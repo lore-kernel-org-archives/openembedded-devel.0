@@ -2,60 +2,60 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D734ACD98D9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A55A2CD98D6
 	for <webhook@archiver.kernel.org>; Fri, 12 Jun 2026 15:34:31 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.73367.1781278467300013270
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.73415.1781278465500574008
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2026 08:34:27 -0700
+ Fri, 12 Jun 2026 08:34:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Tre6y0Wb;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-490b3e03939so9675965e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2026 08:34:27 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=fgwDPT5D;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-490afc47455so5147965e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2026 08:34:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1781278466; x=1781883266; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1781278464; x=1781883264; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YEuD61F6bgh8+R8Esw5QNLkY4eQo8LISVzDaiJZc3R8=;
-        b=Tre6y0Wb2SuCAgSEL84opuUV3nLYCnVfxtAgrc1jIwWM7wTOPeA1/e8xb4MQyD+IOf
-         WenuUe4Rxgnb7vaqMrvVnv/i89FmtyNJiypOIr90AvgQ+gBgehLvrLAifuy0AWRL0y3m
-         vTboeOodcgzXJg1xOhTx05cRs2x6DrXphdsew=
+        bh=iMXkFpe15PVG0duP8n0LRAXWIaoscEabKivphg+ccTE=;
+        b=fgwDPT5DXRIbl0YzmV+ga8YoSkNmKU7uEXLP6LQQx8zMRizfsH8UMzLX0M7bdQDIUa
+         gBgVBFCh5UzXjU3kVJifktWziPdf3oRCeSViqhB1TKIbRnDHWpJR0vyVkh4OxC1++fp/
+         1ylGNCVm8kYkfh1/39lyzqKPN24MjSpT/uMto=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781278466; x=1781883266;
+        d=1e100.net; s=20251104; t=1781278464; x=1781883264;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=YEuD61F6bgh8+R8Esw5QNLkY4eQo8LISVzDaiJZc3R8=;
-        b=rvJlufVSYQCBcgR4oy2NeIw/QlHf6bJ0Clm2AaSSk9MeHSssGq74ahZspm+YjkvrRq
-         bb5QjYYxAcnE1fZbY8YcPLJglp9fRMw6HNT0yiAFA35xetxf1AEdzTSmFJ29e23Ggn+d
-         VzORIMdm2aozr3o5jRA8cdumyQ1sKVg3JUaaqexDZokztR/fY6NjfkmzYstNNP1H0pXC
-         JmaGzLUntL5+6uG4Frc1Ihy76XEUluWv0rPv2MGSdY8GtPytVXvfgoxMNNPwzb/7cqx+
-         9EQWk67uWnvpeANia5CdDKiObh1DlVNSpEo6U1QvawbStbrEeWELwnBMXrQlItwn+fKZ
-         J4Iw==
-X-Gm-Message-State: AOJu0YyK1x2VNSWUtc2sDRCuoyFk9bLDleglP0YkjGHV4z+Fo6h4tNti
-	CggONKdQtfSDzF2nDzvO9ILlGdlv+B6unVFTr29nEY2VgfdakpQqmZEnewOM7HghuYwl5UCToUn
-	4oHno
-X-Gm-Gg: Acq92OE6mbY9eH32dRVh0vo2CsYR2WEzPibY8UCpOb/BTuNaY2pRJeku2tsxdKyKMNU
-	3FFurj6GeI4A5EsWmdQJ0sU217vsiH3Eya/le4HUbv6zYBgqC9hPZSzTiCD0gxGFqalpQPkuvVJ
-	S+W/g7vcDj1oJm5EALOMQm8E0GpOf88nBHtjaB9EMRMlY9XeY8rs9wTBzO9xlqb2kPDPLXMLi8f
-	wx+vwL8m5iOJVZU+nQB2v9xA4htnug82uQUFXb6QN3Rxb2nZvAQ3VitbeKwIcV5mJHgftnHucuA
-	SrFRwNxIZ5oeFQGKKJ5ASGDZ1821gPKU8AzJcbUnfBAyg6XmPzZX4p1NftxCeB3d9j8IW9nXQjA
-	rs0PVLDA5UZQRf1cEqh6uKCd8neir7zHhnK01BoE2+gWYcnzqBItyojlyVzC0N1gNWWFfIM/H58
-	CsPfv5srOpPShdQ5h3ppfXaKWI/NbfpioB16VO
-X-Received: by 2002:a05:600c:138b:b0:490:5000:917 with SMTP id 5b1f17b1804b1-490ec480f21mr39519065e9.1.1781278465762;
-        Fri, 12 Jun 2026 08:34:25 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490ea961f18sm61187095e9.2.2026.06.12.08.34.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=iMXkFpe15PVG0duP8n0LRAXWIaoscEabKivphg+ccTE=;
+        b=PNMr9asgXsdEDrbH0HF/KHqWe5AhdJ6hf/e9rxd3NIDjMnKuRhUu0rJ183YAWbBMpS
+         XhZg0wEdyvMkpaJuJOoFNkhhsz012B17XK0bpnWPi7aYTRTbLtPvNeGkJDYWLIK5FJ8g
+         CYGPJUhKCpcKPZsU+PYyzZSIUu+7A9B6w1VvnJeVQeYYNFSU2Mqol9mH0IXMQ8Z3NcpY
+         DtK4CWigzOsyQXN1PYGXkNJaGCfuZRnHIbWbDKB8kBK7wlRn2yBAIOQh4juoIw5sOYv7
+         8UtmvXjJl2bYd0wE/1YJ9YSjk+GPfLf+ul4SjebzM18UkIf45T/iHkXTDdBeLME/fH1G
+         y0KQ==
+X-Gm-Message-State: AOJu0YxoXHNL7YMuXs4TsoU6b/aihUUmNdsEJsmlma1+yMLU/Lasty8F
+	Dflchh8LTiX0rXV+DRj6cleR+tqpzymuDeiL5djzrQKL53KBCFIkIoYVFdUWsDlfboDZ7ViMsSh
+	4Ok+b
+X-Gm-Gg: Acq92OGjdX1js4pWoKQUxRyHDZS/QE8kMyD491LKGFMUT2ileGlh8QBUrkut5ASLzd7
+	NKdn96bHVWe5cRdQljiqW4bwjoqv/77CA4pnBt24sDq5f9BqASwIj1AV2rLpuCbcU3ySBXWko4K
+	F9M/Leaw8q+UI/squ/u+Nu4F7qJSrA3+qtgxRuvVRF2DUzmVDqJC0tOwVW4MUGtjkGFwEkx+LOV
+	Z+g6TbQhfx6IyVznyYY7jQPwNz3D1Q0XjmY7Ae8lS09lMrcgb1neVdZJBvkcnzUKMeEn9m97OVf
+	Pay7rhVd78ElkUc0c2fdW4+Bkm/uZVHmctCtWxgbNkz9N2b6f7s5aakolvhOT1dU7Fe+14/A9HU
+	UFvP44UjPvnsgyR2CoIw+lVhobjgTs1upiRmdc8eGXsGkST6mJ+76isui1ruvXGKpnasiRxUqh7
+	iZSrxNgGGHBlZpnOio9yDXbIvQEEwDhhCnwi5H
+X-Received: by 2002:a05:600c:4fc5:b0:490:e5c1:b8b9 with SMTP id 5b1f17b1804b1-490ec3388c8mr45382065e9.0.1781278464011;
         Fri, 12 Jun 2026 08:34:24 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490ea961f18sm61187095e9.2.2026.06.12.08.34.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Jun 2026 08:34:23 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/8] python3-dunamai: Add recipe
-Date: Fri, 12 Jun 2026 18:34:02 +0300
-Message-ID: <20260612153404.3213552-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/8] python3-uv-dynamic-versioning: Add recipe
+Date: Fri, 12 Jun 2026 18:34:01 +0300
+Message-ID: <20260612153404.3213552-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260612153404.3213552-1-leon.anavi@konsulko.com>
 References: <20260612153404.3213552-1-leon.anavi@konsulko.com>
@@ -65,32 +65,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2026 15:34:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127548
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127547
 
-Add recipe for release 1.26.1:
+Add recipe for release 0.14.0:
 
-- Fixed: The highest_tag argument was ignored in Version.from_any_vcs()
-- Fixed: Compatibility with Pijul 1.0.0-beta.11
+- Improve Version Source Docs
+- ci: update actions
+- docs: update README
+- feat: support highest-tag option
+- docs: update tips
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-dunamai_1.26.1.bb    | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-dunamai_1.26.1.bb
+ .../python/python3-uv-dynamic-versioning_0.14.0.bb    | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-uv-dynamic-versioning_0.14.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-dunamai_1.26.1.bb b/meta-python/recipes-devtools/python/python3-dunamai_1.26.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-uv-dynamic-versioning_0.14.0.bb b/meta-python/recipes-devtools/python/python3-uv-dynamic-versioning_0.14.0.bb
 new file mode 100644
-index 0000000000..a94120c740
+index 0000000000..0abe25ce70
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dunamai_1.26.1.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Dynamic version generation"
++++ b/meta-python/recipes-devtools/python/python3-uv-dynamic-versioning_0.14.0.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Dynamic versioning based on VCS tags for uv/hatch project"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=059eed55dbfd3fea022510ea62c95dc1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=14d953809f6381e54162e13c2c846fbc"
 +
-+SRC_URI[sha256sum] = "3b46007bd65b00b4824ead0a1aee365fd22d0ec2b9c219497d4fd48f52860c8b"
++SRC_URI[sha256sum] = "574fbc07e87ace45c01d55967ad3b864871257b98ff5b8ac87c261227ac8db5b"
 +
-+inherit pypi python_poetry_core
++PYPI_PACKAGE = "uv_dynamic_versioning"
++
++inherit pypi python_hatchling
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
