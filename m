@@ -2,62 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DDD1CD8CA8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C06ACD98D2
 	for <webhook@archiver.kernel.org>; Sat, 13 Jun 2026 08:19:05 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.87392.1781338736400087199
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.87541.1781338739595005314
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2026 01:18:56 -0700
+ Sat, 13 Jun 2026 01:18:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=KgdRdePw;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2c0c2d8b95bso13853225ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:18:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NMIkQTkj;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2c0a5354da1so14948655ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781338736; x=1781943536; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1781338739; x=1781943539; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GOv2oixjsoUAbVEeg68DZnQHuF31EyL0NCtN1MZTQrE=;
-        b=KgdRdePwRSFGYH5/HjIhSXToFEA7gWkkQGunyOktJ3f9FLezFuyBWXbMl18+BwI/zR
-         GOPqspGV0g9AMKQ9jPFvSlDV+pRWJ396728BaW9Xx8fODkVKxWnnNq25YpXqBKhmsFVS
-         pHDzlFDWK0WzPuL0rVSYL6FLqJoXWr1QjViVRzBRmusWgb8uChW0yYbQYYjHQNYrZNUZ
-         BpbTfNPpqGpLLtj/eYCL2bGONIWTqwFondvDeGyqjFK8CqwgdDh9+MpqOZz/aXyo26+k
-         To3ygvpTSwPCgmlMm1yaYcZ8MRgaE3XAw6//WBsujrKXDwnrjO5QcYvTPlIqaMQfNCvy
-         RmYA==
+        bh=sE6q6wd9coI9oVIPHvAYDhTwkUDle9lN3qvZIU0JMuI=;
+        b=NMIkQTkj0VAv8xx6GtUPdSwd6wH4g9j6fuyN7OXNdh416NPACc2yuV5V60STdI8mhZ
+         n8oY2q9/4GWMn569WU2VKKuDNtTQl8BrY7pbpj0+iammv+TewDg5MQOHXOxa/UXHQrzE
+         zIxmjKRH0gV/2amJ5kEMUHcv4OX7d+cPf+Hzkd/KzYTKZOEdjfz3sCzZyZPsZZeaFi4y
+         W8whjSfzFfQKBh0LlOhh0T8LYQBHBn0Pk1Rn68zPFd3aFCyhqipSa8QKMBwwJvHgW4Uj
+         D6cBReiVlV9tV/1DV1nAl2DBXwmamzsoqOoCWMBojbXFu2sJeGxucDS5XR7paJPVhdmq
+         O2fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781338736; x=1781943536;
+        d=1e100.net; s=20251104; t=1781338739; x=1781943539;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=GOv2oixjsoUAbVEeg68DZnQHuF31EyL0NCtN1MZTQrE=;
-        b=sbBIsHjUL85pqrK0xnlJCtioXSnANK/gdBhPVEdIBytvHRcgOLI1uns/YgSEgFqMWL
-         1nwrvkbCZw5OR+9Vq2nP6NNUKW6s4exQQH1jB15qoLwwaGoZiZ6IJDOrO8jcAQb4NJrj
-         S7TquRSCchCxJ8xos58nY8yW9JGeKDwjgAOgFsoeYBfievj6Dfe2rf4J22pkN3e9bIIr
-         rcVPIKpJjqQCpfor/aP2SGbdiZ86ROuGKbSdlJ1Rww3gHWSQgfKvSaq8HDQm0vLMg8l+
-         K2AXLqNA6CGIH08YF2Q5w3onSLX4BgFKATar29P1ZydtCDppkL4oeptDhbTNS6pW4huC
-         DsEw==
-X-Gm-Message-State: AOJu0YyWCUd7efFeBgV0p4VCrXqKGWzegqOTrlT/ROeWzzMfd7JmPJvp
-	Y62DQbiRs0SotH2ddp6ybEE/FCghNVOOFPt8vdNQHd9cI4c6J8OiM82b7fSETHKd
-X-Gm-Gg: Acq92OEqODZHO9yMAaK8CLAySyzOO+XE5iM7GLbBkWKpQ1XO5+iB/ywUaPR7d6X3p72
-	sHxdQkoyd054AyWNm0gpQFSljQtinu4IHqKzGbe9d+ymd42ZmIJk/a7U54RCRJv2pJAESvYeJ2z
-	Kl76gvB6n7ZUxVRTTcBl6Pa8Q9OALyv9i4FwMeme/dEso1r3G/LTUEEBOejV++QA81IFiwAJt4i
-	q8xooK6fff8aP5cP77MulJcw9TqaYalQHmUiXBH5RN/45e4K1J9mWLdM5XsfSYNqpkzS/ylpsqf
-	sLYeze+wu+4fSlpK/uACzOkkl+dmKQlsnSjBQ59tmlUYxtDgLyEMUVnXKkS1GAPjCT7qcdFLqNt
-	V5vLcPSRYPWuaweEmdgnAOoec5DQXHCBHnKhqCXf/Wfyq00CC0A+Xl3ai6AkQc7QWjhWc3EFavw
-	HbBOagQWFJ7LdRm0OBUuRro/Agexkw54QROzue
-X-Received: by 2002:a17:903:b4e:b0:2c1:6020:7398 with SMTP id d9443c01a7336-2c6641efbc2mr32349235ad.12.1781338735683;
-        Sat, 13 Jun 2026 01:18:55 -0700 (PDT)
+        bh=sE6q6wd9coI9oVIPHvAYDhTwkUDle9lN3qvZIU0JMuI=;
+        b=WCMz0yJD/RvGfw7rDV63txw8ayKEBN5OkLWXyWzFPGxk3jVTjGP4X2KyGhGrMvXV52
+         v930z/PPq5p/qT0XF6HF972+HtdgciVrP2mMXH2JtoMCQX7RqvL91WAua5laadvY/W87
+         dvmywWbr/dfXrfa1gs7ZA/1FoQ7sOHuZ2CyCdkmYcp8bZTwiDHkHIDtTHcQ6oYMLFjKs
+         5whelkr5ZJh9bO4Y1viV1G9Lf1J6W5S1SCFKJNpRryurNt6MXTcLHM/Ny05wSaRtHcqr
+         CiOrRrGEdYa4G8tmUvuUURGQzPDHSOkXf2iTeP+BF/OfziHVb3PZeQ5WcHcSD3jyK4As
+         U+4g==
+X-Gm-Message-State: AOJu0YxNCkhaphRqnfyxGlmc+QtitrwSbwMtMxlelE/uxioUVziIDCLY
+	1f2cVLLFpTu/w67jUj8UIC49x4I8vJa+57znUkvYk08jJt9+jnevKKBGsbSxzVbA
+X-Gm-Gg: Acq92OE2Vyzz2ue0AQDDdvk3Z94xXd0ftAj6nZJlJUCHkZ/Fa9vhRBk7VHNtJvBgS9W
+	HdHl0NWnp4bUJv+rdRWlaGZqHn8szSSzVHtL7dZK+O5fzQNdFH1FDkXRt1RDxe97Lmo2fOizuom
+	4qfhftZnHjk5nz1/XxzWtD8cmcoL6HjvpbNI6yWsLptXtExlmVTW/i65BQ+DdU7RlXGYdMWFvc7
+	pdEP3Y7nrJsaIX8aWjWbtUXnUE8Hgjp4vu/t9+lhUjSNWufEbKfVyx82GTiW+7YVVdGmFg7vVC4
+	TmMIKoG/vFlM/rlVyUl8yMtD8WuuyG1zOP99sQMjcpdTrouASn4Xoyns9p+L+M6Ww8AqWoJbz2S
+	ZCtcj997GokYhLu7v9jYu9ISCCquU7MmmyM5YisJoL57XuWt2byVujs0HPHXFA+t9MJmRV64iUN
+	o/CGR+FbVb/fFb/VYJeXfwTGllghAl46njuPMG
+X-Received: by 2002:a17:903:18c:b0:2be:1eb1:eaf3 with SMTP id d9443c01a7336-2c42e44c50emr45423855ad.11.1781338738972;
+        Sat, 13 Jun 2026 01:18:58 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.53
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Jun 2026 01:18:55 -0700 (PDT)
+        Sat, 13 Jun 2026 01:18:58 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 8/16] libjs-jquery-cookie: patch CVE-2026-46625
-Date: Sat, 13 Jun 2026 20:18:16 +1200
-Message-ID: <20260613081824.1223609-8-ankur.tyagi85@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 9/16] memcached: upgrade 1.6.41 -> 1.6.42
+Date: Sat, 13 Jun 2026 20:18:17 +1200
+Message-ID: <20260613081824.1223609-9-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
 References: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
@@ -67,101 +69,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 08:19:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127560
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127561
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-46625
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit aab5fcaf7983875b9f9e84acea56891e755aa536)
+
+Release Notes:
+https://github.com/memcached/memcached/wiki/ReleaseNotes1642
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libjs-jquery-cookie/CVE-2026-46625.patch  | 63 +++++++++++++++++++
- .../libjs/libjs-jquery-cookie_3.0.5.bb        |  4 +-
- 2 files changed, 66 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-cookie/CVE-2026-46625.patch
+ .../memcached/{memcached_1.6.41.bb => memcached_1.6.42.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/memcached/{memcached_1.6.41.bb => memcached_1.6.42.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie/CVE-2026-46625.patch b/meta-oe/recipes-support/libjs/libjs-jquery-cookie/CVE-2026-46625.patch
-new file mode 100644
-index 0000000000..973e12fc79
---- /dev/null
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie/CVE-2026-46625.patch
-@@ -0,0 +1,63 @@
-+From 808905ea1bb4582bcfd681ba1bb8a1c1d1113b40 Mon Sep 17 00:00:00 2001
-+From: Klaus Hartl <klaus.hartl@gmail.com>
-+Date: Fri, 15 May 2026 11:23:44 +0200
-+Subject: [PATCH] Prevent cookie attribute injection
-+
-+Given that we are using a `for ... in` loop for assembling a cookie's
-+attributes required for writing/removing, we are vulnerable to prototype
-+pollution, where an attacker might attempt to add/overwrite certain
-+attributes and with that broadening access or wiping out a cookie
-+altogether.
-+
-+Such malicious attributes input could most likely come from an object
-+parsed from a JSON string; for example looking like
-+'{"__proto__":{"samesite":"None"}}'.
-+
-+Note that at the moment we're tied to using this kind of for-loop for
-+compatibility with IE 10 + 11.
-+
-+(cherry picked from commit eb3c40e89731e99b8970faaf35ddad249c6c0020)
-+
-+CVE: CVE-2026-46625
-+Upstream-Status: Backport [https://github.com/js-cookie/js-cookie/commit/eb3c40e89731e99b8970faaf35ddad249c6c0020]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/assign.mjs |  1 +
-+ test/tests.js  | 12 ++++++++++++
-+ 2 files changed, 13 insertions(+)
-+
-+diff --git a/src/assign.mjs b/src/assign.mjs
-+index 2934ff3..a0e55f1 100644
-+--- a/src/assign.mjs
-++++ b/src/assign.mjs
-+@@ -3,6 +3,7 @@ export default function (target) {
-+   for (var i = 1; i < arguments.length; i++) {
-+     var source = arguments[i]
-+     for (var key in source) {
-++      if (key === '__proto__') continue
-+       target[key] = source[key]
-+     }
-+   }
-+diff --git a/test/tests.js b/test/tests.js
-+index da65d74..c3ab54e 100644
-+--- a/test/tests.js
-++++ b/test/tests.js
-+@@ -489,6 +489,18 @@ QUnit.test(
-+   }
-+ )
-+ 
-++QUnit.test(
-++  'sanitization of attributes to prevent prototype pollution from untrusted input',
-++  function (assert) {
-++    var untrusted = JSON.parse('{"__proto__":{"foo":"bar"}}')
-++    assert.strictEqual(
-++      Cookies.set('c', 'v', untrusted),
-++      'c=v; path=/',
-++      'should prevent attribute-injection via prototype pollution'
-++    )
-++  }
-++)
-++
-+ QUnit.module('remove', lifecycle)
-+ 
-+ QUnit.test('deletion', function (assert) {
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
-index f4e26a65fc..3740d9c16e 100644
---- a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
-@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/js-cookie/js-cookie"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e16cf0e247d84f8999bf55865a9c98cf"
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.41.bb b/meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+similarity index 95%
+rename from meta-networking/recipes-support/memcached/memcached_1.6.41.bb
+rename to meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+index e41ebdb171..28d8ba3cf9 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.6.41.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+@@ -20,7 +20,7 @@ RDEPENDS:${PN} += "perl perl-module-posix perl-module-autoloader \
+     "
  
--SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main"
-+SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main \
-+           file://CVE-2026-46625.patch \
-+"
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "e097073c156eeff9e12655b054f446d57374cfba5c132dcdbe7fac64e728286a"
++SRC_URI[sha256sum] = "50f08b879d4f9d36dea9d905e9eaade15c708e38db7e9a73fc21dc8b45395de7"
  
- SRCREV = "ab3f67fc4fad88cdf07b258c08e4164e06bf7506"
+ CVE_STATUS[CVE-2022-26635] = "disputed: this is a problem of applications using php-memcached inproperly"
  
 
