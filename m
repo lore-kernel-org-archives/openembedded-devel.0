@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46234CD8CA8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D982CD98D8
 	for <webhook@archiver.kernel.org>; Sat, 13 Jun 2026 08:18:45 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.87537.1781338723668927703
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.87389.1781338716946803399
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2026 01:18:43 -0700
+ Sat, 13 Jun 2026 01:18:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=b1mtMT4q;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2bf125989f2so13436915ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:18:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jrKRFfFk;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2c168baac83so8502435ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:18:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781338723; x=1781943523; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1781338716; x=1781943516; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wJDzWwgTfbi0Zm7DcZAlhFBUHV7QDzId8B0SfT6fmx4=;
-        b=b1mtMT4qDdqW0GEyISgh3+MngasQ8c4sxlJ3bNI/ADNuKJyVQUDk5Yn9DPfodb2uLa
-         6itzveVXC6pyuRslqQ/AUnysia/Uazb3aoe539FdMJNbz3sSpVjFMkfSgWOXTP6optbV
-         4ztPMe9hYk/cOEgb1QIlhbi4buLgZHw1dCcxpM4je5IkYD+wnlb/c4TpOwXNb1LJak9Z
-         n3hMuiaj86pZFmZ6W5H5+qmzqLWjjS9WR4LL3j0NP/Nl1avZKHyj5+ZguQLRuO6cu98t
-         w2YQ5gU7ter7DvccfOQhL8YziU4uiaSGr48ScfZZp79fI9taINHFo9CUWxdp6zbApv9D
-         WjuA==
+        bh=zgAU58CGW1zdYBqSQl/DE4LEBoso+q3MqAhBFXpsc7c=;
+        b=jrKRFfFkhwOPzzH62qX54isLJr6lD8yVUyYeaLY5FJRx9EsS2OxSDJgTVnjYLdGrxn
+         XwwtNVkUx9IYju1YPSvrXB1j24VIVOdEkb/Q3ofw/g4B+CAHDM5lQU0yDPUJzEbUzpLp
+         wyqdbPDRbSsoaDviBozE4cCtZJB2BYa1Po7+mqqQiK3f+sZl1sEmUbb2NJuHrvM9MNXw
+         nVubYnK15Aua7v4qUv5gPsQFl1E/duCXLVZjZidT8gnADhkB4MBfIojZ2valEZfXXwzc
+         1dI8L9Pn3nHmaw3aHN85I2wPGb2yGRNqPkeK8WMPOJAS5BbiOEwUmD8H6Pd6ql6StbBT
+         eT+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781338723; x=1781943523;
+        d=1e100.net; s=20251104; t=1781338716; x=1781943516;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=wJDzWwgTfbi0Zm7DcZAlhFBUHV7QDzId8B0SfT6fmx4=;
-        b=JMH9HyeSJCsICZyo/PPOR+m4Ys/3KDSCOJjYxmCHtT/cFg287a5PDvM2MSFGUcGntq
-         ZxPh+qUyftL/U8CO/jGmyH3j4XlJCbJmizCYoH5LS+i1duYEzXq2UCHhYu3BxofQy+kL
-         jXnHZrVZvdC7qs3W3QI9jG9CZOyk++wxBxqDiUv+INdWzeQJlqicTzcfMV3e3U+U3P7F
-         sl8F4i/QHKBZJoDka2DkrfgYnvosUcU7zvh2meH7ZcS0cc2a4fCkUQDvzIplmeHDLTlC
-         YUXUAE+vQL63Qm0LTRqzj25KlcuRu4MpR2C9rOxGzK788pnWBVRjD2BKBpP84UIYsixU
-         EGLw==
-X-Gm-Message-State: AOJu0YzqzTy4mSjx4BfCALXuNjlBEIYHLYqdCoyouCGJIWW+EzrbfT4X
-	z2pkRf/mPLQA13FCGlxXU+AEOV9uKM+jDM63YbEdAlfWbeYXL/fVVp5lGmC/OjWA
-X-Gm-Gg: Acq92OH0Acgu7r4e06kGwyxtfDiTQWlGR6HwIMFDGEtkqTiffQqOjQ8uHrJc4l8FdCy
-	e2mmk/zQ/RaOgmw5oYIXowaw8wHma4+eGx1tdijkWEjG81JVQZs1F94PUtPUnNChoYzaAKpdFEl
-	M50Ext3jq3M5vCze0y2pDoZ2DDo2lYnFJuH+Q3Z88PaDr+sElrkTVg2UNSZIDgGoTVmOdREJGtg
-	OFvZQ0Bj7lHwgSS3ICFrY9qS2mBzoBGipxSl0V6X7N8mIAlIuFzgyPs8au+QyFEFpgOWa/QbnGe
-	+ZBqDU2rhRNoFNNGdhpMRqXAZCUhgUG52Grj0CQB0VFZqNZnsGeGKjvvBHjaPvUuHj52GX4+NFG
-	McDbJBYbX0IyDX+nFMQJr30AMJElH0oLSFS8v332NOjZKGy6/KqTiluQ2FfMwVET9kN9b33kWRg
-	XMCgBO929bHfNom5NR6kdZToCcrqTQaM4mVxly
-X-Received: by 2002:a17:902:e783:b0:2c0:e2ea:6b0c with SMTP id d9443c01a7336-2c4134ec05dmr70043875ad.21.1781338723072;
-        Sat, 13 Jun 2026 01:18:43 -0700 (PDT)
+        bh=zgAU58CGW1zdYBqSQl/DE4LEBoso+q3MqAhBFXpsc7c=;
+        b=OXRXIfaKVc0c00ucPDCRAtg0NmZMb9hoPvlKhR5BbNXIiBBMChPOaCFEP4V4+WUgFX
+         f8ihmRucgSlT/HV9yQa1Hsiys/CQv84T/BTLhSeoZpdbuc6W+1iQhMSzuvc9ksty3Yu2
+         WfTg8FdLUdr8p4IeJz0PC+og9xqv1z/ftZnlva0MRGg76QPz0A3ToNjhrnXXtOLgXsPh
+         uQC+3qFQqRZUUHnKrGwh5O035Fzn7KVfyRjHtMWDp1/8kjrf5u05WFqaVJJIfrtZe0So
+         Ukg0uMRvMHTmfAtWX6Uvl1uEz0zYGJvFnSzacyQie4T1JKx86mRjzTcko0VXt/IMZ2bK
+         OM2g==
+X-Gm-Message-State: AOJu0YyTHujtAz1h55+6rru7PEGL41RBe9BQtWs+vtu6tdSz3GLfRNkD
+	CYHvnWf5fl5E2AAg1qeHIp+j4C73q8EZQ3yp/pe/oz3QjUpht6Lts9r0ML6dHJGJ
+X-Gm-Gg: Acq92OGhUVDzPEDZKgm8qn+oCXzixjBOSChAT5/7a35rkfrn1RT9O8cYlNFZ4S0VZc5
+	apd7X4ql5JYQDFyQDkRRd3JGWPkAUkunuilD5FVhDFxE8UX37TUVXiYs3HQPLLHGl1IOmJNv/h6
+	cC5eE/dY1itzSlA6odJfQc8A43yXcoFqPSNYoad/x9dPESeGMYTzGS6ml0wms9BnvWgSB/bzCZE
+	lv2S7BxIUPik07NvqvthV71M1wsmcWnN+UyEOBnsovBSIhWUFgNeZ9FGL/LKEcng7//ENPqPBL0
+	ZqDeuvpp5MkFDcYmiCoUotVixnhSV1lg3isYqVv8DF49OISiQt3qK+Ru0xJDCfsmJuSk8rssLAa
+	szF4kVIQwrHnnToxj+Mjw6lHriDdPBRWs7F+yxKngEZib0kuio7QC9sttml7mJkIS/rljlmK2Md
+	NL+zyIazHYFvPxlHH1pRZeiNRH6a9iwqnU2JHa
+X-Received: by 2002:a17:902:f786:b0:2c1:27a3:6859 with SMTP id d9443c01a7336-2c40ff3a324mr70170115ad.7.1781338716177;
+        Sat, 13 Jun 2026 01:18:36 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.39
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Jun 2026 01:18:42 -0700 (PDT)
+        Sat, 13 Jun 2026 01:18:35 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Kjellerstedt <pkj@axis.com>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+Cc: Anton Skorup <anton@skorup.se>,
+	Anton Skorup <antonsk@axis.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 4/16] php: Correct the license to PHP-3.01
-Date: Sat, 13 Jun 2026 20:18:12 +1200
-Message-ID: <20260613081824.1223609-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 2/16] jq: patch CVE-2026-47770
+Date: Sat, 13 Jun 2026 20:18:10 +1200
+Message-ID: <20260613081824.1223609-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
 References: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
@@ -70,31 +70,524 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 08:18:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127556
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127554
 
-From: Peter Kjellerstedt <pkj@axis.com>
+From: Anton Skorup <anton@skorup.se>
 
-The license used by PHP is actually PHP-3.01, not PHP-3.0.
+This patch adds the upstream fix for CVE-2026-47770.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+CVE details: https://ubuntu.com/security/CVE-2026-47770
+
+Signed-off-by: Anton Skorup <antonsk@axis.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 8aade001c144873283a54d74184617654b5c7a4f)
+(cherry picked from commit e4aae1b880aec8d49832b120c0801bc5246e4312)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-devtools/php/php_8.5.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../jq/jq/CVE-2026-47770.patch                | 484 ++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |   1 +
+ 2 files changed, 485 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.5.6.bb b/meta-oe/recipes-devtools/php/php_8.5.6.bb
-index db5bba9ccc..a78b6baafa 100644
---- a/meta-oe/recipes-devtools/php/php_8.5.6.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.5.6.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A server-side, HTML-embedded scripting language"
- HOMEPAGE = "https://www.php.net"
- SECTION = "console/network"
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
+new file mode 100644
+index 0000000000..1d6664e842
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
+@@ -0,0 +1,484 @@
++From 63ae676bc6e97635d8246c78f5947ec47eb85a26 Mon Sep 17 00:00:00 2001
++From: Yu-Fu Fu <yufu@yfu.tw>
++Date: Fri, 22 May 2026 04:07:16 -0700
++Subject: [PATCH] Guard deep structural equality and comparison recursion
++ (#3539)
++
++jv_equal and jv_cmp overflows the C stack on deeply nested
++input. Cap recursion at 10000 with -1 / INT_MIN sentinels;
++operators that compose user expressions surface this as
++"Equality check too deep" / "Comparison too deep".
++
++Fixes CVE-2026-47770.
++
++Signed-off-by: Anton Skorup <antonsk@axis.com>
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/7122866869960b55cea3646bc91334ef55787831]
++---
++ src/builtin.c |  36 +++++++++++++++--
++ src/jv.c      |  46 +++++++++++++++++-----
++ src/jv_aux.c  | 105 ++++++++++++++++++++++++++++++++++++++++++--------
++ tests/jq.test |  40 +++++++++++++++++++
++ 4 files changed, 198 insertions(+), 29 deletions(-)
++
++diff --git a/src/builtin.c b/src/builtin.c
++index ac56f9f..ac25f90 100644
++--- a/src/builtin.c
+++++ b/src/builtin.c
++@@ -295,7 +295,15 @@ jv binop_minus(jv a, jv b) {
++     jv_array_foreach(a, i, x) {
++       int include = 1;
++       jv_array_foreach(b, j, y) {
++-        if (jv_equal(jv_copy(x), y)) {
+++        int equal = jv_equal(jv_copy(x), y);
+++        if (equal < 0) {
+++          jv_free(out);
+++          jv_free(x);
+++          jv_free(a);
+++          jv_free(b);
+++          return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++        }
+++        if (equal) {
++           include = 0;
++           break;
++         }
++@@ -379,11 +387,17 @@ jv binop_mod(jv a, jv b) {
++ #undef dtoi
++ 
++ jv binop_equal(jv a, jv b) {
++-  return jv_bool(jv_equal(a, b));
+++  int r = jv_equal(a, b);
+++  if (r < 0)
+++    return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++  return jv_bool(r);
++ }
++ 
++ jv binop_notequal(jv a, jv b) {
++-  return jv_bool(!jv_equal(a, b));
+++  int r = jv_equal(a, b);
+++  if (r < 0)
+++    return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++  return jv_bool(!r);
++ }
++ 
++ enum cmp_op {
++@@ -395,6 +409,8 @@ enum cmp_op {
++ 
++ static jv order_cmp(jv a, jv b, enum cmp_op op) {
++   int r = jv_cmp(a, b);
+++  if (r == INT_MIN)
+++    return jv_invalid_with_msg(jv_string("Comparison too deep"));
++   return jv_bool((op == CMP_OP_LESS && r < 0) ||
++                  (op == CMP_OP_LESSEQ && r <= 0) ||
++                  (op == CMP_OP_GREATEREQ && r >= 0) ||
++@@ -845,6 +861,12 @@ static jv f_bsearch(jq_state *jq, jv input, jv target) {
++   while (start < end) {
++     int mid = start + (end - start) / 2;
++     int result = jv_cmp(jv_copy(target), jv_array_get(jv_copy(input), mid));
+++    if (result == INT_MIN) {
+++      jv_free(answer);
+++      jv_free(input);
+++      jv_free(target);
+++      return jv_invalid_with_msg(jv_string("Comparison too deep"));
+++    }
++     if (result == 0) {
++       answer = jv_number(mid);
++       break;
++@@ -1136,6 +1158,14 @@ static jv minmax_by(jv values, jv keys, int is_min) {
++   for (int i=1; i<jv_array_length(jv_copy(values)); i++) {
++     jv item = jv_array_get(jv_copy(keys), i);
++     int cmp = jv_cmp(jv_copy(item), jv_copy(retkey));
+++    if (cmp == INT_MIN) {
+++      jv_free(item);
+++      jv_free(values);
+++      jv_free(keys);
+++      jv_free(retkey);
+++      jv_free(ret);
+++      return jv_invalid_with_msg(jv_string("Comparison too deep"));
+++    }
++     if ((cmp < 0) == (is_min == 1)) {
++       jv_free(retkey);
++       retkey = item;
++diff --git a/src/jv.c b/src/jv.c
++index f701b46..e079d08 100644
++--- a/src/jv.c
+++++ b/src/jv.c
++@@ -912,16 +912,20 @@ static jv* jvp_array_write(jv* a, int i) {
++   }
++ }
++ 
++-static int jvp_array_equal(jv a, jv b) {
+++static int jvp_equal(jv a, jv b, int depth);
+++
+++static int jvp_array_equal(jv a, jv b, int depth) {
++   if (jvp_array_length(a) != jvp_array_length(b))
++     return 0;
++   if (jvp_array_ptr(a) == jvp_array_ptr(b) &&
++       jvp_array_offset(a) == jvp_array_offset(b))
++     return 1;
++   for (int i=0; i<jvp_array_length(a); i++) {
++-    if (!jv_equal(jv_copy(*jvp_array_read(a, i)),
++-                  jv_copy(*jvp_array_read(b, i))))
++-      return 0;
+++    int r = jvp_equal(jv_copy(*jvp_array_read(a, i)),
+++                      jv_copy(*jvp_array_read(b, i)),
+++                      depth);
+++    if (r <= 0)
+++      return r;
++   }
++   return 1;
++ }
++@@ -1071,7 +1075,14 @@ jv jv_array_indexes(jv a, jv b) {
++   int alen = jv_array_length(jv_copy(a));
++   for (int ai = 0; ai < alen; ++ai) {
++     jv_array_foreach(b, bi, belem) {
++-      if (!jv_equal(jv_array_get(jv_copy(a), ai + bi), belem))
+++      int equal = jv_equal(jv_array_get(jv_copy(a), ai + bi), belem);
+++      if (equal < 0) {
+++        jv_free(res);
+++        jv_free(a);
+++        jv_free(b);
+++        return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++      }
+++      if (!equal)
++         idx = -1;
++       else if (bi == 0 && idx == -1)
++         idx = ai;
++@@ -1828,7 +1839,7 @@ static int jvp_object_length(jv object) {
++   return n;
++ }
++ 
++-static int jvp_object_equal(jv o1, jv o2) {
+++static int jvp_object_equal(jv o1, jv o2, int depth) {
++   int len2 = jvp_object_length(o2);
++   int len1 = 0;
++   for (int i=0; i<jvp_object_size(o1); i++) {
++@@ -1837,7 +1848,8 @@ static int jvp_object_equal(jv o1, jv o2) {
++     jv* slot2 = jvp_object_read(o2, slot->string);
++     if (!slot2) return 0;
++     // FIXME: do less refcounting here
++-    if (!jv_equal(jv_copy(slot->value), jv_copy(*slot2))) return 0;
+++    int r = jvp_equal(jv_copy(slot->value), jv_copy(*slot2), depth);
+++    if (r <= 0) return r;
++     len1++;
++   }
++   return len1 == len2;
++@@ -2032,7 +2044,16 @@ int jv_get_refcnt(jv j) {
++  * Higher-level operations
++  */
++ 
++-int jv_equal(jv a, jv b) {
+++#ifndef MAX_EQUAL_DEPTH
+++#define MAX_EQUAL_DEPTH (10000)
+++#endif
+++
+++static int jvp_equal(jv a, jv b, int depth) {
+++  if (depth > MAX_EQUAL_DEPTH) {
+++    jv_free(a);
+++    jv_free(b);
+++    return -1;
+++  }
++   int r;
++   if (jv_get_kind(a) != jv_get_kind(b)) {
++     r = 0;
++@@ -2048,13 +2069,13 @@ int jv_equal(jv a, jv b) {
++       r = jvp_number_equal(a, b);
++       break;
++     case JV_KIND_ARRAY:
++-      r = jvp_array_equal(a, b);
+++      r = jvp_array_equal(a, b, depth + 1);
++       break;
++     case JV_KIND_STRING:
++       r = jvp_string_equal(a, b);
++       break;
++     case JV_KIND_OBJECT:
++-      r = jvp_object_equal(a, b);
+++      r = jvp_object_equal(a, b, depth + 1);
++       break;
++     default:
++       r = 1;
++@@ -2066,6 +2087,11 @@ int jv_equal(jv a, jv b) {
++   return r;
++ }
++ 
+++// Returns 1 if equal, 0 if not equal, or -1 if the comparison is too deep
+++int jv_equal(jv a, jv b) {
+++  return jvp_equal(a, b, 0);
+++}
+++
++ int jv_identical(jv a, jv b) {
++   int r;
++   if (a.kind_flags != b.kind_flags
++diff --git a/src/jv_aux.c b/src/jv_aux.c
++index 594a21f..a39f1f1 100644
++--- a/src/jv_aux.c
+++++ b/src/jv_aux.c
++@@ -16,6 +16,24 @@ static double jv_number_get_value_and_consume(jv number) {
++   return value;
++ }
++ 
+++#ifndef MAX_CMP_DEPTH
+++#define MAX_CMP_DEPTH (10000)
+++#endif
+++
+++struct sort_cmp_state {
+++  int too_deep;
+++};
+++
+++#ifdef _MSC_VER
+++static __declspec(thread) struct sort_cmp_state sort_cmp_state;
+++#else
+++#ifdef HAVE___THREAD
+++static __thread struct sort_cmp_state sort_cmp_state;
+++#else
+++static struct sort_cmp_state sort_cmp_state;
+++#endif
+++#endif
+++
++ static jv parse_slice(jv j, jv slice, int* pstart, int* pend) {
++   // Array slices
++   jv start_jv = jv_object_get(jv_copy(slice), jv_string("start"));
++@@ -471,8 +489,7 @@ static jv delpaths_sorted(jv object, jv paths, int start) {
++     int delkey = jv_array_length(jv_array_get(jv_copy(paths), i)) == start + 1;
++     jv key = jv_array_get(jv_array_get(jv_copy(paths), i), start);
++     while (j < jv_array_length(jv_copy(paths)) &&
++-           jv_equal(jv_copy(key), jv_array_get(jv_array_get(jv_copy(paths), j), start)))
++-      j++;
+++           jv_equal(jv_copy(key), jv_array_get(jv_array_get(jv_copy(paths), j), start)) == 1);
++     // if i <= entry < j, then entry starts with key
++     if (delkey) {
++       // deleting this entire key, we don't care about any more specific deletions
++@@ -606,7 +623,13 @@ jv jv_keys(jv x) {
++   }
++ }
++ 
++-int jv_cmp(jv a, jv b) {
+++static int jvp_cmp(jv a, jv b, int depth) {
+++  if (depth > MAX_CMP_DEPTH) {
+++    jv_free(a);
+++    jv_free(b);
+++    return INT_MIN;
+++  }
+++
++   if (jv_get_kind(a) != jv_get_kind(b)) {
++     int r = (int)jv_get_kind(a) - (int)jv_get_kind(b);
++     jv_free(a);
++@@ -621,14 +644,13 @@ int jv_cmp(jv a, jv b) {
++   case JV_KIND_FALSE:
++   case JV_KIND_TRUE:
++     // there's only one of each of these values
++-    r = 0;
++     break;
++ 
++   case JV_KIND_NUMBER: {
++     if (jvp_number_is_nan(a)) {
++-      r = jv_cmp(jv_null(), jv_copy(b));
+++      r = jvp_cmp(jv_null(), jv_copy(b), depth);
++     } else if (jvp_number_is_nan(b)) {
++-      r = jv_cmp(jv_copy(a), jv_null());
+++      r = jvp_cmp(jv_copy(a), jv_null(), depth);
++     } else {
++       r = jvp_number_cmp(a, b);
++     }
++@@ -652,7 +674,9 @@ int jv_cmp(jv a, jv b) {
++       }
++       jv xa = jv_array_get(jv_copy(a), i);
++       jv xb = jv_array_get(jv_copy(b), i);
++-      r = jv_cmp(xa, xb);
+++      r = jvp_cmp(xa, xb, depth + 1);
+++      if (r == INT_MIN)
+++        break;
++       i++;
++     }
++     break;
++@@ -661,13 +685,14 @@ int jv_cmp(jv a, jv b) {
++   case JV_KIND_OBJECT: {
++     jv keys_a = jv_keys(jv_copy(a));
++     jv keys_b = jv_keys(jv_copy(b));
++-    r = jv_cmp(jv_copy(keys_a), keys_b);
+++    r = jvp_cmp(jv_copy(keys_a), keys_b, depth + 1);
++     if (r == 0) {
++       jv_array_foreach(keys_a, i, key) {
++         jv xa = jv_object_get(jv_copy(a), jv_copy(key));
++         jv xb = jv_object_get(jv_copy(b), key);
++-        r = jv_cmp(xa, xb);
++-        if (r) break;
+++        r = jvp_cmp(xa, xb, depth + 1);
+++        if (r != 0)
+++          break;
++       }
++     }
++     jv_free(keys_a);
++@@ -680,6 +705,11 @@ int jv_cmp(jv a, jv b) {
++   return r;
++ }
++ 
+++// Returns <0, 0, >0 if a is less than, equal to, or greater than b, or
+++// INT_MIN if the comparison is too deep
+++int jv_cmp(jv a, jv b) {
+++  return jvp_cmp(a, b, 0);
+++}
++ 
++ struct sort_entry {
++   jv object;
++@@ -687,19 +717,32 @@ struct sort_entry {
++   int index;
++ };
++ 
+++static void sort_entry_array_free(struct sort_entry* entries, int start, int n) {
+++  for (int i = start; i < n; i++) {
+++    jv_free(entries[i].key);
+++    jv_free(entries[i].object);
+++  }
+++  jv_mem_free(entries);
+++}
+++
++ static int sort_cmp(const void* pa, const void* pb) {
++   const struct sort_entry* a = pa;
++   const struct sort_entry* b = pb;
++   int r = jv_cmp(jv_copy(a->key), jv_copy(b->key));
+++  if (r == INT_MIN) {
+++    sort_cmp_state.too_deep = 1;
+++    return 0;
+++  }
++   // comparing by index if r == 0 makes the sort stable
++   return r ? r : (a->index - b->index);
++ }
++ 
++-static struct sort_entry* sort_items(jv objects, jv keys) {
+++static struct sort_entry* sort_items(jv objects, jv keys, int *too_deep) {
++   assert(jv_get_kind(objects) == JV_KIND_ARRAY);
++   assert(jv_get_kind(keys) == JV_KIND_ARRAY);
++   assert(jv_array_length(jv_copy(objects)) == jv_array_length(jv_copy(keys)));
++   int n = jv_array_length(jv_copy(objects));
+++  *too_deep = 0;
++   if (n == 0) {
++     jv_free(objects);
++     jv_free(keys);
++@@ -713,7 +756,13 @@ static struct sort_entry* sort_items(jv objects, jv keys) {
++   }
++   jv_free(objects);
++   jv_free(keys);
+++  sort_cmp_state.too_deep = 0;
++   qsort(entries, n, sizeof(struct sort_entry), sort_cmp);
+++  if (sort_cmp_state.too_deep) {
+++    sort_entry_array_free(entries, 0, n);
+++    *too_deep = 1;
+++    return NULL;
+++  }
++   return entries;
++ }
++ 
++@@ -722,7 +771,10 @@ jv jv_sort(jv objects, jv keys) {
++   assert(jv_get_kind(keys) == JV_KIND_ARRAY);
++   assert(jv_array_length(jv_copy(objects)) == jv_array_length(jv_copy(keys)));
++   int n = jv_array_length(jv_copy(objects));
++-  struct sort_entry* entries = sort_items(objects, keys);
+++  int too_deep = 0;
+++  struct sort_entry* entries = sort_items(objects, keys, &too_deep);
+++  if (too_deep)
+++    return jv_invalid_with_msg(jv_string("Comparison too deep"));
++   jv ret = jv_array();
++   for (int i=0; i<n; i++) {
++     jv_free(entries[i].key);
++@@ -737,13 +789,24 @@ jv jv_group(jv objects, jv keys) {
++   assert(jv_get_kind(keys) == JV_KIND_ARRAY);
++   assert(jv_array_length(jv_copy(objects)) == jv_array_length(jv_copy(keys)));
++   int n = jv_array_length(jv_copy(objects));
++-  struct sort_entry* entries = sort_items(objects, keys);
+++  int too_deep = 0;
+++  struct sort_entry* entries = sort_items(objects, keys, &too_deep);
+++  if (too_deep)
+++    return jv_invalid_with_msg(jv_string("Comparison too deep"));
++   jv ret = jv_array();
++   if (n > 0) {
++     jv curr_key = entries[0].key;
++     jv group = jv_array_append(jv_array(), entries[0].object);
++     for (int i = 1; i < n; i++) {
++-      if (jv_equal(jv_copy(curr_key), jv_copy(entries[i].key))) {
+++      int equal = jv_equal(jv_copy(curr_key), jv_copy(entries[i].key));
+++      if (equal < 0) {
+++        jv_free(curr_key);
+++        jv_free(group);
+++        sort_entry_array_free(entries, i, n);
+++        jv_free(ret);
+++        return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++      }
+++      if (equal) {
++         jv_free(entries[i].key);
++       } else {
++         jv_free(curr_key);
++@@ -765,11 +828,21 @@ jv jv_unique(jv objects, jv keys) {
++   assert(jv_get_kind(keys) == JV_KIND_ARRAY);
++   assert(jv_array_length(jv_copy(objects)) == jv_array_length(jv_copy(keys)));
++   int n = jv_array_length(jv_copy(objects));
++-  struct sort_entry* entries = sort_items(objects, keys);
+++  int too_deep = 0;
+++  struct sort_entry* entries = sort_items(objects, keys, &too_deep);
+++  if (too_deep)
+++    return jv_invalid_with_msg(jv_string("Comparison too deep"));
++   jv ret = jv_array();
++   jv curr_key = jv_invalid();
++   for (int i = 0; i < n; i++) {
++-    if (jv_equal(jv_copy(curr_key), jv_copy(entries[i].key))) {
+++    int equal = jv_equal(jv_copy(curr_key), jv_copy(entries[i].key));
+++    if (equal < 0) {
+++      jv_free(curr_key);
+++      sort_entry_array_free(entries, i, n);
+++      jv_free(ret);
+++      return jv_invalid_with_msg(jv_string("Equality check too deep"));
+++    }
+++    if (equal) {
++       jv_free(entries[i].key);
++       jv_free(entries[i].object);
++     } else {
++diff --git a/tests/jq.test b/tests/jq.test
++index 5013bce..f35ef94 100644
++--- a/tests/jq.test
+++++ b/tests/jq.test
++@@ -2560,3 +2560,43 @@ null
++ try delpaths([[range(10001) | 0]]) catch .
++ null
++ "Path too deep"
+++
+++# regression test for CVE-2026-40612
+++reduce range(10000) as $_ ([]; [.]) | contains([[]])
+++null
+++true
+++
+++try (reduce range(10001) as $_ ([]; [.]) as $x | $x | contains($x)) catch .
+++null
+++"Containment check too deep"
+++
+++# regression test for CVE-2026-43896
+++reduce range(10000) as $_ ({}; {a: .}) as $x | $x * $x | length
+++null
+++1
+++
+++try (reduce range(10001) as $_ ({}; {a: .}) as $x | $x * $x) catch .
+++null
+++"Object merge too deep"
+++
+++# regression test for deep structural equality recursion
+++try ((reduce range(10001) as $_ ([]; [.])) as $x | (reduce range(10001) as $_ ([]; [.])) as $y | $x == $y) catch .
+++null
+++"Equality check too deep"
+++
+++# regression tests for deep ordering comparisons
+++try ((reduce range(10001) as $_ ([]; [.])) as $x | [$x, $x] | sort) catch .
+++null
+++"Comparison too deep"
+++
+++try ((reduce range(10001) as $_ ([]; [.])) as $x | [$x, $x] | unique) catch .
+++null
+++"Comparison too deep"
+++
+++try ((reduce range(10001) as $_ ({}; {a: .})) as $x | [$x, $x] | sort) catch .
+++null
+++"Comparison too deep"
+++
+++try ((reduce range(10001) as $_ ({}; {a: .})) as $x | [$x, $x] | unique) catch .
+++null
+++"Comparison too deep"
++-- 
++2.43.0
++
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+index 026f6bfa71..7665ba2511 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+            file://CVE-2026-33947.patch \
+            file://CVE-2026-33948.patch \
+            file://CVE-2026-39979.patch \
++           file://CVE-2026-47770.patch \
+            "
  
--LICENSE = "PHP-3.0"
-+LICENSE = "PHP-3.01"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fd469cce1a919f0cc95bab7afb28d19d"
- 
- BBCLASSEXTEND = "native"
+ inherit autotools ptest
 
