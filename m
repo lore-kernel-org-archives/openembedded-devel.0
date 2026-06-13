@@ -2,64 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86465CD98D2
-	for <webhook@archiver.kernel.org>; Sat, 13 Jun 2026 08:18:55 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.87391.1781338729852163686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E85DCD98D8
+	for <webhook@archiver.kernel.org>; Sat, 13 Jun 2026 08:19:05 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.87395.1781338742181661794
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2026 01:18:49 -0700
+ Sat, 13 Jun 2026 01:19:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=sRFwk5Wv;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2bf2247e38eso16337745ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:18:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=X/ktQLbA;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2c0c3543590so12226665ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:19:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781338729; x=1781943529; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1781338741; x=1781943541; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=AWmt9hm4RBPFcV8oaJO/+kTBgXex/ab1qLyyBSduhik=;
-        b=sRFwk5WvRX8eSpwvrXh4f7+cmTbVl1hFtE0Ijzzr8mkLkPobYmuTFPQOufBIWK84OG
-         x0HfLq4r/vDqmdK5yfLu3aJGJIDft2ucEo6q3cIMcSosC71ntm5rNrMIZTR3JYrO59ud
-         zKJQzT8JYkTefD64q0CCFl9vauU/xFhUn01sUqKmKMdb6F+Md52s9mxzEXICHIEyqWge
-         g9NKibpp4kAhhsPYoY6Rz49SKF3CgtVtWaoUJz4sxhDZqN/KtkSKqxL+dSwQfU6MZjUM
-         o+vGmGXeXMBUuLFCYiLTA/A+jMhjqZ9Xzcm9L5DlKDsS7qPTjyHUtXjPS1/dRu2JdF4y
-         Qyfw==
+        bh=V9ps80IJ1RrcucvZRYddPyXc5lkBbYgGAIWUu7PRKVM=;
+        b=X/ktQLbA4hFH5veDV2P0lRqfHJccIPUB1r+ECN3TxAgwEneGIGA0LzgVCgN/wzoJU+
+         y0mDGfzbPAMuH5QWHx6At2zL0QVrbnLDzQtBS9c07U7ZXs/S5JjJCi62wOmhnUY3hqKa
+         TykndWdLja+zMdtVubgs7ohZEvAxsmTOEOZ9bOTDHnjyrn3Sgd6oH4BkXEBGOZ4y4hMy
+         GuPg8oqjXXAcdaUxqQBb/qroRUC4Md859xdQs+0keBkKtBaT+ISWBYQjwmAUNY9FQqVf
+         F0CUXBD8aGE3cVe961AJkd022KJii89GxeEA5rjf4k+CZFlANUivFfgbr26agBgjlb9/
+         NQbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781338729; x=1781943529;
+        d=1e100.net; s=20251104; t=1781338741; x=1781943541;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=AWmt9hm4RBPFcV8oaJO/+kTBgXex/ab1qLyyBSduhik=;
-        b=LZH5NzDK3Vdhj0h8U0+y7a7dNHfJHppp7uAThqtlwO30Ir7A6gHE86vDtDoVuhZsoU
-         RrIK5gLIfeDFGq2Frk/LvMAOJmhQkLLJdU9zkc4tv3pim4A8B+0VwCoPCGboHbe1+avr
-         gcjd8yUvzNmMwN8wp1WKbnbrz6hxhPwpMIhrC8vPxBs7qh3hkRbZbVDY4Zkzu53JhYMr
-         Lwhq5oHlPUNtUDEM+bEjx/3gqzOtW6N6o4GO204wcurOvDBUPZliz+VrWw4Ah0kuM/9j
-         wY4NeipcG6tgA3GgjTLNPn13l850EPko5QdWXiNUc5EOwxHN6pSl51bwk14oYsJmRoHo
-         pDjw==
-X-Gm-Message-State: AOJu0YzwSkqcSsBuydwGkIA3n3Y+cneIJ+fvHYwiQJL7ZT/AJy2i23x3
-	SFJzawkax5rwp5IidSsVxFDuM6qeKQ7gkJq2AJ0xFZGxNcVJJt3j3h+KqGpmlcJZ
-X-Gm-Gg: Acq92OHAyKhN69pHzstgNIV1DwzxqX9n+KM7m8L9jHujEyq37Cgx6Wq5undsv896EgQ
-	1ZB/o4GEcyl7AbYgCXHZZzziCHSc0txkWKXQI6ZcefqENhTjo8H7GElGqoHcX5Dp3hxSO/8tw2x
-	+JBMcFMaf+ktBdUF6WuYyiDApqbsr2CkKWoagQI14GvRO/eqr5r78gxjQQ2BvkfgsGKTRbOf97s
-	Qjrl8dhQUbBgJ6ZUVyjgCPzatuN+o8porkKKUblznUl5a05sEcyljIcQjiKPF45Lxvy4vaoTa/J
-	raX8wZyVKKHdF/DjRDAxUQquf9w9edr39bPZ3m6nwYRcnDWfeyQ8+3Ha9Pk1YU5LUZu5nemxKol
-	X12qYKR+VHoSUwZz7/HYaL3DH97JwylJkEnznhssNrcfjeNzSBCMnVBQ+ckZ29MRYIj1BqsG3O5
-	qacOEoNt//RyxicNSV6ALaIyEraXugKCuTudVu
-X-Received: by 2002:a17:903:4587:b0:2bf:2e93:c624 with SMTP id d9443c01a7336-2c41284101amr74008305ad.27.1781338729249;
-        Sat, 13 Jun 2026 01:18:49 -0700 (PDT)
+        bh=V9ps80IJ1RrcucvZRYddPyXc5lkBbYgGAIWUu7PRKVM=;
+        b=egWwLELt+AKh1maEkiWeGzDgyEGfBk5aJErEE89Zga379GRw7iMvxGwQrBaLwwmb2S
+         I64vCm/au/JoUZSIQoLKrcc96HVsvLlorEUAwnqObIXGhm0n2eHwPuKIY2HHST2fMEs3
+         3NqmTph1hO2KwPfnSS2hG9SX+b3uxGEZDZJAtfFYUIXy+wKXvYku2dNykdAPCFDPhx8L
+         cLkj3hGfJ0AqiXpa5vt5hLigzkY5UHZLnkE0jkfXLGGlMByfUtja7s31VW84KmBaDA5u
+         V7kbbKJv3l9UVmgQx5set8oRunzINH1NfjNotBgSSwhsJaXFhipmEpGZXblBfSJHpy5n
+         3Vyw==
+X-Gm-Message-State: AOJu0YzCoBEOKXN3YPA9F5aPDUEB9DQCp41HHeEBrlh26/sc+tTY6+29
+	uF6QoDi1W8d3azwRJiXWuqvd44fV59ChKjepMm58+se6D4oOJzvSr7X7l2R0gPqY
+X-Gm-Gg: Acq92OFwdRTI7CS8QM1yb4+DyJz/VUms5EhrxYaGFPjAY8oTgxt7HbfC8EnY98ULzcz
+	6kscgfIC68aftAylC026gYCqFk8GcMTmGT4+M/s1VcBYjciFuYFBKKkt1jkVwVttA2RU6yj8Fc6
+	zlEh3aXsy5DBPpY5Gz0oiTJDrAwJaZxnbRnBMIBecBYMq6m9dOWw5GcazXtf7eQ6rmOkUcgLbFl
+	trfNRcf9jByLm2MMDTTsYQzzp70DBRtSsWozggug50mdP7VLImmXL9a3/Qen02IWhTKgE9KpIIW
+	H9aR6cRy75/9hGnwsfk5aBDhBLafCTbWd6bmV8sUe9BG/AgV3uBG2NDjSE4nHdvrSEB++sQSoNs
+	WpwA6enW+WfntouTathL/un5JdiIsTpWZJhfao+K+daRhRwgT0oA0lI1pHwgwCYK0AfwBL9pgS2
+	el7kSwU2P8NxkrKcqkxPyUkTBN7bKkPVe/UwZt
+X-Received: by 2002:a17:903:1a88:b0:2bd:9803:9308 with SMTP id d9443c01a7336-2c4141a7f51mr72490355ad.36.1781338741520;
+        Sat, 13 Jun 2026 01:19:01 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.46
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.18.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Jun 2026 01:18:48 -0700 (PDT)
+        Sat, 13 Jun 2026 01:19:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 6/16] imagemagick: upgrade 7.1.2-23 -> 7.1.2-24
-Date: Sat, 13 Jun 2026 20:18:14 +1200
-Message-ID: <20260613081824.1223609-6-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 10/16] postfix: upgrade 3.10.9 -> 3.10.10
+Date: Sat, 13 Jun 2026 20:18:18 +1200
+Message-ID: <20260613081824.1223609-10-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
 References: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
@@ -68,34 +66,98 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 08:18:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127558
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 08:19:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127562
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 2f84b8c1f1cc293be1d458d223f8c61212ac0133)
+Dropped 0001-Fix-build-with-musl.patch which is part of upstream
+version.
+
+Release Notes:
+https://www.postfix.org/announcements/postfix-3.11.3.html
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{imagemagick_7.1.2-23.bb => imagemagick_7.1.2-24.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-23.bb => imagemagick_7.1.2-24.bb} (99%)
+ .../files/0001-Fix-build-with-musl.patch      | 50 -------------------
+ .../{postfix_3.10.9.bb => postfix_3.10.10.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 52 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.10.9.bb => postfix_3.10.10.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-23.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-24.bb
-similarity index 99%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-23.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-24.bb
-index 480f9d9a06..98e1ccdc6e 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-23.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-24.bb
-@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://imagemagick-ptest.sh \
- "
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
+deleted file mode 100644
+index d09418eaac..0000000000
+--- a/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From cbe5ba0deeba6329eed63eade06bb8c062d0d445 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Fri, 8 May 2026 22:39:54 +0800
+-Subject: [PATCH] Fix build with musl
+-
+-Guard glibc-specific version check with __GLIBC__ macro. When building
+-with musl, __GLIBC__ is not defined, so the preprocessor previously fell
+-through to the #else branch and defined NO_SNPRINTF, causing a build
+-error:
+-
+-vbuf_print.c: In function 'vbuf_print':
+-vbuf_print.c:208:46: error: macro 'VBUF_SNPRINTF' passed 5 arguments, but takes just 4
+-  208 |                     VSTRING_ADDNUM(fmt, width);
+-      |                                              ^
+-vbuf_print.c:126:9: note: macro 'VBUF_SNPRINTF' defined here
+-  126 | #define VBUF_SNPRINTF(bp, sz, fmt, arg) do { \
+-      |         ^~~~~~~~~~~~~
+-
+-Wrap the entire block in #ifdef __GLIBC__ so that neither branch
+-is entered on musl.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- src/util/sys_defs.h | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/util/sys_defs.h b/src/util/sys_defs.h
+-index 74319f2..6d3c7d2 100644
+---- a/src/util/sys_defs.h
+-+++ b/src/util/sys_defs.h
+-@@ -794,12 +794,14 @@ extern int initgroups(const char *, int);
+- #define NATIVE_NEWALIAS_PATH "/usr/bin/newaliases"
+- #define NATIVE_COMMAND_DIR "/usr/sbin"
+- #define NATIVE_DAEMON_DIR "/usr/libexec/postfix"
+-+#ifdef __GLIBC__
+- #if HAVE_GLIBC_API_VERSION_SUPPORT(2, 1)
+- #define SOCKADDR_SIZE	socklen_t
+- #define SOCKOPT_SIZE	socklen_t
+- #else
+- #define NO_SNPRINTF
+- #endif
+-+#endif
+- #ifndef NO_IPV6
+- #define HAS_IPV6
+- #if HAVE_GLIBC_API_VERSION_SUPPORT(2, 4)
+--- 
+-2.34.1
+-
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb
+similarity index 98%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb
+index 633e4a7a0d..5a9d77720e 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb
+@@ -27,10 +27,9 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://0004-Fix-icu-config.patch \
+            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+            file://0001-makedefs-Account-for-linux-7.x-version.patch \
+-           file://0001-Fix-build-with-musl.patch \
+            "
  
--SRCREV = "6a10c829fb645e0de1408030e6e0f67e820b0c98"
-+SRCREV = "271b6bc4cbbd3e52e6768c5daeac9e9ed7a139f8"
+-SRC_URI[sha256sum] = "d4b4daab0af2e0c16c0d2d5ac3c7680d5ebd2001ea054f7f2a601c759801bc13"
++SRC_URI[sha256sum] = "3b7197e00a98f7fe4624cf51a00ad805674256eff624e678529ccfbf2c7707a4"
  
- inherit autotools pkgconfig update-alternatives ptest
- export ac_cv_sys_file_offset_bits = "64"
+ UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
+ UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
 
