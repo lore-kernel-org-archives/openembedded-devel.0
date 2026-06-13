@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1058CD98DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95A31CD98D8
 	for <webhook@archiver.kernel.org>; Sat, 13 Jun 2026 08:19:15 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.87400.1781338751669743557
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.87543.1781338745544726069
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2026 01:19:11 -0700
+ Sat, 13 Jun 2026 01:19:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=KuhWqIPU;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2c0a5354da1so14949475ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:19:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Qt2cBR5Q;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2c0bb4a94b8so14250895ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 01:19:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781338751; x=1781943551; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1781338745; x=1781943545; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zSGhpgx/r+al5KGPk4KiPnsL9HRZWrTip9+36pGKfiU=;
-        b=KuhWqIPUxl1QfEZFNFaCtJHLRTgh2MiKrcJeeuw6XkJeYHGOZ7vJjOmD/fCxZ1ac4Y
-         S0Y2okz2lcR4RGtsDDftkEVX23AfpfrD+GKeaVJV27HwsdEk7ddnz2YvTwxKU7hMtSru
-         8eODjM3MlGLCAk8uqThiJeOa15XglFIIYumbwVyXGrtk8F5JvXiBXu2FEXRSqEXkl4/H
-         E2tIoNHCE6xZqzLp8HUsZNqZ1i/SzTSUsYDB7zDpQLk6qBDLZvoDehoHgVIxHSlBYIlb
-         orqhCqQ12hkb39jiRXZ8+7lUerJAUglsQJV7hyN1INzsakTQHtKKmSUPckcW3PogzO/s
-         OP2A==
+        bh=pEarUeyI7QJ6xip3ls6I7t/i/f5yHptBuV57pPIvW34=;
+        b=Qt2cBR5QpQpHjoR4KunkRI2vyRaMNZATMpENIG4zDUd7EHn7iXbm8R8UO1u5sJ9XMQ
+         EToOHr7F3U7gyzaNvE6Xdg0+ZcPWLBdY46jtIdlw2k2QT6yPSHDqAytymtp2kCtr+8cA
+         paownqOUa8EjdnFeNM0mxSnF0YW4p6uCmTk0eHmBpLgAjwv0BadQ7PmMJrQQd2Cs0q1d
+         7Nk0L0kJBecyIgYzZJJFtKwYX0sGUJavaXd0VabbDh2FQJ4QfzwMgr/xR2DC1MsOthPO
+         U2fqoeHDUAU6CxSCoUXMHPcxQi1GSL3WUeLcnzcA8hdw7cLaalBQSM1Y41+lwTbHEa/f
+         pVMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781338751; x=1781943551;
+        d=1e100.net; s=20251104; t=1781338745; x=1781943545;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=zSGhpgx/r+al5KGPk4KiPnsL9HRZWrTip9+36pGKfiU=;
-        b=KK5s5Igk8odqBIILh/D1kBnx4Q9n+Ts0tu57Ae7eFwJgo8vcuEi4XroAXyh2S/U8oB
-         qihwB77utSJNagFR+0Ni8vBhU/0nnFLwyQeW1xe3JbtsHAgoO2yZsTVpVSFo08AodUvc
-         teTAPKqLNpEK65RvDzMSfe7lFa1Y3tgVPcIOettD0InUxYnzf6Dqp1fVJeig/OfY7HLS
-         0z4DdL5GMXpJMht+eTAfSHPMYdoYOMraCPmBh9aNNvm1HJ2zznE0lvnzBb0MVnx+ulAq
-         6Ep6ujWaKVNBmNOyj4SWb0EEiKZHv1PPiMbq4e5aOMHb58q/WZSQv884cswB44bDMMxN
-         uIsQ==
-X-Gm-Message-State: AOJu0Yw6uTRYY06YTFt4uF6s61LDkivmCXkIO4QbnhuEAyL35LcEcp5W
-	4HcqFDpsX6rU1vdtXAmycszICcik2P5NSrrQ+4J93esdo6Tgv978RhrWhOMeeLJx
-X-Gm-Gg: Acq92OGNFY8KBOyDuNHbiTgWWrdVcp+Af4Mbokn9LJpYpNHxkO7jKjQ2h9UKlWMnt7D
-	7IyCJee0addwXOYeJl1E9y6BHonmGxi4Iz2V0fsAc9EqjLxcGSopx5qzthaw0Zb9yTgtPJxOd6J
-	/ZyXbR3hEz2uxkcci6mRMvZRp65UD3WAmzwy45wsnNq4vGUnTXfLqc8i/qqPXbYkJXTEuIgUIO7
-	a4OEG5BYoX/clwHTsYoD3ZdZm7KOWuzz3WRCoxp2eH+bQYKhvJ4TomYFcTOiIrWdpIICApYlK7n
-	p0u1AtLYMYjcFbimxQVFeQF4swBLo1Q5ntpLqpdPHwR0TiRxv/INHRcpTWUOL0MXOvDk/j8f98T
-	PDMWy/B2pv58fiQz2JgUbRWa2/8yDtZup5PQ7hk9NiftFepN1U0k5xgawp3scPJ25sB9WpQGqHh
-	IVt1raIhL7hueXDHPnINFA9kQmQNobfXhFcElG
-X-Received: by 2002:a17:902:f70a:b0:2b0:badc:c9cf with SMTP id d9443c01a7336-2c3fb8d7676mr59909645ad.13.1781338751044;
-        Sat, 13 Jun 2026 01:19:11 -0700 (PDT)
+        bh=pEarUeyI7QJ6xip3ls6I7t/i/f5yHptBuV57pPIvW34=;
+        b=DzthTVq1XoaC3tBXdI7vyX4n+CyRm9hsPmWVO8UXvmHaR9RTvUQvfaA1U88fKCYgUB
+         wvPd0BbIGCmWFFz5UswXxRD4KKISilg9AfKVpQz3hF0zS65EQl0yiChPuEbqGBLw0Ngn
+         1js/dHwJ9CMw4WbmNTh+QlLIp1tD1lhinAQDEuD6mE8Kwu+BudjR4k7rjfd10VXaEvND
+         dA4OEuAHfd3DsirXLGoCMQYdqYphtxQLcl96IubCP+Y8/RRE3mTMLd59ruhx+2gAIzvS
+         Bstgv8NozHh7VGZjSNaivdhHDf7+I+zrQBboORtBGVjpSSkZbnXJtO6D7PxCe2lGE68E
+         9AJA==
+X-Gm-Message-State: AOJu0YzQ6j3qV7WeH4PvVxftEu7xqSxXrr2bJPQ6YKfisyPtTDEwD/Bx
+	xnCTO9reF/eUphxzJthSrLQAlZKPW45VqvZBVwTQaxtr0m1flsWzcl64VRYYQjeY
+X-Gm-Gg: Acq92OG74fGnqU2LlUBEpl6qZB7MhReOzYgrM/TQDi0O+LftZCz8xlg30ofiN3LZKfB
+	TRCAgFxjExHUrEbT7Zk4BVIJIVqjkmalhqK/upDaNjpFvu3766nyhPj0/l3sHdK9xnxXFhkd5pE
+	Bbxn6itdl2YkLkGDNKP/9UTOPE+T3n/pYKrQCACtmY2+oKkVi8QUUVAe1yjFQuieFAijTBwi0nM
+	1Z8KptFGG9j/RAGjQZ2VA342bWtMTp4gvzd02Oryce3ZN+/ZbcWEx1Pi5HYoTt+qjCyzNADWkEy
+	cYG5NbV0x1+RQ+dhcc4zYB15HtV42TlzmqF4NcpcfFmNKQ/EOHyz2uRWAjrQCjsXf2uuxHp4Huc
+	44p4PotaH24dDwvwjFmN16Y84bSlw37KY4x0dJXhuex6/oRVQSuePj/st4WrNvdr9360bEjSjxI
+	+ybh9eTjjKgEdFC1e1ajb2zR0oZl3hHJwATLX9
+X-Received: by 2002:a17:903:120e:b0:2c0:bd0f:1529 with SMTP id d9443c01a7336-2c41255ac72mr66411725ad.23.1781338744876;
+        Sat, 13 Jun 2026 01:19:04 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.19.08
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42c43543asm43885095ad.0.2026.06.13.01.19.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Jun 2026 01:19:10 -0700 (PDT)
+        Sat, 13 Jun 2026 01:19:04 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][wrynose][PATCH 13/16] python3-vector: upgrade 1.8.0 -> 1.8.1
-Date: Sat, 13 Jun 2026 20:18:21 +1200
-Message-ID: <20260613081824.1223609-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-gnome][wrynose][PATCH 11/16] gdm: upgrade 50.0 -> 50.1
+Date: Sat, 13 Jun 2026 20:18:19 +1200
+Message-ID: <20260613081824.1223609-11-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
 References: <20260613081824.1223609-1-ankur.tyagi85@gmail.com>
@@ -69,40 +69,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2026 08:19:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127565
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127563
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-- fix: get rid of cupy<14 quick fix
-- fix: _wrap_results skips momentum equivalents
-- ci: bump setup-uv to maintained tag scheme
-- ci: enable numba testing in 3.14t
+===========
+* Fixed issue where GDM failed to properly terminate conflicting graphical sessions
+  started outside of GDM (e.g. ThinLinc, TigerVNC). GDM now queries logind directly
+  to find and terminate all conflicting sessions
+* Fixed plymouth hanging indefinitely on headless systems or systems without monitors,
+  which prevented the system from reaching graphical.target
+* Fixed XDG_DATA_DIRS construction to prevent gnome-shell from failing to find its
+  files when /usr/share had higher precedence than /usr/local/share
+* Fixed bug where GDM would set XDG_SESSION_TYPE=wayland on X11 sessions
+* Translation updates
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 9966cea909377efb4a91bfc65986feb5df2a7667)
+(cherry picked from commit 78e5d3c646b12b2342b341fa10c650b8142cd372)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-vector_1.8.0.bb => python3-vector_1.8.1.bb} | 2 +-
+ meta-gnome/recipes-gnome/gdm/{gdm_50.0.bb => gdm_50.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-vector_1.8.0.bb => python3-vector_1.8.1.bb} (88%)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_50.0.bb => gdm_50.1.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-vector_1.8.0.bb b/meta-python/recipes-devtools/python/python3-vector_1.8.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-vector_1.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-vector_1.8.1.bb
-index 67312c4423..b04184cc88 100644
---- a/meta-python/recipes-devtools/python/python3-vector_1.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-vector_1.8.1.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b9f683a957276148387db50971a7b3ef"
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_50.0.bb b/meta-gnome/recipes-gnome/gdm/gdm_50.1.bb
+similarity index 96%
+rename from meta-gnome/recipes-gnome/gdm/gdm_50.0.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_50.1.bb
+index 858933a4b3..9332c7836c 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_50.0.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_50.1.bb
+@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
  
- DEPENDS += "python3-hatch-vcs-native"
+ inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
  
--SRC_URI[sha256sum] = "58f95e9e24463851ca34176a20df2fd2e80b41d78615e5b1f7ae4bf313424ca6"
-+SRC_URI[sha256sum] = "1b7658a4fbc7b593342506a1b84eff3459745b09c98c3be83ed58df31fd29b43"
+-SRC_URI[archive.sha256sum] = "646f53d68f2d2d147146ffaeb85047ded8b813dcb1c104d8f0ec36ca609eb5bf"
++SRC_URI[archive.sha256sum] = "770159373512192410f412b5d0c4678ec1573f1ae4b39c81fe75861fe8890174"
  
- inherit pypi python_hatchling
- 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
 
