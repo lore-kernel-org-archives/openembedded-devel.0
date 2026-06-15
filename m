@@ -2,101 +2,99 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 840CACD98E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF64ECD98E4
 	for <webhook@archiver.kernel.org>; Mon, 15 Jun 2026 15:13:27 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.132069.1781536402646026858
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.132070.1781536403252625593
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jun 2026 08:13:22 -0700
+ Mon, 15 Jun 2026 08:13:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Ce+br0Zs;
- spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4903d730b1fso45204705e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 08:13:22 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=otc5JtaI;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-45efb698ef2so1806193f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 08:13:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1781536401; x=1782141201; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MAfQFYHHdG0Tgp1otw0YgDiTtbJ7QoUefl7YYHf2r8E=;
-        b=Ce+br0ZsbErwJx/fa1KO1Gll9ZH65zmH+H6+mVB/n+5O5zdOk5maEClVP19AaL05+9
-         5EzOMRv5Tjqha2umnu8jJ8LV6UYJBAhlwlCI4lYTsNv8is45SDOpPZOAiVycQJF4HuUD
-         g89ggJyE449g6+XXwuG1vtUXD95hjaGypdH5s=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=59nQmYin2JkSVLoZugJ+ky8gzWbHbvk3Wgg8YJdsPG8=;
+        b=otc5JtaI/rKsqTJQ6ganJ6cum3KnGeBl4uFoFjcls2pYhf9oH07E1jEWVNDCVUOLFk
+         BCprDj6cGIZmMMDNYIJs3iwMyB7e/ZA4fqgYsHNwWB21BghcxHGQPe38jjIC5KKm351w
+         FuktNFU4ayeyNUQaPqqcBYsZX4vNHql/xGenY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20251104; t=1781536401; x=1782141201;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MAfQFYHHdG0Tgp1otw0YgDiTtbJ7QoUefl7YYHf2r8E=;
-        b=GTGA4nHF5UfbG5RFsCwIjAWRFkKz5dOJVytCxDjv0HVB9F5xpOmnbVpOQ+dR2CDgbF
-         flMIfgd6zGG1SwFkirxAwEfVlfF0Z7tL0BXZyMOtGNdFzoU3UM5QxdwYTLO6vEy2t43H
-         OoNPlBFnA75rB2AUJgZrD2AB++DbkG49/gGkGLXBTnoSIrTjdX3IWuvyi4apSihgdsFh
-         tsLR8WBYKTKxCVeA0IgGf8x9dACPcOm+uqW/+3mFpo8lBqbau4vm44t7a7GPswOKTKwJ
-         n/eM1rhU58s5dVls8HUMwg+N3IibTPGKD6qhxFl7/+bw9fzph5kFlO6pDN567spkzcOI
-         yGlA==
-X-Gm-Message-State: AOJu0Yx15okeOzqHzkZZi1EA8abNs4sgsnVKS0HLD+8jSQxB8LtFYGQE
-	re5u83j18VirNOEkGEhlsMctzszLw6SsGH6EFSSAwmy/Hrvf5I4GU3S1NBSfFxDMGzlLgKksLcp
-	SDPtm
-X-Gm-Gg: Acq92OFJe+heujxj+mBKe3N0qbVOX5YIyRhuAKVzhJtrhBtUJPmUaNoOBTi0hJvAZKM
-	lCUG8nwtujaWztcM3zh5DyPDkntWgpL+jbJhDPZyZev7/f6Vyv6nzjpDqEMkk7+0EmSqIg8fc0m
-	Mi2kF3FOuwwA/tpMbWVdNMOQAuQa0DjGB0KtaaxkMJwBf++DCu59qqYYKUkQp1K8pFZDHguOiG0
-	ihtX1dxgezGUBfwE1U6WlKiHEtGqqybHmvL0VHUF8Wm2x23qNq159R9D3DIOXHUJl26BW6E7WWg
-	4Cl6S3NiCB8FHueQlRVuTioz/d/GPOlrabUr+NjZma5n7PtFv0/YcGInaV4rsW/LOVik1pzQDYy
-	h3ev36G13SCAb5bJW4AQvMpSQnedRVTbdnEsLWhPjb6Ij5WboC3B0Fc8lk4AUVHC2YoM3FZ4VKU
-	vhriHjwj7we3a+X+pSoE98irirIxEqihlFtv/U
-X-Received: by 2002:a05:600c:68c:b0:491:731c:892a with SMTP id 5b1f17b1804b1-4922013d409mr89736055e9.35.1781536400244;
-        Mon, 15 Jun 2026 08:13:20 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=59nQmYin2JkSVLoZugJ+ky8gzWbHbvk3Wgg8YJdsPG8=;
+        b=TIbpegd+BIb1PsfdnxJZ8TNJyKRTl62z0yQMADPxgaj35q8gZB3UJuIgG/NEvdYSjX
+         2ZiOU7COgvnx6df4Mlhpwk5mHkjhd2ZLCk8btWROD5hiqMhp/2Ajef65NvT8Owq9KKUC
+         OveMnQ9dgmiK2ErivXAyf1pSq4KMiudD0Q7FbfZs9A7FZVDD566/+FHEBnXsgfXkVFkv
+         TWj/NSKo1zaDUhKF4aoWZ+tDBMddHH06QXIWlW8sWGicLb8KDeCm0J8J4pBknjlO0MGu
+         cMotCXOk/n32ANi7NqHZ7CIKKm8jpaDVTUAPrziTFLo9Mc5h+JpCW2Ym/e+RKfO8dQ0Z
+         JfRQ==
+X-Gm-Message-State: AOJu0Ywp4helc1y5p7ZwAvs4psw01CCxRalt+Km8imjlavMM53wfqdnz
+	a/tC5eyHerlYgF8JlFrlqK+Xa8BU0L1mFrES7UKaWp5wpvDbnT6Roin2YsZPIeHd+Lpc4HpC7XX
+	HNHwG
+X-Gm-Gg: Acq92OEzbSgnaPLJwRFrPw1wtEKsJDseLhQ0jLgPDkMufGqZBeXg6yfMlb7YfFXqWQw
+	9y9+zUVtGtFyJSNggYZIY2hqT4viTAPvLnhiQdNERlNHv6gbDV+5pGA3qq8ObxOJKwSusiGJhqu
+	aHWYGloU3TxJic7o8tN51dnanX0M0Lk68ZIt/9f+A4TDiZCAP2jyX2zOnNqfTuM/E39u+/OOm6x
+	hrUU8OEiHSidBOvfFpMo3oMNk16n4/SinlaUc9NKjsE8+9KOD39U3K+eXdTw6XYNE226RHjjjbw
+	Kf+4+pbcOFtbv7ooHyGJ7UOSYOkdFXhyoJY0Te6uZ/0v2q46cRAjn0SqkbHaTTNbGY84I8eh/jY
+	UfTmOa6imBxhece+Q516fBZK8MkHGGPqWWY7MyOSGtzCsd0SH1Mkb2lBIUfg5atKveb2qGHe60s
+	XPZYqJj77kQv6VoV/TrUulYhGv4Node0299zAa
+X-Received: by 2002:a7b:c7c5:0:b0:490:b0e0:3de2 with SMTP id 5b1f17b1804b1-4922010b88fmr112754795e9.33.1781536401189;
+        Mon, 15 Jun 2026 08:13:21 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490ea4b2e8esm219066395e9.0.2026.06.15.08.13.19
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490ea4b2e8esm219066395e9.0.2026.06.15.08.13.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jun 2026 08:13:19 -0700 (PDT)
+        Mon, 15 Jun 2026 08:13:20 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-langtable: Upgrade 0.0.70 -> 0.0.71
-Date: Mon, 15 Jun 2026 18:13:12 +0300
-Message-ID: <20260615151316.3273340-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-ujson: Upgrade 5.12.1 -> 5.13.0
+Date: Mon, 15 Jun 2026 18:13:13 +0300
+Message-ID: <20260615151316.3273340-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260615151316.3273340-1-leon.anavi@konsulko.com>
+References: <20260615151316.3273340-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 15:13:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127586
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127587
 
-Upgrade to release 0.0.71:
+Upgrade to release 5.13.0:
 
-- langtable.py: Fix deprecation warning:
-  langtable.py:2652: UserWarning: pkg_resources is deprecated as an API
-- Add xdq, sus, mrh, hrx, brh, ary, en_SE.UTF-8
-- Get new translations and translation changes from CLDR
-- setup.py: use open() instead of deprecated codecs.open(), declare
-  minimum Python version >= 3.8
-- Add Yangon timezone id part
-- languages.xml: Rename Asia/Rangoon to Asia/Yangon
-- territories.xml: Rename Asia/Rangoon to Asia/Yangon
+- Create manylinux2014 wheels
+- Add support for Python 3.15
+- Disable global interpreter lock for freethreading
+- Re-enable building GraalPy wheels on macOS arm64
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-langtable_0.0.70.bb => python3-langtable_0.0.71.bb} | 2 +-
+ .../python/{python3-ujson_5.12.1.bb => python3-ujson_5.13.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-langtable_0.0.70.bb => python3-langtable_0.0.71.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-ujson_5.12.1.bb => python3-ujson_5.13.0.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.70.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.71.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-langtable_0.0.70.bb
-rename to meta-python/recipes-devtools/python/python3-langtable_0.0.71.bb
-index 7df58f4e0f..0335366445 100644
---- a/meta-python/recipes-devtools/python/python3-langtable_0.0.70.bb
-+++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.71.bb
-@@ -6,7 +6,7 @@ SECTION = "devel/python"
+diff --git a/meta-python/recipes-devtools/python/python3-ujson_5.12.1.bb b/meta-python/recipes-devtools/python/python3-ujson_5.13.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-ujson_5.12.1.bb
+rename to meta-python/recipes-devtools/python/python3-ujson_5.13.0.bb
+index 8f8c6e23d4..29fa9028e0 100644
+--- a/meta-python/recipes-devtools/python/python3-ujson_5.12.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ujson_5.13.0.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
+ LICENSE = "BSD-3-Clause & TCL"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1e3768cfe2662fa77c49c9c2d3804d87"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+-SRC_URI[sha256sum] = "5b7e96406c301a1366534479a7352ec40ec68bb327c0c119091635acd5925e35"
++SRC_URI[sha256sum] = "d62e3d7625384c08082abad81a077af587fdef2761bb14c3822f4234b8d07d75"
  
--SRC_URI[sha256sum] = "725b94121856a3b76d2345e8596954b82ed1eda78513e55ac55fbe4a4823e66e"
-+SRC_URI[sha256sum] = "f9d39c06d5182ea14eb4576bf1da8875af1d44efb166e55d6865b3b59b8ac617"
- 
- inherit pypi setuptools3 python3native
+ inherit pypi ptest-python-pytest python_setuptools_build_meta
  
 -- 
 2.47.3
