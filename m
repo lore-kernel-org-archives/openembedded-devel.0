@@ -1,97 +1,246 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9604CD98DA
-	for <webhook@archiver.kernel.org>; Mon, 15 Jun 2026 15:52:08 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.132792.1781538720043957022
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41D7BCD98DA
+	for <webhook@archiver.kernel.org>; Mon, 15 Jun 2026 18:40:14 +0000 (UTC)
+Received: from mail-yx1-f43.google.com (mail-yx1-f43.google.com [74.125.224.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.136530.1781548809618453157
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jun 2026 08:52:00 -0700
+ Mon, 15 Jun 2026 11:40:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PjM1KR61;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: uvv.mail@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-490aebf33e9so15952905e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 08:51:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ociy7nq2;
+ spf=pass (domain: gmail.com, ip: 74.125.224.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f43.google.com with SMTP id 956f58d0204a3-66061993294so3618642d50.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 11:40:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781548809; cv=none;
+        d=google.com; s=arc-20240605;
+        b=QNnxEgR1+BHRKkU6iNfF2R1PT75n2nzlptJaH9aSrx6mgd03xmzlMXONIKV4qMfboT
+         On81E2E2eeTqr/k7H9mK1GA/z4VADlz4PHI929ZARrwmxVPzkfsJcJ/n5Kh4NsZcJTki
+         OD9KBb7/8bgwfQMis/ACJfvaUqb4Z7EaONR9wrFQ6mNFCFscGGNhOotpGW5Wa4WamhFf
+         2uy4FpuYu+MNmVeaWCZlxYsS6pFivUmxHLKS9LpKj8ZOpzQpTbeJk0NSnZKMrmB4mT2x
+         fLyruomKGe/K+DAfBFYlpy3n9C+lTWxdILsDAeLv72E9Gs21txZBKlIufZIw1NYtWkHW
+         j+ZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=Sv/qZUJDPU7SVuVlt7OrZ4ZRZYim3AtmbGcC1obBxE0=;
+        fh=TKJj+TQbOfhIZO+HJtRVqEbv76mR7gPejKPp/8pTfkM=;
+        b=ZSHE2Z9pd1U9fI7+rI7KBoaQqiMYUuSga9SPBW1v4cKEJ6vpVYDRirNzJ7+OPwCP36
+         eUWKnh55FhgRu2J7vCU14jUI4yZhZXUY+Dg4CD1sOnLb6Cpwl0KEnD7QwWdr3maORxQs
+         FPnrFEz3z06eHLdgc1iEQEhwzyMt9cpGVqT+iLWRKITICN+rTt+toLBdS84XebHdcLug
+         2TinnujlIkzBFvUidSQj3t2PAGDZoa+cGkKmax7Yrbm621lddzzX6ne2xkwDqR1EBy73
+         dqygB99om+nVu7gtnSsSJhkRUbWChkjkrYfIwlUnxv+hXwnK2HoFgFhdAmfiZPz9E08J
+         NJ+g==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781538718; x=1782143518; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XHECzecL3xIBtFa7m68LtBvra1rtg9Q0Y9aCZN/J09E=;
-        b=PjM1KR61HHg7+1F+j1mUQpirFlaAOnJrkt0fvSf8QH4HZZIFEiQ0PEDwUAnwxmgRy5
-         YsOPX2lMb4DvyKqgEJ1Dcf06RCU6mXuOo8KUQBpRMZafafuHGxV2tFqYPwDz3zSLpUyq
-         8o5DokQ8rhb/8hAHVjkm1np81oFMg01g6eQ+jTc7e3o2osX4nq/42R/SC3zpTnyfqX3e
-         7y5SXZpRdePdE/2n/WwO3z1N5WvNDF1pHSA9abghKfD30pyseOqftUeMb9Ga8EttKUi3
-         3WrnbtZtGm8h9Rk8frGX7jl2fM/2a9rQP6LXeS/b34qJa+YzoMlMlLKLnP/tImUq059Z
-         TDYA==
+        d=gmail.com; s=20251104; t=1781548809; x=1782153609; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Sv/qZUJDPU7SVuVlt7OrZ4ZRZYim3AtmbGcC1obBxE0=;
+        b=ociy7nq2U5EsYnZNtecwZIr2RSawcVq3dNywJKJ0px1CFJGOAaCipifbJbd5M2XivI
+         jGx6GMgy2NbvrAVkDeyt30UhYm/STPHP1xDg6p/ZfX86pyvhHpdu5JfWk58WuJ0Ix6xo
+         MrPqmS1oNj3Yi2FG1JqS/tspjltcXd8S/edK7zyJ7eqpb4Q7zFO44seasH0aX8pR2Jp3
+         eF6QIl7szZpmKkR/dMG0s+/3sF4D6ANRg9z6iX8i/WwYL6oadgK/EzWCSnEtTn8ZS8FQ
+         I8JflHUbhlZTZE59xXsXHtePlfFyyW8eIu7QX6Adou4+JqDxIl9lZU9XwMZayj1B6Q91
+         B49g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781538718; x=1782143518;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1781548809; x=1782153609;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XHECzecL3xIBtFa7m68LtBvra1rtg9Q0Y9aCZN/J09E=;
-        b=DuRyafmxYBJtE2Dan6NSG9iPxaHsD+YvKrtHUfnvDN4WsqnW041SANp+aBRCE+kUY3
-         bFNkmNHjVi22Wv/sL1SLuYx8/krw4jB++7Jfjk8sMEfS2TVqPR314IIKALqR7Yfil7Hm
-         nLmAJTbih6ia/Z4P3n31DzLbN3aLNuv7WH+tVa9xch6Gc13Q/qHHte1TKGpd+7h48BVs
-         gLn6QfyK1qkwzJMIknoZw8n8V3a4mpY+5iyCwJ/mNfvJMn2m4A2ZBPAfopEwAsk8dwGr
-         kTKtJ0y14caOFQGRxPg9tG3ejF1fFpTgMO8c+hXYTls5BF4G0sKypRnWUz9ycce6NDhb
-         ugGw==
-X-Gm-Message-State: AOJu0YwLDVsoQXUn9Y+sPH+ecwnXaVmCFvmhUaX+s3cfzvdTbx4ys2Dv
-	9RdnUcsjLZIr9oNTLIa9kC3Hy4KURO5oe6LqNWKO1qU2/NBALYrebZo0JLv1w818
-X-Gm-Gg: Acq92OGjC3zoxmzdZ6vcH4oReGzR0qAZtHXqqx0fYkx0pDpq5x6OHRJ0GPGwYsuKTkg
-	xuD3Mf1X/RtM7TyLy72r5mlEXs7Jm+QYaqX8Gfguv6ROJcX0GS0x7zHb9UGfeYv0HCbN8SSLnR2
-	KQ89Q8u+4WXDyQ+dfxBQPJg/BXDUTB3wv2Vl0KjxBObLoZj9KhTWZO9C2ABeC39IUd73BTmN5LL
-	1C94RH2n4wyOzcZTpENH35fyKF1AZXswbIrDGjZdj0/gikdL9sBEMUckoriYvvrJEPFObef/H9x
-	vaNFDFG27KkPYYyZdvm7DCkUwtagmWCAI6dx9kwthj5omX7MtTky6/F94JU3Pb2xR7irF9NiWQq
-	sGJiNPMM+BGEB7g4/TNR8YxUNYwq++H6uJmsgmvnopEPf9o+CmrT17oUySfsIS2wKvUaNjsEOXP
-	WsKGVbD7bBQZOip4qFYOFQjYQe
-X-Received: by 2002:a05:600c:e556:20b0:490:bde3:d112 with SMTP id 5b1f17b1804b1-490ec5088b6mr139875035e9.30.1781538717999;
-        Mon, 15 Jun 2026 08:51:57 -0700 (PDT)
-Received: from Ubuntu-2204-jammy-amd64-base.. ([2a01:4f8:272:3f67::2])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4922fa97a07sm2276135e9.14.2026.06.15.08.51.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jun 2026 08:51:56 -0700 (PDT)
-From: uvv.mail@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Subject: [meta-oe][PATCH v2] tbb: Fix build error
-Date: Mon, 15 Jun 2026 15:51:49 +0000
-Message-ID: <20260615155149.280023-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=Sv/qZUJDPU7SVuVlt7OrZ4ZRZYim3AtmbGcC1obBxE0=;
+        b=l9c2pHLoLFfgjqEsYxNSbhfXwxJs2ibb1mEmEkjxEUB3MVdE/G/jkWURrX8GAY9U0A
+         s61ynCLUMCbtkzcDTd76m4Ia0o9l/3f9ftsMgHdNWestEk/GA+488+utcKKkp+Y7iVH4
+         iDtSycc/mwlC89T31ki7T9bIFJ+CTDwnEwJV9cv2BDCEkWdLsKxTuINy2X/ss7hOo0hE
+         Zr19VNSDhHR8yHR5ap8Aud2D9q7pESrTKqy6LFAyTRywNZBJWEtNWA00/OALz45xc++l
+         A8zLkKc5b5R4oqXPau7wqPQNtMaRprFuP4qe8vc7kyRU31oRGji1mOxYwPOFweMdqL7L
+         YLRQ==
+X-Gm-Message-State: AOJu0YzqwC3Q01hubrNumtmlo8L+PFO/3St4IlD8oR+T/4J8paM65FCg
+	++7zQFEOxeHUumLb2gf91LTWi3f8qBRLp0tDEIq5UXMXqJAOp5TQQj0Tycy/tROEfvGvCDG+tQA
+	C/AZCvSZrZBa9lvGVZ2xejLol+DbHrDE=
+X-Gm-Gg: Acq92OH7PkDlppOMLhcQW5or+H0Onr8kZcpiQcdp5EEKnNHxTFLEc0sWNxtm2+TaLfc
+	rmzXYmzNUZThLo5dB+tgNBKYksY0LwUeMjN1I0yRKUHQFslvbTJVMVoMxeOTtPuE+7yQ9gnhu3s
+	HD6jtK3nmGiL9C/jgcbui3vSPWfO0LSz4wWpufczpwHIO4I0UctQeUjsgcXNOWGMIpFFge1z1By
+	CCq44+riRIdjevqBLB7MFg6l1D4oWK9gnIuZRm67G9g7R5VCjUrcN1f653JtgKiTfja0WBLP+mu
+	Etr9pA++Omxl2NYPD74sH0NZzEgDfZVRcOB4v0xzy6Bd8FlC3wX6hQ8uQECml0mNMHtmM0z4EkL
+	v4nvGkeoG5ALDNzzhUziFVP3i353QCjLVk12yznKgIT3mTGSmknrtzsY9IB+zuKa99wQWJdBBsc
+	OyGP+BSmo=
+X-Received: by 2002:a05:690e:dcd:b0:660:41fb:6728 with SMTP id
+ 956f58d0204a3-662b5c2833fmr229046d50.0.1781548808567; Mon, 15 Jun 2026
+ 11:40:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260615144348.7946-1-f_l_k@t-online.de>
+In-Reply-To: <20260615144348.7946-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Jun 2026 11:39:57 -0700
+X-Gm-Features: AVVi8CczqjNKyQjTuyrF-oBfn6IXQ2CC0fcut3zSqds-pJJjfWuemYij2BlvdvI
+Message-ID: <CAMKF1sqdnApLQLRANTfimRqnqTUKvfzpkSa-EJ+JbmCzLr6tiQ@mail.gmail.com>
+Subject: Re: [oe] [meta-multrimedia][PATCHv2] libdvdread: switch to meson buildsystem
+To: Markus Volk <f_l_k@t-online.de>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000e280b306544f2704"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 15:52:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127592
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 18:40:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127593
 
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+--000000000000e280b306544f2704
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Target and ptest packages miss the run-time dependency, which causes the
-following build errors:
+I realize there are more recipes in other layers eg meta-gnome depending on
+it. So moving to multimedia layer is perhaps not gonna work
 
-ERROR: tbb-1_2022.3.0-r0 do_package_qa: QA Issue: /usr/lib/tbb/ptest/gnu_15.2_cxx11_64_release/test_tbbbind contained in package tbb-ptest requires libhwloc.so.15()(64bit), but no providers found in RDEPENDS:tbb-ptest? [file-rdeps]
-ERROR: tbb-1_2022.3.0-r0 do_package_qa: QA Issue: /usr/lib/libtbbbind_2_5.so.3.17 contained in package tbb requires libhwloc.so.15()(64bit), but no providers found in RDEPENDS:tbb? [file-rdeps]
-ERROR: tbb-1_2022.3.0-r0 do_package_qa: Fatal QA errors were found, failing task.
+On Mon, Jun 15, 2026, 7:44=E2=80=AFAM Markus Volk via lists.openembedded.or=
+g <f_l_k=3D
+t-online.de@lists.openembedded.org> wrote:
 
-Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
----
- meta-oe/recipes-support/tbb/tbb_2022.3.0.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> autotools buildsystem has been removed:
+> do_configure: no configure script found
+>
+> move recipe to meta-multimedia
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../recipes-multimedia/libdvdread/libdvdread_7.0.1.bb       | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>  rename {meta-oe =3D> meta-multimedia}/recipes-multimedia/libdvdread/
+> libdvdread_7.0.1.bb (59%)
+>
+> diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
+> b/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
+> similarity index 59%
+> rename from meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
+> rename to meta-multimedia/recipes-multimedia/libdvdread/
+> libdvdread_7.0.1.bb
+> index 0e56f0bd3c..0be61c2174 100644
+> --- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
+> +++ b/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
+> @@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D64e753fa7d1ca31632bc383da3b57c27"
+>  SRC_URI =3D "
+> https://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${=
+PV}.tar.xz
+> "
+>  SRC_URI[sha256sum] =3D
+> "2e3e04a305c15c3963aa03ae1b9a83c1d239880003fcf3dde986d3943355d407"
+>
+> -inherit autotools lib_package binconfig pkgconfig
+> +inherit meson lib_package binconfig pkgconfig manpages
+>
+> -CONFIGUREOPTS:remove =3D "--disable-silent-rules"
+> +PACKAGECONFIG ?=3D "libdvdcss"
+> +PACKAGECONFIG[libdvdcss] =3D
+> "-Dlibdvdcss=3Denabled,-Dlibdvdcss=3Ddisabled,libdvdcss"
+> +PACKAGECONFIG[manpages] =3D
+> "-Denable_docs=3Dtrue,-Denable_docs=3Dfalse,doxygen-native"
+> --
+> 2.54.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#127585):
+> https://lists.openembedded.org/g/openembedded-devel/message/127585
+> Mute This Topic: https://lists.openembedded.org/mt/119816699/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-diff --git a/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-index 33741a7ac1..e09aa5d96a 100644
---- a/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-@@ -30,7 +30,8 @@ EXTRA_OECMAKE += " \
-                     -DTBB_DISABLE_HWLOC_AUTOMATIC_SEARCH=OFF \
-                 "
- 
--RDEPENDS:${PN}-ptest += "cmake"
-+RDEPENDS:${PN} += "libhwloc"
-+RDEPENDS:${PN}-ptest += "cmake libhwloc"
- 
- # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
- # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: /tmp/lto-llvm-264bc2.o: can't link soft-float modules with double-float modules
+--000000000000e280b306544f2704
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">I realize there are more recipes in other layers eg meta-=
+gnome depending on it. So moving to multimedia layer is perhaps not gonna w=
+ork=C2=A0</div><br><div class=3D"gmail_quote gmail_quote_container"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Mon, Jun 15, 2026, 7:44=E2=80=AFAM Markus=
+ Volk via <a href=3D"http://lists.openembedded.org">lists.openembedded.org<=
+/a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-onl=
+ine.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"=
+gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
+4,204,204);padding-left:1ex">autotools buildsystem has been removed:<br>
+do_configure: no configure script found<br>
+<br>
+move recipe to meta-multimedia<br>
+<br>
+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
+=3D"_blank" rel=3D"noreferrer">f_l_k@t-online.de</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.0.1.=
+bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0| 6 ++++--<br>
+=C2=A01 file changed, 4 insertions(+), 2 deletions(-)<br>
+=C2=A0rename {meta-oe =3D&gt; meta-multimedia}/recipes-multimedia/libdvdrea=
+d/<a href=3D"http://libdvdread_7.0.1.bb" rel=3D"noreferrer noreferrer" targ=
+et=3D"_blank">libdvdread_7.0.1.bb</a> (59%)<br>
+<br>
+diff --git a/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvd=
+read_7.0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdread_7=
+.0.1.bb</a> b/meta-multimedia/recipes-multimedia/libdvdread/<a href=3D"http=
+://libdvdread_7.0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">lib=
+dvdread_7.0.1.bb</a><br>
+similarity index 59%<br>
+rename from meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdr=
+ead_7.0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdread_7.=
+0.1.bb</a><br>
+rename to meta-multimedia/recipes-multimedia/libdvdread/<a href=3D"http://l=
+ibdvdread_7.0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdr=
+ead_7.0.1.bb</a><br>
+index 0e56f0bd3c..0be61c2174 100644<br>
+--- a/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.=
+0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdread_7.0.1.bb=
+</a><br>
++++ b/meta-multimedia/recipes-multimedia/libdvdread/<a href=3D"http://libdv=
+dread_7.0.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libdvdread_=
+7.0.1.bb</a><br>
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D64e753fa7d1=
+ca31632bc383da3b57c27&quot;<br>
+=C2=A0SRC_URI =3D &quot;<a href=3D"https://download.videolan.org/pub/videol=
+an/libdvdread/$%7BPV%7D/libdvdread-$%7BPV%7D.tar.xz" rel=3D"noreferrer nore=
+ferrer" target=3D"_blank">https://download.videolan.org/pub/videolan/libdvd=
+read/${PV}/libdvdread-${PV}.tar.xz</a>&quot;<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;2e3e04a305c15c3963aa03ae1b9a83c1d2398800=
+03fcf3dde986d3943355d407&quot;<br>
+<br>
+-inherit autotools lib_package binconfig pkgconfig<br>
++inherit meson lib_package binconfig pkgconfig manpages<br>
+<br>
+-CONFIGUREOPTS:remove =3D &quot;--disable-silent-rules&quot;<br>
++PACKAGECONFIG ?=3D &quot;libdvdcss&quot;<br>
++PACKAGECONFIG[libdvdcss] =3D &quot;-Dlibdvdcss=3Denabled,-Dlibdvdcss=3Ddis=
+abled,libdvdcss&quot;<br>
++PACKAGECONFIG[manpages] =3D &quot;-Denable_docs=3Dtrue,-Denable_docs=3Dfal=
+se,doxygen-native&quot;<br>
+-- <br>
+2.54.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#127585): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/127585" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">https://lists.openembedded.org/g/openembedded-devel/message/127585</a=
+><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119816699/199=
+7914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
+edded.org/mt/119816699/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
+openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmai=
+l.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000e280b306544f2704--
 
