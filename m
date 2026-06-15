@@ -1,222 +1,148 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <thomas.noack@iris-sensing.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B708DCD98C5
-	for <webhook@archiver.kernel.org>; Mon, 15 Jun 2026 05:11:30 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.123020.1781500283880049766
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED9E8CD98C5
+	for <webhook@archiver.kernel.org>; Mon, 15 Jun 2026 07:03:32 +0000 (UTC)
+Received: from FR5P281CU006.outbound.protection.outlook.com (FR5P281CU006.outbound.protection.outlook.com [40.107.149.136])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.124195.1781507004090345436
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Jun 2026 22:11:24 -0700
+ Mon, 15 Jun 2026 00:03:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pcrV+DjE;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6608c1a4215so3007970d50.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Jun 2026 22:11:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781500283; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ZqEccy3lGxl7UJv83wsaWADMCI40dCkJ2P1vBXi/yhCqqrDULXtXQoHvbGb9dzr5rN
-         b9LfKUzSEeE3eW5evOWgteVWipD4fbjIjNdMpJN41kujQHItNTqhuXkKe44DaUeg8P2m
-         Nxyn2k/mU7xO1b1jBhr0cFvJ4qeG3BQNGeyIFNTI8naV5scwn+TN/SCkumNmTlEyOu4I
-         7eE4I57dc/L3KN0hPe0mivpJSIpkKHiEljfQ1OHXFgK47gAQ8fmZ4hDvyn6QVMCQxbP7
-         vqgFIIlutUjxBLvnVpQeuZTZ4Lb6VYMSLMQAJ8jpOe4NRoPg2ZU3K7Ay7fanN9swHZ1D
-         lMtQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=qVXhgbnzvjg58yyVifMlTxTU5zxBlrGG7lNRSQJVcPI=;
-        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
-        b=CDeFN5rsuLukz3A9f2FpWib8OPob3rLVuSiFaorB1mMQle6xKt6AAHsPGyu+8l1UTH
-         EnRSxfgyD5B+15yJUhTCFzmEPNf6qhcWc7ugo1nPp+tpcyVW5VZJD8MkMJThG0tkmH6G
-         z4rF78MRUB3IIOnmr8PhIvWd3Dn8B3jKZRbeOLQ6JGEV0HQA0sXnUDVmFvW3eluB5yx/
-         T0cQQ5K9BKomTxPOxt7bH5Xc1EdKuUlbHyAvwWjnzM+0a+zbufOVbJbewVEcDqQ+m5Ue
-         hO2BuNzVnQDXLl4NeI96kt7MflEBKE9RIdrkE5OJHL43qCF6ynyhvmpvUnlIhC8XLPVR
-         N1XQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781500283; x=1782105083; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=qVXhgbnzvjg58yyVifMlTxTU5zxBlrGG7lNRSQJVcPI=;
-        b=pcrV+DjEAx7aFZCJDbIa4S1WoLwfleBW1UmpJIWi6fZscTQkUZYMAyjso1Vg06HZXq
-         F6Jn/3peOenbyoGyrnJ0GBFicNvF0El5mMDRaFukBOIFIc80IAh8KFACIPV6SKHlDsDy
-         IxlVoRVuCMi0TdomhTPOhbTvSigrjfSFVofZw2FqDDC3WBHWgoxOvxUOGIJ10o/mvf1Z
-         /3sbm3frVQFzhBZ6fH96w3JD9DKAwnh0k2uD0FI5eO1u7sZBY1cgGJF2qZVQprX2OI2j
-         FQ4Q8iLYgr71WkcYtkI1sVfmh8L1LjjtMfKPDXqh26QaTl07AzTf0UdpWe4foXGw9f3X
-         nyGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781500283; x=1782105083;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qVXhgbnzvjg58yyVifMlTxTU5zxBlrGG7lNRSQJVcPI=;
-        b=Z4mozfQSghPYP8jLPFPz3OC38nygYU8cZ2l8WRNfrdhCgASg0K5Xa/wzyp3cPo8k4t
-         uev/rZCKxRQsVfOKLh4QDrwYvM4Y+0Y3O3OybGT4WWNbL+M1s/IU3oIX5uw+vlgJ50SY
-         G2bjmUskSxmq78ICW+6xgeINp1969ABMmY3cSzMuVhwpTw1GVclDxUWSfJV5YC9OuyoW
-         GcUmKf9pFEqFkbgTw1mqNSyUOAgBilOPmdiKLozdd/zsgIYKiassW2YGXKrvwiwTe5Th
-         cbSDteeq7/IYS1FO1+fBM88h8fHXurmkwu8H7KFZqVg1e7QZwVjZzOYH8u6ScsJuSHe6
-         PzcA==
-X-Gm-Message-State: AOJu0YxOlXn5WavDcs6ukuPBG2+iHhDEq7pzKSfHWb/hGhseKwqiF5On
-	OHBEfZvF4eEAYVs73x6CXt6+nsVyqnlMfBC1PM8poEqHLoZAqHTQLtjzAMU3OzSbC1JHDuNubU8
-	k7jcCJnz8PVwAi8SIIvI25VbFG4BFG4o=
-X-Gm-Gg: Acq92OFla+7RGva3z9cmi3YrdL1jx9hbHa9XRKrMdhnVnevJag9+Z+WKKdF3W7eSOpe
-	K0fsIkXXyX7GjXe0N/a/O0Z3ALenkVu6+LdpXVGeAZlADyRA/V6LGB8dBjghVVjmv0Ak9+SUd3D
-	NmXKHH9InLk8M3/Kn9g2Qt93um0bEgRfOgmh3OKeEsdn8UaBCUN0EfvNURWBUWyGnJchCaFdlTt
-	+g6YEyOStTcRnwb8jMdwcjylO0IEwiwZ05EXNp6pNeYCSMIWBigW2QwmBUrnNStbZVMRK7F7Aji
-	PDAe1u3BlEozvTVNiT9PfwYl7hK3euzoz1ZcB5iU0EZ1O4YeGf0khVbmSbhqi1dthh/fDJnxMRu
-	JMb+cbZqe5epc6E1M60Bu6WSTSMkRV0w2iVUq8ZskWXNDclAOTDxqKHwXT37Iab6hDdZPRote+I
-	2+A9i4
-X-Received: by 2002:a05:690e:b4f:b0:65e:4bcb:2a76 with SMTP id
- 956f58d0204a3-66276b02173mr8945683d50.39.1781500282839; Sun, 14 Jun 2026
- 22:11:22 -0700 (PDT)
+ dkim=pass header.i=@iris-sensing.com header.s=selector1 header.b=ub4kkoxC;
+ spf=pass (domain: iris-sensing.com, ip: 40.107.149.136, mailfrom: thomas.noack@iris-sensing.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hFXgrkldjnnQkQRgl8szFgYqK+wJ7D/E9SQLlLR4wC+d48LvwZVHWBAYqIZ2b7qodw0vtwB4bq27IK+uQdJyq0dx/+xzhg7xsBM0UKIA/ebZI/cyfhM3T4f2qKRXn+YQIGyTicmiHDUrbpazMOEHVWyaGtKXQEUDlGtolD2y7F4rTpNVC2jiBhCUi8jeAvMMQQ1TIBFswVbTbow4JJLWcgi88WECfA9DOeKrGQaqR074Z1ZsNk4yriGA0g7d2cNqHDUzqVUBCvTDR36r8KOYMDvO6cgW8DcqwGwByLbGJP4Gvk8IP2nVNNyXpWASzDh2+LHjwS50xqivU1wgFvZSPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lMy93aO/IEByDeC3wolGX4OfIqueD2ZgXsLpdLbipxM=;
+ b=f1acYLSb9wy/fzUDOhoN+TE2i4cJMMpNlF1Z8kiANhkveq9F+MMiGTk0GzY9477ycLMnNWvojIN1L7CDBM06KexVPbILZGk+KEzrpXe4owb/xKQijBIj28WBq37WbPppXldsgNMBIo7a1xZtr/7HVVrOYMA8e46BOHdbSBVPk5q96uMiSTzY2UiARP+HLkPeDM7MsWnmSm4ShK3dUa+bsom6vbZ05Mw/FtCVmx1+nmjeT/cFdg2ISj4uqdZ6ECOe2Cn9vqDkJbVxDV0zdTbIvfXAI7LTl47BH/oVsVzN6vzgvfijHPv/pbdvJwMkEWLkO7W7rGy0cyDdqZvgRPgIlA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=iris-sensing.com; dmarc=pass action=none
+ header.from=iris-sensing.com; dkim=pass header.d=iris-sensing.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iris-sensing.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lMy93aO/IEByDeC3wolGX4OfIqueD2ZgXsLpdLbipxM=;
+ b=ub4kkoxCHXUcbQWiBB2vM5egtduJqEw5h0XgNkbwTxYWVD8Yx+K3tq0EivgXs88Hu6gZ201O04K86zYsQFA7zZIN1atyTHK/OwBAkVMLN28x0LRJ4o9FOSTKRZBl9gzaw3OQvRalldBxs4ug8F5o7zOyajyU39iFamrC9Kp++eFDvoj/cTvMxulo0iyH2bPpM9aTXKEhVPvqyAzHp95lpBa91++Y6YjwjgUYtBfQNa09yp2hK5tE2AFdVkr9sCPZB9ErpqZLUyN4vcLvX7pcK1bNgYBwVEI4uj/g6mTcNoCYQFH1g9ZlqgY5FHpefvvOqDjIaj+Kmgl4MeA3PH0exQ==
+Received: from FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:11::7) by
+ FR4P281MB4368.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:12a::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.18; Mon, 15 Jun 2026 07:03:19 +0000
+Received: from FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::55b4:62e0:6097:3723]) by FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::55b4:62e0:6097:3723%6]) with mapi id 15.21.0113.015; Mon, 15 Jun 2026
+ 07:03:18 +0000
+From: Thomas Noack <Thomas.Noack@iris-sensing.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] sdbus-c++-tools: upgrade 2.2.1 -> 2.3.1
+Thread-Topic: [meta-oe][PATCH] sdbus-c++-tools: upgrade 2.2.1 -> 2.3.1
+Thread-Index: Adz8lKBCYS/Slw0wRVuIVDvc/oVdPg==
+Date: Mon, 15 Jun 2026 07:03:18 +0000
+Message-ID: 
+ <FR2P281MB01218EC28D7CECA1E0A562A2B8E62@FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iris-sensing.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: FR2P281MB0121:EE_|FR4P281MB4368:EE_
+x-ms-office365-filtering-correlation-id: 171fb04d-2a1b-4484-33c4-08decaac2e0c
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|55112099003|6133799003|56012099006|3023799007|11063799006|38070700021|18002099003;
+x-microsoft-antispam-message-info: 
+ oLEt6xllkDgZL8CNiBFGQshgtN+i5Jf/gKygFfM3HYd+GinaO26rMsCqWzMf/mdXUOVDg3nnhG5lgjIU6bwowOuP6mv9RAzEw+VT89kVru1GmtfvLM8SmAi0vvJY23RsdsVILOsyEm0hFs3xWpJqowqoaVBtnDrwNnUf86QfDEJlGG/IiO74kQbnuIuiSuNlgmtAUI5YzEqwKxxgkLc0NSMH+jteHwctTjl+bp+z1zvbchoycw5borD9/hivEuegyHWAvm/d3HLBm0ud8pybvPD2zxuvCqk2lDadNXIqGER7YisAEg9vKS+V4Zm2Ew2JZZqh1PnsZWW213YFIsdpAFHwuHvtZthkF7jmI52tAGS3kzwoBR5jmjQqNGtlbfc6UWcGeYpWq3JIctNCKUU4TkCXQmIotCo+gphm4okffJD/zv6iWEIqWKrQgYnip/uVSz/einF+n0VBWgrENe9GuJbCkUhJxDWmMbZ2e5+87CyDVDnl8xKHPzRKwIF+Tttwa5DMFaJxa91BMY9ZDYSSweLAnoA8X83Q30qQGCrSjYHRn3Dk9tGbFxaEICF6MA+Qm/1gKRjzksxvUqUHloe7Q+5Ndqo+u11ySooK8HCm8X+1IkrmB8dJQzhEeDPuTALHStALoTYxuQu4tpsqhmTizMmEFwnerSsdHSQBfazhEhnQlwwbP5qL7ug0L8jUpzz7URHvA2dyEOJs+e0jKgbaVWDqIYfhiQl4cAFTwyuf8feMQMfX9U1neFdpY3HU8fGI
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(55112099003)(6133799003)(56012099006)(3023799007)(11063799006)(38070700021)(18002099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?UZNWU5GmO7qw0wVNzsdF+KqXjaArKhSixw4P4O0NPrc8Qqd+gm1PHfSAakUH?=
+ =?us-ascii?Q?sGxypb1E+vt+2L7vs39KCUCRu6IU2mB0Bp3KhR1hPUtTe2hwwiLLZSiGihkE?=
+ =?us-ascii?Q?LjhiM2CJyby7BKLLWqpV59picnNyj6ZcTV+4bgqkuhoKPCkBVVZ1BJYMGO/E?=
+ =?us-ascii?Q?VfoK+gLg4Gw90pMz2hq4loHlr0BI8wFZLGG1ZacjzzyJTXw0cqgKeLQ9IYAl?=
+ =?us-ascii?Q?IGXQY8maOp70HmfC/CeITKQCafzaHqfq1sj7rrw9VOSebR5sbjPF8vQWN7GU?=
+ =?us-ascii?Q?3ZirOrX6OSpDSkPmKJL16sIDm5R6zLQZA+y5sDUTdmgkqBnTNH/VWoEx7O5x?=
+ =?us-ascii?Q?9A/z+LTRyM0Dk8tOFN8567bb9+PrLnR0OCxdAuCYWmAsvYcud+90mEscobOL?=
+ =?us-ascii?Q?0WglPVfxaXZRHQw0HTxhkrGfwaey9ZPtFUyDGdXI3ctdFWORrk2aJL+pjowa?=
+ =?us-ascii?Q?fAJe1qSZJrXxPu77cpNLMXBMwiQBEIOHd25FkYMyIjVTrxe6EzJHYnzldoik?=
+ =?us-ascii?Q?74ErPpp1UY+6w2IqVngG+uQhORd7i/LAvw7dRqnAMtrGAImeyl3oNd9mm60W?=
+ =?us-ascii?Q?O9dxA36K1e8/jFXos84AaeGPuppoK6ES2JiPoD6guE+UhuYVY28xiMz0E/01?=
+ =?us-ascii?Q?NZWD9vLbu9OMRpXS0nehxa2LcRn/k/HuWREl+1PA4hwdJHp9El1+2adh5zD3?=
+ =?us-ascii?Q?BoQOMrhh93vV/Gvuj32EuvBa+rNfAqMgcOuG0WrI2dfhpAD2ffW+nUGly9So?=
+ =?us-ascii?Q?6ZtJwoVNWLbhI1NqUIVhVvXFAP26C++EMg2Jeq+BlW8LP54h3v83mCXh20c3?=
+ =?us-ascii?Q?OEZLOhJTBcc+3jnRgvAt9lkCUaDnRE28i/8UrVSXaEg+WWawctglnYYs1Fi6?=
+ =?us-ascii?Q?vW8GTH8aSyZl/NplQIm5khOrhuJtXCxTCOIWU7oSVNWuZSa3BqJFyuWeRNPF?=
+ =?us-ascii?Q?puaiZGCYjq+rPk8XsOvEdbbn2TPC54wj1f9+Pv3yE/RLzyiVcddlwff4H5He?=
+ =?us-ascii?Q?z6AjzzNYjiau9Nkd3WSVaE3u1ag+6RNE5/uJiuW80a2uwVxANJhstY10QY7R?=
+ =?us-ascii?Q?ym31iTLBtE1p/qo/jRJ11r8MVDykuy3RDpLcyzv7r2ZRp+c8UOSNfcTtzo9u?=
+ =?us-ascii?Q?tt2Orwrs9dnrVLLE5jjMFg12xdxx1gXOV8DSHtaAhM9Hv5nJ4ohmquikCeKW?=
+ =?us-ascii?Q?MuQuYq2pbICQaBDAuMRscv7+xfZeYjWSubyPt3UGyU9PQvUzraC0/RmlIM5e?=
+ =?us-ascii?Q?GUuaVNsS+U6bWkoYvjnTVQMHpY7JhGxJRZHLIDaaBzqhyWgYRXkPtt9O0ov9?=
+ =?us-ascii?Q?9VCOjV60BUZzwYBTOgwl12EslJRHs0VQX5X59GqYWSq3d3HqITzlBTCZUxCM?=
+ =?us-ascii?Q?rny5FiznLfl8tY0HcsERy6MwlecNWWUeOgQLUiC2tqsqZqjQBtaWpTASx5SY?=
+ =?us-ascii?Q?YztiHxtVgC5gRPOk2a45w5jW3m+47DvaqjlWXH1qmzS2+RLBwh0LeUxW5U4d?=
+ =?us-ascii?Q?IDqmUXAjlgIzXfyukW/Hg9kWJy7yiA+zEatsyHidr8ppZxjFq29AyGaZiNx+?=
+ =?us-ascii?Q?B2Y7M9hPlkp66L112XgeXOOpgSZnKaHTdHrOYV1zwUy1P5kVgU8YWCeMHXjP?=
+ =?us-ascii?Q?I77H9zGQ20zYe5MLPe1VSlwM5fFDwaGhLkZkxQU4/JT297a1JDserd8DXsA7?=
+ =?us-ascii?Q?KSFQk7KJ+I7ZgnfPNIUNY+b16IKBJDKTB9ZCHp6/N3/L3LfUoo300ndO57uy?=
+ =?us-ascii?Q?0ZrmZ80wl4lIkol75jIC/eUBAlqF9ng=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20260611085647.233427-1-f_l_k@t-online.de> <20260611085647.233427-3-f_l_k@t-online.de>
-In-Reply-To: <20260611085647.233427-3-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 14 Jun 2026 22:10:56 -0700
-X-Gm-Features: AVVi8Ccom43W-xOiQ8pSz1cGrNTQE8ZUu8iRtjPS1zkfu0NzU-Y4AKUY7ysN0Q4
-Message-ID: <CAMKF1soMwemcLC1MdZYJ0+SiwXVkp9xzmq=ddQMmiEO+LK2S4Q@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 3/3] libdvdread: switch to meson buildsystem
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000086a795065443db9e"
+X-OriginatorOrg: iris-sensing.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 171fb04d-2a1b-4484-33c4-08decaac2e0c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jun 2026 07:03:18.8640
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 963f3913-ffae-43fd-856b-2dfd3f6604e3
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: aWAxRfAoK11ehPD7KBgS/rY/rnR9pKyMpruCJ1nqG8K/VCQ6pXRH4ajC3nou1WtB8rutBrS5sUv3opRwIVq/6nCbybuYrhghlqzz2bGbf9E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR4P281MB4368
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 05:11:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127580
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2026 07:03:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127581
 
---00000000000086a795065443db9e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Please move this recipe from meta-oe to meta-multimedia as well, otherwise
-its failing due to libdvdcss being in meta-multimedia
+Changelog:
+- https://github.com/Kistler-Group/sdbus-cpp/releases/tag/v2.3.0
+- https://github.com/Kistler-Group/sdbus-cpp/releases/tag/v2.3.1
 
-On Thu, Jun 11, 2026 at 1:57=E2=80=AFAM Markus Volk via lists.openembedded.=
-org
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+Signed-off-by: Thomas Noack <thomas.noack@iris-sensing.com>
+---
+ .../{sdbus-c++-tools_2.2.1.bb =3D> sdbus-c++-tools_2.3.1.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)  rename meta-oe/recipes-core=
+/sdbus-c++/{sdbus-c++-tools_2.2.1.bb =3D> sdbus-c++-tools_2.3.1.bb} (89%)
 
-> autotools buildsystem has been removed:
-> do_configure: no configure script found
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
-> b/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
-> index 0e56f0bd3c..0be61c2174 100644
-> --- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
-> +++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_7.0.1.bb
-> @@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D64e753fa7d1ca31632bc383da3b57c27"
->  SRC_URI =3D "
-> https://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${=
-PV}.tar.xz
-> "
->  SRC_URI[sha256sum] =3D
-> "2e3e04a305c15c3963aa03ae1b9a83c1d239880003fcf3dde986d3943355d407"
->
-> -inherit autotools lib_package binconfig pkgconfig
-> +inherit meson lib_package binconfig pkgconfig manpages
->
-> -CONFIGUREOPTS:remove =3D "--disable-silent-rules"
-> +PACKAGECONFIG ?=3D "libdvdcss"
-> +PACKAGECONFIG[libdvdcss] =3D
-> "-Dlibdvdcss=3Denabled,-Dlibdvdcss=3Ddisabled,libdvdcss"
-> +PACKAGECONFIG[manpages] =3D
-> "-Denable_docs=3Dtrue,-Denable_docs=3Dfalse,doxygen-native"
-> --
-> 2.54.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127520):
-> https://lists.openembedded.org/g/openembedded-devel/message/127520
-> Mute This Topic: https://lists.openembedded.org/mt/119753722/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.2.1.bb b/meta=
+-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.3.1.bb
+similarity index 89%
+rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.2.1.bb
+rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.3.1.bb
+index 13a7b8a45e..56e8bd9234 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.2.1.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.3.1.bb
+@@ -8,7 +8,7 @@ inherit cmake
+=20
+ DEPENDS +=3D "expat"
+=20
+-SRCREV =3D "28b78822cfc5fbec4bd9906168493e9985f586ed"
++SRCREV =3D "ca073434d2c03c2b619f7e23f285cebbf32c7e46"
+ SRC_URI =3D "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=3Dhttps=
+;branch=3Dmaster;tag=3Dv${PV};subpath=3Dtools"
+=20
+ S =3D "${UNPACKDIR}/tools"
+--
+2.53.0.dirty
 
---00000000000086a795065443db9e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Please move this recipe from meta-oe to meta-multimedia as=
- well, otherwise its failing due to=C2=A0libdvdcss being in meta-multimedia=
-<br></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Thu, Jun 11, 2026 at 1:57=E2=80=AFAM Markus Vo=
-lk via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a>=
- &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-online=
-.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gma=
-il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
-04,204);padding-left:1ex">autotools buildsystem has been removed:<br>
-do_configure: no configure script found<br>
-<br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.=
-0.1.bb" rel=3D"noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a> | 6 ++=
-++--<br>
-=C2=A01 file changed, 4 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvd=
-read_7.0.1.bb" rel=3D"noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a>=
- b/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.0.1=
-.bb" rel=3D"noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a><br>
-index 0e56f0bd3c..0be61c2174 100644<br>
---- a/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.=
-0.1.bb" rel=3D"noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a><br>
-+++ b/meta-oe/recipes-multimedia/libdvdread/<a href=3D"http://libdvdread_7.=
-0.1.bb" rel=3D"noreferrer" target=3D"_blank">libdvdread_7.0.1.bb</a><br>
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D64e753fa7d1=
-ca31632bc383da3b57c27&quot;<br>
-=C2=A0SRC_URI =3D &quot;<a href=3D"https://download.videolan.org/pub/videol=
-an/libdvdread/$%7BPV%7D/libdvdread-$%7BPV%7D.tar.xz" rel=3D"noreferrer" tar=
-get=3D"_blank">https://download.videolan.org/pub/videolan/libdvdread/${PV}/=
-libdvdread-${PV}.tar.xz</a>&quot;<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;2e3e04a305c15c3963aa03ae1b9a83c1d2398800=
-03fcf3dde986d3943355d407&quot;<br>
-<br>
--inherit autotools lib_package binconfig pkgconfig<br>
-+inherit meson lib_package binconfig pkgconfig manpages<br>
-<br>
--CONFIGUREOPTS:remove =3D &quot;--disable-silent-rules&quot;<br>
-+PACKAGECONFIG ?=3D &quot;libdvdcss&quot;<br>
-+PACKAGECONFIG[libdvdcss] =3D &quot;-Dlibdvdcss=3Denabled,-Dlibdvdcss=3Ddis=
-abled,libdvdcss&quot;<br>
-+PACKAGECONFIG[manpages] =3D &quot;-Denable_docs=3Dtrue,-Denable_docs=3Dfal=
-se,doxygen-native&quot;<br>
--- <br>
-2.54.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127520): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127520" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127520</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119753722/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119753722/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000086a795065443db9e--
 
