@@ -1,1736 +1,932 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C975CD98DA
-	for <webhook@archiver.kernel.org>; Tue, 16 Jun 2026 07:13:12 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.20])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.148429.1781591292017518233
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD72CD98DA
+	for <webhook@archiver.kernel.org>; Tue, 16 Jun 2026 08:07:23 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.149329.1781597233571891860
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jun 2026 23:28:12 -0700
+ Tue, 16 Jun 2026 01:07:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=FFoWd25L;
- spf=pass (domain: axis.com, ip: 52.101.70.20, mailfrom: anton.skorup@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r0R0wcLiBdceNVscBcPXjSF5MsmKxCDrGghBokJyQpzxqHM3aSaGth7pJr58bo4vcE7gnK1BfTQDMqqpaNspxcjRMii0/tnRDDjK0dkXHO7IkVB/hv6O6b6R/T+TDESSkkeO8GurcOgny8q8ULq1/+TObyCqIw/UEBhf8kJTMetkm8koHfx0r6sX/H78RzlawvBNS5U+ZsF/yFXnirhVi7Pn/K2yjDMj1DPJezTlqT7BJdk96Z+EPvcFalzsmlWeLZyU+0sgbzZ/WHwm7REp5m0wO9325u6KW+0PKDq01c1EI5Z28qkXSTbdblhCi5eWiFCi89BWOallR7/APFFUOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7kEfFyqu3GnATRpg+M0h1/20LtSGYN927fL+bq2pwUg=;
- b=WmJNTA23GOAc8ckpAvr0AsxmDbgFj8Pjz4Wc/mkEtykUmWgtLQgLGG2KzRpU2IxqOCOk/ZZNZwGBFrB7HroB8E3JwzfPkX+OprPwlXIf0YtlLzHLRaSMNwSedSD3hkebLSoPqWUNnskmF9Kg94/hqvE6mlSOIhQnC7mK5lAes5qVzX9/+1LQS/VrsGENzNOscYDs5bBth1GG5Hm6Ca1uOD11sPZbuDffXknsENvPNQgUMU+3ufdh8AE9H+BadsjbSZwdAuuQ+PsxQKBiZ/TIz0rLdXOdJvJxioYbatDOmOGXwJwtombZDyf+z1BTYETDq7e+AsNYhpKcQ3H1lm/tdQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7kEfFyqu3GnATRpg+M0h1/20LtSGYN927fL+bq2pwUg=;
- b=FFoWd25LyRFsOZhNcj3v6TQ0raCbouzEammqbcj9dXocZ+gcmU+48Zo/G5YcxJxKUrMSzOBmzqeSZwKcj7RPlwJ9s4CzIFGghhAX28qfq2nMZBTw2FUCGqZK3MOjtgI4ss7G1SN7pV2J/xvfasKJh2C36EwykyXTTWUlv+/mJm0=
-Received: from CWLP265CA0431.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:1d7::7)
- by BESPR02MB12391.eurprd02.prod.outlook.com (2603:10a6:b10:100::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 06:28:04 +0000
-Received: from AM2PEPF0001C715.eurprd05.prod.outlook.com
- (2603:10a6:400:1d7:cafe::97) by CWLP265CA0431.outlook.office365.com
- (2603:10a6:400:1d7::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Tue,
- 16 Jun 2026 06:28:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- AM2PEPF0001C715.mail.protection.outlook.com (10.167.16.185) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Tue, 16 Jun 2026 06:28:03 +0000
-Received: from se-mail11w.axis.com (10.20.40.11) by se-mail10w.axis.com
- (10.20.40.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.39; Tue, 16 Jun
- 2026 08:28:02 +0200
-Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail11w.axis.com
- (10.20.40.11) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
- Transport; Tue, 16 Jun 2026 08:28:02 +0200
-Received: from pc62260-2523.se.axis.com (pc62260-2523.se.axis.com [10.92.71.7])
-	by se-intmail02x.se.axis.com (Postfix) with ESMTP id 3513D2423;
-	Tue, 16 Jun 2026 08:28:02 +0200 (CEST)
-Received: by pc62260-2523.se.axis.com (Postfix, from userid 19544)
-	id 1CF808461E6; Tue, 16 Jun 2026 08:28:02 +0200 (CEST)
-From: Anton Skorup <antonsk@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Anton Skorup <anton@skorup.se>, Anton Skorup <anton.skorup@axis.com>
-Subject: [PATCH 8/8] jq: patch CVE-2026-43895
-Date: Tue, 16 Jun 2026 08:27:54 +0200
-Message-ID: <20260616062754.748436-8-antonsk@axis.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260616062754.748436-1-antonsk@axis.com>
-References: <20260616062754.748436-1-antonsk@axis.com>
+ dkim=pass header.i=@snap.com header.s=google header.b=OrTBNEwG;
+ spf=pass (domain: snapchat.com, ip: 209.85.218.45, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-bebde89cfd3so518082466b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jun 2026 01:07:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781597232; cv=none;
+        d=google.com; s=arc-20240605;
+        b=KSqKDrfmFbUztuV8gjfBUlnX0pvh7tTyyE1Dolo133jbRnkKow3jMpFBd2IX0qhFGz
+         fqP+U+m8uG7w8nC1MVaufnwz6rLBeg5K/HrOVlpIBs043bKDVcTbcDAprPw2SQ4/Ijw7
+         +Ny1lbwSNuSR8R3GdKNx+Zr7Gwkt6+ObVgx+H+uK6IomY9MyYHjYrAVY2LFvMlO2e8Dd
+         rfxktu4KtX9U0xvoKyxyKIzNjc+o8HL6uz1swTSscG6fSX6D6UN2WyRMkHQYGZL2HtLe
+         sygipb+41jJ16WTfYbfvX6+lMhadA9D5lKDm3ckGMCXOiQ9sftBQscSRNviS9yPmmYW8
+         N74g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=uQXmihtDtGiP34bYrC4IgaH5pM3IVDw1Pj2/zE/EVmI=;
+        fh=qjNAY/wqgvbUjoroyk91POHOrTQ3fhRPJP+lgrurSIc=;
+        b=PlNFMfDEDAjtuXK7ZOgJKkDzDqeRlETzw91B1qN2TkEJ0MH3RP2PdJtAQdzCYpC+iP
+         umdLZaJLQZRAPJ20+ZFhxXE3FtykU+WcmktcFmbG70i4CqeypfhOc7BYkJKE0l55jPCL
+         1h7/X/8WzJisRrq46iNkbnAvsYzSAOkj+EP9unLn3B3PiViRu5fYpGJK3TDyC6516ecw
+         PQ9n6ZUXkgz5PEAcQZCirBTmefYrfxLcuYTySv2OPUqi++APt53q7/W+dsonDe9sjU7V
+         fkv2GpwTVrwLmyH8R+CmIFqQdKfZmDzhcqFx/QrJ7UuiN4mUpqx4i2VJk0YYm6wKHeHG
+         8yVw==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=snap.com; s=google; t=1781597232; x=1782202032; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=uQXmihtDtGiP34bYrC4IgaH5pM3IVDw1Pj2/zE/EVmI=;
+        b=OrTBNEwGJikGppQazz/kjGczR7jvILrjD7KPqmYi8VuevmIOSBnzJI0WtVJoHqucHC
+         TZT1mHcWnHVMTjrtTQr4d40YRsccPfMtx5i/vYXSdgRz+e0HNKKnWZPz+bpfnuPWtuZw
+         XNwY4SMe4tLdqCmSpikAex8JdQeNEUufrSihA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781597232; x=1782202032;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uQXmihtDtGiP34bYrC4IgaH5pM3IVDw1Pj2/zE/EVmI=;
+        b=a9qNrtDeFJki0rjtyqO8q9YgS2zUS6JkOmbt5KolfEc0iGz/QhjKH2ao5V43zilFdV
+         j/8rCFJfItub43XmYzPqJREKaEpn8UM7wpvLeTuRd8kayskQcJIZ4czw5yMBVxM1NGuu
+         fzE41XhnDuTjkjXle+Q4gq7RZuIJn2NHUeJ7Se4GCls/3InzztAtkhEX7gtEVTg0tR7t
+         3OMBHf7vOrS4bgf6tHwxxp0OJJbV0RV7vl0WmYWA/iSVrDjqV4j28ua0+VDCh6pxg9mf
+         EKIodm+yPGtVpcZ0Oxgv0AJeoucM/HA6DKImSlQfzTHeYBrKGWPLYBIra1qL5o8XOdeD
+         K1Sg==
+X-Forwarded-Encrypted: i=1; AFNElJ/2Ujq+TBUWN9n6/vAWPnzMmukc9kRSDAKc8o6r+oRz4bbN1rbORRTFhSgo+gDrOJBqysGR3hSxX4DUrjP0IhzgXXw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzVb2vclC69GTXGNPsKQjLWohibooHHyjUfx6GaaqqqrVF8eZ1g
+	ElEuwJhBCA6AN8R1n44lCeNQHRTTdCU9nknZPw0yDB+iLdvfFd1VQO8ycFHNNMOCRdNAhGSrIP8
+	TB8s2SfKfL0ucp2Hi5z5eMFwqBhJN3rNNS3SEt4O9+w==
+X-Gm-Gg: Acq92OELpsnQmzAkLwTX1YZH8HQU4oicjWbUTd99Mfmol3Wbj3rnowqTXZrn0Ud7qUS
+	m4gzmiDFAzxN4rAdZY+QQ6wHekvdWtryXGV4yI/Uh36AKU+hKqyGTsRf/eqFuZPRoGMjXjPfJ9i
+	+/ds+eF4d50RVUCGooznPz3HxJSfp7d5tpZ+ADocTPeVFrHxkldXz+/qHNJKUTldX2xUAffBTvA
+	cf0lr3oSqyylTm4dyB3o/+b2Jj+pOFIjqz7jK4FvninHSqf4Xe6u53qMa8XTGXxeLyHS1DGBOAf
+	HVuCX9IBii7S08YSVL4eXPQvB0W1cNYUzZwZHOgu
+X-Received: by 2002:a17:907:7385:b0:bfe:ed35:e858 with SMTP id
+ a640c23a62f3a-c043e66aac5mr87717966b.52.1781597231399; Tue, 16 Jun 2026
+ 01:07:11 -0700 (PDT)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C715:EE_|BESPR02MB12391:EE_
-X-MS-Office365-Filtering-Correlation-Id: 42d26eea-8e67-4467-32f1-08decb706bd6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700016|82310400026|376014|23010399003|3023799007|22082099003|18002099003|11063799006|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: 
-	W6hwXTl8cSliTCxZWECx+1xmQRqeOggoDAyztY4nzqjzMVPfLquxhOa0XDKR29kegGVkUeVbVLGYBs37Gq5igboakj8RL1I75ScGbRb0ndoBEKO5Y+iDw6xho/81coxaBK56891+hb1NpzLVN49GdUnHJwXo/DH9AyScTpy0dUS/9+JCJ+ADvdF6rYG/g9SO8LuhhlHTPmvPw6amYYEut3giSfOU22E6WBSlysJs9LzO+/LMFluh953rUuG4os1s8L/DZi9VRvgSluUSmg03zfsYWHQ5XL5FPkJsSJOtSnpUBsNLolo/3SF8S/OmXk2fWWn1GLTRSP+U40mPfZIQ83tBp0YyH2N0NvupMhkot/vo81eUmwh3HdaM9zTh2ZqCzmhx6xMyvmJfIZywDpVVtcwxjHCqreVR/bGd8QUki6+MxjIrnOJtdmw5YYVQx/qhnkihA0ExYCGUjoY9Pnlcm8vvfEvlHG9dDcIeqHVTWLBtzRgBPX37KcNZTQCio1H8PJmodUPnUxcYTITqxeM5sY4VYJ74qB/yA1xNgy2TxaHRPfAV/b5rLZxdGv33X3qO5bjF44wbcgmMVWWYHcbxK0iVY2lF3Kgs+8tL5dC4sXxrDIXSqkpaOgdb1MPBvQXnAguuh7RvuK2kAprEPDsATmwPjGT6UnRQXcOflYhmnpk37f5tZiDgv8h04hgY7e1gjB0FHw+9C1bK1daINIgSZpE/oB0IMkgkgE8SoxT9h/E=
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(23010399003)(3023799007)(22082099003)(18002099003)(11063799006)(56012099006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	mTNrfWIs41qfa16sFYNxUa4mxnWF8DwNKigzRfBEN0KtkB/i/MQEQxmRwUccQnRdltMMJv8wXhw59QMNgWWT02x0gFZ+WptSj2CPp/h85XzMoFM+8UkLuvF40H7NOw2qp6wzPE+X0Ww0KOWXOi/Y7AbVGQ9Z3BD+CyPQeV+3dSrIbGFMtdTmZrzYfq+U0j+yJF1Ynuys+JtMNrIUAbbdJHANZTMD1PXWKiE+QqUqA1jP8U6vP5t2U1osdLRpYmwAViYd77dwfdqYxvz+gEc/+vL4R3whFHTVoP+2yfCmccbwscfXzd2wOhwFlko6ZPcoM7rRz20mzrfTnH7GBCeaBekxYS+9OFNsup/IecQ9gQl9zJIQsMyTYPQeyinfomwTGK+IaRl4ToYTKljQPVpDpxHDdli/KOy8tmX7Wu3u4D+VQDIxwpc1pj4oxE+qKjtS
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 06:28:03.8736
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 42d26eea-8e67-4467-32f1-08decb706bd6
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM2PEPF0001C715.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR02MB12391
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+References: <20260612153339.2514304-1-ecordonnier@snap.com>
+ <CAO5Uq5QtOeKcjLOnyEjr=A3AjTG+vzHOgaw6reNsoh-=v2fyBw@mail.gmail.com> <18B93282C70C82BF.267903@lists.openembedded.org>
+In-Reply-To: <18B93282C70C82BF.267903@lists.openembedded.org>
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Tue, 16 Jun 2026 10:06:59 +0200
+X-Gm-Features: AVVi8CcfHhoR1xA9pv1HiM6JgioocYMsz4bYHxJDMJ79MT17U3hEixg0i_Imdp0
+Message-ID: <CAHUKmYaLpNafy0Hp5j3-7p+LC7NFzWWFt0xKvXgum-pQwFrmzg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] android-libboringssl: add new recipe
+ for BoringSSL shared libraries
+To: ecordonnier@snap.com
+Cc: Alex Kiernan <alex.kiernan@gmail.com>, openembedded-devel@lists.openembedded.org, 
+	Mihajlo Marinkovic <mmarinkovic@snap.com>
+Content-Type: multipart/alternative; boundary="0000000000001c876806545a6efc"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jun 2026 07:13:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127613
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jun 2026 08:07:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127614
 
-From: Anton Skorup <anton@skorup.se>
+--0000000000001c876806545a6efc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-CVE details: https://www.cve.org/CVERecord?id=3DCVE-2026-43895
+Hi,
+I've noticed a small error in the commit message:
 
-Signed-off-by: Anton Skorup <anton.skorup@axis.com>
----
- .../jq/jq/CVE-2026-43895.patch                | 1537 +++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |    1 +
- 2 files changed, 1538 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
+"    An ld.so.conf.d drop-in registers ${libdir}/android so binaries can
+find
+    the libraries at runtime."
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch b/meta-oe/=
-recipes-devtools/jq/jq/CVE-2026-43895.patch
-new file mode 100644
-index 0000000000..8b58c8e95e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
-@@ -0,0 +1,1537 @@
-+From 9d223f153c3632a207fa071caaa6292da33ae361 Mon Sep 17 00:00:00 2001
-+From: itchyny <itchyny@cybozu.co.jp>
-+Date: Sat, 9 May 2026 17:08:43 +0900
-+Subject: [PATCH] Reject embedded NUL bytes in module import paths
-+
-+jq accepts embedded NUL bytes at the language level but resolves
-+module import paths through NUL-terminated C strings, so the path
-+validated by policy or audit code could differ from the on-disk
-+path jq actually opens. Pass jv through gen_import so the AST
-+preserves the original bytes, and reject embedded NULs in
-+validate_relpath.
-+
-+Fixes CVE-2026-43895.
-+
-+Signed-off-by: Anton Skorup
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/9d223f153c3=
-632a207fa071caaa6292da33ae361]
-+---
-+ src/compile.c |  12 +-
-+ src/compile.h |   2 +-
-+ src/linker.c  |   6 +-
-+ src/parser.c  | 556 +++++++++++++++++++++++++-------------------------
-+ src/parser.y  |  16 +-
-+ tests/shtest  |  17 ++
-+ 6 files changed, 307 insertions(+), 302 deletions(-)
-+
-+diff --git a/src/compile.c b/src/compile.c
-+index 5e64946b3e..80b723c119 100644
-+--- a/src/compile.c
-++++ b/src/compile.c
-+@@ -525,13 +525,17 @@ jv block_module_meta(block b) {
-+   return jv_null();
-+ }
-+=20
-+-block gen_import(const char* name, const char* as, int is_data) {
-++block gen_import(jv name, jv as, int is_data) {
-++  assert(jv_get_kind(name) =3D=3D JV_KIND_STRING);
-++  assert(!jv_is_valid(as) || jv_get_kind(as) =3D=3D JV_KIND_STRING);
-+   inst* i =3D inst_new(DEPS);
-+   jv meta =3D jv_object();
-+-  if (as !=3D NULL)
-+-    meta =3D jv_object_set(meta, jv_string("as"), jv_string(as));
-++  if (jv_is_valid(as))
-++    meta =3D jv_object_set(meta, jv_string("as"), as);
-++  else
-++    jv_free(as);
-+   meta =3D jv_object_set(meta, jv_string("is_data"), is_data ? jv_true() =
-: jv_false());
-+-  meta =3D jv_object_set(meta, jv_string("relpath"), jv_string(name));
-++  meta =3D jv_object_set(meta, jv_string("relpath"), name);
-+   i->imm.constant =3D meta;
-+   return inst_block(i);
-+ }
-+diff --git a/src/compile.h b/src/compile.h
-+index bef46328a7..d195e9e2e8 100644
-+--- a/src/compile.h
-++++ b/src/compile.h
-+@@ -33,7 +33,7 @@ block gen_op_pushk_under(jv constant);
-+=20
-+ block gen_module(block metadata);
-+ jv block_module_meta(block b);
-+-block gen_import(const char* name, const char *as, int is_data);
-++block gen_import(jv name, jv as, int is_data);
-+ block gen_import_meta(block import, block metadata);
-+ block gen_function(const char* name, block formals, block body);
-+ block gen_param_regular(const char* name);
-+diff --git a/src/linker.c b/src/linker.c
-+index cfd74d1d48..e9027004cc 100644
-+--- a/src/linker.c
-++++ b/src/linker.c
-+@@ -93,6 +93,10 @@ static jv build_lib_search_chain(jq_state *jq, jv searc=
-h_path, jv jq_origin, jv
-+ // in between).
-+ static jv validate_relpath(jv name) {
-+   const char *s =3D jv_string_value(name);
-++  if (strlen(s) !=3D (size_t)jv_string_length_bytes(jv_copy(name))) {
-++    jv_free(name);
-++    return jv_invalid_with_msg(jv_string("Module path contains a NUL byte=
-"));
-++  }
-+   if (strchr(s, '\\')) {
-+     jv res =3D jv_invalid_with_msg(jv_string_fmt("Modules must be named b=
-y relative paths using '/', not '\\' (%s)", s));
-+     jv_free(name);
-+@@ -425,7 +429,7 @@ int load_program(jq_state *jq, struct locfile* src, bl=
-ock *out_block) {
-+   jv home =3D get_home();
-+   if (jv_is_valid(home)) {
-+     /* Import ~/.jq as a library named "" found in $HOME or %USERPROFILE%=
- */
-+-    block import =3D gen_import_meta(gen_import("", NULL, 0),
-++    block import =3D gen_import_meta(gen_import(jv_string(""), jv_invalid=
-(), 0),
-+         gen_const(JV_OBJECT(
-+             jv_string("optional"), jv_true(),
-+             jv_string("search"), home)));
-+diff --git a/src/parser.c b/src/parser.c
-+index c90e313420..9c60173e27 100644
-+--- a/src/parser.c
-++++ b/src/parser.c
-+@@ -937,19 +937,19 @@ static const yytype_int16 yyrline[] =3D
-+      325,   328,   331,   337,   340,   343,   349,   352,   355,   358,
-+      361,   364,   367,   370,   373,   376,   379,   382,   385,   388,
-+      391,   394,   397,   400,   403,   406,   409,   412,   415,   421,
-+-     424,   441,   450,   457,   465,   476,   481,   487,   490,   495,
-+-     499,   506,   509,   515,   522,   525,   528,   534,   537,   540,
-+-     546,   549,   552,   560,   564,   567,   570,   573,   576,   579,
-+-     582,   585,   588,   592,   598,   601,   604,   607,   610,   613,
-+-     616,   619,   622,   625,   628,   631,   634,   637,   640,   643,
-+-     646,   649,   652,   655,   658,   661,   664,   671,   674,   677,
-+-     680,   683,   687,   690,   694,   712,   716,   720,   723,   735,
-+-     740,   741,   742,   743,   746,   749,   754,   759,   762,   767,
-+-     770,   775,   779,   782,   787,   790,   795,   798,   803,   806,
-+-     809,   812,   815,   818,   826,   832,   835,   838,   841,   844,
-+-     847,   850,   853,   856,   859,   862,   865,   868,   871,   874,
-+-     877,   880,   883,   889,   892,   895,   900,   903,   906,   909,
-+-     913,   918,   922,   926,   930,   934,   942,   948,   951
-++     424,   441,   445,   449,   455,   466,   471,   477,   480,   485,
-++     489,   496,   499,   505,   512,   515,   518,   524,   527,   530,
-++     536,   539,   542,   550,   554,   557,   560,   563,   566,   569,
-++     572,   575,   578,   582,   588,   591,   594,   597,   600,   603,
-++     606,   609,   612,   615,   618,   621,   624,   627,   630,   633,
-++     636,   639,   642,   645,   648,   651,   654,   661,   664,   667,
-++     670,   673,   677,   680,   684,   702,   706,   710,   713,   725,
-++     730,   731,   732,   733,   736,   739,   744,   749,   752,   757,
-++     760,   765,   769,   772,   777,   780,   785,   788,   793,   796,
-++     799,   802,   805,   808,   816,   822,   825,   828,   831,   834,
-++     837,   840,   843,   846,   849,   852,   855,   858,   861,   864,
-++     867,   870,   873,   879,   882,   885,   890,   893,   896,   899,
-++     903,   908,   912,   916,   920,   924,   932,   938,   941
-+ };
-+ #endif
-+=20
-+@@ -2841,42 +2841,32 @@ YYLTYPE yylloc =3D yyloc_default;
-+   case 41: /* ImportWhat: "import" ImportFrom "as" BINDING  */
-+ #line 441 "src/parser.y"
-+                                  {
-+-  jv v =3D block_const((yyvsp[-2].blk));
-+-  // XXX Make gen_import take only blocks and the int is_data so we
-+-  // don't have to free so much stuff here
-+-  (yyval.blk) =3D gen_import(jv_string_value(v), jv_string_value((yyvsp[0=
-].literal)), 1);
-++  (yyval.blk) =3D gen_import(block_const((yyvsp[-2].blk)), (yyvsp[0].lite=
-ral), 1);
-+   block_free((yyvsp[-2].blk));
-+-  jv_free((yyvsp[0].literal));
-+-  jv_free(v);
-+ }
-+-#line 2853 "src/parser.c"
-++#line 2848 "src/parser.c"
-+     break;
-+=20
-+   case 42: /* ImportWhat: "import" ImportFrom "as" IDENT  */
-+-#line 450 "src/parser.y"
-++#line 445 "src/parser.y"
-+                                {
-+-  jv v =3D block_const((yyvsp[-2].blk));
-+-  (yyval.blk) =3D gen_import(jv_string_value(v), jv_string_value((yyvsp[0=
-].literal)), 0);
-++  (yyval.blk) =3D gen_import(block_const((yyvsp[-2].blk)), (yyvsp[0].lite=
-ral), 0);
-+   block_free((yyvsp[-2].blk));
-+-  jv_free((yyvsp[0].literal));
-+-  jv_free(v);
-+ }
-+-#line 2865 "src/parser.c"
-++#line 2857 "src/parser.c"
-+     break;
-+=20
-+   case 43: /* ImportWhat: "include" ImportFrom  */
-+-#line 457 "src/parser.y"
-++#line 449 "src/parser.y"
-+                      {
-+-  jv v =3D block_const((yyvsp[0].blk));
-+-  (yyval.blk) =3D gen_import(jv_string_value(v), NULL, 0);
-++  (yyval.blk) =3D gen_import(block_const((yyvsp[0].blk)), jv_invalid(), 0=
-);
-+   block_free((yyvsp[0].blk));
-+-  jv_free(v);
-+ }
-+-#line 2876 "src/parser.c"
-++#line 2866 "src/parser.c"
-+     break;
-+=20
-+   case 44: /* ImportFrom: String  */
-+-#line 465 "src/parser.y"
-++#line 455 "src/parser.y"
-+        {
-+   if (!block_is_const((yyvsp[0].blk))) {
-+     FAIL((yylsp[0]), "Import path must be constant");
-+@@ -2886,152 +2876,152 @@ YYLTYPE yylloc =3D yyloc_default;
-+     (yyval.blk) =3D (yyvsp[0].blk);
-+   }
-+ }
-+-#line 2890 "src/parser.c"
-++#line 2880 "src/parser.c"
-+     break;
-+=20
-+   case 45: /* FuncDef: "def" IDENT ':' Query ';'  */
-+-#line 476 "src/parser.y"
-++#line 466 "src/parser.y"
-+                           {
-+   (yyval.blk) =3D gen_function(jv_string_value((yyvsp[-3].literal)), gen_=
-noop(), (yyvsp[-1].blk));
-+   jv_free((yyvsp[-3].literal));
-+ }
-+-#line 2899 "src/parser.c"
-++#line 2889 "src/parser.c"
-+     break;
-+=20
-+   case 46: /* FuncDef: "def" IDENT '(' Params ')' ':' Query ';'  */
-+-#line 481 "src/parser.y"
-++#line 471 "src/parser.y"
-+                                          {
-+   (yyval.blk) =3D gen_function(jv_string_value((yyvsp[-6].literal)), (yyv=
-sp[-4].blk), (yyvsp[-1].blk));
-+   jv_free((yyvsp[-6].literal));
-+ }
-+-#line 2908 "src/parser.c"
-++#line 2898 "src/parser.c"
-+     break;
-+=20
-+   case 47: /* Params: Param  */
-+-#line 487 "src/parser.y"
-++#line 477 "src/parser.y"
-+       {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 2916 "src/parser.c"
-++#line 2906 "src/parser.c"
-+     break;
-+=20
-+   case 48: /* Params: Params ';' Param  */
-+-#line 490 "src/parser.y"
-++#line 480 "src/parser.y"
-+                  {
-+   (yyval.blk) =3D BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 2924 "src/parser.c"
-++#line 2914 "src/parser.c"
-+     break;
-+=20
-+   case 49: /* Param: BINDING  */
-+-#line 495 "src/parser.y"
-++#line 485 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_param_regular(jv_string_value((yyvsp[0].literal)));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 2933 "src/parser.c"
-++#line 2923 "src/parser.c"
-+     break;
-+=20
-+   case 50: /* Param: IDENT  */
-+-#line 499 "src/parser.y"
-++#line 489 "src/parser.y"
-+       {
-+   (yyval.blk) =3D gen_param(jv_string_value((yyvsp[0].literal)));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 2942 "src/parser.c"
-++#line 2932 "src/parser.c"
-+     break;
-+=20
-+   case 51: /* StringStart: FORMAT QQSTRING_START  */
-+-#line 506 "src/parser.y"
-++#line 496 "src/parser.y"
-+                       {
-+   (yyval.literal) =3D (yyvsp[-1].literal);
-+ }
-+-#line 2950 "src/parser.c"
-++#line 2940 "src/parser.c"
-+     break;
-+=20
-+   case 52: /* StringStart: QQSTRING_START  */
-+-#line 509 "src/parser.y"
-++#line 499 "src/parser.y"
-+                {
-+   (yyval.literal) =3D jv_string("text");
-+ }
-+-#line 2958 "src/parser.c"
-++#line 2948 "src/parser.c"
-+     break;
-+=20
-+   case 53: /* String: StringStart QQString QQSTRING_END  */
-+-#line 515 "src/parser.y"
-++#line 505 "src/parser.y"
-+                                   {
-+   (yyval.blk) =3D (yyvsp[-1].blk);
-+   jv_free((yyvsp[-2].literal));
-+ }
-+-#line 2967 "src/parser.c"
-++#line 2957 "src/parser.c"
-+     break;
-+=20
-+   case 54: /* QQString: %empty  */
-+-#line 522 "src/parser.y"
-++#line 512 "src/parser.y"
-+        {
-+   (yyval.blk) =3D gen_const(jv_string(""));
-+ }
-+-#line 2975 "src/parser.c"
-++#line 2965 "src/parser.c"
-+     break;
-+=20
-+   case 55: /* QQString: QQString QQSTRING_TEXT  */
-+-#line 525 "src/parser.y"
-++#line 515 "src/parser.y"
-+                        {
-+   (yyval.blk) =3D gen_binop((yyvsp[-1].blk), gen_const((yyvsp[0].literal)=
-), '+');
-+ }
-+-#line 2983 "src/parser.c"
-++#line 2973 "src/parser.c"
-+     break;
-+=20
-+   case 56: /* QQString: QQString QQSTRING_INTERP_START Query QQSTRING_INT=
-ERP_END  */
-+-#line 528 "src/parser.y"
-++#line 518 "src/parser.y"
-+                                                          {
-+   (yyval.blk) =3D gen_binop((yyvsp[-3].blk), gen_format((yyvsp[-1].blk), =
-jv_copy((yyvsp[-4].literal))), '+');
-+ }
-+-#line 2991 "src/parser.c"
-++#line 2981 "src/parser.c"
-+     break;
-+=20
-+   case 57: /* ElseBody: "elif" Query "then" Query ElseBody  */
-+-#line 534 "src/parser.y"
-++#line 524 "src/parser.y"
-+                                    {
-+   (yyval.blk) =3D gen_cond((yyvsp[-3].blk), (yyvsp[-1].blk), (yyvsp[0].bl=
-k));
-+ }
-+-#line 2999 "src/parser.c"
-++#line 2989 "src/parser.c"
-+     break;
-+=20
-+   case 58: /* ElseBody: "else" Query "end"  */
-+-#line 537 "src/parser.y"
-++#line 527 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D (yyvsp[-1].blk);
-+ }
-+-#line 3007 "src/parser.c"
-++#line 2997 "src/parser.c"
-+     break;
-+=20
-+   case 59: /* ElseBody: "end"  */
-+-#line 540 "src/parser.y"
-++#line 530 "src/parser.y"
-+       {
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3015 "src/parser.c"
-++#line 3005 "src/parser.c"
-+     break;
-+=20
-+   case 60: /* Term: '.'  */
-+-#line 546 "src/parser.y"
-++#line 536 "src/parser.y"
-+     {
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3023 "src/parser.c"
-++#line 3013 "src/parser.c"
-+     break;
-+=20
-+   case 61: /* Term: ".."  */
-+-#line 549 "src/parser.y"
-++#line 539 "src/parser.y"
-+     {
-+   (yyval.blk) =3D gen_call("recurse", gen_noop());
-+ }
-+-#line 3031 "src/parser.c"
-++#line 3021 "src/parser.c"
-+     break;
-+=20
-+   case 62: /* Term: "break" BINDING  */
-+-#line 552 "src/parser.y"
-++#line 542 "src/parser.y"
-+               {
-+   jv v =3D jv_string_fmt("*label-%s", jv_string_value((yyvsp[0].literal))=
-);     // impossible symbol
-+   (yyval.blk) =3D gen_location((yyloc), locations,
-+@@ -3040,279 +3030,279 @@ YYLTYPE yylloc =3D yyloc_default;
-+   jv_free(v);
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 3044 "src/parser.c"
-++#line 3034 "src/parser.c"
-+     break;
-+=20
-+   case 63: /* Term: "break" error  */
-+-#line 560 "src/parser.y"
-++#line 550 "src/parser.y"
-+             {
-+   FAIL((yyloc), "break requires a label to break to");
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3053 "src/parser.c"
-++#line 3043 "src/parser.c"
-+     break;
-+=20
-+   case 64: /* Term: Term FIELD '?'  */
-+-#line 564 "src/parser.y"
-++#line 554 "src/parser.y"
-+                {
-+   (yyval.blk) =3D gen_index_opt((yyvsp[-2].blk), gen_const((yyvsp[-1].lit=
-eral)));
-+ }
-+-#line 3061 "src/parser.c"
-++#line 3051 "src/parser.c"
-+     break;
-+=20
-+   case 65: /* Term: FIELD '?'  */
-+-#line 567 "src/parser.y"
-++#line 557 "src/parser.y"
-+           {
-+   (yyval.blk) =3D gen_index_opt(gen_noop(), gen_const((yyvsp[-1].literal)=
-));
-+ }
-+-#line 3069 "src/parser.c"
-++#line 3059 "src/parser.c"
-+     break;
-+=20
-+   case 66: /* Term: Term '.' String '?'  */
-+-#line 570 "src/parser.y"
-++#line 560 "src/parser.y"
-+                     {
-+   (yyval.blk) =3D gen_index_opt((yyvsp[-3].blk), (yyvsp[-1].blk));
-+ }
-+-#line 3077 "src/parser.c"
-++#line 3067 "src/parser.c"
-+     break;
-+=20
-+   case 67: /* Term: '.' String '?'  */
-+-#line 573 "src/parser.y"
-++#line 563 "src/parser.y"
-+                {
-+   (yyval.blk) =3D gen_index_opt(gen_noop(), (yyvsp[-1].blk));
-+ }
-+-#line 3085 "src/parser.c"
-++#line 3075 "src/parser.c"
-+     break;
-+=20
-+   case 68: /* Term: Term FIELD  */
-+-#line 576 "src/parser.y"
-++#line 566 "src/parser.y"
-+                         {
-+   (yyval.blk) =3D gen_index((yyvsp[-1].blk), gen_const((yyvsp[0].literal)=
-));
-+ }
-+-#line 3093 "src/parser.c"
-++#line 3083 "src/parser.c"
-+     break;
-+=20
-+   case 69: /* Term: FIELD  */
-+-#line 579 "src/parser.y"
-++#line 569 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D gen_index(gen_noop(), gen_const((yyvsp[0].literal)));
-+ }
-+-#line 3101 "src/parser.c"
-++#line 3091 "src/parser.c"
-+     break;
-+=20
-+   case 70: /* Term: Term '.' String  */
-+-#line 582 "src/parser.y"
-++#line 572 "src/parser.y"
-+                              {
-+   (yyval.blk) =3D gen_index((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3109 "src/parser.c"
-++#line 3099 "src/parser.c"
-+     break;
-+=20
-+   case 71: /* Term: '.' String  */
-+-#line 585 "src/parser.y"
-++#line 575 "src/parser.y"
-+                         {
-+   (yyval.blk) =3D gen_index(gen_noop(), (yyvsp[0].blk));
-+ }
-+-#line 3117 "src/parser.c"
-++#line 3107 "src/parser.c"
-+     break;
-+=20
-+   case 72: /* Term: '.' error  */
-+-#line 588 "src/parser.y"
-++#line 578 "src/parser.y"
-+           {
-+   FAIL((yyloc), "try .[\"field\"] instead of .field for unusually named f=
-ields");
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3126 "src/parser.c"
-++#line 3116 "src/parser.c"
-+     break;
-+=20
-+   case 73: /* Term: '.' IDENT error  */
-+-#line 592 "src/parser.y"
-++#line 582 "src/parser.y"
-+                 {
-+   jv_free((yyvsp[-1].literal));
-+   FAIL((yyloc), "try .[\"field\"] instead of .field for unusually named f=
-ields");
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3136 "src/parser.c"
-++#line 3126 "src/parser.c"
-+     break;
-+=20
-+   case 74: /* Term: Term '[' Query ']' '?'  */
-+-#line 598 "src/parser.y"
-++#line 588 "src/parser.y"
-+                        {
-+   (yyval.blk) =3D gen_index_opt((yyvsp[-4].blk), (yyvsp[-2].blk));
-+ }
-+-#line 3144 "src/parser.c"
-++#line 3134 "src/parser.c"
-+     break;
-+=20
-+   case 75: /* Term: Term '[' Query ']'  */
-+-#line 601 "src/parser.y"
-++#line 591 "src/parser.y"
-+                                 {
-+   (yyval.blk) =3D gen_index((yyvsp[-3].blk), (yyvsp[-1].blk));
-+ }
-+-#line 3152 "src/parser.c"
-++#line 3142 "src/parser.c"
-+     break;
-+=20
-+   case 76: /* Term: Term '.' '[' Query ']' '?'  */
-+-#line 604 "src/parser.y"
-++#line 594 "src/parser.y"
-+                            {
-+   (yyval.blk) =3D gen_index_opt((yyvsp[-5].blk), (yyvsp[-2].blk));
-+ }
-+-#line 3160 "src/parser.c"
-++#line 3150 "src/parser.c"
-+     break;
-+=20
-+   case 77: /* Term: Term '.' '[' Query ']'  */
-+-#line 607 "src/parser.y"
-++#line 597 "src/parser.y"
-+                                     {
-+   (yyval.blk) =3D gen_index((yyvsp[-4].blk), (yyvsp[-1].blk));
-+ }
-+-#line 3168 "src/parser.c"
-++#line 3158 "src/parser.c"
-+     break;
-+=20
-+   case 78: /* Term: Term '[' ']' '?'  */
-+-#line 610 "src/parser.y"
-++#line 600 "src/parser.y"
-+                  {
-+   (yyval.blk) =3D block_join((yyvsp[-3].blk), gen_op_simple(EACH_OPT));
-+ }
-+-#line 3176 "src/parser.c"
-++#line 3166 "src/parser.c"
-+     break;
-+=20
-+   case 79: /* Term: Term '[' ']'  */
-+-#line 613 "src/parser.y"
-++#line 603 "src/parser.y"
-+                           {
-+   (yyval.blk) =3D block_join((yyvsp[-2].blk), gen_op_simple(EACH));
-+ }
-+-#line 3184 "src/parser.c"
-++#line 3174 "src/parser.c"
-+     break;
-+=20
-+   case 80: /* Term: Term '.' '[' ']' '?'  */
-+-#line 616 "src/parser.y"
-++#line 606 "src/parser.y"
-+                      {
-+   (yyval.blk) =3D block_join((yyvsp[-4].blk), gen_op_simple(EACH_OPT));
-+ }
-+-#line 3192 "src/parser.c"
-++#line 3182 "src/parser.c"
-+     break;
-+=20
-+   case 81: /* Term: Term '.' '[' ']'  */
-+-#line 619 "src/parser.y"
-++#line 609 "src/parser.y"
-+                               {
-+   (yyval.blk) =3D block_join((yyvsp[-3].blk), gen_op_simple(EACH));
-+ }
-+-#line 3200 "src/parser.c"
-++#line 3190 "src/parser.c"
-+     break;
-+=20
-+   case 82: /* Term: Term '[' Query ':' Query ']' '?'  */
-+-#line 622 "src/parser.y"
-++#line 612 "src/parser.y"
-+                                  {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-6].blk), (yyvsp[-4].blk), (yyvs=
-p[-2].blk), INDEX_OPT);
-+ }
-+-#line 3208 "src/parser.c"
-++#line 3198 "src/parser.c"
-+     break;
-+=20
-+   case 83: /* Term: Term '[' Query ':' ']' '?'  */
-+-#line 625 "src/parser.y"
-++#line 615 "src/parser.y"
-+                            {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-5].blk), (yyvsp[-3].blk), gen_c=
-onst(jv_null()), INDEX_OPT);
-+ }
-+-#line 3216 "src/parser.c"
-++#line 3206 "src/parser.c"
-+     break;
-+=20
-+   case 84: /* Term: Term '[' ':' Query ']' '?'  */
-+-#line 628 "src/parser.y"
-++#line 618 "src/parser.y"
-+                            {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-5].blk), gen_const(jv_null()), =
-(yyvsp[-2].blk), INDEX_OPT);
-+ }
-+-#line 3224 "src/parser.c"
-++#line 3214 "src/parser.c"
-+     break;
-+=20
-+   case 85: /* Term: Term '[' Query ':' Query ']'  */
-+-#line 631 "src/parser.y"
-++#line 621 "src/parser.y"
-+                                           {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-5].blk), (yyvsp[-3].blk), (yyvs=
-p[-1].blk), INDEX);
-+ }
-+-#line 3232 "src/parser.c"
-++#line 3222 "src/parser.c"
-+     break;
-+=20
-+   case 86: /* Term: Term '[' Query ':' ']'  */
-+-#line 634 "src/parser.y"
-++#line 624 "src/parser.y"
-+                                     {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-4].blk), (yyvsp[-2].blk), gen_c=
-onst(jv_null()), INDEX);
-+ }
-+-#line 3240 "src/parser.c"
-++#line 3230 "src/parser.c"
-+     break;
-+=20
-+   case 87: /* Term: Term '[' ':' Query ']'  */
-+-#line 637 "src/parser.y"
-++#line 627 "src/parser.y"
-+                                     {
-+   (yyval.blk) =3D gen_slice_index((yyvsp[-4].blk), gen_const(jv_null()), =
-(yyvsp[-1].blk), INDEX);
-+ }
-+-#line 3248 "src/parser.c"
-++#line 3238 "src/parser.c"
-+     break;
-+=20
-+   case 88: /* Term: Term '?'  */
-+-#line 640 "src/parser.y"
-++#line 630 "src/parser.y"
-+          {
-+   (yyval.blk) =3D gen_try((yyvsp[-1].blk), gen_op_simple(BACKTRACK));
-+ }
-+-#line 3256 "src/parser.c"
-++#line 3246 "src/parser.c"
-+     break;
-+=20
-+   case 89: /* Term: LITERAL  */
-+-#line 643 "src/parser.y"
-++#line 633 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_const((yyvsp[0].literal));
-+ }
-+-#line 3264 "src/parser.c"
-++#line 3254 "src/parser.c"
-+     break;
-+=20
-+   case 90: /* Term: String  */
-+-#line 646 "src/parser.y"
-++#line 636 "src/parser.y"
-+        {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3272 "src/parser.c"
-++#line 3262 "src/parser.c"
-+     break;
-+=20
-+   case 91: /* Term: FORMAT  */
-+-#line 649 "src/parser.y"
-++#line 639 "src/parser.y"
-+        {
-+   (yyval.blk) =3D gen_format(gen_noop(), (yyvsp[0].literal));
-+ }
-+-#line 3280 "src/parser.c"
-++#line 3270 "src/parser.c"
-+     break;
-+=20
-+   case 92: /* Term: '-' Term  */
-+-#line 652 "src/parser.y"
-++#line 642 "src/parser.y"
-+          {
-+   (yyval.blk) =3D BLOCK((yyvsp[0].blk), gen_call("_negate", gen_noop()));
-+ }
-+-#line 3288 "src/parser.c"
-++#line 3278 "src/parser.c"
-+     break;
-+=20
-+   case 93: /* Term: '(' Query ')'  */
-+-#line 655 "src/parser.y"
-++#line 645 "src/parser.y"
-+               {
-+   (yyval.blk) =3D (yyvsp[-1].blk);
-+ }
-+-#line 3296 "src/parser.c"
-++#line 3286 "src/parser.c"
-+     break;
-+=20
-+   case 94: /* Term: '[' Query ']'  */
-+-#line 658 "src/parser.y"
-++#line 648 "src/parser.y"
-+               {
-+   (yyval.blk) =3D gen_collect((yyvsp[-1].blk));
-+ }
-+-#line 3304 "src/parser.c"
-++#line 3294 "src/parser.c"
-+     break;
-+=20
-+   case 95: /* Term: '[' ']'  */
-+-#line 661 "src/parser.y"
-++#line 651 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_const(jv_array());
-+ }
-+-#line 3312 "src/parser.c"
-++#line 3302 "src/parser.c"
-+     break;
-+=20
-+   case 96: /* Term: '{' DictPairs '}'  */
-+-#line 664 "src/parser.y"
-++#line 654 "src/parser.y"
-+                   {
-+   block o =3D gen_const_object((yyvsp[-1].blk));
-+   if (o.first !=3D NULL)
-+@@ -3320,103 +3310,103 @@ YYLTYPE yylloc =3D yyloc_default;
-+   else
-+     (yyval.blk) =3D BLOCK(gen_subexp(gen_const(jv_object())), (yyvsp[-1].=
-blk), gen_op_simple(POP));
-+ }
-+-#line 3324 "src/parser.c"
-++#line 3314 "src/parser.c"
-+     break;
-+=20
-+   case 97: /* Term: "reduce" Expr "as" Patterns '(' Query ';' Query ')'  =
-*/
-+-#line 671 "src/parser.y"
-++#line 661 "src/parser.y"
-+                                                     {
-+   (yyval.blk) =3D gen_reduce((yyvsp[-7].blk), (yyvsp[-5].blk), (yyvsp[-3]=
-.blk), (yyvsp[-1].blk));
-+ }
-+-#line 3332 "src/parser.c"
-++#line 3322 "src/parser.c"
-+     break;
-+=20
-+   case 98: /* Term: "foreach" Expr "as" Patterns '(' Query ';' Query ';' =
-Query ')'  */
-+-#line 674 "src/parser.y"
-++#line 664 "src/parser.y"
-+                                                                {
-+   (yyval.blk) =3D gen_foreach((yyvsp[-9].blk), (yyvsp[-7].blk), (yyvsp[-5=
-].blk), (yyvsp[-3].blk), (yyvsp[-1].blk));
-+ }
-+-#line 3340 "src/parser.c"
-++#line 3330 "src/parser.c"
-+     break;
-+=20
-+   case 99: /* Term: "foreach" Expr "as" Patterns '(' Query ';' Query ')' =
- */
-+-#line 677 "src/parser.y"
-++#line 667 "src/parser.y"
-+                                                      {
-+   (yyval.blk) =3D gen_foreach((yyvsp[-7].blk), (yyvsp[-5].blk), (yyvsp[-3=
-].blk), (yyvsp[-1].blk), gen_noop());
-+ }
-+-#line 3348 "src/parser.c"
-++#line 3338 "src/parser.c"
-+     break;
-+=20
-+   case 100: /* Term: "if" Query "then" Query ElseBody  */
-+-#line 680 "src/parser.y"
-++#line 670 "src/parser.y"
-+                                  {
-+   (yyval.blk) =3D gen_cond((yyvsp[-3].blk), (yyvsp[-1].blk), (yyvsp[0].bl=
-k));
-+ }
-+-#line 3356 "src/parser.c"
-++#line 3346 "src/parser.c"
-+     break;
-+=20
-+   case 101: /* Term: "if" Query "then" error  */
-+-#line 683 "src/parser.y"
-++#line 673 "src/parser.y"
-+                         {
-+   FAIL((yyloc), "Possibly unterminated 'if' statement");
-+   (yyval.blk) =3D (yyvsp[-2].blk);
-+ }
-+-#line 3365 "src/parser.c"
-++#line 3355 "src/parser.c"
-+     break;
-+=20
-+   case 102: /* Term: "try" Expr "catch" Expr  */
-+-#line 687 "src/parser.y"
-++#line 677 "src/parser.y"
-+                         {
-+   (yyval.blk) =3D gen_try((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3373 "src/parser.c"
-++#line 3363 "src/parser.c"
-+     break;
-+=20
-+   case 103: /* Term: "try" Expr "catch" error  */
-+-#line 690 "src/parser.y"
-++#line 680 "src/parser.y"
-+                          {
-+   FAIL((yyloc), "Possibly unterminated 'try' statement");
-+   (yyval.blk) =3D (yyvsp[-2].blk);
-+ }
-+-#line 3382 "src/parser.c"
-++#line 3372 "src/parser.c"
-+     break;
-+=20
-+   case 104: /* Term: "try" Expr  */
-+-#line 694 "src/parser.y"
-++#line 684 "src/parser.y"
-+            {
-+   (yyval.blk) =3D gen_try((yyvsp[0].blk), gen_op_simple(BACKTRACK));
-+ }
-+-#line 3390 "src/parser.c"
-++#line 3380 "src/parser.c"
-+     break;
-+=20
-+   case 105: /* Term: '$' '$' '$' BINDING  */
-+-#line 712 "src/parser.y"
-++#line 702 "src/parser.y"
-+                     {
-+   (yyval.blk) =3D gen_location((yyloc), locations, gen_op_unbound(LOADVN,=
- jv_string_value((yyvsp[0].literal))));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 3399 "src/parser.c"
-++#line 3389 "src/parser.c"
-+     break;
-+=20
-+   case 106: /* Term: BINDING  */
-+-#line 716 "src/parser.y"
-++#line 706 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_location((yyloc), locations, gen_op_unbound(LOADV, =
-jv_string_value((yyvsp[0].literal))));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 3408 "src/parser.c"
-++#line 3398 "src/parser.c"
-+     break;
-+=20
-+   case 107: /* Term: "$__loc__"  */
-+-#line 720 "src/parser.y"
-++#line 710 "src/parser.y"
-+            {
-+   (yyval.blk) =3D gen_loc_object(&(yyloc), locations);
-+ }
-+-#line 3416 "src/parser.c"
-++#line 3406 "src/parser.c"
-+     break;
-+=20
-+   case 108: /* Term: IDENT  */
-+-#line 723 "src/parser.y"
-++#line 713 "src/parser.y"
-+       {
-+   const char *s =3D jv_string_value((yyvsp[0].literal));
-+   if (strcmp(s, "false") =3D=3D 0)
-+@@ -3429,198 +3419,198 @@ YYLTYPE yylloc =3D yyloc_default;
-+     (yyval.blk) =3D gen_location((yyloc), locations, gen_call(s, gen_noop=
-()));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 3433 "src/parser.c"
-++#line 3423 "src/parser.c"
-+     break;
-+=20
-+   case 109: /* Term: IDENT '(' Args ')'  */
-+-#line 735 "src/parser.y"
-++#line 725 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D gen_call(jv_string_value((yyvsp[-3].literal)), (yyvsp[-=
-1].blk));
-+   (yyval.blk) =3D gen_location((yylsp[-3]), locations, (yyval.blk));
-+   jv_free((yyvsp[-3].literal));
-+ }
-+-#line 3443 "src/parser.c"
-++#line 3433 "src/parser.c"
-+     break;
-+=20
-+   case 110: /* Term: '(' error ')'  */
-+-#line 740 "src/parser.y"
-++#line 730 "src/parser.y"
-+               { (yyval.blk) =3D gen_noop(); }
-+-#line 3449 "src/parser.c"
-++#line 3439 "src/parser.c"
-+     break;
-+=20
-+   case 111: /* Term: '[' error ']'  */
-+-#line 741 "src/parser.y"
-++#line 731 "src/parser.y"
-+               { (yyval.blk) =3D gen_noop(); }
-+-#line 3455 "src/parser.c"
-++#line 3445 "src/parser.c"
-+     break;
-+=20
-+   case 112: /* Term: Term '[' error ']'  */
-+-#line 742 "src/parser.y"
-++#line 732 "src/parser.y"
-+                    { (yyval.blk) =3D (yyvsp[-3].blk); }
-+-#line 3461 "src/parser.c"
-++#line 3451 "src/parser.c"
-+     break;
-+=20
-+   case 113: /* Term: '{' error '}'  */
-+-#line 743 "src/parser.y"
-++#line 733 "src/parser.y"
-+               { (yyval.blk) =3D gen_noop(); }
-+-#line 3467 "src/parser.c"
-++#line 3457 "src/parser.c"
-+     break;
-+=20
-+   case 114: /* Args: Arg  */
-+-#line 746 "src/parser.y"
-++#line 736 "src/parser.y"
-+     {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3475 "src/parser.c"
-++#line 3465 "src/parser.c"
-+     break;
-+=20
-+   case 115: /* Args: Args ';' Arg  */
-+-#line 749 "src/parser.y"
-++#line 739 "src/parser.y"
-+              {
-+   (yyval.blk) =3D BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3483 "src/parser.c"
-++#line 3473 "src/parser.c"
-+     break;
-+=20
-+   case 116: /* Arg: Query  */
-+-#line 754 "src/parser.y"
-++#line 744 "src/parser.y"
-+       {
-+   (yyval.blk) =3D gen_lambda((yyvsp[0].blk));
-+ }
-+-#line 3491 "src/parser.c"
-++#line 3481 "src/parser.c"
-+     break;
-+=20
-+   case 117: /* RepPatterns: RepPatterns "?//" Pattern  */
-+-#line 759 "src/parser.y"
-++#line 749 "src/parser.y"
-+                           {
-+   (yyval.blk) =3D BLOCK((yyvsp[-2].blk), gen_destructure_alt((yyvsp[0].bl=
-k)));
-+ }
-+-#line 3499 "src/parser.c"
-++#line 3489 "src/parser.c"
-+     break;
-+=20
-+   case 118: /* RepPatterns: Pattern  */
-+-#line 762 "src/parser.y"
-++#line 752 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_destructure_alt((yyvsp[0].blk));
-+ }
-+-#line 3507 "src/parser.c"
-++#line 3497 "src/parser.c"
-+     break;
-+=20
-+   case 119: /* Patterns: RepPatterns "?//" Pattern  */
-+-#line 767 "src/parser.y"
-++#line 757 "src/parser.y"
-+                           {
-+   (yyval.blk) =3D BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3515 "src/parser.c"
-++#line 3505 "src/parser.c"
-+     break;
-+=20
-+   case 120: /* Patterns: Pattern  */
-+-#line 770 "src/parser.y"
-++#line 760 "src/parser.y"
-+         {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3523 "src/parser.c"
-++#line 3513 "src/parser.c"
-+     break;
-+=20
-+   case 121: /* Pattern: BINDING  */
-+-#line 775 "src/parser.y"
-++#line 765 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_op_unbound(STOREV, jv_string_value((yyvsp[0].litera=
-l)));
-+   jv_free((yyvsp[0].literal));
-+ }
-+-#line 3532 "src/parser.c"
-++#line 3522 "src/parser.c"
-+     break;
-+=20
-+   case 122: /* Pattern: '[' ArrayPats ']'  */
-+-#line 779 "src/parser.y"
-++#line 769 "src/parser.y"
-+                   {
-+   (yyval.blk) =3D BLOCK((yyvsp[-1].blk), gen_op_simple(POP));
-+ }
-+-#line 3540 "src/parser.c"
-++#line 3530 "src/parser.c"
-+     break;
-+=20
-+   case 123: /* Pattern: '{' ObjPats '}'  */
-+-#line 782 "src/parser.y"
-++#line 772 "src/parser.y"
-+                 {
-+   (yyval.blk) =3D BLOCK((yyvsp[-1].blk), gen_op_simple(POP));
-+ }
-+-#line 3548 "src/parser.c"
-++#line 3538 "src/parser.c"
-+     break;
-+=20
-+   case 124: /* ArrayPats: Pattern  */
-+-#line 787 "src/parser.y"
-++#line 777 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_array_matcher(gen_noop(), (yyvsp[0].blk));
-+ }
-+-#line 3556 "src/parser.c"
-++#line 3546 "src/parser.c"
-+     break;
-+=20
-+   case 125: /* ArrayPats: ArrayPats ',' Pattern  */
-+-#line 790 "src/parser.y"
-++#line 780 "src/parser.y"
-+                       {
-+   (yyval.blk) =3D gen_array_matcher((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3564 "src/parser.c"
-++#line 3554 "src/parser.c"
-+     break;
-+=20
-+   case 126: /* ObjPats: ObjPat  */
-+-#line 795 "src/parser.y"
-++#line 785 "src/parser.y"
-+        {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3572 "src/parser.c"
-++#line 3562 "src/parser.c"
-+     break;
-+=20
-+   case 127: /* ObjPats: ObjPats ',' ObjPat  */
-+-#line 798 "src/parser.y"
-++#line 788 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3580 "src/parser.c"
-++#line 3570 "src/parser.c"
-+     break;
-+=20
-+   case 128: /* ObjPat: BINDING  */
-+-#line 803 "src/parser.y"
-++#line 793 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_object_matcher(gen_const((yyvsp[0].literal)), gen_o=
-p_unbound(STOREV, jv_string_value((yyvsp[0].literal))));
-+ }
-+-#line 3588 "src/parser.c"
-++#line 3578 "src/parser.c"
-+     break;
-+=20
-+   case 129: /* ObjPat: BINDING ':' Pattern  */
-+-#line 806 "src/parser.y"
-++#line 796 "src/parser.y"
-+                     {
-+   (yyval.blk) =3D gen_object_matcher(gen_const((yyvsp[-2].literal)), BLOC=
-K(gen_op_simple(DUP), gen_op_unbound(STOREV, jv_string_value((yyvsp[-2].lit=
-eral))), (yyvsp[0].blk)));
-+ }
-+-#line 3596 "src/parser.c"
-++#line 3586 "src/parser.c"
-+     break;
-+=20
-+   case 130: /* ObjPat: IDENT ':' Pattern  */
-+-#line 809 "src/parser.y"
-++#line 799 "src/parser.y"
-+                   {
-+   (yyval.blk) =3D gen_object_matcher(gen_const((yyvsp[-2].literal)), (yyv=
-sp[0].blk));
-+ }
-+-#line 3604 "src/parser.c"
-++#line 3594 "src/parser.c"
-+     break;
-+=20
-+   case 131: /* ObjPat: Keyword ':' Pattern  */
-+-#line 812 "src/parser.y"
-++#line 802 "src/parser.y"
-+                     {
-+   (yyval.blk) =3D gen_object_matcher(gen_const((yyvsp[-2].literal)), (yyv=
-sp[0].blk));
-+ }
-+-#line 3612 "src/parser.c"
-++#line 3602 "src/parser.c"
-+     break;
-+=20
-+   case 132: /* ObjPat: String ':' Pattern  */
-+-#line 815 "src/parser.y"
-++#line 805 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D gen_object_matcher((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3620 "src/parser.c"
-++#line 3610 "src/parser.c"
-+     break;
-+=20
-+   case 133: /* ObjPat: '(' Query ')' ':' Pattern  */
-+-#line 818 "src/parser.y"
-++#line 808 "src/parser.y"
-+                           {
-+   jv msg =3D check_object_key((yyvsp[-3].blk));
-+   if (jv_is_valid(msg)) {
-+@@ -3629,267 +3619,267 @@ YYLTYPE yylloc =3D yyloc_default;
-+   jv_free(msg);
-+   (yyval.blk) =3D gen_object_matcher((yyvsp[-3].blk), (yyvsp[0].blk));
-+ }
-+-#line 3633 "src/parser.c"
-++#line 3623 "src/parser.c"
-+     break;
-+=20
-+   case 134: /* ObjPat: error ':' Pattern  */
-+-#line 826 "src/parser.y"
-++#line 816 "src/parser.y"
-+                   {
-+   FAIL((yyloc), "May need parentheses around object key expression");
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3642 "src/parser.c"
-++#line 3632 "src/parser.c"
-+     break;
-+=20
-+   case 135: /* Keyword: "as"  */
-+-#line 832 "src/parser.y"
-++#line 822 "src/parser.y"
-+      {
-+   (yyval.literal) =3D jv_string("as");
-+ }
-+-#line 3650 "src/parser.c"
-++#line 3640 "src/parser.c"
-+     break;
-+=20
-+   case 136: /* Keyword: "def"  */
-+-#line 835 "src/parser.y"
-++#line 825 "src/parser.y"
-+       {
-+   (yyval.literal) =3D jv_string("def");
-+ }
-+-#line 3658 "src/parser.c"
-++#line 3648 "src/parser.c"
-+     break;
-+=20
-+   case 137: /* Keyword: "module"  */
-+-#line 838 "src/parser.y"
-++#line 828 "src/parser.y"
-+          {
-+   (yyval.literal) =3D jv_string("module");
-+ }
-+-#line 3666 "src/parser.c"
-++#line 3656 "src/parser.c"
-+     break;
-+=20
-+   case 138: /* Keyword: "import"  */
-+-#line 841 "src/parser.y"
-++#line 831 "src/parser.y"
-+          {
-+   (yyval.literal) =3D jv_string("import");
-+ }
-+-#line 3674 "src/parser.c"
-++#line 3664 "src/parser.c"
-+     break;
-+=20
-+   case 139: /* Keyword: "include"  */
-+-#line 844 "src/parser.y"
-++#line 834 "src/parser.y"
-+           {
-+   (yyval.literal) =3D jv_string("include");
-+ }
-+-#line 3682 "src/parser.c"
-++#line 3672 "src/parser.c"
-+     break;
-+=20
-+   case 140: /* Keyword: "if"  */
-+-#line 847 "src/parser.y"
-++#line 837 "src/parser.y"
-+      {
-+   (yyval.literal) =3D jv_string("if");
-+ }
-+-#line 3690 "src/parser.c"
-++#line 3680 "src/parser.c"
-+     break;
-+=20
-+   case 141: /* Keyword: "then"  */
-+-#line 850 "src/parser.y"
-++#line 840 "src/parser.y"
-+        {
-+   (yyval.literal) =3D jv_string("then");
-+ }
-+-#line 3698 "src/parser.c"
-++#line 3688 "src/parser.c"
-+     break;
-+=20
-+   case 142: /* Keyword: "else"  */
-+-#line 853 "src/parser.y"
-++#line 843 "src/parser.y"
-+        {
-+   (yyval.literal) =3D jv_string("else");
-+ }
-+-#line 3706 "src/parser.c"
-++#line 3696 "src/parser.c"
-+     break;
-+=20
-+   case 143: /* Keyword: "elif"  */
-+-#line 856 "src/parser.y"
-++#line 846 "src/parser.y"
-+        {
-+   (yyval.literal) =3D jv_string("elif");
-+ }
-+-#line 3714 "src/parser.c"
-++#line 3704 "src/parser.c"
-+     break;
-+=20
-+   case 144: /* Keyword: "reduce"  */
-+-#line 859 "src/parser.y"
-++#line 849 "src/parser.y"
-+          {
-+   (yyval.literal) =3D jv_string("reduce");
-+ }
-+-#line 3722 "src/parser.c"
-++#line 3712 "src/parser.c"
-+     break;
-+=20
-+   case 145: /* Keyword: "foreach"  */
-+-#line 862 "src/parser.y"
-++#line 852 "src/parser.y"
-+           {
-+   (yyval.literal) =3D jv_string("foreach");
-+ }
-+-#line 3730 "src/parser.c"
-++#line 3720 "src/parser.c"
-+     break;
-+=20
-+   case 146: /* Keyword: "end"  */
-+-#line 865 "src/parser.y"
-++#line 855 "src/parser.y"
-+       {
-+   (yyval.literal) =3D jv_string("end");
-+ }
-+-#line 3738 "src/parser.c"
-++#line 3728 "src/parser.c"
-+     break;
-+=20
-+   case 147: /* Keyword: "and"  */
-+-#line 868 "src/parser.y"
-++#line 858 "src/parser.y"
-+       {
-+   (yyval.literal) =3D jv_string("and");
-+ }
-+-#line 3746 "src/parser.c"
-++#line 3736 "src/parser.c"
-+     break;
-+=20
-+   case 148: /* Keyword: "or"  */
-+-#line 871 "src/parser.y"
-++#line 861 "src/parser.y"
-+      {
-+   (yyval.literal) =3D jv_string("or");
-+ }
-+-#line 3754 "src/parser.c"
-++#line 3744 "src/parser.c"
-+     break;
-+=20
-+   case 149: /* Keyword: "try"  */
-+-#line 874 "src/parser.y"
-++#line 864 "src/parser.y"
-+       {
-+   (yyval.literal) =3D jv_string("try");
-+ }
-+-#line 3762 "src/parser.c"
-++#line 3752 "src/parser.c"
-+     break;
-+=20
-+   case 150: /* Keyword: "catch"  */
-+-#line 877 "src/parser.y"
-++#line 867 "src/parser.y"
-+         {
-+   (yyval.literal) =3D jv_string("catch");
-+ }
-+-#line 3770 "src/parser.c"
-++#line 3760 "src/parser.c"
-+     break;
-+=20
-+   case 151: /* Keyword: "label"  */
-+-#line 880 "src/parser.y"
-++#line 870 "src/parser.y"
-+         {
-+   (yyval.literal) =3D jv_string("label");
-+ }
-+-#line 3778 "src/parser.c"
-++#line 3768 "src/parser.c"
-+     break;
-+=20
-+   case 152: /* Keyword: "break"  */
-+-#line 883 "src/parser.y"
-++#line 873 "src/parser.y"
-+         {
-+   (yyval.literal) =3D jv_string("break");
-+ }
-+-#line 3786 "src/parser.c"
-++#line 3776 "src/parser.c"
-+     break;
-+=20
-+   case 153: /* DictPairs: %empty  */
-+-#line 889 "src/parser.y"
-++#line 879 "src/parser.y"
-+        {
-+   (yyval.blk) =3D gen_noop();
-+ }
-+-#line 3794 "src/parser.c"
-++#line 3784 "src/parser.c"
-+     break;
-+=20
-+   case 154: /* DictPairs: DictPair  */
-+-#line 892 "src/parser.y"
-++#line 882 "src/parser.y"
-+          {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3802 "src/parser.c"
-++#line 3792 "src/parser.c"
-+     break;
-+=20
-+   case 155: /* DictPairs: DictPair ',' DictPairs  */
-+-#line 895 "src/parser.y"
-++#line 885 "src/parser.y"
-+                        {
-+   (yyval.blk) =3D block_join((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3810 "src/parser.c"
-++#line 3800 "src/parser.c"
-+     break;
-+=20
-+   case 156: /* DictPair: IDENT ':' DictExpr  */
-+-#line 900 "src/parser.y"
-++#line 890 "src/parser.y"
-+                    {
-+   (yyval.blk) =3D gen_dictpair(gen_const((yyvsp[-2].literal)), (yyvsp[0].=
-blk));
-+ }
-+-#line 3818 "src/parser.c"
-++#line 3808 "src/parser.c"
-+     break;
-+=20
-+   case 157: /* DictPair: Keyword ':' DictExpr  */
-+-#line 903 "src/parser.y"
-++#line 893 "src/parser.y"
-+                      {
-+   (yyval.blk) =3D gen_dictpair(gen_const((yyvsp[-2].literal)), (yyvsp[0].=
-blk));
-+ }
-+-#line 3826 "src/parser.c"
-++#line 3816 "src/parser.c"
-+     break;
-+=20
-+   case 158: /* DictPair: String ':' DictExpr  */
-+-#line 906 "src/parser.y"
-++#line 896 "src/parser.y"
-+                     {
-+   (yyval.blk) =3D gen_dictpair((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3834 "src/parser.c"
-++#line 3824 "src/parser.c"
-+     break;
-+=20
-+   case 159: /* DictPair: String  */
-+-#line 909 "src/parser.y"
-++#line 899 "src/parser.y"
-+        {
-+   (yyval.blk) =3D gen_dictpair((yyvsp[0].blk), BLOCK(gen_op_simple(POP), =
-gen_op_simple(DUP2),
-+                               gen_op_simple(DUP2), gen_op_simple(INDEX)))=
-;
-+ }
-+-#line 3843 "src/parser.c"
-++#line 3833 "src/parser.c"
-+     break;
-+=20
-+   case 160: /* DictPair: BINDING ':' DictExpr  */
-+-#line 913 "src/parser.y"
-++#line 903 "src/parser.y"
-+                      {
-+   (yyval.blk) =3D gen_dictpair(gen_location((yyloc), locations, gen_op_un=
-bound(LOADV, jv_string_value((yyvsp[-2].literal)))),
-+                     (yyvsp[0].blk));
-+   jv_free((yyvsp[-2].literal));
-+ }
-+-#line 3853 "src/parser.c"
-++#line 3843 "src/parser.c"
-+     break;
-+=20
-+   case 161: /* DictPair: BINDING  */
-+-#line 918 "src/parser.y"
-++#line 908 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_dictpair(gen_const((yyvsp[0].literal)),
-+                     gen_location((yyloc), locations, gen_op_unbound(LOADV=
-, jv_string_value((yyvsp[0].literal)))));
-+ }
-+-#line 3862 "src/parser.c"
-++#line 3852 "src/parser.c"
-+     break;
-+=20
-+   case 162: /* DictPair: IDENT  */
-+-#line 922 "src/parser.y"
-++#line 912 "src/parser.y"
-+       {
-+   (yyval.blk) =3D gen_dictpair(gen_const(jv_copy((yyvsp[0].literal))),
-+                     gen_index(gen_noop(), gen_const((yyvsp[0].literal))))=
-;
-+ }
-+-#line 3871 "src/parser.c"
-++#line 3861 "src/parser.c"
-+     break;
-+=20
-+   case 163: /* DictPair: "$__loc__"  */
-+-#line 926 "src/parser.y"
-++#line 916 "src/parser.y"
-+            {
-+   (yyval.blk) =3D gen_dictpair(gen_const(jv_string("__loc__")),
-+                     gen_loc_object(&(yyloc), locations));
-+ }
-+-#line 3880 "src/parser.c"
-++#line 3870 "src/parser.c"
-+     break;
-+=20
-+   case 164: /* DictPair: Keyword  */
-+-#line 930 "src/parser.y"
-++#line 920 "src/parser.y"
-+         {
-+   (yyval.blk) =3D gen_dictpair(gen_const(jv_copy((yyvsp[0].literal))),
-+                     gen_index(gen_noop(), gen_const((yyvsp[0].literal))))=
-;
-+ }
-+-#line 3889 "src/parser.c"
-++#line 3879 "src/parser.c"
-+     break;
-+=20
-+   case 165: /* DictPair: '(' Query ')' ':' DictExpr  */
-+-#line 934 "src/parser.y"
-++#line 924 "src/parser.y"
-+                            {
-+   jv msg =3D check_object_key((yyvsp[-3].blk));
-+   if (jv_is_valid(msg)) {
-+@@ -3898,36 +3888,36 @@ YYLTYPE yylloc =3D yyloc_default;
-+   jv_free(msg);
-+   (yyval.blk) =3D gen_dictpair((yyvsp[-3].blk), (yyvsp[0].blk));
-+ }
-+-#line 3902 "src/parser.c"
-++#line 3892 "src/parser.c"
-+     break;
-+=20
-+   case 166: /* DictPair: error ':' DictExpr  */
-+-#line 942 "src/parser.y"
-++#line 932 "src/parser.y"
-+                    {
-+   FAIL((yylsp[-2]), "May need parentheses around object key expression");
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3911 "src/parser.c"
-++#line 3901 "src/parser.c"
-+     break;
-+=20
-+   case 167: /* DictExpr: DictExpr '|' DictExpr  */
-+-#line 948 "src/parser.y"
-++#line 938 "src/parser.y"
-+                       {
-+   (yyval.blk) =3D block_join((yyvsp[-2].blk), (yyvsp[0].blk));
-+ }
-+-#line 3919 "src/parser.c"
-++#line 3909 "src/parser.c"
-+     break;
-+=20
-+   case 168: /* DictExpr: Expr  */
-+-#line 951 "src/parser.y"
-++#line 941 "src/parser.y"
-+      {
-+   (yyval.blk) =3D (yyvsp[0].blk);
-+ }
-+-#line 3927 "src/parser.c"
-++#line 3917 "src/parser.c"
-+     break;
-+=20
-+=20
-+-#line 3931 "src/parser.c"
-++#line 3921 "src/parser.c"
-+=20
-+       default: break;
-+     }
-+@@ -4156,7 +4146,7 @@ YYLTYPE yylloc =3D yyloc_default;
-+   return yyresult;
-+ }
-+=20
-+-#line 954 "src/parser.y"
-++#line 944 "src/parser.y"
-+=20
-+=20
-+ int jq_parse(struct locfile* locations, block* answer) {
-+diff --git a/src/parser.y b/src/parser.y
-+index 987a4ecaa3..ecd5796561 100644
-+--- a/src/parser.y
-++++ b/src/parser.y
-+@@ -439,26 +439,16 @@ ImportWhat Query ';' {
-+=20
-+ ImportWhat:
-+ "import" ImportFrom "as" BINDING {
-+-  jv v =3D block_const($2);
-+-  // XXX Make gen_import take only blocks and the int is_data so we
-+-  // don't have to free so much stuff here
-+-  $$ =3D gen_import(jv_string_value(v), jv_string_value($4), 1);
-++  $$ =3D gen_import(block_const($2), $4, 1);
-+   block_free($2);
-+-  jv_free($4);
-+-  jv_free(v);
-+ } |
-+ "import" ImportFrom "as" IDENT {
-+-  jv v =3D block_const($2);
-+-  $$ =3D gen_import(jv_string_value(v), jv_string_value($4), 0);
-++  $$ =3D gen_import(block_const($2), $4, 0);
-+   block_free($2);
-+-  jv_free($4);
-+-  jv_free(v);
-+ } |
-+ "include" ImportFrom {
-+-  jv v =3D block_const($2);
-+-  $$ =3D gen_import(jv_string_value(v), NULL, 0);
-++  $$ =3D gen_import(block_const($2), jv_invalid(), 0);
-+   block_free($2);
-+-  jv_free(v);
-+ }
-+=20
-+ ImportFrom:
-+diff --git a/tests/shtest b/tests/shtest
-+index 68705df255..fa972de870 100755
-+--- a/tests/shtest
-++++ b/tests/shtest
-+@@ -893,4 +893,21 @@ if echo '42' | $JQ -f "$d/nul_prog.jq" >/dev/null 2>/=
-dev/null; then
-+   exit 1
-+ fi
-+=20
-++# CVE-2026-43895: No NUL bytes in module/data import paths
-++printf 'import "a\\u0000b" as $x; .' > "$d/nul_import.jq"
-++if $JQ -nf "$d/nul_import.jq" >/dev/null 2>/dev/null; then
-++  printf 'Error expected for import path with NUL bytes\n' 1>&2
-++  exit 1
-++fi
-++printf 'include "a\\u0000b"; .' > "$d/nul_include.jq"
-++if $JQ -nf "$d/nul_include.jq" >/dev/null 2>/dev/null; then
-++  printf 'Error expected for include path with NUL bytes\n' 1>&2
-++  exit 1
-++fi
-++printf '"a\\u0000b" | modulemeta' > "$d/nul_modulemeta.jq"
-++if $JQ -nf "$d/nul_modulemeta.jq" >/dev/null 2>/dev/null; then
-++  printf 'Error expected for modulemeta with NUL bytes\n' 1>&2
-++  exit 1
-++fi
-++
-+ exit 0
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devt=
-ools/jq/jq_1.8.1.bb
-index 0e3e22c65b..c32efc5b88 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -21,6 +21,7 @@ SRC_URI =3D "git://github.com/jqlang/jq.git;protocol=3Dht=
-tps;branch=3Dmaster;tag=3Djq-${
-            file://CVE-2026-41256.patch \
-            file://CVE-2026-41257.patch \
-            file://CVE-2026-43894.patch \
-+           file://CVE-2026-43895.patch \
-            file://CVE-2026-43896.patch \
-            file://CVE-2026-44777.patch \
-            file://CVE-2026-49389.patch \
---=20
-2.43.0
+This is no longer true. This was true in an earlier version of the commit,
+but it now works using RUNPATH. Thus this sentence could be removed.
 
+=C3=89tienne
+
+
+
+On Mon, Jun 15, 2026 at 10:04=E2=80=AFAM Etienne Cordonnier via
+lists.openembedded.org <ecordonnier=3Dsnap.com@lists.openembedded.org> wrot=
+e:
+
+> Thanks for the fix Alex. My local build and testing is with
+> openembedded-core commit
+> https://git.openembedded.org/openembedded-core/commit/?id=3Db5c24e1491dcb=
+9ab0f782df6be6582fbd2151724
+> <https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__git.openembedded.=
+org_openembedded-2Dcore_commit_-3Fid-3Db5c24e1491dcb9ab0f782df6be6582fbd215=
+1724&d=3DDwMFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNon=
+VuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988c=
+xbRKIBcEphOgnCn3BaS-KW6x9pTx0g&s=3DCWeprpi7dtgNeP1I8HHF-ui7HJrmG-6bcrqLeuYc=
+Rhw&e=3D>
+>
+>
+> On Sat, Jun 13, 2026 at 9:33=E2=80=AFAM Alex Kiernan <alex.kiernan@gmail.=
+com>
+> wrote:
+>
+>> On Fri, Jun 12, 2026 at 4:33=E2=80=AFPM Etienne Cordonnier via
+>> lists.openembedded.org
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__lists.openembedde=
+d.org&d=3DDwMFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNo=
+nVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988=
+cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&s=3DPNr5HkvRX6VlmZPDFgBLr4yrLqs_0bfmi-6jkK2=
+p0NY&e=3D>
+>> <ecordonnier=3Dsnap.com@lists.openembedded.org>
+>> wrote:
+>> >
+>> > From: Etienne Cordonnier <ecordonnier@snap.com>
+>> >
+>> > Add a recipe shipping the BoringSSL shared libraries required by
+>> > android-tools-adbd. BoringSSL is the TLS/crypto library used by adbd
+>> > for ADB authentication.
+>> >
+>> > The libraries are installed under ${libdir}/android/ to avoid
+>> conflicting
+>> > with the system libcrypto/libssl in the sysroot. A SOVERSION=3D0 patch=
+ is
+>> > applied so Yocto's standard .so / .so.0 packaging split works correctl=
+y.
+>> > An ld.so.conf.d drop-in registers ${libdir}/android so binaries can fi=
+nd
+>> > the libraries at runtime.
+>> >
+>> > This recipe is tightly coupled to android-tools: update it together wh=
+en
+>> > upgrading android-tools to a new version.
+>> >
+>> > AI-Generated: Uses GitHub Copilot (Claude Sonnet 4.6)
+>> >
+>> > Signed-off-by: Mihajlo Marinkovic <mmarinkovic@snap.com>
+>> > Co-authored-by: Etienne Cordonnier <ecordonnier@snap.com>
+>> > ---
+>>
+>> Just sent this:
+>>
+>>
+>> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__patchwork.yoctopr=
+oject.org_project_oe_patch_20260613073026.529355-2D2-2Dalex.kiernan-40gmail=
+.com_&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNo=
+nVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3D0I9kcs3yTZeLi7TbI-G0bkjbrmVNpkpDZ=
+TF0qEOxbR6rOj9We36bB3auvx3yHUu8&s=3DSQmJGIsA5X3gdlStxI-8A4kfaK5CEr-sSH5aEWa=
+LMDQ&e=3D
+>>
+>> Which I needed to get it to build against current master OE-Core (at
+>> least I think that's what was the important dimension).
+>>
+>> >  ...ION-0-to-crypto-and-ssl-shared-libra.patch | 62 ++++++++++++++++
+>> >  .../android-libboringssl/boringssl-go-stub    | 22 ++++++
+>> >  .../boringssl-gtest-stub.cc                   |  1 +
+>> >  .../android-libboringssl_14.0.0+r45.bb
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&d=3DDwMFaQ=
+&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9Ts=
+Rih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn=
+3BaS-KW6x9pTx0g&s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&e=3D>
+>>       | 70 +++++++++++++++++++
+>> >  4 files changed, 155 insertions(+)
+>> >  create mode 100644
+>> meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/0001-=
+cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch
+>> >  create mode 100644
+>> meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/borin=
+gssl-go-stub
+>> >  create mode 100644
+>> meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/borin=
+gssl-gtest-stub.cc
+>> >  create mode 100644
+>> meta-oe/recipes-devtools/android-libboringssl/android-libboringssl_14.0.=
+0+
+>> r45.bb
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&d=3DDwMFaQ=
+&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9Ts=
+Rih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn=
+3BaS-KW6x9pTx0g&s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&e=3D>
+>> >
+>> > diff --git
+>> a/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/000=
+1-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/000=
+1-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch
+>> > new file mode 100644
+>> > index 0000000000..74ad93aa8d
+>> > --- /dev/null
+>> > +++
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/000=
+1-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch
+>> > @@ -0,0 +1,62 @@
+>> > +From 03a13ef3ea786286d9317562647e9856c1b71736 Mon Sep 17 00:00:00 200=
+1
+>> > +From: Etienne Cordonnier <ecordonnier@snap.com>
+>> > +Date: Thu, 11 Jun 2026 00:00:00 +0000
+>> > +Subject: [PATCH] cmake: add SOVERSION 0 to crypto and ssl shared
+>> libraries
+>> > +
+>> > +BoringSSL's CMakeLists.txt does not set SOVERSION, so the built share=
+d
+>> > +libraries have no SONAME embedded and cmake names them libcrypto.so /
+>> > +libssl.so without any version suffix.  This causes two problems in a
+>> > +Yocto build:
+>> > +
+>> > +1. The Yocto QA check "dev-so" rejects unversioned .so symlinks in
+>> > +   non-dev packages, but those symlinks are required at runtime becau=
+se
+>> > +   the DT_NEEDED entry in binaries that link against BoringSSL refers
+>> to
+>> > +   the bare libcrypto.so name.
+>> > +
+>> > +2. Standard Yocto FILES patterns split libraries by suffix: .so.* goe=
+s
+>> > +   into the runtime package and .so symlinks go into -dev.  Without a
+>> > +   SOVERSION these patterns do not apply correctly.
+>> > +
+>> > +Setting SOVERSION to 0 causes cmake to:
+>> > +  - build libcrypto.so.0 as the real ELF with SONAME=3Dlibcrypto.so.0
+>> > +  - create libcrypto.so as a development symlink
+>> > +
+>> > +Binaries linked with -l:libcrypto.so.0 (as android-tools does) will
+>> > +record DT_NEEDED=3Dlibcrypto.so.0 and resolve correctly at runtime.
+>> > +
+>> > +Upstream-Status: Inappropriate [OE-specific packaging requirement]
+>> > +Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+>> > +---
+>> > + crypto/CMakeLists.txt | 2 ++
+>> > + ssl/CMakeLists.txt    | 2 ++
+>> > + 2 files changed, 4 insertions(+)
+>> > +
+>> > +diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
+>> > +index cdb5ddc..fca86cc 100644
+>> > +--- a/crypto/CMakeLists.txt
+>> > ++++ b/crypto/CMakeLists.txt
+>> > +@@ -327,6 +327,8 @@ endif()
+>> > +
+>> > + set_target_properties(crypto PROPERTIES LINKER_LANGUAGE C)
+>> > +
+>> > ++set_target_properties(crypto PROPERTIES SOVERSION 0)
+>> > ++
+>> > + if(WIN32)
+>> > +   target_link_libraries(crypto ws2_32)
+>> > + endif()
+>> > +diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
+>> > +index d8d997e..e49b350 100644
+>> > +--- a/ssl/CMakeLists.txt
+>> > ++++ b/ssl/CMakeLists.txt
+>> > +@@ -46,6 +46,8 @@ install_if_enabled(TARGETS ssl EXPORT OpenSSLTarget=
+s
+>> ${INSTALL_DESTINATION_DEFAU
+>> > + set_property(TARGET ssl PROPERTY EXPORT_NAME SSL)
+>> > + target_link_libraries(ssl crypto)
+>> > +
+>> > ++set_target_properties(ssl PROPERTIES SOVERSION 0)
+>> > ++
+>> > + add_executable(
+>> > +   ssl_test
+>> > +
+>> > +--
+>> > +2.43.0
+>> > +
+>> > diff --git
+>> a/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-go-stub
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-go-stub
+>> > new file mode 100644
+>> > index 0000000000..de63f38c9c
+>> > --- /dev/null
+>> > +++
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-go-stub
+>> > @@ -0,0 +1,22 @@
+>> > +#!/bin/sh
+>> > +if [ "$1" =3D "run" ] && [ "$2" =3D "util/embed_test_data.go" ]; then
+>> > +    echo 'extern const int boringssl_dummy_crypto_test_data =3D 0;'
+>> > +    exit 0
+>> > +fi
+>> > +if [ "$1" =3D "run" ] && [ "$2" =3D "err_data_generate.go" ]; then
+>> > +    cat <<'EOF'
+>> > +#include <stddef.h>
+>> > +#include <stdint.h>
+>> > +
+>> > +const uint32_t kOpenSSLReasonValues[] =3D {0};
+>> > +const size_t kOpenSSLReasonValuesLen =3D 0;
+>> > +const char kOpenSSLReasonStringData[] =3D "";
+>> > +EOF
+>> > +    exit 0
+>> > +fi
+>> > +if [ "$1" =3D "version" ]; then
+>> > +    echo 'go version go0.0.0 yocto/stub'
+>> > +    exit 0
+>> > +fi
+>> > +echo "Unexpected Go invocation: $*" >&2
+>> > +exit 1
+>> > diff --git
+>> a/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-gtest-stub.cc
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-gtest-stub.cc
+>> > new file mode 100644
+>> > index 0000000000..7477536281
+>> > --- /dev/null
+>> > +++
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/bor=
+ingssl-gtest-stub.cc
+>> > @@ -0,0 +1 @@
+>> > +int boringssl_dummy_gtest_translation_unit =3D 0;
+>> > diff --git
+>> a/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl_14.=
+0.0+
+>> r45.bb
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&d=3DDwMFaQ=
+&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9Ts=
+Rih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn=
+3BaS-KW6x9pTx0g&s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&e=3D>
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl_14.=
+0.0+
+>> r45.bb
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&d=3DDwMFaQ=
+&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9Ts=
+Rih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn=
+3BaS-KW6x9pTx0g&s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&e=3D>
+>> > new file mode 100644
+>> > index 0000000000..fccf6e0dff
+>> > --- /dev/null
+>> > +++
+>> b/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl_14.=
+0.0+
+>> r45.bb
+>> <https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&d=3DDwMFaQ=
+&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9Ts=
+Rih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn=
+3BaS-KW6x9pTx0g&s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&e=3D>
+>> > @@ -0,0 +1,70 @@
+>> > +DESCRIPTION =3D "BoringSSL shared libraries for android-tools"
+>> > +SECTION =3D "libs"
+>> > +# This recipe is tightly coupled to android-tools: when upgrading
+>> android-tools,
+>> > +# update this recipe to the BoringSSL version shipped in the
+>> corresponding Debian
+>> > +# android-platform-tools source package.
+>> > +# BoringSSL is a fork of OpenSSL; new files carry ISC license, OpenSS=
+L
+>> license
+>> > +# covers the forked parts.
+>> > +LICENSE =3D "OpenSSL & ISC"
+>> > +LIC_FILES_CHKSUM =3D
+>> "file://LICENSE;md5=3D2ca501bc96ce9ed0814e2c592c3f9593"
+>> > +
+>> > +SRC_URI =3D " \
+>> > +
+>> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__deb.debian.org_de=
+bian_pool_main_a_android-2Dplatform-2Dexternal-2Dboringssl_android-2Dplatfo=
+rm-2Dexternal-2Dboringssl-5F-24-257BPV-257D.orig.tar.xz&d=3DDwIFaQ&c=3DncDT=
+mphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJT=
+KUkSGa66m67E&m=3D0I9kcs3yTZeLi7TbI-G0bkjbrmVNpkpDZTF0qEOxbR6rOj9We36bB3auvx=
+3yHUu8&s=3Dh9UIfZ9dc3gsp4QbhsGF_Rgdtn0WP9593DrpZPubTfQ&e=3D
+>> \
+>> > +    file://boringssl-go-stub \
+>> > +    file://boringssl-gtest-stub.cc \
+>> > +
+>> file://0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch \
+>> > +"
+>> > +SRC_URI[md5sum] =3D "83d24d2f3136ba6a486b5464369b91b4"
+>> > +SRC_URI[sha256sum] =3D
+>> "f9223e8c15ad5d9e3f1cd50861f4c272658864661e2332bea5d60952aa0930cd"
+>> > +
+>> > +# The Debian orig tarball unpacks to
+>> android-platform-external-boringssl-${PV}/
+>> > +# with the actual source under a src/ subdirectory.
+>> > +S =3D "${UNPACKDIR}/android-platform-external-boringssl-${PV}/src"
+>> > +
+>> > +inherit cmake
+>> > +
+>> > +CFLAGS:append =3D " -Wno-discarded-qualifiers"
+>> > +
+>> > +OECMAKE_TARGET_COMPILE =3D "crypto ssl"
+>> > +
+>> > +EXTRA_OECMAKE =3D " \
+>> > +    -DBUILD_SHARED_LIBS=3DON \
+>> > +    -DBUILD_TESTING=3DOFF \
+>> > +    -DCMAKE_BUILD_TYPE=3DRelWithDebInfo \
+>> > +    -DGO_EXECUTABLE=3D${WORKDIR}/hosttools/go \
+>> > +"
+>> > +
+>> > +do_configure:prepend() {
+>> > +    install -d ${WORKDIR}/hosttools
+>> > +    install -m 0755 ${UNPACKDIR}/boringssl-go-stub
+>> ${WORKDIR}/hosttools/go
+>> > +
+>> > +    # BoringSSL builds its own minimal gtest from
+>> third_party/googletest; provide
+>> > +    # an empty stub .cc. We only build the crypto and ssl targets so
+>> the test
+>> > +    # source files are never compiled, but cmake still needs
+>> gtest-all.cc to
+>> > +    # exist to create the boringssl_gtest target.
+>> > +    if [ ! -f ${S}/third_party/googletest/src/gtest-all.cc ]; then
+>> > +        install -d ${S}/third_party/googletest/src
+>> > +        install -m 0644 ${UNPACKDIR}/boringssl-gtest-stub.cc \
+>> > +            ${S}/third_party/googletest/src/gtest-all.cc
+>> > +    fi
+>> > +}
+>> > +do_install() {
+>> > +    # Install headers under a boringssl/ subdirectory to avoid
+>> shadowing the
+>> > +    # system OpenSSL headers in the sysroot.
+>> > +    install -d ${D}${includedir}/boringssl
+>> > +    cp -a ${S}/include/openssl ${D}${includedir}/boringssl/
+>> > +
+>> > +    # Install shared libraries under ${libdir}/android/ to avoid
+>> conflicting
+>> > +    # with the system libssl/libcrypto in the sysroot.
+>> > +    install -d ${D}${libdir}/android
+>> > +    install -m 0755 ${B}/crypto/libcrypto.so.0
+>> ${D}${libdir}/android/libcrypto.so.0
+>> > +    ln -sf libcrypto.so.0 ${D}${libdir}/android/libcrypto.so
+>> > +    install -m 0755 ${B}/ssl/libssl.so.0
+>> ${D}${libdir}/android/libssl.so.0
+>> > +    ln -sf libssl.so.0 ${D}${libdir}/android/libssl.so
+>> > +
+>> > +}
+>> > +
+>> > +FILES:${PN}-dev =3D "${includedir}/boringssl
+>> ${libdir}/android/libcrypto.so ${libdir}/android/libssl.so"
+>> > +FILES:${PN} =3D "${libdir}/android/libcrypto.so.0
+>> ${libdir}/android/libssl.so.0"
+>> > +
+>> > +BBCLASSEXTEND =3D "native"
+>> > --
+>> > 2.43.0
+>> >
+>> >
+>> >
+>> >
+>>
+>>
+>> --
+>> Alex Kiernan
+>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#127582):
+> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
+.org_g_openembedded-2Ddevel_message_127582&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0=
+hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&=
+m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&s=3DIk=
+a6LPC5Ewu7W4dcCp7zUHIFxID7vEvnSINx0aSq_Nc&e=3D
+> Mute This Topic:
+> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
+.org_mt_119775569_7048771&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC=
+2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Du2Cwo2K-ydtt9=
+_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&s=3Dx3dzROXs9l3ivtVjITt=
+ccKhEeGHQMmqW_AeWCJRbW0s&e=3D
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe:
+> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
+.org_g_openembedded-2Ddevel_unsub&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHv=
+abgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Du2Cwo=
+2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&s=3DOi6YeDRHLzP=
+c9yzQAk-ymFYP9zlP-Fx9wCxk9kFlnVg&e=3D
+> [ecordonnier@snap.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--0000000000001c876806545a6efc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<br>I&#39;ve noticed a small error in the commit messag=
+e:<br><br>&quot;=C2=A0 =C2=A0 An ld.so.conf.d drop-in registers ${libdir}/a=
+ndroid so binaries can find<br>=C2=A0 =C2=A0 the libraries at runtime.&quot=
+;<br><br>This is no longer true. This was true in an earlier version of the=
+ commit, but it now works using RUNPATH. Thus this sentence could be remove=
+d.<br><br>=C3=89tienne<br><br><br></div><br><div class=3D"gmail_quote gmail=
+_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 15, 202=
+6 at 10:04=E2=80=AFAM Etienne Cordonnier via <a href=3D"http://lists.openem=
+bedded.org">lists.openembedded.org</a> &lt;ecordonnier=3D<a href=3D"mailto:=
+snap.com@lists.openembedded.org">snap.com@lists.openembedded.org</a>&gt; wr=
+ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D=
+"ltr">Thanks for the fix Alex. My local build and testing is with openembed=
+ded-core=C2=A0commit=C2=A0<a href=3D"https://urldefense.proofpoint.com/v2/u=
+rl?u=3Dhttps-3A__git.openembedded.org_openembedded-2Dcore_commit_-3Fid-3Db5=
+c24e1491dcb9ab0f782df6be6582fbd2151724&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjI=
+DPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSG=
+a66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9=
+pTx0g&amp;s=3DCWeprpi7dtgNeP1I8HHF-ui7HJrmG-6bcrqLeuYcRhw&amp;e=3D" target=
+=3D"_blank">https://git.openembedded.org/openembedded-core/commit/?id=3Db5c=
+24e1491dcb9ab0f782df6be6582fbd2151724</a>=C2=A0</div><br><div class=3D"gmai=
+l_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Jun 13, 2026 at 9:33=
+=E2=80=AFAM Alex Kiernan &lt;<a href=3D"mailto:alex.kiernan@gmail.com" targ=
+et=3D"_blank">alex.kiernan@gmail.com</a>&gt; wrote:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">On Fri, Jun 12, 2026 at 4:33=E2=80=AFPM=
+ Etienne Cordonnier via<br>
+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__lists.open=
+embedded.org&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epck=
+fdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-yd=
+tt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DPNr5HkvRX6Vl=
+mZPDFgBLr4yrLqs_0bfmi-6jkK2p0NY&amp;e=3D" rel=3D"noreferrer" target=3D"_bla=
+nk">lists.openembedded.org</a> &lt;ecordonnier=3D<a href=3D"mailto:snap.com=
+@lists.openembedded.org" target=3D"_blank">snap.com@lists.openembedded.org<=
+/a>&gt;<br>
+wrote:<br>
+&gt;<br>
+&gt; From: Etienne Cordonnier &lt;<a href=3D"mailto:ecordonnier@snap.com" t=
+arget=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+&gt;<br>
+&gt; Add a recipe shipping the BoringSSL shared libraries required by<br>
+&gt; android-tools-adbd. BoringSSL is the TLS/crypto library used by adbd<b=
+r>
+&gt; for ADB authentication.<br>
+&gt;<br>
+&gt; The libraries are installed under ${libdir}/android/ to avoid conflict=
+ing<br>
+&gt; with the system libcrypto/libssl in the sysroot. A SOVERSION=3D0 patch=
+ is<br>
+&gt; applied so Yocto&#39;s standard .so / .so.0 packaging split works corr=
+ectly.<br>
+&gt; An ld.so.conf.d drop-in registers ${libdir}/android so binaries can fi=
+nd<br>
+&gt; the libraries at runtime.<br>
+&gt;<br>
+&gt; This recipe is tightly coupled to android-tools: update it together wh=
+en<br>
+&gt; upgrading android-tools to a new version.<br>
+&gt;<br>
+&gt; AI-Generated: Uses GitHub Copilot (Claude Sonnet 4.6)<br>
+&gt;<br>
+&gt; Signed-off-by: Mihajlo Marinkovic &lt;<a href=3D"mailto:mmarinkovic@sn=
+ap.com" target=3D"_blank">mmarinkovic@snap.com</a>&gt;<br>
+&gt; Co-authored-by: Etienne Cordonnier &lt;<a href=3D"mailto:ecordonnier@s=
+nap.com" target=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+&gt; ---<br>
+<br>
+Just sent this:<br>
+<br>
+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__patchwork=
+.yoctoproject.org_project_oe_patch_20260613073026.529355-2D2-2Dalex.kiernan=
+-40gmail.com_&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epc=
+kfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D0I9kcs3yT=
+ZeLi7TbI-G0bkjbrmVNpkpDZTF0qEOxbR6rOj9We36bB3auvx3yHUu8&amp;s=3DSQmJGIsA5X3=
+gdlStxI-8A4kfaK5CEr-sSH5aEWaLMDQ&amp;e=3D" rel=3D"noreferrer" target=3D"_bl=
+ank">https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__patchwork.yocto=
+project.org_project_oe_patch_20260613073026.529355-2D2-2Dalex.kiernan-40gma=
+il.com_&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&=
+amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D0I9kcs3yTZeLi7T=
+bI-G0bkjbrmVNpkpDZTF0qEOxbR6rOj9We36bB3auvx3yHUu8&amp;s=3DSQmJGIsA5X3gdlStx=
+I-8A4kfaK5CEr-sSH5aEWaLMDQ&amp;e=3D</a> <br>
+<br>
+Which I needed to get it to build against current master OE-Core (at<br>
+least I think that&#39;s what was the important dimension).<br>
+<br>
+&gt;=C2=A0 ...ION-0-to-crypto-and-ssl-shared-libra.patch | 62 +++++++++++++=
++++<br>
+&gt;=C2=A0 .../android-libboringssl/boringssl-go-stub=C2=A0 =C2=A0 | 22 +++=
++++<br>
+&gt;=C2=A0 .../boringssl-gtest-stub.cc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
+&gt;=C2=A0 .../android-libboringssl_14.0.0+<a href=3D"https://urldefense.pr=
+oofpoint.com/v2/url?u=3Dhttp-3A__r45.bb&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvj=
+IDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkS=
+Ga66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x=
+9pTx0g&amp;s=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&amp;e=3D" rel=3D=
+"noreferrer" target=3D"_blank">r45.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 70 +=
+++++++++++++++++++<br>
+&gt;=C2=A0 4 files changed, 155 insertions(+)<br>
+&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/android-libboringssl=
+/android-libboringssl/0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-l=
+ibra.patch<br>
+&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/android-libboringssl=
+/android-libboringssl/boringssl-go-stub<br>
+&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/android-libboringssl=
+/android-libboringssl/boringssl-gtest-stub.cc<br>
+&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/android-libboringssl=
+/android-libboringssl_14.0.0+<a href=3D"https://urldefense.proofpoint.com/v=
+2/url?u=3Dhttp-3A__r45.bb&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHv=
+abgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=
+=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=
+=3DclgsP3vNtvsca98l4igtjmm_-BhUhn4lDk3FL3rl37c&amp;e=3D" rel=3D"noreferrer"=
+ target=3D"_blank">r45.bb</a><br>
+&gt;<br>
+&gt; diff --git a/meta-oe/recipes-devtools/android-libboringssl/android-lib=
+boringssl/0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch b=
+/meta-oe/recipes-devtools/android-libboringssl/android-libboringssl/0001-cm=
+ake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch<br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..74ad93aa8d<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-devtools/android-libboringssl/android-libborings=
+sl/0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch<br>
+&gt; @@ -0,0 +1,62 @@<br>
+&gt; +From 03a13ef3ea786286d9317562647e9856c1b71736 Mon Sep 17 00:00:00 200=
+1<br>
+&gt; +From: Etienne Cordonnier &lt;<a href=3D"mailto:ecordonnier@snap.com" =
+target=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+&gt; +Date: Thu, 11 Jun 2026 00:00:00 +0000<br>
+&gt; +Subject: [PATCH] cmake: add SOVERSION 0 to crypto and ssl shared libr=
+aries<br>
+&gt; +<br>
+&gt; +BoringSSL&#39;s CMakeLists.txt does not set SOVERSION, so the built s=
+hared<br>
+&gt; +libraries have no SONAME embedded and cmake names them libcrypto.so /=
+<br>
+&gt; +libssl.so without any version suffix.=C2=A0 This causes two problems =
+in a<br>
+&gt; +Yocto build:<br>
+&gt; +<br>
+&gt; +1. The Yocto QA check &quot;dev-so&quot; rejects unversioned .so syml=
+inks in<br>
+&gt; +=C2=A0 =C2=A0non-dev packages, but those symlinks are required at run=
+time because<br>
+&gt; +=C2=A0 =C2=A0the DT_NEEDED entry in binaries that link against Boring=
+SSL refers to<br>
+&gt; +=C2=A0 =C2=A0the bare libcrypto.so name.<br>
+&gt; +<br>
+&gt; +2. Standard Yocto FILES patterns split libraries by suffix: .so.* goe=
+s<br>
+&gt; +=C2=A0 =C2=A0into the runtime package and .so symlinks go into -dev.=
+=C2=A0 Without a<br>
+&gt; +=C2=A0 =C2=A0SOVERSION these patterns do not apply correctly.<br>
+&gt; +<br>
+&gt; +Setting SOVERSION to 0 causes cmake to:<br>
+&gt; +=C2=A0 - build libcrypto.so.0 as the real ELF with SONAME=3Dlibcrypto=
+.so.0<br>
+&gt; +=C2=A0 - create libcrypto.so as a development symlink<br>
+&gt; +<br>
+&gt; +Binaries linked with -l:libcrypto.so.0 (as android-tools does) will<b=
+r>
+&gt; +record DT_NEEDED=3Dlibcrypto.so.0 and resolve correctly at runtime.<b=
+r>
+&gt; +<br>
+&gt; +Upstream-Status: Inappropriate [OE-specific packaging requirement]<br=
+>
+&gt; +Signed-off-by: Etienne Cordonnier &lt;<a href=3D"mailto:ecordonnier@s=
+nap.com" target=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+&gt; +---<br>
+&gt; + crypto/CMakeLists.txt | 2 ++<br>
+&gt; + ssl/CMakeLists.txt=C2=A0 =C2=A0 | 2 ++<br>
+&gt; + 2 files changed, 4 insertions(+)<br>
+&gt; +<br>
+&gt; +diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt<br>
+&gt; +index cdb5ddc..fca86cc 100644<br>
+&gt; +--- a/crypto/CMakeLists.txt<br>
+&gt; ++++ b/crypto/CMakeLists.txt<br>
+&gt; +@@ -327,6 +327,8 @@ endif()<br>
+&gt; +<br>
+&gt; + set_target_properties(crypto PROPERTIES LINKER_LANGUAGE C)<br>
+&gt; +<br>
+&gt; ++set_target_properties(crypto PROPERTIES SOVERSION 0)<br>
+&gt; ++<br>
+&gt; + if(WIN32)<br>
+&gt; +=C2=A0 =C2=A0target_link_libraries(crypto ws2_32)<br>
+&gt; + endif()<br>
+&gt; +diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt<br>
+&gt; +index d8d997e..e49b350 100644<br>
+&gt; +--- a/ssl/CMakeLists.txt<br>
+&gt; ++++ b/ssl/CMakeLists.txt<br>
+&gt; +@@ -46,6 +46,8 @@ install_if_enabled(TARGETS ssl EXPORT OpenSSLTarget=
+s ${INSTALL_DESTINATION_DEFAU<br>
+&gt; + set_property(TARGET ssl PROPERTY EXPORT_NAME SSL)<br>
+&gt; + target_link_libraries(ssl crypto)<br>
+&gt; +<br>
+&gt; ++set_target_properties(ssl PROPERTIES SOVERSION 0)<br>
+&gt; ++<br>
+&gt; + add_executable(<br>
+&gt; +=C2=A0 =C2=A0ssl_test<br>
+&gt; +<br>
+&gt; +--<br>
+&gt; +2.43.0<br>
+&gt; +<br>
+&gt; diff --git a/meta-oe/recipes-devtools/android-libboringssl/android-lib=
+boringssl/boringssl-go-stub b/meta-oe/recipes-devtools/android-libboringssl=
+/android-libboringssl/boringssl-go-stub<br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..de63f38c9c<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-devtools/android-libboringssl/android-libborings=
+sl/boringssl-go-stub<br>
+&gt; @@ -0,0 +1,22 @@<br>
+&gt; +#!/bin/sh<br>
+&gt; +if [ &quot;$1&quot; =3D &quot;run&quot; ] &amp;&amp; [ &quot;$2&quot;=
+ =3D &quot;util/embed_test_data.go&quot; ]; then<br>
+&gt; +=C2=A0 =C2=A0 echo &#39;extern const int boringssl_dummy_crypto_test_=
+data =3D 0;&#39;<br>
+&gt; +=C2=A0 =C2=A0 exit 0<br>
+&gt; +fi<br>
+&gt; +if [ &quot;$1&quot; =3D &quot;run&quot; ] &amp;&amp; [ &quot;$2&quot;=
+ =3D &quot;err_data_generate.go&quot; ]; then<br>
+&gt; +=C2=A0 =C2=A0 cat &lt;&lt;&#39;EOF&#39;<br>
+&gt; +#include &lt;stddef.h&gt;<br>
+&gt; +#include &lt;stdint.h&gt;<br>
+&gt; +<br>
+&gt; +const uint32_t kOpenSSLReasonValues[] =3D {0};<br>
+&gt; +const size_t kOpenSSLReasonValuesLen =3D 0;<br>
+&gt; +const char kOpenSSLReasonStringData[] =3D &quot;&quot;;<br>
+&gt; +EOF<br>
+&gt; +=C2=A0 =C2=A0 exit 0<br>
+&gt; +fi<br>
+&gt; +if [ &quot;$1&quot; =3D &quot;version&quot; ]; then<br>
+&gt; +=C2=A0 =C2=A0 echo &#39;go version go0.0.0 yocto/stub&#39;<br>
+&gt; +=C2=A0 =C2=A0 exit 0<br>
+&gt; +fi<br>
+&gt; +echo &quot;Unexpected Go invocation: $*&quot; &gt;&amp;2<br>
+&gt; +exit 1<br>
+&gt; diff --git a/meta-oe/recipes-devtools/android-libboringssl/android-lib=
+boringssl/boringssl-gtest-stub.cc b/meta-oe/recipes-devtools/android-libbor=
+ingssl/android-libboringssl/boringssl-gtest-stub.cc<br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..7477536281<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-devtools/android-libboringssl/android-libborings=
+sl/boringssl-gtest-stub.cc<br>
+&gt; @@ -0,0 +1 @@<br>
+&gt; +int boringssl_dummy_gtest_translation_unit =3D 0;<br>
+&gt; diff --git a/meta-oe/recipes-devtools/android-libboringssl/android-lib=
+boringssl_14.0.0+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dht=
+tp-3A__r45.bb&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epc=
+kfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-y=
+dtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DclgsP3vNtvs=
+ca98l4igtjmm_-BhUhn4lDk3FL3rl37c&amp;e=3D" rel=3D"noreferrer" target=3D"_bl=
+ank">r45.bb</a> b/meta-oe/recipes-devtools/android-libboringssl/android-lib=
+boringssl_14.0.0+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dht=
+tp-3A__r45.bb&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epc=
+kfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-y=
+dtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DclgsP3vNtvs=
+ca98l4igtjmm_-BhUhn4lDk3FL3rl37c&amp;e=3D" rel=3D"noreferrer" target=3D"_bl=
+ank">r45.bb</a><br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..fccf6e0dff<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-devtools/android-libboringssl/android-libborings=
+sl_14.0.0+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__=
+r45.bb&amp;d=3DDwMFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&a=
+mp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_Sh=
+hkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DclgsP3vNtvsca98l4i=
+gtjmm_-BhUhn4lDk3FL3rl37c&amp;e=3D" rel=3D"noreferrer" target=3D"_blank">r4=
+5.bb</a><br>
+&gt; @@ -0,0 +1,70 @@<br>
+&gt; +DESCRIPTION =3D &quot;BoringSSL shared libraries for android-tools&qu=
+ot;<br>
+&gt; +SECTION =3D &quot;libs&quot;<br>
+&gt; +# This recipe is tightly coupled to android-tools: when upgrading and=
+roid-tools,<br>
+&gt; +# update this recipe to the BoringSSL version shipped in the correspo=
+nding Debian<br>
+&gt; +# android-platform-tools source package.<br>
+&gt; +# BoringSSL is a fork of OpenSSL; new files carry ISC license, OpenSS=
+L license<br>
+&gt; +# covers the forked parts.<br>
+&gt; +LICENSE =3D &quot;OpenSSL &amp; ISC&quot;<br>
+&gt; +LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2ca501bc96ce9ed0814e2=
+c592c3f9593&quot;<br>
+&gt; +<br>
+&gt; +SRC_URI =3D &quot; \<br>
+&gt; +=C2=A0 =C2=A0 <a href=3D"https://urldefense.proofpoint.com/v2/url?u=
+=3Dhttps-3A__deb.debian.org_debian_pool_main_a_android-2Dplatform-2Dexterna=
+l-2Dboringssl_android-2Dplatform-2Dexternal-2Dboringssl-5F-24-257BPV-257D.o=
+rig.tar.xz&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfd=
+iw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D0I9kcs3yTZeL=
+i7TbI-G0bkjbrmVNpkpDZTF0qEOxbR6rOj9We36bB3auvx3yHUu8&amp;s=3Dh9UIfZ9dc3gsp4=
+QbhsGF_Rgdtn0WP9593DrpZPubTfQ&amp;e=3D" rel=3D"noreferrer" target=3D"_blank=
+">https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__deb.debian.org_deb=
+ian_pool_main_a_android-2Dplatform-2Dexternal-2Dboringssl_android-2Dplatfor=
+m-2Dexternal-2Dboringssl-5F-24-257BPV-257D.orig.tar.xz&amp;d=3DDwIFaQ&amp;c=
+=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9=
+TsRih1DULJTKUkSGa66m67E&amp;m=3D0I9kcs3yTZeLi7TbI-G0bkjbrmVNpkpDZTF0qEOxbR6=
+rOj9We36bB3auvx3yHUu8&amp;s=3Dh9UIfZ9dc3gsp4QbhsGF_Rgdtn0WP9593DrpZPubTfQ&a=
+mp;e=3D</a>=C2=A0 \<br>
+&gt; +=C2=A0 =C2=A0 file://boringssl-go-stub \<br>
+&gt; +=C2=A0 =C2=A0 file://boringssl-gtest-stub.cc \<br>
+&gt; +=C2=A0 =C2=A0 file://0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-sha=
+red-libra.patch \<br>
+&gt; +&quot;<br>
+&gt; +SRC_URI[md5sum] =3D &quot;83d24d2f3136ba6a486b5464369b91b4&quot;<br>
+&gt; +SRC_URI[sha256sum] =3D &quot;f9223e8c15ad5d9e3f1cd50861f4c27265886466=
+1e2332bea5d60952aa0930cd&quot;<br>
+&gt; +<br>
+&gt; +# The Debian orig tarball unpacks to android-platform-external-boring=
+ssl-${PV}/<br>
+&gt; +# with the actual source under a src/ subdirectory.<br>
+&gt; +S =3D &quot;${UNPACKDIR}/android-platform-external-boringssl-${PV}/sr=
+c&quot;<br>
+&gt; +<br>
+&gt; +inherit cmake<br>
+&gt; +<br>
+&gt; +CFLAGS:append =3D &quot; -Wno-discarded-qualifiers&quot;<br>
+&gt; +<br>
+&gt; +OECMAKE_TARGET_COMPILE =3D &quot;crypto ssl&quot;<br>
+&gt; +<br>
+&gt; +EXTRA_OECMAKE =3D &quot; \<br>
+&gt; +=C2=A0 =C2=A0 -DBUILD_SHARED_LIBS=3DON \<br>
+&gt; +=C2=A0 =C2=A0 -DBUILD_TESTING=3DOFF \<br>
+&gt; +=C2=A0 =C2=A0 -DCMAKE_BUILD_TYPE=3DRelWithDebInfo \<br>
+&gt; +=C2=A0 =C2=A0 -DGO_EXECUTABLE=3D${WORKDIR}/hosttools/go \<br>
+&gt; +&quot;<br>
+&gt; +<br>
+&gt; +do_configure:prepend() {<br>
+&gt; +=C2=A0 =C2=A0 install -d ${WORKDIR}/hosttools<br>
+&gt; +=C2=A0 =C2=A0 install -m 0755 ${UNPACKDIR}/boringssl-go-stub ${WORKDI=
+R}/hosttools/go<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 # BoringSSL builds its own minimal gtest from third_par=
+ty/googletest; provide<br>
+&gt; +=C2=A0 =C2=A0 # an empty stub .cc. We only build the crypto and ssl t=
+argets so the test<br>
+&gt; +=C2=A0 =C2=A0 # source files are never compiled, but cmake still need=
+s gtest-all.cc to<br>
+&gt; +=C2=A0 =C2=A0 # exist to create the boringssl_gtest target.<br>
+&gt; +=C2=A0 =C2=A0 if [ ! -f ${S}/third_party/googletest/src/gtest-all.cc =
+]; then<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -d ${S}/third_party/googletest/sr=
+c<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0644 ${UNPACKDIR}/boringssl-gt=
+est-stub.cc \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${S}/third_party/googletest=
+/src/gtest-all.cc<br>
+&gt; +=C2=A0 =C2=A0 fi<br>
+&gt; +}<br>
+&gt; +do_install() {<br>
+&gt; +=C2=A0 =C2=A0 # Install headers under a boringssl/ subdirectory to av=
+oid shadowing the<br>
+&gt; +=C2=A0 =C2=A0 # system OpenSSL headers in the sysroot.<br>
+&gt; +=C2=A0 =C2=A0 install -d ${D}${includedir}/boringssl<br>
+&gt; +=C2=A0 =C2=A0 cp -a ${S}/include/openssl ${D}${includedir}/boringssl/=
+<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 # Install shared libraries under ${libdir}/android/ to =
+avoid conflicting<br>
+&gt; +=C2=A0 =C2=A0 # with the system libssl/libcrypto in the sysroot.<br>
+&gt; +=C2=A0 =C2=A0 install -d ${D}${libdir}/android<br>
+&gt; +=C2=A0 =C2=A0 install -m 0755 ${B}/crypto/libcrypto.so.0 ${D}${libdir=
+}/android/libcrypto.so.0<br>
+&gt; +=C2=A0 =C2=A0 ln -sf libcrypto.so.0 ${D}${libdir}/android/libcrypto.s=
+o<br>
+&gt; +=C2=A0 =C2=A0 install -m 0755 ${B}/ssl/libssl.so.0 ${D}${libdir}/andr=
+oid/libssl.so.0<br>
+&gt; +=C2=A0 =C2=A0 ln -sf libssl.so.0 ${D}${libdir}/android/libssl.so<br>
+&gt; +<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +FILES:${PN}-dev =3D &quot;${includedir}/boringssl ${libdir}/android/l=
+ibcrypto.so ${libdir}/android/libssl.so&quot;<br>
+&gt; +FILES:${PN} =3D &quot;${libdir}/android/libcrypto.so.0 ${libdir}/andr=
+oid/libssl.so.0&quot;<br>
+&gt; +<br>
+&gt; +BBCLASSEXTEND =3D &quot;native&quot;<br>
+&gt; --<br>
+&gt; 2.43.0<br>
+&gt;<br>
+&gt;<br>
+&gt; <br>
+&gt;<br>
+<br>
+<br>
+-- <br>
+Alex Kiernan<br>
+</blockquote></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#127582): <a href=3D"https://urldefense.proofpoint.com/v=
+2/url?u=3Dhttps-3A__lists.openembedded.org_g_openembedded-2Ddevel_message_1=
+27582&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&am=
+p;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_Shh=
+kiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DIka6LPC5Ewu7W4dcCp7=
+zUHIFxID7vEvnSINx0aSq_Nc&amp;e=3D" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded.org_=
+g_openembedded-2Ddevel_message_127582&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjID=
+Ph0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa=
+66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9p=
+Tx0g&amp;s=3DIka6LPC5Ewu7W4dcCp7zUHIFxID7vEvnSINx0aSq_Nc&amp;e=3D</a> <br>
+Mute This Topic: <a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dht=
+tps-3A__lists.openembedded.org_mt_119775569_7048771&amp;d=3DDwIFaQ&amp;c=3D=
+ncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsR=
+ih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcEphOg=
+nCn3BaS-KW6x9pTx0g&amp;s=3Dx3dzROXs9l3ivtVjITtccKhEeGHQMmqW_AeWCJRbW0s&amp;=
+e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofpoint.co=
+m/v2/url?u=3Dhttps-3A__lists.openembedded.org_mt_119775569_7048771&amp;d=3D=
+DwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonV=
+uMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu9=
+88cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3Dx3dzROXs9l3ivtVjITtccKhEeGHQMmqW_=
+AeWCJRbW0s&amp;e=3D</a> <br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttps-=
+3A__lists.openembedded.org_g_openembedded-2Ddevel_unsub&amp;d=3DDwIFaQ&amp;=
+c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj=
+9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_ShhkiUH91O8cYqbu988cxbRKIBcE=
+phOgnCn3BaS-KW6x9pTx0g&amp;s=3DOi6YeDRHLzPc9yzQAk-ymFYP9zlP-Fx9wCxk9kFlnVg&=
+amp;e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofpoin=
+t.com/v2/url?u=3Dhttps-3A__lists.openembedded.org_g_openembedded-2Ddevel_un=
+sub&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;=
+r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Du2Cwo2K-ydtt9_Shhki=
+UH91O8cYqbu988cxbRKIBcEphOgnCn3BaS-KW6x9pTx0g&amp;s=3DOi6YeDRHLzPc9yzQAk-ym=
+FYP9zlP-Fx9wCxk9kFlnVg&amp;e=3D</a>=C2=A0 [<a href=3D"mailto:ecordonnier@sn=
+ap.com" target=3D"_blank">ecordonnier@snap.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--0000000000001c876806545a6efc--
 
