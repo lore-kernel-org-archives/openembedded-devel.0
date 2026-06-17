@@ -1,106 +1,130 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BFD8CD98E2
-	for <webhook@archiver.kernel.org>; Wed, 17 Jun 2026 09:28:33 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11590.1781688503267800393
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D712CD98E4
+	for <webhook@archiver.kernel.org>; Wed, 17 Jun 2026 12:27:53 +0000 (UTC)
+Received: from outbound1.mail.transip.nl (outbound1.mail.transip.nl [149.210.149.72])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13843.1781698017577094640
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2026 02:28:23 -0700
+ Wed, 17 Jun 2026 05:06:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=bfEx5wAu;
- spf=pass (domain: konsulko.com, ip: 209.85.128.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-490b4a8e28bso41516815e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2026 02:28:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1781688501; x=1782293301; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cUz2q48lhTYCpluz8bHRPx5U898cqO5ELdkov8aDrbg=;
-        b=bfEx5wAuRrPlvAcos0aJVYxPqWy8GF0U4slVyQTpN6dTRIal6Ky2kqrbvBl0DW1zM5
-         yhAAZ9RHybTI+ekUf600bhOcWB7+g3DYuuyxJbHUrLfjzUPKHMo/0W6FIrtEHdHsyBmr
-         D4cW/BcQHx9HaTdmw2ELxFuACopmv4zIUB5iY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781688501; x=1782293301;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cUz2q48lhTYCpluz8bHRPx5U898cqO5ELdkov8aDrbg=;
-        b=E2oprfPGwgi9+LG3PVsCWR6jQJvWaEb2RZ2J6pSwe4mtDbkEktVR061bFZAwAEV1UL
-         uROJYx8OxJwlx+drENtu93kOKwcCU+NmPlCl8CqT1YS+alvkqjzUnYeuwkBoI/97hH0C
-         VTszFwI9TkmqlJOP5VxWG6KelGd33Z/DkZXtgcMDHqjuUjxeSW8AB6iCPgkj/Nh3OZMf
-         8ozTVrvtjyjJjj1lraO5B2igJSB1c4o2MBtg8dSo5ZFuNBMc1wUMHOJZiu6o6zqvIUEW
-         Q+VIJQYHRuqco2ihA+TAgGiJY6p9KfStqu17DF/YNAkGdGKvn+134LQiq4bC6bUuYgCG
-         SHnQ==
-X-Gm-Message-State: AOJu0YzurX3rlm81b9nFGxO7TQtHi1pof0sCrVXyzNKLxBmJH82X3Q+z
-	86wwkBEWUklyuAmXlYheLHol2QKeDedZc+M89tRN451JXuc72RkQcy3PZS5tDh+se6b0bCajYe6
-	XMyeE
-X-Gm-Gg: Acq92OH8rg8wQDXHAZvnLlNhjpB9TDmDQ8DQi9Em2iqol8MhDNNhpqh7LcWn/i3NNyG
-	uaW1AXC4woEj6qi5WlCk2mnkSNaq2iXuYoduTaAo8+r1C03IzPRm4svu9FGYc18brZEkPGxjTFB
-	OTtvMEIvoKg8pS5lpoo4kVV8SB8r99zXxw//fTrUS35kzXhGDftaEWcDqbPcneW9+MXdk/3B0ci
-	YSkfzCBPD8blW5vN54dczFukY7ifiUR6kJifsResLR9acrRzPgVWB+TgtgR36g5li+JpojuxB/H
-	PHGWT7lC9rL8Cazpb+jARXOx88ZPTlLHIaywwpcx4yPxAGv8/dqUzNu4w1deqt1f9r+lOp739yj
-	Moc84dkWlh3wd+pNibhhaSbH/eladtKtMlsZP+NmZ23SP8YCB69F1vFu3tDWcjnDVcxA+STVCaO
-	CZKu5ZpIo0592QopdG2zX7E/qXkg==
-X-Received: by 2002:a05:600c:840f:b0:491:8043:5c4a with SMTP id 5b1f17b1804b1-49233428690mr51024735e9.31.1781688501175;
-        Wed, 17 Jun 2026 02:28:21 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49230a4601esm154647225e9.1.2026.06.17.02.28.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jun 2026 02:28:20 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=WqStNL14;
+ spf=pass (domain: myspectrum.nl, ip: 149.210.149.72, mailfrom: jeroen@myspectrum.nl)
+Received: from submission14.mail.transip.nl (unknown [10.103.8.165])
+	by outbound1.mail.transip.nl (Postfix) with ESMTP id 4ggMzL6W1HzRxDr;
+	Wed, 17 Jun 2026 14:06:54 +0200 (CEST)
+Received: from yellow.myspectrum.nl (unknown [IPv6:2a01:7c8:bb0c:45:5054:ff:fe01:854])
+	by submission14.mail.transip.nl (Postfix) with ESMTPSA id 4ggMzK15XGz3RgQtv;
+	Wed, 17 Jun 2026 14:06:53 +0200 (CEST)
+Received: from yellow.myspectrum.nl (212-204-162-136.cable.dynamic.v4.ziggo.nl [212.204.162.136])
+	(Authenticated sender: sendmail@myspectrum.nl)
+	by yellow.myspectrum.nl (Postfix) with ESMTPSA id C73072017F;
+	Wed, 17 Jun 2026 12:06:51 +0000 (UTC)
+Authentication-Results: yellow.myspectrum.nl;
+	auth=pass smtp.auth=sendmail@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
+Received: by yellow.myspectrum.nl (sSMTP sendmail emulation); Wed, 17 Jun 2026 14:06:50 +0200
+From: "Jeroen Hofstee" <jeroen@myspectrum.nl>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-bumble: Upgrade 0.0.228 -> 0.0.230
-Date: Wed, 17 Jun 2026 12:28:15 +0300
-Message-ID: <20260617092817.4090239-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+Cc: Jeroen Hofstee <jhofstee@victronenergy.com>,
+	Jason Schonberg <schonm@gmail.com>,
+	Alexander Kanavin <alex@linutronix.de>,
+	Gyorgy Sarvari <skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: native: avoid target-specific signatures
+Date: Wed, 17 Jun 2026 14:06:40 +0200
+Message-ID: <20260617120644.2169686-1-jeroen@myspectrum.nl>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Scanned-By: ClueGetter at submission14.mail.transip.nl
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=transip-a; d=myspectrum.nl; t=1781698013; h=from:subject:to:cc:date:
+ mime-version; bh=jrxEhcBvMSxzj+ZkTDPb/bGIKv4agfV7Uqxv9sMJceo=;
+ b=WqStNL14zwy2utzkGw/tLrFdlTtGczP3Logw1r2iSXh/7o3e2D/WZpoMqc1bR0bQ89or9D
+ 15yRVT88UbkX4ZIYlIR2n+aHYXHgkuhqfIMBc2XJcmbh5Uc7JT3vJ29ZWrY9b6VWQ/lWXe
+ FY2jFAtRoTzwN8kdEXhcAFumEBD+kL3pGWCHg6cWW+u9TQduEbuMCweHfcKvgyUp+nAjIQ
+ qFeM2dwyGo5yOAhH+mjZ0H6hQEKQGs2d3AnKuLtG+kfNOJ8HM4Mrau2NdDnKOjPBC2CJn6
+ HMOU9LD9UfZRJn0TLvZo6QrLAkjjfPGnXOe0hHVPtPxg+cKSqNlKspwB1QtlLw==
+X-Report-Abuse-To: abuse@transip.nl
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2026 09:28:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127655
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2026 12:27:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127658
 
-Upgrade to release 0.0.230:
+From: Jeroen Hofstee <jhofstee@victronenergy.com>
 
-- add basic support for SCO packets over USB
-- fix(usb): support LE ISO data over Bulk endpoints
-- usb transport packet splitter
+The do_create_v8_qemu_wrapper function depends on target information,
+which ends up in the task signature, but the qemu wrapper isn't needed
+for native builds. This causes unnecessary rebuilds of nodejs-native.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Delete the task for nodejs-native and don't install the wrapper script
+for it.
+
+This issue was previously addressed by b2a950a ("nodejs: inherit qemu
+class conditionally"), which was later reverted. This patch addresses
+it by removing the unused task from native builds instead of inheriting
+qemu conditionally.
+
+Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
 ---
- .../{python3-bumble_0.0.228.bb => python3-bumble_0.0.230.bb}   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bumble_0.0.228.bb => python3-bumble_0.0.230.bb} (88%)
+To reproduce:
 
-diff --git a/meta-python/recipes-devtools/python/python3-bumble_0.0.228.bb b/meta-python/recipes-devtools/python/python3-bumble_0.0.230.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-bumble_0.0.228.bb
-rename to meta-python/recipes-devtools/python/python3-bumble_0.0.230.bb
-index aa011258f8..a42478f9a0 100644
---- a/meta-python/recipes-devtools/python/python3-bumble_0.0.228.bb
-+++ b/meta-python/recipes-devtools/python/python3-bumble_0.0.230.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/bumble"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7a775f1b11285b6abedd76748d176125"
- 
--SRC_URI[sha256sum] = "78fb156548dd738a28ecba539e7aaa138117516a8811482e9801bcd35a4fbbbd"
-+SRC_URI[sha256sum] = "1064d45e8370fc2b1bb684c0efd59534407ea16c3a2811985ed50a886fa3b674"
- 
- inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
-@@ -25,6 +25,7 @@ RDEPENDS:${PN} += "\
- 	python3-pyserial-asyncio \
- 	python3-pyusb \
- 	python3-websockets \
-+        python3-libusb1 \
- "
- RDEPENDS:${PN}-ptest += "\
- 	python3-pytest-asyncio \
--- 
-2.47.3
+Before the patch:
+Start with a clean TMPDIR.
+Build nodejs-native for one target architecture.
+Build nodejs-native for a different target architecture.
+nodejs-native will be rebuilt or restaged.
+
+After the patch:
+Building for a different target architecture no longer triggers
+a rebuild or restaging of nodejs-native because the native build
+is no longer target-specific.
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_24.16.0.bb | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.16.0.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_24.16.0.bb
+index ff40a09656..89f32f2063 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_24.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.16.0.bb
+@@ -150,9 +150,12 @@ do_configure () {
+                ${PACKAGECONFIG_CONFARGS}
+ }
+=20
++do_compile:prepend:class-target() {
++    install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.=
+sh
++}
++
+ do_compile () {
+     install -D ${RECIPE_SYSROOT_NATIVE}/etc/ssl/openssl.cnf ${B}/deps/op=
+enssl/nodejs-openssl.cnf
+-    install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.=
+sh
+     oe_runmake BUILDTYPE=3DRelease
+ }
+=20
+@@ -199,6 +202,13 @@ python set_gyp_variables () {
+ }
+=20
+ python __anonymous () {
++    # do_create_v8_qemu_wrapper is not needed for the native build, so m=
+ake sure it
++    # gets deleted otherwise target info ends up in its signature making=
+ the native
++    # build target specific.
++    if bb.data.inherits_class('native', d):
++        bb.build.deltask('do_create_v8_qemu_wrapper', d)
++        return
++
+     # 32 bit target and 64 bit host (x86-64 or aarch64) have different b=
+it width
+     if d.getVar("SITEINFO_BITS") =3D=3D "32" and "64" in d.getVar("BUILD=
+_ARCH"):
+         d.setVar("HOST_AND_TARGET_SAME_WIDTH", "0")
+--=20
+2.43.0
 
 
