@@ -2,40 +2,40 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE7ACCD98EE
-	for <webhook@archiver.kernel.org>; Wed, 17 Jun 2026 06:13:58 +0000 (UTC)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.71])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9048.1781674250728004182
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A943DCD98E2
+	for <webhook@archiver.kernel.org>; Wed, 17 Jun 2026 06:14:08 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.64])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9050.1781674251731018729
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jun 2026 22:30:51 -0700
+ Tue, 16 Jun 2026 22:30:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=KA6GZs9E;
- spf=pass (domain: axis.com, ip: 52.101.84.71, mailfrom: anton.skorup@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=QtlLQKfW;
+ spf=pass (domain: axis.com, ip: 52.101.65.64, mailfrom: anton.skorup@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aTYQAcAaGzeZtNrvXXagIV3Xk0AiDRJNXO+QaqwVoGjGViluNPbC5CZV/72PuhdLvhshIzEEfdO/Pb76J/eU1QBMebtaVCqWmS6RA47ctVlsT6nfnWPD1gDlYbJkJ6j8kT8oboaiUfzRDaJL3Uq3RfhZFeTdcRFSmdwbNLSJTtcyzhJ+Fon2vlu7M4xlrxFgfZOdicg1rhsIIS9KOscqMoYT87YiT1RGxYhiOWVeTug46akm6SrYYg/jIEEZTySKWABTHN4HY9zi14UcLkJDStzhMsfx/FWpUZb956MCaNL1jmXhHfF+EW1Uav4Bw20Fr5HZTezTk0H0dV691t/rsw==
+ b=OWkiefXdx7eCaZ2ZqaQsmy4MjFpCcKG5xZ7nxbxyJg462IjKYDIbZK5x+N4YV7m6mX7YndYj8FeFVVqODoTFwXAarPHfIF6aIevBHLDUdfgsWuaPv0OH7iXDIetPVPK435Xms1smj3G791wO33Z+5Bs6RwFwAv4rFBvI5gtFhz1ztlB6S/4BE19YrW2ZyGQj9Nt1HMrzTbeTfs3K+B6jnK4o7+EAc62X1DhDviy/1OpgmDIAQm6/3NODQzpBVsVHVLOLokoVaVXkOERg60kXa/potFHOYNOC8PpepAcX0MyI0snnAtJ3jQJjXy9x6ULlzBIMn4MIGvi7Bkn691AoXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BRqLzmSZr/eOi1s2oWy4jJAriqUS6lE/YMWIic8bQYs=;
- b=wGUezLpTjh3l67qpqpyLgngXEJI4iNQbZ9X2sDi+AN+DfK3TogaXKmSKb5HHTchyosLCOrKnPWprovjlzAYWgo9YFWN7/fnXcTWoIKqZ4I3m0shjHlC+w0jA/Edv7rMZOxkM9D4ep7iKMnng0nX3U5d3nnCYKAFwVSJMDBrvSh5GT0HzUI2pNhS6tlTPVtLlGE59kgSZ8kkNzTnKiVdWLs826C8EaKVm3leQtHR/RFzUQbFL5IbMWMfDbNT/fFuptuE+4s4Q41zmrI/SP0GKwhJmIJ0cylHYiMGvdNQxyIRfwDg1G/cLWk0CrxRlDLI1dLEMrQsUkNl8VD1JMRy7uw==
+ bh=Te6njP09JnzNU9y7kzVeikD3LfudAhnLMghjsJ8xkZ0=;
+ b=e1i3iGWRYXht1yipQ67NowcYVtGmESB0x+MXgguuQbywABo/BE3Hmn2DSVv406nLU0kGy1ObJEDFe3tGrK3SDzBLoH1KFEFfIorxDyn/oLhcaPraUGfcSXv6NnaF6UU4Y4E/zEO2QBEYKfay6KZOnOEPOSo704oQ91HJ6bVzTfObkWOaubU5UhnAX2Af13J8e3CNu5wOUwbHHCgAUG+fjBZ76FEF1pN878cgu1cifjXYDtMBz0XUL52QlrWi6JYUCOnbEohTeXvitkOGg3X9TJQjQ5Kfrbwo0PcyC2P3plelYs2WESfJtktBc3Uz29UXXdi3OzZS+8d6n7CSUBJ5KQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
  header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BRqLzmSZr/eOi1s2oWy4jJAriqUS6lE/YMWIic8bQYs=;
- b=KA6GZs9E+Lp3MzcHarurCacZkJqEmGuzcFCuA66yQARjlUH+hrK50L+0a63fl2mG+sHhEwEvTzZ4HvBbHPY++NnuIMxEHaYZ/zfqYwrNSqSD7epZDmBYdbH2LXK9CCaUZPCFuC+5Ejq+XRAhRCoceD+0feNrNRtTHyaDHyCphng=
-Received: from DU2P251CA0001.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:230::12)
- by AM9PR02MB7060.eurprd02.prod.outlook.com (2603:10a6:20b:272::6) with
+ bh=Te6njP09JnzNU9y7kzVeikD3LfudAhnLMghjsJ8xkZ0=;
+ b=QtlLQKfW6uruNXBtcf0dbPv08Cuzy94frknoX6mIKXK9cYlDmkJzGshsDuW9BMWJLs9CzS7JYoy7pTnukmXwfOu3Zkm0H1LltzAfSp/7uMdKDpOX9eCfxqKNklDrkfscdebUTKAYH+LdJTVtZqmrkGipgV2QU+VD5Ed0JPsvMtI=
+Received: from DB8PR04CA0025.eurprd04.prod.outlook.com (2603:10a6:10:110::35)
+ by AS8PR02MB10202.eurprd02.prod.outlook.com (2603:10a6:20b:63f::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Wed, 17 Jun
- 2026 05:30:44 +0000
-Received: from DB1PEPF000509E2.eurprd03.prod.outlook.com
- (2603:10a6:10:230:cafe::74) by DU2P251CA0001.outlook.office365.com
- (2603:10a6:10:230::12) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 05:30:46 +0000
+Received: from DB1PEPF000509E9.eurprd03.prod.outlook.com
+ (2603:10a6:10:110:cafe::1c) by DB8PR04CA0025.outlook.office365.com
+ (2603:10a6:10:110::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Wed,
- 17 Jun 2026 05:30:44 +0000
+ 17 Jun 2026 05:30:46 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
  smtp.mailfrom=axis.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=axis.com;
@@ -43,358 +43,155 @@ Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
  195.60.68.100 as permitted sender) receiver=protection.outlook.com;
  client-ip=195.60.68.100; helo=mail.axis.com; pr=C
 Received: from mail.axis.com (195.60.68.100) by
- DB1PEPF000509E2.mail.protection.outlook.com (10.167.242.52) with Microsoft
+ DB1PEPF000509E9.mail.protection.outlook.com (10.167.242.59) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Wed, 17 Jun 2026 05:30:44 +0000
+ 15.21.71.7 via Frontend Transport; Wed, 17 Jun 2026 05:30:46 +0000
 Received: from se-mail10w.axis.com (10.20.40.10) by se-mail10w.axis.com
  (10.20.40.10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.39; Wed, 17 Jun
- 2026 07:30:44 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail10w.axis.com
+ 2026 07:30:45 +0200
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail10w.axis.com
  (10.20.40.10) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
- Transport; Wed, 17 Jun 2026 07:30:44 +0200
+ Transport; Wed, 17 Jun 2026 07:30:45 +0200
 Received: from pc62260-2523.se.axis.com (pc62260-2523.se.axis.com [10.92.71.7])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 270952ACF;
-	Wed, 17 Jun 2026 07:30:44 +0200 (CEST)
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id A8C72551;
+	Wed, 17 Jun 2026 07:30:45 +0200 (CEST)
 Received: by pc62260-2523.se.axis.com (Postfix, from userid 19544)
-	id 2219F8461E6; Wed, 17 Jun 2026 07:30:44 +0200 (CEST)
+	id A77068461E6; Wed, 17 Jun 2026 07:30:45 +0200 (CEST)
 From: Anton Skorup <antonsk@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Anton Skorup <anton@skorup.se>, Anton Skorup <anton.skorup@axis.com>
-Subject: [meta-oe][PATCHv2 3/8] jq: patch CVE-2026-44777
-Date: Wed, 17 Jun 2026 07:30:35 +0200
-Message-ID: <20260617053040.990143-3-antonsk@axis.com>
+Subject: [meta-oe][PATCHv2 5/8] jq: patch CVE-2026-41257
+Date: Wed, 17 Jun 2026 07:30:37 +0200
+Message-ID: <20260617053040.990143-5-antonsk@axis.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260617053040.990143-1-antonsk@axis.com>
 References: <20260617053040.990143-1-antonsk@axis.com>
 MIME-Version: 1.0
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E2:EE_|AM9PR02MB7060:EE_
-X-MS-Office365-Filtering-Correlation-Id: c235f109-4f03-499a-60d9-08decc31943d
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509E9:EE_|AS8PR02MB10202:EE_
+X-MS-Office365-Filtering-Correlation-Id: 28b90d3f-f770-4465-7c31-08decc319525
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700016|23010399003|376014|1800799024|56012099006|11063799006|6133799003|3023799007|18002099003|22082099003|13003099007;
+	BCL:0;ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|56012099006|11063799006|22082099003|18002099003|3023799007|6133799003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	PazuteOBt/EsTECVX1b6jec6ih2z78sJHmEBYyTGmTmjdN770NTmFzIILsIbW4zXmfYKqejTzQBTnJDm3vG42+h1AEbpNaUo6vLX1QPIuOcrIIGaslwJHjXB32MQNMQDkHlt2/6rEwgUkkWumYphBh1RZXfVAQoRLftjCidB4AM0I3JqK5rOEZyB6LMvAuA4h6KOUD5Pnzt3ZB9yD33rMlStCHGjcfULgO/AVWfi6bqoTxK4KaIachpAhx0E59XDUPvpTEF57Y10ffQQpZv21tPBdEpdjKBLHDZoFFAaz0pKwlC6+T4Hye7Khmih9mpYGrdYTIIp9hvmGVxnWxwe6X7qAHzJpWS3BAGf92KZMtXgRTtXYvRl1W4ztFz8Vauxr/5Tr0hIoKIlp0ciP5XY0n4gjcPOsCNfOP+vt6JcJQcxeu4HwZESFhqhJ7H3G8bLxKpgyOGug+2UEXoBKJQjk4xz4KdzH5ySTGv2Hp9FDZhndsmTJtz+UXqwoelWJYiteglvrcRIBi79xvJAQyDLSlCkuyUXUePmlLsy3dcXT+1s6J1XbX+oRsRolXQS/lkDyBtvYCTLflWpgzsJvoTS35Xske6OLlfVz2THAkSgf5mxjmFhJx2rLVc/eLDcUA2/5Izq1PsN1FqPuXBT/S0tROHMEvLRwypkkCB3WrajQeRuBqfRzIL6XypQ6+RNuetUudcpMllsNjQZl+YULc2AI1A2g7Wn4EWX+/6rNajJHYM=
+	5uFGTlutfvmDYWn0zEr27qSgCmK0f3/yrL/qUkPVZV9FE4Fx4r7uK6WbvXBf1xhL5l+iEf7XLMetjhWN4vAKpaVzhVR4I/1pyO2TBTXRqyD6Bjcs5yloSJ+GAoXOJUB8Eys2PIPSBHFgl58xrHAB6vTLVmJw3XI6Qr+yLW3MVCoPZQGpQpuIk/4UXqPhX+e/S6rslKdUo/snajPdEBlhWh6sFVgFr4MLifgj+O6S2zrM5555AgiLYALYycy+fr76Z0PyxvDdPy2UyJRn69ETe8T0BrecXyGxs19QsK70UvPxQYBqUIUqDTk4/RBeBESQmmzNNLklAqNM2FedOvfLQsoDUdORVP9RBE/QZc41Yj5aMQCr8CaLrJDV8SAyt5GNw+rlRF1PcCNhOd2oj2iOd2iqXe4c4nDqJbzObjuCdjv6ygUNnYCHcAhxm/ChpmuTidH4TZpjXwgB+Ml6C/n0lFS5VWUDZk98GD+stzwbac2aPpjNvUiE4C4TW0Cz82UC5REc71X03KzYPjwH7D8DB1vqCHQAcSb77iWU6MTijd7jRz8hSj6o6/+kC9vlmku04DOSuB+X5Crqvw7Cn1Mvpi755vJY9WRE3uQEOGzylT0XqaeiPv35Q3o1lhBN3sbudTUVGK54Ukooh/06tMS/Jl3sNmBgNMS6XoxksECdZScC2sK8OKp1YFdXWzUY191G4JF8Bz/wosj/hVH6yjRIHxNiOBUSqig6h1tgFNtsjd8=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(6133799003)(3023799007)(18002099003)(22082099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(22082099003)(18002099003)(3023799007)(6133799003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	VlGmrmao5q2yL+9TRBeEgzNQfdy7PBkXkZDuzMwDijGpMUUwSOhcu4tgA6bAC9RCGMHe7JpG8w+W1rbc8rjvqDxaCYW1hxZNDCfD6HdJcTKe2793M0y+ugeQt9Gj6bul5D01g4+qwj8PTtGZCuHf4UM246srRX6Itf2fGlot2mzsqVzEB0yeRMPtkHJMaYXviEy1YcGUjcylWozvvQ+9NKeSdWbuWsrjTM798z2y60e9NmjJ7DzuA0LmnNfncEWk8M736HSDoz/zqI4gGrcN2o0EMWexgv7ffsnJr52MknOZ49mwrWSw/bZx692Gvjlhkkasbc3CoJOW+F3GjBi0F6GOCc/rxZa4AZDkhl8tVH7tYuvEQY1+qIeDz3LSsyLyr9FifZy/xeG4bQz/4jfQzjojzMPl91RC2EpYuMOVcduLIQosi2bqIPGRuE40mWKg
+	dfx1Kt83km5utvGbqjYzUvbX57iN1VrLlv6kfuVIKLdjyBru47Z8LVirC8qAOpoYpmiNXHWlEnsunGa2KZKa82+fE10i21FaGLA2NzsrnOe5R/ugI0wM+uD9n0qHH/VMpLumFoHyEoKFgNtTnvEBC1Ol9c8lYvIs5MB7lPDJ0kPOM9j+wTw5m9gSllz73q7hT1QmUsU1wZQMyLXZgOHi2gGZ51aIPXJ6dAF4ewAOr4y5BHG2CDKkMDTTSl7XbGLRmCfPrdI7y7EItx/aMX9CUIt1IBFYE9Nld0Y7JxWbNIHElrATIB9w5Mb3HAuitJMqUpS0jv47s6cFX/LdqYJ36tNIWngtEd+sdJ+kApGxaihHw5x8ZEaEW4fSjlBiMADGzViEss92AKUj2LuTOzi4nIARvvYrCLRV+qg+0cOKuLbeWb/RqTbtGPtc0YsEjcvS
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 05:30:44.5212
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 05:30:46.0400
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c235f109-4f03-499a-60d9-08decc31943d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 28b90d3f-f770-4465-7c31-08decc319525
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	DB1PEPF000509E2.eurprd03.prod.outlook.com
+	DB1PEPF000509E9.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR02MB7060
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR02MB10202
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2026 06:13:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127629
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2026 06:14:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127630
 
 From: Anton Skorup <anton@skorup.se>
 
-CVE details: https://www.cve.org/CVERecord?id=3DCVE-2026-44777
+CVE details: https://www.cve.org/CVERecord?id=3DCVE-2026-41257
 
 Signed-off-by: Anton Skorup <anton.skorup@axis.com>
 ---
-v2
- * Rebased on master-next
----
- .../jq/jq/CVE-2026-44777.patch                | 233 ++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |   1 +
- 2 files changed, 234 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-44777.patch
+ .../jq/jq/CVE-2026-41257.patch                | 52 +++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-41257.patch
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-44777.patch b/meta-oe/=
-recipes-devtools/jq/jq/CVE-2026-44777.patch
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-41257.patch b/meta-oe/=
+recipes-devtools/jq/jq/CVE-2026-41257.patch
 new file mode 100644
-index 0000000000..f6bf926a0a
+index 0000000000..8bf3ecd325
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-44777.patch
-@@ -0,0 +1,233 @@
-+From f58787c41835d9b17795730cb04925fdba25c71c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-41257.patch
+@@ -0,0 +1,52 @@
++From 01b3cded76daacbfddb7f8763700b0803bcb5c6f Mon Sep 17 00:00:00 2001
 +From: itchyny <itchyny@cybozu.co.jp>
-+Date: Mon, 11 May 2026 20:41:38 +0900
-+Subject: [PATCH] Detect circular module imports to prevent stack overflow
++Date: Fri, 24 Apr 2026 22:09:44 +0900
++Subject: [PATCH] Fix signed-int overflow in `stack_reallocate`
 +
-+jq used to recurse without bound on mutual or self-referential
-+`import` declarations, exhausting the stack. Track each library's
-+load state with a `loading` flag set before its dependencies are
-+processed; a recursive reference to an in-progress library now
-+reports "circular import of X".
-+
-+Fixes CVE-2026-44777.
++This fixes CVE-2026-41257.
 +
 +Signed-off-by: Anton Skorup <anton.skorup@axis.com>
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/f58787c4183=
-5d9b17795730cb04925fdba25c71c]
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/01b3cded76d=
+aacbfddb7f8763700b0803bcb5c6f]
 +---
-+ Makefile.am                 |  2 ++
-+ src/linker.c                | 59 ++++++++++++++++++++++++-------------
-+ tests/modules/cycle_a.jq    |  2 ++
-+ tests/modules/cycle_b.jq    |  2 ++
-+ tests/modules/cycle_self.jq |  2 ++
-+ tests/shtest                | 23 +++++++++++++++
-+ 6 files changed, 70 insertions(+), 20 deletions(-)
-+ create mode 100644 tests/modules/cycle_a.jq
-+ create mode 100644 tests/modules/cycle_b.jq
-+ create mode 100644 tests/modules/cycle_self.jq
++ src/exec_stack.h | 14 ++++++++++----
++ 1 file changed, 10 insertions(+), 4 deletions(-)
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index acb94435f4..e2321bb196 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -232,6 +232,8 @@ EXTRA_DIST =3D $(DOC_FILES) $(man_MANS) $(TESTS) $(TES=
-T_LOG_COMPILER)     \
-+         tests/modules/test_bind_order0.jq                               \
-+         tests/modules/test_bind_order1.jq                               \
-+         tests/modules/test_bind_order2.jq                               \
-++        tests/modules/cycle_a.jq tests/modules/cycle_b.jq               \
-++        tests/modules/cycle_self.jq                                     \
-+         tests/onig.supp tests/local.supp                                \
-+         tests/setup tests/torture/input0.json                           \
-+         tests/optional.test tests/man.test tests/manonig.test           \
-+diff --git a/src/linker.c b/src/linker.c
-+index e9027004cc..03f46db05c 100644
-+--- a/src/linker.c
-++++ b/src/linker.c
-+@@ -20,9 +20,13 @@
-+ #include "compile.h"
++diff --git a/src/exec_stack.h b/src/exec_stack.h
++index 2a063e8cf9..159c56e4fb 100644
++--- a/src/exec_stack.h
+++++ b/src/exec_stack.h
++@@ -2,8 +2,10 @@
++ #define EXEC_STACK_H
++ #include <stddef.h>
++ #include <stdint.h>
+++#include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
+++#include <limits.h>
 + #include "jv_alloc.h"
 +=20
-++struct lib_entry {
-++  char *name;
-++  block def;
-++  int loading;
-++};
-+ struct lib_loading_state {
-+-  char **names;
-+-  block *defs;
-++  struct lib_entry *entries;
-+   uint64_t ct;
-+ };
-+ static int load_library(jq_state *jq, jv lib_path,
-+@@ -303,14 +307,24 @@ static int process_dependencies(jq_state *jq, jv jq_=
-origin, jv lib_origin, block
-+     } else {
-+       uint64_t state_idx =3D 0;
-+       for (; state_idx < lib_state->ct; ++state_idx) {
-+-        if (strcmp(lib_state->names[state_idx],jv_string_value(resolved))=
- =3D=3D 0)
-++        if (strcmp(lib_state->entries[state_idx].name, jv_string_value(re=
-solved)) =3D=3D 0)
-+           break;
-+       }
++ /*
++@@ -81,15 +83,19 @@ static stack_ptr* stack_block_next(struct stack* s, st=
+ack_ptr p) {
++ }
 +=20
-+       if (state_idx < lib_state->ct) { // Found
-++        if (lib_state->entries[state_idx].loading) {
-++          jq_report_error(jq, jv_string_fmt("jq: error: circular import o=
-f %s\n",
-++                                            jv_string_value(resolved)));
-++          jv_free(resolved);
-++          jv_free(as);
-++          jv_free(deps);
-++          jv_free(jq_origin);
-++          jv_free(lib_origin);
-++          return 1;
-++        }
-+         jv_free(resolved);
-+         // Bind the library to the program
-+-        bk =3D block_bind_library(lib_state->defs[state_idx], bk, OP_IS_C=
-ALL_PSEUDO, as_str);
-++        bk =3D block_bind_library(lib_state->entries[state_idx].def, bk, =
-OP_IS_CALL_PSEUDO, as_str);
-+       } else { // Not found.   Add it to the table before binding.
-+         block dep_def_block =3D gen_noop();
-+         nerrors +=3D load_library(jq, resolved, is_data, raw, optional, a=
-s_str, &dep_def_block, lib_state);
-+@@ -352,32 +366,38 @@ static int load_library(jq_state *jq, jv lib_path, i=
-nt is_data, int raw, int opt
-+       jq_report_error(jq, jv_string_fmt("jq: error loading data file %s: =
-%s\n", jv_string_value(lib_path), jv_string_value(data)));
-+       nerrors++;
-+     }
-+-    goto out;
-+   } else if (is_data) {
-+     // import "foo" as $bar;
-+     program =3D gen_const_global(jv_copy(data), as);
-++    state_idx =3D lib_state->ct++;
-++    lib_state->entries =3D jv_mem_realloc(lib_state->entries, lib_state->=
-ct * sizeof(struct lib_entry));
-++    lib_state->entries[state_idx].name =3D strdup(jv_string_value(lib_pat=
-h));
-++    lib_state->entries[state_idx].def =3D program;
-++    lib_state->entries[state_idx].loading =3D 0;
-+   } else {
-+     // import "foo" as bar;
-+     src =3D locfile_init(jq, jv_string_value(lib_path), jv_string_value(d=
-ata), jv_string_length_bytes(jv_copy(data)));
-+     nerrors +=3D jq_parse_library(src, &program);
-+     locfile_free(src);
-+     if (nerrors =3D=3D 0) {
-++      // Register the library before processing its dependencies so that
-++      // circular imports can be detected.
-++      state_idx =3D lib_state->ct++;
-++      lib_state->entries =3D jv_mem_realloc(lib_state->entries, lib_state=
-->ct * sizeof(struct lib_entry));
-++      lib_state->entries[state_idx].name =3D strdup(jv_string_value(lib_p=
-ath));
-++      lib_state->entries[state_idx].def =3D gen_noop();
-++      lib_state->entries[state_idx].loading =3D 1;
-++
-+       char *lib_origin =3D strdup(jv_string_value(lib_path));
-+       nerrors +=3D process_dependencies(jq, jq_get_jq_origin(jq),
-+                                       jv_string(dirname(lib_origin)),
-+                                       &program, lib_state);
-+       free(lib_origin);
-+       program =3D block_bind_self(program, OP_IS_CALL_PSEUDO);
-++      lib_state->entries[state_idx].def =3D program;
-++      lib_state->entries[state_idx].loading =3D 0;
-+     }
-+   }
-+-  if (nerrors =3D=3D 0) {
-+-    state_idx =3D lib_state->ct++;
-+-    lib_state->names =3D jv_mem_realloc(lib_state->names, lib_state->ct *=
- sizeof(const char *));
-+-    lib_state->defs =3D jv_mem_realloc(lib_state->defs, lib_state->ct * s=
-izeof(block));
-+-    lib_state->names[state_idx] =3D strdup(jv_string_value(lib_path));
-+-    lib_state->defs[state_idx] =3D program;
-+-  }
-+-out:
-+   *out_block =3D program;
-+   jv_free(lib_path);
-+   jv_free(data);
-+@@ -415,7 +435,7 @@ jv load_module_meta(jq_state *jq, jv mod_relpath) {
-+ int load_program(jq_state *jq, struct locfile* src, block *out_block) {
-+   int nerrors =3D 0;
-+   block program;
-+-  struct lib_loading_state lib_state =3D {0,0,0};
-++  struct lib_loading_state lib_state =3D {0,0};
-+   nerrors =3D jq_parse(src, &program);
-+   if (nerrors)
-+     return nerrors;
-+@@ -441,14 +461,13 @@ int load_program(jq_state *jq, struct locfile* src, =
-block *out_block) {
-+   nerrors =3D process_dependencies(jq, jq_get_jq_origin(jq), jq_get_prog_=
-origin(jq), &program, &lib_state);
-+   block libs =3D gen_noop();
-+   for (uint64_t i =3D 0; i < lib_state.ct; ++i) {
-+-    free(lib_state.names[i]);
-+-    if (nerrors =3D=3D 0 && !block_is_const(lib_state.defs[i]))
-+-      libs =3D block_join(libs, lib_state.defs[i]);
-++    free(lib_state.entries[i].name);
-++    if (nerrors =3D=3D 0 && !block_is_const(lib_state.entries[i].def))
-++      libs =3D block_join(libs, lib_state.entries[i].def);
-+     else
-+-      block_free(lib_state.defs[i]);
-++      block_free(lib_state.entries[i].def);
-+   }
-+-  free(lib_state.names);
-+-  free(lib_state.defs);
-++  free(lib_state.entries);
-+   if (nerrors)
-+     block_free(program);
-+   else
-+diff --git a/tests/modules/cycle_a.jq b/tests/modules/cycle_a.jq
-+new file mode 100644
-+index 0000000000..30c1deaedf
-+--- /dev/null
-++++ b/tests/modules/cycle_a.jq
-+@@ -0,0 +1,2 @@
-++import "cycle_b" as b;
-++def f: null;
-+diff --git a/tests/modules/cycle_b.jq b/tests/modules/cycle_b.jq
-+new file mode 100644
-+index 0000000000..3fdc360fcd
-+--- /dev/null
-++++ b/tests/modules/cycle_b.jq
-+@@ -0,0 +1,2 @@
-++import "cycle_a" as a;
-++def f: null;
-+diff --git a/tests/modules/cycle_self.jq b/tests/modules/cycle_self.jq
-+new file mode 100644
-+index 0000000000..8365eab1a4
-+--- /dev/null
-++++ b/tests/modules/cycle_self.jq
-+@@ -0,0 +1,2 @@
-++import "cycle_self" as s;
-++def f: null;
-+diff --git a/tests/shtest b/tests/shtest
-+index fa972de870..aca82790bc 100755
-+--- a/tests/shtest
-++++ b/tests/shtest
-+@@ -382,17 +382,40 @@ if ! HOME=3D"$mods/home2" $VALGRIND $Q $JQ -n 'inclu=
-de "g"; empty'; then
-+     exit 1
-+ fi
++ static void stack_reallocate(struct stack* s, size_t sz) {
++-  int old_mem_length =3D -(s->bound) + ALIGNMENT;
++-  char* old_mem_start =3D (s->mem_end !=3D NULL) ? (s->mem_end - old_mem_=
+length) : NULL;
+++  size_t old_mem_length =3D (size_t)(-(s->bound)) + ALIGNMENT;
+++  char* old_mem_start =3D s->mem_end !=3D NULL ? s->mem_end - old_mem_len=
+gth : NULL;
 +=20
-++(
-+ cd "$JQBASEDIR" # so that relative library paths are guaranteed correct
-+ if ! $VALGRIND $Q $JQ -L ./tests/modules -ne 'import "test_bind_order" as=
- check; check::check=3D=3Dtrue'; then
-+     echo "Issue #817 regression?" 1>&2
-+     exit 1
-+ fi
-++)
++-  int new_mem_length =3D align_round_up((old_mem_length + sz + 256) * 2);
+++  size_t new_mem_length =3D align_round_up((old_mem_length + sz + 256) * =
+2);
+++  if (new_mem_length > INT_MAX) {
+++    fprintf(stderr, "jq: error: cannot allocate memory\n");
+++    abort();
+++  }
++   char* new_mem_start =3D jv_mem_realloc(old_mem_start, new_mem_length);
++   memmove(new_mem_start + (new_mem_length - old_mem_length),
++             new_mem_start, old_mem_length);
++   s->mem_end =3D new_mem_start + new_mem_length;
++-  s->bound =3D -(new_mem_length - ALIGNMENT);
+++  s->bound =3D -(int)(new_mem_length - ALIGNMENT);
++ }
 +=20
-++(
-+ cd "$JQBASEDIR"
-+ if ! $VALGRIND $Q $JQ -L tests/modules -ne 'import "test_bind_order" as c=
-heck; check::check=3D=3Dtrue'; then
-+     echo "Issue #817 regression?" 1>&2
-+     exit 1
-+ fi
-++)
-++
-++# CVE-2026-44777: Circular imports should be detected
-++if $VALGRIND $JQ -L "$mods" -ne 'import "cycle_a" as a; null' 2> $d/out; =
-then
-++    echo "Mutual import should be rejected" 1>&2
-++    exit 1
-++fi
-++if ! grep -q "circular import" $d/out; then
-++    echo "Expected circular import error" 1>&2
-++    exit 1
-++fi
-++
-++if $VALGRIND $JQ -L "$mods" -ne 'import "cycle_self" as s; null' 2> $d/ou=
-t; then
-++    echo "Self import should be rejected" 1>&2
-++    exit 1
-++fi
-++if ! grep -q "circular import" $d/out; then
-++    echo "Expected circular import error" 1>&2
-++    exit 1
-++fi
-+=20
-+ ## Halt
-+=20
++ static stack_ptr stack_push_block(struct stack* s, stack_ptr p, size_t sz=
+) {
 diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devt=
 ools/jq/jq_1.8.1.bb
-index 2092fe962a..2634fd52a2 100644
+index b0779b389e..9af7e00f3b 100644
 --- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
 +++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -19,6 +19,7 @@ SRC_URI =3D "git://github.com/jqlang/jq.git;protocol=3Dht=
+@@ -18,6 +18,7 @@ SRC_URI =3D "git://github.com/jqlang/jq.git;protocol=3Dht=
 tps;branch=3Dmaster;tag=3Djq-${
+            file://CVE-2026-33948.patch \
             file://CVE-2026-39979.patch \
             file://CVE-2026-41256.patch \
++           file://CVE-2026-41257.patch \
+            file://CVE-2026-43896.patch \
             file://CVE-2026-47770.patch \
-+           file://CVE-2026-44777.patch \
-            file://CVE-2026-49389.patch \
-            file://CVE-2026-49839.patch \
-            "
+            file://CVE-2026-44777.patch \
 --=20
 2.43.0
 
