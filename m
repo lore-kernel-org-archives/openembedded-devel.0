@@ -1,536 +1,197 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13673CD98ED
-	for <webhook@archiver.kernel.org>; Thu, 18 Jun 2026 16:55:58 +0000 (UTC)
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24145.1781801752829886321
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C900CD98ED
+	for <webhook@archiver.kernel.org>; Thu, 18 Jun 2026 18:37:31 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.141])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.26289.1781807841248761784
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jun 2026 09:55:53 -0700
+ Thu, 18 Jun 2026 11:37:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PUvMFFAP;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id 6a1803df08f44-8de2adc59d8so1042236d6.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jun 2026 09:55:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781801752; cv=none;
-        d=google.com; s=arc-20240605;
-        b=F/GQfEmPBz9xSKyOZye1OMJMFuCUdF9ZTwdIE2c1giPEpUqmH/IjA0wVv8SJNy/lo9
-         r6w/v8krzWno3OIX6TAyCLFtKHEiUrSOY8zo/zWIM0KN7mcX4sTHSKDOytsp/zvXraUD
-         lTjvSFWFpLbA5nAV4XUGqITnaE9Xy1aMTxtBIXgt5NKonqdGQesBE3qeBf3L4WRWe0GJ
-         Te1cNYQhS6OrD+He/vbuknw6/Q3KieVn5/p+qZ4dJlV1OU6HS1FUO5aDUspIH6jSCg8c
-         Utktj5DnCikaun/LnuRaV6HZ0u3q+NpqYpvDKev3qYJMPdAFkGrj3TVBZd/gYByrSo0w
-         YT5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=WvV/OFRxK1VnkrlQcA4O84NmtvEQwt4ZCF2jVeAezEQ=;
-        fh=Dvh9lNg/qg6kQ5taOvLoibcNCDo5RMXzCHCf8rlD1xk=;
-        b=fTT/ol+7QPa2VzGUqPUCEJSL3jCoZjy+MjSbZJD7lhpI19aqk/SmrM9/1VrZCrDG+m
-         WgL8crqza9SQij3LwX4lDql0n13biajDt0pxQSvRBF8cNuhl3ZPf114WuUc4gYmln0Qu
-         g5/NwgCiY5tXxtwD48VBO86AeSTFk36xKzhBhAlessyW+2P/vBabWxME7wJU15bdo68H
-         xSAGLbUHMOWYAdBZjMIob3dGhvx4zD53UMMgt7Hr1DLKrVQKCo2ySmJymsNR0AUHrnSs
-         ZPQmPROnZtgisYW4iXH0cZaWNqQG/L2egfF8yP74doQnP+YWz6JSS/2x0yHGJsYbRO0G
-         dpMQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781801752; x=1782406552; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WvV/OFRxK1VnkrlQcA4O84NmtvEQwt4ZCF2jVeAezEQ=;
-        b=PUvMFFAPXG4O4wS+cxAYyVv2sWeWpKg5H2yD4m0qOQ8vQKWdH5l3OhlaQaWRa0RAVM
-         IrFsg9byNv/XoNpeBgT8c70z0nT6tpce8OJ1PyMV1JBlCuGNmFjuT+Ti4PRO1pCx8BMK
-         4ytjHaH+0ELM1j6+6Io4qIxwM9zRk9qPLcNpvuwtjJ3fu8fgX7uP0cNXcXYJtam9u5O3
-         QDo5jBz2ynlQZOLOHtOEvFlf3jFcQTVvnrwPULuziqbILxz9YKD0Cbu30RQzerBqu1GE
-         URZbGpOr2Bwec/o/XactcOMjF8lr72RDrMig9ACuq6UI10H2NOLjdsrFnzPY8tDRZfzk
-         /iNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781801752; x=1782406552;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WvV/OFRxK1VnkrlQcA4O84NmtvEQwt4ZCF2jVeAezEQ=;
-        b=BIchvWsY3QMsz2Et/QxHMuBwG6ejJlStyJW2pf2SQyy9nXuGoOQ9RqraUlByUtt4bP
-         EptniByiRR+AgpVVNpW/alKE7d2MAA8QIPhA+Yl7x35smvQLlaAmY80AkiXfZ1cRfZje
-         q/owdypAquxqKqW4P1X3X1tbVnFiQVvxMeyotSKVBzfFFRiTu0fmGfjrV8eJnryoz9kC
-         kncsgR8XXAPCu6tjv1wJM+CXeRMk7gPklwP2KqRAkEEdVuRpPwCnsfzXj57XLe9DbHxk
-         Kxry9uvXZrssKkq6qtip7mMKqvz2/MjZiovtN6Tkki9RSrtOr0M46FjTPEyzdS0iStZw
-         nJKA==
-X-Forwarded-Encrypted: i=1; AFNElJ/PT0CPp+xolBD9gILHbXV4nYIVM11KubuCR3D3gAhcB34qV6cP0fDpvRJB3FfM79GS9Cs3uvHBTMh0/baAICtAl8Q=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyh6zyE/XItdWoUlBWA4EroPNoCOaSR46fpcvyTlqHzJji+G+bA
-	Gt0Srh0Ki1bSc7Khn3r647QlRgE2tbt3/R2cOkD6CCC+3cbv3vKFh0oFb8b0Bwfs7vqWWcqxLqq
-	L9rhCVX7/ypv+6vXf/Qmb5Pyre3GV53I=
-X-Gm-Gg: AfdE7cneICUSKVRW1K5sZTwamesb9MQ+jDZ+Akje4nAcLiwEcUUU6r9mtxl+jdoxGbk
-	rdh316u3k7CTtbviRiP0cKBGqm96GF4S8iDoyHZJ71Qyxbcmh+PtCNnhtwvUrGJJd36I2DPWZT8
-	BrwWVbM1T/tvZ7TOyS0UPfInWQxWgv2Xd0FFPynyO39FBtSPOuUdfanDv04wBVZsUAl4qu+D+Vb
-	Tl/1w9aYtImPwUFWBHnWxyHetioXhUZgo3ZVv19E3FhezzcJqXpiDSyhgZfoTsxXrjwOnGn8iw5
-	ktTANi8OCIJ1E89MGyZTvIS109G2Rsk=
-X-Received: by 2002:a05:6214:e6f:b0:8db:5500:a8d8 with SMTP id
- 6a1803df08f44-8dcc832cad0mr66038266d6.0.1781801751498; Thu, 18 Jun 2026
- 09:55:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260618113029.1051020-1-peter.marko@siemens.com>
- <CAMKF1sox1_5DZEy5XKrwa=m=2A0Hn+b-3o6JZ-fPrm_YwrrpOg@mail.gmail.com> <AS8PR10MB5073D5089D0649F4C3377015FDE32@AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AS8PR10MB5073D5089D0649F4C3377015FDE32@AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Thu, 18 Jun 2026 18:55:40 +0200
-X-Gm-Features: AVVi8Cf3LMbftFhdabjJLIF6Z8cpMROsRSBKQ14NZIMG25Qh7_oEtDA5Xnm2Ae4
-Message-ID: <CANNYZj_QemUg6BXzNVN=P58kL=ujO-R49fuGKcnXM_O14OU-Hw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libpcre: move recipe from oe-core
-To: peter.marko@siemens.com
-Cc: Khem Raj <raj.khem@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=aLpNSkex;
+ spf=pass (domain: navimatix.de, ip: 52.101.72.141, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JrjffvmoyHmtklGDnRrZKXpCkWhn52iWxCsUWUJdFSiJe7ZC3Ks17t3Q2MctAL3kuUeOWsgeKczXTJ9+XUi0wNYwOq4AJ2DDBgFF7xmScb0ECDkPD81R4sPeGmpr1gMxv6u3V7V2WDPY1uzVKt+Qff4/2B+lgng7VUgT79uVoIur5Km+XT1qytl1uEO+nazVjPoS1wzkds6X8C4D9b/xtkVN/VSTsDXe6jZQZo2lZaNLq0aD3mjsO9VMSN7qVoLK1kvf6QvEhQloRlsxQDQmTGkELsYi7gUC3RRDejIyb5ZMRa6XtQK5dCVtOGNb2la7RKuqx70AMy3k/9leEATmbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Jl4HouPaiEybkTfJNTTM3Qhr/7Y2xdhfyFY5Vnzrrss=;
+ b=IPc1XDWJZ1cxr/is1fRcYnHzuxLK/OUmGYwn//4WCsEIIGHd13KC6LmkmPgWHqZEbx1uTJN6mDm4UPHSXUkBw7b92Sz1fscp/tukowec0jlZOTX8BAxdhtw6SxLi2KcuZvg/PKZiync9/elIHNptWvXX89mxg2Zn/ZQ4ydvfjTFx7k/7tWOmxVokG6/cGSdbgpGjpbLAYRPPFhwtgTXwc/ZJZCdeTZ7V+7lwPs4xP4x9wDLnuU+bwpZC18cL+aJtckJkTAIUJF7AvDpsISj2bh6iUCWsgQ38Q/W/clhD79m6+G0YX+h5hkJ/9fnE8Mmh/oUn6BfaiEmXubZuIX+6oA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Jl4HouPaiEybkTfJNTTM3Qhr/7Y2xdhfyFY5Vnzrrss=;
+ b=aLpNSkexN0GYODVWm2Y6Dw4GrzoUg4oZvC6Y7aNUqChLDZiX/FOaqtSabiHKemhqWqhP+C5Wmzjn0n/8atuNcgk1NqoJjPN6XgV2Zrk1LoparCUWWPYL+O+TgZ/jYQILSIOpoOn4BzR7IeLCOAh2Pyi3WZZXWnnfE3ebOGzLBGs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by DB9PR01MB7338.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:212::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Thu, 18 Jun
+ 2026 18:37:14 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::d5c3:2dea:3d98:25fd]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
+ with mapi id 15.21.0139.009; Thu, 18 Jun 2026 18:37:14 +0000
+Date: Thu, 18 Jun 2026 20:37:12 +0200
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH] atftp: Rework recipe and use libpcre2
+Message-ID: <cfb743394e19ccc8ab722c8fcdef37b076ab3932.1781807832.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0242.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:8b::9) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|DB9PR01MB7338:EE_
+X-MS-Office365-Filtering-Correlation-Id: b270fbe1-7ea2-4d23-da36-08decd689dae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|3023799007|56012099006|6133799003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	Xwm8+AJpm4OpFy4PhvdfTUbCEWzdKXI4ZmDIyruBSApN1cso8RsjWlG5KqP6+LSvy5BJqN4LwvkTd5sT55Hhyd1S1YSbkPu+xiumqIFDwtnogUnAgVoYsYjvjejnbldk+jL+4AxMjWAMWuhoqcg3Cv+cm316yLFKG/G12MxqtpkiFupkuPDHc/dqDaut0U/q+SqBTSPgQeQG0fsYADISwjGiYKY9yOvBWIzFXAVErO5wsU1itgOHY2YjgkNdMd3VFfLkAMHkQVkejSZCXiXKCL0LYsDZUQTh4lk9vV++VTkkdK1TRbw+T04iigWP3Bbxf57SyefehE+YVN+0DPnHWiccvqCNRsU3ZCuxCMP+Am1xcg6zFiGqwaQVb9A+QKSLWoxK3qrb5fqlLkja/VCofkCDKW8kB+2VmVQQ+2Y7DWuppg/8p01+7ea9Xl1SnM7QC4tCaMdK94KaBBB5+OXftXBfeRWcGd+RsPx++KhlkCdsnkbN7G5/PtNOvyuH1LFCwQ+0bzJMQMWe9WmTCBoGX0P2UvmSz2HRG1MYq6aHetVCBTYVS7ZUIuf0DuaF7dRFWZwMQlovbVQb95ydVYLGgz41E0ffZTyE+HKqk9u0OL24sQrgTA2UeK5lUBQfvqbVr0W7fR1DKuzrg8nk8kdrqw2nwyLA471w0HOGcvfdJ1+StNA+TeXKNZa75BA8u6LZUDkAN5KJeB1EsktEyicDow==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(3023799007)(56012099006)(6133799003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?ZoW5CfmRryAseiygFRWdZu+mUcrF3Z+XOZEuFnAeYrHt+/l82q2Cb5i7unCo?=
+ =?us-ascii?Q?ojrs1nM4NHjdr7UwHRCEywLR8X0GDeGV2z5kwWmbh7k9bobokYpW/H0KVbfj?=
+ =?us-ascii?Q?p238sd3jq/LO25xpbCBtTA+y6R5idrwidmwmC4dQnHWth4Er7ZIeaQqxdmx9?=
+ =?us-ascii?Q?frKj+wQ52aLkIxXojtpyOmqTYG7I0hNzux6RIjClVeNYXxUsEeY6bX41+0OH?=
+ =?us-ascii?Q?tLz9wOl9XpC5/n9j8w7EmHTW/KMxdHNmMTy2+EZPSEh2vuJObNPwhwmsnFXJ?=
+ =?us-ascii?Q?U3O0hqV9JdDcuMD7gNoMzDsbcjKeeXwssZj8uXBLbgHH68ATvyPWui4JnHzl?=
+ =?us-ascii?Q?M5KqZOr/zsishOosR3v8v4qHrAI+TSzvzXbP29K/kZQZtpuzI8nmpsio8nxf?=
+ =?us-ascii?Q?KsGzLq0nrpv6RUyjG7sx9bfr9yyaoEfgxExZjffiIad9eEC2gUKolHv2NpWr?=
+ =?us-ascii?Q?bWrhk7/jX1AnEZ+QeHnEeQmZSrK51s20IeAxNM0NMcDAkdpidJ0tq+NeIUpQ?=
+ =?us-ascii?Q?qSv3Glk5DzCEEnLrJ64yhAXgOyPO+VU4pp17Rtism3hnlgyiV06lx66mN1DC?=
+ =?us-ascii?Q?iRE+iHtJNe228BCHFnsAb604MY14q5cmSyJUhQ4eFRfxE4FBJvIPoMmKoSps?=
+ =?us-ascii?Q?/7u2lqfz+s+UKHYtjm8do0KSdFrzFBGYCbsRvjUNVmP9HPXMC6hlYomrbcyz?=
+ =?us-ascii?Q?m0UHZHEUmfG8OJrJ4+fwDr7jK6Ywot6imiOv8gUQOO4q35p/86Cg49pEj0YA?=
+ =?us-ascii?Q?frw40wFb/b5CEkY4jxqj+CQMKknb5klnT7xwbW+fMDCRsenYtIm4+Lrnlzqr?=
+ =?us-ascii?Q?ez2267RdCzDLl2KpYLEDJlhUkeO0RVEkn/MX3XQKfmnoBkc3Z8DI8RZ9EoCJ?=
+ =?us-ascii?Q?r4waMUUhNuxDCMoRxIA/hyovgyOW5jMksSILIp5hdgM2ORJqePVQyvzu2yc0?=
+ =?us-ascii?Q?mesE/c1YEa5F4SP0QW6S4H9P3m7Xt7Jazz59r0DfESMk2++5CP0KMi5Jq7FB?=
+ =?us-ascii?Q?c+rWTYxmzi+y5IMADEqt8jUI9r1obaZWjTeJK6Zgg1QcFZd5MXbq1H/3DAZH?=
+ =?us-ascii?Q?cry+Q0dSd0yCgVft/te1udQPZaOWXzoY5JbSlY9Ry85+J5FRsM9keZYPl88V?=
+ =?us-ascii?Q?ZS3NIoMJSKfj8SoLfDGoGtvhg5bVkuAASgQdB9r3y4kw5mtCNRHFAJhO25XG?=
+ =?us-ascii?Q?sZujmAbPVSOow7uZdnsm2uKO80b82elgGfnwIUG6Ab3MaB+skfWQJhYIXJcv?=
+ =?us-ascii?Q?rVVPyrwDOZ62Q/soM+6+sEOs8EZUqnGgalbqr8UCCh26VZDqgv5WQ2Rg9aQU?=
+ =?us-ascii?Q?dkgK+9nyk+1i0cpjKvOunzPKXzaBYMVNAI7+eVTgR3CuSttoxZweJl4j7NLl?=
+ =?us-ascii?Q?x2fqMac4X17VFNUaUs8dyvoR3idh0dw+W79zzOhOEzA4b7C8xtGUfAUuPOd2?=
+ =?us-ascii?Q?ilwyO5/Q2Otp+yEKV8XwuJNs8sSfBvUiGlO3G3mTZo9VAanYX0KjekdH13j8?=
+ =?us-ascii?Q?pTPI/MSTC63daF/ymSFTl+i+n/bno/s0eFhg+4LzSFjh6o7pLu0hKyXUJRYV?=
+ =?us-ascii?Q?X23zugylpHep8WLst+UgftFWYMK9uQT4sfZ25WxIRQwcmkjidcQJJw883fgE?=
+ =?us-ascii?Q?E5Ku4H+qqcuuBEmEIX8eYaFiHQswz8yosn4J1O9eVJ6HJBaxCEiojXi6uejo?=
+ =?us-ascii?Q?WdUMZSYxkpHAztMHctrGVuKJ+2sh52E9dnPaYINWOLEaGaIDZ0RDioBOyxuq?=
+ =?us-ascii?Q?ulqxBeyEu21ApyNNscyLMpUWLSZ1Wzo=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b270fbe1-7ea2-4d23-da36-08decd689dae
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 18:37:14.0482
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OaN9i12Ku+sqos9YUWinsQcbMoMYuLgRfVAO5zRajkvEnl2+gj8vmLj6P7fuEMu57oslzxYWC5ex6hQX2RW7ZDtg4beABFSvJgVFXvs2WYU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR01MB7338
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jun 2026 16:55:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127665
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jun 2026 18:37:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127666
 
-pcre removal was merged in oe-core, so we'll find out what fails pretty soo=
-n :)
+From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-Alex
+The Debian package page is not the appropriate homepage. And we can add the
+bug tracker URL and a description. Configure has some more options we can
+expose as PACKAGECONFIG. In INSTALL file in the source repository states
+that libpcre2 (instead of libpcre) should be used. And std=3Dgnu89 is no
+longer needed.
 
-On Thu, 18 Jun 2026 at 18:54, Peter Marko via lists.openembedded.org
-<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
->
-> The list is rather long=E2=80=A6
->
->
->
-> grep -rI --exclude=3D*.patch --exclude-dir=3D.git 'pcre\($\|[^2]\)'
->
-> apache2
->
-> sngrep
->
-> ettercap
->
-> daq
->
-> snort
->
-> snort3
->
-> freeradius
->
-> proftpd
->
-> atftp
->
-> ncmpc
->
-> projucer
->
-> x265
->
-> xfce4-verve-plugin
->
-> thunar
->
-> mongodb
->
-> nmap
->
-> fwts
->
-> libdbus-c++
->
-> liboop
->
-> octave
->
-> android-tools
->
-> zabbix
->
->
->
-> There are also other layers like meta-security which have some dependenci=
-es=E2=80=A6
->
->
->
-> Some could be easy, but I think many of those components don=E2=80=99t su=
-pport pcre2 yet.
->
->
->
-> Peter
->
->
->
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: Thursday, June 18, 2026 5:32 PM
-> To: Marko, Peter (FT D EU SK BFS1) <Peter.Marko@siemens.com>
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] libpcre: move recipe from oe-core
->
->
->
-> how many recipes in meta-oe need it? how many of them really need it and =
-not use libpcre2? I would like to not have it in meta-oe if possible.
->
->
->
-> On Thu, Jun 18, 2026 at 4:30=E2=80=AFAM Peter Marko via lists.openembedde=
-d.org <peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
->
-> From: Peter Marko <peter.marko@siemens.com>
->
-> This recipe was removed in oe-core as obsolete (replaced by libpcre2).
-> Since some recipes in meta-oe still depend on it, moe it here.
->
-> Signed-off-by: Peter Marko <peter.marko@siemens.com>
-> ---
->  .../include/ptest-packagelists-meta-oe.inc    |   1 +
->  .../recipes-support/libpcre/libpcre/Makefile  | 183 ++++++++++++++++++
->  .../recipes-support/libpcre/libpcre/run-ptest |   3 +
->  .../recipes-support/libpcre/libpcre_8.45.bb   |  74 +++++++
->  4 files changed, 261 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libpcre/libpcre/Makefile
->  create mode 100644 meta-oe/recipes-support/libpcre/libpcre/run-ptest
->  create mode 100644 meta-oe/recipes-support/libpcre/libpcre_8.45.bb
->
-> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-o=
-e/conf/include/ptest-packagelists-meta-oe.inc
-> index 0467d1f424..46cf9254df 100644
-> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> @@ -36,6 +36,7 @@ PTESTS_FAST_META_OE =3D "\
->      libjcat \
->      libio-pty-perl \
->      libmanette \
-> +    libpcre \
->      libplist \
->      librelp \
->      libssh \
-> diff --git a/meta-oe/recipes-support/libpcre/libpcre/Makefile b/meta-oe/r=
-ecipes-support/libpcre/libpcre/Makefile
-> new file mode 100644
-> index 0000000000..708d807d08
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libpcre/libpcre/Makefile
-> @@ -0,0 +1,183 @@
-> +TESTS =3D pcre_stringpiece_unittest RunTest RunGrepTest
-> +subdir =3D .
-> +am__vpath_adj_setup =3D srcdirstrip=3D`echo "$(srcdir)" | sed 's|.|.|g'`=
-;
-> +am__vpath_adj =3D case $$p in \
-> +    $(srcdir)/*) f=3D`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
-> +    *) f=3D$$p;; \
-> +  esac;
-> +am__tty_colors_dummy =3D \
-> +  mgn=3D red=3D grn=3D lgn=3D blu=3D brg=3D std=3D; \
-> +  am__color_tests=3Dno
-> +am__tty_colors =3D { \
-> +  $(am__tty_colors_dummy); \
-> +  if test "X$(AM_COLOR_TESTS)" =3D Xno; then \
-> +    am__color_tests=3Dno; \
-> +  elif test "X$(AM_COLOR_TESTS)" =3D Xalways; then \
-> +    am__color_tests=3Dyes; \
-> +  elif test "X$$TERM" !=3D Xdumb && { test -t 1; } 2>/dev/null; then \
-> +    am__color_tests=3Dyes; \
-> +  fi; \
-> +  if test $$am__color_tests =3D yes; then \
-> +    red=3D' [0;31m'; \
-> +    grn=3D' [0;32m'; \
-> +    lgn=3D' [1;32m'; \
-> +    blu=3D' [1;34m'; \
-> +    mgn=3D' [0;35m'; \
-> +    brg=3D' [1m'; \
-> +    std=3D' [m'; \
-> +  fi; \
-> +}
-> +am__rst_title =3D { sed 's/.*/   &   /;h;s/./=3D/g;p;x;s/ *$$//;p;g' && =
-echo; }
-> +am__sh_e_setup =3D case $$- in *e*) set +e;; esac
-> +am__common_driver_flags =3D \
-> +  --color-tests "$$am__color_tests" \
-> +  --enable-hard-errors "$$am__enable_hard_errors" \
-> +  --expect-failure "$$am__expect_failure"
-> +am__check_pre =3D \
-> +$(am__sh_e_setup); \
-> +$(am__vpath_adj_setup) $(am__vpath_adj) \
-> +$(am__tty_colors); \
-> +srcdir=3D$(srcdir); export srcdir; \
-> +case "$@" in \
-> +  */*) am__odir=3D`echo "./$@" | sed 's|/[^/]*$$||'`;; \
-> +    *) am__odir=3D.;; \
-> +esac; \
-> +test "x$$am__odir" =3D x"." || test -d "$$am__odir" \
-> +  || $(MKDIR_P) "$$am__odir" || exit $$?; \
-> +if test -f "./$$f"; then dir=3D./; \
-> +elif test -f "$$f"; then dir=3D; \
-> +else dir=3D"$(srcdir)/"; fi; \
-> +tst=3D$$dir$$f; log=3D'$@'; \
-> +if test -n '$(DISABLE_HARD_ERRORS)'; then \
-> +  am__enable_hard_errors=3Dno; \
-> +else \
-> +  am__enable_hard_errors=3Dyes; \
-> +fi;
-> +am__set_TESTS_bases =3D \
-> +  bases=3D'$(TEST_LOGS)'; \
-> +  bases=3D`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
-> +  bases=3D`echo $$bases`
-> +RECHECK_LOGS =3D $(TEST_LOGS)
-> +TEST_SUITE_LOG =3D test-suite.log
-> +TEST_EXTENSIONS =3D  .test
-> +LOG_DRIVER =3D $(SHELL) $(top_srcdir)/test-driver
-> +am__test_logs1 =3D $(TESTS:=3D.log)
-> +am__test_logs2 =3D $(am__test_logs1:.log=3D.log)
-> +TEST_LOGS =3D $(am__test_logs2:.test.log=3D.log)
-> +MKDIR_P =3D /bin/mkdir -p
-> +PACKAGE_STRING =3D PCRE 8.36
-> +SHELL =3D /bin/sh
-> +srcdir =3D .
-> +top_srcdir =3D .
-> +$(TEST_SUITE_LOG): $(TEST_LOGS)
-> +       @$(am__set_TESTS_bases); \
-> +       am__f_ok () { test -f "$$1" && test -r "$$1"; }; \
-> +       redo_bases=3D`for i in $$bases; do \
-> +                     am__f_ok $$i.trs && am__f_ok $$i.log || echo $$i; \
-> +                   done`; \
-> +       st=3D0;  \
-> +       errmsg=3D"fatal: making $(TEST_SUITE_LOG): failed to create"; \
-> +       for i in $$redo_bases; do \
-> +         test -f $$i.trs && test -r $$i.trs \
-> +           || { echo "$$errmsg $$i.trs" >&2; st=3D1; }; \
-> +         test -f $$i.log && test -r $$i.log \
-> +           || { echo "$$errmsg $$i.log" >&2; st=3D1; }; \
-> +       done; \
-> +       test $$st -eq 0 || exit 1;
-> +       @$(am__sh_e_setup); $(am__tty_colors); $(am__set_TESTS_bases); \
-> +       ws=3D'[   ]'; \
-> +       results=3D`for b in $$bases; do echo $$b.trs; done`; \
-> +       test -n "$$results" || results=3D/dev/null; \
-> +       all=3D`  grep "^$$ws*:test-result:"           $$results | wc -l`;=
- \
-> +       pass=3D` grep "^$$ws*:test-result:$$ws*PASS"  $$results | wc -l`;=
- \
-> +       fail=3D` grep "^$$ws*:test-result:$$ws*FAIL"  $$results | wc -l`;=
- \
-> +       skip=3D` grep "^$$ws*:test-result:$$ws*SKIP"  $$results | wc -l`;=
- \
-> +       xfail=3D`grep "^$$ws*:test-result:$$ws*XFAIL" $$results | wc -l`;=
- \
-> +       xpass=3D`grep "^$$ws*:test-result:$$ws*XPASS" $$results | wc -l`;=
- \
-> +       error=3D`grep "^$$ws*:test-result:$$ws*ERROR" $$results | wc -l`;=
- \
-> +       if test `expr $$fail + $$xpass + $$error` -eq 0; then \
-> +         success=3Dtrue; \
-> +       else \
-> +         success=3Dfalse; \
-> +       fi; \
-> +       br=3D'=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D';=
- br=3D$$br$$br$$br$$br; \
-> +       result_count () \
-> +       { \
-> +           if test x"$$1" =3D x"--maybe-color"; then \
-> +             maybe_colorize=3Dyes; \
-> +           elif test x"$$1" =3D x"--no-color"; then \
-> +             maybe_colorize=3Dno; \
-> +           else \
-> +             echo "$@: invalid 'result_count' usage" >&2; exit 4; \
-> +           fi; \
-> +           shift; \
-> +           desc=3D$$1 count=3D$$2; \
-> +           if test $$maybe_colorize =3D yes && test $$count -gt 0; then =
-\
-> +             color_start=3D$$3 color_end=3D$$std; \
-> +           else \
-> +             color_start=3D color_end=3D; \
-> +           fi; \
-> +           echo "$${color_start}# $$desc $$count$${color_end}"; \
-> +       }; \
-> +       create_testsuite_report () \
-> +       { \
-> +         result_count $$1 "TOTAL:" $$all   "$$brg"; \
-> +         result_count $$1 "PASS: " $$pass  "$$grn"; \
-> +         result_count $$1 "SKIP: " $$skip  "$$blu"; \
-> +         result_count $$1 "XFAIL:" $$xfail "$$lgn"; \
-> +         result_count $$1 "FAIL: " $$fail  "$$red"; \
-> +         result_count $$1 "XPASS:" $$xpass "$$red"; \
-> +         result_count $$1 "ERROR:" $$error "$$mgn"; \
-> +       }; \
-> +       {                                                               \
-> +         echo "$(PACKAGE_STRING): $(subdir)/$(TEST_SUITE_LOG)" |       \
-> +           $(am__rst_title);                                           \
-> +         create_testsuite_report --no-color;                           \
-> +         echo;                                                         \
-> +         echo ".. contents:: :depth: 2";                               \
-> +         echo;                                                         \
-> +         for b in $$bases; do echo $$b; done;                          \
-> +       } >$(TEST_SUITE_LOG).tmp || exit 1;                             \
-> +       mv $(TEST_SUITE_LOG).tmp $(TEST_SUITE_LOG);                     \
-> +       if $$success; then                                              \
-> +         col=3D"$$grn";                                                 =
- \
-> +        else                                                           \
-> +         col=3D"$$red";                                                 =
- \
-> +         test x"$$VERBOSE" =3D x || cat $(TEST_SUITE_LOG);              =
- \
-> +       fi;                                                             \
-> +       echo "$${col}$$br$${std}";                                      \
-> +       echo "$${col}Testsuite summary for $(PACKAGE_STRING)$${std}";   \
-> +       echo "$${col}$$br$${std}";                                      \
-> +       create_testsuite_report --maybe-color;                          \
-> +       echo "$$col$$br$$std";                                          \
-> +       if $$success; then :; else                                      \
-> +         echo "$${col}See $(subdir)/$(TEST_SUITE_LOG)$${std}";         \
-> +         echo "$$col$$br$$std";                                        \
-> +       fi;                                                             \
-> +       $$success || exit 1
-> +check-TESTS:
-> +       @list=3D'$(RECHECK_LOGS)';           test -z "$$list" || rm -f $$=
-list
-> +       @test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
-> +       @set +e; $(am__set_TESTS_bases); \
-> +       log_list=3D`for i in $$bases; do echo $$i.log; done`; \
-> +       log_list=3D`echo $$log_list`; \
-> +       $(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) TEST_LOGS=3D"$$log_list=
-"; \
-> +       exit $$?;
-> +pcre_stringpiece_unittest.log: pcre_stringpiece_unittest$(EXEEXT)
-> +       @p=3D'pcre_stringpiece_unittest$(EXEEXT)'; \
-> +       b=3D'pcre_stringpiece_unittest'; \
-> +       $(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-> +       --log-file $$b.log --trs-file $$b.trs \
-> +       $(am__common_driver_flags) -- "$$tst"
-> +RunTest.log: RunTest
-> +       @p=3D'RunTest'; \
-> +       b=3D'RunTest'; \
-> +       $(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-> +       --log-file $$b.log --trs-file $$b.trs \
-> +       $(am__common_driver_flags) -- "$$tst"
-> +RunGrepTest.log: RunGrepTest
-> +       @p=3D'RunGrepTest'; \
-> +       b=3D'RunGrepTest'; \
-> +       $(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-> +       --log-file $$b.log --trs-file $$b.trs \
-> +       $(am__common_driver_flags) -- "$$tst"
-> diff --git a/meta-oe/recipes-support/libpcre/libpcre/run-ptest b/meta-oe/=
-recipes-support/libpcre/libpcre/run-ptest
-> new file mode 100644
-> index 0000000000..990d4a12ad
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libpcre/libpcre/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +make check-TESTS
-> diff --git a/meta-oe/recipes-support/libpcre/libpcre_8.45.bb b/meta-oe/re=
-cipes-support/libpcre/libpcre_8.45.bb
-> new file mode 100644
-> index 0000000000..c5ecbd8cf2
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libpcre/libpcre_8.45.bb
-> @@ -0,0 +1,74 @@
-> +DESCRIPTION =3D "The PCRE library is a set of functions that implement r=
-egular \
-> +expression pattern matching using the same syntax and semantics as Perl =
-5. PCRE \
-> +has its own native API, as well as a set of wrapper functions that corre=
-spond \
-> +to the POSIX regular expression API."
-> +SUMMARY =3D "Perl Compatible Regular Expressions"
-> +HOMEPAGE =3D "http://www.pcre.org"
-> +SECTION =3D "devel"
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Db5d5d1a69a24ea2718263f1ff85a1=
-c58"
-> +SOURCEFORGE_PROJECT =3D "pcre"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${SOURCEFORGE_PROJECT}/pcre-${PV}.tar=
-.bz2 \
-> +           file://run-ptest \
-> +           file://Makefile \
-> +           "
-> +
-> +SRC_URI[sha256sum] =3D "4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cdd=
-ac3546e3218bffb8"
-> +
-> +CVE_PRODUCT =3D "pcre"
-> +
-> +S =3D "${UNPACKDIR}/pcre-${PV}"
-> +
-> +PROVIDES +=3D "pcre"
-> +DEPENDS +=3D "bzip2 zlib"
-> +
-> +PACKAGECONFIG ??=3D "pcre8 unicode-properties jit"
-> +
-> +PACKAGECONFIG[pcre8] =3D "--enable-pcre8,--disable-pcre8"
-> +PACKAGECONFIG[pcre16] =3D "--enable-pcre16,--disable-pcre16"
-> +PACKAGECONFIG[pcre32] =3D "--enable-pcre32,--disable-pcre32"
-> +PACKAGECONFIG[pcretest-readline] =3D "--enable-pcretest-libreadline,--di=
-sable-pcretest-libreadline,readline,"
-> +PACKAGECONFIG[unicode-properties] =3D "--enable-unicode-properties,--dis=
-able-unicode-properties"
-> +PACKAGECONFIG[jit] =3D "--enable-jit=3Dauto,--disable-jit"
-> +
-> +BINCONFIG =3D "${bindir}/pcre-config"
-> +
-> +inherit autotools binconfig-disabled ptest sourceforge-releases
-> +
-> +EXTRA_OECONF =3D "--enable-utf"
-> +
-> +PACKAGES =3D+ "libpcrecpp libpcreposix pcregrep pcregrep-doc pcretest pc=
-retest-doc"
-> +
-> +SUMMARY:libpcrecpp =3D "${SUMMARY} - C++ wrapper functions"
-> +SUMMARY:libpcreposix =3D "${SUMMARY} - C wrapper functions based on the =
-POSIX regex API"
-> +SUMMARY:pcregrep =3D "grep utility that uses perl 5 compatible regexes"
-> +SUMMARY:pcregrep-doc =3D "grep utility that uses perl 5 compatible regex=
-es - docs"
-> +SUMMARY:pcretest =3D "program for testing Perl-comatible regular express=
-ions"
-> +SUMMARY:pcretest-doc =3D "program for testing Perl-comatible regular exp=
-ressions - docs"
-> +
-> +FILES:libpcrecpp =3D "${libdir}/libpcrecpp.so.*"
-> +FILES:libpcreposix =3D "${libdir}/libpcreposix.so.*"
-> +FILES:pcregrep =3D "${bindir}/pcregrep"
-> +FILES:pcregrep-doc =3D "${mandir}/man1/pcregrep.1"
-> +FILES:pcretest =3D "${bindir}/pcretest"
-> +FILES:pcretest-doc =3D "${mandir}/man1/pcretest.1"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> +
-> +do_install_ptest() {
-> +       t=3D${D}${PTEST_PATH}
-> +       cp ${UNPACKDIR}/Makefile $t
-> +       cp -r ${S}/testdata $t
-> +       for i in pcre_stringpiece_unittest pcregrep pcretest; do
-> +               ${B}/libtool --mode=3Dinstall install ${B}/$i $t/
-> +       done
-> +       for i in RunTest RunGrepTest test-driver; do
-> +               install ${S}/$i $t
-> +       done
-> +       # Skip the fr_FR locale test. If the locale fr_FR is found, it is=
- tested.
-> +       # If not found, the test is skipped. The test program assumes fr_=
-FR is non-UTF-8
-> +       # locale so the test fails if fr_FR is UTF-8 locale.
-> +       sed -i -e 's:do3=3Dyes:do3=3Dno:g' ${D}${PTEST_PATH}/RunTest
-> +}
-> +
-> +RDEPENDS:${PN}-ptest +=3D "make"
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127664): https://lists.openembedded.org/g/openembedde=
-d-devel/message/127664
-> Mute This Topic: https://lists.openembedded.org/mt/119865283/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-lex.kanavin@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
+---
+ .../recipes-daemons/atftp/atftp_0.8.1.bb      | 24 ++++++++++++-------
+ 1 file changed, 15 insertions(+), 9 deletions(-)
+
+diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.8.1.bb b/meta-ne=
+tworking/recipes-daemons/atftp/atftp_0.8.1.bb
+index ecd55684f5..be40302a3b 100644
+--- a/meta-networking/recipes-daemons/atftp/atftp_0.8.1.bb
++++ b/meta-networking/recipes-daemons/atftp/atftp_0.8.1.bb
+@@ -1,6 +1,13 @@
+ SUMMARY =3D "Advanced TFTP server and client"
++DESCRIPTION =3D "\
++    atftp is a client/server implementation of the TFTP protocol that \
++    implements RFCs 1350, 2090, 2347, 2348, 2349 and 7440. The server is \
++    multi-threaded and the client presents a friendly interface using \
++    libreadline. \
++"
++HOMEPAGE =3D "https://sourceforge.net/projects/atftp/"
++BUGTRACKER =3D "https://sourceforge.net/p/atftp/bugs/"
+ SECTION =3D "net"
+-HOMEPAGE =3D "http://packages.debian.org/atftp"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D570a9b3749dd0463a1778803b12a6dc=
+e"
+=20
+@@ -11,25 +18,23 @@ SRC_URI =3D "git://git.code.sf.net/p/atftp/code;branch=
+=3Dmaster;protocol=3Dhttps \
+            file://atftpd.service \
+ "
+=20
+-
+ inherit autotools update-rc.d systemd
+=20
+ PACKAGECONFIG ??=3D ""
+-PACKAGECONFIG[pcre] =3D "--enable-libpcre,--disable-libpcre,libpcre"
++PACKAGECONFIG[mtftp] =3D "--enable-mtftp,--disable-mtftp"
++PACKAGECONFIG[pcre] =3D "--enable-libpcre,--disable-libpcre,libpcre2"
+ PACKAGECONFIG[readline] =3D "--enable-libreadline,--disable-libreadline,re=
+adline"
++PACKAGECONFIG[wrap] =3D "--enable-libwrap,--disable-libwrap,libwrap"
+=20
+ INITSCRIPT_PACKAGES =3D "${PN}d"
+ INITSCRIPT_NAME:${PN}d =3D "atftpd"
+ INITSCRIPT_PARAMS:${PN}d =3D "defaults 80"
+=20
+-
+-EXTRA_OEMAKE =3D "CFLAGS=3D'${CFLAGS} -std=3Dgnu89'"
+-
+ do_install:append() {
+     install -d ${D}${sysconfdir}/init.d
+     install -m 0755 ${UNPACKDIR}/atftpd.init ${D}${sysconfdir}/init.d/atft=
+pd
+=20
+-    install -d ${D}/srv/tftp
++    install -d ${D}${servicedir}/tftp
+=20
+     rm ${D}${sbindir}/in.tftpd
+=20
+@@ -41,9 +46,10 @@ PACKAGES =3D+ "${PN}d"
+=20
+ FILES:${PN} =3D "${bindir}/*"
+=20
+-FILES:${PN}d =3D "${sbindir}/* \
++FILES:${PN}d =3D "\
++    ${sbindir}/* \
+     ${sysconfdir} \
+-    /srv/tftp \
++    ${servicedir}/tftp \
+     ${systemd_unitdir}/system/atftpd.service \
+ "
+=20
+--=20
+2.53.0
+
 
