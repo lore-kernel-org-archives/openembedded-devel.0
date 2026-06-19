@@ -2,90 +2,90 @@ Return-Path: <hjadon@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E62ACD98E6
-	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 04:14:28 +0000 (UTC)
-Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.35666.1781842460192056445
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DEE1CD98F6
+	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 04:14:48 +0000 (UTC)
+Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.35935.1781842478669158059
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jun 2026 21:14:20 -0700
+ Thu, 18 Jun 2026 21:14:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=WpLIKNrm;
- spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: hjadon@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=PjuPIkoB;
+ spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: hjadon@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1285; q=dns/txt;
-  s=iport01; t=1781842460; x=1783052060;
+  d=cisco.com; i=@cisco.com; l=1374; q=dns/txt;
+  s=iport01; t=1781842478; x=1783052078;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=yZ6rMijSfhjUXuWq+DwH5u6xJ23715RumtfdeObjm/s=;
-  b=WpLIKNrm61f2PbRuvN5JfvmUVSIQZn+wupajeTKhkRW+fMBZN/eksOjH
-   QdtgSxFzztGaP+Lh3nkpWWR9CiG5/7hC7fgW2OEY3yZCmZoNEBBmEwgh8
-   yUVaeAfIT1uHmoEog4OFdIrLeBCEe4jEnDNURrXbgtPHhPUonTGxR8Spe
-   9Lxn4/HTJRtdNXAokDKV0RWN4/jc6mj7ChVAhJtH6Hy3lNnr3R2PAK8O2
-   FmoVMuz+sglcobjtra1WAyEXQDVilZcGWhWoGAUt9nLL7tpsBjx8wluXk
-   cENtWWInURhfEWaEtNFEayf8fRD9glzxK5g+7edETeNr6xd1p2NlkUncN
+  bh=OWuYx8ua75WLaLLwDtmF58qf+Tm/ex3bUehL6y9sl+Y=;
+  b=PjuPIkoB56F4r+TYCI6ML0w4gjYueu9hW/OICCw6FINIGlet1o9jQPD0
+   N47Cc4E1VTfqsKndr1kFy1Pu9p/dF7D8Mnxg7p1xYwCfsMKDqP2GvLj3j
+   Yv7IlstS2asVOaC3cw0K7Mu2nW84+hiVltgfn2XsuEeUUW7NLuwsx2n0p
+   ZNDNO+OvRX0WjoVA49iOFJ2gRY7xGnQ2UCkCRqWIp5yuPjMy/ZkgNkqAq
+   pY55Yhy7SD+zWCYVO/HMFLwkNXhnRSLcA6uPNOfyDWuD8VhBsvhqkLOvH
+   fgfyPmra/kZD8doISqNZqYY07XEHPas8mQYFFzGspjQPcBW1fdciHyJYq
    g==;
-X-CSE-ConnectionGUID: l9aT8EHcRUy8Ycvgak6Qzg==
-X-CSE-MsgGUID: ODiIIPsbSNa+3FdjSU7NOQ==
-X-IPAS-Result: =?us-ascii?q?A0BCAgC+wTRq/5D/Ja1aglmCV3ReQ0mTWgGhDoF+DwEBA?=
- =?us-ascii?q?Q83GgQBAYUGjUoCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBBwWBD?=
- =?us-ascii?q?hOGTw2GXSsLARgBLTBcRIMCAYJzA7MIgXkzgQGDKAGBVNssAQsUAYE4hT+IH?=
- =?us-ascii?q?3MBhHwnGxuBcoR+hAoqXIV4BIIigQyBeI8wSIEeA1ksAVUTDQoLBwWBZgM1E?=
- =?us-ascii?q?ioVbjIdgSM+F4EMGwcFgR6Be4EChQMjHwM5f4FogSVnZhUwNYEBAREfCoEkA?=
- =?us-ascii?q?wsYDUgRLDcUGwQ+bgeMdxcPgj2BDiyCPQeTYpF8oQ8KKIN1jCGVOhozhASma?=
- =?us-ascii?q?JkIglmLMZZQhGiBaDyBWXAVgyIJShkPlzbAAicyAjsBAQcCBw4DC4FokAACJ?=
- =?us-ascii?q?oFVAQE?=
-IronPort-Data: A9a23:tc9sPaiJ0eneTj1ubxu91AZzX161NhEKZh0ujC45NGQN5FlHY01je
- htvDWmHMvmON2T9eotxYI+xoEgH78CEmIJmQAVrrHsxEXhjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeDULOZ82QsaDxMtfvT8E8HUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUcq+9LUUxu/
- sYlOWA8ZQ6MjuHo+aC0H7wEasQLdKEHPasFsX1miDWcBvE8TNWbHOPB5MRT23E7gcUm8fT2P
- pVCL2EwKk6dPlsWZgt/5JEWxI9EglH/cTRUr1S9rqss6G+Vxwt0uFToGIaFKobbH58NwC50o
- Erh02XYIykBPue5wHne3H6uvdKQuwTCDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
- 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUg4w2Lj66R6AGDCy1cEXhKaccts4k9QjlCO
- kK1ou4FzAdH6NW9IU9xPJ/Nxd9uEUD59VM/WBI=
-IronPort-HdrOrdr: A9a23:XnlP464UlvP4GR4c6wPXwP7XdLJyesId70hD6qm+c3Nom6uj5q
- WTdZsgtCMc5Ax9ZJhCo6HjBED/exPhHPdOiOF7V4tKNzOJhILHFu1fBPPZsl7dMhy70PJB3q
- F9dKU7ItjxAV9myfve2mCDYrIdKB3tytHPuQ8YpE0dKj1XVw==
-X-Talos-CUID: =?us-ascii?q?9a23=3AWYDx7Wjg14Y+ZYe7D9aI/0Cs1jJudizU8Cf9A0S?=
- =?us-ascii?q?CNHc5ebaLRlaTppp2nJ87?=
-X-Talos-MUID: 9a23:X57PywkUGKJqNM/qYVwRdnpFGMZJwpy1AnsrmNZdlcWGDhEvHRCk2WE=
+X-CSE-ConnectionGUID: B0djTb0ORGWsbr7y7SO4Qw==
+X-CSE-MsgGUID: 0aI1/RKnRmacFQwER14y7w==
+X-IPAS-Result: =?us-ascii?q?A0BCAgC+wTRq/4z/Ja1aglmCV3ReQ0mTWgGCBJ8KgX4PA?=
+ =?us-ascii?q?QEBDzcaBAEBhQaNSgImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDYZdKwsBGAEtMFxEgwIBgnMDEbJ3gXkzgQGDKAGBVNssAQsUAYE4h?=
+ =?us-ascii?q?T+IH3MBhHwnGxuBcoR+hAoqXIV4BIIiehKBeI8wSIEeA1ksAVUTDQoLBwWBZ?=
+ =?us-ascii?q?gM1EioVbjIdgSM+F4EMGwcFgR6Be4EChQMjHwM5f4FogSVnZhUwNYEBAREfC?=
+ =?us-ascii?q?oEkAwsYDUgRLDcUGwQ+bgeMdxcPgj2BDiyCPQeTYpF8oQ8KKIN1jCGVOhozh?=
+ =?us-ascii?q?ASmaJkIglmLMZZQhGiBaDyBWXAVgyIJShkPji4ViHPAAicyAjsBAQcCBw4DC?=
+ =?us-ascii?q?4FokAACJoFVAQE?=
+IronPort-Data: A9a23:hQ9sAq1WgoTagQS8dfbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2ZWm
+ jMcXTjTOf7fYjf1fttzOdm2px8Bv5HRz9RqTFRr3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ bsen+WFYAX7g2AtYjpIg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGJhk6P7ESosFNLl5V/
+ +ZHOW82SUy6mLfjqF67YrEEasULNsLnOsYb/3pn1zycVa1gSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUiYC/FMEg9/5JYWnOWhin75WzZZs1mS46Ew5gA/ySQtgOKwb4aFIYbiqcN9xk+5/
+ yX83GLDBxgRGuWA5ADcrmPzmbqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu13fDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9FRpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:3crHJqFedNaYOQA0pLqE3seALOsnbusQ8zAXPo5KJiC9Ffbo8v
+ xG88576faZslsssRIb6LK90de7IU80nKQdieJ6AV7IZmfbUQWTQL2KlbGSoAHIKmnZ6vNX07
+ tmfuxVDd39CkU/sOPBiTPId+rJBLK8gcaVbSC09QYLcT1X
+X-Talos-CUID: 9a23:l25o7GCmCjmLLiv6EwM/+EwoEJgCSFLi133KfF7nMkE1caLAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3AxO7W3Q4DL1aOXRr8sllwqIBIxoww6oX3T3oul68?=
+ =?us-ascii?q?DssKqDDNdAW7BnWuoF9o=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.24,212,1774310400"; 
-   d="scan'208";a="488292206"
-Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
-  by rcdn-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Jun 2026 04:14:17 +0000
+   d="scan'208";a="482574832"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Jun 2026 04:14:36 +0000
 Received: from sjc-ads-21441.cisco.com (sjc-ads-21441.cisco.com [10.128.164.182])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 6473B1800049A;
-	Fri, 19 Jun 2026 04:14:17 +0000 (GMT)
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id 134C4180005A2;
+	Fri, 19 Jun 2026 04:14:36 +0000 (GMT)
 Received: by sjc-ads-21441.cisco.com (Postfix, from userid 1879343)
-	id E3C05CC1611; Thu, 18 Jun 2026 21:14:16 -0700 (PDT)
+	id A2493CC1611; Thu, 18 Jun 2026 21:14:35 -0700 (PDT)
 From: "Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hjadon@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: vchavda@cisco.com
-Subject: [meta-networking][scarthgap][PATCH 2/4] libtdb: upgrade 1.4.10 -> 1.4.13
-Date: Thu, 18 Jun 2026 21:14:12 -0700
-Message-Id: <20260619041412.2621468-1-hjadon@cisco.com>
+Subject: [meta-networking][scarthgap][PATCH 3/4] libtevent: upgrade 0.16.1 -> 0.16.2
+Date: Thu, 18 Jun 2026 21:14:30 -0700
+Message-Id: <20260619041430.2626579-1-hjadon@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-21441.cisco.com [10.128.164.182];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.128.164.182, sjc-ads-21441.cisco.com
-X-Outbound-Node: rcdn-l-core-07.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 04:14:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127675
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 04:14:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127676
 
 From: Himanshu Jadon <hjadon@cisco.com>
 
-Update tdb to the version used with newer Samba releases
+Update tevent to the version used with newer Samba releases
 in upstream meta-openembedded.
 
 This is a prerequisite for upgrading Samba to 4.22.10 on
@@ -93,26 +93,26 @@ Scarthgap.
 
 Signed-off-by: Himanshu Jadon <hjadon@cisco.com>
 ---
- .../libtdb/{libtdb_1.4.10.bb => libtdb_1.4.13.bb}               | 2 +-
+ .../libtevent/{libtevent_0.16.1.bb => libtevent_0.16.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/libtdb/{libtdb_1.4.10.bb => libtdb_1.4.13.bb} (96%)
+ rename meta-networking/recipes-support/libtevent/{libtevent_0.16.1.bb => libtevent_0.16.2.bb} (95%)
 
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
-similarity index 96%
-rename from meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
-rename to meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
-index bd3f9f63a9..6342459154 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
-@@ -15,7 +15,7 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-            file://run-ptest \
- "
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.16.1.bb b/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
+similarity index 95%
+rename from meta-networking/recipes-support/libtevent/libtevent_0.16.1.bb
+rename to meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
+index 0a37d7977d..29a1e6f43f 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.16.1.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
+@@ -17,7 +17,7 @@ SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
  
--SRC_URI[sha256sum] = "02338e33c16c21c9e29571cef523e76b2b708636254f6f30c6cf195d48c62daf"
-+SRC_URI[sha256sum] = "5ee276e7644d713e19e4b6adc00b440afb5851ff21e65821ffaed89e15a5e167"
+ LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
  
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+-SRC_URI[sha256sum] = "362971e0f32dc1905f6fe4736319c4b8348c22dc85aa6c3f690a28efe548029e"
++SRC_URI[sha256sum] = "f0bbd29dfabbcbbce9f4718fc165410cdd4f7d8ee1f3dfc54618d4c03199cea3"
+ 
+ inherit pkgconfig ptest waf-samba
+ 
 -- 
 2.35.6
 
