@@ -1,95 +1,182 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34DD2CD98F2
-	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 15:38:36 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.45403.1781883505925629862
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB9E6CD98F2
+	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 19:29:43 +0000 (UTC)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.49167.1781894701701446120
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2026 08:38:26 -0700
+ Fri, 19 Jun 2026 11:45:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ul8eZnLn;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-490c1915793so18137155e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 08:38:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781883504; x=1782488304; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=64OIngaz54FD6ZIF5Juegxp2YlPw7wlZcWajFnRsRuk=;
-        b=Ul8eZnLnjvQuj64uUZskjDESx1MoCtflzblQaAisnZaRDwVmGl/rNacxVwK5lsyodc
-         fXYaWb+YbB5Ry1oiAtpvRxO3i9r2aNzHvXcdAKHXU/wAi1Q7xMrWtMNvbl6r5QMXZ9J8
-         HhcwkRaB4NYS45mrIXJC1cBMPxi+cvAxyIgYl88qC611khUBwdh+tw1PRSxb3ndTh8Dd
-         t0n5hqdQkT2RT/ZNwJVFd+/cO0ix9ynweMS6PSJV/Mx8oVLhNtncXf4T6/UuJbV7ag5E
-         1UNYp5ETyfSXevsuYHLwfqa5n5nnrK8CLO4tUR9xdgxtiKEg2Z/kJzuDXMhZiaRH5GEC
-         akLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781883504; x=1782488304;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=64OIngaz54FD6ZIF5Juegxp2YlPw7wlZcWajFnRsRuk=;
-        b=IqP6Z+p2fkF9FTC32OnhRZZIMpMXrQ1F6JNVOAqyKa/pJ+MXg23xTtUrJd2sK85YES
-         k/Kp05PnpKgzhF6WrxxnCgifmU+pMFWD08h90GtufTgZDad7Be6kwAhQRGw6FZwHVNHV
-         1a41oENpRI3+04vVBHyCz99ErJq93rz2chy+rHRwetF5ecHezZ93qzSKClRwaesb+F6i
-         BDbrOr5yg/I5mXfnIE+2TxXnQPX2CFUb4U5rL4hSPi1BobVoeZ4vkLl/b3RtIJqME6PI
-         CcP8cPnfFlYy2cpIZ8z0jYp9LSGY/CL87bChrLAYN9VErNxGwAe7su7a6VXpBE3qH9C5
-         7jPA==
-X-Gm-Message-State: AOJu0YyVpEyxHq9szzFV1l8vdAUDLX6rRJV1mpHLrw1SCnYw38NuYNWs
-	YbzDLzqZJKuHiu82+slzrdXFViTA0QDF9W+gjPmHX0B8EZmXEfnvydEt1GB3wA==
-X-Gm-Gg: AfdE7cmEPrl5nWu42buGBYboDmHajiyzytoYlbNHs4G/uiJEcyTvEu0GoV7Ci4vNLMU
-	h0tkTW0JweRHmoey1/ElRTIJ/d1oY0bbOcvWWmmoT8HxiMfHmDa0jx6sRcfDbViI4gVh5BnYPW2
-	FyWjNS+E1FVRF7mVZ0FC+Z9LJK/woXnA7pcLuStrTz/6K9hNurVLPl28np7+vom7Wn14+JYPJI/
-	2t4gyiylh+xSRIoRxk+J/BEthNqSaoCSf4E+LyR+MxbwRP57dszrGiFxnkB7k+gPzn5Vj+zXS+L
-	AREq3o8hKHfds1Wfe0wi6etgM7wpjHDGCUADE0cTt7sMAy5DyVCY54B09JIMm9i/R0veYekVwF1
-	NKEg2OKP6LHS2fvwa7mZN9JDO1FltLVk8BoCi/5ZADajP7a1xu9NAG+5agJqiKIX0A8uNVg50w1
-	Sr9cydnXPVAvqgzXm1GuAavCwIYdv9KGyXkEoKHcek29TIKsi6qAkW9loCrYzriLg9pX17
-X-Received: by 2002:a05:600c:628f:b0:490:601f:d776 with SMTP id 5b1f17b1804b1-49242313c00mr42210685e9.3.1781883503936;
-        Fri, 19 Jun 2026 08:38:23 -0700 (PDT)
-Received: from Unimatrix13-WMWARE-Resolute.localdomain ([78.212.182.19])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4650bc426e1sm9045566f8f.29.2026.06.19.08.38.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Jun 2026 08:38:23 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <locutusofborg@debian.org>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=qO4pIJTd;
+ spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: joaomarcos.costa@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 67D8B1A01EF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 18:44:59 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 250C4601B7
+	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 18:44:59 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 28C71106C892C;
+	Fri, 19 Jun 2026 20:44:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1781894698; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=R0++F0S3SngT31GVZAx1THrQuNwxYSwRrZF16sRwvjA=;
+	b=qO4pIJTdsrbPsajeAC1z/vTq6MZ+JZkdukVfcJFbdfHwgZoLN96Cwd/27BLGc1FUZHgz+A
+	9FUd4+cxJ3/MvLV/4C9w2Qt+6/oE9YlFV7AUjmnA9J3DCo3SICzr7guyKG74x540anApG1
+	kipXJeg0tYfOrWWsokVKkbdJwpB4ZBzT8uDrR6W2opVtIBOp3cmIX8owaTvgG7eJpYxYWd
+	JwXzpZiW5rdN+i6bQGlHiwQL3c1e1whttk8FQyA+3QrNTRbWAYgx7i1pd/nQ56YRv4bER+
+	E1dm+faPCqAkNIRUNlHxMEsGaLrSQIGgAI0rquTfreKRMKn2/ZYWfiMWQayDsg==
+From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagna.gianfranco@gmail.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] ettercap: move from old libpcre to new libpcre2
-Date: Fri, 19 Jun 2026 17:38:16 +0200
-Message-ID: <20260619153816.254921-1-locutusofborg@debian.org>
-X-Mailer: git-send-email 2.53.0
+Cc: =?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>
+Subject: [meta-oe][wrynose][PATCH] jsoncpp: fix GCC 16 (and Clang 22) build failure with u8 string literals
+Date: Fri, 19 Jun 2026 20:44:43 +0200
+Message-ID: <20260619184443.408195-1-joaomarcos.costa@bootlin.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 15:38:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127682
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 19:29:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127683
 
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-Signed-off-by: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+This issue is known upstream: https://github.com/open-source-parsers/json=
+cpp/issues/1684
+
+Backport the corresponding fix, which is available from v1.9.8.
+
+It reproduces with Clang 22.1.8 (from oe-core's master) as well, not
+only GCC 16.
+
+Signed-off-by: Jo=C3=A3o Marcos Costa <joaomarcos.costa@bootlin.com>
 ---
- meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...build-failure-with-u8-string-literal.patch | 73 +++++++++++++++++++
+ .../recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb |  1 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-fix-GCC=
+-16-C-20-build-failure-with-u8-string-literal.patch
 
-diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-index a28de7b2bd..e8679bf463 100644
---- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-+++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-@@ -11,7 +11,7 @@ DEPENDS += "ethtool \
-             librepo \
-             libnet \
-             libpcap \
--            libpcre \
-+            libpcre2 \
-             ncurses \
-             openssl \
-             zlib \
--- 
-2.53.0
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-fix-GCC-16-C-2=
+0-build-failure-with-u8-string-literal.patch b/meta-oe/recipes-devtools/j=
+soncpp/jsoncpp/0001-fix-GCC-16-C-20-build-failure-with-u8-string-literal.=
+patch
+new file mode 100644
+index 0000000000..c27255653a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-fix-GCC-16-C-20-build=
+-failure-with-u8-string-literal.patch
+@@ -0,0 +1,73 @@
++From 143dd23261bc41d929d3603d0d502b2415bebbe4 Mon Sep 17 00:00:00 2001
++From: Jordan Bayles <bayles.jordan@gmail.com>
++Date: Thu, 14 May 2026 15:57:53 -0700
++Subject: [PATCH] fix: GCC 16 / C++20 build failure with u8 string litera=
+ls
++ (#1685)
++
++* fix: GCC 16 / C++20 build failure with u8 string literals (#1684)
++
++In C++20, the `u8""` string literal prefix was changed to evaluate to `c=
+onst char8_t[]` instead of `const char[]`. This caused compilation errors=
+ when these literals were implicitly converted to `std::string` or passed=
+ to functions expecting `const char*`.
++
++This commit adds `reinterpret_cast<const char*>` around the `u8` string =
+literals in the test suite to resolve the build errors while maintaining =
+the intended UTF-8 semantics.
++
++Additionally, this adds C++20 to the GitHub Actions CMake test matrix to=
+ ensure we don't regress on newer standards.
++
++Fixes #1684
++
++* style: run clang-format
++
++Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncp=
+p/commit/71d46ca38e90dc902e8178ba484af4f27fa11947]
++---
++ .github/workflows/cmake.yml |  1 +
++ src/test_lib_json/main.cpp  | 12 +++++++-----
++ 2 files changed, 8 insertions(+), 5 deletions(-)
++
++diff --git a/.github/workflows/cmake.yml b/.github/workflows/cmake.yml
++index 91f387a..375fa90 100644
++--- a/.github/workflows/cmake.yml
+++++ b/.github/workflows/cmake.yml
++@@ -8,6 +8,7 @@ jobs:
++       fail-fast: false
++       matrix:
++         os: [ubuntu-latest, windows-latest, macos-latest]
+++        cxx_standard: [11, 17, 20]
++        =20
++     steps:
++       - name: checkout project
++diff --git a/src/test_lib_json/main.cpp b/src/test_lib_json/main.cpp
++index d6938c1..1144409 100644
++--- a/src/test_lib_json/main.cpp
+++++ b/src/test_lib_json/main.cpp
++@@ -1993,7 +1993,8 @@ JSONTEST_FIXTURE_LOCAL(ValueTest, StaticString) {
++=20
++ JSONTEST_FIXTURE_LOCAL(ValueTest, WideString) {
++   // https://github.com/open-source-parsers/jsoncpp/issues/756
++-  const std::string uni =3D u8"\u5f0f\uff0c\u8fdb"; // "=E5=BC=8F=EF=BC=
+=8C=E8=BF=9B"
+++  const std::string uni =3D
+++      reinterpret_cast<const char*>(u8"\u5f0f\uff0c\u8fdb"); // "=E5=BC=
+=8F=EF=BC=8C=E8=BF=9B"
++   std::string styled;
++   {
++     Json::Value v;
++@@ -3109,9 +3110,9 @@ JSONTEST_FIXTURE_LOCAL(ReaderTest, strictModeParse=
+Number) {
++ }
++=20
++ JSONTEST_FIXTURE_LOCAL(ReaderTest, parseChineseWithOneError) {
++-  checkParse(R"({ "pr)"
++-             u8"\u4f50\u85e4" // =E4=BD=90=E8=97=A4
++-             R"(erty" :: "value" })",
+++  checkParse(reinterpret_cast<const char*>(R"({ "pr)"
+++                                           u8"\u4f50\u85e4" // =E4=BD=90=
+=E8=97=A4
+++                                           R"(erty" :: "value" })"),
++              {{18, 19, "Syntax error: value, object or array expected."=
+}},
++              "* Line 1, Column 19\n  Syntax error: value, object or arr=
+ay "
++              "expected.\n");
++@@ -3223,7 +3224,8 @@ JSONTEST_FIXTURE_LOCAL(CharReaderTest, parseString=
+) {
++     bool ok =3D reader->parse(doc, doc + std::strlen(doc), &root, &errs=
+);
++     JSONTEST_ASSERT(ok);
++     JSONTEST_ASSERT(errs.empty());
++-    JSONTEST_ASSERT_EQUAL(u8"\u8A2a", root[0].asString()); // "=E8=A8=AA=
+"
+++    JSONTEST_ASSERT_EQUAL(reinterpret_cast<const char*>(u8"\u8A2a"),
+++                          root[0].asString()); // "=E8=A8=AA"
++   }
++   {
++     char const doc[] =3D R"([ "\uD801" ])";
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb b/meta-oe/=
+recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+index 354f4e9115..6e931f15d1 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+@@ -17,6 +17,7 @@ SRCREV =3D "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+ SRC_URI =3D "git://github.com/open-source-parsers/jsoncpp;branch=3Dmaste=
+r;protocol=3Dhttps;tag=3D${PV} \
+            file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-166=
+8-1.patch \
+            file://run-ptest \
++           file://0001-fix-GCC-16-C-20-build-failure-with-u8-string-lite=
+ral.patch \
+            "
+=20
+ inherit cmake ptest
+--=20
+2.47.0
 
 
