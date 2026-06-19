@@ -2,184 +2,271 @@ Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D423BCD98F6
-	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 05:59:48 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.128])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36660.1781848787176346188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A378BCDB466
+	for <webhook@archiver.kernel.org>; Fri, 19 Jun 2026 12:27:20 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.113])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.41198.1781872027734323208
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jun 2026 22:59:48 -0700
+ Fri, 19 Jun 2026 05:27:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=Up8jUUkU;
- spf=pass (domain: navimatix.de, ip: 52.101.69.128, mailfrom: joerg.sommer@navimatix.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=J/FiPnvK;
+ spf=pass (domain: navimatix.de, ip: 52.101.66.113, mailfrom: joerg.sommer@navimatix.de)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bk6YY4C+1L8N/ZDBZPMloQrdMVL6xgddtfretMmBr7W2GA6ckNipocOpKq+GB+mvgPaZwFts9MyM83AdIK24BSkLlPaxL2W+cKMjkb8hHNiNEkBUd9jYPMHJ7ib07SnVzJIFw9xxzWUQnA8dgITxO8UIFa+JDGJcxd7A6teCnh4fwBzUFwXUMFhr9RN/KV6yqrBocfOi6AB+q6XGSulYEgLBegHcB9UPwSnxv1yeMwfjWm02mp9tiYO+o8LgwmdX3TKsddRxX5r/EA6qDSVqETwpBdPU8e6nufw0XF1ZupkNQI29Mk7tmbKzp8Kbs8Nq0jAfcZU/LHLdZ5cAH6v9iQ==
+ b=t7IUKRpwagP2+GJoNLR+G+26tm+NO+zRigIMpPWXDvAOdmGYKl+E/6XT1QRaZNRHu4T2EVD7AtWb6tLtFEsOeK6PwMv2dr4Oqvf6oQk5TOKCTtaTObL9GtQSiI38lBsB0Pu4GynIQSfLpzR4OK8fkKreLWZJQywSsTooiCr4OZR2CFVFHM65Vry/Uvs6sG7rZDufTbmEuwpaxi3JxoFBhy866+51UzF3pT28jq/1v0PApaSdU45sBvcIZDoGe2UbIaqyYJ5evxTcHIyAWB8NDHLCmXjBenvtMPjkODJNS1l0QtU1anyUnMQ91whHsPy7HiRqDguFNhydbE/9o1yyzg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gm7/vh7HHinpzWZqt5rkzLn9t0j1zfpzCmq9iQs3S7c=;
- b=TJdUL2iUxKUD/JdDC3IO3rHPfazQLq4aku4z++gkwaoaLeIKX+qCTpRmGHERu0VzGpWtV4ffeAK+X2RmxcuYoKY+ZN4lBCon/vM9KbUfz7hSEbgunpp8iQgnqwef4VpACJzQxSn7t3o3UTPLiabiEQ/MBpZhxQyY6OuWAWUblj2XpOk82a7/+wwbPvdR28Ia0/Zoy7gjPkUlmVyOgI7em5fouoQ9EVXBEl5s0ElJWu13Gx+m5yLhEPP5dwjstQ8EeUStMxdMxJngZT2X9loqNNp/g54dQRrSO1ooRGcmdj8lL/EvB+Gw+TCSaOlQ4BPVZqJSCZg5u6x2YNPX0MhJ1w==
+ bh=H57/N5IAOxYTCQdP8k7KSfbHmlvIWv/cOp6RqMNoOEM=;
+ b=cM+jXJTz89qAhk85jBpClyJbtKwDrFSSLOtV1+Vo6Y97wh2mpAUs2E56ZtQ8444pQKFAn54JTMg4Y8AVaJvffIt7Sy6ejvyLNhOWvAPYKJREuukYF0Bt3Us0Ga5Gi6x/2U/+ApVixIH2rkm9kRW2z69cWo2NSVhxfMDh197LTCm/iwA8Krkhs+UXByx09Iid0zeWXOT0yqIOSiGmdZsFWK6fp+bsDUt6ZKHgB12r+J3fazRydLSE1eSNCoz56vTf/jSvYybGVSq0o05L8iVLPF/HULKEmtvlKyrVIRZDzE6tiIk2kPjHIR3KXXHUO+uGaOYMdlavoE5LaSMMVS9MIA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
  dkim=pass header.d=navimatix.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gm7/vh7HHinpzWZqt5rkzLn9t0j1zfpzCmq9iQs3S7c=;
- b=Up8jUUkUrrw+9HtKLHky3MwnF/D9it0S1OE+lLGG/+jrI18+d7+0NFmCx8EftpaiZTPotry8+aRzoF3yGSZW+iLu/gUVZmgx+yhBWaPOCOXP6TZf5qJZnQTkbZP2jd2fOsBjUOZGmikxyknrTrzYvDIU49//J8nKKaJbrqa9pTc=
+ bh=H57/N5IAOxYTCQdP8k7KSfbHmlvIWv/cOp6RqMNoOEM=;
+ b=J/FiPnvK/PVU3ZDr6L/q43ZnL1pKQpnHGmp6x4to0F1E06Aq3Gv2bAbLUTxjKMyVv4MH2AytWMvnKwQv72DiKdoKL+dEzwwH6VrYDjkYIqGcgkt8CoXYOdjzgaW5Pi+lMtntCdImLdzgNdheXcaq/I+DL6+AXlp9YTy0NnhmmlI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=navimatix.de;
 Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by AMBPR01MB12155.eurprd01.prod.exchangelabs.com
- (2603:10a6:20b:6f5::6) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:150:2cb::8) by AS8PR01MB7192.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:25d::15) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 19 Jun
- 2026 05:59:42 +0000
+ 2026 12:27:03 +0000
 Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
  ([fe80::d5c3:2dea:3d98:25fd]) by
  GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.21.0139.009; Fri, 19 Jun 2026 05:59:41 +0000
-Date: Fri, 19 Jun 2026 07:59:40 +0200
+ with mapi id 15.21.0139.009; Fri, 19 Jun 2026 12:27:03 +0000
+Date: Fri, 19 Jun 2026 14:27:01 +0200
 From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
 To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
 CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH v2] sngrep: upgrade 1.8.2 -> 1.8.3+gitc77bd7
-Message-ID: <220f1c2b1e28979b37131e50457e0381b0561186.1781848779.git.joerg.sommer@navimatix.de>
+Subject: [PATCH] octave: upgrade 7.2.0 -> 11.3.0 + rework + pcre -> pcre2
+Message-ID: <2e11d3a01b91643c580397d35fea87d270d66771.1781872021.git.joerg.sommer@navimatix.de>
 X-Mailer: git-send-email 2.53.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0147.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:7c::14) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-ClientProxiedBy: BE0P281CA0017.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:a::27) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
  (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|AMBPR01MB12155:EE_
-X-MS-Office365-Filtering-Correlation-Id: 89b0db2e-f0ba-4f29-b352-08decdc7f455
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|AS8PR01MB7192:EE_
+X-MS-Office365-Filtering-Correlation-Id: 29cf31ad-e04a-4dd9-cb6d-08decdfe1185
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|56012099006|3023799007|18002099003;
+	BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|56012099006|6133799003|18002099003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	eyyIqx/x4L594/Uh4d3uJDYEZ25eKOnTrUfrQH7+ZfLkV7m7E59OWD+eLif8R2SCNg+ZOpwSr6UXiUnr/p7WS9BcXNbdqpxpglVEUVd8G67XidsCCvKCaBKHfGSUPv6fTrvQh2TRzTApmXRHiQH6DUqYKzP9M0DW15/AZeLtVBZvQF9qmasUfTlXfMBQtNxvxq+k2jLpDhomHlMGeqY0+1+lHEKCslJbEbvP+3ZSZpVy0Lx73Cv6MjWD+rOGAd6+ZdbHldCPcmbL7pklObJu6voYU8Z4tBQhsUcYq8MQWYhh35+6XFlRh3BDJUzOlnAHmG17CZCfUWfSiaQD2J8rEeetRccl6/Bt+Tzh8we//wwfI0EFMSPwiLghnsB6frqpluWFy7QqRoNUaW0DOYmcmGV+sRcBYyb2xAoMGnCVvkkyxcR7nkUA2eLfFESBAyPfKpEHBFTbvM5/EBiliNetZowNqSasFZPSJWQldmCeCvWYgyywiLoxVkpGPRr7dGIgfIpjCDeyRKhr+lbWnSQulo17ST/Z0qO3p8HyCMo+yYWGR4V1SP43BYDtIrbEuJxOnU1HQadp8j04yfPSEs/L/RP5mecHJzjl63hQKURV2b9+wcYP6U0Fipi2ZK/cHOlvckVoY5VCc0gvFRCKYE9d+xnOYyQJduN5kZRDz25Mmhk=
+	1Q0LgZL9bNeMeyTzTrupyruddATTfAVyJrSqI6JdqlT+oYO2JrZoOAQL44GDAm5AiJbikoKUTy4n+QfnJHo0f3+EXIcdAYmoDz7Bbnbe7sve7fzaEDxJ9fMl8ikVOOIc99rCZIF30Tu0+dPBToOip81EwvPn+6FWfrLAml1Xo008DFKdRfY3YhnhAVOYmyKqpMe9Jid+QRSkPI71LJHB53wkqjVYARxyBjX48ee1Yr1/Cqq4ssZsrdnqUqBYXbrjQBem0/EhvUyAghSUbiot3GiOu/F3ud4LEa/n6VAlnFHbjLzp51/9ekh5HR8BUtQqz4d05xF4fPvbT0749ZHZMtnREw0UPLaD0CqocnsBTkcoqmzqsArAIBoHi1t4lLvL4pxBBji0MlkmCw/gp72vbuSowlxD6/L0NQkUeQdLQF3kGOT4ECwxPgfJEvY09fy+sGffqwnS6GhJJUZGmvZvycMgopl/tk7o0aNFaUv0i2NqsfB1vS10zZn6SYOjAbab+ixXibTqhWWun6gOoN5lPI7KNsO2MoQqQX6WVyF+a1bJlTdsC4c/sqphmsgI/ijGuKo6mPtED7b6UKSZI2RRzCqvOsZkRA+Drpl6a84nRcw=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(56012099006)(3023799007)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(56012099006)(6133799003)(18002099003)(13003099007);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?J36Mqt1Yi8NiWvcoL9Pc1JzJYdcPZGfATVkHD/zvHNOYta3uaXYK0CyZn168?=
- =?us-ascii?Q?RHdefGitye99Q8jq1YvZR6kZMX4KSzl3EkvM9wKTneYz6FPaCHUmJ9YcbyCM?=
- =?us-ascii?Q?Lu4CTQPSR8BVjflYvyzDEJJr9muvoQExo93DlAk9hLMLo47qLs7PJeihhRwk?=
- =?us-ascii?Q?P/8DXJ6/twWneMRqNWQWOPGE8OWQc04EBg9ih4jYZyUsM2egdWqK0Zk7lPap?=
- =?us-ascii?Q?GHGmMrZEd8ChQ/S68hf/NjeRsZY6/kohDDoKKsm1kKYyyWqLJgEbWcFy8j0M?=
- =?us-ascii?Q?uFts815QXyWTLxP3JlYMbA4mB3N+t9z8orfUn5o1fR0HvRhNN6BssZU6O8O2?=
- =?us-ascii?Q?bZ+hpLYC+HQErlGymTLfu8GjDISnBIgt7z3+xO8PtDkseHufZf14OU/DUpDG?=
- =?us-ascii?Q?jm8d/ePWUR3HquExbawCrlwnyoSRcPab3qzeWSyp7g/4LnQ8n36uInYQ1M3S?=
- =?us-ascii?Q?FDvM4hAkDM12LIfwXv6HZzFHA+bR5IVrpDSKAMDMtXmw6s/bk+mD9tYxYFxR?=
- =?us-ascii?Q?tkUfXmIkhlv7Pryajj4D7mZhUYNk4lMeJdXbSp57YcBRjhVrsuu6ujBX4qIK?=
- =?us-ascii?Q?JCil98iG8aYgX3d/D67odrlSLGJrjOaCO/FaSHqgMhMVB5W/0qzZL68SzCS7?=
- =?us-ascii?Q?MHiUy+g/dcqiZm/5BUB5XLdwUrmx5j7N3WR7r6TMcShXnfTY7xcaBzYNSGnp?=
- =?us-ascii?Q?HtqLR4IX3ieUmbsmUo/WIHJrmo1CjJv0pGpfCJqLUDgskA3urt7ETy4Xm97T?=
- =?us-ascii?Q?sbmlnrtytlOUe38b40/oVJu8enmakL8JXazYCInxXiQTmaXQy15bQafBBNi9?=
- =?us-ascii?Q?MzO855gLOCpLuHRn+ZPix9mMIlWjOhUl1BMMXdgZmDe9FD7Dx8NS5IYhteZT?=
- =?us-ascii?Q?46fJQO1zHKpUctY6czqbJDeTJFmr6a5o6GZaxVRaCRqSOBbvxy/yHEfORNHT?=
- =?us-ascii?Q?i3ZzK81rhfFc7VEX0vcRkwfUblMnU+b2vKnH+7W1aGfjzgzPxvu0FUdPVDWH?=
- =?us-ascii?Q?lu5vJAy1qBbeDYde1s55P5EiJm8A2BntLTEY1tJ9bSUvGmYmt8RwlG0O5w3R?=
- =?us-ascii?Q?03HiWiB1Ddh6LZlJw+8z6rA94k968FTS+p4U51Oz6rCK9pdcZA9s0ahpFP4E?=
- =?us-ascii?Q?F5TinfHQ5cGMTsRbDZmILf7CQ3nHRtMJ+tAn6Ti0Ri3mN8jNT+kBqcbgEDPg?=
- =?us-ascii?Q?o5YibH42hCIr4OuGswZ56Tzxp1wkNXp2DG1SL3TivoLgA+SHyt+zaMEvggLP?=
- =?us-ascii?Q?RgNxh3EfEnwHmO5k0Mdr8YiSqUiV32CH824lVOn5cJdVTrzyZ6m6B5edAz+q?=
- =?us-ascii?Q?dxzOzgsIKXThDUcNKmOfsY8rXAy62812DtmARvYFO5OckxMO6zecpBqVzeYY?=
- =?us-ascii?Q?N1F07tfXmeHJxvQKcqHpi24O2oYzdfVL/IkHo9OlWPLytI1ocaNMlCObmo1p?=
- =?us-ascii?Q?Egqw/6vBq0WMFCBxfpl2iLTgRw66rbief77UxjMqF8UgH+HXJII1OTEhhb7b?=
- =?us-ascii?Q?XWO9OmgXSH9nYUT7XnvRKpQGprmCVHa9EEWU00gAwBuCf2f2/Y2P2dLwyodY?=
- =?us-ascii?Q?0LA22VIJYgvbFfyHkbDOKvE9m5DAPIfN7//m/ppI42adBbmuQaIMZZGTYukL?=
- =?us-ascii?Q?OteUQccWM5RcEIs0WsS7eLUi4S1mtfP5rghB2LOzrvFLwILkuQApsIFdt3fj?=
- =?us-ascii?Q?BCJO3F+iW6lFOQoqC42tBeAW7CTc0yHENhNaEzbTG6tXxzl4hL9XYe/l1gIn?=
- =?us-ascii?Q?M6LFgUmDRGA/psRE5t/Fx52ePUfgL+M=3D?=
+	=?us-ascii?Q?GCKE1e6jnmaHdeRx6kTbcns/x3RqorQnmkPcsAJNGkGB9wkQSM52+4TPVZOf?=
+ =?us-ascii?Q?nRESwfxyb9KT/GvGn+q254KBfl80loXCNGyb726CiJoU1I9p0g63LIfGd8fF?=
+ =?us-ascii?Q?22XPWIWWknYdsTKxKpb1CLCxKVMBWBpd3QEX/nJ+rjxViO+roXTLMtt/1GsP?=
+ =?us-ascii?Q?DL+0dGVut2xGvcRX/0TBeTUpPw5ws6nsUTuP9iJxb2y8e/X832Eloc+o29hf?=
+ =?us-ascii?Q?O5vBQD6jTpsn7fZQzdHo+CXIt/1DQNOW6AAlm6dNOavlTi/mVSaCKAPnTKry?=
+ =?us-ascii?Q?uhZJRCNwh53RXeccmQMwxSyhasSczPgrqgU+X9bINxVFurrrZP3Zgv+SkQ+S?=
+ =?us-ascii?Q?Qc+fMn7k+VesAFI/UNFBg3NaBUzP6q5DimgEsuTkG4FXdo6DWg2E5E0p7duz?=
+ =?us-ascii?Q?OEunHybtJ8YTNG2irH64UXbfm7n0bD462WnOZhPz0X+VrNNYZj6u9nWUrx2k?=
+ =?us-ascii?Q?ZJbZ4MEwK6S7vcZlydgTNPkZWjBCM7IKGMKVdEXs06B6rkBh74IcIca9n0mZ?=
+ =?us-ascii?Q?rKBT7PMsrw0dJpSXwNbS98kxOr6xk9GYYgvcMXfkztO1cFsDIDZewUUgWDol?=
+ =?us-ascii?Q?+54r1xqRFPgujSU4NDVmozdOzLNJ7Cvl8C4LozTgmVDFuBFwP+BVHcsN+FpZ?=
+ =?us-ascii?Q?INBC1tgz2UXiCXA4AR7CWdFh+nw5dmuNEq61yQG0Zkm0RbDjXKJXm0H+tPao?=
+ =?us-ascii?Q?2GklWmNBlj8DfJWWeHNjUh/YTQ4WBsNsYrtEZXKK2r+aGO6+pfBiNlqK9YVO?=
+ =?us-ascii?Q?T3dVqF6DX6OJrlnkhe0Il3HwN7AqV4NWgQk1D6DlGb2cOUgln1IHCRU1lGNH?=
+ =?us-ascii?Q?QE6FCtjszhJ1ZSJ+4Wa+vYDxHF1LmhcMPsjXeSrvTe1ykX+M2+p0YXOkyu61?=
+ =?us-ascii?Q?4jbFHOFXjjp7v0LjcFQ22ZrXhv/a0JhTyTEqQ0NqR4VD+yvUPzKaoiVIH+gK?=
+ =?us-ascii?Q?zGVs6bw4NbLwFexs+I/cC5LXsTip64jYeb/6dTd2Aaw9y0A+mQngSMgsppMQ?=
+ =?us-ascii?Q?1Xiq1/dS7Ko55/MiKcN/cKJxayMBn1ZM0QP//89bcHwpVr/8/dvQRVkmytQd?=
+ =?us-ascii?Q?a1hhfqPZu0yyQQP5na/T06LK7/dmJU77PpqQVktqvG/rT6rQ97xBnMNFBP26?=
+ =?us-ascii?Q?ch4G2vwrt0kmsuz1aVED5AUBl0qORpcN3+suy0BjU/zJivhk4isCAacH4TMX?=
+ =?us-ascii?Q?LYRQZ+koKjyGI6Um8DcOfC252AZdVkCyHFEdx0LfLI9sz0Rc/seCNAi4GCJf?=
+ =?us-ascii?Q?3i53OtzVDc3HkJMItYR0AX9IaQDfSEb+11KjEWh58zobSW7S+iOZZTJYcnab?=
+ =?us-ascii?Q?dMAls0m4awxTXJ+We8yk2VvnnCaMqP0Cm+Isi8gXm+tP+rZjPD5xZyCPaLOA?=
+ =?us-ascii?Q?dZE4Ug0IDmflAhS0vJYrntm2fk0SuJmiez8I2RY4h6VcrU6f4SoqyhdkWTjp?=
+ =?us-ascii?Q?GggZrCHo1S7O3hMbxM3iks98SNKxeDiAVd13G1MwquR0Ovz1sin+7Vhd9CmA?=
+ =?us-ascii?Q?0Hyv9YTuYAIFXcLzU84re1kKD8kTQQ0cAQLS3ivBpUsOqm1Yh3JDa7odum2s?=
+ =?us-ascii?Q?rCZTEH4tDSRT5mBSde9ha8LhVjMNJ0+bt7tQbKiH96Lbbth2Kr96a4wZZPV8?=
+ =?us-ascii?Q?kyldO8PTFm2NLNn+9OQmhpEMNXczDVw0tRWKKMhHUF+LwDucYk6KuMqsVzVT?=
+ =?us-ascii?Q?IqfW8UUOqK7W9ZjRLf2Rz2nCTGiOrpTzBnnRaFgbc8TR0V0hhWGFuKhEXRU5?=
+ =?us-ascii?Q?nt86nlDfLBZpyJcJ5En+ik5VPmggxV0=3D?=
 X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89b0db2e-f0ba-4f29-b352-08decdc7f455
+X-MS-Exchange-CrossTenant-Network-Message-Id: 29cf31ad-e04a-4dd9-cb6d-08decdfe1185
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 05:59:41.5806
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 12:27:03.4504
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7g4gGfaAl9WBYrSOJGxhSruXSbE9Xse2W+pObDCQoHkGyl2lUL30ZeZVLdWF5lyUmZPswngdTpLpo/O8CWRVcRqDBGm/nvPfflAPJ7eg1qg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR01MB12155
+X-MS-Exchange-CrossTenant-UserPrincipalName: zAfSyUysnVEe7JFVPYd6hGP/6oUJEEIynTePY5Px0LV2doCv+lsu+0gDXpbtx+We/jEr7BBcBaLRK4rXlEWqyrJaUKlvRwDrTwOBU0mzq2E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR01MB7192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 05:59:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127680
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2026 12:27:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127681
 
 From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-Update to a newer version of the last release, because this does not compil=
-e
-which got fixed with
-https://github.com/irontec/sngrep/commit/b84f0663e47de6f238d9f81eed67612a9a=
-b616ef.
+This new version works with pcre2. The other dependencies only got sorted.
+Now, Octave provides xz compressed tarballs, which are much smaller.
 
-sngrep supports pcre2, so use this instead of pcre, which is outdated.
-
-Changelog:
-
-  * capture: add support for telephony-event rtp streams (RFC 4733)
-  * capture: replace fake HEP frames for network captured packets
-  * call flow: limit call-id displayed on title to 125 characters
-  * rtp: fix duration value in telephony-event is incorrectly converted
-  * core: fix out of bound arrays crashes
-  * eep: fix multiple memory crashes in HEP parsing
-  * ipv6: fixed incorrect payload length for fragmented IPv6 packets
-  * build: use libgcrypt-config if pkg-config is not available for libcrypt
+Unfortunately, Octave generates source code files during the build with
+multiple variables from the build environment which are end up in the
+binaries.
 
 Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
- .../sngrep/{sngrep_1.8.2.bb =3D> sngrep_1.8.3.bb}            | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/sngrep/{sngrep_1.8.2.bb =3D> sngrep=
-_1.8.3.bb} (84%)
+ .../files/fix-blas-library-integer-size.patch | 18 ------
+ .../{octave_7.2.0.bb =3D> octave_11.3.0.bb}     | 55 ++++++++++++-------
+ 2 files changed, 34 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/octave/files/fix-blas-library-=
+integer-size.patch
+ rename meta-oe/recipes-devtools/octave/{octave_7.2.0.bb =3D> octave_11.3.0=
+.bb} (39%)
 
-diff --git a/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb b/meta-=
-networking/recipes-support/sngrep/sngrep_1.8.3.bb
-similarity index 84%
-rename from meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb
-rename to meta-networking/recipes-support/sngrep/sngrep_1.8.3.bb
-index 12fe3ececa..c82db8c9aa 100644
---- a/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb
-+++ b/meta-networking/recipes-support/sngrep/sngrep_1.8.3.bb
-@@ -7,7 +7,7 @@ LICENSE =3D "GPL-3.0-or-later & OpenSSL"
- LIC_FILES_CHKSUM =3D "\
-     file://LICENSE;md5=3Dd32239bcb673463ab874e80d47fae504 \
-     file://LICENSE.OpenSSL;md5=3De39170c41c6f83de36426dbf49a03632 \
--    file://README;beginline=3D100;endline=3D124;md5=3D758a88cf2b27572df059=
-96a3810066b3 \
-+    file://README;beginline=3D102;endline=3D126;md5=3D758a88cf2b27572df059=
-96a3810066b3 \
+diff --git a/meta-oe/recipes-devtools/octave/files/fix-blas-library-integer=
+-size.patch b/meta-oe/recipes-devtools/octave/files/fix-blas-library-intege=
+r-size.patch
+deleted file mode 100644
+index 4189d4083a..0000000000
+--- a/meta-oe/recipes-devtools/octave/files/fix-blas-library-integer-size.p=
+atch
++++ /dev/null
+@@ -1,18 +0,0 @@
+-Upstream-Status: Pending
+-
+-diff -Naur octave-4.4.1.orig/configure.ac octave-4.4.1/configure.ac
+---- octave-4.4.1.orig/configure.ac	2019-02-23 10:46:24.287240571 +0000
+-+++ octave-4.4.1/configure.ac	2019-02-23 10:46:42.255249333 +0000
+-@@ -762,6 +762,12 @@
+-   AC_MSG_ERROR([BLAS and LAPACK libraries are required])
+- fi
+-=20
+-+if ac_fn_f77_try_run "$LINENO"; then :
+-+  ax_blas_integer_size=3D8
+-+else
+-+  ax_blas_integer_size=3D4
+-+fi
+-+
+- case $ax_blas_integer_size in
+-   4)
+-     HAVE_64_BIT_BLAS=3Dno
+diff --git a/meta-oe/recipes-devtools/octave/octave_7.2.0.bb b/meta-oe/reci=
+pes-devtools/octave/octave_11.3.0.bb
+similarity index 39%
+rename from meta-oe/recipes-devtools/octave/octave_7.2.0.bb
+rename to meta-oe/recipes-devtools/octave/octave_11.3.0.bb
+index eb96a624f6..9f796e1f0f 100644
+--- a/meta-oe/recipes-devtools/octave/octave_7.2.0.bb
++++ b/meta-oe/recipes-devtools/octave/octave_11.3.0.bb
+@@ -1,5 +1,11 @@
+ SUMMARY =3D "High-level language, primarily intended for numerical computa=
+tions"
+-HOMEPAGE =3D "http://www.gnu.org/software/octave/"
++DESCRIPTION =3D "\
++    GNU Octave is a scientific programming language with powerful \
++    mathematics-oriented syntax with built-in 2D/3D plotting and visualiza=
+tion \
++    tools, which is drop-in compatible with many Matlab scripts. \
++"
++HOMEPAGE =3D "https://octave.org/"
++BUGTRACKER =3D "https://bugs.octave.org/"
+ SECTION =3D "math"
+=20
+ LICENSE =3D "GPL-3.0-only"
+@@ -8,45 +14,52 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1ebbd3e34237a=
+f26da5dc08a4e440464"
+ # To build, add 'FORTRAN:forcevariable =3D ",fortran"' to your local.conf =
+(or use
+ # meta-mortsgna as distro :)
+=20
+-DEPENDS =3D " \
+-    gperf-native \
+-    libglu \
+-    lapack \
+-    fftw \
++DEPENDS =3D "\
+     curl \
+-    freetype \
+-    fontconfig \
+-    texinfo \
+-    pcre \
+-    readline \
++    fftw \
+     fltk \
++    fontconfig \
++    freetype \
++    gperf-native \
+     hdf5 \
++    lapack \
++    libglu \
+     libsndfile1 \
++    pcre2 \
++    readline \
++    texinfo \
  "
 =20
- DEPENDS =3D "\
-@@ -16,7 +16,8 @@ DEPENDS =3D "\
+ inherit autotools pkgconfig texinfo gettext gtk-icon-cache mime-xdg featur=
+es_check
+=20
++# File /usr/lib/octave/11.3.0/liboctinterp.so.15.0.1 in package octave con=
+tains reference to TMPDIR [buildpaths]
++#  contains the whole compiler invokation
++# File /usr/lib/octave/11.3.0/.debug/liboctave.so.13.0.2 in package octave=
+-dbg contains reference to TMPDIR [buildpaths]
++#  contains all fortran compiler options
++# File /usr/src/debug/octave/11.3.0/libinterp/build-env.cc in package octa=
+ve-src contains reference to TMPDIR [buildpaths]
++#  contains multiple variables from the build environment
++# File /usr/src/debug/octave/11.3.0/src/mkoctfile.cc in package octave-src=
+ contains reference to TMPDIR [buildpaths]
++#  contains the variables CC CFLAGS CXX and CXXFLAGS from the build enviro=
+nment
++INSANE_SKIP +=3D "buildpaths"
++
+ REQUIRED_DISTRO_FEATURES =3D "x11 opengl"
+=20
+-SRC_URI =3D " \
+-    ${GNU_MIRROR}/octave/${BPN}-${PV}.tar.gz \
+-    file://fix-blas-library-integer-size.patch \
+-"
+-SRC_URI[sha256sum] =3D "b12cb652587d31c5c382b39ed73463c22a5259ecb2fa6b323a=
+27da409222dacc"
++SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
++SRC_URI[sha256sum] =3D "2b80f3149b2de6d1f4f2fcb4fe6515a17eb363b52111bf57b9=
+0f37bf6f5e12e1"
+=20
+ # Note: Qt5Help is required for gui -> qttools(-native) must be build with
+ # clang in PACKAGECONFIG
+-PACKAGECONFIG[gui] =3D "--with-qt=3Dyes,--with-qt=3Dno,qttools-native qtto=
+ols qtbase"
++PACKAGECONFIG[gui] =3D "--with-qt,--without-qt,qttools-native qttools qtba=
+se"
+=20
+-EXTRA_OECONF =3D " \
++EXTRA_OECONF =3D "\
+     --disable-java \
+     --disable-docs \
  "
 =20
- SRC_URI =3D "git://github.com/irontec/sngrep.git;protocol=3Dhttps;branch=
-=3Dmaster"
--SRCREV =3D "dad1033640f249fa4994f976cf6ee96826c15702"
-+SRCREV =3D "c77bd75a52d1aac96ae9d1603f2b7dfbe7e90ffd"
-+PV .=3D "+git"
+ do_compile:prepend() {
+-	for folder in "liboctave/operators liboctave/numeric liboctave/array libo=
+ctave/util"; do
+-		mkdir -p ${B}/${folder}
+-	done
++    for folder in "liboctave/operators liboctave/numeric liboctave/array l=
+iboctave/util"; do
++        mkdir -p ${B}/${folder}
++    done
+ }
 =20
-=20
- inherit cmake pkgconfig
-@@ -29,7 +30,7 @@ PACKAGECONFIG ?=3D "\
-=20
- PACKAGECONFIG[openssl] =3D "-DWITH_OPENSSL=3DON,-DWITH_OPENSSL=3DOFF,opens=
-sl"
- PACKAGECONFIG[gnutls] =3D "-DWITH_GNUTLS=3DON,-DWITH_GNUTLS=3DOFF,gnutls l=
-ibgcrypt"
--PACKAGECONFIG[pcre] =3D "-DWITH_PCRE=3DOFF,-DWITH_PCRE=3DOFF,libpcre"
-+PACKAGECONFIG[pcre2] =3D "-DWITH_PCRE2=3DOFF,-DWITH_PCRE2=3DOFF,libpcre2"
- PACKAGECONFIG[zlib] =3D "-DWITH_ZLIB=3DON,-DWITH_ZLIB=3DOFF,zlib"
- PACKAGECONFIG[unicode] =3D "-DWITH_UNICODE=3DON,-DWITH_UNICODE=3DOFF"
- PACKAGECONFIG[ipv6] =3D "-DUSE_IPV6=3DON,-DUSE_IPV6=3DOFF"
+ FILES:${PN} +=3D "${datadir}/metainfo"
 --=20
 2.53.0
 
