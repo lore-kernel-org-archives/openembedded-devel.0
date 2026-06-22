@@ -1,268 +1,253 @@
-Return-Path: <ecordonnier@snap.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D565CCDB46B
-	for <webhook@archiver.kernel.org>; Mon, 22 Jun 2026 08:39:40 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.38746.1782117579418927664
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76DCACDB46F
+	for <webhook@archiver.kernel.org>; Mon, 22 Jun 2026 09:43:35 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39534.1782121412173291630
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2026 01:39:39 -0700
+ Mon, 22 Jun 2026 02:43:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=cupQole9;
- spf=pass (domain: snapchat.com, ip: 209.85.128.44, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-490b211ee6aso28035045e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 01:39:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782117577; cv=none;
-        d=google.com; s=arc-20240605;
-        b=TzcTNOiYnggaZJtUyhayf3kLsNCPeMOhnEr86qEIWiLgpygdZjVgUCawE9gr/DHFJV
-         P8xXxf4/Zny0NmnSDzYACkp3Ck5KpTk0dJRlgQH3JOipzTie9lDFf4GQ7+KIqmu7tUea
-         v/shuZqCgh+8FZFcA7+FRh5jQVAZs7QX6brzpfSsf5oyxya23QRG664dE/XJzjLub67u
-         U8AEI7PKq5aHv8JPuO/TKZWnaQXoxfnFJz37zW+z45dWsTnGaagTOA3T5gWR3EHZ2IS9
-         fhT6xFXzKXpYHG1Y4hTdeBP3ymVrKrAeokdrXotop7E+tUuLUXVDL1UqkGTRO63LemeC
-         hY1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=egMbqNHX9x5YvVuV0cEjznuRnA5ydX9TvWPQlTUZ6wA=;
-        fh=slY3CzseMmVDlMmqrvz76xOxCzFnPvB9OKGPtS1cyuU=;
-        b=CLzdlhuXBFUYIdCkkQe87mRN6qWd3ebqAzm6+3xYh3g359WBkfIvqlAwYtqpdZOC/7
-         BhETZ6jW+AHzl3NH0o9woRn5040DPtefMPvT3lcsplPw7JIHeqgUK1xkdyRJ3amjnz8Q
-         ws5/wjkqldEBFFUsdY67Le/IBtw0pICLjpgnYn3aSJBvGaV1pWVCEyzgNEfY7D6GDmB+
-         e9eGjZjOWRZRAdMz0SEzHGOEYnvVxPxQihdAT54islNPFFEYHcaeHNRxeQOHuq+SuJ0l
-         GU1Ubh0ZNS6/7YDnmts+U3paJeqF76/MtQZEdqT71G2H23AEFGdchXzC+vb2gujJtd4V
-         WF5Q==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=GHfVld/d;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=NY5r+9dK;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65M59TmF3850866
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 09:43:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=XexM6m/EiJ9iC4ZUjN408CJugaYPSy8J0mH
+	UFTjM7E0=; b=GHfVld/dHHBAbSGVtCKfuOhYhhgEF790xcByDZuoOpo/bJHYqFa
+	pInKDy8/k7HgKGj+uZYh3HIjxHxDN5Rg2BXiPo8b+g3Tg1lEf0emN7sIttzifJwA
+	qANUztM/1HVf4cYVzXLlT7j2JiE8QvxsR4PvPKClwC0TNxrVNCVgFfVyJicl5slD
+	Q13cemUwyI7vJMTTcqyywcTUoB3kGMA22jb7qDHVPxpL8EgTx6Xj0nCMljjNoH27
+	et/WfZV1Oabm2r1GwihlkDqf8NHQHOE9goIXKhnGCLwo3wDm7xFbprBDZR8rDyxY
+	BVk6Hg7X5f7411nx1jBVT1EGD//Mte/91Cw==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ewm585ptt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 09:43:31 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-36d98b6f019so4730872a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 02:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1782117577; x=1782722377; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=egMbqNHX9x5YvVuV0cEjznuRnA5ydX9TvWPQlTUZ6wA=;
-        b=cupQole9P0rN6VpYUV3V7LG7wPZfjMIlk0LjpCXYbwethj0ngUb5fUUEU9kUoqFV+y
-         gLAYjO0l+qvpzoBgtWgkuE3Rm2+7cIZx/41d2eGDI0g0TN58iZMGN0LAG0lK7WNV1jIp
-         9eWNITk214qdjF8NnYUfk628gNT88uHuW9pt0=
+        d=oss.qualcomm.com; s=google; t=1782121411; x=1782726211; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XexM6m/EiJ9iC4ZUjN408CJugaYPSy8J0mHUFTjM7E0=;
+        b=NY5r+9dKKtyBul4Qljte04fEMCGvnuBV0u3YFjXt1k6yhOzxfb8iVAdQ7P38JJc5Fk
+         9AJlAMtObfMn30bXdQsQ0WTC6TJWDTAUCCbMbPnMNsQwnJ6f1IKkMhwIgTRNG8pc0RxI
+         n4ohDzxIIUy6Q/s46l/C4kK6JV84eQyqFJw/nfaesHErOC+xQLn49qegQF+29lr+snqv
+         Ew44S2C8XjwaGNZHFdOjM64F9AGvVQH+v5H+ExPd43Oza2SmX/t4gmbJo77SdXMPMXlB
+         mLN30nRLcORQbs741qQ6raO/dMK6aMFYdkec6yZg0YriuNQwpsqFTBmfSNf53J+gydXk
+         ArTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782117577; x=1782722377;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=egMbqNHX9x5YvVuV0cEjznuRnA5ydX9TvWPQlTUZ6wA=;
-        b=eDEHWYQVFCInU1KMANUl5t/H+p/ICkRBaVE2Zw8xn1B7D/nQkYAvAFCEOkK1D/86Xv
-         X7pX/PtXQw3aZouKeeX1ziCfWETV3IoMrX9AHo2u06CeIqzz1T7hR8NAJweOh3MX1aq/
-         PaK0tI2ItYKVBlsmbmrZjMU1uXU8pqOWXNiL7RDGmTF+vpyR3xCieKu7hOppBvf+i0y6
-         rVs3nOIRYEd51XruPX8hUGWTzU44DfMPat8t3ze36sodrquQ8GWanib8TreNq+QDX86D
-         oS1e20+FGGVVJOGOfbSADpmdD7r3PDd9U+2FaY2vd+eNoVFJtf4DmFQpq2Z1bE+2CqSU
-         ysNw==
-X-Gm-Message-State: AOJu0YygxyrrXngqkuCz+/8rK4vBQU/34e+jHXYr3br8s98yGHsSpWwT
-	4xZYmpItLXPY/hYhMCy2/YCH006PxXIK1Rqan8c7wJzFSc9xBfbw3WNH4/Gwr/1v/wR5cvQ7pEt
-	fyIYr/r+SEqRFdP43/MCQLaZRFJFzwtWJOhINjiEPKw==
-X-Gm-Gg: AfdE7cmZ1zWqHt4o7MzDNd8+WxP8a+PWUnAD3rUjzK1fK53TR1IuzC2KbohrcOUgeae
-	kSG7m9j5vzbrLFOGQYiOcobDyxX1Ir2IJ9G231T/3HwOljvS6Wdi3OTTDuAtofrKwYuQsi7oHF8
-	+SwD+UFIXMWqr46rBWmmh5/xhEeMEAmyu3J6AX/3oTYX5xpLP/CJBlF2dpkgHfn5uLyRDyUio82
-	d+ew5W6zCbGu7+sZ56SBdr+0FChjpQQDWuoWvy+ZbSHFZF/dBvxcv38x+4vYmPJK3Eup6k8RC2m
-	kWF4vvxKHtPXfEKB27b8Pn2tDfz1xw==
-X-Received: by 2002:a05:600c:3507:b0:492:433a:53af with SMTP id
- 5b1f17b1804b1-492433a552bmr210996185e9.16.1782117576305; Mon, 22 Jun 2026
- 01:39:36 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782121411; x=1782726211;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XexM6m/EiJ9iC4ZUjN408CJugaYPSy8J0mHUFTjM7E0=;
+        b=XgJfxxzzYW7DhThr1OgC+KwNymmx54F/R9aGKJK5JHjxPJmhCwfFioWHf1Tin/XiPb
+         s1S0mlDVFUtUt8mNg+Nm/Th3lQGGB3CnPaYNoVoJ+tCepio4JFm025R83BRa8/Ly/lZA
+         IryNU8KFr0j2jfSURgul8AzogoIKSZgyOqYya9DQ83Jk4VZAffMd7PMG1EMl0Gd1XAHm
+         IkBSeP4t4YZ7kVl0bPETOLanGNyXwrApRLoM7xlOqeEP+2Hc+h0yI3SlQavZ6rYspDP/
+         Q4HmeiH4u0QwXYmNhNPV9jnSVuPBsi3pVtxef+GjKmVs+fqULJKsfoHb00Hzo32UBUwz
+         z7pg==
+X-Gm-Message-State: AOJu0YzPwuaFtkfgzpU8fFMIklnxX8qtUeDy8x/MZjR7xmziw6T2AaYo
+	QeSQk3aM6BCg7iokPIg81DvPd0VO9uRi1AZ4+KDnaBhmUh2BFg2z4vlH7jGLj/gZWh4CS7Df0yD
+	IFuCahBvyUCstWE9yMEf7HnnykpHiVxOPE/ImAGVpT60N9CRcYrt/yRaHDq+5D8+bo/jPKIzplv
+	arM+siwFL4xvLl+anHG08=
+X-Gm-Gg: AfdE7ckjQ8AjauFfLuZ2uLjMU+zKmWp1k1tGdNs/ZyUD9/OxAmOEgHFL40337z81Tpj
+	qvanzO68voFk3BqXn2hif9ORI0oNKVg7KI44EHiGOo9uUwk9Xnz58y+9da32VLDL8Lj9nokCbUR
+	fsO6M37Rz8C120lE+ZaZEKbla67lQGqqrGg1M3vTgfilZJ0HYMWOYSsxYjNpVorXq4pxhxhSimc
+	HfMo3AvXd5MSatvn/4k5r74q/UQ2vjLYsBEGkmF2JEgBX2TCJLdE94tRM7z/48qBconhHwyWB1o
+	qCJoeGiU13325KAJhWHyz4QnGBY1ARW70pl7tFvEd8dd85n3nhvaSDhzDkG5fF2AiqBdeohH6uo
+	NHvPHxD2yeh/YRT/ZBv/ye5Ei0Dxa7es5jGlojncTnQ==
+X-Received: by 2002:a17:90b:1d49:b0:374:d67b:4048 with SMTP id 98e67ed59e1d1-37d4da3ae5dmr8378321a91.11.1782121410688;
+        Mon, 22 Jun 2026 02:43:30 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d49:b0:374:d67b:4048 with SMTP id 98e67ed59e1d1-37d4da3ae5dmr8378300a91.11.1782121410092;
+        Mon, 22 Jun 2026 02:43:30 -0700 (PDT)
+Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c7436af305sm80445465ad.6.2026.06.22.02.43.28
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 22 Jun 2026 02:43:29 -0700 (PDT)
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 00/25] Wrynose pull request
+Date: Mon, 22 Jun 2026 15:13:24 +0530
+Message-ID: <cover.1782121023.git.anuj.mittal@oss.qualcomm.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-References: <20260622070114.170139-1-emailaddress.ashish@gmail.com>
-In-Reply-To: <20260622070114.170139-1-emailaddress.ashish@gmail.com>
-From: Etienne Cordonnier <ecordonnier@snap.com>
-Date: Mon, 22 Jun 2026 10:39:24 +0200
-X-Gm-Features: AVVi8Cc1P3RFC2cB0EiLN60QnUsw9jBdwtXnFXngqZ2tBanmEDLerdIi42fc3tQ
-Message-ID: <CAHUKmYZYiMDMnXe0XYe0CCKspxTNOzNxE4KV82zFCtdXFRW67Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] android-tools: switch DEPENDS from libpcre
- to libpcre2
-To: emailaddress.ashish@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000001590620654d395f8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: CId2A__owfthCQoyZrbNJM0jR55kLyfs
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDA5NSBTYWx0ZWRfXzyZRU0DVTK3+
+ 9dvk84Ig56erbX8ZfOnPlEb+Ajbku0apN/zCJnu5wi/+ychV2caIv+2P1yn0ykYLN3C04XQY9wd
+ Yb/JkNkzSPm/DB7G+xtgkRRTLp6iABs=
+X-Proofpoint-GUID: CId2A__owfthCQoyZrbNJM0jR55kLyfs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDA5NSBTYWx0ZWRfXzWB572IdfUMG
+ rykHRi0PD8+EnsDKA53QTF6QojoE7nqAXXAwNda/jlbb/AnLIMm2M9pImSUP7L4FwSYb4piCIHu
+ debm6JnJtHFRJ/MnhxR3OrRf8TV36teYoRvyBLvajiWct8Rvn+RrV4b3fQISFu3UcefwqFTIZR4
+ bBrPCZWShUVlzNpZKeQHFNHBT78oC7gs8T1uxBGHT98WAfwCh+79x0CkJG0qD0v+SJj16PF+sxI
+ p62ggXMKXzZNbVcep7GZb1wQlnRtDS3MrLDltnXYZvpUMtUx5o2AWjMwI3CL7Cel1q8hQQSQYLo
+ OFFK7Gq2lMzgLnNI70lIsgD7iHAh+RPwcp9a+Y0KLji0BfR4AON+TTVtUPsUMNbfDhygzT5aONz
+ wMsqP9Fr7qwP5aFUxiwIuabF6l3SqUu2mt4jTFZIi849NCPAyVfjjaRGaKOpn620FNDBUK+4W15
+ IcCtl+1m9SRaPnBulsQ==
+X-Authority-Analysis: v=2.4 cv=FOQrAeos c=1 sm=1 tr=0 ts=6a3903c3 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=iGHA9ds3AAAA:8
+ a=Q4-j1AaZAAAA:8 a=VV45L3uDhhvSp9b-ImwA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
+ a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-22_01,2026-06-18_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ phishscore=0 spamscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606220095
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 08:39:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127688
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 09:43:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127689
 
---0000000000001590620654d395f8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Please merge these changes in wrynose. Changes tested on autobuilder and locally.
 
-Hi,
-this patch is changing v29 of android-tools, which doesn't exist any more
-in the master branch (it was updated to version 35).
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1561
 
-=C3=89tienne
+The following changes since commit a43f0d532c399458cae44ce66f3799a220fbb497:
 
-On Mon, Jun 22, 2026 at 9:02=E2=80=AFAM Ashish Mishra via lists.openembedde=
-d.org
-<emailaddress.ashish=3Dgmail.com@lists.openembedded.org> wrote:
+  README: update listed maintainer (2026-05-29 09:29:32 +0530)
 
-> From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
->
-> libpcre was removed from oe-core in commit-057cccd957
->
-> Migrate the DEPENDS to libpcre2, which provides the required
-> functionality and is actively maintained.
->
-> Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
-> ---
->  .../recipes-devtools/android-tools/android-tools_29.0.6.r14.bb  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/android-tools/
-> android-tools_29.0.6.r14.bb b/meta-oe/recipes-devtools/android-tools/
-> android-tools_29.0.6.r14.bb
-> index b3a3f78254..9d76fab08d 100644
-> --- a/meta-oe/recipes-devtools/android-tools/android-tools_29.0.6.r14.bb
-> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_29.0.6.r14.bb
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D " \
->
->  file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3Dcb641bc04cda31daea161b1b=
-c15da69f
-> \
->
->  file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=3D550794465ba0ec5312d6919e=
-203a55f9
-> \
->  "
-> -DEPENDS =3D "libbsd libpcre zlib libcap libusb squashfs-tools 7zip
-> googletest"
-> +DEPENDS =3D "libbsd libpcre2 zlib libcap libusb squashfs-tools 7zip
-> googletest"
->
->  SRCREV_core =3D "abfd66fafcbb691d7860df059f1df1c9b1ef29da"
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127687):
-> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
-.org_g_openembedded-2Ddevel_message_127687&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0=
-hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&=
-m=3Df5O4uqo0sA2G8DyzHRb-uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&s=3DRZ=
-2R8-0dKlCcfyKi-hqOX2N5z1lS1NQSLnfpG8R2VZM&e=3D
-> Mute This Topic:
-> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
-.org_mt_119920452_7048771&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC=
-2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Df5O4uqo0sA2G8=
-DyzHRb-uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&s=3DP9Zg87FJk6Oj3qzsps1=
-Yo9t0ogYshFVu-dIg7faD60w&e=3D
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe:
-> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
-.org_g_openembedded-2Ddevel_unsub&d=3DDwIFaQ&c=3DncDTmphkJTvjIDPh0hpF_4vCHv=
-abgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&m=3Df5O4u=
-qo0sA2G8DyzHRb-uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&s=3D9-T1Q6KrhMD=
-wM9kuGTedSE3Ny1_dfShRrnQ4sdsVSgQ&e=3D
-> [ecordonnier@snap.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+are available in the Git repository at:
 
---0000000000001590620654d395f8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+  https://git.openembedded.org/meta-openembedded-contrib anujm/wrynose
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/wrynose
 
-<div dir=3D"ltr">Hi,<br>this patch is changing v29 of android-tools, which =
-doesn&#39;t exist any more in the master branch (it was updated to version =
-35).<br><br>=C3=89tienne</div><br><div class=3D"gmail_quote gmail_quote_con=
-tainer"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 22, 2026 at 9:02=
-=E2=80=AFAM Ashish Mishra via <a href=3D"http://lists.openembedded.org">lis=
-ts.openembedded.org</a> &lt;emailaddress.ashish=3D<a href=3D"mailto:gmail.c=
-om@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: AshishKuma=
-r Mishra &lt;<a href=3D"mailto:emailaddress.ashish@gmail.com" target=3D"_bl=
-ank">emailaddress.ashish@gmail.com</a>&gt;<br>
-<br>
-libpcre was removed from oe-core in commit-057cccd957<br>
-<br>
-Migrate the DEPENDS to libpcre2, which provides the required<br>
-functionality and is actively maintained.<br>
-<br>
-Signed-off-by: AshishKumar Mishra &lt;<a href=3D"mailto:emailaddress.ashish=
-@gmail.com" target=3D"_blank">emailaddress.ashish@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../recipes-devtools/android-tools/<a href=3D"http://android-tools_29=
-.0.6.r14.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_29.0.6.r14.=
-bb</a>=C2=A0 | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-oe/recipes-devtools/android-tools/<a href=3D"http://andro=
-id-tools_29.0.6.r14.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_=
-29.0.6.r14.bb</a> b/meta-oe/recipes-devtools/android-tools/<a href=3D"http:=
-//android-tools_29.0.6.r14.bb" rel=3D"noreferrer" target=3D"_blank">android=
--tools_29.0.6.r14.bb</a><br>
-index b3a3f78254..9d76fab08d 100644<br>
---- a/meta-oe/recipes-devtools/android-tools/<a href=3D"http://android-tool=
-s_29.0.6.r14.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_29.0.6.=
-r14.bb</a><br>
-+++ b/meta-oe/recipes-devtools/android-tools/<a href=3D"http://android-tool=
-s_29.0.6.r14.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_29.0.6.=
-r14.bb</a><br>
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3Dcb641bc=
-04cda31daea161b1bc15da69f \<br>
-=C2=A0 =C2=A0 =C2=A0file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=3D5507944=
-65ba0ec5312d6919e203a55f9 \<br>
-=C2=A0&quot;<br>
--DEPENDS =3D &quot;libbsd libpcre zlib libcap libusb squashfs-tools 7zip go=
-ogletest&quot;<br>
-+DEPENDS =3D &quot;libbsd libpcre2 zlib libcap libusb squashfs-tools 7zip g=
-oogletest&quot;<br>
-<br>
-=C2=A0SRCREV_core =3D &quot;abfd66fafcbb691d7860df059f1df1c9b1ef29da&quot;<=
-br>
-<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127687): <a href=3D"https://urldefense.proofpoint.com/v=
-2/url?u=3Dhttps-3A__lists.openembedded.org_g_openembedded-2Ddevel_message_1=
-27687&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&am=
-p;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Df5O4uqo0sA2G8DyzH=
-Rb-uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&amp;s=3DRZ2R8-0dKlCcfyKi-hq=
-OX2N5z1lS1NQSLnfpG8R2VZM&amp;e=3D" rel=3D"noreferrer" target=3D"_blank">htt=
-ps://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded.org_=
-g_openembedded-2Ddevel_message_127687&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjID=
-Ph0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa=
-66m67E&amp;m=3Df5O4uqo0sA2G8DyzHRb-uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho=
--QbJ&amp;s=3DRZ2R8-0dKlCcfyKi-hqOX2N5z1lS1NQSLnfpG8R2VZM&amp;e=3D</a> <br>
-Mute This Topic: <a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dht=
-tps-3A__lists.openembedded.org_mt_119920452_7048771&amp;d=3DDwIFaQ&amp;c=3D=
-ncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsR=
-ih1DULJTKUkSGa66m67E&amp;m=3Df5O4uqo0sA2G8DyzHRb-uA--Wat2Fa1tuNQnMBtGFLFbnq=
-iiHzvnbwzJKXho-QbJ&amp;s=3DP9Zg87FJk6Oj3qzsps1Yo9t0ogYshFVu-dIg7faD60w&amp;=
-e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofpoint.co=
-m/v2/url?u=3Dhttps-3A__lists.openembedded.org_mt_119920452_7048771&amp;d=3D=
-DwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonV=
-uMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Df5O4uqo0sA2G8DyzHRb-uA--Wat2Fa1=
-tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&amp;s=3DP9Zg87FJk6Oj3qzsps1Yo9t0ogYshFVu-=
-dIg7faD60w&amp;e=3D</a> <br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttps-=
-3A__lists.openembedded.org_g_openembedded-2Ddevel_unsub&amp;d=3DDwIFaQ&amp;=
-c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj=
-9TsRih1DULJTKUkSGa66m67E&amp;m=3Df5O4uqo0sA2G8DyzHRb-uA--Wat2Fa1tuNQnMBtGFL=
-FbnqiiHzvnbwzJKXho-QbJ&amp;s=3D9-T1Q6KrhMDwM9kuGTedSE3Ny1_dfShRrnQ4sdsVSgQ&=
-amp;e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofpoin=
-t.com/v2/url?u=3Dhttps-3A__lists.openembedded.org_g_openembedded-2Ddevel_un=
-sub&amp;d=3DDwIFaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;=
-r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3Df5O4uqo0sA2G8DyzHRb=
--uA--Wat2Fa1tuNQnMBtGFLFbnqiiHzvnbwzJKXho-QbJ&amp;s=3D9-T1Q6KrhMDwM9kuGTedS=
-E3Ny1_dfShRrnQ4sdsVSgQ&amp;e=3D</a>=C2=A0 [<a href=3D"mailto:ecordonnier@sn=
-ap.com" target=3D"_blank">ecordonnier@snap.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+for you to fetch changes up to 100027977216601000cbefc42c2ff6cf667e7b5e:
 
---0000000000001590620654d395f8--
+  hostapd: Fix clearing settings for color switch (2026-06-18 13:11:20 +0530)
+
+----------------------------------------------------------------
+
+Abhishek Bachiphale (1):
+  dnsmasq: upgrade 2.92 -> 2.93
+
+Andrej Kozemcak (1):
+  poco: fix timezone and data time parser issue
+
+Ankur Tyagi (4):
+  libjs-jquery-cookie: patch CVE-2026-46625
+  postfix: upgrade 3.10.9 -> 3.10.10
+  python3-django: upgrade 5.2.14 -> 5.2.15
+  python3-django: upgrade 6.0.5 -> 6.0.6
+
+Anton Skorup (1):
+  jq: patch CVE-2026-47770
+
+Dmitry Baryshkov (1):
+  mariadb: fix building for the ARMv8.3-A and later systems
+
+Jason Schonberg (2):
+  php: upgrade 8.5.5 -> 8.5.6
+  php: upgrade 8.5.6 -> 8.5.7
+
+Li Zhou (1):
+  haveged: upgrade 1.9.19 -> 1.9.20
+
+Markus Volk (1):
+  pipewire: update 1.6.5 -> 1.6.6
+
+Max Krummenacher (1):
+  fio: fix build with musl
+
+Mingli Yu (1):
+  mariadb: Upgrade 11.4.10 -> 11.4.12
+
+Naman Jain (1):
+  nftables: Conditionally add ${PN}-python as RDEPENDS for ptest
+
+Peter Kjellerstedt (2):
+  php: Correct the license to PHP-3.01
+  ttf-dejavu: Use "Bitstream-Vera" instead of "BitstreamVera" as license
+
+Wang Mingyu (7):
+  haveged: upgrade 1.9.20 -> 1.9.22
+  imagemagick: upgrade 7.1.2-23 -> 7.1.2-24
+  memcached: upgrade 1.6.41 -> 1.6.42
+  gdm: upgrade 50.0 -> 50.1
+  python3-vector: upgrade 1.8.0 -> 1.8.1
+  python3-soupsieve: upgrade 2.8.3 -> 2.8.4
+  proftpd: upgrade 1.3.9a -> 1.3.9b
+
+Wei Zhang (1):
+  hostapd: Fix clearing settings for color switch
+
+ .../gdm/{gdm_50.0.bb => gdm_50.1.bb}          |   2 +-
+ .../{pipewire_1.6.5.bb => pipewire_1.6.6.bb}  |   8 +-
+ .../files/0001-Fix-build-with-musl.patch      |  50 --
+ .../{postfix_3.10.9.bb => postfix_3.10.10.bb} |   3 +-
+ .../{proftpd_1.3.9a.bb => proftpd_1.3.9b.bb}  |   2 +-
+ .../recipes-filter/nftables/nftables_1.1.6.bb |   5 +-
+ .../{dnsmasq_2.92.bb => dnsmasq_2.93.bb}      |   6 +-
+ .../dnsmasq/files/CVE-2026-4891.patch         |  40 --
+ .../dnsmasq/files/CVE-2026-4892.patch         |  36 --
+ .../dnsmasq/files/CVE-2026-4893.patch         |  34 --
+ .../dnsmasq/files/CVE-2026-5172.patch         |  34 --
+ ...emcached_1.6.41.bb => memcached_1.6.42.bb} |   2 +-
+ ...inux-prctl.h-include-to-fix-musl-con.patch |  33 ++
+ meta-oe/recipes-benchmark/fio/fio_3.42.bb     |   1 +
+ ...learing-up-settings-for-color-switch.patch |  34 ++
+ .../hostapd/hostapd_2.11.bb                   |   1 +
+ ...e_11.4.10.bb => mariadb-native_11.4.12.bb} |   0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |   3 +-
+ ...b11be28ae9b2432b2a661bf38a197cf9514d.patch |  52 ++
+ ...{mariadb_11.4.10.bb => mariadb_11.4.12.bb} |   0
+ .../jq/jq/CVE-2026-47770.patch                | 484 ++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |   1 +
+ .../php/{php_8.5.5.bb => php_8.5.7.bb}        |   4 +-
+ .../{haveged_1.9.19.bb => haveged_1.9.22.bb}  |   4 +-
+ .../ttf-fonts/ttf-dejavu_2.37.bb              |   2 +-
+ ...ck_7.1.2-23.bb => imagemagick_7.1.2-24.bb} |   2 +-
+ .../libjs-jquery-cookie/CVE-2026-46625.patch  |  63 +++
+ .../libjs/libjs-jquery-cookie_3.0.5.bb        |   4 +-
+ ...er-trailing-timezone-designators-Tim.patch | 240 +++++++++
+ meta-oe/recipes-support/poco/poco_1.15.2.bb   |   1 +
+ ...ngo_5.2.14.bb => python3-django_5.2.15.bb} |   2 +-
+ ...jango_6.0.5.bb => python3-django_6.0.6.bb} |   2 +-
+ ...ve_2.8.3.bb => python3-soupsieve_2.8.4.bb} |   2 +-
+ ...ector_1.8.0.bb => python3-vector_1.8.1.bb} |   2 +-
+ 34 files changed, 939 insertions(+), 220 deletions(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_50.0.bb => gdm_50.1.bb} (96%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.5.bb => pipewire_1.6.6.bb} (99%)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.10.9.bb => postfix_3.10.10.bb} (98%)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9a.bb => proftpd_1.3.9b.bb} (99%)
+ rename meta-networking/recipes-support/dnsmasq/{dnsmasq_2.92.bb => dnsmasq_2.93.bb} (95%)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4892.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-5172.patch
+ rename meta-networking/recipes-support/memcached/{memcached_1.6.41.bb => memcached_1.6.42.bb} (95%)
+ create mode 100644 meta-oe/recipes-benchmark/fio/fio/0001-backend-remove-linux-prctl.h-include-to-fix-musl-con.patch
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0002-hostapd-Fix-clearing-up-settings-for-color-switch.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.10.bb => mariadb-native_11.4.12.bb} (100%)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/c21bb11be28ae9b2432b2a661bf38a197cf9514d.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.10.bb => mariadb_11.4.12.bb} (100%)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
+ rename meta-oe/recipes-devtools/php/{php_8.5.5.bb => php_8.5.7.bb} (99%)
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.19.bb => haveged_1.9.22.bb} (91%)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-23.bb => imagemagick_7.1.2-24.bb} (99%)
+ create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-cookie/CVE-2026-46625.patch
+ create mode 100644 meta-oe/recipes-support/poco/poco/0004-Fix-DateTimeParser-trailing-timezone-designators-Tim.patch
+ rename meta-python/recipes-devtools/python/{python3-django_5.2.14.bb => python3-django_5.2.15.bb} (61%)
+ rename meta-python/recipes-devtools/python/{python3-django_6.0.5.bb => python3-django_6.0.6.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-soupsieve_2.8.3.bb => python3-soupsieve_2.8.4.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-vector_1.8.0.bb => python3-vector_1.8.1.bb} (88%)
+
+-- 
+2.54.0
+
 
