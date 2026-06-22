@@ -1,120 +1,96 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 272AACDB46F
-	for <webhook@archiver.kernel.org>; Mon, 22 Jun 2026 10:22:57 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.39958.1782123774468050791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2074CD98F2
+	for <webhook@archiver.kernel.org>; Mon, 22 Jun 2026 11:34:47 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.40950.1782128082324282647
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2026 03:22:54 -0700
+ Mon, 22 Jun 2026 04:34:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=QB9lWeXC;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-463f1165e16so4172784f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 03:22:54 -0700 (PDT)
+ dkim=pass header.i=@snap.com header.s=google header.b=OqXejRiI;
+ spf=pass (domain: snapchat.com, ip: 209.85.128.48, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4923139e940so24865125e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 04:34:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1782123772; x=1782728572; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WHI5b4Sa0x7Afb18Kvh2VS+WYFIc8IeH2hD9+PPscX4=;
-        b=QB9lWeXCnMruooceIHarjDPstiQ+A41/yoohg662r+9gVM4BL5ZZ4JaVVwZ3gwtcv6
-         P5yTniQKvKgCl99YcpvQneiIovxOxljnKLNcJ1kU/ybsAyv7CEM98qGFcY5G2QMv1IMy
-         +VV2DVF8CIITqL5GDml+SM2QltKOfAOd3PoAU=
+        d=snap.com; s=google; t=1782128080; x=1782732880; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0IsS3EKdFYMiGcTskOfRfGEyH/x/F++F7/MXYsZLa40=;
+        b=OqXejRiI3xD1vONSBp5K36mewaf5FhokES/7QoQJUIH4XKswz0vbex5hDCGgQ1cSzS
+         uLYNJZlC0WfuPYZJpBnggU/OQTbemtt9ADtz66cQ91bhmHLJW5ehNugQoKuPZIoZscrS
+         qtZGyvlE7rPWJL5BVz3c4rUgTaR0uxXZ6stqQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782123772; x=1782728572;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WHI5b4Sa0x7Afb18Kvh2VS+WYFIc8IeH2hD9+PPscX4=;
-        b=UtRrSiFdEX1voFShu9idwtLHm0dHEsBJXVkUDlfDqFajAoX2U6rFijTubQOTLZ62Ib
-         w7Kv4nkOHDw/pL9xkzVrbxXR7bwDYUfdT/p4UGvAPvDrsyXCe0BkRGkkGLClUKmrPUzn
-         rWiYznXeoZpLNDfht2UlOM8AtBM2oPdF65QEBZ4Ekhym1yJUrxPHsxpl8QKa1mtMWpbh
-         ojMgZd/NJIjgszGu3hDamqCZA49mHAGf5uCZzOLvWuWnAI1BGBtumWfUyKh3jwXiN+F2
-         asUzVJMCoe/Q8SBFQVywOAa0eqOVqA3l42wXp2XtHFUn46FeS3asYxzY/xjw37h42ZmW
-         FtMg==
-X-Gm-Message-State: AOJu0YybbPPJLpk6u5wvaIRM+BggoPSs8xRndH6pssTTLUuS1PgQH0dE
-	IxfW5pi+u1iCLX4FGuBDhTaXvIYTQp8VDoSfEWsBakbE3BTgIhd9LZl+Z9jSjtdDppN4RKgK5/x
-	2CYyl
-X-Gm-Gg: AfdE7ckD390/Vp6GgQTIBChE+4FgWfu8FaFgAvTKHNqX6EZ9nQF2Y/umwCxzW05XXaG
-	OnZoEUEHnpVaJYvhqpDjRKNvYKkimnXi0MLceynAm6n9CrQ1Y/fcy1rOQMEoS0hqyz5/DPX7P7x
-	JP7i12+J09WSe3FPSDUtdeQzjmhdRuFrJ7P8ylp4sD1IAiJiR/nrcnGw/1tR98wGVg82V9DahFK
-	sVzCz/F6tRFcPqs1jwB40lxOT001yalWA57JKZXKcdkUkgVR7pEtcMQtpxtrvetdQw2mahlqV0l
-	Um/F/48OUVfn3oAOGr71AmEEfCTNeFozE10vtUjl2Wg/Vq1EH5lTstsd17XIsWKkdaUjLOe5JMG
-	eg6h4m1Hr/IH+85LU9/cOvhddW55Gw1D6v0/lZr1wvZQTqhuN1m1/DXUZBL/MPG78WoRnmNdzTq
-	qLANtsYzMKoeW9MpQqd6Stgh0ksQ==
-X-Received: by 2002:a05:6000:46d4:b0:45e:f381:cd7b with SMTP id ffacd0b85a97d-4650638556dmr15566255f8f.8.1782123772427;
-        Mon, 22 Jun 2026 03:22:52 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4666712cceesm24397077f8f.35.2026.06.22.03.22.51
+        d=1e100.net; s=20251104; t=1782128080; x=1782732880;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0IsS3EKdFYMiGcTskOfRfGEyH/x/F++F7/MXYsZLa40=;
+        b=aosFLtRt6NIWmy899ZgDJ1Q/NccUUv7HNwHeenAg80gHclQ9o5bB2VwKPtMeJvg5XQ
+         6bbtCA4YIsM5Mcw/36fj2AoIu7Jlj7DIApmL23hMJDT017uOEcpbnSP6KDpR69cuBuFC
+         0trmMK9yP7mev+xcZwe5h3dhUmBfuG1cFo6FswiaRLK2TMy7kCnrZSIlhWgWLq2PecJe
+         Z/+27gRATGfI/ILQ8kPdcZKT1nJ/M9isMT7+Spk61IKY+LInFazd/BZ8bAqmysMty4HL
+         1avS9+RN3KUuaTT66N5W0CHqkxdfhF2SA4+fe5Ey1/62/qLi7+k1CzlmYnv4Mx8CzErZ
+         3bYA==
+X-Gm-Message-State: AOJu0YzEkV3Ifq/+pEs2YIC994oJkWY/h2ERODWrLXO+u5uhZQOxeRFM
+	j5eiZom8lKRVgktT/+e+WurWsTzD23oE4StEEPtbjrbnJtwsDlm4ZOsdZSdTZyTCxFAkk0Q8G9j
+	ngx74iB0=
+X-Gm-Gg: AfdE7clkEx/zJm1SClr190y2cCAhwDOETNDhopGcubEt+GxhGCf2Y1dWBvWUQqYzGub
+	ig9SZXj8AlWkAZxYqHvR5TKhU6T6/RteKAyyESLFll4P75lZVK+PSGBSLeiQsjD/FjAahPcA50W
+	wTdwWYdnxt6PgjCXIvmEljS0DwvLwIFk+kYM2bJsD0z9AgI2eEmbwYaU/JhayckibsuXKa29z92
+	X/KI8XDeIlVu5jaO/BUoKZod2TvjzBgVuTyEjGE545sFOlVv3ARGZO/GxdjjnBD70Ue/95nc4Pw
+	nZ7hxVloNJB+QQ1aNL9DzeWWcybs/9kFykntbGQi+hDDPlYdElfcKfEOlHLPxX5WbXOCvxbCon4
+	OB4EiCGuqLPBpxyPxyvpIiig0+Dh3PMA1MRLZLuflPSpki1XE/0gnht8d+5oC3+SPiFJz+7OjA0
+	347lRu2MSff/Ur82yGpin6RXMfYap9Xe+b9XUnUv+wGQvnB9b/MFhLQOGDnUcSQhVmbm4=
+X-Received: by 2002:a05:600c:6989:b0:492:3445:ecf8 with SMTP id 5b1f17b1804b1-49242326ca4mr201668745e9.3.1782128080364;
+        Mon, 22 Jun 2026 04:34:40 -0700 (PDT)
+Received: from lj8k2dq3.sc-core.net ([85.237.126.22])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49249207dabsm353304205e9.0.2026.06.22.04.34.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Jun 2026 03:22:52 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 22 Jun 2026 04:34:39 -0700 (PDT)
+From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-zeroconf: Enable tests
-Date: Mon, 22 Jun 2026 13:22:47 +0300
-Message-ID: <20260622102247.3370957-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260622102247.3370957-1-leon.anavi@konsulko.com>
-References: <20260622102247.3370957-1-leon.anavi@konsulko.com>
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
+Subject: [meta-oe][PATCH] contrib: oe-stylize: fix warning
+Date: Mon, 22 Jun 2026 13:34:28 +0200
+Message-ID: <20260622113428.711882-1-ecordonnier@snap.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 10:22:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127691
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2026 11:34:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127692
 
-Inherit ptest and includes tests for python3-zeroconf.
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Fix this warning:
+```
+meta-openembedded/./contrib/oe-stylize.py:3: SyntaxWarning: invalid escape sequence '\ '
+"""\
+```
+
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ---
- .../python/python3-zeroconf/run-ptest            |  3 +++
- .../python/python3-zeroconf_0.149.17.bb          | 16 +++++++++++++++-
- 2 files changed, 18 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-zeroconf/run-ptest
+ contrib/oe-stylize.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf/run-ptest b/meta-python/recipes-devtools/python/python3-zeroconf/run-ptest
-new file mode 100644
-index 0000000000..8d2017d39c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.149.17.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.149.17.bb
-index 165ea63dda..e0ab47d3aa 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.149.17.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.149.17.bb
-@@ -5,9 +5,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fe712b1bc27c5c4e9ecd7f31d208900"
+diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
+index 1fb0a5bcc0..e48b4dd5c1 100755
+--- a/contrib/oe-stylize.py
++++ b/contrib/oe-stylize.py
+@@ -15,7 +15,7 @@ TODO:
+  - backup the original .bb file
+  - make a diff and ask confirmation for patching ?
+  - do not use startswith only:
+-    /!\ startswith('SOMETHING') is not taken into account due to the previous startswith('S').
++     WARNING: startswith('SOMETHING') is not taken into account due to the previous startswith('S').
+  - count rule breaks and displays them in the order frequence
+ """
  
- SRC_URI[sha256sum] = "f10e58071bc5e749176b8dc8d7e7ed4d2e6b507dde20fd8169b760cf4f7f4c5a"
- 
--inherit pypi python_poetry_core cython
-+SRC_URI += "file://run-ptest"
-+
-+inherit pypi python_poetry_core cython ptest
- 
- RDEPENDS:${PN} += " \
-     python3-ifaddr (>=0.1.7) \
-     python3-async-timeout \
- "
-+
-+RDEPENDS:${PN}-ptest += " \
-+    python3-pytest \
-+    python3-pytest-asyncio \
-+    python3-pytest-codspeed \
-+    python3-unittest-automake-output \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
 -- 
-2.47.3
+2.43.0
 
 
