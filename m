@@ -2,48 +2,46 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EB6FCDB47F
-	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 16:39:30 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11767.1782319163673228735
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83D41CDB479
+	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 16:52:30 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12129.1782319949525247800
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2026 09:39:24 -0700
+ Wed, 24 Jun 2026 09:52:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=dzR1UITc;
- spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout01.t-online.de (Postfix) with SMTP id 4066F1C1CE
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 18:39:21 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.171.242]) by fwd81.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=h3eIYDDm;
+ spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd82.aul.t-online.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout08.t-online.de (Postfix) with SMTP id 7E77AEEB8
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 18:52:17 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.171.242]) by fwd82.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wcQd6-3itJ4M0; Wed, 24 Jun 2026 18:39:12 +0200
+	esmtp id 1wcQpi-0RXulN0; Wed, 24 Jun 2026 18:52:14 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] xdg-desktop-portal: update 1.20.4 -> 1.22.1
-Date: Wed, 24 Jun 2026 18:39:03 +0200
-Message-ID: <20260624163903.3376268-2-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] xdg-desktop-portal: update 1.20.4 -> 1.22.1
+Date: Wed, 24 Jun 2026 18:52:07 +0200
+Message-ID: <20260624165207.3416536-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260624163903.3376268-1-f_l_k@t-online.de>
-References: <20260624163903.3376268-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1782319152-977FDFDE-4EFF1953/0/0 CLEAN NORMAL
-X-TOI-MSGID: 3992263d-345f-4a2e-84db-a075a947f12f
+X-TOI-EXPURGATEID: 150726::1782319934-789F6B5F-FF0EDB41/0/0 CLEAN NORMAL
+X-TOI-MSGID: a3cbce49-4503-4bd9-b999-4eb7524116c7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1782319161; i=f_l_k@t-online.de;
-	bh=YKtz0qTVs8XZuWXfB5y2OE2O16nTJbEOXUld0V+KIFQ=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=dzR1UITcSNFl8pXcrcct3xXkwBqJ9pKDSkBYsafYeSWqy12CRh2Sp+/CLyKhWTAKJ
-	 JtIfmlADkHzgvKXaY0HmwQidUEy7i6pN12sulrMdREea4SpUg3fv9AUlz3E3E8XIzU
-	 5iWpUZ7DggqY/qa11OSwn7P5Mr0u4Cu+kAbeOCEtAMYVBiSWcPD3Y52SdbdDtaBQDZ
-	 569l1gxwo/bEHvsUeedgM3xT7IEBxGk0c3mdyPhO7jdE/UiicPt0Ix+DDspCRO0JJd
-	 Ihd0T5MwBMJn2FTFu6kIy14lyAoRHv3FVTYUC+293IqhPZLjTMcDg/aS93oSAnQLrD
-	 lL0nN08VbSs1A==
+	s=20260216; t=1782319937; i=f_l_k@t-online.de;
+	bh=Gip19HVK7wUE0vNGSoLVJv/f12TudoA7BuK6KG25k1A=;
+	h=From:To:Subject:Date;
+	b=h3eIYDDmpJund3O9wELSMlfXq9t7Z3RDTk2xfYgaMktVMjaJqOQ7NxKQ9dFhj38zt
+	 0nhuMlehwMW4DnfFWtAgSs3TCkhQQf/NadoMqh+hr0idysmAdsB2HmIc7Z1TjQuiad
+	 D9/ePoo+Ud7qF8T76kgYpYtJDuEI/VVzIGVcIEw61deWG19hqMvQGq76mwsJnZ99cA
+	 v3O2YNV47SeylHgOyZLfr6YQGrPyW0UPZGkWDxmCxUiBabj0gAjMQvRauRZH3XYNa0
+	 EgaqjVYVQtfMhrmlJGzjX/UZhXaCfCUoQObFgq2TFeO+HK2Od+IWEFSnxE889gm18G
+	 RYl8UCs1rYeuw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 16:39:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127721
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 16:52:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127722
 
 Changes in 1.22.0
 Released: 2026-06-08
@@ -195,20 +193,20 @@ sion target (#1830)
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...sktop-portal_1.20.4.bb =3D> xdg-desktop-portal_1.22.1.bb} | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ ...top-portal_1.20.4.bb =3D> xdg-desktop-portal_1.22.1.bb} | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
  rename meta-oe/recipes-support/xdg-desktop-portal/{xdg-desktop-portal_1.=
-20.4.bb =3D> xdg-desktop-portal_1.22.1.bb} (80%)
+20.4.bb =3D> xdg-desktop-portal_1.22.1.bb} (77%)
 
 diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
 l_1.20.4.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-port=
 al_1.22.1.bb
-similarity index 80%
+similarity index 77%
 rename from meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal=
 _1.20.4.bb
 rename to meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1=
 .22.1.bb
-index bb48b59dd8..104c456328 100644
+index bb48b59dd8..0ae75118ed 100644
 --- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.=
 4.bb
 +++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.22.=
@@ -235,7 +233,8 @@ me=3Dgvdb;destsuffix=3D${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/gvdb \
 =20
  # this revision comes from subprojects/libglnx.wrap file of the main sou=
 rce repo
- SRCREV_libglnx =3D "ccea836b799256420788c463a638ded0636b1632"
+-SRCREV_libglnx =3D "ccea836b799256420788c463a638ded0636b1632"
++SRCREV_libglnx =3D "ff64d52116ae74f0d25e24f089db28921ea171ff"
 +# this revision comes from subprojects/gvdb.wrap file of the main source=
  repo
 +SRCREV_gvdb =3D "c6f2359cc1d00f16e0a0e2527fa0bc1882b8b5ab"
