@@ -2,113 +2,148 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38D3BCDE002
-	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 14:49:49 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9094.1782312580088220359
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FCF8CDE002
+	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 16:39:30 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11766.1782319163576306855
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2026 07:49:40 -0700
+ Wed, 24 Jun 2026 09:39:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=FwZ+jmrd;
- spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd92.aul.t-online.de (fwd92.aul.t-online.de [10.223.144.118])
-	by mailout03.t-online.de (Postfix) with SMTP id B6761E083
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 16:49:29 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.171.242]) by fwd92.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=PSPklNvU;
+ spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout01.t-online.de (Postfix) with SMTP id 32D561C1C9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 18:39:21 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.171.242]) by fwd81.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wcOuu-2PqYNu0; Wed, 24 Jun 2026 16:49:28 +0200
+	esmtp id 1wcQd6-3itJ4L0; Wed, 24 Jun 2026 18:39:12 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 2/2] pipewire: update  1.6.6 -> 1.6.7
-Date: Wed, 24 Jun 2026 16:49:22 +0200
-Message-ID: <20260624144922.2404303-2-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH 1/2] flatpak: update 1.17.6 -> 12.18.0
+Date: Wed, 24 Jun 2026 18:39:02 +0200
+Message-ID: <20260624163903.3376268-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260624144922.2404303-1-f_l_k@t-online.de>
-References: <20260624144922.2404303-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1782312568-B3FFD46A-ABC4B304/0/0 CLEAN NORMAL
-X-TOI-MSGID: d43a187e-0e68-44e4-bb58-27f6e172aa5e
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1782319152-D7FFCFDE-2B7C528D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 177dfccd-f1eb-4477-b147-e89721564184
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1782312569; i=f_l_k@t-online.de;
-	bh=GF6/852tegHDMoY8MOtUgcJwn3i2nWocTNzng5ENG9w=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=FwZ+jmrd7Vb+MnS3Imbn9Me6k8U9aokSPWw5xsSMEOIEi3WeYorsjeSM11B8dQrPq
-	 8aXYB6wSJR15est0SjQA8i3LJYh1HU/0t1hQPXTZRSXdFK4Xm2sWzMCiLC9UvHxwIb
-	 Z0RPdDSPl2kPBpr388LA93yUbPD1Z+2D/kQhtKIjvZgJo4ZLo8ER4OJyUF1cCQPMZj
-	 8b+ZCoV/5pyc3oIKQGrOcMUs45RINsmfQC/C6C0DVvLB83weRx2U2QaET2L4mHmiKq
-	 StpMT+QQV2OqIpeFFl6juZObMdoMQU/XCp6TX7QXyqiqbOlEeRXmemYY4adyjyGtud
-	 AkM+yPQ7cA9iQ==
+	s=20260216; t=1782319161; i=f_l_k@t-online.de;
+	bh=uTr0Eadhj15MDaxijfWKZXGOWC9An+zMu1C8FqY5cYM=;
+	h=From:To:Subject:Date;
+	b=PSPklNvUVkhW7XAa3JF7VN5w3UZNTkDUllr5+JPCcwCMnS99P0X2zRzEbT1pRlQuQ
+	 HU1r5Qk/JstB1ud0+BZNeqV6hG4jQQ6mg4SUlBpAenWTEQZtGpkuLDHAytQhEUqIOT
+	 SYi/QIo1PfBpKy8FJGsOtb66cyl7n6OFgcMNP5xo999faZvbmGQErza9kNc28P8vxq
+	 pjsrgoMgTxIjbn+nipqaqqXm6y/ZmqjdchwYY0y9BnG7Y27T8RUMCajsFGpt6fEsb5
+	 3gYNcPztuhruSMTIe7KX+MeqnR+sLjWxcISKk+QqSchUOCi0yk++1d2vCAbWlfyD3A
+	 vumHhXneSGdcg==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 14:49:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127718
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 16:39:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127720
 
-PipeWire 1.6.7 (2026-06-18)
+Changes in 1.18.0
+~~~~~~~~~~~~~~~~~
+Released: 2026-06-08
 
-This is a bugfix release that is API and ABI compatible with the previous
-1.6.x releases.
+Enhancements:
 
-Highlights
-  - Fix a race issue where some ports would stay silent after a rate chan=
-ge.
-  - Fix sync regressions between ALSA cards in some cases.
-  - Small fixes and improvements.
+* Improve error handling and printed output of `flatpak-coredumpctl` (#66=
+49,
+  #6680)
 
-PipeWire
-  - Fix a scheduler regression where some driver nodes would not run
-    correctly and cause sync issues. (#5210)
-  - Fix a race issue with suspend on samplerate changes. It can cause por=
-ts
-    to be silent. (#3547)
+* Support the AMD vendor specific compute interface (`/dev/kfd`) via the =
+DRI
+  device permission (#6648)
 
-Modules
-  - There are some locking issues in the RT portal, for now reduce the
-    DBus timeout to something more sane. Also disable portal RT for
-    pipewire and the pulse server. These are not usually run in a sandbox
-    and can go directly to RTKit.
-  - Fix potential incorrect delay in combine-stream.
+* Improve the output of `flatpak update` with failure causes (#6657)
 
-SPA
-  - Fix a regression in ALSA period_size calculations. For non-power-of-2
-    periods, it would in some cases round down a a power-of-2, causing a
-    mismatch between requested and configured period_size. (#5302)
-  - Fix a potential segfault when removing a card because of bad ALSA api
-    usage. (#5255)
-  - Emit a route param update when card properties change. Otherwise, jac=
-k
-    port updates are not always reflected correctly.
+* Improve startup time for fish shell integration (#6635)
 
-Misc
-  - Make sure we don't deal with uninitialized spa_dict.
+* Translation updates: =E2=80=8Ezh_CN (#6671)
+
+Bug fixes:
+
+* Fix building when HAVE_LIBSYSTEMD but not USE_SYSTEM_HELPER is defined =
+(#6652)
+
+* Ignore system bus failures in parental controls check (#6663)
+
+* Fix some return values and replace deprecated `GTimeVal` with
+  `g_get_real_time()` (#6646)
+
+* Suppress an unused-result warning in the tests (#6655)
+
+Changes in 1.17.7
+~~~~~~~~~~~~~~~~~~
+Released: 2026-05-06
+
+Enhancements:
+
+* Add the new permission conditionals `has-usb-device` and `has-usb-porta=
+l` to
+  allow apps to drop --device=3Dall and --device=3Dusb permissions (#6560=
+)
+
+* Always send the `Flatpak-Upgrade-From` header when updating instead of
+  freshly installing, to improve the quality of statistics (#6626)
+
+* Improve how the absence of the system repo is handled (#6621)
+
+* Changes to repos are now more atomic which helps to avoid them being in=
+ an
+  invalid state. This could be observed when importing the GPG key failed=
+,
+  because the system clock was wrong. (#6547)
+
+* A function to report the age of the configuration was added to libflatp=
+ak,
+  which will help GNOME Software to prevent unnecessary work (#6532)
+
+* Improvements to the build system (#6614, #6610)
+
+* Improve various tests (#6604, #6606, #6619, #6617, #6605, #6625)
+
+* Translation updates: tr (#6629), =E2=80=8Ezh_CN (#6630)
+
+Bug fixes:
+
+* Fix a regression in handling of the fallback-x11 permission, which was
+  affecting overrides from Flatseal (#6632)
+
+* Fix a memory leak in the Flatpak portal (#6613)
+
+* Install SELinux configuration files to the right directory (#6622)
+
+* Silence wrong `lseek()` errors when creating sub-sandboxes (#6609)
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../pipewire/{pipewire_1.6.6.bb =3D> pipewire_1.6.7.bb}           | 2 +-
+ .../flatpak/{flatpak_1.17.6.bb =3D> flatpak_1.18.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.6.bb =3D=
-> pipewire_1.6.7.bb} (99%)
+ rename meta-oe/recipes-extended/flatpak/{flatpak_1.17.6.bb =3D> flatpak_=
+1.18.0.bb} (98%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.7.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.7.bb
-index c8631904ff..50feeaf843 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.7.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb b/meta-oe=
+/recipes-extended/flatpak/flatpak_1.18.0.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb
+rename to meta-oe/recipes-extended/flatpak/flatpak_1.18.0.bb
+index 1512b7239f..879455f63c 100644
+--- a/meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb
++++ b/meta-oe/recipes-extended/flatpak/flatpak_1.18.0.bb
+@@ -8,7 +8,7 @@ SRC_URI =3D " \
+     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
+ "
 =20
- DEPENDS =3D "dbus"
+-SRCREV =3D "9b21874f1a175a9b7c79175a221fa043e202ca73"
++SRCREV =3D "5de2b58bdafde88515d9d6b9189bd1cfd3b88c46"
 =20
--SRCREV =3D "a1c1d9f9f128ec987f23a0140a1704b8f8781787"
-+SRCREV =3D "3b2cb4fb037bf6033b87d3c87ee917b2f686d309"
- BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-${BRANCH};protocol=3Dhttps;tag=3D${PV}"
- SRC_URI +=3D "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-con=
-st-do-.patch"
+=20
+ inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection py=
+thon3native mime features_check useradd
 --=20
 2.54.0
 
