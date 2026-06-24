@@ -1,88 +1,77 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0651BCDE004
-	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 09:59:02 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3563.1782295134392619395
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ADFBCDB47C
+	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 10:57:55 +0000 (UTC)
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4272.1782298670521835002
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2026 02:58:55 -0700
+ Wed, 24 Jun 2026 03:57:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=PpmYsruX;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1782295135; x=1813831135;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=tQtTbq2hZTQMU5Ziqdo05enDaM9jElNi8wOAWKa0vtM=;
-  b=PpmYsruXgxA0MEm7G9JcEKzUv9A3qbBSszH/kDTmee5l7mEll5TNQ/8i
-   NQBQdGzOgArYbOJwW8dA1wu2lcxGuw8r0ATHQPHuHogp/Ni01LJuR3RtW
-   pxxF7A/Sy+tmbAImlquYAKN5QVG8VvbnCKXKVo/arRkkimB9lP+M5U8E6
-   hW55T1JvrlgseKgfHTGUkoIc/HCXuwiy5cbT9JPzWy2GneSsgxryrg6w7
-   6Tw32piGmy0SuV3ErEeqY88gNS3OR4SnBEEmqoU448SWFcs5NN3Hh0qa8
-   7IHGIOKRq9WDRJw55otK3chZoiGhdHAs+PWDN2xPbtI/jlKNJLjZ5F49O
-   Q==;
-X-CSE-ConnectionGUID: 6Cs7tCBLRdidjxkO0RWOyQ==
-X-CSE-MsgGUID: W5Qbp6ENR3CafQvIwTWV6w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11826"; a="231346341"
-X-IronPort-AV: E=Sophos;i="6.24,222,1774278000"; 
-   d="scan'208";a="231346341"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jun 2026 18:58:54 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id E1DBF1C000E9
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 09:58:53 +0000 (UTC)
-Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 956D31C0029A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 09:58:53 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.167.135.148])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id F116582DDF1
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 09:58:51 +0000 (UTC)
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm2 header.b=aheuL/iP;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-1334352-20260624105747934fdd6dfb000207ed-nplxo8@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260624105747934fdd6dfb000207ed
+        for <openembedded-devel@lists.openembedded.org>;
+        Wed, 24 Jun 2026 12:57:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=andrej.kozemcak@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=8yMCbhbWFauiR+EZLf2bDTJnMeSvwIxxcwjIi3+iDAc=;
+ b=aheuL/iP13vfEUOAMR8LODMLlUwSiMxWk1txZ0Z/DVxIPG7ag2NL+o4w3tEriv/5SSQ9Na
+ o6Hgx2WMS5vk/dkz9rpP38GHbkCHl9AwzGJEf/Kn6Qd3V4WaH2emwdO9PVvl4c89WLjZL7xS
+ AmE8as4JqdbmfERWs2Sf63RDNvRCSNWiSwHAm9MDpFJGBZhn4o+DOfhjR7i07VlM3eG6Fhsk
+ P4QFzEx0FAtGHdxYx/TuioADJXz2inKNtLXRfjLWkm9KZZNlSnJObvmh5qCu9yp5r46jHFQ0
+ xwLQiirq5EgYrSF4/70xKvRLzfI5UgDUuZK+blBp++bx3o++KnkKQsMA==;
+From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH 3/5] jasper: Use virtual/freeglut instead of freeglut
-Date: Wed, 24 Jun 2026 17:58:43 +0800
-Message-ID: <20260624095845.2294-4-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260624095845.2294-1-zhengrq.fnst@fujitsu.com>
-References: <20260624095845.2294-1-zhengrq.fnst@fujitsu.com>
+Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Subject: [meta-webserver][PATCH] nginx: upgrade 1.30.2 -> 1.30.3
+Date: Wed, 24 Jun 2026 12:57:39 +0200
+Message-ID: <20260624105739.3477896-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 09:59:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127710
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 10:57:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127713
 
-Use virtual/freeglut to depends on split version of freeglut.
+Changes with nginx 1.30.3
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+*) Security: a heap memory buffer overflow might occur in a worker
+   process when using a configuration with "ignore_invalid_headers off;"
+   and "large_client_header_buffers" with large configured values when
+   proxying a specially crafted request to HTTP/2 or gRPC backend,
+   allowing an attacker to cause worker process memory corruption or
+   segmentation fault in a worker process (CVE-2026-42055).
+
+*) Security: a heap memory buffer overread might occur in a worker
+   process while handling a specially sent response with decoding from
+   UTF-8 via the "charset_map" directive, allowing an attacker to cause
+   a limited disclosure of worker proccess memory or segmentation fault
+   in a worker process (CVE-2026-48142).
+
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
- meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb | 2 +-
+ .../recipes-httpd/nginx/{nginx_1.30.2.bb => nginx_1.30.3.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.30.2.bb => nginx_1.30.3.bb} (51%)
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb b/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
-index b48fff7081..004231d556 100644
---- a/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
-+++ b/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
-@@ -21,7 +21,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl
- 		   jpeg"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.3.bb
+similarity index 51%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.30.2.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.30.3.bb
+index 2ccc7226a4..981b3f6477 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.30.2.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.3.bb
+@@ -2,5 +2,5 @@ require nginx.inc
  
- PACKAGECONFIG[jpeg] = "-DJAS_ENABLE_LIBJPEG=ON,-DJAS_ENABLE_LIBJPEG=OFF,jpeg,"
--PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=ON,-DJAS_ENABLE_OPENGL=OFF,freeglut,"
-+PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=ON,-DJAS_ENABLE_OPENGL=OFF,virtual/freeglut,"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
  
- do_install:append() {
-     chrpath -d ${D}${bindir}/jasper
--- 
-2.43.0
-
+-SRC_URI[sha256sum] = "7df3090907fca3cc0e456d6dc00ceb230da74ea88026ceff0affc29dbbd9ac4c"
++SRC_URI[sha256sum] = "e5823dc6f45610993def93ebf6cfce68264af4958c77e874b7d20f3709001b8f"
+ 
 
