@@ -1,106 +1,91 @@
-Return-Path: <Sandeep.J@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFAA6CDB479
-	for <webhook@archiver.kernel.org>; Thu, 25 Jun 2026 04:53:10 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4554.1782363177499143888
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEE31CDB47F
+	for <webhook@archiver.kernel.org>; Thu, 25 Jun 2026 09:01:36 +0000 (UTC)
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7223.1782378094534315168
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2026 21:52:57 -0700
+ Thu, 25 Jun 2026 02:01:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=kg0R0dyA;
- spf=none, err=permanent DNS error (domain: oak-lpgbuild12.wrs.com, ip: 205.220.178.238, mailfrom: prvs=0636eea621=sj10@oak-lpgbuild12.wrs.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65P4quRo465947;
-	Thu, 25 Jun 2026 04:52:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=cc:content-transfer-encoding:content-type:date:from
-	:message-id:mime-version:subject:to; s=PPS06212021; bh=gpK8HPkAb
-	rJ5+2/Xxa57TZxANHOOxoshr+EerMprnrw=; b=kg0R0dyAtLPrvJNqPPpEgsIzQ
-	KVLSJe3fe+KDE0W4E0j5uZboWkLvKXtbmdNPmGx7+2T9v+ELGG7lkePwSGXl9O1t
-	InROEXrkqp4irx8J/MQG8rZBCie3yIeOgPxyXW5p7M3UpjxkmRo7HF1/CLQGab1S
-	R8v+ratun6T7BwxG85e9V3OQVVnguDd/QHtBYGAC71V6ccxjuPCM1Gb4QJumtzN5
-	U3rz6fQAh1J8rNR//qeRZje5/ZtOl2lslN8WYhG5F9ohco9+JIfQm834W3/YaEmp
-	gOUAgK306WOwsCCuqYttSr2la2JTtSNLlG824QEaVwUtq2ahS+Q7eI6+vAEkA==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4f0t2c865x-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 04:52:56 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Wed, 24 Jun 2026 21:52:55 -0700
-Received: from oak-lpgbuild12.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Wed, 24 Jun 2026 21:52:54 -0700
-Received: by oak-lpgbuild12.wrs.com (Postfix, from userid 1762445396)
-	id AB47D390019F; Thu, 25 Jun 2026 04:52:54 +0000 (UTC)
-From: Sandeep J <Sandeep.J@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Shiva.Komati@windriver.com>, <Randy.MacLeod@windriver.com>,
-        Sandeep J
-	<Sandeep.J@windriver.com>
-Subject: [meta-webserver][PATCH] meta-webserver/README.md: update broken Yocto reference manual URL
-Date: Thu, 25 Jun 2026 04:52:54 +0000
-Message-ID: <20260625045254.1841772-1-Sandeep.J@windriver.com>
-X-Mailer: git-send-email 2.54.0
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sznISVKH;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1782378094; x=1813914094;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=sBGMPPvdwNw/e/8RHI1F1WCv+vx9jZ1StKrdLTNoK7w=;
+  b=sznISVKH+J9ic3Pb7wFfUeonIuINAbBOA4gnq9WTsCGoPqTduAedNBWw
+   2c9znsRlG1iNttc8csDtdKgPdz7Wkx6PfafwlJC2e7iSVJcr5eAKf9AaM
+   GgDZIU2t51iTLVb2DkA+o+CiJFsBnKkL/LfXqty/MjFGId/A7+5AjVAcg
+   zJgODAUO4kIwFURYSm0zlh78+M1aNaD+IpW4v6t+HO4gmCufZ71FQsYLc
+   wO6Kk0Q6vJh1yN/wRftZFlZmR/2HsKuCTbzanCep6EW4r7MeXDgurDVIS
+   O7jQrAB5J2GTjzGLIzOuFlWL3SR7PiiN3Q9I3kASKhSRUlkXbZW/9ocg5
+   w==;
+X-CSE-ConnectionGUID: k5Xs+K0RTMuqZmLTVX6sQA==
+X-CSE-MsgGUID: NBK+bHyhRWaZVKfv50uxiw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="244743075"
+X-IronPort-AV: E=Sophos;i="6.24,224,1774278000"; 
+   d="scan'208";a="244743075"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 18:01:32 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id A3BCF406EC7
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:32 +0000 (UTC)
+Received: from az2nlsmom3.fujitsu.com (unknown [10.150.26.199])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 58AB618ABD3D
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:32 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 69EC0101732D;
+	Thu, 25 Jun 2026 09:01:30 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/47] ctags: upgrade 6.2.20260607.0 -> 6.2.20260621.0
+Date: Thu, 25 Jun 2026 17:00:41 +0800
+Message-ID: <20260625090127.1563-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI1MDAzOSBTYWx0ZWRfX9nUCqAfo40mg
- 1E1i6zR3cUgT6uw9ABOBlu0I0ziNAmwtokgtRMf21knuQYhpX4bdpAbR3LXGUJWTUJ4lwMeQAlR
- Xjyt9Q3DVucsScKqdTRqL5+BdAlljCkWrOW4ij9ULEfGoT0SbgZh+9sskdkZf3OF+dIfhE+wfMD
- G8A8Q5lG20FtqOOE90xDngZ9Y2tn8my3Sff7IO2ltpNmLZgZRZSq49nBHcD9hSbc6UNk/SrBbjF
- iPbAL03b5/G80qWHKKrJ/+r0JKi/DynR6b3aj7Kx26YzcLRoOlk3d1OEx+lJCOw04AN2QG0uEvT
- M60q02BHE1KsLme11n6xL1bni/edoCZEeBYSCHz2baaKQwNDN3JZ8Bcz69RzwH3Homx3GoVcps4
- n1DpcNNHCF2BYhIpHYnK4XsUjS+HHXB0MN1q1RIJAIdlSFcSt4v3Qp0NP2fil/mSw1jz+AjgBGg
- 1+rKlrhe73qmXcyMZCg==
-X-Proofpoint-GUID: h2jspWavXXwCcY_CLhea_DQQTkw4KFHO
-X-Proofpoint-ORIG-GUID: h2jspWavXXwCcY_CLhea_DQQTkw4KFHO
-X-Authority-Analysis: v=2.4 cv=U4Oiy+ru c=1 sm=1 tr=0 ts=6a3cb428 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
- a=klDOsUkWDRETUCZYPvoE:22 a=iGHA9ds3AAAA:8 a=t7CeM3EgAAAA:8
- a=HPCHruN68qoECyIU7zUA:9 a=nM-MV4yxpKKO9kiQg6Ot:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI1MDAzOSBTYWx0ZWRfX/2wCKjjIdzC/
- +MZbb91hyTwDAiFgvQ7jE+H2Rw8+CXqwYSMN0E7AoKwnyxa4t83y7EkXoZ16RDEre47llPkW8CR
- nRFr2w8jkuXY8hwSWoXnDdNm6edIY0Ah3IH43hDUsddfBvx0lsuX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-25_01,2026-06-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 adultscore=0 malwarescore=0 clxscore=1011
- lowpriorityscore=0 spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606250039
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 04:53:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127732
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127733
 
-Update old URL:
-   http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#var-PACKAGECONFIG
-to:
-   https://docs.yoctoproject.org/ref-manual/variables.html#term-PACKAGECONFIG
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Sandeep J <Sandeep.J@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-webserver/README.md | 2 +-
+ .../ctags/{ctags_6.2.20260607.0.bb => ctags_6.2.20260621.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.2.20260607.0.bb => ctags_6.2.20260621.0.bb} (95%)
 
-diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-index 17c7c76d94..565269648d 100644
---- a/meta-webserver/README.md
-+++ b/meta-webserver/README.md
-@@ -43,7 +43,7 @@
-   to the PACKAGECONFIG value for the php recipe in order to enable it.
-   See here for info on how to do that:
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260621.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.2.20260621.0.bb
+index 0d0604239a..208e3e6ac4 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260621.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
--  http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#var-PACKAGECONFIG
-+  https://docs.yoctoproject.org/ref-manual/variables.html#term-PACKAGECONFIG
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "0361a1da51a9cb680732451ab0c35c41bc914bda"
++SRCREV = "7cef08003487e3c87cb727f112c5bff793751ef8"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
  
  
- Maintenance
+-- 
+2.43.0
+
 
