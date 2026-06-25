@@ -1,193 +1,88 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B3F9CDB47F
-	for <webhook@archiver.kernel.org>; Wed, 24 Jun 2026 17:30:42 +0000 (UTC)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12908.1782322054265940885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B13DCDE005
+	for <webhook@archiver.kernel.org>; Thu, 25 Jun 2026 02:04:49 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2823.1782353086664857361
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2026 10:27:35 -0700
+ Wed, 24 Jun 2026 19:04:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=swfWLTZS;
- spf=pass (domain: bootlin.com, ip: 185.246.85.4, mailfrom: joaomarcos.costa@bootlin.com)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 8EE5C4E407D5;
-	Wed, 24 Jun 2026 17:27:32 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 63CF8601C5;
-	Wed, 24 Jun 2026 17:27:32 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 93C6D106C8193;
-	Wed, 24 Jun 2026 19:27:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1782322052; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=FIL91/yb16wK+SiVu4IjbRztBWt48GKSfcjpymxoeL0=;
-	b=swfWLTZST9R7ec+v8tzYufnjqooDNpC0N7Kx81nd7a9lPR5Yly7JDsHtIaZpjpAyNirXb0
-	SuLB4k9+3VQq+1TSU9efaIPhB2fhPDLs8E1WChLVWX/BDQaqK3CBQGdE1QsU/OXGgMCKIk
-	r4StWOZLNF9TSZRB0jvCKUKxRiJF6jiNW2Nnj7UPIYTJSsnvWL0SZikEtZQi2Oa4puunkv
-	YzwMODBkIea5BQZ6JCaeutKoazgxHVYwV+kFwO2I6bicdj44C4nQTv3JiRhAyMPxHHRpcr
-	kbjh0xJwp1zJAhs2feVHHskheg5J0Shb4qq0XR7lgvstsnWp/Hk04RgTAsZTCw==
-From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QJoxSfdW;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1782353087; x=1813889087;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=tQtTbq2hZTQMU5Ziqdo05enDaM9jElNi8wOAWKa0vtM=;
+  b=QJoxSfdWIKOXWo2OzsF+8HB0jsNL5IP7lmfEACym36B82OVuEADOX5Ui
+   AzezNYizkZ9SUgFPx7eAGKgy8xzuBJM2jTVGpXyoGWo6ibS+tsj7Sicaz
+   /ruPFWemX63cj7zqOh8A/JSdHsRz572k6KNayyYesvdxX7psqcqpt99YJ
+   /w336cpevRuf33q5JyuNSJiTnhClYs8Z+gJcDeTOusoSkY8mJWWrQNIsS
+   Emnbx1xKS6DfrjtJ36/KDOD9Uy8hEvskDtQ/kh/sYVONnChWIA7kkgOgn
+   AbHjYiasY/ZyZ/2JWiLPJJjf/SKNRnf+w3sfkJKG5kt9PECswZS2/Fbxb
+   A==;
+X-CSE-ConnectionGUID: RWTKIyoqScerwdc6tfbUcg==
+X-CSE-MsgGUID: 1jIvMdXGRpCw1QLQW5hMiA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="245245101"
+X-IronPort-AV: E=Sophos;i="6.24,223,1774278000"; 
+   d="scan'208";a="245245101"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 11:04:44 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 64FB11000346
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 02:04:44 +0000 (UTC)
+Received: from az2nlsmom3.fujitsu.com (unknown [10.150.26.199])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 199991C4E0CD
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 02:04:44 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.167.135.148])
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 7056F1017302
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 02:04:42 +0000 (UTC)
+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: thomas.petazzoni@bootlin.com,
-	raj.khem@gmail.com,
-	=?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>
-Subject: [PATCH 1/1] bpftrace: fix buildpaths QA issue in bpftrace-dbg and bpftrace-ptest
-Date: Wed, 24 Jun 2026 19:27:08 +0200
-Message-ID: <20260624172708.240536-2-joaomarcos.costa@bootlin.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20260624172708.240536-1-joaomarcos.costa@bootlin.com>
-References: <20260624172708.240536-1-joaomarcos.costa@bootlin.com>
+Subject: [oe][meta-oe][PATCH v2 3/5] jasper: Use virtual/freeglut instead of freeglut
+Date: Thu, 25 Jun 2026 10:04:35 +0800
+Message-ID: <20260625020437.2824-4-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260625020437.2824-1-zhengrq.fnst@fujitsu.com>
+References: <20260625020437.2824-1-zhengrq.fnst@fujitsu.com>
 MIME-Version: 1.0
-X-Last-TLS-Session-Version: TLSv1.3
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2026 17:30:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127725
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 02:04:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127729
 
-With the current version, I had the QA issues below:
+Use virtual/freeglut to depends on split version of freeglut.
 
-WARNING: bpftrace-0.25.1-r0 do_package_qa: QA Issue:
-File /usr/lib/bpftrace/ptest/tests/.debug/bpftrace_test in package bpftra=
-ce-dbg contains reference to TMPDIR [buildpaths]
-
-WARNING: bpftrace-0.25.1-r0 do_package_qa: QA Issue:
-File /usr/lib/bpftrace/ptest/tests/bpftrace_test in package bpftrace-ptes=
-t contains reference to TMPDIR [buildpaths]
-
-A bit of find + grep + strings show that this originally comes from:
-
-field_analyser.cpp.o: [my tmpdir...]/bpftrace/0.25.1/build/tests/data
-field_analyser.cpp.o: [my tmpdir...]/bpftrace/0.25.1/sources/bpftrace-0.2=
-5.1/tests/data/data_source.c
-field_analyser.cpp.o: [my tmpdir...]/bpftrace/0.25.1/sources/bpftrace-0.2=
-5.1/tests/data
-
-The .rodata section is infected with these, and after some more digging,
-the paths come from debug symbols (i.e., .debug_line_str) in
-data_source.o:
-
-build/tests/data/data_source.o: /src/update-2026.01/build/tmp/work/riscv6=
-4.../bpftrace/0.25.1/build/tests/data
-build/tests/data/data_source.o: /src/update-2026.01/build/tmp/work/riscv6=
-4.../bpftrace/0.25.1/sources/bpftrace-0.25.1/tests/data/data_source.c
-build/tests/data/data_source.o: /src/update-2026.01/build/tmp/work/riscv6=
-4.../bpftrace/0.25.1/build/tests/data
-build/tests/data/data_source.o: /src/update-2026.01/build/tmp/work/riscv6=
-4.../bpftrace/0.25.1/sources/bpftrace-0.25.1/tests/data
-
-I'm not familiar with the magic performed by BuildBPF.cmake, but as far
-as I can tell, gcc is being invoked with "-g" and no prefix mapping,
-so there is no way of stopping the source path(s) from ending in data_sou=
-rce.o.
-
-This patch adds a "bridge" between this .cmake file and bpftrace's
-recipe, where I export DEBUG_PREFIX_MAP, so gcc is invoked with the
--ffile-prefix-map flags from OE Core.
-
-The end result is:
-
-$ strings ./build/tests/data/data_source.o | grep "debug\/bpftrace"
-/usr/src/debug/bpftrace/0.25.1/tests/data/data_source.c
-/usr/src/debug/bpftrace/0.25.1/tests/data
-/usr/src/debug/bpftrace/0.25.1/tests/data
-/usr/src/debug/bpftrace/0.25.1/tests/data
-
-Signed-off-by: Jo=C3=A3o Marcos Costa <joaomarcos.costa@bootlin.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...BPF.cmake-introduce-DEBUG_PREFIX_MAP.patch | 36 +++++++++++++++++++
- .../bpftrace/bpftrace_0.25.1.bb               |  3 ++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/b=
-pftrace/bpftrace/0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.pat=
-ch
+ meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace=
-/bpftrace/0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch b/me=
-ta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0001-=
-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch
-new file mode 100644
-index 0000000000..a889d018f8
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftra=
-ce/0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch
-@@ -0,0 +1,36 @@
-+From af36170841d9836926953e17d93e9562e594c9aa Mon Sep 17 00:00:00 2001
-+From: =3D?UTF-8?q?Jo=3DC3=3DA3o=3D20Marcos=3D20Costa?=3D <joaomarcos.cos=
-ta@bootlin.com>
-+Date: Wed, 24 Jun 2026 18:46:14 +0200
-+Subject: [PATCH] cmake/BuildBPF.cmake: introduce DEBUG_PREFIX_MAP
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Jo=C3=A3o Marcos Costa <joaomarcos.costa@bootlin.com>
-+---
-+ cmake/BuildBPF.cmake | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/cmake/BuildBPF.cmake b/cmake/BuildBPF.cmake
-+index cb8cd687..95ae1dc1 100644
-+--- a/cmake/BuildBPF.cmake
-++++ b/cmake/BuildBPF.cmake
-+@@ -86,11 +86,12 @@ function(bpf NAME)
-+     add_custom_target(${NAME}_gen_bitcode DEPENDS ${ARG_BITCODE})
-+     add_dependencies(${NAME} ${NAME}_gen_bitcode)
-+   endif()
-++  separate_arguments(DEBUG_PREFIX_MAP_LIST NATIVE_COMMAND "$ENV{DEBUG_P=
-REFIX_MAP}")
-+   add_custom_command(
-+     OUTPUT ${ARG_OBJECT}
-+     DEPENDS ${ARG_SOURCE} ${ARG_DEPENDS}
-+     # See above: fresh compilation and the use of `gcc`.
-+-    COMMAND ${GCC} -Wno-attributes -g -I ${CMAKE_CURRENT_BINARY_DIR} -c=
- ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${CMAKE_CURRENT_BINARY_DIR}=
-/${ARG_OBJECT}
-++    COMMAND ${GCC} -Wno-attributes -g ${DEBUG_PREFIX_MAP_LIST} -I ${CMA=
-KE_CURRENT_BINARY_DIR} -c ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${=
-CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
-+     COMMAND cmake -E env LLVM_OBJCOPY=3D${LLVM_OBJCOPY} ${PAHOLE} -J ${=
-CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
-+     VERBATIM
-+   )
-+--=20
-+2.47.0
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace=
-/bpftrace_0.25.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools=
-/bpftrace/bpftrace_0.25.1.bb
-index f28c1547db..62e0c17f9d 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftra=
-ce_0.25.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftra=
-ce_0.25.1.bb
-@@ -18,11 +18,14 @@ DEPENDS +=3D "${@bb.utils.contains('PTEST_ENABLED', '=
-1', 'pahole-native llvm-nativ
- SRC_URI =3D "git://github.com/iovisor/bpftrace;branch=3Drelease/0.25.x;p=
-rotocol=3Dhttps;tag=3Dv${PV} \
-            file://run-ptest \
-            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.pa=
-tch \
-+           file://0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.p=
-atch \
- "
- SRCREV =3D "e491811e5d648288c01f42ce087967b271f504a0"
-=20
- inherit bash-completion cmake ptest pkgconfig
-=20
-+export DEBUG_PREFIX_MAP
-+
- PACKAGECONFIG ?=3D " \
-         ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-         ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", ""=
-, d)} \
---=20
-2.47.0
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb b/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
+index b48fff7081..004231d556 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb
+@@ -21,7 +21,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl
+ 		   jpeg"
+ 
+ PACKAGECONFIG[jpeg] = "-DJAS_ENABLE_LIBJPEG=ON,-DJAS_ENABLE_LIBJPEG=OFF,jpeg,"
+-PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=ON,-DJAS_ENABLE_OPENGL=OFF,freeglut,"
++PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=ON,-DJAS_ENABLE_OPENGL=OFF,virtual/freeglut,"
+ 
+ do_install:append() {
+     chrpath -d ${D}${bindir}/jasper
+-- 
+2.43.0
 
 
