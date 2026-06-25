@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30874CDB466
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D94CDE002
 	for <webhook@archiver.kernel.org>; Thu, 25 Jun 2026 09:02:39 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7020.1782378144014515135
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7241.1782378151703224696
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2026 02:02:29 -0700
+ Thu, 25 Jun 2026 02:02:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=YafrPShB;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=dQAX6p7A;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1782378149; x=1813914149;
+  t=1782378151; x=1813914151;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=D3/wornYK0pj1F4VQNnOmJcECysqo6jXqzMycW2qd5g=;
-  b=YafrPShBweXy4XuHMmxdHfHgQOzBFcsYit3lX4sVZui0ZGgJlfKCi/2B
-   TTKQ0ts6ETgO8AbUj3+ht4mIusxgSm/pqkBP8nLvlMRgtOVAXrTd7R8kh
-   kJZM+k0CFiNy7u6H0ZTEJBfyB1XqHA5mLqXXmwj8UrFwFib+vP1G6JOII
-   aHD3HNq29mxQ2YyiOalgzb3CTqYtGSLyhwsHPXak+Vv9VQbkv9R9o4P7j
-   IJ25wJAV5n8ZnddSgXp6k6RpOLPz75SZuL+xzEo0dbCzDD0/SXsS6zkko
-   VU16rHLKW23g6cv8KdgdCKmUDk0ZfP02ZBYUavRYqrh+SX1iEXEtQRYbB
-   A==;
-X-CSE-ConnectionGUID: A1kmXGUNSAKIG56CT5WI2w==
-X-CSE-MsgGUID: 4V+t5MZ7SuSVw3aD2aQStA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="244743182"
+  bh=9vpovjv8YuxOz7Bkg60mOfrz7LhFbB3VUIXKQxnNtoU=;
+  b=dQAX6p7AIkTHIKaXvgSc9rdc5WEE7E0zvIPHHAp3BcXccwxpz3u5yAVs
+   9Eipu+bn2BqAZvr9xbQAqmzhNBZM3CEIo9T6lV1qbUQWvnpeB7bMqMjd4
+   ZY+urxk53QHRFhvBQ2lcPKi+cVr+iK1BDwOMiXJAqAlpKWGWvrNaSQ2dp
+   f619jdCaMdScJgULQk9Rel72GqSgIFy36t5ScBKQt9cKh7DY0G4/cPjDB
+   uwvuCEI+t/9v15Pgl8lqKGkWt/pO7k9N4A6m2GrQlZk4ZRk01CTPcrcxl
+   t0Ez4NYW+8fuJG1DbmicFznszjpMfJ4Bn0BlTeJm0vaUgQPKqU/XSnBdW
+   Q==;
+X-CSE-ConnectionGUID: wjsl4mJFSXe4Ox024POxEA==
+X-CSE-MsgGUID: u00JAQGRT5SiUn7K7dAJJw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="222999919"
 X-IronPort-AV: E=Sophos;i="6.24,224,1774278000"; 
-   d="scan'208";a="244743182"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 18:02:28 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+   d="scan'208";a="222999919"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 18:02:30 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id A4B521C1C704
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:02:28 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 347EE1000169
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:02:30 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (unknown [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 604778267B7
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:02:28 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id DC71D1800BC3
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:02:29 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 63E09101732C;
-	Thu, 25 Jun 2026 09:02:26 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 018731017329;
+	Thu, 25 Jun 2026 09:02:27 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 36/47] python3-sentry-sdk: upgrade 2.62.0 -> 2.63.0
-Date: Thu, 25 Jun 2026 17:01:16 +0800
-Message-ID: <20260625090127.1563-36-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 37/47] python3-socketio: upgrade 5.16.2 -> 5.16.3
+Date: Thu, 25 Jun 2026 17:01:17 +0800
+Message-ID: <20260625090127.1563-37-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260625090127.1563-1-wangmy@fujitsu.com>
 References: <20260625090127.1563-1-wangmy@fujitsu.com>
@@ -61,42 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:02:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127768
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127769
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Prevent double wrapping of sync handlers on FastAPI >= 0.137
-- Use effective_route_context path for prefixed routers
-- (asgi) Gate query string and client IP behind send_default_pii
-- (serializer) Avoid creating reference cycles on every call
-- (user) Set user.ip_address on telemetry if present
-- Remove 0000 trace_id fallbacks
-- MANIFEST.in: Graft tests directory.
+ Catch all exceptions in redis and rabbitmq client managers
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-sentry-sdk_2.62.0.bb => python3-sentry-sdk_2.63.0.bb} | 2 +-
+ .../{python3-socketio_5.16.2.bb => python3-socketio_5.16.3.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_2.62.0.bb => python3-sentry-sdk_2.63.0.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-socketio_5.16.2.bb => python3-socketio_5.16.3.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_2.62.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_2.63.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_2.62.0.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_2.63.0.bb
-index dffbfcf6c6..54a0e45025 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_2.62.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_2.63.0.bb
-@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
- 	python3-datetime \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb b/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
+index 97a378b879..be352876a8 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_5.16.3.bb
+@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "3c870b9f50d9fd15b58c817dbde1c7cfaa9fe3f05df0a4c6edd5571cb82f5491"
-+SRC_URI[sha256sum] = "2a1502bf864769275dbc8c2c9fc7a0f7f5e18358180b615d262d13a31ffba216"
+ PYPI_PACKAGE = "python_socketio"
  
- PYPI_PACKAGE = "sentry_sdk"
+-SRC_URI[sha256sum] = "ad88c228d921646efa436c0a0df217e364ef30ec072df4041484e54d49c15989"
++SRC_URI[sha256sum] = "89b136f677ae65607a84cecda9b4d6c5377b40a97582c504c25df89af16d520e"
  
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,python3-aiohttp python3-websockets"
 -- 
 2.43.0
 
