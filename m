@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4453CDE006
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEF6ECDE002
 	for <webhook@archiver.kernel.org>; Thu, 25 Jun 2026 09:01:46 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7226.1782378103826109171
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7225.1782378102392819022
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2026 02:01:44 -0700
+ Thu, 25 Jun 2026 02:01:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Vu1stUdc;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iUl9QPp5;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1782378104; x=1813914104;
+  t=1782378102; x=1813914102;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Xp9K7OS8C5ofCg8hdAF119yk74v92oo5c0N4mO+qeik=;
-  b=Vu1stUdcmMOLCvBzFSNw4UmAAyjiHxKeboSsNNZ8Nlr0gSBIA385O8vF
-   3r0Aw/V7NiT+3hwi+iuhZz4wCQoOoOSyRv4Fw5VUDScntkhMIpM3cV4RF
-   IXPACGiWmJiTOm7P9zF/qHPzgDUqrGL0wdyXeQJzTxA5STv7ksiFhd/9z
-   OanwRdWgddfRrRDelQ/GNFKMEnwqhq5FnWI3E06hdQ2nDl4Q2uMd4zRDR
-   qImT6nbRE/K8idXIQDC4rBvQ3g8KXB+TJwjjtPsyFaQIdBE60KMrxsQrI
-   LGXvxK+wK16URZDvUcXCecqobOHbKJwWh4R7NeFh1rgSYs+MlFduzCly9
-   A==;
-X-CSE-ConnectionGUID: 3OTCezXLQx6TShzACT+sXg==
-X-CSE-MsgGUID: 5pSnROZ2TAy/5e3pJJIA8A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="244743102"
+  bh=WFamD1QCNbWq8vnErSK145iAh2oqA5Y4t2JbKmcYP2U=;
+  b=iUl9QPp56qr2Y1cMj3U1r5mp9W/fEJivEVuaYFQ/dpudi9Egr3wry+qq
+   wOnecPB1sPPWdUKK1Hde4Cjb6JYfL6rI2nYbGIifNS00utJanlSn6SrYN
+   E+J/jltYDLV3PVwGbz3PsKTtzWbG2vtVpAbawxQxgr2Ed4hRLYURqVhv1
+   o81Dkc/lzeWW7F/xfmfewh1FP1EHpaeCvzoeI0k+tKSlgX+2QYaJcHUox
+   8oCiFtp3QNnpj04spWy/kYzplpDd0GKtuINgM+qYXadAaNbtPg10XdyI2
+   gzTh71XvJuuteea+BvrblhBWm8DSAIy1oB9Jh/6+zMM0IWzcM0puCec8o
+   Q==;
+X-CSE-ConnectionGUID: OfhqKZznSEmUk6Wx702w8A==
+X-CSE-MsgGUID: 8jopjp2lQDKTz5HYTXrrlw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="245302327"
 X-IronPort-AV: E=Sophos;i="6.24,224,1774278000"; 
-   d="scan'208";a="244743102"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 18:01:42 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+   d="scan'208";a="245302327"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2026 18:01:41 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 3E2EE100281A
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:42 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 94E891000169
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:40 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (unknown [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id EC5D78267AB
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:41 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 45613C03F66
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:40 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id F1385101732D;
-	Thu, 25 Jun 2026 09:01:39 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 60355101732C;
+	Thu, 25 Jun 2026 09:01:38 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH 07/47] libio-compress-perl: upgrade 2.220 -> 2.221
-Date: Thu, 25 Jun 2026 17:00:47 +0800
-Message-ID: <20260625090127.1563-7-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 06/47] libdbi-perl: upgrade 1.648 -> 1.649
+Date: Thu, 25 Jun 2026 17:00:46 +0800
+Message-ID: <20260625090127.1563-6-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260625090127.1563-1-wangmy@fujitsu.com>
 References: <20260625090127.1563-1-wangmy@fujitsu.com>
@@ -61,31 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2026 09:01:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127739
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127738
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ibio-compress-perl_2.220.bb => libio-compress-perl_2.221.bb} | 2 +-
+ .../perl/{libdbi-perl_1.648.bb => libdbi-perl_1.649.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-compress-perl_2.220.bb => libio-compress-perl_2.221.bb} (93%)
+ rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.648.bb => libdbi-perl_1.649.bb} (95%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb b/meta-perl/recipes-perl/libio/libio-compress-perl_2.221.bb
-similarity index 93%
-rename from meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb
-rename to meta-perl/recipes-perl/libio/libio-compress-perl_2.221.bb
-index 05c8dd2e82..3a35cf53c7 100644
---- a/meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb
-+++ b/meta-perl/recipes-perl/libio/libio-compress-perl_2.221.bb
-@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=a05fdd79b87a410b617
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.648.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.649.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.648.bb
+rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.649.bb
+index 603c3b3cd2..c25d5d63a6 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.648.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.649.bb
+@@ -10,7 +10,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1a1138dff61f77bbc3d8782caba6758d"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
+-SRC_URI[sha256sum] = "ef266aad6010ce2eabb7e465ebd73ca3020bc58150f6989bd89c2b8f9bac6a86"
++SRC_URI[sha256sum] = "98897cdd06adae70e5516042e47ca08d623db2139fc58fd95cde208adf85c697"
  
--SRC_URI[sha256sum] = "9d96ea291f2c54ef367c7396b857d93ba1ac1c4b2f1bce13ed8a3e5f3eebb627"
-+SRC_URI[sha256sum] = "af42c9c9104adf7d772d255c0d9a404a3462ea45e7bc42d06da0a0b51de3d0ae"
- 
- S = "${UNPACKDIR}/IO-Compress-${PV}"
+ S = "${UNPACKDIR}/DBI-${PV}"
  
 -- 
 2.43.0
