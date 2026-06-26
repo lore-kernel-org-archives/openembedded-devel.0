@@ -1,225 +1,183 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Hemanth.KumarMD@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17E90CD4F26
-	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 07:09:29 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29905.1782457759866317213
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1904CD4F26
+	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 11:42:04 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.33164.1782474120007895887
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2026 00:09:20 -0700
+ Fri, 26 Jun 2026 04:42:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JL+g6Pxl;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-662bf1dab83so1054857d50.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 00:09:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782457759; cv=none;
-        d=google.com; s=arc-20260327;
-        b=jMpggSvErZmnvWiTrgeTUgi+zR01134wd8+zjTG0OjTgDPlun1VzX/45dqtnHf+JnF
-         gdrbpZs3l/w2BZLOZX/dDPY7MfWjX8vppPzIrDQ52wKK9gds0qZ+6rNPHAUNqkISBnm7
-         ZCJPeeTZDtSZicJPHI6cpHUaJc8phU56feMB2oKGcjteZgnRsg9v3TpJa9cffgrB5i/C
-         YeCfmSbA6U9AJnzSfH0OhtJcseeS0zlgCyXKS5dL0KYFLQBrWREmEg93uRN9jg6z+vQ0
-         O+unyWbhF94YvyvG1VJOmiM6DcNqm50PXbqzG7tmvimxEyG0eQ/QsmPQ7HdR9d7Cotlj
-         taGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=yv2iqqoGPcWMCOQE70mg5z+N/zM+9uSrBO5Z5ZQ6z78=;
-        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
-        b=RY8LWq+BS3qhjIIRK1hJQ2pJYsCzFho6McJxVlsTcrDyjRVW46h2n03TAqEPNgZIYY
-         f1Y1d9JbeChW4ROszJvr+Hnq85eklvYH3nKt8WbdWj24+XbnE9dCeXJqZ/I8kkdlSUTd
-         bsyVe684VT+wmJPdxBWaGk19eXUkCVPxnks6No2nweTAjziay0t1qnWfuSOwpuIrNhsA
-         ywpE2WfQQJCs0MX8FhE2MR3IQIsytn9QfuyNLvdb19s48BBViQiCdc64XdB7e7qdMCYE
-         tFTBZeI6DigWN9CjruwiEWfwhHF/ZPju2tEKQpc0DFIEXjzbpo9pVJ24vXfeTA3X1FxZ
-         ZDdg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782457759; x=1783062559; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=yv2iqqoGPcWMCOQE70mg5z+N/zM+9uSrBO5Z5ZQ6z78=;
-        b=JL+g6PxlvmS0rL8S6t6TOJVgakbKeWTrus4iMXnFcuCVsvUeHLlbyzSFennB+2bhEW
-         5C8UK64ktzlkpJWZOTE0lLQ9QJYdS7prPnlgj+MvZFT0hhFOa/EnGOgCrci9MroRQe49
-         km/VJocApzabA4gUn17oWXRlMPpfmpfgo1Z/C6fvRa0hUJYxF0qkhfDlT3dP70ojgD2W
-         li0wC8dqO2DCJ0HlKsWNih9LfpWV2U7wtp1Ockgp0RNBEdAPgy9bKu90UVcwY8ZjsRCY
-         m5kKj8RzAV1kXeNgbxJKemhcqOITkDyjEGHP6DXo8mRF1n3OX6+Rv+giurpTYussDiG1
-         tAIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782457759; x=1783062559;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yv2iqqoGPcWMCOQE70mg5z+N/zM+9uSrBO5Z5ZQ6z78=;
-        b=H6Nvz4PBEn7yZ6AD49X+hJkTLsm7j2rijxZh+vha+Akgu8i/jyIhcCls+z4CFRN0dh
-         z2brAjSi0/gdLJzSXMv/2EPiq7xhW6RjbOng01I0hSZQ2JcyjnEZqOfzQVIHolrKFACo
-         yNdjPSqwz1peY2IduxPCjI2HVGeCZle8iU41/Tenw/Kkg+TjVzCflzw4AYx4mkpP9x3J
-         t0iUa6EQePdRT7pQCEMTWoK19HGkjhp3JORkJ80aSE4p1XOwqqH5LYWBPXGJelAJ3Mf1
-         ME9yhGMvIWt1VPg20yz5FxAJG2yMQXJiDliO2B2T1q4EAHr6j2HMrzOL+Z3MIkPwffPJ
-         1Edg==
-X-Gm-Message-State: AOJu0YzXrhzJ4Em6eM2z0eGiMQtS4S6WTJjARvAaZxSKwHPocDQ9LHEJ
-	+CwIhXs4POzvLULQwIcIihrjhtzqzAECJZxhLvSikN+9sLPc8VySuS2DcEVXg2FL4oe3j1R6nVu
-	EYkD5c5RyiVJkE9ZLtDdcXRwxAoYAYEk=
-X-Gm-Gg: AfdE7ckuZ38MN8gZmqdIUd+fKak/la1KSgeoHz5pOLbRQnya4J3s2r/EVIocjB9EULL
-	lX58ne26QQ4IZrqP4KB6NzDMchQcToGaI0PHjpjSubdM7shg67fJir0GO2H+tFLjkn3l0hvwdZw
-	20R9QL5kyF2QgMGBzHGuv9fwzJ2B837x2OekN6XzCos5wLcpxlLIsbMvHp4iz+0gLZ6Oy8hG3jM
-	AXiPtu/Yaksr8GGjoU8dPhiQD/Zze9JRdcac7us2gsXMZ/t3v7jt0+v19rOvzRQySudyY+wEsAP
-	T/idSpXftSEnoge9URu/IO/NvzKRqooLp04oXg3n8qElI61c144OIQSb8yo8EJ89/sJqvKa/dD7
-	9CuMk95i/2VLrrxq7a1i9Ot5Jgw3cf2Ex7xgQwAfvzFPKpcGToSIy6Y/jVmarIdwwHwAo1w==
-X-Received: by 2002:a05:690e:d4e:b0:660:6780:f3e4 with SMTP id
- 956f58d0204a3-66487e09602mr4575371d50.27.1782457758822; Fri, 26 Jun 2026
- 00:09:18 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Od0BAknN;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=063731df1b=hemanth.kumarmd@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65Q9uqvI3489980
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 04:41:59 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=EnqpLb940wsMTZ3rZ/eYtAfQh8gw6o60RvrLxkuGWE4=; b=
+	Od0BAknN9l6BOeSQHLwa2kdJ9DValxJHJK2/th+LJeFkQu90fB3HcLDF4smCsQ0p
+	aXgrcloYVS3gH5RppwiegUFEgbCx0VjIayOLrPvw1sK1eJKDXRYSwvfab2fFib7K
+	c4zw+/XeszJAFKRmbJaHJYEB0Z9T14cL0w7C0oJRxcqMN+5kBm7+U30/c+cSn1M6
+	OA3zwNOFmnFVRs2fyEQp4HhB3ZGeFc3g2p8ft3moZdii05zpCyLy2GgPT9f+9Orl
+	rojLph+3rkN+9+1VP30A8nXlnDlyoVbZETXbIWIczxIniunRd5eqrzRjTaeKfBSO
+	Z5RKaO7/aX5TUkJ1j5iJ9w==
+Received: from ph7pr06cu001.outbound.protection.outlook.com (mail-westus3azon11010043.outbound.protection.outlook.com [52.101.201.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4f1exk8hkm-2
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 04:41:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ADLXqVsdLQOlouI6Uel9WPZVmVZqeKyaajgfTFHsbHKVbFo9IqgBVvVhoLAl22dIRwOm2CNEQbXYx3Il2JkbjFhWjeuZPOhtR5M2CG3TFapT8yhU3mJ4f5VRzX8mzFsK20XfZb+P1XHx7uOu5CE+AKCdRewSDKSoKDEXQyIXSeOgd7svXLNbRGYmiMaDM2otEHJoDdwdn7EVhPy2om2QjzrCSi1XYrbYFihGuzUs4D1pjSTo6D10XWtsqEouoLgpzNQaPSfEvIagGpwsqVa9WAhRZ46NBFvsHB5ePXn98QYWUFUpM2QkLJ6S0bMSNkLSE+9UoyB9sEHss1IGEJjnBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EnqpLb940wsMTZ3rZ/eYtAfQh8gw6o60RvrLxkuGWE4=;
+ b=itF35I7ucbxs/eFvSRn1YkZjgdgP8QaVAU8/cb5hhX65gWKQjr7q2LyGh9jdhydJLi+fWUM3wujKkJ1J6eOyaub5n94IR8EAFzbDq5LKsmWms5F5/WJYarx4aX9eF8FUC/2jv3pYBd14RfKuvQvcRqPtfcOXHgk01ItG3Ebim1PUJQttr/CMgxJZGuheBUfy4TJwScz8aKgZiOAu2MO5Z3HqjOZwZyEzACC+VmIfOjgpbPnUcxAD1Vr01tK+mPPb/LWgIrd4LCeP3IIKiFEcodLaMRKDjRSapW4y+KzdaIwfj/09PN0ntqhG9I5h1XN27odEA7e970SkoCO1K2vD5Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DM6PR11MB4564.namprd11.prod.outlook.com (2603:10b6:5:2a0::7) by
+ SA2PR11MB4780.namprd11.prod.outlook.com (2603:10b6:806:11d::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.18; Fri, 26 Jun
+ 2026 11:41:58 +0000
+Received: from DM6PR11MB4564.namprd11.prod.outlook.com
+ ([fe80::21dd:5cab:fc47:1dfe]) by DM6PR11MB4564.namprd11.prod.outlook.com
+ ([fe80::21dd:5cab:fc47:1dfe%3]) with mapi id 15.21.0159.018; Fri, 26 Jun 2026
+ 11:41:57 +0000
+From: Hemanth.KumarMD@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Sundeep.Kokkonda@windriver.com, Hemanth.KumarMD@windriver.com
+Subject: [meta-networking][PATCH 2/2] lftp: add zsh completion subpackage
+Date: Fri, 26 Jun 2026 04:41:33 -0700
+Message-ID: <20260626114133.3486742-2-Hemanth.KumarMD@windriver.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20260626114133.3486742-1-Hemanth.KumarMD@windriver.com>
+References: <20260626114133.3486742-1-Hemanth.KumarMD@windriver.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0198.namprd03.prod.outlook.com
+ (2603:10b6:a03:2ef::23) To DM6PR11MB4564.namprd11.prod.outlook.com
+ (2603:10b6:5:2a0::7)
 MIME-Version: 1.0
-References: <20260624133044.1093352-1-f_l_k@t-online.de> <20260624133044.1093352-2-f_l_k@t-online.de>
-In-Reply-To: <20260624133044.1093352-2-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Jun 2026 00:08:52 -0700
-X-Gm-Features: AVVi8CdBGwKvzZFQASe9JqMVnZ4ogrH7PluoxYRnXCtupCKjyTjM0vuA1xZ6BhA
-Message-ID: <CAMKF1sp3_iZ-NaFJ3qrdEFiOAwqXw+WDCZPtmiF1_4vfP-iRDA@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 2/2] packagegroup-meta-multimedia:
- add libdvdread to RDEPENDS
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000008ab325065522c9ce"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR11MB4564:EE_|SA2PR11MB4780:EE_
+X-MS-Office365-Filtering-Correlation-Id: 74fbc628-5b99-438a-c229-08ded377ed95
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|1800799024|52116014|376014|366016|56012099006|11063799006|18002099003|6133799003|38350700014|22082099003;
+X-Microsoft-Antispam-Message-Info: 
+	hljxVeuCWqXixVg2FBd1vr1LyUGjac0+kXCdHZck4PJyQwAEObfpMIAOHIIX8izifboX7yCpjZOQAH6QhahJSnbCDfAGlnsY7wwhxpK01G0WG9RMTtatsPZlk8S74SumjxH3mT2UPfNo11YXwXYcKM0iSTJMiCs9+EFvcitnzNXM4a14TUl6mxCAx3iGLw/YGNKVBQA/dtAd4CO2IGqWNoZb+Do3kBAxvEGgQyOUD270pxaZZ6fQhYTrkIKhQCUIbGRYkaaweqLBjHXp5c5S5QY2/pls4feZzKtNCiUgGryNodwydfgukjB3nfg4mvlgjQTuqJLT6cvGcjI5vshy48jBvcMzTSSxS2OdJpT8Sxr67noJ/k0MUoJOY67LtS6YLsi1FTmBiocvncGf33qku9nj/CVZTpHl0f+OIHL6d51Cc407vZlGWVJV++UtRPhz5Rh+oa6f9lsE/WprIICj+Ry2+mzrTypYMAoXPdm/Y8j81yvzVKnDSwjfZ0XlS4llFJvWqvFw2wjp6MY3jzDBy5RPAiPc2QLeBW+viVeBNQJMSm+IgFKMgOQ3Ewa5YjMqy6dpM5qMh7+pYQ6WL3rRd5qKcU2QGfj6Vrty0Q3pJIBHpVU/UqxkjeOV/kGRMWiEutGrtg3BvXQM7jwRZzjeLMW087f8LgBwoOcLzWT1VfX4GcBhsvPZPWxb1LXi1L8JJXy2Px4VTwTHpm4t2BlH5CurHw4Sd98sSr5q3OKvI2s=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4564.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(52116014)(376014)(366016)(56012099006)(11063799006)(18002099003)(6133799003)(38350700014)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?IV6QErkc8tvCyGIFBum+KUeO176KQUZ8lVdedwRICbhZ+ISbJZqgSQXHYN4Q?=
+ =?us-ascii?Q?WPE+3CIbjJfdN18zxytYzG/Kj+aVG1UpNrCNdnUchm4jzoeH7Lk4xaFjVYq0?=
+ =?us-ascii?Q?16UhCw88mRzgYCJzQumPvf4NwlUOTquQBWmua/hZ5TwjeNg+zGlnaIVUib8l?=
+ =?us-ascii?Q?9MmNicPKVt8EovfUU8WcdCrZJINfJ49OE8uVbm17pU2k2X47XrvtjrAuzPil?=
+ =?us-ascii?Q?qL0COTDnDJdFmDVKfqBdU7m35eDxbHjmTk97fAcQnj2D+K9kb5CPHatGWGSs?=
+ =?us-ascii?Q?/Zxae2NPIaVMFjv50vhTgBGb0dxenFO2kGYpAoRoO0k53+2o3raB6deUlGjp?=
+ =?us-ascii?Q?iYihgGag9ehgx+ZWc8/lXPTggPEbK0NvSeUO+E5VoXRMAENbm3oClsluDdmh?=
+ =?us-ascii?Q?3VCURCRqvEDmCqV92SE1V4hAz3PohwbT9CG02v3gaAlAS+8AKYvBGqSWEen9?=
+ =?us-ascii?Q?Tj4ioFTJEm+y+pkk3mtInJoczsoOuH+1ythNhOezi6gWwzmfjVxdfgn4TxmB?=
+ =?us-ascii?Q?UJ754vZxHPxp9JHE4UX56L1iF7n2Q3nYsn5xnHiRLV7EmENwiKTP9zEN9mff?=
+ =?us-ascii?Q?6oSnoGPhKuR658fKwzlNrL6sqzA2kedwZyunC2ALJ/VOgTjwgP0RB0ym5BbR?=
+ =?us-ascii?Q?PzC+nPrEAe3keJhSwUT4wnrnKLCifLImQ9Fl9v+dJxM1YNNU/JJduATGx1lZ?=
+ =?us-ascii?Q?vNA4esJq1ZXcPmOwDUgX/javB8GDT+CM3lnnL7L6H9yMUF5PMbe/bQECOs80?=
+ =?us-ascii?Q?Vj9XFZT0vorx1GQXk9BpeOjg7vPnHCCEVofp584IZUZmg5S6TYWsREDLBveB?=
+ =?us-ascii?Q?OhWgRasJcjW62iR2zaBBaTatXRpLwfytwTCGJ99IBfGFT32Cxk8P1KUPLCk0?=
+ =?us-ascii?Q?2oLE+UZgXUd+ELVZROaUGTgyIJSFvIu1JvZbQXWQ/c5ErJvS5dsrlffWVh35?=
+ =?us-ascii?Q?fbqHOVQnluXCNEM1JYeGGpCQWrO2oGY59EmXBRYFqH0+zTP9pg7rOzTlK37B?=
+ =?us-ascii?Q?aJ1G0UxjPvpgFVVmvExP4KshZ1WMCRKsX+o9lK+um/3ATB2FrfUiaaCPmx5B?=
+ =?us-ascii?Q?tkE9sbRB6CZRnuLMDT97UTORZKUMdTC+Ha3aVbDT9p3+4lqhogdqY6awEpGL?=
+ =?us-ascii?Q?GsgUzD0k0U0iCj+Dbc56z8R3EN7S+S50EpqepKn4KAAn5p0REhWc9oiaboLq?=
+ =?us-ascii?Q?0vPcnyB4GaJvRTHlOgGIjIplzpBSdo0O+wj7mfTneOUHuvuexmQRbVjep6XF?=
+ =?us-ascii?Q?7VmeeEprexTOzSXoWUNewSvRp64zP2IYN5EqJyBHX4EPBACRN4Gv91NyBsBM?=
+ =?us-ascii?Q?G9rTqbUjdxwSR74Y0nhRjiDigi6idJPrfa621NX3A/nrGj6VMS9LjH2nIPBD?=
+ =?us-ascii?Q?b51YAIaYHbv3UU6xEwoRZ+POMjhak1wKJ3q5lrI9aMswrlIiLoiq+zf0++/e?=
+ =?us-ascii?Q?YtTAp1QXtJuyK73wPLxrZO21mRHPtnAM8OxvcDzaieA7xetwClP0UncNnXto?=
+ =?us-ascii?Q?o9RTa4dcF6bA5zOkux3dN6PjRSj2xN8wXtN/9wxOgsDhat7Z47xVPg5n+hNL?=
+ =?us-ascii?Q?1PLioNOksBarnDSKgmm8sr8epaFxqFjXXeQ66ng1Ki36FXEv19xV0ya0hAM1?=
+ =?us-ascii?Q?10xA4Gv4H+w+3P0qybhg201qUoqJqciNIGRRPflX81LfTa/ALO/vMSipeEbm?=
+ =?us-ascii?Q?VQEk/l+ulPZHfMsxu4we8b+Elk+T10BRvzYIt96kNJwsf4oPC8JvAcRHlgPO?=
+ =?us-ascii?Q?qna9+aude2lu0+SveqoGivK0KcOuf4s=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	G08cl+Gg9aG68zKmw2YjkIcT2KCl5bwTxu85uHYdDR/XmRASGYdEdjZCh7nyAEAleuRgAhhJ54qQG51DCgBwtpCvLBoBqJc8zHfv/UPT/osj1ANs03o4pp9wcXG/vHrb6rGII5UCRvmdJLf9DM1cEK7iPYSLHynnuqKBpQKzh0oiuI3yGXscZ+LRWe4gFaUoaTb3Q9fhzh7amftyseAnTyk0933IhV668JNzem0mH3cWX43IYrGL+BVINVFM5F4w98S4vZvEy4c79qhXNNNVijv1E0HoouSdpEpFb2EuN+ro0jhFdX9J62K8r544GN6A0MgakbP0o9aFGDB0MiyOSw==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74fbc628-5b99-438a-c229-08ded377ed95
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4564.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 11:41:57.5358
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xBJ25MoP5PQwBYFGtIrrklikRD6zvXVIZ3k5REqAgNWo4zIQTn7hvOvwF+pZp6iaQjTdzsSM1XV/bb2k5sUr6caQDqUUAfb0NLJw/DBlZxs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB4780
+X-Proofpoint-ORIG-GUID: fZqJ1xPNWsolah7_OOojaiFFd_mXDnlm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDA5NSBTYWx0ZWRfX9q0SNKFThOfG
+ LRuEos+uAvOJeLaR+RtHl7uWbCS9HfPKQf9KZCfZLvu6jzC0StB5SQogtlVaN+SJtPauyNFAphE
+ 2a4lsDm0b9g2hsFtRFodTF9WMQnoOMDNwFDMX6vuZGHDAZ8JK4nd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDA5NSBTYWx0ZWRfX3mbe3rLxsuAx
+ K/Qn9NELDKeR3w5i8IjVOIq8UPVst4RLfPHb6A6Qyw0JBX0X6vWq04hwmXA3jjwGAQSJsjvkFM0
+ wU/bqqsH5Iz3ZMuNpl74Rt+6s/veyZc4wt7ekQPVG/XOeoaZxNsxi4l4PC2AJa2sjV1YjO7z47d
+ CyHvkqXcTcyThTulSbXSpJn1CA0RRZYXw8iMZ8hu6NPh7H9944oxCdgEaCaurNpHBpFGFXUih4C
+ 6Nw7Cl1R957EG9+rZqAu9vFx7LU9hHcNNf2eSeiHPoOvPAcKC8pkoI3SmIZ6rjfFrWONjDfnFYH
+ 5SS+S/fnPQhF0p4SOSyCl0FBZLQxYM669tTtHwM4GkvD85EhPIY7f1/kfpElwtenwiU5s/saul+
+ /Vlb6U1pURczCrY/V9adCs78lDVSQtai6C9PBD4e+vblLrt5YjOKLCY7KZliVWhn7ZIH1CMkEFh
+ gdsx4hv/MrxfntNnTeA==
+X-Proofpoint-GUID: fZqJ1xPNWsolah7_OOojaiFFd_mXDnlm
+X-Authority-Analysis: v=2.4 cv=NLLlPU6g c=1 sm=1 tr=0 ts=6a3e6587 cx=c_pps
+ a=MXKEcm+r4KK8PT7sjGsI9w==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=NEAV23lmAAAA:8
+ a=t7CeM3EgAAAA:8 a=RY-AXD4GyMzBhyZB318A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-26_03,2026-06-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 impostorscore=0 spamscore=0 priorityscore=1501
+ adultscore=0 suspectscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606260095
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 07:09:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127789
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 11:42:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127791
 
---0000000000008ab325065522c9ce
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Hemanth Kumar M D <Hemanth.KumarMD@windriver.com>
 
-This results in
+4.9.3 installs zsh completion via 'make install'. Package it as
+${PN}-zsh-completion consistent with other recipes in meta-oe.
 
-ERROR: packagegroup-meta-multimedia-1.0-r0 do_package_write_ipk: An allarch
-packagegroup shouldn't depend on packages which are dynamically renamed
-(libdvdread to libdvdread8)
+Link: https://github.com/lavv17/lftp/commit/7f5c127878fa76a916b9ea80419d65e7df549d3e
 
-On Wed, Jun 24, 2026 at 6:31=E2=80=AFAM Markus Volk via lists.openembedded.=
-org
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+Signed-off-by: Hemanth Kumar M D <Hemanth.KumarMD@windriver.com>
+---
+ meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-> libdvdread has recently been moved to meta-multimedia and the 'libdvdred'
-> runtime
-> dependency was removed from packagegroup-meta-oe
-> Add the runtime dependency to packagegroup-meta-multimedia so that is
-> included in
-> world builds again.
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../packagegroups/packagegroup-meta-multimedia.bb                | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-multimedia/recipes-multimedia/packagegroups/
-> packagegroup-meta-multimedia.bb
-> b/meta-multimedia/recipes-multimedia/packagegroups/
-> packagegroup-meta-multimedia.bb
-> index 4da9de3ff9..4e4f58f14a 100644
-> --- a/meta-multimedia/recipes-multimedia/packagegroups/
-> packagegroup-meta-multimedia.bb
-> +++ b/meta-multimedia/recipes-multimedia/packagegroups/
-> packagegroup-meta-multimedia.bb
-> @@ -43,6 +43,7 @@ RDEPENDS:packagegroup-meta-multimedia =3D "\
->      pipewire \
->      ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial",
-> bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} \
->      libcamera \
-> +    libdvdread \
->      vorbis-tools \
->      libopenmpt \
->      mimic \
-> --
-> 2.54.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127715):
-> https://lists.openembedded.org/g/openembedded-devel/message/127715
-> Mute This Topic: https://lists.openembedded.org/mt/119956631/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
+index 3d838e6c42..aa47362c92 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
+@@ -27,5 +27,9 @@ PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STA
+ do_install:append() {
+ 	rm -rf ${D}${libdir}/charset.alias
+ }
++PACKAGES =+ "${PN}-zsh-completion"
++
+ FILES:${PN} += "${datadir}/icons/hicolor"
++FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
++
+ RDEPENDS:${PN} = "perl bash readline"
+-- 
+2.49.0
 
---0000000000008ab325065522c9ce
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">This results in<div><br></div><div>ERROR: packagegroup-met=
-a-multimedia-1.0-r0 do_package_write_ipk: An allarch packagegroup shouldn&#=
-39;t depend on packages which are dynamically renamed (libdvdread to libdvd=
-read8)<br></div></div><br><div class=3D"gmail_quote gmail_quote_container">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jun 24, 2026 at 6:31=E2=80=AF=
-AM Markus Volk via <a href=3D"http://lists.openembedded.org">lists.openembe=
-dded.org</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.o=
-rg">t-online.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">libdvdread has recently been moved to=
- meta-multimedia and the &#39;libdvdred&#39; runtime<br>
-dependency was removed from packagegroup-meta-oe<br>
-Add the runtime dependency to packagegroup-meta-multimedia so that is inclu=
-ded in<br>
-world builds again.<br>
-<br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
----<br>
-=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-multimedia.bb" =
-rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-multimedia.bb</a>=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
-=C2=A01 file changed, 1 insertion(+)<br>
-<br>
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"ht=
-tp://packagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">=
-packagegroup-meta-multimedia.bb</a> b/meta-multimedia/recipes-multimedia/pa=
-ckagegroups/<a href=3D"http://packagegroup-meta-multimedia.bb" rel=3D"noref=
-errer" target=3D"_blank">packagegroup-meta-multimedia.bb</a><br>
-index 4da9de3ff9..4e4f58f14a 100644<br>
---- a/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"http://pa=
-ckagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">package=
-group-meta-multimedia.bb</a><br>
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"http://pa=
-ckagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">package=
-group-meta-multimedia.bb</a><br>
-@@ -43,6 +43,7 @@ RDEPENDS:packagegroup-meta-multimedia =3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0pipewire \<br>
-=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&quot;LICENSE_FLAGS_ACCEPTED&quot;=
-, &quot;commercial&quot;, bb.utils.contains(&quot;DISTRO_FEATURES&quot;, &q=
-uot;x11&quot;, &quot;projucer&quot;, &quot;&quot;, d), &quot;&quot;, d)} \<=
-br>
-=C2=A0 =C2=A0 =C2=A0libcamera \<br>
-+=C2=A0 =C2=A0 libdvdread \<br>
-=C2=A0 =C2=A0 =C2=A0vorbis-tools \<br>
-=C2=A0 =C2=A0 =C2=A0libopenmpt \<br>
-=C2=A0 =C2=A0 =C2=A0mimic \<br>
--- <br>
-2.54.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127715): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127715" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127715</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119956631/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119956631/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000008ab325065522c9ce--
 
