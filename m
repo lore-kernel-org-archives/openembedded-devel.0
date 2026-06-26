@@ -2,244 +2,286 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5261C43458
-	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 15:00:47 +0000 (UTC)
-Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37221.1782486042111545612
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0F21C43458
+	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 15:04:07 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37085.1782486238318903118
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2026 08:00:42 -0700
+ Fri, 26 Jun 2026 08:03:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dDE3Sr5m;
- spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-664345f8645so1398637d50.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 08:00:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782486041; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=C1803v6S;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-6649fde483bso902969d50.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 08:03:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782486237; cv=none;
         d=google.com; s=arc-20260327;
-        b=dae1ARI5I24tVjWYpBrDe7PQoWBLWMc2nunrsg223jBdid9pkhgVQBlxh24QF0bONv
-         +FyVG0tdUZCxrtQYQtdaN2gMfO9jOjy09CZtK/7CHAPfA8bZmhM1ehRR4E+IBPfzk4JJ
-         MdTo/SH0Ra73yf7LRW5HeufGETEwt8T9DqgKOcJaxLhdPpKnc8QJ/V6+YXyS7L/pjnnR
-         WS3+sTk89LDENpiF0tD9vbt7pCLO09AoP5nMt6dwrgVhF6v3uCLdrPP8o2/13fT+58dA
-         dRqBUKn4L0w39OoEzHYvvobej2oe83FSshY3u/EnSbrK3tsS4a/GOh9r7K44RugRKOPI
-         LvKg==
+        b=pEal4YqVTRfZjq5hctw2wpPY00VUu2pKzspTKuIYVMPmpIzDWzF6wlX/R6gIevU9GU
+         QzvJYTb1LJ0i0xzdAdizR5QzDs2thVVf6jd/38OEwrEjaG389CiP4iMx7j05Cc6l2OOn
+         jkMSen2z6Vm8Bj0oyiUHpVoG8w7IuHgUfegoEd8ve0mY20s2vgPsyAhlXYHzJ8IdQ8ns
+         A819X+7T8391vBmPVcYwyJkNCpQfTNVsMYZ/mSMClKUrsW9OikPWsdQJSduMkUr2WzqI
+         xWfsERfWbQhe8lxN3ROszdHu9rpzErimPiuFjWb4Dy04N7jZ75WgBVbAo7UuRfsp8aZT
+         82pA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=2rA5pmWi0Uup1rbCnACo0xXwOG9OHgresntCT2Sda4I=;
-        fh=6hcUKr3duktBY3UgoTWb3oMgRC8h/CdRJUPQi4zxMzQ=;
-        b=prwarsem4G9gyTVTmJCrWjdOh3m36fTZw2OM/n0xAlHgwRU5/xrwb1vfQL+uJoRWaJ
-         tcUWj533s8lGvSPz4e5Z2ltICjJ4tvziYFkAhCplA4E8hqPKgsbk7jUGPQMtLT61Kf5P
-         GMg5HALNn6zaHegrN2eDt8LuRFuszGqaeckAt0gjpA9L9nx4OGypydzKcDyls/A9JI7z
-         NzcQIcej6m1JicDpSrXcLcwNUDpLhGlswXF6KW4uNFq7uAywYvkYeG/deO7puUvQBm16
-         IGzWnxgCbDWhXwT6SHVPecUdgAV1TkIA96b1oRnJ2wGbtxkIkYtG0KeuBGEuJ29bhGfr
-         UiFw==;
+        bh=z9UadtPNMUJVBnkwwcL1vA4ipmTamq12+HfjqnB5qwk=;
+        fh=hWWaLsFaOe59cR4LOA7oTSO3bxLIWodZMwibn2oMu0w=;
+        b=OWzftxanGgM1IGnvCTX3VmImXdNgUPlveO4DOIeRkirqaEr9fYzPojmpiQt7H6KkGn
+         1G8v+mVmYfNcma5SUFcoIfAk4Ct4sNBT0balY/lzzNnJOcFisYcutXYvvB2XfZGTGCm/
+         BTm41hlBcQfEQ2onJsLfKtafBY3PXL9gKdUfIJzGODCYquwo9E9h7Q/zm1aRC3zLbWVh
+         9mk85goya0hOmCANk3Kbfu0vBmT2s1OA1wQHr05hInndFVe4ooK4veifmfTZo3xobia/
+         AOotpb346nVQSToYPuuY1e+QtVuc6AFWcaKAML1IUzkO+cPavTqssPgbFWFHHplUlAjF
+         T5jA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782486041; x=1783090841; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782486237; x=1783091037; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=2rA5pmWi0Uup1rbCnACo0xXwOG9OHgresntCT2Sda4I=;
-        b=dDE3Sr5m6LOyON+gQUezOrQHdMCrxyJgKpFb7cxsPq6BaefchelE20G8dONHsY6QGX
-         UNTE8wkN4XPoMeMroyoX0W8WxnNzLmXez3CEfGj/L2w2fzagWGFL71k0hISbT+5mPt7z
-         +j0w0AKTe2kEoySr5qnOF+nfSXvmqsFJF2mpom42MBkcvTyrMVQcGaJq9u0gtDebJo1A
-         f4l9GN8T5NcAXPkoP9rdbKkP/wo55+y+c6ZfGJYHNnZz/TmHY2Qq8MB9rh9xDxg0FhXy
-         PXc44iRSASCmDsyEGV5QV9c1oh//G7ZNB2hUJPo1rA1DOo57wZDe6vewJrxQyNggBvX7
-         Fofw==
+        bh=z9UadtPNMUJVBnkwwcL1vA4ipmTamq12+HfjqnB5qwk=;
+        b=C1803v6SrDUW0oLzwdVMm4vx1IrBnMJWlbhGRBw8zLLrePKopNO877C964dfhPIZ69
+         9F1AInFzLr7pbioKNUcHN8G1iPQdPIciEMn66s7hpnFhnhCnbIQduk6FouKhErujOmkJ
+         Qat1QK5VrEUaLeZ8gR5mh3Wuf85b0F1obrHxkxv5Aw5GtN6+2MSg9L0aCP19KIAzyFTr
+         R8+P6edvEtRmokVfi1JbnBwXdBhfY+uvgrtjzxtuw9iLVZi3GY0wwWFG8BNYzndXu+5k
+         g7Sx9JyUucjRb1NlAs6jp+0Yfsde8ziPGaHz32bUaPI2aPrZeb96wSK6bvu7Bf1YHmJL
+         Uypw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782486041; x=1783090841;
+        d=1e100.net; s=20251104; t=1782486237; x=1783091037;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2rA5pmWi0Uup1rbCnACo0xXwOG9OHgresntCT2Sda4I=;
-        b=rozRJzwwg7PG5oRFzVZPWLVYpH3v7aT4ahzq1ljBFeBq0IVWuT4xMpQpXKkSWNS3zg
-         hluLsdQRrmBe/Dv+MFdiMDkxih20mQgSBpenUR33JiCjpiFO1x73SlhhKx2mVRAQP4fx
-         aOi7+9WRwt8bKTu/Ph3PyPKS4ycw+fht8R5z5JueLbqFSCJZ1jop+zACMr7hgDtMM5xc
-         d2uU1YZqZ65GhyNakrYbBqgpEZlbzfgbQg6w4uXDb8A80X+GmIm+5Fqf8/LvZdYPW3rh
-         TYuto+JWSggNCgbMXWOHtxGkrapdg4wonOuaz7aEdpBryG9yqP+8f0+J35TU7mbL2ug5
-         A8vg==
-X-Gm-Message-State: AOJu0YzBLEh102ONRvnlDo1gKwXrdhC79plbOulJ5Af0uK/bC3cfrwWS
-	wAtaOPpYMsW08ugNsIB9ntt6SomJCBfQ6ZWG2gHY1j1UPjDz0Mh6htJB1cxGWGGSrQ4iDloKTeU
-	OQ4jT724PonNFqrQuntBKGjTIaH53sHQ=
-X-Gm-Gg: AfdE7cmT+xEkSGpr46cFICPbf+ONlFqI9N+Durxk3xjX7DJaJtfvsTxtoPQ7MKvo6t2
-	sqPXNtLYqSWgRDSzzVZzJ3gvTjGtxHNObQn/xtpls7+4bYkRn7UgojV/JZhBF9PuAF3RvKElZOY
-	IBz/WkpQHx29jNSqvCRcEDGtkdRQ5I5NEX+K2vPFLNdjgenUt0Wwt3gMYJXgc2SKZwiWty/1SX3
-	iVSm3PZG7LqDpuCmHquvYtKvlsWr5lFiXiIpPaaOa1ahLpKOm9wPSSjgCchE0aNyfpizEsCS9MQ
-	9/J7cJcqz7mA62jWsHWcE7auA/d4vk1qefw2kPz04+nX7eSUY6ZhCNeW7spjuHu0qd2qMHxmpPm
-	ANRv/CV/FiDEWYbiAIGNttAhK69z+jCUReVCA88utOaDBrogySZVSHVxVB01WSJ28KPIpvQ==
-X-Received: by 2002:a05:690e:124d:b0:662:e26f:cd10 with SMTP id
- 956f58d0204a3-66487dce322mr5720438d50.51.1782486040738; Fri, 26 Jun 2026
- 08:00:40 -0700 (PDT)
+        bh=z9UadtPNMUJVBnkwwcL1vA4ipmTamq12+HfjqnB5qwk=;
+        b=Y5PaE2/IED0PT9qYVxjeWc4C+H41qCtvxNTcEOLjlRGQFvL3RjrDtpV5w2ErV2Km0G
+         AxxyvrZDwiC2Llt7iouqyL17+sTYZI7SBe3uEq4I5bgIzM3k/9HhjDy9ZoFf6M6d5WF/
+         LDaVodJSlxy+0wJC982g1xMX7r9Ndwk02zrzWWI7D7FutNZEM4HaiZIxvzTZ7uZDrSdx
+         QpdUKJYc9HzWbm5kaI+AjfVQbeEsZ6keqenHTsI+g+Z9qCthDPozcw/FdS114SN2dLBF
+         dmGPmLhr8fPtofcCW9hgQyDVrJmLo/882eLWmr7xleseUVgTykSdI6/bpqUbnOF3jji7
+         PWfQ==
+X-Gm-Message-State: AOJu0YwddbdHHD0UeoSK+G49JUn060O1H/ZzHskhYyC3W92ESrepgfDw
+	q2tuhc0yS4l2Ew2sn3oNuDz5rmLVFg0ru5+7mTAI4R9ZvYIbYyP06JP61fU6W6tRdPh6lIxOvkR
+	VuewtN9Wx8uUGGAErRzYCgEH6FdkM/6U=
+X-Gm-Gg: AfdE7cmRaWTIlbUxD6UGhOY2lIkjlMZQjf0416fxfv+sOLVwNAS/94CYWQCeWkuWlmW
+	17WzqVqIEsKz2O/YCBIFt15l8QNzMPFIh9n9kPiL/xKixbQ8KhLetl6WmmlfhXqB6DxoWy7tvMJ
+	9T47td6YEt3XqeVY9chrwCa6/W2XZ/awtBJ3WsVW/r4HSwNuwvpU5eZ3l7e/9WRmcn01av8CjRL
+	6/978r5U0jIQovX7KuPt1QFR+G77sLj6bz9H+0B9NiKo2k6ozoC4gR7ECJB5YjdaOHC8z7irvdN
+	GsP2LFBOXvn/j4rWaBXEwQvE2IkT0VUcKgBCj0LcF0OltnG6vzPh0qZYSI2TSNk+0JJDl5r6joI
+	mCoxjDwj0nXGPFM5T7ETsURCQPF6KZFSl9uYqyK3i7e2/PE1Zf6hBn3qCCJPkXIq4d/rUcg==
+X-Received: by 2002:a53:ed06:0:b0:664:ae6a:e9a4 with SMTP id
+ 956f58d0204a3-664ae6b0c61mr499471d50.74.1782486237002; Fri, 26 Jun 2026
+ 08:03:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260624133044.1093352-1-f_l_k@t-online.de> <20260624133044.1093352-2-f_l_k@t-online.de>
- <CAMKF1sp3_iZ-NaFJ3qrdEFiOAwqXw+WDCZPtmiF1_4vfP-iRDA@mail.gmail.com> <4MS8HT.AOOYBUNON62K2@t-online.de>
-In-Reply-To: <4MS8HT.AOOYBUNON62K2@t-online.de>
+References: <20260626113322.232336-1-ashwin.prabhakar@oss.qualcomm.com>
+In-Reply-To: <20260626113322.232336-1-ashwin.prabhakar@oss.qualcomm.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Jun 2026 08:00:14 -0700
-X-Gm-Features: AVVi8CdydYdA44NCv_4EDFkA1y3KsNqgwjMoBLZ4ceHFNVbkZ5OLTO6k7RbRLXc
-Message-ID: <CAMKF1soM6i6ktktY3MAvwOf7Z1Uz=MXGYxkdkE2xabPwJNJo8A@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 2/2] packagegroup-meta-multimedia:
- add libdvdread to RDEPENDS
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000046821c0655295f03"
+Date: Fri, 26 Jun 2026 08:03:30 -0700
+X-Gm-Features: AVVi8CdKKXzuP0lkZ3EcCO3OLaeJ2yFCfuN1Isz6jce41bpFCPDHqJlvxa8SRxA
+Message-ID: <CAMKF1spN2c_wpYNTfJHdWntaDk-T7qxv=SJATXiZNqOd6GLUzg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] assimp: Add new recipe for Open Asset
+ Import Library (Assimp)
+To: ashwin.prabhakar@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org, anuj.mittal@oss.qualcomm.com
+Content-Type: multipart/alternative; boundary="000000000000f93f290655296ad9"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 15:00:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127799
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 15:04:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127800
 
---00000000000046821c0655295f03
+--000000000000f93f290655296ad9
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-These are libraries, they should be pulled by shlibs code, I am not sure if
-its needed to be added to packagegroups explicitly.
+these are already applied to master branch. if you are proposing it for
+backports please prefix the subject with branch name appropriately
+([wrynose]) and send v2
 
-On Fri, Jun 26, 2026 at 7:08=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
-te:
+On Fri, Jun 26, 2026 at 5:57=E2=80=AFAM Ashwin Prabhakar via lists.openembe=
+dded.org
+<ashwin.prabhakar=3Doss.qualcomm.com@lists.openembedded.org> wrote:
 
-> I have added PACKAGE_ARCH =3D "${MACHINE_ARCH}" from packagegroup-meta-oe=
-.
-> Hopefully this setting will fix the error
+> From: Ashwin Prabhakar <ashwin.prabhakar@qti.qualcomm.com>
 >
-> Am Fr, 26. Jun 2026 um 00:08:52 -07:00:00 schrieb Khem Raj <
-> raj.khem@gmail.com>:
+> Add a new recipe for the Open Asset Import Library (Assimp) using
+> the latest upstream git source. This library provides a unified
+> interface to import various 3D model formats.
 >
-> This results in
+> Signed-off-by: Ashwin Prabhakar <ashwin.prabhakar@qti.qualcomm.com>
+> Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+> (cherry picked from commit ca1512c46f66fd5b555ca463c61ef08155fcdb57)
+> ---
+>  meta-oe/recipes-graphics/assimp/assimp_git.bb | 39 +++++++++++++++++++
+>  1 file changed, 39 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/assimp/assimp_git.bb
 >
-> ERROR: packagegroup-meta-multimedia-1.0-r0 do_package_write_ipk: An
-> allarch packagegroup shouldn't depend on packages which are dynamically
-> renamed (libdvdread to libdvdread8)
+> diff --git a/meta-oe/recipes-graphics/assimp/assimp_git.bb
+> b/meta-oe/recipes-graphics/assimp/assimp_git.bb
+> new file mode 100644
+> index 0000000000..13d1002946
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/assimp/assimp_git.bb
+> @@ -0,0 +1,39 @@
+> +SUMMARY =3D "Open Asset Import Library"
+> +DESCRIPTION =3D "The Open Asset Import Library (assimp) is a portable Op=
+en
+> Source \
+> +library to import various well-known 3D model formats in a uniform
+> manner."
+> +HOMEPAGE =3D "https://github.com/assimp/assimp"
+> +SECTION =3D "devel"
+> +
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df2d38c9e0d63058b051065fb7b110=
+2a8"
+> +
+> +DEPENDS =3D "zlib"
+> +
+> +SRC_URI =3D "git://
+> github.com/assimp/assimp.git;protocol=3Dhttps;branch=3Dmaster"
+> +
+> +SRCREV =3D "1962da5ac484434524e7a25d566046edd932f901"
+> +
+> +PV =3D "5.x+git${SRCPV}"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE =3D "\
+> +    -DASSIMP_BUILD_ASSIMP_TOOLS=3DOFF \
+> +    -DASSIMP_BUILD_TESTS=3DOFF \
+> +    -DASSIMP_LIB_INSTALL_DIR=3D${baselib} \
+> +    -DCMAKE_INSTALL_PREFIX=3D${prefix} \
+> +    -DCMAKE_INSTALL_LIBDIR=3D${baselib} \
+> +    -DCMAKE_SKIP_RPATH=3DON \
+> +    -DCMAKE_BUILD_WITH_INSTALL_RPATH=3DOFF \
+> +"
+> +
+> +do_install:append() {
+> +
+> +    sed -i \
+> +        -e "s:${WORKDIR}.*:${prefix}:g" \
+> +        -e "s:${TMPDIR}.*:${prefix}:g" \
+> +        ${D}${libdir}/pkgconfig/assimp.pc
+> +
+> +    find ${D} -name "*assimp*cmake*" -delete
+> +    find ${D} -name "*.la" -delete
+> +}
+> --
+> 2.43.0
 >
-> On Wed, Jun 24, 2026 at 6:31=E2=80=AFAM Markus Volk via lists.openembedde=
-d.org
-> <f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 >
->> libdvdread has recently been moved to meta-multimedia and the 'libdvdred=
-'
->> runtime
->> dependency was removed from packagegroup-meta-oe
->> Add the runtime dependency to packagegroup-meta-multimedia so that is
->> included in
->> world builds again.
->>
->> Signed-off-by: Markus Volk <f_l_k@t-online.de>
->> ---
->>  .../packagegroups/packagegroup-meta-multimedia.bb                | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-multimedia/recipes-multimedia/packagegroups/
->> packagegroup-meta-multimedia.bb
->> b/meta-multimedia/recipes-multimedia/packagegroups/
->> packagegroup-meta-multimedia.bb
->> index 4da9de3ff9..4e4f58f14a 100644
->> --- a/meta-multimedia/recipes-multimedia/packagegroups/
->> packagegroup-meta-multimedia.bb
->> +++ b/meta-multimedia/recipes-multimedia/packagegroups/
->> packagegroup-meta-multimedia.bb
->> @@ -43,6 +43,7 @@ RDEPENDS:packagegroup-meta-multimedia =3D "\
->>      pipewire \
->>      ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial",
->> bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} =
-\
->>      libcamera \
->> +    libdvdread \
->>      vorbis-tools \
->>      libopenmpt \
->>      mimic \
->> --
->> 2.54.0
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#127715):
->> https://lists.openembedded.org/g/openembedded-devel/message/127715
->> Mute This Topic: https://lists.openembedded.org/mt/119956631/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
->> raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#127792):
+> https://lists.openembedded.org/g/openembedded-devel/message/127792
+> Mute This Topic: https://lists.openembedded.org/mt/119988959/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
---00000000000046821c0655295f03
+--000000000000f93f290655296ad9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>These are libraries, they should be pulled by shlibs =
-code, I am not sure if its needed to be added to packagegroups=C2=A0explici=
-tly.</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Fri, Jun 26, 2026 at 7:08=E2=80=AFAM Markus Vo=
-lk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div id=3D"m_1=
-632116563961243038geary-body" dir=3D"auto"><div>I have added=C2=A0<span sty=
-le=3D"white-space:break-spaces">PACKAGE_ARCH =3D &quot;${MACHINE_ARCH}&quot=
-; from packagegroup-meta-oe. Hopefully this setting will fix the error</spa=
-n></div></div><div id=3D"m_1632116563961243038geary-quote" dir=3D"auto"><br=
->Am Fr, 26. Jun 2026 um 00:08:52 -07:00:00 schrieb Khem Raj &lt;<a href=3D"=
-mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;:<br=
-><blockquote type=3D"cite"><div dir=3D"ltr">This results in<div><br></div><=
-div>ERROR: packagegroup-meta-multimedia-1.0-r0 do_package_write_ipk: An all=
-arch packagegroup shouldn&#39;t depend on packages which are dynamically re=
-named (libdvdread to libdvdread8)<br></div></div><br><div class=3D"gmail_qu=
-ote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jun 24, 2026 at 6:31=E2=
-=80=AFAM Markus Volk via <a href=3D"http://lists.openembedded.org" target=
-=3D"_blank">lists.openembedded.org</a> &lt;f_l_k=3D<a href=3D"mailto:t-onli=
-ne.de@lists.openembedded.org" target=3D"_blank">t-online.de@lists.openembed=
-ded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">libdvdread has recently been moved to meta-multimedia and the &#39;l=
-ibdvdred&#39; runtime<br>
-dependency was removed from packagegroup-meta-oe<br>
-Add the runtime dependency to packagegroup-meta-multimedia so that is inclu=
-ded in<br>
-world builds again.<br>
+<div dir=3D"ltr">these are already applied to master branch. if you are pro=
+posing it for backports please prefix the subject with branch name appropri=
+ately ([wrynose]) and send v2</div><br><div class=3D"gmail_quote gmail_quot=
+e_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Jun 26, 2026 at =
+5:57=E2=80=AFAM Ashwin Prabhakar via <a href=3D"http://lists.openembedded.o=
+rg">lists.openembedded.org</a> &lt;ashwin.prabhakar=3D<a href=3D"mailto:oss=
+.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.openembedded.o=
+rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">From: Ashwin Prabhakar &lt;<a href=3D"mailto:ashwin.prabhakar@qti.qualcom=
+m.com" target=3D"_blank">ashwin.prabhakar@qti.qualcomm.com</a>&gt;<br>
 <br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+Add a new recipe for the Open Asset Import Library (Assimp) using<br>
+the latest upstream git source. This library provides a unified<br>
+interface to import various 3D model formats.<br>
+<br>
+Signed-off-by: Ashwin Prabhakar &lt;<a href=3D"mailto:ashwin.prabhakar@qti.=
+qualcomm.com" target=3D"_blank">ashwin.prabhakar@qti.qualcomm.com</a>&gt;<b=
+r>
+Signed-off-by: Khem Raj &lt;<a href=3D"mailto:khem.raj@oss.qualcomm.com" ta=
+rget=3D"_blank">khem.raj@oss.qualcomm.com</a>&gt;<br>
+(cherry picked from commit ca1512c46f66fd5b555ca463c61ef08155fcdb57)<br>
 ---<br>
-=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-multimedia.bb" =
-rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-multimedia.bb</a>=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
-=C2=A01 file changed, 1 insertion(+)<br>
+=C2=A0meta-oe/recipes-graphics/assimp/<a href=3D"http://assimp_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">assimp_git.bb</a> | 39 ++++++++++++++++++=
++<br>
+=C2=A01 file changed, 39 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-graphics/assimp/<a href=3D"http://=
+assimp_git.bb" rel=3D"noreferrer" target=3D"_blank">assimp_git.bb</a><br>
 <br>
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"ht=
-tp://packagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">=
-packagegroup-meta-multimedia.bb</a> b/meta-multimedia/recipes-multimedia/pa=
-ckagegroups/<a href=3D"http://packagegroup-meta-multimedia.bb" rel=3D"noref=
-errer" target=3D"_blank">packagegroup-meta-multimedia.bb</a><br>
-index 4da9de3ff9..4e4f58f14a 100644<br>
---- a/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"http://pa=
-ckagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">package=
-group-meta-multimedia.bb</a><br>
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/<a href=3D"http://pa=
-ckagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_blank">package=
-group-meta-multimedia.bb</a><br>
-@@ -43,6 +43,7 @@ RDEPENDS:packagegroup-meta-multimedia =3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0pipewire \<br>
-=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&quot;LICENSE_FLAGS_ACCEPTED&quot;=
-, &quot;commercial&quot;, bb.utils.contains(&quot;DISTRO_FEATURES&quot;, &q=
-uot;x11&quot;, &quot;projucer&quot;, &quot;&quot;, d), &quot;&quot;, d)} \<=
-br>
-=C2=A0 =C2=A0 =C2=A0libcamera \<br>
-+=C2=A0 =C2=A0 libdvdread \<br>
-=C2=A0 =C2=A0 =C2=A0vorbis-tools \<br>
-=C2=A0 =C2=A0 =C2=A0libopenmpt \<br>
-=C2=A0 =C2=A0 =C2=A0mimic \<br>
+diff --git a/meta-oe/recipes-graphics/assimp/<a href=3D"http://assimp_git.b=
+b" rel=3D"noreferrer" target=3D"_blank">assimp_git.bb</a> b/meta-oe/recipes=
+-graphics/assimp/<a href=3D"http://assimp_git.bb" rel=3D"noreferrer" target=
+=3D"_blank">assimp_git.bb</a><br>
+new file mode 100644<br>
+index 0000000000..13d1002946<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-graphics/assimp/<a href=3D"http://assimp_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">assimp_git.bb</a><br>
+@@ -0,0 +1,39 @@<br>
++SUMMARY =3D &quot;Open Asset Import Library&quot;<br>
++DESCRIPTION =3D &quot;The Open Asset Import Library (assimp) is a portable=
+ Open Source \<br>
++library to import various well-known 3D model formats in a uniform manner.=
+&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/assimp/assimp" rel=3D"nor=
+eferrer" target=3D"_blank">https://github.com/assimp/assimp</a>&quot;<br>
++SECTION =3D &quot;devel&quot;<br>
++<br>
++LICENSE =3D &quot;BSD-3-Clause&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Df2d38c9e0d63058b051065fb7b=
+1102a8&quot;<br>
++<br>
++DEPENDS =3D &quot;zlib&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/assimp/assimp.git;pro=
+tocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github.=
+com/assimp/assimp.git;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
++<br>
++SRCREV =3D &quot;1962da5ac484434524e7a25d566046edd932f901&quot;<br>
++<br>
++PV =3D &quot;5.x+git${SRCPV}&quot;<br>
++<br>
++inherit cmake<br>
++<br>
++EXTRA_OECMAKE =3D &quot;\<br>
++=C2=A0 =C2=A0 -DASSIMP_BUILD_ASSIMP_TOOLS=3DOFF \<br>
++=C2=A0 =C2=A0 -DASSIMP_BUILD_TESTS=3DOFF \<br>
++=C2=A0 =C2=A0 -DASSIMP_LIB_INSTALL_DIR=3D${baselib} \<br>
++=C2=A0 =C2=A0 -DCMAKE_INSTALL_PREFIX=3D${prefix} \<br>
++=C2=A0 =C2=A0 -DCMAKE_INSTALL_LIBDIR=3D${baselib} \<br>
++=C2=A0 =C2=A0 -DCMAKE_SKIP_RPATH=3DON \<br>
++=C2=A0 =C2=A0 -DCMAKE_BUILD_WITH_INSTALL_RPATH=3DOFF \<br>
++&quot;<br>
++<br>
++do_install:append() {<br>
++<br>
++=C2=A0 =C2=A0 sed -i \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s:${WORKDIR}.*:${prefix}:g&quot; \<br=
+>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s:${TMPDIR}.*:${prefix}:g&quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${libdir}/pkgconfig/assimp.pc<br>
++<br>
++=C2=A0 =C2=A0 find ${D} -name &quot;*assimp*cmake*&quot; -delete<br>
++=C2=A0 =C2=A0 find ${D} -name &quot;*.la&quot; -delete<br>
++}<br>
 -- <br>
-2.54.0<br>
+2.43.0<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127715): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127715" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127715</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119956631/199=
+View/Reply Online (#127792): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/127792" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/127792</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119988959/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119956631/1997914</a><br>
+t/119988959/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -250,7 +292,6 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div>
-</blockquote></div></blockquote></div></div>
 
---00000000000046821c0655295f03--
+--000000000000f93f290655296ad9--
 
