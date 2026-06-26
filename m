@@ -1,261 +1,192 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <a-christidis@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C484C43458
-	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 15:27:18 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37809.1782487635180290711
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85DE3C43327
+	for <webhook@archiver.kernel.org>; Fri, 26 Jun 2026 16:23:48 +0000 (UTC)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.38966.1782491020277397444
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2026 08:27:15 -0700
+ Fri, 26 Jun 2026 09:23:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HwNQIivB;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6649fde483bso945979d50.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 08:27:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782487634; cv=none;
-        d=google.com; s=arc-20260327;
-        b=k6NlV1q4K2a19e6DSN13UxXkcN1cufjKpph/U0TuR9r3VukQ4O3sgTxe2t6tKLpN02
-         uWeIXl3m/I7zsYFcD/K95mzbcO7x56al1y0egO19cApySZqTioPBKCNH14Yw0lQEXlBS
-         qxbOuxCpG//oLlfms2/Sh+rrahwM6JoXpZ4bfK8rVgo8f0mhx+Kzinf52sXElxn3O0FU
-         Ky4z3fDTa4/vN36WZbIfnn04dggL1uHF3P/GSa8r7gDawNVQxGdIXSgPmkEoG3jsveP8
-         WMk+t1wMg9oikpxc9tBZABE8rBW3xLe8MxtmlyUZx3+KtQSxCL5kTUp/W+XicSW8SkrM
-         CzIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=UNx9iK2Decn7zU0ZFQUirvQrRlnSQVnV2ETfBnHxgsI=;
-        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
-        b=Y6SV/rsdKkeCcKQS26EgfcOq5MtvJnTrnUiq/AoW5YObjSSJOLyCNzzSidabEwj+U9
-         RCLOiiENetsGb0i7RgXm74+z0j7V4gnztl9pxgP8zfi1S9l1pcGMbNlFnZ7xyhJApr0W
-         WM1+eAI/EedNezI+jg4x5thahetWCeAeJ+jWY3M1W51ZQ4BKJYQE1Vlnq3xeFz9PJjYp
-         gTr8B54ul69+t1VoZDz93u5W7mR3YJUXMwzdNPTx4GM2Y6E03G3deHseFKHasPnPJIyb
-         n8e/KWiuHuFnVZAOoQE3JBtT6Mh5vYnwUon1zYXguxm7+s/74GPzz0RtERlLho2h+nsW
-         05cw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782487634; x=1783092434; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=UNx9iK2Decn7zU0ZFQUirvQrRlnSQVnV2ETfBnHxgsI=;
-        b=HwNQIivBVr4OgJqvX63C0oVv70lP8fl0MeXGnFdb2VcZdleNhfE5RkDULqngx3XiXE
-         wXg1wazoJGWLGeQ2xP8iGCYwmO21enfkpoB0wfQ+I5ZLv4HvHN696sjf2PKxuEy2HYFr
-         RyXyMzSmB7/IkiHcOtH6r3LO89z8r3Fib+uiyAkywHlpucq8Ee1tokKg3TvvKaYGsEAa
-         JNBMgOesLo4jWRJg+fw4qhaqGzifGFR6MePMnGLFDRB1Omejp2oarvmTZWeBGCA5tSpH
-         CZ0iFmRbqaE8WNnDxGR/g9nEY7UyF/x9PcXgLIJnloiaFvSjxMFTul45SEOBrATC+ZV1
-         SXSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782487634; x=1783092434;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UNx9iK2Decn7zU0ZFQUirvQrRlnSQVnV2ETfBnHxgsI=;
-        b=YNgtbUaVftloU+bkSvmKRGbQKiUnVyPIpK1MVksox0ZRsbmReX0PjQPt3PbZCtLDhC
-         ATu7M+SD52aJ9WYuUZ4tU04/+a5HUK+Y9oJnh381jJcQ2r2TxBt/pyQXltBEFymbNXme
-         p7Rx640M0chL5HcJxhY2RjE0MxVoemd8jk++wX0rjCxLHrpyuHUHit2Ziob7ZrhbSbaX
-         SIG72kL96b1PXb5zGN96WRQWgtfG88stYMB1M6EShCaCZ/wmrtdNjM3ih9BOO+ATQnhB
-         e008ccjPbXhnksFG2RaPuonNR1kSdbDD4wPEI8g9UKJKRP61QU1T1cCeJp6XxmsG999k
-         rlZw==
-X-Gm-Message-State: AOJu0YxXcFs//6wOlYpeFqiHC8rXDxncM7w2gcRfMguf7T0dgYC00cvZ
-	ps4+AVXVTA3XzFDYkXGMruwruf+6RJxcUbFX04jMt0SA8y4gc46HdznuGnsLQTTHUmTwX9+3Zax
-	Zfe05pcCXzLmF6Jv7XDfR88TT8mrdAAA=
-X-Gm-Gg: AfdE7ckJRLgfIXc8xYlJ8S+fL1wHmJgduhermApO2EGHw34tREIWgcI5HukB0jSf5lu
-	eFOTe3ztpq5Sw7drMIE6OEZukptmV6M0lq8LRk7mhdJZe3WS0l9tIKL1v8S5FfwJ2AJIpy/ldVz
-	ehUaEwmBnwbQRc8WSM/VTnCIQ/YQWMRkuCi9dT4jsQjMu74sXFH+/QYeu9fxZu8k6BUot8kkIqi
-	N1hz+Ktp8atMdrMnbJIxXCh4v7VSn7Tzjc6NcQeNnpysl1n0tQ3FLg93N/LFdZVDgkgV9RPfgGq
-	PP91z/AaxpzethDGbnCnghhlnnn+ZGjLyA2IRNzGn4QlWkGudTtloqrV7PRk2QdovNI4w6k+zwN
-	pg/w2AHTxrkWcJMoDGfPXE629FIfMVzgtIpvOVSBOb1u4tlpHF7pYQeKGRpLaljiyOeoylw==
-X-Received: by 2002:a53:ac83:0:b0:664:a9a0:af70 with SMTP id
- 956f58d0204a3-664a9a0be29mr1239393d50.0.1782487634171; Fri, 26 Jun 2026
- 08:27:14 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=OKwZ+NfT;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=Jg0VDeu7;
+ spf=pass (domain: ti.com, ip: 148.163.150.75, mailfrom: a-christidis@ti.com)
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+	by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65QFhogu2047015;
+	Fri, 26 Jun 2026 11:23:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=proofpoint-05-2026; bh=F4vgP4iRdhrQZ
+	MsHcIJEqt4iwXkTjKZgtx4aPUKg3m0=; b=OKwZ+NfTr954ZPfAE+vE5vmmhpylU
+	6wGaa1RrQhrfH1iWNb6B6Pi2xtA8NBwbGWt1/NP2D02S1HYrZdW8w10T6tbc8RGJ
+	kOY/hm//dW6INDS6GhMczW6i9tpHltOFMCfpH/tlEnlHiPG3nZjNknlfODX0Dsqa
+	1sHJllpip/n0AoGAQodauGxHa7y//ebBjnCuIL1AxmUH1cvnnnQQRMyXS+Ys75ZQ
+	cK/4OTDeQNYnIcTm8NeA3v0Ezyl7dCbO/JYTrakfToil1csitBWLWMSfO0LtUOrm
+	9tjy9UtqwueRaDcWFRXv2YsS3sZRLtKuTj57g4Fk5ddZHFKewJ9U3v0JQ==
+Received: from ch1pr05cu001.outbound.protection.outlook.com (mail-northcentralusazon11010058.outbound.protection.outlook.com [52.101.193.58])
+	by m0380145.ppops.net (PPS) with ESMTPS id 4f1rc51q0n-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 26 Jun 2026 11:23:39 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hQzOZKjZaJpid+yRooMosnfW004CyFu4PCcbozdXeLpUJlTcHy5s87k+r54HAt3JR/lhqYJCWIFwVegUD0sQz6jdn5Z/xSQfBpaIeJpKPzDRXCBKVac+SGpYrkhSabJjNCx+qhKkwxNoIb29vqKzq1A/Wclmr7M2Csnc7HWR84PfVdDBy+AXay8e36tjrmy03qaGLDRRS4E0tXmdP46N5dapFcii1lDBMKkRpvInkcLMOUJpGljenUJj3emQw+gadFUTlLTAkGgtlGvtPMXzwvoiE9zJbh2w+hFLoDo+083IaO89lA3EjenxnUcmuAPXkGA4XrgaQK1IstGOOnButg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=F4vgP4iRdhrQZMsHcIJEqt4iwXkTjKZgtx4aPUKg3m0=;
+ b=cP0oKzRNhywRLvf4ha0ky4HA80qrEzu8zj9oimXzSTMhQBLDfAk09leK4424sMwtbxcWJLtdiTVFyLhxDBiFyMlOMPCMn/dVtkUNJtrkUfisBx0RJxy9Vg928uIMsYtq5sF0iz22u0X5rcR/dN1FeWQCsb041fKqZVuKcWeWmdA75AnQPTh84d6+P689Xku5yVeyPFTCbnr08ht/WyWSy/5YhU2giHX2mKFvlYMZDfGtfdhqVA27nA8Uxqhpd9UVteHBQPmBphSzfh5PXPOPOMcDUQrUjyfaGIubIC9T1kR0H+sRJ6IDu3TuNbsbRH6Mqxru8056Be4Sq8DT3UtTjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=F4vgP4iRdhrQZMsHcIJEqt4iwXkTjKZgtx4aPUKg3m0=;
+ b=Jg0VDeu7plamOttojFQpcmesQYQNtt84QHQqTmft9wjcJfRPC8QsOABinb/yPH1yj40voalaE2ZBwEPI0P1MJvG/+6B7i9pDB1VKwxHdyuWitglm79jYFI+1eiRIJuAitpr9GaIien5Pih52wUr+fwB6Y6Z2B5jri+53EA3AA4Y=
+Received: from PH0PR07CA0027.namprd07.prod.outlook.com (2603:10b6:510:5::32)
+ by CH3PR10MB7905.namprd10.prod.outlook.com (2603:10b6:610:1be::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
+ 2026 16:23:33 +0000
+Received: from SN1PEPF000252A2.namprd05.prod.outlook.com
+ (2603:10b6:510:5:cafe::62) by PH0PR07CA0027.outlook.office365.com
+ (2603:10b6:510:5::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.18 via Frontend Transport; Fri,
+ 26 Jun 2026 16:23:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SN1PEPF000252A2.mail.protection.outlook.com (10.167.242.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Fri, 26 Jun 2026 16:23:33 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 26 Jun
+ 2026 11:23:27 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 26 Jun
+ 2026 11:23:27 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Fri, 26 Jun 2026 11:23:27 -0500
+Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.75.243])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65QGNRmP1979658;
+	Fri, 26 Jun 2026 11:23:27 -0500
+From: <a-christidis@ti.com>
+To: <khem.raj@oss.qualcomm.com>
+CC: <reatmon@ti.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [meta-to][master][PATCH 0/2] opencl-cts: update to 2026.06.18 and enforce -Werror
+Date: Fri, 26 Jun 2026 11:23:25 -0500
+Message-ID: <20260626162327.1416326-1-a-christidis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260626151341.154231-1-f_l_k@t-online.de>
-In-Reply-To: <20260626151341.154231-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Jun 2026 08:26:47 -0700
-X-Gm-Features: AVVi8Cel-VmduQjfNTmwH1fNNchu5rlR36GtyTl4w-1YRjz7A9QH8-hSQkN3XAo
-Message-ID: <CAMKF1sovMviZ2YdK96K2ipQ73XOO38JVaj7LCcB7wdnOO7KExg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv3] flatpak: update 1.17.6 -> 1.18.0
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000405cb2065529bec9"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A2:EE_|CH3PR10MB7905:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5876f725-042f-4a39-399b-08ded39f4453
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700016|82310400026|376014|23010399003|1800799024|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 
+	AJTLsPdJAZzEbQyuiPV058T+NLOJbTgJrTV/ClthTAWbIQkkDvB2dNEZ9bRClGkay1IHI4GrN5uZWCgd3SKVxAyVSCmFGcXJWqbLvnpx1l4s/kTSMGiWDAZBNhjg2BzVVK/aeyfUFJ1JODWQ50a/A5jsTiROAS+yrKmDTQ/jHSaYucA40P54zUfgZ3kJ7MZ11GvHtqUX+Q1yBkYnfwMQiVIgYJgwTlHteTiQI2TenRrgkwGSCnYDkxNuyxMqV5pS8tjEV49mjlveQdRXl4tKUvc7vZAw6r8xfnQIf/c0WhvX40ZKTjAy/ItVYLY+FC1HKkW5BmrQkt8cuHkDvyoUgcPuFluzr6YwfrR8ccmu8jZ1iwlpFmJ8RNW6/D7ThlXtruclpbRi39wl72XkxGKGLOUPvL62XqTyajuL5ZcK1b1hzrju6YCSQ6c8HmwgTqKb68JAWJIXNKUewkZhKbpeygzPg9J36VRlyF2O+BgUfbuBbIJnLGNW6DQna/9laDAlViS833BOQNBHMgEG/Tx75TIkkHakudHOpOPtFq6Cm+kPGjm04Pj5X3J1wzJTS36V1cCRoM7+Ralbn71E5WtyfCcLdq0kOnoo/XJTpwOlQ04K5zBkLpp1S2kmW4eTa5bdNWFU0mWXvPiHjnoRVER3fnjlcilHNb/QBiSVpCDBp6jc7bVZX3oQjR5b0vEr04yHIREzDUUELOHzB1nN/oZMxQ==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(23010399003)(1800799024)(18002099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	wYc+TR9G8A5yRbkFNjbczh97yYf2pEVVpHnuMDhBeVZnj9pPltgdc58yKusEjinKDKIJ7c/vP5QY5X0/eXQboVCD089FCvdpRkHzrcN/zAN5hjpxDdxe0cocdHTD64kRrcnM+I8tRGk0eTvW8mPngd242kwLhNPl5CnuVrYHdGO1jjG+nIUVj17g94GssUSqSw5VdxMxImleYqbTG97g5jP26bNs0vB8XcFxulbx+xmtCBRgE2+j9hWlh7dDY+NcZUfgyuogPyedJ3puovEZXS+9431NZCb3rvmtGHL64P8TJrampJgzTlFVhnL0p6eqz/dBJjkUyNYBtSpXU2ulVxzHeAk6+AyolwZKoY6YzBbQWzZoF69mgQVNHhV7Rs+LUCosgi8G3R3fP8UsGn4C0k0fJ9CaOSy5cnE1VO9Cp3011JbdIeZS82DpWpsqvURl
+X-Exchange-RoutingPolicyChecked: 
+	Yq6RIYO7b8B3zVjGaQSw4ZQ4wyXBHO/BxtnHrAJmhpf18Di0c5NNYzbIYfGw1+zsUCnCnLCaOR+3rjU3eyDljwPFfHGqnZJBkuzRsBQTtklK8icOE0PxymlU+sa2j6BbcP7y3WUlM7uQ+KVTP/6612SBScBMJp1T7Aqg0ecd4D+wrO+kfpFXbWVIUUmaC9LT40VZOI8uOuItWgJT1Br6goTZHXEm2A8j5GSxRxxYy3Q2xxXT9yrZwC1drRQsgIRCTsfy2uMhSwf4PFDguVhNLp1I96gpGAc/V3ingg6paE0NA6LPCG/pV0YQhzAy4hQh7bhtx9Qenxv6GcTkoYeZcA==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 16:23:33.2085
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5876f725-042f-4a39-399b-08ded39f4453
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SN1PEPF000252A2.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7905
+X-Authority-Analysis: v=2.4 cv=DcInbPtW c=1 sm=1 tr=0 ts=6a3ea78b cx=c_pps
+ a=jJEkL6Umpl9hNhu6gfQ4Mg==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=FelO9ux0wxsA:10 a=s63m1ICgrNkA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=KuHDSteq_PTHlu79v2UA:9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDEzNiBTYWx0ZWRfX7G1rWRZ/6eKL
+ a8diceSou/sBPIswLwr7b4zf1g/9KOPYQZosrz3Wxch7l6G+Ivlnytc0vmK6vS50PW4nTkOx8+o
+ sSMog3ch341jpAxBcnY7SXTRxW2jVt8=
+X-Proofpoint-ORIG-GUID: kfzKLhLwBYmB1kqBJPr3HUFV7Uvgsbio
+X-Proofpoint-GUID: kfzKLhLwBYmB1kqBJPr3HUFV7Uvgsbio
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDEzNiBTYWx0ZWRfX8LPGnL6llrEF
+ a+9UUpQtisrXJ7BOLzaVj+c9QhgEyx4+WDlRP9aHecYxOJ1YiEJvZ64/yNy+j6jx/PD8arJhqUt
+ NbS50X3vyjRsx2VaqGwp00lhE7nOtJBUnM+kxQQWCvAZRbr1m0ACxqoycF9wu/l3GQfGO2bFCwg
+ DrBcDNIOzCmTZVWK4pqN5EuOIltTabCFfoNBQyg7QNfx2wSP+427M0FX8OJvKfCBG8N62jVDTw7
+ 33C3v0VRtS7k98d9UUPQyA8JLH+QYL9wBDbOMg+VGnh8yahkXS7Swxn1WjI8D3/E8+l+7sqUKvt
+ rEOlyjCpFuejX/azpwDCStGVTwRbc9lDZJGt2M4EpGg8fQHLJE3FBZQQ86P2o8JMD8dEp+4AU5u
+ oCIEB3CFPGqewN2E5838VfPg5GcA2Ada0wploB/EV+lxa9CSOzM7h9KuybPJ8vv1acOkZ+RjmVE
+ sY9A3xyqW1bQ9BDN5Qw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-26_04,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 priorityscore=1501 phishscore=0 lowpriorityscore=0
+ malwarescore=0 impostorscore=0 bulkscore=0 spamscore=0 adultscore=0
+ clxscore=1011 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606260136
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 15:27:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127805
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2026 16:23:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127806
 
---000000000000405cb2065529bec9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Antonios Christidis <a-christidis@ti.com>
 
-This did not work either, I cleaned it up locally before applying.
+Dear all, 
 
-On Fri, Jun 26, 2026 at 8:13=E2=80=AFAM Markus Volk via lists.openembedded.=
-org
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+Update opencl-cts to the 2026.06.18 upstream release and remove
+warning-suppression workarounds from the recipe.
 
-> Enhancements:
->
-> Improve error handling and printed output of flatpak-coredumpctl
->
-> Support the AMD vendor specific compute interface (/dev/kfd) via the DRI
-> device permission
->
-> Improve the output of flatpak update with failure causes
->
-> Improve startup time for fish shell integration
->
-> Translation updates: =E2=80=8Ezh_CN
->
-> Bug fixes:
->
-> Fix building when HAVE_LIBSYSTEMD but not USE_SYSTEM_HELPER is defined
->
-> Ignore system bus failures in parental controls check
->
-> Fix some return values and replace deprecated GTimeVal with
-> g_get_real_time()
->
-> Suppress an unused-result warning in the tests
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../flatpak/{flatpak_1.17.6.bb =3D> flatpak_1.18.0.bb}            | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-extended/flatpak/{flatpak_1.17.6.bb =3D>
-> flatpak_1.18.0.bb} (98%)
->
-> diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb
-> b/meta-oe/recipes-extended/flatpak/flatpak_1.18.0.bb
-> similarity index 98%
-> rename from meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb
-> rename to meta-oe/recipes-extended/flatpak/flatpak_1.18.0.bb
-> index 1512b7239f..879455f63c 100644
-> --- a/meta-oe/recipes-extended/flatpak/flatpak_1.17.6.bb
-> +++ b/meta-oe/recipes-extended/flatpak/flatpak_1.18.0.bb
-> @@ -8,7 +8,7 @@ SRC_URI =3D " \
->      file://0001-flatpak-pc-add-pc_sysrootdir.patch \
->  "
->
-> -SRCREV =3D "9b21874f1a175a9b7c79175a221fa043e202ca73"
-> +SRCREV =3D "5de2b58bdafde88515d9d6b9189bd1cfd3b88c46"
->
->
->  inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection
-> python3native mime features_check useradd
-> --
-> 2.54.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127802):
-> https://lists.openembedded.org/g/openembedded-devel/message/127802
-> Mute This Topic: https://lists.openembedded.org/mt/119991180/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Patch 1 bumps the version from 2026.05.05 to 2026.06.18 by updating
+SRCREV and renaming the recipe file.
 
---000000000000405cb2065529bec9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Patch 2 removes '--compile-no-warning-as-error' from EXTRA_OECMAKE and
+drops 'SECURITY_STRINGFORMAT:remove = "-Werror=format-security"'. The 
+recipe now carries five patches (submitted upstream via
+PR #2727 and #2728).
 
-<div dir=3D"ltr">This did not work either, I cleaned it up locally before a=
-pplying.</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Fri, Jun 26, 2026 at 8:13=E2=80=AFAM Marku=
-s Volk via <a href=3D"http://lists.openembedded.org">lists.openembedded.org=
-</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-on=
-line.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">Enhancements:<br>
-<br>
-Improve error handling and printed output of flatpak-coredumpctl<br>
-<br>
-Support the AMD vendor specific compute interface (/dev/kfd) via the DRI<br=
->
-device permission<br>
-<br>
-Improve the output of flatpak update with failure causes<br>
-<br>
-Improve startup time for fish shell integration<br>
-<br>
-Translation updates: =E2=80=8Ezh_CN<br>
-<br>
-Bug fixes:<br>
-<br>
-Fix building when HAVE_LIBSYSTEMD but not USE_SYSTEM_HELPER is defined<br>
-<br>
-Ignore system bus failures in parental controls check<br>
-<br>
-Fix some return values and replace deprecated GTimeVal with<br>
-g_get_real_time()<br>
-<br>
-Suppress an unused-result warning in the tests<br>
-<br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
----<br>
-=C2=A0.../flatpak/{<a href=3D"http://flatpak_1.17.6.bb" rel=3D"noreferrer" =
-target=3D"_blank">flatpak_1.17.6.bb</a> =3D&gt; <a href=3D"http://flatpak_1=
-.18.0.bb" rel=3D"noreferrer" target=3D"_blank">flatpak_1.18.0.bb</a>}=C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-oe/recipes-extended/flatpak/{<a href=3D"http://flatpak_1.=
-17.6.bb" rel=3D"noreferrer" target=3D"_blank">flatpak_1.17.6.bb</a> =3D&gt;=
- <a href=3D"http://flatpak_1.18.0.bb" rel=3D"noreferrer" target=3D"_blank">=
-flatpak_1.18.0.bb</a>} (98%)<br>
-<br>
-diff --git a/meta-oe/recipes-extended/flatpak/<a href=3D"http://flatpak_1.1=
-7.6.bb" rel=3D"noreferrer" target=3D"_blank">flatpak_1.17.6.bb</a> b/meta-o=
-e/recipes-extended/flatpak/<a href=3D"http://flatpak_1.18.0.bb" rel=3D"nore=
-ferrer" target=3D"_blank">flatpak_1.18.0.bb</a><br>
-similarity index 98%<br>
-rename from meta-oe/recipes-extended/flatpak/<a href=3D"http://flatpak_1.17=
-.6.bb" rel=3D"noreferrer" target=3D"_blank">flatpak_1.17.6.bb</a><br>
-rename to meta-oe/recipes-extended/flatpak/<a href=3D"http://flatpak_1.18.0=
-.bb" rel=3D"noreferrer" target=3D"_blank">flatpak_1.18.0.bb</a><br>
-index 1512b7239f..879455f63c 100644<br>
---- a/meta-oe/recipes-extended/flatpak/<a href=3D"http://flatpak_1.17.6.bb"=
- rel=3D"noreferrer" target=3D"_blank">flatpak_1.17.6.bb</a><br>
-+++ b/meta-oe/recipes-extended/flatpak/<a href=3D"http://flatpak_1.18.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">flatpak_1.18.0.bb</a><br>
-@@ -8,7 +8,7 @@ SRC_URI =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0file://0001-flatpak-pc-add-pc_sysrootdir.patch \<br>
-=C2=A0&quot;<br>
-<br>
--SRCREV =3D &quot;9b21874f1a175a9b7c79175a221fa043e202ca73&quot;<br>
-+SRCREV =3D &quot;5de2b58bdafde88515d9d6b9189bd1cfd3b88c46&quot;<br>
-<br>
-<br>
-=C2=A0inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection=
- python3native mime features_check useradd<br>
--- <br>
-2.54.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127802): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127802" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127802</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119991180/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119991180/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+Kind Regards,
+Antonios
 
---000000000000405cb2065529bec9--
+Antonios Christidis (2):
+  opencl-cts: Update version 2026.05.05 -> 2026.06.18
+  opencl-cts: enforce -Werror flags and fix upstream build warnings
+
+ ...pe-mismatches-across-function-templa.patch | 209 ++++++++++++++++++
+ ...st_unary_fn-Remove-unused-variable-j.patch |  40 ++++
+ ...rintf-Fix-out-of-bounds-pattern-arra.patch |  32 +++
+ ...002-commonfns-Remove-Wno-format-flag.patch |  30 +++
+ ...3-c11_atomics-Remove-Wno-format-flag.patch |  29 +++
+ ...2026.05.05.bb => opencl-cts_2026.06.18.bb} |  13 +-
+ 6 files changed, 348 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts/0001-commonfns-fix-type-mismatches-across-function-templa.patch
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts/0001-test_unary_fn-Remove-unused-variable-j.patch
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts/0002-command_buffer_printf-Fix-out-of-bounds-pattern-arra.patch
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts/0002-commonfns-Remove-Wno-format-flag.patch
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts/0003-c11_atomics-Remove-Wno-format-flag.patch
+ rename meta-oe/recipes-core/opencl/{opencl-cts_2026.05.05.bb => opencl-cts_2026.06.18.bb} (71%)
+
+-- 
+2.34.1
+
 
