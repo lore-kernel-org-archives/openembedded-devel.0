@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B297C44506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6A4CC4450B
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:38 +0000 (UTC)
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14746.1782634350315682802
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14754.1782634357876889535
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:30 -0700
+ Sun, 28 Jun 2026 01:12:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=lbZjCsob;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-30ec3dfbcd1so251030eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZWCaYH/D;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-30bbe98c3f0so6038151eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634350; x=1783239150; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634357; x=1783239157; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K7hveOHVjQlHbDkxD7jHGogDuClaos2iZ5+5AgSGoXs=;
-        b=lbZjCsobN6zkLNBP6eHe+/FmoCfLPm9bq0unSuyK+pi6ohZ5gEYGbN2OXDqfee8XDh
-         /focdOsfjsLGLHitV9+uMVlekWNM7h6+FBhgEW5D2RViEunj5JlbCnD2PQf6snPHYw1v
-         uaHx3MfINGxnQt9NFmrq2cqcCYaW/O6RGvlOA5ZT950Vcx5aIotkF4Udg21DYmKIqK2i
-         smxzJaF04a2n7q17Ssl2VYWNvFj3SgpE8t2pzmrnpT8qsZy9cXkVkV5NfbUGhZMbyJoj
-         viTj9yfpirhHWdMREPFTd9Z0k3o0zpwtHUDfw/kI4FLo7rvfEs+m+MkuMEIrjPosVwtE
-         Mrzg==
+        bh=BSwPRoFZW8hpBek6LVcWp3UwFJPNFStkUKW0qCpgdJE=;
+        b=ZWCaYH/DEBd+sbhdhbzKPGBYIYGXHGfc/1zSzWbUf7PpKWFwYjA+RYfy0XZO8bZuYV
+         m+A0MolRHJFS8H+md0lB/T8etOMpVA8jQxX9YpYAU3fNvQHJT4M2PBBGC48y5jk0Eh82
+         91K1gyjbzy6W4C6peAEr9n5tubagQjq302IpSf6DG3HKW7C063K7USOTea6kKwPyYeGU
+         MkjJMbgSJANKsyr4WGLIZEyj93baliNzMjErFSPxoMSIocQmwk59FHV+1JYIr5MmFsNf
+         2Ul7+Yc+QJAZHR2YiQ+AcriAsO8G5nFRAvHdv4XEXeEwGsfTRRvN0fZh/psklHmsbkKe
+         RlmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634350; x=1783239150;
+        d=1e100.net; s=20251104; t=1782634357; x=1783239157;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=K7hveOHVjQlHbDkxD7jHGogDuClaos2iZ5+5AgSGoXs=;
-        b=AKHch/ZL0Nisbs3W0lwJsIxowq3nywFtkAepCjqJTnkD4ANLvWXJNh8z9+4E5noA+y
-         Q+fLzEXwi1tduddJmCk1ju7ENrdXv/e8ZbVmpvBE91RCyjU/+W9kvT+UUW8uTN6J6qI4
-         kn2YBQTuWXxivQLEKVVkqmpiC8wLb4W6pde2pRxkakeFmRrbhNmQ0fAlNv8z6zN3fBAL
-         wD5jpnwy7GgnX2ehh9/S//8enz+2AybMJno6HTimfHEMv1EgGgBmGfXH09CocnWivtGa
-         B8VsaPovfjYTSJC9yE/zPqgAnqraajdxAuSXUtwFX9b9SerPF6EB0pNA7ltHiVOuHk0y
-         jXKg==
-X-Gm-Message-State: AOJu0Yy3wtM9SzYdQbXI5XDY61FwLFSHKgWBPmLg7VC0ocrtP9ys0/YN
-	ftFLJO8roke/MhUKWdRvm45gBucg+5Ek3peGWyHaqaVocNqazbDrkqGVBJp+P98mhU1ikw==
-X-Gm-Gg: AfdE7cl+ctQH+E1Xs/lMSqG6P4I1TcEegLSAb3eJpU6NKA3O+iAaUWwitlCm6Zy9WaS
-	PtnVuyI7uQJ9tViGY/V1Rgi/FtmX+NNH96RdjV29ncONKTsy3lhKwGUd7/aq25kYXDrz2yKpxu2
-	731PKb3qcQ1/ujk5njzAwolrrf8evR/y8tW4PiKsia/y3W+sAEL44O0WleIc9u1uczIbllAvT0/
-	zVIlrPg8tt7xYgefDLUNFnRO8TRwA5MyIR1ezGqPYOd6Q3qCPAmhsyViDJoqzfMhUX9mfbH5y/d
-	3pnYpLNQqqMihmedcLjNHfMFTZWQQV3UKGk7pbscsABii6kblN0pTIoDKoH0iK0XFtub5ZRRMyd
-	CZ08G8qsuZQMLy+/ZAwAjeJl4A0Yu3Jc5giOhKAhgfPxRRuhJGGC8XktU5jEre2zO0oPZHWsdM5
-	nrsPOQ46SYAACixi8/Q61/Mz/jYOjrnX8/guKJR9q7gpnziPny/nVq/plak1r51kFEe7h/IPfhn
-	/CIss9iDsklP62VqEhgJPXPrllWLycE/tt7NEggngBVrJvI8A109c1oQYTyQHpgc9BOaQlRELG4
-	HJcTnoHv0UAXwhqooOGotl8dc6Ul0g==
-X-Received: by 2002:a05:7300:d517:b0:30c:544f:a861 with SMTP id 5a478bee46e88-30c84eb7d9amr12084119eec.20.1782634349611;
-        Sun, 28 Jun 2026 01:12:29 -0700 (PDT)
+        bh=BSwPRoFZW8hpBek6LVcWp3UwFJPNFStkUKW0qCpgdJE=;
+        b=GQsPLQeCunc1qb8o4CtytJd2uU5rLyGZxJUokB7snSl5tdjMGMWAnp/emr3ttMX0o6
+         IoNnKxC5IHIpH+vx3Pykz0vlwmvG5haPiT9fcyTxXNwO16oIoMJEXF2Y3uVtMckHldMI
+         gbtvLnC18Bf6QqoC4Dq8GRnbIVqwlfDwdU//XjcStXNa9dabUpcuQeObraj2SLX5RnPQ
+         AmmbzPTANm6Zgw/EvKkqXx7Te35PMI+Olrfl0HP6VXxmBzytqVg6ZTQEZVLKV3G3IJA0
+         8j2nqBXjLSyMo74LGi50QXijjMmi70Piml0kRCsI9BtHjv+vKI+aXFF1ipZcKeobDDEv
+         CNxw==
+X-Gm-Message-State: AOJu0Yxnx3THabD8GnG0sV9JjvpI9tjSnpSUUlrQmYWHajjn0B7ybTq7
+	og/ORQ7/GFo1o5tpZnM278BFBGJ0kkrpfMymyvF4ALX0KfJmqQbkhVxafdxthw5cgXoQew==
+X-Gm-Gg: AfdE7cl/xS1+hrc17tRlEHeTyLdqskt6RTguvcth8hb+59eNRMlrKCpAKkBC+3nQDa7
+	uixd0fcqNga6Yc350NECWA4GpaAO1KST0xYMSSrcL4EV2Bi0RZt+Eh/EfQXpFB77Z9eflEbQVoN
+	wfFA3OjTt7A3IaI0x5XEYVy5VZoAlmMMvvGH9NXKPSEU/0onkVIkWI0OSguA5ISw5Vq9zgQgBBl
+	R9xwhraR2hTkKfHMkRuN5YIrjJJnqZIfLpDjgtk/eQnXzB32Ii5wQl9UIcQxTG1TudC59vYTB4K
+	+bIlZ/8Js9upKs0xqdP/8cPIR/JJeclE27wrRO8XTF6RRLT6TNCNt2dkBOOTgZ/xuhM1miQAZTA
+	83XD24k4rqYT3Zw8qQhVv8qWOvFuagNHMyorhYJX6K/I43lFTir8EQFdC+01z3U2UHRSAIfuaLN
+	V74iRohmJsXwT+lcrC6Towj35yY2ShxYGH5rF+wnpHmmTH4c8cjHeXGzM6sxQIFbrRmJZPijImt
+	Sp/H2Km92KAB5cbePu47qh++CJCuqJC+G4VUrpgoztCfbI11tewLsZDTzS1ReE8Bqgd1Ivs7CaA
+	72EEc/sl3EcUw3KhVYf1OTeso9VD5Q==
+X-Received: by 2002:a05:693c:41cb:20b0:30c:9ab8:da85 with SMTP id 5a478bee46e88-30c9ab8dd63mr6085964eec.11.1782634357233;
+        Sun, 28 Jun 2026 01:12:37 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.29
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:29 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 070/128] leptonica: upgrade 1.86.0 -> 1.87.0
-Date: Sun, 28 Jun 2026 01:10:21 -0700
-Message-ID: <20260628081122.178348-70-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 079/128] libopus: upgrade 1.6 -> 1.6.1
+Date: Sun, 28 Jun 2026 01:10:30 -0700
+Message-ID: <20260628081122.178348-79-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,28 +70,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127880
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127889
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../leptonica/{leptonica_1.86.0.bb => leptonica_1.87.0.bb}      | 2 +-
+ .../libopus/{libopus_1.6.bb => libopus_1.6.1.bb}                | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/leptonica/{leptonica_1.86.0.bb => leptonica_1.87.0.bb} (89%)
+ rename meta-oe/recipes-multimedia/libopus/{libopus_1.6.bb => libopus_1.6.1.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.86.0.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/leptonica/leptonica_1.86.0.bb
-rename to meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
-index 11adbc7125..1e6edfd138 100644
---- a/meta-oe/recipes-graphics/leptonica/leptonica_1.86.0.bb
-+++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.87.0.bb
-@@ -7,7 +7,7 @@ UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.6.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.6.1.bb
+similarity index 96%
+rename from meta-oe/recipes-multimedia/libopus/libopus_1.6.bb
+rename to meta-oe/recipes-multimedia/libopus/libopus_1.6.1.bb
+index 0e2bf09898..14c1cbe0cd 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.6.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.6.1.bb
+@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4b365c2155d66e550e1447075d6744a5"
  
- SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
--SRC_URI[sha256sum] = "1fa08e40bb37fd45802d5e6e7b43927449a5c47d4608ef99d3bd3f0fa76baedc"
-+SRC_URI[sha256sum] = "c73363397f96eb1295602bf44d708a994ad42046c791bf03ea0505d829bdb6a7"
+ SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "b7637334527201fdfd6dd6a02e67aceffb0e5e60155bbd89175647a80301c92c"
++SRC_URI[sha256sum] = "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1"
  
- EXTRA_OECONF += " \
-     --without-libwebp \
+ S = "${UNPACKDIR}/opus-${PV}"
+ 
 
