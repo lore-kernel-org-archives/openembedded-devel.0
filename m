@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E5CCC44501
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BF3CC44502
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:38 +0000 (UTC)
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14749.1782634353606641965
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14748.1782634352850580769
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:33 -0700
+ Sun, 28 Jun 2026 01:12:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=n53o2XwQ;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-30ec1ddd510so322706eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=VBxOEUOR;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-30c591fb1cbso3619577eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634353; x=1783239153; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634352; x=1783239152; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aTJAII3qsozVAv6cm0nW34aXYTurcURal0fw40KLjTA=;
-        b=n53o2XwQYMfuNVx/bLY3DqD+d7dOXsMJQsZWoVnN18CyLGfqJQ2DVQoEl4+G8TORuS
-         jOyCZOsxr62nQd/baf0vtVzgwSRDU7jnc08AMG5fD1zwq8zK5Sx0KABk3La89x1pFczD
-         to/leqvWaDxdg5/2eua1clpBiTPm9Fyqe5e8K4NaTjWcJOZZ02KDDD0MykcQd7MJTUJl
-         u7UPlWpAMGYh3RD5YHNRhpQhRUyXV0gKWlKwKoUFXBPBM4Uo0NSYrByUWMQ23qusTvP+
-         dm42kHowjq0w5N65WB2BnYQhwYYb1kaf5IfMwct1n4dj6miZsVFjC5zhNBikaaED4v/U
-         Gqyw==
+        bh=oy9vJ1BBeshOwvEm1aqPHUqi6oKNHnGZW7U6fNkFCJM=;
+        b=VBxOEUORg/f1zAe9EOguAdsaTQIA6E8u3doXqqdMWYeosiO5PymHIC91T00kaNEq7H
+         Y2TdVPp4+oR32FOcqjJCvLRHOVba6qpjxkHY3a1vMXy51YUlRGWaWSCuxnEMw5JuzeP0
+         LPSrfPcG4vVb/2/CSTUSHGAsjI6eYS0p4BC9bo7FY0byvbsvrjcxtrqyzquctJSjKZ5w
+         g89712iHDqknWrZqRfzjMYy3maibDnpCjTUzPBTmNMAGRNh3uT6AEYR8+LuIjSECmkAN
+         y1Ey9OY02Jc3X9G0LMPs0/L+cgEnEbZN0NZleOHKZ4NKiuKL1SolcUI51NZCCJduYa+P
+         qouQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634353; x=1783239153;
+        d=1e100.net; s=20251104; t=1782634352; x=1783239152;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=aTJAII3qsozVAv6cm0nW34aXYTurcURal0fw40KLjTA=;
-        b=N6LNeic2pxkI3INlen6zuQHmUvXHXFW/0V/YHUKqOBc/eZBpFekAsWgEi3YNI8iXHf
-         vhbeUTvG43UcpamYaOMqLa3nIDA5GhGKwcUIPAU99oyr/2Jk/jRwS1m01jtxILx5eOCh
-         KXYtvwQUyh5VxUcPDZCeaEDyIjxM5s9Rpwv7x3X+UWFtn0qf35ufuCI+75oWIiLdw6A0
-         O8/u6dSX/YYlsdzoHoATZXMtJpohDIlUWhCGmwo61IlsNXgYcGSgCBQeqHuXPrN+p19g
-         px6XAxyP2RJ9+BNED4pyB4cV3ol+qv48bcIIil/hPFpuYoNQJIiU2iA0S3oSKHdvoHYH
-         bHMg==
-X-Gm-Message-State: AOJu0Yw18Jan2G23vltNiZVlffLPVVVmrEA4QU5ZnCzBchr4oy9UwDh5
-	1brmTrY7bg1aFAKKtCwIvWJya+15xtKn1pPbxI2YyvxTFXLqZXkP3OdEHA23GvbqM9pzQg==
-X-Gm-Gg: AfdE7cnBHU37JOtVrSp3Q5jkCFOgaHl0e7BTDkbg8upHXH1sMKlHRHQSry6qXn9ArmX
-	JXl6FgA3lf76oSFBRFa8D+FUc7/GQ2bpnO4NA44f0ymsd8lQzWn3VOFStfv7Yps+P7QfVxefoap
-	ouUOsY0PEMypTixyJtxJIEykUfDfEM+wCs8fNvCOKS28g55ikrBDn5agPCzZfB06/KisQ7UBeZg
-	HHqGmYcwkvu7DsnR0N1v/SbKchcFaOuLCyVrg0TMDIyxXFUbt98tKXazm5Jg6fOLPk/bFaZwKnN
-	YN/ejrGYYB+AEDqabYG5WZnB3FwaO5kEq9Xl+bJdjAfVvcPlhqNE3treE8MPgRAQ03osXog1utY
-	cmqnF4D6SlimEqjlN2Qqs9MiUyd4dltU7+YOVMtuY1JSnFSaxtR7EPmr6EDhW/p+SM2QOudM1yH
-	j4j1PXEq4ti07CO0AI75lfcpkC60JAijv5C4/LdJzX93djxcRGoRvCVOJ8CfiLB47naQ7TIEO9u
-	a+gssEIYbII7WvR2Whv7mn4GGioPltO7CkNFuY1aaazReD6Pd/DDrF71Cs9vbRQhGUsn3aZBM3X
-	AYMxhqaxe+SMPTYIF3y6wa8SfHGbwQ==
-X-Received: by 2002:a05:7300:7b89:b0:30b:d748:e7f9 with SMTP id 5a478bee46e88-30c84bb521fmr12620496eec.10.1782634352904;
+        bh=oy9vJ1BBeshOwvEm1aqPHUqi6oKNHnGZW7U6fNkFCJM=;
+        b=OoF/AELqUXuDCXyF3aGd+IIGO+TbcA0J5dMU4BLeXEVhR7ejXVZeQHX8hLbfHzyq/1
+         GSrDivc7HGjpjfSRKjb7qmX2XQy3NwrjiKVwBBCj0EhJqkPfFegJei/8GJKkt4xHi5d7
+         QQK58wKCYy5Muo5fjxuHMVe0xozZfYSeePMsVrKSY/8Vqdk0MkxvfCdKi/c8ANS2ldpK
+         N12Ukp9C70uDonVw6ktAce8IOL3b9OPYoyv33NA25GcnmPsjs2xgrHOd3eA03uUGuxM7
+         1EfGIaMSf4dKK2GYupSCxuLao1OH6Szv472hzuWF2o0d9z3TgxBhZM53rkmgOa7avqpj
+         niBw==
+X-Gm-Message-State: AOJu0Yx2taNpa41pmYtN35XUW+PEwppHRKKFI8M1SF36NPNUDIwwQVVa
+	rWcMY6Bi0D73f2rrQAIKnY4HyqCMoDYlk5Cm1NFn9HY8jeL2Yb35QgkrNU9AUMEItuv0kA==
+X-Gm-Gg: AfdE7clTXcXib4ZNOxLIjRBiTZPMiQdOWUp+oDRZjg4bGPiDsYzsCZ719V7Ny5EP/Ij
+	1M5k3MpwpZDMkch+c7vPHJbkh/MWcN45vOL53jx+tKYzZSG5eafY+PMOYwIw3sBU3+Bfh7E6G0I
+	pUjwtFbf71MWCNhO686uutyDHP7R0wod1nYevJPK2Keab55i8zRYHqTo64/Ik8FIYT495vKIot3
+	6RfR2as6f5MGeZsWfDTsRfFYT80IF39l3Hdy+hm8+LTDcu3l0+XzjOwehan5MR+W0sQWYT410yh
+	DpvT+IzSkPG4ReZJSh2gptGKTZ+WUwm7XIv5GJKyyYk7W793Eyr8O2os/TkMZ9SjhA+Dyz9Im54
+	f7jNuNoYMriBvI6Qt1VzD/FkUr57Qwt9/BQoZ6PExhedztSFnijl9cA1LqIwaGnlPBnv+ix9J6J
+	bQ5R3Mz1JfjTUwf+/SBbK4IJtolN4fDtXoU31ynmYLy8OgSx0Q/7isetZunw1wilAHXE1H2aKHk
+	y/2FAdUQT8Bi3HXwFxkwTYeikV7LXIC3N+ewo4IUaCUvGPxL2c2pxs6ZI2jwm3Nq1qMn6x2a5f1
+	w/3uXSwnoteQ/QKg43Yn0Bg7rFyvHQ==
+X-Received: by 2002:a05:7300:1896:b0:2c5:220c:5670 with SMTP id 5a478bee46e88-30c84b1f43cmr12729584eec.2.1782634352124;
         Sun, 28 Jun 2026 01:12:32 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.32
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:32 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 074/128] ttf-vlgothic: upgrade 20200720 -> 20220612
-Date: Sun, 28 Jun 2026 01:10:25 -0700
-Message-ID: <20260628081122.178348-74-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 073/128] gtkwave: upgrade 3.3.122 -> 3.3.127
+Date: Sun, 28 Jun 2026 01:10:24 -0700
+Message-ID: <20260628081122.178348-73-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,28 +70,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127884
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127883
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{ttf-vlgothic_20200720.bb => ttf-vlgothic_20220612.bb}      | 2 +-
+ .../gtkwave/{gtkwave_3.3.122.bb => gtkwave_3.3.127.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{ttf-vlgothic_20200720.bb => ttf-vlgothic_20220612.bb} (90%)
+ rename meta-oe/recipes-graphics/gtkwave/{gtkwave_3.3.122.bb => gtkwave_3.3.127.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20220612.bb
-similarity index 90%
-rename from meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20220612.bb
-index e34770d520..dbc9e67406 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20220612.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.en;md5=cc06b20e7a20bdf6c989624405378303 \
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.127.bb
+similarity index 94%
+rename from meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb
+rename to meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.127.bb
+index 0b87c1b21a..774a30e1a4 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.127.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
  
- SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/fonts-vlgothic/${PV}-1ubuntu1/fonts-vlgothic_${PV}.orig.tar.xz"
+ SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "6201b5f93dcaeafa92fc0ec4ad4baeaf60acf16fc8f019bbf061cf4ebf27938a"
++SRC_URI[sha256sum] = "f19da2db43b27bbcc669725843451945a68c3a4ce232562e341d6f63b80b55e4"
+ S = "${UNPACKDIR}/${BPN}-gtk3-${PV}"
  
--SRC_URI[sha256sum] = "297a3813675fbea12c5813b55a78091c9a5946515ecbf9fde8b8102e01c579f4"
-+SRC_URI[sha256sum] = "c201dd3fa73492a2551a339fe235608d3be771237fd5868a526f1b3eb3164d93"
- 
- S = "${UNPACKDIR}/VLGothic"
- 
+ DEPENDS = " \
 
