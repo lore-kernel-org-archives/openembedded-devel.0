@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECDB2C44506
-	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B26EC44508
+	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:06 +0000 (UTC)
 Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14731.1782634319495552016
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.69124.1782634316361731878
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:11:59 -0700
+ Sun, 28 Jun 2026 01:11:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nP5L4WCr;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FEsS7O+s;
  spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-30c591fb1cbso3619234eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:59 -0700 (PDT)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-30bf132969bso3406647eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634319; x=1783239119; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634316; x=1783239116; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6NANekouahei/3LeQRswD7WFEXqPf1kDMWAXu1SLBV0=;
-        b=nP5L4WCri+926BiIwkgLUp2mUeYytyfBO+73fH0WB0YN4J1koqjAoAXLDDbef80t0U
-         Bf2j8PJZPj7CcRe+kPShlDedrCydFsvQGUgejiT2aTzKRApuSNOG74gbLoNl4SVoNm3p
-         XhbykIfNV0eCKyqO/q78ecDs14XLaTBzY36jw7n7EWatbjgFPfLlM/TwbcFUhazpGJEl
-         2r/1A7sWkqCjsHyTETqey2P+wVarYuq1TV09J5TzDH21HivdF58pzE0dXYvS+V0W5Q3A
-         pe08vAZulxEottNLa47GgzsULv3aXtiThcezSQ5XBdBrJtSAHgymWmiZh7ZFxwsi4Nek
-         K/4w==
+        bh=w8tUK2mfqqT+4pF9S3iST6OUbYkFdx8FG7HCpArlE/Q=;
+        b=FEsS7O+snuUWiQXsWdOZfH70TfTW73GxvzHzlXwJueQXYklDqWzBkbORxkHYNNGtUz
+         n0n+dJxlCjEmb+0tXueLrDmeP6yFEwt+OKpl/Hyrme7Ysx9hPDjwxX8JObHBxpVGDNdn
+         9bEpKkGTQyiCktKCALqPNDe2Icga+Eglym2onX4DrrpkoZCqthMvFnwBzgYeo21ChMnv
+         99SNAsd86egxVzv+1QnxQlWWi7FnrRBTluXDpSFeacCNr2hw50q+wc4edQ2c6dFlkr+d
+         H0+QD6zqI1LLTsgiHs2nfZoH255eSwaxg7RishptS0f+6u9d5G9728QiJFffLjqZOQsm
+         NTwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634319; x=1783239119;
+        d=1e100.net; s=20251104; t=1782634316; x=1783239116;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=6NANekouahei/3LeQRswD7WFEXqPf1kDMWAXu1SLBV0=;
-        b=LZmAMHXALkMULKHopxlzpnqArbKW8nNT3br7CCegh0gVnRd0vTw5GVjh/p/DQF0K+y
-         IMeEiMyUSfFajZfHpl3lHhD5OUgDzJUb2dZukg8i+xfIuvqNH4PKY+xpSpDrYE2MwwaZ
-         m0u4lGPhFI/RW/tYiOx1bPyY7JxO4IUrf/rG6KqZePzEkD0BqRNBh/7HG0DqiyBm+kz0
-         ESLyPivAKnZWhyiYYr6XiBtG8fbCKa3JqRsy7G3xYc7euwiFGA/z9pISgwg6i8oZdFhj
-         +gG0CW+3TKum3E9JEdpCBpeZ9uG0BZfnE7SXlxZA+peJpfIJBegzolXmSIYWWuvTpVay
-         3qLw==
-X-Gm-Message-State: AOJu0YzPiYoalqGYrABT59euk/ec8q1FY0vtBVzsOOJv24qvk49pHheu
-	QTpHL4O8VmZdxUGxcyE/I/ez/l+tIkIUnw8qlx2L0osjHD4z9JAyw+h8gIl6vm+xDQDDKg==
-X-Gm-Gg: AfdE7cksJkzuEzB6jUgQ36jc2IY80z0epw4zpvOhOcEfc8EgXJbvhkAUiPKl3v8KjWK
-	kiWUY7NkGHUNYZOmIqcvd1PvNgBUlqcZIS4JpsD7a5ZxjlgyAyGAmKHQe1j76IbIItnK/uEh7il
-	CSpMBkVZB8QEGGF8H79/mVQZlHQcmt4heEIFnILSluRsQjW1KhU+xVqpxhJPtbdJwL+IgeiphZ2
-	3cHETAo+2bEoz4HVsQzi3TqzJnUK/7QnUIiwri+cS2eWYujSm0sxy27uoV6CEv+DuRX4stwncjM
-	5SioS1WAlTcars4OcqFjSS+TuHudk5UVWpGSFYNzSvVlHec0cSwP98CFCQ3Hh171XVziu08/jdD
-	OLH7k6BsvHMB2e8NV0c1RqGRXUoE4cgqD1YFyt0QsUthKOeLcTUWc+BPffbxETkoxAQ12ycd9nU
-	G3URnnlMSfi2Bq89y7AzfrA/+hWdPjJUMHJkS+Y1YEbNocRuHEQImNaJt7PAh3yxpF9jkTUM5p+
-	ZNwXaHR02FSruyAqSpmaJT4GsQzgjDETFEuBcgE3MA5Y2aoubaME8MrgcunkKRBee+1JU5ySOzD
-	XqaBOrpsznchAhhKUJZW8znnOEFkOw==
-X-Received: by 2002:a05:7301:3d17:b0:30c:ab4d:381f with SMTP id 5a478bee46e88-30cab4d3f58mr6011825eec.43.1782634318652;
-        Sun, 28 Jun 2026 01:11:58 -0700 (PDT)
+        bh=w8tUK2mfqqT+4pF9S3iST6OUbYkFdx8FG7HCpArlE/Q=;
+        b=XMaKh8ivNUozadTjP/Vab1lcxqbGr2EhJG83ssDcVVYSIi2UFItDBS7NHWRbL9K/fz
+         RCGoaw+mMFqvaxZ3a44MihHg1iFGAQIj2NFJFA2ty+I7hH7WgWefRrDxu23kTzCmJPWn
+         FukhI/2uT7fF1xzLqloAgvBe2Y55L/ZAR3q93XxQ2BHrp+fK1ADCwZT+jiUq4NrZtAfB
+         AFtHPBsRxS1MlaI9HHn0RIRg2dCKhCLwSQA2TLKOt/8MPa3+B4dN8J8m25ah9jpWgDnR
+         i9ebXmNnGk+jAEmq66cDbiPReX9m0jEKuzlBcVwgo1GMAz9RZgPRG10Gqh0/6YDU3GK1
+         OnJQ==
+X-Gm-Message-State: AOJu0Ywu1GEV8FcvEqIA9ROp6V0RJvzeKiFNsxUrb+wdUWVmGhxV36xd
+	dnY+9V3mk2vA2XtgSbuDWU2Ycgx2InfhtIsVrheI+Rg8ERHZDeKzJbW1YDVGzNaA5eg0hg==
+X-Gm-Gg: AfdE7cmQRzMd13KKMXL5BMXT50VLfkBu25alkfYeGHxCM+FRrWS65D40HkBNXOxNE6e
+	G7N3jFMePwmLNb2GvhIiFTpGPYAH4ROAEcaTwqWGni2Cy1gaVvXICaJDurF1lX+3yupwCtq+ipl
+	QY5FP6XMFS9rsWzHkcjSPkDATOzAP49hgLXp7YxGKKfyntBn7DOwggu7aotsVbMxI/aGpzgwSSz
+	Dmpg+2rU3XgSf7z9LQK5LSDOCcqKt9DWnSLkeeeavDRBBArcwtozHBKw//mTPmr2sslbNOIH1eW
+	EOh5Phap4Z5Hg9+smAimbcvZmX8AZSeqLSW+oRHOTCmHWcQhybytZrDV/+IBMDtYNnw7GFpyiIK
+	WpYGbZJYejsyHCGSsa0cjjy/+1QPLphX7ZOOPpKWFygLjYU72ak4cpLH170zk0n1/jElCu6xApF
+	+uamugqdcod8cCN/nkmf8FjICotfx9lVRki6MDwmy9HHVdU19+6oHh0PL6kCo9wVBOCTu7ATOav
+	glOSojbdVCirEJnmigUl6DiqMGctIj/f/DJ6DNbfNCWLBt1EK5kUxCoPIRPg2aRjKScOiAJk0hd
+	r8Ml+ZfXl/MgnXFxLFQKmjPew2GJFA==
+X-Received: by 2002:a05:7300:fd07:b0:305:179:4dde with SMTP id 5a478bee46e88-30c84e5b383mr12922068eec.35.1782634315659;
+        Sun, 28 Jun 2026 01:11:55 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.57
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:11:58 -0700 (PDT)
+        Sun, 28 Jun 2026 01:11:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 036/128] giflib: upgrade 6.1.2 -> 6.1.3
-Date: Sun, 28 Jun 2026 01:09:47 -0700
-Message-ID: <20260628081122.178348-36-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 033/128] weechat: upgrade 4.8.2 -> 4.9.2
+Date: Sun, 28 Jun 2026 01:09:44 -0700
+Message-ID: <20260628081122.178348-33-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -69,29 +69,29 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127846
+ <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127843
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../giflib/{giflib_6.1.2.bb => giflib_6.1.3.bb}                 | 2 +-
+ .../recipes-irc/weechat/{weechat_4.8.2.bb => weechat_4.9.2.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/giflib/{giflib_6.1.2.bb => giflib_6.1.3.bb} (91%)
+ rename meta-networking/recipes-irc/weechat/{weechat_4.8.2.bb => weechat_4.9.2.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb b/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
-similarity index 91%
-rename from meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb
-rename to meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
-index 9cb2a51879..7940023b6d 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
-@@ -12,7 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
- "
+diff --git a/meta-networking/recipes-irc/weechat/weechat_4.8.2.bb b/meta-networking/recipes-irc/weechat/weechat_4.9.2.bb
+similarity index 93%
+rename from meta-networking/recipes-irc/weechat/weechat_4.8.2.bb
+rename to meta-networking/recipes-irc/weechat/weechat_4.9.2.bb
+index 458a8a317d..b01f3c6c0b 100644
+--- a/meta-networking/recipes-irc/weechat/weechat_4.8.2.bb
++++ b/meta-networking/recipes-irc/weechat/weechat_4.9.2.bb
+@@ -8,7 +8,7 @@ DEPENDS = "zlib libgcrypt gnutls curl aspell zstd cjson gettext-native"
  
- SRC_URI[logo.sha256sum] = "1a54383986adad1521d00e003b4c482c27e8bc60690be944a1f3319c75abc2c9"
--SRC_URI[sha256sum] = "2421abb54f5906b14965d28a278fb49e1ec9fe5ebbc56244dd012383a973d5c0"
-+SRC_URI[sha256sum] = "b65b66b99f0424b93525f987386f22fc5efb9da2bfc92ad4a532249aaffbab0e"
+ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz"
  
- do_install() {
-     # using autotools's default will end up in /usr/local
+-SRC_URI[sha256sum] = "7e2f619d4dcd28d9d86864763581a1b453499f8dd0652af863b54045a8964d6c"
++SRC_URI[sha256sum] = "d1389a9e521bda0c4ebfa108e2abf885ee6c5150c385299f5dca0181a43a0914"
+ 
+ inherit cmake pkgconfig
+ 
 
