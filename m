@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B138C44506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B3F3C44507
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:11:44 +0000 (UTC)
-Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.69112.1782634296620030719
+Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.69111.1782634295833320879
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:11:36 -0700
+ Sun, 28 Jun 2026 01:11:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IpBlyl8r;
- spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-1397e093f90so3570184c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=HeypW5WW;
+ spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-3078e0dcd67so4006385eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634296; x=1783239096; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634295; x=1783239095; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RLGHZXeksvBOoUDxMhT5Q8yzHMNn0uUCr40unbrvbbk=;
-        b=IpBlyl8r+IW02G533nqJa/oyY6GG85nzIPrSRXDI9vD09uZwFu00rRL/LKl50C+jiP
-         RLWQoaEYHA11FzcYgUn3WJgvWW0vkMqC+Sk7shDpa4TcqXa4IWQ1dn3ddM35x5CesgX2
-         eCwus0QreOQd8/KX19rhOrEoqWHmqctcACzzpE33oAkQRTqPG/BIUY1ZCbeiyu76/pqF
-         XuW278mV4CLQj9x8hUiGn5VghGMBs6ocJQQNsi5gk3rOF63IDE7b3uahozvsdB3xmn6E
-         M23Fa/SiS5JO+c74MDb2gIFsNP9TtTfBIVBv7mb5f5bDO2X0wKNgfqAxkHPPQBi9uiK1
-         6jgg==
+        bh=XOJ3H3HZTp4qP/3plZhTPcPVrs3v6zHoUnVqQekR+V0=;
+        b=HeypW5WWQgPzv8CycCpy3U70ZLqKNwQcE0oaoyCp7mZ8GGyCSNRYqVzfU+H+nryIU7
+         ZVUjWaGPZvMYZ15Ni5VbUV1DpC6XmbpqI9PshYOwCrpVEfeogS7GX7AQkA67pvX25ZwH
+         QfGuvmgfAxLWlu4i4MDBeJGEsgZ0OnQOqeid8k0wya3V7TprJnWxGk8KjIPRcZbI5SVn
+         WzkNhZktLfqCSChZaQzBXaHRf8DzAkE5IwhSM9oVAfCi+8LIirfrVyOShoy4cRYdY9af
+         sGFnkGt4Z+z44R/qTWPeu3qmKo/SY0L8OKmbQ/IZ4iPRhTwRyP9W/1HLXgm3orpLN13x
+         tCkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634296; x=1783239096;
+        d=1e100.net; s=20251104; t=1782634295; x=1783239095;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=RLGHZXeksvBOoUDxMhT5Q8yzHMNn0uUCr40unbrvbbk=;
-        b=eEoiF1uLDo9wIQDjRw4aebXrGN6eHSxWyzOHWykcaTR2KxRarOc0BNjcPTSLc1YPPi
-         gE9LvVeVhBxUvT3i80/Uldm2Kzz+eBVj9b2uXhRUlPdY69DmGMS1Cov4FSr0WoWp3y5D
-         gp/PXhI0Qh5TqogkkBTHiGB2hdWqdNcZzTUFNZl1JLnh+kha2y/8d2PJTW1URbjQmGYa
-         GK+VaykN3XPBE6hyR56YFH2bXLRunWRxlGZ3p1dEDM5O8J/bWTVMLY5cbZfuhYGa/jT3
-         DEeE8yH0hUqJvN7FwrNu96JZGUfBQutea8flsvQBDE81sRG8bnSAW9SO2Hp5CeXtyfQW
-         VS4A==
-X-Gm-Message-State: AOJu0Yz0hzOLIaA5PdSheZzxoVjMmhWdLpUTc7we2a1+f+ozhyB9Lqrm
-	gTmQ+hf1aHvgmGOVI35Mbt/1MREajttRJyogheweGTtJTojYCLVy2RoJl70Io4tgFB8C0g==
-X-Gm-Gg: AfdE7ckd6YywpIx6MteW0Yzie2tgsXncZnw4WwcKpV5yEAxhamXmvlQkaMg/UIUcBSf
-	VN0BK6mZY+iGtCdB2GnCxvXZQEzADRXwzlPgDdhOYLlB0i80Nz1r5k0xFOFt7AC1oGktBI0OvX5
-	Ccq7uXGFPu5ikJuKVfjFI2ae2OeABFU0hVovBJS0CkXGNSYlIcEhvumuCg1ao54APAWwlnsJMQS
-	An+Evu/SZIxmzLlL3x9yfyep6nHXGsjuTn87H4U4r3JIQGUoY6CGqtLvqh8QydZqRjKeNHuy9c+
-	MycTo8IgyKcXK4336vZJqhO714MG12imI/MN43VSUNCzr1TaEmOehQAfH6pQAcEEm6CQJ8SBbiu
-	1b4gcGlxZb+DvOM8P0lisFimIO63/ICSO68rd7n9tpNBo/TIgcD02MOKxt/fkBt9BJEIh0MPdYI
-	Rous8bGlzvJiaijWwYeFZJUhkSKe0pqrHFOfNZNhixbjFUiPUczOoMge/bMlhPLd29Yt9GZP8xw
-	mXj8L5xWtAw/dCdho8Z1PeCcUGeUJzKjTE3bgpuOxyGsVQoyBDNzI/dSJD5CeFZycaA9lJV4Axn
-	RCICu1W7g8KyDgT+g2krfJjcK0jA2g==
-X-Received: by 2002:a05:7300:3207:b0:30c:ab4d:382d with SMTP id 5a478bee46e88-30cab4d3bf1mr5703619eec.36.1782634295992;
+        bh=XOJ3H3HZTp4qP/3plZhTPcPVrs3v6zHoUnVqQekR+V0=;
+        b=Ho9zgl6gWJBRfQ3tI3gZPGuD9oW6tuPANrEbSQkUpJRMIuX/0eRKsYhXIE92+G7+AB
+         JPhq9EQTJjaQBIuhTYz5QOcZYJe7SS+Nhjs7dKBN5xvjoywhKSTj2/5ouc6OEtcuQBQq
+         SavFT3UM6aodu6dBKkPaoY9ChEJQI/49sKRHkgxUCWXx49tttPsY2e++/AL+9t830Ooj
+         7O2fV/l2boGM/F/h17o3Qc5fb1+Ec1KVd0kZwKTAPuqQvruWa7agYKCi/ofHYDmQHUtD
+         ssNpSQ3psua80W33c4dk1QK4xaUgsWKPSDx4xf5Ya8wbvmL9LmGmw2ysWdg24ghJOUsY
+         E6ag==
+X-Gm-Message-State: AOJu0YzF/R6RQqX+OeacmWig7iCKewPc4gHp5HgTsOyZ/pY/jBAxXbWC
+	DOH7cWSMVUez0NPA/eqoXYhULEO5Wm9epvFotRc+7LmWieIJnqbtEk7S3Y0pYmzzVmUAsQ==
+X-Gm-Gg: AfdE7cmXyCkRIc7BAUXJ5R6gg0rzOABxSPzvPOdxL1drQVQmw82dAOTYf5lVxlLZssN
+	H6VE7gXIAeMjltiKwfNL3Xfa1heMTPXQKEFlO6kK5sU3KhvNO+yrwRBjT51TAdAbBIoh5RO4IqV
+	ReY+jrgtY5ft/6u/diNCcI8cbps/IeG5U4CJmDCrEvUODYstvF4te1c6eKArRwv6gN3o02b+75j
+	aded6RkeaIuXT+AJgOII1hHIegkBturdlTOfPtk9lV8uhAbqqT6e/q1wISyFYA/7URC38Ymwo9u
+	DfOSicY9RF8NclJ4XLtpxKXClOdii1//A9PZ/OCFtf/ZLF1fuHt8le/6FuROAwyjDlSwRwwmCcS
+	G3otdJ/ZC44mzWWkOZcJCsj4ZQ8w9ODi94GmcshMAnjF28mgMRHHntdmLybwGANU+nxva9UxP6C
+	+oGE9Lcdj3RSRjWcwu23IEOpzHbY5C4RZE+noX52QGN6M4F53Bibh8jpnEsqoLYP8XS00eDBX5+
+	ydDk3mP0BkaBEYG+B5aA5vv4/jCzL2uudyMeGi7fpH7Eg63nKLq/G7cQhyLTIKdtBSbYb2Q2rw6
+	/iWmm2Am+fH/8nGGoocJw/mIzid2Fg==
+X-Received: by 2002:a05:7301:4e8a:b0:2da:a813:a5fd with SMTP id 5a478bee46e88-30c84d0cb7amr12287971eec.22.1782634295179;
         Sun, 28 Jun 2026 01:11:35 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.35
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:11:35 -0700 (PDT)
+        Sun, 28 Jun 2026 01:11:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 012/128] gnome-control-center: upgrade 49.2.2 -> 49.7
-Date: Sun, 28 Jun 2026 01:09:23 -0700
-Message-ID: <20260628081122.178348-12-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 011/128] libpeas-1: upgrade 1.36.0 -> 1.38.1
+Date: Sun, 28 Jun 2026 01:09:22 -0700
+Message-ID: <20260628081122.178348-11-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,28 +70,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:11:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127822
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127821
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...me-control-center_49.2.2.bb => gnome-control-center_49.7.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_49.2.2.bb => gnome-control-center_49.7.bb} (96%)
+ .../libpeas/{libpeas-1_1.36.0.bb => libpeas-1_1.38.1.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/libpeas/{libpeas-1_1.36.0.bb => libpeas-1_1.38.1.bb} (85%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.2.2.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.7.bb
-similarity index 96%
-rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.2.2.bb
-rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.7.bb
-index 38b2c53c82..137d82e92c 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.2.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_49.7.bb
-@@ -40,7 +40,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-
- REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd"
+diff --git a/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.36.0.bb b/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
+similarity index 85%
+rename from meta-gnome/recipes-gnome/libpeas/libpeas-1_1.36.0.bb
+rename to meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
+index c0b785fee7..3a76ed91cb 100644
+--- a/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.36.0.bb
++++ b/meta-gnome/recipes-gnome/libpeas/libpeas-1_1.38.1.bb
+@@ -13,9 +13,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ # FIXME: When upgrading to libpeas 2, g-i is no longer needed.
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
  
- SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
--SRC_URI[sha256sum] = "c23ae220d6c1237d285925de7801e0e36338b9cc1a8bb51c2e37e715e6b503ad"
-+SRC_URI[sha256sum] = "e4a1524af73c25f0ebc5badcf5d5bea79024d801850bb051baf25feff320ed00"
+-SRC_URI = "https://download.gnome.org/sources/libpeas/1.36/libpeas-${PV}.tar.xz;name=archive"
++SRC_URI = "https://download.gnome.org/sources/libpeas/1.38/libpeas-${PV}.tar.xz;name=archive"
+ SRC_URI += "file://0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patch"
+-SRC_URI[archive.sha256sum] = "297cb9c2cccd8e8617623d1a3e8415b4530b8e5a893e3527bbfd1edd13237b4c"
++SRC_URI[archive.sha256sum] = "e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9"
+ S = "${UNPACKDIR}/libpeas-${PV}"
  
- SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
- 
+ PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
 
