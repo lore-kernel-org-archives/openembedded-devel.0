@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B11DC43458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FDC5C43602
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 16:22:38 +0000 (UTC)
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.75152.1782663757510307185
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.75151.1782663756551491004
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 09:22:37 -0700
+ Sun, 28 Jun 2026 09:22:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=XUKPJVlM;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-30c965eab27so4340794eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 09:22:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=XvUrHN5V;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-30bc871ecdfso3314073eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 09:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782663757; x=1783268557; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782663756; x=1783268556; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uGrGrJD+MCQaan2deoqHoUT7qVhfzfIo4kLv2dx3AGM=;
-        b=XUKPJVlMoftnRo+1ZWjalMnLfO54I9I+iblsSciq1yt6RSsXmrxGZUxejWY/yTTYBR
-         Cuj/48nRSftOGJtu0cmzIxEYvUM5ugUZFJrT1mS0xvFDBaFUuMdTNQsUg5xHLlXL4Uuy
-         D0sPlq6mJd0hmEk2kwvPFRvFv84JZzeFF4KgpYy6ouwQLh5sEYgLayin2GryQQql1TDp
-         eLObLUvMK9ABF4zQ6MedVVzffI/EB0bJPiVTKYz5zKMdvFBTYkcK1MWasv/tzHf1zSrh
-         sqDixzytEENf9QDiRGYMhHUqqq+9aqhuUeVPabyOQr+7+gUxZXuRSr8Oui3R6np5TCMl
-         5hmw==
+         :message-id:reply-to:content-type;
+        bh=pK0FrJQ8X4am/kaoLfofSYlcl2K87CwMP+b6vQzFnOQ=;
+        b=XvUrHN5VcrgdctpdK5vqExl2Hhbc0TftU9HLB/G+V/552oTWRonaFHLwzPo1J2k2/q
+         yVxozM3AwnTF/uwX3uyrqWXAZxIPapjdJcNkZv5mzhdiPntbKdBOFpTqpcTqKNseEdUO
+         HmyBNj/jcSve47E/Jj6MMFNrhyezZX0xf494gS5FakPOy7DJrxPm95K/qOzGEjGG2JOv
+         ajkT/t33DUgUa5gL59+Er0BVmQgQ2Z0WoYXBDfBzntoH3d0XQclsbPUeFaZ1xyiZdhv9
+         RgenA2pVR5cvntaFXxjrCR4X+M+bjIM73NWwwu9St1x77UK/fHYYzP0jDdnKhiCjqWjC
+         AXtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782663757; x=1783268557;
+        d=1e100.net; s=20251104; t=1782663756; x=1783268556;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=uGrGrJD+MCQaan2deoqHoUT7qVhfzfIo4kLv2dx3AGM=;
-        b=tLszaWKCynRu4TPpTKyL77xoRgKFsUZvHrLwAvvvQrnOC418HP3CnNc1ytKnCx0RyV
-         A+UKs182dQN1HOkNxNgumeen0lJonl4ITj1a+oCqdGapxT4rGrMAsITcXiBId1LzSZgO
-         X6pkG6FSxEiKCcb4IZLRB7MAvaZ+1UDDhpIEAR2lrS6wKFxIhXTAuWHgKxeXtViYFWeE
-         fzOnesbagGrzEtZq8cT6NtDV9+ilhJXzEbiYwOs18DzbLQU1t9DbvAwFICE7yArrdObt
-         tQHoTBKrup5kzAeNA9o21j7EHd1764vokIAPdPsQMaQ5eH2WbAxhaM7rvgZqWXMe6Xjn
-         P6AQ==
-X-Gm-Message-State: AOJu0Yzf4UbE08LvmJLgiXdakkjwCtVnw780/ahllrL9tDhrPJEyUhDN
-	nEYYLP9COWy5VV9m35DLpyWxmZ4YS/oI0fWW6xXbdf9jKWUgotp5E44qRerBYE3mjHWQIA==
-X-Gm-Gg: AfdE7cmNeiXA69D232pdV5kiFET6xqir0nM4FCXS5etKpwTagXrd/ZaPg60wwsH/ASo
-	+egQLLEbUJUqg7o4Xr3AJvl8Noowmck5E/2Fwgfq9bmlu3Zr69rvAmRklIczYnKdKeMbI/jyfuS
-	plNB5WwkV9f10ux/cJszPvp+bmAYAfQvkYy7jGADKtq1Sz7FpucSczERml9TRXWjgNIki6SspPx
-	TFhpqt3MWUXNgQWsgbbMGD0yNZoAISZNYvs2xEnjNnwFbB6EDa2Bao4MHFeHYvywI9F/rzYBHN0
-	qMD/Ao1lygAB1QPNlf4ZBUqvRq9tEH08C94tCh3gYzRQOw07wdrgas15cTpA2mHlvQIgpX5S1Vk
-	bB8AVd+WNWy5piZemxSaBSXK70/WM4Jk6If0QeJTI/DcGD2/lEYysthbFLYhIm9upUgJeDAcUZe
-	mLRZBGwRpgVXT2hYhY0ODYgKl9Gumq/xrHU/cuzsrly79h92+YhzMKEqtyhO4KMoIoE4de9nc1S
-	taL8JWYKqy+xFu0FQ+7OdPSas7He9BuGFk4M2wB1YC9epINwH6343bm0rUL2bsr4s5S9R53an7l
-	90lvKW8PV4VDs0mAbN54A7bQ9x2Po9gGUeOX/sP6
-X-Received: by 2002:a05:7300:b10b:b0:30c:ab4f:46c0 with SMTP id 5a478bee46e88-30cab4f49camr6167742eec.38.1782663756730;
-        Sun, 28 Jun 2026 09:22:36 -0700 (PDT)
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=pK0FrJQ8X4am/kaoLfofSYlcl2K87CwMP+b6vQzFnOQ=;
+        b=HRdCQVTf2IBmMVKyxzHnT0oajNFssgEspXifeC1/H70Js5bTa9yXmiNmZNbCtp3IYm
+         gA1+gTyK6d4Oy4h0BoEqB9U9gewXDCIMl6Cdkiz5YBUJU+NSnG8gqiD+KKIWE/XD/g+C
+         pAxK/BSMxmLbdTy1HYr4Y/OLikp2T2drv+yPzm/jxO/o78YLipnY5+TGqm37J+NdORA4
+         8LRh5mjJH9vpOt2G0oTsDwug2pF/AeJ43kxXXmW3rlLtFOys8Q+xQCe86xu1rjdRgOw8
+         tS3OC2tWwbp+d0i6I80m/j4dSMl20ormfVJPEGer3vaVC0henJxKzr2SCp/IJWRzL4aX
+         3/hQ==
+X-Gm-Message-State: AOJu0YyqdvQHXnUvHpGiZDLicDPPY/gwok8oqAZ5Frz3SLUJ4Cfl8oqD
+	ZCDfWstlTPRB0oyOuxgqp86+7v3p3bH7JvXuILFqeKiJ83xjqO/2za5qCLR5zUu0Dgu84g==
+X-Gm-Gg: AfdE7cmMogZJh5HOr9MESntDpCDwSgwN4ULQ4AwWXvyBVl484/nK7f43JSUjzsspE5c
+	kEvjuAjt45r0FB8Y8kWMSqVEOLc6Js/ZiK0obbe9SKQhrdhNFQyXHDcbx4LRoDjnqEIpxPRG6M/
+	Ep/Z1zEo71NIvmF6paCIAasC7JFNCvV72qUWcKKbXKWs5/LfmHvrgwan9lfDAlA7nG3r26chuEQ
+	To3s6lcIJ+Ht8TX9NmzU0HC7JXrgzn9xLAFxWhpR0i6X7eHcGBUg0x+XSb2GfnzOWi7qYE+zRes
+	46QIJHfRt7ObKjhgdLavIwBEX3GUT8kUnc9AWDF2vL/DiXisKE9ACFID+xz4Uo867daCJ6Pof+g
+	UtzL/OOm7hp5m7zBCxf+kYBjMRKwe5W/+WEwDCh0Ti8nuJu9PNPmEmJefZZbfBd1HP7F5EVvPKO
+	PZu4FNKHkvxqDqbAYmVx9Z3xvZVX4qSaX9owijTdpu4A3N2UBCfZD42LDigDi1NmV8ez9S5YteH
+	A01Vtzswblku4z6n0B4v7QEzFHpJbFHQr2WA7wmaHmh1x0c+EHwInlLJ13ibNWjk5bHLugKac7q
+	c5n4MVqzbVfjdpn76sebcmXHbJxkww==
+X-Received: by 2002:a05:7300:a485:b0:2d8:7302:d3d with SMTP id 5a478bee46e88-30c84d5034emr11997645eec.8.1782663755829;
+        Sun, 28 Jun 2026 09:22:35 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
         by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30c7c52c591sm49849445eec.7.2026.06.28.09.22.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 09:22:36 -0700 (PDT)
+        Sun, 28 Jun 2026 09:22:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 111/128] python3-croniter: refresh trove-classifiers patch
-Date: Sun, 28 Jun 2026 09:22:05 -0700
-Message-ID: <20260628162222.4081517-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 110/128] minifi-cpp: fix fmt branch and retarget gcc-16 patch
+Date: Sun, 28 Jun 2026 09:22:04 -0700
+Message-ID: <20260628162222.4081517-10-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628162222.4081517-1-khem.raj@oss.qualcomm.com>
 References: <20260628162222.4081517-1-khem.raj@oss.qualcomm.com>
@@ -70,71 +70,68 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 16:22:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127921
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127920
 
-Regenerate 0001-Allow-using-newer-versions-of-trove-classifiers so it
-applies to 6.2.2.
+fmt renamed its default branch master -> main, so the SRCREV was
+unreachable.
+
+Also retarget 0001-Fix-build-with-gcc-16 to
+minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h after
+the source-tree restructure in 0.99.2.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...r-versions-of-trove-classifiers-and-.patch | 33 ++++++++++++++-----
- 1 file changed, 24 insertions(+), 9 deletions(-)
+ .../minifi-cpp/files/0001-Fix-build-with-gcc-16.patch  | 10 +++++-----
+ .../recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb   |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
-index a20075a76f..4ce2404683 100644
---- a/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
-+++ b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
-@@ -1,28 +1,43 @@
- From 297d149636d063a82b33d95ab59928a88db51e4e Mon Sep 17 00:00:00 2001
- From: Khem Raj <khem.raj@oss.qualcomm.com>
- Date: Thu, 14 May 2026 11:44:44 -0700
--Subject: [PATCH] Allow using newer versions of trove-classifiers and pathspec
-+Subject: [PATCH] Allow using newer versions of build dependencies
-+
-+The pyproject.toml pins exact (==) versions of all build-system
-+requirements. When building with --no-isolation (as OE does), pip uses
-+the build dependencies already present in the sysroot, which are newer
-+than the pinned versions, e.g.:
-+
-+  ERROR Missing dependencies:
-+        packaging==26.0
-+        hatchling==1.29.0
-+
-+Relax the exact pins to >= so that the (newer) provided versions
-+satisfy the requirements.
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
+index f1d83760b2..ca1b67783d 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
++++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-build-with-gcc-16.patch
+@@ -8,7 +8,7 @@ Fixes:
+    38 |   virtual int getRealtimeUsec(uint64_t* usec_out) noexcept = 0;
+       |                               ^~~~~~~~
  
- Upstream-Status: Pending
+-  libminifi/include/core/RepositoryMetricsSource.h:29:5: error: 'uint64_t' does not name a type
++  minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h:29:5: error: 'uint64_t' does not name a type
+   |    29 |     uint64_t table_readers_size{};
+   |       |     ^~~~~~~~
  
- Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+@@ -17,7 +17,7 @@ Upstream-Status: Submitted [https://github.com/apache/nifi-minifi-cpp/pull/2194]
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  ---
-- pyproject.toml | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
-+ pyproject.toml | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
+  extensions/systemd/libwrapper/LibWrapper.h       | 1 +
+- libminifi/include/core/RepositoryMetricsSource.h | 1 +
++ minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h | 1 +
+  2 files changed, 2 insertions(+)
  
- diff --git a/pyproject.toml b/pyproject.toml
- index 657cc21..d1b9ce3 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
--@@ -2,9 +2,9 @@
-+@@ -1,10 +1,10 @@
-+ [build-system]
-  requires = [
--     "hatchling==1.29.0",
--     "packaging==26.0",
-+-    "hatchling==1.29.0",
-+-    "packaging==26.0",
- -    "pathspec==1.0.4",
--+    "pathspec>=1.0.4",
--     "pluggy==1.6.0",
-+-    "pluggy==1.6.0",
- -    "trove-classifiers==2026.1.14.14",
-++    "hatchling>=1.29.0",
-++    "packaging>=26.0",
-++    "pathspec>=1.0.4",
-++    "pluggy>=1.6.0",
- +    "trove-classifiers>=2026.1.14.14",
-  ]
-  build-backend = "hatchling.build"
-- 
+ diff --git a/extensions/systemd/libwrapper/LibWrapper.h b/extensions/systemd/libwrapper/LibWrapper.h
+@@ -32,10 +32,10 @@ index d7e7b7c..c8af00e 100644
+  
+  #include "../Common.h"
+  #include "utils/gsl.h"
+-diff --git a/libminifi/include/core/RepositoryMetricsSource.h b/libminifi/include/core/RepositoryMetricsSource.h
++diff --git a/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h b/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
+ index 6c933b7..f39fccf 100644
+---- a/libminifi/include/core/RepositoryMetricsSource.h
+-+++ b/libminifi/include/core/RepositoryMetricsSource.h
++--- a/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
+++++ b/minifi-api/include/minifi-cpp/core/RepositoryMetricsSource.h
+ @@ -20,6 +20,7 @@
+  
+  #include <string>
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb
+index 5e6443598d..1d3992aab3 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.2.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
+            git://github.com/gsl-lite/gsl-lite.git;protocol=https;branch=master;name=gsl-lite;destsuffix=${S}/thirdparty/gsl-lite-src \
+            git://github.com/HowardHinnant/date.git;protocol=https;branch=master;name=date;destsuffix=${S}/thirdparty/date-src \
+            git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;name=asio;destsuffix=${S}/thirdparty/asio-src \
+-           git://github.com/fmtlib/fmt.git;protocol=https;branch=master;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
++           git://github.com/fmtlib/fmt.git;protocol=https;branch=main;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
+            git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.15.3;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
+            git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
+            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=${S}/thirdparty \
 
