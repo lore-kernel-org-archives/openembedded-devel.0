@@ -2,66 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21717C44507
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B165C4450A
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:06 +0000 (UTC)
-Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.69125.1782634317650280027
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14733.1782634325616389373
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:11:57 -0700
+ Sun, 28 Jun 2026 01:12:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=J7Wgp3OX;
- spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-30bf8b2bd20so4928679eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kgduCJq5;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-30bf8b2bd20so4928805eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634317; x=1783239117; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634325; x=1783239125; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cPvciNP2RemdHZxxYRAgvurTv1akdpvf+USK42DRB2o=;
-        b=J7Wgp3OXQmVPbi4dNOE7PDoSUY3FTfA/jdw3L+kJliUr08Yr28PlUPDAHq0wZ+VSPA
-         wHpuF3FjrBPVP/8Wcyc6AL7YGGtq9g2XsRjV72z0/FqMQVYQCQFFw0XLs/DKkKB6DtwA
-         usopRR34+omQotDM+K+TVh4ocCgnuUTjIOE8YLnFPK1kz+kSglgWyG7IjFPHtXAl9QQA
-         fB8/pphdFUGVGHFw/XkedzuWp3eBuIjO/ajR8T0NoROeVr52p+i6yU7rypxlLoxA4W3w
-         6U3fEgoxDhshRiPPr0Mc6F9IHDxHJs5205rf1ntusEX/qV3EfgRt/wqQhc3cXNn4RKTn
-         mh8A==
+        bh=s2eK7DYBFQ/hSbt9sKbfVfNek2hAuaovISAIdUswZ2k=;
+        b=kgduCJq53dvugKYGNmdu7abG/fENHuGPfq28kQ8ewx11ou0FOE7M4/7S5GtsSoMKST
+         l0OrMPbE3Mng6uq1JA91kxfjN/Zilm50Fo6tPly0MjFSDfu0h0NEbcVr0QChKVk36taV
+         y5biqua6/I7y4CrchoN2jEkz6UCXhJ4fNkPOu54z0e7lrB+Rh44OL0zBeFWKsDrJho6K
+         tDRdqP+kWVnY9NGv796Y7jbIMBjIF3JAbw3QygFv4c1KYh8ioafda/uo/BfKJ8XGLrAJ
+         mmJ7xX2dtPoxvp1WJD1kqLjljjgPbagQGdbg7Y978tKJbYKS5uY7iotvwPWZVk/yXibc
+         L6Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634317; x=1783239117;
+        d=1e100.net; s=20251104; t=1782634325; x=1783239125;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=cPvciNP2RemdHZxxYRAgvurTv1akdpvf+USK42DRB2o=;
-        b=I3GwgGMGvGHUgMkWhDrvBNAuuW0FdUJ0zKKMgOgpc+zg3llv7MMBWZbvTkyazIUFr+
-         MY6g8fAWcA9gEy0pKOONSnVYW4AIQ5mX1+gNn9Kgb6OAhkr779P0rDcoU7Hv4oFBH4+t
-         kkeN6GmG/3Qo1R99TsDrBgz318z5q9535c4AWrFXyQQj5cS9vzgwQUg7Q3B4s9J6NcZ1
-         mnBuh3+jO2x9NXzgMQtVZial2Zk3DjbHluhS9ag7Bc1twHhw49PIBDnu0HOfWy/KwoBP
-         tTGkoMJsH9YXBm8v8x/wlgxd1PdintxK6YFxK6ys1200FAiIaPl6yul+8cngp5zPw9jU
-         ZMhA==
-X-Gm-Message-State: AOJu0Yw/GX2z5lMcSnEcEP27fh0LHlv4CQ8XO+CfvmokqnbBFl3LJFh3
-	+ihJXjV8POLacwjyyAlxc7XsWmnvhvksYIk5rAzlRKoP28kXL8oWuzhpo4sA/nhbjeyoEQ==
-X-Gm-Gg: AfdE7cm/rboZzLNbB+x1smfFAmc9jXaaZnS0KehJVb7Or1ckbJjGGZJ3MV2vCcA2hA0
-	u9vjB80dh4yia8Rk2+I1uEivLOqqeTVBoXaPyMOtkTgH67VDyW8f5+ibYCn4A/fSmV1cMDqJpJw
-	CWqCv/zIhg2e4BxXMw4p2ml0+1pzBNkOR1/cl7UQInR96y5srQbZGWfIDolFdFY5LDh2p36yK4S
-	32awsQZp88SHc+rMGU2xyB9b8m+et+Hkrbjy2CtibgbatSe1zQtrNaw72x5hKTiwUf36HLxDBIn
-	0LCk9K2YZ4L+VLRtzDrnIJU7hE1DUYaGGOjeR1c9RZmooYFAbUESLHl/fS47VxPTOt6vK1tU3rD
-	6ssRQ0pKStSAfk4ACcTAQip7raLbhVfg/EhBhndvOiA1gIiAWaNaqliaXZhdIG1pTzyIcRkSTxf
-	rbhuqeA2+rVT00UupWjLktjNAzUvaaJDI8TlImzyqgjEDyBKKQKQLO/e6VtRGkSyTwMtBSO43gI
-	kqMVlR0K/VpHgHbtDNAwWz6z7QDZw8PTEBzCo1lAJBZo1LqQMEKDAUtGoCknL+9qv5NlUY1SfB6
-	UnYmRLU29SJZDbWs3dDGltXJ0HxcsQ==
-X-Received: by 2002:a05:693c:87dc:20b0:30c:ab97:d7b1 with SMTP id 5a478bee46e88-30cab97dc52mr4186713eec.43.1782634316986;
-        Sun, 28 Jun 2026 01:11:56 -0700 (PDT)
+        bh=s2eK7DYBFQ/hSbt9sKbfVfNek2hAuaovISAIdUswZ2k=;
+        b=hR0C6YG14gRofMD6QSgVHU7Lf4muxz6Ca883OhSPWuqN/mFMrh9O1m/wjcUYdDXGbz
+         FdEHg+47Mll+ipksWaFt4FaObjrQOhs2acuBr0Q6gGvggVWIeq6E7vUwPkVxOx7mvxvJ
+         taRn6tPOjAQcHHj9sZziVLi3rp+nr9u3uHmVMt3W7J0AYDjd7eXllx2NrOsW3gWg1WIb
+         gzJh7l3G1cUXf1gSfEzsfHA0KEnrvqRPcJ3bpmDT/iHJt5eNe+8aGu+kZp6QhKs8ntC5
+         21VcUj3EPo7c74SehMk82Yrc3jUFHVdVgTC/gfnDxx3sVp2fkqp6Waz/bnM9IN8kCXJ1
+         aJFw==
+X-Gm-Message-State: AOJu0YyHOLTQNQ0JRloPgHlnblIJmqo7DySSxAM3D4oRmp4GiIbNpb1T
+	uVl2lQSiwydlS6QyTzlcb5bqliGG7hyzVIwDNPMoSSmfAVGrKcNUXp8nuxrqK0lBlzmeVQ==
+X-Gm-Gg: AfdE7cnj5j7IXgUl67ieBJ42pbfVwb+Z06NC3pf13fwjo64QJ5us1E9VWFg0iz6ziEw
+	cv0FmEeJd6lA6KOBo183dDvkOXHowBS04lu6DaO6f7RkzjcxH9vW4Vz+luI0lhWKgWuKWoXqga8
+	nlkS1M+gIUdfLCcy1CMkzkeNEM1YTKXJyMYAp3w8RYJNTwDzDZk8/VuM08m7sBMRoCBRY0pvrgk
+	cqv487Sky1vAydrHaTW1sN5hR27oJypISf0eBa2g0snF0ylMds2SbNUgzu+g51abV+bG99lvo8P
+	EOOhGfe/INbdGg5rCu1dqt4TU+n9X1Gj9lcazsIff2CYdTD4oaz6oLSAip86vO+c5hsRRoFW5wG
+	2wa/0Iy+DzJ/+TsIvqWpm59+D6emHJcn59vEOhLG5MJQ+jImNKAEM/5rQoeerH0nanDCR++8fn/
+	SLbFFS9+EDGBjviF14s6PhUXOx2zdDDixvyWpwXwSam4zWZDNtdrLA4CisPZ8OlI2SLIxS6jYQx
+	VUkODNymqY+1aCbBH8fYUSC9CkYrixIibOD4QE0lKPCAgXjwAbKvMkId2GhuUkSmZr0hu8PYw2w
+	SZYnDAkyMjDWbivjl4oio9NwqZOvWw==
+X-Received: by 2002:a05:7301:2a24:b0:30b:f73f:ff6e with SMTP id 5a478bee46e88-30cab06e5a1mr6586096eec.11.1782634324917;
+        Sun, 28 Jun 2026 01:12:04 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.55
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:11:56 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 034/128] cpuid: upgrade 20230614 -> 20260503
-Date: Sun, 28 Jun 2026 01:09:45 -0700
-Message-ID: <20260628081122.178348-34-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 043/128] gnuplot: upgrade 6.0.3 -> 6.0.4
+Date: Sun, 28 Jun 2026 01:09:54 -0700
+Message-ID: <20260628081122.178348-43-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -71,53 +70,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127844
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127853
 
-Refresh the path patch for the new upstream Makefile.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../cpuid/{cpuid_20230614.bb => cpuid_20260503.bb}            | 2 +-
- ...1-Makefile-update-the-hardcode-path-to-bindir-mandir.patch | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/cpuid/{cpuid_20230614.bb => cpuid_20260503.bb} (90%)
+ .../gnuplot/{gnuplot_6.0.3.bb => gnuplot_6.0.4.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/gnuplot/{gnuplot_6.0.3.bb => gnuplot_6.0.4.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20260503.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
-rename to meta-oe/recipes-devtools/cpuid/cpuid_20260503.bb
-index 36614ca19d..c0e27bdc20 100644
---- a/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20260503.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
-            file://0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch \
-            "
--SRC_URI[sha256sum] = "b1c83045efc26076307751e0662d580277f5f9bf89cf027231a7812003c3a4e8"
-+SRC_URI[sha256sum] = "8ee10fb48d4aa20c484a75d6852883710286ed2975c314bda6d0b0383908cbfe"
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.4.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+rename to meta-oe/recipes-extended/gnuplot/gnuplot_6.0.4.bb
+index 35c83fd23e..fce316a7dd 100644
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.4.bb
+@@ -21,7 +21,7 @@ SRC_URI:append:class-target = " \
+     file://0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch \
+ "
  
- COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+-SRC_URI[archive.sha256sum] = "ec52e3af8c4083d4538152b3f13db47f6d29929a3f6ecec5365c834e77f251ab"
++SRC_URI[archive.sha256sum] = "458d94769625e73d5f6232500f49cbadcb2b183380d43d2266a0f9701aeb9c5b"
+ SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
  
-diff --git a/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch b/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-index 8654fb86c3..e9b3ac08b3 100644
---- a/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-+++ b/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-@@ -16,7 +16,7 @@ diff --git a/Makefile b/Makefile
- index 828d2b1..365e26d 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -55,10 +55,10 @@ cpuinfo2cpuid.man.gz: cpuinfo2cpuid.man
-+@@ -61,10 +61,10 @@ cpuinfo2cpuid.man.gz: cpuinfo2cpuid.man
-  	gzip < $< > $@
-  
-  install: $(PROG) $(PROG).man.gz cpuinfo2cpuid cpuinfo2cpuid.man.gz
-@@ -30,7 +30,7 @@ index 828d2b1..365e26d 100644
- +	install -D -m 444 cpuinfo2cpuid.man.gz $(BUILDROOT)${mandir}/man1/cpuinfo2cpuid.1.gz
-  
-  clean:
-- 	rm -f $(PROG) $(PROG).i386 $(PROG).x86_64
-+ 	rm -f $(PROG) $(PROG).opt $(PROG).i386 $(PROG).x86_64
- -- 
- 2.25.1
- 
+ # for building docs (they deserve it) we need *doc2* tools native
 
