@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAF02C44502
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E116C44501
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:16 +0000 (UTC)
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.69138.1782634330927017278
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.69139.1782634331911300070
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:10 -0700
+ Sun, 28 Jun 2026 01:12:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WuOPeIsT;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-30b9e755555so3464605eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=S+GxKLsQ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-13986d61b4fso3224027c88.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634330; x=1783239130; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634331; x=1783239131; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zOnya/gA/XgAxoFjL9D911pnX/VSmTG7fsvnKFLCUDI=;
-        b=WuOPeIsTsJAdUGZXpw6E9kid2MvOgwOfcr5AO4v3yqUJXvcxehLr6w7PXtO5WcgzT4
-         ssD2jevGZ4LfkmqDGyCY/HeZ6uDjRPHvk29CBVNTMwQVxP39zY9YjXdzpbWd4EFzNBRT
-         rZDEKBu5QfQjq75Aw+ghMUJ+l4iwzagTwqth9Yn73xbNgrLDPncaW3a9NEsYJeOMTW2C
-         TT0SX/dkS8C1hfx9pNMRLbXO+6Auc/x042e6KXhfZ8f4NfRFGKvBFUVUoxCCbUB/csjF
-         lIO7MowJs+inSU6z7lQYMr3NjMHSSs73WY+TK7tZsVF5NB3nP8Wz3QG3DND8k7YBchTD
-         Z6vg==
+        bh=rk/ERHujbBR6OdTeGJe90pJYIU2OrFoe63qAVjSGexs=;
+        b=S+GxKLsQT0c8NSzuAw+FZp+1uhiDXYSvhI37Z7qN7OJjXVM/coy/bPirOnC3vfWMde
+         wXWYryH37KouNryj4VTU7M83A+e18UWtMCRH4E965MHnxyDpRgXqig/oardzFNmOm0pn
+         Nv2l0t7J+7F9Gwqsgk6Fy8QKfOdXMS3gOVkvhjZ+kxA9QvydSbtz/WstOcGU9sHOuc05
+         zliAjlNS/yqVSzCauUY3I3uQjwm4G6mb4pxPBpscxGYyuM/PXztFTOetvzCZJnHUK1Uv
+         kUT8yOaljrp7PEOZmgkTSwjgYkdsMC23ljnYiOQr0cq7G2RY/6gyYF3kQkUnRhOWqm1R
+         XKPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634330; x=1783239130;
+        d=1e100.net; s=20251104; t=1782634331; x=1783239131;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=zOnya/gA/XgAxoFjL9D911pnX/VSmTG7fsvnKFLCUDI=;
-        b=DjBgjDsQ2gLN89tSRhI9G+WAT9uwnKszdbDmUq//pj24Y+qbCPehAAj21Cr9knLsiz
-         qx4NbeM8DThjsZ/aUqqeYHvI5r19s2jlfDCGW7V9Cuhzsx655r1X9U+RA82nIHWFa/Zd
-         Of1I0VVcRhM/8p9kRW21sLHF1YXjtlNSwInRABHYxg3AAwgRnTbQQzR5xE9CxQpmAjMe
-         b5l7ueBGQ93BaCYUrvXlZwmA6AvBc3Gaw6Ac2Sm9FbIXs5z5GKTmxASLEx1s8pJeRCLu
-         1AMngqinec89/vCSEeswqp1YWf9N0EwOrICDS/Eaie84Y27UQQ6/EEH/NelPFGwQwyqi
-         MCNw==
-X-Gm-Message-State: AOJu0Ywcf6T6oXUqztPBA8W+R4hCMQkCNdyKHqCnC8LZiba0WQzIEQ/o
-	BAcgM52U4fHLSUE4T+MjBc2n15oGwtJkJLrRjZpIekMoa0QZ5pUVm5VOEosMomCqM+qW/A==
-X-Gm-Gg: AfdE7cnp/GPNNaVQihAtOKh1S/VdtrvpTYXvAZEeFmiyWLns7B1SB97NHctSoL1AfLw
-	N9q3prvwQgYqAIp/Z6561F8XZ27Kor8veiBaDPH4tgEUqV+NKLRbI95SFA+34S61p8Pj2TsbaJA
-	msJxkhBCbnV67cUmB6UXFCWZ+6DQ8IJL3+76Zygwwk9B49YEPKvPdJeLjXLta31Ejw1Cw3id3yh
-	wUsDagAIobMpmBHz+mtkxX/uwElLbWz2PGkvB1EGynwFT9leAfK3Bh5/+aNoq9GJc/VN9U7CNbw
-	om14MDpPdANOmyoKze/YfNdStqUpRMPLc1GYb05g58G51nAfsbRlOjt9owBueueCl/peGDIafXw
-	UacpKeCiiVBZow546EMfXn64IdRfNrxVY1DWrND6tZuO9NIduoy1YSNEpmWEHHfKyhrjGslhzZG
-	BzYklom6V4gn5M7bhMIZy0SPMcWY//V1cRMXXELGX5fey81Cn0cnQuxyPf8S2WknnIqVJSchE+/
-	u9PeNdy6ZIQ9FdtNuo67NPX3+lDhI43plKZm+KPnFG435TfOIPy3URrx0mSaoFP8E4aur66Mtyr
-	P1/fnzHikbbvjpAOoGPqtSZ1UeDAuDukezm+6ANP
-X-Received: by 2002:a05:7300:7fa7:b0:30e:c43e:8c6b with SMTP id 5a478bee46e88-30ec43e97acmr978832eec.40.1782634330209;
-        Sun, 28 Jun 2026 01:12:10 -0700 (PDT)
+        bh=rk/ERHujbBR6OdTeGJe90pJYIU2OrFoe63qAVjSGexs=;
+        b=CTDalwQfj94hx+zB7p1gyfs0F5OlC8ytcdNeVFqrOWY7eoRnJ+HMBwNHAo/dRn/F5T
+         lzGOcYDeTLgHggIPwH55wXVIdxUCY8sCMLZeHRDsUjSgGVeVfpeqErnHDzLh7TF8hw9k
+         aMdVO5f2t8BwDsh2luO+wwJ16TzC5z9QP2H0g2A4OwhP5QzIm1O49UxTL+uQdXbznY0C
+         PJCOyQAvqvCLRaFtT9aFtHi+WrquW1Sx2Sj+4vNb+bNZn4xAQ3neFkvdcDvOG4wzynE5
+         kaSPBj4lfCMF8FkqDkIX7tGLim6WdFlbkSi9Of1VURYdPXe64n9kqF2rlNgwMfgGeT9b
+         yDkQ==
+X-Gm-Message-State: AOJu0Yw7TVQbTRhFVBJ8NakygjQJobtPPcFg9d0GK48K5lGNnEyibj7d
+	JBu6QXb+4tBNK5TTjtXH/3GptuO7T1qKfVU31pyY6uksqZ42sFDlmWOP2aI6WkCUREkIHQ==
+X-Gm-Gg: AfdE7ckfDzVbzHKiG9/1CNis8A4dIKRhbDfGAi2kcdP35ncmTABp8Gvmy5n9UrMLcmC
+	ZrUJgOomIt3k0x6Javq6ioobhRrst9X1Jf8KHqV0OmUqgWdivtRrgAEiSRP3UFOpQk6NP1+h/sG
+	A8Gd1jC3pfA3tYnLZfhc0JQOelyXX22rlYBOIFH7GzO73cCWFpAnsVbDAYT2C7c2FJPWBy88ONQ
+	+B1ybS/XBFEglfQRpWCvfY+Ce75P38lEztsNo8gDo5UBAqCXLCe/hCaDtrgyunXD5/OsVIK0xCx
+	ks0A4ZZfjOBRC9BghVDSXEjs3FD1zv3kXbDuywONZDVAPNj9pbLE/V14f1uXnC1cTuQ39COtYM5
+	Jdw2r+mVjJNJS2EYNgY5wW8QsVDtCQgLmiqBwXmvOq4ozn5zP3VDEAN2RzHuVEZzQgepAmat3mj
+	5o+x3/yZEcfqVQC0r/rgkqnoxhY09WskeIptzQzJheUmNE4gcIYaixLrVAc1gf79xTGn11XctFq
+	VWTHZFAdLa96iRfrTpUjudhDNWwwZiNgnpqI+57VWhbRUyrpulJFm0SzqfHGGVMj8H4M2QXIla7
+	6AMjiTpQ8R+gndh3i+qDdeDs2EAPTrOP5Od6HkaS
+X-Received: by 2002:a05:7301:3d17:b0:30c:ab4f:46a0 with SMTP id 5a478bee46e88-30cab4f4972mr5927434eec.36.1782634331136;
+        Sun, 28 Jun 2026 01:12:11 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.09
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:09 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 049/128] hplip: upgrade 3.25.8 -> 3.26.4
-Date: Sun, 28 Jun 2026 01:10:00 -0700
-Message-ID: <20260628081122.178348-49-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 050/128] redis: upgrade 8.0.6 -> 8.8.0
+Date: Sun, 28 Jun 2026 01:10:01 -0700
+Message-ID: <20260628081122.178348-50-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,53 +70,118 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127859
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127860
 
-Regenerate configure.patch, which hardcoded version 3.25.8 and had stale
-context, so it applies without fuzz.
+Regenerate 0001-hiredis-use-default-CC and
+0004-src-Do-not-reset-FINAL_LIBS so they apply without fuzz (patch-fuzz
+is a fatal QA error).
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-extended/hplip/hplip/configure.patch      | 8 ++++----
- .../hplip/{hplip_3.25.8.bb => hplip_3.26.4.bb}            | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-extended/hplip/{hplip_3.25.8.bb => hplip_3.26.4.bb} (97%)
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch     |  5 ++---
+ ...ate-Makefile-to-use-environment-build-setting.patch |  0
+ .../0003-hack-to-force-use-of-libc-malloc.patch        |  0
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch             | 10 +++++-----
+ ...-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |  0
+ .../{redis-8.0.6 => redis-8.8.0}/init-redis-server     |  0
+ .../redis/{redis-8.0.6 => redis-8.8.0}/redis.conf      |  0
+ .../redis/{redis-8.0.6 => redis-8.8.0}/redis.service   |  0
+ .../redis/{redis_8.0.6.bb => redis_8.8.0.bb}           |  2 +-
+ 9 files changed, 8 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/0001-hiredis-use-default-CC-if-it-is-set.patch (94%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/0004-src-Do-not-reset-FINAL_LIBS.patch (91%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.0.6 => redis-8.8.0}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_8.0.6.bb => redis_8.8.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/hplip/hplip/configure.patch b/meta-oe/recipes-extended/hplip/hplip/configure.patch
-index 9dad089ff1..85df6aad60 100644
---- a/meta-oe/recipes-extended/hplip/hplip/configure.patch
-+++ b/meta-oe/recipes-extended/hplip/hplip/configure.patch
-@@ -2,12 +2,12 @@ Upstream-Status: Pending
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-8.8.0/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 94%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/0001-hiredis-use-default-CC-if-it-is-set.patch
+index a176f7c14e..8e1985b726 100644
+--- a/meta-oe/recipes-extended/redis/redis-8.0.6/0001-hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis-8.8.0/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -31,11 +31,10 @@ Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
+  1 file changed, 2 deletions(-)
  
- --- a/configure.in
- +++ b/configure.in
--@@ -30,7 +30,7 @@
-- AC_INIT([HP Linux Imaging and Printing], [3.25.8], [3.25.8], [hplip])
+ diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
+-index bd2106b..9ce768d 100644
+ --- a/deps/hiredis/Makefile
+ +++ b/deps/hiredis/Makefile
+-@@ -36,8 +36,6 @@ endef
+- export REDIS_TEST_CONFIG
++@@ -41,8 +41,6 @@
++ HIREDIS_LDFLAGS=
+  
+  # Fallback to gcc when $CC is not in $PATH.
+ -CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-8.8.0/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-8.8.0/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/0003-hack-to-force-use-of-libc-malloc.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-8.8.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 91%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 5b8616c652..a8a13de83e 100644
+--- a/meta-oe/recipes-extended/redis/redis-8.0.6/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis-8.8.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -23,12 +23,12 @@ diff --git a/src/Makefile b/src/Makefile
+ index 5dbbefc..15fbe09 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -131,7 +131,7 @@ endif
 - 
-+@@ -32,7 +32,7 @@ AC_INIT([HP Linux Imaging and Printing], [3.26.4], [3.26.4], [hplip])
++@@ -152,7 +152,7 @@ endif
 +
-+
-  #AM_INIT_AUTOMAKE([1.9 foreign])
- -AM_INIT_AUTOMAKE
- +AM_INIT_AUTOMAKE([foreign])
-  AC_DISABLE_STATIC
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(OPT) $(REDIS_LDFLAGS) $(DEBUG)
+--FINAL_LIBS=-lm -lstdc++
+-+FINAL_LIBS+=-lm -lstdc++
++-FINAL_LIBS=-lm
+++FINAL_LIBS+=-lm
+  DEBUG=-g -ggdb
 - 
 +
-  # Checks for programs.
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.25.8.bb b/meta-oe/recipes-extended/hplip/hplip_3.26.4.bb
+  # Linux ARM32 needs -latomic at linking time
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-8.8.0/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/init-redis-server b/meta-oe/recipes-extended/redis/redis-8.8.0/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/redis.conf b/meta-oe/recipes-extended/redis/redis-8.8.0/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/redis.service b/meta-oe/recipes-extended/redis/redis-8.8.0/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.0.6/redis.service
+rename to meta-oe/recipes-extended/redis/redis-8.8.0/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_8.0.6.bb b/meta-oe/recipes-extended/redis/redis_8.8.0.bb
 similarity index 97%
-rename from meta-oe/recipes-extended/hplip/hplip_3.25.8.bb
-rename to meta-oe/recipes-extended/hplip/hplip_3.26.4.bb
-index 3b5f58f320..f383a3f062 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.25.8.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.26.4.bb
-@@ -16,7 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://0001-Fix-installing-ipp-usb-quirk.patch \
-            file://0001-Drop-using-register-storage-classifier.patch \
-            file://0001-Fix-upstream-CFLAGS-override.patch"
--SRC_URI[sha256sum] = "1cf6d6c28735435c8eb6646e83bcfb721e51c4b1f0e8cf9105a6faf96dc9ad25"
-+SRC_URI[sha256sum] = "b9c61252754f35b4a237396ca8961e7b3e0c56db76d66a6712b7bf3e30e69463"
+rename from meta-oe/recipes-extended/redis/redis_8.0.6.bb
+rename to meta-oe/recipes-extended/redis/redis_8.8.0.bb
+index f6866747eb..865ebd47b6 100644
+--- a/meta-oe/recipes-extended/redis/redis_8.0.6.bb
++++ b/meta-oe/recipes-extended/redis/redis_8.8.0.bb
+@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+           "
+-SRC_URI[sha256sum] = "6d0a9913887a4972536f9da226f1575859c34d86354129163260a5f9c6bd4229"
++SRC_URI[sha256sum] = "88422181efb0c9c0abba332e3e391d409e1e13714b838931669235e5796f704b"
  
- CVE_PRODUCT = "hplip linux_imaging_and_printing"
+ RPROVIDES:${PN} = "virtual-redis"
  
 
