@@ -2,65 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C443C44500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 890D4C44503
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:27 +0000 (UTC)
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.69147.1782634342749384216
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14740.1782634340696669964
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:22 -0700
+ Sun, 28 Jun 2026 01:12:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dxocRj5y;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-30bc871ecdfso3061087eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Fn6WmxXm;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-30eac9abd79so819105eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634342; x=1783239142; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634340; x=1783239140; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NStfMmD/5yv5dXUAsB3NwbnHDMALK0+ReBh+xAeoEwU=;
-        b=dxocRj5yjg4ogZ7x/2kxB946JEPA0oZbQTO3Rl4xRCT9CzZpumvm65fOafDRGopkVe
-         r2XevK+TmWbtlfvqTljJ+mbxOxsjh29GOSlfll/lN7TzgldnTlSjdP+vP99sY9LLhAfu
-         /0esPVQpAiEJGs5RPIn4wxblSxq7J+9o8573CNgIzKaxUEb8S/Ov46lnETTIQWf5gb0a
-         gMtvcmNxqPkTkkru0+oHHNbgjewuBJWLX0O+D4FnDn7Vj86hnW03TMo+6DYHRuNHy1CM
-         PBkFLItl+O3Heqg9Fxf9U9F3/LseXbWu4KRvUAeBtCizxYOl3PchvKZwxELx0bR4ek/5
-         feyQ==
+        bh=sTaRq1LmP3Na/IoUDoFo9+PzsBah+1N6eFjfWiyekS4=;
+        b=Fn6WmxXm4D29IVEfFSDFQ4mYxVh9gjSA3OTjvaYSKCZAZjImVzVS6J9cdqCdc08xdO
+         m76j3b8/OBdTebkgKsFJRe1WGxCHGGZxpKYY4PA0R3F37d93cXIr15D1xlspshRVcG0+
+         TjlhkolMfFkdT9O58EHrfV0ffXV9FCRRcWV5ZlhK1swGYwkf2I0E2vd5P4IidF0LMpBL
+         1qcROHsZfO0qxYA3Ts0ms4Tl2yHJzm5KaLwTbF+efmF2+rIvLvvZrP4trBN7vRZlXNFZ
+         edyllDhQgTSn93wovIUdevmvhooToIm3a6UNTVfxmua86/25ZErs0goMRFNYhu5m8hTY
+         llHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634342; x=1783239142;
+        d=1e100.net; s=20251104; t=1782634340; x=1783239140;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=NStfMmD/5yv5dXUAsB3NwbnHDMALK0+ReBh+xAeoEwU=;
-        b=a2nOQFaZr6zNeTwKZnbEMXM8wjM0Ulo0qEpKNzVzqcLguirEKMbZvTOa7w1Avf6/gK
-         btp5aU7KetgnY+iM5KZy3njoZds9P/8WtYh7SpWhbVhPNgXCInJKokLi/t+sEvmua5kM
-         x25V29p+94Uxt65gKrK4Souf73XoboMpRDBcw659Bsvi8hJr0+Z11yByBISud494+yqC
-         Gag1Ioj9d69KpSARORIWg+EdUdaIYGgMjVkPg6nLnkHgWjE4TW7Np+Yjk+IeR9twIQqk
-         2QHxcvirmfPxRiP5HuFfMrP+cY/L/6nN8zrFgWbTcQF6a8gD0BiwZY7+X3TqCbPJtYZ0
-         DVHw==
-X-Gm-Message-State: AOJu0YzJ4Z0CQA6s8lAV5yYB7qn7uMptiT2pMznWElyH+RgC30fsSvi1
-	WytBRj/7Sh5mMletVKfDjSrxq/4gCyeGFu5Ll01iPeOC8qTuJoCXdejO+I+y2rMGlR2nmw==
-X-Gm-Gg: AfdE7cmT5powi8SvmHhx5jE+VXRWOOxHsHtAXTg+X0AJ3vB3K+iiz7SmhJ1q7l4q0uQ
-	R15ZV8ZEi//mfaYtwSarv/wKLHbxE8cK9iUeHMlU9bkWlZGP+rHn1VfDReJbZF1I3Ms2fanc3Hl
-	a6iEAhj4g0HFpyq3t30cxq6/0mpaVnfZS49zKpkSSqfT/barfSVd6FpDpANetCJMjEv7muQKm3A
-	b90uUqc/+gZLbKMfgxoEJwTkqddYDjSGwPOHbrXdwKx6S4MBzZfhJGiXnJmVP+dMZSdsi3HpdEa
-	KFzK+MwWq7DnIXIkxf2JHblzt04GE6ug5aFS3hXC28aoY1p+In7hRXw4R45VhKkGOcGBXrlK8cW
-	Rsg6XiwaCs5kPMDD1B+Kh8N2ejaPTxTGm8q2MzSsJVkJpTNJbLnvNymmPko6o8aCWwog+taxJqB
-	T2kRXwgbkeTLtLeSAFOLytH+Yk0jIX2IJ04pB+XiNsmSDEllPpiat+50/rlcnlQAyJeHZqXVa7K
-	B59BDFLSl5bvRhdRyJTge0XeW82ungq82avknK23QZrkZ2A/sR1VxknqPbbiagMTwR1+Jv4UBhq
-	D9ze7/RzTYL8NTpyxBYW8siMdCxxNg==
-X-Received: by 2002:a05:7300:2312:b0:30c:efc:c399 with SMTP id 5a478bee46e88-30c8502724fmr13071905eec.35.1782634342041;
-        Sun, 28 Jun 2026 01:12:22 -0700 (PDT)
+        bh=sTaRq1LmP3Na/IoUDoFo9+PzsBah+1N6eFjfWiyekS4=;
+        b=pmgwmSPTSs6CavQfSBmwKozLyH1KYwxRNyDHj58yjlvfGqcIkYiWZ549H+vv9KseYB
+         Gk5i/yLPDwF3qsGgeV5GWRXdFC7PuUHG8gE37dh+rEAiP7s8ci5Wtq3dplaZ2bWmahz6
+         uk3zhNe/mhtSsgG7JDKsoIO09us4XtUshpiJtQziRxbiOGZyyQq0u+Al6mgG48xiDo4j
+         sFpYPxQoG80rHfbabr9E8eRtTNuY93GnmREs6Xaoy7nHi/WMcoJWJuBeTRUi5mNcVdyB
+         DSM/pdqIetNbjAUJki7N62T02wPb4iRZ+E+jEqP5jIzRH7+K22X7PEOfYU4uEA+EzYi+
+         vOqQ==
+X-Gm-Message-State: AOJu0YzCqTlWYMeC5CqkvltGMKr+TNJa8Iwpyoj1IGZ2VZ++0RxG+3D3
+	1wo+8LBM51LSNrAKFSl74kYg1gf/daDPOsBypfZLOXJSfzG79tRhB+gdLXhFgpx+uID2uA==
+X-Gm-Gg: AfdE7clK/fv0rmj4qZ2dgEb/SzNzknE9BuHTDkvjzZ9iGyw7v0WdpqQgWYLEoaIXjwo
+	uLUgfRawPbl/Pnrn6eenjClKSmOS2m7QVJUY6exaI/QzcsmdNq1rPEyZ9Zrtgt0D3u8MOTfplHu
+	60gp5anxaY2FMJBy5WNPBIu7cQ8YtMFxq7YY8cgCiJrl2YS0ccZQnv8+FLN8W/QfMQaKub8NAbX
+	KcDQfis9vGoTqPRD1zDAOkAR+9kDzszfXh5vswzT9Fg7+n6opxNWSx8Mry+FKVb2Z6cFKwAd6gf
+	6IgwbHHqhSchOfpsezzZHqn1QARdOJoXQ6EjJXdvAWjogVdKlXzeE4S2K6hffkkre313RpMU1vM
+	3ANghJxRxYjUA6dw6WmLjue6Xt2Sf/2HUuiAVlhP/46iF9Z0Jxw7FfC7Xc+47A6NiazwXFu0Gbc
+	TzbQWKhW9Sf+Mq+JgCcIQQT6EXHTcZ/e4wFLmc3oKyOAtc5ANmizLgEEXtJI1ztRWDTJS9mDjCE
+	2hatgY1KkA21IUbVUea5HMbjSaBXJtXHv0b49ArK9QSOSJcvnaBjbOoM10j8v8/41YfqcZgZJKw
+	bmCPkjIezAfygcQNSfCUkpZlAMPdog==
+X-Received: by 2002:a05:7300:768c:b0:30c:7ab6:7ff7 with SMTP id 5a478bee46e88-30cab09accfmr6940638eec.15.1782634340076;
+        Sun, 28 Jun 2026 01:12:20 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.21
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:21 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 062/128] poppler: upgrade 25.12.0 -> 26.06.0
-Date: Sun, 28 Jun 2026 01:10:13 -0700
-Message-ID: <20260628081122.178348-62-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 060/128] lcov: upgrade 1.16 -> 2.4
+Date: Sun, 28 Jun 2026 01:10:11 -0700
+Message-ID: <20260628081122.178348-60-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,40 +71,60 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127872
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127870
 
-poppler now sets CMAKE_CXX_STANDARD 23, which enables clang-scan-deps,
-absent in the native sysroot. poppler has no module units, so disable
-scanning with -DCMAKE_CXX_SCAN_FOR_MODULES=OFF.
+Do not package the upstream test suite: the tests under datadir/lcov/tests
+are not needed at runtime and pull fatal file-rdeps on /bin/bash,
+/usr/bin/bash and /bin/env, so remove them in do_install.
+
+Pass DESTDIR separately to fix buildpaths QA. The recipe ran
+'oe_runmake install PREFIX=${D}${prefix}', folding the destdir into PREFIX;
+lcov's Makefile bakes the runtime --bindir/--libdir into the installed perl
+modules and manpages, so the build path leaked into the package:
+
+  do_package_qa: QA Issue: File /usr/lib/lcov/lcovutil.pm ... contains
+  reference to TMPDIR / the build host HOME directory [buildpaths]
+
+Use PREFIX=${prefix} DESTDIR=${D} (and CFG_DIR=${sysconfdir}) so the baked
+paths are the runtime ones.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../poppler/{poppler_25.12.0.bb => poppler_26.06.0.bb}         | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_25.12.0.bb => poppler_26.06.0.bb} (95%)
+ .../lcov/{lcov_1.16.bb => lcov_2.4.bb}              | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lcov/{lcov_1.16.bb => lcov_2.4.bb} (71%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_25.12.0.bb b/meta-oe/recipes-support/poppler/poppler_26.06.0.bb
-similarity index 95%
-rename from meta-oe/recipes-support/poppler/poppler_25.12.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_26.06.0.bb
-index 71bff6d70d..3b1edd9335 100644
---- a/meta-oe/recipes-support/poppler/poppler_25.12.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_26.06.0.bb
-@@ -9,7 +9,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-cmake-Do-not-use-isystem.patch \
-            file://0001-workaround-build-racing.patch \
-            "
--SRC_URI[sha256sum] = "c18b40eb36b1a0c5b86e29ca054bf0770304583da4f2cdd42fe86eca6a20de48"
-+SRC_URI[sha256sum] = "4cb4e5a3dc8cb5eec751c8a23c8ba19f61f96dedc0cd07d2aee6b0c8e2cf6ba4"
+diff --git a/meta-oe/recipes-support/lcov/lcov_1.16.bb b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+similarity index 71%
+rename from meta-oe/recipes-support/lcov/lcov_1.16.bb
+rename to meta-oe/recipes-support/lcov/lcov_2.4.bb
+index a889b3fa82..4c121b9cf6 100755
+--- a/meta-oe/recipes-support/lcov/lcov_1.16.bb
++++ b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+@@ -51,13 +51,22 @@ RDEPENDS:${PN}:append:class-target = " \
+     gcov-symlinks \
+ "
+ SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
++SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+ UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
  
-@@ -33,6 +33,7 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
- SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+ do_install() {
+-    oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
++    # Pass the runtime PREFIX and the staging DESTDIR separately. lcov's
++    # Makefile bakes the runtime --bindir/--libdir ($(PREFIX)/...) into the
++    # installed perl modules and manpages, so folding ${D} into PREFIX would
++    # embed the build path and trip the buildpaths QA check.
++    oe_runmake install PREFIX=${prefix} DESTDIR=${D} CFG_DIR=${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
++
++    # The upstream test suite is shipped under ${datadir}/lcov/tests and is
++    # not needed at runtime. Its shell scripts pull in unwanted file-rdeps on
++    # /bin/bash, /usr/bin/bash and /bin/env, so drop it from the package.
++    rm -rf ${D}${datadir}/lcov/tests
+ }
  
- EXTRA_OECMAKE += " \
-+    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
-     -DENABLE_LCMS=ON \
-     -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
-     -DBUILD_GTK_TESTS=OFF \
+ BBCLASSEXTEND = "native nativesdk"
 
