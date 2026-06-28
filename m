@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7013C43458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF587C43638
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:11:54 +0000 (UTC)
-Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14725.1782634313865010475
+Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14722.1782634311095491558
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:11:53 -0700
+ Sun, 28 Jun 2026 01:11:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dg5A1XyD;
- spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-30ec3dfbcd1so250797eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Az+f4UA5;
+ spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-30bbe98c3f0so6037265eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:11:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634313; x=1783239113; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634310; x=1783239110; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A3FeQPggJJv6oW4ydePOstrQ9sshE+o7RkiV40OhTv4=;
-        b=dg5A1XyDymD4dzdqi0PBJENvw5xhxYOxxJJZyVzu3wf9Fbc1oACrsTHBVHhgnh8clQ
-         L9oiHA6D9/IEmg0Z1DN5Q6Eq1kJ+fogG65v5Cx/wn4d2yO9oC/oyixtpk+BU+8H2jSdu
-         FtT4/cTObi89Np0fCwNjn1bI2Us8FdV70D7+r0LPjoOo2qPKqbb8SyJtFGYIHSTTNuSE
-         ZsZobx62DGziprVnXy+3bM1cEkcGEIs+n+Ak59CwBrlOcHWe49D0nNjEu3ai27FhbvPd
-         ve+9HhAXF+EOKlLcBpuXhpiuvMmYm8fLHbad8qmYcUyaz3BQJdJTY7CORiYPBxUNrQ7C
-         g6QQ==
+        bh=xYSbo3kafdgoguFVFnuRtEZDJ/i/DN1slFTzkRQW25Q=;
+        b=Az+f4UA5tUTX0Y+3Z4a1cL8CdXjqHFO6ia3mEwXWNVRbQfx2zlYaB1WSed7pKkyYqZ
+         0T+ULXUcmskU3DFfq9hqsGhpjwGMajOpmEPo0b7tBcyMmatAPQHlxv3VJCTfjxBfhhvz
+         6UeFrpAniRqJIYlMPZN2g4RdEcLZG6cQcUHp0rzIek9hvdcnmeksZavEL+xvJ1XWcLUQ
+         UyCBig7fIyijlbsE/SJIc3WitUx8NHpp9iXOcDDDLOwvp/wFRMPX+Fc7eN3IomvKiyc0
+         BqRRTcxz7qqXsS3XeoU5GJIE9g4BoH8+FCI4/vKDPu9K3NNPXL7MdiU4FW2VKJRtB5SJ
+         hDEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634313; x=1783239113;
+        d=1e100.net; s=20251104; t=1782634310; x=1783239110;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=A3FeQPggJJv6oW4ydePOstrQ9sshE+o7RkiV40OhTv4=;
-        b=gnOLjn1ncZlxyLUCYfiXCeq4JirGim+PDn9sfjQqq22jlfpVmol4OQ8dpqkQXmmRqo
-         b2Kjqs1vIyIoqg40mVIwgbT71rucR5LHAnjNmhTYhLwpuxtAZr1hCQ7Lo6U0u56xOW+8
-         z4E0DHUr5hfEs310BzsMDlRhqkFpAph6HIAtNJ9gzyHj/9yXBU3nw/+tjv6W0MCg2PMo
-         kAX7+yL8npmzOqjUvDOqFPjIu9SYwDNdLde3/co++1Q8GZH0EOrbbkbecFcU9Aglqz1X
-         FlzXhOh0PVHlNqDMxQPp26fckJtcBxpXmb52gatI89Ax+taOv/HRTxRJDWCCDnBi0QAT
-         v07Q==
-X-Gm-Message-State: AOJu0YyTuf08ZraVCyrf/3OrD8zHEIzdUliwu46tLwkYVDGhLgYcC9UI
-	B+R+pi4qh2nTwQTnt2crxr797cHUKhYkBVl13Yz41hmN35Px7hZCCGGNEouQSDpjfKTScQ==
-X-Gm-Gg: AfdE7ck0Ld2aKzKoQ9whahmUKGbAmdTF7mghpPXpMqDz9GPORl9c2G1XYZ1Yj41LUK0
-	0AFNrWqOqIvJgK2JhkP7Yxro8lsErtlzT73JIuL/De5lpzKyZ9fMMGUVyzMgt/1P8nkr41TS+7K
-	p0zCiNWkOxS6HLGaENrkOGgyhRi9d+bVVo5rd5+6mjT9sswycwG6x2gsdPl2MtoQtO9F1wdb6k+
-	3zUrNmLQb/FoFEBSNvveMkgcfKfd2T6YJNKrTF+KnX+M6OLve7hhqgRq05/qNjv+FA52uxgMQEy
-	5DUoAvU1A2MXgR5zCMmZyv2iFqHZPyvYLYkzOFwsHn1ppbt1JgSfUVOsoF+P37V+W0z5aErQ9W2
-	s1tekv5u0wOkNP0mp+KpRcTu6H4Eu7RdnPYWbhn71un89IwzS6AhqhDOicGvWQyVff6T3awQE2h
-	GPRil3rVofe1Qw26lS6+beXtYN22fk6FYFBT/LJz+dWiNMeP6H56nvhrIdk/OaVcjxnwZDQSJPf
-	Nkbb6hxIww7ZtrMwFpljBjBHcHpHrgFi51jvn6eAViYCENZnFomknycdMhlAqZENKgE9WCnJzIM
-	n94zcwO4RUZNYcM4jZxfAx/UUAAEug==
-X-Received: by 2002:a05:7300:fb87:b0:30c:ab4d:3822 with SMTP id 5a478bee46e88-30cab4d3b9emr5822872eec.36.1782634313107;
-        Sun, 28 Jun 2026 01:11:53 -0700 (PDT)
+        bh=xYSbo3kafdgoguFVFnuRtEZDJ/i/DN1slFTzkRQW25Q=;
+        b=ApQ7FOpnd9R2wKTvhF2sWdigEbw+PkV+Gs+St46vAKXiwE0kWm+E35gVPKdTEjdeYq
+         ZFwuButxXcIr5roYczKeQY/Yq2FOxThauOW7zZwwZhCHmOoIEiMYqJAsVmcRa2vD69tR
+         Xb4zl+HqZgp4SZrYgiBQMuK833J6H5sbXmAWbPUIh2zGQdYlhUCHNSYORyDofS2OnCi0
+         I5vsQhtoDGqT2+1HlgrmpOvAUk5K8aaTttuxHe2E9MQjbFi3+u9oGpS0Amy3VbM6MogW
+         AWKihEXuzBMSGhWqcIIuNDHXDMLeH/BNUirV6vRdEEz0vBMKxMQwaDGiKISt1117lidx
+         E8Sg==
+X-Gm-Message-State: AOJu0YxEvJ2LPVs3yhp/fAcwAlVQloilA+U/G+7kgsTWZC3J3F+xhjWq
+	CvTzy592FxlW/znBerNYII3O3G6AuaRGgiOf1AV6ZdBlTNSyW6Q5HQChZOyw2M2I60smjw==
+X-Gm-Gg: AfdE7cmW1eCtvT53fnLC0Ir/0lKJlpaZ7BThDV2rgQOLYs9U8Fx3Mx/SCKGR+hmIP88
+	iFin8BjEz8+HM/J6kfusvMPYoPAIza/IUKiYX/Mynw3ueiJRFqQD18DOKIqkoRwjtFUzrEQLYHN
+	ePJb5mtsFjKUBHi4LoMV2k5QB6ArUCUOC6G4dpuJzJq7GpQea5u8OXWrwkkfZktc3soyq390RUB
+	CSk/5K/XpVjMxnCF0ry1LGuiY2mDTHR7k5enJJg1OCcOLNEedNxLVBaCjGQCm0c+4etKSdqJNNs
+	w2opXaYwtla7Bd8V7BWamkpS3cHr/H1OR9/Pu0rKqpZz8oI/G9UVHMTUwQEEtoB1Ioi0BetFM7s
+	wxQyaM1OfstfHNlF8V4BL5pJlgRL6oJtLbJYDnQIEBVS0abSO3xsNWJr/i+a1lyEDuWTDJSg1ri
+	WQ6CvP4AsN1nOfTwAq2WjW3WYA/oakkvyjZp8aEcnYaWz+k123lEfwZfqGSt0Bab0HWByWdQywh
+	I3ILV/rfPgpIohtNWXHjHC71MkG9Iwt8vyAhU6UBKmtxY4g+VLRNpVHKYfvgR5sdKP6E8/+pTFE
+	P7HinZo22X7uAMOHUxgtD6tQ32q2Vw==
+X-Received: by 2002:a05:7301:6709:b0:30c:ab4d:da39 with SMTP id 5a478bee46e88-30cab4ddb7emr5328378eec.43.1782634310453;
+        Sun, 28 Jun 2026 01:11:50 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.52
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.11.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:11:52 -0700 (PDT)
+        Sun, 28 Jun 2026 01:11:50 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 030/128] samba: upgrade 4.23.5 -> 4.23.8
-Date: Sun, 28 Jun 2026 01:09:41 -0700
-Message-ID: <20260628081122.178348-30-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 027/128] squid: upgrade 7.5 -> 7.6
+Date: Sun, 28 Jun 2026 01:09:38 -0700
+Message-ID: <20260628081122.178348-27-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,28 +70,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:11:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127840
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127837
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../samba/{samba_4.23.5.bb => samba_4.23.8.bb}                  | 2 +-
+ .../recipes-daemons/squid/{squid_7.5.bb => squid_7.6.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.23.5.bb => samba_4.23.8.bb} (99%)
+ rename meta-networking/recipes-daemons/squid/{squid_7.5.bb => squid_7.6.bb} (98%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.23.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/samba/samba_4.23.5.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
-index ec3149562a..fb00dd2ec1 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.23.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
-@@ -39,7 +39,7 @@ SRC_URI:append:libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
+diff --git a/meta-networking/recipes-daemons/squid/squid_7.5.bb b/meta-networking/recipes-daemons/squid/squid_7.6.bb
+similarity index 98%
+rename from meta-networking/recipes-daemons/squid/squid_7.5.bb
+rename to meta-networking/recipes-daemons/squid/squid_7.6.bb
+index 3364c1f746..637d1f6942 100644
+--- a/meta-networking/recipes-daemons/squid/squid_7.5.bb
++++ b/meta-networking/recipes-daemons/squid/squid_7.6.bb
+@@ -22,7 +22,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
+            file://squid.nm \
             "
  
--SRC_URI[sha256sum] = "593a43ddd0d57902237dfa76888f7b02cb7fc7747111369cb31e126db4836b9f"
-+SRC_URI[sha256sum] = "976129847456dc5b78c00f8ffb79dc605c49d6aaca8b2aa772fd22dbb69fae01"
+-SRC_URI[sha256sum] = "f6058907db0150d2f5d228482b5a9e5678920cf368ae0ccbcecceb2ff4c35106"
++SRC_URI[sha256sum] = "852178fdc37c5b0786a934fc990c7d2fffc82acf19b2284be209b96431d25992"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
- 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce \
+                     file://errors/COPYRIGHT;md5=41d117978dbffedc893e8eeca12537d0 \
 
