@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D385C43458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6FABC44500
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:59 +0000 (UTC)
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.69159.1782634369874526719
+Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.69162.1782634374830450639
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:49 -0700
+ Sun, 28 Jun 2026 01:12:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Gnp3ecKi;
- spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-30c965eab27so3695658eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YHHlqJna;
+ spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-30eac9abd79so819601eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634369; x=1783239169; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634374; x=1783239174; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ilD9FgnkGdqe5GqMnY5Ul/aeY+OYY8Ec4Cj/SXeSGYw=;
-        b=Gnp3ecKi5dlY7nLWGJneXKl2CiFkyGCenHA0/OIsBxVwORrjsGktFjpTfKa6rhaTSv
-         ODDY6VAtMBWOsb2PJswE/ub8nNdCDUGabpWw0Knl7FrkAjvYgNEcOEOp+8xk0H3Q9yKp
-         cDawwk/4vZGSH/uIyZeouCtOZVFUgmQ3BPnsY8sVel/4aPonE1eXbg0MuVQfdZux1QB3
-         bqjl1qMrCenNVfRrIFM117XjkzY5e3H8qkmhaJ9GCI6ST01A4GQqT1KEvUYTFw3VkuLE
-         3TWb3SyjxjpdQ6e6h/OjReDupvYQL34ZF923ls8xd2EfZuihBJv2MTLqUXafzqTgZUiH
-         n4gg==
+        bh=eQjs5L4pDQa9NRnwyedcmuSKR2Lu1a9JM6RMa855cQc=;
+        b=YHHlqJnaNTvuoo/mwwEySgyx12gdtHVRZS6ojzXNjVLGB+qqaSXycOuEAYHnEPGJLs
+         c/mSeYt9oGrdwBitt/wqde27ffPRKlfunJsjOnwH1VUPpQAWMQ9dMV72LWsKeKGlOK20
+         mjuGITdCDW9FYNQrbwBfbHwLCSb080z3Y1A0lw7OdVPTkPCdeE4IxeHyz7iK4+QCrWc+
+         4y6nWzesfKRJpKgKW2rdrfgMxqdOVcLuhib7GqK2RRjU2LpmBWB2go1yAXe0Mhql9viA
+         ke4Okf7r4XdYv26BiagoJDNyWXQ8GgSmmnPsvKfXSlPP3CvE0kPZdNls2dRBBN5jxtVu
+         yJTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634369; x=1783239169;
+        d=1e100.net; s=20251104; t=1782634374; x=1783239174;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ilD9FgnkGdqe5GqMnY5Ul/aeY+OYY8Ec4Cj/SXeSGYw=;
-        b=QKVxQ1mK6F5HHT064FfwMaB0ouCIU3mVWtHagM96QQi0anKpbV5ioL4gPNTD8Tikaa
-         WiDR5wUHZpWfxwUGNadGwEpm8rV+bQIajLiSgSCoYJ4fEpB2LxrUs6BsHpbwgZhaET6U
-         Q2B5xgNLh/7uc35tX2AlmJuYQK7h8skcwZ6bw7g+ISpplxl98YdOReZghL0V2woylg+c
-         jAGrgSGB5g6LiKPNMVOWmVCGMllDyDyEt6oDVqOsqu31rklfRuEO5PxI7zF59D0aMtWi
-         6GC0ySxHlUnhCSfRCNqY2ifdUKpve9eVvMfBBVejGcpYP6449k+RXwSAqWf0vkNh74L+
-         XBIg==
-X-Gm-Message-State: AOJu0YyNFCf87Xoh51WH4nT0HTdIexlh/AbYO2QNqSqt5RXf8zR/6UMC
-	6k5zBn7iD6ZUMAyzU9tcuiLee0IF18tgHdY/egPJbvcMLmXcVe455kF8OKsjsqWDGnKlGQ==
-X-Gm-Gg: AfdE7ckB7gOFO+NlOxn6T23KoTBGMgsCwsnCi//U2AmynvpcH/RpzyQqFT8Lr8TdKFp
-	JSYzziPvNeENwM2yl+8mv1QanbWTBYTizRTQ6bTQH6ZqPx3TpXUy+SW0f9z3zsjtJMQqyw38UK4
-	V2G1dKe4GhwBG/IBhHNaro8u6KDNTlJ28PubLsJcCTA7yBCdPFIiFsaNmV1egkcOSbnd2JD0ngo
-	pCcJp40YFFiIaCZLzYn3qaQBtgmxFaLYPeNRVOYohnkYH18ti91xjJX4+dkOaWRqF/RziIIkOPz
-	jZRqwNxZFcaCizuVWBkOYPDu1MSVF0XAF/d7BEtZ8Gp8V+49DxxMi2q4aXW6OHKdA82Yv28vKt9
-	zhUFKWk0FsErqpFjHdBWVCyWOexl8tbo7Ra8eWUjbkESpmgx8SnDazhg4eSg5Z3t83YwGVKnbmR
-	5ClvoftH+lc6oeFLIyGpv6rcF4cdr9cKrfbQ7A2KTtqM6y5uIwRPJQPqyUJYX6EdA2mvWojZSKy
-	1UXx7/yj2LQmVBjYOdp5HV1o7KVe9CdG2jXYhA4g8Fj14RaClKLQEriDcyLaAn4Y6zv855wU8pV
-	oMEy/UkMYuQWK/GfNYC1XXS/pczs/A==
-X-Received: by 2002:a05:7300:a485:b0:2f1:496c:94bf with SMTP id 5a478bee46e88-30c84dadbb3mr11644777eec.16.1782634369157;
-        Sun, 28 Jun 2026 01:12:49 -0700 (PDT)
+        bh=eQjs5L4pDQa9NRnwyedcmuSKR2Lu1a9JM6RMa855cQc=;
+        b=jWmuRpnEERx0tWknEHG2A0+EiWDWLxD295XzWlu3eM1J09Dy4HELMqqMrBehqk11Np
+         d8Ut0w7mGoeMhAgrWhcvfvwKnYOisVhECLbwVSxLhQ4jnTUfduv5OZRDGWgqweeLguHQ
+         N7JnhAxrzbsSp+oVVr6QF8wFh9EWHnR7NgBj6b0iTiM0pCdZg8mJON5UAyVl6hrVReo8
+         4DzduCapKrwGhoHgXbgf5NFPaejDPuwq0vnmBXUwFqhoddv3Tsb3kfb3VLA6Out3k0O5
+         rZgHWM2x4KOYVykbRzlHKmzSazAxpXcgFU58mBR2rFoh4l6z1+qHokrFUD/mqhNmjhPO
+         DB/w==
+X-Gm-Message-State: AOJu0Yx7p9aOVPwRt5jkNu4gSNkwH7HWAFk3THzjzlpYQglEZ323evJe
+	Gj+YsxvRu80EuWCkXFqwC82+AfNW0Tpz+XTqazoBSEnqOKjA1GEpNwdI4/Kz3J/lq5G83Q==
+X-Gm-Gg: AfdE7clyUkMXoB5c07Ng+Ss/0iwvGtXzaj9r/q/hdfvAI/A9S/7afH53K0PkpS/mRcg
+	kte1ik1xDAi3GhmwazLrGW5wUJ/nw2cZDsn/5JdLkZofONfehq4shnOyS8P9O/1qaugF97Giw1q
+	Y4+XBLXAnvHVWjpBFevlZlLxvothek8v9Hiw7dKM1jybViRywfYyvfXRXd4rBuAkCmMhZ8zYd1z
+	aulCknD/LGUz4RelwKfvGiCu9XxzqhEkBIY5gCvXIVbrqiYmMiOTQTH0Fplx6aQd4NEIQiE9J44
+	8Hj8/QvcATM8BwFx6HqxMpRY4wBKRqUIQGUaGda5pSZatR8z61a3YGU8OokUgKU68RrwR8tMfGU
+	ckjwVeLVtp8djISaJ4R5R0twdU0ETA0MfpiGwTHBzulBbk6Royemou/uCV/Xpr7AYrDcFpDVhZd
+	9xVIDr9WqH1JBi/CZ1WvL0UYK4FQA6rTKatYx/Q/nsKrn6lv9GUOmJCfvPmzkfBTXE3p9L/s7Vq
+	ZfCajJUAiSJgaxfbfT3WgMsCyCVozy/0MsdQqUascEQyefzEMWwXSjA3BVFApnaDSdj2HYpWHk8
+	xRlGPRgmrzK0AT4GwkAZGYCPqoxR+A==
+X-Received: by 2002:a05:7300:df41:b0:30c:7fc9:ddef with SMTP id 5a478bee46e88-30caaf5aabbmr6554230eec.10.1782634374184;
+        Sun, 28 Jun 2026 01:12:54 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:48 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 091/128] ktls-utils: upgrade 1.3.0 -> 1.4.0
-Date: Sun, 28 Jun 2026 01:10:42 -0700
-Message-ID: <20260628081122.178348-91-khem.raj@oss.qualcomm.com>
+Subject: [meta-perl][PATCH 097/128] libcrypt-openssl-rsa-perl: upgrade 0.37 -> 0.41
+Date: Sun, 28 Jun 2026 01:10:48 -0700
+Message-ID: <20260628081122.178348-97-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,71 +70,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127901
-
-Drop 0001-systemd-Fix-out-of-tree-builds, which is present in 1.4.0 and
-no longer applies.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127907
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../0001-systemd-Fix-out-of-tree-builds.patch | 28 -------------------
- ...tls-utils_1.3.0.bb => ktls-utils_1.4.0.bb} |  6 ++--
- 2 files changed, 2 insertions(+), 32 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-systemd-Fix-out-of-tree-builds.patch
- rename meta-oe/recipes-kernel/ktls-utils/{ktls-utils_1.3.0.bb => ktls-utils_1.4.0.bb} (83%)
+ ...ssl-rsa-perl_0.37.bb => libcrypt-openssl-rsa-perl_0.41.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.37.bb => libcrypt-openssl-rsa-perl_0.41.bb} (84%)
 
-diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-systemd-Fix-out-of-tree-builds.patch b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-systemd-Fix-out-of-tree-builds.patch
-deleted file mode 100644
-index a5a46ea8d3..0000000000
---- a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-systemd-Fix-out-of-tree-builds.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 496b0ffd7cd685a1adb48b150157fdea14f5f159 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 9 Dec 2025 08:53:53 -0800
--Subject: [PATCH] systemd: Fix out-of-tree builds
--
--The systemd unit file installation does not work when the build directory
--differs from the source directory because cp cannot find the source file.
--Prefix the unit files with $(srcdir) to reference files from the source tree.
--
--This fixes out-of-tree builds which use separate build directories (B != S).
--
--Upstream-Status: Submitted [https://github.com/oracle/ktls-utils/pull/134]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- systemd/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/systemd/Makefile.am b/systemd/Makefile.am
--index d2f8e25..d6435ad 100644
----- a/systemd/Makefile.am
--+++ b/systemd/Makefile.am
--@@ -24,5 +24,5 @@ MAINTAINERCLEANFILES	= Makefile.in
-- if INSTALL_SYSTEMD
-- install-data-hook: $(unit_files)
-- 	mkdir -p $(DESTDIR)/$(unitdir)
---	cp $(unit_files) $(DESTDIR)/$(unitdir)
--+	cp $(addprefix $(srcdir)/,$(unit_files)) $(DESTDIR)/$(unitdir)
-- endif
-diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.3.0.bb b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.4.0.bb
-similarity index 83%
-rename from meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.3.0.bb
-rename to meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.4.0.bb
-index 947aa90e2e..e8e4f36d6c 100644
---- a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.3.0.bb
-+++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.4.0.bb
-@@ -7,10 +7,8 @@ RDEPENDS:${PN} += " gnutls"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.37.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.41.bb
+similarity index 84%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.37.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.41.bb
+index 90df019fec..4775d12b7f 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.37.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.41.bb
+@@ -4,10 +4,10 @@ HOMEPAGE = "https://metacpan.org/pod/Crypt::OpenSSL::RSA"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
  
--SRC_URI = "https://github.com/oracle/ktls-utils/releases/download/${BP}/${BP}.tar.gz \
--           file://0001-systemd-Fix-out-of-tree-builds.patch \
--           "
--SRC_URI[sha256sum] = "8ee295b26b608450bc0c47ba199b34cf92f7f9ec4c81a62363e6450da76b6739"
-+SRC_URI = "https://github.com/oracle/ktls-utils/releases/download/${BP}/${BP}.tar.gz"
-+SRC_URI[sha256sum] = "acd9e1851e492e7e16b879b30fc800f4a98d4214fa534ebb7e24d379f5984770"
+-SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
++SRC_URI = "${CPAN_MIRROR}/authors/id/T/TI/TIMLEGGE/Crypt-OpenSSL-RSA-${PV}.tar.gz \
+ "
  
- inherit autotools pkgconfig systemd
+-SRC_URI[sha256sum] = "917f7312532f8f4af4f3acbf6ba10e0151f8577d2ef1f38e1035229be86eb6f4"
++SRC_URI[sha256sum] = "82fa839897b88e9c245b6265f3be26d3bc879cae4c7a8151fad4a307c3366822"
+ 
+ DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
  
 
