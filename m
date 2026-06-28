@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55612C43602
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C443C44500
 	for <webhook@archiver.kernel.org>; Sun, 28 Jun 2026 08:12:27 +0000 (UTC)
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14742.1782634343688104421
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.69147.1782634342749384216
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2026 01:12:23 -0700
+ Sun, 28 Jun 2026 01:12:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=iuAdG5RS;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-30ca1b4b278so4369798eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dxocRj5y;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-30bc871ecdfso3061087eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 01:12:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782634343; x=1783239143; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1782634342; x=1783239142; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dz3LLksmW5DuS2rLiNMs2aRYmkrdW6mh732irWsTDgM=;
-        b=iuAdG5RSr0umZjlp+vJ3k5ffvYOi0aF4kG1EeIZZ6oTnZ6CDe+3PfcjwDcwR1N80aD
-         u9lCuJD7rVSyQRS4O0pvG4cQv18vlfjdg0aLGDGHCDKq2vcXEfaMSKNofIFJGahLVpjW
-         8UtMahmAoeheSFcAQDJygwhjuhpFG4a2IHtCDASjh8gRglQiIN07lxkxZIpTwCuvjYRJ
-         06DS9EcUmDTq8eF7JzokTJobdmRDpqCQOXDj8aY3Lq3bjPnAjKPrsW6XcpXfwNsPr4lN
-         BHeR/oPZKc6gNOtotyUo1P5FWzkbMksvwwp0kpjjzTDO0ei5jyVnFvMVLCYdiSB0ggb9
-         +fKA==
+        bh=NStfMmD/5yv5dXUAsB3NwbnHDMALK0+ReBh+xAeoEwU=;
+        b=dxocRj5yjg4ogZ7x/2kxB946JEPA0oZbQTO3Rl4xRCT9CzZpumvm65fOafDRGopkVe
+         r2XevK+TmWbtlfvqTljJ+mbxOxsjh29GOSlfll/lN7TzgldnTlSjdP+vP99sY9LLhAfu
+         /0esPVQpAiEJGs5RPIn4wxblSxq7J+9o8573CNgIzKaxUEb8S/Ov46lnETTIQWf5gb0a
+         gMtvcmNxqPkTkkru0+oHHNbgjewuBJWLX0O+D4FnDn7Vj86hnW03TMo+6DYHRuNHy1CM
+         PBkFLItl+O3Heqg9Fxf9U9F3/LseXbWu4KRvUAeBtCizxYOl3PchvKZwxELx0bR4ek/5
+         feyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782634343; x=1783239143;
+        d=1e100.net; s=20251104; t=1782634342; x=1783239142;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=dz3LLksmW5DuS2rLiNMs2aRYmkrdW6mh732irWsTDgM=;
-        b=mAENF0dNuhmk46IWC0nixtRD7yIu0hZrjjh5j8rOyoz8fHQyxpneGDZvKTCpavc0VO
-         7ypjP34s4bVGq5th3XSMAQzhmeLDZFr42rPeTuLVGTkEU6WjMpVr9cOQtJXkAweLrd8r
-         0uE65A/FPlLzHyhli6D2JReWM3bkhBV6zJBEKPnOqoyWvHu2Z1bWTb4PxHARQ9RuwBPQ
-         3b34k8e4QE/lfLtcMwdDpBrMaYnETEM4da80tjaQufuh23DnxeIfq4x8mwM9d8Dlj2VI
-         VIxuVcG/jhJa+wmFp50vap8ZrnUDlRG4vRm/wnmGNRbU6chzSKMVLeMccVII7JZgZV06
-         iwCw==
-X-Gm-Message-State: AOJu0YyuKD83uc87sa+iorEJS1ITASRRCiBq/f6/RSeSk6znh92QEDFn
-	CIEE790m7eMHbVImY+9yjD9IJ/WvWOtgEbilphBeFeG5ggvgmsqobQxjaU2xtgChr8oFyQ==
-X-Gm-Gg: AfdE7cneLi9BmQ3xl+D3rUcwLbZtILUjAxRZWOxIiYjvs+u5APfItxzzx1uj/PiZqCs
-	r6iFFrHGc0yzOf1dCOd9PQcjK6n+9qRQcWXfYBS+f4M5I5Z4KkQoc9bthEWLVT4gpuQXelhT3dQ
-	KczFkLRm1bAi5lZLoS75ijv6o0S8iMLRa+TWasWNl6nce18ZweBzb1zrdKKeNp4WPOYju0fi1dz
-	ZgSmxHHcLYvILHm/juqMzkyOccy8I1Y8rDd+S6lqx3A1v6cOfdIgR4+8HdiOZuMLQYN/EGh7rd5
-	npwJJ7e9Em3Im41hroUwIcvItTh6V85bbQcfAfNzuiCSBXDra40eXnA4IlFJTpl0pfIu3muo0W6
-	dTcp9klKLSWD2nD8um1yXOMPOOkyiKwUDSt+ggae6xq/IZR692FE+mmOtKFCEwhW1m2EgI/t46/
-	+SMEqDqmp02jpbi8HOaniwSfarqeh1vKsfAcxm/kv/K0D+Ss4JyokrNDd/jqhozIHLqPRu+tKJh
-	g9hopXCdLEbqFiFy5+XIyiYxtDo+EtfcvKEhW6ANnEAYE9NUqH1n3kOtp/6G4cV/xjsWYUqVcXD
-	Bnf1ikuyGjSMmKZO78Q3FrX2hm9quw==
-X-Received: by 2002:a05:7301:60c:b0:30a:e52f:9bcf with SMTP id 5a478bee46e88-30c84e05682mr12108733eec.10.1782634342913;
+        bh=NStfMmD/5yv5dXUAsB3NwbnHDMALK0+ReBh+xAeoEwU=;
+        b=a2nOQFaZr6zNeTwKZnbEMXM8wjM0Ulo0qEpKNzVzqcLguirEKMbZvTOa7w1Avf6/gK
+         btp5aU7KetgnY+iM5KZy3njoZds9P/8WtYh7SpWhbVhPNgXCInJKokLi/t+sEvmua5kM
+         x25V29p+94Uxt65gKrK4Souf73XoboMpRDBcw659Bsvi8hJr0+Z11yByBISud494+yqC
+         Gag1Ioj9d69KpSARORIWg+EdUdaIYGgMjVkPg6nLnkHgWjE4TW7Np+Yjk+IeR9twIQqk
+         2QHxcvirmfPxRiP5HuFfMrP+cY/L/6nN8zrFgWbTcQF6a8gD0BiwZY7+X3TqCbPJtYZ0
+         DVHw==
+X-Gm-Message-State: AOJu0YzJ4Z0CQA6s8lAV5yYB7qn7uMptiT2pMznWElyH+RgC30fsSvi1
+	WytBRj/7Sh5mMletVKfDjSrxq/4gCyeGFu5Ll01iPeOC8qTuJoCXdejO+I+y2rMGlR2nmw==
+X-Gm-Gg: AfdE7cmT5powi8SvmHhx5jE+VXRWOOxHsHtAXTg+X0AJ3vB3K+iiz7SmhJ1q7l4q0uQ
+	R15ZV8ZEi//mfaYtwSarv/wKLHbxE8cK9iUeHMlU9bkWlZGP+rHn1VfDReJbZF1I3Ms2fanc3Hl
+	a6iEAhj4g0HFpyq3t30cxq6/0mpaVnfZS49zKpkSSqfT/barfSVd6FpDpANetCJMjEv7muQKm3A
+	b90uUqc/+gZLbKMfgxoEJwTkqddYDjSGwPOHbrXdwKx6S4MBzZfhJGiXnJmVP+dMZSdsi3HpdEa
+	KFzK+MwWq7DnIXIkxf2JHblzt04GE6ug5aFS3hXC28aoY1p+In7hRXw4R45VhKkGOcGBXrlK8cW
+	Rsg6XiwaCs5kPMDD1B+Kh8N2ejaPTxTGm8q2MzSsJVkJpTNJbLnvNymmPko6o8aCWwog+taxJqB
+	T2kRXwgbkeTLtLeSAFOLytH+Yk0jIX2IJ04pB+XiNsmSDEllPpiat+50/rlcnlQAyJeHZqXVa7K
+	B59BDFLSl5bvRhdRyJTge0XeW82ungq82avknK23QZrkZ2A/sR1VxknqPbbiagMTwR1+Jv4UBhq
+	D9ze7/RzTYL8NTpyxBYW8siMdCxxNg==
+X-Received: by 2002:a05:7300:2312:b0:30c:efc:c399 with SMTP id 5a478bee46e88-30c8502724fmr13071905eec.35.1782634342041;
         Sun, 28 Jun 2026 01:12:22 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.22
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-30ea81b39easm6306040eec.31.2026.06.28.01.12.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2026 01:12:22 -0700 (PDT)
+        Sun, 28 Jun 2026 01:12:21 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 063/128] nspr: upgrade 4.38.2 -> 4.39
-Date: Sun, 28 Jun 2026 01:10:14 -0700
-Message-ID: <20260628081122.178348-63-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 062/128] poppler: upgrade 25.12.0 -> 26.06.0
+Date: Sun, 28 Jun 2026 01:10:13 -0700
+Message-ID: <20260628081122.178348-62-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
 References: <20260628081122.178348-1-khem.raj@oss.qualcomm.com>
@@ -70,28 +70,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2026 08:12:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127873
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127872
+
+poppler now sets CMAKE_CXX_STANDARD 23, which enables clang-scan-deps,
+absent in the native sysroot. poppler has no module units, so disable
+scanning with -DCMAKE_CXX_SCAN_FOR_MODULES=OFF.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/nspr/{nspr_4.38.2.bb => nspr_4.39.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/nspr/{nspr_4.38.2.bb => nspr_4.39.bb} (98%)
+ .../poppler/{poppler_25.12.0.bb => poppler_26.06.0.bb}         | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_25.12.0.bb => poppler_26.06.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/nspr/nspr_4.38.2.bb b/meta-oe/recipes-support/nspr/nspr_4.39.bb
-similarity index 98%
-rename from meta-oe/recipes-support/nspr/nspr_4.38.2.bb
-rename to meta-oe/recipes-support/nspr/nspr_4.39.bb
-index 0d37a42f61..f28d5aaaf7 100644
---- a/meta-oe/recipes-support/nspr/nspr_4.38.2.bb
-+++ b/meta-oe/recipes-support/nspr/nspr_4.39.bb
-@@ -23,7 +23,7 @@ CACHED_CONFIGUREVARS:append:libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE
- UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
- UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
+diff --git a/meta-oe/recipes-support/poppler/poppler_25.12.0.bb b/meta-oe/recipes-support/poppler/poppler_26.06.0.bb
+similarity index 95%
+rename from meta-oe/recipes-support/poppler/poppler_25.12.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_26.06.0.bb
+index 71bff6d70d..3b1edd9335 100644
+--- a/meta-oe/recipes-support/poppler/poppler_25.12.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_26.06.0.bb
+@@ -9,7 +9,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            file://0001-workaround-build-racing.patch \
+            "
+-SRC_URI[sha256sum] = "c18b40eb36b1a0c5b86e29ca054bf0770304583da4f2cdd42fe86eca6a20de48"
++SRC_URI[sha256sum] = "4cb4e5a3dc8cb5eec751c8a23c8ba19f61f96dedc0cd07d2aee6b0c8e2cf6ba4"
  
--SRC_URI[sha256sum] = "e4092faeab77bdc9b32db1113e4215948ee768e26c4666db3b5a60b35f2c9105"
-+SRC_URI[sha256sum] = "bbd02ee87a55676063a63e5bc819e0227de2666b47307b2a0134414cdf42368e"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
  
- CVE_PRODUCT = "netscape_portable_runtime"
+@@ -33,6 +33,7 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
  
+ EXTRA_OECMAKE += " \
++    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
+     -DENABLE_LCMS=ON \
+     -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+     -DBUILD_GTK_TESTS=OFF \
 
