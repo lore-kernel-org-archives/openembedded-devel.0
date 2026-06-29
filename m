@@ -1,144 +1,347 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 071C1C43458
-	for <webhook@archiver.kernel.org>; Mon, 29 Jun 2026 17:08:16 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.69])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37563.1782739809966677462
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69456C43458
+	for <webhook@archiver.kernel.org>; Mon, 29 Jun 2026 18:26:10 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3964.1782757564374001927
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2026 06:30:10 -0700
+ Mon, 29 Jun 2026 11:26:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=MpLXn5CF;
- spf=pass (domain: axis.com, ip: 40.107.159.69, mailfrom: adam.x.nilsson@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AnQRwmH7HVnukvFksGTvWWgkMzhxlJehqdUzwKVxSFJfD49zd8i626D9QPCKUbd2RYCykChYnhx7xpkueb015iZHYzsKcXWJqcnqsh2wmBosZffaqQkZQVPAMy8kgbDsjiprQRfhGA9UOop9X3riJuX9hW7UDS1e8lYhjTTlZJ0gQ8CcckFCrOTY8cFqhN1v8GUOmRtsHwZ93O+4EHBtEb2i95VaiHTjn+RWQEe9qoICyVYykx4J3nsoHCdNKZeOBEchg5sJhemZ8G37iKozB8oAFGeky+b7rENkJI1cVRBXchvnYXZ+BaBvACf66qEFSETh8XohmzfWfjxmXTNO1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H9TB1bBUn1LLxpKTKtFZQjqLOYtkpMPrG8/MIZlu+zQ=;
- b=Xs4J78EH+ixzhBafe+AiQuX1Sfv4Nyoql+fROIHyxlDA+FFU9rW0SazXfOqu62YfpejZCNllfmBa3wXNoXjp7hMPg7gcdlLFjdWzPv96yQP3TuXhvmGX/zXCkWO0SEleFIRvzqZ90TRvj5wXL1j0ImKARup6EtrqrqZtLNJJCvTjn+2dSjodLMPMoeg8JmjYAnvqzJrxEJn+vzkHZF44z5UsLYa1zWh0L9bFDerxshH6BwiZrnLAfItHrNXPWXd7YOFAeLiqHWDYrfinjGGqerM8ygvQXNTdN2X2ttQe0Ts/vxbGnvUhXptlQ7FEm5Qg0T4TkNhssUPZLWNQhU6Y0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H9TB1bBUn1LLxpKTKtFZQjqLOYtkpMPrG8/MIZlu+zQ=;
- b=MpLXn5CFZs8xYITYNqluXfGWlESjiNZl+YPd0YsVM1xdyLu8tibwtc0ffARC5tZdYYdUUol5VU3LHq3kfZ1FXJJOg5z1/RJPB0PzhjxwWN5pRId+F0y+P5/3U6todVppl8X4L74yc9KctJWYNXkxkcRX8ZcVD7sPrGSsaRq10Dc=
-Received: from DB9PR06CA0006.eurprd06.prod.outlook.com (2603:10a6:10:1db::11)
- by PA1PPF051856775.eurprd02.prod.outlook.com (2603:10a6:108:1::244) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.12; Mon, 29 Jun
- 2026 13:30:01 +0000
-Received: from DB5PEPF00014B96.eurprd02.prod.outlook.com
- (2603:10a6:10:1db:cafe::90) by DB9PR06CA0006.outlook.office365.com
- (2603:10a6:10:1db::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
- 29 Jun 2026 13:30:00 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- DB5PEPF00014B96.mail.protection.outlook.com (10.167.8.234) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 13:30:00 +0000
-Received: from se-mail11w.axis.com (10.20.40.11) by se-mail10w.axis.com
- (10.20.40.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.39; Mon, 29 Jun
- 2026 15:29:58 +0200
-Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail11w.axis.com
- (10.20.40.11) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
- Transport; Mon, 29 Jun 2026 15:29:58 +0200
-Received: from pc51388-2240.se.axis.com (pc51388-2240.se.axis.com [10.86.130.217])
-	by se-intmail02x.se.axis.com (Postfix) with ESMTP id C4DA7C66;
-	Mon, 29 Jun 2026 15:29:58 +0200 (CEST)
-Received: by pc51388-2240.se.axis.com (Postfix, from userid 11596)
-	id C3BD4608544F; Mon, 29 Jun 2026 15:29:58 +0200 (CEST)
-From: "Adam Nilsson" <Adam.X.Nilsson@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Adam x Nilsson <Adam.x.Nilsson@axis.com>, Adam Nilsson
-	<Adam.X.Nilsson@axis.com>
-Subject: [meta-oe][PATCH 2/2] lvgl-demo-fb: Update to 9.5.0
-Date: Mon, 29 Jun 2026 15:28:46 +0200
-Message-ID: <20260629132844.2894190-5-Adam.X.Nilsson@axis.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260629132844.2894190-3-Adam.X.Nilsson@axis.com>
-References: <20260629132844.2894190-3-Adam.X.Nilsson@axis.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=m2ZQMThv;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-66493875766so4175278d50.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2026 11:26:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782757563; cv=none;
+        d=google.com; s=arc-20260327;
+        b=QMwsUfX51pM55kdcEaC9TFgj1jXPOAq4BgkcnPVbbJDd4926rl0hr1j4n1hDjjV0Fr
+         +w3AUNqimZ3J+wm0Yxv829xTL8aW8pNtAHkxjIkteZylybNNv9Ipzi7o15EWXsIkjrQw
+         X76Z3HBT/a/1Z3FjrEIws2RPFSUhKa+gZNLg8jAonW85bfbUu592snXk/LuvFRifWTan
+         fDSLPVBV6MsndFYEkcKKXWJYOMBbPh+u+EPkTSj/Ct1xom9y9hEPPq7xU3QFnONsHeQ8
+         DrWzmErsGbcVmYvocdUx0csu6PFbBVKo9oAzRh9RUTUK7Ba6bXFVss1wo5m1tjRlxDqB
+         ITuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=67OuaCMZHZ7pM0A8xChpBF1jjMfUHe5NAuoJTOuddbM=;
+        fh=aiNCl88GKoi1hQ8lNeheo7baGDj7BYpxpzcRT9kb69Y=;
+        b=e3qFoVFcCZ1hTwMQUrrYeO3iwsFvtmDPoULHsQfkNF2qpoRs8A3/bNLki7/hR8pBtz
+         nEHGqPHbDRik/QpHR/YbQG+n1wU/6SRS/r9wOVHFtnWQ4Mr4/fXgLgDZP9iLtn/igihQ
+         FPgkTo5jwxFgYzTQj/ZXgzqsSEy2iAAjJKxbv8SVihD58m2XYx+XHG0pRh9Rl5GCCUig
+         h3hfSHPRV1b+iyBEw5ZZxXVNe4+3WcPTd+9aCFe2cGy2fbLfKs+QOfGq7J60hCtkN23+
+         79qYaMA5QwTQkQ2PXtEQoa2KxgozUA89PbPaD9iA38TKUVgffwhzMo0wwsBa85CVt0cn
+         lMIA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782757563; x=1783362363; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=67OuaCMZHZ7pM0A8xChpBF1jjMfUHe5NAuoJTOuddbM=;
+        b=m2ZQMThv6ZbJWNSURdEv5QdhN9+oZ+m3Xsa2K/AXIcInDRbK4tRQyodjJhA+sxQyfF
+         WqdJmusha5XU0yIn46EBsLm6LEF259BrrRYsURChnOu/1sN7/yeyZBsFiRwUf/iYBlyR
+         XTa5bk1NjVQTcbqnYpenqDVv7g3bv+ei9W2mJ6KT6/PirwlhUWd6qX7aF/vQp1dZZ1C+
+         q6b+roirmY3FAQagPzLnmxwdH5hrFIcNZJQfx4iJ5KD36Q6ooACEDtRJPKASf7MOf5Dl
+         9tP2ag3T7En4e6dPMaY8EzuriYLAMAkGHAVuRZm7xCwSqsVCY2x23Fw2CZuiS/WHeNoz
+         hvpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782757563; x=1783362363;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=67OuaCMZHZ7pM0A8xChpBF1jjMfUHe5NAuoJTOuddbM=;
+        b=lyKmleDQnFC6YKZtjBkogIAFwofSE2aBRFu+vTkr27eINyJdXru9LH5mryNBMNCXVU
+         x5XA5OcBYBS4BiogEkZD+Zn4VsMk8aYmihg46VHUHC0W0VLi1OcQZHKvR8eotiMtFpnK
+         tjqtltkYh06PJ2jwCa9jITewCn1eYEENC88K0HCQttPPTU2Opb8udxPEgvkUkJoTYUTq
+         dFpyzMZ2EHH4bAPpgN39gkyaUbfykLATVBZFXNd2s49sl3uyLk2HHX1HgzYrYv3w9qwl
+         +3wYekkwwIxADOq/eTa5fW3zdXerkFrUpURNyhn8weQePyROjKomgAnntZwk3foNHDx0
+         NEQg==
+X-Gm-Message-State: AOJu0YyPvRdnJDq1Zp0GQphyed/PHAVXt2BTaNKzOk8/VTR3Dp1JE/8o
+	Qzg5cbLXah9kq2iU5vHC7QJpJ3KgIawjUMEJx6zPtqkj0iDtM614lNrytelhbh5TH4c5pwyQAHd
+	KWE3UHw47zc5OpYHqmONJ/6owTGobZyq8WmGYrOc=
+X-Gm-Gg: AfdE7ckk95vPJIuy6K4vawgJj++FpqKEcPRyeGgX00GwfQm3o7zDmS6qJP5UEO9vxfE
+	AMNhTw/SvEGBdpBmriztrXwqzrl59DQGjMcKuCCNVOL//6cfQjI0lHry1kWOWujr5fRcUAdehHa
+	ROlX+qvj/21zf+EnVMaHosMayzyStQWKBYu6pM55MymtBetyCEaBZQu5TW2JJxa7lVyy6XvNgZH
+	syZA5mTxwe5dY2XBkmaVXGkEYBBP7kEXSQIO0DuaD+DIOc06sJBadGmzQt+fdCkISsoWFGrj+uk
+	N7shFkcrMl6RzT3DvakQ58otMYl5zNDpxzQ1jMy5Ur3NNIPTf/OXJjxFpgh3s7rzMY2uWWs1MaG
+	/ZhVfaY6s4picVTGPSZgiRr7GY+ezC80dlIX2FdA7LtvIptdFRT6jRWn2X/7pk2XdNGSgWu8=
+X-Received: by 2002:a05:690e:2624:b0:664:d072:5647 with SMTP id
+ 956f58d0204a3-664f99f0e94mr554626d50.51.1782757563256; Mon, 29 Jun 2026
+ 11:26:03 -0700 (PDT)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B96:EE_|PA1PPF051856775:EE_
-X-MS-Office365-Filtering-Correlation-Id: 703cf7a1-b4f2-42b1-2f97-08ded5e28518
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|23010399003|82310400026|1800799024|22082099003|18002099003|3023799007|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	DdpgUatfPpHTNxS3+1W8GMw7BdNmo1b8jRtfkee//i61z7JHkNmPOBbOufKwfC+gGbUYYEqPh6NQTwcVH8ndQbnlWMatV93SqppYLRj68mL3E88HTsG5dM2BjaAkFB2C3HSzOECOJADUHoAqOS2BaPfi76rJefwe4df28YPqxR3HvrYbtRZQXTjxEkoJsa1KfvL49MJQ5ZaxNeMwJWnXBYuzqOWtZzhuidin03/ixO91Hi5k1RZJEqjIHrI6wkpX/UCUqE+24IG7OpmDwVBvbDUGjEvZhvKGhlGJRC/bOcc4E4qIuIW9cQlRGBG4k9670rtPICF+boxiFHi3GUTvEFzIM8o5SQerD9StoHU4JB2WwHkw40mxPSv6fSmuAKs7oPWwfwKvnLp/I+5kgHYn5PusfwofX7sXg46lUj0T1B7DWotBIncLEFZtn+bDMgd3ae1wxXUD8vlgHDfqb+RqjhRMA6z9AainT3v1upg20MkznWCqcbCG+f7rEWys+u//+GljPMD9aJyzlcs4RzqdcnB4bEJXO2x66tOd2K6jrczB9Sj7nym5baBvujsIzjph3OUpKKYPcTTaoLHWAf3HFHuBs/J9azaP6ZpJsU3qLLJ5cuEqNkbwAXz7m+72RZNN6cTY7cSqnYnHEzvlyY+TT7MroOXhbKIgMlUvpkb+2H7k7H2L3hhoVcbaBAcPC4L/V7EttaZEyjvtj6Tb25Fdvw==
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(23010399003)(82310400026)(1800799024)(22082099003)(18002099003)(3023799007)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	0EvoSryts697P9vdNQ4389av3R2jv5MzC/PRfiPRoJDh+2iM2T+P3KcuWfa9i2OZiCvwnmBanbEy57DTHivOHB6iLWbhvj4twFMvvN5zA5nJtAUhMtPRIsBn8xjEeRMPG/KlU9zE87L7t/Z7GxASnfsX7o+8pKjgt4j2IlSNAClOVdPI/6kyX+5WvaAJfgc0Yl9fufJVgs6JWksgYGrBZtg7UT06E9ECB3vXkl2QV7Jt3hu8f3znBRTKG0eNNOswxvL6dND2qLqgNX/TXbubFkW6FvI02xdEP+IqisWY55vC/w3ExbE+UhVyTP8ugNHewY/iat9wFigwOH9rEOauZG9hN1ILQUg1sCJbtTzLbCxzc5FbIaruNx6WCtzHINtxnVFseS/AT+D9xFjzVgtaFWmIhjgsiHqbs+YBTPXKTFC3lbTgiNF6KHYl/mXWnUQk
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 13:30:00.4987
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 703cf7a1-b4f2-42b1-2f97-08ded5e28518
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB5PEPF00014B96.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PPF051856775
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+References: <20260625020437.2824-1-zhengrq.fnst@fujitsu.com>
+ <CAMKF1spuJhbL5dtkE=nhQABDCm7cU9gFfUk2eSGDwYUBTDbQSw@mail.gmail.com> <OSZPR01MB78681080C3B910F0A9FA1A578BE82@OSZPR01MB7868.jpnprd01.prod.outlook.com>
+In-Reply-To: <OSZPR01MB78681080C3B910F0A9FA1A578BE82@OSZPR01MB7868.jpnprd01.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 29 Jun 2026 11:25:37 -0700
+X-Gm-Features: AVVi8Ce2BjdUHqDPv_uo49SG57pVCRs10o5irSTtE38m1L2yjeGUhswUN_tcdow
+Message-ID: <CAMKF1sp+rWCfigX3Cb0fZxS3epn3p_YNfN=8nhi8T5GOiS=z7A@mail.gmail.com>
+Subject: Re: [oe] [PATCH v2 0/5] freeglut: Bug fix and virtual/freeglut provide.
+To: "Ruoqin Zheng (Fujitsu)" <zhengrq.fnst@fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000004752eb0655689718"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2026 17:08:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127941
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2026 18:26:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127942
 
-From: Adam x Nilsson <Adam.x.Nilsson@axis.com>
+--0000000000004752eb0655689718
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adam Nilsson <Adam.X.Nilsson@axis.com>
----
- .../lvgl/{lvgl-demo-fb_9.4.0.bb =3D> lvgl-demo-fb_9.5.0.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-graphics/lvgl/{lvgl-demo-fb_9.4.0.bb =3D> lvgl-demo=
--fb_9.5.0.bb} (76%)
+yeah I am carrying a patch in master-next to fix it.
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb b/meta-oe/=
-recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-similarity index 76%
-rename from meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb
-rename to meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-index 660031b68f..02ef8ed4a7 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-@@ -10,12 +10,12 @@ DEPENDS =3D "python3-pcpp-native"
- PV .=3D "+git"
+On Sun, Jun 28, 2026 at 7:16=E2=80=AFPM Ruoqin Zheng (Fujitsu) <
+zhengrq.fnst@fujitsu.com> wrote:
 
- SRC_URI =3D "\
--    git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=3Dhttps;=
-branch=3Drelease/v9.4;name=3Ddemo \
--    git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/v9.4;tag=
-=3Dv9.4.0;name=3Dlvgl;subdir=3D${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
-+    git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=3Dhttps;=
-branch=3Drelease/v9.5;name=3Ddemo \
-+    git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/v9.5;tag=
-=3Dv9.5.0;name=3Dlvgl;subdir=3D${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
- "
+> Hi Khem
+>
+> Do you meas the error about "Could NOT find OpenGL"
+> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
+inux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.3/Modules/FindP=
+ackageHandleStandardArgs.cmake:290
+> (message):
+> |   Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY)
+> | Call Stack (most recent call first):
+>
+> I think this build error has nothing to do with this patch.
+>
+> It was caused by lack of DISTRO_FEATURES.
+>
+> # depends on virtual/libgl and libxi
+> REQUIRED_DISTRO_FEATURES =3D "opengl x11"
+>
+> For example:
+> Add "glvnd x11" to DISTRO_FEATURES can solve this build error.
+>
+> Zheng
+> ------------------------------
+> *From:* Khem Raj <raj.khem@gmail.com>
+> *Sent:* Friday, June 26, 2026 23:14
+> *To:* Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 <zhengrq.fnst@fujitsu.co=
+m>
+> *Cc:* openembedded-devel@lists.openembedded.org <
+> openembedded-devel@lists.openembedded.org>
+> *Subject:* Re: [oe] [PATCH v2 0/5] freeglut: Bug fix and virtual/freeglut
+> provide.
+>
+> Seeing this on AB -
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1575/s=
+teps/15/logs/stdio
+>
+> On Wed, Jun 24, 2026 at 7:04=E2=80=AFPM zhengruoqin via lists.openembedde=
+d.org
+> <zhengrq.fnst=3Dfujitsu.com@lists.openembedded.org> wrote:
+>
+> Zheng Ruoqin (5):
+>   Bug fix:
+>   [oe][meta-oe][PATCH v2] freeglut-gles: Add symbol link to fix opencl-ct=
+s
+>     compile error
+>
+>   Add virtual/freeglut to provide split version of freeglut and fix recip=
+e
+> which depends on freeglut.
+>   [oe][meta-oe][PATCH v2] freeglut: Add virtual/freeglut to PROVIDES
+>   [oe][meta-oe][PATCH v2] jasper: Use virtual/freeglut instead of freeglu=
+t
+>   [oe][meta-oe][PATCH v2] ftgl: Use virtual/freeglut instead of freeglut
+>   [oe][meta-oe][PATCH v2] opencl-cts: Use virtual/freeglut instead of
+>     freeglut
+>
+>  meta-oe/recipes-core/opencl/opencl-cts_2026.05.05.bb | 2 +-
+>  meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb  | 5 ++++-
+>  meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb          | 2 +-
+>  meta-oe/recipes-graphics/jasper/jasper_4.2.9.bb      | 2 +-
+>  4 files changed, 7 insertions(+), 4 deletions(-)
+>
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#127726):
+> https://lists.openembedded.org/g/openembedded-devel/message/127726
+> Mute This Topic: https://lists.openembedded.org/mt/119968332/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
--SRCREV_demo =3D "71050624acd8a52ab7d365d0d12acf9bf5fe41db"
--SRCREV_lvgl =3D "c016f72d4c125098287be5e83c0f1abed4706ee5"
-+SRCREV_demo =3D "045137cf0fa1781483cb796261a11b5eb21e99d9"
-+SRCREV_lvgl =3D "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
- SRCREV_FORMAT =3D "demo_lvgl"
+--0000000000004752eb0655689718
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
- inherit cmake pkgconfig
+<div dir=3D"ltr">yeah I am carrying a patch in master-next to fix it.</div>=
+<br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sun, Jun 28, 2026 at 7:16=E2=80=AFPM Ruoqin Zheng (Fujit=
+su) &lt;<a href=3D"mailto:zhengrq.fnst@fujitsu.com">zhengrq.fnst@fujitsu.co=
+m</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+><div class=3D"msg-4937387900613757212">
+
+
+
+
+<div dir=3D"ltr">
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Hi Khem</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Do you meas the error about &quot;Could NOT find OpenGL&quot;</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-lin=
+ux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.3/Modules/FindPac=
+kageHandleStandardArgs.cmake:290 (message):</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+| =C2=A0 Could NOT find OpenGL=C2=A0(missing: OPENGL_opengl_LIBRARY)</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+| Call Stack (most recent call first):</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+I think this build error has nothing to do with this patch.</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+It was caused by lack of DISTRO_FEATURES.</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+# depends on virtual/libgl and libxi<br>
+REQUIRED_DISTRO_FEATURES=C2=A0=3D &quot;opengl x11&quot;</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+For example:</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Add &quot;glvnd x11&quot; to DISTRO_FEATURES can solve this build error.</d=
+iv>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Zheng</div>
+<div id=3D"m_-4937387900613757212appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%">
+<div id=3D"m_-4937387900613757212divRplyFwdMsg" dir=3D"ltr"><font face=3D"C=
+alibri, sans-serif" style=3D"font-size:11pt" color=3D"#000000"><b>From:</b>=
+ Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.k=
+hem@gmail.com</a>&gt;<br>
+<b>Sent:</b> Friday, June 26, 2026 23:14<br>
+<b>To:</b> Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 &lt;<a href=3D"mailto=
+:zhengrq.fnst@fujitsu.com" target=3D"_blank">zhengrq.fnst@fujitsu.com</a>&g=
+t;<br>
+<b>Cc:</b> <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
+get=3D"_blank">openembedded-devel@lists.openembedded.org</a> &lt;<a href=3D=
+"mailto:openembedded-devel@lists.openembedded.org" target=3D"_blank">openem=
+bedded-devel@lists.openembedded.org</a>&gt;<br>
+<b>Subject:</b> Re: [oe] [PATCH v2 0/5] freeglut: Bug fix and virtual/freeg=
+lut provide.</font>
+<div>=C2=A0</div>
+</div>
+<div>
+<div dir=3D"ltr">Seeing this on AB -=C2=A0<a href=3D"https://autobuilder.yo=
+ctoproject.org/valkyrie/#/builders/81/builds/1575/steps/15/logs/stdio" targ=
+et=3D"_blank">https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/b=
+uilds/1575/steps/15/logs/stdio</a></div>
+<br>
+<div>
+<div dir=3D"ltr">On Wed, Jun 24, 2026 at 7:04=E2=80=AFPM zhengruoqin via
+<a href=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembed=
+ded.org</a> &lt;zhengrq.fnst=3D<a href=3D"mailto:fujitsu.com@lists.openembe=
+dded.org" target=3D"_blank">fujitsu.com@lists.openembedded.org</a>&gt; wrot=
+e:<br>
+</div>
+<blockquote style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
+Zheng Ruoqin (5):<br>
+=C2=A0 Bug fix:<br>
+=C2=A0 [oe][meta-oe][PATCH v2] freeglut-gles: Add symbol link to fix opencl=
+-cts<br>
+=C2=A0 =C2=A0 compile error<br>
+<br>
+=C2=A0 Add virtual/freeglut to provide split version of freeglut and fix re=
+cipe which depends on freeglut.<br>
+=C2=A0 [oe][meta-oe][PATCH v2] freeglut: Add virtual/freeglut to PROVIDES<b=
+r>
+=C2=A0 [oe][meta-oe][PATCH v2] jasper: Use virtual/freeglut instead of free=
+glut<br>
+=C2=A0 [oe][meta-oe][PATCH v2] ftgl: Use virtual/freeglut instead of freegl=
+ut<br>
+=C2=A0 [oe][meta-oe][PATCH v2] opencl-cts: Use virtual/freeglut instead of<=
+br>
+=C2=A0 =C2=A0 freeglut<br>
+<br>
+=C2=A0meta-oe/recipes-core/opencl/<a href=3D"http://opencl-cts_2026.05.05.b=
+b" rel=3D"noreferrer" target=3D"_blank">opencl-cts_2026.05.05.bb</a> | 2 +-=
+<br>
+=C2=A0meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeglut_3.8.0.bb=
+" rel=3D"noreferrer" target=3D"_blank">freeglut_3.8.0.bb</a>=C2=A0 | 5 ++++=
+-<br>
+=C2=A0meta-oe/recipes-graphics/ftgl/<a href=3D"http://ftgl_2.4.0.bb" rel=3D=
+"noreferrer" target=3D"_blank">ftgl_2.4.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 | 2 +-<br>
+=C2=A0meta-oe/recipes-graphics/jasper/<a href=3D"http://jasper_4.2.9.bb" re=
+l=3D"noreferrer" target=3D"_blank">jasper_4.2.9.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+| 2 +-<br>
+=C2=A04 files changed, 7 insertions(+), 4 deletions(-)<br>
+<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#127726): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/127726" rel=3D"noreferrer" target=3D"_blank">
+https://lists.openembedded.org/g/openembedded-devel/message/127726</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119968332/199=
+7914" rel=3D"noreferrer" target=3D"_blank">
+https://lists.openembedded.org/mt/119968332/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">
+openembedded-devel+owner@lists.openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">
+https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"m=
+ailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote>
+</div>
+</div>
+</div>
+
+</div></blockquote></div>
+
+--0000000000004752eb0655689718--
 
