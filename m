@@ -1,107 +1,162 @@
-Return-Path: <tafil@tafhub.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C47AC43458
-	for <webhook@archiver.kernel.org>; Tue, 30 Jun 2026 10:33:02 +0000 (UTC)
-Received: from mail.tafhub.de (mail.tafhub.de [5.189.191.204])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18284.1782815578616867143
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C8FDC43458
+	for <webhook@archiver.kernel.org>; Tue, 30 Jun 2026 19:41:27 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28264.1782844142208060361
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2026 03:32:59 -0700
+ Tue, 30 Jun 2026 11:29:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tafhub.de header.s=dkim header.b=kc4zEYad;
- spf=pass (domain: tafhub.de, ip: 5.189.191.204, mailfrom: tafil@tafhub.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPA id CED621880F26;
-	Tue, 30 Jun 2026 12:32:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
-	t=1782815575; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=VvsTYjL/Mg3JlhMjiC5g/tygyEnFglQF2meIoVnjnVk=;
-	b=kc4zEYadw0Z0kKL7Cw5Rt5Kn3Gsye7t5uIcVlOdnIJTbtDXUntNIh9Tt2V9R88V7Zy3ZO2
-	VB15MKmwbZZen2SJbwaaFRfC5BS4tvBi92hhnsWWj3ai8wTjeztPZdx/nr2WGGX44jdAGx
-	sxje/xauMdfZptZG78X+4YY/DWsJj1UoTzJgiitis3he1/tLvjD2vhk90/1UNhcF/aFNMv
-	u060U8zG3vBcgNSAGyO7yzjSqp2VYViblwQquq2Dd06gQdvpy5Vmku2F9J/oWTedvWudfk
-	JJKxJUzvCghEA9dEzuwCFvbMHqGQ8HmZlbVWhW8Ob6mSVF9gzmvOaed4f6BY3w==
-From: "Tafil Avdyli" <tafil@tafhub.de>
-In-Reply-To: <20260630092206.322-3-wangmy@fujitsu.com>
-Content-Type: text/plain; charset="utf-8"
-References: <20260630092206.322-1-wangmy@fujitsu.com> <20260630092206.322-3-wangmy@fujitsu.com>
-Date: Tue, 30 Jun 2026 12:32:53 +0200
-Cc: openembedded-devel@lists.openembedded.org
-To: wangmy@fujitsu.com
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=hPhEP45Z;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=16419c01d2=venkatasainath.ravikanti@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65UIC9rS1589095;
+	Tue, 30 Jun 2026 11:29:01 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=YaSXGEYRp4kpDLFJht5lI0JfP5bbOmjV0fcbAt8bWeA=; b=
+	hPhEP45ZOl5w3Ki6kO5/pDLoHkksJa5K7nTvcF8o+1/wBINkD3zRJCS8Hr2itM5q
+	U/sScgNawg1yHLymMP7DdQawNGMVlZ77UuH7lbOXwJzERRz2B7FxlvbUBqIB6fad
+	wUfk2HCYToCqFfsN0U1320lXHzj5B6Mjjo0WTWP9NB+7zglJq1F08tsSlxbZZjjO
+	WVNtB/xD+c7CrkOclx3C8YVGuEw1D3ifyiOlwLjjdJjkD8ZCSBZQPEi4rVopLgND
+	fCpmHyX3JrEmnrLWPaaneIadOaXZkzTraFtBJjpPFmlApc1cFI9ABN/jMP8yCXTL
+	+zWnATlCpL+xn6Yy1j73Rw==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4f29sym98v-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Tue, 30 Jun 2026 11:29:01 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Tue, 30 Jun 2026 11:29:00 -0700
+Received: from oak-lpgbuild10.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 30 Jun 2026 11:29:00 -0700
+From: "Ravikanti, Venkatasainath" <Venkatasainath.Ravikanti@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Subject: [meta-oe][scarthgap][PATCH] syslog-ng: update config version to match installed binary
+Date: Tue, 30 Jun 2026 18:29:00 +0000
+Message-ID: <20260630182900.1677729-2-venkatasainath.ravikanti@windriver.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260630182900.1677729-1-venkatasainath.ravikanti@windriver.com>
+References: <20260630182900.1677729-1-venkatasainath.ravikanti@windriver.com>
 MIME-Version: 1.0
-Message-ID: <9b39742f-4fb5-7b0b-6a1c-578fd49b44d8@tafhub.de>
-Subject: =?utf-8?q?Re=3A?= [oe] [meta-oe] [PATCH 03/37] =?utf-8?q?fastfetch=3A?= 
- upgrade =?utf-8?q?2=2E64=2E2?= -> =?utf-8?q?2=2E65=2E2?=
-User-Agent: SOGoMail 5.12.8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: None
+X-Proofpoint-GUID: 7BiHmz6BQQt2ayRqxTj6J5LhKxpuuhek
+X-Authority-Analysis: v=2.4 cv=HsJG3UTS c=1 sm=1 tr=0 ts=6a440aed cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=HK-ge7EqtdluswH-FwHe:22 a=t7CeM3EgAAAA:8 a=xNf9USuDAAAA:8
+ a=dfCgHIyVNrt7UoQkNYAA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 7BiHmz6BQQt2ayRqxTj6J5LhKxpuuhek
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDE3NyBTYWx0ZWRfX4ElTPF6o8E1S
+ UDm5j/HXVU/DPRCuyOz4AQu71B1VRc6Qlg9FdhO1WxmzNbTNc5Eq4NiLwMsJZpRaGcrc2IV/ccK
+ oxusS4pQK/x31znVewcpRAO0lCOBDunqSwlph5tknGK9FB0DLC8g
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDE3NyBTYWx0ZWRfX6KtvINHA53+k
+ iHXD72H8v3TupHdkfXnD88RRtI2U5ihDsh56hlOkIwq2T6kUuVAZHuaqrnqUarJajD1BtsWYccP
+ 4n50xe1U6ByqnjGQcF7YkltTJJoq79hLzGDnEccLGjBVMitxENKbzAl/OMgI0bJmfic+qfh8YEW
+ qTOTOTf4YWqFSUVJ77SBtm1QTvcyviJoGVnn1WfDy3iagPRRylgct13w02nF2vYvgrK2yER9ZKl
+ NkboyZ2D/vAHU7Rz4wKpWA4z9odq9+dzaBE7Fpr/O04e3Iqasf7Y58ngjpa3dcEHfvHC+SIZsAJ
+ t4fn8aYgZA3BJmjaAYj78qtmKkzi1J+imlaJv0SM/YIf0gz6u0XlLdi1oQRZZD+gekBLKXggSoC
+ RY65XwuqOfrQnc5qQw/Axh/ufhuYItczmiyL2PVA/KSdw9gfnzbRE7pfUdJ8WJDTRHO1iWi4YCz
+ uIe2fnbbLZq0mSmIRlA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-30_04,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 clxscore=1015 impostorscore=0 adultscore=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606300177
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 10:33:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127980
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 19:41:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127982
 
-Hi,
+From: Venkatasainath Ravikanti <venkatasainath.ravikanti@windriver.com>
 
-this update needs changes to packageconfig.
+syslog-ng 4.6.0 ships with Config version 4.2, but the configuration
+files still declare @version: 3.36. This causes two warnings at startup:
 
-drm-amdgpu got dropped and replaced by raw ioctl calls [1].
+  WARNING: Configuration file format is too old, syslog-ng is running
+  in compatibility mode
+  WARNING: Your configuration file uses an obsoleted keyword
 
-libva usage got split into two [2]:
--PACKAGECONFIG[vaapi] =3D "-DENABLE=5FVA=3DON,-DENABLE=5FVA=3DOFF,libva=
-"
-+PACKAGECONFIG[va-drm] =3D "-DENABLE=5FVADRM=3DON,-DENABLE=5FVADRM=3DOF=
-F,libva"
-+PACKAGECONFIG[va-x11] =3D "-DENABLE=5FVAX11=3DON,-DENABLE=5FVAX11=3DOF=
-F,libva"
+Update the @version to 4.2 to match the binary's config version.
+Also replace the deprecated stats_freq() option with the modern
+stats(freq()) syntax, and add @include "scl.conf" for the systemd
+config to align with current upstream recommendations.
 
-Unsure if it is better to merge into one packageconfig feature:
-PACKAGECONFIG[libva] =3D "-DENABLE=5FVADRM=3DON -DENABLE=5FVAX11=3DON,-=
-DENABLE=5FVADRM=3DOFF -DENABLE=5FVAX11=3DOFF,libva"
+These changes mirror what was done in fee12741695f ("syslog-ng: upgrade
+4.7.0 -> 4.8.1") for the master branch, adapted for the 4.6.0 version
+on scarthgap.
 
-Best regards
-Tafil
+Signed-off-by: Venkatasainath Ravikanti <venkatasainath.ravikanti@windriver.com>
+Assisted-by: Kiro:claude-sonnet-4
+---
+ .../syslog-ng/files/syslog-ng.conf.systemd            | 11 +++++------
+ .../syslog-ng/files/syslog-ng.conf.sysvinit           |  9 ++++-----
+ 2 files changed, 9 insertions(+), 11 deletions(-)
 
-[1]: https://github.com/fastfetch-cli/fastfetch/commit/55eb3c59d4d314d5=
-61b9bdc7226bf1ec1a5f9d5e
-[2]: https://github.com/fastfetch-cli/fastfetch/commit/eff0108bb542b40a=
-72644d2c76e9c1898f05be3e
-
-On Tuesday, June 30, 2026 11:21 CEST, "wangmy via lists.openembedded.or=
-g" <wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
-
-> From: Wang Mingyu <wangmy@fujitsu.com>
->=20
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../fastfetch/{fastfetch=5F2.64.2.bb =3D> fastfetch=5F2.65.2.bb}    =
-  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-support/fastfetch/{fastfetch=5F2.64.2.bb =3D>=
- fastfetch=5F2.65.2.bb} (98%)
->=20
-> diff --git a/meta-oe/recipes-support/fastfetch/fastfetch=5F2.64.2.bb =
-b/meta-oe/recipes-support/fastfetch/fastfetch=5F2.65.2.bb
-> similarity index 98%
-> rename from meta-oe/recipes-support/fastfetch/fastfetch=5F2.64.2.bb
-> rename to meta-oe/recipes-support/fastfetch/fastfetch=5F2.65.2.bb
-> index 8a953508eb..cf1410a96d 100644
-> --- a/meta-oe/recipes-support/fastfetch/fastfetch=5F2.64.2.bb
-> +++ b/meta-oe/recipes-support/fastfetch/fastfetch=5F2.65.2.bb
-> @@ -11,7 +11,7 @@ LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D2090=
-e7d93df7ad5a3d41f6fb4226ac76"
->  DEPENDS =3D "yyjson"
-> =20
->  SRC=5FURI =3D "git://github.com/fastfetch-cli/fastfetch.git;protocol=
-=3Dhttps;branch=3Dmaster;tag=3D${PV}"
-> -SRCREV =3D "636471c3669201b37fca587e2882eaf3c7062aeb"
-> +SRCREV =3D "0e90f3a7d4ac5a7857a968a6f52ea1205be5f404"
-> =20
->  inherit cmake pkgconfig
-> =20
-> --=20
-> 2.43.0
->
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+index 851bf252b..bb8784d31 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+@@ -1,5 +1,5 @@
+-@version: 3.36
+-#
++@version: 4.2
++@include "scl.conf"
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+ # Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
+@@ -8,11 +8,10 @@
+ #     Only change is to add dns_cache(no) to options to suppress initialization warning.
+ #
+ #     Joe Slater <joe.slater@windriver.com>
+-
+ # First, set some global options.
+-options { chain_hostnames(off); flush_lines(0); use_dns(no); dns_cache(no); use_fqdn(no);
+-	  owner("root"); group("adm"); perm(0640); stats_freq(0);
+-	  bad_hostname("^gconfd$");
++options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
++	  dns_cache(no); owner("root"); group("adm"); perm(0640);
++	  stats(freq(0)); bad_hostname("^gconfd$");
+ };
+ 
+ ########################
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+index 70afd0da8..a25acf889 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+@@ -1,4 +1,4 @@
+-@version: 3.36
++@version: 4.2
+ #
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+@@ -8,11 +8,10 @@
+ #     Only change is to add dns_cache(no) to options to suppress initialization warning.
+ #
+ #     Joe Slater <joe.slater@windriver.com>
+-
+ # First, set some global options.
+-options { chain_hostnames(off); flush_lines(0); use_dns(no); dns_cache(no); use_fqdn(no);
+-	  owner("root"); group("adm"); perm(0640); stats_freq(0);
+-	  bad_hostname("^gconfd$");
++options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
++	  dns_cache(no); owner("root"); group("adm"); perm(0640);
++	  stats(freq(0)); bad_hostname("^gconfd$");
+ };
+ 
+ ########################
+-- 
+2.54.0
 
 
