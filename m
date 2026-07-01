@@ -2,42 +2,43 @@ Return-Path: <benjamin.robin@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E6FFC43458
-	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 12:09:01 +0000 (UTC)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.43449.1782907738850246815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97955C43458
+	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 12:50:31 +0000 (UTC)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.44362.1782910226630659911
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jul 2026 05:08:59 -0700
+ Wed, 01 Jul 2026 05:50:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=dkim header.b=iwWoUtvH;
- spf=pass (domain: bootlin.com, ip: 185.246.85.4, mailfrom: benjamin.robin@bootlin.com)
+ dkim=pass header.i=@bootlin.com header.s=dkim header.b=p+RmK2Le;
+ spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: benjamin.robin@bootlin.com)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id D2E9F4E40BE9
-	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Jul 2026 12:08:56 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id B64D01A0DB2
+	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Jul 2026 12:50:24 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id A0CDB60288;
-	Wed,  1 Jul 2026 12:08:56 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id BE81A104C9600;
-	Wed,  1 Jul 2026 14:08:54 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 8A77460288;
+	Wed,  1 Jul 2026 12:50:24 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EF62B104C9619;
+	Wed,  1 Jul 2026 14:50:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1782907736; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=ioJBxzTxLDeMsF7Swre0fYEfMHz3TIZgtKOEzCl6QUQ=;
-	b=iwWoUtvH1Lroz4WbbQBEOTTgEE3pK1lHcxx4TAfzW3QS28fpLEefneCNwb3/1su2DV7YcN
-	G80dupv7jhkglVvNB4je5lI3rZmuXF75UqMVbpdzqGV84gDkuWd7moDyRz3hE/H22q1NOW
-	31jl1MIgw+YMc945Ddohhb0cWmhIuuDCZs/g45f9dTEdfvrMMNiz3u11JRbJsu0mHHhp3E
-	aOlJtmUmWilg7sAEYKa6U1YpOQNZh/9QLzLLrlXVVc46JwljdjhDvnqsn/aMHnyXDgiY/m
-	IsBWWZQH7FMpXAyDlz8/aJbgDK+3Kf1daGVOd4odOQw4vafap63z6yptgOVa7w==
+	t=1782910223; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=sAc1yew7BFhg83zE0YuIZL7ZtRRGyzWdVTEEQ9m1XRg=;
+	b=p+RmK2LeUgFVauusSK9FR+09yR8lilDlK5Nbm6QAYuzOMQK4BCPOhZeesCUD48xGNGQ8kn
+	tk3mJI0S+H76iz2GKcw4bFRNU5Y8NYxmjIYD6ckWq8IGNro5skquEDIse7QXvVbSr75Ptx
+	jcsp2TTd642QD3WlXbzHBu7/njQ+4uGxmi6RU04Rz4UFcNggRsbY29Pj7P2rrzZ0nxR3g9
+	nJ8fazM8+fGiwhkItXmiAn4/wCap0U7xOvY5e24kn4IOGTZZDcVvqwy9dVKuZguVd4fWJF
+	11+kIyld+2d+aQptmwHP9ZyMHmykUIhVfQ2dZ2BzOWAxDGjL6QdL5Dh1KER0ng==
 From: "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
-Date: Wed, 01 Jul 2026 14:08:45 +0200
-Subject: [scarthgap][meta-networking][PATCH] dnsmasq: fix CVE-2026-2291
+Date: Wed, 01 Jul 2026 14:50:14 +0200
+Subject: [PATCH] dnsmasq: fix CVE-2026-4890
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260701-dnsmasq-cve-2026-2291-v1-1-7fae2dd40e84@bootlin.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw6DIBCF4Vcxs+4kgElvr0JYIIxIG9EyaJsY3
- 73YLr+TnH8DphyJ4d5skGmNHKdUIU8NuMGmQBh9NSihzuIiJPrEo+UXupXwGFGpm8TeKd+1rfd
- 09VC/c6Y+fn5dbf7mpXuQK0dMs7O5DMHORo9ULCYq7yk/YwoG9v0L7/eMpJUAAAA=
-X-Change-ID: 20260701-dnsmasq-cve-2026-2291-fc2db33dde8d
+Message-Id: <20260701-dnsmasq-cve-2026-4890-v1-1-9daafc81fde3@bootlin.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNzQ6CMBAGX4X0bJP+ILS8iuHQ7m61JqBQICaEd
+ 7eIiSePs/l2ZmWJxkiJNcXKRlpiio8+gzwVDG6uvxKPmJkpoSpRC8mxT51LA4eF+H7kpbGCh7P
+ Xrq6QtEOWf58jhfj6eC/twWn2d4Jpl30XIw1zDk7H7Ndriv81pazkARR6rRHJYLPIXeddIg6Pr
+ otTU3gBCqrSOOmCsVQ7g1iCIjClDNqDIBQA3rJ2294yYgPvAgEAAA==
+X-Change-ID: 20260701-dnsmasq-cve-2026-4890-f5b3a76de3ad
 To: openembedded-devel@lists.openembedded.org
 Cc: olivier.benjamin@bootlin.com, mathieu.dubois-briand@bootlin.com, 
  pascal.eberhard@se.com, wahid.essid@se.com, 
@@ -47,84 +48,121 @@ X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 12:09:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127993
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 12:50:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127994
 
-dnsmasqs extract_name() function can be abused to cause a heap buffer
-overflow, allowing an attacker to inject false DNS cache entries, which
-could result in DNS lookups to redirect to an attacker-controlled IP
-address, or to cause a DoS.
+A Denial of Service (DoS) vulnerability in the DNSSEC validation of
+dnsmasq allows remote attackers to cause a denial of service via a
+crafted DNS packet.
 
 This patch is used by debian bookworm (2.90-4_deb12u2).
 
 Signed-off-by: Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
 ---
+This patch needs to be applied on top of the previous CVE-2026-2291 patch
+---
  .../recipes-support/dnsmasq/dnsmasq_2.90.bb        |  1 +
- .../dnsmasq/files/CVE-2026-2291.patch              | 40 ++++++++++++++++++++++
- 2 files changed, 41 insertions(+)
+ .../dnsmasq/files/CVE-2026-4890.patch              | 74 ++++++++++++++++++++++
+ 2 files changed, 75 insertions(+)
 
 diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-index 7830c9c81f68..3a7af56c34d7 100644
+index 3a7af56c34d7..ad79a3bfa828 100644
 --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
 +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-@@ -20,6 +20,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
-            file://CVE-2026-4892.patch \
+@@ -21,6 +21,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
             file://CVE-2026-4893.patch \
             file://CVE-2026-5172.patch \
-+           file://CVE-2026-2291.patch \
+            file://CVE-2026-2291.patch \
++           file://CVE-2026-4890.patch \
  "
  SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
  
-diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2026-2291.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-2291.patch
+diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4890.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4890.patch
 new file mode 100644
-index 000000000000..78545159d0c7
+index 000000000000..1c60ae0b798f
 --- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-2291.patch
-@@ -0,0 +1,40 @@
-+From c3059821cd52b423592aeffef7935fdf81035a81 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4890.patch
+@@ -0,0 +1,74 @@
++From 12e5ee3495842ededf8057758ef8da59745bbf33 Mon Sep 17 00:00:00 2001
 +From: Simon Kelley <simon@thekelleys.org.uk>
-+Date: Fri, 10 Apr 2026 16:29:31 +0100
-+Subject: [PATCH] Fix buffer overflow in struct bigname. CVE-2026-2291
++Date: Fri, 10 Apr 2026 22:16:45 +0100
++Subject: [PATCH] Fix NSEC bitmap parsing infinite loop. CVE-2026-4890
 +
-+All buffers capable of holding a domain name should be
-+at least MAXDNAME*2 + 1 bytes long, where MAXDNAME is the maximum
-+size of a domain name. The accounts for the trailing zero and the
-+fact that some characters are escaped in the internal representation
-+of a domain name in dnsmasq.
++Report from Royce M <royce@xchglabs.com>.
 +
-+The declaration of struct bigname get this wrong, with the effect
-+that a remote attacker capable of asking DNS queries or answering DNS
-+queries can cause a large OOB write in the heap.
++Location: dnssec.c:1290-1306, dnssec.c:1450-1463
 +
-+This was first spotted by Andrew S. Fasano.
++The bitmap window iteration advances by p[1] instead of p[1]+2 (missing the 2-byte window header). With bitmap_length=0, both rdlen and p are
++unchanged, causing an infinite loop and dnsmasq stops responding to all queries.
 +
-+CVE: CVE-2026-2291
-+Upstream-Status: Backport [https://sources.debian.org/src/dnsmasq/2.90-4~deb12u2/debian/patches/CVE-2026-2291.patch]
++The same code accesses p[2] after only checking rdlen >= 2 without verifying p[1] >= 1, causing OOB reads at 6 locations.
++
++Both bugs are reachable before RRSIG validation (confirmed by the source comment at line 2125), so no valid DNSSEC signatures are needed.
++
++CVE: CVE-2026-4890
++Upstream-Status: Backport [https://sources.debian.org/src/dnsmasq/2.90-4~deb12u2/debian/patches/CVE-2026-4890.patch]
 +
 +Signed-off-by: Benjamin Robin <benjamin.robin@bootlin.com>
 +---
-+ src/dnsmasq.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/dnssec.c | 14 +++++++-------
++ 1 file changed, 7 insertions(+), 7 deletions(-)
 +
-+diff --git a/src/dnsmasq.h b/src/dnsmasq.h
-+index e455c3f7..be8cf2ad 100644
-+--- a/src/dnsmasq.h
-++++ b/src/dnsmasq.h
-+@@ -467,7 +467,7 @@ struct interface_name {
-+ };
++diff --git a/src/dnssec.c b/src/dnssec.c
++index ed2f53ff..68f1b5d0 100644
++--- a/src/dnssec.c
+++++ b/src/dnssec.c
++@@ -1270,10 +1270,10 @@ static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsi
++	     packet checked to be as long as rdlen implies in prove_non_existence() */
 +
-+ union bigname {
-+-  char name[MAXDNAME];
-++  char name[(2*MAXDNAME) + 1];
-+   union bigname *next; /* freelist */
-+ };
++	  /* If we can prove that there's no NS record, return that information. */
++-	  if (nons && rdlen >= 2 && p[0] == 0 && (p[2] & (0x80 >> T_NS)) != 0)
+++	  if (nons && rdlen >= 2 && p[0] == 0 && p[1] >= 1  && (p[2] & (0x80 >> T_NS)) != 0)
++	    *nons = 0;
 +
++-	  if (rdlen >= 2 && p[0] == 0)
+++	  if (rdlen >= 2 && p[0] == 0 && p[1] >= 1)
++	    {
++	      /* A CNAME answer would also be valid, so if there's a CNAME is should
++		 have been returned. */
++@@ -1301,8 +1301,8 @@ static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsi
++		  break; /* finished checking */
++		}
++
++-	      rdlen -= p[1];
++-	      p +=  p[1];
+++	      rdlen -= p[1] + 2;
+++	      p +=  p[1] + 2;
++	    }
++
++	  return 0;
++@@ -1429,7 +1429,7 @@ static int check_nsec3_coverage(struct dns_header *header, size_t plen, int dige
++		p += hash_len; /* skip next-domain hash */
++		rdlen -= p - psave;
++
++-		if (rdlen >= 2 && p[0] == 0)
+++		if (rdlen >= 2 && p[0] == 0 && p[1] >= 1)
++		  {
++		    /* If we can prove that there's no NS record, return that information. */
++		    if (nons && (p[2] & (0x80 >> T_NS)) != 0)
++@@ -1458,8 +1458,8 @@ static int check_nsec3_coverage(struct dns_header *header, size_t plen, int dige
++			break; /* finished checking */
++		      }
++
++-		    rdlen -= p[1];
++-		    p +=  p[1];
+++		    rdlen -= p[1] + 2;
+++		    p +=  p[1] + 2;
++		  }
++
++		return 1;
 +--
 +2.43.0
 
 ---
 base-commit: b0c2c648a1af89e7a8dd4c2ec841f3bc0ed0ccb9
-change-id: 20260701-dnsmasq-cve-2026-2291-fc2db33dde8d
+change-id: 20260701-dnsmasq-cve-2026-4890-f5b3a76de3ad
+prerequisite-change-id: 20260701-dnsmasq-cve-2026-2291-fc2db33dde8d:v1
+prerequisite-patch-id: e7e3fdcabd23649336d34bd2f492f09007d73472
 
 Best regards,
 --  
