@@ -1,438 +1,193 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <a-christidis@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BD98C43458
-	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 20:24:02 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.54319.1782937435348514723
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 295F8C43458
+	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 21:17:57 +0000 (UTC)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.55953.1782940667879061503
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jul 2026 13:23:56 -0700
+ Wed, 01 Jul 2026 14:17:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=FYKJxWe3;
- spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd93.aul.t-online.de (fwd93.aul.t-online.de [10.223.144.119])
-	by mailout03.t-online.de (Postfix) with SMTP id F0F98E2F3
-	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Jul 2026 22:23:52 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.163.76]) by fwd93.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wf1TL-28ODsv0; Wed, 1 Jul 2026 22:23:51 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] evolution-data-server: update 3.56.2 -> 3.60.2
-Date: Wed,  1 Jul 2026 22:23:44 +0200
-Message-ID: <20260701202344.2893602-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.54.0
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=oWc38ML7;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=cSPgp9XD;
+ spf=pass (domain: ti.com, ip: 148.163.150.75, mailfrom: a-christidis@ti.com)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 661GppSo3884293;
+	Wed, 1 Jul 2026 16:17:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=proofpoint-05-2026; bh=0VtVzTj75dA20
+	wkgPg1FA5iMXCKJ/vesBPKzbszw1qU=; b=oWc38ML7FdlvVylpCS5UHJT5bIT7s
+	GBfO/V/EUhH9oZ3I0pioE4nnxh3JMurZBHj6tujU1nba9G8CP/LwPmxOT07B/CE3
+	Z6ZJk1EuhexujopBcblkIblhNejTCW1IiDG14JRHLOdzUAEitBrm6re5HTE6xXQO
+	a52vdbSG5eG37pV7as1udMifyoRkyi0yjN+2Snd+DyLhPomheewvZnK9L6gyiS1i
+	dzHGjvlTXdB5xlSmNT97PYLIT/lSWYihNCEpqBmr+DRJWTNxBEAQrjJ/hLdKmwgA
+	9M9LC/I/qw73V4U4jTwmgRgfkX+8qsPwixYKuJ6UsIf8YRLbsqmG3Bl9w==
+Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11011026.outbound.protection.outlook.com [52.101.52.26])
+	by m0384305.ppops.net (PPS) with ESMTPS id 4f5240upfq-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 01 Jul 2026 16:17:47 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Xg+YFUWDh+RIrADCU/QNlRdH+JG3SYHrGJGHN09xAG4YbMJzvJ+6jvMxpH6Q1k+Z99SuT6eTO1H5vYKqeMbOu7Be/ShCpuF8R0Asccy+RAtFiymLlpQIQHGOqJ3T4HL2x6447gPN46t2N77fVzwfICY7xcN1QIc8qgiBRppHft+XD0I6JezEoBrYPgWul/8FzkPtlU8sbajMnMaYQjbzXHC5jpzfi7x3Zb41nr/KHNMkuTsBNc+J05zLmwKUuJiNK0N9t1lyf0ZgFprMZBTYJAW87tIKmfMdHtM1CqtGkGLeaSuit5hHRQx2u0CIsDBccEMOZNqEAAwHjzvADFL9Pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0VtVzTj75dA20wkgPg1FA5iMXCKJ/vesBPKzbszw1qU=;
+ b=kmBiTjP10mSNEDSZ+Cb4clVdNrZp62TT4NsjSaX9qPOyoySVnqvE3+c/DyZtCNJBOAWxzVNLDPwMlDx+0Y6YGni8GUlem+CTFVReEPClCmjFAZbpug1FxjO4Krnz4qgqPIAafUsmDsvtFBLzzbMQfvuiDTUDxPSgVcq56bJq7Q0raGGv+4VhlgHnAUDi/46TGGYP5m6xmLYxXAuWqZ2JR3DrbO7KeDNoKU6rdqNVquw62PVTV4xRT/o+p9XDLSLPlcSltCx7eSJhzbCEWnmK9/cmiZI1CmNrKTwGbY5N9+s3LF159OR9EiJaPirhenviw1dazdfpt6kpSiGlmcI1Tw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0VtVzTj75dA20wkgPg1FA5iMXCKJ/vesBPKzbszw1qU=;
+ b=cSPgp9XDMJSilXTDqBJNJ+rfckmp8YsuRcAk7Va+ajWJNa8uhrBCnlqK1GXGhSWx/QSyOmRJCWf+gxdUe7smRdKTUt3x4O4NLmGRhCZAxGHmQ60t5nW1NWrtoSzByhJI0EU58VwZC5/YYe4kPJM2epSUvnBCC3DzVea3kI3etwI=
+Received: from PH7P221CA0085.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:328::19)
+ by SJ2PR10MB7559.namprd10.prod.outlook.com (2603:10b6:a03:546::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 1 Jul 2026
+ 21:17:36 +0000
+Received: from CY4PEPF0000E9D2.namprd03.prod.outlook.com
+ (2603:10b6:510:328:cafe::6f) by PH7P221CA0085.outlook.office365.com
+ (2603:10b6:510:328::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.9 via Frontend Transport; Wed, 1
+ Jul 2026 21:17:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CY4PEPF0000E9D2.mail.protection.outlook.com (10.167.241.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Wed, 1 Jul 2026 21:17:33 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 1 Jul
+ 2026 16:17:31 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 1 Jul
+ 2026 16:17:31 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 1 Jul 2026 16:17:31 -0500
+Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.75.243])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 661LHV6a2254933;
+	Wed, 1 Jul 2026 16:17:31 -0500
+From: <a-christidis@ti.com>
+To: <khem.raj@oss.qualcomm.com>
+CC: <reatmon@ti.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][master][PATCH] opencl-cts: Suppress -Wfree-nonheap-object compiler warning
+Date: Wed, 1 Jul 2026 16:17:31 -0500
+Message-ID: <20260701211731.1620462-1-a-christidis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1782937431-5F7FC499-1259A01E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2ed3e28c-0480-4925-9992-9074c8d8e0e1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1782937432; i=f_l_k@t-online.de;
-	bh=Nyo5KXVftpD1SR8AKbYm0UIH/6pHA7YvJi+n6tNtOi8=;
-	h=From:To:Subject:Date;
-	b=FYKJxWe3sbLpIBF34aajNOR43BKu/c55Z+4rIrbanbltjEhBmeLH026XSMASlfCvV
-	 WoCaM6u4MzapQnSTj5N9JR41dNnIXyJSk+sjRXpXppBEb5uaTof4GGswVYiEDpYr+3
-	 +mZYAKmN9sOMucOoXSm9QTGpI06VB/Ser3CYxXB6EDkWGHo039LFI2yNxT+UUrzgRm
-	 B4xApA9Kkiw/brU/4hRoObVTOHWBQeEy+e4a5SJoot7GWuJD62qanj8Ijw0McKuwbT
-	 hPWuYkYb+dQSULSs8HmLN9rDpVMgO+f3RKrLSOpwUH8cVWX85XM8wofW1neaPzgqW6
-	 OxMfw3hVlbmjQ==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D2:EE_|SJ2PR10MB7559:EE_
+X-MS-Office365-Filtering-Correlation-Id: aa48e28f-bc31-4644-06a8-08ded7b62ac2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700016|23010399003|1800799024|82310400026|376014|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	JapYzZmTdfH1VY0Mxr3jn/P2kqk7CBz7cGWpcFzOhgqImlkstRf/sKzaS/6Bd5vBTGmWob0S0VLefWhyZSgH91eahgDcE2gbpZIj1+ssIJV34/OiAQKNGjdNtGV/KOTF1+8lPMhOvzDz4PLRvEo42JYPRligsUnEG5HSYVc/RBK7wsnwvRxbF9efWyEH1/1Tm/nEvNuD+iPVfQ9fSJ4vrDXTFXMSP9FDmu6IVLCJBnzQYjOFF1O+tMrf2u7ZFtn4sYQID8XdVtXS5fwbHAwfUHV7s9ZuUqNv+j4aQYO6d9WpxgNj3tx//FWyKSYoHQ0McHixiqmG0Y6kAdR5PVINQMLV8VJlZag1Fl2E5v4YtYcuOhxXANOCs3oGle/gtqFB8K+c3dAdPOTbsqMnmeIx55XsSmjWO0j+AZCgCRrmY9AX81E2AWYGjMGTxSgs43wy9z95D2KBZlbs3fAcYTUTkdM4j1Q0MqerN469AuAuMUQGSsRM6ixKsLzSewR+29Q0VGUJfX5oWXTeqUwVOpzzJcrSNzi04eI7KgBzEF8UzDbzfNzN5mqBJNSr2wdlidq2EvT6tFLQ3NkssadycQLal9Hs7RnjsIFQ1KjQG81/es8RJj8CKDf+yZOKyD7HleqHg8YjvfCvaecppwmtwlf6vIlZ+DGS1oOU8f4QbJ/fgZbOKrWoYCJEKazXNvwfdcrgqYObygyzSCWS/l0ssazGJw==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(1800799024)(82310400026)(376014)(56012099006)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	KvSHqyIYBlBp1kJocT0yMVoEiXeP/vmdynXRn+zKVqJtEyBK2RXXrFhTLmr6p9EbdmAJNwtLrt1BoSqmYO5Keg+ZHxZDkPpPRunh9GMqbQVAER7JsG7ylxpCp/lqQRQ0I9p7Rzhej5cDQPXsDW8Use84beESG7Lq8aIOihAtJHUhsADU0M6k5K52xivd2Ut/6GHqZu4eY5LIiaQLSHuO21ZCGSlmR5w7W8itoL064mOT+19Xyi+JUV87uJuD/+ttK4md5nyJg0u4x2H7HJq1h3jXQYmPYJe/wDHMdioRyPMy12aUPRGQRw+5uP7FASMJGbGV8YLwWdzAZpniEWYkKxHyNez+T5naIgnuQTDuSKXPBpoSkhpKhU+sH7nRg0bk9dBW37+Zap8GC3fBRHT8iHMLLtbNBs3XhF4kBJRQlX5/NIhXagSV/24D0N1GEAa3
+X-Exchange-RoutingPolicyChecked: 
+	ZVgv66pd1DSZd9P4P/gaMWRlqbCWyQ1loIDok0EoNC/2nfbMC2KsMjhcTDXicZNqCmTsO2YIDmKV/HpJJFhKe8eIcJGW/VHIerj499kRtA5NtnZpTJMCnAutoYyQEM451cl4Xs2ZdqQOICy3nqPvFow1rTevRtGm0G8swDBh9wxJ8flInK5upue1h58AknwDFtZ4JRj39m1hWK1+WX+wttvdLkZQU76fLFS6Nszym4job8NqmbHFVYM5/+S+4TSi06/DlgHLPxHzuBgFxkpclxTJFs5NfQqNBXP4jO2ZdKulkEqecKT+Kc8db5tC15bmVfkkFLv+8VYy/XZVn2D1lA==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 21:17:33.3722
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa48e28f-bc31-4644-06a8-08ded7b62ac2
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CY4PEPF0000E9D2.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7559
+X-Proofpoint-GUID: ZRP08VRzpwlAgdIGUfmPsSqQKVJ3_90f
+X-Proofpoint-ORIG-GUID: ZRP08VRzpwlAgdIGUfmPsSqQKVJ3_90f
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDIyNyBTYWx0ZWRfX6PMH+4D0UkNj
+ yMP/IFanSScgiOI7Wr/ZSE/XvFMcTxI+GWIxR2bO66f2QNjF7DYIxgGdVSW4ItUsO7QC5faRW3D
+ +epNBc+J5F36v3nwDYv4OTSrgpfiKXo=
+X-Authority-Analysis: v=2.4 cv=cfPiaHDM c=1 sm=1 tr=0 ts=6a4583fb cx=c_pps
+ a=hWS9KTtKglmM4LJ/Q12dcg==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8 a=_1WiUjqA1ILcwL79l7kA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDIyNyBTYWx0ZWRfX9i2mPqMi2egO
+ u2UIeXFqTC1XF2AlyV17Gc602uMTsM/SEzX1GzgPwXoT7vVhQOI2Nz2qipkGJy15ZagDcCHFkkS
+ hVa86ggmk3ZqIc3gxeVXAkFNLcrRZRdAovBNc9ooIyl0r9OaoAl4UTg29a4QPdsTo9bRYNoirnj
+ aNp0K/kYQTRflwXicnjtBkk46Ib8la0qn/B8plbtySHhq5LOlASJwtZG0zPSlW/0Fb+DAKELhOe
+ +8Iuy4CCLqoYrMVrrpozCTFFPA+SbB6+Q05XKwugkTmE9AO1/FEze2VunDijN3mvhB63r+Umkm+
+ tGzC5ODpxAEh9HYG9WxA+pCh2NT7je/zwPGnftO+7EEdeqTl0LYLc5B9Sfp3Wmk/0ntn5pS8vQD
+ 7ymz1qKAMiA4kVjLg/lR7KEsSoRxESMOoY2l2kJHUQptFK0UtPE0aucI0/91KjVhzE5SiI9R0kc
+ WALiTEpZhHIIM42etSg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-01_04,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 impostorscore=0 priorityscore=1501 malwarescore=0
+ spamscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010227
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 20:24:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127996
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 21:17:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127997
 
-This fixes:
-error: assignment to 'ICalDuration *' from 'int' makes pointer from integ=
-er without a cast [-Wint-conversion]
+From: Antonios Christidis <a-christidis@ti.com>
 
-Evolution-Data-Server 3.60.2 2026-05-22
----------------------------------------
+Suppress warnings from -Wfree-nonheap-object check. The warning occurs during
+std::vector cleanup when deallocating memory with offset pointers for
+test "compare_pointers" only on 32 bit platforms.
 
-Bug Fixes:
-	I#637 - IMAPx: Sent folder reverts to default with iCloud email and Quic=
-k Resync
-	evo-I#3302 - Truncated file stored in the (mail) cache
+/recipe-sysroot/usr/include/c++/16.1.0/bits/new_allocator.h:183:66: error: 'void operator delete(void*, std::size_t)' called on pointer '__result' with nonzero offset 24 [-Werror=free-nonheap-object]
+  183 |         _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+      |                                                                  ^
+/test_conformance/generic_address_space/basic_tests.cpp: In function 'int test_compare_pointers(cl_device_id, cl_context, cl_command_queue, int)':
+/test_common/harness/testHarness.h:151:9: note: declared here
+  151 |     int test_##name(cl_device_id device, cl_context context,                   \
+      |         ^~~~~
+/test_common/harness/testHarness.h:154:29: note: in expansion of macro 'REGISTER_TEST_VERSION'
+  154 | #define REGISTER_TEST(name) REGISTER_TEST_VERSION(name, Version(1, 2))
+      |                             ^~~~~~~~~~~~~~~~~~~~~
+/test_conformance/generic_address_space/basic_tests.cpp:776:1: note: in expansion of macro 'REGISTER_TEST'
+  776 | REGISTER_TEST(compare_pointers)
+      | ^~~~~~~~~~~~~
 
-Miscellaneous:
-	e-ms-oapxbc: Simplify error handling in MS-OAPXBC OIDC extension
-	e-ms-oapxbc: Fix error handling of broker response
-	e-ms-oapxbc: Align D-Bus parameters with sso-mib (Felix Moessbauer)
-	e-ms-oapxbc: Add support for broker versions > 2.0.1 (Felix Moessbauer)
-	Do not lock SExp object in data book/cal views start
-	e-book-meta-backend: Handle data: URI-s in PHOTO/LOGO
-	Calendar: Use icaldurationtype_as_utc_seconds() for libical 4.x (Antonio=
- Rojas)
-	OAuth2: Use its own error domain and add camel_util_is_network_error()
-
-Translations:
-	Christian Kirbach (de)
-
-Evolution-Data-Server 3.60.1 2026-04-10
----------------------------------------
-
-Bug Fixes:
-	I#632 - nntp: Fix GSocket ref leak in stream timeout helpers (Mikhail Ga=
-vrilov)
-
-Miscellaneous:
-	nntp: Rename nntp_get_stream_socket() to nntp_ref_stream_socket()
-	ESoupSession: Correct e_soup_session_get_authentication_requires_credent=
-ials()
-
-Evolution-Data-Server 3.60.0 2026-03-13
----------------------------------------
-
-Bug Fixes:
-	I#489 - Backends: Do not block views' start by slow connection
-
-Miscellaneous:
-	Correct ICalGLib reference in gir when building against version 4
-	docs: Update libical-glib online documentation link
-
-Translations:
-	Asier Saratsua Garmendia (eu)
-	Aurimas Aurimas =C4=8Cernius (lt)
-	Bal=C3=A1zs =C3=9Ar (hu)
-	Baurzhan Muftakhidinov (kk)
-	Bruce Cowan (en_GB)
-	Daniel Rusek (cs)
-
-Evolution-Data-Server 3.59.3 2026-02-27
----------------------------------------
-
-Bug Fixes:
-	I#444 - Make credential prompt dialog non-modal
-	I#625 - camel-sasl-ntlm: Check for integer overflow in ntlm_get_string()
-	I#626 - camel-pop3-store: Compute APOP response without string allocatio=
-n
-	I#627 - Canonicalize path before local cache file removal
-	I#628 - e-cal-recur: Check interval intersect always as date-time value
-	evo-I#3257 - NNTP: Subscription dialog does not show all groups
-
-Miscellaneous:
-	e-collection-backend: Fix possible memory leak
-	Use GHashTable's `replace()` instead of `insert()` on some places
-	e-name-western: Crash due to double quotes in the name
-	camel-network-service: Move static variable to read-only area
-	credential-prompters: Add some spacing around widgets in the dialog (gtk=
-4)
-	camel-store-search: Minimize hold of the folder and folder summary locks
-	camel-debug: Include object address in ref/unref backtraces
-	Increase default connection timeout to 30 seconds
-
-Translations:
-	Alan Mortensen (da)
-	Anders Jonsson (sv)
-	Christian Kirbach (de)
-	Jean-Marc TISSIERES (fr)
-	Jordi Mas (ca)
-	Milo=C5=A1 Popovi=C4=87 (sr)
-	Milo=C5=A1 Popovi=C4=87 (sr@latin)
-	Sabri =C3=9Cnal (tr)
-	twlvnn kraftwerk (bg)
-
-Evolution-Data-Server 3.59.2 2026-01-30
----------------------------------------
-
-Bug Fixes:
-	I#617 - Calendar: Prepare to support build with libical 4.x
-	M!206 - docs: Document libical-glib as dependency (Juan Luis Cano Rodr=C3=
-=ADguez)
-
-Miscellaneous:
-	Correct few developer comments
-	Calendar: Correct typo in error message
-	Fix a compiler warning in camel-network-service.c
-	e-book-utils: Correct read of a certificate from a vCard attribute
-	Add ESourceConflictSearch from Evolution
-
-Translations:
-	Aurimas Aurimas =C4=8Cernius (lt)
-	Ekaterine Papava (ka)
-	Juliano de Souza Camargo (pt_BR)
-	Martin (sl)
-	Yuri Chornoivan (uk)
-
-Evolution-Data-Server 3.59.1 2026-01-02
----------------------------------------
-
-Bug Fixes:
-	I#8 - Support vCard v4.0 (RFC 6350)
-	I#554 - CalDAV: Provide a date limit for information sync
-	I#609 - Camel: Encrypt Recipient Alias Configuration
-	I#612 - Calendar: Multiple detached instances cause duplicates
-	I#613 - Camel: Message info changes do not propagate sometimes
-	I#614 - CamelSearchFolder: Add "not_all" "match-threads" kind
-	I#616 - Crash when reading broken multipart/signed
-	I#618 - Calendar: Free/busy not exported without set calendar mail
-	I#620 - alarm-notify: Snooze "until X minutes before start" wrongly remi=
-nds "X min after start"
-	I#621 - addressbook-export: Fails with "Invalid query" error
-	M!201 - Camel: Remove camel_session_ref_service_by_url (Corentin No=C3=AB=
-l)
-	M!203 - Remove several migration functions from Evolution Source Registr=
-y (Corentin No=C3=ABl)
-	evo-I#3157 - Broken multipart/signed shown as raw MIME data
-
-Miscellaneous:
-	org.gnome.EvolutionDataServer.Devel.json: Build also gweather-locations
-	Lower default connection timeout to 15 seconds
-	evolution-source-registry: Remove unused variable (reported by compiler)
-	CamelGpgContext: Improve error messages
-	WebDAV: Default to no download limit
-	CamelStoreDB: Keep 'sqlite_sequence' table during migration
-	CamelDB: Correct return value and repeated function call arguments
-	CamelStoreSearch: Unlock summary and folder when save or prepare_fetch_a=
-ll fails
-	IMAPx: Avoid Junk/Trash folder open when saving changes
-	ERemindersWidget: Workaround too large gap between action buttons
-	CamelFolderSummary: Reload from DB could leak already loaded infos
-	Correct developer comment of e_source_webdav_set_limit_download_days()
-	addressbook: Prefer vCard "take" functions
-	CamelDataCache: Rephrase "Empty cache file" error message
-	Camel: Unread count for virtual Trash/Junk folder not updated properly
-	CamelStoreSearch: Ignore all errors when a message cannot be opened
-	CamelStore: Speed up open folders with virtual Trash or Junk folder
-	EContactAddress: Add helper functions to read, write and clear the struc=
-ture
-	EContact: Add EContactGeo functions to convert to/from string
-	EVCard: Add conversion code for GEO attribute
-	EVCard: Correct PHOTO/LOGO data: URI conversion
-	EContact: Add 'timezone' field
-	EVCard: Add conversion code for KEY attribute
-	EContactCert: Add helper functions to work with attributes
-	ECertificateWidget: Add a function to check whether any certificate data=
- is shown
-	flatpak: Add gettext ACLOCAL workaround
-	EBookSqlite: Correct mutex unlock in e_book_sqlite_lock()
-	EVCard: Add RFC 2739 properties into the list of known vCard 3.0 propert=
-ies
-
-Translations:
-	Asier Saratsua Garmendia (eu)
-	Aurimas =C4=8Cernius (lt)
-	Daniel Rusek (cs)
-	Ekaterine Papava (ka)
-	Emin Tufan =C3=87etin (tr)
-	Juliano de Souza Camargo (pt_BR)
-	Martin (sl)
-	Sabri =C3=9Cnal (tr)
-	twlvnn kraftwerk (bg)
-	Yuri Chornoivan (uk)
-
-Evolution-Data-Server 3.58.0 2025-09-12
----------------------------------------
-
-Bug Fixes:
-	I#607 - test-cal-component-bag: Fails to run with source tree only
-
-Miscellaneous:
-	IMAP: Disable PREVIEW fetch on FETCH error
-
-Translations:
-	Bal=C3=A1zs =C3=9Ar (hu)
-	Daniel Rusek (cs)
-
-Evolution-Data-Server 3.57.3 2025-08-29
----------------------------------------
-
-Bug Fixes:
-	I#555 - Calendar: Deleting "This and Future Occurrences" instances can d=
-uplicate events
-	I#602 - IMAP: Sometimes removes message from local summary in error
-	I#604 - CamelGpgContext: Provide information about encrypted content
-	I#605 - Camel: MH account busy-loops when reading directory content
-	M!188 - EDataServer: Use g_object_notify_by_pspec when possible (Corenti=
-n No=C3=ABl)
-	M!193 - EBookContacts: Use g_object_notify_by_pspec when possible (Coren=
-tin No=C3=ABl)
-	M!198 - alarm-notify: Add a systemd service (Adrian Vovk)
-	M!198 - data: Conditionalize installation of alarm-notify (Adrian Vovk)
-	M!199 - cmake: Specify GLib minimal version to gdbus-codegen (Corentin N=
-o=C3=ABl)
-	M!200 - data: Set desktop directory outside the condition (Hari Rana)
-	M!202 - build: Conditionally install org.gnome.Evolution-alarm-notify.de=
-sktop (Georges Basile Stavracas Neto)
-
-Miscellaneous:
-	CamelDB: Do not error out on SQLITE_ABORT
-	CamelVeeFolder: Fix runtime warning when rebuilding folder content
-	CamelVeeSummary: Reference subfolder in the internal hash table
-
-Translations:
-	Anders Jonsson (sv)
-	Artur S0 (ru)
-	Asier Saratsua Garmendia (eu)
-	Jordi Mas (ca)
-	Juliano de Souza Camargo (pt_BR)
-	Piotr Dr=C4=85g (pl)
-
-Evolution-Data-Server 3.57.2 2025-08-01
----------------------------------------
-
-* The libcamel API dropped CamelObject, it was not needed anymore.
-
-Bug Fixes:
-	I#449 - alarm-notify: Rework snooze options
-	I#591 - alarm-notify: Sometimes uses original reminder time for modified=
- instance
-	evo-I#3089 - Camel: App freezes often when performing various threaded t=
-asks
-	evo-I#3093 - EContact: Consider also FullName as FileAs
-
-Miscellaneous:
-	CamelVeeSummary: Fix dub-subfolders annotations (Corentin No=C3=ABl)
-	CamelFolder: Add state saving API directly (Corentin No=C3=ABl)
-	Camel: Remove CamelObject (Corentin No=C3=ABl)
-	Camel: Remove index of deprecated symbols (Corentin No=C3=ABl)
-	CamelStoreSearch: Make it possible to search for a hashed message ID
-	CamelFolder: Fix a memory leak
-	EReminderWatcher: Debug-print what changes had been received from the ca=
-lendars
-	ERemindersWidget: Change gap around description text view
-	CamelNetworkService: Cache the GQuark locally for the private data (Core=
-ntin No=C3=ABl)
-	Camel: Use g_object_notify_by_pspec when possible (Corentin No=C3=ABl)
-	ECal: Use g_object_notify_by_pspec when possible (Corentin No=C3=ABl)
-	EDataServerUI: Use g_object_notify_by_pspec when possible (Corentin No=C3=
-=ABl)
-	EBook: Use g_object_notify_by_pspec when possible (Corentin No=C3=ABl)
-	EBackend: Use g_object_notify_by_pspec when possible (Corentin No=C3=ABl=
-)
-	EDataBook: Use g_object_notify_by_pspec when possible (Corentin No=C3=AB=
-l)
-	EDataCal: Use g_object_notify_by_pspec when possible (Corentin No=C3=ABl=
-)
-	Camel: Use GParamSpec consistently to create properties (Corentin No=C3=AB=
-l)
-	CamelVeeFolder: Fix a runtime warning when rebuilding the folder
-	CamelFolderSummary: Notify about flag changes on idle
-	ECalClient: Improve performance of generate_instances() function
-
-Translations:
-	Martin (sl)
-	Yuri Chornoivan (uk)
-
-Evolution-Data-Server 3.57.1 2025-06-27
----------------------------------------
-
-* The libcamel API had been changed in several ways, some deprecated
-  symbols had been removed, some API functions renamed and their return
-  values changed (mostly from "transfer full" to "transfer container").
-
-Bug Fixes:
-	I#592 - Handle changed server pool in WebDAV collection sources
-	I#593 - CamelDataWrapper: Correct return value of size calculate functio=
-ns (dagosuhn)
-	I#597 - GOA EWS: Fallback to likely EWS host URL when autodicovery fails
-	M!170 - docs: Update URL to libsoup docs (Simon McVittie)
-	M!176 - docs: Add docs_url argument (Corentin No=C3=ABl)
-	evo-I#2434 - alarm-notify: Should show a visual notification to accompan=
-y notification sounds (John Lorentzson)
-
-Miscellaneous:
-	e-data-server-util: Fix a compiler warning about 'const' qualifier disca=
-rd
-	libecal: Add utility functions to read and convert time to given timezon=
-e
-	test-cal-utils: Add a simple additional check
-	libecal: Add an ECalComponentBag object
-	ESourceRegistry: Reject to create an instance when D-Bus service is not =
-available
-	Misc: Correct developer documentation annotations
-	CamelService: Add private construct-only "with-proxy-resolver" property
-	Camel: Add CamelStoreDB and CamelStoreSearch and use them
-	Camel: Rework Search folders
-	CamelFilterDriver: Remove unused "global variables"
-	Camel: Rename camel_folder_summary_get_array() to camel_folder_summary_d=
-up_uids()
-	Camel: Rename camel_folder_get_uids() to camel_folder_dup_uids()
-	Camel: Remove camel_folder_get_summary()
-	Camel: Rename camel_folder_get_uncached_uids() to camel_folder_dup_uncac=
-hed_uids()
-	Camel: Rename camel_folder_summary_get_changed() to camel_folder_summary=
-_dup_changed()
-	Camel: Rename camel_uid_cache_get_new_uids() to camel_uid_cache_dup_new_=
-uids()
-	Camel: Rename CAMEL_DB_FILE to CAMEL_STORE_DB_FILE
-	CamelDB: Remove unneeded public defines
-	CamelProvider: Remove autodetect function (Corentin No=C3=ABl)
-	lib-camel-test-utils: Reference CamelProvider struct members by name in =
-initialization
-	Camel: Remove deprecated symbols from CamelStoreSummary (Corentin No=C3=AB=
-l)
-	Camel: Remove deprecated symbols from CamelOfflineSettings (Corentin No=C3=
-=ABl)
-	CamelStoreDB: Allow empty folder names
-	CamelStoreGetFolderFlags: Remove deprecated and unused flag (Corentin No=
-=C3=ABl)
-	CamelFolder: Undeprecate get/set_message_flags (Corentin No=C3=ABl)
-	CamelFolder: Remove deprecated functions (Corentin No=C3=ABl)
-	CamelFolderThread: Use the oldest message as a parent of a leaf-only sub=
-thread
-	CamelFolder: Add nullable annotation to camel_folder_get_folder_summary =
-(Corentin No=C3=ABl)
-	CamelFolder: Use g_object_notify_by_pspec when possible (Corentin No=C3=AB=
-l)
-	CamelFolderSummary: Use g_object_notify_by_pspec when possible (Corentin=
- No=C3=ABl)
-	CamelMessageInfo: Use g_object_notify_by_pspec when possible (Corentin N=
-o=C3=ABl)
-	CamelMimePart: Use g_object_notify_by_pspec when possible (Corentin No=C3=
-=ABl)
-	CamelIMAPXMessageInfo: Use g_object_notify_by_pspec when possible (Coren=
-tin No=C3=ABl)
-	CamelFolderThread: Fix a crash caused by the previous commit
-	Camel: Remove extra camel_pstring_free() calls
-	vala: Fix several warnings thrown by Camel (Corentin No=C3=ABl)
-	CamelFolderSummary: Remove prepare-fetch-all signal (Corentin No=C3=ABl)
-	alarm-notify: Skip reminders for cancelled components
-	CamelURL: Add glib-object to the header (Corentin No=C3=ABl)
-	CamelService: Rebase on GObject (Corentin No=C3=ABl)
-	CamelVeeStore: Remove unused property (Corentin No=C3=ABl)
-	CamelIMAPXCommand: Remove leftover assignation to CamelObject (Corentin =
-No=C3=ABl)
-
-Translations:
-	Asier Saratsua Garmendia (eu)
-	=C3=81lvaro Burns (pt_BR)
-	Bal=C3=A1zs Mesk=C3=B3 (hu)
-	Boyuan Yang (zh_CN)
-	Ekaterine Papava (ka)
-	Emin Tufan =C3=87etin (tr)
-	Jordi Mas (ca)
-	Jose Riha (sk)
-	Martin (sl)
-	Yuri Chornoivan (uk)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Antonios Christidis <a-christidis@ti.com>
 ---
- .../evolution-data-server/evolution-data-server.inc           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-core/opencl/opencl-cts_2026.06.18.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
-a-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-d=
-ata-server.inc
-index 54eb593e5f..4e91372c3a 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.inc
-@@ -11,5 +11,5 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6a6e689d1925=
-5cf0557f3fe7d7068212 \
- GNOMEBASEBUILDCLASS =3D "cmake"
- inherit gnomebase upstream-version-is-even
-=20
--SRC_URI[archive.sha256sum] =3D "df4ec29950f29a76eac6fbe0f814c48d2cef7d3f=
-db905002a4a883dd761ce93c"
--PV =3D "3.56.2"
-+SRC_URI[archive.sha256sum] =3D "2084dbdac396371b365d504c1ff45866ba8dca2f=
-1252e5da1d3d9c33abdc1286"
-+PV =3D "3.60.2"
---=20
-2.54.0
+diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2026.06.18.bb b/meta-oe/recipes-core/opencl/opencl-cts_2026.06.18.bb
+index 17480d62ef..e0db6a1314 100644
+--- a/meta-oe/recipes-core/opencl/opencl-cts_2026.06.18.bb
++++ b/meta-oe/recipes-core/opencl/opencl-cts_2026.06.18.bb
+@@ -22,6 +22,8 @@ SRCREV = "8d8f3d272dbd3f0a84156be7890835c4b6deff8e"
+ 
+ EXTRA_OECMAKE:append = " -DSPIRV_INCLUDE_DIR=${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
+ 
++SECURITY_STRINGFORMAT:append:arm = " -Wno-free-nonheap-object"
++
+ PACKAGECONFIG = " \
+ 	${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl gles', '', d)} \
+ 	${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)} \
+-- 
+2.34.1
 
 
