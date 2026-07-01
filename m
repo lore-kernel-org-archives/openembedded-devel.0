@@ -1,202 +1,183 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7812FC43458
-	for <webhook@archiver.kernel.org>; Tue, 30 Jun 2026 23:21:53 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33820.1782861710351159575
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D1A3C43458
+	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 02:27:04 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36494.1782872822790122232
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2026 16:21:50 -0700
+ Tue, 30 Jun 2026 19:27:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=qEumPFqN;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2c9b19bbaefso362475ad.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 16:21:50 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=cS3UpCMK;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JVlSUiwe;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65UNLmKU3495096
+	for <openembedded-devel@lists.openembedded.org>; Wed, 1 Jul 2026 02:27:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=; b=cS3UpCMK4FbY7uw4
+	9EaVnUN954ch9aabuniOANziie5udfpi+Tg3yzeS0U25BDtJYznIC/P3EAdY0ruG
+	CWJ0og4/tG220B1KN9N9j5c1E3BtErLaKXNfzgEbpDHZsVOFNELnxZD1uBZJsC/T
+	MgeE7oAjg3hhWjh1n0zBYYQvLv9wWKM1PC5PxZEOPCmW0FU5RCDIC0yS0jymSICO
+	4uqJRXD3vQso6NkoAJfcjPMJPWLjPeW4nj2tWAlk4YJNQDOjJpBIQI+eCwY3X201
+	eOHtwaIfQkDxePTxl++qnAbzRl6wmgwEZtZ1gBsp+ToLb/BcbAUsD+ZeaIHmXK2l
+	PI/6qA==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4j911vy6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 02:27:01 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0408254aso21175661cf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 19:27:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782872821; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ZTcVyBkohzh0plJaWMZE8VDpAhme6PiBJNAgv4gOeE9BudXdLUGIyIuJ72jerv52mT
+         MSz0uIMIkw2PZcr9NicKmgP+6YzWl3GHQ9n/z00NCdyPLgv5jLZ53XbWdK6yuP4VZrIR
+         qyXfzv2Hp+AifI5jfpGeSYcMEVtTqhtHyZumfs4L4Jdx1cWbJMQilz22UIvdukBp7rDq
+         UI0EnJvce64PcUdBwCPsiMOKUwwqnH/T6SuZhHITkCl6Ffq/k1Ybc2U2LeRzJJVMrqG5
+         V0RcbVBX9mOsYqWiMV0/ayCTEQdO3HoJZqB7M9f1KxBsUxuUg7NZwhXslLvJtpotR0lz
+         GtkA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
+        fh=m/d9KrVvYA4BbVMqG1tHRdDDRqNWot/wwa013o51EOo=;
+        b=lsUvnbm894Ag9RVccOWJaGJSrG97VUYdoaTqvBzAGo+WnSXDME4npvtBeBL0hk+w9M
+         9Fp48C5WiP1sNAQYSSU1rpenuIV3UUid/T7Q+ggJ/J1wffsi7S2p7VVJk5TtTYNnMu8R
+         uxmlRKnOkFsz2PKURdl5Z0NqeixozU3yenV/fesfNKCcIHH4JyEVlZKy5A815fHwVn74
+         m1OWKfOfyFxOMTL69bV2YACRVKELJ1gclHYITUBzA+jvUfEb0azlSH9ImKCbfnevH0Ya
+         WDPCBN4WVSvFgJpOTjJzNsImhpSvZ7jc5BMxMVG2yUQBgGrcXAUw0XqMKDiqOTctVHaz
+         HDAg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782861710; x=1783466510; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1782872821; x=1783477621; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NLR0yV/9vLJb2hZvlLC4Ocwi+VWO3ik2uXG0C0HcE6U=;
-        b=qEumPFqNszzPNNqWLXYhtHFa/iDAvrGYT3o8hFMVP2GcnrQVKKkYGlN2dPacV/cMF5
-         u5euSF/IWqYKI43e5hv5U3F86T7FNF8j+LPR07C1ybilOmTSztWKsXj0Fudr5G2tEihO
-         z2lV5IJIP7XtclzQe/r2S8vUDb/d3RRRBqyNbo64F/BXEczMPiRsrK00yxbA43z6NVRv
-         p0gRfPw3P3RHy5yqSAcqG+uHjnLpIcavlzzDpItolUX4CTgcVeP0ogDdPXZkX8t/3yZL
-         bfcBwdsSD2aRSYlzC7+D/BiGRXNU3MvwS7co8lMfE9+NyeAKScXoq+CWbUP4csaRsRSt
-         Extg==
+        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
+        b=JVlSUiwewVhBw3h8eOo9VDSH+F8h0+3G0p/XonHFx7BJHqO2mBPEV2koCNyLWVjucb
+         GJOXMfHjBDt24u4e4pmQGaXiMtP/ySzhs8lu1BKjXG0uyY9FoQ+BGVnVaeVvFFqPs/1J
+         9fpeZgK+dUhsrXJbfuLIS95PHzDdNTWLckVa/DGOZ973q6ANo7LAw8wq+oMslhaaVe8w
+         jgz4RRe+KqastopyN2AacjWqMaxf4JhZZMrNFyHrlINGmEtg6bY8+ZsxeG9fjsaEHzrj
+         QdBq+B8I+W8PahNXFrQBG3ISMHlsXuf8uPzu+vbd70qYrBa4Z9x+sV8IwtJNJpTJn2EX
+         49oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782861710; x=1783466510;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1782872821; x=1783477621;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=NLR0yV/9vLJb2hZvlLC4Ocwi+VWO3ik2uXG0C0HcE6U=;
-        b=cW3Wl73Rq+hJUvXJg4sL2WCobdqYOtWb9QbRUQrKdGScMSoHOtGXcOFN38Lf5umYAi
-         SB4hyuoh4Fn4R1aEj/YmRmdM9XzYhqr5+ThQ+yL9SeJVKhlCFyMWxlqjkENpcJAEClYy
-         J3WhvZwHEslQCJ5oi7PyMeUiwFcD5qHWH7YuTVeNfyoSX+d8CicZXz6kIzSoeZ8Caz8x
-         Vq7v/GmhxjBK3x0kUwTf8tzeGuXbr1o8bmWCvv7GsLYR6CEhngI9BUGwUuH9tO1QmnGb
-         mU8gha5df/nqTyTsXe5s8NuNrKgfFUWlul6WBcP2za9Q/BH1bnM9NCDs0SLiD4YXM7Iz
-         Ps7Q==
-X-Gm-Message-State: AOJu0Yw/6ZERycKaNWQ142uYGxjXh6+YOiNMPyy3qFejLMh1NGPlJ+DW
-	kcllN+eAouFu7U5uJ1YnGhVtMRm+TsVLvzyBdW1B48en61t2HWV+dNR2xXwJfQ==
-X-Gm-Gg: AfdE7claPkAeFtQZmtLjAjLa9+ITW2eLWfZLTJuq3ii6WAGTQoZNKvD4Hu2ufJGDzz9
-	rUmSFgT4z/SDcaq3DAGc8gRl2fppUOba5CsGMGRBWaYx/Rt13cVSdDZ1gEVEIWGGXWP31w3Y8fm
-	jE9AQ0MwNDwydx7LEeE0XtO4Pr93Z9KJFgAlOs92VxgM1hAigj2fbhBPtw+C8w3pdl6AiNADZk8
-	Q6x78yNgLH8D4xDW6JxQyU/fCk/VPwDTqFVo7C/VkkfXXfCrnrM/ntic4rz37xu+YUntwjDq0SE
-	+Ntosyy8AZAYbId2ovmytubq+dxZLsY/inQJeJBlcyuSYeU8D/yTejO/8e05tOAjI+JW0UOjkak
-	LYo1cSCXUbc3eyoByixPXCMkF4QhWYjwh/4v4UPJ7dzRzQFiMzaXkzra7dg+BY0tRdm2QEkDG5M
-	bHE7FV/cKQOxnc0akVfb+jxyD+vfBjhvL2VhcCRweyNiKfnA==
-X-Received: by 2002:a17:902:ebc4:b0:2c9:bd37:ae76 with SMTP id d9443c01a7336-2ca2ed2c17cmr45105375ad.47.1782861709564;
-        Tue, 30 Jun 2026 16:21:49 -0700 (PDT)
-Received: from localhost.localdomain ([69.9.132.159])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ca3828c950sm21322565ad.51.2026.06.30.16.21.48
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 30 Jun 2026 16:21:48 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-oe][PATCH v2] valkey: upgrade 9.0.4 -> 9.1.0
-Date: Tue, 30 Jun 2026 16:21:16 -0700
-Message-ID: <20260630232115.32391-2-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260630205432.99639-2-tim.orling@konsulko.com>
-References: <20260630205432.99639-2-tim.orling@konsulko.com>
+        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
+        b=kJJ6/2HaxfSFJPnZLPvIM9ZQIz2e8mBcYryC9z51AC+43bb6trTuqEIwYUg7L3ldCq
+         QKmpqaX0RCC+aAOcSMsDFh31DEqSDtPh3xd87vnOsimnk71WhrdRImpQ87ezQqpkFk4V
+         r+cojPINpg1om27lzHE8oHUmNhF+846jBHw3hAd9q/mFFfkDsOg4VNGmWW0sY0Pc7YEx
+         pYuPJijykOUSzV6Ry4Q8V/F/3zpjGZuU9xAv9BHpR/CfsTo5LelyywRyq2T1KLlaAzi9
+         1xEg1QngqwtAo3nofIfmM3svqmwVYxtTccwc6ZQUZuXjFYBaN5kuvg2FaCr+23oWEA4Z
+         atyg==
+X-Gm-Message-State: AOJu0YxG4jXf3Xr1Kml8ODq/zTONsRaN62NfYc8Zbnl8srHP3KopY7Y7
+	VyhfmFOXZGBdA4DULtYAvnc98cLWA0AFNC7CZqJ8/ObnByF+xdB+Nh5+xEA2EGeD2Ro9IuxXL9k
+	ag0NyqYtby8ETGS0eLDw0uaJtXOL7YPTR8ZVi2FMxxFMi3ivD5LA3ogLZ3ZdSKPmj1xBMJiaaah
+	mB7a8xwRY8kF2bTdcYZUJLdEqXLBY82K1He5d9yvc7utWXFGXuV/QE1Hk3WBI=
+X-Gm-Gg: AfdE7ckCWzID9oGOAnYyLf90m4V90kXYKrI7hVUjsm2mc354XC6eBR0j1KTpl0vdbpW
+	Q15s2lL1XH1egprY30dNdRrTpxY/yqmOYj2JqEredZ6maUgchftFZ5HGo2UyGEEX8yt6qDG60+X
+	R+I9n1XiSTH2buvg/Tp586S1I/geG3ryFoEZx0UfWiW6OrL5A0NmgItjdg73uDyEkiuQ==
+X-Received: by 2002:a05:622a:2591:b0:517:9407:5c38 with SMTP id d75a77b69052e-51c17e92d8dmr51264401cf.24.1782872820991;
+        Tue, 30 Jun 2026 19:27:00 -0700 (PDT)
+X-Received: by 2002:a05:622a:2591:b0:517:9407:5c38 with SMTP id
+ d75a77b69052e-51c17e92d8dmr51264161cf.24.1782872820609; Tue, 30 Jun 2026
+ 19:27:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260619041304.2585485-1-hjadon@cisco.com>
+In-Reply-To: <20260619041304.2585485-1-hjadon@cisco.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Wed, 1 Jul 2026 10:26:47 +0800
+X-Gm-Features: AVVi8CcSbcW8UtrCNhbMXiR_lUee-xSRa9d6JCCSvkT7fFDTfx3yWjgZVnzbKtw
+Message-ID: <CA+s=J=wdJDW9TsU4kssqYAZzfFLyuPJA0oPQMSkTM-yMHPiU5A@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][scarthgap][PATCH 0/4] samba: upgrade to 4.22.10
+To: hjadon@cisco.com
+Cc: openembedded-devel@lists.openembedded.org, vchavda@cisco.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-ORIG-GUID: ZrzmQqcFcraJZESe0hzktEM8NXidyEuw
+X-Authority-Analysis: v=2.4 cv=ftfsol4f c=1 sm=1 tr=0 ts=6a447af5 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=Um2Pa8k9VHT-vaBCBUpS:22 a=Q4-j1AaZAAAA:8 a=AUd_NHdVAAAA:8 a=EUspDBNiAAAA:8
+ a=ocHU1tILJPdIRmwv4TUA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+ a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-GUID: ZrzmQqcFcraJZESe0hzktEM8NXidyEuw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDAyMyBTYWx0ZWRfX+uCuJ+A9CclA
+ 1wGKCKXHSoE7NsWMjXr4VnXcSNOFEBu3FH9jVeWgKgOY98S0rf9xMN8UvtHs7tr7rkV6976dqmd
+ /f1Cvjr0fYuoea8uMs/jVl3T6DKGdl4K88N3SMfYddcYxatedr/7dkBPojQuwDS2JgmE7BYy+Qj
+ H1NzswSx+Jeq2lAoJcr2WiNQcgWQzC7r6vpE0i6cJ54/e3S08KK0GfHYrfpMJEGr/o3xDJ5MwEA
+ 66CSpxfcqADJie8Bjg3f0Qhi+AD3acQhFHYdKZljoKSBGBVOs1RCBVPVtpE6Im3CTEKq/Tov/Mn
+ jYF/RbDdptnACZJkznmn1A3z22pGz2RfWPI7XLF7bXLEWRRpduYP2j/4WdXRKN8IgTyDqshwU83
+ SFolalOFZZKm9AaKoUnGqCzUwuAofsFsY52T1Bsh0z9BD0d4yytDiiQW+9wtclxUHKQtrQmR3oU
+ b1Ke7PxUPV14pg78VCA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDAyMyBTYWx0ZWRfXwodwe//LDqm1
+ 8zJCkEAcTomPVVmvg/OX3FY24k7VbJFUODSgwvXdHFd6lTxxQF3g8fpUjPg8Va9v+jvWVE5kOUN
+ gr21+7rTgCaziJK3AGsyq6RHpLCI97k=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-30_06,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010023
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 23:21:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127987
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 02:27:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127988
 
-* Refresh lua-update-Makefile-to-use-environment-build-setting.patch
-* Use ${@oe.utils.trim_version(d.getVar('PV'), 2)} to dynamically
-  determine branch= in SRC_URI
+Hi Himanshu
 
-Valkey 9.1.0 GA - Released Tue May 19 2026
----------------------
+On Fri, Jun 19, 2026 at 12:13=E2=80=AFPM Himanshu Jadon -X (hjadon - E
+INFOCHIPS PRIVATE LIMITED at Cisco) via lists.openembedded.org
+<hjadon=3Dcisco.com@lists.openembedded.org> wrote:
+>
+> From: Himanshu Jadon <hjadon@cisco.com>
+>
+> This series upgrades Samba on scarthgap from 4.19.9 to 4.22.10.
 
-Upgrade urgency LOW: This is the first stable release of Valkey 9.1.
+This version jump includes feature upgrades and not acceptable for the
+stable branch.
 
-* Security fixes
-  - (CVE-2026-23479) Use-After-Free in unblock client flow
-  - (CVE-2026-25243) Invalid Memory Access in RESTORE command
-  - (CVE-2026-23631) Use-after-free when full sync occurs during a
-    yielding Lua/function execution
-
-* New Features and enhanced behavior
-  - Add cluster bus network traffic usage metric in bytes by @hpatro
-    (#3396)
-  - Reduce latency spikes during rehashing via incremental page release
-    by @chzhoo (#3481)
-
-* Bug Fixes
-  - Fix(syncio): Set errno on EOF in syncRead and propagate to
-    conn->last by @abmathur-ie (#3580)
-  - Fix GEOSEARCH BYPOLYGON leak on invalid COUNT by @bandalgomsu (#3568)
-  - Handle NULL pointer in streamTrim listpack delta calculation by
-    @smkher (#3591)
-  - Fixes server crash when RDMA benchmark clients disconnect by
-    @quanyeyang (#3448)
-  - Fix the memory leak in valkey-benchmark by @nmvk (#3643)
-
-Release announcment:
-https://valkey.io/blog/valkey-9-1-delivers-improvements-in-security-performance-and-more/
-
-For full comparison of changes, see:
-https://github.com/valkey-io/valkey/compare/9.0.4...9.1.0
-
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
----
-Changes in v2:
-* Use ${@oe.utils.trim_version(d.getVar('PV'), 2)} to dynamically
-  determine branch= in SRC_URI
-
- ...akefile-to-use-environment-build-setting.patch | 15 +++++++++------
- .../valkey/{valkey_9.0.4.bb => valkey_9.1.0.bb}   |  4 ++--
- 2 files changed, 11 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-extended/valkey/{valkey_9.0.4.bb => valkey_9.1.0.bb} (93%)
-
-diff --git a/meta-oe/recipes-extended/valkey/valkey/lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/valkey/valkey/lua-update-Makefile-to-use-environment-build-setting.patch
-index b91684afd6..7e5a6bb570 100644
---- a/meta-oe/recipes-extended/valkey/valkey/lua-update-Makefile-to-use-environment-build-setting.patch
-+++ b/meta-oe/recipes-extended/valkey/valkey/lua-update-Makefile-to-use-environment-build-setting.patch
-@@ -19,6 +19,9 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
- Updated to work with 8.1.x
- Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
- 
-+Refreshed for 9.1.x
-+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-+
- Upstream-Status: Inappropriate [OE-specific]
- 
- ---
-@@ -28,10 +31,10 @@ Upstream-Status: Inappropriate [OE-specific]
-  3 files changed, 6 insertions(+), 12 deletions(-)
- 
- diff --git a/deps/Makefile b/deps/Makefile
--index 72389def9..5d3ade528 100644
-+index 94d9385..5d49559 100644
- --- a/deps/Makefile
- +++ b/deps/Makefile
--@@ -95,7 +95,6 @@ endif
-+@@ -102,7 +102,6 @@ endif
-  # lua's Makefile defines AR="ar rcu", which is unusual, and makes it more
-  # challenging to cross-compile lua (and redis).  These defines make it easier
-  # to fit redis into cross-compilation environments, which typically set AR.
-@@ -40,7 +43,7 @@ index 72389def9..5d3ade528 100644
-  
-  lua: .make-prerequisites
- diff --git a/deps/lua/Makefile b/deps/lua/Makefile
--index 209a13244..72f4b2bf2 100644
-+index 209a132..72f4b2b 100644
- --- a/deps/lua/Makefile
- +++ b/deps/lua/Makefile
- @@ -33,7 +33,6 @@ INSTALL_DATA= $(INSTALL) -m 0644
-@@ -52,7 +55,7 @@ index 209a13244..72f4b2bf2 100644
-  # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
-  
- diff --git a/deps/lua/src/Makefile b/deps/lua/src/Makefile
--index f3bba2f81..1555ec028 100644
-+index d38b2d8..e6b3540 100644
- --- a/deps/lua/src/Makefile
- +++ b/deps/lua/src/Makefile
- @@ -5,18 +5,14 @@
-@@ -78,5 +81,5 @@ index f3bba2f81..1555ec028 100644
- +CFLAGS += $(MYCFLAGS)
- +LIBS += -lm $(MYLIBS)
-  
-- # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
-- 
-+ # Pretty-printing setup
-+ CC_COLOR="\033[32m"
-diff --git a/meta-oe/recipes-extended/valkey/valkey_9.0.4.bb b/meta-oe/recipes-extended/valkey/valkey_9.1.0.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/valkey/valkey_9.0.4.bb
-rename to meta-oe/recipes-extended/valkey/valkey_9.1.0.bb
-index 93e37a922a..de1f413d4f 100644
---- a/meta-oe/recipes-extended/valkey/valkey_9.0.4.bb
-+++ b/meta-oe/recipes-extended/valkey/valkey_9.1.0.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
- DEPENDS = "readline lua ncurses"
- 
--SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=${PV} \
-+SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version(d.getVar('PV'), 2)};protocol=https;tag=${PV} \
-            file://valkey.conf \
-            file://init-valkey-server \
-            file://valkey.service \
-@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=$
-            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
-            file://GNU_SOURCE-7.patch \
-            "
--SRCREV = "1cbee84ba69b54c3510597965fc4320ce716a6f4"
-+SRCREV = "c9e8005e9d0ec817e26c7db318861cb821409249"
- 
- RPROVIDES:${PN} = "virtual-redis"
- 
--- 
-2.54.0
-
+>
+> Samba 4.22.10 is a security release and addresses:
+> CVE-2026-1933, CVE-2026-2340, CVE-2026-3012,
+> CVE-2026-3238, CVE-2026-4408, and CVE-2026-4480.
+>
+> The base 4.19.9 version is directly affected by CVE-2026-3012,
+> CVE-2026-3238, CVE-2026-4408, and CVE-2026-4480. Samba lists
+> CVE-2026-1933 as affecting versions since 4.21 and CVE-2026-2340
+> as affecting versions since 4.20, so those two are fixed by
+> 4.22.10 but are not applicable to the base 4.19.9 version.
+>
+> The Samba upgrade requires newer talloc, tdb, and tevent versions,
+> so those dependency upgrades are included first in the series.
+>
+> Himanshu Jadon (4):
+>   libtalloc: upgrade 2.4.2 -> 2.4.3
+>   libtdb: upgrade 1.4.10 -> 1.4.13
+>   libtevent: upgrade 0.16.1 -> 0.16.2
+>   samba: upgrade 4.19.9 -> 4.22.10
+>
+>
+> --
+> 2.35.6
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#127673): https://lists.openembedded.org/g/openembedde=
+d-devel/message/127673
+> Mute This Topic: https://lists.openembedded.org/mt/119879020/3616702
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nuj.mittal@oss.qualcomm.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
