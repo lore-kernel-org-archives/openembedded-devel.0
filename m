@@ -1,183 +1,148 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D1A3C43458
-	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 02:27:04 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36494.1782872822790122232
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 121D9C43458
+	for <webhook@archiver.kernel.org>; Wed,  1 Jul 2026 06:33:00 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39109.1782887572765447714
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2026 19:27:02 -0700
+ Tue, 30 Jun 2026 23:32:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=cS3UpCMK;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JVlSUiwe;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65UNLmKU3495096
-	for <openembedded-devel@lists.openembedded.org>; Wed, 1 Jul 2026 02:27:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=; b=cS3UpCMK4FbY7uw4
-	9EaVnUN954ch9aabuniOANziie5udfpi+Tg3yzeS0U25BDtJYznIC/P3EAdY0ruG
-	CWJ0og4/tG220B1KN9N9j5c1E3BtErLaKXNfzgEbpDHZsVOFNELnxZD1uBZJsC/T
-	MgeE7oAjg3hhWjh1n0zBYYQvLv9wWKM1PC5PxZEOPCmW0FU5RCDIC0yS0jymSICO
-	4uqJRXD3vQso6NkoAJfcjPMJPWLjPeW4nj2tWAlk4YJNQDOjJpBIQI+eCwY3X201
-	eOHtwaIfQkDxePTxl++qnAbzRl6wmgwEZtZ1gBsp+ToLb/BcbAUsD+ZeaIHmXK2l
-	PI/6qA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4j911vy6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 02:27:01 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0408254aso21175661cf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 19:27:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782872821; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ZTcVyBkohzh0plJaWMZE8VDpAhme6PiBJNAgv4gOeE9BudXdLUGIyIuJ72jerv52mT
-         MSz0uIMIkw2PZcr9NicKmgP+6YzWl3GHQ9n/z00NCdyPLgv5jLZ53XbWdK6yuP4VZrIR
-         qyXfzv2Hp+AifI5jfpGeSYcMEVtTqhtHyZumfs4L4Jdx1cWbJMQilz22UIvdukBp7rDq
-         UI0EnJvce64PcUdBwCPsiMOKUwwqnH/T6SuZhHITkCl6Ffq/k1Ybc2U2LeRzJJVMrqG5
-         V0RcbVBX9mOsYqWiMV0/ayCTEQdO3HoJZqB7M9f1KxBsUxuUg7NZwhXslLvJtpotR0lz
-         GtkA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
-        fh=m/d9KrVvYA4BbVMqG1tHRdDDRqNWot/wwa013o51EOo=;
-        b=lsUvnbm894Ag9RVccOWJaGJSrG97VUYdoaTqvBzAGo+WnSXDME4npvtBeBL0hk+w9M
-         9Fp48C5WiP1sNAQYSSU1rpenuIV3UUid/T7Q+ggJ/J1wffsi7S2p7VVJk5TtTYNnMu8R
-         uxmlRKnOkFsz2PKURdl5Z0NqeixozU3yenV/fesfNKCcIHH4JyEVlZKy5A815fHwVn74
-         m1OWKfOfyFxOMTL69bV2YACRVKELJ1gclHYITUBzA+jvUfEb0azlSH9ImKCbfnevH0Ya
-         WDPCBN4WVSvFgJpOTjJzNsImhpSvZ7jc5BMxMVG2yUQBgGrcXAUw0XqMKDiqOTctVHaz
-         HDAg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=CT/5Z3uW;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-37fb17e1435so129191a91.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2026 23:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1782872821; x=1783477621; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
-        b=JVlSUiwewVhBw3h8eOo9VDSH+F8h0+3G0p/XonHFx7BJHqO2mBPEV2koCNyLWVjucb
-         GJOXMfHjBDt24u4e4pmQGaXiMtP/ySzhs8lu1BKjXG0uyY9FoQ+BGVnVaeVvFFqPs/1J
-         9fpeZgK+dUhsrXJbfuLIS95PHzDdNTWLckVa/DGOZ973q6ANo7LAw8wq+oMslhaaVe8w
-         jgz4RRe+KqastopyN2AacjWqMaxf4JhZZMrNFyHrlINGmEtg6bY8+ZsxeG9fjsaEHzrj
-         QdBq+B8I+W8PahNXFrQBG3ISMHlsXuf8uPzu+vbd70qYrBa4Z9x+sV8IwtJNJpTJn2EX
-         49oQ==
+        d=gmail.com; s=20251104; t=1782887572; x=1783492372; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NSJWAV5Qn1OVOafjkUTfrYLW7WenIVUa+VL77otpgj8=;
+        b=CT/5Z3uWIGa66IgFDw5P4fxQeaJkOA6+gWAp5Oz8u6uvmrVouYeIt0qfCHsqVIMis0
+         1sZV4xTbr485x8A17WYdjGG0r6NlQ4QmqJWy09UFRXejsrm5NJMwJ2MGEZSZwUaJZMTF
+         94NtTaB0tq/s3frYuToQCndpkb9z8pyBoynccUbN73vPTZbuxhfMBfULM/4KanIPEu1t
+         IT8QWaf5z6x0WhjMJAdGjZpjd/+2wqIvSdx+kV1LRiEgpZ9LgqgNJDtoqYJWI9Iyzbo7
+         yUqmxEy3+JU8rwnNTps4ZIgktd8w8uPaXT21OcXTn3HuDZLOb7LxZcnrT6GUCH0PvAxh
+         jERw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782872821; x=1783477621;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=LG31ZUc+ubtcgyuM2rb9LSES25RyVoAiIpUsJZSniww=;
-        b=kJJ6/2HaxfSFJPnZLPvIM9ZQIz2e8mBcYryC9z51AC+43bb6trTuqEIwYUg7L3ldCq
-         QKmpqaX0RCC+aAOcSMsDFh31DEqSDtPh3xd87vnOsimnk71WhrdRImpQ87ezQqpkFk4V
-         r+cojPINpg1om27lzHE8oHUmNhF+846jBHw3hAd9q/mFFfkDsOg4VNGmWW0sY0Pc7YEx
-         pYuPJijykOUSzV6Ry4Q8V/F/3zpjGZuU9xAv9BHpR/CfsTo5LelyywRyq2T1KLlaAzi9
-         1xEg1QngqwtAo3nofIfmM3svqmwVYxtTccwc6ZQUZuXjFYBaN5kuvg2FaCr+23oWEA4Z
-         atyg==
-X-Gm-Message-State: AOJu0YxG4jXf3Xr1Kml8ODq/zTONsRaN62NfYc8Zbnl8srHP3KopY7Y7
-	VyhfmFOXZGBdA4DULtYAvnc98cLWA0AFNC7CZqJ8/ObnByF+xdB+Nh5+xEA2EGeD2Ro9IuxXL9k
-	ag0NyqYtby8ETGS0eLDw0uaJtXOL7YPTR8ZVi2FMxxFMi3ivD5LA3ogLZ3ZdSKPmj1xBMJiaaah
-	mB7a8xwRY8kF2bTdcYZUJLdEqXLBY82K1He5d9yvc7utWXFGXuV/QE1Hk3WBI=
-X-Gm-Gg: AfdE7ckCWzID9oGOAnYyLf90m4V90kXYKrI7hVUjsm2mc354XC6eBR0j1KTpl0vdbpW
-	Q15s2lL1XH1egprY30dNdRrTpxY/yqmOYj2JqEredZ6maUgchftFZ5HGo2UyGEEX8yt6qDG60+X
-	R+I9n1XiSTH2buvg/Tp586S1I/geG3ryFoEZx0UfWiW6OrL5A0NmgItjdg73uDyEkiuQ==
-X-Received: by 2002:a05:622a:2591:b0:517:9407:5c38 with SMTP id d75a77b69052e-51c17e92d8dmr51264401cf.24.1782872820991;
-        Tue, 30 Jun 2026 19:27:00 -0700 (PDT)
-X-Received: by 2002:a05:622a:2591:b0:517:9407:5c38 with SMTP id
- d75a77b69052e-51c17e92d8dmr51264161cf.24.1782872820609; Tue, 30 Jun 2026
- 19:27:00 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1782887572; x=1783492372;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NSJWAV5Qn1OVOafjkUTfrYLW7WenIVUa+VL77otpgj8=;
+        b=BITYNGBqVg5vbrajgS+/nXtgiTD8+jbXfFP/XuLvwhF8fQXsg0L+z05Wr2u+kSMf2S
+         1Bx49p0HlioNvZqOYsiA+0CnZBrzoS190LKjGAu8Umb5LRR1Z+s9DAJnxNYxQk1i9RPH
+         tPgw6Xl8yvB3n+24Zf72FnlJQI5eyJWNyJSKTGfPcmx+A4DCMRCE2EVLP0OcnIOXbs6i
+         MRGnaXZ/pKqhumu7AJov1Aj7Hfttw888A4p3edl1XNPZo828kG5+HrMmCIj8OSLQrClk
+         pzR3fpH1Hc0v1CveepA1opy5eTN+R1y2ZmfVOpbpN1lPjlxX1sREdgpRKpOmQ62lY79t
+         hUGQ==
+X-Gm-Message-State: AOJu0YzXfGJndqouAHqvQYy44Cl6ICgPatyai9LW6L2nc7FSXBv9rZo+
+	AYsslA9wxty0Y7+Qn9QLNxt0iN18yzWNOmSYfzZlvjuB6TQo94U7GFkqzHFs/6zM0EQ=
+X-Gm-Gg: AfdE7ck6SEgGJq2hDadMCPBjXCm4mOwOkJjvQNdDHWQgwRMrpdo6fHeTjR5FeipOdxe
+	7NrGgyiPJGFx5uhJKDka2HgH9L+kXa5kf6pwdlEw5nVl0c07JCsHA7NFnBcz/Qos5WTLdasP/Pn
+	LEj9MnNGoldtEYNbsxyDH0dlr6pMHYLtK7CqHL7v/XMjvYg4gCzK/DowxIJfxpVsPlRJOMCPTl7
+	G+mj8wNmouogIMeIjuqsEGY/90X8WaXhEy30jrvcrKWqpMzN3d6paMVWv/gaavYcrb8j1Q+eCH8
+	VRxT0n0qUKVxGPjay8y8BmdDqCD+LakbfjCKylEOockXTZVVhKYvNbw9P2rmvEyxoMINg3MTOpX
+	VlIZwDYNmlhC9pT98pEiaFA1jKfKo1v6stX7tUZZz5FOOi/czrwIRhw5N0Uj+ERd6hfG3BO8HIb
+	UMAmjV6WMkOyylFJrYnzrFL++tCcXq4Lnl4nWtuoIzi3/AUb09ZKkQnUYYj5886gRLnvoJ7J3vu
+	s+Zlc5cNlrGUlXfv0nl+6m/RO86OAHk0feB+8Kk9Uhkr8hEBHJ78yCo6kwCksz0DQAULTQMzlGs
+	o30gbxXKoatq/nnqgTYW7Szej9MmIg==
+X-Received: by 2002:a17:90b:1dcf:b0:37f:e326:6559 with SMTP id 98e67ed59e1d1-380aa1c7ac5mr511156a91.22.1782887571986;
+        Tue, 30 Jun 2026 23:32:51 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38095d6666esm1187220a91.6.2026.06.30.23.32.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Jun 2026 23:32:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] crash: Fix cross compilation for 32-bit arm
+Date: Tue, 30 Jun 2026 23:32:47 -0700
+Message-ID: <20260701063247.2483496-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-References: <20260619041304.2585485-1-hjadon@cisco.com>
-In-Reply-To: <20260619041304.2585485-1-hjadon@cisco.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Wed, 1 Jul 2026 10:26:47 +0800
-X-Gm-Features: AVVi8CcSbcW8UtrCNhbMXiR_lUee-xSRa9d6JCCSvkT7fFDTfx3yWjgZVnzbKtw
-Message-ID: <CA+s=J=wdJDW9TsU4kssqYAZzfFLyuPJA0oPQMSkTM-yMHPiU5A@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][scarthgap][PATCH 0/4] samba: upgrade to 4.22.10
-To: hjadon@cisco.com
-Cc: openembedded-devel@lists.openembedded.org, vchavda@cisco.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: ZrzmQqcFcraJZESe0hzktEM8NXidyEuw
-X-Authority-Analysis: v=2.4 cv=ftfsol4f c=1 sm=1 tr=0 ts=6a447af5 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=Q4-j1AaZAAAA:8 a=AUd_NHdVAAAA:8 a=EUspDBNiAAAA:8
- a=ocHU1tILJPdIRmwv4TUA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
- a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-GUID: ZrzmQqcFcraJZESe0hzktEM8NXidyEuw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDAyMyBTYWx0ZWRfX+uCuJ+A9CclA
- 1wGKCKXHSoE7NsWMjXr4VnXcSNOFEBu3FH9jVeWgKgOY98S0rf9xMN8UvtHs7tr7rkV6976dqmd
- /f1Cvjr0fYuoea8uMs/jVl3T6DKGdl4K88N3SMfYddcYxatedr/7dkBPojQuwDS2JgmE7BYy+Qj
- H1NzswSx+Jeq2lAoJcr2WiNQcgWQzC7r6vpE0i6cJ54/e3S08KK0GfHYrfpMJEGr/o3xDJ5MwEA
- 66CSpxfcqADJie8Bjg3f0Qhi+AD3acQhFHYdKZljoKSBGBVOs1RCBVPVtpE6Im3CTEKq/Tov/Mn
- jYF/RbDdptnACZJkznmn1A3z22pGz2RfWPI7XLF7bXLEWRRpduYP2j/4WdXRKN8IgTyDqshwU83
- SFolalOFZZKm9AaKoUnGqCzUwuAofsFsY52T1Bsh0z9BD0d4yytDiiQW+9wtclxUHKQtrQmR3oU
- b1Ke7PxUPV14pg78VCA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDAyMyBTYWx0ZWRfXwodwe//LDqm1
- 8zJCkEAcTomPVVmvg/OX3FY24k7VbJFUODSgwvXdHFd6lTxxQF3g8fpUjPg8Va9v+jvWVE5kOUN
- gr21+7rTgCaziJK3AGsyq6RHpLCI97k=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-30_06,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0
- priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010023
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 02:27:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127988
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Jul 2026 06:33:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127989
 
-Hi Himanshu
+The upstream crash Makefile CONF_TARGET_ARCH mapping (used when
+CROSS_COMPILE is set) enumerates most of OE supported arches
+but omits 32-bit arm. Building with CROSS_COMPILE=arm-*
+therefore aborts at Makefile parse time:
 
-On Fri, Jun 19, 2026 at 12:13=E2=80=AFPM Himanshu Jadon -X (hjadon - E
-INFOCHIPS PRIVATE LIMITED at Cisco) via lists.openembedded.org
-<hjadon=3Dcisco.com@lists.openembedded.org> wrote:
->
-> From: Himanshu Jadon <hjadon@cisco.com>
->
-> This series upgrades Samba on scarthgap from 4.19.9 to 4.22.10.
+    Makefile:75: *** The current Arch(arm) does not support cross compilation.  Stop.
 
-This version jump includes feature upgrades and not acceptable for the
-stable branch.
+ARM is already a valid crash target (defs.h/configure.c), so add a patch
+mapping the normalized "arm" arch to CONF_TARGET_ARCH=ARM like every
+other supported arch.
 
->
-> Samba 4.22.10 is a security release and addresses:
-> CVE-2026-1933, CVE-2026-2340, CVE-2026-3012,
-> CVE-2026-3238, CVE-2026-4408, and CVE-2026-4480.
->
-> The base 4.19.9 version is directly affected by CVE-2026-3012,
-> CVE-2026-3238, CVE-2026-4408, and CVE-2026-4480. Samba lists
-> CVE-2026-1933 as affecting versions since 4.21 and CVE-2026-2340
-> as affecting versions since 4.20, so those two are fixed by
-> 4.22.10 but are not applicable to the base 4.19.9 version.
->
-> The Samba upgrade requires newer talloc, tdb, and tevent versions,
-> so those dependency upgrades are included first in the series.
->
-> Himanshu Jadon (4):
->   libtalloc: upgrade 2.4.2 -> 2.4.3
->   libtdb: upgrade 1.4.10 -> 1.4.13
->   libtevent: upgrade 0.16.1 -> 0.16.2
->   samba: upgrade 4.19.9 -> 4.22.10
->
->
-> --
-> 2.35.6
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127673): https://lists.openembedded.org/g/openembedde=
-d-devel/message/127673
-> Mute This Topic: https://lists.openembedded.org/mt/119879020/3616702
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Verified by cross building crash for qemuarm (arm-yoe-linux-gnueabi-):
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Cc: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+---
+ meta-oe/recipes-kernel/crash/crash.inc        |  1 +
+ ...pport-cross-compiling-for-32-bit-arm.patch | 36 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-Makefile-support-cross-compiling-for-32-bit-arm.patch
+
+diff --git a/meta-oe/recipes-kernel/crash/crash.inc b/meta-oe/recipes-kernel/crash/crash.inc
+index dd231134b2..d6447ebe49 100644
+--- a/meta-oe/recipes-kernel/crash/crash.inc
++++ b/meta-oe/recipes-kernel/crash/crash.inc
+@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
+            file://gdb_build_jobs_and_not_write_crash_target.patch \
+            file://0001-symbol-fix-S-cannot-work-with-kaslr-detection.patch \
+            file://0001-Use-CC-env-var-to-get-compiler-version.patch \
++           file://0001-Makefile-support-cross-compiling-for-32-bit-arm.patch \
+           "
+ # 0001-Use-CC-env-var-to-get-compiler-version.patch:
+ # to get the right compiler info into ./crash --buildinfo
+diff --git a/meta-oe/recipes-kernel/crash/crash/0001-Makefile-support-cross-compiling-for-32-bit-arm.patch b/meta-oe/recipes-kernel/crash/crash/0001-Makefile-support-cross-compiling-for-32-bit-arm.patch
+new file mode 100644
+index 0000000000..102674000b
+--- /dev/null
++++ b/meta-oe/recipes-kernel/crash/crash/0001-Makefile-support-cross-compiling-for-32-bit-arm.patch
+@@ -0,0 +1,36 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 30 Jun 2026 00:00:00 +0000
++Subject: [PATCH] Makefile: support cross compiling for 32-bit arm
++
++The CONF_TARGET_ARCH cross-compilation mapping enumerates aarch64,
++s390x, powerpc64, ppc64le, alpha, i386, mips, sparc64 and riscv64 but
++omits 32-bit arm. As a result, building with CROSS_COMPILE=arm-* (e.g.
++arm-poky-linux-gnueabi-) aborts at Makefile parse time with:
++
++    Makefile:75: *** The current Arch(arm) does not support cross compilation.  Stop.
++
++ARM is already a valid crash target (defs.h/configure.c), so map the
++normalized "arm" arch to CONF_TARGET_ARCH=ARM like every other arch.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/Makefile b/Makefile
++index 1111111..2222222 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -55,6 +55,8 @@ ifeq (${ARCH}, x86_64)
++ CONF_TARGET_ARCH := X86_64
++ else ifeq (${ARCH}, aarch64)
++ CONF_TARGET_ARCH := ARM64
+++else ifeq (${ARCH}, arm)
+++CONF_TARGET_ARCH := ARM
++ else ifeq (${ARCH}, s390x)
++ CONF_TARGET_ARCH := S390X
++ else ifeq (${ARCH}, powerpc64)
++--
++2.43.0
 
