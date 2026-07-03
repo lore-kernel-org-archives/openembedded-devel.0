@@ -1,259 +1,173 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mail@michael-fitzmayer.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 509ADC43458
-	for <webhook@archiver.kernel.org>; Fri,  3 Jul 2026 17:35:19 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.98209.1783100107822078188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 856A0C43458
+	for <webhook@archiver.kernel.org>; Fri,  3 Jul 2026 18:20:49 +0000 (UTC)
+Received: from mailserv.regfish.com (mailserv.regfish.com [52.57.101.90])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.98942.1783102844373518466
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2026 10:35:08 -0700
+ Fri, 03 Jul 2026 11:20:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rZiBSMe0;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-68bd9fce347so1469284a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 10:35:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783100105; cv=none;
-        d=google.com; s=arc-20260327;
-        b=j1H5kUV9VpCTYr2BJ4mYM0y2Kizsx4t9f1g7Veu1dL8ObIa40/RUAB9/R/9EYzOAr4
-         H4q9mqzV1qkoQIRXdV7dN1nvzcBnhG0Xe+KFMMHeIMTXIGWah4odOwanO//IocQcv1jG
-         IRl3jyPFjmhG7A6Njjdx/8NgMqdJN6v9oSWFitDyEWC2QOjlmC5daL0CGlhNcAEbFz0h
-         mtV9S5PQ9tx2JzfULKnyjWeDy4/UutkgPyWktwAbVBPqWcS8GnL1msooXQyaEEA5bIWA
-         SHsMBOE1D+Ao6BUhBsYbYwFK/Aj9iLvjcggaxJ9nMTo9c9twOpihAGvUd3C7LkqONdIA
-         AlMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=jKOLiM/yxPg+J/0f90hmwemakAMcgJ+Ys8+XIsTFIpo=;
-        fh=EHpmre0aQYmRysQfwT+hDmUqB39dsf4VzvypXOcdZLg=;
-        b=VXKpcbeuk2d/F/s/9BIDu1C5nUfe/jtRrTE6XHBoBJv6JYp+2H3qU+PLaqX2Ni3tQH
-         GrCWSpqkoskcjCkGb8+GKbaM+hUdcdEaEw9I5zOxpuqMAw72Cl0YaVRXWgFg4yCfB4yE
-         T8gb9jZr4ZNN27O/x1vqlW1Nx9l5YKTETf05DJUQgq0qnvH5sWDs8g3cT+GhLqQ+Mt0q
-         mDdqjkC5/Ua+zK4AY1Sc7CqXGOs/2tGL6KfSL9ZAfF5ZTZQgBsBvcFnEuQsMn+TDb9NG
-         sbn9MRfj0F6v5IUTa+a5YZoy2a82U7ygPymPUOAyLHbUhq4eBhFSw4yXaUWKFGE4uji3
-         0v6A==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783100105; x=1783704905; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=jKOLiM/yxPg+J/0f90hmwemakAMcgJ+Ys8+XIsTFIpo=;
-        b=rZiBSMe0H7ZASZzAVUjP70iOBJZw7YEsAWfMzn3qs6TvKNvZy9lhqmW1NPfBwXb4Wc
-         rJpDDD5w+rCeidw0AZrCyJDVta1O2ZHGBOjEjWCuYqOw41ZW2IpQ19xtesEBBYQ/Kct0
-         i7jgr744Pt6+IWAPQkjSsZP5MThvFDWW5vWXO/eWSgpA0i4q5zXSlJpucrtriaAKCU7P
-         sJaWlIGh7vy8Wn+tZ6Hdj7YXDutfM0WLokS4BynsHCb3H90PVOAuUfKh/jVIsV687Iap
-         YtYyqEDx7MWxMvHBfrZ8fvtvxuhq1wfAv/mufzpD+7UPoIJKnjcD8XZIwAyoeERIgseU
-         Ev9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783100105; x=1783704905;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jKOLiM/yxPg+J/0f90hmwemakAMcgJ+Ys8+XIsTFIpo=;
-        b=QMcQ0rKwGLVXC2GSesHnPyr6gT0DaM/j+0UZWCz/BTYcRxusO56cI2IoA9WyzkVw3L
-         HRWtLtvDHYf825a5Y1YX1nBuNySAHgCiK/kWYRTeNukfu5d+WkBHou0cokGctllTfcN9
-         cylIH3Wo6GxzhfIRStq2I8OSsXU62PJHkdiQTHVPddjnQ/UMYkFJk4g230XCT+MSeUzJ
-         EQR4EcDe78GYrP1D95hgWslMWkTvIlatvZUN9DZKC0fuYSUchFQuIq/uRKBRyHooF7RF
-         yQ2NoF7fmOpmGseLVDnGLCmCjmED86KVFRQso6SpzbkfVOFLzibuFp+mLUUaYTvaxaGh
-         srag==
-X-Gm-Message-State: AOJu0YxqV/9oTB0uDLzbo6cv7MIWkjsGymAiQ3Rkcf9q1NN7R+1Weknx
-	oEa1TbOT7IkVp1YmzDSHx2V015BSygDzwJGgDyrbdUGMvjdae+BzNa9VKB0BF3Hb9eA1z4jMCuU
-	dwgc1RPdiwhCPpxlADKblJSu+TWRelWo=
-X-Gm-Gg: AfdE7ckd8iMmNhpaFRBulWLa2k5f6RqhDiI/qbGzCTD4LrIsCJ+ICtLsqAheTFkFb5Y
-	OX1ckQEGsyvj1GGW9HuKpoSHmPAyDhxP8wqkkMGbnrwN+mqRY3t/UhWk8xm9s3NVXwUtf8XVqS8
-	CD6C8ra9wmcaOo2K4z8IRJNm9fYGmGyvPh8xo7O3/LFczL7W2qIsENcRUASmir666PKaFe19ut+
-	BNrGdqEjLcf2wUK4qgXwFzHdlqF37McDd3Csvm9KFJ1Ry5RyQAqLVWtkpulzpJDs10T6moBC+ro
-	OBslhJBvsHwg2VNp8SDxTCa8GK9hDYIkoquSl1gOHgt3VusDyvg9sb7lilQmLNWVXYBshy4P1yl
-	2ytu+wTvT8OD1JYs0OPI/4/1vLvdhGeAoRisBrAR2JXbaoHlriASN03OXZyKuKYSg1SWn
-X-Received: by 2002:a05:6402:27c8:b0:698:c1ea:c1f7 with SMTP id
- 4fb4d7f45d1cf-69a1a3c0751mr90555a12.38.1783100104487; Fri, 03 Jul 2026
- 10:35:04 -0700 (PDT)
+ dkim=none (message not signed); spf=none, err=permanent DNS error (domain: michael-fitzmayer.de, ip: 52.57.101.90, mailfrom: mail@michael-fitzmayer.de)
+Received: by mailserv.regfish.com (Postfix, from userid 706)
+	id 55FA260788; Fri,  3 Jul 2026 18:20:42 +0000 (UTC)
+Received: from DESKTOPB84SDL6 (ipservice-092-208-170-243.092.208.pools.vodafone-ip.de [92.208.170.243])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: 46272-0001)
+	by mailserv.regfish.com (Postfix) with ESMTPSA id 07318606EC
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Jul 2026 18:20:41 +0000 (UTC)
+From: "Michael Fitzmayer" <mail@michael-fitzmayer.de>
+Cc: "'OpenEmbedded Devel List'" <openembedded-devel@lists.openembedded.org>
+References: <20260703172800.480930-1-mail@michael-fitzmayer.de> <CAMKF1sqx57Qh_=gkVecREUxndur18rj-9hJy0YucXxK+-y-mPA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqx57Qh_=gkVecREUxndur18rj-9hJy0YucXxK+-y-mPA@mail.gmail.com>
+Subject: RE: [oe] [meta-oe][PATCH] canopenterm: update to version 2.03
+Date: Fri, 3 Jul 2026 20:20:41 +0200
+Message-ID: <001601dd0b18$a89cec80$f9d6c580$@michael-fitzmayer.de>
+X-Mailer: Microsoft Outlook 16.0
 MIME-Version: 1.0
-References: <20260703172800.480930-1-mail@michael-fitzmayer.de>
-In-Reply-To: <20260703172800.480930-1-mail@michael-fitzmayer.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 3 Jul 2026 10:34:43 -0700
-X-Gm-Features: AVVi8CegZDLun6nHhfXRiM6I83qcJnPAh7VM7JTfs2kbpqsiPdSNaqVnk7QyZaw
-Message-ID: <CAMKF1sqx57Qh_=gkVecREUxndur18rj-9hJy0YucXxK+-y-mPA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] canopenterm: update to version 2.03
-To: mail@michael-fitzmayer.de
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000053b60f0655b8584a"
+Thread-Index: AQF+7FfokNA4Mt+mdIXPnj49QaFXPAGICRNGtwwXlSA=
+Content-Language: en-gb
+Content-Type: multipart/signed;
+	protocol="application/pgp-signature";
+	micalg=pgp-sha256;
+	boundary="=-=bWmghFSyqkD0j+=-="
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 17:35:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128013
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 18:20:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128014
 
---00000000000053b60f0655b8584a
-Content-Type: text/plain; charset="UTF-8"
+This is a multipart message in MIME format.
+
+--=-=bWmghFSyqkD0j+=-=
+Content-Type: multipart/alternative;
+	boundary="=-=+PwFLYANNEnWxb=-="
+
+
+--=-=+PwFLYANNEnWxb=-=
+Content-Type: text/plain;
+	charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+
+canopenterm: the checksum differs from previous version because the copyrig=
+ht year span has been updated.
+
+=20
+
+From: Khem Raj <raj.khem@gmail.com>=20
+Sent: 03 July 2026 19:35
+To: mail@michael-fitzmayer.de
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] canopenterm: update to version 2.03
+
+=20
 
 Please document what change in license check sums to differ
 
-On Fri, Jul 3, 2026, 10:28=E2=80=AFAM Michael Fitzmayer via lists.openembed=
-ded.org
-<mail=3Dmichael-fitzmayer.de@lists.openembedded.org> wrote:
+=20
 
-> - Added new script to interface CiA 305: Layer setting services (LSS)
-> - New API function to set baud rate: can_set_baudrate()
-> - Remove usage of white text-color
->
-> Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
-> ---
->  .../{canopenterm_2.02.bb =3D> canopenterm_2.03.bb}          | 8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
->  rename meta-oe/recipes-extended/canopenterm/{canopenterm_2.02.bb =3D>
-> canopenterm_2.03.bb} (84%)
->
-> diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-> b/meta-oe/recipes-extended/canopenterm/canopenterm_2.03.bb
-> similarity index 84%
-> rename from meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-> rename to meta-oe/recipes-extended/canopenterm/canopenterm_2.03.bb
-> index 0e8a7a1c8a..0ee94bb052 100644
-> --- a/meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-> +++ b/meta-oe/recipes-extended/canopenterm/canopenterm_2.03.bb
-> @@ -11,14 +11,12 @@ HOMEPAGE =3D "https://canopenterm.de"
->  BUGTRACKER =3D "https://github.com/CANopenTerm/CANopenTerm/issues"
->
->  LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D
-> "file://LICENSE.md;md5=3Dbd2edc721b4a0289efe949bdbe7dda79"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.md;md5=3D8977ecf3af54da2a5271158cc969bd45"
->
->  DEPENDS =3D "canvenient cjson isocline libinih libsdl3 lua pocketpy"
->
-> -PV .=3D "+git"
-> -
-> -SRC_URI =3D "git://
-> github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3Dmain"
-> -SRCREV  =3D "7a9466029a6e88345e65e794ff1779f778c9358a"
-> +SRC_URI =3D "git://
-> github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3Dmain;tag=
-=3Dv${PV}
-> <http://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3D=
-main;tag=3Dv$%7BPV%7D>
-> "
-> +SRCREV  =3D "63ccae8262f5e796ffca0c8a44fdf7ff0bd28571"
->
->
->  inherit cmake ptest
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#128012):
-> https://lists.openembedded.org/g/openembedded-devel/message/128012
-> Mute This Topic: https://lists.openembedded.org/mt/120103307/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+	=20
 
---00000000000053b60f0655b8584a
-Content-Type: text/html; charset="UTF-8"
+--=-=+PwFLYANNEnWxb=-=
+Content-Type: text/html;
+	charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Please document what change in license check sums to diff=
-er</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"lt=
-r" class=3D"gmail_attr">On Fri, Jul 3, 2026, 10:28=E2=80=AFAM Michael Fitzm=
-ayer via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</=
-a> &lt;mail=3D<a href=3D"mailto:michael-fitzmayer.de@lists.openembedded.org=
-">michael-fitzmayer.de@lists.openembedded.org</a>&gt; wrote:<br></div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">- Added new script to interfac=
-e CiA 305: Layer setting services (LSS)<br>
-- New API function to set baud rate: can_set_baudrate()<br>
-- Remove usage of white text-color<br>
-<br>
-Signed-off-by: Michael Fitzmayer &lt;<a href=3D"mailto:mail@michael-fitzmay=
-er.de" target=3D"_blank" rel=3D"noreferrer">mail@michael-fitzmayer.de</a>&g=
-t;<br>
----<br>
-=C2=A0.../{<a href=3D"http://canopenterm_2.02.bb" rel=3D"noreferrer norefer=
-rer" target=3D"_blank">canopenterm_2.02.bb</a> =3D&gt; <a href=3D"http://ca=
-nopenterm_2.03.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopent=
-erm_2.03.bb</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 8 +++-----<br>
-=C2=A01 file changed, 3 insertions(+), 5 deletions(-)<br>
-=C2=A0rename meta-oe/recipes-extended/canopenterm/{<a href=3D"http://canope=
-nterm_2.02.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_=
-2.02.bb</a> =3D&gt; <a href=3D"http://canopenterm_2.03.bb" rel=3D"noreferre=
-r noreferrer" target=3D"_blank">canopenterm_2.03.bb</a>} (84%)<br>
-<br>
-diff --git a/meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopen=
-term_2.02.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2=
-.02.bb</a> b/meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopen=
-term_2.03.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2=
-.03.bb</a><br>
-similarity index 84%<br>
-rename from meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopent=
-erm_2.02.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2.=
-02.bb</a><br>
-rename to meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopenter=
-m_2.03.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2.03=
-.bb</a><br>
-index 0e8a7a1c8a..0ee94bb052 100644<br>
---- a/meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopenterm_2.=
-02.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2.02.bb<=
-/a><br>
-+++ b/meta-oe/recipes-extended/canopenterm/<a href=3D"http://canopenterm_2.=
-03.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">canopenterm_2.03.bb<=
-/a><br>
-@@ -11,14 +11,12 @@ HOMEPAGE =3D &quot;<a href=3D"https://canopenterm.de" r=
-el=3D"noreferrer noreferrer" target=3D"_blank">https://canopenterm.de</a>&q=
-uot;<br>
-=C2=A0BUGTRACKER =3D &quot;<a href=3D"https://github.com/CANopenTerm/CANope=
-nTerm/issues" rel=3D"noreferrer noreferrer" target=3D"_blank">https://githu=
-b.com/CANopenTerm/CANopenTerm/issues</a>&quot;<br>
-<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
--LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=3Dbd2edc721b4a0289efe949b=
-dbe7dda79&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=3D8977ecf3af54da2a5271158=
-cc969bd45&quot;<br>
-<br>
-=C2=A0DEPENDS =3D &quot;canvenient cjson isocline libinih libsdl3 lua pocke=
-tpy&quot;<br>
-<br>
--PV .=3D &quot;+git&quot;<br>
--<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/CANopenTerm/CANopenTe=
-rm.git;protocol=3Dhttps;branch=3Dmain" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=
-=3Dmain</a>&quot;<br>
--SRCREV=C2=A0 =3D &quot;7a9466029a6e88345e65e794ff1779f778c9358a&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/CANopenTerm/CANopenTe=
-rm.git;protocol=3Dhttps;branch=3Dmain;tag=3Dv$%7BPV%7D" rel=3D"noreferrer n=
-oreferrer" target=3D"_blank">github.com/CANopenTerm/CANopenTerm.git;protoco=
-l=3Dhttps;branch=3Dmain;tag=3Dv${PV}</a>&quot;<br>
-+SRCREV=C2=A0 =3D &quot;63ccae8262f5e796ffca0c8a44fdf7ff0bd28571&quot;<br>
-<br>
-<br>
-=C2=A0inherit cmake ptest<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128012): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128012" rel=3D"noreferrer noreferrer" target=3D"_b=
-lank">https://lists.openembedded.org/g/openembedded-devel/message/128012</a=
-><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120103307/199=
-7914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/mt/120103307/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
-openembedded.org</a><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
-mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmai=
-l.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head><meta name=3DGenerator content=3D"Microso=
+ft Word 15 (filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3DEN-GB link=3Dblue vli=
+nk=3Dpurple><div class=3DWordSection1><p class=3DMsoNormal><span style=3D'm=
+so-fareast-language:EN-US'>canopenterm: the checksum differs from previous =
+version because the copyright year span has been updated.<o:p></o:p></span>=
+</p><p class=3DMsoNormal><span style=3D'mso-fareast-language:EN-US'><o:p>&n=
+bsp;</o:p></span></p><p class=3DMsoNormal><b><span lang=3DEN-US>From:</span=
+></b><span lang=3DEN-US> Khem Raj &lt;raj.khem@gmail.com&gt; <br><b>Sent:</=
+b> 03 July 2026 19:35<br><b>To:</b> mail@michael-fitzmayer.de<br><b>Cc:</b>=
+ OpenEmbedded Devel List &lt;openembedded-devel@lists.openembedded.org&gt;<=
+br><b>Subject:</b> Re: [oe] [meta-oe][PATCH] canopenterm: update to version=
+ 2.03<o:p></o:p></span></p><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><div><=
+p class=3DMsoNormal>Please document what change in license check sums to di=
+ffer<o:p></o:p></p></div><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><div><bl=
+ockquote style=3D'border:none;border-left:solid #CCCCCC 1.0pt;padding:0cm 0=
+cm 0cm 6.0pt;margin-left:4.8pt;margin-right:0cm'><p class=3DMsoNormal style=
+=3D'margin-bottom:12.0pt'><o:p>&nbsp;</o:p></p></blockquote></div></div></b=
+ody></html>
 
---00000000000053b60f0655b8584a--
+--=-=+PwFLYANNEnWxb=-=--
+
+--=-=bWmghFSyqkD0j+=-=
+Content-Type: application/pgp-signature;
+	name="openpgp-digital-signature.asc"
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCAAdFiEEeko8mQdaojPAePLVyfzHsirX2UkFAmpH/XEACgkQyfzHsirX
+2UmQFQv/WIMinDHOQ8j2JmUb6SLf4m8b8C5mVu3LYs6R1a4ns/8jdUN9OX5GgXQ/
+Z1jTEaJZYZT9EbwXkeV5HJk/6NZBdcPwgEv7tQA6RnODtVW16zYOGMjb0hm+3Uvd
+bPkYFL0L6MuwuAGX7z/6HiH3I3g5UE40zc6BjVY1r0iuG9YxvXCu24j8sUG9e3oC
+ZOcdBbOUiXSHojM4UU+KxXdVDbRey6RxiIqL5xH0mTZ+t6efXvMgjtwcNTsvLCFJ
+kzlA0ehzqewKDaHhlAPy78pYODvdgZR8FAbmuFJZZoVgpwRuRIZIjauxZVKoserY
+tKx8x4/BlX0paGpCfdMOaDEw3UpcDhQEvDWhEwE0wi6eTn7TN4Xqv2tYuVUV+QJQ
+mNcCItIERLsB5RrI3+bT9qYGcj6dSgzeAFxVHM7Hdp+jGwzajIK3bReh1PKKHK+B
+A6fo398FeVdZcfKE4SmSx/SG9Ev970mrDprCo62tB9gCM8gBjgOh0sBBV3oemcR8
+GotxLTdj
+=84Q/
+-----END PGP SIGNATURE-----
+
+
+--=-=bWmghFSyqkD0j+=-=--
+
 
