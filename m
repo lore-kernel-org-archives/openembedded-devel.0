@@ -1,261 +1,383 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC9EEC43458
-	for <webhook@archiver.kernel.org>; Fri,  3 Jul 2026 01:16:44 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.83998.1783041401191101455
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E3B2C43458
+	for <webhook@archiver.kernel.org>; Fri,  3 Jul 2026 06:15:47 +0000 (UTC)
+Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.86557.1783059337724463122
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jul 2026 18:16:41 -0700
+ Thu, 02 Jul 2026 23:15:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=JK2EYDYy;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Xihv7p1T;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66319YLS2355972
-	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Jul 2026 01:16:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lt56SaX4ito/qrsUlwDXjAtm7W1gaf7z0bHDAmVY3U0=; b=JK2EYDYyB4M2+X6h
-	ol7DylPG/3bR0H/bR5xssUwon0PpH7eH8peXZne5LggQB25cTZEs9XTAfrovXvEk
-	77LadT2HE32qTabxujTZjevTWVjeoFqDWbALT1wEIt1AV1o1uLMpmm6L/3BmkMD5
-	vtDsURhsWhr++FX4bYv1QwmQr9BrechudpFU9GZXQPhOcA2iQpli2NTccP+pWe7G
-	PV1vo3K3UtPBe86xyLRR7dlPzJVSrlYVvYImCKd+u7QVFmjQVXTq04f/PbeP9Bkg
-	IfeU+NqdsfgYq0AF5PF05pfUU2Ue7I+bZdoIW6mKfHn4Uhgjohj5w886j5Zg/IuU
-	+B7eJg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5qfc31ra-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 01:16:40 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-8ea75996387so54234446d6.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Jul 2026 18:16:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783041399; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kfMA7Dm5;
+ spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-6663b4fe293so170752d50.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Jul 2026 23:15:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783059337; cv=none;
         d=google.com; s=arc-20260327;
-        b=M43OEgpFJW2E5crphivMsyaJRuIFFXlzMd1bbM3m2PABI2mKkBoXQhnuvlUJVfxRRH
-         GBbHo/OAlFeeOJYUyfnL8m83rmBaRYkLdNdhLG05ChKgq6ShpUBSetI1TzuJ8QETKGLp
-         zqw1teDn+wY0+1rjVa7PEPNbauJpXfdUVrKsa0rW3Fc6wCxL5nTIxjC1Tx4NDi3lUbj4
-         us6MDjPqRfzco5NHuzEmgiEcTc4PrFo+FHlQ/v/IUI5oJR1zQemEmOB2gP4nurfk1wXM
-         95RX8+5NvjMhyrBrSvMrfBJICtVYOv7ajz61kkQ4lR5EtBxfwtBL8vSXWmMnHr6b1uLc
-         UD+A==
+        b=GDsw4Iw2vnXOGR4voy2VIXvYfCL18wFP9fznzmLW4nvmoTSPwvLbnMxOnLb7QmzCMf
+         9EtdWvce5VazWux+fkPKkCJpwkOMRPkb0FAu88XWxwrmS+joQSeTuAKLKNvLgJtbXt5I
+         kSEdJKuAHVnBaFo1d/1ObwI+LdAe0r1h5r+BEuqcHTk8Xn1mTTkADDt/deIrHV7LidcL
+         v2MUUCLqV84Yi5nrnzqtNH9oUKIn+GEilMOCBbMhVeLUyXKVUPa5w5UwbA9yAPxN0322
+         vLF5THhWBaOGLJo1fffIc0sDcthx96gHNF2l1+vG8AcSO9zYjL5PbYlAvJEMFpdo6sey
+         Q9+w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=lt56SaX4ito/qrsUlwDXjAtm7W1gaf7z0bHDAmVY3U0=;
-        fh=3mcPwXhT/l6eWXEkkIY+siEB/uHMmqe0KqSWCIPV6GU=;
-        b=Ice3H/ZayF7hHUg4UsO8IfqNZHDA/N/YFRXzSZQGH+0X9tnhZdFo3tS7ul+wMTkTcf
-         K3/raT++y6YBCy5LgUcpaVldwzsQKeegBPjMX6E4dX7wTjHHyvVRWkYD0KEqPkVqKKuo
-         73gw6t2rnzAZIK5RKNiDSCKMVh2hTvSRmBuQn8GQWSFLvJMmUPsgwuCc5OJezMlzvG0s
-         PiNdYYoeEtpg3sghNEef/NrdnI4ZPGOz3DOwmKYDtWHrZw3H8c4KHKYn8aDg1pw1rAFX
-         ZBNwFtLGJpQdbsTWIyYVEgVxFQiq6GjTnyQnXN5giHmkuZyRJhRND3+8hr8aUJj92mId
-         2QGA==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=butXsz7bP52j8bHptxY4s6oUkNYrrN6f4BnN49pfEE8=;
+        fh=sQq4UwMItvi2zQkbQsQ7gG/lHqOQ30Mc0djsN0hkevw=;
+        b=Eg8OEjraqCbZIAMOPPCKWE9uHExxvucC9wUaX0HypPKad9GoAyscb/LV6iED7znXiS
+         w7fgPkQ4Rp8un6RQDGFHhOtjlaslSwQEvSmcHwuY3zQdDvhome1elZE2kLTIaYCbGCl1
+         5TkN2ohrwu8ty6jX/TEwjvnG2/mY+hpc55IyyV02NQjK+AmaSIn+1mkUg/EAuHtxLFRu
+         NyOUvgzs72lAI/1zgN0IGaGiB9lSt6gEUM9s7dNZDL4P3W7m5pOrG+74XBjiNHa37HLQ
+         bVF9PWh54YiMF7l3rUPfiEblhznRE/KUAfRVtxcP1LMCpKoTT9KgdATU+VHh6YR4muay
+         eQaA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783041399; x=1783646199; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lt56SaX4ito/qrsUlwDXjAtm7W1gaf7z0bHDAmVY3U0=;
-        b=Xihv7p1T0o1rNNtUfEXNN2zRcXTgOfrag4cChMMtc9pnjw6aUCWHjtmeMKuc+tw+JA
-         GuJPPaKhIqbf7vM3LMINfUJwvCenIHbpxdpQZAXmXmLa7rqyS0xx/pAkhaBOT8eNRGKj
-         VH74aR1N7m7Ay3lfBeYp0YQkDhDABYr16ZOg9D7r7/pPiEjAqTOcKLyzY/NZSK7hn0jm
-         plgDwW6wND/q7EDbGA+OsWBvvxiveVJ0vDdjvSrMvt1E57kIvCAfEG3oTEUS/xICd3WD
-         Id3/oBSX55g6gyIDkdR7ooanMZiPWpbfxn5t0CYl+mC+moum2dd8Kco7WGcqXqTbMbik
-         NT7g==
+        d=gmail.com; s=20251104; t=1783059337; x=1783664137; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=butXsz7bP52j8bHptxY4s6oUkNYrrN6f4BnN49pfEE8=;
+        b=kfMA7Dm51dHbWuZDhCo1AS1TOFzIi8g2BwoiZqvExlrGtb0uHPrfERzYl3EPwi6zTu
+         Fhv1mUUFvIJpgBnjXhz/Eyil1/wrEGDydPvOHF2lFAmmPWdJFRvd5OIAJYUZyy4Xfg5B
+         eMFW2dtLjzbmcBI8JhfRFj3M3u/ua7utJluGM0Xn5u+6b+LBBqZdnFlQWRsLx1Z3OnFs
+         n9APudX9ziuNpTKjPzIAjsXcwCYxxq1wdlEIUBekK1IjkCLQxYvU7DXvUxQk/3DGLjHN
+         gCjYU5WpqHciLm5j4x8fBgWKgVH8cBWocaK3oaPTMCYs6TVvu0QUrzBzXqUSB1WYeH8v
+         NXnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783041399; x=1783646199;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=lt56SaX4ito/qrsUlwDXjAtm7W1gaf7z0bHDAmVY3U0=;
-        b=aLiuSz8wbxTl1a4FpgumfAPmIU5GpleNrW4pPFiW4q3oat3YRWDDjpWLJ4FDSVh70B
-         4Ih8YWfxfr7yiqg12pPXGtuvyyHAztDM2YfoWiaYnCisPfApITBpdSHSO2LuM35pJR60
-         mJiJx/HG27OKyxQGlk+rZhxwr1Sl3AHzM/CN/Qmr34yUpqvMYezBRpP5X1zImNLUPTdZ
-         L1+WcX6suVl+/7io/LuVPJxpMuOeQBy22vf3KHzbxtT0kzluF/TPGOdTRC9ydbmBJzaM
-         ikRTN3h0YH4Giu1gfi/6AInLPviZtXJjGehfL6GCkqMqsn9TBouXKlig2cpCIos93pbA
-         8+wA==
-X-Gm-Message-State: AOJu0YxhPDrmwbyefHle/ReToZY3JaTWruQWyxaIXOWHaMcwl3Dw5in+
-	mmypCD8+Txwtr0ukNQvBSLMjpPu9fHNm6ARapE4ypd0h2VPZ2onRcaTPJgBZIwZ7O3bMN3q9CCA
-	otN7SQ4FIu9zcuX7Kr7lHTiCqeb3QoTNDq9zkHWX3QsWjHyn6Y5CJcBLtM7dBHoaZ9cl+9tZq2h
-	Q4X32H1XgZi4uwlYEsvj9f6JOc1qln0GIZRsn/ObuEaxWSinxUi/ZYyuVdXuY=
-X-Gm-Gg: AfdE7ckd8HhqJgdeTX5knP3e1m0dQWq44rv2qfUTS0UTmjt4vrJlidL/4NCIjGRc7Qi
-	CrTZAiiMalbphV/AV72r3CEZTBrpxTGh3ZwjskftZLKuLzp+SCypED8YY6C+C0RzI9ilTO6TOHA
-	2oV+dFkFm4sjtPr+pFUgnoroHjL31LwNJA0sh9XIbgA4rWEGtb0w+hvJJwAEecekm8wA==
-X-Received: by 2002:a05:6214:ccb:b0:8ee:6442:833 with SMTP id 6a1803df08f44-8f3c93e1135mr112343676d6.43.1783041399102;
-        Thu, 02 Jul 2026 18:16:39 -0700 (PDT)
-X-Received: by 2002:a05:6214:ccb:b0:8ee:6442:833 with SMTP id
- 6a1803df08f44-8f3c93e1135mr112343396d6.43.1783041398728; Thu, 02 Jul 2026
- 18:16:38 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1783059337; x=1783664137;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=butXsz7bP52j8bHptxY4s6oUkNYrrN6f4BnN49pfEE8=;
+        b=jnDSONGyuUwAfWSY3sD7EAG+QB1LixmXrZ7iM0v5sRPltuIlVLf0o9k8PrukqMt0uZ
+         WCN6XrQOVc0YR6cGWcFRoR4HZWiRHYzNEhFJcJ+NzwWFIKLi1/CwgTi/Umld4lq76NwG
+         ZH5rFmsv24scpNojWBBBXF7CBRULyxbn5zERbHoT5mvQUpc4bxqMB7gfQQZ7PdjC+q/e
+         0iVKzh0cFipJF9WxOb86f3aongKLClo10HDXaATtnlbM65KHPFVAXGvZ/D+BHllTlPHN
+         sl2ugGq9n4J3H9GvtYR3vrIJ4xkFRy9rC3GmsQyoo0TQjVfhvfxds1eOWmVV7xJqkaAI
+         CCzw==
+X-Gm-Message-State: AOJu0YxpiBHwMreKq44oOR3FnQv05euU4dHtFySSdoiH5E+S8fr8TN9B
+	0pupk/PWMY7MGRb/qK51QciywuR8E4jsR1UJya1s1ps7ypOb+NjJBgxA5ABNXIgwSsvKpm7DMV1
+	TWjUuIcZ9ATBJv4SBHN5eeJdBFPoP3vQ=
+X-Gm-Gg: AfdE7cndREzYPYtZquvB7NWywO+VDX3rvhccgmQXEVNs6A1MN6FcLYtvCnBpa5GkP/u
+	YwZSInHz7Hldp7qVT8MbWGHm/gi+EZjaiwZpRVzC5AP687Y8SC4dy5rCNg4TOpZJzdYKocgcHBc
+	WYEcGv7jntdjwVOpgDC81qCLNLJdfpgtNCpbTKQUZKdHCGSYY0jcU4T34WzDZZ2UgHEkqSdEK1M
+	6aWBJD7SqltxNI8AwApMPLzQxMNq67vGofoCJSl7lCVLzCd3Qr0sTPKxa/6E/uiEf7Gi8ThX21v
+	GesoaD8zbn5JSzxHRHIbZrmv2fbQltmMgQXqGaeud/CRueQi0oYn60JMCqSTMABWkO90KZ1JONC
+	gtQebYEyVZJsAuiDJQqM+pCsTppqn5eMxWBoP+9i+KfjoREllCdGxLN58wpdm0gg/1ldGZp/MLo
+	GOnHQGbMM=
+X-Received: by 2002:a05:690e:190e:b0:663:9a0a:7b80 with SMTP id
+ 956f58d0204a3-665219eb176mr8172467d50.19.1783059336333; Thu, 02 Jul 2026
+ 23:15:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260702161521.84024-4-yunseong.kim@est.tech>
-In-Reply-To: <20260702161521.84024-4-yunseong.kim@est.tech>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Fri, 3 Jul 2026 09:16:27 +0800
-X-Gm-Features: AVVi8CdEsoYmgeIi8wzoUq4wVD-cKEAv_vhA5hm4LqQPbeNX7Xz0MNfWWHfs3nQ
-Message-ID: <CA+s=J=x=UXDjX=v54irVpP6Ctebm9--stdudLe32cE=S0kFYCQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH] libyang: upgrade 2.1.148 -> 3.13.6
-To: Yunseong Kim <yunseong.kim@est.tech>
-Cc: openembedded-devel@lists.openembedded.org, yi.zhao@windriver.com,
-        wangmy@fujitsu.com, Martin.Jansa@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: 3d4EaOfo52Kj--yYOoHYsjjmTp1arLhm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDAxMCBTYWx0ZWRfX/iBCm8v1w18q
- Y38V9cWkzhjQmNYPPVv9AqhHhYTetLrl8ttHXipsgiCKqVx4vnWm/VZIKl/oJWuXPovKahdB6oe
- l8sk0qQ4Kp7BKSRlnTwfagxw4Riyi4klTIjiRtNMfqFMJ+8M15Y4HIO9G1Gjae2kOs0sznvNvoB
- JXBHq3KSQ7Z0q6EfBqvNVgNhJxZnyytzWxXRvxkwz7rt7L9Vyksn8SPZzo4bbXF3eOsMS44KNx6
- 54enMh0IAJUowpgMAH2IqeKcsfLP+1RYiKv7b9oENYkRfXlY3iWYiQNAOuuj9Waj8EiVEvtkkna
- uOtEQDOiU9qHmM1RrgxGQ2TRuJDAXYaQgW26zMWZ2Tm//URpAZoJgrHsmxSmkj0JK/ZLpwbG4lT
- FQrE1yJZCZHTLRI1ROaHMwwSAZZ716lXLOMo+EQzQpMTRi9C+/DrP7ZLOJbmCUCmss5gjxiqIke
- 6Gd2xbA96XRLpKS0low==
-X-Authority-Analysis: v=2.4 cv=dvXrzVg4 c=1 sm=1 tr=0 ts=6a470d78 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=cFzWkm7BAAAA:20 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
- a=t7CeM3EgAAAA:8 a=EUspDBNiAAAA:8 a=_ZMcuoMV48YJzp1uHBMA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-GUID: 3d4EaOfo52Kj--yYOoHYsjjmTp1arLhm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDAxMCBTYWx0ZWRfX50G5OhA5Tb11
- mo4xZKbldsDNuSu3eSrH2s+kSgsr4tqsjRDUzv0QgD0+Fkr8XFvqB+N/OaTlJk76UrNh0ICCV0V
- M89CxHo3oCnRhLFQZRC3+WGPuqDvpvA=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-03_01,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 priorityscore=1501 adultscore=0 impostorscore=0
- bulkscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030010
+References: <cover.1782985880.git.anuj.mittal@oss.qualcomm.com>
+In-Reply-To: <cover.1782985880.git.anuj.mittal@oss.qualcomm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Jul 2026 23:15:09 -0700
+X-Gm-Features: AVVi8Cd76WOJYFEG_HtfV4h72fdSgS1IHmtsGppxt_z2cRjc0p4NoT2w_iDy7qI
+Message-ID: <CAMKF1sofs-nPn+9CrcFDfDGi37UcLc_-2JRNfNt1kLV-SjmrYw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 00/16] Scarthgap pull request
+To: anuj.mittal@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005b0be00655aeda5d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 01:16:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128003
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2026 06:15:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128004
 
-On Fri, Jul 3, 2026 at 1:40=E2=80=AFAM Yunseong Kim <yunseong.kim@est.tech>=
- wrote:
->
-> Upgrade libyang to align with the version present in the wrynose.
->
-> ChangeLog:
-> https://github.com/CESNET/libyang/releases/tag/v3.13.6
+--0000000000005b0be00655aeda5d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Why do we need to align the versions? This version also seems to be
-backward incompatible and that is not acceptable for stable branch.
+Looks good. merged now. Thanks Anuj
 
-Thanks,
+On Thu, Jul 2, 2026 at 3:45=E2=80=AFAM Anuj Mittal via lists.openembedded.o=
+rg
+<anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
 
-Anuj
-
+> Please merge these changes in scarthgap. Tested locally and on autobuilde=
+r.
 >
-> * Add xxhash dependency.
-> * Update multilib header from config.h to ly_config.h.
-> * Refresh patch for new version.
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1592
 >
-> Signed-off-by: Yunseong Kim <yunseong.kim@est.tech>
-> ---
->  ...-test_context-skip-test-case-test_searchdirs.patch |  9 +++------
->  .../libyang/{libyang_2.1.148.bb =3D> libyang_3.13.6.bb} | 11 +++++++----
->  2 files changed, 10 insertions(+), 10 deletions(-)
->  rename meta-oe/recipes-extended/libyang/{libyang_2.1.148.bb =3D> libyang=
-_3.13.6.bb} (86%)
+> The following changes since commit
+> b0c2c648a1af89e7a8dd4c2ec841f3bc0ed0ccb9:
 >
-> diff --git a/meta-oe/recipes-extended/libyang/libyang/0001-test_context-s=
-kip-test-case-test_searchdirs.patch b/meta-oe/recipes-extended/libyang/liby=
-ang/0001-test_context-skip-test-case-test_searchdirs.patch
-> index 3c6aee9247..70890e2485 100644
-> --- a/meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-tes=
-t-case-test_searchdirs.patch
-> +++ b/meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-tes=
-t-case-test_searchdirs.patch
-> @@ -1,4 +1,4 @@
-> -From 5de24e1b39c09adb0c5bf4bb4228bd1bb935542a Mon Sep 17 00:00:00 2001
-> +From 24ec37bfe5c4c248dda0e80d6e7ab27afca1d60e Mon Sep 17 00:00:00 2001
->  From: Yi Zhao <yi.zhao@windriver.com>
->  Date: Wed, 22 Mar 2023 16:03:56 +0800
->  Subject: [PATCH] test_context: skip test case test_searchdirs
-> @@ -13,10 +13,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->   1 file changed, 1 deletion(-)
+>   nginx: backport fix for CVE-2026-9256 (2026-06-09 11:37:19 +0530)
 >
->  diff --git a/tests/utests/basic/test_context.c b/tests/utests/basic/test=
-_context.c
-> -index cfba1d30f..8c3bb7ad6 100644
-> +index 116b2ce36..4e96f4e96 100644
->  --- a/tests/utests/basic/test_context.c
->  +++ b/tests/utests/basic/test_context.c
-> -@@ -1061,7 +1061,6 @@ int
-> +@@ -1110,7 +1110,6 @@ int
->   main(void)
->   {
->       const struct CMUnitTest tests[] =3D {
-> @@ -24,6 +24,3 @@ index cfba1d30f..8c3bb7ad6 100644
->           UTEST(test_options),
->           UTEST(test_models),
->           UTEST(test_imports),
-> ---
-> -2.25.1
-> -
-> diff --git a/meta-oe/recipes-extended/libyang/libyang_2.1.148.bb b/meta-o=
-e/recipes-extended/libyang/libyang_3.13.6.bb
-> similarity index 86%
-> rename from meta-oe/recipes-extended/libyang/libyang_2.1.148.bb
-> rename to meta-oe/recipes-extended/libyang/libyang_3.13.6.bb
-> index 0eff3247c6..8ea23990dd 100644
-> --- a/meta-oe/recipes-extended/libyang/libyang_2.1.148.bb
-> +++ b/meta-oe/recipes-extended/libyang/libyang_3.13.6.bb
-> @@ -4,9 +4,9 @@ HOMEPAGE =3D "https://github.com/CESNET/libyang"
->  SECTION =3D "libs"
->  LICENSE =3D "BSD-3-Clause"
+> are available in the Git repository at:
 >
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df3916d7d8d42a6508d0ea418cfff1=
-0ad"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db69fd3b2815bbf1cef5c97f0eee25=
-19a"
+>   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
 >
-> -SRCREV =3D "fc4dbd923e044006c93df020590a1e5a8656c09e"
-> +SRCREV =3D "c2ddd01b9b810a30d6a7d6749a3bc9adeb7b01fb"
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
+rthgap
 >
->  SRC_URI =3D "git://github.com/CESNET/libyang.git;branch=3Dmaster;protoco=
-l=3Dhttps \
->             file://0001-test_context-skip-test-case-test_searchdirs.patch=
- \
-> @@ -17,7 +17,10 @@ S =3D "${WORKDIR}/git"
+> for you to fetch changes up to 29a044218285fdc7fcdd63d5f0929cb3a27b6fed:
 >
->  # Main dependencies
->  inherit cmake pkgconfig lib_package ptest multilib_header
-> -DEPENDS =3D "libpcre2"
-> +DEPENDS =3D " \
-> +    libpcre2 \
-> +    xxhash \
-> +"
->  DEPENDS +=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d=
-)}"
+>   python3-matplotlib: fix build (2026-07-02 15:08:44 +0530)
 >
->  EXTRA_OECMAKE =3D "-DCMAKE_BUILD_TYPE=3DRelease"
-> @@ -31,7 +34,7 @@ do_compile:prepend () {
->  }
+> ----------------------------------------------------------------
 >
->  do_install:append () {
-> -        oe_multilib_header  libyang/config.h
-> +        oe_multilib_header  libyang/ly_config.h
->  }
+> Anuj Mittal (1):
+>   python3-matplotlib: fix build
 >
->  do_install_ptest () {
+> Li Zhou (1):
+>   haveged: upgrade 1.9.18 -> 1.9.20
+>
+> Nitin Wankhade (6):
+>   strongswan: Fix CVE-2026-35328
+>   strongswan: Fix CVE-2026-35329
+>   strongswan: Fix CVE-2026-35330
+>   strongswan: Fix CVE-2026-35331
+>   strongswan: Fix CVE-2026-35332
+>   strongswan: Fix CVE-2026-35333
+>
+> Shubham Pushpkar (5):
+>   jq: Fix CVE-2026-40612
+>   jq: Fix CVE-2026-41256
+>   jq: Fix CVE-2026-41257
+>   jq: Fix CVE-2026-43894
+>   jq: Fix CVE-2026-43896
+>
+> Theo Gaige (Schneider Electric) (1):
+>   nginx: patch CVE-2026-48142
+>
+> Venkatasainath Ravikanti (1):
+>   syslog-ng: update config version to match installed binary
+>
+> Wang Mingyu (1):
+>   haveged: upgrade 1.9.20 -> 1.9.22
+>
+>  ...-insensitive-matching-and-reject-exc.patch | 176 ++++++++++++++++++
+>  ...-undersized-attributes-in-enumerator.patch |  41 ++++
+>  ...t-zero-length-EAP-SIM-AKA-attributes.patch |  54 ++++++
+>  ...d-NULL-pointer-dereference-when-veri.patch |  58 ++++++
+>  ...accept-non-empty-ECDH-public-keys-wi.patch |  51 +++++
+>  ...nt-infinite-loop-if-supported-versio.patch |  42 +++++
+>  .../strongswan/strongswan_5.9.14.bb           |   6 +
+>  .../jq/jq/CVE-2026-40612.patch                | 153 +++++++++++++++
+>  .../jq/jq/CVE-2026-41256.patch                |  54 ++++++
+>  .../jq/jq/CVE-2026-41257.patch                |  57 ++++++
+>  .../jq/jq/CVE-2026-43894.patch                |  56 ++++++
+>  .../jq/jq/CVE-2026-43896.patch                |  97 ++++++++++
+>  meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   5 +
+>  .../{haveged_1.9.18.bb =3D> haveged_1.9.22.bb}  |   3 +-
+>  .../syslog-ng/files/syslog-ng.conf.systemd    |  11 +-
+>  .../syslog-ng/files/syslog-ng.conf.sysvinit   |   9 +-
+>  .../matplotlib-disable-download.patch         |  34 +++-
+>  .../python/python3-matplotlib_3.7.2.bb        |   4 +-
+>  .../nginx/nginx-1.24.0/CVE-2026-48142.patch   |  43 +++++
+>  .../recipes-httpd/nginx/nginx_1.24.0.bb       |   1 +
+>  20 files changed, 938 insertions(+), 17 deletions(-)
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/constraints-Case-in=
+sensitive-matching-and-reject-exc.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/libradius-Reject-un=
+dersized-attributes-in-enumerator.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/libsimaka-Reject-ze=
+ro-length-EAP-SIM-AKA-attributes.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/pkcs5-pkcs7-Avoid-N=
+ULL-pointer-dereference-when-veri.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/tls-server-Only-acc=
+ept-non-empty-ECDH-public-keys-wi.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/tls-server-Prevent-=
+infinite-loop-if-supported-versio.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-41256.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-41257.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43894.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43896.patch
+>  rename meta-oe/recipes-extended/haveged/{haveged_1.9.18.bb =3D>
+> haveged_1.9.22.bb} (93%)
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-48142.patch
+>
 > --
-> 2.53.0
+> 2.54.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#128002): https://lists.openembedded.org/g/openembedde=
-d-devel/message/128002
-> Mute This Topic: https://lists.openembedded.org/mt/120087123/3616702
+> View/Reply Online (#128000):
+> https://lists.openembedded.org/g/openembedded-devel/message/128000
+> Mute This Topic: https://lists.openembedded.org/mt/120081049/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
+>
+
+--0000000000005b0be00655aeda5d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Looks good. merged now. Thanks Anuj</div><br><div class=3D=
+"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Thu, Jul 2, 2026 at 3:45=E2=80=AFAM Anuj Mittal via <a href=3D"http://lis=
+ts.openembedded.org">lists.openembedded.org</a> &lt;anuj.mittal=3D<a href=
+=3D"mailto:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.=
+openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
+style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
+dding-left:1ex">Please merge these changes in scarthgap. Tested locally and=
+ on autobuilder.<br>
+<br>
+<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
+ds/1592" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
+ect.org/valkyrie/#/builders/81/builds/1592</a><br>
+<br>
+The following changes since commit b0c2c648a1af89e7a8dd4c2ec841f3bc0ed0ccb9=
+:<br>
+<br>
+=C2=A0 nginx: backport fix for CVE-2026-9256 (2026-06-09 11:37:19 +0530)<br=
+>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
+el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
+mbedded-contrib</a> anujm/scarthgap<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
+g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
+enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
+<br>
+for you to fetch changes up to 29a044218285fdc7fcdd63d5f0929cb3a27b6fed:<br=
+>
+<br>
+=C2=A0 python3-matplotlib: fix build (2026-07-02 15:08:44 +0530)<br>
+<br>
+----------------------------------------------------------------<br>
+<br>
+Anuj Mittal (1):<br>
+=C2=A0 python3-matplotlib: fix build<br>
+<br>
+Li Zhou (1):<br>
+=C2=A0 haveged: upgrade 1.9.18 -&gt; 1.9.20<br>
+<br>
+Nitin Wankhade (6):<br>
+=C2=A0 strongswan: Fix CVE-2026-35328<br>
+=C2=A0 strongswan: Fix CVE-2026-35329<br>
+=C2=A0 strongswan: Fix CVE-2026-35330<br>
+=C2=A0 strongswan: Fix CVE-2026-35331<br>
+=C2=A0 strongswan: Fix CVE-2026-35332<br>
+=C2=A0 strongswan: Fix CVE-2026-35333<br>
+<br>
+Shubham Pushpkar (5):<br>
+=C2=A0 jq: Fix CVE-2026-40612<br>
+=C2=A0 jq: Fix CVE-2026-41256<br>
+=C2=A0 jq: Fix CVE-2026-41257<br>
+=C2=A0 jq: Fix CVE-2026-43894<br>
+=C2=A0 jq: Fix CVE-2026-43896<br>
+<br>
+Theo Gaige (Schneider Electric) (1):<br>
+=C2=A0 nginx: patch CVE-2026-48142<br>
+<br>
+Venkatasainath Ravikanti (1):<br>
+=C2=A0 syslog-ng: update config version to match installed binary<br>
+<br>
+Wang Mingyu (1):<br>
+=C2=A0 haveged: upgrade 1.9.20 -&gt; 1.9.22<br>
+<br>
+=C2=A0...-insensitive-matching-and-reject-exc.patch | 176 +++++++++++++++++=
++<br>
+=C2=A0...-undersized-attributes-in-enumerator.patch |=C2=A0 41 ++++<br>
+=C2=A0...t-zero-length-EAP-SIM-AKA-attributes.patch |=C2=A0 54 ++++++<br>
+=C2=A0...d-NULL-pointer-dereference-when-veri.patch |=C2=A0 58 ++++++<br>
+=C2=A0...accept-non-empty-ECDH-public-keys-wi.patch |=C2=A0 51 +++++<br>
+=C2=A0...nt-infinite-loop-if-supported-versio.patch |=C2=A0 42 +++++<br>
+=C2=A0.../strongswan/<a href=3D"http://strongswan_5.9.14.bb" rel=3D"norefer=
+rer" target=3D"_blank">strongswan_5.9.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A06 +<br>
+=C2=A0.../jq/jq/CVE-2026-40612.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 | 153 +++++++++++++++<br>
+=C2=A0.../jq/jq/CVE-2026-41256.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 54 ++++++<br>
+=C2=A0.../jq/jq/CVE-2026-41257.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 57 ++++++<br>
+=C2=A0.../jq/jq/CVE-2026-43894.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 56 ++++++<br>
+=C2=A0.../jq/jq/CVE-2026-43896.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 97 ++++++++++<br>
+=C2=A0meta-oe/recipes-devtools/jq/<a href=3D"http://jq_1.7.1.bb" rel=3D"nor=
+eferrer" target=3D"_blank">jq_1.7.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A05 +<br>
+=C2=A0.../{<a href=3D"http://haveged_1.9.18.bb" rel=3D"noreferrer" target=
+=3D"_blank">haveged_1.9.18.bb</a> =3D&gt; <a href=3D"http://haveged_1.9.22.=
+bb" rel=3D"noreferrer" target=3D"_blank">haveged_1.9.22.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A03 +-<br>
+=C2=A0.../syslog-ng/files/syslog-ng.conf.systemd=C2=A0 =C2=A0 |=C2=A0 11 +-=
+<br>
+=C2=A0.../syslog-ng/files/syslog-ng.conf.sysvinit=C2=A0 =C2=A0|=C2=A0 =C2=
+=A09 +-<br>
+=C2=A0.../matplotlib-disable-download.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 34 +++-<br>
+=C2=A0.../python/<a href=3D"http://python3-matplotlib_3.7.2.bb" rel=3D"nore=
+ferrer" target=3D"_blank">python3-matplotlib_3.7.2.bb</a>=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 |=C2=A0 =C2=A04 +-<br>
+=C2=A0.../nginx/nginx-1.24.0/CVE-2026-48142.patch=C2=A0 =C2=A0|=C2=A0 43 ++=
++++<br>
+=C2=A0.../recipes-httpd/nginx/<a href=3D"http://nginx_1.24.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">nginx_1.24.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A01 +<br>
+=C2=A020 files changed, 938 insertions(+), 17 deletions(-)<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/constraints-Case-insensitive-matching-and-reject-exc.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/libradius-Reject-undersized-attributes-in-enumerator.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/libsimaka-Reject-zero-length-EAP-SIM-AKA-attributes.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/pkcs5-pkcs7-Avoid-NULL-pointer-dereference-when-veri.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/tls-server-Only-accept-non-empty-ECDH-public-keys-wi.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/tls-server-Prevent-infinite-loop-if-supported-versio.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patc=
+h<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-41256.patc=
+h<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-41257.patc=
+h<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43894.patc=
+h<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43896.patc=
+h<br>
+=C2=A0rename meta-oe/recipes-extended/haveged/{<a href=3D"http://haveged_1.=
+9.18.bb" rel=3D"noreferrer" target=3D"_blank">haveged_1.9.18.bb</a> =3D&gt;=
+ <a href=3D"http://haveged_1.9.22.bb" rel=3D"noreferrer" target=3D"_blank">=
+haveged_1.9.22.bb</a>} (93%)<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-48142.patch<br>
+<br>
+-- <br>
+2.54.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#128000): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/128000" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/128000</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120081049/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/120081049/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--0000000000005b0be00655aeda5d--
 
