@@ -1,273 +1,171 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <twoerner@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B9E0C43458
-	for <webhook@archiver.kernel.org>; Sat,  4 Jul 2026 07:58:07 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.109903.1783151878624184230
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0984C43458
+	for <webhook@archiver.kernel.org>; Sat,  4 Jul 2026 13:14:12 +0000 (UTC)
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.112430.1783170849234533044
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Jul 2026 00:57:58 -0700
+ Sat, 04 Jul 2026 06:14:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=f0MsQ/Jd;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-664a09bc459so1733894d50.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Jul 2026 00:57:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783151877; cv=none;
-        d=google.com; s=arc-20260327;
-        b=RON5moWbeP4mw1DsYlNYLU93RbWcOWLpkFziNvCBevqnWfzW/9E5GUpIvRyp1+OcXU
-         IzRIfmCKOZrBTJdkvsO7yb4ufK7hYefghkG/I4FzAS2EHH3KcYOTDItSWfcrXrtyXZMB
-         gX4SGPcr8Q2wc/VFsE2hJSWc8xXTsg+c3ZRfdtF0IzBY95y3SoWP41ADxdcLjN87DOKL
-         NtDYByrrCXY7Woen3QG7FIpwR6kRI0FsKcH1aOmJKYGjRn/fRRVXPnngkgYIk7tQQSbo
-         wSIsAT1I4nOuBgjT2eV32hUNYGqn/pd3OeFK+LniA8NK5q19qC0b5m1nh6CO8UTaE3QC
-         JBjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=XqgXzFXGIC3uPe2Gt6EY+Wv2YEjgRjvDuOlvPthNxtw=;
-        fh=tvH0fRzsTzWp7W9pVcVBj/Hg9HcaDtV/l9F/msdGtu4=;
-        b=rRRSP7uwDSCRwwAgYqU1ULQlhk+3YM8hBw+Ky4AU2cjHwy+Q8ti5JVgVC961ZqcGuO
-         g9nT/Uy2G08FfWJnNK9c1l+RWHKuYHdThKCfVPLiTTB7bx8N5qMHjNS/4PjW21z6Kq4A
-         bSNfp27XaVkWgvIquPDQBTPv9R2nOfP6+F/DNllq/k4EukAN5Py1gEV93mOJaRsv/5TI
-         XC/k7++O/d6ev5c14LoaFeWECUhv02BjLN9myTNuHzOHKqHLRNkU3JFxpTn/7gRkiaP6
-         ZEL4ZRDT3gzLy7Sgvoj5Ko9wKA91C4ooX8S0ZHQ/bRP4rrAnIByGt6WnFowUsuHz6xKO
-         HIEA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=PTnOhE0J;
+ spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: twoerner@gmail.com)
+Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-517dc520840so11195391cf.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Jul 2026 06:14:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783151877; x=1783756677; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=XqgXzFXGIC3uPe2Gt6EY+Wv2YEjgRjvDuOlvPthNxtw=;
-        b=f0MsQ/JdT4TMpfizh/RPWhaOSVoHRSUdmWIiWKTWhdBKthzfuv45HayGh8VXqRqwK7
-         TQxc9a6PP7LwjRhrV81JO4SbuE54MvsNMfa4ny20yd0np6QRT2i883c2v6wl2D/Q6t1z
-         n7Ohph4u2zbdp3S6at7yhlmbzBv7MWe/Kthy8VSn5o/RnjjLZV2ITLmYLIJF6dMU8itz
-         iEI/hos8gDsHU5+VG1Zfz97pygi6/rEG7mrVdrruT1WRbsTpy+1OAlT3PWb8rxjRxSGj
-         1q6rsBoNz/ARGUFfyg9vH48hKp05oj7EAPJU0aDJ2ei6S49RPNlk6WqOuYeQwYngv0mM
-         TX/g==
+        d=gmail.com; s=20251104; t=1783170848; x=1783775648; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=i8VLfVvlYx2fkJNYbzowsXt5iPExiBClMBVEfBSr41E=;
+        b=PTnOhE0JZojBODjKeKmy/s+5MNR4fisXmY4uKtfWMv8p6MIeNPWux1hyc6t6K5aQ2A
+         drPBaZmkUVz9WDp9ncd+t4L7fQE6CVPG4hoPp07QoBZ/sG4gbIqxSzje5d+Qu+4iGg5X
+         tlAUoECEf7O08EtENj4xdS1pFjJ7FZvtuTnqqfkMD8p/BN/NSaMM/mDr0VqB7GSkD1rt
+         3Zg9yaZ4Gd7xHKJr/JhK3r0Dx+LOQXAqJLrBPAKSSYEhW3j1OzsV8vxExcyTZfksS5Rc
+         L/p6KcQmYsPKZQtzmIeHK5yclzI6F5u4jo8Qeox8xF9IdT0lMJKNGaC6DTM8z0ByYlG+
+         Nc7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783151877; x=1783756677;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XqgXzFXGIC3uPe2Gt6EY+Wv2YEjgRjvDuOlvPthNxtw=;
-        b=PWAwrjVI4XbKfgLx6bQJNpMAJYfrOWD9efiQq7ckrQhj8pGxt2mWhwMcGQKYgjByiN
-         tmJUV9EuMSRBR0nDH5BcU8zWvPGaMDulbwTmIuktlcbQV2V5lkbm3cJ4G4zc8057TC/y
-         LQcmB4MFfXZWu7zjPCaFVWUjficIlikTyJmpYNqW9HwP9oKamGhkdQWGE0DTIh1D6s1G
-         XZgUBkirmWnKDlKeIp/GjfvuEtvM4JrceSzPGrrjsfcamD7z3m6UFnnkMvTBsXi94BrB
-         uY/99JB59O4Iy3YzHHIMYN5uZ6j3kS81R1Z0lH+EwvVM2aAcEDwBx1OXty+kldy1t2hZ
-         qCMg==
-X-Gm-Message-State: AOJu0Yyt91qvNlgnrTd3Jg6k/32cs+JtqAUWOqSyKU1HyQPI2E3MMGau
-	OVO0qhQRRaA7ivb2iktf+H3XNAi4jli2xoqKS9wfRZvxeaz2Lbe6BdGpswsJG1WXWNPiXyi3nvs
-	QnuadBjg7WO3oce6j9U2UaE4Z7jIm0lo=
-X-Gm-Gg: AfdE7clwOD9XKjcaVQA+4rXXGmk8p8W60EPWVgWM3gxJmujxmLdLzJWNk1nz6uP0Do1
-	RcQxFY5KrnBHrHFxAG5/qYJs/ERQWWxmQb/iGcCck9AqnFnSB8ifQ+N+OEBBSJZ28VgXY+lghBy
-	QKEtWZVaNwqZEjj81FERUO0RGktTLhikMvtni/qkFKvUH+RWguYcMKhJk2KafaSmn2VhrDCmup1
-	gvEauiBVvWTX2MTthVi/hYaS8FvX4tT5pI0WeGXmkZE0uwabUSxahABYmgz84eP6b4IBHAtwdrc
-	Oq8rZCcWWWwVpFF9PrXzFcIhvPQgk27ceVIIocHPrCwD6Uzc9EaGXiW81y5qw+bgpMZ8Y+/TroL
-	1mH0wImIBNxUz210F/TdD1nzMdP7HGNsFH5PPDi/1Tcgbg8vXTyPvughFdXUrf86Dw8sRag==
-X-Received: by 2002:a53:b177:0:b0:664:ae6b:b49f with SMTP id
- 956f58d0204a3-6665305985bmr1707266d50.84.1783151877375; Sat, 04 Jul 2026
- 00:57:57 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1783170848; x=1783775648;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=i8VLfVvlYx2fkJNYbzowsXt5iPExiBClMBVEfBSr41E=;
+        b=jzNgaPoztgGt8IqvWZ7wcHYt2Qu9p9JUN2WnAXxVM69/x7iXM4LEdrOrx94xtEkWR6
+         O3//Mu8r7QOq8WeY1+pEjzZ1SZ8t9hj/Bqwo/yqcvGVfWv632aDXyUuHIwQWsoiRpgxs
+         O8uLKAdZ1Mhn2wbScn1dPbLftQJbpUaNf/gZWEmsek5+j8AJPnYAV44Ya7uMgtHG6IiC
+         lrWyHCNeOnwgzjhQ5bQXQV6jh1bb2oMtXuKlZuTO8Rz3bMjvxQTASZtdIkoBI115aBIQ
+         QxnProRR/TKX7BWMe/5JMfAqtwH7sEzMBdlvM/VOl1LbobjEg9eMjGC2kFQudLLUOWPW
+         04lQ==
+X-Gm-Message-State: AOJu0YxexXcyensC7R/OLnF/QrRa+g/9rLrnrvP5bKZVFeC7OPgjSBhd
+	zwPThdqN0bsTepmZmSA8Nlpv59q3GgVTCvI7DsDSXD79eLjskUr1V0FFOiavRg==
+X-Gm-Gg: AfdE7cn0y0TbpKQpPUSJzQC7B0XNebmCZv5fhB8SU0aVaej+rZL/BbPdsRClKT7G/6s
+	/eei5BKLRMqiM/gnhP8pkU6nrSdFMKUKvfAH5DEIc6z/dYbQn0AOWOWLPEuGOfJikYtjPLZBsvN
+	IvzENsHGbYgQOizvkdy8C1AuWYrpLBRzOyijWqWSHxpxjgq1SUItAD/TntVZ8HnwL+GXejCCAZZ
+	2Yi6/n7JZpjI/Sj9+w8lchQwD1q2eR4sa/3SMm1aXuPbM9mlCS9vh+tAFD7EU/AvwBZ/ddgbFWC
+	szgRB0Sa34Y0Ts4LvrYnUSbNJ7N0t/HFyqKoDLlUeLOwnCNvZzWi1nPAmVHYHGsU6ajtKsDWSEz
+	HiwNBAensTXHhh5eTxUeKOZnpJPjEpvucFB35uGvNaSKErijbHR1oAYCo5znrOmS1LDvFIcBmlB
+	hkpceADQUP4VAUvlI13dm+XBe7RTYWMcg0AtA8wGuuls+sZgNN0iLPDyOusg0oK+aAsA==
+X-Received: by 2002:ac8:5fd4:0:b0:51c:1027:34d4 with SMTP id d75a77b69052e-51c4c25cfa7mr51478211cf.11.1783170847756;
+        Sat, 04 Jul 2026 06:14:07 -0700 (PDT)
+Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51c41da510dsm39840241cf.22.2026.07.04.06.14.05
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 04 Jul 2026 06:14:07 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 2/2] gd: add missing library deps to PACKAGECONFIG entries
+Date: Sat,  4 Jul 2026 09:13:54 -0400
+Message-ID: <20260704131354.463612-2-twoerner@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260704131354.463612-1-twoerner@gmail.com>
+References: <20260704131354.463612-1-twoerner@gmail.com>
 MIME-Version: 1.0
-References: <20260704053656.648316-1-mail@michael-fitzmayer.de>
- <CAMKF1sr-o4FHMJrCZ4MWtTR8RC1qvLBoq7k-gvqD=7bYZW4XQA@mail.gmail.com> <002001dd0b88$b8a65830$29f30890$@michael-fitzmayer.de>
-In-Reply-To: <002001dd0b88$b8a65830$29f30890$@michael-fitzmayer.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 4 Jul 2026 00:57:29 -0700
-X-Gm-Features: AVVi8Ce9pLTi_Pm1y_xSocuktPyl4kcYt8BehOHkJ63uT-UmsQYV3WSNb49Ja2w
-Message-ID: <CAMKF1soY-Zwxz=7tizLN3gegSt6FeRNri+xU-SQ2Wdqb9hMSdw@mail.gmail.com>
-Subject: Re: [oe] [PATCH] canopenterm: update to version 2.03
-To: mail@michael-fitzmayer.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000003b4d1d0655c466a1"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Jul 2026 07:58:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128021
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Jul 2026 13:14:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128023
 
---0000000000003b4d1d0655c466a1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The PACKAGECONFIG entries introduced by the conversion were all missing
+their build-dependency in the third field (the only exception was raqm,
+which already had libraqm there).  As a result the hard-coded DEPENDS
+line was compensating by always pulling in every library regardless of
+which features were actually selected.
 
-https://lore.kernel.org/openembedded-devel/20260704053511.647800-1-mail@mic=
-hael-fitzmayer.de/T/#u
+Evidence from the configure logs confirms which libraries were found or
+missed across the three configurations:
 
-On Sat, Jul 4, 2026 at 12:42=E2=80=AFAM Michael Fitzmayer via lists.openemb=
-edded.org
-<mail=3Dmichael-fitzmayer.de@lists.openembedded.org> wrote:
+  pre-conversion:
+    checking for zlib... yes
+    checking for libpng... yes
+    checking for freetype2 >= 9.8.3... yes
+    checking for libjpeg... yes
+    checking for libtiff-4... yes
 
-> Hi,
->
-> thanks. What do you mean by =E2=80=9Cdropped the hunk=E2=80=9D?
->
->
->
-> I didn=E2=80=99t change much:
->
->
->
-> 14c14
->
-> < LIC_FILES_CHKSUM =3D
-> "file://LICENSE.md;md5=3Dbd2edc721b4a0289efe949bdbe7dda79"
->
-> ---
->
-> > LIC_FILES_CHKSUM =3D
-> "file://LICENSE.md;md5=3D8977ecf3af54da2a5271158cc969bd45"
->
-> 18,21c18,19
->
-> < PV .=3D "+git"
->
-> <
->
-> < SRC_URI =3D "git://
-> github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3Dmain"
->
-> < SRCREV  =3D "7a9466029a6e88345e65e794ff1779f778c9358a"
->
-> ---
->
-> > SRC_URI =3D "git://
-> github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3Dmain;tag=
-=3Dv${PV}
-> <http://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3D=
-main;tag=3Dv$%7BPV%7D>
-> "
->
-> > SRCREV  =3D "63ccae8262f5e796ffca0c8a44fdf7ff0bd28571"
->
->
->
-> *From:* Khem Raj <raj.khem@gmail.com>
-> *Sent:* 04 July 2026 08:58
-> *To:* mail@michael-fitzmayer.de
-> *Cc:* openembedded-devel@lists.openembedded.org
-> *Subject:* Re: [oe] [PATCH] canopenterm: update to version 2.03
->
->
->
-> On Fri, Jul 3, 2026 at 10:37=E2=80=AFPM Michael Fitzmayer via
-> lists.openembedded.org <mail=3Dmichael-fitzmayer.de@lists.openembedded.or=
-g>
-> wrote:
->
-> - Added new script to interface CiA 305: Layer setting services (LSS)
-> - New API function to set baud rate: can_set_baudrate()
-> - Remove usage of white text-color
-> - License-Update: update year in copyright
->
->
->
-> This looks ok.
->
->
->
-> this version dropped the hunk against do_install. Is this intentional ?
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#128020):
-> https://lists.openembedded.org/g/openembedded-devel/message/128020
-> Mute This Topic: https://lists.openembedded.org/mt/120110277/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+  post-conversion, unfixed (zlib, png, and tiff checks absent entirely):
+    checking for freetype2 >= 9.8.3... yes
+    checking for libjpeg... yes
 
---0000000000003b4d1d0655c466a1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+  post-conversion, fixed:
+    checking for zlib... yes
+    checking for libpng... yes
+    checking for freetype2 >= 9.8.3... yes
+    checking for libjpeg... yes
+    checking for libtiff-4... yes
 
-<div dir=3D"ltr"><a href=3D"https://lore.kernel.org/openembedded-devel/2026=
-0704053511.647800-1-mail@michael-fitzmayer.de/T/#u">https://lore.kernel.org=
-/openembedded-devel/20260704053511.647800-1-mail@michael-fitzmayer.de/T/#u<=
-/a></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"l=
-tr" class=3D"gmail_attr">On Sat, Jul 4, 2026 at 12:42=E2=80=AFAM Michael Fi=
-tzmayer via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
-g</a> &lt;mail=3D<a href=3D"mailto:michael-fitzmayer.de@lists.openembedded.=
-org">michael-fitzmayer.de@lists.openembedded.org</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D"msg8977771212=
-526145322"><div lang=3D"EN-GB"><div class=3D"m_8977771212526145322WordSecti=
-on1"><p class=3D"MsoNormal"><span>Hi,<u></u><u></u></span></p><p class=3D"M=
-soNormal"><span>thanks. What do you mean by =E2=80=9C</span>dropped the hun=
-k=E2=80=9D?<u></u><u></u></p><p class=3D"MsoNormal"><span><u></u>=C2=A0<u><=
-/u></span></p><p class=3D"MsoNormal"><span>I didn=E2=80=99t change much:<u>=
-</u><u></u></span></p><p class=3D"MsoNormal"><span><u></u>=C2=A0<u></u></sp=
-an></p><p class=3D"MsoNormal"><span>14c14<u></u><u></u></span></p><p class=
-=3D"MsoNormal"><span>&lt; LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=
-=3Dbd2edc721b4a0289efe949bdbe7dda79&quot;<u></u><u></u></span></p><p class=
-=3D"MsoNormal"><span>---<u></u><u></u></span></p><p class=3D"MsoNormal"><sp=
-an>&gt; LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=3D8977ecf3af54da2a=
-5271158cc969bd45&quot;<u></u><u></u></span></p><p class=3D"MsoNormal"><span=
- lang=3D"DE">18,21c18,19<u></u><u></u></span></p><p class=3D"MsoNormal"><sp=
-an lang=3D"DE">&lt; PV .=3D &quot;+git&quot;<u></u><u></u></span></p><p cla=
-ss=3D"MsoNormal"><span lang=3D"DE">&lt;<u></u>=C2=A0<u></u></span></p><p cl=
-ass=3D"MsoNormal"><span lang=3D"DE">&lt; SRC_URI =3D &quot;git://<a href=3D=
-"http://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=3Dma=
-in" target=3D"_blank">github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
-ps;branch=3Dmain</a>&quot;<u></u><u></u></span></p><p class=3D"MsoNormal"><=
-span>&lt; SRCREV=C2=A0 =3D &quot;7a9466029a6e88345e65e794ff1779f778c9358a&q=
-uot;<u></u><u></u></span></p><p class=3D"MsoNormal"><span>---<u></u><u></u>=
-</span></p><p class=3D"MsoNormal"><span>&gt; SRC_URI =3D &quot;git://<a hre=
-f=3D"http://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhttps;branch=
-=3Dmain;tag=3Dv$%7BPV%7D" target=3D"_blank">github.com/CANopenTerm/CANopenT=
-erm.git;protocol=3Dhttps;branch=3Dmain;tag=3Dv${PV}</a>&quot;<u></u><u></u>=
-</span></p><p class=3D"MsoNormal"><span>&gt; SRCREV=C2=A0 =3D &quot;63ccae8=
-262f5e796ffca0c8a44fdf7ff0bd28571&quot;<u></u><u></u></span></p><p class=3D=
-"MsoNormal"><span><u></u>=C2=A0<u></u></span></p><p class=3D"MsoNormal"><b>=
-<span lang=3D"EN-US">From:</span></b><span lang=3D"EN-US"> Khem Raj &lt;<a =
-href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>=
-&gt; <br><b>Sent:</b> 04 July 2026 08:58<br><b>To:</b> <a href=3D"mailto:ma=
-il@michael-fitzmayer.de" target=3D"_blank">mail@michael-fitzmayer.de</a><br=
-><b>Cc:</b> <a href=3D"mailto:openembedded-devel@lists.openembedded.org" ta=
-rget=3D"_blank">openembedded-devel@lists.openembedded.org</a><br><b>Subject=
-:</b> Re: [oe] [PATCH] canopenterm: update to version 2.03<u></u><u></u></s=
-pan></p><div><p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p><div><div><p cl=
-ass=3D"MsoNormal">On Fri, Jul 3, 2026 at 10:37=E2=80=AFPM Michael Fitzmayer=
- via <a href=3D"http://lists.openembedded.org" target=3D"_blank">lists.open=
-embedded.org</a> &lt;mail=3D<a href=3D"mailto:michael-fitzmayer.de@lists.op=
-enembedded.org" target=3D"_blank">michael-fitzmayer.de@lists.openembedded.o=
-rg</a>&gt; wrote:<u></u><u></u></p></div><blockquote style=3D"border-width:=
-medium medium medium 1pt;border-style:none none none solid;border-color:cur=
-rentcolor currentcolor currentcolor rgb(204,204,204);padding:0cm 0cm 0cm 6p=
-t;margin-left:4.8pt;margin-right:0cm"><p class=3D"MsoNormal">- Added new sc=
-ript to interface CiA 305: Layer setting services (LSS)<br>- New API functi=
-on to set baud rate: can_set_baudrate()<br>- Remove usage of white text-col=
-or<br>- License-Update: update year in copyright<u></u><u></u></p></blockqu=
-ote><div><p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p></div><div><p class=
-=3D"MsoNormal">This looks ok.<u></u><u></u></p></div><div><p class=3D"MsoNo=
-rmal">=C2=A0<u></u><u></u></p></div><div><p class=3D"MsoNormal">this versio=
-n dropped the hunk against do_install. Is this intentional ?<u></u><u></u><=
-/p></div><div><p class=3D"MsoNormal">=C2=A0<u></u><u></u></p></div></div></=
-div></div></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128020): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128020" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/128020</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120110277/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/120110277/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</div></blockquote></div>
+Add the correct Yocto package name to the third field of every entry:
+  avif       -> libavif
+  fontconfig -> fontconfig
+  freetype   -> freetype
+  heif       -> libheif
+  jpeg       -> jpeg
+  liq        -> libimagequant
+  png        -> libpng
+  tiff       -> tiff
+  webp       -> libwebp
+  x          -> virtual/libx11
+  xpm        -> libxpm
+  zlib       -> zlib
 
---0000000000003b4d1d0655c466a1--
+With the dependencies now managed by PACKAGECONFIG, the unconditional
+DEPENDS assignment is redundant and can be removed.
+
+Fixes: be9f029b6c10 ("gd: Support PACKAGECONFIG")
+AI-Generated: codex/claude-sonnet 4.6 (high)
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-oe/recipes-support/gd/gd_2.3.3.bb | 26 ++++++++++++--------------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
+
+diff --git a/meta-oe/recipes-support/gd/gd_2.3.3.bb b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+index d3d13ee1e737..f7bd12bb9bc2 100644
+--- a/meta-oe/recipes-support/gd/gd_2.3.3.bb
++++ b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+@@ -11,8 +11,6 @@ SECTION = "libs"
+ LICENSE = "GD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ace63adfdac78400fc30fa22ee9c1bb1"
+ 
+-DEPENDS = "freetype libpng jpeg zlib tiff"
+-
+ SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1;protocol=https \
+            file://0001-Fix-deprecared-function-prototypes.patch \
+            file://Fix-ftype-missing-const.patch \
+@@ -25,19 +23,19 @@ inherit autotools binconfig gettext pkgconfig
+ 
+ PACKAGECONFIG ?= "jpeg png zlib tiff freetype"
+ 
+-PACKAGECONFIG[avif] = "--with-avif,--without-avif"
+-PACKAGECONFIG[fontconfig] = "--with-fontconfig,--without-fontconfig"
+-PACKAGECONFIG[freetype] = "--with-freetype,--without-freetype"
+-PACKAGECONFIG[heif] = "--with-heif,--without-heif"
+-PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg"
+-PACKAGECONFIG[liq] = "--with-liq,--without-liq"
+-PACKAGECONFIG[png] = "--with-png,--without-png"
++PACKAGECONFIG[avif] = "--with-avif,--without-avif,libavif"
++PACKAGECONFIG[fontconfig] = "--with-fontconfig,--without-fontconfig,fontconfig"
++PACKAGECONFIG[freetype] = "--with-freetype,--without-freetype,freetype"
++PACKAGECONFIG[heif] = "--with-heif,--without-heif,libheif"
++PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
++PACKAGECONFIG[liq] = "--with-liq,--without-liq,libimagequant"
++PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
+ PACKAGECONFIG[raqm] = "--with-raqm,--without-raqm,libraqm"
+-PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff"
+-PACKAGECONFIG[webp] = "--with-webp,--without-webp"
+-PACKAGECONFIG[x] = "--with-x,--without-x"
+-PACKAGECONFIG[xpm] = "--with-xpm,--without-xpm"
+-PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib"
++PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
++PACKAGECONFIG[webp] = "--with-webp,--without-webp,libwebp"
++PACKAGECONFIG[x] = "--with-x,--without-x,virtual/libx11"
++PACKAGECONFIG[xpm] = "--with-xpm,--without-xpm,libxpm"
++PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
+ 
+ EXTRA_OECONF += "--disable-rpath"
+ 
+-- 
+2.50.0.173.g8b6f19ccfc3a
+
 
