@@ -1,152 +1,144 @@
-Return-Path: <ecordonnier@snap.com>
+Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FD9C43458
-	for <webhook@archiver.kernel.org>; Mon,  6 Jul 2026 09:00:44 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.147020.1783328431267911355
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6511CC43458
+	for <webhook@archiver.kernel.org>; Mon,  6 Jul 2026 09:01:54 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.147049.1783328513454152810
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2026 02:00:31 -0700
+ Mon, 06 Jul 2026 02:01:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=DsQtY8ll;
- spf=pass (domain: snapchat.com, ip: 209.85.221.54, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-474560436c3so2701465f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 02:00:31 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=cyB7/2AM;
+ spf=pass (domain: linaro.org, ip: 209.85.216.50, mailfrom: mikko.rapeli@linaro.org)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-38426d04bb4so971964a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 02:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1783328429; x=1783933229; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lzxMyZQZ0Ay8p/8Sd/DtG7Ye+xIV/eFRR4cqXZ4Hw7Q=;
-        b=DsQtY8llOprdnZCatt2+ndw0BwEayDt+snimHMbAzyOZSYScpWMSVOuJ2T4AQLoMgO
-         OQkEFsIdbUZjEU7QvubDwY413fIsydLtlpG+R4hGiAsph7dyG8fvq0kSpZpvBbkJJHLa
-         /1da41Gci/oDDQYtJ45MtvQ58y6phO0qzcMrQ=
+        d=linaro.org; s=google; t=1783328513; x=1783933313; darn=lists.openembedded.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=4tmaif043FcwWnPPwgSMkj3Otny+x1bcWqozUpq/0Rs=;
+        b=cyB7/2AMVuoQxnZ6Tf2JRNuGv1RqhhoCsRO8vdD2rM43xtTXU0gDQuDuyfl9pFlso9
+         kEjEomDx2oHts5w+sGN8HnTrEuwXzVUd6OO+beecSUb0EupbFjXSDVxEGfySsDTmPiL3
+         lRDecXUMnYs4U7t7/ty70GEpsUmxrF/Sbd46f3ONTRRyI8u3reG0davXOXlbBO4TAjLn
+         i5Y7ctB+/lovMN278/N2QA5vKSUvrdPum6DkGRJmUWjCLsFJ22uyhalONhEcyGL407Rf
+         uKAMb6RdZHT2FnukUUa4jBxmyFYRRMcJffw4gzxth3V2tHyxURIHCQkuPpkjiBE2AfvP
+         bpaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783328429; x=1783933229;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lzxMyZQZ0Ay8p/8Sd/DtG7Ye+xIV/eFRR4cqXZ4Hw7Q=;
-        b=nlMUBnJj6HbdLP/B9swhIHalwGlP4qePYeScNfI9lD4y1N5EW8VieQUvIY7eZUDUme
-         fBjq/U+vw/b8iU3Z9nPyzRe1/WCc7sjnZ6mvzzhQ8+fbDv9O10IYXhhnRMc+/4cpjMIT
-         eEoiU5Sv09qwid56iJ/hXbSnQsz4A0tQGvyYHEswxAYWfkhPa8EykWl9Gp6sgpS+Hzir
-         oY6ZMh7YOwjgKncdFPWZGKpE1b+U2m9suVzFT2PyUPYxn7FuHNNyYD4R97XklQTcMYgp
-         1TB9wmmG3crt2sIgKIjg0zU5ov8yHQ84wkXZRNdhmyI0lfpKgg7GXRlKGpmpn/Sj2zX2
-         4ldQ==
-X-Gm-Message-State: AOJu0YzdIl1sPNwA/ByfnURdltCiQkl3Y/Zx7r/8dvrfQ5EOrrP+gTOC
-	CIvMZPWwhS6jTOPJRDhB2AQiJCwSe/LVh8hFm1EK5yJos74NoIiZFXAVv32xm4C7TGFwDLF5iIP
-	KxrzCDwA=
-X-Gm-Gg: AfdE7clvUDvMoK2zSw66Bou7AVr1PJ4egUpnwjLJi4Q35Hq/ektDbWxkryvOoMvP69S
-	itFBHBtWdvkF5G1mXYXkhfAW4QPfhkngdHbLWaxHF18Dn6spTDmUmfwgSd2cpUcCrlQRaPVlbTc
-	xqnkHmIt/gn8BgnDPFkyOCuBZhlnQWiRSGEt0BdlMAWQSIf5EGfIrvuL9Mr2He/vPuRZPEHa2Fc
-	Ep4P2mI5C2Zhl8Cu9bNvilOygzGSKxhNJrpk84+d2ZLE1A2CuKwqhHlwZ8EmpOuy0ZNHC+yoyAS
-	u0EmbZDWf2LaDp1Qp6uGLbebg7mLl4DA5YGLhFDVaiT5cikd+A/CxiGhMRrNp48s4BvTNgYqJQN
-	oSKBvdVYZVUR9aF2njjux6k3uWJloWAd32U241/WG4gZkNo2ecHD9LKt410RKWjw4mWEJGbijiu
-	MlPDudEr7sLvrAx43nog/oedIZNVno24N/tDivP5Y1/Rb3R15KIZdonlXz
-X-Received: by 2002:a5d:6a04:0:b0:473:1ccc:15c9 with SMTP id ffacd0b85a97d-47aac6da5d7mr8301384f8f.40.1783328429243;
-        Mon, 06 Jul 2026 02:00:29 -0700 (PDT)
-Received: from lj8k2dq3.sc-core.net ([85.237.126.22])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa0f21328sm23383267f8f.32.2026.07.06.02.00.28
+        d=1e100.net; s=20251104; t=1783328513; x=1783933313;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=4tmaif043FcwWnPPwgSMkj3Otny+x1bcWqozUpq/0Rs=;
+        b=emcbWA397w3HHN2KG+3WvbvFAHS4/G+ntN9CdO0Dji5m4uqbnPQ9KIU/TgB30qqNst
+         fOpWFZqXj52W+Y9pcez0BiC3IKpRyf1SfUlUiiOz2iuvrH6f0nfW8FBlkWQsfSm+iWf4
+         HBtPDRCz4i750m4wDH3k/0bMYlFUICeQBv6K/ob4rIElplvuuFW95hpm4Ky6HWUPUszf
+         PZ1mpAm/Kh1qPzqj2PWAWzEnT+hO5SPJtW8dvWokmRB5eM81xXikbhlyZgdQqv9pG18+
+         RbNBIXpjiG7xuv3XiBJIns4e9A1rHam4uYmP9HmOWUK7tZeF9unFepcPFZP2MWSCMYDD
+         iC0w==
+X-Forwarded-Encrypted: i=1; AHgh+RqolriONFl9l5HL+NtPIpjoM7GTQNDbs/c4NkPfeGcVTTgajo6GV5XDzE5uSj8AWjU6+HNoRbn3fZQWiX0C2D2dTro=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx/MeGlCqma6Sx3zTDLGDdrER6SVYj4dyFhTYZIeHnznvfE1QXm
+	ST0k8IW3gP0Q0Xv/XinXjs+zQ3gJ5geCLUeSyQw/dzCGFh8iTiLCc7o/5xwa90TKXRU=
+X-Gm-Gg: AfdE7ckX58amB4jlNQmp4S5ZkglaDIrTc2Sh4FwS1mM7/IRwbfL8FJhHNZxbFgXRtoD
+	4KBvrLBHkWI3u8ocEkWz3L1VFmIK6G/IBYMzxe3jQVcTOub2HX2iRT5klPDrLC9gKBdiO/B+h3f
+	EJVLAtPU0izxPy0aMhFd+yfg2SGEOt6s9OoTJRwX+7tBSaYFH5Js96X/zUBil/VCU0VSKuXJ5XN
+	qApm4He3PFplMNV0BWDLXADKu2mVpLw+c0rgCiok5zZxX8L7AgZrdnHjEf4VEfAayaEvZF4t0Gh
+	XLYwUF4Nuvw+ur0OCwgvm9o+/NSK/imyp3M8DV/fGNrOo160DToN/WOnA9ajOVPRo7WW9zDMSVH
+	4qUs4KH4TmQ3dqR7gC7Quwb+Hkj+QOu5k/9VoaSlHm37pBKvGstVrH4im1DTgYyb1fypBJ+mINJ
+	QniScIDcyMkSycnmsOhv5YMyporTJu9lHEwr2cObkR
+X-Received: by 2002:a17:90b:4c52:b0:37c:8df2:9f58 with SMTP id 98e67ed59e1d1-381120ee1c1mr15080450a91.7.1783328512614;
+        Mon, 06 Jul 2026 02:01:52 -0700 (PDT)
+Received: from nuoska (78-27-71-225.bb.dnainternet.fi. [78.27.71.225])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3812718e1b6sm4613549a91.0.2026.07.06.02.01.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jul 2026 02:00:28 -0700 (PDT)
-From: ecordonnier@snap.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Etienne Cordonnier <ecordonnier@snap.com>
-Subject: [meta-oe][PATCH v2] ttf-noto-emoji: upgrade 20200916 -> 2.051
-Date: Mon,  6 Jul 2026 11:00:06 +0200
-Message-ID: <20260706090006.240170-1-ecordonnier@snap.com>
-X-Mailer: git-send-email 2.43.0
+        Mon, 06 Jul 2026 02:01:52 -0700 (PDT)
+Date: Mon, 6 Jul 2026 12:01:48 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: ecordonnier@snap.com
+Cc: ross.burton@arm.com, openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH 2/2] uutils-coreutils: delete .cargo/config.toml
+Message-ID: <aktu_EN4zkSjImFj@nuoska>
+References: <20260706083445.2842309-1-ross.burton@arm.com>
+ <20260706083445.2842309-2-ross.burton@arm.com>
+ <CAHUKmYa5UeP58KtKS8KgM3aF0ejnKMiUHTRaGSP7CeHb-P7mdg@mail.gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHUKmYa5UeP58KtKS8KgM3aF0ejnKMiUHTRaGSP7CeHb-P7mdg@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 09:00:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128032
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 09:01:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128034
 
-From: Etienne Cordonnier <ecordonnier@snap.com>
+Hi,
 
-- NotoEmoji-Regular.ttf was removed upstream in https://github.com/googlefonts/noto-emoji/commit/1442f6acc8463c428c8b38fc558e87c28d8efa5b
-- A new COLRv1 format is provided, with a smaller file-size
+The file is not ignored. It gets used and overrides linker set by cargo.bbclass/rust.
+uutils-coreutils builds are currently broken on arm64 build hosts and this
+patch fixed them.
 
-Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  4 +++-
- .../ttf-fonts/ttf-noto-emoji_2.051.bb         | 23 +++++++++++++++++++
- .../ttf-fonts/ttf-noto-emoji_20200916.bb      | 18 ---------------
- 3 files changed, 26 insertions(+), 19 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_2.051.bb
- delete mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
+Cheers,
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index a4b03e2a88..c3600d5c95 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -556,7 +556,9 @@ RDEPENDS:packagegroup-meta-oe-graphics = "\
-     ttf-lklug \
-     ttf-lohit \
-     ttf-noto-emoji-color \
--    ttf-noto-emoji-regular \
-+    ttf-noto-emoji-color-noflags \
-+    ttf-noto-emoji-colrv1 \
-+    ttf-noto-emoji-colrv1-noflags \
-     ttf-pt-sans \
-     ttf-roboto \
-     ttf-sazanami-gothic \
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_2.051.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_2.051.bb
-new file mode 100644
-index 0000000000..6376b0e10d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_2.051.bb
-@@ -0,0 +1,23 @@
-+require ttf.inc
-+
-+SUMMARY = "Google noto emoji font pack"
-+HOMEPAGE = "https://github.com/googlefonts/noto-emoji"
-+LICENSE = "OFL-1.1"
-+LIC_FILES_CHKSUM = "file://fonts/LICENSE;md5=55719faa0112708e946b820b24b14097"
-+
-+SRC_URI = "git://github.com/googlefonts/noto-emoji;branch=main;protocol=https"
-+SRCREV = "8998f5dd683424a73e2314a8c1f1e359c19e8742"
-+PE = "1"
-+
-+PACKAGES =+ "${PN}-color ${PN}-color-noflags ${PN}-colrv1 ${PN}-colrv1-noflags"
-+FONT_PACKAGES = "${PN} ${PN}-color ${PN}-color-noflags ${PN}-colrv1 ${PN}-colrv1-noflags"
-+
-+FILES:${PN} = "${datadir}/fonts/truetype/*.ttf"
-+FILES:${PN}-color = "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
-+FILES:${PN}-color-noflags = "${datadir}/fonts/truetype/NotoColorEmoji-noflags.ttf"
-+# The COLRv1 format is a color scalable font compared with the previous color bitmap fonts.
-+# COLRv1 is significantly smaller than the color bitmap format (~5MB vs ~11MB).
-+FILES:${PN}-colrv1 = "${datadir}/fonts/truetype/Noto-COLRv1.ttf"
-+FILES:${PN}-colrv1-noflags = "${datadir}/fonts/truetype/Noto-COLRv1-noflags.ttf"
-+
-+do_compile[noexec] = "1"
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
-deleted file mode 100644
-index b5dae22a9d..0000000000
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--require ttf.inc
--
--SUMMARY = "Google noto emoji font pack"
--HOMEPAGE = "https://github.com/googlefonts/noto-emoji"
--LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://fonts/LICENSE;md5=55719faa0112708e946b820b24b14097"
--
--SRC_URI = "git://github.com/googlefonts/noto-emoji;branch=main;protocol=https"
--SRCREV = "aac7ccaa4d1dea4543453b96f7d6fc47066a57ff"
--
--PACKAGES = "${PN}-color ${PN}-regular"
--FONT_PACKAGES = "${PN}-color ${PN}-regular"
--
--
--FILES:${PN}-color = "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
--FILES:${PN}-regular = "${datadir}/fonts/truetype/NotoEmoji-Regular.ttf"
--
--do_compile[noexec] = "1"
--- 
-2.43.0
+-Mikko
+
+On Mon, Jul 06, 2026 at 10:50:19AM +0200, Etienne Cordonnier via lists.openembedded.org wrote:
+> Hi Ross,
+> 
+> what is the use-case of the patch? config.toml file is ignored in
+> out-of-tree builds ( https://github.com/rust-lang/cargo/issues/2930 ), so
+> AFAIU removing it shouldn't make any difference for a bitbake build. Is it
+> for devtool builds?
+> 
+> Étienne
+> 
+> 
+> On Mon, Jul 6, 2026 at 10:34 AM Ross Burton via lists.openembedded.org
+> <ross.burton=arm.com@lists.openembedded.org> wrote:
+> 
+> > This file hardcodes a specific compiler for aarch64-linux builds, which
+> > is not the compiler that we provide.  As it's otherwise useless, we can
+> > just delete the file.
+> >
+> > Signed-off-by: Ross Burton <ross.burton@arm.com>
+> > ---
+> >  .../recipes-core/uutils-coreutils/uutils-coreutils_0.9.0.bb   | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-core/uutils-coreutils/
+> > uutils-coreutils_0.9.0.bb b/meta-oe/recipes-core/uutils-coreutils/
+> > uutils-coreutils_0.9.0.bb
+> > index d294736395..2c7d3a3200 100644
+> > --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.9.0.bb
+> > +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.9.0.bb
+> > @@ -65,6 +65,10 @@ python __anonymous() {
+> >
+> >  BBCLASSEXTEND = "native nativesdk"
+> >
+> > +do_configure:prepend() {
+> > +    rm -f ${S}/.cargo/config.toml
+> > +}
+> > +
+> >  do_compile:prepend() {
+> >      export LIBSTDBUF_DIR="${libdir}/coreutils"
+> >  }
+> > --
+> > 2.43.0
+> >
+> >
+> > 
+> >
+> >
+
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#128031): https://lists.openembedded.org/g/openembedded-devel/message/128031
+> Mute This Topic: https://lists.openembedded.org/mt/120136596/7159507
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [mikko.rapeli@linaro.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
 
