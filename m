@@ -1,151 +1,256 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <spushpka@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17B51C43458
-	for <webhook@archiver.kernel.org>; Mon,  6 Jul 2026 13:53:09 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.71])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.151521.1783345983607125417
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3807C43458
+	for <webhook@archiver.kernel.org>; Mon,  6 Jul 2026 15:20:50 +0000 (UTC)
+Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.152657.1783351247339948657
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2026 06:53:03 -0700
+ Mon, 06 Jul 2026 08:20:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=IZ+CnSpf;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=IZ+CnSpf;
- spf=pass (domain: arm.com, ip: 52.101.72.71, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=x37uZ2l+aoJ3Ot/aA5tKlhSAuk0cwLxq0S2CUTvR7rpHD8CPRaxLJuTRAg88hyaM0OnnIYKw05ERi0QMtBmg/U0z5UdPBpkjVkeJ8SHg73VBy71tWVhGFCK0fjK/IHVHBCdwiUCkwn4DLzzycar6LBOCMF489lrGMBePBzCkz2szbvDYa5LJxHid7NGi4yEzsL6zI9eu+CiD6q8lP05wxlqK/XfgZrv3HA882IbEybWoU69H/sgYp6m158SCUBWkVe7cn7TSwsLvLY4i+bZGXVsLBOpY0KXVNBCHPJdgqJxIyLFwDC5yu+O1FUulJXEWvA5PP21LhNl4ivrz10y53Q==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ScZ7luhkcy7HFhy60oHkvabzbJMgA5KIQqBA5THQdCQ=;
- b=aAEmGyV2WoSiG3NAfDF9p/RddHPXPeM+NC82jtIiuLPOWuIWdiGgOnWHuqDzoPsEpn+O6QN6Jfzg2No3IGF17LAVOfqZgmiKGyaCDPVz/pifsxiaHr1tC1pzUHsHYet+NLcdbuJas0fUHBGvUB+WqKiOHLjWnnEM68QBE8hHxd06ld/Y5AvbSCs+yeH5k5LjE6/BaSK931k2wqKNHU+UERk5hjifbPBgr/bnO5ShM0GQoTFV8g6yM9he0SHifSSkk5PYQyRul9U11BZ5LH6/vYQqSDUMovAJh4zquEhrEyVgAxjZBVTKFUWHL+ebjd9ku109z3ueSL0v67eKKqPQEw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ScZ7luhkcy7HFhy60oHkvabzbJMgA5KIQqBA5THQdCQ=;
- b=IZ+CnSpfc1o38xAYgKRwCtg9ezUsdTFcjTHK0DSqLBv+vAOTwoyRmif6dOgZpYoVaEOO/THA+z8kNumfjUBiLWwN+zdKhUL+gtWS0tMsPR/zfqp0L+sSqnu8zkjJ2sN+uOpWnst9e0Dv4r9dJQAjYS17NjamrujUS55cnJimNN8=
-Received: from DB9PR01CA0023.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:1d8::28) by AS8PR08MB6310.eurprd08.prod.outlook.com
- (2603:10a6:20b:292::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.13; Mon, 6 Jul
- 2026 13:52:55 +0000
-Received: from DB1PEPF000509FF.eurprd03.prod.outlook.com
- (2603:10a6:10:1d8:cafe::22) by DB9PR01CA0023.outlook.office365.com
- (2603:10a6:10:1d8::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.13 via Frontend Transport; Mon, 6
- Jul 2026 13:52:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB1PEPF000509FF.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
- via Frontend Transport; Mon, 6 Jul 2026 13:52:55 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aCK0UM0n2QukGocaGoi7KtOEKSCYr6izZDN7YjSfFUduYfmB5Pil5mfxxpdc/g3UT5+BGBVZ6XQj3vYLueA5Np6JhEvdNkoe60/CVJhXE7IF4II3y4CLErXL25jPpzf//+dpvKqpYfWZwuWzAYAmy/575VRK8r0HDHac0t++jWNA+70uvFla+ww5Bw5YVJyXobvlhqspiGKv1V9FDXhJjCp4bbywRD4SxQK6g079D59D/GovissF2+5pjaCM5U4rvylh1Ppx3Cb0JRmUmvDl4osUh4evld2Lvue6vIl7FL8WzCxkTGYRQFxpYp8PzNAmiROwRMfcWDx6GEZ5SFclEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ScZ7luhkcy7HFhy60oHkvabzbJMgA5KIQqBA5THQdCQ=;
- b=GZUXNQPe0vRNw9tx8w4WcozmRdXALilUaTNEm1qvIM4uD7nxufoll92FIAa8uuNfhctrnNIdZPWnvPPJszfAqKrA9UR9V290aXH1KS1eEXuzx8cVLtelMwVe3NVIPUYwDq1MX2+UM3S0CPmDhNdu+yVHBXjQ3NDQXKW6rKJQN7Ykw3ni38mDZPom7ysQAZ2wchGbplXMa1bSUfuEC2HP9HLZHFTPKLyhCrxJE34S9Esmul3KC4VAHPtSvnFpAGBTB2er+yxj39ZKXz+lGcrOEunej32d6OwTxX8JoofxpTwNDVcOHqJgDj/hqoAHOciFltCPY8cLPEtWwm1szrI94g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ScZ7luhkcy7HFhy60oHkvabzbJMgA5KIQqBA5THQdCQ=;
- b=IZ+CnSpfc1o38xAYgKRwCtg9ezUsdTFcjTHK0DSqLBv+vAOTwoyRmif6dOgZpYoVaEOO/THA+z8kNumfjUBiLWwN+zdKhUL+gtWS0tMsPR/zfqp0L+sSqnu8zkjJ2sN+uOpWnst9e0Dv4r9dJQAjYS17NjamrujUS55cnJimNN8=
-Received: from AM9PR08MB6258.eurprd08.prod.outlook.com (2603:10a6:20b:287::19)
- by DU0PR08MB8785.eurprd08.prod.outlook.com (2603:10a6:10:475::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Mon, 6 Jul
- 2026 13:51:51 +0000
-Received: from AM9PR08MB6258.eurprd08.prod.outlook.com
- ([fe80::171d:1f8b:720d:7a1b]) by AM9PR08MB6258.eurprd08.prod.outlook.com
- ([fe80::171d:1f8b:720d:7a1b%6]) with mapi id 15.21.0181.012; Mon, 6 Jul 2026
- 13:51:51 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [PATCH 1/2] librav1e: make nasm dependency x86-specific
-Thread-Topic: [oe] [PATCH 1/2] librav1e: make nasm dependency x86-specific
-Thread-Index: AQHdDSJXqVow2BXYzkGKdxqX4cPmuLZgfToAgAAFpQA=
-Date: Mon, 6 Jul 2026 13:51:51 +0000
-Message-ID: <D5374CD8-35B3-40F3-B3FF-3CD2B0B776AF@arm.com>
-References: <20260706083445.2842309-1-ross.burton@arm.com>
- <CAMKF1spZt9otLgCQnRW40L8JE9uPfhv9bODREMid=KVAkf2qWw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1spZt9otLgCQnRW40L8JE9uPfhv9bODREMid=KVAkf2qWw@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3864.600.51.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	AM9PR08MB6258:EE_|DU0PR08MB8785:EE_|DB1PEPF000509FF:EE_|AS8PR08MB6310:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2be719f5-1a6f-4c08-76d9-08dedb65e1c3
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: 
- BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|38070700021|18002099003|4143699003|22082099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info-Original: 
- B75y7cD+Cl6wYTezsrUneOJXzuhjmie/Nvm5k//Xhd/tt6qTkPDOMByPgHwaASeJo5pCWK0OFV1AFpbtFwJLzkG1oSq4TpLGzSbPM2orhL+eqJKCMK3h6sD9p809vDVDdD35O/RmQlhvx9bOxdyTwK3lgk4MtFP8ym6EoD4WM+5iaYy2towKkiY3HyDP/FBKZdiDoPBAAAgCrXHqQVj5htQn5Fl9JqLW2JfFKBAitdJgvdQb7L2j+6kYkQHWRonPL9wOh1b7pc5VkVPUinDviSIXKoEDGCYtiNkLeMAEJidaLIX0wM8C7ra+R+hTF575BAmz4oaQyejmhbXWIYpt6ga0WCXniAX8yaGnazOYjqty2z6D4nOtCuqGT36sEJnrN9iDUO55sHudLXZmYoCLYbfIAzxe8mRqJ8eycQU62Hv3/jOqsygVWT+77kkQtW9Gg7U7GAGj0vdt/r0oRCTO7Rfdpg/nC1PmIbAbzwyl9znKXwNOIzfB9o5JtVwMhG76QyGSF9ZhH44gNVKUD02XBqZnUDx6UPu4XomqUOOdwu1ekFSBG0DfcWemj2DcmGoLa7cvfo8YCvcXo1K0I4OrMXioq/OdIlJOo03/teuzuPA8IV58fiWtmu7s2RiU30GNZYuuiSpqJPyUF0PwNRZQGDaniSoEKQCUGzETSye8M9FOBzSx1DBFY+6JQxjpwyjpFUvr4SLG/Oj7kUcVFre4dCqTB65cLJyiB9m9IA/rdms=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6258.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(38070700021)(18002099003)(4143699003)(22082099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D10F886A7BA29D41933AA113F904027E@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=OPbKvnyn;
+ spf=pass (domain: cisco.com, ip: 173.37.86.74, mailfrom: spushpka@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=5299; q=dns/txt;
+  s=iport01; t=1783351247; x=1784560847;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=f3IJ5P4pplTvk+TcBZaissHlwTn84WkGbdL+943v9tw=;
+  b=OPbKvnynUq6f1cxr5s0t3xydjD3MKq0cbNf7aoWcCKB8qAjh1aA6L+JM
+   6QRjddv4rD5CEut5p2GfNU8BKpqgDyVn7yAI/kcErKQzK1Lfxm+2pDXEu
+   eH5sUESWHuonUzfrfg5sMepqHkqzm7q4ZllVZfVrh0RmMRbHKjxt7K8mZ
+   GkT1dxMqe/jgu+PZL6lfI5GMNrNX8JirfPRSLQ1z+zGKcs+8QuW78BKKX
+   rWAEV01GNBkbFrb6+iFg11jYjre+b/rF0FBAEyKpXEvJdqYuoUuQov6YA
+   RaD9UKKUsZkM6gYoEvgos7fr0IrCZju5xJFYDwEw3Btxk6uAitZTdqSYl
+   A==;
+X-CSE-ConnectionGUID: L3iDz5SZR4GxTPeIWWHKFw==
+X-CSE-MsgGUID: a86rYdAKREqL73UPU0p6Xg==
+X-IPAS-Result: =?us-ascii?q?A0BXAADCxktq/4z/Ja1aHQEBAQEJARIBBQUBgX4GAQsBg?=
+ =?us-ascii?q?lZ0X0JJA5ZIgRadCIF+DwEBAQ9EDQQBAYUGjU8CJjYHDgECBAMCAwEBAQEBA?=
+ =?us-ascii?q?QEBAQEBCwEBBQEBAQIBBwWBDhOGTw2GWgECATUBGAEbEiwDAQJaIyGDAgGCc?=
+ =?us-ascii?q?wIBEQa5RIIsgQGDKAE/AkNQ2ywBCxQBBYEzAYU+iB9bGAGEegInGxuBcoEVg?=
+ =?us-ascii?q?nN2gQV3ZQICGIEehm0EgiKBDIFaHo8nSIEeA1ksAVUTDQoLBwWBZgM1EioVb?=
+ =?us-ascii?q?jIdgSM+F4EMGwcFgR2Ba4EChHkjHwM5f4EwdUp5LYECARIeCoFSgSkDCxgNS?=
+ =?us-ascii?q?BEsNxQbBD5uB4x7Fw+CPQGBDQErgiyTOAeSN6EPCiiDdYwhlToaM4VbpRELm?=
+ =?us-ascii?q?H2LN4JTiQ+NQYRogW8FMIFZcBWDIglKGQ+OLQsLg2CFE8lHJDUCAQEHAy8BA?=
+ =?us-ascii?q?QcCBw4DC4FokAGBfAEB?=
+IronPort-Data: A9a23:llRqiquMLMRvUvBtNlykCO7GFufnVAZfMUV32f8akzHdYApBsoF/q
+ tZmKT3VPvaPYmqjKdhzb4zg8kNUu8OGnNc3SFZoriwwFngRgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrav666yEgiclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZTdJ5xYuajhKs/3b9ks21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw3r12LXMTz
+ s4idB8dUiiOpt2J4JGVVbw57igjBJGD0II3oHpsy3TdSP0hW52GG/6M7t5D1zB2jcdLdRrcT
+ 5NGMnw0M1KaPkAJYwtPYH49tL/Aan3XaCVFs1KNpqMf6GnIxws327/oWDbQUoHSGJUMzh/I/
+ goq+UzwUk8ABdC26gCo61bz3dL3oHvjBrIdQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
+ lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZM5ottdQ9Qnoh0
+ Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
+IronPort-HdrOrdr: A9a23:ML7fX65xqewAOVKfjwPXwOTXdLJyesId70hD6qm+c3Nom6uj5q
+ WTdZsgtCMc5Ax9ZJhCo6HjBEDjexPhHPdOiOF7V4tKNzOJhILHFu1fBKLZslnd8lXFh41g/J
+ YlVbRiA9vtClU/p8P77A6kV+sE+rC8gceVbSO09QYVcemsAJsQiTtENg==
+X-Talos-CUID: 9a23:dJXLtWw6SIagTli0zur5BgUwQcEJYCDm/k2MDF+EMWtId4K1anGPrfY=
+X-Talos-MUID: 9a23:EDYgbATtMghfTYNeRXTl1G94BctBwJ6DEWRSyqg+hpGcaxx/bmI=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,149,1779148800"; 
+   d="scan'208";a="505818180"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Jul 2026 15:20:46 +0000
+Received: from sjc-ads-8093.cisco.com (sjc-ads-8093.cisco.com [171.68.208.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id 43CEA180001F3;
+	Mon,  6 Jul 2026 15:20:46 +0000 (GMT)
+Received: by sjc-ads-8093.cisco.com (Postfix, from userid 1839047)
+	id DE6DACBEF99; Mon,  6 Jul 2026 08:20:45 -0700 (PDT)
+From: "Shubham Pushpkar -X (spushpka - E INFOCHIPS PRIVATE LIMITED at Cisco)" <spushpka@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: xe-linux-external@cisco.com,
+	Shubham Pushpkar <spushpka@cisco.com>
+Subject: [meta-OE] [wrynose] [PATCH 1/6] jq: Fix CVE-2026-40612
+Date: Mon,  6 Jul 2026 08:20:15 -0700
+Message-ID: <20260706152022.873284-1-spushpka@cisco.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: 
- bu84Spykfee/RXjibmfhJgPKpX586VoQO+Fv1lG4AOgL93HHoxF9Cf/fMDl5E0my82UTfzGj55Zx8ig+KrIy9CEs7iM7a+D7uFLRh24rX/38kcsaUdzk9+dWc32+GkecLVuZddHXOBlCYkm8ssf+0Ws0lfW4uLYpZOIUglREWLhW14xCLrLH+0ch7uFWPWP/obuo/3CiSZ61m2UyFMRKe2osoVMRgEbVGQkyyXDXDb+4yCud4JtAgCIpaA558OHFX4l3ZSswaumsz545SHFr2lc0cywjno0MNYvwslIlPbp+KNOkGKNxs+/Br9CV1JO21cm6h3aKXkeUXAwwzChajw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8785
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- DB1PEPF000509FF.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	6c2cb991-7fa4-407e-c365-08dedb65bb4d
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|35042699022|14060799003|1800799024|376014|23010399003|82310400026|56012099006|18002099003|11063799006|4143699003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	bj88ZqlMp5PpLKrzMrgEyhHK3pCgtQlbVzMZKxrP5mp7+bnCazoZDYJbOApgH5nj0ewer5JCWNm52GWmu7tCtTLT6YB22aAToVHABjodMjZ5Q6icxVUmyrcQHBUKHC1Gav1g++KrLIQoFtK8E9gh7nzHWoxOp0t440utwrpYjMZ3al07rSzH8i/nZtnX9uBDjhvh91pI4p1zC1VWaTJjNqv1UmE9+k3JkCppMlgwcx872pE5zPXE9snjoU5lVLTfJ2Q4u1yXXUmHk+CqR7J+Q7S0j0SV8fsqQCiZxwJ7wjNyDWzvF+8UAaFv3qimNXR6yrQK/ir5jTreXcYJBYnaIOs8j8hZXdBxhiDl9Licahhb0Ct1POScXii1KZEOBUAK72IIL0LVCuP05H3mQJkSVneJo8chOYdbtRMJvn21cQvGaR8d/XzTTRCfqiXU/HO7RchIyE2wwWb9MKw3v0vWB7K+4/KgCKT5T0xTxVnA4L1li1WhG3G7l/W2tC/fpUb/amsOJZOlTX4JRx/QjPcm+FHkY2GXkN8+Z3Fwhk1JUByF1n1sfeVXPML6fJcEbCITc9Z+xMXDt3TJDHmhNFi2LpmenRhXSn7T5N8aMDcmWSPSVGkXrzKbqO6oxHjOW5gmgGfamlNtZ9yl5tKdHqQfqrhQYBkNwGoehC6pRpnulJBKrBIm9YoDymxeLFj1ltvFDFd2DLpTNJ4R1XjYSIILEQ==
-X-Forefront-Antispam-Report: 
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(35042699022)(14060799003)(1800799024)(376014)(23010399003)(82310400026)(56012099006)(18002099003)(11063799006)(4143699003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	aO92miYaVQhbG2zvEgHPjJyRm6axTgVikHFE4HtCHhsDzZrnqQ0jQTSBevyRMYFG9RQSF3eaismC5VHVL+AgerqOfPS556gwDUpG9+bjVpoXPNtirLxXSn987dr8nigi8qfEai0PsfNjxf8Sqew+d6XOqUVCllYw/7wKpXAfiTV1RJ2hjacXWLEY3iZBVyInhW/enCFiK4vFU2fd0jbDhk+aJ22zCrtRT3yKyRbXIx4xUnKtbc/JKmVccw6GmOrCQms7ZDQ7UXeJy5xVuzsYL86xvjtxxVWGfb0kVWAYirOdPcZ+bd0U9OeXsJtxl+xBM67/L2v20EFGDfNyw5w5gVzHCcruLivX3dzCabhsbBRKrH+s5swGwF+HUC7dJsZPMpVAuHAHRXplAdRK/tlUwqLEmqjOhQvgRPospH1eE2A6ZEr36eKDWmM9RzutyuB0
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 13:52:55.8588
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2be719f5-1a6f-4c08-76d9-08dedb65e1c3
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB1PEPF000509FF.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6310
+Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-8093.cisco.com [171.68.208.131];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 171.68.208.131, sjc-ads-8093.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 13:53:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128044
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Jul 2026 15:20:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128045
 
-T24gNiBKdWwgMjAyNiwgYXQgMTQ6MzEsIEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+IHdy
-b3RlOg0KPiANCj4gRG9lcyBhZGRpbmcgZmRlYnVnLXByZWZpeC1tYXAgdG8gQVNGTEFHUyBoZWxw
-IG9uICB4ODYNCg0KSXQgd291bGQsIGlmIHRoZSBuYXNtIGludm9jYXRpb24gd2FzbuKAmXQgYnVy
-aWVkIGludG8gcnVzdCBjcmF0ZXMgd2l0aCBubyB3YXkgdG8gYWRkIGZsYWdzIGZyb20gdGhlIHJl
-Y2lwZS4NCg0KUm9zcw==
+From: Shubham Pushpkar <spushpka@cisco.com>
+
+The upstream fix [3] is for a newer jq codebase. Debian has already
+backported this fix in jq 1.8.1-6. Use the Debian patch [1], which fixes
+this CVE as tracked in Debian bug #1136445 [2].
+
+[1] https://sources.debian.org/src/jq/1.8.1-7/debian/patches/CVE-2026-40612.patch
+[2] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1136445
+[3] https://github.com/jqlang/jq/commit/d1a12569d91641135976a8536776a4a329c02cc2
+
+Reference:
+https://github.com/jqlang/jq/security/advisories/GHSA-r7m6-x9c7-h69j
+
+Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
+---
+ .../jq/jq/CVE-2026-40612.patch                | 127 ++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |   1 +
+ 2 files changed, 128 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patch
+
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patch
+new file mode 100644
+index 0000000000..f7cae01e21
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-40612.patch
+@@ -0,0 +1,127 @@
++From f1a72c7b5eb9c9e99576b2ca8e59ab1f36a2a4e3 Mon Sep 17 00:00:00 2001
++From: itchyny <itchyny@cybozu.co.jp>
++Date: Fri, 24 Apr 2026 22:02:24 +0900
++Subject: [PATCH] Limit the containment check depth
++
++This fixes CVE-2026-40612.
++
++CVE: CVE-2026-40612
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/d1a12569d91641135976a8536776a4a329c02cc2]
++
++Backport Changes:
++- Dropped the duplicate tests/jq.test hunk because Wrynose already carries
++  the same regression coverage in existing CVE-2026-47770.patch.
++
++(cherry picked from commit d1a12569d91641135976a8536776a4a329c02cc2)
++Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
++---
++ src/builtin.c |  5 ++++-
++ src/jv.c      | 40 +++++++++++++++++++++++++++-------------
++ 2 files changed, 32 insertions(+), 13 deletions(-)
++
++diff --git a/src/builtin.c b/src/builtin.c
++index 902490d..378be02 100644
++--- a/src/builtin.c
+++++ b/src/builtin.c
++@@ -471,7 +471,10 @@ jv binop_greatereq(jv a, jv b) {
++
++ static jv f_contains(jq_state *jq, jv a, jv b) {
++   if (jv_get_kind(a) == jv_get_kind(b)) {
++-    return jv_bool(jv_contains(a, b));
+++    int r = jv_contains(a, b);
+++    if (r < 0)
+++      return jv_invalid_with_msg(jv_string("Containment check too deep"));
+++    return jv_bool(r);
++   } else {
++     return type_error2(a, b, "cannot have their containment checked");
++   }
++diff --git a/src/jv.c b/src/jv.c
++index 08ded35..5a2c3a2 100644
++--- a/src/jv.c
+++++ b/src/jv.c
++@@ -914,19 +914,19 @@ static void jvp_clamp_slice_params(int len, int *pstart, int *pend)
++ }
++
++
++-static int jvp_array_contains(jv a, jv b) {
+++static int jvp_contains(jv a, jv b, int depth);
+++
+++static int jvp_array_contains(jv a, jv b, int depth) {
++   int r = 1;
++   jv_array_foreach(b, bi, belem) {
++     int ri = 0;
++     jv_array_foreach(a, ai, aelem) {
++-      if (jv_contains(aelem, jv_copy(belem))) {
++-        ri = 1;
++-        break;
++-      }
+++      ri = jvp_contains(aelem, jv_copy(belem), depth);
+++      if (ri) break;
++     }
++     jv_free(belem);
++-    if (!ri) {
++-      r = 0;
+++    if (ri <= 0) {
+++      r = ri;
++       break;
++     }
++   }
++@@ -1794,7 +1794,7 @@ static int jvp_object_equal(jv o1, jv o2) {
++   return len1 == len2;
++ }
++
++-static int jvp_object_contains(jv a, jv b) {
+++static int jvp_object_contains(jv a, jv b, int depth) {
++   assert(JVP_HAS_KIND(a, JV_KIND_OBJECT));
++   assert(JVP_HAS_KIND(b, JV_KIND_OBJECT));
++   int r = 1;
++@@ -1802,9 +1802,9 @@ static int jvp_object_contains(jv a, jv b) {
++   jv_object_foreach(b, key, b_val) {
++     jv a_val = jv_object_get(jv_copy(a), key);
++
++-    r = jv_contains(a_val, b_val);
+++    r = jvp_contains(a_val, b_val, depth);
++
++-    if (!r) break;
+++    if (r <= 0) break;
++   }
++   return r;
++ }
++@@ -2035,14 +2035,23 @@ int jv_identical(jv a, jv b) {
++   return r;
++ }
++
++-int jv_contains(jv a, jv b) {
+++#ifndef MAX_CONTAINS_DEPTH
+++#define MAX_CONTAINS_DEPTH (10000)
+++#endif
+++
+++static int jvp_contains(jv a, jv b, int depth) {
+++  if (depth > MAX_CONTAINS_DEPTH) {
+++    jv_free(a);
+++    jv_free(b);
+++    return -1;
+++  }
++   int r = 1;
++   if (jv_get_kind(a) != jv_get_kind(b)) {
++     r = 0;
++   } else if (JVP_HAS_KIND(a, JV_KIND_OBJECT)) {
++-    r = jvp_object_contains(a, b);
+++    r = jvp_object_contains(a, b, depth + 1);
++   } else if (JVP_HAS_KIND(a, JV_KIND_ARRAY)) {
++-    r = jvp_array_contains(a, b);
+++    r = jvp_array_contains(a, b, depth + 1);
++   } else if (JVP_HAS_KIND(a, JV_KIND_STRING)) {
++     int b_len = jv_string_length_bytes(jv_copy(b));
++     if (b_len != 0) {
++@@ -2058,3 +2067,8 @@ int jv_contains(jv a, jv b) {
++   jv_free(b);
++   return r;
++ }
+++
+++// Returns 1 (contained), 0 (not contained), or -1 (too deep)
+++int jv_contains(jv a, jv b) {
+++  return jvp_contains(a, b, 0);
+++}
++--
++2.44.4
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+index 7665ba2511..9f0fcf8cb5 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+            file://CVE-2026-33948.patch \
+            file://CVE-2026-39979.patch \
+            file://CVE-2026-47770.patch \
++           file://CVE-2026-40612.patch \
+            "
+ 
+ inherit autotools ptest
+-- 
+2.44.1
+
 
