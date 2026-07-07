@@ -2,111 +2,111 @@ Return-Path: <roland.kovacs@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15D21C43602
-	for <webhook@archiver.kernel.org>; Tue,  7 Jul 2026 13:09:36 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.172909.1783429768352113642
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F063BC44500
+	for <webhook@archiver.kernel.org>; Tue,  7 Jul 2026 13:09:45 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.16])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.172912.1783429779833517028
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jul 2026 06:09:29 -0700
+ Tue, 07 Jul 2026 06:09:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=A3xaNmDW;
- spf=pass (domain: est.tech, ip: 52.101.83.53, mailfrom: roland.kovacs@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=xZa+1qJw;
+ spf=pass (domain: est.tech, ip: 52.101.72.16, mailfrom: roland.kovacs@est.tech)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WG5bsNOgMVusazSfabtiSLVpJ3gTydS9NTytWuljA+OApiGrW3bANcs8mamFjkFcASck8jdqLEfd6QK+VZ3d6XQS8b7FFkYGC7sIfytESThBHevyCPg3Wv7XnL0qRvHC0fvMAvLJDLnBWSGsWl7o0aOFRX4Gdn38XxX+I8P1g8xJ6paYtOM3v5kOp4whWHIUbb/yg3Qm7YB6dMrRljv8iirRMG4lRGMxjYmGZ9+s2Ua8AhmuZ2KQpXvU3ay8YruhUC9SEd1aZzWcXjsCzmhO6ZmBmK4Ph7cYlZkt+D84rYIzRK3bWFdemT7TWS+lsEcFG4vaKcmMOYqchnpTm/GQLw==
+ b=BMtquzcMFERvPaBlbHWazUaKzO5Fyn9JGabjhOJd5Uuar/JavlodJHiLeJgU2vXgiEvnVWdWR5WKqH5dqHoU+lkWCfHyro1aKQxUGqKDheHcMnGnqwt7+KL8/kntyTFtXB4fEZQdnEfnoW2CHY1ZMNrmQiDYPjTIub3bZi1FUUAx+8KHAxxPbS9fPYp/pPO2bXhOf4sldhrMxMGJXsupIH0Rs937Fo5GsJTh+u9VHdINu/EcZmm+s1l5iUbjzEhlszqFZ4gsSteEeXMSKpRIa8qSq1Vi+BwKvLIz0URuwjNUQNFyOEgfypR3GYHSLUN/b4XzjVAGYGMWorm1wV62Iw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lQTwFJGTokkeV6xsKgiJrgXpAdBc54CJA9uieZEP0Pc=;
- b=g+eIW/V4fsquxBde3Tzqz9YyRyss9qR9u9pGB5zbcBCYlj+vpoR/bOUVANCuIn7lVIaNKuzks8LKJKuCaEU0rROpljaWLookDBuHwz0t8foIJ4NIrc4Bqun8kTWewatzSaJENbPzIMSmkJpIbXLuxQNnkaDYRre666fC9zFdW7FyjuO4wmN83Z8MpU04BC6xIw9fq0Yx5799pkS7x13zNooFb0xPrbhSOECITrnaQsyKOVYLr5ydKBNPzt+RcklPh0IKm2bx8Pfkzj1UldECSXJ0pMuuF3nF5WJnEJ7mkO3WtFb4Lo5kmo2YcATtSwxTbaMHjeIrnSRn/LBbUS5qyw==
+ bh=s+hEldXffSj1a6L+BSinHpl10JkZ0vhaITDnSgh1YzQ=;
+ b=lnwcF1FgmDtIAPwM/kxVjuNBLHiCm4yc6hrN+0Lej/egqRWRuKuXq2PSJAQgkEszK/ok38+toNmrsOlEAGE7xVlPHml4zrFkE+3j3D7p/Q1lDmQX4xZ/8t75WGHaBCsI07ympvkGSy9GZIkLg/clktw897pZLS8aB9q79qZiHTpwat5/RMgg2J4hiDKRUK/uI+nPFL/fv+dCWVX/K9iJbx+DGH2eve/miN2eAAVY7k2kGgBBbrMyDhZvS5RRxsU9mvMhXQtZY3gxTgpn0bc+McE9Q9PnC2luiKwYOH+zmtZTcaiOP92l2HtytC0oA/pm5aiIoT6IuPtJL3NIlPfTBg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
  dkim=pass header.d=est.tech; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lQTwFJGTokkeV6xsKgiJrgXpAdBc54CJA9uieZEP0Pc=;
- b=A3xaNmDWOtsGJxYkwDYC5UtoSq3GhGwZ3mxPy8+KMM+rk+OGxh0/Js2Tk1er+pMJUgIa7sH9A9lztz7GyaKw3tPFbrd1CXgCvnhDq3L4INkwwqyyquHh5N2RPXWNvFKifJ3xmZTqY9GxiFnNZPoQ62UGksCJu/2j7ZB+JoI+vwKyBMxRsSEgSDzKyrFqKtT4ONb1MeYPxr/9alHXmGBzlAZBsEz/6cRZYb/I/oy2A7fyxV3wEmxFS5Oa9wC08dlZwiMYhm7hOTZoQ2BdCxZER5qKZaGf1DwzjcqKTDt5XTBYbiCxgIUI/1ZoF1SGpXYiqe1GqsbaSc3wvXq1CUBd3A==
+ bh=s+hEldXffSj1a6L+BSinHpl10JkZ0vhaITDnSgh1YzQ=;
+ b=xZa+1qJwRhQjAHV9Uy7LfQlwjIuvHwejAExmL76hbpitI0sYp+hvKNjhdJXnIviDlceHdG9mTOPd0FlpZSZKuGcq1eSJ9zKErrr/rD4Z47c5jjnGWj5wJqxy4WW9Oe/qrcHjmvLV/ixHrf6UtqSfbHLrVDd/JPhEc07m+fbs+TCFeyjSDGnzYbNQ9BR3+OeFstsPcM89HI0yztYzXYURmh1kZLsijvGtKXvardYIYFptO1wtBFE77qzqrI6UuoIwdHl2hwXKIHbaDNEDPLytxueabebWQ4pQJdBaANaB+8rJo09wrZGDAiKJc+2uy4oVi8U91aCeUMieHbKmDdnR1Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=est.tech;
 Received: from AM7P189MB0725.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:111::20)
  by DB8P189MB1032.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:16e::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.8; Tue, 7 Jul 2026
- 13:09:22 +0000
+ 13:09:36 +0000
 Received: from AM7P189MB0725.EURP189.PROD.OUTLOOK.COM
  ([fe80::ab4f:3151:4330:625d]) by AM7P189MB0725.EURP189.PROD.OUTLOOK.COM
  ([fe80::ab4f:3151:4330:625d%5]) with mapi id 15.21.0181.012; Tue, 7 Jul 2026
- 13:09:22 +0000
+ 13:09:36 +0000
 From: Roland Kovacs <roland.kovacs@est.tech>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe,wrynose][PATCH] thrift: fix multiple CVEs
-Date: Tue,  7 Jul 2026 15:09:19 +0200
-Message-ID: <20260707130919.112360-1-roland.kovacs@est.tech>
+Subject: [meta-oe,scathgap][PATCH] thrift: fix multiple CVEs
+Date: Tue,  7 Jul 2026 15:09:34 +0200
+Message-ID: <20260707130934.112414-1-roland.kovacs@est.tech>
 X-Mailer: git-send-email 2.55.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: DU2PR04CA0041.eurprd04.prod.outlook.com
- (2603:10a6:10:234::16) To AM7P189MB0725.EURP189.PROD.OUTLOOK.COM
+X-ClientProxiedBy: LO4P123CA0009.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:150::14) To AM7P189MB0725.EURP189.PROD.OUTLOOK.COM
  (2603:10a6:20b:111::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM7P189MB0725:EE_|DB8P189MB1032:EE_
-X-MS-Office365-Filtering-Correlation-Id: a20ffe01-bd38-4aed-4e7d-08dedc28f64b
+X-MS-Office365-Filtering-Correlation-Id: daa39f54-2ece-421d-d83d-08dedc28fe61
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|56012099006|6133799003|29003799003|12006099003|25016099003|11063799006|18002099003|3023799007;
 X-Microsoft-Antispam-Message-Info: 
-	pSo1S6WjiLDCJeLv2PZnlcnXFJrrJ4frmWiZL+gVDHeinh4EbNVras7dwJI71+g6fRSaw1DBiLFF+TimHPIKVVtk4PzOI2NCW5ggRjfmexpNuEDjEqYIB1l1PrjrWBEfJzXFG9ypR/pPLtAntOKoi5Arm4Bw/xfPGqi2Pn997qN+FQ5tAZmV/v21NgsNwn9p4jgWGt36p9kw7Lovv2SJnES0UUWE6rKfCBfGJ46mhF6QoLanGa/lMaIIgBq9tbeLmZaL+P3E9BBd714hxAO6eQsMi9s6eUUIzBsSd4+zbxpKrCxn2RFdQtMGloR4FCdmp7i0gGlB/GjmyFAHnuDc39sDhT1EizHW15yMNb8bAsaxdLjW7X8gOIAHotvFH7kNqVs6a7EGpgEhH8MA/zPcIQcK6v86JqSB6/d16MItsA1/mdrNAZtZTMIZmEGp5g0vk9cAJhs9/5bFaVHxBdLuBOR6D38Ip1korMiCuhvB0v6tkEJd09bDG5osCVTCVoUMuZb7F7H5d+JLzEmPZ3LEp+jBtAI6i5eSECacgPb6HKwkPoyaxVpX32Rz7SDdIou+omUzNguCT7ODeaLpCyFtQEZnNstz64cRB2QSsl40ZJ8Vivj9QZx1cLAb3RQKd7Bs
+	mMLPsVMDnoe2bgsehuMNCx6oe7CNzibqbMwjMJudzzTFWhZHjaCL+HuNq1LYJTvRaA4CVNJ8O/IouGG+rmqcHy6ML4k3IB7TAlYDOYzY+WOBmBy5zrC4hB28L8OJyAYvZYbDIz8TkvbXjtXPQ2LGhoOdQYKGgrch8VVYfN82f3iRG9N/ie9QpD6zbTmASlnI6lf0A/afObFRxaNSuJz5Yl+uzFic29ZVdAVHmdhV/xmrBHSqB9YEdjKHOt4c66XIcXzE3CvQsmjJlnbt8uTi4uQ0kasrgxneOV4/m9EX8mYP+z6LHw/jeJ8y3jj2mXNYtgAbLJD9aOSfDD7XBT5odirS8lf+OTpR01CTPzF9MBF6WlQJTxbmjM3rRtdmN3jqoo9PNNZn0liaQ8M7YLfDSkHMb2AJaCpo9BtS5Z8A/0XJzbaeWv3aDRWUj1lZRv2h74sOGe1egFG8qWTLNimoLQL1BL4mroBrmGw16RPofRam98jc0DU8Yq72KgwyOa1VbpAUgCVqCUaFHV+JmKQiQeVNsMAa08f7HLFt13yrTRLs5jSRimgVSPp+d+g0ImkJlkaNIa4b/cNXl+HHk8XJxyRY8vi0lpRWP9yynK8a+LAWIDbLA1mTeJCZQlUyA5Y6h206lsIbRfQ4G0VsmVZpGcurap6CwwQKd5qO477OtDc=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM7P189MB0725.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(56012099006)(6133799003)(29003799003)(12006099003)(25016099003)(11063799006)(18002099003)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?9hvCxka/Q+AG6NvU4lCROl1yHKjLNgNjkqIh1ip80TfOqrSUOI+eoXbQ7d7D?=
- =?us-ascii?Q?HcgAgdzb04sKc0dxEmasMbLE5QV7anUa8GxUdScqcihs4tjF+VTrrQJqc876?=
- =?us-ascii?Q?z85NxwuJy8zppypQKnZguvGAu+BFfcLFgyu3XzSVuYQ3rFqevRecg5VYLMC4?=
- =?us-ascii?Q?volKhDBW4VRbpKjbi+P/ORmCnJuRYDklarSJuKxFPnJEDWkWdscGqtRcee/W?=
- =?us-ascii?Q?n+kyPhSKVT13cAxkfOEob956WikmYDW4Le7MzwN2Et19cCDuskmqNwIvrS5W?=
- =?us-ascii?Q?stMPG3SnrppJZdg6C2zK4L9sWAXnZhkqqqINRsudu8qOE3FH8FVNwlONwLAl?=
- =?us-ascii?Q?AllPzz/9pycWhHlrahrS2Bq5wXsrpDb9qIsA6Nf63euD3rYG3D55+oTY0ewH?=
- =?us-ascii?Q?ws9PD6eZiwf3H/C1S3Gjwzwg22apvd3xbyJhV7MVp948mDhRcXfxKleiJlkz?=
- =?us-ascii?Q?pcUeGDcSkYGScXMSD2rwz+0PyjMvSINLpfgZnfWoBX1JZ/hk7Gh7mRa/E+xs?=
- =?us-ascii?Q?abMNrctPoU85ccJyv8YU4tsiz21ls1wTmPgEcP/EpX5UT4oFdPz+3YtOhDec?=
- =?us-ascii?Q?zbsbfskBf/rIIV919sz1C52cpgQ9Oyq4GXuc1bTCpck5UYBZgEHnw8HKc/5F?=
- =?us-ascii?Q?23XReetcGO1DCQj7xKove1vqn2xjktaJHGrzTtli+MXBQreMqOEyDrihw6X7?=
- =?us-ascii?Q?eGCm0QnSmPoPBdn9RN5VidB9pxQYUfeeO/1PIhIa9gSMIV7+KE+SePF1NeF9?=
- =?us-ascii?Q?jsI44XsAZbd5vAe37YpohOkkekpRko+KaWC9cSeIz3u8tq+K/g9A9cjfKY7y?=
- =?us-ascii?Q?e0MuwdDZmsLZ8WVpkKi384r6stAwyap8hQZei/GCOkA304KsPbhUurrWn8pW?=
- =?us-ascii?Q?LVf+P7+7XBJFdq62Qn3lckHf+c/gwBJnOM7V3UBAU8DTo+NaDS/8SZGRkxuA?=
- =?us-ascii?Q?WNm63Xp0s41/8AN64tG1snj+KLjL4XxlC/GnSIHvFPMRVtesRVEyyjTd8QW2?=
- =?us-ascii?Q?bG2jBEsItKrRTll46klqMqG3jBusV51WeLjlZ5qVU3jXbD8ILntkc9RRtv9w?=
- =?us-ascii?Q?VIL85ctiyp6krvVdAU7KMuBPVOd1MlhEoATcfu3la/mU7uxjO5iluHtUAa1M?=
- =?us-ascii?Q?sDnpXVFvQWuFjRMpPaYXQ2KyZHhSNBFSzXmH2ThdtIWqVClHaptEDM6mi6Yh?=
- =?us-ascii?Q?WeoaH0157T3QNf4yhArZOqrQ/EV2/+tK0GmnH0s+D8UWOtDqyep/uTOlpTUk?=
- =?us-ascii?Q?KbTZascPNuBhkqTv/vXDLtrnf2ig21vcUDubXYIOaHFc447AtB14LyT9x8mc?=
- =?us-ascii?Q?nintWXt6P5QqPVIw3fBeX7czWniH5x4t/pPempuasAy/YttY8XAGPmsy8MVm?=
- =?us-ascii?Q?SUN/5uDVn1VUyIyaDCaGdSD2pyVxRTHwtbQSPJpF8r2Kfe5yfXVA+gHEJ9zP?=
- =?us-ascii?Q?4ATcTCxH13dmicvdhoUhRMTpWSuxO89p4ipQjcURGtsWefSqOQMgNgtnjmwe?=
- =?us-ascii?Q?2iULcDsPu/lMoHJ9HWWdTmMH4pVV7zmv/cOtcEzwtrjizILiz1wXVO7+p6/0?=
- =?us-ascii?Q?PWTMaCaSoDhchcQ9dAbXDnLL/E2dISWzwbB72OIYTKEojI5+kia3smaJXe6f?=
- =?us-ascii?Q?TfZArZEOxoaVY/1wyilxGraewrpgh0xt3rGqxn6HdEqY0lIVmjRt/kK4x3Wp?=
- =?us-ascii?Q?FRNGC3hsRCSbwZ2nKpReR42tkDcJr++7KB8tlsraKNmH688Rf3pyq6n8svzP?=
- =?us-ascii?Q?ZjubUHhp9A=3D=3D?=
+	=?us-ascii?Q?vXeZckjxyZMDjfjxn+07yzV8DqZt2jQGvscfCwPRn4q/0VuKbfpG8er9ppHw?=
+ =?us-ascii?Q?jrxvjdCjpW6Zvzbk640WS0vKPmCK49F5mC3PcHngD8rlGZmbj+p8QEO7V8W+?=
+ =?us-ascii?Q?LMRAE+3AcrtJhpVDbtROy50CpVeIPaWBS93cGt9VCimY2TqOm3fkBKn3uKnn?=
+ =?us-ascii?Q?HRjUq/x48qWElwHvVCIksbXJQkdTLcraDLG5gTyk5EWl8Q2sYXQaJd3q2BK3?=
+ =?us-ascii?Q?Fq7lSAeUmn3/+A/ERAxWae5inf4Xj+jDF525LsGXRWfWLBWyiDk5slOHmxUY?=
+ =?us-ascii?Q?u/x4PkFX1UB+okUMFmAsqZcdevvzZuCuuqRbcBC8fcXHX8UvsPxm8lP4PLBX?=
+ =?us-ascii?Q?zESm5AHChzIChvaFmyNjiFCy9VXnrEdCSJKFJAR/s2DMbFNIf9YpjXzR30Jb?=
+ =?us-ascii?Q?9DtLQY0a+s0pp/M+bJs9nI76vZK5a7oG02bXNdjLzlcoM2JPFjj2/F1LTu6L?=
+ =?us-ascii?Q?YdVCGOjkIsWtUwnnkVwmiaW815daKC16Zm7kqLGsLirQOqM8QPJK3XAMrYFb?=
+ =?us-ascii?Q?W+QOf8MZycHKYFaTanGCh7AerIEhn9PfINxz+UmeA6weOF8DT6AJ6Ry0aFMm?=
+ =?us-ascii?Q?tbkld/hdXRB4GtDLzg6twDLMd1q8Qm6F+Pi+36MbJ1n/Mi7c8UA0lF4McdZw?=
+ =?us-ascii?Q?A76sO+6Gx4D5/xFkAYZ7tsNQNcbpzKOzsERyZWipQmmSKKKOKmkrHpNs+8A8?=
+ =?us-ascii?Q?jDmhIs68DSNqtreMDH6scw/Z/zHC+LLLTAC534acLKbDMYWiCaGQgx9SsnzY?=
+ =?us-ascii?Q?1ojPgY/Tzox/zghvb4SDMyY+mrJcIVndqZIpe583XebsuUYe5BMbJYszqcO6?=
+ =?us-ascii?Q?Vj62trBwsNLN06Vj8P6y/6jSgA1kTKAxOu2YYXQ9Tk08dhQOExXCQcbcJ68v?=
+ =?us-ascii?Q?Sl/qdRyEH+Qvnb/93CpJs+dV/4jR8CM7KzZqBG1bBEi8aR+h0UhXy8ZFQ84Y?=
+ =?us-ascii?Q?KTzKvR/kJRxeBaX9cAAvcVRxU0WzUqpO+nJ2IvYCD+4CLyRyjNm9e7/2a/Eb?=
+ =?us-ascii?Q?VxOILLksWuWEmgLPUzvGF3+kUQJEwP56UFa7OqtQj2+uyGSYE8+ZepDRgobl?=
+ =?us-ascii?Q?3qcfTKWb9rHDJ8k3l336ey2UEMgwt2hNLSMDmlsgv0syHOeytqxuIA+IF6on?=
+ =?us-ascii?Q?yIEJbz1o6/YEbmKADDl/Yrq4lqaGxLUuk1tLH18dpx5N5OgcXV1fbYWc6xX2?=
+ =?us-ascii?Q?gDOjVvOwFGsP/Ee/Fe/JvLS5gVduMN1ivK/izmQFT9gBaZRWY6RC+QN82aP+?=
+ =?us-ascii?Q?A4kDDF7J91p+aMAepGPmBvRm6AKcQuFMZxmPCdZfGk0ko1IJfMpvc1ybqGhC?=
+ =?us-ascii?Q?U8T+ISeoAEHNhtQnZYJrKM3MDl0dKS4cvR8vU5ZmrrDkZFhsrNHbgSOvwP7O?=
+ =?us-ascii?Q?fg1QZijOF5Zd0O81plr7HCMuiZJHuf5fReynMLDMg6ywlYh5MfhyUfi6Wrjn?=
+ =?us-ascii?Q?W1XJHNk6Hg5se5eDlvxz1K+IylZU37K/f1NAUni/gT2YKv1B7nlunojPi/0T?=
+ =?us-ascii?Q?eLkLIQPxoIurPB8IpxDqYq1gd8ljTeIiAMN7zpo/iCBAyEkrooWq8f0IvBfm?=
+ =?us-ascii?Q?ZJ/1cvKf93XzKi08+TpDDq/S9go6VIcwgvwNjOutO9+hQxsavDn9LZnIYFTg?=
+ =?us-ascii?Q?iNjTogAJbSTLv5pk2Sxb07whmWs3mvBktOdjDEw6YiNB0rkOMtQ5zalfAEWu?=
+ =?us-ascii?Q?CHNxoFc+mpYnHEf6J4znNbItYsvfO3hnrtsC7R6kryUYvB0Z20QY0jceVLLU?=
+ =?us-ascii?Q?uC75Im3KIw=3D=3D?=
 X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: a20ffe01-bd38-4aed-4e7d-08dedc28f64b
+X-MS-Exchange-CrossTenant-Network-Message-Id: daa39f54-2ece-421d-d83d-08dedc28fe61
 X-MS-Exchange-CrossTenant-AuthSource: AM7P189MB0725.EURP189.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 13:09:22.6884
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 13:09:35.9705
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5qCGePkiZwiYr0yIl0mbvdxrMQatc+cePlD8O+SswQiDTv4OtyvVnNgu+26mlbEZ0KQVFUuqjdiTMc0+Yt3Fkw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: yszzH41IYp1kzifABbKuSNfKNOzC9xAJIsYqbdf/wXE2yvhj7evo5wetRFuPnMqXZiaw02iOECjexDuqCA956g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P189MB1032
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 13:09:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128065
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 13:09:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128066
 
 CVE-2026-43868:
   Memory Allocation with Excessive Size Value vulnerability in Apache Thrif=
@@ -134,9 +134,9 @@ lnerability
 Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
 ---
  .../thrift/thrift/CVE-2026-43868.patch        | 1381 +++++++++++++++++
- .../thrift/thrift/CVE-2026-43870.patch        |  134 ++
- .../thrift/thrift_0.22.0.bb                   |    4 +
- 3 files changed, 1519 insertions(+)
+ .../thrift/thrift/CVE-2026-43870.patch        |  127 ++
+ .../thrift/thrift_0.20.0.bb                   |    4 +
+ 3 files changed, 1512 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-438=
 68.patch
  create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-438=
@@ -145,11 +145,11 @@ Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
 diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43868.patc=
 h b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43868.patch
 new file mode 100644
-index 0000000000..de5b21ffa6
+index 0000000000..a4f4aec09e
 --- /dev/null
 +++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43868.patch
 @@ -0,0 +1,1381 @@
-+From cbab9a3e41ef02ad762bfd2e07cbc8e07ef5cf11 Mon Sep 17 00:00:00 2001
++From ebb9e1ec3d7dea6ade9e98951b7f1dd58ba933a5 Mon Sep 17 00:00:00 2001
 +From: Hasnain Lakhani <m.hasnain.lakhani@gmail.com>
 +Date: Thu, 17 Jul 2025 19:57:05 -0700
 +Subject: [PATCH] [THRIFT-5871] Add message / container size checking for R=
@@ -370,7 +370,7 @@ e"));
 ++    }
 ++}
 +diff --git a/lib/rs/src/lib.rs b/lib/rs/src/lib.rs
-+index 2f6018810..d3804eccc 100644
++index 84c1f9b71..1b80d7cfe 100644
 +--- a/lib/rs/src/lib.rs
 ++++ b/lib/rs/src/lib.rs
 +@@ -21,10 +21,11 @@
@@ -857,7 +857,7 @@ l', b'l', b'o']);
 + }
 +diff --git a/lib/rs/src/protocol/compact.rs b/lib/rs/src/protocol/compact.=
 rs
-+index 4dc45cac2..7e1a7510e 100644
++index c0c43722e..a72243e30 100644
 +--- a/lib/rs/src/protocol/compact.rs
 ++++ b/lib/rs/src/protocol/compact.rs
 +@@ -26,6 +26,7 @@ use super::{
@@ -954,7 +954,7 @@ fier>> {
 +         self.last_read_field_id =3D self
 +             .read_field_id_stack
 +             .pop()
-+@@ -227,6 +258,19 @@ where
++@@ -223,6 +254,19 @@ where
 +=20
 +     fn read_bytes(&mut self) -> crate::Result<Vec<u8>> {
 +         let len =3D self.transport.read_varint::<u32>()?;
@@ -975,7 +975,7 @@ of {}",
 +         let mut buf =3D vec![0u8; len as usize];
 +         self.transport
 +             .read_exact(&mut buf)
-+@@ -291,6 +335,12 @@ where
++@@ -287,6 +331,12 @@ where
 +             let type_header =3D self.read_byte()?;
 +             let key_type =3D collection_u8_to_type((type_header & 0xF0) >=
 > 4)?;
@@ -990,7 +990,7 @@ ent_size)?;
 +             Ok(TMapIdentifier::new(key_type, val_type, element_count))
 +         }
 +     }
-+@@ -309,6 +359,30 @@ where
++@@ -305,6 +355,30 @@ where
 +             .map_err(From::from)
 +             .map(|_| buf[0])
 +     }
@@ -1022,7 +1022,7 @@ usize {
 + }
 +=20
 + impl<T> io::Seek for TCompactInputProtocol<T>
-+@@ -2573,14 +2647,25 @@ mod tests {
++@@ -2567,14 +2641,25 @@ mod tests {
 +     fn must_round_trip_small_sized_list_begin() {
 +         let (mut i_prot, mut o_prot) =3D test_objects();
 +=20
@@ -1050,7 +1050,7 @@ usize {
 +     }
 +=20
 +     #[test]
-+@@ -2600,10 +2685,9 @@ mod tests {
++@@ -2594,10 +2679,9 @@ mod tests {
 +=20
 +     #[test]
 +     fn must_round_trip_large_sized_list_begin() {
@@ -1062,7 +1062,7 @@ usize {
 +         assert_success!(o_prot.write_list_begin(&ident));
 +=20
 +         copy_write_buffer_to_read_buffer!(o_prot);
-+@@ -2632,14 +2716,25 @@ mod tests {
++@@ -2626,14 +2710,25 @@ mod tests {
 +     fn must_round_trip_small_sized_set_begin() {
 +         let (mut i_prot, mut o_prot) =3D test_objects();
 +=20
@@ -1090,7 +1090,7 @@ usize {
 +     }
 +=20
 +     #[test]
-+@@ -2658,10 +2753,9 @@ mod tests {
++@@ -2652,10 +2747,9 @@ mod tests {
 +=20
 +     #[test]
 +     fn must_round_trip_large_sized_set_begin() {
@@ -1102,7 +1102,7 @@ usize {
 +         assert_success!(o_prot.write_set_begin(&ident));
 +=20
 +         copy_write_buffer_to_read_buffer!(o_prot);
-+@@ -2725,10 +2819,9 @@ mod tests {
++@@ -2719,10 +2813,9 @@ mod tests {
 +=20
 +     #[test]
 +     fn must_round_trip_map_begin() {
@@ -1115,7 +1115,7 @@ usize {
 +         assert_success!(o_prot.write_map_begin(&ident));
 +=20
 +         copy_write_buffer_to_read_buffer!(o_prot);
-+@@ -2804,7 +2897,7 @@ mod tests {
++@@ -2798,7 +2891,7 @@ mod tests {
 +         TCompactInputProtocol<ReadHalf<TBufferChannel>>,
 +         TCompactOutputProtocol<WriteHalf<TBufferChannel>>,
 +     ) {
@@ -1124,7 +1124,7 @@ usize {
 +=20
 +         let (r_mem, w_mem) =3D mem.split().unwrap();
 +=20
-+@@ -2814,6 +2907,20 @@ mod tests {
++@@ -2808,6 +2901,20 @@ mod tests {
 +         (i_prot, o_prot)
 +     }
 +=20
@@ -1146,9 +1146,9 @@ ration::no_limits());
 +     #[test]
 +     fn must_read_write_double() {
 +         let (mut i_prot, mut o_prot) =3D test_objects();
-+@@ -2883,4 +2990,248 @@ mod tests {
-+=20
-+         assert_success!(i_prot.read_list_end());
++@@ -2841,4 +2948,248 @@ mod tests {
++         assert!(write_fn(&mut o_prot).is_ok());
++         assert_eq!(o_prot.transport.write_bytes().len(), 0);
 +     }
 ++
 ++    #[test]
@@ -1549,7 +1549,7 @@ t in overflow",
 TType::Stop`.
 +diff --git a/lib/rs/src/transport/framed.rs b/lib/rs/src/transport/framed.=
 rs
-+index d8a744872..cf959be8b 100644
++index c30ccd9ed..a08a380f4 100644
 +--- a/lib/rs/src/transport/framed.rs
 ++++ b/lib/rs/src/transport/framed.rs
 +@@ -21,6 +21,7 @@ use std::io;
@@ -1620,16 +1620,16 @@ tory {
 + /// A `TFramedWriteTransport` maintains a fixed-size internal write buffe=
 r. All
 +--=20
-+2.34.1
++2.43.0
 +
 diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43870.patc=
 h b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43870.patch
 new file mode 100644
-index 0000000000..eae170fa86
+index 0000000000..a4b5ef4835
 --- /dev/null
 +++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-43870.patch
-@@ -0,0 +1,134 @@
-+From 86f647c6894360da7496efee6f6f5eb2601a5c3f Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,127 @@
++From 0faaa79330a2864135948186858036676fdbc1b1 Mon Sep 17 00:00:00 2001
 +From: Jens Geyer <jensg@apache.org>
 +Date: Sat, 11 Apr 2026 12:29:16 +0200
 +Subject: [PATCH] Harden Node.js WebSocket server handling Client: nodejs
@@ -1652,61 +1652,63 @@ index 0000000000..eae170fa86
 +
 +Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
 +---
-+ lib/nodejs/lib/thrift/web_server.js | 34 +++++++++++++++++++++--------
-+ 1 file changed, 25 insertions(+), 9 deletions(-)
++ lib/nodejs/lib/thrift/web_server.js | 32 +++++++++++++++++++++--------
++ 1 file changed, 24 insertions(+), 8 deletions(-)
 +
 +diff --git a/lib/nodejs/lib/thrift/web_server.js b/lib/nodejs/lib/thrift/w=
 eb_server.js
-+index f49f654b1..ad3a34c5c 100644
++index a33f47aed..cf88bde1b 100644
 +--- a/lib/nodejs/lib/thrift/web_server.js
 ++++ b/lib/nodejs/lib/thrift/web_server.js
-+@@ -27,6 +27,10 @@ var log =3D require("./log");
-+ var MultiplexedProcessor =3D
-+   require("./multiplexed_processor").MultiplexedProcessor;
++@@ -26,6 +26,10 @@ var log =3D require('./log');
++=20
++ var MultiplexedProcessor =3D require('./multiplexed_processor').Multiplex=
+edProcessor;
 +=20
 ++function sanitizeHeader(value) {
 ++  return (value || "").replace(/[\r\n]/g, "");
 ++}
 ++
-+ var TBufferedTransport =3D require("./buffered_transport");
-+ var TBinaryProtocol =3D require("./binary_protocol");
-+ var InputBufferUnderrunError =3D require("./input_buffer_underrun_error")=
++ var TBufferedTransport =3D require('./buffered_transport');
++ var TBinaryProtocol =3D require('./binary_protocol');
++ var InputBufferUnderrunError =3D require('./input_buffer_underrun_error')=
 ;
-+@@ -84,7 +88,7 @@ var wsFrame =3D {
++@@ -83,7 +87,7 @@ var wsFrame =3D {
 +    * @returns {Buffer} - The WebSocket frame, ready to send
 +    */
-+   encode: function (data, mask, binEncoding) {
-+-    var frame =3D new Buffer(wsFrame.frameSizeFromData(data, mask));
-++    var frame =3D Buffer.alloc(wsFrame.frameSizeFromData(data, mask));
-+     //Byte 0 - FIN & OPCODE
-+     frame[0] =3D
-+       wsFrame.fin.FIN +
-+@@ -171,19 +175,19 @@ var wsFrame =3D {
-+     }
-+     //MASK
-+     if (wsFrame.mask.TO_SERVER =3D=3D (frame[1] & wsFrame.mask.TO_SERVER)=
-) {
-+-      result.mask =3D new Buffer(4);
-++      result.mask =3D Buffer.alloc(4);
-+       frame.copy(result.mask, 0, dataOffset, dataOffset + 4);
-+       dataOffset +=3D 4;
-+     }
-+     //Payload
-+-    result.data =3D new Buffer(len);
-++    result.data =3D Buffer.alloc(len);
-+     frame.copy(result.data, 0, dataOffset, dataOffset + len);
-+     if (result.mask) {
-+       wsFrame.applyMask(result.data, result.mask);
-+     }
-+     //Next Frame
-+     if (frame.length > dataOffset + len) {
-+-      result.nextFrame =3D new Buffer(frame.length - (dataOffset + len));
-++      result.nextFrame =3D Buffer.alloc(frame.length - (dataOffset + len)=
++   encode: function(data, mask, binEncoding) {
++-      var frame =3D new Buffer(wsFrame.frameSizeFromData(data, mask));
+++      var frame =3D Buffer.alloc(wsFrame.frameSizeFromData(data, mask));
++       //Byte 0 - FIN & OPCODE
++       frame[0] =3D wsFrame.fin.FIN +
++           (binEncoding ? wsFrame.frameOpCodes.BIN : wsFrame.frameOpCodes.=
+TEXT);
++@@ -162,19 +166,19 @@ var wsFrame =3D {
++       }
++       //MASK
++       if (wsFrame.mask.TO_SERVER =3D=3D (frame[1] & wsFrame.mask.TO_SERVE=
+R)) {
++-        result.mask =3D new Buffer(4);
+++        result.mask =3D Buffer.alloc(4);
++         frame.copy(result.mask, 0, dataOffset, dataOffset + 4);
++         dataOffset +=3D 4;
++       }
++       //Payload
++-      result.data =3D new Buffer(len);
+++      result.data =3D Buffer.alloc(len);
++       frame.copy(result.data, 0, dataOffset, dataOffset+len);
++       if (result.mask) {
++         wsFrame.applyMask(result.data, result.mask);
++       }
++       //Next Frame
++       if (frame.length > dataOffset+len) {
++-        result.nextFrame =3D new Buffer(frame.length - (dataOffset+len));
+++        result.nextFrame =3D Buffer.alloc(frame.length - (dataOffset+len)=
 );
-+       frame.copy(result.nextFrame, 0, dataOffset + len, frame.length);
-+     }
-+     //Don't forward control frames
-+@@ -450,7 +454,8 @@ exports.createWebServer =3D function (options) {
++         frame.copy(result.nextFrame, 0, dataOffset+len, frame.length);
++       }
++       //Don't forward control frames
++@@ -418,7 +422,8 @@ exports.createWebServer =3D function(options) {
 +     var filename =3D path.resolve(path.join(baseDir, uri));
 +=20
 +     //Ensure the basedir path is not able to be escaped
@@ -1718,79 +1720,77 @@ eb_server.js
 +       response.writeHead(400, "Invalid request path", {});
 +       response.end();
 +       return;
-+@@ -543,6 +548,14 @@ exports.createWebServer =3D function (options) {
-+       }
-+     })
-+     .on("upgrade", function (request, socket, head) {
-++      //Verify CORS origin for WebSocket upgrades
-++      if (request.headers.origin && options.cors) {
-++        if (!options.cors["*"] && !options.cors[request.headers.origin]) =
-{
-++          socket.write("HTTP/1.1 403 Origin not allowed\r\n\r\n");
-++          socket.destroy();
-++          return;
-++        }
++@@ -510,6 +515,14 @@ exports.createWebServer =3D function(options) {
++       response.end();
++     }
++   }).on('upgrade', function(request, socket, head) {
+++    //Verify CORS origin for WebSocket upgrades
+++    if (request.headers.origin && options.cors) {
+++      if (!options.cors["*"] && !options.cors[request.headers.origin]) {
+++        socket.write("HTTP/1.1 403 Origin not allowed\r\n\r\n");
+++        socket.destroy();
+++        return;
 ++      }
-+       //Lookup service
-+       var svc;
-+       try {
-+@@ -557,6 +570,9 @@ exports.createWebServer =3D function (options) {
-+         request.headers["sec-websocket-key"] +
-+           "258EAFA5-E914-47DA-95CA-C5AB0DC85B11",
-+       );
-++      var origin =3D sanitizeHeader(request.headers.origin);
-++      var host =3D sanitizeHeader(request.headers.host);
-++      var reqUrl =3D sanitizeHeader(request.url);
-+       socket.write(
-+         "HTTP/1.1 101 Switching Protocols\r\n" +
-+           "Upgrade: websocket\r\n" +
-+@@ -565,11 +581,11 @@ exports.createWebServer =3D function (options) {
-+           hash.digest("base64") +
-+           "\r\n" +
-+           "Sec-WebSocket-Origin: " +
-+-          request.headers.origin +
-++          origin +
-+           "\r\n" +
-+           "Sec-WebSocket-Location: ws://" +
-+-          request.headers.host +
-+-          request.url +
-++          host +
-++          reqUrl +
-+           "\r\n" +
-+           "\r\n",
-+       );
-+@@ -582,7 +598,7 @@ exports.createWebServer =3D function (options) {
-+             //Prepend any existing decoded data
-+             if (data) {
-+               if (result.data) {
-+-                var newData =3D new Buffer(data.length + result.data.leng=
+++    }
++     //Lookup service
++     var svc;
++     try {
++@@ -521,12 +534,15 @@ exports.createWebServer =3D function(options) {
++     //Perform upgrade
++     var hash =3D crypto.createHash("sha1");
++     hash.update(request.headers['sec-websocket-key'] + "258EAFA5-E914-47D=
+A-95CA-C5AB0DC85B11");
+++    var origin =3D sanitizeHeader(request.headers.origin);
+++    var host =3D sanitizeHeader(request.headers.host);
+++    var reqUrl =3D sanitizeHeader(request.url);
++     socket.write("HTTP/1.1 101 Switching Protocols\r\n" +
++                    "Upgrade: websocket\r\n" +
++                    "Connection: Upgrade\r\n" +
++                    "Sec-WebSocket-Accept: " + hash.digest("base64") + "\r=
+\n" +
++-                   "Sec-WebSocket-Origin: " + request.headers.origin + "\=
+r\n" +
++-                   "Sec-WebSocket-Location: ws://" + request.headers.host=
+ + request.url + "\r\n" +
+++                   "Sec-WebSocket-Origin: " + origin + "\r\n" +
+++                   "Sec-WebSocket-Location: ws://" + host + reqUrl + "\r\=
+n" +
++                    "\r\n");
++     //Handle WebSocket traffic
++     var data =3D null;
++@@ -537,7 +553,7 @@ exports.createWebServer =3D function(options) {
++           //Prepend any existing decoded data
++           if (data) {
++             if (result.data) {
++-              var newData =3D new Buffer(data.length + result.data.length=
+);
+++              var newData =3D Buffer.alloc(data.length + result.data.leng=
 th);
-++                var newData =3D Buffer.alloc(data.length + result.data.le=
-ngth);
-+                 data.copy(newData);
-+                 result.data.copy(newData, data.length);
-+                 result.data =3D newData;
++               data.copy(newData);
++               result.data.copy(newData, data.length);
++               result.data =3D newData;
 +--=20
-+2.34.1
++2.43.0
 +
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb b/meta-oe=
-/recipes-connectivity/thrift/thrift_0.22.0.bb
-index 8ca1d0085e..8d885dadc4 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-@@ -11,6 +11,8 @@ DEPENDS =3D "thrift-native boost flex-native bison-native=
- openssl zlib"
- SRC_URI =3D "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb b/meta-oe=
+/recipes-connectivity/thrift/thrift_0.20.0.bb
+index e4fd07198c..2922dc96e4 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
+@@ -12,6 +12,8 @@ SRC_URI =3D "https://archive.apache.org/dist/${BPN}/${PV}=
+/${BP}.tar.gz \
             file://0001-DefineInstallationPaths.cmake-Define-libdir-in-term=
 s.patch \
-            file://0001-support-reproducible-builds.patch \
+            file://0001-thrift-pr2755.patch \
+            file://0001-THRIFT-5842-Add-missing-cstdint-include-for-int64_t=
+-.patch \
 +           file://CVE-2026-43868.patch \
 +           file://CVE-2026-43870.patch \
             "
- SRC_URI[sha256sum] =3D "794a0e455787960d9f27ab92c38e34da27e8deeda7a5db0e59=
-dc64a00df8a1e5"
+ SRC_URI[sha256sum] =3D "b5d8311a779470e1502c027f428a1db542f5c051c8e1280ccd=
+2163fa935ff2d6"
 =20
-@@ -18,6 +20,8 @@ BBCLASSEXTEND =3D "native nativesdk"
+@@ -19,6 +21,8 @@ BBCLASSEXTEND =3D "native nativesdk"
 =20
  CVE_PRODUCT =3D "apache:thrift"
 =20
