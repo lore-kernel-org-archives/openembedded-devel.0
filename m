@@ -2,107 +2,85 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C76C9C43458
-	for <webhook@archiver.kernel.org>; Tue,  7 Jul 2026 08:11:37 +0000 (UTC)
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.169735.1783411850971312743
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55965C43458
+	for <webhook@archiver.kernel.org>; Tue,  7 Jul 2026 11:42:45 +0000 (UTC)
+Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.171389.1783424304624128141
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jul 2026 01:10:51 -0700
+ Tue, 07 Jul 2026 04:38:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=k4yXen5H;
- spf=pass (domain: gmail.com, ip: 209.85.208.175, mailfrom: alessioigorbogani@gmail.com)
-Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-39b0c6488e6so42754451fa.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 01:10:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783411849; x=1784016649; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sm6GsKaK9wh3mSGJhiajdwHBrX5ngUile4aSMV11FxM=;
-        b=k4yXen5HBgmtj4jkT9pSjL83HtIeG9mlG+/AwmxtqLQFLSBsjCnwtMHm7J4JoNJlzR
-         ciDSruLbLmartvogyVp+h/Not9XRx/6imxloNyy+HhpILRBCP7g6NDR69FM+9DrKGICC
-         0pL4Tp6+qMxd4kjeLXsobcCCacQGLL8cijhnIViwUS3O0t/bxBjt7AEsIntlpmOQ7MsY
-         Gjk1OmkD7DD3+XqOu+kX1hTJaFslzcWinOEAYYT7VhnIs2jcZ5bxhtpcXxm40Ie8J3qX
-         a1se9YfULw7h2P1nL5nJEX6oSZn60ej7BSa/kwDSPgDhOnbcuiJUzFoISQFaTCmCp97H
-         wiPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783411849; x=1784016649;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sm6GsKaK9wh3mSGJhiajdwHBrX5ngUile4aSMV11FxM=;
-        b=GJJWY/maLO1O66MIuYcxpJkBsri1FGXQvxDdMBTYWhH8cgnjUPWD5KRqGqiZE9Sgll
-         iE0uetJiseDrHp6sBqYCGY4ROkj7r8yCmzkecpi7rsDY49vJMUrWg81081EDIhW+qiWP
-         hEZwCh8Ea4lAqgycxdDTtd5vPUoR6Q3NynF7HJmUscfeg0pcujyNE2wr1KO+4/wiSYFW
-         BAikzsuTkn3aZuajklpcKd7Wty8UKbNPOslsde7Z+R+xZYYFeiNcClT9pAXynqqgY1jD
-         7YSh7/4zIprhE0qTqFtBvwI6OTIn+HOOnl+kh0zmlI3Wzc1jZxtFFPaV6FW9FPsnKjvI
-         Ombg==
-X-Gm-Message-State: AOJu0Yyq8zyJb04Cu3o5V3A9W8eqVJGJu1OaIGsQ3MOw0rvXEVa0r+br
-	ujsK8oNAYOntiflD5uJ16dQJ3S/8WapIdYIh2lCbo4ex9rU8jKrK1eVY0aTyYw==
-X-Gm-Gg: AfdE7ckoSO7avSwcLQMGf7Tha4ZUHRs82AY1jt4jokDeqvI4BP/Ow4a2SN+593KKsgf
-	ftcte15kAF95tlbDhJzkYRLLyFYXh03cYOvtroEJKnURRyVLU2B0kpFGXrcWbUVxvi0FYmzDY0O
-	fF/WZlxveS0REOnEfmUW5HGirLTCZQRNY0a50L6czW0eW3OtqSbmtA8w3wWMA8ahhanPjHrzY2J
-	Uo4nkqdVQsjeyIKfNeGZ3nmQLZsanfUc3qOvYeaGg1CKgXSs/4EpnwO526pIQ/nya0lz9lnljqN
-	9+jqDZgZ0XrFYZNBAIy4ufmur8anQrhGpG/qUxKlOVf5uq+eLR8xjcAR4E9V4H1Eb35+EYQKcfX
-	NH+3YBM5VeRSLs4mNWgC70hGETrBMNda3q0Mv40b0Q53t4zSntXsBZC6Vgre+lAJowUEJAQjYCT
-	SJlb/mw7c7xLzWxWQRPVfBZBl2JMNKLV4IAL0Hw6f5lZAfDzqUr6RFd7ZYp8CnaOSaDPTH3Eiln
-	A==
-X-Received: by 2002:a05:600c:198b:b0:493:b61c:72c3 with SMTP id 5b1f17b1804b1-493df099ef7mr41813145e9.32.1783411428606;
-        Tue, 07 Jul 2026 01:03:48 -0700 (PDT)
-Received: from voltumna.elettra.trieste.it (out-207-24.elettra.eu. [140.105.207.24])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa039af67sm37056540f8f.17.2026.07.07.01.03.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jul 2026 01:03:48 -0700 (PDT)
-From: alessioigorbogani@gmail.com
-To: anuj.mittal@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org,
-	Alessio Igor Bogani <alessio.bogani@elettra.eu>
-Subject: [meta-dpdk][master][PATCH] dpdk/25.11: upgrade 25.11.1 -> 25.11.2
-Date: Tue,  7 Jul 2026 10:03:23 +0200
-Message-ID: <20260707080324.2652858-1-alessioigorbogani@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.200.13, mailfrom: lgo@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
+	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
+	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 307E9202596
+	for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 13:38:22 +0200 (CEST)
+Received: from dude03.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::39])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <lgo@pengutronix.de>)
+	id 1wh486-000ZQk-0M
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jul 2026 13:38:22 +0200
+Received: from lgo by dude03.red.stw.pengutronix.de with local (Exim 4.98.2)
+	(envelope-from <lgo@pengutronix.de>)
+	id 1wh486-00000009K11-051y
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jul 2026 13:38:22 +0200
+From: =?UTF-8?B?TGVvbmFyZCBHw7ZocnM=?= <l.goehrs@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-aiohttp: add buildpath HOME check exception due to upstream pkg
+Date: Tue,  7 Jul 2026 13:38:16 +0200
+Message-ID: <20260707113818.2221878-1-l.goehrs@pengutronix.de>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 08:11:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128058
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jul 2026 11:42:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128059
 
-From: Alessio Igor Bogani <alessio.bogani@elettra.eu>
+The upstream tarball fetched from pypi contains `.hash` files like these:
 
-Signed-off-by: Alessio Igor Bogani <alessio.bogani@elettra.eu>
+  $ cat aiohttp/.hash/hdrs.py.hash
+  a46ad6c3a2faf8d26a2c6afc1a2210ce379a23f2799fce7b26a01f6ce5a40642  /home=
+/runner/work/aiohttp/aiohttp/aiohttp/hdrs.py
+
+These file trigger the relatively new HOME buildpath check _if_ the recip=
+e
+happens to be built by someone with HOME set to /home/runner
+(for example someone building in a GitHub workflow):
+
+  ERROR: python3-aiohttp-3.14.1-r0 do_package_qa: QA Issue:
+  File /usr/lib/python3.14/site-packages/aiohttp/.hash/hdrs.py.hash
+  in package python3-aiohttp contains a reference to the build host HOME =
+directory.
+  If upstream hardcodes a directory path that matches your home,
+  you can set OEQA_BUILDPATHS_SKIP =3D "/home/runner" in the recipe. [bui=
+ldpaths]
+
+Follow the suggested fix of setting `OEQA_BUILDPATHS_SKIP`.
+See also openembedded-core commit ee29a9132a ("oeqa: allow exceptions in
+buildpath HOME checks") for an example of `OEQA_BUILDPATHS_SKIP` used.
+
+Signed-off-by: Leonard G=C3=B6hrs <l.goehrs@pengutronix.de>
 ---
- recipes-extended/dpdk/{dpdk_25.11.1.bb => dpdk_25.11.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename recipes-extended/dpdk/{dpdk_25.11.1.bb => dpdk_25.11.2.bb} (91%)
+ meta-python/recipes-devtools/python/python3-aiohttp_3.14.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-extended/dpdk/dpdk_25.11.1.bb b/recipes-extended/dpdk/dpdk_25.11.2.bb
-similarity index 91%
-rename from recipes-extended/dpdk/dpdk_25.11.1.bb
-rename to recipes-extended/dpdk/dpdk_25.11.2.bb
-index e629987..efe2ed5 100644
---- a/recipes-extended/dpdk/dpdk_25.11.1.bb
-+++ b/recipes-extended/dpdk/dpdk_25.11.2.bb
-@@ -1,17 +1,17 @@
- include dpdk.inc
- 
- SRC_URI += " file://0001-config-meson-get-cpu_instruction_set-from-meson-opti.patch"
- 
- STABLE = "-stable"
- BRANCH = "25.11"
--SRCREV = "8f56626b51efca87ac312d04bcd90935020b1e7f"
-+SRCREV = "27757d03e981a1946434e9bf4c9cfb1ab7e03546"
- 
- PACKAGES =+ "${PN}-examples ${PN}-tools"
- 
- FILES:${PN} += " ${bindir}/dpdk-testpmd \
- 		 ${bindir}/dpdk-proc-info \
- 		 ${libdir}/*.so* \
- 		 ${libdir}/dpdk/pmds-26.0/*.so* \
- 		 "
- FILES:${PN}-examples = " \
- 	${prefix}/share/dpdk/examples/* \
--- 
-2.43.0
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.1.b=
+b b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.1.bb
+index a2267ea23c..656cef368a 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.1.bb
+@@ -35,3 +35,5 @@ RDEPENDS:${PN} =3D "\
+ CFLAGS:append:toolchain-gcc:arm =3D " -flax-vector-conversions"
+=20
+ BBCLASSEXTEND =3D "native nativesdk"
++
++OEQA_BUILDPATHS_SKIP =3D "/home/runner"
+--=20
+2.47.3
 
 
