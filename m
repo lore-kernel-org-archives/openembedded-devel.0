@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8806FC43458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3B8FC44503
 	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 09:45:41 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4904.1783503931899056496
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4906.1783503934081651491
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2026 02:45:32 -0700
+ Wed, 08 Jul 2026 02:45:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=lBRaSgqZ;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sPtkxyhy;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1783503932; x=1815039932;
+  t=1783503934; x=1815039934;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=MVu5AG1pHOGeRWQFI+P69c56kvpns8IlD9bSFZq4pTU=;
-  b=lBRaSgqZ+ucamZhuCVTl/2NPrKbTkY0nsQbF0ussSkHMtwTMtvIVHLaB
-   W+GFemzlpwyCnNEQmxMxajOjNk4rhRA7v1914vhgeDZcEr814+mcGXJsy
-   r+PrrV18l6kPwb/I5AwY1XdS5CcWeoVO72JadRwAKdFBdJhO8AKdXoq/E
-   bD3rRKC92+XFmGVSGm1lu/7GFrOKYX8spwf7wI6SOmfTMk7ChB/udyC8O
-   wyC1SlUZjJpyHeKOlI4+uUSYz0k0Q4y5RPvtTgdFu3xpCE0xhJizkep0u
-   OPGgr6YGvZJ9HTpNJlsjHdAuuCg9kunKFA2WQmE9zcr16JutLJXtdP2PV
-   A==;
-X-CSE-ConnectionGUID: vk9BoWMVQvuYZe6bTldjxg==
-X-CSE-MsgGUID: og61Z4lQThC7UdC8DOXweg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="246626021"
+  bh=E3m4w2VkwV256mU+hEhGD3keO+yGFGJidiQB5h8WHkY=;
+  b=sPtkxyhyeLZCCMova+CKEzizSrVzfe76M8ED333cs5borBGVpqc4bR80
+   w5Xc1u8o6uKkiSd4xBi0IicYzgRCM2kXuI7Zn2HXtbn+45yfRh9WgusCS
+   2PoGE8AdvxSGCF/nOP7PUF3okOBDW7Vn9H2aXFMbTG2hIuAYuKBNSi2B0
+   eEUMnwREmA4d+uK7Nr1gfJBcKxC3oQBb9uSH+ZuvfaMTgyUf9SWyvd6C2
+   1u2fxOojfZ02XX3uvUj9FQxg9+XDUnu9rpg3+8jR1kAwaPgU43nVr7ycr
+   riZQ5S6STmQDeFqbOtjcrcMzoiHXkgw9oxriV4NLK0xgdS0eeIDbaX4e4
+   g==;
+X-CSE-ConnectionGUID: lSMnMYosR4+bAEfcI5pEyQ==
+X-CSE-MsgGUID: v46dDV/DRhuYVTJw4hLDWg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="246699866"
 X-IronPort-AV: E=Sophos;i="6.25,153,1779116400"; 
-   d="scan'208";a="246626021"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 18:45:29 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+   d="scan'208";a="246699866"
+Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 18:45:32 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id ED4F2C00541
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:28 +0000 (UTC)
+	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 402A433CE
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:32 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id A5CD583CCAF
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:28 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id EBBAD1807168
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:31 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id CF0651801139;
-	Wed,  8 Jul 2026 09:45:26 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 085A71801131;
+	Wed,  8 Jul 2026 09:45:29 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 09/37] memcached: upgrade 1.6.42 -> 1.6.43
-Date: Wed,  8 Jul 2026 17:44:19 +0800
-Message-ID: <20260708094508.2060-9-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 11/37] ndctl: upgrade v84 -> v85
+Date: Wed,  8 Jul 2026 17:44:21 +0800
+Message-ID: <20260708094508.2060-11-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260708094508.2060-1-wangmy@fujitsu.com>
 References: <20260708094508.2060-1-wangmy@fujitsu.com>
@@ -61,31 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 09:45:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128080
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128082
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../memcached/{memcached_1.6.42.bb => memcached_1.6.43.bb}      | 2 +-
+ meta-oe/recipes-core/ndctl/{ndctl_v84.bb => ndctl_v85.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/memcached/{memcached_1.6.42.bb => memcached_1.6.43.bb} (95%)
+ rename meta-oe/recipes-core/ndctl/{ndctl_v84.bb => ndctl_v85.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.42.bb b/meta-networking/recipes-support/memcached/memcached_1.6.43.bb
-similarity index 95%
-rename from meta-networking/recipes-support/memcached/memcached_1.6.42.bb
-rename to meta-networking/recipes-support/memcached/memcached_1.6.43.bb
-index 28d8ba3cf9..9a98932f95 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.6.42.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.6.43.bb
-@@ -20,7 +20,7 @@ RDEPENDS:${PN} += "perl perl-module-posix perl-module-autoloader \
-     "
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_v84.bb b/meta-oe/recipes-core/ndctl/ndctl_v85.bb
+similarity index 96%
+rename from meta-oe/recipes-core/ndctl/ndctl_v84.bb
+rename to meta-oe/recipes-core/ndctl/ndctl_v85.bb
+index 582e90b96d..eb4fca0ef5 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_v84.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_v85.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74a614eac8b2657a4b8e6607421a0883"
  
- SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz"
--SRC_URI[sha256sum] = "50f08b879d4f9d36dea9d905e9eaade15c708e38db7e9a73fc21dc8b45395de7"
-+SRC_URI[sha256sum] = "8042ee26e004efa0db41ca4a7c713f759c3280c2f8bee438579f13de1e509435"
+ inherit meson pkgconfig bash-completion systemd
  
- CVE_STATUS[CVE-2022-26635] = "disputed: this is a problem of applications using php-memcached inproperly"
+-SRCREV = "8ad90e54f0ff4f7291e7f21d44d769d10f24e2b6"
++SRCREV = "15e932c4e1318a9608ad9b799ad83a32a8b5970d"
+ SRC_URI = "git://github.com/pmem/ndctl.git;branch=main;protocol=https;tag=${PV} \
+            file://0001-include-libgen.h-for-basename.patch"
  
 -- 
 2.43.0
