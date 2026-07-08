@@ -2,61 +2,61 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84C3AC44506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B391C43602
 	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 13:32:59 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8788.1783517576387278961
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8787.1783517575423308636
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2026 06:32:56 -0700
+ Wed, 08 Jul 2026 06:32:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=grIzN1y8;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-493c59f740cso4926235e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 06:32:56 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=IQBk1BPi;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-493d1e8aa46so5272715e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 06:32:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1783517575; x=1784122375; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1783517574; x=1784122374; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4OKqSZqGYQqZQHXFIDNfGtzqZgcl6Ve+qleXQ8TcJws=;
-        b=grIzN1y8lJwdb7DA4zWINCwRE8r9y3tPnGIk+mo2aWqywyw2gpd0nFJ5aFgU9OARV4
-         ifjXZ7H/FVdTnzFIaJdLmcsuR0YzTaNAUwyQ2zWIhqnBz6gQe/6AhDiTuqZ4VtXFLRx2
-         h/ZqtauqCmiHDpagvqXRTeVePVtfhRq4+iXzo=
+         :message-id:reply-to:content-type;
+        bh=8dlL1SNt6SAV5dow8PH0fuCDrHeOm0+49JC2bm/ch/s=;
+        b=IQBk1BPiZf4+aVYF5FfAWHP/0j2bMpFsHs2jrZimL6CYpwDmfuGnKKzYxYjphWi148
+         ELVdPiSVHO3e6zkDoQinwq5G4OUXuyLo9U9/GuPumYmn26XK3z0s6poY8LKD4iEcNYNd
+         uSWZz7XiqX4SFVfjQUQabP+xZfBDXydfD2u2s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783517575; x=1784122375;
+        d=1e100.net; s=20251104; t=1783517574; x=1784122374;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=4OKqSZqGYQqZQHXFIDNfGtzqZgcl6Ve+qleXQ8TcJws=;
-        b=lJKPcYLDWgLficbN/6TE2sKq0OoKMHCBVlSBIJLffc5SVRj/W69j66VZg9DQLKwxji
-         PI5cpJgHRJbWSWNAzyUsVstwcxhLJWaUB38Un1oByhX0sMO3ZPcgkp2hwO6qVt4CVKih
-         K1fPY+li4ABK1HOuCvHuUMz8tI2y114W6eDBU4+PCDQwZWE7oAC2KgDc7uptAL8lK530
-         7lD0wjel143p1farmJu+YsmByTm7W4CG812En79Hv+58PRQIgJ8f8rkX689b9lXH7gNh
-         KKY6j+NG0S6MJxpZjXYAe+s0LCrhmSX2XQpu6KNvkht9Un8NOaA9gw6emeKamFC/qIrw
-         WM9A==
-X-Gm-Message-State: AOJu0YxI0UrIRMzFuc1CFIxHp66+yh94QXbpIk6Cap3jy+6FPzPBYlIc
-	uFVBnpYKjoNrKGXwfh3glIxO+f3zKFM8UOYjFqPhSELk8Du7+Eqta5RJA6hz0i9N280keGr1Nsj
-	x43Qr
-X-Gm-Gg: AfdE7cm4vCQunK59OEe8rP8ZBpfcivu6WUcovRQCoMdHMig1ht3v96MIhOL2sNiWm/x
-	8GEAPbk8AbvZw66w9SvhSL7eu79kgb8UC075R5iBVMN6aGIlX549Hx5rk8T1qB4MYaa9J76AVrs
-	nEEy/V7oSJI6hORiuYX5k2IdmK2ce/zVM7Kdq5DYJmluDj+hFATlRX6+2EZeSAno6vHUHZ7cQfJ
-	6FsguSDkMqe7KCjI9vfw/rkmQH9NcE+D0nip1R7DvPjYvFhN241fRYQ0qDao5m2hhwED8uZ9k3L
-	REIZpvnDd40u+DglYUT+1pBUsZgww04/j5VaghtfRKmgH76N8pe3gXQG+Ok0wkzhhyTT+yt3cs+
-	JTAhc5cqrAHPZWZNudlAV8NnX/OCXsdoLW38Xvugwk6QkrzA4AU0F/UjBsHKwjli2avEGDJnYAK
-	ZhclpmuCHPW9FIp87NGkRUEiHxeNqMP//grmI1ubez8GmbvJG9xR6RGIeaaM+swiyYU3Zpg63No
-	KPK5815uH88gB9DclOIDIdjyMvgANyTsyLrxgOyww==
-X-Received: by 2002:a05:600c:a47:b0:493:e53a:4b24 with SMTP id 5b1f17b1804b1-493e6892f99mr24883125e9.6.1783517574726;
-        Wed, 08 Jul 2026 06:32:54 -0700 (PDT)
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8dlL1SNt6SAV5dow8PH0fuCDrHeOm0+49JC2bm/ch/s=;
+        b=kAnwbFmNMS1ihpeHMpUa3bi/GURpBUvyWC/R98C+HHAEa+LT5u8m1teevn4UyxsBCb
+         vQwajD4d5R7iC3S9/wdJuuuHPGnm99HlrDnCzkhjwK0HYSXGV/wc/baqqsJ6+h82qkDG
+         ilPDOkSFJOTOHwbjDWyasxpFsCmlTYfdtHKnp1VNBEDKe0GyxtxJdrUiRZYDue52ANp4
+         WbsnnUTsigKGBRfUVXbzX6lRv+MSmt+RMZU80oUjxXIwqrdYZsqgO9rBD9rNHMWkKnmd
+         fMIZrroZ/ysnXb0B5XYkiz40SDdA38kgBwiRnMtS8scwxAxt+DoOyP5mJYtAyDHP7G9R
+         kUfQ==
+X-Gm-Message-State: AOJu0Yy0PGC1twXMDn/2RusE4OfiAhQwZIFSu5gxd5+CGT6vqe2fcotu
+	MqM0+ypBPtjnqQNL1NmYyVwEe5teDO0ab48UrxxNvPVqi2QhG225HbaEAEv8o9UMT3XwM5ty/wg
+	R5X9n
+X-Gm-Gg: AfdE7cnbbsWnFfPo3TMX7TfQIAkkZtu/lcDGyKa8rGAFGrJwHLKBttELNAbbc8a/vVV
+	glxSKTSr82RtfVjDXnEySOnJVCpgi1tDj1auiv1EZCBe+ya/FrXdJ4jSbcrliirI1kqVeLpwVgT
+	LVtabXmTSB/rr6bLA1AOumU6qPWe6bup2xgKWtCh9maGcdK4LLyRbHrHHG33oTZnAJkmEpuIjn3
+	JOwkOemm61r0O7zS/MxahCxxiA1jbLQtSZpScu6BTpoGwcDPlXNQrGMaT51uIKC3IgVCAJs7hAz
+	ey11h/Gy4wDrRc8NcoCKVAALsElaKVK5scFDwIvoRg1jzzZvHdrlzvWBLF+5OiY9R7Sj8Q/mH54
+	haDN45Gttf8Q+V8l2RVCzPr3agr73uPhp7SKKBcF0agoTE48Q1XkVQSzVG3XumeUYHUDtF/ppsx
+	JPVg/DkfztBN996QuI0iY7DX8ISm4NhOTq2S3I1kw15JS6Nfrk78104SpKsB23sBbwiV0CK2q3A
+	P5Q+5SBIduXGqe/J6aXXpkMGGmCKmrXhW916vWvkg==
+X-Received: by 2002:a05:600c:3e0c:b0:493:bcef:565c with SMTP id 5b1f17b1804b1-493e68b7fd3mr27055635e9.1.1783517573722;
+        Wed, 08 Jul 2026 06:32:53 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493e0f294a6sm262333915e9.1.2026.07.08.06.32.53
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493e0f294a6sm262333915e9.1.2026.07.08.06.32.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 06:32:54 -0700 (PDT)
+        Wed, 08 Jul 2026 06:32:53 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-jsbeautifier: Upgrade 2.0.1 -> 2.0.3
-Date: Wed,  8 Jul 2026 16:32:48 +0300
-Message-ID: <20260708133248.1765250-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-unidecode: Enable tests
+Date: Wed,  8 Jul 2026 16:32:47 +0300
+Message-ID: <20260708133248.1765250-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260708133248.1765250-1-leon.anavi@konsulko.com>
 References: <20260708133248.1765250-1-leon.anavi@konsulko.com>
@@ -66,42 +66,58 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 13:32:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128112
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128111
 
-Upgrade to release 2.0.3:
-
-- Fix minor crash for certain oddly formed *.js files
-- Fix: make dark mode label dynamic
-- Recognize <script type="importmap"> and beautify its JSON body
-- Add wrap_attributes option to website UI
-- docs: clarify version numbering policy for releases
+Inherit ptest and include tests for unidecode.
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-jsbeautifier_2.0.1.bb => python3-jsbeautifier_2.0.3.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-jsbeautifier_2.0.1.bb => python3-jsbeautifier_2.0.3.bb} (75%)
+ .../python/python3-unidecode/run-ptest         |  3 +++
+ .../python/python3-unidecode_1.4.0.bb          | 18 +++++++++++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-unidecode/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.1.bb b/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
-index a8c3edf3ae..96cb6e84fa 100644
---- a/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
-@@ -6,9 +6,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148
+diff --git a/meta-python/recipes-devtools/python/python3-unidecode/run-ptest b/meta-python/recipes-devtools/python/python3-unidecode/run-ptest
+new file mode 100644
+index 0000000000..8d2017d39c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-unidecode/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb b/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
+index c6969fca4d..ac94ae5cee 100644
+--- a/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
+@@ -5,8 +5,24 @@ SECTION = "devel/python"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- inherit pypi setuptools3
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
  
--SRC_URI[sha256sum] = "45603b2097410feee8d3a6ef8ad5a8e0a0e89f347331888a97e46f332ce8d953"
--
--PYPI_PACKAGE = "jsbeautifier"
-+SRC_URI[sha256sum] = "9579d4e9dbaa00383f3efdff4c98c8140bb85ba319398e8b97cdaba27abd6ba3"
+ PYPI_PACKAGE = "Unidecode"
  
- RDEPENDS:${PN} += "\
-     python3-core \
++SRC_URI += "file://run-ptest"
++
+ SRC_URI[sha256sum] = "ce35985008338b676573023acc382d62c264f307c8f7963733405add37ea2b23"
++
++RDEPENDS:${PN}-ptest += " \
++    python3-pytest \
++    python3-core \
++    python3-io \
++    python3-doctest \
++    python3-unittest \
++    python3-unittest-automake-output \
++"
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
 -- 
 2.47.3
 
