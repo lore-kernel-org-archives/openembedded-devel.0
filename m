@@ -1,93 +1,166 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F834C43602
-	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 09:46:33 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4922.1783503992462712417
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34C59C44501
+	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 13:32:59 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8785.1783517574492230286
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2026 02:46:32 -0700
+ Wed, 08 Jul 2026 06:32:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kUUPv7/a;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1783503994; x=1815039994;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=ps4ScO3LM1PKVFhJlAl1v29/smHOub8Kxdp0BHcZhJ0=;
-  b=kUUPv7/aoIPTElcvxGw+c1UECO1dfN9sWUiX1GRZCKWrh5VRTVKJMI0R
-   ZkRwFXvbip3im7gXV4KtikzyYI6tK1llvvNmR64lm/KO7L6A4Xc+sEMa2
-   +Tl2t9GoXJiaYpPH+Ml/1pgqwagLqOmLc+fOfB6XuNDpTIA9R1/5ajSIF
-   fYYqUxT23x896BeDllXNiswEn6KF4QivtJTKQKQKlTSxQcK1XCB6+bqEN
-   CpcFbl6IPamNMa2KFqUwxVCLrCZY9Yc2MvgREqH+GayZdQbYQB1bjlXXt
-   cbWrMMshfRM9EVyoO/dHE/NcAC40p2xbsCrEbwlPejID0CA1z6AOxl9bK
-   Q==;
-X-CSE-ConnectionGUID: pFwcaJmFTs+oQRkEvPeF9Q==
-X-CSE-MsgGUID: p+wh3FHpRBu/KJ93ou5itw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="224395788"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779116400"; 
-   d="scan'208";a="224395788"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 18:46:32 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id E11051C000F1
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:46:30 +0000 (UTC)
-Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 9504F18915F2
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:46:30 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id A1C5B1800C26;
-	Wed,  8 Jul 2026 09:46:28 +0000 (UTC)
-From: Wang Mingyu < wangmy@fujitsu.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=KX+Yn+pE;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-493b27c7451so20861695e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 06:32:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1783517573; x=1784122373; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+ndsU3GxsjYf7boxJ/ku7RA84kA0bPxkGts2Y4/5Ax8=;
+        b=KX+Yn+pEeaIheLkvj3c9NoKSVQfLuwredUy6/rlRwVZ1eAZ9/c23rk0jInsaaPKa3H
+         qwf4RLmO2OPRoTV+Kbnb6a7lSzMT+LxehmpGfITOwtAcNy3IxJgNPj3UWhJQmh/wKsCp
+         s4e1cp8bpJRXEFR3rx9NZXuG0P+H3Wux2UwKw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783517573; x=1784122373;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=+ndsU3GxsjYf7boxJ/ku7RA84kA0bPxkGts2Y4/5Ax8=;
+        b=fIBi+Jij//mlfnOqI4p7MJjkQQ2l4F2uYZVLOke3VoGvTxtJzrDXhWguXJ3RfNeO6v
+         6El/jhbOgvhO8cr1yH+eKK4wFNw1h1+sfoJHzON5W/J1lwklfoPifA871FgzAfv0Dghq
+         adBd5FwcdD8TWjr2TdFfsHEvqN75Iftz94r5D+kInF1YyE8p8h95CU3nElmtKWqcno5s
+         JF5B+KtLgQuqxeLwqY7jkhzD6vLfiIxAKvpiJsQq5hurncT0E/X+xGEPSh81/tHn3CzU
+         paTwYMbnzLnECfATJwPNh5ARE1vJpXGqP8VGunSyO3FOzvSJdbQ1Lb4F0bNwzqeRooh1
+         2kBA==
+X-Gm-Message-State: AOJu0YwCFzLuQtsNfdWlhLFOvt9Pg5eBOqz1L74kXD01q0uLzdN5jXQO
+	7t+kc5AIexUADdx/R2eBpqmPhxQW24nmvjdBTGx4zk7KJl89dFmtLduvBcpyFsFBWm0ZJOga+Ne
+	crt0Z
+X-Gm-Gg: AfdE7cl4Do4rG2qub0Q27EIYeMFQL7tDh92vhNow06A+to3ybejOIFYThQE82q1MMEJ
+	2WW+pcNWJxsmaQJrH12aWpTfPjDOnb4vbul3DT4ccMjFqg4p5mLPi47SLfpv2zvUQLEZpsxufgV
+	YhlBdn0ZVc78qAva8RJclNNX/0dUWmah6SYMP+/TnVyRan4kuCv3uJDlrNRJ85xAzlBUOXVEQY/
+	/MnuO/o/53BZ6/Iw7ivD93hpadzF93Aw0aCu4DzYplxWhZNpXtLmsHLXqmug1qUa5oKsP6wAftI
+	okhIswjtmvgIhfadW03rZ3PVZylO7zP84rIOakMDloqK7B4NguN407Bhjarb6A9BOBuUAr9finI
+	miPtk3E73uiPshaMUg3dji1HUpLXkVWlH1V8KgrtEonRCvC6fwa+2/lKNv0vq3upGQz8G9olezF
+	oqtvoAEvCvNFZxG/OpkeO+VLRAuXOqJp8NEzRmRgLDIyLEYiYtJodV0VkurOWzvIaisXJINQMOc
+	B1MPuH42xMZEXvWzTUQgDZCoiEk852VCn+zVnbUDA==
+X-Received: by 2002:a05:600c:6208:b0:493:e542:ffd5 with SMTP id 5b1f17b1804b1-493e63706b2mr26320635e9.5.1783517572619;
+        Wed, 08 Jul 2026 06:32:52 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493e0f294a6sm262333915e9.1.2026.07.08.06.32.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 06:32:51 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-xfce] [PATCH 37/37] xarchiver: upgrade 0.5.4.26 -> 0.5.4.27
-Date: Wed,  8 Jul 2026 17:44:47 +0800
-Message-ID: <20260708094508.2060-37-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20260708094508.2060-1-wangmy@fujitsu.com>
-References: <20260708094508.2060-1-wangmy@fujitsu.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/4] python3-pikepdf: Upgrade 10.5.1 -> 10.9.1
+Date: Wed,  8 Jul 2026 16:32:46 +0300
+Message-ID: <20260708133248.1765250-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260708133248.1765250-1-leon.anavi@konsulko.com>
+References: <20260708133248.1765250-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 09:46:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128108
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 13:32:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128110
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Upgrade to release 10.9.1:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+- Fixed a crash (SIGABRT via std::terminate) that could occur when
+  a file-backed {class}pikepdf.Pdf was deallocated while a Python
+  exception was already propagating -- for example when
+  pikepdf.open(filename) appears as a transient element of a
+  list/tuple literal whose later element raises. Opening from a
+  filename closes the file in the input source destructor, which
+  calls back into Python; with an exception already in flight that
+  call raised an error that escaped the destructor. The in-flight
+  exception is now preserved and propagates normally. Added a guard
+  for a likely non-reproducible related case with DecimalPrecision.
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../xarchiver/{xarchiver_0.5.4.26.bb => xarchiver_0.5.4.27.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/xarchiver/{xarchiver_0.5.4.26.bb => xarchiver_0.5.4.27.bb} (94%)
+ .../0001-pyproject.toml-Do-not-strip.patch    | 37 +++++++++++++++++++
+ ...df_10.5.1.bb => python3-pikepdf_10.9.1.bb} |  5 ++-
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+ rename meta-python/recipes-devtools/python/{python3-pikepdf_10.5.1.bb => python3-pikepdf_10.9.1.bb} (71%)
 
-diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.26.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.27.bb
-similarity index 94%
-rename from meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.26.bb
-rename to meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.27.bb
-index 77c6b4c2ca..39fe20b75a 100644
---- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.26.bb
-+++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.27.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "gtk+3 glib-2.0 xfce4-dev-tools-native intltool-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+new file mode 100644
+index 0000000000..7483ad413b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+@@ -0,0 +1,37 @@
++From 22020dc444aaf3f98dc40f38c0a8aad48476db8f Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Wed, 8 Jul 2026 11:45:11 +0000
++Subject: [PATCH] pyproject.toml: Do not strip
++
++Switch from Release to RelWithDebInfo and explicitly disable
++scikit-build-core's strip, so bitbake will handle it Fixes:
++
++WARNING: python3-pikepdf-10.9.1-r0 do_populate_sysroot: File
++'/usr/lib/python3.14/site-packages/pikepdf/_core.abi3.so' from
++python3-pikepdf was already stripped, this will prevent future
++debugging!
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ pyproject.toml | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/pyproject.toml b/pyproject.toml
++index 06ccfbb..475af59 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
++ 
++ [tool.scikit-build]
++ wheel.packages = ["src/pikepdf"]
++-cmake.build-type = "Release"
+++cmake.build-type = "RelWithDebInfo"
+++install.strip = false
++ wheel.py-api = "cp314"
++ 
++ [project]
++-- 
++2.47.3
++
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.5.1.bb b/meta-python/recipes-devtools/python/python3-pikepdf_10.9.1.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-pikepdf_10.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-pikepdf_10.9.1.bb
+index 289a702e06..2482e8913a 100644
+--- a/meta-python/recipes-devtools/python/python3-pikepdf_10.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.9.1.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
  
- SRC_URI = "git://github.com/ib/xarchiver.git;branch=master;protocol=https;tag=${PV}"
--SRCREV = "e14d54e1c85f4dbc78b89042017ebdc0fe5e2f4c"
-+SRCREV = "fbc3330ff6b6e4330190ecebd490cfc27941555c"
+-SRC_URI[sha256sum] = "ffa6c7d0b77deb3af9735e0b0cae177c897431e10d342bb171b62e5527a622b7"
++SRC_URI[sha256sum] = "410fcf32bc9c8a0a96d94bbd6268ba7585333b1423b93a5fa2ef3c05f4eba3da"
++
++SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
  
+ inherit pypi python_setuptools_build_meta
  
- inherit gettext pkgconfig autotools gtk-icon-cache features_check mime-xdg
+@@ -13,6 +15,7 @@ CVE_PRODUCT = "pikepdf"
+ 
+ DEPENDS += " \
+ 	python3-pybind11-native \
++        python3-nanobind-native \
+ 	qpdf \
+ "
+ 
 -- 
-2.43.0
+2.47.3
 
 
