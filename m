@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6688BC43458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67794C43602
 	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 09:46:02 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4728.1783503952572956653
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4915.1783503960606734589
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2026 02:45:53 -0700
+ Wed, 08 Jul 2026 02:46:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=oHpo3Lnr;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=c/tIHTrN;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1783503952; x=1815039952;
+  t=1783503962; x=1815039962;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qWP/Tzd9uo2ErqJ/yxX78v7vVPh9D6plCDfha9QoGOM=;
-  b=oHpo3LnroeyKxP2tUFLrYj3bV8X36duwMdVB9LFY6UC622JOgQWF1qIE
-   N8/PvOq22HtfSfK71U4dT72ksUd2hVb/ZehfRo3QhoD/mryRL4OAa9YNF
-   S5dDU7tmjx+2z6IrumfiG894VvB58HpEDOdbN+TjU+gKG8lqmgXAz3Z0p
-   r35QTN8YE1FLE+rqIXYMkUN0wh+i+GJAMzkNnfv+NZpttVCNBX1iG6OsZ
-   tEoCVyDXKwA8I9uqZrH8tP8VMWGez/iZ2JMMpYyrf9qghzinyqtGQoI6z
-   rgNn5zKBtdJezDcQr8ZIuoWTOzwTTtAnklTSwsNThx+cMUgqrR2EiBncB
-   A==;
-X-CSE-ConnectionGUID: ME6cvRJaQBetpHBph8zULg==
-X-CSE-MsgGUID: CasRegAQRBKVD0U3FdRaqw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="234112727"
+  bh=9cBhPfZguO1ul8gPRWQ8UhGF1Rk0ADxSwrK4E5Ujye0=;
+  b=c/tIHTrNyW+cdIdrluqDRKhtNkqyeYNqA2tbOD6vT50/zH7rfYHH8wpA
+   NehuhIGcFsDyTIfAv/iPvaXJ9/BvyZTlz8b5btm/7stP5nulF5j7kOCZt
+   yIqD9ww+gfoKOyL8TNqL2oBEPRCygbOQ/JXTH0WfFXX/N0FJsGsUKNSbK
+   xxvi6kT+Q+3990zl3Hf/yOXUDjcT96tQcMK0lrE7HVxgW0hreyZReDB0O
+   y0IFwbKGmTTAyl+W2CRinYKFcZMVWtybCoyriD53sukDZWN8lAQ/Sqwml
+   wqpmk0jFuSDiV0t1VBD+lI15YKUshO9jb5ji8eqHfsY4SsvGK+nnohmj5
+   Q==;
+X-CSE-ConnectionGUID: 78fT4wVmTtqp+aLUHn3fUA==
+X-CSE-MsgGUID: RnVIAP8dSZmMS/ze1jymyw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="244843007"
 X-IronPort-AV: E=Sophos;i="6.25,153,1779116400"; 
-   d="scan'208";a="234112727"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 18:45:51 +0900
-Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+   d="scan'208";a="244843007"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 18:46:01 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 046731C01686
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:51 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 1003B42A339
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:59 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id B1D6C18594A0
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:50 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id B4B82100596E
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Jul 2026 09:45:58 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id DED94180112F;
-	Wed,  8 Jul 2026 09:45:48 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id CBEE61800C26;
+	Wed,  8 Jul 2026 09:45:56 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 23/37] python3-lazy: upgrade 1.6 -> 2.0
-Date: Wed,  8 Jul 2026 17:44:33 +0800
-Message-ID: <20260708094508.2060-23-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 28/37] python3-twitter: upgrade 4.16.0 -> 4.17.0
+Date: Wed,  8 Jul 2026 17:44:38 +0800
+Message-ID: <20260708094508.2060-28-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260708094508.2060-1-wangmy@fujitsu.com>
 References: <20260708094508.2060-1-wangmy@fujitsu.com>
@@ -61,36 +61,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 09:46:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128094
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128099
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Copyright year updated to 2026
+Changelog:
+============
+- Add reset_time parameter to TooManyRequests
+- Replace deprecated datetime.utcnow() in MongodbCache.store
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-lazy_1.6.bb => python3-lazy_2.0.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lazy_1.6.bb => python3-lazy_2.0.bb} (53%)
+ .../{python3-twitter_4.16.0.bb => python3-twitter_4.17.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-twitter_4.16.0.bb => python3-twitter_4.17.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lazy_1.6.bb b/meta-python/recipes-devtools/python/python3-lazy_2.0.bb
-similarity index 53%
-rename from meta-python/recipes-devtools/python/python3-lazy_1.6.bb
-rename to meta-python/recipes-devtools/python/python3-lazy_2.0.bb
-index 222489302d..940686af72 100644
---- a/meta-python/recipes-devtools/python/python3-lazy_1.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-lazy_2.0.bb
-@@ -1,8 +1,8 @@
- SUMMARY = "Lazy attributes are computed attributes that are evaluated only once, the first time they are used."
+diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+rename to meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
+index ad05e0ac47..5386e90d42 100644
+--- a/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "Python module to support twitter API"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=48c84b17f84a9a623754604ab73f28fe"
  
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7df3865e8640604acfa474235d2db76b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0ba506a1df3b54afc8b01c9964bb6bdb"
+-SRC_URI[sha256sum] = "1d95cbdc50bf6353a387f881f2584eaf60d14e00dbbdd8872a73de79c66878e3"
++SRC_URI[sha256sum] = "c232e9fffa0b15b81d5ff8ec59d46af85e330285ffc3e64614d2418fb9af71b5"
  
--SRC_URI[sha256sum] = "7127324ec709e8324f08cb4611c1abe01776bda53bb9ce68dc5dfa46ca0ed3e9"
-+SRC_URI[sha256sum] = "f92ec0d32dd6bd115ddec4e3323473ebc0b682ad58c6aca78ebfd9e6d1aa5777"
+ PYPI_PACKAGE = "tweepy"
  
- inherit pypi python_setuptools_build_meta
 -- 
 2.43.0
 
