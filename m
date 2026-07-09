@@ -1,124 +1,137 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B391C43602
-	for <webhook@archiver.kernel.org>; Wed,  8 Jul 2026 13:32:59 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8787.1783517575423308636
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED50BC44503
+	for <webhook@archiver.kernel.org>; Thu,  9 Jul 2026 06:33:01 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3186.1783578777305319378
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2026 06:32:55 -0700
+ Wed, 08 Jul 2026 23:32:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=IQBk1BPi;
- spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-493d1e8aa46so5272715e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 06:32:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=eaRyisD6;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2c6b67d5fa1so6187715ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 23:32:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1783517574; x=1784122374; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1783578777; x=1784183577; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8dlL1SNt6SAV5dow8PH0fuCDrHeOm0+49JC2bm/ch/s=;
-        b=IQBk1BPiZf4+aVYF5FfAWHP/0j2bMpFsHs2jrZimL6CYpwDmfuGnKKzYxYjphWi148
-         ELVdPiSVHO3e6zkDoQinwq5G4OUXuyLo9U9/GuPumYmn26XK3z0s6poY8LKD4iEcNYNd
-         uSWZz7XiqX4SFVfjQUQabP+xZfBDXydfD2u2s=
+        bh=odSLvOH4egZZz67oXDCWVHk7hwA5PdDvlye5eQ+iznw=;
+        b=eaRyisD6/rbzPrpmN1SZxoBB3Gm8AxT6lMcDJc8eY8WLjCs4sj/kSjIDNY7QIQlfZO
+         +pDza7zBAySZ4jI8SrXQa08+QfE/3awYR+IR0oUKmMhyoC7eRNKqW0Kb5I92+v2f2/Ox
+         Dnne2z8QkXeEpZBrhIijkf+l+OnZyBvyadlhpsYovohHPeENE0NM+2XxBEmpf+56WELl
+         XKve55sdqY3NPMladhvoa32kJpVHwqW24NsOUCxdMRlwgWvwYIvqUP+I0i+LHJBLHIUq
+         GxIFqSa0LGzVuQjxD5MPvsAOx24cthKmyVqU2ef7DSFSevAgwtoDJ9JLIW5vGcYDxdkx
+         Yixg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783517574; x=1784122374;
+        d=1e100.net; s=20251104; t=1783578777; x=1784183577;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8dlL1SNt6SAV5dow8PH0fuCDrHeOm0+49JC2bm/ch/s=;
-        b=kAnwbFmNMS1ihpeHMpUa3bi/GURpBUvyWC/R98C+HHAEa+LT5u8m1teevn4UyxsBCb
-         vQwajD4d5R7iC3S9/wdJuuuHPGnm99HlrDnCzkhjwK0HYSXGV/wc/baqqsJ6+h82qkDG
-         ilPDOkSFJOTOHwbjDWyasxpFsCmlTYfdtHKnp1VNBEDKe0GyxtxJdrUiRZYDue52ANp4
-         WbsnnUTsigKGBRfUVXbzX6lRv+MSmt+RMZU80oUjxXIwqrdYZsqgO9rBD9rNHMWkKnmd
-         fMIZrroZ/ysnXb0B5XYkiz40SDdA38kgBwiRnMtS8scwxAxt+DoOyP5mJYtAyDHP7G9R
-         kUfQ==
-X-Gm-Message-State: AOJu0Yy0PGC1twXMDn/2RusE4OfiAhQwZIFSu5gxd5+CGT6vqe2fcotu
-	MqM0+ypBPtjnqQNL1NmYyVwEe5teDO0ab48UrxxNvPVqi2QhG225HbaEAEv8o9UMT3XwM5ty/wg
-	R5X9n
-X-Gm-Gg: AfdE7cnbbsWnFfPo3TMX7TfQIAkkZtu/lcDGyKa8rGAFGrJwHLKBttELNAbbc8a/vVV
-	glxSKTSr82RtfVjDXnEySOnJVCpgi1tDj1auiv1EZCBe+ya/FrXdJ4jSbcrliirI1kqVeLpwVgT
-	LVtabXmTSB/rr6bLA1AOumU6qPWe6bup2xgKWtCh9maGcdK4LLyRbHrHHG33oTZnAJkmEpuIjn3
-	JOwkOemm61r0O7zS/MxahCxxiA1jbLQtSZpScu6BTpoGwcDPlXNQrGMaT51uIKC3IgVCAJs7hAz
-	ey11h/Gy4wDrRc8NcoCKVAALsElaKVK5scFDwIvoRg1jzzZvHdrlzvWBLF+5OiY9R7Sj8Q/mH54
-	haDN45Gttf8Q+V8l2RVCzPr3agr73uPhp7SKKBcF0agoTE48Q1XkVQSzVG3XumeUYHUDtF/ppsx
-	JPVg/DkfztBN996QuI0iY7DX8ISm4NhOTq2S3I1kw15JS6Nfrk78104SpKsB23sBbwiV0CK2q3A
-	P5Q+5SBIduXGqe/J6aXXpkMGGmCKmrXhW916vWvkg==
-X-Received: by 2002:a05:600c:3e0c:b0:493:bcef:565c with SMTP id 5b1f17b1804b1-493e68b7fd3mr27055635e9.1.1783517573722;
-        Wed, 08 Jul 2026 06:32:53 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493e0f294a6sm262333915e9.1.2026.07.08.06.32.52
+        bh=odSLvOH4egZZz67oXDCWVHk7hwA5PdDvlye5eQ+iznw=;
+        b=DFZUoTFpqXSF0ND+Ipcg9LC/vyQOptQ/DJxctivXDw7qdZAw5B9KUgcXiBXTq5L7hk
+         nNlwqvnIMc/xohdltz6waOFZNggiCsX75CwMu05rdWa2LXkQ5w5YjWOI68YjDBbNwAg7
+         bHw/FjKt1X7wtnrPJj6QX1o33fFqSz3LKWm4NgS8uv+7lHgf6B/3Ek6y5JAnIFXYoFNU
+         zxK7tc7cw7IZf83rGJm5e2z4Gpipi0RSjcW/h/hJFbQcP1DyuKbDdmEoByzuaddtkGXK
+         LSL178deDgZ/74a7zg+tmqmEF5KQJnolpEzqLlyqtf0+eCeKvQE0zMTkKpH6dtdkM1FA
+         4FnQ==
+X-Gm-Message-State: AOJu0Yz2G/vKCu0w2rFwK7E/630DFXaVSuLSFpREVKGDxMGXwgdKvh64
+	z30VRn7vYSLxXqOwif0dWm4v3mSls3OLCCuddPadJ3GEzY3TMQxuGUAjoSkvRMPQ9IA=
+X-Gm-Gg: AfdE7ck6EtML48Fn3cbBH+eWucPZ2eHJ4qmLusArwVruehfQz/tuNKcuXFfrl0OQiQc
+	moFwBXh8z5XsiH4i7jy7FN98XIgR7MwbKeQWIs/VaaNKGvNcrvPTn6isD2s28jOmv+TBJ/gGrvj
+	fgswoFEwVyZw6TmP4ZhS26JzRIk9RskEzM8PhAl3QzppJ67xg3+NL8/ig/c8Pxn0j7IjB6JZKWu
+	hGZRgEk2OvDilThITXOvJnh2dlBnnr0yKqYOsXpeo8zPaKlgMrfuYn8GCr0tVk5gDbpZBpJchPp
+	3+2WdoIKC7O4c1zYBYhsUvlF72UTR5yz6BmQqZ0owB97N67A9bYVZh+DDOR1Ii5SOoLQ39xRucU
+	Ts5M57sYK63S23BgvrFDZE2BHAbk38hGHpZnco3YDfGxM1B+QrV0jd1TCTATT9soCkQmIWLXGNC
+	9h71dH7Op7VRFnJy+8XzQdCG6iP+XCnU7lnzk82XT4IsYnizLmPHjXEYH5WJPKBTRWc5WKG0qyn
+	wwjVzB01DNt5fTrNo9TyoQ4/H/3IXjt5yU5Kp7yz5Gvsstfy2doF7q2chIV1lBvlaPbqW8rBbUe
+	mDQO0GPDU4d5dzz/BlmndonyttBfWQ==
+X-Received: by 2002:a17:903:1b2c:b0:2ca:c01e:8837 with SMTP id d9443c01a7336-2ccea444eb7mr60582625ad.24.1783578776651;
+        Wed, 08 Jul 2026 23:32:56 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d5bd5bsm38413735ad.72.2026.07.08.23.32.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 06:32:53 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Wed, 08 Jul 2026 23:32:56 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/4] python3-unidecode: Enable tests
-Date: Wed,  8 Jul 2026 16:32:47 +0300
-Message-ID: <20260708133248.1765250-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260708133248.1765250-1-leon.anavi@konsulko.com>
-References: <20260708133248.1765250-1-leon.anavi@konsulko.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 3/4] python3-pychromecast: Relax build requirements
+Date: Wed,  8 Jul 2026 23:32:50 -0700
+Message-ID: <20260709063251.3218170-3-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260709063251.3218170-1-khem.raj@oss.qualcomm.com>
+References: <20260709063251.3218170-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2026 13:32:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128111
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 06:33:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128115
 
-Inherit ptest and include tests for unidecode.
+The upstream pyproject.toml caps setuptools at <83.0, but OE builds with
+--no-isolation against the native setuptools (now 83.0.0), so the build
+fails with "Missing dependencies: setuptools<83.0,>=65.6". Drop the
+spurious upper bound.
 
-This work was sponsored by GOVCERT.LU.
+Fold this into the existing wheel-version relaxation so pyproject.toml is
+adjusted by a single patch.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../python/python3-unidecode/run-ptest         |  3 +++
- .../python/python3-unidecode_1.4.0.bb          | 18 +++++++++++++++++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-unidecode/run-ptest
+ ...1-pyproject.toml-relax-build-requirements.patch} | 13 +++++++++----
+ .../python/python3-pychromecast_14.0.10.bb          |  2 +-
+ 2 files changed, 10 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/python3-pychromecast/{0001-Allow-building-with-wheel-0.47.patch => 0001-pyproject.toml-relax-build-requirements.patch} (55%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-unidecode/run-ptest b/meta-python/recipes-devtools/python/python3-unidecode/run-ptest
-new file mode 100644
-index 0000000000..8d2017d39c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-unidecode/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb b/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
-index c6969fca4d..ac94ae5cee 100644
---- a/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-unidecode_1.4.0.bb
-@@ -5,8 +5,24 @@ SECTION = "devel/python"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
- 
- PYPI_PACKAGE = "Unidecode"
- 
-+SRC_URI += "file://run-ptest"
-+
- SRC_URI[sha256sum] = "ce35985008338b676573023acc382d62c264f307c8f7963733405add37ea2b23"
-+
-+RDEPENDS:${PN}-ptest += " \
-+    python3-pytest \
-+    python3-core \
-+    python3-io \
-+    python3-doctest \
-+    python3-unittest \
-+    python3-unittest-automake-output \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.47.3
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast/0001-Allow-building-with-wheel-0.47.patch b/meta-python/recipes-devtools/python/python3-pychromecast/0001-pyproject.toml-relax-build-requirements.patch
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python3-pychromecast/0001-Allow-building-with-wheel-0.47.patch
+rename to meta-python/recipes-devtools/python/python3-pychromecast/0001-pyproject.toml-relax-build-requirements.patch
+index cfb201dfe0..74e8f4d438 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast/0001-Allow-building-with-wheel-0.47.patch
++++ b/meta-python/recipes-devtools/python/python3-pychromecast/0001-pyproject.toml-relax-build-requirements.patch
+@@ -1,9 +1,14 @@
+ From a82451e8f2db33e22fef6714ddbd35a3e03debff Mon Sep 17 00:00:00 2001
+ From: Khem Raj <khem.raj@oss.qualcomm.com>
+ Date: Thu, 14 May 2026 11:49:05 -0700
+-Subject: [PATCH] Allow building with wheel 0.47+
++Subject: [PATCH] pyproject.toml: Relax build requirements
 
+-Upstream-Status: Pending
++Allow building with wheel 0.47+ and drop the upstream setuptools upper
++cap. OE provides setuptools via DEPENDS and builds with --no-isolation,
++so the cap is spurious and breaks the build whenever oe-core ships a
++newer setuptools (currently 83.0.0).
++
++Upstream-Status: Inappropriate [oe-core specific dependency versions]
+
+ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+ ---
+@@ -17,7 +22,7 @@ index 20524ca..fc62798 100644
+ @@ -1,5 +1,5 @@
+  [build-system]
+ -requires = ["setuptools>=65.6,<83.0", "wheel>=0.37.1,<0.47.0"]
+-+requires = ["setuptools>=65.6,<83.0", "wheel>=0.37.1,<0.48.0"]
+++requires = ["setuptools>=65.6", "wheel>=0.37.1,<0.48.0"]
+  build-backend = "setuptools.build_meta"
+-
++
+  [project]
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_14.0.10.bb b/meta-python/recipes-devtools/python/python3-pychromecast_14.0.10.bb
+index 5b1d780b86..1c607b9bb9 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_14.0.10.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_14.0.10.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+
+-SRC_URI += "file://0001-Allow-building-with-wheel-0.47.patch"
++SRC_URI += "file://0001-pyproject.toml-relax-build-requirements.patch"
+ SRC_URI[sha256sum] = "f05a1c8d727d4f104c8c731688053033e05157f2ab81bc8eef50ec0c62f9373c"
+
+ inherit pypi python_setuptools_build_meta
 
