@@ -1,216 +1,182 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDAF4C44501
-	for <webhook@archiver.kernel.org>; Thu,  9 Jul 2026 13:09:41 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8867.1783602572124050099
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C33C4C43458
+	for <webhook@archiver.kernel.org>; Thu,  9 Jul 2026 16:10:59 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.512.1783613450383871788
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jul 2026 06:09:32 -0700
+ Thu, 09 Jul 2026 09:10:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=aBA/eTTc;
- spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-493c7902f47so14610735e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 06:09:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=UtqpFam5;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c89636920a3so8683a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 09:10:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1783602570; x=1784207370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=afa29Q7HhHVi8CtDck527MWmjp0MU4yxYCPfcRmQ0E0=;
-        b=aBA/eTTcKAnsb4WqYCyFtAL+uF9PV1ZCHZuQkcewcdgvd2K3aP+fOTMoSh9hVL6qSi
-         K4gqGfVsLsDCe4C3YFN1/uxYtJEM8GGDlb7tk2ptvLGB4+jKQpng9KxaNsxQUTf2Q7gW
-         jrpvLnDfqEyLL3N/cJWnSw7aYohd1aL7wKyTQ=
+        d=gmail.com; s=20251104; t=1783613450; x=1784218250; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=w4iJZjymySH3nONVvldgwpujFAGhGXVa+dBu4bIIJgw=;
+        b=UtqpFam5PvQO6yrR8HC/HXiOjpHjvwikSixbY+20IN8azse6y2N1sfGWqZRvLNXJvN
+         g0I5YhEzkfIJWozpmea4ClV8cVrPVkVh4iBCvBhKFS0Ccg2vN02jSgyQhgKNwSz0ra2E
+         psBmVrcaAwn89wD6YDkwM0t6gFu45rRWNWSipZ57hrJqfs0ZLxFfmG8S/vpn4awn6kWU
+         zDJ8+TcLgv/nB6/EhDHbJyNwC+g2RDgZhtSyAj1vHX62fah3mwl6lks/an6vhLEtHPxj
+         iBUUIcrvWKZjErDLhcAlY9UFJd+Fm5ndj535lLWn53cJl+H7El9R3mzYEWIKuKttUP20
+         2Mbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783602570; x=1784207370;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=afa29Q7HhHVi8CtDck527MWmjp0MU4yxYCPfcRmQ0E0=;
-        b=IJOjlfAuHbxFfD3x6FI/KKByM/MSugvfeSSP1LRmdwxBwcseS5uJwinY2mR8vZr+ve
-         5N0c94/8OcIe6YN4fsFZXt8Qv7N7U7S0lss9Et1a/NJV5Ju4dx4T1y+bTKZ1Fo/8ws+B
-         I5TQghOCUsDZwGNmQyPBgZwa44uHsTuMce4/njgOOIOmqqBe0STEP709hA+U8ADnx6NR
-         IrGGzMIRbLkLZrs871a06CSJ8LidOXv8yrGgvZs2++3YD37oL9ca3vYKxFvaEwvWqHxG
-         ekHme4PZqDg6qQC6VMReBAlnNOvAVQJB32mWRf1xhczxnMOD7nJt/TxqXfZJDqdzvPGq
-         a1vQ==
-X-Gm-Message-State: AOJu0YwUiv28yQ9kcp3f74HGsIdRUkKWcRDDHZZwcTlGlXB3VxBHyDTJ
-	Al6urb/j+vVAM/zC0/rBRZ7PMoNebIJ5n6zhdimBRR502P/PNzfA3VeSjtTc0JPomKbcumKmcDb
-	t2fnb
-X-Gm-Gg: AfdE7ckhDCGgcYEu3QgMgGjEMxW4KZg7zXHsgIBBf+XN+KluzBFKU9hbD+9w0S62U/0
-	ve4xlTqlzUUKLcTBRakpAPY0gKAP/gGsdNusk1EutrUijPlp/9NC3kxHUaDzPNK1cPwFO/txBf9
-	A27iZFgsEuCRzmh2Tl8eOAwMrUxzPulN5OT23fbfj3Uq3LUm83jazmB8u4nlZJq+3fOfVpZnywE
-	EFpcZMzblsMtl1sZQF4akYZ0QvfraQOvUjLYInn88/PBgVGbZv3Ca8aVCXeSWmO3KR5aWFf9BUh
-	qIwDWGiXrmSzDTkoLUHwf+ey1jX0ETt+i9MS0Z4dsPrxyY8MuaIHpFhRInDJZCXejhZTBV5jtU8
-	WG5OqhP7r1DtcLPu0jJ4xcLKA49bZbR7KIiEQZbaWi3mQy35XacXT7JWMQqIMDyPQh8gOaMH6U+
-	NFRdLVEsPe0EMGvvg9dWAGxzy37r8eCQ2SpCzqPtwtliztLmqXlRQQTqW++ap8Mu4j6YuRBoQU3
-	WF02UIe2PZclOAcWMsBXR/r02rsl6Pb91ClEx3pBg==
-X-Received: by 2002:a05:600c:1d0f:b0:493:aaf5:6e04 with SMTP id 5b1f17b1804b1-493e6843302mr70655085e9.15.1783602570376;
-        Thu, 09 Jul 2026 06:09:30 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493eb6cccfdsm61032835e9.1.2026.07.09.06.09.28
+        d=1e100.net; s=20251104; t=1783613450; x=1784218250;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=w4iJZjymySH3nONVvldgwpujFAGhGXVa+dBu4bIIJgw=;
+        b=QlljI3BaYP56Yrv5wfyjItKZHWtmirfbqTO2/aNVMYUUV9Oq89H/Rh4IPmTCFdz+hX
+         5qsz9oQXzoJpVMRtBBKgGH7mqQqNcPx+HpTALBx3UHTCiqaI6v7PJ1+PlxV1KTIgN9H1
+         qzTVZNKTeiHOyh1ls70CmLNivnOr9CMBnq9hJ6HdgipxExCfjII4bnNCqxD0+t1JQ4sh
+         3ItwzGci7x9ZZL+dxoekw2e4t/718rauZ1INrFldGqltoKhr2LplY9fpeC7bd26oEVWj
+         NXnb3sHXoVU9+CeFxVljr+ZFlRDXGNo9WxQItI9Nrdn8rOQ2UUlezSA376Jdg9lNecLD
+         zX4w==
+X-Gm-Message-State: AOJu0YxHcMK3YPZQIUZBdYGpb6rChXoSs3fCJFCxLyEZFz4VrQ8tABJk
+	p+GlaEVCveRnQ6xEt7uZ7IUuaNwaRqWX7PUt3RcIALAyguSmns8BOTumAJuEuEu2U2k=
+X-Gm-Gg: AfdE7cmW665dz5cOUnDvdbzCVwhyGrZQt3IQpS3BN0vt8R2JDKCwTB+d2AhN1v8J/3D
+	WxeMQR5L5qotAS3fYiqHNJ+RkTVQs98GU/Jm/p+uutoY4+kBcOj3DZuLxjE8AcIvHeyUgBrXSAx
+	zS5Ds1bCjGuUUzopBAc+oMPixp3zwMprWa8sFBdy6mbNeT6Mp9d38QvXok/flxEBuvd1AvKVuMe
+	vy4hBryjkCXvcpBxIXKJh/NUezP3qdYJme2egqcZVT5edU4CX+UTTUIJpoGQt4R20F9DR+svbrI
+	74jVgIJyIn+nwAx+W3mdc9NcnDjxbuf5oSJT8936CwOZEqBTK79SdnlLbEaVzEqHZY46444SBVj
+	qAkNp6n8t+rztsvzdIvsCm0lIpQKwVV1Hm5Fec9ieaspcEc61TPQQkKtpZ5RCiQfDjCwbiTUuYc
+	kM3qRPR83900iq6yEOyh2ZW1fHfRgcNaUom8PRaRNUFwGNdlU1ZURO8mpiM6N4O7x1k+QP/V1kv
+	tVJNB3m0ck1hNZEQKktFynr5yMgTv94aC524xjll3LwFSKnpgXSnD2wnnUayt/Lu0nkFzwR+uHW
+	9n7zZfoHy0MnwrphhgSZNllbvG3MwQ==
+X-Received: by 2002:a05:6a20:4308:b0:3bf:b49f:53fd with SMTP id adf61e73a8af0-3c0bc8a59ffmr7963365637.3.1783613449405;
+        Thu, 09 Jul 2026 09:10:49 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31174ac14f2sm34085726eec.27.2026.07.09.09.10.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 06:09:28 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Thu, 09 Jul 2026 09:10:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-pyppmd: Enable tests
-Date: Thu,  9 Jul 2026 16:09:21 +0300
-Message-ID: <20260709130921.4185087-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260709130921.4185087-1-leon.anavi@konsulko.com>
-References: <20260709130921.4185087-1-leon.anavi@konsulko.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] fex: Upgrade to FEX-2607 release
+Date: Thu,  9 Jul 2026 09:10:45 -0700
+Message-ID: <20260709161045.3794831-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 13:09:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128125
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 16:10:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128126
 
-Inherit ptest and include tests for pyppmd.
+Bump the FEX srcrev to the FEX-2607 tag and resync the vendored externals
+to that release's submodule pointers: drop jemalloc (non-glibc) and
+robin-map, which upstream replaced with rpmalloc and unordered_dense.
 
-Add a patch to fix SIGABRT OutputBuffer_Grow() from
-src/ext/_ppmdmodule.c which was detected with the tests.
+Additional build fixes required by this release:
 
-This work was sponsored by GOVCERT.LU.
+- Disable FEX's internal ccache (-DENABLE_CCACHE=OFF); it collides with
+  OE's ccache class and double-wraps the compiler.
+- Build fmt from the bundled External/fmt submodule instead of the system
+  copy. FEX-2607 formats std::byte spans via fmt::join, which its pinned
+  fmt 12.1.0 supports but oe-core's newer fmt 12.2.0 rejects.
+- Stop FEX from stripping binaries at link time so OE can split out debug
+  information and the already-stripped QA check passes.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Built for qemuarm64.
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...md8-Fix-SIGABRT-in-OutputBuffer_Grow.patch | 70 +++++++++++++++++++
- .../python/python3-pyppmd/run-ptest           |  3 +
- .../python/python3-pyppmd_1.3.1.bb            | 23 +++++-
- 3 files changed, 95 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyppmd/0001-Ppmd7-Ppmd8-Fix-SIGABRT-in-OutputBuffer_Grow.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pyppmd/run-ptest
+ ...C-Do-not-strip-binaries-at-link-time.patch | 28 +++++++++++++++++++
+ .../fex/{fex_2601.bb => fex_2607.bb}          | 18 ++++++++----
+ 2 files changed, 40 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/fex/fex/0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch
+ rename meta-oe/recipes-devtools/fex/{fex_2601.bb => fex_2607.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyppmd/0001-Ppmd7-Ppmd8-Fix-SIGABRT-in-OutputBuffer_Grow.patch b/meta-python/recipes-devtools/python/python3-pyppmd/0001-Ppmd7-Ppmd8-Fix-SIGABRT-in-OutputBuffer_Grow.patch
+diff --git a/meta-oe/recipes-devtools/fex/fex/0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch b/meta-oe/recipes-devtools/fex/fex/0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch
 new file mode 100644
-index 0000000000..a31ac621d6
+index 0000000000..6c8faefdb9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyppmd/0001-Ppmd7-Ppmd8-Fix-SIGABRT-in-OutputBuffer_Grow.patch
-@@ -0,0 +1,70 @@
-+From f9c6a0549503f00a1ab0ad58a98a30ee99b96770 Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Thu, 9 Jul 2026 11:37:04 +0000
-+Subject: [PATCH] Ppmd7/Ppmd8: Fix SIGABRT in OutputBuffer_Grow
++++ b/meta-oe/recipes-devtools/fex/fex/0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch
+@@ -0,0 +1,28 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 9 Jul 2026 00:00:00 +0000
++Subject: [PATCH] LinkerGC: Do not strip binaries at link time
 +
-+The decode loop could abort in OutputBuffer_Grow() when a resumed
-+decode thread wrote past the current call's max_length. Stop early
-+once that limit is reached instead of trying to grow the buffer
-+further.
++FEX links Release binaries with --strip-all, which discards the symbol
++table before OE gets a chance to split out debug information. This makes
++the build fail the OE already-stripped QA check and prevents shipping
++-dbg packages. Let OE handle stripping instead.
 +
-+Also fix Ppmd8Decoder_decode because it never updated needs_input
-+when input was fully consumed, unlike Ppmd7.
-+
-+Fixes test_ppmd7_decode_chunks and the equivalent Ppmd8 case,
-+which previously aborted deterministically partway through decoding
-+testdata2.ppmd in small chunks.
-+
-+This work was sponsored by GOVCERT.LU.
-+
-+Upstream-Status: Pending [https://github.com/miurahr/pyppmd/pull/131/]
-+
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++Upstream-Status: Inappropriate [OE handles stripping and debug packaging]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/ext/_ppmdmodule.c | 16 ++++++++++++++++
-+ 1 file changed, 16 insertions(+)
++ Data/CMake/LinkerGC.cmake | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/src/ext/_ppmdmodule.c b/src/ext/_ppmdmodule.c
-+index dafa1c5..94f7f18 100644
-+--- a/src/ext/_ppmdmodule.c
-++++ b/src/ext/_ppmdmodule.c
-+@@ -531,6 +531,12 @@ Ppmd7Decoder_decode(Ppmd7Decoder *self,  PyObject *args, PyObject *kwargs) {
-+             break;
-+         }
-+         if (out->pos == out->size) {
-++            /* Already reached max_length for this call; stop instead of
-++               growing (avoids rest<=0 assert in OutputBuffer_Grow) */
-++            if (self->blocksOutputBuffer->max_length >= 0 &&
-++                self->blocksOutputBuffer->allocated >= self->blocksOutputBuffer->max_length) {
-++                break;
-++            }
-+             if (OutputBuffer_Grow(self->blocksOutputBuffer, out) < 0) {
-+                 PyErr_SetString(PyExc_ValueError, "No Memory.");
-+                 goto error;
-+@@ -1276,6 +1282,11 @@ Ppmd8Decoder_decode(Ppmd8Decoder *self,  PyObject *args, PyObject *kwargs) {
-+              break;  // filled expected
-+         }
-+         if (out->pos == out->size) {
-++            /* Same guard as for Ppmd7Decoder_decode() above */
-++            if (self->blocksOutputBuffer->max_length >= 0 &&
-++                self->blocksOutputBuffer->allocated >= self->blocksOutputBuffer->max_length) {
-++                break;
-++            }
-+             if (OutputBuffer_Grow(self->blocksOutputBuffer, out) < 0) {
-+                 PyErr_SetString(PyExc_ValueError, "L1586: Unknown status");
-+                 goto error;
-+@@ -1303,6 +1314,11 @@ Ppmd8Decoder_decode(Ppmd8Decoder *self,  PyObject *args, PyObject *kwargs) {
-+             self->in_begin = 0;
-+             self->in_end = 0;
-+         }
-++        if (self->eof) {
-++            self->needs_input = False;
-++        } else {
-++            self->needs_input = True;
-++        }
-+     } else {
-+         const size_t data_size = in->size - in->pos;
-+         self->needs_input = False;
-+-- 
-+2.47.3
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pyppmd/run-ptest b/meta-python/recipes-devtools/python/python3-pyppmd/run-ptest
-new file mode 100644
-index 0000000000..8d2017d39c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyppmd/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-pyppmd_1.3.1.bb b/meta-python/recipes-devtools/python/python3-pyppmd_1.3.1.bb
-index 4a06c9f01b..5af79d0453 100644
---- a/meta-python/recipes-devtools/python/python3-pyppmd_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyppmd_1.3.1.bb
-@@ -4,10 +4,15 @@ LICENSE = "LGPL-2.1-or-later"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
- 
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta ptest
- 
- SRC_URI[sha256sum] = "ced527f08ade4408c1bfc5264e9f97ffac8d221c9d13eca4f35ec1ec0c7b6b2e"
- 
-+SRC_URI += " \
-+    file://0001-Ppmd7-Ppmd8-Fix-SIGABRT-in-OutputBuffer_Grow.patch \
-+    file://run-ptest \
-+"
-+
- DEPENDS += " \
-     python3-setuptools-scm-native \
-     python3-toml-native \
-@@ -18,3 +23,19 @@ RDEPENDS:${PN} += "\
-     python3-email \
-     python3-importlib-metadata \
++diff --git a/Data/CMake/LinkerGC.cmake b/Data/CMake/LinkerGC.cmake
++index 1111111..2222222 100644
++--- a/Data/CMake/LinkerGC.cmake
+++++ b/Data/CMake/LinkerGC.cmake
++@@ -9,7 +9,6 @@ macro(LinkerGC target)
++   if (CMAKE_BUILD_TYPE MATCHES "RELEASE")
++     target_link_options(${target} PRIVATE
++       "LINKER:--gc-sections"
++-      "LINKER:--strip-all"
++       "LINKER:--as-needed")
++   endif()
++ endmacro()
+diff --git a/meta-oe/recipes-devtools/fex/fex_2601.bb b/meta-oe/recipes-devtools/fex/fex_2607.bb
+similarity index 73%
+rename from meta-oe/recipes-devtools/fex/fex_2601.bb
+rename to meta-oe/recipes-devtools/fex/fex_2607.bb
+index 7d7824d08a..4737c9fd0e 100644
+--- a/meta-oe/recipes-devtools/fex/fex_2601.bb
++++ b/meta-oe/recipes-devtools/fex/fex_2607.bb
+@@ -13,25 +13,30 @@ SRC_URI = " \
+ 	git://github.com/Sonicadvance1/cpp-optparse.git;name=cpp-optparse;subdir=${S}/Source/Common/cpp-optparse;protocol=https;nobranch=1 \
+ 	git://github.com/FEX-Emu/drm-headers.git;name=fex-drm;subdir=${S}/External/drm-headers;protocol=https;nobranch=1 \
+ 	git://github.com/Cyan4973/xxHash.git;name=xxhash;subdir=${S}/External/xxhash;protocol=https;nobranch=1 \
+-	git://github.com/FEX-Emu/jemalloc.git;name=jemalloc;subdir=${S}/External/jemalloc;protocol=https;nobranch=1 \
++	git://github.com/fmtlib/fmt.git;name=fmt;subdir=${S}/External/fmt;protocol=https;nobranch=1 \
+ 	git://github.com/FEX-Emu/jemalloc.git;name=jemalloc-glibc;subdir=${S}/External/jemalloc_glibc;protocol=https;nobranch=1 \
+ 	git://github.com/ericniebler/range-v3.git;name=range-v3;subdir=${S}/External/range-v3;protocol=https;nobranch=1 \
+-	git://github.com/FEX-Emu/robin-map.git;name=robin-map;subdir=${S}/External/robin-map;protocol=https;nobranch=1 \
++	git://github.com/FEX-Emu/rpmalloc.git;name=rpmalloc;subdir=${S}/External/rpmalloc;protocol=https;nobranch=1 \
++	git://github.com/martinus/unordered_dense.git;name=unordered-dense;subdir=${S}/External/unordered_dense;protocol=https;nobranch=1 \
++	file://0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch \
  "
-+
-+RDEPENDS:${PN}-ptest += " \
-+    python3-pytest \
-+    python3-pytest-benchmark \
-+    python3-core \
-+    python3-crypt \
-+    python3-datetime \
-+    python3-hypothesis \
-+    python3-unittest \
-+    python3-unittest-automake-output \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.47.3
 
+ SRCREV_FORMAT = "fex"
+-SRCREV_fex = "1188c90c10569ca800d7a99c11e59cfeab5e2cc9"
++SRCREV_fex = "1cc4b93e7a71c883ec021b71359f136394dc1f3c"
+ SRCREV_cpp-optparse = "9f94388a339fcbb0bc95c17768eb786c85988f6e"
+ SRCREV_fex-drm = "3e49836995c1dcb3df709440ad2f270b569c6a5f"
+ SRCREV_xxhash = "e626a72bc2321cd320e953a0ccf1584cad60f363"
+-SRCREV_jemalloc = "97d986993dc735a2022856e7e9fdfa1180e8527a"
++SRCREV_fmt = "407c905e45ad75fc29bf0f9bb7c5c2fd3475976f"
+ SRCREV_jemalloc-glibc = "8436195ad5e1bc347d9b39743af3d29abee59f06"
+-SRCREV_robin-map = "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
++SRCREV_rpmalloc = "1d85c246cd827ead6865f4f880d4fef53f2b1864"
++SRCREV_unordered-dense = "3234af2c03549bc85656bfd3a86993bf1cd8aef1"
+ SRCREV_range-v3 = "ca1388fb9da8e69314dda222dc7b139ca84e092f"
+
++# fmt is built from the bundled External/fmt submodule rather than the system
++# copy: FEX-2607 formats std::byte spans via fmt::join, which its pinned fmt
++# 12.1.0 supports but oe-core's newer fmt (12.2.0) rejects.
+ DEPENDS = " \
+     catch2 \
+-    fmt \
+     libdrm  \
+     nasm-native \
+     vulkan-headers \
+@@ -42,6 +47,7 @@ PACKAGECONFIG[qt] = "-DBUILD_FEXCONFIG=ON,-DBUILD_FEXCONFIG=OFF,qtbase qttools-n
+
+ EXTRA_OECMAKE += " \
+ 	-DBUILD_TESTING=OFF \
++	-DENABLE_CCACHE=OFF \
+ 	-DENABLE_VIXL_DISASSEMBLER=OFF \
+ 	-DENABLE_VIXL_SIMULATOR=OFF \
+ 	-DDATA_DIRECTORY=${datadir} \
 
