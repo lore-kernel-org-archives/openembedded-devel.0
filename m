@@ -1,145 +1,132 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79F69C43458
-	for <webhook@archiver.kernel.org>; Thu,  9 Jul 2026 11:32:40 +0000 (UTC)
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7159.1783596751568434479
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A510BC44501
+	for <webhook@archiver.kernel.org>; Thu,  9 Jul 2026 13:09:31 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8822.1783602566623188385
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jul 2026 04:32:31 -0700
+ Thu, 09 Jul 2026 06:09:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=WtH1FH/n;
- spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: deeratho@cisco.com)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=N1TcYpiQ;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-493c2c0b9a8so14870815e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 06:09:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=2417; q=dns/txt;
-  s=iport01; t=1783596751; x=1784806351;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=47rt0ljYjUtPZiFdiKkceOLkw6zo/gDo/0H1S+jGPwM=;
-  b=WtH1FH/nMKQNOm93T53U9KINuf7OiLFGhcZqSxsAClHHnibj/UZDukLR
-   i0fBak9akekQcaTzfSgQmhAKgF9VO9cF5a1Xf0QYKsGPsCv8Po/OlUqLh
-   e+4ilyqAeGSZxov/Tw+2duTBsOdmD6hxNNOsh/TD3QCrGOOQSrac4hZWv
-   E0mpMU8PRwyL1Ds2ZGSTttf1C+jH7NakGNiYmhG/CMAd5QAyozfqthB5T
-   gYAHh7drXUTv4UITdKUEzsREXiqh3kMBQvTR+DpRdb70fyBUOk2a7PyaD
-   G6HJFh/NuDSDOaVoA8Z/VvkxBz62JA2sFcQt0RtNNLRTy5a+Oi8T4FFRi
-   A==;
-X-CSE-ConnectionGUID: wmWU1negQGS6AIPCpu8voA==
-X-CSE-MsgGUID: rjEsphubTP+KTmdcZhSxpA==
-X-IPAS-Result: =?us-ascii?q?A0BEAgCThU9q/5L/Ja1aglmCV3RfQkmUKYIhnh6Bfg8BA?=
- =?us-ascii?q?QEPLhYNBAEBklQCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBBwWBD?=
- =?us-ascii?q?hOGTw2GWgECAQQxAXIDAQJWBCMhgwIBgjoDNgIBEQa5DIIsgQGDWgIMAkNQ2?=
- =?us-ascii?q?EkQglUBCxQBgTiFP4gfWxgBhHwnGxuBcoR+gQWBXAECAQEXgQ2BBoV4BIIig?=
- =?us-ascii?q?QyBWhgGghONWkiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBDBsHBYEdg?=
- =?us-ascii?q?VuBBIR5Ix8DOX+BMHVKeS2BARIeCoFSghYCOgMLGA1IESw3FBsEPm4HjT8XD?=
- =?us-ascii?q?4FxTYEOFBYCqCKhDwoog3WMIY0+h3waM4QElBeSUQuYfY4KllCEaYFoPIFZc?=
- =?us-ascii?q?BWDIglKGQ+OOIh+yUckNQIBCDIBAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:ZXU5I6CHp4meixVW/3niw5YqxClBgxIJ4kV8jS/XYbTApD8i1zdRx
- mMaCmjVaKuMYWr9e90kaI20phsO65KAmtNlOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
- fuo+5eBYAD9i2YtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE3PBRMRgwMIIh1d0pKEB23
- uQFeC4KR0XW7w626OrTpuhEnM8vKozveYgYoHwllWCfBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGYxBPjDS0Un1lM/BJ8zhu60hn7XeDxDo1XTrq0yi4TW5FEpj+G0aYWPKrRmQ+1PnGuDv
- mLb9VjBQTImMdCU+zq+4mqF07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++MskCSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:uy0HmKq73pj4tOsS4u2nL+EaV5obeYIsimQD101hICG9Ffbo9f
- xG88506faZslsssRIb6LO90de7IE80nKQdieJ6AV7IZmbbUQWTQL2KlbGD/xTQXwvj6+Vaya
- BsN4J6CNH2EBxGqPyS2njcLz7lq+P3l5xBQozlvhNQcT0=
-X-Talos-CUID: 9a23:zYnR2m5QQhVHfNTxuNss60srJ5kjf3Lk40yOCm6AIn50GKOSYArF
-X-Talos-MUID: =?us-ascii?q?9a23=3ABEhZvAwC2NYL4X7tU2Sml2rW1BqaqL6sJVsVkYg?=
- =?us-ascii?q?Mh/HHFhB1NzyvjA+nWqZyfw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; 
-   d="scan'208";a="507111728"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Jul 2026 11:32:30 +0000
-Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id 5C503180004BF
-	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Jul 2026 11:32:30 +0000 (GMT)
-Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id 0B0D5CC2EC3; Thu,  9 Jul 2026 04:32:30 -0700 (PDT)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+        d=konsulko.com; s=google; t=1783602565; x=1784207365; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HOIqr00HV0aaPjNwVmncDf7YhdH74F/KdMX3YTZ5mrk=;
+        b=N1TcYpiQcRCZc6icSppabjMfF/UTFmjMf40Lu24gp6d4VpMTeGof/rxPxo6S65K3Eu
+         JS8z0b/OegNvlK5+R6eyq5NJTNRJGhcPP+VzJZq92JYwuQXIIYjDIApoOAQhIerEOiBv
+         5+yArIuYYfsFd6ROg6rIBtkJf7LFShBiLlxWg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783602565; x=1784207365;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HOIqr00HV0aaPjNwVmncDf7YhdH74F/KdMX3YTZ5mrk=;
+        b=Z/FcvYtwYXBoHfO4RnWrDSb05P92iylSiGHr/M4BkLHVIA6RwtdVGPFoxB2bqf1sxz
+         GKfjFn+lmBK3Buh89ITPQZ+jBKJyhsf2gbs/81245Jt46ODlYvaojQ8XyAp81NcqtWGm
+         A9kYWzf7Bgx2ujQPCLnLwMAtB5q3yNi8b2eQjbrAj0+iFtwBNYClOgDiMRficSVfbFPb
+         rcmUCKfngzg1slwhnmbs9nK00D4RAWWLMfHgk6TOGycdSKb0ep66KBVZZKPnOFw7VKEI
+         CNyp8A2kNtkJOreKdgQ6cWVG/R8rZ06+xTxqqvJoVIbiiv2mdPEMVCfMJpeSIynIXqGD
+         JOwA==
+X-Gm-Message-State: AOJu0Yx0ZX3UL/D/rhY4RNOcVWDEccZU+76LEwUpF4Hj2A9lTNxDIG9B
+	sR003tWAcRvXb+7vqUyDXiHARiII2CS57/rIsQ9jP1w/bURVz4vyhqvbKkcAO65rlPzt/ZzETiB
+	mtLHt
+X-Gm-Gg: AfdE7cn3W2OtoS99C4iMhzl+GbrZ7KJcfQ9EOXSQYWdVIN0XiKzLi0BKk4IHzxPYeDb
+	bAe9xuUB0ksuYz8cK5I1ACxya+oBItpKFE6krqswhkPAh/NOMbhJXAch5cRkaVydlsn3yCs8sO0
+	Td3QwA8O2wc9f5aLfoT+B96HYdmFDy6h3b7U/5jfHpqcIOB+9AFeFHTMqYl0GRu05s3dCDkm5y4
+	JLtf96Pm19viB1ltfTsSnckH7AL6eZClsURUMHGaAQnFuYzbcotgL5KO9t+p9J/Zg8PAH9YRclB
+	z507YSSv0LklRv0rDMajWF9u85l7wDomPKd64uiduFDGRLH8KCb3g9dZbLTZyexNjvAmT+CLbsK
+	7LdmW8T9oY5tDNW8smznbsQC482c9VIsgxRShhoGClm93jwXyPjj0ihOeCi3kw2Y38C+AxAjIgq
+	JObyZ70gDQXHDneovjJj33tnr0TGCl8KGeCkq7o4+QVXtmUOZ28G0Cd/Zz6VkHfj02fiDfu/8wc
+	WuT0WbpxGuFiWtGA373QGwmNuvZE3KCu/+AWtVTww==
+X-Received: by 2002:a05:600c:4ece:b0:493:c337:db1a with SMTP id 5b1f17b1804b1-493ec874dd9mr27232095e9.38.1783602564569;
+        Thu, 09 Jul 2026 06:09:24 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-493eb6cccfdsm61032835e9.1.2026.07.09.06.09.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Jul 2026 06:09:23 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH] libidn: Fix CVE-2026-57053
-Date: Thu,  9 Jul 2026 04:32:20 -0700
-Message-Id: <20260709113220.3742085-1-deeratho@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-jsbeautifier: Enable tests
+Date: Thu,  9 Jul 2026 16:09:17 +0300
+Message-ID: <20260709130921.4185087-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-3552.cisco.com [171.68.249.250];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 11:32:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128120
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2026 13:09:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128121
 
-From: Deepak Rathore <deeratho@cisco.com>
+Inherit ptest and include tests for jsbeautifier.
 
-This patch applies the upstream v1.44 backport for
-CVE-2026-57053. The upstream fix commit is referenced in [1],
-and the public CVE advisory is referenced in [2].
+This work was sponsored by GOVCERT.LU.
 
-[1] https://git.savannah.gnu.org/cgit/libidn.git/commit/?id=f57fab06afc1e328bbe197ad3d4a4e83c829593e
-[2] https://www.cve.org/CVERecord?id=CVE-2026-57053
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/python3-jsbeautifier/run-ptest     |  3 +++
+ .../python/python3-jsbeautifier_2.0.3.bb      | 23 ++++++++++++++++---
+ 2 files changed, 23 insertions(+), 3 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-jsbeautifier/run-ptest
 
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-
-diff --git a/meta-oe/recipes-extended/libidn/libidn/CVE-2026-57053.patch b/meta-oe/recipes-extended/libidn/libidn/CVE-2026-57053.patch
+diff --git a/meta-python/recipes-devtools/python/python3-jsbeautifier/run-ptest b/meta-python/recipes-devtools/python/python3-jsbeautifier/run-ptest
 new file mode 100644
-index 0000000000..7079f9c429
+index 0000000000..8d2017d39c
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libidn/libidn/CVE-2026-57053.patch
-@@ -0,0 +1,28 @@
-+From f57fab06afc1e328bbe197ad3d4a4e83c829593e Mon Sep 17 00:00:00 2001
-+From: Simon Josefsson <simon@josefsson.org>
-+Date: Tue, 16 Jun 2026 17:23:38 +0200
-+Subject: [PATCH] Guard against read-out-bounds on some xn-- strings
++++ b/meta-python/recipes-devtools/python/python3-jsbeautifier/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
-+Report and suggested fix by jiami3us@icloud.com in:
-+https://lists.gnu.org/archive/html/help-libidn/2026-05/msg00000.html
-+
-+CVE: CVE-2026-57053
-+Upstream-Status: Backport [https://git.savannah.gnu.org/cgit/libidn.git/commit/?id=f57fab06afc1e328bbe197ad3d4a4e83c829593e]
-+
-+(cherry picked from commit f57fab06afc1e328bbe197ad3d4a4e83c829593e)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-+---
-+ lib/idna.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/lib/idna.c b/lib/idna.c
-+index 27de4489..29664245 100644
-+--- a/lib/idna.c
-++++ b/lib/idna.c
-+@@ -388,4 +388,5 @@ step3:
-+-  if (c_strcasecmp (utf8in, tmpout + strlen (IDNA_ACE_PREFIX)) != 0)
-++  if (c_strncasecmp (tmpout, IDNA_ACE_PREFIX, strlen (IDNA_ACE_PREFIX)) != 0
-++      || c_strcasecmp (utf8in, tmpout + strlen (IDNA_ACE_PREFIX)) != 0)
-+     {
-+       free (utf8in);
-+       return IDNA_ROUNDTRIP_VERIFY_ERROR;
-diff --git a/meta-oe/recipes-extended/libidn/libidn_1.43.bb b/meta-oe/recipes-extended/libidn/libidn_1.43.bb
-index 7c478a1495..e645ffce20 100644
---- a/meta-oe/recipes-extended/libidn/libidn_1.43.bb
-+++ b/meta-oe/recipes-extended/libidn/libidn_1.43.bb
-@@ -17,6 +17,7 @@ inherit pkgconfig autotools gettext texinfo gtk-doc
++pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb b/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
+index 635dc69a13..05de25c3fc 100644
+--- a/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-jsbeautifier_2.0.3.bb
+@@ -4,11 +4,11 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
  
- SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
-            file://dont-depend-on-help2man.patch \
-+           file://CVE-2026-57053.patch \
-            "
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
  
- SRC_URI[sha256sum] = "bdc662c12d041b2539d0e638f3a6e741130cdb33a644ef3496963a443482d164"
+-SRC_URI[sha256sum] = "9579d4e9dbaa00383f3efdff4c98c8140bb85ba319398e8b97cdaba27abd6ba3"
++SRC_URI += "file://run-ptest"
+ 
+-PYPI_PACKAGE = "jsbeautifier"
++SRC_URI[sha256sum] = "9579d4e9dbaa00383f3efdff4c98c8140bb85ba319398e8b97cdaba27abd6ba3"
+ 
+ RDEPENDS:${PN} += "\
+     python3-core \
+@@ -16,4 +16,21 @@ RDEPENDS:${PN} += "\
+     python3-shell \
+ "
+ 
++RDEPENDS:${PN}-ptest += " \
++    python3-pytest \
++    python3-core \
++    python3-unittest \
++    python3-unittest-automake-output \
++"
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/${PYPI_PACKAGE}/tests/* ${D}${PTEST_PATH}/tests/
++
++    cat > ${D}${PTEST_PATH}/pytest.ini <<EOF
++[pytest]
++python_files = test*.py
++EOF
++}
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.35.6
+2.47.3
 
 
