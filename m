@@ -2,132 +2,237 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC15DC43458
-	for <webhook@archiver.kernel.org>; Mon, 13 Jul 2026 10:27:33 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6971.1783933203490230133
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D15C4C43458
+	for <webhook@archiver.kernel.org>; Mon, 13 Jul 2026 10:27:43 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7675.1783668136927375440
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jul 2026 02:00:03 -0700
+ Fri, 10 Jul 2026 00:22:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=QeWpwgjp;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=ZHSPqVpk;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: priyansh.jain@oss.qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66D7YlAo794254
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 08:39:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=f4HdzjEwv/swwLawXrYtfg
-	W6pnjXnM3o0Y/SA0e0tRA=; b=QeWpwgjpSBHzfqG/GYXA+Z0FAlFg6Y9Gs8bZQS
-	6kEgQa226Q7sm7P9YXL9V4t2vQaL/Z73dcHClgNrKwkHiVM066kaA2bphSXc2RBq
-	5fwj9vuOX7+86J+MrPiG9PLQpooGnLdBDRYk1u1RELZB/yK0ig8cdEvjx+6aC2J9
-	Gda/bePR1UY+3/SaqMn7CQjBrBfsxtInJg3GqJoS6c23l+WqGaLMlWiNiKPzoGPs
-	y2CbEVnkRR/m3/wvBbixp/AreP24QC/js9NE5mdSlKjFvBkkrYcGXUy4Qwy+KLe9
-	tUKY1/ot5NWgl6qaA0/5Wq9Zph7GfBy0FlevQmSbDoQ5YEsQ==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcurn07ks-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 08:39:28 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3823dcc1647so3815654a91.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 01:39:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=F7TUAXEI;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: lianux.mm@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-37cab825ec9so768061a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2026 00:22:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783931967; x=1784536767; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=f4HdzjEwv/swwLawXrYtfgW6pnjXnM3o0Y/SA0e0tRA=;
-        b=ZHSPqVpkr9hfQkM/AtJSA+VeNqLn8Vbciiv8Zp9DlWo+qqc/xk85nQy16FpQaBnPTQ
-         WfjRAKnCWzDXVdfRwN/tIjIB8ILUG8FTEyk3c/2xZPSvvVlFraMBXZmYyWenadJ0PDAJ
-         QT8bEMW6+BvCS+VOSCWO3YnyQu5Sx7QdkW6/p+0+b2JYAXocz9NCdVcmuzYIKRuasGCL
-         WJxCFDiR8yUvbkW7IA5sOexFrmFR7z/eGPHz/tSRf5HIlDDpUDxVgV7FislJdmobbBlp
-         JuGl1H3aIV783un9x/pjpIgxPMG74fh3DOnolW27615rBkfbD2sz5OmD/p27yVCgkAy5
-         PI0A==
+        d=gmail.com; s=20251104; t=1783668136; x=1784272936; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=B7D3idS7pVI3FqV3Me4xCQJQ5rfnmVyMr0jpG+sUz+c=;
+        b=F7TUAXEIIljZ0+Feoqrepb8rkkl84222avYB53++Hwtl77YoTHAepPF8f0SFaE7Syu
+         uJRqJgTdrVtp1fLdssJ/PBJP2Z+B/CcZR+rj9deJwNmLJkm6t2+TcIu7yb/2ZI2Abgy4
+         qxjwQPcl9GeUwaQMg2NtgQMzadvonqAxaIelA0/Mwu1Wd/2xel54WrfU3xTZgQtOLrZX
+         6TAbtzgi0OB172RcNciXgqPACZwVvsxlzU9le3NH+eCWokvETIqgt17gAMLuF3Y8UCPN
+         msMofkfUvTxIVvS0UP2+bmcQN8HO8xyi5eu4A8IpcyPNPJEwgrQ6FBgNCZwjt+8XoKhe
+         WsaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783931967; x=1784536767;
-        h=content-transfer-encoding:content-type:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=f4HdzjEwv/swwLawXrYtfgW6pnjXnM3o0Y/SA0e0tRA=;
-        b=ZqHodJa7o0zGmUS1sY7NWYVrUNeKiYklhK4LjPlCBhgUM+Z6o1FG+eL3Stklm+FSr8
-         mYxkk87bBS9c1SQQcVejdLOBa4C9Qzp/MqWM7GoKvB44lLgXwPnSOrwA/nueF9SoQDRO
-         MRnNK2MdB9aYfEdibVb1AsUi15Nd1nzAVC1TeBqHF3XVkmcQnoPzY4weWRiK4YtXxoeG
-         m9p/EVHRPR32BjxM4l1vvgAMfhuQcDtiynkAg/WQidWYcj9wt5Mpc+Qp90Bn0Tn1lGs2
-         GW9Bv3OnuzDc2Kq+4n53K1KERgdgTTi8Ng+REKJKKPYpW/HVOQXReIXXUJqwGUPOtYBO
-         lm0A==
-X-Gm-Message-State: AOJu0YwQD8roO64nACbaLAzDojCLaNtOE85XvSTy2qbCGpZN/ZU0qFBK
-	/tLDvaetf6LyEQmOqQ+tQ1JIT+4OYd1nt4uHKw7iR369MWqjiGVJ9BqaDsqOKbGlfwShAjpiiKR
-	IlXe43x0n3CdfJQ8NZorcWBcLFBr3yoc8I8kl2krmLBSfqBeqZQ0UsP+M//BrlfA+3Hke7dW7j2
-	WOosTw8kMyrgBiZ/7H
-X-Gm-Gg: AfdE7clksiMRjYr63eUwUB4K3jdERnA/KHemZ6yEhvARBKtje7PY+W89g33+AS1Ybyk
-	SdYgK58lilFQMS3VMXsz/aSY9edVEZI2gklQ7xbtkvjRLflNuAI4Jr+stgA/cK0GPbFztf5Mccn
-	qTfM4Y1q/ArO/MrU2nU/fMVUqd/wJCFc569K9buxOOuTeGOI+pVYGYslwozp3t1UZw+G/+NHo9O
-	wu5hBxDPbymNJSa1rf8A0rLyUEVLz+7ZNNGKwks0zM+pwcgw8BRH66ddsQYsBEG/mBERrKOPGVr
-	uKUW2fZidKtoLiV1Btoc+Cm110uGUvhX6801Igd8zkg0E1KqUJrEdXsR0YcsvYcXD0JggVABwlW
-	6hU+wwUuY+Nla7Hj1Mx/GxdNxsh9JILNLVu96/bdh
-X-Received: by 2002:a17:90b:5585:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38dc777b895mr7964144a91.22.1783931967449;
-        Mon, 13 Jul 2026 01:39:27 -0700 (PDT)
-X-Received: by 2002:a17:90b:5585:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38dc777b895mr7964127a91.22.1783931966966;
-        Mon, 13 Jul 2026 01:39:26 -0700 (PDT)
-Received: from [10.218.50.10] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38a55b3cd0bsm6214674a91.12.2026.07.13.01.39.25
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 13 Jul 2026 01:39:26 -0700 (PDT)
-Message-ID: <e16a2043-8a2f-42cd-95d7-468c0bf351c1@oss.qualcomm.com>
-Date: Mon, 13 Jul 2026 14:09:24 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+        d=1e100.net; s=20251104; t=1783668136; x=1784272936;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=B7D3idS7pVI3FqV3Me4xCQJQ5rfnmVyMr0jpG+sUz+c=;
+        b=U1vzmdLz2s2y5ZxLOxtYmm8dabcksatgfz0wkhfsb69MTHXaccz7z4sfivp3KXSKMg
+         yTFbRgx95sOMVv4wZDx/n8L62ZTFd/UdDSPDnZsvWKAgcGxwyrscLuBj/6DWkWbXVj+F
+         uM91Vk4aTyQqHMHy2bpl8BFkCdnaiEQNIywmzlWVyFSDHQHRb37jfKoJB5qh6hB/zIWE
+         fFyvArsb6kZM7ieC3I/mioXpS1B71XQCCQgBfMmVinboVpmZvi6PzSTAtw8fF6R9HLYF
+         ywD3pZCSdwC2Z5DeURhiHHoXPY0q96stiYNSUwlmDRzFXh5OLIDXqsk4uzFGGNTbuJV8
+         co2A==
+X-Gm-Message-State: AOJu0YznHEQfNwmfAoAE7qTWenHV4wIu/AXYSWYLm84WQPeIiz3z+olK
+	c+dptTKq73MFpcp9X9hJswINUq8lrTMylBZarsX/6iTsOE5TNvcvYpG6AB2Xg5uy
+X-Gm-Gg: AfdE7cmbi7mfR1H3yYu59yz1Y3OXAjqr8kL1qNHGZ6t36xLdyVOLxgwT9xaSONXTSGb
+	wbDuPfFkV6ZjDaDpBTT19qK7nyVDdqeD+UcHiBWeLOhb/9wjoehL/3T/TZbu/hV8spGHetpzstk
+	j/zOrbdKjC4xurnF4EWxPdFcC3g/GzeucgS4bxq1wTW62t2jOJ1OwDGs88/rWYLm3wB1OqwjdKn
+	dP7dYBJn8NxYKneRUvWnWEhCiYQwMDHyumLH9bfOoVTkrN473JtKelZ9alPA3A6fR/UTu0hOPhD
+	3OklI3N712R2eCvme0NluQc3H0UPv2eTWQz/3otit0XRrH5DvnV7YUyebEYRnFGgmQdup3nVoTh
+	Qor8wKKGG60w5lUTEgmEEhja0EdsT79vVu8r6KVuvDrz5Wlb49D4BGK1ZNqe6Po8xSOZVyoex6Q
+	hkV/9pI14SAW0ucmtn4X5J0l4=
+X-Received: by 2002:a05:6a21:7d02:b0:3b4:65ac:e2e3 with SMTP id adf61e73a8af0-3c0bc905534mr11897822637.5.1783668136024;
+        Fri, 10 Jul 2026 00:22:16 -0700 (PDT)
+Received: from localhost.localdomain ([104.28.163.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659d8da9sm65867111c88.14.2026.07.10.00.22.14
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Fri, 10 Jul 2026 00:22:15 -0700 (PDT)
+From: "wang lian" <lianux.mm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Priyansh Jain <priyansh.jain@oss.qualcomm.com>
-Subject: Re: Patch submission not appearing in archives/Patchwork
-X-Proofpoint-ORIG-GUID: MZkWuQQnzEeIEZYA-shhTj1NWlL_ul7b
-X-Authority-Analysis: v=2.4 cv=IcK3n2qa c=1 sm=1 tr=0 ts=6a54a440 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=bGsMYw8NXcstUgNhqL0A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDA4OCBTYWx0ZWRfX8HsePLFcWrMa
- EpiHyaQVMXvDnJWl/afZk4GQiqVyK1LPx1G0dnZwZbZKsgwcxCf+P6MN4Nu3Sk6TzdCPesrJRBG
- HinlHD23M79/PZpKGF68IUq3jg4CpeE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDA4OCBTYWx0ZWRfX7OdzkH1fgWpT
- t6j0zltnJZV2P6MSttAQIhBxXsdR45evUdAfAf/oVJvkdd7B/r9QinFoT0LNfWuGQIMIifZVBJB
- oZFwm26Vtr7OQcye9EfpNEvGTxQWM6jclq1iGYnktTbPlqEq41k49l0onJgp8ybLAlohrADgZqU
- pneeKJpC2yjo4xRWDDccO8OKWrP/J0+fkv98cDq9p9scUavg9AugrHtsnj2pJzpGn4xaTMvEvL/
- 8dDnMjyZMz5DF1dXURG/+LmeUysEBmB5/Tfl8rQ/FV4ikEG2d9CE9hHBQU0NHEIkIvhKvoGo41c
- sXCg83q/6rIKFgm7o0zCTYQygBp8bOUyfTlwsD/hARdLJsm3QQIHIhwdYZ8JQ0XsFNw0hjHGhPX
- KWMF1aCyksAgaGyRQooLTvDbc4QQ9kGd59zlTYONJPpDQyMFvQh5vWe/KVjY6jR55fN3kCTSeu6
- 8ooHUdZdlJQ6eTj7f6Q==
-X-Proofpoint-GUID: MZkWuQQnzEeIEZYA-shhTj1NWlL_ul7b
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
- clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130088
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Lian Wang <lianux.wang@processmission.com>
+Subject: [meta-networking][PATCH] tcpdump: upgrade 4.99.4 -> 4.99.6
+Date: Fri, 10 Jul 2026 15:21:59 +0800
+Message-ID: <20260710072159.4628-1-lianux.mm@gmail.com>
+X-Mailer: git-send-email 2.55.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 10:27:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128153
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 10:27:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128154
 
-Hi,
+From: Lian Wang <lianux.wang@processmission.com>
 
-I submitted the following patch on 2026-07-10 using git-send-email:
+Drop CVE-2024-2397.patch which is fixed upstream in 4.99.5.
 
-Subject: [PATCH] thermald: upgrade to 2.5.12
-Message-ID: <20260710084023.3571533-1-priyansh.jain@oss.qualcomm.com>
+Signed-off-by: Lian Wang <lianux.wang@processmission.com>
+---
+ .../tcpdump/tcpdump/CVE-2024-2397.patch       | 129 ------------------
+ .../{tcpdump_4.99.4.bb => tcpdump_4.99.6.bb}  |   3 +-
+ 2 files changed, 1 insertion(+), 131 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
+ rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.4.bb => tcpdump_4.99.6.bb} (91%)
 
-The patch does not appear in the mailing list archives or Patchwork.
-Could you please check whether it is being held for moderation or was
-rejected?
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
+deleted file mode 100644
+index 6934803..0000000
+--- a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
++++ /dev/null
+@@ -1,129 +0,0 @@
+-From b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2 Mon Sep 17 00:00:00 2001
+-From: Guy Harris <gharris@sonic.net>
+-Date: Tue, 12 Mar 2024 00:37:23 -0700
+-Subject: [PATCH] ppp: use the buffer stack for the de-escaping buffer.
+-
+-This both saves the buffer for freeing later and saves the packet
+-pointer and snapend to be restored when packet processing is complete,
+-even if an exception is thrown with longjmp.
+-
+-This means that the hex/ASCII printing in pretty_print_packet()
+-processes the packet data as captured or read from the savefile, rather
+-than as modified by the PPP printer, so that the bounds checking is
+-correct.
+-
+-That fixes CVE-2024-2397, which was caused by an exception being thrown
+-by the hex/ASCII printer (which should only happen if those routines are
+-called by a packet printer, not if they're called for the -X/-x/-A
+-flag), which jumps back to the setjmp() that surrounds the packet
+-printer.  Hilarity^Winfinite looping ensues.
+-
+-Also, restore ndo->ndo_packetp before calling the hex/ASCII printing
+-routine, in case nd_pop_all_packet_info() didn't restore it.
+-
+-Upstream-Status: Backport [https://github.com/the-tcpdump-group/tcpdump/commit/b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2]
+-CVE: CVE-2024-2397
+-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+----
+- print-ppp.c | 31 +++++++++++++++++--------------
+- print.c     |  8 ++++++--
+- 2 files changed, 23 insertions(+), 16 deletions(-)
+-
+-diff --git a/print-ppp.c b/print-ppp.c
+-index aba243d..e5ae064 100644
+---- a/print-ppp.c
+-+++ b/print-ppp.c
+-@@ -42,6 +42,8 @@
+- #include <net/if_ppp.h>
+- #endif
+- 
+-+#include <stdlib.h>
+-+
+- #include "netdissect.h"
+- #include "extract.h"
+- #include "addrtoname.h"
+-@@ -1363,7 +1365,6 @@ ppp_hdlc(netdissect_options *ndo,
+- 	u_char *b, *t, c;
+- 	const u_char *s;
+- 	u_int i, proto;
+--	const void *sb, *se;
+- 
+- 	if (caplen == 0)
+- 		return;
+-@@ -1371,9 +1372,11 @@ ppp_hdlc(netdissect_options *ndo,
+-         if (length == 0)
+-                 return;
+- 
+--	b = (u_char *)nd_malloc(ndo, caplen);
+--	if (b == NULL)
+--		return;
+-+	b = (u_char *)malloc(caplen);
+-+	if (b == NULL) {
+-+		(*ndo->ndo_error)(ndo, S_ERR_ND_MEM_ALLOC,
+-+			"%s: malloc", __func__);
+-+	}
+- 
+- 	/*
+- 	 * Unescape all the data into a temporary, private, buffer.
+-@@ -1394,13 +1397,15 @@ ppp_hdlc(netdissect_options *ndo,
+- 	}
+- 
+- 	/*
+--	 * Change the end pointer, so bounds checks work.
+--	 * Change the pointer to packet data to help debugging.
+-+	 * Switch to the output buffer for dissection, and save it
+-+	 * on the buffer stack so it can be freed; our caller must
+-+	 * pop it when done.
+- 	 */
+--	sb = ndo->ndo_packetp;
+--	se = ndo->ndo_snapend;
+--	ndo->ndo_packetp = b;
+--	ndo->ndo_snapend = t;
+-+	if (!nd_push_buffer(ndo, b, b, (u_int)(t - b))) {
+-+		free(b);
+-+		(*ndo->ndo_error)(ndo, S_ERR_ND_MEM_ALLOC,
+-+			"%s: can't push buffer on buffer stack", __func__);
+-+	}
+- 	length = ND_BYTES_AVAILABLE_AFTER(b);
+- 
+-         /* now lets guess about the payload codepoint format */
+-@@ -1442,13 +1447,11 @@ ppp_hdlc(netdissect_options *ndo,
+-         }
+- 
+- cleanup:
+--	ndo->ndo_packetp = sb;
+--	ndo->ndo_snapend = se;
+-+	nd_pop_packet_info(ndo);
+-         return;
+- 
+- trunc:
+--	ndo->ndo_packetp = sb;
+--	ndo->ndo_snapend = se;
+-+	nd_pop_packet_info(ndo);
+- 	nd_print_trunc(ndo);
+- }
+- 
+-diff --git a/print.c b/print.c
+-index 9c0ab86..33706b9 100644
+---- a/print.c
+-+++ b/print.c
+-@@ -431,10 +431,14 @@ pretty_print_packet(netdissect_options *ndo, const struct pcap_pkthdr *h,
+- 	nd_pop_all_packet_info(ndo);
+- 
+- 	/*
+--	 * Restore the original snapend, as a printer might have
+--	 * changed it.
+-+	 * Restore the originals snapend and packetp, as a printer
+-+	 * might have changed them.
+-+	 *
+-+	 * XXX - nd_pop_all_packet_info() should have restored the
+-+	 * original values, but, just in case....
+- 	 */
+- 	ndo->ndo_snapend = sp + h->caplen;
+-+	ndo->ndo_packetp = sp;
+- 	if (ndo->ndo_Xflag) {
+- 		/*
+- 		 * Print the raw packet data in hex and ASCII.
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.6.bb
+similarity index 91%
+rename from meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
+rename to meta-networking/recipes-support/tcpdump/tcpdump_4.99.6.bb
+index b05b832..5f61b73 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.6.bb
+@@ -24,10 +24,9 @@ SRC_URI = " \
+     http://www.tcpdump.org/release/${BP}.tar.gz \
+     file://add-ptest.patch \
+     file://run-ptest \
+-    file://CVE-2024-2397.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "0232231bb2f29d6bf2426e70a08a7e0c63a0d59a9b44863b7f5e2357a6e49fea"
++SRC_URI[sha256sum] = "5839921a0f67d7d8fa3dacd9cd41e44c89ccb867e8a6db216d62628c7fd14b09"
+ 
+ UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+-- 
+2.55.0
 
-Thanks,
-Priyansh Jain
 
