@@ -1,155 +1,146 @@
-Return-Path: <esa.jaaskela@suomi24.fi>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1D5AC43458
-	for <webhook@archiver.kernel.org>; Sat, 11 Jul 2026 19:22:43 +0000 (UTC)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2251.1783797754918727426
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98BB1C43458
+	for <webhook@archiver.kernel.org>; Sun, 12 Jul 2026 00:47:05 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6682.1783817222641205251
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Jul 2026 12:22:35 -0700
+ Sat, 11 Jul 2026 17:47:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: key syntax error: illegal base64 data at input byte 231" header.i=@suomi24.fi header.s=MBO0001 header.b=fq+CZ6wM;
- spf=pass (domain: suomi24.fi, ip: 80.241.56.161, mailfrom: esa.jaaskela@suomi24.fi)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [IPv6:2001:67c:2050:b231:465::1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gyJVt6z4VzKn8g;
-	Sat, 11 Jul 2026 21:22:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suomi24.fi; s=MBO0001;
-	t=1783797751;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CYbCFvcATGcynfcY5fYIufd5wu1ny5NXWsbgkoB/Wgw=;
-	b=fq+CZ6wMofmJtlAkk1jrfUvuuQ1KAcBS6OkPq6Cf+giA5J8mb4AerWi8HW7ivgn56Gl6o8
-	9Q7TPgnwnXrwj0mKiwaLJ4WkiyG0KpPyU9rS71BZAF9fGSf64KBpLAaDDuYbgHpKSw6g/i
-	OYifGf0EFC0AUxukJn0lfBH02+NGpCmBkz1/5A2mhAnH04Ta5RuFISUPlRnZRF/Vu8+csA
-	S7NQ8qImaj1H8db2I1Al9yXgH65anyHMLey8xgbvS1bXtTGnIXWVQ9fCkpiEv78n7MCnLw
-	WIXaiuDT3OZ/3tu/Vj+Sf7zOit2qdW84ICsCT6F45/eYAP5ro2kvTAH6dWBmoQ==
-Authentication-Results: outgoing_mbo_mout;
-	dkim=none;
-	spf=pass (outgoing_mbo_mout: domain of esa.jaaskela@suomi24.fi designates 2001:67c:2050:b231:465::1 as permitted sender) smtp.mailfrom=esa.jaaskela@suomi24.fi
-From: Esa Jaaskela <esa.jaaskela@suomi24.fi>
-To: openembedded-devel@lists.openembedded.org
-Cc: Etienne Cordonnier <ecordonnier@snap.com>,
-	Gyorgy Sarvari <skandigraun@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Esa Jaaskela <esa.jaaskela@suomi24.fi>
-Subject: [meta-oe][scarthgap][PATCH 1/2] uutils-coreutils: disable stdbuf compilation
-Date: Sat, 11 Jul 2026 22:22:02 +0300
-Message-ID: <20260711192203.2343958-2-esa.jaaskela@suomi24.fi>
-In-Reply-To: <20260711192203.2343958-1-esa.jaaskela@suomi24.fi>
-References: <20260711192203.2343958-1-esa.jaaskela@suomi24.fi>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=UC8ZHMlc;
+ spf=pass (domain: axis.com, ip: 52.101.72.41, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=V1fLLfXQ95Dh4wpXOZHqB8f7RlaMyZP7zI7eTQa06hYcgHQwBKbFm3UPSJ8gD65Fc8FKTOPmNRoQE+mU+ErAC1JLAyMMD6UJEaVu2mymd/0XmY25ZVzA02EbLXJauouOwC/JZ4/a68G404DR3fgib4IgZS4bnqyICrIZUg3o0dXtf+eJpK6sZE2Faa0TM5YCr38Mz3WGfUBUTYjoWBuVT2rsKI90LO9FVEmuzgWgvxm68KF8uz3BHrUC4N7MTdnGiAS9ow7SkFIfEpV1qpltS6zYiEeze6qKLF2F1q1bd5F0G+VSKeRMYZJsbPh7+ruio/adHs46MhzmRlJBzqc80w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4iOxu1yH1gvlm13p8HyH+85DQCETM2dbyl+xqXFuPzk=;
+ b=rY39gR6UdKMf3vdDJ40QbBuhT8BtTZoiQy5Pqda9psTAsubSytjid+pfRk1r4e+ja1xlKHKP/fY14DpbzHwitgGIkKGPSHPEkj4JkaTvb5joNK9zOOmsY4YoHdV5Wj0FATHch5hw2/FoJOuo5vxRCNMm9M1FTIun4vrprmmpESyrD4EDtYMd8kEth/UG/CmhfSMfZkhgj6Jj22EBD9a+vtNehm0tXvBkFMiT3RJWfZqX8N+WBYHeC8KtX8hPJSQP/Yyo92MHV3r6qfFFzwpAJIkOZ3bCjZG7u1TmBevC6XurPMt82jq/9y4CLSa41QqWtBqa2b3rae4+2mMu0tE+dQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4iOxu1yH1gvlm13p8HyH+85DQCETM2dbyl+xqXFuPzk=;
+ b=UC8ZHMlcI3jmkmUgmKNG3SweBvHtzzvHtscdzgKbWGiRrd8tyL7FcgXRhGw5vGKc8bHrGnbsglFQfQgq+0omBSfLrfpUapsuyWzPsyVOCp5aFfXsoOW+TtzDdU5yUImw52kKJSLRRjw1NF2jy6IAn7baxDN9RyrIGCdQUTP7Syo=
+Received: from DUZPR01CA0344.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b8::9) by AM7PR02MB5971.eurprd02.prod.outlook.com
+ (2603:10a6:20b:1a0::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.19; Sun, 12 Jul
+ 2026 00:46:57 +0000
+Received: from DB5PEPF00014B9A.eurprd02.prod.outlook.com (2603:10a6:10:4b8::4)
+ by DUZPR01CA0344.outlook.office365.com (2603:10a6:10:4b8::9) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.18
+ via Frontend Transport; Sun, 12 Jul 2026 00:46:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ DB5PEPF00014B9A.mail.protection.outlook.com (10.167.8.167) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.202.18 via Frontend Transport; Sun, 12 Jul 2026 00:46:56 +0000
+Received: from SE-MAILARCH01W.axis.com (10.20.40.15) by se-mail10w.axis.com
+ (10.20.40.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.39; Sun, 12 Jul
+ 2026 02:46:56 +0200
+Received: from se-mail10w.axis.com (10.20.40.10) by SE-MAILARCH01W.axis.com
+ (10.20.40.15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.61; Sun, 12 Jul
+ 2026 02:46:56 +0200
+Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail10w.axis.com
+ (10.20.40.10) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
+ Transport; Sun, 12 Jul 2026 02:46:56 +0200
+Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 2FC22199E
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2026 02:46:56 +0200 (CEST)
+Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
+	id 2653412AC6C; Sun, 12 Jul 2026 02:46:56 +0200 (CEST)
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] pegtl: Correct the license to BSL-1.0
+Date: Sun, 12 Jul 2026 02:46:51 +0200
+Message-ID: <20260712004651.356661-1-pkj@axis.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 4gyJVt6z4VzKn8g
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9A:EE_|AM7PR02MB5971:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed3f4cb1-3b6d-4973-3efe-08dedfaf1336
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|23010399003|36860700016|18002099003|11063799006|3023799007|13003099007|56012099006;
+X-Microsoft-Antispam-Message-Info: 
+	N2CwNWtqfb0Ye0LLtE+IYMF64yGv5dj0+r7kBm4Ss/XG/i5E00+uy/tIMDxA9flFiVWQtQyLemvXkHIm0ti00Zz+N64nDd0IljTwSWbNqjKLY7tqS76LFKfgG5dPMegcB34Z2I6enezefQYeFPpUz5ftvlxrse49LOq1e6mdBmVIeKo+rEVeFRAz8EqSnZ6VOv810krxajHYxFgjWGlh81hOi1yts4AQ12lJrj0fSIAn/IRmd8UXu15AJS8t/KkL48vuoIX0eyofh3avHOoWrV7edonhaoz8tp2IydqaWT0KNbuSzFJB/QdCGKQ7GbFo8L4mCJ+wRCI5C8AkQniWkEjJyB1a7PFedJl+p0aSCymLVl8MZSCD43OP5dTgN2GPE4QHgz8DbsIpejpbyoDStgYMORm+mJSUXaOfc8jaTFupDcjzR5wox4k+/fMonH6Vxp/TrI1TvEJnjLCyng3OK/8BFgi2eITjbtguoaV3P7popvrlXW5cP/KhYH5rDG3ptTt20YJU21Na2S4V4q6CPUsKpdxqHx0yECz6m4MIKn+5EvIr3VKF5XVXOOKxqqcTVBXiQmHSz7sZws205A7S/LFwCiozIeR1iVwYlF2TUxDWNlQtYz3gKUVq1uytCYlABUWRO7QMW+BUJvf9Ynw2TAe8StgO+8pRqwU4EZCuBA1+YCP0r1M0pQNDT6gZO0hDIrz0OFKixHbmyCt9D7WUTg==
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(23010399003)(36860700016)(18002099003)(11063799006)(3023799007)(13003099007)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	ZiY/MEubg0p5iOkc1dhkCKvP61U9Eb+hQdyNiBqCgL7uU3i+jsjvuZ36YnfCuSav/ul0/NCTu4OLwzoldvuEa/ALpgJjtoXB4QK8AMjxwoLU4vAeOJImSGsukHkiiiVnZVf+YeZMJejoc6bfGtUBtGygM1WVnuZG4pwBv0mbj2qSf2vxc5PHBgY6HvSXa93UKwC0hXdFrIyGDudaQ67A3hVC4UgOOVfrcTkjalFIR+rPkD6/kVe69YkHq803OjZMJ8FPi+pmknSksaQO3Hd3EVGPxucUrPNa+xcdthsNeIhx2kEfbSEyleoAv2F487bF+XQay6W8bPlei6VLdJxU13iApt1/9V8a1lnbCNYdth3NSy8+z2rJIf4Mb8bYltPDlnfzGAr3xudBnmkbP7L88XoXD7a/yZSrw73UT/vMwUeA1k7LNoVi5Udt7a5ruUHa
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2026 00:46:56.7276
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed3f4cb1-3b6d-4973-3efe-08dedfaf1336
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB5PEPF00014B9A.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR02MB5971
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Jul 2026 19:22:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128138
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2026 00:47:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128140
 
-From: Etienne Cordonnier <ecordonnier@snap.com>
+The license was changed from MIT to BSL-1.0 in release 4.0.0.
 
-There is a bug in uutils-coreutils causing stdbuf to include the HOST ver=
-sion of libstdbuf.so, even when cross-compiled.
-As a side-effect, the uutils-coreutils binary was containing the buildpat=
-h, because RPATH was set on libstdbuf.so.
-Thus the buildpath error can be re-enabled.
+Also set SUMMARY instead of DESCRIPTION, and fix some whitespace.
 
-This is tracked upstream by https://github.com/uutils/coreutils/issues/65=
-91
-
-Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
-Co-authored-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1d43511321f2bd08a4b3f0aa1422cf406ae0b3f6)
-Signed-off-by: Esa Jaaskela <esa.jaaskela@suomi24.fi>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- .../files/0002-do-not-compile-stdbuf.patch    | 39 +++++++++++++++++++
- .../uutils-coreutils_0.0.28.bb                |  3 +-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-core/uutils-coreutils/files/0002-do-n=
-ot-compile-stdbuf.patch
+ meta-oe/recipes-extended/pegtl/pegtl_4.0.0.bb | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-core/uutils-coreutils/files/0002-do-not-comp=
-ile-stdbuf.patch b/meta-oe/recipes-core/uutils-coreutils/files/0002-do-no=
-t-compile-stdbuf.patch
-new file mode 100644
-index 0000000000..e4f5627f12
---- /dev/null
-+++ b/meta-oe/recipes-core/uutils-coreutils/files/0002-do-not-compile-std=
-buf.patch
-@@ -0,0 +1,39 @@
-+From 5c08d92aae49f83e3b52ae58e566ef48c749f3c7 Mon Sep 17 00:00:00 2001
-+From: Etienne Cordonnier <ecordonnier@snap.com>
-+Date: Fri, 7 Mar 2025 16:39:33 +0100
-+Subject: [PATCH] do not compile stdbuf
-+
-+Due to including the host version of libstdbuf.so, stdbuf does not work =
-when cross-compiled. See https://github.com/uutils/coreutils/issues/6591#=
-issuecomment-2706575853 for details
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
-+---
-+ Cargo.toml | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Cargo.toml b/Cargo.toml
-+index ea87ccea79..e218719363 100644
-+--- a/Cargo.toml
-++++ b/Cargo.toml
-+@@ -154,7 +154,7 @@ feat_os_macos =3D [
-+ feat_os_unix =3D [
-+   "feat_Tier1",
-+   #
-+-  "feat_require_crate_cpp",
-++  # don't compile feature_require_crate_cpp per default (which contains=
- only stdbuf). "feat_require_crate_cpp",
-+   "feat_require_unix",
-+   "feat_require_unix_utmpx",
-+   "feat_require_unix_hostid",
-+@@ -189,7 +189,7 @@ feat_os_unix_android =3D [
-+ # ** NOTE: these `feat_require_...` sets should be minimized as much as=
- possible to encourage cross-platform availability of utilities
-+ #
-+ # "feat_require_crate_cpp" =3D=3D set of utilities requiring the `cpp` =
-crate (which fail to compile on several platforms; as of 2020-04-23)
-+-feat_require_crate_cpp =3D ["stdbuf"]
-++feat_require_crate_cpp =3D []
-+ # "feat_require_unix" =3D=3D set of utilities requiring support which i=
-s only available on unix platforms (as of 2020-04-23)
-+ feat_require_unix =3D [
-+   "chgrp",
-+--=20
-+2.43.0
-+
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.2=
-8.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-index 76cecac5a6..beaef37700 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De74349878141b2=
-40070458d414ab3b64"
- inherit cargo cargo-update-recipe-crates
+diff --git a/meta-oe/recipes-extended/pegtl/pegtl_4.0.0.bb b/meta-oe/recipe=
+s-extended/pegtl/pegtl_4.0.0.bb
+index 00ab23f025..898b161cad 100644
+--- a/meta-oe/recipes-extended/pegtl/pegtl_4.0.0.bb
++++ b/meta-oe/recipes-extended/pegtl/pegtl_4.0.0.bb
+@@ -1,18 +1,17 @@
+-DESCRIPTION =3D "header-only library for creating parsers according to Par=
+sing Expression Grammar"
++SUMMARY =3D "Header-only library for creating parsers according to Parsing=
+ Expression Grammar"
+ HOMEPAGE =3D "https://github.com/taocpp/PEGTL"
+-LICENSE =3D "MIT"
++LICENSE =3D "BSL-1.0"
+ LIC_FILES_CHKSUM =3D "file://LICENSE_1_0.txt;md5=3De4224ccaecb14d942c71d31=
+bef20d78c"
 =20
- SRC_URI +=3D "git://github.com/uutils/coreutils.git;protocol=3Dhttps;bra=
-nch=3Dmain \
--    file://0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.pat=
-ch"
-+    file://0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.pat=
-ch \
-+    file://0002-do-not-compile-stdbuf.patch"
+ SRC_URI =3D " \
+-	git://github.com/taocpp/PEGTL.git;protocol=3Dhttps;branch=3Dmain \
+-	file://run-ptest \
++    git://github.com/taocpp/PEGTL.git;protocol=3Dhttps;branch=3Dmain \
++    file://run-ptest \
+ "
 =20
- # musl not supported because the libc crate does not support functions l=
-ike "endutxent" at the moment,
- # so src/uucore/src/lib/features.rs disables utmpx when targetting musl.
---=20
-2.47.3
-
+ SRCREV =3D "708de300144de0ec8bd58491facfc5f34d0d0559"
+=20
+ inherit cmake ptest
+=20
+-
+ do_install_ptest () {
+     install -d ${D}${PTEST_PATH}/src/test/pegtl/data
+     install -m 0755 ${B}/src/test/pegtl-test-* ${D}${PTEST_PATH}/src/test/=
+pegtl
 
