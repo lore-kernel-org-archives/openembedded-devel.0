@@ -1,103 +1,133 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92809C43458
-	for <webhook@archiver.kernel.org>; Mon, 13 Jul 2026 09:18:13 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7063.1783934285418216765
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC15DC43458
+	for <webhook@archiver.kernel.org>; Mon, 13 Jul 2026 10:27:33 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6971.1783933203490230133
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jul 2026 02:18:05 -0700
+ Mon, 13 Jul 2026 02:00:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=f_l_k@t-online.de header.s=20260216 header.b=tGDh2U06;
- spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd90.aul.t-online.de (fwd90.aul.t-online.de [10.223.144.116])
-	by mailout02.t-online.de (Postfix) with SMTP id 94980E01D
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 11:18:02 +0200 (CEST)
-Received: from fedora.fritz.box ([84.163.43.133]) by fwd90.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wjCna-29WLM90; Mon, 13 Jul 2026 11:18:02 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] libcamera: add libdrm dependency
-Date: Mon, 13 Jul 2026 11:17:56 +0200
-Message-ID: <20260713091756.66416-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=QeWpwgjp;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=ZHSPqVpk;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: priyansh.jain@oss.qualcomm.com)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66D7YlAo794254
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 08:39:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=f4HdzjEwv/swwLawXrYtfg
+	W6pnjXnM3o0Y/SA0e0tRA=; b=QeWpwgjpSBHzfqG/GYXA+Z0FAlFg6Y9Gs8bZQS
+	6kEgQa226Q7sm7P9YXL9V4t2vQaL/Z73dcHClgNrKwkHiVM066kaA2bphSXc2RBq
+	5fwj9vuOX7+86J+MrPiG9PLQpooGnLdBDRYk1u1RELZB/yK0ig8cdEvjx+6aC2J9
+	Gda/bePR1UY+3/SaqMn7CQjBrBfsxtInJg3GqJoS6c23l+WqGaLMlWiNiKPzoGPs
+	y2CbEVnkRR/m3/wvBbixp/AreP24QC/js9NE5mdSlKjFvBkkrYcGXUy4Qwy+KLe9
+	tUKY1/ot5NWgl6qaA0/5Wq9Zph7GfBy0FlevQmSbDoQ5YEsQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcurn07ks-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 08:39:28 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3823dcc1647so3815654a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 01:39:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783931967; x=1784536767; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=f4HdzjEwv/swwLawXrYtfgW6pnjXnM3o0Y/SA0e0tRA=;
+        b=ZHSPqVpkr9hfQkM/AtJSA+VeNqLn8Vbciiv8Zp9DlWo+qqc/xk85nQy16FpQaBnPTQ
+         WfjRAKnCWzDXVdfRwN/tIjIB8ILUG8FTEyk3c/2xZPSvvVlFraMBXZmYyWenadJ0PDAJ
+         QT8bEMW6+BvCS+VOSCWO3YnyQu5Sx7QdkW6/p+0+b2JYAXocz9NCdVcmuzYIKRuasGCL
+         WJxCFDiR8yUvbkW7IA5sOexFrmFR7z/eGPHz/tSRf5HIlDDpUDxVgV7FislJdmobbBlp
+         JuGl1H3aIV783un9x/pjpIgxPMG74fh3DOnolW27615rBkfbD2sz5OmD/p27yVCgkAy5
+         PI0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783931967; x=1784536767;
+        h=content-transfer-encoding:content-type:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=f4HdzjEwv/swwLawXrYtfgW6pnjXnM3o0Y/SA0e0tRA=;
+        b=ZqHodJa7o0zGmUS1sY7NWYVrUNeKiYklhK4LjPlCBhgUM+Z6o1FG+eL3Stklm+FSr8
+         mYxkk87bBS9c1SQQcVejdLOBa4C9Qzp/MqWM7GoKvB44lLgXwPnSOrwA/nueF9SoQDRO
+         MRnNK2MdB9aYfEdibVb1AsUi15Nd1nzAVC1TeBqHF3XVkmcQnoPzY4weWRiK4YtXxoeG
+         m9p/EVHRPR32BjxM4l1vvgAMfhuQcDtiynkAg/WQidWYcj9wt5Mpc+Qp90Bn0Tn1lGs2
+         GW9Bv3OnuzDc2Kq+4n53K1KERgdgTTi8Ng+REKJKKPYpW/HVOQXReIXXUJqwGUPOtYBO
+         lm0A==
+X-Gm-Message-State: AOJu0YwQD8roO64nACbaLAzDojCLaNtOE85XvSTy2qbCGpZN/ZU0qFBK
+	/tLDvaetf6LyEQmOqQ+tQ1JIT+4OYd1nt4uHKw7iR369MWqjiGVJ9BqaDsqOKbGlfwShAjpiiKR
+	IlXe43x0n3CdfJQ8NZorcWBcLFBr3yoc8I8kl2krmLBSfqBeqZQ0UsP+M//BrlfA+3Hke7dW7j2
+	WOosTw8kMyrgBiZ/7H
+X-Gm-Gg: AfdE7clksiMRjYr63eUwUB4K3jdERnA/KHemZ6yEhvARBKtje7PY+W89g33+AS1Ybyk
+	SdYgK58lilFQMS3VMXsz/aSY9edVEZI2gklQ7xbtkvjRLflNuAI4Jr+stgA/cK0GPbFztf5Mccn
+	qTfM4Y1q/ArO/MrU2nU/fMVUqd/wJCFc569K9buxOOuTeGOI+pVYGYslwozp3t1UZw+G/+NHo9O
+	wu5hBxDPbymNJSa1rf8A0rLyUEVLz+7ZNNGKwks0zM+pwcgw8BRH66ddsQYsBEG/mBERrKOPGVr
+	uKUW2fZidKtoLiV1Btoc+Cm110uGUvhX6801Igd8zkg0E1KqUJrEdXsR0YcsvYcXD0JggVABwlW
+	6hU+wwUuY+Nla7Hj1Mx/GxdNxsh9JILNLVu96/bdh
+X-Received: by 2002:a17:90b:5585:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38dc777b895mr7964144a91.22.1783931967449;
+        Mon, 13 Jul 2026 01:39:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:5585:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38dc777b895mr7964127a91.22.1783931966966;
+        Mon, 13 Jul 2026 01:39:26 -0700 (PDT)
+Received: from [10.218.50.10] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38a55b3cd0bsm6214674a91.12.2026.07.13.01.39.25
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 13 Jul 2026 01:39:26 -0700 (PDT)
+Message-ID: <e16a2043-8a2f-42cd-95d7-468c0bf351c1@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 14:09:24 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-TOI-EXPURGATEID: 150726::1783934282-DDFF8873-B5EF19E9/0/0 CLEAN NORMAL
-X-TOI-MSGID: fee1d93e-aa62-48ec-b193-68163d206a81
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1783934282; i=f_l_k@t-online.de;
-	bh=vpKOLcdHZ9bkeUEffjC/3WRkLXOkX0JOhEf1ntMHl3s=;
-	h=From:To:Subject:Date;
-	b=tGDh2U06sg2BqMgMQ9iVrUPUNogbeMPRJQY1xgHdn7wjud5pFxkcSmlgDkPogEi/m
-	 rB1h5MUnup/Sp4jsy8aqZmGYHVSUp6UW0qkLq3I+G0Ou/pWh98nuLf9FBs7YthTU1f
-	 Nh/VE2s6JZ+C4pid7/kU9VJAJUcmMfxuocz578y8KYOUa+J3gucAl6Cz8UgzkY4OJL
-	 ZB5NQmhmKDveYG9vjcWlQNfz8O3ZpiWauZGYc+qdQJDZB/WfPD0xdDG4Kk3duIRKrt
-	 jGgp1JFowgupmi+aoRR9aQmqKNUQ+cZ7zS6bZasZg/sNFV4ULG1mLCkyK2CJU7KPT6
-	 RL0Lcwi1BEsbg==
+User-Agent: Mozilla Thunderbird
+To: openembedded-devel@lists.openembedded.org
+From: Priyansh Jain <priyansh.jain@oss.qualcomm.com>
+Subject: Re: Patch submission not appearing in archives/Patchwork
+X-Proofpoint-ORIG-GUID: MZkWuQQnzEeIEZYA-shhTj1NWlL_ul7b
+X-Authority-Analysis: v=2.4 cv=IcK3n2qa c=1 sm=1 tr=0 ts=6a54a440 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=bGsMYw8NXcstUgNhqL0A:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDA4OCBTYWx0ZWRfX8HsePLFcWrMa
+ EpiHyaQVMXvDnJWl/afZk4GQiqVyK1LPx1G0dnZwZbZKsgwcxCf+P6MN4Nu3Sk6TzdCPesrJRBG
+ HinlHD23M79/PZpKGF68IUq3jg4CpeE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDA4OCBTYWx0ZWRfX7OdzkH1fgWpT
+ t6j0zltnJZV2P6MSttAQIhBxXsdR45evUdAfAf/oVJvkdd7B/r9QinFoT0LNfWuGQIMIifZVBJB
+ oZFwm26Vtr7OQcye9EfpNEvGTxQWM6jclq1iGYnktTbPlqEq41k49l0onJgp8ybLAlohrADgZqU
+ pneeKJpC2yjo4xRWDDccO8OKWrP/J0+fkv98cDq9p9scUavg9AugrHtsnj2pJzpGn4xaTMvEvL/
+ 8dDnMjyZMz5DF1dXURG/+LmeUysEBmB5/Tfl8rQ/FV4ikEG2d9CE9hHBQU0NHEIkIvhKvoGo41c
+ sXCg83q/6rIKFgm7o0zCTYQygBp8bOUyfTlwsD/hARdLJsm3QQIHIhwdYZ8JQ0XsFNw0hjHGhPX
+ KWMF1aCyksAgaGyRQooLTvDbc4QQ9kGd59zlTYONJPpDQyMFvQh5vWe/KVjY6jR55fN3kCTSeu6
+ 8ooHUdZdlJQ6eTj7f6Q==
+X-Proofpoint-GUID: MZkWuQQnzEeIEZYA-shhTj1NWlL_ul7b
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130088
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 09:18:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128152
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 10:27:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128153
 
-This fixes an issue seeen if 'glvnd' is in DISTRO_FEATURES:
-| FAILED: [code=3D1] src/libcamera/libcamera.so.0.7.1.p/egl.cpp.o
-| x86_64-oe-linux-g++ -m64 -march=3Dnehalem -mtune=3Dgeneric -mfpmath=3Dsse=
- -msse4.2 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wfor=
-mat-security -Werror=3Dformat-security --sysroot=3D/home/flk/bitbake/bitbak=
-e-builds/oe/build/tmp/work/corei7-64-oe-linux/libcamera/0.7.1/recipe-sysroo=
-t -Isrc/libcamera/libcamera.so.0.7.1.p -Isrc/libcamera -I../sources/libcame=
-ra-0.7.1/src/libcamera -Iinclude -I../sources/libcamera-0.7.1/include -Iinc=
-lude/libcamera -Iinclude/libcamera/ipa -Iinclude/libcamera/internal -Isrc/l=
-ibcamera/proxy -I/home/flk/bitbake/bitbake-builds/oe/build/tmp/work/corei7-=
-64-oe-linux/libcamera/0.7.1/recipe-sysroot/usr/include/p11-kit-1 -fdiagnost=
-ics-color=3Dalways -D_GLIBCXX_ASSERTIONS=3D1 -D_FILE_OFFSET_BITS=3D64 -Wall=
- -Winvalid-pch -Wextra -Werror -std=3Dc++20 -Wnon-virtual-dtor -Wno-redunda=
-nt-move -Wmissing-declarations -Wshadow -include /home/flk/bitbake/bitbake-=
-builds/oe/build/tmp/work/corei7-64-oe-linux/libcamera/0.7.1/build/config.h =
--O2 -g -fcanon-prefix-map -ffile-prefix-map=3D/home/flk/bitbake/bitbake-bui=
-lds/oe/build/tmp/work/corei7-64-oe-linux/libcamera/0.7.1/sources/libcamera-=
-0.7.1=3D/usr/src/debug/libcamera/0.7.1 -ffile-prefix-map=3D/home/flk/bitbak=
-e/bitbake-builds/oe/build/tmp/work/corei7-64-oe-linux/libcamera/0.7.1/build=
-=3D/usr/src/debug/libcamera/0.7.1 -ffile-prefix-map=3D/home/flk/bitbake/bit=
-bake-builds/oe/build/tmp/work/corei7-64-oe-linux/libcamera/0.7.1/recipe-sys=
-root=3D -ffile-prefix-map=3D/home/flk/bitbake/bitbake-builds/oe/build/tmp/w=
-ork/corei7-64-oe-linux/libcamera/0.7.1/recipe-sysroot-native=3D -pipe -fvis=
-ibility-inlines-hidden -Wno-error=3Darray-bounds -fPIC -DLIBCAMERA_BASE_PRI=
-VATE -MD -MQ src/libcamera/libcamera.so.0.7.1.p/egl.cpp.o -MF src/libcamera=
-/libcamera.so.0.7.1.p/egl.cpp.o.d -o src/libcamera/libcamera.so.0.7.1.p/egl=
-.cpp.o -c ../sources/libcamera-0.7.1/src/libcamera/egl.cpp
-| ../sources/libcamera-0.7.1/src/libcamera/egl.cpp:22:10: fatal error: libd=
-rm/drm_fourcc.h: No such file or directory
-|    22 | #include <libdrm/drm_fourcc.h>
-|       |          ^~~~~~~~~~~~~~~~~~~~~
+Hi,
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I submitted the following patch on 2026-07-10 using git-send-email:
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.1.b=
-b b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.1.bb
-index 2b351a39be..68b2c6648c 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.1.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.1.bb
-@@ -17,7 +17,7 @@ SRCREV =3D "183e37362f57ff3ce7493abf0bc6f1b57b931f55"
-=20
- PE =3D "1"
-=20
--DEPENDS =3D "python3-pyyaml-native python3-jinja2-native python3-ply-nativ=
-e python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
-+DEPENDS =3D "python3-pyyaml-native python3-jinja2-native python3-ply-nativ=
-e python3-jinja2-native udev gnutls chrpath-native libevent libyaml libdrm"
- DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase=
--native', '', d)}"
-=20
- PACKAGES =3D+ "${PN}-compliance ${PN}-gst ${PN}-pycamera"
---=20
-2.55.0
+Subject: [PATCH] thermald: upgrade to 2.5.12
+Message-ID: <20260710084023.3571533-1-priyansh.jain@oss.qualcomm.com>
 
+The patch does not appear in the mailing list archives or Patchwork.
+Could you please check whether it is being held for moderation or was
+rejected?
+
+Thanks,
+Priyansh Jain
 
