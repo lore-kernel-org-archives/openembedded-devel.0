@@ -2,139 +2,108 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 159FAC4450A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27081C4450C
 	for <webhook@archiver.kernel.org>; Mon, 13 Jul 2026 00:45:16 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1184.1783903506603155861
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1212.1783903515737480319
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2026 17:45:06 -0700
+ Sun, 12 Jul 2026 17:45:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=LStCrt0i;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2ceaf8a1265so11147995ad.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2026 17:45:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lO5xN7gP;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-ca957432c7fso1791311a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2026 17:45:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783903506; x=1784508306; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RqDlz71qpE+slElTV3MrZL/xXWa7hAfkYpJMlMUW7YE=;
-        b=LStCrt0izHuIkp/a45vl2PwCvsLqtKemm+U5rAuhrgE+s1fsAIWsx+7zuVvAPyxEFu
-         FXbluVQlPXCLbqKo/135xPKdOfwntBy7iNwK6dHKxdpplhAFN+k5PFcW6ms22Eihj2Q1
-         DpU40Mdnt17ToFx/MEFJmwqlzf1UzKX0lpHaUTLqNiZODiRDxKZlnwhNfVoQV4kLVhSI
-         wnXZjZhFCvJ05NXXKELDf4bWPfUZwTVc00D35HS3hmQHPP0RdFf6U6N0LHPop5iu4zwA
-         yWZIGTV+syKZ+6sYNJwDgk6Y5Fk6nxjZugabRomuBHe0UlvyaUCv5b/AeZt0comCfWQe
-         bd2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783903506; x=1784508306;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1783903515; x=1784508315; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RqDlz71qpE+slElTV3MrZL/xXWa7hAfkYpJMlMUW7YE=;
-        b=Zk/n8DA281ycBiujkH5nA3uIxLWpY5lPxuiQ4pHknqTGwvO4fDDherhoS4okTQ1kzr
-         bsytq4oLWTF5j0pjIqICZVgHJXrceutC/RAd+F/85daZh0UuHzl/CrJQC6rZ1dAeEOF3
-         FoFtj1Aj3jbhUmyTyWekH1rGANtPRa6PThscFM0pnYOYvCjs8ONZCnhpMAjQeGPeV7Zx
-         iggexWtUPBuAI/u1c2L06UgkKOWpLTGFAqQnPz0PvV0i3Zx5jNJ02LBaBEKTTTq4ttP7
-         n9cKysU0G9UsF3twFOneTqtT9ak6eRTZv4Cn9U49f9DrUVvmzoqDe54bsushXF5Uu7cZ
-         FccA==
-X-Gm-Message-State: AOJu0Yxa20kq6XEV7uXA9NBvCV8/qnBp8ppZwTAcs8PClWJI9mtIu4p5
-	N3pPWWjnGUDnQtC/sejo1s7/t8M7nAKmQggCoqdSnoX1NcCEJWguy4dK29f+D5b107w=
-X-Gm-Gg: AfdE7clWgpeqk4JU1IS+poN488YFPTf5eWloyaI2mHTcj1hev9e8HqBwrhkQ6VP7a83
-	YNyU8m1SLNI2mNMXIRaf6nPE/QnfORULkt694D5qLI6uqTrZleA/jj9K7Kv4C7mamCyA+ES57OZ
-	ms35my38I63YaWvE7LhIP5b1IO30fGIyNky2kZxP8nMUU8zEBQgx5Sw1ubRZDFkd2Jw1MFUlU9J
-	hVZ4loJ8S6VFvV6NrI/caGKx/WZI8KqWZEjxZ4bWysttOsSIBsdZhq6YelaI3VTUoMhEx0sBuKj
-	VJ3TfzFus2nFOEW5dBhtWK68LPmU+CMWlQl4LlyFtJjQNsPI/u6bCUgvApNBoGItcpJVw1Oxt7r
-	XF6SS07E+2DRmGC+onBUvF/9ohZ8IWZfYK3oDyDuMnMwnTvfmp4MQUgEide5rGmPNVMe7V0Inna
-	LAvYa5JwQkLiOn9UQqR/pLrJnUr8h8hwnl3dufsjuszHcnbLhqZDOOt+wmh2xP+vgLD3zSNKS09
-	6D5Jkq+tiezAU40srxG0+lduRUDM7JGa/msI3duJQbMyMW91Hh3oSLryck1UzVH5aTK7I4gNchk
-	buyHuc1if0Cs29Y9KchhpUKGW7I7Gg==
-X-Received: by 2002:a17:903:46cb:b0:2c7:faae:ab15 with SMTP id d9443c01a7336-2ce9e7adb67mr78617265ad.10.1783903505909;
-        Sun, 12 Jul 2026 17:45:05 -0700 (PDT)
+        bh=C4yX7Nuozxd+fKDI1PlYYkgthVkwZn3vbHpy5pDAt4E=;
+        b=lO5xN7gPT5EjrniFa9G4doLKQ9JLQ89Xh5I9gt++qL/iCEgSju7HUb5I+nQyI9LeEW
+         4k2tjo8qwCkO2XkTIkM5NXwo0ElRW1ph0wMhG7in0NJLMd7g1ZRiWKQOppgHepkWaqmu
+         Ya/zTtJG2ntcD62ZAXd+tObBRVu4e8Bhyb7lWWGef3xfyfatU0QI/LdhoBU7hD77YpM6
+         OatXZKkLKAMHCT8lqJWd3yIK0jcITUsPtcZN0jrSXijY4HOqb4umhT3NfIAZnKsWDLiw
+         pY+uXSOIXvHkb3eKjvL7f7sv6zK0B4DkQy6sn/yNkRd9Apj6VaS6THddPAluE6DAhU5d
+         Fc/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783903515; x=1784508315;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=C4yX7Nuozxd+fKDI1PlYYkgthVkwZn3vbHpy5pDAt4E=;
+        b=i8Za1pyYpl3wMA/HSPSMOYh4MdQKDuNPl6om2Y+8teH4ix9VYoe1rRZQHu1awHVNum
+         YT6L1eUOFt3ifJO/uKdTGnZBcFma2/QkMpXiRw7G6pgMDRLvg1qBD5WrfzJNW+Zdz/Hj
+         YoPgFOLnWCyk3Ws7rDXdV67kqyCZ6AP5USXLV8IF9vRElMmBrWM/QC2rRLIZf8MBdU1D
+         W1N4zWvuXSktm6KsBjXAfCQo8DeHU5GMjgScd9UWBs2B+ejFpBuQifhwTjiRPf+xw7E3
+         BOQrViVTtOyrdSWIaV6bld2S+Xumb1feplQXDFHlj8Sf6uS5g71Rtx5fLphC1fVul09N
+         owtQ==
+X-Gm-Message-State: AOJu0YyOlMGHcJYKp1E1ufvKN4W3Ohvy6tzFd6hVdGWAWz+mUqB0HfbQ
+	VV8uR3xDNIX5egs7422lHrVVjiYE3PWPA7GRQJwBbWZiqfmMLmOGn7oUdnzGrbQsMVg=
+X-Gm-Gg: AfdE7cm0KnKUEFYI1qtyIaZJcbfSyrxowBEc8lArQNw4sDmzw04rCuJ3xbMq75i2xCT
+	zhI4b8xRaeVwG0jTFvw/gMwBbZSIonPSxMxqjeUeykvRJN+G3RlGYb0KUoayIFaYQPYFLrEnlW/
+	HNJz8arc4/Cl7wYwwShEk2/TckqnT2BkLgmpgUx3gIdBiykSwwK2fVIHqnOyq4aZy1BKv+rT1zJ
+	nSYFofLXTPKiEUtGO5y67AqdNLpQ+aFy+/FJwjzDi3gAFsGGVii7gs0ljtRlK2IKmZQYYcp5W4c
+	HoWT4xbl2iMBcX5ail1fpcEKUeRM9JDBdjpYLt0MblZjBIq+fW2hJu727wbN3Uku00JV/HiJ9+z
+	FHD0JZ+yyNMe4tZMVvjr+mxaqBjkBUpt2VZpSXG/OcmLuHGn98PA08JzqAhGMoWAHTvBiNRIGAW
+	yy1LtDUtu84J8dR74lC3ybN1DAeKjFCya+70UJt9F1eb5ZXzPGNZnu+YtJarvafg8LP0xaamWS4
+	MBDrTN42t/+NQPzyfvVbuQLTZHt+pJYyVzC3Y+YwcPJgF2c3s0m2bS/UpncAuWK0hVDJuVTnmY7
+	3aPe3A07y910BiaRRpVg+M4emtZwCg==
+X-Received: by 2002:a05:6a21:113:b0:3aa:c93b:625b with SMTP id adf61e73a8af0-3c110762fd4mr7527692637.3.1783903514992;
+        Sun, 12 Jul 2026 17:45:14 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659666e7sm71206990c88.7.2026.07.12.17.45.04
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b659666e7sm71206990c88.7.2026.07.12.17.45.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2026 17:45:04 -0700 (PDT)
+        Sun, 12 Jul 2026 17:45:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 1/8] python3-dbus-deviation: Drop all setup_requires to fix build failure
-Date: Sun, 12 Jul 2026 17:44:55 -0700
-Message-ID: <20260713004502.716970-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 7/8] bpftrace: fix patch context so -fno-stack-protector applies to test object
+Date: Sun, 12 Jul 2026 17:45:01 -0700
+Message-ID: <20260713004502.716970-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260713004502.716970-1-khem.raj@oss.qualcomm.com>
+References: <20260713004502.716970-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2026 00:45:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128143
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128149
 
-do_compile failed with:
+The 0003 patch that links the data_source test carrier binary without
+the host runtime also adds -fno-stack-protector to the object compile
+line, needed because host gcc toolchains default to
+-fstack-protector-strong and the -nostdlib link then fails with:
 
-  AttributeError: 'NoneType' object has no attribute 'lower'
+  data_source.c:212: undefined reference to `__stack_chk_fail'
 
-A non-empty setup_requires makes setuptools run fetch_build_eggs(),
-which enumerates every distribution in the native sysroot and calls
-packaging.utils.canonicalize_name(dist.name). Under the setuptools/
-Python 3.14 in the sysroot one distribution exposes a None name, so
-canonicalize_name() crashes on None.lower() and aborts the build.
-
-Extend the existing patch to drop the whole setup_requires block
-instead of only setuptools_git. sphinx is only used by the build_sphinx
-command (not run during do_compile) and is already provided via
-DEPENDS, so removing it is safe and keeps setuptools out of the
-fetch_build_eggs() path.
+However patch 0001 (DEBUG_PREFIX_MAP) runs first in SRC_URI and rewrites
+the same compile line to insert ${DEBUG_PREFIX_MAP_LIST}, so 0003's
+first hunk no longer matched the tree and the -fno-stack-protector flag
+was silently dropped from the object compile (it only landed on the
+link line). Rebase 0003's first hunk onto the post-0001 context so the
+flag is applied where it is needed.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...o-donwload-requierment-which-will-ca.patch | 25 +++++++++++++------
- 1 file changed, 17 insertions(+), 8 deletions(-)
+ ...cmake-BuildBPF.cmake-link-data-source-binary-without.patch | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch b/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
-index b163db772c..7acb4493c8 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
-+++ b/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
-@@ -3,25 +3,34 @@ Subject: [PATCH] Prevent trying to donwload requierment which will cause
-
- 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1e83062ad0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/setuptools-git/
-
-+Dropping all setup_requires entries also avoids setuptools'
-+fetch_build_eggs() code path, which enumerates every installed
-+distribution in the native sysroot and crashes with
-+"AttributeError: 'NoneType' object has no attribute 'lower'" when one of
-+them exposes a None name under newer setuptools/Python. sphinx is only
-+needed for the build_sphinx command (not run during do_compile) and is
-+provided via DEPENDS, so it is safe to remove here.
-+
- Upstream-Status: Inappropriate [oe specific]
-
--Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
- ---
-- setup.py | 1 -
-- 1 file changed, 1 deletion(-)
-+ setup.py | 4 ----
-+ 1 file changed, 4 deletions(-)
-
- diff --git a/setup.py b/setup.py
- index 245193f..d899e4c 100755
- --- a/setup.py
- +++ b/setup.py
--@@ -92,7 +92,6 @@ setuptools.setup(
-+@@ -92,8 +92,4 @@ setuptools.setup(
-      exclude_package_data={'': ['.gitignore']},
-      zip_safe=True,
--     setup_requires=[
-+-    setup_requires=[
- -        'setuptools_git >= 0.3',
--         'sphinx',
--     ],
-+-        'sphinx',
-+-    ],
-      install_requires=['lxml'],
----
-+     tests_require=[],
-+--
- 2.43.0
-
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch
+index 7a69d0f8c1..695f709d6b 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch
+@@ -62,8 +62,8 @@ index cb8cd68..8aa059f 100644
+      OUTPUT ${ARG_OBJECT}
+      DEPENDS ${ARG_SOURCE} ${ARG_DEPENDS}
+      # See above: fresh compilation and the use of `gcc`.
+--    COMMAND ${GCC} -Wno-attributes -g -I ${CMAKE_CURRENT_BINARY_DIR} -c ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
+-+    COMMAND ${GCC} -Wno-attributes -fno-stack-protector -g -I ${CMAKE_CURRENT_BINARY_DIR} -c ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
++-    COMMAND ${GCC} -Wno-attributes -g ${DEBUG_PREFIX_MAP_LIST} -I ${CMAKE_CURRENT_BINARY_DIR} -c ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
+++    COMMAND ${GCC} -Wno-attributes -fno-stack-protector -g ${DEBUG_PREFIX_MAP_LIST} -I ${CMAKE_CURRENT_BINARY_DIR} -c ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SOURCE} -o ${CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
+      COMMAND cmake -E env LLVM_OBJCOPY=${LLVM_OBJCOPY} ${PAHOLE} -J ${CMAKE_CURRENT_BINARY_DIR}/${ARG_OBJECT}
+      VERBATIM
+    )
 
