@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9BACC4450F
-	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 10:40:00 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3441.1784111998001588350
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5259C44507
+	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 10:40:10 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3438.1784111994956034428
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2026 03:39:58 -0700
+ Wed, 15 Jul 2026 03:40:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Wt4qyS/A;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Dgvdf4qm;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1784111998; x=1815647998;
+  t=1784112001; x=1815648001;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=sZiUWVapRarddu/dxB1Cex4Geaom2+iZcOYjI3z0Vo0=;
-  b=Wt4qyS/Av6vrSZTykBjp4tlSffWYrKwl+PhcKb1G+T+dtXPb7tbvKHob
-   F298fF0ctCpzjO5E4/J5K5f6cXi9DZ4r8aiwSw48KL2AtUAlA9QJcSLuj
-   c33NM6hJLqrJnFvyoyfNqVgUz+vKw03iGvmCut4+9nuM5K8du51ChAWSS
-   oXVqNLy0gVxiyVhkSxtAnui31M1HwLddS0B0xxs37DV+gnn69ymo1BfSx
-   Ul/YTNRjvGpiJScw3k/zrdXVLPUXbywAhS+Jy7VqjytCqcxGXq2O6GAix
-   4WoWaNvYep6zaaJsxLPl5Sk4iYbjCnpa0fdsmn6PJ5WsXp5NqM4I0j9pf
-   A==;
-X-CSE-ConnectionGUID: ayJpO0oJTnqcx4GqVd2UBw==
-X-CSE-MsgGUID: UWQVC+5OTfe28z6/L1RliQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="233681192"
+  bh=zjlvl3HZc/4vjl+GZAUA5dNaeQGNEmD3iz7wVc9UF34=;
+  b=Dgvdf4qmK+8TuHechaZV+FqSPZc2h8ofMYP6te1PoW/Wvj3Ldjwwr2TS
+   ESgH/uAElNHQvr+JmhegpeHMmkB/dx4NldApsrWAz/+eeY05FI7e5n5dF
+   5Zf8e+MPN/2Updms8OeBhP5zeIw5FX7L3p4rG+pK75EpGBkXVrvYd3c52
+   kyruzzfJk5/JhpTyoW06WVcoV49IefN/VyMz5pPqU3iEV1au+O0bgRRuJ
+   DelfqwQGGpvySqk9sVC1MUlFs1CF4OxtS478W5vdZRi5PNHwIWEt0hvVe
+   QIqa3ps7w16m6NS9l88DWa7QmsSAr/5tTCqdQgXGiOvDSFvEA0BLQzqeX
+   Q==;
+X-CSE-ConnectionGUID: FM3wSEGIReah18HdLo7hxw==
+X-CSE-MsgGUID: Di0YrtinSEygFFIeIR1QpQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="225218902"
 X-IronPort-AV: E=Sophos;i="6.25,165,1779116400"; 
-   d="scan'208";a="233681192"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 19:39:56 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+   d="scan'208";a="225218902"
+Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 19:40:01 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 5733C1C000F6
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:39:56 +0000 (UTC)
+	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 1D883AC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:01 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 084BD18915CD
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:39:56 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id BDFF9102FBAC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:00 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 15FD61802731;
-	Wed, 15 Jul 2026 10:39:53 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id C2DE91801122;
+	Wed, 15 Jul 2026 10:39:58 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 13/44] python3-bumble: upgrade 0.0.231 -> 0.0.232
-Date: Wed, 15 Jul 2026 18:38:43 +0800
-Message-ID: <20260715103914.2120-13-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 16/44] python3-cmd2: upgrade 4.0.0 -> 4.1.1
+Date: Wed, 15 Jul 2026 18:38:46 +0800
+Message-ID: <20260715103914.2120-16-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260715103914.2120-1-wangmy@fujitsu.com>
 References: <20260715103914.2120-1-wangmy@fujitsu.com>
@@ -60,40 +60,32 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128186
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128189
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-- CIG: Fix CIG parameters for unidirectional CIS
-- Refine dependencies
-- Fix race condition in PeriodicAdvertisingSync state transition
-- transport/usb: Handle missing interruptEventHandler gracefully
-- fix: exclude channel 76 from default CS channel_map (Core Spec 6.0 compliance)
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-bumble_0.0.231.bb => python3-bumble_0.0.232.bb}    | 2 +-
+ .../python/{python3-cmd2_4.0.0.bb => python3-cmd2_4.1.1.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bumble_0.0.231.bb => python3-bumble_0.0.232.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_4.0.0.bb => python3-cmd2_4.1.1.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bumble_0.0.231.bb b/meta-python/recipes-devtools/python/python3-bumble_0.0.232.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-bumble_0.0.231.bb
-rename to meta-python/recipes-devtools/python/python3-bumble_0.0.232.bb
-index 768b204de9..dd2c1516f2 100644
---- a/meta-python/recipes-devtools/python/python3-bumble_0.0.231.bb
-+++ b/meta-python/recipes-devtools/python/python3-bumble_0.0.232.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/bumble"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7a775f1b11285b6abedd76748d176125"
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_4.0.0.bb b/meta-python/recipes-devtools/python/python3-cmd2_4.1.1.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-cmd2_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_4.1.1.bb
+index 13c84adff7..79407d00dc 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_4.1.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2a861642858e0858af9dd4e4716bae0"
  
--SRC_URI[sha256sum] = "43bd0ba5830d74ded82a369b535d2d98a8b2a41945540b1fe874bb14259dc5a2"
-+SRC_URI[sha256sum] = "78dc4dde9e270367605c697fa40c2e429513ee086b800789c97443a6ac7b2b79"
+ DEPENDS += "python3-setuptools-scm-native"
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+-SRC_URI[sha256sum] = "97956c491be8ae2c5239ba1e7658b52804f0e54b401b15cae80c6b85c9dce74f"
++SRC_URI[sha256sum] = "8a70157dacbbbc11290c18cb3453f0c8ab1dba742572d247a06f4bb519a16472"
+ 
+ inherit pypi python_setuptools_build_meta python3native
  
 -- 
 2.43.0
