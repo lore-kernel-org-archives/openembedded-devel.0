@@ -2,73 +2,74 @@ Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7814FC44501
-	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 17:20:11 +0000 (UTC)
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.333.1784136001195435467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7B66C44508
+	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 17:27:05 +0000 (UTC)
+Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.81.1784136425372107178
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2026 10:20:01 -0700
+ Wed, 15 Jul 2026 10:27:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=jvPxE81E;
- spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: deeratho@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=dNOdj6Gc;
+ spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3309; q=dns/txt;
-  s=iport01; t=1784136001; x=1785345601;
+  d=cisco.com; i=@cisco.com; l=2653; q=dns/txt;
+  s=iport01; t=1784136425; x=1785346025;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=A4y3ybM+cZmTKbygWcudAY7tQIwgX5AsqqeGJ4T7NJY=;
-  b=jvPxE81E5Ov1C1XqO+VetVli3v++oOLxPGgF2aMmzP4bC9VM2xajw9QK
-   0gLZLFSDAYuUXIrXNEbLQUs/2/QkgjZRdlg5qjWW3pNc97QqfegYuj8Kd
-   vO/68AwIZBk1f4J/fCcFCLSmWapqbilJpTihTnBtN5fngaZXwLn2GX75L
-   oCBSk+/xwVGiQ2xYc1DbNsAZTc6IkGy6uLYZotpepfqZrgOvwfsYEl2YE
-   3JoLaCmsuO6uh4bDLnDRJKkePYCTOAEmNrhiJK0D1Ex1efzl3q1ciquFG
-   xsqiQ5ENOAfPBn06wBvAhR3d1zN9X4nv6hZT+fZV0wYQu5hppjtWbjheL
-   w==;
-X-CSE-ConnectionGUID: 2PYBLD8dRLG+m98REpquVw==
-X-CSE-MsgGUID: 04pVG4sJROqB47tuoNkZFg==
-X-IPAS-Result: =?us-ascii?q?A0BBAgCFwFdq/5X/Ja1aHgEBCxIMggULgld0X0JJA5Qmg?=
- =?us-ascii?q?iGBFp0IgX4PAQEBDzQdBAEBklgCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBB?=
- =?us-ascii?q?QEBAQIBBwWBDhOGTw2HEwEYAV1cPAiDAgGCdAMRvR2CLIEBgygBMQMLAkNQ2?=
- =?us-ascii?q?y4BCxQBgTiFP4ggdAGEfCcbG4FygRWCc3aBBYFcAYgmBIIigQyBeI94SIEeA?=
- =?us-ascii?q?1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4EMGwcFgR2BUIEChHYjHwM5f4Ewd?=
- =?us-ascii?q?Up3LWoSF4FRghSBGAMLGA1IESw3FBsEPm4HjTAZJYI/PRwRJAErIIIMkzWSP?=
- =?us-ascii?q?qESCiiDdYwhlToaM6psCyOYWo4KlWBwhGmBaDyBRwsHcBWDIglKGQ+OOCeFQ?=
- =?us-ascii?q?2XLXjw1AgwvAQEHAgcOAwuBaJF+AQE?=
-IronPort-Data: A9a23:b2t08qMJJQTafdTvrR31lsFynXyQoLVcMsEvi/4bfWQNrUpw0jFTm
- mBLCzjXM6zcNDD9eI11ady+/UNT6pfTnNUyGXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WV7lV
- e/a+ZWFZgf6gmMsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj669WPWsSEd0UwMJYQmQfp
- cY1MCkQUA/W0opawJrjIgVtrt4oIM+uOMYUvWttiGiDS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzPXwsYDUXUrsTIJ4zkf2hmnn4WzZZs1mS46Ew5gA/ySQsieC1b4eNI4TiqcN9xhqAm
- E2a5EbDJQgwaIOD1D2j8UCCibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRulzfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:9VXg5638N7fJb72Ybv+CEQqjBIIkLtp133Aq2lEZdPUzSL37qy
+  bh=iHmfrMqcbE2kGS25ZEWrsv8gyULvtK3XBrtAANiHXvI=;
+  b=dNOdj6GcSHYC6kVFD3jTqZoxJ4IPBLRrkKBfoLu6r4vIE0DbwEEg5oIF
+   SP+Ga+BULdyl2/kplDX3JQK1kr39so0othXYtgHZ/qxT7iPHkJzwEO9h0
+   CqIRkVjvYX+1ObfL8zuQsP6mKivtpe/wdKd1Dm3gKeS/e7etc3o5LCKSL
+   FeRMtxU2LnfTsLo28HPKUtyD+8NflldPCKNQ3+H4r+zf16zUXmPLpZfcu
+   85FUHoi9qeskyJizbCl4sFZjtJiDVDrDsLPKXqqzDfsr9+eHg4ZSfXEVm
+   pqjp3bGQ1haEsd2n2dWaHVjBwvnf7s33d5NuSvc+w4qkMtTMHw7tjPomF
+   A==;
+X-CSE-ConnectionGUID: +MGb74iAS/CdUzuOvKTkOA==
+X-CSE-MsgGUID: ucBPQzk/Ru6+hwODO04keg==
+X-IPAS-Result: =?us-ascii?q?A0BDAgBqwldq/5X/Ja1aglmCV3RfQkmUKYE1bJ4egX4PA?=
+ =?us-ascii?q?QEBD0QNBAEBklgCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBBwWBD?=
+ =?us-ascii?q?hOGTw2GWgEtCwFyAwECWiMZCIMCAYJ0AxG9PIF5M4EBhH3bLgELFAGBOIU/i?=
+ =?us-ascii?q?CBcGAGEfCcbG4FygRWDaYEFgVwCgSeBBoV4BIIigQyBWh6PeUiBHgNZLAFVE?=
+ =?us-ascii?q?w0KCwcFgWYDNRIqFW4yHYEjPheBDBsHBYEdgVCBAoR2Ix8DOX+BMHVKdy1qE?=
+ =?us-ascii?q?heBUYIUgRoDCxgNSBEsNxQbBD5uB41KJYI/gQ4BKgGCLBGlYqESCiiDdYwhl?=
+ =?us-ascii?q?ToaM4VbpRELmH2OCpZQhGmBaDyBWXAVgyIJFjQZD44tAQoLgy4yhRPJBTw1C?=
+ =?us-ascii?q?zIBAQcCBw4DC4FokACBfgEB?=
+IronPort-Data: A9a23:rWy/jKlBFyCbkCY62TptkcHo5gzRJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJOX2uEPfzfMTH8edslPYri80IFvJbcyoNkQARp+yg9F1tH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+ZC31GONgWYubDpLsv/b8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05Fc491ewoXWBnz
+ rszJA0fczedpN6155vuH4GAhux7RCXqFJkUtnclyXTSCuwrBMmZBa7L/tRfmjw3g6iiH96HO
+ JFfMmUpNkmdJUQTaz/7C7pm9AusrnXyfidRtFKSjaE2+GPUigd21dABNfKIIo3WHZ8Mxx3wS
+ mTu4m/TOigIN5ul1GTG8m2LqsiXwSD2V9dHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS8gqBzO/Qpg2eHGVBF2QHY909v8hwTjsvv
+ rOUo+7U6fVUmOX9YRqgGn289Fte5QB9wbc+WBI5
+IronPort-HdrOrdr: A9a23:ibM0B62r97jv7sVbwcUKzwqjBIIkLtp133Aq2lEZdPUzSL37qy
  nAppomPHPP5Qr5O0tQ+uxoRpPgfZq0z/cciuMs1NyZMzUO1lHFEGgb1+vf6gylPTHi/ehA0q
  olWa1/BNrsSWVet6/BkWyF+xJK+qjhzEhu7t2uq0tQcQ==
-X-Talos-CUID: 9a23:tJ0NMGOOLbmLs+5DAhFW3mo4SswfVlKeySaAGWKgEHtXV+jA
-X-Talos-MUID: 9a23:Y2lhmAQy4xFJd+ysRXS02ClcG5tzwZ6JEWpRzokbvO+HBwJ/bmI=
+X-Talos-CUID: =?us-ascii?q?9a23=3Az6j7wmi/jyYDRmymFNidXP0rtTJuMVjyxiiMIma?=
+ =?us-ascii?q?DTk1lda+IbkGzxKBDup87?=
+X-Talos-MUID: 9a23:2cyGNgWNYyfTWlfq/CLnrglbJsQv2bnwS0AStrkh45WHOCMlbg==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,165,1779148800"; 
-   d="scan'208";a="510075010"
+   d="scan'208";a="509402113"
 Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
-  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 15 Jul 2026 17:20:00 +0000
+  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 15 Jul 2026 17:27:02 +0000
 Received: from bgl-ads-3413.cisco.com (bgl-ads-3413.cisco.com [173.39.60.50])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id 1021F180001FE
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 17:20:00 +0000 (GMT)
+	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id 833F31800026A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 17:27:02 +0000 (GMT)
 Received: by bgl-ads-3413.cisco.com (Postfix, from userid 1795984)
-	id 30D0FCC037D; Wed, 15 Jul 2026 22:49:58 +0530 (IST)
+	id A3E13CC037D; Wed, 15 Jul 2026 22:57:00 +0530 (IST)
 From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-networking][scarthgap][PATCH] mbedtls: set CVE_STATUS for CVE-2025-66442
-Date: Wed, 15 Jul 2026 22:49:52 +0530
-Message-Id: <20260715171952.1143899-1-deeratho@cisco.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] nmap: fix CVE-2026-58058
+Date: Wed, 15 Jul 2026 22:56:53 +0530
+Message-Id: <20260715172653.1153703-1-deeratho@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -78,70 +79,76 @@ X-Outbound-Node: rcdn-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 17:20:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128224
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 17:27:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128225
 
 From: Deepak Rathore <deeratho@cisco.com>
 
-Analysis:
-- The Mbed TLS advisory states the issue occurs when LLVM
-  select-optimize is enabled. [1]
-- The same advisory also states that Arm/x86 builds with
-  MBEDTLS_HAVE_ASM enabled are not affected. The default mbedtls
-  configuration in this branch enables MBEDTLS_HAVE_ASM.
-- NVD also describes the issue as occurring only with LLVM's
-  select-optimize feature. [2]
-- The mbedtls recipes now evaluate the effective build flags across
-  target, native, and nativesdk variants, handle the supported
-  -mllvm spellings, and only mark the CVE unpatched when the
-  vulnerable LLVM option combination is explicitly enabled and the
-  Arm/x86 MBEDTLS_HAVE_ASM carve-out does not apply.
-- When those conditions are not met, the current mbedtls build
-  configuration is not affected.
-- Hence ignoring/deferred the CVE for now.
+This patch applies the upstream master backport for
+CVE-2026-58058. The upstream fix commit is referenced in [1],
+and the public CVE advisory is referenced in [2].
 
-Reference:
-[1] https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-03-compiler-induced-constant-time-violations/
-[2] https://nvd.nist.gov/vuln/detail/CVE-2025-66442
+[1] https://github.com/nmap/nmap/commit/bb6754e76bb1686315008e1aa1c40202a513fb83
+[2] https://github.com/advisories/GHSA-wxvj-hc4r-fq45
 
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 0eda0f3c556de7ab1c3b03b6f38eb9b4ac29a2d7)
 Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 ---
- .../mbedtls/mbedtls_3.6.6.bb                    | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ .../nmap/files/CVE-2026-58058.patch           | 33 +++++++++++++++++++
+ meta-oe/recipes-security/nmap/nmap_7.80.bb    |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.6.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.6.bb
-index cedbc90ccf..67f522f415 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.6.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.6.bb
-@@ -56,8 +56,25 @@ ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-+MBEDTLS_CVE_2025_66442_FLAGS = "${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${TOOLCHAIN_OPTIONS}"
-+MBEDTLS_CVE_2025_66442_FLAGS:append:class-native = " ${BUILD_CFLAGS} ${BUILD_CXXFLAGS} ${BUILD_CPPFLAGS}"
-+MBEDTLS_CVE_2025_66442_FLAGS:append:class-nativesdk = " ${BUILDSDK_CFLAGS} ${BUILDSDK_CXXFLAGS} ${BUILDSDK_CPPFLAGS}"
-+MBEDTLS_CVE_2025_66442_ARCH = "${TARGET_ARCH}"
-+MBEDTLS_CVE_2025_66442_ARCH:class-native = "${BUILD_ARCH}"
+diff --git a/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch b/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
+new file mode 100644
+index 000000000..653caee7e
+--- /dev/null
++++ b/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
+@@ -0,0 +1,33 @@
++From ad19a059ec459552d9c4ba2ffa40e0cb2e7034bb Mon Sep 17 00:00:00 2001
++From: dmiller <dmiller@e0a8ed71-7df4-0310-8962-fdc924857419>
++Date: Thu, 25 Jun 2026 21:58:49 +0000
++Subject: [PATCH] Fix extension header parsing. Credit: Himanshu Anand
 +
- CVE_PRODUCT = "mbed_tls"
- 
-+CVE_STATUS[CVE-2025-66442] = "${@ \
-+    'unpatched' if ( \
-+        ((('-mllvm' in d.getVar('MBEDTLS_CVE_2025_66442_FLAGS').split() and \
-+           ('--disable-select-optimize=false' in d.getVar('MBEDTLS_CVE_2025_66442_FLAGS').split() or \
-+            '-disable-select-optimize=false' in d.getVar('MBEDTLS_CVE_2025_66442_FLAGS').split())) or \
-+          '-mllvm=--disable-select-optimize=false' in d.getVar('MBEDTLS_CVE_2025_66442_FLAGS').split() or \
-+          '-mllvm=-disable-select-optimize=false' in d.getVar('MBEDTLS_CVE_2025_66442_FLAGS').split()) and \
-+         d.getVar('MBEDTLS_CVE_2025_66442_ARCH') not in ('aarch64', 'aarch64_be', 'arm', 'armeb', 'i586', 'i686', 'x86_64'))) \
-+    else 'not-applicable-config: CVE applies only when LLVM select-optimize is enabled and the Arm/x86 MBEDTLS_HAVE_ASM carve-out does not apply; current mbedtls build configuration does not meet those conditions' \
-+}"
++CVE: CVE-2026-58058
++Upstream-Status: Backport [https://github.com/nmap/nmap/commit/bb6754e76bb1686315008e1aa1c40202a513fb83]
 +
- # Strip host paths from autogenerated test files
- do_compile:append() {
- 	sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
++(cherry picked from commit bb6754e76bb1686315008e1aa1c40202a513fb83)
++Signed-off-by: Deepak Rathore <deeratho@cisco.com>
++---
++ libnetutil/netutil.cc | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/libnetutil/netutil.cc b/libnetutil/netutil.cc
++index e11b3f103..4d26f3c41 100644
++--- a/libnetutil/netutil.cc
+++++ b/libnetutil/netutil.cc
++@@ -687,11 +687,13 @@ static const void *ipv6_get_data_primitive(const struct ip6_hdr *ip6,
++   *nxt = ip6->ip6_nxt;
++   p += sizeof(*ip6);
++   while (p < end && ipv6_is_extension_header(*nxt)) {
++-    if (p + 2 > end)
+++    if (p + 8 > end)
++       return NULL;
++     *nxt = *p;
++     p += (*(p + 1) + 1) * 8;
++   }
+++  if (p >= end)
+++    return NULL;
++ 
++   *len = end - p;
++   if (upperlayer_only && !ipv6_is_upperlayer(*nxt))
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.80.bb b/meta-oe/recipes-security/nmap/nmap_7.80.bb
+index 18b1a5024..afae38fb7 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.80.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.80.bb
+@@ -13,6 +13,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
+            file://0001-Make-ndiff-support-python3.patch \
+            file://0001-configure.ac-make-ndiff-depend-on-python3.patch \
+            file://nmap-rename-enum-PCAP_SOCKET.patch \
++           file://CVE-2026-58058.patch \
+            "
+ 
+ SRC_URI[md5sum] = "d37b75b06d1d40f27b76d60db420a1f5"
 -- 
 2.35.6
 
