@@ -1,103 +1,119 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76A90C4450E
-	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 09:36:19 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2664.1784108170750837789
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC61C4450C
+	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 10:39:40 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3413.1784111975501937191
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2026 02:36:11 -0700
+ Wed, 15 Jul 2026 03:39:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kNhesPZj;
- spf=pass (domain: konsulko.com, ip: 209.85.221.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4720f3bf164so253927f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 02:36:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1784108169; x=1784712969; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OSY5eO7zch0hfDvLUC8DDrF59PbIZMMb2hX+oDFndPQ=;
-        b=kNhesPZj6uJ2zAxR4a655TFb9LQV9kyI3X0AgwUKxXb8D6ptdAwnPg4KfKBInA2Qh8
-         LelDH9uQ/4CWiDeWXIfRw0NxbdPT9y5Puqm+4KQicYxqhh/pEGvdAUV11QHFJbOOM7Tu
-         O4lFuWPHqWouBpwgBOm1QJ/sdejUrJ5Z0h6Aw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784108169; x=1784712969;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OSY5eO7zch0hfDvLUC8DDrF59PbIZMMb2hX+oDFndPQ=;
-        b=TTWqtu/5LBmIAXuJwi02Sep9teiZxhHWp61sNqUIqe41mnn53myrbouxuH6o4VDuZ0
-         67eDhMFN4wJRCioJjZT437C/JQ/hF5km6ZUnPc9zh4hP66UCs1T7I53bbuPhZHShPEPq
-         mnE19ZxgokW6I84/qp+FD1dgwAljGIosUmgXYZrjHkkQjXl08B25c87L+DlI+yiXiFZ+
-         dOThsg6sJTntrCgPAcvUQZzNrOQwDFGz9AEab9gMF3wD1LqabcvuMhfe+kAfHsp+aTfx
-         YjsGGUjpX+PTpJWNEFpiYz+Nrgu5QlTqdd0rMuG7X/TF+1r8MAbm7kn4DccUTiGUyGL8
-         oYsQ==
-X-Gm-Message-State: AOJu0Yw+uULwO0OxGiQzUMSJHI3vBM+eZRrgclefWZoHsyLKNCsxGQ/S
-	stNyvv8AQ5frw01FNwgysXrhuZjPTm1i8gS8swUuGMZ+Y42yMpjRIp/FVIwSz0MDib36RiiUEva
-	FM0kq
-X-Gm-Gg: AfdE7cmua54VBnNU3kqhW4BF3Ah906gq1NpqJ1B7yQVCRsJOLDHtWuUy8Cs7vYlWm+A
-	iPNBB6qK4WHDoeNk0RBL58zN3VHTbtOEZw0TcTL4f6/SkoENB1W4LFbHnGId/kagtuP4P3ofyEv
-	hda2RBKfPLKxMAUvUDl/EBsRP+CVLF9uoIgQ7VI5KUTgeZqCLF3sC7lbmyuULkIFHdmSjjL5XgO
-	uNWUPH2IzxKMc4mJyR6d8nc5LQeRvvDiqSCHKD/jb43pLG9/DubVFqOMeuxd5+JkrTsYh83EB1D
-	YUGtI2NfyrdcbWrOAwDMvBrFlLttaRhWCW8Ri0BV3Jl+1PLa7Rv3JXSIGTlO5PP9SJ5Xv6Ua595
-	mMNGjLG+Kv8dEDmYWzAhshaIPqS8wfHUy8p7C0PqjPFJZ8/UQJt5Kepjpo3MCKW+Dd+dsyAteHt
-	fGmnMq5NYOlGbtEMi6xS5oWDqESEPpNnhfSq+nsHnMxri8S2qrM0euodWWCfy3izzBang+9MirP
-	EiAxEjHD5BFYr8hTMrY7RqMJwggUNWDWrsUvoRvFA==
-X-Received: by 2002:a05:6000:4713:b0:473:41c6:f1b9 with SMTP id ffacd0b85a97d-47f2dc863cdmr18860008f8f.11.1784108168861;
-        Wed, 15 Jul 2026 02:36:08 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f464c7c96sm15032791f8f.33.2026.07.15.02.36.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Jul 2026 02:36:08 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ccGd01vZ;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1784111979; x=1815647979;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=E2u9HMF6swRx7/4GlUdmxY5G8GSXLM9E/70FnvrGlIQ=;
+  b=ccGd01vZTLIEpSi1y1POZsYB3q1HpQr3Q4R98MOQrOi3ncB9HpSU95AQ
+   l5hfyzp1zobX33qkPqgzKDW7Y5XPRy575aPgqjCA2mlw81SvpIlxV2bJf
+   1BjYlIppRsqjl9RQlW0l0Jp6+oZipeEa8V+wwuz+6Yjw89nD+ZBfxUQl9
+   TDBihQ+04p37XUnUn6q5q2R9nunWF9W14+CMisYVKWg/AW/7GQNbjRgoT
+   UX+aUbmh9fbf20JIVHAxpvZGcJ0Vax9NkQ9aD2Zd665Vmq47hdIbodpXu
+   yDw0I6+MexbPxP4ec4ql/HxEVlmPTJ3SQftJ/ofHyW0UkIwb6Yz2bWrza
+   g==;
+X-CSE-ConnectionGUID: 73uFUyFlQGyf8OE41GVNOQ==
+X-CSE-MsgGUID: TyFo/0lxRJyuc+TkdZAwVg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="247440345"
+X-IronPort-AV: E=Sophos;i="6.25,165,1779116400"; 
+   d="scan'208";a="247440345"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 19:39:39 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id F1EB3100014F
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:39:35 +0000 (UTC)
+Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id A20B0102095F
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:39:35 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id B16711800B81;
+	Wed, 15 Jul 2026 10:39:33 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-term: Upgrade 2.5 -> 3.0
-Date: Wed, 15 Jul 2026 12:36:01 +0300
-Message-ID: <20260715093602.2749784-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260715093602.2749784-1-leon.anavi@konsulko.com>
-References: <20260715093602.2749784-1-leon.anavi@konsulko.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/44] fastfetch: upgrade 2.65.2 -> 2.66.0
+Date: Wed, 15 Jul 2026 18:38:32 +0800
+Message-ID: <20260715103914.2120-2-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <20260715103914.2120-1-wangmy@fujitsu.com>
+References: <20260715103914.2120-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 09:36:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128172
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:39:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128175
 
-Upgrade to release 3.0:
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-- Remove deprecated license classifier.
-- Upgrade .readthedocs.yaml.
-- Upgrade sphinx and sphinx-rtd-theme in docs extra.
-- Require Python >= 3.5.
+Changes:
+=========
+CPU package count is no longer reported in the default output.
+Users can still print it in custom formats via {packages}
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Bugfixes:
+==========
+Fixed compatibility with WSL 2.9.3 (#2433, WM, Linux)
+Fixed accurate AMD GPU names are not queried in driverSpecific mode (GPU, Linux)
+Fixed GPU core counting for Apple Silicon GPU on Asahi Linux (GPU, Linux)
+Some internal cleanups and optimizations
+
+Features:
+=========
+Added Astra Linux version detection (OS, Linux)
+Improved performance of Windows PowerShell version detection (Shell, Windows)
+Improved performance of Media module on macOS (Media, macOS)
+Added proxmox backup server detection (#2443, OS, Linux)
+
+Logos:
+======
+Added Flatcar, Azure Linux
+Added Chimera_small, Chimera2, Parabola2_small, PostmarketOS2, Qubes_small
+Updated linuxmint_small
+Cleaned up distro names
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-term_2.5.bb => python3-term_3.0.bb}         | 2 +-
+ .../fastfetch/{fastfetch_2.65.2.bb => fastfetch_2.66.0.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-term_2.5.bb => python3-term_3.0.bb} (74%)
+ rename meta-oe/recipes-support/fastfetch/{fastfetch_2.65.2.bb => fastfetch_2.66.0.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-term_2.5.bb b/meta-python/recipes-devtools/python/python3-term_3.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-term_2.5.bb
-rename to meta-python/recipes-devtools/python/python3-term_3.0.bb
-index fe0aabf0ff..b4f801bf4d 100644
---- a/meta-python/recipes-devtools/python/python3-term_2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-term_3.0.bb
-@@ -3,7 +3,7 @@ SECTION = "devel/python"
- LICENSE = "Python-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d90e2d280a4836c607520383d1639be1"
+diff --git a/meta-oe/recipes-support/fastfetch/fastfetch_2.65.2.bb b/meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb
+similarity index 98%
+rename from meta-oe/recipes-support/fastfetch/fastfetch_2.65.2.bb
+rename to meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb
+index fb56556ff3..8835e3d85d 100644
+--- a/meta-oe/recipes-support/fastfetch/fastfetch_2.65.2.bb
++++ b/meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
+ DEPENDS = "yyjson"
  
--SRC_URI[sha256sum] = "846fda941dbb8a7c9f246e99bf5ee731910fc4a4cc54b7e36457c133c9f6b78b"
-+SRC_URI[sha256sum] = "a6a81535e68fd98d25b1e2a1dff15400c5678e7f942e2d5bb5bde56784534d98"
+ SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
+-SRCREV = "0e90f3a7d4ac5a7857a968a6f52ea1205be5f404"
++SRCREV = "08698098579bb8b043b0a343159b8018f5cea4fc"
  
- inherit pypi python_setuptools_build_meta
+ inherit cmake pkgconfig
  
 -- 
-2.47.3
+2.43.0
 
 
