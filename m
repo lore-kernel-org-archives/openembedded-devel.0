@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C536C4450E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E2D9C4450C
 	for <webhook@archiver.kernel.org>; Wed, 15 Jul 2026 10:40:42 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3431.1784112035952588858
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3453.1784112040733874582
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2026 03:40:36 -0700
+ Wed, 15 Jul 2026 03:40:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=j7m9iqrC;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=b482Cjau;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1784112036; x=1815648036;
+  t=1784112041; x=1815648041;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qDHVQPxHal2O2dOvQDPdUcUFH9GXHdScgg0jNVKW+5s=;
-  b=j7m9iqrCtNRXL5GUFSYLj1t0wXZRpjNOTUn6kqh0QfI95v6jGKYdkVzU
-   7tG1MkKMUAASma0jr6QRHIhV1hW5dyKNwUdRyHTw8KZbiNgSrgwNtHyJA
-   nMni9/ll7kVrWao2QCDTr5c1ipJp+D69UivMLny5f3I99S9mMF2OQQh0e
-   XK58SpQM0H7DTgKy7uQvYzJOpDLxqMvYy8s+wtuXyqbUh6YSMmdu07TjR
-   BRprG8hKafTg4kb/JtuIkrGKgiWf+TIcXZvx0gpzRGjpeFigP0RId/Gih
-   1zzmJJ/QtgSJdPiSTd7GKzsTsThCz3SMObnKfIZiWdlau8j/8MYWYJAyB
-   w==;
-X-CSE-ConnectionGUID: AJyKM1XZQaS1KE519rhVeQ==
-X-CSE-MsgGUID: +2kTFsAwScqMihNDP/sYPw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="247518954"
+  bh=9sWVvc6KG797RZQM9XeYyrOV6aAdKErGHsN+6svcxBw=;
+  b=b482CjaumpF5Q1YCbKvr31JXvURuWU/kkzaYP2Unvelc6zDlregsxC37
+   zsacq5JEyokwpWDVI9h+csl7ufMC0/5GmEzvSSbFr6GxisRpU8Q0BtBWK
+   qmKLZWr1d6wlqxG12e+/+lhcmBitE5tqAdphKNy/fXN9IwSOmAmVXxZLL
+   T882uSoU17LUwLjY8w1sUOjOAcbZMGIsjw2KaK0LtK9rfKvN4eOJDDWvT
+   /nSU5DbqZiI+MqD2voObHgSATfAp/bmfOblPlGs1MMqB45So0JYUYFqmr
+   yKCaE20d+etnRcZlHqzb+XxQdSU14CuYTNcgWa3CnwjzFEb3gR6fvGjFE
+   Q==;
+X-CSE-ConnectionGUID: TL5vyot6TB6uuVyk6cQA8w==
+X-CSE-MsgGUID: Fx9NrVXOQV+RWX1Gkgcbaw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="233681264"
 X-IronPort-AV: E=Sophos;i="6.25,165,1779116400"; 
-   d="scan'208";a="247518954"
-Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 19:40:35 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+   d="scan'208";a="233681264"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 19:40:39 +0900
+Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 537D45521
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:34 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id E7E26C00569
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:38 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id F1C5F1C00152
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:33 +0000 (UTC)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 9DCC4148CE4E
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:38 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 0169B1800B81;
-	Wed, 15 Jul 2026 10:40:31 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id B70E41801122;
+	Wed, 15 Jul 2026 10:40:36 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 37/44] xlsatoms: upgrade 1.1.4 -> 1.1.5
-Date: Wed, 15 Jul 2026 18:39:07 +0800
-Message-ID: <20260715103914.2120-37-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 40/44] xrefresh: upgrade 1.1.0 -> 1.1.1
+Date: Wed, 15 Jul 2026 18:39:10 +0800
+Message-ID: <20260715103914.2120-40-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260715103914.2120-1-wangmy@fujitsu.com>
 References: <20260715103914.2120-1-wangmy@fujitsu.com>
@@ -61,38 +61,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2026 10:40:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128210
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128213
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Copyright year updated to 2009
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../xorg-app/{xlsatoms_1.1.4.bb => xlsatoms_1.1.5.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xlsatoms_1.1.4.bb => xlsatoms_1.1.5.bb} (67%)
+ .../xorg-app/{xrefresh_1.1.0.bb => xrefresh_1.1.1.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xrefresh_1.1.0.bb => xrefresh_1.1.1.bb} (80%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.4.bb b/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.5.bb
-similarity index 67%
-rename from meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.4.bb
-rename to meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.5.bb
-index ad06612d5e..353ce1b42b 100644
---- a/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.5.bb
-@@ -5,10 +5,10 @@ HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/xlsatoms/"
- DESCRIPTION = "Xlsatoms lists the interned atoms defined on an X11 server"
- SECTION = "x11/app"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2b08d9e2e718ac83e6fe2b974d4b5fd8"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b5c50f6b3acc044e9a0cca8b74c8eb93"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.0.bb b/meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.1.bb
+similarity index 80%
+rename from meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.0.bb
+rename to meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.1.bb
+index 12d05b1307..f9a8d42ef2 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.0.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xrefresh_1.1.1.bb
+@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dad633bce9c3cd0e3abf72a16e0057cf"
  
- DEPENDS += "libxmu"
  BBCLASSEXTEND = "native"
  
+-SRC_URI[sha256sum] = "29ed592d5ece35a3029004d8c46f3002f92970870a96c11e38baf7f1122b8b5f"
++SRC_URI[sha256sum] = "e947048130f6300e8be86573af8f225b486884fac14fcfe01bd913b41fa73bd3"
  SRC_URI_EXT = "xz"
--SRC_URI[sha256sum] = "f4bfa15f56c066d326a5d5b292646708f25b9247506840b9047cd2687dcc71b7"
-+SRC_URI[sha256sum] = "9ac9400328fbeffe15c9d94a90dedb90d09dcaa9d51482efabc55b33a736e317"
 -- 
 2.43.0
 
