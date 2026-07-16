@@ -2,932 +2,1898 @@ Return-Path: <lianux.mm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB697C44501
-	for <webhook@archiver.kernel.org>; Thu, 16 Jul 2026 08:08:54 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7917.1784189334288432002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2F39C4450A
+	for <webhook@archiver.kernel.org>; Thu, 16 Jul 2026 08:09:04 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7918.1784189338086032953
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2026 01:08:54 -0700
+ Thu, 16 Jul 2026 01:08:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Jna60TOi;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: lianux.mm@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2cab973140bso76482595ad.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 01:08:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=b27ipAcF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: lianux.mm@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2cacb8416a1so29962055ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 01:08:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784189334; x=1784794134; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3k6hbS0a/BJtFciAM5jZtgTS1AU/qKEhgdNJRvSnX6g=;
-        b=Jna60TOiTCxGP+6L8izvi3osUMNODvSm7GqzavSH3OY4NhflOSkRvwO84WwxqRETN0
-         QZKoEKdfjOsOtOfPeTJV66ztp5wPcf/FUnv4bMQG1N1HabSverCq6aRsZ+czp52dtkZr
-         o7eNdVdQWIIqkaq3LwFVfCLV2f/Oq/elz2SoovYGmLj1VKEjyX/7ThKHFYQCqe4nD88p
-         byImO60Zh40n4cNgmICqe+eFaOaV0CQW0yJZm0yzZKB8YjU38OcLjoyQeZo4CONPbVq0
-         fj3MQfRbbmVZd3FqrAGToM0ybzr4MYILp7x6VJStvBBLrjMEwyb5xY9MmJr80cxKnpbf
-         JkFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784189334; x=1784794134;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1784189337; x=1784794137; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3k6hbS0a/BJtFciAM5jZtgTS1AU/qKEhgdNJRvSnX6g=;
-        b=hqZu8g4uHdp/JRpXnG46ceFxePucIBpZ5zooOCgJjEoKjNVlAxdIC1IgPKS76mwD37
-         +eTj+7m1jASq5q0CK7NwfgRDZRYkolUpygxUMr4/ktdS0daukXN4J5Q4ZQ1bJWf7RHV7
-         jcRyzkjEiSS2VCxQ2oSGsevE8ZgX9T+dug+aga+BX+mvS48bJmIdY2+xSWb3dBG5VvVs
-         9PvotBS+8scbqo6lJj4nuzEDuker8/dOLGibm6aOnx2Cnpz3ioZulT3pcKsDmxnJJoxL
-         o75HzrZhr6Q16POExD3LL9dO/cmrFxoCMpUhcIIKeOxdOIBgk2prcH9kxoBS/MVuqUP0
-         cV0w==
-X-Gm-Message-State: AOJu0YxTO312nL/RPPm98fIvGGJYsvekQi3HhiSthOQGKK7JQcKq6hcT
-	x+jfem3qBbuq08dd/FtESGXCsieIPFaa6hAPwVlAr7ygau+ootoK48gwKVhhbbJ5T4F2OQ==
-X-Gm-Gg: AfdE7clv1BQJrWGe5ldIvK4aB/WnfCHwU1NURIfrFcbbLeXvvann00RXfJTXskJpMR9
-	JFx6/otFgBl7E495hjjFtXsYQWOGsHCyVo95SPN8tyQ6RG0UqB4oVYtH1ujlWma3u0lKhYxB3ER
-	tEE5gRERyBpLWwWWsW4w0hZxk5G90q2dKC9A3w30Gi9WkvSqkiSMSiIF5oHywPpZ6BSU2LFBTiA
-	j8UTNJiVcc7xrXI2/bGiXCjKPqAeZoCRUP1PaRuIC/uHRyaa1yBwlktDSTphOSEuUc4/oekp8gh
-	LEDDVt9xhtKWNZxVzzVBnYk09D1FlOsP0DlUYPBRT4ytfL4hoiBTwfblpAYcownoxjEP4OF70dU
-	pfPUUqUo053555zdrE5IcKlKSgnUC89ftc8W7fih99W6ueZbY+lHIIoO1TNaAHY2G+D/5bwre7J
-	ckySzdDr9itA==
-X-Received: by 2002:a17:902:cccb:b0:2cc:e620:e307 with SMTP id d9443c01a7336-2cf03c3a4a1mr57918615ad.20.1784189333273;
-        Thu, 16 Jul 2026 01:08:53 -0700 (PDT)
+        bh=qfR7vjFfncykti69vTWuxd3pPgRKMTh0unvB4ikUbns=;
+        b=b27ipAcFFX8FK7zawk3EGiu1U0C5z2PL5EAsfd1sb7hPOzL5ZTbjCew1LLebLSktRe
+         zQmr1eXS7ecbOiZ1tjibC5TliKkFJUvBG7QRok/Yiqn3hAKoy8qaNyMENU9HKHzd/keq
+         Vpii72RJt4ZCcUffPVxZ2BaOgDcmjiivDO3NP3ylXk31NVuspWvfO72+kYBObRfV7IHY
+         7bd3+0Gv1udgFQms9GmfjhEgcw/Df52Mz+zGfuAeLzlIVCemIijR5Bqkbbsq+NNklPT7
+         3Cwa+VtsEfnJbliE3J7xpyf85Xi/2zoiVpqSxIisODiGUoaAIQfdljPDLQropCQGCSFW
+         DlKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784189337; x=1784794137;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qfR7vjFfncykti69vTWuxd3pPgRKMTh0unvB4ikUbns=;
+        b=EDdrYH6NGDaQM5fEldoC9NiIkZ6SfS8ZLKEoW+iOI51pOLZtxVa3NexE34LE4ZNWcu
+         9GbA+HpdKTqvkH7ol+psms4QywFTJsnEj59jg54iONZgJOBNdWWjUs4Rfbe9YAfGuld7
+         KJkg77GWBAdNmDEE5Id3LDqai8ShDXTDT/tKK4qDh+7y0T1ezqPU02vwt9YgyJ45NN2M
+         ArXKv2DCzzN/SfgWJaFsOUkQ7kVVEDnN+OZtsfNnXSNDMEMMLXPpfGPWwpOVn0bXuTUD
+         FULZOlg7T8MOZd3zrjRN6aWC2gjBScCZ1Mmz4HRTTcJwYbTjAJ3oDDaOpZDwl/W8FcI3
+         fgnA==
+X-Gm-Message-State: AOJu0Yzo0kGbf7+/3MfNBRXD9fdE5y3I02ig2xbH8Fn/htoK2isQbf7z
+	VSO01Cg4u2zRSzWkodqitr1PYeZt101B3rhEvzmBOc9hdSdP4R6+YXnJxhXvJHBDPy9sUw==
+X-Gm-Gg: AfdE7cnx6mYJFKti6cOobZBaSLkCmzwm9dxNJTbuSNmGng0ZUFN8Bv3wfQzveuVU5R4
+	xHcms558ovuCzSxxVuvPNOxbaDjxyz9WCiOdsjqUlMZyQGNi4ZJ9a52ItgFGKqgyrz14uSclktm
+	6dLZUXrA62MzsLHsPAiPSay6sy2rse47hCPMN6cU9M0uEAy2VyhYvDZpLxiBJREHq9ymnFq9zkG
+	opBuHEkSQvbTrSYTxJaf6IaEQQY+rvWv2Z0I0gtkRlYw5v6Ym8pS2b9BiDVj30m9Op2hZ+x7RjT
+	mNTYSd2JHr37uN1wBQCrcUyoLpDWhIurkE2O4J4ZZaiAI0edQCX1kxO8x7yKgPhkDf7cTLy61ZF
+	CmDzD/WGniPVKVhbJSPK//BnbmOwMlJu7k5c2bvsnbOLmNXxt3O4EzxFAs+0s0sXgVpbInMTq82
+	qjR3gNqSyEmg==
+X-Received: by 2002:a17:902:f787:b0:2ce:d957:59c4 with SMTP id d9443c01a7336-2ced9575addmr147317695ad.6.1784189336364;
+        Thu, 16 Jul 2026 01:08:56 -0700 (PDT)
 Received: from localhost.localdomain ([2605:a141:2231:7698::1])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf105b4f78sm16401185ad.62.2026.07.16.01.08.49
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf105b4f78sm16401185ad.62.2026.07.16.01.08.53
         (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Thu, 16 Jul 2026 01:08:52 -0700 (PDT)
+        Thu, 16 Jul 2026 01:08:55 -0700 (PDT)
 From: Lian Wang <lianux.mm@gmail.com>
 X-Google-Original-From: Lian Wang <lianux.wang@processmission.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Lian Wang <lianux.wang@processmission.com>
-Subject: [PATCH 1/2] wolfssl: upgrade 5.7.2 -> 5.9.2
-Date: Thu, 16 Jul 2026 16:08:39 +0800
-Message-ID: <20260716080840.19806-1-lianux.wang@processmission.com>
+Subject: [PATCH 2/2] opensc: upgrade 0.25.1 -> 0.27.1
+Date: Thu, 16 Jul 2026 16:08:40 +0800
+Message-ID: <20260716080840.19806-2-lianux.wang@processmission.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260716080840.19806-1-lianux.wang@processmission.com>
+References: <20260716080840.19806-1-lianux.wang@processmission.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 08:08:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128230
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 08:09:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128231
 
-- Drop 9 CVE patches (CVE-2025-7394, CVE-2025-7395) fixed upstream
-- All security fixes included in 5.9.2 release
+- Drop 9 CVE patches and 1 PR patch all fixed upstream in 0.27.0
+- CVE-2024-8443, CVE-2025-49010, CVE-2025-66037,
+  CVE-2025-66038, CVE-2025-66215 resolved
+- Switch to master branch as stable-0.25 is obsolete
 
 Signed-off-by: Lian Wang <lianux.wang@processmission.com>
 ---
- .../wolfssl/files/CVE-2025-7394-1.patch       |  46 ---
- .../wolfssl/files/CVE-2025-7394-2.patch       | 275 ------------------
- .../wolfssl/files/CVE-2025-7394-3.patch       | 125 --------
- .../wolfssl/files/CVE-2025-7394-4.patch       |  85 ------
- .../wolfssl/files/CVE-2025-7394-5.patch       |  40 ---
- .../wolfssl/files/CVE-2025-7394-6.patch       |  48 ---
- .../wolfssl/files/CVE-2025-7395-1.patch       |  84 ------
- .../wolfssl/files/CVE-2025-7395-2.patch       |  27 --
- .../wolfssl/files/CVE-2025-7395-3.patch       |  25 --
- .../{wolfssl_5.7.2.bb => wolfssl_5.9.2.bb}    |  11 +-
- 10 files changed, 1 insertion(+), 765 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-1.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-2.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-3.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-4.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-5.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-6.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
- rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.7.2.bb => wolfssl_5.9.2.bb} (78%)
+ ...ixes-for-uninitialized-memory-issues.patch | 1268 -----------------
+ .../opensc/files/CVE-2024-8443-0001.patch     |   60 -
+ .../opensc/files/CVE-2024-8443-0002.patch     |   55 -
+ .../opensc/files/CVE-2025-49010.patch         |   72 -
+ .../opensc/files/CVE-2025-66037.patch         |   35 -
+ .../opensc/files/CVE-2025-66038.patch         |   41 -
+ .../opensc/files/CVE-2025-66215-1.patch       |   29 -
+ .../opensc/files/CVE-2025-66215-2.patch       |   37 -
+ .../opensc/files/CVE-2025-66215-3.patch       |   45 -
+ .../opensc/files/CVE-2025-66215-4.patch       |   62 -
+ .../{opensc_0.25.1.bb => opensc_0.27.1.bb}    |   16 +-
+ 11 files changed, 3 insertions(+), 1717 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-49010.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66037.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66038.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66215-1.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66215-2.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66215-3.patch
+ delete mode 100644 meta-oe/recipes-support/opensc/files/CVE-2025-66215-4.patch
+ rename meta-oe/recipes-support/opensc/{opensc_0.25.1.bb => opensc_0.27.1.bb} (70%)
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-1.patch
+diff --git a/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch b/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
 deleted file mode 100644
-index e561b26..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-1.patch
+index 1c45067..0000000
+--- a/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
 +++ /dev/null
-@@ -1,46 +0,0 @@
--From 6d0ee56813d69eee72108e1dc859743e02f70077 Mon Sep 17 00:00:00 2001
--From: Josh Holtrop <josh@wolfssl.com>
--Date: Thu, 5 Jun 2025 19:48:34 -0400
--Subject: [PATCH] Reseed DRBG in RAND_poll()
+@@ -1,1268 +0,0 @@
+-From: Virendra Thakur <virendrak@kpit.com>
+-Date: Tue, 15 Oct 2024 17:29:19 +0000 (-0600)
+-Subject: Avoid using uninitialized memory
 -
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/0c12337194ee6dd082f082f0ccaed27fc4ee44f5]
--(cherry picked from commit 0c12337194ee6dd082f082f0ccaed27fc4ee44f5)
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+-Avoid using uninitialized memory
+-
+-37 new use-of-uninitialized-memory bugs were found while testing fuzzing harnesses. The bugs were found in these functions:
+-
+-cac_read_file()
+-cardos_match_card()
+-sc_bin_to_hex()
+-strcmp(), from gids_get_identifiers()
+-do_select()
+-bcmp(), from cac_list_compare_path()
+-insert_cert()
+-cardos_lifecycle_get()
+-gids_read_masterfile()
+-sc_pkcs15init_parse_info()
+-piv_get_challenge()
+-asn1_decode()
+-malloc(), from cac_read_file()
+-sc_asn1_decode_object_id()
+-sc_pkcs15emu_sc_hsm_decode_cvc()
+-gemsafe_get_cert_len()
+-process_fcp()
+-dnie_process_fci()
+-iso7816_process_fci()
+-sc_pkcs15_read_file()
+-strlen(), from set_string()
+-asn1_encode_path()
+-msc_extract_rsa_public_key()
+-sc_build_pin()
+-DES_set_key_unchecked(), from openssl_enc()
+-starcos_write_pukey()
+-iasecc_sdo_parse()
+-setcos_generate_key()
+-iasecc_parse_size()
+-iasecc_se_parse()
+-sc_hsm_determine_free_id()
+-asn1_encode_entry()
+-coolkey_rsa_op()
+-sc_asn1_read_tag()
+-do_init_app()
+-sc_pkcs15init_create_pin()
+-sc_asn1_clear_algorithm_id()
+-Reported by Matteo Marini (@Heinzeen)
+-
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/pull/3225/files/ab476044a009003262991c065b792baa053c7be5]
+-
+-CVE: CVE-2024-45615 CVE-2024-45616 CVE-2024-45617 CVE-2024-45618 CVE-2024-45619 CVE-2024-45620
+-Hunk present in card-entersafe.c and card-gids.c are refresehed base on codebase.
+-
+-From f25c61dae98ebfc7eb81b48f002621663cfcf9cb Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Mon, 20 May 2024 21:19:15 +0200
+-Subject: [PATCH 01/30] gids: Avoid using uninitialized memory
+-
+-Thanks Matteo Marini for report
+-
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
 ----
-- src/ssl.c | 20 +++++++++++++++++---
-- 1 file changed, 17 insertions(+), 3 deletions(-)
--
--diff --git a/src/ssl.c b/src/ssl.c
--index 9ba891d62..a1421d523 100644
----- a/src/ssl.c
--+++ b/src/ssl.c
--@@ -24159,11 +24159,25 @@ int wolfSSL_RAND_poll(void)
--         return  WOLFSSL_FAILURE;
--     }
--     ret = wc_GenerateSeed(&globalRNG.seed, entropy, entropy_sz);
---    if (ret != 0){
--+    if (ret != 0) {
--         WOLFSSL_MSG("Bad wc_RNG_GenerateBlock");
--         ret = WOLFSSL_FAILURE;
---    }else
---        ret = WOLFSSL_SUCCESS;
--+    }
--+    else {
--+#ifdef HAVE_HASHDRBG
--+        ret = wc_RNG_DRBG_Reseed(&globalRNG, entropy, entropy_sz);
--+        if (ret != 0) {
--+            WOLFSSL_MSG("Error reseeding DRBG");
--+            ret = WOLFSSL_FAILURE;
--+        }
--+        else {
--+            ret = WOLFSSL_SUCCESS;
--+        }
--+#else
--+        WOLFSSL_MSG("RAND_poll called with HAVE_HASHDRBG not set");
--+        ret = WOLFSSL_FAILURE;
--+#endif
--+    }
-- 
--     return ret;
-- }
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-2.patch
-deleted file mode 100644
-index 883a5a1..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-2.patch
-+++ /dev/null
-@@ -1,275 +0,0 @@
--From b506ed4aeb2c86788422427624a03eb9bda52efc Mon Sep 17 00:00:00 2001
--From: JacobBarthelmeh <jacob@wolfssl.com>
--Date: Tue, 10 Jun 2025 12:49:08 -0600
--Subject: [PATCH] add sanity checks on pid with RNG
--
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/31490ab813a5aac096f50800c26c690d8ae586d2]
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- CMakeLists.txt             |   1 +
-- configure.ac               |   4 +-
-- src/ssl.c                  |  40 +++++++++++-
-- wolfcrypt/src/random.c     | 126 ++++++++++++++++++++++---------------
-- wolfssl/wolfcrypt/random.h |   3 +
-- 5 files changed, 118 insertions(+), 56 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 4e6f05fc6..910a36648 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -124,6 +124,7 @@ check_function_exists("memset" HAVE_MEMSET)
-- check_function_exists("socket" HAVE_SOCKET)
-- check_function_exists("strftime" HAVE_STRFTIME)
-- check_function_exists("__atomic_fetch_add" HAVE_C___ATOMIC)
--+check_function_exists("getpid" HAVE_GETPID)
-- 
-- include(CheckTypeSize)
-- 
--diff --git a/configure.ac b/configure.ac
--index c973b7e39..43ddd4767 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -125,8 +125,8 @@ AC_CHECK_HEADER(stdatomic.h, [AM_CPPFLAGS="$AM_CPPFLAGS -DWOLFSSL_HAVE_ATOMIC_H"
-- # check if functions of interest are linkable, but also check if
-- # they're declared by the expected headers, and if not, supersede the
-- # unusable positive from AC_CHECK_FUNCS().
---AC_CHECK_FUNCS([gethostbyname getaddrinfo gettimeofday gmtime_r gmtime_s inet_ntoa memset socket strftime atexit])
---AC_CHECK_DECLS([gethostbyname, getaddrinfo, gettimeofday, gmtime_r, gmtime_s, inet_ntoa, memset, socket, strftime, atexit], [], [
--+AC_CHECK_FUNCS([gethostbyname getaddrinfo gettimeofday gmtime_r gmtime_s inet_ntoa memset socket strftime atexit getpid])
--+AC_CHECK_DECLS([gethostbyname, getaddrinfo, gettimeofday, gmtime_r, gmtime_s, inet_ntoa, memset, socket, strftime, atexit, getpid], [], [
-- if test "$(eval echo \$"$(eval 'echo ac_cv_func_${as_decl_name}')")" = "yes"
-- then
--     AC_MSG_NOTICE([    note: earlier check for $(eval 'echo ${as_decl_name}') superseded.])
--diff --git a/src/ssl.c b/src/ssl.c
--index a1421d523..872aed594 100644
----- a/src/ssl.c
--+++ b/src/ssl.c
--@@ -23615,6 +23615,10 @@ int wolfSSL_RAND_Init(void)
--         if (initGlobalRNG == 0) {
--             ret = wc_InitRng(&globalRNG);
--             if (ret == 0) {
--+            #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
--+                FIPS_VERSION3_LT(6,0,0)))
--+                currentPid = getpid();
--+            #endif
--                 initGlobalRNG = 1;
--                 ret = WOLFSSL_SUCCESS;
--             }
--@@ -24045,8 +24049,30 @@ int wolfSSL_RAND_pseudo_bytes(unsigned char* buf, int num)
--     return ret;
-- }
-- 
---/* returns WOLFSSL_SUCCESS if the bytes generated are valid otherwise
--- * WOLFSSL_FAILURE */
--+#if defined(HAVE_GETPID) && defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)))
--+/* In older FIPS bundles add check for reseed here since it does not exist in
--+ * the older random.c certified files. */
--+static pid_t currentPid = 0;
--+
--+/* returns WOLFSSL_SUCCESS on success and WOLFSSL_FAILURE on failure */
--+static int RandCheckReSeed()
--+{
--+    int ret = WOLFSSL_SUCCESS;
--+    pid_t p;
--+
--+    p = getpid();
--+    if (p != currentPid) {
--+        currentPid = p;
--+        if (wolfSSL_RAND_poll() != WOLFSSL_SUCCESS) {
--+            ret = WOLFSSL_FAILURE;
--+        }
--+    }
--+    return ret;
--+}
--+#endif
--+
--+/* returns WOLFSSL_SUCCESS (1) if the bytes generated are valid otherwise 0
--+ * on failure */
-- int wolfSSL_RAND_bytes(unsigned char* buf, int num)
-- {
--     int     ret = 0;
--@@ -24089,6 +24115,16 @@ int wolfSSL_RAND_bytes(unsigned char* buf, int num)
--          */
--         if (initGlobalRNG) {
--             rng = &globalRNG;
--+
--+        #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
--+                FIPS_VERSION3_LT(6,0,0)))
--+            if (RandCheckReSeed() != WOLFSSL_SUCCESS) {
--+                wc_UnLockMutex(&globalRNGMutex);
--+                WOLFSSL_MSG("Issue with check pid and reseed");
--+                return ret;
--+            }
--+        #endif
--+
--             used_global = 1;
--         }
--         else {
--diff --git a/wolfcrypt/src/random.c b/wolfcrypt/src/random.c
--index 89c7411c9..b440e274b 100644
----- a/wolfcrypt/src/random.c
--+++ b/wolfcrypt/src/random.c
--@@ -1599,6 +1599,9 @@ static int _InitRng(WC_RNG* rng, byte* nonce, word32 nonceSz,
-- #else
--     rng->heap = heap;
-- #endif
--+#ifdef HAVE_GETPID
--+    rng->pid = getpid();
--+#endif
-- #if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
--     rng->devId = devId;
--     #if defined(WOLF_CRYPTO_CB)
--@@ -1849,6 +1852,63 @@ int wc_InitRngNonce_ex(WC_RNG* rng, byte* nonce, word32 nonceSz,
--     return _InitRng(rng, nonce, nonceSz, heap, devId);
-- }
-- 
--+#ifdef HAVE_HASHDRBG
--+static int PollAndReSeed(WC_RNG* rng)
--+{
--+    int ret   = DRBG_NEED_RESEED;
--+    int devId = INVALID_DEVID;
--+#if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
--+    devId = rng->devId;
--+#endif
--+    if (wc_RNG_HealthTestLocal(1, rng->heap, devId) == 0) {
--+    #ifndef WOLFSSL_SMALL_STACK
--+        byte newSeed[SEED_SZ + SEED_BLOCK_SZ];
--+        ret = DRBG_SUCCESS;
--+    #else
--+        byte* newSeed = (byte*)XMALLOC(SEED_SZ + SEED_BLOCK_SZ, rng->heap,
--+            DYNAMIC_TYPE_SEED);
--+        ret = (newSeed == NULL) ? MEMORY_E : DRBG_SUCCESS;
--+    #endif
--+        if (ret == DRBG_SUCCESS) {
--+        #ifdef WC_RNG_SEED_CB
--+            if (seedCb == NULL) {
--+                ret = DRBG_NO_SEED_CB;
--+            }
--+            else {
--+                ret = seedCb(&rng->seed, newSeed, SEED_SZ + SEED_BLOCK_SZ);
--+                if (ret != 0) {
--+                    ret = DRBG_FAILURE;
--+                }
--+            }
--+        #else
--+            ret = wc_GenerateSeed(&rng->seed, newSeed,
--+                              SEED_SZ + SEED_BLOCK_SZ);
--+        #endif
--+            if (ret != 0)
--+                ret = DRBG_FAILURE;
--+        }
--+        if (ret == DRBG_SUCCESS)
--+            ret = wc_RNG_TestSeed(newSeed, SEED_SZ + SEED_BLOCK_SZ);
--+
--+        if (ret == DRBG_SUCCESS)
--+            ret = Hash_DRBG_Reseed((DRBG_internal *)rng->drbg,
--+                                   newSeed + SEED_BLOCK_SZ, SEED_SZ);
--+    #ifdef WOLFSSL_SMALL_STACK
--+        if (newSeed != NULL) {
--+            ForceZero(newSeed, SEED_SZ + SEED_BLOCK_SZ);
--+        }
--+        XFREE(newSeed, rng->heap, DYNAMIC_TYPE_SEED);
--+    #else
--+        ForceZero(newSeed, sizeof(newSeed));
--+    #endif
--+    }
--+    else {
--+        ret = DRBG_CONT_FAILURE;
--+    }
--+
--+    return ret;
--+}
--+#endif
-- 
-- /* place a generated block in output */
-- WOLFSSL_ABI
--@@ -1908,60 +1968,22 @@ int wc_RNG_GenerateBlock(WC_RNG* rng, byte* output, word32 sz)
--     if (rng->status != DRBG_OK)
--         return RNG_FAILURE_E;
-- 
--+#ifdef HAVE_GETPID
--+    if (rng->pid != getpid()) {
--+        rng->pid = getpid();
--+        ret = PollAndReSeed(rng);
--+        if (ret != DRBG_SUCCESS) {
--+            rng->status = DRBG_FAILED;
--+            return RNG_FAILURE_E;
--+        }
--+    }
--+#endif
--+
--     ret = Hash_DRBG_Generate((DRBG_internal *)rng->drbg, output, sz);
--     if (ret == DRBG_NEED_RESEED) {
---        int devId = INVALID_DEVID;
---    #if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
---        devId = rng->devId;
---    #endif
---        if (wc_RNG_HealthTestLocal(1, rng->heap, devId) == 0) {
---        #ifndef WOLFSSL_SMALL_STACK
---            byte newSeed[SEED_SZ + SEED_BLOCK_SZ];
---            ret = DRBG_SUCCESS;
---        #else
---            byte* newSeed = (byte*)XMALLOC(SEED_SZ + SEED_BLOCK_SZ, rng->heap,
---                DYNAMIC_TYPE_SEED);
---            ret = (newSeed == NULL) ? MEMORY_E : DRBG_SUCCESS;
---        #endif
---            if (ret == DRBG_SUCCESS) {
---            #ifdef WC_RNG_SEED_CB
---                if (seedCb == NULL) {
---                    ret = DRBG_NO_SEED_CB;
---                }
---                else {
---                    ret = seedCb(&rng->seed, newSeed, SEED_SZ + SEED_BLOCK_SZ);
---                    if (ret != 0) {
---                        ret = DRBG_FAILURE;
---                    }
---                }
---            #else
---                ret = wc_GenerateSeed(&rng->seed, newSeed,
---                                  SEED_SZ + SEED_BLOCK_SZ);
---            #endif
---                if (ret != 0)
---                    ret = DRBG_FAILURE;
---            }
---            if (ret == DRBG_SUCCESS)
---                ret = wc_RNG_TestSeed(newSeed, SEED_SZ + SEED_BLOCK_SZ);
---
---            if (ret == DRBG_SUCCESS)
---                ret = Hash_DRBG_Reseed((DRBG_internal *)rng->drbg,
---                                       newSeed + SEED_BLOCK_SZ, SEED_SZ);
---            if (ret == DRBG_SUCCESS)
---                ret = Hash_DRBG_Generate((DRBG_internal *)rng->drbg, output, sz);
---
---        #ifdef WOLFSSL_SMALL_STACK
---            if (newSeed != NULL) {
---                ForceZero(newSeed, SEED_SZ + SEED_BLOCK_SZ);
---            }
---            XFREE(newSeed, rng->heap, DYNAMIC_TYPE_SEED);
---        #else
---            ForceZero(newSeed, sizeof(newSeed));
---        #endif
---        }
---        else {
---            ret = DRBG_CONT_FAILURE;
---        }
--+        ret = PollAndReSeed(rng);
--+        if (ret == DRBG_SUCCESS)
--+            ret = Hash_DRBG_Generate((DRBG_internal *)rng->drbg, output, sz);
--     }
-- 
--     if (ret == DRBG_SUCCESS) {
--diff --git a/wolfssl/wolfcrypt/random.h b/wolfssl/wolfcrypt/random.h
--index 9dd616328..f472e1f40 100644
----- a/wolfssl/wolfcrypt/random.h
--+++ b/wolfssl/wolfcrypt/random.h
--@@ -183,6 +183,9 @@ struct WC_RNG {
-- #endif
--     byte status;
-- #endif
--+#ifdef HAVE_GETPID
--+    pid_t pid;
--+#endif
-- #ifdef WOLFSSL_ASYNC_CRYPT
--     WC_ASYNC_DEV asyncDev;
-- #endif
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-3.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-3.patch
-deleted file mode 100644
-index e70a3fe..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-3.patch
-+++ /dev/null
-@@ -1,125 +0,0 @@
--From 62a3a4f0b8b307bdacc34204db44627521de4bf9 Mon Sep 17 00:00:00 2001
--From: JacobBarthelmeh <jacob@wolfssl.com>
--Date: Tue, 10 Jun 2025 14:15:38 -0600
--Subject: [PATCH] add mutex locking and compat layer FIPS case
--
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/fbbb6b7707f7f8ae1c38ab68daec0af02ee0208a]
--(cherry picked from commit fbbb6b7707f7f8ae1c38ab68daec0af02ee0208a)
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- src/ssl.c | 62 +++++++++++++++++++++++++++----------------------------
-- 1 file changed, 31 insertions(+), 31 deletions(-)
--
--diff --git a/src/ssl.c b/src/ssl.c
--index 872aed594..f0186b253 100644
----- a/src/ssl.c
--+++ b/src/ssl.c
--@@ -23603,6 +23603,12 @@ static int wolfSSL_RAND_InitMutex(void)
-- 
-- #ifdef OPENSSL_EXTRA
-- 
--+#if defined(HAVE_GETPID) && defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--+/* In older FIPS bundles add check for reseed here since it does not exist in
--+ * the older random.c certified files. */
--+static pid_t currentRandPid = 0;
--+#endif
--+
-- /* Checks if the global RNG has been created. If not then one is created.
--  *
--  * Returns WOLFSSL_SUCCESS when no error is encountered.
--@@ -23616,8 +23622,8 @@ int wolfSSL_RAND_Init(void)
--             ret = wc_InitRng(&globalRNG);
--             if (ret == 0) {
--             #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
---                FIPS_VERSION3_LT(6,0,0)))
---                currentPid = getpid();
--+                FIPS_VERSION3_LT(6,0,0)
--+                currentRandPid = getpid();
--             #endif
--                 initGlobalRNG = 1;
--                 ret = WOLFSSL_SUCCESS;
--@@ -24049,28 +24055,6 @@ int wolfSSL_RAND_pseudo_bytes(unsigned char* buf, int num)
--     return ret;
-- }
-- 
---#if defined(HAVE_GETPID) && defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)))
---/* In older FIPS bundles add check for reseed here since it does not exist in
--- * the older random.c certified files. */
---static pid_t currentPid = 0;
---
---/* returns WOLFSSL_SUCCESS on success and WOLFSSL_FAILURE on failure */
---static int RandCheckReSeed()
---{
---    int ret = WOLFSSL_SUCCESS;
---    pid_t p;
---
---    p = getpid();
---    if (p != currentPid) {
---        currentPid = p;
---        if (wolfSSL_RAND_poll() != WOLFSSL_SUCCESS) {
---            ret = WOLFSSL_FAILURE;
---        }
---    }
---    return ret;
---}
---#endif
---
-- /* returns WOLFSSL_SUCCESS (1) if the bytes generated are valid otherwise 0
--  * on failure */
-- int wolfSSL_RAND_bytes(unsigned char* buf, int num)
--@@ -24114,17 +24098,27 @@ int wolfSSL_RAND_bytes(unsigned char* buf, int num)
--          * have the lock.
--          */
--         if (initGlobalRNG) {
---            rng = &globalRNG;
---
--         #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
---                FIPS_VERSION3_LT(6,0,0)))
---            if (RandCheckReSeed() != WOLFSSL_SUCCESS) {
--+                FIPS_VERSION3_LT(6,0,0)
--+            pid_t p;
--+
--+            p = getpid();
--+            if (p != currentRandPid) {
--                 wc_UnLockMutex(&globalRNGMutex);
---                WOLFSSL_MSG("Issue with check pid and reseed");
---                return ret;
--+                if (wolfSSL_RAND_poll() != WOLFSSL_SUCCESS) {
--+                    WOLFSSL_MSG("Issue with check pid and reseed");
--+                    ret = WOLFSSL_FAILURE;
--+                }
--+
--+                /* reclaim lock after wolfSSL_RAND_poll */
--+                if (wc_LockMutex(&globalRNGMutex) != 0) {
--+                    WOLFSSL_MSG("Bad Lock Mutex rng");
--+                    return ret;
--+                }
--+                currentRandPid = p;
--             }
--         #endif
---
--+            rng = &globalRNG;
--             used_global = 1;
--         }
--         else {
--@@ -24201,6 +24195,11 @@ int wolfSSL_RAND_poll(void)
--     }
--     else {
-- #ifdef HAVE_HASHDRBG
--+        if (wc_LockMutex(&globalRNGMutex) != 0) {
--+            WOLFSSL_MSG("Bad Lock Mutex rng");
--+            return ret;
--+        }
--+
--         ret = wc_RNG_DRBG_Reseed(&globalRNG, entropy, entropy_sz);
--         if (ret != 0) {
--             WOLFSSL_MSG("Error reseeding DRBG");
--@@ -24209,6 +24208,7 @@ int wolfSSL_RAND_poll(void)
--         else {
--             ret = WOLFSSL_SUCCESS;
--         }
--+        wc_UnLockMutex(&globalRNGMutex);
-- #else
--         WOLFSSL_MSG("RAND_poll called with HAVE_HASHDRBG not set");
--         ret = WOLFSSL_FAILURE;
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-4.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-4.patch
-deleted file mode 100644
-index 7d6413f..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-4.patch
-+++ /dev/null
-@@ -1,85 +0,0 @@
--From d7a68e85ebe4705e7345b0e5012c806615cd86c7 Mon Sep 17 00:00:00 2001
--From: JacobBarthelmeh <jacob@wolfssl.com>
--Date: Tue, 10 Jun 2025 16:12:09 -0600
--Subject: [PATCH] add a way to restore previous pid behavior
--
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/47cf634965a3aabe82fd97a8feed9efd6688e34a]
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- src/ssl.c                  | 11 ++++++-----
-- wolfcrypt/src/random.c     |  4 ++--
-- wolfssl/wolfcrypt/random.h |  2 +-
-- 3 files changed, 9 insertions(+), 8 deletions(-)
--
--diff --git a/src/ssl.c b/src/ssl.c
--index f0186b253..e214fa504 100644
----- a/src/ssl.c
--+++ b/src/ssl.c
--@@ -23603,7 +23603,8 @@ static int wolfSSL_RAND_InitMutex(void)
-- 
-- #ifdef OPENSSL_EXTRA
-- 
---#if defined(HAVE_GETPID) && defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--+#if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
--+    defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
-- /* In older FIPS bundles add check for reseed here since it does not exist in
--  * the older random.c certified files. */
-- static pid_t currentRandPid = 0;
--@@ -23621,8 +23622,8 @@ int wolfSSL_RAND_Init(void)
--         if (initGlobalRNG == 0) {
--             ret = wc_InitRng(&globalRNG);
--             if (ret == 0) {
---            #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
---                FIPS_VERSION3_LT(6,0,0)
--+            #if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
--+                defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--                 currentRandPid = getpid();
--             #endif
--                 initGlobalRNG = 1;
--@@ -24098,8 +24099,8 @@ int wolfSSL_RAND_bytes(unsigned char* buf, int num)
--          * have the lock.
--          */
--         if (initGlobalRNG) {
---        #if defined(HAVE_GETPID) && defined(HAVE_FIPS) && \
---                FIPS_VERSION3_LT(6,0,0)
--+        #if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
--+                defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--             pid_t p;
-- 
--             p = getpid();
--diff --git a/wolfcrypt/src/random.c b/wolfcrypt/src/random.c
--index b440e274b..dc89db542 100644
----- a/wolfcrypt/src/random.c
--+++ b/wolfcrypt/src/random.c
--@@ -1599,7 +1599,7 @@ static int _InitRng(WC_RNG* rng, byte* nonce, word32 nonceSz,
-- #else
--     rng->heap = heap;
-- #endif
---#ifdef HAVE_GETPID
--+#if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID)
--     rng->pid = getpid();
-- #endif
-- #if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
--@@ -1968,7 +1968,7 @@ int wc_RNG_GenerateBlock(WC_RNG* rng, byte* output, word32 sz)
--     if (rng->status != DRBG_OK)
--         return RNG_FAILURE_E;
-- 
---#ifdef HAVE_GETPID
--+#if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID)
--     if (rng->pid != getpid()) {
--         rng->pid = getpid();
--         ret = PollAndReSeed(rng);
--diff --git a/wolfssl/wolfcrypt/random.h b/wolfssl/wolfcrypt/random.h
--index f472e1f40..320641548 100644
----- a/wolfssl/wolfcrypt/random.h
--+++ b/wolfssl/wolfcrypt/random.h
--@@ -183,7 +183,7 @@ struct WC_RNG {
-- #endif
--     byte status;
-- #endif
---#ifdef HAVE_GETPID
--+#if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID)
--     pid_t pid;
-- #endif
-- #ifdef WOLFSSL_ASYNC_CRYPT
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-5.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-5.patch
-deleted file mode 100644
-index 6747f24..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-5.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From 670437d91ae3025b4721eb4f450e5dc31fc3d6ee Mon Sep 17 00:00:00 2001
--From: Chris Conlon <chris@wolfssl.com>
--Date: Wed, 18 Jun 2025 16:08:34 -0600
--Subject: [PATCH] Add HAVE_GETPID to options.h if getpid detected, needed for
-- apps to correctly detect size of WC_RNG struct
--
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/9c35c0de65e135e621400958f22829c0d2555ed4]
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- configure.ac | 9 +++++++++
-- 1 file changed, 9 insertions(+)
--
--diff --git a/configure.ac b/configure.ac
--index 43ddd4767..636c45aef 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -156,6 +156,9 @@ fi
-- #ifdef HAVE_STDLIB_H
--     #include <stdlib.h>
-- #endif
--+#ifdef HAVE_UNISTD_H
--+    #include <unistd.h>
--+#endif
-- ]])
-- 
-- AC_PROG_INSTALL
--@@ -9479,6 +9482,12 @@ then
--     AM_CFLAGS="$AM_CFLAGS -DHAVE___UINT128_T=1"
-- fi
-- 
--+# Add HAVE_GETPID to AM_CFLAGS for inclusion in options.h
--+if test "$ac_cv_func_getpid" = "yes"
--+then
--+    AM_CFLAGS="$AM_CFLAGS -DHAVE_GETPID=1"
--+fi
--+
-- LIB_SOCKET_NSL
-- AX_HARDEN_CC_COMPILER_FLAGS
-- 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-6.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-6.patch
-deleted file mode 100644
-index e86bc8b..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7394-6.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From aaad0035e4e795b8b225bd481e3942de015a362d Mon Sep 17 00:00:00 2001
--From: Chris Conlon <chris@wolfssl.com>
--Date: Wed, 18 Jun 2025 16:57:02 -0600
--Subject: [PATCH] Add check for reseed in ssl.c for HAVE_SELFTEST, similar to
-- old FIPS bundles that do not have older random.c files
--
--CVE: CVE-2025-7394
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/cdd02f9665ef43126503307972e4389070a00a73
--(cherry picked from commit cdd02f9665ef43126503307972e4389070a00a73)
--Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-----
-- src/ssl.c | 9 ++++++---
-- 1 file changed, 6 insertions(+), 3 deletions(-)
--
--diff --git a/src/ssl.c b/src/ssl.c
--index e214fa504..e538233fc 100644
----- a/src/ssl.c
--+++ b/src/ssl.c
--@@ -23604,7 +23604,7 @@ static int wolfSSL_RAND_InitMutex(void)
-- #ifdef OPENSSL_EXTRA
-- 
-- #if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
---    defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--+    ((defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)) || defined(HAVE_SELFTEST))
-- /* In older FIPS bundles add check for reseed here since it does not exist in
--  * the older random.c certified files. */
-- static pid_t currentRandPid = 0;
--@@ -23623,7 +23623,9 @@ int wolfSSL_RAND_Init(void)
--             ret = wc_InitRng(&globalRNG);
--             if (ret == 0) {
--             #if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
---                defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--+                ((defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)) || \
--+                 defined(HAVE_SELFTEST))
--+
--                 currentRandPid = getpid();
--             #endif
--                 initGlobalRNG = 1;
--@@ -24100,7 +24102,8 @@ int wolfSSL_RAND_bytes(unsigned char* buf, int num)
--          */
--         if (initGlobalRNG) {
--         #if defined(HAVE_GETPID) && !defined(WOLFSSL_NO_GETPID) && \
---                defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)
--+                ((defined(HAVE_FIPS) && FIPS_VERSION3_LT(6,0,0)) || \
--+                 defined(HAVE_SELFTEST))
--             pid_t p;
-- 
--             p = getpid();
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
-deleted file mode 100644
-index 9c661d6..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
-+++ /dev/null
-@@ -1,84 +0,0 @@
--From e6c0d1ac7b480c0b5e36f660dd3c0f2b45e4c3ab Mon Sep 17 00:00:00 2001
--From: Ruby Martin <ruby@wolfssl.com>
--Date: Mon, 2 Jun 2025 16:38:32 -0600
--Subject: [PATCH] create policy for WOLFSSL_APPLE_NATIVE_CERT_VALIDATION,
-- domain name checking
--
--CVE: CVE-2025-7395
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/9864959e41bd9259f258c09171ae2ec1c43fbc7f]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- src/internal.c | 25 ++++++++++++++++++++-----
-- 1 file changed, 20 insertions(+), 5 deletions(-)
--
--diff --git a/src/internal.c b/src/internal.c
--index 6bbd38fa8..2b090382f 100644
----- a/src/internal.c
--+++ b/src/internal.c
--@@ -221,7 +221,7 @@ WOLFSSL_CALLBACKS needs LARGE_STATIC_BUFFERS, please add LARGE_STATIC_BUFFERS
-- #include <Security/SecCertificate.h>
-- #include <Security/SecTrust.h>
-- #include <Security/SecPolicy.h>
---static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
--+static int DoAppleNativeCertValidation(WOLFSSL* ssl, const WOLFSSL_BUFFER_INFO* certs,
--                                             int totalCerts);
-- #endif /* #if defined(__APPLE__) && defined(WOLFSSL_SYS_CA_CERTS) */
-- 
--@@ -15992,7 +15992,7 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
--              * into wolfSSL, try to validate against the system certificates
--              * using Apple's native trust APIs */
--             if ((ret != 0) && (ssl->ctx->doAppleNativeCertValidationFlag)) {
---                if (DoAppleNativeCertValidation(args->certs,
--+                if (DoAppleNativeCertValidation(ssl, args->certs,
--                                                      args->totalCerts)) {
--                     WOLFSSL_MSG("Apple native cert chain validation SUCCESS");
--                     ret = 0;
--@@ -41246,7 +41246,8 @@ cleanup:
--  * wolfSSL's built-in certificate validation mechanisms anymore. We instead
--  * must call into the Security Framework APIs to authenticate peer certificates
--  */
---static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
--+static int DoAppleNativeCertValidation(WOLFSSL* ssl,
--+                                            const WOLFSSL_BUFFER_INFO* certs,
--                                             int totalCerts)
-- {
--     int i;
--@@ -41255,7 +41256,8 @@ static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
--     CFMutableArrayRef certArray = NULL;
--     SecCertificateRef secCert   = NULL;
--     SecTrustRef       trust     = NULL;
---    SecPolicyRef      policy    = NULL ;
--+    SecPolicyRef      policy    = NULL;
--+    CFStringRef       hostname  = NULL;
-- 
--     WOLFSSL_ENTER("DoAppleNativeCertValidation");
-- 
--@@ -41283,7 +41285,17 @@ static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
--     }
-- 
--     /* Create trust object for SecCertifiate Ref */
---    policy = SecPolicyCreateSSL(true, NULL);
--+    if (ssl->buffers.domainName.buffer &&
--+            ssl->buffers.domainName.length > 0) {
--+        /* Create policy with specified value to require host name match */
--+        hostname = CFStringCreateWithCString(kCFAllocatorDefault,
--+        (const char*)ssl->buffers.domainName.buffer, kCFStringEncodingUTF8);
--+    }
--+    if (hostname != NULL) {
--+        policy = SecPolicyCreateSSL(true, hostname);
--+    } else {
--+        policy = SecPolicyCreateSSL(true, NULL);
--+    }
--     status = SecTrustCreateWithCertificates(certArray, policy, &trust);
--     if (status != errSecSuccess) {
--         WOLFSSL_MSG_EX("Error creating trust object, "
--@@ -41314,6 +41326,9 @@ cleanup:
--     if (policy) {
--         CFRelease(policy);
--     }
--+    if (hostname) {
--+        CFRelease(hostname);
--+    }
-- 
--     WOLFSSL_LEAVE("DoAppleNativeCertValidation", ret);
-- 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
-deleted file mode 100644
-index 857f6bb..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From aad4e7c38f3784942923f4871d61a7e41d3de842 Mon Sep 17 00:00:00 2001
--From: Brett <bigbrett@users.noreply.github.com>
--Date: Wed, 4 Jun 2025 15:48:15 -0600
--Subject: [PATCH] prevent apple native cert validation from overriding error
-- codes other than ASN_NO_SIGNER_E
--
--CVE: CVE-2025-7395
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/bc8eeea703253bd65d472a9541b54fef326e8050]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- src/internal.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/src/internal.c b/src/internal.c
--index 2b090382f..79f584a0a 100644
----- a/src/internal.c
--+++ b/src/internal.c
--@@ -15991,7 +15991,8 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
--             /* If we can't validate the peer cert chain against the CAs loaded
--              * into wolfSSL, try to validate against the system certificates
--              * using Apple's native trust APIs */
---            if ((ret != 0) && (ssl->ctx->doAppleNativeCertValidationFlag)) {
--+            if ((ret == ASN_NO_SIGNER_E) &&
--+                (ssl->ctx->doAppleNativeCertValidationFlag)) {
--                 if (DoAppleNativeCertValidation(ssl, args->certs,
--                                                      args->totalCerts)) {
--                     WOLFSSL_MSG("Apple native cert chain validation SUCCESS");
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
-deleted file mode 100644
-index a7e1c33..0000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From f2a85e37e552d8dfafa2cbf32507b2fa545ee593 Mon Sep 17 00:00:00 2001
--From: Brett <bigbrett@users.noreply.github.com>
--Date: Wed, 4 Jun 2025 16:56:16 -0600
--Subject: [PATCH] add missing error trace macro
--
--CVE: CVE-2025-7395
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/0e2a3fd0b64bc6ba633aa9227e92ecacb42b5b1b]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- src/internal.c | 2 +-
+- src/libopensc/card-gids.c | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/src/internal.c b/src/internal.c
--index 79f584a0a..5557b5698 100644
----- a/src/internal.c
--+++ b/src/internal.c
--@@ -15991,7 +15991,7 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
--             /* If we can't validate the peer cert chain against the CAs loaded
--              * into wolfSSL, try to validate against the system certificates
--              * using Apple's native trust APIs */
---            if ((ret == ASN_NO_SIGNER_E) &&
--+            if ((ret == WC_NO_ERR_TRACE(ASN_NO_SIGNER_E)) &&
--                 (ssl->ctx->doAppleNativeCertValidationFlag)) {
--                 if (DoAppleNativeCertValidation(ssl, args->certs,
--                                                      args->totalCerts)) {
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-similarity index 78%
-rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
-rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-index 0dc488d..2600e94 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-@@ -14,17 +14,8 @@ RPROVIDES:${PN} = "cyassl"
+-diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
+-index aa63035097..90c98b557d 100644
+---- a/src/libopensc/card-gids.c
+-+++ b/src/libopensc/card-gids.c
+-@@ -251,7 +251,7 @@ static int gids_get_DO(sc_card_t* card,
+- 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
+- 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
+- 
+--	p = sc_asn1_find_tag(card->ctx, buffer, sizeof(buffer), dataObjectIdentifier, &datasize);
+-+       p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
+- 	if (!p) {
+- 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
+- 	}
+-
+-From a905ad4600ab13f36ec1d0c909b18ca016d91a5a Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Mon, 20 May 2024 21:31:38 +0200
+-Subject: [PATCH 02/30] pkcs15init: Avoid using uninitialized memory
+-
+-Thanks Matteo Marini for report
+-
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+----
+- src/pkcs15init/profile.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/pkcs15init/profile.c b/src/pkcs15init/profile.c
+-index 5113af6ef6..72963e2f9c 100644
+---- a/src/pkcs15init/profile.c
+-+++ b/src/pkcs15init/profile.c
+-@@ -1809,7 +1809,7 @@ do_pin_storedlength(struct state *cur, int argc, char **argv)
+- static int
+- do_pin_flags(struct state *cur, int argc, char **argv)
+- {
+--	unsigned int	flags;
+-+	unsigned int	flags = 0;
+- 	int		i, r;
+- 
+- 	if (cur->pin->pin.auth_type != SC_PKCS15_PIN_AUTH_TYPE_PIN)
+-
+-From 4ca050b83c8f265280059697c3764460ad8aac9b Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 3 Sep 2024 09:15:22 +0200
+-Subject: [PATCH 03/30] pkcs15init: Remove tab indentation
+-
+----
+- src/pkcs15init/profile.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/pkcs15init/profile.c b/src/pkcs15init/profile.c
+-index 72963e2f9c..4fbc3e7e1f 100644
+---- a/src/pkcs15init/profile.c
+-+++ b/src/pkcs15init/profile.c
+-@@ -1809,7 +1809,7 @@ do_pin_storedlength(struct state *cur, int argc, char **argv)
+- static int
+- do_pin_flags(struct state *cur, int argc, char **argv)
+- {
+--	unsigned int	flags = 0;
+-+	unsigned int flags = 0;
+- 	int		i, r;
+- 
+- 	if (cur->pin->pin.auth_type != SC_PKCS15_PIN_AUTH_TYPE_PIN)
+-
+-From 5580be58f2dc88f8b75a60d213a57014333c6b17 Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Mon, 20 May 2024 22:14:48 +0200
+-Subject: [PATCH 04/30] cac: Correctly calculate certificate length based on
+- the resplen
+-
+-Thanks Matteo Marini for report
+-
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+----
+- src/libopensc/card-cac1.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libopensc/card-cac1.c b/src/libopensc/card-cac1.c
+-index 5ddacc4565..06b2671f43 100644
+---- a/src/libopensc/card-cac1.c
+-+++ b/src/libopensc/card-cac1.c
+-@@ -92,12 +92,12 @@ static int cac_cac1_get_certificate(sc_card_t *card, u8 **out_buf, size_t *out_l
+- 		if (apdu.sw1 != 0x63 || apdu.sw2 < 1)  {
+- 			/* we've either finished reading, or hit an error, break */
+- 			r = sc_check_sw(card, apdu.sw1, apdu.sw2);
+--			left -= len;
+-+			left -= apdu.resplen;
+- 			break;
+- 		}
+- 		/* Adjust the lengths */
+--		left -= len;
+--		out_ptr += len;
+-+		left -= apdu.resplen;
+-+		out_ptr += apdu.resplen;
+- 		len = MIN(left, apdu.sw2);
+- 	}
+- 	if (r < 0) {
+-
+-From 9da37a80ed3b3ceaf472e1a43a4672f4e30637d1 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 11 Jul 2024 14:58:25 +0200
+-Subject: [PATCH 05/30] cac: Fix uninitialized values
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_card/1,fuzz_pkcs11/6
+----
+- src/libopensc/card-cac.c | 12 ++++++------
+- 1 file changed, 6 insertions(+), 6 deletions(-)
+-
+-diff --git a/src/libopensc/card-cac.c b/src/libopensc/card-cac.c
+-index 898fce8aa5..412f22644d 100644
+---- a/src/libopensc/card-cac.c
+-+++ b/src/libopensc/card-cac.c
+-@@ -252,7 +252,7 @@ static int cac_apdu_io(sc_card_t *card, int ins, int p1, int p2,
+- 	size_t * recvbuflen)
+- {
+- 	int r;
+--	sc_apdu_t apdu;
+-+	sc_apdu_t apdu = {0};
+- 	u8 rbufinitbuf[CAC_MAX_SIZE];
+- 	u8 *rbuf;
+- 	size_t rbuflen;
+-@@ -389,13 +389,13 @@ cac_get_acr(sc_card_t *card, int acr_type, u8 **out_buf, size_t *out_len)
+- static int cac_read_file(sc_card_t *card, int file_type, u8 **out_buf, size_t *out_len)
+- {
+- 	u8 params[2];
+--	u8 count[2];
+-+	u8 count[2] = {0};
+- 	u8 *out = NULL;
+--	u8 *out_ptr;
+-+	u8 *out_ptr = NULL;
+- 	size_t offset = 0;
+- 	size_t size = 0;
+- 	size_t left = 0;
+--	size_t len;
+-+	size_t len = 0;
+- 	int r;
+- 
+- 	params[0] = file_type;
+-@@ -458,7 +458,7 @@ static int cac_read_binary(sc_card_t *card, unsigned int idx,
+- 	const u8 *tl_ptr, *val_ptr, *tl_start;
+- 	u8 *tlv_ptr;
+- 	const u8 *cert_ptr;
+--	size_t tl_len, val_len, tlv_len;
+-+	size_t tl_len = 0, val_len = 0, tlv_len;
+- 	size_t len, tl_head_len, cert_len;
+- 	u8 cert_type, tag;
+- 
+-@@ -1519,7 +1519,7 @@ static int cac_parse_CCC(sc_card_t *card, cac_private_data_t *priv, const u8 *tl
+- static int cac_process_CCC(sc_card_t *card, cac_private_data_t *priv, int depth)
+- {
+- 	u8 *tl = NULL, *val = NULL;
+--	size_t tl_len, val_len;
+-+	size_t tl_len = 0, val_len = 0;
+- 	int r;
+- 
+- 	if (depth > CAC_MAX_CCC_DEPTH) {
+-
+-From 39a55ef0a44cb34b22e585281b1e1eee30eb79a5 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 11 Jul 2024 15:27:19 +0200
+-Subject: [PATCH 06/30] cardos: Fix uninitialized values
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_card/2
+----
+- src/libopensc/card-cardos.c | 8 ++++----
+- 1 file changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
+-index 2e2d524333..a0e2322478 100644
+---- a/src/libopensc/card-cardos.c
+-+++ b/src/libopensc/card-cardos.c
+-@@ -94,14 +94,14 @@ static void fixup_transceive_length(const struct sc_card *card,
+- 
+- static int cardos_match_card(sc_card_t *card)
+- {
+--	unsigned char atr[SC_MAX_ATR_SIZE];
+-+	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
+- 	int i;
+- 
+- 	i = _sc_match_atr(card, cardos_atrs, &card->type);
+- 	if (i < 0)
+- 		return 0;
+- 
+--	memcpy(atr, card->atr.value, sizeof(atr));
+-+	memcpy(atr, card->atr.value, card->atr.len);
+- 
+- 	/* Do not change card type for CIE! */
+- 	if (card->type == SC_CARD_TYPE_CARDOS_CIE_V1)
+-@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
+- 		return 1;
+- 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
+- 		int rv;
+--		sc_apdu_t apdu;
+--		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE];
+-+		sc_apdu_t apdu = { 0 };
+-+		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
+- 		/* first check some additional ATR bytes */
+- 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
+- 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
+-
+-From e66619fadb3fd666e3359886fe18e387de068799 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Fri, 12 Jul 2024 13:16:56 +0200
+-Subject: [PATCH 07/30] card-dnie: Check APDU response length and ASN1 lengths
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_decode/10, fuzz_pkcs15_encode/12
+----
+- src/libopensc/asn1.c      | 4 +++-
+- src/libopensc/card-dnie.c | 8 ++++++--
+- 2 files changed, 9 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libopensc/asn1.c b/src/libopensc/asn1.c
+-index 08ef56149c..548263a2da 100644
+---- a/src/libopensc/asn1.c
+-+++ b/src/libopensc/asn1.c
+-@@ -68,7 +68,7 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
+- 
+- 	*buf = NULL;
+- 
+--	if (left == 0 || !p)
+-+	if (left == 0 || !p || buflen == 0)
+- 		return SC_ERROR_INVALID_ASN1_OBJECT;
+- 	if (*p == 0xff || *p == 0) {
+- 		/* end of data reached */
+-@@ -83,6 +83,8 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
+- 	 */
+- 	cla = (*p & SC_ASN1_TAG_CLASS) | (*p & SC_ASN1_TAG_CONSTRUCTED);
+- 	tag = *p & SC_ASN1_TAG_PRIMITIVE;
+-+	if (left < 1)
+-+		return SC_ERROR_INVALID_ASN1_OBJECT;
+- 	p++;
+- 	left--;
+- 	if (tag == SC_ASN1_TAG_PRIMITIVE) {
+-diff --git a/src/libopensc/card-dnie.c b/src/libopensc/card-dnie.c
+-index 464670f096..d8b90e8439 100644
+---- a/src/libopensc/card-dnie.c
+-+++ b/src/libopensc/card-dnie.c
+-@@ -1172,12 +1172,16 @@ static int dnie_compose_and_send_apdu(sc_card_t *card, const u8 *path, size_t pa
+- 
+- 	if (file_out) {
+- 		/* finally process FCI response */
+-+		size_t len = apdu.resp[1];
+- 		sc_file_free(*file_out);
+- 		*file_out = sc_file_new();
+- 		if (*file_out == NULL) {
+- 			LOG_FUNC_RETURN(ctx, SC_ERROR_OUT_OF_MEMORY);
+- 		}
+--		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, apdu.resp[1]);
+-+		if (apdu.resplen - 2 < len || len < 1) {
+-+			LOG_FUNC_RETURN(ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
+-+		}
+-+		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, len);
+- 	}
+- 	LOG_FUNC_RETURN(ctx, res);
+- }
+-@@ -1935,7 +1939,7 @@ static int dnie_process_fci(struct sc_card *card,
+- 	int *op = df_acl;
+- 	int n = 0;
+- 	sc_context_t *ctx = NULL;
+--	if ((card == NULL) || (card->ctx == NULL) || (file == NULL))
+-+	if ((card == NULL) || (card->ctx == NULL) || (file == NULL) || buflen == 0)
+- 		return SC_ERROR_INVALID_ARGUMENTS;
+- 	ctx = card->ctx;
+- 	LOG_FUNC_CALLED(ctx);
+-
+-From 737931e6edaaa2142e1e71a2b76159f6ce458bb8 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Fri, 12 Jul 2024 14:03:59 +0200
+-Subject: [PATCH 08/30] muscle: Report invalid SW when reading object
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/20, fuzz_pkcs15init/10
+----
+- src/libopensc/muscle.c | 19 ++++++++++---------
+- 1 file changed, 10 insertions(+), 9 deletions(-)
+-
+-diff --git a/src/libopensc/muscle.c b/src/libopensc/muscle.c
+-index 46a9f66b88..89dfcbbcba 100644
+---- a/src/libopensc/muscle.c
+-+++ b/src/libopensc/muscle.c
+-@@ -92,33 +92,34 @@ int msc_partial_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *da
+- 	apdu.resp = data;
+- 	r = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
+--	if(apdu.sw1 == 0x90 && apdu.sw2 == 0x00)
+-+	if (apdu.sw1 == 0x90 && apdu.sw2 == 0x00 && dataLength <= apdu.resplen)
+- 		return (int)dataLength;
+--	if(apdu.sw1 == 0x9C) {
+--		if(apdu.sw2 == 0x07) {
+-+	if (apdu.sw1 == 0x9C) {
+-+		if (apdu.sw2 == 0x07) {
+- 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_FILE_NOT_FOUND);
+--		} else if(apdu.sw2 == 0x06) {
+-+		} else if (apdu.sw2 == 0x06) {
+- 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_NOT_ALLOWED);
+--		} else if(apdu.sw2 == 0x0F) {
+-+		} else if (apdu.sw2 == 0x0F) {
+- 			/* GUESSED */
+- 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_INVALID_ARGUMENTS);
+- 		}
+- 	}
+- 	sc_log(card->ctx,
+- 		"got strange SWs: 0x%02X 0x%02X\n", apdu.sw1, apdu.sw2);
+--	return (int)dataLength;
+--
+-+	SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_UNKNOWN_DATA_RECEIVED);
+- }
+- 
+- int msc_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *data, size_t dataLength)
+- {
+--	int r;
+-+	int r = 0;
+- 	unsigned int i;
+- 	size_t max_read_unit = MSC_MAX_READ;
+- 
+--	for(i = 0; i < dataLength; i += max_read_unit) {
+-+	for (i = 0; i < dataLength; i += r) {
+- 		r = msc_partial_read_object(card, objectId, offset + i, data + i, MIN(dataLength - i, max_read_unit));
+- 		LOG_TEST_RET(card->ctx, r, "Error in partial object read");
+-+		if (r == 0)
+-+			break;
+- 	}
+- 	return (int)dataLength;
+- }
+-
+-From e7f6a24b7e9ac849d0242ce9e183c8160e5e9e8c Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Fri, 12 Jul 2024 14:16:24 +0200
+-Subject: [PATCH 09/30] card-mcrd: Check length of response buffer in select
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/5,12 fuzz_pkcs15_crypt/9
+----
+- src/libopensc/card-mcrd.c | 11 +++++++----
+- 1 file changed, 7 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/libopensc/card-mcrd.c b/src/libopensc/card-mcrd.c
+-index 3a549999eb..911e9f0a07 100644
+---- a/src/libopensc/card-mcrd.c
+-+++ b/src/libopensc/card-mcrd.c
+-@@ -587,20 +587,23 @@ do_select(sc_card_t * card, u8 kind,
+- 		}
+- 	}
+- 
+--	if (p2 == 0x04 && apdu.resp[0] == 0x62) {
+-+	if (p2 == 0x04 && apdu.resplen > 2 && apdu.resp[0] == 0x62) {
+- 		*file = sc_file_new();
+- 		if (!*file)
+- 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
+-+		if (apdu.resp[1] > apdu.resplen - 2)
+-+			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
+- 		process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
+- 		return SC_SUCCESS;
+- 	}
+- 
+--	if (p2 != 0x0C && apdu.resp[0] == 0x6F) {
+-+	if (p2 != 0x0C && apdu.resplen > 2 && apdu.resp[0] == 0x6F) {
+- 		*file = sc_file_new();
+- 		if (!*file)
+- 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
+--		if (apdu.resp[1] <= apdu.resplen)
+--			process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
+-+		if (apdu.resp[1] > apdu.resplen - 2)
+-+			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
+-+		process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
+- 		return SC_SUCCESS;
+- 	}
+- 	return SC_SUCCESS;
+-
+-From d18a07ea891c7bd7dff0d187fbb4df5169fd9698 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Fri, 12 Jul 2024 14:35:47 +0200
+-Subject: [PATCH 10/30] pkcs15-cert.c: Initialize OID length
+-
+-In case it is not set later.
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/7
+----
+- src/libopensc/pkcs15-cert.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/pkcs15-cert.c b/src/libopensc/pkcs15-cert.c
+-index 1777a85835..5e2dbb89d0 100644
+---- a/src/libopensc/pkcs15-cert.c
+-+++ b/src/libopensc/pkcs15-cert.c
+-@@ -169,7 +169,7 @@ sc_pkcs15_get_name_from_dn(struct sc_context *ctx, const u8 *dn, size_t dn_len,
+- 	for (next_ava = rdn, next_ava_len = rdn_len; next_ava_len; ) {
+- 		const u8 *ava, *dummy, *oidp;
+- 		struct sc_object_id oid;
+--		size_t ava_len, dummy_len, oid_len;
+-+		size_t ava_len = 0, dummy_len, oid_len = 0;
+- 
+- 		/* unwrap the set and point to the next ava */
+- 		ava = sc_asn1_skip_tag(ctx, &next_ava, &next_ava_len, SC_ASN1_TAG_SET | SC_ASN1_CONS, &ava_len);
+-
+-From c65e6f004d99187d63d68e4a9a9d5ada770b7b8d Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Fri, 12 Jul 2024 15:04:19 +0200
+-Subject: [PATCH 11/30] card-gids: Use actual length of reponse buffer
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/11
+----
+- src/libopensc/card-gids.c | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
+-index 90c98b557d..5fb0d4acb4 100644
+---- a/src/libopensc/card-gids.c
+-+++ b/src/libopensc/card-gids.c
+-@@ -231,6 +231,7 @@ static int gids_get_DO(sc_card_t* card,
+- 	size_t datasize = 0;
+- 	const u8* p;
+- 	u8 buffer[MAX_GIDS_FILE_SIZE];
+-+        size_t buffer_len = sizeof(buffer);
+- 
+- 	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
+- 	sc_log(card->ctx,
+-@@ -244,14 +245,15 @@ static int gids_get_DO(sc_card_t* card,
+- 	apdu.data = data;
+- 	apdu.datalen = 04;
+- 	apdu.resp = buffer;
+--	apdu.resplen = sizeof(buffer);
+-+        apdu.resplen = buffer_len;
+- 	apdu.le = 256;
+- 
+- 	r = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
+- 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
+-+        buffer_len = apdu.resplen;
+- 
+--       p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
+-+       p = sc_asn1_find_tag(card->ctx, buffer, buffer_len, dataObjectIdentifier, &datasize);
+- 	if (!p) {
+- 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
+- 	}
+-
+-From 3b242c5d7160a66fb94efabef9318ebf03ebc63f Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 16 Jul 2024 14:05:36 +0200
+-Subject: [PATCH 12/30]  cac: Check return value when selecting AID
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/14
+----
+- src/libopensc/card-cac.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libopensc/card-cac.c b/src/libopensc/card-cac.c
+-index 412f22644d..71ab7e482f 100644
+---- a/src/libopensc/card-cac.c
+-+++ b/src/libopensc/card-cac.c
+-@@ -1293,10 +1293,10 @@ static int cac_parse_aid(sc_card_t *card, cac_private_data_t *priv, const u8 *ai
+- 	/* Call without OID set will just select the AID without subsequent
+- 	 * OID selection, which we need to figure out just now
+- 	 */
+--	cac_select_file_by_type(card, &new_object.path, NULL);
+-+	r = cac_select_file_by_type(card, &new_object.path, NULL);
+-+	LOG_TEST_RET(card->ctx, r, "Cannot select AID");
+- 	r = cac_get_properties(card, &prop);
+--	if (r < 0)
+--		return SC_ERROR_INTERNAL;
+-+	LOG_TEST_RET(card->ctx, r, "Cannot get CAC properties");
+- 
+- 	for (i = 0; i < prop.num_objects; i++) {
+- 		/* don't fail just because we have more certs than we can support */
+-
+-From 19d55573fcb638d02acc378cf638da9b4e481cd7 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 16 Jul 2024 14:22:02 +0200
+-Subject: [PATCH 13/30] pkcs15-tcos: Check number of read bytes for cert
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/15
+----
+- src/libopensc/pkcs15-tcos.c | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
+-index a84001e122..4d02a98ee1 100644
+---- a/src/libopensc/pkcs15-tcos.c
+-+++ b/src/libopensc/pkcs15-tcos.c
+-@@ -62,7 +62,8 @@ static int insert_cert(
+- 			"Select(%s) failed\n", path);
+- 		return 1;
+- 	}
+--	if(sc_read_binary(card, 0, cert, sizeof(cert), 0)<0){
+-+	r = sc_read_binary(card, 0, cert, sizeof(cert), 0);
+-+	if (r <= 0){
+- 		sc_log(ctx, 
+- 			"ReadBinary(%s) failed\n", path);
+- 		return 2;
+-
+-From 74d42f32fd6f96f190ee7dd188f873115dcb5af2 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 16 Jul 2024 14:29:01 +0200
+-Subject: [PATCH 14/30] cardos: Return error when response length is 0
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/18
+----
+- src/libopensc/card-cardos.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
+-index a0e2322478..124752d78b 100644
+---- a/src/libopensc/card-cardos.c
+-+++ b/src/libopensc/card-cardos.c
+-@@ -1281,7 +1281,7 @@ cardos_lifecycle_get(sc_card_t *card, int *mode)
+- 	LOG_TEST_RET(card->ctx, r, "Card returned error");
+- 
+- 	if (apdu.resplen < 1) {
+--		LOG_TEST_RET(card->ctx, r, "Lifecycle byte not in response");
+-+		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Lifecycle byte not in response");
+- 	}
+- 
+- 	r = SC_SUCCESS;
+-
+-From 2e6333f2024765bbd0e384cadce6d6c6496339a2 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 16 Jul 2024 15:51:51 +0200
+-Subject: [PATCH 15/30] card-piv: Initialize variables for tag and CLA
+-
+-In case they are not later initialize later by
+-sc_asn1_read_tag() function.
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/21
+----
+- src/libopensc/card-piv.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/card-piv.c b/src/libopensc/card-piv.c
+-index f4eafe47a4..034635d898 100644
+---- a/src/libopensc/card-piv.c
+-+++ b/src/libopensc/card-piv.c
+-@@ -4428,7 +4428,7 @@ static int piv_get_challenge(sc_card_t *card, u8 *rnd, size_t len)
+- 	const u8 *p;
+- 	size_t out_len = 0;
+- 	int r;
+--	unsigned int tag_out, cla_out;
+-+	unsigned int tag_out = 0, cla_out = 0;
+- 	piv_private_data_t * priv = PIV_DATA(card);
+- 
+- 	LOG_FUNC_CALLED(card->ctx);
+-
+-From 95815e45fb9f764d6e820a287ebc242e5a3155ec Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 16 Jul 2024 16:32:45 +0200
+-Subject: [PATCH 16/30] pkcs15-sc-hsm: Initialize variables for tag and CLA
+-
+-In case they are not later initialize later by
+-sc_asn1_read_tag() function.
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_crypt/12
+----
+- src/libopensc/pkcs15-sc-hsm.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/pkcs15-sc-hsm.c b/src/libopensc/pkcs15-sc-hsm.c
+-index 315cd74482..acdbee7054 100644
+---- a/src/libopensc/pkcs15-sc-hsm.c
+-+++ b/src/libopensc/pkcs15-sc-hsm.c
+-@@ -386,7 +386,7 @@ int sc_pkcs15emu_sc_hsm_decode_cvc(sc_pkcs15_card_t * p15card,
+- 	struct sc_asn1_entry asn1_cvcert[C_ASN1_CVCERT_SIZE];
+- 	struct sc_asn1_entry asn1_cvc_body[C_ASN1_CVC_BODY_SIZE];
+- 	struct sc_asn1_entry asn1_cvc_pubkey[C_ASN1_CVC_PUBKEY_SIZE];
+--	unsigned int cla,tag;
+-+	unsigned int cla = 0, tag = 0;
+- 	size_t taglen;
+- 	const u8 *tbuf;
+- 	int r;
+-
+-From 16e0af0a310e4f611b88ea29ec53e02928d5ba35 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Wed, 17 Jul 2024 09:15:43 +0200
+-Subject: [PATCH 17/30] pkcs15-gemsafeV1: Check length of buffer for object
+-
+-Number of actually read bytes may differ from
+-the stated object length.
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_crypt/15
+----
+- src/libopensc/pkcs15-gemsafeV1.c | 20 +++++++++++++++-----
+- 1 file changed, 15 insertions(+), 5 deletions(-)
+-
+-diff --git a/src/libopensc/pkcs15-gemsafeV1.c b/src/libopensc/pkcs15-gemsafeV1.c
+-index 25140503fa..9fb8956fe9 100644
+---- a/src/libopensc/pkcs15-gemsafeV1.c
+-+++ b/src/libopensc/pkcs15-gemsafeV1.c
+-@@ -169,6 +169,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
+- 	size_t objlen;
+- 	int certlen;
+- 	unsigned int ind, i=0;
+-+	int read_len;
+- 
+- 	sc_format_path(GEMSAFE_PATH, &path);
+- 	r = sc_select_file(card, &path, &file);
+-@@ -177,9 +178,11 @@ static int gemsafe_get_cert_len(sc_card_t *card)
+- 	sc_file_free(file);
+- 
+- 	/* Initial read */
+--	r = sc_read_binary(card, 0, ibuf, GEMSAFE_READ_QUANTUM, 0);
+--	if (r < 0)
+-+	read_len = sc_read_binary(card, 0, ibuf, GEMSAFE_READ_QUANTUM, 0);
+-+	if (read_len <= 2) {
+-+		sc_log(card->ctx, "Invalid size of object data: %d", read_len);
+- 		return SC_ERROR_INTERNAL;
+-+	}
+- 
+- 	/* Actual stored object size is encoded in first 2 bytes
+- 	 * (allocated EF space is much greater!)
+-@@ -208,7 +211,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
+- 	 * the private key.
+- 	 */
+- 	ind = 2; /* skip length */
+--	while (ibuf[ind] == 0x01 && i < gemsafe_cert_max) {
+-+	while (ind + 1 < (size_t)read_len && ibuf[ind] == 0x01 && i < gemsafe_cert_max) {
+- 		if (ibuf[ind+1] == 0xFE) {
+- 			gemsafe_prkeys[i].ref = ibuf[ind+4];
+- 			sc_log(card->ctx, "Key container %d is allocated and uses key_ref %d",
+-@@ -235,7 +238,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
+- 	/* Read entire file, then dissect in memory.
+- 	 * Gemalto ClassicClient seems to do it the same way.
+- 	 */
+--	iptr = ibuf + GEMSAFE_READ_QUANTUM;
+-+	iptr = ibuf + read_len;
+- 	while ((size_t)(iptr - ibuf) < objlen) {
+- 		r = sc_read_binary(card, (unsigned)(iptr - ibuf), iptr,
+- 				   MIN(GEMSAFE_READ_QUANTUM, objlen - (iptr - ibuf)), 0);
+-@@ -243,7 +246,14 @@ static int gemsafe_get_cert_len(sc_card_t *card)
+- 			sc_log(card->ctx, "Could not read cert object");
+- 			return SC_ERROR_INTERNAL;
+- 		}
+--		iptr += GEMSAFE_READ_QUANTUM;
+-+		if (r == 0)
+-+			break;
+-+		read_len += r;
+-+		iptr += r;
+-+	}
+-+	if ((size_t)read_len < objlen) {
+-+		sc_log(card->ctx, "Could not read cert object");
+-+		return SC_ERROR_INTERNAL;
+- 	}
+- 
+- 	/* Search buffer for certificates, they start with 0x3082. */
+-
+-From 5aad7762d144a39ef11bd6f0881fc7e992161bb5 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Wed, 17 Jul 2024 10:39:52 +0200
+-Subject: [PATCH 18/30] card-jpki: Check number of read bytes
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_encode/18
+----
+- src/libopensc/card-jpki.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/libopensc/card-jpki.c b/src/libopensc/card-jpki.c
+-index 6e4d0f3165..71339491d1 100644
+---- a/src/libopensc/card-jpki.c
+-+++ b/src/libopensc/card-jpki.c
+-@@ -195,6 +195,8 @@ jpki_select_file(struct sc_card *card,
+- 		u8 buf[4];
+- 		rc = sc_read_binary(card, 0, buf, 4, 0);
+- 		LOG_TEST_RET(card->ctx, rc, "SW Check failed");
+-+		if (rc < 4)
+-+			LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Received data too short");
+- 		file = sc_file_new();
+- 		if (!file) {
+- 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
+-
+-From 535e9d62f94b496bb5214edf0ee6f431ae6d94cb Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Wed, 17 Jul 2024 11:18:52 +0200
+-Subject: [PATCH 19/30] pkcs15-tcos: Check return value of serial num
+- conversion
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_encode/21
+----
+- src/libopensc/pkcs15-tcos.c | 9 +++++++--
+- 1 file changed, 7 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
+-index 4d02a98ee1..2bd275c4f4 100644
+---- a/src/libopensc/pkcs15-tcos.c
+-+++ b/src/libopensc/pkcs15-tcos.c
+-@@ -531,10 +531,15 @@ int sc_pkcs15emu_tcos_init_ex(
+- 	/* get the card serial number */
+- 	r = sc_card_ctl(card, SC_CARDCTL_GET_SERIALNR, &serialnr);
+- 	if (r < 0) {
+--		sc_log(ctx,  "unable to get ICCSN\n");
+-+		sc_log(ctx, "unable to get ICCSN");
+- 		return SC_ERROR_WRONG_CARD;
+- 	}
+--	sc_bin_to_hex(serialnr.value, serialnr.len , serial, sizeof(serial), 0);
+-+	r = sc_bin_to_hex(serialnr.value, serialnr.len, serial, sizeof(serial), 0);
+-+	if (r != SC_SUCCESS) {
+-+		sc_log(ctx, "serial number invalid");
+-+		return SC_ERROR_INTERNAL;
+-+	}
+-+
+- 	serial[19] = '\0';
+- 	set_string(&p15card->tokeninfo->serial_number, serial);
+- 
+-
+-From 230a783a0476ef1b387818ba5dd9c1c73978744f Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Wed, 17 Jul 2024 12:53:52 +0200
+-Subject: [PATCH 20/30] pkcs15-tcos: Check certificate length before accessing
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_encode/8
+----
+- src/libopensc/pkcs15-tcos.c | 35 +++++++++++++++++++++--------------
+- 1 file changed, 21 insertions(+), 14 deletions(-)
+-
+-diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
+-index 2bd275c4f4..ecaa66edf2 100644
+---- a/src/libopensc/pkcs15-tcos.c
+-+++ b/src/libopensc/pkcs15-tcos.c
+-@@ -45,6 +45,7 @@ static int insert_cert(
+- 	struct sc_pkcs15_cert_info cert_info;
+- 	struct sc_pkcs15_object cert_obj;
+- 	unsigned char cert[20];
+-+	size_t cert_len = 0;
+- 	int r;
+- 
+- 	memset(&cert_info, 0, sizeof(cert_info));
+-@@ -57,25 +58,31 @@ static int insert_cert(
+- 	strlcpy(cert_obj.label, label, sizeof(cert_obj.label));
+- 	cert_obj.flags = writable ? SC_PKCS15_CO_FLAG_MODIFIABLE : 0;
+- 
+--	if(sc_select_file(card, &cert_info.path, NULL)!=SC_SUCCESS){
+--		sc_log(ctx, 
+--			"Select(%s) failed\n", path);
+-+	if (sc_select_file(card, &cert_info.path, NULL) != SC_SUCCESS) {
+-+		sc_log(ctx, "Select(%s) failed", path);
+- 		return 1;
+- 	}
+- 	r = sc_read_binary(card, 0, cert, sizeof(cert), 0);
+--	if (r <= 0){
+--		sc_log(ctx, 
+--			"ReadBinary(%s) failed\n", path);
+-+	if (r <= 0) {
+-+		sc_log(ctx, "ReadBinary(%s) failed\n", path);
+- 		return 2;
+- 	}
+--	if(cert[0]!=0x30 || cert[1]!=0x82){
+--		sc_log(ctx, 
+--			"Invalid Cert: %02X:%02X:...\n", cert[0], cert[1]);
+-+	cert_len = r; /* actual number of read bytes */
+-+	if (cert_len < 7 || (size_t)(7 + cert[5]) > cert_len) {
+-+		sc_log(ctx, "Invalid certificate length");
+-+		return 3;
+-+	}
+-+	if (cert[0] != 0x30 || cert[1] != 0x82) {
+-+		sc_log(ctx, "Invalid Cert: %02X:%02X:...\n", cert[0], cert[1]);
+- 		return 3;
+- 	}
+- 
+- 	/* some certificates are prefixed by an OID */
+--	if(cert[4]==0x06 && cert[5]<10 && cert[6+cert[5]]==0x30 && cert[7+cert[5]]==0x82){
+-+	if (cert[4] == 0x06 && cert[5] < 10 && cert[6 + cert[5]] == 0x30 && cert[7 + cert[5]] == 0x82) {
+-+		if ((size_t)(9 + cert[5]) > cert_len) {
+-+			sc_log(ctx, "Invalid certificate length");
+-+			return 3;
+-+		}
+- 		cert_info.path.index=6+cert[5];
+- 		cert_info.path.count=(cert[8+cert[5]]<<8) + cert[9+cert[5]] + 4;
+- 	} else {
+-@@ -83,12 +90,12 @@ static int insert_cert(
+- 		cert_info.path.count=(cert[2]<<8) + cert[3] + 4;
+- 	}
+- 
+--	r=sc_pkcs15emu_add_x509_cert(p15card, &cert_obj, &cert_info);
+--	if(r!=SC_SUCCESS){
+--		sc_log(ctx,  "sc_pkcs15emu_add_x509_cert(%s) failed\n", path);
+-+	r = sc_pkcs15emu_add_x509_cert(p15card, &cert_obj, &cert_info);
+-+	if (r != SC_SUCCESS) {
+-+		sc_log(ctx, "sc_pkcs15emu_add_x509_cert(%s) failed", path);
+- 		return 4;
+- 	}
+--	sc_log(ctx,  "%s: OK, Index=%d, Count=%d\n", path, cert_info.path.index, cert_info.path.count);
+-+	sc_log(ctx, "%s: OK, Index=%d, Count=%d", path, cert_info.path.index, cert_info.path.count);
+- 	return 0;
+- }
+- 
+-
+-From afb1bba4f1966a5b78fdba44b6e7c4dd115cfb29 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Wed, 17 Jul 2024 14:56:22 +0200
+-Subject: [PATCH 21/30] pkcs15-lib: Report transport key error
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/17, fuzz_pkcs15init/18
+----
+- src/pkcs15init/pkcs15-lib.c | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/pkcs15init/pkcs15-lib.c b/src/pkcs15init/pkcs15-lib.c
+-index 6574e8025d..943d53e987 100644
+---- a/src/pkcs15init/pkcs15-lib.c
+-+++ b/src/pkcs15init/pkcs15-lib.c
+-@@ -3831,13 +3831,15 @@ sc_pkcs15init_get_transport_key(struct sc_profile *profile, struct sc_pkcs15_car
+- 	if (callbacks.get_key)   {
+- 		rv = callbacks.get_key(profile, type, reference, defbuf, defsize, pinbuf, pinsize);
+- 		LOG_TEST_RET(ctx, rv, "Cannot get key");
+--	}
+--	else if (rv >= 0)  {
+-+	} else if (rv >= 0) {
+- 		if (*pinsize < defsize)
+- 			LOG_TEST_RET(ctx, SC_ERROR_BUFFER_TOO_SMALL, "Get transport key error");
+- 
+- 		memcpy(pinbuf, data.key_data, data.len);
+- 		*pinsize = data.len;
+-+	} else {
+-+		/* pinbuf and pinsize were not filled */
+-+		LOG_TEST_RET(ctx, SC_ERROR_INTERNAL, "Get transport key error");
+- 	}
+- 
+- 	memset(&auth_info, 0, sizeof(auth_info));
+-
+-From 60f08c6fca2f87f30480589d00922599c8189555 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 09:23:20 +0200
+-Subject: [PATCH 22/30] pkcs15-starcos: Check length of file to be non-zero
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/20
+----
+- src/pkcs15init/pkcs15-starcos.c | 4 +++-
+- 1 file changed, 3 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/pkcs15init/pkcs15-starcos.c b/src/pkcs15init/pkcs15-starcos.c
+-index bde7413a46..267ad2b04a 100644
+---- a/src/pkcs15init/pkcs15-starcos.c
+-+++ b/src/pkcs15init/pkcs15-starcos.c
+-@@ -670,6 +670,8 @@ static int starcos_write_pukey(sc_profile_t *profile, sc_card_t *card,
+- 		return r;
+- 	len = tfile->size;
+- 	sc_file_free(tfile);
+-+	if (len == 0)
+-+		return SC_ERROR_INTERNAL;
+- 	buf = malloc(len);
+- 	if (!buf)
+- 		return SC_ERROR_OUT_OF_MEMORY;
+-@@ -684,7 +686,7 @@ static int starcos_write_pukey(sc_profile_t *profile, sc_card_t *card,
+- 	if (num_keys == 0xff)
+- 		num_keys = 0;
+- 	/* encode public key */
+--	keylen  = starcos_encode_pukey(rsa, NULL, kinfo);
+-+	keylen = starcos_encode_pukey(rsa, NULL, kinfo);
+- 	if (!keylen) {
+- 		free(buf);
+- 		return SC_ERROR_INTERNAL;
+-
+-From 513d3fdeed6b07f05c8d3bf9532d0b54dcbc3488 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 09:35:23 +0200
+-Subject: [PATCH 23/30] iasecc-sdo: Check length of data before dereferencing
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/21
+----
+- src/libopensc/iasecc-sdo.c | 3 +++
+- 1 file changed, 3 insertions(+)
+-
+-diff --git a/src/libopensc/iasecc-sdo.c b/src/libopensc/iasecc-sdo.c
+-index 417b6dd57d..98402a4e3f 100644
+---- a/src/libopensc/iasecc-sdo.c
+-+++ b/src/libopensc/iasecc-sdo.c
+-@@ -760,6 +760,9 @@ iasecc_sdo_parse(struct sc_card *card, unsigned char *data, size_t data_len, str
+- 
+- 	LOG_FUNC_CALLED(ctx);
+- 
+-+	if (data == NULL || data_len < 2)
+-+		LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
+-+
+- 	if (*data == IASECC_SDO_TEMPLATE_TAG)   {
+- 		size_size = iasecc_parse_size(data + 1, data_len - 1, &size);
+- 		LOG_TEST_RET(ctx, size_size, "parse error: invalid size data of IASECC_SDO_TEMPLATE");
+-
+-From b1cdaf4b820d6ba6e3f42acd289ef3e6540bb9f3 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 15:39:15 +0200
+-Subject: [PATCH 24/30] card-oberthur: Check length of serial number
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs11/1, fuzz_pkcs15init/2
+----
+- src/libopensc/card-oberthur.c | 5 ++++-
+- 1 file changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
+-index f344d5901f..5920c2c417 100644
+---- a/src/libopensc/card-oberthur.c
+-+++ b/src/libopensc/card-oberthur.c
+-@@ -145,7 +145,7 @@ auth_select_aid(struct sc_card *card)
+- {
+- 	struct sc_apdu apdu;
+- 	unsigned char apdu_resp[SC_MAX_APDU_BUFFER_SIZE];
+--	struct auth_private_data *data =  (struct auth_private_data *) card->drv_data;
+-+	struct auth_private_data *data = (struct auth_private_data *)card->drv_data;
+- 	int rv, ii;
+- 	struct sc_path tmp_path;
+- 
+-@@ -162,6 +162,9 @@ auth_select_aid(struct sc_card *card)
+- 
+- 	rv = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
+-+	if (apdu.resplen < 20) {
+-+		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Serial number has incorrect length");
+-+	}
+- 	card->serialnr.len = 4;
+- 	memcpy(card->serialnr.value, apdu.resp+15, 4);
+- 
+-
+-From 67064f41b5dd0947a7fcbc78b7c46d35439c6458 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 10:16:39 +0200
+-Subject: [PATCH 25/30] pkcs15-setcos: Check length of generated key
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/26
+----
+- src/pkcs15init/pkcs15-setcos.c | 5 ++++-
+- 1 file changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/pkcs15init/pkcs15-setcos.c b/src/pkcs15init/pkcs15-setcos.c
+-index a445513901..6525541f5a 100644
+---- a/src/pkcs15init/pkcs15-setcos.c
+-+++ b/src/pkcs15init/pkcs15-setcos.c
+-@@ -507,6 +507,9 @@ setcos_generate_key(struct sc_profile *profile, struct sc_pkcs15_card *p15card,
+- 		r = sc_card_ctl(p15card->card, SC_CARDCTL_SETCOS_GETDATA, &data_obj);
+- 		LOG_TEST_RET(ctx, r, "Cannot get key modulus: 'SETCOS_GETDATA' failed");
+- 
+-+		if (data_obj.DataLen < 3 || data_obj.DataLen < pubkey->u.rsa.modulus.len)
+-+			LOG_TEST_RET(ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Cannot get key modulus: wrong length of raw key");
+-+
+- 		keybits = ((raw_pubkey[0] * 256) + raw_pubkey[1]);  /* modulus bit length */
+- 		if (keybits != key_info->modulus_length)  {
+- 			sc_log(ctx,
+-@@ -514,7 +517,7 @@ setcos_generate_key(struct sc_profile *profile, struct sc_pkcs15_card *p15card,
+- 				 keybits, key_info->modulus_length);
+- 			LOG_TEST_RET(ctx, SC_ERROR_PKCS15INIT, "Failed to generate key");
+- 		}
+--		memcpy (pubkey->u.rsa.modulus.data, &raw_pubkey[2], pubkey->u.rsa.modulus.len);
+-+		memcpy(pubkey->u.rsa.modulus.data, &raw_pubkey[2], pubkey->u.rsa.modulus.len);
+- 	} else {
+- 		sc_file_free(file);
+- 	}
+-
+-From c911e5fca9184b16f94669ca0fa5227aaf0b590e Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 11:03:46 +0200
+-Subject: [PATCH 26/30] iasecc-sdo: Check length of data when parsing
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/27,29
+----
+- src/libopensc/iasecc-sdo.c | 9 +++++++++
+- 1 file changed, 9 insertions(+)
+-
+-diff --git a/src/libopensc/iasecc-sdo.c b/src/libopensc/iasecc-sdo.c
+-index 98402a4e3f..dbd5b9f08c 100644
+---- a/src/libopensc/iasecc-sdo.c
+-+++ b/src/libopensc/iasecc-sdo.c
+-@@ -318,16 +318,25 @@ iasecc_se_parse(struct sc_card *card, unsigned char *data, size_t data_len, stru
+- 
+- 	LOG_FUNC_CALLED(ctx);
+- 
+-+	if (data_len < 1)
+-+		LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
+-+
+- 	if (*data == IASECC_SDO_TEMPLATE_TAG)   {
+- 		size_size = iasecc_parse_size(data + 1, data_len - 1, &size);
+- 		LOG_TEST_RET(ctx, size_size, "parse error: invalid size data of IASECC_SDO_TEMPLATE");
+- 
+-+		if (data_len - 1 < size)
+-+			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
+-+
+- 		data += size_size + 1;
+- 		data_len = size;
+- 		sc_log(ctx,
+- 		       "IASECC_SDO_TEMPLATE: size %"SC_FORMAT_LEN_SIZE_T"u, size_size %d",
+- 		       size, size_size);
+- 
+-+		if (data_len < 3)
+-+			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
+-+
+- 		if (*data != IASECC_SDO_TAG_HEADER)
+- 			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
+- 
+-
+-From 755448b802a3631724eaf9a3cdece327afd127b7 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 11:38:25 +0200
+-Subject: [PATCH 27/30] pkcs15-sc-hsm: Properly check length of file list
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15init/8
+----
+- src/pkcs15init/pkcs15-sc-hsm.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/pkcs15init/pkcs15-sc-hsm.c b/src/pkcs15init/pkcs15-sc-hsm.c
+-index 71f96cfc56..db1a2b518f 100644
+---- a/src/pkcs15init/pkcs15-sc-hsm.c
+-+++ b/src/pkcs15init/pkcs15-sc-hsm.c
+-@@ -140,7 +140,7 @@ static int sc_hsm_determine_free_id(struct sc_pkcs15_card *p15card, u8 range)
+- 	LOG_TEST_RET(card->ctx, filelistlength, "Could not enumerate file and key identifier");
+- 
+- 	for (j = 0; j < 256; j++) {
+--		for (i = 0; i < filelistlength; i += 2) {
+-+		for (i = 0; i + 1 < filelistlength; i += 2) {
+- 			if ((filelist[i] == range) && (filelist[i + 1] == j)) {
+- 				break;
+- 			}
+-
+-From 9c8c25a82e1ef4b26a1828e430f6efe07f002b8c Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 18 Jul 2024 12:33:31 +0200
+-Subject: [PATCH 28/30] card-coolkey: Check length of buffer before conversion
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_reader/3
+----
+- src/libopensc/card-coolkey.c | 11 ++++++++---
+- 1 file changed, 8 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libopensc/card-coolkey.c b/src/libopensc/card-coolkey.c
+-index 9192aac092..5d547bc960 100644
+---- a/src/libopensc/card-coolkey.c
+-+++ b/src/libopensc/card-coolkey.c
+-@@ -1688,6 +1688,7 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
+- 	u8 key_number;
+- 	size_t params_len;
+- 	u8 buf[MAX_COMPUTE_BUF + 2];
+-+	size_t buf_len;
+- 	u8 *buf_out;
+- 
+- 	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
+-@@ -1728,8 +1729,6 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
+- 		ushort2bebytes(params.init.buf_len, 0);
+- 	} else {
+- 		/* The data fits in APDU. Copy it to the params object */
+--		size_t buf_len;
+--
+- 		params.init.location = COOLKEY_CRYPT_LOCATION_APDU;
+- 
+- 		params_len = sizeof(params.init) + datalen;
+-@@ -1749,6 +1748,7 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
+- 	if (r < 0) {
+- 		goto done;
+- 	}
+-+	buf_len = crypt_out_len_p;
+- 
+- 	if (datalen > MAX_COMPUTE_BUF) {
+- 		u8 len_buf[2];
+-@@ -1767,7 +1767,12 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
+- 					priv->nonce, sizeof(priv->nonce));
+- 
+- 	} else {
+--		size_t out_length = bebytes2ushort(buf);
+-+		size_t out_length;
+-+		if (buf_len < 2) {
+-+			r = SC_ERROR_WRONG_LENGTH;
+-+			goto done;
+-+		}
+-+		out_length = bebytes2ushort(buf);
+- 		if (out_length > sizeof buf - 2) {
+- 			r = SC_ERROR_WRONG_LENGTH;
+- 			goto done;
+-
+-From b6754eb3b279505c6d4f09cfa1c77dcad9420468 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Tue, 23 Jul 2024 10:48:32 +0200
+-Subject: [PATCH 29/30] card-entersafe: Check length of serial number
+-
+-Thanks Matteo Marini for report
+-https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
+-
+-fuzz_pkcs15_reader/5
+----
+- src/libopensc/card-entersafe.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/libopensc/card-entersafe.c b/src/libopensc/card-entersafe.c
+-index 5f6d8a424d..025ebedc91 100644
+---- a/src/libopensc/card-entersafe.c
+-+++ b/src/libopensc/card-entersafe.c
+-@@ -1479,6 +1479,8 @@ static int entersafe_get_serialnr(sc_car
+- 	r=entersafe_transmit_apdu(card, &apdu,0,0,0,0);
+- 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
+- 	LOG_TEST_RET(card->ctx, sc_check_sw(card,apdu.sw1,apdu.sw2),"EnterSafe get SN failed");
+-+        if (apdu.resplen != 8)
+-+                LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Invalid length of SN");
+- 
+- 	card->serialnr.len=serial->len=8;
+- 	memcpy(card->serialnr.value,rbuf,8);
+-
+-From ab476044a009003262991c065b792baa053c7be5 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
+-Date: Thu, 1 Aug 2024 10:32:40 +0200
+-Subject: [PATCH 30/30] card-cardos: Check length of APDU response
+-
+----
+- src/libopensc/card-cardos.c | 8 ++++----
+- 1 file changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
+-index 124752d78b..595ec099e3 100644
+---- a/src/libopensc/card-cardos.c
+-+++ b/src/libopensc/card-cardos.c
+-@@ -94,7 +94,7 @@ static void fixup_transceive_length(const struct sc_card *card,
+- 
+- static int cardos_match_card(sc_card_t *card)
+- {
+--	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
+-+	unsigned char atr[SC_MAX_ATR_SIZE] = {0};
+- 	int i;
+- 
+- 	i = _sc_match_atr(card, cardos_atrs, &card->type);
+-@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
+- 		return 1;
+- 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
+- 		int rv;
+--		sc_apdu_t apdu = { 0 };
+--		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
+-+		sc_apdu_t apdu = {0};
+-+		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = {0};
+- 		/* first check some additional ATR bytes */
+- 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
+- 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
+-@@ -131,7 +131,7 @@ static int cardos_match_card(sc_card_t *card)
+- 		apdu.lc = 0;
+- 		rv = sc_transmit_apdu(card, &apdu);
+- 		LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
+--		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00)
+-+		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00 || apdu.resplen < 2)
+- 			return 0;
+- 		if (apdu.resp[0] != atr[10] ||
+- 		    apdu.resp[1] != atr[11])
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
+deleted file mode 100644
+index 7d80aba..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-From b28a3cef416fcfb92fbb9ea7fd3c71df52c6c9fc Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Mon, 12 Aug 2024 19:02:14 +0200
+-Subject: [PATCH] openpgp: Do not accept non-matching key responses
+-
+-When generating RSA key pair using PKCS#15 init, the driver could accept
+-responses relevant to ECC keys, which made further processing in the
+-pkcs15-init failing/accessing invalid parts of structures.
+-
+-Thanks oss-fuzz!
+-
+-https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=71010
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+-
+-CVE: CVE-2024-8443
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/b28a3cef416fcfb92fbb9ea7fd3c71df52c6c9fc]
+-
+-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+----
+- src/libopensc/card-openpgp.c | 10 ++++++++++
+- 1 file changed, 10 insertions(+)
+-
+-diff --git a/src/libopensc/card-openpgp.c b/src/libopensc/card-openpgp.c
+-index fad32f0ce..f99ec0db9 100644
+---- a/src/libopensc/card-openpgp.c
+-+++ b/src/libopensc/card-openpgp.c
+-@@ -2877,6 +2877,9 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, u8* data, size_t data_len,
+- 
+- 		/* RSA modulus */
+- 		if (tag == 0x0081) {
+-+			if (key_info->algorithm != SC_OPENPGP_KEYALGO_RSA) {
+-+				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
+-+			}
+- 			if ((BYTES4BITS(key_info->u.rsa.modulus_len) < len)  /* modulus_len is in bits */
+- 				|| key_info->u.rsa.modulus == NULL) {
+- 
+-@@ -2892,6 +2895,9 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, u8* data, size_t data_len,
+- 		}
+- 		/* RSA public exponent */
+- 		else if (tag == 0x0082) {
+-+			if (key_info->algorithm != SC_OPENPGP_KEYALGO_RSA) {
+-+				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
+-+			}
+- 			if ((BYTES4BITS(key_info->u.rsa.exponent_len) < len)  /* exponent_len is in bits */
+- 				|| key_info->u.rsa.exponent == NULL) {
+- 
+-@@ -2907,6 +2913,10 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, u8* data, size_t data_len,
+- 		}
+- 		/* ECC public key */
+- 		else if (tag == 0x0086) {
+-+			if (key_info->algorithm != SC_OPENPGP_KEYALGO_ECDSA &&
+-+					key_info->algorithm != SC_OPENPGP_KEYALGO_ECDH) {
+-+				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
+-+			}
+- 			/* set the output data */
+- 			/* len is ecpoint length + format byte
+- 			 * see section 7.2.14 of 3.3.1 specs */
+---
+-2.34.1
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
+deleted file mode 100644
+index 30a7e63..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From 02e847458369c08421fd2d5e9a16a5f272c2de9e Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Thu, 15 Aug 2024 11:13:47 +0200
+-Subject: [PATCH] openpgp: Avoid buffer overflow when writing fingerprint
+-
+-Fix also surrounding code to return error (not just log it)
+-when some step fails.
+-
+-Thanks oss-fuzz
+-
+-https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=70933
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+-
+-CVE: CVE-2024-8443
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/02e847458369c08421fd2d5e9a16a5f272c2de9e]
+-
+-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+----
+- src/libopensc/card-openpgp.c | 17 ++++++++++++-----
+- 1 file changed, 12 insertions(+), 5 deletions(-)
+-
+-diff --git a/src/libopensc/card-openpgp.c b/src/libopensc/card-openpgp.c
+-index f99ec0db9..3957440de 100644
+---- a/src/libopensc/card-openpgp.c
+-+++ b/src/libopensc/card-openpgp.c
+-@@ -2756,14 +2756,21 @@ pgp_calculate_and_store_fingerprint(sc_card_t *card, time_t ctime,
+- 	/* update the blob containing fingerprints (00C5) */
+- 	sc_log(card->ctx, "Updating fingerprint blob 00C5.");
+- 	fpseq_blob = pgp_find_blob(card, 0x00C5);
+--	if (fpseq_blob == NULL)
+--		LOG_TEST_GOTO_ERR(card->ctx, SC_ERROR_OUT_OF_MEMORY, "Cannot find blob 00C5");
+-+	if (fpseq_blob == NULL) {
+-+		r = SC_ERROR_OUT_OF_MEMORY;
+-+		LOG_TEST_GOTO_ERR(card->ctx, r, "Cannot find blob 00C5");
+-+	}
+-+	if (20 * key_info->key_id > fpseq_blob->len) {
+-+		r = SC_ERROR_OBJECT_NOT_VALID;
+-+		LOG_TEST_GOTO_ERR(card->ctx, r, "The 00C5 blob is not large enough");
+-+	}
+- 
+- 	/* save the fingerprints sequence */
+- 	newdata = malloc(fpseq_blob->len);
+--	if (newdata == NULL)
+--		LOG_TEST_GOTO_ERR(card->ctx, SC_ERROR_OUT_OF_MEMORY,
+--			"Not enough memory to update fingerprint blob 00C5");
+-+	if (newdata == NULL) {
+-+		r = SC_ERROR_OUT_OF_MEMORY;
+-+		LOG_TEST_GOTO_ERR(card->ctx, r, "Not enough memory to update fingerprint blob 00C5");
+-+	}
+- 
+- 	memcpy(newdata, fpseq_blob->data, fpseq_blob->len);
+- 	/* move p to the portion holding the fingerprint of the current key */
+---
+-2.34.1
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-49010.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-49010.patch
+deleted file mode 100644
+index a0ac9fd..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-49010.patch
++++ /dev/null
+@@ -1,72 +0,0 @@
+-From fd4c54b4571b2e1593a8331906b5f0ca2aa39283 Mon Sep 17 00:00:00 2001
+-From: Frank Morgner <frankmorgner@gmail.com>
+-Date: Thu, 22 May 2025 00:24:32 +0200
+-Subject: [PATCH] fixed Stack-buffer-overflow WRITE in GET RESPONSE
+-
+-The do-while loop in apdu.c requires the output data to be set in any
+-case, otherwise non existent data may be copied to the output data.
+-
+-fixes https://issues.oss-fuzz.com/issues/416351800
+-fixes https://issues.oss-fuzz.com/issues/416295951
+-
+-(cherry picked from commit 953986f65db61871bbbff72788d861d67d5140c6)
+-CVE: CVE-2025-49010
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/953986f65db61871bbbff72788d861d67d5140c6]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/card-nqApplet.c | 11 ++++++-----
+- src/libopensc/iso7816.c       |  5 +++--
+- 2 files changed, 9 insertions(+), 7 deletions(-)
+-
+-diff --git a/src/libopensc/card-nqApplet.c b/src/libopensc/card-nqApplet.c
+-index f9075b948..90706f4b1 100644
+---- a/src/libopensc/card-nqApplet.c
+-+++ b/src/libopensc/card-nqApplet.c
+-@@ -190,9 +190,10 @@ static int nqapplet_finish(struct sc_card *card)
+- 	LOG_FUNC_RETURN(card->ctx, SC_SUCCESS);
+- }
+- 
+--static int nqapplet_get_response(struct sc_card *card, size_t *cb_resp, u8 *resp)
+-+static int
+-+nqapplet_get_response(struct sc_card *card, size_t *cb_resp, u8 *resp)
+- {
+--	struct sc_apdu apdu;
+-+	struct sc_apdu apdu = {0};
+- 	int rv;
+- 	size_t resplen;
+- 
+-@@ -204,12 +205,12 @@ static int nqapplet_get_response(struct sc_card *card, size_t *cb_resp, u8 *resp
+- 
+- 	rv = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
+--	if (apdu.resplen == 0) {
+--		LOG_FUNC_RETURN(card->ctx, sc_check_sw(card, apdu.sw1, apdu.sw2));
+--	}
+- 
+- 	*cb_resp = apdu.resplen;
+- 
+-+	if (apdu.resplen == 0) {
+-+		LOG_FUNC_RETURN(card->ctx, sc_check_sw(card, apdu.sw1, apdu.sw2));
+-+	}
+- 	if (apdu.sw1 == 0x90 && apdu.sw2 == 0x00) {
+- 		rv = SC_SUCCESS;
+- 	} else if (apdu.sw1 == 0x61) {
+-diff --git a/src/libopensc/iso7816.c b/src/libopensc/iso7816.c
+-index 2fea84078..dc2f03c00 100644
+---- a/src/libopensc/iso7816.c
+-+++ b/src/libopensc/iso7816.c
+-@@ -920,11 +920,12 @@ iso7816_get_response(struct sc_card *card, size_t *count, u8 *buf)
+- 
+- 	r = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
+--	if (apdu.resplen == 0)
+--		LOG_FUNC_RETURN(card->ctx, sc_check_sw(card, apdu.sw1, apdu.sw2));
+- 
+- 	*count = apdu.resplen;
+- 
+-+	if (apdu.resplen == 0) {
+-+		LOG_FUNC_RETURN(card->ctx, sc_check_sw(card, apdu.sw1, apdu.sw2));
+-+	}
+- 	if (apdu.sw1 == 0x90 && apdu.sw2 == 0x00)
+- 		r = 0;					/* no more data to read */
+- 	else if (apdu.sw1 == 0x61)
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66037.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66037.patch
+deleted file mode 100644
+index 91ffe53..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66037.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From b1a6f86298af7dfbaa1110b86662a9d1393a7678 Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Tue, 25 Nov 2025 15:58:02 +0100
+-Subject: [PATCH] pkcs15: Avoid buffer overrun on invalid data
+-
+-Invalid data can contain zero-length buffer, which after copying
+-was dereferenced without length check
+-
+-Credit: Aldo Ristori
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+-(cherry picked from commit 65fc211015cfcac27b10d0876054156c97225f50)
+-
+-CVE: CVE-2025-66037
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/65fc211015cfcac27b10d0876054156c97225f50]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/pkcs15-pubkey.c | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/src/libopensc/pkcs15-pubkey.c b/src/libopensc/pkcs15-pubkey.c
+-index a759efa45..48fb08cac 100644
+---- a/src/libopensc/pkcs15-pubkey.c
+-+++ b/src/libopensc/pkcs15-pubkey.c
+-@@ -1328,6 +1328,10 @@ sc_pkcs15_pubkey_from_spki_fields(struct sc_context *ctx, struct sc_pkcs15_pubke
+- 	       "sc_pkcs15_pubkey_from_spki_fields() called: %p:%"SC_FORMAT_LEN_SIZE_T"u\n%s",
+- 	       buf, buflen, sc_dump_hex(buf, buflen));
+- 
+-+	if (buflen < 1) {
+-+		LOG_TEST_RET(ctx, SC_ERROR_INVALID_DATA, "subjectPublicKeyInfo can not be empty");
+-+	}
+-+
+- 	tmp_buf = malloc(buflen);
+- 	if (!tmp_buf) {
+- 		r = SC_ERROR_OUT_OF_MEMORY;
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66038.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66038.patch
+deleted file mode 100644
+index e5a27de..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66038.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 2f5582340ac3fd2062d0f6561a13aa9b269062dd Mon Sep 17 00:00:00 2001
+-From: Jakub Jelen <jjelen@redhat.com>
+-Date: Tue, 18 Nov 2025 14:13:59 +0100
+-Subject: [PATCH] compacttlv: Fix possible buffer overrun
+-
+-Fixes: GHSA-72x5-fwjx-2459
+-
+-Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+-(cherry picked from commit a20b91adc2fc66785c0df98abc8ef456c0eaab9d)
+-
+-CVE: CVE-2025-66038
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/a20b91adc2fc66785c0df98abc8ef456c0eaab9d]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/sc.c | 10 ++++++----
+- 1 file changed, 6 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/libopensc/sc.c b/src/libopensc/sc.c
+-index 7c9e0d25e..eb88b9abe 100644
+---- a/src/libopensc/sc.c
+-+++ b/src/libopensc/sc.c
+-@@ -1082,13 +1082,15 @@ const u8 *sc_compacttlv_find_tag(const u8 *buf, size_t len, u8 tag, size_t *outl
+- 		size_t expected_len = tag & 0x0F;
+- 
+- 	        for (idx = 0; idx < len; idx++) {
+--			if ((buf[idx] & 0xF0) == plain_tag && idx + expected_len < len &&
+--			    (expected_len == 0 || expected_len == (buf[idx] & 0x0F))) {
+-+			u8 ctag = buf[idx] & 0xF0;
+-+			size_t ctag_len = buf[idx] & 0x0F;
+-+			if (ctag == plain_tag && idx + ctag_len < len &&
+-+					(expected_len == 0 || expected_len == ctag_len)) {
+- 				if (outlen != NULL)
+--					*outlen = buf[idx] & 0x0F;
+-+					*outlen = ctag_len;
+- 				return buf + (idx + 1);
+- 			}
+--			idx += (buf[idx] & 0x0F);
+-+			idx += ctag_len;
+-                 }
+-         }
+- 	return NULL;
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-1.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66215-1.patch
+deleted file mode 100644
+index ac2926b..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-1.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 74a72d3a82d1f49d55ef822ededec74738a30ec4 Mon Sep 17 00:00:00 2001
+-From: Frank Morgner <frankmorgner@gmail.com>
+-Date: Wed, 4 Jun 2025 00:52:13 +0200
+-Subject: [PATCH] fixed  Stack-buffer-overflow WRITE
+-
+-fixes https://issues.oss-fuzz.com/issues/421520684
+-
+-(cherry picked from commit eab4d17866bb457dd86d067b304294e9f6671d52)
+-
+-CVE: CVE-2025-66215
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/eab4d17866bb457dd86d067b304294e9f6671d52]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/card-oberthur.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
+-index d5445f01a..a8aba7992 100644
+---- a/src/libopensc/card-oberthur.c
+-+++ b/src/libopensc/card-oberthur.c
+-@@ -1135,7 +1135,7 @@ auth_compute_signature(struct sc_card *card, const unsigned char *in, size_t ile
+- 	apdu.lc = ilen;
+- 	apdu.le = olen > 256 ? 256 : olen;
+- 	apdu.resp = resp;
+--	apdu.resplen = olen;
+-+	apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 
+- 	rv = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-2.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66215-2.patch
+deleted file mode 100644
+index 316ac97..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-2.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 5f8c904577cce1a6e21f793ba4aab1c473ff4136 Mon Sep 17 00:00:00 2001
+-From: Frank Morgner <frankmorgner@gmail.com>
+-Date: Wed, 4 Jun 2025 01:07:56 +0200
+-Subject: [PATCH] oberthur: fixed potential Stack-buffer-overflow WRITE
+-
+-(cherry picked from commit 3402a90d8c9be223d4cf6abe009a4707117d7972)
+-
+-CVE: CVE-2025-66215
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/3402a90d8c9be223d4cf6abe009a4707117d7972]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/card-oberthur.c | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
+-index a8aba7992..216640ebd 100644
+---- a/src/libopensc/card-oberthur.c
+-+++ b/src/libopensc/card-oberthur.c
+-@@ -2246,14 +2246,16 @@ auth_read_record(struct sc_card *card, unsigned int nr_rec, unsigned int idx,
+- 	if (flags & SC_RECORD_BY_REC_NR)
+- 		apdu.p2 |= 0x04;
+- 
+--	apdu.le = count;
+--	apdu.resplen = count;
+-+	apdu.le = count > SC_MAX_APDU_BUFFER_SIZE ? SC_MAX_APDU_BUFFER_SIZE : count;
+-+	apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 	apdu.resp = recvbuf;
+- 
+- 	rv = sc_transmit_apdu(card, &apdu);
+- 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
+- 	if (apdu.resplen == 0)
+- 		LOG_FUNC_RETURN(card->ctx, sc_check_sw(card, apdu.sw1, apdu.sw2));
+-+	if (count < apdu.resplen)
+-+		LOG_FUNC_RETURN(card->ctx, SC_ERROR_WRONG_LENGTH);
+- 	memcpy(buf, recvbuf, apdu.resplen);
+- 
+- 	rv = sc_check_sw(card, apdu.sw1, apdu.sw2);
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-3.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66215-3.patch
+deleted file mode 100644
+index 5857abe..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-3.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From 4db6d034c9566e903e4c1094beccaf05efc4e7e5 Mon Sep 17 00:00:00 2001
+-From: Frank Morgner <frankmorgner@gmail.com>
+-Date: Thu, 5 Jun 2025 13:18:15 +0200
+-Subject: [PATCH] oberthur: use MIN where possible
+-
+-(cherry picked from commit a4bbf8a631537a4c0083b264095ed1cd36d307ab)
+-
+-CVE: CVE-2025-66215
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/a4bbf8a631537a4c0083b264095ed1cd36d307ab]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/card-oberthur.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
+-index 216640ebd..3e7a7b6b9 100644
+---- a/src/libopensc/card-oberthur.c
+-+++ b/src/libopensc/card-oberthur.c
+-@@ -606,7 +606,7 @@ auth_list_files(struct sc_card *card, unsigned char *buf, size_t buflen)
+- 	if (apdu.resplen == 0x100 && rbuf[0]==0 && rbuf[1]==0)
+- 		LOG_FUNC_RETURN(card->ctx, 0);
+- 
+--	buflen = buflen < apdu.resplen ? buflen : apdu.resplen;
+-+	buflen = MIN(buflen, apdu.resplen);
+- 	memcpy(buf, rbuf, buflen);
+- 
+- 	LOG_FUNC_RETURN(card->ctx, (int)buflen);
+-@@ -1133,7 +1133,7 @@ auth_compute_signature(struct sc_card *card, const unsigned char *in, size_t ile
+- 	apdu.datalen = ilen;
+- 	apdu.data = in;
+- 	apdu.lc = ilen;
+--	apdu.le = olen > 256 ? 256 : olen;
+-+	apdu.le = MIN(olen, 256);
+- 	apdu.resp = resp;
+- 	apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 
+-@@ -2246,7 +2246,7 @@ auth_read_record(struct sc_card *card, unsigned int nr_rec, unsigned int idx,
+- 	if (flags & SC_RECORD_BY_REC_NR)
+- 		apdu.p2 |= 0x04;
+- 
+--	apdu.le = count > SC_MAX_APDU_BUFFER_SIZE ? SC_MAX_APDU_BUFFER_SIZE : count;
+-+	apdu.le = MIN(count, SC_MAX_APDU_BUFFER_SIZE);
+- 	apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 	apdu.resp = recvbuf;
+- 
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-4.patch b/meta-oe/recipes-support/opensc/files/CVE-2025-66215-4.patch
+deleted file mode 100644
+index 80816aa..0000000
+--- a/meta-oe/recipes-support/opensc/files/CVE-2025-66215-4.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From 665871f38aee0d52eba923783d4606becc7628d0 Mon Sep 17 00:00:00 2001
+-From: Frank Morgner <frankmorgner@gmail.com>
+-Date: Thu, 5 Jun 2025 14:04:35 +0200
+-Subject: [PATCH] oberthur: use SC_MAX_APDU_RESP_SIZE where possible
+-
+-(cherry picked from commit 56bc5e9575965461d99a274be45d71c18ab6eae0)
+-
+-CVE: CVE-2025-66215
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/56bc5e9575965461d99a274be45d71c18ab6eae0]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- src/libopensc/card-oberthur.c | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
+-index 3e7a7b6b9..159b84aed 100644
+---- a/src/libopensc/card-oberthur.c
+-+++ b/src/libopensc/card-oberthur.c
+-@@ -1133,7 +1133,7 @@ auth_compute_signature(struct sc_card *card, const unsigned char *in, size_t ile
+- 	apdu.datalen = ilen;
+- 	apdu.data = in;
+- 	apdu.lc = ilen;
+--	apdu.le = MIN(olen, 256);
+-+	apdu.le = MIN(olen, SC_MAX_APDU_RESP_SIZE);
+- 	apdu.resp = resp;
+- 	apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 
+-@@ -1180,14 +1180,14 @@ auth_decipher(struct sc_card *card, const unsigned char *in, size_t inlen,
+- 	}
+- 
+- 	_inlen = inlen;
+--	if (_inlen == 256)   {
+-+	if (_inlen == SC_MAX_APDU_RESP_SIZE)   {
+- 		apdu.cla |= 0x10;
+- 		apdu.data = in;
+- 		apdu.datalen = 8;
+- 		apdu.resp = resp;
+- 		apdu.resplen = SC_MAX_APDU_BUFFER_SIZE;
+- 		apdu.lc = 8;
+--		apdu.le = 256;
+-+		apdu.le = SC_MAX_APDU_RESP_SIZE;
+- 
+- 		rv = sc_transmit_apdu(card, &apdu);
+- 		sc_log(card->ctx, "rv %i", rv);
+-@@ -1504,7 +1504,7 @@ auth_read_component(struct sc_card *card, enum SC_CARDCTL_OBERTHUR_KEY_TYPE type
+- {
+- 	struct sc_apdu apdu;
+- 	int rv;
+--	unsigned char resp[256];
+-+	unsigned char resp[SC_MAX_APDU_RESP_SIZE];
+- 
+- 	LOG_FUNC_CALLED(card->ctx);
+- 	sc_log(card->ctx, "num %i, outlen %"SC_FORMAT_LEN_SIZE_T"u, type %i",
+-@@ -2160,7 +2160,7 @@ auth_read_binary(struct sc_card *card, unsigned int offset,
+- 	if (auth_current_ef->magic==SC_FILE_MAGIC &&
+- 			auth_current_ef->ef_structure == SC_CARDCTL_OBERTHUR_KEY_RSA_PUBLIC)   {
+- 		int jj;
+--		unsigned char resp[256];
+-+		unsigned char resp[SC_MAX_APDU_RESP_SIZE];
+- 		size_t resp_len, out_len;
+- 		struct sc_pkcs15_pubkey_rsa key;
+- 
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
+similarity index 70%
+rename from meta-oe/recipes-support/opensc/opensc_0.25.1.bb
+rename to meta-oe/recipes-support/opensc/opensc_0.27.1.bb
+index 5f43826..08182f5 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
+@@ -11,19 +11,9 @@ SECTION = "System Environment/Libraries"
+ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
  
- SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
-            file://run-ptest \
--           file://CVE-2025-7395-1.patch \
--           file://CVE-2025-7395-2.patch \
--           file://CVE-2025-7395-3.patch \
--           file://CVE-2025-7394-1.patch \
--           file://CVE-2025-7394-2.patch \
--           file://CVE-2025-7394-3.patch \
--           file://CVE-2025-7394-4.patch \
--           file://CVE-2025-7394-5.patch \
--           file://CVE-2025-7394-6.patch \
-            "
--SRCREV = "00e42151ca061463ba6a95adb2290f678cbca472"
-+SRCREV = "ac01707f552c611fbd135cc723b2682b3e7f80f2"
- 
- S = "${WORKDIR}/git"
+-#v0.21.0
+-SRCREV = "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
+-SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https \
+-           file://0001-PR-Fixes-for-uninitialized-memory-issues.patch \
+-           file://CVE-2024-8443-0001.patch \
+-           file://CVE-2024-8443-0002.patch \
+-           file://CVE-2025-49010.patch \
+-           file://CVE-2025-66037.patch \
+-           file://CVE-2025-66038.patch \
+-           file://CVE-2025-66215-1.patch \
+-           file://CVE-2025-66215-2.patch \
+-           file://CVE-2025-66215-3.patch \
+-           file://CVE-2025-66215-4.patch \
++#v0.27.1
++SRCREV = "19868984dc4dc697af6a86d65ab32a1f19a43ea4"
++SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
+          "
+ DEPENDS = "virtual/libiconv openssl"
  
 -- 
 2.55.0
