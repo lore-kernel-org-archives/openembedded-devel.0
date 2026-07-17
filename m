@@ -2,97 +2,87 @@ Return-Path: <lianux.mm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AF64C44507
-	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 06:41:28 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8036.1784270481157355520
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE2F3C4450F
+	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 06:45:47 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8080.1784270740481478353
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2026 23:41:21 -0700
+ Thu, 16 Jul 2026 23:45:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=sYiMOmNw;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: lianux.mm@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-38a0c7e841fso4610467a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 23:41:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bY4uBEEP;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: lianux.mm@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cad4170e8eso95986295ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 23:45:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784270480; x=1784875280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rU1CTfZudARhVcA+EH8AX2A3xWvf8vwq/ppOpsC3Lbc=;
-        b=sYiMOmNwEFEugBijBmhgV7qm1tasjEs2tifAQ0P1bE42byrpaj6l40yrs/i6iLH/lF
-         Ph546JKC4JW84n91YVuiwYcuPvu8p8wy3kfinVh+srly+slGnUYfTO45q9tvbIsMmoiw
-         YYeFDTqE4qZ/yD8qRHDnZa+O4IDibtXhiz18lxmqLM7aZNMp9gjW3Fqi8I3/S3aLxLel
-         7pn3Wni0EsqzS0ULefXFfW2PIhF9l1Rj6QfgxKW5nmyr83sptkMXzI2A2pE0TQ07HU8g
-         Tlp7cIeuZjkfmPVcYwL4q+8y8JzNeHp2wfAj6ImxoPRD2oWT1mUrGLlMg1VPf0f+ewOO
-         8y6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784270480; x=1784875280;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1784270740; x=1784875540; darn=lists.openembedded.org;
+        h=cc:references:in-reply-to:date:subject:to:content-transfer-encoding
+         :mime-version:content-type:from:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rU1CTfZudARhVcA+EH8AX2A3xWvf8vwq/ppOpsC3Lbc=;
-        b=c3DndKXrPQADsfocz1i1DctTPPIPqwxJZRuxplUrqGussKsJC0RMd1vJt+8NDPuoIG
-         IqTgaTYOAwroDduDfJp4/u/wyG32cZnqxPxuoQmi6pstjWKOxbntIikTULIuqptQcK0Y
-         /44XkWBEa9fMxWkAiDA+7K03rqm59rPLrgrSM3RVHeyl29/bfvVDJwpVv8BRzrHvIJaS
-         gGsnR0sWaVeI3iQuMOKBOD+E5JmvXFOHDN1dsFEPMs5v0nISusUablwJzWIsjdO5lnmc
-         tfoeDFZTfiBtjXwxZo0vasxTPG/zmqBHFnFQqg6C9zzB7VUTnhP9knq55l5/0Sy7tkhV
-         yt0A==
-X-Gm-Message-State: AOJu0YwkV3PjUv3BRjkR264x1UpgROox1bYHk31YLtOvLc2zIiLypUOo
-	zkGCbQ/swqA8lobOoVfGKIxj5mdhsDTlatpWyRLM0zWAivg+KiLjmKCUX9fFcw==
-X-Gm-Gg: AfdE7cnDNbk3wilVLvdHnS4imuumO0iEnlnPLkUnQR9yJgP5g+o30IZHvOpElxFvznO
-	C0X7r9de/jM6N27k79g7gQI69NcEYYDjASrnlZm82MuIwazIaXPaJM8wstb7X5OEfA07OiG9XaP
-	YpSO179t5SnqNFd2cEpCVfOv1Ohrbyg7mR2/tc3UL5me5nvnxf5y3I5oKVV19/FybEuH/HCd3ol
-	TZd/MInkwFEJs1vy7/Hr9YSAyAI5FjzJxTSoXhY/CDkd19Eb7opVWkz5h/XPMLqDitnfIYM6h1v
-	VeKHsg5fc2poh3gRqK7t6eRffZlWaJnfOG5Iv3mjWYfMHOhL9SZ0GpEbEXwTiMIZIUrUhe9kmZH
-	QfNnLcKpyEMP1tD0J4709UQW4+LZYEBJ77TXVkXV7Xt55vk3SAae+W9CZ7hGspzHe9B3wpaugST
-	VskQy6aA/dyg==
-X-Received: by 2002:a17:90b:3dce:b0:387:e0db:3fad with SMTP id 98e67ed59e1d1-38e4b5d3ec4mr1303928a91.38.1784270480437;
-        Thu, 16 Jul 2026 23:41:20 -0700 (PDT)
-Received: from localhost.localdomain ([2605:a141:2231:7698::1])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e4b0e9c5fsm500239a91.10.2026.07.16.23.41.18
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Thu, 16 Jul 2026 23:41:20 -0700 (PDT)
+        bh=crbvNmaAkyCQak/FtqzFVkkBidSFXrir8yNqrpWM7k0=;
+        b=bY4uBEEPcq8NzQw9EYOqSnXuKEcgWRhttFdrRDzDdkeSw+RDfGRSAjSqlaWDLd/ZGs
+         Vg/GjOL0WAS4nEufb7K08S9AKFU9Xzg8arI+QqLHgMvgD8xj4V7QRFr/EwKaQUZzs4ra
+         nT5Hy93UHGRQXvfuSnUR2+eU3X0CV6/2BOGxWKPjZ8Y45UE/lNQ6+obUQs9aDDQfMMAk
+         JRAtTfSCcLOMgrYlKXcY7UnoWIB2PAn5ufOXCYzUogX31L/cOXQY134dR2hGTU+dtTUz
+         rumB+L3o3eD+ht6tue5ud+SGH/BUA3AqpoIyUnqdKsdv3xa6lfSWOXKD4+WylmYjSIF8
+         WaAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784270740; x=1784875540;
+        h=cc:references:in-reply-to:date:subject:to:content-transfer-encoding
+         :mime-version:content-type:from:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=crbvNmaAkyCQak/FtqzFVkkBidSFXrir8yNqrpWM7k0=;
+        b=Hrl8Y+sbUXJoEUFfljvKT07XYsty4VUY1kHyyMJPb/g59kkFOP5GtT0nWsIELKvUdm
+         HpV8mybHEJEcC8mewG3mw3l5IefNK7gle8l2J+v/CnqUkTBVcYYA+UOHOP1iSjcY8kxq
+         uKdjh7c6A6+wxJges3SS8ikFLFitp/Y0FlaX9fBmaftbFgtR9LmnOrfQIgAxlMYo1wxO
+         5YIdOtn31ybyGtaPS5+6GTJqVuM38L6bmcik23b/PjXdQdx5YUjwBbSf1QZvU/dvjoPE
+         sI9zuvTC6rcVhwtkoH10loGXhVo6WpyGatDwg8E2zrJuGHCI5zRohssgF7yXRX17xdK2
+         b5bw==
+X-Gm-Message-State: AOJu0YyMnCJ7Rm2kKGJz5gkaakYg8eHA79XEFCsitCrmyut7TYaOyeTs
+	Z+j0uOoDS7f6vDCsAP4o9Xu1svBLxstJqFgH/AD9aGQq+JvNpmlYzItR6rDvV9xE+wk=
+X-Gm-Gg: AfdE7cl6edfe1NgOH9JH/7BbbPA6qJp+aBiplNvZyk64Mmxegwye3IttrWbRaKUv1r7
+	7qejqbAVzvrSH7ylSSWxx7LKgjHsTMrlzUCiSiFbll4wR0Cn7dnlRgzRif2Kf6Lx5H7AgEyaeSP
+	Yz/XwZbLuSXp4yk7jLX0Mna66jxnrHyih1fxe6U5vD9AnsG9P04APo55jQUhbMuDu1ErkwCU8nv
+	/FbcBGQ6s6Z1pOkUqHHTwu8KAXRYEyzzvPkal2oCp/q2+5fScMsluo2PH6XGSUpyF/XrFQhtmMy
+	fBxqBGS+e+oeYQybrDRAZAdv2RD2Pb17kXHO7Ttxm8hQnsShq8oZjvQY5yUmGV/Dmh6ac6LbX4k
+	G1uirzgoG90uRZHQWfxQ/wZMKiRD98ylHsS4UXeiy8dJ3yzzVZ5Sh6E+YPKR/4mI0V18LI6RCza
+	iHDO5rCxLvvKc=
+X-Received: by 2002:a17:903:234c:b0:2ca:feb:303b with SMTP id d9443c01a7336-2cf3494894emr14542675ad.25.1784270739810;
+        Thu, 16 Jul 2026 23:45:39 -0700 (PDT)
+Received: from lianux-2.local ([2605:a141:2231:7698::1])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf344b1348sm5180615ad.18.2026.07.16.23.45.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 23:45:39 -0700 (PDT)
+Message-ID: <6a59cf93.4e95adb8.1c8022.48c0@mx.google.com>
 From: Lian Wang <lianux.mm@gmail.com>
 X-Google-Original-From: Lian Wang <lianux.wang@processmission.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Lian Wang <lianux.wang@processmission.com>
-Subject: [oe-devel][master][PATCH] wolfssl: upgrade 5.9.1 -> 5.9.2
-Date: Fri, 17 Jul 2026 14:41:09 +0800
-Message-ID: <20260717064109.50778-1-lianux.wang@processmission.com>
-X-Mailer: git-send-email 2.55.0
+Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH 1/2] wolfssl: upgrade 5.7.2 -> 5.9.2
+Date: Fri, 17 Jul 2026 14:45:34 +0800
+In-Reply-To: 
+References: 
+Cc: raj.khem@gmail.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 06:41:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128246
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 06:45:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128247
 
-- Update SRCREV to v5.9.2-stable tag
-- All security fixes from 5.9.2 release included
+Hi Khem,
 
-Signed-off-by: Lian Wang <lianux.wang@processmission.com>
----
- .../wolfssl/{wolfssl_5.9.1.bb => wolfssl_5.9.2.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.9.1.bb => wolfssl_5.9.2.bb} (98%)
+Thank you for the review.
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-index 2978ff1..9834c22 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.2.bb
-@@ -17,7 +17,7 @@ SRC_URI = " \
-     file://run-ptest \
- "
- 
--SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
-+SRCREV = "a82476d144290bf6a786607a16c224acff63d882"
- 
- 
- inherit autotools ptest
--- 
-2.55.0
+I've checked the master branch and found:
+- opensc (2/2) is already at 0.27.1 on master - no upgrade needed
+- tcpdump is already at 4.99.6 on master - no upgrade needed
+- wolfssl needed 5.9.1 -> 5.9.2, I've sent a v2 rebased on master
 
+Thanks for the guidance on the branch policy. I'll target master for
+version upgrades going forward.
+
+Thanks,
+Lian
 
