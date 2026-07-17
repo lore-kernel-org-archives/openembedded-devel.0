@@ -2,235 +2,268 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0DFFC44520
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87FECC44516
 	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 13:04:49 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13067.1784293481635296534
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12947.1784293481046159240
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 17 Jul 2026 06:04:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=IkQfisO3;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-471eeac43bfso7336924f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 06:04:41 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=oK8n1f36;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4954afac04bso5180935e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 06:04:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1784293480; x=1784898280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HxINFHz4ymKRXxLVQGmdB4eqHiQVieHFud1vlDmW49w=;
-        b=IkQfisO3iu+cfR4S/eUoYyokf3xnnZCRxgkfQHi4pLNFR+usEjaiAIsNt/wtN4WqCf
-         B52qcR0Uunz3/AqiKStXli80XSp2rHXVmy6zBcdG6rSLVSyPvMxVL1z+mQuBhLmMEQrp
-         DGfLDgwt8vugGId3LmxV+fld9iiUoNQhil/Hk=
+        d=konsulko.com; s=google; t=1784293479; x=1784898279; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rKP+WBQieUbCQn+KZdjshJ+QrCbqwEPH9SI2j+IfGlA=;
+        b=oK8n1f36Wb7jQ0viglklB/nN6VvXEVZKfwrbAAKWF98N0lmTYIL8MKqgZGEURBB34V
+         tyUynhzaxV2hHtH//Eqnh7CEA65cLdBwwevQKxh58mapm2shBKXKXNy1k4fCe9AozfbU
+         bzFfurxtFansl7mbnvMi+mg6nMRaCP9+lMjJw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784293480; x=1784898280;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HxINFHz4ymKRXxLVQGmdB4eqHiQVieHFud1vlDmW49w=;
-        b=Grn3w3ciFRwo9rZPrXybnBsaWgLGXcZ96oBHS1XkmWsEbwzKvr8KygaGEwxdmEKNPh
-         MJYvRlRCT9N96IKqUyO+7IGRoKNNARnqkQecXaYD6Gnhe2Ri8OVwF2xINtFXJnWxLmnL
-         sWIFqJfrKdieyCxMAOjiarnIK8KpSgUTvHabArdk2mSIv/Vek0HfYAVzNzbiN/c+ya+m
-         Amsg3kmxCALjdIrwvgDwUGrjOKVHp78quEyaRPqcZj+2gJUIZGoNC2m5kcEp7CZxPJLT
-         9DXCW4e7PB00GpEX+3qSj2g+vwSgWNp2bjCX27O9pd0vYD7A8vPrxJIK1hnOrEtrmup4
-         qhug==
-X-Gm-Message-State: AOJu0YyeQw2PoVNQAVaKqa6DbiwUYGfJRKuwJ07vt9zqDHrnyZ88DaXK
-	mE+7kg0ObzHgnKpY1kOmm2of13WQk+Q5oXSxiTYUuOijArkZ2DJnF90vjKjoiMgLNnxXlzywkPU
-	2SO56
-X-Gm-Gg: AfdE7ckc3L/IheqmPWt4S+fDerF9MQnco0W8AHH0Mq63gI7WTV+cq0MuKStI6+Aib9o
-	mQyKyLK0D53maKBeOmp//eFDwr7MGsisVKZiXCV2kpmSKTuNYuIoSaNp3Hpjn29nV2zrlhgpTMD
-	SPRvy5jH7l2Vnbo/LbZftEqrYHh2xHyz/a27uEp237qXeZg1MK9U99bC9/hIjootTTjHaib7DSk
-	PoaFOZbToQmWatPXM0PI6Tqdg6hEzTXoSLkvkBVXljmaxai29s4IOePDy0UhySUxVD96fKZxQpC
-	d3J2Zw63LRa41c/8mmpaZN3sCtsKCrELzVTgm5I8aW5z8kNgOQ3R5QZG3fwz3A4SKNGT6p5L0t/
-	rowP3o8QtlRNXlKC31nQlXl/3eMuq4XCfS0rjSdVg37Kuc08ETlklF3WJxIcz4EKw7jWYJSU3ab
-	Pce5ylalFky8TasyPtnBCdt30HQbWRM8zey/M7z28QThx1L1tkd0rK2sRaPYjfA3SIWtgn2DJDG
-	XqNpPSH/E+NzKGmD1OnNtHjrjf+klw=
-X-Received: by 2002:adf:e010:0:10b0:474:cd60:1154 with SMTP id ffacd0b85a97d-47f6232c9c2mr2460395f8f.41.1784293479683;
-        Fri, 17 Jul 2026 06:04:39 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784293479; x=1784898279;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rKP+WBQieUbCQn+KZdjshJ+QrCbqwEPH9SI2j+IfGlA=;
+        b=L7dLkqX4GQtup9a2/lKj0Fz8SKbg2pfa16SqXavywc8gkMNSwjKB5tKJtZ/rg1BGQb
+         b276zqTEzNWDAoqti2POv7m7HQ0FlHrJD8jIv0PLJFSOHRim9Bv8ebxpJTCDdjLmYSFi
+         F854WxaCXTIdm8vx5b73IIatqu8NlN5Wlg4zTFgioSrHelFvtjGzZaBmd00S4yGCyIXZ
+         rXxJRbJWjXe1hmDyX8ZoQpckCBzRM6xaOk0P16lfsLqwUQypyZVBYmmqNvPTtTn4Oh4a
+         ItVGSpZ/5p5ITaO2PIYol0eUlWwFU9u4jNPxvRuOpDL67LXgzrk1dcIeOYfptvC5PVOe
+         tT8w==
+X-Gm-Message-State: AOJu0YwyBoHAq1rfyiq8/YcpNVT8YyNErGWrjpfvVHZBRTfO+1Raiul9
+	3y77lh4tMdiJLBX6bo7VYDbtd9wkoSTRpl06K69H6vYfMt87WvxBtDxeNT1sdrmg4CH96rjse7W
+	gi60B
+X-Gm-Gg: AfdE7cmlm8Vj2TCnhf54AxY1QGe3qsToJliV3HaVUXtt5tyYX+J4JNQcuZVbMfO4QRp
+	qyDcSPJgCaXoiL0gC1x7mO5vniV8kaXbKiPMmJBMF9fbYpxG/BpjOkVIcS7v8zymjUdKjQzsYub
+	Pdbng8aBCu/TeBQ7KCDO11H+124EsOPop0QzGllwUoejcfnppA6ACSP7BpmUIImPynvNJe5qlHN
+	GYZDAKUWFmpIZOCn2VCGcQZACQHLdH7VgNfe+U441J4OkMrOkE07365KQxvlBqnC96d0z0WtVrm
+	ZNRzPrDl3BiJpvRv9rnYfHRVOWeXkkspJH84eRD9XuSQMXe6j7t3T75qYuDQF92kjrY90OYngyf
+	fp2LLdc1ZVtUlnbqyYxxd2W4FF0gEgsQuxqPXhEPCUcWAW9K6RM4POlrp9cFQqdvsyK5+hflsOG
+	3eUezGDBhUGunMFrc/6aUi6nvozZwDYQVOvGd/4OHCl20CwVvK3+JrmLJOuANu2nXkD2LQ0zbNw
+	r+S5UPd4E0jd4fiMKGvWkIVj3l1GaA=
+X-Received: by 2002:a05:600c:e549:20b0:493:b4cf:d37f with SMTP id 5b1f17b1804b1-4954a3f0e58mr21760245e9.16.1784293478679;
+        Fri, 17 Jul 2026 06:04:38 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63e49500sm3592112f8f.2.2026.07.17.06.04.38
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63e49500sm3592112f8f.2.2026.07.17.06.04.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 06:04:39 -0700 (PDT)
+        Fri, 17 Jul 2026 06:04:38 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-lief: Upgrade 0.17.3 -> 1.0.0
-Date: Fri, 17 Jul 2026 16:04:35 +0300
-Message-ID: <20260717130435.849145-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-scikit-build-core: Upgrade 0.12.2 -> 1.0.3
+Date: Fri, 17 Jul 2026 16:04:34 +0300
+Message-ID: <20260717130435.849145-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260717130435.849145-1-leon.anavi@konsulko.com>
-References: <20260717130435.849145-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 13:04:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128250
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128249
 
-Upgrade to release 1.0.0:
+Upgrade to release 1.0.3:
 
-- Add Android JNI Analyzer
-- The DWARF import plugin now supports comments
-- Add support for generating DWARF from firmware or binaries
-  without a precise format or architecture
-- Add support for accessing the bit size of bit-field declarations
-- Add support for accessing Enum entries:
-  lief.dwarf.types.Enum.entries()
-- Add support for reading from or assigning a register to a function
-  parameter
-- Add support for reading from or assigning a description
-  (DW_AT_description) to a lief.dwarf.Function, lief.dwarf.Variable,
-  or lief.dwarf.LexicalBlock:
-  lief.dwarf.Function.description()
-  lief.dwarf.Variable.description()
-  lief.dwarf.LexicalBlock.description()
-- Enable the creation of nested lief.dwarf.editor.Function.LexicalBlock
-- Add support for generating a C/C++ definition for a whole
-  lief.dwarf.CompilationUnit ( lief.dwarf.CompilationUnit.to_decl()).
-  The output of the following to_decl() functions can now be
-  configured through the new lief.DeclOpt structure:
-  lief.dwarf.Function.to_decl()
-  lief.dwarf.Variable.to_decl()
-  lief.dwarf.Type.to_decl()
-  lief.dwarf.CompilationUnit.to_decl()
-- Improve support and the API for LF_ENUM: lief.pdb.types.Enum
-- Improve support and the API for LF_PROCEDURE: lief.pdb.types.Function
-- Improve support and the API for LF_ARRAY: lief.pdb.types.Array
-- Improve support and the API for simple types: lief.pdb.types.Simple
-- Improve support and the API for LF_ONEMETHOD: lief.pdb.types.Method
-- Add support for generating a C/C++ definition for a lief.pdb.Function
-  ( lief.pdb.Function.to_decl()) and a lief.pdb.CompilationUnit
-  ( lief.pdb.CompilationUnit.to_decl()), configurable with the new
-  lief.DeclOpt structure.
-- Add support for DT_AUXILIARY tag: lief.ELF.DynamicEntryAuxiliary
-- Add support for DT_FILTER tag: lief.ELF.DynamicEntryFilter
-- Add lief.ELF.parse_from_dump() to parse an ELF binary from a
-  memory dump
-- Add lief.COFF.Section.coff_string for accessing the full section
-  name when this name does not fit in 8 bytes.
-- Add support for writing big-endian Mach-O binaries
-- Introduce an API for selecting a specific Mach-O binary by
-  architecture from a FAT binary
-- Add lief.MachO.FatBinary.create() to create a FAT binary from a
-  list of lief.MachO.Binary objects targeting different architectures
-- Add support for lief.MachO.ThreadLocalVariables
-- Fix an extra byte being written after the thread state of an
-  LC_UNIXTHREAD/LC_THREAD command, which shifted the following load
-  commands by one byte
-- Add support for editing the runtime tables of the
-  LC_FUNCTION_VARIANTS command and committing the changes on write:
-  lief.MachO.FunctionVariants
-- Add a structured parser, editing API and writer for the
-  LC_FUNCTION_VARIANT_FIXUPS command:
-  lief.MachO.FunctionVariantFixups
-- Add support for the LC_LAZY_LOAD_DYLIB_INFO command:
-  lief.MachO.LazyLoadDylibInfo
-- Add lief.MachO.parse_from_dump() to parse a Mach-O binary from a
-  memory dump
-- Add setters for lief.PE.ImportEntry.iat_value and
-  lief.PE.ImportEntry.ilt_value
-- Add lief.PE.Binary.offset_to_rva() to convert a raw offset into a RVA
-- Add lief.PE.parse_from_dump() to parse a PE binary from a memory dump
-- Update lief.Binary.offset_to_virtual_address() for PE binaries
-  to return an absolute virtual address instead of a RVA
-- Add support for adding an lief.PE.Import at a specific position:
-  lief.PE.Binary.add_import()
-- Improve support for EFI binaries, such as bzImage
-- Add support for Objective-C categories: lief.ObjC.Category,
-  accessible through lief.ObjC.Metadata.categories
-- Add support for iterating over the operands of MIPS, PowerPC,
-  eBPF and RISC-V instructions (Register, Immediate, Memory and
-  PCRelative):
-  lief.assembly.mips.Instruction.operands()
-  lief.assembly.powerpc.Instruction.operands()
-  lief.assembly.ebpf.Instruction.operands()
-  lief.assembly.riscv.Instruction.operands()
-- The Rust FFI no longer relies on autocxx and bindgen. It is now
-  built on top of plain cxx, which simplifies the bindings and
-  reduces the iteration time
-- The Rust bindings directory has been renamed from api/rust/cargo/
-  to api/rust/crates/
-- Add support for the aarch64-linux-android and x86_64-linux-android
-  targets
-- Add LIEF_LIFETIMEBOUND annotations wrapping [[clang::lifetimebound]]
-  to leverage Clang's lifetime analysis. This helps detect dangling
-  references at compile time for methods that return references or
-  iterators tied to an object's lifetime
+Fixes:
+
+- Complete the setuptools SubCommand protocol
+- Thread config_settings to the build command
+- Keep source tree clean in strict editable mode
+
+Documentation:
+
+- Put uv first in installer tabs and add it to config-settings
+- List choices for Literal options in the README table
+- Touch up README options tables, setuptools docs
+- Show the projects list as a card grid with language/binding badges
+- Add high-star projects to the known projects list
+
+CI and testing:
+
+- Make linkcheck retry timeouts from slow hosts
+- Forward -C config-settings in downstream editable install
+
+Include a patch to rename directory name from ${module} __module__
+to avoid error due to an unexpanded bitbake variable.
 
 This work was sponsored by GOVCERT.LU.
 
-License-Update: Update years
-
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...equirements.txt-Allow-newer-versions.patch | 28 +++++++++----------
- ...3-lief_0.17.3.bb => python3-lief_1.0.0.bb} |  6 ++--
- 2 files changed, 17 insertions(+), 17 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lief_0.17.3.bb => python3-lief_1.0.0.bb} (85%)
+ ...-builder.py-Check-PYTHON_INCLUDE_DIR.patch |  15 ++-
+ ...c-scikit_build_core-Don-t-use-module.patch | 107 ++++++++++++++++++
+ ....bb => python3-scikit-build-core_1.0.3.bb} |   3 +-
+ 3 files changed, 118 insertions(+), 7 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-scikit-build-core/0001-src-scikit_build_core-Don-t-use-module.patch
+ rename meta-python/recipes-devtools/python/{python3-scikit-build-core_0.12.2.bb => python3-scikit-build-core_1.0.3.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lief/0001-build-requirements.txt-Allow-newer-versions.patch b/meta-python/recipes-devtools/python/python3-lief/0001-build-requirements.txt-Allow-newer-versions.patch
-index 9c61f0bdee..114034a6a9 100644
---- a/meta-python/recipes-devtools/python/python3-lief/0001-build-requirements.txt-Allow-newer-versions.patch
-+++ b/meta-python/recipes-devtools/python/python3-lief/0001-build-requirements.txt-Allow-newer-versions.patch
-@@ -15,20 +15,20 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
- --- a/api/python/build-requirements.txt
- +++ b/api/python/build-requirements.txt
- @@ -1,10 +1,10 @@
---tomli==2.2.1
---scikit-build-core==0.11.1
--+tomli>=2.2.1
--+scikit-build-core>=0.11.1
-+-tomli==2.4.1
-+-scikit-build-core==1.0.3
-++tomli>=2.4.1
-++scikit-build-core>=1.0.3
-  # For Ninja: msvc.msvc14_get_vc_env
---setuptools==70.2.0
--+setuptools>=70.2.0
-+-setuptools==83.0.0
-++setuptools>=83.0.0
-  # For the "env" feature
---pydantic==2.11.3
--+pydantic>=2.11.3
-+-pydantic==2.13.4
-++pydantic>=2.13.4
-  # Implicit from scikit-build-core
---pathspec==0.12.1
---build==1.2.1
---wheel==0.45.1
--+pathspec>=0.12.1
--+build>=1.2.1
--+wheel>=0.45.1
-+-pathspec==1.1.1
-+-build==1.5.1
-+-wheel==0.47.0
-++pathspec>=1.1.1
-++build>=1.5.1
-++wheel>=0.47.0
-diff --git a/meta-python/recipes-devtools/python/python3-lief_0.17.3.bb b/meta-python/recipes-devtools/python/python3-lief_1.0.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-lief_0.17.3.bb
-rename to meta-python/recipes-devtools/python/python3-lief_1.0.0.bb
-index fe954e1b32..e6f155d5f3 100644
---- a/meta-python/recipes-devtools/python/python3-lief_0.17.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lief_1.0.0.bb
-@@ -2,12 +2,12 @@ SUMMARY = "Library to instrument executable formats"
- DESCRIPTION = "LIEF: Library to Instrument Executable Formats"
- HOMEPAGE = "https://github.com/lief-project/LIEF"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=9ab5db472ff936b441055522f5000547"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c43f89548372352eb04f30367ec7a0f3"
- SECTION = "libs"
+diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
+index 6d52086aab..dec3f8b3ae 100644
+--- a/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
++++ b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
+@@ -1,4 +1,4 @@
+-From 0aee90d953406414f09740a6ef851ed7e666dc9e Mon Sep 17 00:00:00 2001
++From 7aa7a9be9c1d7906b9d4e8f89c078887e8dc5bfc Mon Sep 17 00:00:00 2001
+ From: Leon Anavi <leon.anavi@konsulko.com>
+ Date: Mon, 27 Jan 2025 19:17:48 +0200
+ Subject: [PATCH] builder.py: Check PYTHON_INCLUDE_DIR
+@@ -15,15 +15,18 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
--SRCREV = "03aca30b53db2f336b36f90843061bb3f840ff5a"
-+SRCREV = "d05b3499b6934137e917c009a4df0a9dc8cb11c5"
- SRC_URI = " \
--    git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.17.x;tag=${PV} \
-+    git://github.com/lief-project/LIEF.git;protocol=https;branch=main;tag=${PV} \
-     file://0001-build-requirements.txt-Allow-newer-versions.patch \
-     file://0002-api-python-config-default.toml-Debug.patch \
+ diff --git a/src/scikit_build_core/builder/builder.py b/src/scikit_build_core/builder/builder.py
+-index d05065f..b01d621 100644
++index 4be0cca..0fc54f4 100644
+ --- a/src/scikit_build_core/builder/builder.py
+ +++ b/src/scikit_build_core/builder/builder.py
+-@@ -228,7 +228,7 @@ class Builder:
+-         python_sabi_library = (
+-             get_python_library(self.config.env, abi3=True) if limited_api else None
+-         )
++@@ -395,7 +395,7 @@ class Builder:
++             python_sabi_library = get_python_library(self.config.env, abi3t=True)
++         elif sabi == _SabiMode.ABI3:
++             python_sabi_library = get_python_library(self.config.env, abi3=True)
+ -        python_include_dir = get_python_include_dir()
+ +        python_include_dir = os.getenv("PYTHON_INCLUDE_DIR") or get_python_include_dir()
+          numpy_include_dir = get_numpy_include_dir()
+  
+          # Warning for CPython 3.13.4 Windows bug
++-- 
++2.47.3
++
+diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-src-scikit_build_core-Don-t-use-module.patch b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-src-scikit_build_core-Don-t-use-module.patch
+new file mode 100644
+index 0000000000..c284a3175c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-src-scikit_build_core-Don-t-use-module.patch
+@@ -0,0 +1,107 @@
++From 8223ad7e5606174ac0ff47068cd22776a499854c Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Fri, 17 Jul 2026 14:40:58 +0300
++Subject: [PATCH] src/scikit_build_core: Don't use ${module}
++
++Replace ${module} with __module__ and renmame the the placeholder
++directories to avoid the following bitbake error:
++
++ERROR: Directory name ${module} contains unexpanded bitbake variable.
++This may cause build failures and WORKDIR polution.
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ src/scikit_build_core/init/__main__.py                | 11 +++++++++--
++ .../abi3/src/{${module} => __module__}/_core.c        |  0
++ .../abi3t/src/{${module} => __module__}/_core.c       |  0
++ .../templates/c/src/{${module} => __module__}/_core.c |  0
++ .../src/{${module} => __module__}/__init__.py.in      |  0
++ .../cython/src/{${module} => __module__}/_core.pyx    |  0
++ .../fortran/src/{${module} => __module__}/_core.f     |  0
++ .../nanobind/src/{${module} => __module__}/_core.cpp  |  0
++ .../pybind11/src/{${module} => __module__}/_core.cpp  |  0
++ .../swig/src/{${module} => __module__}/_core.c        |  0
++ .../swig/src/{${module} => __module__}/_core.i        |  0
++ 11 files changed, 9 insertions(+), 2 deletions(-)
++ rename src/scikit_build_core/resources/templates/abi3/src/{${module} => __module__}/_core.c (100%)
++ rename src/scikit_build_core/resources/templates/abi3t/src/{${module} => __module__}/_core.c (100%)
++ rename src/scikit_build_core/resources/templates/c/src/{${module} => __module__}/_core.c (100%)
++ rename src/scikit_build_core/resources/templates/common/src/{${module} => __module__}/__init__.py.in (100%)
++ rename src/scikit_build_core/resources/templates/cython/src/{${module} => __module__}/_core.pyx (100%)
++ rename src/scikit_build_core/resources/templates/fortran/src/{${module} => __module__}/_core.f (100%)
++ rename src/scikit_build_core/resources/templates/nanobind/src/{${module} => __module__}/_core.cpp (100%)
++ rename src/scikit_build_core/resources/templates/pybind11/src/{${module} => __module__}/_core.cpp (100%)
++ rename src/scikit_build_core/resources/templates/swig/src/{${module} => __module__}/_core.c (100%)
++ rename src/scikit_build_core/resources/templates/swig/src/{${module} => __module__}/_core.i (100%)
++
++diff --git a/src/scikit_build_core/init/__main__.py b/src/scikit_build_core/init/__main__.py
++index 1d213fe..36f4db5 100644
++--- a/src/scikit_build_core/init/__main__.py
+++++ b/src/scikit_build_core/init/__main__.py
++@@ -103,12 +103,19 @@ def _generate(
++ 
++     written: list[Path] = []
++     for root in (resources / "templates" / "common", resources / "templates" / backend):
++-        # Walk the tree; path components are templated too (e.g. ``${module}``).
+++        # Walk the tree and process the templated path components for
+++        # __module__ that has replaced ${module} to avoid the following
+++        # bitbake error:
+++        # ${module} contains unexpanded bitbake variable.
+++        # This may cause build failures and WORKDIR polution.
++         stack = [(root, Path())]
++         while stack:
++             node, rel = stack.pop()
++             for entry in node.iterdir():
++-                name = string.Template(entry.name).safe_substitute(substitutions)
+++                if entry.name == "__module__":
+++                    name = module
+++                else:
+++                    name = string.Template(entry.name).safe_substitute(substitutions)
++                 if entry.is_dir():
++                     stack.append((entry, rel / name))
++                     continue
++diff --git a/src/scikit_build_core/resources/templates/abi3/src/${module}/_core.c b/src/scikit_build_core/resources/templates/abi3/src/__module__/_core.c
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/abi3/src/${module}/_core.c
++rename to src/scikit_build_core/resources/templates/abi3/src/__module__/_core.c
++diff --git a/src/scikit_build_core/resources/templates/abi3t/src/${module}/_core.c b/src/scikit_build_core/resources/templates/abi3t/src/__module__/_core.c
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/abi3t/src/${module}/_core.c
++rename to src/scikit_build_core/resources/templates/abi3t/src/__module__/_core.c
++diff --git a/src/scikit_build_core/resources/templates/c/src/${module}/_core.c b/src/scikit_build_core/resources/templates/c/src/__module__/_core.c
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/c/src/${module}/_core.c
++rename to src/scikit_build_core/resources/templates/c/src/__module__/_core.c
++diff --git a/src/scikit_build_core/resources/templates/common/src/${module}/__init__.py.in b/src/scikit_build_core/resources/templates/common/src/__module__/__init__.py.in
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/common/src/${module}/__init__.py.in
++rename to src/scikit_build_core/resources/templates/common/src/__module__/__init__.py.in
++diff --git a/src/scikit_build_core/resources/templates/cython/src/${module}/_core.pyx b/src/scikit_build_core/resources/templates/cython/src/__module__/_core.pyx
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/cython/src/${module}/_core.pyx
++rename to src/scikit_build_core/resources/templates/cython/src/__module__/_core.pyx
++diff --git a/src/scikit_build_core/resources/templates/fortran/src/${module}/_core.f b/src/scikit_build_core/resources/templates/fortran/src/__module__/_core.f
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/fortran/src/${module}/_core.f
++rename to src/scikit_build_core/resources/templates/fortran/src/__module__/_core.f
++diff --git a/src/scikit_build_core/resources/templates/nanobind/src/${module}/_core.cpp b/src/scikit_build_core/resources/templates/nanobind/src/__module__/_core.cpp
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/nanobind/src/${module}/_core.cpp
++rename to src/scikit_build_core/resources/templates/nanobind/src/__module__/_core.cpp
++diff --git a/src/scikit_build_core/resources/templates/pybind11/src/${module}/_core.cpp b/src/scikit_build_core/resources/templates/pybind11/src/__module__/_core.cpp
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/pybind11/src/${module}/_core.cpp
++rename to src/scikit_build_core/resources/templates/pybind11/src/__module__/_core.cpp
++diff --git a/src/scikit_build_core/resources/templates/swig/src/${module}/_core.c b/src/scikit_build_core/resources/templates/swig/src/__module__/_core.c
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/swig/src/${module}/_core.c
++rename to src/scikit_build_core/resources/templates/swig/src/__module__/_core.c
++diff --git a/src/scikit_build_core/resources/templates/swig/src/${module}/_core.i b/src/scikit_build_core/resources/templates/swig/src/__module__/_core.i
++similarity index 100%
++rename from src/scikit_build_core/resources/templates/swig/src/${module}/_core.i
++rename to src/scikit_build_core/resources/templates/swig/src/__module__/_core.i
++-- 
++2.43.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.12.2.bb b/meta-python/recipes-devtools/python/python3-scikit-build-core_1.0.3.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-scikit-build-core_0.12.2.bb
+rename to meta-python/recipes-devtools/python/python3-scikit-build-core_1.0.3.bb
+index d7f8aacd97..4a28b119b4 100644
+--- a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.12.2.bb
++++ b/meta-python/recipes-devtools/python/python3-scikit-build-core_1.0.3.bb
+@@ -12,7 +12,8 @@ inherit pypi python_hatchling
+ SRC_URI += " \
+ 	file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch \
+ 	file://0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch \
++	file://0001-src-scikit_build_core-Don-t-use-module.patch \
  "
+-SRC_URI[sha256sum] = "562e0bbc9de1a354c87825ccf732080268d6582a0200f648e8c4a2dcb1e3736d"
++SRC_URI[sha256sum] = "a4d7a05978ee37975c37743510c8991e2debce7ef83afb0a07c0c576fd4f16e8"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
