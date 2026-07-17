@@ -1,123 +1,115 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BACA9C44516
-	for <webhook@archiver.kernel.org>; Thu, 16 Jul 2026 17:57:30 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1218.1784224641384555923
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3518C4450F
+	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 03:34:54 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6170.1784259287679716892
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2026 10:57:21 -0700
+ Thu, 16 Jul 2026 20:34:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=fw0ORyTU;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202607161757187627d7e85a00020768-n7_kc_@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202607161757187627d7e85a00020768
-        for <openembedded-devel@lists.openembedded.org>;
-        Thu, 16 Jul 2026 19:57:19 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=9bO5wtSAVH4OxlH2TzvdHWO/poWIgmpSIvVOxt9BffA=;
- b=fw0ORyTUyWska0LyhmRayasEgkBsGhdqcRx3adX7e+lLkELH2VBV/C9HFPl07buqfR7AIu
- bcJZKMuNYjMsxQzBz9wJTPyTQ61t1Q77W/om5RRvJbtzfuzTwHRt7Im/AcXWfZyfFyd13/iv
- Z5fJQLtwQ98hWrqgbRSo/VccraxZWkJ4vb5qZYdqyn9LkPcKDQJ5dh0VwbaCHylRSgt6wHNC
- 5jOujpovp//8Pn+KJGMVb6Hy0XMo2BfPG6U9ZWiaYp1G3YcrebtJyXjGYraAgyozn2MOMP4n
- JV0zJswSifu9QkTs2XCLB70H3Na47s/8Pvn7fnxwkPT4nppjF98g2Qdg==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=tBHPOdnz;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38dfe7eb825so3421256a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 20:34:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784259287; x=1784864087; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=uEZ/906wB/ZvWrtoqOT4n9AnwMUGouKgWV3QeuJR7y4=;
+        b=tBHPOdnzZY74zFNE28Lr+vpiPUSK6xia6Kqc1bk7DCVe5Vk5vuk8rprJeUHKqnLC0b
+         4Yqz71TL5Rt33lAPiSBtZzruWFqbEzZBrGHEYnk1a/7cTywVXfdEYrg7WqgVPT9nLnFV
+         BtPffeFq6KfA+gVjDRE9qChUHHXkwOTMH8wOaB40q5ipRC8aMas5R9H4NaD08pn9CCaF
+         WE5iAzkEKlfjOBvb3IKrD9IDRrUCCxtpUlcnzdBqObtS9qdEiEfjvr0xwC2yk9dvbFfq
+         LOJ3ZomazK4JH8O1jKefEsqA9SAS7uZZBwTQFDV2P9wHvarwF5gnEPdKC1WajnHE2ukx
+         06tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784259287; x=1784864087;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=uEZ/906wB/ZvWrtoqOT4n9AnwMUGouKgWV3QeuJR7y4=;
+        b=CVu9OzC2wL0kLyH3tzAmBJY242sfbCw7jN2L6mXW2IYI8zpsDGfXnhKpgD4ztsdmvh
+         saSIXs3XfBB7tnwjn8Ltqui+syODZMDRfElTuw24eQAk62Xs84c6G0jM9Eg8LfetnA+9
+         dm6yL6yP48cuDM9dOVHADpB0Fbnckrym0zG2j3+ERtug7ctzAJ9l0Q5+QuhNvy5VbL43
+         Ne2MTQUIq+mln0bYm7Yx5qlzeNhxUKzuzfNfBBfPV6WbjkO0aVNQgPgm0sKWX7JnYxRa
+         s4iLzPgeRu25ZnoNt2c+JqNZhMgUfPJU+NvsHFD1pfHq+ppL8kfgxDBaO9lA8bOdIzJQ
+         olLA==
+X-Gm-Message-State: AOJu0YyfaUYKjuVcaOhYNUiXc8XvwnUIMRBiohh7nFLYhwTtXdJjszhp
+	zuPJpTpzVnP5RYXrXCJUlInlvfGCgDrRaPj3bwb6lM+Qte5tqu94Qwh+TKoJCg==
+X-Gm-Gg: AfdE7cn8I8gHU/HWU3YMith0iwV/VFkKGX3t69uoMqjygRstq6oRLxgmXxjd4vkJejq
+	b9XW2TRxQ1lSgvcBySprE7aVNAVUwPn96wC9F5G3j6bVa/G1WAvBtR4iHGIb7eCh2DxciCRIDuE
+	A7MlC+ztQwdqcdkLWna6hP0dZ2CL5QQyNNTidl/2E/bMNxETFl76LXMbd4TE4EcngvqojqKUqYw
+	kjaKxMfuUnJbC/XMbsxaxG2VI/sTsrUUevGbT+N0D3ZYp+cvSK/NBbs+UZAsH2G8iYEmfr/GTJa
+	bk8MSQgpQvLhie4jz/K3EI40MNd9asYkopTwYFGEXKgd7dkAmqZQpt+TD8YZwjVS7KsFQePGmBT
+	0mqD+mVdRpkTsii+HFbh7cVZvUVXJbGSdu6xYgz7eJsdg/PW5yvanM7sToefxf/U0Fpu27mmXPl
+	xMRL2WitA4h7Qf5EZ1cRjXxnDhmIMHOgBlmaWNcPd3DIAtqP/mvuHBJ191UtOyIZvxukUIyB9Eo
+	6SqSaT9j4SEpgkup0cluyRxo+Al63CCW/c9qndF0k/lan7XlR/TjDdS9QiKj6dABYW5ftxW3/5M
+	vxpnBnZpVs3nimwzr/U=
+X-Received: by 2002:a17:90b:4b85:b0:37d:7bb4:bffb with SMTP id 98e67ed59e1d1-38e4b3d1427mr753769a91.2.1784259286968;
+        Thu, 16 Jul 2026 20:34:46 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a20b1f3sm1509307eec.26.2026.07.16.20.34.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 20:34:46 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][wrynose][PATCH 2/2] libwebsockets: patch CVE-2026-10650
-Date: Thu, 16 Jul 2026 19:56:51 +0200
-Message-ID: <20260716175651.833748-2-peter.marko@siemens.com>
-In-Reply-To: <20260716175651.833748-1-peter.marko@siemens.com>
-References: <20260716175651.833748-1-peter.marko@siemens.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] dbus-broker: package ptest files from nonarch_libdir
+Date: Thu, 16 Jul 2026 20:34:42 -0700
+Message-ID: <20260717033442.1750599-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Jul 2026 17:57:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128239
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 03:34:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128240
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Pick patch mentioned in NVD report.
+dbus-broker's meson build installs its test and benchmark binaries to a
+hardcoded path derived from the prefix:
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+    conf.set('testdir', get_option('prefix') / 'lib/dbus-broker/tests')
+
+i.e. always ${prefix}/lib/dbus-broker/tests, regardless of ${baselib}.
+In OE terms that is ${nonarch_libdir}, not ${libdir}.
+
+The recipe however collects them with ${libdir}, which only matches on
+targets where baselib is "lib". On lib64 targets and for multilib
+variants (e.g. lib32-dbus-broker) ${libdir} differs from the hardcoded
+install path, so the installed tests are not captured by any package and
+do_package fails with:
+
+    QA Issue: dbus-broker: Files/directories were installed but not
+    shipped in any package:
+      /usr/lib/dbus-broker/tests/unit/test-...
+      /usr/lib/dbus-broker/tests/dbus/test-...
+    [installed-vs-shipped]
+
+Use ${nonarch_libdir} so the FILES glob always matches meson's install
+location.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libwebsockets/CVE-2026-10650.patch        | 46 +++++++++++++++++++
- .../libwebsockets/libwebsockets_4.5.8.bb      |  5 +-
- 2 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.patch
+ meta-oe/recipes-core/dbus/dbus-broker_37.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.patch
-new file mode 100644
-index 0000000000..5846b3616d
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.patch
-@@ -0,0 +1,46 @@
-+From 3f9f0c6ecaf0e6f3f219d30632c5d1f2479d7498 Mon Sep 17 00:00:00 2001
-+From: Biniam F Demissie <biniamfd@gmail.com>
-+Date: Wed, 13 May 2026 04:25:55 +0100
-+Subject: [PATCH] ssh: plugin: add limit to resource exhaustion
-+
-+CVE: CVE-2026-10650
-+Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/3f9f0c6ecaf0e6f3f219d30632c5d1f2479d7498]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ plugins/ssh-base/sshd.c | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/plugins/ssh-base/sshd.c b/plugins/ssh-base/sshd.c
-+index ea35cb8b7..c849644d4 100644
-+--- a/plugins/ssh-base/sshd.c
-++++ b/plugins/ssh-base/sshd.c
-+@@ -1,7 +1,7 @@
-+ /*
-+  * libwebsockets - small server side websockets and web server implementation
-+  *
-+- * Copyright (C) 2010 - 2019 Andy Green <andy@warmcat.com>
-++ * Copyright (C) 2010 - 2026 Andy Green <andy@warmcat.com>
-+  *
-+  * Permission is hereby granted, free of charge, to any person obtaining a copy
-+  * of this software and associated documentation files (the "Software"), to
-+@@ -28,6 +28,8 @@
-+ #include <string.h>
-+ #include <stdlib.h>
-+ 
-++#define LWS_SSH_MAX_PACKET_SIZE  (256 * 1024)
-++
-+ void *sshd_zalloc(size_t s)
-+ {
-+ 	void *p = malloc(s);
-+@@ -592,6 +594,11 @@ again:
-+ 			pss->parser_state = SSHS_MSG_PADDING;
-+ 			pss->ctr = 0;
-+ 			pss->pos = 4;
-++
-++			if (pss->msg_len > LWS_SSH_MAX_PACKET_SIZE) {
-++				lwsl_notice("msg size %u exceeds maximum\n", pss->msg_len);
-++				goto bail;
-++			}
-+ 			if (pss->msg_len < 2 + 4) {
-+ 				lwsl_notice("illegal msg size\n");
-+ 				goto bail;
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
-index 4fb87342f6..bca2663419 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
-@@ -7,7 +7,10 @@ DEPENDS = "zlib"
- DEPENDS:append:class-native = " libcap-native"
- 
- SRCREV = "fbb0baf6af9c4324f0f1591734c78b0089b599d4"
--SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.5-stable;tag=v${PV}"
-+SRC_URI = " \
-+    git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.5-stable;tag=v${PV} \
-+    file://CVE-2026-10650.patch \
-+"
- 
- UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_37.bb b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+index ae9c8f2fcd..8691afb90b 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_37.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+@@ -40,7 +40,7 @@ RDEPENDS:${PN} += "dbus-common dbus-tools"
+ FILES:${PN} += "${nonarch_libdir}/systemd/catalog"
+ FILES:${PN} += "${systemd_system_unitdir}"
+ FILES:${PN} += "${systemd_user_unitdir}"
+-FILES:${PN}-ptest += "${libdir}/${PN}/tests"
++FILES:${PN}-ptest += "${nonarch_libdir}/${PN}/tests"
+
+ # test-sockopt fails to compile with musl without this flag
+ CFLAGS:append:libc-musl = "${@bb.utils.contains('PTEST_ENABLED', '1', ' -Wno-error=incompatible-pointer-types ', '', d)}"
 
