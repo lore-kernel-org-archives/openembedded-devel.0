@@ -1,413 +1,150 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 932D2C4450F
-	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 05:59:07 +0000 (UTC)
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7598.1784267944520929434
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12D68C44507
+	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 06:34:08 +0000 (UTC)
+Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.98])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7972.1784270044476476986
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2026 22:59:04 -0700
+ Thu, 16 Jul 2026 23:34:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Yzd4wHD5;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: deeratho@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=12158; q=dns/txt;
-  s=iport01; t=1784267944; x=1785477544;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=h2JWpGvppxGBJYE+PdKTx7Q4Vk3/IoP1BeOtSVfe6a8=;
-  b=Yzd4wHD5wIxuXZ/sc6sKg1VnL+CDSPdPIpO3cPRwlmUoIF/iplrO8kwI
-   4jFDu4xrm6GJxi/0/z+EutFvIFwgm68+I7BP7x2PKT6lsB548ryYmOPiw
-   NrX2NWNrFTC9F6DlXvRRpqOqqXC2FRYfWS+wLXM/jPMH+SXXjZa2NsSZE
-   rQb6G/DRyC2L6BskobMcuAEW8wAJBJ85ziOMECU7SZzUd+Cs+qtZqE80X
-   PBZa89socjD0+8x+aauPZqTwd3drQQGVDaXQrtBl9gXLtgKWgFtulomcR
-   ML70I2b6WT8neX25NDaPxkHZ6IPugGGQs94txbG0yr0zFKwNO6dlwiNAN
-   Q==;
-X-CSE-ConnectionGUID: QpbUSpD/SgWe1j0IZPEtRw==
-X-CSE-MsgGUID: lGTKV8BCS5yepywoc7lFGg==
-X-IPAS-Result: =?us-ascii?q?A0BFAgBWw1lq/5P/Ja1aglmCV3RfQkmUKYE1bIEWnQiBf?=
- =?us-ascii?q?g8BAQEPRA0EAQGSWQImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDYZaAS0LARgBWQMBAlojGQiDAgGCdAMRBr1FgXkzgQGDKAE/AkNQ2?=
- =?us-ascii?q?y4BCxQBgTiFP4ggXBgBhHwnGxuBcoEVgnN2gQWBXAKBJ4Z+BIIigQyBWh6QA?=
- =?us-ascii?q?UiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBDBsHBYEdgTqBAIR2Ix8DO?=
- =?us-ascii?q?X+BL3VKdy1qEheBToIUgT4DCxgNSBEsNxQbBD5uB41II4FNcgEsThMBExgXC?=
- =?us-ascii?q?4E8JAKmG6ESCiiDdYwhlToaM6psC5h9iyeCY4oNjEOEaYFoPIFZcBWDIglKG?=
- =?us-ascii?q?Q9WjVcBCguDYIRvyVE8NQIJMgEBBwIHDgMLgWiQAIF+AQE?=
-IronPort-Data: A9a23:yklYE6gAKEhPZKIp95CDmpl2X161MBEKZh0ujC45NGQN5FlHY01je
- htvX2iEbPuNZ2L8L9wiYY+3pEgP75/Vz9UyGgQ+/ys0FChjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeCULOZ82QsaDxMtPvd8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUh4uxKOnlis
- scXFz1UbEiitdqb3IikH7wEasQLdKEHPasFsX1miDWcBvE8TNWaG+PB5MRT23E7gcUm8fT2P
- pVCL2EwKk6dPlsWZgh/5JEWxI9EglHzfjBCoU6VooI84nPYy0p6172F3N/9Jo3UFZUMwh7Gz
- o7A12DWPjIkZPa08meU/2q9mejEwifVd41HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2cZLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:27M9laMjKhRuwsBcTvGjsMiBIKoaSvp037BN7TESdfU7SKKlfq
- yV8cjztiWE6wr5JktApTnoAsDpKhnhHPVOjrX5U43PYOCfgguVBbAny5f+yDv9HCC73Otc2a
- B8N5VaMrTLfD1HZQKQ2njeLz7mq+P3lJyVuQ==
-X-Talos-CUID: 9a23:LwFUtmNM5Ifl6O5DYTFtyXUMNocefULQlXWIAn2AJHpTV+jA
-X-Talos-MUID: 9a23:kyYe4wgTgtlj71zhH0rBE8MpMOhUwJr+Ims2zIQLo9ibMicvPxmyg2Hi
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.25,168,1779148800"; 
-   d="scan'208";a="496881406"
-Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 17 Jul 2026 05:59:03 +0000
-Received: from bgl-ads-3413.cisco.com (bgl-ads-3413.cisco.com [173.39.60.50])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id 0C64218000895
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:59:03 +0000 (GMT)
-Received: by bgl-ads-3413.cisco.com (Postfix, from userid 1795984)
-	id 2F022CC037D; Fri, 17 Jul 2026 11:29:01 +0530 (IST)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][scarthgap][PATCH] ldns: fix CVE-2026-10846
-Date: Fri, 17 Jul 2026 11:28:41 +0530
-Message-Id: <20260717055841.2905177-1-deeratho@cisco.com>
-X-Mailer: git-send-email 2.35.6
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=mdZ+ZKGw;
+ spf=pass (domain: navimatix.de, ip: 40.107.130.98, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=b/VdyJ13T69xFp+2hrnZBkzrTdlYl6vc4YeiEFmTqXvPI27G5rtdF4t4AunTHk8ECP/1YxEmqgMV7SXDujKsbC5XVossf380kaLbcuMYMYLK2DjSTDU0/jFdoxvc5B/Dadgm93UcFfdcNexEahtSKO3AsAIrPCW1hMzOWT5fBRG1aznp+3S/A1xvWlQrE3b8y7jm4GD7TX3Md1h8+L5UHb8KvVM8Es/9U1eRml7SMt20vj5W08UY7jEv6AV2Vhrnj8tKSKyLTE41iNgkViMtrY3/UppTgaGPNdv7abt9mq/jTWrdLlYHR+PIklhbdU8uXqryJiwn7yen1UZaPAl/Yg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MSVZQAOaHd+yoWN/YF5l85vOVkOnF1QigUt83zXe+2w=;
+ b=vDgKEDHWnVXggq6hX6/Ikcz1lYgvm2KodGnW/mag0QN8kAic2q6MWNu3LEwuXcEhtbPBSYe+NSuGuPlYtpo7BJSaPqnK1JPI6mP7IX6jW1b/r1vPunh0o2VSRcoQuUEtb/rb6Fy2zrbDMhOFxt228GGl986O3dzWtyTm6PEgE84NDfYhMJ79ipsYXHP1Ufyyw1OMog1Fmi5+XO0T6HMT7h7Qw1W3YJVeFCSXe4IqluRV+H4SVGsC29iAwmn5UTqT4zULNi1hQljqxEfjSk9b7A0P8fZo7wjM4qL1ycKCwqaSTT51gl/dGaWPofmzXiIULZd2Jj9uIehFDa7BaUtDzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MSVZQAOaHd+yoWN/YF5l85vOVkOnF1QigUt83zXe+2w=;
+ b=mdZ+ZKGwUyqCWP0EikdaqArD/bR6jPq9fEl0qrObLlr0pGq1IoU5ig/ShuyvL6sBiWfffnq5UdIkhsuWYVvG9X922wMpmeGIR2J9HUwNOmdQdOJolDh0St54sMn32O/MErNPSWjFbcbwRPWHERcMs2gKobIgg9UsNT9VijXpLUg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by VI0PR01MB11365.eurprd01.prod.exchangelabs.com
+ (2603:10a6:800:265::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 06:33:59 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::d5c3:2dea:3d98:25fd]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
+ with mapi id 15.21.0223.011; Fri, 17 Jul 2026 06:33:58 +0000
+Date: Fri, 17 Jul 2026 08:33:57 +0200
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH] zsh: Update 5.9.1 -> 5.9.2
+Message-ID: <ccc9289f95924943d5fba4f4be27e6c558652390.1784270036.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0032.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:22::20) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;bgl-ads-3413.cisco.com [173.39.60.50];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 173.39.60.50, bgl-ads-3413.cisco.com
-X-Outbound-Node: rcdn-l-core-10.cisco.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|VI0PR01MB11365:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7d7a716-eb35-43fc-1190-08dee3cd61f5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|366016|376014|1800799024|10067099003|6133799003|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	D+EKr7ielFcNYQFiBhXl0HEVWr2l12sEhSaIKUtWSw89n0jrxQPmRETMUKlY23syCC40NDn1Av+YFl0B7JTCUMc9kBbIP6SzLcHTlycxo+9rJt6fAb9/WQ6VAaFJR2zZmoqug9tSx6DQoUCxzr1+lcjwqYNDaywRIuq7M7KETMLPtN4Ei7k5YPjPybCJ3qHU60mKP5oaHFgvcK6CZGZMpy0C3WJoHp5Uyrt/lI7pig/kFwWSgina/WY++u2LjZwvEQ8Sh/6PHpncazd66gY/COeapV3gVgxGOKnj/VB7PripaQp36QrAQzlQJuiyaURmmSPk2GpO0AoSrusyEW00P+q96G6CyimXwiaVEaEDLOoITGHYDHlaCsy8say53jf5rySXmEfqlOXe01UEvpgxOW3fxg30FqfAYFlQ1XU+asqbfqTuS/cmzfjldmxcXU5p+ADNXSROS/qIq6OQg+3jLfriTnrb1/9MshHeSgDXyQYvug9ndmlYrt3GdPMahJ1vxCyogHin+qYti+fQTdaep7jGVCzSf3nOmOwPqjaT62r5lAWK44KYscjRc7N9Mgff+FHnUp5QN02XduKpXVmdMl6Qg9JsPjuIF0ASm1e21Ow=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(10067099003)(6133799003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?y9SoCNNm1uiYCPihG9owbVW/XUp5kXaEbaNEFeybyg1dryUT09UI9pocGNla?=
+ =?us-ascii?Q?WLaoBEztbqfeK/yHYWFSP3ARx0O2PwkpFPZTqzOVqGPJ5gcBUtGSae0UFmiH?=
+ =?us-ascii?Q?ahPz79n0I50grrmSJQPJQRqaN3BI9IEA5PAbiI9CPwDOPhRD5HEobYUCTQ3i?=
+ =?us-ascii?Q?dODGwxiUfYLTaMM7pfB9+bn73aiio246Qc4m3mFFUI1KKPxqBJpGlh9iRCjv?=
+ =?us-ascii?Q?3SK/U0q+Lk9sXJsu9YN21YIm3E2j1gJi+LF0+ivuuqPmMTRto1KdRnr3nsH9?=
+ =?us-ascii?Q?u0RzQADhO/PSXWu8qyPnGCJYtXhoNd4RYYhLee3BJ3VrbF31ZfT3b09dXZB3?=
+ =?us-ascii?Q?3Q2bcpiks5PT7itUhCntS3SISIRjHOsYKrSCbpVFHZKT9F+i/XCDESwaXWzp?=
+ =?us-ascii?Q?KDGk3TYF2OGWuNE/J2rLhFIVQ/BcT/d17WlfTTSUOxaEjkSh7ijU4x+/5x2p?=
+ =?us-ascii?Q?ged37fQI7LQLXIAO5WS18L9yECAReq3StpBgNnvk2FVxF99d5qYducGvx/49?=
+ =?us-ascii?Q?TPK9uoE/4IaU+o0jTQU4AILia9TbcgsLWLey4Rcm+XjXwmZZZK32c0NsMBia?=
+ =?us-ascii?Q?Cr21vtQ5z5cj/X0kTB/PWhiGEZ0mr9xbXA1xc2E0nG17SufMEFqiqGix6tWI?=
+ =?us-ascii?Q?jksd3rOjp2kGWzVPBvmaZrGikfAOVBWSXQLkroQlr2PcRhk1PCxgwDKHR6Rt?=
+ =?us-ascii?Q?/sbjAUWtshula0F4fILMMVw0ZNyMbR794adIQEBwKxZpxuieQJ89qEZhsJit?=
+ =?us-ascii?Q?rIPYU/C3Rn9837O5TXPe0UWWuL9jE0wblvA6tksDyJc+Cy7mKr8RavY63/6Q?=
+ =?us-ascii?Q?f+E2w/IE1v+pPgXUjDtsgNHaa2lm3zwGWg8TxK0CcHo2SzFAIxnlW70nkAuM?=
+ =?us-ascii?Q?wHbhF4yOm5fjFEfarTtd3545VFeJUJMuUF2sl6703Rx5AUeU3BWh13+VaFFI?=
+ =?us-ascii?Q?+tSbfIWzYxeZFFGICtjzuq7ukjtB3RYfAS9FWyviL2z3ifMgpdk4mGOC8Ct+?=
+ =?us-ascii?Q?eNcPqrq/WEniscw/fK6Rgsd8pjKFw8J5rv4ggIJXhtvyt517yC2/mPS7IHdZ?=
+ =?us-ascii?Q?AIbJ/LRDhtwYUe1mYA+ocRdEQbJXdVFWRHgLHfPQhGlChzJBScRH054Vm3mg?=
+ =?us-ascii?Q?AFxD9wTS2VGIIFAx3KNyGAZelnYFq0FChpRDNU+AecQzJY6Mz+BkadriDJAx?=
+ =?us-ascii?Q?tzS/CzRWGlU/v8J372lvkA1FrXZaz8FsJbw/mMlVS3QiKXvdAgKhCf2QlbHe?=
+ =?us-ascii?Q?G1poJWy5lNnJ5sOxTbbOW818VZBSilWqJWIaGoG/MzmKGgAO8uwsiOvP/9KX?=
+ =?us-ascii?Q?zeZTrKQecsd7DrCPSS+qqZNmFdHIkO+8PO+Q31e2YaEi2C+OWeJCnAHylsb1?=
+ =?us-ascii?Q?RdzvGed5HohWGx5oOKvdxoHvhPusrBtVIj6G9Jlgp4oXQgMZ5Sz83M9+ojnc?=
+ =?us-ascii?Q?9I42fcECvHSJrQ3+JMhx8EqYJu2UDGxBMnwuL0EoZ9UK7eqVjWnkBEUKQnu1?=
+ =?us-ascii?Q?gRJcWlWiEDnHF0NR6TSYrrCxVcwnXCa0yBGsQ04XIlx7n9/x5AOUEeh2ooKW?=
+ =?us-ascii?Q?O5dWnpBJmGfDfjZKKIvXjjz0Nzj4bPzcm21inYkUmvPJBQXdrs54UoMHLQLs?=
+ =?us-ascii?Q?bLUQjPe4jUm6b7BCN8wYGSV6Ae4B9Ja47ABd3Mc/IPhIULhW7U6uNN4yvoRB?=
+ =?us-ascii?Q?RwtFcPQjvxyazfW7MvIz/B0Ag8msTEexFhnGFpupEPiEpiCXCh594Vnw8jJw?=
+ =?us-ascii?Q?H+hsZd7ASbeo29jeb8ua9Cf8w4Wwxh0=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7d7a716-eb35-43fc-1190-08dee3cd61f5
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 06:33:58.5962
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CPhUdUOlyeMYdntiLEBwU+CZzhyNDZsk7VfGUP5hF2mmbjd2Rko7CXFuuIIUTpYK1LraGwQtyxDi/zZ4dHKzW/M0VT8DwsHNhSNm/l8+Ckk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR01MB11365
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:59:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128244
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 06:34:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128245
 
-From: Deepak Rathore <deeratho@cisco.com>
+From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-This patch backports the upstream fixes released in ldns 1.9.2 for
-CVE-2026-10846.The upstream commits are referenced in [1], [2], and
-[3], and the public CVE advisory is referenced in [4].The individual
-backported commit links are also recorded in the embedded patch headers.
+Changelog https://zsh.sourceforge.io/releases.html
 
-[1] https://github.com/NLnetLabs/ldns/commit/a21fb16686bbe3355886905f95e13eab5144d805
-[2] https://github.com/NLnetLabs/ldns/commit/9ea51a68d458b43a17ccf4ee98a71325300df524
-[3] https://github.com/NLnetLabs/ldns/commit/dc117528dfc60b2dda82d9171b7e9e0b6890da2f
-[4] https://www.nlnetlabs.nl/downloads/ldns/CVE-2026-10846.txt
+* Only minor changes.
 
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
- .../ldns/ldns/CVE-2026-10846_p1.patch         | 117 ++++++++++++++++++
- .../ldns/ldns/CVE-2026-10846_p2.patch         | 117 ++++++++++++++++++
- .../ldns/ldns/CVE-2026-10846_p3.patch         |  34 +++++
- meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb   |   6 +-
- 4 files changed, 273 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
- create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
- create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
+ meta-oe/recipes-shells/zsh/{zsh_5.9.1.bb =3D> zsh_5.9.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-shells/zsh/{zsh_5.9.1.bb =3D> zsh_5.9.2.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
-new file mode 100644
-index 0000000000..4b9d86a2ee
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
-@@ -0,0 +1,117 @@
-+From 844fb7e197b646a11dc058c5c7ce0877371bd4d4 Mon Sep 17 00:00:00 2001
-+From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
-+Date: Fri, 29 May 2026 09:44:27 +0200
-+Subject: [PATCH] Fix to check address and port and TXID
-+
-+CVE: CVE-2026-10846
-+Upstream-Status: Backport [https://github.com/NLnetLabs/ldns/commit/a21fb16686bbe3355886905f95e13eab5144d805]
-+
-+(cherry picked from commit a21fb16686bbe3355886905f95e13eab5144d805)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-+---
-+ net.c | 65 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 64 insertions(+), 1 deletion(-)
-+
-+diff --git a/net.c b/net.c
-+index 57d4dff2..03911637 100644
-+--- a/net.c
-++++ b/net.c
-+@@ -441,6 +441,50 @@ ldns_udp_bgsend2(ldns_buffer *qbin,
-+ 	return ldns_udp_bgsend_from(qbin, to, tolen, NULL, 0, timeout);
-+ }
-+ 
-++/** helper sockaddr compare function. returns -1, 0 or 1. */
-++static int
-++ldns_sockaddr_cmp(const struct sockaddr_storage* addr1, socklen_t len1,
-++	const struct sockaddr_storage* addr2, socklen_t len2)
-++{
-++	struct sockaddr_in* p1_in = (struct sockaddr_in*)addr1;
-++	struct sockaddr_in* p2_in = (struct sockaddr_in*)addr2;
-++	struct sockaddr_in6* p1_in6 = (struct sockaddr_in6*)addr1;
-++	struct sockaddr_in6* p2_in6 = (struct sockaddr_in6*)addr2;
-++	if(len1 < len2)
-++		return -1;
-++	if(len1 > len2)
-++		return 1;
-++	assert(len1 == len2);
-++	if( p1_in->sin_family < p2_in->sin_family)
-++		return -1;
-++	if( p1_in->sin_family > p2_in->sin_family)
-++		return 1;
-++	assert( p1_in->sin_family == p2_in->sin_family );
-++	/* compare ip4 */
-++	if( p1_in->sin_family == AF_INET ) {
-++		/* just order it, ntohs not required */
-++		if(p1_in->sin_port < p2_in->sin_port)
-++			return -1;
-++		if(p1_in->sin_port > p2_in->sin_port)
-++			return 1;
-++		assert(p1_in->sin_port == p2_in->sin_port);
-++		return memcmp(&p1_in->sin_addr, &p2_in->sin_addr,
-++			sizeof(p1_in->sin_addr));
-++	} else if (p1_in6->sin6_family == AF_INET6) {
-++		/* just order it, ntohs not required */
-++		if(p1_in6->sin6_port < p2_in6->sin6_port)
-++			return -1;
-++		if(p1_in6->sin6_port > p2_in6->sin6_port)
-++			return 1;
-++		assert(p1_in6->sin6_port == p2_in6->sin6_port);
-++		return memcmp(&p1_in6->sin6_addr, &p2_in6->sin6_addr,
-++			sizeof(p1_in6->sin6_addr));
-++	} else {
-++		/* eek unknown type, perform this comparison for sanity. */
-++		return memcmp(addr1, addr2, len1);
-++	}
-++}
-++
-+ static ldns_status
-+ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
-+ 		const struct sockaddr_storage *to  , socklen_t tolen,
-+@@ -449,6 +493,8 @@ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
-+ {
-+ 	int sockfd;
-+ 	uint8_t *answer;
-++	struct sockaddr_storage reply_addr;
-++	socklen_t reply_addr_len;
-+ 
-+ 	sockfd = ldns_udp_bgsend_from(qbin, to, tolen, from, fromlen, timeout);
-+ 
-+@@ -467,13 +513,19 @@ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
-+          * but returns a 'NETWORK_ERROR' much like a timeout. */
-+         ldns_sock_nonblock(sockfd);
-+ 
-+-	answer = ldns_udp_read_wire(sockfd, answer_size, NULL, NULL);
-++	reply_addr_len = sizeof(reply_addr);
-++	answer = ldns_udp_read_wire(sockfd, answer_size, &reply_addr,
-++		&reply_addr_len);
-+ 	close_socket(sockfd);
-+ 
-+ 	if (!answer) {
-+ 		/* oops */
-+ 		return LDNS_STATUS_NETWORK_ERR;
-+ 	}
-++	/* Check that the reply came from the to addr. */
-++	if(ldns_sockaddr_cmp(to, tolen, &reply_addr, reply_addr_len) != 0) {
-++		return LDNS_STATUS_NETWORK_ERR;
-++	}
-+ 
-+ 	*result = answer;
-+ 	return LDNS_STATUS_OK;
-+@@ -599,6 +651,17 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
-+ 			ldns_resolver_set_nameserver_rtt(r, i, LDNS_RESOLV_RTT_INF);
-+ 			status = send_status;
-+ 		}
-++		if(reply_bytes && ldns_buffer_limit(qb) >= 2) {
-++			uint16_t txid = ldns_buffer_read_u16_at(qb, 0);
-++			if(reply_size < 2 ||
-++				ldns_read_uint16(reply_bytes) != txid) {
-++				printf("wrong TXID!\n");
-++				status = LDNS_STATUS_ERR; /* wrong ID */
-++				LDNS_FREE(reply_bytes);
-++				reply_bytes = NULL;
-++				reply_size = 0;
-++			}
-++		}
-+ 		
-+ 		/* obey the fail directive */
-+ 		if (!reply_bytes) {
-diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
-new file mode 100644
-index 0000000000..f2f9d4b596
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
-@@ -0,0 +1,117 @@
-+From 0e291b494fc5e4d3800b27d7016fc92c7aac269e Mon Sep 17 00:00:00 2001
-+From: Willem Toorop <willem@nlnetlabs.nl>
-+Date: Tue, 2 Jun 2026 12:19:38 +0200
-+Subject: [PATCH] Match question from query in response, and...
-+
-+... error codes for unmatched ID and for QDCOUNT != 1 in both queries
-+and responses
-+
-+CVE: CVE-2026-10846
-+Upstream-Status: Backport [https://github.com/NLnetLabs/ldns/commit/9ea51a68d458b43a17ccf4ee98a71325300df524]
-+
-+Backport Changes:
-+- Omitted upstream test commit 7f6364cd7f595de766a43401bbecf935e042faa5
-+  because the ldns recipe does not run the upstream test framework.
-+
-+(cherry picked from commit 9ea51a68d458b43a17ccf4ee98a71325300df524)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-+---
-+ error.c      |  6 ++++++
-+ ldns/error.h |  5 ++++-
-+ net.c        | 29 ++++++++++++++++++++++++++---
-+ 3 files changed, 36 insertions(+), 4 deletions(-)
-+
-+diff --git a/error.c b/error.c
-+index e3fd1211..f046c962 100644
-+--- a/error.c
-++++ b/error.c
-+@@ -184,6 +184,12 @@ ldns_lookup_table ldns_error_str[] = {
-+ 	{ LDNS_STATUS_INVALID_SVCPARAM_VALUE,
-+ 		"Invalid wireformat of a value "
-+ 		"in the ServiceParam rdata field of SVCB or HTTPS RR" },
-++	{ LDNS_STATUS_ID_DID_NOT_MATCH,
-++		"Response ID did not match the query ID" },
-++	{ LDNS_STATUS_QDCOUNT_MUST_BE_ONE,
-++		"The query section MUST contain exactly one question" },
-++	{ LDNS_STATUS_QUERY_DID_NOT_MATCH,
-++		"The question in the response did not match the query" },
-+ 	{ 0, NULL }
-+ };
-+ 
-+diff --git a/ldns/error.h b/ldns/error.h
-+index 2429b770..5754f5a0 100644
-+--- a/ldns/error.h
-++++ b/ldns/error.h
-+@@ -141,7 +141,10 @@ enum ldns_enum_status {
-+ 	LDNS_STATUS_RESERVED_SVCPARAM_KEY,
-+ 	LDNS_STATUS_NO_SVCPARAM_VALUE_EXPECTED,
-+ 	LDNS_STATUS_SVCPARAM_KEY_MORE_THAN_ONCE,
-+-	LDNS_STATUS_INVALID_SVCPARAM_VALUE
-++	LDNS_STATUS_INVALID_SVCPARAM_VALUE,
-++	LDNS_STATUS_ID_DID_NOT_MATCH,
-++	LDNS_STATUS_QDCOUNT_MUST_BE_ONE,
-++	LDNS_STATUS_QUERY_DID_NOT_MATCH
-+ };
-+ typedef enum ldns_enum_status ldns_status;
-+ 
-+diff --git a/net.c b/net.c
-+index 03911637..ab7cf028 100644
-+--- a/net.c
-++++ b/net.c
-+@@ -564,6 +564,10 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
-+ 
-+ 	assert(r != NULL);
-+ 
-++	/* The query should at least have one question */
-++	if(ldns_buffer_limit(qb) < 6 || ldns_buffer_read_u16_at(qb, 4) != 1)
-++		return LDNS_STATUS_QDCOUNT_MUST_BE_ONE;
-++
-+ 	status = LDNS_STATUS_OK;
-+ 	rtt = ldns_resolver_rtt(r);
-+ 	ns_array = ldns_resolver_nameservers(r);
-+@@ -655,8 +659,7 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
-+ 			uint16_t txid = ldns_buffer_read_u16_at(qb, 0);
-+ 			if(reply_size < 2 ||
-+ 				ldns_read_uint16(reply_bytes) != txid) {
-+-				printf("wrong TXID!\n");
-+-				status = LDNS_STATUS_ERR; /* wrong ID */
-++				status = LDNS_STATUS_ID_DID_NOT_MATCH;
-+ 				LDNS_FREE(reply_bytes);
-+ 				reply_bytes = NULL;
-+ 				reply_size = 0;
-+@@ -671,7 +674,7 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
-+ 					LDNS_FREE(src);
-+ 				}
-+ 				LDNS_FREE(ns);
-+-				return LDNS_STATUS_ERR;
-++				return status ? status : LDNS_STATUS_ERR;
-+ 			} else {
-+ 				LDNS_FREE(ns);
-+ 				continue;
-+@@ -733,6 +736,26 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
-+ #endif /* HAVE_SSL */
-+ 
-+ 	LDNS_FREE(reply_bytes);
-++	if (reply) {
-++		ldns_pkt *query = NULL;
-++
-++		if(ldns_pkt_qdcount(reply) != 1) {
-++			status = LDNS_STATUS_QDCOUNT_MUST_BE_ONE;
-++			ldns_pkt_free(reply);
-++			reply = NULL;
-++
-++		} else if(ldns_wire2pkt(&query
-++		                , ldns_buffer_begin(qb)
-++		                , ldns_buffer_position(qb)) != LDNS_STATUS_OK
-++		|| ldns_pkt_qdcount(query) != 1
-++		|| ldns_rr_compare(ldns_rr_list_rr(ldns_pkt_question(query),0)
-++		                  ,ldns_rr_list_rr(ldns_pkt_question(reply),0))){
-++			status = LDNS_STATUS_QUERY_DID_NOT_MATCH;
-++			ldns_pkt_free(reply);
-++			reply = NULL;
-++		}
-++		ldns_pkt_free(query);
-++	}
-+ 	if (result) {
-+ 		*result = reply;
-+ 	}
-diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
-new file mode 100644
-index 0000000000..f0f0de8b71
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
-@@ -0,0 +1,34 @@
-+From b2cae7389bc43613fdd21bed1f9d41b3870c5545 Mon Sep 17 00:00:00 2001
-+From: Willem Toorop <willem@nlnetlabs.nl>
-+Date: Tue, 2 Jun 2026 12:42:38 +0200
-+Subject: [PATCH] Issues from clang analysis
-+
-+CVE: CVE-2026-10846
-+Upstream-Status: Backport [https://github.com/NLnetLabs/ldns/commit/dc117528dfc60b2dda82d9171b7e9e0b6890da2f]
-+
-+(cherry picked from commit dc117528dfc60b2dda82d9171b7e9e0b6890da2f)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-+---
-+ net.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/net.c b/net.c
-+index ab7cf028..215c0cac 100644
-+--- a/net.c
-++++ b/net.c
-+@@ -514,6 +514,7 @@ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
-+         ldns_sock_nonblock(sockfd);
-+ 
-+ 	reply_addr_len = sizeof(reply_addr);
-++	memset(&reply_addr, 0, reply_addr_len);
-+ 	answer = ldns_udp_read_wire(sockfd, answer_size, &reply_addr,
-+ 		&reply_addr_len);
-+ 	close_socket(sockfd);
-+@@ -524,6 +525,7 @@ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
-+ 	}
-+ 	/* Check that the reply came from the to addr. */
-+ 	if(ldns_sockaddr_cmp(to, tolen, &reply_addr, reply_addr_len) != 0) {
-++		free(answer);
-+ 		return LDNS_STATUS_NETWORK_ERR;
-+ 	}
-+ 
-diff --git a/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb b/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
-index 80e5571954..75d02ad673 100644
---- a/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
-+++ b/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
-@@ -3,7 +3,11 @@ HOMEPAGE = "https://nlnetlabs.nl/ldns"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=34330f15b2b4abbbaaa7623f79a6a019"
- 
--SRC_URI = "https://www.nlnetlabs.nl/downloads/ldns/ldns-${PV}.tar.gz"
-+SRC_URI = "https://www.nlnetlabs.nl/downloads/ldns/ldns-${PV}.tar.gz \
-+           file://CVE-2026-10846_p1.patch \
-+           file://CVE-2026-10846_p2.patch \
-+           file://CVE-2026-10846_p3.patch \
-+           "
- SRC_URI[sha256sum] = "c3f72dd1036b2907e3a56e6acf9dfb2e551256b3c1bbd9787942deeeb70e7860"
- 
- DEPENDS = "openssl"
--- 
-2.35.6
+diff --git a/meta-oe/recipes-shells/zsh/zsh_5.9.1.bb b/meta-oe/recipes-shel=
+ls/zsh/zsh_5.9.2.bb
+similarity index 95%
+rename from meta-oe/recipes-shells/zsh/zsh_5.9.1.bb
+rename to meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
+index a62526dbb2..88c846a27d 100644
+--- a/meta-oe/recipes-shells/zsh/zsh_5.9.1.bb
++++ b/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D1a4c4cda3e8096=
+d2fd483ff2f4514fec"
+ DEPENDS =3D "ncurses bison-native libcap libpcre2 gdbm groff-native"
+=20
+ SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.x=
+z"
+-SRC_URI[sha256sum] =3D "5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c5c416=
+b5042e58d8280d"
++SRC_URI[sha256sum] =3D "020ee644be1749507b282e619cdcd95c56ff36144e79b7a3c2=
+45458aacd9458f"
+=20
+ inherit autotools gettext update-alternatives manpages
+=20
+--=20
+2.53.0
 
 
