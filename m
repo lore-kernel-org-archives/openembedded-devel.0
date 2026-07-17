@@ -2,85 +2,84 @@ Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B37D7C4450F
-	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 05:58:47 +0000 (UTC)
-Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7697.1784267919794538422
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 932D2C4450F
+	for <webhook@archiver.kernel.org>; Fri, 17 Jul 2026 05:59:07 +0000 (UTC)
+Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7598.1784267944520929434
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2026 22:58:39 -0700
+ Thu, 16 Jul 2026 22:59:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=MjHgMnQM;
- spf=pass (domain: cisco.com, ip: 173.37.86.74, mailfrom: deeratho@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Yzd4wHD5;
+ spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=12087; q=dns/txt;
-  s=iport01; t=1784267919; x=1785477519;
+  d=cisco.com; i=@cisco.com; l=12158; q=dns/txt;
+  s=iport01; t=1784267944; x=1785477544;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=rvMSYH8r8S91CwIwf4enGZ+1/MQG0EB/BAZyz0bBLQ4=;
-  b=MjHgMnQMu1LFiMx5rYRpw6Fhf4SPDO+KI1Wt1TxcdAoHwxQHM/SaIGBK
-   x41Bu9oZR6yOyotl3xO8u3+W309AoYTxCpmqVmqX0nXy0ck91Vgc7FaFK
-   U/kkTGVy0y46QCOg5m9BvattnNPRmKbrAqRrX3VD8pv8IBb9lU6/xYO7j
-   jkqkYLmzHY4VXmaDQDB82ELSSDKEpV4t5bVJxon2aTxPP48omCAksEaJz
-   qoMinMZrIf+tVsClZA7dq8kWBFjA+zhpyRSRmknq22RO9rgtXR7k4lZaw
-   ok9J8W8PlMAnI2VIfRicDQKKUWrzZrSBVxds7PKZhaFPr/jY0mjNACLUk
-   A==;
-X-CSE-ConnectionGUID: Lx3Ag6flToyk5mV9ew10AA==
-X-CSE-MsgGUID: jFCgTdNnSNyVfwjAuipZZg==
-X-IPAS-Result: =?us-ascii?q?A0AmAABWw1lq/4//Ja1aHQEBAQEJARIBBQUBgXwIAQsBg?=
- =?us-ascii?q?lZ0X0JJjHKHN4E1bIEWnQiBfg8BAQEPRA0EAQGSWQImNAkOAQIEAwIDAQEBA?=
- =?us-ascii?q?QEBAQEBAQELAQEFAQEBAgEHBYEOE4ZPDYZaAS0LARgBWQMBAlojGQiDAgGCd?=
- =?us-ascii?q?AMRBr1FgXkzgQGDKAE/AkNQ2y4BCxQBgTgBhT6IIFwYAYR8JxsbgXKBFYE7g?=
- =?us-ascii?q?Th2gQWBXAKBJ4Z+BIIigQyBWh6QAUiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yH?=
- =?us-ascii?q?YEjPheBDBsHBYEdgTqBAIR2Ix8DOX+BL3VKdy1qEheBToIUgT4DCxgNSBEsN?=
- =?us-ascii?q?xQbBD5uB41II4FNcgEsThMBExgigTwkAqYboRIKKIN1jCGVOhozqmwLmH2LJ?=
- =?us-ascii?q?4Jjig2MQ4RpgWg8gVlwFYMiCUoZD1aNVAMBCguDYIRvyVE8NQIJMgEBBwIHD?=
- =?us-ascii?q?gMLgWiQAIF+AQE?=
-IronPort-Data: A9a23:7HqIHq1S8sfhAgWB0/bD5YNwkn2cJEfYwER7XKvMYLTBsI5bp2cFy
- WseX2mDP6zcMWGnKIp1Ptjg8xwGucWDz4QySgs63Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
- 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
- Lsen+WFYAX7g2EtbDpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
- u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGKFFtFIJG9OJLBnBNq
- PkmeT0SN0iqrrfjqF67YrEEasULNsLnOsYb/3pn1zycVahgSpHYSKKM7thdtNsyrpkRRrCFO
- IxDNGcpNUibC/FMEg9/5JYWkOqlnHDjczpwo1OOrq1x6G/WpOB0+OW0aYSPIoTaHK25mG6ai
- EnJw2jfBCo8JeKR1jis73O0tN3AyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPBWC4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rHnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:FS7Cvak+PZ9qMlSP3dx8L4PaV/PpDfIc3DAbv31ZSRFFG/Fw8P
- re/sjzuiWbtN98YhwdcLO7Scq9qA3nlKKdiLN5VdzJYOCMggSVxe9ZgbcKuweBJwTOsshAyK
- xnb69yTPf0DVR8kILGxTPQKadE/DFCm5rY4ts3CBxWPGVXV50=
-X-Talos-CUID: 9a23:CmX17m3eKkE7V8AXYGPdLbxfPtB+W3KDwnPsJF67VGNXGbCKEAe50fYx
-X-Talos-MUID: 9a23:6+BdHgup2o+kRZiyuc2nhh9JO/tkxaKVLlEzn4oEktSFLR5CNGLI
+  bh=h2JWpGvppxGBJYE+PdKTx7Q4Vk3/IoP1BeOtSVfe6a8=;
+  b=Yzd4wHD5wIxuXZ/sc6sKg1VnL+CDSPdPIpO3cPRwlmUoIF/iplrO8kwI
+   4jFDu4xrm6GJxi/0/z+EutFvIFwgm68+I7BP7x2PKT6lsB548ryYmOPiw
+   NrX2NWNrFTC9F6DlXvRRpqOqqXC2FRYfWS+wLXM/jPMH+SXXjZa2NsSZE
+   rQb6G/DRyC2L6BskobMcuAEW8wAJBJ85ziOMECU7SZzUd+Cs+qtZqE80X
+   PBZa89socjD0+8x+aauPZqTwd3drQQGVDaXQrtBl9gXLtgKWgFtulomcR
+   ML70I2b6WT8neX25NDaPxkHZ6IPugGGQs94txbG0yr0zFKwNO6dlwiNAN
+   Q==;
+X-CSE-ConnectionGUID: QpbUSpD/SgWe1j0IZPEtRw==
+X-CSE-MsgGUID: lGTKV8BCS5yepywoc7lFGg==
+X-IPAS-Result: =?us-ascii?q?A0BFAgBWw1lq/5P/Ja1aglmCV3RfQkmUKYE1bIEWnQiBf?=
+ =?us-ascii?q?g8BAQEPRA0EAQGSWQImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDYZaAS0LARgBWQMBAlojGQiDAgGCdAMRBr1FgXkzgQGDKAE/AkNQ2?=
+ =?us-ascii?q?y4BCxQBgTiFP4ggXBgBhHwnGxuBcoEVgnN2gQWBXAKBJ4Z+BIIigQyBWh6QA?=
+ =?us-ascii?q?UiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBDBsHBYEdgTqBAIR2Ix8DO?=
+ =?us-ascii?q?X+BL3VKdy1qEheBToIUgT4DCxgNSBEsNxQbBD5uB41II4FNcgEsThMBExgXC?=
+ =?us-ascii?q?4E8JAKmG6ESCiiDdYwhlToaM6psC5h9iyeCY4oNjEOEaYFoPIFZcBWDIglKG?=
+ =?us-ascii?q?Q9WjVcBCguDYIRvyVE8NQIJMgEBBwIHDgMLgWiQAIF+AQE?=
+IronPort-Data: A9a23:yklYE6gAKEhPZKIp95CDmpl2X161MBEKZh0ujC45NGQN5FlHY01je
+ htvX2iEbPuNZ2L8L9wiYY+3pEgP75/Vz9UyGgQ+/ys0FChjpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeCULOZ82QsaDxMtPvd8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUh4uxKOnlis
+ scXFz1UbEiitdqb3IikH7wEasQLdKEHPasFsX1miDWcBvE8TNWaG+PB5MRT23E7gcUm8fT2P
+ pVCL2EwKk6dPlsWZgh/5JEWxI9EglHzfjBCoU6VooI84nPYy0p6172F3N/9Jo3UFZUMwh7Gz
+ o7A12DWPjIkZPa08meU/2q9mejEwifVd41HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
+ UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2cZLtcnr8QxAzct0
+ zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
+IronPort-HdrOrdr: A9a23:27M9laMjKhRuwsBcTvGjsMiBIKoaSvp037BN7TESdfU7SKKlfq
+ yV8cjztiWE6wr5JktApTnoAsDpKhnhHPVOjrX5U43PYOCfgguVBbAny5f+yDv9HCC73Otc2a
+ B8N5VaMrTLfD1HZQKQ2njeLz7mq+P3lJyVuQ==
+X-Talos-CUID: 9a23:LwFUtmNM5Ifl6O5DYTFtyXUMNocefULQlXWIAn2AJHpTV+jA
+X-Talos-MUID: 9a23:kyYe4wgTgtlj71zhH0rBE8MpMOhUwJr+Ims2zIQLo9ibMicvPxmyg2Hi
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,168,1779148800"; 
-   d="scan'208";a="511620081"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 17 Jul 2026 05:58:37 +0000
+   d="scan'208";a="496881406"
+Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
+  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 17 Jul 2026 05:59:03 +0000
 Received: from bgl-ads-3413.cisco.com (bgl-ads-3413.cisco.com [173.39.60.50])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id 5DDBC1800039B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:58:36 +0000 (GMT)
+	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id 0C64218000895
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:59:03 +0000 (GMT)
 Received: by bgl-ads-3413.cisco.com (Postfix, from userid 1795984)
-	id 77333CC037D; Fri, 17 Jul 2026 11:28:34 +0530 (IST)
+	id 2F022CC037D; Fri, 17 Jul 2026 11:29:01 +0530 (IST)
 From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH] ldns: fix CVE-2026-10846
-Date: Fri, 17 Jul 2026 11:28:28 +0530
-Message-Id: <20260717055828.2904536-1-deeratho@cisco.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] ldns: fix CVE-2026-10846
+Date: Fri, 17 Jul 2026 11:28:41 +0530
+Message-Id: <20260717055841.2905177-1-deeratho@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;bgl-ads-3413.cisco.com [173.39.60.50];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 173.39.60.50, bgl-ads-3413.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
+X-Outbound-Node: rcdn-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:58:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128243
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2026 05:59:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128244
 
 From: Deepak Rathore <deeratho@cisco.com>
 
@@ -99,7 +98,7 @@ Signed-off-by: Deepak Rathore <deeratho@cisco.com>
  .../ldns/ldns/CVE-2026-10846_p1.patch         | 117 ++++++++++++++++++
  .../ldns/ldns/CVE-2026-10846_p2.patch         | 117 ++++++++++++++++++
  .../ldns/ldns/CVE-2026-10846_p3.patch         |  34 +++++
- meta-oe/recipes-devtools/ldns/ldns_1.9.0.bb   |   6 +-
+ meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb   |   6 +-
  4 files changed, 273 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
  create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
@@ -107,11 +106,11 @@ Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 
 diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
 new file mode 100644
-index 0000000000..9456f62281
+index 0000000000..4b9d86a2ee
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
 @@ -0,0 +1,117 @@
-+From 4ebda24000ee83704af0998251b98c89a2285985 Mon Sep 17 00:00:00 2001
++From 844fb7e197b646a11dc058c5c7ce0877371bd4d4 Mon Sep 17 00:00:00 2001
 +From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
 +Date: Fri, 29 May 2026 09:44:27 +0200
 +Subject: [PATCH] Fix to check address and port and TXID
@@ -126,7 +125,7 @@ index 0000000000..9456f62281
 + 1 file changed, 64 insertions(+), 1 deletion(-)
 +
 +diff --git a/net.c b/net.c
-+index e944d018..8b8da108 100644
++index 57d4dff2..03911637 100644
 +--- a/net.c
 ++++ b/net.c
 +@@ -441,6 +441,50 @@ ldns_udp_bgsend2(ldns_buffer *qbin,
@@ -230,11 +229,11 @@ index 0000000000..9456f62281
 + 		if (!reply_bytes) {
 diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
 new file mode 100644
-index 0000000000..be26c6b891
+index 0000000000..f2f9d4b596
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
 @@ -0,0 +1,117 @@
-+From 4414a52362e1ec09d2c60f1870e5398b78376e4a Mon Sep 17 00:00:00 2001
++From 0e291b494fc5e4d3800b27d7016fc92c7aac269e Mon Sep 17 00:00:00 2001
 +From: Willem Toorop <willem@nlnetlabs.nl>
 +Date: Tue, 2 Jun 2026 12:19:38 +0200
 +Subject: [PATCH] Match question from query in response, and...
@@ -258,13 +257,13 @@ index 0000000000..be26c6b891
 + 3 files changed, 36 insertions(+), 4 deletions(-)
 +
 +diff --git a/error.c b/error.c
-+index 5723aea9..4fc05d6d 100644
++index e3fd1211..f046c962 100644
 +--- a/error.c
 ++++ b/error.c
-+@@ -191,6 +191,12 @@ ldns_lookup_table ldns_error_str[] = {
-+ 		"at least 2 bytes of option data" },
-+ 	{ LDNS_STATUS_EQUAL_RR,
-+ 		"An identical RR already existed in the zone" },
++@@ -184,6 +184,12 @@ ldns_lookup_table ldns_error_str[] = {
++ 	{ LDNS_STATUS_INVALID_SVCPARAM_VALUE,
++ 		"Invalid wireformat of a value "
++ 		"in the ServiceParam rdata field of SVCB or HTTPS RR" },
 ++	{ LDNS_STATUS_ID_DID_NOT_MATCH,
 ++		"Response ID did not match the query ID" },
 ++	{ LDNS_STATUS_QDCOUNT_MUST_BE_ONE,
@@ -275,15 +274,15 @@ index 0000000000..be26c6b891
 + };
 + 
 +diff --git a/ldns/error.h b/ldns/error.h
-+index a76eb2ec..41d64cc0 100644
++index 2429b770..5754f5a0 100644
 +--- a/ldns/error.h
 ++++ b/ldns/error.h
-+@@ -144,7 +144,10 @@ enum ldns_enum_status {
-+ 	LDNS_STATUS_INVALID_SVCPARAM_VALUE,
-+ 	LDNS_STATUS_NOT_EDE,
-+ 	LDNS_STATUS_EDE_OPTION_MALFORMED,
-+-	LDNS_STATUS_EQUAL_RR
-++	LDNS_STATUS_EQUAL_RR,
++@@ -141,7 +141,10 @@ enum ldns_enum_status {
++ 	LDNS_STATUS_RESERVED_SVCPARAM_KEY,
++ 	LDNS_STATUS_NO_SVCPARAM_VALUE_EXPECTED,
++ 	LDNS_STATUS_SVCPARAM_KEY_MORE_THAN_ONCE,
++-	LDNS_STATUS_INVALID_SVCPARAM_VALUE
+++	LDNS_STATUS_INVALID_SVCPARAM_VALUE,
 ++	LDNS_STATUS_ID_DID_NOT_MATCH,
 ++	LDNS_STATUS_QDCOUNT_MUST_BE_ONE,
 ++	LDNS_STATUS_QUERY_DID_NOT_MATCH
@@ -291,7 +290,7 @@ index 0000000000..be26c6b891
 + typedef enum ldns_enum_status ldns_status;
 + 
 +diff --git a/net.c b/net.c
-+index 8b8da108..7baec967 100644
++index 03911637..ab7cf028 100644
 +--- a/net.c
 ++++ b/net.c
 +@@ -564,6 +564,10 @@ ldns_send_buffer(ldns_pkt **result, ldns_resolver *r, ldns_buffer *qb, ldns_rdf
@@ -353,11 +352,11 @@ index 0000000000..be26c6b891
 + 	}
 diff --git a/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
 new file mode 100644
-index 0000000000..336f97b43e
+index 0000000000..f0f0de8b71
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
 @@ -0,0 +1,34 @@
-+From e9604a0e5d4a1a7b807f6ec27967c03e689127a7 Mon Sep 17 00:00:00 2001
++From b2cae7389bc43613fdd21bed1f9d41b3870c5545 Mon Sep 17 00:00:00 2001
 +From: Willem Toorop <willem@nlnetlabs.nl>
 +Date: Tue, 2 Jun 2026 12:42:38 +0200
 +Subject: [PATCH] Issues from clang analysis
@@ -372,7 +371,7 @@ index 0000000000..336f97b43e
 + 1 file changed, 2 insertions(+)
 +
 +diff --git a/net.c b/net.c
-+index 7baec967..4c1f4054 100644
++index ab7cf028..215c0cac 100644
 +--- a/net.c
 ++++ b/net.c
 +@@ -514,6 +514,7 @@ ldns_udp_send_from(uint8_t **result, ldns_buffer *qbin,
@@ -391,10 +390,10 @@ index 0000000000..336f97b43e
 + 		return LDNS_STATUS_NETWORK_ERR;
 + 	}
 + 
-diff --git a/meta-oe/recipes-devtools/ldns/ldns_1.9.0.bb b/meta-oe/recipes-devtools/ldns/ldns_1.9.0.bb
-index de75c73207..415890b2b3 100644
---- a/meta-oe/recipes-devtools/ldns/ldns_1.9.0.bb
-+++ b/meta-oe/recipes-devtools/ldns/ldns_1.9.0.bb
+diff --git a/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb b/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
+index 80e5571954..75d02ad673 100644
+--- a/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
++++ b/meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb
 @@ -3,7 +3,11 @@ HOMEPAGE = "https://nlnetlabs.nl/ldns"
  LICENSE = "BSD-3-Clause"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=34330f15b2b4abbbaaa7623f79a6a019"
@@ -405,7 +404,7 @@ index de75c73207..415890b2b3 100644
 +           file://CVE-2026-10846_p2.patch \
 +           file://CVE-2026-10846_p3.patch \
 +           "
- SRC_URI[sha256sum] = "abaeed2858fbea84a4eb9833e19e7d23380cc0f3d9b6548b962be42276ffdcb3"
+ SRC_URI[sha256sum] = "c3f72dd1036b2907e3a56e6acf9dfb2e551256b3c1bbd9787942deeeb70e7860"
  
  DEPENDS = "openssl"
 -- 
