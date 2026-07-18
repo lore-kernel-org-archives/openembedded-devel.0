@@ -2,217 +2,148 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E611C4451B
-	for <webhook@archiver.kernel.org>; Sat, 18 Jul 2026 15:29:52 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7935.1784388583616139843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 331B9C4451C
+	for <webhook@archiver.kernel.org>; Sat, 18 Jul 2026 15:51:32 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8289.1784389884120274220
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Jul 2026 08:29:43 -0700
+ Sat, 18 Jul 2026 08:51:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gZ9zkJm1;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-81ee6b2da98so27975097b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Jul 2026 08:29:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784388583; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WsHODLm9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-8143daf89c7so51048887b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Jul 2026 08:51:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784389883; cv=none;
         d=google.com; s=arc-20260327;
-        b=A/lq4uyPLqsDOLDSwBLLbWcZjpdMHXFJTrxcbLUuxbDHs0chlP9nqO2L4na5zU5Qoe
-         hWQwA6obUapR9Tpmgba9xN6ykAnrr3IS2bRYtg7gi+XiEG6xFBGKkHKtTDFBZYXQ/Eny
-         kwpgypNXK5mNxDtLdls0UUnXG32qqtFpgRI95ljM8Min/Hrx691wgfKBHb4XnZEIPk3h
-         Km0qT5ioZj12C5MXngJaIiCZcyQ+xypjKIdHidWMRFJwUtbWP1XxeaeW+bJPI3jzfXuB
-         wWkLvcWyzo6TfG6YDMc0iybkoMLW30pad617hXV7bOT2CKdNix2ZHdFTApxMsBNJvsTI
-         fwbg==
+        b=FPX35KEkGCc/AgmL+N9OrxoTGNTJ/yuOnOVdKPxic4i96wGkp0zQessIzIe/wxJ9W0
+         IvFXpJ5PXH+MuJuSY1n7E3CHGV9hYia/w3YHRTQhbgIsLVSuI7VRWbTAupsTmEwwvBw8
+         DD9KYZ6jTogWlvHLY1k89V8xhNbUFxRVh/oOwvxqvYTG2/Zgo+9wYmlJBLHurjEwwkFm
+         acwDT3VXAlMOV+zeDaYwK77xWOc0nqauvMsv2p/iZE3l5+9zbngFoYfeG+Y1pTnN6llg
+         9rao7BuUa6D3prT3k8aRiXovrY6ZkJBAQFS7/D20YADAeTsougSuKDn8SCbMwjE+MIGx
+         lLUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=WsrAkDVqOprqqnMZiTr+3+gmHv90K71TPBo3jx/xEQY=;
-        fh=8keRl2qkbBaB+fIMFJvlKJ0uiBueEFIWGp/Rf5nhwrw=;
-        b=SYtgxMYBSbdh81pMhc0oY6uUk1zt2foGdQf1wQ9bsl/MpUWVbZaSdB2RcVwrIYz1HR
-         /I+Jm/30z4nqR8jQVOuTx8A903uy1foI4BEDPm4NISbPUNlQzct2F91X5eSai5l3cWS/
-         Ab8gGSep/dliejLW1dqwMkF3RuoCVLoF4EXRwpPH/1QGQUUSOfMvEYyimXiRfG5MgAHx
-         O+DiQvEw7I4qs+rJeLfTse08M1mQyMCHNttrstT8vHfygfhK15MBHrjpcSJm0GBY7U80
-         LRT7LrGKt38danH1tF7rMtd2xR0SAK6IV7S0YhjOB5kDzlUA5frOeMVIVugmWXulE4Wo
-         2JcQ==;
+        bh=9ICZ45RvuedbQUs8losc1xuhika9oxCCEk0EFJ4clFo=;
+        fh=wtQJmTNKI5f1UFKEvRhwyoTFPNk3MPf/Yr/dx5nN1Vo=;
+        b=HVy6SABYk0bj7GQ8YEavmJ+aLnnRcKlWmKuLDC6RdQWUWAHLh4+0supVutJxlrjv5G
+         8UwCUaDgT77U9H9BOdDt/bZ0oRy37Tqagxg97KGdvfXqMNprdfBimZfrOvX1vxO5G/0p
+         8HOrFp9EqM3yKYOjMcnveodUy/dgi/J/K7+yBua9cuUL/kgX+9FtYNy+3LIR++60CdXw
+         5RQ/z9mZnsqJa+04atSsLvRku4eJBNhtLiidCbA3GXub16rr1N4KvovOGRU2R2APVkKp
+         q9xJfNCumssvIMlzc8g1emw0pLWGW7mVnzIwR31KK4aUEAecY4RfiZoqOIVtXPp/+Vck
+         ZYHA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784388583; x=1784993383; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1784389883; x=1784994683; darn=lists.openembedded.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=WsrAkDVqOprqqnMZiTr+3+gmHv90K71TPBo3jx/xEQY=;
-        b=gZ9zkJm1XkuBGqwzfFI1vxgs4zGV3okSAC8QPM/22WNP57/PG6t0afNp3ybdVVTX2Y
-         T7AtiXhqsk/DXSNPktXbMfxa2A7MKzDP8a/XeGUnizVqGRiADdGCSXcXG0uaQ+37yHAg
-         n+eXdA0BUrNSVQRWZgJeypMlgGT6bhlAaL7B0ElfC9dQ9mO7G1RxFqze6HuBVAHuhUH4
-         DmBJ0Hf4qHnkUC/N9VkXjJGUGckr+I16InXJDBr+681s3eXmQEq74HEQFflc7EsIIW4e
-         AfGCwav99o7zp4qdfPKLr3Gl5xqnJJmkgsJiV4c1+azl0BN53//GQ2fQom976B0LhVdz
-         rkyw==
+        bh=9ICZ45RvuedbQUs8losc1xuhika9oxCCEk0EFJ4clFo=;
+        b=WsHODLm9z9O8a/f5ggXP+JQ0yvVIyLptO2DJR1b++fnz1hBSYTY3vhWVdpWvWw1l1J
+         xdp1VNHVvJ80LLuXg9YR7Q9SKV9Eo+c4UthxZQ1H44ORbuiIh6Hrk45wwHu/93QvU5tP
+         LoyKQiiGdMiQJY2Lhs8khNp1yO2x9/giQmEXRvxrCXklh+3tmA6+nMT34UT+sqpa/lnf
+         XL5wHkVQJ0sGv5I5rj39h+p8aNXOhwCijNGcHIRq5wOjhk3fjnXGyYUX4OZF6xdeHW/w
+         No2k0Q9fumganNtPmlRANN0NQwGAnOr8NJsVprEfaui3R1yatF6AxvEakGHM2lK6qbvL
+         skSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784388583; x=1784993383;
+        d=1e100.net; s=20251104; t=1784389883; x=1784994683;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=WsrAkDVqOprqqnMZiTr+3+gmHv90K71TPBo3jx/xEQY=;
-        b=izWuVSBl7P26taCEtWIcGoPfLqtU+TVqmbPrqugnj2Pyxfgjk1hPelsIg6HId+e7lB
-         z/DwYtLrT9LIvx5iFRFk0oXMCnpu1+apxTMvinFOP3G4fichwEBtoc1t0r2glBwseJJI
-         n8dAT1ZJcrERND3gUTTJDB53iPHdE9n3qjC5d9dpX9W8aFnNy2kCAQHHRFW2jbjfx4gR
-         m1usQxKsXHjPEWK8BbX0iVuLcsOXn9UILGe+NT4QDS+C9PkbXF32RdU0PtrO79Q9Ngnq
-         C6Cc7rhCooSLOdawKPIMpKc0gdI6RQ0nSFJfE/MTD1FhMeWZiSLlfcz7TiUTxAuew5/m
-         vRgg==
-X-Gm-Message-State: AOJu0Ywtv4Hy0P7RiPnYKswffwFiU/m98jw2cCOIET6Y/kA4ETt6NorT
-	JbO0MGgM/J18ZCiAm/wWjfUtofA1HCE5ajxWpWXzttozbdrMPEetfVrwo2i/SjWL5KSXx0aScSz
-	qkTJqds0HsjCYftrOh/BbolkKS1+ZlHx+escL
-X-Gm-Gg: AfdE7cl9FcX4YglU90fPpLD4Tjb2fg9VIGB6Etsc+pGwc6HHvTct6C73PcOTYjzFPEK
-	AqzDGFA0oX+3fb1GBHylujHSdorozOyCui//bADBF+jNcK4/nLyZfeKDJtw4dXU6GOMPBkP8Otc
-	xC/q/J2cyrAOjEwWoYPgcPUDzFyV06NNRaRmF267iO1dL1ga+tTdX2KY6iqfpqwDTIQg4xHCEJc
-	n2jdy07Kk0sk1w0tl+k6vR8dqaK+rd/jMajLrKqP6wdEYk7VdtJ52lmkMkkW/ApRtM14yNzfx4n
-	fIRl+C5pkMrzF91iFrCBFMPsFgV5jie82ikFN+JBU0rcoyOp44H9SGd7oRgBtYsmV1A6qPj7tMh
-	1K8r+t5RJHqVmrV05Jrcqbs8NY62e+DpsVup2rJE/HziQUt1fREXStbVv4l4=
-X-Received: by 2002:a05:690c:67c4:b0:80c:85c6:8984 with SMTP id
- 00721157ae682-81ef265b313mr20908527b3.67.1784388582537; Sat, 18 Jul 2026
- 08:29:42 -0700 (PDT)
+        bh=9ICZ45RvuedbQUs8losc1xuhika9oxCCEk0EFJ4clFo=;
+        b=BDXHzmsb+FYoNPOaChgLcPoJHcRqyKgO9U3yTnF0eeJkzz7zLylna0RN6abvGkp1mZ
+         D3GmE5X0APRjDMz1I4ytZSMeA2mhVZ55C26e3ctlIBKdZmdQOrrgOUzPszEKabaMwaHh
+         VrFIdqk+ZlkO2H2pL6Gf9rGhnXt/rEOogZTp6JYGLO/kXgxsHPXTN0+T4GEMZs6ZcMQq
+         3KoDqpWXnVLLPAmrqb34OVtoRvVHu12wKrVYfjPX9yzoAP9cM53K7AdwQlG4aZTkzefr
+         tZwDLG5ikyR+h8ypnOets5d4Z3Y7rakpCKdrOFOKEzysHW6tJ4/Lcl4Gx7A4aB6Msado
+         wEmA==
+X-Gm-Message-State: AOJu0YyElXEc/j43HrIbIfNE7VdsqWE9NwPCL817QbrrHnrgGw0paOLm
+	0fRzanlpzAoQn9Dike3O9f2Vi4/lAB312cD4MLnIf2uH8aI5aQFjyuaIXuFIhRO5PiF8tKxDKVM
+	eHlZIoIFQRxT+1PAhT8NauArAWZ/fe5Ihqf1b
+X-Gm-Gg: AfdE7cnhFahMPo31Ia+lN1zeQpRWwOzTdFm7WQSiu5R7GcEPF5hzLuUBTlf912xjPCq
+	9ZVTAg5+HV0829jn/r3y83lClH/CpsQTUJXtvVchs+0UjGLt878GspDkK6T0VuqoHpvNG9OERkp
+	yLn7oVy8ZcIgL8VjkdhE0CAAVu5TvmZPRrdC6xVDwjwrv3E+AhgFNBJQRSNaFYf7mt7/CZF1Fj1
+	uV9FKrTgK+tob+u4uagNBf4ul906VuiZCNgx36Z4iRVSOwms4gT5fCAodVC2Tqs5qwXlbGVrNnU
+	PkjVcRbTRJR/zh/8bOQ+cvmi5MTHwFM669p4kyxP22iVqYEuvlNa2S5WbkKQaCApAAWem+m/rZE
+	AYDKmJlQPb4Q9PGogsIRmGQtn+Nvo/GcEJoz1637BKQRxlGHoLMbD0YhKMRzkWIMABXARww==
+X-Received: by 2002:a05:690c:b9e:b0:80c:2874:67b5 with SMTP id
+ 00721157ae682-81ef25e9282mr23868937b3.52.1784389883103; Sat, 18 Jul 2026
+ 08:51:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260715130932.1438994-1-ctheegal@qti.qualcomm.com>
-In-Reply-To: <20260715130932.1438994-1-ctheegal@qti.qualcomm.com>
+References: <ccc9289f95924943d5fba4f4be27e6c558652390.1784270036.git.joerg.sommer@navimatix.de>
+In-Reply-To: <ccc9289f95924943d5fba4f4be27e6c558652390.1784270036.git.joerg.sommer@navimatix.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 18 Jul 2026 08:29:16 -0700
-X-Gm-Features: AUfX_mwizNh9o6TZqKaKoe2QFmJfOntKx-bHvV6CmBia-rdC3AMPFCJQy3h2KSM
-Message-ID: <CAMKF1sqUtErjiuXXwPrGomhRgnMs9cug91zNOE-trb9tERHUkw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] boot-time-analysis-tools: add boot time
- profiling tools
-To: ctheegal@qti.qualcomm.com
+Date: Sat, 18 Jul 2026 08:50:55 -0700
+X-Gm-Features: AUfX_mwBQkS8Zoyz0y5UA1YAemL3M_6DI0EIgqF3an6ItSr9gkYi0YfPJylms0c
+Message-ID: <CAMKF1srYEvATLXXGDgBizwnedDPhihfX0E5+VBi0n=R-kMZZyQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] zsh: Update 5.9.1 -> 5.9.2
+To: joerg.sommer@navimatix.de
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000009a7f9e0656e4579b"
+Content-Type: multipart/alternative; boundary="0000000000001f8e6a0656e4a53f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Jul 2026 15:29:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128254
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Jul 2026 15:51:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128255
 
---0000000000009a7f9e0656e4579b
+--0000000000001f8e6a0656e4a53f
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-This depends on python3-systemd which comes from meta-python and meta-oe
-does not depend on meta-python, so it. fails layers dependency check.
-Please move this recipe under meta-oe/dynamic-layers/meta-python
+The sha checksum for 5.9.2 tarball seems to have discrepancies.
 
-On Wed, Jul 15, 2026 at 6:09=E2=80=AFAM Chitti Babu Theegala via
-lists.openembedded.org <ctheegal=3Dqti.qualcomm.com@lists.openembedded.org>
-wrote:
+https://errors.yoctoproject.org/Errors/Details/950824/
 
-> Add two new recipes from the CentOS Automotive SIG
-> boot-time-analysis-tools project to enable boot time profiling
-> and measurement.
+Can you check by building please ?
+
+
+On Thu, Jul 16, 2026 at 11:34=E2=80=AFPM J=C3=B6rg Sommer via lists.openemb=
+edded.org
+<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
+
+> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 >
-> boot-time-analysis-tools:
->   Python-based toolset for collecting, analyzing and visualizing system
->   boot timing data from the systemd journal. Provides the 'boot_timings'
->   CLI utility which queries D-Bus and the systemd journal to produce
->   structured boot time reports. Depends on python3-dbus and python3-syste=
-md
->   for runtime journal and D-Bus access.
+> Changelog https://zsh.sourceforge.io/releases.html
 >
-> cntvct-log:
->   Userspace C utility built with Meson that logs ARM CNTVCT_EL0 virtual
->   counter timestamps to correlate hardware-level timing with systemd boot
->   events. Installs cntvct@.service as a systemd template unit (disabled
->   by default) for on-demand per-instance activation. The service preset
->   file (98-cntvct-log.preset) is installed for system-preset-based
-> enablement.
+> * Only minor changes.
 >
-> Both recipes fetch from the same upstream git repository:
->   https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools
->
-> Signed-off-by: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
+> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 > ---
->  .../boot-time-analysis-tools_0.7.1.bb         | 13 +++++++++
->  .../cntvct-log_0.7.1.bb                       | 27 +++++++++++++++++++
->  2 files changed, 40 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/boot-time-analysis-tools/
-> boot-time-analysis-tools_0.7.1.bb
->  create mode 100644 meta-oe/recipes-devtools/boot-time-analysis-tools/
-> cntvct-log_0.7.1.bb
+>  meta-oe/recipes-shells/zsh/{zsh_5.9.1.bb =3D> zsh_5.9.2.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-shells/zsh/{zsh_5.9.1.bb =3D> zsh_5.9.2.bb} (95%)
 >
-> diff --git a/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> boot-time-analysis-tools_0.7.1.bb
-> b/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> boot-time-analysis-tools_0.7.1.bb
-> new file mode 100644
-> index 0000000000..00a5c8b960
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> boot-time-analysis-tools_0.7.1.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Boot time analysis tools from CentOS Automotive SIG"
-> +REQUIRED_DISTRO_FEATURES =3D "systemd"
-> +DESCRIPTION =3D "Tools for analyzing and visualizing system boot time"
-> +HOMEPAGE =3D "
-> https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1c2e0cc0dec0b709fe547806b5573=
-7b0"
-> +
-> +SRC_URI =3D "git://
-> gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=3D=
-https;branch=3Dmain;tag=3D${PV}
-> <http://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;pro=
-tocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7D>
-> "
-> +SRCREV =3D "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
-> +
-> +inherit setuptools3 features_check
-> +
-> +RDEPENDS:${PN} =3D "python3-dbus python3-systemd "
-> diff --git a/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> cntvct-log_0.7.1.bb b/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> cntvct-log_0.7.1.bb
-> new file mode 100644
-> index 0000000000..8cf2a4c225
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/boot-time-analysis-tools/
-> cntvct-log_0.7.1.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "cntvct-log - ARM virtual counter boot time logger"
-> +DESCRIPTION =3D "Userspace tool to log ARM CNTVCT_EL0 counter values for
-> boot time analysis"
-> +HOMEPAGE =3D "
-> https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://../LICENSE;md5=3D1c2e0cc0dec0b709fe547806b55737b0"
-> +
-> +SRC_URI =3D "git://
-> gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=3D=
-https;branch=3Dmain;tag=3D${PV}
-> <http://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;pro=
-tocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7D>
-> "
-> +SRCREV =3D "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
-> +
-> +S =3D "${UNPACKDIR}/cntvct-log-${PV}/cntvct-log"
-> +
-> +inherit meson systemd
-> +
-> +# Manually install service file if meson.build doesn't handle it
-> +do_install:append() {
-> +    if [ -f ${S}/usr/lib/systemd/system/cntvct@.service ]; then
-> +        install -d ${D}${systemd_system_unitdir}
-> +        install -m 0644 ${S}/usr/lib/systemd/system/cntvct@.service \
-> +            ${D}${systemd_system_unitdir}/cntvct@.service
-> +    fi
-> +}
-> +
-> +SYSTEMD_SERVICE:${PN} =3D "cntvct@.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +
-> +# Explicitly include the service file in the package
-> +FILES:${PN} +=3D "${systemd_system_unitdir}/cntvct@.service"
+> diff --git a/meta-oe/recipes-shells/zsh/zsh_5.9.1.bb
+> b/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
+> similarity index 95%
+> rename from meta-oe/recipes-shells/zsh/zsh_5.9.1.bb
+> rename to meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
+> index a62526dbb2..88c846a27d 100644
+> --- a/meta-oe/recipes-shells/zsh/zsh_5.9.1.bb
+> +++ b/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
+> @@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D
+> "file://LICENCE;md5=3D1a4c4cda3e8096d2fd483ff2f4514fec"
+>  DEPENDS =3D "ncurses bison-native libcap libpcre2 gdbm groff-native"
+>
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
+.xz"
+> -SRC_URI[sha256sum] =3D
+> "5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c5c416b5042e58d8280d"
+> +SRC_URI[sha256sum] =3D
+> "020ee644be1749507b282e619cdcd95c56ff36144e79b7a3c245458aacd9458f"
+>
+>  inherit autotools gettext update-alternatives manpages
+>
+> --
+> 2.53.0
+>
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#128218):
-> https://lists.openembedded.org/g/openembedded-devel/message/128218
-> Mute This Topic: https://lists.openembedded.org/mt/120280473/1997914
+> View/Reply Online (#128245):
+> https://lists.openembedded.org/g/openembedded-devel/message/128245
+> Mute This Topic: https://lists.openembedded.org/mt/120311241/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -220,163 +151,81 @@ tocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7D>
 >
 >
 
---0000000000009a7f9e0656e4579b
+--0000000000001f8e6a0656e4a53f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This depends on=C2=A0python3-systemd which comes from meta=
--python and meta-oe does not depend on meta-python, so it. fails layers dep=
-endency check. Please move this recipe under meta-oe/dynamic-layers/meta-py=
-thon</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Wed, Jul 15, 2026 at 6:09=E2=80=AFAM Chitti Ba=
-bu Theegala via <a href=3D"http://lists.openembedded.org">lists.openembedde=
-d.org</a> &lt;ctheegal=3D<a href=3D"mailto:qti.qualcomm.com@lists.openembed=
-ded.org">qti.qualcomm.com@lists.openembedded.org</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">Add two new recipes from th=
-e CentOS Automotive SIG<br>
-boot-time-analysis-tools project to enable boot time profiling<br>
-and measurement.<br>
+<div dir=3D"ltr">The sha checksum for 5.9.2 tarball seems to have discrepan=
+cies.=C2=A0<div><br></div><div><a href=3D"https://errors.yoctoproject.org/E=
+rrors/Details/950824/">https://errors.yoctoproject.org/Errors/Details/95082=
+4/</a></div><div><br></div><div>Can you check by building please ?<div><br>=
+</div></div></div><br><div class=3D"gmail_quote gmail_quote_container"><div=
+ dir=3D"ltr" class=3D"gmail_attr">On Thu, Jul 16, 2026 at 11:34=E2=80=AFPM =
+J=C3=B6rg Sommer via <a href=3D"http://lists.openembedded.org">lists.openem=
+bedded.org</a> &lt;joerg.sommer=3D<a href=3D"mailto:navimatix.de@lists.open=
+embedded.org">navimatix.de@lists.openembedded.org</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">From: J=C3=B6rg Sommer &lt=
+;<a href=3D"mailto:joerg.sommer@navimatix.de" target=3D"_blank">joerg.somme=
+r@navimatix.de</a>&gt;<br>
 <br>
-boot-time-analysis-tools:<br>
-=C2=A0 Python-based toolset for collecting, analyzing and visualizing syste=
-m<br>
-=C2=A0 boot timing data from the systemd journal. Provides the &#39;boot_ti=
-mings&#39;<br>
-=C2=A0 CLI utility which queries D-Bus and the systemd journal to produce<b=
-r>
-=C2=A0 structured boot time reports. Depends on python3-dbus and python3-sy=
-stemd<br>
-=C2=A0 for runtime journal and D-Bus access.<br>
+Changelog <a href=3D"https://zsh.sourceforge.io/releases.html" rel=3D"noref=
+errer" target=3D"_blank">https://zsh.sourceforge.io/releases.html</a><br>
 <br>
-cntvct-log:<br>
-=C2=A0 Userspace C utility built with Meson that logs ARM CNTVCT_EL0 virtua=
-l<br>
-=C2=A0 counter timestamps to correlate hardware-level timing with systemd b=
-oot<br>
-=C2=A0 events. Installs cntvct@.service as a systemd template unit (disable=
-d<br>
-=C2=A0 by default) for on-demand per-instance activation. The service prese=
-t<br>
-=C2=A0 file (98-cntvct-log.preset) is installed for system-preset-based ena=
-blement.<br>
+* Only minor changes.<br>
 <br>
-Both recipes fetch from the same upstream git repository:<br>
-=C2=A0 <a href=3D"https://gitlab.com/CentOS/automotive/src/boot-time-analys=
-is-tools" rel=3D"noreferrer" target=3D"_blank">https://gitlab.com/CentOS/au=
-tomotive/src/boot-time-analysis-tools</a><br>
-<br>
-Signed-off-by: Chitti Babu Theegala &lt;<a href=3D"mailto:ctheegal@qti.qual=
-comm.com" target=3D"_blank">ctheegal@qti.qualcomm.com</a>&gt;<br>
+Signed-off-by: J=C3=B6rg Sommer &lt;<a href=3D"mailto:joerg.sommer@navimati=
+x.de" target=3D"_blank">joerg.sommer@navimatix.de</a>&gt;<br>
 ---<br>
-=C2=A0.../<a href=3D"http://boot-time-analysis-tools_0.7.1.bb" rel=3D"noref=
-errer" target=3D"_blank">boot-time-analysis-tools_0.7.1.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0| 13 +++++++++<br>
-=C2=A0.../<a href=3D"http://cntvct-log_0.7.1.bb" rel=3D"noreferrer" target=
-=3D"_blank">cntvct-log_0.7.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 27 +++++++++++++++++++<br>
-=C2=A02 files changed, 40 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/boot-time-analysis-tools/=
-<a href=3D"http://boot-time-analysis-tools_0.7.1.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">boot-time-analysis-tools_0.7.1.bb</a><br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/boot-time-analysis-tools/=
-<a href=3D"http://cntvct-log_0.7.1.bb" rel=3D"noreferrer" target=3D"_blank"=
->cntvct-log_0.7.1.bb</a><br>
+=C2=A0meta-oe/recipes-shells/zsh/{<a href=3D"http://zsh_5.9.1.bb" rel=3D"no=
+referrer" target=3D"_blank">zsh_5.9.1.bb</a> =3D&gt; <a href=3D"http://zsh_=
+5.9.2.bb" rel=3D"noreferrer" target=3D"_blank">zsh_5.9.2.bb</a>} | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-oe/recipes-shells/zsh/{<a href=3D"http://zsh_5.9.1.bb" re=
+l=3D"noreferrer" target=3D"_blank">zsh_5.9.1.bb</a> =3D&gt; <a href=3D"http=
+://zsh_5.9.2.bb" rel=3D"noreferrer" target=3D"_blank">zsh_5.9.2.bb</a>} (95=
+%)<br>
 <br>
-diff --git a/meta-oe/recipes-devtools/boot-time-analysis-tools/<a href=3D"h=
-ttp://boot-time-analysis-tools_0.7.1.bb" rel=3D"noreferrer" target=3D"_blan=
-k">boot-time-analysis-tools_0.7.1.bb</a> b/meta-oe/recipes-devtools/boot-ti=
-me-analysis-tools/<a href=3D"http://boot-time-analysis-tools_0.7.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">boot-time-analysis-tools_0.7.1.bb</a><br>
-new file mode 100644<br>
-index 0000000000..00a5c8b960<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/boot-time-analysis-tools/<a href=3D"http://b=
-oot-time-analysis-tools_0.7.1.bb" rel=3D"noreferrer" target=3D"_blank">boot=
--time-analysis-tools_0.7.1.bb</a><br>
-@@ -0,0 +1,13 @@<br>
-+SUMMARY =3D &quot;Boot time analysis tools from CentOS Automotive SIG&quot=
-;<br>
-+REQUIRED_DISTRO_FEATURES =3D &quot;systemd&quot;<br>
-+DESCRIPTION =3D &quot;Tools for analyzing and visualizing system boot time=
-&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://gitlab.com/CentOS/automotive/src/boo=
-t-time-analysis-tools" rel=3D"noreferrer" target=3D"_blank">https://gitlab.=
-com/CentOS/automotive/src/boot-time-analysis-tools</a>&quot;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D1c2e0cc0dec0b709fe547806b5=
-5737b0&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://gitlab.com/CentOS/automotive/src=
-/boot-time-analysis-tools.git;protocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7=
-D" rel=3D"noreferrer" target=3D"_blank">gitlab.com/CentOS/automotive/src/bo=
-ot-time-analysis-tools.git;protocol=3Dhttps;branch=3Dmain;tag=3D${PV}</a>&q=
-uot;<br>
-+SRCREV =3D &quot;2409ce37e7389d8079bdb8740cb6a44b505fb8d4&quot;<br>
-+<br>
-+inherit setuptools3 features_check<br>
-+<br>
-+RDEPENDS:${PN} =3D &quot;python3-dbus python3-systemd &quot;<br>
-diff --git a/meta-oe/recipes-devtools/boot-time-analysis-tools/<a href=3D"h=
-ttp://cntvct-log_0.7.1.bb" rel=3D"noreferrer" target=3D"_blank">cntvct-log_=
-0.7.1.bb</a> b/meta-oe/recipes-devtools/boot-time-analysis-tools/<a href=3D=
-"http://cntvct-log_0.7.1.bb" rel=3D"noreferrer" target=3D"_blank">cntvct-lo=
-g_0.7.1.bb</a><br>
-new file mode 100644<br>
-index 0000000000..8cf2a4c225<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/boot-time-analysis-tools/<a href=3D"http://c=
-ntvct-log_0.7.1.bb" rel=3D"noreferrer" target=3D"_blank">cntvct-log_0.7.1.b=
-b</a><br>
-@@ -0,0 +1,27 @@<br>
-+SUMMARY =3D &quot;cntvct-log - ARM virtual counter boot time logger&quot;<=
-br>
-+DESCRIPTION =3D &quot;Userspace tool to log ARM CNTVCT_EL0 counter values =
-for boot time analysis&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://gitlab.com/CentOS/automotive/src/boo=
-t-time-analysis-tools" rel=3D"noreferrer" target=3D"_blank">https://gitlab.=
-com/CentOS/automotive/src/boot-time-analysis-tools</a>&quot;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://../LICENSE;md5=3D1c2e0cc0dec0b709fe54780=
-6b55737b0&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://gitlab.com/CentOS/automotive/src=
-/boot-time-analysis-tools.git;protocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7=
-D" rel=3D"noreferrer" target=3D"_blank">gitlab.com/CentOS/automotive/src/bo=
-ot-time-analysis-tools.git;protocol=3Dhttps;branch=3Dmain;tag=3D${PV}</a>&q=
-uot;<br>
-+SRCREV =3D &quot;2409ce37e7389d8079bdb8740cb6a44b505fb8d4&quot;<br>
-+<br>
-+S =3D &quot;${UNPACKDIR}/cntvct-log-${PV}/cntvct-log&quot;<br>
-+<br>
-+inherit meson systemd<br>
-+<br>
-+# Manually install service file if meson.build doesn&#39;t handle it<br>
-+do_install:append() {<br>
-+=C2=A0 =C2=A0 if [ -f ${S}/usr/lib/systemd/system/cntvct@.service ]; then<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -d ${D}${systemd_system_unitdir}<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0644 ${S}/usr/lib/systemd/system/cn=
-tvct@.service \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${systemd_system_unitdir}/cn=
-tvct@.service<br>
-+=C2=A0 =C2=A0 fi<br>
-+}<br>
-+<br>
-+SYSTEMD_SERVICE:${PN} =3D &quot;cntvct@.service&quot;<br>
-+SYSTEMD_AUTO_ENABLE =3D &quot;disable&quot;<br>
-+<br>
-+# Explicitly include the service file in the package<br>
-+FILES:${PN} +=3D &quot;${systemd_system_unitdir}/cntvct@.service&quot;<br>
+diff --git a/meta-oe/recipes-shells/zsh/<a href=3D"http://zsh_5.9.1.bb" rel=
+=3D"noreferrer" target=3D"_blank">zsh_5.9.1.bb</a> b/meta-oe/recipes-shells=
+/zsh/<a href=3D"http://zsh_5.9.2.bb" rel=3D"noreferrer" target=3D"_blank">z=
+sh_5.9.2.bb</a><br>
+similarity index 95%<br>
+rename from meta-oe/recipes-shells/zsh/<a href=3D"http://zsh_5.9.1.bb" rel=
+=3D"noreferrer" target=3D"_blank">zsh_5.9.1.bb</a><br>
+rename to meta-oe/recipes-shells/zsh/<a href=3D"http://zsh_5.9.2.bb" rel=3D=
+"noreferrer" target=3D"_blank">zsh_5.9.2.bb</a><br>
+index a62526dbb2..88c846a27d 100644<br>
+--- a/meta-oe/recipes-shells/zsh/<a href=3D"http://zsh_5.9.1.bb" rel=3D"nor=
+eferrer" target=3D"_blank">zsh_5.9.1.bb</a><br>
++++ b/meta-oe/recipes-shells/zsh/<a href=3D"http://zsh_5.9.2.bb" rel=3D"nor=
+eferrer" target=3D"_blank">zsh_5.9.2.bb</a><br>
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENCE;md5=3D1a4c4cda3=
+e8096d2fd483ff2f4514fec&quot;<br>
+=C2=A0DEPENDS =3D &quot;ncurses bison-native libcap libpcre2 gdbm groff-nat=
+ive&quot;<br>
+<br>
+=C2=A0SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/$=
+{BP}.tar.xz&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c=
+5c416b5042e58d8280d&quot;<br>
++SRC_URI[sha256sum] =3D &quot;020ee644be1749507b282e619cdcd95c56ff36144e79b=
+7a3c245458aacd9458f&quot;<br>
+<br>
+=C2=A0inherit autotools gettext update-alternatives manpages<br>
+<br>
+-- <br>
+2.53.0<br>
+<br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128218): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128218" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/128218</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120280473/199=
+View/Reply Online (#128245): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/128245" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/128245</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120311241/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/120280473/1997914</a><br>
+t/120311241/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -388,5 +237,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div>
 
---0000000000009a7f9e0656e4579b--
+--0000000000001f8e6a0656e4a53f--
 
