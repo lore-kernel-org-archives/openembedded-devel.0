@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3748C44524
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C52A8C4452F
 	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 23:39:42 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11424.1784590776344847863
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11425.1784590778420595990
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 16:39:36 -0700
+ Mon, 20 Jul 2026 16:39:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Xsgnosng;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2cea3004256so123212695ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:39:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=MEe8iL0o;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2caed617615so118296145ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:39:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784590776; x=1785195576; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1784590778; x=1785195578; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NKX5vHha/YN45+6Jo07GLYhnJ6IddIpMAmt+4BFLZ8Y=;
-        b=XsgnosngZdeIuif/SSZa7pUgFcqg2RxjipshMb8zFnvOqOh+fjQieH9pS9ZsV4qlPN
-         7xZiDRMpDP/oYppofN2ru87gMmOH6x8aPsZfMvI9lk2QF9h8FVbhRMD9Ds1UDqdPbPtM
-         yjqccmgw9KoxKScuwN3ujSyNw9qUGjSWxolckJRCfMEZwgx625+GsPV/lVjoOpdPQDjj
-         2W/mlAbEiOYKTkqWSWRDWe81JqYJyl71CJTVmhSBIZd2oaqaw1BnjCygp0b07BJOAQmo
-         WtlE7RN49CZhLHZ4Hu8Hc5ytsyO2RTA4Hm0F+jZEZAlxzXZHdqCwuz4R+RHc3svLvet+
-         r/Rg==
+        bh=SiZg9Zn+HiGMEE/R/hS3aGRI/Ritx85FAtv9Ctt0EZ8=;
+        b=MEe8iL0oARP4DeBfwdK1Ut/iJ7tny4I7yaFtpoYV4yZOhdS+Q+JHx2nkQWb0QmSMOv
+         OC8yv7NGhomv0vdhVPQiN277IytKx1JjC4AouaHapx9+y73eu5AtXpr1VHw2T2PX+5cs
+         NaSK4ITDCIC6lWD/5l7wsV5VmefSy2ItrnGwcofmtG9zOooe1K4xwsQd9NhRdxsSBtGN
+         9fZnR/pkcoxWGQT3vk+Ssm0n6TWIQ3BObMPAHIxULsgaAmNO/LdaWHJX10NSMybyodNR
+         cD8SCaSms+gZhDd/xDdK9JAXC5eNMNqPdxnqh+kPXUoXtnV3fVvfqJyRwqta9C91RIc7
+         5QTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784590776; x=1785195576;
+        d=1e100.net; s=20251104; t=1784590778; x=1785195578;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NKX5vHha/YN45+6Jo07GLYhnJ6IddIpMAmt+4BFLZ8Y=;
-        b=Vbsut1Hby9u5tMZQ0iSl0b6M2pftz7mO4v3A+bJqcBAx8UXIA2i/duk46ldWgT8qqg
-         B77CUYgfyH146cEeavNjQCRqlo3sW0JIDIMpY8zy8MV9b2vVMSthmXkfZxQ2nR3qDpj5
-         FRVq8JEMEUj2OkDpAcvprwnndIZ9KQ9SWcBD2fe2ithT/3m78ISf7yKpvCKC/cewjQu8
-         JkAv+34p/GLWoDQh9x72TTCMkktX4yOgqaAzUyp6nA1f6F0Ohn4FQKi+QMWkhgM1J3s0
-         wjeeUjVFpt8mSRYIe9oVH/xXJY99r7MP2IOiGIZ/0O8caUmXGVqv0LkmzDDaqWlcezyn
-         TOlA==
-X-Gm-Message-State: AOJu0YwmuzCU8McjiDKuRnVHGAX42gW4tvFPVIr7vG7Ng1A3EMTP3AW+
-	po3dM04itKnTrIr5Fh8nzhFZlVAtqcvVfYiacWER+GxJY0ChdQRC3+ld9DPV0g==
-X-Gm-Gg: AR+sD10AiSKDkAza5zrZCXFp3TDgjz9e/zbwVhRR/Rez75K8LUWAh+3CAhoS88IpjxD
-	alv2na3epMs2MdGB0oDU95DwcwtnrIROW4ip7maNhj8p8wU9WEoBSZZxbbnzJkNGgLzU2CLh30F
-	e6NhEJvJejgbv0b7a1X1Ab0Cl+pqW7XxKEWDzrWJoi2oc5MmBA4IoixqM4eUD6ygnCxwhG/dOHq
-	BZlFxNikQE9LwyZai7OojH1Z/ttZB6bQxON63C+dvJT7T/6XnEZ5NgUy5GwUxYbkaWhh4Zk4Dho
-	jxORYTH1VhSCpoAu/vIFyMBRHK/hOkGOWuKvNRdvZp3K264M4Qhz71thDKcnM/rQh6isxE/WU+B
-	KuIMI00r5c2GLj3wfbP5pRRSfuu/OXxRlO4XMqP8Bd+t5x8bhhjezAF/9u0Zle+yiuhzWohtOqF
-	2EC/5sLk6cc7Q4ibE=
-X-Received: by 2002:a17:903:3805:b0:2cf:8131:75e8 with SMTP id d9443c01a7336-2cf813177admr8720385ad.13.1784590775682;
-        Mon, 20 Jul 2026 16:39:35 -0700 (PDT)
+        bh=SiZg9Zn+HiGMEE/R/hS3aGRI/Ritx85FAtv9Ctt0EZ8=;
+        b=cHST4XtIvCJsZAEYuCfOgmu/+qrjMMeBpTucq5IztiNrEI7+YBItHNs3imC/D3iP1p
+         XNSJRibncpJA55J/aPtNJZL5c0cC56xlq6uFjkrZugxUEqVgNEqFN07P827SUEOHBiNP
+         6Oo7boxs/YH4MW9ToPdup8sBKhIZkG4ueLZJ90th5O2CdT3qZCjoigJPXKmUVkmWZdCI
+         dgldM+VzRcovoDlQXAJJM1YYDPJwPJSlzPvLDGV5JrBhzstMRpDIqeUz23sAhvljPV8a
+         l/r9QVOT/5yCA0Dc022lCIbQJB7LCUnFRSPN9aEMWvgg0ejhnw1WK9mcrug88ejKv7bJ
+         6ykQ==
+X-Gm-Message-State: AOJu0Yz1/Fdrt4Pq1eshY+IYxFFjsRBHh6xg6ViWneXwvPWhkF2aCgS7
+	qf1oQYcDFLtxHqIcTduz4g0Jp7Wc02xWboT2AviYKEGc8rLyyqJEnHwaiJSEYg==
+X-Gm-Gg: AfdE7cmFiliG2b4FyCsKuTXuRss1BxpT93qVPEGltDTyx+kXX+1cv18OzdbFRcw3Oz5
+	RNxeL9Z7JziMdvE7KKvgAmpq+fVEFnDvM62sxxYGnbLX64uUNLJyM9k3cT8v5YSj61MPh3fbtNF
+	Sybzok1srRiak015ZPHFb1QEmA27CIotZLXxXCiHejbao+lvAfKyKOcmh/F770Qq+7sGnW3FXFx
+	W/7IlZV9z1MToASBJ18+dCZtTSWbfoW2/5thkNElqdTwqNJtgl6QyHXMP+yTAo40OKDNIsF18hR
+	JlmoP7MNGDrjd7LP+WjH2uUDVkTIZ1PcyeqwN50o6ujgiospcMWu/qVKVr1+rjg+kQ4iOQgzQDH
+	8Nie/xYgPib3lO45mArZ/OZhyhELH3NcyCVb1PiDIGDBliyLoUGAUSMcreW3EJK89+YnoknSa/W
+	dtRfiQm2YCiFaOCT8=
+X-Received: by 2002:a05:6a20:a103:b0:3c3:87e1:2637 with SMTP id adf61e73a8af0-3c3ad7abaefmr17379313637.22.1784590777780;
+        Mon, 20 Jul 2026 16:39:37 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.39.33
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.39.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 16:39:35 -0700 (PDT)
+        Mon, 20 Jul 2026 16:39:37 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 28/30] postfix: upgrade 3.10.10 -> 3.10.12
-Date: Tue, 21 Jul 2026 11:38:09 +1200
-Message-ID: <20260720233811.2324493-28-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 29/30] python3-django: upgrade 6.0.6 -> 6.0.7
+Date: Tue, 21 Jul 2026 11:38:10 +1200
+Message-ID: <20260720233811.2324493-29-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
 References: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
@@ -67,33 +67,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:39:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128329
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128330
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-http://www.postfix.org/announcements/postfix-3.11.4.html
-http://www.postfix.org/announcements/postfix-3.11.5.html
+https://docs.djangoproject.com/en/dev/releases/6.0.7/
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../postfix/{postfix_3.10.10.bb => postfix_3.10.12.bb}          | 2 +-
+ .../python/{python3-django_6.0.6.bb => python3-django_6.0.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/postfix/{postfix_3.10.10.bb => postfix_3.10.12.bb} (99%)
+ rename meta-python/recipes-devtools/python/{python3-django_6.0.6.bb => python3-django_6.0.7.bb} (75%)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.12.bb
-similarity index 99%
-rename from meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb
-rename to meta-networking/recipes-daemons/postfix/postfix_3.10.12.bb
-index 5a9d77720e..3d78fa15cf 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.10.10.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.12.bb
-@@ -29,7 +29,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
-            file://0001-makedefs-Account-for-linux-7.x-version.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-django_6.0.6.bb b/meta-python/recipes-devtools/python/python3-django_6.0.7.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-django_6.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-django_6.0.7.bb
+index a96a6dbf53..4542485154 100644
+--- a/meta-python/recipes-devtools/python/python3-django_6.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-django_6.0.7.bb
+@@ -1,7 +1,7 @@
+ require python3-django.inc
+ inherit python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "3b7197e00a98f7fe4624cf51a00ad805674256eff624e678529ccfbf2c7707a4"
-+SRC_URI[sha256sum] = "f9ff299f92e4179706537bda288971f4b6eff7e70aa912d03da3cd1b6ffd842e"
+-SRC_URI[sha256sum] = "ad03916ba59523d781ae5c3f631960c23d69a9d9c43cecda52fc23b47e953713"
++SRC_URI[sha256sum] = "2998503fc083124fb58037084bfa00de323c7c743f05f1b4284e77bff0ab8890"
  
- UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
- UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 6.x branch,
 
