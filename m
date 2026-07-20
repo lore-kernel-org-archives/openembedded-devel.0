@@ -2,64 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E660DC4452F
-	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 23:39:01 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11276.1784590732307531523
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7270C44520
+	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 23:39:11 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11411.1784590750972010633
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 16:38:52 -0700
+ Mon, 20 Jul 2026 16:39:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=UpLlg8ui;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-848643382fcso11773429b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:38:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=OWSljT/i;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-c9d1fc053e0so6338512a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784590732; x=1785195532; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1784590750; x=1785195550; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cU3MAVMkmR/j4ch5V9cwY2dRIwSh8iYi1SF99eWHOo0=;
-        b=UpLlg8uimOBHOjKN5Agj+htbUcHjaIHfhBOuX9Z+cigSKkWW2tIwdh4yAWyqfP6aMt
-         TXGncr1BnmPjRz+XX6YBVsj/rQO4PujGUAY6GKE60Ff15OqRlnUXyi5zqO7V5yOvIHqw
-         KYtt9D4pVr2g+n1Brgvqe058Zea9Nq325qkoCuFJ3ZOHkcO1GaCZxwoYyU6r5mbLGXnV
-         eWBe+zBmyU7jr/aZjPXYJoWMsZUkqKdJ+41cOCS4soxu0EAfL/znGzi20CFk/bMYR3Tr
-         j4rUF0bSejlQp4UB+5lDM9mtSSXjRnEE3mMEsscAqp4BqZamyjy5WyeCbksiKaRq3SeV
-         uJXw==
+        bh=m4X+PSg4Sk+TweEHUX1lMrWslzbwzFv5g0n9eLM5TQ0=;
+        b=OWSljT/izFnLRdp2RRYZwCNvFMqNeRWB0mWIO7gDQljGeMuzvu/2/lhVyyovWa3kiN
+         DzzIQ9IqlTb6xX/yOeMQYljlnEgTgWOdZkQ/jt/N0PLIQtyfhVdEhPFfo7kYhzK7Ybm+
+         XNOB2xqa53j6gHpYoqu6TX3JEmF/SLLFYzx9oIC7BdWR9d6jqNgVz7zZVyqFQsEV3Ko5
+         D08luI+T6FRpBQWGI72g+vWme9Ms1pKHOF6VzUIhG+5LwPnS2jLM/f3jwS9jlLo29/yv
+         Irzn5ZzyJ/hX/VFwobCVTGFL3zQYoXqDhs4wTksAPh49HvyYyJVlEWuxmWp4dXx76KF8
+         7b1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784590732; x=1785195532;
+        d=1e100.net; s=20251104; t=1784590750; x=1785195550;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cU3MAVMkmR/j4ch5V9cwY2dRIwSh8iYi1SF99eWHOo0=;
-        b=QdKU+UfdvqTWZc1GXmDO7KKKuTGpPN3J0g9LSQ0qmGkEPcZglrtQ4PoxlkkLTrJpf0
-         0LZMayy4WIFg6ug3a4o+2mukQwvEQv0uNGcuBKoqrdXq5XZ5pfYpgSDwi1EKrAd8A6LC
-         yBmMS6XicwZ2D6E4QPKev/hHhGpGEoJ7nqAuwWz74UjvW/ocMFdafBiwb8zVWjdfey5l
-         qe6+35/zFdR+ksf6b+ibKWqV9SDVwTqbGAsZXiw+ZmUX/V3b7hWQ9gQF6MJgwziBB7hi
-         LMra5nBWAHu+chIjrRKgnBvP/TnYKPivT4eW4DLL5RXQTLE0PMpEtviol0Csv7OTo0By
-         OBRg==
-X-Gm-Message-State: AOJu0Yzcyv/oEzQuWPh4xnXoLcwSgdEh10xBtNCqKADmm8knVDDX6ZKO
-	hvwOJlBz9UyWsqPG/hTVDzp5b+I2mV3o1oCWKPDDuTaexT7taeHaVWgH0YYHww==
-X-Gm-Gg: AfdE7ck1ccxRPCyxuC9ok/cmbYQictzW+5V0LmSb6FTW68SnXVJbz5M5DpOhkotDwbB
-	8eukUX0QVSD4y8Mc/iildFPTc1rERd9OZL4GJzN5c4Wo5IPdBrm1WvvNqwPL/k3RgZb6pina57W
-	+vr8ODHQ4mzA+fCHl1garNLJZl//xbH5UqlddWyBYizYp/+xMgez4NmVvxZemt7Z8FJI41ixm94
-	JJTH/JtcOuYYg9m8wCIOuQ5qOwCOh2kfmOfgEbL5S0iO0578AnXD5bFATYxDGLi+AhDJ6VmAFYR
-	VnoykAmEYMF3MvdkVj0VF6yKgyfeAtx5sPBObc384NVVQg3/Tmkc6m03o7u5EWxVfDp8dS9e5K0
-	LhaOk4TGc8t++QUh4Pbxm6kTGpBK2RUgsPzkdyrT+9Hk/pxJPDOBuQ0zBTuvWcO2hF3NJe2q+xT
-	dYewlemV9JM1hv/Fnmt4S0tOYoLg==
-X-Received: by 2002:a05:6a20:914f:b0:3c3:8ce8:203 with SMTP id adf61e73a8af0-3c3ad9d158dmr16378772637.50.1784590731699;
-        Mon, 20 Jul 2026 16:38:51 -0700 (PDT)
+        bh=m4X+PSg4Sk+TweEHUX1lMrWslzbwzFv5g0n9eLM5TQ0=;
+        b=cZP4W7Y9c+/dIATgnfEP40n09EGym3DjfV0L+//lIIItvEBoRvydYRfOibvsivyXZO
+         /wAxdJJ7lGDmnIqrNpeLECXekJrrwEBIRfoh/nd/azUredaotTA16LHFktpyGTv39MD0
+         fdC0IRLIsPxALmpWxTO/bw2Zz9fqk/yjwDGHk+F6vDLtCPr2B/+L28AC/Zl7cp8sLjkl
+         BfX24Y3Ny29CNB0OzCxCLBdsIgK53+Qp4rlabaHwxEg7C48luI0GtkSgo/WxJAoy3Rpp
+         EI4qxf3/Z0NVIkvRx5YL9FTfGWLk9ltoCd592jttvUimjM/thXbEPZ9azOWRBmAgqqFD
+         vtRw==
+X-Gm-Message-State: AOJu0YyCZiHLTvmGDOqYBuv4kaIxq7gbrJ+ae4v2CbnN/pGVtxX0Knmy
+	Bedeo3tHfUMZa9rYMKk2vJyptocVGHH5EZk+0XMo0b0ojde5hbC70LryTY1B4A==
+X-Gm-Gg: AfdE7cl9fvFbEUp6CvZYqVb72YzxjmRrB1DQdODd52KSrHU+RcLiq88ooTFj8YZtNu8
+	GqJJoAkyAvNmNzRjptw+N0ssaU1pmExFKJPUYNUI8aXhm9sOsb+8oWy8EBk3QsBDUSffOIPgdae
+	GJsOi7dVd6PwaPIS6URD/gh9Kazz5r91obvzsYvUkK/UWazbYPoPCqhV80RedE7JHFFzzQXrVKf
+	PaeV0JJ/7bW1RA/lifbERfQESEA+mQujhXpnuXYV6OwJxs/pG8UyXtsHxq5fOgH5MfbOWNvhsRB
+	d2T7m+bAd7e1ymtFT5Tg+7mAJpwazSX/EAYaCVpeBHXXVkf8WYp1rrgOZk50PZtM6ZPJzg92Pys
+	TBYKvSD5F4jnwaWJtD/JjB3FkHzsGWBqAfUgWDo/hP9kx8gliz4r8kSGEhKh7D+T5GvLPzKVj+T
+	D5+AeVih4ti+rHDMI=
+X-Received: by 2002:a05:6a21:7a46:b0:3c0:b4f8:bbfb with SMTP id adf61e73a8af0-3c3ad66822cmr19689531637.22.1784590750359;
+        Mon, 20 Jul 2026 16:39:10 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.38.49
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.39.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 16:38:51 -0700 (PDT)
+        Mon, 20 Jul 2026 16:39:10 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][wrynose][PATCH 11/30] swagger-ui: upgrade 5.32.6 -> 5.32.7
-Date: Tue, 21 Jul 2026 11:37:52 +1200
-Message-ID: <20260720233811.2324493-11-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-filesystems][wrynose][PATCH 18/30] ifuse: upgrade 1.2.0 -> 1.2.1
+Date: Tue, 21 Jul 2026 11:37:59 +1200
+Message-ID: <20260720233811.2324493-18-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
 References: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
@@ -68,38 +67,37 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:39:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128312
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:39:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128319
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Khem Raj <khem.raj@oss.qualcomm.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 5a1603e21dfe5636e129b0a07d4e6c110841d564)
+(cherry picked from commit a2ab019840555e06b13ab72ea96481b9d282de23)
 
 Changelog:
-https://github.com/swagger-api/swagger-ui/releases/tag/v5.32.7
+https://github.com/libimobiledevice/ifuse/releases/tag/1.2.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../swagger-ui/{swagger-ui_5.32.6.bb => swagger-ui_5.32.7.bb}   | 2 +-
+ .../ifuse/{ifuse_1.2.0.bb => ifuse_1.2.1.bb}                    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.6.bb => swagger-ui_5.32.7.bb} (94%)
+ rename meta-filesystems/recipes-filesystems/ifuse/{ifuse_1.2.0.bb => ifuse_1.2.1.bb} (83%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.6.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.6.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb
-index 4f157f1692..788a8f5638 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.6.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.0.bb b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.1.bb
+similarity index 83%
+rename from meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.0.bb
+rename to meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.1.bb
+index daeb5b9be2..82dc3b714c 100644
+--- a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.0.bb
++++ b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.2.1.bb
+@@ -7,7 +7,7 @@ DEPENDS = "fuse3 libimobiledevice"
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
+ SRC_URI = "https://github.com/libimobiledevice/ifuse/releases/download/${PV}/ifuse-${PV}.tar.bz2"
  
--SRCREV = "dcdca62c8b64a0a54e4decd4e1a6c3c712fdcc60"
-+SRCREV = "bf6a8f05dcde5904cab31e666e80e456a05782f2"
+-SRC_URI[sha256sum] = "5c584ae999ed52b386b0d2d1af8f8dcba451cddf31d7cd24367b18db0a9a5a9e"
++SRC_URI[sha256sum] = "9d490470ba6553f8052b385bb5330462e46fbe82131ebe65be47a1cc1c70e857"
  
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ inherit autotools pkgconfig
  
 
