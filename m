@@ -2,61 +2,61 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ABE1C44515
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AC31C4452B
 	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 14:34:41 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10432.1784558072548223561
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10485.1784558071840463357
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 20 Jul 2026 07:34:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=YwBPDEB7;
- spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-47c6e9a694bso5658817f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 07:34:32 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Gk/4wmRv;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4799b3f7c83so7419651f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 07:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1784558071; x=1785162871; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1784558070; x=1785162870; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jbjsDNgp4VqbzDHXvSwmxgyZ/a3uk3Bf702zZTE+B84=;
-        b=YwBPDEB7b+DXZftCuiDqRo/BPa3txTIt6YPk1AN6MJT31glSvixu4HYXR/XTCijsxI
-         RJ7MLcEGVSW+GsEyhmuwCHFRHavujaaNFm5oVofHmwkwA0lIChvHCPZ54j3DGLpaWoLB
-         op1T/za/LqGYdY/cwND6Ayy4WJC6p/liWkkTo=
+        bh=iXKLbZKIy2icSc/VcWwJBGA8ovbu/MaqwEc7usjy0AI=;
+        b=Gk/4wmRvD65W7deHU+sfGMPWsABjiu70Ymm7KmHtHdTPg+ICj4y10/pShBSqHRbFBh
+         /lf7sKFHfVXKzL6mEAR3JmHINXZPQY4XH4+xLV1EWljlif8Lh878U8kL34MxGT7SSZz6
+         I2ZAQh8plCJeu5g5hpcJh2SR6bQjSknpt5cp0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784558071; x=1785162871;
+        d=1e100.net; s=20251104; t=1784558070; x=1785162870;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jbjsDNgp4VqbzDHXvSwmxgyZ/a3uk3Bf702zZTE+B84=;
-        b=LLHOxBJ5kgdOKRIDkBhQmhtCC2XIZguaOBR3zfsMAfkB0v0IjhUVukW7uPxqHWFLdI
-         ff5+CEoXM/9QAUpXx/FUuDQj0u/AO8ePK4W+7MJGsf9M+ASi/CrRvTceM8P7Io/8dRQA
-         EJ7CEDxqE1UkM3TErrUN9mS5X96tXcqEdnr/flT87FztlWMNRk2vkIXidRmD/upZQUzF
-         xEo9bIh2m1e1AP3HFLNMUCd3JvSClFxfTrAS5covLJKEgVq0VGTaKNzEUZiT2LqQuzg5
-         46kuUxtayot64NCLul+1jZ4FH6VqSP3Wc8MJjkhtnJ1Ol7eCFRJ5N5xW80CkEt+Hrf8W
-         391w==
-X-Gm-Message-State: AOJu0YzGLR/EaH+3J1n21SGrULVbF5BfKlyZ/z1owau/5H6jTHYGu+5q
-	FmnQsGZywAJdCx/FYA80Q5LhYaICUsDvA5JsDGa+UgcgfZrwPie07g+jvPpL2CS+SUl+ulw7vBN
-	EGlnF
-X-Gm-Gg: AR+sD13Bkrd2jKPwJ+FS7wpyCpEM3iVirEtJ64yixIBRztm8VZOfkcLf2dOKsppCjcc
-	ApVgVDzrZS4huHnOUX9Xtcs0l06+UEtzCdPpfi9Linr6jy4+8IK2448YmCPD/kpg+5/pjgJy0SQ
-	eLJ+VQdD+t11RQYQYh/GxXBkyuDAyAvjzrrrzoenAr1lUWlLBVfv+bsEITn/V+CqIxx/9tM6VkG
-	wto9+Ei3MzSsBYT6LtTtVk+YRQu9DLmTNuxC3EAVH5ULQ1S6fSCc3thf+IZgRgzcxzsmRt2yTbb
-	YcUIPQG3Qg6nQgu9JcNUm3fHQxX1Mrn039J4svxZYY1/hasIGDqWPf7AFoHZNNprTcwISSx9Q+s
-	kbbWJ45hhV/mgalP5s7Tv98WiNkdyW6p8O/KLr8YFpzs+GDVrfQyXPh6wHmeQn1/UqsntDw1pfl
-	snilOJw1jSkc36u7MDxtvKuF+Xkz1lR9aUEuPNc+XJORfJCoJqEej/chMhaKxRsw6QpNSGr5K8M
-	84moQvJiJG2fGMhJmTAcZsdzA4GOyI=
-X-Received: by 2002:a05:6000:2407:b0:47f:4fa9:ae33 with SMTP id ffacd0b85a97d-47f622fef02mr17469946f8f.12.1784558070776;
-        Mon, 20 Jul 2026 07:34:30 -0700 (PDT)
+        bh=iXKLbZKIy2icSc/VcWwJBGA8ovbu/MaqwEc7usjy0AI=;
+        b=CsTGEaYNhT5TotWeHScLYbAAV6C4Tjxo94MfpOwPETsa8Njf7YrNR4a8wpiKSQidCe
+         g5GKAD/gcieDjlB+OvGj1rpDCnfIteIiCRmD1LKQJFIGdXZ3zPZzVR4XVImw6neYIUWv
+         7egk11gO7VgB9eiH1W8PaAnggTo37PojQ9AL78i69KsfWNbnVxkKasjepVa3ywMmle7S
+         a4d3MXsqnz5z83/3fQBRCaTyces4bqQafvA9ierjHEqS466OyVQQcCCkBslPnR6KAC9a
+         cNTDS74/qa8GDZKETvJfJMoVg8+7KC7VPT1NTQmBmA0yeYxuGt2wkISSbWY2gsW4UJa/
+         sc5Q==
+X-Gm-Message-State: AOJu0YxBm7T5Rnbbtu9KZFVTwO8TwDcMrZ9v5rIFFe+5JBakBbkAb7QZ
+	9QpKoJeiwsrppZMwgMxZm1POi5JXF61fPbuwE9LXbUdZOObT0TK7CHRjUNtpeRNBsXSrNJ7xepm
+	SGQf5
+X-Gm-Gg: AR+sD13Np+DSMEF0aamKoOuXuNe+nJwZpwTgFzCE67IcVNjsoChHnG0FjfOjBMw921V
+	ywsZ8FCEJoHV5O8o+sSOfshLjvUmnxQCoKIvJ5uOSPFa23KEb5COWpXWvoO8/j3Ce/oi6fU7ICA
+	7HVQY76dD20oY+tDlDdIuYHDwWvpImaLWtqJSiGKXgshCerpIrtgIOhYxHHs4+UPBdHxxppYPve
+	FtxOx9HuzHyk56NXd9jBwcjGIl84gLpRc7q9bHLkPlHwWSKLhL/YhpieNIDygVNr6xjAl+wdlLL
+	gYpGl5gvVqKPMR+gt6r/yi/NCLm25RLnid/6s9z0USNlsJFC7+rRN+mlaZSZ14oLythFGbIJlft
+	K+XxzpOc70S/1A+hkpEzOkzkDuYOHnIzf17maVSH1Cj9wE8hxm4M9SoB1f3SOl3aKESkRc7B18J
+	8Vr2ZMca+coYes5ukBHfz9WAl9sB9fbROyMCQ3PhV3QMG/cRoOCIvFzPbhcF0bq8J5JhxabiclZ
+	gNzeEsFJeTxEOOKPASUB4xCnQqc1Iotk+aFRZjwcQ==
+X-Received: by 2002:a05:6000:2303:b0:47f:5291:fae with SMTP id ffacd0b85a97d-47f6233bec9mr17393362f8f.51.1784558069858;
+        Mon, 20 Jul 2026 07:34:29 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63edd7d3sm29498970f8f.25.2026.07.20.07.34.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63edd7d3sm29498970f8f.25.2026.07.20.07.34.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 07:34:30 -0700 (PDT)
+        Mon, 20 Jul 2026 07:34:29 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-invoke: Upgrade 2.2.1 -> 3.0.3
-Date: Mon, 20 Jul 2026 17:34:26 +0300
-Message-ID: <20260720143426.809643-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-autobahn: Upgrade 26.6.1 -> 26.7.1
+Date: Mon, 20 Jul 2026 17:34:25 +0300
+Message-ID: <20260720143426.809643-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260720143426.809643-1-leon.anavi@konsulko.com>
 References: <20260720143426.809643-1-leon.anavi@konsulko.com>
@@ -66,83 +66,181 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 14:34:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128279
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128278
 
-Upgrade to release 3.0.3:
+Upgrade to release 26.7.1:
 
-- Reverted the @task return value type hint change; it actually
-  just makes things worse. Taking this one back to the drawing
-  table for later.
-
-From 3.0.2:
-
-- Define a custom __repr__ for Promise so it can be displayed in
-  interactive sessions or other debug contexts, without running
-  afoul of AttributeError. Thanks to Leonid Shvechikov for the
-  original bug report.
-- Make the return value type hint for @task more specific; as-is it
-  would trigger typecheck errors when handing regular, decorated
-  task functions as inputs to add_task and similar methods.
-
-From 3.0.1:
-
-- Minor tweaks to documentation and type hints/inheritance (mostly
-  around Promise).
-
-From 3.0.0:
-
-- Add access to the core CLI parser's remainder value, via
-  Context.remainder - this allows for more elegant wrapper tasks.
-- Update the return value, and type hint, of run and friends to be
-  Result instead of Optional[Result].
-- run now includes local subprocess PIDs in Result objects (as
-  .pid), via the new Runner.get_pid method. This may be generally
-  useful for auditing or similar tasks, but is primarily intended
-  for users of disown=True who want to perform their own subprocess
-  management.
-- Fix a grab bag's worth of Sphinx doc render problems, among which
-  were some class attributes (eg Context.command_cwds) that had
-  silently disappeared from the class' autodoc output after our
-  2.0 release.
-- Expanded mypy type hint checking to more of the codebase &
-  generally touched up some type hints here and there. More of
-  this is planned to occur as we go.
-- Dropped support for Python versions <3.9. That's right, we've
-  caught up to Python's own EOL regime... as of late 2024! As part
-  of this change, we also switched over to using pyproject.toml for
-  packaging metadata.
-
-Fixes:
-
-WARNING: python3-invoke-3.0.3-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml with setuptools.build_meta,
-use the correct class [pep517-backend]
+- Fix WebSocket maxMessagePayloadSize being enforced against the
+  compressed on-the-wire frame length instead of the uncompressed
+  reassembled message size when permessage-compress
+  (deflate/bzip2/snappy/brotli) is negotiated. A small compressed
+  frame could inflate far beyond the configured limit and be
+  delivered to the application (a decompression-bomb style
+  denial-of-service; security advisory GHSA-hxp9-w8x3-p566, same
+  class as CVE-2016-10544). The limit is now re-checked at the
+  inflation site against the running uncompressed message size,
+  and the connection is failed with close code 1009 (message too
+  big) before delivery - for both the whole-message and streaming
+  receive APIs and every compression backend. Behaviour change:
+  a compressed message that inflates past maxMessagePayloadSize
+  is now rejected where it previously passed; uncompressed traffic
+  and the per-frame maxFramePayloadSize wire guard are unaffected
+- Fix the permessage-deflate max_message_size receive cap silently
+  truncating an over-limit message and raising a zlib error instead
+  of cleanly rejecting it: the bounded decompress(..., max_length)
+  left the remaining input in unconsumed_tail undrained, so the
+  message was corrupted rather than reported. Decompression is now
+  bounded cumulatively across frames and raises
+  PayloadExceededError as soon as the uncompressed size would
+  exceed the cap
+- Make bounded decompression backend-agnostic:
+  decompress_message_data() gains an optional max_output_len
+  argument (documented on the PerMessageCompress base class) and
+  every permessage-compress backend now honours it. deflate and
+  bzip2 stop inflating once the limit is reached (native
+  incremental cap); snappy and brotli, whose libraries expose no
+  output-length argument, inflate the frame (already bounded on
+  the wire by maxFramePayloadSize) and then reject - a weaker but
+  still clean per-frame guarantee. The WebSocket receive path
+  passes the remaining maxMessagePayloadSize budget so a
+  compressed frame no longer expands unbounded into memory before
+  the size check; the previous post-inflation check remains as a
+  backstop. Previously only deflate had any decompressed-output
+  cap, so a snappy/bzip2/brotli frame could inflate fully into
+  memory first
+- Make the asyncio RawSocket receive size limit configurable, at
+  parity with the Twisted backend. The asyncio
+  WampRawSocketFactory now exposes
+  setProtocolOptions(maxMessagePayloadSize=...) /
+  resetProtocolOptions() (bounds [512, 2**24], default 16 MB), and
+  the configured value drives both the advertised handshake length
+  exponent and the enforced receive cap (rounded up to the next
+  power of two), matching the Twisted factory. Previously the
+  asyncio receive limit was hardwired to 16 MB (a dead
+  max_size=None branch), so an asyncio WAMP peer could not tighten
+  its RawSocket receive limit for DoS hardening and Crossbar's
+  RawSocket max_message_size had no effect on the asyncio path
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-invoke_2.2.1.bb => python3-invoke_3.0.3.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-invoke_2.2.1.bb => python3-invoke_3.0.3.bb} (74%)
+ ...essing-for-external-cross-toolchains.patch | 88 +++++++++++++++++++
+ ...n_26.6.1.bb => python3-autobahn_26.7.1.bb} |  4 +-
+ 2 files changed, 91 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
+ rename meta-python/recipes-devtools/python/{python3-autobahn_26.6.1.bb => python3-autobahn_26.7.1.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-invoke_2.2.1.bb b/meta-python/recipes-devtools/python/python3-invoke_3.0.3.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-invoke_2.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-invoke_3.0.3.bb
-index bcff343480..e9d19da088 100644
---- a/meta-python/recipes-devtools/python/python3-invoke_2.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-invoke_3.0.3.bb
-@@ -3,9 +3,9 @@ HOMEPAGE = "https://www.pyinvoke.org/"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a8815068973f31b78c328dc067e297ab"
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
+new file mode 100644
+index 0000000000..8f2e8f0d01
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
+@@ -0,0 +1,88 @@
++From c677aa7a80fd551abb391a8f6abd28dc9f5c43a2 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 20 Jul 2026 15:52:32 +0300
++Subject: [PATCH] Skip -march guessing for external cross toolchains
++
++Don't add -march flag when CC/CROSS_COMPILE names an external cross
++toolchain (Yocto/OpenEmbedded, Buildroot, ...). These already
++inject the correct target. Avoid issues such as an unknown value
++'x86-64-v2' for '-march' when cross compiling for ARM machine.
++
++Upstream-Status: Pending [https://github.com/crossbario/autobahn-python/pull/1934]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ src/autobahn/nvx/_compile_args.py | 36 ++++++++++++++++++++++++++++---
++ 1 file changed, 33 insertions(+), 3 deletions(-)
++
++diff --git a/src/autobahn/nvx/_compile_args.py b/src/autobahn/nvx/_compile_args.py
++index 2a35ab31..173e5fd4 100644
++--- a/src/autobahn/nvx/_compile_args.py
+++++ b/src/autobahn/nvx/_compile_args.py
++@@ -81,6 +81,10 @@ CIBUILDWHEEL : str, optional
++ AUDITWHEEL_PLAT : str, optional
++     Set by auditwheel/manylinux builds. Indicates wheel build.
++ 
+++CC, CROSS_COMPILE : str, optional
+++    If either names a triplet-prefixed compiler (e.g. "aarch64-poky-linux-gcc"),
+++    an external cross toolchain is assumed and no -march flag is added.
+++
++ Examples
++ --------
++ 
++@@ -212,9 +216,6 @@ def get_compile_args():
++         # But default codegen is already optimized for current arch
++         return ["/O2", "/W3"]
++ 
++-    # GCC/Clang on POSIX (Linux, macOS, *BSD)
++-    machine = _get_target_machine()
++-
++     # Base flags for all POSIX platforms
++     base_args = [
++         "-std=c99",
++@@ -233,6 +234,14 @@ def get_compile_args():
++         # deployments). It is NOT safe for distributed wheels or cross-compilation.
++         return base_args + ["-march=native"]
++ 
+++    if _is_external_toolchain():
+++        # Cross toolchain (Yocto/OpenEmbedded, Buildroot, ...) already sets its
+++        # own -march/-mtune; don't second-guess it (#1930).
+++        return base_args
+++
+++    # GCC/Clang on POSIX (Linux, macOS, *BSD)
+++    machine = _get_target_machine()
+++
++     # Default for everyone (AUTOBAHN_ARCH_TARGET unset or "safe"): a portable
++     # baseline architecture. Defaulting to "safe" rather than -march=native is
++     # what makes cross-compilation work out of the box - a cross toolchain
++@@ -248,6 +257,27 @@ def get_compile_args():
++     return base_args
++ 
++ 
+++def _is_external_toolchain():
+++    """
+++    True if ``CC`` or ``CROSS_COMPILE`` names a triplet-prefixed compiler (e.g.
+++    ``aarch64-poky-linux-gcc``), the convention used by externally managed
+++    toolchains such as Yocto/OpenEmbedded and Buildroot.
+++
+++    Returns
+++    -------
+++    bool
+++        True if an externally managed cross toolchain is detected.
+++    """
+++    for var in ("CC", "CROSS_COMPILE"):
+++        value = os.environ.get(var, "")
+++        if not value:
+++            continue
+++        exe = os.path.basename(value.split()[0])
+++        if "-" in exe:
+++            return True
+++    return False
+++
+++
++ def _get_target_machine():
++     """
++     Return the *target* machine architecture for the build.
++-- 
++2.43.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_26.6.1.bb b/meta-python/recipes-devtools/python/python3-autobahn_26.7.1.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-autobahn_26.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-autobahn_26.7.1.bb
+index f9239b4904..7829a0e149 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn_26.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-autobahn_26.7.1.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "http://crossbar.io/autobahn"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=49165a577911c4178e915dc26e2802a3"
  
--SRC_URI[sha256sum] = "515bf49b4a48932b79b024590348da22f39c4942dff991ad1fb8b8baea1be707"
-+SRC_URI[sha256sum] = "437b6a622223824380bfb4e64f612711a6b648c795f565efc8625af66fb57f0c"
+-SRC_URI[sha256sum] = "66b27e066a8ea265541eb07fd964e3116e2b8f51d797eea8a46b55c07fd81a07"
++SRC_URI += "file://0001-Skip-march-guessing-for-external-cross-toolchains.patch"
++
++SRC_URI[sha256sum] = "c6949a2c6eb95fb1c218837dbda0a59abbbebafb8b11098551c01a7061dfd245"
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
+ CVE_PRODUCT = "autobahn"
  
- RDEPENDS:${PN} += " \
-         python3-fcntl \
 -- 
 2.47.3
 
