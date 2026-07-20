@@ -2,198 +2,1660 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0EBEC4452D
-	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 17:59:49 +0000 (UTC)
-Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3711.1784570388797419872
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A54AC44529
+	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 17:59:59 +0000 (UTC)
+Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3712.1784570389587770381
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 20 Jul 2026 10:59:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Fpj/dAHQ;
- spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=AI/sdK2x;
+ spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4201; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=42684; q=dns/txt;
   s=iport01; t=1784570389; x=1785779989;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=AwoVMrYVh2rBXaIpCyvDCgHaPuM6NwSuNZs++kDm6cQ=;
-  b=Fpj/dAHQOJu4LUUvYqWOn5OMzV39FiXNDszvkxFy63ar+QjpnlNOYqcN
-   XB2ooKEQsrJV949/t5QLTV5LIyezMvy1jT5rUc2I2QAI1CorDn+p78Iam
-   HQRFAaDYv9eVVu14d2DEahIk8s8lTTvk5+uxOZJk6fRtwoXalZfPf6fmq
-   GcvXF3p7aBlQfNeABBEDVV3gO8c+VGrsTiyz05xEsj9+dWaqxzV5BKzDz
-   mYxYPbxu1FBejJkc+z5hw8gVi3pmsD553GbWFBcBXyKCsx7I7QdNYT2va
-   hKSRf/2o1xL02u/xblrrFouBQlB/XLRA6VGBE+WxZAoR9IyZZRRX4nJzJ
-   Q==;
-X-CSE-ConnectionGUID: 1KaBMv0hTvaAmQIOh5KE9A==
-X-CSE-MsgGUID: MBm4QakRTqO1iRY/XY7HMA==
-X-IPAS-Result: =?us-ascii?q?A0BLAgCzYF5q/5L/Ja1aglmCV3ReQ0kDhFSRdoETnQiBf?=
- =?us-ascii?q?g8BAQEPRA0EAQGFBQKNUwImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBA?=
- =?us-ascii?q?gEHBYEOE4ZPDYZaAQIBAyMPARgBLRAcAwECAwImAgIrIwgQCYMCAYJ0AxG7f?=
- =?us-ascii?q?HqBMoEBgygBgVTbLgELFAEFgQUuhT+DHQGFAlwYAYR8JxsbgXKBFYJzdoEFg?=
- =?us-ascii?q?VwChTuCagSCIoEMgVoej3RIgQIcA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F?=
- =?us-ascii?q?zRYGwcFgR2BOoEChHQjHwM5f4EvdUp3LWkBEheBJoISAoE7Ag4DCxgNSBEsN?=
- =?us-ascii?q?xQZBD0BbgeNQCOCQIEOASsXghWldqEPCiiDdYwhlToaM4VbpRELmH2LN4JTl?=
- =?us-ascii?q?lCEaYFoPIFZcBWDIglKGQ+OOINrzlonMgIJAy8BAQcCBwEMAQMLgWiRfgEB?=
-IronPort-Data: A9a23:PcOxVqgICnJoG2Ms9BLfQ0isX161MBEKZh0ujC45NGQN5FlHY01je
- htvWzjVOfyOM2CgL9wjPdjnp08BsMOGzoRlSwY6qS80QytjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeCULOZ82QsaDxMtPjb8E0HUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqVB2e9dJH8W9
- cAGIRkIVzGkh7+V7eOSH7wEasQLdKEHPasFsX1miDWcBvE8TNWbEuPB5MRT23E7gcUm8fT2P
- pVCL2EwKk6dPlsWZgl/5JEWxI9EglHzcDBcoVOErII84nPYy0p6172F3N/9J4XQH54NxRbBz
- o7A10HTB00jPd+l9SOiq3OWt6j/rHzbfatHQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YQLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWna1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:x4+/va2CU1OhWyzyl+eiLAqjBGwkLtp133Aq2lEZdPWaSKOlfq
- eV7ZImPH7P+VEssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCZgguVxehZhOOIqQEIWReOk9K1vp
- 0PT0ERMrHN5HFB/L/HCXGDYrUd6ejC1ry0juHDyHooZwRrZ6Z8qzpdMG+gYzVLrM0sP+tCKH
- JajfA33AadRQ==
-X-Talos-CUID: 9a23:MOTLcWCG4esV0gf6E3BE/WQxBJglTmPU5XLpAmi4VEVEGZTAHA==
-X-Talos-MUID: 9a23:4QXFvgUVmeK7H2rq/BrGgW1bPcRS372JUUE3oNI2ipakEAUlbg==
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Ur5SLhj6Mp3yaiie3D3kxTosaA1pM0tcouWLTutIIGk=;
+  b=AI/sdK2xlO4jITl6OJaLil7u1TQ9hOozdCOE8lIW6YlMmYjeJGM10pIB
+   STQWlE5YHjRt0bJ0/11WkNn1+qFQuZEiiCOrrpIk1enGzTP6RGz4uYjHu
+   gthdZUGHlW9WGMF/rHFjeTv9GMEi55oEd4V4VVZkR8Nx4arRY0tSAM4Ct
+   ACpSCdidgCzVZIeFSNagEAq/DtiUPPQpruowYLNCKprCOIXO16KbEh2wB
+   zbELmbCsMd1hWn/JnBPat5c9sEm3kz1GB3+ZCcAOjfo2K/6/BCRyFq4/t
+   fTmd118keQLRRNA8TeLyuW8FIzKNk+IcKW2jHVg0ZOAvbeqCDXkrkPQ0j
+   w==;
+X-CSE-ConnectionGUID: s30+TjQjRLatBxd1Sht2jQ==
+X-CSE-MsgGUID: HLWPZSs8QKe7yGTmF/MmNA==
+X-IPAS-Result: =?us-ascii?q?A0BGAgAwYV5q/4v/Ja1aHgEBCxIMggULgld0XkNJA5ZHg?=
+ =?us-ascii?q?RadCIF+DwEBAQ9EDQQBAYUFjVUCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBB?=
+ =?us-ascii?q?QEBAQIBBwWBDhOGTw2GWgECAR0BDAsBGAEtLAMBAlojIYMCAYJ0AxG7aoF5M?=
+ =?us-ascii?q?4EBgygBgVTbLgELFAEFgTOFP4ggXBgBhHwnGxuBcoEVgnN2gQWBXAKIJQSCI?=
+ =?us-ascii?q?oEMgVoeMo9CSIEeA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4EMGwcFgR2BO?=
+ =?us-ascii?q?oEChHQjHwM5f4EvdUp3LWkBEheBJoISAoE7Ag4DCxgNSBEsNxQZBD5uB41AI?=
+ =?us-ascii?q?4IgGQd7EwETGEZSCFgNJySTEwEHkBaCIaEPCiiDdYwhlToaM4VbpRELmH2LN?=
+ =?us-ascii?q?4JTlg5ChGmBaDyBWXAVgyIJShkPjioOC4NgzlonMgIJAy8BAQcCBw4DC4Foh?=
+ =?us-ascii?q?GGLIS2BTwEB?=
+IronPort-Data: A9a23:aSDUBauMG0+u9cH0mw/HSbnGm+fnVAZfMUV32f8akzHdYApBsoF/q
+ tZmKW3UM/fYMDbwfItwPY3i8hkE757Qm95qTFdo+Hw1RiMbgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrav666yEgiclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZTdJ5xYuajhKs/3Z8Esx1BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw4b0vQl1Mz
+ P4iDDkRRACP3tm23Oi5c7w57igjBJGD0II3oHpsy3TdSP0hW52GG/+M7t5D1zB2jcdLdRrcT
+ 5NGMnw0M1KaPkAJYwxGYH49tL/Aan3Xfz5VrFuUtKMf6GnIxws327/oWDbQUoHTH5QFwR3F/
+ goq+UzZJi4iBueEmQOm/y29qdPKs2TeXaQ7QejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
+ lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZMpottdQ9Qnoh0
+ Vrhc87VOAGDeYa9ERq1nop4ZxvoUcTJBQfuvRM5cDY=
+IronPort-HdrOrdr: A9a23:JRn926kp862buTJ6WsxGqeD7t+rpDfIA3DAbv31ZSRFFG/FwWf
+ rAoB19726QtN9/YhAdcLy7VZVoIkmsl6Kdn7NwAV7KZmCP0wGVxepZg7cKrQeNJ8TWzJ846U
+ 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYLcemvAJsQljuQzW2gYytLeDU=
+X-Talos-CUID: 9a23:szpeLWys0V4UOz9illtRBgUPQZhmTn/kzk30KlOSGWowc72JE12prfY=
+X-Talos-MUID: 9a23:yWu8VguKbn61Le24Lc2npBVdDPVT+PSXK01SgLo6vufDEClWEmLI
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,175,1779148800"; 
-   d="scan'208";a="512230381"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Jul 2026 17:59:48 +0000
+   d="scan'208";a="512987350"
+Received: from rcdn-l-core-02.cisco.com ([173.37.255.139])
+  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Jul 2026 17:59:48 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id ED1B318000204;
+	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id E726B18000211;
 	Mon, 20 Jul 2026 17:59:47 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 9678DCAEF79; Mon, 20 Jul 2026 10:59:47 -0700 (PDT)
+	id 8F497CAEF77; Mon, 20 Jul 2026 10:59:47 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [meta-OE][wrynose][PATCH 3/3] jq: Fix CVE-2026-54679
-Date: Mon, 20 Jul 2026 10:59:41 -0700
-Message-Id: <20260720175941.2521378-3-dkelaiya@cisco.com>
+Subject: [meta-OE][wrynose][PATCH 1/3] jq: Fix CVE-2026-43895
+Date: Mon, 20 Jul 2026 10:59:39 -0700
+Message-Id: <20260720175941.2521378-1-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260720175941.2521378-1-dkelaiya@cisco.com>
-References: <20260720175941.2521378-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
+X-Outbound-Node: rcdn-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 17:59:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128286
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 17:59:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128287
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-This patch applies the upstream fix for CVE-2026-54679 as referenced
-in [2], using the upstream commit identified in [1].
+This patch applies the upstream fix as referenced in [2], using the commit shown in [1].
 
-[1] https://github.com/jqlang/jq/commit/46d1da30944ce93dd671ac72b6513fc0eb747837
-[2] https://github.com/jqlang/jq/security/advisories/GHSA-29gj-222p-j7vx
+[1] https://github.com/jqlang/jq/commit/9d223f153c3632a207fa071caaa6292da33ae361
+[2] https://github.com/jqlang/jq/security/advisories/GHSA-7q7g-mrq3-phxr
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../jq/jq/CVE-2026-54679.patch                | 77 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |  1 +
- 2 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch
+ .../jq/jq/CVE-2026-43895.patch                | 1543 +++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |    1 +
+ 2 files changed, 1544 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
 new file mode 100644
-index 0000000000..b4bcff8c75
+index 0000000000..18c6e0b585
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch
-@@ -0,0 +1,77 @@
-+From 3750f018d4ecdcccdd11edc4830efb7adc511123 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
+@@ -0,0 +1,1543 @@
++From 2dbe7f22e5f536759f937eba90f59914841e5d21 Mon Sep 17 00:00:00 2001
 +From: itchyny <itchyny@cybozu.co.jp>
-+Date: Tue, 16 Jun 2026 14:31:14 +0900
-+Subject: [PATCH 3/3] Tighten string length bounds and propagate invalid jv in
-+ implode
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++Date: Sat, 9 May 2026 17:08:43 +0900
++Subject: [PATCH 1/3] Reject embedded NUL bytes in module import paths
 +
-+The bound added in CVE-2026-32316 (e47e56d22) still allowed
-+`sizeof(jvp_string) + (currlen + len) * 2 + 1` to wrap `size_t` on
-+32-bit platforms. Tighten the threshold so the final allocation
-+fits in 32-bit `size_t`.
++jq accepts embedded NUL bytes at the language level but resolves
++module import paths through NUL-terminated C strings, so the path
++validated by policy or audit code could differ from the on-disk
++path jq actually opens. Pass jv through gen_import so the AST
++preserves the original bytes, and reject embedded NULs in
++validate_relpath.
 +
-+Also break out of `jv_string_implode` and `f_string_implode` once
-+`jv_string_append_codepoint` returns an invalid `jv`; otherwise the
-+next iteration triggers the assertion in `jvp_string_ptr` (or
-+invokes undefined behavior under `-DNDEBUG`).
++Fixes CVE-2026-43895.
 +
-+Fixes CVE-2026-54679.
++CVE: CVE-2026-43895
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/9d223f153c3632a207fa071caaa6292da33ae361]
 +
-+CVE: CVE-2026-54679
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/46d1da30944ce93dd671ac72b6513fc0eb747837]
-+
-+Co-authored-by: Dirk Müller <dirk@dmllr.de>
-+(cherry picked from commit 46d1da30944ce93dd671ac72b6513fc0eb747837)
++(cherry picked from commit 9d223f153c3632a207fa071caaa6292da33ae361)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ src/builtin.c | 1 +
-+ src/jv.c      | 5 +++--
-+ 2 files changed, 4 insertions(+), 2 deletions(-)
++ src/compile.c |  12 +-
++ src/compile.h |   2 +-
++ src/linker.c  |   6 +-
++ src/parser.c  | 556 +++++++++++++++++++++++++-------------------------
++ src/parser.y  |  16 +-
++ tests/shtest  |  17 ++
++ 6 files changed, 307 insertions(+), 302 deletions(-)
 +
-+diff --git a/src/builtin.c b/src/builtin.c
-+index 0463fca..eb91ac7 100644
-+--- a/src/builtin.c
-++++ b/src/builtin.c
-+@@ -1396,6 +1396,7 @@ static jv f_string_implode(jq_state *jq, jv a) {
-+     if (nv < 0 || nv > 0x10FFFF || (nv >= 0xD800 && nv <= 0xDFFF))
-+       nv = 0xFFFD; // U+FFFD REPLACEMENT CHARACTER
-+     s = jv_string_append_codepoint(s, nv);
-++    if (!jv_is_valid(s)) break;
-+   }
++diff --git a/src/compile.c b/src/compile.c
++index f0be1a5..14de73c 100644
++--- a/src/compile.c
+++++ b/src/compile.c
++@@ -525,13 +525,17 @@ jv block_module_meta(block b) {
++   return jv_null();
++ }
 + 
-+   jv_free(a);
-+diff --git a/src/jv.c b/src/jv.c
-+index 4f48f04..76c70c2 100644
-+--- a/src/jv.c
-++++ b/src/jv.c
-+@@ -1194,7 +1194,7 @@ static uint32_t jvp_string_remaining_space(jvp_string* s) {
-+ static jv jvp_string_append(jv string, const char* data, uint32_t len) {
-+   jvp_string* s = jvp_string_ptr(string);
-+   uint32_t currlen = jvp_string_length(s);
-+-  if ((uint64_t)currlen + len >= INT_MAX) {
-++  if ((uint64_t)currlen + len >= INT_MAX - sizeof(jvp_string) / 2) {
-+     jv_free(string);
-+     return jv_invalid_with_msg(jv_string("String too long"));
-+   }
-+@@ -1369,7 +1369,7 @@ jv jv_string_repeat(jv j, int n) {
-+   }
-+   int len = jv_string_length_bytes(jv_copy(j));
-+   int64_t res_len = (int64_t)len * n;
-+-  if (res_len >= INT_MAX) {
-++  if ((uint64_t)res_len >= INT_MAX - sizeof(jvp_string) / 2) {
-+     jv_free(j);
-+     return jv_invalid_with_msg(jv_string("Repeat string result too long"));
-+   }
-+@@ -1454,6 +1454,7 @@ jv jv_string_implode(jv j) {
-+     if (nv < 0 || nv > 0x10FFFF || (nv >= 0xD800 && nv <= 0xDFFF))
-+       nv = 0xFFFD; // U+FFFD REPLACEMENT CHARACTER
-+     s = jv_string_append_codepoint(s, nv);
-++    if (!jv_is_valid(s)) break;
-+   }
++-block gen_import(const char* name, const char* as, int is_data) {
+++block gen_import(jv name, jv as, int is_data) {
+++  assert(jv_get_kind(name) == JV_KIND_STRING);
+++  assert(!jv_is_valid(as) || jv_get_kind(as) == JV_KIND_STRING);
++   inst* i = inst_new(DEPS);
++   jv meta = jv_object();
++-  if (as != NULL)
++-    meta = jv_object_set(meta, jv_string("as"), jv_string(as));
+++  if (jv_is_valid(as))
+++    meta = jv_object_set(meta, jv_string("as"), as);
+++  else
+++    jv_free(as);
++   meta = jv_object_set(meta, jv_string("is_data"), is_data ? jv_true() : jv_false());
++-  meta = jv_object_set(meta, jv_string("relpath"), jv_string(name));
+++  meta = jv_object_set(meta, jv_string("relpath"), name);
++   i->imm.constant = meta;
++   return inst_block(i);
++ }
++diff --git a/src/compile.h b/src/compile.h
++index bef4632..d195e9e 100644
++--- a/src/compile.h
+++++ b/src/compile.h
++@@ -33,7 +33,7 @@ block gen_op_pushk_under(jv constant);
 + 
-+   jv_free(j);
++ block gen_module(block metadata);
++ jv block_module_meta(block b);
++-block gen_import(const char* name, const char *as, int is_data);
+++block gen_import(jv name, jv as, int is_data);
++ block gen_import_meta(block import, block metadata);
++ block gen_function(const char* name, block formals, block body);
++ block gen_param_regular(const char* name);
++diff --git a/src/linker.c b/src/linker.c
++index 72feabc..46dd289 100644
++--- a/src/linker.c
+++++ b/src/linker.c
++@@ -97,6 +97,10 @@ static jv build_lib_search_chain(jq_state *jq, jv search_path, jv jq_origin, jv
++ // in between).
++ static jv validate_relpath(jv name) {
++   const char *s = jv_string_value(name);
+++  if (strlen(s) != (size_t)jv_string_length_bytes(jv_copy(name))) {
+++    jv_free(name);
+++    return jv_invalid_with_msg(jv_string("Module path contains a NUL byte"));
+++  }
++   if (strchr(s, '\\')) {
++     jv res = jv_invalid_with_msg(jv_string_fmt("Modules must be named by relative paths using '/', not '\\' (%s)", s));
++     jv_free(name);
++@@ -445,7 +449,7 @@ int load_program(jq_state *jq, struct locfile* src, block *out_block) {
++   jv home = get_home();
++   if (jv_is_valid(home)) {
++     /* Import ~/.jq as a library named "" found in $HOME or %USERPROFILE% */
++-    block import = gen_import_meta(gen_import("", NULL, 0),
+++    block import = gen_import_meta(gen_import(jv_string(""), jv_invalid(), 0),
++         gen_const(JV_OBJECT(
++             jv_string("optional"), jv_true(),
++             jv_string("search"), home)));
++diff --git a/src/parser.c b/src/parser.c
++index 8bba468..de52986 100644
++--- a/src/parser.c
+++++ b/src/parser.c
++@@ -937,19 +937,19 @@ static const yytype_int16 yyrline[] =
++      325,   328,   331,   337,   340,   343,   349,   352,   355,   358,
++      361,   364,   367,   370,   373,   376,   379,   382,   385,   388,
++      391,   394,   397,   400,   403,   406,   409,   412,   415,   421,
++-     424,   441,   450,   457,   465,   476,   481,   487,   490,   495,
++-     499,   506,   509,   515,   522,   525,   528,   534,   537,   540,
++-     546,   549,   552,   560,   564,   567,   570,   573,   576,   579,
++-     582,   585,   588,   592,   598,   601,   604,   607,   610,   613,
++-     616,   619,   622,   625,   628,   631,   634,   637,   640,   643,
++-     646,   649,   652,   655,   658,   661,   664,   671,   674,   677,
++-     680,   683,   687,   690,   694,   712,   716,   720,   723,   735,
++-     740,   741,   742,   743,   746,   749,   754,   759,   762,   767,
++-     770,   775,   779,   782,   787,   790,   795,   798,   803,   806,
++-     809,   812,   815,   818,   826,   832,   835,   838,   841,   844,
++-     847,   850,   853,   856,   859,   862,   865,   868,   871,   874,
++-     877,   880,   883,   889,   892,   895,   900,   903,   906,   909,
++-     913,   918,   922,   926,   930,   934,   942,   948,   951
+++     424,   441,   445,   449,   455,   466,   471,   477,   480,   485,
+++     489,   496,   499,   505,   512,   515,   518,   524,   527,   530,
+++     536,   539,   542,   550,   554,   557,   560,   563,   566,   569,
+++     572,   575,   578,   582,   588,   591,   594,   597,   600,   603,
+++     606,   609,   612,   615,   618,   621,   624,   627,   630,   633,
+++     636,   639,   642,   645,   648,   651,   654,   661,   664,   667,
+++     670,   673,   677,   680,   684,   702,   706,   710,   713,   725,
+++     730,   731,   732,   733,   736,   739,   744,   749,   752,   757,
+++     760,   765,   769,   772,   777,   780,   785,   788,   793,   796,
+++     799,   802,   805,   808,   816,   822,   825,   828,   831,   834,
+++     837,   840,   843,   846,   849,   852,   855,   858,   861,   864,
+++     867,   870,   873,   879,   882,   885,   890,   893,   896,   899,
+++     903,   908,   912,   916,   920,   924,   932,   938,   941
++ };
++ #endif
++ 
++@@ -2841,42 +2841,32 @@ yyreduce:
++   case 41: /* ImportWhat: "import" ImportFrom "as" BINDING  */
++ #line 441 "src/parser.y"
++                                  {
++-  jv v = block_const((yyvsp[-2].blk));
++-  // XXX Make gen_import take only blocks and the int is_data so we
++-  // don't have to free so much stuff here
++-  (yyval.blk) = gen_import(jv_string_value(v), jv_string_value((yyvsp[0].literal)), 1);
+++  (yyval.blk) = gen_import(block_const((yyvsp[-2].blk)), (yyvsp[0].literal), 1);
++   block_free((yyvsp[-2].blk));
++-  jv_free((yyvsp[0].literal));
++-  jv_free(v);
++ }
++-#line 2853 "src/parser.c"
+++#line 2848 "src/parser.c"
++     break;
++ 
++   case 42: /* ImportWhat: "import" ImportFrom "as" IDENT  */
++-#line 450 "src/parser.y"
+++#line 445 "src/parser.y"
++                                {
++-  jv v = block_const((yyvsp[-2].blk));
++-  (yyval.blk) = gen_import(jv_string_value(v), jv_string_value((yyvsp[0].literal)), 0);
+++  (yyval.blk) = gen_import(block_const((yyvsp[-2].blk)), (yyvsp[0].literal), 0);
++   block_free((yyvsp[-2].blk));
++-  jv_free((yyvsp[0].literal));
++-  jv_free(v);
++ }
++-#line 2865 "src/parser.c"
+++#line 2857 "src/parser.c"
++     break;
++ 
++   case 43: /* ImportWhat: "include" ImportFrom  */
++-#line 457 "src/parser.y"
+++#line 449 "src/parser.y"
++                      {
++-  jv v = block_const((yyvsp[0].blk));
++-  (yyval.blk) = gen_import(jv_string_value(v), NULL, 0);
+++  (yyval.blk) = gen_import(block_const((yyvsp[0].blk)), jv_invalid(), 0);
++   block_free((yyvsp[0].blk));
++-  jv_free(v);
++ }
++-#line 2876 "src/parser.c"
+++#line 2866 "src/parser.c"
++     break;
++ 
++   case 44: /* ImportFrom: String  */
++-#line 465 "src/parser.y"
+++#line 455 "src/parser.y"
++        {
++   if (!block_is_const((yyvsp[0].blk))) {
++     FAIL((yylsp[0]), "Import path must be constant");
++@@ -2886,152 +2876,152 @@ yyreduce:
++     (yyval.blk) = (yyvsp[0].blk);
++   }
++ }
++-#line 2890 "src/parser.c"
+++#line 2880 "src/parser.c"
++     break;
++ 
++   case 45: /* FuncDef: "def" IDENT ':' Query ';'  */
++-#line 476 "src/parser.y"
+++#line 466 "src/parser.y"
++                           {
++   (yyval.blk) = gen_function(jv_string_value((yyvsp[-3].literal)), gen_noop(), (yyvsp[-1].blk));
++   jv_free((yyvsp[-3].literal));
++ }
++-#line 2899 "src/parser.c"
+++#line 2889 "src/parser.c"
++     break;
++ 
++   case 46: /* FuncDef: "def" IDENT '(' Params ')' ':' Query ';'  */
++-#line 481 "src/parser.y"
+++#line 471 "src/parser.y"
++                                          {
++   (yyval.blk) = gen_function(jv_string_value((yyvsp[-6].literal)), (yyvsp[-4].blk), (yyvsp[-1].blk));
++   jv_free((yyvsp[-6].literal));
++ }
++-#line 2908 "src/parser.c"
+++#line 2898 "src/parser.c"
++     break;
++ 
++   case 47: /* Params: Param  */
++-#line 487 "src/parser.y"
+++#line 477 "src/parser.y"
++       {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 2916 "src/parser.c"
+++#line 2906 "src/parser.c"
++     break;
++ 
++   case 48: /* Params: Params ';' Param  */
++-#line 490 "src/parser.y"
+++#line 480 "src/parser.y"
++                  {
++   (yyval.blk) = BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 2924 "src/parser.c"
+++#line 2914 "src/parser.c"
++     break;
++ 
++   case 49: /* Param: BINDING  */
++-#line 495 "src/parser.y"
+++#line 485 "src/parser.y"
++         {
++   (yyval.blk) = gen_param_regular(jv_string_value((yyvsp[0].literal)));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 2933 "src/parser.c"
+++#line 2923 "src/parser.c"
++     break;
++ 
++   case 50: /* Param: IDENT  */
++-#line 499 "src/parser.y"
+++#line 489 "src/parser.y"
++       {
++   (yyval.blk) = gen_param(jv_string_value((yyvsp[0].literal)));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 2942 "src/parser.c"
+++#line 2932 "src/parser.c"
++     break;
++ 
++   case 51: /* StringStart: FORMAT QQSTRING_START  */
++-#line 506 "src/parser.y"
+++#line 496 "src/parser.y"
++                       {
++   (yyval.literal) = (yyvsp[-1].literal);
++ }
++-#line 2950 "src/parser.c"
+++#line 2940 "src/parser.c"
++     break;
++ 
++   case 52: /* StringStart: QQSTRING_START  */
++-#line 509 "src/parser.y"
+++#line 499 "src/parser.y"
++                {
++   (yyval.literal) = jv_string("text");
++ }
++-#line 2958 "src/parser.c"
+++#line 2948 "src/parser.c"
++     break;
++ 
++   case 53: /* String: StringStart QQString QQSTRING_END  */
++-#line 515 "src/parser.y"
+++#line 505 "src/parser.y"
++                                   {
++   (yyval.blk) = (yyvsp[-1].blk);
++   jv_free((yyvsp[-2].literal));
++ }
++-#line 2967 "src/parser.c"
+++#line 2957 "src/parser.c"
++     break;
++ 
++   case 54: /* QQString: %empty  */
++-#line 522 "src/parser.y"
+++#line 512 "src/parser.y"
++        {
++   (yyval.blk) = gen_const(jv_string(""));
++ }
++-#line 2975 "src/parser.c"
+++#line 2965 "src/parser.c"
++     break;
++ 
++   case 55: /* QQString: QQString QQSTRING_TEXT  */
++-#line 525 "src/parser.y"
+++#line 515 "src/parser.y"
++                        {
++   (yyval.blk) = gen_binop((yyvsp[-1].blk), gen_const((yyvsp[0].literal)), '+');
++ }
++-#line 2983 "src/parser.c"
+++#line 2973 "src/parser.c"
++     break;
++ 
++   case 56: /* QQString: QQString QQSTRING_INTERP_START Query QQSTRING_INTERP_END  */
++-#line 528 "src/parser.y"
+++#line 518 "src/parser.y"
++                                                          {
++   (yyval.blk) = gen_binop((yyvsp[-3].blk), gen_format((yyvsp[-1].blk), jv_copy((yyvsp[-4].literal))), '+');
++ }
++-#line 2991 "src/parser.c"
+++#line 2981 "src/parser.c"
++     break;
++ 
++   case 57: /* ElseBody: "elif" Query "then" Query ElseBody  */
++-#line 534 "src/parser.y"
+++#line 524 "src/parser.y"
++                                    {
++   (yyval.blk) = gen_cond((yyvsp[-3].blk), (yyvsp[-1].blk), (yyvsp[0].blk));
++ }
++-#line 2999 "src/parser.c"
+++#line 2989 "src/parser.c"
++     break;
++ 
++   case 58: /* ElseBody: "else" Query "end"  */
++-#line 537 "src/parser.y"
+++#line 527 "src/parser.y"
++                    {
++   (yyval.blk) = (yyvsp[-1].blk);
++ }
++-#line 3007 "src/parser.c"
+++#line 2997 "src/parser.c"
++     break;
++ 
++   case 59: /* ElseBody: "end"  */
++-#line 540 "src/parser.y"
+++#line 530 "src/parser.y"
++       {
++   (yyval.blk) = gen_noop();
++ }
++-#line 3015 "src/parser.c"
+++#line 3005 "src/parser.c"
++     break;
++ 
++   case 60: /* Term: '.'  */
++-#line 546 "src/parser.y"
+++#line 536 "src/parser.y"
++     {
++   (yyval.blk) = gen_noop();
++ }
++-#line 3023 "src/parser.c"
+++#line 3013 "src/parser.c"
++     break;
++ 
++   case 61: /* Term: ".."  */
++-#line 549 "src/parser.y"
+++#line 539 "src/parser.y"
++     {
++   (yyval.blk) = gen_call("recurse", gen_noop());
++ }
++-#line 3031 "src/parser.c"
+++#line 3021 "src/parser.c"
++     break;
++ 
++   case 62: /* Term: "break" BINDING  */
++-#line 552 "src/parser.y"
+++#line 542 "src/parser.y"
++               {
++   jv v = jv_string_fmt("*label-%s", jv_string_value((yyvsp[0].literal)));     // impossible symbol
++   (yyval.blk) = gen_location((yyloc), locations,
++@@ -3040,279 +3030,279 @@ yyreduce:
++   jv_free(v);
++   jv_free((yyvsp[0].literal));
++ }
++-#line 3044 "src/parser.c"
+++#line 3034 "src/parser.c"
++     break;
++ 
++   case 63: /* Term: "break" error  */
++-#line 560 "src/parser.y"
+++#line 550 "src/parser.y"
++             {
++   FAIL((yyloc), "break requires a label to break to");
++   (yyval.blk) = gen_noop();
++ }
++-#line 3053 "src/parser.c"
+++#line 3043 "src/parser.c"
++     break;
++ 
++   case 64: /* Term: Term FIELD '?'  */
++-#line 564 "src/parser.y"
+++#line 554 "src/parser.y"
++                {
++   (yyval.blk) = gen_index_opt((yyvsp[-2].blk), gen_const((yyvsp[-1].literal)));
++ }
++-#line 3061 "src/parser.c"
+++#line 3051 "src/parser.c"
++     break;
++ 
++   case 65: /* Term: FIELD '?'  */
++-#line 567 "src/parser.y"
+++#line 557 "src/parser.y"
++           {
++   (yyval.blk) = gen_index_opt(gen_noop(), gen_const((yyvsp[-1].literal)));
++ }
++-#line 3069 "src/parser.c"
+++#line 3059 "src/parser.c"
++     break;
++ 
++   case 66: /* Term: Term '.' String '?'  */
++-#line 570 "src/parser.y"
+++#line 560 "src/parser.y"
++                     {
++   (yyval.blk) = gen_index_opt((yyvsp[-3].blk), (yyvsp[-1].blk));
++ }
++-#line 3077 "src/parser.c"
+++#line 3067 "src/parser.c"
++     break;
++ 
++   case 67: /* Term: '.' String '?'  */
++-#line 573 "src/parser.y"
+++#line 563 "src/parser.y"
++                {
++   (yyval.blk) = gen_index_opt(gen_noop(), (yyvsp[-1].blk));
++ }
++-#line 3085 "src/parser.c"
+++#line 3075 "src/parser.c"
++     break;
++ 
++   case 68: /* Term: Term FIELD  */
++-#line 576 "src/parser.y"
+++#line 566 "src/parser.y"
++                         {
++   (yyval.blk) = gen_index((yyvsp[-1].blk), gen_const((yyvsp[0].literal)));
++ }
++-#line 3093 "src/parser.c"
+++#line 3083 "src/parser.c"
++     break;
++ 
++   case 69: /* Term: FIELD  */
++-#line 579 "src/parser.y"
+++#line 569 "src/parser.y"
++                    {
++   (yyval.blk) = gen_index(gen_noop(), gen_const((yyvsp[0].literal)));
++ }
++-#line 3101 "src/parser.c"
+++#line 3091 "src/parser.c"
++     break;
++ 
++   case 70: /* Term: Term '.' String  */
++-#line 582 "src/parser.y"
+++#line 572 "src/parser.y"
++                              {
++   (yyval.blk) = gen_index((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3109 "src/parser.c"
+++#line 3099 "src/parser.c"
++     break;
++ 
++   case 71: /* Term: '.' String  */
++-#line 585 "src/parser.y"
+++#line 575 "src/parser.y"
++                         {
++   (yyval.blk) = gen_index(gen_noop(), (yyvsp[0].blk));
++ }
++-#line 3117 "src/parser.c"
+++#line 3107 "src/parser.c"
++     break;
++ 
++   case 72: /* Term: '.' error  */
++-#line 588 "src/parser.y"
+++#line 578 "src/parser.y"
++           {
++   FAIL((yyloc), "try .[\"field\"] instead of .field for unusually named fields");
++   (yyval.blk) = gen_noop();
++ }
++-#line 3126 "src/parser.c"
+++#line 3116 "src/parser.c"
++     break;
++ 
++   case 73: /* Term: '.' IDENT error  */
++-#line 592 "src/parser.y"
+++#line 582 "src/parser.y"
++                 {
++   jv_free((yyvsp[-1].literal));
++   FAIL((yyloc), "try .[\"field\"] instead of .field for unusually named fields");
++   (yyval.blk) = gen_noop();
++ }
++-#line 3136 "src/parser.c"
+++#line 3126 "src/parser.c"
++     break;
++ 
++   case 74: /* Term: Term '[' Query ']' '?'  */
++-#line 598 "src/parser.y"
+++#line 588 "src/parser.y"
++                        {
++   (yyval.blk) = gen_index_opt((yyvsp[-4].blk), (yyvsp[-2].blk));
++ }
++-#line 3144 "src/parser.c"
+++#line 3134 "src/parser.c"
++     break;
++ 
++   case 75: /* Term: Term '[' Query ']'  */
++-#line 601 "src/parser.y"
+++#line 591 "src/parser.y"
++                                 {
++   (yyval.blk) = gen_index((yyvsp[-3].blk), (yyvsp[-1].blk));
++ }
++-#line 3152 "src/parser.c"
+++#line 3142 "src/parser.c"
++     break;
++ 
++   case 76: /* Term: Term '.' '[' Query ']' '?'  */
++-#line 604 "src/parser.y"
+++#line 594 "src/parser.y"
++                            {
++   (yyval.blk) = gen_index_opt((yyvsp[-5].blk), (yyvsp[-2].blk));
++ }
++-#line 3160 "src/parser.c"
+++#line 3150 "src/parser.c"
++     break;
++ 
++   case 77: /* Term: Term '.' '[' Query ']'  */
++-#line 607 "src/parser.y"
+++#line 597 "src/parser.y"
++                                     {
++   (yyval.blk) = gen_index((yyvsp[-4].blk), (yyvsp[-1].blk));
++ }
++-#line 3168 "src/parser.c"
+++#line 3158 "src/parser.c"
++     break;
++ 
++   case 78: /* Term: Term '[' ']' '?'  */
++-#line 610 "src/parser.y"
+++#line 600 "src/parser.y"
++                  {
++   (yyval.blk) = block_join((yyvsp[-3].blk), gen_op_simple(EACH_OPT));
++ }
++-#line 3176 "src/parser.c"
+++#line 3166 "src/parser.c"
++     break;
++ 
++   case 79: /* Term: Term '[' ']'  */
++-#line 613 "src/parser.y"
+++#line 603 "src/parser.y"
++                           {
++   (yyval.blk) = block_join((yyvsp[-2].blk), gen_op_simple(EACH));
++ }
++-#line 3184 "src/parser.c"
+++#line 3174 "src/parser.c"
++     break;
++ 
++   case 80: /* Term: Term '.' '[' ']' '?'  */
++-#line 616 "src/parser.y"
+++#line 606 "src/parser.y"
++                      {
++   (yyval.blk) = block_join((yyvsp[-4].blk), gen_op_simple(EACH_OPT));
++ }
++-#line 3192 "src/parser.c"
+++#line 3182 "src/parser.c"
++     break;
++ 
++   case 81: /* Term: Term '.' '[' ']'  */
++-#line 619 "src/parser.y"
+++#line 609 "src/parser.y"
++                               {
++   (yyval.blk) = block_join((yyvsp[-3].blk), gen_op_simple(EACH));
++ }
++-#line 3200 "src/parser.c"
+++#line 3190 "src/parser.c"
++     break;
++ 
++   case 82: /* Term: Term '[' Query ':' Query ']' '?'  */
++-#line 622 "src/parser.y"
+++#line 612 "src/parser.y"
++                                  {
++   (yyval.blk) = gen_slice_index((yyvsp[-6].blk), (yyvsp[-4].blk), (yyvsp[-2].blk), INDEX_OPT);
++ }
++-#line 3208 "src/parser.c"
+++#line 3198 "src/parser.c"
++     break;
++ 
++   case 83: /* Term: Term '[' Query ':' ']' '?'  */
++-#line 625 "src/parser.y"
+++#line 615 "src/parser.y"
++                            {
++   (yyval.blk) = gen_slice_index((yyvsp[-5].blk), (yyvsp[-3].blk), gen_const(jv_null()), INDEX_OPT);
++ }
++-#line 3216 "src/parser.c"
+++#line 3206 "src/parser.c"
++     break;
++ 
++   case 84: /* Term: Term '[' ':' Query ']' '?'  */
++-#line 628 "src/parser.y"
+++#line 618 "src/parser.y"
++                            {
++   (yyval.blk) = gen_slice_index((yyvsp[-5].blk), gen_const(jv_null()), (yyvsp[-2].blk), INDEX_OPT);
++ }
++-#line 3224 "src/parser.c"
+++#line 3214 "src/parser.c"
++     break;
++ 
++   case 85: /* Term: Term '[' Query ':' Query ']'  */
++-#line 631 "src/parser.y"
+++#line 621 "src/parser.y"
++                                           {
++   (yyval.blk) = gen_slice_index((yyvsp[-5].blk), (yyvsp[-3].blk), (yyvsp[-1].blk), INDEX);
++ }
++-#line 3232 "src/parser.c"
+++#line 3222 "src/parser.c"
++     break;
++ 
++   case 86: /* Term: Term '[' Query ':' ']'  */
++-#line 634 "src/parser.y"
+++#line 624 "src/parser.y"
++                                     {
++   (yyval.blk) = gen_slice_index((yyvsp[-4].blk), (yyvsp[-2].blk), gen_const(jv_null()), INDEX);
++ }
++-#line 3240 "src/parser.c"
+++#line 3230 "src/parser.c"
++     break;
++ 
++   case 87: /* Term: Term '[' ':' Query ']'  */
++-#line 637 "src/parser.y"
+++#line 627 "src/parser.y"
++                                     {
++   (yyval.blk) = gen_slice_index((yyvsp[-4].blk), gen_const(jv_null()), (yyvsp[-1].blk), INDEX);
++ }
++-#line 3248 "src/parser.c"
+++#line 3238 "src/parser.c"
++     break;
++ 
++   case 88: /* Term: Term '?'  */
++-#line 640 "src/parser.y"
+++#line 630 "src/parser.y"
++          {
++   (yyval.blk) = gen_try((yyvsp[-1].blk), gen_op_simple(BACKTRACK));
++ }
++-#line 3256 "src/parser.c"
+++#line 3246 "src/parser.c"
++     break;
++ 
++   case 89: /* Term: LITERAL  */
++-#line 643 "src/parser.y"
+++#line 633 "src/parser.y"
++         {
++   (yyval.blk) = gen_const((yyvsp[0].literal));
++ }
++-#line 3264 "src/parser.c"
+++#line 3254 "src/parser.c"
++     break;
++ 
++   case 90: /* Term: String  */
++-#line 646 "src/parser.y"
+++#line 636 "src/parser.y"
++        {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3272 "src/parser.c"
+++#line 3262 "src/parser.c"
++     break;
++ 
++   case 91: /* Term: FORMAT  */
++-#line 649 "src/parser.y"
+++#line 639 "src/parser.y"
++        {
++   (yyval.blk) = gen_format(gen_noop(), (yyvsp[0].literal));
++ }
++-#line 3280 "src/parser.c"
+++#line 3270 "src/parser.c"
++     break;
++ 
++   case 92: /* Term: '-' Term  */
++-#line 652 "src/parser.y"
+++#line 642 "src/parser.y"
++          {
++   (yyval.blk) = BLOCK((yyvsp[0].blk), gen_call("_negate", gen_noop()));
++ }
++-#line 3288 "src/parser.c"
+++#line 3278 "src/parser.c"
++     break;
++ 
++   case 93: /* Term: '(' Query ')'  */
++-#line 655 "src/parser.y"
+++#line 645 "src/parser.y"
++               {
++   (yyval.blk) = (yyvsp[-1].blk);
++ }
++-#line 3296 "src/parser.c"
+++#line 3286 "src/parser.c"
++     break;
++ 
++   case 94: /* Term: '[' Query ']'  */
++-#line 658 "src/parser.y"
+++#line 648 "src/parser.y"
++               {
++   (yyval.blk) = gen_collect((yyvsp[-1].blk));
++ }
++-#line 3304 "src/parser.c"
+++#line 3294 "src/parser.c"
++     break;
++ 
++   case 95: /* Term: '[' ']'  */
++-#line 661 "src/parser.y"
+++#line 651 "src/parser.y"
++         {
++   (yyval.blk) = gen_const(jv_array());
++ }
++-#line 3312 "src/parser.c"
+++#line 3302 "src/parser.c"
++     break;
++ 
++   case 96: /* Term: '{' DictPairs '}'  */
++-#line 664 "src/parser.y"
+++#line 654 "src/parser.y"
++                   {
++   block o = gen_const_object((yyvsp[-1].blk));
++   if (o.first != NULL)
++@@ -3320,103 +3310,103 @@ yyreduce:
++   else
++     (yyval.blk) = BLOCK(gen_subexp(gen_const(jv_object())), (yyvsp[-1].blk), gen_op_simple(POP));
++ }
++-#line 3324 "src/parser.c"
+++#line 3314 "src/parser.c"
++     break;
++ 
++   case 97: /* Term: "reduce" Expr "as" Patterns '(' Query ';' Query ')'  */
++-#line 671 "src/parser.y"
+++#line 661 "src/parser.y"
++                                                     {
++   (yyval.blk) = gen_reduce((yyvsp[-7].blk), (yyvsp[-5].blk), (yyvsp[-3].blk), (yyvsp[-1].blk));
++ }
++-#line 3332 "src/parser.c"
+++#line 3322 "src/parser.c"
++     break;
++ 
++   case 98: /* Term: "foreach" Expr "as" Patterns '(' Query ';' Query ';' Query ')'  */
++-#line 674 "src/parser.y"
+++#line 664 "src/parser.y"
++                                                                {
++   (yyval.blk) = gen_foreach((yyvsp[-9].blk), (yyvsp[-7].blk), (yyvsp[-5].blk), (yyvsp[-3].blk), (yyvsp[-1].blk));
++ }
++-#line 3340 "src/parser.c"
+++#line 3330 "src/parser.c"
++     break;
++ 
++   case 99: /* Term: "foreach" Expr "as" Patterns '(' Query ';' Query ')'  */
++-#line 677 "src/parser.y"
+++#line 667 "src/parser.y"
++                                                      {
++   (yyval.blk) = gen_foreach((yyvsp[-7].blk), (yyvsp[-5].blk), (yyvsp[-3].blk), (yyvsp[-1].blk), gen_noop());
++ }
++-#line 3348 "src/parser.c"
+++#line 3338 "src/parser.c"
++     break;
++ 
++   case 100: /* Term: "if" Query "then" Query ElseBody  */
++-#line 680 "src/parser.y"
+++#line 670 "src/parser.y"
++                                  {
++   (yyval.blk) = gen_cond((yyvsp[-3].blk), (yyvsp[-1].blk), (yyvsp[0].blk));
++ }
++-#line 3356 "src/parser.c"
+++#line 3346 "src/parser.c"
++     break;
++ 
++   case 101: /* Term: "if" Query "then" error  */
++-#line 683 "src/parser.y"
+++#line 673 "src/parser.y"
++                         {
++   FAIL((yyloc), "Possibly unterminated 'if' statement");
++   (yyval.blk) = (yyvsp[-2].blk);
++ }
++-#line 3365 "src/parser.c"
+++#line 3355 "src/parser.c"
++     break;
++ 
++   case 102: /* Term: "try" Expr "catch" Expr  */
++-#line 687 "src/parser.y"
+++#line 677 "src/parser.y"
++                         {
++   (yyval.blk) = gen_try((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3373 "src/parser.c"
+++#line 3363 "src/parser.c"
++     break;
++ 
++   case 103: /* Term: "try" Expr "catch" error  */
++-#line 690 "src/parser.y"
+++#line 680 "src/parser.y"
++                          {
++   FAIL((yyloc), "Possibly unterminated 'try' statement");
++   (yyval.blk) = (yyvsp[-2].blk);
++ }
++-#line 3382 "src/parser.c"
+++#line 3372 "src/parser.c"
++     break;
++ 
++   case 104: /* Term: "try" Expr  */
++-#line 694 "src/parser.y"
+++#line 684 "src/parser.y"
++            {
++   (yyval.blk) = gen_try((yyvsp[0].blk), gen_op_simple(BACKTRACK));
++ }
++-#line 3390 "src/parser.c"
+++#line 3380 "src/parser.c"
++     break;
++ 
++   case 105: /* Term: '$' '$' '$' BINDING  */
++-#line 712 "src/parser.y"
+++#line 702 "src/parser.y"
++                     {
++   (yyval.blk) = gen_location((yyloc), locations, gen_op_unbound(LOADVN, jv_string_value((yyvsp[0].literal))));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 3399 "src/parser.c"
+++#line 3389 "src/parser.c"
++     break;
++ 
++   case 106: /* Term: BINDING  */
++-#line 716 "src/parser.y"
+++#line 706 "src/parser.y"
++         {
++   (yyval.blk) = gen_location((yyloc), locations, gen_op_unbound(LOADV, jv_string_value((yyvsp[0].literal))));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 3408 "src/parser.c"
+++#line 3398 "src/parser.c"
++     break;
++ 
++   case 107: /* Term: "$__loc__"  */
++-#line 720 "src/parser.y"
+++#line 710 "src/parser.y"
++            {
++   (yyval.blk) = gen_loc_object(&(yyloc), locations);
++ }
++-#line 3416 "src/parser.c"
+++#line 3406 "src/parser.c"
++     break;
++ 
++   case 108: /* Term: IDENT  */
++-#line 723 "src/parser.y"
+++#line 713 "src/parser.y"
++       {
++   const char *s = jv_string_value((yyvsp[0].literal));
++   if (strcmp(s, "false") == 0)
++@@ -3429,198 +3419,198 @@ yyreduce:
++     (yyval.blk) = gen_location((yyloc), locations, gen_call(s, gen_noop()));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 3433 "src/parser.c"
+++#line 3423 "src/parser.c"
++     break;
++ 
++   case 109: /* Term: IDENT '(' Args ')'  */
++-#line 735 "src/parser.y"
+++#line 725 "src/parser.y"
++                    {
++   (yyval.blk) = gen_call(jv_string_value((yyvsp[-3].literal)), (yyvsp[-1].blk));
++   (yyval.blk) = gen_location((yylsp[-3]), locations, (yyval.blk));
++   jv_free((yyvsp[-3].literal));
++ }
++-#line 3443 "src/parser.c"
+++#line 3433 "src/parser.c"
++     break;
++ 
++   case 110: /* Term: '(' error ')'  */
++-#line 740 "src/parser.y"
+++#line 730 "src/parser.y"
++               { (yyval.blk) = gen_noop(); }
++-#line 3449 "src/parser.c"
+++#line 3439 "src/parser.c"
++     break;
++ 
++   case 111: /* Term: '[' error ']'  */
++-#line 741 "src/parser.y"
+++#line 731 "src/parser.y"
++               { (yyval.blk) = gen_noop(); }
++-#line 3455 "src/parser.c"
+++#line 3445 "src/parser.c"
++     break;
++ 
++   case 112: /* Term: Term '[' error ']'  */
++-#line 742 "src/parser.y"
+++#line 732 "src/parser.y"
++                    { (yyval.blk) = (yyvsp[-3].blk); }
++-#line 3461 "src/parser.c"
+++#line 3451 "src/parser.c"
++     break;
++ 
++   case 113: /* Term: '{' error '}'  */
++-#line 743 "src/parser.y"
+++#line 733 "src/parser.y"
++               { (yyval.blk) = gen_noop(); }
++-#line 3467 "src/parser.c"
+++#line 3457 "src/parser.c"
++     break;
++ 
++   case 114: /* Args: Arg  */
++-#line 746 "src/parser.y"
+++#line 736 "src/parser.y"
++     {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3475 "src/parser.c"
+++#line 3465 "src/parser.c"
++     break;
++ 
++   case 115: /* Args: Args ';' Arg  */
++-#line 749 "src/parser.y"
+++#line 739 "src/parser.y"
++              {
++   (yyval.blk) = BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3483 "src/parser.c"
+++#line 3473 "src/parser.c"
++     break;
++ 
++   case 116: /* Arg: Query  */
++-#line 754 "src/parser.y"
+++#line 744 "src/parser.y"
++       {
++   (yyval.blk) = gen_lambda((yyvsp[0].blk));
++ }
++-#line 3491 "src/parser.c"
+++#line 3481 "src/parser.c"
++     break;
++ 
++   case 117: /* RepPatterns: RepPatterns "?//" Pattern  */
++-#line 759 "src/parser.y"
+++#line 749 "src/parser.y"
++                           {
++   (yyval.blk) = BLOCK((yyvsp[-2].blk), gen_destructure_alt((yyvsp[0].blk)));
++ }
++-#line 3499 "src/parser.c"
+++#line 3489 "src/parser.c"
++     break;
++ 
++   case 118: /* RepPatterns: Pattern  */
++-#line 762 "src/parser.y"
+++#line 752 "src/parser.y"
++         {
++   (yyval.blk) = gen_destructure_alt((yyvsp[0].blk));
++ }
++-#line 3507 "src/parser.c"
+++#line 3497 "src/parser.c"
++     break;
++ 
++   case 119: /* Patterns: RepPatterns "?//" Pattern  */
++-#line 767 "src/parser.y"
+++#line 757 "src/parser.y"
++                           {
++   (yyval.blk) = BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3515 "src/parser.c"
+++#line 3505 "src/parser.c"
++     break;
++ 
++   case 120: /* Patterns: Pattern  */
++-#line 770 "src/parser.y"
+++#line 760 "src/parser.y"
++         {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3523 "src/parser.c"
+++#line 3513 "src/parser.c"
++     break;
++ 
++   case 121: /* Pattern: BINDING  */
++-#line 775 "src/parser.y"
+++#line 765 "src/parser.y"
++         {
++   (yyval.blk) = gen_op_unbound(STOREV, jv_string_value((yyvsp[0].literal)));
++   jv_free((yyvsp[0].literal));
++ }
++-#line 3532 "src/parser.c"
+++#line 3522 "src/parser.c"
++     break;
++ 
++   case 122: /* Pattern: '[' ArrayPats ']'  */
++-#line 779 "src/parser.y"
+++#line 769 "src/parser.y"
++                   {
++   (yyval.blk) = BLOCK((yyvsp[-1].blk), gen_op_simple(POP));
++ }
++-#line 3540 "src/parser.c"
+++#line 3530 "src/parser.c"
++     break;
++ 
++   case 123: /* Pattern: '{' ObjPats '}'  */
++-#line 782 "src/parser.y"
+++#line 772 "src/parser.y"
++                 {
++   (yyval.blk) = BLOCK((yyvsp[-1].blk), gen_op_simple(POP));
++ }
++-#line 3548 "src/parser.c"
+++#line 3538 "src/parser.c"
++     break;
++ 
++   case 124: /* ArrayPats: Pattern  */
++-#line 787 "src/parser.y"
+++#line 777 "src/parser.y"
++         {
++   (yyval.blk) = gen_array_matcher(gen_noop(), (yyvsp[0].blk));
++ }
++-#line 3556 "src/parser.c"
+++#line 3546 "src/parser.c"
++     break;
++ 
++   case 125: /* ArrayPats: ArrayPats ',' Pattern  */
++-#line 790 "src/parser.y"
+++#line 780 "src/parser.y"
++                       {
++   (yyval.blk) = gen_array_matcher((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3564 "src/parser.c"
+++#line 3554 "src/parser.c"
++     break;
++ 
++   case 126: /* ObjPats: ObjPat  */
++-#line 795 "src/parser.y"
+++#line 785 "src/parser.y"
++        {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3572 "src/parser.c"
+++#line 3562 "src/parser.c"
++     break;
++ 
++   case 127: /* ObjPats: ObjPats ',' ObjPat  */
++-#line 798 "src/parser.y"
+++#line 788 "src/parser.y"
++                    {
++   (yyval.blk) = BLOCK((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3580 "src/parser.c"
+++#line 3570 "src/parser.c"
++     break;
++ 
++   case 128: /* ObjPat: BINDING  */
++-#line 803 "src/parser.y"
+++#line 793 "src/parser.y"
++         {
++   (yyval.blk) = gen_object_matcher(gen_const((yyvsp[0].literal)), gen_op_unbound(STOREV, jv_string_value((yyvsp[0].literal))));
++ }
++-#line 3588 "src/parser.c"
+++#line 3578 "src/parser.c"
++     break;
++ 
++   case 129: /* ObjPat: BINDING ':' Pattern  */
++-#line 806 "src/parser.y"
+++#line 796 "src/parser.y"
++                     {
++   (yyval.blk) = gen_object_matcher(gen_const((yyvsp[-2].literal)), BLOCK(gen_op_simple(DUP), gen_op_unbound(STOREV, jv_string_value((yyvsp[-2].literal))), (yyvsp[0].blk)));
++ }
++-#line 3596 "src/parser.c"
+++#line 3586 "src/parser.c"
++     break;
++ 
++   case 130: /* ObjPat: IDENT ':' Pattern  */
++-#line 809 "src/parser.y"
+++#line 799 "src/parser.y"
++                   {
++   (yyval.blk) = gen_object_matcher(gen_const((yyvsp[-2].literal)), (yyvsp[0].blk));
++ }
++-#line 3604 "src/parser.c"
+++#line 3594 "src/parser.c"
++     break;
++ 
++   case 131: /* ObjPat: Keyword ':' Pattern  */
++-#line 812 "src/parser.y"
+++#line 802 "src/parser.y"
++                     {
++   (yyval.blk) = gen_object_matcher(gen_const((yyvsp[-2].literal)), (yyvsp[0].blk));
++ }
++-#line 3612 "src/parser.c"
+++#line 3602 "src/parser.c"
++     break;
++ 
++   case 132: /* ObjPat: String ':' Pattern  */
++-#line 815 "src/parser.y"
+++#line 805 "src/parser.y"
++                    {
++   (yyval.blk) = gen_object_matcher((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3620 "src/parser.c"
+++#line 3610 "src/parser.c"
++     break;
++ 
++   case 133: /* ObjPat: '(' Query ')' ':' Pattern  */
++-#line 818 "src/parser.y"
+++#line 808 "src/parser.y"
++                           {
++   jv msg = check_object_key((yyvsp[-3].blk));
++   if (jv_is_valid(msg)) {
++@@ -3629,267 +3619,267 @@ yyreduce:
++   jv_free(msg);
++   (yyval.blk) = gen_object_matcher((yyvsp[-3].blk), (yyvsp[0].blk));
++ }
++-#line 3633 "src/parser.c"
+++#line 3623 "src/parser.c"
++     break;
++ 
++   case 134: /* ObjPat: error ':' Pattern  */
++-#line 826 "src/parser.y"
+++#line 816 "src/parser.y"
++                   {
++   FAIL((yyloc), "May need parentheses around object key expression");
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3642 "src/parser.c"
+++#line 3632 "src/parser.c"
++     break;
++ 
++   case 135: /* Keyword: "as"  */
++-#line 832 "src/parser.y"
+++#line 822 "src/parser.y"
++      {
++   (yyval.literal) = jv_string("as");
++ }
++-#line 3650 "src/parser.c"
+++#line 3640 "src/parser.c"
++     break;
++ 
++   case 136: /* Keyword: "def"  */
++-#line 835 "src/parser.y"
+++#line 825 "src/parser.y"
++       {
++   (yyval.literal) = jv_string("def");
++ }
++-#line 3658 "src/parser.c"
+++#line 3648 "src/parser.c"
++     break;
++ 
++   case 137: /* Keyword: "module"  */
++-#line 838 "src/parser.y"
+++#line 828 "src/parser.y"
++          {
++   (yyval.literal) = jv_string("module");
++ }
++-#line 3666 "src/parser.c"
+++#line 3656 "src/parser.c"
++     break;
++ 
++   case 138: /* Keyword: "import"  */
++-#line 841 "src/parser.y"
+++#line 831 "src/parser.y"
++          {
++   (yyval.literal) = jv_string("import");
++ }
++-#line 3674 "src/parser.c"
+++#line 3664 "src/parser.c"
++     break;
++ 
++   case 139: /* Keyword: "include"  */
++-#line 844 "src/parser.y"
+++#line 834 "src/parser.y"
++           {
++   (yyval.literal) = jv_string("include");
++ }
++-#line 3682 "src/parser.c"
+++#line 3672 "src/parser.c"
++     break;
++ 
++   case 140: /* Keyword: "if"  */
++-#line 847 "src/parser.y"
+++#line 837 "src/parser.y"
++      {
++   (yyval.literal) = jv_string("if");
++ }
++-#line 3690 "src/parser.c"
+++#line 3680 "src/parser.c"
++     break;
++ 
++   case 141: /* Keyword: "then"  */
++-#line 850 "src/parser.y"
+++#line 840 "src/parser.y"
++        {
++   (yyval.literal) = jv_string("then");
++ }
++-#line 3698 "src/parser.c"
+++#line 3688 "src/parser.c"
++     break;
++ 
++   case 142: /* Keyword: "else"  */
++-#line 853 "src/parser.y"
+++#line 843 "src/parser.y"
++        {
++   (yyval.literal) = jv_string("else");
++ }
++-#line 3706 "src/parser.c"
+++#line 3696 "src/parser.c"
++     break;
++ 
++   case 143: /* Keyword: "elif"  */
++-#line 856 "src/parser.y"
+++#line 846 "src/parser.y"
++        {
++   (yyval.literal) = jv_string("elif");
++ }
++-#line 3714 "src/parser.c"
+++#line 3704 "src/parser.c"
++     break;
++ 
++   case 144: /* Keyword: "reduce"  */
++-#line 859 "src/parser.y"
+++#line 849 "src/parser.y"
++          {
++   (yyval.literal) = jv_string("reduce");
++ }
++-#line 3722 "src/parser.c"
+++#line 3712 "src/parser.c"
++     break;
++ 
++   case 145: /* Keyword: "foreach"  */
++-#line 862 "src/parser.y"
+++#line 852 "src/parser.y"
++           {
++   (yyval.literal) = jv_string("foreach");
++ }
++-#line 3730 "src/parser.c"
+++#line 3720 "src/parser.c"
++     break;
++ 
++   case 146: /* Keyword: "end"  */
++-#line 865 "src/parser.y"
+++#line 855 "src/parser.y"
++       {
++   (yyval.literal) = jv_string("end");
++ }
++-#line 3738 "src/parser.c"
+++#line 3728 "src/parser.c"
++     break;
++ 
++   case 147: /* Keyword: "and"  */
++-#line 868 "src/parser.y"
+++#line 858 "src/parser.y"
++       {
++   (yyval.literal) = jv_string("and");
++ }
++-#line 3746 "src/parser.c"
+++#line 3736 "src/parser.c"
++     break;
++ 
++   case 148: /* Keyword: "or"  */
++-#line 871 "src/parser.y"
+++#line 861 "src/parser.y"
++      {
++   (yyval.literal) = jv_string("or");
++ }
++-#line 3754 "src/parser.c"
+++#line 3744 "src/parser.c"
++     break;
++ 
++   case 149: /* Keyword: "try"  */
++-#line 874 "src/parser.y"
+++#line 864 "src/parser.y"
++       {
++   (yyval.literal) = jv_string("try");
++ }
++-#line 3762 "src/parser.c"
+++#line 3752 "src/parser.c"
++     break;
++ 
++   case 150: /* Keyword: "catch"  */
++-#line 877 "src/parser.y"
+++#line 867 "src/parser.y"
++         {
++   (yyval.literal) = jv_string("catch");
++ }
++-#line 3770 "src/parser.c"
+++#line 3760 "src/parser.c"
++     break;
++ 
++   case 151: /* Keyword: "label"  */
++-#line 880 "src/parser.y"
+++#line 870 "src/parser.y"
++         {
++   (yyval.literal) = jv_string("label");
++ }
++-#line 3778 "src/parser.c"
+++#line 3768 "src/parser.c"
++     break;
++ 
++   case 152: /* Keyword: "break"  */
++-#line 883 "src/parser.y"
+++#line 873 "src/parser.y"
++         {
++   (yyval.literal) = jv_string("break");
++ }
++-#line 3786 "src/parser.c"
+++#line 3776 "src/parser.c"
++     break;
++ 
++   case 153: /* DictPairs: %empty  */
++-#line 889 "src/parser.y"
+++#line 879 "src/parser.y"
++        {
++   (yyval.blk) = gen_noop();
++ }
++-#line 3794 "src/parser.c"
+++#line 3784 "src/parser.c"
++     break;
++ 
++   case 154: /* DictPairs: DictPair  */
++-#line 892 "src/parser.y"
+++#line 882 "src/parser.y"
++          {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3802 "src/parser.c"
+++#line 3792 "src/parser.c"
++     break;
++ 
++   case 155: /* DictPairs: DictPair ',' DictPairs  */
++-#line 895 "src/parser.y"
+++#line 885 "src/parser.y"
++                        {
++   (yyval.blk) = block_join((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3810 "src/parser.c"
+++#line 3800 "src/parser.c"
++     break;
++ 
++   case 156: /* DictPair: IDENT ':' DictExpr  */
++-#line 900 "src/parser.y"
+++#line 890 "src/parser.y"
++                    {
++   (yyval.blk) = gen_dictpair(gen_const((yyvsp[-2].literal)), (yyvsp[0].blk));
++ }
++-#line 3818 "src/parser.c"
+++#line 3808 "src/parser.c"
++     break;
++ 
++   case 157: /* DictPair: Keyword ':' DictExpr  */
++-#line 903 "src/parser.y"
+++#line 893 "src/parser.y"
++                      {
++   (yyval.blk) = gen_dictpair(gen_const((yyvsp[-2].literal)), (yyvsp[0].blk));
++ }
++-#line 3826 "src/parser.c"
+++#line 3816 "src/parser.c"
++     break;
++ 
++   case 158: /* DictPair: String ':' DictExpr  */
++-#line 906 "src/parser.y"
+++#line 896 "src/parser.y"
++                     {
++   (yyval.blk) = gen_dictpair((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3834 "src/parser.c"
+++#line 3824 "src/parser.c"
++     break;
++ 
++   case 159: /* DictPair: String  */
++-#line 909 "src/parser.y"
+++#line 899 "src/parser.y"
++        {
++   (yyval.blk) = gen_dictpair((yyvsp[0].blk), BLOCK(gen_op_simple(POP), gen_op_simple(DUP2),
++                               gen_op_simple(DUP2), gen_op_simple(INDEX)));
++ }
++-#line 3843 "src/parser.c"
+++#line 3833 "src/parser.c"
++     break;
++ 
++   case 160: /* DictPair: BINDING ':' DictExpr  */
++-#line 913 "src/parser.y"
+++#line 903 "src/parser.y"
++                      {
++   (yyval.blk) = gen_dictpair(gen_location((yyloc), locations, gen_op_unbound(LOADV, jv_string_value((yyvsp[-2].literal)))),
++                     (yyvsp[0].blk));
++   jv_free((yyvsp[-2].literal));
++ }
++-#line 3853 "src/parser.c"
+++#line 3843 "src/parser.c"
++     break;
++ 
++   case 161: /* DictPair: BINDING  */
++-#line 918 "src/parser.y"
+++#line 908 "src/parser.y"
++         {
++   (yyval.blk) = gen_dictpair(gen_const((yyvsp[0].literal)),
++                     gen_location((yyloc), locations, gen_op_unbound(LOADV, jv_string_value((yyvsp[0].literal)))));
++ }
++-#line 3862 "src/parser.c"
+++#line 3852 "src/parser.c"
++     break;
++ 
++   case 162: /* DictPair: IDENT  */
++-#line 922 "src/parser.y"
+++#line 912 "src/parser.y"
++       {
++   (yyval.blk) = gen_dictpair(gen_const(jv_copy((yyvsp[0].literal))),
++                     gen_index(gen_noop(), gen_const((yyvsp[0].literal))));
++ }
++-#line 3871 "src/parser.c"
+++#line 3861 "src/parser.c"
++     break;
++ 
++   case 163: /* DictPair: "$__loc__"  */
++-#line 926 "src/parser.y"
+++#line 916 "src/parser.y"
++            {
++   (yyval.blk) = gen_dictpair(gen_const(jv_string("__loc__")),
++                     gen_loc_object(&(yyloc), locations));
++ }
++-#line 3880 "src/parser.c"
+++#line 3870 "src/parser.c"
++     break;
++ 
++   case 164: /* DictPair: Keyword  */
++-#line 930 "src/parser.y"
+++#line 920 "src/parser.y"
++         {
++   (yyval.blk) = gen_dictpair(gen_const(jv_copy((yyvsp[0].literal))),
++                     gen_index(gen_noop(), gen_const((yyvsp[0].literal))));
++ }
++-#line 3889 "src/parser.c"
+++#line 3879 "src/parser.c"
++     break;
++ 
++   case 165: /* DictPair: '(' Query ')' ':' DictExpr  */
++-#line 934 "src/parser.y"
+++#line 924 "src/parser.y"
++                            {
++   jv msg = check_object_key((yyvsp[-3].blk));
++   if (jv_is_valid(msg)) {
++@@ -3898,36 +3888,36 @@ yyreduce:
++   jv_free(msg);
++   (yyval.blk) = gen_dictpair((yyvsp[-3].blk), (yyvsp[0].blk));
++ }
++-#line 3902 "src/parser.c"
+++#line 3892 "src/parser.c"
++     break;
++ 
++   case 166: /* DictPair: error ':' DictExpr  */
++-#line 942 "src/parser.y"
+++#line 932 "src/parser.y"
++                    {
++   FAIL((yylsp[-2]), "May need parentheses around object key expression");
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3911 "src/parser.c"
+++#line 3901 "src/parser.c"
++     break;
++ 
++   case 167: /* DictExpr: DictExpr '|' DictExpr  */
++-#line 948 "src/parser.y"
+++#line 938 "src/parser.y"
++                       {
++   (yyval.blk) = block_join((yyvsp[-2].blk), (yyvsp[0].blk));
++ }
++-#line 3919 "src/parser.c"
+++#line 3909 "src/parser.c"
++     break;
++ 
++   case 168: /* DictExpr: Expr  */
++-#line 951 "src/parser.y"
+++#line 941 "src/parser.y"
++      {
++   (yyval.blk) = (yyvsp[0].blk);
++ }
++-#line 3927 "src/parser.c"
+++#line 3917 "src/parser.c"
++     break;
++ 
++ 
++-#line 3931 "src/parser.c"
+++#line 3921 "src/parser.c"
++ 
++       default: break;
++     }
++@@ -4156,7 +4146,7 @@ yyreturnlab:
++   return yyresult;
++ }
++ 
++-#line 954 "src/parser.y"
+++#line 944 "src/parser.y"
++ 
++ 
++ int jq_parse(struct locfile* locations, block* answer) {
++diff --git a/src/parser.y b/src/parser.y
++index bc9803f..d587ea2 100644
++--- a/src/parser.y
+++++ b/src/parser.y
++@@ -439,26 +439,16 @@ ImportWhat Query ';' {
++ 
++ ImportWhat:
++ "import" ImportFrom "as" BINDING {
++-  jv v = block_const($2);
++-  // XXX Make gen_import take only blocks and the int is_data so we
++-  // don't have to free so much stuff here
++-  $$ = gen_import(jv_string_value(v), jv_string_value($4), 1);
+++  $$ = gen_import(block_const($2), $4, 1);
++   block_free($2);
++-  jv_free($4);
++-  jv_free(v);
++ } |
++ "import" ImportFrom "as" IDENT {
++-  jv v = block_const($2);
++-  $$ = gen_import(jv_string_value(v), jv_string_value($4), 0);
+++  $$ = gen_import(block_const($2), $4, 0);
++   block_free($2);
++-  jv_free($4);
++-  jv_free(v);
++ } |
++ "include" ImportFrom {
++-  jv v = block_const($2);
++-  $$ = gen_import(jv_string_value(v), NULL, 0);
+++  $$ = gen_import(block_const($2), jv_invalid(), 0);
++   block_free($2);
++-  jv_free(v);
++ }
++ 
++ ImportFrom:
++diff --git a/tests/shtest b/tests/shtest
++index 4b75187..5d47f49 100755
++--- a/tests/shtest
+++++ b/tests/shtest
++@@ -878,4 +878,21 @@ if echo '42' | $JQ -f "$d/nul_prog.jq" >/dev/null 2>/dev/null; then
++   exit 1
++ fi
++ 
+++# CVE-2026-43895: No NUL bytes in module/data import paths
+++printf 'import "a\\u0000b" as $x; .' > "$d/nul_import.jq"
+++if $JQ -nf "$d/nul_import.jq" >/dev/null 2>/dev/null; then
+++  printf 'Error expected for import path with NUL bytes\n' 1>&2
+++  exit 1
+++fi
+++printf 'include "a\\u0000b"; .' > "$d/nul_include.jq"
+++if $JQ -nf "$d/nul_include.jq" >/dev/null 2>/dev/null; then
+++  printf 'Error expected for include path with NUL bytes\n' 1>&2
+++  exit 1
+++fi
+++printf '"a\\u0000b" | modulemeta' > "$d/nul_modulemeta.jq"
+++if $JQ -nf "$d/nul_modulemeta.jq" >/dev/null 2>/dev/null; then
+++  printf 'Error expected for modulemeta with NUL bytes\n' 1>&2
+++  exit 1
+++fi
+++
++ exit 0
 +-- 
 +2.53.0
 +
 diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-index 4bf8292ac0..b213e21c57 100644
+index 7585d0c5f9..18a7093885 100644
 --- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
 +++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+            file://CVE-2026-43894.patch \
+            file://CVE-2026-43896.patch \
             file://CVE-2026-44777.patch \
-            file://CVE-2026-43895.patch \
-            file://CVE-2026-49839.patch \
-+           file://CVE-2026-54679.patch \
++           file://CVE-2026-43895.patch \
             "
  
  inherit autotools ptest
