@@ -1,289 +1,195 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F082BC44520
-	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 16:10:31 +0000 (UTC)
-Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1127.1784563823392966863
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74896C44520
+	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 16:43:23 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1610.1784565037673268806
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 09:10:23 -0700
+ Mon, 20 Jul 2026 09:30:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YsNYkay8;
- spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-667f1390f58so7484798d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 09:10:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784563822; cv=none;
-        d=google.com; s=arc-20260327;
-        b=TqwnK6lA+sKH4DsTyGxXHU4tpi/COxhO2L+b/6QOK+1skpwk6AN+DpkAdXWNjurwsf
-         R614ClvsAsoSBvqoEplIxkEyKXbAMBdQPeM3jQdCE0qnnD/urGq7K5q344SXXWE1ED+M
-         P4HrDQyh7lq/WPLSMi5obW/b86PEnEpB7vZCHYVyw0O6VbcUjZiQYoV69FXXXR1Vyryr
-         l0fdowsuwnrcQvBO/LMlXzf8Euh/QddyVa6dqwlFUsn3qCIIfakTckwhbVESmv1qOMEz
-         xUXg4jtUrUe9xb08hZhbtz19BtYCpSJf6ob/cAoA0k98Mckp8IIF+1CZ4PoahgRe5wru
-         /BVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=tyvupXrZKuo1QgVyMLF8amrwjcjW6QUngm1VL91cAq0=;
-        fh=TlRTNirvdGFngn9XZXZ2e7y2XhIk2EE7NaI4LL7rUEo=;
-        b=pxyfIWNYkwOB5qZjnj2q9ofX5SHjKdx+Ftd/D0oO1nu+Wi1MdWoQGub1Iq6LbQbZf9
-         jef2xqEighAEv2QjWFlTQpmW2GzkNh8ZPZyFlHdC9MNi8BEdDSr7U4JqaVhvAEgrbYmq
-         CBN5gbRNn1b//UDQlwY48jPK0WYlYsrFjdIZLWEnRnshEaVJ6wsvP1M5cLsUWgQENPDD
-         bVcvqHE/0vzfug+tK6m0NB9rVX7hIIyYRc/gqRy8H8sUsNOFRqwrLTRWV0CNjIXcJN62
-         VSPqgGlG97UkquVAUbWD0Vxuv5rFKXHMRlnhMjZgflYn2K6EMSTanc++QDKMVO38cRez
-         WYbw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=o/nZ1UQi;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-ca965de53baso3753848a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 09:30:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784563822; x=1785168622; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1784565037; x=1785169837; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tyvupXrZKuo1QgVyMLF8amrwjcjW6QUngm1VL91cAq0=;
-        b=YsNYkay80vSxS+vVy9UY7+C3kDVRXJtpy8wmq9DY9pNpmZlMG21wZ9P1gRUYMQ9lc5
-         gnfM9u5nX0kGExgGRTyCnapLoO59bRE4zpzo8Pbeky2yirbZPCHiK2VyYD5fJshvPSZu
-         TDeJj7c4f1DX/ycTh2AiSPV2mUZOrWmCe129/BgSSIbS9OrGMYb8PyM9vkVrTHlIh+rU
-         3bdTRMOLl3D+pwZemjSQCI7ZDysW+VLe1IG3NMg2ivrjOFO7hR/SwD7RDyd/iYduiE+W
-         d6OoC5qYt+nwn+8pQkV7MN2sMktSsPvibYGon8GoMWlSsPpbu/HuMIzw5TyEVKC/oD24
-         c3mw==
+        bh=l8V3oc6D0XR9+Flc251ZOZVV6ApzxFWuTVqnncjY4XI=;
+        b=o/nZ1UQi6HvYfbVf/SfgZyz/FIOJGX1tUgqQmw1DOJice4duDrPqkN42p+mPAzUbC7
+         ldH+xY9zhUHF3rE+7TP0i2VRbbUashhgyBdLdaqqGOwAsdxDtiO5+3pqTJhuyKjUO/hm
+         xZuoXJujS4km5jyUccl7gyZtX6PJcK30JdinCPf44Wp2wYKuAQryL/ASTYxGP6Huzunf
+         OLTZ9qGuRKLPz7a4ZIAH8xDQzyRjGXyPswHZH3ZCth8lCGNfGcRzIGxVe2S+uxW+K60i
+         5+IraWh6RHGCkJDpKdulFbVliw51luT4p+/13TKd8GxgLQnlh1KeULgMMQ24BtrBh+Yn
+         ZmSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784563822; x=1785168622;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=tyvupXrZKuo1QgVyMLF8amrwjcjW6QUngm1VL91cAq0=;
-        b=CEH96xHaHs87+SgsZmkxmatZnpDZ+V6VbB6zbDME6MVM+FSR7cmP78Q+bfUPU4E4ia
-         7W9qUlOpdG4FgTRLCdZgeFtwuwaWDTka9yXVjFF2/UnUzWIyixQhyxulbtJsp/bIwgKN
-         ShRr0JTdI6ZyFyGBeVV3/HCtyaAYtbdNOqSGmA5Ibfg3WO/vyYtOBnkIbF/vjgI/rA+c
-         TjQAikyZvEUxI07/aNf3wVd76uQ2/cGHznz3L3rxlOHLM4nct3ijGzOF0wV2zxYwRjAN
-         SZIfyYnkKAcB4o0QpeN0yxlJWFnwstyUOrNQLiIa5qrf/rH5FR0sEC1cgdthTNz623eV
-         RetQ==
-X-Gm-Message-State: AOJu0YzGAMB/09LaJhp1F1+aWdTaIhJtuJeOhKOAF+iPyXqzKrtCTQgz
-	oc7TBqBCZwsA3BuQ17pQM+A6xyAU6kiAuojW9H4vW+oPU0BEZMbiWLVA1pGryF3AUA5jDUwf0Z5
-	qaQ206ocMYHhMZiKEcQjkXcK4aXSgCvU=
-X-Gm-Gg: AR+sD134RPdk59KY7VevUgExwiTwIBC1wpFhERcAWyxsOf5ZwZS8J1Ydu2ZnXmO/fQB
-	NDB3TvpFimssPC/cwCaEcZGIKUwx1u/ut79Ms7AT5pBAaUiem3aHjjuyMh3bLQD1ivpFLgyrTYw
-	aQMH31ExSH2u1TBjvd6UvFjbwwY+hLaHQ9f6XIeQZmUT265wMkV74VOeVLBw+yH7+juiT+PljG/
-	1z9aB4ZWP4Eyr8Pl4b0gUzrDTNTVDtmkcBa9xkg27drHJ865Kj9lWKycHiG5I+YZaLA9Z1pV84D
-	NYnfd1Zf/3Fkt6IdeM2dE1HLiSWF5q6deic/ejdBaI3ZpbjTQ+JG7hOGyIXSAh4boOS+BjSPbhf
-	tJEttCimeEtTxaLcDXSTkCrT/H+lbVT3anAAkhvIjdnr2iIllyN/XRwK4pW6pGnBYAd2kLQ==
-X-Received: by 2002:a05:690c:4c0b:b0:81c:f1f1:134 with SMTP id
- 00721157ae682-81ef27eba7fmr49474677b3.39.1784563822328; Mon, 20 Jul 2026
- 09:10:22 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784565037; x=1785169837;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=l8V3oc6D0XR9+Flc251ZOZVV6ApzxFWuTVqnncjY4XI=;
+        b=enFScUSPF8JKo4Tl8TTHb0tn7iQTjWymFcWwC1moG+rx/sBMGECrnbeiDFJo4HSeAf
+         G8TTkfij5Vvoutr4id6HXZJh3JMaVHpmv0RP1Feua5ZGpexRjzoh0cKwNrVLKm+sFhpC
+         GOSzHnGywrTubPigUn5eu4ofAAmpAiGqLV+Zdk9Y5qTXy42L+iEVWxYbOnzg+SiswxjJ
+         ohxNdojxwGIOv/7nF0kSgi58QpbDacTxJHnXQeHuB1D3xH201frZ0arSZPzu0cuuE4hO
+         /4HNFifqr0ZyAAaMZgMmtNZxe3k7daNG8FwBJ4Na9cc6yQ3d2mCjf+IgjZ2hG8tema3I
+         7snQ==
+X-Gm-Message-State: AOJu0YyDqE1jY21PT1gvN/oa4FJT+yfdvjIAhOWbh4sZ6YfakkRILN9M
+	0+88mQLidod8cqmB39Jazbfs4CuJElEM/YsQOw/v/Yu7az3s9+NIXLKWnA7+rA==
+X-Gm-Gg: AfdE7cmUOG3AuXh0fUDyDWRM7VMaVcJh/5ll6JInHbFSJ6oRViaPg2oFr0Icant8vMK
+	KJ+aXAUQfR5wjUfXdfq48N2ycr1myGNr1CERrcKd/wMDFBKJBYYtljxLgzutiZj2I1JhiZyLMFt
+	ae5mwfzcpuJ9uDI3QsIne0FGgqpXm9T8tvwwE2VUh/j5NhjevKL07ZgpE3rP2ueHBS9S35Mcauo
+	WlEpRg47Kvu+ubWkyyvms99zTSPviQ8zKBr0xzKMAgW5AZXPnZufZ+lG8H00xjn6k7HU73DK3wQ
+	I9geez+l+zHFu8EQxCZCHvMSA5K5BoFUieNSWiSCSx8vMxcLowH49GognqjShnYjPyRIc75LY8t
+	sWvQ1/PJtQyjGXWzfEMxCDOsa7Djquau2zra9aKzHtkejS+rh0DZoKvfHttUEgr4F7OhBky6lSX
+	LLlwjhHqVTf1eUXApti6u/47k=
+X-Received: by 2002:a05:6a21:a60e:b0:3c3:bd7f:ed3d with SMTP id adf61e73a8af0-3c3bd7feeffmr9082327637.31.1784565036747;
+        Mon, 20 Jul 2026 09:30:36 -0700 (PDT)
+Received: from thuannt-Z87M-D3H.. ([42.113.218.129])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429f9bcccsm43364429eec.4.2026.07.20.09.30.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 09:30:36 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Thu=E1=BA=ADn=20Nguy=E1=BB=85n-Th=C3=A1i?= <nguyenthaithuanalg@gmail.com>
+Subject: [PATCH v2 1/2] libsimplelog: add binary log feature and cache hit/miss support
+Date: Mon, 20 Jul 2026 23:30:29 +0700
+Message-ID: <20260720163030.7247-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260720160226.6848-1-nguyenthaithuanalg@gmail.com>
-In-Reply-To: <20260720160226.6848-1-nguyenthaithuanalg@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Jul 2026 09:10:10 -0700
-X-Gm-Features: AUfX_mzOkl_SxXjT-IOSYe0yEfD3Ew-tOzt8h0xcCTLuucvVFmvJ5uTKQgXoqxU
-Message-ID: <CAMKF1spHwV9MZmibpVg=qt2V2QLw-MJUCp4uT+fjioj1yJcoNg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libsimplelog: upgrade 1.0.8 -> 1.1.0
-To: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000b582bf06570d2401"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:10:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128281
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:43:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128282
 
---000000000000b582bf06570d2401
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Introduce a new binary log feature based on UTF-8 encoding patterns
+to optimize logging capabilities.
 
-Second patch in this series needs similar fix. Please rework that as well
-and send v2
+Add cache hit and miss tracking mechanism to monitor performance
+effectiveness.
 
-On Mon, Jul 20, 2026, 9:06=E2=80=AFAM Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=A1=
-i via lists.openembedded.org
-<nguyenthaithuanalg=3Dgmail.com@lists.openembedded.org> wrote:
+Signed-off-by: Thuận Nguyễn-Thái <nguyenthaithuanalg@gmail.com>
+---
+ .../0001-allow-build-with-cmake-4.patch       | 40 -------------------
+ .../libsimplelog/libsimplelog_1.0.8.bb        | 18 ---------
+ .../libsimplelog/libsimplelog_1.1.0.bb        | 29 ++++++++++++++
+ 3 files changed, 29 insertions(+), 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libsimplelog/libsimplelog/0001-allow-build-with-cmake-4.patch
+ delete mode 100644 meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.8.bb
+ create mode 100644 meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
 
-> Add note to answer from meta-openembedded maintainer: Khem Raj
->
-> And explain -D__LINUX__=3D1, -D_GNU_SOURCE=3D1 and musl (strictly POSIX)
->
-> Signed-off-by: Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=A1i <nguyenthaithuanalg=
-@gmail.com>
-> ---
->  .../libsimplelog/libsimplelog_1.1.0.bb           | 16 +++++++++++++---
->  1 file changed, 13 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
-> b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
-> index 53c13d726b..7a385d537b 100644
-> --- a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
-> +++ b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
-> @@ -3,17 +3,27 @@ SUMMARY =3D "simplelog-topc - Simple, STABLE, powerful =
-of
-> logging library in ANSI
->  DESCRIPTION =3D "Async and Fast C/C++ multi-thread logger with topics. N=
-o
-> external dependencies."
->  HOMEPAGE =3D "https://github.com/thuanalg/simplelog-topic"
->  LICENSE =3D "MIT"
-> +#The checksum of "LIC_FILES_CHKSUM" changed b/c I did change from "2024"
-> to "2024-2026"
-> +#libsimplelog  is allways full "MIT license".
->  LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3D594fdc3cb85f0b684cf5d7b332a741be"
->
->  SRC_URI =3D "git://
-> github.com/thuanalg/simplelog-topic.git;branch=3Dmain;protocol=3Dhttps;ta=
-g=3Dv${PV}
-> <http://github.com/thuanalg/simplelog-topic.git;branch=3Dmain;protocol=3D=
-https;tag=3Dv$%7BPV%7D>
-> "
->
->  SRCREV =3D "151e83902ca9755bcd285791d2f49de6fc30bfe6"
->
-> -S =3D "${WORKDIR}/git"
-> -
->  inherit cmake
->
-> -# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
->  EXTRA_OECMAKE +=3D "-DUNIX_LINUX=3D1 -D__LINUX__=3D1 -D_GNU_SOURCE=3D1"
->
-> +# From v.1.0.8 -> v1.1.0
-> +# Note for -D__LINUX__=3D1 -D_GNU_SOURCE=3D1
-> +# If don't use these flags, v.1.1.0 works like v1.0.8, and well adapt
-> with musl (strictly POSIX)
-> +# If use 2 flags, they helps the source is more effective. Please test
-> for 2 cases, you will see.
-> +# Please check "p->r =3D sched_getcpu();" in "simplelog.c"
-> +# You can use as below without any problem
-> +# EXTRA_OECMAKE +=3D "-DUNIX_LINUX=3D1"
-> +
-> +# Drop 0001-allow-build-with-cmake-4.patch as it is now integrated
-> upstream.
-> +# Please see branch "main", commit
-> "4827c4325063266f6d2a7e133a9d3a9050ff6a3c" by
-> +# Author: Alper Ak <alperyasinak1@gmail.com>
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#128280):
-> https://lists.openembedded.org/g/openembedded-devel/message/128280
-> Mute This Topic: https://lists.openembedded.org/mt/120361632/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-support/libsimplelog/libsimplelog/0001-allow-build-with-cmake-4.patch
+deleted file mode 100644
+index 17adf92bb0..0000000000
+--- a/meta-oe/recipes-support/libsimplelog/libsimplelog/0001-allow-build-with-cmake-4.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 77be1b3e7d6ff4261114424278413a679672bb92 Mon Sep 17 00:00:00 2001
+-From: Alper Ak <alperyasinak1@gmail.com>
+-Date: Wed, 9 Jul 2025 12:10:37 +0300
+-Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
+- compatibility
+-
+-Fix:
+-
+-| CMake Error in CMakeLists.txt:
+-|   No cmake_minimum_required command is present.  A line of code such as
+-|
+-|     cmake_minimum_required(VERSION 4.0)
+-|
+-|   should be added at the top of the file.  The version specified may be lower
+-|   if you wish to support older CMake versions for this project.  For more
+-|   information run "cmake --help-policy CMP0000".
+-|
+-|
+-| -- Configuring incomplete, errors occurred!
+-
+-Upstream-Status: Submitted [https://github.com/thuanalg/simplelog-topic/pull/1]
+-
+-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+----
+- CMakeLists.txt | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index dca80f1..0fc6db0 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -1,3 +1,5 @@
+-+cmake_minimum_required(VERSION 3.5)
+-+
+- # Add main.cpp file of the project root directory as a source file
+- project(simplelog_topic_project)
+- set(SOURCE_LIB_FILES src/simplelog.c )
+--- 
+-2.43.0
+-
+diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.8.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.8.bb
+deleted file mode 100644
+index 41b9d47686..0000000000
+--- a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.8.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-
+-SUMMARY = "simplelog-topc - Simple, STABLE, powerful of logging library in ANSI C/C++. Ready for billion records."
+-DESCRIPTION = "Async and Fast C/C++ multi-thread logger with topics. No external dependencies."
+-HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
+-
+-SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https;tag=v${PV} \
+-        file://0001-allow-build-with-cmake-4.patch"
+-
+-SRCREV = "093d80b4006042b75a433a5e63760ae9bebad142"
+-
+-inherit cmake
+-
+-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
+-EXTRA_OECMAKE += "-DUNIX_LINUX=1"
+-
+-
+diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
+new file mode 100644
+index 0000000000..7a385d537b
+--- /dev/null
++++ b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.1.0.bb
+@@ -0,0 +1,29 @@
++
++SUMMARY = "simplelog-topc - Simple, STABLE, powerful of logging library in ANSI C/C++. Ready for billion records."
++DESCRIPTION = "Async and Fast C/C++ multi-thread logger with topics. No external dependencies."
++HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
++LICENSE = "MIT"
++#The checksum of "LIC_FILES_CHKSUM" changed b/c I did change from "2024" to "2024-2026"
++#libsimplelog  is allways full "MIT license".
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=594fdc3cb85f0b684cf5d7b332a741be"
++
++SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https;tag=v${PV}"
++
++SRCREV = "151e83902ca9755bcd285791d2f49de6fc30bfe6"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DUNIX_LINUX=1 -D__LINUX__=1 -D_GNU_SOURCE=1"
++
++# From v.1.0.8 -> v1.1.0
++# Note for -D__LINUX__=1 -D_GNU_SOURCE=1
++# If don't use these flags, v.1.1.0 works like v1.0.8, and well adapt with musl (strictly POSIX)
++# If use 2 flags, they helps the source is more effective. Please test for 2 cases, you will see.
++# Please check "p->r = sched_getcpu();" in "simplelog.c"
++# You can use as below without any problem
++# EXTRA_OECMAKE += "-DUNIX_LINUX=1"
++
++# Drop 0001-allow-build-with-cmake-4.patch as it is now integrated upstream. 
++# Please see branch "main", commit "4827c4325063266f6d2a7e133a9d3a9050ff6a3c" by 
++# Author: Alper Ak <alperyasinak1@gmail.com>
++
+-- 
+2.43.0
 
---000000000000b582bf06570d2401
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">Second patch in this series needs similar fix. Please rew=
-ork that as well and send v2=C2=A0</div><br><div class=3D"gmail_quote gmail=
-_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jul 20, 202=
-6, 9:06=E2=80=AFAM Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=A1i via <a href=3D"ht=
-tp://lists.openembedded.org">lists.openembedded.org</a> &lt;nguyenthaithuan=
-alg=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.o=
-penembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex">Add note to answer from meta-openembedded maintainer: Khem R=
-aj<br>
-<br>
-And explain -D__LINUX__=3D1, -D_GNU_SOURCE=3D1 and musl (strictly POSIX)<br=
->
-<br>
-Signed-off-by: Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=A1i &lt;<a href=3D"mailto=
-:nguyenthaithuanalg@gmail.com" target=3D"_blank" rel=3D"noreferrer">nguyent=
-haithuanalg@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../libsimplelog/<a href=3D"http://libsimplelog_1.1.0.bb" rel=3D"nore=
-ferrer noreferrer" target=3D"_blank">libsimplelog_1.1.0.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0| 16 +++++++++++++---<br>
-=C2=A01 file changed, 13 insertions(+), 3 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-support/libsimplelog/<a href=3D"http://libsimp=
-lelog_1.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libsimplelo=
-g_1.1.0.bb</a> b/meta-oe/recipes-support/libsimplelog/<a href=3D"http://lib=
-simplelog_1.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libsimp=
-lelog_1.1.0.bb</a><br>
-index 53c13d726b..7a385d537b 100644<br>
---- a/meta-oe/recipes-support/libsimplelog/<a href=3D"http://libsimplelog_1=
-.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libsimplelog_1.1.0=
-.bb</a><br>
-+++ b/meta-oe/recipes-support/libsimplelog/<a href=3D"http://libsimplelog_1=
-.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">libsimplelog_1.1.0=
-.bb</a><br>
-@@ -3,17 +3,27 @@ SUMMARY =3D &quot;simplelog-topc - Simple, STABLE, powerf=
-ul of logging library in ANSI<br>
-=C2=A0DESCRIPTION =3D &quot;Async and Fast C/C++ multi-thread logger with t=
-opics. No external dependencies.&quot;<br>
-=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://github.com/thuanalg/simplelog-t=
-opic" rel=3D"noreferrer noreferrer" target=3D"_blank">https://github.com/th=
-uanalg/simplelog-topic</a>&quot;<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
-+#The checksum of &quot;LIC_FILES_CHKSUM&quot; changed b/c I did change fro=
-m &quot;2024&quot; to &quot;2024-2026&quot;<br>
-+#libsimplelog=C2=A0 is allways full &quot;MIT license&quot;.<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3D594fdc3cb85f0b684=
-cf5d7b332a741be&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/thuanalg/simplel=
-og-topic.git;branch=3Dmain;protocol=3Dhttps;tag=3Dv$%7BPV%7D" rel=3D"norefe=
-rrer noreferrer" target=3D"_blank">github.com/thuanalg/simplelog-topic.git;=
-branch=3Dmain;protocol=3Dhttps;tag=3Dv${PV}</a>&quot;<br>
-<br>
-=C2=A0SRCREV =3D &quot;151e83902ca9755bcd285791d2f49de6fc30bfe6&quot;<br>
-<br>
--S =3D &quot;${WORKDIR}/git&quot;<br>
--<br>
-=C2=A0inherit cmake<br>
-<br>
--# Specify any options you want to pass to cmake using EXTRA_OECMAKE:<br>
-=C2=A0EXTRA_OECMAKE +=3D &quot;-DUNIX_LINUX=3D1 -D__LINUX__=3D1 -D_GNU_SOUR=
-CE=3D1&quot;<br>
-<br>
-+# From v.1.0.8 -&gt; v1.1.0<br>
-+# Note for -D__LINUX__=3D1 -D_GNU_SOURCE=3D1<br>
-+# If don&#39;t use these flags, v.1.1.0 works like v1.0.8, and well adapt =
-with musl (strictly POSIX)<br>
-+# If use 2 flags, they helps the source is more effective. Please test for=
- 2 cases, you will see.<br>
-+# Please check &quot;p-&gt;r =3D sched_getcpu();&quot; in &quot;simplelog.=
-c&quot;<br>
-+# You can use as below without any problem<br>
-+# EXTRA_OECMAKE +=3D &quot;-DUNIX_LINUX=3D1&quot;<br>
-+<br>
-+# Drop 0001-allow-build-with-cmake-4.patch as it is now integrated upstrea=
-m. <br>
-+# Please see branch &quot;main&quot;, commit &quot;4827c4325063266f6d2a7e1=
-33a9d3a9050ff6a3c&quot; by <br>
-+# Author: Alper Ak &lt;<a href=3D"mailto:alperyasinak1@gmail.com" target=
-=3D"_blank" rel=3D"noreferrer">alperyasinak1@gmail.com</a>&gt;<br>
-<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128280): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128280" rel=3D"noreferrer noreferrer" target=3D"_b=
-lank">https://lists.openembedded.org/g/openembedded-devel/message/128280</a=
-><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120361632/199=
-7914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/mt/120361632/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
-openembedded.org</a><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
-mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmai=
-l.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000b582bf06570d2401--
 
