@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B623CC44515
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D05EFC44520
 	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 23:39:01 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11405.1784590740524978083
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11400.1784590735057463578
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 16:39:00 -0700
+ Mon, 20 Jul 2026 16:38:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BqnGYXDn;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-384930ca5e2so9961054a91.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:39:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=MCsPeOfu;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2cad4170e8eso148643065ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:38:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784590740; x=1785195540; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1784590734; x=1785195534; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zIzYe7LNy4B96ufGP8IvZ397WuDrGYAjGqLQURJE+e8=;
-        b=BqnGYXDnjq3QMI576hOUVKFIlAG7/hOVu4REjaEfh/OF7eHKSO7EYuqC9qSiDBghtS
-         zlmmL01uDNG2Wt6Th6D3MdV8C5Zzol23WCvphPIqzA15EXBhekArah0vmCrrVAC9ktqE
-         M1Wz4SODBYIT3oK8/NdY0kV566px18vKQ5/gxI96i8VvsQEpH1Z+gvcBqjLzIDGsN1Bp
-         0yBHrp5Zn0FajX/mstLvPBS8fi9p21f3aJSYZKaTjVgA3ItU4sUs7Nt3+YNviQA1mV8F
-         NmXXZ+u27GcKcY0/nBodih1MHNj2lK6PlETtfiRSI631YB022nNu18zAHIs29Q0WQEA0
-         wujw==
+        bh=InUuMlfrQAjFAKMQJcoYJ9lBV5CcRQ65enJ7nPPCAsI=;
+        b=MCsPeOfuUxtmvVnys7RuDV/Xf/FAKAqHYzYoLvgRGDCSkRnor0Ie1im1RI+OEOPiLN
+         27OW0HiN3WMFsSJG+upNNfP4sYHv0M/nbFx/56QfuMeAuchl0Ore8Axvmhl3isC0yd04
+         NaUFz1BNmUDgvBL236usbKd1tdVqQDdsyfrLHVsc1SEIvsQQBCCDPdwKf53z8mTZWPsH
+         prWH/IZO3ZD2riBjM0e10xnMl18gUEkJtF5mUMNc9igA7g+dVT6LBUWfOXluvdpKkKDy
+         37A94GBmSwOvFF654N9KWG4lMr+q1KljEodbce3nQjII4719yqaEYumoLNM1owbYaSxo
+         FjTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784590740; x=1785195540;
+        d=1e100.net; s=20251104; t=1784590734; x=1785195534;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zIzYe7LNy4B96ufGP8IvZ397WuDrGYAjGqLQURJE+e8=;
-        b=Hl7u8AcB/laHCIetlXz2lVjjSofPD6eKnA2OVqQNBsQE8sKxO2zHGjcRpyM7cYRd0J
-         nE/suApn+go4GtVY91oxWs4Z73PCjIkkD/QHp5VDy6HBvliIDT/FZto376SFhj+WfK/f
-         im7pOeuboQm2/ac1Y+a0o+QFWHCSTJB1RspBPtkc1dFUPEWF24k48INRoYWzto27oQ+T
-         qEWNkJMtuVPw79QxojvMPaCvctVHRdShQaszvLXGdULMFFf+w+HIeX9ws6mGR/wWDdaT
-         Vt8H+uXusP6oHLXixHX3rdz1Xz1vYSHgYxo5ExIae6vRB6x8qdk6h8/DmcmSiIi6aDY/
-         AqNA==
-X-Gm-Message-State: AOJu0YxaHVQUwniEJ40uGwTTCc6fgNR/8wWGSqyCQcWmBzN+T10NyU8E
-	SKmdnIQW6zVq6ORzXxt4FcSiMv5e1qwaTANcu6Q5t+fQZ4y2ZKx7pU6gQJ5wdQ==
-X-Gm-Gg: AfdE7ckAt1ZQRc0qxsRdTlord/qTrBF2Jl6q+7nWjqLJmQopuVSQlT03JhTrxlo9pAy
-	hxyrscbOHDVfwCpNNNMkr0WRteRK68cywISf2EmPneUBtfnUhm4OetCSSlmAhFBFGUinQrQRwCi
-	bwV8QigjEV8gTdKL2qOSkfykmu40Z8cWMxoH22xNlBTUB+8w4easNIuOyaOM5jmDkDw/9oqLtvX
-	x0ra3ktv72OoBaQfu3qOeMd6h9ktwU8DuFGW2/q4l/ov78SrcCkJEu+Q0T6yXVbdJQkSBX5dBQs
-	LtYXwC8V229uQRXmAzVwuThommmNAk/1DwSkM8ib/uIqnhaS1V6Yf36zOHWazZKibb45kdS6UJG
-	9gJ4Jq5+V4knxeoC56//OWDA6K5KNA0KSH7UNkGvIv4DPd2QH0IHP9IecbPjjfczsTeUIWUxKXr
-	yv+1BzxUXSYJBEBx0=
-X-Received: by 2002:a05:6a21:a87:b0:3c3:a8a4:e71a with SMTP id adf61e73a8af0-3c3ad6035d4mr16732511637.11.1784590739935;
-        Mon, 20 Jul 2026 16:38:59 -0700 (PDT)
+        bh=InUuMlfrQAjFAKMQJcoYJ9lBV5CcRQ65enJ7nPPCAsI=;
+        b=dK1PtYJjD/FbRyHbAxUy7aRmHV+zlej5Ol4030MeB+zoD55ssk3NPiF0gnI1CQnugf
+         9BhUATU4TTacGrZcaz2eC+XNZiyMOKRicbxs2NZ6t1NIIMq08UJvQ22K1XF4hwFq43W2
+         /cccq4BlRaZ2ga6mbuBkc2NsbG8slEmwlA+88NVYtM8PJrZgtWGibJzWcx6HPP7T3Igd
+         tpe+1AVC/dbtExEqPrOzahJnVFZonUJ4RH5FHZvRLA4ak9QXX+tdXcg3gsIVrUV8Y6yA
+         BkxvSHjfHmpV/dB9/1AfElfGjaNFjOyqtXOC8WOzmJ1DvWjg8qCdU/oEqakOt4yUmayV
+         pKGw==
+X-Gm-Message-State: AOJu0Yzus7BPwxJb7ekId3zJYG4bjuHkKtxZnJhnYjz2MinM797AxxPf
+	+a1hemKotp2FejEBL9QlMNyHu5/puoQ/4ZqGu+dgbGXiH6YmMJKS9Bsp9dLlZA==
+X-Gm-Gg: AR+sD135afneGJ6bP+uGMgXRRbMEFCufjqc80p5i/0/IcK1iCanhcG4/uz9plftzv5o
+	lg1dZL8uHEuL3nidmi9hDqEJ+LuHCGsuDgrOBMrpq4Er99PjcbpOavlEu/wxhroTi30FqWoKpQy
+	OqQUb1bZF3VDUBrII259XO8114ZHEO8dooOFYQCn56hFOZ489r3B27HTtbZMTUUOQG8pNVTDY9k
+	O7uiDfYVi+jVluLv+PQ/2Ag5RaVo5KJoT8FdmVMErXicMlG4L1U9CQfCFuU45ACZ9XcK2A2OwjT
+	yqjpw7+j/ug+Fd5eqJGqxAeZoZVbgfLzqTjE/lkL+5xt+nOnF32HEhoGRVADCpZoRTbL7eCaVPI
+	fJomJjXXPP410QNJhb60/ZAvpC94SDcmerrPBgmjO4J3GHsMseQZfTBOKm+5zQR/4092P7MxhEb
+	/FiG5oRcULZYZjjJ8=
+X-Received: by 2002:a17:902:e80e:b0:2cc:9179:32e with SMTP id d9443c01a7336-2cf3481bc46mr176539885ad.10.1784590734420;
+        Mon, 20 Jul 2026 16:38:54 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.38.57
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.38.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 16:38:59 -0700 (PDT)
+        Mon, 20 Jul 2026 16:38:54 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][wrynose][PATCH 14/30] python3-sqlalchemy: upgrade 2.0.49 -> 2.0.50
-Date: Tue, 21 Jul 2026 11:37:55 +1200
-Message-ID: <20260720233811.2324493-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][wrynose][PATCH 12/30] swagger-ui: upgrade 5.32.7 -> 5.32.8
+Date: Tue, 21 Jul 2026 11:37:53 +1200
+Message-ID: <20260720233811.2324493-12-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
 References: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
@@ -69,37 +69,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:39:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128315
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128313
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit c419e48aa35ee108ffc8f333f75815505b3ead73)
+(cherry picked from commit 39399bd1e4cdc3685340e781637632b91a72c66b)
 
 Changelog:
-https://docs.sqlalchemy.org/en/21/changelog/changelog_20.html#change-2.0.50
+https://github.com/swagger-api/swagger-ui/releases/tag/v5.32.8
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...ython3-sqlalchemy_2.0.49.bb => python3-sqlalchemy_2.0.50.bb} | 2 +-
+ .../swagger-ui/{swagger-ui_5.32.7.bb => swagger-ui_5.32.8.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.49.bb => python3-sqlalchemy_2.0.50.bb} (88%)
+ rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.7.bb => swagger-ui_5.32.8.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.49.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.50.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.49.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.50.bb
-index ecc9099e30..aa14e1570b 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.49.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.50.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=53a9111717b305b0fae0d704a24925c3"
+diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.8.bb
+similarity index 94%
+rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb
+rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.8.bb
+index 788a8f5638..cd8b56cc01 100644
+--- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.7.bb
++++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.8.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "d15950a57a210e36dd4cec1aac22787e2a4d57ba9318233e2ef8b2daf9ff2d5f"
-+SRC_URI[sha256sum] = "af5607d11ef90fd6a5c0549fe0045dce1663d427426bcfb506dcb5346a85a3b9"
+ SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
  
- inherit pypi python_setuptools_build_meta cython
+-SRCREV = "bf6a8f05dcde5904cab31e666e80e456a05782f2"
++SRCREV = "4e0d3f88de7db0395a80ef0541ff428f0926d484"
+ 
+ CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
  
 
