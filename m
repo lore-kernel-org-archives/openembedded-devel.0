@@ -1,135 +1,101 @@
-Return-Path: <amery@apptly.co>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C02FC44520
-	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 22:52:21 +0000 (UTC)
-Received: from v523.v5ed9ac7d.euw1.send.eu.mailgun.net (v523.v5ed9ac7d.euw1.send.eu.mailgun.net [141.193.32.23])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10459.1784587931820170213
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73402C44520
+	for <webhook@archiver.kernel.org>; Mon, 20 Jul 2026 23:38:31 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11387.1784590706808252118
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 15:52:12 -0700
+ Mon, 20 Jul 2026 16:38:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@e.apptly.co header.s=mta header.b=JHKWC3Gq;
- spf=pass (domain: e.apptly.co, ip: 141.193.32.23, mailfrom: bounce+b4604d.b6604b-openembedded-devel=lists.openembedded.org@e.apptly.co)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=e.apptly.co; q=dns/txt; s=mta; t=1784587929; x=1784595129;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Subject: Cc: To: To: From: From: Sender: Sender;
- bh=lQwJantapy/Afgh97gb3wTRiru3eKajZQOtbyjwmD90=;
- b=JHKWC3GqK6GhvK05/KM5pH3H6Mu6Xaf+Q8tjGNDjcSO5ME4PQ9fzLiVrKFs6dS6pVWVtzypGqvwDcoCY3LxMrEsg2CF2bovYrwCJctmRyMp+G/TUtqZIbmsYdTeYby3cVPgTmqzq3m7I7+1sCXSAWBv2cHXO7xWwWi1BfsIGmrg=
-X-Mailgun-Sid: WyI4OTQ5NCIsIm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnIiwiYjY2MDRiIl0=
-Received: from localhost (unknown [51.179.224.164]) by
- 57d00acbdea48da1018033e4e1c21bac7bc40d5753215abfcd9992e8ee833e10 with SMTP id
- 6a5ea6990a815ede3ee1fa58 (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256);
- Mon, 20 Jul 2026 22:52:09 GMT
-X-Mailgun-Sending-Ip: 141.193.32.23
-Sender: amery=apptly.co@e.apptly.co
-From: Alejandro Mery <amery@apptly.co>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qS4KNtCf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cc73e322dbso125215455ad.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 16:38:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784590706; x=1785195506; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rOSX9Xy2sck0djCC/9VDb2HCflUpCKUXrTwL2S9gE0g=;
+        b=qS4KNtCfs9KvTPJIN469LeMeJ12jhZ/EJgAgTSxD8hl1q+z2A9+gz4LwiYf2KKwnvK
+         BBoFDSB27UmazRPmGA0RcUCI8wjjrqD55FDngmDLD8ufFMDG6LzFmgrh8YUZQqsPhZGV
+         KwwPW2JPU0iiM9CJmvINtFNUUHNbcKfSMja6QsFeK+cjyeGfjAR47TjeiPJjKKaLh4zP
+         TSmZVqSscSh+nCGGFxem0njc1O8AaQU5QfttDHVNAJb7tb9q8ZCvDICl9xyFUaX/UgQq
+         Sb57KECe6/q4PDeIE8qHC9yD4HC2yjrPyqD2Qho/95L8FgFTM8WNxmE2xm99QR/hzYYR
+         Sc1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784590706; x=1785195506;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rOSX9Xy2sck0djCC/9VDb2HCflUpCKUXrTwL2S9gE0g=;
+        b=Emkx/4X+2+vwjO2qluaorRGe2XCXrSj8UhJn6eD9forO0cjZ3foa6nVSICYaCjsxxI
+         Zb8nqaviTsw3W22sPe8D8UslCEWQP7aDceAbaMpz5jJr3rWkO6e+GjAF1np9niEyVNCo
+         04vQHhHqWQWAOrNKXcoEnS89tKzrFkRpbMs7/ZtPhSbTeQax4zHQz4P8LD0Vl2dX4JPp
+         KD9gfr/fszrmKGGuYFQCKAVYfrXPM2jZKm8QlvjnIJuGtOylhDiXEML4XE6zPXMDg5GA
+         U9fzvYg3SpEieh8ushFc7GTxqgzPwuWJCXzreh/pVpJf9Ae9ECc50oBwk+/baZ5rWBzW
+         n46A==
+X-Gm-Message-State: AOJu0YxKhtEakf9zg2FXRCqVfoFaLMn6VYrPNA6NBEHpAHS3DIGOuxOE
+	av611xhsxCN3o+DHdqV0ewE296QACEa+gcsu7S79H2PWE6rq+xThWDM8IvW0NQ==
+X-Gm-Gg: AR+sD12l6nRXN0orWfmwhFkXki9xECJIw44X+dvGO2D8keaEPp1+wJPBMUzhP546IpT
+	tYRi0sVw/n422AiVwuffDhStv//PnSMTxCP8JGtcThJT9AIELREZFxIEvGrNGohHu1t+JPnUz02
+	L3fiepS2ANktCUVP5yNNredO+9YxH36GqPnD0fFc519509+BGR2wm925Si3O2WnfkBf2gKDo1Y1
+	kSPkgXoGP+U+NoF7gE4zP0eo1BCwsL4nwmbLvPjgFUpx53pMU+jUdoV4VujuyNF1x0MzNnX2TBB
+	iexIFT1CcCa8o/Jj4xjq/ZXKbT+9SNkZArtVujQkFG61u2irnCrrhaAZyVfqX3TynC9QeGDDw5t
+	W+3aLgBiPrdNxLXUFUbP7xZm5NoI5EJJ2BGrqWtIiu8cuMoh5SSPIDw59VW93fCgheRANoZjSTV
+	wD4byiwDVD9kkR21Y=
+X-Received: by 2002:a17:903:1c7:b0:2c8:1f56:9fc5 with SMTP id d9443c01a7336-2cf349fb45amr171478665ad.35.1784590706213;
+        Mon, 20 Jul 2026 16:38:26 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe4677sm36926061eec.11.2026.07.20.16.38.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 16:38:25 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: anuj.mittal@oss.qualcomm.com,
-	Alejandro Mery <amery@apptly.co>
-Subject: [meta-oe][wrynose][PATCH] ltrace: fix PRIb64 length modifier on LP64 musl
-Date: Mon, 20 Jul 2026 22:52:09 +0000
-Message-ID: <20260720225209.3736953-1-amery@apptly.co>
-X-Mailer: git-send-email 2.47.3
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 2/30] imagemagick: upgrade 7.1.2-25 -> 7.1.2-26
+Date: Tue, 21 Jul 2026 11:37:43 +1200
+Message-ID: <20260720233811.2324493-2-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
+References: <20260720233811.2324493-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 22:52:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128301
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:38:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128303
 
-lens_default.c defines PRIb64 through a fallback that hardcodes
-__PRI64_PREFIX as "ll". That is only correct where uint64_t is unsigned
-long long (ILP32). On LP64 musl targets uint64_t is unsigned long, so the
-resulting "%llb" conversion does not match the argument and do_compile
-aborts under -Werror=format:
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-    lens_default.c:90:48: error: format '%llb' expects argument of type
-    'long long unsigned int', but argument 3 has type 'uint64_t'
-    {aka 'long unsigned int'}
-
-glibc never reaches the fallback: it defines __PRI64_PREFIX itself,
-wordsize aware, in <inttypes.h>. musl provides the same modifier there
-under the name __PRI64 but not __PRI64_PREFIX, so the hardcoded "ll" is
-used and is wrong on 64-bit. Reuse musl's __PRI64 when __PRI64_PREFIX is
-absent, keeping "ll" as a last resort. glibc builds are unaffected: the
-block is skipped entirely.
-
-Signed-off-by: Alejandro Mery <amery@apptly.co>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 1078fc88a3a06902b8c1207821fe51e26651aa93)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...t-fix-PRIb64-length-modifier-on-musl.patch | 49 +++++++++++++++++++
- .../recipes-devtools/ltrace/ltrace_0.8.1.bb   |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-lens_default-fix-PRIb64-length-modifier-on-musl.patch
+ .../{imagemagick_7.1.2-25.bb => imagemagick_7.1.2-26.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-25.bb => imagemagick_7.1.2-26.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-lens_default-fix-PRIb64-length-modifier-on-musl.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-lens_default-fix-PRIb64-length-modifier-on-musl.patch
-new file mode 100644
-index 0000000000..b644efff94
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-lens_default-fix-PRIb64-length-modifier-on-musl.patch
-@@ -0,0 +1,49 @@
-+From 1a03dca3000616aa61d2c8137068706c9095a653 Mon Sep 17 00:00:00 2001
-+From: Alejandro Mery <amery@geeks.cl>
-+Date: Mon, 20 Jul 2026 20:13:56 +0000
-+Subject: [PATCH] lens_default: fix PRIb64 length modifier on LP64 musl
-+
-+The fallback that defines PRIb64 hardcodes __PRI64_PREFIX as "ll", which
-+is only correct where uint64_t is unsigned long long (ILP32). On LP64
-+targets uint64_t is unsigned long, so the resulting "%llb" conversion
-+does not match the argument and, with -Werror=format, aborts the build:
-+
-+    lens_default.c:90:48: error: format '%llb' expects argument of type
-+    'long long unsigned int', but argument 3 has type 'uint64_t'
-+    {aka 'long unsigned int'}
-+
-+glibc never reaches the fallback: it defines __PRI64_PREFIX itself,
-+wordsize aware, in <inttypes.h>. musl provides the same modifier there
-+under the name __PRI64 but not __PRI64_PREFIX, so the hardcoded "ll" is
-+used and is wrong on 64-bit.
-+
-+Reuse musl's __PRI64 when __PRI64_PREFIX is absent, keeping the literal
-+"ll" as a last resort for C libraries that expose neither.
-+
-+Upstream-Status: Submitted [https://gitlab.com/cespedes/ltrace/-/merge_requests/69]
-+Signed-off-by: Alejandro Mery <amery@geeks.cl>
-+---
-+ lens_default.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/lens_default.c b/lens_default.c
-+index 0de6f37..28df811 100644
-+--- a/lens_default.c
-++++ b/lens_default.c
-+@@ -64,8 +64,13 @@ READER(read_double, double)
-+ 
-+ #ifndef PRIb64  // Underlying format supported by bookworm glibc, but macros not exposed until 2.38
-+ #ifndef __PRI64_PREFIX
-++/* glibc exposes the 64-bit length modifier as __PRI64_PREFIX; musl as __PRI64 */
-++#ifdef __PRI64
-++#define __PRI64_PREFIX __PRI64
-++#else
-+ #define __PRI64_PREFIX "ll"
-+ #endif
-++#endif
-+ #define PRIb64 __PRI64_PREFIX "b"
-+ #endif
-+ #define HANDLE_WIDTH(BITS)						\
-+-- 
-+2.47.3
-+
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_0.8.1.bb b/meta-oe/recipes-devtools/ltrace/ltrace_0.8.1.bb
-index 77bb61830b..aa377e2ec8 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_0.8.1.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_0.8.1.bb
-@@ -27,6 +27,7 @@ SRC_URI = "git://gitlab.com/cespedes/ltrace.git;protocol=https;branch=main;tag=$
-            file://0001-proc-Make-PROC_PID_FILE-not-use-variable-length-arra.patch \
-            file://0001-dwarf_prototypes-return-NULL-from-NEXT_SIBLING-on-er.patch \
-            file://0001-trace-fix-1-bit-bitfield-assignments-for-clang-Wsing.patch \
-+           file://0001-lens_default-fix-PRIb64-length-modifier-on-musl.patch \
-            "
- SRC_URI:append:libc-musl = " file://add_ppc64le.patch"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-25.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-26.bb
+similarity index 99%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-25.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-26.bb
+index 4a0cc0e1ff..fa4a6dfef8 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-25.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-26.bb
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://imagemagick-ptest.sh \
+ "
  
--- 
-2.47.3
-
+-SRCREV = "04a04eaaa22f721f204c4bf4c6b24b08b1afe5c5"
++SRCREV = "38ba210c5e5a660013d632a3d33c431e658befcc"
+ 
+ inherit autotools pkgconfig update-alternatives ptest
+ export ac_cv_sys_file_offset_bits = "64"
 
