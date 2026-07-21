@@ -1,295 +1,255 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Ishaan.Desai@ibm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05C6BC4452D
-	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 17:40:48 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28972.1784655638698542484
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBDF9C4452B
+	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 21:46:55 +0000 (UTC)
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.34694.1784670410130811361
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jul 2026 10:40:38 -0700
+ Tue, 21 Jul 2026 14:46:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IkV1ffVK;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-81e8fa1b8d6so119231897b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 10:40:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784655638; cv=none;
-        d=google.com; s=arc-20260327;
-        b=G/1LL6F2zULJZanX2nVUte/yHufjV6OUkd5k3ftMyR3JT85yfQ+xN8tJyZwblRMgXW
-         9ThgBf0a3Fjt7d/Tf1SFKKkLCtlN6NlymRlJ0sh6G8BIf78V29OmjMU1wZF+3dIbpomX
-         j7T9KVzVO/AfCWnGkotJ3/Fwdpagz/4b6GDo2Pfw/8stfW0spi9w2+IT0d1BSrVR32p0
-         9WG/RiO4fXU0jkvwNcxYvuZyvWWwVbZPYArv3z4evS6ncdTJ/jxUrjfif0QJFYE6kVmp
-         Z8TNbBmKrHo0wKPMT/NhYw7ZwEYTIQ5FDx4oTyI77k9aSG/l8PtcUKVyar8Gg4fXoIFN
-         c8OQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=/pLYP61SBchE21R5k0BP+WRrxn2rukslTVNr2Wz9ThQ=;
-        fh=/ocEzzqrd6xq7lLe0Pdn4i+HA2K5/K+r/itKI3dg96U=;
-        b=i1tbOijwg2425474Ho4ecxGnrKGtMS6lwOj1ZPu9xtglSMmlk/vBN9QTl0V4RLY6Ak
-         JdQeMv9MfroIEgJlKjc2L9w4onJypEJbDV65KhM7wlMg26xcfJZqnFtuZNcshhTXG91+
-         YIW+c4cvt6KM60hpKegj3aErKDDJVsvlGLvDTtuiVOU6CLL2LmgiM2lci4Gyok/wtrcB
-         TGjSEmnjq3+cCewqaxN6kY0ETbOvhtGLMU6aeryDVx5PB8/zfZnFKpOIqdsyFAizNvpp
-         AWFcTUg7GGmCEUkkPkMJdaww0y0i+d5i5Nj62lYRcgUxaUArJnarJz+op/uFPXBZud6z
-         AyXw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784655638; x=1785260438; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/pLYP61SBchE21R5k0BP+WRrxn2rukslTVNr2Wz9ThQ=;
-        b=IkV1ffVKYaJJ7s+r62FUSe2a5WCH+9O4RdUd5+sc3onqPj0nuTgeBzhV68Z+d9vc2b
-         ftruRrmrX09GNk2O/ZmBRxjwcANmmEfdU9thAzJ1wMSTURw+LJB3uGRofqpLmsLP3dvL
-         k5veZXNXk8UDWUX2sLAcJLCI/KE5KMPY2U0wd9QOkf8nOnblnevtXEI/N1nRGzlSKBRi
-         OX2CV/+gyJlJLPumzqRz9yLHag73dAWlppkByF2JboGmVuucgj53OLNg9E0I7zDy6dy2
-         QCX3xvcpNxEISZbX70mj5QTAMby9LmKSCitnOh4Gu2MsNrXRY76ixQLEJ/lgxk1nZdt6
-         bXXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784655638; x=1785260438;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=/pLYP61SBchE21R5k0BP+WRrxn2rukslTVNr2Wz9ThQ=;
-        b=VoF3m21+2vLrtUZRxzuhtrTF6RbRha/1Y5NfggwvsXuu9ofvL1Bje3EI3R5OcXhO5G
-         l2sCkTThuh48Unqn7sUj/YlhqBZnvzkkdzlHC8sPX+vah7E0YhPVwljXXq5k+TeXC1dJ
-         kboMR38qr1pm1uGmJAoUcKSD5q8twb6WrwXBk2ti8NoWGNE0Vq/w0F34mTbsMwWHovky
-         S4n0mxwG8z4WOwVsBbGKLV+YT51pD3QUodg2xtwYvE7vE5RbPYN45UCoZkPAIkbDicvl
-         Hy5DhxWD/Tr68sD/RhEyrWGeNmYWIxBItMfnMLl9qOFx0qtAEF4RleUVRE8IImfAxsXQ
-         KM3g==
-X-Gm-Message-State: AOJu0YwxTWVgFhenWiEFKyIc+YUeQpyoY4PwSZMoVvwlHc5B9tIwHCDu
-	CL4FYUNxw50f+vTPFA9Wx2AfJtCgsG0N6hoomcH1ZHSMEMxSWF3MkRGIv+ENGatXGG78/f52KE7
-	TaRLt9VmaPkG/kMQx9K+IT5fly6UkytACAyHx
-X-Gm-Gg: AR+sD10YJwJi2UzClcTOXpipxQwCuoOA+DDmJyCarbaceerW3D0ZA4SlXfyyuaz3V3N
-	ERUL5fe21v9dF9g684kirK0Q1dPSXb34+109uFKa3U9nctvpx5cOQhSGyOx9ywFgr/E1ODQtk40
-	pyX5LXctVO9ll7Uj57Kwnc7FJOmJbfd5HItEQmpX9YaxiZs6d/IIMfgPe3WKBbIYNrdE9GYYyCw
-	bAoBg4JWWUP8zzeEC3BrsNlZXrx8fYvF0TqdGELtMdPpqEr5gTMrpD9k3wNWr978GHiO2B8dXZB
-	5qxH0VPVWGD57TBha4wJyBUlkPAQYguhbsJxuX3Jj8kMNQ6dY+QCUxPx0Lej3Ottk8L113WATxw
-	IeiMTmb8SX3MtObmyo5+FnUjmvuvHV0lEvivjp+Y2Pf7rLJCRaufoDN6NktoP4A==
-X-Received: by 2002:a05:690c:6607:b0:80c:d342:955c with SMTP id
- 00721157ae682-81ef26cb595mr63664997b3.3.1784655637579; Tue, 21 Jul 2026
- 10:40:37 -0700 (PDT)
+ dkim=pass header.i=@ibm.com header.s=pp1 header.b=XiPRyIzi;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: ibm.com, ip: 148.163.158.5, mailfrom: ishaan.desai@ibm.com)
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LLBifT2175604
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 21:46:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=pp1; bh=ljKlBLzyYyr2V8sriQk44eVYdUViBuSaXG6OQ+mjW
+	b0=; b=XiPRyIzil/jmyhvR65onlBzEzEAHiW5oAcK1lkRXHqqvm62QW8ZspAjEq
+	E67C54Q4cH8C80urqPmFpIfxfuv23GhqB4QjR4aF2bOBo9GGa3JEJKSrC55szJjp
+	tp46we4FqdofJozj18lECdTVt/qRzlQQCx2xQJe4BxicN7zZkLu/vnYLzwUrPjEl
+	nlCWno5kSiscWgOTAtv5k8HaghrvvOCgz2UrfdakXYHiD2tbmQL0je3vfdRIf1LD
+	4lFOi4m8Kc47xG6ARBHOwFn9Ogh2QqNayuDsDrY71YB1iytnGQBRpnMgdBAyuTN2
+	/AViCzxoX55dkVkigpOlA0uP27tBg==
+Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fg7ah6kj3-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 21:46:48 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66LLYbHU001811
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 21:46:48 GMT
+Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
+	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4fgmtjveu7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 21:46:48 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (smtpav05.wdc07v.mail.ibm.com [10.39.53.232])
+	by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 66LLkhoT25035336
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 21 Jul 2026 21:46:43 GMT
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E2BE258043;
+	Tue, 21 Jul 2026 21:46:42 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9A58D58053;
+	Tue, 21 Jul 2026 21:46:42 +0000 (GMT)
+Received: from pfw153.pfw.tadn.ibm.com (unknown [9.5.7.52])
+	by smtpav05.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+	Tue, 21 Jul 2026 21:46:42 +0000 (GMT)
+From: Ishaan Desai <Ishaan.Desai@ibm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ishaan Desai <Ishaan.Desai@ibm.com>
+Subject: [meta-oe][PATCH] memory-control-config: add recipe for per-service systemd memory limits
+Date: Tue, 21 Jul 2026 16:46:32 -0500
+Message-ID: <20260721214632.1751594-1-Ishaan.Desai@ibm.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260721082727.2994105-1-james@codeconstruct.com.au>
-In-Reply-To: <20260721082727.2994105-1-james@codeconstruct.com.au>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Jul 2026 10:40:09 -0700
-X-Gm-Features: AUfX_mzt87YtIoxOW6XGEr08EFz9McKQhqKHZz-VmQcGHNTa-Atm1p3qH4QXMXg
-Message-ID: <CAMKF1sr-5TrcXuUrasxXiOCgT9hO5mqzZi1ZfOm0-ypSQ2rMiw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking] [PATCH] mctp: upgrade 2.5 -> 2.6
-To: james@codeconstruct.com.au
-Cc: openembedded-devel@lists.openembedded.org, jk@codeconstruct.com.au
-Content-Type: multipart/alternative; boundary="000000000000530b8d0657228568"
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: InEIZVlL1uxpwtjvtojJ3t_CLrlk_Grv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDIyNSBTYWx0ZWRfX3Cjs4NWykNqU
+ 5KEVQyL9SLtlWv7n62arXjg9jSh2GMlCyDnXl+XOYOv66t/ZloulL8FzVXJ4SMkBl0Zt/3ICqd4
+ ymU+w0cMejxpgGRYpIcHa4r2/Wl9LaJNz9L889qr8pUJiwamwjgV7sUbEZgFQQ+mXSUIz/aMMOg
+ IWiWm0nZq5vwSmtp62eLJltz9EEYDEMUgOAxMIwA7H3own72nYec208kvF6TWqgy9HJLogIWbhM
+ UGCcGNAFcBKKr0dsoHdX9XZ5KmsIPPhNsy3UzVzRGqmhi+hY9O9RY7wO1thLhxYEXHSTDxD5Ngd
+ Vk9KNZ0uaAUKs9FkbDAmgSGOBtB53NG3yWrtOIIc1zYTPVuaThKY99pWkzWln7ILYhSytOou0KV
+ 1NPw8GfNTbk5Uu7XlhhF0UOVG3ZIfCBg5xJfC6CGlPm85lO1MFbasGlORRykbyH5DqECw1/lJaC
+ FHvRdByB/skHwlWXExw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDIyNSBTYWx0ZWRfX3NbbSA64aOVs
+ APW192kmrWTIPeT6SjPz18JmrG6/pmIwKBhABOHnTDXqtj9Am3hHTo/EbIu5LGF+8ffbR2coMnl
+ NHlgMtIImHMMKmwizVB/ORYLDAzFrsU=
+X-Proofpoint-GUID: InEIZVlL1uxpwtjvtojJ3t_CLrlk_Grv
+X-Authority-Analysis: v=2.4 cv=SM5ykuvH c=1 sm=1 tr=0 ts=6a5fe8c8 cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
+ a=RzCfie-kr_QcCd8fBx8p:22 a=NEAV23lmAAAA:8 a=VnNF1IyMAAAA:8
+ a=1G0JcXrOhLlhgDCZcgMA:9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-21_04,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 lowpriorityscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ spamscore=0 malwarescore=0 priorityscore=1501 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210225
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 17:40:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128359
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 21:46:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128360
 
---000000000000530b8d0657228568
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Added a recipe that caps the memory usage of individual systemd
+services without modifying those services' own recipes. Services and
+limits are given via MEMORY_CONTROL_SERVICES as space-separated
+<unit>:<limit>[:<oom_policy>] entries. For each recipe, it generates
+a systemd drop-in under ${systemd_system_unitdir} setting MemoryMax,
+MemoryHigh (70% of max), and MemorySwapMax=0. The optional "kill" policy
+also adds OOMPolicy=continue and OOMScoreAdjust=500.
 
-this does not work when systemd is not in distro_features
+The service list is empty by default, so the recipe is a no-op until a
+distro, machine, or product .bbappend configures it. Drop-ins install to
+the system unit directory so systemd reads them at boot with no
+daemon-reload. Entries are validated at build time so a bad limit fails
+the build.
 
-Parsing recipes...ERROR:
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking=
-/recipes-support/mctp/mctp_2.6.bb:
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking=
-/recipes-support/mctp/mctp_2.6.bb
-inherits useradd but doesn't set USERADD_PACKAGES
+Signed-off-by: Ishaan Desai <Ishaan.Desai@ibm.com>
+---
+ .../memory-control-config_1.0.bb              | 137 ++++++++++++++++++
+ 1 file changed, 137 insertions(+)
+ create mode 100644 meta-oe/recipes-support/memory-control-config/memory-control-config_1.0.bb
 
-
-
-On Tue, Jul 21, 2026 at 1:27=E2=80=AFAM James Lee via lists.openembedded.or=
-g <james=3D
-codeconstruct.com.au@lists.openembedded.org> wrote:
-
-> mctp version 2.6 released on 2026-07-21, bump srcrev to the v2.6 tag.
->
-> The new version of mctpd can run as an unprivileged user with
-> CAP_NET_BIND_SERVICE and CAP_NET_ADMIN added to the process' ambient
-> capabilities. Added this unpriviledged user to the recipe when systemd
-> is available.
->
-> Signed-off-by: James Lee <james@codeconstruct.com.au>
-> Acked-by: Jeremy Kerr <jk@codeconstruct.com.au>
-> ---
->  .../recipes-support/mctp/{mctp_2.5.bb =3D> mctp_2.6.bb}      | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/mctp/{mctp_2.5.bb =3D> mctp_2.6.b=
-b}
-> (82%)
->
-> diff --git a/meta-networking/recipes-support/mctp/mctp_2.5.bb
-> b/meta-networking/recipes-support/mctp/mctp_2.6.bb
-> similarity index 82%
-> rename from meta-networking/recipes-support/mctp/mctp_2.5.bb
-> rename to meta-networking/recipes-support/mctp/mctp_2.6.bb
-> index a8787d3f2b..73e090bdab 100644
-> --- a/meta-networking/recipes-support/mctp/mctp_2.5.bb
-> +++ b/meta-networking/recipes-support/mctp/mctp_2.6.bb
-> @@ -5,12 +5,12 @@ LICENSE =3D "GPL-2.0-only"
->
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
-b21"
->
-> -SRCREV =3D "07c7a5d526f686da89bc9ae9cad917e46652b272"
-> +SRCREV =3D "31ac0e86b0e23d32abf34d191653a87a47f3c9a7"
->
->  SRC_URI =3D "git://
-> github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3Dhttps;tag=3Dv${PV}
-> <http://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3Dhttps;tag=
-=3Dv$%7BPV%7D>
-> "
->
->
-> -inherit meson pkgconfig systemd
-> +inherit meson pkgconfig systemd useradd
->
->  EXTRA_OEMESON =3D " \
->      -Dtests=3Dfalse \
-> @@ -39,6 +39,9 @@ do_install:append () {
->      fi
->  }
->
-> +USERADD_PACKAGES =3D "${@bb.utils.contains('PACKAGECONFIG', 'systemd',
-> '${PN}', '', d)}"
-> +USERADD_PARAM:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'systemd'=
-,
-> '-r -U -s /bin/false mctpd', '', d)}"
-> +
->  FILES:${PN} +=3D " \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
->              '${datadir}/dbus-1/system.d/mctpd.conf', '', d)} \
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#128340):
-> https://lists.openembedded.org/g/openembedded-devel/message/128340
-> Mute This Topic: https://lists.openembedded.org/mt/120373276/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000530b8d0657228568
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">this does not work when systemd is not in distro_features=
-=C2=A0<div><br></div><div><pre style=3D"color:rgb(0,0,0);white-space:pre-wr=
-ap">Parsing recipes...ERROR: /srv/pokybuild/yocto-worker/meta-oe/build/meta=
--openembedded/meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2=
-.6.bb">mctp_2.6.bb</a>: /srv/pokybuild/yocto-worker/meta-oe/build/meta-open=
-embedded/meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.6.bb=
-">mctp_2.6.bb</a> inherits useradd but doesn&#39;t set USERADD_PACKAGES
-</pre><br></div></div><br><div class=3D"gmail_quote gmail_quote_container">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 21, 2026 at 1:27=E2=80=AF=
-AM James Lee via <a href=3D"http://lists.openembedded.org">lists.openembedd=
-ed.org</a> &lt;james=3D<a href=3D"mailto:codeconstruct.com.au@lists.openemb=
-edded.org">codeconstruct.com.au@lists.openembedded.org</a>&gt; wrote:<br></=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex">mctp version 2.6 rele=
-ased on 2026-07-21, bump srcrev to the v2.6 tag.<br>
-<br>
-The new version of mctpd can run as an unprivileged user with<br>
-CAP_NET_BIND_SERVICE and CAP_NET_ADMIN added to the process&#39; ambient<br=
->
-capabilities. Added this unpriviledged user to the recipe when systemd<br>
-is available.<br>
-<br>
-Signed-off-by: James Lee &lt;<a href=3D"mailto:james@codeconstruct.com.au" =
-target=3D"_blank">james@codeconstruct.com.au</a>&gt;<br>
-Acked-by: Jeremy Kerr &lt;<a href=3D"mailto:jk@codeconstruct.com.au" target=
-=3D"_blank">jk@codeconstruct.com.au</a>&gt;<br>
----<br>
-=C2=A0.../recipes-support/mctp/{<a href=3D"http://mctp_2.5.bb" rel=3D"noref=
-errer" target=3D"_blank">mctp_2.5.bb</a> =3D&gt; <a href=3D"http://mctp_2.6=
-.bb" rel=3D"noreferrer" target=3D"_blank">mctp_2.6.bb</a>}=C2=A0 =C2=A0 =C2=
-=A0 | 7 +++++--<br>
-=C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
-=C2=A0rename meta-networking/recipes-support/mctp/{<a href=3D"http://mctp_2=
-.5.bb" rel=3D"noreferrer" target=3D"_blank">mctp_2.5.bb</a> =3D&gt; <a href=
-=3D"http://mctp_2.6.bb" rel=3D"noreferrer" target=3D"_blank">mctp_2.6.bb</a=
->} (82%)<br>
-<br>
-diff --git a/meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.=
-5.bb" rel=3D"noreferrer" target=3D"_blank">mctp_2.5.bb</a> b/meta-networkin=
-g/recipes-support/mctp/<a href=3D"http://mctp_2.6.bb" rel=3D"noreferrer" ta=
-rget=3D"_blank">mctp_2.6.bb</a><br>
-similarity index 82%<br>
-rename from meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.5=
-.bb" rel=3D"noreferrer" target=3D"_blank">mctp_2.5.bb</a><br>
-rename to meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.6.b=
-b" rel=3D"noreferrer" target=3D"_blank">mctp_2.6.bb</a><br>
-index a8787d3f2b..73e090bdab 100644<br>
---- a/meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.5.bb" r=
-el=3D"noreferrer" target=3D"_blank">mctp_2.5.bb</a><br>
-+++ b/meta-networking/recipes-support/mctp/<a href=3D"http://mctp_2.6.bb" r=
-el=3D"noreferrer" target=3D"_blank">mctp_2.6.bb</a><br>
-@@ -5,12 +5,12 @@ LICENSE =3D &quot;GPL-2.0-only&quot;<br>
-<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D4cc91856b08b094b4f406=
-a29dc61db21&quot;<br>
-<br>
--SRCREV =3D &quot;07c7a5d526f686da89bc9ae9cad917e46652b272&quot;<br>
-+SRCREV =3D &quot;31ac0e86b0e23d32abf34d191653a87a47f3c9a7&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/CodeConstruct/mc=
-tp;branch=3Dmain;protocol=3Dhttps;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" targ=
-et=3D"_blank">github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3Dhttps;=
-tag=3Dv${PV}</a>&quot;<br>
-<br>
-<br>
--inherit meson pkgconfig systemd<br>
-+inherit meson pkgconfig systemd useradd<br>
-<br>
-=C2=A0EXTRA_OEMESON =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0-Dtests=3Dfalse \<br>
-@@ -39,6 +39,9 @@ do_install:append () {<br>
-=C2=A0 =C2=A0 =C2=A0fi<br>
-=C2=A0}<br>
-<br>
-+USERADD_PACKAGES =3D &quot;${@bb.utils.contains(&#39;PACKAGECONFIG&#39;, &=
-#39;systemd&#39;, &#39;${PN}&#39;, &#39;&#39;, d)}&quot;<br>
-+USERADD_PARAM:${PN} =3D &quot;${@bb.utils.contains(&#39;PACKAGECONFIG&#39;=
-, &#39;systemd&#39;, &#39;-r -U -s /bin/false mctpd&#39;, &#39;&#39;, d)}&q=
-uot;<br>
-+<br>
-=C2=A0FILES:${PN} +=3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#39;sy=
-stemd&#39;, \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;${datadir}/dbus-1/syst=
-em.d/mctpd.conf&#39;, &#39;&#39;, d)} \<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128340): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128340" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/128340</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120373276/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/120373276/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000530b8d0657228568--
+diff --git a/meta-oe/recipes-support/memory-control-config/memory-control-config_1.0.bb b/meta-oe/recipes-support/memory-control-config/memory-control-config_1.0.bb
+new file mode 100644
+index 0000000000..adce8f1328
+--- /dev/null
++++ b/meta-oe/recipes-support/memory-control-config/memory-control-config_1.0.bb
+@@ -0,0 +1,137 @@
++SUMMARY = "Systemd drop-in memory limits for services"
++DESCRIPTION = "Installs ${systemd_system_unitdir}/<service>.service.d/memory-control.conf \
++drop-in files that apply MemoryMax/MemoryHigh cgroup v2 limits to the services \
++listed in MEMORY_CONTROL_SERVICES, without modifying the service recipes."
++HOMEPAGE = "https://github.com/ishaandesai23/memory-control-config"
++SECTION = "base"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
++
++inherit allarch systemd
++
++# The drop-ins only mean anything under systemd. OpenBMC selects systemd via
++# INIT_MANAGER rather than DISTRO_FEATURES, so accept either.
++python __anonymous() {
++    if (d.getVar('INIT_MANAGER') != 'systemd'
++            and 'systemd' not in (d.getVar('DISTRO_FEATURES') or '').split()):
++        raise bb.parse.SkipRecipe(
++            "memory-control-config requires systemd")
++}
++
++RDEPENDS:${PN} = "systemd"
++
++# Always produce a package, even when no services are configured, so an image
++# or packagegroup can depend on it unconditionally.
++ALLOW_EMPTY:${PN} = "1"
++
++# Nothing is fetched, unpacked, configured or compiled: every file is generated
++# in do_install from MEMORY_CONTROL_SERVICES.
++do_configure[noexec] = "1"
++do_compile[noexec] = "1"
++do_install[dirs] = "${D}"
++do_install[vardeps] += "MEMORY_CONTROL_SERVICES"
++
++
++# Per-service memory limits.  <unit>:<limit>[:<oom_policy>]
++#   <unit>        systemd service name (the .service suffix is optional)
++#   <limit>       raw bytes, or a K/M/G[B] suffix (e.g. 512M, 256K, 1G)
++#   <oom_policy>  "default" (bare limits) or "kill" (adds OOMPolicy=continue
++#                 and OOMScoreAdjust=500)
++#
++# MemoryHigh is 70% of MemoryMax.
++#
++# Leave empty here and set from a distro/machine/product .bbappend:
++#     MEMORY_CONTROL_SERVICES:append = " webui:256M:kill inventory-sync:128M"
++
++MEMORY_CONTROL_SERVICES ??= ""
++
++
++def mc_parse_services(d):
++    """Parse MEMORY_CONTROL_SERVICES into a list of
++    (unit, entry, bytes_max, bytes_high, oom_policy) tuples.
++    Calls bb.fatal on any malformed entry so a typo fails the build.
++    """
++    import re
++
++    size_units = {
++        '':  1,           'B':  1,
++        'K': 1024,        'KB': 1024,
++        'M': 1024 ** 2,   'MB': 1024 ** 2,
++        'G': 1024 ** 3,   'GB': 1024 ** 3,
++    }
++    size_re = re.compile(r'^(\d+)([A-Za-z]*)$')
++
++    result = []
++    for entry in (d.getVar('MEMORY_CONTROL_SERVICES') or '').split():
++        parts = entry.split(':')
++        if not (2 <= len(parts) <= 3):
++            bb.fatal("memory-control-config: malformed entry '%s'; "
++                     "expected <unit>:<limit>[:<oom_policy>]" % entry)
++
++        unit       = parts[0].strip()
++        limit_str  = parts[1].strip()
++        oom_policy = parts[2].strip().lower() if len(parts) == 3 else 'default'
++
++        if not unit.endswith('.service'):
++            unit += '.service'
++
++        if oom_policy not in ('default', 'kill'):
++            bb.fatal("memory-control-config: OOM policy '%s' for '%s' is "
++                     "invalid; use 'default' or 'kill'" % (oom_policy, unit))
++
++        m = size_re.match(limit_str)
++        if not m:
++            bb.fatal("memory-control-config: limit '%s' for '%s' is not a "
++                     "valid size (use raw bytes or a K/M/G[B] suffix)"
++                     % (limit_str, unit))
++
++        number, suffix = m.group(1), m.group(2).upper()
++        if suffix not in size_units:
++            bb.fatal("memory-control-config: unknown size suffix '%s' in "
++                     "'%s' for '%s'" % (m.group(2), limit_str, unit))
++
++        bytes_max = int(number) * size_units[suffix]
++        if bytes_max <= 0:
++            bb.fatal("memory-control-config: limit '%s' for '%s' must be "
++                     "greater than zero" % (limit_str, unit))
++
++        bytes_high = bytes_max * 7 // 10
++        result.append((unit, entry, bytes_max, bytes_high, oom_policy))
++
++    return result
++
++
++python do_install() {
++    import os
++
++    entries = mc_parse_services(d)
++    if not entries:
++        bb.note("memory-control-config: MEMORY_CONTROL_SERVICES is empty; "
++                "nothing to install")
++        return
++
++    destdir      = d.getVar('D')
++    unitdir      = d.getVar('systemd_system_unitdir')
++    pn           = d.getVar('PN')
++
++    for unit, entry, bytes_max, bytes_high, oom_policy in entries:
++        dropin_dir = os.path.join(destdir + unitdir, unit + '.d')
++        os.makedirs(dropin_dir, exist_ok=True)
++        dropin_path = os.path.join(dropin_dir, 'memory-control.conf')
++
++        with open(dropin_path, 'w') as f:
++            f.write('# generated by %s\n' % pn)
++            f.write('# entry: %s\n' % entry)
++            f.write('[Service]\n')
++            f.write('MemoryMax=%d\n'  % bytes_max)
++            f.write('MemoryHigh=%d\n' % bytes_high)
++            f.write('MemorySwapMax=0\n')
++            if oom_policy == 'kill':
++                f.write('OOMPolicy=continue\n')
++                f.write('OOMScoreAdjust=500\n')
++
++        bb.note("memory-control-config: wrote %s (%s, policy=%s)"
++                % (dropin_path, entry, oom_policy))
++}
++
++FILES:${PN} += "${systemd_system_unitdir}"
 
