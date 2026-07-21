@@ -1,115 +1,60 @@
-Return-Path: <emailaddress.ashish@gmail.com>
+Return-Path: <ashishkumar.mishra@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70D76C4452B
-	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 16:27:47 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27186.1784651257327242749
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jul 2026 09:27:37 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Qa49spw6;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-84862b0d5f8so6614114b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 09:27:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784651257; x=1785256057; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=AYZBRKyczPhYLQFdtNywcUsBTfsdosEdzwZS0FCboVg=;
-        b=Qa49spw6wOuppfvSE8tf2g9XlPens82e1wwxvHc+VJzTcTe3QiYA2kgYUuiX5FyhBg
-         dY0aAqlENc7L3GLejmIIPQFejWo+poWGqzLYwB1YufUVdG5YPcG1URu4bKZFciqxShVv
-         8XvCp48y6OnjLsSDYTVOFS8ZvutdUClLBFNc/0IFr4YijDjxxW+c1GhXvoSjCEzRJZQu
-         8ThKeLQc7zlPX3Ztzb43y83MCcBAGLiEhOltijck2Yp51fL2jSf/6bDVsDiawrnPyVSe
-         YAF7Xu6GqbWxttI04qkYz0X6XkoPcSCoKhL+GpjFBuJXFcfaMJWWKzRUi67EqhnM9aOq
-         qxsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784651257; x=1785256057;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AYZBRKyczPhYLQFdtNywcUsBTfsdosEdzwZS0FCboVg=;
-        b=RKU4teg6a57/QFXW2WylyeJ8lly2EwGOt78ztCw6Hu+bSQKkmyvHk5GxCjELPlWYio
-         lFJQZlS30EVz78ctNRgE0/aSmRUq39+Nc5a5i6oJv4APKjECGRhhoG0GDUAS47rS4tMT
-         0aPKQVJuoysyxitUJTNpvYueGDHZGQZAXy+4aLykIb0LqEvbOP0XKkBype3cZpRJPamw
-         lBQ6smjJp//kOolu9wXCfSx2ZBODKLTFuHbv0FhmH6ACJcT8y29wPxQ6+ylpOhUBecGA
-         /aQwFZ9vQINCkvKNEPRoKJCnUuDkC7NzuQZC6QBx5sHfMRvkcB346cT6Di8Hj2pUCj0q
-         uTgw==
-X-Gm-Message-State: AOJu0YwS3riD3JoC85cof3j4sVz8ZGC269cPmgN/ptCtmjCETJLNhFTn
-	L0jImdeLaWO8Fa3PeeAJjpH9S1vzmhryKZbKCNDCLYVtwLCByzR83JA2NrHjdA==
-X-Gm-Gg: AfdE7cnX3SBrYrKLzbSh67FGeJMT3wx9ZoZdqlIN+Hj5g/KUwxRHbSPyK/OQfhYXLzP
-	SsyrjqGWOBjcpXb6MTYw8VWsiXFIzAayLkySOT8hu0SVTh22qJAQO7PunZHnbHdtApLZHDquvHn
-	zmWmU5FbWe4SIKQ4kPMpJGsf0UsnAdcu9WAnhzhqVWH14C8flDQi3LZfJsIKY/YwPcvvZqEIJe+
-	RUBjbDCmBCJvbAwzharVwEeZ0XCFsjS5s46ueBNa1CrvCq9AxjpFtvSXeo5g4qxoK7YVmKwfEEL
-	C5/ixIWhSLR7OhneOtfa5mByTrb63oTr1rtVB3hRmza/8dl8zHxd2LE32UxU7GbvH65f9wPcJCn
-	vmHX6x2PvmTaSV5JgNZa2yWpbmY9P8p6aCjwjuqgRohs9MFJwOZv+CPfSi7LUv0IZfxPtB/IOOq
-	3/ulAOrapnxHgQ2Kb2zg==
-X-Received: by 2002:a05:6a21:4a97:b0:3c3:8c88:7b20 with SMTP id adf61e73a8af0-3c3ada1eb3cmr19446683637.44.1784651256462;
-        Tue, 21 Jul 2026 09:27:36 -0700 (PDT)
-Received: from ashishkumar.. ([2406:7400:12b:e084:b7f2:160:d1f2:65e2])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147dc1b99esm479421eec.3.2026.07.21.09.27.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 09:27:35 -0700 (PDT)
-From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98954C4452B
+	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 16:29:07 +0000 (UTC)
+Subject: Re: [RFC_V2] [meta-oe]: Improving ext* sparse image generation: migrating from img2simg to ext2simg_android for ext* filesystem
 To: openembedded-devel@lists.openembedded.org
-Cc: AshishKumar Mishra <emailaddress.ashish@gmail.com>
-Subject: [meta-openembedded][PATCH v3 3/3] image_types_sparse: switch ext* conversion to ext2simg_android
-Date: Tue, 21 Jul 2026 21:56:44 +0530
-Message-ID: <20260721162645.2056048-4-emailaddress.ashish@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260721162645.2056048-1-emailaddress.ashish@gmail.com>
-References: <20260721162645.2056048-1-emailaddress.ashish@gmail.com>
+From: "AshishKumar Mishra" <ashishkumar.mishra@bmwtechworks.in>
+X-Originating-Location: Bengaluru, Karnataka, IN (106.51.208.21)
+X-Originating-Platform: Linux Chrome 150
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 21 Jul 2026 09:29:00 -0700
+References: <rGsP.1771488393837852960.eVnE@lists.openembedded.org> <a11b45eb-1ee0-4274-9780-5a86105a7a1f@gmail.com> <1030996.1771825388005282969@lists.openembedded.org> <1127752.1772426743792609011@lists.openembedded.org> <a19a9a63-5ac2-4da1-838e-b06e861c7bd7@gmail.com>
+In-Reply-To: <a19a9a63-5ac2-4da1-838e-b06e861c7bd7@gmail.com>
+Message-ID: <871943.1784651340840963216@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="AnlS0J788sc95EdboZNl"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 16:27:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128356
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 16:29:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128357
 
-We have RFC discussion at
-https://lists.openembedded.org/g/openembedded-devel/message/124499
-https://lists.openembedded.org/g/openembedded-devel/message/125497
+--AnlS0J788sc95EdboZNl
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Move ext* sparse image generation from 'img2simg' to ' ext2simg_android'
+Hi Richard / Gyorgy Sarvari,
 
-Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
----
- meta-oe/classes/image_types_sparse.bbclass | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+I have shared the V3 of this RFC
+https://lists.openembedded.org/g/openembedded-devel/message/128353
 
-diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-index 5416c2a019..5c1d92bd18 100644
---- a/meta-oe/classes/image_types_sparse.bbclass
-+++ b/meta-oe/classes/image_types_sparse.bbclass
-@@ -13,11 +13,21 @@ DELETE_RAWIMAGE_AFTER_SPARSE_CMD ??= "0"
- 
- CONVERSION_CMD:sparse = " \
-     truncate --no-create --size=%${SPARSE_BLOCK_SIZE} "${IMAGE_NAME}.${type}"; \
--    img2simg -s "${IMAGE_NAME}.${type}" "${IMAGE_NAME}.${type}.sparse" ${SPARSE_BLOCK_SIZE}; \
-+    case '${type}' in \
-+        ext*) \
-+            bbnote 'Running e2fsprogs-derived ext2simg_android..' ; \
-+            ext2simg_android '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.simg' || bberror 'ext2simg_android failed' \
-+            ;; \
-+        *) \
-+            bbnote 'Generating sparse image for non-ext filesystem...'; \
-+            img2simg -s '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.sparse' ${SPARSE_BLOCK_SIZE}; \
-+            ;; \
-+    esac; \
-     if [ "${DELETE_RAWIMAGE_AFTER_SPARSE_CMD}" = "1" ]; then \
-         rm -f ${IMAGE_NAME}.${type};\
--        bbwarn "Raw file ${IMAGE_NAME}.${type} removed" ;\
-+        bbnote "Raw file ${IMAGE_NAME}.${type} removed" ;\
-     fi;\
-  "
- 
--CONVERSION_DEPENDS_sparse = "android-tools-native"
-+CONVERSION_DEPENDS_sparse = "android-tools-native e2fsprogs-ext4sparse-native"
-+do_image_ext4[depends] += "e2fsprogs-ext4sparse-native:do_populate_sysroot"
--- 
-2.43.0
+Can team please consider this for master branch
 
+Thanks ,
+Ashish
+
+--AnlS0J788sc95EdboZNl
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi Richard / <span style=3D"color: #333333; font-family: system-ui, 'S=
+egoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, =
+sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto=
+ Color Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures:=
+ normal; font-variant-caps: normal; font-weight: 400; letter-spacing: norma=
+l; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; w=
+idows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: n=
+owrap; background-color: #ffffff; text-decoration-thickness: initial; text-=
+decoration-style: initial; text-decoration-color: initial; display: inline =
+!important; float: none;">Gyorgy Sarvari,&nbsp;<br /></span><br />I have sh=
+ared the V3 of this RFC&nbsp;<br /><a href=3D"https://lists.openembedded.or=
+g/g/openembedded-devel/message/128353" target=3D"_blank" rel=3D"noopener">h=
+ttps://lists.openembedded.org/g/openembedded-devel/message/128353</a>&nbsp;=
+<br /><br />Can team please consider this for master branch&nbsp;<br /><br =
+/>Thanks ,<br />Ashish&nbsp;</div>
+
+--AnlS0J788sc95EdboZNl--
 
