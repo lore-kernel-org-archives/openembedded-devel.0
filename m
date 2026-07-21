@@ -1,98 +1,96 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <james@codeconstruct.com.au>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DCC7C44529
-	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 06:07:59 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16595.1784614076526854293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 238B7C44529
+	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 08:27:40 +0000 (UTC)
+Received: from codeconstruct.com.au (codeconstruct.com.au [203.29.241.158])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17873.1784622452059656366
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2026 23:07:56 -0700
+ Tue, 21 Jul 2026 01:27:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TfWN9N7l;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38deea72eebso8913723a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2026 23:07:56 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@codeconstruct.com.au header.s=2022a header.b=axPM2LHN;
+ spf=pass (domain: codeconstruct.com.au, ip: 203.29.241.158, mailfrom: james@codeconstruct.com.au)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784614076; x=1785218876; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=u84udp6lHFDHbSMxiOVMovPY2jrsUoSJg0ab9zE7HB8=;
-        b=TfWN9N7lHRdl/A20D7GysAQAP1/pyV6QzK+fs6YUO8K162wmT8XUpwWH/UjoCDyc9+
-         ri3E7xe/3KPl4eXPdPL4CBFXAl7Qg2Jl69IwYdC3YgR3kyKCcKEYogjFtRB47QTkGC/H
-         +BGHedNMaWNhExU9RP1L0sJ+r97YS8zqkeLSZj8exSKKdPWkgUCad1mXq1JrVQWziOmk
-         pPKPbdgiyHr4N8BN4CpmWiF+ivnHLg9A5UDMo8XaTmEx8dDcE/NSpRQL2E/ThuhVyhNU
-         eNN+TNq9e7KDXhswOyEvxyeMM/v67p0D0kJqHXdEPxpvXlyto34Lt6DaL/DHvpP1u2YL
-         Ptfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784614076; x=1785218876;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=u84udp6lHFDHbSMxiOVMovPY2jrsUoSJg0ab9zE7HB8=;
-        b=Gc2OUyTMOktXV2g8CnFfnQBmXB/NSvX3EngPYcgs5TxzqCGr/NT/PkZTudvI36DKOx
-         f1lGgqowIdAHfN50ViPqCei8f7UT2owo8i0xAc+QIPapXhq80pC3mOhMJqaOmT3BJQG2
-         ZLYviVOus6kxFvS4dkL3PItUm+0Ro9LNa9+UVUZ73Oa3KePH5IWpXdfLpyjcLuw5wz/g
-         WEnByD2VRaMQItajFoUzS7GS0EKJXInkT5df/YAwV9NKh1lUEjJZtAEU+U53iZw/nRVp
-         rnQMNwZ7dz1U0EIYRHynKhNKt31XVHX+GiLLwyhwtuM6e39AVUaO6vx9x4JZo0CKpaBS
-         JDsw==
-X-Gm-Message-State: AOJu0YwAFOmbfJuEN817z42jG3wTpYbL6sTr5jQirAlZ6M0VONKW4ycI
-	7metMZ62GKSgUDixx8/QbJe6Cdy0BbvozecXT7yaKPIbm+JbFV+CPn/wRg8eWg==
-X-Gm-Gg: AfdE7cm8HX1VCYbb05H5FxzlKjVJJnLqdB+xgsDdMw/e4I0eMQqS32Ia590s/6CX/Av
-	typ38Y38UvIKV4JTlVVdp2RmFQyCEXZVnucf55N1vjqhSe26w4H6hqwPJluXV9zgkSs8rRB5plW
-	0UvI1nXUdFrSnqYVdN/PerjzjDSFWiiUL/DMctGCZhC4elpn7DCw8vVKOC47bXC/VyPhy/giabH
-	af4n4kyeRwxNcN6P+32sUVHbf84qVN9z8c+UqSgO6SoUNs7U+VdMbc1GCkmWTpCOD5UZoxn+rwa
-	YChQyPFyhTpjXaMRy+8sbBzACPHbo3fSnYO6zy8yfxmYslEJFZeFmpTpg52uFIg752myHKCKmfO
-	zKiq0EhQ/7yHjEeSVCHtqyZqCoHhaNgRs1lCFQZUlAuixIkBXKy/paHdrRhxYNy7WKWMSlp0r8j
-	lTpW9u4e9rYJfmUUWFHoyHncqHBxWJ4SW5+0TiiMOsvuxj3AwCU5fVRh2QasTMJl4wV/2jEhQV7
-	BwKslVi6M1f07q5e20Pl2g/wJclEr6IB4jvtLYpw0dFaPnXVQy3tkjnow9CA8RXcoQ5314M/FC0
-	9dnpzFq4nfXnL92rLP4=
-X-Received: by 2002:a05:6300:95:b0:3b4:75c0:3ec0 with SMTP id adf61e73a8af0-3c3ad8368b3mr17941180637.30.1784614075792;
-        Mon, 20 Jul 2026 23:07:55 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1bb77csm48026026eec.18.2026.07.20.23.07.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 23:07:55 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+	d=codeconstruct.com.au; s=2022a; t=1784622449;
+	bh=J/w2NGohuoqbxRG55cmGB0RFpf8gqCKV331lQZNdJu8=;
+	h=From:To:Cc:Subject:Date;
+	b=axPM2LHNkOkGf1kWAu3IRq6GHQiYQns3j+KwL0hQj/bLT4lohnO7+VSwlyruVYyKK
+	 53aRSDMBhChVLBjIODruWc0yrSQcPzUKJnl0X+b2IWIDh4crGXudN7CsaICLwDF9SH
+	 qHCiQKMfq3FbrgFakK7+jIy1cPo9YTHCqumyiivwOnRX8M/0ry6Jr2cb928+bgWbVz
+	 Qo8iNuh+5pZ/4fBoJjkrq6nCrl1dA9V59KOTNdc/3Me5W2kAcrj37wPtdnSJLCZL6Q
+	 lcw9ZwZQ0v5E06v3FywHdqrPRAw9URvuDDx/ZPM2pMamql2hZqgk+Wh5TjFhQZdqWZ
+	 6lsGh/nMTsH2w==
+Received: by codeconstruct.com.au (Postfix, from userid 10004)
+	id 1E67966322; Tue, 21 Jul 2026 16:27:29 +0800 (AWST)
+From: James Lee <james@codeconstruct.com.au>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH] python3-wxgtk4: Use valid SPDX identifier for the wxWindows license
-Date: Mon, 20 Jul 2026 23:07:52 -0700
-Message-ID: <20260721060752.2591565-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+Cc: jk@codeconstruct.com.au
+Subject: [oe] [meta-networking] [PATCH] mctp: upgrade 2.5 -> 2.6
+Date: Tue, 21 Jul 2026 16:27:26 +0800
+Message-ID: <20260721082727.2994105-1-james@codeconstruct.com.au>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 06:07:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128339
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jul 2026 08:27:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128340
 
-"wxWindows" is not a valid SPDX license identifier and has no generic
-license file, so do_populate_lic fails the license-exists QA check:
+mctp version 2.6 released on 2026-07-21, bump srcrev to the v2.6 tag.
 
-  No generic license file exists for: wxWindows in any provider
+The new version of mctpd can run as an unprivileged user with
+CAP_NET_BIND_SERVICE and CAP_NET_ADMIN added to the process' ambient
+capabilities. Added this unpriviledged user to the recipe when systemd
+is available.
 
-Spell it as the current SPDX expression, matching the wxwidgets recipe
-this binds to: LGPL-2.0-or-later WITH WxWindows-exception-3.1.
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: James Lee <james@codeconstruct.com.au>
+Acked-by: Jeremy Kerr <jk@codeconstruct.com.au>
 ---
- .../recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.5.bb     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/mctp/{mctp_2.5.bb =3D> mctp_2.6.bb}      | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/mctp/{mctp_2.5.bb =3D> mctp_2.6.b=
+b} (82%)
 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.5.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.5.bb
-index 1ee6e5b93b..a84648266e 100644
---- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.5.bb
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.5.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Python3 interface to the wxWidgets Cross-platform C++ GUI toolkit."
- HOMEPAGE = "https://www.wxpython.org"
+diff --git a/meta-networking/recipes-support/mctp/mctp_2.5.bb b/meta-netw=
+orking/recipes-support/mctp/mctp_2.6.bb
+similarity index 82%
+rename from meta-networking/recipes-support/mctp/mctp_2.5.bb
+rename to meta-networking/recipes-support/mctp/mctp_2.6.bb
+index a8787d3f2b..73e090bdab 100644
+--- a/meta-networking/recipes-support/mctp/mctp_2.5.bb
++++ b/meta-networking/recipes-support/mctp/mctp_2.6.bb
+@@ -5,12 +5,12 @@ LICENSE =3D "GPL-2.0-only"
+=20
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
+b21"
+=20
+-SRCREV =3D "07c7a5d526f686da89bc9ae9cad917e46652b272"
++SRCREV =3D "31ac0e86b0e23d32abf34d191653a87a47f3c9a7"
+=20
+ SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
+https;tag=3Dv${PV}"
+=20
+=20
+-inherit meson pkgconfig systemd
++inherit meson pkgconfig systemd useradd
+=20
+ EXTRA_OEMESON =3D " \
+     -Dtests=3Dfalse \
+@@ -39,6 +39,9 @@ do_install:append () {
+     fi
+ }
+=20
++USERADD_PACKAGES =3D "${@bb.utils.contains('PACKAGECONFIG', 'systemd', '=
+${PN}', '', d)}"
++USERADD_PARAM:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'systemd'=
+, '-r -U -s /bin/false mctpd', '', d)}"
++
+ FILES:${PN} +=3D " \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
+             '${datadir}/dbus-1/system.d/mctpd.conf', '', d)} \
+--=20
+2.47.3
 
--LICENSE = "BSD-2-Clause AND LGPL-2.0-only AND wxWindows"
-+LICENSE = "BSD-2-Clause AND LGPL-2.0-only AND LGPL-2.0-or-later WITH WxWindows-exception-3.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"
-
- DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
 
