@@ -1,95 +1,69 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15139C44512
-	for <webhook@archiver.kernel.org>; Wed, 22 Jul 2026 06:01:02 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.41836.1784700059183012460
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35268C4452D
+	for <webhook@archiver.kernel.org>; Wed, 22 Jul 2026 06:09:52 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.41950.1784700581641745678
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jul 2026 23:00:59 -0700
+ Tue, 21 Jul 2026 23:09:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=pdP3C8D6;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd96.aul.t-online.de (fwd96.aul.t-online.de [10.223.144.122])
-	by mailout07.t-online.de (Postfix) with SMTP id A28A4E2AD
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2026 08:00:56 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.162.124]) by fwd96.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wmQ0l-0K9FBZ0; Wed, 22 Jul 2026 08:00:55 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
+	by 156.147.23.51 with ESMTP; 22 Jul 2026 15:09:39 +0900
+X-Original-SENDERIP: 156.147.1.125
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.127.86)
+	by 156.147.1.125 with ESMTP; 22 Jul 2026 15:09:39 +0900
+X-Original-SENDERIP: 10.177.127.86
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] dav1d: update 1.5.3 -> 1.5.4
-Date: Wed, 22 Jul 2026 08:00:48 +0200
-Message-ID: <20260722060048.49786-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-python][PATCH 1/2] python3-aiodns: set CVE_PRODUCT and set status for CVE-2025-48945
+Date: Wed, 22 Jul 2026 15:09:34 +0900
+Message-ID: <20260722060935.273232-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1784700055-457F9957-D24956A8/0/0 CLEAN NORMAL
-X-TOI-MSGID: 70622b90-a998-4e45-acb9-d1aab0a9dc39
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1784700056; i=f_l_k@t-online.de;
-	bh=bGgLltxAZjeUJ4RWfxaHwlg0Del9kkZuq7iaB+25h2o=;
-	h=From:To:Subject:Date;
-	b=pdP3C8D62ti99YhmkpT6AMUIqjGpZyRskT+LhKnDhz8/ZOCxQZHVNN8MFx2Gc0mzK
-	 TnwLswtKPn7O5SNKzdBSa9tL23K4ywzAyBZGME1wzeXlkgkusSPMfrL0PRSwspNJy8
-	 P/2clbI3D9E2c2M0zqhkHUPnzAfAdj14uEPjzjEbr3J/nMNqStII9a0S2R1aoZG7QP
-	 bBJ7I56G4Pu5Vc7vBmXj8Sy81Om7BNu8I7rPrKI9teFWKWVO9RHtpf4Et45l9KLKGP
-	 GPEq37YBWkz0T5J7mkhn8ds+cLHoUerR9x70ycQLQkPTHV/Op4ph8pTx52F3/LhVBt
-	 pbFdM+XNgniqQ==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2026 06:01:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128361
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2026 06:09:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128362
 
-Changes for 1.5.4 'Sonic':
---------------------------
+From: "mark.yang" <mark.yang@lge.com>
 
-1.5.4 is a minor release of dav1d, focused on optimizations and maintenan=
-ce:
- - Support for OS/2, including API exports and assembly
- - Switch to external checkasm
- - Add Armv9.3-A GCS (Guarded Control Stack) support
- - AArch64: optimize ipred_v, ipred_h and ipred_smooth_* 8bpc functions, =
-and
-   reduce .text size
- - ARM32: optimize prep_neon
- - RISC-V: ipred_(dc, h, v, pal) optimizations for 8 and 16bpc,
-   generate_grain_y for 8bpc, and optimizations (prep/put_8tap, 6-tap and=
- copy paths)
- - Portability improvements for non-POSIX systems (signal() fallback)
- - Schedule tile tasks for all passes at once, improving threading
- - Precompute the quantization matrix tables at build time
- - Move loop-invariant computations out of hot loops
+The pypi class default python:aiodns doesn't match how aiodns is
+tracked in the CVE databases. NVD has no CPE for aiodns yet; the only
+existing record (CVE-2025-48945) carries aio-libs:aiodns in its CNA
+affected entry [1], so set that pair.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+CVE-2025-48945 itself is a use-after-free in pycares: the GHSA lives
+in the pycares repository [2] and the affected range "< 4.9.0" uses
+pycares version numbers (fixed in pycares 4.9.0 [3], we ship 5.0.1).
+Mark it cpe-incorrect so it doesn't get reported against aiodns.
+
+[1] https://www.cve.org/CVERecord?id=CVE-2025-48945
+[2] https://github.com/saghul/pycares/security/advisories/GHSA-5qpg-rh4j-qp35
+[3] https://github.com/saghul/pycares/releases/tag/v4.9.0
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- .../recipes-multimedia/dav1d/{dav1d_1.5.3.bb =3D> dav1d_1.5.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.5.3.bb =3D> dav=
-1d_1.5.4.bb} (91%)
+ meta-python/recipes-devtools/python/python3-aiodns_4.0.4.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.3.bb b/me=
-ta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb
-similarity index 91%
-rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.3.bb
-rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb
-index 6c092c1649..ed45711b12 100644
---- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.3.bb
-+++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.4.bb
-@@ -7,7 +7,7 @@ LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D48d9210a87a24f62609b5a4f777d8=
-dfe"
-=20
- SRC_URI =3D "git://code.videolan.org/videolan/dav1d.git;protocol=3Dhttps=
-;nobranch=3D1"
--SRCREV =3D "b546257f770768b2c88258c533da38b91a06f737"
-+SRCREV =3D "54706fc6bc0cdecab7e9593974a4039cc038fca7"
-=20
- DEPENDS:append:x86 =3D " nasm-native"
- DEPENDS:append:x86-64 =3D " nasm-native"
---=20
-2.55.0
-
+diff --git a/meta-python/recipes-devtools/python/python3-aiodns_4.0.4.bb b/meta-python/recipes-devtools/python/python3-aiodns_4.0.4.bb
+index 875ec724d3..eb66cc5f34 100644
+--- a/meta-python/recipes-devtools/python/python3-aiodns_4.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-aiodns_4.0.4.bb
+@@ -15,4 +15,7 @@ RDEPENDS:${PN} += " \
+     python3-pycares \
+ "
+ 
++CVE_PRODUCT = "aio-libs:aiodns"
++CVE_STATUS[CVE-2025-48945] = "cpe-incorrect: this CVE is for pycares, fixed in pycares 4.9.0"
++
+ BBCLASSEXTEND = "native nativesdk"
 
