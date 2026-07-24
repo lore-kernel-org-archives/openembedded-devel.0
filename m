@@ -2,156 +2,98 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CC5DC531F9
-	for <webhook@archiver.kernel.org>; Fri, 24 Jul 2026 02:14:26 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11209.1784859256245939414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FE45C53200
+	for <webhook@archiver.kernel.org>; Fri, 24 Jul 2026 02:14:36 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11430.1784859269674422081
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jul 2026 19:14:16 -0700
+ Thu, 23 Jul 2026 19:14:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pdXyqN+8;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-383b4a3755fso1236886a91.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jul 2026 19:14:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cfdDrYii;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso1107481a91.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jul 2026 19:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784859256; x=1785464056; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PZYhGjohYXdnI3SPH6uITkT46B4m6TT5ZrlYHckQHII=;
-        b=pdXyqN+8kPZ60a+DMGP0DzOMuAO3MDEFdefKLuagN9iGsVOeW3inA/ba9ak8eKFwHe
-         2rcUtESxyOaZctjhH593UMvTR172T7mM0394DDPhk53nygN0kWMQuja4aPxEWydMwHZ5
-         9ss94cHmCIHaEFp9az3uOObn8gb71V/b/3RKcGYomSu5NCzvmJ0QIlPjg/9KikyXrcNG
-         V3+4s6WYTHoQIOE8Xka9CFW6GV9c2/8Jaf0y1htYyrwOpaQI0NJZ19FChxyjNAp9GAbo
-         ihUk6wPRghvFGxzQOEM9XCdm1sNjLYUMRr3bk+p82iUlAeAvMZH+xJeyjCuaRjgr7G1Q
-         LkXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784859256; x=1785464056;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1784859269; x=1785464069; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PZYhGjohYXdnI3SPH6uITkT46B4m6TT5ZrlYHckQHII=;
-        b=bcU9rpaFubGyXfTgu8s4ViyiDUH2DLjW4yXoPtWbrWRDxmjKpgRruSs+eqzHvJHi7z
-         YzXJSnUu27gyEpMZj8Axk3H3K13OaGzkz+DBAML5O7Xir4DX2z9+dZ6wp7MoNPoi/LDG
-         GtYysvpOTynl7nl/48BFJYbVQ2a/CJYdSLNR4gDjIRxlPZ4zf/iDPZWnVzYXbigqufCI
-         Xp8lwqW4cEbIg31S/TKhkjXcr3poG7TRFjIrRFhitBZQMv35qGjvExrZwy/wfB2lBVZ/
-         2KX7JXqb8dkD/LF3OybSkeRqG13ZWkSHN3jNs7BXsi8v7/S9biK+DkfrczrE0s4ebo/8
-         AIAA==
-X-Gm-Message-State: AOJu0YxNkla+utnqsWrwi3cJ6/LgqdjUXZ7Huz0bwr6ZR9fSQeHfbbTT
-	BS83dWnH3OhitKm3/wrc+jeByd8UDt+XAgbV0imBv3GDZ7621QUZNYNTdWwc18RB
-X-Gm-Gg: AR+sD11jIyGhiIyT7crJHG2QrR+66cm2T41hh81lOcjWZ2dL/gbXGLHVHcG+YkFLBvI
-	5J6lvoML4av+ijm8AxYf6zQ4K6BtBkqMTLpDzpA+7qNkCCR19RiHg2VA07errQe/Sd9G2chpEf7
-	k6f6RKUcKhhn/Roa+II1p/dPKJlHyCpgulGqKGK4OK/5gT5HVOxRuFeeqaet5/Rod7LIUsQyJtP
-	4fx/O8B0T1gzqPYCw8Q49sXtURf6g8YZ0kJR/bCzgoSjh2xJouxjkzjNbF405TW3FwQNfXs/jxP
-	fZH4xB59BNEcJdSZevXIYAwH9YN2dSOuu8bdseKt9/fqs8AhXL9sfbamukpuDr4kr8STiBW8UDw
-	ku7WWS/nw4HRfO7ny46aySfwvEdqetUAB3LpIiXrVRsWIQD7ejMUSBpsDlsfpjOmgiDZoavq6zM
-	jvS+U/L2UoU3ezmW2eWtEwCvDIyA==
-X-Received: by 2002:a17:90b:4f8b:b0:38e:5701:644a with SMTP id 98e67ed59e1d1-38ec6650522mr5013150a91.27.1784859255582;
-        Thu, 23 Jul 2026 19:14:15 -0700 (PDT)
+        bh=ZlovDU8VonWwHWemxmuYFU5WHVWipcvc0Czh7XW7owE=;
+        b=cfdDrYii50p9awXRGZLhKjZ2xqTS62lFl545B6MCFAiqNKO1RoV/Z0FOOj/QGUv3Uh
+         SIhKgTtpDy/b/YWV/Ud7pSusUUhzEa82iCat8zpWHTFU4uigagd8saIIHmRfkInOvM0m
+         UBZ2xh2tqlfq7OyJgLW6jsCjCSmbujuWj4nfkO56Xka8n0Q40xzlO2zwajxJpHbGr9iB
+         Ba9AvSITTHBdIY98PpSvTm9Abj43lK+Gl7WVC6IhyWg+fTQZPAfWqQ7Pk8KZrlT6eEXP
+         LnfPbMIvx1C5bN9y8NblgKegoBTSuA4KwywetPyD4WpLs7tI205mhD2c3j1AcoHYBKyC
+         Axgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784859269; x=1785464069;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZlovDU8VonWwHWemxmuYFU5WHVWipcvc0Czh7XW7owE=;
+        b=kYB+YV+mULC9OE4gwgrQnHNsxgDloPceRtjFNQoGR+jixWkkNDJnfsbpfjsrKjWggM
+         KglxqJviibKwWD5GnANWjo5U2WXoMPWGW+J0cXmNLiGQYaFAnqzg8LLoE4ayv7kGbWbU
+         GfioFhPV7FppcRitBSmxbcj/gyDwIZix+1QnCqdFh1dXEtda0C6Xm3Q6lLnF0LnogzPZ
+         q0xe1X5OBAmUJwhZHbfLhmaKgzcddjhbZutusB9Jupl1rJ4eS+hpV1jxp5sc4pgQ3o5Q
+         SAukgN2Rh+YF5HVHyeEVxKWS/Xf9fQ9HYB/u2oRggUCKpQB7g2I7/DkmCsCzlwuVdfTY
+         Anmw==
+X-Gm-Message-State: AOJu0YwbR0IXt4hHYfdT9f5RMcRJTfxqI7T4wg+4iHZ1Yir3leefTSj1
+	wHEcFG2ntb1jmUtz5xXLcnG9Rf3G7iqBU3lt1TUnts3DGYpin41Z/XAaWHoHTa38
+X-Gm-Gg: AR+sD12tM0CNfKJzmGmWUQm0r4e7LCB9d8LvhCQH+503xwbxpeIbRrn+sO40m9xvfEq
+	DYLougw/MiS0Welyffve5U+2DgbJT8n8w5sJoGsu5uyyzWxo2v1Cmua3eCbppdXpgifM7n+KXnE
+	tvvx9HaJnVdMcSbYOVwV0a0atE/CFGNP0hdwSHC+bKt7n78qv5RDkUd5tNV4SJsN4FB9ACmV2xb
+	vABb3hoqq4ROjupZYHquOTdBDwEjXMIIC0FAtc987ez4/zO9jqbI2NRiJ3GhgdoX2O/4qSowjaT
+	y8Z7yXyjeLCTGa+3MvIVzZgp8lJSQPEM7olIitHp3VhIMIPBtk7SDCe6NXUTHun8MJdyqJQNu54
+	mU6EF5lRRUCmLfzRnNaa9axnvnwQRKnRu6wSOpxmIM8xC/eC1+nhTlwpUbdIeDMci9tJox4J97f
+	w6uxdsqOU3UWwPZu4=
+X-Received: by 2002:a17:90b:3b47:b0:38c:cf7a:5fec with SMTP id 98e67ed59e1d1-38ec64ffc79mr5909441a91.13.1784859269012;
+        Thu, 23 Jul 2026 19:14:29 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d1300401fsm26824794c88.3.2026.07.23.19.14.12
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d1300401fsm26824794c88.3.2026.07.23.19.14.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 19:14:14 -0700 (PDT)
+        Thu, 23 Jul 2026 19:14:27 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/13] colord: upgrade 1.4.7 -> 1.4.8
-Date: Fri, 24 Jul 2026 14:13:55 +1200
-Message-ID: <20260724021407.2840261-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 5/13] simpleiot: upgrade 0.18.4 -> 0.18.5
+Date: Fri, 24 Jul 2026 14:13:59 +1200
+Message-ID: <20260724021407.2840261-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260724021407.2840261-1-ankur.tyagi85@gmail.com>
+References: <20260724021407.2840261-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 02:14:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128423
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 02:14:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128427
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Dropped patch which is included in this version and resolved QA issues.
-
-Release Notes:
-https://github.com/hughsie/colord/blob/1.4.8/NEWS
+Release Note:
+https://github.com/simpleiot/simpleiot/releases/tag/v0.18.5
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/colord/colord.bb      |  3 +-
- meta-oe/recipes-support/colord/colord.inc     |  4 +--
- ...2b2379fb5582f4312e59bf51a2823df56276.patch | 28 -------------------
- 3 files changed, 4 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-support/colord/colord/08a32b2379fb5582f4312e59bf51a2823df56276.patch
+ .../simpleiot/{simpleiot_0.18.4.bb => simpleiot_0.18.5.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/simpleiot/{simpleiot_0.18.4.bb => simpleiot_0.18.5.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/colord/colord.bb b/meta-oe/recipes-support/colord/colord.bb
-index 6eb9db8dab..19d2ac3211 100644
---- a/meta-oe/recipes-support/colord/colord.bb
-+++ b/meta-oe/recipes-support/colord/colord.bb
-@@ -21,7 +21,6 @@ RDEPENDS:${PN} += "hwdata"
+diff --git a/meta-oe/recipes-extended/simpleiot/simpleiot_0.18.4.bb b/meta-oe/recipes-extended/simpleiot/simpleiot_0.18.5.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/simpleiot/simpleiot_0.18.4.bb
+rename to meta-oe/recipes-extended/simpleiot/simpleiot_0.18.5.bb
+index 1ba7c7b43b..e852e3d3e5 100644
+--- a/meta-oe/recipes-extended/simpleiot/simpleiot_0.18.4.bb
++++ b/meta-oe/recipes-extended/simpleiot/simpleiot_0.18.5.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=3b83ef96387f14655fc854dd
  
- SRC_URI += " \
- 	file://0001-Run-native-cd_idt8-cd_create_profile.patch \
--	file://08a32b2379fb5582f4312e59bf51a2823df56276.patch \
- "
+ SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX}"
  
- EXTRA_OEMESON += " \
-@@ -40,10 +39,12 @@ FILES:${PN} += " \
-     ${datadir}/polkit-1 \
-     ${datadir}/glib-2.0 \
-     ${datadir}/color \
-+    ${datadir}/metainfo \
-     ${systemd_user_unitdir} \
-     ${nonarch_libdir}/tmpfiles.d \
-     ${libdir}/colord-plugins \
-     ${libdir}/colord-sensors \
-+    ${libdir}/sysusers.d \
- "
+-SRCREV = "1a501b7691e153969fa64e9ca58706454b160b18"
++SRCREV = "9addf01e40eae111f59c822141a47aa87caf04b6"
  
- USERADD_PACKAGES = "${PN}"
-diff --git a/meta-oe/recipes-support/colord/colord.inc b/meta-oe/recipes-support/colord/colord.inc
-index 447531f312..0f239f36ce 100644
---- a/meta-oe/recipes-support/colord/colord.inc
-+++ b/meta-oe/recipes-support/colord/colord.inc
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://meson.build;beginline=3;endline=3;md5=f42198707d793be58b274d34fd5238c3 \
- "
- 
--PV = "1.4.7"
-+PV = "1.4.8"
- SRC_URI = "https://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
--SRC_URI[sha256sum] = "de02d9910634ae159547585cec414e450f711c27235453b4f9b38a9f2361a653"
-+SRC_URI[sha256sum] = "21500bd68975312a7f0f3ce6019d9f75f42aacaa75ca7115ec720b5445406896"
- 
-diff --git a/meta-oe/recipes-support/colord/colord/08a32b2379fb5582f4312e59bf51a2823df56276.patch b/meta-oe/recipes-support/colord/colord/08a32b2379fb5582f4312e59bf51a2823df56276.patch
-deleted file mode 100644
-index 860e6ab4af..0000000000
---- a/meta-oe/recipes-support/colord/colord/08a32b2379fb5582f4312e59bf51a2823df56276.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 08a32b2379fb5582f4312e59bf51a2823df56276 Mon Sep 17 00:00:00 2001
--From: Richard Hughes <richard@hughsie.com>
--Date: Mon, 29 Jan 2024 10:37:11 +0000
--Subject: [PATCH] Fix writing to the database with ProtectSystem=strict
--
--Fixes https://github.com/hughsie/colord/issues/166
--
--Upstream-Status: Backport [https://github.com/hughsie/colord/commit/08a32b2379fb5582f4312e59bf51a2823df56276]
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
-----
-- data/colord.service.in | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/data/colord.service.in b/data/colord.service.in
--index 6825d944..c358dc4b 100644
----- a/data/colord.service.in
--+++ b/data/colord.service.in
--@@ -17,6 +17,10 @@ ProtectControlGroups=true
-- RestrictRealtime=true
-- RestrictAddressFamilies=AF_UNIX
-- 
--+ConfigurationDirectory=colord
--+StateDirectory=colord
--+CacheDirectory=colord
--+
-- # drop all capabilities
-- CapabilityBoundingSet=~CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_ADMIN CAP_SYS_PTRACE CAP_CHOWN CAP_FSETID CAP_SETFCAP CAP_DAC_OVERRIDE CAP_DAC_READ_SEARCH CAP_FOWNER CAP_IPC_OWNER CAP_NET_ADMIN CAP_SYS_RAWIO CAP_SYS_TIME CAP_AUDIT_CONTROL CAP_AUDIT_READ CAP_AUDIT_WRITE CAP_KILL CAP_MKNOD CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SYS_NICE CAP_SYS_RESOURCE CAP_MAC_ADMIN CAP_MAC_OVERRIDE CAP_SYS_BOOT CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_SYS_CHROOT CAP_BLOCK_SUSPEND CAP_LEASE CAP_SYS_PACCT CAP_SYS_TTY_CONFIG CAP_WAKE_ALARM
-- 
+ require ${BPN}-licenses.inc
+ require ${BPN}-go-mods.inc
 
