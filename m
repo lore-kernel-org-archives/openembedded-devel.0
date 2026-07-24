@@ -2,179 +2,262 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8993DC531CC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BEA3C531D0
 	for <webhook@archiver.kernel.org>; Fri, 24 Jul 2026 01:08:05 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10435.1784855279182068263
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10434.1784855277187112304
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jul 2026 18:07:59 -0700
+ Thu, 23 Jul 2026 18:07:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=c/7MhulA;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=TdO/8TkE;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NLePJ11351344
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 01:07:58 GMT
+ dkim=fail reason="dkim: body hash did not verify" header.i=@qualcomm.com header.s=qcppdkim1 header.b=IIDnTljV;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@oss.qualcomm.com header.s=google header.b=C+K44wZA;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NLeZOq1237342
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 01:07:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=INlsOxZt4xL
-	1bePZL7OB4ZcFAsWLgRkvk0Hmbw8fE0U=; b=c/7MhulAyqSBblVIkAIkfgfOwxW
-	38/CSYtpWWHlJKvVsJWIK8rkOLULUO+DQrVCwxPEH2oOB1K0OmXr5svQ2GtC6SQ/
-	wj9ouoTzx1Bz7K+CpSvdiql3ZjbhhHcJMgZhjnBKSLqi7bGpCqM3NUHDkfwCP0D7
-	SFdH+zVCQxwybaTwWI20L2H2lzk9f2EZDQ7mk7J1+qsoBaPTnh+Tt55+yoNK/IKW
-	LTwp98bU7tPeMk4J3oslN06SHQ8fm5+F+YavlHuIVdrHEyjjvP7325N+nNaHCCK/
-	hVNThc/aKQBjz6hmd9xBnRA3JbEsnTfSAQskV9C7JtK0KOaMID5LgpPlmIQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkqa09ear-1
+	content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ySq2rMXdCqXfJ2Ci4S3LhewsOg3F+ht58O91MUDVOLM=; b=IIDnTljVRkCe7fF0
+	SIRIwRSAgDGhtAvEMLZCKxFbsPSVFu7Ehvvt2JvKKuFVQHnU1cvKvRgI1izoZE3a
+	S3yU4McROqcXgDmUAdicpesbBFpTfiVzoX9MbdNDc9N3y8GjZvvCMgjW3TAleLQr
+	vofTqRR0pfig/RitxCqOpkhhnV/3R+sKYCEV7u0iQ+Zl5ce3tDnR7biHJueyrA9M
+	DU8umHMVd66YWRAjYmP0Ycny091otfE7hDf3DTb+4xQ0VZB+u1bucMrvN9k5Nkfr
+	mZZonKVY9EZgGY3uEcC6ZjkD4n1fLmUQ81IX8TrQiUEUSY0kHRFOxyFCMoyAyyVS
+	jb1+pg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkp5vhuyp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 01:07:58 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cfbf3e4a63so11337595ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jul 2026 18:07:58 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 01:07:55 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb7d6ba548eso1752893a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jul 2026 18:07:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784855278; x=1785460078; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=INlsOxZt4xL1bePZL7OB4ZcFAsWLgRkvk0Hmbw8fE0U=;
-        b=TdO/8TkE/A0yxP7UIkMFVgn0KpLqwkJvOgtNn0XaljuXtJ1Dg76qSChCoy9ZgGu0kY
-         zR8y5QPJ/DedN1pWRaipNYKx8v4KQs+ZoMh3dBAqEY9VH8NLoTwOsFO+vsL2d/hzphRM
-         B2Bqn0ZPQY7qwfJ7XR37WJTHbF0a9dzJEO2Uo/QgHKQAZ7E7y/RI4pSQhK4f6Wl+hsc7
-         NNmqT63DeUTw47yHfAPPhxto38BbcD8A1b1fHa0f173lUoJgLTczbYUboT0bdkLafAlu
-         07HKUeZUGXfs/a1+Xcf2ObENaRkFIP6Www2xa2gT1FPYV5gjNpuVyNuiNux9d4tKD6Us
-         TF2A==
+        d=oss.qualcomm.com; s=google; t=1784855275; x=1785460075; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ySq2rMXdCqXfJ2Ci4S3LhewsOg3F+ht58O91MUDVOLM=;
+        b=C+K44wZAytu6Hfqm+PpP1KZ6BFa1Dxh8sT73e4MgJTe+u4p+Ddg86LMnykVlcUtcQ1
+         tG64GiOZwFp9sirJznIfkUjGDObCq/qT+WdWfBYzlIDvzMjA+LCZg9qJHSi+Bgm3YSqW
+         BPgivRwt4OGwyaUXbbYxo3yI4sYKqZH+6ZyWP3Im+PCmo/EffRajZ12IVVC+CR+49suJ
+         FVMC+kAuweqioSpE9qvmlxUDD3KkwiSeSRbjL5ZAx22FwYraIaQ6v5bQimJSYaVCiP5N
+         75RlYFqolSRhTpV17W8LPg9lex/fRzNJ6CN0TZ2f98XQOdh3jpEzVQFqDZTcn1++FFeC
+         CFtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784855278; x=1785460078;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=INlsOxZt4xL1bePZL7OB4ZcFAsWLgRkvk0Hmbw8fE0U=;
-        b=XNC/bqmVx7eG653FPqE0qyQadf8lEzJp3PwNeqK+iU9ecfOz6JsOtrr1bk4QO8wzus
-         AydFsgvy+ntswvWPiJqOxO/3OAavWrSLmrOKxqOHXJeSAbqpPv1XNrl0AtdBLBNoA/od
-         2IFYkt73qG3mwum9I3DHzC4HfokoWJWoc+TnZAS0PMUEiZZxoMOxizdxTttsk9K7y5AX
-         ylwr1uUr4Vx6R/1J/5YOwDIxmW5b4o1ns0YOI/KoXq+WmjbK/YcOoG6+7d3G98mU9oUw
-         SNGgMZBzRdMkVYFNM3Hp40io3tlv0kF0S3EB6klggFOtkm+nuCkQI6MnMM9tFxvYQiyH
-         QRbA==
-X-Gm-Message-State: AOJu0YwRv5MZhneGagz8Lpr2ziPgvD2gNxuqF75Mksp0SK0PaGVzw35p
-	zz+f3igF7h6VtIK8z7RZx9r1+r4HSWPMqLk7RrP72rvl4ngA5Zl6aT+jXOQKBwSZI4bf6xGfCfP
-	xg0isr6tTcwM+J3NexEBRroSQUm3cGoDK4UVyzwDOW08ItZocOoFNau0lmEq/RVq+oh2tPmU0To
-	WC0iLImnN0Sf7rniU6zN+bzA==
-X-Gm-Gg: AR+sD13/p2x0uIt4pnxtCB3N41vgkHhCwvZVUhHL0aN8bjr5nX7cOJhnzVwLXEcp0Id
-	S2FZzJXitvNDCxHqrrV2WCwUDNylTpfyA1WwvHowNeNDLCaxsH6X5oAycy0OOHSZN5mqoyaO3rt
-	8qbdMxaLwnMgu3ll3s7WZ7MXjMxp1/dCIIrAXjY+pQCuIedN0ULG2Hb/KzDMnT4l+m5RZ8ihbPp
-	1onstPMyeBPIZqA1PaY81GWGeY+wgKsRHKpYPnGH78z1h0opOG8kLYKWWj097CKc6/cXDjvctPC
-	6EnHWEUEF6Co1gH9gSOttqPHjEenb5Jjz3DrXgegNaAsAJUXVA87bbm+LI3ze6YhN/XckegFko+
-	CU8kUpKICer9ia4lH1sAr1a3iv4vafyo=
-X-Received: by 2002:a05:6a21:9d8a:b0:3c3:7bb9:c93 with SMTP id adf61e73a8af0-3c44b1e4bb0mr5718085637.53.1784855278092;
-        Thu, 23 Jul 2026 18:07:58 -0700 (PDT)
-X-Received: by 2002:a05:6a21:9d8a:b0:3c3:7bb9:c93 with SMTP id adf61e73a8af0-3c44b1e4bb0mr5718059637.53.1784855277685;
-        Thu, 23 Jul 2026 18:07:57 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784855275; x=1785460075;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ySq2rMXdCqXfJ2Ci4S3LhewsOg3F+ht58O91MUDVOLM=;
+        b=MSf7WBiXuFZE1ir+KbqtxdHNOcAtdtw0WeTJgRLyxBbSJTzXSZ3+4TCZAANHhFwANb
+         GN5csXuctHvQhBXqb4Xw5QLiT0+1YfvTmEWRfqLyk36kl/6QOUar+GVGgO7fM8mgBiEz
+         OikN3oPleHXrugwBbVT56ewhYZxb6C1zwdA/FDuHCGCiPLqANFbbt/BFBNnxVy7u4dy1
+         3pMBdSgdLsSI8Wxsmsemg9u7J+D/4YUOq6+t2h05iUqcjOWh/AvT10OFTpXuruzyuc7v
+         Zj3t4KAOk83p2jTKjCulAr8m6hxzON6T7u07nocgT+1rIWTQ+ONsTRTjusgjo4mkEHG0
+         OEQQ==
+X-Gm-Message-State: AOJu0YxmIXOWCh6Fa0POOxeZ7YhxvRsZ9Z3TEHGS2Uy5LxvCf7mazQ10
+	KVBS6nrcBS2b2LKFhws9UP33eMT9oe2q+NA8nxh/lHY5+AJAt+q2BjAp4rR3KCacoqznnrvprrl
+	8kMj9xmI0Eh9pRwIcvG2+N07GFzsohTUOQdiqVB5wosp8PxolLjCVQTn32If/8qXMiIeTpoYf1n
+	BS73AMkSYitODSVgunVbw/xQ==
+X-Gm-Gg: AR+sD10p082BxcRf1xVKIJLWj4NChZcJwa+ce2JJrTkOSiBVYRG+53dcRmsmtql196a
+	JID+/p1Gzq8+xG4sf3aqjfdYNF6/T2l64fN+2fwEISujZfJNIxBTegFpo6+qRxy/EBjww4cIpAn
+	cVLvU5RUqeFK6gJ85ujTWVRaWwnE5/9Kdxxk5tJYd27J9VA59AWkgN8Vk/opAE8aml9Ew2Gag6p
+	y+CeJzHLhwzQlsllY4SEB26lO6m6DqCW3MfyVtj+gyO9nsHINjnYkhuuYTbGqNynNyvQ20p3qGq
+	E3Wz48mquQDcqqoleNmgAMPKl/M5YBBThDYEYwiICGtRSF7GAyU07upbXbyyBooE990GhRk/vKu
+	sVj2RN+ecTTGntMZxUY/GSj2ZUKCMNyc=
+X-Received: by 2002:a05:6a21:683:b0:3c4:397a:69b8 with SMTP id adf61e73a8af0-3c44afe7510mr6040958637.21.1784855274784;
+        Thu, 23 Jul 2026 18:07:54 -0700 (PDT)
+X-Received: by 2002:a05:6a21:683:b0:3c4:397a:69b8 with SMTP id adf61e73a8af0-3c44afe7510mr6040923637.21.1784855274370;
+        Thu, 23 Jul 2026 18:07:54 -0700 (PDT)
 Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e07000fsm44906934eec.21.2026.07.23.18.07.56
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e07000fsm44906934eec.21.2026.07.23.18.07.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 18:07:57 -0700 (PDT)
+        Thu, 23 Jul 2026 18:07:54 -0700 (PDT)
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [wrynose][meta-oe][PATCH 4/4] sysdig: Use LuaJIT headers to match the linked LuaJIT library
-Date: Fri, 24 Jul 2026 06:37:46 +0530
-Message-ID: <20260724010746.2638347-4-anuj.mittal@oss.qualcomm.com>
+Subject: [wrynose][meta-oe][PATCH 2/4] bpftool-native: Fix -Wdiscarded-qualifiers errors for glibc 2.42+
+Date: Fri, 24 Jul 2026 06:37:44 +0530
+Message-ID: <20260724010746.2638347-2-anuj.mittal@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260724010746.2638347-1-anuj.mittal@oss.qualcomm.com>
 References: <20260724010746.2638347-1-anuj.mittal@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: bC--Tqmm8FRtJ-MeYX9fPsjb6FCAz-lI
-X-Proofpoint-GUID: bC--Tqmm8FRtJ-MeYX9fPsjb6FCAz-lI
-X-Authority-Analysis: v=2.4 cv=e/k2j6p/ c=1 sm=1 tr=0 ts=6a62baee cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=6gl_cCoBAAAA:8 a=qQrxp82UNMj1BDdyP6UA:9 a=GvdueXVYPmCkWapjIL-Q:22
- a=Bor9z-CvbNo2M6AZn8_k:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDAwNyBTYWx0ZWRfXxeG5buqoRyU+
- DKC9gP1oBoOySHs1hAvaErmHl1bmQs1uWg9dfUTzAabTltMDmU6bpe0gJWCPGn5YUs7HgOTz4ic
- 09UG/uGPiEWCYEaS/itPkjYpTFrftDSKTlC4GQtDMDlRZuSsu/IkD0I+AbKg6NDi7cYnNG9h8X9
- 9AHeu7bI3ENZjtTDRQdbXhpxcu6qXwz9/cRBRlf6oZIw0cdgQweKl+EkjwNl9BLGfVmXJu9dVoR
- qnV9Ayf5907taZvo+kCavZHoeo8IQyFKDqKra97uoe1gJLfl0GyeWvrbc7viVGregzVUJPq+2Ly
- aMgCfLf4vRu4Q4zt665Xk6XlPKplHLYklvXMaA+YfzlnB5MU3ybMsi/xBrGiYR/u5SR/l7AYllS
- usO1nxSUmvEch6DSRH5PyVJ4Z59HqtztA/mXAR9KveoiGuE/z3MARTMV1VXTN0mDJhMIeJG61cI
- Fjd5bv9CwPhv/oCrOIg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDAwNyBTYWx0ZWRfX3UgdaN5k3vSc
- yFiy52KKiwles/5daDB4kk+7ch4v5fHirxz86VfPM2ooh3ITahYCxJnIol9UwTkW0ZagSxtvkiu
- ysJ5dTR0SOty8rm9qI1340GoJIgturY=
+Content-Type: text/plain; charset=UTF-8
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDAwNyBTYWx0ZWRfX/s1pEiMDYKKF
+ qcCOh3xfvapDjewdhe6NopFZ019cYIHwTSYaJFJOY+drbIbcYpkJfD2Pv6hhR5MCalJfRQv1OJk
+ 3wqyOcUFMFfQ4x9YMQDTyRsSDn9y/7c=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDAwNyBTYWx0ZWRfX5yLRhlagHLQf
+ UM4XkYAY+9VPO6fCCE8yYWrV6LYCGeuypXGKU7XRfKW2XsLub91Il05uC2yfCDNG6wAYLcyXy4t
+ 00gfFnqNaXhWoS1cbdXgMID4p7cyDpPYcorCTroYJy7shvHjshLV4tDlZcm7hXjCbtSLIW1TRK/
+ VVKTtOCQ9pmHap55Q0pxam5KkIAt2yAd4grvqUvo6mJrC0IXrPualuy2mddVdCAOcjnUYA2Gntq
+ 57zfaaJ7b6PYRtRDd3esREi1tXxAKkLV6/PA8brrGs9AYoLP5SDxpTip2/TKfxuiN9ZRXOPr99T
+ 4KwSqYErVLheT/9MRuxuPl5JZ4CzuINvI9PlEvHI9Lx4JYrhCbktv/ZsvFoQbGUrbuM625b3QHa
+ tNnaaJ677yHyiyY2nOR5OTNmE+Qa4NCicyU/uAxDYz8qySi4TM3P64AB7S+AAmLfUuEKIrB0JYc
+ Dr7RMQwmynozAjw63AA==
+X-Authority-Analysis: v=2.4 cv=Z9Dc2nRA c=1 sm=1 tr=0 ts=6a62baeb cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=EUspDBNiAAAA:8
+ a=20KFwNOVAAAA:8 a=iox4zFpeAAAA:8 a=ag1SF4gXAAAA:8 a=U-vipH0GeQgctoQbMLAA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
+ a=FdTzh2GWekK77mhwV6Dw:22 a=WzC6qhA0u3u7Ye7llzcV:22 a=Yupwre4RP9_Eg_Bd0iYG:22
+X-Proofpoint-GUID: 7Q0LnunnQB1mGPRcUCBuUvVywGcJ2HcN
+X-Proofpoint-ORIG-GUID: 7Q0LnunnQB1mGPRcUCBuUvVywGcJ2HcN
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_07,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
- malwarescore=0 clxscore=1015 spamscore=0 phishscore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607240007
+ malwarescore=0 spamscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0
+ adultscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240007
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0031df01.pphosted.com id 66NLeZOq1237342
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2026 01:08:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128422
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128420
 
-From: Khem Raj <khem.raj@oss.qualcomm.com>
+From: He Zhe <zhe.he@windriver.com>
 
-csysdig fails to link when stock Lua is also present in the sysroot:
+Backport a patch from kernel to fix the following build errors.
 
-  ld.lld: error: undefined symbol: luaL_openselectedlibs
-  >>> referenced by chisel.cpp:1190
-  ld.lld: error: undefined symbol: lua_pcallk
-  ld.lld: error: undefined symbol: lua_setglobal
+bbpf.c: In function =E2=80=98kallsyms_cb=E2=80=99:
+| libbpf.c:8192:13: error: assignment discards =E2=80=98const=E2=80=99 qu=
+alifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+|  8192 |         res =3D strstr(sym_name, ".llvm.");
+|       |             ^
+| libbpf.c: In function =E2=80=98avail_kallsyms_cb=E2=80=99:
+| libbpf.c:11497:31: error: assignment discards =E2=80=98const=E2=80=99 q=
+ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+| 11497 |                 if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
+|       |                               ^
+| libbpf.c: In function =E2=80=98resolve_full_path=E2=80=99:
+| libbpf.c:12085:35: error: assignment discards =E2=80=98const=E2=80=99 q=
+ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+| 12085 |                         next_path =3D strchr(s, ':');
+|       |
 
-sysdig's chisel code does #include "lua.h" and links against LuaJIT
-(lua${JIT}), but the recipe-sysroot also carries stock Lua headers
-(openembedded-core lua installs lua.h into ${includedir}). Those headers
-win the include search over ${includedir}/luajit-2.1, so the chisel
-objects are compiled against stock Lua while the binary links
-libluajit-5.1.so. In Lua >= 5.4.4 luaL_openlibs is a macro for
-luaL_openselectedlibs and lua_setglobal/lua_pcallk are real symbols,
-none of which LuaJIT (a Lua 5.1 ABI) provides, hence the undefined
-references. -DLUA_INCLUDE_DIR does not help: sysdig's luajit.cmake only
-consults it in its stock-Lua fallback, not when it finds LuaJIT.
-
-Prepend ${STAGING_INCDIR}/luajit-2.1 to CFLAGS/CXXFLAGS. These land in
-CMAKE_CXX_FLAGS, which precede CMake's generated -I includes, so LuaJIT's
-lua.h is found first and matches the linked library.
-
-Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+Signed-off-by: He Zhe <zhe.he@windriver.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 00e7a9118097cbcf4677cbcfebb772357623f4cd)
+(cherry picked from commit 0a3798eaed3f45a93463414c0f4752b54e8978de)
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 ---
- meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ .../bpftool/bpftool-native_6.16.bb            |  5 +-
+ ...-Fix-Wdiscarded-qualifiers-under-C23.patch | 69 +++++++++++++++++++
+ 2 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fi=
+x-Wdiscarded-qualifiers-under-C23.patch
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-index 6d754b9bd0..bea66ad17c 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-@@ -62,9 +62,18 @@ EXTRA_OECMAKE = "\
-                 -DCREATE_TEST_TARGETS=OFF \
- "
- 
-+# sysdig's chisel code does #include "lua.h". The recipe-sysroot also carries
-+# stock Lua headers (openembedded-core lua installs lua.h into ${includedir}),
-+# which are ABI-incompatible with the LuaJIT library sysdig links against: in
-+# Lua >= 5.4.4 luaL_openlibs is a macro for luaL_openselectedlibs and
-+# lua_setglobal/lua_pcallk are real symbols, none of which LuaJIT provides.
-+# sysdig's luajit.cmake only honours LUA_INCLUDE_DIR in its stock-Lua fallback,
-+# not when it finds LuaJIT, and the LuaJIT include dir does not win the search
-+# order, so lua.h resolves to the stock header and the link fails. Put the
-+# LuaJIT include dir first so its lua.h is used and matches the linked library.
- #Add include dir to find driver_config.h
--CXXFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
--CFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
-+CXXFLAGS:append = " -I${STAGING_INCDIR}/luajit-2.1 -I${WORKDIR}/driver_Make/driver/src"
-+CFLAGS:append = " -I${STAGING_INCDIR}/luajit-2.1 -I${WORKDIR}/driver_Make/driver/src"
- 
- #To fix do_package QA Issue
- do_compile:append() {
--- 
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb b/meta=
+-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+index fe3ad6138e..edc635517a 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+@@ -9,7 +9,10 @@ DEPENDS =3D "binutils-native elfutils-native"
+=20
+ inherit native bash-completion
+=20
+-SRC_URI =3D "${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz"
++SRC_URI =3D "\
++    ${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz \
++    file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch \
++"
+ SRC_URI[sha256sum] =3D "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab4=
+8516bcc1befbcd83"
+=20
+ S =3D "${UNPACKDIR}/linux-${PV}"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdisc=
+arded-qualifiers-under-C23.patch b/meta-oe/recipes-kernel/bpftool/bpftool=
+/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
+new file mode 100644
+index 0000000000..4726727c3d
+--- /dev/null
++++ b/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-q=
+ualifiers-under-C23.patch
+@@ -0,0 +1,69 @@
++From ab21cf885fb2af179c44d8beeabd716133b9385d Mon Sep 17 00:00:00 2001
++From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
++Date: Sat, 6 Dec 2025 14:28:25 +0500
++Subject: [PATCH] libbpf: Fix -Wdiscarded-qualifiers under C23
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++commit d70f79fef65810faf64dbae1f3a1b5623cdb2345 upstream.
++
++glibc =E2=89=A5 2.42 (GCC 15) defaults to -std=3Dgnu23, which promotes
++-Wdiscarded-qualifiers to an error.
++
++In C23, strstr() and strchr() return "const char *".
++
++Change variable types to const char * where the pointers are never
++modified (res, sym_sfx, next_path).
++
++Suggested-by: Florian Weimer <fweimer@redhat.com>
++Suggested-by: Andrii Nakryiko <andrii@kernel.org>
++Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
++Link: https://lore.kernel.org/r/20251206092825.1471385-1-mikhail.v.gavri=
+lov@gmail.com
++Signed-off-by: Alexei Starovoitov <ast@kernel.org>
++[ shung-hsi.yu: needed to fix kernel build failure due to libbpf since g=
+libc
++  2.43+ (which adds 'const' qualifier to strstr) ]
++Signed-off-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
++Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
++
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/linux/kernel/g=
+it/stable/linux.git/commit/?h=3Dlinux-6.18.y&id=3Dab21cf885fb2af179c44d8b=
+eeabd716133b9385d]
++Signed-off-by: He Zhe <zhe.he@windriver.com>
++---
++ tools/lib/bpf/libbpf.c | 7 ++++---
++ 1 file changed, 4 insertions(+), 3 deletions(-)
++
++diff --git a/tools/lib/bpf/libbpf.c b/tools/lib/bpf/libbpf.c
++index dd3b2f57082d..9c98c6adb6d0 100644
++--- a/tools/lib/bpf/libbpf.c
+++++ b/tools/lib/bpf/libbpf.c
++@@ -8245,7 +8245,7 @@ static int kallsyms_cb(unsigned long long sym_addr=
+, char sym_type,
++ 	struct bpf_object *obj =3D ctx;
++ 	const struct btf_type *t;
++ 	struct extern_desc *ext;
++-	char *res;
+++	const char *res;
++=20
++ 	res =3D strstr(sym_name, ".llvm.");
++ 	if (sym_type =3D=3D 'd' && res)
++@@ -11574,7 +11574,8 @@ static int avail_kallsyms_cb(unsigned long long =
+sym_addr, char sym_type,
++ 		 *
++ 		 *   [0] fb6a421fb615 ("kallsyms: Match symbols exactly with CONFIG_L=
+TO_CLANG")
++ 		 */
++-		char sym_trim[256], *psym_trim =3D sym_trim, *sym_sfx;
+++		char sym_trim[256], *psym_trim =3D sym_trim;
+++		const char *sym_sfx;
++=20
++ 		if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
++ 			return 0;
++@@ -12159,7 +12160,7 @@ static int resolve_full_path(const char *file, c=
+har *result, size_t result_sz)
++ 		if (!search_paths[i])
++ 			continue;
++ 		for (s =3D search_paths[i]; s !=3D NULL; s =3D strchr(s, ':')) {
++-			char *next_path;
+++			const char *next_path;
++ 			int seg_len;
++=20
++ 			if (s[0] =3D=3D ':')
++--=20
++2.34.1
++
+--=20
 2.54.0
 
 
