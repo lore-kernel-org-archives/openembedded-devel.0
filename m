@@ -2,96 +2,5679 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F03FC53209
-	for <webhook@archiver.kernel.org>; Sun, 26 Jul 2026 02:30:06 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4254.1785032995153286740
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F30E5C531D0
+	for <webhook@archiver.kernel.org>; Sun, 26 Jul 2026 02:30:05 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4419.1785032999729224441
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2026 19:29:55 -0700
+ Sat, 25 Jul 2026 19:29:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SlyJuDlQ;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso1161456a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2026 19:29:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dseo287Z;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2caced6038eso18959535ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2026 19:29:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785032994; x=1785637794; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=la7yVla2UNtJYXc1Nem5/HHwQ8cyvLbgF3SbupHGhUs=;
-        b=SlyJuDlQ4JBZ8OU3mUJ2zXgMMdMQtxSH9V9RKeptpiANrs34dycktDJdeKZJ4vINun
-         ZYzFU1swfbQvxOEPyO5r+ZnMWYSgdjhKVMzVVgu7bU0h5YsWTjuklDcrS/SeC6Un8Mxi
-         eOtO1Iew0vBmQ2vDVtsr9b8V5joey2WYJfJdGw9TLLMeh9bivowmDfWuOakW6+ttqeHf
-         xUtoCrJ0F0yAMtnYeW+Is1iUtFQUKRX66lNNM+lXQT5GxwmZCicP7iaLaMy9DqTFILMW
-         OpAnVZZ66xbweHbWGwtdO/+HjzIQ8oJxxMBc0enbOl2dWTKwVh3x74pSZx6OHdcT8eMN
-         xtWw==
+        d=gmail.com; s=20251104; t=1785032999; x=1785637799; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=QmW4i5gn/tzoKeLWVo6qHQZrVw0QUrU73xST5f2rZd8=;
+        b=dseo287ZRKfH7vPe8vVQ4VPP8gSwO8Ec6z24IauwUQobUolmtkYM62HEpvZk8rVDFR
+         viHRCefwM2RrDmThbzU3hkXE47wkAecpwVViTrx3yBrClBWvdSv3K9hkmkdgBpcG89Dy
+         U2XYTyXnFOSkmx9E2rFyFaPIsdgKao5gL441BORpf0TtyIP2Q/iLHQnNAXbOsNhAe2bH
+         PoKsfb/8WfWhP+zj7tgxEy6KzyRy8WIFfK9XxR0k+iXJk82wuz9dXg3fsRxQFpb6cA2m
+         wyUOV/AbLvsTP9b6uafnDCiQ03bn7eIahd5AH4kqZiKlZBT3RYkdYTyuhrmORvAI/g/k
+         zWsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785032994; x=1785637794;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=la7yVla2UNtJYXc1Nem5/HHwQ8cyvLbgF3SbupHGhUs=;
-        b=ACcLcOsVI+HlufMQ5dnbwZ7J0EQFh8+2Pul2cTF/mvtrvMbhBmhQc4PIpGoCflAvD4
-         WXY/oDRofs/Bvf/CCBZEZW6nUNdnDv7KATsP5uB2Qi3qEls2zbDObwckzbfNc9j0B8Zg
-         XkXNADzmssbfixpv6azp3LNDOBXQk/7p7v4AbViYwC8jK1IOaJNICWvFtKJu1HxAFZMD
-         2IBX6a5vek3kc4bW+xF4w3aX+URpExhm1G9Xyab6jfKnUUOjUkpUxIm8PWata3YzceZG
-         dpg7aU57TFV+UpmF1yRGAT0ztBS7AoECE+UWvmwbBpzsXjcDOJ36tmJcWKLJVl0WS1GD
-         Y7VQ==
-X-Gm-Message-State: AOJu0YyL6PyAfAC+0+tZzSrIu+az4OzJq69+wb0mLKAULh3+NycGL25N
-	zRGW21GKr3W6gZAzKuF5d1k/2McGqpPBxXyC034PvHVVtI4BpsWukWah9BSadg==
-X-Gm-Gg: AR+sD11Z25vM7J37uTWkF4252J7OsiWH2FF+lEgOlC14r8thkQr/tT1ruhkZhE/LR7m
-	2At27R6VgxPw9X4KFdE/uMqdEj/qgP80xUNjXtA2SewOmZyqHzJeumx3svsc71nxrQiriWp7v/o
-	Z8+VegcvILTq07/PtJzPMdJoCStiZLbYtHyyIwM3/nh+zf6ecSukDm5opXDidfB95+cEphsS07J
-	+DXGJtAF8GMTmIuSOU3vHypkMRuxsLk5AftsIRPqJ1v5c4SelHlu2nqKjVfccQfQEUVvhG3+96g
-	wnPSgeUa+Y5UNQMkA2PUGJoLjLTxXiXjwYAVci2EZVMcn8S3XCChPxh/v9bjc+VOYLaDdd3FOCq
-	7CRA9eOHTiqWfJV0yM8aRcsGbYq/cx5i/0j4GOLGkc+THPnNCgxgNgDXWtiAWgm1CNVyflF3Hzu
-	nTjzHTbBQLL3YnK4E0FqT3Wb6CTSgbvqSHDE7taKUpo6Qbwo8+sRVWj/oNvPZGe/SYnNdxB32rv
-	a20UVRyCYN1FY9OKWW/R4M9hIuMSKqZwWws7AUh4f+5yoSAeoK69F7GcRZHcjfDWU4+qeTH93R0
-	eigpPBDdJUuOvgIJiZk=
-X-Received: by 2002:a17:90b:57e3:b0:38e:9279:468c with SMTP id 98e67ed59e1d1-38f296091e5mr3787450a91.25.1785032994466;
-        Sat, 25 Jul 2026 19:29:54 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785032999; x=1785637799;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QmW4i5gn/tzoKeLWVo6qHQZrVw0QUrU73xST5f2rZd8=;
+        b=quSbh56busXsKYjrWh8JpCmyWmerUAQCZbIR9bmVMO+y5AoSo1pHRO2Lryeo2gVDuE
+         L8QCSeNIDTrqMaNBAkm4ulxNz2k1UA2iwVUIuyVzfbfz2BFC5c2tzqGjJiEJs/AeCh93
+         47jXLm9u+1KXasGbHxF4AV6IhKKKOPRRd03BfiZD96OKAyOe6/KjOYXb4WHBdQSRAP+K
+         sEZ4HatqXz/YfmwbGJ9fBSqCFWb3yoNKTXQ3CYELp789CUUXOClORLUFXjr/FrAzawAD
+         5mOsEgQETyfiRzaSBMYCw7VArZblkDaHIp4fLLD7D3GwplCzOLr5gqZIuXFcRQl0AI88
+         ONnQ==
+X-Gm-Message-State: AOJu0Yw6Kui3chWgvWcFYQg1g2dYJPkvGWEPt2WKVJtTnoEoTpZwpnyW
+	jr6OBm1dDY72odcazGKz0RMQoRYK8vnxeJu2u3TNRn1IJzw6Narp2SY+mPiPSQ==
+X-Gm-Gg: AR+sD13uYQ7/tkBFOSavb87JcS3TiXHayL0LOUGPzcLPDDmY2tOGXUlRQQgDhEkAEOH
+	xSzFkfcbBP75n1fhCJ064Po48BebJW6apN8Rv+Tqa69g8Yr9+13FZ0JBkDBG8FdwAoNIFnp/Mi1
+	sXaTtHsMAjzZxJzO5ZXblNDdHtOh+ls5BArpf78m/pdvbY1BCGy3vj9/zhuadVEkBnHP3CRe10S
+	lWGLV/e4loIqPkTyb8zkq3+IXiQm9el18GlvCw4mtdMVdFVSehu1BoRoRF26C3BY2pwkzh2R4mc
+	MTl8LLur0ZsSaq1TDD/A45B1+CNEf5NIMCgDcu11+UI5EdXL42qcy67Ey8ExwcVHLx0UPih9Lv8
+	5pTvYU7RWH9rHRqPqi+MpiHD22EzP6FzkgnoubpqJlewp8xGxo5HsxvnveFz+3/a0qzSuKi5FXO
+	8UlyvF5ZBpG7kumKAG906PntqWqASRND7PYrP9ukp4ffJP/uhcZSEdwzlwZCYbuVQXWPC1BEL1I
+	Da+py6K8L7TNgsq9tAJwl9WKeZKkLWyEEamPjjz4bziDESxa2qRwvoO3GkvOFdvKmbotNrjaD6Q
+	4gWtv/E9inWoMUNRFytP5ROTpmn2Og==
+X-Received: by 2002:a17:902:eccf:b0:2cc:ac15:ff4c with SMTP id d9443c01a7336-2cfd70e066cmr58250885ad.8.1785032996387;
+        Sat, 25 Jul 2026 19:29:56 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc3e127asm26526993eec.2.2026.07.25.19.29.53
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc3e127asm26526993eec.2.2026.07.25.19.29.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jul 2026 19:29:53 -0700 (PDT)
+        Sat, 25 Jul 2026 19:29:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	"Claude Opus 4.8 (1M context)" <noreply@anthropic.com>
-Subject: [meta-gnome][PATCH 1/2] gnome-terminal: replace deprecated GFDL-1.3 with GFDL-1.3-no-invariants-only
-Date: Sat, 25 Jul 2026 19:29:49 -0700
-Message-ID: <20260726022951.1696787-1-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 2/2] anthy: port to anthy-unicode 1.0.0.20260213
+Date: Sat, 25 Jul 2026 19:29:50 -0700
+Message-ID: <20260726022951.1696787-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260726022951.1696787-1-khem.raj@oss.qualcomm.com>
+References: <20260726022951.1696787-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2026 02:30:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128448
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2026 02:30:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128449
 
-The recent oe-core change validating LICENSE as an SPDX expression
-(classes/conf/lib: Parse LICENSE as SPDX Expression) flags GFDL-1.3 as
-a deprecated license identifier. The COPYING.GFDL checksum
-(a22d0be1ce2284b67950a4d1673dd1b0) matches the GFDL-1.3-no-invariants-only
-text, so use that non-deprecated identifier.
+Replace the long-dead anthy 9100h (last released 2009, fetched from an old
+Ubuntu source tarball) with the maintained fork anthy-unicode, which is UTF-8
+native and actively released on GitHub.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+anthy-unicode renames its libraries (libanthy-unicode, libanthydic-unicode,
+libanthyinput-unicode), pkg-config module file (anthy-unicode.pc), headers
+(includedir/anthy-unicode-1.0/anthy), config file (anthy-unicode.conf) and
+binaries (anthy-*-unicode). The recipe and packaging are updated accordingly:
+libanthy-unicode0 for the runtime libraries and the standard PN-dev for the
+development files.
+
+The cross-compilation strategy is carried over from the old recipe: dictionary
+generation runs helper programs (mkfiledic, mkworddic, mkdepgraph, calctrans,
+proccorpus) that cannot execute when cross compiling. native-helpers.patch
+promotes them to bin_PROGRAMS so anthy-unicode-native stages them into the
+native sysroot; target-helpers.patch makes the target dictionary rules call
+them from PATH instead of ./. not_build_elc.patch avoids byte-compiling the
+Emacs lisp (no target Emacs under cross compilation). The patches are
+regenerated against anthy-unicode's -unicode-suffixed libtool archives. The
+legacy 2ch_t.patch is dropped; anthy-unicode has no mkanthydic/2ch.t.
+
+uim is switched from the legacy EUC-JP anthy backend to the UTF-8
+anthy-unicode backend it already supports: configure with --without-anthy
+--with-anthy-utf8, DEPENDS on anthy-unicode, and the uim-anthy package is
+renamed uim-anthy-utf8 (plugin libuim-anthy-utf8, anthy-utf8*.scm, module
+registered as anthy-utf8) with RDEPENDS on libanthy-unicode0.
+
+packagegroup-meta-oe: anthy -> anthy-unicode.
+
+Verified by building anthy-unicode-native and anthy-unicode for
+x86-64 (do_package_qa clean): the native helpers stage into the native
+sysroot, the target build generates anthy.wdic/anthy.dep/anthy.dic via those
+native helpers, and packaging splits into anthy-unicode, libanthy-unicode0 and
+anthy-unicode-dev. uim variables verified by parse (it requires the x11
+DISTRO_FEATURE, which the qemux86-64 yoe distro strips, so it is not buildable
+in this configuration).
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../packagegroups/packagegroup-meta-oe.bb     |    2 +-
+ .../anthy-unicode/native-helpers.patch        |   61 +
+ .../anthy-unicode/not_build_elc.patch         |   23 +
+ .../anthy-unicode}/target-helpers.patch       |   50 +-
+ .../anthy-unicode_1.0.0.20260213.bb           |   41 +
+ .../recipes-support/anthy/anthy/2ch_t.patch   | 5064 -----------------
+ .../anthy/anthy/native-helpers.patch          |   60 -
+ .../anthy/anthy/not_build_elc.patch           |   19 -
+ meta-oe/recipes-support/anthy/anthy_9100h.bb  |   48 -
+ meta-oe/recipes-support/uim/uim_1.9.6.bb      |   26 +-
+ 10 files changed, 171 insertions(+), 5223 deletions(-)
+ create mode 100644 meta-oe/recipes-support/anthy-unicode/anthy-unicode/native-helpers.patch
+ create mode 100644 meta-oe/recipes-support/anthy-unicode/anthy-unicode/not_build_elc.patch
+ rename meta-oe/recipes-support/{anthy/anthy => anthy-unicode/anthy-unicode}/target-helpers.patch (67%)
+ create mode 100644 meta-oe/recipes-support/anthy-unicode/anthy-unicode_1.0.0.20260213.bb
+ delete mode 100644 meta-oe/recipes-support/anthy/anthy/2ch_t.patch
+ delete mode 100644 meta-oe/recipes-support/anthy/anthy/native-helpers.patch
+ delete mode 100644 meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
+ delete mode 100644 meta-oe/recipes-support/anthy/anthy_9100h.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
-index 489e1af7ce..449ce6d1ed 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME terminal"
--LICENSE = "GFDL-1.3 AND GPL-3.0-only"
-+LICENSE = "GFDL-1.3-no-invariants-only AND GPL-3.0-only"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
-     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index bdda72195b..824ef445f1 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -705,7 +705,7 @@ RDEPENDS:packagegroup-meta-oe-shells = "\
+
+ RDEPENDS:packagegroup-meta-oe-support = "\
+     ace-cloud-editor \
+-    anthy \
++    anthy-unicode \
+     asio \
+     atop \
+     augeas \
+diff --git a/meta-oe/recipes-support/anthy-unicode/anthy-unicode/native-helpers.patch b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/native-helpers.patch
+new file mode 100644
+index 0000000000..88676bbd42
+--- /dev/null
++++ b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/native-helpers.patch
+@@ -0,0 +1,61 @@
++Upstream-Status: Inappropriate [cross-compile specific]
++
++Stage the native anthy-unicode helpers (mkfiledic, mkdepgraph, mkworddic,
++calctrans, proccorpus) as bin_PROGRAMS so anthy-unicode-native installs them
++into the native sysroot, where the target build's dictionary rules pick them
++up from PATH (see target-helpers.patch).
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++diff --git a/calctrans/Makefile.am b/calctrans/Makefile.am
++index a48867a..dc6af11 100644
++--- a/calctrans/Makefile.am
+++++ b/calctrans/Makefile.am
++@@ -3,7 +3,7 @@ EXTRA_DIST =\
++  corpus.3.txt corpus.4.txt corpus.5.txt\
++  corpus_info weak_words
++
++-noinst_PROGRAMS = calctrans proccorpus
+++bin_PROGRAMS = calctrans proccorpus
++ INCLUDES = -I$(top_srcdir)/
++
++ calctrans_SOURCES = calctrans.c input_set.c input_set.h corpus.c
++diff --git a/depgraph/Makefile.am b/depgraph/Makefile.am
++index 468f90c..75b285c 100644
++--- a/depgraph/Makefile.am
+++++ b/depgraph/Makefile.am
++@@ -9,7 +9,7 @@ CLEANFILES = anthy.dep
++ EXTRA_DIST = indepword.txt $(DEPWORDS)
++
++ # Generate the dictionary
++-noinst_PROGRAMS = mkdepgraph
+++bin_PROGRAMS = mkdepgraph
++ mkdepgraph_SOURCES = mkdepgraph.c
++ mkdepgraph_LDADD =  ../src-main/libanthy-unicode.la ../src-worddic/libanthydic-unicode.la
++
++diff --git a/mkanthydic/Makefile.am b/mkanthydic/Makefile.am
++index dfabff6..1c665eb 100644
++--- a/mkanthydic/Makefile.am
+++++ b/mkanthydic/Makefile.am
++@@ -3,7 +3,7 @@ noinst_SCRIPTS =
++ CLEANFILES = anthy.dic
++ INCLUDES = -I$(top_srcdir)/ -DSRCDIR=\"$(srcdir)\"
++
++-noinst_PROGRAMS = mkfiledic
+++bin_PROGRAMS = mkfiledic
++ mkfiledic_SOURCES = mkfiledic.c
++ mkfiledic_LDADD = ../src-diclib/libdiclib.la
++
++diff --git a/mkworddic/Makefile.am b/mkworddic/Makefile.am
++index d9b262e..b0a9e01 100644
++--- a/mkworddic/Makefile.am
+++++ b/mkworddic/Makefile.am
++@@ -26,7 +26,7 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gcanna.ctd \
++ 	    @top_srcdir@/mkworddic/udict
++
++ # Generate the dictionary
++-noinst_PROGRAMS = mkworddic
+++bin_PROGRAMS = mkworddic
++ mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
++ mkworddic_LDADD = ../src-worddic/libanthydic-unicode.la
++
+diff --git a/meta-oe/recipes-support/anthy-unicode/anthy-unicode/not_build_elc.patch b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/not_build_elc.patch
+new file mode 100644
+index 0000000000..a3aa82407d
+--- /dev/null
++++ b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/not_build_elc.patch
+@@ -0,0 +1,23 @@
++Upstream-Status: Inappropriate [cross-compile specific]
++
++Do not byte-compile the Emacs lisp files at build time; there is no target
++Emacs available under cross compilation. The .el sources are still shipped.
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++diff --git a/src-util/Makefile.am b/src-util/Makefile.am
++index c51c076..7ccad01 100644
++--- a/src-util/Makefile.am
+++++ b/src-util/Makefile.am
++@@ -16,10 +16,7 @@ bin_PROGRAMS = \
++     anthy-agent-unicode \
++     anthy-morphological-analyzer-unicode \
++     $(NULL)
++-ELCFILES = anthy-unicode.elc anthy-unicode-azik.elc anthy-unicode-conf.elc \
++-    anthy-unicode-dic.elc anthy-unicode-isearch.elc anthy-unicode-kyuri.elc \
++-    leim-list.elc \
++-    $(NULL)
+++ELCFILES =
++ if ELISP
++ lisp_LISP = $(ELISP_FILES)
++ endif
+diff --git a/meta-oe/recipes-support/anthy/anthy/target-helpers.patch b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/target-helpers.patch
+similarity index 67%
+rename from meta-oe/recipes-support/anthy/anthy/target-helpers.patch
+rename to meta-oe/recipes-support/anthy-unicode/anthy-unicode/target-helpers.patch
+index fc5c72c051..ce0a51ee58 100644
+--- a/meta-oe/recipes-support/anthy/anthy/target-helpers.patch
++++ b/meta-oe/recipes-support/anthy-unicode/anthy-unicode/target-helpers.patch
+@@ -1,9 +1,18 @@
+-Upstream-Status: Pending
++Upstream-Status: Inappropriate [cross-compile specific]
+
+-diff -Nurp anthy-9100h.org/calctrans/Makefile.am anthy-9100h/calctrans/Makefile.am
+---- anthy-9100h.org/calctrans/Makefile.am	2007-10-27 23:02:59.000000000 +0900
+-+++ anthy-9100h/calctrans/Makefile.am	2014-11-11 17:14:42.152999991 +0900
+-@@ -15,31 +15,31 @@ dict_source_files = anthy.cand_info anth
++For the target build, do not compile or run the dictionary-generation helpers
++(mkfiledic, mkdepgraph, mkworddic, calctrans, proccorpus) locally -- they are
++built by anthy-unicode-native and installed into the native sysroot. Drop the
++"./" prefix from the dictionary rules so the helpers are taken from PATH, and
++disable the local build of the helpers that also provide libraries.
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++diff --git a/calctrans/Makefile.am b/calctrans/Makefile.am
++index a48867a..b47b6af 100644
++--- a/calctrans/Makefile.am
+++++ b/calctrans/Makefile.am
++@@ -15,31 +15,31 @@ dict_source_files = anthy.cand_info anthy.trans_info anthy.corpus_array anthy.co
+
+  update_params:
+  	rm -f parsed_data2
+@@ -47,19 +56,20 @@ diff -Nurp anthy-9100h.org/calctrans/Makefile.am anthy-9100h/calctrans/Makefile.
+
+  noinst_DATA = $(dict_source_files)
+  CLEANFILES = $(dict_source_files) parsed_data parsed_data2 anthy.feature_info
+-diff -Nurp anthy-9100h.org/depgraph/Makefile.am anthy-9100h/depgraph/Makefile.am
+---- anthy-9100h.org/depgraph/Makefile.am	2008-11-29 21:46:14.000000000 +0900
+-+++ anthy-9100h/depgraph/Makefile.am	2014-11-11 17:12:03.813999991 +0900
++diff --git a/depgraph/Makefile.am b/depgraph/Makefile.am
++index 468f90c..1f3de05 100644
++--- a/depgraph/Makefile.am
+++++ b/depgraph/Makefile.am
+ @@ -9,11 +9,11 @@ CLEANFILES = anthy.dep
+  EXTRA_DIST = indepword.txt $(DEPWORDS)
+
+  # Generate the dictionary
+ -noinst_PROGRAMS = mkdepgraph
+ -mkdepgraph_SOURCES = mkdepgraph.c
+--mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
++-mkdepgraph_LDADD =  ../src-main/libanthy-unicode.la ../src-worddic/libanthydic-unicode.la
+ +#noinst_PROGRAMS = mkdepgraph
+ +#mkdepgraph_SOURCES = mkdepgraph.c
+-+#mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
+++#mkdepgraph_LDADD =  ../src-main/libanthy-unicode.la ../src-worddic/libanthydic-unicode.la
+
+ -anthy.dep : mkdepgraph $(DEPWORDS)
+ -	./mkdepgraph
+@@ -67,9 +77,10 @@ diff -Nurp anthy-9100h.org/depgraph/Makefile.am anthy-9100h/depgraph/Makefile.am
+ +	mkdepgraph
+
+  noinst_DATA = anthy.dep
+-diff -Nurp anthy-9100h.org/mkanthydic/Makefile.am anthy-9100h/mkanthydic/Makefile.am
+---- anthy-9100h.org/mkanthydic/Makefile.am	2007-04-14 18:01:10.000000000 +0900
+-+++ anthy-9100h/mkanthydic/Makefile.am	2014-11-11 17:10:34.792999991 +0900
++diff --git a/mkanthydic/Makefile.am b/mkanthydic/Makefile.am
++index dfabff6..d1109cc 100644
++--- a/mkanthydic/Makefile.am
+++++ b/mkanthydic/Makefile.am
+ @@ -3,12 +3,12 @@ noinst_SCRIPTS =
+  CLEANFILES = anthy.dic
+  INCLUDES = -I$(top_srcdir)/ -DSRCDIR=\"$(srcdir)\"
+@@ -88,19 +99,20 @@ diff -Nurp anthy-9100h.org/mkanthydic/Makefile.am anthy-9100h/mkanthydic/Makefil
+
+
+  # To install
+-diff -Nurp anthy-9100h.org/mkworddic/Makefile.am anthy-9100h/mkworddic/Makefile.am
+---- anthy-9100h.org/mkworddic/Makefile.am	2009-01-23 12:31:31.000000000 +0900
+-+++ anthy-9100h/mkworddic/Makefile.am	2014-11-11 17:13:31.946999992 +0900
+-@@ -26,14 +26,14 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gc
++diff --git a/mkworddic/Makefile.am b/mkworddic/Makefile.am
++index d9b262e..6a8a54c 100644
++--- a/mkworddic/Makefile.am
+++++ b/mkworddic/Makefile.am
++@@ -26,14 +26,14 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gcanna.ctd \
+  	    @top_srcdir@/mkworddic/udict
+
+  # Generate the dictionary
+ -noinst_PROGRAMS = mkworddic
+ -mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
+--mkworddic_LDADD = ../src-worddic/libanthydic.la
++-mkworddic_LDADD = ../src-worddic/libanthydic-unicode.la
+ +#noinst_PROGRAMS = mkworddic
+ +#mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
+-+#mkworddic_LDADD = ../src-worddic/libanthydic.la
+++#mkworddic_LDADD = ../src-worddic/libanthydic-unicode.la
+
+  noinst_DATA = anthy.wdic
+
+diff --git a/meta-oe/recipes-support/anthy-unicode/anthy-unicode_1.0.0.20260213.bb b/meta-oe/recipes-support/anthy-unicode/anthy-unicode_1.0.0.20260213.bb
+new file mode 100644
+index 0000000000..e8c4d9b97c
+--- /dev/null
++++ b/meta-oe/recipes-support/anthy-unicode/anthy-unicode_1.0.0.20260213.bb
+@@ -0,0 +1,41 @@
++DESCRIPTION = "Anthy Unicode is a maintained fork of the Anthy Japanese input \
++method. It converts Hiragana text to Kana Kanji mixed text and works in UTF-8."
++HOMEPAGE = "https://github.com/fujiwarat/anthy-unicode"
++
++LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5f37c94ff7ea73f8ed6ce61216611051 \
++    file://alt-cannadic/COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b \
++"
++
++SRC_URI = "https://github.com/fujiwarat/anthy-unicode/releases/download/${PV}/anthy-unicode-${PV}.tar.gz \
++    file://not_build_elc.patch \
++"
++
++SRC_URI:append:class-target = " file://target-helpers.patch"
++SRC_URI:append:class-native = " file://native-helpers.patch"
++
++SRC_URI[sha256sum] = "666e91b92c76eb5bee7ee88dca1478eb55122c2af2641f055d4e51cf9d904860"
++
++UPSTREAM_CHECK_URI = "https://github.com/fujiwarat/anthy-unicode/releases"
++UPSTREAM_CHECK_REGEX = "anthy-unicode-(?P<pver>\d+(\.\d+)+)"
++
++DEPENDS:class-target = "anthy-unicode-native"
++RDEPENDS:${PN}:class-target = "libanthy-unicode0"
++
++inherit autotools pkgconfig
++
++PACKAGES += "${PN}-el libanthy-unicode0"
++
++FILES:${PN}-dbg += "${libdir}/.debug"
++FILES:libanthy-unicode0 = "${libdir}/libanthy-unicode.so.* \
++    ${libdir}/libanthydic-unicode.so.* \
++    ${libdir}/libanthyinput-unicode.so.* \
++"
++
++FILES:${PN}-el = "${datadir}/emacs/*"
++FILES:${PN} = "${datadir}/* \
++    ${bindir}/* \
++    ${sysconfdir}/anthy-unicode.conf \
++"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/anthy/anthy/2ch_t.patch b/meta-oe/recipes-support/anthy/anthy/2ch_t.patch
+deleted file mode 100644
+index a0d3f9c25e..0000000000
+--- a/meta-oe/recipes-support/anthy/anthy/2ch_t.patch
++++ /dev/null
+@@ -1,5064 +0,0 @@
+-Upstream-Status: Pending
+-
+-source: shamelessly stolen from debian ;-)
+-purpose: add some entries particularly useful in Japanese 2channel anonymous website
+-         (at least that is my understanding ;-))
+-
+---- anthy-5414.orig/mkanthydic/2ch.t
+-+++ anthy-5414/mkanthydic/2ch.t
+-@@ -0,0 +1,5055 @@
+-+# 2ch�Ѹ��Canna��������
+-+# HARUYAMA Seigo haruyama@unixuser.org
+-+# ������ʻ�Ϥ������٤� �ʤ� ���äѤ�����Ϥ��ʤΤ�
+-+# ����Ŧ�������
+-+# ����: http://freezone.kakiko.com/jiten/index.html
+-+#       http://members.tripod.co.jp/maruheso/aadic/index.html
+-+#       http://isweb33.infoseek.co.jp/computer/gikosite/ (403 Forbidden)
+-+#       http://cannadic.oucrc.org/
+-+#       http://www.kyoto.trans-nt.com/anthy/
+-+#       http://www.media-k.co.jp/jiten/
+-+# ���ͤˤ��Ƥ��뼭������ե饤���󥹤��Ϥä��ꤷ�ޤ���
+-+# ��Ͽ���줿��˴ؤ��Ƥϥѥ֥�å��ɥᥤ��Ȳ򤷤�����ʤ�
+-+# ��Ƚ�Ǥ��Ƥ��ޤ�.
+-+#
+-+# ���μ����̵�ݾڤǤ���
+-+#
+-+# 2004/5/19��
+-+#
+-+1�Τ����夦���� #T35 >>1�ΰ콵��
+-+1�Τ��ä��夦���� #JN >>1�ΰ콵��
+-+1�Τ����ʤʤ��� #JN 1���Ĥʤ���
+-+2����󤻤�����Ӥ礦���� #JN 2ch�����±�
+-+911������ #T35 911����
+-+�������� #CJ ��������
+-+�������� #KK ��������
+-+�������� #T35 ��������
+-+�����뤢���� #T35 RR
+-+����������顼 #JN ����������顼
+-+���������Ф��礦�椦 #CJ ���������о�ʹ
+-+�������� #CJ ��������
+-+����������� #CJ ������������衣
+-+�������� #T35 ��������
+-+�����Ϥ� #CJ �����ϥ�
+-+�����Ϥ� #CJ �����ʎ�
+-+�����뤢���� #T35 RR
+-+�����뤨�������� #T35 RAR
+-+���� #JN ����
+-+���������� #T35 IR
+-+�������� #T35 ��������
+-+������ #T35 ����
+-+�������� #CJ ����������
+-+�������� #T35 ��������
+-+�����Ƥ����Ѥ #T35 �ɣԥѥ
+-+�����Ǥ��� #T35 �ɣ�
+-+�����ɤ� #T35 ����
+-+�����ʤ֤�ä� #T35 �����ʥ֥�å�
+-+�����ˤ����ͤ� #T35 i��2�����ͤ�
+-+�����Τ��� #CN ���μ�
+-+�����Τ��� #T35 ���μ�
+-+�����ԡ� #T35 �ɣ�
+-+�����Ԥ� #T35 ip!
+-+������ #KK ����
+-+������ #T35 ����
+-+�����ܤ� #JN �����ܤ�
+-+�����ܤ� #T35 �����ܤ�
+-+������ˤ夦�Ϥ��� #T35 ime.nu�Ƥ�
+-+������� #T35 iMona
+-+������ʡ� #JN ������ʡ�
+-+������ʡ� #JN ������ʡ�
+-+�������� #T35 ������
+-+������ #KK ������
+-+������ #T35 ������
+-+�����襤�桼������� #JN IYU-01
+-+���� #KK ����
+-+���� #T35 ����
+-+������ #JN ������
+-+�����Ȥ��� #T35 �����ȥ���
+-+�����Ȥ��� #T35 �����ȥ���
+-+������ #T35 ������
+-+���� #R5r ��
+-+�������� #KSr �Ĥ���
+-+�������� #T35 �Ĥ���
+-+�������� #KK �Ķ�
+-+�������� #T35 �Ķ�
+-+������ #T35 �Ļ�
+-+������ #T35 ����
+-+�����ꤳ�Ƥ� #T35 �������
+-+�����ꤳ�Ԥ� #T35 ���ꥳ�ԥ�
+-+������� #JN �������
+-+���� #T35 ��
+-+���������ˤߤ� #T35 �ְ�ˮƻ
+-+�������ۤ��ɤ� #T35 �ְ�ˮƻ
+-+��������ä� #T35 �֥���å�
+-+�������󤷤㤯 #T35 ���˼�
+-+������ #KK ������
+-+������ #T35 ������
+-+�����ޤդ顼 #T35 �֥ޥե顼
+-+�����ޤդ餢 #T35 �֥ޥե顼
+-+���� #R5 aga
+-+�����Ȥ� #CJ �����Ȥ�
+-+�������ΤΤߤ䤫���ʤ�����Τ� #JN ���ĵܲ»���Ʋ�
+-+�����ϤФ�Ҥ礦����󤷤褦 #T35 ���ո�ɸ�����
+-+�����Ҥ���ʡ� #JN �����ҥ���ʡ�
+-+�����Ҥ���ʡ� #T35 �����ҥ���ʡ�
+-+�����Ҥ���ʤ� #T35 �����ҥ���ʡ�
+-+�����줹 #JN �����쥹
+-+�������� #T35 ������
+-+�������������� #T30 ������������
+-+�������������� #T35 ������������
+-+������ #JN ����
+-+������ #T35 ����
+-+�����ͤ����ڤ���� #T35 �����ͥ����ڥ����
+-+�������� #CN ������
+-+�������� #T35 ������
+-+���� #CJ ����
+-+���� #CN �奲
+-+���� #KSr ����
+-+���� #R5 age
+-+���� #T35 age
+-+���� #T35 ����
+-+���� #T35 �夲
+-+���� #T35 �奲
+-+�������餷 #T35 age�Ӥ餷
+-+�������餷 #T35 �����Ӥ餷
+-+�������夦 #T35 ������
+-+�����Ѥ��ޤ� #JN age�ʎߎ��ώ�
+-+�����֤餶���� #JN age�֥饶����
+-+������ʡ� #JN age��ʡ�
+-+������ #CJ age��
+-+�����줹 #T35 age�쥹
+-+������ʤܤ� #CJ ������ʥܥ���
+-+���� #JN ����
+-+���� #T35 ����
+-+�������ˤ� #T35 �������˥�
+-+�������� #JN ��������
+-+�������� #T35 ��������
+-+�����Ϥ������ #T30 �����ϥ�������
+-+�����Ϥ������ #T35 �����ϥ�������
+-+��������� #T35 ī�����
+-+�����̤ޤʤߤ��󤻤� #JN ������������
+-+�����Ϥ顼 #JN �����ϥ顼
+-+�����Ҥ����ˤ������� #T35 ī��12.10
+-+�����ԡ� #JN �����ԡ���
+-+�����ݤ� #T35 ̣�ݥ�
+-+��������ʡ� #JN ��Ļ��ʡ�
+-+�������������� #T35 ��������������
+-+�������������Ȥ������� #JN ��������
+-+�������������� #T35 ��������������
+-+�����ޤ󤬤������� #T35 �����ޤ��粦
+-+������ #JN ������
+-+�����Ѥ��ޤ� #JN �����ѥ��ޥ�
+-+�����Ѥ���ä��礤 #JN �����ѥ���å��祤
+-+�����ޤ��Ѥ��ԡ����� #JN �����ʎߎ��ώ�PC
+-+���ä��� #JN ���å���
+-+���ä��� #JN ���å���
+-+���ä� #JN ���ä�
+-+���ä��� #CJ ���ä���
+-+���ä��� #JN ���ä���
+-+���ä����ä������Ȥ� #JN ���å����å������ȥ�
+-+���äפ��礯�ˤ� #T35 ���𿦿�
+-+���äפ��礯�ˤ� #T35 ���𿦿�
+-+���äפ� #T35 Appz
+-+���äפ뤪�䤸 #T35 ���åץ륪�䥸
+-+���äפ뤭�ä� #JN ���åץ륭�å�
+-+���äפ������� #T35 ���åץ�������
+-+���ġ� #JN (��A��;)����
+-+���ġ� #JN ����
+-+���Ĥ����礦������������ #JN �ڎ��ώ���
+-+���Ĥ����礦������������ #JN �����ގ��������ގ������ގ���
+-+���Ȥԡ� #T35 @p
+-+���ʤ��������� #JN ���ʥ���������
+-+���ʤ���Ϥ�ˤ�Ǥ� #CJ ���ʤ����ȿͤǤ�
+-+���ʤ���Ϥ�ˤ�Ǥ� #JN ��'��`�ˡ㤢�ʤ����ȿͤǤ�
+-+���ʤ���Ϥ�ˤ�Ǥ� #JN ���ʤ����ȿͤǤ�
+-+���ʤ����դ����Ȥꤤ #T35 ���ʥ����ե����ȥ꡼
+-+���ʤ� #T35 ���ʥ�
+-+���� #T35 ��
+-+���ˤ��� #T35 ���˥���
+-+���ˤ� #T35 ���˥�
+-+���ˤ��� #T35 ����
+-+���ˤפ� #T35 ���˥ץ�
+-+���ˤ� #T35 ���˥�
+-+���Τ��� #T35 ���ι�
+-+���Τ��ˤΤ��Τۤ����� #T35 ���ι�Τ���ˡ§
+-+���Ϥ� #JN (*����`*)���ʎ�&#9829;
+-+���Ϥ� #JN (*����`;)��
+-+���Ϥ� #JN ��(*����`)���ʎ���&#9829;
+-+���Ϥ� #JN ��(*�ߧ�`;)���Ď��Ď����ʎ���������������&#9829;!!!!
+-+���Ϥ� #JN ��(�ߧ�`*;)����,���ʎ�&#9829;
+-+���Ϥ� #JN ���ʎ�&#9829;
+-+���Ѥ� #T35 ���ѥ�
+-+���Ѥि�ޤ�äƤ��� #JN ���ѥࡪ�ƻ��äƤ���
+-+���Ҥ� #CJ ���ҥ�
+-+���Ҥ� #CJ ���ˎ�
+-+���Ҥ� #JN ���ҥ�
+-+���Ҥ� #JN ���ˎ�
+-+���Ҥ㤢���餷 #JN ���ҥ㥢���饷��
+-+���Ҥ㤬�ߤϤ��� #JN ���ҥ�����
+-+���Ӥ� #CJ ���Ӥ�
+-+���Ԥä��㡼 #JN ���ԥå��㡼
+-+���դ�����ɤ��ä��� #JN ���ե�����ɣ�
+-+���դ� #T35 ���ե�
+-+���դ��󤳤��������⤦ #T35 ���ե���Ҷ�����
+-+���դ��ˤ��� #JN ���ե��˥���
+-+���֤��� #T35 ������
+-+���֤����ʡ� #JN �����ɥ����ʡ�
+-+���� #T30 ����
+-+���� #T30 ����
+-+���פ��� #T35 ���פ���
+-+���� #JN �ʤä�
+-+���� #JN ����
+-+���ۤ��� #T35 ���۽�
+-+���ۤ��� #JN ���ۤ���
+-+���ۤ���� #T35 ���ۥ����
+-+���ۤ���� #T35 ���ۥ����
+-+���ܡ��� #JN ���ܡ���
+-+���ܡ��� #T30 ���ܡ���
+-+���ܡ��� #T30 ���ܡ���
+-+���ܡ���ͤäȤ�� #T35 ���ܡ���ͥåȥ��
+-+���ܡ���Ф��餤 #JN ���Ύގ�������
+-+���ܤ������ #T35 ���ܡ������
+-+���ܤ��� #T35 ���ܡ���
+-+���ܤ���ͤäȤ濫�� #T35 ���ܡ���ͥåȥ��
+-+���ݡ� #KK ���ݡ�
+-+���ݡ� #T35 ���ݡ�
+-+���ݤ� #T35 ���ݡ�
+-+���ޡ� #JN ��&hearts;��;&hearts;�ˎ��ώ�
+-+���ޡ� #JN ���ޡ�
+-+���� #T35 ��
+-+������ˤ�ߤ� #JN �¼��Ǝ��Ў�
+-+���ᤶ�� #T35 ���ᤶ��
+-+���ᤶ���ͤäȤġ� #CN ���ᤶ���ͤäȣ�
+-+���ᤶ���ͤäȤġ� #T35 ���ᤶ���ͤäȣ�
+-+���ᤶ�� #T35 ���ᤶ��
+-+���ᤶ���ͤäȤĤ� #T35 ���ᤶ���ͤäȣ�
+-+���᤾�� #CN ���᤾��
+-+���᤾�� #JN ���᤾��
+-+���᤾�� #T35 ���᤾��
+-+���᤾������ #JN ���᤾���ʲ���
+-+���᤾������ #T35 ���᤾���ʲ���
+-+����ˤ�ޤ��� #T35 ����˥�ޥ���
+-+����ͤ� #JN ����ͤ�
+-+���䤷������ #CN ���䤷������
+-+���䤷�� #T35 ����ɤ�
+-+���䤷�����夦�ˤ� #T35 ����ɤ�����
+-+���䤷������ #CN ����ɤ�����
+-+���䤷������ #T35 ����ɤ�����
+-+���䤷���濫��� #T35 ����ɤ�����
+-+����ʤߤ줤 #JN ����ʤߥ쥤
+-+���� #JN ����
+-+���� #T35 ����
+-+���� #T35 ��
+-+�����ʡ� #JN �����ʡ�
+-+����� #T35 �����
+-+���� #S5r �Ӥ�
+-+���餢���� #T35 ���顼����
+-+���餯�� #JN ���餯��
+-+���餯���ä��礤 #JN ���餯���å��祤
+-+���餵�� #T35 �Ӥ���
+-+���餵�� #T35 �Ӥ���
+-+���餷 #T35 �Ӥ餷
+-+���餷 #T35 �Ӥ��
+-+���餷 #T35 �ӻ�
+-+���餷 #T35 ����
+-+���餷 #T35 ��
+-+���餷���餤 #T30 �Ӥ餷����
+-+���餷���餤 #T35 �Ӥ餷����
+-+���餷���Ƥ� #T30 �Ӥ餷����
+-+���餷���Ƥ� #T35 �Ӥ餷����
+-+���餷�����������󤿡� #JN �Ӥ餷���祻�󥿡�
+-+���餹 #S5r �Ӥ�
+-+����Ӥ������餷 #T35 ����ӥ���Ӥ餷
+-+������ #CJ ������
+-+������ #JN (���ա�)�㤢������
+-+������ #JN ������
+-+���������󤼤󤿤� #JN ������������
+-+���ꤨ���� #CJ ���ꥨ����
+-+���ꤨ���� #T35 ���ꥨ����
+-+���ꤨ���� #T35 ���؎�����
+-+���ꤨ���� #T35 ���ꥨ����
+-+���ꤨ���� #T35 ���؎�����
+-+���꤬�Ȥ� #JN ���꤬�Ȥ�
+-+���ꤹ #JN ���ꤹ
+-+���뤫��ʤ������ष�� #JN ���륫��ʥ���̳��
+-+���뤯���Τ� #JN �⤯���Υ�
+-+���뤯�� #JN �⤯��
+-+����� #JN �����
+-+�������꡼�� #JN �������꡼��
+-+���󤬤Ȥʤ⡼ #JN ���󤬤ȥʥ⡼
+-+���󤰤� #T35 ���󥰥�
+-+���󤱤󤵤� #JN �š�������
+-+���󤷤㤹�ͤ� #JN ���󥷥㥹ǭ
+-+���󤿤��ʡ� #JN ���󥿥��ʡ�
+-+���󤿤�͡� #JN ���󥿥�͡�
+-+����������餦��� #T35 ����������饦���
+-+������Ǥ����Ƥ��� #T35 �����DT
+-+����ʤ��Ϥ�� #CN ���濺̾
+-+����ʤ��Ϥ�� #T35 ���濺̾
+-+���礥 #JN ���礥
+-+�� #C5r ��
+-+�������� #T35 ����
+-+�����ڡ����� #JN �����ڡ�����
+-+�����󤸤�ʤ��� #JN �����󤸤�ʤ���
+-+���� #CJ  (���ώ�)����!!
+-+���� #CJ  �ʡ��ϡ��˥���!!
+-+���� #CJ  �ʡ��ϡ��ˎ���!!
+-+���� #CJ ����
+-+����������� #JN �����������
+-+�������� #T35 ����
+-+���������������㤦�󤫤� #CJ ���������������㤦�󤫤ȡ�
+-+������ #T35 ����
+-+���������� #T35 ��ƥ���
+-+�����Ϥ�ɤǤ⤬�ä��夯����Ǥ�ͤ��� #T35 �ȤϽɤǤ��ɽ�Ǥ�ͤ�����
+-+���� #T35 ����
+-+�������ʤ�Τ� #JN �������ގŎӎɎ�
+-+���������� #CJ ����������
+-+�������礦��㤯 #CJ �ʰʲ���ά
+-+�������礦��㤯 #CJ �ʲ���ά
+-+������Τ��ޤΤ��� #JN �ܤ�Υ��ޥΥ���
+-+�������֤Ĥ����ʡ� #JN �ܤ��֤Ĥ����ʡ�
+-+�������뤷���夦�ˤ夦 #JN �°�����
+-+�����Τ����������� #JN �¤��Τ����������
+-+�����Τ����ˤ����� #JN �¤����ɤ�������
+-+���� #C5r �¤�
+-+�����ʤ� #CJ �����ʥ�����
+-+�����ʤ� #CJ �����Ŏ�!!
+-+�����̤� #T35 �Ӿ�
+-+�����͡��� #JN �����͡���
+-+������� #T35 ����
+-+������󤦤� #JN ������󥦥�
+-+�����������Ƥʡ�����Ҥ� #JN �������������ƥʡ�������ҥ�
+-+��������Ф� #T35 ��������Х�
+-+���������� #JN �۹񵼸�
+-+�������� #T35 ����
+-+��������äƤ��󤳤���� #CJ ����äƥ��󥳤���Ρ�
+-+������ #T35 ���
+-+�����䤭���⤦�� #JN �оƤ������
+-+������ʤ����Ǥ� #JN �������ᡦ�ʥ��ǡ���
+-+�����礦������������Ǥ��� #CJ (���ώ�)�����ގ������ގ������ގ��ݎÎގ���
+-+�����礦������������Ǥ��� #CJ �ʡ��ϡ��ˎ����ގ������ގ������ގ��ݎÎގ���
+-+���� #T35 �ػ�
+-+�����ɤ� #T35 �����ɥ�
+-+���� #T35 ��
+-+������ #T35 ����
+-+�������� #T35 �˴�
+-+������������ #CJ �Ĥ������
+-+�������� #KK �˲
+-+�������� #T35 �˲
+-+�������Ȥ� #CJ �Ĥ�����
+-+�������͡��� #JN �������͡���
+-+���������������� #T35 �Ĺ����
+-+�������Ф� #T30 �ĸ���
+-+�������� #W5r �İ�
+-+���������� #T35 �İ㤤
+-+�����ȤФ� #T35 �ĤȤФ�
+-+�����ˤ��� #CJ �Ĥ��¤���
+-+�����ᤤ #T35 ��̾
+-+������ꤢ��Ƥ� #T35 ������ꥢ��ƥ�
+-+���� #T35 1
+-+������ #JNS �԰�
+-+������ #T35 �԰�
+-+���������󤽤� #T35 ������
+-+�������ޤ��� #T35 ���⳦
+-+�������� #JN ������
+-+��������Τ��������ޤ� #CJ 1����Τ����ͤ�
+-+��������Τ��������ϤäԤ礦 #JN ������ι��ȯɽ
+-+���������Ȥ�ޤ��������� #JN ��������괬����ؿ�
+-+���������Ȥ�ޤ��������� #T35 ��������괬����ؿ�
+-+�����äƤ�������� #JN ���äƤ�������͡�
+-+�����ΤĤ����Ҥ礦 #JN ��������ɽ
+-+�����ΤϤ� #JN ������
+-+�����ϤϤ䤯���� #JN �����᤯��͡���
+-+�����ӤäȤ��� #T35 1bit��
+-+�����⤸�ŤĤĤ��äƤդ䤷���������������� #JN ��ʸ�����Ĥդ䤷�ƺ�ä�����
+-+���ä����� #T35 �����
+-+���ä��󤳤�� #JN �������ݎ��؎ݎ���
+-+���ä���äƤ������� #JN �¤ä���äƤ�������
+-+���ä���� #CJ 1ch
+-+���ä���� #CJ 1ch.tv
+-+���ä���� #CJ �������
+-+���ä���� #T35 1ch
+-+���ä���� #T35 1ch.tv
+-+���ä���� #T35 �������
+-+���ä����ͤ� #CJ 1ch
+-+���ä����ͤ� #CJ 1ch.tv
+-+���ä����ͤ� #CJ �������
+-+���ä����ͤ� #T35 1ch
+-+���ä����ͤ� #T35 1ch.tv
+-+���ä����ͤ� #T35 �������
+-+���äƤ��� #CJ �¤äƤ���
+-+���äƤ��� #kxuru �¤äƤ���
+-+���äƤ褷 #CJ ���æӤ��
+-+���äƤ褷 #CJ �¤äƤ褷
+-+���äƤ褷�������Ҥ����Ƥ� #JN �¤äƤ褷����������
+-+���äƤ褷�ˤ�Ƥ������󤫤� #JN �¤äƤ褷ǧ��Ѱ���
+-+���äƤ褷�ˤ�Ƥ������󤫤� #JN �¤äƤ褷ǧ��Ѱ���
+-+���äƤ褹 #CJ �¤äƥ襹
+-+���äȤ�����椦 #T35 ������ͥ
+-+���äѤĤ����ʤ餴���� #CJ ��ȯ�����ʤ����
+-+���äѤ󤭤㤯 #T35 ���̵�
+-+���äѤ󤸤� #T35 ���̿�
+-+���Ĥ⤳������ #JN ���Ĥ⤳������
+-+���Ƥ󤷤ޤ��� #CJ ��ž���ޤ���
+-+���Ƥ󤷤ޤ��� #T35 ��ž���ޤ���
+-+���Ǥۤ� #JN ���������ÎގΎ�
+-+���Ǥۤ� #JN ���ÎގΎ�
+-+���Ȥ����� #JN ��ƣ��
+-+���Ȥ����� #JN ��ƣ��
+-+���ʤ���ʡ� #JN �ļ˥�ʡ�
+-+���ʤ������С� #T35 ������С�
+-+���ʤ������Ф� #T35 ������С�
+-+���ʤ� #T35 175
+-+���ʤ� #T35 ���ʥ�
+-+���ʤ� #T35 ��
+-+���ˤͤ� #JN ini�ͤ�
+-+���� #CN ��
+-+���� #KK ��
+-+���� #T35 ��
+-+���̤����ܤ� #JN ����˾
+-+���̤��󤻤� #T35 ������
+-+���̤��夦 #T35 ����
+-+���̤�ޤФ� #JN ������
+-+���Τ���� #T35 ���Τ����
+-+���Τ����顼 #JN ���Υ����顼
+-+���Τ����� #T35 ���ڥ���
+-+���Τ��ΤǤ�� #JN ���Τ�������
+-+���Τ��� #JN ���Υ���
+-+���Τ��ΤǤ�� #JN ���Τ�������
+-+���Ф���͡��� #JN ����͡���
+-+���ѡ��� #T15 ���ѡ���
+-+���ѡ��� #T35 ���ѡ���
+-+���ޤ�������� #JN ���淳��
+-+���ޤ���ʡ� #JN �����ʡ�
+-+���ޤ�����ʡ� #JN ���ޥ�����ʡ�
+-+���ޤ�����ʡ� #T35 ���ޥ�����ʡ�
+-+���ޤ�����ʤ� #T35 ���ޥ�����ʡ�
+-+���ޤ����� #CJ ���ޤ�����
+-+���ޤΤ��� #JN ���ޥΥ���
+-+���ޤΤ������ˤ���С������ #JN ���ޥΥ��������ˤ���С������
+-+���ޤΤ����Ԥ��� #JN ���ώɎ����ԥ���!
+-+����̤Ϥ��� #T35 ime.nu�Ƥ�
+-+���� #CN ��
+-+���� #T35 ��
+-+���⤦�� #T35 ��
+-+���䤷���� #JN ������
+-+����ɤ� #CJ �ʡ������ˎ��ԎĎގ�!!
+-+����ޤä��� #JN ��ϯ��
+-+����ޤä��� #JN �����ώ�����
+-+���褦 #JN ���礥
+-+���褦 #JN ���礥
+-+����ʤ��� #JN ����ʥ���
+-+����� #JN �ʎ߭��ߡˎ��׎�
+-+����� #JN ���׎�
+-+����͡��� #JN ����͡���
+-+����͡��褫������ #JN ����͡��襫������
+-+����͡��� #JN ����͡���
+-+����ͤ���ˤ� #JN ����ͥ���˥�
+-+���ꤢ���� #JN Iria����
+-+����� #JN �ʎߧ؎�)���َ�
+-+����� #JN ���َ�
+-+����Ӥ� #T35 ����Ӥ�
+-+���줰�� #T35 �������
+-+����������� #T35 ������
+-+���󤳤������� #JN ���󥳲���
+-+���󤳤������� #T35 ���󥳲���
+-+���� #T35 ����
+-+����Ԥ� #T35 ����ԥ�
+-+����ܤ� #T35 ����
+-+�������� #CJ ������
+-+�������� #CJ ������
+-+���������餹 #T35 �������饹
+-+�������� #T35 ������
+-+���������� #KK ��������
+-+���������� #T35 ��������
+-+������ #JN ��
+-+���������Ȥ꡼���ˤä� #JN �������ȥ꡼���˥å�
+-+���������夤�� #T35 ����������
+-+�������ꤤ #T35 virii
+-+������ #T35 ������
+-+�����󤨤न�ä��� #T35 WinMX
+-+������Ǥ� #T35 Windy
+-+������ɤ����� #T35 winduke
+-+������ɤ��� #T35 Windoz
+-+���� #JN ��
+-+���� #JN ����
+-+�������� #T35 wait
+-+�������ϤäϤä� #CJ ���������ϥåϥå�
+-+����������ݡ��� #JN ������������ݡ���
+-+�����Τ���ˤä��Τ��Ȥ� #T35 �����˥å�����
+-+������ #T35 ������
+-+�������� #T35 ��������
+-+�������� #T35 ��������
+-+�����ʤ󤫤������Ȥ����ˤޤ褤���󤸤ޤä������뤡 #JN �������ʤ󤫤������Ȥ������¤����󤸤ޤä������륡��
+-+�����ʤ󤫤������Ȥ����ˤޤ褤���󤸤ޤä������뤡 #JN �������ʤ󤫤������Ȥ������¤����󤸤ޤä������ގَ���
+-+�����ޡ� #JN (�ߧՎ�)�����ώ�
+-+�����ޡ� #JN ��|
+-+�����ޡ� #JN �����ϡ�
+-+���� #KYT ����
+-+�������� #T35 ��������
+-+��������� #JN ����
+-+������ #JN (`����)�����ގ�
+-+������ #JN ������
+-+������ #JN �����ގ�
+-+�������� #JN ��������
+-+������ #CJ ������
+-+�������� #CJ uzeeee!
+-+������������ #JN ������������������
+-+�������� #JN ��������!
+-+�������� #JN ��������!
+-+�����Ϥ����Ǥ���Ȥߤ̤���ҤȤǤʤ��� #CJ �����Ϥ����Ǥ���ȸ�ȴ����ͤǤʤ���
+-+������ #T35 ����
+-+�����ˤĤä���Ǥ��� #JN �Τ˥ĥå���Ǥ���
+-+�����夦�����Ϥ� #T30 ���賫ȯ
+-+�����夦�����Ϥ� #T35 ���賫ȯ
+-+�����夦��Ф� #CJ �����Х�
+-+���ä��� #JN ���å���
+-+���ä����Ϥ� #CJ ���ä����ϥ�
+-+���ä�����ꤢ���ʡ� #JN �ʤ���ꥢ���ʡ�
+-+���Ĥ��� #T35 ݵ��
+-+���Ĥ���� #JN ���ĥ����
+-+���Ĥ� #KK ݵ��
+-+���Ĥ� #T35 ݵ��
+-+���Ĥ����Τ� #CJ ���Ĥ����Τ�
+-+���Ĥ����Τ� #CJ ���ǤĤ���Ǿ
+-+���Ĥ����Τ� #CJ ݵ����Τ�
+-+���Ĥ����Τ� #CJ ݵ����ǻ
+-+���Ĥ����Τ� #CJ ݵ�ǻ�ǹ
+-+���Ĥ����Τ� #CJ ݵ�̻�Ǿ
+-+���Ĥ䤭 #JN ݵ�Ƥ�
+-+���Ƥ� #T35 ���ƥ�
+-+���� #T35 ����
+-+���ʡ� #JN ��(�ߡ���)�����Ŏ�
+-+���ʡ� #JN ���Ŏ�
+-+���� #T35 ����
+-+���ˤ��� #T35 ���˥���
+-+���ˤ��� #T35 ���˹�
+-+���ˤ㡼 #JN ���ˤ��
+-+���ˤ夦 #JN ���ˤ夦
+-+���Ҥ硼 #JN ���ҥ硼
+-+���Ҥ礹�� #T35 ���ҥ祹��
+-+���� #T30 ����
+-+���� #T30 ����
+-+���� #T35 up
+-+���� #T35 ����
+-+���פ��礯�ˤ� #T35 ���𿦿�
+-+���ܤ��� #JN �ʎߧ��ߡˎ��Ύގ���
+-+���ܤ��� #JN ���ܥ���
+-+���ޡ� #CJ (�ߧՎ�)���ώ�
+-+���ޡ� #CJ �ʡ��ա��˥��ޡ�
+-+���ޡ� #CJ �ʡ��ա��ˎ��ώ�
+-+���ޡ� #CJ ���ޡ�
+-+���ޡ� #JN (�ߧՎ�)���ώ�
+-+���ޡ� #JN ���ώ�
+-+���ޤ� #CJ ���ޡ�
+-+���ޤ��ܤ� #JN ���ޤ��ܤ�
+-+���ޤ��ܤ� #KK ���ޤ���
+-+���ޤ��ܤ� #T35 ���ޤ���
+-+���ޤʤ� #T35 ����
+-+���⤦���⤫�뤯���⤫��äƤ��ʤ� #CJ ���Ӥ���ڤ�������̤äƤ��ʤ�
+-+���⤩�� #JN ���⥩��
+-+���⤩�� #JN ���ӎ���
+-+���� #T35 ����
+-+����äƤ� #T35 ����äƤ�
+-+���餢�� #T35 ΢��
+-+���餢���ޤ��礦���� #T35 ΢����Ķ��
+-+���館�� #T35 ���饨��
+-+����ˤ���� #KK ΢�������
+-+����ˤ���� #T35 ΢2�����
+-+����ˤ���� #T35 ΢�������
+-+����Ϥ� #T35 ΢ʢ
+-+����ܤ� #T35 ΢��
+-+����ܤ� #T35 ΢��
+-+����ܤ� #T35 �����
+-+����顼 #JN ����顼
+-+���ꤸ�ʤ� #T35 ���ꥸ�ʥ�
+-+����ʤ� #T35 ����ʥ�
+-+����ʤ餵���С��Ƥ����� #JN ����ʥ饵���С��ƥ���
+-+����ʤ餵���С��Ƥ����� #JN ���؎Ŏ׎����ʎގ��Î���
+-+����ʤ餵���С��Ƥ����� #JN ���؎Ŏ׎����ʎގ��Î��ġ�
+-+���뤵���Ϥ����ʤ� #JN ���뤵������ʤ�
+-+���뤻���Ф� #JN ���뤻���ϼ���
+-+���뤻���Ф� #CJ ���뤻���ϼ�
+-+����Ȥ�ޤ� #JN ���َĎ׎ώ�
+-+����ޤ�ޤ� #JN ����ޥ�ޥ�
+-+������ޤ� #JN ������ޥ�
+-+�������� #JN ��������
+-+���嵐���� #CJ ���率����
+-+���嵐���� #CJ ���܎�����
+-+����ʤ� #CJ ����ʤˡ�
+-+���� #T35 �����
+-+���󤳡� #JN ���󥳡�!
+-+���󤳡� #JN ���ݎ���!
+-+���󤳤��� #CN ������
+-+���󤳤��� #T35 ������
+-+���󤳤Ǥ����衼 #JN ���󥳤Ǥ����衼����
+-+���� #JN ����
+-+�������� #T35 ����
+-+��������ʤ��� #T35 ��~�¤�ʤ�
+-+�������ä����� #JN airH"���ގ�
+-+�������� #T35 ��������
+-+�������� #T35 ��������
+-+�������礦��ʡ� #JN �Ķȥ�ʡ�
+-+�������ˤ��� #T35 �������˥���
+-+�������� #T35 ����
+-+�������Ƥ������न�뤫 #T30 html��
+-+�������Ƥ��Ƥ��Ԥ��졼���� #JN http�졼����
+-+�����٤ä��� #KK �����٥å���
+-+�����٤ä��� #KK �����٥�ʵ
+-+�����ꤦ�嵐���� #JN �����ꥦ�異����
+-+�����ꤦ�嵐���� #JN �����؎��܎�����
+-+�����ꤦ�嵐���� #JN �����؎��܎�����
+-+��������ʤ��� #T35 ��~�¤�ʤ�
+-+�����٤� #CN �����٥�
+-+�����٤� #T35 �����٥�
+-+�����٤� #CN ����
+-+�����٤� #CN ����
+-+�����٤� #CN ����
+-+�����٤� #T35 ����
+-+�����٤� #T35 ����
+-+�����٤� #T35 ����
+-+�����٤�������� #CN �������
+-+�����٤�������� #T35 �������
+-+���������ɤ��뤹 #JN ���������ɥ��륹
+-+�������פ����Ƥä� #JN exploited
+-+�������ͤ� #JN exe�ͤ�
+-+�����ꤿ�� #JN ���¥ꤿ��
+-+�������त�� #T35 $ME
+-+�������줿�� #T35 �������쥿��
+-+�����Ȥ����⤢���餷 #JN �����ȥ����⥢�Ӥ餷
+-+��������� #CJ ���Ӥ��
+-+���ä������� #JN X������
+-+���Ĥ� #JN ���ĥ�
+-+���Ȥ� #JN ����
+-+���Ȥ� #JNS ����
+-+���Ȥ� #JN ����
+-+���Ȥ� #JNS ����
+-+���ʤ� #JN ���ʤ�
+-+���ʤ꤫���� #JN ���ʤ꤫����
+-+���ˤ��� #KK ���˥���
+-+���ˤ��� #T35 ���˥���
+-+���̤����濫�� #T35 NG���
+-+���̤��� #T35 �Υ���
+-+���̤ˤ��뤦�� #T35 n���롼��
+-+���̤襤���夦 #T35 ny��
+-+���Ҥ� #CN ��ɲ
+-+���Ӥդ餤��ä��礤 #JN ���ӥե饤��å��祤����
+-+���դ��� #CJ FA
+-+���դ��� #CJ FA?
+-+���դ�� #T35 F���
+-+���֡��� #T35 ���֡���
+-+���֤��� #T35 ���֡���
+-+���ߤ� #T35 ���ߤ�
+-+���न������ #KK ���२������
+-+���न������ #KK ���ю�������
+-+���न�ä��� #T35 MX
+-+���न�ä������� #JN �ͣؤ���
+-+���न�ä�������Ȥ��ޤ� #JN �ͣؤ���ȥ��ޥ�
+-+���न�ä������夦 #T35 MX��
+-+���न�ढ���� #T35 MMR
+-+���न�ढ���뤳�Ԥ� #CJ MMR���ԥ�
+-+���ह�� #T35 M����
+-+����֤��礦 #JN ����Ĺ
+-+����� #JN ����
+-+���� #JN ��
+-+���� #T35 ��
+-+������� #JN ����ĥ���
+-+����Ĥ��� #JN ������
+-+���줯�� #T35 ����ʵ
+-+���줯�� #T35 ����ʵ����
+-+���줯������ #T35 ����ʵ
+-+���줯������ #T35 ����ʵ����
+-+�����������󤿤����ꤻ�󤸤㤢 #T35 �����������⥺�ꥻ�󥸥㡼
+-+������ #T30 ������
+-+������ #T35 ������
+-+�������������ĤĤΤ����� #T35 �������������Ĥ�����
+-+�������򤿤ܤ���Ĥ���ɤ��� #KK �����������Ǳ�ư��
+-+�������󤬡� #T35 �������󥬡�
+-+�������󤬤� #T35 �������󥬡�
+-+�������꡼ #JN �������꡼
+-+�����ä��� #T35 erox
+-+�����ܤ� #KK ������
+-+���󤤡� #T30 ���󤤡�
+-+���󤤡� #T35 ���󤤡�
+-+���󤤤� #T35 ���󤤡�
+-+���󤫤����夷������� #JN ��βμꤷ�������
+-+���󤳤��� #T35 ����
+-+���󤸤󤪤� #JN ���󥸥�
+-+�����������ԡ� #T35 �ϣȣ�
+-+���������桼�ۡ� #JN ���������桼�ۡ�
+-+���������ˤ塼���ߤ� #CJ �����������˥塼��������
+-+�������ޤ��� #CJ ������������
+-+������������������ #T35 ��������������
+-+������������������ #T35 ��������������
+-+�����ʤ��ʡ� #JN �����ʤ��ʡ�
+-+������ #T35 ������
+-+������ #T35 ������
+-+����������夦 #T35 �����
+-+�����ɤ��᤬�� #KK ��ƻ����
+-+���������֤��礦 #JN �祮����Ĺ
+-+�������ߤߤϤ�Ƥ� #JN �羮����Ź
+-+������ #JN �����á�
+-+�����Ĥ� #JN �����ĥ�
+-+�����Ĥ� #JN ������
+-+�����Ǥ����� #T35 �����ǥ�����
+-+�����Ȥ���פꤤ�� #T35 �����ȥ���ץ꡼��
+-+�����Ȥ� #KK ˱
+-+�����Ȥ� #T35 ˱
+-+�����ߤߤ�ʡ� #JN �缪��ʡ�
+-+�����ߤߤ�ʤ� #JN �缪˨����
+-+�����ߤߤ��顼 #JN �缪���顼
+-+������ꤳ���� #T35 �翹������
+-+�����������礦���� #JN ������������
+-+���������Ǥ��褫�Ƥ��ʤ��� #CJ ���������Ǥ��衪���ƥ��ʤ��󡪡�
+-+������ #JN ������
+-+������� #JN ���ݡ�
+-+������� #JN �����Ԏݡ�
+-+�����줹 #T35 ���쥹
+-+������ #T35 ����
+-+���� #T35 ��
+-+�����줹 #T35 �٥쥹
+-+������ #T35 ����
+-+�������Ϥ� #JN �������Ϥ�
+-+�������Ϥ� #T35 �������Ϥ�
+-+�����ޤ� #T35 �����ޥ�
+-+�����Τߤ��礦�� #JN �����߾���
+-+�������ߤ�ʡ� #JN �������ߥ�ʡ�
+-+�����դ͡��褫�ä���������Ƥ͡���Ȥ����ä� #JN �����ե͡����with����ƥ͡����
+-+�����ޤӤ��Ǥ��� #JN �����ޥӥ��ǥ���
+-+�����顼 #JN ������
+-+�����顼 #JN ������
+-+������ #T30 ������
+-+�������ʤ� #JN ������ʥ�
+-+�������Ƥ��� #T35 �����Ʒ�
+-+������ #JN ����
+-+������ #T35 ����
+-+�����ꤹ #JN �����ꥹ
+-+������ڤ�ڤ� #CJ ������ڥ�ڥ�!
+-+������ڤ�ڤ� #CJ �����؎͎ߎݎ͎ߎ�!
+-+������򤪤��त���󤫤� #JN �������������Ҥ�Ѱ��������
+-+������򤪤��त���󤫤� #JN �������������Ҥ�Ѱ��������
+-+������ޤ��� #JN ���������
+-+�����󤬡����ä� #JN �����󥬡�Z
+-+�����󤬤����ä� #JN �����󥬡�Z
+-+������ #T35 ����
+-+�������� #CJ ��������
+-+�������� #CJ ��������
+-+�������Ǥ⤷�褦�� #CJ �������Ǥ⤷�褦��
+-+�����줹 #T35 �٥쥹
+-+�������� #T35 ��������
+-+�������夦 #KK �򥿵�
+-+�������夦 #T35 �򥿵�
+-+�������夦 #T35 ������
+-+�����������夦���� #JN �����罸��
+-+������ä� #T35 ������å�
+-+���������ʡ� #JN ���������ʡ�
+-+������Τ� #JN ����δ�
+-+���äȡ������ #JN ���åȡ������
+-+���� #T35 ��
+-+���Ĥ��� #KK ����
+-+���Ĥ��졼 #CJ �����졼
+-+���Ĥ��졼 #T35 �����졼
+-+���Ĥ��줨 #T35 �����졼
+-+���ĤȤ����ä���Ĥ��� #CJ ���Ȥ����ä��ۻ��
+-+���Ť� #JN ���ť�
+-+���Ǥ����� #JN ���ǥ�����
+-+���Ǥ� #T35 ���Ǥ�
+-+���Ǥ�ޤ� #JN ���Ǥ�ޥ�
+-+���Ǥ�ޤ� #T35 ���Ǥ�ޤ�
+-+���ȡ������ܤä����礦���� #JN ���ȡ�������ֵ��㳲
+-+���Ȥ��� #JN ���Ȥ���
+-+���Ȥ��ɤ� #T35 ��Ч
+-+���Ȥ��� #T35 ���
+-+���Ȥ��� #JN ����
+-+���Ȥ��� #JNS ���ȥ���
+-+���Ȥ��� #T35 �ڼ�
+-+���Ȥ��� #T35 ����
+-+���Ȥ����� #JN ���ȥ���
+-+���Ȥ����� #T30 ���ȥ���
+-+���Ȥ����� #T35 ���ȥ���
+-+���Ȥ������󤹤� #JN ���ȥ�������
+-+���Ȥ� #T35 ��Ȥ�
+-+���ȤʤΤ��������� #JN ��ͤε��ť�����
+-+���Ȥޤ� #JN �ڴ�
+-+���Ȥ� #T35 ����
+-+���ɤ� #T35 ���ɤ�
+-+���� #CJ ����
+-+���ʡ��� #T30 ���ʡ���
+-+���ʡ��� #T30 ���Ŏ���
+-+���ʤ������ޤ� #CJ ���ʤ������ޤ�
+-+���ʤ������ޤ� #JN ���ʤ������ޤ���
+-+���ʤ���� #CJ ���ʼ�̣
+-+���ʤ���� #T35 ���ʼ�̣
+-+���ʤˡ� #T30 ���ʥˡ�
+-+���ʤˤ����� #T35 ���ʥˡ�����
+-+���ʤˤ��� #T35 ���ʥ˥���
+-+���ʤ̡� #T30 ���ʥ̡�
+-+���ʤ̡� #T30 ���Ŏǎ�
+-+���ˤ��ˤ�ä��礤 #JN ���ˡ��˥�å��祤
+-+���ˤ��� #JN ���ˤ���
+-+���ˤ��ꤦ�������� #JN ���ˤ��걦���
+-+���ˤ��꤬�ʡ� #JN ���ˤ��ꥬ�ʡ�
+-+���ˤ��ꤸ������ #JN ���ˤ��ꤸ������
+-+���ˤ��ꤸ�㤮 #JN ���ˤ��ꥸ�㥮
+-+���ˤ��ꤹ�餤�� #JN ���ˤ��ꥹ�饤��
+-+���ˤ��ꤻ���� #JN ���ˤ�������
+-+���ˤ��ꤻ��褦���ä��� #JN ���ˤ������ѥ��å���
+-+���ˤ��ꤿ��� #JN ���ˤ��꥿����
+-+���ˤ������ #JN ���ˤ�����
+-+���ˤ���Ƥ� #JN ���ˤ���ŷ��
+-+���ˤ���Ȥ� #JN ���ˤ�����
+-+���ˤ���Ȥ� #JN ���ˤ�����
+-+���ˤ���Ф�� #JN ���ˤ���Х��
+-+���ˤ���Ҥä��� #JN ���ˤ���ҥå���
+-+���ˤ���ۤ�� #JN ���ˤ�������
+-+���ˤ���भ�भ #JN ���ˤ���७�७
+-+���ˤ����ʡ� #JN ���ˤ����ʡ�
+-+���ˤ����ä��礤 #JN ���˥����å��祤
+-+���ˤ�꡼�� #T35 ���˥�꡼��
+-+���ˤ�ꤤ�� #T35 ���˥�꡼��
+-+���� #T35 ����
+-+���ͤ����� #T35 ���ͤ�����
+-+���ϤʤФ��� #T35 ����Ȫ
+-+���Ϥ褦���� #T35 ���Ϥ礥�ɡ���
+-+���Ф���� #T35 ���ʎގ�����
+-+���Ф���� #T35 ���Х����
+-+���Ф��夦 #T35 ���п�
+-+���Ф��夦 #T35 ���п�
+-+���ѡ��� #T35 ���ѡ���
+-+���Ѥ��� #T35 ���ѡ���
+-+���Ӥ��ˤݤä� #JN ��ë�ݥå�
+-+���դ��� #T30 ���ղ�
+-+���դ餤��Ӥ塼�� #KK ���ե饤��ӥ塼��
+-+���֤� #T35 ��ʪ
+-+���٤�꡼�� #T35 ���٥�꡼��
+-+���٤�ꤤ�� #T35 ���٥�꡼��
+-+���٤�꡼�� #T35 ���٥�꡼��
+-+���٤�ꤤ�� #T35 ���٥�꡼��
+-+���٤�Ȥ�������ʤ� #T35 ������������ʡ�
+-+���ޡ��� #T35 ���ޡ���
+-+���ޤ��� #JN ������
+-+���ޤ����ˡ� #JN ���ޥ����ˡ�
+-+���ޤ����Ƥۤ��ߤ����� #CJ ���������ܤ򸫤�����ʡ�����
+-+���ޤ����ʡ� #JN ���ޥ����ʡ�
+-+���ޤ����ޡ� #JN ���ޥ����ޡ�
+-+���ޤ����͡� #JN ���ޥ����͡�
+-+���ޤ����㤬�� #JN ���ޥ����㥬��
+-+���ޤ����㤬�� #JN ���ޥ����㥬��
+-+���ޤ�����͡��� #JN ���ޥ�����͡���
+-+���ޤ����� #JN ���ޥ�����
+-+���ޤ����� #JN ���ޥ�����(������)
+-+���ޤ����� #JN ������
+-+���ޤ����ʡ� #JN ���ޤ����ʡ�
+-+���ޤ����� #JN ���ޥ�ë
+-+���ޤ��Ϥ������ #CJ �����ϥ��󡦥��󤫡�
+-+���ޤ��⤫�� #JN ���ޥ��⥫��
+-+���ޤ���¤㡼 #JN ���ޥ���¥㡼
+-+���ޤ���ʡ� #CJ ���ޥ���ʡ�
+-+���ޤ���ʡ��Ϥ� #JN ���ޥ���ʡ���
+-+���ޤ���ʤ� #CJ ���ޥ���ʡ�
+-+���ޤ���ʤ��� #JN OMAEMONA��
+-+���ޤ���ˤ㡼 #JN ���ޤ���ˤ㡼
+-+���ޤ���Ҥ� #JN ���ޥ���ҥ�
+-+���ޤ󤸤夦 #T35 ���Ƭ
+-+���ߤ���������顼 #JN �����礤������顼
+-+���ߤȤ��� #T35 ���ߥȥ���
+-+���ह�� #JN ���ह��
+-+���᡼�� #T35 ���᡼��
+-+���ᤤ�Ф󤫤� #CJ ��̾�Բ�
+-+���᤬ #T35 ���ᥬ
+-+���᤬���餷 #T35 �عӤ餷
+-+���᤬���� #T35 ����
+-+����� #CJ �פ�
+-+����餿���Ҥ� #JN �����δ��
+-+������ #CJ �פ�졣
+-+������ #T35 �פ��
+-+���䤳�ڤ󤮤� #JN �ƻҥڥ󥮥�
+-+���� #KK ݣ
+-+���� #T35 ݣ
+-+���꤭ #T35 ���ꥭ
+-+����Ť�14�ޤ�Фפ��������� #CJ �ޤ���14�����ץ���������
+-+����Ϥ�֤� #T35 �޸��֥�
+-+����٤��ӡ� #T35 �������ӡ�
+-+����٤��Ӥ� #T35 �������ӡ�
+-+����礦�ꤪ�ͤ����� #JN ���������Ф���
+-+���뤹�Ƥä� #JN ���륹�ƥå�
+-+���줪��� #T35 ����
+-+���줵�� #T35 ����
+-+���줵�ޤ褦������ #T35 �����Ѥ�����
+-+������� #JN ������
+-+����ˤ��擄���� #T35 ������������
+-+����Ϥޤ������ʤ����äѤ󤸤� #T35 ���ϴְ㤤�ʤ����̿�
+-+�����ʡ� #CJ �����ʡ�
+-+������� #T35 ��ϳ���
+-+����ä��� #JN (�������ˎ��܎����Ŏ�����
+-+����ä��� #JN ����å��ʡ�����
+-+����ä��� #JN ���܎����Ŏ�����
+-+���󤿤� #T35 ����
+-+���󤿤� #T35 ����
+-+����ߤ礦�� #JN ���ۻ�
+-+����ꤨ�� #T35 Onlien
+-+�� #R5r ��
+-+�����ɤ���פ�����ʡ� #JN CC��ʡ�
+-+���������央 #T35 ���ż��
+-+�������� #T35 ����
+-+�������󤭤äƤ��ӤĤäƤ��� #CJ �����ڤäƼ��ߤäƻ��
+-+�������󤭤äƤ��ӤĤäƤ��� #JN �����ڤäƼ��ߤäƻ��
+-+�����Ƥ��֤餦���� #KK ��Ŭ�֥饦����
+-+�����ɤ� #KK ��Ʊ
+-+�����ɤ� #KK ��Ƹ
+-+�����ɤ� #KK ��ƻ
+-+�����ɤ� #T35 ��Ʊ
+-+�����ɤ� #T35 ��Ƹ
+-+�����ɤ� #T35 ��ƻ
+-+�����դ����Ѥ��Ѥ�ʡ����� #JN �������ѥ��ѥ�ʡ���
+-+�����ؤ����� #JN ���Ĥ���
+-+������� #T35 �������
+-+���� #CJ ����
+-+�����Ǥ�Ĥ� #T35 �����Ǥ�Ĥ�
+-+������ #CJ (���ώ�)������!
+-+������ #CJ �ʡ��ϡ��ˎ�����!
+-+������ #CJ ������
+-+������ #CJ ������!
+-+������ #CJ ������!
+-+������ #T35 ������
+-+�����⤸ #T35 ��ʸ��
+-+�����⤸�����������餤 #T30 ��ʸ����������
+-+������ #K5r ��
+-+�����䤱 #CJ ����
+-+�����䤱 #T35 ����
+-+������ #T35 ����
+-+������ #M5r �񤭹�
+-+������ #T30 ������
+-+�����礦����Τꤢ���ȤϤ󤫤��Τ��礦���󤸤礦 #JN �ֵ���ŵ���ȥϥ󥫥���ĩ���
+-+���� #KK ��
+-+���� #T35 ��
+-+�����ä� #T35 ���û�
+-+�����ɤȤ� #CJ ���٤Ȥ�
+-+�����ˤ��� #CN �Ѽ���
+-+�����ؤ� #T30 ����
+-+�����ؤ� #T35 ����
+-+�����褦 #T35 ����
+-+������ #T30 ��Υ
+-+�����ꤤ�� #CN ��Υ��
+-+�����ꤤ�� #T35 ��Υ��
+-+�����ꤤ���Τ����ꤤ�� #T35 ��Υ�Ĥγ�Υ��
+-+������ #T35 ����
+-+���� #T35 kage
+-+������ #KY ������
+-+�������� #T35 ��������
+-+�������� #T35 ������
+-+������� #KY �������
+-+������뤤 #T35 ������륤
+-+���� #JN �����ܤ�
+-+���� #JN �ø�
+-+���� #JN ��
+-+���� #T35 ��
+-+�������� #JN ��������
+-+�������� #JN ��������
+-+������⡼�� #JN ������⡼��
+-+�����Ƥ� #KK �����ƥ�
+-+�����Ƥ� #T35 �����ƥ�
+-+���� #T35 ����
+-+���������� #T35 ��������
+-+�����䤸�뤷 #T35 ����
+-+���������� #T35 ���Х���
+-+�������� #T35 ������
+-+��������ʡ� #JN �����ʡ�
+-+���� #R5 ��
+-+���� #R5r ��
+-+�������� #T30 �ҥ���
+-+�����䤪 #T30 �ҥ䥪
+-+������ #T35 �٤�
+-+������顼 #JN ������顼
+-+�������ߤ餤�� #T35 ���Ȥߥ饤��
+-+�����塼���� #KK �����������
+-+�����塼���� #T35 �����������
+-+�����塼���㤵�� #JN ����������㤵��
+-+�����夦���� #T35 �����������
+-+�����礦 #T35 ��Ĺ
+-+���ä��� #CJ ���ä���
+-+���ä��� #T35 ���ä���
+-+���ä��� #CJ ���ä���
+-+���ä����� #T35 ���å�����
+-+���äȤ�ʡ� #JN ���åȥ�ʡ�
+-+���ä� #KK ��Ƹ
+-+���ä� #T35 ��Ƹ
+-+���äѤ���ʤ��� #JN ���åѤ���ʤ���
+-+���äѤäѡ� #JN ���åѥåѡ�
+-+���� #JN ��
+-+���� #T35 ��
+-+���Ĥޤ� #T35 ����
+-+���Ĥ� #T35 ���ĥ�
+-+���Ƥ��� #T35 ���ƥ���
+-+���Ȥ������ #JN ��ƣ�����
+-+���Ȥ�����椦 #T35 ������ͥ
+-+���Ȥ��椫 #JN ��ƣͳ��
+-+���ɤޤ�� #KK ���ɥޥ��
+-+���ɤޤ�� #T35 ���ɥޥ��
+-+���ʡ� #JN ���ʡ�
+-+���� #KK ��
+-+���� #T35 ��
+-+���ˤФ� #JN (������)
+-+���ˤФ� #JN ���˥Х�
+-+���ͤ͡��� #JN ���ͥ͡���
+-+���Ӥ��ˤ��� #KK ���ӥ��˥���
+-+���Ӥ��ˤ��� #T35 ���ӥ��˥���
+-+���Ӥ󤿤� #JN ���Ӥ���
+-+���դ��� #JN ���ե���
+-+���� #R5 ����
+-+���֤�����������䤪���� #KK ������ҥ䥪����
+-+���֤�����������䤪���� #T35 ������ҥ䥪����
+-+���֤Ȥष #T35 ���֥ȥॷ
+-+���ס��뤤�� #CN ���ס�����
+-+���ס��뤤�� #T35 ���ס�����
+-+���ס��뤤�� #T35 ���̎ߎ�����
+-+���פ��뤤�� #T35 ���ס�����
+-+���פ��뤤�� #T35 ���̎ߎ�����
+-+���פ� #JN (���ώ�)�Ρ�
+-+���פ� #JN ���ץ󥳡�
+-+���� #T35 ��
+-+���ޤɤ��ޤ��餷 #JN ���ޥɥ��޹Ӥ餷
+-+���� #JN ��
+-+���� #T35 ��
+-+���ߤ����Ȥä������� #JN �����ù���
+-+���ߤ������ #T35 ������
+-+���ߤ����� #T35 �����
+-+���ߤʤꤰ�롼�� #JN �륰�롼��
+-+���ߤʤꤰ�롼�� #T35 �륰�롼��
+-+���ߤʤꤰ�뤦�� #T35 �륰�롼��
+-+���ߤΤ����Ƥ������� #T35 ����GTO
+-+���ߤΤʤ�ߤϤ꡼�֤ˤ��夦���� #JN ȱ��Ǻ�ߤϥ꡼�֣���
+-+���� #T35 ��
+-+���� #T35 ���ޥ�
+-+����ޤ� #T35 ���ޥ�
+-+�����ʡ� #JN �����ʡ�
+-+�����ʡ����졼�� #JN �����ʡ����졼��
+-+����줹 #T35 ���쥹
+-+�����餤���������� #JN ���̥饤����������
+-+�����餤���������� #JN ���̥饤����������
+-+�����餤�������ޤ��� #JN ���̥饤�������ޥ���
+-+�����餤�������뤹 #JN ���̥饤�������륹
+-+�����餤�������뤹 #JN ���̥饤�������륹
+-+�����餤�������뤡�ä� #JN ���̥饤����GOLACK
+-+�����餤�����������꡼ #JN ���̥饤����������
+-+�����餤�����������꡼ #JN ���̥饤����������
+-+�����餤�����������꡼���ä��� #JN ���̥饤�����������ݣ�
+-+�����餤�����������꡼���ä��� #JN ���̥饤�����������ݣ�
+-+�����餤�������Ȥ��󤬡� #JN ���̥饤�������ȥ��󥬡�
+-+�����餤�����⤦�� #JN ���̥饤�����⥦��
+-+���⤹ #S5 ����
+-+����� #T35 ��
+-+���餢����� #T35 ���顼�����
+-+���餢�� #T35 ���Ȥ�
+-+���餭�ޤ��� #CJ ������ޤ���
+-+���餹 #JN ��
+-+���뤿�� #JN ���륿��
+-+���졼�Ѥ��ޤ� #JN ���졼�ѥ��ޥ�
+-+���졼�Ѥ�ޤ� #JN ���졼�ѥ�ޥ�
+-+���졼�Ѥ�ޤ� #JN ���ڎ��ʎߎݎώ�
+-+���줤���夦�����褦 #CJ ����ɺ��
+-+����� #T35 ����
+-+���蘆�� #T35 ���
+-+���路�ޤ��Ť� #JN �������ż�
+-+���� #T35 ��
+-+���󤫤�ɤ���� #KK �ش�ƱΩ
+-+���󤫤�ɤ���� #T35 �ش�ƱΩ
+-+���󤬤������֤� #JN �سإ����֥�
+-+���󤬤롼��ʡ� #JN ���󥬥롼��ʡ�
+-+���󤯤��� #JN ���󣹣�
+-+���󤯤��� #JN ����ϫ
+-+���󤯤��� #T35 ���󣹣�
+-+���󤯤��� #T35 ����ϫ
+-+���� #R5 ����
+-+���� #R5r ����
+-+���󤳤� #KK ����
+-+���󤳤� #KK ����
+-+���󤳤� #KK ա��
+-+���󤳤� #T35 ����
+-+���󤳤� #T35 ����
+-+���󤳤� #T35 ա��
+-+���󤳤��Ȥ� #T35 �ڹ�Ȥ�
+-+���󤳤��Ȥ� #T35 �ڹ�Ȥ�
+-+���󤳤ä� #KK ���󥳥å�
+-+���󤳤ä� #T35 ���󥳥å�
+-+���󤳤ɤ� #JN �׸�Ļ
+-+���󤵤��դ����֤����� #T35 �����ե����֥�����
+-+���󤵤�Ȥ����Ǥ󤷤� #JN �׻��Ȥ����ż�
+-+���󤷤�Ϥ�ˤ� #CJ ���եϥ�˥�
+-+���󤸤�뤤 #T35 ��������
+-+������礯�ˤ� #T35 ��ľ��
+-+����Ƥ��� #T35 �����
+-+����Ƥ����� #T35 ���ꥹ��
+-+����Ƥ��Ȥꤪ #T35 ����ȥꥪ
+-+����Ƥ��ˤ󤯤ߤ��� #T35 ������ȹ�
+-+����Ƥ��褦�� #T35 �����Ѹ�
+-+����Ȥ��Ϥ������� #JN �������
+-+����Ȥ� #KK ����ȥ�
+-+����Ȥ� #T35 ����ȥ�
+-+����ʤ��� #JN ��ľ��
+-+����ʤ��� #JN ��̾��
+-+����ʤ��� #JN ��ľ��
+-+����ʤ��� #JN ��ľ��
+-+����ʤ��� #T35 ��ľ��
+-+����ʤ��� #T35 ��̾��
+-+����ʤ��� #T35 ��ľ��
+-+����ʤ��� #T35 ��ľ��
+-+����ͤ������� #JN ��ǫ����
+-+����ޤ󤻤��� #JN ��������
+-+����ꤷ�㤵��Ǥ��� #CJ �����Ԥ���Ǥ�������
+-+�����ˤ�դ���� #T35 &quot;����&quot;�ͥե����
+-+�����󤹤�ä� #T35 ��Ϣ����å�
+-+�������� #T35 ��Ϣ���
+-+������ #CJ ����������_��_;�˨�����
+-+������ #JN ������
+-+������ #JN �������ʎߧ���;)������
+-+������ #JN ���ʎߧՎ�lll�ˎ��ގ���
+-+���������Ȥ򤤤ä� #CJ ���������Ȥ���ä�
+-+�������� #T35 ��������
+-+��������� #T35 ���������
+-+��������� #T35 ����
+-+��������Ĥ��ä� #JN ���Х��å�
+-+��������Ĥ��� #JN ��������ķ�
+-+������ #T35 ����
+-+�����ɤ餤�ʤ� #T35 �����ɥ饤�ʡ�
+-+�����ɤ餤�󤤤� #T35 �����ɥ饤����
+-+���������֤�֤� #CJ ���������֥�֥�
+-+���������֤�֤� #CJ ���ގ����ގ��̎ގَ̎ގ�
+-+���������֤�֤� #T30 ���������֥�֥�
+-+���������֤�֤뤭�礦������� #T30 ���������֥�֥붵����
+-+�����줭�����餷 #T35 ���򥢥��饷
+-+�����줭����� #T35 ������
+-+�����줭���夦�ɤ����� #T35 �������Ǽ�
+-+�����줭�������� #T35 �����������
+-+�����Τ���ˤ��礦�ߤ��ä��褦�Ǥ� #CJ �����Υ���˶�̣����ä��褦�Ǥ�
+-+���������äפ����� #T35 �������åץ�����
+-+���� #T30 ����
+-+���� #T35 ����
+-+������Ԥ� #JN ������ԥ�
+-+���ä��� #CJ ��|��|��
+-+���ä��� #CJ orz
+-+���ä��� #CJ _no
+-+���ä��� #CJ OTL
+-+���ä��� #CJ OTZ
+-+���ä��� #CJ JTO
+-+���ä� #JN ���å�
+-+���ä��夯���� #T35 ��ɽ�
+-+���ä���� #T35 ���ä�����
+-+���ä� #KK ���å�
+-+���ä� #T35 ���å�
+-+���ʡ� #JN ���ʡ�
+-+���ʡ����ä����Ĥ褦�������ä��Ȥ��� #JN ���ʡ��ʼ��ѷ���
+-+���ʡ������Ƥ� #JN ���ʡ�����
+-+���ʡ������Ƥ� #JN ���ʡ�����
+-+���ʤ� #CJ ���ʥ�
+-+���ʤ� #CJ ���ގŎ���
+-+���Τ� #T35 ���Υ�
+-+���Ϥ� #T35 ����
+-+���ᤵ�� #KK ����
+-+���ᤵ�� #T35 ����
+-+���꤬�꤯�� #T35 ���ꥬ�귯
+-+����٤� #JN ������
+-+����٤���顼 #JN �����٥��顼
+-+���󤬤� #R5r ���󤬤�
+-+���󤬤� #T35 ���󥬥�
+-+����Ф��ʡ� #JN ����Х��ʡ�
+-+����� #R5 �����
+-+����� #R5r �����
+-+�����Ϥ�ɤ�ͤ�������� #T35 ��̴HN����
+-+���� #KK ��
+-+�����Ƥ������꡼�� #CJ �����ƥ������꡼�ʢ�
+-+�����Ƥ������꡼�� #T35 �����ƥ������꡼�ʢ�
+-+�����ˤ��� #T35 �����˥���
+-+������ #T35 ����
+-+������ #T35 ������
+-+�������ܤ��줸���� #T35 �������ܥ������
+-+���� #JN ����
+-+�������������ۤ� #JN ����������
+-+������ #JN ������
+-+�������� #JN ��������
+-+���� #T35 ��
+-+���������ˤ��� #JN ������ˤ���
+-+���������顼 #JN ������顼
+-+�����ʤ� #KK �����ʥ�
+-+�����ޤ��Ȥ����Ȥʤߤ򤫤���� #JN ����ǡ�����ȥʥߤ����
+-+�����ޤ���ʡ� #JN �����ޥ���ʡ�
+-+������ #T35 ����
+-+�����夤����⤸ #T35 �����¸ʸ��
+-+�����夤����⤸ #T35 �����¸ʸ��
+-+�����夦 #T30 ��
+-+�����夦 #T35 ��
+-+������� #T35 ����
+-+������ #CJ ������
+-+������ #KYT ������
+-+�����礤 #T35 �����祤
+-+�����礪�� #T35 �����祪��
+-+������� #T35 �������
+-+������ #CJ ��������������������(���ϡ�)����������������������
+-+������ #CJ ��������������������(�ߢώ�)����������������������
+-+������ #CJ ������������(���ϡ���(���ϡ��ᡬ�ϡ�)�ᡬ�ϡ�)��������!!!
+-+������ #CJ ��������������������(�ߢώ�)������������������!!!
+-+������ #JN ������!!!!
+-+������ #JN ��������������(�ߢώ�)����������!!!!
+-+������ #CJ ������
+-+������ #CJ ������
+-+���������� #T35 ����age
+-+�������夦 #T35 �̣�
+-+�������Ф����� #T35 �̻�����
+-+��������� #T35 �̥����
+-+�����͡��� #JN �����͡���
+-+�����͡������ #JN �����͡������
+-+�����ͤä� #KK �̥ͥå�
+-+������� #KK �̿�
+-+������� #T35 �̿�
+-+���� #KK ����
+-+���� #T35 ����
+-+���� #T35 ����
+-+���� #T35 ����
+-+�������� #JN ��������
+-+�������� #JN �५���ǡڤफ���ǡ���̾��������
+-+�������� #T35 ��������
+-+�������� #T35 ���ϳ�
+-+�������� #T35 ���ϳ�
+-+�������������ۤ� #JN ���ϳ�����
+-+�������������ۤ� #T35 ������������
+-+���ä����ޤ� #JN ���å����ޥ�
+-+���ä��� #T35 ���å���
+-+���Ƥ� #T35 ���ƥ�
+-+���Ƥ����夦 #T35 ���ƥ���
+-+���Ƥʤ� #JN ���ÎŎ�
+-+���Ƥʤ� #JN ���ÎŎ��������������ʎ�_�ߡ˨�����������!!!!!
+-+���ȡ� #JN ���ȡ�
+-+���ˤ���͡��� #JN ���˥���͡���
+-+���ˤ��ʤ� #JN �ʎߦŎߡˎ��Ǝ��Ŏ�!!
+-+���ˤ��ʤ� #JN ���˥��ʥ�!!
+-+���ˤ��ʤ� #JN ���Ǝ��Ŏ�!!
+-+���̤����󤫤��ƤĤɤ� #JN �ᱺ�׳�Ŵƻ
+-+���ͤ󤫤��� #T30 ��ǰ������
+-+���ͤ󤫤��� #T35 ��ǰ������
+-+���ͤ�ѤԤ� #T35 ��ǰ�ѥԥ�
+-+���ͤ�ޤ��� #T35 ��ǰ�õ���
+-+���Τ� #T35 ���Υ�
+-+���Τ� #T35 ��
+-+���Τ����ˤ� #JN ����(���װ�)
+-+���Τ����ˤ� #JN ���Υ����˥�
+-+���ϤҤ㤯�ˤ��夦 #JN ���ϣ�����
+-+���Ф� #T35 ����
+-+���ܡ��� #CJ ���ܡ���
+-+���ܡ��� #T35 ���ܡ���
+-+���ܤ� #CJ ���ܤ�
+-+���ܤ� #CJ ���ܥ�
+-+���ܤ�� #CJ ���ܤ��
+-+���ܤ�� #CJ ���ܥ��
+-+���ߤϤ�����󤴤Τ� #CJ ���ϥ�����󹥤�
+-+���� #KK ����
+-+���� #KY ����
+-+���ळ #T35 ���ॳ
+-+���व�� #KK ������
+-+���व�� #T35 ������
+-+���व�� #T35 ʧ��
+-+����� #JN �����
+-+����� #T35 �����
+-+�������� #JN ��������
+-+�����󤸤� #JN ����
+-+�����󤸤� #T35 ����
+-+���� #KYT ����
+-+���⤤ #T35 ���⥤
+-+������������Ȥ��褦 #CJ �������������Ȥ��褦
+-+����äȤ��顼 #JN ����åȥ��顼
+-+����äȤ��顼 #T35 ����åȥ��顼
+-+����äȤ��餢 #T35 ����åȥ��顼
+-+����äϤ����� #JN ����á��ϥ�����
+-+����äϤ����� #JN ���������ʎ��ގ�����-�Ɏɡ�
+-+����ä� #T35 ����å�
+-+����äפ�� #T35 ����å�ϳ��
+-+����� #T35 ��
+-+����Ԥ� #CJ ����ԡ�
+-+����פƤ� #JN ����ץƥ�
+-+����פƤ� #T35 ����ץƥ�
+-+����פƤ� #T35 �����̎ߎÎ�
+-+�����Ϥ� #T35 �����ϥ�
+-+���夦 #T35 Q
+-+���夦�������� #T35 �ߺѲ�
+-+���夦�� #JN ���
+-+���夦���夦 #T35 �ۼ�
+-+���夦���夦 #T35 �޽�
+-+���夦���� #T35 �쥹��
+-+���夦���� #T35 Q��
+-+���夦�����ͤ� #T35 ������ͥ�
+-+���夦�Ƥ��� #T35 QT
+-+���夦�Ƥ� #KK ����
+-+���夦�Ƥ� #T35 ����
+-+���夦�Ƥ� #T35 ����
+-+���夦�Ƥ󤤤��������� #T35 9��15����
+-+���夦�Ƥ󤭤夦�Ԥ󤯤��ؤ� #T35 9��9pink����
+-+���夦�ˤ��Τ��礦������󤾤� #T35 ������ζ��顦��¤��Ω�����Ω�����
+-+���夦�ޤä����� #CN ��ͣ����
+-+���夦�ޤä����� #T35 ��ͣ����
+-+���夦���� #KK ��ϻ
+-+���夦���� #T35 ��ϻ
+-+���� #JN ����
+-+���� #T35 ����
+-+����ᤤ���� #JN �����¸�
+-+���礦 #T35 ��
+-+���礦���夦�Ӥ礦���󤸤� #T35 �����¿���
+-+���礦���� #T35 ����
+-+���礦���󤷤央 #T35 �������
+-+���礦���󤷤央 #T35 �������
+-+���礦���������Ǥ��� #T35 ����ID
+-+���礦�������夦��礦 #JN ������λ
+-+���礦�����Τۤ����� #JN �ʡ������ˎݡ�
+-+���礦�����Τۤ����� #JN ������ݸ��
+-+���礦������ʡ� #JN �����ʡ�
+-+���礦������ʡ��ΤϤ� #JN �����ʡ�����
+-+���礦�Ȥ����󤻤� #JN ��Ƭ����
+-+���礦�Ȥ��� #CN ���Ը�
+-+���礦�Ȥ��� #CNS ���Ը�
+-+���礦�Ȥ��� #T35 ���Ը�
+-+���礦�Ȥ������Ĥ� #CN ���Ի����Ŷ�
+-+���礦�Ȥ������Ĥ� #CNS ���Ի����Ŷ�
+-+���礦�Ȥ������Ĥ� #T35 ���Ի����Ŷ�
+-+���礦�Ȥ�󤸤㡼 #JN ���ԥ�󥸥㡼
+-+���礦�Ϥ� #T35 ���ϥ�
+-+���礦�椦����ä� #T35 ��ͭ����å�
+-+���礦�椦���ƤϤ� #T35 ��ͭ���ƥϥ�
+-+���礦�椦�Ȥ�ä� #T35 ��ͭ�ȥ�å�
+-+���礸�� #T35 ����
+-+��������������Ф� #T35 ����Ǽ���
+-+��������������Ф󤰤� #T35 ����Ǽ��ķ�
+-+����ߤߤ�ʡ� #JN �𼪥�ʡ�
+-+����� #JN �ʡ���+���ˎ��׎�
+-+����� #JN �����
+-+����� #JN ���׎�
+-+���ꤳ�ߤ������礦 #JN �ڹ���Ĺ
+-+���ꤳ�ߤ������礦�ȤҤ��椭 #JN �ڹ���Ĺ�ȤҤ��椭
+-+����Ф� #T35 ����Х�
+-+����Ф� #T35 ������
+-+����Ф󤲤ä��� #T35 �����֥��å���
+-+����Ф󤲤ä��� #T35 �����֥��å���
+-+���� #T35 ��
+-+���󤭤��ɤ� #JN �ᵦ��Ƹ
+-+���󤭤��ɤ� #T35 �ᵦ��Ƹ
+-+���󤰤�ʤꤾ�� #JN ���󥰥�ʥ꥾��
+-+���󤰤줪���褷���� #JN ���󥰥쥪����ϯ
+-+������� #T35 ����
+-+����ޤ� #JN ����ޥ�
+-+����ޤ� #T35 ����ޥ�
+-+����ޤ󤳤��礦 #KK ����ޥ󥳶�
+-+����ޤ󤳤��礦 #T35 ����ޥ󥳶�
+-+���� #JN ����
+-+�����᤹ #JN �����᥹
+-+���� #CJ ����
+-+���� #JN ����
+-+�������� #JN ��������
+-+���������� #JN ����������
+-+�������� #JN ������
+-+�������� #JN ��������
+-+��������� #JN ���������
+-+�������� #JN ��������
+-+����������� #JN �������̻�
+-+���������� #JN ����������
+-+�������礦���� #JN ��������
+-+�������� #CJ ��������
+-+������������ #JN ���ť�����
+-+���������� #JN ���ť�����
+-+�������� #JN ������
+-+�������󤭤夦���� #JN ���������
+-+������ #JN ��������ʻҡڤ�ʤ��ۡ�������������������������
+-+������ #JN ������
+-+�������ɤ����㤬�ä��� #JN ������ư�ֳع�
+-+�������������� #JN ������������
+-+�������������� #JN ���ގ���������
+-+�������������� #JN �ӎŎ��ю��ݷ�
+-+��������Ȥ����� #JN ������Ʈ��
+-+�������� #JN ��������
+-+�������ޤ� #JN ���Ŷ̻�
+-+����������ʤ���� #JN ����������ʤ����
+-+�������夦 #JN �������奦
+-+�������夦 #JN ������
+-+�����Ĥ꡼ #JN �����ĥ꡼
+-+�����Ƥ󤪤����� #JN ���������������
+-+�����ʤ� #KK �����ʥ�
+-+�����ʤ� #T35 �����ʥ�
+-+�����ͤ� #JN �����ͥ�
+-+�����ͤ� #JN ����ǭ
+-+�����ͤ� #JN ����ǭ��
+-+�����ͤ� #T35 ����ǭ
+-+�����ͤ������󤢤äȤ�����硼 #JN ����ǭι�ġ���Ĺ
+-+�����Τ��� #JN ����������
+-+�����Ϥ� #JN ����ȭ
+-+�����Ϥˤ㡼�� #CJ �����ϥ˥㡼��
+-+�����Ϥˤ㡼�� #JN �����ϥ˥㡼��
+-+�����ϤϤ� #CJ �����ϥϥ�
+-+�����Ѥ� #JN �����ѥ�
+-+�����Ѥ� #KK �����ѥ�
+-+�����Ѥ� #T35 �����ѥ�
+-+�����դ��� #JN ��������
+-+�����դ��ꤪ�뤷�礦���� #JN �������ե��ꥪ�뾭��
+-+�����١����� #JN �����١�����
+-+������ #KK ������
+-+������ #T35 ������
+-+�����ޤ뤵�󤢤����� #JN G503is
+-+������ #JN ������
+-+����������ʤ���� #JN ����������ʤ����
+-+�����󤫤��礥 #JN ���Ͳ����礥
+-+�����󤫤����������� #JN ���Ͳ�������������
+-+�����󤫤��顼 #JN ���Ͳ����顼
+-+���ä�������� #KK ���å��������
+-+���ä��� #CJ ���å���
+-+���Τ� #JN ���Υ�
+-+���Τ� #JN ���Υ�
+-+���㤯����ߤ�������ʡ� #JN �ե����ݤ���ʡ�
+-+���㤯����ߤ�������ʡ��ѡ��դ����ȤФ� #JN �ե����ݤ���ʡ��ѡ��ե�������
+-+���㤯���Ĥ��夦 #T35 �Ի���
+-+���㤯���Ĥ��� #T35 �Ի���
+-+���㤯�������㤯���Ĥ������������� #T35 ���ԡ��Ի�AA
+-+���㤯�������礯�ˤ� #T35 ���Կ���
+-+���㤯�������� #T35 ���ԥ���
+-+���㤯�ϤĤɤ� #T30 ��ȯư
+-+����� #JN �����
+-+���礯����� #T35 ���祯��Ϻ
+-+���뤡��� #JN ���륡���
+-+����ˤ㡼�� #JN ����˥����
+-+�����󤫤󤽤�����ä� #T35 ���������ۥ���å�
+-+�����󤹤��� #T35 �����󥹥���
+-+�����󤹤��� #T35 �����󥹥���
+-+���󤨤�ޤ󤻤� #T35 �������
+-+�������ߤ��ͤ� #JN ����𥯥������ߥ��ͥ������
+-+������ #T35 ����
+-+���������Ƥ� #T35 ��������
+-+���������Ƥ͡��� #JN ���������ƥ͡���
+-+�������礦��ʤ����� #JN ��������Ϻ
+-+�������礦��ʤ꡼�� #JN �����ʥ꡼��
+-+�����Ƥ���ʡ� #JN �����ʡ�
+-+������ #CJ ������
+-+���� #T35 ����
+-+���� #T35 ��
+-+������ #JN �ʎߧ׎ߡˎ�����
+-+������ #JN ������
+-+������ #JN ������
+-+���������� #T35 ����������
+-+�������塼�� #KK �������塼��
+-+�������塼�� #T35 �������塼��
+-+�������夦�� #T35 �������塼��
+-+���� #T35 ��
+-+�����������ͤ����� #JN ���ɤ����Ф���
+-+������������������ #T35 ������������²
+-+����������ʡ� #JN ����������ʡ�
+-+�������� #T35 ʵ����
+-+��������Ӥ㤯�Ȥ� #JN KuSo300t
+-+�������� #T35 ��������
+-+�������� #T35 ʵ����
+-+�������줪�Ȥ� #JN ����������
+-+�������줫�����夦���礦���� #JN ʵ�������ȼ�
+-+�������줱�󤻤Ĥ����󤫤� #T35 ʵ������߰Ѱ���
+-+�������줷�����ۤ����������󤫤� #JN ʵ����ؿ����Ѱ���
+-+�������줷�� #JN ���������
+-+��������� #JN ʵ�����Ω�Ƥ�ʤäƸ��ä���������������������
+-+���������ʡ� #JN ���������ʡ�
+-+���������ä��礤 #JN ���������å��祤
+-+�������夦�ܤ��Ǥ�Ѥ������ #JN ʵ��˼���Ȥ�����㡪
+-+�����Ǥ����������������� #JN ʵ�Ǥ�������
+-+�����Ф� #T35 ʵȢ
+-+�����ܤä��� #T35 ʵ�ܥå���
+-+������פ� #T35 ������ץ�
+-+�����줹 #T30 ʵ�쥹
+-+�����줹 #T35 ʵ�쥹
+-+�������� #T35 ������
+-+������ʤ����Ĥ�� #T35 ������ʤ�����
+-+������ʤ����Ĥ�󤹤� #T35 ������ʤ����䥹��
+-+������͡��� #JN ������͡���
+-+�������� #T35 ����
+-+�����Ӥ뤲 #T35 �����ӥ륲
+-+���ä��� #T35 ���å���
+-+���ä��� #T35 ���å���
+-+���ä���ɤ��ɤ��ɤ� #JN �������َĎގ��Ďގ��Ďގ�
+-+���ɤ���� #JN ��ƣ���
+-+���ˤ� #JNM ���˥�
+-+���ˤ� #T35 ���˥�
+-+���ˤ����󤯤�������Ȥ꡼�ؤ� #JN ���ˤ����󥯥�������ȥ꡼�ԡ�
+-+���ˤ���ͤäȤˤ��� #CJ kunisawa.net���¤�
+-+���ӤĤ꤮�� #JN ���ߤꥮ��
+-+���ޤ��󤳤��� #T35 ���ޤ��󥳡���
+-+���᡼�� #T35 ������
+-+���ᤨ�� #T35 ������
+-+�����ʡ� #JN ����ʡ�
+-+���� #T35 ��
+-+���� #T35 ¢
+-+���餤�� #T35 ������
+-+���館�Ϥ��֤ꤹ #JN ���館�ϥ��֥ꥹ
+-+���餯 #T30 ���饯
+-+���餲 #T35 ���饲
+-+���餲 #T35 ����
+-+����ä��� #T35 ����å���
+-+����ä��� #T35 ����å���
+-+����ä� #T30 ����å�
+-+����餬���ä� #JN ����餬Ω�ä�
+-+����� #T35 �����
+-+���꡼��Ҥä� #T30 ���꡼��ҥå�
+-+���ꤳ #JN �����
+-+������夦 #T35 ����
+-+���줢�餷�� #KK ���쥢�饷��
+-+���줤������������ #T35 ���쥤������������
+-+���줯�줯�� #T35 ���줯�췯
+-+���줯����夦�ܤ��ܤ���Ĥ������󤤤��󤫤� #JN ���줯���˼���ǿ�ʰѰ���
+-+�������礦���� #T35 ����«
+-+�������礦�������� #T35 ����«OFF
+-+�����ޤ�顼 #JN ���ޥ�顼
+-+�����ߤߤ�ʡ� #JN ������ʡ�
+-+������� #T35 �����
+-+����� #CJ �����
+-+����� #CJ ���܎�
+-+�� #T35 ��
+-+�����碌 #T35 ���碌
+-+���ä���� #CJ ���å����
+-+���ä���� #CJ ���ގ����ގ��̎�
+-+���äɤդ������ #CJ ���åɥե������
+-+����ä��夤���� #T35 ����å��奤����
+-+���꡼�� #T35 ���꡼��
+-+���꡼�� #T35 ���꡼��
+-+���ꤤ��ͤ����� #T35 ���꡼�󰹤���
+-+���ꤤ��ͤ����� #T35 ���꡼��Ф���
+-+���졼�Ȥ���Ф��ʡ� #JN ���졼�ȥ���Х��ʡ�
+-+�������� #JN ��������
+-+���� #T35 ����
+-+����Ȥ����� #JN ���᥮��
+-+����ޤ��� #CN ���ϸ�
+-+���� #T35 ��
+-+��������ݤ�� #JN ����������
+-+�������� #T35 KO
+-+�������夦 #T35 KQ
+-+���������֤� #T35 �ٹ�ʸ
+-+���������礦 #JN �ٻ�ģ
+-+�������Ф� #T35 �Ǽ���
+-+�������Ф󤤤���� #T35 �Ǽ��İ���
+-+�������Ф�Ȥäפ� #CJ �Ǽ��ĥȥåפ�
+-+���������Ǥ���ʡ� #JN �������å�ʡ�
+-+������ #JN �Ӥ���
+-+�������� #T30 ��������
+-+�������� #T30 ��������
+-+���ä��� #T30 �뺧
+-+���äڤ� #T35 ����
+-+���äڤ����� #T35 ���ʷ�
+-+���Ĥ��� #T35 �Ǵ�
+-+���Ĥ� #T35 ������
+-+���Ƥ� #CJ ���Ƥ�
+-+�����ԡ� #JN �����ԡ�
+-+������󤲤�ӤȤ� #T35 ������󥲥���ƣ
+-+���� #JNM ����
+-+���󤫤Ϥ��� #JN ���󤫤Ϥ��ơʡ�����������
+-+���󤫤���夦 #T35 ���ڿ�
+-+���󤱤󤫤���夦 #T35 �����ڿ�
+-+�����ϡ����� #CN �����ϡ���
+-+�������餸�礦�ۤ� #T35 ��΢����
+-+�������礦 #T35 ���
+-+�����Ȥ����� #CJ guestguest
+-+�������� #T35 ��������
+-+�������� #T35 ���ގ�����
+-+���ä��� #T35 ���
+-+���ä�����ʤޤ� #JN ���å�����ʥޥ�
+-+���ä� #T35 ���å�
+-+���äס� #JN ���åס�
+-+���ɤ����󤻤� #JN ��ƻ����
+-+���� #JN ����
+-+���� #JN ����顼
+-+����顼 #JN ����
+-+����顼 #JN ����顼
+-+�������� #CN ������
+-+�������� #T35 ������
+-+������ʡ� #JN ������ʡ�
+-+���󤪤� #T35 ��������
+-+���󤪤� #T35 ���ގ�����
+-+���󤷤��� #JN ���Ҳ�
+-+���󤷤Ф����� #JN ��������
+-+���󤸤� #T35 ����
+-+�����ۡ� #T35 �����ۡ�
+-+�����ۡ� #T35 ����
+-+�����ۡ� #T35 ����
+-+������ #T35 �ҵ�
+-+������������Ȥ��Ĥ᤿�� #CJ ��������䤤�Ĥ᤿��
+-+�������� #T35 ������
+-+������������ #CN ��������
+-+������������ #T35 ��������
+-+���������ؤ� #JN �ȱ�ʼ
+-+�����������礱�� #T35 �����跺
+-+����������夦 #T35 ���ڿ�
+-+�������� #T35 �����
+-+�������� #T35 ����
+-+�����������夦�ܤ� #T35 �����˼
+-+���������褱 #T35 �������
+-+������������ #T35 �����
+-+�����������äƤ� #T35 ��������
+-+�������������� #JN ��������
+-+�������󤮤� #JN ���̵���
+-+�������礦�� #T35 �������礦��
+-+�����Ĥ����Ϥ�Τ�ߤ������� #KK ���̰�ȿ����߾ä���
+-+�����ʤäƤ�Ϥ��������ʤäƤ��Ǥ� #CJ �����ʤäƤ�Ϥ����������ʤäƤ��Ǥ���
+-+�����Τ褦�ؤ� #JN ������ʼ
+-+�����Τ褦�ؤ� #T35 ������ʼ
+-+�����Ф� #KY ��Ф�
+-+�����Ф� #KYmi ��Ф�
+-+������ #KK ��
+-+������ #T35 ��
+-+�����ۤ� #T35 �����ۡ�
+-+�����ۤ� #T35 ����
+-+�����ۤ� #T35 ����
+-+�����ܤ� #T35 ��˼
+-+��������ʡ� #JN ��������ʡ�
+-+������󤤤äƤ褷 #CJ �����¤äƤ褷
+-+������Ĥ��夦 #T35 ��Ω��
+-+������� #T30 ����
+-+������� #T30 ����
+-+������Ĥ����٤󤫤� #T35 ��Ω���ۡʳ���
+-+������ĤϤ��Ĥ���������ĤϤߤˤ��� #CJ ��Ω�������������ŤϽ���
+-+�������ʤʤ����� #T35 ��Ϣ����������
+-+�����Ǥ��� #CJ �����Ǥ���
+-+�����Ϥ����㡼���ʤ���äɤ��� #JN (���ϡ�)�����ʎ��ގ��ގ������Ŏ��ڎ��Ďގ��ގ�
+-+�����Ϥ����㡼���ʤ���äɤ��� #JN �����ϥ����㡼���ʥ���åɥ���
+-+�����Ϥ����㡼���ʤ���äɤ��� #JN �����ʎ��ގ��ގ������Ŏ��ڎ��Ďގ��ގ�
+-+�����Ϥɤ����� #JN �����Ϥɤ�����
+-+�����Ϥɤ����� #JN �����ϥɥ�����
+-+�����Ϥɤ����� #JN �����ʎĎގ����ގ�
+-+�����ϤҤɤ����󤿤��ͤäȤǤ��� #CJ �����ϤҤɤ����󥿡��ͥåȤǤ���
+-+�����Ϥ碌������ʤ��� #CJ ����������Ĥ���ʤ���
+-+�����Ϥ�뤤���󤿤��ͤäȤǤ��� #CJ �����ϰ������󥿡��ͥåȤǤ���
+-+�����ޤǤ��� #CJ --------�����ޤ��ɤ��-------
+-+������ #T35 ����
+-+�����̤� #KK ��ȴ��
+-+�����̤� #T35 ��ȴ��
+-+��������ʡ� #JN �𿩥�ʡ�
+-+�����פ�Ƥ� #T35 �����ץ�Ź
+-+������ #JN ����
+-+������ #T35 ����
+-+���ä����顼 #JN ���å����顼
+-+���ä��ꤵ�� #JN ���ä��ꤵ��
+-+���� #T35 ����
+-+���Ƥ� #T35 ����
+-+���Ƥ������� #T30 ����á��
+-+���Ƥ��Ϥ�ɤ� #T35 ����ϥ�ɥ�
+-+���Ƥ��Ϥ�ɤ뤹��ä� #T35 ����ϥ�ɥ륹��å�
+-+���Ƥ��դ��� #T35 ����ե���
+-+���ƤϤ� #T35 ���ƥϥ�
+-+���ƤϤ󤫡��ˤФ� #T35 ���ƥϥ󥫡��˥Х�
+-+���ƤϤ󤫤��ˤФ� #T35 ���ƥϥ󥫡��˥Х�
+-+���ƤϤ󤹤�ä� #T35 ���ƥϥ󥹥�å�
+-+���ɤ�ʡ� #JN ���ɥ�ʡ�
+-+���ʤ� #T35 ����
+-+���ˡ� #T35 ���ˡ�
+-+���ˤ� #T35 ���ˡ�
+-+���Τ��ä����Ϥޤ��ˤ����Ƥ����Ĥ��Ǥ� #CJ �����ʤ����������Ƥ����Ĥ��Ǥ�
+-+���Τ���Ϥ������� #CJ ���Υ���ϥ�������
+-+���Τ��� #JN ���Υ���
+-+���Τ���� #CJ ������Ϻ��
+-+���Ԥ� #T30 ���ԥ�
+-+���Ԥڤ��餷 #T35 ���ԥڹӤ餷
+-+���Ԥڤ��� #KYT ���ԥڤ���
+-+���Ԥڤ��夦 #T35 ���ԥڿ�
+-+���ԤڤϤ����塼����Ǥ��ܡ������ #JN ���ԤڤϤ����������Ǥ��ܡ������
+-+���ܤ椭�� #JN �ʎҡ��󡦡�
+-+���ܤ椭�� #JN ���ܥ業��
+-+���ޤĤФ餳������ #KK �������⹻
+-+���ޤĤФ餳������ #T35 �������⹻
+-+���ޤ� #JN ���ޥ�
+-+���ߤ� #KK ���ߥ�
+-+���ߤ� #KK ���ߥ�
+-+���ߤ� #T35 ���ߥ�
+-+���ߤߤ�ʡ� #JN ������ʡ�
+-+���� #T35 ��
+-+���ᤷ�� #KK �Ʊ�
+-+���ᤷ�� #T35 �Ʊ�
+-+���ᤸ�� #KK �Ʊ�
+-+���ᤸ�� #T35 �Ʊ�
+-+���� #RT ����
+-+���� #T35 ����
+-+�����ޡ� #CN �����ޡ�
+-+�����ޡ� #T35 �����ޡ�
+-+�����ޤ� #T35 �����ޡ�
+-+����� #JN �����
+-+����󤺤��餷 #JN ����󥺹Ӥ餷��
+-+����󤺤��顼 #JN ����󥺥��顼
+-+����󤺤����� #JN ����󥺥�����
+-+���줪����� #CJ ���줪�������
+-+����Ϥ��夦���������� #CJ ����Ͻ���������wwww
+-+�����ä� #T35 �����å�
+-+�����ä����� #T35 �����å���
+-+�����ä���ä��礤 #JN �����å���å��祤
+-+������ #CJ  ������
+-+������ #CJ ������
+-+������ #N5 ������
+-+���襤���襤�ҡ� #CJ ���磻���磻�ҡ�
+-+���󤷤夦�ΤӤä���ɤä��ꤾ�� #JN �����Υӥå���ɥå��ꤾ��
+-+����ɡ���ޤ�顼 #JN ����ɡ���ޥ�顼
+-+����Τ� #T35 ��Ǿ
+-+���� #KK ����
+-+���������ˡ��֤󤷤� #T35 552ʸ��
+-+���������ˡ���󤸤� #T35 552ʸ��
+-+�����󤭤� #T35 �汣��
+-+�������󤭤�餵��ˤ󤰤� #JN ��������黰����
+-+�������󤭤�餵��ˤ󤰤ߤ��ä��������󤭤Ȥ����ä� #JN ��������黰���ȡ��軰����
+-+�������󤭤�餵��ˤ󤰤ߤ��ä������ˤ��Ȥ����ä� #JN ��������黰���ȡ��������
+-+�����Ϥ� #JNS ��ʢ
+-+�����Ϥ� #T35 ��ʢ
+-+�����Ϥ��ʡ� #JN ���ʰʲ�ά�˥�ʡ�
+-+�����ޤ뤵��餦�� #T35 503�饦��
+-+�����֤�ä� #JN �����֥�å�
+-+�����֤�ä� #KK �����֥�å�
+-+�����֤�ä� #T35 �����֥�å�
+-+�����֤�褳�Ϥޤ��� #JN �����֥겣�Ϳ�
+-+�������� #T35 ��������
+-+�����������Ƥ����� #JN ����������
+-+������ #T35 ���
+-+�����֤ȤФ��֡� #T35 �����Х��֡�����
+-+������ #T35 �滰��
+-+�����㡼���ޤ�顼 #JN �����㡼���ޥ�顼
+-+�����㡼�����顼 #JN �����㡼�����顼
+-+������ #JN ������
+-+���äɤϤ�� #T35 ���åɥϥ��
+-+���ˤ㤢 #JN ���ˤ㤢
+-+���ˤ㤢 #JN ���˥㥢
+-+���Ф� #T35 ����
+-+���Ф����餷 #T35 �����Ӥ餷
+-+���Ф����ޤ� #CJ �������ޥ�
+-+���ޤ�ɤ� #JN ���ޤ�ɤ�
+-+���ߤФ� #T35 ����Ȣ
+-+���ߤ� #T35 ���ߤ�
+-+���᤽ #CJ ���᥽
+-+���顼 #JN ���顼
+-+���餡 #JN �Ԏߧ��ߡՎ��ގ׎���������������������������!!!!!
+-+���餡 #JN ���饡
+-+����礦�⤨ #T35 ����˨
+-+���뤡 #CJ (�ߧ���)���ގَ���
+-+���뤡 #CJ ���륡
+-+���뤡 #CJ ���륡!
+-+���뤡 #CJ ���ގَ���
+-+���뤡 #JN  ��(*������)�Ύ��ގَ�
+-+���뤡 #JN (�ߧ���)���ގَ�
+-+���뤡 #JN ���륡
+-+���뤡 #JN ���ގَ�
+-+���뤡 #T35 goluah!
+-+���뤡�Ȥ�ޤ� #JN ���륡�ȥ�ޥ�
+-+���뤢 #CJ ���륡!
+-+�������� #T35 ��������
+-+�����Ф��󤷤��� #T35 �����дƻ��
+-+�����Ф������� #T35 ���������
+-+������������ #JN �����š��¤������š�
+-+����������ΤϤ��ޤ�Ǥ� #CJ ����������λϤޤ�Ǥ�
+-+�������������㤯���󤬤����  #JN �������������Ҥ�������!!!
+-+�������������㤯���󤬤���� #JN �������������Ҥ�������!!!
+-+�������� #T35 �ǹ�
+-+�����������礦 #T35 �ǹⶵ
+-+�������������� #JN ��������������
+-+�������դä����� #JN ���������եå�����
+-+��������줹 #T35 �ǿ��쥹
+-+�������󤻤󤯤� #T35 ��������
+-+�������� #JN ��������
+-+�������� #T35 ��������
+-+�����������夦�������������ۤ� #JN ����饭����������
+-+�����ɤ꤭���� #JN ������ϰ�
+-+�����С������������ #KK �����С������������
+-+�����⤨�ȡ��ʤ��� #T35 ��˨�ȡ��ʥ���
+-+�����⤨�Ȥ��ʤ��� #T35 ��˨�ȡ��ʥ���
+-+�������� #JN ��������
+-+�������Ф餻���� #T35 ��������
+-+������ #JN ��
+-+������ #T35 ��
+-+�����ˤä� #T35 �����ˤä�
+-+�������󤵤������夦�ʤʤ��� #JN ���츩����Խ�����
+-+�������� #T30 ���
+-+�������礤�餤 #T30 �������
+-+�������礤�餤 #T35 �������
+-+�������礬���ɤ餤�� #T35 ��������ɥ饤��
+-+��������ˤ� #T35 �����
+-+�����������餤 #T30 ��������
+-+�������� #T35 ��������
+-+�����Ť� #T30 �����Ť�
+-+�����Ť� #T30 ��������
+-+�����餬������������ #KK ���ֳر�
+-+�����餬������������ #KK ���ֹ⹻
+-+�����餬�������夦���ä��� #KK ������ع�
+-+�����餿�󤫤� #T35 �����餿��ʲ���
+-+�����餿����夦 #T35 �����餿���
+-+��������夦 #T35 ����
+-+������ä� #T35 ������ä�
+-+������ä� #T35 ������
+-+������ˤ� #JN ������˥�
+-+������ͤä� #KK ������ͤä�
+-+��������� #JN ���������
+-+�����Ȥ����ȤϤˤ㡼��� #JN ��ȥ����ȤϤˤ㡼���
+-+�����ˤ����ä��礤 #JN ���ˤ����å��祤
+-+���� #KS sage
+-+���� #KSr ����
+-+���� #T35 sage
+-+���������� #T35 sage����
+-+�������餷 #T35 sage�Ӥ餷
+-+�������󤳤� #T30 �����ʹ�
+-+�������󤳤� #T35 sage�ʹ�
+-+�����äƤ� #JN sage���Î�
+-+�����줹 #T30 sage�쥹
+-+������ #JN ����
+-+���������󤹤� #JN �����ڷ��
+-+���������� #JN ����������
+-+���������� #JN ����������
+-+�������� #JN ��������
+-+������ #JN ������
+-+������ #JN ������
+-+���ä����ޤĤ� #T35 ���å����פ�
+-+���ä��夦���������㡼�� #JN ���ߺޥ����㡼��
+-+���äݤ� #CN ���Ύߎ�
+-+���äݤ� #KK ���ݥ�
+-+���äݤ� #T35 ���ݥ�
+-+���äݤ� #T35 ���Ύߎ�
+-+���Ĥ������� #T35 ���ƶػ�
+-+���Ȥ�� #T35 ���ȥ��
+-+���� #T35 ��
+-+���Ф��� #T30 �����
+-+���Ф������� #CJ ���������
+-+���Ф��Ȥ� #CJ ��������
+-+���֤Фä��������Ƥ������न�� #T35 subback.html
+-+���ᤸ�ޤ����� #T35 �������
+-+���� #T35 ����
+-+����äƤ� #T35 ����äƤ�
+-+������ #T35 ������
+-+���餷���� #KSr ���餷age
+-+���餷���� #KSr ���餷����
+-+���餷���� #KSr ����age
+-+���餷���� #T35 SALA��age
+-+���餷���� #T35 SALA�ž夲
+-+���餷���� #T35 �ӣ��̣��ž夲
+-+���餷���� #T35 ���餷age
+-+���餷���� #T35 ����age
+-+���餷������ʡ� #JN �����夲��ʡ�
+-+����֤�ä� #JN ����֥�å�
+-+����֤�ä� #JN ����֥�å�
+-+���뤶�Ȥ� #T35 ���
+-+����١��� #T30 ����١���
+-+����Ĥ� #T35 �����
+-+����Ť� #T35 �����
+-+���錄��ޤ��ȤϤ郎���Τ� #CJ ���Ͽ��פϲ椬̿
+-+����䤫 #JN �֤䤫��
+-+���󤬤Ĥ����� #JN �������
+-+���󤭤㤯 #KK ����
+-+���󤭤㤯 #T35 ����
+-+���󤯤��� #CJ ���󥯥���
+-+���󤯤��� #CJ ���ݎ�����
+-+���󤱡� #JN ���󥱡�
+-+���󤱡�����֤� #T35 ���˿�ʹ
+-+���󤲤ä� #JN �����åȤ�����������
+-+���� #T35 ����
+-+���󤺤Τ��� #JN ���Ӥ���
+-+���󤿤�ˤ� #JN ���󥿡��˥�
+-+��������ʡ� #JN ���ʥ��顼
+-+����ɤ��ä� #JN ����ɥ��å�
+-+����᡼�Ȥ�Τ����夦���� #JN �����α���͡�
+-+����⤸������ #T35 ��ʸ�����
+-+�����ܤ� #JN �����ܥ�
+-+������󤿤����� #T35 �������μ�
+-+�������� #JN ��������
+-+�������� #JN ��������
+-+������ #JN ������
+-+�����������Ϥ� #JN �߸˽�����
+-+�����ˤ�������ä� #T35 �������RED
+-+�����ˤ��ˤ�Ƥ� #T30 ����ǧ��
+-+������礦�֤ä������� #CN ����ʪ����
+-+������礦�֤ä������� #T35 ����ʪ����
+-+���� #T35 ����
+-+���ä��夻�󤻤� #JN ��������
+-+���Ĥ��󤳤Ƥ� #T35 ���̸���
+-+���֤Ȥ󤢤餷 #JN ���֤Ȥ�Ӥ餷
+-+���虜�� #T30 ���虜��
+-+�� #M5 ��
+-+�� #N5 ��
+-+�� #N5 ��
+-+�� #N5 ��
+-+�� #R5 ��
+-+�����ˤ�� #JN �����ˤ��
+-+�������� #KK ��R
+-+�������� #T35 ��R
+-+�������� #T35 ��R
+-+�����碌����� #JN ��������
+-+���� #JN ����
+-+���� #T35 ����
+-+������ #JN ������
+-+������������礦 #JN �����Ѱ�Ĺ
+-+����������� #JN �����������
+-+�������礭�礦���� #JN ����������
+-+�������꡼�ޤ����� #JN ����������
+-+�������꡼�ޤ����� #JN �������ώ�����
+-+�������� #JN ��������
+-+�������� #JN ��������
+-+�����Ҥ� #JN ����ɱ
+-+�����Ҥ��դ� #JN ������ʸ
+-+�����ޤ� #JN �����ޥ�
+-+�������� #T35 ��������
+-+�������� #T35 ��������
+-+������ #T35 �ٱ�
+-+���� #JN ��
+-+���� #T35 ��
+-+�������� #KK ������
+-+�������� #T35 ������
+-+������ #T35 ����
+-+�����ˤ� #T35 ����
+-+������ #KK �ͳ�
+-+������ #T35 ��
+-+������������ #T35 ����
+-+���������󤸤� #T35 �ͳѿ���
+-+�������� #T35 �����
+-+�������ߤ��餡 #JN �������ގ׎�
+-+�������ߤʤ᤯�� #JN �������
+-+�����󤫤� #JN ���
+-+������ #JNM ������
+-+������ #T35 ������
+-+������ #CN ���
+-+������ #T35 ���
+-+�������ۤ濫 #CJ �������ۥ
+-+������ #T35 ������
+-+�������������ܤ� #JN �������������ܥ�
+-+�����פ� #KK �����ץ�
+-+�����פ� #T35 �����ץ�
+-+������������ #T35 ���β���
+-+������Ф��� #JN ������з��ʲ���
+-+������Ф����Ĥ��䤳�����������Ф� #JN ������и�����Թ�®�Х�
+-+������Фʡ� #JN ������Хʡ�
+-+�������夦�� #T35 ���Ŷ�
+-+�����ˤ�Τ��� #T35 ���ͤΥ���
+-+���ä��� #T35 �Τä���
+-+���ä������� #T35 �Τä�����
+-+���ä������夦�ܤ� #T35 �Τä�����˼
+-+���äƤ�ʤ�ʤ����Ƥ����Ƥ���ʤ��ä��ΤǤ��� #CJ �ΤäƤ�ʤ顢�ʤ���Ŧ���Ƥ���ʤ��ä��ΤǤ�����
+-+���Ȥˤ���㤨�� #JN ���̥˥���㥨��
+-+���� #CJ ����
+-+���ʡ� #JN ���ʡ�
+-+���ʤ� #T35 ���ʡ�
+-+���ʤ��Ф�Τ��Τ�ʡ� #JN ���ᶾ�����κ����ʡ�
+-+���ʤ͡��� #JN ��ʥ͡���
+-+���ˤ��ߤȤ�äפ��֤Ǥ� #JN ����ȥ�åץ��֥ǥ�
+-+���ˤ��ߤߤʤ餤�����꡼ #JN ��������������꡼
+-+���ˤ��ߤߤʤ餤�����꡼ #JN ������������꡼
+-+���� #CJ ����
+-+���� #CJ �Ԥ�
+-+���� #CJ ���
+-+���͡��� #JN ��͡���
+-+���ͤС� #JN ���ͥС�
+-+���ͤС� #JN ���ͥС�
+-+���ͤ褪�᡼�� #JN ��ͤ褪�᡼��
+-+���Τ֤餤�� #T35 Ǧ�饤��
+-+���Ф��� #T35 �Ƹ�
+-+���Ф��� #T35 �Ƹ�
+-+���Ф� #T35 ��Х�
+-+���֤��蘆�� #JN ��߷����
+-+���ۤ� #T35 ���ۥ�
+-+���ۤ� #T35 ���ۥ�
+-+���ܤ����夦 #JN ��`)��(���ˡʡ�)��(`��
+-+���ܤ����夦 #JN ���ý�
+-+�����ʡ� #JN ���ࡦ��ʡ�
+-+���ᤸ #T35 (�ߧՎ�)���Ҏ���
+-+����Ĥ�������Ӥ��� #T35 �����դ��Դ��ӡ���
+-+����Ĥ� #JN ����ĥ�
+-+����� #T35 �����
+-+����� #T35 ���ӎ�
+-+���㤡����褦�����󤰤Ȥ����� #JN ���㥡���ѥ����󥰤ȥ�����
+-+���㤢����褦���� #CN ���㥢������
+-+���㤢����褦���� #T35 ���㥢������
+-+���㤤������ #T35 ���㥤����
+-+���㤤�� #T35 ���㥤��
+-+���㤭���� #CJ (�����؎���)����������
+-+���㤭���� #CJ ���㥭����
+-+���㤯�줭�ꤷ���� #T35 ���㥯�쥭�ꥷ����
+-+���㤷�礦 #JN �־�
+-+����Ф��Τ� #CJ ����Х��Υ�
+-+����Ф��Τ� #CJ �����ʎގ��Ɏ�
+-+����Ф��� #T35 �������
+-+����٤�Ĥ��� #JN ����٤��
+-+�����Ƥ� #JN �ʎ��ώ��ˎ����ݎÎ���
+-+�����Ƥ� #JN �����ƥ�
+-+���䤢 #T35 ����
+-+���夦 #JN ���夥
+-+���夦���󤢤����� #KK ������������
+-+���夦���礦 #T35 ����
+-+���夦�������顼 #JN ���ͥ��顼
+-+���夦�Ȥ� #T30 ����
+-+���夦�Ȥ� #T35 ����
+-+���夦�դ� #T30 ����
+-+���夦�դ� #T35 ����
+-+���夦�餯 #T35 ���夦�餯�ʽ����
+-+���夦��礦 #CJ --------��λ-------
+-+���夦��礦 #CJ ������Ὢλ�������
+-+���夦��礦 #T30 ��λ
+-+���夦��礦���夦�ܤ� #T35 ��λ��˼
+-+���夷 #T35 ���
+-+���夷�� #JN ���夷��
+-+���夸�� #T35 �缣��
+-+����ä��礦 #T30 ��ĥ
+-+����Ԥ��󤷤� #T35 ����ԡ����
+-+���硼��ʡ� #JN ���硼��ʡ�
+-+���硼��ʡ� #JN ���硼��ʡ�
+-+���硼��ͤ����� #KK ���硼��ͥ�����
+-+���礦���� #T30 ����
+-+���礦���� #T30 ����
+-+���礦���ɤ���� #T35 ��ժDQN
+-+���礦���󤵤� #T35 ������
+-+���礦�������ޤ󤫤ä� #CJ ��ľ�����ޥ󥫥å�
+-+���礦�������ޤ󤫤ä� #CJ ��ľ�����ޥ󥫥å���
+-+���礦���夦 #T35 ����
+-+���礦�ܤ� #T35 ����
+-+���礦�ܤ����� #T35 ������
+-+���礦�椻�󤷤��ä����ޤ� #T35 ������Υ��å����ޥ�
+-+���礦�椻�󤷤��ä����ޤ� #T35 ������Υ��å����ޥ�
+-+���礦��ʤפ��� #T35 �����ʥץ���
+-+���礦��ͤ����� #T35 ���硼��ͥ�����
+-+���礯�ˤ� #T35 ����
+-+���礯�ˤ󤵤� #T35 ���ͤ���
+-+���礯�͡��� #JN ���͡���
+-+���礯�褦��ʡ� #JN ���ѥ�ʡ�
+-+���礸�礭�顼���٤� #JN ������顼���٥�
+-+���礿 #T35 ���祿
+-+���礿���� #T35 ���祿����
+-+�����������ɤ��ä� #JN ���奵��ɥ��å�
+-+����������ͤС� #JN ���奷�ͥС�
+-+��������ޤ��줹�ޤ� #JN ����ޥ��쥹�ޥ�
+-+���������ʡ� #JN �����ʡ�
+-+���������͡� #JN �����͡�
+-+����� #JN �����
+-+����� #JN �����Ύ�
+-+����ܡ��� #CJ �����Ύގ���
+-+����ܡ��� #JN (�����ء�`)����ܡ���
+-+����ܡ��� #JN (�����؎�`)�����Ύގ���
+-+����ܡ��� #JN �����-��
+-+����ܡ��� #JN �����Ύ�-��
+-+����ܤ��� #CJ ����ܡ���
+-+����ܤ��� #CJ �����Ύގ���
+-+����ܤ��� #JN �����Ύގ��ގ�
+-+�����͡��� #JN �����͡���
+-+���褪���� #SUC ���衼����
+-+���褪���� #SUC ���֎�����
+-+����ʤ��� #JN ����ʥ���
+-+����͡��� #JN ����͡���
+-+����ͤ��� #T35 ����͡���
+-+����ͤΤ����� #JN ����ͥΥ�����
+-+����ҡ��� #JN ����ҡ���
+-+���� #T35 ��
+-+����� #T35 ����
+-+����Ȥꤤ�� #T35 ����Ȥ���
+-+����Ȥꤶ��餤 #JN ����Ȥ��
+-+���� #SUC ����
+-+���� #SUC ��
+-+�������ȤˤϤ�������Ǥ��ʤ� #CJ �ǿͤˤϤ��������ʤ���
+-+�����ͤ� #KK ��ǭ
+-+�����ͤ� #T35 ��ǭ
+-+������� #T35 ����
+-+���󤫤��ʡ� #JN ���������ʡ���
+-+���󤭤������ä����ˤ�Ƥ����礦 #JN ����Ͽã��ǧ���
+-+���󤱤����� #T35 ������
+-+���󤶤�Ϥ������ˤϤ�Ȥ�����äƤ� #CJ �����Ͻ񤫤���Ⱦǯ�ңϣͤäƤ�
+-+���� #T35 �»�
+-+���󤷤��1���� #JN ����Σ�����
+-+���󤸤Ĥ����� #T35 ���³���
+-+���󤸤� #T35 ����
+-+���󤸤夯�����夦 #T35 ����50
+-+���󤸤夯�ߤʤߤ������夦�ˤ夦���դȤ��꡼��Τͤ������ #JN ��������ֵ������եȥ��꡼��פΤͤ������
+-+���󤹤� #T35 ������
+-+���󤹤줪��ǤȤ��������ޡ��� #JN ���ʡ������ˡ������줪��ǤȤ��������ޡݤ���
+-+���󤹤줪��ǤȤ��������ޡ��� #JN �����줪��ǤȤ��������ޡݤ�
+-+���󤹤�äɤ��Ȥäѡ� #T35 ��������åɥ��ȥåѡ�
+-+���󤹤�äɤ��ȤäѤ� #T35 ��������åɥ��ȥåѡ�
+-+���󤻤� #PRE ����
+-+���󤻤� #T35 ����
+-+���󤻤����夦�ܤ� #T35 ������˼
+-+���󤻤� #T35 ����
+-+���󤽤��ɤ��Ǥ⤤ #KY ����ɤ��Ǥ⤤
+-+���󤽤��ɤ��Ǥ⤤ #KY ����ɤ��Ǥ���
+-+���󤽤��ɤ��Ǥ�� #KY ����ɤ��Ǥ���
+-+������礦���� #KK ��Ĺ����
+-+������礦���� #T35 ��Ĺ����
+-+����� #T35 ����
+-+����ˤ����� #T35 ��������
+-+����͡��褪�֤͡��� #JN �����͡��衦���֡��͡���
+-+���� #T35 ��
+-+�������� #T35 �ǣ�
+-+���������Ȥ������� #JN G��ȥ�������
+-+���������Ȥ������� #JN G��ȥ��������ñ�Τ��Ȳ�����Ƚ��ʤ��Τǣ�ɤ�����ġ�
+-+���������Ȥ������� #JN �ʡ��ϡ��ˡ��ʡ��ϡ����
+-+���� #JN ����
+-+������ #T35 ���ָ�
+-+���������褯 #T35 J����
+-+�������Ӥ��Ӥ����� #T35 JBBS
+-+�����Τ����ɤ��ä��� #JN �����Υ����ɥ��å���
+-+������Ȥ��� #JN ������ȥ���
+-+������Ȥ���顼�Ȥ��� #JN ������ȥ���顼�ȥ���
+-+���������󤨤餤 #CJ ���������󥨥饤
+-+���������󤨤餤 #CJ ���ގ������ݎ��׎�
+-+���� #KK ����
+-+���� #KK ��
+-+���� #T35 ����
+-+���� #T35 ��
+-+�������ޤ��� #JN �����Ⲧ
+-+������ #JN ����
+-+���������Ȥ� #JN (���ϡ�)���ގ��ގ����ގĎ���
+-+���������Ȥ� #JN ���������ȥ�
+-+�������Τ����� #JN �Ϲ��ζȲ�
+-+�������������� #JN ��������������
+-+������������ #JN (���ώ�)���ގ������ގ�����
+-+������������ #JN �Ρʡ��ϡ��ˡ�
+-+������������ #JN ������������
+-+������������ #JN ����������
+-+������������ #JN ���Ǝ�������(*���ϡ�*)��������!!
+-+������������ #T30 QQQQ
+-+������������ #T30 �����
+-+������������ #T35 ������������
+-+������������ #T35 �����
+-+������������ #JN �ʡ��顦��
+-+������������ #JN ������������
+-+������������ #JN �޻��޾�
+-+������������ #JN ���ގ������ގ���
+-+�����Ĥ����� #JN ��-��-��
+-+�����Ĥ����� #JN �����ĥ�����
+-+�����Ĥ����� #JN �޻¼޴�
+-+�����Ĥ����� #JN ���ގ����ގ���
+-+�����󤻤��� #JN �Ͽ�����
+-+������� #CJ ��������������
+-+������� #CJ �Ͽ̤���������
+-+�������ʤɤ����ʤ��� #CJ �����ʤ������ʤ���
+-+�������� #T35 ��������
+-+�������夦 #T35 ������
+-+�����󤵤� #T35 ���ú�
+-+���ä��礦���� #T35 �¶�����
+-+���äѤҤȤ��ꤲ #JN ���åѥҥȥ��ꥲ
+-+���Ĥ�򤫤��ʤȤ���ۤ� #CJ ���ä�񤯤ʤȤ���ۤɡ�
+-+���ɤ������������� #T35 ��ư��������
+-+���Ϥ��� #T35 ���ϡ���
+-+���Ф� #T35 ����
+-+���Ҥ㤯������ #JN �ʡ�ɴ����
+-+���Ҥ㤯������ #JN ���ҥ㥯������
+-+���Ҥ㤯������ #JN ���ގˎ������ގ���
+-+���פ��� #T35 ���ץ���
+-+���פ��� #T35 ���ץ���
+-+���ؤ��ݤ� #KK ���Ĥݤ�
+-+���ؤ��ݤ� #T35 ���Ĥݤ�
+-+���ߤ�Ȥ���ʡ� #JN ��̱�ޥ�ʡ�
+-+���ߤ�Ȥ���ʡ� #JN ��̱�ޥ�ʡ�
+-+���� #JN GM
+-+�����򤪤褰���� #JN ���̤�ˤ�����
+-+���㡼�ˡ� #JN ���㡼�ˡ�
+-+���㤬��ʡ� #JN ���㤬��ʡ�
+-+���㤷�� #T35 �ٿ�
+-+����ä��� #T35 ����å���
+-+����ä��� #JN ����å���
+-+����ä��� #T35 ����å���
+-+����ä��� #T35 ����å���
+-+����ˤ� #T35 �ط�
+-+����ˤ� #T35 �ٷ�
+-+����� #JN ���ގ��ˎ�
+-+����ޤ��� #T35 �����
+-+����ߤ����� #JN ����ߥ�����
+-+����� #T35 JA��L
+-+����󤬤ꤢ��Ϥह���� #JN ����󥬥ꥢ��ϥॹ����
+-+����󤯤���ä�������ä��㡼 #JN ����󥯡�����å���������å��㡼
+-+����󤰤�ݤ��äȤΤ����Ϥդ������� #CJ ����󥰥�ݥ��åȤ���ϥե�������
+-+���夦���礯 #JN ����
+-+���夦���礯 #T35 ����
+-+���夦�ʤʤ�����פ� #T35 17������ץ�
+-+���夦�ˤ� #T35 ����
+-+���夦�Ϥ����ˤ��夦�������� #T35 18����20������
+-+���夦�դ����� #T35 ��ʣ����
+-+���夦�դ�����ä� #T35 ��ʣ�����
+-+���夦�ޤ󤨤� #JN ����
+-+���夦�ޤ󤨤� #JN ������
+-+���夦�ߤ� #T35 ��̱
+-+���夦��� #JN ����
+-+���夫�� #CN ����
+-+���夫�� #T35 ����
+-+����ơ��� #JN ����ơ���
+-+����󤫤� #T30 ���
+-+����󤭤󤤤� #CN �����
+-+����󤭤󤤤� #T35 �����
+-+���椦��ߤ��Ƥˤ����ʤ�Ҥ���Ƥ� #JN ���楦��ߥ��ƥ˥����ʥ�ҥ���ƥ�
+-+���椦��ߤ��Ƥˤ����ʤ�Ҥ���Ƥ� #JN ��ճ�з��Ʊ���������
+-+���椦��ߤ��Ƥˤ����ʤ�Ҥ���Ƥ� #JN ���ގՎ����Ў��ގÎƎ����Ŏ׎ˎ��ގ؎Î�
+-+���礤�ä� #KS JOY�ä�
+-+���礦������ #JN ������
+-+���礦���夦 #T30 ����
+-+���礦�Ȥ�����椦 #T35 ������ͥ
+-+���礦�Ȥ��夦 #T35 ���Ͽ�
+-+���礦��� #T35 ��Ϣ
+-+���礻�դȤ��֤ɤ��� #JN ���祻�դȥ����ɥ���
+-+����Ƥ� #T35 ����
+-+����Ƥ��������꡼�� #JN ���륨�����꡼��
+-+����ˡ� #JN ����ˡ�
+-+����� #JN �����
+-+����� #T35 �����
+-+����󤸤� #JN ����󥸥�
+-+�����ա��� #JN ����󡦥ա���
+-+���餤 #T35 ����
+-+���餤���󤷤�ꤷ�� #JN ���븶������
+-+����͡��� #JN ����͡���
+-+���줹 #T30 ���쥹
+-+���� #SUC ��
+-+���󤸤㡼 #JN ���󥸥㡼
+-+����ˤ� #T35 ����
+-+����ˤ� #T35 �����Ծ�
+-+����ˤ������� #T35 ����
+-+����ˤ������� #T35 �����Ծ�
+-+����ߤ󤰤󤰤󤫤� #JN ��̱������
+-+�����󤴤��֤�ä� #JN ���̥����֥�å�
+-+�����ѡ����ꤪ #JN �����ѡ����ꥪ
+-+�����ѡ���ʤ����������� #JN �����ѡ���ʥ�������
+-+�����ѡ��ꤢ����夦�ܤ� #T35 �����ѡ��ꥢ���˼
+-+�������󤫤󤹤� #KK �����ɥ���
+-+�������󤫤󤹤� #T35 �����ɥ���
+-+�������� #T35 ����
+-+���������礥 #JN �ۤ������礥��
+-+���������褦 #JN �ۤ������礥��
+-+�����Ѥ��Τ����� #T35 �����ѡ��Υ���
+-+�����Ѥ��Ϥ��� #T35 �����ѡ��ϥ���
+-+�����Ѥ��ꤢ����夦�ܤ� #T35 �����ѡ��ꥢ���˼
+-+�����⤸�⤸���ĤĤ��äƤդ䤷���������������� #JN ��ʸ���������䤷�ƺ�ä�����
+-+�����ä� #JN ���û�
+-+�����ä� #T35 ���û�
+-+���� #T35 �ܲ�
+-+�������顼������� #CJ �������顼������
+-+�����餢�� #T35 �����顼��
+-+���� #SUC ��
+-+���������� #T35 ��
+-+�����������ۤ󤷤� #JN �����������ܼ�
+-+�������פ� #T35 �������ץ�
+-+������ #T35 ������
+-+������פ� #T35 ������ץ�
+-+�����ޤ��� #CJ �����ޤ���
+-+��������� #CJ ��������ʡ�
+-+������ #T35 ������
+-+��������ͤ��Ǥ��� #JN �ʡ��ϡ������ڽ��ˎÎގ���
+-+��������ͤ��Ǥ��� #JN ���ڽ��˥ǥ���
+-+��������ͤ��Ǥ��� #JN ���ڽ��ˎÎގ���
+-+�������ޤ� #JN �������ޥ�
+-+���������ˤ����ͤ�Ϥ��ޤ�� #JN ��������2ch�Ϥޤ���
+-+������ #JN ���Ͽ�
+-+������ #T35 ���Ͽ�
+-+���ä������襤����ʡ� #JN �����ä��������襤��(^o^)��ʡ�
+-+���äɤ� #JN �ʡ��ϡ��ˎ����Ďގ�!
+-+���äɤ� #JN ���åɥ�
+-+���äɤ� #JN �����Ďގ�
+-+���äɤ� #T35 ���åɥ�
+-+���Ƥ������� #T35 ���ƥ�������
+-+���ƤϤ� #T35 �Τƥϥ�
+-+���ȡ����ᤳ #T35 ���ȡ����ᥳ
+-+���Ȥ����ᤳ #T35 ���ȡ����ᥳ
+-+���Ȥ�ä� #T35 �ǥȥ�å�
+-+���ʤ��� #T30 ���ʥ���
+-+���ʤ����ФФ� #JN ��������
+-+���ͤ����� #T35 ���ͤ�����
+-+���Ρ� #T35 �ӣΣϣ�
+-+���Τ� #T35 SNOW
+-+���� #KS ����
+-+���ѡ�����ʡ� #JN ���ѡ�����ʡ�
+-+���Ѥ����� #T35 �ʡ��ϡ��˥��ѥ�����!!��
+-+���Ѥ����� #T35 �ʡ��ϡ��ˎ��ʎߎ����Ύ�!!��
+-+���Ѥ����� #T35 ���ѥ�����
+-+���Ѥ����� #T35 ���ʎߎ����Ύ�
+-+���Ѥ����ܤ����� #T35 ���ѥ����ܸ���
+-+���Ѥ����� #T35 �ʡ��ϡ��ˎ��ʎߎ����Ύ�!!��
+-+���Ѥ����� #T35 ���ʎߎ����Ύ�
+-+���Ѥ����ܤ����� #T35 ���ѥ����ܸ���
+-+���Ѥ��夦 #T35 ���ѿ�
+-+���Ѥ� #T30 ���ѥ�
+-+���Ѥ� #T35 spam
+-+���Ѥ� #T35 ���ѥ�
+-+���Ѥ� #JN SPAN
+-+���Ԥޤ� #T35 ���ԥޥ�
+-+���դ��󤯤� #JN ���ե��󥯥���
+-+���֤��� #T35 ���֥���
+-+���ڤ�󤫡� #KK ���ڥ�󥫡�
+-+���ڤ�󤫡� #T35 ���ڥ�󥫡�
+-+���ڤ�󤫤� #T35 ���ڥ�󥫡�
+-+���� #JN ����
+-+���� #T35 ����
+-+���ޤ� #CJ ���ޥ�
+-+�����ä� #T35 SMART
+-+�����ä� #T35 �ӣͣң���
+-+���� #JN ����
+-+���餤�� #JN ���饤��
+-+����äȤ���� #JN ����åȤ����
+-+���� #T35 ����
+-+���줴�Ф� #T30 �������
+-+���줵������ #T30 ������
+-+���줹�� #T35 ���쥹��
+-+���줿�� #T35 ���쥿��
+-+��������� #T35 ����㤤
+-+����ä� #T35 ����ä�
+-+����ä� #T35 ����å�
+-+����äɤ��ä��夯 #T30 ����åɰ���
+-+����äɤ��ä��夯 #T35 ����åɰ���
+-+����äɤ������ #T35 ����åɰ���
+-+����äɤ��Ȥäѡ� #T35 ����åɥ��ȥåѡ�
+-+����äɤ��Ȥäѡ����ơ������ #JN ����åɥ��ȥåѡ����ơ������
+-+����äɤ��ȤäѤ� #T35 ����åɥ��ȥåѡ�
+-+����äɤҤ礦���ˤ�Ƥ������󤫤� #JN ����å�ɾ��ǧ��Ѱ���
+-+����äɤդ����Ȥۤ����� #T35 ����åɥե���������
+-+����äɤդ����Ȥۤ����� #T35 ����åɥե���������
+-+����äɤ줤�� #T30 ����åɥ쥤��
+-+����ˤ�Ƥ����礦 #JN ����ǧ���
+-+����Ҥ礦�����礦 #JN ����ɾ����
+-+�����褴 #S5 ������
+-+�����褴�� #CJ ��������
+-+�����äȤ��ܤ����Ƥ� #CJ �����åȳФ����Ƥ�
+-+���󤹤󤹤��� #CJ (���ϡ�)���ݎ��ݎ����ݢ�
+-+���󤹤󤹤��� #CJ ���󥹥󥹡����
+-+����ޤ� #CJ ����ޤ�
+-+�������ޤ� #JN ���������ޡ���
+-+�������� #JN ��������
+-+�����ʤޤϤ����� #JN �ʥ����˥ʥޥϥ���
+-+����顼 #JN ����顼
+-+���ꤻ�� #T35 ���ꥻ��
+-+���뤤����� #KK ���뤤��
+-+���뤤����� #T35 ���뤤��
+-+���� #T35 ����
+-+���줬�����ʤ��ΤǤ��夦�������Ƥ����ޤ��� #JN ���줬�������Τǽ������Ƥ����ޤ�����
+-+���줬�����ʤ��ΤǤ��夦�������ޤ��� #JN ���줬���ʤ��Τǽ������ޤ���
+-+���줬�����ʤ��ΤǤ��夦�������ޤ� #JN ���줬���ʤ��Τǽ������ޤ�
+-+������प������ #JN ������प������
+-+�������� #T35 ����
+-+�������� #JN ��������
+-+�������� #JN ��������
+-+������ #JNM ����
+-+�������� #JN ����
+-+�������� #T35 ����
+-+��������� #JN �Ľ�
+-+��������Ƥ��֤餯�� #T35 ����Ū�֥饯��
+-+�������󤷤礯�Ҥ���ޤ� #JN �������ʥ��ޥ�
+-+�����������夦 #T35 ���ݿ�
+-+������ #T35 ����
+-+������ #JN ����
+-+������ #JN ���̡�
+-+������2 #JN ���̣֣��
+-+������3 #JN ���̣֣��
+-+�����Ȥ���͡��� #JN ���̥���͡���
+-+�����Ȥ��� #JN ���̵�
+-+�����Ȥ������� #JN (��������)����������������
+-+�����Ȥ������� #JN ���̴����
+-+�����Ȥ������礦 #JN ���̺Ǿ�
+-+�����Ȥ����� #JN ���̥�����
+-+�����Ȥ��夦�������� #JN ���̣�����
+-+�����Ȥ��դ��󤯤� #JN ���̥��ե��󥯥�
+-+�����Ȥ������ޤ� #JN ���̥��������ޡ���
+-+�����Ȥ��������դä����� #JN �������եå�����
+-+�����Ȥ��������դä�����С������2 #JN �������եå�����ver��
+-+�����Ȥ��������դä�����С������3 #JN �������եå�����ver��
+-+�����ȤΤ� #JN ���̤Τ�
+-+�����ȤϤ�ޤ��С������1 #JN ����ʢ�����֣��
+-+�����ȤϤ�ޤ��С������2 #JN ����ʢ�����֣��
+-+�����Ȥա��� #JN ���̤ա���
+-+�����Ȥդ��֤� #JN ���̤դ��֤�
+-+�����Ȥ֤Ĥ֤� #JN ���̤֤Ĥ֤�
+-+�����Ȥ֤Ĥ֤Ĥ��夦�������� #JN ���̤֤Ĥ֤ģ�����
+-+�����Ȥ֤Ĥ֤Ĥɤ��� #JN ���̤֤Ĥ֤Ĥɤ���
+-+�����Ȥ֤Ĥ֤Ĥɤ���С������2 #JN ���̤֤Ĥ֤Ĥɤ���֣��
+-+�����Ȥ�ä� #JN ���̥�å�
+-+�����Ȥ᤿�顼�С������1 #JN ���̥᥿�顼ver��
+-+�����Ȥ᤿�顼�С������2 #JN ���̥᥿�顼ver��
+-+�����Ȥ�Ǥ��� #JN ���̥�ǥ���
+-+�����Ȥ줫�����ä��ߤ�����Ϥ��� #JN ���̥졦�������ä��ߤ����ϥ���
+-+�����Ȥ� #JN ���̤������
+-+������夦 #T35 ����
+-+���������դ��򤿤������顼 #JN ������������������顼
+-+�������󤸤� #T35 ��������
+-+�����ӡ� #T35 ����B
+-+������ #T35 ����
+-+�������� #KK �ѿ�
+-+�������� #T35 �ѿ�
+-+���������Ϥ󤷤�줹 #T30 �Կ�ȿ�ͥ쥹
+-+���������Ϥ󤷤�줹 #T35 �Կ�ȿ�ͥ쥹
+-+�������� #CN ��������
+-+�������� #T30 ��������
+-+�������� #T35 ��������
+-+���ߤ��󤳤��� #T35 ���ߤ��󥳡���
+-+���뤲���� #T35 ���륲����
+-+���� #T35 1000
+-+���󤤤����Ӥˤ�����Ƥ�Ƥ�Ȥ��뤹��ä� #T35 1000�Ԥ����Ӥ��Ĥ�ž���Ȥ��륹��å�
+-+���󤤤� #T35 1001
+-+���󤳤����� #JN �����
+-+���󤳤����� #JN ��Լ�
+-+���󤳤����� #T35 ��Լ�
+-+���󤷤夦���ä��� #T35 �콤�ع�
+-+���󤹤����󤹤� #T35 ����ϥ���
+-+���󤻤� #JN ����
+-+���󤻤��������� #JN �����������ơ�
+-+���󤻤��դ��֤� #JN �����դ��֤�
+-+���󤻤��֤Ĥ֤� #JN �����֤Ĥ֤�
+-+���󤽤� #T35 1000��
+-+����Τ����夦���� #T35 ��Ǿ����
+-+�����󤤤� #T35 ������
+-+���äȤ� #JN �ڴ�
+-+���äȤ��� #T35 �ڼ�
+-+���äȤ��� #T35 ����
+-+���äȤ����ͤ뤦�󤨤����� #JN Zch���Ŀ�
+-+���դ����������� #JN ���ե�����������
+-+���� #T35 0
+-+������� #T35 ����
+-+����Ĥ� #T30 ����
+-+����Ĥ� #T35 ����
+-+����� #T35 ����
+-+����餿�� #T35 ������
+-+������ #T35 ������
+-+�������� #CJ �������ϡ�
+-+�����Ǥ�ʤ��� #JN �����Ǥ�ʤ���
+-+�����ʤ� #JN �����ʥ�
+-+������ #CN ����
+-+������ #T35 ����
+-+������ #T35 �ز�
+-+�������� #T35 �㷢
+-+�������� #KK ���
+-+�������� #T35 ���
+-+�����������礦�� #T35 ��ľ���
+-+������ #T35 �Ҹ�
+-+���������� #CJ �Ҹ��¤�
+-+���������� #T35 �Ҹ˹Ԥ�
+-+�������� #JN �⹿
+-+�������Ф� #T35 �Ҹ���
+-+������������ä� #T35 ���祹��å�
+-+�������� #T35 ����
+-+�������礯 #T30 ����
+-+�������� #JN ���
+-+������ #T35 ������
+-+�������礦�줹 #T30 ��ī�쥹
+-+�����Ǥ�ʤ��� #CJ �����Ǥ�ʤ���
+-+�����Ǥ�ʤ��� #JN �����Ǥ�ʤ���
+-+�����Ȥ� #T35 ����
+-+�����Ϥ����󤶤� #CJ �����Ϥ�����
+-+�����ꤽ����㤯 #T35 ������ά
+-+������ #T30 �³�
+-+������ #T35 ¨��
+-+���������� #T35 ¨�ॹ��
+-+�������Ϥ�Ƥ� #T35 ¨��Ƚ��
+-+�����ۤ� #CJ ®��
+-+�����줹 #T30 ¨�쥹
+-+�����줹 #T35 ¨�쥹
+-+���ˡ������ޡ� #T35 ���ˡ������ޡ�
+-+���ˤ������ޤ� #T35 ���ˡ������ޡ�
+-+���̤��夦�Ӥ� #JN ���̵���
+-+���� #JN ����
+-+���Τ� #JN ���
+-+���ΤĤ��������� #T35 �֤��פΤĤ����
+-+���ФФС��� #JN ���ХХ�-��!!!
+-+���ФФС��� #JN ���ʎގʎގʎ�-��!!!
+-+���ФФС��� #JN ���ʎގʎގʎގ���!!!!
+-+���Ӥ��� #JN ���ӥ���
+-+���դޤä� #JN ���եޥåס�
+-+���ܤ��ʤ��⡼�� #CJ ���Ѥʤ��⡼��
+-+���ޤ�䤬�������ˤ��ޤ�� #CJ ���ޥ�䤬�������ˤ��ޤ��
+-+���餤�� #JN ���饤��
+-+����ʤ��� #JN ����ʥ���
+-+����͡��Ǥ� #JN ����͡��ǥ�
+-+����͡��� #JN ����͡���
+-+����͡��褫�󤤤Ф� #JN ����͡���ʰ���
+-+����ߤ����Ȥ� #JN ���鸫�����Ȥ�
+-+����äɤ�ʡ��� #JN ����åɡ���ʡ���
+-+���줬�ʤˤ� #JN ���쥬�ʡ�˥�
+-+���� #JNS ¹
+-+���󤴤��� #T35 ¹���
+-+���󤷤ΤϤ����뤷 #JN ¹�Ҥδ���
+-+����ʤΤ��ä���줮 #JN ����ʤ��Τå���쥮
+-+����ʤФʤʤ��� #JN ����ʥХʥʥ���
+-+����ޤ��褷 #JN ¹����
+-+�����ɤ��� #CN ��������
+-+�����ɤ��� #T35 ��������
+-+���� #CJ ����
+-+���ˤä� #JN ���ˤä�
+-+���ˤä����󤷤㤯 #JN ���ˤä��˼�
+-+���ˤä����󤷤㤯����դ� #JN ���ˤä��˼ߦ�
+-+���ˤä����󤷤㤯���������Ȥ꡼ #JN ���ˤä��˼�V
+-+���� #JN ����
+-+���� #JN ����
+-+���� #T35 ����
+-+���̡��ԡ� #JN ���̡��ԡ�
+-+���̤��ᤤ����Ƥ� #JN ���̡�������õ��
+-+���̤�����礦 #JN ���̼�Ĺ
+-+���̤äƤ� #CJ ���̤äƤ�
+-+���̤֤� #T35 ������
+-+���̤ޤ��� #JN ���̥ޥ���
+-+���� #T35 ����
+-+���� #JN ����
+-+�����Ф� #T35 �����Х�
+-+�� #K5 ��
+-+�� #KJ ��
+-+������ #JN ������
+-+���� #JN ��
+-+���� #T35 ��
+-+�������� #CJ ������������||��|(|��|��|`|)|��||����������
+-+�������� #CJ �������������áæ��áʡá��âϡá��áˡæ��áè��������ۡ�����
+-+�������� #CJ ������������||��|(|��|��|��|)|��||����������!!!
+-+������ #T35 �絤
+-+���������� #T35 ��ȴ�
+-+�������礦���礦�冷�� #JN �������µ���
+-+�������礦 #CJ ��Ĺ��
+-+�����Ȥ�Фʡ� #T35 �����ȥ�Хʡ�
+-+������ #T35 TIME
+-+������Ѥ�ɤä��� #T35 ������ѥ�ɥå���
+-+������� #T35 ������
+-+�������ݤ󤵤�ɤݤ� #CJ �������ݥ󤵤�ɥݥ�
+-+���������ߤ� #JN �������
+-+�������� #JNM ��������
+-+�������� #T35 ��������
+-+���������󤸤��� #KK ������������
+-+���������󤸤��� #T35 ������������
+-+������������礦 #JNS ��������Ĺ
+-+������������礦 #JNSUC ��������Ĺ
+-+�����Ϥ��褷 #T35 �ⶶͳ
+-+�����餮�� #JN �����饮��
+-+���������ʡ� #JN ���������ʡ�
+-+�������夦 #T35 ���
+-+�������ˤä� #T35 �ĸ�����
+-+���������� #JNM ��������
+-+������������ #JN ���ĵ�����
+-+���������� #JN ���ĵ���
+-+���������Ф������ #T35 ���ĵ��Ϸ���
+-+�����դ��Τ������� #JN ���ٻΤΣã�
+-+�������� #T35 tako��
+-+�����ͤ� #JN �����ͤ�
+-+�����ͤ� #JN �����ͤ�
+-+������ #JNS ����
+-+������ #T35 ����
+-+�������ä� #KK �������å�
+-+�������ۤ� #T35 ����ˤ
+-+�������ޤ��� #JN ����ޤ���
+-+�������ޤĤ� #T35 ����פ�
+-+�����夦 #T30 ¿��
+-+�����夦�Ȥ����� #T30 ¿�����
+-+���������� #T35 ����������
+-+�������� #KK ï��
+-+�������� #T35 ï��
+-+������������ #CJ ������������
+-+������������ #CJ ������������
+-+������������ #JN (�ߢώ�)������������
+-+������������ #JN ������������
+-+������������ #JN ������������
+-+���� #K5r á
+-+������ #T35 á��
+-+������ #K5r á��
+-+������������ #JN ��Ȥ���
+-+������������ #JN ��Ȥ���
+-+������ #T35 TDN
+-+�����󤯤� #T35 ¿�ʶ�
+-+���ä��夦 #T35 ���
+-+���Ƥ��餷 #T35 Ω�ƹӤ餷
+-+���Ƥʤ��� #T35 Ω��ľ��
+-+���Ƥˤ� #T30 Ω��ƨ��
+-+���Ƥ�� #T35 ���ɤ�
+-+���ʤ� #JN ����
+-+���ʤ� #JNS ����
+-+���ʤ��դ��󤿤��� #T35 ����ե��󥿥���
+-+���ʤ���ʤ� #JN ��������
+-+���ʤФ����ɤ�������ʡ� #JN ��ͼ���ɤ�������ʡ�
+-+���ˤ���ɤ��֤ĤӤ礦���� #T35 ë߷ưʪ�±�
+-+���� #T35 ��
+-+���ͤ��夦 #T35 ���
+-+���ͤʤ� #JN ��̵��
+-+���ͤʤ� #T35 ��̵��
+-+���� #KK «
+-+���� #T35 «
+-+���Ф��礦���� #T35 «����
+-+���ޤ� #T35 �̻�
+-+���ޤ���� #JN ���ޤ����
+-+���ߤ� #KK ���ߥ�
+-+������礦�� #JN ��¼μ��
+-+����� #CJ ��|��|��
+-+����� #CJ orz
+-+����� #CJ _no
+-+����� #JN �����
+-+���� #KK í
+-+���� #T35 í
+-+���餳 #T35 ���饳
+-+���꤭����� #T35 ¾�Ϥ����
+-+����Ф� #CN ������
+-+����Ф� #T35 ������
+-+����Ф󤿤��� #T35 ����Х���Ϻ
+-+���뤱�� #T35 ���륱��
+-+����ߤߤ�ʡ� #JN ���켪��ʡ�
+-+������ #SUC ��Ϻ
+-+������ #T35 ������Ϻ
+-+����� #T35 TAWARA
+-+���� #SUC ����
+-+���� #SUC ����
+-+���󤭤塼 #CJ ���󥭥塼
+-+���󤭤塼 #CJ ���ݎ�����
+-+���󤭤夦 #CJ ���󥭥塼
+-+���󤭤夦 #CJ ���ݎ�����
+-+���󤽤����� #CJ (���ϡ�)���󥽥�����
+-+���󤽤����� #CJ (���ϡ�)���ݎ�������
+-+���󤽤����� #CJ (���ϡ�)������������
+-+���󤽤����� #CJ (�ߢώ�)������������
+-+���󤽤����� #CJ ���󥽥�����
+-+���󤽤����� #CJ ���ݎ�������
+-+���󤽤����� #JN (���ϡ�)���ݎ�������
+-+���󤽤����� #JN ���󥽥�����
+-+���󤽤����� #JN �ݿ���
+-+���󤽤����� #JN ���ݎ�������
+-+���󤽤��䤯�� #JN û­�Ԏ�����
+-+����ݤݤ��� #JN ������º��
+-+�����䤹 #JN �����䥹
+-+�����䤹 #T35 �����䥹
+-+�����䤹���Τ� #JN �����䥹���Υ�
+-+�����䤹 #JN �����䥹
+-+���������Ҥ��� #T35 �粦����
+-+�������󤲤� #T35 ��Ը�
+-+�������� #JN ���
+-+���������礦���󤰤����� #JN ����Υ��󥰥�����
+-+�������󤫤󤳤�� #JN ����������
+-+�������󤫤�Ƥʡ� #JN ������ƥʡ�
+-+�������󤫤��Ҥ� #JN �������ҥ�
+-+�������󤻤� #T35 ������
+-+�����Ȥ����Ƥ����� #KK ���찡���
+-+�����Ȥ����Ƥ����� #T35 ���찡���
+-+�����ˤ��夦�ܤ����� #T35 ��2��˼��
+-+�����ˤ��夦�ܤ����� #T35 �裲��˼��
+-+�����Ф��Ϥ� #JN ����ȯ
+-+������ #T30 ������
+-+������ #T35 ������
+-+������ #T30 ������
+-+������ #T35 ������
+-+������ #T35 ������
+-+�������줬���� #CJ �������줬����
+-+������ #SUC ������
+-+�����ɤʤˤ����Ĥ�󤢤� #CJ �����ɡ��������䤢�롩
+-+�����Ϥ���٤󤷤Ƥ������� #CJ �����ϴ��ۤ��Ƥ�������
+-+���������� #T35 ����������
+-+�����٤��� #JN �Ф��٤���
+-+������ #T35 �̥���
+-+�����줷�夦�褦���� #T35 �̥�����ƽ�
+-+�������� #JN ��������
+-+������ #JN ������
+-+���ä����夦 #T35 ���ä���
+-+���äȤ��� #CJ dat�¤�
+-+���äȤ�������� #JN DAT�¤���ʹ��
+-+���äȤ��� #CJ dat���
+-+���֤뤤���䤭���� #JN ���֥뤤���Ƥ�����
+-+���֤�ޡ��� #T35 �ףͣ��ңã�
+-+���ޤ����� #T35 �٤�����
+-+���ޤ줳���� #JN ���ޥ쥳����
+-+���ߤ��� #T35 ���ߥ���
+-+���ߤ��� #T35 ���ߥ���
+-+���ߤ��� #T35 ���ߥ䥽
+-+���� #JN ���ʡ��ء��ˢ�
+-+���� #JN ��̵
+-+���� #T35 ��̴
+-+���� #T35 ��̵
+-+���ᤫ�� #CJ ���ܤ���
+-+���ᤫ�� #CJ ���ܤ���
+-+���᤹��äɤ���꤭���� #JN ���܎��ڎ��Ď޴�������
+-+����ʤ�ĤϤʤˤ��äƤ��� #CJ ����ʤ�Ĥϲ����äƤ�����
+-+����ʤ�ĤϤʤˤ��äƤ���� #CJ ������ۤϲ����äƤ����
+-+����ʤ�ĤϤʤˤ��äƤ���� #JN ������ۤϲ����äƤ����
+-+����Ф� #T35 ����Ȣ
+-+����ܤä��� #T35 ����ܥå���
+-+������ #T35 ������
+-+����ޤ�ʡ� #JN ����ޥ�ʡ�
+-+����ޤ�ʡ� #JN ����ޥ�ʡ�
+-+���줤��ͤ� #JN ���ǰ��
+-+���줹 #T35 �̥쥹
+-+����⤤�ʤ�����ҤȤ�ܤä� #CJ ï�⤤�ʤ����졣�ҤȤ�ܤä�
+-+������������ #JN �������ގ�����
+-+������ˤ����ͤ� #KK �����ࣲ�����ͤ�
+-+������ʡ� #JN ������ʡ�
+-+�������� #T35 ��������
+-+���������� #T35 ����������
+-+������ #JN ������(�������ˎ�����
+-+������ #JN ������
+-+�������ؤ�ɤ� #T30 �ϳ���ư
+-+�������ؤ�ɤ� #T35 �ϳ���ư
+-+������ #JNM ������
+-+������ #JNM ���
+-+������ #JNM ����
+-+������ #T35 ������
+-+������ #T35 ���
+-+������ #T35 ����
+-+�������� #T35 �ϲ�����
+-+������ #T35 �Դ�
+-+������Ǥä����� #T35 �Դ��Ǥä��夲
+-+������졼�� #T35 ������졼��
+-+������줨�� #T35 ������졼��
+-+�������� #JN ��������
+-+�������� #CJ ��������
+-+�����礦 #T35 �Ӿ�
+-+���� #T35 �Ͽ�
+-+�����͡��� #JN �����͡���
+-+�������ޤ�� #JN �������ޤ��
+-+���äѤ� #KK ���äѤ�
+-+���Ƥ� #KK ����
+-+���Ƥ� #T35 ����
+-+���Ƥ���� #JN ������
+-+���ͤС� #JN ���ͥС�
+-+���Ф��󤸤� #T35 ���ո���
+-+���Ф����� #T35 ���ͻ��
+-+���ФȤߤ� #T35 ������̱
+-+���Ф餭 #CN ���Х饭
+-+���Ф餭 #T35 ���Х饭
+-+���Ф餮 #CN ���Х饮
+-+���Ф餮 #T35 ���Х饮
+-+���Ӥ��� #JN ���ӥ���
+-+���Ӥ����֤� #JN ���ӥ����֥�
+-+���Ӥ��� #JN ���Ӥ���
+-+���Ӥդ� #JN ���ӥե�
+-+���Ӥ��顼 #JN ���ӥ��顼
+-+���ᤤ #T35 ��̾
+-+���㤤 #JN ����,._.,��
+-+���㤤 #JN ��������
+-+����֤��� #JN �������
+-+����֤��� #JN ������
+-+����֤������ɤ� #JN ��������ư
+-+����� #JN �����
+-+����� #T35 �����
+-+����� #JN �����
+-+����󤳤ޤ��� #T35 ���������
+-+����󤳤� #T35 ����󥳥�
+-+����󤵤� #SUC �������
+-+����󤵤� #T35 �������
+-+���塼���塼���� #KK ���塼���塼����
+-+���塼�ܡ� #JN ���塼���ܡ�
+-+���塼�ܡ��Ǥ��� #JN ���塼�ܡ��Ǥ��衪
+-+���夦 #T35 ��
+-+���夦����礦����ܤ��󤳤����� #JN �������������Լ�
+-+���夦�����������Ϥ� #T35 ��������Ϥ�
+-+���夦���� #T30 ���
+-+���夦���� #JN ���
+-+���夦���� #T35 ���
+-+���夦������� #T35 ��Ž�
+-+���夦���夦���� #T35 ���塼���塼����
+-+���夦�֤뤪��� #T35 ��Ž�
+-+���夦�ܤ� #T35 ��˼
+-+���夦�ܤ�������� #T35 ��˼����
+-+���夦�ܤ���ˤ夦��礯 #KK ��˼Υ����
+-+����� #T35 �����
+-+����פ��� #T35 ����ץ���
+-+����פ��� #T35 �����̎ߎ���
+-+���� #JN ����
+-+������ #JN ������
+-+���礤�Τ� #T35 ���祤�Υ�
+-+���礦���줰��� #JN Ķ����
+-+���礦�����ɤä� #JN .
+-+���礦�����ɤä� #JN Ĵ���ɥå�
+-+���礦���󤷤� #JN ĩ���
+-+���礦���󤻤� #JN Ķ����
+-+���礦���󤻤� #T35 Ķ����
+-+���礦�ˤ�����֤� #KK ���礦�ˤ���ʹ
+-+���礦�ˤ�����֤� #T35 ���礦�ˤ���ʹ
+-+���礦�դ����� #T35 ��ʣ����
+-+���礦�դ�����ä� #T35 ��ʣ�����
+-+���礦�֤�줹 #T35 Ĺʸ�쥹
+-+���礦�줹 #T35 Ĺ�쥹
+-+���礦���� #JN ĹϷ
+-+���礦���� #T35 ĹϷ
+-+���礯��� #T30 ľ���
+-+���礯��� #T30 ľ���
+-+���礷�夵�� #T35 ���祷�奵��
+-+���礷�夵�� #T35 ������������
+-+���礽 #T35 ���祽
+-+���礽 #T35 ������
+-+����äѤ� #T35 ����åѥ�
+-+�����͡��� #JN �����͡���
+-+����줮����� #JN ����쥮�����
+-+����� #T35 �����
+-+����� #T35 ������
+-+����󤤤뤷��֤� #KK ����󥤥뿷ʹ
+-+����󤤤뤷��֤� #T35 ����󥤥뿷ʹ
+-+������ #CJ ������
+-+����͡��� #JN ����͡��衡
+-+���줹 #T30 �٥쥹
+-+���줹 #T35 �٥쥹
+-+���� #T35 Ŀ
+-+���� #T35 ��
+-+���󤫤��ߤ��� #T35 ������
+-+���� #JN ����
+-+���� #T35 ����
+-+���󤳤���� #T35 ���󤳲�Ƭ
+-+���󤳤म�塼 #CJ ���󤳤म�塼
+-+���󤳤म�夦 #CJ ���󤳤म�塼
+-+���󤷤� #T35 ����
+-+���󤸤� #T35 ����
+-+���󤽤� #T30 ����
+-+���󤽤����餷 #JN �����Ӥ餷
+-+���󤽤����� #T35 ���տ�
+-+���󤽤����� #T35 ������
+-+���󤽤����� #T35 ������
+-+���󤽤��� #T35 ������
+-+���󤽤��٤󤸤� #T35 �����ؽ�
+-+���󤽤����顼 #JN �������顼
+-+����Ǥ��� #T35 ��D
+-+����Ф� #T35 ����
+-+����פ� #KK ����
+-+����פ� #KK ���奦
+-+����פ� #T35 ����
+-+����פ� #T35 ���奦
+-+����פ� #T35 ����
+-+����ݡ� #JN �ʡ��ϡ��ˎ��ݎΎߎ�!!
+-+����ݡ� #JN ����!
+-+����ݡ� #JN ���ݎΎߎ�!!
+-+����ݤ����֤� #JN ����ݥ����֥�
+-+����ݤ��� #T35 ������
+-+�¤�� #JN �¥��
+-+�¤󤮤� #JN �¤��
+-+�äƤ������������� #CJ �äƤ���������������
+-+�äƤ������������� #CJ �äƤ����������ގ�����
+-+�äƤ������������� #CJ �äƤ����������ގ�����>>
+-+��  #R5r ��
+-+�� #R5 ��
+-+�ġ������ġ����� #JN (?��?)
+-+�ġ������ġ����� #JN �ť����ť���
+-+�ġ������ġ����� #JN �ގ����ގ���
+-+�ġ� #JN �ġ�
+-+�ġ��� #CJ �ġ���
+-+�ġ�������������� #JN �ġ����������ɤ�
+-+�Ĥ������� #JN �ĥ�����
+-+�Ĥ����礦�Τ���Ф� #CJ �̾�Σ���
+-+�Ĥ����礦�Τ���Ф� #T35 �̾�Σ���
+-+�Ĥ��ۤ����ޤ��� #T35 ���󤷤ޤ���
+-+�Ĥ� #KK ��
+-+�Ĥ� #T35 ��
+-+�Ĥ� #T35 ��
+-+�Ĥ����夦 #T35 ���
+-+�Ĥ��ΤϤ����� #JN �Ĥ��ΤϤ�����
+-+�Ĥ��Ҥ� #KK ��ɱ
+-+�Ĥ� #T35 �ΤΤ���
+-+�Ĥ� #T35 ��
+-+�Ĥ����� #JN �ԡ���
+-+�Ĥ����� #T35 �ԡ���
+-+�Ĥ����� #T35 �ԡ���
+-+�Ĥ����� #JN �Ա�
+-+�ĤΤ�ʡ� #JN �ĤΥ�ʡ�
+-+�Ĥ� #CN ��
+-+�Ĥ� #T35 ��
+-+�Ĥ� #T35 ��
+-+�Ĥܤޤ���ߤˤʤˤ�꡼�� #JN ����͡��ЎƎŎƎ��؎���
+-+�Ĥޤ�� #CJ �ĥޥ��
+-+�Ĥ� #JN �ĥ�
+-+�Ĥ�Ҥ� #T35 �Ĥ�Ҥ�
+-+�Ĥ餤���Ȥ򤪤⤦���顼 #JN �ɤ����Ȥ�פ����顼
+-+�Ĥ� #T35 ���
+-+�Ĥꤷ #T35 ����
+-+�Ĥ�٤����� #T35 ���ӻ���
+-+�Ĥ줿 #T35 ��줿
+-+�š� #JN �š�
+-+�Ƥ��� #JN ����
+-+�Ƥ����� #JN �ƥ�����
+-+�Ƥ����Ǥ������� #T35 TDN
+-+�Ƥ����� #JNM �ƥ�����
+-+�Ƥ����� #T35 �ƥ�����
+-+�Ƥ����㡼�� #T35 �ƥ����㡼��
+-+�Ƥ����㤢�� #T35 �ƥ����㡼��
+-+�Ƥ��� #T35 �ƥ���
+-+�Ƥ��� #T35 �Î��ʎ�
+-+�Ƥ���� #T35 �ƥ����
+-+�Ƥ���ݤΤ冷�� #T35 �ƥ���ݤ����ڤ�
+-+�Ƥ���ݤΤ冷�� #T35 �Î��юΎߤ����ڤ�
+-+�Ƥ���ݤӤ� #T35 �ƥ���ݥӥ�
+-+�Ƥ���� #T35 �ƥ����
+-+�Ƥ������� #T35 �����
+-+�Ƥ����礦 #T35 �㶸
+-+�Ƥ������ᤤ�� #JN ��Ԣ̽��
+-+�Ƥ����夫��Ѥ���ʡ� #JN �������ʡ�
+-+�Ƥ����� #T35 ����
+-+�Ƥ��ɤҤ� #KYT ������
+-+�Ƥ���֤� #T35 �ƥ�����
+-+�Ƥ����� #T30 �Ƥ�����
+-+�Ƥ��� #JN �ƥ���
+-+�Ƥ��� #KK ������
+-+�Ƥ��� #T35 ������
+-+�Ƥ��Ƥ� #CJ �Ƥ��Ƥ�
+-+�Ƥ� #JN �ƥ�
+-+�Ƥ� #JN �Î�
+-+�Ƥ� #T35 �ƥ�
+-+�Ƥ� #T35 �Î�
+-+�Ƥä����� #T35 �ƥå�����
+-+�Ƥä��󤫤� #KK ������
+-+�Ƥä��󤫤� #T35 ������
+-+�ƤäƤ��������󤻤󤲤� #JN Ű�칳�����
+-+�Ƥ� #T35 Ŵ
+-+�ƤĤ������äȤ������äȤᤤ�Ƥ� #JN Ŵ�򥿣���@��Ŵ
+-+�ƤĤ������äȤ����ᤤ�Ƥ� #JN Ŵ�򥿣���@��Ŵ
+-+�ƤĤΤ����� #T35 Ŵ����
+-+�ƤƤ� #T35 �ƤƤ�
+-+�Ƥʡ� #JN �ƥʡ�
+-+�ƤդƤ� #JN �ƤդƤ�
+-+�Ƥᤧ��ʡ� #JN �ƥᥧ��ʡ�
+-+�Ƥ뤯�ϤΤ� #T35 �Ƥ뤯�ϤΤ�
+-+�Ƥ�� #T35 �ƥ��
+-+�Ƥ�ۤ��夦��礦 #T30 �ƥ�۽�λ
+-+�Ƥ�ۤޤ� #JN �ƥ�ۥޥ�
+-+�Ƥ�ۤ�ä��� #T35 �ƥ�ۥ�å���
+-+�Ƥ����꡼�� #JN �ƥ����꡼��
+-+�Ƥ󤷤��� #CJ ŷ�ȱ�
+-+�Ƥ󤷤��� #T35 ŷ�ȱ�
+-+�Ƥ�Τ� #JN ŷ��
+-+�Ƥ�פ� #T35 �ƥ�ץ�
+-+�Ƥ�ݤä� #KS �ƥ�ݤä�
+-+�Ǥ��뤫 #CJ �ǡ����뤫
+-+�Ǥ� #JN �Ǥ�
+-+�Ǥ�����������ʡ� #JN �ģʥ�ʡ���
+-+�Ǥ����� #T35 �ĥ�
+-+�Ǥ����ʤ��� #JN �ǥ�������
+-+�Ǥ�������ɡ� #JN �ǥ���������ɡ�
+-+�Ǥ����󤰤� #T35 DION��
+-+�Ǥ���줦�����󤬡� #JN �ǥ��������󥬡�
+-+�Ǥ���줦�����󤬤� #JN �ǥ��������󥬡�
+-+�Ǥ��Ȥ������ #T35 �ǥ��ȥ������
+-+�Ǥ��Ȥ������ #T35 �ǥ��ȥ������
+-+�Ǥ��� #JN DEVU
+-+�Ǥ��� #JN �ष��ष��ʡ����˧��ʡ���
+-+�Ǥ���Ѥߤ󤾤� #T35 �ǡ���ѥߥ󥾥�
+-+�Ǥ���Ѥߤ󤾤� #T35 �Îގ��ݎʎߎЎݎ��ގ�
+-+�Ǥ����礦����ɤ��� #JN �ǥ�Ĺ������
+-+�Ǥ��� #JNS ����
+-+�Ǥ��� #T35 ����
+-+�Ǥ���Ҥä����⤽ #T35 ����ɬ����⥽��
+-+�Ǥ� #JN ��
+-+�Ǥ� #T35 ��
+-+�Ǥ���ʤƤ��ޡ������� #JN �ǥ���ʥƥ��ޡ�������
+-+�Ǥ� #SUC DEATH
+-+�Ǥ� #SUC �ǥ�
+-+�Ǥ����Ȥäפ����������� #T35 �ǥ����ȥå׸�������
+-+�Ǥ����ɤʤˤ� #CJ �Ǥ����ɡ�������
+-+�Ǥ��Ǥ� #CJ �Ǥ��Ǥ�
+-+�Ǥ��Ȥ������� #JN �ǥ��ȥ�����
+-+�Ǥ��� #T35 �ǥ���
+-+�Ǥդ���Ȥʤʤ� #T35 �ǥե����̵̾��
+-+�Ǥ֤��� #T35 �ǥ֥�
+-+�Ǥ֤��� #JN �ǥ֥���
+-+�Ǥ֤��ʡ� #JN �ǥ֥��ʡ�
+-+�Ǥ֤��� #T35 �ǥ֥���
+-+�Ǥ֤� #T35 �ǥ֥�
+-+�Ǥ֤򤿤Ҥä��� #T35 �ǥ֥򥿥ҥå���
+-+�Ǥ֤򤿤Ҥä��� #T35 �ǥ֥򥿥ҥå���
+-+�Ǥؤ顼 #JN �ǥإ顼
+-+�Ǥܤ����� #JN �ǥܤ�����
+-+�Ǥޤ� #T30 ��Į
+-+�Ǥޤ� #T35 ��Į
+-+�Ǥ�������� #CJ �Ǥ��������
+-+�Ǥ� #R5 �ǥ�
+-+�Ǥ꤫�� #JN �ǥ�ʡ���`�˥���
+-+�Ǥ󤭤��� #JN �ŵ���
+-+�Ǥ󤲤��Ф��Ф� #JN �Ǥ󤲤��Х��Х�
+-+�Ǥ󤷤㤦�� #JN �żֵ�
+-+�Ǥ󤷤㤬���� #T35 �ż֥�����
+-+�Ǥ󤷤㤮�夦 #JN �żֵ�
+-+�Ǥ󤻤Ĥ��礸�󤤤Ǥۤ� #JN ���������ÎގΎ�
+-+�Ǥ󤿤� #T35 �Ķ�
+-+�Ǥ�Ĥ� #T35 ��2
+-+�Ǥ�� #T35 ����
+-+�Ǥ�ɤ� #T35 ��ť
+-+�Ǥ�� #T35 ��2
+-+�Ǥ�� #T35 �ǥ��
+-+�Ǥ�� #T35 ����
+-+�Ǥ�Ѥ��ϤʤФ������� #T35 ���ȡ�����Ȫ��
+-+�Ǥ�Ѥ����� #T35 ���ȵ���
+-+�Ǥ�Ѥ���� #T35 ���ȥ����
+-+�Ǥ�Ѥ��礦�������ʡ� #JN ����Ĵ������ʡ�
+-+�Ǥ�ѤȤ� #T35 �����Ի�
+-+�Ǥ�Ѥˤ���� #T35 ����2ch
+-+�Ǥ�Ѥˤ����ͤ� #T35 ����2�����ͤ�
+-+�Ǥ�Ѥ��顼 #JN ���ȥ��顼
+-+�Ǥ�Ѥ餤���� #T35 ���ȥ饤����
+-+�Ǥ�Ѥ� #T35 ���ȥ�
+-+�� #SUC �ȡ�
+-+�ȡ��ۤ� #CN �ȡ��ۥ�
+-+�ȡ��ۤ� #T35 �ȡ��ۥ�
+-+�Ȥ������Ȥˤ������ΤǤ��� #CJ �Ȥ������Ȥˤ������ΤǤ���
+-+�Ȥ������Ȥˤ������ΤǤ��� #CJ �Ȥ������Ȥˤ������ΤǤ��͡�:)
+-+�Ȥ��äƤ������� #CJ �ȸ��äƤ�������
+-+�Ȥ��äƤߤ�Ƥ��� #CJ �ȸ��äƤߤ�ƥ���
+-+�Ȥ������������Ȥ꡼ #JN �ȥ����������ȥ꡼
+-+�Ȥ� #T35 ��
+-+�Ȥ����� #CN �ݲ�
+-+�Ȥ����� #CN �쳤
+-+�Ȥ����� #KK �ݲ�
+-+�Ȥ����� #T35 �ݲ�
+-+�Ȥ����� #T35 �쳤
+-+�Ȥ����夦���夦 #T35 ��޿�
+-+�Ȥ����礦 #JN ���
+-+�Ȥ����礦 #T35 ���
+-+�Ȥ����礦�������� #KK �����������
+-+�Ȥ����礦���Ƥ��� #T35 ���kitty�ʡ�����
+-+�Ȥ����礦������ #JN �ȥ����祦������
+-+�Ȥ����礦��������Ӥ礦���� #JN ��������±���
+-+�Ȥ����礦�Ȥ����������礯 #JN ��������ݶ�
+-+�Ȥ����礦�Ȥ�ĤޤĤ���Ӥ礦���� #JN �����Ω�����±�
+-+�Ȥ����� #T30 �㤵��
+-+�Ȥ����礦���� #T35 «����
+-+�Ȥ��������� #T35 �������
+-+�Ȥ��Ϥ� #KK ��ȷ
+-+�Ȥ��Ϥ� #T35 ��ȷ
+-+�Ȥ��֤��夦 #T35 �����
+-+�Ȥ��֤ؤä� #T35 Ƭ���إå�
+-+�Ȥ��ۤ� #T35 �ȡ��ۥ�
+-+�Ȥ��ᤤ���ܡ��� #T30 Ʃ�����ܡ���
+-+�Ȥ��ᤤ���ܤ��� #T30 Ʃ�����ܡ���
+-+�Ȥ��褳�Ȥä��夦�Ϥޤ��ˤ��ܤ����� #CJ �첣�õޤ������ܥ���!
+-+�Ȥ����Ф� #JN �ԱĥХ�
+-+�Ȥ����� #CJ �Ȼפ�졣
+-+�Ȥ������ #CJ �Ȼץ���
+-+�Ȥ���� #T35 �ȥ����
+-+�Ȥ����������� #JN ���Ĺ̰�
+-+�Ȥ��Ƥ���礫�� #T35 ����ι��
+-+�Ȥ��ˤ󤮤礦�������礷 #JN ��ǧ�������
+-+�Ȥ��ˤ󤮤礦�������礷 #KK ��ǧ�������
+-+�Ȥ��ᤤ #T35 ƿ̾
+-+�Ȥ��ᤤ���� #T35 ƿ̾��
+-+�Ȥ��ᤤ�������Ф� #T35 ƿ̾�Ǽ���
+-+�Ȥ��͡��� #JN �ʡ��ǡ��ˡ��ȥ��͡���
+-+�Ȥ��͡��� #JN �ȥ��͡���
+-+�Ȥ����� #CJ �Ȥ�����
+-+�Ȥ�����Ȥ����Ԥ��� #JN �ȥ�����ȥ����ԥ�����
+-+�Ȥ� #T35 �Ի�
+-+�Ȥ��� #T35 ��ê
+-+�Ȥä��夦���̤��� #JN �õޤ��̹�
+-+�ȤäƤ⤿��ˤʤ뤪�Ϥʤ� #JN �ȤäƤ⤿��ˤʤ뤪��
+-+�ȤäȤȤ����� #JN �ȤäȤ�����
+-+�ȤĤ��� #T35 �ͷ�
+-+�ȤĤ������ä����� #JN ���ͥ��å�����
+-+�ȤĤ������夦 #T35 �ͷ��
+-+�Ȥʤ��� #JN �ĎŎ���
+-+�ȤӤ������䡼��ʡ� #JN ���ӥ������䡼��ʡ�
+-+�Ȥ� #T35 �ȥ�
+-+�Ȥޤ� #T35 tomato
+-+�Ȥ� #JN �ȥ�
+-+�Ȥ� #T35 �ȥ�
+-+�Ȥ���ʡ� #JN ������ʡ�
+-+�Ȥ�� #T35 �ȥ���
+-+�Ȥ�� #T35 �Ď���
+-+�Ȥ�ޤ� #T35 �ȥ�ޥ�
+-+�Ȥ�ޤ� #T35 �ĎԎώݎ�
+-+�Ȥ�Ϥ����ߤ� #T35 ˭����̱
+-+�Ȥ餦�ޡ� #JN (||�ߧ���)�Ď׎��ώ�
+-+�Ȥ餦�ޡ� #JN �ȥ饦�ޡ�
+-+�Ȥ餦�ޡ� #JN �Ď׎��ώ�
+-+�Ȥ餯�󤢤�ɤ��פ��� #JN �Ȥ餯������פ���
+-+�Ȥ餯�󤢤�ɤ��פ��� #JN �Ȥ餯������פ���
+-+�Ȥ�顼 #JN �ȥ�顼
+-+�Ȥ� #CN Ļ
+-+�Ȥ� #CN ��
+-+�Ȥ� #KK ��
+-+�Ȥ� #T35 Ļ
+-+�Ȥ� #T35 ��
+-+�Ȥꤳ�� #CN ������
+-+�Ȥꤳ�� #CN Ļ��
+-+�Ȥꤳ�� #T35 ������
+-+�Ȥꤳ�� #T35 Ļ��
+-+�Ȥꤵ�� #JN �ȥꤵ��
+-+�Ȥ�ä� #T35 �ȥ�å�
+-+�Ȥ�ȤȤ�Ǥ�����顼 #JN Ļ������Ǥ�����顼
+-+�Ȥ�Ϥ� #T35 Ļ�Ϥ�
+-+�Ȥ줫�� #T35 �ȥ쥫��
+-+�Ȥ� #T35 ��
+-+�Ȥ󤭤� #CN �ȥ󥭥�
+-+�Ȥ󤭤� #T35 �ȥ󥭥�
+-+�Ȥ������ #KK �ȥ������
+-+�Ȥ������ #T35 �ȥ������
+-+�Ȥ�ɤ� #CJ �ȥ�ɥ�
+-+�Ȥ�ɤ� #CJ �ŭ�
+-+�Ȥ�ɤ� #JN �ŭ�
+-+�Ȥ�ڤ� #T35 �ȥ�ڥ�
+-+�ɡ��⤯�� #T35 �ɡ��ⷯ
+-+�ɤ��� #JN �ɥ���
+-+�ɤ��� #R5 �ɥ���
+-+�ɤ��� #T35 �ɥ���
+-+�ɤ��Ĥ�ʡ� #JN �ɥ��ĥ�ʡ�
+-+�ɤ������㤴���֤� #JN Ʊ�ּҥ����֥�
+-+�ɤ����� #T35 Ʊ��
+-+�ɤ����󤪤�� #T35 Ʊ�ͽ�
+-+�ɤ��Ƥ� #T35 Ƹ��
+-+�ɤ��Ǥ⤤���ˤ� #JN �ɤ��Ǥ⤤���˥�
+-+�ɤ��Ǥ⤤���䡼 #JN �ɥ��ǥ⥤���䡼
+-+�ɤ��Ǥ⤤���䤽��ʤ��� #JN �ɤ��Ǥ⤤���䡢����ʤ��ȡ�
+-+�ɤ��Ǥ⤤���� #JN �ɤ��Ǥ⤤����
+-+�ɤ��⤹�ߤޤ��� #JN �ɥ��⥹�ߥޥ���
+-+�ɤ��⤹�ߤޤ��� #JN �Ďގ��ӎ��Ўώ���
+-+�ɤ��� #CJ �ɤ���
+-+�ɤ��� #SUC �ɤ���
+-+�ɤ������礦�ۤ��Ҥ礦���Ф� #JN ƻϩ����ɽ����
+-+�ɤ������� #JN �ɥ������󡪡���
+-+�ɤ�������2 #JN �ɥ������󡪡�����
+-+�ɤ��夽 #T35 DQS
+-+�ɤ��夽 #T35 �ɥ��好
+-+�ɤ��夽���������ˤäݤ� #JN �ɥ��好��������
+-+�ɤ��夽���������ˤäݤ� #JN �Ďގ�������������
+-+�ɤ��夽����� #JN �Ďގ����������
+-+�ɤ���� #KK �ɥ����
+-+�ɤ���� #T35 �ɥ����
+-+�ɤ���� #T35 DJN
+-+�ɤ���� #T35 �ģѣ�
+-+�ɤ���� #T35 �ɥ����
+-+�ɤ����ʤ������� #T35 �ɥ����ʲ��
+-+�ɤ����Ȥ� #T35 ����
+-+�ɤ�����Ƥ����� #JN �ȿ��벦
+-+�ɤ����� #T35 �ɤ�����
+-+�ɤ��� #T35 ����
+-+�ɤ��Ȥ� #CN ����
+-+�ɤ��Ȥ� #T35 ����
+-+�ɤ��Ȥ�ޤ� #JN �ɥ��ȥ�M
+-+�ɤ��ԡ� #T35 �ɥ���
+-+�ɤ��Ԥ� #T35 �ɥ�P
+-+�ɤ��� #T35 �ٿ�
+-+�ɤ������� #JN ��������
+-+�ɤƤ��塼 #T35 �ɥƥ��塼
+-+�ɤƤ��夦 #T35 �ɥƥ��塼
+-+�ɤ֤ͤ��� #T35 ����
+-+�ɤ� #T35 �ģϣ�
+-+�ɤ��� #JN �ɥ���
+-+�ɤ� #JN �ɥ�
+-+�ɤ館���դ���Ȥդ����� #JN �ɥ館���ʡ�ܥե�����
+-+�ɤ餴�� #T35 �ɥ饴��
+-+�ɤ餴�󤪤����� #T35 �ɥ饴�󥪥�����
+-+�ɤ餴�󤹤Ȥä� #T35 �ɥ饴�󥹥ȥå�
+-+�ɤ�ä��ʡ� #JN �ɥ�å��ʡ�
+-+�ɤ���� #T35 �ɥ����
+-+�ɤ�������� #T35 �ɥ��������
+-+�ɤ뤨�त�� #T35 $ME
+-+�ʤ��������ä����म����� #T35 �ʡ��������å����������
+-+�ʤ����ʤؤäɤդ��� #T35 �ʥ����ʥإåɥե���
+-+�ʤ� #KS �न
+-+�ʤ� #T35 �न
+-+�ʤ��ʤ��� #JN �ʥ��ʥ���
+-+�ʤ���� #T35 �ʤ����
+-+�ʤ������Τۤ� #T35 �決�¤���
+-+�ʤ������ԡ� #T35 �ʤ�GP
+-+�ʤ������Ԥ� #T35 �ʤ�GP
+-+�ʤ����� #JN �ʤ�����
+-+�ʤ����� #T35 �ʤ�����
+-+�ʤ����ޤ� #T35 �ʤ���
+-+�ʤ����� #T30 ���Ļ�
+-+�ʤ��Ĥ��� #T35 ��Ѥ���
+-+�ʤ��ΤҤ� #T35 ��ο�
+-+�ʤ���������� #JN ή���������
+-+�ʤ��֤�Τ��󤽤��⤸�줹�椦�ɤ��������������� #JN Ĺʸ�δ���ʸ���쥹ͶƳ����
+-+�ʤ������ͤ� #T35 �ʤ������ͤ�
+-+�ʤ����Ƥ��ʡ� #JN �ꤲ�ΤƤ��ʡ�
+-+�ʤ��䤱�� #T35 ̾�Ų���
+-+�ʤ����� #T35 ̵��
+-+�ʤ��Τ����ᤤ���� #JN �����̿��
+-+�ʤ��Τˤۤ󤸤� #JN ������ܿ�
+-+�ʤä� #JN �ʡ�����������
+-+�ʤä� #JN �ʤä�
+-+�ʤä� #T35 �ʤä�
+-+�ʤä� #T35 ����
+-+�ʤä����꤬�Ȥ� #CJ �ʤä����꤬�Ȥ�(����������)
+-+�ʤä���ʡ� #JN �ʤä���ʡ�
+-+�ʤä��� #T35 �ʤä���
+-+�ʤä��夦 #T35 Ǽ��
+-+�ʤĤ��夦 #T35 �ƿ�
+-+�ʤĤ��夦�ܤ� #T35 �ƿ�˼
+-+�ʤĤܤ� #T35 ��˼
+-+�ʤĤ� #JN �ʥĥ�
+-+�ʤʤ��� #JN ������
+-+�ʤʤ����� #T35 ̵̾������
+-+�ʤʤ�����פ餺�� #JN ̵̾������ץ饺��
+-+�ʤʤᤦ�� #T35 �Ф��
+-+�ʤʤᤫ�ä��Ϥ�����Ƥ󤿡��󤨡��Ϥ�����Ƥ󤫤ä��Ȥ��ʤʤ�פ�äѤۤ� #JN ��(���ϡ�)���ץ�åѡ�
+-+�ʤʤᤫ�ä��Ϥ�����Ƥ󤿡��󤨡��Ϥ�����Ƥ󤫤ä��Ȥ��ʤʤ�פ�äѤۤ� #JN ��(�ߢώ�)���̎ߎَ��ʎߡ�
+-+�ʤˤ��äƤ�դᤤ #CJ �����äƤ�����
+-+�ʤˤ� #KK ����
+-+�ʤˤ� #T35 ����
+-+�ʤˤ����� #CJ �ʤˤ����롩
+-+�ʤˤ��ˤ��Ӥ��뤮�� #JN ((���ߧ���)���ގ����ގ��̎ގَ̎ގ�
+-+�ʤˤ��ˤ��Ӥ��뤮�� #JN �����˶����륮��
+-+�ʤˤ��� #JN ����
+-+�ʤˤ��� #T35 ����
+-+�ʤˤߤƤ���褵�� #JN �����Ƥ�����
+-+�ʤˤ�꡼�� #JN �ŎƎ��؎���
+-+�ʤΤ� #SUC �ʤΤ�
+-+�ʤΤ餢 #CJ �ʤΤ��
+-+�ʤޤ����Ԥ� #T35 ��IP
+-+�ʤޤ����������ߤޤ�� #CJ �ʤ��Ȥ��������
+-+�ʤޤ� #T35 �ʤޤ�
+-+�ʤޤ��פ줤 #T35 �ʤޤ��ץ쥤
+-+�ʤޤ�� #T35 �ʥޥ��
+-+�ʤߤ��� #CJ �ʥߥ���
+-+�ʤߤ��Ǥޤ����ߤ��ޤ��� #CJ �ޤ����������ޤ���
+-+�ʤ� #JN �ʥ�
+-+�ʤ᤯�� #JN �ʥ᥯��
+-+�ʤ�ߤ�����ȤϤ��� #T35 Ǻ�ߤ�������Ť���
+-+�ʤ椭����� #JN ̾���
+-+�ʤ꤭�ꤹ�� #T35 �ʤ꤭�ꥹ��
+-+�ʤꤹ�� #S5r �ʤꤹ��
+-+�ʤꤿ�Ȥäפ����� #JN �ʤꤿ�Ȥäפ�����
+-+�ʤꤿ�Ȥäפ����� #JN �ʤꤿ�Ȥäפ�����
+-+�ʤ�Ф� #T35 �ʥ�Х�
+-+�ʤ줢 #W5 ����
+-+�ʤ줢�� #T35 ���礤
+-+�ʤ� #CJ �ʤ�
+-+�ʤ󤬤�Ƥ������� #JN ����㵤��
+-+�ʤ󤱤��� #T35 �ʤ���
+-+�ʤ�����ʡ�����ɤ��������� #JN �ʥ�����ʡ�������������
+-+�ʤ������� #CJ �ʤ�������
+-+�ʤ�Ĥä��ꤷ�� #CJ �ʤ�Ĥä��ꤷ��
+-+�ʤ�Ȥ������ȤǤ��礦 #CJ �ʤ�Ȥ������ȤǤ��礦
+-+�ʤ�Ф��������� #T35 �ʥ�С���������
+-+�ʤ�ߤ� #T35 ��̱
+-+�ʤ�ߤ󤤤� #T35 ��̱��
+-+�ʤ�⤸��򤿤Ƥ�ߤ���� #CJ ��ʸ���ܤ���ɤߤ���Ρ�
+-+�� #T30 ����
+-+�� #T35 2
+-+�� #T35 ����
+-+�ˡ� #JN �ˡ�
+-+�ˡ�������󤸤��� #T35 ������������
+-+�ˤ����夦 #T35 ny��
+-+�ˤ��äԤ礦 #CJ �˰�ɼ
+-+�ˤ����� #T35 �����
+-+�ˤ��Ӥ��Ǥ�����ʡ� #JN �˥��Ӥ����褿��ʡ�
+-+�ˤ����äפ󤯤� #CJ �˥����åץ󥯥�!
+-+�ˤ����äפ󤯤� #CJ �Ǝ������̎ߎݎ���!
+-+�ˤ����äפ󤯤� #JN �˥����åץ󥯥�!
+-+�ˤ����äפ󤯤� #JN �Ǝ������̎ߎݎ���!
+-+�ˤ����ס��� #CJ (���ϡ�)�˥����ס���
+-+�ˤ����ס��� #CJ (���ώ�)�Ǝ����̎ߎ���
+-+�ˤ����ס��� #CJ �˥����ס���
+-+�ˤ����ס��� #CJ �Ǝ����̎ߎ���
+-+�ˤ����ס��� #JN (���ώ�)�Ǝ����̎ߎ���
+-+�ˤ����ס��� #JN �˥����ס���
+-+�ˤ����ס��� #JN �Ǝ����̎ߎ���
+-+�ˤ��Ϥ�ˤ� #KK ���̼�
+-+�ˤ��Ϥ�ˤ� #T35 ���̼�
+-+�ˤ��٤� #T35 ���ش�
+-+�ˤ��ä� #JN 2���å�
+-+�ˤ��Ƥ��ˤ��Ƥ��ˤ��Ƥ��Ϥ䤯�ˤ��Ƥ��� #JN ƨ���Ƥ�ƨ���Ƥ�ƨ���Ƥ��᤯ƨ���Ƥ��á�
+-+�ˤ���ä� #JN �˥���å�
+-+�ˤ� #JN ���
+-+�ˤ� #JNS ���
+-+�ˤ� #T35 ���
+-+�ˤ����� #JN ��ॿ��
+-+�ˤ����� #T35 ��ॿ��
+-+�ˤ��ƤĤФ�����ä������� #KK ��Ŵ�Х�����å�����
+-+�ˤ��ƤĤФ�����ä������� #T35 ��Ŵ�Х�����å�����
+-+�ˤ��夦�ͤ󤤤٤�� #T35 ����ǯ���٥��
+-+�ˤ����� #T35 �󼡸�
+-+�ˤ����󤪤� #T35 �󼡸�����
+-+�ˤ������ #T35 �󼡸���
+-+�ˤ��夦 #T35 20
+-+�ˤ��夦�ʤʤ����������줯�����Ƥ� #JN 27��ʵ���������
+-+�ˤ���äȤ����� #T35 20Ʈ��
+-+�ˤ��礦�����Τ餯���� #T35 ���ϸ������
+-+�ˤ����� #T35 ������
+-+�ˤ��Ϥ�ʤ���ɤ��ˤ夦�꡼�� #JN ���պڡ����ˤ夦�꡼��
+-+�ˤ���ä� #T35 ����å�
+-+�ˤ���ʡ� #JN ����ʡ�
+-+�ˤ���Τ虜 #CJ 2000�ε�
+-+�ˤ��� #JN �˥���
+-+�ˤ��� #JN �Ǝ��ގ�
+-+�ˤ��������� #JN �˥������
+-+�ˤ������� #JN �˥�������
+-+�ˤ����� #JN �˥�����
+-+�ˤ����� #JN �˥�����
+-+�ˤ���� #CJ 2ch
+-+�ˤ���� #CJ �������
+-+�ˤ���� #T35 2ch
+-+�ˤ���� #T35 �������
+-+�ˤ���󤵤Ф��äƤʤ��󤷤��� #T35 2ch������ʴƻ��
+-+�ˤ����Ƥ��ˤ� #CJ �����Ū�ˤ�
+-+�ˤ����Ƥ��Ҥ礦�� #T35 �����Ūɾ��
+-+�ˤ����ͤ뤯������äɤĤ��ۤ����󤻤� #JN �������ͤ�ʵ����å���������
+-+�ˤ����ͤ뤰��ݤ������� #JN ����跳ˡ���
+-+�ˤ����ͤ뤵�ݡ��Ȥ��󤿡� #JN �������ͤ륵�ݡ��ȥ��󥿡�
+-+�ˤ����ͤ뤼�󤤤��ˤ󤭤Ȥ��ʤ��� #T35 2�����ͤ����Ŀ͵��ȡ��ʥ���
+-+�ˤ����ͤ뤿���� #T35 2�����ͤ륿����
+-+�ˤ����ͤ�Ĥ� #T35 2ch2
+-+�ˤ����ͤ�Ĥ� #T35 2�����ͤ�2
+-+�ˤ����ͤ�ʤʤ��夦���� #CJ �������ͤ뼷����
+-+�ˤ����ͤ�ʤʤ��夦���� #T35 �������ͤ뼷����
+-+�ˤ����ͤ�� #T35 2ch2
+-+�ˤ����ͤ�� #T35 2�����ͤ�2
+-+�ˤ����ͤ�ΤϤ�֤�Ϥͤ��ǤǤ��Ƥ��ޤ� #CJ 2�����ͤ��Ⱦʬ�ϥͥ��ǤǤ��Ƥ��ޤ�
+-+�ˤ����ͤ�Ӥ夦�� #T35 2�����ͤ�ӥ塼��
+-+�ˤ����ͤ�֤餦�� #T35 2�����ͤ�֥饦��
+-+�ˤ����֤��� #T35 2ch-Blog
+-+�ˤ����פ��Ф����� #T35 2ch�ץ��Х�����
+-+�ˤ������ᤤ #JN 2�����Ϣ��
+-+�ˤä� #JN ����
+-+�ˤä� #T35 ����
+-+�ˤä��� #JN �˥å���
+-+�ˤä����󤻤� #T30 �˥å�����
+-+�ˤä��� #T35 �˥å���
+-+�ˤä��� #T35 ����
+-+�ˤäݤ�ϤϤ󤻤����� #CJ ���ܤ�ȿ�ʤ��롪
+-+�ˤȤ�����椦 #T35 ������ͥ
+-+�ˤȤ��ؤ� #JN ����ʼ
+-+�ˤȤ��ؤ� #T35 ����ʼ
+-+�ˤˤ���󤬤��ä��餷�꡼�� #SUC �ˣ�����󤬤��ä��饷�꡼��
+-+�ˤˤ���󤬤��ä��餷�꡼�� #T35 �ˣ�����󤬤��ä��饷�꡼��
+-+�ˤˤ���󤬤��ä��餷�ꤤ�� #T35 �ˣ�����󤬤��ä��饷�꡼��
+-+�ˤϤ��ä� #CJ �ˤϾФä���
+-+�ˤۤ󤵤󤭤礦�������� #T35 ���ܣ������
+-+�ˤۤ󤻤��ᤤ #KK ������̿
+-+�ˤۤ����� #KK �˥ۥ�����
+-+�ˤۤ����� #T35 �˥ۥ�����
+-+�ˤ㤦 #JN �ˤ㤦��
+-+�ˤ�ˤ� #CJ �˥�˥�
+-+�ˤ�� #CJ �ʡ������˥˥��
+-+�ˤ�� #CJ �˥��
+-+�ˤ��� #CJ �ʡ������˥˥���
+-+�ˤ��� #CJ �ʡ������ˎƎԎ؎�
+-+�ˤ��� #JN �ʡ������ˎƎԎ؎�
+-+�ˤ��� #JN �˥���
+-+�ˤ��� #JN �ƎԎ؎�
+-+�ˤ塼�����ơ������ #KK �˥塼�����ơ������
+-+�ˤ夦�������ۤ��פ餹 #T35 �˥塼��®��+
+-+�ˤ夦�����פ餹������ #T35 �˥塼®+����
+-+�ˤ� #RT �ˤ�
+-+�ˤ礤���� #T35 �˥祤��
+-+�ˤ礤���� #T35 �Ǝ�����
+-+�ˤ礬���� #CJ (�ߧՎ�)�Ǝ����ގ���
+-+�ˤ礬���� #CJ �˥祬����
+-+�ˤ礬���� #CJ �Ǝ����ގ���
+-+�ˤ������� #T35 ������
+-+�ˤ餤�� #JN �˥饤��
+-+�ˤ���㤨�뤻���С� #JN �˥���㥨�륻���С�
+-+�ˤ����Ť� #JN �˥����
+-+�ˤ����ͤ� #JN �˥���ǭ
+-+�ˤ����ह�� #JN �˥���̼
+-+�ˤ�ष #JN �˥���
+-+�ˤ�ϡ��ˤ�� #JN �ˤ�ϡ��ˤ��
+-+�ˤ狼 #T35 �˥參
+-+�ˤ狼�餷�꡼�� #CN �����饷�꡼��
+-+�ˤ狼�餷�꡼�� #T35 �����饷�꡼��
+-+�ˤ狼�餷�ꤤ�� #T35 �����饷�꡼��
+-+�ˤ󤤤��� #JN Ǥ�դ���
+-+�ˤ󤷤� #KK ǥ��
+-+�ˤ󤷤� #T35 ǥ��
+-+�ˤ󤸤� #JN �˥󥸥�
+-+�ˤ�Ƥ�ɤ��������󤳤��������� #T35 ǤŷƲ�����Ҷ���
+-+�ˤ�餤�� #T35 Ǧ�饤��
+-+�̡��� #T35 �̡���
+-+�̤����� #CN �̤�����
+-+�̤����� #T35 �̤�����
+-+�̤��� #T35 �̡���
+-+�̤��ʤ� #F04 �̤��ʤ�
+-+�̤��ʤ� #T35 �̤��ʤ�
+-+�̤äؤäۡ� #CJ �̥åإåۡ�
+-+�̤äؤäۡ� #JN (���ώ��ώ�)�ǎ��͎��Ύ�
+-+�̤äؤäۡ� #JN �̤äؤäۡ�
+-+�̤äؤäۡ� #JN �̥åإåۡ�
+-+�̤äؤäۡ� #JN �ǎ��͎��Ύ�
+-+�̤äؤäۡ� #T35 (���ϡ��ϡ�)�̥åإåۡ�
+-+�̤äؤäۡ� #T35 (���ώ��ώ�)�ǎ��͎��Ύ�
+-+�̤äݤ� #T35 �̥åݥ�
+-+�̤ޤä� #KK �̤ޤä�
+-+�̤ޤä� #T35 �̤ޤä�
+-+�̤꤫�٤�ʡ� #JN �̤��ɥ�ʡ�
+-+�̤� #KY �̥�
+-+�̤�� #T35 �̤��
+-+�� #CJ ne��
+-+�͡��� #JN �͡���
+-+�͡��褪�֤͡��� #JN �͡��衦���֡��͡���
+-+�͡���ɤ��ᤤ #JN �͡���Ʊ��
+-+�ͤ� #JN �ͤ�
+-+�ͤ��ͤ� #CJ �ͤ��ͤ�
+-+�ͤ��ܤ��������Ǥ��� #JN �ͤ��ܤ��������Ǥ���
+-+�ͤ������������ #T35 �ͥ���ζ��
+-+�ͤ������Ƥ� #JN �ͥ�����
+-+�ͤ��म���� #JN �ͥ��म��
+-+�ͤ��म���� #JN �ͥ�����
+-+�ͤ��� #T30 �ͥ���
+-+�ͤ��� #T35 �ͥ���
+-+�ͤ� #CN �ͤ�
+-+�ͤ� #CN �ͥ�
+-+�ͤ� #T35 �ͤ�
+-+�ͤ� #T35 �ͥ�
+-+�ͤ����ޤ�顼 #JN �ͥ����ޥ�顼
+-+�ͤ��������� #CJ �ͤ��繥��
+-+�ͤ��䤷�� #CN ǭ����
+-+�ͤ��䤷�� #T35 ǭ����
+-+�ͤ� #JN �ͥ�
+-+�ͤ������󤸤� #T35 �ͥ�������
+-+�ͤ���ʡ� #JN �ͥ���ʡ�
+-+�ͤ��ߤ��Ȥ� #JN �ͥ�����
+-+�ͤ��ߤϤ�椦���� #JN �͸�ͺ��
+-+�ͤ� #T35 �ͥ�
+-+�ͤ����礯�ˤ󤹤� #T35 �ͥ����ͥ���
+-+�ͤ����� #T35 �ͥ�����
+-+�ͤ����� #CJ �ͥ�������
+-+�ͤ��Ф餷���夦 #T35 �ͥ��Ф餷��
+-+�ͤ����äȤ������� #JN �ͥ����åȤ�������
+-+�ͤ����� #T35 �ͥ�����
+-+�ͤ����� #T35 �ԥ�����
+-+�ͤ��夦 #T35 �Ϳ�
+-+�ͤ��� #T35 ����
+-+�ͤäȤ��� #T35 Net��
+-+�ͤäȤפ줤�䤢 #T35 �ͥåȥץ쥤�䡼
+-+�ͤäȤ��ʤ� #KK �ͥåȥ��ʡ�
+-+�ͤʤ� #T35 �ͥʥ�
+-+�ͤˤ��꡼�� #JN �ʡ��ϡ��ˎȎƎ��؎���
+-+�ͤˤ��꡼�� #JN �ͥ˥��꡼��
+-+�ͤˤ��꡼�� #T35 �ͥ˥��꡼��
+-+�ͤ��� #CJ �ͤ���
+-+�ͤ餢 #T35 �ͥ顼
+-+�ͤ����夦 #T35 �ͥ���
+-+�ͤ� #CJ ����
+-+�ͤ���㤯 #T35 Ǵ��
+-+�ͤ���㤯���� #T35 Ǵ�巯
+-+�ͤ�֤Ĥ��夦�Ȥ��ߤ��� #KK ǰʩ���ϳ���
+-+�ͤ�֤Ĥ��夦�Ȥ��ߤ��� #T35 ǰʩ���ϳ���
+-+�ͤ��礦 #T35 ǳ��
+-+�Ρ������ #JN �Ρ������
+-+�Ρ��� #JN �Ρ���
+-+�Τ����� #T35 �Υ�����
+-+�Τ��äѤ�Ƥ��ʤȤ����礦 #SUC �ΰ���Ū����ħ
+-+�Τ��� #JN ����
+-+�Τ����礦 #T35 ����
+-+�Τ��ʤ� #T35 Ǿ��
+-+�Τ��ʤ����ܡ��� #T30 Ǿ�⤢�ܡ���
+-+�Τ��Ȥ󤻤󤻤� #T35 �Ρ��ȥ�����
+-+�Τ��Ȥ�Ȥ�ä� #T35 �Ρ��ȥ�ȥ�å�
+-+�Τ� #CJ �Τ�
+-+�Τ� #SUC �Τ�
+-+�Τ��� #JN �Υ���
+-+�Τ��� #T35 NGS
+-+�Τ������ #T35 �Υ�������
+-+�ΤΤ����� #JN �Τ�����
+-+�ΤΤ��� #JN �ΤΤ���
+-+�ΤΤ��� #T35 �ΤΤ���
+-+�ΤΤ��� #T35 ��
+-+�Τ� #KSr ����
+-+�ΤӤΤӤ������ #JN �ΤӤΤӤ������
+-+�ΤӤ�ߤ夢���� #JN �Υӥ�ߥ奢����
+-+�ΤӤ�ߤ夢���� #JN �Ɏˎގ��Ў�������
+-+�Τ֤�� #T35 �Τ֤��
+-+�Τ褫�� #CJ ��ͽ��!!
+-+�Τ�ʤä� #JN ���ɤʤä�
+-+�Τ�ͤ� #JN ����ǭ
+-+�Τ� #T35 ����
+-+�Τ�� #T35 �Υ��
+-+�Τ����ޤ��� #CJ ���ޡ���
+-+�Τ����� #T35 �Τ�����
+-+�Τ󤹤� #T35 �Υ󥹥�
+-+�� #KK ��
+-+�� #T35 ��
+-+�Ϥ� #CJ �ϥ���
+-+�Ϥ� #JN �ʡ맥��)�ʎ���
+-+�Ϥ� #JN �ϥ�?
+-+�Ϥ��Ϥ� #CJ (;������)�ϥ��ϥ�
+-+�Ϥ��Ϥ� #CJ (;������)�ʎ��ʎ�
+-+�Ϥ��Ϥ� #CJ �ϥ��ϥ�
+-+�Ϥ��Ϥ� #CJ �ʎ��ʎ�
+-+�Ϥ��Ϥ� #JN (;������)�ʎ��ʎ�
+-+�Ϥ��Ϥ� #JN �ϥ��ϥ�
+-+�Ϥ��Ϥ� #JN �ʎ��ʎ�
+-+�Ϥ��Ϥ� #T30 �ϥ��ϥ�
+-+�Ϥ��Ϥ� #T30 �ʎ��ʎ�
+-+�Ϥ��Ϥ��ʤ�ƤǤ��ʤ��� #CJ �ʎ��ʎ��ʤ�ƽ���ʤ����
+-+�Ϥ��Ϥ��ʤ�ƤǤ��ʤ��� #JN �ϥ��ϥ��ʤ�ƽ���ʤ����
+-+�Ϥ��Ϥ��ʤ�ƤǤ��ʤ��� #JN �ʎ��ʎ��ʤ�ƽ���ʤ����
+-+�Ϥ� #CJ �Ϥ���
+-+�Ϥ� #JN �ʡ맥��)�ʎ���
+-+�Ϥ��Ϥ� #CJ �ϥ��ϥ�
+-+�Ϥ����� #CN ����
+-+�Ϥ����� #T35 ����
+-+�Ϥ������������� #JN ���̎ߧ��ߡ�Ш�ʎ������ގ������ގ�
+-+�Ϥ������������� #JN �ϥ�������������
+-+�Ϥ������������� #JN �ʎ������ގ������ގ�
+-+�Ϥ����ʤ���֤ˤޤ����ä� #CJ �ϥ����ʥ���֤ˤޤ������Ť��ޤ����Ǥ���
+-+�Ϥ��ä����� #CJ ���ä�����
+-+�Ϥ��� #JN �Ϥ���
+-+�Ϥ��� #T35 �Ϥ���
+-+�Ϥ���� #T35 �����
+-+�Ϥ��� #T35 �ϥ���
+-+�Ϥ��� #T35 �衼
+-+�Ϥ��� #T35 �ϥ���
+-+�Ϥ��� #T35 �衼
+-+�Ϥ��� #KK �ո�
+-+�Ϥ������� #CN �ո���
+-+�Ϥ������� #T35 �ո���
+-+�Ϥ������������⤨���Ȥ��ȡ��ʤ��� #T35 �ո��ĺ�ǳ���˥ȡ��ʥ���
+-+�Ϥ������������⤨�ȡ��ʤ��� #KK �ո��ĺ�˨�ȡ��ʥ���
+-+�Ϥ������������⤨�ȡ��ʤ��� #T35 �ո��ĺ�˨�ȡ��ʥ���
+-+�Ϥ������󤽤� #T35 �ո�����
+-+�Ϥ������夦 #T35 �ո���
+-+�Ϥ����ä� #T35 �ո��û�
+-+�Ϥ��夦�� #CJ HQN
+-+�Ϥ����� #CN ����
+-+�Ϥ����� #T35 ����
+-+�Ϥ���� #CJ (�븶
+-+�Ϥ���� #CJ �븶
+-+�Ϥ� #T30 �ϥ�
+-+�Ϥ����꡼�ʤ� #JN �Ϥ����꡼�ʤ�
+-+�Ϥ����Ĥ��夦 #T35 ��å��
+-+�Ϥ��� #T35 ����
+-+�Ϥ��� #JN ����
+-+�Ϥ��� #T35 ����
+-+�Ϥ���ޤ��� #JN ���ֲ�
+-+�Ϥ���ޤ������� #JN ���֥�������
+-+�Ϥ���ޤ������� #JN ���֥�������ʲ��Ρ�
+-+�Ϥ���ʤޤ� #T35 �Ϥ���ʤޤ�
+-+�Ϥ����� #T30 �ϥ�����
+-+�Ϥ����� #T30 �ʎ�����
+-+�Ϥ� #T35 ����
+-+�Ϥ��������Τ��� #JN �㤷�����ΰ�
+-+�Ϥ��������ߡ� #JN �㤷�����ߡ�
+-+�Ϥ������ɤ����� #CJ �㤷���ɥ�������
+-+�Ϥ������ɤ��� #CJ �㤷��Ʊ�ա�
+-+�Ϥ������ɤ��� #CJ �㤷��Ʊ����
+-+�Ϥ������ˤ礦�� #CJ �㤷��Ǣ�ա�
+-+�Ϥ������ˤ󤸤� #JN �㤷��Ǧ��
+-+�Ϥ������Ҥ礦�� #CJ �㤷����͡�
+-+�Ϥ��ɤ� #CJ �Ϥ��ɤ�
+-+�Ϥ��ɤ� #CJ ��Ʊ
+-+�Ϥ��ɤ� #T30 �Ϥ��ɤ�
+-+�Ϥ��ɤ� #T30 ��Ʊ
+-+�Ϥ���ʡ� #JN hage��ʡ�
+-+�Ϥ���ꤷ�央 #T35 �ո������
+-+�Ϥ����Ǥ��� #CJ �Ϥ����Ǥ�����
+-+�Ϥ����Ǥ��� #SUC �Ϥ����Ǥ�����
+-+�Ϥ����Ǥ� #T35 �����Ǥ�
+-+�Ϥ��ä� #T35 �Ѥû�
+-+�Ϥ��뤹 #T35 �Ϥ��뤹
+-+�Ϥ� #T35 ϡ
+-+�Ϥ����� #T35 ϡ����
+-+�Ϥ� #T35 �ϥ�
+-+�Ϥ������������� #T35 ����������
+-+�Ϥ����Ĥ��� #T35 �������
+-+�Ϥ����礦���ޤ����󤫤�ꤻ�󤿡� #JN Ȭ������ִ������󥿡�
+-+�Ϥ����� #T35 �Ϥ�����
+-+�Ϥ��Ȥ������ #RT ��Ƭ�ȤΡ�
+-+�Ϥ��Ȥ�����Τޤ�ޤ� #JN ��Ƭ�ȤΡ�����
+-+�Ϥä��� #T35 �ϥå���
+-+�Ϥä��� #T35 �ϥå���
+-+�Ϥä��餤�� #CN �ϥå�����
+-+�Ϥä��餤�� #T35 �ϥå�����
+-+�Ϥä��� #T35 �ϥå���
+-+�Ϥä�����夦 #T35 8000��
+-+�Ϥä��㤱�Ƥ��� #CJ �Ϥä��㤱�ƥ���
+-+�ϤäƤ� #T35 hatten
+-+�ϤäƤ� #T35 �ϥåƥ�
+-+�ϤäƤ󤯤� #JN hatten��
+-+�ϤäƤ󤷤͡��� #JN ȯŸ���͡���
+-+�ϤäȤ����󤪤ˤ����ʡ� #JN �����Ȥ��ˤ����ʡ�
+-+�ϤäȤ����󤮤� #JN ȬƬ�ȥ���
+-+�ϤäȤ����󤻤�褦�����䤦�餳���� #JN ȬƬ�����ѳڲ�΢����
+-+�ϤäȤ�������ɤ����� #JN ȬƬ�ȎҎݎĎގ�����
+-+�ϤäȤ������ʡ� #JN ��Ƭ�ȥ�ʡ�
+-+�ϤäȤ������ʡ����� #JN ���Ȥ������ʡ�����
+-+�ϤäȤ������ۤ��ܤ��ˤ��������� #JN ��Ƭ�Ȥ��Ǥܤ���������
+-+�Ϥä� #T35 �դ���
+-+�ϤäѤ��� #JN �Ϥä���
+-+�ϤäԤ��Ĥꤤ�դ�� #T35 HappyTreeFriends
+-+�ϤĤ��Ф�ä� #T35 ��ǥ�å�
+-+�ϤĤɤ� #T30 ȯư
+-+�ϤĤҤΤǤ��󤽤� #T30 �����νС�����
+-+�ϤǤ����С� #KK �ϥǥ����С�
+-+�ϤǤ����С� #T35 �ϥǥ����С�
+-+�ϤǤ����Ф� #T35 �ϥǥ����С�
+-+�Ϥ� #JN ȷ
+-+�Ϥ� #T35 ȷ
+-+�ϤȤ��� #JN ȷ��
+-+�ϤȤ��� #T35 ȷ��
+-+�ϤȤ��Ȥ��� #JN ȷ��
+-+�ϤȤ��Ȥ��� #T35 ȷ��
+-+�ϤȤ�ޤ椭�� #JN ȷ��ͳ����
+-+�Ϥɤ��ۤ� #JN ��ưˤ
+-+�Ϥ� #T35 ��
+-+�Ϥʤ� #JN ɡ��
+-+�Ϥʤ� #T35 ɡ��
+-+�Ϥʤܤ��� #JN ��˹��
+-+�Ϥˤ�󤾤� #JN �ϥ˥��¢
+-+�Ϥͤ� #T35 ķ�ͤ�
+-+�Ϥ� #T35 �Ϥ�
+-+�Ϥ� #T35 �ϥ�
+-+�ϤޤޤĤ� #T35 �Ϥ޺פ�
+-+�Ϥ� #KK ��
+-+�Ϥ� #T35 ��
+-+�Ϥळ #JNM �ϥ��
+-+�Ϥळ #T35 �ϥ��
+-+�Ϥह���� #JN ��������,�ˡ���������("��)
+-+�Ϥह���� #JN �ϥॹ����
+-+�Ϥि���� #JN �ϥ���Ϻ
+-+�Ϥ�ʤפȤ� #JN �ϥ�ʥץȥ�
+-+�Ϥ䤯����ޤ�� #CJ �᤯�դ��
+-+�Ϥ�ߤޤ��� #JN ®�忿��
+-+�Ϥ餷�� #T35 �ϥ饷��
+-+�Ϥ餷�ޤ� #T35 �ϥ饷�ޥ�
+-+�Ϥ꡼�ݤä����Ȥؤɤ����� #JN �ϥ꡼���ݥå����ȥإɥ�����
+-+�Ϥ뤤���Ф� #JN �հ���
+-+�Ϥ뤤���Ф� #T35 �հ���
+-+�Ϥ뤫 #T35 �ϥ륫
+-+�Ϥ���夦 #T35 �տ�
+-+�Ϥ��� #JNS �ջ�
+-+�Ϥ��ä� #CJ �ϾФä���
+-+�Ϥ��ä� #SUC �ϾФä���
+-+�Ϥ󤫤� #T35 �Ϥ󤫤�
+-+�Ϥ󤫤����� #T35 Ⱦ�ѥ���
+-+�Ϥ󤫤����ʤ��� #T35 Ⱦ�Ѥ�����
+-+�Ϥ󤫤��ˤ����󤤤� #T35 Ⱦ���󼡸���
+-+�Ϥ󤫤��⤸��� #T35 Ⱦ��ʸ����
+-+�Ϥ󤫤��⤸��Ĥ��� #CN Ⱦ��ʸ������
+-+�Ϥ󤫤��⤸��Ĥ��� #KK Ⱦ��ʸ������
+-+�Ϥ󤫤��⤸��Ĥ��� #T35 Ⱦ��ʸ������
+-+�Ϥ󤭤夦 #KK Ⱦ��
+-+�Ϥ󤭤夦 #KK Ⱦ��
+-+�Ϥ󤭤夦 #T35 Ⱦ��
+-+�Ϥ󤭤夦 #T35 Ⱦ��
+-+�Ϥ󤭤夦�Ϥ� #T35 �ȵ�ʎ���
+-+�Ϥ󤰤뤤�����������ۤ����� #T35 �ϥ󥰥������ˡ§
+-+�Ϥ󤳤��褳�� #T30 �ȹ�ͽ��
+-+�Ϥ󤳤��褳������ #T35 �ȹ�ͽ�𥹥�
+-+�Ϥ󤷤�������󤵤��Ϥ�館�� #CJ �����̺ҤϾФ�����
+-+�Ϥ󤸤㤤���� #T35 �Ⱥ��
+-+�Ϥ󤺤ܤ� #T35 Ⱦ���ܥ��
+-+�Ϥ󤻤����뤪������ #JN ȿ�ʤ��뤪������
+-+�Ϥ󤻤����뤪������ #T35 ȿ�ʤ��뤪������
+-+�Ϥ󤽤������뤹���� #JN ���������륹����
+-+�Ϥ���� #T35 ����
+-+�Ϥ�Ȥ� #T35 Ⱦ��
+-+�Ϥ�ɤ� #T35 �ϥ�ɥ�
+-+�Ϥ�ɤ�͡��� #T35 �ϥ�ɥ�͡���
+-+�Ϥ�ɤ�ͤ��� #T35 �ϥ�ɥ�͡���
+-+�Ϥ�ˤ� #SUC �̼�
+-+�Ϥ�ˤ㤷�󤮤礦 #JN �̼㿴��
+-+�Ϥ�Τ� #T35 ȾǾ
+-+�С� #JN BAR
+-+�С� #T35 �С�
+-+�С����󤭤顼���٤� #JN ������顼���٥�
+-+�С����� #T35 �С�����
+-+�С�����ͤäȤ����ɤ�ˤ����Ҥ���12���� #JN �С������ͥåȥ����ɥ���¼��ң�����
+-+�С������ͤäȤ����ɤ뤨�뤨�뤨�� #JN �С������ͥåȥ����ɥ�LLL
+-+�С��ܤä� #JN �С��ܥå�
+-+�С��� #JN �С���
+-+�С��� #T35 �С���
+-+�Ф� #T35 �С�
+-+�Ф����� #T35 �С�����
+-+�Ф��� #T35 �С���
+-+�Ф������⤸ #T35 �ܳ�ʸ��
+-+�Ф����졼�� #T35 �Х����졼��
+-+�Ф��Ф� #JN �޲�޲
+-+�Ф��Ф� #JN �ʎގ��ʎގ�
+-+�Ф�������� #T35 �Х����󡦥���
+-+�Ф��� #JN �ʎގ���
+-+�Ф��� #JN �ʎގ�����(�ߧՎ�)�ɡ�
+-+�Ф����� #JN �Х�����
+-+�Ф����ä� #T35 �и��û�
+-+�Ф��� #T35 �Х���
+-+�Ф��ˤϤ��ԤڤǤ��ʤ� #CJ �¦��ʦ��ˤϥ��ԥڤǤ��ʤ�
+-+�Ф������ #T35 �Х������
+-+�Ф����꡼�� #T35 �Эʥ�
+-+�Ф����꡼�� #T35 �ʎޭʎ�
+-+�Ф����꡼�����äȤ� #CJ �Эʥ����
+-+�Ф����꡼�����äȤ� #CJ �ʎޭʎ��׭�
+-+�Ф����ꤤ�� #T35 �ʎޭʎ�(�Х����꡼��)
+-+�Ф����ꤤ�����äȤ� #CJ �ʎޭʎ��׭�
+-+�Ф��󤳤� #CN �дڹ�
+-+�Ф��󤳤� #T35 �дڹ�
+-+�Ф��塼�फ�� #JN �Х��塼�५��
+-+�Ф����� #T35 ����
+-+�Ф�����ä������� #KK �Х�����å�����
+-+�Ф�����ͤ��� #JN ���ƥͥ���
+-+�Ф����塼������ #JN �����塼����
+-+�Ф� #JN �Х�
+-+�Ф������� #T35 �Х�������
+-+�Ф�����ä� #T30 �Х�����å�
+-+�Ф��������� #JN �Х���������
+-+�Фä����� #JN Ȳ�β�
+-+�Ф� #JN ��
+-+�ФĤФ� #T35 ��Ȣ
+-+�ФĤܤä��� #T35 �ߥܥå���
+-+�ФȤ顼 #JN �Хȥ顼
+-+�ФȤ��魯�� #JN �Хȥ��凉��
+-+�ФФ� #JN �̥�
+-+�Ф� #R5 �Х�
+-+�ФӤ�Ƥ� #T35 �Хӥ�ƥ�
+-+�ФӤ�ˤ� #KK �Хӥ뵶
+-+�ФӤ�ˤ� #T35 �Хӥ뵶
+-+�Ф餳�� #CN �Х��
+-+�Ф餳�� #T35 �Х��
+-+�Ф���� #T35 �Х����
+-+�Ф���� #T35 �ʎގ׎���
+-+�Ф뤫���ä��礤 #JN �Х륫�󡦥�å��祤
+-+�Ф� #T35 ��
+-+�Ф���� #T35 ����
+-+�Ф���礦 #JN ��Ĺ
+-+�Ф���礦 #T35 ��Ĺ
+-+�Ѥ��Ѥ� #T35 �С�
+-+�Ѥ��Ѥ󤭤礦���� #JN �ѥ��ѥ���
+-+�Ѥ��� #T35 ����
+-+�Ѥ����󤭤夦���夦�Ф������� #T35 �ѥ�����ߵޥХ�������
+-+�Ѥä� #T35 Pat
+-+�Ѥ� #KK �ѥ�
+-+�Ѥ� #T35 �ѥ�
+-+�Ѥ� #KS �ѥ�
+-+�Ѥ� #R5 �ѥ�
+-+�Ѥ� #T35 Pat
+-+�ѤԤ� #T35 �ѥԥ�
+-+�ѤڤäȤޤڤä� #JN �ѥڥåȥޥڥå�
+-+�Ѥ䤪 #T35 �ѥ䥪
+-+�Ѥ餵���ȤԤ�ߡ� #JN ��(��o�ߢ���~~
+-+�Ѥ餵���ȤԤ�ߡ� #JN �ѥ饵���ȥԥ�ߡ�
+-+�Ѥ餵���ȤԤ�ߡ� #JN �ѥ饵���ȥԥ�ߡ�
+-+�Ѥ�������������� #T35 �ѥ�������к�
+-+�Ѥ���ޤĤ� #T35 �ѥ鿹�פ�
+-+�Ѥ졼�� #JN �ѥ졼��
+-+�Ѥ��ߤΤ��� #JN �ѥ��ߥη�
+-+�Ѥ�Ƥ��� #T35 �ѥ�ƥ���
+-+�Ѥ�Ѥ� #T35 �ѥ�ѥ�
+-+�Ѥ�Ѥ� #T35 �ѥ�ѥ�
+-+�� #T35 ��
+-+�ҡ��ˤˡ��ˤӤä��� #JN �ҡ��˥ˡ��ˡ�
+-+�Ҥ�����㤯 #T35 �ҡʰʲ�ά��
+-+�Ҥ���Ӥɤ� #T35 �Ҥ����Ч
+-+�Ҥ���Ĥ����� #KK ���̿�
+-+�Ҥ��� #T35 �ҥ���
+-+�Ҥ����� #T35 ��ŷ�
+-+�Ҥ��� #JNS ���ۻ�
+-+�Ҥ��� #T35 ���ۻ�
+-+�Ҥ���������ʤ��� #JN ������ʽ�
+-+�Ҥ��� #T35 �ҥ���
+-+�Ҥ�������� #JN �ҥ��������
+-+�Ҥ����� #R5r �Ҥ�����
+-+�Ҥ����� #R5r �����Ƥ�
+-+�Ҥ������顼 #JN �ҥ������顼
+-+�Ҥ�����ꤳ�ޤ� #JN �ҥ��������ޥ�
+-+�Ҥ��㤯 #T35 ����
+-+�Ҥ����� #JN �ҥ�����
+-+�Ҥ� #JN �ҥ�
+-+�Ҥ� #JN ɦ
+-+�Ҥ� #T35 �ҥ�
+-+�Ҥ��ष #T35 �Ҥ��ष
+-+�Ҥ����1 #T35 �Ỵ�ʣ�
+-+�Ҥ���ʤ��� #JN �Ỵ�ʣ�
+-+�Ҥ���ʤ��� #T35 �Ỵ��1
+-+�Ҥ����� #T35 ������
+-+�Ҥ��礦�����ɤ����� #KK ���Ʒ�Ʊ��
+-+�Ҥ��礦�����ɤ����� #T35 ���Ʒ�Ʊ��
+-+�Ҥ��� #JN ��
+-+�Ҥ��Ҥ� #T35 �Ҥ��Ҥ�
+-+�Ҥä��� #JN �ҥå���
+-+�Ҥä��� #JN �ҥå���
+-+�Ҥä��� #T35 �Ҥä���
+-+�Ҥä��� #T35 �ҥå���
+-+�Ҥä��� #T35 �ҥå���
+-+�Ҥä����� #CJ ɬ�����
+-+�Ҥä����� #T35 ɬ�����
+-+�Ҥä��� #T35 �Ҥä���
+-+�ҤĤ� #T35 ��
+-+�ҤĤ褦�����ΤФ����Ƥ� #T35 ɬ�װ����ϼ��Τƾ�
+-+�ҤǤ��� #JN �ҤǤ���
+-+�ҤǤ�� #KS HIDE���
+-+�ҤȤ������� #T35 �����
+-+�ҤȤ��������ߤ� #JN �Ϳ����缪
+-+�ҤȤФ��� #T35 ����
+-+�ҤȤߤ���� #JN Ʒ�����
+-+�ҤȤ�褦����ä� #T35 �ҤȤ��ѥ���å�
+-+�Ҥɤ��ɤ��Ƥ� #T35 ��ƻƸ��
+-+�Ҥʤ󤸤� #T35 �����
+-+�Ҥʤ󤸤�椦�ɤ����� #JN �����ͶƳ����
+-+�ҤΤǤ��礦 #T35 ����Į
+-+�ҤϤ�褦�ܤ� #T35 ��Ƚ��˾
+-+�ҤҤҤ� #CJ �ҥҥҥ�
+-+�ҤҤҤҤ� #CJ �ҥҥҥҥ�
+-+�Ҥդߤ����� #T35 ����������
+-+�Ҥ� #T35 hibe
+-+�Ҥ� #T35 �ҥ�
+-+�Ҥޤ͡��� #JN �ҥޥ͡���
+-+�Ҥ㤯�����Ϥ��������ˤ����� #CJ ɴ�����ϰ줢���ˤ�����
+-+�Ҥ㤯���󤸤夦�ˤˤ��Τ��������� #T35 132���ܤ��ǿ�����
+-+�Ҥ㤯���礦�Ȥ� #T35 ɴ���Ի�
+-+�Ҥ㤯���夦���夦�����Ǥ󤷤� #JN 119���ż�
+-+�Ҥ㤯�ˤ��夦�ϤäȤ������ʡ� #JN 128Ƭ�ȥ�ʡ�
+-+�Ҥ�äۤ� #CJ �ҥ�åۡ�
+-+�Ҥ�äۤ� #CJ �ˎ����Ύ�
+-+�Ҥ褳 #JN �ҥ襳
+-+�Ҥ褷���夦 #T35 ���ȿ�
+-+�Ҥ餬�� #JN �Ҥ餬��
+-+�Ҥ餬�� #T35 �Ҥ餬��
+-+�Ҥ餬�ʤǤ塼�� #JN ����������������������������������������ʲ�ά��
+-+�Ҥ餬�ʤǤ塼�� #JN �Ҥ餬��DUKE
+-+�Ҥ�ߤߤ�ʡ� #JN ʿ����ʡ�
+-+�Ҥ�ߤߤ��顼 #JN ʿ�����顼
+-+�Ҥ�㤯 #T35 �ҡ�ά��
+-+�Ҥ������� #JNM ����
+-+�Ҥ������� #T35 ����
+-+�Ҥ��Ҥ� #JN �ҥ��ҥ�
+-+�Ҥ��Ҥ� #T35 �ҥ��ҥ�
+-+�Ҥ��ݤ� #JN �Ҥ��ݤ�
+-+�Ҥ��椭 #JN �Ҥ��椭
+-+�Ҥ��椭 #JNM �Ҥ��椭
+-+�Ҥ��椭 #T35 �Ҥ��椭
+-+�Ҥ��椭������礯�ˤ� #JN �Ҥ��椭����ľ��
+-+�Ҥ��椭������礯�ˤ� #JN �Ҥ��椭����ľ��
+-+�Ҥ��椭����ʤ��� #JNM �Ҥ��椭����ľ��
+-+�Ҥ��椭�����ˤ�դ��󤯤�� #KK �Ҥ��椭��ǧ�ե��󥯥��
+-+�Ҥ��椭�äݤ��� #JN �Ҥ��椭�äݤ���
+-+�Ҥ��椳����ʤ��� #JNM �Ҥ���ҡ���ľ��
+-+�Ҥ�Ԥ礦���� #T30 ��ɾ��
+-+�Ҥ�Ԥ礦���� #T35 ��ɾ��
+-+�ӡ� #T35 ��
+-+�ӡ����� #JN �ӡ�����
+-+�ӡ����뤢�餷 #JN �ӡ�����Ӥ餷
+-+�ӡ����� #T35 B�϶�
+-+�Ӥ� #JN �Ӥ�
+-+�Ӥ����뤢�餷 #T35 �ӡ�����Ӥ餷
+-+�Ӥ��㤯 #JN ����
+-+�Ӥ��礦���礻�󤷤����顼�ա��� #JN ��������Υ����顼�ա���
+-+�Ӥ��礦����ˤ�Ƥ� #T30 ������ǧ��
+-+�Ӥ� #T35 �ӥ�
+-+�Ӥ��ͤ��ˤ夦���פ餹 #T35 �ӥ��ͥ��˥塼����
+-+�Ӥ������� #T35 �ӥ�������
+-+�ԡ��� #T30 �ԡ���
+-+�ԡ�������� #T35 �ԡ�����Ϻ
+-+�Ԥ� #T35 P
+-+�Ԥ����塼 #JN �ԥ����塼
+-+�Ԥ����夦 #JN �ԥ����奦
+-+�Ԥ����夦 #JN �ԥ���
+-+�Ԥ��ġ� #KK �ԥ��ġ�
+-+�Ԥ��ߤ� #JN �ԥ��ߥ�
+-+�Ԥ��ߤ� #JN �ԥ��ߥ�
+-+�Ԥ� #T35 �ԥ�
+-+�Ԥ��Ԥ�� #JN �ԥ��ԥ��
+-+�Ԥ� #JN �ԥ���
+-+�Ԥ� #T35 �ԥ�
+-+�Ԥ� #T35 �ԥ���
+-+�Ԥ��� #JN �ԥ�
+-+�Ԥ��� #T35 �ԥ�
+-+�Ԥ��� #T35 �ԥ���
+-+�Ԥ󤭡� #JN �ԥ󥭡�
+-+�Ԥ󤯤��濫�ɤäȤ��� #T35 pinktower.com
+-+�Ԥ󤯤����ͤ� #T35 Pink�����ͤ�
+-+�Ԥ�ݤ���ä��� #T30 �ԥ�ݥ���å���
+-+�ա��� #CJ �ա���
+-+�ա��� #JN �ա���
+-+�ա��󤭤礦���� #JN �ա�����
+-+�դ������Ȥ�������� #JN �ե������ȡ����������
+-+�դ������Ȥ����� #JN �ե������ȡ�������
+-+�դ����ʤ뤢�󤵤� #CJ FA
+-+�դ����ʤ뤢�󤵤� #CJ FA?
+-+�դ����ʤ뤢�󤵤� #CJ �ե����ʥ륢�󥵡���
+-+�դ����ʤ뤿�֤� #T35 �ե����ʥ륿�֡�
+-+�դ����ʤ�դ��󤿤��� #T35 FINAL��FANTAZY
+-+�դ��ä��桼 #JN �ե��å��桼
+-+�դ��ä��椦�֤��������� #CJ Fuch��You���֤�������
+-+�դ��Ӥ� #KS �ե��ӥ�
+-+�դ��Ӥ�� #T35 �ե��ӥ��
+-+�դ��餪 #JN �ե��饪
+-+�դ��󤿤��� #T35 �ե��󥿥���
+-+�դ��󤿤��� #T35 �ե��󥿥���
+-+�դ����ͤ⤨ #JN �ե�����˨��
+-+�դ��ä��㡼�ޤ� #JN �ե��å��㡼�ޥ�
+-+�դ��뤿 #T30 �ե��륿
+-+�դ��뤿�� #T35 �ե��륿��
+-+�դ��������� #T35 �����Ѱ�
+-+�դ��֤Ĥ� #T35 �դ��֤Ĥ�
+-+�դ��� #CJ �ա���
+-+�դ��� #CJ �̎���
+-+�դ��顼���� #JN �ե��顼����
+-+�դ��顼����դ��ߤ꡼ #JN �ե��顼����ե��ߥ꡼
+-+�դ���͡��� #JN �ե���͡���
+-+�դ����� #T35 4rd
+-+�դ���͡��� #JN �ե���͡���
+-+�դ��ߤ����������� #JN ����Ѱ�Ϻ
+-+�դ����礦 #JN �դ����礦
+-+�դ��� #JN �ե���
+-+�դ��� #T35 �ե���
+-+�դ����礦 #JN ����
+-+�դ����礦 #T35 ����
+-+�դ��������� #T35 ʣ������
+-+�դ���������ä� #T35 ʣ������å�
+-+�դ����� #T35 ������
+-+�դ��줭 #T35 ʤ��
+-+�դ� #T35 ����
+-+�դ���顼 #JN �ե���顼
+-+�դ��� #JN �ե���
+-+�դ��� #JNM �դ���
+-+�դ����� #JN �ե�����
+-+�դ����������ܤ�Τߤ������դ����� #JN �ե������������߲᤮���ե�����
+-+�դ������ޤ���� #JN �ե�����̡��
+-+�դ����ʤ��� #T30 fusianasan
+-+�դ����ʤ���Ȥ�ä� #T35 fusianasan�ȥ�å�
+-+�դ��礦 #T30 ���
+-+�դ��礷 #T35 �����
+-+�դ��夦�����ष�� #JN ���淺̳��
+-+�դä��� #T35 ������
+-+�դä����뤿���� #JN �եå������纴
+-+�դä���ȤӤդ����� #JN �եñ����ե���
+-+�դä���ȤӤդ����� #JN �̎�����̎���
+-+�դä��� #JN �̎�����
+-+�դȤ��� #JNM ����
+-+�դȤ��� #T35 ����
+-+�դȤޤ� #JN �եȥޥ�
+-+�դȤޤ� #KY ���ޤ�
+-+�դȤޤ��������� #JN ���ޤ�������
+-+�դȤޤ��������� #JN ���ޤ�������
+-+�դȤޤ����ޤ�顼 #JN ���ޤ����ޥ�顼
+-+�դȤޤ�����ʡ� #JN ���ޤ�����ʡ�
+-+�դɤ��ߤ� #T35 ��ư��
+-+�դˤ� #T35 ����
+-+�դ夦����ͤ����� #T35 �ե塼����ͥ�����
+-+�դ夦����ͤ������ #T35 �ե塼����ͥ������
+-+�դ椷�Ф��� #JN �߼Ƹ�
+-+�դ椷�Ф��� #T35 �߼Ƹ�
+-+�դ���夦 #T35 �߿�
+-+�դ餰���� #T5 �ե饰��Ω
+-+�դ�ä���ޤ� #JN �ե�å���ޥ�
+-+�դ�äȤ��ꤣ #T35 �ե�å�3
+-+�դ�󤹤Ѥ� #T35 �ե饽���ѥ�
+-+�դ�󤹤Ѥ� #T35 �̎׎����ʎߎ�
+-+�դ꡼�դ����� #JN FREEFALL
+-+�դ꤫�����ʤ� #JN �����֤��ʥ�
+-+�դ������ #T35 ���Ѥ����
+-+�դ뤦������ #JN �ե������
+-+�դ뤦������ #T35 �ե������
+-+�դ�äĤ��� #JN �ե�åĥ���
+-+�֤� #JN  ����
+-+�֤� #JN ���
+-+�֤� #T35 ���
+-+�֤� #T35 ����
+-+�֤��ޤ� #T30 �֥��ޥ�
+-+�֤����� #T35 �֥�����
+-+�֤��褯 #JN �֥��襯
+-+�֤��褯 #T35 �֥��襯
+-+�֤� #JN ��
+-+�֤� #T35 ��
+-+�֤� #T35 ޼
+-+�֤��� #JN �֤���
+-+�֤��� #T35 �֤���
+-+�֤ä� #T35 �֥å�
+-+�֤ä��ޡ��� #T30 �֥å��ޡ���
+-+�֤ä��� #T35 ʪ��
+-+�֤ä� #T35 �֥å�
+-+�֤Ĥ��� #T35 ʩ��
+-+�֤ɤ���ʡ� #JN ��ƺ��ʡ�
+-+�֤̤� #T35 �֥̥�
+-+�֤Ӥ��夦 #T35 �֥ӿ�
+-+�֤褯 #T35 �֥襯
+-+�֤� #T35 �֥�
+-+�֤餦������ä��� #T35 �֥饦��������å���
+-+�֤餦������ä��㡼 #T35 �֥饦��������å��㡼
+-+�֤餯�� #T35 �֥饯��
+-+�֤餯�� #T35 �����
+-+�֤餯������ä� #T35 �֥饯������å�
+-+�֤餯������ä��� #T35 �֥饯������å���
+-+�֤�ä��ۤ��� #T35 �֥�å��ۡ���
+-+�֤뤪�� #T35 �֥��
+-+�֤�ɤä������� #KK �֥�ɥå�������
+-+�֤줤�� #T35 ̵���
+-+�֤줤�� #JN �֥쥤��
+-+�֤����ɤФ�ɤ롼�� #T35 �֥����ɥХ�ɥ롼��
+-+�֤����ɤФ�ɤ롼���� #T35 �֥����ɥХ�ɥ롼����
+-+�֤��ä��� #T35 �֤��ä���
+-+�פ��� #CN ����
+-+�פ��� #T35 ����
+-+�פ����� #JN �פ�����
+-+�פ� #CJ �פ�
+-+�פ� #CJ �ץ�
+-+�פ� #CJ �̎ߎ�
+-+�פ� #JN �ʡ�,_�����ˎ̎ߎ�
+-+�פ� #JN �̎ߎ�
+-+�פäפ��ס� #JN �פäפ��ס�
+-+�פ� #T35 �פ�
+-+�פ� #T35 �ץ�
+-+�פˤ� #T35 �ץ˥�
+-+�פˤ���夦 #T35 �ץ˥��
+-+�פ�ʤꤢ #JN �ץ�ʥꥢ
+-+�פꤦ�� #T35 �פꤦ��
+-+�פ�פ�Ѥä� #JN �ץ�ץ�ѥå�
+-+�פ��ʤ餤�ޤΤ��� #CJ �ץ��ʥ饤�ޥΥ���
+-+�פ��ʤ餤�ޤΤ��� #CJ �̎ߎ؎َŎ׎��ώɎ���
+-+�פ��ʤ餤�ޤΤ��� #JN �ץ��ʥ饤�ޥΥ���
+-+�פ��ʤ餤�ޤΤ��� #JN �̎ߎ؎َŎ׎��ώɎ���
+-+�פ�󤢤��� #T35 �ץ��Ƭ
+-+�פ뤮�� #JN �ץ륮��
+-+�פ��� #JN �ץ���
+-+�פ����������� #T35 �Уңϣأٵ���
+-+�פ����� #T35 �ץ�����
+-+�פ����ߤ� #T35 �ץ���̱
+-+�פ��������Ȥ��ä��� #KK �ץ��������ȣ�
+-+�פ��������Ȥ��ä��� #T35 �ץ���������X
+-+�פ��������Ȥ��ä��� #T35 �ץ��������ȣ�
+-+�פ��������Ȥ��� #KK �ץ��������ȣ�
+-+�פ��������Ȥ��� #T35 �ץ��������ȣ�
+-+�פ��������Ȥ��� #T35 �ץ���������K
+-+�פ��Ф�������� #T35 �ץ��ѥ������
+-+�פ��Ѥ�������濫 #T35 �ץ��ѥ�������
+-+�ء���ʡ� #JN �ء���ʡ�
+-+�ؤ����� #JN ʿ��
+-+�ؤ����� #T35 ʿ��
+-+�ؤ������� #T35 �ĺ���
+-+�ؤ��� #CJ (�����ώ�`)�ؤ���
+-+�ؤ��� #CJ �ؤ���
+-+�ؤ������ߤ餤�����ˤʤä��Фä���ʤ�� #CJ �ؤ������饤�����ˤʤä��Фä���ʤ��
+-+�ؤ� #T35 ��
+-+�ؤĤ� #CJ >>�����ع�
+-+�ؤʤ� #JNS �ؤʤ�
+-+�ؤʤ� #T35 �ؤʤ�
+-+�ؤΤؤΤ�ؤ� #JN �ؤΤؤΤ�ؤ�
+-+�ؤܤ� #T35 �ؤܤ�
+-+�ؤ�ʤ��� #T35 �Ѥʲ�
+-+�٤ä��� #T35 ����
+-+�٤Ӥ��� #JN �٥Ӥ���
+-+�٤����Ǥ������餷 #JN �٥����ǥ����Ӥ餷
+-+�٤��� #JN �٥���
+-+�٤� #T35 �ش�
+-+�٤󤸤�Τ餯���� #T35 �ؽ�����
+-+�٤󤼤󤫤� #JN �٥󥼥��
+-+�ڡ����Ӥ塼 #T35 �ڡ����ӥ塼
+-+�ڤ��Ф� #T35 �ڥ�Ȣ
+-+�ڤ��ܤä��� #T35 �ڥ��ܥå���
+-+�ڤ��� #CJ �ڤ���
+-+�ڤ� #CJ �ڤ�
+-+�ڤä� #T35 �ڥå�
+-+�ڤäȤܤȤ� #T35 �ڥåȥܥȥ�
+-+�ڤ� #T35 �ڥ�
+-+�ڤɤդ��ꤢ #T35 �ڤɤդ��ꤢ
+-+�ڤɤդ��ꤢ #T35 �ڥɥե��ꥢ
+-+�ڤ�� #JN �ڥ��
+-+�ڤ�� #T35 �ڥ��
+-+�ڤ꤫ #T35 �ڥꥫ
+-+�ۡ�������ä��㡼 #JN �ۡ�������å��㡼
+-+�ۡ�������ä��㡼 #T35 �ۡ�������å��㡼
+-+�ۤ� #JN �ʎߢ�ߡ�
+-+�ۤ� #JN �Ύ�
+-+�ۤ� #T35 ˤ
+-+�ۤ������դ󤨤���� #T35 ����ʮ��Ͻ
+-+�ۤ����� #CN ���
+-+�ۤ����� #T35 ���
+-+�ۤ����礦��ʤ� #JN �����ʥ�
+-+�ۤ�������ä��㤢 #T35 �ۡ�������å��㡼
+-+�ۤ����������� #T35 ˡ§����
+-+�ۤ��� #T30 ����
+-+�ۤ��Ƥ� #JN ˡ��
+-+�ۤ��� #T30 �ݴ�
+-+�ۤ��Ȥ��󤱤�Ǥ�����ʡ� #JN ���Ϳ����ǻ������ʡ�
+-+�ۤ��ۤ����Ĥ��� #CN ���̻���
+-+�ۤ��ۤ����Ĥ��� #T35 ���̻���
+-+�ۤ����� #T35 �ۤ�����
+-+�ۤ� #T35 ��
+-+�ۤ����� #JN ������
+-+�ۤ��� #T30 �ݼ�
+-+�ۤ���Ϥ��餷 #CJ �ݼ�ϹӤ餷
+-+�ۤ��� #CJ �ۥ���������
+-+�ۤ��� #CJ �Ύ���������
+-+�ۤ��� #JN �ۥ���
+-+�ۤ��� #T30 ����
+-+�ۤä��� #T35 ʧ��
+-+�ۤäȤ��� #KK �ۥåȥ���
+-+�ۤäȤ��� #T35 �ۥåȥ���
+-+�ۤ� #JN ����
+-+�ۤͤ��� #T35 ����
+-+�ۤΤ��Τ��� #T35 ��Υ���
+-+�ۤद��� #T35 �ۥࡼ���
+-+�ۤद��󤦤���� #CJ �ۥࡼ����Ǥ���ơ�
+-+�ۤ�Ѥ� #T35 �ۥ�ѥ�
+-+�ۤ�� #CJ �ۤ��
+-+�ۤ襤�Ȥ١������󤭤礦 #JN �ۥ磻�ȥ١����϶�
+-+�ۤ� #T35 ��
+-+�ۤ󤱤ʤ� #JN �ܲȤʤ�
+-+�ۤ󤷤� #T35 �ܼ�
+-+�ۤ󤹤� #T35 �ܥ���
+-+�ۤ󤹤줵�󤭤礦���� #JN �ܥ��컰����
+-+�ۤ󤹤�ΤϤ� #JN �ܥ���δ�
+-+�ܡ��ɤ������ #T35 �ܡ��ɰ���
+-+�ܤ� #T35 ˼
+-+�ܤ��� #T35 ����
+-+�ܤ��ᤤ #T35 ˴̿
+-+�ܤ��뤺 #JN �ܡ��륺
+-+�ܤ��� #T30 �ܤ���
+-+�ܤ������ #T35 �ͽ�
+-+�ܤ����󤫤襤���央����� #JN �ܤ����󡢤��襤���央�����
+-+�ܤ��Ȥ� #JN ����
+-+�ܤ��Ȥ� #T35 ����
+-+�ܤ��Τ��Ĥ����� #JN �ͤΤ��Ĥ�����
+-+�ܤ��Τ��Ĥ����� #JN �ͤΤ��Ĥ����󡪡�(����`)��
+-+�ܤ��Τ�������ؤ������줽���Ǥ� #CJ �ܥ���������ĺ����줽���Ǥ�
+-+�ܤ��� #CJ �ܥ���
+-+�ܤ� #R5 ��
+-+�ܤ� #T35 ����
+-+�ܤä����� #JN ��(`����)�Υܥå�����
+-+�ܤä����� #JN ��(`����)�ɎΎގ���������
+-+�ܤä����� #JN �ܥå�����
+-+�ܤä����� #JN �Ύގ���������
+-+�ܤä����� #T35 �ܥå�����
+-+�ܤä��Ƥ� #T35 �ֵ�ŷ��
+-+�ܤä��ɤ館��� #JN �ܤä��ɥ館���
+-+�ܤä��塼�� #JN �ܥå��塼��
+-+�ܤǤ������Ӥ��� #T35 �ܥǥ������ӡ���
+-+�ܤܤ� #T35 ����
+-+�ܤܤ� #T35 �Хܡ���
+-+�ܤܤ� #T35 �Хܥ�
+-+�ܤܤ󤹤� #T35 �ܥܥ󥹥�
+-+�ܤߤ礦 #CJ �ܤߤ硼
+-+�ܤߤ礦 #T35 �ܤߤ硼
+-+�ܤ뤸�礢 #JN �ܤ뤸�礢��yBEncckFOU
+-+�ܤ󤯤餹 #T35 �ܥ󥯥饹
+-+�ܤ󤵤� #T35 �ߺ�
+-+�ܤ󤵤����󤻤� #T35 �ߺ�����
+-+�ܤ���夦 #T35 �߿�
+-+�� #CJ ��
+-+�ݡ����� #JN �ʡ�����*�ˎΎߎ�����
+-+�ݡ����� #JN �ݡ�����
+-+�ݡ���ޤ� #JN �ݡ���ޥ�
+-+�ݤ� #T35 �ݥ�
+-+�ݤ����� #T35 �ݥ�����
+-+�ݤ����󤹤� #T35 �ݥ����󥹥�
+-+�ݤ����� #JN �ݥ�����
+-+�ݤ����� #T35 �ݥ�����
+-+�ݤ����� #CJ (���ա�)�ݥ�����
+-+�ݤ����� #CJ (�ߧՎ�)�Ύߎ�����
+-+�ݤ����� #CJ �ݥ�����
+-+�ݤ����� #CJ �Ύߎ�����
+-+�ݤ����� #JN (�ߧՎ�)�Ύߎ�����
+-+�ݤ����� #JN �ݥ�����
+-+�ݤ����� #JN �Ύߎ�����
+-+�ݤ����� #CJ �ݥ�����
+-+�ݤ����� #CJ �Ύߎ�����
+-+�ݤ��Ȥ��� #JN �ݥ��Ȥ���
+-+�ݤä� #JN �ݤä�
+-+�ݤä� #JN �ݥå�
+-+�ݤä� #T35 �ݤä�
+-+�ݤä� #T35 �ݥå�
+-+�ݤꤴ���ʡ� #JN �������ݥꥴ���ʡ�
+-+�ݤꤴ���ʡ� #JN �ݥꥴ���ʡ�
+-+�ݤ�Ȥ��뤴 #T35 ��ƺ���
+-+�ݤ� #T35 �ݥ�
+-+�ݤ󤭤󤫤� #CN �ݥ󥭥󥫥�
+-+�ݤ󤭤󤫤� #T35 �ݥ󥭥󥫥�
+-+�ݤ���� #CN �ݥ���
+-+�ݤ���� #T35 �ݥ���
+-+�ݤ�Ф� #CN �ݥ�
+-+�ݤ�Ф� #T35 �ݥ�
+-+�� #JN ��
+-+�� #T35 ��
+-+�ޡ�����äȤ���ɤդ�󤽤� #JN �ޡ�����åȡ��ե�󥽥�
+-+�ޡ����� #JN �ޡ�����
+-+�ޡ����� #JN �ͣ��ңӲ�
+-+�ޡ��� #KK �ޡ���
+-+�ޤ��������� #T35 ��(`����)�Υޥ�������
+-+�ޤ��������� #T35 ��(`����)�Ɏώ����ގ�����
+-+�ޤ������Ĥ� #CJ �ޤ�����失
+-+�ޤ����󤿤����� #CJ �ޤ��������
+-+�ޤ��� #T35 �ޡ���
+-+�ޤ����� #T35 �ޥ�����
+-+�ޤ����礯 #T35 �ͣ���
+-+�ޤ��������դ� #T35 �ޥ�ʵ���ե�
+-+�ޤ��� #CN ����
+-+�ޤ��� #T35 ����
+-+�ޤ�����ڤ󤮤� #JN �ޤ�����ڥ󥮥�
+-+�ޤ��ˤä� #JN �ޥ��˥å���
+-+�ޤ��Ӥ��� #T35 �ޥ��ӡ���
+-+�ޤ���ɤ���ä��㤢 #T35 �ޥ���ɥ���å��㡼
+-+�ޤ� #JN �ޥ�
+-+�ޤ� #T35 �ޥ�
+-+�ޤ����Ѥä� #T35 �ޥ����ѥå�
+-+�ޤ����� #T35 ������
+-+�ޤ��������� #JN ���ķļ�
+-+�ޤ��� #JN �ޥ���
+-+�ޤ�����ʤդ��� #JN �Ⲧ��ʥե���
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��� #T35 �⳦
+-+�ޤ��� #K5 �ޤ���
+-+�ޤ��Ĥ��äƤ��������⤤ #CJ �ޤ��Ĥ��äƤ��������⥤
+-+�ޤ��� #JNM �ޥ���
+-+�ޤ��� #JNM �⵴��
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��� #T35 �⵴��
+-+�ޤ��Τ뤭 #JN ����αɱ
+-+�ޤ��ޤ� #KK �ޤ��ޤ�
+-+�ޤ��� #T35 ��
+-+�ޤ����� #T35 �餱��
+-+�ޤ��� #T35 ���
+-+�ޤ��� #JN ��
+-+�ޤ��ԡ� #JN �ޤ��ԡ�
+-+�ޤ��ԡ� #T35 �ޤ��ԡ�
+-+�ޤ��Ԥ� #T35 �ޤ��ԡ�
+-+�ޤ��Ԥ��� #T35 �ޤ��Ԥ���
+-+�ޤ��� #JNM �ޤ���
+-+�ޤ��� #JNM �ޥ���
+-+�ޤ��� #JNM ����
+-+�ޤ��� #T35 �ޤ���
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��� #T35 ����
+-+�ޤ���͡��褫�ä��������ʤ��ʤ���Ȥ����ä� #JN �ޥ���͡����with���ʥ��ʥ����
+-+�ޤ��� #JNM �ޥ���
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��褷 #JNM ����
+-+�ޤ����� #T35 �ޥ�����
+-+�ޤ����� #T35 �ޥ�����
+-+�ޤ���� #JN �ޥ����
+-+�ޤ���� #T35 �ޥ����
+-+�ޤ��󤤤�ͤ����� #JN �ޥ��󥤥�ͥ�����
+-+�ޤ��󤵤� #CJ �ޤ��󤵤󡦡���
+-+�ޤ�����ʡ� #JN �ޥ�����ʡ�
+-+�ޤ��줹 #T30 �ޥ��쥹
+-+�ޤ��줹�ޤ� #JN �ޥ��쥹�ޥ�
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ��� #JNM �ޥ���
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ����� #T35 �ޥ�����
+-+�ޤ��� #SUC �ޤ���
+-+�ޤ��������Ĥ�Τ��Τ� #CJ �ޥ����������Ĥ�Τ��Τ�
+-+�ޤ��� #CJ �ޥ���
+-+�ޤ��� #CJ �ώ��ގ�
+-+�ޤ����塼 #T35 �ޤ����塼
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ� #CJ �ޤ���
+-+�ޤ����� #T30 �ޥ�����
+-+�ޤ����� #T30 �ޥ�����
+-+�ޤ����꤭��餮�㤯���ĤȤ� #KK �ޥ����ꥭ���Ի���
+-+�ޤ����꤭��餮�㤯���ĤȤ����餷 #JN �ޥ����ꥭ���Ի��޹Ӥ餷
+-+�ޤ����꤭��餮�㤯���ĤȤ��������� #JN �ޥ����ꥭ���Ի�������
+-+�ޤ����ꤴ�� #JN MATAARI��
+-+�ޤ�����ʤ䤷�礯��Ĥ����� #JN �ޡ�������뿩������
+-+�ޤ��������� #JN �ޥ���������
+-+�ޤ��������� #JN �ώ����؎Ҏ��ގ�
+-+�ޤ����ꤹ�� #T35 �ޥ����ꥹ��
+-+�ޤ�������夦 #T35 �ޥ������
+-+�ޤ����������� #CJ �ޤ���夫
+-+�ޤ����������� #CJ �ޤ�����
+-+�ޤ��ʤ������줫 #CJ �ޤ����ĥ��줫
+-+�ޤ��� #JN �ޥ���
+-+�ޤ��ӡ��ӡ����� #KK �ޤ�BBS
+-+�ޤ��Ӥ��Ӥ����� #T35 �ޤ�BBS
+-+�ޤä��� #T30  �ޥå���
+-+�ޤä��� #T30 �ޤä���
+-+�ޤä����ʡ� #JN �ޥå����ʡ�
+-+�ޤĤ� #T35 ����
+-+�ޤĤ����� #JN ��������
+-+�ޤĤ����� #T35 ��ʿ
+-+�ޤĤ������� #JN ���ķ���
+-+�ޤĤ� #T35 �פ�
+-+�ޤĤꤢ���� #JN �פ�˰����
+-+�ޤĤ���ȤĤ����� #JN �פ�����ͷ����
+-+�ޤ� #T35 �ޥ�
+-+�ޤȤФդߤ� #JN Ū��ʸ��
+-+�ޤɤ� #T35 �ޥɥ�
+-+�ޤɤĤ��� #T35 ��Ȥ�
+-+�ޤˡ� #JN �ޥˡ���
+-+�ޤˡ����ޤä���롼�� #JN �ޥˡ����ޥå���롼��
+-+�ޤˡ����ޤä���롼�� #JN �ޥˡ����ޥå���롼��
+-+�ޤҤ��� #JN �ޥҥ���
+-+�ޤҤ��� #JN �ώˎ���
+-+�ޤҤ��� #T35 �ޥҥ���
+-+�ޤҤ������礥 #JN �ޥҥ������礥
+-+�ޤҤ������礥 #JN �ώˎ������礥
+-+�ޤۤ��Ĥ��� #T35 ��ˡ�Ȥ�
+-+�ޤܤ� #T35 ���ܡ���
+-+�ޤܤ� #T35 ���ܥ�
+-+�ޤݡ��� #CJ �ޥݡ���
+-+�ޤ� #CJ �ʡ��ա��˥ޥޡ�����
+-+�ޤ� #CJ �ʡ��ա��ˎώϡ�����
+-+�ޤ� #JN �ʡ��ա��˥ޥޡ�����
+-+�ޤ� #JN �ʡ��ա��ˎώϡ�����
+-+�ޤޤ��� #T35 �ޥޥ���
+-+�ޤޤ�ʡ��������礦�� #JN �ޥޥ�ʡ���Ĺ��
+-+�ޤޤ� #JN �ޥޥ�
+-+�ޤޤ� #T35 �ޥޥ�
+-+�ޤळ #T35 �ޥॳ
+-+�ޤ� #T35 Ʀ
+-+�ޤ餤���� #JN �ޥ饤����
+-+�ޤ餹���� #JN �ޥ顦������
+-+�ޤ�͡��� #JN �ޥ�͡���
+-+�ޤ�ܤ� #JN �ޥ�˷
+-+�ޤ�� #JN �ޥ���
+-+�ޤ�顼 #JN �ޥ�顼
+-+�ޤ�顼���󤵡��� #JN �ޥ�顼���󥵡���
+-+�ޤ��ɤ� #JN �ޥ����
+-+�ޤ�꡼�ޤ� #JN �ޥ�꡼�ޥ�
+-+�ޤ�� #JN ����
+-+�ޤ�� #T35 �ޤ��
+-+�ޤ뤤���� #T35 �ݰ��
+-+�ޤ뤹�� #JN �ͣ��ңӲ�
+-+�ޤ�� #JN �ޥ��
+-+�ޤ�� #T35 �ޥ��
+-+�ޤ���ݤ��� #T30 �ޥ���ݥ���
+-+�ޤ�� #JN ����
+-+�ޤ�ߤߤ�ʡ� #JN �ݼ���ʡ�
+-+�ޤ��� #T35 �ޥ���
+-+�ޤ路���� #JN �ޤ路����
+-+�ޤ� #T35 ��
+-+�ޤ󤤤�Ǥ󤷤� #JN �����ż�
+-+�ޤ󤬤ͤ����� #T35 ̡��ͥ�����
+-+�ޤ󤭤󤨤��� #T35 �ޥ󥭥�EXE
+-+�ޤ󤮤�� #T35 �ޥ󥮥��
+-+�ޤ󤺤� #T35 �ĥ���
+-+�ޤ󤻡� #CJ �ޥ󥻡�
+-+�ޤ󤻡��᡼���� #T35 �ޥ󥻡��᡼����
+-+�ޤ󤻤��ᤨ���� #T35 �ޥ󥻡��᡼����
+-+�ޤ�ɤ����� #CJ �ޥ�ɥ�����
+-+�ޤ�ܤ� #JN �ޥ�ܥ�
+-+�ߡ��Ȥܡ��� #JN �ߡ��ȥܡ���
+-+�ߤ��ˤ㤢���� #T35 �ߡ���㡼����
+-+�ߤ��� #JN �ߤ���
+-+�ߤ��� #KK �ߤ���
+-+�ߤ��� #T35 �ߤ���
+-+�ߤ��ɤ��� #JN �ߤ��ɰ�
+-+�ߤ��ɤ���ʤ��� #JN �ߤ��ɰ�����
+-+�ߤ����� #JN �ߥ�����
+-+�ߤ��ƤǤ����ޤ��� #CJ ����ǽ񤭤ޤ���
+-+�ߤ��Ҥ� #T35 ���Ҥ�
+-+�ߤ��ߤ��ʤ��� #KK ����ߤ��ʡ���
+-+�ߤ��������� #T35 �����Τ
+-+�ߤ����ʡ� #JN ���ӥ�ʡ�
+-+�ߤ��礯���� #T35 ̤����
+-+�ߤ�����ʡ� #JN �����ʡ�
+-+�ߤ������ۤ� #JN Mr.�Ύ�
+-+�ߤ������ #JN �奴���
+-+�ߤ������ #T35 �奴���
+-+�ߤ��ͤ��� #JN ����
+-+�ߤ��ͤ��� #T35 ����
+-+�ߤ��餤�Ҥ��� #T35 ������ش�
+-+�ߤ��� #JN (*'-'*)
+-+�ߤ��� #JN �ߤ���
+-+�ߤä��� #JN �ߤä���
+-+�ߤä��� #T35 �ߤä���
+-+�ߤä��� #T35 �ߤä���
+-+�ߤäդ������䤳 #JN �ߥåե����ƻ�
+-+�ߤĤ��� #T35 ��������
+-+�ߤĤ� #T35 ������
+-+�ߤĤߤ�ʡ� #JN ��������ʡ�
+-+�ߤɤͤ� #T35 �ߥɰ�
+-+�ߤɤ꤬���� #T35 �г�
+-+�ߤʡ� #JN �ߥʡ�
+-+�ߤʤ��ʤ椭 #JN ����̾��
+-+�ߤʤ��ʤ椭 #T35 ����̾��
+-+�ߤʤŤ����礦�ۤ��ڡ��� #KK ��̵�����ڡ���
+-+�ߤʤݤ� #T35 �ߤʤݤ�
+-+�ߤʤߤ���� #T35 ������
+-+�ߤʤߤ��ޤ� #KK �Į
+-+�ߤʤߤ��ޤ� #T35 �Į
+-+�ߤʤ�� #T35 �ߥʤ��
+-+�ߤʤ�Ȥ��� #JN ������
+-+�ߤˤ��� #JN �ߥ˥���
+-+�ߤˤ�� #JN �ߥ˥��
+-+�ߤΤ� #T35 ̧��
+-+�ߤߤ��䤵�� #T35 �ߥߥ�������
+-+�ߤߤʤ���ʡ� #JN ���ʤ���ʡ�
+-+�ߤ�� #JNS ��¼
+-+�ߤ�� #T35 ��¼
+-+�ߤ㤢���� #T35 �ߤ����
+-+�ߤ�ä� #JN �ߥ�å�
+-+�ߤ礥 #JN �ߤ礥
+-+�ߤ褦 #JN �ߤ礥
+-+�ߤ餤�ˤä� #T35 ̤������
+-+�ߤ뤯���դ� #T35 �ߥ륯���ե�
+-+�ߤ�� #T35 ̱��
+-+�ߤ�ʡ��������ġ� #JN �ߤ�ʡ��������ġ�
+-+�ߤ�ʤ���Τ��ͤ��� #T35 �ߤ�ʤ���Τ��ͤ���
+-+�त�� #CN ����
+-+�थ #JN �थ
+-+�फ���� #JN �५����
+-+�फ�Ĥ��ͤ� #JN �५�Ĥ�ǰ
+-+�म�塼 #JN �८�塼
+-+�ऱ�顼 #JN �ॱ�顼
+-+�ष���� #T35 ����
+-+�ष�С� #JN �ॷ�С�
+-+�ष�夦 #T35 ̵��
+-+�ष�礯 #T35 ̵��
+-+�स�뤷 #T35 ̵��
+-+�ह���ˤ� #JN �ॹ���˥�
+-+�ह�� #T35 �ॹ��
+-+��ä� #JN ��å�
+-+��ͤ� #JNM ��ͥ�
+-+��ͤ� #T35 ��ͥ�
+-+��ͤ��Ϥ��� #T35 ��ͥ��ϥ���
+-+��ͤ� #JN ��ͥ�
+-+��ͤ� #JNM ��ͥ�
+-+��ͤ� #T35 ��ͥ�
+-+��Ϥ� #JN �ʎߧ��ߡ��˥�ϥ�
+-+��Ϥ� #JN ��ϥ�
+-+��餵�� #JN ��
+-+��餵�� #T35 ��
+-+��餵���� #CJ ���
+-+���Τ���ܤ� #JN ¼�Υ���ܥ�
+-+�������� #JN ��������
+-+�������� #JN �ю؎��ގ���
+-+�᡼��ܤ� #T35 �᡼��ܥ�
+-+�ᤢ�ꤣ #T35 �ᥢ�ꥣ�������ꥣ
+-+�ᤢ�ꤣ�ΤͤĤ����줹 #T35 �ᥢ�ꥣ����¤�쥹�������ꥣ����¤�쥹
+-+�ᤤ�� #CN ����
+-+�ᤤ�� #T35 ��
+-+�ᤤ���� #T35 ̾����
+-+�ᤤ����Τ����� #CJ ̾����ΰ���
+-+�ᤤ����Τ褫�� #CJ ̾�����ͽ��
+-+�ᤤ�Ƥ� #T35 ��Ŵ
+-+�ᤤ�̤�Τ褫�� #CJ �ƥ̥��̷��
+-+�ᤤ�פ뤷���ä� #T35 MapleSyrup
+-+�ᤤ��ؤ󤸤礦 #CJ ̾���־�
+-+�ᤤ��ܤ� #T35 �᡼��ܥ�
+-+�ᤨ�Ƥ뤹�� #T35 �᡼�ƥ륹��
+-+�ᤫ�� #JN �Ҏ���
+-+�ᤫ���褦 #JN �ᥫ���礥
+-+�ᤫ���ޡ� #JN �Ҏ����ώ��ʎҎ�����
+-+�ᤫ���Ȥ��� #JN �ᥫZ��
+-+�ᤫ���ˤ��� #JN �ᥫ���ˤ���
+-+�ᤫ�����ʡ� #JN �ᥫ�����ʡ�
+-+�ᤫ���� #JN �ᥫ����
+-+�ᤫ����顼 #JN �ᥫ����顼
+-+�ᤫ����͡��� #JN �ᥫ����͡���
+-+�ᤫ������ #JN [��������]
+-+�ᤫ������ #JN �Ҏ����ގ���
+-+�ᤫ������ #JN �ᥫ����
+-+�ᤫ�����Ǥ�ʤ��� #JN �ᥫ�����Ǥ�ʤ���
+-+�ᤫ����͡��� #JN �ᥫ����͡���
+-+�ᤫ���� #JN �ᥫ����
+-+�ᤫ�Ȥ��͡��� #JN [:��/|��:]�Ď��Ȏ���
+-+�ᤫ�Ȥ��͡��� #JN �ᥫ�ȥ��͡���
+-+�ᤫ�դ��顼���� #JN �ᥫ�ե��顼����
+-+�ᤫ�⤦���ͤ��� #JN �ᥫ�ӎ����Ȏ���!
+-+�ᤫ��ʡ� #JN �ᥫ��ʡ�
+-+�᤬���� #JN �ᥬ����
+-+�᤬�� #KK �ᥬ��
+-+�᤬�� #T35 �ᥬ��
+-+�᤬�� #T35 ����
+-+�᤮�Τ��� #JN �ᡦ���Υ�����
+-+�ᤱ #T35 �ᤱ
+-+�ᤱ�� #T35 �ᤱ��
+-+�ᤱ��ߤȤ�� #CJ �ᤱ��ǧ���
+-+�ᤷ���� #T35 �ᤷ��
+-+�᤹�֤� #T35 ����
+-+�᤽�С� #T35 �᥽�С�
+-+�᤽�Ф� #T35 �᥽�С�
+-+�᤾���㡼�꡼ #KK �᥾���㡼�꡼
+-+�᤾���㡼�꡼ #T35 �᥾���㡼�꡼
+-+�᤾���㤢�ꤤ #T35 �᥾���㡼�꡼
+-+�᤿�꤫ #T35 �᥿�ꥫ
+-+�᤿��ä� #KK �᤿��ä�
+-+����� #T35 �ܶ�
+-+��Ǥơ��� #JN ��ǥơ���
+-+��ʤ� #JN �ܤʤ�
+-+���С� #T35 ���С�
+-+���顼 #JN ���顼
+-+��ꤱ��Ƥ󤷤��� #JN ��ꥱ��ŷ�ȡ����顪
+-+���뤷����С��С��� #JN ���롦������С��С���
+-+���ؤ� #T35 ���إ�
+-+���ؤ󤤤� #T35 ���إ���
+-+���ޤ� #T35 ���ޥ�
+-+������ѡ� #T35 ������ѡ�
+-+������Ѥ� #T35 ������ѡ�
+-+����� #T35 �����
+-+��� #T35 ��
+-+��󤿤�ؤ뤹���� #T35 ��󥿥�إ륹��
+-+���� #T30 ����
+-+���ɤ����� #JN ���ɥ�����
+-+���ɤ����������� #JN �ҎݎĎގ���������
+-+���С� #T35 ���С�
+-+���Ф� #T35 ���С�
+-+���ؤ餢 #T35 ���إ顼
+-+���ؤ뤤�� #T35 ���إ���
+-+���ܤ� #T35 ���ܤ�
+-+�⡼���� #CN �⡼��
+-+�⡼���� #T35 �⡼��
+-+�⡼���� #CN �⡼����
+-+�⡼���� #T35 �⡼����
+-+�⡼�ˤ󤰤����ҡ� #CN �⡼�˥󥰥����ҡ�
+-+�⡼�ˤ󤰤����ҡ� #KK �⡼�˥󥰥����ҡ�
+-+�⡼�ˤ󤰤ह�� #JN �⡼�˥�̼��
+-+�⡼�ˤ󤰤ह�ᤤ�� #CN �⡼�˥�̼����
+-+�⤢�� #T35 ��ͭ
+-+�⤤�� #CN ����
+-+�⤤�� #T35 ����
+-+�⤦���� #T35 �⡼��
+-+�⤦�����ä����� #JN �⤦�ܤä�����
+-+�⤦���� #T35 �Ѹ�
+-+�⤦���� #T35 �⡼����
+-+�⤦���ͤ���  #JN ��(`����)�ɤ⤦��ͤ���
+-+�⤦���ͤ��� #CJ ��(`����)�Τ⤦��ͤ��衪
+-+�⤦���ͤ��� #CJ ��(`����)�Τ⤦��ͤ��衪���率����
+-+�⤦���ͤ��� #CJ ��(`����)�ɤ⤦��ͤ��衪
+-+�⤦���ͤ��� #CJ ��(`����)�ɤ⤦��ͤ��衪���܎�����
+-+�⤦���ͤ��� #CJ �⤦��ͤ��衪
+-+�⤦���ͤ��� #JN ��(`����)�Τ⤦��ͤ��衪���率����
+-+�⤦���ͤ��� #JN ��(`����)�ɤ⤦��ͤ��衪���܎�����
+-+�⤦���ͤ��� #JN �⥦���ͥ���!!���率����!�⥦���ͥ���!!���率����!�⥦���ͥ���!!���率����!
+-+�⤦���ͤ��� #JN �ӎ����Ȏ���!!���܎�����!�ӎ����Ȏ���!!���܎�����!�ӎ����Ȏ���!!���܎�����!
+-+�⤦���ͤ��褦�嵐����  #JN ��(`����)�ɤ⤦��ͤ��衪���܎�����
+-+�⤦�������� #CJ �⤦��������
+-+�⤦�������Ȥ� #T35 �⡼������
+-+�⤦������������ #T35 �⡼������������
+-+�⤦���ͤ� #CJ �⤦���ͤ�
+-+�⤦����� #CJ �⤦�����
+-+�⤦����� #T35 �⤦�����
+-+�⤦�ˤ󤰤����Ҥ� #T35 �⡼�˥󥰥����ҡ�
+-+�⤦�ߤ��� #CJ �⤦�ߤ���
+-+�⤦�ߤ��� #T35 �⤦�ߤ���
+-+�⤦�⤦ #CJ �⡼�⡼
+-+�⤨ #KS ˨��
+-+�⤨ #T35 ˨��
+-+�⤪�Τ� #T35 �⥪�Υ�
+-+�⤫�� #JN �⥫��
+-+�⤬�줿���� #JN �⥬�쥿��
+-+�⤯�����ɤ���� #KK �ܷ�ɥ����
+-+�⤱�� #JN �⥱��
+-+�⤱�� #JN �ӎ���
+-+�⤳�� #JN �⤳��
+-+�⤷������ #JNS ������
+-+�⤷������ #JNSUC ������
+-+�⤸�줹 #T35 ʸ���쥹
+-+�⤹�顼 #JN �⥹�顼
+-+�⤻ #T35 �⤻
+-+�⤻�� #T35 �⤻��
+-+�⤿�� #T35 �⥿��
+-+��ä��꡼�� #JN ��å��꡼��
+-+��ä��� #JN ��å���
+-+��ä��� #T35 ��å���
+-+��ä��� #T35 ��ä���
+-+��ä��� #T35 ��å���
+-+��Ƥ͡��� #JN ��ƥ͡���
+-+��Ȥ��������ΤĤ꤭���������� #JN ����±�������ϥ�������
+-+��Ȥ��������ΤĤ꤭���������ʤȤ��Τ��֤󤿤� #JN ����±�������ϥ������ʤȤ��λ�ʬ����
+-+��ʡ� #JN ��ʡ�
+-+��ʡ������ޤ� #JN ��ʡ������ޥ�
+-+��ʡ������� #JN ��ʡ�������
+-+��ʡ����󤳤� #KK ��ʡ��Ѹ�
+-+��ʡ��������� #KK ��ʡ���������
+-+��ʡ��������� #T35 ��ʡ���������
+-+��ʡ����ä��� #JN ��ʡ����å���
+-+��ʡ����󤹤� #JN ��ʡ����
+-+��ʡ����󤹤��� #JN ��ʡ��򤹷�
+-+��ʡ�����֤�פ� #JN ��ʡ���ʬ�ۿ�
+-+��ʡ�����֤�פ���ʡ����顼�Ф� #JN ��ʡ���ʬ�ۿޥ�ʡ������顼��
+-+��ʡ�����֤�뤤�����äƤ��Ф� #JN ��ʡ���ʬ��޷�����
+-+��ʡ�����֤�뤤�����ˤä��Ф� #JN ��ʡ���ʬ��ޡ����˥å���
+-+��ʡ�����֤�뤤�����ˤä��Ф� #JN ��ʡ���ʬ��ޥ��˥å���
+-+��ʡ����礦��� #JN ��ʡ�����
+-+��ʡ������� #JN ��ʡ���¢
+-+��ʡ����夦��󤻤� #JN ��ʡ�������
+-+��ʡ��������夦���礯���������顼�ɤ餤�С� #JN ��ʡ�²����˱��������顼�ɥ饤�С�
+-+��ʡ����󤸤礦�ΤҤߤ� #JN ��ʡ���������̩
+-+��ʡ��Ǥ������֤Ĥ��뤹�줳���������礦�䤯����ä����礦 #JN ��ʡ����ܤ��֤Ĥ��륹���ݾ��󽽥���
+-+��ʡ��Ȥ����Τ����ष��ä� #JN ��ʡ��ȥ����Υ����ॷ��å�
+-+��ʡ��Τ����ˤ� #JN ��ʡ��ΰ���
+-+��ʡ��Τ��Τ��� #JN ��ʡ������
+-+��ʡ��Τ��Τ��� #JN ��ʡ�������ʸο͡�
+-+��ʡ��Τ��� #JN ��ʡ�������
+-+��ʡ��Ϥ褦�����ͤ� #JN ��ʡ������ա���ͤ�
+-+��ʡ��Ф�� #JN ��ʡ��Х��
+-+��ʡ��դä��� #JN ��ʡ�����
+-+��ʡ��ޤ� #JN ��ʡ��ޥ�
+-+��ʡ��ޤ� #JN �ӎŎ��ώ�
+-+��ʡ��ࡼ�󤰤� #JN ��ʡ��ࡼ��
+-+��ʡ��ࡼ�󤰤� #JN ���ގ���������
+-+��ʡ��ࡼ�󤰤� #JN �ӎŎ��ю��ݷ�
+-+��ʡ��᤿��Ф�� #JN ��ʡ��᥿��Х��
+-+��ʡ��ꤶ #JN ��ʡ��ꥶ
+-+��ʤ� #T35 ��ʡ�
+-+��ʤ����󤳤� #T35 ��ʡ��Ѹ�
+-+��ʤ��������� #T35 ��ʡ���������
+-+��ʤ����餷 #JN ��ʥ����饷��
+-+��ʤ���� #T35 ��ʡ����
+-+��ʤ����� #JN ��ʥ�����
+-+��ʤ� #JN ����
+-+��ʤ������󤻤� #JN ��ʻ�����
+-+��ʤ���� #JN ��ʤ����
+-+��ʤ��� #JN ��ʲ�
+-+��ʤ� #JN ��ʥ�
+-+��ʤ� #JN ��ʥ�
+-+��ʤ� #JNS ��ʥ�
+-+��ʤ� #T35 ��ʥ�
+-+��ʤ� #T35 ����
+-+��ʤ�����Τ� #JN ��ʥ��Ѳ�
+-+��ʤ��� #JN ��ʱ�
+-+��ʤ��� #JN �ӎű�
+-+��ʤ������ #JN ��ʤ������
+-+��ʤ���Τ� #JN ��ʴѲ�
+-+��ʤ���Τ� #JN ��̾�Ѳ�
+-+��ʤ��������椬����󤹤���� #JN ��ʥ�������������󥹥����
+-+��ʤ����դ���ϡ���ˡ����󤲤󤬤����� #JN ��ʥ����ե���ϡ���ˡ��ɸ�����
+-+��ʤ����פ� #JN �ͣϣΣ��ạ̃ϣУ�
+-+��ʤ����� #JN ��ʥ�����
+-+��ʤ��館��  #JN ���¢��Τ
+-+��ʤ��館�� #JN ���¢��Τ
+-+��ʤ� #JN ��ʻ�
+-+��ʤ��� #JN ��ʥ���
+-+��ʤ��󤱤��ʡ� #JN ��ʥ��󡦥����ʡ�
+-+��ʤ����� #JN ��ʥ�����
+-+��ʤ����� #JN �����¢
+-+��ʤ��� #KK ��ʥ���
+-+��ʤ��顼 #KK ��ʥ��顼
+-+��ʤ��餢���Ǥ��� #T35 monazillaID
+-+��ʤ��餪�뤰��� #T35 monazilla.org(w
+-+��ʤ���ˤ� #JN ������
+-+��ʤ������� #JN �����
+-+��ʤȤ��Ф����ʤ����� #JN ��ʥȥ����Х��������
+-+��ʤˡ� #JN ��ʥˡ�
+-+��ʤΤ꤭�夦 #JN ��ʥΡ�����
+-+��ʤ� #KK ��ʥ�
+-+��ʤ� #T35 ��ʥ�
+-+��ʤ� #JN ��ʥ�
+-+��ʤܤ� #JN ��ʥܥ�
+-+��ʤݤ줪���ʤѤ�� #JN ��ʥݥ쥪����ʥѥ��
+-+��ʤޤ��� #JN ������
+-+��ʤߤϤ󤿡� #JN ��ʥߡ��ϥ󥿡�
+-+��ʤष #JN �����
+-+��ʤ꤫���� #JN ��ʤ꤫����
+-+��ʤ줤 #JN �����
+-+��ʤ줤 #JN �����
+-+��ˡ� #JN ��ˡ�
+-+��ˤ� #JN ��˥�����
+-+��ˤ㡼���� #JN ��˥㡼��
+-+��ˤ㡼���� #JN ��˥㡼��
+-+��ˤ� #R5 ��ˤ�
+-+��͡� #JN ��͡�
+-+��͡��� #JN ��͡���
+-+��ͤ� #JN ��ͥ�
+-+��Τ������� #JN ��Ρ���������
+-+��Τ��������������� #CJ ��Τ�����������
+-+��Τۤ��������� #JN ʪ���������
+-+��Ѥ��� #T35 ��ѡ���
+-+��դ��ؤդ� #JN ��ե��إե�
+-+��ޡ� #JN ��ޡ�
+-+��ߤ��� #T35 ��߲�
+-+��ߤ��� #T35 �沬
+-+��⤤������ǡ����꡼�ह�ڤ���� #JN ��������ǡ����꡼��SP
+-+��⤦�� #T35 ��⡼��
+-+��⤪�� #T35 ��⡼��
+-+������� #JN �������
+-+����顼 #JN ����顼
+-+��䤷 #T35 ��䥷
+-+��� #JN ����
+-+��顼�ޤ� #JN ��顼�ޥ�
+-+��館��� #JN ��館���
+-+��餪��� #JN ����
+-+��餳 #JN ����
+-+��餿���� #JN ������
+-+�����㤨�� #JN �����㥨��
+-+���Ҥ㤯 #JN ���ɴ
+-+���ޤ��� #JN ������
+-+���ޤ� #JN ���ޥ�
+-+���褷���� #JN ���ȱ�
+-+���� #JN ����
+-+���顼 #JN ���顼
+-+���顼���餷 #JN ���顼�Ӥ餷
+-+���顼�����礦 #JN ���顼��Ĺ
+-+���顼���󤸤夦�� #JN ���顼���ƻ�
+-+���顼���礦���� #JN ���顼Ĺ��
+-+���顼�Ƥ����� #JN ���顼�ƥ�����
+-+���顼�դ��� #JN ���顼4
+-+���顼�֤��礦 #JN ���顼��Ĺ
+-+���顼�ޤ� #JN ���顼�ޥ�
+-+���館�� #JN ���饨��
+-+����Ȥ� #JN ������
+-+����Ȥ� #JN �ӎ׎���
+-+����ȤΤȤ�ʤ��� #JN �ӎ׎��¡ʺ��ˤȎӎűơʱ���
+-+���� #JN ���ꡦ��
+-+��� #T35 ��
+-+��ꤢ���äƤޤ���ޤ��� #CJ ����夬�äƤޤ���ޤ���
+-+�����夦 #T35 ����
+-+��� #JN ���
+-+��뤡 #JN (�ߎێ�)�ӎَ�!!
+-+��뤡 #JN ��륡
+-+��� #T35 ϳ��
+-+��줯�� #T35 ϳ���
+-+����ϤΤĤ뤮 #CJ ���Ϥη���
+-+��󤭤����夬�� #T35 ��󥭡����奬��
+-+��󤯤��� #CJ ʸ�礢�롩
+-+���뤤 #T30 ����
+-+�� #SUC ��
+-+�䤪 #T30 �䥪
+-+�䤪�� #T35 �䤪��
+-+�䤪���� #KK �䥪����
+-+�䤪���� #T35 �䥪����
+-+�䤪�Ϥ� #T35 �䥪�Ť�
+-+�䤪�� #T35 ������
+-+�䤪�դ� #KK �䥪�ե�
+-+�䤭���� #T35 �䤭����
+-+�䤭�Ĥ��� #T35 ���դ���
+-+�䤭�Ĥ��䤤�� #T35 ���դ���
+-+�䤭�Ȥ� #KK �Ƥ�Ļ
+-+�䤭�Ȥ� #T35 �Ƥ�Ļ
+-+�䤭�ʤ����Ǥ��ޤ��Τ����ޤ�䤭�ʤ��� #CJ �Ƥ��ʤ������ǡ�������Ƭ��Ƥ��ʤ���
+-+�䤭�� #JN ���
+-+�䤭�� #JN ��С�
+-+�䤯�� #JN �䥯��
+-+�䤯��� #T35 �䥯���
+-+�䤯��Ĥ��� #JN �䥯��Ĥ���
+-+�䤰�ä���꡼�� #JN �䥰�å���꡼��
+-+�䤵���� #JN ͥ����
+-+�䤷 #T35 ����
+-+�䤷���� #T30 �䥷����
+-+�䤷�� #T35 �뺵
+-+�䤸�뤷���夦 #T35 �����
+-+�䤹������ä� #CN ���ĥ���å�
+-+�䤹������ä� #T35 ���ĥ���å�
+-+�䤹�� #T35 ��
+-+�䤽�ޡ� #JN �䥽�ޡ�
+-+�䤽�ޡ��������� #JN �䥽�ޡ�(��������)
+-+������ #JN ������
+-+��äۡ� #CN ��åۡ�
+-+��äۡ� #KK ��åۡ�
+-+��äۡ� #T35 ��åۡ�
+-+��äۤ� #T35 ��åۡ�
+-+��� #JN ���
+-+��� #T35 ���
+-+��ʤ����� #JNS ��ʤ�����
+-+��ʤ����� #T35 ��ʤ�����
+-+��ʤ������ʡ� #JN ��ʥ������ʡ�
+-+��� #KK ���
+-+��դ� #CN ����
+-+��դ� #T35 ����
+-+��դ��� #KK ��ե���
+-+��դ��� #T35 ��ե���
+-+��֤ˤ�ߤ��顼 #JN 鮤ˤ�ߥ��顼
+-+��ޤ����Ȥ�ä� #T35 ����ȥ�å�
+-+��ޤ����錄�� #T35 �����(^^)
+-+��ޤ� #JN ����
+-+���Ƥ���� #CJ ���Ƥ����
+-+���� #CJ ����
+-+���ʤ��� #CJ ���ʤ���
+-+��ꤹ������ #JN ��ꤹ����
+-+��뤭�ʤ� #T35 ��뵤�ʤ���
+-+��뤾 #JN ��뤾����
+-+���äƤ֤� #CJ ���ä���
+-+��������� #CJ ���������
+-+��������� #CJ �Ԏێ�����
+-+�������� #JNM ��������
+-+��󤸤�� #KK ��󥸥��
+-+��󤸤�� #T35 ��󥸥��
+-+����� #CJ �����
+-+����� #T35 �����
+-+�桼�����ӡ������֤�Ǥ��ӤĤäƤ��� #CJ USB�����֥�Ǽ��ߤäƻ��
+-+�桼���� #T35 �գ�
+-+�桼�桼 #JN �桼�桼
+-+�椦���� #JN ʹ��
+-+�椦���� #JN ͼ��
+-+�椦�����ʤ��Ƥߤ�ʤ��������������Ĥ��� #T35 ͦ����̵���Ƹ���ʤ��������⥹��
+-+�椦�� #T35 �椦��
+-+�椦���� #T35 ͦ��
+-+�椦�����ʡ� #JN ͦ�ԥ�ʡ�
+-+�椦�����ʤ� #JN ͦ�ԥ����
+-+�椦�Ǥ����פ��������� #T35 UD�ץ���������
+-+�椦�ɤ� #T30 ͶƳ
+-+�椦�ʤ�ޤĤ� #T35 �椦�ʤ�פ�
+-+�椦�ϤȤ��Ƥ�����ޤ��� #CJ YOU�����ꤵ��ޤ���
+-+�椦�Ӥ�椦�������� #CJ ͹�ء�͹����
+-+�椦�Ӥ�椦�������� #CN ͹�ء�͹����
+-+�椦�Ӥ�椦�������� #T35 ͹�ء�͹����
+-+�椦�ܤ� #JN m(-_-m)�����׎Ҏ��Ԏ�
+-+�椦�ܤ� #JN �椦˷
+-+�椦�ᤤ���Ƥ� #T35 ͭ̾����
+-+�椦��礦�� #T30 ͭ����
+-+�椬�� #T35 ��
+-+�椭���ˤ������� #JN �㤪�ˤ�������
+-+�椭���뤷 #T35 �°�
+-+�椭���뤷���夦�ˤ夦 #JN �°�����
+-+��ä��� #JN ��å���
+-+��ä��� #T35 ��å���
+-+��ä��� #T35 ��å���
+-+��Ǥ����� #T35 ��Ǥ����顦����
+-+��ˤä����դ�ä��� #T35 unix�ե�å���
+-+��֤� #T35 ����
+-+��� #JN ���
+-+��󤫡��� #JN ��󥫡���
+-+��󤫡��� #T35 ��󥫡���
+-+��󤫤��� #T35 ��󥫡���
+-+����� #CJ �����
+-+����� #T35 �����
+-+�� #CJ YO��
+-+�� #CJ yo��
+-+�� #CJ yp
+-+�褢�� #T35 �奢��
+-+�褤�������ʡ� #JN �襤�������ʡ�
+-+�褤�������ʡ� #JN �֎��������ӎŎ�
+-+�褦���� #T35 �ζ�
+-+�褦���ѤѤȤ���ꤿ�Τ󤸤㤦���� #CJ �衼���ѥ�������󤸤㤦����
+-+�褦���� #T35 �礥�Ɏޤ�
+-+�褦����椦���� #JN �礥�ɡ���夥����
+-+�褦���� #T35 ����
+-+�褦�����󤫤�Ǥʤ����Ƥ��� #T35 �ġ��ա��ࡡ�����顡�С�ľ�������ơ�������
+-+�褦������� #T35 ������
+-+�褩 #CJ YO��
+-+�褩 #CJ yo��
+-+�褩 #CJ yp
+-+�褩������ #JN �襩������
+-+�褩�����դ��ä������礦���ä��Ȥ� #JN �襩������(����)
+-+�褫���� #JN �襫����
+-+�褯�֤����� #JN (��V��)��
+-+�褯�֤����� #JN �߿���
+-+�褯�� #JN �ʦ��զ��ˎ֎��ӎ�����
+-+�褯�� #JN �襯�⡦����
+-+�褯�� #JN �֎��ӎ�����
+-+�褳�Ϥ� #CN �襳�ϥ�
+-+�褳�Ϥ� #T35 �襳�ϥ�
+-+�褳��ޤ��󤴤��� #T35 ���������
+-+�褴�� #T35 �襴��
+-+�褴�� #T35 ����
+-+�褷�� #JN Yoshida
+-+�褷�Τ䤳�Ԥ� #T35 ����ȥ��ԥ�
+-+�褷�椭 #T35 �褷�椭
+-+�褷�褷 #JN �ʡ��������ˡ��ʡ��������ˎ֎��֎�
+-+�褷�褷 #JN �褷�褷
+-+�褼�� #T35 �奼��
+-+�褽���Τʤʤᤦ�� #T35 ͽ�ۤμФ��
+-+����줹 #T35 ͽ�Υ쥹
+-+��ä���� #JN ��ä����
+-+��ä���� #T35 ��ä����
+-+��ä�����ʡ� #JN ��ä�����ʡ�
+-+��ʡ� #JN ��ʡ�
+-+��� #T35 ��
+-+��͡� #JN ��͡�
+-+��ߡ��� #JN ��ߡ���
+-+��� #CJ ��
+-+���Τ����� #T35 ��Τ�����
+-+��� #T35 >>4
+-+���Ȥ�����ˤ餤�� #JN ��Ƭ�ȥ˥饤��
+-+���ޤ��� #T35 404
+-+����� #CJ �����
+-+����� #T35 �����
+-+�顼 #T35 �ң���
+-+�顼�������ꤦ�嵐���� #JN ��-�������ꥦ�率����
+-+�顼�������ꤦ�嵐���� #JN ��-���ގ����؎��܎�����
+-+�顼��� #T35 �顼���
+-+�顼��󤮤� #JN �顼��󥮥�
+-+�顼��󤮤�����ɤ�ʡ� #JN �顼��󥮥�����ʡ�
+-+�顼����ʡ� #JN �顼����ʡ�
+-+�餢 #T35 RAR
+-+�餤���衼 #T35 (���ώ�)�׎����֎�!!
+-+�餤���衼 #T35 �ʡ��ϡ��˥饤���衼!!
+-+�餤���衼 #T35 �ʡ��ϡ��ˎ׎����֎�!!
+-+�餤���ä� #KK �饸��
+-+�餤�� #CN ����
+-+�餤���礦 #KK ��Ļ
+-+�餤���礦 #T35 ��Ļ
+-+�餤�� #T35 �饤��
+-+�餤�� #T35 �鸤
+-+�餤�� #T35 �׸�
+-+�餤�� #T35 �׎���
+-+�餦���� #T35 �饦����
+-+�餦�᤹ #JN �饦�᥹
+-+�餦�᤹ #T35 �饦�᥹
+-+�餦�� #CN �饦��
+-+�餦�� #T35 �饦��
+-+�餦�󤸤��դ��� #T30 �饦�󥸥��ղ�
+-+�餦�󤸤� #T30 �饦�󥸲�
+-+�餦�󤸤Ҥʤ󤸤� #T35 �饦�������
+-+�餦�󤸤� #T35 �饦�󥸥�
+-+�餦�󤸤㡼 #T35 �饦�󥸥㡼
+-+�餦�󤸤㤢 #T35 �饦�󥸥㡼
+-+�餦�󤸤㤢�ͤ� #T35 �饦�󥸥㡼Ǭ
+-+�餭���ޤ� #JN �饭���ޥ�
+-+�餭���ޤ� #JN �饭���ޥ�
+-+�餸���ä� #KK �饸��
+-+�餹�ܤ��Ϥ����Ȥ����⤢ #CJ �饹�ܥ��ϥ����ȥ����⥢
+-+��ä�������� #T35 ��å�������
+-+��äȤ��顼 #JN ��åȥ��顼
+-+��Ƥ󤢤Ҥ� #JN ��ƥ󥢥ҥ�
+-+��Ǥ��� #T35 ��ǥ���
+-+��ʡ� #JN ��ʡ�
+-+����� #T35 �����
+-+����� #T35 �׎؎׎�
+-+��뤯�� #JN ��륯��
+-+��뤯�� #T35 ��륯��
+-+����� #SUC �����
+-+����� #SUC �����
+-+�꡼����� #JN �꡼����
+-+�꡼�դȤ����� #T35 �꡼�����
+-+�꡼�ޤ� #JN �꡼�ޥ�
+-+�꡼�ޤ� #T30 �꡼�ޥ�
+-+�꡼��ä� #JN ���꡼��å�
+-+�꡼��äҤ���ˤ� #JN ���꡼��åңʣ�
+-+�꡼��äҤˤ��� #JN ���꡼��å�����
+-+�ꤢ������͡��� #JN �ꥢ�륽��͡���
+-+�ꤢ���夦 #T35 �ꥢ��
+-+�ꤢ�� #T35 �ꥢ��
+-+�ꤢ�뤢���Ѥ��ޤ� #JN �ꥢ�륢���ѥ��ޥ�
+-+�ꤢ�뤢���Ѥ��ޤ� #JN �ꥢ�뎱���ʎߎ��ώ�
+-+�ꤢ�뤢�ä��� #JN �ꥢ�뤢�ä���
+-+�ꤢ�뤣�礥 #JN �ꥢ�뤣�礥
+-+�ꤢ�뤣�礥�⤳�⤳�С������ #JN �ꥢ�뤣�礥�ʤ⤳�⤳�С�������
+-+�ꤢ�뤤��͡��� #JN �ꥢ�륤��͡���
+-+�ꤢ�뤦�� #JN �ꥢ��ݵ
+-+�ꤢ�뤪�ޤ����ޡ� #JN �ꥢ�륪�ޥ����ޡ�
+-+�ꤢ�뤪�ޤ���ʡ� #JN �ꥢ�륪�ޥ���ʡ�
+-+�ꤢ�뤫������ #JN �ꥢ�륫������
+-+�ꤢ�뤭������ #JN �ꥢ�륭����
+-+�ꤢ�뤭�����������ۤ� #JN �ꥢ����ϳ�����
+-+�ꤢ�뤮�� #JN �ꥢ�륮��
+-+�ꤢ�뤴�����դޤ󤾤� #JN �ꥢ���������­
+-+�ꤢ�뤷�� #JN �ꥢ�뤷��
+-+�ꤢ�뤷�ͤС� #JN �ꥢ�륷�ͥС�
+-+�ꤢ�뤷�礦�ܤ� #T35 �ꥢ�����
+-+�ꤢ�뤷��͡��� #JN �ꥢ�륷��͡���
+-+�ꤢ�뤷��͡���2 #JN �ꥢ�륷��͡��裲
+-+�ꤢ�뤸���������� #JN �ꥢ�른����������
+-+�ꤢ�뤸���������� #JN �ꥢ�뎼�ގ������ގ���
+-+�ꤢ�뤸��ʤ����餯�� #CJ �ꥢ�뤸��ʤ����饯��
+-+�ꤢ�뤸��󤸤礵�� #JN �ꥢ�른��󥸥礵��
+-+�ꤢ�뤹�äɤ� #JN �ꥢ�뎽���Ďގ�
+-+�ꤢ�뤹�դ��󤯤� #JN �ꥢ�륹�ե��󥯥�
+-+�ꤢ�뤽���Ǥ�ʤ��� #JN �ꥢ�뤽���Ǥ�ʤ���
+-+�ꤢ�뤽��͡��� #JN �ꥢ�륽��͡���
+-+�ꤢ�뤽�줬�ʤˤ� #JN �ꥢ�륽�쥬�ʡ�˥�
+-+�ꤢ�뤿���� #T35 �ꥢ�륿����
+-+�ꤢ����夦�ܤ� #T35 �ꥢ���˼
+-+�ꤢ��ʤ��ˤ����ʡ� #JN �ꥢ��ʤ��ˤ����ʡ�
+-+�ꤢ��ʤ��ˤ����ʡ����� #JN �ꥢ��ʤ��ˤ����ʡ���
+-+�ꤢ��ʤ��ˤ����ʡ��� #JN �ꥢ��ʤ��ˤ����ʡ���
+-+�ꤢ��ʤ��� #JN �ꥢ��ʥ���
+-+�ꤢ��ʤä� #JN �ꥢ��ʤä�
+-+�ꤢ��ʤɤ������� #JN �ꥢ�����������
+-+�ꤢ��ʤͤ���ʡ� #JN �ꥢ��ʥͥ���ʡ�
+-+�ꤢ��ˤ��� #JN �ꥢ��˥���
+-+�ꤢ��Ϥ� #JN �ꥢ��ϥ���
+-+�ꤢ��Ҥ��椭 #JN �ꥢ��Ҥ��椭
+-+�ꤢ��դ��顼���� #JN �ꥢ��ե��顼����
+-+�ꤢ��ۤ��� #JN �ꥢ�����
+-+�ꤢ��ޤ��� #JN �ꥢ��ޥ���
+-+�ꤢ��ޤˡ� #JN �ꥢ������
+-+�ꤢ���ä� #JN �ꥢ���å�
+-+�ꤢ��⤦���ͤ��� #JN �ꥢ��⥦���ͥ���
+-+�ꤢ���ʡ� #JN �ꥢ���ʡ�
+-+�ꤢ������� #JN �ꥢ�������
+-+�ꤢ��褷�Ƥ��� #JN �ꥢ��褷�ƥ���
+-+�ꤢ��ꤢ��Ƥ� #T35 �ꥢ��ꥢ��ƥ�
+-+�ꤢ����� #JN �ꥢ�����
+-+�ꤤ�� #T35 reach
+-+�ꤤ�ɤ����������� #T35 read.cgi
+-+�꤫����� #T35 Τ�¤����
+-+�꤭����Ǥ� #T35 �ꥭ����ǥ�
+-+�꤭�äɤ�顼�� #JN �ꥭ�åɡ���顼��
+-+�꤯ #T35 Φ
+-+�ꤸ������ #JN ������
+-+��ä� #T35 ��å�
+-+��äĤ����뤵 #JN ��åĤ����뤵
+-+��äݤ����� #JN Ω����
+-+��Ƥʤ� #T35 ��ƥʡ�
+-+��Ȥ뤨���ꤦ�嵐���� #JN ��ȥ륨���ꥦ������
+-+��Ȥ뤨���ꤦ�嵐���� #JN �؎Ďَ����؎�������
+-+��ܤä� #T35 ��ܥå�
+-+��ܤ�С����ޤ󤫤ä� #JN ��ܥ�С������ޥ󥫥å�
+-+��ܤ�С����ޤ󤫤ä� #JN ��ܥ�����������ޥ󥫥å�
+-+��ܤ� #T35 ��ܥ�
+-+��ܤ�פ줤 #T30 ��ܥ�ץ쥤
+-+��⡼�Ȥۤ��� #T35 ��⡼�ȥۥ���
+-+���� #T35 ����
+-+��㤯 #T35 (ry
+-+��㤯 #T35 ry
+-+��㤯 #T35 �ʣ��
+-+��㤯���������󤵤� #T35 ά�����ú�
+-+��礦���줪�Ȥ� #JN �ɥ�����
+-+��礦����Τ褫�� #CJ �ɥ����ͽ��
+-+��礦�Τ� #T35 ξǾ
+-+��뤳 #JN ����
+-+������� #T30 �������
+-+������ɤ���ä� #T35 ������ɥ���å�
+-+������� #T35 �������
+-+��󤴤Ĥ��� #T35 ��󥴻Ȥ�
+-+�뤤 #T35 rui
+-+��Ѥ�դ�ä��� #T35 ��ѥ�ե�å���
+-+�졼 #JN �졼
+-+�줤���夦���� #JN ���ͼ�
+-+�줤�� #JN �쥤��
+-+�줤���� #T35 �䴨
+-+�줤������ #T35 ��¢��
+-+�줰�ͤä��� #T35 Regnessem
+-+�줲�� #T35 �쥲��
+-+�줲������ #CN �쥲����
+-+�줲������ #T35 �쥲����
+-+�줸 #T35 �쥸
+-+�줹 #T30 �쥹
+-+�줹�������� #T30 �쥹���
+-+�줹���줴�Ф� #T30 �쥹�������
+-+�줹���Ƥ��Ф� #T30 �쥹Ω�Ƹ���
+-+�줹�Ф󤴤� #T35 �쥹�ֹ�
+-+��äȤ� #KK ��Ƭ
+-+��äɤ֤ä����Ϥ� #CJ ��åɥ֥å���ȿ������åɥ����ɡ�
+-+��Ĥ���٤��١������ޤ��ء� #CJ ��Ĥ��硪�٤��١��������ޤ��ء���
+-+��Ĥ���٤��١������ޤ��ء� #T35 ��Ĥ��硪�٤��١��������ޤ��ء���
+-+��Ǥ��������� #T35 ��ǥ�������
+-+��٤�Ҥ� #KY ��٥���
+-+���� #JN ����
+-+���� #JN ����
+-+���ʤ��� #CN ���ʥ���
+-+���ʤ���Τ��顼 #JN ���ʥ���Υ��顼
+-+����⡼�� #JN ����⡼��
+-+���� #T35 ����
+-+��� #T35 ���
+-+�� #T35 ϧ
+-+��������롼�� #T35 ��������롼��
+-+������ʤ٤� #JN ��������ʥ٥�
+-+���� #T35 ����
+-+�����äȤǤĤ��̤��� #CJ �����åȤ��ͤ�ȴ����
+-+���� #T35 ����
+-+���ä����Ƥ� #JN ���å����ƥ�
+-+���ä���ʡ� #JN ���å���ʡ�
+-+���äݤ󤾡� #JN ���äݤ󤾡�
+-+���äݤ󤾡� #T35 ���äݤ󤾡�
+-+���Ƥ��� #T35 ���ơ���
+-+���Ƥ��� #T35 �ێÎ���
+-+���Ӥ᤹ #JN ���ӥ᥹
+-+���Ӥ᤹ #T35 ���ӥ᥹
+-+���Ӥ顼 #T35 ���ӥ顼
+-+���դȤפ餹��� #CN ���եȥץ饹���
+-+���� #KS ROM
+-+���� #R5 �ңϣ�
+-+���� #T35 R@M
+-+���� #T35 ROM
+-+���� #T35 �ңϣ�
+-+���� #T35 ����
+-+���ꤳ�� #T35 ���ꥳ��
+-+����ڤ� #T35 ����ڥ�
+-+���� #CJ (lol
+-+���� #KK ����
+-+���� #JN ����
+-+���� #T35 ����
+-+���� #T35 ������
+-+���ʡ� #JN ���ʡ�
+-+�襤�Ǥ���󤸤夦 #JN �磻�ơ�������
+-+�襤�ӡ��ӡ��ۤ����ߤ� #T35 �٣£�����̱
+-+�狼���� #T35 �狼����
+-+�狼�ΤϤ� #T35 WAKANOHANA
+-+�狼�� #T35 �狼��
+-+�櫓�狼��� #JN �辰�參���
+-+�蘆�� #T35 �掠��
+-+�露�� #CN �±�
+-+�露�� #KK �±�
+-+�露�� #T35 �±�
+-+�碌������ #JN ����ı�
+-+�錄�ʤ� #T35 ����
+-+�錄�ʤ٤�ʡ� #JN �勵�ʥ٥�ʡ�
+-+�錄�ʤ٤�ʡ� #JN �勵�ʥ٥�ʡ�
+-+��� #T35 �
+-+��ʡ� #JN ��ʡ�
+-+��� #CJ  (��
+-+��� #CJ (w
+-+��� #CJ (��
+-+��� #CJ (���
+-+��� #CJ (��
+-+��� #CJ (�܎�
+-+��� #CJ w
+-+��� #CJ ���
+-+��� #CJ ���
+-+��� #CJ ��
+-+���1 #JN ���1
+-+���1 #JN �܎�1
+-+��餣 #CJ ��饣
+-+��餿 #CJ ��饿
+-+��餿 #CJ �܎׎�
+-+���� #T35 ����
+-+���碌��� #CJ ���糧���
+-+���碌��� #CJ �܎׎܎��َ�
+-+��ꤪ #T35 ��ꥪ
+-+���� #R5 ����
+-+��줶�� #T35 ��쥶��
+-+��줶���夦�ܤ� #T35 ��쥶��˼
+-+��줺 #T35 ��쥺
+-+����� #KK �����
+-+����� #T35 �����
+-+����� #T35 ���ʪ
+-+����� #CJ �����
+-+������ #T35 WONDER
+-+�򤫤����ह����� #CJ ��񤭹��ॹ����衪��
+-+�򤫤����ह����� #JN �ʡ��ϡ���
+-+�� #JN ��
+-+�� #T35 ��
+-+�򤿤��ˤʤޤ�ޤ� #JN ����42700
+-+�򤿤����� #T35 ��á��
+-+�򤿤������� #T35 ��á����
+-+�򤿤����ä� #T30 �򥿥����å�
+-+�򤿤����ä����ˤ򤿤ؤ� #JN �򥿥����å��ʥ��˥��ԡ�
+-+�򤿤顼 #JN �򥿥顼
+-+�򤿤顼 #JN �����׎�
+-+��� #T30 ���
+-+������� #CN �����
+-+������� #T35 �����
+-+��ä� #T30 ��å�
+-+��ä����� #CN ��å���
+-+��ä����� #T35 ��å���
+-+��� #T35 ���
+-+�� #JN �������
+-+�󤬤� #CJ �󤬤�
+-+�󤸤� #CJ �󤸤㡪
+-+����� #JN �����
+-+������ #CJ ������
+-+��� #JN ��ǡ�
+-+��ʤ������ʤ� #CJ ��ʤ������ʤ�
+-+��ʤ櫓�͡��� #JN ��ʤ櫓�͡���
+-+��� #JN (`��.��)����!
+-+��� #JN ��ޡ�
+diff --git a/meta-oe/recipes-support/anthy/anthy/native-helpers.patch b/meta-oe/recipes-support/anthy/anthy/native-helpers.patch
+deleted file mode 100644
+index 0b2df01aba..0000000000
+--- a/meta-oe/recipes-support/anthy/anthy/native-helpers.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-Upstream-Status: Pending
+-
+-upstream: not applicable
+-author: pH5
+-comment: Stage the native anthy helpers mkfiledic, mkdepgraph, mkworddic,
+-comment: calctrans and proccorpus.
+-
+-Index: anthy-9100h/mkanthydic/Makefile.am
+-===================================================================
+---- anthy-9100h.orig/mkanthydic/Makefile.am
+-+++ anthy-9100h/mkanthydic/Makefile.am
+-@@ -3,7 +3,7 @@ noinst_SCRIPTS =
+- CLEANFILES = anthy.dic
+- INCLUDES = -I$(top_srcdir)/ -DSRCDIR=\"$(srcdir)\"
+-
+--noinst_PROGRAMS = mkfiledic
+-+bin_PROGRAMS = mkfiledic
+- mkfiledic_SOURCES = mkfiledic.c
+- mkfiledic_LDADD = ../src-diclib/libdiclib.la
+-
+-Index: anthy-9100h/depgraph/Makefile.am
+-===================================================================
+---- anthy-9100h.orig/depgraph/Makefile.am
+-+++ anthy-9100h/depgraph/Makefile.am
+-@@ -9,7 +9,7 @@ CLEANFILES = anthy.dep
+- EXTRA_DIST = indepword.txt $(DEPWORDS)
+-
+- # Generate the dictionary
+--noinst_PROGRAMS = mkdepgraph
+-+bin_PROGRAMS = mkdepgraph
+- mkdepgraph_SOURCES = mkdepgraph.c
+- mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
+-
+-Index: anthy-9100h/mkworddic/Makefile.am
+-===================================================================
+---- anthy-9100h.orig/mkworddic/Makefile.am
+-+++ anthy-9100h/mkworddic/Makefile.am
+-@@ -26,7 +26,8 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gc
+- 	    @top_srcdir@/mkworddic/udict
+-
+- # Generate the dictionary
+--noinst_PROGRAMS = mkworddic
+-+#noinst_PROGRAMS = mkworddic
+-+bin_PROGRAMS = mkworddic
+- mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
+- mkworddic_LDADD = ../src-worddic/libanthydic.la
+-
+-Index: anthy-9100h/calctrans/Makefile.am
+-===================================================================
+---- anthy-9100h.orig/calctrans/Makefile.am
+-+++ anthy-9100h/calctrans/Makefile.am
+-@@ -3,7 +3,7 @@ EXTRA_DIST =\
+-  corpus.3.txt corpus.4.txt corpus.5.txt\
+-  corpus_info weak_words
+-
+--noinst_PROGRAMS = calctrans proccorpus
+-+bin_PROGRAMS = calctrans proccorpus
+- INCLUDES = -I$(top_srcdir)/
+-
+- calctrans_SOURCES = calctrans.c input_set.c input_set.h corpus.c
+diff --git a/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch b/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
+deleted file mode 100644
+index bedb5e0498..0000000000
+--- a/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
++++ /dev/null
+@@ -1,19 +0,0 @@
+-Upstream-Status: Pending
+-
+-upstream: not applicable
+-source: stolen from debian
+-
+-Index: anthy-9100h/src-util/Makefile.am
+-===================================================================
+---- anthy-9100h.orig/src-util/Makefile.am
+-+++ anthy-9100h/src-util/Makefile.am
+-@@ -8,7 +8,8 @@ ELISP_FILES = anthy.el anthy-dic.el anth
+-  anthy-isearch.el anthy-azik.el anthy-kyuri.el
+- EXTRA_DIST = $(ELISP_FILES) typetab dic-tool-usage.txt anthy.i
+- bin_PROGRAMS = anthy-dic-tool anthy-agent anthy-morphological-analyzer
+--ELCFILES = anthy.elc anthy-dic.elc anthy-azik.elc anthy-conf.elc anthy-isearch.elc anthy-kyuri.elc leim-list.elc
+-+#ELCFILES = anthy.elc anthy-dic.elc anthy-azik.elc anthy-conf.elc anthy-isearch.elc anthy-kyuri.elc leim-list.elc
+-+ELCFILES =
+- if ELISP
+- lisp_LISP = $(ELISP_FILES)
+- endif
+diff --git a/meta-oe/recipes-support/anthy/anthy_9100h.bb b/meta-oe/recipes-support/anthy/anthy_9100h.bb
+deleted file mode 100644
+index 47edc4ae86..0000000000
+--- a/meta-oe/recipes-support/anthy/anthy_9100h.bb
++++ /dev/null
+@@ -1,48 +0,0 @@
+-DESCRIPTION = "Anthy is a system for Japanese input method. It converts Hiragana text to Kana Kanji mixed text."
+-HOMEPAGE = "http://anthy.sourceforge.jp"
+-
+-LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=11f384074d8e93e263b5664ef08a411a \
+-    file://alt-cannadic/COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b \
+-"
+-
+-SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/anthy/9100h-23ubuntu2/anthy_9100h.orig.tar.gz \
+-    file://not_build_elc.patch \
+-    file://2ch_t.patch \
+-"
+-
+-SRC_URI:append:class-target = " file://target-helpers.patch"
+-SRC_URI:append:class-native = " file://native-helpers.patch"
+-
+-SRC_URI[sha256sum] = "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2275547"
+-
+-UPSTREAM_CHECK_URI = "https://osdn.net/projects/anthy/releases/"
+-UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>(\d+)+(\w*))"
+-
+-DEPENDS:class-target = "anthy-native"
+-RDEPENDS:${PN}:class-target = "libanthy0"
+-
+-inherit autotools pkgconfig
+-
+-PACKAGES += "${PN}-el libanthy0 libanthy-dev"
+-
+-FILES:${PN}-dbg += "${libdir}/.debug"
+-FILES:libanthy0 = "${libdir}/libanthy.so.*  \
+-    ${libdir}/libanthydic.so.* \
+-    ${libdir}/libanthyinput.so.* \
+-"
+-
+-FILES:libanthy-dev = "${libdir}/libanthy*.la \
+-    ${libdir}/libanthy*.a \
+-    ${libdir}/libanthy*.so \
+-    ${includedir}/anthy \
+-    ${libdir}/pkgconfig/anthy.pc \
+-"
+-
+-FILES:${PN}-el = "${datadir}/emacs/*"
+-FILES:${PN} = "${datadir}/* \
+-    ${bindir}/* \
+-    ${sysconfdir}/anthy-conf \
+-"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/uim/uim_1.9.6.bb b/meta-oe/recipes-support/uim/uim_1.9.6.bb
+index 8629bee4e8..3e494e3338 100644
+--- a/meta-oe/recipes-support/uim/uim_1.9.6.bb
++++ b/meta-oe/recipes-support/uim/uim_1.9.6.bb
+@@ -13,12 +13,12 @@ SRC_URI[sha256sum] = "67f0e5fa4292a533edc6f98b842df60c531a89cf82d0336a4e1ab72202
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
+-DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit autoconf-archive-native"
++DEPENDS = "anthy-unicode fontconfig libxft libxt glib-2.0 ncurses intltool libedit autoconf-archive-native"
+ DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native"
+
+ RDEPENDS:uim = "libuim0 libedit"
+-RDEPENDS:uim-anthy = "anthy libanthy0"
+-RDEPENDS:uim-anthy:append:libc-glibc = " glibc-utils glibc-gconv-euc-jp"
++RDEPENDS:uim-anthy-utf8 = "libanthy-unicode0"
++RDEPENDS:uim-anthy-utf8:append:libc-glibc = " glibc-utils glibc-gconv-euc-jp"
+
+ LEAD_SONAME = "libuim.so.1"
+
+@@ -33,6 +33,8 @@ GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
+
+ EXTRA_OECONF += "--disable-emacs \
+     --with-libedit=${STAGING_EXECPREFIXDIR} \
++    --without-anthy \
++    --with-anthy-utf8 \
+     --without-scim \
+     --without-m17nlib \
+     --without-prime \
+@@ -65,7 +67,7 @@ do_install:append() {
+     rm -rf ${D}${datadir}/applications
+ }
+
+-PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy uim-common libuim0 libuim-dev"
++PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy-utf8 uim-common libuim0 libuim-dev"
+
+ FILES:${PN} = "${bindir}/uim-help \
+     ${libdir}/uim/plugin/libuim-* \
+@@ -87,8 +89,8 @@ FILES:libuim-dev = "${libdir}/libuim*.a \
+     ${includedir}/uim \
+     ${libdir}/pkgconfig/uim.pc \
+ "
+-FILES:uim-anthy = "${libdir}/uim/plugin/libuim-anthy.* \
+-    ${datadir}/uim/anthy*.scm \
++FILES:uim-anthy-utf8 = "${libdir}/uim/plugin/libuim-anthy-utf8.* \
++    ${datadir}/uim/anthy-utf8*.scm \
+ "
+ FILES:${PN}-dbg += "${libdir}/*/*/*/.debug ${libdir}/*/*/.debug"
+ FILES:${PN}-dev += "${libdir}/uim/plugin/*.la"
+@@ -126,19 +128,19 @@ FILES:uim-skk = "${libdir}/uim/plugin/libuim-skk.* \
+ "
+
+ PACKAGE_WRITE_DEPS += "qemu-native"
+-pkg_postinst:uim-anthy() {
++pkg_postinst:uim-anthy-utf8() {
+     if test -n "$D"; then
+-        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register anthy --path $D${datadir}/uim
++        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register anthy-utf8 --path $D${datadir}/uim
+     else
+-		uim-module-manager --register anthy --path ${datadir}/uim
++		uim-module-manager --register anthy-utf8 --path ${datadir}/uim
+     fi
+ }
+
+-pkg_prerm:uim-anthy() {
++pkg_prerm:uim-anthy-utf8() {
+     if test -n "$D"; then
+-        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister anthy
++        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister anthy-utf8
+     else
+-		uim-module-manager --path ${datadir}/uim --unregister anthy
++		uim-module-manager --path ${datadir}/uim --unregister anthy-utf8
+     fi
+ }
+
 
