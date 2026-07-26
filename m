@@ -1,350 +1,484 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 117A3C531D0
-	for <webhook@archiver.kernel.org>; Sun, 26 Jul 2026 03:13:46 +0000 (UTC)
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com [209.85.222.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4838.1785035622720926215
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7DDEC531C9
+	for <webhook@archiver.kernel.org>; Sun, 26 Jul 2026 13:36:28 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10554.1785072980597799470
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2026 20:13:42 -0700
+ Sun, 26 Jul 2026 06:36:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nlIdTpCn;
- spf=pass (domain: gmail.com, ip: 209.85.222.49, mailfrom: festevam@gmail.com)
-Received: by mail-ua1-f49.google.com with SMTP id a1e0cc1a2514c-971a7a7061bso871226241.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2026 20:13:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785035621; x=1785640421; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pLeC5+CDN+uSNRdIh+rjM6g1myWzhlPik3e4ciLwvYY=;
-        b=nlIdTpCnySxXO4che5+sX8jed9x3lPM7aMsw4/5gOnLmO669FKyxhH1OMjZHs8wIiw
-         kkGDL9urAKTmPHRcxl2lzeIIstMo90OxAQdR6jrgwem5/O7Zk6tAOUe73mNuKq29D/2v
-         vfWYEB4RBSmJTKaLhjhGY5V671bXb1ZeY4IaOhD7K8FmY2A97oqFaUj8aDO8YJv0BbXu
-         31Ldn2o7kQWHYqlhgZm+mpNl6+VYtUdmrXo5QzAgWA7zXnPwHvFIQyo8Cj3GqA0npXYc
-         PVd2J9u2MN1YjbnTjjUOpbqGhoqM9j7Kdom9j+BvHI3g3eQ2l3VzmLvF1fxmGJYtKy8S
-         O5+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785035621; x=1785640421;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pLeC5+CDN+uSNRdIh+rjM6g1myWzhlPik3e4ciLwvYY=;
-        b=cgB/T94o1SZMLP3ho21dUHEOfW5fG4HxVvBfTvlG54EgXJ6180eTH0LiDQ7JYCtGVD
-         zgS1blYnHhjPBL1TKKlaPlMN9sAA42SC5SqZCaT28tM7rzDiqcyykEIsoch5DjgSBWjO
-         aIrtwCc08xyH70TYVFOTKpFJ68ghC0zEUtLH0XOBDwicyL/PRVESbCNBE9eiX6C/SEVB
-         mvcxfOpTcaXcZyFtUbCCbTvAQoPDCYOPVu8r1aHigtBuKCzKs1V/FnrdnE+wl7mZF+B/
-         FOSiBlGqGXK3p4WR43jThQpknokCxm/fdd7rQWyhxEIg8wXDjmW77gkFuDEBeSpm6VQt
-         5lVQ==
-X-Gm-Message-State: AOJu0YzKae2MJu5wimu4Rwf35lZWihOiRqL2lZ1h7hA+fxiWrLVQC10a
-	eW0iYelK63YfMiXTzn/WklOAMMHC8r4OtKLBGQ1xRI2KPKACA3gAGOinVBgdsg==
-X-Gm-Gg: AR+sD10vrKqq8xLxCKu4UzCj8ZjwmRkKVdA8IZS7J+AwjLC95FKDswyKs95icTK6JbI
-	tEPAY9QsQ9X58OIzDbVshDYxRbZJ1DgLtVrNr2RGQ4VqrfJNnaTl5x9z/jSQjarPesHfSBOuHjJ
-	z2ZFgTIC9J/z0naGpt7F2ng/jWTPoEhIAy+EsbHRJAWszLIozvLhDY6eKkeMB3JK+B8D7w7PWzl
-	NNSJvamK4VYBfEZ2MqWFTe2lwYTPT8C6dv6UBnSe4Fxs+V3ErZ/TuDmpIvQt/77woPMzuiX4ZYM
-	GlY+IqQxNpdrFcwL4D5lxixqm+Gg2j4Smrt0jy4xj/Ew6XsBPSqLAWyGptp8R10VqEPric2fBKN
-	/DT3GKksd8bSzNnBLBc6LiGxs85I9gspIaDzHJbKaPdhHS2ZsuLRSImTMPwdncLM4zXcqRp+RLl
-	3nIynfQePfZ0xePo3TqeldspijUmmNyb1m5dA/CmlELYodf7zesg==
-X-Received: by 2002:a05:6102:4194:b0:631:2973:5c2c with SMTP id ada2fe7eead31-75040abd835mr2565453137.21.1785035621471;
-        Sat, 25 Jul 2026 20:13:41 -0700 (PDT)
-Received: from fabio-X870-EAGLE-WIFI7.. ([2804:1b3:a801:60b4:7dd:bf94:624c:9fa8])
-        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-750362ea9aesm2787967137.9.2026.07.25.20.13.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jul 2026 20:13:40 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=VfE5ThSQ;
+ spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd94.aul.t-online.de (fwd94.aul.t-online.de [10.223.144.120])
+	by mailout10.t-online.de (Postfix) with SMTP id 49BD837E6A
+	for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2026 15:36:17 +0200 (CEST)
+Received: from fedora.fritz.box ([79.219.238.251]) by fwd94.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1wnz1b-0WuuzR0; Sun, 26 Jul 2026 15:36:15 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] imx-cst: upgrade 3.4.1 -> 4.0.1
-Date: Sun, 26 Jul 2026 00:13:33 -0300
-Message-ID: <20260726031333.1318399-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCHv2] malcontent: update 1.13.1 -> 1.14.0
+Date: Sun, 26 Jul 2026 15:36:11 +0200
+Message-ID: <20260726133611.144195-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1785072975-0AFFB4F8-47945B5E/0/0 CLEAN NORMAL
+X-TOI-MSGID: ae68e198-2ff3-4970-847c-256d152139b9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1785072977; i=f_l_k@t-online.de;
+	bh=juPvVdnaOOsjbCMln+/7NQRZGQEJgQGdZOxg46JXplI=;
+	h=From:To:Subject:Date;
+	b=VfE5ThSQ8LddK1pA3q0mkl+3jz1JgLC+Iho29A1KAl4UP1cGNMpd8Rl4oHFFctF16
+	 PAQE4d7rVlHVSZfk/2ZBrszgMRDpZ+CncgIUOQeC+RESQS/3dMu30g5eg6ZyDp0a8w
+	 jojfhDCSzcGP9ZfJBeTg7+duiRomo2V2XxQnor6kemWigTKzS/GY9/tOoIJkQ4nIm/
+	 u5mmwE4vUflcSj0+e9oaYca9dAZenTyQaqCKPuAU6A3p0lENne250bSfkyl+uUjX86
+	 JdPhyVD4Gf/qTvuNlDbhVoJCBEzyFxl80gik8n7sY/6kiRhxc778vojptMVkaXHFKJ
+	 J811GV4CgHzLQ==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2026 03:13:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128450
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2026 13:36:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128451
 
-CST 4.0.1 replaces the custom Makefile build with CMake. Inherit the
-cmake class, use the source src directory, and switch the parser
-dependency from byacc to bison. Add json-c and point CMake at its staged
-headers.
+- add missing dependencies
+- fetch missing subprojects
+- LIC_FILES_CHKSUM has changed but LICENSE is still LGPL-2.1
+- The malcontent-timer-ext-agent, malcontent-timerd, and malcontent-webd =
+services
+  are configured to run under their own user accounts. Create the users s=
+o that
+  the services can run.
 
-Disable installation of internal CST static libraries. Suppress line
-directives from flex and bison generated sources to avoid embedding build
-paths in the output.
+Overview of changes in malcontent 0.14.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Refresh source and license checksums and account for json-c's MIT
-license. Drop the obsolete Makefile race fix.
+* Bugs fixed:
+  - #89 After reworking user selector and navigation, removing currently =
+viewed
+    users isn't handled (Philip Withnall)
+  - #101 Integrate NSS web filtering module in flatpak (Philip Withnall)
+  - #122 Allow viewing screen time usage when using malcontent-control as=
+ a
+    child user (Philip Withnall)
+  - #129 Hide level bar if there=E2=80=99s no data available yet
+  - #133 EstimatedTimesChanged signal is not emitted after a screen time
+    extension request is granted (Philip Withnall)
+  - !292 docs: Add diagram and some more notes to screen time design docu=
+ment
+  - !293 malcontent-client: Improve some error messages for invalid comma=
+nd
+    lines
+  - !294 build: Post-release version bump
+  - !295 po: Fix a few localisation problems
+  - !296 Update Chinese translation
+  - !297 docs: Add a diagram of web filtering IPC
+  - !298 Update Czech translation
+  - !299 updated ru.po
+  - !300 Replace sl.po with translation update
+  - !305 Update Czech translation
+  - !306 Update Chinese translation
+  - !307 Update Georgian translation
+  - !309 Update Slovenian (sl) translation
+  - !311 build: Use system libcdb library if available
+  - !312 malcontent-webd-update/tests: Only install webd template if test=
+s are
+    installed
+  - !314 nss/tests/nss-objdump: Also allow linker library
+  - !315 Update Swedish translation
+  - !316 build/ci: Minor cleanups related to docs
+  - !317 Update Kazakh translation
 
-Import Debian's check_return_values.patch from its packaging repository:
+* Translation updates:
+  - Chinese (China) (lumingzh)
+  - Czech (AsciiWolf)
+  - Georgian (NorwayFun)
+  - Kazakh (Baurzhan Muftakhidinov)
+  - Russian (Ser82-png)
+  - Slovenian (filmsi)
+  - Swedish (Anders Jonsson)
 
-https://salsa.debian.org/collabora-team/imx-code-signing-tool
+Overview of changes in malcontent 0.14.alpha
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-It handles fgets() failures required by the warning-as-error build.
+* This is an unstable development release previewing some new features; a=
+ lot of
+  things have changed around, so it=E2=80=99s expected that there may be =
+some packaging
+  issues; please file an issue on
+  https://gitlab.freedesktop.org/pwithnall/malcontent/-/issues if so
 
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
+* Add developer API documentation
+
+* Refresh UI
+
+* Add support for screen time limits
+
+* Add backend for web filtering
+
+* Bugs fixed:
+  - #2 Build developer documentation (Philip Withnall)
+  - #73 Updated sl.po translationn
+  - #74 Add family API (Philip Withnall)
+  - #75 Ensure MctSessionLimits can do daily time limit and bedtime sched=
+ule
+    (Philip Withnall)
+  - #76 Add org.freedesktop.MalcontentTimer1.Parent API for querying chil=
+d
+    computer usage (Philip Withnall)
+  - #80 Refresh UI for unlock page
+  - #81 Rework user selector
+  - #83 Add screen time subpage with basic screen limits options
+  - #84 Add screen time chart
+  - #88 Implement NSS web filtering module and filter list daemon (Philip
+    Withnall)
+  - #91 Port documentation comments to gi-docgen format
+  - #95 Build sysext image in CI for integration testing with gnome-shell
+    (Philip Withnall)
+  - #96 Selecting username from commandline fails (Ignacy Kuchci=C5=84ski=
+)
+  - #97 Add org.freedesktop.MalcontentTimer1.Child API for extending a ch=
+ild=E2=80=99s
+    session time (Philip Withnall)
+  - #98 After adding screen time subpage, the previous value of bedtime/s=
+creen
+    limit are not preserved (Philip Withnall)
+  - #100 Bump the app copyright date (Philip Withnall)
+  - #102 Add tests for filter list parsing code in malcontent-webd (Phili=
+p
+    Withnall)
+  - #107 Follow-up from "Add screen time chart"
+  - #109 Set a default daily screen time limit value
+  - #110 Show logged-in child accounts in the parental controls applicati=
+on
+  - #111 Screen time summary level bar overflows
+  - #112 Fix assertion when closing the application (Philip Withnall)
+  - #113 Investigate gtklevelbar breaking
+  - #115 Improve documentation of the malcontent-client record-usage comm=
+and
+    (Philip Withnall)
+  - #117 Emit EstimatedTimesChanged signal from malcontent-timerd if sess=
+ion
+    limits settings change (Philip Withnall)
+  - #118 Malcontent-timerd daemon error on GNOME OS child account login (=
+Philip
+    Withnall)
+  - #119 Fix duration picker breaking in 12-hour clock mode
+  - #120 Update Turkish translation
+  - !189 build: Post-release version bump
+  - !190 Bulgarian translation by kraftwerk
+  - !191 malcontent-control: Port about dialog to AdwAboutDialog
+  - !192 ci: Add various linting tests for shell and Python
+  - !193 malcontent-client: Add support for setting a session limit polic=
+y
+  - !194 Improve REUSE license/copyright tagging somewhat
+  - !195 Update Georgian translation
+  - !196 malcontent-timerd: Add initial implementation of timer daemon
+  - !197 po: Add new malcontent-timerd files to POTFILES.in
+  - !198 updated ru.po
+  - !200 ui: Fix wrong a11y role in button
+  - !202 nss: Add a new libnss_malcontent.so.2 NSS module for web filteri=
+ng
+  - !204 libmalcontent: Add web filtering settings storage and API
+  - !205 malcontent-client: Add {get,set}-web-filter commands
+  - !210 Add icons to libmalcontent-ui gresources
+  - !211 docs: Add Code of Conduct
+  - !213 Add missing mct_session_limits_equal() and mct_web_filter_equal(=
+)
+    functions
+  - !214 manager: Rework change notification from AccountsService and sup=
+port
+    notification for session limits and web filters
+  - !215 Various minor type and terminology fixes
+  - !216 user-selector: Factor out getuid() calls into a :current-user pr=
+operty
+  - !217 Fix icons in dark theme
+  - !218 tools: Add a sysext build tool
+  - !219 malcontent-control: Add D-Bus service file
+  - !220 malcontent-control: Change component type to "desktop-applicatio=
+n"
+  - !221 accounts-service: Make extension symlinks relative
+  - !222 Handle external changes to users and settings
+  - !224 Fix waiting asynchronously for user manager
+  - !225 malcontent-webd: Add initial implementation of web filtering dae=
+mon
+  - !226 Adjust malcontent-timer for shell integration
+  - !227 po: Add missing files to POTFILES.in
+  - !228 Replace sl.po; this is the updated translation (100%).
+  - !229 nss: Add unit tests for NSS module
+  - !230 Update of sl.po
+  - !231 malcontent-timer: Remove an invalid attribute from a D-Bus XML f=
+ile
+  - !232 tests: Add test for the sandboxing of malcontent-webd.service an=
+d
+    malcontent-timerd.service
+  - !233 Update Czech translation
+  - !235 Malcontent client improvements
+  - !236 Update Polish translation 250828
+  - #83 Add screen time subpage with basic screen limits options
+  - #84 Add screen time chart
+  - #88 Implement NSS web filtering module and filter list daemon (Philip
+    Withnall)
+  - #91 Port documentation comments to gi-docgen format
+  - #95 Build sysext image in CI for integration testing with gnome-shell
+    (Philip Withnall)
+  - #96 Selecting username from commandline fails (Ignacy Kuchci=C5=84ski=
+)
+  - #97 Add org.freedesktop.MalcontentTimer1.Child API for extending a ch=
+ild=E2=80=99s
+    session time (Philip Withnall)
+  - #98 After adding screen time subpage, the previous value of bedtime/s=
+creen
+    limit are not preserved (Philip Withnall)
+  - #100 Bump the app copyright date (Philip Withnall)
+  - #102 Add tests for filter list parsing code in malcontent-webd (Phili=
+p
+    Withnall)
+  - #107 Follow-up from "Add screen time chart"
+  - #109 Set a default daily screen time limit value
+  - #110 Show logged-in child accounts in the parental controls applicati=
+on
+  - #111 Screen time summary level bar overflows
+  - #112 Fix assertion when closing the application (Philip Withnall)
+  - #113 Investigate gtklevelbar breaking
+  - #115 Improve documentation of the malcontent-client record-usage comm=
+and
+    (Philip Withnall)
+  - #117 Emit EstimatedTimesChanged signal from malcontent-timerd if sess=
+ion
+    limits settings change (Philip Withnall)
+  - #118 Malcontent-timerd daemon error on GNOME OS child account login (=
+Philip
+    Withnall)
+  - #119 Fix duration picker breaking in 12-hour clock mode
+  - #120 Update Turkish translation
+  - !189 build: Post-release version bump
+  - !190 Bulgarian translation by kraftwerk
+  - !191 malcontent-control: Port about dialog to AdwAboutDialog
+  - !192 ci: Add various linting tests for shell and Python
+  - !193 malcontent-client: Add support for setting a session limit polic=
+y
+  - !194 Improve REUSE license/copyright tagging somewhat
+  - !195 Update Georgian translation
+  - !196 malcontent-timerd: Add initial implementation of timer daemon
+  - !197 po: Add new malcontent-timerd files to POTFILES.in
+  - !198 updated ru.po
+  - !200 ui: Fix wrong a11y role in button
+  - !202 nss: Add a new libnss_malcontent.so.2 NSS module for web filteri=
+ng
+  - !204 libmalcontent: Add web filtering settings storage and API
+  - !205 malcontent-client: Add {get,set}-web-filter commands
+  - !210 Add icons to libmalcontent-ui gresources
+  - !211 docs: Add Code of Conduct
+  - !213 Add missing mct_session_limits_equal() and mct_web_filter_equal(=
+)
+    functions
+  - !214 manager: Rework change notification from AccountsService and sup=
+port
+    notification for session limits and web filters
+  - !215 Various minor type and terminology fixes
+  - !216 user-selector: Factor out getuid() calls into a :current-user pr=
+operty
+  - !217 Fix icons in dark theme
+  - !218 tools: Add a sysext build tool
+  - !219 malcontent-control: Add D-Bus service file
+  - !220 malcontent-control: Change component type to "desktop-applicatio=
+n"
+  - !221 accounts-service: Make extension symlinks relative
+  - !222 Handle external changes to users and settings
+  - !224 Fix waiting asynchronously for user manager
+  - !225 malcontent-webd: Add initial implementation of web filtering dae=
+mon
+  - !226 Adjust malcontent-timer for shell integration
+  - !227 po: Add missing files to POTFILES.in
+  - !228 Replace sl.po; this is the updated translation (100%).
+  - !229 nss: Add unit tests for NSS module
+  - !230 Update of sl.po
+  - !231 malcontent-timer: Remove an invalid attribute from a D-Bus XML f=
+ile
+  - !232 tests: Add test for the sandboxing of malcontent-webd.service an=
+d
+    malcontent-timerd.service
+  - !233 Update Czech translation
+  - !235 Malcontent client improvements
+  - !236 Update Polish translation 250828
+  - !237 docs: Add web filtering design document
+  - !238 docs: Add a document about system integration (packaging)
+  - !240 Update Czech translation
+  - !241 malcontent-client: Fix --help output for set-web-filter subcomma=
+nd
+  - !242 Calculate next session times in malcontent-timer
+  - !243 Update Czech translation
+  - !245 po: Add false positves to POTFILES.skip
+  - !246 Update Polish translation 250907
+  - !247 manager: Handle UnknownInterface error from AccountsService
+  - !249 Minor malcontent-webd fixes
+  - !251 docs: Mention the update-error file in malcontent-webd.8
+  - !252 libmalcontent-ui: Update documentation to use gi-docgen
+  - !254 docs: Add some reference links to screen time design document
+  - !255 Update Chinese translation
+  - !256 Update Slovenian translation
+  - !257 libmalcontent-timer: Retry queries if the timer store is busy
+  - !258 time-page: Prevent calling unref on a NULL pointer
+  - !259 malcontent-webd-update: Disable timeout when updating filters
+  - !260 malcontent-webd: Relax UMask in service file
+  - !261 Update Czech translation
+  - !262 po: Add missing file to POTFILES.in
+  - !263 Update Chinese translation
+  - !264 build: Use exposed interfaces directory
+  - !265 libmalcontent-ui: Add missing gir include path
+  - !266 Minor fixes for malcontent-control
+  - !268 Replace sl.po with translation update.
+  - !269 Russian translation updated
+  - !270 Update Czech translation
+  - !271 Update Chinese translation
+  - !272 Updated RU against most recent pot
+  - !273 Statically link libgsystemservice
+  - !274 Various minor fixes and build system tests
+  - !277 l10n: Replace sl.po (Slovenian)
+  - !279 Update Swedish translation
+  - !282 tests: Add unit tests for `MctExtensionAgentObject`
+  - !286 libmalcontent: Port remaining doc comments to gi-docgen format
+  - !289 malcontent-control: Fix a crash when quitting just after making =
+changes
+  - !291 po: Update Bulgarian translation
+
+* Translation updates:
+  - Bulgarian (twlvnn, twlvnn kraftwerk)
+  - Chinese (China) (lumingzh)
+  - Czech (AsciiWolf)
+  - Georgian (NorwayFun)
+  - Polish (Piotr Dr=C4=85g)
+  - Russian (Julia Dronova, Ser82-png)
+  - Slovenian (filmsi, Martin Srebotnjak)
+  - Swedish (Anders Jonsson)
+  - Turkish (Sabri =C3=9Cnal)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-check-return-value-of-fgets.patch    | 101 ++++++++++++++++++
- ...fix-missing-makefile-rule-dependency.patch |  45 --------
- .../recipes-support/imx-cst/imx-cst_3.4.1.bb  |  42 --------
- .../recipes-support/imx-cst/imx-cst_4.0.1.bb  |  36 +++++++
- 4 files changed, 137 insertions(+), 87 deletions(-)
- create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst/0001-check-return-value-of-fgets.patch
- delete mode 100644 meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
- delete mode 100644 meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
- create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
+ .../recipes-gnome/malcontent/malcontent-ui.bb |  4 ++--
+ .../recipes-gnome/malcontent/malcontent.bb    | 21 ++++++++++++-------
+ .../recipes-gnome/malcontent/malcontent.inc   | 21 ++++++++++++++++---
+ 3 files changed, 33 insertions(+), 13 deletions(-)
 
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst/0001-check-return-value-of-fgets.patch b/meta-oe/recipes-support/imx-cst/imx-cst/0001-check-return-value-of-fgets.patch
-new file mode 100644
-index 000000000000..be3165f3d982
---- /dev/null
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst/0001-check-return-value-of-fgets.patch
-@@ -0,0 +1,101 @@
-+From 8a0717cc07e78d1133cc10e62220770734181bee Mon Sep 17 00:00:00 2001
-+From: Tobias Deiminger <tobias.deiminger@linutronix.de>
-+Date: Fri, 30 Jan 2026 01:55:36 +0100
-+Subject: [PATCH] Check return value of fgets
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb b/meta-oe/=
+recipes-gnome/malcontent/malcontent-ui.bb
+index 8630822939..d0a975a457 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
++++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
+@@ -1,7 +1,5 @@
+ SUMMARY =3D "User-Interface for malcontent."
+ HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
+-LICENSE =3D "LGPL-2.1-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+=20
+ require malcontent.inc
+=20
+@@ -20,6 +18,8 @@ DEPENDS +=3D " \
+ 	flatpak \
+ 	libadwaita \
+ 	gtk4 \
++	gi-docgen-native \
++	gnome-desktop \
+ "
+=20
+ GIR_MESON_OPTION =3D ""
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.bb b/meta-oe/rec=
+ipes-gnome/malcontent/malcontent.bb
+index 9da95329a8..7bebdf35bd 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent.bb
++++ b/meta-oe/recipes-gnome/malcontent/malcontent.bb
+@@ -1,7 +1,5 @@
+ SUMMARY =3D "malcontent implements support for restricting the type of c=
+ontent."
+ HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
+-LICENSE =3D "LGPL-2.1-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+=20
+ require malcontent.inc
+=20
+@@ -13,11 +11,13 @@ DEPENDS =3D " \
+ 	itstool-native \
+ 	libpam \
+ 	polkit \
++	gi-docgen-native \
++	libsoup \
+ "
+=20
+ GIR_MESON_OPTION =3D ""
+=20
+-inherit  meson pkgconfig gobject-introspection gettext features_check
++inherit  meson pkgconfig gobject-introspection gettext features_check us=
+eradd
+=20
+ REQUIRED_DISTRO_FEATURES =3D "pam polkit gobject-introspection"
+=20
+@@ -27,9 +27,14 @@ PACKAGECONFIG[ui] =3D ",,,malcontent-ui"
+ EXTRA_OEMESON =3D "-Dui=3Ddisabled -Dpamlibdir=3D${base_libdir}/security=
+"
+=20
+ FILES:${PN} +=3D " \
+-	${base_libdir}/security/pam_malcontent.so \
+-	${datadir}/accountsservice \
+-	${datadir}/help \
+-	${datadir}/dbus-1 \
+-	${datadir}/polkit-1 \
++    ${nonarch_libdir}/sysusers.d \
++    ${systemd_system_unitdir} \
++    ${base_libdir}/security/pam_malcontent.so \
++    ${datadir}/accountsservice \
++    ${datadir}/help \
++    ${datadir}/dbus-1 \
++    ${datadir}/polkit-1 \
+ "
 +
-+The cmake project has a reasonable default setting
-+CMAKE_COMPILE_WARNING_AS_ERROR=ON in cmake/compiler_options.cmake. With this
-+setting our build will fail on unchecked return values from fgets(). This
-+patch fixes the issue by adding return value checks.
++USERADD_PACKAGES =3D "${PN}"
++USERADD_PARAM:${PN} =3D "--system --user-group -s /bin/false malcontent-=
+timer-ext-agent;malcontent-timerd;malcontent-webd"
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.inc b/meta-oe/re=
+cipes-gnome/malcontent/malcontent.inc
+index 7cb052d69c..de5da10193 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent.inc
++++ b/meta-oe/recipes-gnome/malcontent/malcontent.inc
+@@ -1,3 +1,18 @@
+-SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;branch=3Dmalcontent-0.13"
+-SRCREV =3D "090042fec5181621e2fd8cfef9fc446ed86db98b"
+-PV =3D "0.13.1"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D310c7c93cf5181c6b0cc8229a1f3c=
+6f6"
 +
-+This is not just to silence the errors. C99 defines for fgets: "If a read
-+error occurs during the operation, the array contents are indeterminate and a
-+null pointer is returned". We should actually check the return value to avoid
-+undefined behavior from processing indeterminate data.
++SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;nobranch=3D1;tag=3D${PV};name=3Dmalcontent"
++SRC_URI +=3D "git://gitlab.gnome.org/pwithnall/libgsystemservice.git;nam=
+e=3Dlibgsystemservice;subdir=3D${S}/subprojects/libgsystemservice;protoco=
+l=3Dhttps;nobranch=3D1"
++SRC_URI +=3D "git://gitlab.gnome.org/GNOME/gvdb.git;protocol=3Dhttps;sub=
+dir=3D${S}/subprojects/gvdb;name=3Dgvdb;nobranch=3D1"
++SRC_URI +=3D "https://www.corpit.ru/mjt/tinycdb/tinycdb-0.81.tar.gz;subd=
+ir=3D${S}/subprojects;name=3Dtinycdb"
++SRCREV_malcontent =3D "d28f6635359d02d1068d8b21fb5810e5074b7903"
++SRCREV_libgsystemservice =3D "f4c5764652b5f347347b459ee011e4f02b29c3a0"
++SRCREV_gvdb =3D "466fc22016cf0981424e7121557611942191992f"
++SRC_URI[tinycdb.sha256sum] =3D "469de2d445bf54880f652f4b6dc95c7cdf6f5502=
+c35524a45b2122d70d47ebc2"
++SRCREV_FORMAT =3D "malcontent"
 +
-+Let get_passcode_to_key_file return -1 on error, since it is used as callback
-+to OpenSSLs PEM_read_bio_PrivateKey_ex where documentation states "The
-+callback must return the number of characters in the passphrase or -1 if an
-+error occurred".
++PV =3D "0.14.0"
 +
-+Upstream-Status: Pending
-+---
-+ src/lib/back_end/pkey.c            |  6 +++++-
-+ src/tools/pki_tree/hab4_pki_tree.c | 25 +++++++++++++++++++++----
-+ 2 files changed, 26 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lib/back_end/pkey.c b/src/lib/back_end/pkey.c
-+index 31b5c3d..d6e9784 100644
-+--- a/src/lib/back_end/pkey.c
-++++ b/src/lib/back_end/pkey.c
-+@@ -102,8 +102,12 @@ int get_passcode_to_key_file(char *buf, int size, int rwflag, void *userdata)
-+         return 0;
-+     }
-+ 
-+-    fgets(buf, size, password_fp);
-++    buf = fgets(buf, size, password_fp);
-+     fclose(password_fp);
-++    if (buf == NULL)
-++    {
-++        return -1;
-++    }
-+     chomp(buf);
-+ 
-+     return strlen(buf);
-+diff --git a/src/tools/pki_tree/hab4_pki_tree.c b/src/tools/pki_tree/hab4_pki_tree.c
-+index 3c878e4..4ff15b2 100644
-+--- a/src/tools/pki_tree/hab4_pki_tree.c
-++++ b/src/tools/pki_tree/hab4_pki_tree.c
-+@@ -118,6 +118,7 @@ int main(int argc, char **argv)
-+     int num_srk = 0;
-+     int val_period = 0;
-+     char *pass = NULL;
-++    char *user_input = NULL;
-+     unsigned long serial = 0;
-+     char duration_str[10] = {0};
-+     char num_srk_str[10] = {0};
-+@@ -304,10 +305,18 @@ int main(int argc, char **argv)
-+         if (strcmp(existing_ca, "y") == 0)
-+         {
-+             printf("Enter CA key name: ");
-+-            fgets(ca_key, sizeof(ca_key), stdin);
-++            user_input = fgets(ca_key, sizeof(ca_key), stdin);
-++            if (user_input == NULL) {
-++                fprintf(stderr, "Error while reading user input\n");
-++                return 1;
-++            }
-+             ca_key[strcspn(ca_key, "\n")] = '\0';
-+             printf("Enter CA certificate name: ");
-+-            fgets(ca_cert, sizeof(ca_cert), stdin);
-++            user_input = fgets(ca_cert, sizeof(ca_cert), stdin);
-++            if (user_input == NULL) {
-++                fprintf(stderr, "Error while reading user input\n");
-++                return 1;
-++            }
-+             ca_cert[strcspn(ca_cert, "\n")] = '\0';
-+         }
-+         printf("\nKey type options (confirm targeted device supports desired "
-+@@ -330,10 +339,18 @@ int main(int argc, char **argv)
-+                             ARRAY_SIZE(rsa_kl_values));
-+         }
-+         printf("Enter PKI tree duration (years): ");
-+-        fgets(duration_str, sizeof(duration_str), stdin);
-++        user_input = fgets(duration_str, sizeof(duration_str), stdin);
-++        if (user_input == NULL) {
-++            fprintf(stderr, "Error while reading user input\n");
-++            return 1;
-++        }
-+         duration = atoi(duration_str);
-+         printf("How many Super Root Keys should be generated ? : ");
-+-        fgets(num_srk_str, sizeof(num_srk_str), stdin);
-++        user_input = fgets(num_srk_str, sizeof(num_srk_str), stdin);
-++        if (user_input == NULL) {
-++            fprintf(stderr, "Error while reading user input\n");
-++            return 1;
-++        }
-+         num_srk = atoi(num_srk_str);
-+         ask_until_valid(
-+             "Do you want the SRK certificates to have the CA flag set? (y/n) :",
-+-- 
-+2.47.3
-+
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch b/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
-deleted file mode 100644
-index ce7626ab31e5..000000000000
---- a/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
-+++ /dev/null
-@@ -1,45 +0,0 @@
--From 73509cb22ffab827dc3e3ccda2781683b8e8296d Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?K=C3=A9l=C3=A9fa=20San=C3=A9?= <kelefa.sane@smile.fr>
--Date: Mon, 2 Jun 2025 11:07:08 +0200
--Subject: [PATCH] fix missing makefile rule dependency
--
--During, the package build with an high CPU load we can face
--a build failed issue, caused by the header file cst_parser.h not present
--when compiling cst_lexer.c, which depend on cst_parser.h:
--| x86_64-poky-linux-gcc  ... -c cst_lexer.c -o cst_lexer.d
--| ../../code/front_end/src/cst_lexer.l:21:10: fatal error:
--|cst_parser.h: No such file or directory
--|    21 | #include "cst_parser.h"
--|       |          ^~~~~~~~~~~~~~
--| compilation terminated.
--
--The file cst_parser.h is generated during compilation
--by a makefile rule which also generate cst_parser.c
--
--To fix the issue, makefile rule needed to be update
--in order for compilation of cst_lexer.c to be done,
--always after the generation of cst_parser.h and .c
--
--Upstream-Status: Submitted [https://community.nxp.com/t5/Other-NXP-Products/Package-imx-code-signing-tool-3-4-0-dfsg-2-build-issue/m-p/2108575#M28853]
--
--Signed-off-by: Kelefa Sane <kelefa.sane@smile.fr>
-----
-- code/build/make/rules.mk | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/code/build/make/rules.mk b/code/build/make/rules.mk
--index 7720e4b..239108b 100644
----- a/code/build/make/rules.mk
--+++ b/code/build/make/rules.mk
--@@ -35,6 +35,11 @@ LFLAGS  := -t
-- 	@echo "Link $@"
-- 	$(LD) $^ $(LDFLAGS) -o $@
-- 
--+# Compilation of cst_lexer.c require cst_parser.h 
--+# (cst_lexer.c include cst_parser.h) which is generated
--+# by the same makefile genrating cst_parser.c
--+cst_lexer.o: cst_parser.c
--+
-- %.o: %.c
-- 	@echo "Compile $@"
-- 	# generate dependency file
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
-deleted file mode 100644
-index c9e73a83b437..000000000000
---- a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
-+++ /dev/null
-@@ -1,42 +0,0 @@
--SUMMARY = "i.MX code signing tool"
--DESCRIPTION = "Code signing support that integrates the HABv4 and AHAB library for i.MX processors"
--LICENSE = "Apache-2.0 AND BSD-3-Clause"
--
--LIC_FILES_CHKSUM = "\
--    file://LICENSE.bsd3;md5=14aba05f9fa6c25527297c8aac95fcf6 \
--    file://LICENSE.hidapi;md5=e0ea014f523f64f0adb13409055ee59e \
--    file://LICENSE.openssl;md5=3441526b1df5cc01d812c7dfc218cea6 \
--"
--
--DEPENDS = "byacc-native flex-native openssl"
--
--# debian: 3.4.0+dfsg-2
--DEBIAN_PGK_NAME = "imx-code-signing-tool"
--DEBIAN_PGK_VERSION = "${PV}+dfsg"
--
--SRC_URI = "\
--    ${DEBIAN_MIRROR}/main/i/${DEBIAN_PGK_NAME}/${DEBIAN_PGK_NAME}_${DEBIAN_PGK_VERSION}.orig.tar.xz \
--    file://0001-fix-missing-makefile-rule-dependency.patch \
--"
--
--SRC_URI[sha256sum] = "342c0c028658a4a859fe70578b58c3b07e17bee0c7e3a13d063d4791e82c2dee"
--
--S = "${UNPACKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
--
--EXTRA_OEMAKE = 'CC="${CC}" LD="${CC}" AR="${AR}" OBJCOPY="${OBJCOPY}"'
--
--inherit siteinfo
--
--do_compile() {
--    oe_runmake -C code/obj.linux${SITEINFO_BITS} OSTYPE=linux${SITEINFO_BITS} ENCRYPTION=yes COPTIONS="${CFLAGS} ${CPPFLAGS}" LDOPTIONS="${LDFLAGS}"
--    oe_runmake -C add-ons/hab_csf_parser COPTS="${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
--}
--
--do_install () {
--    install -d ${D}${bindir}
--    install -m 755 ${S}/code/obj.linux${SITEINFO_BITS}/cst ${D}${bindir}/
--    install -m 755 ${S}/code/obj.linux${SITEINFO_BITS}/srktool ${D}${bindir}
--    install -m 755 ${S}/add-ons/hab_csf_parser/csf_parser ${D}${bindir}
--}
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb b/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
-new file mode 100644
-index 000000000000..826943fe09c3
---- /dev/null
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "i.MX code signing tool"
-+DESCRIPTION = "Code signing support that integrates the HABv4 and AHAB library for i.MX processors"
-+LICENSE = "Apache-2.0 AND BSD-3-Clause AND MIT"
-+
-+LIC_FILES_CHKSUM = "\
-+    file://licenses/LICENSE.bsd3;md5=1ef4297097d818a9787ed775218c133f \
-+    file://licenses/LICENSE.json-c;md5=de54b60fbbc35123ba193fea8ee216f2 \
-+    file://licenses/LICENSE.openssl;md5=3441526b1df5cc01d812c7dfc218cea6 \
-+"
-+
-+DEPENDS = "bison-native flex-native json-c openssl"
-+
-+DEBIAN_PKG_NAME = "imx-code-signing-tool"
-+DEBIAN_PKG_VERSION = "${PV}+dfsg"
-+
-+SRC_URI = "\
-+    ${DEBIAN_MIRROR}/main/i/${DEBIAN_PKG_NAME}/${DEBIAN_PKG_NAME}_${DEBIAN_PKG_VERSION}.orig.tar.xz \
-+    file://0001-check-return-value-of-fgets.patch \
-+"
-+SRC_URI[sha256sum] = "fd92a1a9faa10fb81bbf752c7ee1e257f17e1ec4c2964f8a47adf8a3eaa7df41"
-+
-+S = "${UNPACKDIR}/${DEBIAN_PKG_NAME}-${DEBIAN_PKG_VERSION}"
-+
-+OECMAKE_SOURCEPATH = "${S}/src"
-+
-+# CST_INSTALL only controls installation of internal static libraries, not tools.
-+EXTRA_OECMAKE = "\
-+    -DCST_INSTALL=OFF \
-+    -DFLEX_TARGET_ARG_COMPILE_FLAGS=--noline \
-+    -DBISON_TARGET_ARG_COMPILE_FLAGS=--no-lines \
-+    -DJSONC_INCLUDE_DIR=${STAGING_INCDIR} \
-+"
-+
-+inherit cmake
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.43.0
++do_configure:prepend() {
++    cp ${S}/subprojects/packagefiles/tinycdb/meson.build ${S}/subproject=
+s/tinycdb-0.81
++}
+--=20
+2.55.0
 
 
