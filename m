@@ -2,61 +2,61 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DF5AC53219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33EBFC54F4C
 	for <webhook@archiver.kernel.org>; Tue, 28 Jul 2026 11:45:49 +0000 (UTC)
 Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9506.1785239148396268024
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9505.1785239147594835137
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2026 04:45:48 -0700
+ Tue, 28 Jul 2026 04:45:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=e/4ySD88;
+ dkim=pass header.i=@konsulko.com header.s=google header.b=C8baW8sU;
  spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4720f3bf164so555335f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 04:45:48 -0700 (PDT)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4728c12ba97so2243273f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 04:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1785239147; x=1785843947; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1785239146; x=1785843946; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7QHqPGAum1oi4157MZZU5xAe4Sib9bZo6vmms31JqZE=;
-        b=e/4ySD88BN5/6byxopp0JPrQ3wxwlsh3Lk37C5dgFCaECM1m39dRblOiTcYuF9n98F
-         xeJyeZyvcJI5EHF8Gx7TZ7MgSzW9HcKkIfaLmeHfvweo2QDXrraRw7mYVx91a8atdTh+
-         a1RZuqtuj4a9n+oxsxKDWYETHch5oWK+Ajafo=
+        bh=TxQM8bAhPX/tuODSbHRWKVcIAz5/v9rRUvWtESeF1g0=;
+        b=C8baW8sU3+IyDF1iQEAmM9uAfgDZVfhwBCYJwpqNucyt8eOIqYpaU13M4OqW95lU9d
+         mDteLCHNkSt0jyWxpwV3O5GIVQGS+EhpjAPTya+/WsyFexmETeFHVgmRSlGiwPEZvCnF
+         SmM6HfFiILhybqPE4mGbEy9Np8coFpgNuzano=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785239147; x=1785843947;
+        d=1e100.net; s=20251104; t=1785239146; x=1785843946;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7QHqPGAum1oi4157MZZU5xAe4Sib9bZo6vmms31JqZE=;
-        b=Rb9OwwsYN8LpnVgcsX9NT5UFysFR3Z36eoOJT2QmrDUKObbfvB8mlq+A5uAWzgUd45
-         4o9cgwJfVB9E606TMlI1CzEOSMWKbW8kOZ5U4/1Kl99N82KufgRO8NDotSAbwbiOxHLA
-         HclmblbyGUZ7/5Y/u9bUtYpnI1RfHsahm4nk83QkrEgJTJJdx/7bW/vz2qhx/wV7jIQW
-         LpneW7vxgmApnIrzvCCQm8vzkb3Gj9y9rBFFiXJHEGBlNC5RssWxF2VQZO/fdgTyyFW/
-         v6GD+qJX1T9Kla1HVYVM6xvroSpbpEao1zN4L41R6Juw7yAB5HHMJKT3793XFSWQ1jle
-         VkCg==
-X-Gm-Message-State: AOJu0YyiETK5gSvmUp/wxkGNIymEFGXSr2EK4qR4VigAoaJOYY/vG1ZG
-	r+SIfDSbpJyzPyW2q7snWzhsTXDKiIV8nUkxUzp/RnHY7ZXZ7F9xg832gUqUGQb6iBjSRvSYHx4
-	uXDg5
-X-Gm-Gg: AR+sD13VzWgvWDU0ZCSIpXmgor+L4xPFPkSeelMCnywarxkbxrnm6ttjRKwAqjr7RnP
-	je0El1YgFBvc3vFGFiXlJTIu4v8h43vpbhJDGmNOv44hG1KlAMXG3SRGNpsAfIxMscpTURn9pgH
-	aQ0Ya+oJyXn4Cuq6/X9/u7RIPkxcOd7LYU2ABTegCiLwb4z8OjvdrSdcot4Li82U8HddIvQWNLh
-	CvgsnwftrllyDHMv5xTjW8DDIX1Ubvy5V+GFKghPOoa33g5D5iVbNu2Rh5ynaqPg75QhbJprTOI
-	po6EbLeqLCasLBZYG9hmdbTVJLyJqv101KlKRTxrFB0DyzwT5GsbNizYpIAni5+RI2md3I5IYJJ
-	2bEIlzc8kH7HuTzRZckeB0gAhnFcFWiV0UkicvCroygFnmHNLOgZ6twCNWPPKrA8UPDGjm763zf
-	Y+Y6fdjbQ2opnCY7GVOnOSWmO7XcL8LL59eu6mRYnxU45hru3a4ev4a0Na9H06y2Yq18LFr34WW
-	rzyeKdO9lKfv9A75V8/P65+kQyxikg=
-X-Received: by 2002:a05:6000:25c6:b0:47f:6fd4:5fb4 with SMTP id ffacd0b85a97d-47fb1ecac34mr2400999f8f.17.1785239146679;
-        Tue, 28 Jul 2026 04:45:46 -0700 (PDT)
+        bh=TxQM8bAhPX/tuODSbHRWKVcIAz5/v9rRUvWtESeF1g0=;
+        b=VBfc3GDyFUgEUupwQs/UUNIIjlLGenm26BdcSLYFUyC6Tyj17HgdZp5VJtxDALMqY7
+         bZCU1J2cd9yZ21mGYzti04bPu39feYCEunt8j7M9dOuuSeeANVy4KEJxOBiZtuRR9Jba
+         6MRkFB8txTi0PUStgdHMVZvfGIu8ljfMHlIXzoYEqy4TDXKuD55494Zt/jNhU2cDKeTW
+         kJSbDOnRSp+um/E79whsjMq6+/Ein4AUmNUu5priQaI/2wY7+13zkCnzjbrmMHQErPSm
+         TwsK4xWqv0e0VfYXtmPzxNiNIiYQALPKLDVJ2IJN/84wfi+lCXqiUbQgFgXxuS5Ha9xF
+         raeg==
+X-Gm-Message-State: AOJu0YwObCf2VKSDUsoXfDE2yz7offPg4DPfw2I1cUO+G+w15vOY6pwI
+	6bvdozzSK1o87FDh1IQnO3CXq0/ywI1Oulr2UZO4VszXtQhFGRAZWvhjD4YqfzA2U1qzwjT/VVi
+	3FNWT
+X-Gm-Gg: AR+sD12ONQnkb4wYSfDUcKCQDF+tUsUJ4hTWyvOncp0/YxUWSVrYbhPJl2v6xNa6FlU
+	+3OROvLQTpiulqP/Wg86GB3mEYYR5CF/1og69Gx3pRCi/duIcqrMr+hgvfYLGhxFNjwJtsQ+4JI
+	QfySYh9U/dTAngk/joEIQNWrA07fG5PJaEt3GQCEvZIuJe3mfJ/C+vcE1ymcb1aMwDasGB5enOZ
+	S8fATn8Upz1wqf5qAKmU9Vmn6Y7C4jgrcTziRmvKsrleYkR6XntZrXviSxnXVNT3b5mjiFMUnGM
+	D9oVGYa6X6R/tpF9SCMdavxDS/UGo+8Fp0Zjk52Rbd9QW5ScgpTIhPYkkjgL6GhD0TMWWtmlxM8
+	iIvUMPa1SzwTZBsp3fNclOjwcHM7X+C2pK1bpFhWOLMpQ6IqHHAI07VbVNFYC5WEJmr5ta6IiFt
+	10sPQXNiPY5dmxhhyq7JOGzbX00NoVwC5YjHwOrGQJVm85wCyhs6iVgteras92qW2wroKUR0y3T
+	ez9VhfCLCslW7Vle8Wrur9WmM7r4GA=
+X-Received: by 2002:a05:6000:1842:b0:47f:6742:170e with SMTP id ffacd0b85a97d-47fb1f27200mr2407289f8f.54.1785239145860;
+        Tue, 28 Jul 2026 04:45:45 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f96b9abc0sm37021654f8f.32.2026.07.28.04.45.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 04:45:46 -0700 (PDT)
+        Tue, 28 Jul 2026 04:45:45 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-pydantic: Enable test_docs.py
-Date: Tue, 28 Jul 2026 14:45:32 +0300
-Message-ID: <20260728114533.1775490-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-devtools: Add recipe
+Date: Tue, 28 Jul 2026 14:45:31 +0300
+Message-ID: <20260728114533.1775490-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260728114533.1775490-1-leon.anavi@konsulko.com>
 References: <20260728114533.1775490-1-leon.anavi@konsulko.com>
@@ -66,66 +66,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 11:45:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128511
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128510
 
-We now have Rust 1.71+ version in oe-core so we can build ruff,
-add it to the ptest runtime dependencies, install docs and fix
-paths in test_docs.py.
+Add a recipe for devtools, Python's missing debug print command and
+more. Release 0.12.2:
 
-There is a known jemallocator issue on aarch64 that affects ruff
-and some of the pydantic tests from test_docs.py:
+- install debug into builtins via DebugProxy
 
-E           <jemalloc>: Unsupported system page size                                                                                                       E           memory allocation of 4 bytes failed
+From release 0.12.1:
 
-More details about JEMALLOC_SYS_WITH_LG_PAGE:
-https://github.com/gnzlbg/jemallocator/issues/170#issuecomment-1503228963
+- Fix docs publish.
+
+From release 0.12.0:
+
+- build docs on CI
+- Update usage to reflect the recent addition of the pytest plugin
+- Support dataclasses with slots
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-pydantic_2.13.4.bb         | 19 ++++++++++++++++---
- 1 file changed, 16 insertions(+), 3 deletions(-)
+ .../python/python3-devtools_0.12.2.bb          | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-devtools_0.12.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb
-index fb80c066f9..52d2c855ec 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb
-@@ -58,13 +58,24 @@ RDEPENDS:${PN}-ptest += "\
-     python3-rich \
-     python3-sqlalchemy \
-     python3-unixadmin \
-+    python3-ruff \
-+    python3-pytest-examples \
-+    python3-devtools \
-+    ${PN}-doc \
- "
- 
-+do_install:append() {
-+   install -d ${D}${docdir}/${PN}/
-+   cp -rf ${S}/docs/* ${D}${docdir}/${PN}/
-+}
+diff --git a/meta-python/recipes-devtools/python/python3-devtools_0.12.2.bb b/meta-python/recipes-devtools/python/python3-devtools_0.12.2.bb
+new file mode 100644
+index 0000000000..25ea7cd11c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-devtools_0.12.2.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Python's missing debug print command, and more."
++DESCRIPTION = "Python's missing debug print command, and more."
++HOMEPAGE = "https://github.com/samuelcolvin/python-devtools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3c69d58fa5f4ff0b4244368d39546751"
 +
- do_install_ptest:append() {
-     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
--    # Requires 'ruff' (python3-ruff) which we cannot build
--    # until we have Rust 1.71+ in oe-core
--    rm -f ${D}${PTEST_PATH}/tests/test_docs.py
-+    # Fix paths in test_docs.py
-+    sed -i \
-+        -e "s|^DOCS_ROOT = Path(__file__).parent.parent / 'docs'|DOCS_ROOT = Path('${docdir}/${PN}')|" \
-+        -e "s|^SOURCES_ROOT = Path(__file__).parent.parent / 'pydantic'|SOURCES_ROOT = Path('${PYTHON_SITEPACKAGES_DIR}/pydantic')|" \
-+        ${D}${PTEST_PATH}/tests/test_docs.py
-     # We are not trying to support mypy
-     rm -f ${D}${PTEST_PATH}/tests/test_mypy.py
-     # We are not trying to run benchmarks
-@@ -72,4 +83,6 @@ do_install_ptest:append() {
-     sed -i -e "/--automake/ s/$/ -k 'not test_config_validation_error_cause and not test_dataclass_config_validate_default and not test_annotated_validator_nested and not test_use_bare and not test_use_no_fields and not test_validator_bad_fields_throws_configerror and not test_assert_raises_validation_error and not test_model_config_validate_default and not test_readonly_qualifier_warning'/" ${D}${PTEST_PATH}/run-ptest
- }
- 
-+FILES:${PN}-doc += "${docdir}/${PN}"
++SRC_URI[sha256sum] = "efceab184cb35e3a11fa8e602cc4fadacaa2e859e920fc6f87bf130b69885507"
 +
- BBCLASSEXTEND = "native nativesdk"
++inherit pypi python_hatchling ptest-python-pytest
++
++RDEPENDS:${PN}-ptest += "\
++    python3-core \
++    python3-executing \
++    python3-numpy \
++    python3-asttokens \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
