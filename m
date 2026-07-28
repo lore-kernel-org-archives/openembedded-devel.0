@@ -1,106 +1,97 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46459C53219
-	for <webhook@archiver.kernel.org>; Tue, 28 Jul 2026 11:45:59 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9508.1785239149301595190
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78EAEC54F52
+	for <webhook@archiver.kernel.org>; Tue, 28 Jul 2026 20:19:17 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.143.1785269948419615064
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2026 04:45:49 -0700
+ Tue, 28 Jul 2026 13:19:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kIuFaqcy;
- spf=pass (domain: konsulko.com, ip: 209.85.128.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-49545ba3d4eso21686465e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 04:45:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=aDfxDgoC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4954afac04bso2770255e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 13:19:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1785239147; x=1785843947; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=325cvXDbn0sHzAK5L5KujeBUwVE3G8Mqq0PV8Hx+3xk=;
-        b=kIuFaqcyn4DVi7LiPTbYylmO9TKP2tp5WmUV14ZDll9MaenONSwCVUbNgPK+FM6jDx
-         b0mDaQAK3pP6jGpHywOjNgvznTYQ8GVvzSX5/NnnguQ0Fm5LOQkB6MLgocbXjlbq1uZJ
-         9wIbrH750YNI+gLfZugdavti1rM1KpzxaZ2Ac=
+        d=gmail.com; s=20251104; t=1785269946; x=1785874746; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=OQn0FVWNioXLqja+F9Gh7g6ne9cw8V3y6Vq1U2Cd2IM=;
+        b=aDfxDgoCMxhgX/D1T9dgNpFtAc0WIiFWsyKkDbGV/kzh7L6FJujF/Jarz3j4lkHNeV
+         7e52QH3u3f+va94Ja2kAEpkDx/GIow6/5r+Fsrswlp6FIwm6/nUtuXA5xpgJ/dQqFx58
+         p9W8/8ni1/xXl+qocEHTYMvvwruQntHaBjEefy+JlzlDC4BocLOSh24QPkUFM9EjHm9O
+         SNH0BWpODYHOoIFu1jLojg2PScABydPkQ9C6YniKbY6gsnSJRIwwY4+OHJUsgEFRv0tQ
+         EKnLVQU4iO2oQ2i32KgD0cXdEDiffyFesT0nzmdVwLE016SaI3qP9884CJ4el4M3Q8D7
+         /zLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785239147; x=1785843947;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=325cvXDbn0sHzAK5L5KujeBUwVE3G8Mqq0PV8Hx+3xk=;
-        b=oftJXLnX0WviFh9V+nY7cth41uAm8Qd01F/5HaHNUawC/upnYIrsCtmS3z7uLXoZLo
-         8Oyod4Qt1abmn1wZC+INxoSL6+kuDrGH+jQb2PUuqC1r923tFEj+fX7ZR9UgLuCagPAf
-         m52umu+vHHEYoZRrUDWqJ4vw1OJWYgh2EHVXwlZm2xoR1aEZntolOoJFdHIjhyzEORS3
-         Y7rMFaEZH00LD8eW+FpA34zfmJslmxXZ72sp1aBanHAvnRGFUDcxaJhoy+bdsgLfFMo9
-         FjSnMsfkAAisZvHWMSBIBe6D5UJm08evSpvzEqL359GFZ6AHluHfTpr2wj4ZkP+0Lqlg
-         AHsg==
-X-Gm-Message-State: AOJu0YzlYJ6if/931wKuTfRavYjzl0041nrgs1A4pBJBm/+PGvHFLsCo
-	ck2F4NvCoD1/8UCbjAwgrNNpZaPe2jdIA9id5akdzQZJCwSOJVyAMepQPTvAb2W6cQ/II30oQbj
-	2gYK2
-X-Gm-Gg: AR+sD12g13eskEj6R2UZpEkhqFq9uEFB7eybxMiZd2p5Z402HmX0apUtGGo8rRBiogR
-	s5JFeO9xHRt5FckSGp2bvrlXzTPxVMwTIbUjxatCsnhTh1svxSJo3oykUyvkUK8CBhMO+pRRt2o
-	jdqBkixhdJAGLX+JEsFH2uGsXZROH3bRHVj3XAC1b64384d+AR3g6rm2eB4xRfgyG1PjHxsr9/0
-	04/XHqWhl6Wgy9NSrkNPtnleYVBLf4EZvSO+me10qdAy3mSy/HYOiTRFS4YzeO9Z6Mbbf4U6Ka0
-	QFbl1prC8UwlepoB5If60rarwvQ6LDWy71DslljXm/dOi6cRtu2hhbuHGBsCbGvidQpxZxrAEcN
-	W1dGF79220s2SVzdN4NVWHOT1clHBzNaXsMCd7GT9LAKN3+ddQSMGEj7zIsDf32rnvesMXQ00vs
-	biyswMSJOgLtny+otY+0FLOqDmwjN6jC2Bqs9TTI3JHpDv+1DcrpWL8/Xj+IKjukksEKAGtjBBM
-	mcPTdJVMQncbppFYk1KILFSmz4Ojjc=
-X-Received: by 2002:a05:600c:e549:20b0:495:71f8:7325 with SMTP id 5b1f17b1804b1-496c6586a5amr14790595e9.32.1785239147564;
-        Tue, 28 Jul 2026 04:45:47 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f96b9abc0sm37021654f8f.32.2026.07.28.04.45.46
+        d=1e100.net; s=20251104; t=1785269946; x=1785874746;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=OQn0FVWNioXLqja+F9Gh7g6ne9cw8V3y6Vq1U2Cd2IM=;
+        b=Ybq0wQ3NAScj8+WCtGJepZY/7Bnw0HFJA45UMTA5vbwiD+/hbno/u2tmLdjqH9m7fk
+         33TySd+sIUfl+N6u7kkOuTOHZ/7fEYsYHYEKLOtOd2QX3t4I7XNGkBnul0CAYMuN9PYY
+         v8C3R7BtRjKkLCv2a+6lz/a7qmhn0/KZFV0XGRRbHkQj3SCqj20xZCbr3Niujy/qL5G3
+         rYHNIqPd1mmkZQnp4QQvdyMKjUyS2tT8VYMoT1P4AmfrVV0Q7LIuJai2xXQ2nFsGfxxE
+         yV2f0ooj74lZiwAoc6D+uB7yXFLc5hCjiAvsMV4xJ9+lHT9l+Qf2xyiK92Gzgzhr6YU5
+         Y8pA==
+X-Gm-Message-State: AOJu0Yw2K7K8mnykdSyE4bMG6gImo9Cq3nWib2KpJm1U672HFBHzGGdn
+	XtlcNqN58HNRMCS5uksbmxfxgEHU7mAepMG91DqCxa8Gw4WJyN4cZM9DLzknOjYg
+X-Gm-Gg: AR+sD10Y7WiVNECyVfoAQzFCxC3/w7mhoPDMW6ZFJM7y2ApHyL6S2EInSqEHprc/Efi
+	2s3a+GmJ0N10ua4mc18rB/laP/rnmuKUE31193FqWQvvHoFXYuM0yDKxTviHpx3kFDm1qvYDc1c
+	78hFmwRttcyyoLWi38/I/+JuIzAYXkDOXzYFmKceJ8xVs8WAIVKwhGvbvhuHZlLt60yRIuBzw4Y
+	kmv+JlUplSDYYbvJa8JWffVMr3f7f7mdTdkJCloywDNv5mcCYTqDmNOcvZB/4S1WAPZyFSqkqo8
+	WGCJjvtSqO9mlcFzzVHgk5qHdKY7iR+CjIcFniAfyJMtbcLNFM54LHoMdjmpoeFB1Me54h7sWmc
+	6GSm6WwkpRGWIKuDCuJabfQOBhZTKxm9M5opvkmKTsJchtWvUVhvyw3Tzm+8AmIBGcYhhiLJliQ
+	m/FiXgGzaLi6DgKbn4kc6zpQQ=
+X-Received: by 2002:a05:6000:1843:b0:47f:90f6:879a with SMTP id ffacd0b85a97d-47fb1eab0fdmr4719210f8f.43.1785269946333;
+        Tue, 28 Jul 2026 13:19:06 -0700 (PDT)
+Received: from dld58y9k4-lin.dl.net ([2001:b07:646e:1164:a5ef:30c1:2db5:b86a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fb647a8d4sm1861559f8f.0.2026.07.28.13.19.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 04:45:47 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 28 Jul 2026 13:19:05 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <locutusofborg@debian.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-textparser: Enable tests
-Date: Tue, 28 Jul 2026 14:45:33 +0300
-Message-ID: <20260728114533.1775490-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260728114533.1775490-1-leon.anavi@konsulko.com>
-References: <20260728114533.1775490-1-leon.anavi@konsulko.com>
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] vboxguestdrivers: Upgrade to 7.2.14
+Date: Tue, 28 Jul 2026 22:19:00 +0200
+Message-ID: <20260728201900.1604649-1-locutusofborg@debian.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 11:45:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128512
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 20:19:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128513
 
-Inherit ptest-python-pytest and include tests for textparser.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 ---
- .../recipes-devtools/python/python3-textparser_0.26.2.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ .../{vboxguestdrivers_7.2.8.bb => vboxguestdrivers_7.2.14.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.8.bb => vboxguestdrivers_7.2.14.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-textparser_0.26.2.bb b/meta-python/recipes-devtools/python/python3-textparser_0.26.2.bb
-index 40276038a3..f36308f843 100644
---- a/meta-python/recipes-devtools/python/python3-textparser_0.26.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-textparser_0.26.2.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "A text parser written in the Python language."
-+SUMMARY = "A text parser."
- HOMEPAGE = "https://github.com/eerimoq/textparser"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fe9942a8bba5458a9dbd11277bc347ad"
-@@ -9,7 +10,13 @@ PYPI_PACKAGE = "textparser"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+similarity index 98%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+index de47bb0e5a..18fda0393d 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+@@ -23,7 +23,7 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[sha256sum] = "0642ed4a12b7204cd30c0abbc2c10c1cc7ad55ce1756a01e86a16d4b6b066592"
++SRC_URI[sha256sum] = "384f293184c52fd51bc941c17d753b4019446f53a6b07c828adfb3e61fe0a500"
  
- DEPENDS += "python3-setuptools-scm-native"
- 
--inherit pypi python_setuptools_build_meta
-+RDEPENDS:${PN}-ptest += "\
-+   python3-mypy \
-+   python3-ruff \
-+   python3-coverage \
-+"
-+
-+inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
- CLEANBROKEN = "1"
- 
+ S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
 -- 
-2.47.3
+2.43.0
 
 
