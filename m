@@ -2,76 +2,80 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11063C54F51
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 110ACC54FCD
 	for <webhook@archiver.kernel.org>; Wed, 29 Jul 2026 09:19:10 +0000 (UTC)
-Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7426.1785316740417422150
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7430.1785316749018583338
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2026 02:19:00 -0700
+ Wed, 29 Jul 2026 02:19:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=MfDG3hJ8;
- spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=P/6WwxPY;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3814; q=dns/txt;
-  s=iport01; t=1785316740; x=1786526340;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=bLJ2ArFQwCbuGHCYgibrWiJV5tfrhtcqEixj/UfrytM=;
-  b=MfDG3hJ8ePS6v96TxHkYAuWp93ffOaNLbka/9OeFqcj5kiQQatz9L9ea
-   s1Lw4RAo4iTZZ8W7+yLqJ1BqJfAM/tdLZ6bOkFucBFNK8/STqOw7if1HV
-   fQTQGjYzDreFFD0l593CAeZogVDyq2pGg/KDPYD/XRv1TZcstaXZhwh7K
-   +xSUdB5y6Jkt35MV6E2hx24WBcKyn6w4X/yUJM66fyqlZY4cbYRWjub+E
-   SRfDpR1eKH0fxtFpX/j5M2BPLlOYpzv1wVTX+3KD5rpLwE3CXWUWwpH0H
-   zJM8ZzMLAMginiZCZ02FMfTjZ0ic9c7YUjeGjcjOg9snSCV0NSvoOjXYI
-   Q==;
-X-CSE-ConnectionGUID: 97CCdzNGRWiFSsRRwrFbcQ==
-X-CSE-MsgGUID: GWPJlr7zT1agg1Jm3KRWdg==
-X-IPAS-Result: =?us-ascii?q?A0BEAgB8xGlq/5UQJK1aglmCV3ReQ0mVXmyBFp0IgX4PA?=
- =?us-ascii?q?QEBD0QNBAEBhQWNaAImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDYZaAQIBNQFGLAMBAlojIYMCAYJ0AxG+E4IsgQGDWgUJAkNQ2y4BC?=
- =?us-ascii?q?xQBBYEzhT+IIFwYAYR8JxsbgXKBFYJzdoEFgVwBAYEnhn4EgiJ6EoFaHpA3S?=
- =?us-ascii?q?IEeA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4ENGwcFgR2BLD+EVyMZNn+BL?=
- =?us-ascii?q?3VKdy1pARIXgRqDOQKCQQMLGA1IESw3FBkEPm4HjW8hgkQBgQ4BKyCBZCiTL?=
- =?us-ascii?q?pJIgTWfWgoog3WMIZU6GjOFW6URmQiOCpYZN4RpgWg8gUcLB3AVgyIJShkPj?=
- =?us-ascii?q?i4KC4NggX+DQgbJEycyCzIBAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:0OAzBK96HgpnKWqrlzIeDrUD1n+TJUtcMsCJ2f8bNWPcYEJGY0x3z
- 2EXXDyOaP2NN2Ske98kPN+3pktU75aEmoAwQAU/pX9EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmE4EzrauS9xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mvyyHjEAX9gWAsbThFs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2lnYqYz9vRRLltx9
- NIjMwo3cQqtjemPlefTpulE3qzPLeHiOIcZ/3UlxjbDALN/G9bIQr7B4plT2zJYasJmRKmFI
- ZFHL2MxKk2cMnWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+Oe8boCIJIDaHa25mG63m
- Vrk+36mEC1DPdOQkBiAqVGWuePAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZF+k8rQXIwa3O7kPAXC4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rGnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:kaXaBamL4zoytPLHbavdxpN+0HzpDfIA3DAbv31ZSRFFG/FwWf
- rAoB19726QtN9/YhAdcLy7VZVoIkmsl6Kdn7NwAV7KZmCP0wGVxepZg7cKrQeNJ8TWzJ846U
- 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYLcemvAJsQljuQzW2gYytLeDU=
-X-Talos-CUID: =?us-ascii?q?9a23=3A9rpf32kXTae7jAXY3SUuSXm7j+XXOSyC51zcMWm?=
- =?us-ascii?q?XM1loZoaOc2WP4o1umPM7zg=3D=3D?=
-X-Talos-MUID: 9a23:rcDCRwmF/T/4wLy1P2lCdnpNC/9K577xGnxUmJoJ4uuBbg9KBDuS2WE=
+  d=cisco.com; i=@cisco.com; l=3174; q=dns/txt;
+  s=iport01; t=1785316749; x=1786526349;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=mibhsJ0hUQ48FgYtWYGMort54N4XgneR4RysZUCopG8=;
+  b=P/6WwxPYyoLFO4wM4U6TJnzvMtl2nWEgE/L3QdpqoopXAyyh8m6vjJr0
+   8pC9GN4m0FLqKpf1UnuCB4sFx4w3JWgMQKMjsp4nsR7zSykqlAXpaLoNs
+   F6FY3HjIj8DLJ6rQBctx/zWCAJTaJ4YNcFV3q2KL7Kc2OIavoYZCbWF1e
+   c78/dJ8J7UvYu5Cfcwt9NTXxCp3Zwyb6mkN/F+iO4t8Nd9LTk74rJZIvU
+   T14vUPlNOqSLImj7rr4olGitRxjixAAjtsJo7JahmX+GAXHIZ1hLL8fnm
+   cW2F7SOiI23kbdotWqZZZG74R+7LQzVvPqDCGnOP8qljO57omNtM2a9Sh
+   A==;
+X-CSE-ConnectionGUID: PQ97elZpQ8mQh9sTeqOBow==
+X-CSE-MsgGUID: PKmtCotMSAyRyy5bkM7nWA==
+X-IPAS-Result: =?us-ascii?q?A0BHAgB8xGlq/5UQJK1aglmCV3ReQ0kDlVtsA54bgX4PA?=
+ =?us-ascii?q?QEBD0QNBAEBhQUCjWYCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBB?=
+ =?us-ascii?q?wWBDhOGTw2GWgECAQMyAUYQHAMBAi8rIwgZgwIBgnQDEb4TgiyBAYNoAkNQ2?=
+ =?us-ascii?q?y4BCxQBBYEzhT+IIFwYAYR8JxsbgXKBFYNpgQWBXAKBJ4Z+BIIiehKBWh6QN?=
+ =?us-ascii?q?0iBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBDRsHBYEdgSw/hFcjGTZ/g?=
+ =?us-ascii?q?S91SnctaQESF4EagzkCgkEDCxgNSBEsNxQZBD5uB41vIYJEAYEOASuCLEulK?=
+ =?us-ascii?q?6EPCiiDdYwhlToaM4VbpRELmH2OCpZQhGmBaDyBWXAVgyIJShkPji0BCguDY?=
+ =?us-ascii?q?IUTNMkTJzILAy8BAQcCBw4DC4FokACBfgEB?=
+IronPort-Data: A9a23:v6+CN6Bpo9I53xVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApDMlhDRVn
+ WsaXzjSM/jfY2PyLowlPNvg901Xu8eDz983OVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
+ fuo+5eBYAD/imYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE+8w/U0wyD5UhquNOATBVy
+ fEBDxoKcUXW7w626OrTpuhEj8AnKozveYgYoHwllGufBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
+ YxANWsHgBfoO3WjPn8XFJI3n+6yrnL+aDZf7lmSoMLb5kCMnVQggOe1b4G9ltqifeZQgm2fu
+ kf91nXDEwBHPt+6ljy62yf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWstxoYXZ9UVuY98gzIk/CS6AeCDW9CRTlEADA7iPILqfUR/
+ gfht7vU6fZH69V5lVr1Gm+okA6P
+IronPort-HdrOrdr: A9a23:yD8t1qsasWVcvtzWQ5LdGiHF7skDrtV00zEX/kB9WHVpmwKj+P
+ xG+85rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1MmZPDUO0VHAROoJ0WKh+UyEJ8SUzIBgPM
+ lbH5SWIeeAa2SS9fyKgzWQIpIH3MSN9ryuiKP1yndgShwvVoRbhj0Jczpy1iZNNXJ77V1TLu
+ vl2vZ6
+X-Talos-CUID: =?us-ascii?q?9a23=3AMD2WWWj77gtR43Zcxq2/WryMLzJuSkSMk3rUEVe?=
+ =?us-ascii?q?BWWNQSOyOdVKJ34ljjJ87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AUzWzjA2sq7r1yUWRF32+FTgnTzUj24erFGsKjbA?=
+ =?us-ascii?q?9kti+JD0tMTS40zKIa9py?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,192,1779148800"; 
-   d="scan'208";a="796256480"
+   d="scan'208";a="790987073"
 Received: from alln-l-core-12.cisco.com ([173.36.16.149])
-  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 29 Jul 2026 09:18:59 +0000
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 29 Jul 2026 09:19:08 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 3DDBD1800020B;
-	Wed, 29 Jul 2026 09:18:59 +0000 (GMT)
+	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 15CDB18000238;
+	Wed, 29 Jul 2026 09:19:08 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id CD17FCD1450; Wed, 29 Jul 2026 02:18:58 -0700 (PDT)
+	id AFB5ECD1450; Wed, 29 Jul 2026 02:19:07 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-oe][wrynose][PATCH 1/5] libdbi-perl: Fix CVE-2026-9698
-Date: Wed, 29 Jul 2026 02:18:36 -0700
-Message-Id: <20260729091840.84531-1-hthakar@cisco.com>
+Subject: [meta-oe][wrynose][PATCH 2/5] libdbi-perl: Fix CVE-2026-10879
+Date: Wed, 29 Jul 2026 02:18:37 -0700
+Message-Id: <20260729091840.84531-2-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20260729091840.84531-1-hthakar@cisco.com>
+References: <20260729091840.84531-1-hthakar@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
@@ -82,95 +86,82 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2026 09:19:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128551
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128552
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
 This patch applies the upstream fix as referenced in [2], using the
 commit shown in [1].
 
-[1] https://github.com/perl5-dbi/dbi/commit/bfe5d73c162d2d1f761a639a0aa33aad6a9eb54e
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-9698
+[1] https://github.com/perl5-dbi/dbi/commit/af79036c07aa9a457971c0f4136e37c85dc20978
+[2] https://security-tracker.debian.org/tracker/CVE-2026-10879
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../perl/libdbi-perl/CVE-2026-9698.patch      | 51 +++++++++++++++++++
- .../perl/libdbi-perl_1.647.bb                 |  4 +-
- 2 files changed, 54 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch
+ .../perl/libdbi-perl/CVE-2026-10879.patch     | 41 +++++++++++++++++++
+ .../perl/libdbi-perl_1.647.bb                 |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch
 new file mode 100644
-index 0000000000..83df70de54
+index 0000000000..06668adf07
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch
-@@ -0,0 +1,51 @@
-+From 9a85c9bc1c1fafa42a223d3310f9c5a6305902f0 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch
+@@ -0,0 +1,41 @@
++From 37f2f9149944fa265ea65a8344a9efcdebc0d717 Mon Sep 17 00:00:00 2001
 +From: "H.Merijn Brand - Tux" <linux@tux.freedom.nl>
-+Date: Wed, 27 May 2026 11:16:50 +0200
-+Subject: [PATCH] Fix possible stack overflow (old issue already noted by Tim)
++Date: Thu, 28 May 2026 14:14:50 +0200
++Subject: [PATCH] Replacing `?` with `:p#` in `preparse ()` with more than 9
++ `?` causes buffer overflow
 +
-+CVE: CVE-2026-9698
-+Upstream-Status: Backport [https://github.com/perl5-dbi/dbi/commit/bfe5d73c162d2d1f761a639a0aa33aad6a9eb54e]
++`:p1` is length 3, `?` just 1, but `:p1003` is length 6!
++
++CVE: CVE-2026-10879
++Upstream-Status: Backport [https://github.com/perl5-dbi/dbi/commit/af79036c07aa9a457971c0f4136e37c85dc20978]
 +
 +Backport Changes:
 +- Applied the DBI.xs security fix without functional changes.
 +- Omitted ChangeLog and lib/DBI/Changes.pm because they contain only
 +  DBI 1.648 release-note updates.
 +- Omitted dbixs_rev.h because it is generated from upstream Git history
-+  and its hunk depends on DBIXS_RELEASE and DBIXS_VERSION metadata added
-+  after DBI 1.647. The fix does not change the DBIXS or DBISTATE
-+  interface.
-+- Omitted the Makefile.PL addition that runs dbixs_rev.pl from the doc
-+  target. It only regenerates dbixs_rev.h and is not required to compile
-+  or activate the DBI.xs security fix.
++  and its hunk only updates the generated timestamp and revision. The
++  fix does not change the DBIXS or DBISTATE interface.
++- Omitted doc/DBI.3 and doc/DBI.man because they are generated manual
++  pages that only contain regenerated dates and are absent from the
++  DBI 1.647 CPAN source.
 +
-+(cherry picked from commit bfe5d73c162d2d1f761a639a0aa33aad6a9eb54e)
++(cherry picked from commit af79036c07aa9a457971c0f4136e37c85dc20978)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ DBI.xs | 7 ++-----
-+ 1 file changed, 2 insertions(+), 5 deletions(-)
++ DBI.xs | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/DBI.xs b/DBI.xs
-+index 97d9378..1f06d4d 100644
++index 1f06d4d..fbfe405 100644
 +--- a/DBI.xs
 ++++ b/DBI.xs
-+@@ -4000,7 +4000,6 @@ XS(XS_DBI_dispatch)
-+         SV **statement_svp = NULL;
-+         const int is_warning = (!SvTRUE(err_sv) && strlen(SvPV_nolen(err_sv))==1);
-+         const char *err_meth_name = meth_name;
-+-        char intro[200];
++@@ -4203,7 +4203,7 @@ preparse(SV *dbh, const char *statement, IV ps_return, IV ps_accept, void *foo)
++     }
 + 
-+         if (meth_type == methtype_set_err) {
-+             SV **sem_svp = hv_fetch((HV*)SvRV(h), "dbi_set_err_method", 18, GV_ADDWARN);
-+@@ -4008,10 +4007,8 @@ XS(XS_DBI_dispatch)
-+                 err_meth_name = SvPV_nolen(*sem_svp);
-+         }
-+ 
-+-        /* XXX change to vsprintf into sv directly */
-+-        sprintf(intro,"%s %s %s: ", HvNAME(DBIc_IMP_STASH(imp_xxh)), err_meth_name,
-+-            SvTRUE(err_sv) ? "failed" : is_warning ? "warning" : "information");
-+-        msg = sv_2mortal(newSVpv(intro,0));
-++        msg = sv_2mortal(newSVpvf("%s %s %s: ", HvNAME(DBIc_IMP_STASH(imp_xxh)), err_meth_name,
-++            SvTRUE(err_sv) ? "failed" : is_warning ? "warning" : "information"));
-+         if (SvOK(DBIc_ERRSTR(imp_xxh)))
-+             sv_catsv(msg, DBIc_ERRSTR(imp_xxh));
-+         else
++     /* XXX this allocation strategy won't work when we get to more advanced stuff */
++-    new_stmt_sv = newSV(strlen(statement) * 3);
+++    new_stmt_sv = newSV(strlen(statement) * 6 + 16);
++     sv_setpv(new_stmt_sv,"");
++     src  = statement;
++     dest = SvPVX(new_stmt_sv);
 diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
-index 00f8181065..f676f73d67 100644
+index f676f73d67..5a76924560 100644
 --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
 +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
-@@ -9,7 +9,9 @@ SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=65f65488c774efe1da488e36ad6c4a36"
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=65f65488c774efe1da488e36ad6c4a36"
  
--SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz \
-+           file://CVE-2026-9698.patch \
-+           "
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz \
+            file://CVE-2026-9698.patch \
++           file://CVE-2026-10879.patch \
+            "
  SRC_URI[sha256sum] = "0df16af8e5b3225a68b7b592ab531004ddb35a9682b50300ce50174ad867d9aa"
  
- S = "${UNPACKDIR}/DBI-${PV}"
 -- 
 2.35.6
 
