@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BB8CC54F51
-	for <webhook@archiver.kernel.org>; Wed, 29 Jul 2026 06:05:13 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5338.1785305103235799848
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB42CC53200
+	for <webhook@archiver.kernel.org>; Wed, 29 Jul 2026 06:05:12 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5339.1785305104261262422
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2026 23:05:03 -0700
+ Tue, 28 Jul 2026 23:05:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZdH29V9M;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-381216921aaso526963a91.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 23:05:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=oyCEyKCt;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cc97653887so7719415ad.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 23:05:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785305103; x=1785909903; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785305104; x=1785909904; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WrNgSz7sPIle6GTsAbgVgiztK5Mz+y5ugEX9PG2ZLHE=;
-        b=ZdH29V9M2jORQXGh8PNt2T63RsY+bCXyYmFxIFMUYXVGIVAo2bjepj8YVxJ90hI7AG
-         doq6NUaahm9JhPmrpihiAuJIlmvhsw7Nix2mVoMUS/Bn33Ia1ckkgvTykWNLKFT4Q3U4
-         0XSm6y9FD5uyGlk23p6u4z5l253/IcSWnzsQYRWpsUV1k17x1J/EB7Me/Yfb8UYGCHfy
-         ttXDocotJ4Hv9qzuRtHVO2to4/G41AeqWmW6uI3Tns5N61qBJKQJHFFbCXYFfUxBjfFw
-         vMmutQYymRBzUxcU3StFaXTaokT034isLnl/N3DrNMCy1HMNOOEkS9fYJdx9CiRcwxYG
-         ByVw==
+        bh=uiD5mQVradz0s+5nZUCuKiqIkNVz63sXjUMYe8FI2LI=;
+        b=oyCEyKCt7keezvzb3RUcViPHiF23bX5B+MJhuWztqL91pQS53aCtwj2SUviuhfvhES
+         oCV5KCUpOkpy+o+oA1F/4UX8YnzG5xvKfnkspqI2+/ZuLiQmNGE4t/9+D8DWS1+mzYpN
+         LLAEtI12BqI5u8+nv7Ye1ZcBaApOxpfDpagUSR8f+b+Rkh3UoQ0dmMFpG+6Ni94QxsQW
+         CiabzOJ5uE7N/RLBDm3c69wWhoan/kRYoXRG1NYM2UN44ZTGDEMZDkS7GyCniIlkycaT
+         wSFSoQqEQnCUPeyvVneLdUE1Bl5JJn6DeirnDt4559fbfIlenxh90vPsiP5ogMy7vgbF
+         OFnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785305103; x=1785909903;
+        d=1e100.net; s=20251104; t=1785305104; x=1785909904;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WrNgSz7sPIle6GTsAbgVgiztK5Mz+y5ugEX9PG2ZLHE=;
-        b=IAB71FPfYeWEtOomt/QX6A9LBI6UYhw64NktznuuVW0ZLa8cI8wrNygo02jKwusN00
-         64dT08IXeujlVtaLp4Zvx9POssUZjlF278AlkXzpChG9SRlGvTV8WFOqVTWu9pELbEgk
-         K0gEEDjpCPGR4Dfw1lARq3wuSQhmLVovQm79kblVxAEQaBeUm7rLqHXtcH82S30FRYzm
-         FN3pMhLMc6L76GPnWLNhEQjj5c1VdCv5/dSjFAiULASIDn8El94/MoWV7e+U6rSvX9+U
-         fbMVSK5TecwucMBpyl/ArDSOOor6+vo6190pXFAtdRjKFUMnzmUluGJKTq7SGwrUE9mJ
-         yAZw==
-X-Gm-Message-State: AOJu0YyXNbwo3fvBo7Zc9ETN9L8hT1Foys/ls5XeyqPehClfOoxN6Yhj
-	bugvz2aRF+sI2DZa2bqsA49z3KWXmgb3+tyW7Waq/gT+vHIHQFHIb+IT8JLqVS4s
-X-Gm-Gg: AR+sD12JZT9jXFya4T92cRu/uOu6vI4OzdF15XQtGcgE0pjBRgiNxuipOXf0U9KDxVv
-	q9CwsZHnJuDnCOWjP4HgsGjKiggYBWYIaJ8g57+fAcfpOtL2SdLWf7HqwEI2M1Ah6AvQdJHBf17
-	xQ1mLZwyG+Os2SK8lEiH9ozmSrvDuzvJk9Li0sPS7ajSfLbXKyDj+CU++t2CuBmPlw03JKGdAul
-	yYU1ehDijpOQgkpNOaK5oK2AFBh2J2HsGnbx0CW8VM4L0RF4NHlB+1lZHE0NRWxch0VOjqgEmYH
-	Nh5iT6q6rR7wPEKs6uhK5aAAzJSrPe67O314gWh1/6kFS7pR/kVWGPS4Xi3Yi3ssTBJnUBvFsas
-	ia9Aq/da+qtBJMeIMEIF8M5K+qmqj5rL8b8KaKFhCb74GmTKG+nBaQlVMcBtBzJGWR7/Rof8u84
-	sx8/6pk3+mGK4criMrAY01eGmunbPPlX4BCO8jbxTuCsA7B9xeVPWv+4k8lmfF7LacmVvYf/WEN
-	n/EmNQ4puB255pACwxRGM622k6FmdvNS6DNf6WbO3AtvsoR0vVQUbTW7fMOv4t19mTxMO4r7D2c
-	1KGEOgwa0Axsh5g5HtQWCoeBZzyn/ttFfiRTGPSj1fCFhTPs+bddIJBofEkwfPNM/EgYjv4IWoK
-	N2w==
-X-Received: by 2002:a17:90b:4ad0:b0:38e:8050:e63a with SMTP id 98e67ed59e1d1-38f6a30cf17mr4828584a91.6.1785305102457;
-        Tue, 28 Jul 2026 23:05:02 -0700 (PDT)
+        bh=uiD5mQVradz0s+5nZUCuKiqIkNVz63sXjUMYe8FI2LI=;
+        b=QDqavLMfY0+3Djk4X1t6QdVEKbm2v21mHP63iUdN/KW3R5kEczsp6euLcpU/546CM4
+         0hv676lIaoqj+T8qBnhEhfk/bGoHQk29oin3BaFNXujClKw5EVGKc2ndSwOGJL3Bn+GN
+         F7C87dwthOWd5x78KK1rb4K7Mk273ozBjGtOrNYaxm6LmSQlbFmez2+Ff3RAQzWVOpUL
+         PKxDzhhahxuFSkdKWS/8wx0LguJ6eVGQk8xeSnCzM9YrOBmXhvlzbNC5ZECVCAwe8jyt
+         50UP2avfX3v62ED2Ye1HxW+/pBX2w5XJQZmIzFi1W0sqyTrUR7Ik5VaVOz+tclsk3Zy3
+         +V4w==
+X-Gm-Message-State: AOJu0Yy2gz7T3Q7C33sMF+c7diF6LAbVNbIryHBf0fCwbUQRAIiLchoS
+	ujAz3kYpwr8z+mqLUH9Q72aQb6OjZwQMW65/J5fRiJEiQ4Ozbc8/TSD5J90mqQ==
+X-Gm-Gg: AR+sD13HsuAcJo3vYLthh987DnlTC2c7RZdjoVfgYDXrMm7C4F/sGxCnDB71OeRstIq
+	LIAvdzHBX2uQQdtc/ZjLTqCgCbAZuoWoIRcOkVazetZuOBxdBbmss41K/qrbueMbTKa2mhtDdey
+	ZG04yoqAgfOmsMv7G7l5YOu5iynhayECGTfzaDCgLbmZhw+c/mCK1wcyne6UlRIdkNE97/kcieM
+	mP5GqbZfin2xgsHUDpewshI4jgPCqYITLigUFBVuWnBvz6BVbsQEUG19JR/gmyga+SQRVEPPdYE
+	q4aiFMY2ixU47w5cCdedasBKikB4On2KZL1cXQHKGFJ1byBUTicGaqSyFG5oGyzyiG4rxdDCvu+
+	6xmfdWEDywZgpSexTcUcrqk42rc++Bs4ShmonYKGssbWaoOztWklGlUsZV6ly3Gxw/UYWKiu2ZO
+	HSH3dJyowMe4IPoT8MEIGNxF7x81hCaTSpWkNYr20tOHzw9IdUQt4XXDvoGyWFj0QiKP07zXDs0
+	JiPu6Vz1prg1CVaNvlZWk0J9/9ch9Q1jMYFs0M18zpqiAnY9IHYvkT+hOPoJZMkycSbi7RT2Pnr
+	URfpf2XlmgmU8W56Xjm2R50wfYIti5nzQS7l08Cwy783AswYouSsUrKg0LujYYQWJ0D3r1bVwkL
+	eJg9GDcL8KaIC
+X-Received: by 2002:a17:90b:2f4b:b0:38e:7268:220d with SMTP id 98e67ed59e1d1-38f6a5181b3mr5391309a91.20.1785305103535;
+        Tue, 28 Jul 2026 23:05:03 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f6412a92bsm2278342a91.5.2026.07.28.23.05.01
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f6412a92bsm2278342a91.5.2026.07.28.23.05.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 23:05:01 -0700 (PDT)
+        Tue, 28 Jul 2026 23:05:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-filesystems][PATCH 4/5] xfstests: upgrade 2025.04.27 -> 2026.07.21
-Date: Tue, 28 Jul 2026 23:04:54 -0700
-Message-ID: <20260729060455.3993973-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-filesystems][PATCH 5/5] exfatprogs: upgrade 1.4.1 -> 1.4.2
+Date: Tue, 28 Jul 2026 23:04:55 -0700
+Message-ID: <20260729060455.3993973-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260729060455.3993973-1-khem.raj@oss.qualcomm.com>
 References: <20260729060455.3993973-1-khem.raj@oss.qualcomm.com>
@@ -70,179 +70,293 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2026 06:05:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128547
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2026 06:05:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128548
 
-387 commits across 21 fortnightly releases (739 files changed,
-+16397/-2042). 114 new tests added (xfs x44, generic x32, btrfs x16,
-f2fs x14, ext4 x3, overlay x2, selftest x2, ceph x1) and one removed
-(xfs/539).
+Upstream changes (NEWS):
+ * dump.exfat: prevent a heap buffer overflow in name parsing.
+ * Install lsdosattr and chdosattr in /bin instead of /sbin (covered by
+   the default FILES:${PN}, so packaging is unaffected).
+ * libexfat: use __builtin_popcountl() throughout and add an internal
+   exfat_count_used_clusters() helper (static lib, no ABI impact).
 
-Major themes:
- * Multi-block atomic writes: new common/atomicwrites, fio atomic-write
-   helpers, fsx atomic-write support, and O_[D]SYNC / sudden-shutdown /
-   bigalloc / hardware-AWU atomic tests.
- * XFS zoned / RT-device work: common/zoned with zloop helpers, zoned
-   growfs, zone-alignment mkfs checks, zone GC low-space, external and
-   internal realtime device support.
- * New xfs_healer test family (background repair service).
- * file_getattr(2)/file_setattr(2) support (new src/file_attr.c,
-   AC_HAVE_FILE_GETATTR probe), VFS delegation tests, and a new
-   fsnotify/fanotify error-reporting helper (src/fs-monitor.c).
- * Infrastructure: treewide $MOUNT_PROG -> _mount conversion, temp
-   files moved to $TMPDIR, systemd-coredump collection in check.
+No dependency or build-system changes; configure.ac is unchanged, so
+DEPENDS and the ptest install steps stay as-is.
 
-Build-system: configure.ac gains AC_HAVE_FILE_GETATTR and a
-btrfs_ioctl_received_subvol_args type check; src/Makefile adds
-unlink-fsync, truncate, rw_hint, fs-monitor, btrfs_ioctl and a
-conditional file_attr target. No new link libraries, so no DEPENDS
-change is needed. LICENSE checksum unchanged.
+While enabling the ptest image (meta-filesystems-image-ptest-exfatprogs)
+on qemux86-64, the upcase_table test cases (present since 1.4.0, so this
+is a pre-existing failure now exercised) failed because they used
+`truncate` and `xxd -r - <file>`, which are unavailable in a BusyBox
+core-image-minimal rootfs:
 
-Recipe patch changes:
- * Drop 0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch:
-   its rationale (glibc sys/mount.h vs linux/mount.h clash reached via
-   src/vfs/utils.c) no longer applies because utils.c no longer includes
-   sys/mount.h, and the src/Makefile hunk no longer applied anyway.
- * Add 0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch:
-   glibc 2.43 defines F_GETDELEG/F_SETDELEG but neither glibc nor the
-   kernel UAPI declares struct delegation, so tying the struct to the
-   "#ifndef F_GETDELEG" guard leaves it undefined and locktest fails to
-   build with "variable has incomplete type 'struct delegation'".
+  truncate: command not found
+  FAIL: to create corrupted image
 
-Also bump the bundled unionmount-testsuite by one commit
-(dir-weird-open-dir.py adjusted to the upstream kernel).
+Add 0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch,
+which rewrites those scripts to size the image with dd and poke the
+corrupted bytes with printf|dd (tools already present in the base
+image). ptest result on qemux86-64 is now 23 of 23 passing.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...tie-struct-delegation-to-the-F_GETDE.patch | 52 +++++++++++++++++++
- ...unts_propagation-and-remove-sys-moun.patch | 31 -----------
- ...s_2025.04.27.bb => xfstests_2026.07.21.bb} |  6 +--
- 3 files changed, 55 insertions(+), 34 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch
- delete mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch
- rename meta-filesystems/recipes-utils/xfstests/{xfstests_2025.04.27.bb => xfstests_2026.07.21.bb} (93%)
+ ...le-use-dd-printf-instead-of-truncate.patch | 230 ++++++++++++++++++
+ ...xfatprogs_1.4.1.bb => exfatprogs_1.4.2.bb} |   3 +-
+ 2 files changed, 232 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-utils/exfatprogs/exfatprogs/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
+ rename meta-filesystems/recipes-utils/exfatprogs/{exfatprogs_1.4.1.bb => exfatprogs_1.4.2.bb} (88%)
 
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch
+diff --git a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
 new file mode 100644
-index 0000000000..4139b9fd94
+index 0000000000..cac60c2325
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch
-@@ -0,0 +1,52 @@
-+From 784139a16a03cd0c6486e4b587b995e9d5ab21dd Mon Sep 17 00:00:00 2001
++++ b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
+@@ -0,0 +1,230 @@
++From de421347db0026110c4997ef48bdd16f50a5a65b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 29 Jul 2026 05:10:29 +0000
-+Subject: [PATCH] locktest: do not tie struct delegation to the F_GETDELEG
-+ guard
++Date: Wed, 29 Jul 2026 05:34:27 +0000
++Subject: [PATCH] tests: upcase_table: use dd/printf instead of truncate and
++ xxd -r
 +
-+glibc 2.43 added F_GETDELEG/F_SETDELEG to <bits/fcntl-linux.h>, but it
-+does not declare struct delegation and neither does the kernel UAPI.
++The upcase_table test scripts used `truncate` (coreutils) and
++`xxd -r - <file>` to build and corrupt the test image. In minimal
++images (e.g. Yocto core-image-minimal + BusyBox) `truncate` is often
++absent and BusyBox's `xxd` applet does not implement the two-operand
++`xxd -r - <file>` revert form, so the scripts fail with:
 +
-+locktest.c defined struct delegation inside "#ifndef F_GETDELEG", which
-+assumes that any libc providing the fcntl commands also provides the
-+struct. On glibc 2.43+ the guard is taken, the struct is never defined
-+and the build fails:
++  truncate: command not found
++  FAIL: to create corrupted image
 +
-+  locktest.c:1065:20: error: variable has incomplete type 'struct delegation'
-+  locktest.c:1365:23: error: variable has incomplete type 'struct delegation'
-+  locktest.c:1615:20: error: variable has incomplete type 'struct delegation'
++Every xxd/truncate use here reduces to "size the image to 32 MiB" and
++"write one constant byte at a computed offset", both of which `dd`
++(with printf for the byte value) does portably with tools already
++present in a base rootfs.
 +
-+Keep the F_GETDELEG/F_SETDELEG fallbacks guarded, but define the struct
-+unconditionally since no libc declares it.
-+
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/exfatprogs/exfatprogs]
 +
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ src/locktest.c | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
++ ...le-use-dd-printf-instead-of-truncate.patch | 111 ++++++++++++++++++
++ .../0001-TableChecksum-and-upcase-table.sh    |   6 +-
++ tests/upcase_table/0002-FirstCluster.sh       |   4 +-
++ tests/upcase_table/0003-DataLength.sh         |   6 +-
++ tests/upcase_table/0004-EntryType.sh          |   4 +-
++ 5 files changed, 121 insertions(+), 10 deletions(-)
++ create mode 100644 out/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
 +
-+diff --git a/src/locktest.c b/src/locktest.c
-+index 54ee1f0..e24a0fe 100644
-+--- a/src/locktest.c
-++++ b/src/locktest.c
-+@@ -80,13 +80,18 @@ extern int h_errno;
-+ #ifndef F_GETDELEG
-+ #define F_GETDELEG	(1024 + 15)
-+ #define F_SETDELEG	(1024 + 16)
-++#endif
++diff --git a/out/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch b/out/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
++new file mode 100644
++index 0000000..2cec31f
++--- /dev/null
+++++ b/out/0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch
++@@ -0,0 +1,111 @@
+++From 65d12741714de046a37ef3cf4ae2c1660235901a Mon Sep 17 00:00:00 2001
+++From: Khem Raj <khem.raj@oss.qualcomm.com>
+++Date: Wed, 29 Jul 2026 05:34:27 +0000
+++Subject: [PATCH] tests: upcase_table: use dd/printf instead of truncate and
+++ xxd -r
+++
+++The upcase_table test scripts used `truncate` (coreutils) and
+++`xxd -r - <file>` to build and corrupt the test image. In minimal
+++images (e.g. Yocto core-image-minimal + BusyBox) `truncate` is often
+++absent and BusyBox's `xxd` applet does not implement the two-operand
+++`xxd -r - <file>` revert form, so the scripts fail with:
+++
+++  truncate: command not found
+++  FAIL: to create corrupted image
+++
+++Every xxd/truncate use here reduces to "size the image to 32 MiB" and
+++"write one constant byte at a computed offset", both of which `dd`
+++(with printf for the byte value) does portably with tools already
+++present in a base rootfs.
+++
+++Upstream-Status: Submitted [https://github.com/exfatprogs/exfatprogs]
+++
+++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+++---
+++ tests/upcase_table/0001-TableChecksum-and-upcase-table.sh | 6 +++---
+++ tests/upcase_table/0002-FirstCluster.sh                   | 4 ++--
+++ tests/upcase_table/0003-DataLength.sh                     | 6 +++---
+++ tests/upcase_table/0004-EntryType.sh                      | 4 ++--
+++ 4 files changed, 10 insertions(+), 10 deletions(-)
+++
+++diff --git a/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh b/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
+++index 57390e1..507d0c2 100755
+++--- a/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
++++++ b/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
+++@@ -3,7 +3,7 @@
+++ 
+++ img=${1:-"exfat.img"}
+++ 
+++-truncate -s 32M $img
++++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
+++ mkfs.exfat $img >> /dev/null
+++ dump_info=$(dump.exfat $img)
+++ clu_heap_off=$(echo "${dump_info}" | grep "Cluster Heap Offset (sector offset):" | cut -d ':' -f 2)
+++@@ -14,8 +14,8 @@ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | c
+++ 
+++ # Make TableChecksum field corrupted
+++ checksum_off=$((${upcase_entry_off}+4))
+++-echo "$(printf "%x" $checksum_off):0xff" | xxd -r - $img
++++printf '\377' | dd of=$img bs=1 seek=$checksum_off conv=notrunc 2>/dev/null
+++ 
+++ # Make upcase table corrupted
+++ upcase_off=$(((${upcase_clu} - 2) * ${clu_size} + ${clu_heap_off} * ${sector_size}))
+++-echo "$(printf "%x" $upcase_off):0x7F" | xxd -r - $img
++++printf '\177' | dd of=$img bs=1 seek=$upcase_off conv=notrunc 2>/dev/null
+++diff --git a/tests/upcase_table/0002-FirstCluster.sh b/tests/upcase_table/0002-FirstCluster.sh
+++index 9dfb1dc..ae84555 100755
+++--- a/tests/upcase_table/0002-FirstCluster.sh
++++++ b/tests/upcase_table/0002-FirstCluster.sh
+++@@ -3,11 +3,11 @@
+++ 
+++ img=${1:-"exfat.img"}
+++ 
+++-truncate -s 32M $img
++++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
+++ mkfs.exfat $img >> /dev/null
+++ dump_info=$(dump.exfat $img)
+++ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | cut -d ':' -f 2)
+++ 
+++ # Make FirstCluster field corrupted
+++ start_clu_off=$((${upcase_entry_off}+20))
+++-echo "$(printf "%x" $start_clu_off):0x00" | xxd -r - $img
++++printf '\000' | dd of=$img bs=1 seek=$start_clu_off conv=notrunc 2>/dev/null
+++diff --git a/tests/upcase_table/0003-DataLength.sh b/tests/upcase_table/0003-DataLength.sh
+++index 68742b2..661d218 100755
+++--- a/tests/upcase_table/0003-DataLength.sh
++++++ b/tests/upcase_table/0003-DataLength.sh
+++@@ -3,7 +3,7 @@
+++ 
+++ img=${1:-"exfat.img"}
+++ 
+++-truncate -s 32M $img
++++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
+++ mkfs.exfat $img >> /dev/null
+++ 
+++ dump_info=$(dump.exfat $img)
+++@@ -11,5 +11,5 @@ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | c
+++ size_off=$((${upcase_entry_off}+24))
+++ 
+++ # Make DataLength field corrupted
+++-echo "$(printf "%x" $size_off):0x00" | xxd -r - $img
+++-echo "$(printf "%x" $(($size_off + 1))):0x00" | xxd -r - $img
++++printf '\000' | dd of=$img bs=1 seek=$size_off conv=notrunc 2>/dev/null
++++printf '\000' | dd of=$img bs=1 seek=$(($size_off + 1)) conv=notrunc 2>/dev/null
+++diff --git a/tests/upcase_table/0004-EntryType.sh b/tests/upcase_table/0004-EntryType.sh
+++index b34661f..74d40a7 100755
+++--- a/tests/upcase_table/0004-EntryType.sh
++++++ b/tests/upcase_table/0004-EntryType.sh
+++@@ -3,11 +3,11 @@
+++ 
+++ img=${1:-"exfat.img"}
+++ 
+++-truncate -s 32M $img
++++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
+++ mkfs.exfat $img >> /dev/null
+++ 
+++ dump_info=$(dump.exfat $img)
+++ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | cut -d ':' -f 2)
+++ 
+++ # Make EntryType field corrupted
+++-echo "$(printf "%x" $upcase_entry_off):0x7F" | xxd -r - $img
++++printf '\177' | dd of=$img bs=1 seek=$upcase_entry_off conv=notrunc 2>/dev/null
++diff --git a/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh b/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
++index 57390e1..507d0c2 100755
++--- a/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
+++++ b/tests/upcase_table/0001-TableChecksum-and-upcase-table.sh
++@@ -3,7 +3,7 @@
 + 
-++/*
-++ * glibc 2.43 added F_GETDELEG/F_SETDELEG to <bits/fcntl-linux.h> but it does
-++ * not declare struct delegation, and neither does the kernel UAPI. Therefore
-++ * the struct definition cannot be tied to the F_GETDELEG guard above.
-++ */
-+ struct delegation {
-+ 	uint32_t d_flags;
-+ 	uint16_t d_type;
-+ 	uint16_t __pad;
-+ };
-+-#endif
++ img=${1:-"exfat.img"}
 + 
-+ static char	*prog;
-+ static char	*filename = 0;
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch b/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch
-deleted file mode 100644
-index 9fdf69ff46..0000000000
---- a/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 340e708f79b824816aacfa74e330d8acdafc5129 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 14 Aug 2022 13:33:05 -0700
--Subject: [PATCH] Drop detached_mounts_propagation and remove sys/mount.h from
-- vfs/utils.c
--
--with glibc 2.36+ sys/mount.h conflicts with linux/mount.h and here
--linux/mount.h is included via xfs/xfs.h header and we need sys/mount.h
--for the mount() API prototype. Until thats resolved lets not build this
--testcase
--
--Upstream-Status: Inappropriate [Libc specific Workaround]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/Makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/Makefile b/src/Makefile
--index 6ac72b36..5472ba66 100644
----- a/src/Makefile
--+++ b/src/Makefile
--@@ -34,7 +34,7 @@ LINUX_TARGETS = xfsctl bstat t_mtab getdevicesize preallo_rw_pattern_reader \
-- 	dio-invalidate-cache stat_test t_encrypted_d_revalidate \
-- 	attr_replace_test swapon mkswap t_attr_corruption t_open_tmpfiles \
-- 	fscrypt-crypt-util bulkstat_null_ocount splice-test chprojid_fail \
---	detached_mounts_propagation ext4_resize t_readdir_3 splice2pipe \
--+	ext4_resize t_readdir_3 splice2pipe \
-- 	uuid_ioctl t_snapshot_deleted_subvolume fiemap-fault min_dio_alignment
-- 
-- EXTRA_EXECS = dmerror fill2attr fill2fs fill2fs_check scaleread.sh \
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2026.07.21.bb
-similarity index 93%
-rename from meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb
-rename to meta-filesystems/recipes-utils/xfstests/xfstests_2026.07.21.bb
-index 9e86b77c5e..e03290aaa0 100644
---- a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb
-+++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2026.07.21.bb
-@@ -2,17 +2,17 @@ SUMMARY = "File system QA test suite"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
++-truncate -s 32M $img
+++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
++ mkfs.exfat $img >> /dev/null
++ dump_info=$(dump.exfat $img)
++ clu_heap_off=$(echo "${dump_info}" | grep "Cluster Heap Offset (sector offset):" | cut -d ':' -f 2)
++@@ -14,8 +14,8 @@ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | c
++ 
++ # Make TableChecksum field corrupted
++ checksum_off=$((${upcase_entry_off}+4))
++-echo "$(printf "%x" $checksum_off):0xff" | xxd -r - $img
+++printf '\377' | dd of=$img bs=1 seek=$checksum_off conv=notrunc 2>/dev/null
++ 
++ # Make upcase table corrupted
++ upcase_off=$(((${upcase_clu} - 2) * ${clu_size} + ${clu_heap_off} * ${sector_size}))
++-echo "$(printf "%x" $upcase_off):0x7F" | xxd -r - $img
+++printf '\177' | dd of=$img bs=1 seek=$upcase_off conv=notrunc 2>/dev/null
++diff --git a/tests/upcase_table/0002-FirstCluster.sh b/tests/upcase_table/0002-FirstCluster.sh
++index 9dfb1dc..ae84555 100755
++--- a/tests/upcase_table/0002-FirstCluster.sh
+++++ b/tests/upcase_table/0002-FirstCluster.sh
++@@ -3,11 +3,11 @@
++ 
++ img=${1:-"exfat.img"}
++ 
++-truncate -s 32M $img
+++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
++ mkfs.exfat $img >> /dev/null
++ dump_info=$(dump.exfat $img)
++ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | cut -d ':' -f 2)
++ 
++ # Make FirstCluster field corrupted
++ start_clu_off=$((${upcase_entry_off}+20))
++-echo "$(printf "%x" $start_clu_off):0x00" | xxd -r - $img
+++printf '\000' | dd of=$img bs=1 seek=$start_clu_off conv=notrunc 2>/dev/null
++diff --git a/tests/upcase_table/0003-DataLength.sh b/tests/upcase_table/0003-DataLength.sh
++index 68742b2..661d218 100755
++--- a/tests/upcase_table/0003-DataLength.sh
+++++ b/tests/upcase_table/0003-DataLength.sh
++@@ -3,7 +3,7 @@
++ 
++ img=${1:-"exfat.img"}
++ 
++-truncate -s 32M $img
+++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
++ mkfs.exfat $img >> /dev/null
++ 
++ dump_info=$(dump.exfat $img)
++@@ -11,5 +11,5 @@ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | c
++ size_off=$((${upcase_entry_off}+24))
++ 
++ # Make DataLength field corrupted
++-echo "$(printf "%x" $size_off):0x00" | xxd -r - $img
++-echo "$(printf "%x" $(($size_off + 1))):0x00" | xxd -r - $img
+++printf '\000' | dd of=$img bs=1 seek=$size_off conv=notrunc 2>/dev/null
+++printf '\000' | dd of=$img bs=1 seek=$(($size_off + 1)) conv=notrunc 2>/dev/null
++diff --git a/tests/upcase_table/0004-EntryType.sh b/tests/upcase_table/0004-EntryType.sh
++index b34661f..e7098b4 100755
++--- a/tests/upcase_table/0004-EntryType.sh
+++++ b/tests/upcase_table/0004-EntryType.sh
++@@ -3,11 +3,11 @@
++ 
++ img=${1:-"exfat.img"}
++ 
++-truncate -s 32M $img
+++dd if=/dev/zero of=$img bs=1048576 count=32 2>/dev/null
++ mkfs.exfat $img >> /dev/null
++ 
++ dump_info=$(dump.exfat $img)
++ upcase_entry_off=$(echo "${dump_info}" | grep "Upcase table entry position:" | cut -d ':' -f 2)
++ 
++ # Make EntryType field corrupted
++-echo "$(printf "%x" $upcase_entry_off):0x7F" | xxd -r - $img
+++printf '\177' | dd of=$img bs=1 seek=$((upcase_entry_off)) conv=notrunc 2>/dev/null
+diff --git a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.1.bb b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.2.bb
+similarity index 88%
+rename from meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.1.bb
+rename to meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.2.bb
+index 89603a8c5b..47c06e683f 100644
+--- a/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.1.bb
++++ b/meta-filesystems/recipes-utils/exfatprogs/exfatprogs_1.4.2.bb
+@@ -12,8 +12,9 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRCREV = "92c428db1fe3fa4f7bd2593788bc9b71403d59ae"
--SRCREV_unionmount = "c6ab621ac19f2b96d34cd98f244e611750e2bb23"
-+SRCREV = "f8833996b76765e9f1e5650fc77470e92fcf8a82"
-+SRCREV_unionmount = "f48a57d2a7db5f86ff3dbc4444c3c3041e182d7d"
- SRCREV_FORMAT = "default_unionmount"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
++           file://0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "85c133e8802cbc1191bff2477a67b376192dfb9f94bb254c05dbae79fd958f2e"
++SRC_URI[sha256sum] = "47c7c8ddeccbf50d39b903353f2cb3df79134367a4fd764fe2ce3755ff5877bf"
  
- SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;tag=v${PV} \
-            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
-            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
--           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-            file://0001-include-libgen.h-for-basename-API-prototype.patch \
-            file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch \
-            file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
-+           file://0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch \
-            "
- 
- 
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
 
