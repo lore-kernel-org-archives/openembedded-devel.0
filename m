@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C68C7C54F9B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8718C54FCD
 	for <webhook@archiver.kernel.org>; Wed, 29 Jul 2026 02:44:38 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3028.1785293068671200666
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3033.1785293070947176687
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2026 19:44:28 -0700
+ Tue, 28 Jul 2026 19:44:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=AFq/wcPp;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-c9aea40d799so225769a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 19:44:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=pzakNTMe;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-c9ef3e1337fso253345a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2026 19:44:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785293068; x=1785897868; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785293070; x=1785897870; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lXoPZ95dD93T0MQ94485TnzZdNPze66jQ0ksvaLiFKw=;
-        b=AFq/wcPpIQY6dq4ruF674QU1qddjR/FbeTh5NQN6jn4CeJEFls/mRHVG/u/ECIZL6J
-         fAVkQZUn/U1bqrb2vB20ieIESREU//9cmLNNrOQ+s+fnR9A1D9/BfCAULN35v77uqBmJ
-         Qq3kpGPlvB9D5mlkNZz2Yk+k4SGgS418cX3s6EKcqIxOt1oy3mb5yL7wPP/VYM8mmfFb
-         +nlCNNfA0886vRAP1vIKbSHemqH/grParELXeWk6ghNVcCNdTQD/Q8QDKLvtOdpBz1V3
-         QxkbvKRrwXReWbUA+VYkhlQJtc6jvuLSDpgOCh0ATYdKF936nYxkS5x3zVWMynIU8p0T
-         f3hw==
+        bh=pi5R4UAZ4o4qnHz4V8G2kheYDliVPWb8h8HzkIy4VCk=;
+        b=pzakNTMePux/mCkgFg+Tg3yXI6grRM97Mso5U2rMYohwh5PczkM+kOFSyMS30XOEfH
+         OtVY7HJ35etNDdFgaH8OhlJodsqcP+nxJ18gwoN7pDjRSF64QCViPUjMrAuZlamndBWZ
+         V3T0NHrbsxpG43HFRr6w74/+DUlPyWvHDEtlS61iO2IjIeG2nfzkstW5wWwM232Hxo/Q
+         h/fe2YxycP5/PrY/MO7oQfOMViPgvX7sszMRWIGeNX3WJ2m5b9xw2dThWS+1i86vyQ/c
+         792TNF9LC9NrQvN/6kbCsJlBdjnolb25QlvVLn8vLV/g7nina/Hrah+iPpUBp1lMoHjP
+         4E+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785293068; x=1785897868;
+        d=1e100.net; s=20251104; t=1785293070; x=1785897870;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lXoPZ95dD93T0MQ94485TnzZdNPze66jQ0ksvaLiFKw=;
-        b=o6lWhdo0B+0KdVGwTn2amOzXXLLzi4PKUEDzzlpoAX0Br+HaU8LL11l/vdFMdKI2LN
-         XF6vUwPmwvXGpMke7MDIlRwnI6HAM6t/z11tUDL6Lo5izpoaNEdgyWwCZrTol0qa/5cE
-         8pV+vul7wrHsJxq3RGwZ7RkRCWNeeLjdFPRvnTXGxRhmVw97OubbPSVcoIQjyrHHg/Ms
-         nifTvXAdk02OxNNtSM4MwVi4xr20HVsN5DYvZxnLmQFwpceB1fyfL2w07Kg9nTndT0Kc
-         27+WD8Wy/Kta2EGnhEhCaLg5DLge5CIEKbVPU89HX40coVET+aqZi8XPxAEM0PTAq8sI
-         fE7g==
-X-Gm-Message-State: AOJu0YxNMYMnHH2IKPSMQUUEga71JNedmtL7nX6pHrTUdjahe0H65XRD
-	RaUg14ngJzEyWDkbW98ICtY69kElQOouNynOxYTGg1ssvjQGR2XE/8+9aTeSBxYn
-X-Gm-Gg: AR+sD12IPaEfWB4C1yu3KGSuuDWjva6M2AFVcSUfQ2H24Pukf29t6NXMdJAnTXOgjLM
-	CFd6USAOmGSWyo/l+UpCZ6AWXmKja8ZwBO0DNDpHSEKbOesSFlKC44GWhJx/ZUZ9FtPvicirASq
-	8N1r27UdRM9L8DOIjY2Mjkv+uwp3i2sqEM3V+uMaeeGVLeK67I7vFbir2HjSnijnjX+bTGpY45E
-	kMD6MX3ZmHo/h/7Fkgm7a7BfZDe3Mtqa/CWfEwypcyT6c4sEGIJM9AxwivmGQ8tUjfWkKhZr1qJ
-	Mtx+oECCRoFOGzdq2YPoamN4fC0FdU9Qnco3Bfwm3Ce0m4ve4jlfAY9AbuFMnMex+tZ03r0BWIZ
-	9XZ3fCJLtPek4030+z4olnmwE1PtvkoWjvSIypW9rAo3IIn+lr28eWgznHk089bKRAYFXcofOTm
-	yJ4zZeU1wjGeuCOHb4sBM2lhaOQmIEfVq5HRO5wZVUpf6mNhmT3quwfp/MSTazObReijBA50H6W
-	qZqAwYW2IYo1tOw1speoMfyOUbzWCgU9U0H24s11GE3mCDGiNyYFIdJiQsuZpzj2QVb2T5K8zlB
-	ZFRdFJ89qIumIcAvONXN73OJ0tEedfM+YpSWNJZRB4bABEE4N64JkwRq6I8qhL17wIs/EJ9KQJd
-	/JQ==
-X-Received: by 2002:a05:6a20:cc0e:b0:3c4:1c9f:d7d with SMTP id adf61e73a8af0-3c8ba5d8fcfmr5857010637.46.1785293067993;
-        Tue, 28 Jul 2026 19:44:27 -0700 (PDT)
+        bh=pi5R4UAZ4o4qnHz4V8G2kheYDliVPWb8h8HzkIy4VCk=;
+        b=GIR8N5+lTQIPzF/D4FstqpR1PQywXSe/oU5BAiTlRm9rXBsgyAZMDffvhOW9GHXi1I
+         KKuGUIn0JeOLRvlZb5ipPVVksphQAj50Iq8Y5egoi5mfQ1w0eSp6f8H2CQhkssjIWVED
+         zcPN9VmlL3m7Ew6d8gaH2eRrHKrRk54HGYsIw9I3YXiKndCs6M9op8lulWjn9q1SnwqB
+         GRu2wZmz+hd6WgCV6tF3GkQbh0ie0fHiWrzigSrBpBiJ3y4/U9ty1CwGKmw2X0rLctyB
+         uroRGXHsbLValoATgtIwD4+5sByIjje4t2dzs4xeMNlTN+HTy1LreQJDbPzTXCRAVdfx
+         i3aw==
+X-Gm-Message-State: AOJu0YwmZAo6u0j9lAmkgdHPNokbluUsls+yIMmeHxmU8H59lmoSA+81
+	NESjh5T04SjH4RpBNVq24+Z8MbtK0/jo+HOdZhZT3f61Wdy2haAj9bwOZrkQ6rch
+X-Gm-Gg: AR+sD12IRtl2Wmyv6a8maa7sQj8GaZsuCXpTWXp9X7wQDxC+rcVQ+geMP3YRtgu8rOS
+	OBGy+EuMBslztw1QoygQd/9AxSTSdILgtxFZo39PfoJkFRugXZt1GIId1ez/eqsgEBUMctlgM+H
+	98z0TtUgs2CHxBqLjrkjwqhxqjx0LvWUevUgY86d/Bp/lvP5zl6v+6BUv5XMQqIosSVOE/U9ntY
+	nSlF4rCtWsKr5bAnS1ozSFgJPWwmFcRerL6cE9AqT+TFG+Htk2OF9Tx4RaIu9rA1NDHYe1Zio10
+	0FaGrosAVwtjy0DbxQVfuqjNUIbWmf2Cb3Ex11XFRIvZrgRN0hApPP3ljsrVsBmq9ES9zSr9maS
+	dyTilcnLofGxC2J6iN4G4D8CRTj48IrQ7TCunPCoeCAUzT5cxNaoLmgIdZnqMgDhUilMi6wZAC/
+	QbWFNhQ10wluRDhWMBuOEfZ2C9AP2jp1I/0BAckDTxx69m7elqpvn8rPOecrEvX5EHLXlxlbqML
+	mWF0o3ijq0PGsOhgYH+x6dUQFqf2npxgLzyzVn2SfjhMpCM62DatwtBae+FfGBgWCT6+R9D3/vF
+	V1uT5TarEcgI+/oLILktIiExGs4WcVD0X1ZVq5cgJazqz+EMaTe199ml9hSm8LTohw8B9BGAPoQ
+	vQA==
+X-Received: by 2002:a05:6a21:6b8c:b0:3c3:652c:664e with SMTP id adf61e73a8af0-3c8ba668fa5mr6050116637.69.1785293070305;
+        Tue, 28 Jul 2026 19:44:30 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e72643a12sm5787402c88.5.2026.07.28.19.44.26
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e72643a12sm5787402c88.5.2026.07.28.19.44.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 19:44:27 -0700 (PDT)
+        Tue, 28 Jul 2026 19:44:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 05/18] poppler: upgrade 26.06.0 -> 26.07.0
-Date: Tue, 28 Jul 2026 19:44:07 -0700
-Message-ID: <20260729024420.2328180-5-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 07/18] xmlsec1: upgrade 1.3.11 -> 1.3.12
+Date: Tue, 28 Jul 2026 19:44:09 -0700
+Message-ID: <20260729024420.2328180-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260729024420.2328180-1-khem.raj@oss.qualcomm.com>
 References: <20260729024420.2328180-1-khem.raj@oss.qualcomm.com>
@@ -71,38 +71,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2026 02:44:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128521
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128523
 
 Changes:
-- core: remove the deprecated DCT and JPX decoders; GPG-based signature
-  improvements; fix a signature regression (KDE bug #520496); fix added
-  annotations getting lost in some cases (#1732); fix crashes in malformed
-  documents.
-- utils: pdfinfo now sanitizes its output.
-- cpp: add render_hint::ignore_paper_color to allow a transparent paper color.
-- glib: construct PopplerPage::mutex, fixing a crash on macOS (#1743).
-- qt5/qt6: fix a crash in some signature operations (#1737).
+- xmlsec-openssl: add experimental ML-KEM support.
+- xmlsec-nss: add SHA3 support.
+- xmlsec-gnutls: add RSA-OAEP (SHA-256 / SHA-384 / SHA-512) support.
+- xmlsec-core: add --transform-max-depth to control the maximum transform
+  execution depth (0 disables the depth check).
+- Several other small fixes.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../poppler/{poppler_26.06.0.bb => poppler_26.07.0.bb}          | 2 +-
+ .../xmlsec1/{xmlsec1_1.3.11.bb => xmlsec1_1.3.12.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_26.06.0.bb => poppler_26.07.0.bb} (96%)
+ rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.3.11.bb => xmlsec1_1.3.12.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_26.06.0.bb b/meta-oe/recipes-support/poppler/poppler_26.07.0.bb
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.11.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.12.bb
 similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_26.06.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_26.07.0.bb
-index 3b1edd9335..ab1275e1a2 100644
---- a/meta-oe/recipes-support/poppler/poppler_26.06.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_26.07.0.bb
-@@ -9,7 +9,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-cmake-Do-not-use-isystem.patch \
-            file://0001-workaround-build-racing.patch \
+rename from meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.11.bb
+rename to meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.12.bb
+index dfdd7d5572..b46e76a24d 100644
+--- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.11.bb
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.12.bb
+@@ -22,7 +22,7 @@ SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz
+            file://run-ptest \
             "
--SRC_URI[sha256sum] = "4cb4e5a3dc8cb5eec751c8a23c8ba19f61f96dedc0cd07d2aee6b0c8e2cf6ba4"
-+SRC_URI[sha256sum] = "304832f48f8a47fdca90c6b6d1f684e68f37c10c9a0726f345f4ca9df4ca01e2"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+-SRC_URI[sha256sum] = "53675e98fa83b48201d24f7bfbcaeaa1b51496b8b19ff969785856bdeb196af3"
++SRC_URI[sha256sum] = "24045199af12d93fe5fdbbbf7e386e823e4842071e9432e2b90ac108b889a923"
  
+ UPSTREAM_CHECK_URI = "https://github.com/lsh123/xmlsec/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
 
