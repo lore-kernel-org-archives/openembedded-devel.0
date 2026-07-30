@@ -1,102 +1,102 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE94CC55167
-	for <webhook@archiver.kernel.org>; Thu, 30 Jul 2026 11:30:04 +0000 (UTC)
-Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9540.1785411002368517372
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FF4FC55165
+	for <webhook@archiver.kernel.org>; Thu, 30 Jul 2026 15:15:38 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14031.1785424533312213106
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2026 04:30:02 -0700
+ Thu, 30 Jul 2026 08:15:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Mxp5X/oj;
- spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-664c6304683so1861756d50.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 04:30:02 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=BQtm5aWU;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4954f5e8020so11042415e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 08:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785411001; x=1786015801; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JihGAU6YaJl91Vpw5D0eD7k/Pvf30mkzl9zUB8gcmtw=;
-        b=Mxp5X/ojQ2ETxy0cVsDsQ0EFGAuaX3y58wu1FYc5HQgQ2SONM4sIaxsavKosEGvTGt
-         j3q97ms7YXvYZRw1pdjq9X5sPIwXu9qfcmujSYGF+1EcANmeF4BMTjDcyAJqA1w5AYQT
-         KIgqYbn/8t03LckFBKi1aQEiqVNrP+UqnxizFWXAUj8s2Sl7vyctc0jip++r/JPff0Ga
-         hg2pP7nLFEfVzpvP4039+y/T7VkJfHi8t+DeKCvYxyjrPYqYb9ZzIWNLsmKQkerbt2kv
-         FdiitdKdUFTwy9WnzLQVsoYkvteEdMPpBfheLbTQGP/oKxXXoPX+LLGF8HazfAAmm+nx
-         Ca9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785411001; x=1786015801;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1785424531; x=1786029331; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JihGAU6YaJl91Vpw5D0eD7k/Pvf30mkzl9zUB8gcmtw=;
-        b=TDVdOez8+YI6WFGTUOxq0v1h7tP1mGO/QCKPQCHMlKcAqy8oKjYxcapknPlcwDh0Yj
-         Bb5Dp6kKpJYLpAFseQFI7DSUMv7aZusIO0wqJvBMWg7O1XkHI0+oARqO8qH8Qt4Yxmwq
-         eyqd9xl61hc5y/HXJ3c5vBb1yV+vhgYGjmuQO7h7HTy9Bhii8j+RzhT/mSNKy1fpEp6R
-         kpfqE0hNiRAN1EZq0M9Q5kLAN4KuYJg0wtOXIoYOAHEHYNXdMKfgtGdQjWoxJ/K3RuiF
-         W7xpgnH2iQOz3jakqDlYJx46H3S8hwoHj9AmJk4aAUz0EPzWrWjGfOM6VY3xGJT/qpUO
-         wnpQ==
-X-Gm-Message-State: AOJu0Yyvk0yewyxA81f86tQ8flX2q6h2As/wWs+7TiCAEt0tW8aIRXgD
-	ihUdtgfCM+vEKwPim4NkCm7u1IzlvEFD03Ls9ycEvQxoZJ1egvwIjyndsEEvz9Fv
-X-Gm-Gg: AR+sD11QGGiEDDz5sAlwSH8HpZ5JD5OKE0FTlvBxtHz15lWoqVuT33+eVBnUhQiF8X5
-	4cPZwytJpOWrLblGw8awZcfgkx+sqyMLJWb/aAtKJAfdAzbSRe0g+WClqEoMICZtkooj8BPXl0Y
-	aUYrR2oaz1XTHuueX8mpU0w6FQ5BYqmKyJeK1mcYaddchSJYY3Q5CKJICE3dbykjiVe4fCX96Ym
-	d7DpKxAWH0wcW0Z8Zc2PRIQq4Ixfkqw8Yg9Lu/n+J8RmKkNFSuw+iRNeK5ECFdjKvClAG2a79KQ
-	nWbA7REHO8kxx5GBsDr+7RluY5dWgaALLfLHWYtRJudXhKT+E5dRLHwRqi/WfChaucmu99LqDeU
-	J5D5T3WjtoTzZ0TLyEI7ENtByhruZXOFD6yXpK8yEHKgps+qnoRaC97QdyPXabEk45UyrBi8/Wm
-	q00WPIa50yFi/AAI5YEDJKhJrwnJEXp419gj5IKnlVmgOvzS/SuqExfpTTuUZpvEcE/6gi1P8JW
-	ts4/4Id6sThr6M1vXYjBCBXpdO0VmeaROyrUeARgB6M5mmsYUJMUH0O+JPRAuFBN2Vwop03dS2K
-	O8Nh7jYUmHYs
-X-Received: by 2002:a05:690c:c4ea:b0:81d:c233:aea0 with SMTP id 00721157ae682-81fb892bd50mr16080877b3.18.1785411001000;
-        Thu, 30 Jul 2026 04:30:01 -0700 (PDT)
-Received: from localhost.localdomain ([71.54.207.93])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-81fb88c799esm8185757b3.4.2026.07.30.04.30.00
+        bh=9zwiHqscNbitTD6YacX5ljcX6xJhBcruryj7RMJg9jo=;
+        b=BQtm5aWUTkPVLD+KpoUnRCmGSRc8cikvRcfDw1HV3kxPfOK1m5LG1LKMNnY/PXN8Fl
+         +Dn8JruVs9AfBVjRqZTRHfZOz5X0JzyZOGaNFtNhUMz+nSeCeAZ8e9ilc0GMDiQdPHyJ
+         8IkVgRSJX6yWzhmtHNI905vnTHG2xA+i+C0yQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785424531; x=1786029331;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9zwiHqscNbitTD6YacX5ljcX6xJhBcruryj7RMJg9jo=;
+        b=K2zt53CXlXkzEulpqoO7HFZ7khTgOFeU1gPtgMZjBYX1bbTQdAySnrpGHgZ7bH0EhQ
+         fOQ2GYIehj4IXrck5uNbXNUIqpSihhJ7UF+UwjEYztmqSYaNRMUov3ZQs5iP37RbJCGh
+         rqHnP2CPHrD/c72mhntDNrLI9FjFEpSeef+77sOPtsYe/Gvn/tp02HFd3jgWGkHt3pJx
+         x6rpfrLSRMbZu/QeCH0RiDg8tyoQdmHpLuZnTgH7E+zjrEtBkZ3GdyTYUlyUU9/GzlBa
+         UhzpHDVAXps0rPE1Qqh335NErY0WuL2q7Vttr+4xFeh0xF45FDFLsx3VWImBAIxQQKMT
+         kXVg==
+X-Gm-Message-State: AOJu0YwQgqBSfQEZJHa/wmC07b8vGpXUuOm/UBJZsJ1kXv0ZEVGZd7gV
+	h8RcA8Z/3FCO2LXA2SXu2X0YtcydPyoY/hgIMdl5oVEs6p5N/vgCJA0GX3g5VEzE9xPsUlw/Pzi
+	9rnNE
+X-Gm-Gg: AR+sD10rNxdBA0xPrCs7dWHvyxVCdE7GluGFt6X5KhBiAiHUgY4MwUERaX1YEL4BGWZ
+	Ts+VrH3HMe7Mu2niJNpQw0fYlcKJLIfTtILOymQqJVSZAbzsxX9iNvHqd9qtl+oxqS6qDyw1jr0
+	BMV0/i4GO7qXcgyCQYmtLDK11gLPvaeY99CL9GAD7Wkx/hFrNOHpq5uwY/iAhrGaC9HEmcDvFDo
+	7FxqBpO+ZmuqyCqUZMAQOrSejlzPw6AWnJCbY3UIOdoVVQQEt5sfm+NRsBF2l/enj1Y1jIwGyXj
+	qdUXD/mwMqU9zOlWMSt0J+QcPntRDhYZWYzJsGvxbaX+sQUI+1SVKGgdRyXvoo/keNz0C1ridLF
+	JTTXO3G02IUJjcd2nsQCwEZCkxjm0pHqcj3zw+JxTnLBH1eUJ6QQ6XYwZfmvWjf/kClGYoW+dC3
+	fLHqyZt/YlW50DcM7tqvWOC1s7/KadiIapcspin5ghF/sqB6l0QykPx+Vn7CB+49RU68ghLTfVg
+	mZegWHtnBC/aafzrvh6QQfwTTE5ad+5+n1Vtozdldcm51xICYYHouQ8WK6YzvDktZLE4WEYovCv
+	X9bj0pTI55w6Zw==
+X-Received: by 2002:a05:600c:8b4c:b0:497:fee3:3622 with SMTP id 5b1f17b1804b1-49800eabad7mr34447375e9.33.1785424530852;
+        Thu, 30 Jul 2026 08:15:30 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49800f0ecd4sm64044325e9.1.2026.07.30.08.15.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 04:30:00 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 30 Jul 2026 08:15:30 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][wrynose][PATCH] nodejs:  upgrade 22.23.1 -> 22.23.2
-Date: Thu, 30 Jul 2026 07:29:14 -0400
-Message-ID: <20260730112914.1702437-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-pika: Upgrade 1.4.1 -> 1.4.2
+Date: Thu, 30 Jul 2026 18:15:27 +0300
+Message-ID: <20260730151527.3241842-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260730151527.3241842-1-leon.anavi@konsulko.com>
+References: <20260730151527.3241842-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 11:30:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128570
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 15:15:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128572
 
-This is the July 2026 Security Release.
+Upgrade to release 1.4.2:
 
-https://nodejs.org/en/blog/vulnerability/july-2026-security-releases
+- Stop mutating global asyncio event loop policy on import
+- Importing pika.adapters can break asyncio subprocesses on Windows
 
-Changelog: https://github.com/nodejs/node/releases/tag/v22.23.2
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../nodejs/{nodejs_22.23.1.bb => nodejs_22.23.2.bb}             | 2 +-
+ .../python/{python3-pika_1.4.1.bb => python3-pika_1.4.2.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.23.1.bb => nodejs_22.23.2.bb} (99%)
+ rename meta-python/recipes-devtools/python/{python3-pika_1.4.1.bb => python3-pika_1.4.2.bb} (86%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.2.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.23.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.23.2.bb
-index 8ad884b9cd..bfa5e296e2 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.2.bb
-@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "b27385d6845089bdb91285d94b06c2a5cf1c37f8173a3c4e10824cc1ffadeaba"
-+SRC_URI[sha256sum] = "bbe768df8d5815d7fa76124052985332452e0a4742d39f32027550d1aab8f6fb"
+diff --git a/meta-python/recipes-devtools/python/python3-pika_1.4.1.bb b/meta-python/recipes-devtools/python/python3-pika_1.4.2.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-pika_1.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-pika_1.4.2.bb
+index e0313552d0..beb32240c5 100644
+--- a/meta-python/recipes-devtools/python/python3-pika_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pika_1.4.2.bb
+@@ -8,7 +8,7 @@ HOMEPAGE = "https://pika.readthedocs.io"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=678ec81495ba50edf81e84e4f1aa69f3"
  
- S = "${UNPACKDIR}/node-v${PV}"
+-SRC_URI[sha256sum] = "e851f3e4992adfbf8eb64e9b86d94e3382f92ba0200055abedbb29676b8e713b"
++SRC_URI[sha256sum] = "48d1f50297e76be4fc798fd5232d4d532d7a4758e51f7c0ae6c4004b9808a26b"
+ 
+ inherit pypi python_setuptools_build_meta
  
 -- 
-2.43.0
+2.47.3
 
 
