@@ -2,208 +2,159 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8124CC5516D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A05D7C55171
 	for <webhook@archiver.kernel.org>; Thu, 30 Jul 2026 18:03:05 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18151.1785434584048547549
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18149.1785434581639889074
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2026 11:03:04 -0700
+ Thu, 30 Jul 2026 11:03:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=luY5qUl3;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c9c26a5fb98so762292a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 11:03:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Nn76ZOOS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2cf50c6f235so1129155ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 11:03:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785434583; x=1786039383; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=u4YsMcBDw5PCJMXM8xz+HIBRR+5yluk3YkW0OG0wSQU=;
-        b=luY5qUl37EL5U+rnH6dFcqTd1Df1bjUmAL4MXyaYzWkolcwvpXS+Vyg6Dosvg1zONO
-         nzfRqEXIEyzcYY12H0m6afsbd+jCZquU16DvhMPvtIFtchsOgIgX0TbWprgp4e/XhGOC
-         GdCfWcxFPv9Nspp+sG8sG5mOhcbWNS4QzOVGa1p/nO8yGjWRn8p0k98IitFhJ+jBX6mM
-         bV/xm8zXKbUZhBkLamwludQIXT0lOkHD83j+wuLs5QK9ixJ3edL/tQSMd7lXIRkWJWP2
-         10ud+OPuVj1Rp65w8oRLX93p64TfO4ZPd3QNqJxOVrdQkIgzNhbJuKmY6bcIdU+Ec+jK
-         72/A==
+        d=gmail.com; s=20251104; t=1785434581; x=1786039381; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6apwJl9JDIV5XE7EMUs505Pj7iEl9jysGOE8QkmLLn4=;
+        b=Nn76ZOOSCc+oyQED0R2XTMVD+8ArPfxT8dZi/mpSzoUPY59lk95W4fFD8uLmpcj+B7
+         qzyJDNzpSgp6R6Cw8B7FE6KLduwfSEWhq3fpN//XlOgAU3b98FJ6aPi+nyzAC0ZIGa2Q
+         H+CyPrncAe3BWWL/Jc9UYMC74tJz5HR6XeNws8CcwPgt/Ga2K2hBvjFhOgFeS2cEVp3T
+         t4KjKFDxtCw7ApLHasPhORv/oDsVFD9Z6XSY3q2nR4d2Qc77y7Kh7jfFa1qaUQ9c1SDz
+         JYHzdds/X5/ebf6zx30TaGsHFGxkhTGxzsrSfUgL/aVhWCUqGza7pCqsJVbK5TGYFSnZ
+         Lg1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785434583; x=1786039383;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=u4YsMcBDw5PCJMXM8xz+HIBRR+5yluk3YkW0OG0wSQU=;
-        b=pb6JS0dNMdKdsfN64HlOThp9gepHyH77hyDggSCQCR8kqcM95aqC7XSI+5gRUkLw4Q
-         N8tcTwcFd2yvzp53ndQdQKTP2yhWIuEnD5yNd0msBLvAdqDdFd5EO9mNYFGG+WF10Enm
-         QYmJMecFszNjLN7/DUeEyDAO1cFoWW/FgPe6ADebDf7tWGqEqUx5xHXx2qlxpGO9DgA6
-         5ZACW84uKWIFeAmEjDkQvIAWTIn1nVkdmHeTxStiKMJa76do0q4QEDHwqXOaBtknG6F7
-         jvRcpfMm2Qi11hghYf9oA2/5hdYV0EIkkG/Qemk+ANUzClIpYi8SjHNwkPUyxz4i3pAj
-         kFFw==
-X-Gm-Message-State: AOJu0YyPqVTvevgAHWkRtqanvCJDOG8DqHeLtKVZpjhdA9I4/cn2b5Pi
-	vMXja72Tj76K2TZ6ciPrfWk7bm2EWy4Bj22nDMuMNrmscsc62qZw5Po/6aNeBLmY
-X-Gm-Gg: AR+sD131nGC/a/8SejX7jwtpw9XVacpjqDTdqvLtkGhPDdxvxSSsOGRyxxVLnxHvmGl
-	mf7QoZR0uOZR5ovbn6qwVNRaAr4kwIhzDms5t94wSGEMd5BYpgv2RHsIy5OcL1jOdFrJQHU+Pfk
-	zg08VwHXseYoZjkpSwyrTcH3Sqhv7CP/3PQYqkKN9ybm3NobHBjNabVb7Xz/cm5wf6fUj0bUShs
-	uZyoDfOgej0YUJ2AhrgAQ4okmVBy0sV7bPI5kuxt87QbabXIBTgaZ0fL7irxCKBmItAiHM9vkKJ
-	NTF1gahfQjJ+0jkKNhSav9XfnX21uaGFcKAm+5OnlVCwHV2L6Mu79Rj5cGJG4XSLPURp2JrvmRc
-	Twr9iKto2h9l0TD748Jm2N75GZEx+B8IRE2blsTbgUKhQL50ET6r5XwSuP/wXYGb4uRit2ucXOl
-	InHASoB5kbQCqpljQWzBTjqOoZvowbUUnsAawl/2VZktpHCqogpyC7npkhjRTjlz3aWZQDwa/8J
-	588fm9RnQJ/QOYmPHMrTQvdKCecfk8A8sV2kLlknTx+H3nH+J9qsE3qeuYNvi5TigbKcppkUBdn
-	Yn8XpqwqL9EOyRjgMTOabtuuiFs0UNVpuOB27guxTSrsHP0RR/VBSNSYLqQvJLxRwcm1y3nVR3x
-	cPg==
-X-Received: by 2002:a05:6300:6bc6:20b0:3c3:7195:fd47 with SMTP id adf61e73a8af0-3c90d9624e1mr687062637.24.1785434583023;
-        Thu, 30 Jul 2026 11:03:03 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785434581; x=1786039381;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=6apwJl9JDIV5XE7EMUs505Pj7iEl9jysGOE8QkmLLn4=;
+        b=HmdbT4pq4MbXPdlw0rFBo3dcPbPaXIKg9XP3ppln4NJpAGr6l90s7wqC1RX9xIGVT9
+         x+5DZv8k1usiKTVA4ciW/47m0JceMtml1fYba85YkvNQ1hX56bJW4MLnyqAosuDOCWBq
+         NTfBTP+4kXEzrQwWk6nmO3xEmjF0pzP1ifsN6SLjkaX6kViZomPNhACSUZAo+bm7hVd8
+         T9GPMvUIbpVdIlJXNSwWNK2e24AjkhX8MgJXpwGZ43pu42lQurKXlIa+WIaBbSRulmS5
+         ciwQvq/4TerqNiiMoxTIg2gEg6PTwQqtO9wgcZ2rlsAISssCbJaCiE+1OUq3/+OHJzo8
+         UDyQ==
+X-Gm-Message-State: AOJu0Yw8pnFhW6VO+ztidwD7Qk1iuddKi1goe315/B/SjWBPlEvS7/TP
+	hegswdJxr4NZSbsXtBKT8RDPOuQEAzxMkW00S045phOPiQNKIWp3bF2XkA76FOBg
+X-Gm-Gg: AR+sD12WF//41fClpN5PmDG4/+7o2UNxw6B3AGhJfXCyk9pWehj/r2OeOq0cEUDm0V9
+	HcdyVtixQ8spSyznsvIgV7dho6g+IHySjRCN3O8/VO4Ni5JitCJ9t7lF6ZNYc7tpw5vrpR7cvgI
+	Ap4zDMyx/zPAoKGh8x+m7SXOzYS+IaB3uBM5EHkToJmdpZa9dLAGS7QjFUTgQf3W+hqysErGlex
+	WUpLNrhP0EZBNlHDOb7cm8XyVyURnVLdZFWNuO4P3Pcwz34AM2h+XUFP2RtW/0Qwqr86O24avk2
+	tGsejduzcj1uRra4cjT1/Edoo8UQwIzDeq6/4H37FpY861t3iI3lN6XE+VcYvTgFjv3exRX/D0f
+	v8zWxV5vDROnhOa6yEzL//f8MD4mzl5z5WGq+J/YNPJAEDjoU691TiQYtB5LQOtpT8mMtObo2Qt
+	s1w/AZ+mgmwjr9b/+JHEHuxfzX5wB0bScD063EAVdLLDkk5iH9phnfyOrD47Li8L9XMODcSpnRq
+	GAdGXCJlfMOY0OpXr1LLKV9VL3CBaWqgA2RnawBCdpicImYiJ+pPDOzQk6vbHuQcUha7zKfRxvq
+	TrRfgsMp7FcooHzVIpWEebLCasEBvMMD7ihRYu9M2BOkzIgTm7BFPuxdVxzwIyGnJhMjFDpT3se
+	7iGZlECWX2q0wEg==
+X-Received: by 2002:a17:90b:4acc:b0:37e:b6a:6cdf with SMTP id 98e67ed59e1d1-38fa7efea94mr852808a91.20.1785434580733;
+        Thu, 30 Jul 2026 11:03:00 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e7265010esm24015408c88.6.2026.07.30.11.03.02
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e7265010esm24015408c88.6.2026.07.30.11.02.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 11:03:02 -0700 (PDT)
+        Thu, 30 Jul 2026 11:03:00 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH 3/4] webmin: upgrade 2.641 -> 2.653
-Date: Thu, 30 Jul 2026 11:02:55 -0700
-Message-ID: <20260730180257.3733387-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-webserver][PATCH 1/4] cockpit: upgrade 352 -> 364
+Date: Thu, 30 Jul 2026 11:02:53 -0700
+Message-ID: <20260730180257.3733387-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260730180257.3733387-1-khem.raj@oss.qualcomm.com>
-References: <20260730180257.3733387-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 18:03:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128575
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128573
 
-Upstream changes:
- * 2.650: new Systemd Services, GRUB 2, and Kea DHCP modules; WebSocket
-   proxy support in Servers Index; Alpine Linux support; Let's Encrypt
-   IP-based certificate support; editable SSH public keys in Users and
-   Groups.
- * 2.651: Certbot certificate request/renewal fixes; fix live activation
-   of Linux bond interfaces.
- * 2.652: global per-user ACL to block URL downloads from non-public IPs;
-   fix hex HTML entity recognition; fix session checks with HMAC session
-   keys; fix Usermin switching to use one-time login URLs.
- * 2.653: fix missing xmlrpc-lib.pl; fix partially installed Debian
-   package listing; Authentic theme improvements.
+Upstream changes (release notes):
+ * 353: Networking - suggest prefix length and gateway address; bug fixes.
+ * 354: Convert documentation to AsciiDoc; work around Firefox 146/147
+   bug; bug fixes.
+ * 355: ws - remove obsolete pam_cockpit_cert module; shell - add
+   StartTransientUnit as a sudo alternative.
+ * 356: systemd - allow editing timers created by Cockpit; convert
+   license headers to SPDX format.
+ * 357: lib - use browser context menu on shift; bridge - support
+   Python 3.14 on old kernels.
+ * 358: Networking - add Wi-Fi support; Cockpit Client updated to GTK 4.
+ * 359: Bug fixes and translation updates.
+ * 360: ws - CVE-2026-4631 (be more explicit when handling hostnames on
+   cli); ws - support loading a custom login page.
+ * 361: Remove all "Mount" actions in Anaconda mode; dependency updates.
+ * 362: Fix arbitrary code execution via specially crafted logs page link
+   (CVE-2026-4802); bug fixes.
+ * 363: Translation updates.
+ * 364: Bug fixes and translation updates.
 
-Recipe changes:
- * Drop init-exclude.patch: both hunks (init/index.cgi commented-out
-   runlevel loop and init/init-lib.pl exclude= support) are now
-   incorporated in upstream webmin 2.653.
- * Refresh net-generic.patch: upstream added alpine-linux to the
-   os_support line in net/module.info; refresh the patch context.
- * Refresh net-lib.pl.patch: context shifted by 4 lines with fuzz 1;
-   refreshed against 2.653 (same fallback to debian-linux-lib.pl).
- * Remove webmin-openrc-init from do_install: webmin 2.653 ships a new
-   webmin-openrc-init script that references /sbin/openrc-run, which is
-   not available on systemd-based distros; remove the file to avoid an
-   unresolvable RDEPENDS QA failure.
+cockpit 356 converted all license headers to SPDX format, moving the
+LGPL-2.1 text from COPYING to LICENSES/LGPL-2.1.txt. Update
+LIC_FILES_CHKSUM path accordingly (md5 is unchanged).
+
+Refresh 0001-Warn-not-error-if-xsltproc-is-not-found.patch: the
+configure.ac context shifted (-61 lines); same MSG_ERROR → MSG_WARN
+change preserved.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../webmin/files/net-generic.patch            | 24 +++++++++++++------
- .../webmin/files/net-lib.pl.patch             |  8 ++++---
- .../{webmin_2.641.bb => webmin_2.653.bb}      |  4 ++--
- 3 files changed, 24 insertions(+), 12 deletions(-)
- rename meta-webserver/recipes-webadmin/webmin/{webmin_2.641.bb => webmin_2.653.bb} (98%)
+ .../cockpit/{cockpit_352.bb => cockpit_364.bb}              | 4 ++--
+ .../0001-Warn-not-error-if-xsltproc-is-not-found.patch      | 6 ++++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+ rename meta-webserver/recipes-webadmin/cockpit/{cockpit_352.bb => cockpit_364.bb} (97%)
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-index cd9a522bb6..30f1d3dcc4 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-@@ -1,20 +1,30 @@
- Add support for configuring network interfaces on a generic linux system
+diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_352.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
+similarity index 97%
+rename from meta-webserver/recipes-webadmin/cockpit/cockpit_352.bb
+rename to meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
+index 6b1fdcaeb1..07e2b9d163 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/cockpit_352.bb
++++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
+@@ -2,14 +2,14 @@ SUMMARY = "Admin interface for Linux machines"
+ DESCRIPTION = "Cockpit makes it easy to administer your GNU/Linux servers via a web browser"
  
-+Refreshed for webmin 2.653 (upstream added alpine-linux to os_support).
+ LICENSE = "LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1.txt;md5=4fbd65380cdd255951079008b364516c"
+ 
+ SRC_URI += " \
+     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
+     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
+     file://cockpit.pam \
+     "
+-SRC_URI[sha256sum] = "72098a51f85c4a63f2e276af119920a5faca978b57652df562b409b5941b5146"
++SRC_URI[sha256sum] = "514cea072e1ef137323ab92bdb07a66bbb5106ecd584e7a046294cf0170cb690"
+ 
+ inherit gettext pkgconfig autotools systemd features_check python3targetconfig
+ 
+diff --git a/meta-webserver/recipes-webadmin/cockpit/files/0001-Warn-not-error-if-xsltproc-is-not-found.patch b/meta-webserver/recipes-webadmin/cockpit/files/0001-Warn-not-error-if-xsltproc-is-not-found.patch
+index db583cfd29..b8e812f0ae 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/files/0001-Warn-not-error-if-xsltproc-is-not-found.patch
++++ b/meta-webserver/recipes-webadmin/cockpit/files/0001-Warn-not-error-if-xsltproc-is-not-found.patch
+@@ -3,6 +3,8 @@ From: Khem Raj <raj.khem@gmail.com>
+ Date: Wed, 7 Sep 2022 11:12:28 -0700
+ Subject: [PATCH] Warn not error if xsltproc is not found
+ 
++Refreshed for cockpit 364 (context shifted; same intent preserved).
 +
- Upstream-Status: Inappropriate [config]
+ Upstream-Status: Inappropriate [oe-core specific]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+---
-+ net/generic-linux-lib.pl | 2 ++
-+ net/module.info          | 2 +-
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/net/generic-linux-lib.pl b/net/generic-linux-lib.pl
-+new file mode 100644
-+--- /dev/null
-++++ b/net/generic-linux-lib.pl
-+@@ -0,0 +1,2 @@
-++do 'linux-lib.pl';
-++
-+diff --git a/net/module.info b/net/module.info
- --- a/net/module.info
- +++ b/net/module.info
- @@ -1,6 +1,6 @@
-  name=Networking
-  category=net
---os_support=solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
--+os_support=generic-linux solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
-+-os_support=solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux alpine-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
-++os_support=generic-linux solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux alpine-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
-  desc=Network Configuration
-  longdesc=Configure boot time and active interfaces, DNS, routing and /etc/hosts.
-  readonly=1
----- /dev/null
--+++ b/net/generic-linux-lib.pl
--@@ -0,0 +1,2 @@
--+do 'linux-lib.pl';
--+
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-index 949525dfd7..cacd8c94f2 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-@@ -3,15 +3,17 @@ Upstream-Status: Inappropriate [config]
- XXX: need to work out a better fix.
+@@ -11,10 +13,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- Signed-off-by: Dexuan Cui <dexuan.cui@intel.com>
-+---
-+ net/net-lib.pl | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
- --- a/net/net-lib.pl
- +++ b/net/net-lib.pl
--@@ -38,7 +38,7 @@ elsif ($gconfig{'os_type'} eq 'debian-li
-- 	$net_mode = "netplan";
-+@@ -42,7 +42,7 @@ elsif ($auto_net_mode eq "dhcpcd") {
-+ 	$net_mode = "dhcpcd";
-  	}
-  else {
- -	do "$gconfig{'os_type'}-lib.pl";
- +	do "debian-linux-lib.pl";
-  	$net_mode = $gconfig{'os_type'};
-  	}
-- 
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_2.641.bb b/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
-similarity index 98%
-rename from meta-webserver/recipes-webadmin/webmin/webmin_2.641.bb
-rename to meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
-index b513ec14e6..a46c3aad16 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_2.641.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=0a6446108c96d0819d21e40b48109507"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://setup.sh \
--           file://init-exclude.patch \
-            file://net-generic.patch \
-            file://remove-startup-option.patch \
-            file://disable-version-check.patch \
-@@ -19,7 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://mysql-config-fix.patch \
-            file://webmin.service \
-             "
--SRC_URI[sha256sum] = "220015eaff2b666b9bbdf2ce2bc676de72d33e5cc5f35b800b0fa14934bdb95a"
-+SRC_URI[sha256sum] = "9acc680d3d45cee876f36fc8810ce68bb6e44a0365e245a4298a180e0d016696"
- UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
- UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
- 
-@@ -91,6 +90,7 @@ do_install() {
-         | tar --no-same-owner -xpf - -C ${D}${libexecdir}/webmin
- 
-     rm -f ${D}${libexecdir}/webmin/webmin-init
-+    rm -f ${D}${libexecdir}/webmin/webmin-openrc-init
-     rm -f ${D}${libexecdir}/webmin/ajaxterm/ajaxterm/configure.initd.gentoo
-     rm -rf ${D}${libexecdir}/webmin/patches
- 
+ diff --git a/configure.ac b/configure.ac
+-index 6896c19..2a1fb52 100644
++index 0d12145..36cb2c4 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -182,7 +182,7 @@ AC_SUBST([systemdunitdir], [$systemdunitdir])
++@@ -121,7 +121,7 @@ AC_SUBST([systemdunitdir], [$systemdunitdir])
+  # package as xgettext, and we find them by PATH, so just check for the one.
+  AC_PATH_PROG([XGETTEXT], [xgettext], [no])
+  if test "$XGETTEXT" = "no"; then
 
