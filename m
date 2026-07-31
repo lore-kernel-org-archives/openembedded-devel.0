@@ -1,121 +1,99 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 343ADC54F54
-	for <webhook@archiver.kernel.org>; Fri, 31 Jul 2026 04:36:22 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4204.1785472578268546088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99AFEC55167
+	for <webhook@archiver.kernel.org>; Fri, 31 Jul 2026 06:51:23 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1120.1785480678168260542
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2026 21:36:18 -0700
+ Thu, 30 Jul 2026 23:51:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=R2eMnlyO;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1785472579; x=1817008579;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Jsvyg9v620gJIppS9TQ7hcxhy4wwbRKykoMjOPsPWSo=;
-  b=R2eMnlyO9s/2OCoKiPA7eoLiWjIAtrlEr9JVZbT4xSwTL3eKV/UNlbtm
-   mZsxVSgyk99AvhhKrIsmIOcwI9sSY4BMfYKqeNlxOFMNJdqKH/dHC/zrZ
-   sSw2cotDVALKhgd3w4nv+lH8mWMjzxkoxJ46Cp18SgF50/aMl5j5Khscd
-   qcaxcOIOSjbwZX+s/qZDsKq7ShF5oXjdDXr9eUTEfhjGZOABEqGk5Dvsz
-   XNdntlHmqrbZuBCQlNtJruAjOwY0oTU2o8l8F35+65E29jCyC1yU2Kpvz
-   91GS7XWLMRX0qNT9USUb4VtvwMVgX3EaxZKWiv5aaBt3PBFQ28EPyZuMs
-   Q==;
-X-CSE-ConnectionGUID: nVTCmmdJR9K6P6dLldzzng==
-X-CSE-MsgGUID: If8Eci8cQmiTrI5B/5Xkbg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11860"; a="249146041"
-X-IronPort-AV: E=Sophos;i="6.25,195,1779116400"; 
-   d="scan'208";a="249146041"
-Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Jul 2026 13:36:16 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 54A79CA5E
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:36:16 +0000 (UTC)
-Received: from az2uksmom3.o.css.fujitsu.com (unknown [10.151.22.205])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 0F19D102FB96
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:36:16 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 20B591005AE8;
-	Fri, 31 Jul 2026 04:36:13 +0000 (UTC)
-From: Wang Mingyu < wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=EyeK1InH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-81dfdbd86d1so6808507b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 23:51:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785480677; x=1786085477; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=sU8yK0LQBUQw8WtNermjcKmvMuQTbw4Z+g0zQwDIZhE=;
+        b=EyeK1InHYHWBngMIO5w3HHAoPqjXyEY17xCxIGDgBvcPW9AkWnyrlaJqmnnIy29FW/
+         Ai8rXREn2AQYREGynP2WbRXVIXEK4hSDXqff9VgFDdUSQ/U2sDAZwCUmMKKgSe1Afyfj
+         O52xvmAJs7+fYDEhXpjibP1YW+a34qae6fVWThMQJTVjIojzQUwUOrKATBF8+v/YgADw
+         IQKiywSi6dBzsp1mk/EbYFqyoA4oGyvFlYgw3MSDYbThGemFj6A2dgbzS9Pbu+hBzyVP
+         etHOpVBhSN14d6F2fKlLixBg2LHj5VyHNI28B0UmfFFce2LrJvt+xklTTFaIBuHXVNOV
+         ph4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785480677; x=1786085477;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=sU8yK0LQBUQw8WtNermjcKmvMuQTbw4Z+g0zQwDIZhE=;
+        b=g0QkZ/Ms5VIUMk6vum+JgfHYCbxmhBPMPXx58QMcMJ6XZ8KADimzphj/Ihe2y/e1KN
+         rxzbTAAfGzGfHLBAP95vZqD5tvQjE+1LfiveSjjSmR+XGVsHuLZra2Kpj2zN2RLJl+cX
+         wKRRJa/q+nT7f8zCvz7FQHGy1M1iIBnFZ842uFDXT+5nFy8LZZn6Q/wXqVpoUgsXqltY
+         tReDipqP4331F3U4Spd13vseIx202GXK363Qt7zTmab/Sg+IZ8uIQ4NLAHbFXXjTez1A
+         GqeH1gIxDI+pr2k8jiMq5neE6mM8R6mWzyhd6kFD3BlxgFPkflPFZg5DRupqbPUsk4yE
+         cDLg==
+X-Gm-Message-State: AOJu0Yw58f+mv9l4pO4eCNu79rBGCthf7Kl+RevdjzuG90e9V/yE3urs
+	Q77S8OdaO2ByxYUAZ1h2Hb7ilXZs0gRKJt/wxFw9Gp+G7jOD61N2iq9MYDJpyh8+
+X-Gm-Gg: AR+sD13LyvbyAQmC5an8FMtae5MhO070xAW/o2syK93RQV4lb/eD9l/wiaZrcvAFg5v
+	kF4+YbOGES0F93vEx43EUcJbUKp++mfYRc7MoWkKcds3sxPRu4YNSJ7cfbQk61XNBrgTkTEW3+5
+	/qk+4BJLkzVkEejbptRZJLkO6yAHXrPSt2n3VbteMG47C0fq+AWmTeIRWSCj2lgosaN+nyuw4il
+	1pHnZFrZSrNBYWn/MTm5arvDdFox7PFLQv8YLqKcW5cDPQITuVAoyGr/w+yVOQwIxTwLa6WJ8/s
+	2Z3Y/bEfQDGpWcz+H/cjwKrhzWm7b9PCc+EHks4ijGiaLoboMNkmhuxkHc/d31UX3RFE8VsgkLf
+	2bssyIH7VzKhjS5L8iBFDbk+Sh5Iza6xxX+wWCB+Aqgzh77tMmqXJ4u4fMMhQdBD88XMQrdADpv
+	JOZ4q+YwjXZ3bhtIhwsUJ9J+sjIfoc4PglvoVSTYEV4uUd8Oy7itzQlEqwO6aanZadJHnyOYQSR
+	yx5HM/oIeH2kPJdFWe1bHlEr5DdDihS4TaujgEpLuTWa4qjpiDdyG0/l6YdN2Nf73GnhqB1itw/
+	Y3ywj7PSXwcv
+X-Received: by 2002:a05:690c:3601:b0:80c:37a:b62d with SMTP id 00721157ae682-81fcbbddd96mr4628247b3.44.1785480676780;
+        Thu, 30 Jul 2026 23:51:16 -0700 (PDT)
+Received: from localhost.localdomain ([71.54.207.93])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-81fccf841e1sm2249067b3.18.2026.07.30.23.51.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jul 2026 23:51:16 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] pcsc-lite: install systemd system units
-Date: Fri, 31 Jul 2026 12:36:10 +0800
-Message-ID: <20260731043610.1552-1-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] php: upgrade 8.5.8 -> 8.5.9
+Date: Fri, 31 Jul 2026 02:51:05 -0400
+Message-ID: <20260731065105.1000116-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:36:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128578
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 06:51:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128579
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+This is a security release.
 
-pcsc-lite 2.5.0 defaults to installing systemd user units, which leaves the
-package without a system-level pcscd.service while SYSTEMD_SERVICE still
-enables pcscd.socket. On target systems this makes systemctl status pcscd
-fail, and systemctl --user start pcscd can fail because the user unit
-requires polkit.service from the user manager.
+Changelog: https://www.php.net/ChangeLog-8.php#8.5.9
 
-Select upstream Meson systemdunit=system so pcscd.service and pcscd.socket
-are installed as system units. Keep upstream sysusers.d packaging so
-systemd-sysusers can create the pcscd system user required by the
-generated service and socket units.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ meta-oe/recipes-devtools/php/{php_8.5.8.bb => php_8.5.9.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.5.8.bb => php_8.5.9.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
-index d6427d2eba..75b0babec3 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
-@@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative
+diff --git a/meta-oe/recipes-devtools/php/php_8.5.8.bb b/meta-oe/recipes-devtools/php/php_8.5.9.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.5.8.bb
+rename to meta-oe/recipes-devtools/php/php_8.5.9.bb
+index 8d9b91aa7f..bc249fd0d3 100644
+--- a/meta-oe/recipes-devtools/php/php_8.5.8.bb
++++ b/meta-oe/recipes-devtools/php/php_8.5.9.bb
+@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
  
- EXTRA_OEMESON = " \
-     -Dlibusb=false \
-+    -Dsystemdunit=system \
-     -Dusbdropdir=${libdir}/pcsc/drivers \
- "
+ S = "${UNPACKDIR}/php-${PV}"
  
-@@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native = " pcsc-lite-lib-native"
+-SRC_URI[sha256sum] = "22f938efc6c4eaa8bf2e40ae11466140309496aa5d5a19204272fb2596fd11dd"
++SRC_URI[sha256sum] = "703c082ad9d2946ac647f3596812300d2c62b360d2f31a999021692a9b39476c"
  
- FILES:${PN} = "${sbindir}/pcscd \
-                ${datadir}/polkit-1 \
--               ${nonarch_libdir}/systemd/user \
-+               ${systemd_system_unitdir}/pcscd.service \
-+               ${systemd_system_unitdir}/pcscd.socket \
-+               ${libdir}/sysusers.d \
-+               ${exec_prefix}/sysusers.d \
-                ${sysconfdir}/default/pcscd"
- FILES:${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
- FILES:${PN}-dev = "${includedir} \
-@@ -54,12 +58,6 @@ FILES:${PN}-spy-dev = "${libdir}/libpcscspy.la \
- 
- do_install:append() {
-     rm -rf ${D}${datadir}/metainfo
--    # pcsc-lite installs pcscd-sysusers.conf into systemd's sysusersdir when
--    # the systemd pkg-config variable is available (${libdir}/sysusers.d),
--    # and falls back to ${exec_prefix}/sysusers.d otherwise. Drop both so the
--    # file is not left unpackaged (installed-vs-shipped QA).
--    rm -rf ${D}${libdir}/sysusers.d
--    rm -rf ${D}${exec_prefix}/sysusers.d
- }
- 
- RPROVIDES:${PN} += "${PN}-systemd"
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
 -- 
 2.43.0
 
