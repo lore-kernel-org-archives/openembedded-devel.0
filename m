@@ -2,498 +2,295 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14C73C5516F
-	for <webhook@archiver.kernel.org>; Fri, 31 Jul 2026 17:56:52 +0000 (UTC)
-Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1985.1785520604830319203
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16766C5516F
+	for <webhook@archiver.kernel.org>; Fri, 31 Jul 2026 17:59:12 +0000 (UTC)
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2159.1785520745310354484
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2026 10:56:45 -0700
+ Fri, 31 Jul 2026 10:59:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=FVQhyjV7;
- spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-66892c81725so1493733d50.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 10:56:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785520604; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bWl5LUcr;
+ spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-6682259cae6so1254202d50.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 10:59:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785520744; cv=none;
         d=google.com; s=arc-20260327;
-        b=QbqkRul9FAafRU+NwdEcnmioOKB57gcGH/mW6rMPWzOeS+fS3AVLq3prt+rOiGCx4j
-         ptU4Lx1KA9D57z/aIBl8mwfgZfnIDP2i4P+sIA9YgIUvEevn/xMvIih8G+ZIegHdAXSO
-         DZOTSGFaJpnh603fys/jDkmDWUZ39xwxPRKiJHmJ0WJ/0x5NxvaEu5BVUDQl6mzqbb8U
-         TOPOM2J3u1vpKYxCrVa3BxhWnQOIOhyjvAvi/tosaLjviS1ZVLP3YUo3ejru0uXBwcNq
-         gZftjQRRjBmCzTd4uFhVM4UnCQ2dvJHAQMMh/njiOQ4CxMsPCzcg0UZW70G8m8NG2Pdm
-         Iy7Q==
+        b=NetUqPOYsJleJi8oyxjbfAdBMimBixN8rCjZTscKPUdUxcRAHsXxDKYDIqNHH1xvul
+         Ht57/1a5sD9OPKY5/wRof/96XE1xCtrMxVO/48VlCgr2AX0gduejeWdQAvX+EwDmAYJj
+         JfywGUryhMzWJ2sgiQMIu6gktlOfhAdwQXpSJlS2n6FALXmDgVbw7Ekom6GgnNZjIr6o
+         s1dYEe70CxNVnwc2f6NA0rO1q2PRqDLC4bDDGyLJZRKLkzvTueCjpP4TSLHBsgxLesZT
+         DZWMZ5k0OCEZSrfvSYGGfd3Phug8NyOUvaafBEPsXOyMM3zYq3d7T6xWGXrehhMuftlX
+         R18g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=HxHE7VbmnffLdCKWXAfQyt344n3Zfum1uewJNSBPu8g=;
-        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
-        b=Lbg0Es4ixXvzre/kscEgdKYgeKkc+ju+gTYXi0CfkfViDaZMc8wLtSt0EyxHAvDmrY
-         XKSmyhTp0JidB4WHjOHcEIXuE1dJptYfQCY6O+oscCczLT3WGzjNrz6FkVd3od+nhkp7
-         DTWhoWEwnyAoLwB6Dvl43lH0FqQ17NtkJmYDPib2lp/Lx75hG6UvaNNbjD+ORmlq91DG
-         6p90XUPRzb8py+hoRovDgGG8lBBx6Ap3RoM4J8zJdPZtBZLH4rslZpNY5VoYav5zNpGG
-         /eBB7ZNODEvsYehsZ+qrnZHcPn+umaEthVVylaUEClUsSrXMCPavxUZt+MufY6RuFl3G
-         M7eQ==;
+        bh=7VY2ln+jLO97w5E9lF6AQKb/PH3HPjE6f3OzEh7emks=;
+        fh=xc7Pw1C2r64/D3IAczFTr6Vs+3vKL6I7LfJKgO2Lfwc=;
+        b=f5y2gVRaSJdIts82GoEATnZA4yYwik9LnuQ20rNT30MsRVAjc/xDjKcKKnX6awLLnt
+         CaL4DXHnaQSj2rVJEQZ5lzeXOyb5u5naB9XqICPsDnq1Xk7CqK3NDEtdGkwFqQtXFkZm
+         B4g8NrNhBcFq5RbV1KACT4AWaOZPVWxUspxpT2UgBkr7DOJcR0xEqW3JbTQz17BZjwhX
+         YFXEsv09I/2hJqyVfpVbDHVPHNOdXFDk/bebCmOumv1g0HOtopcfiJs/CT89o2jg8Bwl
+         s0N7t+WKuappN8hSlYva1gzq8XLJwJYz6apPbgpF83Hqc+vHAcqc+I4ckGUDpsqqOqiC
+         eEFg==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785520604; x=1786125404; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785520744; x=1786125544; darn=lists.openembedded.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HxHE7VbmnffLdCKWXAfQyt344n3Zfum1uewJNSBPu8g=;
-        b=FVQhyjV7iBMvdSY2etuIR44hWyr2cmTGeQs9Lge9rOQ5arW/0lct5jYpYgUFMb5tv0
-         8BSiOpUsm/aZEdugME1R2yfT1WdaqINcKIH036fIBok9KyAMPhgsaIXdPlOGrDcWgzah
-         w+nBZdkZy6sEodiKAWMGp2C72pHXTWkPFDtSLNq4MHWrQnQuXlad1GgFKA37mSn9RGL5
-         /f8fbxqeVImI0gZmscp7MblUkEPiBFdjRK2p8S9p6cNNG89mvDIcIphPNDgaxAjWLNAr
-         SAspQLy189P4e84TcW5sUvgpFj8GJFS0huFVLb1gh6BvcbnaG02vjzj/D+6n/n3/jOEl
-         ElDQ==
+        bh=7VY2ln+jLO97w5E9lF6AQKb/PH3HPjE6f3OzEh7emks=;
+        b=bWl5LUcra0F3u3aOO5dB5TBmHt79ObEKMTNdu/0GWgE8GrqwG6VDaxWA5rT/092ZrY
+         L2K+vz5Q1kYkhnJSEaRQJCU5jswXKZKfhSqoG5EOMnlRHlpLCfPT6AA2+beUw6LGNayb
+         nL7PQSo3RXVq8Qu3R78rNC4YDXYC88cnUQH338xF1sUTizIfGE0FlO/wyron4QZKKyoJ
+         RTF7LgrpyCVMFNgg0qWBl5bJFnceFNp8b1sPgLQTP2b+K3SKi+0ND3EjLJKemgXYVnvm
+         0D21yjhM8onDpIMursgRZYwsJAVVEbZMxndA6WLT3txoIp1erTHHS//eZ5LB6Nxc4hE2
+         3sAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785520604; x=1786125404;
+        d=1e100.net; s=20251104; t=1785520744; x=1786125544;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=HxHE7VbmnffLdCKWXAfQyt344n3Zfum1uewJNSBPu8g=;
-        b=X3/+SP2Zyn2ZujicQsfo0aOjENIEN2HROjlg+n907awbEz7fj8K2EKG1TW3gmse/V7
-         cqrwzxlOHjyldfUsBnj6BXMzjppvYGrWaK2UsIqlRway2O79QIRq95gklGxkMcmRGLIp
-         P3ByF5CGbC7RmtlINobvFtA2SlLRQ6XgT6nstUuF0SJe0pZ6laWpF/EqffdRtwSeEssC
-         shnnS9afyTTeZM+bJD4ediPTyK5DlFI+3RssCN3pE+0QreQ6/hiOw19y/Qhve3Qktbad
-         13EA43t9yCpNMyWrVgTwAqj8BUTPbJpfPwFm23FV5FWwbeBYPabLVEfutQ8L8PUn+YOv
-         SBIg==
-X-Gm-Message-State: AOJu0Yw98OnFQ+Vco+cVQM9qXCRxdMKMgFA4R/KESXDEVj+uM5I8yNoG
-	lWxaUup2ugYAiMTb1nbLrerGzZERFX6sno7wx8eVoBv11WwpUGim0GzeVoYHrTWYqKSS8R0Agk7
-	ci1h4HCyL6qDilsuPB3pxTb7JJOPNjNc=
-X-Gm-Gg: AR+sD11+nNK47WhNYhJp45Dwn6OT8qh+/4mMBScMdFjgQGBBdB2WB+pL5cumsdM70F/
-	nG+NMBm5zVwuGAcSTvPqSqfpNfVsKrJzVrcmgysQG+7Ta9PIngdkRAe8WEJJu1jTMGeCXxG1mjz
-	sYJQnI9C+TYFG0IsJzArbpDFMuhPsIx4jQWrh4VHlCRSQfkGZrEnakksF80nLO8Dr1WVM328cNi
-	Ao22YKGeE8l45kHdK11W+WxSnSTTXVjz/J3Bp81Cr+a4PGqSgopvQKLu0XsTIrxC4BsksU+GufR
-	apCstrJTuXURFlPlrIB+n66fd2vnuBZN1WTDg2iIJunwuw/DfviPPDFkUFHuarwlwmE2+xX9cD7
-	bW72PUrKIcc10LeE1TLqKUZhSgNEVz2cpGxjHU0CXA7zsKQjzPlVLmZWBNi+k4UGYq98hp78s2D
-	YUz+flQczUWyhohGFEzIhSYLJyj21p0YHv5phSv9lWTrui
-X-Received: by 2002:a53:d053:0:20b0:667:dd2f:9441 with SMTP id
- 956f58d0204a3-6694f01c0e6mr965513d50.13.1785520603565; Fri, 31 Jul 2026
- 10:56:43 -0700 (PDT)
+        bh=7VY2ln+jLO97w5E9lF6AQKb/PH3HPjE6f3OzEh7emks=;
+        b=Ajwzb94lmCUFmn9jnsLHDsuz7TD3x76b9d9BTmX+AvBnbkPyXW3MPo7nai8P3tFQ1t
+         OlvXrrY0ADtyaREbPsHpf5doG96SmTBGfqSnmzk9AM8O4UHjd7v66ty1zE0xpW59r5Jm
+         7ezVfGaeFCGzK5bTiTg7BDUR5ADT+7TJBCI8GmVo5eD0rAMdp9uV4KzXm/lseonmaZN0
+         ixK3rf5UCKaCqRCuOvZp46a/uVfNAti2+H2Lej8kcWhgTD/qQIzTtPKuIIXgQnFlDgL4
+         hSIOwH6ZcPcvO+OfGgpLZsqCkKIOfPwVwLcOYMbu23zSkA8ZrTIEhR0JQfqCXoMHHUDj
+         lGZQ==
+X-Gm-Message-State: AOJu0YxhHPi714ljoDafQR6ZDnuwzaP/GkRRAoq5GitoTdJl0TP4KA1c
+	BAlS1RuU+0zPKymBgnSPSDb6Mk1wkIhcrztfcxADcHUKJc/bBErPzLJ7OFS75aqVzxN9J/tr4Qp
+	oVzWzY2QNxCd8qBTDMUGXB01fGMiqBAWAa6DL
+X-Gm-Gg: AR+sD11a41WqL9B43zGq3VVbIrF0iMtq+Y8bIVaCR5S27fHWHrsPuETqW1RJo+h0v0j
+	NLIIRzEDBa+aNiRqO7jYZwR7evKArBWza0preji23NsfEWpFmtD6KFN2zRZfWzceourvNgyvF3f
+	w5hX0P2QzMfjxYQz+aREFoc25yT9ADj5Eeo6NJc9hVMySOPglmDB7vOg6TIkeeouE8SAFgZ82mj
+	gMVCa58nRiD6BSPCh+h6AUoRWOLFrwJaUycIYbofYX9XtjWwz7nBTJRK/0KH4E9FR5D/l2zozO1
+	5SiqnvrtpepED/qnypzeQCltIlj8DHFfprardjCrRbJ/GYDy7Cm+ejBPUzSbtuOHRn8fooTzIJ8
+	OCVONBQsyRyPKphMZspzpmhulntRTiVDP0PS3IZe/38SdaeNaEGM7ye41k5CgESZt+CPDbjIaAp
+	H+lyv+8aHQVv4kJT2wwi4uZMWzZVu4ZmfY4y1kaF0lLr/pgyI6KPKd4Ws=
+X-Received: by 2002:a53:b4c9:0:b0:669:483e:c36a with SMTP id
+ 956f58d0204a3-6694f17092amr829665d50.34.1785520744219; Fri, 31 Jul 2026
+ 10:59:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1785461355.git.anuj.mittal@oss.qualcomm.com>
-In-Reply-To: <cover.1785461355.git.anuj.mittal@oss.qualcomm.com>
+References: <20260731043610.1552-1-wangmy@fujitsu.com>
+In-Reply-To: <20260731043610.1552-1-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 31 Jul 2026 10:56:14 -0700
-X-Gm-Features: AUfX_mzCXqaHLwclzrQtTK_LNJHxRPoX0Zid3p17ABCZNZQC7A819_2GsusmmTo
-Message-ID: <CAMKF1srT_n5FVS8xyP33gyuWVLC83X9D9dCqpodnXPVfUEcXvg@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Scarthgap pull request
-To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Fri, 31 Jul 2026 10:58:34 -0700
+X-Gm-Features: AUfX_mx-IHebrAb_rrHN_yduL_PTSo2saCZNQ2hft0_kvyZzpbRj9ZzsKN25Ljw
+Message-ID: <CAMKF1sqfzZL4eFsKu1zfQJuh-8yUNgRiFYJAWXfHYS14xZtx7A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] pcsc-lite: install systemd system units
+To: wangmy@fujitsu.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000005092f20657ebe96a"
+Content-Type: multipart/alternative; boundary="000000000000b2d2d60657ebf1f0"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 17:56:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128584
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 17:59:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128585
 
---0000000000005092f20657ebe96a
+--000000000000b2d2d60657ebf1f0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-LGTM. merged now thanks Anuj
+Please rebase on top of the latest master branch and resend.
 
-On Thu, Jul 30, 2026 at 9:21=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qualco=
-mm.com>
-wrote:
+On Thu, Jul 30, 2026 at 9:36=E2=80=AFPM wangmy via lists.openembedded.org <=
+wangmy=3D
+fujitsu.com@lists.openembedded.org> wrote:
 
-> Please merge these changes in scarthgap. Tested locally and on autobuilde=
-r.
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1679
+> pcsc-lite 2.5.0 defaults to installing systemd user units, which leaves t=
+he
+> package without a system-level pcscd.service while SYSTEMD_SERVICE still
+> enables pcscd.socket. On target systems this makes systemctl status pcscd
+> fail, and systemctl --user start pcscd can fail because the user unit
+> requires polkit.service from the user manager.
 >
-> The following changes since commit
-> 7eb94107580092f79ff1b639a87762fe6f96aa12:
+> Select upstream Meson systemdunit=3Dsystem so pcscd.service and pcscd.soc=
+ket
+> are installed as system units. Keep upstream sysusers.d packaging so
+> systemd-sysusers can create the pcscd system user required by the
+> generated service and socket units.
 >
->   nginx: fix CVE-2026-42055 (2026-07-16 15:49:44 +0530)
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb | 12 +++++-------
+>  1 file changed, 5 insertions(+), 7 deletions(-)
 >
-> are available in the Git repository at:
+> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
+> b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
+> index d6427d2eba..75b0babec3 100644
+> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
+> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.0.bb
+> @@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative
 >
->   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
+>  EXTRA_OEMESON =3D " \
+>      -Dlibusb=3Dfalse \
+> +    -Dsystemdunit=3Dsystem \
+>      -Dusbdropdir=3D${libdir}/pcsc/drivers \
+>  "
 >
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
-rthgap
+> @@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native =3D "
+> pcsc-lite-lib-native"
 >
-> for you to fetch changes up to ef3df29f2cfca6a9513b51ebcdccf82b6c8a836f:
+>  FILES:${PN} =3D "${sbindir}/pcscd \
+>                 ${datadir}/polkit-1 \
+> -               ${nonarch_libdir}/systemd/user \
+> +               ${systemd_system_unitdir}/pcscd.service \
+> +               ${systemd_system_unitdir}/pcscd.socket \
+> +               ${libdir}/sysusers.d \
+> +               ${exec_prefix}/sysusers.d \
+>                 ${sysconfdir}/default/pcscd"
+>  FILES:${PN}-lib =3D "${libdir}/libpcsclite*${SOLIBS}"
+>  FILES:${PN}-dev =3D "${includedir} \
+> @@ -54,12 +58,6 @@ FILES:${PN}-spy-dev =3D "${libdir}/libpcscspy.la \
 >
->   libdbi-perl: Fix CVE-2026-14740 (2026-07-30 07:53:25 +0530)
+>  do_install:append() {
+>      rm -rf ${D}${datadir}/metainfo
+> -    # pcsc-lite installs pcscd-sysusers.conf into systemd's sysusersdir
+> when
+> -    # the systemd pkg-config variable is available (${libdir}/sysusers.d=
+),
+> -    # and falls back to ${exec_prefix}/sysusers.d otherwise. Drop both s=
+o
+> the
+> -    # file is not left unpackaged (installed-vs-shipped QA).
+> -    rm -rf ${D}${libdir}/sysusers.d
+> -    rm -rf ${D}${exec_prefix}/sysusers.d
+>  }
 >
-> ----------------------------------------------------------------
->
-> Ankur Tyagi (2):
->   postfix: upgrade 3.8.17 -> 3.8.19
->   haveged: upgrade 1.9.22 -> 1.9.23
->
-> Benjamin Robin (Schneider Electric) (1):
->   dnsmasq: fix CVE-2026-4890
->
-> Darsh Kelaiya (6):
->   jq: Fix CVE-2026-43895
->   jq: Fix CVE-2026-47770
->   jq: Fix CVE-2026-49839
->   jq: Fix CVE-2026-54679
->   dnsmasq: Fix CVE-2026-12725
->   dnsmasq: Fix CVE-2026-12969
->
-> Deepak Rathore (1):
->   ldns: fix CVE-2026-10846
->
-> Hetvi Thakar (5):
->   libdbi-perl: Fix CVE-2026-9698
->   libdbi-perl: Fix CVE-2026-10879
->   libdbi-perl: Fix CVE-2026-14380
->   libdbi-perl: Fix CVE-2026-14739
->   libdbi-perl: Fix CVE-2026-14740
->
-> Joao Marcos Costa (1):
->   nginx: backport fixes for CVE-2026-42533
->
-> Khem Raj (1):
->   apache2: upgrade 2.4.67 -> 2.4.68
->
-> Peter Marko (2):
->   libwebsockets: patch CVE-2026-10650
->   hostapd: set status for CVE-2026-58374
->
-> Qliangw (1):
->   libuio: fix FILE descriptor leak
->
-> Wang Mingyu (1):
->   monocypher: upgrade 4.0.2 -> 4.0.3
->
->  .../{postfix_3.8.17.bb =3D> postfix_3.8.19.bb}  |   2 +-
->  .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   3 +
->  .../dnsmasq/files/CVE-2026-12725.patch        | 111 +++
->  .../dnsmasq/files/CVE-2026-12969.patch        |  54 ++
->  .../dnsmasq/files/CVE-2026-4890.patch         |  75 ++
->  .../hostapd/hostapd_2.10.bb                   |   2 +
->  .../libwebsockets/CVE-2026-10650.patch        |  46 ++
->  .../libwebsockets/libwebsockets_4.3.3.bb      |   1 +
->  ...onocypher_4.0.2.bb =3D> monocypher_4.0.3.bb} |   2 +-
->  .../jq/jq/CVE-2026-43895.patch                | 206 +++++
->  .../jq/jq/CVE-2026-47770.patch                | 449 +++++++++++
->  .../jq/jq/CVE-2026-49839.patch                |  37 +
->  .../jq/jq/CVE-2026-54679.patch                |  74 ++
->  meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   4 +
->  .../ldns/ldns/CVE-2026-10846_p1.patch         | 117 +++
->  .../ldns/ldns/CVE-2026-10846_p2.patch         | 117 +++
->  .../ldns/ldns/CVE-2026-10846_p3.patch         |  34 +
->  meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb   |   6 +-
->  .../perl/libdbi-perl/CVE-2026-10879.patch     |  34 +
->  .../perl/libdbi-perl/CVE-2026-14380_p1.patch  |  37 +
->  .../perl/libdbi-perl/CVE-2026-14380_p2.patch  |  65 ++
->  .../perl/libdbi-perl/CVE-2026-14380_p3.patch  |  27 +
->  .../perl/libdbi-perl/CVE-2026-14380_p4.patch  |  56 ++
->  .../perl/libdbi-perl/CVE-2026-14739.patch     | 170 +++++
->  .../perl/libdbi-perl/CVE-2026-14740.patch     |  40 +
->  .../perl/libdbi-perl/CVE-2026-9698.patch      |  43 ++
->  .../perl/libdbi-perl_1.643.bb                 |   9 +
->  .../{haveged_1.9.22.bb =3D> haveged_1.9.23.bb}  |   2 +-
->  ...ix-fclose-leak-in-uio_line_from_file.patch |  31 +
->  .../recipes-extended/libuio/libuio_0.2.1.bb   |   1 +
->  .../{apache2_2.4.67.bb =3D> apache2_2.4.68.bb}  |   2 +-
->  .../nginx/nginx-1.24.0/CVE-2026-42533-1.patch | 126 ++++
->  .../nginx/nginx-1.24.0/CVE-2026-42533-2.patch | 381 ++++++++++
->  .../nginx/nginx-1.24.0/CVE-2026-42533-3.patch | 704 ++++++++++++++++++
->  .../nginx/nginx-1.24.0/CVE-2026-42533-4.patch | 587 +++++++++++++++
->  .../nginx/nginx-1.24.0/CVE-2026-42533-5.patch |  55 ++
->  .../recipes-httpd/nginx/nginx_1.24.0.bb       |   5 +
->  37 files changed, 3710 insertions(+), 5 deletions(-)
->  rename meta-networking/recipes-daemons/postfix/{postfix_3.8.17.bb =3D>
-> postfix_3.8.19.bb} (99%)
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2026-12725.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2026-12969.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2026-4890.patch
->  create mode 100644
-> meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.p=
-atch
->  rename meta-oe/recipes-crypto/monocypher/{monocypher_4.0.2.bb =3D>
-> monocypher_4.0.3.bb} (85%)
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-49839.patch
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch
->  create mode 100644
-> meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
->  create mode 100644
-> meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
->  create mode 100644
-> meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p1.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p2.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p3.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p4.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14739.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14740.patch
->  create mode 100644
-> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch
->  rename meta-oe/recipes-extended/haveged/{haveged_1.9.22.bb =3D>
-> haveged_1.9.23.bb} (94%)
->  create mode 100644
-> meta-oe/recipes-extended/libuio/libuio/fix-fclose-leak-in-uio_line_from_f=
-ile.patch
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.67.bb =3D>
-> apache2_2.4.68.bb} (99%)
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-1.patch
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-2.patch
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-3.patch
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-4.patch
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-5.patch
->
+>  RPROVIDES:${PN} +=3D "${PN}-systemd"
 > --
-> 2.54.0
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#128578):
+> https://lists.openembedded.org/g/openembedded-devel/message/128578
+> Mute This Topic: https://lists.openembedded.org/mt/120530364/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---0000000000005092f20657ebe96a
+--000000000000b2d2d60657ebf1f0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">LGTM. merged now thanks Anuj</div><br><div class=3D"gmail_=
-quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, =
-Jul 30, 2026 at 9:21=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mitt=
-al@oss.qualcomm.com">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex">Please merge these changes=
- in scarthgap. Tested locally and on autobuilder.<br>
+<div dir=3D"ltr">Please rebase on top of the latest master branch and resen=
+d.</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Thu, Jul 30, 2026 at 9:36=E2=80=AFPM wangmy via =
+<a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;wa=
+ngmy=3D<a href=3D"mailto:fujitsu.com@lists.openembedded.org">fujitsu.com@li=
+sts.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex">From: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.=
+com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
 <br>
-<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
-ds/1679" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
-ect.org/valkyrie/#/builders/81/builds/1679</a><br>
+pcsc-lite 2.5.0 defaults to installing systemd user units, which leaves the=
 <br>
-The following changes since commit 7eb94107580092f79ff1b639a87762fe6f96aa12=
-:<br>
-<br>
-=C2=A0 nginx: fix CVE-2026-42055 (2026-07-16 15:49:44 +0530)<br>
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
-el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
-mbedded-contrib</a> anujm/scarthgap<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
-g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
-enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
-<br>
-for you to fetch changes up to ef3df29f2cfca6a9513b51ebcdccf82b6c8a836f:<br=
+package without a system-level pcscd.service while SYSTEMD_SERVICE still<br=
 >
-<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-14740 (2026-07-30 07:53:25 +0530)<br>
-<br>
-----------------------------------------------------------------<br>
-<br>
-Ankur Tyagi (2):<br>
-=C2=A0 postfix: upgrade 3.8.17 -&gt; 3.8.19<br>
-=C2=A0 haveged: upgrade 1.9.22 -&gt; 1.9.23<br>
-<br>
-Benjamin Robin (Schneider Electric) (1):<br>
-=C2=A0 dnsmasq: fix CVE-2026-4890<br>
-<br>
-Darsh Kelaiya (6):<br>
-=C2=A0 jq: Fix CVE-2026-43895<br>
-=C2=A0 jq: Fix CVE-2026-47770<br>
-=C2=A0 jq: Fix CVE-2026-49839<br>
-=C2=A0 jq: Fix CVE-2026-54679<br>
-=C2=A0 dnsmasq: Fix CVE-2026-12725<br>
-=C2=A0 dnsmasq: Fix CVE-2026-12969<br>
-<br>
-Deepak Rathore (1):<br>
-=C2=A0 ldns: fix CVE-2026-10846<br>
-<br>
-Hetvi Thakar (5):<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-9698<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-10879<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-14380<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-14739<br>
-=C2=A0 libdbi-perl: Fix CVE-2026-14740<br>
-<br>
-Joao Marcos Costa (1):<br>
-=C2=A0 nginx: backport fixes for CVE-2026-42533<br>
-<br>
-Khem Raj (1):<br>
-=C2=A0 apache2: upgrade 2.4.67 -&gt; 2.4.68<br>
-<br>
-Peter Marko (2):<br>
-=C2=A0 libwebsockets: patch CVE-2026-10650<br>
-=C2=A0 hostapd: set status for CVE-2026-58374<br>
-<br>
-Qliangw (1):<br>
-=C2=A0 libuio: fix FILE descriptor leak<br>
-<br>
-Wang Mingyu (1):<br>
-=C2=A0 monocypher: upgrade 4.0.2 -&gt; 4.0.3<br>
-<br>
-=C2=A0.../{<a href=3D"http://postfix_3.8.17.bb" rel=3D"noreferrer" target=
-=3D"_blank">postfix_3.8.17.bb</a> =3D&gt; <a href=3D"http://postfix_3.8.19.=
-bb" rel=3D"noreferrer" target=3D"_blank">postfix_3.8.19.bb</a>}=C2=A0 |=C2=
-=A0 =C2=A02 +-<br>
-=C2=A0.../recipes-support/dnsmasq/<a href=3D"http://dnsmasq_2.90.bb" rel=3D=
-"noreferrer" target=3D"_blank">dnsmasq_2.90.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
-=A03 +<br>
-=C2=A0.../dnsmasq/files/CVE-2026-12725.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1=
-11 +++<br>
-=C2=A0.../dnsmasq/files/CVE-2026-12969.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 54 ++<br>
-=C2=A0.../dnsmasq/files/CVE-2026-4890.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 75 ++<br>
-=C2=A0.../hostapd/<a href=3D"http://hostapd_2.10.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">hostapd_2.10.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
-=C2=A0.../libwebsockets/CVE-2026-10650.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 46 ++<br>
-=C2=A0.../libwebsockets/<a href=3D"http://libwebsockets_4.3.3.bb" rel=3D"no=
-referrer" target=3D"_blank">libwebsockets_4.3.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-|=C2=A0 =C2=A01 +<br>
-=C2=A0...<a href=3D"http://onocypher_4.0.2.bb" rel=3D"noreferrer" target=3D=
-"_blank">onocypher_4.0.2.bb</a> =3D&gt; <a href=3D"http://monocypher_4.0.3.=
-bb" rel=3D"noreferrer" target=3D"_blank">monocypher_4.0.3.bb</a>} |=C2=A0 =
-=C2=A02 +-<br>
-=C2=A0.../jq/jq/CVE-2026-43895.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 206 +++++<br>
-=C2=A0.../jq/jq/CVE-2026-47770.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 449 +++++++++++<br>
-=C2=A0.../jq/jq/CVE-2026-49839.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 37 +<br>
-=C2=A0.../jq/jq/CVE-2026-54679.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 74 ++<br>
-=C2=A0meta-oe/recipes-devtools/jq/<a href=3D"http://jq_1.7.1.bb" rel=3D"nor=
-eferrer" target=3D"_blank">jq_1.7.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 =C2=A04 +<br>
-=C2=A0.../ldns/ldns/CVE-2026-10846_p1.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 117 +++<br>
-=C2=A0.../ldns/ldns/CVE-2026-10846_p2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 117 +++<br>
-=C2=A0.../ldns/ldns/CVE-2026-10846_p3.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 34 +<br>
-=C2=A0meta-oe/recipes-devtools/ldns/<a href=3D"http://ldns_1.8.3.bb" rel=3D=
-"noreferrer" target=3D"_blank">ldns_1.8.3.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=A0=
-6 +-<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-10879.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-34 +<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14380_p1.patch=C2=A0 |=C2=A0 37 +<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14380_p2.patch=C2=A0 |=C2=A0 65 ++<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14380_p3.patch=C2=A0 |=C2=A0 27 +<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14380_p4.patch=C2=A0 |=C2=A0 56 ++<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14739.patch=C2=A0 =C2=A0 =C2=A0| 170 ++=
-+++<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-14740.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-40 +<br>
-=C2=A0.../perl/libdbi-perl/CVE-2026-9698.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
-43 ++<br>
-=C2=A0.../perl/<a href=3D"http://libdbi-perl_1.643.bb" rel=3D"noreferrer" t=
-arget=3D"_blank">libdbi-perl_1.643.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A09 +<br>
-=C2=A0.../{<a href=3D"http://haveged_1.9.22.bb" rel=3D"noreferrer" target=
-=3D"_blank">haveged_1.9.22.bb</a> =3D&gt; <a href=3D"http://haveged_1.9.23.=
-bb" rel=3D"noreferrer" target=3D"_blank">haveged_1.9.23.bb</a>}=C2=A0 |=C2=
-=A0 =C2=A02 +-<br>
-=C2=A0...ix-fclose-leak-in-uio_line_from_file.patch |=C2=A0 31 +<br>
-=C2=A0.../recipes-extended/libuio/<a href=3D"http://libuio_0.2.1.bb" rel=3D=
-"noreferrer" target=3D"_blank">libuio_0.2.1.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
-=A01 +<br>
-=C2=A0.../{<a href=3D"http://apache2_2.4.67.bb" rel=3D"noreferrer" target=
-=3D"_blank">apache2_2.4.67.bb</a> =3D&gt; <a href=3D"http://apache2_2.4.68.=
-bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.68.bb</a>}=C2=A0 |=C2=
-=A0 =C2=A02 +-<br>
-=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42533-1.patch | 126 ++++<br>
-=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42533-2.patch | 381 ++++++++++<br>
-=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42533-3.patch | 704 +++++++++++++++++=
-+<br>
-=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42533-4.patch | 587 +++++++++++++++<b=
+enables pcscd.socket. On target systems this makes systemctl status pcscd<b=
 r>
-=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42533-5.patch |=C2=A0 55 ++<br>
-=C2=A0.../recipes-httpd/nginx/<a href=3D"http://nginx_1.24.0.bb" rel=3D"nor=
-eferrer" target=3D"_blank">nginx_1.24.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 =C2=A05 +<br>
-=C2=A037 files changed, 3710 insertions(+), 5 deletions(-)<br>
-=C2=A0rename meta-networking/recipes-daemons/postfix/{<a href=3D"http://pos=
-tfix_3.8.17.bb" rel=3D"noreferrer" target=3D"_blank">postfix_3.8.17.bb</a> =
-=3D&gt; <a href=3D"http://postfix_3.8.19.bb" rel=3D"noreferrer" target=3D"_=
-blank">postfix_3.8.19.bb</a>} (99%)<br>
-=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
-2026-12725.patch<br>
-=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
-2026-12969.patch<br>
-=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
-2026-4890.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebs=
-ockets/CVE-2026-10650.patch<br>
-=C2=A0rename meta-oe/recipes-crypto/monocypher/{<a href=3D"http://monocyphe=
-r_4.0.2.bb" rel=3D"noreferrer" target=3D"_blank">monocypher_4.0.2.bb</a> =
-=3D&gt; <a href=3D"http://monocypher_4.0.3.bb" rel=3D"noreferrer" target=3D=
-"_blank">monocypher_4.0.3.bb</a>} (85%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patc=
-h<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patc=
-h<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-49839.patc=
-h<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patc=
-h<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_=
-p1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_=
-p2.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_=
-p3.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--10879.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14380_p1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14380_p2.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14380_p3.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14380_p4.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14739.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--14740.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026=
--9698.patch<br>
-=C2=A0rename meta-oe/recipes-extended/haveged/{<a href=3D"http://haveged_1.=
-9.22.bb" rel=3D"noreferrer" target=3D"_blank">haveged_1.9.22.bb</a> =3D&gt;=
- <a href=3D"http://haveged_1.9.23.bb" rel=3D"noreferrer" target=3D"_blank">=
-haveged_1.9.23.bb</a>} (94%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/libuio/libuio/fix-fclose-=
-leak-in-uio_line_from_file.patch<br>
-=C2=A0rename meta-webserver/recipes-httpd/apache2/{<a href=3D"http://apache=
-2_2.4.67.bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.67.bb</a> =3D=
-&gt; <a href=3D"http://apache2_2.4.68.bb" rel=3D"noreferrer" target=3D"_bla=
-nk">apache2_2.4.68.bb</a>} (99%)<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
-E-2026-42533-1.patch<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
-E-2026-42533-2.patch<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
-E-2026-42533-3.patch<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
-E-2026-42533-4.patch<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
-E-2026-42533-5.patch<br>
+fail, and systemctl --user start pcscd can fail because the user unit<br>
+requires polkit.service from the user manager.<br>
 <br>
+Select upstream Meson systemdunit=3Dsystem so pcscd.service and pcscd.socke=
+t<br>
+are installed as system units. Keep upstream sysusers.d packaging so<br>
+systemd-sysusers can create the pcscd system user required by the<br>
+generated service and socket units.<br>
+<br>
+Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
+=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.0.bb</a> | 12 +++++--=
+-----<br>
+=C2=A01 file changed, 5 insertions(+), 7 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_=
+2.5.0.bb" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.0.bb</a> b/met=
+a-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.0.bb" rel=3D=
+"noreferrer" target=3D"_blank">pcsc-lite_2.5.0.bb</a><br>
+index d6427d2eba..75b0babec3 100644<br>
+--- a/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.0.bb</a><br>
++++ b/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.0.bb</a><br>
+@@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative<br>
+<br>
+=C2=A0EXTRA_OEMESON =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0-Dlibusb=3Dfalse \<br>
++=C2=A0 =C2=A0 -Dsystemdunit=3Dsystem \<br>
+=C2=A0 =C2=A0 =C2=A0-Dusbdropdir=3D${libdir}/pcsc/drivers \<br>
+=C2=A0&quot;<br>
+<br>
+@@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native =3D &quot; pcsc-lite=
+-lib-native&quot;<br>
+<br>
+=C2=A0FILES:${PN} =3D &quot;${sbindir}/pcscd \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${datadir}/polkit-1=
+ \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${nonarch_libdir}/s=
+ystemd/user \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${systemd_system_un=
+itdir}/pcscd.service \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${systemd_system_un=
+itdir}/pcscd.socket \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${libdir}/sysusers.=
+d \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${exec_prefix}/sysu=
+sers.d \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${sysconfdir}/defau=
+lt/pcscd&quot;<br>
+=C2=A0FILES:${PN}-lib =3D &quot;${libdir}/libpcsclite*${SOLIBS}&quot;<br>
+=C2=A0FILES:${PN}-dev =3D &quot;${includedir} \<br>
+@@ -54,12 +58,6 @@ FILES:${PN}-spy-dev =3D &quot;${libdir}/<a href=3D"http:=
+//libpcscspy.la" rel=3D"noreferrer" target=3D"_blank">libpcscspy.la</a> \<b=
+r>
+<br>
+=C2=A0do_install:append() {<br>
+=C2=A0 =C2=A0 =C2=A0rm -rf ${D}${datadir}/metainfo<br>
+-=C2=A0 =C2=A0 # pcsc-lite installs pcscd-sysusers.conf into systemd&#39;s =
+sysusersdir when<br>
+-=C2=A0 =C2=A0 # the systemd pkg-config variable is available (${libdir}/sy=
+susers.d),<br>
+-=C2=A0 =C2=A0 # and falls back to ${exec_prefix}/sysusers.d otherwise. Dro=
+p both so the<br>
+-=C2=A0 =C2=A0 # file is not left unpackaged (installed-vs-shipped QA).<br>
+-=C2=A0 =C2=A0 rm -rf ${D}${libdir}/sysusers.d<br>
+-=C2=A0 =C2=A0 rm -rf ${D}${exec_prefix}/sysusers.d<br>
+=C2=A0}<br>
+<br>
+=C2=A0RPROVIDES:${PN} +=3D &quot;${PN}-systemd&quot;<br>
 -- <br>
-2.54.0<br>
+2.43.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#128578): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/128578" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/128578</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120530364/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/120530364/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div>
 
---0000000000005092f20657ebe96a--
+--000000000000b2d2d60657ebf1f0--
 
