@@ -1,400 +1,248 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9179AC5516E
-	for <webhook@archiver.kernel.org>; Thu, 30 Jul 2026 18:03:05 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17841.1785434582928337347
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24C26C54F54
+	for <webhook@archiver.kernel.org>; Fri, 31 Jul 2026 04:21:22 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4050.1785471680199724922
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2026 11:03:02 -0700
+ Thu, 30 Jul 2026 21:21:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=DweIyK8j;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-38f620399a0so161477a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 11:03:02 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ltqTDK31;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=II/3Efii;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V2Oep42910044
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:21:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=rFDprARhpMaDWgJ8WpFjhq
+	fThe9BMCU8JfCbCh39D6o=; b=ltqTDK31pvMN8bDF5etUiVlY5PxuGW4CDRzgC+
+	4Bi1kvcUYO/0oN48jjv2uh+nOL0/LJHRZSiETHscTGgiPDUabPl6lDcTAfw9e2+y
+	HO/hHjBNBVPe1YT23CljLvoGG2WUN/MKcpvcawXuAhzIEwYQk9EI7VmBJ42O61TM
+	HZcpNHBFyeDxsCWDiVJqqReHmx8Kh5ZeYIoBcam/x7XrvrEjImLWbUO66nCmck1x
+	bUppjKYFGpOyaHUS6gQbbz3HpaYnBNmVbv1cO1oQLt/VWM6RKNyT+e3to3Bu603i
+	8RY0BAb61zSx2Amgd3HjPN1IJnSt2cWVGn/LN32RbuYjfB/A==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frjw7gc3b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:21:18 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb6dd278512so361858a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 21:21:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785434582; x=1786039382; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=lhPgCIA+4l10mjkhtaR2VUZuGbqOAfOw1yQhFEndYR4=;
-        b=DweIyK8jyZSQSOBbc0wYKxGo2x9FLK7mh8RHwlpfTvIwbUfkiGV+On8GLSDFG5g0aN
-         KVTmngZvVA1sCarj91K9fqFxcXRxskPKaakMS2v3nF3R+HJ2gfdoTxG+97o9q3yYvF61
-         u0xDxoz/U1g21MCav8ALt0nrRv57VDPtZYjps95VChkmXaYWsnNEhTDUPyTl64JzFPQK
-         JqYKVImQhQOXl4OeRfychnMHa+qpF8D7Dotf1h2pdi12DQVDf9AlR+O/khP78UT+UZzF
-         ox6jC8gtiwLei5WJfEFqeyn7W1qADXmpRdumSn3E6TycNdr+o/QFsw9NbrySPyS174fk
-         WjJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785434582; x=1786039382;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1785471678; x=1786076478; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lhPgCIA+4l10mjkhtaR2VUZuGbqOAfOw1yQhFEndYR4=;
-        b=qiUZRx1VLL6++HCKJVJ36VArigIDw8XukCmjR8VXk0JhTB+FiL/Hz2CYEJIaXiFnOv
-         6Dh3ogCMdVI0dZSkbU+iFWm2U6mob4XP4ncjJD4N073KEhHqPLBPYG5nVEjzCiUGIlI8
-         eNAX+iECef7sR47ZyJuf3GGP5EBC3Fq3LNzY5imWUhYQwfanBvudNYxVfB0JkNR2bkxm
-         q0RZxQbGk5y7uFPi4VdDETAoAlNPGl3qHRavC+bgpp9ed7xr3fgOaxnGhtK5hMnaWwXL
-         EFBDMqAP2nNL08nLmUIzzhTBVVVv3a7qfHQpqbisG9OuX8fPMHn5WGjj/HSj7zhDkd6n
-         zGdg==
-X-Gm-Message-State: AOJu0YxbFcAnrVYilvcJG0xuNYRfcpJ5bTshPoj/iBqrH/ixe41ADtzz
-	BGirA1Tq25jAbbK4eH7eYSRqyZdmjA0DT4Z8QPmvuwzdjCvv5srLd/OWB/htyeKk
-X-Gm-Gg: AR+sD13vaQf1AdAbR64MqAmlbdZcS+bmAAG5oPV/tK0iYaHuRqeXcSXcb6m4W5pmyan
-	p2XxBdRl0SsgK2FtD/oek55tH/kcpSE2L3JQtCoJppTVMcQYis5cKL6j9X5NxQHRTSrTMORV8TD
-	ejQ2icHThK2hM2G0hehkuHVHNjNk3zDxIwclWdGz/tshOdmAokmwLEjguIrqFfkrQH8pjyPPzyZ
-	hJokc1k3miEAJcCSY7N/kA5W51B8ZN5Eu+usGfdlt+kZOQ9M+4yJwWortsQhbffKPvZKKlaOZJW
-	1G9E0vhY/5ctknHbVlbTSyZQaGU2avxyz0HaRTBIaB8vXA4pp542ZcX+ZS/tn+Vvp66S2SXeWXk
-	g3gWKfILKcDrMC739bgIcGa7d4TQrt/mL6RefOx8r3u6oOAw3+b1xX1rZozLZt1RM3MaFfqwIre
-	mBuzMCvW5S1T4XYEpVMDob3n4DGHsBX8xknGDiVujoHL99sfbVsliWVZdQGHcs4UEqAgy3LuQ74
-	dyUoalUyCVKBTBuA4kMG8czQYY2AYuwPmrROCC4+E4EzCp7fEadKViRt1P5vVNMoGPd0WzqJKPy
-	zv8JPDb9ldQrhSda3yptdco2O/J4POCUGDCRLs2S8DoXwXzjZ59wmH6Qzr9qdv+deYpHR7bE58B
-	ztA==
-X-Received: by 2002:a17:90b:1dd0:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-38fa7dcb02bmr864248a91.6.1785434581967;
-        Thu, 30 Jul 2026 11:03:01 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e7265010esm24015408c88.6.2026.07.30.11.03.00
+        bh=rFDprARhpMaDWgJ8WpFjhqfThe9BMCU8JfCbCh39D6o=;
+        b=II/3Efii4T6UYOHWEMAFA0f4KrFLkVK6dTo6l4K13xr6rzgVZ5MQwZIv23Q4ABWzz5
+         LLV8IOyAn+0b4MFDPtnlHf4l8MMvYD2KrpQMySYGfTFAekeDwg57zpOP9cRZgQGwUK04
+         6vXBnd+3mUREcbtKK7MfMG/5t4L5eEaXMoBaZdNIQcA+2XxXdw6064lDF1vfW23e49hD
+         MGomToXTK0WRKaJYIvU+EhzgnYC0nhIM1vhXW63LBOdvR1RCMiGtZF/mtHN6Cp9unzO0
+         wgem2+Lb5dNTCqvCUin4j60mh9B7+ySaR1odRHMm/HMJ5wEdhtv4FBxmqNpWVXP8dElU
+         t4mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785471678; x=1786076478;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rFDprARhpMaDWgJ8WpFjhqfThe9BMCU8JfCbCh39D6o=;
+        b=WNi31s5kGb17yrNOTauls9zFfkmvQ/kSP6qpD/AfGYf385Y3Wtn2AyJhqbTdHZYn1I
+         dAk7KIu9jNVQyJsEcFQFxGms26T6Lj4YmQ/oe4Zcrs3sMOvct3em2tVR/WdySJQEaOBg
+         Wxyz01gfgtoTfS7n/0A6TjRSECMzg/7Opn3NnaAU7htZ5svSzkkVEWfSYZlXMePuROpK
+         Sd4sWxqfXRbt4/tjNFgBf5nXAtETJVMHpS6YQ1nVk5zv3xoiX6RwLGgtUfon4H91+nox
+         rmrgia07sPgpGSZsZBSJHKqzQNvONOX6kxWhJJw3OVcZyckWfWiLNUJXixSJYTcTWjtQ
+         uifQ==
+X-Gm-Message-State: AOJu0YwLK6FjJzupeT/22mN4tAnloPymmVB0zPFh0h3aa6kdw+IcvgYy
+	Ai7l/qIHT/QwqBY1Cbo2c7+A/bA6gN6pFnPBq4D7s4mNEclTDJIMUP1FuanWQgGY/vXvhFP+6xR
+	FG0vS5ipbEvq4zBFiYO+hUp6t9P/Oz/fRd++JMaQBkbz4ZQ+6bv9Sa11dVrFofPMI0Jct0H1BXn
+	yO+enjF4er8PQUE4vEj00=
+X-Gm-Gg: AR+sD13CB6IhaODh/lUyKAxhKBwKSbgEkV27xherav57MhZ9dmAgBaC+iptYGqynmPL
+	FLYt9Cp6QFXYUZdhG/X3TmcOACYZmzlRX1FEflOz+xvWEfraatDoS55MtrbmeM4J7PORSVYxAgu
+	md/iIpcCeikkAslYAm0V/Eqsr5aC58rIBwF0ukRdFEGP4RAkDLBufXzPrg3DdWPPvczv3R8SJEW
+	fs7cNe/fMpx2EvMQ1ytkrhEEaf3vG4D3mjfl5ZHmtm0lrz5zLqFn/H+4ZMunebkDBNtnhbSlkgj
+	XVoNgDaSn//cFcHYBZcUeoledszvtBZcNvjuZMRUg5OR4GVLZru3ltb4k9nC66WhUc5lrvhAsKQ
+	oe9VJverk2lR69LK45ibia9Lp+MsG7u4=
+X-Received: by 2002:a05:6a20:914c:b0:3bf:6c08:2b2d with SMTP id adf61e73a8af0-3c91b380940mr382639637.53.1785471677600;
+        Thu, 30 Jul 2026 21:21:17 -0700 (PDT)
+X-Received: by 2002:a05:6a20:914c:b0:3bf:6c08:2b2d with SMTP id adf61e73a8af0-3c91b380940mr382562637.53.1785471676233;
+        Thu, 30 Jul 2026 21:21:16 -0700 (PDT)
+Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e045016sm846169eec.19.2026.07.30.21.21.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 11:03:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH 2/4] netdata: upgrade 1.47.5 -> 2.10.4
-Date: Thu, 30 Jul 2026 11:02:54 -0700
-Message-ID: <20260730180257.3733387-2-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260730180257.3733387-1-khem.raj@oss.qualcomm.com>
-References: <20260730180257.3733387-1-khem.raj@oss.qualcomm.com>
+        Thu, 30 Jul 2026 21:21:15 -0700 (PDT)
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Subject: [PATCH 00/21] Scarthgap pull request
+Date: Fri, 31 Jul 2026 09:51:08 +0530
+Message-ID: <cover.1785461355.git.anuj.mittal@oss.qualcomm.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAyNCBTYWx0ZWRfX3uMuqtRpURbA
+ /xtyycVroF/UCeFmlz0nxfDql2/sHfYV3Ozhep/WTzaxvOsN/Hc6Ibcy1b2ojSE/IQ7smGGnF6h
+ q3xx+grZ293sKPkiATbWaLr/kI9X96QNAc4E6Crh0xSgirMRPbWzxoL+bWtUoe1RxUJWmE0ex+Y
+ NjabAchvTuq2RisO4X4vx7bwFJ391PpNOgjmbgMMZmSW5yl6+8qA/lMLViQKkDTGCS4ahIzsnJU
+ tFfipa4kkywdqVbqW7pLp3xZ7otUsgd2UMszeD79mDcw8d3qCAnbWMlZHO582j4Fs2vsEq6gjYP
+ LjBKlQrC/fvHbq3pqj7RhNV1hTHNvVZdhMSl0JDwEtZ8twKBzzNtrfm9HNLn1fupjaM/xN1cn3z
+ IkZN/ddjNKfeuKeZ5MXgyY8+njDOCAsuKIIEvuVm/naF/QarecNtB2LBuSjNJcBHba+Y9gKCbny
+ kI/eQfRKnJdyt/LjJtg==
+X-Proofpoint-ORIG-GUID: 3Zy4GkHCH2HAXeKHDyI4Xx9utvqoVOOX
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAyNCBTYWx0ZWRfX+2wZ1cEIz+Wr
+ oTGE3iZecJdH2c8HR6ZzYVnGJo6Fn87UcnHYcULyhqj/F9Xsh510qiJtlUXyfvbR5FCTs1ji2Bm
+ 1R7Io12BgCNb4DO1yViQMyK5bbDzDzc=
+X-Proofpoint-GUID: 3Zy4GkHCH2HAXeKHDyI4Xx9utvqoVOOX
+X-Authority-Analysis: v=2.4 cv=H+3rBeYi c=1 sm=1 tr=0 ts=6a6c22be cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=iGHA9ds3AAAA:8 a=Q4-j1AaZAAAA:8 a=2dwgUA42GyM2YDXeM2UA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_01,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 clxscore=1015 bulkscore=0 priorityscore=1501
+ adultscore=0 impostorscore=0 phishscore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310024
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2026 18:03:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128574
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2026 04:21:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128577
 
-Major version jump (1.x → 2.x series). Key upstream changes:
- * 2.x dropped the legacy Netdata Cloud Agent-Cloud-Link (ACLK) and
-   merged cloud-connectivity into the main binary; ENABLE_ACLK and
-   ENABLE_CLOUD cmake options removed. OpenSSL and libcurl are now
-   mandatory build dependencies (no longer optional via PACKAGECONFIG).
- * Improved database engine, new collectors (systemd-units, OTel,
-   scripts plugin), and expanded Go plugin with SNMP overhaul.
- * 2.10.x stabilization: fix ZFS-related crashes, eBPF shared-memory
-   pool leak, SNMP counter wrapping, database engine memory safety.
- * 2.10.4: larger patch for stability, memory safety, and crash
-   resilience across database engine, streaming, and collectors;
-   backports new macOS hardware sensor collectors.
+Please merge these changes in scarthgap. Tested locally and on autobuilder.
 
-Recipe changes:
- * Add curl and openssl to mandatory DEPENDS (both now REQUIRED by
-   cmake); remove PACKAGECONFIG[openssl] and PACKAGECONFIG[cloud].
- * Remove webui_v0/v1/v2 PACKAGECONFIG entries and associated
-   do_install block (the webui architecture changed in 2.x).
- * Remove -DENABLE_ACLK=OFF from EXTRA_OECMAKE (option no longer
-   exists); keep -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF.
- * Refresh 0002-Do-not-hardcode-systemd-unit-directories.patch for
-   2.10.4 (the BUILD_FOR_PACKAGING/systemd service install blocks
-   shifted ~1119 lines; same substitution preserved).
- * 2.x vendors its own libsensors copy which needs flex/bison to
-   generate its config lexer/parser at build time; add flex-native
-   and bison-native to DEPENDS.
- * Protobuf detection now runs unconditionally (used by several 2.x
-   exporters/collectors even with the remote-write exporter disabled);
-   add protobuf and protobuf-native to DEPENDS and point cmake at the
-   native protoc via Protobuf_PROTOC_EXECUTABLE.
- * Disable several 2.x features that reach out to the network at
-   configure time and cannot work in an offline build:
-    - ENABLE_PLUGIN_OTEL / ENABLE_PLUGIN_OTEL_SIGNAL_VIEWER (pull in
-      Rust/Corrosion via CMake FetchContent)
-    - ENABLE_PLUGIN_SCRIPTS (requires Go, same as ENABLE_PLUGIN_GO)
-    - ENABLE_ML (FetchContent-downloads dlib)
-    - ENABLE_LIBBACKTRACE (ExternalProject-downloads libbacktrace)
-    - ENABLE_DASHBOARD, now exposed as PACKAGECONFIG[dashboard] and
-      off by default (the local agent dashboard isn't shipped in the
-      release tarball; enabling it makes cmake fetch it from
-      app.netdata.cloud at configure time)
- * BUILD_FOR_PACKAGING=ON now also installs sysusers.d/tmpfiles.d
-   snippets under ${nonarch_libdir}; remove them in do_install since
-   user creation is handled by useradd.bbclass and tmpfiles by our own
-   netdata-volatiles.conf, avoiding an "installed but not shipped" QA
-   failure from duplicate/unmanaged files.
- * Fix three new-in-2.x reproducibility leaks that embed host build
-   paths into the packages (buildpaths QA, an error in oe-core's default
-   ERROR_QA):
-    - Add 0003-Do-not-record-the-configure-command-line-in-the-binar.patch:
-      2.x bakes the full cmake invocation into config.h for
-      "netdata -W buildinfo"; the collected flags include --sysroot= and
-      -ffile-prefix-map= and so leak ${WORKDIR} into the binary.
-    - Add 0004-libsensors-do-not-emit-line-directives-in-generated-s.patch:
-      pass bison -l / flex -L so the generated conf-parse.[ch] and
-      conf-lex.c do not carry absolute #line paths (these live in file
-      contents, so -ffile-prefix-map cannot rewrite them).
-    - Remove the shipped build-info-cmake-cache.gz in do_install: it is a
-      gzipped CMakeCache.txt kept only for buildinfo reporting and is full
-      of host paths.
-   Verified with buildpaths promoted back to ERROR_QA: netdata builds and
-   packages with no buildpaths diagnostics and no /home path remains
-   anywhere under the package tree.
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1679
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- ...ot-hardcode-systemd-unit-directories.patch | 20 +++---
- ...-configure-command-line-in-the-binar.patch | 31 ++++++++
- ...-emit-line-directives-in-generated-s.patch | 40 +++++++++++
- .../{netdata_1.47.5.bb => netdata_2.10.4.bb}  | 71 +++++++++++--------
- 4 files changed, 124 insertions(+), 38 deletions(-)
- create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/0003-Do-not-record-the-configure-command-line-in-the-binar.patch
- create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/0004-libsensors-do-not-emit-line-directives-in-generated-s.patch
- rename meta-webserver/recipes-webadmin/netdata/{netdata_1.47.5.bb => netdata_2.10.4.bb} (68%)
+The following changes since commit 7eb94107580092f79ff1b639a87762fe6f96aa12:
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0002-Do-not-hardcode-systemd-unit-directories.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0002-Do-not-hardcode-systemd-unit-directories.patch
-index 143caf89cb..15668c121b 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata/0002-Do-not-hardcode-systemd-unit-directories.patch
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0002-Do-not-hardcode-systemd-unit-directories.patch
-@@ -3,26 +3,28 @@ From: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
- Date: Tue, 1 Oct 2024 17:01:33 +0200
- Subject: [PATCH] Do not hardcode systemd unit directories
- 
-+Refreshed for netdata v2.10.4 (context shifted; same intent preserved).
-+
- Upstream-Status: Inappropriate [oe-core specific]
- Signed-off-by: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
- ---
-  CMakeLists.txt | 6 +++---
-  1 file changed, 3 insertions(+), 3 deletions(-)
- 
--Index: netdata-v1.47.3/CMakeLists.txt
--===================================================================
----- netdata-v1.47.3.orig/CMakeLists.txt
--+++ netdata-v1.47.3/CMakeLists.txt
--@@ -2531,7 +2531,7 @@ if(BUILD_FOR_PACKAGING)
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index d6dafd9..530298e 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -3642,7 +3642,7 @@ if(BUILD_FOR_PACKAGING)
-          install(FILES
-                  ${CMAKE_BINARY_DIR}/system/systemd/netdata.service
-                  COMPONENT netdata
- -                DESTINATION lib/systemd/system)
- +                DESTINATION $ENV{systemd_system_unitdir})
--         install(DIRECTORY
--                 COMPONENT netdata
--                 DESTINATION usr/lib/systemd/journald@netdata.conf.d)
--@@ -2620,11 +2620,11 @@ if(NOT OS_WINDOWS)
-+         install(FILES
-+                 ${CMAKE_BINARY_DIR}/system/systemd/sysusers/netdata.conf
-+                 COMPONENT user
-+@@ -3739,11 +3739,11 @@ if(NOT OS_WINDOWS)
-      install(FILES
-              ${CMAKE_BINARY_DIR}/system/systemd/netdata-updater.service
-              COMPONENT netdata
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0003-Do-not-record-the-configure-command-line-in-the-binar.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0003-Do-not-record-the-configure-command-line-in-the-binar.patch
-new file mode 100644
-index 0000000000..4d0b81a0f3
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0003-Do-not-record-the-configure-command-line-in-the-binar.patch
-@@ -0,0 +1,31 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 29 Jul 2026 20:00:00 +0000
-+Subject: [PATCH] Do not record the configure command line in the binary
-+
-+The CONFIGURE_COMMAND string is baked into config.h and reported by
-+"netdata -W buildinfo". In a cross build the collected flags contain
-+--sysroot=, -ffile-prefix-map= and similar arguments that carry absolute
-+host build paths, so the resulting binary embeds the build directory.
-+That makes the build unreproducible and trips OE's buildpaths QA check.
-+
-+The string is purely informational, so report it as unavailable rather
-+than leaking the build environment into the shipped binary.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -3397,7 +3397,7 @@
-+         "-DCMAKE_SHARED_LINKER_FLAGS='${CMAKE_SHARED_LINKER_FLAGS}'"
-+ )
-+
-+-string(JOIN " " CONFIGURE_COMMAND "cmake" ${CONFIGURE_OPTIONS})
-++set(CONFIGURE_COMMAND "unavailable (stripped for reproducible builds)")
-+
-+ if (NOT NETDATA_USER)
-+         set(NETDATA_USER "netdata")
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0004-libsensors-do-not-emit-line-directives-in-generated-s.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0004-libsensors-do-not-emit-line-directives-in-generated-s.patch
-new file mode 100644
-index 0000000000..9d3cee4c37
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0004-libsensors-do-not-emit-line-directives-in-generated-s.patch
-@@ -0,0 +1,40 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 29 Jul 2026 20:10:00 +0000
-+Subject: [PATCH] libsensors: do not emit #line directives in generated sources
-+
-+bison and flex embed the absolute path of both the input grammar and the
-+generated output into #line directives. Those paths live in the file
-+contents rather than in debug info, so -ffile-prefix-map cannot rewrite
-+them, and the generated conf-parse.[ch]/conf-lex.c shipped in the debug
-+source package end up referencing the host build directory. That makes
-+the build unreproducible and trips OE's buildpaths QA check.
-+
-+Pass -l (bison) and -L (flex) to suppress the #line directives. The only
-+effect is that compiler diagnostics for the generated parser point at the
-+generated file instead of the grammar, which is an acceptable trade for a
-+vendored parser that is not being developed here.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ src/collectors/debugfs.plugin/libsensors/CMakeLists.txt | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+--- a/src/collectors/debugfs.plugin/libsensors/CMakeLists.txt
-++++ b/src/collectors/debugfs.plugin/libsensors/CMakeLists.txt
-+@@ -16,12 +16,12 @@
-+
-+ # Generate Bison parser
-+ bison_target(LibsensorsParser vendored/lib/conf-parse.y ${CMAKE_CURRENT_BINARY_DIR}/conf-parse.c
-+-        COMPILE_FLAGS "-p sensors_yy --defines=${CMAKE_CURRENT_BINARY_DIR}/conf-parse.h"
-++        COMPILE_FLAGS "-p sensors_yy -l --defines=${CMAKE_CURRENT_BINARY_DIR}/conf-parse.h"
-+ )
-+
-+ # Generate Flex scanner
-+ flex_target(LibsensorsLexer vendored/lib/conf-lex.l ${CMAKE_CURRENT_BINARY_DIR}/conf-lex.c
-+-        COMPILE_FLAGS "-Psensors_yy -Cfe -8"
-++        COMPILE_FLAGS "-Psensors_yy -Cfe -8 -L"
-+ )
-+
-+ # Add dependency to ensure correct build order
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.5.bb b/meta-webserver/recipes-webadmin/netdata/netdata_2.10.4.bb
-similarity index 68%
-rename from meta-webserver/recipes-webadmin/netdata/netdata_1.47.5.bb
-rename to meta-webserver/recipes-webadmin/netdata/netdata_2.10.4.bb
-index f18c979685..709538b1d4 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.5.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_2.10.4.bb
-@@ -6,10 +6,16 @@ LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
- 
- DEPENDS += "\
-+    bison-native \
-+    curl \
-+    flex-native \
-     json-c \
-     libuv \
-     libyaml \
-     lz4 \
-+    openssl \
-+    protobuf \
-+    protobuf-native \
-     util-linux \
-     zlib \
-     "
-@@ -17,11 +23,13 @@ DEPENDS += "\
- SRC_URI = "\
-     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
-+    file://0003-Do-not-record-the-configure-command-line-in-the-binar.patch \
-+    file://0004-libsensors-do-not-emit-line-directives-in-generated-s.patch \
-     file://netdata.conf \
-     file://netdata-volatiles.conf \
-     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
-     "
--SRC_URI[sha256sum] = "8073eee2392f92daa1f8bb5cf13fb988b8c3b52ff9574b50706ff69bdbdb51ce"
-+SRC_URI[sha256sum] = "d1ae949863925d626b1d42a53000bcca2c239718e0b0ddc6a3f3f5029b21cdfe"
- 
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
- UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>(?!1\.99)\d+(?:\.\d+)*)"
-@@ -63,10 +71,8 @@ USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata \
-     ${@bb.utils.contains('PACKAGECONFIG','docker','--groups docker','',d)} --user-group netdata"
- 
--PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ??= "freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[brotli] = ",,brotli"
--PACKAGECONFIG[cloud] = "-DENABLE_CLOUD=ON,-DENABLE_CLOUD=OFF,"
--PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
- PACKAGECONFIG[freeipmi] = "-DENABLE_PLUGIN_FREEIPMI=ON,-DENABLE_PLUGIN_FREEIPMI=OFF,freeipmi"
- PACKAGECONFIG[nfacct] = "-DENABLE_PLUGIN_NFACCT=ON,-DENABLE_PLUGIN_NFACCT=OFF,libmnl"
- # needs meta-virtualization
-@@ -75,14 +81,28 @@ PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
- PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
- PACKAGECONFIG[docker] = ",,virtual/docker, virtual/docker"
- PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
--# WebUI (packageconfig not set: v0, v1 & v2)
--PACKAGECONFIG[webui_v0] = ",,,,,webui_v1 webui_v2"
--PACKAGECONFIG[webui_v1] = ",,,,,webui_v0 webui_v2"
--PACKAGECONFIG[webui_v2] = ",,,,,webui_v0 webui_v1"
--
--# ebpf doesn't compile (or detect) the cross compilation well
--EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
--                  -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
-+# The local agent dashboard is not shipped in the release tarball; enabling it
-+# makes CMake download https://app.netdata.cloud/agent.tar.gz at configure
-+# time, which cannot work in an offline build. Off by default.
-+PACKAGECONFIG[dashboard] = "-DENABLE_DASHBOARD=ON,-DENABLE_DASHBOARD=OFF"
-+
-+# ebpf doesn't compile (or detect) the cross compilation well.
-+# Several 2.x features fetch sources at configure time, which cannot work in
-+# an offline build, so they are disabled here:
-+#  - ENABLE_PLUGIN_OTEL / ENABLE_PLUGIN_OTEL_SIGNAL_VIEWER pull Rust/Corrosion
-+#    via CMake FetchContent.
-+#  - ENABLE_PLUGIN_SCRIPTS requires Go (as does ENABLE_PLUGIN_GO).
-+#  - ENABLE_ML FetchContent-downloads dlib.
-+#  - ENABLE_LIBBACKTRACE ExternalProject-downloads libbacktrace.
-+# Protobuf is detected unconditionally and needs the native protoc.
-+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
-+                  -DENABLE_PLUGIN_OTEL=OFF -DENABLE_PLUGIN_OTEL_SIGNAL_VIEWER=OFF \
-+                  -DENABLE_PLUGIN_SCRIPTS=OFF \
-+                  -DENABLE_ML=OFF \
-+                  -DENABLE_LIBBACKTRACE=OFF \
-+                  -DProtobuf_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
-+                  -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
-+                  -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
- 
- do_compile:append() {
-     # Go dependencies are protected with read-only permissions, but would prevent cleaning
-@@ -127,23 +147,16 @@ do_install:append() {
-     install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
-     install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
- 
--    # webUI
--    if  "${@bb.utils.contains('PACKAGECONFIG', 'webui_v0', 'true', 'false', d)}"; then
--        rm -rf ${D}${datadir}/netdata/web/v1
--        rm -rf ${D}${datadir}/netdata/web/v2
--        install -m 0644 ${D}${datadir}/netdata/web/v0/index.html ${D}${datadir}/netdata/web/
--    fi
--    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v1', 'true', 'false', d)}"; then
--        rm -rf ${D}${datadir}/netdata/web/v0
--        rm -rf ${D}${datadir}/netdata/web/v2
--        install -m 0644 ${D}${datadir}/netdata/web/v1/index.html ${D}${datadir}/netdata/web/
--    fi
--    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v2', 'true', 'false', d)}"; then
--        rm -rf ${D}${datadir}/netdata/web/v0
--        rm -rf ${D}${datadir}/netdata/web/v1
--        install -m 0644 ${D}${datadir}/netdata/web/v2/index.html ${D}${datadir}/netdata/web/
--    fi
--    chown -R netdata:netdata ${D}${datadir}/netdata/web
-+    # BUILD_FOR_PACKAGING installs its own sysusers.d/tmpfiles.d snippets, but
-+    # user creation is handled by useradd.bbclass and tmpfiles by our own
-+    # netdata-volatiles.conf above, so drop the upstream ones to avoid
-+    # shipping duplicate/unmanaged files.
-+    rm -rf ${D}${nonarch_libdir}/sysusers.d ${D}${nonarch_libdir}/tmpfiles.d
-+
-+    # 2.x ships a gzipped copy of CMakeCache.txt purely so that
-+    # "netdata -W buildinfo" can report it; it is full of host build paths.
-+    # It carries no runtime value in a cross build, so drop it.
-+    rm -f ${D}${datadir}/netdata/build-info-cmake-cache.gz
- }
- 
- FILES:${PN} += "\
+  nginx: fix CVE-2026-42055 (2026-07-16 15:49:44 +0530)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
+
+for you to fetch changes up to ef3df29f2cfca6a9513b51ebcdccf82b6c8a836f:
+
+  libdbi-perl: Fix CVE-2026-14740 (2026-07-30 07:53:25 +0530)
+
+----------------------------------------------------------------
+
+Ankur Tyagi (2):
+  postfix: upgrade 3.8.17 -> 3.8.19
+  haveged: upgrade 1.9.22 -> 1.9.23
+
+Benjamin Robin (Schneider Electric) (1):
+  dnsmasq: fix CVE-2026-4890
+
+Darsh Kelaiya (6):
+  jq: Fix CVE-2026-43895
+  jq: Fix CVE-2026-47770
+  jq: Fix CVE-2026-49839
+  jq: Fix CVE-2026-54679
+  dnsmasq: Fix CVE-2026-12725
+  dnsmasq: Fix CVE-2026-12969
+
+Deepak Rathore (1):
+  ldns: fix CVE-2026-10846
+
+Hetvi Thakar (5):
+  libdbi-perl: Fix CVE-2026-9698
+  libdbi-perl: Fix CVE-2026-10879
+  libdbi-perl: Fix CVE-2026-14380
+  libdbi-perl: Fix CVE-2026-14739
+  libdbi-perl: Fix CVE-2026-14740
+
+Joao Marcos Costa (1):
+  nginx: backport fixes for CVE-2026-42533
+
+Khem Raj (1):
+  apache2: upgrade 2.4.67 -> 2.4.68
+
+Peter Marko (2):
+  libwebsockets: patch CVE-2026-10650
+  hostapd: set status for CVE-2026-58374
+
+Qliangw (1):
+  libuio: fix FILE descriptor leak
+
+Wang Mingyu (1):
+  monocypher: upgrade 4.0.2 -> 4.0.3
+
+ .../{postfix_3.8.17.bb => postfix_3.8.19.bb}  |   2 +-
+ .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   3 +
+ .../dnsmasq/files/CVE-2026-12725.patch        | 111 +++
+ .../dnsmasq/files/CVE-2026-12969.patch        |  54 ++
+ .../dnsmasq/files/CVE-2026-4890.patch         |  75 ++
+ .../hostapd/hostapd_2.10.bb                   |   2 +
+ .../libwebsockets/CVE-2026-10650.patch        |  46 ++
+ .../libwebsockets/libwebsockets_4.3.3.bb      |   1 +
+ ...onocypher_4.0.2.bb => monocypher_4.0.3.bb} |   2 +-
+ .../jq/jq/CVE-2026-43895.patch                | 206 +++++
+ .../jq/jq/CVE-2026-47770.patch                | 449 +++++++++++
+ .../jq/jq/CVE-2026-49839.patch                |  37 +
+ .../jq/jq/CVE-2026-54679.patch                |  74 ++
+ meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   4 +
+ .../ldns/ldns/CVE-2026-10846_p1.patch         | 117 +++
+ .../ldns/ldns/CVE-2026-10846_p2.patch         | 117 +++
+ .../ldns/ldns/CVE-2026-10846_p3.patch         |  34 +
+ meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb   |   6 +-
+ .../perl/libdbi-perl/CVE-2026-10879.patch     |  34 +
+ .../perl/libdbi-perl/CVE-2026-14380_p1.patch  |  37 +
+ .../perl/libdbi-perl/CVE-2026-14380_p2.patch  |  65 ++
+ .../perl/libdbi-perl/CVE-2026-14380_p3.patch  |  27 +
+ .../perl/libdbi-perl/CVE-2026-14380_p4.patch  |  56 ++
+ .../perl/libdbi-perl/CVE-2026-14739.patch     | 170 +++++
+ .../perl/libdbi-perl/CVE-2026-14740.patch     |  40 +
+ .../perl/libdbi-perl/CVE-2026-9698.patch      |  43 ++
+ .../perl/libdbi-perl_1.643.bb                 |   9 +
+ .../{haveged_1.9.22.bb => haveged_1.9.23.bb}  |   2 +-
+ ...ix-fclose-leak-in-uio_line_from_file.patch |  31 +
+ .../recipes-extended/libuio/libuio_0.2.1.bb   |   1 +
+ .../{apache2_2.4.67.bb => apache2_2.4.68.bb}  |   2 +-
+ .../nginx/nginx-1.24.0/CVE-2026-42533-1.patch | 126 ++++
+ .../nginx/nginx-1.24.0/CVE-2026-42533-2.patch | 381 ++++++++++
+ .../nginx/nginx-1.24.0/CVE-2026-42533-3.patch | 704 ++++++++++++++++++
+ .../nginx/nginx-1.24.0/CVE-2026-42533-4.patch | 587 +++++++++++++++
+ .../nginx/nginx-1.24.0/CVE-2026-42533-5.patch |  55 ++
+ .../recipes-httpd/nginx/nginx_1.24.0.bb       |   5 +
+ 37 files changed, 3710 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.8.17.bb => postfix_3.8.19.bb} (99%)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-12725.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-12969.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4890.patch
+ create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-10650.patch
+ rename meta-oe/recipes-crypto/monocypher/{monocypher_4.0.2.bb => monocypher_4.0.3.bb} (85%)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-47770.patch
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-49839.patch
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-54679.patch
+ create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p1.patch
+ create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p2.patch
+ create mode 100644 meta-oe/recipes-devtools/ldns/ldns/CVE-2026-10846_p3.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-10879.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p1.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p2.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p3.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14380_p4.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14739.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-14740.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2026-9698.patch
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.22.bb => haveged_1.9.23.bb} (94%)
+ create mode 100644 meta-oe/recipes-extended/libuio/libuio/fix-fclose-leak-in-uio_line_from_file.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.67.bb => apache2_2.4.68.bb} (99%)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-1.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-2.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-3.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-4.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42533-5.patch
+
+-- 
+2.54.0
+
 
