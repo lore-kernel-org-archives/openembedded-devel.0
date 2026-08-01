@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99DA7C55181
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4F4AC55182
 	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:45:56 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13742.1785620753301054592
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13740.1785620747698635498
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:45:53 -0700
+ Sat, 01 Aug 2026 14:45:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SjlW544T;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-c9c26a5fb98so1291119a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kOHVOKDP;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2d02b4c3601so24773115ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785620753; x=1786225553; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785620747; x=1786225547; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UNBrku9AZgqOokEaZA0chzuH+J4gN6d0A8uD6jYWuIE=;
-        b=SjlW544TgP2ShZ/zRocoLMG+kddiaLZamkgFOn2COQPKrUpJWMzmKVjVdyiz3juSDz
-         2W4uqSED9NZl800LFpYwP1U2JRxQI7j9spGkBqPziC+GOc5QZJuzDVibFbG8aFlf4rh+
-         WeUVon99xoN+9Xq/LsOUmM2oCjkCutHzqIHU8p8q456s31NIZ4ovUUEyna5qtAPZ73OJ
-         oXy9zX3hUQGZKfLDiTwsIIXQyrnZrvEYis+fVH0GIe1KP2nXsmwmPl2AUM0C6z4XODq+
-         syYp3TFCHOm+jvgEMV8DNvCBW+Id/Db08FzJI9DRfIp+P4g78jDo0MAMLSYLVRACQCDN
-         rhMA==
+        bh=JTxiVKHJB/jCZBd9xHuqEMJCwbBFMAjxE42qR8HMgRs=;
+        b=kOHVOKDPQCXYxk97uKa9ZAgIfr2+1fOknzw73SqiiffUk1Z/LRUISxO6lS4G5OrXp+
+         f2d2NhXUQAx/MqbQKgvONYx8w0Sdy2Vo/n/qzKr70nK/hw4yrgrV3SdIlCDr0db+I8JJ
+         dDmN4Ot49REER6oKTJ/Xa4cdUqWlGe0NrP+8O6TP8hif9XT4LB77r7zISmRZ47D/yMeA
+         559+xWzYyJwG8i+g9GXYcSgBfXfdKkX9acMxZNuBj1d3NSHb/lGjTRdAzpUJtyX+mzcC
+         vvVn2IKY7QEVJM35N6g/t4CPUC1L97062de7AEvDNkh0O/p+Lymhy8avFPIkshdq9A2L
+         0pGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785620753; x=1786225553;
+        d=1e100.net; s=20251104; t=1785620747; x=1786225547;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UNBrku9AZgqOokEaZA0chzuH+J4gN6d0A8uD6jYWuIE=;
-        b=Gst9umHDmCnoxunUkCGgKYwplq0VRbBIiD1jQCdkffp2c8UAHWdlUwlaLBAzo70cUY
-         AeeTEtrNTV/x0H2G/QFEwULRYNkxl/mTvNtpDDBJzZGI87oGrfCqk8XaO58jt7y0G6uP
-         lewrxiy7A99Dx7BSla1J9lhNQLNgAVVucZ6m8QqfnISCAVY5ebDnTdkjisOkfy3bTuBA
-         1FIFqzu+tl5RB0eSUFFrjL7DPuM5ntLwcLeS0cLkv7aHeK5hbmTYG7a1HjTbt2vlsofD
-         5/EkqyQ7FR16UkcxnIfG5d23R6g6h8k7P5oC2OJE4+k9rH+YcjR+jljjj9HkxZqr2lkx
-         /Mhg==
-X-Gm-Message-State: AOJu0YyOWj50BJe6AjwpK0bK7y1gtptXJLgueknH3E+N1RyX3/r4ixL3
-	REQgWU1osSfkktJp6t1ZMZxYgM7VBV+urQVGxKgsEtHVi+3REkq7Gk6GhpjUoeo1
-X-Gm-Gg: AR+sD13mcB20BI4XzrqIwsNnW0A4qPNBHHsGOfN9kO4E2W80h13KyEx263c+Mr2eGZ6
-	IB8HHw4qBAqJqwkjpJGVrJX4HQZ9DcwFw7b/8jqMEyIj9dX2Ed58/5hBVZ9Ef5uCEZ80fUrJjt7
-	2KNpQG/Uay2X+/25cmqEbP5PziP9w2FEjV4OI3PboaYSAgSboJK303UMjvQx4pzqxlticcq/bR9
-	zCcL+F2WBDBkDh1V5PUd16FibgZ01vwsh8bKkDKW4RDtPp1Mhg1HH7N8dYQcjTaeJIRyJEnVH/L
-	i4WMnDG/KCruIAUeqWp+Ui5kLAdkRQpQ4yrPouqTGL0lNA9VGT6v4L7V/SVv2S6vHJ8HfABh6kf
-	eHyINzlHB2odRVg3uKHTht5eIaMKRQ3XjiIgNpe2j6An2NjCY0hWAd3iZ511YjCiWvCFpBY8YUR
-	L8or2zHlKPeiMzATxDxPII9huJiTCAkmKf6NsJ7BI+bw+Ffj+QOho/9L8+tpVjhojhoNo+K2iiM
-	gzVxAcBpu7xw/OnQGHs2DNeAlEjOw8cCedSz77RSfNtyRVMqaAMpDh10w/pGdC0mcJtnL9J8r8d
-	N3sgPYBVY9wQtLnB6A+Wd4XRTs4ka77ZPVLVDkMw6DO+U98x7ramGmy16X44Y4qWyZEvEVYhkeW
-	vMg==
-X-Received: by 2002:a05:6a21:6e46:b0:3bf:aa54:4cbc with SMTP id adf61e73a8af0-3c91a972ec7mr7055786637.26.1785620752622;
-        Sat, 01 Aug 2026 14:45:52 -0700 (PDT)
+        bh=JTxiVKHJB/jCZBd9xHuqEMJCwbBFMAjxE42qR8HMgRs=;
+        b=X77D8+9P5SfPF/waZqzmWXDqVwcXXwOLL3c/FWaBcQxOAk129QFl0aulFyleb5eg8B
+         3hwWktd27faawwGkvzcTqD9PjcM2e6SxiFnjuwlWLub4xQm7j/QonSl/fj81/oNxSwpQ
+         xIwRF4+wzMCI8BWVhz5liKaC0Gf3m3a9uVL6g7+rsPCWE3VvahyrwTaJIZMXvJCMawys
+         lFH57u7IewoW9+T3ctu7EPeXwNbswuJ3FiodltawGgdFb1iLkTI7jifkeZ6x+FQi1aK/
+         /a3nI9xvAvByKWfekRgcpgE06hZTyS0p9Q4figYAoEzTU1mhlxvFI3jKOJWrxa58F0we
+         MM3A==
+X-Gm-Message-State: AOJu0YzaT9A9r7Ok1VBcVgpuSTE6NSyoFSliptcXjRL63LNUO4sdsfR4
+	r3k/eGEIKIpE3Y0/ghbI9moJcy/DWlixfwOs91FNOVG2/A9Rivvw2QratOK0Lqls
+X-Gm-Gg: AR+sD104yFEQjEaMOk9vVlGkfVPuqU9U7/k87LRnpf7L4Nk/SwPxLl13j7rRu8L/jRw
+	SEmxnKE22ee/KisTUifPek40+9B2Jw9spJARXjUY5LpUpIgcyTGqc6ROyfJOO0dPIbReUJFaM4x
+	rOpJ8llHNsNV339jHjX/1iR9f3HVeDx6iNa7uZhqMHm/w8c0okqmGVpQ5KBDePo6r7+GM70yEiO
+	PdDMbjhMhwq02CtVUHWI6wBeD9MsBxiC5Z0kw9vSKgZjsEgPHTLH1HjDSo3jUf+uGyVSxR4VvU3
+	lAoSKiqiEiLNtYBQG4U/X1hpJw8sLU0KUPSWh3gJ7eL29dRbbXuOWAxmuvaq8a20P75I55WhDbG
+	QP/B8eD0ReCwimNGsAcjIYqSfun3EbbUxQY8QuqtYURqgLFXuW7zekSgiruZLE/G58uoxFvKfEb
+	iyNzyJs5CC8YeYipreV8YAx7OWRz+oHyOTbCm3qP+PWDlQCNFKRwWQJf5ZpX6AGKa1ZJbNXUkFp
+	iHdROrVYxTyv4w9IfwYjURaZzhTc4PliTJJ2DKAJd5nT7VoLOBrkLkBmFadEtz7Aakr2jWDOc1i
+	ZPZiPMBXp3o3N12sw1ZOPp9PNkemB1yHMfEhh8Jn4HvO5666yr9X+X3oeVaKKWOOW1Jn+vK5IbV
+	g0w==
+X-Received: by 2002:a17:903:2a8e:b0:2c9:9a2e:dab0 with SMTP id d9443c01a7336-2d0521e91ffmr46712055ad.3.1785620746929;
+        Sat, 01 Aug 2026 14:45:46 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.51
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:45:52 -0700 (PDT)
+        Sat, 01 Aug 2026 14:45:46 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 24/31] gerbera: upgrade 3.0.0 -> 3.2.1
-Date: Sat,  1 Aug 2026 14:45:19 -0700
-Message-ID: <20260801214526.788343-24-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 19/31] fluidsynth: upgrade 2.5.3 -> 2.5.7
+Date: Sat,  1 Aug 2026 14:45:14 -0700
+Message-ID: <20260801214526.788343-19-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
 References: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
@@ -71,61 +71,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:45:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128641
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128636
 
-Upstream changes (release notes):
- * 3.1.0/3.1.1: assorted fixes and code improvements (docker startup
-   under the default user, dependency maximum-version bumps).
- * 3.2.0: resolve a long-standing transcoding/error-return issue with
-   libpupnp after dropping the old MediaTomb UPnP hack; allow splitting
-   config.xml at any section; export/reimport web-UI entries around a
-   database clear; many new import/runtime configuration entries.
- * 3.2.1: fix MySQL/PostgreSQL database migration and init with
-   ffmpegthumbnailer disabled; raise supported pupnp (1.18.3) and
-   jsoncpp (1.9.7) maximums.
+Upstream changes (git log v2.5.3..v2.5.7):
+ * Security fixes: heap buffer overflow in the MIDI player
+   (GHSA-976m-35rw-h3m6), heap overrun in the pitch_bend_range command,
+   DLS ptbl/articulation integer overflows (GHSA-r4mc-v3p8-pv47,
+   GHSA-hp72-35pr-6h6r), SF2 DMOD unsigned underflow (GHSA-rmc4-c8hw-455w),
+   and a heap overrun for DLS samples (GHSA-59ph-rx8r-8p4j).
+ * Remove systemd lock-file gating and add automatic shell port
+   selection; fix big-endian cpp11 path; fix partially-uninitialized
+   fluid_sample and assorted DLS 'pgal'/sample-validation fixes.
 
-New build dependencies in 3.2.x:
- * cxxopts is now required (find_package(cxxopts 3.2.0 REQUIRED)); add it
-   to DEPENDS (provided by meta-oe).
- * A new WITH_ZIP option (default ON) pulls in libzippp and libzip for
-   "package download". Neither is packaged here, so add a PACKAGECONFIG
-   [zip] knob left disabled by default (-DWITH_ZIP=FALSE), matching 3.0.0
-   behaviour.
-
-The two local build patches (fmt 12 include fix, <cstring> include) still
-apply and are retained.
+Version-only bump of SRCREV_fluidsynth; sub-source SRCREVs unchanged.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../gerbera/{gerbera_3.0.0.bb => gerbera_3.2.1.bb}           | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/gerbera/{gerbera_3.0.0.bb => gerbera_3.2.1.bb} (91%)
+ .../fluidsynth/{fluidsynth_2.5.3.bb => fluidsynth_2.5.7.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_2.5.3.bb => fluidsynth_2.5.7.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.0.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.2.1.bb
-similarity index 91%
-rename from meta-multimedia/recipes-multimedia/gerbera/gerbera_3.0.0.bb
-rename to meta-multimedia/recipes-multimedia/gerbera/gerbera_3.2.1.bb
-index a08c31d0c2..8ae899d3ec 100644
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.0.0.bb
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.2.1.bb
-@@ -7,10 +7,10 @@ SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master;tag
-            file://0001-fix-build-against-fmt-12-include-fmt-format.h.patch \
-            file://0002-include-cstring-for-std-strerror-std-memcpy.patch \
-            "
--SRCREV = "7846f3dd5d0f848a60d0c3146c3b7290881a8992"
-+SRCREV = "a6a2bb2991d197a52755a488fc943566d654d3bd"
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
+similarity index 97%
+rename from meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb
+rename to meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
+index f579d1ddd2..8bf40cbb51 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
+ "
+ SRCREV_FORMAT = "fluidsynth"
+-SRCREV_fluidsynth = "6b8fabbd60f0df3b6e2f5b5df8478a1b43315acd"
++SRCREV_fluidsynth = "3ede3f7c8ffc5d16e5d28f416cbfd71f3ad2b814"
+ SRCREV_gcem = "012ae73c6d0a2cb09ffe86475f5c6fba3926e200"
+ SRCREV_signalsmith-audio-basics = "012d2be17b0eb6839628f8c73687c4ccccc1bb01"
  
- 
--DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2 icu jsoncpp"
-+DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2 icu jsoncpp cxxopts"
- 
- SYSTEMD_SERVICE:${PN} = "gerbera.service"
- 
-@@ -28,5 +28,6 @@ PACKAGECONFIG[exiv2] = "-DWITH_EXIV2=TRUE,-DWITH_EXIV2=FALSE,exiv2"
- PACKAGECONFIG[matroska] = "-DWITH_MATROSKA=TRUE,-DWITH_MATROSKA=FALSE,libebml libmatroska"
- PACKAGECONFIG[magic] = "-DWITH_MAGIC=TRUE,-DWITH_MAGIC=FALSE,file"
- PACKAGECONFIG[js] = "-DWITH_JS=TRUE,-DWITH_JS=FALSE,duktape"
-+PACKAGECONFIG[zip] = "-DWITH_ZIP=TRUE,-DWITH_ZIP=FALSE,libzippp libzip"
- 
- SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
 
