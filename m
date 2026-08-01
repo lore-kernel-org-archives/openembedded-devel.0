@@ -2,66 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C98E4C55172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B93DAC5516F
 	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:46:06 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13614.1785620760345809491
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13611.1785620757121844170
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:46:00 -0700
+ Sat, 01 Aug 2026 14:45:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JYhTYFd9;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-ca88130e09aso1678204a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:46:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=K9I35/r6;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2cace91f112so23429705ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785620760; x=1786225560; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785620756; x=1786225556; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6GOUzqte4EnjizrqmRfVylGLS/5q8nCDMGFzHpPLc6s=;
-        b=JYhTYFd9X4GAEIIsxSNHtbC6EKHBP/Yc3XyWq8zYPYHQ3+0fkWiK9lHY45X/l3yEjy
-         GgGvuvwWHb/1811EncGFKQH3cGduW5cPLUf2sIkZRxSkOa5NpTGIKpWRlS9w56BRPaws
-         JuDbMiWS4AHQ701y864UCNojfT2X1SVK5iJbjwBEJPiL6cioDUVkmD3SKopeVVgVehIh
-         OC2DL8e3L36dEOuiLM/a17EkaAvCY4P/ob3VLxirjW7XRuCBbaNwjHmAfpJxRcYGe+Ed
-         oIJ0VXAfCjlPPUqW5fFB4NPxHa2khHwxHuA4BPTlsAuxUcMLPPK4dGmDCILkXF92rwCt
-         BYpg==
+        bh=PsZIgcE2NAIJbXO7pCYxipwZvNgXpOyVNp5Qfwh5m+g=;
+        b=K9I35/r6F/fHb1PvQ+ybrEsVp2sJts11iAxHnRKYEQrJlkyHb5hpwRoUZhdd1edwyp
+         f4Rj66CyEcgB0VjF5kkpngSvpWxva09W2Ppq7VC6+zfhqLYDZ+aIwlzzXY6n6zODv1aX
+         MIKd6D1I95ibJ+eBHmRhnH95G/ETPckH0XtDuME3NZG5puAUxluYV6fS2Un1KXEwKEEY
+         jCQP4pBd2gKxDj3hOVGa8kjqISJptttFnMoDXE1NtcwQWZFpt0Ujx61NbCNABb4kdhsV
+         4VaEKlYIlaSiUH0XLirEdl7hKBLIqpID8YDBl5Bq3bffDW9/Ccz49OcrLCpCbIiJbhWB
+         y37g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785620760; x=1786225560;
+        d=1e100.net; s=20251104; t=1785620756; x=1786225556;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6GOUzqte4EnjizrqmRfVylGLS/5q8nCDMGFzHpPLc6s=;
-        b=iqgcU1B+Fmklx/iXq2jc3Gr/xDYAWr51bKRnl1pDWes9AerTFlxqnO2kvSxraQr1ZU
-         KfUWpbDtZ63/94scC/CxiDBaxY2cd05jQBjotyBETBmvAKKZvMZdvcDXz0+2RN4NTaqa
-         PfWFgGkg/dIOND0tKzUasWL1NfS7FTLtcvLlsoSEq+FpWg+paIK/wbwPKMP//k9RBFHv
-         C0RCDN2OYBt0yvmNVAOilMJ7CU+qUjzVZHrXs7gAmd2D8g1msU/5Kwf8kdmcJyBuV4Y5
-         4Gi9036snvh+sgx3R3D66vEX4ANyCXMvFgTGPsUEZc8UesRhAkH7YIsPBGb+9mWfKJXl
-         OVdw==
-X-Gm-Message-State: AOJu0YwyYWGlppPXKf84dB8iqfdCiSSnMkHtY7j9kOYbrhPb5oXFLm1x
-	9Gi+UrO5fqIl8xIigS3YZGcV+tF1ffxP4k0mOM85gT8zU1E0s4MEKbwIL+zCec9/
-X-Gm-Gg: AR+sD11DufHKMUpJwxBuW7zdFiRNkbGyULsR1PQWlDpN6f3g8Z2ctfKL/rJpVUIsrby
-	YU5a74vz/0uHenCt7xUNLTgXNjkL7uIZWhKNwfnLRR/b0MtQe0Wsz9n0Cc/FYBDzOlVT/qfKyzz
-	ohB/mH5T+LBpbx03ByNsSzs5SGeKc4AJrMM7W5nvzelCoqqE3WRBasVOeEBq77vEI3IbTsMdiV5
-	DJKJhqc4Iy+b2kcXvGv0Tsf+9EU/kbwbyiB/a3198mDUJ7b31jYRgg00Llqj3IdNXgSpUrJV8FB
-	Db+tq9DUTPOJ5+j5kn7FYPuyaa18EntS1g9e4cdv/aylGapgqqM/6LR0mMyqQq9+JqRbo8DF8Qp
-	8KmrQdhUXEwuWAdkGwvEW2CBDxfO9HHvzhJZg8Al8jjWnIGQrJWvQLEQcXdtvZGRf/f1ZL1irhY
-	TX9s//KPQKLc9/ztJwnyTZgHgi1mia671bCzpsctJYSe58X5sd5kH3m6jMdr7fiBPb9RTA0G+Lz
-	jpPsE8tuIbhuFJY1lRbxXw6Q3EO86v62oiejrrAEhUc3dJjUhLv9mJrAqHxQC0fztoqP5U9sBMG
-	yrfC256VHD3b3qAVg7zEVx5OsaZOXMB7coh2Sck9BnspqIzO+PmzD7z3T1VDbTDltC/qClZqNxh
-	Mzg==
-X-Received: by 2002:a05:6a20:2591:b0:3c3:812a:2198 with SMTP id adf61e73a8af0-3c92a4d6fc5mr4977901637.4.1785620759657;
-        Sat, 01 Aug 2026 14:45:59 -0700 (PDT)
+        bh=PsZIgcE2NAIJbXO7pCYxipwZvNgXpOyVNp5Qfwh5m+g=;
+        b=n3RkiiSPPu218oP96yH/7cpElOdtdVjCv65qnMs3AYvly8lu6Him2litDHBe1PflJ7
+         fm2Q7ypyzDWE93KOlTYCcgOdj9HOxzEQyax5ur00qbModJYtLsePhLvbCeYAOjep63N9
+         U718oZ7MBNzAUAha3ZYKROehKiIDsRpQJ03GWx75tCNabhuVVSaUGuZFkthfxKNTy6Qz
+         3GiAzKAy9P7m2AkfUY/VDfsA1LnF6M5DtwFZRzzbFnKjfCM9lm9E6G9KZ44F6or+ACYw
+         riKHcIgnEmy7Fz6tzGDzhQKG4VDDSIHI/eD+2uegtdepchFatPPchFciEC7u33qwqn0/
+         iEZw==
+X-Gm-Message-State: AOJu0YxaoBg4Pe03413a3QU7Fmd9Fq+qqQd3Eiv1QAZwQANezdr6SufO
+	CCcB9s+m/KdqjqU3f4R5D1YQRKWNxGeyT0pqvAFFY3HLcdt1CnFr2I6gR+7OFGXu
+X-Gm-Gg: AR+sD13+dXKUXDsqvxFR3efJgEjRRUXg2UdnZUDNXwujrrCpxH436CNH/ha9m/7RUy6
+	weXjV54wrGTNqgVYO/WRuCqNpNtaKAcMLdmxJe/jOrxEc8CEAbpdKtMS3haOCHiw409S7PcNHqU
+	aUClcbWxiMqckdygRHxN/YOudvya3a8om45OdrPWiWRstPgXY+Cp3Xar/9MBvQBwxqde3iaIRhE
+	dizouVasol8DtMmdFNw1DeFIJ0cwunUWnZ/GnmkGhIb0q/v+X6PRG5dKqOiwzqEybuTn9CMgrqh
+	pBjWn8fntcYJ0j5/VTkTK9qQodG+nwicSiyuZ7rWzNWbEhAxAFUCZYNiOBUo5p4t/VrbQuOIdYm
+	2F6WdBZIBC1JEvJU1+8yrx0js/o4fYoggpwz4LpuBPXSGVR8YWME6xVFoLxgLnmN9bG/2j5mMLv
+	Uw93qscz06lBpykeCZG7iaP4N2WLuix+0gix9eGFAI0RORevcqsjoDxTYumnq1niDZOMD2dfLAF
+	wiEkABCIf5lGHSHTgabbfHmkoWwsoVZT/e4u4ZV9x+qLlrOKVffeUeWqFZM00ETtFsZf2PiJmwH
+	yWFLWm7ZV4kQ7LG/89VhPNrWMEAK2N3fAQvTDoiwy3jK+MVyhUyAaFPkmDbno+o7Zn8O9z90g/y
+	7lAgvbng4wDJJ
+X-Received: by 2002:a17:902:f612:b0:2ca:f44b:63be with SMTP id d9443c01a7336-2d0521bc1b4mr45861195ad.3.1785620756482;
+        Sat, 01 Aug 2026 14:45:56 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.58
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:45:59 -0700 (PDT)
+        Sat, 01 Aug 2026 14:45:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 31/31] python3-mpv: propagate ffmpeg's commercial LICENSE_FLAGS
-Date: Sat,  1 Aug 2026 14:45:26 -0700
-Message-ID: <20260801214526.788343-31-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 28/31] turbostat: Use oe.kernel.get_version_file
+Date: Sat,  1 Aug 2026 14:45:23 -0700
+Message-ID: <20260801214526.788343-28-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
 References: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
@@ -71,38 +72,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:46:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128648
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128645
 
-python3-mpv RDEPENDS on mpv, which requires ffmpeg (LICENSE_FLAGS =
-"commercial"). With "commercial" not in LICENSE_FLAGS_ACCEPTED, parsing
-the universe target - which ignores EXCLUDE_FROM_WORLD - reports:
+oe-core commit b980106560 ("lib/oe/kernel: Move python functions from
+linux-kernel-base to library code") moved the kernel helpers out of
+linux-kernel-base.bbclass into meta/lib/oe/kernel.py and renamed them from
+get_kernelXXX to oe.kernel.get_XXX, so get_kernelversion_file no longer exists
+and expanding KERNEL_VERSION raises NameError.
 
-  WARNING: Nothing RPROVIDES 'mpv' (but .../python3-mpv_1.0.8.bb
-           RDEPENDS on or otherwise requires it)
-  NOTE: Runtime target 'python3-mpv' is unbuildable, removing...
+turbostat is COMPATIBLE_HOST x86 only, so this does not show up when parsing for
+other architectures, but it breaks the same way as zabbix did.
 
-Now that mpv carries LICENSE_FLAGS = "commercial" and is skipped, carry
-the same flag here so python3-mpv is likewise skipped cleanly in both
-world and universe instead of surfacing as an unbuildable dependency.
-The redundant EXCLUDE_FROM_WORLD is dropped.
+Switch to the new name. The functions now live in the oe library, which is
+always available in python expressions, so the linux-kernel-base inherit is no
+longer needed -- it only exports KBUILD_BUILD_* now, which is of no use here,
+and upstream intends to remove the class entirely.
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-mpv_1.0.8.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-kernel/turbostat/turbostat.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-mpv_1.0.8.bb b/meta-python/recipes-devtools/python/python3-mpv_1.0.8.bb
-index 2d345cfc55..19b84334f1 100644
---- a/meta-python/recipes-devtools/python/python3-mpv_1.0.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-mpv_1.0.8.bb
-@@ -14,4 +14,8 @@ RDEPENDS:${PN} += "\
-     mpv \
-     python3-ctypes \
- "
--EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
-+# RDEPENDS on mpv, which propagates ffmpeg's LICENSE_FLAGS = "commercial";
-+# carry the same flag so this recipe is cleanly skipped (in both world and
-+# universe) unless "commercial" is in LICENSE_FLAGS_ACCEPTED, rather than
-+# surfacing as an unbuildable "Nothing RPROVIDES 'mpv'" dependency.
-+LICENSE_FLAGS = "commercial"
+diff --git a/meta-oe/recipes-kernel/turbostat/turbostat.bb b/meta-oe/recipes-kernel/turbostat/turbostat.bb
+index f65699865e..fcd1b116b8 100644
+--- a/meta-oe/recipes-kernel/turbostat/turbostat.bb
++++ b/meta-oe/recipes-kernel/turbostat/turbostat.bb
+@@ -16,8 +16,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/COPYING;md5=bbea815ee2795b2f4230826c0c6b
+ COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+ COMPATIBLE_HOST:libc-musl = "null"
+
+-KERNEL_VERSION = "${@get_kernelversion_file("${STAGING_KERNEL_BUILDDIR}")}"
+-inherit linux-kernel-base
++KERNEL_VERSION = "${@oe.kernel.get_version_file("${STAGING_KERNEL_BUILDDIR}")}"
+
+ SRC_URI += "\
+             file://COPYING \
 
