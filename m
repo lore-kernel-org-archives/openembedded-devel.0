@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5402EC55179
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60C41C55178
 	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:45:56 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13606.1785620752385038402
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13604.1785620749641648166
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:45:52 -0700
+ Sat, 01 Aug 2026 14:45:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Euhva1G7;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-c9cf07d2df6so1612415a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=OYHc9V6C;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2ceab75934dso24357465ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785620752; x=1786225552; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785620749; x=1786225549; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PS8ok5FW+6aV9f9FNEIaIzZKgcHpOwg50QdAVsf8Lmw=;
-        b=Euhva1G7FWpuZ4rHUAk16cthIuwxsu/1zo4E3IMHGjmTkACNx8gqhImSKN0ss7mHfF
-         x/ulUU3CUsJOwFFwfW+eywR/3QYu4zliKdRxLmrJ83z5E52/x6fuP7lXqT3BYeXyNyO9
-         KztlcbsmGRMd/f43fm0AG4Xs1AfKPGtKWzw6P9ipJk6vECLtCDr4f5SKN4vu3HqhpqoA
-         AfnomwZzssDQaBXp7Xa+TF0khrWWvVGC07LTyMd8UtRYtTKtpY8mCnvTBJlexl2GoRAA
-         oDkHn7oBmdp+LUDaP1EuGQNjGwfVoQXA6bQ6W9Gr2NhdboucpYHyc/qgYtTB0RTPGGu4
-         cnWg==
+        bh=nXfiboS4Vg38Ukyzug9Gl6UFwUwM/CGz+6VuVzvJTHA=;
+        b=OYHc9V6CIfOtCdjco2oX2lhLwya1RgRsTV+zrnWwLn8VzhCuo+fHt+fvvcDFS6a4PX
+         AoRYap4EH4+TLvopcIrY7MNKWNAiCgfvWrZ8jlEgz6Ev0eM0VMEeR9L4trKOLDRWdYEO
+         e4+3RbuNpeXTpOk37MOU7oWnjYiLl7xHLTotKqesFwjWwpfE9y9inYXk1PwAIXeobT41
+         I3YLZTfGGu4gjlQwSdcVwbY7QrBKA5glX+Amd589AVv90sF8Vqk7CXS6al1te2H23Ht8
+         16qSYwNjsvhOqQ7r5Pcv/QtZArOgLz5hMyTZ75H+sliscksP4/ESVnLeYgKmhYOxm/1I
+         uG5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785620752; x=1786225552;
+        d=1e100.net; s=20251104; t=1785620749; x=1786225549;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PS8ok5FW+6aV9f9FNEIaIzZKgcHpOwg50QdAVsf8Lmw=;
-        b=Y5vRCDnzNOsxcUPTrQJbPXhDnNys8OgNNRanAKIb0Dns1TNXjnb/5FVZGxF6Z5FvkF
-         KgLxOOOzeKAIRHVaO9ihcA3zrXj4Z+gB9rq/nUO8+/lsui1UYGuFCEw95fC2m6tYBZyr
-         QQOwqtQ5nar3uO+uSNwmKFtDMoB3OmdRgTGYK9fG57crklTEG6MIpyYYHEtIsuym0sR3
-         rIuU1atVQMzTGTTE1A7PNsIPe1/wk2gtWwK9x6fpY5RP3xpNn+jejI7Gqc4YXD6oiuQj
-         ZLwJwTg0kiZyt8k7Qb8AgcXVFSrN7m9cbXEOwWbWXLi6OuAUDwxaNcNT4PKKcCA1p9Gm
-         5pSQ==
-X-Gm-Message-State: AOJu0YzYFA4QmnG4sU6Bk5Iwo0l/QkQqVEDMloCFVyXN8Lzajc47Gwwo
-	kxm13WLd/MVJhL1KsTrmO7vJbEL1YfSWmB0SinWz8NviWanaoiWp3HznZEFqR+38
-X-Gm-Gg: AR+sD10v8vx7hhe4Ubii1OJmRhVAauicxjXluuCPWy3c7KwSmU1VNQdiz98QKlwtoaX
-	AgPz6i4UZcgh1h/pv9E6itP7KvcEgAzWMmiveh0VZPaoLehxJ0jVnDOPHs/8A4UrA/0pw0Q8G2W
-	jwl+ZDCCmGNBoTOOCm+/Ylk0MW7vurzfr4Qa4NRK4zKk6dLAwr+THB2rBK9PWCNIIT3XNZWkNKQ
-	HnAiiAA4o+oLraRXNTXBwWlAtp9KBOKg999jg4zR6bgkaG2vxM5fzbKA3sYsYWy/XyBsGpvGdii
-	dAscN2w7C8spfMCBArShMGq48tcwwISTJAZA11gCXx9gP/h2hMLYKVYdsyn9JQxWcVo0d17qu0d
-	dYcTKRJOZ6ZBZtYlOyKN9laPg2QJla7jJg411c8v2mHXHbjR+C+ex1Ps1/cS2ryiFCJF1mtcVUU
-	WT16m89Ok+HTtoSTkizrUVMq2zvQg4baXnQ76XHWSWxPFbBWzBmZodGg6p/mtsfB4zP69NL4i6V
-	3Qs6jsK2ttjCF/aDLWArHrzWfR+Ct92wX+EJGh+y2D1VLp7MaOZAdnR03mRHz3yxK2xnnCh0zmq
-	fegxoLJu676UDoMHFRi68RrpX0aeP+VauThEY+K8hmuvbsppuaTmCV8R1N2jupAw4puq9TJheIk
-	puw==
-X-Received: by 2002:a05:6a21:505:b0:3bf:6c08:4ebb with SMTP id adf61e73a8af0-3c92a8139f2mr5485412637.48.1785620751640;
-        Sat, 01 Aug 2026 14:45:51 -0700 (PDT)
+        bh=nXfiboS4Vg38Ukyzug9Gl6UFwUwM/CGz+6VuVzvJTHA=;
+        b=Y9CRAoUWkhhSFllI52KX8ba5ryfZWG7y0gTud3Pa4aDkfwH2xr9Oh+npz+oBWeR8aM
+         JCHqban/nay7EQ5uMprS7bG6r2i0Na/w22SSPeJigbwdDnuwwtNODfVwTEjyL7eJdj4W
+         2PaOmTeVq6QMWaVu1RStQ/weONUz8i+91nWyDuyrGAUJGfes+hZ3te3tQKpiVoyM0gOm
+         ruMrIljbR34vj06VHVlZs5ae2oiJJ9kp2B1fy0RbbNhCNSO01+di3uPahfCA2EyyEJmR
+         xpre5jzUhRrjcJ2WLNUpYAhibbgeHBoujwpGu/RbRg/sLi659o/iWK4+LHOVc1Xq/FzQ
+         Orow==
+X-Gm-Message-State: AOJu0YwWm8DbeCK2SFqO4npDdp8Edh4hXFNWGHTrVo3gFl7YuAoSoZfr
+	NvhEBdpeg/AgSS5p4WA5ekpDKJlh9dyiGSfnLI5+AJt7qeGn1651p2TrQQZueedU
+X-Gm-Gg: AR+sD10/L5StkSDeNIg+yHvvndHfrNXByII9ji35kxevlFI6dWkyo245LgGDRkGwKq2
+	u8LG+OXPHc8ImOMkLUSq6M+Mz19oID+fx+fdaOhOILUv784Mph82cTyDMDxxA65SoBjPl1rLSxG
+	QYmEpwUpxDvWAgj2S6hdYDjb4IwFQPmLJC+7q/Qzm8lCkiOXg4r9JQjAXnmSkLTCjnH+4LV4PfB
+	kmWMlEDHUVbqGf1fjZU2TQ4x6tYKXHKT8mg9fdwI91hbNRtRve2oF8egkel6CNI8xp3yoB4txqD
+	dJq3z8ca9e28u1zRoLjQDp50nEZP+hLuNm5Bbmgm77r4m3fiGuuU/creE4ePBFLX78l7DKumonr
+	O/8JYWhyh8rhLvzmfqR/dG51tb0A/ipNpP7u0ZF7hePgHiNFSDHfgyhzaywoGIsVW7TVL3fCFbj
+	llJVu3Z+PXTh36pTqMtwFg1GQ2Tcn09MmQ3FdinDQOI5xVEfBXmAWe7btlpOzt1lFnUTAPMeujl
+	s+UT+DAeHxNf1Adkvj5dUuCSb0bUAezXOtnp/7BTq9K7BgqIkgtYN93uyn/1GdD9VYmGJudkTko
+	JChknztefrX/72ji9gdQIOud9utSYN1a4jFr+rELTXhvHlhf3PfcRhhUxrSvPeBEFR6903gBurX
+	KySg/BecjmkUC
+X-Received: by 2002:a17:903:354b:b0:2cc:d192:50b8 with SMTP id d9443c01a7336-2d052913c00mr52112895ad.47.1785620748966;
+        Sat, 01 Aug 2026 14:45:48 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.50
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:45:51 -0700 (PDT)
+        Sat, 01 Aug 2026 14:45:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 23/31] srt: upgrade 1.5.4 -> 1.5.6
-Date: Sat,  1 Aug 2026 14:45:18 -0700
-Message-ID: <20260801214526.788343-23-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 21/31] openal-soft: upgrade 1.24.3 -> 1.25.2
+Date: Sat,  1 Aug 2026 14:45:16 -0700
+Message-ID: <20260801214526.788343-21-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
 References: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
@@ -71,97 +71,100 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:45:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128640
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128638
 
-Upstream changes (git log v1.5.4..v1.5.6):
- * Group/bonding fixes: check value length in group config storage, fix
-   deriving string options by a group, fix getting SRTO_RCVBUF/SRTO_SNDBUF
-   and rejecting options not allowed on a group, and fix a wrong
-   'connection lost' error when sending to a connection-pending group.
- * Fix a stalled connection that should break after rogue NAK/ACK, and a
-   misleading listening-socket error message.
- * Build: Windows-on-Arm64 support, fix Windows installers, fix use of
-   the OPENSSL_USE_STATIC_LIBS CMake option, deprecation warning for
-   Windows+PThreads.
+Upstream changes:
+ * 1.25.x modernizes the mixer, bundles fmt 11.2.0 (was 11.1.1), and
+   annotates realtime-critical functions with [[clang::nonblocking]].
 
-Drop 0002-allow-build-with-cmake-4.patch: it backported the
-cmake_minimum_required(VERSION 3.5) bump, which is already present in
-1.5.6 upstream.
+Drop 0001-Add-missing-include-for-malloc-free.patch: it backported a
+<cstdlib> include into the bundled fmt-11.1.1 copy, which is already
+present in the fmt-11.2.0 now bundled by 1.25.2.
+
+openal-soft hardcodes -Werror=function-effects for C++ even with
+ALSOFT_WERROR=OFF. clang-22's function-effects analysis then fails the
+build on calls from nonblocking mixer code into non-nonblocking
+std::variant::emplace. Pre-seed HAVE_WFUNCTION_EFFECTS=OFF (clang only)
+so neither -Wfunction-effects nor its -Werror promotion is added.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../srt/0002-allow-build-with-cmake-4.patch   | 43 -------------------
- .../srt/{srt_1.5.4.bb => srt_1.5.6.bb}        |  3 +-
- 2 files changed, 1 insertion(+), 45 deletions(-)
- delete mode 100644 meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
- rename meta-multimedia/recipes-support/srt/{srt_1.5.4.bb => srt_1.5.6.bb} (90%)
+ ...-Add-missing-include-for-malloc-free.patch | 38 -------------------
+ ...l-soft_1.24.3.bb => openal-soft_1.25.2.bb} | 14 +++++--
+ 2 files changed, 10 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/openal/openal-soft/0001-Add-missing-include-for-malloc-free.patch
+ rename meta-multimedia/recipes-multimedia/openal/{openal-soft_1.24.3.bb => openal-soft_1.25.2.bb} (64%)
 
-diff --git a/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
+diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft/0001-Add-missing-include-for-malloc-free.patch b/meta-multimedia/recipes-multimedia/openal/openal-soft/0001-Add-missing-include-for-malloc-free.patch
 deleted file mode 100644
-index 8c91e3919b..0000000000
---- a/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
+index cd966c04f7..0000000000
+--- a/meta-multimedia/recipes-multimedia/openal/openal-soft/0001-Add-missing-include-for-malloc-free.patch
 +++ /dev/null
-@@ -1,43 +0,0 @@
--From 5a71ca427a10fe89ad48e9dbb6641e4403d81fa7 Mon Sep 17 00:00:00 2001
--From: Alper Ak <alperyasinak1@gmail.com>
--Date: Thu, 10 Jul 2025 13:30:25 +0300
--Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-- compatibility
+@@ -1,38 +0,0 @@
+-From 468b52958ded2dd942386d52e456ed259875b6e3 Mon Sep 17 00:00:00 2001
+-From: Chris Robinson <chris.kcat@gmail.com>
+-Date: Fri, 18 Jul 2025 01:57:32 -0700
+-Subject: [PATCH] Add missing include for malloc/free
 -
--Fix:
--
--| CMake Error at CMakeLists.txt:10 (cmake_minimum_required):
--|   Compatibility with CMake < 3.5 has been removed from CMake.
--|
--|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
--|   to tell CMake that the project requires at least <min> but has been updated
--|   to work with policies introduced by <max> or earlier.
--|
--|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
--|
--|
--| -- Configuring incomplete, errors occurred!
--
--Upstream-Status: Backport [https://github.com/Haivision/srt/commit/0def1b1a1094fc57752f241250e9a1aed71bbffd]
--
--Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+-Upstream-Status: Backport [https://github.com/kcat/openal-soft/commit/6b69e11867e6498f244da95de7a3d6c25f79f205]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- fmt-11.1.1/include/fmt/format.h | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
 -
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 328a433f..448d6254 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -7,7 +7,7 @@
-- # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-- #
+-diff --git a/fmt-11.1.1/include/fmt/format.h b/fmt-11.1.1/include/fmt/format.h
+-index d1b83d18..ae5700ff 100644
+---- a/fmt-11.1.1/include/fmt/format.h
+-+++ b/fmt-11.1.1/include/fmt/format.h
+-@@ -44,6 +44,7 @@
+- #  include <cmath>    // std::signbit
+- #  include <cstddef>  // std::byte
+- #  include <cstdint>  // uint32_t
+-+#  include <cstdlib>  // std::malloc, std::free
+- #  include <cstring>  // std::memcpy
+- #  include <limits>   // std::numeric_limits
+- #  include <new>      // std::bad_alloc
+-@@ -742,12 +743,12 @@ template <typename T> struct allocator {
 - 
---cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
--+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-- set (SRT_VERSION 1.5.4)
+-   T* allocate(size_t n) {
+-     FMT_ASSERT(n <= max_value<size_t>() / sizeof(T), "");
+--    T* p = static_cast<T*>(malloc(n * sizeof(T)));
+-+    T* p = static_cast<T*>(std::malloc(n * sizeof(T)));
+-     if (!p) FMT_THROW(std::bad_alloc());
+-     return p;
+-   }
 - 
-- set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
---- 
--2.43.0
--
-diff --git a/meta-multimedia/recipes-support/srt/srt_1.5.4.bb b/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-similarity index 90%
-rename from meta-multimedia/recipes-support/srt/srt_1.5.4.bb
-rename to meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-index 72e9ff658d..b4ae8bed09 100644
---- a/meta-multimedia/recipes-support/srt/srt_1.5.4.bb
-+++ b/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-@@ -6,10 +6,9 @@ HOMEPAGE = "https://github.com/Haivision/srt"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+--  void deallocate(T* p, size_t) { free(p); }
+-+  void deallocate(T* p, size_t) { std::free(p); }
+- };
+- 
+- }  // namespace detail
+diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.25.2.bb
+similarity index 64%
+rename from meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb
+rename to meta-multimedia/recipes-multimedia/openal/openal-soft_1.25.2.bb
+index a1d2932f93..e2da0b1b9f 100644
+--- a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb
++++ b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.25.2.bb
+@@ -7,10 +7,16 @@ inherit cmake pkgconfig
  
--SRCREV = "a8c6b65520f814c5bd8f801be48c33ceece7c4a6"
-+SRCREV = "c63c311e88aa55e430e3b7d94b89d790994f88c4"
- SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master;tag=v${PV} \
-            file://0001-don-t-install-srt-ffplay.patch \
--           file://0002-allow-build-with-cmake-4.patch \
-            "
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ DEPENDS = "zlib libsndfile1"
  
+-SRCREV = "dc7d7054a5b4f3bec1dc23a42fd616a0847af948"
+-SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master \
+-           file://0001-Add-missing-include-for-malloc-free.patch \
+-          "
++SRCREV = "b2c48f7718ef3fcf67921a8b6534c4914e328970"
++SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
++
++# openal-soft 1.25.x annotates realtime-critical mixer functions with
++# [[clang::nonblocking]] and, even with ALSOFT_WERROR=OFF, hardcodes
++# -Werror=function-effects for CXX. clang-22's function-effects analysis
++# then fails the build on calls into non-nonblocking std::variant::emplace.
++# Pre-seed the feature-detection cache var so neither -Wfunction-effects
++# nor its -Werror promotion is added.
++EXTRA_OECMAKE:append:toolchain-clang = " -DHAVE_WFUNCTION_EFFECTS=OFF"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pipewire pulseaudio', d)}"
+ PACKAGECONFIG[alsa] = "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"
 
