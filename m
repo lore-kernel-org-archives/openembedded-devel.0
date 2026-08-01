@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78870C55172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E504C5516F
 	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:45:45 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13595.1785620735876615173
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13736.1785620742759806504
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:45:35 -0700
+ Sat, 01 Aug 2026 14:45:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=e2CU2ARy;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-c999f162c9aso1409135a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=E13gzs0d;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-cbb8b54fcf8so2018846a12.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785620735; x=1786225535; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785620742; x=1786225542; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=k3dV+5HCy+MzHADv6mgNGZL6exM6ReNrSG/Ap7e0W5M=;
-        b=e2CU2ARybbzz1GiamYE6b/WQfrgqJcNH3L+7obvDDWCfOnLId/1s7s8AFZehaiwkap
-         FllA5oJXk5+xI8L1N9c0vgH7iSSSHs79+HDvCevbXZ7Oz03sYEJOc/WK0zfGnuHo1Wu9
-         hpTBGlVedBDeiV+ygHFQA/0KOL0duAEouF8qfpI+PK+len4ElH5MPz4mpPBvOnmSQThY
-         slEmk5ZjEzlHAJFnFH4UfSWB8vH/YrGt2A/cQWxXChwQ+CKFbybHQzP9pCAfJI41Phyr
-         AeEq2PfEUtD21NmBXDaRf9NeVRd2j8zs6XpbeNzS/EwnPtSWvnBRoQtoTSmZ1KW87pTs
-         jnkA==
+        bh=rijC0Q6JDQO2/KjydTy5APc5NOmfvCTUATIkRJNc43Y=;
+        b=E13gzs0dschSPDx4hcj+GW5515fkTIWtDGwflEig7mu8XTZY+yL0M0ul/7e+MFaIqQ
+         fpyVYvT6gN82yRNWAhszFWiRmyQMSn8eAD8yUPkTEN9qtyCrWmjydYyr3KAze22It8X7
+         IOU0VTIDdn+QTJh0cj3eI2ruEMJ6ldN33WHK/1++UKnFsmGq1wdSG/dLdVYLdseIaSH3
+         mVn9erdKKPDhWSCOUOE6ncFKqA3CexNyEzOX/84VQISpt0VQJbxe/tXOggFKhAK8aDSQ
+         ghaSdahSopyhZSk7oPzD05SiB1y6OokZQrmL9ktxjW04kBlJ47JodJHFjDnj5yc+ySWO
+         FVsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785620735; x=1786225535;
+        d=1e100.net; s=20251104; t=1785620742; x=1786225542;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=k3dV+5HCy+MzHADv6mgNGZL6exM6ReNrSG/Ap7e0W5M=;
-        b=jhTer6nrLYqY5FeNVKmSK+44BKDd7tATcjwWnPr4KREcyd1aisVtQEiViuROTwXmog
-         HCLu3c3poJto2J8uMAqD981mZkwedgXl7Wo4uqWjKA9elGwoDTegU2aYlRIWpOPw5K7o
-         DlvfSagTwbqwC4iBl56UWv/UoymSw4WVqTRd4zgdoJTpd1LHo4ZV3XFoW0lWdFPNpRj8
-         JujnM8bZiKNrXqfeWklgFtZNoKtV3y9HRwzTPJyBrf1zex3m80nyOIvJD96EcpWc+IXt
-         TMXenamOZYm9eFMaZdUE3ais6qllzI9mac8Is1+wMNdUORSjiriGr8jfhJnqrGe1Hdzo
-         YVBA==
-X-Gm-Message-State: AOJu0YyhUqablOcDf/Uqa3z3MAiAgoKAlkclL33fM9M/BkUTO68hKu4W
-	NOsvm/nzOBvt0Dx4DzZ/Yxo+hAcXu+7Dw2WqjLU4v/88oSz+7PM42/vX14Cl3JHV
-X-Gm-Gg: AR+sD10YccyqKE+r+DbMF9WZeDr0jPcYs16Svvsf4eze45WtAR5FtZMvfdFEvCMFbMg
-	0+NBqSahY83wkT60e11ySPc6JX6+o7zok7rttu3MX8As/NUzusEpO6fzaUbRpGnTZlPC9ZHKlGN
-	VoMWsJWUU2r+rdpd1qV2AZCx1bb2iPcKC5/7C88bSXoiEOxnYwR/AJanl+M+BtCHhTXF9g8f8mx
-	qngPy+p3JZdyzNccxJXzLVxXqHCxorgg5eQpq1KDAcJUBjkKOoksMeq+bjN19PzH1gnF+ytqm3J
-	8GLQ5srJBXdzqlunuafJD6P8XIXskbgDaQSUYABAYUb1vxAzaw4aPpk9IE54Qv4jh0vvHdE4/cj
-	cxRjCEX7nI9J56np8W1DoFHiUS5mxjWldCnND8kXZwGjZfie6zJ5sDZvrT/m1KQKOxGKvLPIjR2
-	EqT1OAJrs+Ll8v0K3q6K+vthtFtx9/ReYp9UzBFgkYYHkFgy7NmggfMZsIZeF6JmBtivBeREgD1
-	MgG6mYf7wlhOY8p7qfvs8YlcccnuQ28HCPyneIWkCo67DkLdLeQoSXZfvvghLZS95WGvBt6cZZc
-	/5uFKBPgHUGZLxIx53JmhmTNlS3k9/Wm1XtwFR/a/5E1BM2ImwR4ftvZ5tlKfNV/NR7qDOHrayw
-	x5A==
-X-Received: by 2002:a05:6a21:501:b0:3c3:a969:2cf with SMTP id adf61e73a8af0-3c92a8f5e8cmr5197774637.53.1785620735135;
-        Sat, 01 Aug 2026 14:45:35 -0700 (PDT)
+        bh=rijC0Q6JDQO2/KjydTy5APc5NOmfvCTUATIkRJNc43Y=;
+        b=rGQxR2zGGNaAkQMHFS/9P7o2b6Efen3nCHfYWLn32hyVR8VcRuSyVCcdtg+P3EZ4rL
+         lkBXjbX+vunJsOBq9R8gBTctTBh9yStM8yITAJUp9g1zOo+41TBj7m0RDFeVHhKhdxQg
+         qhTZYDMY5CTRiLyaFlY/zRr18rRlk/7ISoakUpIk5CnWgj/ldUeCH0mSk4GQ/Oz4Vq9p
+         YsXpZwsRdTNhImczkRzRDZpJYNfwVMtgIZOHd57sUsHwqh+TZ+Y57VLw0qr/NR49Dw3+
+         ieDYw8P1f+VhKugv6XWECKJaGR8lpfR0jWkM3YoWo5gOyGelsQPA1bj7MU6V7d+yvZHK
+         g+pg==
+X-Gm-Message-State: AOJu0YyRIHbOgzrnb95CNHDko2gxvw+8DgZIx0WeSgFAwxdHSLYOyyXv
+	Fiux/t/FjVA8YgV/5OVpYdwkTyznRxO8Q2rwdIwqTkQU42bjM+UBU0UeJvrIA5Qa
+X-Gm-Gg: AR+sD115KVxAYPQoLYNEAk+qsr2tIQ/eOizTHg3ZG4tMD48cZDxYCowMTkd/N9rHJWy
+	qvRmDqZExf8mBed3LX/+W28Qj8PvSMr/8a1EpJSvWd5RDQ9kKDqRh4KjCuFuQcpzMDEfSUzFxu3
+	51y+J1YfdGzdYydZc+Zm/yVxTLReLi0Xx0cdCaE1EDNV+uIFWut4BB0E8uz6xZ/G3/vsCjllQKS
+	IfsmBYujCJ/0a3Bwf7j+eXoiR+BN3PMGMu1e3TcZT6F1K8Bv/4X4BiuCH2MgzMXhhVlc/pti8kz
+	D8jbjhSaCuTrhMOXK7+QewDtPbhxJN0DNGAdzN8Q1BVYgGJmVQOlSO/e9HyMKk3SRvWgzCATIB7
+	wzXDajml5UHvgYuHWN8s1NotWjkDTisg+veVWpXQjvrwRIqtfYJz7ZYW3vvMehBShhuEy+ezoX1
+	qyvKaqKFNvI+7srhLA0WrLzat7bZwNaj7lOeo2UBbeytWGkB9lvmqo6AQnJANsbByQjZBZjPI+2
+	mnZ3+KhHB017zMKh/htxgc28/37HxRuyzhHQZW4DCiIv+rtIliS8eBsGW+K1wVrHwpHy4gwsfuo
+	7x9iFV2LblNEMz0muJMl07g/CJgXOZKE6jKLD/skPQPwrMFjFGjJ05vW3qL5IytlzYWBxpTbKGP
+	2ew==
+X-Received: by 2002:a05:6a21:a97:b0:3bf:ba89:5236 with SMTP id adf61e73a8af0-3c92a7c8adbmr4437004637.33.1785620742083;
+        Sat, 01 Aug 2026 14:45:42 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.34
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:45:34 -0700 (PDT)
+        Sat, 01 Aug 2026 14:45:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 07/31] libavif: upgrade 1.4.1 -> 1.4.2
-Date: Sat,  1 Aug 2026 14:45:02 -0700
-Message-ID: <20260801214526.788343-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 14/31] gssdp: upgrade 1.6.4 -> 1.6.6
+Date: Sat,  1 Aug 2026 14:45:09 -0700
+Message-ID: <20260801214526.788343-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
 References: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
@@ -71,42 +71,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:45:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128624
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128631
 
-Upstream changes (CHANGELOG.md, 1.4.2):
- * Require C11 for compilation (public headers remain C99).
- * avifgainmaputil: add --jobs flag for multi-threaded read/write and
-   enable auto tiling; use AOM_TUNE_IQ for layered inter-frame encoding.
- * Fix memory leak of altICC on early return; avoid MT loop-restoration
-   crash with libaom < 3.13.3; fix decoding of layered images with
-   multiple scaled alpha layers; fix NaN bypass of AVIF_CLAMP in gain-map
-   tone mapping; fix NULL deref in avifImageCopy().
- * Refreshed bundled dependency pins (aom v3.14.1, libyuv, libpng 1.6.58,
-   etc.) - not used here; the recipe fetches libargparse/libyuv at their
-   own pinned SRCREVs.
-
-Version-only bump of SRCREV_libavif; sub-source SRCREVs unchanged.
+Upstream changes (NEWS):
+ * 1.6.5: block the corresponding TCP socket when allocating a UDP socket.
+ * 1.6.6: fix binding to unicast sockets (regression from 1.6.5).
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../libavif/{libavif_1.4.1.bb => libavif_1.4.2.bb}              | 2 +-
+ .../gupnp/{gssdp_1.6.4.bb => gssdp_1.6.6.bb}                    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/libavif/{libavif_1.4.1.bb => libavif_1.4.2.bb} (96%)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.6.4.bb => gssdp_1.6.6.bb} (92%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb b/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.2.bb
-similarity index 96%
-rename from meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb
-rename to meta-multimedia/recipes-multimedia/libavif/libavif_1.4.2.bb
-index c4dde341b8..aa1a7e4cec 100644
---- a/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.2.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=51549db0941829faeedcc86efec2f4c0"
- SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=main;tag=v${PV};name=libavif"
- SRC_URI += "git://github.com/kmurray/libargparse.git;protocol=https;nobranch=1;name=libargparse;subdir=${S}/ext/libargparse"
- SRC_URI += "git://chromium.googlesource.com/libyuv/libyuv;protocol=https;nobranch=1;name=libyuv;subdir=${S}/ext/libyuv"
--SRCREV_libavif = "6543b22b5bc706c53f038a16fe515f921556d9b3"
-+SRCREV_libavif = "c5240fc79fe5c2407e10afd35f5505ef6333ea49"
- SRCREV_libargparse = "ee74d1b53bd680748af14e737378de57e2a0a954"
- SRCREV_libyuv = "6067afde563c3946eebd94f146b3824ab7a97a9c"
- SRCREV_FORMAT = "libavif"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+similarity index 92%
+rename from meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+index 94679ce28b..944a4ef16f 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ inherit gnomebase pkgconfig gobject-introspection vala gi-docgen features_check ptest
+ SRC_URI += "file://run-ptest"
+-SRC_URI[archive.sha256sum] = "ff97fdfb7f561d3e6813b4f6a2145259e7c2eff43cc0e63f3fd031d0b6266032"
++SRC_URI[archive.sha256sum] = "767d2275254ce0efeaeac64419ff9f4f0ad470d134ef672f5c556b2abb786bcb"
+ 
+ DEPENDS = " \
+     glib-2.0 \
 
