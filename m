@@ -2,66 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24FC1C5516F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A48DC55175
 	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:45:56 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13602.1785620746750484036
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13608.1785620755168548030
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:45:46 -0700
+ Sat, 01 Aug 2026 14:45:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ysy7UyCf;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-c998fd549a8so1704623a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ojB8phow;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2cfff5f88dbso24424835ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:45:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785620746; x=1786225546; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785620754; x=1786225554; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cf7ro5rfUT/Zxr9HKpD1DwAEk8UVa7g0wQJ16P79rWU=;
-        b=Ysy7UyCfdspYIAfcZ3/NL03Sb8SEi0ExOc1Bye/mJPdhQPnDM/1lc2wnslsyufkuDF
-         HerFgsTinVMkGuD5PihydtRzxDlxrD7kOJl7yBOhxL5zL1w9Pz8vrc8omNRE1+7Eqryr
-         bd4CsT96JKeEAHeUT1sWMcsShdPzQVvhGJpaKYUGIhMtH6eX6TA+Q8wll9GH9GImmcIs
-         BKABde9xZ0s5/iN7dClt9nnnkeuZGCMS/kENPAhM9/aTMCtwDTcZ5t1WbipvFrdGfwMI
-         jxsnDBJiEo4ibqPTbBrepM8W2KTeh7cnBG7txV/IGT6neAGjRpXOAYfjyXzMU2iNkCdX
-         zBSQ==
+        bh=OsJb01AIB7kEF/VlThD8q+1+/TXgCSaLnc95sXW6HkI=;
+        b=ojB8phowc+97XAgOEobzFKt7Q3vgDGAGweFKNJkD7qDPKX+7/PQ9OU8pcvFgvQ+lDP
+         jO/FU/lNG9WB4TMfQsbclERjAVcWi+Q2jKhWX5ffIoaBMq1NG4tGw9fxxdCGL0i3Uf8/
+         34xW34zrufR27UUUK9VVgBivZR+hWsWmQVteB0628QiUWgx3qXnDv7K6zZdN+MToKXlg
+         8i2Tvdn4EI8bqYum4MDIvT88LbQmWktzLj2JLI6RIxJaMrG9Ww1IsyIayAnZ1KMs4p45
+         uY5PLITMKpcfwYyqI8BYuMAD5sQh8ff7kuvvroKdpeEf5zMt083cgEuX8Xn8glsVlgQu
+         69KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785620746; x=1786225546;
+        d=1e100.net; s=20251104; t=1785620754; x=1786225554;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cf7ro5rfUT/Zxr9HKpD1DwAEk8UVa7g0wQJ16P79rWU=;
-        b=eSBHUwIsyVLCXU1eEeGjeA3VD87S6NQRQWLniyS34cHXzhZJ1dIsFGInXo5pcMwfLZ
-         ISTH36ywxJovUOzblybU0SzhdASc+lZr28WUG+8Ry18GGVpOd96P4U4uclpEIIohctH2
-         tbb2REfrWI+haFg7rDwK9Mw8S2vgOwuJeP1z6htPhFQQPDlUhb9iw0X+1SFg7+P8fiQ5
-         ddOJdlnV2sNZ52uqiq1BIr75LyBkKM9qXiai8NGfDygw+Wsz/5m/OJW+y12Asfo2NCS9
-         cW1EcFX7AR41VA/ifTEp/zhScoXNOKdbU+PHER/+4i0KoqQ1p7MtsjR1EUl3XpQWlT9U
-         CJyg==
-X-Gm-Message-State: AOJu0Yy2cX9aEnXT+KA7fDBRcN2dyEOFS56Av8+Wc0A0UBqI9EtAYBBZ
-	Mol8ZwZTUckq23ziNazVKpmeLgRiiJQGamHrjbV60MUWI2mjI6KVx4Iw/rfc5t2y
-X-Gm-Gg: AR+sD10cUcLXAvyQXPYiHsGDPa43fb8tLqHm8J5JzEeuINFAQ3/q/MlWDY93xrKpgiJ
-	BrWv211Y/qzRLLKGMEmhdFgJS643qAkN/vytfO/VzPcE0Vjn6/h/14FUOuyaUyiqJ2Ys6HosxZS
-	R2FURZQPhP/HT3KNMN5g+za8yiXOWLa2OyCEThLlw3jdQTqQiIrywJ8zjbOZBZnX2g82xFDpMaI
-	bejlcI7ElPBXxE41QzrrAOsCw0dGOGdgC3N7x01SIZEkX6TDdy46y0ysJkvT0PilTFW6tdOC+Lq
-	zGfsD9u/e/t3EyT8Z3rk+rT2YsihQy1o5qHrjeeG0vq//PwykyCf9pmScTWXFmzhVqL1+icJHQ/
-	zx48OkcxIFtQRflRrL+PLoYwQ9/FVwPT66R5GSpEJqT7ij4JY0Hh8QvR82LW4UzxewQcLO7OMZ6
-	MIyoBQHLa8uze3pf/e5sWKA3mNivIVQilFpeWdc960xHjOjsJB3TkfK9n0jj80kzRt4VjcPS7Cw
-	LswDnMErstUzJ0dZhXi4SPfNymUFGiJWoXPeY5flFrB5JqwPmJE89CSdtkBuxNwF56oesAtczrk
-	9Dq1wVIhHBuzXjkFivABd1frQzmEmqtm8GPYK61Q4jIn7ZwDx19FtEnX/S6F8+GzXbR/PgqDqTm
-	dfw==
-X-Received: by 2002:a05:6a21:1584:b0:3bf:a0e5:999a with SMTP id adf61e73a8af0-3c92a8378femr5660526637.48.1785620745967;
-        Sat, 01 Aug 2026 14:45:45 -0700 (PDT)
+        bh=OsJb01AIB7kEF/VlThD8q+1+/TXgCSaLnc95sXW6HkI=;
+        b=NbLwQ9RuAGVN+g5rVO/1YYPp0f/szAXwPVgnNf1xjuRTKG9M6WE4+7sNPufoSYhAOP
+         3dhIWsV3SBbCH6+Kobiqe9AG3PugK+pH0+6an8/vKx0RrCCicy1VID2zts2fz/aarNPH
+         sTD6qQ5ESnkaCXlJs6AXbYxgrN+FV7i7tA+AD2Gi6xBbmxt30UC7DwCjwHTFG/1mhwL9
+         K9UtSNAsGuLTpeY6NF/UTcbpkhoIinKzCPWuI/SL4ATipy8SVCdjkucikslp+8ehBKnG
+         pcyUc9ARZOloND3NSGgKfkxhDdYqvlWVz101cSCafNEyDY4d96cR6lbKl+VU+I7jCHho
+         l2/A==
+X-Gm-Message-State: AOJu0Yw4DofGFegFWEXA68EAUSYI18xjQby5VTd7LAQuBU5ThZo6xyrJ
+	of+p82gba17xc9/p6GobXserY/eara9GRTdhI7L3I6s1FznXj86QNlynogM5phrr
+X-Gm-Gg: AR+sD10oZSaevP+R4dRD+hznvIeshkXIkK5N/sUmcilXLHFY0p9A26NFa1uxllI8XI4
+	/0lhFW5kPwHHz1rO/wc+UowcFwt5iF1xnqkP3d8wZkjwXodINc9gq0JAMuPgm3tHRRvA9yN1rmu
+	xUnYMLWBD0ZuiKQ/wbvFWWsKjyABXFlnOiBrVtwtFVp2ZFbkaRizHpbuhX56TJqgxmtjTMj7/Zw
+	bsIC2U7Akc0DQ7SpcgWQNijJBNb+Iui6HZFqv6QarLK0Rg2TJzAXj/QgLWvRGEqI1pP/NdtRR36
+	ap5d//Gian76+7wN1oLRi/EBjnxyJFrd+Gi0M21qjvZPDvFQgwbLRAen3hIL/MNTijcsJezIO5X
+	jWuTKOn9mW+lx2E+1WaDb7vNeP32BMlSSzVKKhwPeDiBO7O2ucedvYj8WdRO/Jk/B7qnYQ73gf+
+	FR1pm3zg7WfrJgC+Ir1h+uvL8lot8HplLRm8FbvSseXQ0uifMBZD0a2XXSNdcATo9uCfNAHda+q
+	Bd1QBqky85TvCdbWvFgqywL9xKtB45HhPJnoT1KTtfCP+LBJ9SY3LwT55m8UqCtg3aLXQh7hw1N
+	sYCoKEGgqfrVkby9Ng61GOnX94Nt0IkV0sn5Ck8xpX4Ud1t6j+R8tOhMef6Tu7aRRlb1sSYWRnh
+	eWg==
+X-Received: by 2002:a17:902:f542:b0:2ce:88d7:a233 with SMTP id d9443c01a7336-2d052428c82mr43673845ad.33.1785620754516;
+        Sat, 01 Aug 2026 14:45:54 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5b0sm19105102eec.1.2026.08.01.14.45.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:45:45 -0700 (PDT)
+        Sat, 01 Aug 2026 14:45:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 18/31] python3-pillow-heif: upgrade 1.1.1 -> 1.5.0
-Date: Sat,  1 Aug 2026 14:45:13 -0700
-Message-ID: <20260801214526.788343-18-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 26/31] fwupd: Only enable hsi on x86
+Date: Sat,  1 Aug 2026 14:45:21 -0700
+Message-ID: <20260801214526.788343-26-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
 References: <20260801214526.788343-1-khem.raj@oss.qualcomm.com>
@@ -71,90 +72,68 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:45:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128635
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128643
 
-Upstream changes (release notes):
- * 1.2.0: dropped Python 3.9; PREFERRED_DECODER must be a valid decoder.
- * 1.3.0: pixel-aspect-ratio (pasp) read/write; free-threaded (no-GIL)
-   Python support; fix integer overflow in the encode path leading to a
-   heap OOB read (CVE-2026-28231).
- * 1.4.0: track newer bundled libheif/libde265/libx265 (not used here -
-   the recipe builds against the system libraries); minimum libheif
-   raised to 1.19.0.
- * 1.5.0: grid (tiled) image encoding via options.GRID_TILE_SIZE /
-   tile_size, info["tiling"] read-back, and PH_LIBHEIF_CMAKE_ARGS.
+fwupd 2.1.7 fails to configure on every non-x86 machine:
 
-Refresh 0001-setup.py-support-cross-compiling.patch for 1.5.0: setup.py
-context shifted, so the patch applied with fuzz and failed the patch-fuzz
-QA check. Regenerated against 1.5.0 (same STAGING_INCDIR/STAGING_LIBDIR
-changes).
+  ../sources/fwupd-2.1.7/meson.build:288:68: ERROR: Feature hsi cannot be enabled
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+HSI (Host Security ID) has always been implemented for x86 only, but the way
+meson.build enforces that changed in 2.1.x. 2.0.19 had:
+
+  hsi = get_option('hsi').disable_auto_if(host_machine.system() != 'linux').disable_auto_if(
+    host_cpu != 'x86' and host_cpu != 'x86_64'
+  ).allowed()
+
+while 2.1.7 has:
+
+  hsi = get_option('hsi').require(host_machine.system() == 'linux').require(
+    host_cpu in ['x86', 'x86_64']
+  ).allowed()
+
+disable_auto_if() only downgrades features that are set to 'auto', so passing
+-Dhsi=enabled on e.g. aarch64 used to go through silently. require() is an
+assertion, so the same option is now a hard error.
+
+The recipe lists hsi unconditionally in the default PACKAGECONFIG and therefore
+always passes -Dhsi=enabled. Restrict that to the architectures whose meson
+cpu_family is x86 or x86_64. Non-x86 now gets -Dhsi=disabled, and require() on
+an explicitly disabled feature is a no-op rather than an error.
+
+PACKAGECONFIG[hsi] is left alone so it can still be requested explicitly.
+
+Verified on qemuarm64 (do_configure now succeeds, meson reports "hsi: disabled",
+recipe builds through to packaging) and on qemux86-64 (hsi remains in
+PACKAGECONFIG, so the feature is unchanged where it is supported).
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-setup.py-support-cross-compiling.patch      | 12 +++++++-----
- ...ow-heif_1.1.1.bb => python3-pillow-heif_1.5.0.bb} |  2 +-
- 2 files changed, 8 insertions(+), 6 deletions(-)
- rename meta-multimedia/recipes-devtools/python/{python3-pillow-heif_1.1.1.bb => python3-pillow-heif_1.5.0.bb} (85%)
+ meta-oe/recipes-bsp/fwupd/fwupd_2.1.7.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-devtools/python/python3-pillow-heif/0001-setup.py-support-cross-compiling.patch b/meta-multimedia/recipes-devtools/python/python3-pillow-heif/0001-setup.py-support-cross-compiling.patch
-index 66cf7a9244..ea6ce13e67 100644
---- a/meta-multimedia/recipes-devtools/python/python3-pillow-heif/0001-setup.py-support-cross-compiling.patch
-+++ b/meta-multimedia/recipes-devtools/python/python3-pillow-heif/0001-setup.py-support-cross-compiling.patch
-@@ -3,6 +3,8 @@ From: Leon Anavi <leon.anavi@konsulko.com>
- Date: Mon, 5 May 2025 16:08:37 +0000
- Subject: [PATCH] setup.py: support cross compiling
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_2.1.7.bb b/meta-oe/recipes-bsp/fwupd/fwupd_2.1.7.bb
+index 3a30b5d1ee..c144a52156 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_2.1.7.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_2.1.7.bb
+@@ -40,8 +40,8 @@ PACKAGECONFIG ??= "\
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
++    ${@bb.utils.contains_any('TARGET_ARCH', 'i386 i486 i586 i686 x86_64', 'hsi', '', d)} \
+     gnutls \
+-    hsi \
+     plugin_modem_manager \
+ "
 
-+Refreshed for pillow-heif 1.5.0 (context shifted).
-+
- Upstream-Status: Inappropriate [oe specific]
-
- Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-@@ -11,10 +13,10 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-  1 file changed, 11 insertions(+), 8 deletions(-)
-
- diff --git a/setup.py b/setup.py
--index 68945e4..67566e8 100644
-+index f6d444d..29b6b4d 100644
- --- a/setup.py
- +++ b/setup.py
--@@ -125,12 +125,12 @@ class PillowHeifBuildExt(build_ext):
-+@@ -126,12 +126,12 @@ class PillowHeifBuildExt(build_ext):
-                      self._add_directory(library_dirs, match.group(1))
-
-          # include, rpath, if set as environment variables
-@@ -29,8 +31,8 @@ index 68945e4..67566e8 100644
-              if k in os.environ:
-                  for d in os.environ[k].split(os.path.pathsep):
-                      self._add_directory(library_dirs, d)
--@@ -199,12 +199,15 @@ class PillowHeifBuildExt(build_ext):
--             self._update_extension("_pillow_heif", ["heif"], extra_compile_args=["-O3", "-Werror"])
-+@@ -210,12 +210,15 @@ class PillowHeifBuildExt(build_ext):
-+             )
-          else:  # let's assume it's some kind of linux
-              # this old code waiting for refactoring, when time comes.
- -            self._add_directory(include_dirs, "/usr/local/include")
-@@ -51,6 +53,6 @@ index 68945e4..67566e8 100644
-
-              self._update_extension("_pillow_heif", ["heif"], extra_compile_args=["-O3", "-Werror"])
-
-+
- --
- 2.39.5
--
-diff --git a/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.1.1.bb b/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.5.0.bb
-similarity index 85%
-rename from meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.1.1.bb
-rename to meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.5.0.bb
-index c4dce72085..4558715113 100644
---- a/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.1.1.bb
-+++ b/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.5.0.bb
-@@ -11,7 +11,7 @@ PYPI_PACKAGE = "pillow_heif"
- inherit pypi python_setuptools_build_meta
-
- SRC_URI += "file://0001-setup.py-support-cross-compiling.patch"
--SRC_URI[sha256sum] = "f60e8c8a8928556104cec4fff39d43caa1da105625bdb53b11ce3c89d09b6bde"
-+SRC_URI[sha256sum] = "16b11a37b762ff42da2d36527bb5cb14bd9194c24c389ee911155d6e23c53065"
-
- DEPENDS += "libheif"
-
+@@ -49,6 +49,10 @@ PACKAGECONFIG[bluetooth] = "-Dbluez=enabled,-Dbluez=disabled"
+ PACKAGECONFIG[firmware-packager] = "-Dfirmware-packager=true,-Dfirmware-packager=false"
+ PACKAGECONFIG[fish-completion] = "-Dfish_completion=true,-Dfish_completion=false"
+ PACKAGECONFIG[gnutls] = "-Dgnutls=enabled,-Dgnutls=disabled,gnutls"
++# HSI is only implemented for x86. Since 2.1.x meson.build gates it with
++# .require() rather than .disable_auto_if(), so asking for it anywhere else is a
++# hard error ("Feature hsi cannot be enabled") instead of being quietly ignored,
++# hence the architecture check on the default above.
+ PACKAGECONFIG[hsi] = "-Dhsi=enabled,-Dhsi=disabled"
+ PACKAGECONFIG[libdrm] = "-Dlibdrm=enabled,-Dlibdrm=disabled,libdrm"
+ PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
 
