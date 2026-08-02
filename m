@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 391D4C55177
-	for <webhook@archiver.kernel.org>; Sun,  2 Aug 2026 12:05:09 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22326.1785672300087980638
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0BC3C55175
+	for <webhook@archiver.kernel.org>; Sun,  2 Aug 2026 12:05:08 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22328.1785672303220508234
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Aug 2026 05:05:00 -0700
+ Sun, 02 Aug 2026 05:05:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ODZw5A01;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-84536ecfc5bso2848965b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 05:05:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=eFFBhI6A;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-c9b373d5af0so1924729a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 05:05:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785672299; x=1786277099; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785672302; x=1786277102; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UA58OPHJErQY7Orjin6AZHk7wp/5isM96Wq48iy6pHM=;
-        b=ODZw5A01K9i19W989JyQak17RbVZRSro8bXqLk2O4KApqFOXxifPdSJ3HWknJScDsB
-         /oUt6edbqZNAyflhSxBQ3wZVPtMWe0pTXIkbHwWw2PQMX2GfOXhBDGQcEh8krAoregsg
-         ItK+naaH21tPoGL7zXELHfZA6dAlQqiSwQmSfj+zSvHidoshp9S83ojPpGKxVhp9POXR
-         i9bCCY8a551Dpa9Lzip2oPAR5W0G5gPBcRM4307ywAnJAlQ1cncZ3G/kA/PiwHnM6gl5
-         9rox/4guG25Jg+3TLFUiHNrDmBnUWJjUasKeA7IyGGeWnk1odXQor/uqeIp6eo1Pr4mV
-         dFag==
+        bh=It+9TCplql0YblllWpH/VDlNs2rlFx9F8UlqStIXLZA=;
+        b=eFFBhI6AWiWKnwgAz5GnGAhNd0ApOIenW1YJsqibMqzUvJhGdzQLwYGzD6/zzl2dlt
+         I7hsURSz1lOEjNefNQreOyr5NJauqLCNnDwQd2QyU8zSQ2z6BU5CMiNQHfKIcDmT6oHu
+         FOEEFx8FmCIxmwJ+BxLTuEIOnx6c9IvyZcJKRAiZP8TR/0Pf0Kse7zYqPrCAeJ58kZig
+         X/r/P7HqIc+eYYTwAl/UWLpbsY38Cosx3oL97Qnxz10MTDjrVkNJS+XTy7oyj1iJrvpc
+         DBlongsfjl6siv43rJlraqD15BHu/Zy79m40NMUoU9xkf54+XHr7Rf3otHya6GWG7GmK
+         nQ/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785672299; x=1786277099;
+        d=1e100.net; s=20251104; t=1785672302; x=1786277102;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UA58OPHJErQY7Orjin6AZHk7wp/5isM96Wq48iy6pHM=;
-        b=h7bNsshoQlW1xjNVoOodyMGLVXbLYQ+lzrtLhLdFYUnxBxPgJbe/U+gSbLaDKxyc0n
-         3dSaUO7ulllFsI8SpCLNWI1OshdvZNMisDwap0V2Qs5YTXfjjQ6+VVa1qR3A4CQISOk6
-         skXvvU2tPuamtwbae+/xfZO/agJaZTVKa0wGfQvOPfLsKhDGOi42dQaAmSQip/hOkBOJ
-         ArFw5gPAWVmg1d/itWCgLpFRK4T1JHd+R1fqEM3qwZGklnd1EuJGYJL9DYk2Tkd0nX25
-         0ntHzO/0eCZ+BPRJkbxBtGvGeX/Wp0beP663886BrJoYv8WdfGPPDv0L8SFbbw8kzXFI
-         ocpw==
-X-Gm-Message-State: AOJu0YxGYgSRvm0U5DdW5qrGY2/9SGt2FJ+edKqXoE1jSfHKkUWHAX7P
-	BPCunKODlwJ9TulsFTbx7wXFUZmDclmcMjuOuIVKvyVSHZc42Qp/Cl0iPJHEXQ==
-X-Gm-Gg: AR+sD13jNqy2Cw9yiNwxxMp1CSVqBjZukEPSqEoLpG81lDwc8+GHK7vamDO09UgSeAG
-	HRF3oPc1icM9ywo1wF9aA7nXEcGuKgGZydu55ZYTSvN8l+VaItZP1ahtta7W91BMlgoHFoCwaDr
-	ReKLd8/5Y6gKHhnbkaVeKyfYmH0E0kZZ6jT24BeQQpA3EKPmhR5OkB26A2PWUW5qJyzD5jCMM0U
-	OJywM2vOESH22bg8eXyblfZa1gGX551pGBUfyeGUO0AoV7lTt9mK+kGHGVBgHLr0XX02TV78nkN
-	dXEGU6ZI7fPj7MxYXYpJhXAU1VvobuIOA1U4fpAfApU1bZCOfGn0Yt7kvyMtNGRbhgoh8tqqfpb
-	ooUNJTUTe/pqoaZJQsOelQn0i+0p6HZKcnD9nb+N6mGCXfR2XZQ8I6Brb9B93r8vldvrsAAG7I0
-	XlS/QDSMrYvHxFmTE6HC//qQrPuyUzIKkuUU+4fCL0EqOHSabmoKqxJE6p47l50ckb/hA7hkph/
-	Q==
-X-Received: by 2002:a05:6a00:2343:b0:848:7e85:f208 with SMTP id d2e1a72fcca58-84ee4954d26mr5760867b3a.37.1785672299511;
-        Sun, 02 Aug 2026 05:04:59 -0700 (PDT)
+        bh=It+9TCplql0YblllWpH/VDlNs2rlFx9F8UlqStIXLZA=;
+        b=qQcyWCDTX8jKgqY/UkyyiT2A6tpiOYqTyLVrq7Era1eTxgfxwhJn5G8epjPb4bgR81
+         0jAF5RipcrXqvljYmxFmWtl753t0l3AWDcSQvoCG0iP0DYHr6fyzxLlA1CRLY35aWWvp
+         P7f6qDHqes+mWpgjNaDbVOelvGwf73jbhYgtUGTpt7jOOCCfjbqzecDVNXs4KrIyBYQ8
+         tSlGpKel8mLflgXLgk2lZLEOT4/+piNrQb2RllV3JUpk07WuxCG+MbssU33pHyj/XwHc
+         e5diyZOeEGL8a+gXFQpEpUipI7+L+cJ2dFhdX6JyGPlo9aLAHQeYSxGBFzYtHGfzK4DK
+         TjCg==
+X-Gm-Message-State: AOJu0YyA1imuaFFVvpP0VMibm0VC6+2M/061dX+gj82KRsyEimJw5mPL
+	5Pgofq2usljdm4c8JyOBUhHySANiJDjKMUGpuHu1HdFkJgGzMDWfOSqELwoqCg==
+X-Gm-Gg: AR+sD10rgmyW3wW0Ub5YTcpG/+JcO+M/YVlLnaIVOTVrrSWQFbgoNhokKqf2XA66wmc
+	nz5Gm91mWZinhAHiQprW7vFW2T2H4+KjouzqRq57J4Pg9dYKiR6VRSK8a20+ZxKUO9p9OYmgIqc
+	/rmqx8ed709wieI3UgpCo/vFWQE4sUqmpJscKVfklsNZOkUL3EAvqEs8TaaRlg4DPHrRbneq1lN
+	1uqTXFbKhzshRidik65Wh109WF6mb8LHXkv6fFTYwmVsSIH+fjLZcB2xAU+5kntlXHkeryAUx1B
+	GRrSUvSgGZskTND8mbf3KHHiOzgLejNpWGi1MbxyX88qHYr1k/PPwm0jU8qSX2GD+1JTBH0XHG2
+	ZZ4HfAxxRM1JKpB163EQths+xICb401f3Heh6Ties2TqpM1kRdHH4uUdq/2t6dVQmN9Qx1fev2D
+	x051SM3I1XWBZ9eP+BsPWmLfjLbD0nVhk/TOijiOIFKv0kNtjJxZ8P8HauSuULuW2TClnsoM6Si
+	g==
+X-Received: by 2002:a05:6a21:6194:b0:3b4:85db:1bed with SMTP id adf61e73a8af0-3c92a89caf9mr5584850637.45.1785672302352;
+        Sun, 02 Aug 2026 05:05:02 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbe39eb13dbsm2556152a12.29.2026.08.02.05.04.57
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbe39eb13dbsm2556152a12.29.2026.08.02.05.04.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 05:04:59 -0700 (PDT)
+        Sun, 02 Aug 2026 05:05:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][master-next][PATCH 2/11] nghttp3: upgrade 1.15.0 -> 1.18.0
-Date: Mon,  3 Aug 2026 00:04:33 +1200
-Message-ID: <20260802120444.2973561-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][master-next][PATCH 3/11] cifs-utils: upgrade 7.4 -> 7.7
+Date: Mon,  3 Aug 2026 00:04:34 +1200
+Message-ID: <20260802120444.2973561-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260802120444.2973561-1-ankur.tyagi85@gmail.com>
 References: <20260802120444.2973561-1-ankur.tyagi85@gmail.com>
@@ -67,40 +67,59 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 12:05:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128657
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 12:05:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128658
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Sub-source munit SRCREV unchanged.
-
-https://github.com/ngtcp2/nghttp3/releases/tag/v1.16.0
-https://github.com/ngtcp2/nghttp3/releases/tag/v1.17.0
-https://github.com/ngtcp2/nghttp3/releases/tag/v1.18.0
+Changelog:
+cifs-utils: bump version to 7.7
+cifs.upcall: fix regression with krb5 + creduid
+cifs.upcall: Avoid int overflow after year 2038
+mount.cifs: fix const correctness in parse_options
+cifs.upcall: fix compiler warning with -Wvla
+smbinfo: parse action and filename from change notifications
+cifs-utils: bump version to 7.6
+cifs.upcall: remove getpwuid() dependency
+smbinfo: update notify subcommand
+smbinfo: add filecompressioninfo subcommand
+cifs.upcall: Adjust log level
+docs: Enable debug logs
+cifs.upcall: add option to enable debug logs
+cifs.upcall: Retry krb5 TGS request with uppercase service name
+mount.cifs: remove runtime pass_length calculation
+mount.cifs: adjust get_password_from_file() buf size
+build_assert: add ccan build_assert.h header
+mount.cifs: fix buffer overrun in set_password
+smbinfo: fix decimated subseconds in smbinfo filebasicinfo timestamp output
+smbinfo: add notify subcommand
+docs: update username= option to drop invalid examples
+cifs.upcall: fix calloc() argument order in main()
+cifs-utils: bump version to 7.5
+docs: update echo_interval description
+cifscreds: fix parsing of commands and parameters
+cifs-utils: Fix documentation for character remappings.
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../nghttp3/{nghttp3_1.15.0.bb => nghttp3_1.18.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-protocols/nghttp3/{nghttp3_1.15.0.bb => nghttp3_1.18.0.bb} (87%)
+ .../cifs/{cifs-utils_7.4.bb => cifs-utils_7.7.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/cifs/{cifs-utils_7.4.bb => cifs-utils_7.7.bb} (97%)
 
-diff --git a/meta-networking/recipes-protocols/nghttp3/nghttp3_1.15.0.bb b/meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb
-similarity index 87%
-rename from meta-networking/recipes-protocols/nghttp3/nghttp3_1.15.0.bb
-rename to meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb
-index 2539939bb1..a0d1b97d93 100644
---- a/meta-networking/recipes-protocols/nghttp3/nghttp3_1.15.0.bb
-+++ b/meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb
-@@ -9,9 +9,9 @@ SRC_URI = "git://github.com/ngtcp2/nghttp3;protocol=https;branch=main;tag=v${PV}
-            git://github.com/ngtcp2/sfparse;protocol=https;branch=main;name=sfparse;subdir=${S}/lib/sfparse \
- "
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.4.bb b/meta-networking/recipes-support/cifs/cifs-utils_7.7.bb
+similarity index 97%
+rename from meta-networking/recipes-support/cifs/cifs-utils_7.4.bb
+rename to meta-networking/recipes-support/cifs/cifs-utils_7.7.bb
+index 23a08cb350..51475bae77 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_7.4.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_7.7.bb
+@@ -4,7 +4,7 @@ SECTION = "otherosfs"
+ LICENSE = "GPL-3.0-only AND LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
--SRCREV_nghttp3 = "d326f4c1eb3f6a780d77793b30e16756c498f913"
-+SRCREV_nghttp3 = "dbfc24286138cb0b6490160e7ca87fe1ce6722a0"
- SRCREV_munit = "11e8e3466b2d6a8bdfd4b05a3d1ee7805c5d3442"
--SRCREV_sfparse = "ff7f230e7df2844afef7dc49631cda03a30455f3"
-+SRCREV_sfparse = "4b313cfd2e1b389ae632b36dcd50402307289af2"
+-SRCREV = "edac7178bec9520fb57d14946e67f5dd33b82d43"
++SRCREV = "3a7dc396306654aa225c35767e56ac1fb239922e"
+ SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master;tag=${BP}"
  
- SRCREV_FORMAT = "nghttp3"
- 
+ DEPENDS += "libtalloc"
 
