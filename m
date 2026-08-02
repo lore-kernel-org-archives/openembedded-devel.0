@@ -1,96 +1,139 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2184BC5516F
-	for <webhook@archiver.kernel.org>; Sat,  1 Aug 2026 21:58:57 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13905.1785621530932497612
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E1E3C55162
+	for <webhook@archiver.kernel.org>; Sun,  2 Aug 2026 04:48:19 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18277.1785646095869186641
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2026 14:58:51 -0700
+ Sat, 01 Aug 2026 21:48:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=I8GhLmJr;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c96b08cdd1cso1563953a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 14:58:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=EzR3Cunj;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-4591f35aff3so269760fac.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:48:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785646095; cv=none;
+        d=google.com; s=arc-20260327;
+        b=H/04+ZUMzHacbdJqq+cXIs+A2lxZCpF37JOXcvbg14677QxMr2+s8BqiLjyaGCnw1l
+         q47ktktVyJAl8GNf869wNUwN9R8WkOaRd6tDvDEub6C07pBF4XjcuIMC3xBCJAa4Ufmt
+         NlyIQQkCc3ZHnakR0cADCwV2THbgkNGB4vofYFKRgIWki4LF3XjAMjk4jYFbtoMPl2oh
+         5Th8W9+LCViix7qffaYk53/iFvXeAbJaAIMQwjTFht7XAo33DKTnsDW9CsT/lkikrNgS
+         ocXchUQKfBKnr5d5mUIvSzZLqZBC84DVTFqvY0blwoRNhGgr8Xgj7sMYxt2C3yLlSbc7
+         CoTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=gcvByKAokOXJsmBdH/xZw5q42zwhtTYpS6F34IuN6fc=;
+        fh=kqtH9RvdTS8z4R7bH+N1q4tJTvX5kZFkdgAseXKYH84=;
+        b=TZ2VmgXzoHlTQTENyw7NP/2EeVDQMVMNnn44VdvolGsq/UBVo2BhswD4WH3Dcuj4Pz
+         1JpKZoXmquXkHJWgNn3enNNGiNgPqNocCTXiVGLesMJY8L+kSoj1Hyu9p//XqFrFPqp+
+         VYtKFL7tHE00htRrUaj3Tynat6uYkw4TsW9nnYpSLfc1ZwKP0KhHjl1ld0GPQVpG1OzR
+         2YC0Hq2yrYPJQQ2oVbahLGZ3O+hbpZtCrlCNMP/HaGa2WdVQD33eQeglU8VZFTEoGZgv
+         BC51PAp5j+mn56+kMYhOdzYvRJBok5JPZA+u0rAmFr6yVEmj56o87+B0lCKPJU+TbFKr
+         gYJg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785621530; x=1786226330; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jz0WDkVDVRuqRlqpwIMm0Xl4DBr6nBaGSd6ZMN2vPwI=;
-        b=I8GhLmJrY/T6Nhhr9UzBG6ZmsHeCdlA3HzPODqOZXmNGL3D+aBne09eKdI2pfSWEe+
-         vIKuhWTwqak2sU1PWEEzbcXVxR5AfKtQBdO2LkFtPdXuBeIvILT+KZGqdj2jVO5oyC9r
-         njuKuen1sAmbvEsvhcOXwbf4v1abMAoWPk/hYGiymBmPdRcTXkepsasSqc2yH0gkENGU
-         myGz1MFn+A1xzjuceq1SH2V/TYT/n5Yfy0MYljT0/N7197doRKc5qjyTfnl1xRnxWEvd
-         tYu3pLEqw6mfCKGHQTn9LMgdQTE6gkOtgOpWONWC+KConihqyiAx88S1mB+NbjPoXlyf
-         vzBw==
+        d=gmail.com; s=20251104; t=1785646095; x=1786250895; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=gcvByKAokOXJsmBdH/xZw5q42zwhtTYpS6F34IuN6fc=;
+        b=EzR3CunjOip5i+WmVmC+vmNqBcwB3+p5BXglCdtY3wkzjZtuXfSXQ8p/pLoZgBhFAn
+         tdPacdI/+suISKOXABWt3XQSGFdxcJiNrFUBFUViCdHTzu+JR7xGqBdVdxCtGATXZlY8
+         3BWkIMYUy5ovVRV+R+93yVPW7ijjQarLJrCEeNwOjuJhF4OXXHgU8ZvuBplTd+T/C4qK
+         axar08tRZVt3YjCXzDWe6YHAj3tVe3LoqPR8LgK0Yr0v9WCZVBF4zaRoxHXf5ZpOvec6
+         BijFFGaxKIqFDh5ydZvz9VnikLN960py2u5nJu3vUDZioCZKkMd89G5aZcb4xmyVWiup
+         ytMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785621530; x=1786226330;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jz0WDkVDVRuqRlqpwIMm0Xl4DBr6nBaGSd6ZMN2vPwI=;
-        b=UJ9055mbgIRD/6y96TS2EAPInLPuMvAbNrLc8/pwLyAX1uBY7G+p3mUPScsKvqVi9L
-         1HKUvtEupfca7JbWnSL65Y2Ao/2dFy1Dd08imgFohRmvRAb53ySl/yVbXF8Pd1+2IsPY
-         eRTCS3YI+RCCid8PQmP8ycu++rwznsKFHJZfze8fYaW19oOGWfaimzjhNJ+ktbDf1tBG
-         Y7RQSdnKhtRq5+Klr7YvY/ipHRYdZ8IsVC94tHg4Rg7VIG7J3uksKX6xJcWDuGT75VNa
-         XcmdyS6qY30dsC8macWHnMzsJSuMSIz+8tRmlim7e0ZVYVu2yxqks9+8XyKBaA80L1ZH
-         8rRg==
-X-Gm-Message-State: AOJu0Yy/PkUCEbPDYquka9io/9i3fBhVJQacW9FYLxbY/b81qqUuFgq5
-	EeIWXbQXsDSPor1TKq8QPKqWf7li0cZ6AcP4WIIBIpyV59sqVRijE4us4NqW8cx6
-X-Gm-Gg: AR+sD13rOd7ce091Id+9LnmFqu3d7EkllYqFd+6NIRXc7txZiXSXjNqJEZilHHAI4Tf
-	vtI0WO4HM8iPBuNvg0APFetgEBFD+X/tJK0PXZyJbDWFvlykkbEl2RUhoRXvMzMsJMeBF62+fdu
-	xfL+jbSl2i2+drykderldgo9paztApUHIYp/dRzCtsN/ISXEFxuY1jDvfK/q7qHSV8OlsQYnjOv
-	9NymtIY653gyGK0DtxUvwhja6diF7U6KbSwCd7DeQqbSO48TXFP2aR+Uy2Y6p0yOTB0Yd1Q19Sa
-	WeU9UqnFXIEysuHK9r4s1iy7nroXqzYy4f5QeRpX4n36YtOq41vAPCT36hIr0WwB0dyc5lEGwty
-	D5tGrTiaCpKtcvw7YzmMVt6ZJXYXfXsuTi7rWcAVakUHMEociMXU4gCoJwgMeO3r7cM9RqlPlnW
-	BdAEjQvYT9CdH2etaSmczajzqZv0dNyQokPqrBjkW8BAuZTTSLVEJOeH/E7oQ2OKt66kEQJVyj0
-	UzviqX1SLvVf32a6XSiyh1rPpb/9JotWFOd+LBgbC4uxataJOmVNIj9GNcsWtY468fgZmplxtJS
-	JSkoqlSNHRg06WYL4URevJ7uLcX0YzVPnHgB+2SInqwd860j7Gv5aPFxOcvLyuirnxQaK8LMAFR
-	2jojA/idsXYHVqA==
-X-Received: by 2002:a05:6300:6698:b0:3c3:b226:f165 with SMTP id adf61e73a8af0-3c92a83769emr4570952637.35.1785621530281;
-        Sat, 01 Aug 2026 14:58:50 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e107sm23559442eec.27.2026.08.01.14.58.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 14:58:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] crash-cross-canadian: Use oe.utils.all_multilib_tune_values in the docs
-Date: Sat,  1 Aug 2026 14:58:46 -0700
-Message-ID: <20260801215846.987181-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+        d=1e100.net; s=20251104; t=1785646095; x=1786250895;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=gcvByKAokOXJsmBdH/xZw5q42zwhtTYpS6F34IuN6fc=;
+        b=FQWJ9t5A8owb6n44VP8nAxnyQecxjZ+iN6dE+saRRzgV6uhByKamKxAyySX4s9i8SJ
+         yiyYcxc79k6HO/RKUeFafD62yKrt3+5oP7yP3Bc/nSK0xffpJETOmBXpG+7TMUNVOXxW
+         2onibu59ImaaGl3LAfWsCkJh+UOiQSdgxmWPJ3j/queO/ZogU1WwvCpRzb8MttIcN622
+         6UwrxW7wTM78jR6PuWT4MX9niT2W4WwbuyImAwjc/FyBsYqq7UhmGlFsK5Du5xLPyZkL
+         PbtR/c03T/g5M1nYI+n9MAACRw93EPSj/SYIr2mEAJ5lZhx533oreyIHBBLBTA/EN8gX
+         jd0g==
+X-Gm-Message-State: AOJu0YyClOFJzBodq8NqjtCjdv0uL5PJjZQ5Nvk5ygbAn8x/7XEZY36o
+	pddvl6z0YM3sXKJUo9zCDAeS7piyyfs21FMeZSz/lMCKJcG6Q/kw4dY2vjNyvYgWCz1Yy7OyJfw
+	u/OqtvL2NzvQnULlXMvoXTU1W/HqAcT0=
+X-Gm-Gg: AR+sD12lLHtkZZG0avDbHKjb21EPbecvB1iGz4dkVWoPjScW+TkU21hZTGgbQG1ea13
+	fKewCVXd8e5Hax+vepRSU9+UR3jhnZ1F4gI1rZ1hUaco/lrQokZRO9JfFMZF0bfQOp2ZCc/k6oe
+	wmxZ2HrhUvKyIjuUYMucqr9c9b8U9rgZ9XpPsysZjrwt0Z7FbTmiQJkw0yHiynAUadLMQWHP42c
+	meY9tEGPE8uU59lRpB0klsLNpjlv5uiWpQTPKKYYD3jMB716ptcQFtjlZRPcJrWmzqz7+fE6she
+	l3q+k8Ta7svtTne2/kiIrM9bQN62VXBQlJ1MgR1xaZ03RcU=
+X-Received: by 2002:a05:6870:8263:b0:456:baee:4819 with SMTP id
+ 586e51a60fabf-45905dce079mr8898886fac.11.1785646095019; Sat, 01 Aug 2026
+ 21:48:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260801131138.3299410-1-ankur.tyagi85@gmail.com> <CAMKF1sqfU+AADR--Bria3NnKDCnKbV7Lux1ESx4ccGTx-60tPg@mail.gmail.com>
+In-Reply-To: <CAMKF1sqfU+AADR--Bria3NnKDCnKbV7Lux1ESx4ccGTx-60tPg@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Sun, 2 Aug 2026 16:48:04 +1200
+X-Gm-Features: AUfX_mzYXUE0S2N-bqMKXyhjZjmqPsb5euMX14yYQtTazHVc8dt2C7lwsSfTf4o
+Message-ID: <CADySD0Gw=nY-BYmgrgiwRy5VRq0Oykgg5O1-6u6kX61vEpzG2g@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 1/20] imagemagick: upgrade 7.1.28 -> 7.1.29
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2026 21:58:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128649
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 04:48:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128650
 
-oe-core 6b2defb521 ("utils: Move functions from utils.bbclass to utils.py")
-moved all_multilib_tune_values out of utils.bbclass, so the unqualified name
-is no longer available to recipes. Update the packagegroup snippet in the
-comment block so that copying it still works.
+sure, I'll do it soon.
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- meta-oe/recipes-kernel/crash/crash-cross-canadian_9.0.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-kernel/crash/crash-cross-canadian_9.0.2.bb b/meta-oe/recipes-kernel/crash/crash-cross-canadian_9.0.2.bb
-index 924e3ccfc0..bb9bc321b4 100644
---- a/meta-oe/recipes-kernel/crash/crash-cross-canadian_9.0.2.bb
-+++ b/meta-oe/recipes-kernel/crash/crash-cross-canadian_9.0.2.bb
-@@ -60,7 +60,7 @@ do_compile() {
- # To ship crash into your sdk, you should create/update a packagegroup-cross-canadian.bbappend and
- # add the following
- # CRASH = "crash-cross-canadian-${TRANSLATED_TARGET_ARCH}"
--# RDEPENDS:${PN} += "${@all_multilib_tune_values(d, 'CRASH')}"
-+# RDEPENDS:${PN} += "${@oe.utils.all_multilib_tune_values(d, 'CRASH')}"
- #
- # You should also add some kernel packages in your sdk, add the followng in your conf/local.conf:
- #
+On Sun, Aug 2, 2026 at 3:41=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> please rebase this series on top of master-next and resend please.
+>
+> On Sat, Aug 1, 2026 at 6:11=E2=80=AFAM Ankur Tyagi via lists.openembedded=
+.org <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
+>>
+>> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>>
+>> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>> ---
+>>  .../{imagemagick_7.1.2-28.bb =3D> imagemagick_7.1.2-29.bb}        | 2 +=
+-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>  rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-28.bb =3D=
+> imagemagick_7.1.2-29.bb} (99%)
+>>
+>> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-28.bb=
+ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-29.bb
+>> similarity index 99%
+>> rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-28.bb
+>> rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-29.bb
+>> index 7fd34dc54c..0890edb8c5 100644
+>> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-28.bb
+>> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-29.bb
+>> @@ -17,7 +17,7 @@ SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.=
+git;branch=3Dmain;protocol=3Dhtt
+>>             file://imagemagick-ptest.sh \
+>>  "
+>>
+>> -SRCREV =3D "c2068fb3394af17fb9e3a78c712af2ca67141836"
+>> +SRCREV =3D "360eda553586e389c9c725fc49df94f209a8a3c7"
+>>
+>>  inherit autotools pkgconfig update-alternatives ptest
+>>  export ac_cv_sys_file_offset_bits =3D "64"
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#128595): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/128595
+>> Mute This Topic: https://lists.openembedded.org/mt/120549559/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
