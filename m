@@ -2,84 +2,114 @@ Return-Path: <iwanicki92@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B99FC55180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2264DC55175
 	for <webhook@archiver.kernel.org>; Sun,  2 Aug 2026 15:52:22 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.25419.1785685931709622138
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.25420.1785685932632113766
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 02 Aug 2026 08:52:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=I+pWJV2H;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: iwanicki92@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4954a9e8490so11060775e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 08:52:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=J6lhV7Yu;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: iwanicki92@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4980fe6b3beso4595685e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 08:52:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785685930; x=1786290730; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=O4KpYlZiPlXIZEzhtBnB/tGv6lz6luRA6zOdOFleiUc=;
-        b=I+pWJV2HDORt7Z1kVjGWYZ7SARecYsHa8m/ImviBBkaxepBPKmZCChuGUcFuh6lUPa
-         1pOkSHRu1qHIbv2Itb3sh/URpZW81zKC2pHfHKd2TPhSiDu1mTRkSllKtqG4XZHtCdCd
-         Ot3e9BxgS/S0aM9+oEZJfkNrh4KhzJhfYdMTblJI7+O96Isu7mJQFRIrEaqiavc/606S
-         44bjnYG0h+/gWTkWngjkgFhhWU6NvulqNOz3ou50C/FnovxV/D4lr6LnAu7CT7GKcVln
-         FezV+PCrGjzYiLtsChbuD4SNrKVvml3XNpq4mrfUs//2BCI0nIez+3azLYqeDB2B9Ui2
-         qylA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785685930; x=1786290730;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20251104; t=1785685931; x=1786290731; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=O4KpYlZiPlXIZEzhtBnB/tGv6lz6luRA6zOdOFleiUc=;
-        b=GmqyuDG16FmjfjZCfxkMDjhf/Opwsan+mxpARa0Ao6NUmOX7JsfkfRF98+P9awiQRN
-         P3MP+4BseVqG6kVPeQqwYJ+DwYj4CBltM+J1maXRmdMPt+ieEg5uKbZk47lDMUuU+uv+
-         Ligr9em60UVM2jq5NYarTmfqCCgBRoopp+kNGCaLZ71Xgm9KbpaK4ux50qOe75owWi/7
-         u54fCzONmmsj3KNjfHFUnwfaoPmjezEKUBZrhfRJRkv3PnTcutRE2ZeJOL6fSMDJ21WU
-         5TP3ma5xyfmxL3uMsx/T2YAeoMjDLKQfAhHmf2rasgh8rxula2NEJiO0nrQCIZW4P94g
-         uLNg==
-X-Gm-Message-State: AOJu0YyytVKVeMloUDXUdbzgely3L9qPBqqORk+lJTi5Sxjp2EYyjYj0
-	2bCdooZnSjwJnut4br76dwk9XNBTETTlk/l3fFgEQpKi3vfEHCY69km3TwlG5YID
-X-Gm-Gg: AR+sD12d/Ax0nYmS716su1XtIujJvRKu/bAD4FF7b6Ey80eawAxJM03RaBRzO4F/VpR
-	ybNdwhiqR9nDGqy8Jnw1obZerQSOMJaNivsFgzEoqC2HvlRWUaUXk+aLpcAC7M3hk20MrbDHnXj
-	qV5SqCwKYzIspbX+NmH7Ofvj8f+tSu+wjYjORKprc8aWbhkXWrxePd2WuOcIftH4PJ3azQmhLkX
-	bNNQ9dWibqqPdgZgGMQWc+mkKdZMcyHvQTrBeI8rp/cXttOWGXSUhep2z4VujXhxatBny573GEg
-	13Mk/d7WParz14PrqQHCULALHOO0HUAX0bUlWB43T7wQDHcWOW2wse9ttxObZAKQzzkCw+4E2SZ
-	nijFU9mNZSmyfMaj2PnmNCEIVJU8Yf7QRgCHFWF5wM7xTK02twMMFwU6lnNSWYtiC7e/NGnQ8wB
-	LchHfnZw4MQyr85aNQf2cW2tRyGimNjFQsPx4v6Fr5ZlDXcS4NXJs0JWAHwYFK0PBwjTL9ngI3F
-	U+NVAdzCjs4osuz1x/+e9HNRVc7vRU=
-X-Received: by 2002:a05:600c:46c3:b0:494:1f7:8057 with SMTP id 5b1f17b1804b1-4980eb8d081mr110712425e9.1.1785685929632;
-        Sun, 02 Aug 2026 08:52:09 -0700 (PDT)
+        bh=g0A/5XrF2IuRby+eCHVLDolhB6j3qgsHFd36PUvrNHA=;
+        b=J6lhV7YuG6wwI/HJxROiBHAXN0ZJKHiOuBmYm9JO7nXXPuTR2yot063XgD9H4YwyCj
+         dEingB0FGoOMK4tIaNraeTUKVpoN72530oUEKVvec2sCnQJijQdzteG488ZlfX6JpKIC
+         uJHOZTITqvf1R7RoTbd8Kl5JXyahcA1uL85vpNwUhNzhLrSgTbgNYWPZyDnSydQU0th9
+         2Q9ppr6GXPRs52M8e6u8n1cQIGyASgIKaaomqmfTgKsRovXy3+m9Hio98rbzak8/GmhN
+         wdncF5iQM0j9Tiz8Wrzv81Y3XlgnaWV20NI/JIRd3z7Sc+TnrprOohHmCsnbXvwqBBvg
+         mQgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785685931; x=1786290731;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=g0A/5XrF2IuRby+eCHVLDolhB6j3qgsHFd36PUvrNHA=;
+        b=CCmgetLAI4Vwt7o8kChPBJhHFmoC4TyrEKKMXcw31/3NBAuPWHqhqLzjvEoPZaxoKL
+         uH66cH5tdcvI5SCMc7LNTl7WCE0ZVV4cSWsv6uhphPuNIP6fpKVQ1gGPobK9gbvo6s3S
+         MzfSl3wdIeVNMwztQ1+B7bMF3ugFhvzpUY8Rxk2Suu64tkBpNoKQQCSymfOP68tBNMV+
+         GNlLB7kmjqDbQMlsn0l0oUY7EwoAYbVQvmplyiKGLyAp0wD6FiTgP9iovyjQiYtTRI7k
+         hwgu3YNCmGHgHwR8/X/H3/GOTT0aqIpfNlH8xgatvZT2LI2kSheFCbvJVzR/77xX+Sqc
+         DY7g==
+X-Gm-Message-State: AOJu0Yxvv0/rIgnLBPR1jvXR1hSqeFk4P6QsxS77Vlba8EHMp+hNxj1g
+	RirKUhyuTJOIJMSOrtSSVoJQkLm8bgCqpBL6yTM0O+snkuZXaDTiqC19qghL7AgP
+X-Gm-Gg: AR+sD10RlwHmqcsx5T7nJdBQL/M+Sv5Rmd8FYm/F8spY9VKHtZZOstlLwTIF0FwfCLX
+	T0ARoX2+MjNFCQNcXYc13HjecROMEXmfvUB50+36BBczqwcaMvc6gd6i/QnURb4IlmNVKCRLvXI
+	AeuXyHmw+lfscf5iZc/4lnFacEDK8xSlbS8PD3XLGSMq0PWGfctanuSLIMTJDZjyQljfvgWdKz3
+	iNqB518L3nIelMlFYrGQrY9QH8CZRK3GgxueEzne8rekRKRhfyBJLVa1JsiGwEayISziwHb/TDs
+	kAZZp+vLu0U/RkOgCYhdoBnA3nDBpZOEfcOpIRJULZqwqfwhY1hcZN6KXhZVuh8u8CzZZSKPHNL
+	TUzA1QtUxh7yoS/SKp3hMZdIzrBBF+xN98QKvlsLKY6xRg0VWqX26v7a9nbSSUicRFJRFCDMexI
+	wQ1A5DgyE8BLN/DT+ybZ2pY9GiKmld10rvXDnZrfZU7BqVNyINBcLZiquX5mk4DtkOqcAuxwuUn
+	uL8F/BSNygX4yqUz3NBYCrqOTHT0HY=
+X-Received: by 2002:a05:600c:a42:b0:495:69eb:27d3 with SMTP id 5b1f17b1804b1-4980eba0a6fmr133751495e9.8.1785685930845;
+        Sun, 02 Aug 2026 08:52:10 -0700 (PDT)
 Received: from iwans-fedora.play.pl (89-73-147-156.dynamic.play.pl. [89.73.147.156])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b9441csm143350235e9.4.2026.08.02.08.52.07
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b9441csm143350235e9.4.2026.08.02.08.52.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 08:52:08 -0700 (PDT)
+        Sun, 02 Aug 2026 08:52:10 -0700 (PDT)
 From: iwanicki92 <iwanicki92@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 0/2] Fix runtime dependencies of 2 python packages
-Date: Sun,  2 Aug 2026 17:51:37 +0200
-Message-ID: <20260802155139.4128822-1-iwanicki92@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-rich: add missing runtime dependencies
+Date: Sun,  2 Aug 2026 17:51:38 +0200
+Message-ID: <20260802155139.4128822-2-iwanicki92@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260802155139.4128822-1-iwanicki92@gmail.com>
+References: <20260802155139.4128822-1-iwanicki92@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2026 15:52:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128667
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128668
 
-Those packages are python3-rich and python3-typer.
-Packages are completely unusable if they are the
-only python packages installed due to missing many
-runtime dependencies.
+`python3-markdown-it-py` was missing along with some python3 modules.
+I went through the code and added everything imported that I noticed,
+except modules imported on Windows.
 
-iwanicki92 (2):
-  python3-rich: add missing runtime dependencies
-  python3-typer: add missing runtime dependencies
-
- .../python/python3-typer_0.27.0.bb            | 13 ++++++++----
+Signed-off-by: iwanicki92 <iwanicki92@gmail.com>
+---
  .../python-rich/python3-rich_15.0.0.bb        | 21 ++++++++++++++-----
- 2 files changed, 25 insertions(+), 9 deletions(-)
+ 1 file changed, 16 insertions(+), 5 deletions(-)
 
+diff --git a/meta-python/recipes-extended/python-rich/python3-rich_15.0.0.bb b/meta-python/recipes-extended/python-rich/python3-rich_15.0.0.bb
+index 2ab3b2fdbc24..e15e84253548 100644
+--- a/meta-python/recipes-extended/python-rich/python3-rich_15.0.0.bb
++++ b/meta-python/recipes-extended/python-rich/python3-rich_15.0.0.bb
+@@ -12,10 +12,21 @@ SRC_URI[sha256sum] = "edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b
+ 
+ inherit pypi python_poetry_core
+ 
+-RDEPENDS:${PN} = "python3-html \
+-                  python3-image \
+-                  python3-pygments \
+-                  python3-unixadmin \
+-                  "
++RDEPENDS:${PN} = " \
++    python3-datetime \
++    python3-html \
++    python3-image \
++    python3-io \
++    python3-json \
++    python3-logging \
++    python3-markdown-it-py \
++    python3-math \
++    python3-mmap \
++    python3-numbers \
++    python3-pickle \
++    python3-pygments \
++    python3-threading \
++    python3-unixadmin \
++"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.55.0
 
