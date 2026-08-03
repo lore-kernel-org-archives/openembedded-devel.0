@@ -1,105 +1,247 @@
-Return-Path: <rouven.rastetter.ext@karlstorz.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1BA5C55182
-	for <webhook@archiver.kernel.org>; Mon,  3 Aug 2026 17:19:10 +0000 (UTC)
-Received: from mx08-0040c702.pphosted.com (mx08-0040c702.pphosted.com [185.183.31.154])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1452.1785777541703308935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D40DC55184
+	for <webhook@archiver.kernel.org>; Mon,  3 Aug 2026 23:52:11 +0000 (UTC)
+Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6194.1785801122009443136
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2026 10:19:02 -0700
+ Mon, 03 Aug 2026 16:52:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@karlstorz.com header.s=S-DKIM-20210427 header.b=W2tr5V7E;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: karlstorz.com, ip: 185.183.31.154, mailfrom: prvs=267521c273=rouven.rastetter.ext@karlstorz.com)
-Received: from pps.filterd (m0267678.ppops.net [127.0.0.1])
-	by mx07-0040c702.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673GwW3I1322277
-	for <openembedded-devel@lists.openembedded.org>; Mon, 3 Aug 2026 17:18:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karlstorz.com;
-	 h=cc:content-transfer-encoding:content-type:date:from
-	:message-id:mime-version:subject:to; s=S-DKIM-20210427; bh=93Fxb
-	/+0/iKdVUv3Ug8NdYTO4n47P7wbtzrkVZg5tz4=; b=W2tr5V7EEwV6onxVwPtG8
-	JpyIZFdKY009Ns1EJ/6kO25d2GhudVB8mX98mGX07X3W1N2Mo9FNPpfsuRqsBWgE
-	WVzIndeqOeBtY6YRlYqPEi0QXmibvEYtd28wyesqfSEYjtkztE07UZE29N2b+c0u
-	6bOKX2ClaV9XM09Q/KN26YxDYeE2lRu84M6n12nkwm9cm5k/vbJLgFKAHgMjm/E6
-	pTPLLcMZJUgVfTo5bz65cSBht4uG3B1Z3zimn6B5XMNq41g3nmN6BiRq2Sb9Mxcq
-	wx4wmnUnMy0UVJzzUo/OTW15Zvb5oqKZX3Rf78o+cidD/2weyvqEQwRdTPE6dMLa
-	g==
-Received: from tut-ex02-pv.kstg.corp ([62.134.76.232])
-	by mx07-0040c702.pphosted.com (PPS) with ESMTPS id 4fs8tjwwm5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 17:18:59 +0000 (GMT)
-Received: from TUT-EX01-PV.KSTG.corp (10.0.10.190) by TUT-EX02-PV.KSTG.corp
- (10.0.10.191) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 3 Aug
- 2026 19:18:58 +0200
-Received: from tutn-jjhfqf4.kstg.corp (10.0.10.41) by
- InternalSMTPRelay.KSTG.corp (10.0.10.190) with Microsoft SMTP Server id
- 15.2.2562.45 via Frontend Transport; Mon, 3 Aug 2026 19:18:58 +0200
-From: Rouven Rastetter <rouven.rastetter.ext@karlstorz.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Rouven Rastetter <rouven.rastetter.ext@karlstorz.com>
-Subject: [meta-oe][PATCH] vboxguestdrivers: Provide target kernel version
-Date: Mon, 3 Aug 2026 19:18:13 +0200
-Message-ID: <20260803171813.318922-1-rouven.rastetter.ext@karlstorz.com>
-X-Mailer: git-send-email 2.54.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=oA/FCEVK;
+ spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-6611669cd16so5469104d50.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 16:52:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785801121; cv=none;
+        d=google.com; s=arc-20260327;
+        b=k5v2zrV6T9VI6vYWnJe8KylHIafCkz4ykM1cxTXOsb7Vpas1xVCUmhnJRpGPw3Pf4B
+         A7/YxjaMsKBGNNdyJZBZeFtlqZCsTzK42FnwyEPgxc66dk0FHQJMExOSxNFGR38t6RTW
+         orYHLCicnXR56Y1qsgymoIT5M8HyIF98U3mtgFOS6q3rZ9NXX5Uijfr8bJ0118LaGoYY
+         f8c1l2OOZcALaV3sJY3vo2lv5r75iI7gUABRDN1YqP+kIlDJLJh8RoqFflq/ZG8eRgJB
+         uG+NevTjGZLMoed/EWPhG5ezz2S3IWfYXwVhsOmy8WLDeEuHxA2hKFFVbWZae6KKVAfA
+         gU1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=MsAqgDSnIKfter7U28x4+sU0pSLKNCMPSX0owmrXxNQ=;
+        fh=zZ9YUynVN9G273RPAJouLFE6ZT8DhYeil1e0fR2zEQY=;
+        b=jb2cNCtkDeQMbkFRy3F2O/tIHuiNa4ijvbURa6RtpZPQG3rEpp3cPhN59O/lJf2l00
+         bLAQlaMsmbdaaMR+V8U8yfMd16NIzcU3W2gPe/gMdq+xkeHXKQ42o8sLnSyuyg8hz0zd
+         QmIg3JSIZB3WibqGiWy9bnE4Inlttn6sx2xAsoh+Ic1MDlvfaTUGVL8ZhNC/9VEo/c1C
+         ScqSrB5kqWSyZ1gJ2G//e849xTNDEO9f399bRvTFxFB4sOibeDa1Xa/VPXOrkKvGCNam
+         bK7a2VorQK3+BIKr1SMfCi4r3Q3dY7mHIu97RlGP5M6qoH2n5jd3tm+JqkCJilHs3C3o
+         i7nQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785801121; x=1786405921; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MsAqgDSnIKfter7U28x4+sU0pSLKNCMPSX0owmrXxNQ=;
+        b=oA/FCEVK32Mq2toWq06vtycFY798pt6gS39S2kxJWwOF/Auz1rZd9wTG8hFpre3ExX
+         xbYHuRyEe0fc1QaPXLe7PyNBqbYQ0w/VY7WCVGaR7MLg2x7d/KgZLpxA2vGKhtLCQ4AY
+         MsvB0krOhecA1OTMQAizMhQZTOb1mbBNm9/Hg7P+/oPaNggcV/vCLSda/Dktud0aBawM
+         Qo4RsGVsFPavEweexha1w+uz8i8IkvxlDZs3+YX5OBBPPPjwEn65qs4osAV1Kj9cAZ2M
+         u1XcoQ+Znu7ozquEDlEbYsFRtTHS2eiRmda2z4PN3Phdpwgu7fqueELuEJ7dB+Irm6C+
+         gR3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785801121; x=1786405921;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=MsAqgDSnIKfter7U28x4+sU0pSLKNCMPSX0owmrXxNQ=;
+        b=dlNI24VrX7zW03jT9mE0rUTPuH6uLxsyeZ4vS8hW9aIFROTI97NWYgVRyIY9tRIviH
+         mjACkobTl/7bqJsr+hrh0IISdaPT0HVqX9uIWhj12j4se3JD/sMzH2wEnjc8gpnto+8n
+         +zLMY61wY4FNIOyX99iC48BG70rISTjirR3HWEMVNfYjtfhHN9OP+NvR18OyT5iZ1Q9D
+         SqIdCDCQIypQ0GXNqx4o/vKCtnFM/o4QFdaFiX4gKT5PNzIuUg1CX/oZvNjpNkB0fDcq
+         q0BxA3Ohg47zRr3c+cLaYyZEVb0yCzi9K4hwdELElR9kEBuuqFv67yHyH4626C5fAhQZ
+         tzUw==
+X-Gm-Message-State: AOJu0YwTAL5UbkJ7c+7kszwq2NHtdIHLpa0fH87w2dcLOYv4vuJ3+cFh
+	OJzCaSSYeHzkcdmWrGcppAQkmT9HHBel4dp/VauUGhOiHINz9Ipx+z/7EVIBCs/EW2m++9ZM/Qb
+	s3WeWteZU31qUfYFtYU7PA+T8W1a1BnPy+0Iurxs=
+X-Gm-Gg: AR+sD119do3aoSugrnxUANg7q5mrvMGkGK7lmCd89262VDwbzTletN3Ij9ATfj+Vxz8
+	BHfCaFiiFIDpEaaU+DgWlidUY36gBx30FLwaX9ByRIDVLOy5oyHHUUjTvPYpwJyiE0qf5Usjeav
+	8VxdSV+Y56Hj/jrF0uPN3WSnzlAiiLpGXWwoxMswTp0TpC9ij9BYhbsBRO0Wri4z6w4pioY0IdQ
+	/PQ7LDSvYPLrBREgQVJQez8xPGqnCEvCTZ6NSs4cQG/a0bBZJz3/1AGK+uL3SANVT61T1iAhXEg
+	dTkwo1InBIzXXOuK5VvYuqn5BCDpiAhbMAZTckPvpZPe0SyeuBTLwDbaTOJtg3QOGF/1Xk/yxPp
+	Wo8bYXpoHgvp3BN81VkGsVOy9OkyXbkjkZnwdShscaRglPAx5wxY4B+fa7d61SS1i880hH2+PRM
+	jAgGCI8o/TgMZfsfVHjGxZjXPXowM+nu7/BoYgD1rsv/RaxgCWBjhNiAI=
+X-Received: by 2002:a05:690e:4093:b0:660:4936:95d5 with SMTP id
+ 956f58d0204a3-6696043b46fmr10684221d50.40.1785801120929; Mon, 03 Aug 2026
+ 16:52:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: xsIzu3Tv3bsQqQLbwLGIj8-5hcYuSi4s
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE1NCBTYWx0ZWRfXxRJ8qCDEjSEk
- R2astd9WK5RfWdT1NflTDn/La7EFmI9f4LlHw3hgfAWSwlzJj5T61MezXSCHizL1byyT3cgeI1W
- JUiK9a5pkiW4s5gMFp7IIAgaMBZOiQGtiiOQeeHMXgtOJN4L+cgw
-X-Proofpoint-ORIG-GUID: xsIzu3Tv3bsQqQLbwLGIj8-5hcYuSi4s
-X-Authority-Analysis: v=2.4 cv=CMMamxrD c=1 sm=1 tr=0 ts=6a70cd83 cx=c_pps
- a=OToaj9FDvIz41JSycRbD4A==:117 a=OToaj9FDvIz41JSycRbD4A==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=DBWTBMGyQNCzyBkTEoZL:22
- a=-VCclSYHLTda9MBvNMHz:22 a=UGY95wR5ipXtWyEIMhIA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE1NCBTYWx0ZWRfX3CuP4AloqsIk
- nCi49oldrNMwgeFMp2l5zE9qpNeddt2EwLvQqb0bkMkqfbG7cgUHyJ95qM49Npolu4IZemOepej
- RQNWJ155mKFOsfsjY+ME2988kAvpw7h7uuZbcYSXbLIS52Wq0/RP8U2IA8wyqvv833Qo+ZUgEV0
- +dyHFKHY+htHSs57SxSBjgOk9DTKY5q3bC5r7YnAFyF8e8I2ES/sRL+ou2Kbk8VJbGymGcndB5h
- zqqPY8SHEy6ISuPEDV4V9NdcR7R0L++k/vfLRWqaiRnx2Oogox9/RAWNCifnMPOY1m0nh8KB5jS
- dl8zACqX+qc5dLT+aoSOjJRKA8JrDs+JX/qOuAYsJePu2Pp64hBe8YwLWcszsEePB6F0/T36MIV
- sy83+1YgFlMMotLj6/m5rsqizgaynyucUi00yFEcDcwYlhqr0Ryc3Sv/FnlyYTKE9Yu5eDKusBq
- yW1r0aIzsi3kGtJ3Wpw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-03_04,2026-08-03_02,2025-10-01_01
+References: <20260803171813.318922-1-rouven.rastetter.ext@karlstorz.com>
+In-Reply-To: <20260803171813.318922-1-rouven.rastetter.ext@karlstorz.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 3 Aug 2026 16:51:34 -0700
+X-Gm-Features: AUfX_mxAE9RjIh8ze62_r0C3lDKdCJX1Ihsyo5dJKfV4_puWg7JOHgpQqiEHFk4
+Message-ID: <CAMKF1sqR1+U6Afm7DWYSB1CEbxVAFhTrR2zOVN6WLGgooOe8Xg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] vboxguestdrivers: Provide target kernel version
+To: rouven.rastetter.ext@karlstorz.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000073dc3506582d398b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 17:19:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128696
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 23:52:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128697
 
-The Makefile uses `uname` to determine the kernel version. We must
-override this with the actual target kernel version.
+--00000000000073dc3506582d398b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The kernel version might be empty during parsing (e.g. when using
-linux-dummy), therefore `or ''` is needed.
----
- .../vboxguestdrivers/vboxguestdrivers_7.2.14.bb               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Mon, Aug 3, 2026 at 10:19=E2=80=AFAM Rouven Rastetter via lists.openembe=
+dded.org
+<rouven.rastetter.ext=3Dkarlstorz.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
-index 18fda0393d..6a870c267c 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
-@@ -14,7 +14,7 @@ DEPENDS = "virtual/kernel"
- # compiler-runtime deps needed to compile and link the userspace utility.
- DEPENDS += "virtual/compilerlibs virtual/libc"
- 
--inherit module kernel-module-split
-+inherit linux-kernel-base module kernel-module-split
- 
- COMPATIBLE_MACHINE = "(qemux86|qemux86-64|qemuarm64)"
- 
-@@ -32,7 +32,7 @@ S:task-patch = "${UNPACKDIR}/${BP}"
- export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
- export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
- 
--EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
-+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${@(get_kernelversion_file('${STAGING_KERNEL_BUILDDIR}') or '').split('.')[0]}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
- 
- # otherwise 5.2.22 builds just vboxguest
- MAKE_TARGETS = "all"
+> The Makefile uses `uname` to determine the kernel version. We must
+> override this with the actual target kernel version.
+>
+> The kernel version might be empty during parsing (e.g. when using
+> linux-dummy), therefore `or ''` is needed.
+> ---
+>  .../vboxguestdrivers/vboxguestdrivers_7.2.14.bb               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/vboxguestdrivers/
+> vboxguestdrivers_7.2.14.bb b/meta-oe/recipes-support/vboxguestdrivers/
+> vboxguestdrivers_7.2.14.bb
+> index 18fda0393d..6a870c267c 100644
+> --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+> +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+> @@ -14,7 +14,7 @@ DEPENDS =3D "virtual/kernel"
+>  # compiler-runtime deps needed to compile and link the userspace utility=
+.
+>  DEPENDS +=3D "virtual/compilerlibs virtual/libc"
+>
+> -inherit module kernel-module-split
+> +inherit linux-kernel-base module kernel-module-split
+>
+
+linux-kernel-base is deprecated in oe-core/master now. I would suggest to
+use the new ways of using it via oe.kernel.get_version_file
+
+
+>
+>  COMPATIBLE_MACHINE =3D "(qemux86|qemux86-64|qemuarm64)"
+>
+> @@ -32,7 +32,7 @@ S:task-patch =3D "${UNPACKDIR}/${BP}"
+>  export VBOX_KBUILD_TARGET_ARCH =3D "${ARCH}"
+>  export VBOX_KBUILD_TARGET_ARCH:x86-64 =3D "amd64"
+>
+> -EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build'
+> KBUILD_VERBOSE=3D1 CC=3D'${CC} ${DEBUG_PREFIX_MAP}
+> -ffile-prefix-map=3D${STAGING_KERNEL_DIR}=3D${KERNEL_SRC_PATH}
+> -ffile-prefix-map=3D${STAGING_KERNEL_BUILDDIR}=3D${KERNEL_SRC_PATH}'"
+> +EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build'
+> KERN_MAJ=3D'${@(get_kernelversion_file('${STAGING_KERNEL_BUILDDIR}') or
+> '').split('.')[0]}' KBUILD_VERBOSE=3D1 CC=3D'${CC} ${DEBUG_PREFIX_MAP}
+> -ffile-prefix-map=3D${STAGING_KERNEL_DIR}=3D${KERNEL_SRC_PATH}
+> -ffile-prefix-map=3D${STAGING_KERNEL_BUILDDIR}=3D${KERNEL_SRC_PATH}'"
+>
+>  # otherwise 5.2.22 builds just vboxguest
+>  MAKE_TARGETS =3D "all"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#128696):
+> https://lists.openembedded.org/g/openembedded-devel/message/128696
+> Mute This Topic: https://lists.openembedded.org/mt/120580604/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000073dc3506582d398b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 3, =
+2026 at 10:19=E2=80=AFAM Rouven Rastetter via <a href=3D"http://lists.opene=
+mbedded.org">lists.openembedded.org</a> &lt;rouven.rastetter.ext=3D<a href=
+=3D"mailto:karlstorz.com@lists.openembedded.org">karlstorz.com@lists.openem=
+bedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">The Makefile uses `uname` to determine the kernel version. We mu=
+st<br>
+override this with the actual target kernel version.<br>
+<br>
+The kernel version might be empty during parsing (e.g. when using<br>
+linux-dummy), therefore `or &#39;&#39;` is needed.<br>
+---<br>
+=C2=A0.../vboxguestdrivers/<a href=3D"http://vboxguestdrivers_7.2.14.bb" re=
+l=3D"noreferrer" target=3D"_blank">vboxguestdrivers_7.2.14.bb</a>=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/<a href=3D"http://vbo=
+xguestdrivers_7.2.14.bb" rel=3D"noreferrer" target=3D"_blank">vboxguestdriv=
+ers_7.2.14.bb</a> b/meta-oe/recipes-support/vboxguestdrivers/<a href=3D"htt=
+p://vboxguestdrivers_7.2.14.bb" rel=3D"noreferrer" target=3D"_blank">vboxgu=
+estdrivers_7.2.14.bb</a><br>
+index 18fda0393d..6a870c267c 100644<br>
+--- a/meta-oe/recipes-support/vboxguestdrivers/<a href=3D"http://vboxguestd=
+rivers_7.2.14.bb" rel=3D"noreferrer" target=3D"_blank">vboxguestdrivers_7.2=
+.14.bb</a><br>
++++ b/meta-oe/recipes-support/vboxguestdrivers/<a href=3D"http://vboxguestd=
+rivers_7.2.14.bb" rel=3D"noreferrer" target=3D"_blank">vboxguestdrivers_7.2=
+.14.bb</a><br>
+@@ -14,7 +14,7 @@ DEPENDS =3D &quot;virtual/kernel&quot;<br>
+=C2=A0# compiler-runtime deps needed to compile and link the userspace util=
+ity.<br>
+=C2=A0DEPENDS +=3D &quot;virtual/compilerlibs virtual/libc&quot;<br>
+<br>
+-inherit module kernel-module-split<br>
++inherit linux-kernel-base module kernel-module-split<br></blockquote><div>=
+<br></div><div>linux-kernel-base is deprecated in oe-core/master now. I wou=
+ld suggest to use the new ways of using it via=C2=A0oe.kernel.get_version_f=
+ile</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+>
+<br>
+=C2=A0COMPATIBLE_MACHINE =3D &quot;(qemux86|qemux86-64|qemuarm64)&quot;<br>
+<br>
+@@ -32,7 +32,7 @@ S:task-patch =3D &quot;${UNPACKDIR}/${BP}&quot;<br>
+=C2=A0export VBOX_KBUILD_TARGET_ARCH =3D &quot;${ARCH}&quot;<br>
+=C2=A0export VBOX_KBUILD_TARGET_ARCH:x86-64 =3D &quot;amd64&quot;<br>
+<br>
+-EXTRA_OEMAKE +=3D &quot;KERN_DIR=3D&#39;${WORKDIR}/${KERNEL_VERSION}/build=
+&#39; KBUILD_VERBOSE=3D1 CC=3D&#39;${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-=
+map=3D${STAGING_KERNEL_DIR}=3D${KERNEL_SRC_PATH} -ffile-prefix-map=3D${STAG=
+ING_KERNEL_BUILDDIR}=3D${KERNEL_SRC_PATH}&#39;&quot;<br>
++EXTRA_OEMAKE +=3D &quot;KERN_DIR=3D&#39;${WORKDIR}/${KERNEL_VERSION}/build=
+&#39; KERN_MAJ=3D&#39;${@(get_kernelversion_file(&#39;${STAGING_KERNEL_BUIL=
+DDIR}&#39;) or &#39;&#39;).split(&#39;.&#39;)[0]}&#39; KBUILD_VERBOSE=3D1 C=
+C=3D&#39;${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=3D${STAGING_KERNEL_DIR=
+}=3D${KERNEL_SRC_PATH} -ffile-prefix-map=3D${STAGING_KERNEL_BUILDDIR}=3D${K=
+ERNEL_SRC_PATH}&#39;&quot;<br>
+<br>
+=C2=A0# otherwise 5.2.22 builds just vboxguest<br>
+=C2=A0MAKE_TARGETS =3D &quot;all&quot;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#128696): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/128696" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/128696</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120580604/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/120580604/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000073dc3506582d398b--
 
