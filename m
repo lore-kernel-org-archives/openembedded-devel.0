@@ -2,105 +2,105 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9928C55838
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C07DCC55182
 	for <webhook@archiver.kernel.org>; Mon,  3 Aug 2026 14:19:08 +0000 (UTC)
 Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.1])
  by mx.groups.io with SMTP id smtpd.msgproc02-g2.44172.1785766647382335015
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 03 Aug 2026 07:17:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=WTgCHLUR;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=h+GqNRNJ;
  spf=pass (domain: est.tech, ip: 52.101.66.1, mailfrom: adarsh.jagadish.kamini@est.tech)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mq7pQ6fzS9RcjYFruXFCystAHTo+hpi7D34K3GmYBDCU0Vi3nsND3s57c3j8A9CuvL0BUXgBozxp3QHp0uDYdhyD7xMNGfO3dKpy2ak1x2MEoA/nJtN2THuRkxPkyWNZQAL7Mf+C8Cq1yFAGKzt6XCpVFhA5WqZraVvDRzT+oB1vDDoYRzRInJvXb89oywgq8Ljjy4YSebSwJ4EvArRStoaqOBR3yrihfDbf+N3fWVtYIAffHmEzoLKeMzKOp4zIsP9ZaJ+OG8KJYEv/srlJC5wT1j6+2+A/vntVHA3EgDYXpo9DWAVSU3hxn/arUV3n5+5f35JruFNnyxzJZZzD0g==
+ b=PPKzNBl84nWayPt+TL9oqeMeSlVBHA5AFCqzrDf2xkKV8UFUVufHGCecS/F5GAq+TvPlI2hKw5Me9/2nEqxSgjRwJ6r8olnuxhWO2TkKlJmhYZP+JXW3xg9os6b+b0m3Ck/HwsoUpGk77gXdvmjOS3GU8/NfdDgc74fijzgmyMldaV1GhhzCFc8JaI5lk7Z98gp9eCR5bDXrHhMxWv5YzZEbua7yifFVsON5C+E6z3LmPUSu8fAVtFiSHioGxyuU2fdEDzwTVwSQ8UIGlkD1Wmr7npC3RS/UjRRuu6MsCq8fiiaMmoARftso6SIXO5fEOls5dYPyiOmnLjsMz0+r0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M58YcnXt0m2hPZBJZZddtpjK/XxZukls1yhSmpGrv9s=;
- b=DaJLK0aoFWnszOWCSUbaeT22sC4IwUZqpKX9VLpiWiiakm5TJhjHtfeTal8eN2m5k6GhCHMFl6axAQ6W0TCW/jZnqwCr/gKQQ42PoQUWm9nOnml8n1P45ppeTjTpKzXpcSNKDrLaqMY6FvwoE7Mz3Tlx98RUOTfabOQCVAKNKcSnFisR5gb9+nw0N/88Lca9C2dp5NZVJEvGb31wOA6ijT6MijqHHs9BqmTZBzvHDWtf35nqdIbGo70ze64PzEwYr7tdyA8jwMi8MtjSL4piX8aweaZ7LCCE3oS8A8AlE9kmOTPgRjXTF5baqZzejCAr1t1hal0onzi3vHhJt/gklA==
+ bh=Ec7Pswxo6LZ9OPU2fiAQZKYJoPKNOoJtFvlWGUW80f0=;
+ b=NxX/7WGvYmNe8k0PkFbCPpDC1O0rRqFATDipbfN2FYeFa2cCjItANdkQxhGU8wsGbDPSIFNVdd8DNPa4Dhi89CFKVg2/WcqSDHsfhdr//q2NptbANzrnJI978YaN7j+6XkGsAm9xmPbPBh6Zsg5hpZYkyLfYH+izlX7nr6nAF4grusnvO3+xFyObnztoZmlPM8/6CHW84kra5slCu9bvxZ82apfY2U6OgCr0cGtbxudPMneAlGkhOolYCqB5n/iX3y8c5ogi9ikY8kWhVqGEWggKx6nzQRBwc4LwBtG+KRLJ5qWNgzU17awugYsYbcWFmdDG7sz1VfzphLnX5450ug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
  dkim=pass header.d=est.tech; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M58YcnXt0m2hPZBJZZddtpjK/XxZukls1yhSmpGrv9s=;
- b=WTgCHLURRI+38BYiaKIVV9/Gjavpd9NSCtnOmTsAfhqZpaNE270c95i9W8+kJXNU3k/9yOkCmr4EVoSUV5xf5ledL9AatNqLsWwWdPUZ8eg4tjz/zLyI1NwdTDvK5rwb6QtJ6nSOwZtfLKxyofDNrJ+FPNQ++sGQ2jW0ZNw17V4MACN6/sP1Vr6cHnNEbedWEOuTkKodijGefb4L+U2pJnuXlLxTVV01yvxH6F6ldqJuNdWOMRwWTUuBS9hPEYlWeYmVGumWh+Fxkn53UBEbN5e4MitoCEBTLvnVQePAHXJ0fV0W4/WEUsx7YT9AodTg+JidC4TOT9XK5iZcLvNSjQ==
+ bh=Ec7Pswxo6LZ9OPU2fiAQZKYJoPKNOoJtFvlWGUW80f0=;
+ b=h+GqNRNJHndUJub083ZaPq5kBR227wLLvC65cxGB3FY9ZgMOz1yykkHo3W16hP/dRyN6QMd6Kyx2rwn9fNY5k7wdRT3G57uu2+EAGIy0dxBWaRBWgJ3oVhnrhRB5FQTbo5O2jae2eGEjq1/3GW3Y6uoY/bwQnT2aI26Vd27vfU4hbW8+ZgxpgE938dD1qxipvtZxHpNdxNYMiaK5mLiSzS788kNgL6heyiLnwupY/rGwVAyOfTkuSKgK0SYXljPlbTaV1g0GHhp4DNbHnCqQ1lpHaBu1PFTC5c3UqJGvlaaHG6WLQXvzALsyq5LIRDQ6xcDF8B7T6jXf+rSFZIxcjw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=est.tech;
 Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:396::9)
  by DU0P189MB1820.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:344::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.13; Mon, 3 Aug
- 2026 14:17:22 +0000
+ 2026 14:17:24 +0000
 Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
  ([fe80::f147:85e5:34de:eeff]) by AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
  ([fe80::f147:85e5:34de:eeff%4]) with mapi id 15.21.0292.012; Mon, 3 Aug 2026
- 14:17:22 +0000
+ 14:17:24 +0000
 From: "Adarsh Jagadish Kamini" <adarsh.jagadish.kamini@est.tech>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 1/3] thrift: fix CVE-2026-55971
-Date: Mon,  3 Aug 2026 16:17:10 +0200
-Message-ID: <20260803141716.853285-2-adarsh.jagadish.kamini@est.tech>
+Subject: [meta-oe][scarthgap][PATCH 2/3] thrift: fix CVE-2026-58023
+Date: Mon,  3 Aug 2026 16:17:11 +0200
+Message-ID: <20260803141716.853285-3-adarsh.jagadish.kamini@est.tech>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260803141716.853285-1-adarsh.jagadish.kamini@est.tech>
 References: <20260803141716.853285-1-adarsh.jagadish.kamini@est.tech>
-X-ClientProxiedBy: DUZPR01CA0189.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b6::7) To AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
+X-ClientProxiedBy: DUZPR01CA0181.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b3::22) To AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
  (2603:10a6:20b:396::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8P189MB1672:EE_|DU0P189MB1820:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00ce15f5-9077-4bde-9efe-08def169efa5
+X-MS-Office365-Filtering-Correlation-Id: 8d77855a-946f-4fea-9a89-08def169f099
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|13003099007|56012099006|10067099003|11063799006|12006099003|18002099003|22082099003|3023799007;
+	BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|13003099007|6133799003|56012099006|10067099003|11063799006|12006099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	/f4A9Sm95PA7+VhcsqcLDei/XOuxy288tbkEgpSM+3b+/w0iFlKpKqhcW88Ld/fs/kG1JQLk5JJqfQ1M+l8Xh+dSsxtYZZcSidbXrb28/b8NO43j1vSYJH0jX6UaDR9grbPHNZUPrczFHDemqg+rwf7fumRnpQJQ71oFX+xgpL0MMpVg39ddOz/7/yk8T8dDVH4FhpbvwHZYpCk0ArLATgfPe1glSgCMGaEKXOmDANG4DHB1cYC5MMPnPuu4T4UqtVAHIxZO5vqcLUBBPk3ZUkOcnLTGBZywgFt59CclFOFTwdjHdVKCdpZKCV/wms0tDNkMcYHLW6QwEp7Af9gvv+5mB9HR93cAF8qfiP17TfFh7F7aeX2VfjNJcIkJWwEhPN/JXsLGZCFVwkX1dt26ZWV6qrG2rkEOrZeU8HVmVPhcNSV++RlZcb4l5RmNmCEukzoIcN4o3+4W0sIgyfsateANPIe/zSYApqgv4l06K3JRdW9ab4IL38vN1r/Hm0MWBy7wMcKZhbIxcqhHj1Sn7iUBlx+2MzDToaWfhg+2Cf1aQmaE2bcaahpO5q+tukLnNnP9AEByX57j3WPza9s90+esTdRlT8cDpBv60TV6v97e1K1HUW0Fk1oKJbRgx+MKpcvmZ2o3p1Pq2ggvi/pFKnDoc+9UpZGTWBQob7Wc9xE=
+	P9ZHbjNlboh9alAefAducaYf+1eVGA+sU2MRxxIUNJTYxWS1bHiazx5RpqptHvikKaMoT/BHPfUrIrRC0IQGwt4BW8aoYoUtlfVgRO7gO0LPqPc3vpdKjAsyukk7MiATcyMdI2ZXNTpyPhiAabk9CPwWas9NnFjAFdRYdEZHieLFW7US6ASB9eGI2xKlw+MU+PwWyfiIKnfWRIJ9j36Zg8Us54e6bsQyisRbre78WNJzQ8u5vSPJb2Kz3XIi1obqewWB1oOTREEFxy45pV6kgv4oOO39gbKbAFbg4GzsJAY8zvQ0OH7l4O1Cjgrt7EgLT/us+PckDHhwsu8tls4VAykVf5DQetOjk2bdtDvw52xpvqnWrxv1jBaKGWEtccPVjMDEz8NCnTp9/Dk0AfGmeYSHEn0wCuDDl7n9pvCoVNf7mg9NlG8Z3lFdRJ+QvtfspCGq0jbtZ6oLhhFems1WJQ1d58udnTSOZmrwegXCqRBfawFQyBjLWo/iziQVYS4fZF7q/8MczO1fX7BrtYygM0MkKsA/elzVHGQzf5mrwKvQO8Tunq3EYGSMqiqHy6vWiFBofKY4NAIoNVx9DQyOXCd6Ll540MGOE2VRhBRNiz0k/jfhEAdbysWgrliS5Oh4rlmEGYpg8iHn95IseSyCtePYWNabqb2cXw/Z0FwhWws=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8P189MB1672.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(13003099007)(56012099006)(10067099003)(11063799006)(12006099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8P189MB1672.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(13003099007)(6133799003)(56012099006)(10067099003)(11063799006)(12006099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?OA9sBp7mN10xpJo6RGQ8NylCmZtIXroS8WYIw86W9mwno2ug4yN37TL7ssxi?=
- =?us-ascii?Q?nn9xj4wz0aPggOfgI69ycIVaSMvaEW/pXkO7Hdrv0KfAQHqjQcSc+n/xmg4s?=
- =?us-ascii?Q?srKD16SBWucCeQKphufJ6d29Og3mFytPgpIlAYHUKpjcyEEd4s2zu25DjDXa?=
- =?us-ascii?Q?ESfigFNnnAl3D7rMAUgypr/lQPGP2FwLQCNeKFVUF2WK/B0alebXnxeYX9Qx?=
- =?us-ascii?Q?OxGiGXZofcJaKoSZB/AwmLRMusYQ+QcGAoOECt/q6KJLwt8y6a1NQNXL1ykM?=
- =?us-ascii?Q?5FatCIHhNPO0VSaMoep9u3gbUz7CzfWtKgzgpY76lm+9BQtGpA82w94RsFlm?=
- =?us-ascii?Q?7RwYEe44FHIgWSCgorozA5LdL1xiWGL0ZLq+G1BoNCJXwKtGTJpvXJJ5NHNR?=
- =?us-ascii?Q?SOpA7h22JPkOlSbj/X3IONWjLnCc92edTB4/jmaNLPmBax2JCma3TRf3xfnz?=
- =?us-ascii?Q?DB4bswMrjcLvn8wq/tEcAmIXvcyfNUMbxy4kcaSFXUnqtQDu0VT5KLMolI5R?=
- =?us-ascii?Q?L3VLnSuhqV4UmLlwSIekDqOvLnrnx0YH0Sr62NhwK0tyMNbTc+mLK0a2bt0F?=
- =?us-ascii?Q?cfT5MBftx058j7uIlA+nGXrm2xv9tVRldzQGmNM4JhtO3Et/ZpK/tzfskO9F?=
- =?us-ascii?Q?ytFdCtZpInllGz98y2p2GSw9s9Y7LHi7SAxjV0QCC0Jh6iTqb1Fo8rVkq8Pq?=
- =?us-ascii?Q?bU4DTeGeWAIO6l9QQU/8/Bug81/7P8uDQfO5Amqo6FL+5IlvgayG66qoJ6r9?=
- =?us-ascii?Q?GHttLKz/+DmXyayh6O7jXT3PInpxRIsPxdEVsnScsV5CCY89L9EcmL2LH4w0?=
- =?us-ascii?Q?8IzZLZLDmWwroXBLd8kx3VpLeRQhr9JZhDzeLFOjCWMIvMzYyfiArWrBhLlB?=
- =?us-ascii?Q?u5joZGJ3RFwHext6ksDOy+6UizPe/Z9Hc7zlHoROhQRh78rfEbI4jSkxx9Cd?=
- =?us-ascii?Q?3fjfqurw8AS3c10immc5O/8avV/RysUa6d9TBBZgN2/NC7d60luH/ps7FAzb?=
- =?us-ascii?Q?6kI0eUOI9/n7SZhLTVZ+0bXjHNGS8d1SBeEmrwcVzUX52bVJvReqvEoEUyZg?=
- =?us-ascii?Q?GZV+mTJt2ag0ffBrE+bKLo4x3GtS/qp4CSDfGX4chEpq2qi0THPax8vHDa4k?=
- =?us-ascii?Q?6uYtH18ahuJig71yetaMNs5rkQ+g13Xs0JjwTNhfwQ3ME5E6gVxK29G8+9Pk?=
- =?us-ascii?Q?SbCATBRKXXx3oQna0kNOjVzWi100Hu7pjjw09PmotOgylecaQDogdjFHePK0?=
- =?us-ascii?Q?CPuhGAF8XNs0hMTz7ECEg/uIo2JmhEZKzVCGxu9Es8r3bgtmV9pmbZOvllxp?=
- =?us-ascii?Q?487Pzvne46dkU7CDuQTUfvmHdF2NAsWYYYeomvDK6PDdvwOFG43GivMph8yD?=
- =?us-ascii?Q?Ms663hXvzdgRIrX416cdP95zGOKY0C3/Ra7/yxz8RYgDFyuCAKodQRTCLHPV?=
- =?us-ascii?Q?WeD3DZhkLAj6C7lLLVCwZM4RY55KZuereQGFWTMXL9qfWvCVwYIm42KE52vz?=
- =?us-ascii?Q?3PclUcZXLMVBijlMVrk7V7O1TvQdzDrakg4VbcUGmUflOwLFlqQDBF/Zy1n2?=
- =?us-ascii?Q?gfvTgoG6Ts4GXWcxFjANaWh1oMxcJXooWer1gPUMCInks5r5PR/mxH5esh4s?=
- =?us-ascii?Q?jJY38b/1GI6EeOwJb80X8MImO7vi7f/K61bUAd4KMqkE/84kOVbgocuHYmYQ?=
- =?us-ascii?Q?b7H8S+86s6FJ6p250Wsekn+WsHwhJSUFocLopQQRVA17/Rqrcgj0hW9U4Du0?=
- =?us-ascii?Q?I2du5mDv6Gsg3p2OFx/1EiYAz7XZqAmx/TobYw42BTveL8eoHUGJ?=
+	=?us-ascii?Q?wf1knH5knQ1H0PvA7U+2EbZaX2VcVDNVu0gKXE4EEfPnLqkkqH3avtYqkxXw?=
+ =?us-ascii?Q?3yJNnqJM9ZjGhUaaDDYYElFlQi85HF4gUhKI1uidubTHCBPaRZuTIVA4YBGY?=
+ =?us-ascii?Q?74OCjVNRvxX8OmkPIVI8q7Ld4jLiHkHJ3GZG4WAkvCCg3UxZ0TbY1CywNfUW?=
+ =?us-ascii?Q?HiwO7+703xZRSSMaDUzq/qBErP6syoUsRAaTS0g/GuWn0gCxGAE1rZOhQnLB?=
+ =?us-ascii?Q?hqcJcN6/BmQdkYWVR+39e1k9Qgv3qMCWCXku80QYa9MPrlrG66nlYc3AtUun?=
+ =?us-ascii?Q?EjRHmAuwBKG3U19VH4bM1Hp+G2Qo5GgrR3+Q7c98anCS0m0dKgUdieXQR2bI?=
+ =?us-ascii?Q?QWEUqdPv/Hc7+0wIjv0aXr0i2z2+6J5gxkDY2jnfvgcxZeATBk0cbrXkzBPb?=
+ =?us-ascii?Q?fq2qKmERjefTH+pP+meYpN4gJta1N7zUCHvq6HvgSdAjOf4dLzFSAvrVxxvT?=
+ =?us-ascii?Q?jkYmyLprvGz3gnCO5TnMEQboocl82PuBSCsIi+lkks2Qdhvjn7XUw0o20R/h?=
+ =?us-ascii?Q?Q+TJvzy+q21NveoOjDXLXsUOkgOGSgDFPEsK+jUMdGBylhIqYYjUXwrzgzQO?=
+ =?us-ascii?Q?qfv/D8XhpTMvVTQ7o03ssXt1AfE8c14zcnmBvF0UGsIW3z1yQFweT8P/nlcP?=
+ =?us-ascii?Q?zwylpMJ2BvNVQlDV0OxBVeMAFOufgRwK4mg7ieNY5nOvoZ6ygYdWQjAM4341?=
+ =?us-ascii?Q?2fwt5IsGnbOGBukDyihKgPJSIIgGhEdLM/Epkz6nL1rwVcsujAL3p/owtFj9?=
+ =?us-ascii?Q?aI6rimyEFPIfG3tUN9wiHRjTVxIS6xMtnyTebHiGuhAZrN4Qst6yjdyptn5R?=
+ =?us-ascii?Q?V5m6ei1TVUHyYjqY/MKAeZ5XKG2010lrHdoauRHL3VmEwU2RXuZVNp5fnbNN?=
+ =?us-ascii?Q?4fhIPb7xE5DsIIhobocn84m+CRFOV8MTthYBLNVdF9yeetEni/X1aLCgIeDK?=
+ =?us-ascii?Q?7b5XhSYNVveTf9fqUzHFG5kSmbu3wH7kzRtym2tell1uxNLMczQqaCjLxSDM?=
+ =?us-ascii?Q?CONNT8AaXhpO1RWEslgpdnzSt1332p/Z8nJs5KWFPtHxC/zOQwUZqbmTr5e3?=
+ =?us-ascii?Q?/PRlOHXUE0SZ9wpXAIRlvJclrPGe5NBgOnubc62t3voAmUaVUomUb6rU8hYT?=
+ =?us-ascii?Q?5y208SNyrQW336Vx4Lw81ROgZQTD8CfeOSs58x9cPz/xhBawj/JVZNtdE5+J?=
+ =?us-ascii?Q?YcPgAq8c8Spbo7JyQghqoDzjs2Oxz8maC1Ikkc3g2jlnUnBD3ImwWn6+HDHq?=
+ =?us-ascii?Q?G9QVQOTv6IS0abAegowipugTyx8u23vHHrAyFK3u05uDbCXRA0738Em9SjXf?=
+ =?us-ascii?Q?D+aWe8yfLPmKwMFestR8Dr1J7eyIvfyj4QGHr7wRQkOKaZJgVaz3qRlmVdpZ?=
+ =?us-ascii?Q?fd4KG3EMaZKqzJ2XdScSNl3m/ykiIkYY0pVOSXRBuruMigsrVo4r8QZY5ir2?=
+ =?us-ascii?Q?+Z4Qt2EEXp/pr36v+sICR83LfGrC0lZHoO9kYWdKv5yJ4KrTfQmGjwQ93QjE?=
+ =?us-ascii?Q?eIlzgXcc81uW/zovhregW5hsL9kmMG9zLHHHKkeKqjGbiRpFpkoxf30cZsyT?=
+ =?us-ascii?Q?MeY0pBt2+/rYg9P+v+nKXVd8GdPQKXO5HFCR4BkxztfBlRj5MaRRBxOGsqBi?=
+ =?us-ascii?Q?UhOSLmJk3W0TXzfIWC65gSxemPi0+BzdlhqZ1tXlNv4Snvm5Zafv4NCyIbc6?=
+ =?us-ascii?Q?UcXZeZL/CTTg9Dyr5t6dkLZ+NIB8WbRA4Zk/fzd2ftQYs6rLTByQoV39kerJ?=
+ =?us-ascii?Q?2dJiIlElcB7tWUdAUxaYNBSUBl1A774WVYw+7CHv/RwxPYodvuhD?=
 X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ce15f5-9077-4bde-9efe-08def169efa5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d77855a-946f-4fea-9a89-08def169f099
 X-MS-Exchange-CrossTenant-AuthSource: AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2026 14:17:22.8477
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2026 14:17:24.4521
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dop2nRAXdCPnyDnoVryIIDKS3gG4/n7tCXmMz+xieA6gYDOXnMN3Ns5AW5LAI/09lS+cxX6TD+ICyU2UTx1/XPCshujcbMvOFtAf2NnJedI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: KtBqslgVLe5plaLtmvbfreJnwTXvt53sG1QMUkGTgBC1BVGNoq9K+RDfFr51u5vYIpwTJhXD3rd+aTkBamtqKDkKudXuL66f+qP91MLEwhU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P189MB1820
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
@@ -108,167 +108,326 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 14:19:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128690
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128691
 
 From: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
 
-Backport patch to fix CVE-2026-55971.
+Backport patch to fix CVE-2026-58023.
 
 References:
-  https://nvd.nist.gov/vuln/detail/CVE-2026-55971
+  https://nvd.nist.gov/vuln/detail/CVE-2026-58023
 
 Upstream fix:
-  https://github.com/apache/thrift/commit/db4a473f3a984eee27273256fe737be5d=
-d175595
+  https://github.com/apache/thrift/commit/d68305a7308a11df2c1daef16f55dbc19=
+dfa6ff0
 
 Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
 ---
- .../thrift/thrift/CVE-2026-55971.patch        | 98 +++++++++++++++++++
- .../thrift/thrift_0.20.0.bb                   |  1 +
- 2 files changed, 99 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-559=
-71.patch
+ .../thrift/thrift/CVE-2026-58023.patch        | 231 ++++++++++++++++++
+ .../thrift/thrift_0.20.0.bb                   |   1 +
+ 2 files changed, 232 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-580=
+23.patch
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55971.patc=
-h b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55971.patch
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-58023.patc=
+h b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-58023.patch
 new file mode 100644
-index 0000000000..584352a027
+index 0000000000..f6cc703369
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55971.patch
-@@ -0,0 +1,98 @@
-+From 46533058efd34461065e029d9f180a349647db5e Mon Sep 17 00:00:00 2001
-+From: Jens Geyer <jensg@apache.org>
-+Date: Wed, 17 Jun 2026 23:27:46 +0200
-+Subject: [PATCH] Read the zlib transform result directly in THeaderTranspo=
-rt
-+ untransform Client: cpp
++++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-58023.patch
+@@ -0,0 +1,231 @@
++From 0459eb08472ea28695e0b78088ca7530ebc34238 Mon Sep 17 00:00:00 2001
++From: Javid Khan <dxbjavid@gmail.com>
++Date: Fri, 26 Jun 2026 21:35:32 +0200
++Subject: [PATCH] copy buffered data not the GByteArray struct in c_glib
++ read_slow Client: c_glib
 +
-+The zlib read path decompressed the frame into the transform buffer and th=
-en copied the result back into the receive buffer. Swap the transform buffe=
-r in as the receive buffer and read the result directly instead of copying =
-it.
++thrift_framed_transport_read_slow copies leftover bytes from the previous =
+frame with memcpy(buf, t->r_buf, t->r_buf->len), passing the GByteArray str=
+uct pointer as the source instead of t->r_buf->data. The correct source is =
+the buffer's data member, as used by the other memcpy calls in the same fil=
+e. thrift_buffered_transport_read_slow contains the same mistake in its lef=
+tover path. Both are updated to read from t->r_buf->data, and a regression =
+test using a memory buffer exercises the cross-boundary read path in each t=
+ransport.
 +
-+Adds a write/read round-trip test through the zlib transform.
++This closes #3607
 +
-+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
-+
-+Conflicts Resolved:
-+
-+lib/cpp/test/ThrifttReadCheckTests.cpp (1 conflict):
-+- The stable branch lacks the prerequisite THRIFT-5854 commit, so the
-+  test_theadertransport_header_size_exceeds_frame test and the
-+  THeaderTransport.h include it depends on are not present here. Kept only
-+  the new test_theadertransport_zlib_roundtrip test from this fix and adde=
-d
-+  the missing #include <thrift/transport/THeaderTransport.h> (present in
-+  upstream's tree via the THRIFT-5854 prerequisite) since it is required b=
-y
-+  the new test and is a trivial, self-contained include with no functional
-+  code dependency.
-+
-+Assisted-by: kiro:claude-sonnet-5
-+
-+Changes from upstream commit db4a473f3a98:
-+  - lib/cpp/src/thrift/transport/THeaderTransport.cpp: adapted from upstre=
-am
-+  - lib/cpp/test/ThrifttReadCheckTests.cpp: adapted from upstream
-+
-+CVE: CVE-2026-55971
-+Upstream-Status: Backport [https://github.com/apache/thrift/commit/db4a473=
-f3a984eee27273256fe737be5dd175595]
++CVE: CVE-2026-58023
++Upstream-Status: Backport [https://github.com/apache/thrift/commit/d68305a=
+7308a11df2c1daef16f55dbc19dfa6ff0]
 +
 +Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
 +---
-+ .../src/thrift/transport/THeaderTransport.cpp |  8 ++++++-
-+ lib/cpp/test/ThrifttReadCheckTests.cpp        | 24 +++++++++++++++++++
-+ 2 files changed, 31 insertions(+), 1 deletion(-)
++ .../transport/thrift_buffered_transport.c     |  2 +-
++ .../transport/thrift_framed_transport.c       |  2 +-
++ lib/c_glib/test/Makefile.am                   |  6 +-
++ lib/c_glib/test/testbufferedtransport.c       | 47 ++++++++++++++
++ lib/c_glib/test/testframedtransport.c         | 62 +++++++++++++++++++
++ 5 files changed, 115 insertions(+), 4 deletions(-)
 +
-+diff --git a/lib/cpp/src/thrift/transport/THeaderTransport.cpp b/lib/cpp/s=
-rc/thrift/transport/THeaderTransport.cpp
-+index b3b833389..117c8edd5 100644
-+--- a/lib/cpp/src/thrift/transport/THeaderTransport.cpp
-++++ b/lib/cpp/src/thrift/transport/THeaderTransport.cpp
-+@@ -298,7 +298,13 @@ void THeaderTransport::untransform(uint8_t* ptr, uint=
-32_t sz) {
-+                                     "Error while zlib deflateEnd");
-+       }
++diff --git a/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transp=
+ort.c b/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport.c
++index 30aa95caf..21e3e42d4 100644
++--- a/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport.c
+++++ b/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport.c
++@@ -93,7 +93,7 @@ thrift_buffered_transport_read_slow (ThriftTransport *tr=
+ansport, gpointer buf,
++   /* first copy what we have in our buffer. */
++   if (have > 0)
++   {
++-    memcpy (buf, t->r_buf, t->r_buf->len);
+++    memcpy (buf, t->r_buf->data, t->r_buf->len);
++     want -=3D t->r_buf->len;
++     t->r_buf =3D g_byte_array_remove_range (t->r_buf, 0, t->r_buf->len);
++   }
++diff --git a/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transpor=
+t.c b/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport.c
++index 3cbb245e0..8deed4119 100644
++--- a/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport.c
+++++ b/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport.c
++@@ -138,7 +138,7 @@ thrift_framed_transport_read_slow (ThriftTransport *tr=
+ansport, gpointer buf,
++   /* first copy what we have in our buffer, if there is anything left */
++   if (have > 0)
++   {
++-    memcpy (buf, t->r_buf, t->r_buf->len);
+++    memcpy (buf, t->r_buf->data, t->r_buf->len);
++     want -=3D t->r_buf->len;
++     t->r_buf =3D g_byte_array_remove_range (t->r_buf, 0, t->r_buf->len);
++   }
++diff --git a/lib/c_glib/test/Makefile.am b/lib/c_glib/test/Makefile.am
++index f3a0c30df..71cfc7970 100644
++--- a/lib/c_glib/test/Makefile.am
+++++ b/lib/c_glib/test/Makefile.am
++@@ -150,7 +150,8 @@ testbufferedtransport_LDADD =3D \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_socket.o \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_server_transport.o \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_server_socket.o \
++-    $(top_builddir)/lib/c_glib/src/thrift/c_glib/libthrift_c_glib_la-thri=
+ft_configuration.o=20
+++    $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_memory_buffer.o \
+++    $(top_builddir)/lib/c_glib/src/thrift/c_glib/libthrift_c_glib_la-thri=
+ft_configuration.o
 +=20
-+-      memcpy(ptr, tBuf_.get(), sz);
-++      // The result now lives in tBuf_ and is typically larger than the s=
-ource
-++      // section it was read from, so it does not fit back into the recei=
-ve
-++      // buffer at ptr.  Swap the transform buffer in as the receive buff=
-er and
-++      // continue from its start instead of copying the result back in pl=
-ace.
-++      rBuf_.swap(tBuf_);
-++      std::swap(rBufSize_, tBufSize_);
-++      ptr =3D rBuf_.get();
-+     } else {
-+       throw TApplicationException(TApplicationException::MISSING_RESULT, =
-"Unknown transform");
++ testframedtransport_SOURCES =3D testframedtransport.c
++ testframedtransport_LDADD =3D \
++@@ -158,7 +159,8 @@ testframedtransport_LDADD =3D \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_socket.o \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_server_transport.o \
++     $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_server_socket.o \
++-    $(top_builddir)/lib/c_glib/src/thrift/c_glib/libthrift_c_glib_la-thri=
+ft_configuration.o=20
+++    $(top_builddir)/lib/c_glib/src/thrift/c_glib/transport/libthrift_c_gl=
+ib_la-thrift_memory_buffer.o \
+++    $(top_builddir)/lib/c_glib/src/thrift/c_glib/libthrift_c_glib_la-thri=
+ft_configuration.o
++=20
++ testzlibtransport_SOURCES =3D testzlibtransport.c
++ testzlibtransport_LDADD =3D \
++diff --git a/lib/c_glib/test/testbufferedtransport.c b/lib/c_glib/test/tes=
+tbufferedtransport.c
++index d01806d61..7493b7222 100644
++--- a/lib/c_glib/test/testbufferedtransport.c
+++++ b/lib/c_glib/test/testbufferedtransport.c
++@@ -25,6 +25,7 @@
++ #include <thrift/c_glib/transport/thrift_socket.h>
++ #include <thrift/c_glib/transport/thrift_server_transport.h>
++ #include <thrift/c_glib/transport/thrift_server_socket.h>
+++#include <thrift/c_glib/transport/thrift_memory_buffer.h>
++=20
++ #define TEST_DATA { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' }
++=20
++@@ -306,6 +307,51 @@ test_write_fail(void)
 +     }
-+diff --git a/lib/cpp/test/ThrifttReadCheckTests.cpp b/lib/cpp/test/Thriftt=
-ReadCheckTests.cpp
-+index eb4ca01b2..2ef6ae0c6 100644
-+--- a/lib/cpp/test/ThrifttReadCheckTests.cpp
-++++ b/lib/cpp/test/ThrifttReadCheckTests.cpp
-+@@ -38,6 +38,7 @@
-+ #include <thrift/protocol/TList.h>
-+ #include <thrift/protocol/TSet.h>
-+ #include <thrift/protocol/TMap.h>
-++#include <thrift/transport/THeaderTransport.h>
-+=20
-+ BOOST_AUTO_TEST_SUITE(ThriftReadCheckExceptionTest)
-+=20
-+@@ -224,4 +225,27 @@ BOOST_AUTO_TEST_CASE(test_tthriftjsonprotocol_read_ch=
-eck_exception) {
-+   protocol->readMapEnd();
 + }
 +=20
-++BOOST_AUTO_TEST_CASE(test_theadertransport_zlib_roundtrip) {
-++  using apache::thrift::transport::THeaderTransport;
-++  // A run of identical bytes compresses to far fewer bytes than it occup=
-ies
-++  // once expanded again, so the result of the zlib transform is much lar=
-ger
-++  // than the frame section it is read from.  This drives the full write/=
-read
-++  // round trip through the zlib transform path.  Keep the payload small =
-enough
-++  // to stay within the transform buffer the reader sizes from its write =
-buffer.
-++  const std::size_t N =3D 700;
-++  std::vector<uint8_t> payload(N, 0x42);
+++/* A read larger than the bytes already sitting in the read buffer takes =
+the
+++   read_slow() path with have > 0. That leftover used to be copied from t=
+he
+++   GByteArray structure itself rather than its data member, which corrupt=
+ed the
+++   result and over-read the small struct allocation once more than a hand=
+ful of
+++   bytes were buffered. Pre-load the buffer and drive the read through a =
+memory
+++   buffer so the path is exercised without a socket peer. */
+++static void
+++test_read_across_buffer (void)
+++{
+++  ThriftBufferedTransport *bt;
+++  ThriftTransport *transport;
+++  ThriftMemoryBuffer *membuf;
+++  guchar leftover[96];
+++  guchar tail[4];
+++  guchar buf[100];
+++  gint32 got;
+++  guint i;
 ++
-++  std::shared_ptr<TMemoryBuffer> buffer(new TMemoryBuffer());
-++  std::shared_ptr<THeaderTransport> writer(new THeaderTransport(buffer));
-++  writer->setTransform(THeaderTransport::ZLIB_TRANSFORM);
-++  writer->write(payload.data(), static_cast<uint32_t>(payload.size()));
-++  writer->flush();
+++  for (i =3D 0; i < sizeof (leftover); i++)
+++    leftover[i] =3D (guchar) (0x10 + i);
+++  for (i =3D 0; i < sizeof (tail); i++)
+++    tail[i] =3D (guchar) (0xc0 + i);
 ++
-++  std::shared_ptr<THeaderTransport> reader(new THeaderTransport(buffer));
-++  std::vector<uint8_t> out(N, 0x00);
-++  reader->readAll(out.data(), static_cast<uint32_t>(out.size()));
+++  membuf =3D g_object_new (THRIFT_TYPE_MEMORY_BUFFER, "buf_size", 1024, N=
+ULL);
+++  thrift_transport_write (THRIFT_TRANSPORT (membuf), tail, sizeof (tail),=
+ NULL);
 ++
-++  BOOST_CHECK(out =3D=3D payload);
+++  transport =3D g_object_new (THRIFT_TYPE_BUFFERED_TRANSPORT,
+++                            "transport", THRIFT_TRANSPORT (membuf), NULL)=
+;
+++
+++  /* leave 96 bytes already buffered, more than sizeof(GByteArray) */
+++  bt =3D THRIFT_BUFFERED_TRANSPORT (transport);
+++  g_byte_array_append (bt->r_buf, leftover, sizeof (leftover));
+++
+++  /* this read exceeds the buffered bytes and must return the real buffer=
+ed
+++     data followed by the freshly read tail, not the GByteArray structure=
+ */
+++  got =3D thrift_transport_read (transport, buf, 100, NULL);
+++  g_assert (got =3D=3D 100);
+++  g_assert (memcmp (buf, leftover, 96) =3D=3D 0);
+++  g_assert (memcmp (buf + 96, tail, 4) =3D=3D 0);
+++
+++  thrift_transport_read_end (transport, NULL);
+++  g_object_unref (transport);
+++  g_object_unref (membuf);
 ++}
 ++
-+ BOOST_AUTO_TEST_SUITE_END()
++ int
++ main(int argc, char *argv[])
++ {
++@@ -319,6 +365,7 @@ main(int argc, char *argv[])
++   g_test_add_func ("/testbufferedtransport/OpenAndClose", test_open_and_c=
+lose);
++   g_test_add_func ("/testbufferedtransport/ReadAndWrite", test_read_and_w=
+rite);
++   g_test_add_func ("/testbufferedtransport/WriteFail", test_write_fail);
+++  g_test_add_func ("/testbufferedtransport/ReadAcrossBuffer", test_read_a=
+cross_buffer);
++=20
++   return g_test_run ();
++ }
++diff --git a/lib/c_glib/test/testframedtransport.c b/lib/c_glib/test/testf=
+ramedtransport.c
++index 008e61e40..581b71067 100644
++--- a/lib/c_glib/test/testframedtransport.c
+++++ b/lib/c_glib/test/testframedtransport.c
++@@ -24,6 +24,7 @@
++ #include <thrift/c_glib/transport/thrift_socket.h>
++ #include <thrift/c_glib/transport/thrift_server_transport.h>
++ #include <thrift/c_glib/transport/thrift_server_socket.h>
+++#include <thrift/c_glib/transport/thrift_memory_buffer.h>
++=20
++ #define TEST_DATA { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' }
++=20
++@@ -305,6 +306,66 @@ thrift_server (const int port)
++   g_object_unref (tsocket);
++ }
++=20
+++/* append a framed message (4-byte big-endian size header + body) */
+++static void
+++append_frame (GByteArray *wire, const guchar *data, guint32 len)
+++{
+++  guint32 netlen =3D htonl (len);
+++  g_byte_array_append (wire, (const guchar *) &netlen, 4);
+++  g_byte_array_append (wire, data, len);
+++}
+++
+++/* A read whose length crosses a frame boundary takes the read_slow() pat=
+h
+++   while bytes are still buffered from the previous frame. That leftover =
+used
+++   to be copied from the GByteArray structure itself rather than its data
+++   member, corrupting the result and over-reading the heap once more than=
+ a
+++   handful of bytes remained. Drive it through a memory buffer so the pat=
+h is
+++   exercised without a socket peer. */
+++static void
+++test_read_across_frames (void)
+++{
+++  guchar f1[100];
+++  guchar f2[100];
+++  guchar buf[100];
+++  gint32 got;
+++  guint i;
+++
+++  for (i =3D 0; i < sizeof (f1); i++)
+++    {
+++      f1[i] =3D (guchar) (0x10 + i);
+++      f2[i] =3D (guchar) (0xc0 + i);
+++    }
+++
+++  GByteArray *wire =3D g_byte_array_new ();
+++  append_frame (wire, f1, sizeof (f1));
+++  append_frame (wire, f2, sizeof (f2));
+++
+++  ThriftMemoryBuffer *membuf =3D g_object_new (THRIFT_TYPE_MEMORY_BUFFER,
+++                                             "buf", wire,
+++                                             "buf_size", (guint32) 0,
+++                                             NULL);
+++  ThriftTransport *transport =3D g_object_new (THRIFT_TYPE_FRAMED_TRANSPO=
+RT,
+++                                             "transport",
+++                                             THRIFT_TRANSPORT (membuf),
+++                                             NULL);
+++
+++  /* consume part of the first frame so 96 bytes stay buffered */
+++  got =3D thrift_transport_read (transport, buf, 4, NULL);
+++  g_assert (got =3D=3D 4);
+++  g_assert (memcmp (buf, f1, 4) =3D=3D 0);
+++
+++  /* this read spans into the second frame and must return the real buffe=
+red
+++     bytes, not the bytes of the GByteArray structure */
+++  got =3D thrift_transport_read (transport, buf, 100, NULL);
+++  g_assert (got =3D=3D 100);
+++  g_assert (memcmp (buf, f1 + 4, 96) =3D=3D 0);
+++  g_assert (memcmp (buf + 96, f2, 4) =3D=3D 0);
+++
+++  thrift_transport_read_end (transport, NULL);
+++  g_object_unref (transport);
+++  g_object_unref (membuf);
+++}
+++
++ int
++ main(int argc, char *argv[])
++ {
++@@ -318,6 +379,7 @@ main(int argc, char *argv[])
++   g_test_add_func ("/testframedtransport/OpenAndClose", test_open_and_clo=
+se);
++   g_test_add_func ("/testframedtransport/ReadAndWrite", test_read_and_wri=
+te);
++   g_test_add_func ("/testframedtransport/ReadAfterPeerClose", test_read_a=
+fter_peer_close);
+++  g_test_add_func ("/testframedtransport/ReadAcrossFrames", test_read_acr=
+oss_frames);
++=20
++   return g_test_run ();
++ }
 diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb b/meta-oe=
 /recipes-connectivity/thrift/thrift_0.20.0.bb
-index e4fd07198c..23a6debf9a 100644
+index 23a6debf9a..35482d2471 100644
 --- a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
 +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
-@@ -12,6 +12,7 @@ SRC_URI =3D "https://archive.apache.org/dist/${BPN}/${PV}=
+@@ -13,6 +13,7 @@ SRC_URI =3D "https://archive.apache.org/dist/${BPN}/${PV}=
 /${BP}.tar.gz \
-            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-term=
-s.patch \
             file://0001-thrift-pr2755.patch \
             file://0001-THRIFT-5842-Add-missing-cstdint-include-for-int64_t=
 -.patch \
-+           file://CVE-2026-55971.patch \
+            file://CVE-2026-55971.patch \
++           file://CVE-2026-58023.patch \
             "
  SRC_URI[sha256sum] =3D "b5d8311a779470e1502c027f428a1db542f5c051c8e1280ccd=
 2163fa935ff2d6"
