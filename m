@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4169C55184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C07FFC55196
 	for <webhook@archiver.kernel.org>; Mon,  3 Aug 2026 11:21:12 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.41012.1785756070791885736
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.41010.1785756068456980889
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2026 04:21:10 -0700
+ Mon, 03 Aug 2026 04:21:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=fcE1NGTm;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cee9b74ee1so24715005ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 04:21:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=j5j+qJNb;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2cacf197759so46463485ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 04:21:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785756070; x=1786360870; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785756068; x=1786360868; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hrUyy1YEdCB/iaAATj+DyPWh8xPzoaQqkt50AThvw1Q=;
-        b=fcE1NGTmcCQzA90XnPlOtuk7uJQ543B4F93muRiHSvqNNmRfhV9SdobfipgV4hQ7uB
-         nQNL0e4yN0ooNj7w/v/G42BnQ6uC3YSSy7wZETE7T5hvYYid0m1WHaByRf/y9I3ETSfz
-         NioXNL2Yb32P0ZTQFbIg+lNkIoPU0uh4HO1xhL99PyJQguPZnbMx12T4s6BASiMhuxPt
-         CrlFUZrjjf1sPs6KpuGqa2PM5BmARFBG+ITGJY1Fs4n9lMMoF0Gpga1PSsozP9xHZaKF
-         dfLxhNzbyIQ96GVpEbA+5N5XJJaMCMO/iMMZ5wCkIHsCN3+8TqvJSv7tubD9R6mahZ4u
-         /ciQ==
+        bh=xheTwc3yOOkrp69x8B+bUwjYJw2LDHW3VFAPP7pEshM=;
+        b=j5j+qJNbCSeH9cKsvQv3uwcf6Kx5RRuf0kEHh4BuzG1l3GyxkuwTJyUk+QSZj5hYV/
+         LclU/2O9EPSencATPAlWoBkxbR22bQ4Jmn6U8FAHbTF3FwUWaBlDPnJvzytRZULxdzPe
+         +pkfE+zGwtIcYtGQ/jIJbSDTa64Ao7yrdsBayq/RTKlDv5M2MArahDupRBs4F3nNCuTl
+         NOZZ/FaeoPdzuLgCwttUzMm26+ZOpaFK85a0374Am0Hjf5vQqwR/beXAsWgmvGRGuyam
+         kGA/t+b6TuAi+miXGKvFd6wMy/dmoMOh49Bv8RhHdgwME7CEY8VXcU/nbCdA33zQErlR
+         hgiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785756070; x=1786360870;
+        d=1e100.net; s=20251104; t=1785756068; x=1786360868;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hrUyy1YEdCB/iaAATj+DyPWh8xPzoaQqkt50AThvw1Q=;
-        b=IKbk4I7IHbsZR1sSJNenckowBkv3KTrClenC2PKaw87legHcHHWHN55VEk35OSuiN+
-         wkz1qz7aXnaCaTZFcCIrEtQlrWkaZ2T+qWg41ZfVzOm3nBs+VU3OTh6ipoFLLUlzz/4C
-         K0VXH1P8TngHHUEvqcouolTxE09SYSrJYXJ/n2kogxRtrVYoCBAxUlqCgX5uv26o5I5U
-         ngiSrSYn70Gnx5x29FPwUysFLTQ13DdnR1ZYk5YW8UQFcml0WruE3Z5EkqzYm9NVl0Yn
-         eOHr0uA4emM6oeNQPVBov4K5QrXbCL0ypUCGfZyFYoIhStz0NYsTvAoEwjHZfARIqf3B
-         k7rw==
-X-Gm-Message-State: AOJu0YwC/RvMQzhwnLM41eFO6lURUWRbM8oa4gAuvB8sgATiK80mgu0x
-	DeT5BXompYVIocLPJKM8hsjWuShSkxy8lKnbzxlHTX0491z9dCD1TvbbK+Z4RuXp
-X-Gm-Gg: AR+sD134lWwmYCpoMn0weOt0OFnfrZiy4re67uMvvbJGvz0F1LVlwBUzHWYTgAlfZR7
-	+zEfWL2stV7WqKOgEnKownyvaLzfUFtd1kaJBRq3jPdZsV/QuB55mnqBe5ivBxVSqj0Nt+/Bda/
-	nhOeW65I92vw+doCUF6oggSiONnDP2ud2osuOvTNLThHMHkc0XDKmRv6dhOGxHZ7vN3JQQFsEnL
-	YNR8lffDFkHbGsBYia7PaAtb2PGakTFlhxSMmU4TBs1jP2+4HPNPzSWXb1PTGrfg4I36Eky7bkG
-	TNZIfvEitPECiUaqtzXuqfODauKi9wAf7U4aFP7BInVnw+PnyZgAb3MdinZ6DXDCvkdKrEpIgvV
-	2UWsManMZxGjSfbZituta/UeqGJ426lAhU/BbTQpuRlICB+IdSnS3uGwkcqcRNc1vOfmde3yd+9
-	cpo3f65vEjVnWbCJz9ypD6kbKQIz+b3W7rVd2pKYt4YZ0VBELpFKg9ZSO8Zx70mJuIU/CS4mcgg
-	Q==
-X-Received: by 2002:a17:902:e890:b0:2c9:e69f:edce with SMTP id d9443c01a7336-2d0527fa6f4mr82795495ad.44.1785756070062;
-        Mon, 03 Aug 2026 04:21:10 -0700 (PDT)
+        bh=xheTwc3yOOkrp69x8B+bUwjYJw2LDHW3VFAPP7pEshM=;
+        b=dRkCTKsRa19/OF3sAJQUbduAdT8xesvcJS2lckZK9RW3jhZynvoxyAeATndYRrNzBe
+         in+OC4PC9zDXkVk48jQYlUdUwacPQZFFHf4oFyQ79CDGez7/LPpsA9dabK09cTbF7z2E
+         4VgnzEmqB+h24ktHMqpDl/jdluilv9mVOjH39MGSz+oEl8Au5U0ZCkUiDgTWwMQrMKaL
+         j0rcGjF3x2WWbuQBhx9u9o4fzzBykjfQtz0DNSQiOVcv2J8GObr0VHZPUqs4CfoZ2AD9
+         JZ7rMtgQybgMuK3IWAcjqgLNs7OFQXgPXrSGIsJLbElNDPOOP67Tlp5Y7cRBO6IesRLh
+         ld4w==
+X-Gm-Message-State: AOJu0YwO85WynG+d4ktwj3Op6J5KHWzYotcpwptIycbKdih8Ida82JV+
+	mTwgDOx8Kh6ZDjZfLZAOA3r2FCbrcS0Cgw3xOo7EeHRUGYpHe2LnrteyscTYzbJA
+X-Gm-Gg: AR+sD1096hjrXZCARpbKx80uAfUIpNwpNsgLg3CcnK3t471dTuK8YFFYdX4O5AkG9f2
+	Xp3D5dXSab9QptS2K+itqpS7Y+QtVQmeGURogCkKV1AF1Ju1GPPrOamm+LhnvOsGQBh86INMf2A
+	CasAKW/idM2dKmUpHo2sHQX3BNYOophdWukwACrw+NvqW6F9ThQ2r2PITALexL7OZMW6yfHHMpN
+	kIC1LKLlV4zJ88n8SIItqZiQWzViMxxhd3zEnwO+u7xweiZqYKiCjEYDap6DMTkOM6GGuP6h4DA
+	TNtziKp2WyKIXxDUZHA975FTIbYsCQMP9V4vtjzW2bi+Ky9vTatMluHvw+JDAoC/OJOpfC11LlQ
+	uUu5gFonGix/TilnqEStobfV9pRkUp69Gibqri9aXYsjdG7JGEW8lOPwslw0gVPA1ZjK6EHNzvt
+	G30991LOJiuiKqEXrSDOOr3DkklgXT3S+IM/PzNEgb4xOVv5luE2VViFOMbi7OytpKJipre6Aw+
+	6o=
+X-Received: by 2002:a05:6a21:1b84:b0:3c3:a0cd:9d27 with SMTP id adf61e73a8af0-3c92a5f1c7emr9791736637.26.1785756067818;
+        Mon, 03 Aug 2026 04:21:07 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153ddcba2bsm42463843eec.11.2026.08.03.04.21.08
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153ddcba2bsm42463843eec.11.2026.08.03.04.21.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 04:21:09 -0700 (PDT)
+        Mon, 03 Aug 2026 04:21:07 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 4/6] cjose: upgrade 0.6.2.4 -> 0.6.2.7
-Date: Mon,  3 Aug 2026 23:20:53 +1200
-Message-ID: <20260803112055.3926085-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 3/6] libplacebo: upgrade 7.351.0 -> 7.360.1
+Date: Mon,  3 Aug 2026 23:20:52 +1200
+Message-ID: <20260803112055.3926085-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260803112055.3926085-1-ankur.tyagi85@gmail.com>
 References: <20260803112055.3926085-1-ankur.tyagi85@gmail.com>
@@ -68,35 +68,79 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 11:21:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128679
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128678
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Dropped patch that is merged in the upstream version.
+Also updated branch and included tag in the SRC_URI.
+
 Changelog:
-https://github.com/OpenIDC/cjose/releases/tag/v0.6.2.5
-https://github.com/OpenIDC/cjose/releases/tag/v0.6.2.6
-https://github.com/OpenIDC/cjose/releases/tag/v0.6.2.7
+https://code.videolan.org/videolan/libplacebo/-/tags/v7.360.0
+https://code.videolan.org/videolan/libplacebo/-/tags/v7.360.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cjose/{cjose_0.6.2.4.bb => cjose_0.6.2.7.bb}                | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/cjose/{cjose_0.6.2.4.bb => cjose_0.6.2.7.bb} (88%)
+ ...vulkan-utils_gen-fix-for-python-3.14.patch | 30 -------------------
+ ...acebo_7.351.0.bb => libplacebo_7.360.1.bb} |  6 ++--
+ 2 files changed, 2 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
+ rename meta-oe/recipes-multimedia/mplayer/{libplacebo_7.351.0.bb => libplacebo_7.360.1.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/cjose/cjose_0.6.2.4.bb b/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
+deleted file mode 100644
+index 4e381af340..0000000000
+--- a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From ae40237869ae1db4de7f6d86865bc99820852495 Mon Sep 17 00:00:00 2001
+-From: Nicolas Chauvet <kwizart@gmail.com>
+-Date: Tue, 29 Jul 2025 11:42:35 +0200
+-Subject: [PATCH] vulkan/utils_gen: fix for python 3.14
+-
+-Python 3.14+ has added more type checking. This patch fixes usage
+-
+-Fixes: https://github.com/haasn/libplacebo/issues/335
+-
+-Upstream-Status: Backport [https://code.videolan.org/videolan/libplacebo/-/commit/12509c0f1ee8c22ae163017f0a5e7b8a9d983a17]
+-Signed-off-by: Nicolas Chauvet <kwizart@gmail.com>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/vulkan/utils_gen.py | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/vulkan/utils_gen.py b/src/vulkan/utils_gen.py
+-index 9a97d35f..9b803d82 100644
+---- a/src/vulkan/utils_gen.py
+-+++ b/src/vulkan/utils_gen.py
+-@@ -202,7 +202,8 @@ if __name__ == '__main__':
+-     if not xmlfile or xmlfile == '':
+-         xmlfile = find_registry_xml(datadir)
+- 
+--    registry = VkXML(ET.parse(xmlfile))
+-+    tree = ET.parse(xmlfile)
+-+    registry = VkXML(tree.getroot())
+-     with open(outfile, 'w') as f:
+-         f.write(TEMPLATE.render(
+-             vkresults = get_vkenum(registry, 'VkResult'),
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
 similarity index 88%
-rename from meta-oe/recipes-support/cjose/cjose_0.6.2.4.bb
-rename to meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
-index eb1db40705..b35cf349f1 100644
---- a/meta-oe/recipes-support/cjose/cjose_0.6.2.4.bb
-+++ b/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7249e2f9437adfb8c88d870438042f0e"
+rename from meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
+rename to meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
+index 3a1096bb57..94767730a8 100644
+--- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.360.1.bb
+@@ -4,10 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
  
- SRC_URI = "git://github.com/OpenIDC/cjose;protocol=https;branch=version-0.6.2.x;tag=v${PV}"
+ DEPENDS += "fastfloat glad-native python3-mako-native python3-jinja2-native vulkan-headers"
  
--SRCREV = "8d94c3ad3237ab6a83d2e92fa541542b1b92c023"
-+SRCREV = "10af8915a666b50caa5500cdc3f2523b916be720"
+-SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.351 \
+-           file://0001-vulkan-utils_gen-fix-for-python-3.14.patch \
+-          "
+-SRCREV = "3188549fba13bbdf3a5a98de2a38c2e71f04e21e"
++SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=release;tag=v${PV}"
++SRCREV = "cee9b076f2c63104ccfd497fa79c39a867293ec4"
  
- DEPENDS = "openssl libcheck jansson"
+ inherit meson pkgconfig
  
 
