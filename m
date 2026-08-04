@@ -1,103 +1,105 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D27AC55172
-	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 05:57:26 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10575.1785823045052316852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F0E2C5518F
+	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 07:00:47 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11039.1785826845720751014
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2026 22:57:25 -0700
+ Tue, 04 Aug 2026 00:00:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TnRCj3ot;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2cace91f112so47116975ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2026 22:57:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=XDncRrBW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cbb85186d43so2041638a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 00:00:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785823044; x=1786427844; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1fRo7bZVnmnlfE9IVcjVTBOJJLr/H/a9uTjg02t80k8=;
-        b=TnRCj3otA6m0cK5Smqf4gSefVyVUaHhGLeceabTNnurruHMHsyKMLJAMXWcAxewxgb
-         0HuVtFgdNhLxyzxvChVG7rbqq25wMFNC8JzRB1AuTQ6h9r/JeHsqXOgq2sCnmR8g/gEu
-         7r/WV5ni3Dfb7vJ82vlqt1N2aY6WXy35z2B+z/r9VHZjg2xMKC3xU+YGd5O3jhmtT92L
-         fAosJ8Cld73Uf2OnWfLoF+Stlj88xc/Tv/FaFcEIl2J5QWTgo1a5sswZPGPbMMIQ9e/Z
-         6qzl3smqkFxQtjrYZcjmLOQQKZtcZKBHdeEU/KxKS1mn9NxMrRMV7bOILDb9ERhlogYD
-         N90Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785823044; x=1786427844;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1785826845; x=1786431645; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1fRo7bZVnmnlfE9IVcjVTBOJJLr/H/a9uTjg02t80k8=;
-        b=ARhtjZqpRwoiPix+GbNSIAwqe28FWfJqK5Qp1aQ8iihETalbuqcLAultqTXauPpSNl
-         GO1UaZ0tEgL0vU7Y83E2jq0Cy6ocmEU3uLZ9ZsWUxUlznhXAMSBK+BtZ02rzZ3WFeXUr
-         szi9mXuELX5j3m1iTTMP2m4eIHAqjDswgWwocokTKQj3SBY0nbD3A717ZdEjyjZ8yr7v
-         VxzW5YDzSfmz5SPF5YuONPw3bOB9HKsLL4ArJAPARsrZhqj3YSDY43bIJSe6iCdG8/gC
-         bKDHLPwupiehLLkvf7Z+429/9UeBJlxTvtNrMr9u0ssgvvOSf+9BazzifJ5Z3rVsyffc
-         WR3w==
-X-Gm-Message-State: AOJu0YwdnHGv9PvX+r6m4rB+SYQDeYlNB40OnAyb2Jgk8dWry1G+tuKq
-	DV55eg+xsNhbUgoJZPdw0VrTJdGr+R3CJSEdrKZaAtGhW70CXDrbQxnNzq3VodZd
-X-Gm-Gg: AR+sD12LHmA9P5LXYHPcBa/SZCjxa4QRqPwpE4fc9h9m+L468KpMwziNcZbkvhEgqFF
-	8PTfSF8fDmeAeGdKkOLkCk6cVuuQUbLY+cMmlcIO29wZ3TnUMjz41vbm76pxGDdCcwzEvHDWvRt
-	A9lunSQ98fuqV6wIURGFUp54fmfmhY4LAUp4R9MVANRbeBxRd+R+/UCD3yxIJ6KCbw4Icy6zC8J
-	0EUMBm9ktAMfWQzex8o32IlA8yUkysHeL7nwvi9CzfcOtImJUG2TGea1zh8etMB1+xIL8l0VQS5
-	WXfY9qpsUr76C8yqYWqW54MjGVvN1KFAlGTA8e+Pgzuja7CqBbukvAl0CAawSdddW01E0/kx/h9
-	LSvZ7pt/TqenHbJxc9yuDmW6TtZ2am3O+9irQeoHo+JHZK+fmOY0wo0/SR6yNqPQtDa3p99vbSI
-	NOVj3TEsjWX0Sp5EEjZeEA9e3QQVwj2ZT7okTAwHLl6YQYcqhdBI/ZTBWE3v+hlGIFr7aCs30sa
-	1p0rba1Jy8QURJiP5btvxp6EoZHPEGfHwsKxYIR4tsAa8xdZaz/hP5PJ/Vy71tlx2XrWXQXMdgN
-	sB1bGAQVo9e7weIrcWEV/X34UP4xlZ5txYqdcsijOK564NHggHJdg6R1RMptqNXEFNuNo8O2c2c
-	sXQ==
-X-Received: by 2002:a05:6a20:938e:b0:3c3:b6f1:13ef with SMTP id adf61e73a8af0-3c92a8f5958mr14725365637.62.1785823044294;
-        Mon, 03 Aug 2026 22:57:24 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4e506csm37527156c88.13.2026.08.03.22.57.23
+        bh=PTut7JsgX4PAp9yia7owWt1VFDzlW5rqzW7LKl2bXCw=;
+        b=XDncRrBWqqvKnWRwp5LGOMr07V0CktDWXKrPoxwWXc67iJbfs1JYIZevmi+WkYuUAJ
+         R02G8mEkrth5OiVSPCxFa2BHSvvWKZAyf+gN5BvCb45liSnSejasjnjtLbMJYrTprL/S
+         sbP5RODHWIaht+vsvntgRyCLmJg66xXKwBOhUpjAkMO4s8g/0fC1iw1jJOuMR6VBxfon
+         NITAekQFulMnrbvAvYT/Nauanaub7mWe+pnzTjZQj+xTxFxB/h2pKje/0tNB/p06Ng6M
+         yQNjQRFrMWOn+we0BPY2fVl460+Zxha0c/rx413tZuCE587YwAdfO4kpqOQttSM4WhWX
+         zv8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785826845; x=1786431645;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PTut7JsgX4PAp9yia7owWt1VFDzlW5rqzW7LKl2bXCw=;
+        b=LPI/VyU0ANIShvF66kp0RzeURQ6lgEbwoKMhQ5NPseGmns6ROPG2NEkQ/2k8ycIsZT
+         UicvA7bDvvC0k6dWqyo6CxHZVOXx2fY1a5/O5DtzdLpGLoK3W3UQ3UA5A6BwUA6w9w9u
+         xsyQBJhh1KED0+vO0x9+bjBXMxxAS0zlRbiY7cPSuzKQX0GT+pY3UxCe+cgfEDlMLx+6
+         Pt6ITIgluvnV8xZUnPyiCaz46gD8ou61cVKs9ATClK4dOiJDGfdcX+VxDv9hNZC3/fVy
+         KyRWuJxVM47eP/HeDUYsK+pViKXbhJXy5NO5kqDLhMb+rIHDJfXl0aKsMKjwsxC35qTb
+         Z9Vw==
+X-Gm-Message-State: AOJu0YzanfnRuKlkXwLNL9/QM3syA5eGz0+gcXrGeSwtSfcw60jwYpuL
+	Fzo62Fq8KQ9s1nOSBH/hAvo6V0+2Nui43AeueoAIsTQTqezyE3fN+0A4Pu+M9g==
+X-Gm-Gg: AR+sD12jF9hiaMao6vlsnxR723JxuLoV6I+o+gsCl7WZiIDOswh3udizFSVa+Tq48YX
+	3iQH+8Dh97zroEhUo3ToG5IXCUFNLP9CYrKyTwToVFVkz0dNHGhxlI8xB4FnZrNN3tYQZvfkcz9
+	z1pG/9rZyQCfe3ZgAiKdAzDTlVY032vHTOYy9xl9Q9aYhcJDSWr6HZrhoL2/OHBpzCwhhI6w9ik
+	jJYHD3dOnyu5NNbSCymCBUJFBRwWSJcHEOeeGvu5giwzm3eDle9SCD/Rl5fJPPclfFQnRjyd1v8
+	mKccDu7Na6f+9RCANtL1QoY08kegTE48WQHRfXfqWASdg54LbvC7cJYAwusmqTkEF6OW19HRvaU
+	Tod/Abgxu6C/Kjx4U1nTVt0kbvifbjQGfJ58M5uPIixRKSbBvGM9TWG0706qboH4k3oQeXZNl9u
+	8YjJJCD7K7fCsdQ2kAYBjuFoVoK28CtiRnwsbbdXAQ1A1ZkdXGoev+NipBwxNH4BUOABKdLaJyA
+	Q==
+X-Received: by 2002:a05:6a21:7489:b0:3bf:7498:9cd1 with SMTP id adf61e73a8af0-3c92a89c7d4mr11546377637.45.1785826841573;
+        Tue, 04 Aug 2026 00:00:41 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31586447d52sm916034eec.12.2026.08.04.00.00.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 22:57:23 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Tue, 04 Aug 2026 00:00:41 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH] librav1e: Drop need for a dependency on libgit2
-Date: Mon,  3 Aug 2026 22:57:21 -0700
-Message-ID: <20260804055721.1733701-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 2/4] python3-charset-normalizer: upgrade 3.4.7 -> 3.4.9
+Date: Tue,  4 Aug 2026 19:00:10 +1200
+Message-ID: <20260804070012.3171225-2-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260804070012.3171225-1-ankur.tyagi85@gmail.com>
+References: <20260804070012.3171225-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 05:57:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128734
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 07:00:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128736
 
-rav1e's default features include git_version, which pulls built/git2 and thus
-libgit2-sys into build.rs -- a *build-dependency*, so it is probed and linked
-for the build host.  cargo_common exports LIBGIT2_NO_VENDOR, so libgit2-sys
-probes pkg-config, which points at the target sysroot, and the host link then
-picks up the target's libm.so linker script.  That script names absolute
-target paths (/usr/lib/libm.so.6), which only resolve on the build host when
-host and target architectures differ enough for ld to skip the script as
-incompatible, so this breaks on aarch64 hosts building aarch64 targets.
-git_version only embeds a git hash in the version string, which is
-meaningless here, so drop it and keep the rest of the default feature set.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Dropped patch as upstream[1] raised upperbound setuptools to 83.
+
+https://github.com/jawah/charset_normalizer/releases/tag/3.4.8
+https://github.com/jawah/charset_normalizer/releases/tag/3.4.9
+
+[1] https://github.com/jawah/charset_normalizer/commit/6f7eb9e42afc9d555b53a3129e94b0508154d4ce
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...normalizer_3.4.7.bb => python3-charset-normalizer_3.4.9.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.4.7.bb => python3-charset-normalizer_3.4.9.bb} (80%)
 
-diff --git a/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb b/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
-index 740918bd18..13f417008b 100644
---- a/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
-+++ b/meta-multimedia/recipes-multimedia/rav1e/librav1e_p20250902.bb
-@@ -7,7 +7,8 @@ inherit cargo_c pkgconfig cargo-update-recipe-crates
-
- require ${PN}-crates.inc
-
--DEPENDS = "libgit2"
-+CARGO_BUILD_FLAGS += "--no-default-features --features binaries,asm,threading,signal_support"
-+
- DEPENDS:append:x86 = " nasm-native"
- DEPENDS:append:x86-64 = " nasm-native"
-
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.7.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.7.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb
+index 52c194626b..70dcb9e158 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
+ 
+-SRC_URI += "file://0001-pyproject.toml-relax-setuptools-upper-bound.patch"
+-SRC_URI[sha256sum] = "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5"
++SRC_URI[sha256sum] = "673611bbd43f0810bec0b0f028ddeaaa501190339cac411f347ac76917c3ae7b"
+ 
+ DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
+ 
 
