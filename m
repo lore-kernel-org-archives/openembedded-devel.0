@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F562C561E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3C4CC56201
 	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 19:41:32 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24826.1785872486657493512
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24825.1785872484258503467
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2026 12:41:26 -0700
+ Tue, 04 Aug 2026 12:41:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JwCAI8TI;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-84e0688b7e8so189841b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KXnX+HGU;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-38de840f2f0so176255a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785872486; x=1786477286; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785872484; x=1786477284; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sOtox9xuOteAFEboMtcwbi6rFEIpySpkU/GuiuAcpKU=;
-        b=JwCAI8TIpCUvfbjUwZWt7sASBMGcPVEzbeCqxLZd5cZ/D5OPVFS7PnLHy2YEx8ap7c
-         2uGRxXwggLcHguOdoeYGRpqhZ4eW5+RC7P4lmmGKiZP/LOvlm+2loANu4Bt+Wd6uSrjh
-         jWkcTYjGipcKT3/iB5XUHj+lTZVy6WDi9UQ4HmfLWtO3QlFsqQAuc90KK3UKSPWUlvdC
-         ItQnZIpuPRKzPlJja9NnMqgDYiezxkgg7kGxLo6fyt4FWoT66nzkzrbMkgp5rtY7UYvu
-         qN7YP4kvQ7fHNfnTa5RWDpEnWv4LkSyhRnGShDh3sxATvOK/FOmh35LRJzFXqYn/LwHU
-         VfDQ==
+        bh=r8Y1o47IH8B0G1BAcvP7DpA6BQL/DokPSZyyNATxgDU=;
+        b=KXnX+HGUzt43jO3zDl0cMUEKNmpw9vj79lCjaNECZVImTbCDhVlr2JxIXh8kYl8r5v
+         cHZLGsKbiKnzOU5bZp2N9+5AtdoP+hF/z8BrJcnbA1huWBVj8nT+yW+pKKJ6MxyyPnCC
+         6AguDiF7Vb5394g7fsDACpDRiXLV4paYudXV/R8D8PJ3pcrEVQ+ernkpDhfTuLkyZdCc
+         8lc8HDmSscqwiQy5hxTSYNbQP8+vpz7e+8FOEjqXPKFoJ7bEo8ypB2Nywib6abNngJJs
+         U7mY2D4es5s8iw6k9F50+56UVTIhorXVog+8pAushYBqsYYn0+UMh50ZwPRRlwXqDiqo
+         L2Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785872486; x=1786477286;
+        d=1e100.net; s=20251104; t=1785872484; x=1786477284;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sOtox9xuOteAFEboMtcwbi6rFEIpySpkU/GuiuAcpKU=;
-        b=g3nzRRv90F35Ul36WWCfv6sf329BKk2iLm7Fgr/1p+nfdyLVgZvMBLPfrT98/f3xHS
-         KJGPMllLMMwkKGhMlXd2RHQGLIGuFPc/n4Z8ZUaOm0wepXyMfjZVkWqxz5wlqnSWhX3C
-         XI2EYVkP4/I3AM5ivLsAh+inAqBHlja+t05l89rVcN4ePlsNFZZL762y8F+6RRyPEZQL
-         IHengWU0BunJgsoNRJiUs2DysawCherQ9BDloZmvjxE3rJHbdoFQs4KyfsV07Qn10Fvx
-         Xe4GKFReLYoSyTOdtMfhZO4vY48wSiuE6XXArrGJANA8II3jVolVEzDpxgDSJ4WqP/Pp
-         KW+g==
-X-Gm-Message-State: AOJu0YzSSr1xCR11T9ApwY2VjvuK7RUCPVCnN98ZC14ptHox1Ewzeej8
-	njIrRaXMRh7CF6yvv5UnzVfuehxyp1RC2Qh/rsOFI4ewXCVPAu075Ovfq7K4DqyB
-X-Gm-Gg: AR+sD13AawHfmrXnEEm5e5Ke5iZvzFZL/QuGJHjob+Uv/9+2Z9KfDrmrmE4Qo18m0yh
-	NVPTds56XLO/Qi6RJae3Rq2WQ6LQXgloVhDte1uclXNixQMadTdc17R516DDNmiHCwqXG1O+2oq
-	pRBKUiulIdHHyyomPmds2Qt+ClsZC4nJXs1AMi0T2FkH4/6O0j/gqoZFng5jEK8PxpdUg6dHn9d
-	AQnp/kxo/+azpx2fsf9DdOcZlqz0mizh1fDQtnyIukriBWPmFvDhYkOLIm+QHpGfzpwEXhE0DQJ
-	mMffGbdq8ChLgrUMBaMFekUomgJGXjx3zltt+DJFos/LbPzZJQQ+O8MM9mIC5+BhlQJUSHPkSKX
-	ozP0LxfKsWZytOAKSrpU4DVTi2pgJGvd4eA4wvVziAcMQclrPO+c04AwBCJ25U7+hpGvPAQ8+1f
-	7FluVhr0k5etGDRO23PTrHJ66uRSkrMtR7C4UgdZ5iBZ4PgbfoeFp5eM531YD4/Lu5NGkkfEwZG
-	yqHfNg+oxfJ
-X-Received: by 2002:a05:6a20:cf82:b0:3b4:71a9:cd8f with SMTP id adf61e73a8af0-3cb8603af3bmr1048468637.41.1785872486007;
-        Tue, 04 Aug 2026 12:41:26 -0700 (PDT)
+        bh=r8Y1o47IH8B0G1BAcvP7DpA6BQL/DokPSZyyNATxgDU=;
+        b=cfTuSR37dhCzuHX3a/M8K3p8NegInrQi4SO0qoaTozspef4Gf2NFuosBrHrRXx3MOf
+         p6O0hbVnEij9MmCyAwC5W0JmhUiw9chbhVagcbcMtOqCjOUoiU9A0UthBMCFNEmM/ifT
+         KXE9zYCU9XR1t4Dc9uDa+8gtt8sDNi+f/N+mx26sDkkWTFnx2jFyFECuyhTFpQcXa+u1
+         J0EAbGZw8LhoVBsZ1DtM6fV7AiLku8Qe2wR5ZbkBc4R9T5ba/MfZ6NhFXhCrTVdL9+bq
+         C+YROsIQJoYnE7Zi7mz1AtZCzcp/Dfxr0Xwwnjw75BlARkwnPCfuzqBEn7g4zBdzeeE8
+         Zhmg==
+X-Gm-Message-State: AOJu0YwYJSd0sTk4rXMFOvib11i8rsTy6TjqkfDIIyguJviuPGSsm5uJ
+	Gh1B3m1ucC/J0LiQy/WpF8PWqJ6SV4pc0FgNMlLrXHRsRhCeN7cEsPz0R0Hwfl4w
+X-Gm-Gg: AR+sD11rx20n9mHMWvn7U2Cxv2SBqmCyur/rc6EU+lIDqR+BK3CELEutVUgKT/F+9Hv
+	yMHLrbXXvbtJbjkjcER9U399TGM3uKJO+n1y8CL0CLo7m9e27WCZVzDUkiQwk+VETU62icoir9f
+	oDDqoK2AjqMHiTv7xumBsrwc3DmPwmmQqGd1U2zXEGk4p5mFZUIlgG/1Vu0xLhdLwj8dU+CDwAL
+	e/cGsN7qhVNCZBHBOsMCEhCAWvyEVppoMRL4k7k359pn4Tee3trhBJvdWNG1YkKdWAyO5cnwEaf
+	zXj0dALflq7d4EQMlZlrkxBx51NAIVZJ5sNhHJ2a2dOc4tG+JaYA6Vq9bghG1Ae6uvX/n0hw1+E
+	5JxXRD2bPaKXKINg6JZ76ZVicoo0T0qnOOKXO8O44jv8J3iDtbQXfswF69AdbfbfZVPUZljhiZR
+	nL8s9JPSgtAys1rqhyegGJ4glNE9ErH7sSHxpQyO6vcQjM3bCsqQU+H/4h0/v5474QRLuFVFGLr
+	A==
+X-Received: by 2002:a17:90b:53cf:b0:37f:b0a9:1a68 with SMTP id 98e67ed59e1d1-3903c54b340mr1143419a91.7.1785872483616;
+        Tue, 04 Aug 2026 12:41:23 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.24
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 12:41:25 -0700 (PDT)
+        Tue, 04 Aug 2026 12:41:23 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][wrynose][PATCH 30/36] srt: upgrade 1.5.4 -> 1.5.6
-Date: Wed,  5 Aug 2026 07:39:57 +1200
-Message-ID: <20260804194003.3158916-30-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][wrynose][PATCH 29/36] gssdp: upgrade 1.6.4 -> 1.6.6
+Date: Wed,  5 Aug 2026 07:39:56 +1200
+Message-ID: <20260804194003.3158916-29-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
 References: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
@@ -69,101 +69,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 19:41:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128777
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128776
 
 From: Khem Raj <khem.raj@oss.qualcomm.com>
 
-Upstream changes (git log v1.5.4..v1.5.6):
- * Group/bonding fixes: check value length in group config storage, fix
-   deriving string options by a group, fix getting SRTO_RCVBUF/SRTO_SNDBUF
-   and rejecting options not allowed on a group, and fix a wrong
-   'connection lost' error when sending to a connection-pending group.
- * Fix a stalled connection that should break after rogue NAK/ACK, and a
-   misleading listening-socket error message.
- * Build: Windows-on-Arm64 support, fix Windows installers, fix use of
-   the OPENSSL_USE_STATIC_LIBS CMake option, deprecation warning for
-   Windows+PThreads.
-
-Drop 0002-allow-build-with-cmake-4.patch: it backported the
-cmake_minimum_required(VERSION 3.5) bump, which is already present in
-1.5.6 upstream.
+Upstream changes (NEWS):
+ * 1.6.5: block the corresponding TCP socket when allocating a UDP socket.
+ * 1.6.6: fix binding to unicast sockets (regression from 1.6.5).
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 70dfb6465fcf400af471ffc9af5ec77e49ec3452)
+(cherry picked from commit 2292354019d5374052c66356a4b1b1ebc2221d4c)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../srt/0002-allow-build-with-cmake-4.patch   | 43 -------------------
- .../srt/{srt_1.5.4.bb => srt_1.5.6.bb}        |  3 +-
- 2 files changed, 1 insertion(+), 45 deletions(-)
- delete mode 100644 meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
- rename meta-multimedia/recipes-support/srt/{srt_1.5.4.bb => srt_1.5.6.bb} (90%)
+ .../gupnp/{gssdp_1.6.4.bb => gssdp_1.6.6.bb}                    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.6.4.bb => gssdp_1.6.6.bb} (92%)
 
-diff --git a/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
-deleted file mode 100644
-index 8c91e3919b..0000000000
---- a/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 5a71ca427a10fe89ad48e9dbb6641e4403d81fa7 Mon Sep 17 00:00:00 2001
--From: Alper Ak <alperyasinak1@gmail.com>
--Date: Thu, 10 Jul 2025 13:30:25 +0300
--Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-- compatibility
--
--Fix:
--
--| CMake Error at CMakeLists.txt:10 (cmake_minimum_required):
--|   Compatibility with CMake < 3.5 has been removed from CMake.
--|
--|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
--|   to tell CMake that the project requires at least <min> but has been updated
--|   to work with policies introduced by <max> or earlier.
--|
--|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
--|
--|
--| -- Configuring incomplete, errors occurred!
--
--Upstream-Status: Backport [https://github.com/Haivision/srt/commit/0def1b1a1094fc57752f241250e9a1aed71bbffd]
--
--Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-----
-- CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 328a433f..448d6254 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -7,7 +7,7 @@
-- # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-- #
-- 
---cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
--+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-- set (SRT_VERSION 1.5.4)
-- 
-- set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
---- 
--2.43.0
--
-diff --git a/meta-multimedia/recipes-support/srt/srt_1.5.4.bb b/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-similarity index 90%
-rename from meta-multimedia/recipes-support/srt/srt_1.5.4.bb
-rename to meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-index 72e9ff658d..b4ae8bed09 100644
---- a/meta-multimedia/recipes-support/srt/srt_1.5.4.bb
-+++ b/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-@@ -6,10 +6,9 @@ HOMEPAGE = "https://github.com/Haivision/srt"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+similarity index 92%
+rename from meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+index 94679ce28b..944a4ef16f 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.4.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.6.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
  
--SRCREV = "a8c6b65520f814c5bd8f801be48c33ceece7c4a6"
-+SRCREV = "c63c311e88aa55e430e3b7d94b89d790994f88c4"
- SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master;tag=v${PV} \
-            file://0001-don-t-install-srt-ffplay.patch \
--           file://0002-allow-build-with-cmake-4.patch \
-            "
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ inherit gnomebase pkgconfig gobject-introspection vala gi-docgen features_check ptest
+ SRC_URI += "file://run-ptest"
+-SRC_URI[archive.sha256sum] = "ff97fdfb7f561d3e6813b4f6a2145259e7c2eff43cc0e63f3fd031d0b6266032"
++SRC_URI[archive.sha256sum] = "767d2275254ce0efeaeac64419ff9f4f0ad470d134ef672f5c556b2abb786bcb"
  
+ DEPENDS = " \
+     glib-2.0 \
 
