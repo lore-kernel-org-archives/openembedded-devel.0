@@ -2,71 +2,71 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10FABC55172
-	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 08:58:58 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12049.1785833934113160768
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BA1AC55172
+	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 09:11:28 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12426.1785834678487446207
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2026 01:58:54 -0700
+ Tue, 04 Aug 2026 02:11:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Et57RCjD;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-81e8fa1b8d6so56276017b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 01:58:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Jbcitk5a;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-81ed000b507so38554997b3.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 02:11:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785833933; x=1786438733; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785834677; x=1786439477; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=91srrBUeWZXz99epIubD1Klrgox2jxRRxzC1yHESDfE=;
-        b=Et57RCjD5/Tt++8SsPvRFZqBSZgKH/A21UnGfE4OTUZCgypJ2bFpH0vm1JnIb6aiDg
-         lU/NqV0lySobOU7mlZuBzwddfqaFOnVwddyqOibGXqJhdtw6fP0C90DGuHeHW0CjzXNl
-         nD0AeeAnrEWWxL0BB4hAHT5T2hOe2uLcVhGgl0mHODMy2wEwv0a3ZyqMWQB4W0QBfS0Q
-         62XJLLhecv0DK66Y8TL721+zz+x0yVJzZy6vFhX3D4PnMGvg1S90pWjIPCQ29i98ytuB
-         0jpSo/8Opa/QGZC0Wtz3KnuWHSE6ugxuYqp7aC7/S5euoCMskLjNaSPkKvIhOHl/Z67w
-         dsGA==
+        bh=FV3tQxJ0vTincE0pewggijmAr50xIV416MFtIu8X0qY=;
+        b=Jbcitk5aJMovIRJrYFL9OUKrMQTZH/g7wLMr4hWFjrRZK52W9ZX9bCWDQPaEEo30m0
+         Ea1zK35kU5GoE1MpVx1H1uOq1ro0J5P4lNxCC2rN7ail65ArE0VggtQN8V/yBqo5SIjp
+         DgMAVVT33dTDxWITCNTWRXe+7MgdHV4FHJ/M0ZUXfjUlqZ+WyKNjHzIs5AzM6mQvjeiT
+         wZNkWzDBUsbBbnuf6sTLP4hnzw/R2QfWYRY+WTj0brDbtSKnXDOs66xkfui0IJW3/6s9
+         aVgeV8znxLOoMvAIkHOR/yXLlKzT2Mp8c+7fDb04iqJ4fDqYKPyC2T3zz4CCpFtuA3aH
+         nq6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785833933; x=1786438733;
+        d=1e100.net; s=20251104; t=1785834677; x=1786439477;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=91srrBUeWZXz99epIubD1Klrgox2jxRRxzC1yHESDfE=;
-        b=J+9WiAduS+YerTRtTnxhHZ24fzK2FTaMNeBqbUVltSblkO2pmuDGeIDNRL2OhGtgQP
-         fB5NlH/Y1WGMulbiCcmK2+BexAj37voRlMKsxRWPg2XCyqnfwIPztqKHrrq9sTdIh3TS
-         VH4aN8vFrRYA4sNAR8dd3li2/EI7doclWDlWP0YRs+KGIoXk7OQN3yrJ3HPDNZi75uoc
-         zHg9AISaUgNWMx8bKaneSO8apL5rDakaKW4p8e1ZYjrloY/EucuFaMHzoEDrrgqD1ewe
-         gCC6Rr9K7Ypw6+B+z60YD+3eNIDSBGSA4rnQPZfBNrIKHpMUt/SpBDH24PpU7xp7l6Qc
-         xbxA==
-X-Gm-Message-State: AOJu0Yyv33NGXrU/O5ydI8SUhxQ8MbKLPl3QRWk5EUKUuUO19yaq4OMZ
-	CoWHquCakOKWFCNGNcuhHH/9NcgsSmawLMPKvE5IY/+lbVy2l2My3R41nBEBwLY4
-X-Gm-Gg: AR+sD126TMT5DGqgmclKvzbdvE8xANqJQMtUNF8sp/SpKfjRN3eCi4byhNDkV1pLGoE
-	SrsMKnGKrufwRz90BK7TsNCxlOQuVaKxdNaC6ZLrKmUFs9F6shTWMRiETDrReLT2ujci9C0zI7o
-	CUFN5Hsk8XhVuoS2mSUsGWffTlwX+lEBA5NHM7TGjCZNQbgectw9+XF/8fcZleOvfjFv1m5cWXk
-	hiDjxypoJHHQJbXj3A6DBSM1QSkXmk11x6snImkp2HN5M7fZOqJr+9GfT9wFbjxFD+AccKG63Lr
-	wBk5Zglgg+HLUsE/+0Uvxe2jbQwqxOOI7yGYdHf/a3Rkjgk+gR6aY2ubx3+pOW7f/253X2cZ6Zz
-	5oih5yjqKij/8Nflfm8YotuBBcgxUlue4ZOQDFjAyVaIW3Xs9j0PXUAcwbMhcUg1T/eLD9tETzn
-	vjc3+ehVBDzOhxHTOpjBJNw0lroerk/qGx1QrnSzUnkE7wtOUqOO1GDRx64Ww7/8ngulDiKFjg7
-	7C6CQIbcbfGihhE3YENGpKK58hQHEc8A3BAUTjkwrSdFdCipiNcE7hrtyq8QnHGBARAsPidZ/ix
-	3dtJ6YekXxKJ
-X-Received: by 2002:a05:690c:6c13:b0:7bd:cf35:e33b with SMTP id 00721157ae682-81fd4b372e4mr165757377b3.17.1785833932799;
-        Tue, 04 Aug 2026 01:58:52 -0700 (PDT)
+        bh=FV3tQxJ0vTincE0pewggijmAr50xIV416MFtIu8X0qY=;
+        b=ku6EZ/Vd7iU2EzM0RpLHz70KLgwOa2FluS5OUiC9xaMxMtw7MbMGiWYEG8PJCJFFLU
+         PkNY+sz0/D2KxOCkdEEms032EYeg4sR7BW+1y6qmq5ThfEJXCzA64h2RC4CSc1Wishy1
+         PXxwSUgf9q/TcRS3ABMBbQUOG9H8LUTPZb2k24NyMaXIOzr+5LJTEFkz/6al6Lka4kPU
+         yKB2S9ycJ8R2KcJx4kJoFNGTHBEBO3KrATl451u5eaLRBlWhPHKuRehyQhebY6Xi6pi+
+         qGX2DFIwhgM8czSRVcGp+fDeW/NEUcnK+HaFvhEd6O/DlvFm1KXX6IMw2hylQo4uOXLq
+         ASCQ==
+X-Gm-Message-State: AOJu0YzAWn7Ysc0icbaAm/Gqtu/uWQniE4ost/hk4/XchwS8dAJXlCIx
+	khD+AavgAytfJQLSKNMgP6qOTuzyDWn0TDbuXvBU6Wy4v6OWAtQm5Mc6/H9ggbHh
+X-Gm-Gg: AR+sD12yqVJXS/BoHJB7ZwbTJXX4NmwcLe1ERuo5RSevGoWw4lg+sXEwr7BAQBZj4cY
+	+vWaPZCqoNZVl1UnUncIxsth5GK5Nuujq45b5GfONPG5+B8byT2noyYFlqQ05U+DHHnwJGAEgd5
+	cRvp4cCclubNVw6T8l37sbtNHhIygU63HpBHXiNUyu8gUc/7EluZgvPkGUd1uLCe0rXK918eVCN
+	50nZepnVEhO+dL6p2GblTQ2CkSDvQgKlvPbVq5FiVuGRKGolfG4uJG3BzEkFw8aFz7MD19n0Mid
+	j085HlRycMlIuj8V11JrPCsjqRoDsYx6q+yQaSAS5A6LIgNXczgWHNUfjf/UUWYEOmagPzJrbpJ
+	xzdRUDZidnNaymhmgoGDdjVa02e/JZ6btyuWlsOBLch7Z1zfbiIPaXTqLcJsXBhlatVGysC73Xy
+	jtKwrE6In4w5rFJqiRk4TyFEhZ/1ip11KlWwAnEhCxRJXXDn3s071nCSJnXsgMLOjuIp2LXHpKl
+	VlIc95VwhItuC/47qov/s8qWIJL/hBYbhRPEuJH74IiSfSyMpKIO0XEK3QrvRBw+lwhLGJ3rx2r
+	/kTtimc1HirUrXVxMrbvbl4=
+X-Received: by 2002:a05:690c:6706:b0:80e:5236:b944 with SMTP id 00721157ae682-81fd4a4d080mr164058987b3.10.1785834677305;
+        Tue, 04 Aug 2026 02:11:17 -0700 (PDT)
 Received: from localhost.localdomain ([71.54.207.93])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-82013487b13sm1729737b3.38.2026.08.04.01.58.52
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-820131d8bdasm1956427b3.10.2026.08.04.02.11.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 01:58:52 -0700 (PDT)
+        Tue, 04 Aug 2026 02:11:16 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH v2] thunar: upgrade 4.21.5 -> 4.21.6
-Date: Tue,  4 Aug 2026 04:58:41 -0400
-Message-ID: <20260804085841.2850979-1-schonm@gmail.com>
+Subject: [meta-xfce][PATCH v3] thunar: upgrade 4.21.5 -> 4.21.6
+Date: Tue,  4 Aug 2026 05:11:03 -0400
+Message-ID: <20260804091103.2883650-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 08:58:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128741
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 09:11:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128742
 
 Drop backported patch which is already built into this new version.
 
@@ -74,42 +74,12 @@ Changelog: https://gitlab.xfce.org/xfce/thunar/-/tags/thunar-4.21.6
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../oe-npm-cache                              |  0
- ....18.bb => nodejs-oe-cache-native_24.19.bb} |  0
- .../{nodejs_24.18.1.bb => nodejs_24.19.0.bb}  |  2 +-
  .../0001-Properly-guard-gdkx.h-include.patch  | 37 -------------------
  .../{thunar_4.21.5.bb => thunar_4.21.6.bb}    |  4 +-
- 5 files changed, 2 insertions(+), 41 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-24.18 => nodejs-oe-cache-24.19}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_24.18.bb => nodejs-oe-cache-native_24.19.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_24.18.1.bb => nodejs_24.19.0.bb} (98%)
+ 2 files changed, 1 insertion(+), 40 deletions(-)
  delete mode 100644 meta-xfce/recipes-xfce/thunar/files/0001-Properly-guard-gdkx.h-include.patch
  rename meta-xfce/recipes-xfce/thunar/{thunar_4.21.5.bb => thunar_4.21.6.bb} (88%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.18/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.19/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.18/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.19/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.19.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.18.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.19.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.18.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.19.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_24.18.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_24.19.0.bb
-index db3cba1a75..4ef05cc623 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_24.18.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.19.0.bb
-@@ -35,7 +35,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI:append:class-target = " \
-            file://0009-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "86d40d594bbdfcf69009a62fdf43cb19ae72b6cb5822d2bdd8349c5a1b2fa628"
-+SRC_URI[sha256sum] = "f6d95e10a0431ee1067fc6aabe9f762908b4716dd35324e1ddb4b1466b76659f"
- 
- S = "${UNPACKDIR}/node-v${PV}"
- 
 diff --git a/meta-xfce/recipes-xfce/thunar/files/0001-Properly-guard-gdkx.h-include.patch b/meta-xfce/recipes-xfce/thunar/files/0001-Properly-guard-gdkx.h-include.patch
 deleted file mode 100644
 index 9d4afc7167..0000000000
