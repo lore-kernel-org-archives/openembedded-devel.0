@@ -2,65 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EF8CC55822
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5EEDC56202
 	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 19:41:42 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24831.1785872500990963479
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24829.1785872493658761020
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2026 12:41:41 -0700
+ Tue, 04 Aug 2026 12:41:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TTO/s2dB;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38759bcd877so188516a91.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JP6d0gIc;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cbe6295f05bso1156268a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785872500; x=1786477300; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785872493; x=1786477293; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GvDfQzOnJPfXHYBIG50/06ZqE7YRSFxf53ya0nVch90=;
-        b=TTO/s2dBhzNQbvb2HyaqRVw4QdV6QbTEMdqbVM1ZQnCMXIefjfAh6/01Ta2787R2ez
-         35a5WrY+NzL5ICtcnyuvvr798ejHMF4RxXBQb4SwDoWGMKCPoPkla0NOH+Jyh4vhyCCZ
-         QIKoIB8UDm+3fEEPgRTzq/HBXKdUwM+RyUCu2R3Xh0iw6CWasrmoR/kgA+1iwbTxd1EC
-         GFkIJYBhqGXbb5CL+U5eADH1rRI60NM4xwMJgoj6EoBOawR3baxFHoJF+ycKeF9/D4q8
-         CVbSUxNR+LlNp/laYQr4L9uehKVs/q/150lI7Yz4qO+RInKPsT9uL3Vkz3YKt01/sIkG
-         aykA==
+        bh=uY3a2w2G4lSrPrwFVO4KCImk33jszD7GbfCUOwhFvLA=;
+        b=JP6d0gIcRlCsScLLEczX2UwiyJT/N5CI6i6aCX/HX+lu8ZioIs4fk3qRFEO/QjI1xU
+         InFwmASAY0izt+7/GPnzhdhixphUFV2efYRmhJ1JB3LGFPJfZV3R+SNHNC86YxmlkjEu
+         A1WpZFINUMCtudAl7ugEGXtimKiSVGh67hu057Iy7g9lc0K/v9stRocCk4BxYOg+TPk5
+         8zeZUX98JjwIIKEMNbqsvw7vu18p4XKZbB3+cdy/gqCUedpqzDTpEhCD614BYOsfMbIS
+         XY0bD3+wmFxGKlOMTSLkomuFBBhz2f94Q+CtOhEGNtsBcP6u15SWZaRTYBe61REXURqB
+         hpnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785872500; x=1786477300;
+        d=1e100.net; s=20251104; t=1785872493; x=1786477293;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GvDfQzOnJPfXHYBIG50/06ZqE7YRSFxf53ya0nVch90=;
-        b=ahSskLCvkunFH13r3XAdBq1YOtKnEfXWBBhv7c6/D4Yh/EXPA+i4ApPpQVqxd2QK6K
-         4IQif9QJNk6DQaFcB/TheY+4roW00th/2TCJ/jCgkZi1ncGWN2WrO003kX0oHoAhVobS
-         k3bm0l7KQhzDcYdeo3LX1u+jtFuXA8B52NXWpThYqoY0yrreluZbYCih1XEn0YhZcKsn
-         7xZ2y5mfji/FzLE37ZGIvzqGqshj4UAyK5y+qDLALSva3RB3LmwXKEcNfsXekuIiQLqd
-         XaR+uUoAaD2ZFruTuSuVGw/HOZy6JCql/x3SUJf7tPTE4nzDtCHfjLWuhJWQsQho5ZY7
-         B6eA==
-X-Gm-Message-State: AOJu0YwuXL388JA1LhRvzHWpv8bik0mNC2rQfNaF7J73nAJID19ppLXt
-	Rsyl4ajHLYzSTpXRdDPZcfavsY78vKJkHAcKLc7CGWi1YuSaZUeY8QwtANd8KatX
-X-Gm-Gg: AR+sD13Aa92oSI036hzwPdR3TbheIBHrLTNd5x1Ijq+lcl+CZzLj/PV/XU6b3gEtZ18
-	OHSQKnrWDHrB4R0gpLEJyc828scVQ5+MKS/7sqPDknhUtrFAajFkvcRjHQORXMPx39Lg00E5BvA
-	Pk+LiWsqV3Ibzoi2ZX+ROHKuGdn8luMYHHSUDwphlHJ8czjig5iANVipglUmWivrNvC9rCZ4f/y
-	VbHcN7I9d3xqUf8WFT0peHgr29rcDMRTak0QBW1TkVyVqInaLoPAY1/goiOpwZmCpwH7b5KEm3n
-	9RRDZHxGLUYUNOkMb3uonN5kYr9zXI0fDTm56SdK5ccryWJrH3GdY+e8aOeVqXOkjs4Lr8rY3l4
-	3aSyO3P1hYdGWu+r9O25Xeka1/vkXVD65/Z/UGXwhpwNAp4F5pzHtm0V7ssy892qGAnaX9p4LaW
-	5tuJj98uK2juWILBpDUSGMuCYWFoUTtYYfmlkAGnOA6Yl5OOeBhF4k0SD2QOpTLD9RJ0w5EY3Xn
-	g==
-X-Received: by 2002:a05:6a21:6b01:b0:3b2:924c:566e with SMTP id adf61e73a8af0-3cb860767eemr1036060637.36.1785872500266;
-        Tue, 04 Aug 2026 12:41:40 -0700 (PDT)
+        bh=uY3a2w2G4lSrPrwFVO4KCImk33jszD7GbfCUOwhFvLA=;
+        b=qEO4ZmA17ZsOE68Y73/noQ2Zib4OgIWBBTK5FAuljFncKdgPgpurW9FQzCZ4Tl3mDG
+         SlvPSJk3P29xD36UBo+Wo6Vt37rklblYxPmg7JLwrqsEibcq533QZBlxPUKkG+bY1BWe
+         5Qqo2w4nOStS3M3JpdOeCkai21+UoHwMvSlaj3uw3lGH5jfEBdrbhuX7+1DmYPxrYXiE
+         J1hVRqZKuV5NhFr1G7+lPhMEqOPa9Ow/JzGOsTZs2TujoZk8SfY33hffYyvoNZfJMgFy
+         oaLg8bbo/pnugmLAOsVMtMdGW9x10Pq6KFvNRoB3+DPivShTP1mB2WvACNvcX83C9Aej
+         l5PA==
+X-Gm-Message-State: AOJu0YzMAGc7Ifi1BnTIQKnejVMJ/7J/akxjIlpbk0rHEzt+aBFrO4rp
+	krrkbblfOHNdP3UcrpBi+Usg8+5BhUIJu1kCnzmyf4wvMTQCuk9fr2TqVl4eanrm
+X-Gm-Gg: AR+sD132/Ivna8BsYD2Bx5jfN4NVt+jtrIbHBmXH2Pbhvqv9DRzYq8hwFr4Jvc5MoXA
+	F6LINnZ11/0OYDWBcxk/pNcG3TYnrDCmz3KdS2wsqnX4yVNuDxzgZw9BIeuwLUj1/G3r1YeTEKD
+	hcFleQ/I0cT+SojG99UAs161p3NerdSEkPkuw4FaxCdrO8jFXXaHVl+PefDC+e+uv2fXSWgcPyW
+	n+Xj636ojMX8yvzq49oW3ZMcb1F0Whwc7rgHlV6jhGMFrJkupP55qJnbg4AS5U9oxoxwLSk7RJt
+	byX5lKW82KA6eS3n1QNaMGnJitB6qLo/WP2fj4KkumHgZaW6HKNGEW+ftiD1QvUrUJ46LRPNYu9
+	ZdVOBMKknSOSYTKOPpYj1FAEc0qRUS85s6PJXdjtfa9jWC3qaiz8yAn/74gFHpUI49faWwmTEb2
+	4/VYukC2nU9SQ01rDKDput9V0z1awzNmwI2UFVEDnD6eZV3HvOBqL1I96m8H984Gl/Sm4v52cNo
+	e6ZJJN/Dn4u
+X-Received: by 2002:a05:6300:6708:b0:3bf:8a0e:dd99 with SMTP id adf61e73a8af0-3cb6c829888mr6042619637.17.1785872492886;
+        Tue, 04 Aug 2026 12:41:32 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.37
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 12:41:39 -0700 (PDT)
+        Tue, 04 Aug 2026 12:41:32 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][wrynose][PATCH 36/36] python3-rarfile: upgrade 4.3 -> 4.4
-Date: Wed,  5 Aug 2026 07:40:03 +1200
-Message-ID: <20260804194003.3158916-36-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 33/36] python3-faker: upgrade 40.13.0 -> 40.14.1
+Date: Wed,  5 Aug 2026 07:40:00 +1200
+Message-ID: <20260804194003.3158916-33-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
 References: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
@@ -70,36 +68,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 19:41:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128783
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128780
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/markokr/rarfile/releases/tag/v4.4
+https://github.com/joke2k/faker/blob/refs/tags/v40.36.0/CHANGELOG.md#v40140---2026-04-17
+https://github.com/joke2k/faker/blob/refs/tags/v40.36.0/CHANGELOG.md#v40141---2026-04-17
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-rarfile_4.3.bb => python3-rarfile_4.4.bb}   | 2 +-
+ .../{python3-faker_40.13.0.bb => python3-faker_40.14.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-rarfile_4.3.bb => python3-rarfile_4.4.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-faker_40.13.0.bb => python3-faker_40.14.1.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rarfile_4.3.bb b/meta-python/recipes-devtools/python/python3-rarfile_4.4.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-rarfile_4.3.bb
-rename to meta-python/recipes-devtools/python/python3-rarfile_4.4.bb
-index f051e63b62..2229dcfda7 100644
---- a/meta-python/recipes-devtools/python/python3-rarfile_4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-rarfile_4.4.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1916695551f7eec48dfd97db9467b831"
+diff --git a/meta-python/recipes-devtools/python/python3-faker_40.13.0.bb b/meta-python/recipes-devtools/python/python3-faker_40.14.1.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-faker_40.13.0.bb
+rename to meta-python/recipes-devtools/python/python3-faker_40.14.1.bb
+index 97f0e6e8f6..572308c6d9 100644
+--- a/meta-python/recipes-devtools/python/python3-faker_40.13.0.bb
++++ b/meta-python/recipes-devtools/python/python3-faker_40.14.1.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
  
- inherit setuptools3
+-SRC_URI[sha256sum] = "a0751c84c3abac17327d7bb4c98e8afe70ebf7821e01dd7d0b15cd8856415525"
++SRC_URI[sha256sum] = "b12b657eaa78c99c138b45e77167c9f42309ed1cc40255c5e853ef3113fcdecc"
  
--SRC_URI[sha256sum] = "0d8b5a7ffb9f8e9a7b002f2398905e4420c0cb373e799b48e48f418db9c8816a"
-+SRC_URI[sha256sum] = "b7d29d671223cdc80e8b992df212d152ad88e6c961d4426c3fb2fefe8dd86fdf"
- 
- inherit pypi
+ inherit pypi setuptools3 ptest-python-pytest
  
 
