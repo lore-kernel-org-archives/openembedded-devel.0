@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C1F7C56201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FEA0C55822
 	for <webhook@archiver.kernel.org>; Tue,  4 Aug 2026 19:41:22 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24820.1785872472970606841
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24994.1785872478155154800
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2026 12:41:13 -0700
+ Tue, 04 Aug 2026 12:41:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Cxg0CeMf;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-38fdeaed181so212605a91.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=mFCPxKKq;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2ce98cb8165so3166615ad.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 12:41:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785872472; x=1786477272; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785872477; x=1786477277; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=r7xFgi3KX+SrPIJzV7AvAmvcadFnvHZQ9EQbZ+jqnPc=;
-        b=Cxg0CeMfZbTOYkdVFO8TZPtdtlBhQ5xgSKclKrGnmaQFO0RvJGWIXhpM8rXD7oWsB4
-         wzQ5Q6Ff7Xiy7y2DlbBWtNgmIkQDCWgyfpvDbzMg+hnNQLfcgjhJqfAYVNJBKvHRvBwf
-         m8W0sfr530S4us1pLfQyzfg03TMc3wbvhOLt+YV020B0sDIAy9aSO1m9VTI8TIz8ujZE
-         T+b1+ikbHE1bXGqJxxWOTLQSV4ZpEPvNGkqVI2OrQVuiAb46betfqVWXTsHYtzmvmO1m
-         mixp9dkdhSIRWBW4w2G3e+g062t/nRQLmSVP6EbToTZ/mfAkjSZmlhNLyhnMLVTB9+LP
-         D7zw==
+        bh=KSmb2sweWSnDdUYMFIaRawnny5PQgX9bF/EaFCgLG+c=;
+        b=mFCPxKKqxffzV8C+GGoLtbV/S5i3q+0xJ0v6Ysrjh0YUxSWMzA75dtTJBbXRHTrsB9
+         +UFG8kX/DSRrZDGFPfqsLpQ8ZW3nsQU9+2aD351AshzdqPJFix4aM/w18uQQAHw9NZMS
+         fvCZmAzqdRy08soyyLsba/yoTKeJjBejdxHO0rQmlx5xhtv0RmIKiSHM6ehxkrZaTf+5
+         1f7JowdyYfzCJyLeSaoz/0D2auy87dIOBq53uncgGqTwrWL5vNiwz6XPbQxuuhQ7uwS1
+         b6iY1XUGKnTapkv9dEyZUNFSJybVrUsa9BKNlj9ZzXvuRqvB4HNSOoiELW39/OaGe0py
+         J+oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785872472; x=1786477272;
+        d=1e100.net; s=20251104; t=1785872477; x=1786477277;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=r7xFgi3KX+SrPIJzV7AvAmvcadFnvHZQ9EQbZ+jqnPc=;
-        b=Sv/gQPRbGb1lSuh5rMp/VjgHNzpxkrUOdxoWusgFesyAglKoCLTr2AvM71aBTC6zjH
-         U4YPFXNzPNhe0VyxRL8Gjcd8GtdG/23uQrpGKxSwdtGAfLlwg+tO3cHQtefVKXPK6MYt
-         Ug2caERHp9XDtFUyYHz3FxijxzTNNSi8FY0utONuX62oOh6wHi1K18HjYlJCAG+h+UuD
-         hXIro5ltg3pvO+Ylng1WMpEn3pThL0+C+KC7IcJ8QC3LcTbhvQbsl6kcUQ82uETXixd+
-         4168SxCZCMIT97ns7VHNQ3ezIEfAXdBY1eAI03uNCwphLd01P0uLiZ6UW0KDsZJxn97y
-         zmqg==
-X-Gm-Message-State: AOJu0YzCZiIOGdnyvO6a7CDnzbvoy53Cmw/JNT7XsTkIgwmOvzbGUXK4
-	oLQaOBZVzxbRwCtp7lKLxpmmE60a4vThg/wSdey6OB74wuUm+leKk2E1koEWbhbH
-X-Gm-Gg: AR+sD11+vX+gHnYRil+jHa9a6Z8TX5v3IQKGmVtgVPovjHHohNOPZEJ+u5C9Uy5dTy4
-	g4pLZ3vn+c0sTL5bSO2zWNXP/z2CkYe0LI2AjKXdO2WR1M7wXMpXoTMGG+oqw0xo8PQnnKb4xnQ
-	pgmxChuH+GVulc/5/PDjAgYUElXGERwglxWpYyEbbgPydobY7SGtA60qRVcdeUGEtclFFTVudyo
-	D0oI5U35u5qoaS/3hYJm6C7BRhs2s7UYI2lgNBORD10kdCdWyyotm1EQKXhp3qdrRvNiGyUTkhC
-	42lIqpZR9vRHpKkQ3Kd5+NlbRE5LN8bWD+l/jg0KnBOYdF5+I9SDXJrV297GOpUEp9M3rYd93Ez
-	UpYJpGmIN7uzYEBEsxDHd6QPp9SptW6iWgXb/sshwVrZXkPpAYwE3GbNSY8ocCR0yJrCakQXB0V
-	Rdw/n25aHH0wcaB0pqYXm/HLvq8vj7Ns4NBuXP1ZZ1MKgJ38wmWPVje850OLnW2hKi2EEFenNUx
-	w==
-X-Received: by 2002:a17:90b:540e:b0:38e:6a30:4bbc with SMTP id 98e67ed59e1d1-3903c681346mr1277915a91.21.1785872472305;
-        Tue, 04 Aug 2026 12:41:12 -0700 (PDT)
+        bh=KSmb2sweWSnDdUYMFIaRawnny5PQgX9bF/EaFCgLG+c=;
+        b=VNFjVji3CS0nDF8+qu/gnlcPCbiaMh7+YDzzm5Ri+y3MkRO5KyVQB165fDr+XYmt2K
+         YL8bovlGhQmrDXUfNTG+q1Q+4SGTfbY/fPEN9V1evyL4DZ7kIVXkTmypLJR/Jo2G1sJK
+         Ba8ctM6NVM7XOwFtyBnTF9uS7VzARJm/1xlsEXuMPzT/JPeIdsdOOYIGXyyPKVUVagy6
+         6/CKQi4poy4Nma3+8C+LeJFKsFoEf1+wLZJjndG0TXP9dHfDIR/pAuslWJW5GqPNzcsM
+         scVtv1wYOSTDA2o/W0RaQX9NUEGWo0Amz9QDdvE/yDRo2XajXjdY/3k+xC/Sc60VC140
+         rt9Q==
+X-Gm-Message-State: AOJu0YzsEvE8ECeJfgINApAtWcmQnrbRFVFiLMArgiaK53hXqhEh9BoR
+	D5ActRuZkseGyHbsB2Q77N8MRtoPP9fOQzJspzhEWldt3VTDtAw2jBhjdfsp0FJK
+X-Gm-Gg: AR+sD12YVKu/LI5MnTJZvZpVzdudcMttOUsXVyaiqdPLDL0CsGSjLZVrBWlu1BTfQ22
+	Av/5QFssrfG8giGz8mE6OlqCSdxymJnwsr6+XScsBmxenPj4B9LcGX4YCevUQ3zT9xxrR9F35gN
+	KXwt8hN/OGh36Mqp+u6R12jt3ntwWPPflYT6jKP6dIN3YcZV9fSzAuiAEWkMsjYpvkVk3gUM+it
+	thNLVyhe0jas6I6WW7I+ecHAqsWejChUX9LVa8Vit/CNMyn/IpgzHdY1RdDgAlcL/+yUrtJQdih
+	iTyvCNf0eLkxtHuVYzvmrSwJC8n/oVwCLzEurX4CpQt+tkwWua12sYFzKQM2FFJ0zrWsSQNRGQv
+	YweSpczrgDWEGArulmJxy7WPuSrQ8JSFxEFqzx5SeA5YMdpHkdfKVlcL3z8cwSQfRThWJNLWl4F
+	auIzJVTnzSxRihhM+0htfz5uWigpepoy/FNzemFZlNH/B0rb7wfqDbAXmUdY5MSyrdElq/xG9k/
+	JLSIyx6TD9c
+X-Received: by 2002:a17:903:1208:b0:2cc:ac15:ff4c with SMTP id d9443c01a7336-2d08aa64448mr52632715ad.8.1785872477436;
+        Tue, 04 Aug 2026 12:41:17 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673b7f4sm8156417eec.17.2026.08.04.12.41.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 12:41:12 -0700 (PDT)
+        Tue, 04 Aug 2026 12:41:17 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][wrynose][PATCH 25/36] fluidsynth: upgrade 2.5.3 -> 2.5.7
-Date: Wed,  5 Aug 2026 07:39:52 +1200
-Message-ID: <20260804194003.3158916-25-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][wrynose][PATCH 27/36] libupnp: upgrade 1.14.25 -> 1.14.31
+Date: Wed,  5 Aug 2026 07:39:54 +1200
+Message-ID: <20260804194003.3158916-27-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
 References: <20260804194003.3158916-1-ankur.tyagi85@gmail.com>
@@ -69,44 +69,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 19:41:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128772
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128774
 
 From: Khem Raj <khem.raj@oss.qualcomm.com>
 
-Upstream changes (git log v2.5.3..v2.5.7):
- * Security fixes: heap buffer overflow in the MIDI player
-   (GHSA-976m-35rw-h3m6), heap overrun in the pitch_bend_range command,
-   DLS ptbl/articulation integer overflows (GHSA-r4mc-v3p8-pv47,
-   GHSA-hp72-35pr-6h6r), SF2 DMOD unsigned underflow (GHSA-rmc4-c8hw-455w),
-   and a heap overrun for DLS samples (GHSA-59ph-rx8r-8p4j).
- * Remove systemd lock-file gating and add automatic shell port
-   selection; fix big-endian cpp11 path; fix partially-uninitialized
-   fluid_sample and assorted DLS 'pgal'/sample-validation fixes.
+Upstream changes (ChangeLog):
+ * 1.14.31: fix for CVE-2026-41682.
+ * 1.14.30: revert an inadvertent API change (25d4bd0b).
+ * 1.14.29: CMake builds from the release tarball now work.
+ * 1.14.26-28: SONAME/CMake build fixes and assorted portability fixes
+   (e.g. OmniOS POSIX asctime_r).
 
-Version-only bump of SRCREV_fluidsynth; sub-source SRCREVs unchanged.
+Version-only bump (git tag release-1.14.31); recipe unchanged.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 7205920b8c45cb24781d2d1a59160fe3635418ff)
+(cherry picked from commit d98bc9596101d3eae2921cd93f1a35b72869edf6)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../fluidsynth/{fluidsynth_2.5.3.bb => fluidsynth_2.5.7.bb}     | 2 +-
+ .../libupnp/{libupnp_1.14.25.bb => libupnp_1.14.31.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_2.5.3.bb => fluidsynth_2.5.7.bb} (97%)
+ rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.14.25.bb => libupnp_1.14.31.bb} (94%)
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
-similarity index 97%
-rename from meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb
-rename to meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
-index f579d1ddd2..8bf40cbb51 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.3.bb
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.5.7.bb
-@@ -13,7 +13,7 @@ SRC_URI = " \
-     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
- "
- SRCREV_FORMAT = "fluidsynth"
--SRCREV_fluidsynth = "6b8fabbd60f0df3b6e2f5b5df8478a1b43315acd"
-+SRCREV_fluidsynth = "3ede3f7c8ffc5d16e5d28f416cbfd71f3ad2b814"
- SRCREV_gcem = "012ae73c6d0a2cb09ffe86475f5c6fba3926e200"
- SRCREV_signalsmith-audio-basics = "012d2be17b0eb6839628f8c73687c4ccccc1bb01"
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.25.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
+similarity index 94%
+rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.25.bb
+rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
+index bcecfd3b8e..6ba21971d0 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.25.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.31.bb
+@@ -8,7 +8,7 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+ 
+-SRCREV = "da7cf950f22357545061961b7e5610e08690b0cf"
++SRCREV = "79ff958ed1012e60faba84981481f76cea43c7f2"
+ SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x;tag=release-${PV} \
+           "
  
 
