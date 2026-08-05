@@ -1,149 +1,213 @@
-Return-Path: <rouven.rastetter.ext@karlstorz.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 010D4C55174
-	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 09:19:18 +0000 (UTC)
-Received: from mx07-0040c702.pphosted.com (mx07-0040c702.pphosted.com [205.220.184.135])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36546.1785921546927418395
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1887C55ABA
+	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 09:23:37 +0000 (UTC)
+Received: from mx0a-00300601.pphosted.com (mx0a-00300601.pphosted.com [148.163.146.64])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36584.1785921633422888247
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 02:19:07 -0700
+ Wed, 05 Aug 2026 02:20:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@karlstorz.com header.s=S-DKIM-20210427 header.b=Zx6x8QRB;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: karlstorz.com, ip: 205.220.184.135, mailfrom: prvs=26774a484e=rouven.rastetter.ext@karlstorz.com)
-Received: from pps.filterd (m0267679.ppops.net [127.0.0.1])
-	by mx07-0040c702.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6758bmfL1443008;
-	Wed, 5 Aug 2026 09:19:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karlstorz.com;
-	 h=cc:content-transfer-encoding:content-type:date:from
-	:message-id:mime-version:subject:to; s=S-DKIM-20210427; bh=TY7o2
-	DGXBHpEtx806BevG1cYsTXzV03P7mIVBjlaWOg=; b=Zx6x8QRBlFL/h3IbdgLQH
-	fvzeebv3dJ+V6vTOc2IKEDEImc+AB/rawkgCJIJ6NeRyGe+uHVTm1CcP9jvoNrcf
-	TkOSfV3uMSal3JzLgwN6/zXweyALSZgfjyiSK2iBTKy5wZwtXTEbrP1vl9hz5lGp
-	mID/vHGsnb8+ukMf8Vqh0EJNBmxoSzWgeM+igOamPv4nsHkSv1yy0hJk2+Dbuz1o
-	cCzjKyUeQOllizdItUZrjNCAUASIFNFqZvoKcaVpHqRtVd2EzJmMwRbZq50FbEUm
-	yQurddEm2O2MbFxNakgnazbiVb9UImpNtzL5m/sjwdGagp6CPmTs4YLAxhrIEooy
-	g==
-Received: from tut-ex01-pv.kstg.corp ([62.134.76.232])
-	by mx07-0040c702.pphosted.com (PPS) with ESMTPS id 4fu3v1y8nc-1
+ dkim=pass header.i=@emerson.com header.s=email header.b=3uCJDISl;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: emerson.com, ip: 148.163.146.64, mailfrom: prvs=967708a2d4=shubhanshu.mani.tripathi@emerson.com)
+Received: from pps.filterd (m0484886.ppops.net [127.0.0.1])
+	by mx0b-00300601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6758dYaQ2570310;
+	Wed, 5 Aug 2026 09:11:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emerson.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=email; bh=TBevabNFgnobd3OOj/TtGc0k5a
+	MUwRX9CqblL2Hapw0=; b=3uCJDISliCR1cwrWTdYsAZvpCxXrZ4o48D30ya9d9Y
+	0SVYFXVSlA95j9Tnhyo0uzpnm/FUfJw5TrAqjtAJJYs7jzSY02eiTRlEmSUCuMCG
+	Fyf0K8MD4dZSi423FQtHKuiUPtxwpokIH6HLY+OWBFObuDbHJ0Pi6uoFWXmvYevL
+	jbyPwn1EWIVwaiDn0foWp1ZpheCRXNBE6xGL8LDTMJ8wXRQnlzZfGwCMOrLzZmW2
+	hCSkIxMY8CkiijwmeYGAauBkPQTVBp69hMd237JfmjKjvfqp9Mo6YQeFD30lb7/k
+	OQu8D1bSTUUwQ8ZPdiWEru02JGWJX3i0rW/EDfUsZJyw==
+Received: from us-aus-excas-p2.ni.corp.natinst.com ([130.164.94.74])
+	by mx0b-00300601.pphosted.com (PPS) with ESMTPS id 4fuyq9h9d9-7
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 05 Aug 2026 09:19:04 +0000 (GMT)
-Received: from TUT-EX02-PV.KSTG.corp (10.0.10.191) by TUT-EX01-PV.KSTG.corp
- (10.0.10.190) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 5 Aug
- 2026 11:19:03 +0200
-Received: from tutn-jjhfqf4.kstg.corp (10.0.10.41) by
- InternalSMTPRelay.KSTG.corp (10.0.10.191) with Microsoft SMTP Server id
- 15.2.2562.45 via Frontend Transport; Wed, 5 Aug 2026 11:19:03 +0200
-From: Rouven Rastetter <rouven.rastetter.ext@karlstorz.com>
+	Wed, 05 Aug 2026 09:11:35 +0000 (GMT)
+Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Wed, 5 Aug 2026 04:11:28 -0500
+Received: from shtripat-build-machine.ni.corp.natinst.com (172.18.68.32) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server id 15.2.1258.28 via Frontend Transport; Wed, 5 Aug 2026 04:11:26 -0500
+From: Shubhanshu Mani Tripathi <shubhanshu.mani.tripathi@emerson.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Rouven Rastetter <rouven.rastetter.ext@karlstorz.com>,
-        Khem Raj
-	<raj.khem@gmail.com>
-Subject: [meta-oe][wrynose][PATCH] vboxguestdrivers: Provide target kernel version
-Date: Wed, 5 Aug 2026 11:18:41 +0200
-Message-ID: <20260805091841.16237-1-rouven.rastetter.ext@karlstorz.com>
-X-Mailer: git-send-email 2.54.0
+CC: Khem Raj <raj.khem@gmail.com>, Anuj Mittal <anuj.mittal@intel.com>,
+        "Darsh
+ Kelaiya" <dkelaiya@cisco.com>,
+        Shubhanshu Mani Tripathi
+	<shubhanshu.mani.tripathi@emerson.com>
+Subject: [meta-oe][scarthgap][PATCH] jq: fix build regression from CVE-2026-43895 backport
+Date: Wed, 5 Aug 2026 14:41:15 +0530
+Message-ID: <20260805091115.1827657-1-shubhanshu.mani.tripathi@emerson.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDA3MyBTYWx0ZWRfXwwojL4CU7kL3
- UP9uvQdETXWDlqRWPwNX8CU0dGSFPuy8Mt2O0GokykSdGQN062GWInQZsjX8sE5wuOzdIyIwMxx
- 4kh3fo3ew9Q9PLkh71b7OdShpwo1/nBimyOBgZyWf4J/8toaEQC2/61S/d6xRjT2kdD93piLacZ
- tdg9UhngTtn5aumT6+WkJNg3EpEuw5D44fPyt+PPCLdhuZZoVQ/umGOYAI9mQk9AhBxVuTeFWXL
- Hwvm8tNbCrb4kpc21RyTw4FoPfiVhUbJX58QIkThNMXkICFzLtlwMuEMALqGQFSin0ituWUwNoK
- +6p82J5sXR6octzLXPfq1mRBvMdReQ5NFcAY9neX3PZDZS2dvHL0A5rugDIVhuz5h1PpGYBT7aR
- JYP6JjMy+okr91d9D/CdVFa3tmdpOU5GXM3OPTa9B6jkY4ij7qwNChwM9hMT7Tj268YXH8zMLFW
- 7zuqLWV7Bgra1HrdtVQ==
-X-Proofpoint-ORIG-GUID: XSTLH6jTycQqjuw7Emn44SOFnK3SjyPR
-X-Proofpoint-GUID: XSTLH6jTycQqjuw7Emn44SOFnK3SjyPR
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDA3MyBTYWx0ZWRfX5W1IW+t9oXIq
- sv0WJ2tn7wee2PYdDHRN9lZ5+QrR1cUMVdTb0p2sGJM5yoemCar4b5UadOm89lnk6PcblS3ukWo
- zdZMVnY27kNtFNdNn15RMmtACYbWINC9x2jXetwQH1oszkkZxGRs
-X-Authority-Analysis: v=2.4 cv=bKwm5v+Z c=1 sm=1 tr=0 ts=6a730008 cx=c_pps
- a=OToaj9FDvIz41JSycRbD4A==:117 a=OToaj9FDvIz41JSycRbD4A==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=DBWTBMGyQNCzyBkTEoZL:22
- a=Mf5tFF2oQ1p1YQ6vkpes:22 a=pGLkceISAAAA:8 a=TJlxxRfH0uqe1ifZU9EA:9
+X-Proofpoint-GUID: 1-9hQDAS8JeODvI-4eketY2P-w3njV6d
+X-Authority-Analysis: v=2.4 cv=AvveGu9P c=1 sm=1 tr=0 ts=6a72fe47 cx=c_pps
+ a=VUOoxcgKHUMpfFMIT0tLvw==:117 a=VUOoxcgKHUMpfFMIT0tLvw==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Ps6gwBxKFAOpZu8f3VnT:22
+ a=b2B3eP2nOkD9akDMWo6S:22 a=geDs06hvAAAA:8 a=AUd_NHdVAAAA:8
+ a=iJsmdLiuG8GtLBV03mYA:9 a=7yvi0DHx91fDKfvzWsLo:22
+X-Proofpoint-ORIG-GUID: 1-9hQDAS8JeODvI-4eketY2P-w3njV6d
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDA3MSBTYWx0ZWRfXxK7dWkWZUzxR
+ 6PiA3hGg5RHLo4ADQdMCXsrCXKkJaJbyFg0U0zLvCpUDCgXru+y4b0WujPFk1CDfKG2O1oaFk+z
+ pevzmPaEREYhhcu50fhtVWu4V5Y5Z3dbbrjfFcscq5jkIyoLOXia
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDA3MSBTYWx0ZWRfX64BThp7/eubw
+ TzJNYD7+4AwSGpD68CQ2GkABH3CmT4YfY+lsZenOXCjDKupgzDIVj70lmfwZ8XAw+v7Y/KK78LU
+ srPA27qW0cU6Rcv0inbxraDHWhwaDbUZla926TQ/FYRI9nQcs02qaZ7g33LyCVVL8ykd5X07wIa
+ ByvtVTn9lvqJ2RehQS8mP+5Qu7jNpsfcG24/2wXwhzX+oOQKgSBr0mofP+nHo+G1vw/jW/XZ0HL
+ pFCzc9q6kp+ODSncpD6SJOnSwbaNZr3PL2S/PbgmcXLA4vIsBR4Jl4YyA1VhdwpaeRBfV/slZFm
+ c8nu4dMZd1uKbiG/uxOU/3VFBP6nrRRnZgjklHqNFrWqEHvFXVd5Yy+aBYiDHo1QF5GPOA7i77z
+ Utmg0jOFRUWBHgQlQMHunNiGkOB1vkisbwozcmZt/zED0aNIjFpt0VoePE2P7ManAbe/AyNHLNo
+ zbjDBxt8pizfA9JFR+A==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_03,2026-08-04_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ lowpriorityscore=0 suspectscore=0 phishscore=0 bulkscore=0 adultscore=0
+ clxscore=1011 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608050071
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 09:19:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128807
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 09:23:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128808
 
-The Makefile uses `KERN_MAJ = $(shell uname -r | cut -d . -f1)` to
-determine if the kernel version is <7, which enables building vboxvideo.
+The CVE-2026-43895 backport patches both the pre-generated src/parser.c
+that jq ships (and builds, since maintainer-mode/bison is disabled) and
+its source src/parser.y. Git orders the diff sections alphabetically, so
+parser.c is applied before parser.y and parser.y ends up with a newer
+mtime. make's implicit .y.c rule then treats the shipped parser.c as
+stale and tries to regenerate it with bison; jq's overridden rule only
+prints "NOT building parser.c!" and produces no file, so the build fails
+with:
 
-Therefore, with a host kernel >=7 and a target kernel <7, vboxvideo is
-not built and we get this error in vboxsf:
+  cc1: fatal error: src/parser.c: No such file or directory
 
-```
-| In file included from ../vboxsf/include/iprt/stdarg.h:59,
-|                  from ../vboxsf/include/iprt/types.h:44,
-|                  from ../vboxsf/include/iprt/string.h:43,
-|                  from mount.vboxsf.c:62:
-| ../vboxsf/include/linux/stdarg.h:6:9: warning: 'va_start' redefined
-|     6 | #define va_start(v, l)  __builtin_va_start(v, l)
-|       |         ^~~~~~~~
-| In file included from mount.vboxsf.c:44:
-|
-/work/oe-upstream/bitbake-builds/poky-master/build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/7.2.14/recipe-sysroot-native/usr/lib/x86_64-poky-linux/gcc/x86_64-poky-linux/16.1.0/include/stdarg.h:49:9:
-note: this is the location of the previous definition
-|    49 | #define va_start(...) __builtin_c23_va_start(__VA_ARGS__)
-|       |         ^~~~~~~~
-| ../vboxsf/include/linux/stdarg.h:8:9: warning: 'va_arg' redefined
-|     8 | #define va_arg(v, T)    __builtin_va_arg(v, T)
-|       |         ^~~~~~
-|
-/work/oe-upstream/bitbake-builds/poky-master/build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/7.2.14/recipe-sysroot-native/usr/lib/x86_64-poky-linux/gcc/x86_64-poky-linux/16.1.0/include/stdarg.h:54:9:
-note: this is the location of the previous definition
-|    54 | #define va_arg(v,l)     __builtin_va_arg(v,l)
-|       |         ^~~~~~
-| ../vboxsf/include/linux/stdarg.h:9:9: warning: 'va_copy' redefined
-|     9 | #define va_copy(d, s)   __builtin_va_copy(d, s)
-|       |         ^~~~~~~
-|
-/work/oe-upstream/bitbake-builds/poky-master/build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/7.2.14/recipe-sysroot-native/usr/lib/x86_64-poky-linux/gcc/x86_64-poky-linux/16.1.0/include/stdarg.h:57:9:
-note: this is the location of the previous definition
-|    57 | #define va_copy(d,s)    __builtin_va_copy(d,s)
-|       |         ^~~~~~~
-```
+Reorder the backport so the src/parser.y hunk is applied before the
+generated src/parser.c hunk. parser.c is then written last, is not older
+than parser.y, and make uses the shipped parser as-is.
 
-If the missmatch is reversed, there is probably a different error.
-
-To fix this we provide the actual target kernel version via the KERN_MAJ
-Makefile variable
-
-Note: The kernel version might be empty during parsing (e.g. when using
-linux-dummy), therefore `or ''` is needed.
-
-CC: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Shubhanshu Mani Tripathi <shubhanshu.mani.tripathi@emerson.com>
 ---
- .../vboxguestdrivers/vboxguestdrivers_7.2.8.bb                | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../jq/jq/CVE-2026-43895.patch                | 73 ++++++++++---------
+ 1 file changed, 38 insertions(+), 35 deletions(-)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
-index 6b6a2f23ff..27f79c24c5 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/${VBOX_NAME}/COPYING;md5=217590d3a513571
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
+index efde45c710..b21f7c2806 100644
+--- a/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-43895.patch
+@@ -22,6 +22,9 @@ Backport Changes:
+ - Limited parser.c to three import/include action changes.
+   The newer grammar caused unrelated generated-parser churn.
+   Keeping target numbering avoids unrelated generated changes.
++- Applied the src/parser.y hunk before the generated src/parser.c hunk.
++  Otherwise parser.y is newer and make regenerates parser.c with bison.
++  Bison is disabled here, so the shipped parser.c must stay the newest.
  
- DEPENDS = "virtual/kernel"
+ (cherry picked from commit 9d223f153c3632a207fa071caaa6292da33ae361)
+ Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+@@ -29,8 +32,8 @@ Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+  src/compile.c | 12 ++++++++----
+  src/compile.h |  2 +-
+  src/linker.c  |  6 +++++-
+- src/parser.c  | 16 +++-------------
+  src/parser.y  | 16 +++-------------
++ src/parser.c  | 16 +++-------------
+  tests/shtest  | 17 +++++++++++++++++
+  6 files changed, 37 insertions(+), 32 deletions(-)
  
--inherit module kernel-module-split
-+inherit linux-kernel-base module kernel-module-split
- 
- COMPATIBLE_MACHINE = "(qemux86|qemux86-64|qemuarm64)"
- 
-@@ -24,7 +24,7 @@ S:task-patch = "${UNPACKDIR}/${BP}"
- export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
- export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
- 
--EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
-+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${@(get_kernelversion_file('${STAGING_KERNEL_BUILDDIR}') or '').split('.')[0]}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
- 
- # otherwise 5.2.22 builds just vboxguest
- MAKE_TARGETS = "all"
+@@ -97,6 +100,40 @@ index e7d1024..4b15008 100644
+          gen_const(JV_OBJECT(
+              jv_string("optional"), jv_true(),
+              jv_string("search"), jv_string(home))));
++diff --git a/src/parser.y b/src/parser.y
++index 3d24689..2901cab 100644
++--- a/src/parser.y
+++++ b/src/parser.y
++@@ -504,26 +504,16 @@ ImportWhat Exp ';' {
++ 
++ ImportWhat:
++ "import" ImportFrom "as" BINDING {
++-  jv v = block_const($2);
++-  // XXX Make gen_import take only blocks and the int is_data so we
++-  // don't have to free so much stuff here
++-  $$ = gen_import(jv_string_value(v), jv_string_value($4), 1);
+++  $$ = gen_import(block_const($2), $4, 1);
++   block_free($2);
++-  jv_free($4);
++-  jv_free(v);
++ } |
++ "import" ImportFrom "as" IDENT {
++-  jv v = block_const($2);
++-  $$ = gen_import(jv_string_value(v), jv_string_value($4), 0);
+++  $$ = gen_import(block_const($2), $4, 0);
++   block_free($2);
++-  jv_free($4);
++-  jv_free(v);
++ } |
++ "include" ImportFrom {
++-  jv v = block_const($2);
++-  $$ = gen_import(jv_string_value(v), NULL, 0);
+++  $$ = gen_import(block_const($2), jv_invalid(), 0);
++   block_free($2);
++-  jv_free(v);
++ }
++ 
++ ImportFrom:
+ diff --git a/src/parser.c b/src/parser.c
+ index 0599db7..c50f2fb 100644
+ --- a/src/parser.c
+@@ -141,40 +178,6 @@ index 0599db7..c50f2fb 100644
+  }
+  #line 3116 "src/parser.c"
+      break;
+-diff --git a/src/parser.y b/src/parser.y
+-index 3d24689..2901cab 100644
+---- a/src/parser.y
+-+++ b/src/parser.y
+-@@ -504,26 +504,16 @@ ImportWhat Exp ';' {
+- 
+- ImportWhat:
+- "import" ImportFrom "as" BINDING {
+--  jv v = block_const($2);
+--  // XXX Make gen_import take only blocks and the int is_data so we
+--  // don't have to free so much stuff here
+--  $$ = gen_import(jv_string_value(v), jv_string_value($4), 1);
+-+  $$ = gen_import(block_const($2), $4, 1);
+-   block_free($2);
+--  jv_free($4);
+--  jv_free(v);
+- } |
+- "import" ImportFrom "as" IDENT {
+--  jv v = block_const($2);
+--  $$ = gen_import(jv_string_value(v), jv_string_value($4), 0);
+-+  $$ = gen_import(block_const($2), $4, 0);
+-   block_free($2);
+--  jv_free($4);
+--  jv_free(v);
+- } |
+- "include" ImportFrom {
+--  jv v = block_const($2);
+--  $$ = gen_import(jv_string_value(v), NULL, 0);
+-+  $$ = gen_import(block_const($2), jv_invalid(), 0);
+-   block_free($2);
+--  jv_free(v);
+- }
+- 
+- ImportFrom:
+ diff --git a/tests/shtest b/tests/shtest
+ index 505d45d..4a5978c 100755
+ --- a/tests/shtest
+-- 
+2.43.0
+
 
