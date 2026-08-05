@@ -2,118 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E81AEC55174
-	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 17:12:34 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.652.1785949953135619913
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D427C55174
+	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 21:26:21 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6224.1785965175811994991
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 10:12:33 -0700
+ Wed, 05 Aug 2026 14:26:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=mCyvnzEb;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-38e69bdb0fcso1285514a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 10:12:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=XcKuqMjx;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2ccf2360620so15361095ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 14:26:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785949952; x=1786554752; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785965175; x=1786569975; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XakmDXUDZcCY13BMGg1vGrZSCislIyBAieMXxS1yhUA=;
-        b=mCyvnzEbzRG21c63EKQxj7ceQXOjVE/JDdHLjZGZruzZTENhL1cq0aHjiOL7x1DGKZ
-         tj/zZFWIDpXoMuynl/g3jpO5zPMm8s/ITIELhJMHfOdh/Oh1EGnPH5nxhkC1fVKCEydk
-         HaSSCiZpPhyNiDStVOEwsGR2ffE9THUhkP1tIjirfqHsKMgr5RoacCDsSL9oKlGkEyHD
-         KWvXQNpkHf44YPmZf03SOCarYRoo9cPQJDDIv4zLv22kWCfWAjamfe/aZciBb1ruxHsX
-         Onlomv/hPz9CuURLSBGGiRc2xTxSjUQcGCIKgpIpgZOsR0bhboohmFOOplc+iVooKiP9
-         bKdA==
+        bh=FbLa34YiUq3IqIon3HsW/E5uC+ohJj+s6tUAEEWlSdE=;
+        b=XcKuqMjx8NpdvT78NOqsZChOQ01mfaARCwi3Xca/aZJfX1+SebdDv7Lqa7Xj1Ij0r3
+         A6uHqAkEyYHA+x16GJKU9I3gekpLrc3arC+Zj8Pg7mPyNe42SS0E7r4E+Ya54NDOfURE
+         4O5KS0B71RhKyxXPjw4OH1k9H4ik+t6QKSSKeRpM/cqiotw/hskc9BaI7Dlhp4N1ruI+
+         6rUKkYRF09ImvE+yWxbP+kXoyeLp9l7PxWipbmwQYzfic8icdX1c0Fp/zdP+FMNGHQkk
+         Jl0nD23H5fGyyk6lVAsQGd+eU1rM2wrtMV+j2wY4wBrpLGSHOeSMGWbCAuRIzMAG4YSJ
+         K6WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785949952; x=1786554752;
+        d=1e100.net; s=20251104; t=1785965175; x=1786569975;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XakmDXUDZcCY13BMGg1vGrZSCislIyBAieMXxS1yhUA=;
-        b=payUhBtIRPtYzpp4o4v5skwvooaPGNtFTSjdNCRpAm2ALv2J36FS4ONzZQhM0QLSar
-         0S6OKEuEfwq+Y4v0mMMs13L61qrDuP55RKV3coklr7uqEgjCExgweZMUC3NTLheOuitv
-         VUDt12svgOphEG5GRPybahmlLY57bj3fveCUoQYwZU9D/6AF5+MjayMF5syw3+sdHnjH
-         4jrwKYyarscHT1GN1Ggq3EFsNFuiLMS40YgPHF88upx+vjat5R4a69eVmb28+cyG1TKB
-         OvsE1KTKrdOZftL2tLGCQI7gashPbJvo7MF5Rrd9mEOVlTYQ4cFnABTnHvASzLVe/0rD
-         1uzA==
-X-Gm-Message-State: AOJu0YwguNvIguK9+SF9Ucn6nEUYAOW5UxtDSNVSd134JTmNfqGvgUCG
-	4/zI83fjrD8hdPC3RhPMgJT6sCi2TPsHfhvLUlwpSWzs3xQT4bHyZ956qY+JekQA
-X-Gm-Gg: AR+sD10M4KRLPt6juGDznYpDd8Nv9AAjcl6p5G+NnPcSWMpPF3FIayLfTCP6COWjIFN
-	BG6+SA3YG6RqgZBy+pWWYU1FGcACMynTlJm9bjdbqM9ghbeNEb/kIcs3pwlaELaoEu23ZDBxzpm
-	i9QXbY9JrtzSe0x6gDD6Fm1+UzkKtxC4EFiz9bKuVsSBp6SOAKcrxEzxqFKpO/5Np6Cl9Exv26G
-	STLmnONB8Ip2Tr4+q0qpf812WnRUkxzb2lQj0B4Iz/yXj59tzoYxduBgz+Nns+2HQEZXIXPheni
-	W4WDyyO2NTk/2IZs6vVpe6AmXgEv6bcPXc1j2QNOI2dD1/sm7kBMViNIM8bEdoij7+wpgrPw6DZ
-	LVKD+mW3BCp23dJ0igA6YLhZtFvEaTSfT3Q4qJCJYsKlRu3v/NipF2C4YiCTGPJqEEN+1uthXDZ
-	25DAAHdrGqXZ+LJ3uQ9JIn3gbr1MBVVrv6qWrxH4DQXGS7oovM3q2Oy5dkE+sbL18q1m3ivi3oj
-	RxVLbnp/g63TOt8TRMyeC7VvaK6qVRUcCq3qPyUac+RP/Efpo/fBC3urKy2nBc8rau/t/G+HuKv
-	1aznm44cKsFJ5Y+y0gdZLEUtE217ykwDmZFW2moLVZNX7nIU/rw26aiV/pbyHePymfFjQoUfvzF
-	8Zw==
-X-Received: by 2002:a17:90a:ec8c:b0:38d:c74d:29c5 with SMTP id 98e67ed59e1d1-3903c5c0c92mr8890528a91.19.1785949952289;
-        Wed, 05 Aug 2026 10:12:32 -0700 (PDT)
+        bh=FbLa34YiUq3IqIon3HsW/E5uC+ohJj+s6tUAEEWlSdE=;
+        b=HtD+0AAOUqhNbXzSEKqWi9Tv1yLhFutoAfljOjhnlevZnjN1xOlA/eWpxeU0Eo8Oc/
+         Pwv38RD08tB+jgf+66o7WL3KSeyu/qw5ax2t3prwUtkQd3/BfqkVexHrlGmW3iYHOlw8
+         A8SlWDB3rIGWdHURjsFluGZU6QQgKh+CwY1/WUIP+qpH2PducKwM7h8B0jfDFLL5ooc6
+         mDv9VtgFypHZx0poTHHcYVxXti3UtUC3GZXR4GmzFVhKj90iPnZxJSwWcOurPb4I9Y8H
+         F96vVlwnxnCz4SaBVAMafjFRUAE8Z8KOQxRUPPgP0LMOBvXj1zV6nDakNftS8rcenfwn
+         4a1A==
+X-Gm-Message-State: AOJu0YxPyAKJ1ZxsNZP6kYh0OuYn31Kf/et8ROnFxhzE3hKNpldDcWw3
+	1f2wksS3/JbtW5pXrhgzlGdvqjf+Zswf/ph4sKWY/4+b+mudosarhF+25ZVAWESE
+X-Gm-Gg: AR+sD11fUGWOcG0QuqLSYUG6jNg4O5CZFKxljMWBXiwTDhWExf0njHyvd2slcP4tvAd
+	23GzwhUR/3SfKnctELpRu4HjKl1/iPXWHaK+v9gr77nxc/U+t9+oJmqIPsAwSj0VyTcySNTsD4E
+	a8JPk6lqkiCweujn6weS3xrGKbIHmlDCcMl1y/tkf7cfaRojRiAqFR53De4YvTOLwdXlliLzDd8
+	+O+6h/9gCd/uZWE8M3UoDv30oxUekW3G8o28bDGQ+X01VdJTuG+lcapp9VbudGyjhmu/3rQqGLj
+	Oy86sKYg/G1WhY35Xs14TlIIbs1Mc1e/Wvfr665z4KLfKdzvvGQmUCC+x9lpNZl8BLyNErd0yMd
+	w5s092sGphLnIlN21vwAFxFPnpUizbcRW/sJUFjNUbIfAtbUJDVjjDfOloQe9XARlWy7z9ZvMtU
+	OvK3Pf5xMekKOjkjZhW5egf3Jzy5tyUEuiI0FjVdqIETeSFU5eiEtPU+aZXHa3WFFkFRKM1oP41
+	je7QgRYyDoCuG0OsrYDZ5In7L40sDQ4EyyssDDynwqIKvYcZ6WeEwyZkZcdjU+cV0M/jSdVMNCX
+	oofSHCheaM+xWBIWutYS4mzmy4d6GqyPFZkSyhOdnU9qe9uPUdprprMBKHV2FzdPzbPDD9Lr4nh
+	x2g==
+X-Received: by 2002:a17:902:ebc3:b0:2d0:8b28:51ab with SMTP id d9443c01a7336-2d0ca712e65mr119760545ad.7.1785965175061;
+        Wed, 05 Aug 2026 14:26:15 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca8df89asm29333653c88.9.2026.08.05.10.12.31
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673be4dsm25585093eec.16.2026.08.05.14.26.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Aug 2026 10:12:31 -0700 (PDT)
+        Wed, 05 Aug 2026 14:26:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] libsdl-image: Fix link failure by pointing OBJC at CC
-Date: Wed,  5 Aug 2026 10:12:29 -0700
-Message-ID: <20260805171229.3631757-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/3] rrdtool: Fix do_configure by exporting ABS_TOP_BUILDDIR for perl bindings
+Date: Wed,  5 Aug 2026 14:26:10 -0700
+Message-ID: <20260805212612.1351211-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 17:12:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128822
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 21:26:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128823
 
-configure.in calls AC_PROG_OBJC and libSDL_image_la_SOURCES carries an
-Objective-C source, so automake selects Objective-C as the link language
-for the library and emits:
+1.10.3 grew a third branch in bindings/perl-shared/Makefile.PL: when
+ABS_TOP_BUILDDIR is unset it assumes a standalone build, pkg-config
+probes for an installed librrd and dies.
 
-  libSDL_image_la_LINK = $(LIBTOOL) ... --mode=link $(OBJCLD) \
-                         $(AM_OBJCFLAGS) $(OBJCFLAGS) ...
-  OBJCLD = $(OBJC)
+| pkg-config could not find librrd. Is rrdtool installed?
+| Try: brew install rrdtool (macOS) or apt install librrd-dev (Debian/Ubuntu)
 
-AC_PROG_OBJC detects a bare compiler carrying none of TOOLCHAIN_OPTIONS,
-so while compilation goes through $(CC) and is fine, the link drops
---sysroot and the tune flags and falls over:
+bindings/Makefile.am always passes ABS_TOP_SRCDIR, ABS_TOP_BUILDDIR and
+ABS_SRCDIR when it runs Makefile.PL, but do_configure re-runs it by hand
+to redo the perl bindings and did not. Export them there too so the
+in-tree branch is taken and RRDs links against -L${B}/src/.libs -lrrd.
 
-  ld.lld: error: cannot open crtbeginS.o: No such file or directory
-  ld.lld: error: unable to find library -lpng
-  ld.lld: error: unable to find library -ljpeg
-  ld.lld: error: unable to find library -ltiff
-  ld.lld: error: unable to find library -lz
-  ld.lld: error: unable to find library -lSDL
-
-Export OBJC as CC so the link gets the full toolchain options.
-configure.in already forces OBJCFLAGS=$CFLAGS, so that needs nothing.
+Verified on aarch64 for qemuarm64: do_configure fails before the change
+with the error above, and do_compile and do_package succeed after.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.10.3.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb b/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
-index 29fb8cb4aa..4b4cf4e62d 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
-@@ -17,6 +17,14 @@ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.10.3.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.10.3.bb
+index a434927b23..656cee7ffa 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.10.3.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.10.3.bb
+@@ -97,9 +97,14 @@ do_configure() {
+         ${B}/bindings/Makefile
 
- export SDL_CONFIG = "${STAGING_BINDIR_CROSS}/sdl-config"
+     #redo the perl bindings
++    # perl-shared/Makefile.PL only links against the in-tree librrd when
++    # ABS_TOP_BUILDDIR is set, which is what bindings/Makefile.am does. Without
++    # it the standalone branch pkg-config probes for an installed librrd and
++    # dies with "pkg-config could not find librrd", so export them here too.
+     (
+     cd ${S}/bindings/perl-shared;
+-    perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
++    ABS_TOP_SRCDIR="${S}" ABS_TOP_BUILDDIR="${B}" ABS_SRCDIR="${S}/bindings/perl-shared" \
++        perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
 
-+# configure.in runs AC_PROG_OBJC and libSDL_image_la_SOURCES carries an
-+# Objective-C file, so automake picks Objective-C as the link language and
-+# links via $(OBJCLD) = $(OBJC) instead of $(CC). AC_PROG_OBJC detects a bare
-+# compiler with none of the toolchain options, so the link loses --sysroot and
-+# the tune flags and then fails to find crtbeginS.o, -lz, -lSDL and friends.
-+# Point OBJC at the full CC; configure.in already forces OBJCFLAGS=$CFLAGS.
-+export OBJC = "${CC}"
-+
- # Disable the run-time loading of the libs and bring back the soname dependencies.
- EXTRA_OECONF += "--disable-jpg-shared --disable-png-shared -disable-tif-shared"
-
+     cd ../../bindings/perl-piped;
+     perl Makefile.PL INSTALLDIRS="vendor";
 
