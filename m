@@ -2,191 +2,796 @@ Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91078C55174
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92828C55ABF
 	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 05:09:31 +0000 (UTC)
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33694.1785906564085992250
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33695.1785906564637631711
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 04 Aug 2026 22:09:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Dh7OAi8e;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=U6Q2tz6A;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4539; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=30543; q=dns/txt;
   s=iport01; t=1785906564; x=1787116164;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=i88kl91tWSFJtbo9RuWvOKXLRHn4Oxg7EhmNGroYsjw=;
-  b=Dh7OAi8ep6El6zHXm0HGlAGrrwA+JwOrqQk/tT4/VDOqunIuN2r/FZpc
-   4xRr+tWuQ6/bx09zJ/lbBwH+eGxM6pHctr+RfTh9azGYzGWZP0Il3c58w
-   4o7I01kbGTNX/Am9yvVglpF/qQ0J5JwHQlKbDzWFib8zVFk2iRNQYib5R
-   zHXfRfLm9KAwaChEIU4WB/XoVVLoeCf8Ysuu89jedcGeCMK0RxlC6dtij
-   YKbk0B7eeyltUJms84YEPdYB+OnPPGuL/i7hEVTCvL66N6ughkjD4iLyq
-   WegoUMSaRpIZmEbdbqwvAymt3PMBeMXvlqt9P9UIkc+MsZiN8+4C7sdmI
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Zh206VrcripY1c2b1gszYa6IMgU9UYCJn1uOT7slNiM=;
+  b=U6Q2tz6Ac50fP1fNAiZOMhyJdQ85V4cTJvDVgENXtGEsmKBlrvIquGMe
+   XXRFN6MZfhU2832DYcQdqxlu/Z9zdXZTSC1gRpg1NmxKzoZsF0hreofYV
+   PCug/X6qkvgUNVkQ98ezeuxc4CwTGrVPehhG+OrzIMf98gnaIJYhACVNn
+   9ncl6qbuelmDT8kVK9ENUdimQjq0IJS2ACLTcpopsKRS+VHV9pCNGZMll
+   FjLrf88bYWbQ0u/oVsrMKUow/zfUTClJc0i6tu3ayJBvaQFCxBHiu+JQ0
+   999FXwVbPFhRnqMg9eL/7fSDSoWRikRhsgszyjOzr4/inJLi2DjU8BQdU
    g==;
-X-CSE-ConnectionGUID: e32epLZLSlG5sRDx6TDp6g==
-X-CSE-MsgGUID: DOpQWf8wQvaqfSsuj5d+gw==
-X-IPAS-Result: =?us-ascii?q?A0BKAgBfxHJq/40QJK1aHgE8DAILgWWCV3RfQkkDlkcDn?=
- =?us-ascii?q?huBfg8BAQEPRA0EAQGFBQKNZgImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFA?=
- =?us-ascii?q?QEBAgEHBYEOE4ZPDYZaAQIBAycLARgBLRAcAwECLysjCBmDAgGCdAIBEbxhg?=
- =?us-ascii?q?XkzgQGDKAGBVNsuAQsUAQWBM4U/iCFdGAGEfCcbG4FygRWDaYEFgVwCgSeGf?=
- =?us-ascii?q?gSCDRV6EoFaHoMGg0qKCUiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBD?=
- =?us-ascii?q?RsHBYEdgSiEbSMZNnyBCV6BLSpkARIXgQmCewKCem8LGA1IESw3FBkEPm4Hj?=
- =?us-ascii?q?WgggV9aBwFzGgErFwlfBngvDwILAgcVkn2QHoIhoQ8KKIN1jCGVOhozhASBV?=
- =?us-ascii?q?5JAklELmH2OCpZQhGmBaDyBWXAVgyIJShkPjjiDa4QHgQzHJiQ1AgkDMAEHA?=
- =?us-ascii?q?gcPAoFzkAACJgdvYAEB?=
-IronPort-Data: A9a23:z/mMXKPhYdAzqz3vrR30lsFynXyQoLVcMsEvi/4bfWQNrUomg2cHy
- DMfCm3VOfreMWb9fIpyPt+xoUwP756EztQySnM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WV7lV
- e/a+ZWFZgf1g2IsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj6/g1VkwuGb88weJYXHp02
- exGFBwVMB/W0opawJrjIgVtrs0nKM+uOMYUvWttiGmFS/0nWpvEBa7N4Le03h9p2ZsIRqiYP
- pRfMGY2BPjDS0Un1lM/BJ8gleGzhmHXeDxDo1XTrq0yi4TW5FMgjOmyaIqMJbRmQ+15uV6hm
- WyW4F3nCwgUD8eCy2eJsX2z07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYVX95WVul/4waXx++Mv0CSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:+So4ia2bqKfDnFwuF61M2wqjBGokLtp133Aq2lEZdPWaSKOlfq
- eV7ZMmPHDP6Qr5NEtMpTnEAtjjfZq+z+8Q3WBuB9eftWDd0QPCRr2Kr7GSpgEIcBeRygcy78
- tdmoFFebvN5CBB/KXHyTj9Nco8y9+a963tr+Lfw3BxCTxOUchbnn5E4sLxKDwMeOGAbqBJbK
- ah2g==
-X-Talos-CUID: 9a23:ZYj0a2xzdOURcZlQ+DvjBgUZQZooalnv6EzUDBKjM0p5FoG5UQGfrfY=
-X-Talos-MUID: 9a23:7DCtZwjsVfgNwZKqY56cMsMpGOBw2pugWF80j5wftfKfKC4tN3SSk2Hi
+X-CSE-ConnectionGUID: 2vJNullmTM+iZFsXOP84OQ==
+X-CSE-MsgGUID: EIo4VoNrTKGeFb+fdyEuCQ==
+X-IPAS-Result: =?us-ascii?q?A0BGAgBfxHJq/5QQJK1aglmCV3RfQkkDlkeBFp0IgX4PA?=
+ =?us-ascii?q?QEBD0QNBAEBhQUCjWYCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBB?=
+ =?us-ascii?q?wWBDhOGTw2GWgECAR0YARgBLSwDAQJaIyGDAgGCdAIBEbxhgiyBAYMoAYFU2?=
+ =?us-ascii?q?y4BCxQBBYEzhT+IIV0YAYR8JxsbgXKBFYJzdoEFgVwCiCUEgg0VehKBWh6BL?=
+ =?us-ascii?q?YUjiglIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQ0bBwWBHYEohG0jG?=
+ =?us-ascii?q?TZ8gQlegS0qZAESF4EJgnsCgnpvCxgNSBEsNxQZBD5uB41oIIJAATBDBwkKA?=
+ =?us-ascii?q?RMSBhcJMC8GDA9dBwsdDwINBBgUkmkBB5AWgiGhDwoog3WMIZU6GjOEBIFXg?=
+ =?us-ascii?q?huQJYshhzALmH2CWYsxlWhohGmBaDyBWXAVO4JnCUoZD44qAwsLg2CEB4EMx?=
+ =?us-ascii?q?yYkNQIJAzABBwIHDwKBc5EeYAEB?=
+IronPort-Data: A9a23:ajAu3KCR4vuM/xVW/3jiw5YqxClBgxIJ4kV8jS/XYbTApD4hg2NWz
+ GUfWDiCbvaLY2rwKY9yaYqwo08EsJ7cx4MxOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
+ fuo+5eBYA/9h2YuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEmetMKlwyOYgk36V2M09Vx
+ dsgeGwqV0XW7w626OrTpuhEj8AnKozveYgYoHwllGifBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
+ YxANWoHgBfoO3WjPn8bBYw3mvyonlH0ciZTrxSeoq9fD237k10ugOCwboONEjCMbeh0mRqmo
+ UTcw0fWDz8Qd9KT2BeY2Uv504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
+ UsM9ywjqKI/+ECmQp/6RRLQnZKflhcYX9wVF6gx7xuAj/ONpQ2YHWMDCDVGbbTKqfMLeNDj7
+ XfR9/uBONClmOT9pa61nltMkQ6PBA==
+IronPort-HdrOrdr: A9a23:8+mT360rFYexv4Z3ttWD8QqjBJ4kLtp133Aq2lEZdPWaSKOlfq
+ eV7ZEmPHDP6Qr5NEtMpTniAtjjfZqjz/5ICOAqVN/INjUO01HHEGgN1+ffKhTbaknDH5ZmpM
+ RdWpk7LsHsBl5nisu/ygy5H9E8hOSjysmT9IDjJ7MHd3ASV0mmhD0JbDqmLg==
+X-Talos-CUID: 9a23:awe5GWFFz15WfJyTqmI96mwyB8Qhd0H4j3biDVSILl45FJqsHAo=
+X-Talos-MUID: =?us-ascii?q?9a23=3AOSKLzg7GqNkjHlKTkS7lnfKMxoxFwqPyNkcri6k?=
+ =?us-ascii?q?llMSqP29+NyawkR+OF9o=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,205,1779148800"; 
-   d="scan'208";a="794970817"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Aug 2026 05:09:23 +0000
+   d="scan'208";a="797805610"
+Received: from alln-l-core-11.cisco.com ([173.36.16.148])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Aug 2026 05:09:23 +0000
 Received: from sjc-ads-20746.cisco.com (sjc-ads-20746.cisco.com [171.70.189.245])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id 260DB1800049A;
+	by alln-l-core-11.cisco.com (Postfix) with ESMTPS id 279A918000393;
 	Wed,  5 Aug 2026 05:09:23 +0000 (GMT)
 Received: by sjc-ads-20746.cisco.com (Postfix, from userid 1887503)
-	id B35CCC75FFD; Tue,  4 Aug 2026 22:09:22 -0700 (PDT)
+	id AE803C8EA73; Tue,  4 Aug 2026 22:09:22 -0700 (PDT)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-oe][PATCH 2/2] hdf5: Fix CVE-2026-26197
-Date: Tue,  4 Aug 2026 22:09:22 -0700
-Message-Id: <20260805050922.3936520-2-devanshp@cisco.com>
+Subject: [meta-oe][PATCH 1/2] hdf5: Fix CVE-2026-26199
+Date: Tue,  4 Aug 2026 22:09:21 -0700
+Message-Id: <20260805050922.3936520-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260805050922.3936520-1-devanshp@cisco.com>
-References: <20260805050922.3936520-1-devanshp@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-20746.cisco.com [171.70.189.245];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 171.70.189.245, sjc-ads-20746.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
+X-Outbound-Node: alln-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 05:09:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128794
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128795
 
 From: Devansh Patel <devanshp@cisco.com>
 
 This patch applies the upstream HDF5 2.1.0 backport for
-CVE-2026-26197. The upstream fix commit is referenced in [1],
+CVE-2026-26199. The upstream fix commit is referenced in [1],
 and the public CVE advisory is referenced in [2].
 
-[1] https://github.com/HDFGroup/hdf5/commit/8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6
-[2] https://github.com/HDFGroup/hdf5/security/advisories/GHSA-gh44-7wpq-622f
+[1] https://github.com/HDFGroup/hdf5/commit/9268b803b742f99c1f8793cae74f19e74976b065
+[2] https://github.com/HDFGroup/hdf5/security/advisories/GHSA-5c6x-jmgf-f5vc
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- .../hdf5/files/CVE-2026-26197.patch           | 70 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
+ .../hdf5/files/CVE-2026-26199.patch           | 677 ++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
+ 2 files changed, 678 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-26199.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-26199.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-26199.patch
 new file mode 100644
-index 0000000000..c8d3547e08
+index 0000000000..24ad0f5660
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
-@@ -0,0 +1,70 @@
-+From 7a9f34e150beb688397d3f562d0f6ed1f9cd0e60 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-26199.patch
+@@ -0,0 +1,677 @@
++From e26fc8e32247cef9524a539a921ff986bd8cbf66 Mon Sep 17 00:00:00 2001
 +From: bmribler <39579120+bmribler@users.noreply.github.com>
-+Date: Tue, 3 Feb 2026 16:26:51 -0500
-+Subject: [PATCH] Validate datatype size for consistency (#6173)
++Date: Mon, 26 Jan 2026 19:07:23 -0500
++Subject: [PATCH] Fixes buffer underflow (#6143)
 +
-+User report:
-+When a file is corrupted such that an array datatype's size, the
-+number of elements, and the element size are not in agreement, it can
-+trigger an out of bounds read.
-+(private GH issue: GHSA-gh44-7wpq-622f)
-+Added a validation to ensure the above are in agreement.
++Fixes security issue by treating non-NULL buffer with size 0 as length-only query in get_name API functions.
 +
-+CVE: CVE-2026-26197
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6]
++Behavior:
++Modify get_name API functions to treat (buffer != NULL, size == 0) as length-only queries, preventing undefined behavior.
++Fix applied to H5Aget_name, H5Aget_name_by_idx, H5Fget_name, H5Gget_objname_by_idx, H5Iget_name, H5Lget_name_by_idx, H5Rget_file_name, H5Rget_obj_name, H5Rget_attr_name, and 8 other functions.
++Tests:
++Update test/links.c, test/tattr.c, test/tfile.c, test/titerate.c, and test/trefer.c to verify new behavior with non-null buffer and size 0.
++Documentation:
++Update comments in H5A.c, H5F.c, H5Gdeprec.c, H5I.c, H5L.c, H5R.c, and H5Rdeprec.c to reflect new behavior.t]@users.noreply.github.com>
++
++CVE: CVE-2026-26199
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/9268b803b742f99c1f8793cae74f19e74976b065]
 +
 +Backport Changes:
-+- Omitted release_docs/CHANGELOG.md because its HDF5 2.1.0 release
-+  context does not apply to the 2.0.0 backport.
++- Omitted release_docs/CHANGELOG.md because its HDF5 2.1.0 release context does not apply to the 2.0.0 backport.
 +
-+(cherry picked from commit 8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6)
++(cherry picked from commit 9268b803b742f99c1f8793cae74f19e74976b065)
 +Signed-off-by: Devansh Patel <devanshp@cisco.com>
 +---
-+ src/H5Odtype.c | 20 +++++++++++++++++++-
-+ 1 file changed, 19 insertions(+), 1 deletion(-)
++ src/H5A.c       | 11 ++++++++-
++ src/H5F.c       | 32 ++++++++++++++++++---------
++ src/H5Gdeprec.c | 32 ++++++++++++++++++---------
++ src/H5I.c       | 32 ++++++++++++++++++---------
++ src/H5L.c       |  4 ++++
++ src/H5R.c       | 59 ++++++++++++++++++++++++++++++++++++++++++++++++-
++ src/H5Rdeprec.c | 22 ++++++++++++++++--
++ test/links.c    | 21 ++++++++++++++++--
++ test/tattr.c    | 25 +++++++++++++++++++--
++ test/tfile.c    | 16 +++++++++++++-
++ test/titerate.c | 16 +++++++++++++-
++ test/trefer.c   | 43 +++++++++++++++++++++++++++++------
++ 12 files changed, 265 insertions(+), 48 deletions(-)
 +
-+diff --git a/src/H5Odtype.c b/src/H5Odtype.c
-+index f53f608ee..d6405cdb8 100644
-+--- a/src/H5Odtype.c
-++++ b/src/H5Odtype.c
-+@@ -774,7 +774,8 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
-+                 HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "invalid datatype location");
-+             break;
++diff --git a/src/H5A.c b/src/H5A.c
++index 0725489bc..9d4862d32 100644
++--- a/src/H5A.c
+++++ b/src/H5A.c
++@@ -1221,7 +1221,8 @@ done:
++     Up to 'buf_size'-1 characters are stored in 'buf' followed by a '\0' string
++     terminator.  If the name of the attribute is longer than 'buf_size'-1,
++     the string terminator is stored in the last position of the buffer to
++-    properly terminate the string.
+++    properly terminate the string.  If 'buf' is non-NULL but 'buf_size' is 0,
+++    treat the call as length being queried.
++ --------------------------------------------------------------------------*/
++ ssize_t
++ H5Aget_name(hid_t attr_id, size_t buf_size, char *buf /*out*/)
++@@ -1233,6 +1234,10 @@ H5Aget_name(hid_t attr_id, size_t buf_size, char *buf /*out*/)
 + 
-+-        case H5T_ARRAY:
-++        case H5T_ARRAY: {
-++            size_t expected_size; /* for validating array datatype size consistency */
-+             /*
-+              * Array datatypes...
-+              */
-+@@ -816,6 +817,22 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
-+             if (H5O__dtype_decode_helper(ioflags, pp, dt->shared->parent, skip, p_end) < 0)
-+                 HGOTO_ERROR(H5E_DATATYPE, H5E_CANTDECODE, FAIL, "unable to decode array parent type");
++     FUNC_ENTER_API((-1))
 + 
-++            /* Check for multiplication overflow */
-++            if (dt->shared->parent->shared->size > 0 &&
-++                dt->shared->u.array.nelem > SIZE_MAX / dt->shared->parent->shared->size)
-++                HGOTO_ERROR(H5E_DATATYPE, H5E_BADVALUE, FAIL,
-++                            "array datatype size calculation would overflow");
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (buf && buf_size == 0)
+++        buf = NULL;
 ++
-++            expected_size = dt->shared->parent->shared->size * dt->shared->u.array.nelem;
-++
-++            /* Verify the stored size matches the calculated size */
-++            if (dt->shared->size != expected_size)
-++                HGOTO_ERROR(
-++                    H5E_DATATYPE, H5E_BADVALUE, FAIL,
-++                    "array datatype size mismatch: expected %zu (element_size=%zu * nelem=%zu), got %zu",
-++                    expected_size, dt->shared->parent->shared->size, dt->shared->u.array.nelem,
-++                    dt->shared->size);
-++
-+             /* Check if the parent of this array has a version greater than the
-+              * array itself. */
-+             H5O_DTYPE_CHECK_VERSION(dt, version, dt->shared->parent->shared->version, ioflags, "array", FAIL)
-+@@ -829,6 +846,7 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
-+             if (dt->shared->parent->shared->force_conv == true)
-+                 dt->shared->force_conv = true;
-+             break;
-++        }
++     /* check arguments */
++     if (NULL == (vol_obj = H5VL_vol_object_verify(attr_id, H5I_ATTR)))
++         HGOTO_ERROR(H5E_ARGS, H5E_BADTYPE, (-1), "not an attribute");
++@@ -1295,6 +1300,10 @@ H5Aget_name_by_idx(hid_t loc_id, const char *obj_name, H5_index_t idx_type, H5_i
 + 
-+         case H5T_COMPLEX: {
-+             bool homogeneous;
++     FUNC_ENTER_API(FAIL)
++ 
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Check args */
++     if (H5I_ATTR == H5I_get_type(loc_id))
++         HGOTO_ERROR(H5E_ARGS, H5E_BADTYPE, FAIL, "location is not valid for an attribute");
++diff --git a/src/H5F.c b/src/H5F.c
++index a0a57d294..2450098b7 100644
++--- a/src/H5F.c
+++++ b/src/H5F.c
++@@ -1972,19 +1972,27 @@ done:
++  * Function:    H5Fget_name
++  *
++  * Purpose:     Gets the name of the file to which object OBJ_ID belongs.
++- *              If 'name' is non-NULL then write up to 'size' bytes into that
++- *              buffer and always return the length of the entry name.
++- *              Otherwise `size' is ignored and the function does not store
++- *              the name, just returning the number of characters required to
++- *              store the name. If an error occurs then the buffer pointed to
++- *              by 'name' (NULL or non-NULL) is unchanged and the function
++- *              returns a negative value.
+++ *
+++ * Description:
+++ *              When 'name' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
+++ *
+++ *              When 'name' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
+++ *
+++ * Return:      Success:    Length of the name (excluding null terminator)
+++ *              Failure:    Negative
++  *
++  * Note:        This routine returns the name that was used to open the file,
++  *              not the actual name after resolving symlinks, etc.
++- *
++- * Return:      Success:    The length of the file name
++- *              Failure:    -1
++  *-------------------------------------------------------------------------
++  */
++ ssize_t
++@@ -1998,6 +2006,10 @@ H5Fget_name(hid_t obj_id, char *name /*out*/, size_t size)
++ 
++     FUNC_ENTER_API((-1))
++ 
+++    /* If name size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Check the type */
++     type = H5I_get_type(obj_id);
++     if (H5I_FILE != type && H5I_GROUP != type && H5I_DATATYPE != type && H5I_DATASET != type &&
++diff --git a/src/H5Gdeprec.c b/src/H5Gdeprec.c
++index b6364db46..b610ad473 100644
++--- a/src/H5Gdeprec.c
+++++ b/src/H5Gdeprec.c
++@@ -1145,20 +1145,26 @@ done:
++  * Function:	H5Gget_objname_by_idx
++  *
++  * Purpose:     Returns the name of objects in the group by giving index.
++- *              If `name' is non-NULL then write up to `size' bytes into that
++- *              buffer and always return the length of the entry name.
++- *              Otherwise `size' is ignored and the function does not store the name,
++- *              just returning the number of characters required to store the name.
++- *              If an error occurs then the buffer pointed to by `name' (NULL or non-NULL)
++- *              is unchanged and the function returns a negative value.
++- *              If a zero is returned for the name's length, then there is no name
++- *              associated with the ID.
++  *
++- * Note:	Deprecated in favor of H5Lget_name_by_idx
+++ * Description:
+++ *              When 'name' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
++  *
++- * Return:	Success:        Non-negative
++- *		Failure:	Negative
+++ *              When 'name' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
++  *
+++ * Return:      Success:    Length of the name (excluding null terminator)
+++ *              Failure:    Negative
+++ *
+++ * Note:	Deprecated in favor of H5Lget_name_by_idx
++  *-------------------------------------------------------------------------
++  */
++ ssize_t
++@@ -1172,6 +1178,10 @@ H5Gget_objname_by_idx(hid_t loc_id, hsize_t idx, char *name /*out*/, size_t size
++ 
++     FUNC_ENTER_API(-1)
++ 
+++    /* If name size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Set up collective metadata if appropriate */
++     if (H5CX_set_loc(loc_id) < 0)
++         HGOTO_ERROR(H5E_SYM, H5E_CANTSET, (-1), "can't set collective metadata read info");
++diff --git a/src/H5I.c b/src/H5I.c
++index b71a9772b..4b8fc4f02 100644
++--- a/src/H5I.c
+++++ b/src/H5I.c
++@@ -824,19 +824,27 @@ done:
++  *
++  * Purpose:     Gets a name of an object from its ID.
++  *
++- * Return:      Success:    The length of the name
+++ * Description:
+++ *              When 'name' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
++  *
++- *              Failure:    -1
+++ *              When 'name' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
+++ *
+++ * Return:      Success:    The length of the name (excluding null terminator)
+++ *              Failure:    Negative
++  *
++  * Notes:
++- *  If 'name' is non-NULL then write up to 'size' bytes into that
++- *  buffer and always return the length of the entry name.
++- *  Otherwise 'size' is ignored and the function does not store the name,
++- *  just returning the number of characters required to store the name.
++- *  If an error occurs then the buffer pointed to by 'name' (NULL or non-NULL)
++- *  is unchanged and the function returns a negative value.
++- *  If a zero is returned for the name's length, then there is no name
++- *  associated with the ID.
+++ *              If a zero is returned for the name's length, then there is no name
+++ *              associated with the ID.
++  *
++  *-------------------------------------------------------------------------
++  */
++@@ -851,6 +859,10 @@ H5Iget_name(hid_t id, char *name /*out*/, size_t size)
++ 
++     FUNC_ENTER_API((-1))
++ 
+++    /* If name size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Get the object pointer */
++     if (NULL == (vol_obj = H5VL_vol_object(id)))
++         HGOTO_ERROR(H5E_ID, H5E_BADTYPE, (-1), "invalid identifier");
++diff --git a/src/H5L.c b/src/H5L.c
++index a818445c5..ee603bfa8 100644
++--- a/src/H5L.c
+++++ b/src/H5L.c
++@@ -1478,6 +1478,10 @@ H5Lget_name_by_idx(hid_t loc_id, const char *group_name, H5_index_t idx_type, H5
++ 
++     FUNC_ENTER_API((-1))
++ 
+++    /* If name size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Check arguments */
++     if (!group_name || !*group_name)
++         HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, (-1), "no name specified");
++diff --git a/src/H5R.c b/src/H5R.c
++index 2b8dcdbf2..8851cb33f 100644
++--- a/src/H5R.c
+++++ b/src/H5R.c
++@@ -1013,8 +1013,23 @@ done:
++  * Purpose:     Given a reference to some object, determine a file name of the
++  *              object located into.
++  *
++- * Return:      Non-negative length of the path on success / -1 on failure
+++ * Description:
+++ *              When 'buf' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
+++ *
+++ *              When 'buf' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
++  *
+++ * Return:      Success:    The length of the name (excluding null terminator)
+++ *              Failure:    Negative
++  *-------------------------------------------------------------------------
++  */
++ ssize_t
++@@ -1032,6 +1047,10 @@ H5Rget_file_name(const H5R_ref_t *ref_ptr, char *buf /*out*/, size_t size)
++         H5R__get_type((const H5R_ref_priv_t *)ref_ptr) >= H5R_MAXTYPE)
++         HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, (-1), "invalid reference type");
++ 
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (buf && size == 0)
+++        buf = NULL;
+++
++     /* Get name */
++     if (H5I_INVALID_HID == (loc_id = H5R__get_loc_id((const H5R_ref_priv_t *)ref_ptr))) {
++         /* Un-opened external references do not have loc_id set but hold a
++@@ -1073,6 +1092,21 @@ done:
++  * Purpose:     Given a reference to some object, determine a path to the
++  *              object referenced in the file.
++  *
+++ * Description:
+++ *              When 'buf' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
+++ *
+++ *              When 'buf' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
+++ *
++  * Return:      Non-negative length of the path on success / -1 on failure
++  *
++  *-------------------------------------------------------------------------
++@@ -1099,6 +1133,10 @@ H5Rget_obj_name(H5R_ref_t *ref_ptr, hid_t rapl_id, char *buf /*out*/, size_t siz
++     if (rapl_id < 0)
++         HGOTO_ERROR(H5E_ARGS, H5E_BADTYPE, (-1), "not a property list");
++ 
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (buf && size == 0)
+++        buf = NULL;
+++
++     /* Retrieve loc_id from reference */
++     if (H5I_INVALID_HID == (loc_id = H5R__get_loc_id((const H5R_ref_priv_t *)ref_ptr)))
++         /* Attempt to re-open file and pass rapl_id as a fapl_id */
++@@ -1140,6 +1178,21 @@ done:
++  *
++  * Purpose:     Given a reference to some attribute, determine its name.
++  *
+++ * Description:
+++ *              When 'buf' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
+++ *
+++ *              When 'buf' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the name (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
+++ *
++  * Return:      Non-negative length of the path on success / -1 on failure
++  *
++  *-------------------------------------------------------------------------
++@@ -1157,6 +1210,10 @@ H5Rget_attr_name(const H5R_ref_t *ref_ptr, char *buf /*out*/, size_t size)
++     if (H5R__get_type((const H5R_ref_priv_t *)ref_ptr) != H5R_ATTR)
++         HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, (-1), "invalid reference type");
++ 
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (buf && size == 0)
+++        buf = NULL;
+++
++     /* Get attribute name */
++     if ((ret_value = H5R__get_attr_name((const H5R_ref_priv_t *)ref_ptr, buf, size)) < 0)
++         HGOTO_ERROR(H5E_REFERENCE, H5E_CANTGET, (-1), "unable to determine attribute name");
++diff --git a/src/H5Rdeprec.c b/src/H5Rdeprec.c
++index 6ca014e16..4b5437d4f 100644
++--- a/src/H5Rdeprec.c
+++++ b/src/H5Rdeprec.c
++@@ -741,9 +741,23 @@ done:
++  * Purpose:     Given a reference to some object, determine a path to the
++  *              object referenced in the file.
++  *
++- * Return:      Success:    Non-negative length of the path
++- *              Failure:    -1
+++ * Description:
+++ *              When 'name' is non-NULL:
+++ *                - if 'size' > 0: writes up to 'size' bytes into the buffer
+++ *                  (including null terminator) and returns the actual length
+++ *                  of the name (excluding null terminator).
+++ *                - if 'size' == 0: treats the call as length query, does not
+++ *                  write anything to the buffer (not even a null terminator), and
+++ *                  returns the actual length of the name (excluding null terminator).
++  *
+++ *              When 'name' is NULL: does not write anything regardless of 'size'
+++ *              and returns the actual length of the path (excluding null terminator).
+++ *
+++ *              On error, the buffer is unchanged and the function returns
+++ *              a negative value.
+++ *
+++ * Return:      Success:    The length of the path (excluding null terminator)
+++ *              Failure:    Negative
++  *-------------------------------------------------------------------------
++  */
++ ssize_t
++@@ -766,6 +780,10 @@ H5Rget_name(hid_t id, H5R_type_t ref_type, const void *ref, char *name /*out*/,
++     if (ref_type != H5R_OBJECT1 && ref_type != H5R_DATASET_REGION1)
++         HGOTO_ERROR(H5E_ARGS, H5E_BADVALUE, (-1), "invalid reference type");
++ 
+++    /* If buffer size is zero, treat as length query and do not write, even a '\0' */
+++    if (name && size == 0)
+++        name = NULL;
+++
++     /* Get the VOL object */
++     if (NULL == (vol_obj = H5VL_vol_object(id)))
++         HGOTO_ERROR(H5E_ARGS, H5E_BADTYPE, (-1), "invalid file identifier");
++diff --git a/test/links.c b/test/links.c
++index 262cd0f2e..091cdaf84 100644
++--- a/test/links.c
+++++ b/test/links.c
++@@ -154,6 +154,9 @@ static const char *FILENAME[] = {"links0",
++ #define TIMESTAMP_GROUP_1 "timestamp1"
++ #define TIMESTAMP_GROUP_2 "timestamp2"
++ 
+++/* Used by test_deprec() */
+++#define NON_NULL_BUF "NON_NULL_BUF"
+++
++ /* Link iteration struct */
++ typedef struct {
++     H5_iter_order_t order;     /* Direction of iteration */
++@@ -1990,8 +1993,11 @@ test_deprec(hid_t fapl, bool new_format)
++     hsize_t    num_objs; /* Number of objects in a group */
++     char       filename[1024];
++     char       tmpstr[1024];
++-    int        len = 0; /* Length of comment */
++-    herr_t     status;  /* Generic return value */
+++    int        len = 0;          /* Length of comment */
+++    char       non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++    char      *buf_ptr;          /* To pass mid-string */
+++    ssize_t    name_len;         /* Length of name */
+++    herr_t     status;           /* Generic return value */
++ 
++     if (new_format)
++         TESTING("backwards compatibility (w/new group format)");
++@@ -2052,6 +2058,17 @@ test_deprec(hid_t fapl, bool new_format)
++     if (len >= 0)
++         TEST_ERROR;
++ 
+++    /* Verify that passing a non-null buffer with size 0 still returns the correct name
+++       size and the buffer is not modified */
+++    strcpy(non_null_buf, NON_NULL_BUF);
+++    buf_ptr = &non_null_buf[4];
+++    if ((name_len = H5Gget_objname_by_idx(group1_id, (hsize_t)0, buf_ptr, 0)) < 0)
+++        FAIL_STACK_ERROR;
+++    if ((size_t)name_len != strlen(tmpstr))
+++        TEST_ERROR;
+++    if ((strcmp(non_null_buf, NON_NULL_BUF) != 0))
+++        TEST_ERROR;
+++
++     /* Test getting the type for objects */
++     if ((obj_type = H5Gget_objtype_by_idx(group1_id, (hsize_t)0)) < 0)
++         FAIL_STACK_ERROR;
++diff --git a/test/tattr.c b/test/tattr.c
++index 780f11591..af08d2db0 100644
++--- a/test/tattr.c
+++++ b/test/tattr.c
++@@ -148,6 +148,7 @@ static float attr_data5 = -5.123F; /* Test data for 5th attribute */
++ 
++ /* Used by test_attr_info_null_info_pointer() */
++ #define GET_INFO_NULL_POINTER_ATTR_NAME "NullInfoPointerAttr"
+++#define NON_NULL_BUF                    "NON_NULL_BUF"
++ 
++ /* Used by test_attr_rename_invalid_name() */
++ #define INVALID_RENAME_TEST_ATTR_NAME     "InvalidRenameTestAttr"
++@@ -6526,10 +6527,13 @@ test_attr_rename_invalid_name(hid_t fcpl, hid_t fapl)
++ 
++ /***************************************************************
++ **
++-**  test_attr_get_name_invalid_buf(): A test to ensure that
++-**      passing a NULL buffer to H5Aget_name(_by_idx) when
+++**  test_attr_get_name_invalid_buf(): A test to ensure that:
+++**    - passing a NULL buffer to H5Aget_name(_by_idx) when
++ **      the 'size' parameter is non-zero doesn't cause bad
++ **      behavior.
+++**    - passing a non-NULL buffer to H5Aget_name(_by_idx)
+++**      when the 'size' parameter is zero treats as a length
+++**      query call.
++ **
++ ****************************************************************/
++ static void
++@@ -6539,6 +6543,9 @@ test_attr_get_name_invalid_buf(hid_t fcpl, hid_t fapl)
++     hid_t   fid;
++     hid_t   attr;
++     hid_t   sid;
+++    char    non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++    char   *buf_ptr;          /* To pass mid-string */
+++    ssize_t namelen;          /* Length of attribute name */
++ 
++     /* Create dataspace for attribute */
++     sid = H5Screate(H5S_SCALAR);
++@@ -6569,6 +6576,20 @@ test_attr_get_name_invalid_buf(hid_t fcpl, hid_t fapl)
++ 
++     VERIFY(err_ret, FAIL, "H5Aget_name_by_idx");
++ 
+++    /* Verify that passing a non-null buffer with size 0 still returns the correct name
+++       size and the buffer is not modified */
+++    strcpy(non_null_buf, NON_NULL_BUF);
+++    buf_ptr = &non_null_buf[4];
+++    namelen = H5Aget_name(attr, (size_t)0, buf_ptr);
+++    CHECK(namelen, FAIL, "H5Aget_name");
+++    VERIFY(namelen, (ssize_t)strlen(GET_NAME_INVALID_BUF_TEST_ATTR_NAME), "H5Aget_name");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Aget_name");
+++
+++    namelen = H5Aget_name_by_idx(fid, ".", H5_INDEX_CRT_ORDER, H5_ITER_INC, 0, buf_ptr, 0, H5P_DEFAULT);
+++    CHECK(namelen, FAIL, "H5Aget_name_by_idx");
+++    VERIFY(namelen, (ssize_t)strlen(GET_NAME_INVALID_BUF_TEST_ATTR_NAME), "H5Aget_name_by_idx");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Aget_name_by_idx");
+++
++     /* Close dataspace */
++     err_ret = H5Sclose(sid);
++     CHECK(err_ret, FAIL, "H5Sclose");
++diff --git a/test/tfile.c b/test/tfile.c
++index 7f7e293b9..32ea586cd 100644
++--- a/test/tfile.c
+++++ b/test/tfile.c
++@@ -147,6 +147,9 @@
++ /* Declaration for test_incr_filesize() */
++ #define FILE_INCR_FILESIZE "tfile_incr_filesize"
++ 
+++/* Used by test_file_getname() */
+++#define NON_NULL_BUF "NON_NULL_BUF"
+++
++ /* Files created under 1.6 branch and 1.8 branch--used in test_filespace_compatible() */
++ static const char *OLD_FILENAME[] = {
++     "filespace_1_6.h5", /* 1.6 HDF5 file */
++@@ -2411,7 +2414,9 @@ test_file_getname(void)
++     hsize_t dims[TESTA_RANK] = {TESTA_NX, TESTA_NY};
++     char    name[TESTA_NAME_BUF_SIZE];
++     ssize_t name_len;
++-    herr_t  ret; /* Generic return value */
+++    char    non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++    char   *buf_ptr;          /* To pass mid-string */
+++    herr_t  ret;              /* Generic return value */
++ 
++     /* Output message about test being performed */
++     MESSAGE(5, ("Testing H5Fget_name() functionality\n"));
++@@ -2426,6 +2431,15 @@ test_file_getname(void)
++     VERIFY_STR(name, FILE1, "H5Fget_name");
++     VERIFY(name_len, strlen(FILE1), "H5Fget_name");
++ 
+++    /* Verify that passing a non-null buffer with size 0 still returns the correct name
+++       size and the buffer is not modified */
+++    strcpy(non_null_buf, NON_NULL_BUF);
+++    buf_ptr  = &non_null_buf[4];
+++    name_len = H5Fget_name(file_id, buf_ptr, 0);
+++    CHECK(name_len, FAIL, "H5Fget_name");
+++    VERIFY(name_len, strlen(FILE1), "H5Fget_name");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Fget_name");
+++
++     /* Create a group in the root group */
++     group_id = H5Gcreate2(file_id, TESTA_GROUPNAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
++     CHECK(group_id, FAIL, "H5Gcreate2");
++diff --git a/test/titerate.c b/test/titerate.c
++index 7efae3472..595a577d8 100644
++--- a/test/titerate.c
+++++ b/test/titerate.c
++@@ -39,6 +39,9 @@
++ #define SPACE1_RANK 1
++ #define SPACE1_DIM1 4
++ 
+++/* Used by test_reference_obj() and test_reference_attr() */
+++#define NON_NULL_BUF "NON_NULL_BUF"
+++
++ typedef enum { RET_ZERO, RET_TWO, RET_CHANGE, RET_CHANGE2 } iter_enum;
++ 
++ /* Custom group iteration callback data */
++@@ -894,7 +897,9 @@ test_grp_memb_funcs(hid_t fapl)
++     VERIFY(ginfo.nlinks, (NDATASETS + 2), "H5Gget_info");
++ 
++     for (i = 0; i < (int)ginfo.nlinks; i++) {
++-        H5O_info2_t oinfo; /* Object info */
+++        H5O_info2_t oinfo;            /* Object info */
+++        char        non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++        char       *buf_ptr;          /* To pass mid-string */
++ 
++         /* Test with NULL for name, to query length */
++         name_len = H5Lget_name_by_idx(root_group, ".", H5_INDEX_NAME, H5_ITER_INC, (hsize_t)i, NULL,
++@@ -908,6 +913,15 @@ test_grp_memb_funcs(hid_t fapl)
++         /* Double-check that the length is the same */
++         VERIFY(ret, name_len, "H5Lget_name_by_idx");
++ 
+++        /* Test with non-null buffer for name and 0 for size */
+++        strcpy(non_null_buf, NON_NULL_BUF);
+++        buf_ptr = &non_null_buf[4];
+++        ret = (herr_t)H5Lget_name_by_idx(root_group, ".", H5_INDEX_NAME, H5_ITER_INC, (hsize_t)i, buf_ptr, 0,
+++                                         H5P_DEFAULT);
+++        CHECK(ret, FAIL, "H5Lget_name_by_idx");
+++        VERIFY(ret, name_len, "H5Lget_name_by_idx");
+++        VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Lget_name_by_idx");
+++
++         /* Keep a copy of the dataset names around for later */
++         obj_names[i] = strdup(dataset_name);
++         CHECK_PTR(obj_names[i], "strdup");
++diff --git a/test/trefer.c b/test/trefer.c
++index cd6bf2ca1..4df923fd8 100644
++--- a/test/trefer.c
+++++ b/test/trefer.c
++@@ -88,6 +88,9 @@ typedef struct s2_t {
++ #define MAX_ITER_WRITE  MAX_ITER_CREATE
++ #define MAX_ITER_READ   MAX_ITER_CREATE
++ 
+++/* Used by test_reference_obj() and test_reference_attr() */
+++#define NON_NULL_BUF "NON_NULL_BUF"
+++
++ /****************************************************************
++ **
++ **  test_reference_params(): Test basic H5R (reference) parameters
++@@ -458,11 +461,13 @@ test_reference_obj(void)
++         *rbuf;          /* buffer read from disk            */
++     H5R_ref_t *wbuf_cp; /* copy buffer                      */
++     unsigned  *ibuf, *obuf;
++-    unsigned   i, j;     /* Counters                         */
++-    ssize_t    namelen;  /* String buffer size return value  */
++-    char      *namebuf;  /* Buffer for attribute's or dataset's name */
++-    H5O_type_t obj_type; /* Object type                      */
++-    herr_t     ret;      /* Generic return value             */
+++    unsigned   i, j;             /* Counters                                 */
+++    ssize_t    namelen;          /* String buffer size return value          */
+++    char      *namebuf;          /* Buffer for attribute's or dataset's name */
+++    H5O_type_t obj_type;         /* Object type                              */
+++    char       non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++    char      *buf_ptr;          /* To pass mid-string */
+++    herr_t     ret;              /* Generic return value                     */
++ 
++     /* Output message about test being performed */
++     MESSAGE(5, ("Testing Object Reference Functions\n"));
++@@ -626,17 +631,31 @@ test_reference_obj(void)
++     CHECK(namelen, FAIL, "H5Rget_file_name");
++     VERIFY(namelen, strlen(FILE_REF_OBJ), "H5Rget_file_name");
++ 
+++    /* Test passing in non-null buffer with buffer size is zero */
+++    strcpy(non_null_buf, NON_NULL_BUF);
+++    buf_ptr = &non_null_buf[4];
+++    namelen = H5Rget_file_name(&rbuf[0], buf_ptr, 0);
+++    CHECK(namelen, FAIL, "H5Rget_file_name");
+++    VERIFY(namelen, strlen(FILE_REF_OBJ), "H5Rget_file_name");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Rget_file_name");
+++
++     /* Get the file name for the reference */
++     namebuf = (char *)malloc((size_t)namelen + 1);
++     namelen = H5Rget_file_name(&rbuf[0], namebuf, (size_t)namelen + 1);
++     CHECK(namelen, FAIL, "H5Rget_file_name");
++     VERIFY(strcmp(namebuf, FILE_REF_OBJ), 0, "namebuf vs FILE_REF_OBJ");
++     VERIFY(namelen, strlen(FILE_REF_OBJ), "H5Rget_file_name");
++-
++     free(namebuf);
++ 
++     /* Testing Dataset1 */
++ 
+++    /* Test passing in non-null buffer with buffer size is zero */
+++    buf_ptr = &non_null_buf[8];
+++    namelen = H5Rget_obj_name(&rbuf[0], H5P_DEFAULT, buf_ptr, 0);
+++    CHECK(namelen, FAIL, "H5Rget_obj_name");
+++    VERIFY(namelen, strlen(DS1_REF_OBJ), "H5Rget_obj_name");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Rget_obj_name");
+++
++     /* Getting the name of the referenced object and verify it */
++     namelen = H5Rget_obj_name(&rbuf[0], H5P_DEFAULT, NULL, 0);
++     CHECK(namelen, FAIL, "H5Rget_obj_name");
++@@ -2479,6 +2498,8 @@ test_reference_attr(void)
++     char      *attr_name = NULL; /* name of attribute, from H5A */
++     ssize_t    attr_name_size;   /* size of attribute name */
++     H5O_type_t obj_type;         /* Object type */
+++    char       non_null_buf[80]; /* Buffer to test non-null buffer calls */
+++    char      *buf_ptr;          /* To pass mid-string */
++     herr_t     ret;              /* Generic return value */
++ 
++     /* Output message about test being performed */
++@@ -2649,10 +2670,18 @@ test_reference_attr(void)
++ 
++     /* Testing "Attr1" */
++ 
+++    /* Test passing in non-null buffer with buffer size is zero */
+++    strcpy(non_null_buf, NON_NULL_BUF);
+++    buf_ptr = &non_null_buf[4];
+++    namelen = H5Rget_attr_name(&ref_rbuf[0], buf_ptr, 0);
+++    CHECK(namelen, FAIL, "H5Rget_attr_name");
+++    VERIFY(namelen, strlen(ATTR1_REF_OBJ), "H5Rget_attr_name");
+++    VERIFY(strcmp(non_null_buf, NON_NULL_BUF), 0, "H5Rget_attr_name");
+++
++     /* Getting the name of the referenced attribute and verify it */
++     namelen = H5Rget_attr_name(&ref_rbuf[0], NULL, 0);
++     CHECK(namelen, FAIL, "H5Rget_attr_name");
++-    VERIFY(namelen, strlen(ATTR1_REF_OBJ), "H5Rget_obj_name");
+++    VERIFY(namelen, strlen(ATTR1_REF_OBJ), "H5Rget_attr_name");
++ 
++     namebuf = (char *)malloc((size_t)namelen + 1);
++     namelen = H5Rget_attr_name(&ref_rbuf[0], namebuf, (size_t)namelen + 1);
 diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index b28d1e0faf..20b2f1100e 100644
+index 350be8dc0e..b28d1e0faf 100644
 --- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
 +++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
+@@ -16,6 +16,7 @@ DEPENDS += "qemu-native zlib"
+ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BPN}-${PV}.tar.gz;downloadfilename=${BPN}-${PV}-1.tar.gz \
             file://0002-Remove-suffix-shared-from-shared-library-name.patch \
             file://0001-cmake-remove-build-flags.patch \
-            file://CVE-2026-26199.patch \
-+           file://CVE-2026-26197.patch \
++           file://CVE-2026-26199.patch \
             "
  SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
  
