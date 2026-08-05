@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C5B4C56201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F428C55ABA
 	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 10:56:30 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37818.1785927387904060231
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37817.1785927383264861584
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 03:56:27 -0700
+ Wed, 05 Aug 2026 03:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=npCXxUDO;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8484f229529so682960b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 03:56:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Bn0paFVu;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-cbe6295f05bso1642729a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 03:56:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785927387; x=1786532187; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1785927383; x=1786532183; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2T6vJYgubRUaIWa0VK//eD4vty8DV1yY6EFtj2do1Z4=;
-        b=npCXxUDOO6NLbDGvrATGxCaO/kZQVvTgLgUDFTc+bpG+6oMO7nITGgNIanVuJuaVu7
-         3+XB295Z0Nu1qq/oWHJTKROcUtivvA1JsjSoj1XEp6NQ5PCPScSqSf5Cmlmt8Hl3iqSB
-         vOdoDepZihVHNQGzgeSkuMNRocZN2OQNX9B60b3uwdg2le+UMncVbCv4ekrhtLWByW3W
-         Sx5LCcQmkj0fw/stCjX2WmqTWy4ShPBPpLFpzhB2J5Q+i/2HZUcIvZuG56qT+Wux2sDa
-         8WGYGRcyWiQzg4bOWGRbQQjCtnVRp7p3MbgDV392qw+0GC9KAz33zwz2JOcK8+6EycjV
-         3JRQ==
+        bh=gVRgqV6SzA4u1Rz1DyWpkK5iaecA3t1nHrp22e0n5U4=;
+        b=Bn0paFVuoM7QVW57w2dwOMwTx+XtX0gO10P8vzWMGXakKrXbizzbZXGv9PLPqMLmQi
+         XBpy9PZcOnTeWbjy/heKbVHCgHsDqnOLz5eXcLcsB8sKoUX+7QQHqxilluiWd8vlxY4/
+         uSzXq2UOapQd2A734odjjlvQzL8eg4R1SJ1yIG2+zCw5mu+cu0sCU4vlOxkdGYseyfoU
+         OPpRILLjCGOh3YY5cEKS+gNE8lX+WBvfAp0DxGnKM+jQ81AvnLTkYT1lUL6/v78fvp8N
+         zjYtoeNQ0A/XCl/Fk91lY+OfRZhhkr5Hr3S9q0DVGjUkmdEVRfoXpw3cg4HThLV6bl0L
+         c4zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785927387; x=1786532187;
+        d=1e100.net; s=20251104; t=1785927383; x=1786532183;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2T6vJYgubRUaIWa0VK//eD4vty8DV1yY6EFtj2do1Z4=;
-        b=c5+5wmpe3pMo0zivYLHd5eOZeflyVNyRtFfNrLlL9FqQ1fPL6kzSD6kE0+DLZxg0Z4
-         wtBpupf7gxL/s6Ko9Xbr1FRP2VEsmSV+NoK4W6/ogqaahITbI8k//YSIK/X0qOvACSDV
-         5w0aZjs+u59p5DxTPUSTe5BSrBKxWrgL2EOZ5xGDK1OQNYHfTt8y+heUAlmqWjIbOHpt
-         u/RBybP/OCIwnnkquMsA2WCeqcgzH4YUKoEE7p6615WuMU4mpbrRTtplQLLIi4IHingr
-         0HU6Wkdwieuu1Jkp9U8JggdvLlbHz0iAXaKJbzsOmfPsWL64H5i34Ef7dApCmQNvpS5V
-         Wh7Q==
-X-Gm-Message-State: AOJu0YyByUa/vGVQ/OOaAskfEa+HFpQDtNVIDdEZiigr/KvWCpHQXgFA
-	n/S2ezJlA3p8ftv1XoCQ0RvDEKk0haHHNuZ4u+VHiRzBfUaNSMV8E9IDCVJcsw==
-X-Gm-Gg: AR+sD11AgJaN8GKHpZsYcmY/Nu6PXgA8wKu3Y/bLDG1Hg+A269dGMqQM+KmlqSORzBq
-	6gDaEKKcA4DZP6uuJuCHut1NLlFRAptevJeF/U9bwZABpZtYByYqgm4EmsrYsCn0xAfZSCiGfsY
-	4NLtwttuUWqkzQdgOYuaRBTkCFoLg0rIx+pkaQKQXw1hFl2uGD7AjItE/Kvrz5+XbNviPSGsJcw
-	7v94nnA9YOp8lu/Xy18VFa7QgqVkRrvCFHA331kfQc0smYz3EsIxx6wID3cElBgdKMWA4zoRnTI
-	A09rxKOmSbgJxuybto3REuU3SK2I90Q0miLrePf8Vepz9oHPkk1DGhGbDuOzTxAfq4e1FvN9fFU
-	ZA36QfZyVw78FPEh3ntmArCAYqaMX1e+njrNwgK4yC8N0v+6zDspdbTl678wsVUhkOAr9DZ+L56
-	v8tSeK6IoAvSiWqnPojSDpPvKTTh20y6EtD2S3T93bevKlYnZXzt00B4p0B8AISiB9p97mWTPsO
-	drjdyKhSam7
-X-Received: by 2002:a05:6a20:9183:b0:3b3:486f:f2d1 with SMTP id adf61e73a8af0-3cb85dee539mr6418725637.3.1785927387235;
-        Wed, 05 Aug 2026 03:56:27 -0700 (PDT)
+        bh=gVRgqV6SzA4u1Rz1DyWpkK5iaecA3t1nHrp22e0n5U4=;
+        b=m+zHU2niU8tvFpObmxjOeMA7d2ho3QIeT7kEAPx/twuH6L3P7N6yhVzd4fR8Dh3vy0
+         OqGwDU/WVUxKpQrh17by9Hu6/SnPE2qEX0xx3bgRgAcRk7wLdKYpuBaUfNmC0zXF/VMO
+         VtB5MPwmyKy6nSaHDIqlo7WOVqvoJUSJRnRy0rYntMIEiAbutTcUORLWQdWfvou4gWtY
+         Bbfogo8HE4glPj7TMSDtefha3P59R9FO+9BFnVDzG1uu33lFxfEtjMaoueE5c35Wae4d
+         dmdTyWAKU1GwgCqFmfik82rYPbJ4DSPRWxg7d8VAStQaBzInN4oYmWBOSIh+DI9HvqZA
+         Z1XA==
+X-Gm-Message-State: AOJu0YxNJQSyNS8Bo7ZUvwnz9N9sbN2LyXMYzUx5TJwANWWLW0I59mwP
+	gyXQOxODU8DrpycLGVM/2alaAcWhhNaZu6Nm/K+BWAFqykYASq3PfKZeo+A6Qg==
+X-Gm-Gg: AR+sD11D/OlSjpsiMm5hRViq0KdY9zdjFb5C5wwLy6lgxREeLVIUmPTBGkhKKsl0mEK
+	Wb8iEbu7ivGRaSlRX794k6aj716hcNaqVrejfrPPRBa+8ohpd2gzzWgQ8EXODv5uV7e4VOEOgxc
+	56oN0S63Vebq4bBx+7F76C/NRuhcMjVLk+JqYEENfy/AQznGgO5NQHrjdMW3GGGIBPKkz48saxV
+	t7UmYjIQ3UB6RnOpY4dSZFJQYyaiuUdITFhe/1YXanJTvTT0Rwb2tdqy5DjFOObCHydp/0HSN9b
+	Dinfgl51JSmFwnNfTD35CTrRQ5m+sXTM1sqsunKnFF2XjvmT4CXnRgiEMWS0/lMzPtDRLLU6ztd
+	iH8RkHRjdR8LSu0kSkrDayM3MJqJFHoqn/fVfJVwKQj178ZImn9xfK6Og2QGpXZjhuo+woxfr4X
+	I+VxvJ4upSu2I4DsQ+ptTg9ro0s0w7ELPWFRsNs5J57c7b9ZU+8wsAsd80Qp5xw4rydqw4IX0i0
+	Q==
+X-Received: by 2002:a05:6a20:6f01:b0:3a2:c9a1:2c26 with SMTP id adf61e73a8af0-3cb6c752d7amr11206458637.7.1785927382636;
+        Wed, 05 Aug 2026 03:56:22 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31586790e21sm16407166eec.24.2026.08.05.03.56.25
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31586790e21sm16407166eec.24.2026.08.05.03.56.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Aug 2026 03:56:26 -0700 (PDT)
+        Wed, 05 Aug 2026 03:56:22 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 4/8] gst-instruments: upgrade 0.3.1 -> 0.3.2
-Date: Wed,  5 Aug 2026 22:56:07 +1200
-Message-ID: <20260805105612.1648951-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-gnome][PATCH 2/8] gvfs: upgrade 1.60.1 -> 1.60.2
+Date: Wed,  5 Aug 2026 22:56:05 +1200
+Message-ID: <20260805105612.1648951-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260805105612.1648951-1-ankur.tyagi85@gmail.com>
 References: <20260805105612.1648951-1-ankur.tyagi85@gmail.com>
@@ -68,49 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 10:56:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128813
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128811
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-- Dropped setting PV in the recipe and included tag in the SRC_URI.
-- Upstream removed ui configuration option[1]
-
 Changelog:
-https://github.com/kirushyk/gst-instruments/compare/0.3.1...v0.3.2
-
-[1] https://github.com/kirushyk/gst-instruments/commit/209dc6741159bbca9561df6598d45bbeab8cc2cf
+https://gitlab.gnome.org/GNOME/gvfs/-/blob/1.60.2/NEWS?ref_type=tags
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{gst-instruments_git.bb => gst-instruments_0.3.2.bb}  | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
- rename meta-multimedia/recipes-support/gst-instruments/{gst-instruments_git.bb => gst-instruments_0.3.2.bb} (65%)
+ .../recipes-gnome/gvfs/{gvfs_1.60.1.bb => gvfs_1.60.2.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.60.1.bb => gvfs_1.60.2.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.3.2.bb
-similarity index 65%
-rename from meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb
-rename to meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.3.2.bb
-index b3953cf5c3..476acfdb36 100644
---- a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb
-+++ b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.3.2.bb
-@@ -5,10 +5,9 @@ SECTION = "multimedia"
- LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
- DEPENDS = "gstreamer1.0"
--SRCREV = "cb8977a6711657e32853159cd539d1d75fcbc772"
--PV = "0.3.1+git"
-+SRCREV = "0fdaed3fbabe272e02cfc3b0a956b36da9f4ce63"
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.60.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.60.2.bb
+similarity index 97%
+rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.60.1.bb
+rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.60.2.bb
+index 7dca3cd3b9..bdcc331712 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.60.1.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.60.2.bb
+@@ -18,7 +18,7 @@ DEPENDS += "\
+ RDEPENDS:${PN} += "gsettings-desktop-schemas"
  
--SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;branch=master;tag=v${PV}"
+ SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+-SRC_URI[archive.sha256sum] = "90eaba333ab7d31a7fdeade45954a513c3661ccebbd9a138aab3fb481dfb9e40"
++SRC_URI[archive.sha256sum] = "a8d7744615a488a559302fe0cc8f418d5b44aba3c2ba2163e5a9e6f607c1be9a"
  
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- inherit vala meson pkgconfig
-@@ -17,6 +16,3 @@ FILES:${PN}-staticdev += "${libdir}/gstreamer-1.0/*a"
- FILES:${PN} += "${libdir}/*"
- 
- INSANE_SKIP:${PN}-dev = "dev-elf"
--
--PACKAGECONFIG ??= "${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'ui', '', d)}"
--PACKAGECONFIG[ui] = "-Dui=enabled,-Dui=disabled,gtk+3"
 
