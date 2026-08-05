@@ -1,174 +1,161 @@
-Return-Path: <ctheegal@qti.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94A5DC55174
-	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 05:46:11 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34030.1785908768698707236
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CF34C55822
+	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 06:44:03 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.34668.1785912236180538648
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2026 22:46:08 -0700
+ Tue, 04 Aug 2026 23:43:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ParagzkA;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.168.131, mailfrom: ctheegal@qti.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6753Vlq81017190
-	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Aug 2026 05:46:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	BpvmQ9bWpP1L/025WBad5WCmc81Jvs615+in1tweYoU=; b=ParagzkAKAMskpw9
-	Q39cG6+zWmtoU6BM53i/PjsZeGWf2CP0lohXkL2KjcXgzlJ9vOjzTOHiKsKVm0eX
-	bxao9HAAT9UBKyBy0i35wJLL7FXTSjagHIwzIsswagqfFe3lfs/u/pbSK/aKt7ir
-	KbdCvS4VmmuCSjJ1+6vHaw4uIqsdDoNGcoP/eyzaeshxgZDUUO4co5pTOmuXuBAq
-	BiEQdgn5qAKhZlk/Z/ahCKRNmSB37dw7i5gcXQ07Jvv6gfn7zwi5sftjnnjtzgW3
-	LjaaKcNsEiEzpJXkv13BhPXK5467QUo0vqGIakGA+PU21EVDInrPHyz7fHo2UtCi
-	GLdw3Q==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fuwbqrerx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 05:46:07 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTPS id 6755k68D010225
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Aug 2026 05:46:06 GMT
-Received: from hu-ctheegal-hyd.qualcomm.com (10.80.80.8) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.43; Tue, 4 Aug 2026 22:46:03 -0700
-From: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <ctheegal@qualcomm.com>, Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
-Subject: [meta-oe][PATCH v2] boot-time-analysis-tools: add boot time profiling tools
-Date: Wed, 5 Aug 2026 11:15:33 +0530
-Message-ID: <20260805054533.1722572-1-ctheegal@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260715130932.1438994-1-ctheegal@qualcomm.com>
-References: <20260715130932.1438994-1-ctheegal@qualcomm.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QdLhAA6J;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-8485bd28dd0so737367b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2026 23:43:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785912235; x=1786517035; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cQWpfoekk1Gkqlfu0D7DBsgOOVeazmmy4g49UdE/IWg=;
+        b=QdLhAA6Jtb16oYqTFYLDPEHK/ThZfFmRr6iwzyiRD+ZRJ77MNtBrycq83jRgo7pfKP
+         KxtAh+fjxHPMDrgkDR/cvLURmdpktR2WRGhxTKrWIruOfu6/xJOq3cE7rbZqOCDuo17D
+         djbtvb19bcu+04l53C9unc/hPtEm0Whr62u5jcZzBV0Cip3xWwruaAdzeJQCdg/tju4S
+         x64N8QE4vGSClN39jmRbinmlS/BLow31fu4QSXHNlWW5nB0EIGQUSIn5Lyc9+hE6ZQ/q
+         aX/KbtufBDKpLLeEpwWbJa6mqiQp/j6HhHajGcoqKLVCLdf+60RmsvlMZ/jR/x5zkTDg
+         8qeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785912235; x=1786517035;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cQWpfoekk1Gkqlfu0D7DBsgOOVeazmmy4g49UdE/IWg=;
+        b=Qgj9T4B+fAZxs4qXIpAVt5XWJR7h2KfojAbVfL5/SMwE1/kUxHjmF+ZtmgyX7HWy2i
+         0pq0q0si1n0P3sO9AZ8i7BFH0Cc1t0XzQTXaFUjCKK5KVLEx2avoa+onZ2SSZKt/HLvv
+         qTRnE0QP5oliWWMVPFirxGamorFK8pCOYKhSUUXCzwRBGTOfLl8AYJCQ81xmdinlB+Lt
+         Zxkd+BJ5nlO0xSLT/+Su5EYmNNDfxEIp0JT7zCSIwL6dE2cktf5j/Yj5Cl68UR8f2+5C
+         cp2R3CuiLd6y95hwkJMqHgeJL5T4faUL9YutH9QPcgbntUwrgmWreyu3wlce831TeFku
+         /1mA==
+X-Gm-Message-State: AOJu0YxueXrvQVZWH31p+suzN82guOUxQQbKTBeJkOxMZaSUVQoV9O5F
+	rd4/EYfQorJVf3FCihFzZjG43BWYrkpoLhvCZZGKIOPwv95B5msExH2HhpRGV5wM
+X-Gm-Gg: AR+sD11LDXsGxN4C28rCf7X7LgIUqYkzms3zDwOEz4aEd8cBzRcslWVtEK2E0ywtic/
+	3szv8gnYy6Fz8+snbVttuEkIwW7EOzUeFwzHkGKulaLoDnWR2Z+eyi+ff54bp9FDBz28wo9HWpD
+	YsYPxNJUDAwrpSp5md6K25e5cTmnJB8SwG6fAcKanHtxf1a86OCN2sy5DE0qtrKiMW6OysAhBQx
+	FHOorTEp3bK4AqG+ESLkY+bQF60y0xCOyaGOYxYXsyMujFiW6+pn/wEXIE1LY500I6yYdAlDVbm
+	mEjcIZcIuW5K87lH4buZAAfmmlJqDQDw4oGDnyvVHh6eSlhwsPjJp+qSevQh4QrzHfbWdN7Fri5
+	InwvnGoZ5T3YtgICi9OpGYdzqoLIYDjY/XpxsQps7D4ZwyUzCISMlBDdJ+fF2ovCFJUN8auVKyy
+	6UludTiVgT9Rg/3TWuY3jiwSfbhk0Wji+//VgRe5akwLQgkxeg4bgI0pbjZnXWjRjXcZzg3ws02
+	bKNso9LAu5x2QvVyDBxrnBPlBompOf9coVCV9KdaHWiNA0C/SUKQ1en2k5VLOL7yLxBIybpbppe
+	lXASJM7M5z7HaBmi7jW+ShItY0IRo0pUC/PddF3SPAa1hiqVNmJMRhkrmsbuYUYaE5FFBTdrbBL
+	ARA==
+X-Received: by 2002:a05:6a20:c5a7:b0:3c8:f98f:475b with SMTP id adf61e73a8af0-3cb85e6c950mr5379866637.19.1785912235358;
+        Tue, 04 Aug 2026 23:43:55 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca908068sm9892246c88.12.2026.08.04.23.43.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Aug 2026 23:43:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 1/2] python3-bleak: Use python_uv_build and drop the uv_build upper bound
+Date: Tue,  4 Aug 2026 23:43:51 -0700
+Message-ID: <20260805064352.2945950-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-ORIG-GUID: 1E1IAzc1j77tK0TZmXUIU90_Pfw3x1uE
-X-Authority-Analysis: v=2.4 cv=B+uJFutM c=1 sm=1 tr=0 ts=6a72ce1f cx=c_pps
- a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=GEpy-HfZoHoA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=Ujg9kQxSS-RusALq8T8A:9
-X-Proofpoint-GUID: 1E1IAzc1j77tK0TZmXUIU90_Pfw3x1uE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDA0MiBTYWx0ZWRfXwtX7cOqivpeT
- v33s8D/WIYPQBWioWqrcb095V3y6Cc41+6iBZf8U2OZHNH+ari+C9UYREDYYMWXt5v/xE/rCinC
- 9AMSV5pT3foYv9EQC8Rfg9rI/4XmgTA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDA0MiBTYWx0ZWRfXxIjTtYGfC5xu
- N0Wi5YQiu6ItYQo+mSQ+yW0qBE8PD5NryasQ0AeNgBSmhlWjSy/B2aEWMJr2JFZEKlslTqVH03y
- wxifj4SWLL0Bainh8Vz5Pbgpx3YK4YLoE+hTgbenb2xVZ5Bw4L0dX8LDiAv2kgxr/bADaIzT+i6
- x1NyUpJdXmlwKoMuYpbxNjVUanD4RyQHVGwPdHzndSpJgu18Zfu4hMUe/UQH1uLU/eQa7WKeB63
- i4C01dWDGesgeGwsJ70NPYxvRnWihq7V2weNtPWLG9oqb4bYgtXsDc3t9gXpDmFMUl/gscF5buM
- CkIg/+5DH/jZ7PG+u8v1BUS+aZPl0OD+5GOv9Lv/EGwM0BL8WER4y2tgPYRisC5Db141UkGmJNq
- mliEDrfaG7eyLYDK1mLEfD6NEJZIm0yAvUaEbGeu8d0AXI0INMU/5wwBjtmJmce9i02fwDrm5T6
- as1yFhspYXnmfyosyxA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-05_01,2026-08-04_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- priorityscore=1501 suspectscore=0 malwarescore=0 adultscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608050042
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 05:46:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128798
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 06:44:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128799
 
-Add two new recipes from the CentOS Automotive SIG
-boot-time-analysis-tools project to enable boot time profiling
-and measurement.
+bleak's build backend is uv_build, but the recipe inherited
+python_poetry_core and then added python3-uv-build-native to DEPENDS by
+hand. Both classes are thin wrappers over python_pep517 that differ only
+in the native backend they pull in, and python_pep517 takes the backend
+from pyproject.toml, so inherit python_uv_build instead and drop the
+manual DEPENDS along with the unused poetry-core dependency.
 
-boot-time-analysis-tools:
-  Python-based toolset for collecting, analyzing and visualizing system
-  boot timing data from the systemd journal. Provides the 'boot_timings'
-  CLI utility which queries D-Bus and the systemd journal to produce
-  structured boot time reports. Depends on python3-dbus and python3-systemd
-  for runtime journal and D-Bus access.
+The patch capped uv_build at <0.12.0, which the 0.11.32 -> 0.12.1
+upgrade in oe-core invalidated:
 
-cntvct-log:
-  Userspace C utility built with Meson that logs ARM CNTVCT_EL0 virtual
-  counter timestamps to correlate hardware-level timing with systemd boot
-  events. Installs cntvct@.service as a systemd template unit (disabled
-  by default) for on-demand per-instance activation. The service preset
-  file (98-cntvct-log.preset) is installed for system-preset-based enablement.
+  ERROR Unmet dependencies (checked against .../nativepython3):
+  	uv_build<0.12.0,>=0.10.9
 
-Both recipes fetch from the same upstream git repository:
-  https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools
+This bound has now broken twice, and there is only ever one uv-build in
+the sysroot, so drop the upper bound rather than raise it again.
 
-Signed-off-by: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
+Verified on aarch64 for qemuarm64: do_compile fails before the change
+with the error above and both do_compile and do_package succeed after.
 
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
-Changes in v2:
-- Move recipe under meta-oe/dynamic-layers/meta-python to fix
-  layers dependency check (meta-oe must not depend on meta-python
-  unconditionally). Reported by Khem Raj.
----
- .../boot-time-analysis-tools_0.7.1.bb         | 13 +++++++++
- .../cntvct-log_0.7.1.bb                       | 27 +++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
+ ...leak-Support-newer-uv_build-versions.patch | 23 +++++++++++++++----
+ .../python/python3-bleak_3.0.2.bb             |  6 +----
+ 2 files changed, 20 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
-new file mode 100644
-index 0000000000..67dba14897
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Boot time analysis tools from CentOS Automotive SIG"
-+REQUIRED_DISTRO_FEATURES = "systemd"   # only build if systemd is in use
-+DESCRIPTION = "Tools for analyzing and visualizing system boot time"
-+HOMEPAGE = "https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
+diff --git a/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch b/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
+index bead8f3be6..043d7887c0 100644
+--- a/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
++++ b/meta-python/recipes-devtools/python/python3-bleak/0001-bleak-Support-newer-uv_build-versions.patch
+@@ -1,11 +1,26 @@
+ From 2e0994321b57e547a3c1f7e1f225e55ca007e45f Mon Sep 17 00:00:00 2001
+ From: Leon Anavi <leon.anavi@konsulko.com>
+ Date: Mon, 15 Jun 2026 17:53:47 +0300
+-Subject: [PATCH] bleak: Support newer uv_build versions
++Subject: [PATCH] bleak: Drop the uv_build upper version bound
+
+-Support newer uv_build versions
++bleak 3.0.2 requires uv_build<0.11.0. OE builds wheels with
++"pyproject-build --no-isolation" against whatever python3-uv-build is in
++the sysroot, and that check is enforced:
+
+-Upstream-Status: Submitted [https://github.com/hbldh/bleak/pull/2001]
++| * Getting build dependencies for wheel...
++|
++| ERROR Missing dependencies:
++|       uv_build>=0.10.9,<0.11.0
 +
-+SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
-+SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
++Raising the bound just moves the problem to the next uv-build upgrade --
++it has already been hit twice, most recently by the 0.11.32 -> 0.12.1
++upgrade in oe-core. Since there is only ever one uv-build in the
++sysroot, drop the upper bound instead.
 +
-+inherit setuptools3
++Upstream merged a bump to <0.12.0 (https://github.com/hbldh/bleak/pull/2001)
++which will be in the next release, but that would need raising again too.
 +
-+RDEPENDS:${PN} = "python3-dbus python3-systemd "
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
-new file mode 100644
-index 0000000000..8cf2a4c225
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "cntvct-log - ARM virtual counter boot time logger"
-+DESCRIPTION = "Userspace tool to log ARM CNTVCT_EL0 counter values for boot time analysis"
-+HOMEPAGE = "https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
-+
-+SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
-+SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
-+
-+S = "${UNPACKDIR}/cntvct-log-${PV}/cntvct-log"
-+
-+inherit meson systemd
-+
-+# Manually install service file if meson.build doesn't handle it
-+do_install:append() {
-+    if [ -f ${S}/usr/lib/systemd/system/cntvct@.service ]; then
-+        install -d ${D}${systemd_system_unitdir}
-+        install -m 0644 ${S}/usr/lib/systemd/system/cntvct@.service \
-+            ${D}${systemd_system_unitdir}/cntvct@.service
-+    fi
-+}
-+
-+SYSTEMD_SERVICE:${PN} = "cntvct@.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+# Explicitly include the service file in the package
-+FILES:${PN} += "${systemd_system_unitdir}/cntvct@.service"
++Upstream-Status: Inappropriate [OE specific]
+
+ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+@@ -21,7 +36,7 @@ index 3224afc..4be6da7 100644
+
+  [build-system]
+ -requires = ["uv_build>=0.10.9,<0.11.0"]
+-+requires = ["uv_build>=0.10.9,<0.12.0"]
+++requires = ["uv_build>=0.10.9"]
+  build-backend = "uv_build"
+
+  [tool.uv.build-backend]
+diff --git a/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb b/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb
+index c84b6bbc8d..022582e0e9 100644
+--- a/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bleak_3.0.2.bb
+@@ -8,14 +8,10 @@ SRC_URI:append = " \
+ 	file://0001-bleak-Support-newer-uv_build-versions.patch \
+ "
+
+-inherit pypi python_poetry_core ptest-python-pytest
++inherit pypi python_uv_build ptest-python-pytest
+
+ SRC_URI[sha256sum] = "c2229cb8238d5876b4bd05c74bf7a1aea1f88da39d2e51ac9dfd5cc319d5265f"
+
+-DEPENDS += "\
+-	python3-uv-build-native \
+-"
+-
+ RDEPENDS:${PN}-ptest += " \
+ 	python3-asyncio \
+ 	python3-pytest-asyncio \
 
