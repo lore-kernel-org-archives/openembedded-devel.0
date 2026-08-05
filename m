@@ -2,69 +2,69 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12DF7C55174
-	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 15:44:13 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.43199.1785944648038849450
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B8A3C55ABA
+	for <webhook@archiver.kernel.org>; Wed,  5 Aug 2026 15:47:03 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.43237.1785944821013921715
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 08:44:08 -0700
+ Wed, 05 Aug 2026 08:47:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=aZ8/Yw7x;
- spf=pass (domain: konsulko.com, ip: 209.85.128.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4954d29264cso6088135e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 08:44:07 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=flV5Tma5;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-496bb7cdf51so13222575e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 08:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1785944646; x=1786549446; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1785944819; x=1786549619; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Zam/zHej4PInrbiZEslfrmISjSOPJTlOEnJCRnXFXI=;
-        b=aZ8/Yw7xDukQqP34WMwFPop1XkLDWbqerZJZ8AeQ6HTOx26B+mxPP37fMVDqdbscan
-         BAs1l9qNzqftYS3xWc5K57jQU8xVh1AAkwKSM6YcslS7v4fYhDguU4r0Bvfej3mWhJpm
-         5jjefP5kKgGFtiqDURba62A+UegzlBvj6plWs=
+        bh=zQ6du6qomFzzK+BOQNkAEViz75t5ZsQvjdl+5nflj8A=;
+        b=flV5Tma5p52GA8LAlLW/8G+ttL/58ToVVNK1MdzGMSc9qEmkjC69PUdJ3A5RVae90j
+         juHyYH4+tFcJKpk4rD5DNeEsy208M4qr+gppKGN7IfGwDdPmZExUsWcblhbxNKRfTlUp
+         NlXURUhVxgk9mepKsPcYCWVfwD846OdlLdn3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785944646; x=1786549446;
+        d=1e100.net; s=20251104; t=1785944819; x=1786549619;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8Zam/zHej4PInrbiZEslfrmISjSOPJTlOEnJCRnXFXI=;
-        b=rVi07lUnJ+RR20vbD66uiWTLsx7rzEJCsZiEUNtqptQc35TBbf1Y/Dpba0LyOEk2yC
-         GAIR1hFnaT/2utn34F29qjVOWaEb29VSMDExce21AczZTAXGDh77rFWxtJnpdj/1GIcF
-         8ry3mJPDgeJYQgkgBiseppDuYJZfp/FS0OIbIhGGtPh4UhK79TGNlE3F4ILfs9df6XbO
-         ct8OEoaFhAcbyDHpkW4kRsgMBUpcuLawloH/4EnYXvd0BN/Yfqgs45eb8JVt/uv7n3vY
-         cVOUeDRd2h9dZWITOPwr6Q8E47iDnJNQhayyHI+SqBL3HIJYpepDWwTzxZ5mgHtLwrN/
-         1tBQ==
-X-Gm-Message-State: AOJu0YzWc8z/qDYEPRV+sL6ry59g3KSXaSuNoD1ZCNR9zikyeyn1bbKF
-	jMiyVl8gi9qDN9lrMBG96rYgHJu++pChpMsFLtEOrSovXH3ykyUsU5HT//04I30YKhV4w8l5HRp
-	D4Cuw
-X-Gm-Gg: AR+sD11WtnU1GztnLVZc3zxEV/4peoansDzt4G3n6jrKuIq527DZtypchFIrb+gTdED
-	lIYZu+ysBGWGg33A1o8NpuZQeNlWU0fYg6pwl9PWeyEXiqu2HTBzEtFbXEXPj1queHC1dQ7uo8M
-	j39sKMroAHPZpmghSTbF3buSy6xQ3Fw/Lku8HYAAvMpcfbCrXGw8wU+9oP8HjTCrqiYBhfdsl6z
-	2u0xUSPML9mBHcJUm2K95f/xJuc/sVbYszih43hQpWnSBLnz5CmN82hMcoN/CBpqGtgNzWlHXqq
-	7c8zGccLvwVHhdADJzsBi1FPdoEEK5LEcoLDGv2ewPU7idn+zFnEv7C7XP1wNQqos53yNEsJsL6
-	n8uMNKTNZxDTqkk9sq2D0RAdJmwrhXGKNLNCEH9rhB6Fp21s+hW+rX9bRKd0K+NL+ko6Z/DORFn
-	pJj9l8RLW6c/VYF4LcJ3oJ7XXkRnldWaRVybTr3yBfxJf2Ao77IHMvo597/18FWUS7vpxpZSlsP
-	Ahc71r/V6NAP4qzplRweV9pfK7PukYYi8oi90ARppnKxkAIFET69I1vA59jSF77wcJXEkVxKiGQ
-	lGwvzJO0m3+53R+bIcugo7H8
-X-Received: by 2002:a05:600c:19cd:b0:498:519:e660 with SMTP id 5b1f17b1804b1-4994e72f7b6mr93823115e9.4.1785944646005;
-        Wed, 05 Aug 2026 08:44:06 -0700 (PDT)
+        bh=zQ6du6qomFzzK+BOQNkAEViz75t5ZsQvjdl+5nflj8A=;
+        b=LXSrcOiVSmJ4R/2Jy2OY2WuqDUAG0b7XKRh/29h9iMRLsDugWA3fXm6Hj2EKJ5DIFp
+         qYrI+/ZFXP8TbPm2QMazZdpsAk2sLWQwSclVMp8AuNwR6FuKvjDJB6lRq36R5JZU9KzG
+         uhho24JM0wkmw7L7xiSpz8EXyy99K1BQyWI44085xAKR6ArjqemW2ABGd+I8mVhBPwU3
+         kdYlOxnDGkkw1oNVbZGfq+7aqqxVDHPmy4qOJkE0Z3JoJq/f1msyQaLlpZsUsydmz6zq
+         2IaKA3bBGwkkQnlcA2Lat/VIfrPGvt91D+qKyDCqeGWYSdgb2Jlub6VLWL3B/d4SUqJ7
+         Vp3g==
+X-Gm-Message-State: AOJu0YxSpNYhEMvPY4pLbgahVEGVU6BT+OOs/CKrB1xqSZ35/Fb5A8e2
+	jOKql2Nlsmww4XE16Va9NsorEUQ5OzKACAQmRrGYN4rAXuTEU9FeXgetATM0X7Gl0SwHNgtY9VQ
+	zwfNG
+X-Gm-Gg: AR+sD10o+aZ5xPcyrI876ZSm2tovFGTMhwTqQjGPy3eiD48Quy+gWJwBdXwCYySyzFc
+	0NEMCbfP6o59Ll/VDjbaPT34pNwd9ahAuz++SOKd6tZIhfFhgOc7shFPxxcHD0DpedEUL2xIdzG
+	IRxXszFDddg4FjChByKBbE+27exRhWN9R6t+3vJM+sQ7zF3+p9Jv1IcBEpQ49zv5U5LA2KoPl8H
+	8fBeSZ6R5uXCP3+MgTYD0J65dslit3q2Vo3ck3kaeTbaBLIzZdSeNxxpCH4WHw2h5VmMuRwOOXy
+	6srdycJFY3h4WPyerRLHjncYkdpUeKWSWfQVCtCCDBIj/Vm38tmGMDieWoJ6wB1tBtlEsR3xKQy
+	VhhXYEHGAjAztJ0AADecEM9P4dvTvPiIm6sOBiqKtpK3aNeLSv2vnwa2vZY/AhfgqOwQb+jdjKT
+	CFpJdRoztdkEKkxEVdiiEyWfl88lF26SHMxFtxj4/nCTJg2PgavPvyiepxGE0tIGWiZA6q9quua
+	X6z0XJOY7LGRRZcOT11L/nksVirSk5+bv+02tb/vaYLoo2X5EQ+F3dnCTvLvQerS/+RtNOw+T+X
+	t7kHvCi6Iqw99d1cRog5M5wt
+X-Received: by 2002:a05:600c:3b20:b0:499:4893:97d3 with SMTP id 5b1f17b1804b1-4994e7cb8ebmr91552645e9.13.1785944819162;
+        Wed, 05 Aug 2026 08:46:59 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4994e99319bsm50858375e9.3.2026.08.05.08.44.05
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4994e52d819sm48307915e9.1.2026.08.05.08.46.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Aug 2026 08:44:05 -0700 (PDT)
+        Wed, 05 Aug 2026 08:46:58 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-pikepdf: Upgrade 10.10.0 -> 10.11.0
-Date: Wed,  5 Aug 2026 18:44:01 +0300
-Message-ID: <20260805154401.2869647-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-pikepdf: Upgrade 10.10.0 -> 10.11.0
+Date: Wed,  5 Aug 2026 18:46:55 +0300
+Message-ID: <20260805154655.2870084-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 15:44:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128820
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2026 15:47:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128821
 
 Upgrade to release 10.11.0:
 
@@ -107,22 +107,25 @@ Upgrade to release 10.11.0:
   {exc}~pikepdf.exceptions.InvalidPdfImageError instead of failing
   further down with an obscure error from Pillow.
 
+This work was sponsored by GOVCERT.LU.
+
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pikepdf_10.10.0.bb => python3-pikepdf_10.11.0.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pikepdf_10.10.0.bb => python3-pikepdf_10.11.0.bb} (82%)
+ ...python3-pikepdf_10.10.0.bb => python3-pikepdf_10.11.0.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pikepdf_10.10.0.bb => python3-pikepdf_10.11.0.bb} (75%)
 
 diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.10.0.bb b/meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb
-similarity index 82%
+similarity index 75%
 rename from meta-python/recipes-devtools/python/python3-pikepdf_10.10.0.bb
 rename to meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb
-index 7355c68c8b..d34b4f3813 100644
+index 7355c68c8b..91ea5fd821 100644
 --- a/meta-python/recipes-devtools/python/python3-pikepdf_10.10.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb
 @@ -1,9 +1,10 @@
- SUMMARY = "Read and write PDFs with Python, powered by qpdf"
-+DESCRIPTION = "Read, write, repair, and transform PDFs in Python, powered by qpdf"
+-SUMMARY = "Read and write PDFs with Python, powered by qpdf"
++SUMMARY = "Read, write, repair, and transform PDFs in Python, powered by qpdf"
++DESCRIPTION = "A Python library for reading and writing PDF, powered by QPDF"
  HOMEPAGE = "https://github.com/pikepdf/pikepdf"
  LICENSE = "MPL-2.0"
  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
