@@ -1,504 +1,253 @@
-Return-Path: <hthakar@cisco.com>
+Return-Path: <OmkarAbaji.Patil@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09888C55ABF
-	for <webhook@archiver.kernel.org>; Thu,  6 Aug 2026 05:51:54 +0000 (UTC)
-Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13114.1785995511396216566
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CBBFC55ABF
+	for <webhook@archiver.kernel.org>; Thu,  6 Aug 2026 06:23:24 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13875.1785997396261260908
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 22:51:51 -0700
+ Wed, 05 Aug 2026 23:23:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ih74iBxe;
- spf=pass (domain: cisco.com, ip: 173.37.142.95, mailfrom: hthakar@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=14833; q=dns/txt;
-  s=iport01; t=1785995511; x=1787205111;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Mn/MGvpRGi12zNJJxbRAK2qJ4h9NAYwWr/AO0VbJPmY=;
-  b=ih74iBxeTB/RCV14Bg+gGNCm0DuF5450Zbz0kit4kk0AjaSvXUTzdTQq
-   Qnbcm42BFCavCq9E+HdY32M7HPOqw7aOentxybP6U1rQ5tqgm1Dhkj1Tc
-   w8N9GTl8uc+fwo6AGp99LZn2R6Tyyu9sGvGZ9MxTRMlTA3S+ZY2bDIjfq
-   Ibo4NzEyFwF3Nx4fN71Yb3pwyVQhrnUh7VDRcp1miLUU+cnBI5Mxn+bgH
-   3zOL/iNqwvWM1+A9dv8P46N55CK5kz1sWL4QoSN2NUdcVASynHm+Cl4Fs
-   Ag9gLdmbiquQ381jciEDADFIEUmriYUA2foIJ8iolhCK2f2TB0lr3wcrr
-   A==;
-X-CSE-ConnectionGUID: th0LdhjvQZa9dUbyKo3ffg==
-X-CSE-MsgGUID: /Ky255y5QwKo0/muNkNYig==
-X-IPAS-Result: =?us-ascii?q?A0BLAgC5IHRq/4wQJK1aglmCV3ReQ0mVXmwDgROKUYVmj?=
- =?us-ascii?q?FEUgWoPAQEBD0QNBAEBhD9GAo1mAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4Thk8NhloBAgEDJwsBGAEtEBwDAQIvIAsjCBkagmgBgjoDN?=
- =?us-ascii?q?wMRvHSBeTOBAYJmQgGBVNhJDYFJgQ8BCxQBBYEzhT+CfoUjXRgBRIQ4Jxsbg?=
- =?us-ascii?q?XKBFYJzdoEFgRpCAoEnEQ+GXgSCDRWBDIFaHoEteGKDR4NcA4ZLSIEeA1ksA?=
- =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+F4ENGwcFgR2BKIRoIxk2eoEJXoEtKmQBE?=
- =?us-ascii?q?heBCYJvAoJ6gSkLGA1IESw3FBkEPm4HjX8ggU5TDhIBFRdhAQckRgIzChQHL?=
- =?us-ascii?q?QgXAR4VGzySbAERkAyCIYpzlF5NcQoog3WMIY8+hXwaM4QEgVeSQJJRC5h9j?=
- =?us-ascii?q?gqECZIFQoRpgWg8gVlwFTuCZwlKGQ9WjVQECguDYIRQQ1HGVScyAgkyAQEHA?=
- =?us-ascii?q?gcOAwuBaJAAASeBVgEB?=
-IronPort-Data: A9a23:lgPvRqx5hMRL+zpuBrV6t+dhxyrEfRIJ4+MujC+fZmUNrF6WrkUCm
- GtMXDiCPP3cazT0ft5wbN+19koDuZ6Bz9NiTQY4/lhgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 46aT/H3Ygf/hWYkaj9MscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJF02ZakU+uRpOFNHp
- PAlIiEuaUuNie3jldpXSsE07igiBMDvOIVavjRryivUSK59B5vCWK7No9Rf2V/chOgXQq2YP
- JRfMGQpNUiYC/FMEg9/5JYWnPuoj3r2aRVTqUmeouw85G27IAlZgOC1aIeEJozSLSlTtgG7t
- zibonWkOw45M4TYzCej8VSdh+CayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl7CQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSn1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:pLhydKDDcHHKFM7lHel055DYdb4zR+YMi2TDGXofdfUzSL3+qy
- nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygd179
- YHT0EHMqySMXFKyeDn/QK/D9EshPOD8KyumKPi6k0Fd3ASV0mlhD0JcTpy1SZNNXF7OaY=
-X-Talos-CUID: 9a23:4wPeHmB8NGVgLCT6EzVnrGoYGsI7S0/UnXvtKV6bDj1nRrLAHA==
-X-Talos-MUID: 9a23:bHYGDAkPPasYRx9PWFafdnolF9Yyvvm/VXkSspJe/MyZEy9WCjaS2WE=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.25,207,1779148800"; 
-   d="scan'208";a="800059480"
-Received: from alln-l-core-03.cisco.com ([173.36.16.140])
-  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Aug 2026 05:51:30 +0000
-Received: from sjc-ads-5471.cisco.com (sjc-ads-5471.cisco.com [10.28.23.235])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-03.cisco.com (Postfix) with ESMTPS id 4AF101800042F;
-	Thu,  6 Aug 2026 05:51:30 +0000 (GMT)
-Received: by sjc-ads-5471.cisco.com (Postfix, from userid 1887505)
-	id EA517CC12A6; Wed,  5 Aug 2026 22:51:29 -0700 (PDT)
-From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ieZ6kb1o;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=26789fefaa=omkarabaji.patil@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6764sWjf3561744
+	for <openembedded-devel@lists.openembedded.org>; Thu, 6 Aug 2026 06:23:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=aHrhfeDuHBkuuqw/U06m
+	+N1rhNJ+D6PMlO668G5R4uI=; b=ieZ6kb1o2jiGGZjhb+vxg6a8yqi8HTQeo1FI
+	X3l0xfmabLcTu7TgPpAVQ7D7JqtDf9wfIkR0Ev3+05ucI9NPdE9wCIWYP7JlXFMW
+	fnWU4SY4sX4ETgtQ7aP8guEyPuRoyB0PBY2yWz5hevTuNdTIpnG7toIuQAMTBxlN
+	+yz2z3v/LLqEOq9JJkRlctgUZPsvBI06ki80NiFqeOX3zr9MC5z/6e1s4vRoojnb
+	a9WBGvF0a+tLOK1QjrvFW0499lCKAqRPVqSer5/5iSorIMq4qPaC2wgmKMWAWtSh
+	kBe7apNOr7n+KQYEZsXtW2K2ukDqmMEmXC9q+vVofiQQUwudAw==
+Received: from bn1pr04cu002.outbound.protection.outlook.com (mail-eastus2azon11010030.outbound.protection.outlook.com [52.101.56.30])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4fs7s8g86g-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 06 Aug 2026 06:23:14 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qS9SYDlu7nrIf3cWYZknLBtUEriG5MMTd9YJd2vJhehEwmdtSf3U0GElOjIKro3jPgNHfqFG1caS2ZjXCRr9t/lXKfYVZmGcgHYYiylzgtG61L57V2/M8ICWDQhtikK+9dTkpaxpfmvbwR7gqIGzKHRhxJ1AMc4sCNr8wdrH5kUwi+xFwikC8Mo3sTysGhr7jzBIdsm/zgDGiC3Jx2ahmFRuu8Ro8TL4Dz1IweqoE9fg+r2gB2hhYfGsDYJ8nVspIvxjifsID1v+4mjFx9f/sftqzC/+UFosTn5+eKE+9Oy1fhqJ8W3cnrIHeoZxau++YWnrvr7jzz8nuUQLklzqBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aHrhfeDuHBkuuqw/U06m+N1rhNJ+D6PMlO668G5R4uI=;
+ b=ewLmBqb+4ROBqtDLSgP7YDT+yoFIonFv7ae+jcfRwNsBExX/9xbUgtkHSlosTwPC0Hu5R3mjsW4cJPubNcG5jzphiMHuFenUp8lfkarXbbKleoIZxOaJf9A4W0tPkKwD4MlWqweR7cEnWQGVSQpMYuFXupvmFlSzKg8gfXy4elyiDaxztBVAyZ0O2smEbcN/x0k3CFwDzXQK1KsjSLsTlLtMwvjD0oDVkNGNadyqRL9L/YHUP7HTbdnYYo43FfZLlP+EXhZSsm9nnncXZ5GwWZdms34wHMghhKRXK1e5/cyi4E6vNeK/PzTyKXNzykI3IaP89AChAxJLO1+1YuMESw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from PH3PPF3ECB6A513.namprd11.prod.outlook.com
+ (2603:10b6:518:1::d19) by PH8PR11MB9535.namprd11.prod.outlook.com
+ (2603:10b6:510:39f::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.19; Thu, 6 Aug
+ 2026 06:23:12 +0000
+Received: from PH3PPF3ECB6A513.namprd11.prod.outlook.com
+ ([fe80::af7a:fb70:1f7e:534f]) by PH3PPF3ECB6A513.namprd11.prod.outlook.com
+ ([fe80::af7a:fb70:1f7e:534f%3]) with mapi id 15.21.0270.018; Thu, 6 Aug 2026
+ 06:23:12 +0000
+From: Omkar Patil <OmkarAbaji.Patil@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com,
-	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-python][scarthgap][PATCH 5/5] python3-twisted: Fix CVE-2026-42304
-Date: Wed,  5 Aug 2026 22:51:01 -0700
-Message-Id: <20260806055101.23160-5-hthakar@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260806055101.23160-1-hthakar@cisco.com>
-References: <20260806055101.23160-1-hthakar@cisco.com>
-MIME-Version: 1.0
+Subject: [meta-networking][wrynose][PATCH] openvpn: fix CVE-2026-40215
+Date: Thu,  6 Aug 2026 11:52:48 +0530
+Message-Id: <20260806062248.2339681-1-OmkarAbaji.Patil@windriver.com>
+X-Mailer: git-send-email 2.40.0
 Content-Transfer-Encoding: 8bit
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-5471.cisco.com [10.28.23.235];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.28.23.235, sjc-ads-5471.cisco.com
-X-Outbound-Node: alln-l-core-03.cisco.com
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR02CA0048.apcprd02.prod.outlook.com
+ (2603:1096:4:196::23) To PH3PPF3ECB6A513.namprd11.prod.outlook.com
+ (2603:10b6:518:1::d19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH3PPF3ECB6A513:EE_|PH8PR11MB9535:EE_
+X-MS-Office365-Filtering-Correlation-Id: ce1254d8-8c11-47e9-ed1e-08def383311a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|366016|52116014|1800799024|376014|11063799006|56012099006|10067099003|6133799003|12006099003|18002099003|13003099007|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	ljc/MbY668HGKQ3/22iyArFs1gEcNDOzMGriSp3GlI7eoEuJjhLlVPEEKyiudQGd2Iu3qKQXuYKUal4FQDkRduVPEfm2YR1BWtAH8s6RhRpFqNi7yMBfPaNY/hvUxggsKgrajgU6EMNheEgiFJCijfbRjSzvAEivNjBVxn6b0x34XOzn3s19Wa0mEm+5DCG9ItO3wuxSn2iWKZ9oJJv2aK7cmhXKxiVmfVTcD3zeLIuA9d+LFrWnsrlo60GnN4BXxjmklsnRqOWppEcCJDwxIzn432TjQnFdfYPX7kg7cteGdj/q473fqW/tHksD6ovwkCYd1hkJwQuTwV+XaQfdrTnMb6LTLXlfPjhcVNKFBtrUhHEXVhLQtHiKjujWrBAoRZRX/y1UAIhRi2lYzyyLKBfIxQo9lz8V9GBfsVRZXoHP3de+GP+KWyJEdle1RueyPY/xt+S7Vmmf4KJsa861LoVnY5HVIdCizwLo+4VR7wZf1sAMyvIIN621r0tv0O1DymreOJM2y8z4hRthdKHmyOwtaz5B4Z8q+eEyLqCdadnLBVf7jSFWRKJB4QmARYflU2AwctsclqMBG8chRM5H2nOf6XFO4lw/PAKPjfZ5/0Wjit/IFq1Mhrlg3LNzUhzS9bDVe5OT6sul1FCc1j7SKDZql916dqgjFI0eHeW7t3cCYd9MKrMjT8/2QrE2KPpT+lwr5fuKNPh+hSwYUWTEN4mrBWknyGIkJbYoMZPUqfY=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH3PPF3ECB6A513.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(52116014)(1800799024)(376014)(11063799006)(56012099006)(10067099003)(6133799003)(12006099003)(18002099003)(13003099007)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?u0EdXs8jLjer7Kx/98NqjmqNKTnx4jR1SDlOdeDpTOV8Lehn4HIgxYxAWh44?=
+ =?us-ascii?Q?CMM/gqu+vcN7GMUIpngr4uCJKJtdr/mKoaJGiGdM6fk2ap5y539qwNzJnuP0?=
+ =?us-ascii?Q?w7dN9Mvi0xB5tKxF27T9tgGuHJU1hW84P3LRlnjf7H8lPqQBH4D6SGNZ2tE7?=
+ =?us-ascii?Q?FJZCrXQ9Nh7hZLMaJ6o5+xxDznVyxsPUbqe7a29AG6JupbOhfuFI53Gic/kY?=
+ =?us-ascii?Q?GYhA/22ff8QCCw00r9iY6BedwYp85TBvjsryMCx1nQqbsGXzSobyVI81EsP0?=
+ =?us-ascii?Q?TzmIMKigFhtJVY8JGsjqnQkUo/n5cRftq0y99mx/yy3MNNHGOF/ubbxti2O/?=
+ =?us-ascii?Q?wTI5JQNWVysjGtrEnXBunJrPmm81oNZxnMMjdnyKrTI/HTvzLTzTdxXsloEd?=
+ =?us-ascii?Q?fPufx0ejAgdIUBovf7IfdcJ/QbxpEw5newAtiH9jmSszoITTGViGmC/8VBmT?=
+ =?us-ascii?Q?gj361VF3iD3Ub/wsypgSWOTLUh+BUdl5oY5Es1Kz3yadHV7Hy7fxQawUc0KV?=
+ =?us-ascii?Q?UZA251L0SvC4jOmk1e9hzlrtZgGroasQ3dqjha2DAxCz+LUMDnL2OMUe7YOD?=
+ =?us-ascii?Q?I57uUR0NlrqJbjQYB7LHoMm1NTdzCC3inIhcQaKoqR/WCta3FFkgK6T10iaW?=
+ =?us-ascii?Q?ZKRXKWgwmr+dCTF6x0FVJ6j0vu8ngmFehD97PrrQ/Z46h7xBQTFsnT3M4kSf?=
+ =?us-ascii?Q?2W/qs8GcPibqeZ3OW0JnUMf8dEHhq5zvVPrX0ikpzFnWMyHxxy7Q3OkwLdQ/?=
+ =?us-ascii?Q?kKAql3UivpWDEdCm9KhHSEZfOwp6/s6C3dX1W13qQhfAtX83NIirGF0dLRNi?=
+ =?us-ascii?Q?QUojji6EqSDjH2Q+472T0RXhQFJhvgxV3BiHRgKIrdYV7PhZl8DYLrbXXRse?=
+ =?us-ascii?Q?FMgpU3NzcoRinpYWwqtHXsncrgLSLsn++nMqxZG4yQ3wzOqgfQ20+jJKJUgk?=
+ =?us-ascii?Q?jxa1Pg67rmARSmIEzPFUWWjsoX7wmQuAdbpswnj6LpgUne8aSEyKQglHfW5E?=
+ =?us-ascii?Q?hEc7JASujaS86hodaLVuBe5LK+P2Tobp0miOmz6RbQ9Hr1Y2KTbPKUjNYkv3?=
+ =?us-ascii?Q?sLYhYZ6iiMqdRTmzBAV0KNl2lf/wmZMBbfN7u1BTHmUTkcbMGehNQX+N/ZiF?=
+ =?us-ascii?Q?+hZzn7JIAI+oVsNwvAjWFcs75pZQSo/qQCo/rx1QpLUC8kiN5H08Q7ruJOZ/?=
+ =?us-ascii?Q?CEEcZFEBBMVqpplSgJ4/bu/WQtqF8aXuHllxLJpIn8fcuXvetTPdBIcNXwwu?=
+ =?us-ascii?Q?ks7Tfrl/tXdc4jSQSeZDrOFRsp7raFxzVDdkitKQ5qJJrfsECdHTOfh1+M/Q?=
+ =?us-ascii?Q?vNbQ6AA4iGAssal6q1/w6L7azzgcLnTVGnxepefT/+UPZ+33xHOQynoH64l2?=
+ =?us-ascii?Q?eyzuE7JTUa2pVrmdwlfIT4I9F5dbasRldffck+FysWwNyA0wSI6/Ko+c6tSd?=
+ =?us-ascii?Q?r6ozVRM9tp5PWdyH9Uu6SdEVE7v5+kKRzmuKlI7pi5HESNTuMpoO0sIqurO5?=
+ =?us-ascii?Q?6dfK3nogCkmqAxoBXTVTvVjmccFJDDdQdhdwLO/D5ZzYrnCxvu0Pla9TkiNX?=
+ =?us-ascii?Q?DGfxK9qY9ug8f6RKwrOchfWQW+EvgMVzBuvfxLCJDPevTGYjFpLkNiE6PJFu?=
+ =?us-ascii?Q?5XyefDFZyZVlCsKVhTMQiKBUQNrWE7AmpnHCFMJsfq9XIyd+EpC7OPvGexLy?=
+ =?us-ascii?Q?JvyYOkEdQ4VvgKMOggV7KlyUXtjjrJnb+uDghFyxWyUm43IWO+cF5Dx39UaR?=
+ =?us-ascii?Q?I41jgxTuVxS3T/6BOya8zueDBaoyRT4=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	g3AV6GXYaCpjaGipba9oknm1vT8buL17C7g9R7W9yVU8ByZv+SQSvTZmxTxv+fuKt9NrerjTpDGWBzaRPtlHQuWAIctJBLanm9iqKOK7r16qRG6s5/XJtDeltHCHGSXwM4HJ8OKuagNBhyu52MYfUNq8499nESe6zgh4M66Wdavalks31M+dCJgKcYTUDHRTTNJFFlnnLg/jWpqBny55vkfpBbbyX/IwF47S6qxdWQFuDH4XNVJj3NaxMUqk7iI9jdzXJZ2yJLuEAUtoa6m1yTSRzbjUQuL/VMcj5vVV1rM3YfSda/g7wT5z2OCk0XL5kUMM7mL27KWjGSe5kFjyOA==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce1254d8-8c11-47e9-ed1e-08def383311a
+X-MS-Exchange-CrossTenant-AuthSource: PH3PPF3ECB6A513.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 06:23:12.5351
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ansLfibmpRCYgiJuf0mgKOJzOjOTZhwngG1A1MjjcP8loCLri6nKALrVoGK2t31G4uZhfxSsqFc7fhRsRc3N87Z2yNIQ+FDzP2qhhDdK3Rc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB9535
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA0NyBTYWx0ZWRfX9l8PUll/UDDA
+ G3AOxFMAl04l5OM23bCQ+oIZzEMBcfRIuI5RVGJH33RIWbV+1NK+GwbCUncPdPkclSh5tNaTZiw
+ UA8fU1zpOsmp8BfjCHj5b25zOKMnmTltiF7Gw14HULkrJd1HFfdP
+X-Proofpoint-ORIG-GUID: Cwj6XUzomFzgL7lI-0CJjsEkAGao2Wvz
+X-Authority-Analysis: v=2.4 cv=Q77iJY2a c=1 sm=1 tr=0 ts=6a742852 cx=c_pps
+ a=lJB3plHzOIAfJWf+6KWQLg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22 a=PYnjg3YJAAAA:8
+ a=xNf9USuDAAAA:8 a=NEAV23lmAAAA:8 a=9dNbsytUAAAA:8 a=uDo-SIiEAAAA:8
+ a=t7CeM3EgAAAA:8 a=xeC3QtFAAAAA:8 a=GvQkQWPkAAAA:8 a=pGLkceISAAAA:8
+ a=amB30EhMnZE3fcpCAG0A:9 a=gPpeecpFUKP6j8iU7U-x:22 a=Rkhf4GTZPwEC63LfVcCP:22
+ a=FdTzh2GWekK77mhwV6Dw:22 a=9XEOD9pWidfRTSXZEhnp:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA0NyBTYWx0ZWRfX1QfrOcveo9iZ
+ gVyoCndJRzldpvgx5SIT+jU8SVeSxFIYz80bD2cbuyrx5hhBMOZX/SXYaXa//pjLV9g7Cbs1Wb8
+ yuDYuv7rLkMgKwjd2J8p74ix09rFhCWrnG89NRMAKQJjXKkuGLPBOzls9Kbc509SOqByano68Fc
+ u/rNFNd6sWtDzGz8pi3HIgdyUMqXcY+AScBlq/Oeb0V8rhvzGs4cKLblEvArGVWoQ4oYXxoxb5W
+ ZQnGIewHZl6/yIvvkfqs3GOvlH6ZX3HC6G2R8+7x8C5b4bDaN20FvX2nEZbcEsvTi6OAddXNAYP
+ ij+IWZS4C97Cs59dDK/njw12cga1IF2EtAxHxJN/pzMCz4Eeed2nH+0SnO4Gs6VOmeAUdDpBUIp
+ KniFb4tb+w4fBUueQmjB+090HEqopTTEUNEor+7dZzRYwYms2tbiWmjYcTVJUqqapkCMx3l+TU1
+ 0qeSdwuW4LS4DLgyRQA==
+X-Proofpoint-GUID: Cwj6XUzomFzgL7lI-0CJjsEkAGao2Wvz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1011
+ priorityscore=1501 spamscore=0 suspectscore=0 adultscore=0 bulkscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608060047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Aug 2026 05:51:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128836
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Aug 2026 06:23:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128837
 
-From: Hetvi Thakar <hthakar@cisco.com>
+A race condition in OpenVPN 2.6.0 through 2.6.19 and 2.7_alpha1
+through 2.7.1 allows remote attackers to potentially cause a
+server crash or leak heap memory via a use-after-free triggered
+during TLS session promotion
 
-This patch applies the upstream 26.4.0rc2 backport for
-CVE-2026-42304. The upstream fix merge is referenced in [1],
-and the public CVE advisory is referenced in [2]. The individual
-backported commit links are recorded in the embedded patch header
-because the fix expands to multiple commits.
+Reference:
+[https://nvd.nist.gov/vuln/detail/CVE-2026-40215]
+[https://security-tracker.debian.org/tracker/CVE-2026-40215]
 
-[1] https://github.com/twisted/twisted/commit/2d196123264efb0027eecfe1b430be4a9babdbd8
-[2] https://github.com/advisories/GHSA-grgv-6hw6-v9g4
+Upstream patch:
+[https://github.com/OpenVPN/openvpn/commit/4a2c827c2536aa03a1d6c7cc916689a46c067187]
 
-Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
+Signed-off-by: Omkar Patil <OmkarAbaji.Patil@windriver.com>
 ---
- .../python3-twisted/CVE-2026-42304.patch      | 369 ++++++++++++++++++
- .../python/python3-twisted_24.3.0.bb          |   2 +-
- 2 files changed, 370 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2026-42304.patch
+ .../openvpn/openvpn/CVE-2026-40215.patch      | 59 +++++++++++++++++++
+ .../recipes-support/openvpn/openvpn_2.7.0.bb  |  1 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-42304.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-42304.patch
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
 new file mode 100644
-index 0000000000..e43ae68977
+index 0000000000..e1bd0c99df
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2026-42304.patch
-@@ -0,0 +1,369 @@
-+From 6a1c3399c54a874673a565601bac999ab400c666 Mon Sep 17 00:00:00 2001
-+From: Adi Roiban <adiroiban@gmail.com>
-+Date: Wed, 29 Apr 2026 16:03:39 +0100
-+Subject: [PATCH] Merge commit from fork
++++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
+@@ -0,0 +1,59 @@
++From 4a2c827c2536aa03a1d6c7cc916689a46c067187 Mon Sep 17 00:00:00 2001
++From: Arne Schwabe <arne@rfc2549.org>
++Date: Fri, 10 Apr 2026 16:59:53 +0200
++Subject: [PATCH] Ensure that buffer of freed session are not used
 +
-+names: mitigate DNS compression-pointer flood (GHSA-grgv-6hw6-v9g4)
++In a race condition an old TLS session could still try to send a packet but
++also get replaced by a new session. In this case, the buffer of the new
++session is still referenced. Add the check_session_buf_not_used function
++to mitigate this problem.
 +
-+CVE: CVE-2026-42304
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/2d196123264efb0027eecfe1b430be4a9babdbd8]
++Also make the check if the to_link pointer is in one of the memory
++regions a bit better even though this not make a difference with the
++way we use these structs. But better safe than sorry.
 +
-+Backport Changes:
-+- Expanded the upstream merge and applied its complete first-parent code
-+  and regression-test changes.
-+- The expanded dependency sequence is be71ecaa113f642f03083bd5ed33af47c59308c8,
-+  86e1b5490de5baa8ca284d1e6f4f0ade3e8ad7e0,
-+  c75d44ed81b47f8086ed801cfcdb2568b0b32301,
-+  d7d81e08d46b3f266963ea77e5f6b4a333af455f,
-+  9df6d960d3569751ebb5567093fe1d1d9f63ca54, and
-+  9ca319ebf61386dd33354c4ade3946ef84ad58fb.
-+- Retained Scarthgap's `typing.Sequence` import instead of the newer
-+  `collections.abc.Sequence` import.
-+- Omitted the release-news fragment; it does not affect the fix.
++A better solution to remove the TM_INITIAL state and handle reconnecting
++session in their own complete tls_multi is a more involved fix that requires
++a lot more refactoring.
 +
-+(cherry picked from commit 2d196123264efb0027eecfe1b430be4a9babdbd8)
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
++CVE: 2026-40215
++Reported-By: XlabAI Team of Tencent Xuanwu Lab (xlabai@tencent.com)
++Reported-By: Guannan Wang (wgnbuaa@gmail.com
++Reported-By: Zhanpeng Liu (pkugenuine@gmail.com)
++Reported-By: Guancheng Li (lgcpku@gmail.com)
++Signed-off-by: Arne Schwabe <arne@rfc2549.org>
++
++Change-Id: I7c5fa2a7a2563b7a8955d386411f3ceffe5b092f
++Private-URL: https://github.com/OpenVPN/openvpn-private-issues/issues/112
++Acked-by: Gert Doering <gert@greenie.muc.de>
++
++CVE: CVE-2026-40215
++Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/4a2c827c2536aa03a1d6c7cc916689a46c067187]
++
++Signed-off-by: Gert Doering <gert@greenie.muc.de>
++(cherry picked from commit b2a15fb84d85790eeae4a2e12b431cbfd0b0302f)
++Signed-off-by: Omkar Patil <OmkarAbaji.Patil@windriver.com>
 +---
-+ src/twisted/names/dns.py           | 160 ++++++++++++++++++++++++++---
-+ src/twisted/names/test/test_dns.py |  85 +++++++++++++++
-+ 2 files changed, 230 insertions(+), 15 deletions(-)
++ src/openvpn/ssl.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/src/twisted/names/dns.py b/src/twisted/names/dns.py
-+index c7644ef50..4d093720d 100644
-+--- a/src/twisted/names/dns.py
-++++ b/src/twisted/names/dns.py
-+@@ -11,10 +11,12 @@ Future Plans:
-+ from __future__ import annotations
-+ 
-+ # System imports
-++import contextvars
-+ import inspect
-+ import random
-+ import socket
-+ import struct
-++from contextlib import contextmanager
-+ from io import BytesIO
-+ from itertools import chain
-+ from typing import Optional, Sequence, SupportsInt, Union, overload
-+@@ -126,6 +128,7 @@ __all__ = [
-+     "OP_UPDATE",
-+     "PORT",
-+     "AuthoritativeDomainError",
-++    "DNSDecodeError",
-+     "DNSQueryTimeoutError",
-+     "DomainError",
-+ ]
-+@@ -444,6 +447,87 @@ def readPrecisely(file, l):
-+     return buff
-+ 
-+ 
-++class DNSDecodeError(ValueError):
-++    """
-++    Raised when a DNS message cannot be decoded because it violates a
-++    protocol-level safety limit.
-++    """
-++
-++
-++class _DecodeContext:
-++    """
-++    Mutable state shared between the L{IEncodable} decoders invoked while
-++    reading a single DNS message.
-++
-++    The primary purpose is to bound the total number of compression-pointer
-++    jumps taken across every name in the message, defending against packets
-++    that fan out thousands of records pointing to deeply chained pointers.
-++
-++    This class is private.  External callers must not rely on it; the
-++    per-message scope is installed and torn down by L{Message.decode}
-++    through L{_decodeContextVar}.
-++
-++    @ivar jumps: The number of compression pointers followed so far.
-++    @ivar maxJumps: The inclusive upper bound on L{jumps}.  Exceeding it
-++        causes L{registerJump} to raise L{DNSDecodeError}.
-++    """
-++
-++    __slots__ = ("jumps", "maxJumps")
-++
-++    def __init__(self, maxJumps: int = 1000) -> None:
-++        self.jumps = 0
-++        self.maxJumps = maxJumps
-++
-++    def registerJump(self) -> None:
-++        """
-++        Record that a compression pointer has been followed.
-++
-++        The check is performed before any further bytes are read so the
-++        caller fails fast as soon as the aggregate limit is breached, even
-++        if additional records remain in the buffer.
-++
-++        @raise DNSDecodeError: if the cumulative number of jumps exceeds
-++            L{maxJumps}.
-++        """
-++        self.jumps += 1
-++        if self.jumps > self.maxJumps:
-++            raise DNSDecodeError(
-++                "Too many compression pointers while decoding DNS message "
-++                f"(limit is {self.maxJumps})"
-++            )
-++
-++
-++# Private module-level L{contextvars.ContextVar} used to share a single
-++# L{_DecodeContext} across the re-entrant calls performed while decoding one
-++# DNS message.  L{contextvars} (rather than a plain module attribute) is used
-++# on purpose: although Twisted's reactor is single-threaded, message decoding
-++# is re-entrant across many records in a single pass and L{ContextVar}
-++# guarantees the scope is restored correctly on exit -- and remains isolated
-++# per-task should a future caller decode messages from multiple
-++# L{asyncio}-style contexts concurrently.
-++_decodeContextVar: contextvars.ContextVar[_DecodeContext | None] = (
-++    contextvars.ContextVar("_dnsDecodeContext", default=None)
-++)
-++
-++
-++@contextmanager
-++def _installDecodeContext(context: _DecodeContext):
-++    """
-++    Install C{context} on L{_decodeContextVar} for the duration of the
-++    C{with} block and restore the previous value on exit.
-++
-++    This wraps the L{contextvars.ContextVar.set} / L{contextvars.ContextVar.reset}
-++    token dance so call sites can use a plain C{with} statement.
-++
-++    @param context: The L{_DecodeContext} to install as the active context.
-++    """
-++    token = _decodeContextVar.set(context)
-++    try:
-++        yield context
-++    finally:
-++        _decodeContextVar.reset(token)
-++
-++
-+ class IEncodable(Interface):
-+     """
-+     Interface for something which can be encoded to and decoded
-+@@ -549,8 +633,17 @@ class Name:
-+ 
-+     @ivar name: A byte string giving the name.
-+     @type name: L{bytes}
-++
-++    @ivar maxCompressionPointers: Per-message cap on the total number of
-++        compression-pointer dereferences L{decode} will follow before
-++        raising L{DNSDecodeError}.  Defaults to C{1000}.  Override it on
-++        a subclass or individual instance to tune the trade-off between
-++        tolerance for legitimately verbose messages and resistance to
-++        denial-of-service attacks.
-+     """
-+ 
-++    maxCompressionPointers: int = 1000
-++
-+     def __init__(self, name: bytes | str = b""):
-+         """
-+         @param name: A name.
-+@@ -595,16 +688,33 @@ class Name:
-+         """
-+         Decode a byte string into this Name.
-+ 
-++        When invoked from L{Message.decode}, a shared compression-pointer
-++        counter is picked up transparently from the private
-++        L{_decodeContextVar}.  Standalone callers get a fresh per-call
-++        counter seeded from L{maxCompressionPointers}, so existing code
-++        keeps working unchanged while still being protected against
-++        pathological inputs.
-++
-+         @type strio: file
-+         @param strio: Bytes will be read from this file until the full Name
-+-        is decoded.
-++            is decoded.
-++
-++        @type length: L{int} or L{None}
-++        @param length: Present for compatibility with the L{IEncodable}
-++            interface; ignored by this decoder.
-+ 
-+         @raise EOFError: Raised when there are not enough bytes available
-+-        from C{strio}.
-++            from C{strio}.
-++
-++        @raise ValueError: Raised when the name cannot be decoded because
-++            it contains a compression loop.
-+ 
-+-        @raise ValueError: Raised when the name cannot be decoded (for example,
-+-            because it contains a loop).
-++        @raise DNSDecodeError: Raised when the cumulative number of
-++            compression-pointer jumps exceeds the configured limit.
-+         """
-++        context = _decodeContextVar.get()
-++        if context is None:
-++            context = _DecodeContext(maxJumps=self.maxCompressionPointers)
-+         visited = set()
-+         self.name = b""
-+         off = 0
-+@@ -616,6 +726,7 @@ class Name:
-+                 return
-+             if (l >> 6) == 3:
-+                 new_off = (l & 63) << 8 | ord(readPrecisely(strio, 1))
-++                context.registerJump()
-+                 if new_off in visited:
-+                     raise ValueError("Compression loop in encoded name")
-+                 visited.add(new_off)
-+@@ -2488,8 +2599,17 @@ class Message(tputil.FancyEqMixin):
-+         header fields.
-+     @ivar _sectionNames: The names of attributes representing the record
-+         sections of this message.
-++
-++    @ivar maxCompressionPointers: Per-message cap on the total number of
-++        compression-pointer dereferences L{decode} will follow across every
-++        name in the message before raising L{DNSDecodeError}.  Defaults to
-++        C{1000}.  Override it on a subclass or individual instance to tune
-++        the trade-off between tolerance for legitimately verbose messages
-++        and resistance to denial-of-service attacks.
-+     """
-+ 
-++    maxCompressionPointers: int = 1000
-++
-+     compareAttributes = (
-+         "id",
-+         "answer",
-+@@ -2704,19 +2824,29 @@ class Message(tputil.FancyEqMixin):
-+         self.checkingDisabled = (byte4 >> 4) & 1
-+         self.rCode = byte4 & 0xF
-+ 
-+-        self.queries = []
-+-        for i in range(nqueries):
-+-            q = Query()
-+-            try:
-+-                q.decode(strio)
-+-            except EOFError:
-+-                return
-+-            self.queries.append(q)
-++        # A single shared counter bounds the total compression-pointer work
-++        # performed across every name in this message.  It is installed on
-++        # the private context variable so nested record decoders pick it up
-++        # without needing to thread it through each signature.
-++        decodeContext = _DecodeContext(maxJumps=self.maxCompressionPointers)
-++        with _installDecodeContext(decodeContext):
-++            self.queries = []
-++            for i in range(nqueries):
-++                q = Query()
-++                try:
-++                    q.decode(strio)
-++                except EOFError:
-++                    return
-++                self.queries.append(q)
-+ 
-+-        items = ((self.answers, nans), (self.authority, nns), (self.additional, nadd))
-++            items = (
-++                (self.answers, nans),
-++                (self.authority, nns),
-++                (self.additional, nadd),
-++            )
-+ 
-+-        for l, n in items:
-+-            self.parseRecords(l, n, strio)
-++            for l, n in items:
-++                self.parseRecords(l, n, strio)
-+ 
-+     def parseRecords(self, list, num, strio):
-+         for i in range(num):
-+diff --git a/src/twisted/names/test/test_dns.py b/src/twisted/names/test/test_dns.py
-+index 3b8f6e130..3be6b4546 100644
-+--- a/src/twisted/names/test/test_dns.py
-++++ b/src/twisted/names/test/test_dns.py
-+@@ -352,6 +352,54 @@ class NameTests(unittest.TestCase):
-+         stream = BytesIO(b"\xc0\x00")
-+         self.assertRaises(ValueError, name.decode, stream)
-+ 
-++    def test_rejectTooManyCompressionPointers(self):
-++        """
-++        L{Name.decode} raises L{dns.DNSDecodeError} when it would have to
-++        follow more than L{Name.maxCompressionPointers} compression
-++        pointers to finish decoding a name.
-++        """
-++        # Four distinct pointers chained end-to-end, terminated by a zero
-++        # label byte.  With maxCompressionPointers of three the fourth
-++        # dereference must trip the safety limit.
-++        payload = b"\xc0\x02\xc0\x04\xc0\x06\xc0\x08\x00"
-++        name = dns.Name()
-++        name.maxCompressionPointers = 3
-++        self.assertRaises(
-++            dns.DNSDecodeError, name.decode, BytesIO(payload)
-++        )
-++
-++    def test_decodeRecoversAfterDNSDecodeError(self):
-++        """
-++        After L{Name.decode} raises L{dns.DNSDecodeError}, subsequent
-++        L{Name.decode} calls continue to work.  No residual
-++        compression-pointer counter leaks across calls, so a legitimate
-++        name decoded right after a hostile one still succeeds.
-++        """
-++        # First, force a DNSDecodeError by decoding a payload that
-++        # exceeds the configured limit.
-++        hostile = dns.Name()
-++        hostile.maxCompressionPointers = 3
-++        self.assertRaises(
-++            dns.DNSDecodeError,
-++            hostile.decode,
-++            BytesIO(b"\xc0\x02\xc0\x04\xc0\x06\xc0\x08\x00"),
-++        )
-++
-++        # Then prove the process has not been poisoned: a legitimate
-++        # name still decodes normally, both with a fresh instance and
-++        # with the instance that just errored.
-++        stream = BytesIO()
-++        dns.Name(b"example.org").encode(stream)
-++
-++        fresh = dns.Name()
-++        stream.seek(0)
-++        fresh.decode(stream)
-++        self.assertEqual(fresh.name, b"example.org")
-++
-++        stream.seek(0)
-++        hostile.decode(stream)
-++        self.assertEqual(hostile.name, b"example.org")
-++
-+     def test_equality(self):
-+         """
-+         L{Name} instances are equal as long as they have the same value for
-+@@ -761,6 +809,43 @@ class MessageTests(unittest.SynchronousTestCase):
-+         """
-+         self.assertEqual(dns.Message().authenticData, 0)
-+ 
-++    def test_rejectCompressionPointerFlood(self):
-++        """
-++        L{Message.decode} installs a shared compression-pointer counter and
-++        raises L{dns.DNSDecodeError} when the aggregate number of pointer
-++        dereferences across every record in the message exceeds
-++        L{dns.Message.maxCompressionPointers}.
-++        """
-++        chainLength = 100
-++        numRecords = 8000
-++        header = struct.pack(
-++            "!H2B4H", 0x1234, 0x80, 0x00, 0, numRecords, 0, 0
-++        )
-++
-++        # Long compression chain inside the RDATA of an unknown
-++        # record so that subsequent records can aim pointers at it.
-++        owner = b"\x04rrrr\x00"
-++        chainBase = len(header) + len(owner) + 10
-++        chain = bytearray()
-++        for i in range(chainLength):
-++            chain += struct.pack("!H", 0xC000 | (chainBase + 2 * (i + 1)))
-++        chain += b"\x04test\x00"
-++
-++        firstRecord = (
-++            owner
-++            + struct.pack("!HHIH", 999, 1, 0, len(chain))
-++            + bytes(chain)
-++        )
-++        followupRecord = (
-++            struct.pack("!H", 0xC000 | chainBase)
-++            + struct.pack("!HHIH", 1, 1, 0, 4)
-++            + b"\x00\x00\x00\x00"
-++        )
-++        payload = header + firstRecord + followupRecord * (numRecords - 1)
-++
-++        message = dns.Message()
-++        self.assertRaises(dns.DNSDecodeError, message.decode, BytesIO(payload))
-++
-+     def test_authenticDataOverride(self):
-+         """
-+         L{dns.Message.__init__} accepts a C{authenticData} argument which
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-index 691b80ac68..59aef8a606 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
- SRC_URI += " \
-     file://CVE-2024-41671.patch \
-     file://CVE-2024-41810.patch \
-+    file://CVE-2026-42304.patch \
- "
++diff --git a/src/openvpn/ssl.c b/src/openvpn/ssl.c
++index b188b4e9b32..a63d142ec46 100644
++--- a/src/openvpn/ssl.c
+++++ b/src/openvpn/ssl.c
++@@ -3280,6 +3280,7 @@ tls_multi_process(struct tls_multi *multi, struct buffer *to_link,
++                 if (i == TM_ACTIVE && ks_lame->state >= S_GENERATED_KEYS
++                     && !multi->opt.single_session)
++                 {
+++                    check_session_buf_not_used(to_link, session);
++                     move_session(multi, TM_LAME_DUCK, TM_ACTIVE, true);
++                 }
++                 else
++@@ -3353,6 +3354,7 @@ tls_multi_process(struct tls_multi *multi, struct buffer *to_link,
++      */
++     if (TLS_AUTHENTICATED(multi, &multi->session[TM_INITIAL].key[KS_PRIMARY]))
++     {
+++        check_session_buf_not_used(to_link, &multi->session[TM_ACTIVE]);
++         move_session(multi, TM_ACTIVE, TM_INITIAL, true);
++         tas = tls_authentication_status(multi);
++         msg(D_TLS_DEBUG_LOW,
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+index 0cbe4641cd..4e466598dc 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+            file://0001-tests-skip-test-execution-when-cross-compiling.patch \
+            file://openvpn \
+            file://run-ptest \
++           file://CVE-2026-40215.patch \
+           "
  
- SRC_URI[sha256sum] = "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b4fd4ae"
-@@ -178,4 +179,3 @@ FILES:${PN}-pair = " \
- FILES:${PN}-doc += " \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/python/_pydoctortemplates \
- "
--
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 -- 
-2.35.6
+2.40.0
 
 
