@@ -2,75 +2,79 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7DAAC55838
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9058C56205
 	for <webhook@archiver.kernel.org>; Thu,  6 Aug 2026 05:51:33 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13113.1785995489081352051
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13570.1785995483792386520
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2026 22:51:29 -0700
+ Wed, 05 Aug 2026 22:51:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Eb8VOEq/;
- spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=J+79oaAB;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=5034; q=dns/txt;
-  s=iport01; t=1785995489; x=1787205089;
+  d=cisco.com; i=@cisco.com; l=6080; q=dns/txt;
+  s=iport01; t=1785995483; x=1787205083;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=mUydsJW6QMzVznEqTelXm++5wEJGKl8GT9EHb7XDBN0=;
-  b=Eb8VOEq/TYgxRx/zQoH0MvlvjR1iA40IEOrKOSVSJ8KCI2Uz97ju6i4l
-   Uq+wYy5ReM/GLSqmsyQgcUObSLnPO8PdMA6KSzWs6BBnYcKkVexyvA24F
-   cGypOg2iT6kG1Vl0qEY/PwUuoVCunE1t/rvKbvw6F68c4WdW3xLqzC/pg
-   +VEZkfV+n4KfRVOUABBXGjOeORKgZO1AzDZGeTk1bqI3WfDNzHHj82VL+
-   av8grb451AHPdGyg8JCKVe1EvcvKMCVfNG6GwDiWHd8+z1QFtGVkA5a5n
-   BGRWfD4fU5A21k/1DPTYg6DfZZS6o6bSsq1g/mNa4MZDx/GLGyJWGcF5h
-   w==;
-X-CSE-ConnectionGUID: /lVJyTC8Qtqa50Wal0Cnkg==
-X-CSE-MsgGUID: DEqH5WOBTgKOIMw11nmYJQ==
-X-IPAS-Result: =?us-ascii?q?A0BIAgA8IHRq/40QJK1aglmCV3ReQ0mWSgOeG4F+DwEBA?=
- =?us-ascii?q?Q9EDQQBAYUFAo1mAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
- =?us-ascii?q?Q4Thk8NhloBAgEDJwsBGAEbEhAcAwECLysjCBmDAgGCdAMRvHKBeTOBAYMoA?=
- =?us-ascii?q?YFU2y4BCxQBBYEzhT+IIV0YAUSEOCcbG4FygRWDaYEFgVwCiCUEgiJ6EoFak?=
- =?us-ascii?q?RZIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQ0bBwWBHYEohGgjGTZ6g?=
- =?us-ascii?q?QlegS0qZAESF4EJgm8CgnqBKQsYDUgRLDcUGQQ+bgeNfyCCQWQqASt/EoE5p?=
- =?us-ascii?q?VihDwoog3WMIZU6GjOEBIFXkkCSUQuYfY4KlgEFSoRpgWg8gVlwFYMiCUoZD?=
- =?us-ascii?q?444g2uFZMZVJzICCTIBAQcCBw4DC4FokAItgU8BAQ?=
-IronPort-Data: A9a23:NjADFqkfXDKMN1ZifvecGs/o5gzXJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xIYWziBMvfcYmqjfY0iPdznoxsHvsLTz4Q2HgA/rylhRFtH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+ZC31GONgWYubDpEs//b8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FcocxMRmPUoez
- OABIW1VURmH38mww73uH4GAhux7RCXqFIobvnclyXTSCuwrBMifBa7L/tRfmjw3g6iiH96HO
- JFfMmQpNUqGOkEWUrsUIMpWcOOAhmX/ej5RsnqepLE85C7YywkZPL3Fb4uFJoXUG5wF9qqej
- k7r5kSkPTYwCNO87hug7Sv1gOr+vxquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBYCDVAc9ch8sQxQFTGy
- 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
-IronPort-HdrOrdr: A9a23:u11c8KOaBNtJVsBcThmjsMiBIKoaSvp037Dk7S9MoHtuA6ulfq
- +V/cjzuSWYtN9VYgBDpTniAtjlfZqjz/5ICOAqVN/INjUO+lHYSb2KhrGN/9SPIUHDH8dmpM
- FdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPHhXg2UK1XYDNu5deXcGPDV7OQ==
-X-Talos-CUID: 9a23:K18NdmNSOSjroO5DHy1Z1l8oMZAcbmTUkS/vKkvgImBqR+jA
-X-Talos-MUID: 9a23:dqmrygqbOSoqP2o7mlUezx1PLec13IOENE8utrQjpJDdMylBGQ7I2Q==
+  bh=AX/kCCdUpt6CUVQU001ZLy1CMrygQ5TCX6KwTlnC3WU=;
+  b=J+79oaABCwqigukTpoIA+antf+F2mBZGfaw2IxWpHwPEmgQgPb4gUvMu
+   hNUmw9Jx5esOq11GoTJABxG+x6TDc11Ym52Rjezz3aV4gvOMl4ZVxLlxY
+   Q/CL5+OZnA1R8B4L4ydF82FCPWX5J0aTM7X9KB8dxz8Ek9esvvR6fAe98
+   PWaHbYB3f6+BR9MCuBEpwt979oijfkQ9DXpaEnS7kbxnjMcaqeBKvJiSi
+   6ByZvTlUALRVtvPt+U3CcvOCT4Yz6e22BvuBVEVRxSi8LBrUGq1XoUc4E
+   sm3gV/WqDW5z60YJcOTbIaUJNpMPKV8IjjF6O5j/K1Ch+DeHUJAyNj8Qk
+   Q==;
+X-CSE-ConnectionGUID: ggn5gfX5Qtu1wkpDdtjqGQ==
+X-CSE-MsgGUID: 9Or5jJn2SUy58ErxxPUHxQ==
+X-IPAS-Result: =?us-ascii?q?A0BLAgC3H3Rq/5UQJK1aEwEBgkSCV3ReQ0mVXmwDkUqMU?=
+ =?us-ascii?q?YF+DwEBAQ9EDQQBAYUFAo1mAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBA?=
+ =?us-ascii?q?QECAQcFgQ4Thk8NhloBAgEDJwsBFAQBGxIQHAMBAi8rIwgZgwIBgnQDEQa8a?=
+ =?us-ascii?q?4F5M4EBgk9ZAYFU2y4BCxQBBYEzgWGDXoghXRgBhHwnGxuBcoEVg2mBBYFcA?=
+ =?us-ascii?q?oglBIIiehKBWpEWSIEeA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4ENGwcFg?=
+ =?us-ascii?q?R2BKIRoIxk2eoEJXoEtKmQBEheBCYJvAoJ6gSkLGA1IESw3FBkEPm4HjX8gg?=
+ =?us-ascii?q?iEgewkKASsEe4FLBJMMkkiBNZ9aCiiDdYwhlToaM4QEpmgLmH2CWYsxgU2Ta?=
+ =?us-ascii?q?UoBT4RpgWg8gVlwFYMiCUoZD44uCguDYMw5JzICCTIBAQcCBw4DC4FokX4BA?=
+ =?us-ascii?q?Q?=
+IronPort-Data: A9a23:tSBP3aAZ7Sa6mhVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApGsg1T0Ey
+ TBNW2GDaPiCYmv9KtElPoy08RsCuJfSzdYwOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
+ fuo+5eBYA/9hmYuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEzPpoUU44DdAh5vsuHmJW2
+ fAEKikiV0XW7w626OrTpuhEj8AnKozveYgYoHwllGufBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
+ YxANWsHgBfoO3WjPn8XFJI3n+6yrnL+aDZf7lmSoMLb5kCMnV0oj+K8aIe9ltqiFOJPw0S6o
+ Dj9wnWkUjwAJMyn9BqVyyf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWstxoYXZ9UVuY98gzIk/CS6AeCDW9CRTlEADA7iPILqfUR/
+ gfht7vU6fZH6tV5lVr1Gm+okA6P
+IronPort-HdrOrdr: A9a23:GY5XXapsElnF3UakkyuynBEaV5rzeYIsimQD101hICG9vPb2qy
+ nIpoV96faaslcssR0b9OxofZPwI080lqQFhbX5Q43DYOCOggLBR+tfBMnZsljd8kbFmNK1u5
+ 0NT0FWMqyXMbEDt7eY3CCIV/A93dKA7Kekwc3az3trUEVWTpsI1XYBNu5eeXcGPzWvwvECZe
+ Kh2vY=
+X-Talos-CUID: =?us-ascii?q?9a23=3AQDECY2iwo8ykSk63p9BFOvLYpTJufXLbkXjeExK?=
+ =?us-ascii?q?BFXswV76NZVOM+rpLqp87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3Ar/+4hQ3/pfovs1zasfYq2iiokzUjsoO0VUIvl88?=
+ =?us-ascii?q?9htjZZQFqKyelsRSne9py?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,207,1779148800"; 
-   d="scan'208";a="798416618"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Aug 2026 05:51:28 +0000
+   d="scan'208";a="799172905"
+Received: from alln-l-core-12.cisco.com ([173.36.16.149])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Aug 2026 05:51:22 +0000
 Received: from sjc-ads-5471.cisco.com (sjc-ads-5471.cisco.com [10.28.23.235])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id 1117418000183;
-	Thu,  6 Aug 2026 05:51:28 +0000 (GMT)
+	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id BBAA11800016D;
+	Thu,  6 Aug 2026 05:51:22 +0000 (GMT)
 Received: by sjc-ads-5471.cisco.com (Postfix, from userid 1887505)
-	id B0A87CC12A6; Wed,  5 Aug 2026 22:51:27 -0700 (PDT)
+	id 67780CC12A6; Wed,  5 Aug 2026 22:51:22 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-python][scarthgap][PATCH 4/5] python3-pyjwt: Fix CVE-2026-48526
-Date: Wed,  5 Aug 2026 22:51:00 -0700
-Message-Id: <20260806055101.23160-4-hthakar@cisco.com>
+Subject: [meta-python][scarthgap][PATCH 2/5] python3-pyjwt: Fix CVE-2026-48524
+Date: Wed,  5 Aug 2026 22:50:58 -0700
+Message-Id: <20260806055101.23160-2-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260806055101.23160-1-hthakar@cisco.com>
 References: <20260806055101.23160-1-hthakar@cisco.com>
@@ -79,135 +83,139 @@ Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-5471.cisco.com [10.28.23.235];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.23.235, sjc-ads-5471.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
+X-Outbound-Node: alln-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 06 Aug 2026 05:51:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128835
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128833
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-Reject JSON Web Key documents passed directly as HMAC secrets. This
-prevents public asymmetric JWK data from being reused as an HMAC key
-when an application permits mixed symmetric and asymmetric algorithms.
+Preserve a valid cached JWK set when a refresh request fails. The
+previous finally block stored None on errors, turning a transient JWKS
+outage into an authentication failure for otherwise cached keys.
 
 This patch applies the relevant subset of the upstream 2.13.0 fix.
 The upstream commit is referenced in [1], and the public advisory is
 referenced in [2].
 
 [1] https://github.com/jpadilla/pyjwt/commit/95791b1759b8aa4f2203575d344d5c78564cdc81
-[2] https://github.com/advisories/GHSA-xgmm-8j9v-c9wx
+[2] https://github.com/advisories/GHSA-fhv5-28vv-h8m8
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python/python3-pyjwt/CVE-2026-48526.patch | 87 +++++++++++++++++++
+ .../python/python3-pyjwt/CVE-2026-48524.patch | 91 +++++++++++++++++++
  .../python/python3-pyjwt_2.8.0.bb             |  1 +
- 2 files changed, 88 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48526.patch
+ 2 files changed, 92 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48524.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48526.patch b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48526.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48524.patch b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48524.patch
 new file mode 100644
-index 0000000000..6cde3ccce3
+index 0000000000..4dc49771b4
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48526.patch
-@@ -0,0 +1,87 @@
-+From 9d2064bccc0ac60884906d9dd89ace589f9f8281 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-48524.patch
+@@ -0,0 +1,91 @@
++From cb19f697eff2807d28c66639e5ee39cc92de4985 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Jos=C3=A9=20Padilla?= <jpadilla@users.noreply.github.com>
-+Date: Mon, 3 Aug 2026 03:22:08 -0700
-+Subject: [PATCH] algorithms: reject raw JWK documents as HMAC secrets
++Date: Mon, 3 Aug 2026 03:21:01 -0700
++Subject: [PATCH] PyJWKClient: preserve cached JWKS on fetch errors
 +
-+Reject JSON Web Key documents passed directly to
-+HMACAlgorithm.prepare_key. Public asymmetric JWK data must not be
-+accepted as an HMAC secret when callers permit mixed algorithm families.
++Only replace the cached JWK set after a successful fetch. A failed
++refresh previously stored None from the finally block and discarded
++valid cached keys.
 +
-+CVE: CVE-2026-48526
++CVE: CVE-2026-48524
 +Upstream-Status: Backport [https://github.com/jpadilla/pyjwt/commit/95791b1759b8aa4f2203575d344d5c78564cdc81]
 +
 +Backport Changes:
-+- Extracted only the CVE-2026-48526 raw-JWK rejection and regression tests
-+  from the bundled upstream 2.13.0 commit. The other requested CVE fixes
-+  are carried as separate patches.
-+- Adapted the hunk and test locations to PyJWT 2.8.0, renamed the upstream
-+  local variable `jwk_obj` to `jwk`, and omitted explanatory comments;
-+  the validation logic and assertions are unchanged.
-+- Excluded the separate empty-HMAC-key hardening bundled in the same file.
++- Extracted only the CVE-2026-48524 successful-fetch cache update and
++  regression test from the bundled upstream 2.13.0 commit. The other
++  requested CVE fixes are carried as separate patches.
++- Adapted the hunk and test locations to PyJWT 2.8.0 and shortened the
++  upstream explanatory comments without changing behavior or assertions.
 +- Omitted the 2.13.0 version and changelog updates, CVE-2026-48523 (which
 +  does not affect 2.8.0), and unrelated hardening from the bundled commit.
 +
 +(cherry picked from commit 95791b1759b8aa4f2203575d344d5c78564cdc81)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ jwt/algorithms.py        | 13 +++++++++++++
-+ tests/test_algorithms.py | 22 ++++++++++++++++++++++
-+ 2 files changed, 35 insertions(+)
++ jwt/jwks_client.py        | 12 ++++++------
++ tests/test_jwks_client.py | 12 ++++++++++--
++ 2 files changed, 16 insertions(+), 8 deletions(-)
 +
-+diff --git a/jwt/algorithms.py b/jwt/algorithms.py
-+index ed18715..b6303ed 100644
-+--- a/jwt/algorithms.py
-++++ b/jwt/algorithms.py
-+@@ -270,6 +270,19 @@ class HMACAlgorithm(Algorithm):
-+                 " should not be used as an HMAC secret."
++diff --git a/jwt/jwks_client.py b/jwt/jwks_client.py
++index 18de342..0e7d226 100644
++--- a/jwt/jwks_client.py
+++++ b/jwt/jwks_client.py
++@@ -59,7 +59,6 @@ class PyJWKClient:
++             self.get_signing_key = lru_cache(maxsize=max_cached_keys)(self.get_signing_key)  # type: ignore
++ 
++     def fetch_data(self) -> Any:
++-        jwk_set: Any = None
++         try:
++             r = urllib.request.Request(url=self.uri, headers=self.headers)
++             with urllib.request.urlopen(
++@@ -70,11 +69,12 @@ class PyJWKClient:
++             raise PyJWKClientConnectionError(
++                 f'Fail to fetch data from the url, err: "{e}"'
 +             )
++-        else:
++-            return jwk_set
++-        finally:
++-            if self.jwk_set_cache is not None:
++-                self.jwk_set_cache.put(jwk_set)
+++
+++        # Only update the cache on a successful fetch. Writing None from a
+++        # finally block on error would discard a previously cached JWKS.
+++        if self.jwk_set_cache is not None:
+++            self.jwk_set_cache.put(jwk_set)
+++        return jwk_set
 + 
-++        stripped = key_bytes.lstrip()
-++        if stripped.startswith(b"{"):
-++            try:
-++                jwk = json.loads(key_bytes)
-++            except ValueError:
-++                jwk = None
-++            if isinstance(jwk, dict) and "kty" in jwk:
-++                raise InvalidKeyError(
-++                    "The specified key looks like a JWK and should not be "
-++                    "used directly as an HMAC secret. Load it via "
-++                    "PyJWK / HMACAlgorithm.from_jwk first."
-++                )
-++
-+         return key_bytes
++     def get_jwk_set(self, refresh: bool = False) -> PyJWKSet:
++         data = None
++diff --git a/tests/test_jwks_client.py b/tests/test_jwks_client.py
++index d4bdd35..4a836f2 100644
++--- a/tests/test_jwks_client.py
+++++ b/tests/test_jwks_client.py
++@@ -271,18 +271,26 @@ class TestPyJWKClient:
 + 
-+     @overload
-+diff --git a/tests/test_algorithms.py b/tests/test_algorithms.py
-+index 1a39552..e5220c6 100644
-+--- a/tests/test_algorithms.py
-++++ b/tests/test_algorithms.py
-+@@ -108,6 +108,28 @@ class TestAlgorithms:
-+             with pytest.raises(InvalidKeyError):
-+                 algo.from_jwk(keyfile.read())
++         assert repeated_call.call_count == 1
 + 
-++    @pytest.mark.parametrize(
-++        "jwk_file",
-++        [
-++            "jwk_rsa_pub.json",
-++            "jwk_ec_pub_P-256.json",
-++            "jwk_okp_pub_Ed25519.json",
-++            "jwk_hmac.json",
-++        ],
-++    )
-++    def test_hmac_prepare_key_rejects_jwk_json(self, jwk_file: str) -> None:
-++        algo = HMACAlgorithm(HMACAlgorithm.SHA256)
++-    def test_get_jwt_set_failed_request_should_clear_cache(self):
+++    def test_get_jwt_set_failed_refresh_preserves_cached_jwks(self) -> None:
++         url = "https://dev-87evx9ru.auth0.com/.well-known/jwks.json"
++ 
++         jwks_client = PyJWKClient(url)
++         with mocked_success_response(RESPONSE_DATA_WITH_MATCHING_KID):
++             jwks_client.get_jwk_set()
++ 
+++        assert jwks_client.jwk_set_cache is not None
+++        assert jwks_client.jwk_set_cache.get() is not None
 ++
-++        with open(key_path(jwk_file)) as keyfile:
-++            with pytest.raises(InvalidKeyError, match="looks like a JWK"):
-++                algo.prepare_key(keyfile.read())
++         with pytest.raises(PyJWKClientError):
++             with mocked_failed_response():
++                 jwks_client.get_jwk_set(refresh=True)
++ 
++-            assert jwks_client.jwk_set_cache is None
+++        cached = jwks_client.jwk_set_cache.get()
+++        assert cached is not None
 ++
-++    def test_hmac_prepare_key_accepts_json_without_kty(self) -> None:
-++        algo = HMACAlgorithm(HMACAlgorithm.SHA256)
-++
-++        key = algo.prepare_key('{"this": "is just a json-shaped secret"}')
-++        assert key == b'{"this": "is just a json-shaped secret"}'
-++
-+     @crypto_required
-+     def test_rsa_should_parse_pem_public_key(self):
-+         algo = RSAAlgorithm(RSAAlgorithm.SHA256)
+++        with mocked_success_response(RESPONSE_DATA_WITH_MATCHING_KID) as call:
+++            jwks_client.get_jwk_set()
+++        assert call.call_count == 0
++ 
++     def test_failed_request_should_raise_connection_error(self):
++         token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik5FRTFRVVJCT1RNNE16STVSa0ZETlRZeE9UVTFNRGcyT0Rnd1EwVXpNVGsxUWpZeVJrUkZRdyJ9.eyJpc3MiOiJodHRwczovL2Rldi04N2V2eDlydS5hdXRoMC5jb20vIiwic3ViIjoiYVc0Q2NhNzl4UmVMV1V6MGFFMkg2a0QwTzNjWEJWdENAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vZXhwZW5zZXMtYXBpIiwiaWF0IjoxNTcyMDA2OTU0LCJleHAiOjE1NzIwMDY5NjQsImF6cCI6ImFXNENjYTc5eFJlTFdVejBhRTJINmtEME8zY1hCVnRDIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.PUxE7xn52aTCohGiWoSdMBZGiYAHwE5FYie0Y1qUT68IHSTXwXVd6hn02HTah6epvHHVKA2FqcFZ4GGv5VTHEvYpeggiiZMgbxFrmTEY0csL6VNkX1eaJGcuehwQCRBKRLL3zKmA5IKGy5GeUnIbpPHLHDxr-GXvgFzsdsyWlVQvPX2xjeaQ217r2PtxDeqjlf66UYl6oY6AqNS8DH3iryCvIfCcybRZkc_hdy-6ZMoKT6Piijvk_aXdm7-QQqKJFHLuEqrVSOuBqqiNfVrG27QzAPuPOxvfXTVLXL2jek5meH6n-VWgrBdoMFH93QEszEDowDAEhQPHVs0xj7SIzA"
 diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.8.0.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.8.0.bb
-index fc3e0bc31d..3804d8ab72 100644
+index 55884cddad..7b72cfb4bd 100644
 --- a/meta-python/recipes-devtools/python/python3-pyjwt_2.8.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.8.0.bb
-@@ -10,6 +10,7 @@ SRC_URI += " \
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4b56d2c9973d8cf54655555be06e551"
+ SRC_URI += " \
+     file://CVE-2026-32597.patch \
      file://CVE-2026-48522.patch \
-     file://CVE-2026-48524.patch \
-     file://CVE-2026-48525.patch \
-+    file://CVE-2026-48526.patch \
++    file://CVE-2026-48524.patch \
  "
  SRC_URI[sha256sum] = "57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"
  
