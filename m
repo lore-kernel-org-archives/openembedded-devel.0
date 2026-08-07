@@ -1,617 +1,258 @@
-Return-Path: <jaipaul.cheernam@est.tech>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BF6DC5AC7A
-	for <webhook@archiver.kernel.org>; Fri,  7 Aug 2026 05:56:22 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.40])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36547.1786082174089395767
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A2E8C5AC7A
+	for <webhook@archiver.kernel.org>; Fri,  7 Aug 2026 07:10:06 +0000 (UTC)
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37552.1786086603991541735
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Aug 2026 22:56:14 -0700
+ Fri, 07 Aug 2026 00:10:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@est.tech header.s=selector1 header.b=hRjb59VZ;
- spf=pass (domain: est.tech, ip: 52.101.66.40, mailfrom: jaipaul.cheernam@est.tech)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ry8XtsEmfiCG5/iJqj+kOj2LBXvkIUWI1r6f/qLtIA48AdbYV6aWZgkA7jt8bSYWhZDb73DusXwBKSYAvXvyGlcVz0sWLrcyJyJW1iMHEdCP9mVlLp6GPH/HF/Bi3BTO1ukFCbxtrGnq905Q/e+kXa1To1VoK9mp3QJaeEdRvLgm3uDP9Rk99Sax0otABz/3Q335xGm5TsWRGYdJV6XBp7lMV7zkj9N3Ca8tdstx7l/DwAhgwLWs5cre47sGjy0CQSCLqWeJXvrmZTff7WZLDLyQpTwZwPnmb1V15pKg/7etKYSs7tjuyvIIPtK9gWuj2xxR91S1oF7zeBLcnY4tCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PRkF1Szfkctn6XpWUpW+ecV9VOd5FDlTCLIGngaawSE=;
- b=CXvgNTW8CmmMsvGqIdB0PgBwDY0AMo1AyRKwoey9shTE5oaCZhQ7k1NMsWStYUXlCyS7lZCYHBcjieWF2+Gj/OAy52lo6IqQ7uCkn6TvQdIwv4xAaF3Ny6iMv3K9XzzdwnPTCAVXCkdhrjnkDCDM3/381RKsl1J2yFNfwT5znCRiei5quVNb9qmkYwnGV2886aUkfp3MmJeVnUF4Ej9NDVzvwDgWMLycqgyG7Fw9Zq6JA929NQbbD4L7yqFjlnOGhrXxXbArQSG/cPJ1Y9g9pwCBkVEtwGXPhmhVoon86RKF9UfgrszcXw1LXBK3cVrQkn+R114Gbm2VKnKBJEJ1pg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
- dkim=pass header.d=est.tech; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PRkF1Szfkctn6XpWUpW+ecV9VOd5FDlTCLIGngaawSE=;
- b=hRjb59VZA64eTzy0l2EC6xNpxEU61zcLm9YxmMMdPNLzJwH3qsHHlyK08VpjNLIfrrRP6FrmNzAvdxFah5hrjjkvQYEOA+xs3WzMkESBYKRt/brpHjMZA9XsshPtnAlMmihtEZrejHWT4SWdWtADlIfiMJs/SORtPkYU4pAJulmm1hgQyhoW8V1hSxwusgvq40vZx6zRO3mRT8uyCdCK9bS/0VgE2qTYvz16xjWnrEEfV7yx08GuwcvWkUdWriCwpyKFoSQ9MIYc1cKCx+nu2Gcoib2Yvg97WxYpP5yHIDQSPntDMwDCTlGXDXkRVqhF7pIBN/LATAI7gBlaWc7naw==
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
- by GV2P189MB2912.EURP189.PROD.OUTLOOK.COM (2603:10a6:150:26e::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.9; Fri, 7 Aug 2026
- 05:56:07 +0000
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0292.013; Fri, 7 Aug 2026
- 05:56:07 +0000
-From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: Re: [oe] [meta-networking][PATCH 2/3] net-snmp: Backport upstream fix
- for explicit library linking
-Thread-Topic: [oe] [meta-networking][PATCH 2/3] net-snmp: Backport upstream
- fix for explicit library linking
-Thread-Index: AQHdJSEUeGTQb2Pi1UeEy7VSnny+RraSF/pc
-Date: Fri, 7 Aug 2026 05:56:07 +0000
-Message-ID: 
- <DU7PPF66507B2D76B0DC1B2BFBE539BBE38F3D12@DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM>
-References: <20260805212612.1351211-1-khem.raj@oss.qualcomm.com>
- <20260805212612.1351211-2-khem.raj@oss.qualcomm.com>
-In-Reply-To: <20260805212612.1351211-2-khem.raj@oss.qualcomm.com>
-Accept-Language: en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-reactions: allow
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=est.tech;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DU7PPF66507B2D7:EE_|GV2P189MB2912:EE_
-x-ms-office365-filtering-correlation-id: 6f663095-54dd-4c43-9c9e-08def44892cb
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|23010399003|10070799003|376014|366016|1800799024|13003099007|38070700021|56012099006|4143699003|11063799006|10067099003|8096899003|22082099003|18002099003|3023799007;
-x-microsoft-antispam-message-info: 
- TJSmG/u1/Tw6MO2lGvIfiPL/X2OMg7FE8OjOnDMon36rdKco3HP6t/f+ckJ3INr11QnvnpT4uFuP86BQA7F0HJj7+xfbMqwMrBtAhvWs0N5DYqgw/XDGvPJuvnsnEHvcckrWjhSajrzhTZxe997bOCrGZPo1i9+EQqMe0iOZLmZX6jTr8XCnfdI07f88ZGuAtzsPFDnv+Oeq9Yr+2j7Cv3+OE333gfhoq0rARZ6985m9utdo/dowhtSztLPppT+6UbWkJSxO98qG0QI4NF6uG+vAgFd1N/dXlDH6fk2idBWkLdETBKMKpCIizoWTqYBLP6WVsR++pPr521bWzo6GL/WMDZSQmq97O60hITTvCvpe+61xk8ScoWivfrF8jzZk8Z67+KkZ9GfsjXJFFpmRrIHrspuQyWmx2tQ0ojmqdgRrDXsfdaXJvU/DYlY580uq/IRLN0CLP52NxexuCCqtluczqoQOeEJ6vtNHZeC0pMXtjEIDy7cz+jDazEbDszB6+5o97Itl2QXNZe30xGm/vUcDBxNTP01USARxWop/4SDR/4pHUEwTsa2Ip7alUGdl+/kqpwS3R5oXP/ov/+pkzLR4nkI8JrmHRl7T6YeYjYcdppCTMq84aQNb073wxKNKd5Euml1I3WjEd0sYFqmWyaGzUlggzvi8RP55vtcD0mE=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(10070799003)(376014)(366016)(1800799024)(13003099007)(38070700021)(56012099006)(4143699003)(11063799006)(10067099003)(8096899003)(22082099003)(18002099003)(3023799007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-2022-jp?B?d3owWlNtY2lIVTF0ZkIwZk5Jd0x0Nlo3SXVrUUlNQm9RTEYxbHNxMkVp?=
- =?iso-2022-jp?B?VGp2YkJvbXhjeUxkYkxMZDcvTzZkWkNTc3UrRURDZ3I5dFBnZjc1U0I5?=
- =?iso-2022-jp?B?YitGS2lBVGx1MHdocVVBYWUwSGtZNjNQMGNmN0VQelBKVTZhMWxiOVJJ?=
- =?iso-2022-jp?B?blNINjZ0WExzSlZyU3pibjAzOVlXTVlhMEI4bXpjZldsNkZ6c3BZNTU1?=
- =?iso-2022-jp?B?ZlYvd2lpdkFaQWNGUGxmcWdzRnpUQ0hicnpsZXFaSlZ0THIwc2xNY1Zw?=
- =?iso-2022-jp?B?dkR4OXM1eEpzcVpLTTVaTGNBdWxtMzM5ZWVtbWFucjh1THJLL0cxS1Bx?=
- =?iso-2022-jp?B?SDk3YlE2M1V2NTVEWlFhS1ZyM3F5RGpkcGtBWFhaY2p2bGEzQ0luMWpJ?=
- =?iso-2022-jp?B?T2FEbUJvQVJQNnhUa2hIejk4aEV1NFpCbmtLOW5mOThCcHZGOVAvRmtH?=
- =?iso-2022-jp?B?cmNsNXlMM3U0Ym9DVVM4UmlNaHBLSWNZZ0R0YjkzZVNETmJ5U2NDZXli?=
- =?iso-2022-jp?B?VGpWd1hBdGJkQkZocmc1bnEvSEZsbEl2N3EwS3pBaGx1MXowTjJhSkQ5?=
- =?iso-2022-jp?B?b3NLeW9naWxXVU5YQy9ZWU5sd2xoc3pOeTBnaEJhYnVVSEFXYmhuZFV3?=
- =?iso-2022-jp?B?Nzg5RURiYm9pcGNTaWVnQ0haSTFKbVJPNHZrQmRvTzZsUzNkL0FBVGl1?=
- =?iso-2022-jp?B?UnBRNkpnaVdtTkkzaXhsbWMxZVRSTVNBaVdZdVI3YVIzUWlqT3M1RGdV?=
- =?iso-2022-jp?B?TUczbjc3aVNnUGYvWWxDVVBjREV0QWRSZmhnbU51ZHFnVVMwMjJpbFhG?=
- =?iso-2022-jp?B?SXNqU01yaUw4TmdmN3Bnc0hrakNjZWcrT2JGYklvVDB2YkMvUDJjcGFK?=
- =?iso-2022-jp?B?djdGWUkzUVhOV0tma0d3SnpzWTJDNUs0N2tYNTJmb3JoWHJ6VEVoWk1O?=
- =?iso-2022-jp?B?dE05eWRyN05ZQTFTcFdYZnZob2NxUERDWlptNjEvbXJBc2gwRlpWc3dm?=
- =?iso-2022-jp?B?NXlpRFFoLzI3VGg3bDJoVE9BTTN0dlFianVEUFN4V1VOcElNR3BMYUhl?=
- =?iso-2022-jp?B?N2xYMFhBcDMvY2M0Z000K0FhWTBva0ZMSFR1RnI5WU5mai9uOVpUYWxy?=
- =?iso-2022-jp?B?VklxaDlDM2FSWkQ2SCt4cHNvV2EyU0c3UndYaVVGbFpqaEVBVGxwVnBZ?=
- =?iso-2022-jp?B?bWtuT0JHbGZnaHo1eFdFbHFrYkFsTXZnOXpUL0pWUmtSODVGQzhSb2pG?=
- =?iso-2022-jp?B?SjMvdjZWVzExMDBjSzdTeDI2Q1IyaVpraVBaV3hLVVVZRmNIeTc5OHpr?=
- =?iso-2022-jp?B?Z2tmNldlOWxrTWxKcG5RUW5QNGNIc0ZBNC9OY3FNU0hVWTZQNm0rVTFk?=
- =?iso-2022-jp?B?Qnh2MzhlRlo5ejZtUHFadnRXRUFSVGZsV2trM1J1dDl6SWJsRVM5MGdB?=
- =?iso-2022-jp?B?UGFoNFFWQy8za0lWWDJOa2F3Yjd0ODlCVGg2blp5ZHZ4c2pyVWIrZ1I4?=
- =?iso-2022-jp?B?K0xjZ1pSVngvY1VLS3ZFSVVlN2hBMmhzZ3RwSGlRYUJQYi95WVVFczhq?=
- =?iso-2022-jp?B?ZzNzbnpabXBOQm5udGRNekg1M0I1blRFVnFrSWVMQWxuVUtlcDdqejIy?=
- =?iso-2022-jp?B?R3NuWXdhcXdtcjBrYVl5SDIvSitvblgzb0NUSHdTVUo5TUtBNitYK0RS?=
- =?iso-2022-jp?B?d3RjWFBXUWgzZHVQQlFIbGZCenBYd0JQZFdsSjRuT3dsV2ttSER3T3Vn?=
- =?iso-2022-jp?B?WG42cFJYYjZiL3NVRmJRaytIcWl6Z3U1aUFrMUc3UERxRXl5Um1Fdloz?=
- =?iso-2022-jp?B?cGREcEFMMkpLZk1zbFYwdGMrTE9PQTkxdktSSUNhL1NyaGIrbGRMYTVq?=
- =?iso-2022-jp?B?SWFwRnlRbk9rUlZLem1GbllxdndBRVBMV2xLd0FOMjdOeEhNUUNtTmYx?=
- =?iso-2022-jp?B?QzJoUHpvandjNGdZeWhORVdFM0JWbGtJVEpNZkVmTVloTmJOMGpJcVli?=
- =?iso-2022-jp?B?dWRleVJ0ZURzQ1doWXlCbEE1Ty9aTEd3NDMzQmI3VFZET1VMUTJqQVdW?=
- =?iso-2022-jp?B?NkJzK0l5YmJuZlZndWZYVnBGNjRyWlc3aEw1NkFTQlFlUW5XQ0RabDEv?=
- =?iso-2022-jp?B?TzhWM2M1TDZqR25odWpPWnRMZ2pyV09IbmZQZ1JxcVZMcUpoKzAyeU5E?=
- =?iso-2022-jp?B?cXF4cHNNalZ0RE05U1lrMWVVZmI4VlJkVnNzK0U1Rnd2eTY2S1NXL2w5?=
- =?iso-2022-jp?B?ZzE4Tmc3bGhwWkxMRUtzMS9CeE02dDAyeHlXV3E1RVVTay9mQUhuNFlY?=
- =?iso-2022-jp?B?MUNFamk3ckhpM3FvMEcrYnhMWXpCTUtvZGZIRVBtajNUZEZYQWxGZzRa?=
- =?iso-2022-jp?B?R25OUmVrOTlQM0ViRlNrSXZmbjM5aTNIVk4xdVhBV0RTL09aQ3BsZ1BR?=
- =?iso-2022-jp?B?cFRaeDZqVmI5UVdnWEhrM2JtcFZ0dmh4cjdrSWFjNy8wcDBEKzgzbUMz?=
- =?iso-2022-jp?B?SFlUTk1CbCtkUlBSOVJNdmF3Q1NTckRlaEFzUE1xZURzRGgySCtKck1P?=
- =?iso-2022-jp?B?Y2NhTGRLbmQ5dlZtQXB1Y3kvZFpoM2NpVG80bHY5cjlJZVg0?=
-x-ms-exchange-antispam-messagedata-1: 2VgOdqUgpBCauuCv5BoDEj857lQtdec7nic=
-Content-Type: multipart/alternative;
-	boundary="_000_DU7PPF66507B2D76B0DC1B2BFBE539BBE38F3D12DU7PPF66507B2D7_"
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=tNzvf43s;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-ca97d139d5fso2473100a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2026 00:10:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786086603; x=1786691403; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=g/a2fEXljaJZOc6XUYZ9moL15ID97UfTHZHYd5wn1q4=;
+        b=tNzvf43sHi0lOPLKDfxdqH7weaoiVHU++yIIJ8k1GCmkgztaB9aZVCeqsO0D3vgAe3
+         YJTkoKjGFTOK7DdXR1Z9yKhBPoIZ/Sbk7m50heEpNz1NTsKv9w14MHbEPqnjAQNTzr6F
+         I8S4owt38/QFg+/LcdZV/+v06lFcV8y+GSQaezh1VmNNAojYrQ4l2U20U1Xke3NXSvye
+         NHVEnX80O0bwoN79F2pXyJUzT09u/r+BZVNGYU3JDnKFKkuVfKQ09fVXQoyQe1wOxnus
+         5vl8yGsPU5HMJE66HEOuGou4UQ/Zh2LhRlCFZDI5CG0Y1wi+cHGaqDO6QQLk+uexxAo5
+         9WVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786086603; x=1786691403;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=g/a2fEXljaJZOc6XUYZ9moL15ID97UfTHZHYd5wn1q4=;
+        b=rBhG8WC57W29edk4rg5+uf4ffMawbK0edGrrhm2kD1QU7F/USrAIdePadyXQiblqtF
+         HynElDSuf8hMXPOyO9neuURVikW0SriQmeft+Er+RApPIrLvmYu+yp1Kz8urqdHwRV3U
+         EJ0DHyw4TpjaSh6XSojUZ9UD6f+XSmwKkAmwwWIDPUyUrhf8tkDzcnls1cPzpk3pxaxC
+         yb+1OZ2D8F1doIB6zX0CBmjaIhkmAwZuv9NjX6g4Zt+oHq6cgrojN17FgNRDTQWSHIA8
+         oLNu2hKiL1kIS/IqtxUGTJU7Q2+0CaUYxGy5DS2nCThSRx2JVX/4GsNixFedfDVHLHxm
+         yBHw==
+X-Gm-Message-State: AOJu0YydStveb3bbns3PmLGgx9WH/rLPLq9Np/PaZZ+RlSMROeFJ83Iz
+	oipdndGxmVoSBnycQqZF2vlu0vV5pSguPrGUdCwZcXc88X0BTIKsJoVRFjjnD9AI
+X-Gm-Gg: AR+sD11niqhQ5/JEaYX+Dj8O4PCBgCw8TBVpdO9rmNxVSJ5LMc4awLbmJk17G70eK2U
+	xbnAgqg132/hqzLY6CpvbbmZydMmlQL8F4f6IwoUJONVYPHSO1B9KCRF+Fm5fDu8VF72ATL7pO4
+	rGvnvaM1yKYMFrMrOK8s3Qgfdd2eG+xvYN6DtK6ews2byL/6OwTXKj9uRiMJJPyyYFUbY+aPVJ5
+	JUV7E/8G7SIHt2d3Rz+OuVih8VQ7hln8NznUijXVmti05huyvXd4a5WDCzGF/x7dN9yrovTA6Ra
+	ptW14RJMXC3gx7t+mwVdVXHwGqNBJfnqXU9nuiuq20lS/H1VM1advp3rUIV8K9mzKBZueG2oPxq
+	xmigXEKkeb+osG/theguzW0hCmaoW3QPsmtsrLhjS+TFGJNIeoqayGKESpM0QzdOZVCvc8Dbbcu
+	Svkw/JtmCwMXOR3fc5GPBiiMvB/mESt4qdB6NYfOYqa/1PwVSYhCpo/9WJZdI/HU05HUOKlIDW/
+	A==
+X-Received: by 2002:a05:6a00:3928:b0:84e:d5e6:a085 with SMTP id d2e1a72fcca58-84f2de7e930mr19849560b3a.0.1786086603121;
+        Fri, 07 Aug 2026 00:10:03 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84f5a51e99asm520440b3a.33.2026.08.07.00.09.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2026 00:10:01 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/6] redis: upgrade 7.2.12 -> 7.2.15
+Date: Fri,  7 Aug 2026 19:09:46 +1200
+Message-ID: <20260807070953.2275518-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f663095-54dd-4c43-9c9e-08def44892cb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2026 05:56:07.0355
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: G6lUGX9L2b90Ps19FU9IP45SUvDKG23gU0yPUzBuNUKvTGsaE7NVfC0nOhPoyU3+gY8pLTTBemWQOkOiwBvaO7dbt3WEk0ekQtuWdOvQ4jA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P189MB2912
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2026 05:56:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128857
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2026 07:10:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128858
 
---_000_DU7PPF66507B2D76B0DC1B2BFBE539BBE38F3D12DU7PPF66507B2D7_
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Hi Khem,
+Refreshed patches for this version.
 
-This fixes the net-snmp 5.9.5.2 do_compile failure we hit after the libtool=
- 2.5.4 =1B$B"*=1B(B 2.6.2 upgrade (link_all_deplibs=3Dno exposing missing d=
-irect dependencies in libnetsnmptrapd).
+https://github.com/redis/redis/releases/tag/7.2.13
+https://github.com/redis/redis/releases/tag/7.2.14
+https://github.com/redis/redis/releases/tag/7.2.15
 
- Tested-by: jaipaul.cheernam@est.tech
-
-Regards,
-Jaipaul
-From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> on behalf of Khem Raj via lists.openembedded.org <raj.khem=
-=3Dgmail.com@lists.openembedded.org>
-Date: Wednesday, 5 August 2026 at 23:26
-To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
-nembedded.org>
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [oe] [meta-networking][PATCH 2/3] net-snmp: Backport upstream fix =
-for explicit library linking
-
-libnetsnmptrapd uses symbols that live in libnetsnmpagent, but
-apps/Makefile.in only passes $(MIBLIB) and $(USELIBS) to the link. That
-works with GNU ld, which resolves symbols through the DT_NEEDED entries
-of the libraries named on the command line, and libnetsnmpmibs records a
-dependency on libnetsnmpagent. lld deliberately does not, so the link
-fails:
-
-| ld.lld: error: undefined symbol: init_vacm_config_tokens
-| >>> referenced by snmptrapd_auth.c:51
-| >>>               .libs/snmptrapd_auth.o:(init_netsnmp_trapd_auth)
-| ld.lld: error: undefined symbol: send_v2trap
-| >>> referenced by snmptrapd_handlers.c:886
-| >>>               .libs/snmptrapd_handlers.o:(axforward_handler)
-
-Backport upstream commit 5e66246bd994 which names $(AGENTLIB) explicitly
-and additionally links libcrypto into libnetsnmpmibs and the apps, both
-of which rely on the same transitive resolution. The libnetsnmptrapd.la
-hunk is rebased because 5.9.5.2 still puts $(LDFLAGS) at the end of that
-link command.
-
-Verified on aarch64 for qemuarm64: do_compile fails before the change
-with the errors above; after it do_compile and do_package succeed and
-libnetsnmptrapd.so records DT_NEEDED on libnetsnmpmibs, libnetsnmpagent
-and libnetsnmp directly.
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...akefile.in-Link-libraries-explicitly.patch | 103 ++++++++++++++++++
- .../net-snmp/net-snmp_5.9.5.2.bb              |   1 +
- 2 files changed, 104 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/001=
-2-apps-Makefile.in-Link-libraries-explicitly.patch
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch             | 3 ++-
+ ...-lua-update-Makefile-to-use-environment-build-setting.patch | 3 ++-
+ .../0003-hack-to-force-use-of-libc-malloc.patch                | 3 ++-
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch                     | 3 ++-
+ ...5-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 3 ++-
+ .../0006-Define-correct-gregs-for-RISCV32.patch                | 3 ++-
+ .../redis/{redis-7.2.12 => redis-7.2.15}/init-redis-server     | 0
+ .../redis/{redis-7.2.12 => redis-7.2.15}/redis.conf            | 0
+ .../redis/{redis-7.2.12 => redis-7.2.15}/redis.service         | 0
+ .../redis/{redis_7.2.12.bb => redis_7.2.15.bb}                 | 2 +-
+ 10 files changed, 13 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0001-hiredis-use-default-CC-if-it-is-set.patch (92%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (94%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0003-hack-to-force-use-of-libc-malloc.patch (90%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0004-src-Do-not-reset-FINAL_LIBS.patch (87%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (86%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/0006-Define-correct-gregs-for-RISCV32.patch (95%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.15}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_7.2.12.bb => redis_7.2.15.bb} (97%)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0012-apps-=
-Makefile.in-Link-libraries-explicitly.patch b/meta-networking/recipes-proto=
-cols/net-snmp/net-snmp/0012-apps-Makefile.in-Link-libraries-explicitly.patc=
-h
-new file mode 100644
-index 0000000000..5129282ef2
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0012-apps-Makefil=
-e.in-Link-libraries-explicitly.patch
-@@ -0,0 +1,103 @@
-+From 5e66246bd994a2f693bd02773823691c8d07a070 Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Fri, 24 Jul 2026 09:34:18 -0700
-+Subject: [PATCH] apps/Makefile.in: Link libraries explicitly
-+
-+When building Net-SNMP with -no-undefined (which is used for libraries lik=
-e
-+libnetsnmpmibs.la and libnetsnmptrapd.la) and link_all_deplibs=3Dno (defau=
-lt on
-+modern systems to prevent overlinking), compilation fails due to undefined
-+references to symbols from transitive dependencies.
-+
-+1. libnetsnmpmibs.la fails to link because it uses OpenSSL DH/BN symbols
-+   (when snmp-usm-dh-objects-mib is enabled) but does not link with
-+   libcrypto directly. Fix this by adding LIBCRYPTO to LMIBLIBS in
-+   configure if OpenSSL is used, and exporting LIBCRYPTO.
-+
-+2. libnetsnmptrapd.la fails to link because it uses symbols from
-+   libnetsnmpagent.la (like vacm_check_view_contents) but does not link wi=
-th
-+   it directly. Fix this by adding $(AGENTLIB) to libnetsnmptrapd.la link
-+   line in apps/Makefile.in.
-+
-+3. Executables in apps/ (like snmpusm and snmptls) fail to link because
-+   they use OpenSSL symbols directly but do not link with libcrypto/libssl
-+   directly. Fix this by adding @LIBCRYPTO@ to LIBS in apps/Makefile.in.
-+
-+This makes Net-SNMP compatible with newer versions of libtool.
-+
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/5e6=
-6246bd994a2f693bd02773823691c8d07a070]
-+
-+The libnetsnmptrapd.la hunk is rebased: 5.9.5.2 still puts $(LDFLAGS) at
-+the end of that link command, upstream has since moved it before
-+$(LLIBTRAPD_OBJS). The change itself is unmodified.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ apps/Makefile.in            | 4 ++--
-+ configure                   | 7 +++++++
-+ configure.d/config_os_libs2 | 6 ++++++
-+ 3 files changed, 15 insertions(+), 2 deletions(-)
-+
-+diff --git a/apps/Makefile.in b/apps/Makefile.in
-+index 57b8524..252fd84 100644
-+--- a/apps/Makefile.in
-++++ b/apps/Makefile.in
-+@@ -95,7 +95,7 @@ MYSQL_LIBS   =3D @MYSQL_LIBS@
-+ MYSQL_INCLUDES        =3D @MYSQL_INCLUDES@
-+
-+ VAL_LIBS      =3D @VAL_LIBS@
-+-LIBS          =3D $(USELIBS) $(VAL_LIBS) @LIBS@
-++LIBS          =3D $(USELIBS) $(VAL_LIBS) @LIBS@ @LIBCRYPTO@
-+ PERLLDOPTS_FOR_APPS =3D @PERLLDOPTS_FOR_APPS@
-+ PERLLDOPTS_FOR_LIBS =3D @PERLLDOPTS_FOR_LIBS@
-+
-+@@ -235,7 +235,7 @@ snmppcap$(EXEEXT):    snmppcap.$(OSUFFIX) $(USEAGENTLI=
-BS)
-+        $(LINK) ${CFLAGS} -o $@ snmppcap.$(OSUFFIX) ${LDFLAGS} ${USEAGENTL=
-IBS} ${LIBS} -lpcap
-+
-+ libnetsnmptrapd.$(LIB_EXTENSION)$(LIB_VERSION): $(LLIBTRAPD_OBJS)
-+-      $(LIB_LD_CMD) $@ ${LLIBTRAPD_OBJS} $(MIBLIB) $(MYSQL_LIBS) $(USELIB=
-S) $(PERLLDOPTS_FOR_LIBS) $(LDFLAGS)
-++      $(LIB_LD_CMD) $@ ${LLIBTRAPD_OBJS} $(MIBLIB) $(AGENTLIB) $(MYSQL_LI=
-BS) $(USELIBS) $(PERLLDOPTS_FOR_LIBS) $(LDFLAGS)
-+        $(RANLIB) $@
-+
-+ snmpinforminstall:
-+diff --git a/configure b/configure
-+index 6ef0026..4270aff 100755
-+--- a/configure
-++++ b/configure
-+@@ -683,6 +683,7 @@ PERLLDOPTS_FOR_APPS
-+ PERLLDOPTS_FOR_LIBS
-+ EMBEDPERLUNINSTALL
-+ EMBEDPERLINSTALL
-++LIBCRYPTO
-+ LIBCURSES
-+ HAVE_LIBCURSES
-+ NETSNMP_BUILD_PCAP_PROG_FALSE
-+@@ -32065,6 +32066,12 @@ printf "%s\n" "$netsnmp_cv_func_ceil_LNETSNMPLIBS=
-" >&6; }
-+  fi
-+
-+
-++if test x$CRYPTO !=3D x; then
-++    LMIBLIBS=3D"$LMIBLIBS $LIBCRYPTO"
-++fi
-++
-++
-++
-+ cat >confcache <<\_ACEOF
-+ # This file is a shell script that caches the results of configure
-+ # tests run on this system so they can be shared between configure
-+diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
-+index 5787e58..d21ea77 100644
-+--- a/configure.d/config_os_libs2
-++++ b/configure.d/config_os_libs2
-+@@ -718,3 +718,9 @@ AC_SUBST([LIBCURSES])
-+ #   libm for ceil
-+ #
-+ NETSNMP_SEARCH_LIBS(ceil, m,,,, LNETSNMPLIBS)
-++
-++if test x$CRYPTO !=3D x; then
-++    LMIBLIBS=3D"$LMIBLIBS $LIBCRYPTO"
-++fi
-++
-++AC_SUBST(LIBCRYPTO)
-+--
-+2.43.0
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb=
- b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
-index 00a7b50cdf..48704d020f 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
-@@ -24,6 +24,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV=
-}.tar.gz \
-            file://0009-net-snmp-fix-for-disable-des.patch \
-            file://0010-net-snmp-Reproducibility-Don-t-check-build-host-for=
-.patch \
-            file://0011-ac_add_search_path.m4-keep-consistent-between-32bit=
--.patch \
-+           file://0012-apps-Makefile.in-Link-libraries-explicitly.patch \
-            file://netsnmp-swinst-crash.patch \
-            "
- SRC_URI[sha256sum] =3D "16707719f833184a4b72835dac359ae188123b06b5e42817c0=
-0790d7dc1384bf"
-
---_000_DU7PPF66507B2D76B0DC1B2BFBE539BBE38F3D12DU7PPF66507B2D7_
-Content-Type: text/html; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-2022-=
-jp">
-</head>
-<body>
-<div style=3D"direction: ltr; line-height: normal; margin: 0px; font-family=
-: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0)=
-;">
-Hi Khem,</div>
-<div style=3D"direction: ltr; line-height: normal; margin: 0px; font-family=
-: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0)=
-;">
-<br>
-</div>
-<div style=3D"direction: ltr; line-height: normal; margin: 0px; font-family=
-: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0)=
-;">
-This fixes the net-snmp 5.9.5.2 do_compile failure we hit after the libtool=
- 2.5.4 =1B$B"*=1B(B 2.6.2 upgrade (link_all_deplibs=3Dno exposing missing d=
-irect dependencies in libnetsnmptrapd).</div>
-<div style=3D"direction: ltr; line-height: normal; margin: 0px; font-family=
-: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0)=
-;">
-&nbsp;&nbsp;</div>
-<div style=3D"line-height: normal; margin: 0px; font-family: Aptos, Arial, =
-Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-&nbsp;Tested-by: jaipaul.cheernam@est.tech&nbsp;</div>
-<div style=3D"direction: ltr; font-family: Aptos, Arial, Helvetica, sans-se=
-rif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div style=3D"direction: ltr; font-family: Aptos, Arial, Helvetica, sans-se=
-rif; font-size: 12pt; color: rgb(0, 0, 0);">
-Regards,</div>
-<div style=3D"direction: ltr; font-family: Aptos, Arial, Helvetica, sans-se=
-rif; font-size: 12pt; color: rgb(0, 0, 0);">
-Jaipaul</div>
-<div id=3D"mail-editor-reference-message-container">
-<div class=3D"ms-outlook-mobile-reference-message skipProofing">
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-</div>
-<div style=3D"padding: 3pt 0in 0in; border-width: 1pt medium medium; border=
--style: solid none none; border-color: rgb(181, 196, 223) currentcolor curr=
-entcolor;">
-<div class=3D"ms-outlook-mobile-reference-message skipProofing" style=3D"te=
-xt-align: left; font-family: Aptos; font-size: 12pt; color: black;">
-<b>From: </b>openembedded-devel@lists.openembedded.org &lt;openembedded-dev=
-el@lists.openembedded.org&gt; on behalf of Khem Raj via lists.openembedded.=
-org &lt;raj.khem=3Dgmail.com@lists.openembedded.org&gt;<br>
-<b>Date: </b>Wednesday, 5 August 2026 at 23:26<br>
-<b>To: </b>openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
-@lists.openembedded.org&gt;<br>
-<b>Cc: </b>Khem Raj &lt;khem.raj@oss.qualcomm.com&gt;<br>
-<b>Subject: </b>[oe] [meta-networking][PATCH 2/3] net-snmp: Backport upstre=
-am fix for explicit library linking<br>
-<br>
-</div>
-</div>
-<div class=3D"PlainText" style=3D"font-size: 11pt;">libnetsnmptrapd uses sy=
-mbols that live in libnetsnmpagent, but<br>
-apps/Makefile.in only passes $(MIBLIB) and $(USELIBS) to the link. That<br>
-works with GNU ld, which resolves symbols through the DT_NEEDED entries<br>
-of the libraries named on the command line, and libnetsnmpmibs records a<br=
->
-dependency on libnetsnmpagent. lld deliberately does not, so the link<br>
-fails:<br>
-<br>
-| ld.lld: error: undefined symbol: init_vacm_config_tokens<br>
-| &gt;&gt;&gt; referenced by snmptrapd_auth.c:51<br>
-| &gt;&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp; .libs/snmptrapd_auth.o:(init_netsnmp_trapd_auth)<br=
->
-| ld.lld: error: undefined symbol: send_v2trap<br>
-| &gt;&gt;&gt; referenced by snmptrapd_handlers.c:886<br>
-| &gt;&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp; .libs/snmptrapd_handlers.o:(axforward_handler)<br>
-<br>
-Backport upstream commit 5e66246bd994 which names $(AGENTLIB) explicitly<br=
->
-and additionally links libcrypto into libnetsnmpmibs and the apps, both<br>
-of which rely on the same transitive resolution. The libnetsnmptrapd.la<br>
-hunk is rebased because 5.9.5.2 still puts $(LDFLAGS) at the end of that<br=
->
-link command.<br>
-<br>
-Verified on aarch64 for qemuarm64: do_compile fails before the change<br>
-with the errors above; after it do_compile and do_package succeed and<br>
-libnetsnmptrapd.so records DT_NEEDED on libnetsnmpmibs, libnetsnmpagent<br>
-and libnetsnmp directly.<br>
-<br>
-Signed-off-by: Khem Raj &lt;khem.raj@oss.qualcomm.com&gt;<br>
----<br>
-&nbsp;...akefile.in-Link-libraries-explicitly.patch | 103 +++++++++++++++++=
-+<br>
-&nbsp;.../net-snmp/net-snmp_5.9.5.2.bb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 1 +<br>
-&nbsp;2 files changed, 104 insertions(+)<br>
-&nbsp;create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snm=
-p/0012-apps-Makefile.in-Link-libraries-explicitly.patch<br>
-<br>
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0012-apps-=
-Makefile.in-Link-libraries-explicitly.patch b/meta-networking/recipes-proto=
-cols/net-snmp/net-snmp/0012-apps-Makefile.in-Link-libraries-explicitly.patc=
-h<br>
-new file mode 100644<br>
-index 0000000000..5129282ef2<br>
---- /dev/null<br>
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0012-apps-Makefil=
-e.in-Link-libraries-explicitly.patch<br>
-@@ -0,0 +1,103 @@<br>
-+From 5e66246bd994a2f693bd02773823691c8d07a070 Mon Sep 17 00:00:00 2001<br>
-+From: Bart Van Assche &lt;bvanassche@acm.org&gt;<br>
-+Date: Fri, 24 Jul 2026 09:34:18 -0700<br>
-+Subject: [PATCH] apps/Makefile.in: Link libraries explicitly<br>
-+<br>
-+When building Net-SNMP with -no-undefined (which is used for libraries lik=
-e<br>
-+libnetsnmpmibs.la and libnetsnmptrapd.la) and link_all_deplibs=3Dno (defau=
-lt on<br>
-+modern systems to prevent overlinking), compilation fails due to undefined=
-<br>
-+references to symbols from transitive dependencies.<br>
-+<br>
-+1. libnetsnmpmibs.la fails to link because it uses OpenSSL DH/BN symbols<b=
-r>
-+&nbsp;&nbsp; (when snmp-usm-dh-objects-mib is enabled) but does not link w=
-ith<br>
-+&nbsp;&nbsp; libcrypto directly. Fix this by adding LIBCRYPTO to LMIBLIBS =
-in<br>
-+&nbsp;&nbsp; configure if OpenSSL is used, and exporting LIBCRYPTO.<br>
-+<br>
-+2. libnetsnmptrapd.la fails to link because it uses symbols from<br>
-+&nbsp;&nbsp; libnetsnmpagent.la (like vacm_check_view_contents) but does n=
-ot link with<br>
-+&nbsp;&nbsp; it directly. Fix this by adding $(AGENTLIB) to libnetsnmptrap=
-d.la link<br>
-+&nbsp;&nbsp; line in apps/Makefile.in.<br>
-+<br>
-+3. Executables in apps/ (like snmpusm and snmptls) fail to link because<br=
->
-+&nbsp;&nbsp; they use OpenSSL symbols directly but do not link with libcry=
-pto/libssl<br>
-+&nbsp;&nbsp; directly. Fix this by adding @LIBCRYPTO@ to LIBS in apps/Make=
-file.in.<br>
-+<br>
-+This makes Net-SNMP compatible with newer versions of libtool.<br>
-+<br>
-+Upstream-Status: Backport [<a href=3D"https://github.com/net-snmp/net-snmp=
-/commit/5e66246bd994a2f693bd02773823691c8d07a070" data-outlook-id=3D"53a57e=
-65-69c5-46bb-a357-38413e61edf9">https://github.com/net-snmp/net-snmp/commit=
-/5e66246bd994a2f693bd02773823691c8d07a070</a>]<br>
-+<br>
-+The libnetsnmptrapd.la hunk is rebased: 5.9.5.2 still puts $(LDFLAGS) at<b=
-r>
-+the end of that link command, upstream has since moved it before<br>
-+$(LLIBTRAPD_OBJS). The change itself is unmodified.<br>
-+<br>
-+Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<br>
-+---<br>
-+ apps/Makefile.in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp; | 4 ++--<br>
-+ configure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 7 +++++++<br>
-+ configure.d/config_os_libs2 | 6 ++++++<br>
-+ 3 files changed, 15 insertions(+), 2 deletions(-)<br>
-+<br>
-+diff --git a/apps/Makefile.in b/apps/Makefile.in<br>
-+index 57b8524..252fd84 100644<br>
-+--- a/apps/Makefile.in<br>
-++++ b/apps/Makefile.in<br>
-+@@ -95,7 +95,7 @@ MYSQL_LIBS&nbsp;&nbsp; =3D @MYSQL_LIBS@<br>
-+ MYSQL_INCLUDES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =3D @MYSQL_INCLU=
-DES@<br>
-+<br>
-+ VAL_LIBS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =3D @VAL_LIBS@<br>
-+-LIBS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =3D $(USELIBS)=
- $(VAL_LIBS) @LIBS@<br>
-++LIBS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =3D $(USELIBS)=
- $(VAL_LIBS) @LIBS@ @LIBCRYPTO@<br>
-+ PERLLDOPTS_FOR_APPS =3D @PERLLDOPTS_FOR_APPS@<br>
-+ PERLLDOPTS_FOR_LIBS =3D @PERLLDOPTS_FOR_LIBS@<br>
-+<br>
-+@@ -235,7 +235,7 @@ snmppcap$(EXEEXT):&nbsp;&nbsp;&nbsp; snmppcap.$(OSUFFI=
-X) $(USEAGENTLIBS)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(LINK) ${CFLAGS} -o $@ snmppca=
-p.$(OSUFFIX) ${LDFLAGS} ${USEAGENTLIBS} ${LIBS} -lpcap<br>
-+<br>
-+ libnetsnmptrapd.$(LIB_EXTENSION)$(LIB_VERSION): $(LLIBTRAPD_OBJS)<br>
-+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(LIB_LD_CMD) $@ ${LLIBTRAPD_OBJS} $(MIBLI=
-B) $(MYSQL_LIBS) $(USELIBS) $(PERLLDOPTS_FOR_LIBS) $(LDFLAGS)<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(LIB_LD_CMD) $@ ${LLIBTRAPD_OBJS} $(MIBLI=
-B) $(AGENTLIB) $(MYSQL_LIBS) $(USELIBS) $(PERLLDOPTS_FOR_LIBS) $(LDFLAGS)<b=
-r>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(RANLIB) $@<br>
-+<br>
-+ snmpinforminstall:<br>
-+diff --git a/configure b/configure<br>
-+index 6ef0026..4270aff 100755<br>
-+--- a/configure<br>
-++++ b/configure<br>
-+@@ -683,6 +683,7 @@ PERLLDOPTS_FOR_APPS<br>
-+ PERLLDOPTS_FOR_LIBS<br>
-+ EMBEDPERLUNINSTALL<br>
-+ EMBEDPERLINSTALL<br>
-++LIBCRYPTO<br>
-+ LIBCURSES<br>
-+ HAVE_LIBCURSES<br>
-+ NETSNMP_BUILD_PCAP_PROG_FALSE<br>
-+@@ -32065,6 +32066,12 @@ printf &quot;%s\n&quot; &quot;$netsnmp_cv_func_ce=
-il_LNETSNMPLIBS&quot; &gt;&amp;6; }<br>
-+&nbsp; fi<br>
-+<br>
-+<br>
-++if test x$CRYPTO !=3D x; then<br>
-++&nbsp;&nbsp;&nbsp; LMIBLIBS=3D&quot;$LMIBLIBS $LIBCRYPTO&quot;<br>
-++fi<br>
-++<br>
-++<br>
-++<br>
-+ cat &gt;confcache &lt;&lt;\_ACEOF<br>
-+ # This file is a shell script that caches the results of configure<br>
-+ # tests run on this system so they can be shared between configure<br>
-+diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2<br>
-+index 5787e58..d21ea77 100644<br>
-+--- a/configure.d/config_os_libs2<br>
-++++ b/configure.d/config_os_libs2<br>
-+@@ -718,3 +718,9 @@ AC_SUBST([LIBCURSES])<br>
-+ #&nbsp;&nbsp; libm for ceil<br>
-+ #<br>
-+ NETSNMP_SEARCH_LIBS(ceil, m,,,, LNETSNMPLIBS)<br>
-++<br>
-++if test x$CRYPTO !=3D x; then<br>
-++&nbsp;&nbsp;&nbsp; LMIBLIBS=3D&quot;$LMIBLIBS $LIBCRYPTO&quot;<br>
-++fi<br>
-++<br>
-++AC_SUBST(LIBCRYPTO)<br>
-+--<br>
-+2.43.0<br>
-+<br>
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb=
- b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb<br>
-index 00a7b50cdf..48704d020f 100644<br>
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb<br>
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb<br>
-@@ -24,6 +24,7 @@ SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/net-snmp/net-snmp=
--${PV}.tar.gz \<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://0009-net-snmp-fix-for-disable-des.patch" data-outlook-id=3D"3b8a=
-2449-e9ef-4fd1-8264-9f45cf67555f">
-file://0009-net-snmp-fix-for-disable-des.patch</a>&nbsp;\<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://0010-net-snmp-Reproducibility-Don-t-check-build-host-for.patch" =
-data-outlook-id=3D"a375ccd2-6771-448d-9093-4c714b45034b">
-file://0010-net-snmp-Reproducibility-Don-t-check-build-host-for.patch</a>&n=
-bsp;\<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://0011-ac_add_search_path.m4-keep-consistent-between-32bit-.patch"=
- data-outlook-id=3D"478e46ef-b2b5-42d8-8ada-d6ee7901adab">
-file://0011-ac_add_search_path.m4-keep-consistent-between-32bit-.patch</a>&=
-nbsp;\<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=3D"fi=
-le://0012-apps-Makefile.in-Link-libraries-explicitly.patch" data-outlook-id=
-=3D"44512125-e103-4f1b-b3ef-245a0e077e59">
-file://0012-apps-Makefile.in-Link-libraries-explicitly.patch</a>&nbsp;\<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://netsnmp-swinst-crash.patch" data-outlook-id=3D"f624672a-0099-4df=
-1-9ecf-ab8aa1bbec65">
-file://netsnmp-swinst-crash.patch</a>&nbsp;\<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;<b=
-r>
-&nbsp;SRC_URI[sha256sum] =3D &quot;16707719f833184a4b72835dac359ae188123b06=
-b5e42817c00790d7dc1384bf&quot;<br>
-</div>
-</div>
-</body>
-</html>
-
---_000_DU7PPF66507B2D76B0DC1B2BFBE539BBE38F3D12DU7PPF66507B2D7_--
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 92%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0001-hiredis-use-default-CC-if-it-is-set.patch
+index 99783ce237..f9f126842e 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0001-hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -1,4 +1,4 @@
+-From 2fec7733df9a6224875f3ecd3aaafc2857a546c0 Mon Sep 17 00:00:00 2001
++From 47f7923c89362328d9c447898b5b3a4661b86b99 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 17:39:52 -0600
+ Subject: [PATCH] hiredis: use default CC if it is set
+@@ -22,6 +22,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+ 
+ Reworked for 6.0.4
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  deps/hiredis/Makefile | 2 --
+  1 file changed, 2 deletions(-)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 94%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+index a3365043b5..813f665861 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0002-lua-update-Makefile-to-use-environment-build-setting.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+@@ -1,4 +1,4 @@
+-From 71d92a24da61eab1e3697cc83ebc387b57bb6c3b Mon Sep 17 00:00:00 2001
++From c94f05e81555aa0ff4b203198830c8779ad0c652 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 20:22:19 -0600
+ Subject: [PATCH] lua: update Makefile to use environment build settings
+@@ -16,6 +16,7 @@ Signed-off-by: Armin Kuster <akust808@gmail.com>
+ 
+ updated to work wtih 6.2.1
+ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  deps/Makefile         |  1 -
+  deps/lua/Makefile     |  1 -
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 90%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0003-hack-to-force-use-of-libc-malloc.patch
+index 4ab1ca0ca8..a480fa44fd 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0003-hack-to-force-use-of-libc-malloc.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0003-hack-to-force-use-of-libc-malloc.patch
+@@ -1,4 +1,4 @@
+-From 577335d0309c852d9f6099c255d5a80603fcbdb9 Mon Sep 17 00:00:00 2001
++From 3be5a588bf8ef420b9e95ccdeb6879fd6dee035a Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Wed, 6 Feb 2013 20:51:02 -0600
+ Subject: [PATCH] hack to force use of libc malloc
+@@ -15,6 +15,7 @@ Signed-off-by: Venture Research <tech@ventureresearch.com>
+ 
+ Update to work with 4.0.8
+ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  src/Makefile | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 87%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 71044365af..d4493e498d 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -1,4 +1,4 @@
+-From 225f45d5fbeaa8998fac983fcb78d7912d6d6dd3 Mon Sep 17 00:00:00 2001
++From 9289dd9d8773deeaaed9a8f798bca600443c2a40 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 10 Sep 2019 20:04:26 -0700
+ Subject: [PATCH] src: Do not reset FINAL_LIBS
+@@ -11,6 +11,7 @@ e.g. -latomic is needed on clang/x86 to provide for 64bit atomics
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  src/Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 86%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+index a45de28e0e..728eaf6d2f 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+@@ -1,4 +1,4 @@
+-From b636c748fb4047b1ef3a4062c675e1ee4584230b Mon Sep 17 00:00:00 2001
++From 7f8137f3875579f7c82bdb0182071e3a324f5660 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Dec 2019 12:09:51 -0800
+ Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
+@@ -11,6 +11,7 @@ Fixes
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  src/zmalloc.c | 1 +
+  1 file changed, 1 insertion(+)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.15/0006-Define-correct-gregs-for-RISCV32.patch
+similarity index 95%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/0006-Define-correct-gregs-for-RISCV32.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/0006-Define-correct-gregs-for-RISCV32.patch
+index bf44858d16..e4e0b9324a 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.12/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.15/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,4 +1,4 @@
+-From 8984a5df54fc80de1c99b311f117d28c2a42d959 Mon Sep 17 00:00:00 2001
++From 82749b35860ef3c317f85af4d7c5f45473355692 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+@@ -9,6 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Updated patch for 6.2.8
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  src/debug.c | 26 ++++++++++++++++++++++++--
+  1 file changed, 24 insertions(+), 2 deletions(-)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.15/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.15/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.15/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.12/redis.service
+rename to meta-oe/recipes-extended/redis/redis-7.2.15/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.15.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/redis/redis_7.2.12.bb
+rename to meta-oe/recipes-extended/redis/redis_7.2.15.bb
+index 2b4087a74b..7ff1110752 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.15.bb
+@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
+-SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d0196bc"
++SRC_URI[sha256sum] = "7bf7975331511fdb788e85dae63964b128fccee1df026a10db57444babc9c9c4"
+ 
+ inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
+ 
 
