@@ -1,308 +1,174 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ctheegal@qti.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B29EC5AC67
-	for <webhook@archiver.kernel.org>; Sun,  9 Aug 2026 02:23:32 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2915.1786242211474313003
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A2BEC5AD4E
+	for <webhook@archiver.kernel.org>; Sun,  9 Aug 2026 13:24:31 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9008.1786281870541125722
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Aug 2026 19:23:31 -0700
+ Sun, 09 Aug 2026 06:24:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YNJjcpCo;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-7dbcb505578so5095937b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2026 19:23:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786242210; cv=none;
-        d=google.com; s=arc-20260327;
-        b=VjG2zbH0HOWWfJT2FVi7eoCWAmKhMLGLPoEyTlgDQSPo1UmQZ2kxQNrGcybQfX9adD
-         FSVUgtSKN7lGbhOxBkwecUTlePipENh0uqzWNKCKqnPEjAaLh5NmGMDjuquj2XI/94+i
-         3L/B/Kg/cdWCGQr0sDuUSQDIy4TuFmoiLbxATFpQDkz9wUJa10jYYVG/yz2UgAw9Rrgm
-         GzwHePWT4Mx5w0TT0ae9yAF9xySdVPe/QrmzUc2mfzhRaMvIPiINEjhF8lRyo7I2T46p
-         4xifqbUeJ+wZ3VA4AqCvOYm3/8Bh26SFFMYoLlZGNufr/+HCxiUXqPQoS7o5LgClJXHh
-         LSsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=YAhqQ/hrWCV+juz2dayo9hRmg7FFyKiclhGSieH/DZE=;
-        fh=xc7Pw1C2r64/D3IAczFTr6Vs+3vKL6I7LfJKgO2Lfwc=;
-        b=igCbnKq9Eo9whcvjEBHCf4Lr1lKlN/NSON3Yw4Nk8xFcIxWPYsZMBq8a2C6vtRU/iu
-         VMn2ZbSDh3FjHAGLeYDES/+sH445KvJ0vQngCaYGyQQ/6Mjx57MXgiekqsuhQD9Mi/wJ
-         ibs62jeIffLnWTZgK0XdbIhCcxMn5wwBuuxLqo9X85GU+zvF4TfLvXQFAk2/Ve2EBwY4
-         adgPKbhcQj/bEhrxWuN14vAEeAJbfTdXjnLfOCd8ptV3+rpfW7BF0aBaBZIWnlrAnj2L
-         fOEkzWheoNodGWEBJOiGUft+xw/h1FkgfyBuCMjPUGh7+fTnkAQtCiTMg4nYZllKrQ9s
-         SWVQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786242210; x=1786847010; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YAhqQ/hrWCV+juz2dayo9hRmg7FFyKiclhGSieH/DZE=;
-        b=YNJjcpCo277GkKHehxCglmly4AXrgI6TNFn76SWOhGhvKXLOCLEegFM5XE7rehH+Yv
-         gpvVKfUQFQU3U7lSYdGoz9DkP9aumYwLebS92jFIvcV0xCxsCt/r7jxp9Vps4PxNeP3l
-         yuIlqMzdO+b8ajbKAB0cDswOLEHapXE/E9y8kiqSQYSlcfP/YGCxBaKzMq92mIjkYX7q
-         vQEoLfpswAPRjLDaIyqIyjTaqaerGbN+UIpHHTlzoidb7eXEP4hgUUXqwZm1FzlLJAc3
-         lJeZ0xziuYHXM+oAO7RFrZW9sSGMQq7eA30Hx+fAH/p0+QX1v19G10R7yIj/nybhiiuU
-         8C5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786242210; x=1786847010;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=YAhqQ/hrWCV+juz2dayo9hRmg7FFyKiclhGSieH/DZE=;
-        b=iwxxUhqY6MWUS+6Y2jQe+gneeUtQPbjf9NZoNZxWdW1OYaX08zABuvh0R6n2aTcTTU
-         TV8+3+2EK8X+XQuCiStIE/xwiZ4zzZ3ZK2ebu6wMS1aAVp5FjmECj5G0NyPNGLnjjJym
-         lakAqbG975hlbHKX3hNIj4NxhJHAPNWB/eNfTZIY+fDD6XuqHyEerltRG2iWrDJ6Og0H
-         58WIVz9MIHYvhseWUpoGpIICAEyYLS5GA+y2IQVQKf1+FPUfDT37L1lcB8LEzQflouNm
-         Q06pN9MSkkconEnYqKS6Lv/VgSujsOqY8Jfz3a5LCmyjDEd73o2ZlCN/8+dM4V4C7pkV
-         sZzA==
-X-Gm-Message-State: AOJu0YzJ4QV2hf9K9Bl6nA1hxnoud+wodyNZ4QWCMHlPRq4r8vC+Mi8g
-	DlvoVCkzwvDLir/gGK8d1wozCMPHOrIapqOrrxClKx9CGglvIq14ckPZnY0sqmve1fvMTAanbba
-	loIwM4FdXtHBgh0E4PrBjqhhEf8Bao0Jufb5rYCc=
-X-Gm-Gg: AR+sD11XvvDhotQX3LPPqRAGj30XhzLL6BvT1Zq9BFQaIMTQVGtmxmolML65iCNug/b
-	EBCzl+WBC2h706oraoAFqmjZR10dnQ4zpBeLI4yL3OmBR4l3YPm53tbdU4qckt6YJODHKpvznDK
-	BEtXdt5wIzXk+lK+Ec0AlT9FjORDSyl61GfoGPmrHtO/69fUtyr2JMnfCC/8WqCjLZyNMc5gsFO
-	s5mOllWaD9vPuCZAK6l5Oj96aXsoaKHY2DAaQWm4t1xv0JsnTCvalKlzlnanVm1cSOM9flSt3n+
-	XgmH49sVJAIUdL7TWeAs98XPDNjpMDF/Y40PnAGzLXZ4uaYIfMjCFkWoB53EwoYcBceRp8y6+gd
-	ogm9OYAuvGQ7zBwOaexPVAkWwmYwY7hzx2mQ07/DpO/8WC2eoUHl5xcJilMtMeHSFLlz/y8TKeg
-	5zaNNuvNMiUnijA9dJhIY2SgfsfM87I8WYZVKEfoh6qU8bRnB2GEne
-X-Received: by 2002:a05:690c:9a81:b0:820:12dd:7472 with SMTP id
- 00721157ae682-82445193dddmr70980537b3.23.1786242210357; Sat, 08 Aug 2026
- 19:23:30 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=JYm7vjyo;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.180.131, mailfrom: ctheegal@qti.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679C1blA2675006
+	for <openembedded-devel@lists.openembedded.org>; Sun, 9 Aug 2026 13:24:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vMoqHL/9D10G6WohdAl1UqOU7t2NCbfmKZbQKKZ+kNY=; b=JYm7vjyomW/rRUkV
+	rDmrhpWFlGjZGqhXy/paw+bdlfpAnqCnU7R75MFx62t0L3cFp42tMPITh/3ERcdT
+	AQfF7L93iwFDqTjYrNNWj3zpx0fbNm+Tl6sK6Ucyk8JqJaahm7J+SmtlhvsVtAvx
+	BinCFpdUHwidW+M3Wj9HyoFJG4jJkWyxH0ehMDCZy6dU8339STRQ8PoaPqq1amkv
+	BSFlC8K1XTsrXDpzgypD5f0rBdtC2Htodps/VipDaTH7B2bkhSkuiwDrIceNmioZ
+	EQqzPCNR4Et7Ih100dOUvOw2uQL+JgCrQ4S2iX677AccxBL2fP2OJRSoeNnt4W8P
+	KjNonw==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwvhvawdn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2026 13:24:29 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTPS id 679DORAS013911
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 9 Aug 2026 13:24:28 GMT
+Received: from hu-ctheegal-hyd.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Sun, 9 Aug 2026 06:24:26 -0700
+From: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
+Subject: [meta-oe][PATCH v3] boot-time-analysis-tools: add boot time profiling tools
+Date: Sun, 9 Aug 2026 18:54:14 +0530
+Message-ID: <20260809132414.1934095-1-ctheegal@qti.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260805054533.1722572-1-ctheegal@qti.qualcomm.com>
+References: <20260805054533.1722572-1-ctheegal@qti.qualcomm.com>
 MIME-Version: 1.0
-References: <20260807100911.1629-1-wangmy@fujitsu.com>
-In-Reply-To: <20260807100911.1629-1-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 8 Aug 2026 19:23:04 -0700
-X-Gm-Features: AUfX_mwo411z5s3i5sk62qinaudbdyfSNGYgJDVj9kIl5wsKxUJAUmgAFXKz6qI
-Message-ID: <CAMKF1spGr_KhHN97Te28gBNhaRonnR_Xj16uc6s-e6o5z_j84g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH v3] pcsc-lite: install systemd system units
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000006e6759065893ecc1"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Authority-Analysis: v=2.4 cv=eqbvCIpX c=1 sm=1 tr=0 ts=6a787f8d cx=c_pps
+ a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=GEpy-HfZoHoA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=Ujg9kQxSS-RusALq8T8A:9
+X-Proofpoint-ORIG-GUID: SQZmFD9Gsc7ZukL3Gn26p7fHE4srS3mD
+X-Proofpoint-GUID: SQZmFD9Gsc7ZukL3Gn26p7fHE4srS3mD
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA5MDExOCBTYWx0ZWRfX2rv6/lWeeINc
+ LMdOTtUMnz9BNHCUHN8P4YeAijwv1Zu/gEfN+7bKAMdJ12M9tmZdd8AUM3SNJ7XaGoTSzY9tMd1
+ X65NVaacqYrPe/vK8ro+NV74CrayQhp8aPWEODZj8BoHIvGiYjCDc5LxgSNVbL1JguBAHvNAHop
+ rJF+lwtNOerpqYa32I3fMvgf4vY16gsomtIgzKX944fofuzAAAXYCHVaAPlY4ch3P/VDSO6Kkih
+ uqfVQngQvpijVUeOIlWKWUbrnebURyI3ZmCR63fasOqF0dvF6roQ3OKzbXApoeCHdIvIxsGBLiC
+ M1a+X7i6kAJLKq4tOMROSLLSQXtv5HH/jNdSefAoXyElwIrjABgUUSZ6FpvjM7JhKzGvlC+LosG
+ tFe5dwJ4A3GNOA2C71h+ZOjv2tWHyK0yYCUns3bm/esYjkQsroUNIKDEJnVrMX9NJLxy2nyI2Wx
+ 1Z/7Gol4/VsteAOeL0w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA5MDExOCBTYWx0ZWRfX6Q3hIoimubCr
+ pSS+SZkAEATTYdOBkJjtsHoZKUw92CJm7c1nZ2cPmCfc4WYX6hVA9SPfNqgMefyCnDvBSVcAg6i
+ P8FigtOb83ZeTbmR8fWE3Ce1P4aQEjQ=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-09_04,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 spamscore=0 clxscore=1015 adultscore=0
+ bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608090118
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2026 02:23:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128870
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2026 13:24:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128871
 
---0000000000006e6759065893ecc1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Add two new recipes from the CentOS Automotive SIG
+boot-time-analysis-tools project to enable boot time profiling
+and measurement.
 
-Next error
+boot-time-analysis-tools:
+  Python-based toolset for collecting, analyzing and visualizing system
+  boot timing data from the systemd journal. Provides the 'boot_timings'
+  CLI utility which queries D-Bus and the systemd journal to produce
+  structured boot time reports. Depends on python3-dbus and python3-systemd
+  for runtime journal and D-Bus access.
 
-| ../sources/pcsc-lite-2.5.1/meson.build:12:0: ERROR: Value "no" (of type
-"string") for option "systemdunit" is not one of the choices. Possible
-choices are (as string): "user", "system".
-|
+cntvct-log:
+  Userspace C utility built with Meson that logs ARM CNTVCT_EL0 virtual
+  counter timestamps to correlate hardware-level timing with systemd boot
+  events. Installs cntvct@.service as a systemd template unit (disabled
+  by default) for on-demand per-instance activation. The service preset
+  file (98-cntvct-log.preset) is installed for system-preset-based enablement.
 
+Both recipes fetch from the same upstream git repository:
+  https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools
 
-On Fri, Aug 7, 2026 at 3:09=E2=80=AFAM wangmy via lists.openembedded.org <w=
-angmy=3D
-fujitsu.com@lists.openembedded.org> wrote:
+Signed-off-by: Chitti Babu Theegala <ctheegal@qti.qualcomm.com>
 
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> pcsc-lite 2.5.0 defaults to installing systemd user units, which leaves t=
-he
-> package without a system-level pcscd.service while SYSTEMD_SERVICE still
-> enables pcscd.socket. On target systems this makes systemctl status pcscd
-> fail, and systemctl --user start pcscd can fail because the user unit
-> requires polkit.service from the user manager.
->
-> Select upstream Meson systemdunit=3Dsystem so pcscd.service and pcscd.soc=
-ket
-> are installed as system units. Keep upstream sysusers.d packaging so
-> systemd-sysusers can create the pcscd system user required by the
-> generated service and socket units.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb | 12 +++++-------
->  1 file changed, 5 insertions(+), 7 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-> b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-> index ae20447050..f70c17495a 100644
-> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-> @@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative
->
->  EXTRA_OEMESON =3D " \
->      -Dlibusb=3Dfalse \
-> +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd',
-> '-Dsystemdunit=3Dsystem', '-Dsystemdunit=3Dno', d)} \
->      -Dusbdropdir=3D${libdir}/pcsc/drivers \
->  "
->
-> @@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native =3D "
-> pcsc-lite-lib-native"
->
->  FILES:${PN} =3D "${sbindir}/pcscd \
->                 ${datadir}/polkit-1 \
-> -               ${nonarch_libdir}/systemd/user \
-> +               ${systemd_system_unitdir}/pcscd.service \
-> +               ${systemd_system_unitdir}/pcscd.socket \
-> +               ${libdir}/sysusers.d \
-> +               ${exec_prefix}/sysusers.d \
->                 ${sysconfdir}/default/pcscd"
->  FILES:${PN}-lib =3D "${libdir}/libpcsclite*${SOLIBS}"
->  FILES:${PN}-dev =3D "${includedir} \
-> @@ -54,12 +58,6 @@ FILES:${PN}-spy-dev =3D "${libdir}/libpcscspy.la \
->
->  do_install:append() {
->      rm -rf ${D}${datadir}/metainfo
-> -    # pcsc-lite installs pcscd-sysusers.conf into systemd's sysusersdir
-> when
-> -    # the systemd pkg-config variable is available (${libdir}/sysusers.d=
-),
-> -    # and falls back to ${exec_prefix}/sysusers.d otherwise. Drop both s=
-o
-> the
-> -    # file is not left unpackaged (installed-vs-shipped QA).
-> -    rm -rf ${D}${libdir}/sysusers.d
-> -    rm -rf ${D}${exec_prefix}/sysusers.d
->  }
->
->  RPROVIDES:${PN} +=3D "${PN}-systemd"
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#128867):
-> https://lists.openembedded.org/g/openembedded-devel/message/128867
-> Mute This Topic: https://lists.openembedded.org/mt/120640343/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+---
+Changes in v2:
+- Move recipe under meta-oe/dynamic-layers/meta-python to fix
+  layers dependency check (meta-oe must not depend on meta-python
+  unconditionally). Reported by Khem Raj.
+---
+ .../boot-time-analysis-tools_0.7.1.bb         | 12 ++++++++
+ .../cntvct-log_0.7.1.bb                       | 28 +++++++++++++++++++
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
 
---0000000000006e6759065893ecc1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Next=C2=A0error</div><div><br></div>| ../sources/pcsc=
--lite-2.5.1/meson.build:12:0: ERROR: Value &quot;no&quot; (of type &quot;st=
-ring&quot;) for option &quot;systemdunit&quot; is not one of the choices. P=
-ossible choices are (as string): &quot;user&quot;, &quot;system&quot;.<br>|=
- <br>=C2=A0</div><br><div class=3D"gmail_quote gmail_quote_container"><div =
-dir=3D"ltr" class=3D"gmail_attr">On Fri, Aug 7, 2026 at 3:09=E2=80=AFAM wan=
-gmy via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
-> &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@lists.openembedded.org">fujits=
-u.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex">From: Wang Mingyu &lt;<a href=3D"mailto:wangmy@=
-fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
-<br>
-pcsc-lite 2.5.0 defaults to installing systemd user units, which leaves the=
-<br>
-package without a system-level pcscd.service while SYSTEMD_SERVICE still<br=
->
-enables pcscd.socket. On target systems this makes systemctl status pcscd<b=
-r>
-fail, and systemctl --user start pcscd can fail because the user unit<br>
-requires polkit.service from the user manager.<br>
-<br>
-Select upstream Meson systemdunit=3Dsystem so pcscd.service and pcscd.socke=
-t<br>
-are installed as system units. Keep upstream sysusers.d packaging so<br>
-systemd-sysusers can create the pcscd system user required by the<br>
-generated service and socket units.<br>
-<br>
-Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
-=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.1.bb</a> | 12 +++++--=
------<br>
-=C2=A01 file changed, 5 insertions(+), 7 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_=
-2.5.1.bb" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.1.bb</a> b/met=
-a-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.1.bb" rel=3D=
-"noreferrer" target=3D"_blank">pcsc-lite_2.5.1.bb</a><br>
-index ae20447050..f70c17495a 100644<br>
---- a/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.1.bb</a><br>
-+++ b/meta-oe/recipes-support/pcsc-lite/<a href=3D"http://pcsc-lite_2.5.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">pcsc-lite_2.5.1.bb</a><br>
-@@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative<br>
-<br>
-=C2=A0EXTRA_OEMESON =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0-Dlibusb=3Dfalse \<br>
-+=C2=A0 =C2=A0 ${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#39;systemd=
-&#39;, &#39;-Dsystemdunit=3Dsystem&#39;, &#39;-Dsystemdunit=3Dno&#39;, d)} =
-\<br>
-=C2=A0 =C2=A0 =C2=A0-Dusbdropdir=3D${libdir}/pcsc/drivers \<br>
-=C2=A0&quot;<br>
-<br>
-@@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native =3D &quot; pcsc-lite=
--lib-native&quot;<br>
-<br>
-=C2=A0FILES:${PN} =3D &quot;${sbindir}/pcscd \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${datadir}/polkit-1=
- \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${nonarch_libdir}/s=
-ystemd/user \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${systemd_system_un=
-itdir}/pcscd.service \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${systemd_system_un=
-itdir}/pcscd.socket \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${libdir}/sysusers.=
-d \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${exec_prefix}/sysu=
-sers.d \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${sysconfdir}/defau=
-lt/pcscd&quot;<br>
-=C2=A0FILES:${PN}-lib =3D &quot;${libdir}/libpcsclite*${SOLIBS}&quot;<br>
-=C2=A0FILES:${PN}-dev =3D &quot;${includedir} \<br>
-@@ -54,12 +58,6 @@ FILES:${PN}-spy-dev =3D &quot;${libdir}/<a href=3D"http:=
-//libpcscspy.la" rel=3D"noreferrer" target=3D"_blank">libpcscspy.la</a> \<b=
-r>
-<br>
-=C2=A0do_install:append() {<br>
-=C2=A0 =C2=A0 =C2=A0rm -rf ${D}${datadir}/metainfo<br>
--=C2=A0 =C2=A0 # pcsc-lite installs pcscd-sysusers.conf into systemd&#39;s =
-sysusersdir when<br>
--=C2=A0 =C2=A0 # the systemd pkg-config variable is available (${libdir}/sy=
-susers.d),<br>
--=C2=A0 =C2=A0 # and falls back to ${exec_prefix}/sysusers.d otherwise. Dro=
-p both so the<br>
--=C2=A0 =C2=A0 # file is not left unpackaged (installed-vs-shipped QA).<br>
--=C2=A0 =C2=A0 rm -rf ${D}${libdir}/sysusers.d<br>
--=C2=A0 =C2=A0 rm -rf ${D}${exec_prefix}/sysusers.d<br>
-=C2=A0}<br>
-<br>
-=C2=A0RPROVIDES:${PN} +=3D &quot;${PN}-systemd&quot;<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#128867): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/128867" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/128867</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/120640343/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/120640343/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000006e6759065893ecc1--
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
+new file mode 100644
+index 0000000000..87fbd68f78
+--- /dev/null
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Boot time analysis tools from CentOS Automotive SIG"
++DESCRIPTION = "Tools for analyzing and visualizing system boot time"
++HOMEPAGE = "https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
++
++SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
++SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
++
++inherit setuptools3
++
++RDEPENDS:${PN} = "python3-dbus python3-systemd "
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
+new file mode 100644
+index 0000000000..434ddc5893
+--- /dev/null
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/cntvct-log_0.7.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "cntvct-log - ARM virtual counter boot time logger"
++DESCRIPTION = "Userspace tool to log ARM CNTVCT_EL0 counter values for boot time analysis"
++HOMEPAGE = "https://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://../LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
++
++SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
++SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
++
++S = "${UNPACKDIR}/cntvct-log-${PV}/cntvct-log"
++
++inherit meson systemd features_check
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++# Manually install service file if meson.build doesn't handle it
++do_install:append() {
++    if [ -f ${S}/usr/lib/systemd/system/cntvct@.service ]; then
++        install -d ${D}${systemd_system_unitdir}
++        install -m 0644 ${S}/usr/lib/systemd/system/cntvct@.service \
++            ${D}${systemd_system_unitdir}/cntvct@.service
++    fi
++}
++
++SYSTEMD_SERVICE:${PN} = "cntvct@.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++# Explicitly include the service file in the package
++FILES:${PN} += "${systemd_system_unitdir}/cntvct@.service"
 
