@@ -1,105 +1,68 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48878C5AD55
-	for <webhook@archiver.kernel.org>; Mon, 10 Aug 2026 11:17:05 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27586.1786360612172523408
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E66BAC5AC82
+	for <webhook@archiver.kernel.org>; Mon, 10 Aug 2026 12:21:35 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28551.1786364494446522096
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Aug 2026 04:16:52 -0700
+ Mon, 10 Aug 2026 05:21:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=mBBg3+L/;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-47f7854678cso1155712f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 04:16:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1786360610; x=1786965410; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8vfPdTwmiM1qmVtL00+ZIupexqm1LouWdLrJRgPaU4g=;
-        b=mBBg3+L/XzIJL+HQXEHrFeGJdLxsz/Z5F5Blnhg767tifjkCKweZAr9dRFRHOYor6E
-         YYynYJ0FxID+d/kqchFh3URNvo96sPcwFXsTK/l/JaRcRUyTzHH4tXJKsExh4ugsqNxt
-         qBaNa3uSq30hqzRdmyP9GRxGtmdLp2kHiNt1E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786360610; x=1786965410;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8vfPdTwmiM1qmVtL00+ZIupexqm1LouWdLrJRgPaU4g=;
-        b=ITh6+zIPG41O3agm7uFE5fd/GnuhX6EUGg7KNxHdqXkWM+lwKLlbjFAqkapc7esrcN
-         Q4qvoMaGwMzrOZrmgzxUhqT5UGUXMwh+uJA2wanNwsewXU+lwVWUtugoPBrzFIxwcEE1
-         7LhrkG73/VI0mbzF+IZ8vkWbKQsr/eUHnW72r75ll1azEWjWtJHE9EodNehuEwLy4xgJ
-         ykArbJGCzxIdFEd2iub46DfnhAeE2X4fkKeIyHGfXHULNLqfmjAsCGvsRmsVADdwTFk7
-         EO/Su5Iq8+O06z6QI9WfBou51zPom0HD5xLPuAoxkLDC0u3Rds+kJxlXKJjOEEwhPTUT
-         D34Q==
-X-Gm-Message-State: AOJu0YwOuo8xkA3SeiHHHjwqBqRCs9K0bKXpn8R7dMSnVu6bWnNq10UY
-	AWSe3KKXinznxMId/s/mEC/kcG00GU4SNA2QAFGYeDUzDfV2rwpX+HrPDvqmOOYeQaXeMkhp7we
-	i1OvB
-X-Gm-Gg: AR+sD12WyMTltp8cKvBaK/HWC7g+lEaQ/ZsCdJRLyj3UPwnJ/uOXGpzTWAtSXsP1t/N
-	4X35JnbbhXe+IS/p5geIrFgPOnkJgmLMZF862IxsKYv6ST1sl04cSxDkbYPtkRY6K7XvFc3D+8n
-	XwpomReaDKPtvkTTBLECkVc3FCqdbSljdj+N784QmnDNAYg0ffx3KeM7a5hWFfWOt4OYCmOoWP5
-	EK8O0dbuSlY/W40sIgAXe+l6LlVz0pIW47qeXDjpEGIrl4NRrXKHbwy+aSSWuUvNKhPB6MLnsMp
-	R4ND/D7YTJrQ3g7Jlyk5gOYnn0d4xU8sTA0i2F/8+Eo4cb19IcWCv2MyA23K1yENv1GolZzEPf/
-	iPHLUTcNJj2wnPR3PRYyxz6xq26x23L/9iF0+XVF8NoNMQEiuIPXNR6D/E5Gfhj084qElXVmhjq
-	seN3/yeWoEapHYfCsKuFkX2EyTHeYlXXQ3Lm9NE0xbUmet2xx+cCodkTzU1vHgNHxNq2cA5wQzU
-	4KVsBpA/SNXG+M4yopIms4lWmIwlbTfLjGd9gUFk5ndF3rIx8ynsDM06uXo9h6/ShsFQuU422oe
-	+CdAUX+7TLlukQ==
-X-Received: by 2002:a5d:64e7:0:b0:47f:96e3:530e with SMTP id ffacd0b85a97d-48130ea1e03mr27790679f8f.8.1786360610198;
-        Mon, 10 Aug 2026 04:16:50 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4800220727bsm35271853f8f.33.2026.08.10.04.16.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 04:16:49 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=CbgDsVA3;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0673714BF
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 05:21:30 -0700 (PDT)
+Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8F4BE3F86F
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 05:21:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1786364494; bh=FG2baYGHYhd+2xmA9hKjWkVkXDUzqzEvWTm8iAZHt2I=;
+	h=From:To:Subject:Date:In-Reply-To:References:From;
+	b=CbgDsVA3hCipJa61U4W6N7MMPdXh+NIBDLiGsBxVbj1ZvnFq4jH83bk5G55uDNf4U
+	 TzmxeUP3WzxAKKigXIX/nE2DM+xfUK77WPAzFZvwAezlSiL8SVlvUZhn9nZJ7m6890
+	 jLJyiRDkZ6877ilEDszL8VsOa6Aze+4NGkO4fNL4=
+From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 2/3] ramspeed: Upgrade LICENSE syntax
-Date: Mon, 10 Aug 2026 14:16:44 +0300
-Message-ID: <20260810111645.1136923-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260810111645.1136923-1-leon.anavi@konsulko.com>
-References: <20260810111645.1136923-1-leon.anavi@konsulko.com>
+Subject: [PATCH 03/24] python3-stevedore: remove obsolete RDEPENDS
+Date: Mon, 10 Aug 2026 13:21:09 +0100
+Message-ID: <20260810122130.633299-3-ross.burton@arm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260810122130.633299-1-ross.burton@arm.com>
+References: <20260810122130.633299-1-ross.burton@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 11:17:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128879
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 12:21:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128883
 
-Upgrade LICENSE syntax. Fixes:
+pbr was removed as an accidental runtime dependency in 5.5.0[1], and six
+was removed in 2.0[2].
 
-WARNING: ramspeed: LICENSE is using an old syntax and should be
-upgraded to: "LicenseRef-Alasir"
+[1] stevedore 7c2740e ("Remove explicit pbr dependency")
+[2] stevedore 1aca4bc ("Drop Python 2.7 support")
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-benchmark/ramspeed/ramspeed_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-stevedore_5.9.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/ramspeed/ramspeed_git.bb b/meta-oe/recipes-benchmark/ramspeed/ramspeed_git.bb
-index ce5dcdb276..71c2827c51 100644
---- a/meta-oe/recipes-benchmark/ramspeed/ramspeed_git.bb
-+++ b/meta-oe/recipes-benchmark/ramspeed/ramspeed_git.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Cache and memory benchmarking tool"
- DESCRIPTION = "RAMspeed is a micro-benchmark for measuring cache and memory bandwidth"
- HOMEPAGE = "https://github.com/cruvolo/ramspeed"
--LICENSE = "Alasir"
-+LICENSE = "LicenseRef-Alasir"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=92cffec6695a20eab8d0e4770f4e9353"
- 
- SRC_URI = "git://github.com/cruvolo/ramspeed.git;protocol=https;branch=master"
-@@ -16,4 +16,4 @@ do_compile() {
- do_install() {
-     install -d ${D}${bindir}
-     install -m 0755 ramspeed ${D}${bindir}/
--}
-\ No newline at end of file
-+}
--- 
-2.47.3
+diff --git a/meta-python/recipes-devtools/python/python3-stevedore_5.9.0.=
+bb b/meta-python/recipes-devtools/python/python3-stevedore_5.9.0.bb
+index 6549551ae0..225e36dd9f 100644
+--- a/meta-python/recipes-devtools/python/python3-stevedore_5.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-stevedore_5.9.0.bb
+@@ -9,6 +9,4 @@ DEPENDS +=3D "python3-pbr-native"
+=20
+ inherit pypi python_setuptools_build_meta
+=20
+-RDEPENDS:${PN} +=3D "python3-pbr python3-six"
+-
+ BBCLASSEXTEND =3D "native"
+--=20
+2.43.0
 
 
