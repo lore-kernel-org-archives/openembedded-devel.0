@@ -2,101 +2,96 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B875BC5AC67
-	for <webhook@archiver.kernel.org>; Tue, 11 Aug 2026 06:36:59 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48904.1786430211839865521
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB924C5AD7B
+	for <webhook@archiver.kernel.org>; Tue, 11 Aug 2026 06:37:09 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48910.1786430225854296937
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Aug 2026 23:36:51 -0700
+ Mon, 10 Aug 2026 23:37:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=o9K8kVgD;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-84536ecfc5bso2749653b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 23:36:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=CTihxyF0;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-84a2dcede83so3539167b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 23:37:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786430211; x=1787035011; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=VSGXkVwSvVLS2Sdt8ARsz6STdrWsBLscackxvOlBsHw=;
-        b=o9K8kVgDfEITkHqZNzlymSyUSH5JU772imYrw3ZEmiY4Tto9TAIIIdtz65QBxLv2Xp
-         41lo9XPyKM7iRlzAk49iK09CFD+oZRyFpfD8hE+eqVuDpzuM9aIwh2pWRkHp/FRu69Zo
-         m1yhp6fcgD2Vzkr5RtqUnig82W3O1qfJpFc0aCuCCO3TUV3TsIWIcqT3vcBFRsNE1z5M
-         puWiW9jdiGidWtAKhb4nWDiLzKuqDE4y75V17JPjc3LxZ/i+KyeQwmu1aEEgzPjtv/kg
-         46o8pXzw1YdK8268j+ARVyVts51mEOwXdReBP53twmm6iPbxj37N9DYEVoglfDA+rhN5
-         j7Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786430211; x=1787035011;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1786430225; x=1787035025; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=VSGXkVwSvVLS2Sdt8ARsz6STdrWsBLscackxvOlBsHw=;
-        b=NcuVdmnnh9CAYmh5n3s5oCX9q3VEp8yLOpchFJBA28CiBKt7lOshTT8TmuZV11AYIY
-         pwMY5MEHJ5gthu8JigZ1CHpL+rbsdBNoQbkNQgdbe+/F2vEu9UyrsQEs/VNPumttOb8m
-         cj0SWK06Cz/h5SqS+sLwJ7kYC+mk49SzOWXi/i6oR0ym353C6vvwW01kaYr5pB/THe6f
-         PinhRyDb7GD/ctBUgUh4A+Asx9HpTxcma9ONF/BXIqome4Z7cf/sDqjEk618WNX2TH1f
-         wLrMeIVumyI9OeQMORWcnLci+IsnvWCxZfPV6WZK+Xvvtzh1Ai5a7x1PnXLy8D2f2NQ5
-         07bA==
-X-Gm-Message-State: AOJu0YySztWzm/CG4ZDs5ivxG42KJzDHaBTobE9aSdsGnBxE/UWqrRAG
-	6QYskYmY4Ol6Q2zOnq5shPnLk47mcoWnvcBjb+8zm1LvHEjmUoBSIUB4rvm5LTDo
-X-Gm-Gg: AR+sD13/43iibtQBNIrbqVErEdEPnB34+HhTL4oMZdro7H+lWB+pzo0S//XpFvS6xeb
-	8PSxkcNtKFhhfPn4bTz/5ijm8Gb0J/5XnMUS1lA1slLBCuosLcoA6T1pcq7lm2wy+sjPbCSExLT
-	87N5fd5TRf6Y/f7BrnczIJGrmfdX49TjDogoypA/jlEvOHqMNbiULUDIJfAjYzYsfb0N6ZDt12c
-	iNNVv8M5/IiukPYXQhkbbr9Ye3T1U1PnBByLKLAxkxUfc4gLkdDkzo1P1NwnpHVNkIUrpXPESSc
-	BDslOSTQ/HYaBKa+bKYkCpHCS3TVySalYLRrz3p1Bq3lvT8iEkjeels499xYNwHgORmtbSlKjbb
-	7lqTcmC/NqDd2phhrdI2bxs/zax3lqQh/weKx1xUHw7UqIjOJ2qO/TX+bjYtwVkcdK/DkyhWL+7
-	ynTXJCTIQJxCHqV7+ZQ+aP17e6wWDBWBFmTOdUPGOr7PPYOOJsBaHeO9x3nV+WTRLmTwKe0Ctd3
-	nCPpm46CfZs
-X-Received: by 2002:a05:6a00:6088:b0:84e:2722:5da4 with SMTP id d2e1a72fcca58-84fa882d15dmr1026338b3a.20.1786430211055;
-        Mon, 10 Aug 2026 23:36:51 -0700 (PDT)
+        bh=jc4p3QNQP9xakmIk7bjB/C2Ol1l7fpBt5nq25lQcS+U=;
+        b=CTihxyF04FxUrYvI/So82cxMwLa6sz6RhzGt/Y+e2UMwya2HbbDd5D2EVgetAR2xYq
+         6VJqU78GuicL7sJRIjALRUl0ZJUEYiVQvd62uQJxrQVW+N7cDjv67hImiISW+6f2Zjeo
+         JP0CEHMctZIPG7+c5dliw0i1TH46xUGsInkUob4Ct7NDlNbCJxCMKDjql/SUn3HtRc0P
+         oM9BbPGm9lBhbguxvfwKa1UrX1JqKU8lX82bI2kB4qVQ6yPJLHP2QPxZU4OvrlLBdJrM
+         yUl/Vgt7FoOU4VBkF6m/3yH1py1GbbFBl6NzoP07BZOSS+mNw/H6dT6bvN0y3yg2rhFs
+         4i2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786430225; x=1787035025;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jc4p3QNQP9xakmIk7bjB/C2Ol1l7fpBt5nq25lQcS+U=;
+        b=T5FSAA96Lgs/CVJ0Ri2Ln09ykCV4klAWigjyh4EBE1iNzf3HoBtbLHwBxSB0kyoyja
+         /+Xh4V75HW+THdcFwcZpWcuFGNi3XmQMK3NS6W7NS8cldUIpUdOCv7lEVdT2tYlN3G45
+         +cP7sgrU2fHIt1TsGoW3WiyV6IxzJna2JHLMH1US07myzCg79MZy1j2THR3LmTlUS3Ix
+         ijj0LKkHpB7oBtpxPslNTXxKSjhyigNxpKbrQh6HoSHEThBe92IpeBLRv1vY5E1Md3ND
+         AdtXL/Tk6nu2cwGjsAlDbpUSIzCrrotv1L0NwGhWqIYxvKoO2tMRQJwzCmDKCyWGB1Gm
+         mOQA==
+X-Gm-Message-State: AOJu0YwofoB+lODYN8V1gzw3FprYp78Cl7I9TP1ag1Foru39BM74ax2Q
+	yzENyBocZomOpMXkSQUndk8xK5fxW3iwstin3ycfZ8eYT4nEK1azdQIhczwsBgA7
+X-Gm-Gg: AR+sD11lQ3NFmQ3gIn9/GU/aduV4AdgU7VtusSPFidgRPU2JjmyLWIpNIqcR+mLaN92
+	wAe9yJw4RDXoR55P3YpjYBsEBTKmZ8DyOXGdxAg7Ra4qn7KTUQhHSllueFteTtIwrj8f3vWY6Wn
+	N0iJQPGg/bbuWY8nimACr/KRZzhUr1wFmgoyRVUtOwosvu/49iSrD+2YHUjEIoqR/4cho08S3d9
+	ncpso52TCr51XltHxZ/Jl5P5X5L7DY4pwrwu6iELdl6aru7Crqo/bA1qgeY8u86GPnNNPwM/2dY
+	tY3uP6FsltmE4z/AiyZf7IK9v/omx8Fsp8ni6oTvsA61KIlrajfKBy/bn/LmtroZ9J3SIl2J1LL
+	dCL0Bw9zOCnRJV9CnojXyuDRrk5psb6gbpwuQU0oMjoYpSbXBXcMbpqH8B4kD8Luyz92iNNct3v
+	41dd2uMsL5nVSeTiVkTIJZNH/2QjexCVyXqqmREJvKWL0rzhGGrffKpK1huXNm61a0E5v8J7vaK
+	g==
+X-Received: by 2002:a05:6a00:a211:b0:848:8715:c2d9 with SMTP id d2e1a72fcca58-84fa866d54amr978804b3a.2.1786430225180;
+        Mon, 10 Aug 2026 23:37:05 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fa952841dsm154852b3a.30.2026.08.10.23.36.48
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fa952841dsm154852b3a.30.2026.08.10.23.37.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 23:36:50 -0700 (PDT)
+        Mon, 10 Aug 2026 23:37:04 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][PATCH 1/6] swagger-ui: upgrade 5.32.11 -> 5.32.12
-Date: Tue, 11 Aug 2026 18:36:38 +1200
-Message-ID: <20260811063643.152169-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 6/6] python3-mlcommons-loadgen: upgrade 6.0.16 -> 6.0.17
+Date: Tue, 11 Aug 2026 18:36:43 +1200
+Message-ID: <20260811063643.152169-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260811063643.152169-1-ankur.tyagi85@gmail.com>
+References: <20260811063643.152169-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Aug 2026 06:36:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128916
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Aug 2026 06:37:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128921
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Also updated branch in the SRC_URI.
-
-Changelog:
-https://github.com/swagger-api/swagger-ui/releases/tag/v5.32.12
-
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{swagger-ui_5.32.11.bb => swagger-ui_5.32.12.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.11.bb => swagger-ui_5.32.12.bb} (85%)
+ ...ns-loadgen_6.0.16.bb => python3-mlcommons-loadgen_6.0.17.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python3-mlcommons-loadgen/{python3-mlcommons-loadgen_6.0.16.bb => python3-mlcommons-loadgen_6.0.17.bb} (91%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.11.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb
-similarity index 85%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.11.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb
-index 19000d6f35..bfeb75f6ca 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.11.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb
-@@ -10,9 +10,9 @@ SECTION = "net"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.16.bb b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.17.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.16.bb
+rename to meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.17.bb
+index 926f3c4aea..0fbbd106b7 100644
+--- a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.16.bb
++++ b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_6.0.17.bb
+@@ -21,7 +21,7 @@ SRC_URI += " \
+ PYPI_PACKAGE = "mlcommons_loadgen"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
  
--SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
-+SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+-SRC_URI[sha256sum] = "f9122f0f09168aad38e3c8b130f728a5a28a269990e9ff724b350495a11054fe"
++SRC_URI[sha256sum] = "a2e85d09e3cc0c606f89bfe1fbf97537c8b5b238ae0afbd923ad9c710fcf2ca8"
  
--SRCREV = "414a60c9a40408d37821297682b8a190a840a79b"
-+SRCREV = "9b5acf38723108ac816dcb7303897e87f933ac4e"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
- 
+ # Because the pyproject.toml contains invalid requirements.
+ INSANE_SKIP += "pep517-backend"
 
