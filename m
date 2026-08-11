@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 902C7C5AD55
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0A68C5AD7B
 	for <webhook@archiver.kernel.org>; Tue, 11 Aug 2026 05:37:48 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48356.1786426666611804215
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48355.1786426664224985332
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Aug 2026 22:37:46 -0700
+ Mon, 10 Aug 2026 22:37:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rrHkbZXB;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2cc73e322dbso29696605ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 22:37:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cvhicdEJ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38e08baf860so2652190a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2026 22:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786426666; x=1787031466; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786426664; x=1787031464; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/HLIQA7AYPeFjadSuhI/VgWqZ81Rxzrbus/2OdQ5KYQ=;
-        b=rrHkbZXBojEmV1Lp3w1iHvplK2X/CWXG9WLiZk5hD43M9ja3wagbQ642+Ks457PbBc
-         TNCs8bcDGSECysSK9+c6JXZhpQaJHoC15k76/OIxM94z25U1hvakk9YDHFlI/OaUd1vA
-         azw7r+51RfnUD58jPdVbR/wCU7Tk2pSLC/unf3ldz++ytV1z6/RJuIs01WV3sy8CdKFX
-         V3yPxlLj1/NJHdO1+hvjxGoLEdBDHG7KD6q+tHRZF4HejQjiw0ySv5UzoA/h/ide8KZM
-         2cRQYsFjtjpIrV3jEPUuQqwHa1e+/NuRBavjqnz4nm5Sup8p0wdgF1Mz8FkHU8I5qJ1K
-         t1Mw==
+        bh=+pEaIHMT239SxsgTgmZukAzDwc9nT5B1Gbl6Xqbgs1k=;
+        b=cvhicdEJ68zENFenaOQqgmgfFeQwzvL/oybn7twqdadVwk7NZRXLBrjE8LsaWz0uGX
+         KlYMnaNUBZ7NCxU5boK+WmcgLNXDD4G4Z6ANGplTYgSPYg4QlAJ3+0t0jE8ZGKHFMliL
+         AeXM/Jh+n2LlkNQISZ1TUHb/XyuBSHB6Ypyn8NNx41LxFtVgc5yC7D0VR1HuJHiyG3Wz
+         A32C/jsaSMVz10GImfuMkFTEhgmZt5IrSYc26kNISIbDsgOpeO3DtpLiTKzvohidxqx6
+         PBB9IlmRZK+/pI8+hcSBncHxQEmAlM3mUeESmlreMwGRPkyj8Zs8DrNKSCKQ2dnXLC41
+         +3+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786426666; x=1787031466;
+        d=1e100.net; s=20251104; t=1786426664; x=1787031464;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/HLIQA7AYPeFjadSuhI/VgWqZ81Rxzrbus/2OdQ5KYQ=;
-        b=Ypo/Ml5G2hEk84qXwTFfhzlSOP5YoWFZ2GGtjnVIrO+AwLcQbtBVokcxweroBDaO9k
-         UNyJlYd7NlDjMd9WrI/Myj0dX29VTC3YAfEmKyIhdO86iRDAy8X9/ckXBKJeSblLwide
-         MX1Pof3qEpP/5iiz3bXrMQwWJwDC4tFLWStQ34WWwlACEs33tkpvUnAZSuf6Q6B5AK+A
-         /frzf/ueJJn0mg4qc9mkCb/rOL5ZIb3f3dbiVr5UJQXhulS3MlTuToNpGsWnCN8pbZ2D
-         Y6up0AjdSlvwcFh8l8U2CXW0Xnny7k1KwT14uQH9dl8TSab8kI4+r7y03WQYNtTZEi3R
-         Zy1A==
-X-Gm-Message-State: AOJu0Yx31R+1eu3XzRgwq/FvAfJcWrCmnzptjYtPOWldTPiCcod2fitq
-	se61y3tQ4xYaVD6ftOvEPejXLcv2o9VyZIIj8+pQvMWyTscA07iDA2bnkXi2SzAX
-X-Gm-Gg: AR+sD12D4rCs1XqqCkojuB2VzgDtG/iPCrsz6r/7Otgfx9cCGcN326X2qwXAwqrL7bM
-	Hhc5xxarXRqnrU5FRSdnNQpapKTgQqJ97x8QFmsGvOtWgl52r8XYMbdQEXvoMXG92OPnsTHZWT/
-	t6BNOSxJzKbPyMG3a+yAjuxXlrM+DvFSEja2fUaUt3ZaOtixRO2O49iGyw92h9Hnxu/Wvl7dAod
-	LtUFjyjzUOt3HOf66uBUrqCx7s+xlN0znr/VEljjfFys3Tf4fjRS/SMIMZi6+4qXjdB65Z/NWNx
-	HM1P1cPgnAUEP1747jb4o7zsy7WzW4yjfGuZV7rAY6OLtaR+41207w7pfOrgktsBruv37snIG4P
-	uUVlsGfWfY3qtM9/Tx3hmlw5lOajF97PbS0/SzTC95cqCGhjouNT4W6fU21zgOz3658hZ5IUmFx
-	IWR/Yq9ATzDJNBJoeP8q06uXYwnTaiUwMuDOUggNRQ897IGCVDvFk85DruQ1mn2Hk+g+I0ZwJ0A
-	Q==
-X-Received: by 2002:a05:6a20:da12:b0:3c0:b766:751b with SMTP id adf61e73a8af0-3cc2ba03da4mr1264492637.14.1786426665972;
-        Mon, 10 Aug 2026 22:37:45 -0700 (PDT)
+        bh=+pEaIHMT239SxsgTgmZukAzDwc9nT5B1Gbl6Xqbgs1k=;
+        b=ht6jCc6+gdsIXKusIkBPTrAglS7WFek8ak1WUuHrE6iMOG2R/oXNl9DHS6BhB3AJ0q
+         wXFMkWk2nWFLveb5zSs9lxn8qU6t0nwSsLLQML8JZ45Eqh8oN4akB8WXgYIiCBm0Sn7+
+         HakzD7gtxI1c9Jfkz/gbCrbqGZ6eRy4ev83mwQ0hSr+GsSAhN9xoI2VnK07mUOiJe/1q
+         zpEy5N7ddFkjBmktGnNxfQ8qOsGiHewEeKoErQqFhD2H/HsCZqlY6kSJ9799W6Oz3pqh
+         Lx0YRs6HvnE/JDba2NLizsnOGoCv33Ka0J2AzW3VPoHmY3as5th4kSJh7ZJhLgrSsegK
+         gH1A==
+X-Gm-Message-State: AOJu0YxHc6J5EgBThTj+4DhYUipzfls2UNt+OJw43poDB29gdYog2w8S
+	IMEew17WGD3HBUrj3udpwJdyf+0uLcEGLcMFMivZQIvlaivue5k/6a+an6wUVFt+
+X-Gm-Gg: AR+sD13YqLWNtU9I75rrNquOQoGbtLMI9W8MgLIG1aCCYr7MVedZILJZ0ySNA7+lKks
+	w/BC+GdavUnb2BUWZhsVCocD6DVRIVN9/To8Tk+5ZVFztIzdBxykt3elMZ5sK+MuvwRjWz6Yomj
+	AY3zJWjQJ7u1kDkVNg5Ge3HDC/d/3DmbMZ1jLsK01GBtyGC1ziElkv07Vh9wbuSLELzdLPbZzfs
+	wq4YLGrmJ2SE+uP8j0Hx6VmxfL8msPcxNNd0jUTm6B39zg10wBsIsKpLWb8lBNo46Lt1jDZKX72
+	x0ieFCb6JHg26gicUOmtI9QNTAR94GVxVjzBnQpDoniVqilnsMGn83i02I/bCAvj9vl0HqdTdz5
+	dSwCmuGzlhjj2D5c9i6Cey5NjT26oZ2OOg3SwlHo7LspN6CNrGAqZ6KPFY7TOgF+q8A03RjJiNW
+	4u37g1sLnuFatAuKfzTBzFV5YrQF9BN0GsdCQa0ROVXqNX7IqIdSZe/j+1AscwQDdwjEqCPc3Ij
+	w==
+X-Received: by 2002:a17:90a:ec90:b0:38e:2860:253f with SMTP id 98e67ed59e1d1-392ec53e6c1mr916048a91.12.1786426663535;
+        Mon, 10 Aug 2026 22:37:43 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31c64237e9csm923812eec.18.2026.08.10.22.37.44
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31c64237e9csm923812eec.18.2026.08.10.22.37.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 22:37:45 -0700 (PDT)
+        Mon, 10 Aug 2026 22:37:40 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 3/6] postfix: upgrade 3.11.5 -> 3.11.6
-Date: Tue, 11 Aug 2026 17:37:25 +1200
-Message-ID: <20260811053728.4125303-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/6] libdevmapper,lvm2: upgrade 2.03.41 -> 2.03.42,2.03.41 -> 2.03.42
+Date: Tue, 11 Aug 2026 17:37:24 +1200
+Message-ID: <20260811053728.4125303-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260811053728.4125303-1-ankur.tyagi85@gmail.com>
 References: <20260811053728.4125303-1-ankur.tyagi85@gmail.com>
@@ -68,33 +68,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 11 Aug 2026 05:37:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128911
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128910
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Release Note:
-http://www.postfix.org/announcements/postfix-3.11.6.html
+Changelog[1]:
+- Add `--lockopt retries=N` to lvmlockd.
+- Add `--lockopt removeretry=SECONDS` to lvmlockd to retry vgremove.
+- Use lockd_lv lock probes for pvmove holder availability in shared VGs.
+- Auto-revert metadata when initial pvmove mirror activation fails.
+- Refuse activation of pvmove-locked LV when pvmove runs on another node.
+- Allow pvmove --abort without args when using lvmlockd.
+- Add cluster lock lifecycle for pvmove LV in shared VGs.
+- Add support for pvmove in a shared VG.
+- Allow lvremove -f to remove pvmove-locked LVs after interrupted pvmove.
+- Handle active pvmove during vgchange -an with force flags.
+- Fix pvmove completion to use suspend+resume for DM table reload.
+- Fix deactivation cascade during active pvmove.
+- Support inactive LVs in pvmove with metadata-only mirror insertion.
+- Kill orphaned polling process on pvmove --abort.
+- Support formatting vdo volumes with kernel vdo target (version >= 9.2).
+- Fix VDO index_memory_size_mb quantization and report minimum required pool size.
+- Add vdo_format.c with pre-format logical size computation for kernel format.
+- Add --enable-asan/--enable-tsan to build with sanitizer options.
+- Mirror cleans orphaned missing DM nodes on image removal.
+- Splitcache deactivates individually activated component.
+- Fix memleak in vgimportclone and vg_write_commit_bad_mdas().
+- Fix autoactivation on top of MD and loop devices if udev db records incomplete.
+- Make MD device ready state check in udev to be in sync with MD udev rules.
+
+[1] https://sourceware.org/git/?p=lvm2.git;a=blob;f=WHATS_NEW;h=45ba143df59ed17f39fc3cc802b2f0cb32cfddc5;hb=56bef2d3430fcc5d5b00f64c099251ea824ad16f
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../postfix/{postfix_3.11.5.bb => postfix_3.11.6.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/postfix/{postfix_3.11.5.bb => postfix_3.11.6.bb} (99%)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.11.5.bb b/meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb
-similarity index 99%
-rename from meta-networking/recipes-daemons/postfix/postfix_3.11.5.bb
-rename to meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb
-index 60f1889a38..14854ca11d 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.11.5.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb
-@@ -29,7 +29,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
-            file://0001-Fix-build-with-musl.patch \
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 77dec89bbf..8c00063775 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main;tag=${PV_TAG} \
+            file://0001-include-libgen.h-for-basename.patch \
             "
  
--SRC_URI[sha256sum] = "4a6ab3d0e9390989fa201fc6c446045fc702c4e16e7a247c3ae261c9e9bee610"
-+SRC_URI[sha256sum] = "b9a748705b1cab0a4afcbe42f934c82a33b342ba3229017fb508c71700078d07"
+-SRCREV = "539014d16099ee8d46318b49e9014332e2dc7ef3"
+-PV = "2.03.41"
++SRCREV = "56bef2d3430fcc5d5b00f64c099251ea824ad16f"
++PV = "2.03.42"
+ PV_TAG = "v${@d.getVar('PV').replace('.', '_')}"
  
- UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
- UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
 
