@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFDC0C5DF6E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77A49C5DF70
 	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 20:10:51 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28165.1786651847482623790
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27834.1786651845055910235
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 13:10:47 -0700
+ Thu, 13 Aug 2026 13:10:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SoPmamSy;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-38deea72eebso278756a91.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 13:10:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=mbXLZBSc;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2cc73e322dbso6264555ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 13:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786651847; x=1787256647; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786651844; x=1787256644; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3jaBhK1BGP5XIUx3wINaeIibGk4hYmawPJLk/JJGifs=;
-        b=SoPmamSyZ3YdtclKqQZ+kva0Wydpntp5/DSoJLLIYryGuWQaKByXd6PehJNHw5Stmq
-         LolVbY1gEDZgH9gRV0ACYkj8N9HBX07uI2tw4m4i/r0xaOXX/ZF8Kqf8HztvhJlvgF9g
-         +1aap6DymhiO9kzWORbCtJbRsv8o88OZ3tGyQQxvVi7/cFNaTvuIfqlEmaxYII3e8286
-         a+bk6pU8PicLjXLHs5emR4WsDHJbYuiEk2IukAfbdFlRwLTuCUNYNLjEoF/S/QbQuuZz
-         zoeqlJydxiwjj4Ue9p2ZOLxfe/YlnVL2MFSvTGFns/5PcssQp1ygxdYpoxAkzkhak2o6
-         3DxQ==
+        bh=1YmQqnEymQdBu8DA6nON9Z5wZDIQvAchk64b/MmB5Zg=;
+        b=mbXLZBScn1TxM94bhv9tn4e+OI3/iU2S07VedRXtmcRWeEmraeIWK3VlCoNXeZmfDJ
+         5KDkF5IvFsVqvV5aJXT+qP5HlYa4CWFwTGr9/htIoGJ1u4t5v8N/fuUm2bOgkYrlcZvE
+         kK3LWsMJKibXUgyvM2Gldp80VdT0wTQ7nhehQi9HNeyjgce1YBWicozBsZZLYEB4suZd
+         EISfdiM47Qalli2zzRGqeu6Xp72J3gufCztRrdzx1tR1vnvJ+f5KmAsm6XUfVGCIf6uU
+         tdjjJBjqJTmAHFOU5+fiUKB6mY4XoJxFrZC72xvxW+1Q3Y5k3N/k512EctYDYTJqsdSX
+         rlUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786651847; x=1787256647;
+        d=1e100.net; s=20251104; t=1786651844; x=1787256644;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3jaBhK1BGP5XIUx3wINaeIibGk4hYmawPJLk/JJGifs=;
-        b=ZsHLP+IzTuE84rJSYn+4E0QYBdm2uJCdfz6WNcIOuSyrSp/Kr8lW5xjG/PwdCpEJzt
-         l4qsseu/a4uj7oTGDiS0oPbamnBQHNcjhqsrETTBFkAkRsRuLPgomHFx4lYeH4gF13Lx
-         3eD5moZmAJHW08MwbOCA4dsd4nAsyR7+T0qwZskwvQLJZ/r5LNpzD/tj1ZBIB/p6V047
-         A95vZ9yQHs4DWX24LHl7COhc6t3e3URrCroGNTKw4AGCqmAhJre3XS3cLBtqy/qlOEPf
-         zW/yHmOz721zI7sk8i7+V+ZQYBgc2S8u2/zpsTHYijFfBNaVHQMjH1Vu4s0iN4RFlsKd
-         O9qg==
-X-Gm-Message-State: AOJu0YwE6VRRxkksSJ8DMW+Y7ANhaXJHy9pXDh46EC3WeOPiYwHlpAi3
-	U4sfkk1spRGpuAZFTp72j2BDbZQuR0oXnno1LkWGgtZYVi0zGOPgkbGG6KaFphXv
-X-Gm-Gg: AR+sD10OKqe/VKmKDVI/xtVs6vWujjjLpkroXtA9WzFK/RpYhTIWMN800zUueVgJFmE
-	9mDUx5AW5BhiH72YxvBh8WcXI8Ju/f4CvVJsfts7PCRLdGBUm080q/Z6Jtm52L8KY5xBO5vS7rO
-	WqdovhWrqj9jMolliHUQPqG90n6FUGfrhevA2b4p+YiCf5D4aXurZ+SHKZhAOLGuMCRUudhuwiE
-	lHcfISzepdILeQc7z29p2nvib5rsh6Nu6kbEWIsxV8c9b9PJVvm54j6Ew+1ewA4mqpRiWz9LP9h
-	lxTadNLvB7VEr9gozu+sMrOFg+iq/G49H+LRbRyFJ7sLeRkgLNdPp7gUEfRdqKQKKEfPTPwRoyW
-	ywy45NREpxmXcnLurzjg7AJSxmGW8m6dH2XrUEPJg4s7181wVM1XvF8Dvs3SXJTmFwGXHJv/fkA
-	vIKYmFPGJwS4uWyE3QVpF7mwVHtmtPT6Ok7U/xrmr4P9Q36m8uMZ3hS6S5N+YNI41xg2VBBEvk8
-	GdqOgQxkJpjFQ3MWjxc/O/IllPO1fD2a8US7u2LobFOn3KXLisbTz8BxQBW5x2bYu9/cDzQNmUZ
-	NahOnGhpckl/DvgqtVtaVlvV0Ce6j2jBD7XXH8No9HSQ0l/XmERh0876SlwT+sfebW/lDWN9Yxk
-	aGLVPVP0NtESMHQ5sv7soEehdH8+FxG/LNzVf+gXLsZwvdQ==
-X-Received: by 2002:a17:90b:39b0:b0:38e:659b:f366 with SMTP id 98e67ed59e1d1-3933b500d17mr688128a91.0.1786651846867;
-        Thu, 13 Aug 2026 13:10:46 -0700 (PDT)
+        bh=1YmQqnEymQdBu8DA6nON9Z5wZDIQvAchk64b/MmB5Zg=;
+        b=ILBHs7Z3UJ0rKg1gVKAkivyZ6+0NJ/rSBTZCb2ee9uRRdcHUcl0v1Ftwp1WSQsY1nt
+         y1KB0U9ytF7ke+yj1OtOENAr3YJ++2QZOvkJMak1g9glp22e8qp8tWZ1NBjI4PBlghGh
+         YxYLhgQ+3uqXPgFoIT3DSFAQgWb4knf8rXQV2VbG+PP6HwGxnBDIMbr16YCdNN/zvHC2
+         viyv1OjhAM8ifsk/xpdqHpAOKA87dlkuTMdeDsWr0bkGpFmXSA9HsEIY7AgvNUCaJrRz
+         n1pQttYw9vlJ1/EJDsP54rQgOwiElZIg7EUrBgkkshm9ymuGgpVQfO10EaJyPu5yTL2o
+         aPVA==
+X-Gm-Message-State: AOJu0YyWvkca257Pvk7a2YFGcDoobMe+XMfjaW46NzrnAP4yPLcveoVO
+	kAbuO+cSAgTSGW2LGv1+rsUE/fEs3ReF5ym0UYMCOano2UlhWWIinIwf+fAcWTrF
+X-Gm-Gg: AR+sD12IVZ8u2ZsgdzVNVwmTO0Xno6WM7WsG0fR23jWGQdZ1Rk7g7Rnke9ajbMQqlzV
+	NeIP7c5ecLnLMuZ0moEYJOXaqe6VRRCWUhNfqwz8/wbauPxidl7fj2jLDVaAhDh++VbfBrlZg5v
+	D8Jh4v9w62ywTSa9u/VbOBlHfbiLZXAODAhVwY4c6efTRWwQDzMKaMCT7dQJAUjsHFs04xgEk/M
+	F0dSB39eA3AIG7JTsg3jJupgZ3XKDeu3vjZuFEePD+D1vRtXuUMccBNZd+VyfT0b2AvSkKdbWxs
+	VDzAoVk2tu2HdADs2NuI/seXgwr3kChcTEv8KaX8xOQv/B05sCZbaoe7FYTQkjVbKgw7FYP6mcv
+	464jxoy4Y9Q6jkRnQ9Vg7FmXuxHE6QkNgILsDiUHTVI3amZKQy7YwPe5qTWDxaOQsJIccKkJ+z5
+	zUjTxDsX5oj4ClWSUyM51pJ9Jik2Ger1dPPyqbmLuLdJbkeJj53TIaaQG0yAlzjhgX3BMfSZRNu
+	f2Wpwb2edDe4jZ+UaRs+lldb35M1HKj1IXwXbkMF6rnUYyPxWwvCEnggFAeuy1LcXaSkIzVpVKQ
+	LR/Xw9z7UhZIGi1NUMxAvmOt9OYkw+FKpYK2NUN6B/Hvga6NlSDvijpLGOkDPTANJDOxHV73oZZ
+	dfbw8QzweHA/8EpSCq1MnyTQhr4nLq/YmyDB/oi8/skUted6UNloFVQDq
+X-Received: by 2002:a05:6a21:1391:b0:3c3:7e9c:e292 with SMTP id adf61e73a8af0-3cc7200c62dmr267330637.25.1786651844256;
+        Thu, 13 Aug 2026 13:10:44 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31ebfc37202sm10012289eec.20.2026.08.13.13.10.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31ebfc37202sm10012289eec.20.2026.08.13.13.10.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 13:10:46 -0700 (PDT)
+        Thu, 13 Aug 2026 13:10:43 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 73/80] python3-uinput: add python3-wheel-native to DEPENDS
-Date: Thu, 13 Aug 2026 13:08:27 -0700
-Message-ID: <20260813200834.1302829-73-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 71/80] python3-tornado: add python3-wheel-native to DEPENDS
+Date: Thu, 13 Aug 2026 13:08:25 -0700
+Message-ID: <20260813200834.1302829-71-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260813200834.1302829-1-khem.raj@oss.qualcomm.com>
 References: <20260813200834.1302829-1-khem.raj@oss.qualcomm.com>
@@ -71,7 +71,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 20:10:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129017
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129015
 
 setuptools3.bbclass and python_setuptools_build_meta.bbclass no longer
 add python3-wheel-native to DEPENDS by default, following oe-core
@@ -92,20 +92,20 @@ Add python3-wheel-native to DEPENDS directly to satisfy it.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-python/recipes-devtools/python/python3-uinput_1.0.1.bb | 2 ++
+ meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-uinput_1.0.1.bb b/meta-python/recipes-devtools/python/python3-uinput_1.0.1.bb
-index 164a6e902a..f63cbf22fc 100644
---- a/meta-python/recipes-devtools/python/python3-uinput_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-uinput_1.0.1.bb
-@@ -10,6 +10,8 @@ PYPI_PACKAGE = "python-uinput"
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
+index 4dda1541b8..544c8606e5 100644
+--- a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
+@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "66c513a76cda70d53907bc27cf1447557699c2e95aa48ba27a442ff61c
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+ inherit pypi python_setuptools_build_meta
  
 +DEPENDS += "python3-wheel-native"
 +
- DEPENDS += "udev"
+ # Requires _compression which is currently located in misc
  RDEPENDS:${PN} += " \
-     python3-ctypes \
+     python3-asyncio \
 
