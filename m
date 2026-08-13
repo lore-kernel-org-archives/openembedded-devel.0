@@ -2,96 +2,93 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3273FC5AC67
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F1DAC5B572
 	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 05:51:09 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12940.1786600263556125100
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12870.1786600260971608425
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2026 22:51:03 -0700
+ Wed, 12 Aug 2026 22:51:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=EvY6zhy5;
- spf=pass (domain: mvista.com, ip: 209.85.216.52, mailfrom: hprajapati@mvista.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38dd55ad76cso693123a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2026 22:51:03 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=Z7B3noV3;
+ spf=pass (domain: mvista.com, ip: 209.85.215.172, mailfrom: hprajapati@mvista.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-cbedf318752so1296895a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2026 22:51:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1786600263; x=1787205063; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Sz9YkumYUHpqmbPqTJsRAd7i9QCZPwXC7euU+5+2MR8=;
-        b=EvY6zhy5S1yhDRZtcg+FnRhSTzulMaQG/Jec8v/IgmFBPeQi4YKKstgGjkQjEgrA4X
-         ahfgAL7rGZOAVZhs97O/UxLHpsHd1WV2sqZK/FiNyb7vzoLi8UrIfQREviHVsK52FBGB
-         tqnhHLC+shDOLNFrnzwsW3rq67jdk5dT3thls=
+        d=mvista.com; s=google; t=1786600260; x=1787205060; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LoSLB9q4w6ux0Q552lt9KrkfNDbMAbfc7oaMfTMrsaI=;
+        b=Z7B3noV37xO4Yp/PeZUJa5DFI5KMyItHXsXnIwOSMoVV67WIXEjB5Tf19nKxPPDLXe
+         +/UfYDN+M/B5PBmoibMQBRGtZ7g0pCz/u86wXYiUaMCeLbtla/bJvsaCFV2dceg6YSTu
+         VsWUiF4pB8sd2CiSM6hnF/rPjXZ1gK8RHqxEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786600263; x=1787205063;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Sz9YkumYUHpqmbPqTJsRAd7i9QCZPwXC7euU+5+2MR8=;
-        b=Vj4nIp1e8Q8vzDCVOrEyCNtqTkIo0tRk+3FIi0FLOE3QY4jgEk2q1BW/HWYwtVDSpX
-         pW9LYJjCp8SUrK4EHwlEIDm30FAxTlRWJwihPBwKAZgMYRPhm6c2q6B/NrfEQeEHmhKU
-         kLVfS93MVWefr0VrkPsRVwMthR+PoL+GybqQABuSAUzzPfjFRWCAYl8eC30b+LHXqFhK
-         osTF2yVXz2Hm0fcogjdlnEswdAZwKAsjGN43LXN6d+7NnJkrXm+VHJFi6WEZ/pwK8oC3
-         gw+2X+kkVJFCffU7ag2BQw7AxQFSqFiQGb20J9IFcPiT6Uap2zGZ6NXKdCqmuBaDgA7J
-         3EaQ==
-X-Gm-Message-State: AOJu0YxkbAMgRacR4gdW7u6XXauPArw6SdmNSunLXfRV0ycppIzuhAG6
-	uJ7JUV9+/2TvBvxRjWbJMAL+YFMEReiM5rNSwBqguyr31k7pW5rtkYZcHqoW9wvDkxWuFs9wW0e
-	t+KhMXMQ=
-X-Gm-Gg: AR+sD12ChkNhC/CnFC6sZ1rKONdhwA4V20bT/dzbZE9cW1YOY+2w2de9OyNRT57/K8E
-	AYXTa+J/Xtbf7mJD8RatvWa3dldTRqmYlSJDhLxfpQ56r3i5XB7NxjSQ50xbpSm1ga442pUuCNu
-	jwgOpD5EyhobRU2EaYyzJazF5yCSO6VQL5jJxgldsH/e7MTWGtmyo6p6btY11GhZ0C6Gx7D9cmz
-	veet4KGAJrXfkR9RQ1T3ejJOetVhMFpng1fnx/OfxCeH0Pwyyr1yJRwqzLAW75lwfgfc7H+diWX
-	bcMNxvPm+LjYBbL1l+tnOfZGdVH9NiIM4lMfyYabJd+gsAxLOYGoFkqaL/KpN1ZiqVvuQJhpTPj
-	MX2F2nA58hCWyrqKgAp62yvuxBmsKSCnBrJcMtTPPT327toQoj8MkV6L/wc890vhahrMEl5ymQk
-	6eKwhxDPEpiAfMZKKlV/vjp3gPumegEn0cYqEnAV+jT0pSIsCmkjz28QYPTneKnzMsjnUx5CrEj
-	g==
-X-Received: by 2002:a17:90b:39ac:b0:36b:b903:994 with SMTP id 98e67ed59e1d1-3931f446ef4mr1971553a91.4.1786600262624;
-        Wed, 12 Aug 2026 22:51:02 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786600260; x=1787205060;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LoSLB9q4w6ux0Q552lt9KrkfNDbMAbfc7oaMfTMrsaI=;
+        b=ow6AulOiWP5+3Rf20+tr4y5PxxJxhaaEdTNZ5165ie+6QLHymxucyppBQzcKGp1F+1
+         u7FrTNnv2A2Gqi9ZhVtyh/tFQuepm8MOYVPS+drqj3acA6CQ8x+9FLhd01tFVznQRi+B
+         bDvKfcZxf5Gb4p1XDN4tvPq6cXZFuvTKYhanEc8DO/8ppPPAsM4+X5V+ZaZRU8GRnSQr
+         Gf3WCenih2jey/QZ8l38nyykIBM2xN+t4OCaH8NeKz/5IFXg8jmsqpnXmzQwNTRkBC3l
+         bah8cQ9/EpEKg7EST98tCPR0yG1R7FkNmvR+0LSIwEewv/tjxj3ku7acmeYU8KwT+Yxr
+         EzgQ==
+X-Gm-Message-State: AOJu0YwtA5YTPUpNvnD6s4bOKeCEKp1iBNssVTFpsrP0Rm3Uoq+68yHn
+	LIQTBMqUN2LC/S0AATNad7wLP2fXsX8hrjO5HpdYCDMUVPZ3rVsHN9AROqJyl2QU8mfKL9RkDZJ
+	MAIoubhs=
+X-Gm-Gg: AR+sD1231UoPnmxUguARn/08MzopEOXoJragSLlsxroeeKY0TXUq6SY5U4HBbm63NXP
+	dC12JbiRnLkGkH7SeKOQg64AeglCu3cZplXK7tiyHikgjBwwfwzYpeHTSXhewURVKTm/4qWHbP4
+	yaxGMZ5WqdGJtPXRc40jFBllWIK5OookMnbi/fd3VdxtuWoe74/mezrk6Pys4RDpH/mM5eNwzFT
+	yWfJyj55H5pzKVHh1360wGAnVwmqhiLgYBOfXZITWXhtolzsB1WtjL9x5FE3wrI5qJ5VNyW7U5f
+	Dd1Dxpnl3T4rigcMjy7rTUOBqoCsA75QleHOt5K9L4ZcLWpRTmb91RdRZUXVEtpxj4LUHya+Q9D
+	xb7sGznaOlfbTdwZuvnQWdBGpBC/F2wnr2UQEUfCzoNl8PCupHsvxBr+5hKx1PnkgOiDjSaoVoq
+	B3hW1rPRHqmxNDSxqgiVFHDjHydy+S75KrLakFCPx7Avl4Q4S35Ug/sqdqlCmHQJQmVzLDvy+Qd
+	TLu2DA1LRqF
+X-Received: by 2002:a05:6a20:d12e:b0:3c2:dcdd:a85a with SMTP id adf61e73a8af0-3cc5515541emr5271809637.13.1786600260206;
+        Wed, 12 Aug 2026 22:51:00 -0700 (PDT)
 Received: from MVIN00013.mvista.com ([150.129.170.209])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1412da6a1aasm5876820c88.12.2026.08.12.22.51.00
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1412da6a1aasm5876820c88.12.2026.08.12.22.50.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 22:51:02 -0700 (PDT)
+        Wed, 12 Aug 2026 22:50:59 -0700 (PDT)
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH 2/2] libssh: set status for CVE-2026-59842
-Date: Thu, 13 Aug 2026 11:20:42 +0530
-Message-ID: <20260813055042.91413-2-hprajapati@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH 1/2] libssh: set status for CVE-2026-15370
+Date: Thu, 13 Aug 2026 11:20:41 +0530
+Message-ID: <20260813055042.91413-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260813055042.91413-1-hprajapati@mvista.com>
-References: <20260813055042.91413-1-hprajapati@mvista.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 05:51:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128935
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128934
 
 Analysis:
-  - CVE-2026-59842 affects information disclosure via short GSSAPI Curve25519 public key.
+  - CVE-2026-15370 affects stack buffer overflow in SFTP server longname construction.
   - This vulnerable code is not present in the current libssh 0.10.6.
   - Hence ignoring the CVE for this version.
 
 Reference:
-1. https://www.cve.org/CVERecord?id=CVE-2026-59842
-2. https://www.libssh.org/security/advisories/CVE-2026-59842.txt
-3. https://security-tracker.debian.org/tracker/CVE-2026-59842
+https://www.cve.org/CVERecord?id=CVE-2026-15370
+https://www.libssh.org/security/advisories/CVE-2026-15370.txt
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- meta-oe/recipes-support/libssh/libssh_0.10.6.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/libssh/libssh_0.10.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 13e01ff9fc..63854ef5fd 100644
+index 1e1b5fb0a5..13e01ff9fc 100644
 --- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -72,3 +72,4 @@ BBCLASSEXTEND = "native nativesdk"
+@@ -70,3 +70,5 @@ do_install_ptest () {
+ BBCLASSEXTEND = "native nativesdk"
+ 
  CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: only affects Windows due to loading configuration from C:\etc"
- #Reference: https://www.libssh.org/security/advisories/CVE-2026-15370.txt
- CVE_STATUS[CVE-2026-15370] = "fixed-version: vulnerable SFTP server longname construction handling was introduced in 0.11.0 and is not present in 0.10.6"
-+CVE_STATUS[CVE-2026-59842] = "fixed-version: vulnerable information disclosure via short GSSAPI Curve25519 public key in 0.12.0 and is not present in 0.10.6"
++#Reference: https://www.libssh.org/security/advisories/CVE-2026-15370.txt
++CVE_STATUS[CVE-2026-15370] = "fixed-version: vulnerable SFTP server longname construction handling was introduced in 0.11.0 and is not present in 0.10.6"
 -- 
 2.50.1
 
