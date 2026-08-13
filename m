@@ -2,118 +2,118 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8271AC5AC67
-	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 08:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C64A0C5AC67
+	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 08:49:41 +0000 (UTC)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14094.1786607299102133257
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14727.1786610838181184597
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 00:48:19 -0700
+ Thu, 13 Aug 2026 01:47:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ourjajBc;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=g2Hw1gTg;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=YJ2iwth1;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Y+1iXV16;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ashwin.prabhakar@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67D5g7Ld1072366
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 07:48:18 GMT
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67D5g42U1530133
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 08:47:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:in-reply-to:message-id
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
 	:mime-version:references:subject:to; s=qcppdkim1; bh=5JBb6ccLjck
-	3OXd2yFfPIbavBWRg/IQyx2waEM2n7HQ=; b=ourjajBc4a4K6GUpdQL8qHYM1D7
-	mKHDXJtZApci2e1DDg9KixIfSOc5/BNg5ByCJoUR5bb+PzXB7UFDir/GBGhbcp3A
-	oxthP7r3giCOTpWJeLy0+NlhkAkx750mKqmnMH2LG3fXQBcwmS/1VSK4MWIQeQih
-	vxMHTwiP8+9gyhcCXuvavv6+XYVuSzF18CTU0f6Ethtnbsl8KX2iaqj44TPyVILS
-	9QHTTs0DcP0TSn0e9kgVkNIzmMkj9LEz4RnLj04Eocx5me0lGmav2LzeOaqy4JNH
-	Rnb8r6N56GfvEvvjzndsVjvIBPTLP4C1MLUcIMqAEPA9/SPAyl0bt5FKJfQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g14syh734-1
+	3OXd2yFfPIbavBWRg/IQyx2waEM2n7HQ=; b=YJ2iwth1d7LqPDk8fzOEss/ypql
+	cHUvnkY7egPdC/mxa6/SNDoFqSbzwM+0frKZ0omKOJktwt+tg2dkfBHiV3IeT4ej
+	PGpUP7PWNNAbbQvnmGeHlYUv7yEqjr6578BDsQqhdndLjIro8a8t7rc2iaKXy7QK
+	MkJ0YdtZZcUE5+cZZdA56plkGQ7NOxi7vTT3FcC2tWThaMuYeSUmooQYYgXNwwid
+	uOf4Z9XrXQ6fmomC6DPVxLJ4sImOXGL2OjCmwvk/yOl6pJd8+jsxT2Ga0rWtJata
+	O2foQmQJa7xsmq6b/AVJEmhf83psienhWPyapuQgWc0ci18/vEMH4jma72Q==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g143hsj43-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 07:48:18 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1eb52e1fso7165311cf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 00:48:18 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 08:47:17 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c21c01cf3so32890321cf.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 01:47:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786607297; x=1787212097; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1786610836; x=1787215636; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
         bh=5JBb6ccLjck3OXd2yFfPIbavBWRg/IQyx2waEM2n7HQ=;
-        b=g2Hw1gTg7kRTKWpvn0US1ik4OK+QiG2E9bVU2Fblnx1R56Q5XXZNGKNs6u/fYWG8RH
-         4P8lLW7iFWBhNEt11JRcX5b01/r74BIIQ8rtmJ1ePIzFK4Ywa/WW6fFECiU1oHGuOeem
-         oE4Srn89OpDCxzhYj/uawcQVjfaPuhZmInE0l35JExdiHapT+9sgWNLpaOjfddc87YHX
-         Czw1YPPWZ5yym2tv+ahUASE8rAQGOqv14bXza6zS8dJciphnbOCsUmOa0nB3OC0nSFpy
-         5QwS9HXYp7evcfwi6jUsn73+5KoaMLR2Jm+VB1PJ1c0CEnGoA6Sv3BFJK+zkCOepD0u4
-         IHow==
+        b=Y+1iXV16+spbWpQtMlbbUObdYnWCWHKvIv5eE8oPg5KhJp+umBiRL9RG9U+YFmZ5s6
+         LajxlEAv5Y1nCU1DSO5sUD13edlq2cCbKhfOxlQnL2gS5nvmRjtCGBelKcFXcTwM2Va7
+         Fd5DdqxW5eH8JBK5DWKtoqOsYuAUolLHmNq/2LhUW3hGU/Vj+0nwHyFehmaHCtP4fQzh
+         d5BsEOlJ72eOi3bGCMNyBDhCCTaSOJKMdcguyThwXP9kekkfv+OM0pio9i35qkf26IOP
+         xitgag7qzMM0LQdvhTGUTj8zwF/sn1m5DLiOWFBTSPTC3BmOaW+oS59gieAmnxa/2X1J
+         fHOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786607297; x=1787212097;
+        d=1e100.net; s=20251104; t=1786610836; x=1787215636;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
         bh=5JBb6ccLjck3OXd2yFfPIbavBWRg/IQyx2waEM2n7HQ=;
-        b=E+Tz5aiRbBcxqzjhB9NMxFWVZErfrvUMmkAJsQupP66G6Sgzu3wfK7HyaElp3fx4an
-         XTazbeeC3iBaqOZhnSVN4YpIC1063ubFhoNuwKwV/SomqzlE8VNKQuEhsAj79m5zV/+R
-         Ie3EazajItuJfeJjIOru30jTA5oj80217oV0Go5tpnqOtSBgkPicAjoAT5NrkeXgVgcz
-         9LjgMW5IBFpDzUdq4ITilTr3sghoQlDq96aDxNpu5FrJwm8PYp1o55QLpPt1pJDfxsZQ
-         lOKCjM0W0bKSc68WYYoPrEaqyevEd271lmylQiLUT+oPMntavAyvDb64lbd4YLGzFp0J
-         7rgQ==
-X-Gm-Message-State: AOJu0YzkJ6J3HYRCl78ph9WC39IGsV3SIpEL81mgQ+QZW0qgnXPfgQHC
-	CffrkdPq4YxlxHFNz3QfiRsffAwvIRHgC8aDGH0aFO0fszeOkqPvm/EeMocyfbw8CFbkK9c4G1G
-	bfr79rKQjdqtXDEOe7FbYlh2dNAKf5H3/MSA8kUoXQ0ARQKVCEDBGCkp+ez/MdDjP3ItOlP6M9G
-	ps7YRnJ6Ta5gjRWVZX
-X-Gm-Gg: AR+sD12UvUW2nQ/tuz9zWRIEvGQYKOlvk9ob3N/OjIj7ZO+Qo46NuF/iGBygCENlB5w
-	2F3IoHez5NY/RyAB4Nk49KuwqNFcSe9zzGVDy1DY0knJnD0uKoqL3k8BMJRyfx8al3fS1lRBsli
-	0/LSJQxmLM6gQRa+BQGvfvUc4Dn2b/oetWaloJvjI18gBoXxlRNVk6jDVBp0HXcwRKEAisNbuKX
-	Wbf3P9/tG1awAqNoH/1KjjV7cMvGVJnwmaH/CkjPrqK6riA13bI821eWqP2O2mHx6qLadUOgPHe
-	OOqwHqd65hgzAwITIt/mSbn82goKiAUgxwvttAI5oEB4HQJaFA1ZiMeXQOBY9JXWfis0UtUVcE1
-	YFAgGRBkcETLXiM4iqSmFK8gDt2w7rqQ1GzISZb1I+yoc1XolhdehllIs09/ckXY=
-X-Received: by 2002:a05:622a:1194:b0:52d:6cf5:1c01 with SMTP id d75a77b69052e-52d73e2d702mr36432121cf.36.1786607297171;
-        Thu, 13 Aug 2026 00:48:17 -0700 (PDT)
-X-Received: by 2002:a05:622a:1194:b0:52d:6cf5:1c01 with SMTP id d75a77b69052e-52d73e2d702mr36431331cf.36.1786607296257;
-        Thu, 13 Aug 2026 00:48:16 -0700 (PDT)
+        b=ptNl2D0sw5JLKsCuDOgjl0Zi71l6hZw8BEnUesuO7CI+UvMZFp9wscuvOSUNFTqbn2
+         CT4sXsEmrBRUxd7qN5OCmWgke8P7j0ywFYG2Ca8WoTqqiYa0GOD2CJkukWKM5402IBpP
+         D6Z6YOXCJWbWWW3fqxk/eUHWVHxuWU0Yf/v+l6ylKc3jHCYZTH1+fOM+87NnqQrBduce
+         f+zolYygWYAAiLsK/GKNonjOBk7O8AGsWMvhqd3gSkXONnWz3maWPzfEDGwM4XwdNoVX
+         +P+O2I885tyz2JMtB/LXGRBu8V5fE0CKBIKZUcLbpRDF3tpz/klTpuzcQIqTblTFcCcw
+         dDUg==
+X-Gm-Message-State: AOJu0YzuT/MHpKpjRRmcFKgXgu3qGYFSGz6yoej82aV0Mk178GFpoUVs
+	5W/rxvMQziXZdbsNcLrdMEtVrmWkPgpx2prJn0L8kK0oCNOOUxx+lOlOLe0Puz4Se38+dyLOWLJ
+	3VyxeCkyhT/VIpeep7qQpUPbt6GZa+/XpPv6zkBiQXxBlHCELhJAuMgHJZVt3StHT6JJ1/q3UxE
+	dD8RWFG+VpPAGFdldJ
+X-Gm-Gg: AR+sD12x0U3eXVTKKWta8CNw378s1kdisUkGvheAOI+DX8CbyibkOg60s6MZv7OPpS8
+	BciMPdoRBZ2QSImVOzzL9prH1wcVKBukGvJt5P9nYpUGOu83pCQCnfZIrhQA3L8STU+PQwsVxos
+	jHam6QRc6jDBodZMLAFOu/zAW/5A24m9FD5FZZFuSuzNipI4K3bkgl6vxGSU5Zt1hHUa8Zbl7pp
+	+4vq9Me1PKV5ZVGvtTEUB+XwuR4LoCNjiJnZUM/5ejxMG4jBnHDnlu2fiRlSI+FTgcJPIrsdWrf
+	xzUK0DSSgcrpLsoxiX8SffVBWxmhHtRB+ucNJUtkhT5XvQkinihOqxTtUHB2ay7TEFJAZsEXYbz
+	wKw+kWQ3eG/3iRWImRILa7+TkhcoTFzZKAz2w3m1O0QlmA6CwuCtTGhlIvnFiBwU=
+X-Received: by 2002:a05:622a:986:b0:51c:2068:a9f8 with SMTP id d75a77b69052e-52d73c1bc13mr43462251cf.5.1786610836439;
+        Thu, 13 Aug 2026 01:47:16 -0700 (PDT)
+X-Received: by 2002:a05:622a:986:b0:51c:2068:a9f8 with SMTP id d75a77b69052e-52d73c1bc13mr43462011cf.5.1786610836109;
+        Thu, 13 Aug 2026 01:47:16 -0700 (PDT)
 Received: from qualcomm-ThinkPad-T14s-Gen-2a.wlan.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a37f73f7c0sm605986a12.0.2026.08.13.00.48.13
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a37f8cddf8sm593341a12.28.2026.08.13.01.47.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 00:48:15 -0700 (PDT)
+        Thu, 13 Aug 2026 01:47:13 -0700 (PDT)
 From: Ashwin Prabhakar <ashwin.prabhakar@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [=PATCH v2] assimp: upgrade to latest master to fix GCC 16 build failure
-Date: Thu, 13 Aug 2026 09:47:21 +0200
-Message-ID: <20260813074813.1531783-1-ashwin.prabhakar@oss.qualcomm.com>
+Cc: ashwin.prabhakar@oss.qualcomm.com
+Subject: [PATCH v2] assimp: upgrade to latest master to fix GCC 16 build failure
+Date: Thu, 13 Aug 2026 10:47:12 +0200
+Message-ID: <20260813084712.1532932-1-ashwin.prabhakar@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <CAMKF1srEpQ50APyZuoa7XjhjC52wRTLa8HZy2BbUPi9Qs3JOxA@mail.gmail.com>
 References: <CAMKF1srEpQ50APyZuoa7XjhjC52wRTLa8HZy2BbUPi9Qs3JOxA@mail.gmail.com>
 MIME-Version: 1.0
-X-Authority-Analysis: v=2.4 cv=ZcQt8MVA c=1 sm=1 tr=0 ts=6a7d76c2 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Authority-Analysis: v=2.4 cv=R5oz39RX c=1 sm=1 tr=0 ts=6a7d8495 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=NEAV23lmAAAA:8 a=1Dfise4yaFfiQpOBiUcA:9 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA1MyBTYWx0ZWRfXzj6fIPaSarWD
- rXudu8lWIXXNnhlAUdV7uBzxZi36hIcKwQy5uJkM/otBckdg/IeQdPjgNaH96GZJIp0enOVvzE8
- USZCblbuLc5LhuwLh0YgALOE4Q7GjYLvNhJtNLv9+6Jrlab7mSVqkg/JyOsUICtbdlMaY4Yp/Y3
- xTr4wsVCKMuVbKRxoa6Gkbi3NgJTgtar+sVXZXdztE40T0V2ZRF7HpIH/uNoT4JzrukXp2D/wxa
- CmlY44Pa1P7wEB3u/2Kg12e5rQ89tvD0My3L+KU87Q1rGgLwnUwQTHSdzFKH78/ShHdxwujEprI
- XPbpn4+zCDz1mDnyBHBfAsBT7gOVBQ8w5ZdeTSMWWVyBA0qfdojFI1UJMA4jJOhQOfsPc6eMQhE
- hSJLI46QPB8x+K9DUdZjs87pPBVbJNWUp7DrPu3ZVdvCvanQBs02hjEFNmMQg3m5S1LvJNn3hCV
- Y+gLIsWXu3tZXzV/VRw==
-X-Proofpoint-ORIG-GUID: f_i_a3piCmikXKCE1YEl0ofZyhkvbY8f
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA1MyBTYWx0ZWRfXwYQhJFqZKjUF
- 7WoxRR37KF3If4yxbigbve4OcUELPmeDIWA93eNf4+kxM8Lx+7lsJT4019C9Jg1WmINnXAwfHSM
- nafV9qJhAiWJU6DBYYcOfGBJUQICPBA=
-X-Proofpoint-GUID: f_i_a3piCmikXKCE1YEl0ofZyhkvbY8f
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=NEAV23lmAAAA:8 a=1Dfise4yaFfiQpOBiUcA:9 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA2MCBTYWx0ZWRfX44rY1OHWHLwu
+ IDielRJ/jHfvnVmt/mytVjlQC7LAhCJYnW9nDH/H6A3IKTkj3Grl5BZqk9gMLDmo5WPSrprSXgn
+ SQ4cGoKEkIO2juE3x2GV5ooKLXsLYSDMmFwfRiHFDtImC+P/R+pLTo4s/bvpbo3/89GA/ktGeRu
+ yY6aho9kMkyprB3YVj9TiB17+9hqa+Sg9yzWYzS/lEx27pfj8p+0E0w1u4gIXRt1HVtmvbdb292
+ M5EfYpcr+4cxC2fVGW7Zt3r2N0q0XAUKb62O7yLwGhkbaXdaWPWrO1TVUhK5Vfxjxae2lLxa8nl
+ Mc/mwei8hvTqJ/ibolgl6cS07hQ/Q3iFmH1Ha1vELBIoUb0Lj7wyRkgHoJfmdJqsflizk/aVqf4
+ 3M5v6kGWMlSEni1IjtA+C8QkmQzIn2dlwAMKHZdjxUKBYSStBF3T5Fw00oEwFTn0YUGS1dPCrl/
+ kpX20oga2AwXAu+7JGA==
+X-Proofpoint-GUID: aLX-vmF5DLmgtDhUi3NIopgmqQYIvWjm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA2MCBTYWx0ZWRfX7Lu5wthjaR0q
+ WQG7dnI4LX+rbATTwbXf9kaxNgvIy3ypMR4ZI15PBGtsMefiSOu2VPcfuIUNOse3+VfMKmqsLdX
+ dA/RVY3KVFbp82DPIaZdRfhrIJPtYuc=
+X-Proofpoint-ORIG-GUID: aLX-vmF5DLmgtDhUi3NIopgmqQYIvWjm
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0
- adultscore=0 bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0
+ malwarescore=0 suspectscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130053
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130060
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 08:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128936
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 08:49:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/128937
 
 Update SRCREV to include upstream commit 3edb90201 ("Fix two compiler
 warnings (#6669)") which removes an unused variable 'qu' in
