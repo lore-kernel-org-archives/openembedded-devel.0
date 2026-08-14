@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17EA5C5DF6D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05AE1C5B572
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:18 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24364.1786747573807621612
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24366.1786747576197862084
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:46:13 -0700
+ Fri, 14 Aug 2026 15:46:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=qtCH0NqE;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-c9ef3e1337fso1153411a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Hq2cBcSs;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-382ef647e20so1539011a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747573; x=1787352373; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747575; x=1787352375; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ks9ZFGcdsXb+4dZs9OZ21Vqj6r/95wyNVTPI4Pji8Rs=;
-        b=qtCH0NqESLMpRaUxldQfYRTT+qiM7O6iYsoJXqlrMFq5Z1DueIUgBt6E9rCoxJOb+2
-         FOCkX+1GfaF9ed+BZ6/iVsMGQcXDVMU8WqZydC4UfsmBX8znjFOSrq3sui3LGzgZ+DaI
-         KQqh3RlRO2GPwCUNLXoK8lazbnOqc2VqpNqgt86uBz9kvKrNKFtnf1HqEAv7h8CGEf6L
-         nVeOiNOnwh5S953XpEzu+LMOGcez64yAk7klMHzkK8ce67nSJ/qFOzKqoi7SgeRMhoJb
-         LHB45GddGH1R1uY8XvY1uJDvqhk8p4o+EtYK9omlAV6NVc1wye3M2o61NyKHXXgODccJ
-         k3xw==
+        bh=9KjjhWuNiwc+olKf6I5xYjiEKAl8wGqHNoR6oiknskw=;
+        b=Hq2cBcSs7/hZUhg5QKwN4i36Y+k7jkEIxRAnjgtroYgfkusON/UqkbWTGMwAgO+FO7
+         cKaIVqwG8eRyILHJMgV0z+QEKOT/0N6t5eyqoheNMj/MSmtKWNr9sxlDzg+xGwTmZa79
+         fKP4cBuys33HGIUuqLhOsv+BgEGGRtGnBAdUjuJqRfnH4OkafiR8M+GW17b5QO4mUStn
+         QCZgQAM5/pN3JoCw890qy5FnN9whML+9J1nwQACs1BW6cRoPB96V4KV1sbVdNuU9hjxB
+         mdVEzFNWo8Nl51Y9fYli2ytZWa1qW/bDZhelRuO0u4Ga4NTCB+POnsfclIEcleYXsLoW
+         uBHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747573; x=1787352373;
+        d=1e100.net; s=20251104; t=1786747575; x=1787352375;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ks9ZFGcdsXb+4dZs9OZ21Vqj6r/95wyNVTPI4Pji8Rs=;
-        b=O5zWQ2hAndRC3ncik1BnlLlapPaJhaB3cYx/upfxPNmskkxq22/6Fpmo2Usa04EtfQ
-         mtvH1zANwbNJqkIWQBmleb7i0Ud9RJ8hQF6tWvnN2m1UA1BrKevZn8sYXH4MYe/EDybz
-         PkWgALLWsyjDhxKtlSdL0Q2dtK9/xwjUFPNwNpPgoCIo74ncKuPPEn9kZRf9pKF81j2L
-         mwcIKUauqaujwYHD9+LTcuvZam2SspvJwoQugJqbp5ofo1OkPN31CYIyp3nNM4GF4gxT
-         a+BsKfGFoKgu5WutCqlwiMqDRD/8TjQvhZ6Ju8/x0dOzHbyacRgQTrCcrsVn/2lWE64K
-         lgrw==
-X-Gm-Message-State: AOJu0YwMFTX3lhrorCxWNfvQ83kjLpox4yBVK6PEignn1+ku48M4VCl+
-	zh5itjK0Rc3x5tGvpBgTo98m/I37WSKdtU1YEKQaSQPbCAswNqC8G1iIVNmqiWO/
-X-Gm-Gg: AR+sD13urLtczRlFbuXGKi7lUz/1uFdvP6/xuMP4Ye630NpqjYUFX9d3bhor3bJxa9P
-	IygBaA8V+3vhiey44muBrDb7qenA2IEnkq0v0ikq/L+TIPFskSNPQrs/8rc6YEfJ60X1Ykn2SRh
-	4lv077bPjtJ7JPo0nUrU11eIh1LWtZ/n/WEYq1P4ticgIGVogVsnNXVfS4QR5K6u06E+9beBzRO
-	T70jFpqtmcrADal/w1gdnOYsvMCCRHzqkc0fDlFDnlencXyG6wy433mJnf9jByUV3Plggst8Usc
-	eCam9+0AMo1ks7hGOhDuqcK5dXHWE3mpOfhpQ0/w8ZwbdjMO4tyfHTYuuOWUVHaCKltZXzDv7fa
-	+yi2jeWmYOnPdcaYsVcrh83puUC3KkzdTcz+U3LhpFk5Zs59Rp1K+HF5eb0xPLALMSkilqaut9I
-	AZn2ySTojxKx0R9GnJy0k+wibvHU4AxBttpBt0Tz7M6JdY3C1SZ8t1dTYHqoFkayWCBX8ldrquG
-	Qx6X04SraKaSz+fOn6Xd/LL7+QudTaW3/dEEfwDV4SNDmjFiSX5oEagmqtdkgow0U6Sx/pG9vp2
-	3ZGqYTAWWla5RAL7TDUjafqNjJjqt8GL+LqO8YQ0kr0ZYd5m/ow2PnxJedpakd9YcHvK62a4zNx
-	/b3chotgZl0K3Iig9/317SsLeNmmTS6ey8zPZuLYN+IYDxg==
-X-Received: by 2002:a05:6a21:7111:b0:3b1:882a:607b with SMTP id adf61e73a8af0-3cc71d24898mr11533543637.22.1786747573108;
-        Fri, 14 Aug 2026 15:46:13 -0700 (PDT)
+        bh=9KjjhWuNiwc+olKf6I5xYjiEKAl8wGqHNoR6oiknskw=;
+        b=HTNp0RasmVUwgzdw9AHdJR0SghcEs/Dz0KgVjQ46+MVoBc/myWNHOK6jAePkJe4URW
+         9FEbFHPkb6aEt+JRXofvWPSRw/q7aphK/BzCc2vlYkwL0RXz4QWDjezunJd9BV0rq+xi
+         cGuel0tqMqFXr9s5DN3DuqRDI6pF646zgO6x2wlZhfGwIKm/+P/5NCH9YhGS6TBqF0/n
+         1JFGFrQ+UcI8NGykrxi0nyuHCgP6qjnwafiqwwtV4IIqzkF67dY+c9/AVRN6QmDkegSQ
+         mDKNnrgox9Ej30e/5tr3jwvuJbw6MSV2h540ylQDAZfzhO0GH5I31a+p7z3Nxf0M772o
+         edkA==
+X-Gm-Message-State: AOJu0YyxQYgb8icZWQhxmmH8I3NhU5g4X/9V4/DZjQ+lPH0pRNJkrTZp
+	Yf79B6gtZm/3h8b8CYkBnxg0VGDVAvryrZHwf2nObzmtrhz3JNsSqIjyCCzGXQ==
+X-Gm-Gg: AR+sD131J/LZbv5vVNUbEKnfVcx9B92VIRfEanaG+6I9Q6JZ3rAmcgb1xOU2+WR0zE5
+	N2JvkDBNyPtgSvDWsy87dUaA+fPlFfDBPAGIcgcwQadfn99yuhWaoZTY0VvmlPTFNZlNBLS3vV/
+	CkhlQCB4YlK6BAU/KvwSacUA73S18HTTrgj5qgS1Iv93Q2s1WuF7U+2iNngbV9ibQYk2IsXWNNi
+	g5Q1ilK4eL1FiD+7ptk6/9RUsbH2WC/sd7+TzMLQKzCp5AmWEvFSGgwp1n/0dsKj+CyohOCR7cU
+	t8Q2IUjtI0LQD+AqlVyyGtbIjMQYmnUcotcBHWmn/Q1ZnXD2MoKbjyQafMnzEVB7oYWS+0nnDIl
+	ZxESCmOrDBEN2yyVhtoA0HKWEWIqGLtlHdc0fPSfMDW173fFDkdIDMv2/WnN1HBUrVezSCoCIbv
+	o/Ia/IwKLidtn75rsnmtwlVWkUGQiXkBHAqNjSCWJrPb/h13uHsGT38N7NoaAKdtz4pJLoRrHop
+	dzoUDR8a1ZbFYWgbrmFxyYEDlHNkBZ+DNwVpF00wsejflyWIKB2UBuDOghzE9kylm70MiM0UDGn
+	O3NO1J/MM2alyoP+svihRwZH1PrRu6OBDSIWI0LW6hnkmE2+MMVVUgWFTF6B2BCqyOTUelx9Fqe
+	RdNyDvUCTg+lIEeMaT2vxqjLbJRmnhcrD7AVnn/huuYzuXA==
+X-Received: by 2002:a17:90b:5624:b0:38e:7f1b:efa with SMTP id 98e67ed59e1d1-3933e5c4f30mr10564421a91.11.1786747575544;
+        Fri, 14 Aug 2026 15:46:15 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.12
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:46:12 -0700 (PDT)
+        Fri, 14 Aug 2026 15:46:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 028/109] ipc-run: upgrade 20231003.0 -> 20260402.0
-Date: Fri, 14 Aug 2026 15:44:14 -0700
-Message-ID: <20260814224539.1523174-28-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 030/109] libcec: upgrade 8.1.3 -> 8.1.4
+Date: Fri, 14 Aug 2026 15:44:16 -0700
+Message-ID: <20260814224539.1523174-30-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,37 +71,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129092
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129094
 
-Major release; see upstream release notes for details.
+Point release with bug fixes and minor improvements.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../perl/{ipc-run_20231003.0.bb => ipc-run_20260402.0.bb}   | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/perl/{ipc-run_20231003.0.bb => ipc-run_20260402.0.bb} (75%)
+ .../libcec/{libcec_8.1.3.bb => libcec_8.1.4.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/libcec/{libcec_8.1.3.bb => libcec_8.1.4.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb b/meta-oe/recipes-devtools/perl/ipc-run_20260402.0.bb
-similarity index 75%
-rename from meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb
-rename to meta-oe/recipes-devtools/perl/ipc-run_20260402.0.bb
-index 77fcebd846..fa4ffd5907 100644
---- a/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb
-+++ b/meta-oe/recipes-devtools/perl/ipc-run_20260402.0.bb
-@@ -6,11 +6,11 @@ styles are both supported and may be mixed."
- HOMEPAGE = "https://metacpan.org/release/IPC-Run"
- SECTION = "libs"
- LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0ebd37caf53781e8b7223e6b99b63f4e"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0cec6aceee7559197f14caccd0f4c2f9"
- DEPENDS = "perl"
+diff --git a/meta-oe/recipes-extended/libcec/libcec_8.1.3.bb b/meta-oe/recipes-extended/libcec/libcec_8.1.4.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/libcec/libcec_8.1.3.bb
+rename to meta-oe/recipes-extended/libcec/libcec_8.1.4.bb
+index dd118753cd..4513bf502c 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_8.1.3.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_8.1.4.bb
+@@ -9,7 +9,7 @@ DEPENDS = "p8platform udev ncurses swig-native python3"
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
+ DEPENDS:append:rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
  
--SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=master;protocol=https"
--SRCREV = "ad56c3b5f5a211d32bbb8ac29f180d707ee58c1b"
-+SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=main;protocol=https"
-+SRCREV = "a8232b0a3e0e713696bf6bb8f970c561d0fe3d8f"
- 
- 
- inherit cpan
+-SRCREV = "bfc6a5fe0425d09f02e282f676113cc3150c118f"
++SRCREV = "0b7bb7bcb64ed256c9e427420e21247bb7fa20a5"
+ SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https;tag=${BPN}-${PV} \
+            file://0001-Enhance-reproducibility.patch \
+           "
 
