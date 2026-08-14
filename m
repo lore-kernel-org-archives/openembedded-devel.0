@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 453C2C5DF75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DEEAC5DF6E
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:11 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24398.1786747624790543468
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24401.1786747630364763364
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:47:04 -0700
+ Fri, 14 Aug 2026 15:47:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=s5+o22mc;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cbedbaba5fdso1004403a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=efgEIy4j;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so1466704a91.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747624; x=1787352424; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747630; x=1787352430; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=btv0bWUBO/Qnsquo4KHFoQqKKf9wqB9huR0sw04z2BQ=;
-        b=s5+o22mcoMXxuPezQeVg7KyLTVgVSXtbyONZLmTzWnoZoqaiLSJnxmvQgBJ+x4zORi
-         xUTOS45tqunjIEi88KrSAsj3bvLMZy2DrhQ/UbosW1EWIfp9J1wCRnECcNyrohY59LuV
-         aorRnYVKzdL33r4C4z8hdfFqVVIzO7ppxmtdn/ozBvUWw5b3lCyfyaqg89VEG1p52The
-         LFwI2MwvqhiJSxM3G/PnNtxI11+DelKmF4bvr3G1OZW7nGqeGrGAtLQvWiumhGabqL0L
-         M8qLPq6LeF8r04Mi/gO/LENmsoa4IT/q7DWuNOOp7XR28gQR5OkpjZbTTdqqDMnDV1ev
-         g9cg==
+        bh=FAX6kjqWkL1ywycTyZp5NAuEpperXQ5nR9LcJmz8nz4=;
+        b=efgEIy4jWMR+luYX6uB2nwuEJ2n/Jz+XU4DJzzePuhibpbDn3LMXbjznLttVXTLvUy
+         eePe5PaAE86rDh84NWxVb9Pq/+KabJSWbTxrNWuBOKGzK87LtytN0l7Nm9DrB2FpMTPk
+         BVJOBL3qkX20nXELdcF6rbFJ0o14VmiQzIG6DdvS0C6jqiTxNpUtKAW8yOej8CgPTIsm
+         Pyo0jgYX5/zubpNjJI+ZuPJO7kTSCGNlKG0Yx82TREUCzWLeSLarh2IznL20HL8fRiJu
+         p3cs/vrfypw+uoFKiR6NWexOC5+qAk0HhLQLA89m1YXESIzLUUGyKYxGaIMr6ijDcvAR
+         /mcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747624; x=1787352424;
+        d=1e100.net; s=20251104; t=1786747630; x=1787352430;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=btv0bWUBO/Qnsquo4KHFoQqKKf9wqB9huR0sw04z2BQ=;
-        b=ieXxsTmdAmQBBKDkrcVG3E/62Of+hlVQZURrc8tSZvCttfQoW4qW74nynxXamlIfHD
-         ixcYUR7MV28/Vk+OSg7FMeRE9Pn+quGJ3Mssrqbpjy8AkgCmeBRUIPSFHF17EHShAR9W
-         eucq7xJsPTx6FTY0dPdhfbtEN/PxEWiPrg4JMQvF9tsvmyF9GPnqcUXksdSYEcRbp/GT
-         C7UmywpjHNPn7UpvlGosYI5AJpFBW9UlmZux+cUIorqOrv8Q9k35d6IgGhA2gzUKyRqx
-         7W8aHjxXxKTSKtA9cH1Hlf+fZ2iwfWgsK52Cg//ba2II5DsmRQFZIbL77/toGhHFWiHv
-         qw9A==
-X-Gm-Message-State: AOJu0Yx3H9PnZ0tz+89g1hJkI5VJLR9OX2CEZmP++ggir/bbju/QVkSa
-	5Tod1OExZsn9qWiN9hjmLb4O18YrD9fK+76GkgBglURF9zZ9tom0yWkQQAnhK4BU
-X-Gm-Gg: AR+sD10E19ujxwVQS/D5MQHsllNLyabMpk8FhmgKBgMCObrwy/MMy86iLAU5SyKfmdG
-	JpN69CA6TX3JJOSoEZe5WRkbl+mHluC402R1vrj/ZGysta+3Uy0RA43brnDGRtDSzi2eDSJuCbk
-	SMKXn+E6R41rUSWLfMRfwRVLTB6r12vL4veEMkkDMJeKZcKTtc9+cfVbFdHClgu+u3MtTPG2rdK
-	Ktd3OHE9lZSVe07C8j0G1OVw0iFEZpL7QCfz2A96/QGcT260xI7fRBckTP4aAUYn89X+YIoa8uu
-	YbYziSyjZtKJXsrduiPC9Md8ia66XZ0T5tOZ8DOgnSdUC/1CzJtrfzKqAkwSQ0KOXPL5JKKpEWN
-	peEEDaApDgkNVCF+JyW31ookgoB3mpLDEuE7VDilkLMEeGMjtnfPkMWHlfaGTXEfRQIwsz2AphB
-	klmO6wRlivp5/uGl0zbNzDHPgiMiXAAWt0jl3uQgl6sTaqTQ2+l5EQUYixOjN8ItOBRZTUzrjkH
-	mVuK/P8lZg93K3R1j938kBgvcs52aXjIukuK+vokesXXddFhuqBAeY9kku94wzqLWCju5SUdoMy
-	uqr8umxLeAJEQSaI8dYFz241M23nr/egO6uzCIbK+3DhZOd1FXlYFcUksDb2whNKNqGJbsYE+fC
-	5MC/QuupmLxYziJONr0V0IF9tjMbaEzHvbPsIwRuWPllQ+w==
-X-Received: by 2002:a05:6300:670a:b0:3bf:63af:855 with SMTP id adf61e73a8af0-3cc7199308fmr11476125637.1.1786747624052;
-        Fri, 14 Aug 2026 15:47:04 -0700 (PDT)
+        bh=FAX6kjqWkL1ywycTyZp5NAuEpperXQ5nR9LcJmz8nz4=;
+        b=Ujz4PxzpSD4/fiKNP+frBibK2wA1vLSX7xCtHkmbdOjPLi0cwHTNPhIPq99BjOAYSl
+         W3BmWaFXX0U9v+01+bp57eIVcc3ONHfpumS8vZLXWEvO7QsNjCMDNkg+785pschbHc3D
+         kbt3/qMsAOGzeUtbhC6g9B8nF9C4h0Jxk80rx4zd5YPnS8eqq7z/ycfpz8j1xO21lHns
+         T/j8W1DVx6ZdTbi5IREYAMp+sVX9wEK6B8DaqQw+5q3Di1ck99kpcO7VjZxXYFKmrTch
+         wNUqXiE+RQmyanayfLSxguAFP3fHD5QAjRS7DH8/rVNSs8UVKjuRwKccmyT1eNakYVgO
+         0lcw==
+X-Gm-Message-State: AOJu0YyoyzMhIA7Ry8R0/diZ8mdU4+ug8ulKWFfW2CWFhLm0VTcz8gab
+	mS9nHBUTirkKjFfXPcRKulqLWxoteYi+JsXZzGatQCM3ryqfVAcsyyRCyKav9Pcv
+X-Gm-Gg: AR+sD10h6YpiDOGiuw8nIrGyXQQSdkev/zr82cCbcvFIsJWf52RWIjepwEDFDkR020x
+	VvNAz3Ljs8ndLEldGx/qDkqAj9yRoY+Ax16aucsPpMJi5oLdxEQRxDJpYN1YbxTuCPhxepoI1WX
+	2d0tpbLb1HqffNroyrz+nnPS/ySfjBsJbmWmPoqKwOSZC/bY7Wy3AIiGG/JQMvriXigO3nm24y4
+	GxE3kE9brEqzBrUqSecT5W+uIYEAupQQyXLlXgOSuojYgP4zGrBzIsWZTTjR/aJIyipb5nCG+Zd
+	l5lzmWPUBnuIB8Y/VOjtyyxxw72rEBV6MZSHySsxr7eiVNsVtMveNA0GU3bvZIVNfnyFQfonWXj
+	0apdWF3U4AJh+U+j4MtCq4/S1HKixH0DrUB9NyxJwQ2slLcyrxYvhUTbcsS/1/zltJuSjI2wCkn
+	XIN/tUPHmHRoL/E+sE2zIPuH0E5SUPAiyLkA+DMDBhDNR7h3AuVaHbn/ip+spnUym0+2euzwUw5
+	FQTETS2zrhrNVO2MQZST5Jo/EJxRNnQvmONwQXOcA1vOR+JL0hivLDGzoaeGc7Y5oIPjF2SxdBn
+	OAM7Q7mtNz9xzPSBUchrpPeNXVE4rVVb51khCMl2p3uvi1/zDElLgfmkjU218aa/b150QfuCVnp
+	Lfo2F6btjO6NpIt3yFjxZ5HlghZttuzUuO55sKH9BAqv8wQ==
+X-Received: by 2002:a17:90b:52cd:b0:37f:df85:272f with SMTP id 98e67ed59e1d1-3933bad2bf5mr11018039a91.19.1786747629632;
+        Fri, 14 Aug 2026 15:47:09 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.02
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:47:03 -0700 (PDT)
+        Fri, 14 Aug 2026 15:47:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 073/109] psqlodbc: upgrade 17.00.0007 -> 18.00.0002
-Date: Fri, 14 Aug 2026 15:44:59 -0700
-Message-ID: <20260814224539.1523174-73-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 077/109] minizip-ng: upgrade 4.0.10 -> 4.2.2
+Date: Fri, 14 Aug 2026 15:45:03 -0700
+Message-ID: <20260814224539.1523174-77-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,165 +71,61 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129137
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129141
 
-Tracks the postgresql 18 major release this driver targets. Rebased
-psqlodbc-fix-for-ptest-support.patch onto 18.00.0002: upstream now generates
-a second (ANSI) DSN block alongside the original Unicode one, so the
-localhost/postgres/5432 test defaults are applied to both; upstream also
-added a server_version parameter to runtest() and native TAP "ok"/"not ok"
-progress lines, neither of which this patch touches -- it continues to
-reformat the final per-test line to PASS:/FAIL:, which is what
-ptest-runner's log parser matches on.
+Minor release. MZ_PPMD (new default-on feature since 4.2.x) git-clones
+ip7z/7zip over the network at configure time via CMake FetchContent;
+disabled it, there's no network access in the build sandbox and nothing in
+this recipe needs it. do_install:append's post-install sed also needed
+retargeting: 4.2.x renamed the generated cmake config file from
+minizip.cmake to minizip-config.cmake.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../psqlodbc-fix-for-ptest-support.patch      | 44 ++++++++++++++-----
- ...c_17.00.0007.bb => psqlodbc_18.00.0002.bb} |  2 +-
- 2 files changed, 33 insertions(+), 13 deletions(-)
- rename meta-oe/recipes-dbs/psqlodbc/{psqlodbc_17.00.0007.bb => psqlodbc_18.00.0002.bb} (97%)
+ .../{minizip-ng_4.0.10.bb => minizip-ng_4.2.2.bb}     | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-core/minizip-ng/{minizip-ng_4.0.10.bb => minizip-ng_4.2.2.bb} (73%)
 
-diff --git a/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch b/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
-index a1f60b2692..140342d5ef 100644
---- a/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
-+++ b/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
-@@ -9,6 +9,13 @@ Subject: [PATCH] psqlodbc: fixes for ptest support
- * Fix the output format for ptest.
- * Fix the results and exe dir.
- 
-+Rebased on 18.00.0002: upstream now generates a second (ANSI) DSN block
-+alongside the original Unicode one, so the localhost/postgres/5432 defaults
-+are applied to both; upstream also added a server_version parameter to
-+runtest() and native TAP "ok"/"not ok" progress lines, neither of which this
-+patch touches -- it only continues to reformat the final PASS:/FAIL: lines
-+per-test, which is what ptest-runner's log parser matches on.
-+
- Upstream-Status: Inappropriate [OE ptest specific]
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-@@ -19,10 +26,9 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-  3 files changed, 16 insertions(+), 16 deletions(-)
- 
- diff --git a/test/Makefile.in b/test/Makefile.in
--index 3f9a9af..09406ae 100644
- --- a/test/Makefile.in
- +++ b/test/Makefile.in
--@@ -19,7 +19,7 @@ CPPFLAGS = @CPPFLAGS@ -I..	# config.h
-+@@ -19,7 +19,7 @@
-  ODBC_CONFIG = @ODBC_CONFIG@
-  PROVE = @PROVE@
-  
-@@ -32,7 +38,6 @@ index 3f9a9af..09406ae 100644
-  all: $(TESTBINS) runsuite reset-db
-  
- diff --git a/test/odbcini-gen.sh b/test/odbcini-gen.sh
--index 2eaba35..d7c03ba 100755
- --- a/test/odbcini-gen.sh
- +++ b/test/odbcini-gen.sh
- @@ -6,7 +6,7 @@
-@@ -44,7 +49,7 @@ index 2eaba35..d7c03ba 100755
-  driver=${drvr}.so
-  if test ! -e $driver ; then
-  	driver=${drvr}.dll
--@@ -16,7 +16,7 @@ if test ! -e $driver ; then
-+@@ -16,7 +16,7 @@
-  	fi
-  fi
-  
-@@ -53,7 +58,21 @@ index 2eaba35..d7c03ba 100755
-  drivera=${drvra}.so
-  if test ! -e $drivera ; then
-  	drivera=${drvra}.dll
--@@ -52,10 +52,10 @@ Driver          = PostgreSQL Unicode
-+@@ -52,10 +52,10 @@
-+ Trace           = No
-+ TraceFile               =
-+ Database                = contrib_regression
-+-Servername              =
-+-Username                =
-++Servername              = localhost
-++Username                = postgres
-+ Password                =
-+-Port                    =
-++Port                    = 5432
-+ ReadOnly                = No
-+ RowVersioning           = No
-+ ShowSystemTables                = No
-+@@ -78,10 +78,10 @@
-  Trace           = No
-  TraceFile               =
-  Database                = contrib_regression
-@@ -68,10 +87,9 @@ index 2eaba35..d7c03ba 100755
-  RowVersioning           = No
-  ShowSystemTables                = No
- diff --git a/test/runsuite.c b/test/runsuite.c
--index 6ac3709..023ac1d 100644
- --- a/test/runsuite.c
- +++ b/test/runsuite.c
--@@ -55,7 +55,7 @@ bailout(const char *fmt, ...)
-+@@ -55,7 +55,7 @@
-  
-  /* Given a test program's name, get the test name */
-  void
-@@ -80,7 +98,7 @@ index 6ac3709..023ac1d 100644
-  {
-  	const char *basename;
-  #ifdef WIN32
--@@ -69,7 +69,7 @@ parse_argument(const char *in, char *testname, char *binname)
-+@@ -69,7 +69,7 @@
-  	if (strchr(in, DIR_SEP) == NULL)
-  	{
-  		strcpy(testname, in);
-@@ -89,16 +107,16 @@ index 6ac3709..023ac1d 100644
-  		return;
-  	}
-  
--@@ -131,7 +131,7 @@ int main(int argc, char **argv)
-+@@ -139,7 +139,7 @@
-  	failures = 0;
-  	for (i = 1, j = 1; i <= numtests; i++, j++)
-  	{
- -		parse_argument(argv[j], testname, binname);
- +		parse_argument(argv[j], testname, binname, inputdir);
-- 		if (runtest(binname, testname, i, inputdir) != 0)
-+ 		if (runtest(binname, testname, i, inputdir, server_version) != 0)
-  			failures++;
-  	}
--@@ -161,29 +161,29 @@ runtest(const char *binname, const char *testname, int testno, const char *input
-+@@ -169,29 +169,29 @@
-  #ifndef WIN32
-  	snprintf(cmdline, sizeof(cmdline),
-  			 "ODBCSYSINI=. ODBCINSTINI=./odbcinst.ini ODBCINI=./odbc.ini "
-@@ -115,7 +133,7 @@ index 6ac3709..023ac1d 100644
-  #endif
-  	rc = system(cmdline);
-  
-- 	diff = rundiff(testname, inputdir);
-+ 	diff = rundiff(testname, inputdir, server_version);
-  	if (rc != 0)
-  	{
- -		printf("not ok %d - %s test returned %d\n", testno, testname, rc);
-@@ -135,3 +153,5 @@ index 6ac3709..023ac1d 100644
-  		ret = 0;
-  	}
-  	fflush(stdout);
-+--
-+2.43.0
-diff --git a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_17.00.0007.bb b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_18.00.0002.bb
-similarity index 97%
-rename from meta-oe/recipes-dbs/psqlodbc/psqlodbc_17.00.0007.bb
-rename to meta-oe/recipes-dbs/psqlodbc/psqlodbc_18.00.0002.bb
-index 92ee2594f9..ae1d603e1d 100644
---- a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_17.00.0007.bb
-+++ b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_18.00.0002.bb
-@@ -26,7 +26,7 @@ SRC_URI = "git://github.com/postgresql-interfaces/psqlodbc.git;protocol=https;br
+diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.2.2.bb
+similarity index 73%
+rename from meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb
+rename to meta-oe/recipes-core/minizip-ng/minizip-ng_4.2.2.bb
+index 2e7f438821..84ab08e981 100644
+--- a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb
++++ b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.2.2.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master
             file://run-ptest \
-            "
+ "
  
--SRCREV = "8038cee43d6dff468320008ea928f3eaa1186726"
-+SRCREV = "95b35ac7cb2c9ea9df087fda08a695d89b8f8134"
- PV_WITH_USCORE = "${@d.getVar('PV').replace('.', '_')}"
+-SRCREV = "f3ed731e27a97e30dffe076ed5e0537daae5c1bd"
++SRCREV = "7b2387161c542fa9f427352dcdef76097d0d692b"
  
- DEPENDS += "postgresql unixodbc"
+ 
+ RCONFLICTS:${PN} += "minizip"
+@@ -19,8 +19,12 @@ DEPENDS = "xz openssl bzip2"
+ 
+ inherit cmake pkgconfig ptest
+ 
++# MZ_PPMD (new default-on feature since 4.2.x) git-clones ip7z/7zip over the
++# network at configure time via CMake FetchContent; disable it, there's no
++# network access in the build sandbox and nothing in this recipe needs it.
+ EXTRA_OECMAKE = "-DMZ_FORCE_FETCH_LIBS=OFF \
+                  -DBUILD_SHARED_LIBS=ON \
++                 -DMZ_PPMD=OFF \
+ "
+ 
+ PACKAGECONFIG ??= "zlib ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'test', '', d)}"
+@@ -30,8 +34,9 @@ PACKAGECONFIG[test] = "-DMZ_BUILD_TESTS=ON -DMZ_BUILD_UNIT_TESTS=ON, -DMZ_BUILD_
+ 
+ 
+ do_install:append () {
+-    # remove absolute paths
+-    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/minizip.cmake
++    # remove absolute paths (4.2.x renamed this generated file from
++    # minizip.cmake to minizip-config.cmake)
++    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/minizip-config.cmake
+ }
+ 
+ do_install_ptest() {
 
