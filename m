@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B829C5DF74
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B7D5C5DF6E
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:18 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24361.1786747569691115366
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24493.1786747571901139247
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:46:09 -0700
+ Fri, 14 Aug 2026 15:46:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BMjQYpfv;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-39266382df6so1322405a91.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lc9SoAJE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc11a30a259so591038a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747569; x=1787352369; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747571; x=1787352371; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=T1E/3QazzmeijPdLiYrIybRKPqTXnWY/YZk2MAzzR8o=;
-        b=BMjQYpfvNNF8tRIUMWaBiENlacK2gnoWhFQQLLzAhTaFcCoRqmMOj5sBxbbiG6sf8D
-         Y27tFA8rRfqsa2fRAJnPSe4x0jnjvKa6iHTveyePB6D4wbdm3rWxUrM7axfPgsJmUZN1
-         NfwWcNui5d/HmUDiXEmBgrXsdkvOg1zJ08JihI2fx+nrkS0GPQXzH7xy0bWQy8Rs0Ln8
-         nJB1nBDPdpqZUkmjhGc3Z9BDJM5UbZhKlAVfmy7mNHFOoug/B6pL7pQk3JdVRfBv/XDe
-         MmzzBe2qNEczZ1NudJpbKO9jPXhNQNqhNSbU9bzDkp339mYP5byT3RGoJ1osREuSKD24
-         zHBw==
+        bh=ius89W9zMAxzGkdgXgU15/JnoGG0kAY5cqYYFjQQjdM=;
+        b=lc9SoAJEp0qR9NxZEexOWkiG21tijp31T+Sr2uN1HDmc+d6p7a1p8/ibAI0lgyDm2j
+         FytmjppobJml6B2PX6zLQQmsfHRDt2LetHKLTaWhWiETFRlDgqo/BhAoSSKk+CAddHhf
+         d8CrMhwGAj8ZsmW3WDj+DxaNvl1Lhx20BkIeFVAcOlR4I/INAPTcoRK8/znlYoBklA/v
+         p8ohUIQeFD/nPAA8CLqGksdQ9l7S8M2Mz8sHcT7ia1LEAyFN1G0MzVd+mbpvrIDCVta/
+         rv5ZWtM8AyZFOEup2MVcuLfts4u/nmnTAk9cjJiU0SQx1aeBgFFZG9ayr6twdQJX2WE6
+         ekbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747569; x=1787352369;
+        d=1e100.net; s=20251104; t=1786747571; x=1787352371;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=T1E/3QazzmeijPdLiYrIybRKPqTXnWY/YZk2MAzzR8o=;
-        b=CpRIh7dH1dbqy3/O5Rw6H3IXbwXK2TRA28oKohjZPjyDETaAlUraRPCF9xBZqyP3qy
-         y/6HEnD9DbzFMbJWPtUQLjxqIToCY/2wjaCqgGkUGKZbvaKLMOORKq9ZEss4MUzrnrlB
-         BhsvundqAugylevOBl1lV/gh2mJUWxJeke8UajDi6MF3xaMoDcQ61dEPgN8IyvMTvpgR
-         t30bT0F1Yw6ueRCdhdNdQZRx0kWgi8OsycCPotn3EJaySmS8+LDfLzFuTrCWKZPZPwx+
-         2MZLVzsT3OEGQITp5nfIIVl0Uvdx07RcIutURNFnaIW3j2YoUITPTmaWTEmrXQeak4tO
-         vjUg==
-X-Gm-Message-State: AOJu0YzXpvFI7OXkqoxbBQjiluWhexfVLLvhb3QhisN0R4bDK3LDFcIk
-	BRVVnzAdg5u7HKrzW9jQG2rcgoObXBhUAa8woVYOmbMTnfLklgvjfc/FuVVOqI8l
-X-Gm-Gg: AR+sD13jGYdW5vSRHX3Dq2vg0tQ0060kEy7ouBA/naxd2AofUxb9LCeWEnpcnsr7SBn
-	kAaxNrZSgvuc0kB9UpoLFOKixIwXLHi4sqKtl/1vWYvekTBz3QQ3AZUkurXoOaKUOGD3jPbslQR
-	LeFVkYroDIqkeIdxaHogoGyMOMCk0EXY7s/rYDBPFWH4u8Mjb2OTd+Sxol78BjiKRD3UauQdMYg
-	eA54NovZUPvcaXEhhVyvR67K7/hd/0yaCvAPvapC/Mz6Ua4bnOZe0z+AuPDBF+onqHF39UuYo7y
-	xkUiK7K8YTo7H8ZxOCy2Z78GIe1Xtrg58i0ub2gihw8R6pKu3OHBhUlRFKgPRoHzG9vINFahUhl
-	clTh9prLke5OeBEeVrOY4pmmwhuhdVRdikq618f4/y5nAWoW9yT2WLE44TdKgz9iEW6sb5hRaBS
-	5qyal3LhzqcqmNQu2oxwzzQAOsgHxY670arHq4tSLzkTEvjx+54tLmQuwXSklPkb7UbYoUuLsar
-	Y+baXB+GR7+IUzng3XgaJBHbOUecl0s8aq6dyzJyBfTEFKWEqeV/WPkIvLmIN/554NKwjWJ2Tkb
-	5Gb5yjIJTsJjY/48qkHDCSYAT5lY+aQ5qGMA1KJ+I51LgfaprCA8Vm6OYGLasNBTbH/lcZn8+zf
-	3Ehk3ARuoMZpaMo3vj5VtZKLsVZa/48pLfHIV/U84Z6Z1Kg==
-X-Received: by 2002:a17:90a:d88f:b0:38e:bbf1:de3f with SMTP id 98e67ed59e1d1-3933b87a74emr10790245a91.12.1786747569011;
-        Fri, 14 Aug 2026 15:46:09 -0700 (PDT)
+        bh=ius89W9zMAxzGkdgXgU15/JnoGG0kAY5cqYYFjQQjdM=;
+        b=GWE3vTKPA4WayQlbdPf68cypqRbvcp/wPodqf3wZy9ovtxE4xRb8laYaufgG2h8tsX
+         CPd1Ycnf/hibX5+cfnYQYYu6ZFPuMCqQrbY8SzRZT4IvN41gfxlj95CL1WshJZwx25X3
+         AQ4YRlg9NI2ZfKTa57JXAhcf7ZCOm7OZNl3oEroo1jbUrqEwmIQ3CzMnK5z8W2iZqfZb
+         P0YTmkFAd4x7uzUaRJDu8tu7G2xhfzlEvPorD1u+exgi0skEDkBsOxuZj115miIDakMG
+         N0Ys1dQJuXjsXHNI2TjU1QyKpsyNl5ldvOGzw7VCeivea8qoVrGGpT7GpcgO6xEGwTfs
+         Rv7A==
+X-Gm-Message-State: AOJu0Ywzw73P1vz0ohXvIdXjqxJWLmHjC/ckucXHofEadLJGAlBYpWdw
+	lINYdZHF4CCbg4kZa+KC2/8WSLknDrMP7cdSLJkVxrgUzoaWEAnv3qJMrE+gJUjz
+X-Gm-Gg: AR+sD103Fp9E4dfipCG/c5wOv7rXz62aBs4RRoPR+SnQrSkAIR0xfA6grk8q9lDSTT6
+	j3bZ4qwMG+mGggM7EWNkkcB3df/4aFN9rL3KURmBIhrOs4zTxR+fvmcahAVmQpPhdxVHBYm+l8Q
+	KiZogvG68gmm0m4FNESGAk1hGEnqvE86FY7/jg+gPSlbjsFrAdt9oaMEd8D5l3nlCQrQHCGMq2/
+	KXvWRaxy2TxvCDjzSgwiIoS/qnG60VwfzS+qKsAguHhj3C1q5AGrgAye9IzbRykw3un5MQQjSHq
+	K9IjSDoTDXJ/Q33fIFcyazZX53Gj8Uz0qx+FnXNg7LXa510iQtCgp9YdyPVf95MAqEn9HQr5WV7
+	fZsaPWZ7gY2oHsueKjutUqgCqalxOPmSnNAuLHlaX19NzFxBbBktE9IwYpoPBKDy6DP0VF51FL0
+	N1BlH92VG2XjEdpoe60sMGQwMLiLCsV4tCDLviORfMeh8zDYiY5uG8GXfwkItXQj/wlFFDRxpbJ
+	bPo3gK/ti7Dx238MxplaS2trf7CW99SINSS7RItFpkCULBfuL+CnmEiUi0Auykw6fY8qcsKIMJc
+	09ngr/HKOZHlcWI59P0L/nTVD2i00T/8v4emTteQsg66xrkwZBki2jaUfWwK+Gi4Bcl9CdYPnlF
+	koHXs1JCYF2zZj3YepxA+AXosySXfhOSHGASIROOprsanaA==
+X-Received: by 2002:a05:6a21:9981:b0:3c3:a140:9392 with SMTP id adf61e73a8af0-3cc7177a8e5mr8667189637.0.1786747571071;
+        Fri, 14 Aug 2026 15:46:11 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.08
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:46:08 -0700 (PDT)
+        Fri, 14 Aug 2026 15:46:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 024/109] glibmm-2.68: upgrade 2.88.0 -> 2.88.1
-Date: Fri, 14 Aug 2026 15:44:10 -0700
-Message-ID: <20260814224539.1523174-24-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 026/109] gtkmm3: upgrade 3.24.7 -> 3.24.11
+Date: Fri, 14 Aug 2026 15:44:12 -0700
+Message-ID: <20260814224539.1523174-26-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,31 +71,42 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129088
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129090
 
 Point release with bug fixes and minor improvements.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../glib-2.0/{glibmm-2.68_2.88.0.bb => glibmm-2.68_2.88.1.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/glib-2.0/{glibmm-2.68_2.88.0.bb => glibmm-2.68_2.88.1.bb} (90%)
+ .../gtk+/{gtkmm3_3.24.7.bb => gtkmm3_3.24.11.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-gnome/gtk+/{gtkmm3_3.24.7.bb => gtkmm3_3.24.11.bb} (63%)
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.0.bb b/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.1.bb
-similarity index 90%
-rename from meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.0.bb
-rename to meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.1.bb
-index 051dd05abe..cfabce5b5e 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.0.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.88.1.bb
-@@ -12,7 +12,7 @@ inherit gnomebase
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.7.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
+similarity index 63%
+rename from meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.7.bb
+rename to meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
+index cc1266dce6..7710ac9a8a 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.7.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.11.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.gtkmm.org/"
+ SECTION = "libs"
  
- SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+ LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+-                    file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4bf661c1e3793e55c8d1051bc5e0ae21 \
++                    file://COPYING.tools;md5=570a9b3749dd0463a1778803b12a6dce"
  
--SRC_URI[archive.sha256sum] = "a6549da3a6c43de83b8717dae5413c57a60d92f6ecc624615c612d0bb0ad0fe2"
-+SRC_URI[archive.sha256sum] = "c139f962b1575c8827cd39d1ac21b7a367be3bda1409c0c7e21a29090f371506"
+ DEPENDS = "glib-2.0-native atkmm pangomm glibmm gtk+3 cairomm gdk-pixbuf-native"
  
- S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+@@ -14,7 +14,7 @@ inherit gnomebase features_check
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ 
+-SRC_URI[archive.sha256sum] = "1d7a35af9c5ceccacb244ee3c2deb9b245720d8510ac5c7e6f4b6f9947e6789c"
++SRC_URI[archive.sha256sum] = "19e383c82d5dd89db275e00b82864e90414d4c3fb3d100b2f996bcc2338a4cc7"
+ 
+ EXTRA_OEMESON = "-Dbuild-demos=false"
  
 
