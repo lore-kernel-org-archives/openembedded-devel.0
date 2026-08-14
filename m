@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECE1C5DF6D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 428ADC5B572
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:39 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24506.1786747591013684887
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24511.1786747597802255702
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:46:31 -0700
+ Fri, 14 Aug 2026 15:46:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=lkfYcFKc;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cc11a905ba5so398766a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=e+hwf22T;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2cfbbdfa60bso15332045ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747590; x=1787352390; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747597; x=1787352397; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ctoaDeRL8OQax1QdvK1sn5fL0pLEITzVSDCcefpEmME=;
-        b=lkfYcFKcvd48Ry5tOVdUgcUq7T77MqFu1JifxhHni/HXLEC2NCioCZUjyWZe7G05d8
-         n8996/NgsENHG+g2KgXLDyEVxFUsEHhR3x+XOycaQ8MTpBIWgYAb7Xk4pDfvrZkFP6Tz
-         R5p+ltPxYZHsCd0BWFadHM4vKEDaqDM6zek1+00SRLtRXz0KBg5/d3Wxoc5nw41XlXbq
-         krji0Yhm2lGA71Q8byekidmMAHzV0PZvZPQ607GaBf75xp+K1m7hBSiUiR3vXX1tu3KP
-         DcWIazem1BWRhpBGrLG3cHCXYAV6kDS6E4uj41NKGBLIm35zGBBOvOs0rB/UJxjdTm8Y
-         SKpg==
+        bh=NCMf9npD6Y2j2neRkZp8Q6Ug3NRRUaq3FxphJ+vPIy8=;
+        b=e+hwf22TOB7q6vN/G2bFR1HnmXPguYdI27FpI3moWSSnw0CAuQlUIK1KcHPhb2UKf3
+         wwqT2NwPr1UQGaHI8Nb14T3NlrrTfe+NhZSOT3oPia1fi7tgYpQnMYFnh2ASObTYJ0BE
+         Vg/WCe0NqC2UOb2SrsStLAALvR88AIllkr0IYKH4OWYjKB7MO6guJTM+vRlDCz9CyOAQ
+         RVu7Sycyvl8df4DYw0dgQYHPg7OY57fxVRdim8FnGzO5UmYft7ZphIiE8dWJdV6SaypC
+         OjZ2rWs/55PnwrNgLwZtUiE6QmFXrbsahJM2KRmiRYeCivt35yBYtllpazYyTzejUtME
+         Ys9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747590; x=1787352390;
+        d=1e100.net; s=20251104; t=1786747597; x=1787352397;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ctoaDeRL8OQax1QdvK1sn5fL0pLEITzVSDCcefpEmME=;
-        b=NXvO95oQLC+magvngutJT/Orp2Tvsaz2u+4ySx/tyrA0noYAWCHuk9OtpYq5pAmF4Z
-         rce/xvWbqMKoQ+x2cTCv4y0rhSg7SyWjxRZgWgYeY+CQFR6q8luI2tSxjPtO+ftXa4Ck
-         z0Lrfr3iYbypHJr7ZBOVYroDGf93Xt1jMhOEmfAybp6X2cf+VpYJQfPTREExn6edWJFW
-         YNtR1bUAvkW39Zf5uNcUG0oGFLDYQhwa/dLGw01+8lE4oCNvx6mKaUJUV7ef5KypWWl+
-         3mNwL4p7TSsphzz0DhH380xBUZbnb/cyGaXXAktEksRDTiBPJfVqJy7MtUSEYhxDyZa4
-         SCyA==
-X-Gm-Message-State: AOJu0YxhpyMh8oOofHrdS2doFHBz7+ByD1k+OiI8n/G3SY4pb7CMWzgt
-	YWH7EOn7J5lABwHhQe+PzBG3Oc1KIjF5p9SeVvcDKk2sN3T9nt3apnapOXBo6vhM
-X-Gm-Gg: AR+sD10QkPGuLCDFupIXWqR7XeJlM3kcVd8ZWPUe5MGbLP0wC6c9lY9LzwLn6Kvg+/o
-	baFAFjvEQqVQjKO6a7ZBTtF/giq4RhC2idqrCmW/3kYAUzQmCHdi1t3AAYTBGeYrk3nAkle1MWe
-	dxXdCUj8S/xBSD5bGtAPlchbbgjvjJc96lgoryuvKvMviEJd4/sZcGGQP7ZIWh81ZOXlup8wgQw
-	MvgdWaDwb/+xihQs0TkoY1Bmp+xaSyBjCElUZeB2M753NUt1wY7gPfOVAKMhkV+pv6qCKbMGn6x
-	nAOERs7LO4dZ+oRFs1PCC3fX49tTaTKGLi06u1SJF4k4R7cTFuyiCHyRtFCkIhFBTf639g9rrFe
-	YRgxJrVyUtsXmd8YpgsWyQKIEbbR6bo3n8BA6SYDpdmraVzFayzDh3Cq9BnrxccgAnggZWPLFpm
-	UrFlF0X/wcmIpXoQV8n1t6wA01ZXYfxz9BschCYGAJs41Ig8INtH56NRr1VKFS1Cmucz4uHNZrE
-	VLA1UmxxDPcAXc1bzAqrHtyDP1ipHbBcHC9OdDWS3oCfxxFj4u1n4bNYO8RtZ62qRFzEqyMvDy0
-	m+bn6iWBDAn6mxAS46gC0Yoc9OHeeFX2QsZK+YU5JU00cI6Iu//5/FtrnFVcoBxRmy1taT8c8XW
-	VfJi4Dp8eG9HikNA5R/xc3G33LNQQ76IT9GgR4oNo3Z7ACg==
-X-Received: by 2002:a05:6a20:3ca1:b0:3c8:e313:8d42 with SMTP id adf61e73a8af0-3cc71d3eae1mr10942630637.31.1786747590279;
-        Fri, 14 Aug 2026 15:46:30 -0700 (PDT)
+        bh=NCMf9npD6Y2j2neRkZp8Q6Ug3NRRUaq3FxphJ+vPIy8=;
+        b=JvRrUYH3K20yG4tkVYp91MluKqgosA43F0xwjgeCGXNub09j07160oIRszUIC5K117
+         igdI7l+aRogamXnATyCW6c3Nngp/r/uUkelxdWjfq15wUgI14F0vrG+uAyzVrLkUcADJ
+         dDFQk9EzY95s7dIrCXwxsCMQrAck48zL1SDqk9JJ4Vp5vSsa9eU72BK4lDTBNe9U2k7M
+         2tHl6l1xhenr7Klo934QN8D8DELE/zgcp0056N75lsM/fjqnSjwH8c/+sErCyEOKabk9
+         1gwV9wP6kN9vR9Rd5bNjJB8ATWbj85Lz/E9XscyuKGCwNimYd1p1I9KFn6zeTvrg8D3o
+         pLwg==
+X-Gm-Message-State: AOJu0Yx8Tf7V3WVdgfBQg66OKnCBAYAvFGf+4CG0ygaSl5J4BmK6YF7y
+	N5LpFWyzr2N2iZtitxz+jHno/OTZciBJ9nGOQRf2cfLHO61R+zKqPEa6GNaBwOB9
+X-Gm-Gg: AR+sD10obNAdWgL/tGsN44dqJVTWs5UOKtqX8xJGsIOL8WdreAmyasvpUHwK0a+taQA
+	pqxk+p6IEaZ5HaJQJBDiDJnRF5LQuPfwEi0wAwSNy1qchYvn3BflPcsSIUt5ZCo1hovM2JxhPJS
+	VoPIpmMHT0sEyAk5BQIvqip8GsdPvcIVsH0YRlNZxfWbfBa8ScwJJNg/IhfxKHO43BbPfvHbbs9
+	dqlUwzRtUGVNdvCTqRJRHEqbR6UMd3GBB5BJMGNzvgmrWDf+TrOhoK8I+GGsAPFuGg3F12HAP+M
+	E/k6aTt7FYfelFnlhG7QqnJEUbdiIVQm5PbTU+l+WXg4FlVQG1zKNzfUC9ngp6f9bb1ucAPPuZ5
+	+aRBSpxUpp05CFOMEKfRNljaVuPa3WTUp/JmAgJaQIIJoQN9TI+LoR4dZT+3K/u3tCNHe5GZZRZ
+	bjNOrrTDD4XOP+I17tppKG34TntoVxYJ2o6Z/um/p7+kpTAM0Zi3J63b9VWjp4TZ5RmrLi0BQSu
+	molHaRGeloFyYU8sv50PONP4Qqe/ePjlum3/wjA+epvPtCMDJUeMRiDSZp2Hbb3LGKxIrZHpW1h
+	r+e+Yf1MykwpCEHzQpyU1zfEPFzr6cHFE/qcWmdaa3LZEZxT076btCYSvmteiMEEG6gGwb0WsnJ
+	aVrUXxFjzj5kuEZeRWZJu//pJCE4s1W0VVBebHEBVjtGGpY4bdJOYU0ZA
+X-Received: by 2002:a17:90b:1d45:b0:366:10f1:3d91 with SMTP id 98e67ed59e1d1-3933b7c3b71mr10676805a91.1.1786747597082;
+        Fri, 14 Aug 2026 15:46:37 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.29
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:46:29 -0700 (PDT)
+        Fri, 14 Aug 2026 15:46:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 043/109] libtorrent: upgrade 0.16.12 -> 0.16.19
-Date: Fri, 14 Aug 2026 15:44:29 -0700
-Message-ID: <20260814224539.1523174-43-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 048/109] opencv: upgrade 4.13.0 -> 4.14.0
+Date: Fri, 14 Aug 2026 15:44:34 -0700
+Message-ID: <20260814224539.1523174-48-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,46 +71,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129107
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129112
 
-Point release with bug fixes and minor improvements.
+Minor release; see upstream release notes for details.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{libtorrent_0.16.12.bb => libtorrent_0.16.19.bb}       | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_0.16.12.bb => libtorrent_0.16.19.bb} (79%)
+ .../opencv/{opencv_4.13.0.bb => opencv_4.14.0.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/opencv/{opencv_4.13.0.bb => opencv_4.14.0.bb} (98%)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.12.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.19.bb
-similarity index 79%
-rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.12.bb
-rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.19.bb
-index c9b5275a69..892adb902c 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.12.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.19.bb
-@@ -7,21 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.13.0.bb b/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
+similarity index 98%
+rename from meta-oe/recipes-support/opencv/opencv_4.13.0.bb
+rename to meta-oe/recipes-support/opencv/opencv_4.14.0.bb
+index 981b06e33b..1926ee8e26 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.13.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
+@@ -10,15 +10,15 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
  
- SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV}"
--SRCREV = "27463ee72d83295444262d503130fb0f8cc227e0"
-+SRCREV = "74b88c154d634c4fc6ee32a6a9e49f1da75725f8"
+ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+-SRCREV_opencv = "fe38fc608f6acb8b68953438a62305d8318f4fcd"
+-SRCREV_contrib = "d99ad2a188210cc35067c2e60076eed7c2442bc3"
++SRCREV_opencv = "0654a42e19215ef25b1d367d822f3c630447e7c7"
++SRCREV_contrib = "a8e9acd62cabd30419dba83007f2ac0d07de5e2c"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+ SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
+ SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
+ # kleidicv must match version of OpenCV
+-SRCREV_kleidicv = "1e8fe7008c2292657b9689d70ea5d30db0e57767"
++SRCREV_kleidicv = "b1dbf474b8685b97a64d03e828b359fbdc050d1f"
  
- CVE_PRODUCT = ""
- 
--PACKAGECONFIG ??= "instrumentation aligned"
-+PACKAGECONFIG ??= "instrumentation"
- 
- PACKAGECONFIG:remove:mipsarch = "instrumentation"
- PACKAGECONFIG:remove:powerpc = "instrumentation"
- PACKAGECONFIG:remove:riscv32 = "instrumentation"
- 
- PACKAGECONFIG[instrumentation] = "--enable-instrumentation,--disable-instrumentation,"
--PACKAGECONFIG[aligned] = "--enable-aligned,--disable-aligned,"
- 
- inherit autotools pkgconfig
--
--EXTRA_OECONF = "--with-posix-fallocate"
+ SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv_kleidicv"
+ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
 
