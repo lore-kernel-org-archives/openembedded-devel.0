@@ -2,110 +2,152 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B356EC5DF69
-	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 20:11:01 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27842.1786651854300339406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E89AFC5B572
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 00:38:31 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3629.1786667905029540431
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 13:10:54 -0700
+ Thu, 13 Aug 2026 17:38:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IvaIiMut;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cc61541f8cso18840045ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 13:10:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=BBmSoFot;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-c9ef3e1337fso290089a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 17:38:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786651854; x=1787256654; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hurrd8TD+U2C+X9OVvVUrM3z7rNQpKXQqTkGPxoScJ0=;
-        b=IvaIiMutgp6rieJ1y2Ad/OZ00gho+E1NWm3PEaaNcUKmTYLDznBUr1lhPNdvybHB/E
-         w3jSI4fUxZNmxLFywp8Z7fo1h082UQduqT7TGqIFfGIWuNgk2gtsVyIua9GHpxPlPfhq
-         Bf0ABTZOtt+ARzfCaOXcFgIEJOeHP3/pdyMQMFEapnEqDpxIj+zqf+sVT+bvbn5Eo0eM
-         AX2ZuyZSNoC3PG5RXoJokzDG7VefiSRpJ3d73XbqABmuLmgepSHrALh9MjWpYQRks0yh
-         r1rpL65PMfqL8Lv4V0Vp8FLlKLPLRBL5qVmJabkuJUaM8HHYIrV4sWu9O4PjkT0pWeuZ
-         papA==
+        d=gmail.com; s=20251104; t=1786667904; x=1787272704; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jdY/lOIR1MGExyrnjD8lmIKj2GiCEAhKT789Xir8SuQ=;
+        b=BBmSoFota8vmHFk3NZ4k3Wa2WP3zI/bAx5mAEUWRp5X/A+ABG3TlGh8JKNB6VIc6PB
+         g01gB2TSj74VSJXptNsKOp8O8a3Pja5gTMzCIYCWie2zuhDNGK/XFD+Lr2zB4uwMeV1h
+         HltEuQiDtiA+Vt9QEEwX4Up1JJwRDwZANPD1deYmBlEwKegKJeGbzl2YpTI7MSAoqbuj
+         TrmvjXqv1/4ae9zIbT2edOQjzv7ZfGnPqUiJ/1CZHOOWiGK1mQCmVJFbvcPpaIJNY8j/
+         QOnBLDiLNgmtupqRXAuuL5GW6g5N5Cff09v/B+bOiq4VZBDh1h4tu93F9hzKMVOTN3FA
+         4ebA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786651854; x=1787256654;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hurrd8TD+U2C+X9OVvVUrM3z7rNQpKXQqTkGPxoScJ0=;
-        b=WmTVxdNSAyIGdylxMMi8G4Wob8kyeZ0PhH+Eh9efBLTgQmJcSBCm3nY2s27ZpnM39Y
-         AVwb5H6nHRk0chskZKURlvFeo/oGoUKVarK/oBaIxS3jS/zW7tRSiFyjN05onW1ysbtW
-         sefRsRbgCsDnaVQd+zAG74sBRo6Qkhjod8EsSXucReXKj2dWZQuYCUYNQArliRGWQF2v
-         XeFszUAgHbHLEEKRssyEb1n2bIGSNc2kVdFN+cGBhGx/nC9MQ/pmbg3Xv698sDw55wdt
-         KryVwpeBWL4XKTreKmCYQJwLBqz90r5rIR0caS+q+hEEGjxRSk1ffnZ29CgCJi/1rVGj
-         v/ZA==
-X-Gm-Message-State: AOJu0YyCDbc6UcQZ5mS3r+MYychYG0urFNoitS2ITl//dPoQ5hWuc8zN
-	8XXYEGuOQpFCuDhu6h1H+7mGWin/hEmCCAAI7f1gA50m/horQxQbYg2q/jAgPupn
-X-Gm-Gg: AR+sD10X6UZDajyqFjN87DhiwnUZd5CC20lqmrbIyeQO4vrTHVy8Z/fjicwgma1a4nC
-	JrYKpZvpR3kaYZtsNAaSXecNUuClmeeX2d1ch+U/XorJ0eDH7zGMgUkskOSwIj6D/NfShWdxeuU
-	2DPYacrP/JJeCAljqP2P8JrxqQo7TbXt+5rGb7JfCzZ316iHVQhzXBLPwJN2qP4vS8tq3f6VLlj
-	lTKqH0QwQAZD4FZAsE+LjoR1cKA1SGN4zJAn+DvCtw9TQXbBggQeUH6aSd0evtwDtUUa+dnwUMz
-	5MatVL89ve+yPRsKrwY3aAMo4Ft8VL/ZQbgrTal9KUkMesQlIC7Ldb29A5rr4kyC6EdQvlk5CKz
-	RCfO7IBPXOLHT8vKN2Hw9kY3PPuLsdfjqk6b52K6IGCMkE+3dORQykts9bpRDRKoDldHISAwTKb
-	o2LLqQeQJBl8x++H52bAX5qlDuriozD2G7bydwqTjS1qs5m79t1LLHwFSxOe2u9TKENGAGKeftc
-	/qsPbdweCD9gpzXxPqWohnfUlvX0haYlb26ID/kBVimkq9EW3JDaieV5X8C3UABQT9UYqxu+IhR
-	TQE4+EjolA8a7Js7PUctgAo/a2ZvRAxSOOGLXtg0CZheaMZwAZb9Vai2FH4WCTNd9cf3vkHy74m
-	Ah95g8njF+oaMifYx5JNF/1t0isuKROn/QhNKP7S4bKwX0g==
-X-Received: by 2002:a17:903:1a0d:b0:2d2:72b6:556b with SMTP id d9443c01a7336-2d37f7b7ca7mr102965675ad.13.1786651853591;
-        Thu, 13 Aug 2026 13:10:53 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786667904; x=1787272704;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jdY/lOIR1MGExyrnjD8lmIKj2GiCEAhKT789Xir8SuQ=;
+        b=LO0hGAy2RdXQXAghLafy5zyTrRaNhgHPKk90Hz2PLTZzD8KpaUxTWIp4VewjcVrctE
+         sklsqWyFTy+RlqOweWiZFKA1xs3104tb6JZn03tJFV8R1prKkx+OhC99OPO4i2d8MIBi
+         s8zl29EYKg191yxazaJoWOm35HUKEzYxmDF1OjsoMzvC2AILePP5szD5PCBksP/Va4Pd
+         jO6rBM5kLVq1t1suOpIH+vdnVcWZPkUV0qmtvJzZmdri56K+SCajbB1D+qlKApREKTSe
+         smn1uvfnXElEzrjbdHS85xKln0Gep3H8gjbXNmk/WW9JHg0nZW8H19o89mSDiNpUf5Dp
+         kH3A==
+X-Gm-Message-State: AOJu0YytMvLVkriZwrHHqmVzD4al09AqKfGs2JKxb5Zcd9yTBXrRdbxS
+	9gaSsrOlErFb2KnbCX0lDnmMR5WrF5CzOWiXPkZN8ct88iuTxtzLoYJ4ACzafkyK
+X-Gm-Gg: AR+sD13spjj+/b8dLAQLt76Fj6LyTml1nYe5bowOk3B1p4p4ojK7QXVdk/HgajG+6ZQ
+	WIa7xj697JyeDhY8zi+0c1oGdIO/l1zgrXk9lVUBnb77UASKI387voCq2T7RGNxg8L1N/K/Mzu6
+	r2hPQfwqPFyntKgcRK6/DlxBuvWy1aIEcIEUwSnqEJlATQ5u1qy/B0j2lT72DDEgarWZry+BQsr
+	OaK/Inz+QTW3enFtMCKZHRaYfXckrhCg94uT30z8cnXblQKmUrQV4fIQ4wXffubaQ5L81LTt6EU
+	r/tRHr+SP/cFxCFQWTEfsMjxsswyPzehztBhFX1Nl75akeBl7kcdmsPZTimBiUl3WtBgvQf3UAD
+	OCz394p7iUUkvnYLdV1GeOZzoBHnC9oTgwMMboEDtEGOYMw/zDMwsN2l0TAl3MSHDxsrXbzE1Pt
+	CNWH+xjuWw025jUiSfsmDDtNx6uLeHwDzaFASbHOMvkfLQltRaPUMmCgZG5k8Ifqz4s3TcUd5r5
+	ien1X+zBa9eDjvO4KJQz3s1AtTechH+HNpOtkVkxZ6JbOLR3X/b0EuPhzHoVy3l0JL7fCAs3u5o
+	jCBun3yYfA0NX0bTtLgFhKl5yLgNRxLVknhu6YKLcnbNBII/iwZv5ViM8rdhGhgy2QgLHOGMbRi
+	GoHxqP1oouDEdzlVcx/xt3zEEkJzf/p0htLg6RwiHFyvQCw==
+X-Received: by 2002:a05:6a20:914c:b0:3b4:5c70:ca3e with SMTP id adf61e73a8af0-3cc71da42f8mr1450496637.25.1786667904253;
+        Thu, 13 Aug 2026 17:38:24 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31ebfc37202sm10012289eec.20.2026.08.13.13.10.51
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm3236209c88.2.2026.08.13.17.38.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 13:10:51 -0700 (PDT)
+        Thu, 13 Aug 2026 17:38:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 77/80] python3-zopeinterface: add python3-wheel-native to DEPENDS
-Date: Thu, 13 Aug 2026 13:08:31 -0700
-Message-ID: <20260813200834.1302829-77-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 1/4] python3-fann2: add SWIG py2/py3 C-API compat patch
+Date: Thu, 13 Aug 2026 17:38:16 -0700
+Message-ID: <20260814003819.1417656-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260813200834.1302829-1-khem.raj@oss.qualcomm.com>
-References: <20260813200834.1302829-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 20:11:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129021
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 00:38:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129025
 
-setuptools3.bbclass and python_setuptools_build_meta.bbclass no longer
-add python3-wheel-native to DEPENDS by default, following oe-core
-commit e546c697b7 ("classes/setuptools3: remove wheel dependency"),
-since setuptools >= 70.1.0 no longer needs the external wheel package
-to build a wheel.
+fann2.i's HELPER_ARRAY_TEMPLATE typemaps use the Python 2 C-API names
+PyInt_Check/PyInt_AsLong/PyInt_FromLong. Python 3.14 no longer ships
+any fallback definitions for them, so the SWIG-generated wrapper
+fails to compile:
 
-This recipe's pyproject.toml/setup.py still declares wheel as a build
-requirement, so pyproject-build's --no-isolation dependency check now
-fails:
+  fann2/fann2_wrap.cxx:10062:41: error: use of undeclared identifier 'PyInt=
+_AsLong'; did you mean 'PyLong_AsLong'?
 
-  ERROR Unmet dependencies (checked against .../recipe-sysroot-native/usr/bin/nativepython3):
-  	wheel
-  		wanted: any
-  		found: not installed
-
-Add python3-wheel-native to DEPENDS directly to satisfy it.
+Add a patch mapping them to their PyLong_* equivalents.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-devtools/python/python3-zopeinterface_8.5.bb        | 2 ++
- 1 file changed, 2 insertions(+)
+ ...n2.i-add-py2-py3-C-API-compat-macros.patch | 36 +++++++++++++++++++
+ .../python/python3-fann2_1.1.2.bb             |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-fann2/0002-=
+fann2.i-add-py2-py3-C-API-compat-macros.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_8.5.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_8.5.bb
-index a148622f13..f9fd55ff6f 100644
---- a/meta-python/recipes-devtools/python/python3-zopeinterface_8.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-zopeinterface_8.5.bb
-@@ -6,6 +6,8 @@ PYPI_PACKAGE = "zope_interface"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
- 
- inherit pypi python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-fann2/0002-fann2.i=
+-add-py2-py3-C-API-compat-macros.patch b/meta-python/recipes-devtools/pytho=
+n/python3-fann2/0002-fann2.i-add-py2-py3-C-API-compat-macros.patch
+new file mode 100644
+index 0000000000..03f59b38ba
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-fann2/0002-fann2.i-add-py=
+2-py3-C-API-compat-macros.patch
+@@ -0,0 +1,36 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Subject: fann2.i: add py2/py3 C-API compat macros
 +
-+DEPENDS += "python3-wheel-native"
- SRC_URI[sha256sum] = "7a3ba1c5877f0f3e3906b02ddf793abed2becc2948116414ce0e1dd820b68d6d"
- PACKAGES =. "${PN}-test "
- 
++The HELPER_ARRAY_TEMPLATE typemaps in fann2.i use the Python 2 C-API
++names PyInt_Check/PyInt_AsLong/PyInt_FromLong. Python 3.14 no longer
++ships any fallback definitions for them, so the SWIG-generated wrapper
++fails to compile:
++
++  fann2/fann2_wrap.cxx:10062:41: error: use of undeclared identifier 'PyIn=
+t_AsLong'; did you mean 'PyLong_AsLong'?
++
++Map them to their PyLong_* equivalents.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++--- a/fann2/fann2.i
+++++ b/fann2/fann2.i
++@@ -15,6 +15,18 @@
++ #include "fann_cpp_subclass.h"=0D
++ %}=0D
++=0D
+++%{=0D
+++#ifndef PyInt_Check=0D
+++#define PyInt_Check(x) PyLong_Check(x)=0D
+++#endif=0D
+++#ifndef PyInt_AsLong=0D
+++#define PyInt_AsLong(x) PyLong_AsLong(x)=0D
+++#endif=0D
+++#ifndef PyInt_FromLong=0D
+++#define PyInt_FromLong(x) PyLong_FromLong(x)=0D
+++#endif=0D
+++%}=0D
+++=0D
++ %define HELPER_ARRAY_TEMPLATE( templ , T, GetFunc, SetFunc, cast)=0D
++     %typemap(in) templ<T> *  (templ<T> temp){=0D
++         // templ<T>* type_map in=0D
+diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/m=
+eta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
+index 3053ca5d71..c2170f6bb0 100644
+--- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc73b943dc75f6f65=
+e007c56ac6515c8f"
+ SRC_URI[sha256sum] =3D "cdca0a65ad48e08320672affe38c3dd4ea15e27821e5e1db9f=
+a2b34299bdd41e"
+
+ SRC_URI +=3D " file://0001-setup.py-Don-t-hardcode-swig-and-fann2-binary-l=
+ocati.patch"
++SRC_URI +=3D " file://0002-fann2.i-add-py2-py3-C-API-compat-macros.patch"
+
+ inherit pypi setuptools3
+
 
