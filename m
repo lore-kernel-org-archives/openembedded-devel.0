@@ -2,166 +2,172 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2A0DC5DF75
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:00 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24391.1786747616514655481
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04FBFC5CFC1
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:11 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24400.1786747629317360930
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:46:56 -0700
+ Fri, 14 Aug 2026 15:47:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=DnUMiHtJ;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cc11a30a259so591537a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=nwYMiN03;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38dcbade417so1619645a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747616; x=1787352416; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eILrNWcj7WT6QdGL5IPkuRj7fM36NFvCZXH3JX/lhVg=;
-        b=DnUMiHtJSJYfhUsJIZixau4vn8qSkkbQJbUgnuqpgiEfdy5g+sHmMbHs8ggk0tn1rb
-         l9wfEtsKiAqk7lACyOdsfzYUAtee600FlJcLeQtMRg02h38P6fC6xMGlRekEkbcanjH9
-         8C/H1iSzJ/kFMsjkO5jG4ih8M+EE67XjRmGiKjctF2sxd0J3neXt+lJ5oSzS6QaFep/s
-         FG4vl1sd91IiXSdSSTLL3n7Rv8cYnvGI7Rylv5B8RZAKaRmKCeINCkj7VLWeZhPnEKZt
-         K5sGim6jD4ldCy7mxEazRDfdImKNQ+brOpJVoFLdeQPsaWXeIoAIIayjmhPM99m/ac9U
-         7Org==
+        d=gmail.com; s=20251104; t=1786747629; x=1787352429; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=zxtgEpnlAcTt4JXfMkYcZPSHJpgTjrJzFdcH8sdNuPI=;
+        b=nwYMiN03VFpYAmc1PxHsRDTa9NH1Jp5NKtK0AbRXNJxHlkVPmEIp1WmZebxMFxaI6T
+         2MdzxWpp89KSAlwo5BMOqvMg5KHqoCLXc4NF5v/sMuUPQ8kG0ogstmIH9Sk444P6GA2o
+         +KkSOvSQESUiwONT8OQrf0uyV4eQcMBTMeLLdj9vkLOWNfCo9eCk/0oEJib9HmRgvtaP
+         vY2kPsOFlr+8umNPxi3ahZ5/P6ZwSRcAed4SN9k3nSlPKAbhr0dYn6lCrPH70EJgnYFw
+         OSrVbXuxKRTR+5gcnN2Q15+geIpQG+q7n5uJvJFT0Ie1a7mXV89SSlUyaBmYMun4LSAz
+         5tKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747616; x=1787352416;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eILrNWcj7WT6QdGL5IPkuRj7fM36NFvCZXH3JX/lhVg=;
-        b=IC0tdo8QeDsnX/+6NYnE8yFBShlyQ61rh50+cLNnf3/XlwIm9w4ShX9VJ2AFl8g5iw
-         2rZRC1GfQPZULZE9ncqIr7/3//drwGRePesIY+hPOPHS8MF4Y+z+3xstBfXS/IMs5Wgd
-         VD3RGQiAUhhlJLARHvlpObGxMXPp2IZDWpVAHWnCMvJt3BS2PFxopjliZwBQn30UKXQ/
-         QUtiHN3nOxB9cOrstJ4Cjz+GcQbi5tjuN8q7V5qxojZkaCOlNaZzVi1W4MXlZ6OjLcZa
-         BL8ESneODqN1hgZLVgomQHFCthewaMVDfW1mssPqKg/I700MTnnE5pXacd5iyczrGAnt
-         acnQ==
-X-Gm-Message-State: AOJu0YxWylQ85eglgfL4zz9iKMco0PRh/bO9tbRu/M4FJIaWEllSCvUo
-	fYzem8zW+J9OxJSGQlYEem+d5aqtFdwhDlri81pf7WWxf7Hh8j2Xv6hrv2/j84a9
-X-Gm-Gg: AR+sD10CcgtQFN/RW3MFt92Ef1pM9zoSpoIVaw4WVC4ZlAITfg/3AWru7bF4VffXyWn
-	SuXxdl+G1bjZOCb5oiiI6XvaMzemyEfKfHuS8rX7ZbM1V4RDHHM/x400D2JpKdaKeZVk4kxFuY9
-	7nBi30BGK+8vkykqlCHngG4OwFmsfmjARFI4Ll0qoRQjQimHvOjx80JCP2uCuRGD/pkLKhScFMO
-	HcZsy/cWFpfsYT2kJOLx4u6iQG8SJZKXluPrWOcO+zNfyjc+X/KvWuhfgoo2LivaJpmZERjpl3c
-	4W97dHkS+mi6+SNuGcK+WCjEeJ/KeIa3rfoc4rN7jYBmp1lP+bs0SmMeo1FXSC/AB6sXv1cr6rP
-	it3J+5r501DCuKESK1ufJFZDCtCVJXOMyonkPQJo1KpHCS4Vo/nApneAsvIdy3Zz2jjjAfqujj4
-	aGvDHakURXMrfPKym8FTWZBBtEr4BySWeL82JF2R1sHLEf6b3FLTiAzLGgYR2lEOhnONNuUkc0k
-	uYaFNXhW5nnJbQL5z4m0vlyQBGJKhc3SF4vIB332Ej7/5rKxXWNcj7i7c0fKo7d7cmR6XKTePKN
-	6eeuoIhNFS2aQfUap3DSa7qNm+xWWQjy1vvQ81Xu4J9r40XmRENInT37elsPEdj4nnO9rB3Jn5u
-	k0AepFM6yctRQVbb5ZqaaFbyxhJwp0PIR4Io6+cERberpfA==
-X-Received: by 2002:a05:6a20:12c8:b0:3c1:85d:fa2f with SMTP id adf61e73a8af0-3cc71eb2723mr9527300637.36.1786747615779;
-        Fri, 14 Aug 2026 15:46:55 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786747629; x=1787352429;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zxtgEpnlAcTt4JXfMkYcZPSHJpgTjrJzFdcH8sdNuPI=;
+        b=Lxklgqh0l1YB18imvDEYfhqjKvm2tr5WSzLV0U8aH1mGWRcP+3Fx+LQP5sMrV18ujP
+         w4z3Int3PqgW77GaN+9wWKmOvjl9IqbxYSkyuNRm1SXndHEgGgihhhq2tRmEyyirobq0
+         CkQ0POqgJmxai2zzS3rG0shTJpEwKbtSFJEE0o9/2DCuB4K9+SflSncc/cZ7xgPoxjx3
+         AEiQsYZ1JuNGO6iGuFUurF24SEI2s+a9ugkXH9tjXl+E38v1bCjvOk+SajQYyryBvO68
+         rLHYW5gKIlCVQv7mxbu7IQ4RNWDIerNvRXvKaYa9L1rB5XtOOpdasnLGEVy/pYxwQaN3
+         xYig==
+X-Gm-Message-State: AOJu0Yw0wrolXb4KsHJhF3Kczj8dZmNyuK07QMzgWDrYQA6SucBx/zI7
+	TA5vvwNLVRPBKVa7QLZdtbzQOQwqOUBZzsAWm+XgUaLbSwJKn54Jul+rX4fjH07U
+X-Gm-Gg: AR+sD10nbfBgz5pKqYObDyqnH+zUb9iQyRcn6UVuPPpzQt3BxDrxDsjtAshaBnXBVlc
+	n7L0uqht1GKI4b4ibvoovmUp6b5nX9GL3mmZirWIhLBnXot62QtRtiqJY9mI5J+LYuXFN2iyoeD
+	779u5+VsbhDZan5WT8YKCli4uQLzJm2HKssHqvN2iW8lxrOLU7Ba9mlk3rk2kYvabaxezPtoscg
+	K4F7T/EeUih64IthUBZaG7Ld0SCwOi/LOZZI0RUOW3Jg7SdNl+eF79Sx/K8ddZK4jhAFF9U1SBu
+	alWisr7adjqiX4snwUF3sFG0sn++tuE1mrfZJ1jPg4Dijkrllui+6c+MtIFeIUE+3mvh3GTQP5N
+	06BItQGkkcvDBNgsCNnIaJH18U25w9x/NEKEnNqT6jvaDj4E39+mOXJPT54XLxDi3EQdXSWW9XM
+	b7+qtqIJ5jKb+Zv0wW3Xp3YGyvRXppbxP2pYDnL6Ztya3QPEZKiKTPBMNXCkClHpeN++ZgyeslU
+	kBHYY1WVNn8A51qCc11AIsyh0kwp+75upWB2zaqIfdDPSnRshIekmyNEKHrrrsxBU/k/ZyZXLAt
+	YaYnKnIb/eqHaBCDEfOuTtRCrdamfkOkvi5uyY7aAvOGrnTLBoAg1qxmCBV7ZESwFCeN9Nn3pfu
+	JlQqWNcG3M0TBcvd+LpkGft9MBFGUZ0LsAd8PD48Vj9s0ig==
+X-Received: by 2002:a17:90b:1806:b0:38d:ec31:4840 with SMTP id 98e67ed59e1d1-3933b907356mr9134568a91.13.1786747628567;
+        Fri, 14 Aug 2026 15:47:08 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.54
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:46:55 -0700 (PDT)
+        Fri, 14 Aug 2026 15:47:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 066/109] cli11: upgrade 2.6.1 -> 2.7.2
-Date: Fri, 14 Aug 2026 15:44:52 -0700
-Message-ID: <20260814224539.1523174-66-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 076/109] libjxl: upgrade 0.11.2 -> 0.12.0
+Date: Fri, 14 Aug 2026 15:45:02 -0700
+Message-ID: <20260814224539.1523174-76-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129130
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129140
 
-Point release. LIC_FILES_CHKSUM md5 updated for the LICENSE file whose copyright header now says 2017-2026 instead of 2017-2025; license text unchanged.
+Point release. Dropped 0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch:
+its actual fix (the CMAKE_SYSTEM_PROCESSOR MATCHES "riscv" guard around
+-mrelax-all) is already present upstream in 0.12.0's CMakeLists.txt; only the
+CONTRIBUTORS name-credit hunk was left, not worth carrying as a patch on its own.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../remove_tmpdir_from_test_binary.patch      | 45 ++++++++-----------
- .../cli11/{cli11_2.6.1.bb => cli11_2.7.2.bb}  |  4 +-
- 2 files changed, 21 insertions(+), 28 deletions(-)
- rename meta-oe/recipes-support/cli11/{cli11_2.6.1.bb => cli11_2.7.2.bb} (88%)
+ ...use-mrelax-all-with-clang-on-RISCV64.patch | 56 -------------------
+ .../{libjxl_0.11.2.bb => libjxl_0.12.0.bb}    |  3 +-
+ 2 files changed, 1 insertion(+), 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch
+ rename meta-oe/recipes-multimedia/libjxl/{libjxl_0.11.2.bb => libjxl_0.12.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch b/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
-index 22c3e5211f..78ef11e487 100644
---- a/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
-+++ b/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
-@@ -1,33 +1,26 @@
- Remove tmpdir from apptest binary
- 
--This binary is used in the ptest package. It executes another helper binary
--for the test, which is identified by its absolute path, as it was determined during
--build. To avoid the QA error (and to find the helper binary during test excution),
--use pwd command files.
-+The AppTest binary is used in the ptest package. It spawns two helper binaries
-+(ensure_utf8 / ensure_utf8_twice) which upstream identifies by the absolute
-+path in the build tree via $<TARGET_FILE:...>. That absolute path both trips
-+the buildpaths QA check and does not exist on the target. Refer to the helpers
-+relative to the current directory instead - run-ptest chdir()s into the tests
-+directory the helpers are installed into.
- 
- Upstream-Status: Inappropriate [oe-specific]
- Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
- 
- 
--diff --git a/tests/AppTest.cpp b/tests/AppTest.cpp
--index 29aff27c..ddb8238b 100644
----- a/tests/AppTest.cpp
--+++ b/tests/AppTest.cpp
--@@ -2819,7 +2819,7 @@ TEST_CASE("C20_compile", "simple") {
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch
+deleted file mode 100644
+index 287dfc8ca8..0000000000
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl/0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From 0cf439c243dfdb6eee6133ee87172235a42e59c9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 14 Sep 2024 22:04:06 +0000
+-Subject: [PATCH] cmake: Do not use -mrelax-all with clang on RISCV64
+-
+-This option causes clang 19+ to crash on riscv64
+-
+-For RISC-V -mrelax-all causes the assembler stage to convert
+-all conditional branches into
+-
+-  bcc reg, reg, tmplabel
+-  jmp target
+-tmplabel:
+-
+-Unconditional jmp can reach targets a lot further than a conditional branch.
+-Unfortunately, jmp also has a limited range so sometimes needs to be
+-converted to an indirect jump which requires a scratch register.
+-We do all branch relaxation early for RISC-V during the compilation
+-stage so we can allocate the scratch register.
+-
+-If the assembler also does branch relaxation it will increase the size
+-of the function and may cause unconditional jmps to go out of range.
+-If this happens, linking will fail.
+-
+-Upstream-Status: Submitted [https://github.com/libjxl/libjxl/pull/3826]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- CMakeLists.txt | 2 +-
+- CONTRIBUTORS   | 1 +
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 8b2ccb57..39bee096 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -335,7 +335,7 @@ else ()
 - 
-- // #845
-- TEST_CASE("Ensure UTF-8", "[app]") {
---    const char *commandline = CLI11_ENSURE_UTF8_EXE " 1234 false \"hello world\"";
--+    const char *commandline = "$(pwd)/ensure_utf8 1234 false \"hello world\"";
--     int retval = std::system(commandline);
-- 
--     if(retval == -1) {
--@@ -2837,7 +2837,7 @@ TEST_CASE("Ensure UTF-8", "[app]") {
-- 
-- // #845
-- TEST_CASE("Ensure UTF-8 called twice", "[app]") {
---    const char *commandline = CLI11_ENSURE_UTF8_TWICE_EXE " 1234 false \"hello world\"";
--+    const char *commandline = "$(pwd)/ensure_utf8_twice 1234 false \"hello world\"";
--     int retval = std::system(commandline);
-- 
--     if(retval == -1) {
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -159,8 +159,7 @@ endforeach()
-+ function(add_dependent_application_definitions TARGET)
-+   foreach(APP IN LISTS CLI11_DEPENDENT_APPLICATIONS)
-+     string(TOUPPER ${APP} APP_UPPERCASE)
-+-    target_compile_definitions(${TARGET}
-+-                               PRIVATE CLI11_${APP_UPPERCASE}_EXE="$<TARGET_FILE:${APP}>")
-++    target_compile_definitions(${TARGET} PRIVATE CLI11_${APP_UPPERCASE}_EXE="./${APP}")
-+
-+     if(WIN32)
-+       target_link_libraries(${APP} PRIVATE shell32)
-diff --git a/meta-oe/recipes-support/cli11/cli11_2.6.1.bb b/meta-oe/recipes-support/cli11/cli11_2.7.2.bb
-similarity index 88%
-rename from meta-oe/recipes-support/cli11/cli11_2.6.1.bb
-rename to meta-oe/recipes-support/cli11/cli11_2.7.2.bb
-index b6c1ac56ba..9f06452301 100644
---- a/meta-oe/recipes-support/cli11/cli11_2.6.1.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_2.7.2.bb
-@@ -1,14 +1,14 @@
- DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
- HOMEPAGE = "https://github.com/CLIUtils/CLI11"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=27559a6fd853c4b46ec4dea16597460c"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=744e78b25a90f01b35b087d9fb985ed4"
+-   # Machine flags.
+-   add_compile_options(-funwind-tables)
+--  if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+-+  if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "riscv")
+-     add_compile_options("SHELL:-Xclang -mrelax-all")
+-   endif()
+-   if (CXX_CONSTRUCTOR_ALIASES_SUPPORTED)
+-diff --git a/CONTRIBUTORS b/CONTRIBUTORS
+-index 848096f9..a88c6157 100644
+---- a/CONTRIBUTORS
+-+++ b/CONTRIBUTORS
+-@@ -10,6 +10,7 @@ Iulia-Maria Comșa
+- Jan Wassenberg
+- Jon Sneyers
+- Jyrki Alakuijala
+-+Khem Raj
+- Krzysztof Potempa
+- Lode Vandevenne
+- Luca Versari
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.12.0.bb
+similarity index 94%
+rename from meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
+rename to meta-oe/recipes-multimedia/libjxl/libjxl_0.12.0.bb
+index f73fd314c2..7422282e4c 100644
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.12.0.bb
+@@ -9,10 +9,9 @@ inherit cmake pkgconfig mime
+ DEPENDS = "highway brotli"
  
- DEPENDS = "catch2"
+ SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1;tag=v${PV} \
+-           file://0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch \
+            "
  
- SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https;tag=v${PV} \
-            file://remove_tmpdir_from_test_binary.patch \
-            file://run-ptest"
--SRCREV = "bfffd37e1f804ca4fae1caae106935791696b6a9"
-+SRCREV = "919ce47dad39520a6e9a695d3e2d222c6920a445"
+-SRCREV = "332feb17d17311c748445f7ee75c4fb55cc38530"
++SRCREV = "a7a9c787341cf703dede03c2009fa460cae5e5df"
  
- inherit cmake ptest
- 
+ EXTRA_OECMAKE = " \
+ 	-DCMAKE_BUILD_TYPE=Release \
 
