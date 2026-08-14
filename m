@@ -2,63 +2,63 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B09C5CFC1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3E5FC5DF69
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 13:57:37 +0000 (UTC)
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13587.1786715806576550060
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13376.1786715804457217141
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 06:56:46 -0700
+ Fri, 14 Aug 2026 06:56:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre.com header.s=google header.b=I5EKPJbB;
- spf=pass (domain: baylibre.com, ip: 209.85.160.177, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-51c4436d02cso5971331cf.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 06:56:46 -0700 (PDT)
+ dkim=pass header.i=@baylibre.com header.s=google header.b=ep/xs5FC;
+ spf=pass (domain: baylibre.com, ip: 209.85.219.52, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-8fcc43c48f7so10578366d6.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 06:56:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1786715805; x=1787320605; darn=lists.openembedded.org;
+        d=baylibre.com; s=google; t=1786715803; x=1787320603; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8Au9UB43Va7LA752XK6RXBI6AiHDzVbX4sBnqlsxRYg=;
-        b=I5EKPJbB85G8rzhEjB1XEpTx1BFafy72VPPVuenlgllOVOgX92o4m4ZFpytp2XFs8A
-         YYOapER9C2oB7pL2stkvYux7B81lPg9kuUe/4wOd4o2E0M9f7WWE14/gKpYCUo33fTw1
-         X1bvp51I2RJjxLPKRjpwJMjy6DMxixtWgRF3rAg00kRR28d1yTIy3xw9V5OtvQSanfsL
-         t04PewA1OmNF/vrg5HhyCJKW9I0U16u3L2dd7P9qipuW8IoDvTZp7jfQiOw+C8pw8RXf
-         lHoHLuec+xY+fwzkocRTi77mk3CDxIOx7QpmWEvvTr04E+B2Ls9dvfXAVGeTUuMzkZF8
-         yVEQ==
+        bh=1L+L4h+lagITJ/WcRLQd7+L5w4gyoicVF4lx+h9WBuo=;
+        b=ep/xs5FCyH5qsfXbOq74M1f9wQa9pXvpXiOlHwVTP5PtgoSjcjn0CvG5o6uHQWTK4c
+         mZf/q95xFHw/HoTGLMQLunpxv4FDDYcl0I2CtJrFdubVtvt8yK90M/4KfWuyEwHc522A
+         VJZGT2esv4BwHHJmR+z4RB8tOC7VBkiwV63M5OLn2EivcNdgVO/NYF6OgEj1+JAja2LS
+         8xt7Tw68sRm71ZoPjWKZzeQZZJ6STnf67Vn87/aFot+XLJN7N2BPGN4lWEcd4UWAqwVX
+         K0a4MuwnSngxQOEWdr9edxPIjr+wEULC/Y4nGk9CaqVwBUKfL7x6wDLeRbUQg5yzE9/A
+         nwmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786715805; x=1787320605;
+        d=1e100.net; s=20251104; t=1786715803; x=1787320603;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Au9UB43Va7LA752XK6RXBI6AiHDzVbX4sBnqlsxRYg=;
-        b=lzPLOXzVt9zm7fdUnL0oBRd1FBdJfFmgqzm8lAm+2jTgpC76/lMUJviTN4U+KtbmpK
-         ccY2fTa13Tuy7+Aj4aD0lv0gpdFeplyC7DLhKJP8LdxZuqDFLjOCOlNajZ6Wcfc5oGhk
-         nOyRBwVudDeDpn6ALlROG5HRQOZgFkKG3cayPTPmZdXHQu9EBXRuImGn4rvjL1hnuswQ
-         1gbG9PSYmsVC3M5RA7sjeB/U9np6LzR4I6/TBDq84oaqYSvy/wU7Siqjh1Y8dc8fLKeM
-         9eUR9lLt9vVKMEgaNekqNcVEpT0f8/VUzZo276p5ni2qUhpkFjqL2IzAZko7VbUG9Cnf
-         //Fw==
-X-Gm-Message-State: AOJu0Yz5WEomtRx6IuD4+6Jkt543jne7jNcH8Q+LeVt44O4Zjh/PrRWK
-	vWp7Rq6DAnagok9+Pvx5Ve5tf9JsX0/FW8CL9TYnInB1PTiGEkXAW4KRCUxHm91vujZqelAHZ6Q
-	eQzdZxdA=
-X-Gm-Gg: AR+sD13mZHkPGo4kW1HbrP6Rxc1Ql3ah9eFD/f9KSgSaCGe1tNd9kf1GzgNt2InDvyS
-	hITQ9ryYogGn4ZN9V2ILqXuBqRONUpBZDDTqFYEuqjWqfhcZT3R6G3fOEGgSoQUibyLyPxv0OiO
-	HWWssVTFR73zhJIgG0n7Yzy6FoXlY6fioVbTcVkp5cgqjpDoqnS/WZfzHhOuJkckOGc/jMAzE0c
-	O6kTSvAVDkWlRkhPP/jCit0rC6jGa0crSMqCRCvarRQ4rlm0mu4+y+F+kTIgPu3M5uzMTjHepN5
-	F2pjrV1nYGyvtGPDVEZowZw/VJgZS7bjUv8u8kq2C9XKOd5sr++9qFZckm8/IWm+o7HgaYIqPPg
-	LZDpbyc4pHKXba6fW26yWFvaGBPWo+7bDMzAg0Ig39dJXRJ4Wy2cJgd6zOOzRiRHLNWj3oZ0rOC
-	INBg/gvhDFUFvhSuasbooi4h5rRNp8bwh4t/4MgezzpigaQpJtLh4BGTPiCFi0Q7/4
-X-Received: by 2002:a05:622a:1b89:b0:528:38b1:b54c with SMTP id d75a77b69052e-52d85305081mr62697621cf.2.1786715805342;
-        Fri, 14 Aug 2026 06:56:45 -0700 (PDT)
+        bh=1L+L4h+lagITJ/WcRLQd7+L5w4gyoicVF4lx+h9WBuo=;
+        b=gpCRh/89cQxGkNPjhCOmZ1WzTDO012r9bQltzv+6o7Tt6AbmUWnZ9xCb2Mx/5ajT7L
+         xAyLbDJ+ouED/VaaKZsqyGe9DWgs2/K8dDMQFtlnyzi60hwWDXg986ECspZhPbqxgIwH
+         xilJDpu6bv+Rrlmyi6BIbnWwfHkyH8pH6x3Eu8nHzmstn7o4/G+bdCLe+/17xWXDet+L
+         zOt4p/eCVffYB9rBTrMDirXnNEsI9xSHchCwBCSA6EfsshF63zafTCvj58fWEpX+TVIj
+         9lVT9A3PLIRrdBArTF1wqQKlii+1vgPSNppFBbCauYEEIlUnqMhHWPlJS4uhCVC7e4LO
+         su8Q==
+X-Gm-Message-State: AOJu0YxCY3Ey6nIr77Og7QQH7L8aHkPCCk3lu1AE3RojvZNLUnXYSchQ
+	obORUPCpxCjX6rbQkgmaamkuWQieILNADoctzAOQbU6hzMtwkGWWTOOL+9FwEpoNx/Y25kxgmRs
+	ENdwzAxY=
+X-Gm-Gg: AR+sD138HoINFTLX59JqDdqAvw6wfSUAV2JgTkkHBMETY65x2SkNCXtJf1eNeBlSdAR
+	GCc/M3B5Nn7/Tk7gdbACXfiA4tYgbNPQ5UAglkrzPFqWMYRb7lQ0USZUgCDN4SD4Nat7Peib0mr
+	5nEy6/hPtD/BeI1v4jprrT4BBcfY0HpOvPhMmiY9/vMDreNxGuS/qR3GIWu7VSmcTiDfV7FzxbP
+	yWlsK89YnpC/Dhsqge73TZLF41/0HKR5d8uXZJjjHhKJBSNrJGK8E4GClyD/wyTcW52Mwm2yuDZ
+	C4RbUhPFcbj+HaTyDdLMvknHLmEZa35RjVipfhf6DBGAGFSBIs+86KQUboGv4uqxA8Vr1Xiwpof
+	ZnEjBmlG2X+3GKz+mUwD0Yf65MBgGUwPm9svh/vXHLElLdD+g6+iG8Wz/18PiPQpSweI4fm/uiB
+	OLSTpG1IHRfTh5GV+kOIN10xc3/dx8yaTYH3VJSPvCgrHh6iegkxESqAQkismhICr9
+X-Received: by 2002:a05:620a:254a:b0:92e:f380:dabf with SMTP id af79cd13be357-936d22c5b78mr622405485a.30.1786715803300;
+        Fri, 14 Aug 2026 06:56:43 -0700 (PDT)
 Received: from localhost ([2001:1970:3847:e000:e8bd:ca0f:c232:9f10])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90a9220293asm19996346d6.12.2026.08.14.06.56.44
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-936ce1ea6cfsm278756385a.27.2026.08.14.06.56.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 06:56:44 -0700 (PDT)
+        Fri, 14 Aug 2026 06:56:42 -0700 (PDT)
 From: "Trevor Gamblin" <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: pidge@baylibre.com
-Subject: [meta-python][PATCH 3/4] python3-glances: add ptest
-Date: Fri, 14 Aug 2026 09:56:36 -0400
-Message-ID: <20260814135637.537350-3-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 2/4] packagegroup-meta-python: add python3-glances
+Date: Fri, 14 Aug 2026 09:56:35 -0400
+Message-ID: <20260814135637.537350-2-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814135637.537350-1-tgamblin@baylibre.com>
 References: <20260814135637.537350-1-tgamblin@baylibre.com>
@@ -68,73 +68,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 13:57:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129047
-
-Example output:
-
-|root@qemux86-64:~# ptest-runner python3-glances
-|START: ptest-runner
-|2026-08-14T13:48
-|BEGIN: /usr/lib/python3-glances/ptest
-|============================= test session starts ==============================
-|platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
-|rootdir: /usr/lib/python3-glances/ptest
-|plugins: putao-0.4, anyio-4.14.2, inline-snapshot-0.35.3
-|collected 37 items
-|
-|tests/test_core.py .....................................                 [100%]
-|
-|============================== 37 passed in 8.02s ==============================
-|DURATION: 8
-|END: /usr/lib/python3-glances/ptest
-|2026-08-14T13:48
-|STOP: ptest-runner
-|TOTAL: 1 FAIL: 0
-|root@qemux86-64:~#
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129046
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../recipes-devtools/python/python3-glances/run-ptest  |  3 +++
- .../recipes-devtools/python/python3-glances_4.3.2.bb   | 10 +++++++++-
- 2 files changed, 12 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-glances/run-ptest
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb       | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-glances/run-ptest b/meta-python/recipes-devtools/python/python3-glances/run-ptest
-new file mode 100644
-index 0000000000..f56ca03dca
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-glances/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest tests/test_core.py
-diff --git a/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb b/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb
-index 6acd8429b3..9b8e529c87 100644
---- a/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb
-@@ -7,7 +7,11 @@ SRC_URI[sha256sum] = "736faa7faea3bcd58afffd6443974b4ed4b498627a71ce5d6c9640b7b5
- 
- PYPI_PACKAGE = "glances"
- 
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta ptest-python-pytest
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
- 
- # psutil/jinja2/packaging are oe-core; fastapi/uvicorn/defusedxml are
- # meta-python. 
-@@ -26,5 +30,9 @@ RDEPENDS:${PN} += " \
-     python3-xml \
- "
- 
-+RDEPENDS:${PN}-ptest += " \
-+    python3-requests \
-+"
-+
- # Optional fast-JSON accelerator glances uses if present.
- RRECOMMENDS:${PN} += "python3-orjson"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index b129e62d16..f58f8a0f29 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -151,6 +151,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-geojson \
+     python3-geomet \
+     python3-gevent \
++    python3-glances \
+     python3-gmpy2 \
+     python3-gmqtt \
+     python3-gnupg \
 -- 
 2.55.0
 
