@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDCBEC5DF6E
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:45:56 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24340.1786747548629281008
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E040C5DF79
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:45:57 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24345.1786747554965783597
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:45:48 -0700
+ Fri, 14 Aug 2026 15:45:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WBpx7vHg;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38125cebfdaso2328118a91.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NXMfqjle;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-ca88130e09aso892239a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747548; x=1787352348; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747554; x=1787352354; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wMVRQR3LTSbP7Q/ni1PhHWfip6PdmVhCxSmHWd/afCE=;
-        b=WBpx7vHgjVs17YU/hV13h0Xmsq44hX6ExB6KLIIDcUhXE1kzdDcxo7IbGMvecc949r
-         t73vwyUN2i81/7kDZ7cY+gxtPFj1ns6Hdcvsqum1MUpgbGcpZnW+VMzC/frP2W7lPvb6
-         DWKWhY6ZuIUVY8rMhNeKk6PGRkTjQNe2kTslKbYVGGVJrei8EKPrb7o0OBvAdAg2P4Gw
-         x4sfbEuqn+K/WE10ijy6xP8Si7b9awnTDQUvb/EIVnE023F6arB4xjYz47Iv/GHq5kV6
-         1lr3Jf11LS1FIIO5nlDE5i9yo+tDRD/bMD4WuuwIc/2DUEnfEIEo6tOaGbPpbtbhw4+5
-         Kwng==
+        bh=v84EinAOPtSLQqW6zPKQbGfn2yp6XUzwjcJ1Z++7qAA=;
+        b=NXMfqjle+IaEvqFpkdD5YsQyV2f3Z2mVevJ/CSn2hbmAuZu+zhMKLvXX750/NVuLld
+         6zzAT67e06HRBEEjAckmVrryFcCZNIu3VM4OeGATwYvtcrMkzil7bVoPAjAFu+nxEcdr
+         nlwJCwbO/y/wH2e8WRPYJVWh9PXvRMg2Z+mMZMY7jzimHiGERD/uw07KKO4dvq5nLa6r
+         EevlcLgRk7A/noF9PDy89vuEhxtdCzgrZxiMdD3bgUtgKxyVVYmNtO+wOhb73tE/3suS
+         1W3muwTl1ARLJEYdcZcrT68Efh2D7pT4e+271vVzfXGfcr10U1RD01acHSNXIonkypFT
+         iC5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747548; x=1787352348;
+        d=1e100.net; s=20251104; t=1786747554; x=1787352354;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wMVRQR3LTSbP7Q/ni1PhHWfip6PdmVhCxSmHWd/afCE=;
-        b=OxN7UOoh0MUY52L3rqEv6ytMgXyRZTT16frrN1nlNSAh1GKD7DgN+vLAhDf8G8iv8u
-         yyI3WJN60E9wDQe/4py7Umpybhejnt77VqpUI8CD+t5G6AIvi4hPhnIUvww8fUBVo0Xt
-         vXQLViLlOqeUv0Ik7nKNVeMeTa7lbyqEVHf8gfUvRSDSnx7vUzYCWCyo2fXqV5n0aJG6
-         2d/2vaNIiWhokJCa8+bnDJYz7Rpf5/NtPDYq+5uXdg/fLPXNf8iPx2QlfXsQRwIbSNae
-         MxoKW9JGm5r7UVawYzsvypqBnBES4OdkIBDowybw/P0LwhfpHQefopNBZtRXSk8x8dRi
-         e8WA==
-X-Gm-Message-State: AOJu0Yx1MPxseOd7TJ9hZTucO+dQgR/FngJuL1P3gmHLrmLqDj+zqZr8
-	2HsSMEzeoBAQqQh7pIfNbZm+p3ijjd8HoZifoMWshNydo7LsMoPYf1w2cSR/Dj4m
-X-Gm-Gg: AR+sD12YqEvL55Ft3qLt/j8PaMvTgewBwtvdR2gcvp4FYdxb92g167NmlCew/cn/iBA
-	eo7/jH3mXxbreTsVE8TR8Fji9vaO9v350fvP/JOuF9+4LbMtqD8Gy9s8u5lTLndE2Poy5kQn7Ya
-	p0EE78HKnUUwqCq3Ad7hfR688UsZkDDzGS4hYHi2a+7i0UsNh3S4xz0IAgKnhxSNh5JTXZETw4X
-	H7U+2jI3IA3entszy5CJxvLFZuAPBP/zp9T9AhHuAdDPAWpCJayUHYBBXFvl3b+6DJmABNPaTyV
-	NUM0WMYVClAP8d9e35M86WGoqCDAa5qSpHkXnn6s4ltyyjdKMDw4NXjTLD3g83iqtIbLnZ1tiKn
-	KJnm+68+byry4XYPJ0sRsbqmBn+Srs+2z3+/dA2xCbFsICIJ8Z/jxfU0xGjLlTYdc6OTJO1UV53
-	r2AnfkoUVsagBWOUPntjF6693c8yeV7mY7/F6WVsbffVU6zBBIVVmgAjkR0jxLOmWZthJPvwDr1
-	sKZZaAMu7mCE1L3axQmlDdT06zFTM8IBy3hmBLxu/t61ktsEakGHnyunUjbm37Og6kTAadVwQGN
-	oOf1Gm9doLf2IEGQ1h/6uChlBX1CykKmqy2arnqGA0TpkXP7wH6GJ4BdHatmYXRRXIN2MaUrZ8d
-	hl5HhupgxUkIwa3RykPlbmhAvJhdamIhlPun1ulxfW81GOtjFmmMnwnWn
-X-Received: by 2002:a17:90b:3910:b0:38d:f096:a1dc with SMTP id 98e67ed59e1d1-3933b872257mr10350305a91.11.1786747548005;
-        Fri, 14 Aug 2026 15:45:48 -0700 (PDT)
+        bh=v84EinAOPtSLQqW6zPKQbGfn2yp6XUzwjcJ1Z++7qAA=;
+        b=PNiDH7nM3YV7x1toj8auZi1BcWt2YJzH80GYJ3DA39EWPhceYHuRw2xA5Oy/jxHxej
+         2h6TgZOHvhHr7oi8vQTA7veIQgwjABpjN4yS/nS7fFURxlzd65yvwlO+dF+2ka2jALkG
+         45fLDocOHCuIk1nTpY3Ktu+umIf8tybcDegiP/hhlSoBFYXHDrZHzX7/8mcoy667Cqjj
+         55DOMNGIH62RinTr4cUR0hIADKFFrA2KV2mO+AwxyHgA6Y4WuobAwafxLdYJrybadrG+
+         hAp1aYS3gvTUs1GUD+EmyDFNmeBNWtqXkn9iNFzQeq6juE2C73UMcr6hz9Xjwu+mhYFl
+         +2XQ==
+X-Gm-Message-State: AOJu0Ywcb1CtffBLar6EL1ojvItYIMAXUsZAzASK6SQ/dklpKjr8x6IF
+	YRqB4+ekjJCtIpneX18KsPX8JyN1VpX+5A5vNeQ11395yyTlFmeEVKdEevVHOYvw
+X-Gm-Gg: AR+sD10LNx9POInA43/66dF1gul+DiprUCA49FefBDWNQREDmYAcO4WqKjo7xQDGmUf
+	mifSjTfgTwDC3KuUjiPlZiI+okZD1veGgfNJznLRr53Hl+7HRNlj0hsrxE52jeZ37XyI9ph4kYM
+	wbOznQnn/TCNeKK2oJqYV8UAsjTycWEw7OBgiZnctIEZQTx2TQ2+3JfqJMSF6YYM1O6oMNBXFLz
+	KxNz2IXDfeFzHZGvch8ZrxKHPCgIEL8weS1ddzO5T+21IP7KEdOmmHijkvnFfTFXFglvT6vRFGx
+	sNYYLRue0o2jaq0dXl8aMsr7amHhxT9Fg+Jr1klYCxN5cCLiz94RCZFr6Byd84BS+v3Z+XooVdm
+	kNN3zI/b09we33ynvty19HSOQSEx5hD/FBGWYgN/kqQ9u9qJufLjlXmklmUuJcMUf2lNI6oWVPQ
+	91/QlK9yu0jyP/oD1b2fm+TgCwL4+ANalKtoWe/QdeKd8EyIf07ffdc6sahXyDa7P3Mq6jqNzUe
+	kjjy5kF0jXuqwCqy31KTCh2AcN3KpC/pWbDCOKCY6teG/xDaNgN9UWYjy9eSDxE9zKm2+z4dljA
+	+Kf2CILFYkBehbEMA+BzjNwuD4o5Onx3r2fvGAyWwYBMz87pZUyNDd5ZdE1niRv+7YkOa36qO6R
+	P4EuATxs3Ze3qVXLN1wIw4ApvLNlp3oWaAYUxqI5VlrPg3Q==
+X-Received: by 2002:a05:6a20:d48e:b0:3c0:b943:f984 with SMTP id adf61e73a8af0-3cc71992308mr10759889637.3.1786747554186;
+        Fri, 14 Aug 2026 15:45:54 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.47
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:45:47 -0700 (PDT)
+        Fri, 14 Aug 2026 15:45:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 004/109] source-han-sans-jp-fonts: upgrade 2.004 -> 2.005
-Date: Fri, 14 Aug 2026 15:43:50 -0700
-Message-ID: <20260814224539.1523174-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 010/109] unicode-ucd: upgrade 14.0.0 -> 16.0.0
+Date: Fri, 14 Aug 2026 15:43:56 -0700
+Message-ID: <20260814224539.1523174-10-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -70,42 +70,37 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:45:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129068
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:45:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129074
 
-Adobe released Source Han Sans 2.005 on 2025-06-18.  Per the upstream
-ReadMe version history it bumps the copyright range to 2014-2025,
-refreshes the Latin component from Source Sans v3.052, and applies a
-large batch of per-language glyph and CMap fixes across the
-CN/TW/HK/JP/KR subsets (added U+31BC-U+31BF, U+2BB37, U+2D25D and
-various Ext-B/C glyphs; corrected strokes, contour alignment and
-interpolation bugs; removed and remapped a number of region-specific
-glyphs to their corresponding shared forms; fixed IVS mappings in the
-KR sequence file).  Upstream also renumbered the release assets with an
-ordinal prefix (SourceHanSansJP.zip is now 17_SourceHanSansJP.zip), so ZIPNAME is
-updated to match.
+Moves the Unicode Character Database from Unicode 14.0 to Unicode 16.0,
+picking up the 15.0, 15.1 and 16.0 standard releases (roughly 5000 new
+characters, including seven new scripts, plus the associated property
+and normalization data file updates). 16.0.0 is the newest version
+published under https://www.unicode.org/Public/zipped/. The license
+file (license.txt) is byte-identical, so LIC_FILES_CHKSUM is unchanged.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ns-jp-fonts_2.004.bb => source-han-sans-jp-fonts_2.005.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{source-han-sans-jp-fonts_2.004.bb => source-han-sans-jp-fonts_2.005.bb} (44%)
+ .../{unicode-ucd_14.0.0.bb => unicode-ucd_16.0.0.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/unicode-ucd/{unicode-ucd_14.0.0.bb => unicode-ucd_16.0.0.bb} (91%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
-similarity index 44%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
-index 40128f97d3..51f8035264 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
-@@ -1,6 +1,6 @@
- require source-han-sans-fonts.inc
+diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_16.0.0.bb
+similarity index 91%
+rename from meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
+rename to meta-oe/recipes-support/unicode-ucd/unicode-ucd_16.0.0.bb
+index aaa419afba..debe26f4ce 100644
+--- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
++++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_16.0.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = " \
+     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd;downloadfilename=unicode-ucd-${PV}.zip \
+     https://www.unicode.org/license.txt;downloadfilename=ucd-license-v4.txt;name=ucd-license \
+ "
+-SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
++SRC_URI[ucd.sha256sum] = "c86dd81f2b14a43b0cc064aa5f89aa7241386801e35c59c7984e579832634eb2"
+ SRC_URI[ucd-license.sha256sum] = "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
  
- SUMMARY = "Adobe OpenType Pan-CJK font family for Japanese"
--ZIPNAME = "SourceHanSansJP"
-+ZIPNAME = "17_SourceHanSansJP"
- 
--SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
-+SRC_URI[sha256sum] = "076a167394a2bf125a7ab13164a5ea1ce529b988d867c11052e83473b2a704f1"
+ # The tarball name (UCD.zip) carries no version, so check the per-release
 
