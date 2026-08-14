@@ -2,117 +2,117 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 944E4C5CFC1
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 06:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94EA8C5CFC1
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 06:23:06 +0000 (UTC)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4309.1786670977403453444
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4366.1786671241835485314
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 18:29:37 -0700
+ Thu, 13 Aug 2026 18:34:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=OWtU/Uqo;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=F24xzzFK;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=EFjumTpV;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=NkHjsnrA;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: hangtian.zhu@oss.qualcomm.com)
 Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67E19HMF4024872
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 01:29:37 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67DLX2xq3576662
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 01:07:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=O6B6ENDM1Mra+W8q2YRLdpxLEehrayiEHq+
-	CQVagNZk=; b=OWtU/Uqo0Dr9s1G4xEBkuRPsqyb5348OHZZMUy+YklqB8TlQf2b
-	hqYLhrEbybZk/v2cUMNo8NCOd4l8OqUmKs/PB5a57QQDmYzFhIT6HRrOizxQvxVG
-	W907JNk84OHvwRr+i7Dxn5TBSO9QcVZjXmjgKh6+W9k3a3MYRT/JKpm1UOhVtDcQ
-	sEWJXwAXrRBe1Jpt25SoyYVkBKu7aKvR8Pf+Y+MRo1PQYkOBH9lCK4C7nmRmXuKy
-	hSVjXBuSiCoeIgLd0wYvWvZzhhdoHHEiLOm3X+cL6h1M+2/VGXXs3L962SWMbGSd
-	K2SZHv4H/bQhSOCfbk0lARIMSgK6yN2/DBg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1cb5ken3-1
+	:subject:to; s=qcppdkim1; bh=c2/lr+OVyC30Q7y1PaS03Qj+UbYIQ/PD6rl
+	OdrNb3Vc=; b=EFjumTpVe0ErRL20cLlLeVNzJ6Z3k2Bz17mUK5pYzVuYOQagTRL
+	H1nRl96RGLQ9b840cYaio23I7b3vL6O6jzIo4uUEZrleHPPdTtPJuhkAdoBPyRCf
+	QnUSvlgwQeKykTlFvtIYHodkilMMslCIs6XFpSJLc04jhwjnDdZ5l+Z2nsh9biLX
+	4vROdtoM1XTnfdbvSH2chKUhXH3oCwmyy9Nvsz+25VZodpjN8VIsQbqx0W69YLxm
+	K1QTnz2ZAO39t0Mnhrd30Svz/cs0rwLHmMNfhOfD4WOqpuUN0RWqN4FDSm3ya6dC
+	nBnnxV7o4mYZWtgM6h3FtKbTMEO+94T3ncw==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1cb5kcx9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 01:29:36 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d001671a54so10701945ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 18:29:36 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 01:07:24 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-8484f26852dso404520b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 18:07:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786670976; x=1787275776; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1786669643; x=1787274443; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=O6B6ENDM1Mra+W8q2YRLdpxLEehrayiEHq+CQVagNZk=;
-        b=F24xzzFKWWBNGbE2n1dAsu5onWRmKPtw6X9Bxo5eRSV15CJowWvg1wUPlTe8OO7lOf
-         GFzFx4NoCE5SFaobGMsOYmY2vFGzb0oZNQULKNGZ40A9OmBWYAPfwmQIksK/62CWEJjK
-         HQ0Ny5esjDPHUpHJI6Dhi+iOUvodYkrkB84IiJ6EH3Abl51Me9LJpS6xe2vsOdnkWUhB
-         +VvZQ9WVjtRje9kBtfkBRfQU42vg4/wOZHe21Eo1FEdYM7TFWKc6r1kjSWE/TovjBua/
-         L5rblvD40SLHttc8ut/0Ni7g3hisCX+ZlXYjKf/buuwAydWQE/NFsUhNGd/x1LqbxkbA
-         v+Dw==
+        bh=c2/lr+OVyC30Q7y1PaS03Qj+UbYIQ/PD6rlOdrNb3Vc=;
+        b=NkHjsnrAOHw/YCf6Knso6EcsDAEz5crOgRRUMWfvX55dPMrsEBm4NO7qNblSJndaKv
+         2HLVBe86+IwUblE7FnoGDF3D8C8x4oqbbTT5/xyMihWZwbisGo27Zy6DoKqPXf9PaBC0
+         pKqOgE4bbtfFlAH1Bp/LddrRsRSa8vJyzB15eQLrhQP456xt0ZtqzTAyQUgOvH9YE0ut
+         zG5InHJCZy3B9Ff3hKukG7UXXBn0rKM7+2vfod2SKM7bb28dimGGJAQitmEcXAzPDQDJ
+         xtSgMlk+NbJGF/1kmad8vI25eh0jxBNdXiW7nF2n4v1Dzc6xFLfmvDTKIkB0Lr6OS8WC
+         2xlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786670976; x=1787275776;
+        d=1e100.net; s=20251104; t=1786669643; x=1787274443;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=O6B6ENDM1Mra+W8q2YRLdpxLEehrayiEHq+CQVagNZk=;
-        b=iU75Qot2VTheeVocWZOBq77KE7NQVXuuDIgqX0HL9m7ZPH/oiQQi0iUZL7RpKkKdb8
-         LxRGchj+xZWzHW53x4lKSdJ2y/PX5UOgAAqd/wG2vm7OXRGwa0PiqHeACOtQ7Y7SHQZG
-         9BbPQ0kph5Xh00bKP0NmwxRUYoYR92vp6THM9LZJc9zihA2scz2IbEfs3gNQDgvCj3q6
-         6AwoyUx9Amw60xML/ikr/6/D2p2Y1sAZ1a9QY4aS00TQBLol1XqkCRxS24lyz6AOWviW
-         rwdAL5jmOAtA+ABh6Tgis1UUsCtnUbkLuDjiAoBjmR7fp7GCCcUngF3US3WcjQeWUqcb
-         IXNg==
-X-Gm-Message-State: AOJu0YzjbTcxUX/gsxNffmW6COfFwxuSLYLLwdVxCiHCDBeVDxm/iihz
-	ltGIYf3FWzZFX7n3cRh1PhjJ+Jfq9VJ9UQRXqFFr8nAhYkS1C1gJXe2BggX+LEAXRUibc+nwxUF
-	xsu+RwK+Aevn2beP61IRMGGzcGQC1iGRwzOwVGEsCcOOYSb5Ql09zOOMT9eltXrGo43U/NwmDDI
-	+Wp6W4CBzVtaRty3pE
-X-Gm-Gg: AR+sD12OQ3P6Z2RtSRKYW9SWR+2Qys19kBwslSbG9GgMEY7Dz57AaqCDwpN0TlwQS3j
-	cRXyspPvP3th4/2aoJCVvWKn3Plbru3PUxZAeFF9/PXYpgjwEmLDZQpjHGQcrK2MMwcjH9nF2Ck
-	h9yxRyN2ggEYS7jlT2n9f82+vl0pt3hBBix8yGHS0kGtmuKgoLhlafkNRMo/92FGeJP0E9o25tN
-	ulAHPAnCNvuUGMxpPqSduVNnvE6Jz6EVGsyQnlTbYk6oQeUfTz3MsisPSa6anzFqxoMYtqOnY+4
-	+ow09d1/6WtOfwqJ+Q9P/CrsNvcPCb6UcoD761KMolBpUnmxMg0A/NxLtnvHlF28G3Y0H3QAo/1
-	2KZor8W7Jbzk4FNXasd+Gjn82XnYs/s8hRwvVK48QDx8mQv6xRz8ldv8Qnl6mIvn4
-X-Received: by 2002:a17:902:f689:b0:2c9:fa31:84f9 with SMTP id d9443c01a7336-2d3b0cdc256mr22167365ad.5.1786670975914;
-        Thu, 13 Aug 2026 18:29:35 -0700 (PDT)
-X-Received: by 2002:a17:902:f689:b0:2c9:fa31:84f9 with SMTP id d9443c01a7336-2d3b0cdc256mr22166895ad.5.1786670975324;
-        Thu, 13 Aug 2026 18:29:35 -0700 (PDT)
+        bh=c2/lr+OVyC30Q7y1PaS03Qj+UbYIQ/PD6rlOdrNb3Vc=;
+        b=sRbSRA4wtwT6dQaeYRsgqDxJZ7Ks5p8o9VuSfRI7303fE6hiGcCJCPOevs05I14MJB
+         +QEm3OsSp7dgB9gi+5SvB+4U0wFIZGMZpA/m+zTw3RNXvh/20zW3b8n/nVXYEA6nI6Jv
+         BWjNwV1Crkptauc+5ehgFc2cGYvKc1LbM/di15YbNzG0WvOxAbT/Zu+AL6RZucOcHctr
+         csNcINhnStOKG4nqjIg/SX+YbTT8pK8kO6EnplkeyrrAJCRrJgIpUihPy1ozOjB+U5UO
+         oSbCqSxjTeNPVwWf2xf1JzBpHhCnDopP3D5FaBSLqxRCNz/mOzMeHHw9DMiaK11b3MN1
+         87oQ==
+X-Gm-Message-State: AOJu0YyNjBICDvN+gz15cI88+hTgV+uh6JeHQwguzPCKqFIwij5qsII2
+	IrWf4BMJFsyZpzLfSKpWRaruwd9h5jgJujhWAvI5iBxyMFZ9uqwLg2Y6epzSQxmC3wQ6alW2bMe
+	3EeqeE7oIZnnrIqJocUZ5RqYFQz/OtAXQzqNIQlS7DVWnlvgJlhrW8fI2V3P1vW1GcvtpGHi4/h
+	L2qSSMim+t+wsF5hne
+X-Gm-Gg: AR+sD13GI/BA8/+Go+aKNfB+q5cZT0i9OU10Ma1SuGjN1m/iO/54jd9czGRcYBdmhLf
+	M9Pg5wfso0/m4HFz1jd6c8szuSfMjIrZ7geodMZL9ISaxOJldcLAD+2NuU5hTKfW5FLCuMzKE9C
+	cjMS4+CCXUjM85W6xlYbUYRyDkZb8sPtMpJm3CkGrY5y1sR9S+9r8V56ENDGDd3M6+T/YPmfOun
+	+s7WjCSrhVNLqhiNGDHxffCDA3NK2qxfq6oZs2mwM31aY0j785H5lXXxvFqWyNKDBPmGgscvSd8
+	0JdOuC2O/SOCFmpk+w2qCxr0ibXGDIrUtPJQgYypKf2x/ha9fjvYLv/GunN1rrqW0eI/V9pe7iL
+	gTvvSZwYzLsxafrUb1z8Fv1InkT7yzZ7KMr668vd8KiYMp5hH6on7nQNmzUXrcgUG
+X-Received: by 2002:a05:6a00:4c1a:b0:848:6447:e0a6 with SMTP id d2e1a72fcca58-84fde00137dmr2084803b3a.9.1786669643268;
+        Thu, 13 Aug 2026 18:07:23 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4c1a:b0:848:6447:e0a6 with SMTP id d2e1a72fcca58-84fde00137dmr2084728b3a.9.1786669642423;
+        Thu, 13 Aug 2026 18:07:22 -0700 (PDT)
 Received: from hangtian-z2-2004.ap.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d3aebdce8fsm3090315ad.77.2026.08.13.18.29.33
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbef7217132sm1680253a12.23.2026.08.13.18.07.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 18:29:34 -0700 (PDT)
+        Thu, 13 Aug 2026 18:07:21 -0700 (PDT)
 From: Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: qli_sdc_iot_wlan_host_oss.external@qti.qualcomm.com
-Subject: [wrynose] hostapd: upgrade 2.11 to 2.12
-Date: Fri, 14 Aug 2026 09:29:31 +0800
-Message-Id: <20260814012931.294128-1-hangtian.zhu@oss.qualcomm.com>
+Subject: [PATCH] hostapd: upgrade 2.11 to 2.12
+Date: Fri, 14 Aug 2026 09:07:18 +0800
+Message-Id: <20260814010718.286760-1-hangtian.zhu@oss.qualcomm.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Proofpoint-ORIG-GUID: JJO41Tv09Bl6sX9I_6mvOJEA2kEq0OR3
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDAxMCBTYWx0ZWRfX3DptCXBR7Re5
- Xt8hvEybrTN143O8S2oVT6sgAmnVKKwcXD69CkefOpLWBUHDOsC3y9yC+Du3a04ocAIdxUbI3BI
- FB84D52aXuZQqfpJf1EYBzgEO57jb8c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDAxMCBTYWx0ZWRfX6B4sk7Wv9aje
- 6xbFHgZSMtZsm+BgMPVDGcxz8Iqfud7BqdyDpQKhYQgFbaZBaYdO5AiJteMqpbrjF63DZm5uXW/
- /O7yvNLRVPsVGo0xeul9+zES6E43+BESXfueeHsT7/9oXo4PAba7BzhoWNB7TxkwbHv7hSEoE9t
- O2IA+FnMxCzvTXalpUA40ky+rAcpPW3Gp7jm0mjLa4uGWt1EYyv5sk+P78J9g4BlK3p6aWHcsox
- 5s8R9aNdm1OWN4Q10/S4/7kJsvjHNJCkFAcO1/ArSr5hWR1E1+W5tIwe97J33TsQhnbC9BBccYi
- fcOck8OcnMdxODFbHAuJ/YKJgh/orjYnbVpA5fjqhJuPcGLzrpSi/n5B+rnLYz4GaKEyJ6HxDLY
- oQcQVcO6X30llKHIZUqUP1jZwlPHNPGhG6fmmOANQvnmkBWNMAYdcQdc+BYCy/mETJ/2aBBRneo
- wYi0zm7ATZyBrjK9hUQ==
-X-Authority-Analysis: v=2.4 cv=GoNyPE1C c=1 sm=1 tr=0 ts=6a7e6f80 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+X-Proofpoint-ORIG-GUID: rqdlHWWBlq74jSUPqbg_IOlLOPno7Al9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDAwNiBTYWx0ZWRfX3uBxOCYJFsL7
+ 600sXLoiD4TWXYprQxudCDwwwiCOPN+GVl8HnjPwQEUnVBow+adDQB7Eu6r/806dmojw1abjRNd
+ opzpW6ctxzMID6hHti4qpurcbudg3s8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDAwNiBTYWx0ZWRfXwuwc++wvk5+Y
+ uZxVshFd+TYkn3ohiOae8hmeetF1f+1fAZ7LpHrFAmFWU+DIcKFzRN0j1+rtWIBlb7BWWyxQOMD
+ PeVBCzDZ7+/vk+/SAqfm99s6gywyCzWDL0ojAVVdtV7Z28qAp9kQvqfREpqtOu4fBNlQEXHCZut
+ 4gKQQaFdoPU8v9/VZhgHLPLYQWnXx88OYSf9G247qaWGiyspc67Muu/PyOQOLGxT60DEDIK24LF
+ bFRDiTfpmZHokeuKvZ45QHbiefiI5NQuPu/NkJWfSwY+mhCoNkSF8m2r2OcJM8ve2/qt207usKv
+ 5GYk6fl1/dT/2ylWNvWXwPVpWRd7WlMdHXLTri1VK/ODuNPIkERGScEqo2JSciBFMo7mZuE2d3n
+ URIiXA0I2ZuVCUnJVRIzXn2dXcc4kRq5xJ5dhOfB9UGXY5amEvCDx7uxRaS5/RtJJTSVZQexXnV
+ SAYJobGJ4jBsRxm5Yww==
+X-Authority-Analysis: v=2.4 cv=GoNyPE1C c=1 sm=1 tr=0 ts=6a7e6a4c cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=yaAG3qJ-AAAA:8
  a=EUspDBNiAAAA:8 a=3-RhneuVAAAA:8 a=COk6AnOGAAAA:8 a=a_U1oVfrAAAA:8
- a=g9gh2NdiATZAZWeT5MIA:9 a=GvdueXVYPmCkWapjIL-Q:22 a=oLVlbjkABFOu4cUI0CGI:22
+ a=g9gh2NdiATZAZWeT5MIA:9 a=IoOABgeZipijB_acs4fv:22 a=oLVlbjkABFOu4cUI0CGI:22
  a=VLVLkjT_5ZicWzSuYqSo:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: JJO41Tv09Bl6sX9I_6mvOJEA2kEq0OR3
+X-Proofpoint-GUID: rqdlHWWBlq74jSUPqbg_IOlLOPno7Al9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-14_01,2026-08-12_01,2025-10-01_01
+ definitions=2026-08-13_07,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  lowpriorityscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
- impostorscore=0 phishscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ impostorscore=0 phishscore=0 suspectscore=0 clxscore=1011 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608140010
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608140006
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 06:22:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129039
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 06:23:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129040
 
 Rename the recipe to 2.12 and update the upstream source checksum.
 Refresh LIC_FILES_CHKSUM for README changes in the new release.
@@ -416,7 +416,7 @@ index ce1c145fd7..7673ce0d38 100644
  inherit update-rc.d systemd pkgconfig features_check
  
 
-base-commit: 6bf0d8ad57b33950bab4c7f6c037e1ccb6f6e2eb
+base-commit: ea7c7c4f2e21a0aadb53d1691de6d5a85dc11a8e
 -- 
 2.25.1
 
