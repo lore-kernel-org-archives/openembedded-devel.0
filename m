@@ -2,191 +2,203 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E28EC5DF6D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 946EBC5DF6E
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:21 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24536.1786747634129885809
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24402.1786747635516551035
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:47:14 -0700
+ Fri, 14 Aug 2026 15:47:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dNXEP8Ui;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2cf50c6f235so19296355ad.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=iu/K/uq9;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cbe827e3cb4so1632584a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747633; x=1787352433; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=adFrsNfEAR81ugRv1ZMYoCF69YA35/ezJQg3zqWul0c=;
-        b=dNXEP8Uie0wv9JyMZ+7Pne45dfYFEB/X/Ejesjp50WRaKku5hgc5KtNCD3KKZlGoDo
-         YLwA7DU1MFwNxvLdcmo4MGWODzrfl6X5VVnc0d6jmK6xvUBKiGC77WJVq29nsfV6FWhj
-         UwTpcLCt8SGeR0ZLVddLJdXUfSnpKu2F5l1lvgiakHkkkPQ6NKXN1o+AmGaiBWUu1XZs
-         GRz7N/VzA37aaN/pBWUO+dI+10gz6cIFKU5qqm248J1/t9ZbxLA3ALUxuSfv0CI/KeAG
-         hmSOnBYQ3arNMDq8JSKWdOVmZ1G0V2VibFq51QuZeDtdEJ85EaWTKfmVsLOm8vXPOpA6
-         YhKA==
+        d=gmail.com; s=20251104; t=1786747635; x=1787352435; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=699wWLdFNAKjfUKQdEfWkVBKikvJfZ5u9QHivnmMXV4=;
+        b=iu/K/uq9lgsxPZ21G9VFBcn8xm+lZOJ/VJYgg61Pm0+NYCXEXEpsFNFHWQ5IK7pcM5
+         57dg3ZB2vbBi+EXi9B55HUACw+lr4O/88a1LjA7eZriDNxIi3t8MdiGi93uqZr/lG5w4
+         OoW4P1HCfSYmqeYyIWtPVzo9r8vFYJ7+Yp6Uxp5Hnj6zUoF6dxhLY2gNfb4G5jrH6NFj
+         a09vkPa5D2C2mAO73LGWCicFvKhJ/NmqTydUq7XwnLfuDHlF0aixlpidiY/j0Y1WsyhA
+         zrAqqdU11IPrBfH/YpTITFdHsRB8pFXLv2PwDgFyE8GCjFX2Ff6+bBVHFDNE/RrQdbN5
+         RF+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747633; x=1787352433;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=adFrsNfEAR81ugRv1ZMYoCF69YA35/ezJQg3zqWul0c=;
-        b=kB7gdZXt1B0ecJPQlF7hYkwBat4DNJowuj268oRrURPhLBWrspNEsk4ut73CqSD7ST
-         etOeCEJuPRRMKJP/QOwhH909cJDQZ/WaNseMAxOeHIXQaSgvZCOzxjyZfJ1VoKvas/Vd
-         GW21EohlZV3FqolatHXdWWSgSf+WV7nC30zAil00d2yeW5kchYtZV+iGy94pBQkrGpvK
-         g761OMmkzBUB+l/ubMQHQor/G7enjEg/4JM4DxtsKGQMxExU1CCwR1TlQd6NkuYz2gF3
-         h9F4dPLcDK6kanHBZTWj6E/mRPecob1/qGnweA4v0m5rslwbTsZpfb34vF1gIqMlrdH5
-         2G+A==
-X-Gm-Message-State: AOJu0Yw/fqw4KA7RMKwp5lDzEM3+6gruZ7wtE3P8p/2P7pZbFD5EWPRU
-	FpN6ky06X4SZiwJXu8Dv9q07qrm3cBQlgJ5zSUiaMgXOdrtzdezyQnR9/VP/kg==
-X-Gm-Gg: AR+sD10MRO2VijME4LuBKYPmS5/CDEKiloFc4ZjzQ4odZhAo4rpFyGx466ponmUZsqW
-	TvnkeFgfyjXso5nhBRv9rYzuBwD2JMRSkEQN5b7ldJBAlSGua7911BE1eSKkpw9OpTt7qJMiWMI
-	nAt2ZHZjj35wHACASVbjVkMm5h0tBSTS3YypDb0xi1EO7qLOTpe6qPk/WJO2xLOk9eQY/E3DPCp
-	9o3qI+LkXtt9sPfj12U+OIEjvJqOFYpprlashcPOTeq0itUHnTeSD2CVm/C2ePxsDHbxQzs+pZM
-	IqiOxVuMmSg7Kazv+SYeHfGbYZboSP86jqJNH0xKOBJr6oTAUCjDdKSw9odh1Kt3EywwKuVLWmO
-	X6RE702ncMw9lKV9NP/199yLHaBrIsvTv9TIydSz9ZtFUjS3fgLdMxiwdhR/gTY2KPAS50iGWXN
-	t5tPPH5S11ZU2yHQDffYIRcObwCHI8ePUu0+L47Q7TJltP/Jw6ncZktlqwrTnb3Ck+w7dpMnEYy
-	9syYc9oKjeBLEGWPcsLprZPhL8nERz/GOmm6XQdyfb4OgZmTCaGYefV1vMpCtQY8GjWl9lPHwxy
-	UmqIIYV1QYeGwOrLpn62cyK7km/bbbViHM7DQE++hByzr1v2oeSRZLLwgUEfRlaZFagRZNJNLjg
-	r1FfZhoCuemXaRs8GpFnVMRBuuHuvJio8bzz+OnOkr3LK5w==
-X-Received: by 2002:a05:6a21:178a:b0:3bf:e761:6285 with SMTP id adf61e73a8af0-3cc71de3fa5mr11824870637.29.1786747633448;
-        Fri, 14 Aug 2026 15:47:13 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786747635; x=1787352435;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=699wWLdFNAKjfUKQdEfWkVBKikvJfZ5u9QHivnmMXV4=;
+        b=oaf85BwSkbLcocbeewuTuLjaCmdiGWrWcgV1G2vcaHlFKsI1Ne8joLw7k4BTmgKUHx
+         0wC4dxQXH5n+waEqMomuzHblfE6y9Y+UZyGHH2sY/UfUpItM7M9y2HZcpHn1g/zt6mgC
+         dT0dtxLRYPS0oCWtL+XwJTbgIAfl7Vd8uLF78bVIn0sbGfUwPN7m9rsNZ1KTrkpMmt5v
+         AsOGdJ94nSLzPxmiEm2TifaXJbv8x9DQNbjGuRgMJQ0mhIP1LhrmSsqT2iYUq/pQWGWu
+         6C2AYQDBXCgbEXZvUaobR+Bqd0j/VNGOdZ/Y9G5lRZTfN8tKm53bc58JceV7rdKhtlP7
+         vGnw==
+X-Gm-Message-State: AOJu0Yx2Uwhx+IuhHymRkR/LVR5IHV0le7zZRSvokTs4mEDni/r2QhNP
+	z9InbIRH1by78DsFZBWg3vro+Rvub536gkSVRSdQrDt1RF6XjKmW00cUXgXLSwHQ
+X-Gm-Gg: AR+sD11mX+Nz0gJyhSyVLzFN/9DLZRWv9JGHJDHYQgHXhyF4BL96HxX+SLYoklk7r4R
+	7VuwLCPvwYnkFHxMK8zPOiud865wQefKgVUCYNnD++VAsMvSSgmHLbZSnt+XEjXGrJFL9Fz9ae5
+	Z/fgIsnxlBpzRF7gD+w6rkjk+NTOZDZMxjdN6o/uDA33HkA2lBtmJbRKTM8rRWBSiWqtmCX8hkB
+	sHlTmulHXJiRQZ3ppO6Rx9IvvDCqfrU9r7ne9NzRO3ugae+/eS0j4BnutQKrsHiWLY4gNQudwZL
+	pkk0nrNTbivp4YyaRkNoqQvLihUl1CpXrOnDjPMQZNvqdVRwxQHakz3H6tN4VAFlO/oMhP957nj
+	PCGql/1PuNBJpb2SRelzQSSqerdKEJSdwO86iJm/vSy/uPtTaDWG7WiVyrZ7HalccoA38St6EWD
+	L5/RT9Jz1N27qHPmWDNsOU3sY6pwkim6eVy/2LqqWYsQFvZssKp8/CQQZElUQTkASk7T39uT2p/
+	gS6e+++tpkQtqGqlT6ilt1ysvRB2QgOoLcx1RQ1yVL4yleBvulrPoKHkpt4WPCrelnvYDSJuNuK
+	yOU5ooZKEkmWhDqB+OrUCA4Mtpqc429gCxPGhZ6kj1UlSWgABwfDtzG/yaOYq4oTTWbQv9j67LI
+	2JDdAwfgg44F0Ief9VJm7JcD45NfjYrsdeRwxcSXvZ2/Drg==
+X-Received: by 2002:a05:6a20:430a:b0:3c3:c07b:5322 with SMTP id adf61e73a8af0-3cc71e7d6f0mr10019029637.34.1786747634828;
+        Fri, 14 Aug 2026 15:47:14 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.12
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:47:12 -0700 (PDT)
+        Fri, 14 Aug 2026 15:47:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 080/109] unattended-upgrades: upgrade 2.9.1 -> 2.13
-Date: Fri, 14 Aug 2026 15:45:06 -0700
-Message-ID: <20260814224539.1523174-80-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 081/109] redis: upgrade 8.8.1 -> 8.10.0
+Date: Fri, 14 Aug 2026 15:45:07 -0700
+Message-ID: <20260814224539.1523174-81-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129144
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129145
 
-Minor release. Dropped 0001-setup.py-Disable-autodection-of-modules.patch:
-2.13's setup.py already passes both packages=[] and py_modules=[] itself, so
-re-adding py_modules=[] produced a "keyword argument repeated" SyntaxError.
-Rebased 0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch onto
-the new import block and the shifted run() body.
+8.10.0's default "all"/"build" goal also builds the bundled modules
+(redisbloom, redisearch, redisjson, redistimeseries), which pull in
+their own vendored build systems and a python3 interpreter this
+recipe has never needed. Restrict do_compile to the core server only,
+the way scripts/build.sh does it internally (oe_runmake -C src all).
+Rebase 0004-src-Do-not-reset-FINAL_LIBS.patch for the shifted context.
+
+Build-verified for qemux86-64 (do_package_qa green).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...up.py-Disable-autodection-of-modules.patch | 28 -------------------
- ...de-Remove-distro_info-usage-to-check.patch | 19 ++++++-------
- ...s_2.9.1.bb => unattended-upgrades_2.13.bb} |  3 +-
- 3 files changed, 9 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/unattended-upgrades/files/0001-setup.py-Disable-autodection-of-modules.patch
- rename meta-oe/recipes-devtools/unattended-upgrades/{unattended-upgrades_2.9.1.bb => unattended-upgrades_2.13.bb} (90%)
+ ...0001-hiredis-use-default-CC-if-it-is-set.patch |  0
+ ...akefile-to-use-environment-build-setting.patch |  0
+ .../0003-hack-to-force-use-of-libc-malloc.patch   |  0
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch        | 15 +++++++++------
+ ..._SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |  0
+ .../init-redis-server                             |  0
+ .../{redis-8.8.1 => redis-8.10.0}/redis.conf      |  0
+ .../{redis-8.8.1 => redis-8.10.0}/redis.service   |  0
+ .../redis/{redis_8.8.1.bb => redis_8.10.0.bb}     | 10 +++++++++-
+ 9 files changed, 18 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/0004-src-Do-not-reset-FINAL_LIBS.patch (76%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.8.1 => redis-8.10.0}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_8.8.1.bb => redis_8.10.0.bb} (88%)
 
-diff --git a/meta-oe/recipes-devtools/unattended-upgrades/files/0001-setup.py-Disable-autodection-of-modules.patch b/meta-oe/recipes-devtools/unattended-upgrades/files/0001-setup.py-Disable-autodection-of-modules.patch
-deleted file mode 100644
-index ec70dd6570..0000000000
---- a/meta-oe/recipes-devtools/unattended-upgrades/files/0001-setup.py-Disable-autodection-of-modules.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 8fd80ead718ffc53d7182b9df6f49974113ff8fc Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 23 May 2022 11:23:58 -0700
--Subject: [PATCH] setup.py: Disable autodection of modules
--
--This helps to fix build with latest setuptools
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- setup.py | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/setup.py b/setup.py
--index 932bf01..fd5a092 100755
----- a/setup.py
--+++ b/setup.py
--@@ -12,6 +12,7 @@ if __name__ == "__main__":
--         name='unattended-upgrades',
--         version='0.1',
--         scripts=['unattended-upgrade'],
--+        py_modules=[],
--         data_files=[
--             ('../etc/logrotate.d/',
--                 ["data/logrotate.d/unattended-upgrades"]),
---- 
--2.36.1
--
-diff --git a/meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch b/meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-index d39427e9fd..317d0dfe4a 100644
---- a/meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-+++ b/meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-@@ -17,24 +17,20 @@ Signed-off-by: Aníbal Limón <anibal@rzerosystems.com>
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-8.10.0/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/0001-hiredis-use-default-CC-if-it-is-set.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-8.10.0/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-8.10.0/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/0003-hack-to-force-use-of-libc-malloc.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-8.10.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 76%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+index a8a13de83e..d6dff5f853 100644
+--- a/meta-oe/recipes-extended/redis/redis-8.8.1/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis-8.10.0/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -15,20 +15,23 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ Reworked for 8.0.0
+ Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
  
- Upstream-Status: Inappropriate
++Rebased on 8.10.0: context shifted by 1 line (offset only).
++
  ---
-- unattended-upgrade | 38 --------------------------------------
-- 1 file changed, 38 deletions(-)
+  src/Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 5dbbefc..15fbe09 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -152,7 +152,7 @@ endif
 -
- diff --git a/unattended-upgrade b/unattended-upgrade
--index 802d4d5..3b4e83e 100755
-+index b72e59e..8ff0c1c 100755
- --- a/unattended-upgrade
- +++ b/unattended-upgrade
--@@ -83,9 +83,6 @@ import apt
-+@@ -89,8 +89,6 @@ import apt
-  import apt_inst
-  import apt_pkg
-  
- -import distro_info
- -
---
-- # the reboot required flag file used by packages
-- REBOOT_REQUIRED_FILE = "/var/run/reboot-required"
-- KEPT_PACKAGES_FILE = "var/lib/unattended-upgrades/kept-back"
--@@ -2061,41 +2058,6 @@ def run(options,             # type: Options
-+ # workaround debian #1076097, it's unclear why we get the warning:
-+ # "DeprecationWarning: This process (pid=3710789) is multi-threaded,
-+ #  use of fork() may lead to deadlocks in the child."
-+@@ -2436,42 +2434,6 @@ def run(options,             # type: Options
-      if should_stop():
-          return UnattendedUpgradesResult(False)
-  
-@@ -53,7 +49,8 @@ index 802d4d5..3b4e83e 100755
- -        except Exception as e:
- -            logging.warning("Could not figure out development release: %s" % e)
- -        else:
---            if ((devel.series == DISTRO_CODENAME
-+-            if ((isinstance(devel, distro_info.DistroRelease)
-+-                 and devel.series == DISTRO_CODENAME
- -                 and devel.release is not None
- -                 and devel.release - date.today() > DEVEL_UNTIL_RELEASE)):
- -                syslog.syslog((_("Not running on this development "
-diff --git a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb b/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.13.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb
-rename to meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.13.bb
-index 3d92f59ff2..9534fd3197 100644
---- a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb
-+++ b/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.13.bb
-@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
++@@ -152,7 +152,7 @@
++ 
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(OPT) $(REDIS_LDFLAGS) $(DEBUG)
+ -FINAL_LIBS=-lm
+ +FINAL_LIBS+=-lm
+- DEBUG=-g -ggdb
+-
+- # Linux ARM32 needs -latomic at linking time
++ 
++ # Replication compression (opt-in via BUILD_COMPRESSION=yes). When enabled the
++ # replication stream can be compressed with libzstd; when disabled libzstd is
++--
++2.34.1
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-8.10.0/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/init-redis-server b/meta-oe/recipes-extended/redis/redis-8.10.0/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/redis.conf b/meta-oe/recipes-extended/redis/redis-8.10.0/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-8.8.1/redis.service b/meta-oe/recipes-extended/redis/redis-8.10.0/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.8.1/redis.service
+rename to meta-oe/recipes-extended/redis/redis-8.10.0/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_8.8.1.bb b/meta-oe/recipes-extended/redis/redis_8.10.0.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/redis/redis_8.8.1.bb
+rename to meta-oe/recipes-extended/redis/redis_8.10.0.bb
+index 09a7c3aeac..6176dc45be 100644
+--- a/meta-oe/recipes-extended/redis/redis_8.8.1.bb
++++ b/meta-oe/recipes-extended/redis/redis_8.10.0.bb
+@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+           "
+-SRC_URI[sha256sum] = "1d1e423c9c808de3cb01dd3300d2b8d305b7691382e31a847ec17b66d3157477"
++SRC_URI[sha256sum] = "f1baa4b28befd417aa6577ebeedde9e9fc7814cfcc299b2a6d2fd99ef7420a6c"
  
- SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=master \
-            file://0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch \
--           file://0001-setup.py-Disable-autodection-of-modules.patch \
-            "
+ RPROVIDES:${PN} = "virtual-redis"
  
--SRCREV = "5aff8fa2b5b60b7c11bbfb39c884477e72d11d02"
-+SRCREV = "221b1a688ee291fd7e0d116dccb57073b921619a"
+@@ -47,6 +47,14 @@ do_compile:prepend() {
+     oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
+ }
  
- 
- inherit setuptools3_legacy
++# 8.10.0's default "all"/"build" goal also builds the bundled modules
++# (redisbloom, redisearch, redisjson, redistimeseries), which pull in their own
++# vendored build systems and a python3 interpreter this recipe has never needed.
++# Build the core server only, the way scripts/build.sh does it internally.
++do_compile() {
++    oe_runmake -C src all
++}
++
+ do_install() {
+     export PREFIX=${D}/${prefix}
+     oe_runmake install
 
