@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E532C5DF74
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4CD5C5DF77
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:07 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24484.1786747559430497969
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24352.1786747560369455847
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:45:59 -0700
+ Fri, 14 Aug 2026 15:46:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dMIxkHLc;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38fdeaed181so2257504a91.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Z5pAuvyu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-38deea72eebso1635203a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747559; x=1787352359; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747560; x=1787352360; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ex6M8LOAS7wvgrxt6x4ZCrCs97GN+anTDqDk6K0JuuU=;
-        b=dMIxkHLcXmmFgVWmdGiXMrNL2fgw2VeJfojrBoOW4s/4Wldmkfqdlbsp/hUMFFkF9Z
-         Xk4I/GwiPK9ZFreXBgmE3fnb0msgeEUV0En0RYQ+JeWMsEJnlLHbEhvNLAH11lGMBQnD
-         S6QfSl1iC69NMKS1SRfCVPqdrWbpjKGFx/j+1gbU2IrK0z8lqyuClt2ny1BUhUzxU516
-         frsrgzdjwRLfGkDiNL0e4Yn5y5zmxkHpjc3tRDoMw7jLyU7wKeZysyHAEUSTVcwUxCjt
-         bVGd97ojKzeOk8I1lqoa5cyZfngnx8WS/Ug0aI/GuEl0ZbH043TwLXvPS0zwYAmJP27I
-         xW/A==
+        bh=2zQRK3EncrrJ7fXQ+2H/LG38pLmHRjYNw90TalCEZec=;
+        b=Z5pAuvyuegz9PjbOgWITjxfKkQ4kI8UE6YsixBY/AXB84Lu9Si3kC2VL8PaisdThmv
+         erVcMWFrPZTP1phwpjxHAkUYjHS30m2YJV6iWtl+XaYD4Xnyhwk2bIAOfFyI8W9Mjr/t
+         3y32O+F20svy2HSA9s8qE42EAzxHd7cCe1rVxrgmQ+abKx3C4GfX3hNN+yRRUdT/bv0Y
+         4s1lzl+UilcqxW9pbvngNOL05HbJE/AWrSvFJZmqf9hwqouisUODJmWFjWvoh2lcfK0D
+         u7hHcgQXqDzG7srM37ORLoeAU4ECSLkqdTOdwq5Li7we1YDly/M5HbDOx0ldI7l36Vpo
+         C9IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747559; x=1787352359;
+        d=1e100.net; s=20251104; t=1786747560; x=1787352360;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ex6M8LOAS7wvgrxt6x4ZCrCs97GN+anTDqDk6K0JuuU=;
-        b=sRw2MUMeNdXs+JjAxBnKyUjjUx6AfOoe2t6OT5caouyqtlp2WkCCyt2IQ0/r8Pyd7i
-         LsmnVHiJL8kfIquWtEZhk37lXephw/rFKW6G574sfT5Cz61GGEnHgu437kTAzLqCMD8/
-         KkcN7xkj89PbUpReLln42vCZfCpWwNkdFVeDH7zzaE0O9ZH4A/6MUOVHadRQAsR/YQk6
-         6E+0d1cm5p5gR4JM5ztpoPaaaS8uoP492UwVTf1msmVsSfCMXMZOgAiUjyPgO39PXI87
-         SaRPowO4PPMyvACz8cjZXXO/hspcTE9dEkz8+eU+KpbL/UceVcr5p7NX0ea85Co5ccAE
-         ygkQ==
-X-Gm-Message-State: AOJu0Yzr+5CwB/W6m/x/YNSqhaYV0CoT5NCKIciViaqPJT31ti4/63z3
-	aoqyC0BSBME/+38VxJzNkQl9xFzFuQsk/PwtXYGOj3kCV3Ui8avDrl7gvgnDsezs
-X-Gm-Gg: AR+sD116wJbCrQ61SlBljD7+ntCrxrtlveZE1N1lKi1AXlXO7do8NB64BnmF3azsMJf
-	wGVUW3ayZzf+rq0OwUA1EmpYJwusGRyLKH1Ev+RevYV9bIZaAPC4FyWxVrASySa8SWV7WFswwMJ
-	bAXi+sd+1HXEKB15guB11IbNVeQ8/unJEaqNSVpAj/vdUrdh4w3CCpYM3cTzH6IRqz7ccVMKlQI
-	0zK1fagvUjty6TrG58h/nf5Qv2JRF9yPryVYnFNJbi5tkcU0t9Pc8t7gqJH84wPYLLWmDrGqIIi
-	0+Fk3n1HKzCr3sDYxIUDRrkeOPvZucSrIF7+z6oe9voqZs29OYAMRHxBNW4HL2kEEV+9UUdJNNE
-	BKRcXReEx5Uwo9UXwdbRVX5hCy1ZuxXe1/i/+3CZW+1ziMMbi2z2y/Y6BOnIRKB4tp3CYn8qokQ
-	uSWKmc1HkRl+s6ZzoKroTxeW0IZ/XwVsIuwHTIF8Hb1Vy826GKzsJL7sGlxqJozYZli1f5OsvqQ
-	c49+Vs7vmhfvaosbqGTMmkJTCISO41bVth4HMZ8SlKaiz8zYcedL8HIkKeCPvUaoudBXvKboBLa
-	eaF9zeZqXua/SrAa8VXGXXlL4L/Gd2rgxrVZNHTaOSMDzM1rJEsJhpIcU18/tkweaHeuLgTyf5l
-	gr96KUT9oWCPqMCongNPqJulRv0mr3DvT3+WaZumPqp/hJQ==
-X-Received: by 2002:a17:90b:33c6:b0:38f:57f0:1f5d with SMTP id 98e67ed59e1d1-3933b96b54dmr9439025a91.15.1786747558720;
-        Fri, 14 Aug 2026 15:45:58 -0700 (PDT)
+        bh=2zQRK3EncrrJ7fXQ+2H/LG38pLmHRjYNw90TalCEZec=;
+        b=gZjI/fxS//Ewd7JuW7JTzccJfNNi9NcaUgB3nj53mmrgTJQZy6fxB15THpwDu5dFRj
+         laJ9Z6TI9bUloiaizwFtmupDvuFEbWANwl4g73iV5IO2/XCUz0NX2U3kHFIudYp41fUm
+         OGYdNNwWsYZuNVzA1AYkjpuixjJrg7KR2xMTRKFCHgZMMiuzPFnif+UhJpT97OoioDg0
+         j2cMrRd2/SSdYNXxEa8FHM7O7n4WTUpge5FIGuBxFIkuQEj3022yrtJwhs/P825p/KJy
+         +nFjQOtboWbxG97YNxdxrMdOKebn+QNppdwH50Vlnt1iw9QLEq8dfXQNTo0dAlrLXh1F
+         JrBQ==
+X-Gm-Message-State: AOJu0YxFQT9kLmuPtzakQsjQrrJf9pLnSuGnrcQfZPej685f6CfjHOqE
+	0zquUq7iyKv88rRvCLhEXYsiJeK4RfRdEZhbObj6CKxom5IxbXpj3s7YxnYwaeoJ
+X-Gm-Gg: AR+sD10mpcu8CPXPv233oxXKfAjZPK4MSAgm+NINlTLrQ61xaXYnJ/rqDix+qPIK6sZ
+	34JejTbsUKxvKaXVznBSbpF/FoOxEZ2tidk1RoftsEX5ZaZWp4GkyspQknOyjIGkVkmlbmDhe5C
+	NCDgkK9kdo9KSJnUJj90IjBUl5uONb+Dz/boETWP/QanhfWFg30Rvs0qD6AbxYnuixhD+7064Jv
+	IafH1HpSjHnjeU3K3hdYS0OekiqyvOIF5MHej8Ok/7z4/Q4PZt9SVwIUjJspwGOLU8KO8uvH1+u
+	wEFehTHhyqTGVsqoMsLSkTZc+O9Bkt3wDvu5x5x/1PHIUjd/A3r//cY9o+IA6ERdIBllVl9H1oy
+	rAcf3oQIa+YYQ4MrMp14/hCSct9yzxPbm6mGZPryETyEkpRGavvSnkhup7Aw5a4GeE0WO16C2PO
+	uawBuxt+wA0fvTSua9afr90z3gi/gj6cbSOr+V2OhTsjOox1ooRWPIb6M5o8nwi+2Y3yM5Lj6mI
+	ToMgS7869UbZjmM6vnZwgv/9W2DFx6nSOvMmB222DDRqPYzax6c6Tjjoq/diy1WKYhiq0p+rsT9
+	QFaLQDvSVdm3kKet6+bgn3e/Pbqz4jSH/kFYNZ1Z49GVDFEXI2309QGjVesQwAwPS5IBsGzkcpE
+	Jkobb1TTPXAZnt/YNMHWZX7QVSCOvqzqQVnUbG2jw6uWyJw==
+X-Received: by 2002:a17:90b:1d01:b0:38e:9045:babe with SMTP id 98e67ed59e1d1-3933b75535cmr9992450a91.7.1786747559681;
+        Fri, 14 Aug 2026 15:45:59 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.57
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:45:58 -0700 (PDT)
+        Fri, 14 Aug 2026 15:45:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 014/109] catch2: upgrade 3.15.0 -> 3.15.3
-Date: Fri, 14 Aug 2026 15:44:00 -0700
-Message-ID: <20260814224539.1523174-14-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 015/109] snapper: upgrade 0.13.0 -> 0.13.1
+Date: Fri, 14 Aug 2026 15:44:01 -0700
+Message-ID: <20260814224539.1523174-15-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,41 +71,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129078
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129079
 
-Three bugfix releases on the 3.15 line, per upstream release notes. 3.15.1
-fixes a potential out-of-bounds access when locating the start of a broken
-UTF-8 sequence during linebreaking (#3096) and TEMPLATE_LIST_TEST_CASE_METHOD
-/ CATCH_TEMPLATE_PRODUCT_TEST_CASE potentially causing ODR violations (#3161).
-3.15.2 stops --warn InfiniteGenerators from firing when the generator was
-limited to a specific element by path filtering and silences
--Wunused-parameter in -fno-exceptions builds. 3.15.3 makes the JSON
-reporter's number handling locale-independent (#3176), improves inf/NaN
-handling in JSON output, and rewrites catch_discover_tests for a 4-5x speedup
-with deterministic registration order. No API or ABI change; only the git tag
-and SRCREV needed updating.
+Bugfix release in the 0.13 line (the newest snapper tag; the higher
+numbered yast-snapper/2_2x_y tags in the same repository belong to the
+separate YaST snapper module, not to snapper itself). No build system or
+packaging changes; COPYING is unchanged.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-test/catch2/{catch2_3.15.0.bb => catch2_3.15.3.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-test/catch2/{catch2_3.15.0.bb => catch2_3.15.3.bb} (92%)
+ .../snapper/{snapper_0.13.0.bb => snapper_0.13.1.bb}          | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/snapper/{snapper_0.13.0.bb => snapper_0.13.1.bb} (92%)
 
-diff --git a/meta-oe/recipes-test/catch2/catch2_3.15.0.bb b/meta-oe/recipes-test/catch2/catch2_3.15.3.bb
+diff --git a/meta-oe/recipes-support/snapper/snapper_0.13.0.bb b/meta-oe/recipes-support/snapper/snapper_0.13.1.bb
 similarity index 92%
-rename from meta-oe/recipes-test/catch2/catch2_3.15.0.bb
-rename to meta-oe/recipes-test/catch2/catch2_3.15.3.bb
-index e68fe9c885..f331a09f68 100644
---- a/meta-oe/recipes-test/catch2/catch2_3.15.0.bb
-+++ b/meta-oe/recipes-test/catch2/catch2_3.15.3.bb
-@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+rename from meta-oe/recipes-support/snapper/snapper_0.13.0.bb
+rename to meta-oe/recipes-support/snapper/snapper_0.13.1.bb
+index 56d4c89d0f..aa8547b33d 100644
+--- a/meta-oe/recipes-support/snapper/snapper_0.13.0.bb
++++ b/meta-oe/recipes-support/snapper/snapper_0.13.1.bb
+@@ -9,7 +9,7 @@ DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib
+ inherit autotools-brokensep pkgconfig gettext manpages
  
- SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https;tag=v${PV}"
--SRCREV = "6ee0826dcae55ed1e06b2c5701981221e979e1e6"
-+SRCREV = "95d8a61b089317bec800c7cc4c64064cbcb3802d"
+ SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
+-SRCREV = "3a3bd97083976d28538d402284ff947b4aab5b8f"
++SRCREV = "8cfc33817b91dbf7194d7fd043dc378026d01db5"
  
+ EXTRA_OECONF += "--disable-zypp"
  
- inherit cmake python3native
+@@ -26,6 +26,8 @@ export MKDIR_BIN = "${bindir}/mkdir"
+ export TOUCH_BIN = "${bindir}/touch"
+ export CP_BIN = "${bindir}/cp"
+ export REALPATH_BIN = "${bindir}/realpath"
++export SHA256SUM_BIN = "${bindir}/sha256sum"
++export LS_BIN = "${bindir}/ls"
+ 
+ do_install:append() {
+ 	install -d ${D}${sysconfdir}/sysconfig
 
