@@ -2,97 +2,122 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3A41C5CFCF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7394C5CFC1
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 06:09:36 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7245.1786687766703575368
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7303.1786687767951841834
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 23:09:26 -0700
+ Thu, 13 Aug 2026 23:09:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=MkH9+Gca;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-c9eefcf9175so554727a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 23:09:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=CE6A7KKA;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-ca88130e09aso330176a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 23:09:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786687766; x=1787292566; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MbX3MwxCJVKfholyQ+yvDHAMYuiZxljLQORgBIC8wPA=;
-        b=MkH9+GcakRDOv0+g5WoIazBLLg5pvVArJZTJPiTQFtfy9y94C5LBMo0MLKIR2i5khh
-         VljGuI7hiB/u0VtGNhRG+ULulxMg0MIbhrd/zQt+kL8nz8ego6ffsduG/tlTtM76Kkob
-         glnFj4MfTZ3SSjOImYuDKMS76wThF6vJl7n93YqRNmnCGoEJFW/ztwG5CVBvD2CZroGX
-         8DNeV4N+txLbT1cEaCuYX98N0z0SH/Eaz6gnDZ3E93Cws7i6ekLXlxGGgOtUX4nRGg5l
-         whsrJbTSrQD+FujibyqP2e2R2qXbjdci1E1wqN+K6xNLwWYNQOwojf7tW89ppYcdg09X
-         EXLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786687766; x=1787292566;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1786687767; x=1787292567; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MbX3MwxCJVKfholyQ+yvDHAMYuiZxljLQORgBIC8wPA=;
-        b=Ix78XTHeBU+ZLsLmWGh23UkiBHtdPj81PeHVGkuLc46rPyr+ZK8bZ4HbrG9YAwPK4/
-         8v4VaAPK885uHlN+NXYm9cEWnVT7Myo7rAG36CsMO9te19enBvcnJ9HR2sO8JXgyQCKp
-         XywgYShtNIfezFXb34JWN6BQfqGzkb6F5d+ALBcJXmPiLkPhDsXdctw1wsPHNCnYaEF7
-         CxEjB642LMOIHQz4SqxnJfUI/OWFAFI+1dBZN1ilIz2ojWZOeVBDOt8llG5e1YN8kG5B
-         4KAKW2oPDK9pQOoKEkJoJag9EgJzxHQ+q1n7m0B5mOFRPN0EHFHSrMfvXCnEmegWQvvq
-         1UTQ==
-X-Gm-Message-State: AOJu0YxDlAYHw/bkSvaHdDHLe/P5vU3buO8jlByEfMIBt49v7xjxsbSH
-	L79WqvLksRJ+9X7e4yq80Ynpk+pktY3BTkzgpuWjRCUu0tWb2fiDS/siN9uy9s9S
-X-Gm-Gg: AR+sD13NCeaTS5A2kDEoS4oD7dJioWGTzm//8AlbS4ukl2Er8L2P+WDjxGZxYfFEwW4
-	GOLX6OyH/1qhIudXPjs+/+c9cj/ivgqp+nRjFFHoCBN4K2c6FplO7sf8yInXEz3xlCPZIxUnVV2
-	drsWcnUeIRfNGvaXkdHbb42oE+73QHhfklFSM6D8LqWImRGC1pLBt4jPWkhvv23nfSfDx4hqCmA
-	2qg5EmRn67QbFaQzPFZo00pRXBC+kGc85Pw+chb0jS233lyU8j83ESdwxt/8BENl/I11vA0mmLK
-	u5ToNTuSNyQh4MdEkm3obWrw3grAydlcguO8CK2cLhDH30Xt7MT1oTF9U7fyTjsQwU1TFDWGcaH
-	pX9/w0lLOqo2Saza+qbY1GXa3GZY0TxMLLz/GgBa2YRApHu7gJWP5uk/ZSw+pub/wJTzaUe+Qse
-	L1IoZXxy5ckb9v36S70h0NfQI83B4EHxhq1IxAd+KNdkxGwnusOwyxwqaQXMnMBpoynKHPutxZS
-	4MXQXHB5crA2DjSHxi2//QJCPSBMS9a3IMGkefQtDm433BHzh1p4J+9oiIEQ4C0wOmk/HHYjeOW
-	ybYfuAg7GMfpy8bpsj3Xu/tQS45OdgKao3PWwJY/ANbfhICCxIBj4YRIjZGRnI1VWRqqwwvz4n6
-	OyVsLIH6ejPLlmWM0G/w4/kJ72yu0XUoRfTF+rewB4BDs3A==
-X-Received: by 2002:a05:6a21:3282:b0:3cb:96dd:2477 with SMTP id adf61e73a8af0-3cc719c7361mr3692982637.8.1786687765923;
-        Thu, 13 Aug 2026 23:09:25 -0700 (PDT)
+        bh=s6wvz/roGBUHlhhvOpc/duPGEcCwFPlqi/15UxzXLyM=;
+        b=CE6A7KKAaBcXaSOAS44XMMmadw95oLv4GPJ41hi/6WAKgda3UQh7w6mZLKCWgpTpk/
+         kM89NAOAdY9JKu0yLuobsyNRBmnMu4Gz5vwr2oKgRKqXn8sl/bKKwBBN3G0LuokfPb29
+         XgNTPitkDoxKaWVRFXRA2h1RPwl4ZykWgwB+pvyGahGRoH7pEvTJiT/wUmIm0a1FpY9b
+         VeNvwaF8lM/LuPV7B1Wt/NM+tj+1mXCfSPPAquXBZUPGAYsnB6hHYPDEAg5Vg9KWdgWj
+         9Gj4SO/jp6OxvTvBtFsO9RlvcPFkF9LuBBc9tB4hurwVfZwLGzF0rV7dMvGXmrTLPa27
+         jGnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786687767; x=1787292567;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=s6wvz/roGBUHlhhvOpc/duPGEcCwFPlqi/15UxzXLyM=;
+        b=FfiCbXqk1RIsFm4/VfU6bXw8t8gL60yF16+yXULVXFwReknyGUcKHuD0ll9hAfb85y
+         08rFXKc+4gYdeuckKgt6EdDk0s86F8S4Jfk/tYrNC05rBapVmPiW3mQmfHhoBzPuK727
+         pbPE1wunXrWjbFChSDcfstxrCQBiD/020Cyzh3/kwxcs+T32Vip4i3uIeJYvAeBlQaGc
+         B0KsZtDOfl670NBYBKitQJ2q5pOcqWT4RAT2sWUEpnE2IlHyqtcUwvSD9J0FqKIv+dun
+         K6unbFpNQzqQXZ1gW1h/tIfxdt83EjciAJUp5OF9vR7FVSLrSXiCM4ResrpTNi0o/UFe
+         N5GA==
+X-Gm-Message-State: AOJu0YzyYPIhldliOADFVtP8p9uISmQtbdmswzSWZymHLqNbuP2OLNnE
+	L7agzrAlvZajxDWc4D8LEAuV5J3k9qreYcudcBZTL+wTwnHfzj3N7tIAnBclrjMN
+X-Gm-Gg: AR+sD13CE1Y/7TFe8H5RlegHgeC5KgHOa3nDhxPhhCZeQeY6XosQIMd62Q/O6Rb+dMZ
+	DCpyzn77RqCKEPhJ5PzoZHSwBIiCfT3EsSOBzc/XVU/iRhvUhZe1ql5w8/P8ktj8PVaxLHuffGL
+	VSXvHZdHDnykWviaiF5XCz9eNMypZat4OVIB+AtewFEO185rqJFor9yloUgEavh49QePfx60EIL
+	xp7TOmX4oKZ6IYdkc5Lbn80n9DqGzGsqCU2iJI241E86+JIW97P+ZQtFlTosGI+vcW+RjYuCeea
+	yanlHYFJMurJermSnPEoys4RVphRwfF291wk9evJpINoIlGhrFR40zyL9weejO+uc2b3A559xhu
+	mRiUFCGyce1T1XgJNmEmbf2uL6BajhQdMfb+6JWm8wfxzYWCicPgi+ctM95oR9hg85vob3539HP
+	zf0uck4aV6Qpb2+O0UQUAj20iWmr5hJ/+0baLCKbj9S0WroiLJfAVZkkflAHeAoorEKAdMphsjo
+	zyjSJ6ThgN1M6k6WyHYCl/hgrBlJca3XctpeYVUaHpH+KDfHPNoFgRpaRcux/oY0Vr4nlsKNLz6
+	0CW+PmJ6jTXyP4WHTjrMF1ScBgGCMcNRW5f/pWJPJIzIme8he9j41HyvK09Zi4rosFgKmy0hswy
+	j05N6E8pMQAzLqpyQdEvvY1RjePgryaxrZ76wsGW7TP7erw==
+X-Received: by 2002:a05:6a20:430a:b0:3c4:2b8b:e88f with SMTP id adf61e73a8af0-3cc71988438mr3312818637.5.1786687767071;
+        Thu, 13 Aug 2026 23:09:27 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141386a039asm5403326c88.0.2026.08.13.23.09.24
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141386a039asm5403326c88.0.2026.08.13.23.09.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 23:09:25 -0700 (PDT)
+        Thu, 13 Aug 2026 23:09:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH] python3-pandas: Add python3-wheel-native to DEPENDS
-Date: Thu, 13 Aug 2026 23:09:21 -0700
-Message-ID: <20260814060922.2788021-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-pandas: fix stripping of build paths from generated sources
+Date: Thu, 13 Aug 2026 23:09:22 -0700
+Message-ID: <20260814060922.2788021-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260814060922.2788021-1-khem.raj@oss.qualcomm.com>
+References: <20260814060922.2788021-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 06:09:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129037
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129038
 
-Fixes
-| * Getting build dependencies for wheel...
-|
-| ERROR Unmet dependencies (checked against <sysroot-native>/usr/bin/nativepython3):
-| 	wheel
-| 		wanted: any
-| 		found: not installed
+do_install failed because the glob in do_install:prepend did not match
+anything, leaving sed with a literal path to a non-existent file:
+
+  sed: can't read .../build/pandas/_libs/sparse.cpython-*/pandas/_libs/sparse.pyx.c: No such file or directory
+
+meson names the per-target private directory <target>.so.p and puts the
+generated sources directly in it, so the actual file is
+
+  ${B}/pandas/_libs/sparse.cpython-314-x86_64-linux-gnu.so.p/sparse.pyx.c
+
+The do_compile:append hunk was meant to do the same job for every
+generated source, but it searched for ${WORKDIR}/pandas-${PV}, which no
+longer exists now that sources are unpacked under ${WORKDIR}/sources, so
+it silently matched nothing.
+
+Fix the remaining pass to look for ${S} and drop the redundant (and
+fragile) per-file sed in do_install:prepend. Also parenthesise the -o
+expression so the name filter applies to both alternatives, and use
+-print0/-0.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-python/recipes-devtools/python/python3-pandas_3.0.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-devtools/python/python3-pandas_3.0.5.bb   | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
 
 diff --git a/meta-python/recipes-devtools/python/python3-pandas_3.0.5.bb b/meta-python/recipes-devtools/python/python3-pandas_3.0.5.bb
-index 407503277e..a9bae34f72 100644
+index a9bae34f72..c159113a21 100644
 --- a/meta-python/recipes-devtools/python/python3-pandas_3.0.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-pandas_3.0.5.bb
-@@ -17,6 +17,7 @@ inherit pkgconfig pypi python_mesonpy cython
- DEPENDS += " \
-     python3-numpy \
-     python3-versioneer-native \
-+    python3-wheel-native \
- "
+@@ -35,13 +35,10 @@ PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
+ export PYTHONPATH
 
- CFLAGS:append:toolchain-clang = " -Wno-error=deprecated-declarations"
+ do_compile:append() {
+-    # Fix absolute paths in generated files
+-    find ${B} -name "*.c" -o -name "*.cpp" | xargs -r \
+-        sed -i 's|${WORKDIR}/pandas-${PV}/|${TARGET_DBGSRC_DIR}/|g'
+-}
+-
+-do_install:prepend() {
+-	sed -i -e 's;${S};;g' ${B}/pandas/_libs/sparse.cpython-*/pandas/_libs/sparse.pyx.c
++    # Cython embeds the path of the .pyx it was generated from into the
++    # generated C sources, which are shipped in the -dbg package
++    find ${B} \( -name "*.c" -o -name "*.cpp" \) -print0 | xargs -0 -r \
++        sed -i 's|${S}/|${TARGET_DBGSRC_DIR}/|g'
+ }
+
+ EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
 
