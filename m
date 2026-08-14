@@ -1,200 +1,206 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE3BAC5CFCF
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 14:30:12 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14305.1786717803946365364
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58FB7C5CFC1
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 15:21:23 +0000 (UTC)
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15278.1786720876737950881
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 07:30:04 -0700
+ Fri, 14 Aug 2026 08:21:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TN/rLjUX;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4799b3f7c83so749308f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 07:30:03 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hI3KWHeR;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786717802; x=1787322602; darn=lists.openembedded.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tIv9DWygPPo4aQsIEHzKLXyAmHcLQowozBTzKaKa7b4=;
-        b=TN/rLjUXnxRmvRYCyVZrdpnparFn5PNhY95lt5dovESTVADCLIn+cAlam4cYS2TwaY
-         fUDvmLomqeF6+K/8SlB+GunYlV3H2Re/fu9E96vuj1e81esDqC5qf5AyqMq8Png9WDws
-         9uyv739xwhVp0MQzUSW7JHqaiFLEyujaTUUx5yWTkleKAahk+Up1UMKV+z8d3RQaGqpx
-         292Iy8tMy1U2oq+SA9oF9OoL8tuSLUiRhjROj/XR9VyJDCkdM7FeMMcFQQiHHJOLwSuB
-         XMF4MEXxh5Kv7e4zuCylNL5r/h5VXYnDphykpVETBPjiiwrc083qQZFYm3l9UUwwSPVX
-         yHHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786717802; x=1787322602;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tIv9DWygPPo4aQsIEHzKLXyAmHcLQowozBTzKaKa7b4=;
-        b=ftkN7vPONRmyEpDuTqrs2gF+EUQ4yFLedRUNCflY/OSvz/Kmo6j4s90uRwQjlvrlQH
-         gjHooQzZWfhCuJz1ALHDu8W3lvm+Pf/SpaPqSUYGrv0EHD8/NUUYQRnNXkHX4HOYLFUV
-         +kmTxMvnqIkOPIAFJlmF3rgRPO9wOt3+OUw0/bDYjZhBvVq+C9xsFA7heXwjApzJ2DZ5
-         TWfG/pT+HNkzCOD4LQZbR/YIMw+OGQPsfnKX/sqRxE2184/07RqwXURIHHEUtcurVdk0
-         g0DSemk1LIQPtqPKuGiJkKVtlTuQuZr3823BU1AGliVMnTIC3ke+4s8+NDQAZOiJDlnG
-         5Ngg==
-X-Gm-Message-State: AOJu0YyD5pNwZv0HmJP3sgHAgITKznFlw29QDElPAKuJ66wVXlxFPMo+
-	4uL3cDFcasBbVqMMQPfoguUa8xU6eB5mYwJR4MbofxNmHtGuGjHdTyUOcRfrpw==
-X-Gm-Gg: AR+sD10Nqru8boVOQCFi5fenkhkF26P9twMxgpOrUwaKPRomHdq/FCT/YsfXQBs+ERp
-	7tQCPQ1rUWO3Mw50yWRy39UZteDuzkrNtMVHcB3RPMrEwYtRN5ZnRuaHglDnR6uRxOZkmcIcoZK
-	x6E0APZzrchpWMVJ5pRgk6Kw7azHO8zUZF81+VKD9VbPfsEpwqrc5FbSjJl1hA54vKEUIvZNUgg
-	LtqPy+qQg2Ts+Rc5eJ7nFFyQmBV/PWvdXpR2LfDRzZ2odgqLfpOYekDxZqBEKMkynFkw33Y7gY7
-	c1eUbG5EpACZ7d5tsWDuDEdS8yopa9a9032TTxwcMb4ePTBT+yGOMijQoidQeDszWlw20dAKJpR
-	AMxoEY9qKUSZDNqXorLiBW7Mj5e1LsLcpPcgEXHDlLr/rxOI8AVNGMr/wxZeemJpq5Pw0POyDn4
-	yD/H9c1xEOphyhmoxzy9icT5d3fPHxdHPGwIjy5z3wFaKEV1x+W6ie8AwwS10cqQRnASIoY+zmh
-	Bo5fcjRVYWXQyBW7eosTrpYCnjZT+VxzYY/62CZnckPVt1cU6Hl6Jw2rBRVXI2weYM=
-X-Received: by 2002:a05:6000:26c4:b0:47f:9283:1fb3 with SMTP id ffacd0b85a97d-481606d2962mr9090117f8f.0.1786717802034;
-        Fri, 14 Aug 2026 07:30:02 -0700 (PDT)
-Received: from [192.168.5.15] (host81-148-255-151.range81-148.btcentralplus.com. [81.148.255.151])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4815f20058fsm9973661f8f.4.2026.08.14.07.30.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 07:30:01 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Fri, 14 Aug 2026 15:29:46 +0100
-Subject: [meta-oe][PATCH 2/2] cpufrequtils: fix do_install, drop the
- toolchain patch, add nls PACKAGECONFIG
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-cpufrequtils-v1-2-5ac5e77bf5ff@gmail.com>
-References: <20260814-cpufrequtils-v1-0-5ac5e77bf5ff@gmail.com>
-In-Reply-To: <20260814-cpufrequtils-v1-0-5ac5e77bf5ff@gmail.com>
+  d=cisco.com; i=@cisco.com; l=5053; q=dns/txt;
+  s=iport01; t=1786720876; x=1787930476;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=H0fdg1eO3TiAJ3HroUhaQu6D94LgutTAzv6wvKSubxA=;
+  b=hI3KWHeR2eKqAlx+2jgwuQhrePpqxCtN2S8MtwyP9fckmSVeZ3bC7ldO
+   5aZbJaIXTbI+eYlfNMLsjkoTKwCzRlv8PRiZVPIYcCHe/pOIZklhi8/kc
+   cM0MaWE+cpCz1k/uaxkOM3qz8+lGLvOCLSuETkQUPkhM9K3Us5WI/f+Lw
+   z/aPqMXbXtowVo/2dgIvev1mmC6RhbyyOzBrNOmzTCVWG5kLFlPh7aHvF
+   AUnISFGeAeHPAnISEg+a8BCagEJO6ece8Z7kiE8TBl3RzDZ8MaoGmWOHN
+   ZFzBOg3yuSIXoKY4KB+VaEOlJxCmFrYyTppryNGh59wIFPw70aLNVoUnf
+   w==;
+X-CSE-ConnectionGUID: LYxaEYNaSAmgqSLFoGRNRg==
+X-CSE-MsgGUID: TZCcTNWSQbyv6srW4+UogA==
+X-IPAS-Result: =?us-ascii?q?A0BIAgB/MX9q/5MQJK1aglmCV3ReQ0kDlkcDnhuBfg8BA?=
+ =?us-ascii?q?QEPRA0EAQGFBQKNaQImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDYZaAQIBAycLARgBLRAcAwECLysjCBmDAgGCdAMRww2BeTOBAYMJH?=
+ =?us-ascii?q?wE/AkNQ2zABCxQBBYEzhT+IIV0YAYR8JxsbgXKBFYNpgQWBXAEBgSeGfgSCD?=
+ =?us-ascii?q?RV6EoFagS+BVINIinNIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQ0bB?=
+ =?us-ascii?q?gWBHYEohDcjGTZ6gQlegSsqYQESF4EJghICgnOCBgIBSQwLGA1IESw3FBkEP?=
+ =?us-ascii?q?m4HjhoggWZaBwFzGgErFwlfBoEnDwILAgcVkn2SP6EPCiiDdowhlToaM4QEg?=
+ =?us-ascii?q?VeSQJJRC5h9jgqWEz2EaYFoPIFHCwdwFYMiCUoZD444g2uBf4IIyDInMgIJA?=
+ =?us-ascii?q?y8BAQcCBw4DC4FohGGLHwImB29gAQE?=
+IronPort-Data: A9a23:kNVZe6O4CBUKC2nvrR30lsFynXyQoLVcMsEvi/4bfWQNrUoihTcHy
+ 2oXWG6AMvfeZ2LwfNAjbo638xsH7JPUnN43GXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
+ ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WV7lV
+ e/a+ZWFZgf1gmIsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
+ 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj69FfHEgbDKsRwc9yDnh10
+ dIfBworVB/W0opawJrjIgVtrs0nKM+uOMYUvWttiGiBS/0nWpvEBa7N4Le03h9p2ZsIRqiYP
+ pRfMGYwBPjDS0Un1lM/BJ8gleGzhmHXeDxDo1XTrq0yi4TW5Fwpj+G2YIWNKrRmQ+1prG2Tm
+ kT5xF3zEw9EL8aglXm49X2F07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
+ AoT4icooK04+UCnQ9W7WAe3yENopTYVX95WVul/4waXx++Nu0CSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:qcUDwanO9CslqubQ6icPMgnOSunpDfL03DAbv31ZSRFFG/FwWf
+ rAoB19726StN9/YhAdcLy7VZVoBEmsl6KdgrNhWYtKIjOHhILAFugLhuHfKn/bakjDH4Vmu5
+ uIHZITNDTYNykdsS+D2njaL/8QhP+a7auvmeDSi11pTQ1sduVcyj0RMHfjLqWzLzM2fqbQ0/
+ Gnl7J6mwY=
+X-Talos-CUID: 9a23:GVdqWmFZaJ0SVnemqmJDxV4dN/EDe0b0yXjJGGuWDklTboeaHAo=
+X-Talos-MUID: 9a23:jgQNDwad42J//uBTiw3Hjw1EC/xR6bWwVlsXrslFhs6LHHkl
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,222,1779148800"; 
+   d="scan'208";a="807138708"
+Received: from alln-l-core-10.cisco.com ([173.36.16.147])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 14 Aug 2026 15:21:15 +0000
+Received: from sjc-ads-9357.cisco.com (sjc-ads-9357.cisco.com [10.30.212.121])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by alln-l-core-10.cisco.com (Postfix) with ESMTPS id 9588718000161;
+	Fri, 14 Aug 2026 15:21:15 +0000 (GMT)
+Received: by sjc-ads-9357.cisco.com (Postfix, from userid 1887503)
+	id 33D37CC12A7; Fri, 14 Aug 2026 08:21:15 -0700 (PDT)
+From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-X-Mailer: b4 0.16.0
+Cc: xe-linux-external@cisco.com
+Subject: [meta-oe][scarthgap][PATCH 2/2] hdf5: Fix CVE-2026-26197
+Date: Fri, 14 Aug 2026 08:21:15 -0700
+Message-Id: <20260814152115.3812730-2-devanshp@cisco.com>
+X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20260814152115.3812730-1-devanshp@cisco.com>
+References: <20260814152115.3812730-1-devanshp@cisco.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-9357.cisco.com [10.30.212.121];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.30.212.121, sjc-ads-9357.cisco.com
+X-Outbound-Node: alln-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 14:30:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129051
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:21:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129052
 
-do_install ran make with -e, which gives the environment precedence over
-the makefile's own assignments. Every CPPFLAGS and CFLAGS use in the
-makefile is +=, seeded from the environment, so -e discarded all of the
-makefile's additions: the CPPFLAGS += defining PACKAGE, PACKAGE_BUGREPORT
-and VERSION, the conditional -DNLS, -pipe and $(WARNINGS). utils/info.c
-and utils/set.c then failed to build with "'PACKAGE' undeclared" while
-relinking cpufreq-info and cpufreq-set, which install: pulls in via all:.
-Dropping -e also makes do_install and do_compile agree on flags, where
-the install-time relink previously produced binaries built differently
-from the ones do_compile had made.
+From: Devansh Patel <devanshp@cisco.com>
 
--e predates 0001-dont-unset-cflags.patch, back when the makefile assigned
-CC/LD/AR/STRIP/RANLIB absolutely and -e was the only way to override them.
-That patch is dropped here in favour of setting CC on the make command
-line, which outranks a makefile assignment without needing a patch at all.
-CC is the only one of those variables the makefile ever references: LD, AR
-and RANLIB are assigned but never used, and STRIP only feeds STRIPCMD,
-which the recipe already overrides. The patch had carried
-Upstream-Status: Pending since 2012 against a project whose last commit
-was in 2011.
+This patch backports the upstream fix first released in HDF5 2.1.0.
+The upstream fix commit is referenced in [1], and the public advisory
+is referenced in [2].
 
-NLS becomes a PACKAGECONFIG rather than an inline USE_NLS expression so it
-can be set per-recipe, defaulting from USE_NLS so existing behaviour is
-unchanged. gettext-native is named explicitly because gettext.bbclass
-substitutes gettext-minimal-native when USE_NLS is no, and that has no
-xgettext/msgmerge for the update-gmo target this enables. The gettext
-inherit becomes conditional on the same PACKAGECONFIG, deferred because it
-reads a value that does not exist yet at that point in the parse.
+Although the advisory [2] lists HDF5 2.0.0 as affected, NVD [3]
+also marks versions before 2.0.0 as affected, and its CPE
+configuration marks versions before 2.1.0 as vulnerable. Scarthgap's
+HDF5 1.14.4-3 H5T_ARRAY decoder in src/H5Odtype.c computes the array
+element count and decodes the parent datatype without checking for
+multiplication overflow or verifying that the stored datatype size
+matches the element size multiplied by the element count. The
+vulnerable code path is therefore present in 1.14.4-3, so this
+backport is applicable.
 
-AI-Generated: Claude Opus 5 (Claude Code)
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+[1] https://github.com/HDFGroup/hdf5/commit/8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6
+[2] https://github.com/HDFGroup/hdf5/security/advisories/GHSA-gh44-7wpq-622f
+[3] https://nvd.nist.gov/vuln/detail/CVE-2026-26197
+
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- .../cpufrequtils/0001-dont-unset-cflags.patch      | 32 ----------------------
- .../recipes-bsp/cpufrequtils/cpufrequtils_008.bb   | 17 +++++-------
- 2 files changed, 7 insertions(+), 42 deletions(-)
+ .../hdf5/files/CVE-2026-26197.patch           | 69 +++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |  1 +
+ 2 files changed, 70 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
 
-diff --git a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
-deleted file mode 100644
-index 72f480100030..000000000000
---- a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Upstream-Status: Pending
--
----- git.old/Makefile	2012-04-17 13:29:46.280435340 +0200
--+++ git/Makefile	2012-04-17 13:31:13.664433470 +0200
--@@ -77,17 +77,7 @@ INSTALL_PROGRAM = ${INSTALL}
-- INSTALL_DATA  = ${INSTALL} -m 644
-- INSTALL_SCRIPT = ${INSTALL_PROGRAM}
-- 
---# If you are running a cross compiler, you may want to set this
---# to something more interesting, like "arm-linux-".  If you want
---# to compile vs uClibc, that can be done here as well.
---CROSS = #/usr/i386-linux-uclibc/usr/bin/i386-uclibc-
---CC = $(CROSS)gcc
---LD = $(CROSS)gcc
---AR = $(CROSS)ar
---STRIP = $(CROSS)strip
---RANLIB = $(CROSS)ranlib
---HOSTCC = gcc
---
--+HOSTCC = $(BUILD_CC)
-- 
-- # Now we set up the build system
-- #
--@@ -95,7 +85,7 @@ HOSTCC = gcc
-- # set up PWD so that older versions of make will work with our build.
-- PWD = $(shell pwd)
-- 
---export CROSS CC AR STRIP RANLIB CFLAGS LDFLAGS LIB_OBJS
--+export CFLAGS LDFLAGS LIB_OBJS
-- 
-- # check if compiler option is supported
-- cc-supports = ${shell if $(CC) ${1} -S -o /dev/null -xc /dev/null > /dev/null 2>&1; then echo "$(1)"; fi;}
-diff --git a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
-index 4df67ca3eaec..0db24a82c3e1 100644
---- a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
-+++ b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "To make access to the Linux kernel cpufreq subsystem easier for users and cpufreq userspace tools, a cpufrequtils package was created"
- 
--inherit gettext
-+inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'nls', 'gettext', '', d)}
- 
- DEPENDS = "libtool-cross"
- 
-@@ -10,27 +10,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- SRCREV = "a2f0c39d5f21596bb9f5223e895c0ff210b265d0"
- PV .= "+git"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git;branch=master;protocol=https \
--           file://0001-dont-unset-cflags.patch \
--"
-+SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git;branch=master;protocol=https"
- 
- # Upstream repo does not tag
- UPSTREAM_CHECK_COMMITS = "1"
- 
--EXTRA_OEMAKE:append = " ${@['', 'NLS=false']['${USE_NLS}' == 'no']} "
--
--
--
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
--EXTRA_OEMAKE = "V=1 CROSS=${TARGET_PREFIX} STRIPCMD=echo 'CP=cp'"
-+PACKAGECONFIG ??= "${@oe.utils.conditional('USE_NLS', 'no', '', 'nls', d)}"
-+PACKAGECONFIG[nls] = "NLS=true,NLS=false,gettext-native"
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
+new file mode 100644
+index 000000000..4df770e93
+--- /dev/null
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-26197.patch
+@@ -0,0 +1,69 @@
++From 8a69764e016009a0ac949707d84161550dde8af4 Mon Sep 17 00:00:00 2001
++From: bmribler <39579120+bmribler@users.noreply.github.com>
++Date: Tue, 3 Feb 2026 16:26:51 -0500
++Subject: [PATCH] Validate datatype size for consistency (#6173)
 +
-+EXTRA_OEMAKE = "V=1 CROSS=${TARGET_PREFIX} CC='${CC}' STRIPCMD=echo 'CP=cp' ${PACKAGECONFIG_CONFARGS}"
++User report:
++When a file is corrupted such that an array datatype's size, the number of elements,
++and the element size are not in agreement, it can trigger an out of bounds read.
++(private GH issue: GHSA-gh44-7wpq-622f)
++Added a validation to ensure the above are in agreement.
++
++CVE: CVE-2026-26197
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6]
++
++Backport Changes:
++- Omitted release_docs/CHANGELOG.md because the file does not exist in
++  HDF5 1.14.4-3 and its HDF5 2.1.0 release context is not applicable.
++
++(cherry picked from commit 8cd9f7a7ba6757fbb72e36bbe23e127f8507c8a6)
++Signed-off-by: Devansh Patel <devanshp@cisco.com>
++---
++ src/H5Odtype.c | 20 +++++++++++++++++++-
++ 1 file changed, 19 insertions(+), 1 deletion(-)
++
++diff --git a/src/H5Odtype.c b/src/H5Odtype.c
++index 085ce24cd..2541b001f 100644
++--- a/src/H5Odtype.c
+++++ b/src/H5Odtype.c
++@@ -783,7 +783,8 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
++                 HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "invalid datatype location");
++             break;
++ 
++-        case H5T_ARRAY:
+++        case H5T_ARRAY: {
+++            size_t expected_size; /* for validating array datatype size consistency */
++             /*
++              * Array datatypes...
++              */
++@@ -825,6 +826,22 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
++             if (H5O__dtype_decode_helper(ioflags, pp, dt->shared->parent, skip, p_end) < 0)
++                 HGOTO_ERROR(H5E_DATATYPE, H5E_CANTDECODE, FAIL, "unable to decode array parent type");
++ 
+++            /* Check for multiplication overflow */
+++            if (dt->shared->parent->shared->size > 0 &&
+++                dt->shared->u.array.nelem > SIZE_MAX / dt->shared->parent->shared->size)
+++                HGOTO_ERROR(H5E_DATATYPE, H5E_BADVALUE, FAIL,
+++                            "array datatype size calculation would overflow");
+++
+++            expected_size = dt->shared->parent->shared->size * dt->shared->u.array.nelem;
+++
+++            /* Verify the stored size matches the calculated size */
+++            if (dt->shared->size != expected_size)
+++                HGOTO_ERROR(
+++                    H5E_DATATYPE, H5E_BADVALUE, FAIL,
+++                    "array datatype size mismatch: expected %zu (element_size=%zu * nelem=%zu), got %zu",
+++                    expected_size, dt->shared->parent->shared->size, dt->shared->u.array.nelem,
+++                    dt->shared->size);
+++
++             /* Check if the parent of this array has a version greater than the
++              * array itself. */
++             H5O_DTYPE_CHECK_VERSION(dt, version, dt->shared->parent->shared->version, ioflags, "array", FAIL)
++@@ -838,6 +855,7 @@ H5O__dtype_decode_helper(unsigned *ioflags /*in,out*/, const uint8_t **pp, H5T_t
++             if (dt->shared->parent->shared->force_conv == true)
++                 dt->shared->force_conv = true;
++             break;
+++        }
++ 
++         case H5T_NO_CLASS:
++         case H5T_NCLASSES:
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+index 80ab17dd2..7769a3034 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+@@ -31,6 +31,7 @@ SRC_URI = " \
+     file://CVE-2025-2308.patch \
+     file://CVE-2025-6857.patch \
+     file://CVE-2026-26199.patch \
++    file://CVE-2026-26197.patch \
+ "
+ SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
  
- do_compile() {
- 	oe_runmake
- }
- 
- do_install() {
--	oe_runmake -e install DESTDIR=${D}
-+	oe_runmake install DESTDIR=${D}
- 	rm -f ${D}${libdir}/libcpufreq.so.0 ${D}${libdir}/libcpufreq.so
- 	ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so.0
- 	ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so
-
 -- 
-2.43.0
-
+2.35.6
 
