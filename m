@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7614CC5CFC1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E532C5DF74
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:07 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24348.1786747558449107191
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24484.1786747559430497969
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:45:58 -0700
+ Fri, 14 Aug 2026 15:45:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=kncEa5jf;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cbedbaba5fdso1004055a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dMIxkHLc;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38fdeaed181so2257504a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747558; x=1787352358; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747559; x=1787352359; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=C+awc3/II4iLPOAXUgbkd6EuBqZ8blSo0k4ReYIBBtU=;
-        b=kncEa5jfNh6ji7/xfIJAD5R0twx94kKhB5o3NQOUv7A8jezwMS2zLiDbclRHalgBhL
-         ekzlMx/BZT8E5MYm0ExzckVdzK9MgbV4M0TcpqnFoeCkqlhCNjDtsWZ8Z6fzagv9eNf2
-         GoEBGel1Yw+0hET3J+D97NF8FhBucUEHN2VNjLy5IBeLM3MsdAiAzUMPnzffRmAvihYz
-         X4xBtucaJv2/8PUXeVvsO+mRXLnTuc0gc4rO47+t5Cps6ZiYaFn9L8PGU1CLVV98Z9md
-         9Oy++lErnFdRBwGBK+W6krgDl7jure822lvLIzvOidDqorvZMiwrgdjfxRFEqDtlsXag
-         DUEA==
+        bh=ex6M8LOAS7wvgrxt6x4ZCrCs97GN+anTDqDk6K0JuuU=;
+        b=dMIxkHLcXmmFgVWmdGiXMrNL2fgw2VeJfojrBoOW4s/4Wldmkfqdlbsp/hUMFFkF9Z
+         Xk4I/GwiPK9ZFreXBgmE3fnb0msgeEUV0En0RYQ+JeWMsEJnlLHbEhvNLAH11lGMBQnD
+         S6QfSl1iC69NMKS1SRfCVPqdrWbpjKGFx/j+1gbU2IrK0z8lqyuClt2ny1BUhUzxU516
+         frsrgzdjwRLfGkDiNL0e4Yn5y5zmxkHpjc3tRDoMw7jLyU7wKeZysyHAEUSTVcwUxCjt
+         bVGd97ojKzeOk8I1lqoa5cyZfngnx8WS/Ug0aI/GuEl0ZbH043TwLXvPS0zwYAmJP27I
+         xW/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747558; x=1787352358;
+        d=1e100.net; s=20251104; t=1786747559; x=1787352359;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=C+awc3/II4iLPOAXUgbkd6EuBqZ8blSo0k4ReYIBBtU=;
-        b=GP2NGrCxJ092j9f+f0QbDVfCyO4gexoW4zSar8fq+dQlXIDAI+V0DdOtEkpC4MFHzu
-         xmoETUOkzyO/0Ye+/gXYvReZNboNUywgNN2Gie2JU101ZDbf/MxDMohU1jwvIplYuz/I
-         LGr0BNadNz9XrUxq0QdmrRp3ZqcWzGv4vsKrenoMIVt6GpUfts2sPIQo9nK8EdKcc13n
-         3p3GZmqjgPDPFNqurzL/PCHfqG3dSGG2KcKGtbiHnXHeeKsN4j6aSpKkYn93Lon56KBO
-         8nqEDKiBr1+QzMtqKdfgCECJOFq8Ob1Fd5FKS1v/tKDi5ZjWQiXFLDEA7b7aiH6iPXvy
-         Octg==
-X-Gm-Message-State: AOJu0YzZ/LsIZsdYWihsO5v2tZu5bbNk68hezsAsnZBEVSXTaILGnv1U
-	lmjsA/fm7Ng06BH072CBV/bvglWI07tQPLMbNl1r0QGtc2O+AaPIXB2t+yYFBdJU
-X-Gm-Gg: AR+sD10KqTDPLCDHNabwzPL84BXcJjOA0A7Py+dumRuYVL5ZVGdWgfO8kQzrc6esYyE
-	Y5FxiXAfJFaACdJzpBvdZdAbILWBJtrsRJAfyMLtMZXA7ZPoymxAcIdRPGWAKy+xPwOkf8WocPJ
-	JVBqmdzxBd/jjo3vWGIkN6ebX8/V6+8Qs/ti8qy0KVgCf33bt7maW+Lxz7pmpoS79QQ45lZKrZI
-	g5MMlm1LsMZVNEf8OfeEen8+XENdW61rYTr/2Nc/ZFFLtzhZhieIn9SqpBW3FfV7uIeHasyAIUb
-	mhKagubI39y0wI802uNi503giLqiIqHE7ZYXDJ71N5YsyrWbzBmNvH3wp+Hl0dCP6HXnZJFzQrs
-	3pMRQ6DsNOi56FgsdPvjnoyGfjsCWo5JigEK70FXlSs4D7s1Xj/micTrI4orV7A0gDfjfAzMyGU
-	byCcakmK8cfFs2fRjiX4kh0SF8z3Pw9oOAvqag1MOkJUNn935dqQNL3ZdlYMreuKc/rVsb5Rlpf
-	S1HYq2nQb2WibKoQ2Bt4qAiVv2O3tmaX/OLkysG4NQjI1lHEQ4q0VXOTaY/b1oOrWXcWm+WwdMW
-	qqXb1wnsVmislTaOxGv1D35eghLVmIZgdXDBHeeEy4xSsYieG7Dy+5rERuIEtWscLgqWI/E1h98
-	RmOtNnxNkyycFIk76BUEexW3y3HiKMRx0kfEQwyZXhIcF5wr75gk=
-X-Received: by 2002:a05:6a20:94c8:b0:3cc:4d86:389c with SMTP id adf61e73a8af0-3cc71a68040mr10039715637.13.1786747557635;
-        Fri, 14 Aug 2026 15:45:57 -0700 (PDT)
+        bh=ex6M8LOAS7wvgrxt6x4ZCrCs97GN+anTDqDk6K0JuuU=;
+        b=sRw2MUMeNdXs+JjAxBnKyUjjUx6AfOoe2t6OT5caouyqtlp2WkCCyt2IQ0/r8Pyd7i
+         LsmnVHiJL8kfIquWtEZhk37lXephw/rFKW6G574sfT5Cz61GGEnHgu437kTAzLqCMD8/
+         KkcN7xkj89PbUpReLln42vCZfCpWwNkdFVeDH7zzaE0O9ZH4A/6MUOVHadRQAsR/YQk6
+         6E+0d1cm5p5gR4JM5ztpoPaaaS8uoP492UwVTf1msmVsSfCMXMZOgAiUjyPgO39PXI87
+         SaRPowO4PPMyvACz8cjZXXO/hspcTE9dEkz8+eU+KpbL/UceVcr5p7NX0ea85Co5ccAE
+         ygkQ==
+X-Gm-Message-State: AOJu0Yzr+5CwB/W6m/x/YNSqhaYV0CoT5NCKIciViaqPJT31ti4/63z3
+	aoqyC0BSBME/+38VxJzNkQl9xFzFuQsk/PwtXYGOj3kCV3Ui8avDrl7gvgnDsezs
+X-Gm-Gg: AR+sD116wJbCrQ61SlBljD7+ntCrxrtlveZE1N1lKi1AXlXO7do8NB64BnmF3azsMJf
+	wGVUW3ayZzf+rq0OwUA1EmpYJwusGRyLKH1Ev+RevYV9bIZaAPC4FyWxVrASySa8SWV7WFswwMJ
+	bAXi+sd+1HXEKB15guB11IbNVeQ8/unJEaqNSVpAj/vdUrdh4w3CCpYM3cTzH6IRqz7ccVMKlQI
+	0zK1fagvUjty6TrG58h/nf5Qv2JRF9yPryVYnFNJbi5tkcU0t9Pc8t7gqJH84wPYLLWmDrGqIIi
+	0+Fk3n1HKzCr3sDYxIUDRrkeOPvZucSrIF7+z6oe9voqZs29OYAMRHxBNW4HL2kEEV+9UUdJNNE
+	BKRcXReEx5Uwo9UXwdbRVX5hCy1ZuxXe1/i/+3CZW+1ziMMbi2z2y/Y6BOnIRKB4tp3CYn8qokQ
+	uSWKmc1HkRl+s6ZzoKroTxeW0IZ/XwVsIuwHTIF8Hb1Vy826GKzsJL7sGlxqJozYZli1f5OsvqQ
+	c49+Vs7vmhfvaosbqGTMmkJTCISO41bVth4HMZ8SlKaiz8zYcedL8HIkKeCPvUaoudBXvKboBLa
+	eaF9zeZqXua/SrAa8VXGXXlL4L/Gd2rgxrVZNHTaOSMDzM1rJEsJhpIcU18/tkweaHeuLgTyf5l
+	gr96KUT9oWCPqMCongNPqJulRv0mr3DvT3+WaZumPqp/hJQ==
+X-Received: by 2002:a17:90b:33c6:b0:38f:57f0:1f5d with SMTP id 98e67ed59e1d1-3933b96b54dmr9439025a91.15.1786747558720;
+        Fri, 14 Aug 2026 15:45:58 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.56
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:45:57 -0700 (PDT)
+        Fri, 14 Aug 2026 15:45:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 013/109] capnproto: upgrade 1.4.0 -> 1.5.0
-Date: Fri, 14 Aug 2026 15:43:59 -0700
-Message-ID: <20260814224539.1523174-13-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 014/109] catch2: upgrade 3.15.0 -> 3.15.3
+Date: Fri, 14 Aug 2026 15:44:00 -0700
+Message-ID: <20260814224539.1523174-14-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,43 +71,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129077
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129078
 
-Cap'n Proto 1.5.0 is primarily a KJ-HTTP security release.  It hardens
-the plain-HTTP serialization path against request smuggling / HTTP
-desync: serializeRequest/serializeConnectRequest now reject request
-targets containing whitespace or control characters and serializeResponse
-rejects status text containing CR, LF or NUL (GHSL-2026-146, reported by
-Kevin Stubbings), and the header parser no longer accepts whitespace
-between a field name and the colon.  It also picks up compatibility
-fixes: builds against OpenSSL 4.0 while remaining compatible with older
-OpenSSL, Bazel 9 support, boringssl Bzlmod repo_name, an MSVC build fix,
-tolerating ERROR_INVALID_FUNCTION from GetFileInformationByHandleEx under
-Wine, replacing the c++/LICENSE.txt symlink with a real file, and
-scoping CTest to the project.  LICENSE is unchanged and
-0001-Export-binaries-only-for-native-build.patch still applies cleanly.
+Three bugfix releases on the 3.15 line, per upstream release notes. 3.15.1
+fixes a potential out-of-bounds access when locating the start of a broken
+UTF-8 sequence during linebreaking (#3096) and TEMPLATE_LIST_TEST_CASE_METHOD
+/ CATCH_TEMPLATE_PRODUCT_TEST_CASE potentially causing ODR violations (#3161).
+3.15.2 stops --warn InfiniteGenerators from firing when the generator was
+limited to a specific element by path filtering and silences
+-Wunused-parameter in -fno-exceptions builds. 3.15.3 makes the JSON
+reporter's number handling locale-independent (#3176), improves inf/NaN
+handling in JSON output, and rewrites catch_discover_tests for a 4-5x speedup
+with deterministic registration order. No API or ABI change; only the git tag
+and SRCREV needed updating.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../capnproto/{capnproto_1.4.0.bb => capnproto_1.5.0.bb}        | 2 +-
+ .../recipes-test/catch2/{catch2_3.15.0.bb => catch2_3.15.3.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/capnproto/{capnproto_1.4.0.bb => capnproto_1.5.0.bb} (95%)
+ rename meta-oe/recipes-test/catch2/{catch2_3.15.0.bb => catch2_3.15.3.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
-rename to meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-index 948ff80345..b867c72e36 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
+diff --git a/meta-oe/recipes-test/catch2/catch2_3.15.0.bb b/meta-oe/recipes-test/catch2/catch2_3.15.3.bb
+similarity index 92%
+rename from meta-oe/recipes-test/catch2/catch2_3.15.0.bb
+rename to meta-oe/recipes-test/catch2/catch2_3.15.3.bb
+index e68fe9c885..f331a09f68 100644
+--- a/meta-oe/recipes-test/catch2/catch2_3.15.0.bb
++++ b/meta-oe/recipes-test/catch2/catch2_3.15.3.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
  
- SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https;tag=v${PV} \
-            file://0001-Export-binaries-only-for-native-build.patch"
--SRCREV = "8b892a8a11a632f5d52b877a49728808a142379a"
-+SRCREV = "373e61ec89e2359f1c362e9b2eadc552f4779306"
+ SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https;tag=v${PV}"
+-SRCREV = "6ee0826dcae55ed1e06b2c5701981221e979e1e6"
++SRCREV = "95d8a61b089317bec800c7cc4c64064cbcb3802d"
  
- S = "${UNPACKDIR}/${BP}/c++"
  
+ inherit cmake python3native
 
