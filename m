@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19865C5DF76
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 350E1C5DF79
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:46:29 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24502.1786747583971854020
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24375.1786747588586176253
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:46:24 -0700
+ Fri, 14 Aug 2026 15:46:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IHOuVBHJ;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-384930ca5e2so1788277a91.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ApriqOwp;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-84862b0d5f8so1244464b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:46:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747583; x=1787352383; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747588; x=1787352388; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=npmCOv24iNEt8EzIIflfze1zpcB3AMVX2RacoVsoV28=;
-        b=IHOuVBHJApyPsxjFaXugpMwkzPiQH8t6J2JlPpllLr991/IOlyKKAaX2qg40QpD++i
-         U31luBIqor6A7L5VOEpLAQtwlFJgeDZqt3shx9vTiLRvX2nvPi+57nMkX5njXnFru7rH
-         NspqN4SJOwHWd9hWRT3Nes1MtfaivO8FPV/l8TMm+LbKWAwi1tYbYF3IjBo/4v0jNLAC
-         gyUOIyX0jv85Kv0ln10xnxdXzQ9HfuBMOLEH76hwlLlICZO/P0NnpeEAVAHVUXBpFrgn
-         EM1Hjx8fcaWf56fSOwz77UizWxRL2vMHln1h0tV9L486QnJp1LX393L9Jdwpx4wfKoSL
-         DsGg==
+        bh=PLroP09OxEWy8udbVjVRMuOuIjgTNZRDjB82B0gxM0w=;
+        b=ApriqOwpZPzHex+rBlI2XQEnmb6HT9Qpp8gwq/uKZAlXeATaiMiIHi/Sl/i27+iiBw
+         j6JQyM5ynL6WkalASvFPROL6rkZ2YmH21pDJ6/CoUR7iQRHtqQ+6FSH6omD3Ic3eNW8p
+         fEXA+6Cfy1vPS2bB0ywX9gLmL6ryHLo8L5kv6ZDu7jbEGt77PFxJ7EonfRCHZ7P9so31
+         VK2m7Mne8FRBxva++IqtuFrUU2ujYC2aBUaE4WAaPCVlMVBQgpOUTjomQKjQJEiaF85e
+         I4aY58Zftpyo/oXXW/lwewKuoa1fSAVKIcMbNlTyydK4FpeAUgvG0Cq2s4K6FHB/V8Bj
+         6/Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747583; x=1787352383;
+        d=1e100.net; s=20251104; t=1786747588; x=1787352388;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=npmCOv24iNEt8EzIIflfze1zpcB3AMVX2RacoVsoV28=;
-        b=NKI54vtVgN2ce5FOJ3KcFcVo8KSe8T6vpvAOWNCKrR2lSKS2sgeJaF8mefA2slRGKK
-         +hdlz82PKQixSBc9xm/zhlG+UpAETIgerCs7j5hMsw0ma1z5HOZU21oiHDgOtgHS+Nmq
-         b8Z6rKRBkceic+OX5QC2ZZpycpX5SDRGHRPAAjcatJIFFa0OzSVvgaQucIvTIZQDz1Fg
-         vKpBfLSv6arBqMWNYvWSiolRjsLyGnKyyDtY0t8TiJymF5rfFbWb9W3u1J/zJYgOQkPX
-         M8kBYrhdb25VMu5Sj3CXvZsOzjpUPEl2wskd1LPicQTpjBsel5t2Qx1C85yoUASVplxi
-         5r9Q==
-X-Gm-Message-State: AOJu0YyQLUTTU1vBnEIPGpycg5O7MLgjdE9fFALe7aGaUbcZVZgtlDva
-	ZhRlAQk3HQjoSl+l9daAUk/senaBThqryzJV3VWkely1HGBVyX4cqbVKou/jBf7x
-X-Gm-Gg: AR+sD10Cj4vFdsnVxdbF9A9xFqansq5jB8K1qy31MJIvqnl0nc7tFFFFgrjQf0jH3u0
-	qBdI/1GG8h0XAztnWuf0TlKOFx0M15gdB0V8VAZawUoG/2MQOeYen+oi+EY27yrPYZzueZsehHv
-	+irdwaPlptPFG2wgy0zRFVRGbLGgfkIxQJpBPwCW89AFDjCFZtE+EWLBEMSorJXRl56aFz4fbqK
-	zidQAd4nrvT4GgwIQe6YFeyp0zeIPf/ycPTgROPQpPLYnW1QNWpmMC90Bf1MmBJFiDk9QX52B6B
-	yS9nneJOpi3NQUd++axGmghuLaRJBFDAYuV4SBND8RR18vYZT+ex5w9w5YPcU42cskncxscPsO2
-	NybXEtUOcmUQJmphDZ43hjXCZ/VZT6y/V5gqN9J109erkRUtKMaAY0bRJ+ZXpkE1u/PsHPypXz9
-	eQjgjJpJ0YzomHUXLmeEw1vhMhfexEdGPq3tZ6jvYtkTJEwzThaSKZBrSUEEla3YNno7K7y+foO
-	5DY85qVuAYqdNVqsl4SY3T9WkcGDP1z7TJ9I6XbtBHcZlrabZ5cXzbCe99UGKGRzIakJ+9nBsyK
-	tXI7RmeZEi9SwJG9Eg1vVDsK8x5ph2iGHgC+g8ipUS7vmc8YlZ4sXf42jhu3URyn33JzCIX2wkp
-	fvsu03oD8wvOSKxWxD54wVylj6PtXAt/EF0dehaET0p1s2Q==
-X-Received: by 2002:a17:90a:e7c1:b0:36a:8240:2477 with SMTP id 98e67ed59e1d1-3933ed1ba09mr9664116a91.19.1786747583359;
-        Fri, 14 Aug 2026 15:46:23 -0700 (PDT)
+        bh=PLroP09OxEWy8udbVjVRMuOuIjgTNZRDjB82B0gxM0w=;
+        b=ky1HMcqHlHYkrLhNbNemEC/IB4lBD2/ClJ/ft/mrK785li3gG0cCwILEiAmNr73nnI
+         ApCfBhueWjqI5p4JoRiW2M+1KKSgOCk62U2bTnLmgH9k9GJ6ivA57Dr8lyR8+DGq3N1B
+         8Mc6VCVYYplqqj1YY/Zc/kg13IgjdlF5ByrMBCFSVB5y/0igTxTJHtJj/FC62obdfocw
+         zcOC/CKmzqWM01syzWapirXygA0y4+HVVi4vyePtG9gs5HsxUx2LYWQb6Qvxjc0WFfZh
+         0cFjfF3h55/r2q/C2J+87rm2koBvCd5U0qq6/X79h/zNKFG6hW/WreE5Ow6r/DoQhKpt
+         wcQA==
+X-Gm-Message-State: AOJu0YzU7uCvg6xj/Njhsu7Yg4ASBzPkx4dvN0AdJNs55FMjE3uvoOV1
+	vbQn9yNKZOs0m/bu6kWw3fFDP6ncuTKhz0MUOolEXlTZu7h/mBav9pCI7xS7lLow
+X-Gm-Gg: AR+sD11VhChYHv1GtYky6nBJA2UlpxGH+qJNDE3WVMaM5ud8PZK5YxechT+yAwRDVp4
+	yPH5rQ/HnaugcSLkFVHODQoc4254pjzMm3EgIFiZF5UbD3MPp+0MizNgSpOb4wqZxYEkrOPB9qN
+	PD0o7MCsuD3HNWEt4gX4RHXx3nWjaxai1uYIxZZATNfhx56Vm0/X+sm7HZyD6nrXaRQ3oXL3NJR
+	8FTN8TYXFKgfLHzov/VGsFVo55DOjHncs7cxRaVjWcSUTOp73KqvIcRZAC+phGvAXL4oU48C5SV
+	Iggdj7LWo61VB9b0A4wxIwWwXefUdSqUjlEAuCw8iwymJbKB/Vm+6oChQyrrH+iZ0NvkgHac+h0
+	z7osCAWsd5zK3UOFpoY/zPqOWeEAIotBjh/nkfG7pk0pzgu9Cv/FSU52q+vuDnrsABqAVWUAT+G
+	oBmOyuA4xs69AaUBjmbadscgPDWglKW5gGSDggMZnMVw+Yd9H+zaX05LXIHwM/4qqsUYhzHkbfp
+	E+bDa3RUc2Gx7iFICfNvyq9IkgjTCTZs4hd5IQ5xrTR9lDJS+5MoZYonGVGbLCgT1JaM3W8HM/F
+	vg1T4AfInZRpyIG5dplPQKzIJoBgv75XuX1d4FBquTASFx4mNiR1LmkKFdVOhBW2IZcJZ8Yhywm
+	jAtsCOwMMDEHRhdUuRWK9V/meUzxwsz/O3qRfF3JXVLqVUwRXHOaebllv
+X-Received: by 2002:a05:6a20:9150:b0:3bf:7ab7:98a4 with SMTP id adf61e73a8af0-3cc71d195d9mr8939577637.27.1786747587918;
+        Fri, 14 Aug 2026 15:46:27 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.22
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.46.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:46:22 -0700 (PDT)
+        Fri, 14 Aug 2026 15:46:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 037/109] libmodbus: upgrade 3.1.12 -> 3.2.0
-Date: Fri, 14 Aug 2026 15:44:23 -0700
-Message-ID: <20260814224539.1523174-37-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 041/109] libsdl3-mixer: upgrade 3.2.2 -> 3.2.4
+Date: Fri, 14 Aug 2026 15:44:27 -0700
+Message-ID: <20260814224539.1523174-41-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,31 +71,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:46:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129101
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129105
 
-Minor release; see upstream release notes for details.
+Point release with bug fixes and minor improvements.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../libmodbus/{libmodbus_3.1.12.bb => libmodbus_3.2.0.bb}       | 2 +-
+ .../libsdl3/{libsdl3-mixer_3.2.2.bb => libsdl3-mixer_3.2.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/libmodbus/{libmodbus_3.1.12.bb => libmodbus_3.2.0.bb} (92%)
+ rename meta-oe/recipes-graphics/libsdl3/{libsdl3-mixer_3.2.2.bb => libsdl3-mixer_3.2.4.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.12.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.2.0.bb
-similarity index 92%
-rename from meta-oe/recipes-extended/libmodbus/libmodbus_3.1.12.bb
-rename to meta-oe/recipes-extended/libmodbus/libmodbus_3.2.0.bb
-index 2e149580eb..1eddfb8bd1 100644
---- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.12.bb
-+++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.2.0.bb
-@@ -7,7 +7,7 @@ LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.2.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.4.bb
+similarity index 96%
+rename from meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.2.bb
+rename to meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.4.bb
+index 138536c628..10df37632c 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.2.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=df8f4d887d3997f6e9cf81bb7f43dbf7"
+ DEPENDS = "libsdl3"
  
- SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=https;tag=v${PV}"
--SRCREV = "9af6c16074df566551bca0a7c37443e48f216289"
-+SRCREV = "a9b025d12289855490b10d77461c99e001abfc0f"
+ SRC_URI = "git://github.com/libsdl-org/SDL_mixer.git;protocol=https;branch=release-3.2.x;tag=release-${PV}"
+-SRCREV = "a5e1890afc5115ffd16cefdbb4d50f74bf4970ce"
++SRCREV = "72a81869b45e249e8e67102db4e98dd2441f05a1"
  
+ inherit cmake pkgconfig
  
- inherit autotools pkgconfig
 
