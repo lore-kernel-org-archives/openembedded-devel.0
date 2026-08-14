@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C4B0C5DF72
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDCBEC5DF6E
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:45:56 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24341.1786747549520960748
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24340.1786747548629281008
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:45:49 -0700
+ Fri, 14 Aug 2026 15:45:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=hKAFZQGQ;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-38a0c7e841fso2163331a91.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WBpx7vHg;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38125cebfdaso2328118a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747549; x=1787352349; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747548; x=1787352348; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=t2sEZ8juISdwIjBynRymcf6kw+3qj4ihBiC02SXwOyo=;
-        b=hKAFZQGQNYIJfhsKDgceVruVyPRJuOoA6dT17Bczfpa1nqzloHG02fx9+KZ082E9tI
-         7tQ9C9LxIL9Oq7reC1QTRjlXcKbB16HEUsFQ8PgELGwfnkW9mPnKFnA0UlBHZKB22nok
-         Gf+JION6W4zr4Y791d9wEUWBD/o9SDDiET7C9Iq9m+2UllgOXbDjh173VTbH7oLkQLft
-         kCyA6sKV27kNoyPetwQzSIEgzJDWJJFJYfHvLZef71UMv6e8il8N1SXEB1BuOz4TMj1N
-         8/VdzsAOvVfPfQky4ff6/UNHmh1dxRTD340eW7qWaHvW6HTOX9Uq7abNbAk9iOlVJCva
-         EI+w==
+        bh=wMVRQR3LTSbP7Q/ni1PhHWfip6PdmVhCxSmHWd/afCE=;
+        b=WBpx7vHgjVs17YU/hV13h0Xmsq44hX6ExB6KLIIDcUhXE1kzdDcxo7IbGMvecc949r
+         t73vwyUN2i81/7kDZ7cY+gxtPFj1ns6Hdcvsqum1MUpgbGcpZnW+VMzC/frP2W7lPvb6
+         DWKWhY6ZuIUVY8rMhNeKk6PGRkTjQNe2kTslKbYVGGVJrei8EKPrb7o0OBvAdAg2P4Gw
+         x4sfbEuqn+K/WE10ijy6xP8Si7b9awnTDQUvb/EIVnE023F6arB4xjYz47Iv/GHq5kV6
+         1lr3Jf11LS1FIIO5nlDE5i9yo+tDRD/bMD4WuuwIc/2DUEnfEIEo6tOaGbPpbtbhw4+5
+         Kwng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747549; x=1787352349;
+        d=1e100.net; s=20251104; t=1786747548; x=1787352348;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t2sEZ8juISdwIjBynRymcf6kw+3qj4ihBiC02SXwOyo=;
-        b=EQrufi56yFqLLOYU8sMupBKAvLlWtUlKfMjfp83AS8SySez2F/Lrs9AOZqamnXjYnY
-         Pl/DrufDFrF5NENOXlXruppr0TE5rPfQ6giegUezmurzQ4xiKkIZoEbKu7FWlFHUvUqI
-         NRhyw8mCOfOj8lfgTHYrOraxz1R1JNodPfVCCcd4sC/kpG2r2pJtQXBcz4K290fJ/5vB
-         3/BoTeq6OWlMVXDTrLAqfSWJXuPwMLqfGBptA+EN+0QtA/StSpwGSjb3g0B0SHMY8kpK
-         OEC0aaPxZx6yaAMLGGYkb0t6mhOL92TWvO6kl0rAu9C+cDw+IonDf1zX6A9S84IcgxEN
-         qHwg==
-X-Gm-Message-State: AOJu0YwTThSYoCOITGi0PEDR9amhvYWT1ezJ85eOvzZTg4mmvlUi2xdg
-	Au8metmOvz20CepblQcs8ZLNA0ltNT46aOmN+FX6KXi39PI09w9RDCOhqBUkO5ru
-X-Gm-Gg: AR+sD11yz9+nAkmo3M1f7FJ4eO/jibiNfnthihXpN/zZRbG3nMY3Azg4vBMZdOgdOGY
-	EPVdhUM06a8KgM9NCwS9mXI2eOEOKve+re00unlQnPjKoxDabFEu5jplKIDpdDYfrXUlTA4YgNr
-	a7nZ8TTgSsghrRvSrpR6HmrcKAXpbSlh9dzcwLsKP2kAO/ShGhk6Fs6vQGti8wcwAnBUlVLBamG
-	IEGH08tduOTurQa44pur6WaZcjV8VE7dSNgO/vN8xfWxwXAwELOs94qn+fTmf78yCM2KyJxVXZ0
-	ix00RpPsrtrDKIYZjMyFPkKcJ2qcXfMxvVU36MD7cckcYc1pttPYxevg5rI+LdzwfKK9zKlsT5n
-	ts0KbKQ7X+EoWkFoVCp4UXFLqkiiP5jEN9YqVDNJxs7LgrgAAiCNsuYV1+Y1AwOxhEmS/Ihj46L
-	9oMVVhZcwUarOCwEr97dVRrRlFjw91ivisyT0XID+NgNrFoCVH1nxYbed/1HSUp7nEc3IxTqH6L
-	cxFBA+l1cVFWQl051SwF0cnlPICoY4DJxVkK3LZudf2LpnNSRNuWLzKDYPLF3eVxce8J0t62YqA
-	XdBOWaMB9NSuM1oa709F1SKkAXTiugEuZIbfJXIttGa4E4ZaTbfCHXaZat1dg2FYpNC9DkwxRvk
-	8r7Ely3DhPItGbaEsmSw3znqgkmSxqigO9nFUIDkKVPtmhA==
-X-Received: by 2002:a17:90b:5450:b0:38e:655c:6516 with SMTP id 98e67ed59e1d1-3933b4f3238mr10714727a91.0.1786747548892;
+        bh=wMVRQR3LTSbP7Q/ni1PhHWfip6PdmVhCxSmHWd/afCE=;
+        b=OxN7UOoh0MUY52L3rqEv6ytMgXyRZTT16frrN1nlNSAh1GKD7DgN+vLAhDf8G8iv8u
+         yyI3WJN60E9wDQe/4py7Umpybhejnt77VqpUI8CD+t5G6AIvi4hPhnIUvww8fUBVo0Xt
+         vXQLViLlOqeUv0Ik7nKNVeMeTa7lbyqEVHf8gfUvRSDSnx7vUzYCWCyo2fXqV5n0aJG6
+         2d/2vaNIiWhokJCa8+bnDJYz7Rpf5/NtPDYq+5uXdg/fLPXNf8iPx2QlfXsQRwIbSNae
+         MxoKW9JGm5r7UVawYzsvypqBnBES4OdkIBDowybw/P0LwhfpHQefopNBZtRXSk8x8dRi
+         e8WA==
+X-Gm-Message-State: AOJu0Yx1MPxseOd7TJ9hZTucO+dQgR/FngJuL1P3gmHLrmLqDj+zqZr8
+	2HsSMEzeoBAQqQh7pIfNbZm+p3ijjd8HoZifoMWshNydo7LsMoPYf1w2cSR/Dj4m
+X-Gm-Gg: AR+sD12YqEvL55Ft3qLt/j8PaMvTgewBwtvdR2gcvp4FYdxb92g167NmlCew/cn/iBA
+	eo7/jH3mXxbreTsVE8TR8Fji9vaO9v350fvP/JOuF9+4LbMtqD8Gy9s8u5lTLndE2Poy5kQn7Ya
+	p0EE78HKnUUwqCq3Ad7hfR688UsZkDDzGS4hYHi2a+7i0UsNh3S4xz0IAgKnhxSNh5JTXZETw4X
+	H7U+2jI3IA3entszy5CJxvLFZuAPBP/zp9T9AhHuAdDPAWpCJayUHYBBXFvl3b+6DJmABNPaTyV
+	NUM0WMYVClAP8d9e35M86WGoqCDAa5qSpHkXnn6s4ltyyjdKMDw4NXjTLD3g83iqtIbLnZ1tiKn
+	KJnm+68+byry4XYPJ0sRsbqmBn+Srs+2z3+/dA2xCbFsICIJ8Z/jxfU0xGjLlTYdc6OTJO1UV53
+	r2AnfkoUVsagBWOUPntjF6693c8yeV7mY7/F6WVsbffVU6zBBIVVmgAjkR0jxLOmWZthJPvwDr1
+	sKZZaAMu7mCE1L3axQmlDdT06zFTM8IBy3hmBLxu/t61ktsEakGHnyunUjbm37Og6kTAadVwQGN
+	oOf1Gm9doLf2IEGQ1h/6uChlBX1CykKmqy2arnqGA0TpkXP7wH6GJ4BdHatmYXRRXIN2MaUrZ8d
+	hl5HhupgxUkIwa3RykPlbmhAvJhdamIhlPun1ulxfW81GOtjFmmMnwnWn
+X-Received: by 2002:a17:90b:3910:b0:38d:f096:a1dc with SMTP id 98e67ed59e1d1-3933b872257mr10350305a91.11.1786747548005;
         Fri, 14 Aug 2026 15:45:48 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.48
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:45:48 -0700 (PDT)
+        Fri, 14 Aug 2026 15:45:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 005/109] source-han-sans-kr-fonts: upgrade 2.004 -> 2.005
-Date: Fri, 14 Aug 2026 15:43:51 -0700
-Message-ID: <20260814224539.1523174-5-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 004/109] source-han-sans-jp-fonts: upgrade 2.004 -> 2.005
+Date: Fri, 14 Aug 2026 15:43:50 -0700
+Message-ID: <20260814224539.1523174-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,7 +71,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:45:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129069
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129068
 
 Adobe released Source Han Sans 2.005 on 2025-06-18.  Per the upstream
 ReadMe version history it bumps the copyright range to 2014-2025,
@@ -82,30 +82,30 @@ various Ext-B/C glyphs; corrected strokes, contour alignment and
 interpolation bugs; removed and remapped a number of region-specific
 glyphs to their corresponding shared forms; fixed IVS mappings in the
 KR sequence file).  Upstream also renumbered the release assets with an
-ordinal prefix (SourceHanSansKR.zip is now 18_SourceHanSansKR.zip), so ZIPNAME is
+ordinal prefix (SourceHanSansJP.zip is now 17_SourceHanSansJP.zip), so ZIPNAME is
 updated to match.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ns-kr-fonts_2.004.bb => source-han-sans-kr-fonts_2.005.bb} | 4 ++--
+ ...ns-jp-fonts_2.004.bb => source-han-sans-jp-fonts_2.005.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{source-han-sans-kr-fonts_2.004.bb => source-han-sans-kr-fonts_2.005.bb} (44%)
+ rename meta-oe/recipes-graphics/ttf-fonts/{source-han-sans-jp-fonts_2.004.bb => source-han-sans-jp-fonts_2.005.bb} (44%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.005.bb
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
 similarity index 44%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.005.bb
-index 8b32ab82d2..34a5e7115a 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.005.bb
+rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
+rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
+index 40128f97d3..51f8035264 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.005.bb
 @@ -1,6 +1,6 @@
  require source-han-sans-fonts.inc
  
- SUMMARY = "Adobe OpenType Pan-CJK font family for Korean"
--ZIPNAME = "SourceHanSansKR"
-+ZIPNAME = "18_SourceHanSansKR"
+ SUMMARY = "Adobe OpenType Pan-CJK font family for Japanese"
+-ZIPNAME = "SourceHanSansJP"
++ZIPNAME = "17_SourceHanSansJP"
  
--SRC_URI[sha256sum] = "02fe28a48c6381c49d61c27a1b173c77f0e6f2b9f2b68e79f076f10a6a8f4bfe"
-+SRC_URI[sha256sum] = "ada0398122ebfebcae9efc1c6bb1dc5512c03b8f54035a8f527cd82a3c0441ac"
+-SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
++SRC_URI[sha256sum] = "076a167394a2bf125a7ab13164a5ea1ce529b988d867c11052e83473b2a704f1"
 
