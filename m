@@ -2,64 +2,63 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A57D2C5DF6E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3FBBC5DF70
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 17:04:45 +0000 (UTC)
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17295.1786726380864187874
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17470.1786726383841658051
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 09:53:01 -0700
+ Fri, 14 Aug 2026 09:53:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre.com header.s=google header.b=iuLRgCX5;
- spf=pass (domain: baylibre.com, ip: 209.85.222.173, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-9309d4ea213so97822885a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 09:53:00 -0700 (PDT)
+ dkim=pass header.i=@baylibre.com header.s=google header.b=PD5XJoqf;
+ spf=pass (domain: baylibre.com, ip: 209.85.160.172, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-51c04bf4711so13223201cf.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 09:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1786726380; x=1787331180; darn=lists.openembedded.org;
+        d=baylibre.com; s=google; t=1786726383; x=1787331183; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=RY1h0bV3JKXLqQTrkbwgIapAGfRbYXW8vm/kC4sa8EA=;
-        b=iuLRgCX5g62BkvDrrQ8glKjogqJvdAIl5Ynj4LqQ9Pl2e/Szv/vqBojNazeQwwWH8f
-         ABaIdpp2YeOf0O6fCUYcMa2af2a28hMtI6o/NdKgP7FE1LNx+cRJKBtZd3MpKhQIgWIM
-         0IGo9MlEfupV2Tl5hrZ65pgo+VYRV5SwE1n51EZZQ5BNvY/uuz8/LkPq1qjrtUr8NjJO
-         jqxTdZc4Z1pKc9q/PRPV5ERQKnqA1ziBPh+WiR1pYiiiA4DY7EJ2ne+Ic69/qnVUurNw
-         HtuFRwaqYanvistCF/nnOZACm7oJ0paTsBPd6oILxz5gT26J+VjXJfwf6vuV1IA7I3Zy
-         bBeA==
+        bh=fqCRlnsh/L0uUOPNOxTjOLsQ0hhO9Q3ePwDsKW5FMgQ=;
+        b=PD5XJoqf+uLDGCG5YKQuH0nCx0K8TPHMWQmSTmOviNTlI1OvQP1n00gdpK9ROhmFSY
+         Bx284QiTk6qckKenvc3u+X2EOiCC6GrAm5wXTwHTjp/4G95vHqioQZZZq/I3FNHDtZaX
+         G3GlOlubj/k/ClFKEZZXYrJCA9U33JYX+Qcr2R2+uWz1MCB55c1RBzbdkk6ZgLzCNQXR
+         kAL29gtmixfrxv+ccOE6QfBhqXtELtFyUJR/Bm1qhAxXKJUz0wOj9ydUPETc5bgQzWTA
+         ZRN0XGXr8oVqj0y/DJ8AZpp/vptYXemFYZ7WChmOJfRM2KHI/xG9oKZa7Xd+OaFwU5Hs
+         JfJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786726380; x=1787331180;
+        d=1e100.net; s=20251104; t=1786726383; x=1787331183;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=RY1h0bV3JKXLqQTrkbwgIapAGfRbYXW8vm/kC4sa8EA=;
-        b=nc/vdVTdOigxJpH5kgqhw07zMnQJFDJdujac8TCvRcp84InX3xlZP/zFlmQwvO94p0
-         ibzbrt2D/+28DEi9XwiUJKeQTdJUT8eiIC2FXMclH/kFa72dnSUbOFOGSwIquHrlVazN
-         Utd6pIKpHlPOOJRnUqJ6pBJyz87Iy69N3OBwTh1iwzo4t4IRQEcH2QZmiaAFztOWYPhr
-         gfqqi2IvqVb3W/y0CNGpeqeyMAGRxAEUNhl7RVBj4qJkqmZnsizf9XCDPJ5iHbPENnVS
-         2/gQ6dkfW3WgoWkRJYHD7tKCJh2ZiuWl6lfmQtOZqnRh7xU70l6dN7eSQthXa3Ppralf
-         L5qQ==
-X-Gm-Message-State: AOJu0YwRBPjLu652nOmw8vFM8IFnMrTOblviBq75JEjlY7tOnuwqCw73
-	mo0X67TvLQ/n6AQZpQnF3AkQcawyErsMdca8Pi5EgmoSYrJiNoqtzI+W3teM4MH6hdGchvV7NoS
-	vEOdq+rQ=
-X-Gm-Gg: AR+sD12zEp4lyEGLPG6MzBbq+N1PHiKIWCSrM7SpAEM8Wd3Tt9gzv+1Wc4Y6LIzO3Wz
-	YpzfsFKjgQtGwK7cgmyTUUyk228cjxBbna4rbs9T0IJuznaYS+uk2K4nvRFaLuvIvp189D961y4
-	PFkaGmJyDugcj0hMz0tp2CZYwnxpM1gpCltryYhFen+z0/5FC6LfQyKBzKeEB2TqOaBUf3FHk02
-	B8cnGDxHCGGFTWYLMNOXZeSHpZqGmp3vEJHFWaTAv4tKr/VBEt9+pD1ZHG7NYZ+2xzEMNaff0QJ
-	uJt2OD0jCwow9Qkb401PeLFCRT7JHs1x5ZgRWuTrKVkgGpxXggnAO/3xx3hXsryC5u06kku6QT4
-	zK3/BUz1liloucFNOzSoxd54hzo83CDdDTbv6y0ewjE80fZD06Ml/+/aNsnDvJzNdr3w2BYmks6
-	qxm7FWL/LrbbxJJ2ymesLOg4+eeDxEUpew2WRPXyxPT8eEAPsKcyune/co0Dlj3a9unl3Fbp6U2
-	5w=
-X-Received: by 2002:a05:620a:1b91:b0:92e:694a:77b1 with SMTP id af79cd13be357-936d1fd6723mr835982785a.4.1786726379611;
-        Fri, 14 Aug 2026 09:52:59 -0700 (PDT)
+        bh=fqCRlnsh/L0uUOPNOxTjOLsQ0hhO9Q3ePwDsKW5FMgQ=;
+        b=WM7wINkZXHbB2KipBcwZ1BiOXe4uhs5C8MtI2zsGHZlhp0dIIonlUtAV/7rEPfuoic
+         W1IYC+/PNIeEHyPE6uFyFbd29WjZdFcwbQJ4k8qLfgaiWgHSqCqIKjH+ruVzOuUucu32
+         u1/bR++fXUce2UkGZ6ZsqwaAS0QlZB6/Bc3IfJsA6osQvpSp+mOqP1FO3Qfm3agofzX3
+         91jvbYSLzxYB+hYtf/LBHFCCTgmJTcB5GB49+7aUUpjuMXrEcQ+14wsKWbWHnIC8fPNQ
+         XP36tvhAY2F9SAfQpTdlvJjy3VeTPbnpGUt/4aOAox3RLk+8Ede/pK7SpgLTJagilwC9
+         ZEqg==
+X-Gm-Message-State: AOJu0YxylarJdfk5HrJeRDJYr1I6PVs86idA129nfELbFC8bT3UOM5Oh
+	KpMz9RAgLYRE/hgDGmpVdBku3w9bQZxwUF2pMOUkQTmVpDKzfGMM7GzaO8KF+suSDyPUoB+95os
+	suIBX9rk=
+X-Gm-Gg: AR+sD13yi3TrTd6Mq11Jj7JsySacQgm1+VCcIdtTDRrjDUb9H97ghkp3Su46MaUlpZu
+	C1vbeyM/lVH4pUh4ljzLEJxunVOveedxkEub0Xp7QifrFYSsVzPGVB/Pa2oNyRmEm8S1uhuzpxF
+	yZvBLEuj30QpYrD2gGcdlCX9QAdR6+Zck3tzKExSJiTeDJc0TwVmwNn7hbyddcQxpNToKoFCeWK
+	728BjsnZ9BnT18kqRJ9oOHdBQvVxXdEjVTNjwE3LdS3QPpodRy72zOvOfOJrVQyqeAeEQ+o41G+
+	xlSBwjdWdsTEkFCb7hLNarX+aMdaZ3VeDcX+42LlSTKxag4PhydUEl/hGEBhXBv3mj8pQ8u6zee
+	ph1AZ0Io0qL/iOCdaCm6XdwxBl0hX0UoPPljZzp1Z5ZvwPkL4wxYAzPpuhhi5orPVS5cTN1D3iE
+	lZ/cioz1ZgXsoQrFjSg68GIVypC5FIBV4njKLhTQ6ZRYhd4Tw7y9An51qIcu2MRRVQ
+X-Received: by 2002:a05:622a:2446:b0:51c:1a11:75cf with SMTP id d75a77b69052e-52d852fda64mr84114881cf.7.1786726382744;
+        Fri, 14 Aug 2026 09:53:02 -0700 (PDT)
 Received: from localhost ([2001:1970:3847:e000:e8bd:ca0f:c232:9f10])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-936ce1e40e2sm315167585a.26.2026.08.14.09.52.58
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-52d83f00957sm24767561cf.9.2026.08.14.09.53.00
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 09:52:58 -0700 (PDT)
+        Fri, 14 Aug 2026 09:53:01 -0700 (PDT)
 From: "Trevor Gamblin" <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-initramfs][PATCH 03/10] meta-initramfs: add bitbake-registry configs for nodistro, poky on master branch
-Date: Fri, 14 Aug 2026 12:52:43 -0400
-Message-ID: <20260814165250.590784-4-tgamblin@baylibre.com>
+Subject: [meta-filesystems][PATCH 04/10] meta-filesystems: add bitbake-registry configs for nodistro, poky on master branch
+Date: Fri, 14 Aug 2026 12:52:44 -0400
+Message-ID: <20260814165250.590784-5-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814165250.590784-1-tgamblin@baylibre.com>
 References: <20260814165250.590784-1-tgamblin@baylibre.com>
@@ -69,24 +68,24 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 17:04:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129057
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129058
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../meta-initramfs-nodistro-master.conf.json  | 56 +++++++++++++
- .../meta-initramfs-poky-master.conf.json      | 82 +++++++++++++++++++
- 2 files changed, 138 insertions(+)
- create mode 100644 meta-initramfs/bitbake-registry/meta-initramfs-nodistro-master.conf.json
- create mode 100644 meta-initramfs/bitbake-registry/meta-initramfs-poky-master.conf.json
+ ...meta-filesystems-nodistro-master.conf.json | 59 +++++++++++++
+ .../meta-filesystems-poky-master.conf.json    | 85 +++++++++++++++++++
+ 2 files changed, 144 insertions(+)
+ create mode 100644 meta-filesystems/bitbake-registry/meta-filesystems-nodistro-master.conf.json
+ create mode 100644 meta-filesystems/bitbake-registry/meta-filesystems-poky-master.conf.json
 
-diff --git a/meta-initramfs/bitbake-registry/meta-initramfs-nodistro-master.conf.json b/meta-initramfs/bitbake-registry/meta-initramfs-nodistro-master.conf.json
+diff --git a/meta-filesystems/bitbake-registry/meta-filesystems-nodistro-master.conf.json b/meta-filesystems/bitbake-registry/meta-filesystems-nodistro-master.conf.json
 new file mode 100644
-index 0000000000..bfd867c365
+index 0000000000..b33bb2f2f5
 --- /dev/null
-+++ b/meta-initramfs/bitbake-registry/meta-initramfs-nodistro-master.conf.json
-@@ -0,0 +1,56 @@
++++ b/meta-filesystems/bitbake-registry/meta-filesystems-nodistro-master.conf.json
+@@ -0,0 +1,59 @@
 +{
-+    "description": "OpenEmbedded - 'nodistro' with meta-initramfs layer",
++    "description": "OpenEmbedded - 'nodistro' with meta-oe, meta-python, meta-networking and meta-filesystems layers",
 +    "sources": {
 +        "bitbake": {
 +            "git-remote": {
@@ -121,10 +120,13 @@ index 0000000000..bfd867c365
 +        "configurations": [
 +        {
 +            "name": "nodistro",
-+            "description": "OpenEmbedded 'nodistro', with the meta-initramfs layer added",
-+            "setup-dir-name": "meta-initramfs-nodistro-master",
++            "description": "OpenEmbedded 'nodistro', with the meta-oe, meta-python, meta-networking and meta-filesystems layers added",
++            "setup-dir-name": "meta-filesystems-nodistro-master",
 +            "bb-layers": ["openembedded-core/meta",
-+                "meta-openembedded/meta-initramfs"
++                "meta-openembedded/meta-oe",
++                "meta-openembedded/meta-python",
++                "meta-openembedded/meta-networking",
++                "meta-openembedded/meta-filesystems"
 +            ],
 +            "oe-fragments-one-of": {
 +                "machine": {
@@ -141,14 +143,14 @@ index 0000000000..bfd867c365
 +    },
 +    "version": "1.0"
 +}
-diff --git a/meta-initramfs/bitbake-registry/meta-initramfs-poky-master.conf.json b/meta-initramfs/bitbake-registry/meta-initramfs-poky-master.conf.json
+diff --git a/meta-filesystems/bitbake-registry/meta-filesystems-poky-master.conf.json b/meta-filesystems/bitbake-registry/meta-filesystems-poky-master.conf.json
 new file mode 100644
-index 0000000000..1dbdc3fc34
+index 0000000000..0b13141c76
 --- /dev/null
-+++ b/meta-initramfs/bitbake-registry/meta-initramfs-poky-master.conf.json
-@@ -0,0 +1,82 @@
++++ b/meta-filesystems/bitbake-registry/meta-filesystems-poky-master.conf.json
+@@ -0,0 +1,85 @@
 +{
-+    "description": "Poky - The Yocto Project testing distribution with meta-initramfs layer",
++    "description": "Poky - The Yocto Project testing distribution with meta-oe, meta-python, meta-networking and meta-filesystems layers",
 +    "sources": {
 +        "bitbake": {
 +            "git-remote": {
@@ -189,11 +191,14 @@ index 0000000000..1dbdc3fc34
 +    "bitbake-setup": {
 +        "configurations": [
 +        {
-+            "setup-dir-name": "meta-initramfs-$distro-master",
++            "setup-dir-name": "meta-filesystems-$distro-master",
 +            "bb-layers": ["openembedded-core/meta",
 +                "meta-yocto/meta-yocto-bsp",
 +                "meta-yocto/meta-poky",
-+                "meta-openembedded/meta-initramfs"
++                "meta-openembedded/meta-oe",
++                "meta-openembedded/meta-python",
++                "meta-openembedded/meta-networking",
++                "meta-openembedded/meta-filesystems"
 +            ],
 +            "oe-fragments-one-of": {
 +                "machine": {
@@ -216,11 +221,11 @@ index 0000000000..1dbdc3fc34
 +            "configurations": [
 +            {
 +                "name": "poky",
-+                "description": "Poky - The Yocto Project testing distribution, with the meta-initramfs layer added"
++                "description": "Poky - The Yocto Project testing distribution, with the meta-oe, meta-python, meta-networking and meta-filesystems layers added"
 +            },
 +            {
 +                "name": "poky-with-sstate",
-+                "description": "Poky - The Yocto Project testing distribution, with the meta-initramfs layer added, and with internet sstate acceleration. Use with caution as it requires a completely robust local network with sufficient bandwidth.",
++                "description": "Poky - The Yocto Project testing distribution, with the meta-oe, meta-python, meta-networking and meta-filesystems layers added, and with internet sstate acceleration. Use with caution as it requires a completely robust local network with sufficient bandwidth.",
 +                "oe-fragments": ["core/yocto/sstate-mirror-cdn"]
 +            }
 +            ]
