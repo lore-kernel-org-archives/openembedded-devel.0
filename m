@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0DF9C5B572
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:45:55 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24477.1786747552029928401
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15D45C5DF6D
+	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:45:56 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24475.1786747546624519493
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:45:52 -0700
+ Fri, 14 Aug 2026 15:45:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=cDXf4V+E;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cf27856f9cso15541385ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KkEEy6Vd;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38e88b60121so1269191a91.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:45:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747551; x=1787352351; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747546; x=1787352346; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/VQ4Q1gk6fryo+5Aum+gCgM1Bk4YxiB/XVGkYr7+rHE=;
-        b=cDXf4V+ELk0f7aTr9KXZ1hykpGWXfLAV5FDdOCjvaRihlMGc/AlN8gBAWSP9LNZCwl
-         rSvp/xqdiRqy2CV0zWjYQinF8UEKy3W5yTx1vK6mpAXxKWjeKUGFomxcCIyc//4d479g
-         8j2DTZO3Hcr+E5WyXB1xu+66xwdvgt/U0K03Zan3jjAwfE3VMuVDbfoF69wT6u9TJSlL
-         RsVJaeQO8VgoQSk4WOlhrMnrwLlzfifKPnbDPumKF1TXbpVwJMhzdyktHuQwY2wywKmX
-         pRzpCNR9a0jZ4JSB82gvZmgZa5NQ2r0SU1nRTz21esfm+cEvTW8pJhQZbaGHpVj9kIm4
-         4dDw==
+        bh=W+O/0P2J5XSI8JvmxrlXezdCyWyzpUTunWAbwhg3nfA=;
+        b=KkEEy6Vd7LEcH9sOeWJWcwbNpe7SkZU1qAVNtpWrgsLsa21tXIjRV4V3V7u8D/jxbX
+         oq5fYO7a7GOEwkMRH+kppZWA8oljDtXDRJRAHGRGNxyzo69vCG+4R4Cyg7+BOk6fXQ6O
+         z4De9OpVnaWz+rnQ40N6pnX2yDIy2d04XnouPHk71i0vDiXNVi1UO4DcpAUMzolmUWgo
+         AarKssvrvCgcDCORCtofRKxJPtfiEzCiXRmrVSDfwEMP3YB8+UPAAEQa9WI1Sg70kFtW
+         Bk7nVUi/gbpDOUu0vq/07QHDCJ4D2nTmBUl1ZuZjuu0BcIEhAPK72t5DGxLFdZe6+Dq5
+         EnIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747551; x=1787352351;
+        d=1e100.net; s=20251104; t=1786747546; x=1787352346;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/VQ4Q1gk6fryo+5Aum+gCgM1Bk4YxiB/XVGkYr7+rHE=;
-        b=CYE4tE8f0mTkcqxBSotnytW/FrJ4xttvkhVgzw2TrKs2WSHTsYFoFggf11Kz+1+c89
-         RFojc0kSHbkSS+EyuK4l2ksKnqfvrWZckHRKVpRyhLJ+PogroDhC3QT699c8CBO7hwaO
-         81ByuOiSF3ILNc1gyM9r23I60sOe5pa+W8hz6Un/+fG42aN+/CCzGYe19mvyrkzYHXQr
-         6AgeW6cn+jmV33O9iSMDiYVoTQd0SI8q6qNdiQCMNMocIxhMPqWRB6yLg5YCRGJ+Xz73
-         kIAuUANSnjATOGP8cx7BUZ9YDfhq0E3bu4c4lSDRDXob5nZ7JEvHg1rlm4QmJRDeZ2JZ
-         /4Vw==
-X-Gm-Message-State: AOJu0YxDRD2egwIMSifnUr65eHrmpxgK1sSLvGOkLQu1bVP4GbgwyIm7
-	rP1EWBY5g0SZZ41UC6jN4cCmllO6QqWW8CFiLZSKlC6AyFjqZ7pjuvLZscVmrX0U
-X-Gm-Gg: AR+sD10tDbYmBWU+QpzYMYL+FXSKgPuuU7a05N1utuus+cCZYNkZgjQ7lBshXi1GVoN
-	AerIc2bVpIFck4oadHtR5EGNRJ6xaHLWGJvb116QSKFnmg9Pt/KL5e+6RfPp708LEUnngkh8MkW
-	C7UlqYiEZccEHhF9H24/7exTmBEVXt9NMc2BZZ/Yn899dfRVcHAnpX5Rs/l9JtBw70GdUEpyXQJ
-	XyfQ315I25FnW8gHECxKw7zG3c1ldW79Pld8VJ3U7cnPNA4C+/DDglPECutgmvOhu/Sh5w3qeuE
-	QS8z+PS7/2awnTLoTnd4U0Rmrrw/OyxUUPfzC3Zns7EUrmNeRphWyEBpkYjYOElUWkvjjW7yZBP
-	psVKuo+IYxK4IP8nXgcQSUAfIOgAowFax+qxfy19uCgXspxCQyBufJmW0W2vAs/wxfHnMXw+med
-	4XAhqMe6nCeE+HIXwZuVZEBXf1gFT9jewmVRwiKRwhzmyTy7AkXVQ9akTWz6dMFZAwRYISLsODc
-	9JZmZym/BS90K2mlp8gTeduYnRUt2rYyWl8IqcPtHI/TZ377pvyuau7J0Dxtwq8rjwd4CKiL/oE
-	sBd9HYLMdZAcG6EAf79but9XuZ3XW9NVompSp0UCPhnOSCwPfqybhoo+ilib4za7P+qkR/zJrke
-	cEMzV93XffDJRZXG73pJrnq6uQEBUbBv+DKYWxlvxW7P+tbNB2HjAFfUyPw==
-X-Received: by 2002:a05:6a20:9183:b0:3b4:870e:6f44 with SMTP id adf61e73a8af0-3cc71de5b86mr10471015637.35.1786747551289;
-        Fri, 14 Aug 2026 15:45:51 -0700 (PDT)
+        bh=W+O/0P2J5XSI8JvmxrlXezdCyWyzpUTunWAbwhg3nfA=;
+        b=Ctw9clGgYgS0Ay8BYtZZrEfdFnvSsJqhbSpbpaAkrM8UR9BmES8W6xef09b3Ngjcv4
+         2miAG/lExoNsAZdxPkpvPCMCcRMidsmgoBYTcQg4yhmmHGChf4PxSTIjRb3u06ZhyIVc
+         93GZFTahTBVzJFzfCbIJXoq84cfnRnEiTKQGYVrDNebbc5phOFSqcC+03VOWdnChoFMN
+         Lo8OFkmjqOKQ2nr7B3EworTNwUYV2eCAbI7EroxMB8ecJ5xGqxb3TW7VepL73iAWN7ly
+         HskSUJoGlZN8Ar6g4ejfBizANkk3ydgaINQUgbgjOMzHb2apTGRwOCgWOI1mQ3gS20nq
+         nxAg==
+X-Gm-Message-State: AOJu0YykufxjyvA1KXWNsft8RYSfQRmVMgDXgRtxODjyUBVv70pNyOaz
+	qGTbRz8Zdjw4crXYJ1QrCKlHmGJITi2nv9+0sAf/Qjxnt7vz+6/PRtGgjJPDjteD
+X-Gm-Gg: AR+sD12M+Ir0p8Q6cWP6bTeadbykRnBoXzXRoyMHwd04fVxUypoFkLp5+42GMFjHx8c
+	aV00zXv64uf3sU5T11nmrucwLXYSZSzLb6P5153yxhMtzuCkXP2bgNtrdZXRIB1EmfdbJSyr6Hk
+	P8W9m6UUaE7E099Cpq59V022bsE1DSsvs3FSAWmAFQjWR8ZpE5UzPD5K3a47ybZQkDWVKwRh3dQ
+	uAF3TuYxRCk/0Hq3t5oLLYYL97SZOZezwmYO5rRtBh7mUKXdhkzDIoNhvc6UYdQ6YIwbPDYZYxu
+	O+OhllkDpAofopw77SK3lD54QDZmTkcahYRHAMcp/8EDza6zB11YnI+zROVm70FvGOEIdzBKlLI
+	EW3Mr3HOUDjYKfDwYV3FawuMdd2BvpgPUh4sSQQT4aUMPx0e6FOtZEsbBRTyYJeNoSkwqoh067w
+	qLvPGtvFGeZILOJ9nSnf8JEOyvQYus2O67I4v4KSidd2PKGvXljJ1uRLNvQ77dAXK38bSm7Rdwc
+	OfcUh/N/fTV9+h6Kr/o20apqEpqmLrvx6IY/RKZlpIuSFD7Y6b65VCtddvceVppj3DkfIk5rJO9
+	fmAMrvgPVn9yLnDWukhllfaXkmAyr+wfdUizU/ZbCAqD7KWPAg8j/16CRwKEN3OL6OpCTOGY3yC
+	1pNpzVZPFeRTXwiA5xv8c0shmU2XPOfcbNRqPdBWs2wdzxQ==
+X-Received: by 2002:a17:90b:5805:b0:380:105f:8ffd with SMTP id 98e67ed59e1d1-3933b90d562mr10373794a91.16.1786747545883;
+        Fri, 14 Aug 2026 15:45:45 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.50
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.45.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:45:50 -0700 (PDT)
+        Fri, 14 Aug 2026 15:45:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 007/109] source-code-pro-fonts: upgrade 2.030_1.050 -> 2.042_1.062
-Date: Fri, 14 Aug 2026 15:43:53 -0700
-Message-ID: <20260814224539.1523174-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 002/109] xorg-sgml-doctools: upgrade 1.12 -> 1.12.1
+Date: Fri, 14 Aug 2026 15:43:48 -0700
+Message-ID: <20260814224539.1523174-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -70,62 +70,44 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:45:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129071
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:45:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129066
 
-Adobe's 2.042R-u/1.062R-i/1.026R-vf release re-compiles all fonts so
-that the static instances correspond to the variable-font versions;
-uprights are at 2.042 and italics at 1.062.
-
-Upstream also reorganised the release assets: instead of a single
-all-formats source-code-pro-<ver>.zip containing a top-level versioned
-directory (plus EOT/OTF/TTF/WOFF trees and a bundled LICENSE.txt), each
-format is now published as its own archive that unpacks a bare OTF/
-directory with no license file.  So SRC_URI now fetches
-OTF-source-code-pro-2.042R-u_1.062R-i.zip with ;subdir=${BP}, S points
-at that subdir, and LIC_FILES_CHKSUM references the common OFL-1.1 text
-(the repository's LICENSE.md is the verbatim SIL OFL 1.1, only the
-copyright year and Adobe notice differ, and it is no longer shipped in
-the font archive).  UPSTREAM_CHECK_REGEX is adjusted for the new
-"R-u" tag suffix.  All 14 OTF faces are packaged as before.
+Upstream 1.12.1 adds a meson build system alongside autotools (with CI
+checks comparing the installed file list against xorgproto), aligns the
+meson settables with the autotools ones, refreshes the gitlab CI
+templates, and drops the "All rights reserved" phrasing from the Oracle
+copyright notices.  That copyright change alters COPYING, so
+LIC_FILES_CHKSUM is updated accordingly (license terms themselves, MIT,
+are unchanged).  Upstream also switched the release tarball compression
+from bzip2 to xz, so SRC_URI_EXT is set to "xz".  The recipe continues
+to build with autotools.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...0_1.050.bb => source-code-pro-fonts_2.042_1.062.bb} | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{source-code-pro-fonts_2.030_1.050.bb => source-code-pro-fonts_2.042_1.062.bb} (67%)
+ ...g-sgml-doctools_1.12.bb => xorg-sgml-doctools_1.12.1.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-doc/{xorg-sgml-doctools_1.12.bb => xorg-sgml-doctools_1.12.1.bb} (44%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.042_1.062.bb
-similarity index 67%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.042_1.062.bb
-index 38a5126eea..069b290436 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.042_1.062.bb
-@@ -3,19 +3,19 @@ require ttf.inc
- SUMMARY = "Adobe Source Code Pro"
- HOMEPAGE = "https://github.com/adobe-fonts/source-code-pro"
- LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c7c16bdc2c96af797293d68503e5c65c"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
+diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.1.bb
+similarity index 44%
+rename from meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
+rename to meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.1.bb
+index 21a0ed74fa..bb8feba64b 100644
+--- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
++++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.1.bb
+@@ -4,8 +4,10 @@ PE = "1"
  
- inherit allarch fontcache
+ SUMMARY = "SGML entities and XML/CSS stylesheets used in X.Org docs"
  
- SRC_URI = " \
--    https://github.com/adobe-fonts/source-code-pro/releases/download/2.030R-ro/1.050R-it/source-code-pro-2.030R-ro-1.050R-it.zip \
-+    https://github.com/adobe-fonts/source-code-pro/releases/download/2.042R-u/1.062R-i/1.026R-vf/OTF-source-code-pro-2.042R-u_1.062R-i.zip;subdir=${BP} \
-     file://44-source-code-pro-fonts-fontconfig.conf \
- "
--SRC_URI[sha256sum] = "da2ac159497d31b0c6d9daa8fc390fb8252e75b4a9805ace6a2c9cccaed4932e"
--S = "${UNPACKDIR}/source-code-pro-2.030R-ro-1.050R-it"
-+SRC_URI[sha256sum] = "754a2e3ebb945ae905d720ac5896b3b34acc9546dd6551ef9536869788629dae"
-+S = "${UNPACKDIR}/${BP}"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4cd7c44828c87cd91077a7d85098f117"
  
- UPSTREAM_CHECK_URI = "https://github.com/adobe-fonts/source-code-pro/tags"
--UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+\.\d+)R"
-+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+\.\d+)R-u"
+-SRC_URI[sha256sum] = "65a9fdddedc17bd5e9c0b00d904960f03f047c3a62de5458989d493c29fec806"
++SRC_URI_EXT = "xz"
++
++SRC_URI[sha256sum] = "0a5d54c0706b4e89d5acd4d455db3745ab4ad26be627cce015b90ad403b56d6f"
  
- do_install() {
-     install -d ${D}${sysconfdir}/fonts/conf.d/
+ FILES:${PN} += "${datadir}/sgml/X11"
 
