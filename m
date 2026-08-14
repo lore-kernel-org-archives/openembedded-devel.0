@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66AA5C5B572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74B76C5CFC1
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:21 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24535.1786747632784191113
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24403.1786747637435371735
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:47:12 -0700
+ Fri, 14 Aug 2026 15:47:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=lz49mQ2I;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-c96b08cdd1cso1170588a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=DsCdRBHs;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-38511175ad3so1506012a91.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747632; x=1787352432; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747637; x=1787352437; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PdU3JVZzQtdPHiuiuQZCjbVtwsnuvLhvtLuIBrKQdUA=;
-        b=lz49mQ2Igmspb1Zt5efrwywcKo9NExmzE+e/f7TFAce8Pd8ddFPb/BXCdccdVKZAD0
-         +Z6lOSRIjq3xKlnZTEMxKRBkkr12vNRjhvtYPUW4z1gps5KgXpPbnSQQXeVLqsHR5jEw
-         n/NeGO4/O32DK0m70GxSE/FjuFRytxPiok3aIYmFjR5GQyD8LM/2Orqx73IkPzrgNBm+
-         uJxdRr0VV2EOX195I8W3RqKXzD1+4R+YP3W2QWOmSbX21VJuEA2kcigo7mT7EFM7o/6O
-         hfup7CthknNFIPswx8DTmCVo+DludEXJ1J/UfYTbbXEYXEDHnMTZ/KTt9SMC6k6gxLoN
-         3xPg==
+        bh=KxFAPVEAu6Ms3CeeNMa+pHG6p4vKggAd1iNCC32O+/k=;
+        b=DsCdRBHs97GuvRBU6FxCMkkZZCYUHJRTyuJXnYiQleFzaczPxpINUHDPwccSe4U964
+         mCgrYwkQ4nc97y8iM3DA08msT4sH/rYtoTf1QHKY4n6HBI3YDIrOgT21RJz6ZaVfSeCf
+         kpAB1+SOmqm85D1e1V1aRARc4BMju4lnFKV8RCJzoBsZDqpAWx5XNM3TyE/rCe8pSz7H
+         oT5+SVpacTZvC/G/2dRXR2Qrskd3tacN8B+9w+DQ9U1i2aoWbhJHqt7O9m6BMQHV/yEN
+         n0EBgwvNHiwyMBr12xTi1Tl5yJH+Q8Y5ag0Yg8DO8IhuqgtqNtfIrXbPDWf04D4KAl1J
+         Ha0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747632; x=1787352432;
+        d=1e100.net; s=20251104; t=1786747637; x=1787352437;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PdU3JVZzQtdPHiuiuQZCjbVtwsnuvLhvtLuIBrKQdUA=;
-        b=qaY848jpIqRI0XjkXImaSfVp138aTcYN8MHoaicip1KNriB9t7Ldczt+/lkY0i7MBe
-         dcvP4Ttw38eFR4mmlVQkrilU9XwPvkVy4zkOrpMFh6SR1jKWK+TyYbIt1dTgZ64nVZuE
-         lG5DIbdfgWaTJA9cbMxx90yug9Kcnbp204aDEBQo1NJWMfshfQgKjNYrwIfWglbIhkzO
-         Tc18aicDX84zNiKehicB25h/EiyHZvvraaRFtx1ZUD92NLbwYKgzQonFsruVPXDLIY/A
-         ZuDYooiCpBNfnOk2ybLSirp2VvNHYE6FsRCFVfL4jcGKC4ljU6zhOiYMDZl6pPcd+BBR
-         FvsA==
-X-Gm-Message-State: AOJu0Yxp14pl0V5AUPOJRD4N7ivEcSUo9uVPL9jWc4fDpSq5jeRWQfTz
-	mp9vBuWr0mBrlhTRFLUzIew4VqDXpHzXh61rq3W2Z0Yzj4vqoj3dzkXohs8p9VW1
-X-Gm-Gg: AR+sD10k2+EsEZr3VcPLUy2rBa2W7ycNe2qe6DPdP8iFd0gePpB5FhRldOsWhtyRvGF
-	guys8q6DD/tFipnoZhXg410oc2xwwv4w1gQYD6JYmOmUbCU1STg50KIm52QnPy7G4DU2IuJICdE
-	dhjgkIOLTQzMo/NAI9zfLugg3y1nkmt72zXc9acP6Hia42iWx2jp3hSQUUp7Stnv2/HryeSjQH2
-	IATHpOxs7k858bMHwy+CB5cMKYbdB700uxsGG9+mALuHhVklG+7UQfvSvvqVfwAXSL7gLw5iWWH
-	tXqarOXe0uYarIuzY6szX+sRvaC0vtb4fqZzROm5fdu9CSEQaa+Iig3ulIuEhrZGK+ew3sZGCgm
-	xFEYl7KDUyfTQlJ9dH+C6/PmD1MqwIuYN9el5EZQwYIF1fBMgPgRedoXdX7fMhxb7EhZZxYu9r7
-	rMwmh2O+rXf8cVTjW2vea6UhX7ZF/WF59tcKsrB/yeAbepiLtuznN2So6TtBgeswUpsAhUe6LA7
-	Fqu1tVMvNAoRzu96TfLB3hRFuf1C1aPVViD8ZWWQOMLPbF2cz94NfDN2LfuG9FNSbfE4Ksjg8pt
-	/hxNqgkKvm/2ZsPuO5l1KYfo+/9yKCqCBri4u/LVpVfWZBKZ+Ag8xpLdDPnr5/Og0zYNgTVzXEd
-	yS9ARKpQDLT+cynYdnGdcvyy4Nrwse9+vrSC2sFxHoncROg==
-X-Received: by 2002:a05:6a20:3949:b0:3c3:8651:b317 with SMTP id adf61e73a8af0-3cc71ced4d0mr9671721637.10.1786747632057;
-        Fri, 14 Aug 2026 15:47:12 -0700 (PDT)
+        bh=KxFAPVEAu6Ms3CeeNMa+pHG6p4vKggAd1iNCC32O+/k=;
+        b=Le4bddEyXfJd6OmkyLTKPd1ZVrhncUPu/0nbV9WIF4260Xpj+ROSmNE1Jjs3WKTRl0
+         pcFJazm4oMVzhZvI+qecaev6WNeRdCojHB3u/zAA7NdLnOISCvjI8hCp058cvp21YsPq
+         ysfoGLe42Ta05W7roH+1HdA3TCxaofgCsa3Quq/ddmAC1xXP3zkX+s+DH+pA0r0j0Uxa
+         M4xz5YNxwL2AuSu+Vsuitp86uONNGcq2xqzLprFcifYe5HOvuvtuWDSMSZNxZbsNAtFq
+         D79gSSHl0fTI1kEs87o/re5RlJcJrU9kqq4KDA7et4XKsHxslZMnHXhMlpUHGeW4krhc
+         tb6A==
+X-Gm-Message-State: AOJu0Yy85es8/gRFZCzLQ9Gg1djq6wCmCQ+NcGD2yIfiah7tWUv1AK36
+	u0xKvNDFlUwQoC2f9RzxYTbpPQ3D2q0GYCxicX4y4Ctf3lUTENcrIzdpdeRL40EO
+X-Gm-Gg: AR+sD13hQEy//ZBuLO3JbEWm2ANV6gJhS2Z39jrtQtfMYrISYWMYSAh1oQ6QHChGVZS
+	3Dgoq2LxvhBGo9E60vanQBXBe5QQkPJM9w/NSfIjzes3h+/S9XHMl+T3HgLtuW1L3H0csNTd2tg
+	bbs/43BtzOQfa6qOzFK9tvQAI6ontWFTPXzAHq6jH9ra0Eo/pR3Fk3AgkoG2YvbecKuKIfY2i6B
+	98D2g1+b0xognCN/WVnD6UMXorLdqbXGxcXdukblNp6KU9zsJVSmGQij+Clm6cXeOc+kmVHqoyw
+	QyUpyxL8ll+ZqI5tk/GlQ0mc8SrJem+3zbTksQ5Qy2FxN+ABm5a57F5N5bVVXCfEjPX9pH1Jox0
+	E7rY9MKkApv0+vQ8s9L/Dr4HKueJ9WDcLVuiy6rln0FeEbKdPa3xj0JfyYGWZUvFnoWYVmS7DB4
+	lojHzZsxuqoTaZOTuEfR5PazNfCoP/awfPzUmmWgjqtlp/zQwCYm33B6lqONSnDg/N8OsFSCykx
+	yHi6jwzku+o9wM6TFG9G8jddnX2UK9DR21b/HtiMM+Bi1O5JwZ0tj+qiX8ticZErU/+CSXeabkB
+	60evdXw6VUseg7m5J6LkOWW9suAXJjkd/L7gB0OXI+nQWcRxYxwVtdMY1ORuEWz3d592Gbyysmx
+	u0AQhOGUGmR27ZGIDjeAxMTKEUjahYSxOZRjK2puKBeW+tg==
+X-Received: by 2002:a05:6a21:7316:b0:3c4:de3:816c with SMTP id adf61e73a8af0-3cc71ed56f7mr11054239637.37.1786747636621;
+        Fri, 14 Aug 2026 15:47:16 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.10
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:47:11 -0700 (PDT)
+        Fri, 14 Aug 2026 15:47:15 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 079/109] pngcheck: upgrade 2.3.0 -> 3.0.2
-Date: Fri, 14 Aug 2026 15:45:05 -0700
-Message-ID: <20260814224539.1523174-79-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 082/109] wxwidgets: upgrade 3.2.8.1 -> 3.2.11
+Date: Fri, 14 Aug 2026 15:45:08 -0700
+Message-ID: <20260814224539.1523174-82-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,190 +71,391 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129143
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129146
 
-Major release. Three patches rebased onto 3.0.2's shifted line numbers:
-0001-make-Respect-variables-from-environement.patch (upstream added an
-alternate -L$(ZPATH) -lz definition, commented out, above our target lines;
-same changes, offset only), 0001-png-fix-IDAT-windowsize-...patch and
-10-pngsplit-format-strings.patch (upstream renamed the usage-string macros
-png_fix_IDAT_windowsize_usage/PNGSPLIT_HDR/PNGSPLIT_USAGE to their current
-names; same %s-format fix, offset only).
+Upstream refactored install.cmake/config.cmake/webview's CMakeLists.txt
+to derive install paths from a new library_dir variable (=
+CMAKE_INSTALL_LIBDIR, from GNUInstallDirs) and a wxCONFIG_DIR helper,
+both already multilib-aware on their own:
+
+- Drop 0003-create-links-with-relative-path.patch: wx_install_symlink()
+  now does "ln -s --relative" natively.
+- Drop 0005-wx-config-fix-libdir-for-multilib.patch: superseded by the
+  library_dir/wx_get_install_platform_dir refactor.
+- Reduce 0002-fix-libdir-for-multilib.patch to its one remaining hunk
+  (wxOUTPUT_DIR in CMakeLists.txt, a build-dir path untouched by the
+  refactor).
+- Rebase 0004-don-not-append-system-name-to-lib-name.patch (context
+  shift only).
+- Drop the now-unneeded wxBUILD_INSTALL_{RUNTIME,LIBRARY,PLATFORM_SUBDIR}
+  EXTRA_OECMAKE overrides: forcing an absolute libdir into
+  wxBUILD_INSTALL_RUNTIME_DIR broke the new install.cmake's wx-config
+  symlink construction (double /usr prefix, installed-vs-shipped QA
+  failure); GNUInstallDirs-based defaults are multilib-correct without
+  them.
+- do_install:append: guard the bindir rmdir (bindir no longer created
+  at all, not just left empty) and repoint the host-contamination sed
+  at the new versioned cmake/wxWidgets-3.2/ install path.
+
+Build-verified for qemux86-64 (do_package_qa green).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-Respect-variables-from-environement.patch | 13 +++++----
- ...dowsize-Fix-format-string-errors-in-.patch | 17 ++++++-----
- .../pngcheck/10-pngsplit-format-strings.patch | 28 ++++++++++---------
- .../{pngcheck_2.3.0.bb => pngcheck_3.0.2.bb}  |  4 +--
- 4 files changed, 32 insertions(+), 30 deletions(-)
- rename meta-oe/recipes-support/pngcheck/{pngcheck_2.3.0.bb => pngcheck_3.0.2.bb} (84%)
+ .../0002-fix-libdir-for-multilib.patch        | 95 +++----------------
+ ...0003-create-links-with-relative-path.patch | 60 ------------
+ ...n-not-append-system-name-to-lib-name.patch | 10 +-
+ ...05-wx-config-fix-libdir-for-multilib.patch | 69 --------------
+ ...widgets_3.2.8.1.bb => wxwidgets_3.2.11.bb} | 17 ++--
+ 5 files changed, 24 insertions(+), 227 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/0003-create-links-with-relative-path.patch
+ delete mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/0005-wx-config-fix-libdir-for-multilib.patch
+ rename meta-oe/recipes-extended/wxwidgets/{wxwidgets_3.2.8.1.bb => wxwidgets_3.2.11.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch b/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
-index 12333cc1f1..1ca4ecab1a 100644
---- a/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
-+++ b/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
-@@ -5,6 +5,9 @@ Subject: [PATCH] make: Respect variables from environement
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0002-fix-libdir-for-multilib.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0002-fix-libdir-for-multilib.patch
+index cd0417612f..93d31dc871 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0002-fix-libdir-for-multilib.patch
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0002-fix-libdir-for-multilib.patch
+@@ -15,18 +15,22 @@ Rebase for wxWidgets 3.2.1. Replace wxPLATFORM_LIB_DIR with LIB_SUFFIX
+ in this patch that LIB_SUFFIX has been passed to cmake in cmake.bbclass.
  
- link with shared zlib
- 
-+Rebased on 3.0.2: context shifted by 2 lines (upstream added an alternate
-+-L$(ZPATH) -lz definition, commented out); same changes, offset only.
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Rebased on 3.2.11: upstream refactored install.cmake/config.cmake/
++webview/CMakeLists.txt to derive their install paths from a new
++library_dir variable (= CMAKE_INSTALL_LIBDIR, from GNUInstallDirs) and
++wxCONFIG_DIR (derived from wxOUTPUT_DIR), which are already multilib-aware
++on their own -- dropped those 3 now-redundant hunks. Only wxOUTPUT_DIR
++in CMakeLists.txt (a build-dir path, not an install path, so untouched by
++that refactor) still needs the LIB_SUFFIX fix.
  ---
- Upstream-Status: Pending
-@@ -13,11 +16,10 @@ Upstream-Status: Pending
-  1 file changed, 8 insertions(+), 10 deletions(-)
+- CMakeLists.txt                         |  2 +-
+- build/cmake/config.cmake               |  2 +-
+- build/cmake/install.cmake              | 12 ++++++------
+- build/cmake/lib/webview/CMakeLists.txt |  2 +-
+- 4 files changed, 9 insertions(+), 9 deletions(-)
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
  
- diff --git a/Makefile.unx b/Makefile.unx
--index 772da46..4ae7061 100644
- --- a/Makefile.unx
- +++ b/Makefile.unx
--@@ -24,18 +24,16 @@ ZINC = -I$(ZPATH)
-- ZLIB = $(ZPATH)/libz.a
-+@@ -24,18 +24,16 @@
-+ #ZLIB = $(ZPATH)/libz.a
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index d6a4b49..9e86b87 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -43,7 +43,7 @@ include(build/cmake/policies.cmake NO_POLICY_SCOPE)
++@@ -48,7 +48,7 @@
+  # Initialize variables for quick access to wx root dir in sub dirs
+  set(wxSOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+  set(wxBINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
+@@ -35,80 +39,5 @@ index d6a4b49..9e86b87 100644
   
-  INCS = $(ZINC)
- -LIBS = $(ZLIB)
-@@ -40,7 +42,7 @@ index 772da46..4ae7061 100644
-  PROG = pngcheck
-  PROG2 = pngsplit
-  PROG3 = png-fix-IDAT-windowsize
--@@ -57,13 +55,13 @@ EXES = $(PROG)$(E) $(PROG2)$(E) $(PROG3)$(E)
-+@@ -57,13 +55,13 @@
-  all:  $(EXES)
-  
-  $(PROG)$(E): $(PROG).c
-@@ -57,6 +59,5 @@ index 772da46..4ae7061 100644
-  
-  
-  # maintenance ---------------------------------------------------------------
+  # parse the version number from wx/version.h and include in wxMAJOR_VERSION and wxMINOR_VERSION
+  file(READ "${wxSOURCE_DIR}/include/wx/version.h" WX_VERSION_H_CONTENTS)
+-diff --git a/build/cmake/config.cmake b/build/cmake/config.cmake
+-index addd8d6..9ec6775 100644
+---- a/build/cmake/config.cmake
+-+++ b/build/cmake/config.cmake
+-@@ -100,7 +100,7 @@ function(wx_write_config_inplace)
+-     execute_process(
+-         COMMAND
+-         "${CMAKE_COMMAND}" -E ${COPY_CMD}
+--        "${wxBINARY_DIR}/lib/wx/config/inplace-${TOOLCHAIN_FULLNAME}"
+-+        "${wxBINARY_DIR}/lib${LIB_SUFFIX}/wx/config/inplace-${TOOLCHAIN_FULLNAME}"
+-         "${wxBINARY_DIR}/wx-config"
+-         )
+- endfunction()
+-diff --git a/build/cmake/install.cmake b/build/cmake/install.cmake
+-index 202d054..e255e0b 100644
+---- a/build/cmake/install.cmake
+-+++ b/build/cmake/install.cmake
+-@@ -44,11 +44,11 @@ if(WIN32_MSVC_NAMING)
+- else()
+-     install(
+-         DIRECTORY "${wxSETUP_HEADER_PATH}"
+--        DESTINATION "lib/wx/include")
+-+        DESTINATION "lib${LIB_SUFFIX}/wx/include")
+- 
+-     install(
+-         FILES "${wxOUTPUT_DIR}/wx/config/${wxBUILD_FILE_ID}"
+--        DESTINATION "lib/wx/config"
+-+        DESTINATION "lib${LIB_SUFFIX}/wx/config"
+-         PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+-                     GROUP_EXECUTE GROUP_READ
+-                     WORLD_EXECUTE WORLD_READ
+-@@ -57,13 +57,13 @@ else()
+-     install(DIRECTORY DESTINATION "bin")
+-     install(CODE "execute_process( \
+-         COMMAND ${CMAKE_COMMAND} -E create_symlink \
+--        \"${CMAKE_INSTALL_PREFIX}/lib/wx/config/${wxBUILD_FILE_ID}\" \
+-+        \"${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/wx/config/${wxBUILD_FILE_ID}\" \
+-         \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wx-config\" \
+-         )"
+-     )
+- endif()
+- 
+--install(EXPORT wxWidgetsTargets NAMESPACE wx:: DESTINATION "lib/cmake/wxWidgets/${wxPLATFORM_LIB_DIR}")
+-+install(EXPORT wxWidgetsTargets NAMESPACE wx:: DESTINATION "lib${LIB_SUFFIX}/cmake/wxWidgets/${wxPLATFORM_LIB_DIR}")
+- 
+- # find_package config file
+- include(CMakePackageConfigHelpers)
+-@@ -86,11 +86,11 @@ write_basic_package_version_file(
+- configure_package_config_file(
+-     "${wxSOURCE_DIR}/build/cmake/wxWidgetsConfig.cmake.in"
+-     "${projectConfig}"
+--    INSTALL_DESTINATION "lib/cmake/wxWidgets"
+-+    INSTALL_DESTINATION "lib${LIB_SUFFIX}/cmake/wxWidgets"
+- )
+- install(
+-     FILES "${projectConfig}" "${versionConfig}"
+--    DESTINATION "lib/cmake/wxWidgets"
+-+    DESTINATION "lib${LIB_SUFFIX}/cmake/wxWidgets"
+- )
+- 
+- # uninstall target
+-diff --git a/build/cmake/lib/webview/CMakeLists.txt b/build/cmake/lib/webview/CMakeLists.txt
+-index 2cb35e7..7977a84 100644
+---- a/build/cmake/lib/webview/CMakeLists.txt
+-+++ b/build/cmake/lib/webview/CMakeLists.txt
+-@@ -146,7 +146,7 @@ if(WXGTK AND wxUSE_WEBVIEW_WEBKIT2)
+-         ${WEBKIT2_LIBRARIES}
+-         )
+- 
+--    wx_install(TARGETS wxwebkit2_ext LIBRARY DESTINATION "lib/wx/${WX_WEB_EXT_VERSION}/web-extensions")
+-+    wx_install(TARGETS wxwebkit2_ext LIBRARY DESTINATION "lib${LIB_SUFFIX}/wx/${WX_WEB_EXT_VERSION}/web-extensions")
+- 
+-     wx_add_dependencies(wxwebview wxwebkit2_ext)
+- endif()
 --- 
 +--
- 2.12.2
+ 2.49.0
 -
-diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch b/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
-index 0fc5a8e0d2..97ddb8df09 100644
---- a/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
-+++ b/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
-@@ -12,27 +12,26 @@ Upstream-Status: Pending
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/gpl/png-fix-IDAT-windowsize.c b/gpl/png-fix-IDAT-windowsize.c
--index 6d4ef9c..d212017 100644
-+index 6543d20..b190906 100644
- --- a/gpl/png-fix-IDAT-windowsize.c
- +++ b/gpl/png-fix-IDAT-windowsize.c
--@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
-+@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
-              fprintf(stderr, "  Compiled with zlib %s; using zlib %s.\n",
-                ZLIB_VERSION, zlib_version);
-              fprintf(stderr, "\n");
---            fprintf(stderr, png_fix_IDAT_windowsize_usage);
--+            fprintf(stderr, "%s", png_fix_IDAT_windowsize_usage);
-+-            fprintf(stderr, PNG_FIX_IDAT_WINDOWSIZE_USAGE);
-++            fprintf(stderr, "%s", PNG_FIX_IDAT_WINDOWSIZE_USAGE);
-              fflush(stderr);
-              return 1;
-          }
--@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
-+@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
-      fflush(stdout);
-  
-      if ( argn == argc ) {
---        fprintf(stderr, png_fix_IDAT_windowsize_usage);
--+        fprintf(stderr, "%s", png_fix_IDAT_windowsize_usage);
-+-        fprintf(stderr, PNG_FIX_IDAT_WINDOWSIZE_USAGE);
-++        fprintf(stderr, "%s", PNG_FIX_IDAT_WINDOWSIZE_USAGE);
-          fflush(stderr);
-          return 5;
-      } else {
- -- 
--2.12.2
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0003-create-links-with-relative-path.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0003-create-links-with-relative-path.patch
+deleted file mode 100644
+index dbede0304f..0000000000
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0003-create-links-with-relative-path.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-From b86806ef34d4c9171165c1533064bf34ad822e20 Mon Sep 17 00:00:00 2001
+-From: Kai Kang <kai.kang@windriver.com>
+-Date: Sat, 12 Oct 2024 18:43:25 +0800
+-Subject: [PATCH] create links with relative path
 -
-+2.25.1
-diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch b/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
-index 2ff6d664c0..d71cd12def 100644
---- a/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
-+++ b/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
-@@ -7,36 +7,38 @@ Upstream-Status: Pending
-  gpl/pngsplit.c |   10 +++++-----
-  1 file changed, 5 insertions(+), 5 deletions(-)
+-It fails to build python3-wxgtk4 which depends on wxwidgets:
+-
+-| ERROR: wxwidgets-native-3.2.1-r0 do_populate_sysroot: sstate found an
+-    absolute path symlink /path/to/build/tmp-glibc/work/x86_64-linux
+-    /wxwidgets-native/3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work
+-    /x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wx-config
+-    pointing at /path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native/3.2.1-r0
+-    /recipe-sysroot-native/usr/lib/wx/config/gtk3-unicode-3.2.
+-  Please replace this with a relative link.
+-| ERROR: wxwidgets-native-3.2.1-r0 do_populate_sysroot: sstate found an
+-    absolute path symlink /path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native
+-    /3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native
+-    /3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc pointing at /path/to/build/tmp-glibc
+-    /work/x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc-3.2.
+-   Please replace this with a relative link.
+-
+-Create symlink with relative path to fix the issues.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- build/cmake/install.cmake        | 2 +-
+- build/cmake/utils/CMakeLists.txt | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/build/cmake/install.cmake b/build/cmake/install.cmake
+-index d3303faabb..c79e187f37 100644
+---- a/build/cmake/install.cmake
+-+++ b/build/cmake/install.cmake
+-@@ -42,7 +42,7 @@ else()
+-     install(DIRECTORY DESTINATION "bin")
+-     install(CODE "execute_process( \
+-         COMMAND ${CMAKE_COMMAND} -E create_symlink \
+--        \"${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/wx/config/${wxBUILD_FILE_ID}\" \
+-+        \"../lib${LIB_SUFFIX}/wx/config/${wxBUILD_FILE_ID}\" \
+-         \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wx-config\" \
+-         )"
+-     )
+-diff --git a/build/cmake/utils/CMakeLists.txt b/build/cmake/utils/CMakeLists.txt
+-index dbed8cc9b3..1dbc3261d3 100644
+---- a/build/cmake/utils/CMakeLists.txt
+-+++ b/build/cmake/utils/CMakeLists.txt
+-@@ -40,7 +40,7 @@ if(wxUSE_XRC)
+-         # Don't use wx_install() here to preserve escaping.
+-         install(CODE "execute_process( \
+-             COMMAND ${CMAKE_COMMAND} -E create_symlink \
+--            \"${CMAKE_INSTALL_PREFIX}/bin/${wxrc_output_name}${EXE_SUFFIX}\" \
+-+            \"./${wxrc_output_name}${EXE_SUFFIX}\" \
+-             \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX}\" \
+-             )"
+-         )
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0004-don-not-append-system-name-to-lib-name.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0004-don-not-append-system-name-to-lib-name.patch
+index e3463ba170..5ef944edfa 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0004-don-not-append-system-name-to-lib-name.patch
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0004-don-not-append-system-name-to-lib-name.patch
+@@ -14,15 +14,16 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+ Rebase for wxWidgets 3.2.1.
  
-+diff --git a/gpl/pngsplit.c b/gpl/pngsplit.c
-+index ca4567b..0147ef4 100644
- --- a/gpl/pngsplit.c
- +++ b/gpl/pngsplit.c
--@@ -141,8 +141,8 @@
-+@@ -141,8 +141,8 @@ int main(int argc, char *argv[])
-                    0 == strncmp( argv[argn], "-quiet", 2 ) )
-              verbose = 0;
-          else {
---            fprintf(stderr, pngsplit_hdr);
---            fprintf(stderr, pngsplit_usage);
--+            fprintf(stderr, "%s", pngsplit_hdr);
--+            fprintf(stderr, "%s", pngsplit_usage);
-+-            fprintf(stderr, PNGSPLIT_HDR);
-+-            fprintf(stderr, PNGSPLIT_USAGE);
-++            fprintf(stderr, "%s", PNGSPLIT_HDR);
-++            fprintf(stderr, "%s", PNGSPLIT_USAGE);
-              fflush(stderr);
-              return 1;
-          }
--@@ -150,8 +150,8 @@
-+@@ -150,8 +150,8 @@ int main(int argc, char *argv[])
-      }
-  
-      if ( argn == argc ) {
---        fprintf(stderr, pngsplit_hdr);
---        fprintf(stderr, pngsplit_usage);
--+        fprintf(stderr, "%s", pngsplit_hdr);
--+        fprintf(stderr, "%s", pngsplit_usage);
-+-        fprintf(stderr, PNGSPLIT_HDR);
-+-        fprintf(stderr, PNGSPLIT_USAGE);
-++        fprintf(stderr, "%s", PNGSPLIT_HDR);
-++        fprintf(stderr, "%s", PNGSPLIT_USAGE);
-          fflush(stderr);
-          return 5;
-      } else {
--@@ -162,7 +162,7 @@
-+@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
-  
-      /*=============================  MAIN LOOP  =============================*/
-  
---    fprintf(stdout, pngsplit_hdr);
--+    fprintf(stdout, "%s", pngsplit_hdr);
-+-    fprintf(stdout, PNGSPLIT_HDR);
-++    fprintf(stdout, "%s", PNGSPLIT_HDR);
-      fflush(stdout);
-  
-      while (argn <= argc) {
-diff --git a/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb b/meta-oe/recipes-support/pngcheck/pngcheck_3.0.2.bb
-similarity index 84%
-rename from meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb
-rename to meta-oe/recipes-support/pngcheck/pngcheck_3.0.2.bb
-index 3bd2f414d7..69eeb204f8 100644
---- a/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb
-+++ b/meta-oe/recipes-support/pngcheck/pngcheck_3.0.2.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "pngcheck verifies the integrity of PNG, JNG and MNG files"
- HOMEPAGE = "http://www.libpng.org/pub/png/apps/pngcheck.html"
- LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://gpl/COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LIC_FILES_CHKSUM = "file://gpl/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "zlib libpng"
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++Rebased on 3.2.11: context shifted by 109 lines (offset only, same change).
+ ---
+  build/cmake/functions.cmake | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/png-mng/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/png-mng/${BPN}/${PV}/${BPN}-${PV}.tar.g
-            file://0001-make-Respect-variables-from-environement.patch \
+ diff --git a/build/cmake/functions.cmake b/build/cmake/functions.cmake
+-index 81ede7d8ae..23eebeb914 100644
+ --- a/build/cmake/functions.cmake
+ +++ b/build/cmake/functions.cmake
+-@@ -243,9 +243,9 @@ function(wx_set_target_properties target_name)
++@@ -352,9 +352,9 @@
+      endif()
+  
+      set(cross_target)
+@@ -34,7 +35,6 @@ index 81ede7d8ae..23eebeb914 100644
+ +    #endif()
+  
+      set(lib_prefix "lib")
+-     if(MSVC OR (WIN32 AND wxBUILD_SHARED))
+--- 
++     if(WIN32_MSVC_NAMING OR (WIN32 AND wxBUILD_SHARED))
++--
+ 2.25.1
+-
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0005-wx-config-fix-libdir-for-multilib.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0005-wx-config-fix-libdir-for-multilib.patch
+deleted file mode 100644
+index b650c50386..0000000000
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0005-wx-config-fix-libdir-for-multilib.patch
++++ /dev/null
+@@ -1,69 +0,0 @@
+-From 4230cd84f156f9eb5c9b80ffbc69dd55fa7c7ca7 Mon Sep 17 00:00:00 2001
+-From: Kai Kang <kai.kang@windriver.com>
+-Date: Sat, 12 Oct 2024 18:43:25 +0800
+-Subject: [PATCH] wx-config: fix libdir for multilib
+-
+-It sets 'libdir' with path element 'lib' directly which is not suitable
+-for multilib. Add an option '--baselib' for wx-config to support
+-multilib when cross compile. And set default value of baselib with
+-"lib${wxPLATFORM_LIB_DIR}".
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+-
+-Rebase for wxWidgets 3.2.1. Replace wxPLATFORM_LIB_DIR with variable LIB_SUFFIX.
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- build/cmake/config.cmake | 2 +-
+- wx-config.in             | 6 ++++--
+- 2 files changed, 5 insertions(+), 3 deletions(-)
+-
+-diff --git a/build/cmake/config.cmake b/build/cmake/config.cmake
+-index 9ec677534b..ee61cf7572 100644
+---- a/build/cmake/config.cmake
+-+++ b/build/cmake/config.cmake
+-@@ -110,7 +110,7 @@ function(wx_write_config)
+-     set(prefix ${CMAKE_INSTALL_PREFIX})
+-     set(exec_prefix "\${prefix}")
+-     set(includedir "\${prefix}/include")
+--    set(libdir "\${exec_prefix}/lib")
+-+    set(libdir "\${exec_prefix}/\${baselib}")
+-     set(bindir "\${exec_prefix}/bin")
+- 
+-     if(wxBUILD_MONOLITHIC)
+-diff --git a/wx-config.in b/wx-config.in
+-index 1173d89685..8364a33e9d 100755
+---- a/wx-config.in
+-+++ b/wx-config.in
+-@@ -42,7 +42,8 @@ usage()
+- {
+-     cat 1>&2 <<EOF
+- 
+-- wx-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--release] [--version-full]
+-+ wx-config [--prefix[=DIR]] [--exec-prefix[=DIR]][--baselib=DIR]
+-+           [--release] [--version-full]
+-            [--list] [--selected-config] [--host=HOST] [--toolkit=TOOLKIT]
+-            [--universal[=yes|no]] [--unicode[=yes|no]] [--static[=yes|no]]
+-            [--debug[=yes|no]] [--version[=VERSION]] [--flavour=FLAVOUR]
+-@@ -133,7 +134,7 @@ wxconfig_output_options="prefix exec_prefix
+- 
+- # Options that permit the user to supply hints that may affect the output.
+- # These options all accept arbitrary values, to interpret as they please.
+--wxconfig_input_options="prefix exec_prefix utility $wxconfig_schema"
+-+wxconfig_input_options="prefix exec_prefix baselib utility $wxconfig_schema"
+- 
+- # Input options that accept only a yes or no argument.
+- #
+-@@ -400,6 +401,7 @@ is_cross()  { [ "xno" = "xyes" ]; }
+- # Determine the base directories we require.
+- prefix=${input_option_prefix-${this_prefix:-@prefix@}}
+- exec_prefix=${input_option_exec_prefix-${input_option_prefix-${this_exec_prefix:-@exec_prefix@}}}
+-+baselib=${input_option_baselib:-lib${LIB_SUFFIX}}
+- wxconfdir="@libdir@/wx/config"
+- 
+- installed_configs=`cd "$wxconfdir" 2> /dev/null && ls | grep -v "^inplace-"`
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.1.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.11.bb
+similarity index 91%
+rename from meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.1.bb
+rename to meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.11.bb
+index f87744b48e..51f3fdb39d 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.1.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.11.bb
+@@ -18,16 +18,14 @@ DEPENDS += " \
+     tiff \
+ "
+ 
+-SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2.8-hotfix;protocol=https;tag=v${PV} \
++SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https;tag=v${PV} \
+            file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
+            file://0002-fix-libdir-for-multilib.patch \
+-           file://0003-create-links-with-relative-path.patch \
+            file://0004-don-not-append-system-name-to-lib-name.patch \
+-           file://0005-wx-config-fix-libdir-for-multilib.patch \
+            file://0006-Fix-locale-on-musl.patch \
+            file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
             "
+-SRCREV = "896e4f587615b832ce27b8325357cb504997e1d3"
++SRCREV = "749625e0ea4d70d1f75494aa52231d835531a618"
  
--SRC_URI[sha256sum] = "77f0a039ac64df55fbd06af6f872fdbad4f639d009bbb5cd5cbe4db25690f35f"
-+SRC_URI[sha256sum] = "0d7e262f24116fddf2847a8ceb5c92d9f5f26efb42e9fff63ec2bb7676131ca7"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/png-mng/files/pngcheck/"
- UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
+@@ -40,9 +38,6 @@ EXTRA_OECMAKE += " \
+     -DwxUSE_LIBPNG=sys \
+     -DwxUSE_LIBTIFF=sys \
+     -DwxUSE_REGEX=builtin \
+-    -DwxBUILD_INSTALL_RUNTIME_DIR=${libdir} \
+-    -DwxBUILD_INSTALL_LIBRARY_DIR=${libdir} \
+-    -DwxBUILD_INSTALL_PLATFORM_SUBDIR=${libdir} \
+ "
+ EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
+ 
+@@ -110,14 +105,16 @@ do_compile:append() {
+ }
+ 
+ do_install:append() {
+-    # do not ship bindir if empty
+-    rmdir --ignore-fail-on-non-empty ${D}${bindir}
++    # do not ship bindir if empty (may not exist at all)
++    if [ -d ${D}${bindir} ]; then
++        rmdir --ignore-fail-on-non-empty ${D}${bindir}
++    fi
+ 
+     # fix host contamination
+     sed -i -e "s#${STAGING_DIR_NATIVE}##g" \
+            -e "s#${STAGING_DIR_TARGET}##g" \
+            ${D}${libdir}/wx/config/*-unicode-3.2 \
+-           ${D}${libdir}/cmake/wxWidgets/wxWidgetsTargets.cmake
++           ${D}${libdir}/cmake/wxWidgets-3.2/wxWidgetsTargets.cmake
+ }
+ 
+ FILES:${PN} += " \
 
