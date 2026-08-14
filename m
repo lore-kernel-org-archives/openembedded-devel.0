@@ -2,152 +2,152 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E89AFC5B572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0D55C5DF67
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 00:38:31 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3629.1786667905029540431
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3630.1786667908407104145
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2026 17:38:25 -0700
+ Thu, 13 Aug 2026 17:38:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BBmSoFot;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-c9ef3e1337fso290089a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 17:38:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Lx0PG/k4;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2d049069377so5952715ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2026 17:38:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786667904; x=1787272704; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jdY/lOIR1MGExyrnjD8lmIKj2GiCEAhKT789Xir8SuQ=;
-        b=BBmSoFota8vmHFk3NZ4k3Wa2WP3zI/bAx5mAEUWRp5X/A+ABG3TlGh8JKNB6VIc6PB
-         g01gB2TSj74VSJXptNsKOp8O8a3Pja5gTMzCIYCWie2zuhDNGK/XFD+Lr2zB4uwMeV1h
-         HltEuQiDtiA+Vt9QEEwX4Up1JJwRDwZANPD1deYmBlEwKegKJeGbzl2YpTI7MSAoqbuj
-         TrmvjXqv1/4ae9zIbT2edOQjzv7ZfGnPqUiJ/1CZHOOWiGK1mQCmVJFbvcPpaIJNY8j/
-         QOnBLDiLNgmtupqRXAuuL5GW6g5N5Cff09v/B+bOiq4VZBDh1h4tu93F9hzKMVOTN3FA
-         4ebA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786667904; x=1787272704;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1786667908; x=1787272708; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jdY/lOIR1MGExyrnjD8lmIKj2GiCEAhKT789Xir8SuQ=;
-        b=LO0hGAy2RdXQXAghLafy5zyTrRaNhgHPKk90Hz2PLTZzD8KpaUxTWIp4VewjcVrctE
-         sklsqWyFTy+RlqOweWiZFKA1xs3104tb6JZn03tJFV8R1prKkx+OhC99OPO4i2d8MIBi
-         s8zl29EYKg191yxazaJoWOm35HUKEzYxmDF1OjsoMzvC2AILePP5szD5PCBksP/Va4Pd
-         jO6rBM5kLVq1t1suOpIH+vdnVcWZPkUV0qmtvJzZmdri56K+SCajbB1D+qlKApREKTSe
-         smn1uvfnXElEzrjbdHS85xKln0Gep3H8gjbXNmk/WW9JHg0nZW8H19o89mSDiNpUf5Dp
-         kH3A==
-X-Gm-Message-State: AOJu0YytMvLVkriZwrHHqmVzD4al09AqKfGs2JKxb5Zcd9yTBXrRdbxS
-	9gaSsrOlErFb2KnbCX0lDnmMR5WrF5CzOWiXPkZN8ct88iuTxtzLoYJ4ACzafkyK
-X-Gm-Gg: AR+sD13spjj+/b8dLAQLt76Fj6LyTml1nYe5bowOk3B1p4p4ojK7QXVdk/HgajG+6ZQ
-	WIa7xj697JyeDhY8zi+0c1oGdIO/l1zgrXk9lVUBnb77UASKI387voCq2T7RGNxg8L1N/K/Mzu6
-	r2hPQfwqPFyntKgcRK6/DlxBuvWy1aIEcIEUwSnqEJlATQ5u1qy/B0j2lT72DDEgarWZry+BQsr
-	OaK/Inz+QTW3enFtMCKZHRaYfXckrhCg94uT30z8cnXblQKmUrQV4fIQ4wXffubaQ5L81LTt6EU
-	r/tRHr+SP/cFxCFQWTEfsMjxsswyPzehztBhFX1Nl75akeBl7kcdmsPZTimBiUl3WtBgvQf3UAD
-	OCz394p7iUUkvnYLdV1GeOZzoBHnC9oTgwMMboEDtEGOYMw/zDMwsN2l0TAl3MSHDxsrXbzE1Pt
-	CNWH+xjuWw025jUiSfsmDDtNx6uLeHwDzaFASbHOMvkfLQltRaPUMmCgZG5k8Ifqz4s3TcUd5r5
-	ien1X+zBa9eDjvO4KJQz3s1AtTechH+HNpOtkVkxZ6JbOLR3X/b0EuPhzHoVy3l0JL7fCAs3u5o
-	jCBun3yYfA0NX0bTtLgFhKl5yLgNRxLVknhu6YKLcnbNBII/iwZv5ViM8rdhGhgy2QgLHOGMbRi
-	GoHxqP1oouDEdzlVcx/xt3zEEkJzf/p0htLg6RwiHFyvQCw==
-X-Received: by 2002:a05:6a20:914c:b0:3b4:5c70:ca3e with SMTP id adf61e73a8af0-3cc71da42f8mr1450496637.25.1786667904253;
-        Thu, 13 Aug 2026 17:38:24 -0700 (PDT)
+        bh=BVU9dhdmpGoGdJCMhiHj1YXDhX/u+GUUIjJLosoqvvU=;
+        b=Lx0PG/k43JNVKx2ZKZpChbsBmpC9QtTX3FH8CfAZLe5zqrZiEQBtKhs3HMa0yzNCtt
+         2di9PJ6Tz1dvkr155eFa5LTTlOCdLfgpaGgRo5w+5DKC6i/NnCixcQZ8vQAt3xfAYiFv
+         AqIg4HaAoUr+4vmHngjsPXGR5LoZRh6i28KaMBF8jaxLphhh7kZA7w7QiJd3bSUs9U2I
+         LIubGmTNdNjXnHebYrteTsecZJH/9zk2m15bjyfnjSEVcAp7ww3ciS/1YRiWklpHjBiE
+         ZskGo60Kb7GsNYyAjI7mHs2ZA7O7LAfMQeA/22wNCRgReeKZfDIDdarOP1i4fdoSM9/w
+         H6ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786667908; x=1787272708;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BVU9dhdmpGoGdJCMhiHj1YXDhX/u+GUUIjJLosoqvvU=;
+        b=IFPnlrTOZ7K9Z8LicZLEFhSpRpvai4C/40YT9T+aeECoAEaoSBucISdCO3xtAZ9crh
+         gmRdQNtddJjXo7/sadp3NOwRxBXdpww1zbbiRglKwtQQM3SpOok21K0ovCSzWwNkoPz9
+         /Ctp+Bh3ocFiZuXlz6hEpHp6WYdxgoUsRFNukadbIEKQVLcPz18xbR17AGAIirynxx6Z
+         nxiug8mxvh7WfyjGch7Jp6kT9RbS5uSaNtPOsALZpemoijVxbqbZtE4861u4lHWnhI5U
+         QHdYuqaVOMKNod0Vnh2aTSSDQCNO646CkynXDlXGGnC54goRJ6QES9YuwTM9NJ9C/goy
+         LTAg==
+X-Gm-Message-State: AOJu0Yx6Vq78C2LSm2sQYTSEhRQuW2hs99xGPFrYsRNtdg3n9GaqPp26
+	tXdNs+5rKi4vw755F78FY+P9zpotu/ei/K5334xNFL5518wFgD3swPp8rjYK0w==
+X-Gm-Gg: AR+sD10/TIP2gnNnm+DADc9Ba8XvZpw0LUWFL73YGzldOT4Xxw618GQVm4rgIELclQA
+	cH/enGjnZtcj8UZFhBv6n7ZRIbNgsV53uBFVPla59qkRFYDrVQyW6kzzIbs6l+4dXqiEdlXFrQl
+	Jr/1f3+ITOwCk+GS+WvreQp+kf+YupXK107c020OvjIbZXqGq6Yu3XrXPb+9KIoLfUBCrOPwjZ0
+	0YTXWiVTquOkFInchJjWSf15qTKkxukDPYPVLnyLkxg4YmYWNQ3q0Xn9xq27uuxI7El4R1z8snT
+	YUvn+JXhySTyekQ6To0mstkNqklt52Ujd6ezgZGqngj0E55wDBT/yw/bi46I7YG6MjtMfMzDmfT
+	I7XWIM8QqLmYsw3It2Bmbx9a8MIav1FbT5hjNRlImwWnRx0BRatJ/I2DY6WiL0498a54UUAJt7P
+	j7LCCHkjrGDnxbz5Wu3o+mBENVkYx46BKjPSqfouYrcZ1al/a2QmSZPrDrQYGW/LQRfu38Dq2ni
+	88bQ5BDfYkmYPleOsCx3QzwLj7pDGi3TINp08q2lvl00uQ4QYlfmmAWesdU08EDOHFuPe/s4qQv
+	fqymwhgS6djtK7g5uN1uAWN0k+Q93q0FhNjYmm2ABaVzv7ZQYmFbmHbez1uIHW6npy2tQhyO5ey
+	58YDv8jlMCXDg/kV4JqsNW9Jf4jHZMWXgPcxs1dkz+zmO+Q==
+X-Received: by 2002:a17:90b:3d83:b0:38e:5ab7:ce9b with SMTP id 98e67ed59e1d1-3933bcf00eemr1969505a91.21.1786667907563;
+        Thu, 13 Aug 2026 17:38:27 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm3236209c88.2.2026.08.13.17.38.21
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm3236209c88.2.2026.08.13.17.38.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 17:38:22 -0700 (PDT)
+        Thu, 13 Aug 2026 17:38:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 1/4] python3-fann2: add SWIG py2/py3 C-API compat patch
-Date: Thu, 13 Aug 2026 17:38:16 -0700
-Message-ID: <20260814003819.1417656-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 2/4] python3-m2crypto: add SWIG py2/py3 C-API compat patch
+Date: Thu, 13 Aug 2026 17:38:17 -0700
+Message-ID: <20260814003819.1417656-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260814003819.1417656-1-khem.raj@oss.qualcomm.com>
+References: <20260814003819.1417656-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 00:38:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129025
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129026
 
-fann2.i's HELPER_ARRAY_TEMPLATE typemaps use the Python 2 C-API names
-PyInt_Check/PyInt_AsLong/PyInt_FromLong. Python 3.14 no longer ships
-any fallback definitions for them, so the SWIG-generated wrapper
+_rsa.i, _lib.i and _ec.i use the Python 2 C-API names PyInt_AsLong,
+PyInt_FromLong and PyString_FromString. Python 3.14 no longer ships
+any fallback definitions for them, so the generated _m2crypto_wrap.c
 fails to compile:
 
-  fann2/fann2_wrap.cxx:10062:41: error: use of undeclared identifier 'PyInt=
-_AsLong'; did you mean 'PyLong_AsLong'?
+  src/SWIG/_m2crypto_wrap.c:4895:21: error: call to undeclared function 'PyInt_AsLong'
+  src/SWIG/_m2crypto_wrap.c:9842:26: error: call to undeclared function 'PyString_FromString'
 
-Add a patch mapping them to their PyLong_* equivalents.
+Add a patch mapping them to their Python 3 equivalents in the shared
+raw-C block emitted ahead of the %include'd modules that use them.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...n2.i-add-py2-py3-C-API-compat-macros.patch | 36 +++++++++++++++++++
- .../python/python3-fann2_1.1.2.bb             |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-fann2/0002-=
-fann2.i-add-py2-py3-C-API-compat-macros.patch
+ ...to.i-add-py2-py3-C-API-compat-macros.patch | 41 +++++++++++++++++++
+ .../python/python3-m2crypto_0.48.0.bb         |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-fann2/0002-fann2.i=
--add-py2-py3-C-API-compat-macros.patch b/meta-python/recipes-devtools/pytho=
-n/python3-fann2/0002-fann2.i-add-py2-py3-C-API-compat-macros.patch
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch b/meta-python/recipes-devtools/python/python3-m2crypto/0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch
 new file mode 100644
-index 0000000000..03f59b38ba
+index 0000000000..d65920341a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-fann2/0002-fann2.i-add-py=
-2-py3-C-API-compat-macros.patch
-@@ -0,0 +1,36 @@
++++ b/meta-python/recipes-devtools/python/python3-m2crypto/0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch
+@@ -0,0 +1,41 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Subject: fann2.i: add py2/py3 C-API compat macros
++Subject: _m2crypto.i: add py2/py3 C-API compat macros
 +
-+The HELPER_ARRAY_TEMPLATE typemaps in fann2.i use the Python 2 C-API
-+names PyInt_Check/PyInt_AsLong/PyInt_FromLong. Python 3.14 no longer
-+ships any fallback definitions for them, so the SWIG-generated wrapper
++_rsa.i, _lib.i and _ec.i use the Python 2 C-API names PyInt_AsLong,
++PyInt_FromLong and PyString_FromString. Python 3.14 no longer ships
++any fallback definitions for them, so the generated _m2crypto_wrap.c
 +fails to compile:
 +
-+  fann2/fann2_wrap.cxx:10062:41: error: use of undeclared identifier 'PyIn=
-t_AsLong'; did you mean 'PyLong_AsLong'?
++  src/SWIG/_m2crypto_wrap.c:4895:21: error: call to undeclared function 'PyInt_AsLong'
++  src/SWIG/_m2crypto_wrap.c:9842:26: error: call to undeclared function 'PyString_FromString'
 +
-+Map them to their PyLong_* equivalents.
++Map them to their Python 3 equivalents in the shared raw-C block that
++is emitted ahead of the %include'd modules that use them.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+--- a/fann2/fann2.i
-++++ b/fann2/fann2.i
-+@@ -15,6 +15,18 @@
-+ #include "fann_cpp_subclass.h"=0D
-+ %}=0D
-+=0D
-++%{=0D
-++#ifndef PyInt_Check=0D
-++#define PyInt_Check(x) PyLong_Check(x)=0D
-++#endif=0D
-++#ifndef PyInt_AsLong=0D
-++#define PyInt_AsLong(x) PyLong_AsLong(x)=0D
-++#endif=0D
-++#ifndef PyInt_FromLong=0D
-++#define PyInt_FromLong(x) PyLong_FromLong(x)=0D
-++#endif=0D
-++%}=0D
-++=0D
-+ %define HELPER_ARRAY_TEMPLATE( templ , T, GetFunc, SetFunc, cast)=0D
-+     %typemap(in) templ<T> *  (templ<T> temp){=0D
-+         // templ<T>* type_map in=0D
-diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/m=
-eta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-index 3053ca5d71..c2170f6bb0 100644
---- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc73b943dc75f6f65=
-e007c56ac6515c8f"
- SRC_URI[sha256sum] =3D "cdca0a65ad48e08320672affe38c3dd4ea15e27821e5e1db9f=
-a2b34299bdd41e"
++--- a/src/SWIG/_m2crypto.i
+++++ b/src/SWIG/_m2crypto.i
++@@ -64,6 +64,21 @@
++ static PyObject *x509_store_verify_cb_func;
++ %}
++
+++%{
+++#ifndef PyInt_Check
+++#define PyInt_Check(x) PyLong_Check(x)
+++#endif
+++#ifndef PyInt_AsLong
+++#define PyInt_AsLong(x) PyLong_AsLong(x)
+++#endif
+++#ifndef PyInt_FromLong
+++#define PyInt_FromLong(x) PyLong_FromLong(x)
+++#endif
+++#ifndef PyString_FromString
+++#define PyString_FromString(x) PyUnicode_FromString(x)
+++#endif
+++%}
+++
++ %include <openssl/opensslv.h>
++
++ /* Bring in STACK_OF macro definition */
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.48.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.48.0.bb
+index 96c8a8797a..1a06fca017 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.48.0.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.48.0.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740a
+ SRC_URI[sha256sum] = "178e290f558ddf0379aaefd34c0a8ddb21f21502594e588f928dda85f1ad202b"
 
- SRC_URI +=3D " file://0001-setup.py-Don-t-hardcode-swig-and-fann2-binary-l=
-ocati.patch"
-+SRC_URI +=3D " file://0002-fann2.i-add-py2-py3-C-API-compat-macros.patch"
+ SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
++SRC_URI += "file://0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch"
 
- inherit pypi setuptools3
-
+ CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
+ CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.46.2) contains the fix already"
 
