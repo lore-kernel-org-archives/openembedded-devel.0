@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 191C5C5B572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E050C5DF70
 	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:11 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24397.1786747622275492038
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24530.1786747625830265808
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:47:02 -0700
+ Fri, 14 Aug 2026 15:47:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gam6fD/O;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3900e39d935so1551620a91.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=f+7k/Sr5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so1466682a91.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747622; x=1787352422; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786747625; x=1787352425; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ED6maNPlJ1VvJSZi6rmrMkZcJ/HLXgT6RaHusQV1C1s=;
-        b=gam6fD/ONGKAVxqaZNOej8Z3+G/0oBs10xlHTP7ZyCCxSlqmorKdgUZ/0WDGEr2bLf
-         gCuIqiV6tFUZk5yKAOkP7yGueXhmytusCwDIcBhx3kDrM0wMIrQUiXqZ33fhrFb21szU
-         xuzdwDBheMpxtXuEe1UmjbcC3p11dUZ9V94IxUAyO+V1uE7T0AXZLjLoE+s3t5zqSxxY
-         vR0bZxwdfkEbC6oaqQLkquPyReqhDe7+YRZ7GzqeUNLFAYDrHOkxB+vvczF/FRYDy5se
-         QNE0IH4+LmGRgXRmet8R/JmGSwQPoSDBWnoJeafWmcK8g12XbSYGfx32bGNExwozA70h
-         EWwA==
+        bh=tKvDGv8/S0tmcdFLh/KjSU6yNANaZGcbtw6B2BznJro=;
+        b=f+7k/Sr5PpPlt9OEygsGjk4gXZrb37QUnNGLYW2gWf6GxNKFD0I+1GfLkRbkomJ6zj
+         q6BXvKy3fMGw0CS31abUCdn9JGlJAKD50C0VSplIIXScbilR1OBFATwnZ6lVw+bpS17E
+         ytOOpr1QghaysPgvperbmBjCUGWQRvl5xsdaoyRPuYTvqDzQ+v3x5Mvl05p5J9VWgRFs
+         XpW060iicg+/zBxkFB2djLffFTtZNaOJ/RS6kJq0HIwDovJQgVamMRsWs5KeGoR/sYCZ
+         vtq1fA+9ZoEkPHwX2ftCDL0+BwyzfoV/TVcYqe52W6CNLwDfxjYNLPb9rl3wuAX2BL6C
+         CKfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747622; x=1787352422;
+        d=1e100.net; s=20251104; t=1786747625; x=1787352425;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ED6maNPlJ1VvJSZi6rmrMkZcJ/HLXgT6RaHusQV1C1s=;
-        b=EzarRsgJmPFL4lqBaJ8A+So+3JkO36/vBFFbSr4KIuhZJKHpVNLGIZxNIux2yrH+AM
-         LT9vBSU1G2FREzCj74zoXQ0IITwrSI68s7zZanN3awZjAEFyFpemrPl7lhCnS4+5Aady
-         W6PjtBOLwN7pNdZbgPc3cKfUbxyLf4h2Our4BJr64Pxi/pPSGYqoZZ7XYYeaksNoS+Vr
-         rWhMuBYuR6DGSCPPwTb+q5CabxQ206gXvBWYkPlBEMtu44iWdn+/ek2Ozu4hZVuhXiNd
-         3kkPBlyeWYZ8Ec6pMNf/tv1JzuB+OWANfj+3K4GqbE/kl46aH6Ud7tRcEfBpxl3hrXJY
-         iqWw==
-X-Gm-Message-State: AOJu0Yw5h6WI0TDwY88M9+QjnGL3/3NETSj/CJv1UUKRXtW2DoYWBzwe
-	tmeK/x8f/h9YjkLzpjWvRAN7kz0Tc2C67Y00qKgReD5nVetbKAcYaTsXR2/xk+IQ
-X-Gm-Gg: AR+sD11R0n4IEvCqgEa68IJURkLv2j7zPpge+Eu2tUOITb61IumOGrpVxMXdsG/03dN
-	U3JtOK+7bPdca7IuQHN4NKaT0F6/6uDv3Et69lISDoWBBsTbr5SeHZxMUu0BkpTXpQCGLIoUBLc
-	0K6BRXgU0NYhO+x0r8+SL+UgURgVly4ItfbUbu5clZS5fTc95BDWSejjhcSThxgdwOa35nVKZBi
-	ghZBE+URP1IZPxsOODaMHRL3dTIekQGI0V9OoCMBnNtPVcIrzpJn8+19c5wmViHVbjrbK9wuiBC
-	hEjJwSfYo+tz0Gpt5rR6B0TYvRkfdEwLh75YH0EN/pGFWjF7QF8EYpSxGbs0QFuSLP+prKkHyBK
-	Q1DqkoL8Zicke/NcFV/pvBxO2MdhecEmF0LWtFNzAAbwZFSie3lQSfEPqBE/Ph0D2CnCq6/Tp5X
-	rr4lGWFxGQW+qbUP57lIeIU4Cs5Evk6VwpR2Gn+KiYrj0GyDLzRCY8SMmj2sAeeSoRRDTADrIjn
-	MHkfo71JQbF8b9Ryqqv6NKnN2LRl+sPsylejg3GdVjH70mZlfgnB+DC7lmN3XYQgKkwspzeE65S
-	5m+9Ol758jmN6l9klENBzne/gHp5Ud5w8Szji2+kGAyg+UxIP5UsorLENX6zrwNjQ/pBcn0Badf
-	vn4U8PSoTNAaLbgJcv+DLOFBz/5HnAYmwsUTQl0jSbUINYw==
-X-Received: by 2002:a17:90b:590d:b0:38f:23d6:b4a9 with SMTP id 98e67ed59e1d1-3933ed66651mr11405890a91.21.1786747621534;
-        Fri, 14 Aug 2026 15:47:01 -0700 (PDT)
+        bh=tKvDGv8/S0tmcdFLh/KjSU6yNANaZGcbtw6B2BznJro=;
+        b=qMLAEk/pxCdwRdFC2IVV6Jv0Wym1cKfPuuQ9f9InPM/zd/PKvQSmJ0YXHdp5yhA2Hr
+         olT9Qt6f1LJPlDKSndheLmCFCgSJY6KBTU57keSDYIHUK175A3WtE2v1C5jjA4OGocyM
+         LJUe+gSiiImD0PXOekuWYLkO1O/izlelhdfgJsKi1HFekFsdgT7ujRiSBLGX9TTABELv
+         q2uxdk3xrWh74plDJ5ISUY3mw6c28SER9BrtceqjAynTZpbzpFGCXZMZ9HcZjTIQTFd0
+         FZDk00lbYoTc9QRW5ikGOrHy7zdBPKXohLOAOtIYIhtrk1M20RqiJy93BZsULEw4tCO9
+         U4XQ==
+X-Gm-Message-State: AOJu0Yz5/eD0DJyJ7LZWTIM6I5DuvH93c7OOoYQMaxDqoqOaqQyGDjZn
+	F3BpPumraq/W2IE6Oy1ZiOU/Al6kTA7w+wCKLL/ieXJUhYl7Sj4vtpl1gVlT/dB5
+X-Gm-Gg: AR+sD13D+kxwSq5molqOdvw8WmMB6G9tDgYcokR48QVbs0/ayD45Hf6qtKkoJmOS08P
+	t3P84FrHFDlcVWsW1qietGnNDSyx0orqHrlxxSMOiwvs7ihXvszsHuVvAcWWZE23xJ7OkaWH0Fi
+	W1uEgt7wNmlv1URy0vcBUZ/Nksex4joj/0YU5SIBvobMF6S/88cGVPnRk+jywHFIBBgXMgS/GGm
+	wkSMSIqbXmIi3i0ma9E5EeTOsBVYMqQ7GlD+406mymCRu2h1oxExSOg8VF7KgKAEMQ1W/vf82QP
+	A7+xn7vhzP3ffPKXjYRlUcex44ZBJHqY2REjXHBMz2GwpgPMTBeNUzblbk2D8S9z5Xhy4ORpLfp
+	dtjQwn1JCXbyWsezsOg3IktGIJ8d1ExdP9NspJJDul1qalXDVjskbRpnQBGK3OZL/XzL2634rTl
+	SOemMermbpLWon4Pj5ZHk5AB3JR5NrXqlVtogM8REVIYGn9XcPsQanlSGB2WlsUtT13rBkeCJRR
+	fav5qnzuXTDcu6QkuJd9jKOFO9pQXJ6FutTjHuBgWtgpvHH6KZJUVLvD6RVjD/ZTKtydM22mqnG
+	AbKgAw0DhWFgOA/GnLA/COFEp8KWHXM40tQMwIs6DZEc0ATA5lZuYx4LFCpGn3UdPbWJZz072OM
+	Vj74Wdg47BDas79haK5MadpO3aCS0Ir7EnVsbGSGUUkXDdg==
+X-Received: by 2002:a17:90b:2d92:b0:36b:77b9:5c8c with SMTP id 98e67ed59e1d1-3933babae61mr10881149a91.17.1786747625092;
+        Fri, 14 Aug 2026 15:47:05 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.00
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:47:00 -0700 (PDT)
+        Fri, 14 Aug 2026 15:47:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 071/109] gsoap: upgrade 2.8.142 -> 2.8.144
-Date: Fri, 14 Aug 2026 15:44:57 -0700
-Message-ID: <20260814224539.1523174-71-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 074/109] glade: upgrade 3.36.0 -> 3.40.0
+Date: Fri, 14 Aug 2026 15:45:00 -0700
+Message-ID: <20260814224539.1523174-74-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
@@ -71,161 +71,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129135
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129138
 
-Point release. SRC_URI[sha256sum] filled in for the new tarball. Refreshed
-0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-systems.patch: 2.8.144
-widened the same guard lines with its own opt-in WITH_MUSL/WITH_POSIX_*_R
-macros (which this recipe never defines), so the patch's automatic __GLIBC__
-detection is still needed on top and was rebased onto the new line numbers
-and macro list.
+Minor release. Two recipe-side fixes needed for the new meson.build:
+3.40.0 renamed the "docs" option to "gtk_doc" and dropped "introspection"
+entirely (introspection is no longer optional), so gtk-doc.bbclass and
+gobject-introspection.bbclass are repointed via GTKDOC_MESON_OPTION and
+GIR_MESON_OPTION rather than guessing at PACKAGECONFIG. 3.40.0 also ships
+new /usr/share/help (translated user docs) and /usr/share/gettext/its
+(catalog ITS rules) content that the old FILES:${PN} didn't claim, added.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-signature-on-non-glibc-linux-musl-s.patch | 62 ++++++++++++-------
- .../{gsoap_2.8.142.bb => gsoap_2.8.144.bb}    |  2 +-
- 2 files changed, 40 insertions(+), 24 deletions(-)
- rename meta-oe/recipes-support/gsoap/{gsoap_2.8.142.bb => gsoap_2.8.144.bb} (94%)
+ .../{glade_3.36.0.bb => glade_3.40.0.bb}      | 32 +++++++++++--------
+ 1 file changed, 18 insertions(+), 14 deletions(-)
+ rename meta-oe/recipes-devtools/glade/{glade_3.36.0.bb => glade_3.40.0.bb} (42%)
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
-index 51ffde158e..a57b3ff23e 100644
---- a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
-+++ b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
-@@ -4,18 +4,23 @@ Date: Sun, 19 May 2024 17:11:20 -0700
- Subject: [PATCH] Provide strtod_l signature on non-glibc linux ( musl )
-  systems
+diff --git a/meta-oe/recipes-devtools/glade/glade_3.36.0.bb b/meta-oe/recipes-devtools/glade/glade_3.40.0.bb
+similarity index 42%
+rename from meta-oe/recipes-devtools/glade/glade_3.36.0.bb
+rename to meta-oe/recipes-devtools/glade/glade_3.40.0.bb
+index 57f0fe0aa8..140b6637a6 100644
+--- a/meta-oe/recipes-devtools/glade/glade_3.36.0.bb
++++ b/meta-oe/recipes-devtools/glade/glade_3.40.0.bb
+@@ -8,26 +8,30 @@ DEPENDS = "gtk+3 glib-2.0 libxml2 intltool-native itstool-native \
+            gnome-common-native \
+            autoconf-archive-native \
+ "
+-GNOMEBASEBUILDCLASS = "autotools"
+-inherit features_check autotools gettext pkgconfig gnomebase gobject-introspection mime-xdg gtk-doc
++inherit features_check gettext pkgconfig gnomebase gobject-introspection mime-xdg gtk-doc
  
-+Rebased on 2.8.144: upstream widened the same guard lines with its own
-+opt-in WITH_MUSL/WITH_POSIX_*_R macros, which this recipe never defines, so
-+the automatic __GLIBC__ detection this patch adds is still needed on top.
-+
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- gsoap/stdsoap2.c | 5 +++++
-- 1 file changed, 5 insertions(+)
-+ gsoap/stdsoap2.c   | 8 ++++++--
-+ gsoap/stdsoap2.cpp | 8 ++++++--
-+ 2 files changed, 12 insertions(+), 4 deletions(-)
+ # xfce4 depends on libwnck3, gtk+3 and libepoxy need to be built with x11 PACKAGECONFIG.
+ # cairo would at least needed to be built with xlib.
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- --- a/gsoap/stdsoap2.cpp
- +++ b/gsoap/stdsoap2.cpp
--@@ -74,6 +74,11 @@ A commercial use license is available fr
-- 
-+@@ -74,6 +74,11 @@
-+
-  #include "stdsoap2.h"
-- 
-+
- +#if defined(__linux__) && !defined(__GLIBC__)
- +struct __locale_struct;
- +double strtod_l(const char *__restrict, char **__restrict, struct __locale_struct *);
-@@ -24,39 +29,39 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  #if GSOAP_VERSION != GSOAP_LIB_VERSION
-  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
-  #endif
--@@ -5460,7 +5465,7 @@ tcp_gethostbyname(struct soap *soap, con
-+@@ -5460,7 +5465,7 @@
-  {
-  #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
-    struct hostent_data ht_data;
---#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
--+#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-+-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-++#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-    int r;
-    char *tmpbuf = soap->tmpbuf;
-    size_t tmplen = sizeof(soap->tmpbuf);
--@@ -5493,7 +5498,7 @@ tcp_gethostbyname(struct soap *soap, con
-+@@ -5493,7 +5498,7 @@
-      hostent = NULL;
-      soap->errnum = h_errno;
-    }
---#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
--+#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-+-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-++#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-    while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
-    {
-      if (tmpbuf != soap->tmpbuf)
--@@ -23192,7 +23197,7 @@ soap_strerror(struct soap *soap)
-+@@ -23409,7 +23414,7 @@
-    {
-  #ifndef WIN32
-  # ifdef HAVE_STRERROR_R
---#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
--+#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
-+-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R) || defined(WITH_MUSL)
-++#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R) || defined(WITH_MUSL)
-      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
-      if (err != 0)
-        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
- --- a/gsoap/stdsoap2.c
- +++ b/gsoap/stdsoap2.c
--@@ -74,6 +74,11 @@ A commercial use license is available fr
-- 
-+@@ -74,6 +74,11 @@
-+
-  #include "stdsoap2.h"
-- 
-+
- +#if defined(__linux__) && !defined(__GLIBC__)
- +struct __locale_struct;
- +double strtod_l(const char *__restrict, char **__restrict, struct __locale_struct *);
-@@ -65,21 +70,32 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  #if GSOAP_VERSION != GSOAP_LIB_VERSION
-  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
-  #endif
--@@ -5493,7 +5498,7 @@ tcp_gethostbyname(struct soap *soap, con
-+@@ -5460,7 +5465,7 @@
-+ {
-+ #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
-+   struct hostent_data ht_data;
-+-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-++#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-+   int r;
-+   char *tmpbuf = soap->tmpbuf;
-+   size_t tmplen = sizeof(soap->tmpbuf);
-+@@ -5493,7 +5498,7 @@
-      hostent = NULL;
-      soap->errnum = h_errno;
-    }
---#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
--+#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-+-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-++#elif (!defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__) || defined(WITH_POSIX_GETHOSTBYNAME_R) || defined(WITH_MUSL)) && !defined(SUN_OS) && !defined(__QNX__) && !defined(QNX) && defined(HAVE_GETHOSTBYNAME_R)
-    while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
-    {
-      if (tmpbuf != soap->tmpbuf)
--@@ -23263,7 +23268,7 @@ soap_strerror(struct soap *soap)
-+@@ -23409,7 +23414,7 @@
-    {
-  #ifndef WIN32
-  # ifdef HAVE_STRERROR_R
---#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
--+#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
-+-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R) || defined(WITH_MUSL)
-++#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R) || defined(WITH_MUSL)
-      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
-      if (err != 0)
-        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
-+--
-+2.43.0
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb
-similarity index 94%
-rename from meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb
-rename to meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb
-index f77b88fedd..5d4c99256b 100644
---- a/meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7eaf5d4df67c0db38549ba3c714a37d6 \
+-SRC_URI = "${GNOME_MIRROR}/glade/3.36/glade-${PV}.tar.xz \
+-           file://remove-yelp-help-rules-var.patch \
+-           file://CVE-2020-36774.patch \
+-          "
+-SRC_URI[sha256sum] = "19b546b527cc46213ccfc8022d49ec57e618fe2caa9aa51db2d2862233ea6f08"
+-
+-EXTRA_OECONF += "--disable-man-pages"
+-
+-FILES:${PN} += "${datadir}/glade ${datadir}/metainfo ${libdir}/glade/modules/libgladegtk.so"
+-
+-
+-
++SRC_URI[archive.sha256sum] = "31c9adaea849972ab9517b564e19ac19977ca97758b109edc3167008f53e3d9c"
  
- SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
-            file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
--SRC_URI[sha256sum] = "6d7196bd6591ec2977474c681e351b4a33eb5c2d64c9e2e6727b004f330b3752"
-+SRC_URI[sha256sum] = "b981818fbbd4bf9f6f4feac03136800f6e16a7d0b7515924ff7a2661ca26e581"
++# Man pages are generated with xsltproc pulling the docbook stylesheets over
++# the network, so keep them disabled like the autotools build did.
++EXTRA_OEMESON += "-Dman=false"
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/${BPN}2/files/"
- UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)\.zip"
++# 3.40.0 renamed the docs meson option to "gtk_doc" and dropped the
++# "introspection" option entirely (introspection is no longer optional), so
++# repoint gtk-doc.bbclass at the new name and tell gobject-introspection.bbclass
++# not to inject a -Dintrospection flag that no longer exists.
++GTKDOC_MESON_OPTION = "gtk_doc"
++GIR_MESON_OPTION = ""
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gjs] = "-Dgjs=enabled,-Dgjs=disabled,gjs"
++PACKAGECONFIG[python] = "-Dpython=enabled,-Dpython=disabled,python3-pygobject"
++PACKAGECONFIG[webkit] = "-Dwebkit2gtk=enabled,-Dwebkit2gtk=disabled,webkitgtk3"
+ 
++FILES:${PN} += "${datadir}/glade ${datadir}/metainfo ${libdir}/glade/modules/libgladegtk.so \
++                ${datadir}/gettext ${datadir}/help \
++"
 
