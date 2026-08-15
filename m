@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 757D9C5DF70
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C475C5B572
 	for <webhook@archiver.kernel.org>; Sat, 15 Aug 2026 02:51:01 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2466.1786762255285553727
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2489.1786762252315048059
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 19:50:55 -0700
+ Fri, 14 Aug 2026 19:50:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QKw0d69A;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38fdeaed181so2438281a91.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lbJBkoSi;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-38f620399a0so1448449a91.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786762255; x=1787367055; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786762252; x=1787367052; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wFVW574ww1LzEmohPH8qCdPP5NoNcrMRggCeqDIE6mU=;
-        b=QKw0d69AYTxx6ViAmIDlAAQIOZdh3DN/IbK5Bq456lMKJfarwzi6cKaWYqQJQciHvk
-         rgSrWz8SrWdKsJO1QcheYRoMgxLMZBMjUZKc+4zCQ+8AW+yNdI/9xt4XE/W4G4gfh2w2
-         X9efSnUWZoTaPizMm4q+0vJDnp/5aapuArICLonkIe01b3MEkFFTsF03ft5513mv/yi3
-         x9DlA6vk9jgFp7+/8Rtqz/2UeZ67Z0YRJ37J0Bm8u3I9vzeMIRWllJiT7qTCMxsp4sin
-         8gGrUO2MlsJq+1WJNZUWZ/LEbDvD9bpokMEKG6d+J32h91VGq0Q7TGPDIty2yOyHW08b
-         /09A==
+        bh=TOfqtiF+6PMI1DI0KscTw9RlNSE2r5dPYy0t6FhY4YQ=;
+        b=lbJBkoSitHk63BqAXA1spANKTHrDt6bY4gH2Jd7CnG6CeDCFJWIt75w9M2y3w19MUy
+         ggBgHYhCsFP5Oq1XPRBGluabPUYKFqjeciR1fMqOop1K8kUOzWCeHD7Br9nOMsFtFL5e
+         qLuh/JubUETzDNISB/E7NZ7jFFWD2+vVmQjda8Oup+qQGXFfbGcWfowYPIHgu38uRUgT
+         7iOb5R7yTWfz8hrqtT8V7OtnegK9YZOLmtFiV8T+HzRBUVt9ulLZBG5mvxad6crdpTQ4
+         vMFb1WAeg9ZWcquaUW3lUNeYMxekDkuBcHhHRiAgnVn4G3FEV5oLFY8HATptGoO+XVt+
+         ceqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786762255; x=1787367055;
+        d=1e100.net; s=20251104; t=1786762252; x=1787367052;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wFVW574ww1LzEmohPH8qCdPP5NoNcrMRggCeqDIE6mU=;
-        b=hwcvSHyG4R/vZBJOCZnRbgqXkW4TnXEjcY5Ti9L7ltU44iO+eSuMjqtxLKJqOmkWHg
-         yj2w1j/91zcXUXtnQsbwzMCFZ8wPH98ECZpZ06reFO1k+Fbn5v8Z0GuPLqYZrjh2fyDF
-         Xjr1j9+gNfBxiwTheXqpGd1rCt/cNVtau8JYRhn7QH8ofa8IqSLR0uJoQQDkCky0OoOq
-         14aDB3RaX6qetd4UpzD2bbuJDo3jtXe5M+GTrgX5UCwk+c+ytxA3CtJIlTVkLkrem2bD
-         bPk5+uF/g1ARKpQLQ5h4xlMoXav1xX2ZeeMYNCE3jW/SklTs9e5nZgeqOc/uHrTFDyks
-         Kz3g==
-X-Gm-Message-State: AOJu0YyohGyosqExZ/s/ydPWrHlghp5FU9xGXRx7NmbRh/Wlx1h2yFoi
-	c5b1gYC1wh6CKtFHlRkwEarrptCNHOKE0Bjl/LrebbMlkkWFfhzjo3uJ3WrtokhH
-X-Gm-Gg: AR+sD12fgilmSUZbdWigvoeIJZCVXnNBVR6zW9nQjQxCjpJt9Cqk6wPmV0PhI3C+4w0
-	kqS4wawYACgP6yI/Bzf2l2tUeuOgck57ot1CJf3RDR7I/2DVajJb0b2Ou7htmePrBpeGKFxpPM2
-	T0aqc9ddYq8cvCa8lD0kWsaeDn1Sob8SkQX/vKIZNyiUlHbBODgbQB0GeFN6mbf6L77G/JoiOGQ
-	39nwOSvq+M7hO+sCLRylDlNB/OfNWiBf2pOjyhoo9BBCkLMP7+40Othuuk9DGFZyfrHjr6kS3Fr
-	PrKvMt/uKgbDwrbs3n3eALTpPtOHcsyRhMMGlCh/uoyP4xZigun2SjlunRZ1+xFXg016mtWfHop
-	xcTOTiGMH2VAe3Al2gj5ACi1BnN8E18iieQBOgu30hEH/CqkQnyx8xys8+654vUgsvmK9hghn7s
-	ZxyF5aCR1BaZrr1PRv0Dno6s3uE+styEiiQ1Y0BktPVYl1fplLQFe/vRlWmxzBG3j+2SS448mjV
-	o8jOXDR56JRmaU53Rx4xFPvCGNpZ95aGvI/k35bgseP04H6RT6fOeRlyESMDtHHzeabWYMPMYuT
-	dvsBI09yGcPWMvx8mnOXis+hoAP8X1uqThX3TrwvxM/IR/UaP2/0IlF/Zr4mJXoqnhmXknRS/N3
-	cYjI1o2dSdp6BpJ+z6IUVPyDNRqCvS22FL47xY8IE+uiLQA==
-X-Received: by 2002:a17:90b:4b90:b0:37f:e177:f58 with SMTP id 98e67ed59e1d1-3933b874ba2mr10763077a91.9.1786762254588;
-        Fri, 14 Aug 2026 19:50:54 -0700 (PDT)
+        bh=TOfqtiF+6PMI1DI0KscTw9RlNSE2r5dPYy0t6FhY4YQ=;
+        b=R9hmn/Rt4vqlDosR/jhIY81DCxxBNxUwD5B3JlXuQU+LGND9qdBgDD1iZqC8sAU/9O
+         GG8X0uFq+gdl4vNHro1LxL3KSImdJytVA0IvWZAid1PAL53Elu1ZqfB0R4tQu3RnTjqa
+         CAFOxNr9/WKxh9qrIaP3y45aAnjEI5GhoJmxLLzubCjrGtxlSPxOkMbBfiwQ240VMLV5
+         AvS6vXpVkjc2bg5sk432UqqKUKP6kakV7ehNk2UkeUg1jXayRpdoPleLZU2RR3MHCs4a
+         yvkeG5MrJKVoJYZ4VTOiU0aae2Zk1WG3xOPjKc3sJgOyIqe78YNLQTtGIM5/NALkah8Y
+         I6rQ==
+X-Gm-Message-State: AOJu0YyJTO60RUQN+Iv+34t5JU0zdAEEpaOtG+/p4i233AdYjBPU5ZjZ
+	vgwvRbUz9yHBrcwseHSpnIgd678a1Z2sbPgbEGzerbUxyFJBIDAeAa1b4XnSH5Ve
+X-Gm-Gg: AR+sD10okC3thEhyidA2S7KecswMQ0WIZaf/dSCZJwchch1cr1In43NmW1GdQZB9hox
+	n/tThSQHSo/ZDY8AeQd8RORzkXkj9C5Ao2WHTJCGgXHi6FTfUryo/t3fsTh3qp9T9vHWfXXnZz3
+	e05gVD75Py9IT8VkRCUxXCTV8N7m5YmWZ4UkqrLyOSSedoDVsCxlNt7TvX3/mkNTQld/9LgxzCP
+	kVM8jThVsfckQVznkFRE9uTUyvAgyPIudRkF4twrxIUNGMkQRLRoRhykKGZbV7XfWw95EieQ/Sz
+	rFB3ndTMrhoeoLbrFPVQw29n9a4P9sUS+TwliAsoXwA1KkvU+LGYXBAHTiceB9Ta2bfeE2R2Jk3
+	VI42UA4+TjQRWc2wRQzXEM/L0ZO7hEZUeJ9PnrvfeUKQGN6C+HnfcNj15FeVMr6cpSoyFgm5Rv4
+	w4d5YLp+BlWNbK1GxY2MaDV3beJW+8xqyEzlaZShFVMVplNzFt1ovoBirdHBbSmehSGTf1DIRLO
+	T6KXx768AWMLonC/Pds+hpA2M1PLy0S5caUmP5vHhIEIzyMPsUEbf9wdr0V8PJV39JP19fEceVv
+	zmLKhJd0WgKBxJpOREQiOADSHAqo8AwHbRGNHr3LSSZLtd4PSivY6jTdcElHkZX3/pfEI9NWmbC
+	dns677yyFfby/r6kNNhHgd98HtZOm53H6G18kj3SQgYMStQ==
+X-Received: by 2002:a17:90b:5388:b0:38d:fda6:4873 with SMTP id 98e67ed59e1d1-3933b8fc728mr11594848a91.10.1786762251423;
+        Fri, 14 Aug 2026 19:50:51 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.53
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 19:50:54 -0700 (PDT)
+        Fri, 14 Aug 2026 19:50:50 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 105/109] llhttp: add new recipe (9.4.3)
-Date: Fri, 14 Aug 2026 19:50:39 -0700
-Message-ID: <20260815025044.437694-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 102/109] tcpreplay: upgrade 4.5.5 -> 4.6.0
+Date: Fri, 14 Aug 2026 19:50:36 -0700
+Message-ID: <20260815025044.437694-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
 References: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
@@ -71,40 +71,57 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 15 Aug 2026 02:51:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129170
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129167
 
-restinio 0.7.x drops its bundled http_parser and instead requires
-llhttp to be supplied externally via find_package().
+Bump to the 4.6.0 release tarball. As of 4.6.0 upstream introduces
+CMake as the recommended build system, but the release tarball still
+ships the Autotools build files (configure/Makefile.am) and Autotools
+remains fully supported for building from release tarballs (only
+deprecated for eventual removal in a future release), so the existing
+autotools-brokensep-based recipe continues to work unchanged.
+
+0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch kept unchanged, still
+needed, applies cleanly.
+
+Build-verified: tcpreplay builds and packages successfully (existing
+buildpaths QA warnings for libtcpreplay.pc/defines.h are pre-existing
+and expected, WARN not ERROR on this distro).
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-support/llhttp/llhttp_9.4.3.bb     | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-networking/recipes-support/llhttp/llhttp_9.4.3.bb
+ .../{tcpreplay_4.5.5.bb => tcpreplay_4.6.0.bb}         | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+ rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.5.5.bb => tcpreplay_4.6.0.bb} (54%)
 
-diff --git a/meta-networking/recipes-support/llhttp/llhttp_9.4.3.bb b/meta-networking/recipes-support/llhttp/llhttp_9.4.3.bb
-new file mode 100644
-index 0000000000..98e65bf08e
---- /dev/null
-+++ b/meta-networking/recipes-support/llhttp/llhttp_9.4.3.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Port of http_parser to llvm's libFuzzer, and a rewrite of the HTTP parser used in Node.js"
-+DESCRIPTION = "llhttp is a HTTP/1.x parser generated from a bytecode-like \
-+               instruction set that is smaller and faster to maintain than \
-+               the legacy http_parser it replaces. It is used by restinio \
-+               (and Node.js itself) as the HTTP request/response parser."
-+HOMEPAGE = "https://github.com/nodejs/llhttp"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9e4e583cb28b7e0c2ef8df4832706e96"
-+
-+# The release/v* tags carry the generated sources and live on the "release"
-+# branch, which shares no history with "main".
-+SRC_URI = "git://github.com/nodejs/llhttp.git;protocol=https;branch=release;tag=release/v${PV}"
-+SRCREV = "0e815792b167a9bd8ace259b95b7da953776c288"
-+
-+inherit cmake
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.5.5.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb
+similarity index 54%
+rename from meta-networking/recipes-support/tcpreplay/tcpreplay_4.5.5.bb
+rename to meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb
+index 55bc8e198f..368308408f 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.5.5.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
+     file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "ba37b6c9270fcebe86b83f68c4ec3d5ac8981f8c6087b582af0205a35ec4b11d"
++SRC_URI[sha256sum] = "30f73b901e74b6ffc36c0f82afccc9d5740e70ba214a15763631a59dd2cc3564"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+@@ -23,5 +23,13 @@ EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}${prefix}"
+ inherit siteinfo autotools-brokensep
+ 
+ do_install:append() {
++    # configure --with-libpcap=${STAGING_DIR_HOST}${prefix} bakes the absolute
++    # recipe-sysroot path into defines.h's pcap.h include and into
++    # libtcpreplay.pc's Libs.private -L flag, tripping the buildpaths QA
++    # check. Strip it from both the source tree copy (shipped verbatim into
++    # the tcpreplay-src debug package) and the installed copies under ${D}.
+     sed -i -e 's:${RECIPE_SYSROOT}::g' ${S}/src/defines.h
++    sed -i -e 's:${RECIPE_SYSROOT}::g' \
++        ${D}${includedir}/tcpreplay/defines.h \
++        ${D}${libdir}/pkgconfig/libtcpreplay.pc
+ }
 
