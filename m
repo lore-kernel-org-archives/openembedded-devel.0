@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F7B3C5DF77
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1438DC5DF75
 	for <webhook@archiver.kernel.org>; Sat, 15 Aug 2026 02:51:02 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2467.1786762256454166664
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2465.1786762254300760921
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 19:50:56 -0700
+ Fri, 14 Aug 2026 19:50:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PZYxZqnf;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cbed97fa26fso1057635a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=L4/N6aVX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-38d489b6b71so1827526a91.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786762256; x=1787367056; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1786762254; x=1787367054; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hYm9AuJAjJZN/iHMEIGkk+jr/emO/HF/JOpEGar4E70=;
-        b=PZYxZqnfKxgtwiLF9AmwnkJgmy8qAcSCsEDVn17eoXxi/JXlwlJ6CgXcG1z3pH6F0G
-         2uZb+o7Bxc0h67A5ZzfvW8+H+G8YsUDAGp/1uNCA14stgjNx0cLOdBEjo4dqx9kKsjHN
-         J9snd5gy6NoxMJU7GqBwJP73beOkq4lzHrG3jOOWDow9BIYI/F6aoEPlI+r0riz4p2iZ
-         9tMUHG38eeWs9whvE/N1ggkUgWPEtPi/SA8QPZRn8MbxZ8iXeJqLDQXdx1eFy0FgQ+jJ
-         xjpMwPJb9xyt4a3J4qD1oYuDN8SdnentJJWomDunrj7FQkphSbGK9OvGc397twHBpEWg
-         QwKw==
+        bh=iGCJtvMuknmomRi3nfpQCqLb/Oi0a6tg351AuOahgBg=;
+        b=L4/N6aVX+ZGBX4WY1VPYBY5peGQM8MzSVxRymBKC78WVBrT1XNaVBjpUn4Q4dZLB6a
+         mlTi5URaqXv491G+Ecp4KUM0nkM4J9wyv/+sd+Twu8spdENdHEuCcf76exYSAyvNZjN0
+         ZTOlMbqXojMXmtsuA6HVf8j/UWa/sUp5H+FG1T/tyBxcWbGqQiMWNw0LaP+OZIeE/13/
+         77ypUg76ELz1ShQsjU13DVngWbM6fSsQQ+gfVgOZ8fYWJAIYGf2A9UCgIwHJ0NNfl3Sf
+         HHOmW4W53h6eMFCroNRlbd3VMJ+bj64ltzBLJzoVMka8Qbie49T/+qvo/V54msAPvkBE
+         xyMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786762256; x=1787367056;
+        d=1e100.net; s=20251104; t=1786762254; x=1787367054;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hYm9AuJAjJZN/iHMEIGkk+jr/emO/HF/JOpEGar4E70=;
-        b=ehAXXARUj3t9zeVx1qWFUDdYfmsVIPC/WYjpXA0pY8EGCzprPto0dunLJ8/XYSJ93q
-         tm/+8nwDXi7tNmFqWPJW42Agj2BKVZ+YADvkxksqorXUK7XSvC2er1T3C16nNURIVz7o
-         JMNhVUr9ZEuA4ZC6mCYf32LBq45FgUhShb0m76zxkQa+kJLaTlPHWCTdwM8pGyuLZT1J
-         zgXSUgzuq29PRABh5D2A1bOaTIKuPU4KB3PXcoYyzKSs/KW1r4czfGOwyINWq3Rdi7+U
-         HcGhUlyherTFz/zEDyWHgGsSwxrYPsdfrhaGMZyhj4zYry74CSDaGMyeaTWp8m3+qmcX
-         zTLw==
-X-Gm-Message-State: AOJu0Yx11GVLv+EMwH6FS6wzOLlNNSQb1BUlacy6+YAE7ptdeN3vDiaR
-	X5qEq/ENtIubW0GTY438HOCxrq293CWy3yuw/rBOqFUEu7qjMWqw77wQu9344KWG
-X-Gm-Gg: AR+sD10LeVYK60UO/cK1IK33pw9G113VQjUL0of5ryuItShz0yNylh5ddBHN8P63pBL
-	xTo8hlV1gSpWykxRkmYRdGlAa2zTJ9WMFwMWz3V09q921Twr9kt1SMmIc90epc8b4idzxOz1dGB
-	0xwSfL4D0Voa2AIV629TG/N3RDPNNe6unrlUVpNo3vykxZFNcJXq3pixgkynw50OdFuSDsxEnK2
-	5k1FILx2bj0J1/sy5B6L2R1i8p7HFABm5cEdY1W3yPWVraiyR1yaME118eHGGRRLbpn5sPnvLJq
-	gCItkt3MM37TdusKhDmWSBUMJX3KjdddY9cbzh9AWpqmElusO/DSdknYu6t7a6gCJiJNC+prHhX
-	ddJM7llcRns7vnmAyCWOk8i5o0EyFMx9VDitrp2upMvnF3OLNI/Y2+st2ohIETTn4q79wjPpRR9
-	BGemuZLJBT3gTTL+dt/r8UBajVAR6IIEe46pY6cGz2Y0UcFGdatFMdhAtxk9SVCuZ+Tnkn8nJ2D
-	Cm378QlpNKEkL3jLay9eRM9o2cEoV4ZUpAOpHBBiIR1lbvvFh3jCzj2Yn1Twp0QJRHZnxb6EHeG
-	UtNxVubfzbF/it9UiOaAC+t8VD/TU3vMf5y+JrujVrU+047ZPZPW/2kkMYvKz9r8/Re4FVn+EVT
-	2hG9fdn8Mek0J70Xjem+ZswNuNteWaqZ/HczC1zUfbbzR/GA=
-X-Received: by 2002:a17:90b:1dc5:b0:38e:7e9b:5fbc with SMTP id 98e67ed59e1d1-3931f4844b0mr14552953a91.7.1786762255659;
-        Fri, 14 Aug 2026 19:50:55 -0700 (PDT)
+        bh=iGCJtvMuknmomRi3nfpQCqLb/Oi0a6tg351AuOahgBg=;
+        b=rE+Kv71RDlEAudu5HfgRWl2vGYnK5VJu6CiZNlealWEwN4Pg21LHObMKFBtaHCiZIS
+         QXb1xuF0DJVAUcqzClnVYql9zrzxpzi7dYpY6utFlLMBITD9sqNhYKmpjQFrmVSGyyNt
+         H/A+Y+MhMMnlzrxOCNvKV1wsjP+O+UXwTOu1kK40Uw3ukJcMvCR1J+j/EGlu8UudnbgJ
+         B7FRK+DpZgVGjARHW6AfRpE5CBG9N79tGgHDnXkrRm/bC2kkQST6/pt30pCE/r+ZD7xN
+         xEGYSms8JF1fa7PXLqcN/c0o4LbXx4J3maZ9+uXOMOFZ7f6gvXB0VJemCmDon9sUGdI3
+         TvKA==
+X-Gm-Message-State: AOJu0YzjjcNHutpmb0jcTO1qowijedbJXd4KElXtzmOgpAWfib1ZcR+b
+	hhWuiBg74FoK1tMZsgjZniW8DFVzusVRNvszUZhe6mJ0JoOV8zeLNo7TbhuRqx7b
+X-Gm-Gg: AR+sD116oaYuhVseR0zLHFvBcugP/pNCTopSTlumwnk+FYbWqg00LJkIbUO+/iuIOH3
+	wrGxRhQVsaezFdHa6wVjRTYWK93auzyofYMhQPXnlPsc2vRfFS4Gku8b2dJ/O9JN3IF2tPS8mZf
+	lcJqXfPqKbdk8fJp/NROH+gFs9Cv3IepKaqIt8wvUcL7qAoCNZPZ1on22e9WFrynIBe1LZ6Kij+
+	GntLiPlpBMHQcZWyHCVS/b/vSa4IgXdyXWOZib+qXo71DSuxVSLdiyXA+ksZIIGnj+f4CeTOoJ4
+	7h3Q1XYhTKuAXGQbnuMkbwatFYESAabtDTdldZp+Ars0cZShDvRtJJD5a/C5qWwh8aJoCjwzKB4
+	A2yzo9z5RYHxP+23bqBEjDOgGzfSDqUp2Yh9vHxpTD0H6/WMR4KuL3h9Qay5X1HcqHBC/QHVR6A
+	7w3b51Oz3SxTE4WWbveasdrF4EDhGJgjTZzcq51L/ZWpz3NL3cLt0h/JH95eq2gTvOUEPWR/uwJ
+	T++/SIY5T4HoEkr0QKTzJr1lO4fc4QUtsFm0hUd7fo2SVg+qQxjDF7HZtIix3aFYsXBY1v6/Q8a
+	6n1PpNcTJjO/qrXhDn9Uaha8G/qEusRzeb10/INRfqlB058C5kFzDErQRt4tu0574xedeFvEUrw
+	SV5bQkKv88XTzRp0mRqJekQBlLR07nhnbYYSeHocHLyL7YA==
+X-Received: by 2002:a17:90b:558d:b0:38e:542:6485 with SMTP id 98e67ed59e1d1-3933b8fc711mr11667866a91.12.1786762253578;
+        Fri, 14 Aug 2026 19:50:53 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.54
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 19:50:55 -0700 (PDT)
+        Fri, 14 Aug 2026 19:50:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 106/109] expected-lite: add new recipe (0.8.0)
-Date: Fri, 14 Aug 2026 19:50:40 -0700
-Message-ID: <20260815025044.437694-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 104/109] samba: upgrade 4.23.8 -> 4.23.11
+Date: Fri, 14 Aug 2026 19:50:38 -0700
+Message-ID: <20260815025044.437694-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
 References: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
@@ -71,43 +71,53 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 15 Aug 2026 02:51:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129171
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129169
 
-restinio 0.7.x drops its bundled nonstd::expected backport and
-instead requires expected-lite to be supplied externally via
-find_package(). Add a new recipe pinned to v0.8.0, the exact
-version restinio 0.7.9.1 pins in its externals.rb manifest.
+Stay within the 4.23.x stable series (do not touch the sibling
+talloc/tdb/tevent/ldb recipes). This picks up two intervening point
+releases:
 
-Modeled on the existing span-lite recipe (same author/ecosystem,
-same LICENSE.txt boilerplate).
+- 4.23.9: bug-fix release (use-after-free in ACL claims/conditions
+  handling, CTDB read-only record use-after-free/resource leak, RODC
+  auth fixes, among others).
+- 4.23.10: security release fixing CVE-2026-6949 (TSIG/DNS OOB write
+  crash), CVE-2026-58216 (KDC kpasswd OOB read crash),
+  CVE-2026-58218 (DNS TKEY cache-flood DoS), CVE-2026-58221 (LDAP
+  privilege escalation via internal LDB special DNs),
+  CVE-2026-58222 (LDAP Compare filter used as protected-attribute
+  disclosure oracle) and CVE-2026-58224 (CTDB protocol
+  bounds-checking gaps).
+- 4.23.11: further bug fixes (DRS memory leak, pthreadpool fork race,
+  RODC/NTLMv2 trust fixes, CephFS vfs crashes).
+
+All 13 existing patches (including the musl-only pam/getpwent_r ones)
+still apply cleanly against 4.23.11 with offset only, no fuzz, so none
+needed to be reworked or dropped. LIC_FILES_CHKSUM for COPYING is
+unchanged.
+
+Build-verified with cleansstate + full build for qemux86-64.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../expected-lite/expected-lite_0.8.0.bb         | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-support/expected-lite/expected-lite_0.8.0.bb
+ .../samba/{samba_4.23.8.bb => samba_4.23.11.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.23.8.bb => samba_4.23.11.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/expected-lite/expected-lite_0.8.0.bb b/meta-oe/recipes-support/expected-lite/expected-lite_0.8.0.bb
-new file mode 100644
-index 0000000000..f63d5dde2e
---- /dev/null
-+++ b/meta-oe/recipes-support/expected-lite/expected-lite_0.8.0.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Expected objects in C++11 and later in a single-file header-only library"
-+DESCRIPTION = "A single-file header-only library to represent value objects \
-+               that either contain a valid value or an error, providing a \
-+               backport of the C++23 std::expected for use with C++11 and \
-+               later."
-+HOMEPAGE = "https://github.com/martinmoene/expected-lite"
-+SECTION = "libs"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
-+
-+SRC_URI = "git://github.com/martinmoene/expected-lite.git;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "182165b584dad130afaf4bcd25b8629799baea38"
-+
-+inherit cmake
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
+index 3fc3df5471..49599f29f9 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:libc-musl = " \
+            file://samba-4.3.9-remove-getpwent_r.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "976129847456dc5b78c00f8ffb79dc605c49d6aaca8b2aa772fd22dbb69fae01"
++SRC_URI[sha256sum] = "089fdeeaf83593d8f9a16847a86b6cad2fc90f7a893eb8d9d5f509bbecadc0d4"
+ 
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
+ 
 
