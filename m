@@ -2,124 +2,107 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C05C4C5DF76
-	for <webhook@archiver.kernel.org>; Fri, 14 Aug 2026 22:47:42 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24559.1786747662207181212
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03343C5DF67
+	for <webhook@archiver.kernel.org>; Sat, 15 Aug 2026 02:50:51 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2488.1786762249679129456
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 15:47:42 -0700
+ Fri, 14 Aug 2026 19:50:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HwX0r21X;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2cee9b74ee1so11906345ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 15:47:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ogf9Em1+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-ca12086c06eso1238737a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786747661; x=1787352461; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PiE4dQtY1uByY2iT/qLJisprJT7NiBJre4EdPxXuQxc=;
-        b=HwX0r21XcjwBHoEARp8PespIPqS5MpCKYYvoz5mePMSQg2VM/A8M0+clD4CFRy/O8L
-         73xsFmc/Z+oKVPk4Y64/1bConzm3dfgsK2lXVNFgOWNkgrlAq3jRDDWCL5ioY0+surSL
-         v4N05AXjsfzMSWon3sWYUH2Y2D3+Q0rBJ/ovESR3YlYF+QSFABqf92Hu3kcr0JjaC4/9
-         9UJoYZH/XgCf18oeU12OO6VhPvLt7kZW4v3ZUH+LdrUtl/oKXKwcYnttVjZCHZy7KQ9p
-         rdqAdPbZtFotvCRvmiSXtnBJGCl+Xd4ZveNTb4GobeMh+vB2AX6gQEMhriPuMFc9lmRJ
-         +o/A==
+        d=gmail.com; s=20251104; t=1786762249; x=1787367049; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=0yhsY489WnzKSJ69pqlZVerC+CJRorB8FrF0M+Ekn7k=;
+        b=ogf9Em1+Ju/FypPOK5CfZ4Ys4CjMihHFvgM8wMtT2cTpDnUMl+8FazozDVyNVDxZXO
+         j915UtLR0ZcybPCmahauWbnvh8B+pzhKt2qJd5pP4lZMH3O5Ap5rOJZp8JNsnO/cKsd7
+         IDwAayiWSYqDwODBx1ffoHUqRPyvRqVfFlumFQn8tg0rOVSn9/9Gw3BRFuSInYnVjtj9
+         mCdKIqAStIIs3wUe0dZ8hrP8Q3gSmx0d/+48o4itRm12b83Mlo8bu0R9r5JoMgWejFkI
+         4E+t8XkcNe5sWWYuMa/dZ0mYkQcs3zPwn1BN3zxpjzu8LcCnhJHzRVt7kcgJjYAm1WMo
+         WR0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786747661; x=1787352461;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PiE4dQtY1uByY2iT/qLJisprJT7NiBJre4EdPxXuQxc=;
-        b=syMAr8YI4e9n61LCHo7er3wxOEmz85v0fkXhR1X6I0PVT0sXuepFTHbwQ5St4sFK9H
-         p8gt80jwUkeijXCuIm8zrcVbx4XlS9hYNiYfj3RBNFEXiY8mG6qBrvTLPqts+lOZ/Dq+
-         lQIak3uf+rQECdiQ8izEEOAgeADBC/m/LDPUoJnGBPXmwJjuoZx4WxbGQx8xZCubztG6
-         FTBzRqeiTDrxht8TlxYTEYYEyzQHfilu/87AotOYJn+thOrlVv3N1nn8xirz20Qwi0kp
-         KkFW8C41q119T6Zgm2R2vapDLsmdmBJFdW8VvHpNnst+zVSlPNlsz3dCTRCg14ydaeEd
-         V6Qg==
-X-Gm-Message-State: AOJu0Yx4qdJtjcwl9K/EJq4cz4q9GshjmFB2Cw8CQhqn3C+xgxoe7YMk
-	RgrMvbL8rzZjYiMpyA28Yc41TKIe8icwTVQVOJ/y2YsVhqIdRGKNskjtLpSsGPZb
-X-Gm-Gg: AR+sD113nUW/Dv/hVPHk+k57nrYtsN+KgRLn2vsmaa7vbmNYHc9G/9ozZyiqYCcE81y
-	e+/qzalwBQ+lFRWYMUgfA3pfMr5EUC7D6gRRO+sF9GhDGS4ID8K16K/jkaLl/FoB8S5/Q753pPj
-	938ouNy/rNpiFZBPO8SCi+ukh6RpqruMe7nJsapPBHCCt77oI68VYl6osKWzixALy2z2V2vk+Hs
-	E4stvPDCTjvx2oXWQ5/9TihwIvfaKMFBd/KBucvkCnRgRzJ1hbx3u9bArPA/koYFuosNIeC0iSb
-	xPlShgjofvI03Bzz45HA0DJj0sex3dFTF8ryzkMsqCN+rw1G0a0vAurrg9YM8Tr5+ssLdL8bbEa
-	/XO7bC3DwzSVlLphLHz8jllhYTfkhSQrHsIZI9y3dumTGJbj6obpGMg6IgXhK4zNcJsYbAPZM1Y
-	nK4ro8xuLFxkwQCYtmx8FKoP7+uzAxd4NF2G3kSk4xvHTgBdpKeE0Ayl/ukeZ8LBmaDA35Az9vs
-	QW3z/gHkRuCJFR/AY6yLnp1Z8V6mV8fjt29L/HbgKy7FhaktCcYtpkABRgUkPXcl9sFkeby/IBY
-	4SWIWG4e5Xjy7Vl8ScHmjD10yqGnnTFW18OUN3HUOCg/DPyFcYHyyn/FOqHer5+OEP1e75SMr42
-	jf3XhvK4LXydwWGPmLSjIiV+hCVIeXsYKGQHpw1ogi8flWA==
-X-Received: by 2002:a05:6a20:6f8a:b0:3c4:1916:9d46 with SMTP id adf61e73a8af0-3cc71f4a5famr12068692637.27.1786747661489;
-        Fri, 14 Aug 2026 15:47:41 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786762249; x=1787367049;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0yhsY489WnzKSJ69pqlZVerC+CJRorB8FrF0M+Ekn7k=;
+        b=n8z1WcROPx3vUdnnbTIrXGJZmqSOQLRra2JZiAhzd+9hY53SjxZwP5BN/bBDcCOixn
+         YtXE7WWaBiTVvMbU+igFh7xc7yqJmrI1aebDVW9my7cA4AGhamJfIGo1KSvNIIK2WJ6N
+         Wi2/6PXLmW+oudbsPbVivKDxEx0vFrQVpesd7KvxpIA9CEnDNujyBowaIiFI+w2q5qcp
+         qgQ1Nrdx347Yw7JXRDirY4R4oWBEGjJR/xhy00SjH+ra8pA4um13b82TfpqyCeCYFmEm
+         ThD0/04TRev7Ooi+WKDe2obzjBQP5Ei+eJMVBXNvYAH+EeH0x+FF+nJuQ0ej/EakTPxV
+         OHeQ==
+X-Gm-Message-State: AOJu0Yw1TWah/JvYmm+h3BFHHhtZ8vJxhc3D0/nTDKuFvGF2g0ain7cv
+	rKGw/mEh1JScfTXrgZ9FrEfq4+1YpSPpaUJQC8Vsf+RM7E8qLAxn9t9nkuMjbKlo
+X-Gm-Gg: AR+sD13wXhLaR8ZKyYRZTtcno8ky/Ylkgywszp+/T6ULd7566NJkZU9FaaqXTYZCSXc
+	bGRxCxPko5fuT/2TGvPq/1d34aukINqMmJZpJobcO6MdwLFhpu4OcY6SyM+T5oavYYgkG8ijrwE
+	pIMIGoEIlfQsHUgSS+aYY+S2Ox/ATTPG6lx85mZn7YZ72a7Ff325HiiE8/3THk1e2iSu84VbL6w
+	72gJ00JudCsZKUxQfpHAHFw7UptXgmmqPzWN67ABaLxMk2MJV7k8+GwmTv0XCAr2H07dXHJPlrd
+	Tln38itmcav0pZiLf9V0WbH+LwvkqA+/CqyaMrr1linA7DAAMta7K5uBA86qNj0r21d9eEILJO/
+	jtyracwsO5nWdlktrfJlkJvT8c8FTE9DEI/HmJuIfFJKOgu6mdji/9LEoCs8U6uxKrhqsKS5P4l
+	QSvHeDuA5CYBotLphRDftQEKKZDpsJ21QYSm1z7+ZPluHRlpy0s5pKX5GfV4ZVicZeKBDtTm2Jb
+	e+AQWa5u/K7C336XuCzGzLIPQv6Yxo48fSmgef0AfNQsX6cGl2FNWaBaW52D/RpFRCybi55IeDy
+	he0RSQgdy1iROUtMXKNMF+COTA7qk6ElLybzMeSZLN3jq9tpv8MaJe/8hF5IuSOWuxLIfdiFzzS
+	M3pLv/1JIfHZupW/i/y0UW7al3zOJzRNxH7gowyW6Eo+EaQ==
+X-Received: by 2002:a05:6a21:48d:b0:3c0:b766:74f4 with SMTP id adf61e73a8af0-3cc71e17eacmr12381751637.31.1786762248893;
+        Fri, 14 Aug 2026 19:50:48 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141387ac9b1sm14541588c88.2.2026.08.14.15.47.40
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 15:47:40 -0700 (PDT)
+        Fri, 14 Aug 2026 19:50:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 100/109] python3-scapy: upgrade 2.6.1 -> 2.7.0
-Date: Fri, 14 Aug 2026 15:45:26 -0700
-Message-ID: <20260814224539.1523174-100-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-pystemd: add python3-wheel-native to DEPENDS
+Date: Fri, 14 Aug 2026 19:50:34 -0700
+Message-ID: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
-References: <20260814224539.1523174-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 22:47:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129164
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Aug 2026 02:50:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129165
 
-Bump to the v2.7.0 tag. Rebase the ptest ICMPv6 skip patch: upstream
-added a "needs_root" tag to the "Sending and receiving an
-ICMPv6EchoRequest" test's tag line in test/regression.uts, so the
-"skipped_ptest" tag now needs to be appended after "needs_root"
-rather than replacing the whole line. With this rebase both hunks
-apply with offset only (no fuzz).
+setuptools3.bbclass and python_setuptools_build_meta.bbclass no longer
+add python3-wheel-native to DEPENDS by default, following oe-core
+commit e546c697b7 ("classes/setuptools3: remove wheel dependency"),
+since setuptools >= 70.1.0 no longer needs the external wheel package
+to build a wheel.
 
-Build-verified: python3-scapy builds and packages (including
--ptest) successfully.
+This recipe's pyproject.toml/setup.py still declares wheel as a build
+requirement, so pyproject-build's --no-isolation dependency check now
+    fails:
 
-AI-Generated: Uses Claude Code
+      ERROR Unmet dependencies (checked against .../recipe-sysroot-native/usr/bin/nativepython3):
+            wheel
+                    wanted: any
+                    found: not installed
+
+Add python3-wheel-native to DEPENDS directly to satisfy it.
+
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...01-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch | 4 ++--
- .../python/{python3-scapy_2.6.1.bb => python3-scapy_2.7.0.bb} | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-devtools/python/{python3-scapy_2.6.1.bb => python3-scapy_2.7.0.bb} (98%)
+ meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-devtools/python/python3-scapy/0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch b/meta-networking/recipes-devtools/python/python3-scapy/0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch
-index 68e5cf5b45..74c9ebb660 100644
---- a/meta-networking/recipes-devtools/python/python3-scapy/0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch
-+++ b/meta-networking/recipes-devtools/python/python3-scapy/0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch
-@@ -43,8 +43,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-      sck.close()
- 
-  = Sending and receiving an ICMPv6EchoRequest
---~ netaccess ipv6
--+~ netaccess ipv6 skipped_ptest
-+-~ netaccess ipv6 needs_root
-++~ netaccess ipv6 needs_root skipped_ptest
-  def _test():
-      with no_debug_dissector():
-          x = sr1(IPv6(dst="www.google.com")/ICMPv6EchoRequest(),timeout=3)
-diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.6.1.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-similarity index 98%
-rename from meta-networking/recipes-devtools/python/python3-scapy_2.6.1.bb
-rename to meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-index 0c547a53ce..c21d2eb0e3 100644
---- a/meta-networking/recipes-devtools/python/python3-scapy_2.6.1.bb
-+++ b/meta-networking/recipes-devtools/python/python3-scapy_2.7.0.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- # If you want ptest support, use the git repo
- # UTscapy does not exist in the pypi pkg
- #
--SRCREV = "8e08cbf759de6709a5b4af6bea3655d293129bb4"
-+SRCREV = "1de09fe85fe5c9d60ea5c6de130374e170b5bc28"
- SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v${PV} \
-            file://0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch \
-            file://run-ptest"
+diff --git a/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb b/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
+index b987007e39..9aec45aeeb 100644
+--- a/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
+
+ SRC_URI[sha256sum] = "3533f6d287a1ffe39dbfffcf2f547454bb8ef7a169ac6a24e81f446ddb258802"
+
+-DEPENDS = "systemd"
++DEPENDS = "python3-wheel-native systemd"
+ RDEPENDS:${PN} += "\
+     python3-xml \
+     python3-lxml \
 
