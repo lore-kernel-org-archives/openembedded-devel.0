@@ -1,123 +1,636 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1438DC5DF75
-	for <webhook@archiver.kernel.org>; Sat, 15 Aug 2026 02:51:02 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2465.1786762254300760921
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4D63C5B572
+	for <webhook@archiver.kernel.org>; Sun, 16 Aug 2026 10:43:45 +0000 (UTC)
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7800.1786877016262554988
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2026 19:50:54 -0700
+ Sun, 16 Aug 2026 03:43:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=L4/N6aVX;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-38d489b6b71so1827526a91.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2026 19:50:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hYDTFQNp;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-cbeea240819so1286928a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Aug 2026 03:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786762254; x=1787367054; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=iGCJtvMuknmomRi3nfpQCqLb/Oi0a6tg351AuOahgBg=;
-        b=L4/N6aVX+ZGBX4WY1VPYBY5peGQM8MzSVxRymBKC78WVBrT1XNaVBjpUn4Q4dZLB6a
-         mlTi5URaqXv491G+Ecp4KUM0nkM4J9wyv/+sd+Twu8spdENdHEuCcf76exYSAyvNZjN0
-         ZTOlMbqXojMXmtsuA6HVf8j/UWa/sUp5H+FG1T/tyBxcWbGqQiMWNw0LaP+OZIeE/13/
-         77ypUg76ELz1ShQsjU13DVngWbM6fSsQQ+gfVgOZ8fYWJAIYGf2A9UCgIwHJ0NNfl3Sf
-         HHOmW4W53h6eMFCroNRlbd3VMJ+bj64ltzBLJzoVMka8Qbie49T/+qvo/V54msAPvkBE
-         xyMA==
+        d=gmail.com; s=20251104; t=1786877015; x=1787481815; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=XDhHzXlOTO59xuQpyN388ocFeGUo0X6ekRuhTcyYaXE=;
+        b=hYDTFQNp5XQPpnijQQma934vhd5Y2Cl2zIYPsDlHm+Al7+ug1Ny6f59Q7DXPC5JuVd
+         4i4qT2WG6xfsiJGpt3r9ueCy5WtoY7ohKTYLjTx7DqNL68HvCGFq2xt5bvrrWSMJTYWq
+         1T2GwvK45zzhCkSkjSbeCrJTfslJOLhzS2m53HnEv0dX87o7F6HAnwrH00j05hI71+74
+         vOHRKsk+Aef3QDM24eEjTMM3GpLN8XiBxwiKQHU0XAU5SerWbGtz8meidNaVq5jH1fqz
+         DM6rDcb1cNZEIh+NOzX7mQnzjZUKDhDp5CziTdZPXLYrqjeEpc8pWQ7ai3hmeDid9rxB
+         dS5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786762254; x=1787367054;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=iGCJtvMuknmomRi3nfpQCqLb/Oi0a6tg351AuOahgBg=;
-        b=rE+Kv71RDlEAudu5HfgRWl2vGYnK5VJu6CiZNlealWEwN4Pg21LHObMKFBtaHCiZIS
-         QXb1xuF0DJVAUcqzClnVYql9zrzxpzi7dYpY6utFlLMBITD9sqNhYKmpjQFrmVSGyyNt
-         H/A+Y+MhMMnlzrxOCNvKV1wsjP+O+UXwTOu1kK40Uw3ukJcMvCR1J+j/EGlu8UudnbgJ
-         B7FRK+DpZgVGjARHW6AfRpE5CBG9N79tGgHDnXkrRm/bC2kkQST6/pt30pCE/r+ZD7xN
-         xEGYSms8JF1fa7PXLqcN/c0o4LbXx4J3maZ9+uXOMOFZ7f6gvXB0VJemCmDon9sUGdI3
-         TvKA==
-X-Gm-Message-State: AOJu0YzjjcNHutpmb0jcTO1qowijedbJXd4KElXtzmOgpAWfib1ZcR+b
-	hhWuiBg74FoK1tMZsgjZniW8DFVzusVRNvszUZhe6mJ0JoOV8zeLNo7TbhuRqx7b
-X-Gm-Gg: AR+sD116oaYuhVseR0zLHFvBcugP/pNCTopSTlumwnk+FYbWqg00LJkIbUO+/iuIOH3
-	wrGxRhQVsaezFdHa6wVjRTYWK93auzyofYMhQPXnlPsc2vRfFS4Gku8b2dJ/O9JN3IF2tPS8mZf
-	lcJqXfPqKbdk8fJp/NROH+gFs9Cv3IepKaqIt8wvUcL7qAoCNZPZ1on22e9WFrynIBe1LZ6Kij+
-	GntLiPlpBMHQcZWyHCVS/b/vSa4IgXdyXWOZib+qXo71DSuxVSLdiyXA+ksZIIGnj+f4CeTOoJ4
-	7h3Q1XYhTKuAXGQbnuMkbwatFYESAabtDTdldZp+Ars0cZShDvRtJJD5a/C5qWwh8aJoCjwzKB4
-	A2yzo9z5RYHxP+23bqBEjDOgGzfSDqUp2Yh9vHxpTD0H6/WMR4KuL3h9Qay5X1HcqHBC/QHVR6A
-	7w3b51Oz3SxTE4WWbveasdrF4EDhGJgjTZzcq51L/ZWpz3NL3cLt0h/JH95eq2gTvOUEPWR/uwJ
-	T++/SIY5T4HoEkr0QKTzJr1lO4fc4QUtsFm0hUd7fo2SVg+qQxjDF7HZtIix3aFYsXBY1v6/Q8a
-	6n1PpNcTJjO/qrXhDn9Uaha8G/qEusRzeb10/INRfqlB058C5kFzDErQRt4tu0574xedeFvEUrw
-	SV5bQkKv88XTzRp0mRqJekQBlLR07nhnbYYSeHocHLyL7YA==
-X-Received: by 2002:a17:90b:558d:b0:38e:542:6485 with SMTP id 98e67ed59e1d1-3933b8fc711mr11667866a91.12.1786762253578;
-        Fri, 14 Aug 2026 19:50:53 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-323050db573sm5153181eec.9.2026.08.14.19.50.52
+        d=1e100.net; s=20251104; t=1786877015; x=1787481815;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=XDhHzXlOTO59xuQpyN388ocFeGUo0X6ekRuhTcyYaXE=;
+        b=AE4WTe/4n9ShXSx9aBHiXtxOtVcrWaoNg4MDFrZdVF2nhEpE3kzSGdtVoLsYvcEpw3
+         BOmEJkGP8qT/k+1EdQOdWyaTJ23IfHuYXys+iXwxF4zVE+fK5vVRK0XQvK+xtyOEWj3v
+         1wDyWLBUYL+SQfxj/gbTS6eGVSCrTQ+qc32n59ZHmSK3E0FBMaxJKZf6Xaa5kTbnSJVg
+         tOvA7v/sxfC1RfqwgugUSdB8RWBtN4GU/FcI2WkKLzhVO85JqKNrhOpV5XPN/49MZtvV
+         0ZYpKSkCT+9PBf86aYxzKx3gpbMJ3UkJ3CBC1tXRZtlVMJEdA4a76LxtG5W/iwJLxr2f
+         Novw==
+X-Gm-Message-State: AOJu0YzpZ3c8ENJXNQ97JqjPv0JnnDD+3EX5yt7KD7bny4Z1xBMaZ+sU
+	bEXsLqmhOZ/g2wwoXZY/05j3YHRn4oXpdIc981WOXlBUmdONWVaCCGRqJNTnRykt
+X-Gm-Gg: AR+sD12lRSI3o8idgwo325Ae8rPw5MPdFe0NTIW1gXbycKPHca2YD+HK1+KgFNwAw/m
+	zBevNVZ2sQwE92ToVs5yIVd+j3fFyqVni3XdefdUnIgIhqSMJxxnbuTNPLTUCUXCKadWVTlzCSI
+	smkmy51E2vUTFwudnpbK37vNmmAlyunUYQMxf75teofaTL0p1Q55sTncijrG46q2DrE4ceHdwEj
+	+i2r9Q6njLdGt/WpDU5LSJ9lLmZ/ZoeLPWTq51VrfenANVAWWHRy0HbG3m6+dpDVRZfrTzMw+ff
+	ceASdd4VY7dJJbQ6Efet4raBNU9NQ+hkQfTJFEWRkijxydjOa5KqlWuCYZXOl/aYqFbKth2hpEw
+	maVeX8Ct6RtESHe4L1aZwUrvuOuA+T8xTmxuHDTLPpw1YyXcRH+xcTfvbTeS87PU5B2Wb0t9+Es
+	AWVL5qm4ukqmqtTp5zp/nKmYAd0yLh2LiVrE1Cyo0mX2wvkp62LIP3euDt8f/0VUhqmXLD6J3FD
+	A==
+X-Received: by 2002:a05:6a20:2588:b0:3c3:c3fb:2473 with SMTP id adf61e73a8af0-3cc71cca121mr17940736637.20.1786877015295;
+        Sun, 16 Aug 2026 03:43:35 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320d5bd9fe0sm39953539eec.1.2026.08.16.03.43.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 19:50:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Sun, 16 Aug 2026 03:43:34 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 104/109] samba: upgrade 4.23.8 -> 4.23.11
-Date: Fri, 14 Aug 2026 19:50:38 -0700
-Message-ID: <20260815025044.437694-5-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
-References: <20260815025044.437694-1-khem.raj@oss.qualcomm.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH v2 1/1] jsoncpp: upgrade 1.9.5 -> 1.9.7
+Date: Sun, 16 Aug 2026 22:43:19 +1200
+Message-ID: <20260816104319.1670683-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Aug 2026 02:51:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129169
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Aug 2026 10:43:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129175
 
-Stay within the 4.23.x stable series (do not touch the sibling
-talloc/tdb/tevent/ldb recipes). This picks up two intervening point
-releases:
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-- 4.23.9: bug-fix release (use-after-free in ACL claims/conditions
-  handling, CTDB read-only record use-after-free/resource leak, RODC
-  auth fixes, among others).
-- 4.23.10: security release fixing CVE-2026-6949 (TSIG/DNS OOB write
-  crash), CVE-2026-58216 (KDC kpasswd OOB read crash),
-  CVE-2026-58218 (DNS TKEY cache-flood DoS), CVE-2026-58221 (LDAP
-  privilege escalation via internal LDB special DNs),
-  CVE-2026-58222 (LDAP Compare filter used as protected-attribute
-  disclosure oracle) and CVE-2026-58224 (CTDB protocol
-  bounds-checking gaps).
-- 4.23.11: further bug fixes (DRS memory leak, pthreadpool fork race,
-  RODC/NTLMv2 trust fixes, CephFS vfs crashes).
+https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.6
+https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
 
-All 13 existing patches (including the musl-only pam/getpwent_r ones)
-still apply cleanly against 4.23.11 with offset only, no fuzz, so none
-needed to be reworked or dropped. LIC_FILES_CHKSUM for COPYING is
-unchanged.
+Also backport patch to fix C++11 ABI breakage when compiled with C++17.
 
-Build-verified with cleansstate + full build for qemux86-64.
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../samba/{samba_4.23.8.bb => samba_4.23.11.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.23.8.bb => samba_4.23.11.bb} (99%)
+ ...akage-when-compiled-with-C-17-1668-1.patch | 525 ++++++++++++++++++
+ .../{jsoncpp_1.9.5.bb => jsoncpp_1.9.7.bb}    |   6 +-
+ 2 files changed, 529 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
+ rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.5.bb => jsoncpp_1.9.7.bb} (82%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-index 3fc3df5471..49599f29f9 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.23.8.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-@@ -39,7 +39,7 @@ SRC_URI:append:libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
-            "
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
+new file mode 100644
+index 0000000000..6125b009d4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
+@@ -0,0 +1,525 @@
++From 2e27e4d666798437b95bf3600b4a58450cc4ae20 Mon Sep 17 00:00:00 2001
++From: Jordan Bayles <bayles.jordan@gmail.com>
++Date: Thu, 9 Apr 2026 10:37:08 -0700
++Subject: [PATCH] Fix C++11 ABI breakage when compiled with C++17 #1668 (#1675)
++
++* ci: suppress Node 20 deprecation and missing python-version warnings
++
++- Injects `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true` in all workflows to
++  opt-in to Node.js 24 and suppress the deprecation warnings from
++  multiple GitHub Actions.
++- Specifies `python-version: '3.x'` for `actions/setup-python@v5` in
++  `meson.yml` to fix the missing input warning.
++
++* Fix C++11 ABI breakage when compiled with C++17 (#1668)
++
++When JSONCPP_HAS_STRING_VIEW was defined, the library dropped the
++`const char*` and `const String&` overloads for `operator[]`, `get`,
++`removeMember`, and `isMember`, breaking ABI compatibility for projects
++consuming the library with C++11.
++
++This change unconditionally declares and defines the legacy overloads
++so they are always exported, restoring compatibility.
++
++* ci: add ABI compatibility matrix workflow
++
++This adds a new GitHub Actions workflow to verify ABI compatibility across C++ standard boundaries. It explicitly tests the scenario where JsonCpp is built with one standard (e.g., C++11) and consumed by an application built with a newer one (e.g., C++23), and vice versa.
++
++To facilitate testing the specific `std::string_view` boundary that is conditionally compiled, a new `stringView` demo application has been added to the `example/` directory and is consumed directly by the CI matrix to ensure standard library symbols link correctly across standard versions, build types (shared/static), and operating systems.
++
++* fix: inline std::string_view methods to prevent ABI breaks
++
++This commit completely eliminates the ABI breakage that occurs across C++ standard boundaries when using `std::string_view`.
++
++Previously, when the library was built with C++17+, CMake would leak `JSONCPP_HAS_STRING_VIEW=1` as a PUBLIC definition. A C++11 consumer would receive this definition, attempt to parse the header, and fail with compiler errors because `std::string_view` is not available in their environment.
++
++Conversely, if the library was built in C++11 (without `string_view` symbols), a C++17 consumer would naturally define `JSONCPP_HAS_STRING_VIEW` based on `__cplusplus` inside `value.h`. The consumer would then call the declared `string_view` methods, resulting in linker errors because the methods weren't compiled into the library.
++
++By moving all `std::string_view` overloads directly into `value.h` as `inline` methods that delegate to the fundamental `const char*, const char*` methods:
++1. The consumer's compiler dictates whether the overloads are visible (via `__cplusplus >= 201703L`).
++2. The consumer compiles the inline wrappers locally, removing any reliance on the library's exported symbols for `std::string_view`.
++3. CMake no longer needs to pollute the consumer's environment with PUBLIC compile definitions.
++
++* run clang format
++
++* finish clang format
++
++(cherry picked from commit c67034e4b4c722579ee15fddb8e4af8f04252b08)
++
++Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncpp/commit/c67034e4b4c722579ee15fddb8e4af8f04252b08]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ .github/workflows/abi-compatibility.yml | 79 +++++++++++++++++++++++++
++ example/BUILD.bazel                     |  6 ++
++ example/CMakeLists.txt                  |  1 +
++ example/stringView/stringView.cpp       | 29 +++++++++
++ include/json/value.h                    | 54 +++++++++++------
++ src/lib_json/CMakeLists.txt             |  9 ---
++ src/lib_json/json_value.cpp             | 66 ---------------------
++ 7 files changed, 151 insertions(+), 93 deletions(-)
++ create mode 100644 .github/workflows/abi-compatibility.yml
++ create mode 100644 example/stringView/stringView.cpp
++
++diff --git a/.github/workflows/abi-compatibility.yml b/.github/workflows/abi-compatibility.yml
++new file mode 100644
++index 0000000..881c4e8
++--- /dev/null
+++++ b/.github/workflows/abi-compatibility.yml
++@@ -0,0 +1,79 @@
+++name: ABI Compatibility
+++
+++on: [check_run, push, pull_request]
+++
+++env:
+++  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+++
+++jobs:
+++  abi-compatibility:
+++    runs-on: ${{ matrix.os }}
+++
+++    strategy:
+++      fail-fast: false
+++      matrix:
+++        os: [ubuntu-latest, windows-latest, macos-latest]
+++        shared_libs: [ON, OFF]
+++        include:
+++          - jsoncpp_std: 11
+++            app_std: 23
+++          - jsoncpp_std: 23
+++            app_std: 11
+++
+++    steps:
+++      - name: checkout project
+++        uses: actions/checkout@v4
+++
+++      - name: build and install JsonCpp (C++${{ matrix.jsoncpp_std }})
+++        shell: bash
+++        run: |
+++          mkdir build-jsoncpp
+++          cd build-jsoncpp
+++          cmake .. -DCMAKE_CXX_STANDARD=${{ matrix.jsoncpp_std }} \
+++                   -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+++                   -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install-jsoncpp \
+++                   -DBUILD_SHARED_LIBS=${{ matrix.shared_libs }} \
+++                   -DJSONCPP_WITH_TESTS=OFF
+++          cmake --build . --config Release
+++          cmake --install . --config Release
+++
+++      - name: create example app
+++        shell: bash
+++        run: |
+++          mkdir example-app
+++          cat << 'EOF' > example-app/CMakeLists.txt
+++          cmake_minimum_required(VERSION 3.10)
+++          project(abi_test)
+++
+++          find_package(jsoncpp REQUIRED CONFIG)
+++
+++          add_executable(abi_test stringView.cpp)
+++          target_link_libraries(abi_test PRIVATE JsonCpp::JsonCpp)
+++          EOF
+++
+++          cp $GITHUB_WORKSPACE/example/stringView/stringView.cpp example-app/stringView.cpp
+++
+++      - name: build example app (C++${{ matrix.app_std }})
+++        shell: bash
+++        run: |
+++          cd example-app
+++          mkdir build
+++          cd build
+++          cmake .. -DCMAKE_CXX_STANDARD=${{ matrix.app_std }} \
+++                   -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+++                   -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/install-jsoncpp
+++          cmake --build . --config Release
+++
+++      - name: run example app
+++        shell: bash
+++        run: |
+++          if [ "$RUNNER_OS" == "Windows" ]; then
+++            export PATH=$GITHUB_WORKSPACE/install-jsoncpp/bin:$PATH
+++            ./example-app/build/Release/abi_test.exe
+++          elif [ "$RUNNER_OS" == "macOS" ]; then
+++            export DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/install-jsoncpp/lib:$DYLD_LIBRARY_PATH
+++            ./example-app/build/abi_test
+++          else
+++            export LD_LIBRARY_PATH=$GITHUB_WORKSPACE/install-jsoncpp/lib:$LD_LIBRARY_PATH
+++            ./example-app/build/abi_test
+++          fi
++diff --git a/example/BUILD.bazel b/example/BUILD.bazel
++index ebbd0b5..3581308 100644
++--- a/example/BUILD.bazel
+++++ b/example/BUILD.bazel
++@@ -33,3 +33,9 @@ cc_binary(
++     srcs = ["stringWrite/stringWrite.cpp"],
++     deps = ["//:jsoncpp"],
++ )
+++
+++cc_binary(
+++    name = "stringView",
+++    srcs = ["stringView/stringView.cpp"],
+++    deps = ["//:jsoncpp"],
+++)
++diff --git a/example/CMakeLists.txt b/example/CMakeLists.txt
++index 230d1bd..0666db7 100644
++--- a/example/CMakeLists.txt
+++++ b/example/CMakeLists.txt
++@@ -4,6 +4,7 @@ set(EXAMPLES
++     readFromStream
++     stringWrite
++     streamWrite
+++    stringView
++ )
++ add_definitions(-D_GLIBCXX_USE_CXX11_ABI)
++ 
++diff --git a/example/stringView/stringView.cpp b/example/stringView/stringView.cpp
++new file mode 100644
++index 0000000..b5e33e9
++--- /dev/null
+++++ b/example/stringView/stringView.cpp
++@@ -0,0 +1,29 @@
+++#include "json/json.h"
+++#include <cstdlib>
+++#include <iostream>
+++
+++#if defined(JSONCPP_HAS_STRING_VIEW)
+++#include <string_view>
+++#endif
+++
+++/**
+++ * \brief Example using std::string_view with JsonCpp.
+++ */
+++int main() {
+++  Json::Value root;
+++  root["key"] = "value";
+++
+++#if defined(JSONCPP_HAS_STRING_VIEW)
+++  std::cout << "Has string_view support" << std::endl;
+++  std::string_view sv("key");
+++  if (root.isMember(sv)) {
+++    std::cout << root[sv].asString() << std::endl;
+++  }
+++#else
+++  std::cout << "No string_view support" << std::endl;
+++  if (root.isMember("key")) {
+++    std::cout << root["key"].asString() << std::endl;
+++  }
+++#endif
+++  return EXIT_SUCCESS;
+++}
++diff --git a/include/json/value.h b/include/json/value.h
++index f32f456..2007e6b 100644
++--- a/include/json/value.h
+++++ b/include/json/value.h
++@@ -357,7 +357,8 @@ public:
++   Value(const StaticString& value);
++   Value(const String& value);
++ #ifdef JSONCPP_HAS_STRING_VIEW
++-  Value(std::string_view value);
+++  inline Value(std::string_view value)
+++      : Value(value.data(), value.data() + value.length()) {}
++ #endif
++   Value(bool value);
++   Value(std::nullptr_t ptr) = delete;
++@@ -405,7 +406,14 @@ public:
++   /** Get string_view of string-value.
++    *  \return false if !string. (Seg-fault if str is NULL.)
++    */
++-  bool getString(std::string_view* str) const;
+++  inline bool getString(std::string_view* str) const {
+++    char const* begin;
+++    char const* end;
+++    if (!getString(&begin, &end))
+++      return false;
+++    *str = std::string_view(begin, static_cast<size_t>(end - begin));
+++    return true;
+++  }
++ #endif
++   Int asInt() const;
++   UInt asUInt() const;
++@@ -496,12 +504,19 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Access an object value by name, create a null member if it does not exist.
++   /// \param key may contain embedded nulls.
++-  Value& operator[](std::string_view key);
+++  inline Value& operator[](std::string_view key) {
+++    return resolveReference(key.data(), key.data() + key.length());
+++  }
++   /// Access an object value by name, returns null if there is no member with
++   /// that name.
++   /// \param key may contain embedded nulls.
++-  const Value& operator[](std::string_view key) const;
++-#else
+++  inline const Value& operator[](std::string_view key) const {
+++    Value const* found = find(key.data(), key.data() + key.length());
+++    if (!found)
+++      return nullSingleton();
+++    return *found;
+++  }
+++#endif
++   /// Access an object value by name, create a null member if it does not exist.
++   /// \note Because of our implementation, keys are limited to 2^30 -1 chars.
++   /// Exceeding that will cause an exception.
++@@ -516,7 +531,6 @@ public:
++   /// that name.
++   /// \param key may contain embedded nulls.
++   const Value& operator[](const String& key) const;
++-#endif
++   /** \brief Access an object value by name, create a null member if it does not
++    * exist.
++    *
++@@ -533,8 +547,10 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++-  Value get(std::string_view key, const Value& defaultValue) const;
++-#else
+++  inline Value get(std::string_view key, const Value& defaultValue) const {
+++    return get(key.data(), key.data() + key.length(), defaultValue);
+++  }
+++#endif
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++   Value get(const char* key, const Value& defaultValue) const;
++@@ -542,7 +558,6 @@ public:
++   /// \note deep copy
++   /// \param key may contain embedded nulls.
++   Value get(const String& key, const Value& defaultValue) const;
++-#endif
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++   /// \note key may contain embedded nulls.
++@@ -588,13 +603,14 @@ public:
++   /// \pre type() is objectValue or nullValue
++   /// \post type() is unchanged
++ #if JSONCPP_HAS_STRING_VIEW
++-  void removeMember(std::string_view key);
++-#else
+++  inline void removeMember(std::string_view key) {
+++    removeMember(key.data(), key.data() + key.length(), nullptr);
+++  }
+++#endif
++   void removeMember(const char* key);
++   /// Same as removeMember(const char*)
++   /// \param key may contain embedded nulls.
++   void removeMember(const String& key);
++-#endif
++   /** \brief Remove the named map member.
++    *
++    *  Update 'removed' iff removed.
++@@ -602,13 +618,14 @@ public:
++    *  \return true iff removed (no exceptions)
++    */
++ #if JSONCPP_HAS_STRING_VIEW
++-  bool removeMember(std::string_view key, Value* removed);
++-#else
+++  inline bool removeMember(std::string_view key, Value* removed) {
+++    return removeMember(key.data(), key.data() + key.length(), removed);
+++  }
+++#endif
++   bool removeMember(String const& key, Value* removed);
++   /// Same as removeMember(const char* begin, const char* end, Value* removed),
++   /// but 'key' is null-terminated.
++   bool removeMember(const char* key, Value* removed);
++-#endif
++   /// Same as removeMember(String const& key, Value* removed)
++   bool removeMember(const char* begin, const char* end, Value* removed);
++   /** \brief Remove the indexed array element.
++@@ -622,15 +639,16 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Return true if the object has a member named key.
++   /// \param key may contain embedded nulls.
++-  bool isMember(std::string_view key) const;
++-#else
+++  inline bool isMember(std::string_view key) const {
+++    return isMember(key.data(), key.data() + key.length());
+++  }
+++#endif
++   /// Return true if the object has a member named key.
++   /// \note 'key' must be null-terminated.
++   bool isMember(const char* key) const;
++   /// Return true if the object has a member named key.
++   /// \param key may contain embedded nulls.
++   bool isMember(const String& key) const;
++-#endif
++   /// Same as isMember(String const& key)const
++   bool isMember(const char* begin, const char* end) const;
++ 
++diff --git a/src/lib_json/CMakeLists.txt b/src/lib_json/CMakeLists.txt
++index 03e9335..a0695e9 100644
++--- a/src/lib_json/CMakeLists.txt
+++++ b/src/lib_json/CMakeLists.txt
++@@ -131,9 +131,6 @@ if(BUILD_SHARED_LIBS)
++ 
++     target_compile_features(${SHARED_LIB} PUBLIC ${REQUIRED_FEATURES})
++ 
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${SHARED_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++ 
++     target_include_directories(${SHARED_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++@@ -168,9 +165,6 @@ if(BUILD_STATIC_LIBS)
++ 
++     target_compile_features(${STATIC_LIB} PUBLIC ${REQUIRED_FEATURES})
++ 
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${STATIC_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++ 
++     target_include_directories(${STATIC_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++@@ -198,9 +192,6 @@ if(BUILD_OBJECT_LIBS)
++ 
++     target_compile_features(${OBJECT_LIB} PUBLIC ${REQUIRED_FEATURES})
++ 
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${OBJECT_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++ 
++     target_include_directories(${OBJECT_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++diff --git a/src/lib_json/json_value.cpp b/src/lib_json/json_value.cpp
++index 74f7789..a8eb72d 100644
++--- a/src/lib_json/json_value.cpp
+++++ b/src/lib_json/json_value.cpp
++@@ -441,14 +441,6 @@ Value::Value(const String& value) {
++       value.data(), static_cast<unsigned>(value.length()));
++ }
++ 
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-Value::Value(std::string_view value) {
++-  initBasic(stringValue, true);
++-  value_.string_ = duplicateAndPrefixStringValue(
++-      value.data(), static_cast<unsigned>(value.length()));
++-}
++-#endif
++-
++ Value::Value(const StaticString& value) {
++   initBasic(stringValue);
++   value_.string_ = const_cast<char*>(value.c_str());
++@@ -656,21 +648,6 @@ bool Value::getString(char const** begin, char const** end) const {
++   return true;
++ }
++ 
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::getString(std::string_view* str) const {
++-  if (type() != stringValue)
++-    return false;
++-  if (value_.string_ == nullptr)
++-    return false;
++-  const char* begin;
++-  unsigned length;
++-  decodePrefixedString(this->isAllocated(), this->value_.string_, &length,
++-                       &begin);
++-  *str = std::string_view(begin, length);
++-  return true;
++-}
++-#endif
++-
++ String Value::asString() const {
++   switch (type()) {
++   case nullValue:
++@@ -1190,17 +1167,6 @@ Value* Value::demand(char const* begin, char const* end) {
++                       "objectValue or nullValue");
++   return &resolveReference(begin, end);
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-const Value& Value::operator[](std::string_view key) const {
++-  Value const* found = find(key.data(), key.data() + key.length());
++-  if (!found)
++-    return nullSingleton();
++-  return *found;
++-}
++-Value& Value::operator[](std::string_view key) {
++-  return resolveReference(key.data(), key.data() + key.length());
++-}
++-#else
++ const Value& Value::operator[](const char* key) const {
++   Value const* found = find(key, key + strlen(key));
++   if (!found)
++@@ -1221,7 +1187,6 @@ Value& Value::operator[](const char* key) {
++ Value& Value::operator[](const String& key) {
++   return resolveReference(key.data(), key.data() + key.length());
++ }
++-#endif
++ 
++ Value& Value::operator[](const StaticString& key) {
++   return resolveReference(key.c_str());
++@@ -1261,18 +1226,12 @@ Value Value::get(char const* begin, char const* end,
++   Value const* found = find(begin, end);
++   return !found ? defaultValue : *found;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-Value Value::get(std::string_view key, const Value& defaultValue) const {
++-  return get(key.data(), key.data() + key.length(), defaultValue);
++-}
++-#else
++ Value Value::get(char const* key, Value const& defaultValue) const {
++   return get(key, key + strlen(key), defaultValue);
++ }
++ Value Value::get(String const& key, Value const& defaultValue) const {
++   return get(key.data(), key.data() + key.length(), defaultValue);
++ }
++-#endif
++ 
++ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
++   if (type() != objectValue) {
++@@ -1288,31 +1247,13 @@ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
++   value_.map_->erase(it);
++   return true;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::removeMember(std::string_view key, Value* removed) {
++-  return removeMember(key.data(), key.data() + key.length(), removed);
++-}
++-#else
++ bool Value::removeMember(const char* key, Value* removed) {
++   return removeMember(key, key + strlen(key), removed);
++ }
++ bool Value::removeMember(String const& key, Value* removed) {
++   return removeMember(key.data(), key.data() + key.length(), removed);
++ }
++-#endif
++-
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-void Value::removeMember(std::string_view key) {
++-  JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
++-                      "in Json::Value::removeMember(): requires objectValue");
++-  if (type() == nullValue)
++-    return;
++ 
++-  CZString actualKey(key.data(), unsigned(key.length()),
++-                     CZString::noDuplication);
++-  value_.map_->erase(actualKey);
++-}
++-#else
++ void Value::removeMember(const char* key) {
++   JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
++                       "in Json::Value::removeMember(): requires objectValue");
++@@ -1323,7 +1264,6 @@ void Value::removeMember(const char* key) {
++   value_.map_->erase(actualKey);
++ }
++ void Value::removeMember(const String& key) { removeMember(key.c_str()); }
++-#endif
++ 
++ bool Value::removeIndex(ArrayIndex index, Value* removed) {
++   if (type() != arrayValue) {
++@@ -1353,18 +1293,12 @@ bool Value::isMember(char const* begin, char const* end) const {
++   Value const* value = find(begin, end);
++   return nullptr != value;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::isMember(std::string_view key) const {
++-  return isMember(key.data(), key.data() + key.length());
++-}
++-#else
++ bool Value::isMember(char const* key) const {
++   return isMember(key, key + strlen(key));
++ }
++ bool Value::isMember(String const& key) const {
++   return isMember(key.data(), key.data() + key.length());
++ }
++-#endif
++ 
++ Value::Members Value::getMemberNames() const {
++   JSON_ASSERT_MESSAGE(
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.5.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+similarity index 82%
+rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.5.bb
+rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+index c54dc94666..29b15d875a 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.5.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+@@ -13,8 +13,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
  
--SRC_URI[sha256sum] = "976129847456dc5b78c00f8ffb79dc605c49d6aaca8b2aa772fd22dbb69fae01"
-+SRC_URI[sha256sum] = "089fdeeaf83593d8f9a16847a86b6cad2fc90f7a893eb8d9d5f509bbecadc0d4"
+ PE = "1"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
+-SRCREV = "5defb4ed1a4293b8e2bf641e16b156fb9de498cc"
+-SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
++SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
++SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https \
++           file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch \
++"
+ 
+ S = "${WORKDIR}/git"
  
 
