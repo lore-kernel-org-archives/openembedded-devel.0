@@ -2,79 +2,77 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9646FC5DF88
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E412BC5DF81
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:35 +0000 (UTC)
 Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.15269.1787076932678337791
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 18 Aug 2026 11:15:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=HRqVzg13;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=RAoE9977;
  spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=17749; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=13606; q=dns/txt;
   s=iport01; t=1787076933; x=1788286533;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tIi1ecQret2PZxj1hPykSVCVZDc9ShWXrl6glxFSiBg=;
-  b=HRqVzg13dSbLk1kM7/GHqNh6kcNNBMN1qX8KNr20+zLJWVOUfJfVKJ/D
-   hPxW/dsiCS7YVwJXxAUP46DnaUQi2ZJ/234cnmkGlekGES+OuJncW0tlO
-   KFDlX4zc0jyTq5ggQRnVDkltY4/x0HMLdpMaKVv2+umGvKz8y+qqGIEod
-   BzMr45468rT1u80eZEM9UK8sA1rd9u5Z5vI22kvjCuvP7d0vXOPkJXR4w
-   Sf66K59DcW2WvJtq2GPBbOJMtGV/0eiyMK+2pNYCcr1o+rma6PBfOSsiz
-   8DuKb5OLS4P/56nsWSVex2bQwPJiuFUiWGV5j9FfBrZJ4aUXYf6NH5DLt
-   Q==;
-X-CSE-ConnectionGUID: DoBhYFjCR2677E2pQRt1nQ==
-X-CSE-MsgGUID: ypfpMjD+TfmBVpBi432w9g==
-X-IPAS-Result: =?us-ascii?q?A0BLAgDJn4Rq/44QJK1aHgEBCxIMggULgld0XkNJhFeRB?=
- =?us-ascii?q?2wDnhuBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBAQEBC?=
- =?us-ascii?q?wEBBQEBAQIBBwWBDhOGTw2GWgECAQMjBAsBGAEtEBwDAQIDAiYCAisdAQUIG?=
- =?us-ascii?q?YMCAYJ0AxEGxBl6fzOBAYMoAUNBUNswAQsUAQWBBS6FP4MfAYUCXRgBhHwnG?=
- =?us-ascii?q?xuBcoEVg2mBBYFcAgKBSINxgmoEgiKBDIFagS2QKUiBAhwDWSwBVRMNCgsHB?=
- =?us-ascii?q?YFmAzUSKhVuMh2BIz4XNVgbBgWBHYEohDcjGTZ6gQlegSsqYQESF4EJggoCg?=
- =?us-ascii?q?nOCBgIBSUUOCxgNSBEsNxQZBD0BbgeOOCCCQ2EtASkBAQR7EnoCGgUODgIcF?=
- =?us-ascii?q?JMij2WCIYE1n1oKKIN2jCGVOhozhASBV5JAklELmH2JAYI2glOWAFCEaYFoP?=
- =?us-ascii?q?IFZcBU7gmcJShkPjgsjCguDYIUTUcZVJzICCTIBAQcCBw4DC4FokAEBJgeBT?=
- =?us-ascii?q?wEB?=
-IronPort-Data: A9a23:/dnkNaMIIgy6FznvrR30lsFynXyQoLVcMsEvi/4bfWQNrUomhj0Om
- mEfWmGPaPffMTf3KdxxYN/n9ExU65TVn4NlTHM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WV7lV
- e/a+ZWFZgf1gmEsaQr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj69lpJkEHE48zwLwpXj5jr
- +QhEixUaCnW0opawJrjIgVtrs0nKM+uOMYUvWttiGmES/0nWpvEBa7N4Le03h9p2ZsIRqiYP
- pRfMGY1BPjDS0Un1lM/BJEzmO6pl3DXeDxDo1XTrq0yi4TW5FwoieG1YIuOJLRmQ+1EhkiAg
- 2DqvFj3BzskLPaelWHf7SOj07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYVX95WVul/4waXx++MvkCSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:3zBYhKDD+43g/3LlHely55DYdb4zR+YMi2TDGXofdfUzSL3/qy
- nOpoV96faaslcssR0b9OxofZPwI080lqQFhbX5Q43DYOCOggLBR+tfBMnZsljd8kbFmNK1u5
- 0NT0FWMqyIMbEDt7eY3CCIV/A93dKA7Kekwc3az3trUEVWTpsI1XYANu5eeXcGPjWvwvECZe
- Gh2vY=
-X-Talos-CUID: =?us-ascii?q?9a23=3ALlv+Rmkk7ReWfJSD6a3feVWxXoTXOVHa5nfhDU2?=
- =?us-ascii?q?TMzw3F+K4E0epwr89lfM7zg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AYkoeQAxVFgJmbu3DxPRb7QKgTZqaqLW2Blgok7l?=
- =?us-ascii?q?Fh8eBHxJoETbB126oE4Byfw=3D=3D?=
+  bh=Zoaup8cpMWLANorYOCcsY/i0tfPtLcfqVXEHNbSL2Z4=;
+  b=RAoE9977rw2sMaq5q3b2Kgh0L3cbegQXToHwlo2JZKVHscaS+yfTe4i4
+   SZE1FXneOii7fQ9OPcqx5OtqTL+u319mMWay9LvF0O4I9mW23Vb40QBGL
+   cf1/73ayU0KwquYsqsfMQcFkrtSc2fS8yj+RAMzS31QM8OAE/gTrk8L6c
+   oYsHe8yd72sj25tmCI3pWLja2ddUCA4iFcdXV9roJ6MNkl+V6sBJpypRS
+   R5GKeRDJxLnNt6/EitnhFNth4lrgy/T45GfKVJzWaE14ISSUSgECeZYvw
+   hSqJcpbK42iEPGMx5jwNik0+l2RY62ATtJkwjooYehiRP0uRdwFk1rT7b
+   A==;
+X-CSE-ConnectionGUID: aJq2WPfxT2umraSj3qkYBQ==
+X-CSE-MsgGUID: 7GzpsZQ0TZ20nybBkZC6/Q==
+X-IPAS-Result: =?us-ascii?q?A0C4AgDJn4Rq/5UQJK1aHgEBCxIMggULgld0XgoBOEmEV?=
+ =?us-ascii?q?5FzA4ETnQiBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBA?=
+ =?us-ascii?q?QEBCwEBBQEBAQIBBwWBDhOGTw2GWgECAQMjBAsBGAEtEAkTAwECAwImAgIrI?=
+ =?us-ascii?q?wgZgwIBgnQDEah9myJ6fzOBAYMoAYFU2zABCxQBBYEFLoU/gx8BhQJdGAGEf?=
+ =?us-ascii?q?CcbG4FygRWBO4E4doEFgVwCgTiEA4JqBIIigQyBWpFWSIECHANZLAFVEw0KC?=
+ =?us-ascii?q?wcFgWYDNRIqFW4yHYEjPhc1WBsGBYEdgSiENyMZNnqBCV6BKyphARIXgQmCC?=
+ =?us-ascii?q?gKCc4IGAgFJRQ4LGA1IESw3FBkEPQFuB444IIJDgQ4BKgF7gTEckyOSN6EPC?=
+ =?us-ascii?q?iiDdowhlToaM6psC5h9jgqWAFCEaYFoPIFZcBWDIglKGQ+OKg4Lg2DMOScyA?=
+ =?us-ascii?q?gkyAQEHAgcOAwuBaJABgX0BAQ?=
+IronPort-Data: A9a23:V5/R063feYh8h/M/8fbD5YJwkn2cJEfYwER7XKvMYLTBsI5bpzVRm
+ zFMCz2PPfiDZ2Okc9BwYY7j8RtQ6MfTzIRhQAtr3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ Lsen+WFYAX7g24tbTpPg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGBWMvZ7Ig9PZLW3xL7
+ /UjKmsUbSGpvrfjqF67YrEEasULJc3vOsYb/3pn1zycVKxgSpHYSKKM7thdtNsyrpkRRrCFO
+ YxAN3w2MEWojx5nYj/7DLoyn+qsj3juehVTqUmeouw85G27IAlZgOG0aYKFK4DVLSlTthm3t
+ HrdzV2hPiNAbNqOwxCGwFnywdaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl/DQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSj1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:dnXh86pim1GLDp4hzh0Nm+caV5r1eYIsimQD101hICG9vPb2qy
+ nIpoV86faUskd3ZJhOo7G90cW7LE80sKQFg7X5Xo3SODUOxlHJEGgK1+KLqFfd8m/Fh4tgPM
+ xbHZSWZuedMbFSt7eC3ODBKadC/PC3tIa1mOzZ03BhCStua61m8kNFLzzzKDwPeOGDbqBJbq
+ Z1IaF81kGdRUg=
+X-Talos-CUID: =?us-ascii?q?9a23=3AE0mXOWhbXVvW4pbU+6zc4B6iGTJue1/ElkjoLV+?=
+ =?us-ascii?q?EU3tsUrSuSwSJ+5JOqp87?=
+X-Talos-MUID: 9a23:/8JazASha1DVhvHARXSzqyN6L/VRu5icUhgLgJ8suPuva2tJbmI=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,230,1779148800"; 
-   d="scan'208";a="811108936"
-Received: from alln-l-core-05.cisco.com ([173.36.16.142])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:31 +0000
+   d="scan'208";a="811108947"
+Received: from alln-l-core-12.cisco.com ([173.36.16.149])
+  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:32 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-05.cisco.com (Postfix) with ESMTPS id 7C35218000221;
+	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id F13E818000159;
 	Tue, 18 Aug 2026 18:15:31 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 1CB24CCD9B2; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
+	id 38103CD02BE; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 01/10] python3-aiohttp: fix CVE-2026-34993
-Date: Tue, 18 Aug 2026 11:15:19 -0700
-Message-Id: <20260818181528.3405276-2-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 07/10] python3-aiohttp: fix CVE-2026-54277
+Date: Tue, 18 Aug 2026 11:15:25 -0700
+Message-Id: <20260818181528.3405276-8-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260818181528.3405276-1-dkelaiya@cisco.com>
 References: <20260818181528.3405276-1-dkelaiya@cisco.com>
@@ -84,527 +82,304 @@ Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-05.cisco.com
+X-Outbound-Node: alln-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129241
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129242
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the upstream fix as referenced in [2], using
 the commit shown in [1].
 
-[1] https://github.com/aio-libs/aiohttp/commit/dcf40f30637e8752c76781cf6703b5a236749a00
-[2] https://github.com/advisories/GHSA-jg22-mg44-37j8
+[1] https://github.com/aio-libs/aiohttp/commit/5ab61bb4cd88f19b712f12c7c9295fe262bf804d
+[2] https://github.com/advisories/GHSA-63hw-fmq6-xxg2
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-34993.patch      | 478 ++++++++++++++++++
- .../python/python3-aiohttp_3.13.5.bb          |   4 +
- 2 files changed, 482 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34993.patch
+Changes in v2
+- Added the corresponding generated aiohttp/_http_parser.c changes.
+- Updated cb_on_url() and cb_on_status() in the generated C parser to
+  enforce max_line_size against the accumulated parser buffer.
+- Ensured the security fix is included when Wrynose builds the
+  generated C parser without regenerating it from the patched .pyx.
+- Documented the Wrynose-specific backport changes in the patch
+  metadata.
+---
+ .../python3-aiohttp/CVE-2026-54277.patch      | 249 ++++++++++++++++++
+ .../python/python3-aiohttp_3.13.5.bb          |   1 +
+ 2 files changed, 250 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34993.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34993.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
 new file mode 100644
-index 0000000000..9c430f4217
+index 0000000000..db50155d33
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34993.patch
-@@ -0,0 +1,478 @@
-+From 9a92d1c1caacbb3244526d2ef9c197978f701c76 Mon Sep 17 00:00:00 2001
-+From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
-+Date: Sun, 22 Feb 2026 15:53:43 +0000
-+Subject: [PATCH] [PR #12091/8a631e74 backport][3.14] Restrict pickle
-+ deserialization in CookieJar.load() (#12105)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
+@@ -0,0 +1,249 @@
++From f61e8949f10a0e77ceba28a6639627e6e57bf167 Mon Sep 17 00:00:00 2001
++From: "J. Nick Koston" <nick@koston.org>
++Date: Sun, 7 Jun 2026 00:33:03 -0500
++Subject: [PATCH] [PR #12826/36df6c13 backport][3.14] Enforce max_line_size on
++ fragmented request target and reason in C parser (#12837)
 +
-+**This is a backport of PR #12091 as merged into master
-+(8a631e74c1d266499dbc6bcdbc83c60f4ea3ee3c).**
++CVE: CVE-2026-54277
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/5ab61bb4cd88f19b712f12c7c9295fe262bf804d]
 +
-+---------
++Backport Changes:
++- Added aiohttp/_http_parser.c because Wrynose builds the
++  pre-generated C parser without running Cython.
++- Updated cb_on_url() and cb_on_status() to enforce max_line_size
++  against the accumulated parser buffer.
 +
-+CVE: CVE-2026-34993
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/dcf40f30637e8752c76781cf6703b5a236749a00]
-+
-+Co-authored-by: Yuval Elbar <41901908+YuvalElbar6@users.noreply.github.com>
-+Co-authored-by: Sam Bull <git@sambull.org>
-+(cherry picked from commit dcf40f30637e8752c76781cf6703b5a236749a00)
++(cherry picked from commit 5ab61bb4cd88f19b712f12c7c9295fe262bf804d)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/12091.bugfix.rst   |   6 ++
-+ aiohttp/cookiejar.py       | 114 +++++++++++++++++++++-
-+ docs/client_reference.rst  |  18 +++-
-+ docs/spelling_wordlist.txt |   7 +-
-+ tests/conftest.py          |   5 +
-+ tests/test_cookiejar.py    | 189 +++++++++++++++++++++++++++++++++++++
-+ 6 files changed, 331 insertions(+), 8 deletions(-)
-+ create mode 100644 CHANGES/12091.bugfix.rst
++ CHANGES/12826.bugfix.rst  |  1 +
++ aiohttp/_http_parser.c    | 36 ++++++++++++++++++------------------
++ aiohttp/_http_parser.pyx  |  4 ++--
++ tests/test_http_parser.py | 22 ++++++++++++++++++++++
++ 4 files changed, 43 insertions(+), 20 deletions(-)
++ create mode 100644 CHANGES/12826.bugfix.rst
 +
-+diff --git a/CHANGES/12091.bugfix.rst b/CHANGES/12091.bugfix.rst
++diff --git a/CHANGES/12826.bugfix.rst b/CHANGES/12826.bugfix.rst
 +new file mode 100644
-+index 000000000..45ffbc355
++index 000000000..7e095615d
 +--- /dev/null
-++++ b/CHANGES/12091.bugfix.rst
-+@@ -0,0 +1,6 @@
-++Switched :py:meth:`~aiohttp.CookieJar.save` to use JSON format and
-++:py:meth:`~aiohttp.CookieJar.load` to try JSON first with a fallback to
-++a restricted pickle unpickler that only allows cookie-related types
-++(``SimpleCookie``, ``Morsel``, ``defaultdict``, etc.), preventing
-++arbitrary code execution via malicious pickle payloads
-++(CWE-502) -- by :user:`YuvalElbar6`.
-+diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
-+index 193648d43..757cc10e8 100644
-+--- a/aiohttp/cookiejar.py
-++++ b/aiohttp/cookiejar.py
-+@@ -4,6 +4,7 @@ import contextlib
-+ import datetime
-+ import heapq
-+ import itertools
-++import json
-+ import os  # noqa
-+ import pathlib
-+ import pickle
-+@@ -48,6 +49,41 @@ _MIN_SCHEDULED_COOKIE_EXPIRATION = 100
-+ _SIMPLE_COOKIE = SimpleCookie()
+++++ b/CHANGES/12826.bugfix.rst
++@@ -0,0 +1 @@
+++Fixed the C HTTP parser not enforcing ``max_line_size`` on a request target or response reason phrase that is split across multiple reads; each fragment was checked on its own, so an accumulated line could exceed the limit without raising ``LineTooLong``. The accumulated length is now checked, matching the pure-Python parser -- by :user:`bdraco`.
++diff --git a/aiohttp/_http_parser.c b/aiohttp/_http_parser.c
++index 911c9aa65..14c5b3350 100644
++--- a/aiohttp/_http_parser.c
+++++ b/aiohttp/_http_parser.c
++@@ -14760,7 +14760,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++  *                    const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data             # <<<<<<<<<<<<<<
++  *     try:
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++ */
++   __pyx_t_1 = ((PyObject *)__pyx_v_parser->data);
++   __Pyx_INCREF(__pyx_t_1);
++@@ -14771,7 +14771,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++  *                    const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             status = pyparser._buf + at[:length]
++ */
++   {
++@@ -14786,16 +14786,16 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++       /* "aiohttp/_http_parser.pyx":721
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:
++- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
++  *             status = pyparser._buf + at[:length]
++  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
++ */
++-      __pyx_t_5 = (__pyx_v_length > __pyx_v_pyparser->_max_line_size);
+++      __pyx_t_5 = ((__Pyx_PyByteArray_GET_SIZE(__pyx_v_pyparser->_buf) + __pyx_v_length) > __pyx_v_pyparser->_max_line_size);
++       if (unlikely(__pyx_t_5)) {
++ 
++         /* "aiohttp/_http_parser.pyx":722
++  *     try:
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             status = pyparser._buf + at[:length]             # <<<<<<<<<<<<<<
++  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
++  *         extend(pyparser._buf, at, length)
++@@ -14809,7 +14809,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++         __pyx_t_6 = 0;
++ 
++         /* "aiohttp/_http_parser.pyx":723
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             status = pyparser._buf + at[:length]
++  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)             # <<<<<<<<<<<<<<
++  *         extend(pyparser._buf, at, length)
++@@ -14854,7 +14854,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++         /* "aiohttp/_http_parser.pyx":721
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:
++- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
++  *             status = pyparser._buf + at[:length]
++  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
++ */
++@@ -14878,7 +14878,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++  *                    const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             status = pyparser._buf + at[:length]
++ */
++     }
++@@ -14968,7 +14968,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
++  *                    const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             status = pyparser._buf + at[:length]
++ */
++     __pyx_L5_except_error:;
++@@ -15045,7 +15045,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++  *                       const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data             # <<<<<<<<<<<<<<
++  *     try:
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++ */
++   __pyx_t_1 = ((PyObject *)__pyx_v_parser->data);
++   __Pyx_INCREF(__pyx_t_1);
++@@ -15056,7 +15056,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++  *                       const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             reason = pyparser._buf + at[:length]
++ */
++   {
++@@ -15071,16 +15071,16 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++       /* "aiohttp/_http_parser.pyx":736
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:
++- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
++  *             reason = pyparser._buf + at[:length]
++  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
++ */
++-      __pyx_t_5 = (__pyx_v_length > __pyx_v_pyparser->_max_line_size);
+++      __pyx_t_5 = ((__Pyx_PyByteArray_GET_SIZE(__pyx_v_pyparser->_buf) + __pyx_v_length) > __pyx_v_pyparser->_max_line_size);
++       if (unlikely(__pyx_t_5)) {
++ 
++         /* "aiohttp/_http_parser.pyx":737
++  *     try:
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             reason = pyparser._buf + at[:length]             # <<<<<<<<<<<<<<
++  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
++  *         extend(pyparser._buf, at, length)
++@@ -15094,7 +15094,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++         __pyx_t_6 = 0;
++ 
++         /* "aiohttp/_http_parser.pyx":738
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             reason = pyparser._buf + at[:length]
++  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)             # <<<<<<<<<<<<<<
++  *         extend(pyparser._buf, at, length)
++@@ -15139,7 +15139,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++         /* "aiohttp/_http_parser.pyx":736
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:
++- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
++  *             reason = pyparser._buf + at[:length]
++  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
++ */
++@@ -15163,7 +15163,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++  *                       const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             reason = pyparser._buf + at[:length]
++ */
++     }
++@@ -15253,7 +15253,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
++  *                       const char *at, size_t length) except -1:
++  *     cdef HttpParser pyparser = <HttpParser>parser.data
++  *     try:             # <<<<<<<<<<<<<<
++- *         if length > pyparser._max_line_size:
+++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
++  *             reason = pyparser._buf + at[:length]
++ */
++     __pyx_L5_except_error:;
++diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
++index 5da835bc6..e1edee310 100644
++--- a/aiohttp/_http_parser.pyx
+++++ b/aiohttp/_http_parser.pyx
++@@ -718,7 +718,7 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
++                    const char *at, size_t length) except -1:
++     cdef HttpParser pyparser = <HttpParser>parser.data
++     try:
++-        if length > pyparser._max_line_size:
+++        if len(pyparser._buf) + length > pyparser._max_line_size:
++             status = pyparser._buf + at[:length]
++             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
++         extend(pyparser._buf, at, length)
++@@ -733,7 +733,7 @@ cdef int cb_on_status(cparser.llhttp_t* parser,
++                       const char *at, size_t length) except -1:
++     cdef HttpParser pyparser = <HttpParser>parser.data
++     try:
++-        if length > pyparser._max_line_size:
+++        if len(pyparser._buf) + length > pyparser._max_line_size:
++             reason = pyparser._buf + at[:length]
++             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
++         extend(pyparser._buf, at, length)
++diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
++index 25604dbcc..8cb591f20 100644
++--- a/tests/test_http_parser.py
+++++ b/tests/test_http_parser.py
++@@ -1272,6 +1272,17 @@ def test_http_request_max_status_line_under_limit(parser: HttpRequestParser) ->
++     assert msg.url == URL("/path" + path.decode())
 + 
 + 
-++class _RestrictedCookieUnpickler(pickle.Unpickler):
-++    """A restricted unpickler that only allows cookie-related types.
-++
-++    This prevents arbitrary code execution when loading pickled cookie data
-++    from untrusted sources. Only types that are expected in a serialized
-++    CookieJar are permitted.
-++
-++    See: https://docs.python.org/3/library/pickle.html#restricting-globals
-++    """
-++
-++    _ALLOWED_CLASSES: frozenset[tuple[str, str]] = frozenset(
-++        {
-++            # Core cookie types
-++            ("http.cookies", "SimpleCookie"),
-++            ("http.cookies", "Morsel"),
-++            # Container types used by CookieJar._cookies
-++            ("collections", "defaultdict"),
-++            # builtins that pickle uses for reconstruction
-++            ("builtins", "tuple"),
-++            ("builtins", "set"),
-++            ("builtins", "frozenset"),
-++            ("builtins", "dict"),
-++        }
-++    )
-++
-++    def find_class(self, module: str, name: str) -> type:
-++        if (module, name) not in self._ALLOWED_CLASSES:
-++            raise pickle.UnpicklingError(
-++                f"Forbidden class: {module}.{name}. "
-++                "CookieJar.load() only allows cookie-related types for security. "
-++                "See https://docs.python.org/3/library/pickle.html#restricting-globals"
-++            )
-++        return super().find_class(module, name)  # type: ignore[no-any-return]
-++
-++
-+ class CookieJar(AbstractCookieJar):
-+     """Implements cookie storage adhering to RFC 6265."""
-+ 
-+@@ -123,14 +159,84 @@ class CookieJar(AbstractCookieJar):
-+         return self._quote_cookie
-+ 
-+     def save(self, file_path: PathLike) -> None:
-++        """Save cookies to a file using JSON format.
-++
-++        :param file_path: Path to file where cookies will be serialized,
-++            :class:`str` or :class:`pathlib.Path` instance.
-++        """
-+         file_path = pathlib.Path(file_path)
-+-        with file_path.open(mode="wb") as f:
-+-            pickle.dump(self._cookies, f, pickle.HIGHEST_PROTOCOL)
-++        data: dict[str, dict[str, dict[str, str | bool]]] = {}
-++        for (domain, path), cookie in self._cookies.items():
-++            key = f"{domain}|{path}"
-++            data[key] = {}
-++            for name, morsel in cookie.items():
-++                morsel_data: dict[str, str | bool] = {
-++                    "key": morsel.key,
-++                    "value": morsel.value,
-++                    "coded_value": morsel.coded_value,
-++                }
-++                # Save all morsel attributes that have values
-++                for attr in morsel._reserved:  # type: ignore[attr-defined]
-++                    attr_val = morsel[attr]
-++                    if attr_val:
-++                        morsel_data[attr] = attr_val
-++                data[key][name] = morsel_data
-++        with file_path.open(mode="w", encoding="utf-8") as f:
-++            json.dump(data, f, indent=2)
-+ 
-+     def load(self, file_path: PathLike) -> None:
-++        """Load cookies from a file.
-++
-++        Tries to load JSON format first. Falls back to loading legacy
-++        pickle format (using a restricted unpickler) for backward
-++        compatibility with existing cookie files.
-++
-++        :param file_path: Path to file from where cookies will be
-++            imported, :class:`str` or :class:`pathlib.Path` instance.
-++        """
-+         file_path = pathlib.Path(file_path)
-+-        with file_path.open(mode="rb") as f:
-+-            self._cookies = pickle.load(f)
-++        # Try JSON format first
-++        try:
-++            with file_path.open(mode="r", encoding="utf-8") as f:
-++                data = json.load(f)
-++            self._cookies = self._load_json_data(data)
-++        except (json.JSONDecodeError, UnicodeDecodeError, ValueError):
-++            # Fall back to legacy pickle format with restricted unpickler
-++            with file_path.open(mode="rb") as f:
-++                self._cookies = _RestrictedCookieUnpickler(f).load()
-++
-++    def _load_json_data(
-++        self, data: dict[str, dict[str, dict[str, str | bool]]]
-++    ) -> defaultdict[tuple[str, str], SimpleCookie]:
-++        """Load cookies from parsed JSON data."""
-++        cookies: defaultdict[tuple[str, str], SimpleCookie] = defaultdict(SimpleCookie)
-++        for compound_key, cookie_data in data.items():
-++            domain, path = compound_key.split("|", 1)
-++            key = (domain, path)
-++            for name, morsel_data in cookie_data.items():
-++                morsel: Morsel[str] = Morsel()
-++                morsel_key = morsel_data["key"]
-++                morsel_value = morsel_data["value"]
-++                morsel_coded_value = morsel_data["coded_value"]
-++                # Use __setstate__ to bypass validation, same pattern
-++                # used in _build_morsel and _cookie_helpers.
-++                morsel.__setstate__(  # type: ignore[attr-defined]
-++                    {
-++                        "key": morsel_key,
-++                        "value": morsel_value,
-++                        "coded_value": morsel_coded_value,
-++                    }
-++                )
-++                # Restore morsel attributes
-++                for attr in morsel._reserved:  # type: ignore[attr-defined]
-++                    if attr in morsel_data and attr not in (
-++                        "key",
-++                        "value",
-++                        "coded_value",
-++                    ):
-++                        morsel[attr] = morsel_data[attr]
-++                cookies[key][name] = morsel
-++        return cookies
-+ 
-+     def clear(self, predicate: Optional[ClearCookiePredicate] = None) -> None:
-+         if predicate is None:
-+diff --git a/docs/client_reference.rst b/docs/client_reference.rst
-+index a1fc98b3c..374796f40 100644
-+--- a/docs/client_reference.rst
-++++ b/docs/client_reference.rst
-+@@ -2464,16 +2464,28 @@ Utilities
-+ 
-+    .. method:: save(file_path)
-+ 
-+-      Write a pickled representation of cookies into the file
-++      Write a JSON representation of cookies into the file
-+       at provided path.
-+ 
-++      .. versionchanged:: 3.14
-++
-++         Previously used pickle format. Now uses JSON for safe
-++         serialization.
-++
-+       :param file_path: Path to file where cookies will be serialized,
-+           :class:`str` or :class:`pathlib.Path` instance.
-+ 
-+    .. method:: load(file_path)
-+ 
-+-      Load a pickled representation of cookies from the file
-+-      at provided path.
-++      Load cookies from the file at provided path. Tries JSON format
-++      first, then falls back to legacy pickle format (using a restricted
-++      unpickler that only allows cookie-related types) for backward
-++      compatibility with existing cookie files.
-++
-++      .. versionchanged:: 3.14
-++
-++         Now loads JSON format by default. Falls back to restricted
-++         pickle for files saved by older versions.
-+ 
-+       :param file_path: Path to file from where cookies will be
-+            imported, :class:`str` or :class:`pathlib.Path` instance.
-+diff --git a/docs/spelling_wordlist.txt b/docs/spelling_wordlist.txt
-+index 7dc09edb1..382ad414e 100644
-+--- a/docs/spelling_wordlist.txt
-++++ b/docs/spelling_wordlist.txt
-+@@ -98,6 +98,7 @@ deduplicate
-+ defs
-+ Dependabot
-+ deprecations
-++deserialization
-+ DER
-+ dev
-+ Dev
-+@@ -210,7 +211,8 @@ Multipart
-+ musllinux
-+ mypy
-+ Nagle
-+-Nagle’s
-++Nagle's
-++NFS
-+ namedtuple
-+ nameservers
-+ namespace
-+@@ -232,6 +234,7 @@ param
-+ params
-+ parsers
-+ pathlib
-++payloads
-+ peername
-+ performant
-+ pickleable
-+@@ -351,6 +354,8 @@ unhandled
-+ unicode
-+ unittest
-+ Unittest
-++unpickler
-++untrusted
-+ unix
-+ unsets
-+ unstripped
-+diff --git a/tests/conftest.py b/tests/conftest.py
-+index c299df5aa..bfaa26680 100644
-+--- a/tests/conftest.py
-++++ b/tests/conftest.py
-+@@ -95,6 +95,11 @@ def blockbuster(request: pytest.FixtureRequest) -> Iterator[None]:
-+             bb.functions[func].can_block_in(
-+                 "aiohttp/web_urldispatcher.py", "add_static"
-+             )
-++        # save/load is not async, so we must allow this:
-++        for func in ("io.TextIOWrapper.read", "io.BufferedReader.read"):
-++            bb.functions[func].can_block_in("aiohttp/cookiejar.py", "load")
-++        for func in ("io.TextIOWrapper.write", "io.BufferedWriter.write"):
-++            bb.functions[func].can_block_in("aiohttp/cookiejar.py", "save")
-+         # Note: coverage.py uses locking internally which can cause false positives
-+         # in blockbuster when it instruments code. This is particularly problematic
-+         # on Windows where it can lead to flaky test failures.
-+diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
-+index 17e27e8f7..694514067 100644
-+--- a/tests/test_cookiejar.py
-++++ b/tests/test_cookiejar.py
-+@@ -9,6 +9,7 @@ import sys
-+ import unittest
-+ from http.cookies import BaseCookie, Morsel, SimpleCookie
-+ from operator import not_
-++from pathlib import Path
-+ from typing import List, Set
-+ from unittest import mock
-+ 
-+@@ -1621,3 +1622,191 @@ async def test_shared_cookie_with_multiple_domains() -> None:
-+     # Verify cache is reused efficiently
-+     assert ("", "") in jar._morsel_cache
-+     assert "universal" in jar._morsel_cache[("", "")]
-++
-++
-++# === Security tests for restricted unpickler and JSON save/load ===
-++
-++
-++async def test_load_rejects_malicious_pickle(tmp_path: Path) -> None:
-++    """Verify CookieJar.load() blocks arbitrary code execution via pickle.
-++
-++    A crafted pickle payload using os.system (or any non-cookie class)
-++    must be rejected by the restricted unpickler.
-++    """
-++    import os
-++
-++    file_path = tmp_path / "malicious.pkl"
-++
-++    class RCEPayload:
-++        def __reduce__(self) -> tuple[object, ...]:
-++            return (os.system, ("echo PWNED",))
-++
-++    with open(file_path, "wb") as f:
-++        pickle.dump(RCEPayload(), f, pickle.HIGHEST_PROTOCOL)
-++
-++    jar = CookieJar()
-++    with pytest.raises(pickle.UnpicklingError, match="Forbidden class"):
-++        jar.load(file_path)
-++
-++
-++async def test_load_rejects_eval_payload(tmp_path: Path) -> None:
-++    """Verify CookieJar.load() blocks eval-based pickle payloads."""
-++    file_path = tmp_path / "eval_payload.pkl"
-++
-++    class EvalPayload:
-++        def __reduce__(self) -> tuple[object, ...]:
-++            return (eval, ("__import__('os').system('echo PWNED')",))
-++
-++    with open(file_path, "wb") as f:
-++        pickle.dump(EvalPayload(), f, pickle.HIGHEST_PROTOCOL)
-++
-++    jar = CookieJar()
-++    with pytest.raises(pickle.UnpicklingError, match="Forbidden class"):
-++        jar.load(file_path)
-++
-++
-++async def test_load_rejects_subprocess_payload(tmp_path: Path) -> None:
-++    """Verify CookieJar.load() blocks subprocess-based pickle payloads."""
-++    import subprocess
-++
-++    file_path = tmp_path / "subprocess_payload.pkl"
-++
-++    class SubprocessPayload:
-++        def __reduce__(self) -> tuple[object, ...]:
-++            return (subprocess.call, (["echo", "PWNED"],))
-++
-++    with open(file_path, "wb") as f:
-++        pickle.dump(SubprocessPayload(), f, pickle.HIGHEST_PROTOCOL)
-++
-++    jar = CookieJar()
-++    with pytest.raises(pickle.UnpicklingError, match="Forbidden class"):
-++        jar.load(file_path)
-++
-++
-++async def test_load_falls_back_to_pickle(
-++    tmp_path: Path,
-++    cookies_to_receive: SimpleCookie,
+++def test_http_request_max_status_line_fragmented(
+++    parser: HttpRequestParser,
 ++) -> None:
-++    """Verify load() falls back to restricted pickle for legacy cookie files.
-++
-++    Existing cookie files saved with older versions of aiohttp used pickle.
-++    load() should detect that the file is not JSON and fall back to the
-++    restricted pickle unpickler for backward compatibility.
-++    """
-++    file_path = tmp_path / "legit.pkl"
-++
-++    # Write a legacy pickle file directly (as old aiohttp save() would)
-++    jar_save = CookieJar()
-++    jar_save.update_cookies(cookies_to_receive)
-++    with file_path.open(mode="wb") as f:
-++        pickle.dump(jar_save._cookies, f, pickle.HIGHEST_PROTOCOL)
-++
-++    jar_load = CookieJar()
-++    jar_load.load(file_path=file_path)
-++
-++    jar_test = SimpleCookie()
-++    for cookie in jar_load:
-++        jar_test[cookie.key] = cookie
-++
-++    assert jar_test == cookies_to_receive
+++    # Split an overlong request target across reads so that each callback
+++    # fragment is under the limit but the accumulated target is not.
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
+++    with pytest.raises(http_exceptions.LineTooLong, match=match):
+++        parser.feed_data(b"GET /" + b"a" * 8000)
+++        parser.feed_data(b"a" * 8000 + b" HTTP/1.1\r\nHost: a\r\n\r\n")
 ++
 ++
-++async def test_save_load_json_roundtrip(
-++    tmp_path: Path,
-++    cookies_to_receive: SimpleCookie,
++ def test_http_response_parser_utf8(response) -> None:
++     text = "HTTP/1.1 200 Ok\r\nx-test:тест\r\n\r\n".encode()
++ 
++@@ -1349,6 +1360,17 @@ def test_http_response_parser_status_line_under_limit(
++     assert msg.reason == reason.decode()
++ 
++ 
+++def test_http_response_parser_status_line_too_long_fragmented(
+++    response: HttpResponseParser,
 ++) -> None:
-++    """Verify save/load roundtrip preserves cookies via JSON format."""
-++    file_path = tmp_path / "cookies.json"
-++
-++    jar_save = CookieJar()
-++    jar_save.update_cookies(cookies_to_receive)
-++    jar_save.save(file_path=file_path)
-++
-++    jar_load = CookieJar()
-++    jar_load.load(file_path=file_path)
-++
-++    saved_cookies = SimpleCookie()
-++    for cookie in jar_save:
-++        saved_cookies[cookie.key] = cookie
-++
-++    loaded_cookies = SimpleCookie()
-++    for cookie in jar_load:
-++        loaded_cookies[cookie.key] = cookie
-++
-++    assert saved_cookies == loaded_cookies
+++    # Split an overlong reason phrase across reads so that each callback
+++    # fragment is under the limit but the accumulated reason is not.
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
+++    with pytest.raises(http_exceptions.LineTooLong, match=match):
+++        response.feed_data(b"HTTP/1.1 200 " + b"a" * 8000)
+++        response.feed_data(b"a" * 8000 + b"\r\n\r\n")
 ++
 ++
-++async def test_save_load_json_partitioned_cookies(tmp_path: Path) -> None:
-++    """Verify save/load roundtrip works with partitioned cookies."""
-++    file_path = tmp_path / "partitioned.json"
-++
-++    jar_save = CookieJar()
-++    jar_save.update_cookies_from_headers(
-++        ["session=cookie; Partitioned"], URL("https://example.com/")
-++    )
-++    jar_save.save(file_path=file_path)
-++
-++    jar_load = CookieJar()
-++    jar_load.load(file_path=file_path)
-++
-++    # Compare individual cookie values (same approach as test_save_load_partitioned_cookies)
-++    saved = list(jar_save)
-++    loaded = list(jar_load)
-++    assert len(saved) == len(loaded)
-++    for s, lo in zip(saved, loaded):
-++        assert s.key == lo.key
-++        assert s.value == lo.value
-++        assert s["domain"] == lo["domain"]
-++        assert s["path"] == lo["path"]
-++
-++
-++async def test_json_format_is_safe(tmp_path: Path) -> None:
-++    """Verify the JSON file format cannot execute code on load."""
-++    import json
-++
-++    file_path = tmp_path / "safe.json"
-++
-++    # Write something that might look dangerous but is just data
-++    malicious_data = {
-++        "evil.com|/": {
-++            "session": {
-++                "key": "session",
-++                "value": "__import__('os').system('echo PWNED')",
-++                "coded_value": "__import__('os').system('echo PWNED')",
-++            }
-++        }
-++    }
-++    with open(file_path, "w") as f:
-++        json.dump(malicious_data, f)
-++
-++    jar = CookieJar()
-++    jar.load(file_path=file_path)
-++
-++    # The "malicious" string is just a cookie value, not executed code
-++    cookies = list(jar)
-++    assert len(cookies) == 1
-++    assert cookies[0].value == "__import__('os').system('echo PWNED')"
-++
-++
-++async def test_save_load_json_secure_cookies(tmp_path: Path) -> None:
-++    """Verify save/load preserves Secure and HttpOnly flags."""
-++    file_path = tmp_path / "secure.json"
-++
-++    jar_save = CookieJar()
-++    jar_save.update_cookies_from_headers(
-++        ["token=abc123; Secure; HttpOnly; Path=/; Domain=example.com"],
-++        URL("https://example.com/"),
-++    )
-++    jar_save.save(file_path=file_path)
-++
-++    jar_load = CookieJar()
-++    jar_load.load(file_path=file_path)
-++
-++    loaded_cookies = list(jar_load)
-++    assert len(loaded_cookies) == 1
-++    cookie = loaded_cookies[0]
-++    assert cookie.key == "token"
-++    assert cookie.value == "abc123"
-++    assert cookie["secure"] is True
-++    assert cookie["httponly"] is True
-++    assert cookie["domain"] == "example.com"
++ def test_http_response_parser_bad_version(response) -> None:
++     with pytest.raises(http_exceptions.BadHttpMessage):
++         response.feed_data(b"HT/11 200 Ok\r\n\r\n")
++-- 
++2.35.6
++
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index f3a0fbf557..bce27905aa 100644
+index 3c07933200..1a6baebfe9 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -6,6 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+@@ -13,6 +13,7 @@ SRC_URI += " \
+     file://CVE-2026-54274.patch \
+     file://CVE-2026-54275.patch \
+     file://CVE-2026-54276.patch \
++    file://CVE-2026-54277.patch \
+ "
  
- SRC_URI[sha256sum] = "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1"
- 
-+SRC_URI += " \
-+    file://CVE-2026-34993.patch \
-+"
-+
  CVE_PRODUCT = "aiohttp"
- CVE_STATUS_GROUPS = "CVE_AIOHTTP_FIX_3_13_4"
- CVE_AIOHTTP_FIX_3_13_4[status] = "fixed-version: fixed in 3.13.4"
 -- 
 2.35.6
 
