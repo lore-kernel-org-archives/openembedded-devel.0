@@ -1,143 +1,141 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C30ABC5DF74
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 05:28:09 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2572.1787030814786717912
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B41C5DF67
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 07:44:55 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3780.1787039089121166173
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Aug 2026 22:26:54 -0700
+ Tue, 18 Aug 2026 00:44:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=l4hxI7Wh;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: ericyunlinchiang@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-836c8bde2dcso53587027b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Aug 2026 22:26:54 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=kmWch1wi;
+ spf=pass (domain: mvista.com, ip: 209.85.215.170, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-c998fd549a8so3279890a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 00:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787030814; x=1787635614; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1787039088; x=1787643888; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3SLimiQwNw5hP2dVxB38JKDklWMHgCdFoMFGDM9Nuos=;
-        b=l4hxI7WhmRz2Y2wennYmew3ryilYs0nmtXdqMp+1RNlKyYeqvMBg7Dhh3o+SEMdcgk
-         /z3ajaldr86/iw6dh5SoLUw85LpKsqbrtnOrIK2CFbA66rH1NveymgCbw+dpoBcCvnZb
-         SNQt93lL8zji9tWOJdSTW2RrKODyPCTM8UbbfjAGgVOfP/o8OZSWER0UM0K9QVMp4w+x
-         RSP7yjcOgTqemOUP1tFwT/Inf0GqbR5R8WakgsOsdJtzHccUyYJASbLvgURggbEvlxlk
-         odj6U0LNfleU0Isht6ghKbkEDOTJ5fz0bfUiEL/7jbQoJT3WAHEmA5DhOgVTyWNYchCN
-         180g==
+        bh=vjWe6BrGfao+h77gHxWn+4wDHkYioUA82XrmoUocehg=;
+        b=kmWch1wih8kvKbjfR6vtjcw2tas3xNwmrWqLtrYmUTHd4Ly5WkH/s5v25gNgUFnjS1
+         TIy2n0B27Fgjt3JceaRpSPZXXkcZZ8nWekGhQthxJO7PGXIUsKd4J6XZ0a3ulfRmuUjf
+         n1x3yjDYwL1yUd4Zf94jY8gqK0tVSMimcuMFg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787030814; x=1787635614;
+        d=1e100.net; s=20251104; t=1787039088; x=1787643888;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3SLimiQwNw5hP2dVxB38JKDklWMHgCdFoMFGDM9Nuos=;
-        b=H+Pko4s11VwiBsT19s8+qnCFww5m/U6V1e+IXohk9E7w9RQc05hIJ6UZFMaQfAJpyO
-         eLc5+LyvXP3rYflPWu4ErP7Ykn9IDZlMgOVnL4uk8MkPiR+ukxRAhoGd1OvlIEEuJU24
-         +kiQkH/TQXf3447pvPTSWGahOCTzpTyIVvzjQD3xxFjDkrVBHLFR+zhga1hwgxGWp7z0
-         gn+iSw3cQcV3sRVQvupRhu+Nq/ZqHC1eP/ceIRq2OT53adX0icWt5vHaADoInjyZBBGO
-         UWB2ZO1U13jMo1skEXCWQIMYKzpvtmqzeU8wwgO1qmwr17uBG1oiR4KmLNc+//Z8Z0K9
-         pjwA==
-X-Gm-Message-State: AOJu0Yzjkl+2Vb8h/ubkX4Y/rqjFiGClr6hQvDzaWXjJPWrVMajfJuED
-	YiURbetRh41LCMyzgYSQAc5KXDuLJLb8Vm8C0R4hs1W6EaGkgWsXKU0hkcApAAxX
-X-Gm-Gg: AR+sD11U2RqOoxh+lbSFUZJdi+jFcjDxIF5sGAWJpUZ+wIDeX/WO0bWR5AqLO6XtIup
-	8Q800DA1hjY8TypxLInc/AR97Lqb0lexf7stOmzBJscVjVtKt3LbrNaXAqcuo2tEXpJXRE17gj3
-	tJ2b0QHQNx7T6pXt62FLtx2U3VIPGCwKogCMEi1SrquGV40yurVi1LTafc8hl36cMZs1JMPyHFo
-	KUXDZXSyCoO8/nEkiw52D8+tr2TjJNYaNOhjX3WyElRs1QzwHSfAhc4b36QP+vKTmlThXijzVG0
-	cR9nltF60478OHoPgrbR8SEhS1wK9MP+U2C6Q9UNqlAFhKfE8YjUc3xV9NkU85RjjyoYaZq3+yV
-	deEXv3/Zv7oKQMyLvdKU1QEUGCPizQMB/0nOmdZezE4/8uLudT3B6iz5SiEHTul4GtBIBfb6Fab
-	AX8CG+OBRKgd/jM6hGoAmjWUtypZX7wkmnzDhGw63DtaAhFWbdNz8FwnC03HGD9w79WPzW0UDm6
-	aHqwzJi1CgB0fVnR8v6sTmQVWJ+/g==
-X-Received: by 2002:a17:902:e80f:b0:2ca:e9dc:7357 with SMTP id d9443c01a7336-2d3b0d31815mr315028085ad.9.1787030347693;
-        Mon, 17 Aug 2026 22:19:07 -0700 (PDT)
-Received: from eric-N-A (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d5bb499ec7sm12986565ad.13.2026.08.17.22.19.06
+        bh=vjWe6BrGfao+h77gHxWn+4wDHkYioUA82XrmoUocehg=;
+        b=fOQHJUdvuQeChNl4v6DyoWau+2w62KfHg/m+EJwqXnCWkbUOmaU3l/TkFGzbOlmz1s
+         P5gRVq6AnjC3ddeiQLnkNtirjt/ZbpWCpq59/143MM32n3SrxpJn3RAmfR+sMnbOofkH
+         TIVw5D365f1gLZsAhZHzh3sHeVBfif+WSkQBDpb3N7Z0pFu7zcMJ9gCjkpAj3JvKq56p
+         3O1o4Az3heL1uBZBo0rM4AOoyP4oCgYwsU6cti2VL2AyjoBCxYatQXc5ztc03ssgEDUQ
+         ul7gj9sh5xL2tTKCU0zc5WmJFciJFr64Y7i2wdcbGCgboNYaVSaz/H+pp3yK9Dk2iCI5
+         QIZg==
+X-Gm-Message-State: AOJu0Yw8n0/cnwb7/2eaM/SZxozwJTVC2ipZZmPynU4HP2O/M3iDf+UV
+	wn6Moy3DQlWw8XN1UWU2KrUVy/WpXFgqpvR/f08z1nl/RBa47AeyCVYzUWx5xqj4l/bplwK8YQ0
+	lkIpCHTA=
+X-Gm-Gg: AR+sD13XV04DvtNmuewofGAc4lBlWo+nuqC/un+LIa2mzgWmMWB1hvoJB49xicl6qum
+	6iaZ0pGGZNmLFiiIKuWujr1hwR+Sb0ParSixkRmB6aR8xL9qs+PG4YeoANyhSJyYgeV0mtYQ7Py
+	NC1TOiRcoWgDa+LZ5ho+dgemuks1ORCLn+0oCd67mDB9U9YC6itZBuAJw0+6oqK9I6J3OAwqdQ2
+	VD2HOWR58L1zR8xUuDDOeJf7+hzn8Cb4/of9tHLNt4E6HDYXxpvzfshL7gUMSOGjgthfSKZ2E7Q
+	+ydmPs8g5F2vICO4kOjazphbms3yxjhcclhWBY8+Q5rsEalDHqMZU9EAZxfcoJ27AilHYtjelYI
+	+KwLnqQIwQ6ZyyfpB8PqZEvTVq7Mx+Oiq6jzNJv7jscjiybcYKHNr84s++zkQgDxxJ/Nzt8mBoL
+	Tscnej2c1BMX01/5H1trlaJcxOTCGvHTpupOjMcZqqpTtzAS+ikLsdbyhkmVMweFlYL3HbPnnzt
+	8aR
+X-Received: by 2002:a17:90b:17d2:b0:381:9028:5945 with SMTP id 98e67ed59e1d1-3933e60c1damr30117272a91.14.1787039088318;
+        Tue, 18 Aug 2026 00:44:48 -0700 (PDT)
+Received: from MVIN00352.mvista.com ([2401:4900:1f29:777d:ea96:6c89:c935:111e])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-326798c566asm15644832eec.11.2026.08.18.00.44.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Aug 2026 22:19:07 -0700 (PDT)
-From: Eric Chiang <ericyunlinchiang@gmail.com>
+        Tue, 18 Aug 2026 00:44:46 -0700 (PDT)
+From: Vijay Anusuri <vanusuri@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	khem.raj@oss.qualcomm.com,
-	potin.lai.pt@gmail.com,
-	Eric Chiang <ericyunlinchiang@gmail.com>
-Subject: [meta-oe][PATCH] usbmuxd: create the usbmux user the udev rule requires
-Date: Tue, 18 Aug 2026 13:17:53 +0800
-Message-ID: <20260818051753.772159-1-ericyunlinchiang@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][scarthgap][patch] giflib: Fix CVE-2026-26740
+Date: Tue, 18 Aug 2026 13:14:15 +0530
+Message-ID: <20260818074415.1079855-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 05:28:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129227
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 07:44:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129228
 
-usbmuxd ships 39-usbmuxd.rules, which starts the daemon when an Apple
-device appears:
+Pick patch according to [2]
 
-  ACTION=="add", ..., OWNER="usbmux", ENV{SYSTEMD_WANTS}="usbmuxd.service"
+[1] https://nvd.nist.gov/vuln/detail/CVE-2026-26740
+[2] https://ubuntu.com/security/CVE-2026-26740
 
-The recipe never creates that account. Up to systemd v257 udev only
-logged a warning and the rest of the line still ran. systemd a1ee55e3c9
-("udev-rules: ignore OWNER=/GROUP= with unknown user/group", first
-released in v258) makes udev drop the whole rule line instead, so
-SYSTEMD_WANTS is never applied and usbmuxd is never started when a
-device is plugged in.
-
-Creating the account is what the rule already expects, and it preserves
-the intent of the systemd change: that change guards against a rule
-naming a nonexistent user silently clearing a valid earlier ownership
-assignment, and with the account present there is no nonexistent user.
-Removing OWNER= from the rule would evade that check instead of
-satisfying it. The daemon still runs as root, so nothing else changes.
-
-Also ship a sysusers.d fragment. Systems that modified a user or
-password at runtime carry a copied-up /etc/passwd in a writable /etc,
-which masks an account added at image build time even after an update;
-systemd-sysusers recreates it there. The uid may then differ, but the
-udev rule resolves the account by name and the daemon runs as root, so
-only the name matters.
-
-Distros that keep /etc on persistent storage may also need
-systemd-sysusers to actually run on boot; that is outside the scope of
-this recipe.
-
-Signed-off-by: Eric Chiang <ericyunlinchiang@gmail.com>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../recipes-connectivity/usbmuxd/usbmuxd_git.bb   | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ .../giflib/giflib/CVE-2026-26740.patch        | 40 +++++++++++++++++++
+ .../recipes-devtools/giflib/giflib_5.2.2.bb   |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/giflib/giflib/CVE-2026-26740.patch
 
-diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-index c5e0fbee1a..6258bc5134 100644
---- a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-+++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
- 
- DEPENDS = "udev libusb1 libplist libimobiledevice-glue"
- 
--inherit autotools pkgconfig gitpkgv systemd
-+inherit autotools pkgconfig gitpkgv systemd useradd
- 
- PKGV = "${GITPKGVTAG}"
- PV = "1.1.2+git"
-@@ -22,5 +22,18 @@ UPSTREAM_CHECK_COMMITS = "1"
- EXTRA_OECONF += "--without-preflight"
- 
- FILES:${PN} += "${base_libdir}/udev/rules.d/"
-+FILES:${PN} += "${nonarch_libdir}/sysusers.d"
- 
- SYSTEMD_SERVICE:${PN} = "usbmuxd.service"
+diff --git a/meta-oe/recipes-devtools/giflib/giflib/CVE-2026-26740.patch b/meta-oe/recipes-devtools/giflib/giflib/CVE-2026-26740.patch
+new file mode 100644
+index 0000000000..1e30a28773
+--- /dev/null
++++ b/meta-oe/recipes-devtools/giflib/giflib/CVE-2026-26740.patch
+@@ -0,0 +1,40 @@
++From 061605081115bbfd7019bafc119a13b6f17fcf25 Mon Sep 17 00:00:00 2001
++From: Anthony Hurtado <amhurtado@protonmail.com>
++Date: Mon, 1 Jun 2026 15:40:48 -0500
++Subject: [PATCH] Fix CVE-2026-26740: heap OOB write in EGifGCBToSavedExtension
 +
-+# 39-usbmuxd.rules carries OWNER="usbmux"; from systemd v258 udev drops the
-+# whole rule line when the user does not exist, so the daemon is never
-+# started. Create the account, and ship a sysusers.d fragment so it is also
-+# recreated on systems whose /etc predates this recipe.
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM:${PN} = "--system --no-create-home --shell /bin/false --user-group usbmux"
++EGifGCBToSavedExtension calls EGifGCBToExtension which unconditionally
++writes 4 bytes into ep->Bytes without checking ep->ByteCount. If the
++extension block was allocated with fewer than 4 bytes, this results in
++a heap buffer overflow.
 +
-+do_install:append() {
-+    install -d ${D}${nonarch_libdir}/sysusers.d
-+    printf 'u usbmux - "usbmux daemon"\n' > ${D}${nonarch_libdir}/sysusers.d/usbmuxd.conf
-+}
++The read-side counterpart DGifExtensionToGCB already validates that
++GifExtensionLength == 4 before reading. Add the symmetric check on
++the write side: return GIF_ERROR when ep->ByteCount < 4.
++
++Signed-off-by: Anthony Hurtado <amhurtado@pm.me>
++
++Upstream-Status: Backport [https://sourceforge.net/p/giflib/code/ci/061605081115bbfd7019bafc119a13b6f17fcf25]
++CVE: CVE-2026-26740
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ egif_lib.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/egif_lib.c b/egif_lib.c
++index 1526868..8160560 100644
++--- a/egif_lib.c
+++++ b/egif_lib.c
++@@ -678,6 +678,9 @@ int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB,
++ 		ExtensionBlock *ep =
++ 		    &GifFile->SavedImages[ImageIndex].ExtensionBlocks[i];
++ 		if (ep->Function == GRAPHICS_EXT_FUNC_CODE) {
+++			if (ep->ByteCount < 4) {
+++				return GIF_ERROR;
+++			}
++ 			EGifGCBToExtension(GCB, ep->Bytes);
++ 			return GIF_OK;
++ 		}
++-- 
++2.43.0
++
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb b/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
+index c26f3cf160..e96765ca2b 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
+@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
+            file://0001-Makefile-fix-typo-in-soname-argument.patch \
+            file://CVE-2026-23868.patch \
+            file://CVE-2025-31344.patch \
++           file://CVE-2026-26740.patch \
+            "
+ 
+ SRC_URI[logo.sha256sum] = "1a54383986adad1521d00e003b4c482c27e8bc60690be944a1f3319c75abc2c9"
 -- 
-2.53.0
+2.43.0
 
 
