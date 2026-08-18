@@ -2,381 +2,303 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E412BC5DF81
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:35 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15269.1787076932678337791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3F0FC5DF8C
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:37 +0000 (UTC)
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15142.1787076933147785365
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 18 Aug 2026 11:15:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=RAoE9977;
- spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Azuyfi6k;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=13606; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=8162; q=dns/txt;
   s=iport01; t=1787076933; x=1788286533;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Zoaup8cpMWLANorYOCcsY/i0tfPtLcfqVXEHNbSL2Z4=;
-  b=RAoE9977rw2sMaq5q3b2Kgh0L3cbegQXToHwlo2JZKVHscaS+yfTe4i4
-   SZE1FXneOii7fQ9OPcqx5OtqTL+u319mMWay9LvF0O4I9mW23Vb40QBGL
-   cf1/73ayU0KwquYsqsfMQcFkrtSc2fS8yj+RAMzS31QM8OAE/gTrk8L6c
-   oYsHe8yd72sj25tmCI3pWLja2ddUCA4iFcdXV9roJ6MNkl+V6sBJpypRS
-   R5GKeRDJxLnNt6/EitnhFNth4lrgy/T45GfKVJzWaE14ISSUSgECeZYvw
-   hSqJcpbK42iEPGMx5jwNik0+l2RY62ATtJkwjooYehiRP0uRdwFk1rT7b
-   A==;
-X-CSE-ConnectionGUID: aJq2WPfxT2umraSj3qkYBQ==
-X-CSE-MsgGUID: 7GzpsZQ0TZ20nybBkZC6/Q==
-X-IPAS-Result: =?us-ascii?q?A0C4AgDJn4Rq/5UQJK1aHgEBCxIMggULgld0XgoBOEmEV?=
- =?us-ascii?q?5FzA4ETnQiBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBA?=
- =?us-ascii?q?QEBCwEBBQEBAQIBBwWBDhOGTw2GWgECAQMjBAsBGAEtEAkTAwECAwImAgIrI?=
- =?us-ascii?q?wgZgwIBgnQDEah9myJ6fzOBAYMoAYFU2zABCxQBBYEFLoU/gx8BhQJdGAGEf?=
- =?us-ascii?q?CcbG4FygRWBO4E4doEFgVwCgTiEA4JqBIIigQyBWpFWSIECHANZLAFVEw0KC?=
- =?us-ascii?q?wcFgWYDNRIqFW4yHYEjPhc1WBsGBYEdgSiENyMZNnqBCV6BKyphARIXgQmCC?=
- =?us-ascii?q?gKCc4IGAgFJRQ4LGA1IESw3FBkEPQFuB444IIJDgQ4BKgF7gTEckyOSN6EPC?=
- =?us-ascii?q?iiDdowhlToaM6psC5h9jgqWAFCEaYFoPIFZcBWDIglKGQ+OKg4Lg2DMOScyA?=
- =?us-ascii?q?gkyAQEHAgcOAwuBaJABgX0BAQ?=
-IronPort-Data: A9a23:V5/R063feYh8h/M/8fbD5YJwkn2cJEfYwER7XKvMYLTBsI5bpzVRm
- zFMCz2PPfiDZ2Okc9BwYY7j8RtQ6MfTzIRhQAtr3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
- 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
- Lsen+WFYAX7g24tbTpPg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
- u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGBWMvZ7Ig9PZLW3xL7
- /UjKmsUbSGpvrfjqF67YrEEasULJc3vOsYb/3pn1zycVKxgSpHYSKKM7thdtNsyrpkRRrCFO
- YxAN3w2MEWojx5nYj/7DLoyn+qsj3juehVTqUmeouw85G27IAlZgOG0aYKFK4DVLSlTthm3t
- HrdzV2hPiNAbNqOwxCGwFnywdaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl/DQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSj1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:dnXh86pim1GLDp4hzh0Nm+caV5r1eYIsimQD101hICG9vPb2qy
- nIpoV86faUskd3ZJhOo7G90cW7LE80sKQFg7X5Xo3SODUOxlHJEGgK1+KLqFfd8m/Fh4tgPM
- xbHZSWZuedMbFSt7eC3ODBKadC/PC3tIa1mOzZ03BhCStua61m8kNFLzzzKDwPeOGDbqBJbq
- Z1IaF81kGdRUg=
-X-Talos-CUID: =?us-ascii?q?9a23=3AE0mXOWhbXVvW4pbU+6zc4B6iGTJue1/ElkjoLV+?=
- =?us-ascii?q?EU3tsUrSuSwSJ+5JOqp87?=
-X-Talos-MUID: 9a23:/8JazASha1DVhvHARXSzqyN6L/VRu5icUhgLgJ8suPuva2tJbmI=
+  bh=VpCWzxAAJhCY7rPV/MKoAmbVsGzpn5sjdKYOE+h9wRU=;
+  b=Azuyfi6k1PnDeTXUVFsPYLhwqLw/gUuUs0NDru/S7/g46r75AQkBYoaw
+   libkf09ZYd/I8Cl3TdjcFxz9+1mkMTWtAfwU/Nb+Mzz0PFhK9SwOtYaOV
+   oIJONUC5pT7PEdyxF1or5OKIb3SNMBMFMWdSvNjEr8RZAZKMNHz+TlfQz
+   3ZU/Jzufnon8zIbuLSl/xYJ7D+hgAX8NbnV8K5nExRoFLjyyrTd9jhKQt
+   F+YZDUtGfl7W4GwAJsoxKLMXjwM3bPnBIi1ve0xCz0L/ux7uy1x44decD
+   LC/qAqK2NEEQPMA1gZJ2/Ws01yPf+ZuySAVM9OVvDhnut5fuYw7ldPqJE
+   Q==;
+X-CSE-ConnectionGUID: PzqrXjVHSBqZ6TT2bxwoEA==
+X-CSE-MsgGUID: lltU+7S2Rm+wmGklnrlH7g==
+X-IPAS-Result: =?us-ascii?q?A0BJAgBIoIRq/44QJK1aHgEBCxIMggULghg/dF5DSZZKA?=
+ =?us-ascii?q?4ETnQiBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?wEBBQEBAQIBBwWBDhOGTw2GWgECAQMdCgsBGAEtEBwDAQIvKyMIEAmCKlgBg?=
+ =?us-ascii?q?nQDEcRGgXkzgQGDKAGBVNswAQsUAQWBM4U/iCJdGAGEfCcbG4FygRWBO4E4d?=
+ =?us-ascii?q?oEFgVwCgTgQhl0EgiKBDIFagS2QKUiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yH?=
+ =?us-ascii?q?YEjPheBDRsGBYEdgSiENyMZNnqBCV6BKyphARIXgQmCCgKCc4IGAgFJRQ4LG?=
+ =?us-ascii?q?A1IESw3FBkEPm4HjjgggkOBDgEqAYE0gRQypSihDwoog3aMIZU6GjOEBIFXk?=
+ =?us-ascii?q?kCSUQuYfY4KlT0rGFCEaYFoPIFZcBU7gmcJShkPjioOC4NghWTGVScyAgkyA?=
+ =?us-ascii?q?QEHAgcOAwuBaJABgX0BAQ?=
+IronPort-Data: A9a23:Md9poaxk4ikpQBi5inl6t+dmxyrEfRIJ4+MujC+fZmUNrF6WrkVUn
+ WJODGrXaKuCNzTxe94iOoSz901T7JTXmoNnTVM/pFhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ 46aT/H3Ygf/hWYkaz1MsMpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJHkkJJco+NhXOktXx
+ 6IkFGoHfg+EqsvjldpXSsE07igiBMDvOIVavjRryivUSK57B5vCWK7No9Rf2V/chOgXQq2YP
+ JRfMGQpNUiaC/FMEg9/5JYWkOSlgnD+YjRwo1OOrq1x6G/WpOB0+Oi0aIqOJ43XGK25mG6co
+ n77vDvCWCsfd8Oa5jmB9GioprDAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZF+k8rQXIwa3O7kPBWy4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rHnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:P5aFX6xgf2TKD8ApxzMvKrPw9L1zdoMgy1knxilNoNJuHfBw8P
+ re+8jzuiWUtN98YhwdcJW7Scu9qBDnhPpICPcqXYtKNTOO0ADDEGgh1/qG/9SKIUPDH4BmuZ
+ uIWpIObuEYdWIK7vrS0U2fD8sqxsWB/eSDgOfTyGoocCRRApsQljuQzm2gYzZLrM4sP+tAKK
+ ah
+X-Talos-CUID: 9a23:gaetWGG1+us+ZGLzqmJf5lcOKsIbUkb31UWOH3PiA3Z2T5C8HAo=
+X-Talos-MUID: 9a23:4rzzKAb7DeERDOBTszvwuXI9D51S5uexDW8OlZMcv+nbOnkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,230,1779148800"; 
-   d="scan'208";a="811108947"
-Received: from alln-l-core-12.cisco.com ([173.36.16.149])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:32 +0000
+   d="scan'208";a="810835955"
+Received: from alln-l-core-05.cisco.com ([173.36.16.142])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:32 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id F13E818000159;
-	Tue, 18 Aug 2026 18:15:31 +0000 (GMT)
+	by alln-l-core-05.cisco.com (Postfix) with ESMTPS id 04A33180004B9;
+	Tue, 18 Aug 2026 18:15:32 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 38103CD02BE; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
+	id 3BF69CD02BF; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 07/10] python3-aiohttp: fix CVE-2026-54277
-Date: Tue, 18 Aug 2026 11:15:25 -0700
-Message-Id: <20260818181528.3405276-8-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 08/10] python3-aiohttp: fix CVE-2026-54278
+Date: Tue, 18 Aug 2026 11:15:26 -0700
+Message-Id: <20260818181528.3405276-9-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260818181528.3405276-1-dkelaiya@cisco.com>
 References: <20260818181528.3405276-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-12.cisco.com
+X-Outbound-Node: alln-l-core-05.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129242
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129239
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the upstream fix as referenced in [2], using
 the commit shown in [1].
 
-[1] https://github.com/aio-libs/aiohttp/commit/5ab61bb4cd88f19b712f12c7c9295fe262bf804d
-[2] https://github.com/advisories/GHSA-63hw-fmq6-xxg2
+[1] https://github.com/aio-libs/aiohttp/commit/4f7480e474cccc6a8cc2c92ad3f17a31dedf8232
+[2] https://github.com/advisories/GHSA-g3cq-j2xw-wf74
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
-Changes in v2
-- Added the corresponding generated aiohttp/_http_parser.c changes.
-- Updated cb_on_url() and cb_on_status() in the generated C parser to
-  enforce max_line_size against the accumulated parser buffer.
-- Ensured the security fix is included when Wrynose builds the
-  generated C parser without regenerating it from the patched .pyx.
-- Documented the Wrynose-specific backport changes in the patch
-  metadata.
----
- .../python3-aiohttp/CVE-2026-54277.patch      | 249 ++++++++++++++++++
+ .../python3-aiohttp/CVE-2026-54278.patch      | 182 ++++++++++++++++++
  .../python/python3-aiohttp_3.13.5.bb          |   1 +
- 2 files changed, 250 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
+ 2 files changed, 183 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch
 new file mode 100644
-index 0000000000..db50155d33
+index 0000000000..13a3cecd21
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
-@@ -0,0 +1,249 @@
-+From f61e8949f10a0e77ceba28a6639627e6e57bf167 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch
+@@ -0,0 +1,182 @@
++From 0a0f845786316ed4dd9fdd785f5f694dee74bba5 Mon Sep 17 00:00:00 2001
 +From: "J. Nick Koston" <nick@koston.org>
-+Date: Sun, 7 Jun 2026 00:33:03 -0500
-+Subject: [PATCH] [PR #12826/36df6c13 backport][3.14] Enforce max_line_size on
-+ fragmented request target and reason in C parser (#12837)
++Date: Sun, 7 Jun 2026 00:39:29 -0500
++Subject: [PATCH] [PR #12828/13b635d7 backport][3.14] Bounded unread compressed
++ drain (#12845)
 +
-+CVE: CVE-2026-54277
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/5ab61bb4cd88f19b712f12c7c9295fe262bf804d]
++CVE: CVE-2026-54278
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/4f7480e474cccc6a8cc2c92ad3f17a31dedf8232]
 +
-+Backport Changes:
-+- Added aiohttp/_http_parser.c because Wrynose builds the
-+  pre-generated C parser without running Cython.
-+- Updated cb_on_url() and cb_on_status() to enforce max_line_size
-+  against the accumulated parser buffer.
-+
-+(cherry picked from commit 5ab61bb4cd88f19b712f12c7c9295fe262bf804d)
++(cherry picked from commit 4f7480e474cccc6a8cc2c92ad3f17a31dedf8232)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/12826.bugfix.rst  |  1 +
-+ aiohttp/_http_parser.c    | 36 ++++++++++++++++++------------------
-+ aiohttp/_http_parser.pyx  |  4 ++--
-+ tests/test_http_parser.py | 22 ++++++++++++++++++++++
-+ 4 files changed, 43 insertions(+), 20 deletions(-)
-+ create mode 100644 CHANGES/12826.bugfix.rst
++ CHANGES/12828.bugfix.rst     |  1 +
++ aiohttp/streams.py           | 17 +++++++---
++ tests/test_streams.py        | 28 ++++++++++++++++
++ tests/test_web_functional.py | 63 ++++++++++++++++++++++++++++++++++++
++ 4 files changed, 104 insertions(+), 5 deletions(-)
++ create mode 100644 CHANGES/12828.bugfix.rst
 +
-+diff --git a/CHANGES/12826.bugfix.rst b/CHANGES/12826.bugfix.rst
++diff --git a/CHANGES/12828.bugfix.rst b/CHANGES/12828.bugfix.rst
 +new file mode 100644
-+index 000000000..7e095615d
++index 000000000..9893577a5
 +--- /dev/null
-++++ b/CHANGES/12826.bugfix.rst
+++++ b/CHANGES/12828.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed the C HTTP parser not enforcing ``max_line_size`` on a request target or response reason phrase that is split across multiple reads; each fragment was checked on its own, so an accumulated line could exceed the limit without raising ``LineTooLong``. The accumulated length is now checked, matching the pure-Python parser -- by :user:`bdraco`.
-+diff --git a/aiohttp/_http_parser.c b/aiohttp/_http_parser.c
-+index 911c9aa65..14c5b3350 100644
-+--- a/aiohttp/_http_parser.c
-++++ b/aiohttp/_http_parser.c
-+@@ -14760,7 +14760,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+  *                    const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data             # <<<<<<<<<<<<<<
-+  *     try:
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+ */
-+   __pyx_t_1 = ((PyObject *)__pyx_v_parser->data);
-+   __Pyx_INCREF(__pyx_t_1);
-+@@ -14771,7 +14771,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+  *                    const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             status = pyparser._buf + at[:length]
-+ */
-+   {
-+@@ -14786,16 +14786,16 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+       /* "aiohttp/_http_parser.pyx":721
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:
-+- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-+  *             status = pyparser._buf + at[:length]
-+  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
-+ */
-+-      __pyx_t_5 = (__pyx_v_length > __pyx_v_pyparser->_max_line_size);
-++      __pyx_t_5 = ((__Pyx_PyByteArray_GET_SIZE(__pyx_v_pyparser->_buf) + __pyx_v_length) > __pyx_v_pyparser->_max_line_size);
-+       if (unlikely(__pyx_t_5)) {
+++Fixed :meth:`~aiohttp.StreamReader.readany` and :meth:`~aiohttp.StreamReader.read_nowait` joining data fed back into the buffer during the call (when draining below the low water mark resumes reading) into a single unbounded :class:`bytes`; a call now returns only the chunks that were buffered when it started, keeping the drain of an unread auto-decompressed request body bounded by the read buffer -- by :user:`bdraco`.
++diff --git a/aiohttp/streams.py b/aiohttp/streams.py
++index 921827eb3..b52c20742 100644
++--- a/aiohttp/streams.py
+++++ b/aiohttp/streams.py
++@@ -572,14 +572,21 @@ class StreamReader(AsyncStreamReaderMixin):
++         """Read not more than n bytes, or whole buffer if n == -1"""
++         self._timer.assert_timeout()
 + 
-+         /* "aiohttp/_http_parser.pyx":722
-+  *     try:
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             status = pyparser._buf + at[:length]             # <<<<<<<<<<<<<<
-+  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
-+  *         extend(pyparser._buf, at, length)
-+@@ -14809,7 +14809,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+         __pyx_t_6 = 0;
++-        chunks = []
+++        if n == -1:
+++            # Drain only chunks present now; _read_nowait_chunk() can
+++            # re-entrantly resume_reading() and refill the buffer.
+++            count = len(self._buffer)
+++            if count == 1:
+++                return self._read_nowait_chunk(-1)
+++            return b"".join([self._read_nowait_chunk(-1) for _ in range(count)])
+++
+++        chunks: list[bytes] = []
++         while self._buffer:
++             chunk = self._read_nowait_chunk(n)
++             chunks.append(chunk)
++-            if n != -1:
++-                n -= len(chunk)
++-                if n == 0:
++-                    break
+++            n -= len(chunk)
+++            if n == 0:
+++                break
 + 
-+         /* "aiohttp/_http_parser.pyx":723
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             status = pyparser._buf + at[:length]
-+  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)             # <<<<<<<<<<<<<<
-+  *         extend(pyparser._buf, at, length)
-+@@ -14854,7 +14854,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+         /* "aiohttp/_http_parser.pyx":721
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:
-+- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-+  *             status = pyparser._buf + at[:length]
-+  *             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
-+ */
-+@@ -14878,7 +14878,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+  *                    const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             status = pyparser._buf + at[:length]
-+ */
-+     }
-+@@ -14968,7 +14968,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_url(llhttp_t *__pyx_v_parser, c
-+  *                    const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             status = pyparser._buf + at[:length]
-+ */
-+     __pyx_L5_except_error:;
-+@@ -15045,7 +15045,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+  *                       const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data             # <<<<<<<<<<<<<<
-+  *     try:
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+ */
-+   __pyx_t_1 = ((PyObject *)__pyx_v_parser->data);
-+   __Pyx_INCREF(__pyx_t_1);
-+@@ -15056,7 +15056,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+  *                       const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             reason = pyparser._buf + at[:length]
-+ */
-+   {
-+@@ -15071,16 +15071,16 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+       /* "aiohttp/_http_parser.pyx":736
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:
-+- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-+  *             reason = pyparser._buf + at[:length]
-+  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
-+ */
-+-      __pyx_t_5 = (__pyx_v_length > __pyx_v_pyparser->_max_line_size);
-++      __pyx_t_5 = ((__Pyx_PyByteArray_GET_SIZE(__pyx_v_pyparser->_buf) + __pyx_v_length) > __pyx_v_pyparser->_max_line_size);
-+       if (unlikely(__pyx_t_5)) {
++         return b"".join(chunks) if chunks else b""
 + 
-+         /* "aiohttp/_http_parser.pyx":737
-+  *     try:
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             reason = pyparser._buf + at[:length]             # <<<<<<<<<<<<<<
-+  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
-+  *         extend(pyparser._buf, at, length)
-+@@ -15094,7 +15094,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+         __pyx_t_6 = 0;
++diff --git a/tests/test_streams.py b/tests/test_streams.py
++index 93686746e..8b4fcf322 100644
++--- a/tests/test_streams.py
+++++ b/tests/test_streams.py
++@@ -1723,3 +1723,31 @@ async def test_stream_reader_small_limit_resumes_reading(
 + 
-+         /* "aiohttp/_http_parser.pyx":738
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             reason = pyparser._buf + at[:length]
-+  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)             # <<<<<<<<<<<<<<
-+  *         extend(pyparser._buf, at, length)
-+@@ -15139,7 +15139,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+         /* "aiohttp/_http_parser.pyx":736
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:
-+- *         if length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:             # <<<<<<<<<<<<<<
-+  *             reason = pyparser._buf + at[:length]
-+  *             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
-+ */
-+@@ -15163,7 +15163,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+  *                       const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             reason = pyparser._buf + at[:length]
-+ */
-+     }
-+@@ -15253,7 +15253,7 @@ static int __pyx_f_7aiohttp_12_http_parser_cb_on_status(llhttp_t *__pyx_v_parser
-+  *                       const char *at, size_t length) except -1:
-+  *     cdef HttpParser pyparser = <HttpParser>parser.data
-+  *     try:             # <<<<<<<<<<<<<<
-+- *         if length > pyparser._max_line_size:
-++ *         if len(pyparser._buf) + length > pyparser._max_line_size:
-+  *             reason = pyparser._buf + at[:length]
-+ */
-+     __pyx_L5_except_error:;
-+diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
-+index 5da835bc6..e1edee310 100644
-+--- a/aiohttp/_http_parser.pyx
-++++ b/aiohttp/_http_parser.pyx
-+@@ -718,7 +718,7 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
-+                    const char *at, size_t length) except -1:
-+     cdef HttpParser pyparser = <HttpParser>parser.data
-+     try:
-+-        if length > pyparser._max_line_size:
-++        if len(pyparser._buf) + length > pyparser._max_line_size:
-+             status = pyparser._buf + at[:length]
-+             raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
-+         extend(pyparser._buf, at, length)
-+@@ -733,7 +733,7 @@ cdef int cb_on_status(cparser.llhttp_t* parser,
-+                       const char *at, size_t length) except -1:
-+     cdef HttpParser pyparser = <HttpParser>parser.data
-+     try:
-+-        if length > pyparser._max_line_size:
-++        if len(pyparser._buf) + length > pyparser._max_line_size:
-+             reason = pyparser._buf + at[:length]
-+             raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
-+         extend(pyparser._buf, at, length)
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 25604dbcc..8cb591f20 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -1272,6 +1272,17 @@ def test_http_request_max_status_line_under_limit(parser: HttpRequestParser) ->
-+     assert msg.url == URL("/path" + path.decode())
-+ 
-+ 
-++def test_http_request_max_status_line_fragmented(
-++    parser: HttpRequestParser,
++     protocol.resume_reading.assert_called()
++     assert protocol._reading_paused is False
+++
+++
+++async def test_readany_does_not_drain_reentrant_refill(
+++    protocol: mock.Mock,
 ++) -> None:
-++    # Split an overlong request target across reads so that each callback
-++    # fragment is under the limit but the accumulated target is not.
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-++    with pytest.raises(http_exceptions.LineTooLong, match=match):
-++        parser.feed_data(b"GET /" + b"a" * 8000)
-++        parser.feed_data(b"a" * 8000 + b" HTTP/1.1\r\nHost: a\r\n\r\n")
+++    """A single readany() must not reassemble data fed re-entrantly.
 ++
+++    Draining below the low water mark resumes reading, which can synchronously
+++    refill the buffer (e.g. decompressing another chunk). Joining that refill in
+++    one call would reassemble an unbounded body.
+++    """
+++    loop = asyncio.get_running_loop()
+++    stream = streams.StreamReader(protocol, limit=4, loop=loop)
 ++
-+ def test_http_response_parser_utf8(response) -> None:
-+     text = "HTTP/1.1 200 Ok\r\nx-test:тест\r\n\r\n".encode()
+++    refills = [b"second", b"third"]
+++
+++    def resume_reading() -> None:
+++        if refills:
+++            stream.feed_data(refills.pop(0))
+++
+++    protocol.resume_reading.side_effect = resume_reading
+++
+++    stream.feed_data(b"first")
+++
+++    # Popping "first" refills "second", but this readany() returns only "first".
+++    assert await stream.readany() == b"first"
+++    assert await stream.readany() == b"second"
+++    assert await stream.readany() == b"third"
++diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
++index fe9cce27b..e2fd40432 100644
++--- a/tests/test_web_functional.py
+++++ b/tests/test_web_functional.py
++@@ -5,6 +5,8 @@ import pathlib
++ import socket
++ import sys
++ from typing import Any, Dict, Generator, NoReturn, Optional, Tuple
+++import zlib
+++from contextlib import suppress
++ from unittest import mock
 + 
-+@@ -1349,6 +1360,17 @@ def test_http_response_parser_status_line_under_limit(
-+     assert msg.reason == reason.decode()
++ import pytest
++@@ -23,7 +25,9 @@ from aiohttp import (
++ )
++ from aiohttp.compression_utils import ZLibBackend, ZLibCompressObjProtocol
++ from aiohttp.hdrs import CONTENT_LENGTH, CONTENT_TYPE, TRANSFER_ENCODING
+++from aiohttp.helpers import DEFAULT_CHUNK_SIZE
++ from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer
+++from aiohttp.streams import StreamReader
++ from aiohttp.typedefs import Handler
++ from aiohttp.web_protocol import RequestHandler
++ 
++@@ -1683,6 +1687,65 @@ async def test_response_prepared_with_clone(aiohttp_client) -> None:
++     await resp.release()
 + 
 + 
-++def test_http_response_parser_status_line_too_long_fragmented(
-++    response: HttpResponseParser,
+++@pytest.mark.parametrize("decompressed_size", [4 * 1024 * 1024, 32 * 1024 * 1024])
+++async def test_unread_compressed_body_drain_is_bounded(
+++    aiohttp_server: AiohttpServer,
+++    monkeypatch: pytest.MonkeyPatch,
+++    decompressed_size: int,
 ++) -> None:
-++    # Split an overlong reason phrase across reads so that each callback
-++    # fragment is under the limit but the accumulated reason is not.
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-++    with pytest.raises(http_exceptions.LineTooLong, match=match):
-++        response.feed_data(b"HTTP/1.1 200 " + b"a" * 8000)
-++        response.feed_data(b"a" * 8000 + b"\r\n\r\n")
+++    """Draining an unread compressed body stays bounded by the read buffer.
+++
+++    A handler that rejects before reading still drains the payload during
+++    lingering close; a small compressed body must not force a large transient
+++    allocation (a deflate-bomb style DoS).
+++    """
+++    drain_reads: list[int] = []
+++    drained = asyncio.Event()
+++    readany = StreamReader.readany
+++
+++    async def record_readany(self: StreamReader) -> bytes:
+++        data = await readany(self)
+++        assert data
+++        drain_reads.append(len(data))
+++        drained.set()
+++        return data
+++
+++    monkeypatch.setattr(StreamReader, "readany", record_readany)
+++
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(status=401)
+++
+++    app = web.Application(client_max_size=1024)
+++    app.router.add_post("/", handler)
+++    server = await aiohttp_server(app)
+++
+++    body = zlib.compress(b"a" * decompressed_size)
+++    assert len(body) < decompressed_size
+++    head = (
+++        b"POST / HTTP/1.1\r\n"
+++        b"Host: localhost\r\n"
+++        b"Content-Encoding: deflate\r\n"
+++        b"Content-Length: %d\r\n"
+++        b"Connection: keep-alive\r\n\r\n"
+++    ) % len(body)
+++
+++    reader, writer = await asyncio.open_connection(server.host, server.port)
+++    try:
+++        writer.write(head + body)
+++        await writer.drain()
+++        status_line = await asyncio.wait_for(reader.readline(), 5)
+++        assert status_line.startswith(b"HTTP/1.1 401 ")
+++        await asyncio.wait_for(drained.wait(), 5)
+++    finally:
+++        writer.close()
+++        with suppress(ConnectionResetError, BrokenPipeError):
+++            await writer.wait_closed()
+++
+++    # Bounded by the buffer, not the decompressed size.
+++    assert max(drain_reads) <= 3 * DEFAULT_CHUNK_SIZE
+++    assert max(drain_reads) < decompressed_size
 ++
 ++
-+ def test_http_response_parser_bad_version(response) -> None:
-+     with pytest.raises(http_exceptions.BadHttpMessage):
-+         response.feed_data(b"HT/11 200 Ok\r\n\r\n")
-+-- 
-+2.35.6
-+
++ async def test_app_max_client_size(aiohttp_client) -> None:
++     async def handler(request):
++         await request.post()
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index 3c07933200..1a6baebfe9 100644
+index 1a6baebfe9..9a53c3b518 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -13,6 +13,7 @@ SRC_URI += " \
-     file://CVE-2026-54274.patch \
+@@ -14,6 +14,7 @@ SRC_URI += " \
      file://CVE-2026-54275.patch \
      file://CVE-2026-54276.patch \
-+    file://CVE-2026-54277.patch \
+     file://CVE-2026-54277.patch \
++    file://CVE-2026-54278.patch \
  "
  
  CVE_PRODUCT = "aiohttp"
