@@ -2,68 +2,68 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A7DFC5DF70
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 09:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0E6AC5DF7D
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 10:15:10 +0000 (UTC)
 Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4726.1787044794399379818
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5592.1787048093119467832
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2026 02:19:54 -0700
+ Tue, 18 Aug 2026 03:14:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=KhLQmt+U;
+ dkim=pass header.i=@mvista.com header.s=google header.b=KK5imeWn;
  spf=pass (domain: mvista.com, ip: 209.85.216.48, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38e347638adso5361456a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 02:19:54 -0700 (PDT)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3811f512167so6186071a91.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 03:14:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1787044794; x=1787649594; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1787048092; x=1787652892; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/y1xZx8YV2Sr815t2hkINywfrh/I7i5O9zjltAG/HxQ=;
-        b=KhLQmt+UBV1jaNEwLOVPvnjo6jZwMFL42DNLcYEkeoaKVP4OhoBmOux0jepHvGeieq
-         GRMS+2Vj3uHnkQ6WanblMUJbt5UZd3pzlqetRTe93lgEoDr38zXir4RACQZg38l/8qxE
-         MXe65/tDsId02z6FxYKjX6pCto4Swyj3fMRmA=
+        bh=07XOPx54l7s5Zlbw7c6mFsCK4qlvfbIGfMYowZ1qxuo=;
+        b=KK5imeWnNhjwCY6bcwMl4mcVvYbeAgAhhUBS18lJ0v+rgjOyWLTy3jj2r3VZZgoNpe
+         F+JdiAPoJWPuQHdA778YnzssndhXKh6FEYXkaC1j7DkRazHUpiwFkootMGeC/VM2+1IO
+         CN+6ODPEjF+Wah47CC75LF4jGTJu19dIoX0eQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787044794; x=1787649594;
+        d=1e100.net; s=20251104; t=1787048092; x=1787652892;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/y1xZx8YV2Sr815t2hkINywfrh/I7i5O9zjltAG/HxQ=;
-        b=EAi4a4ZBi5Q+QrqHYdXRaPFswdtS7NfjfxOvry9EDceO10mKIhZUoqyoqDA0IOT4yr
-         fVJD4ovY1598IRH7Uj57x/yQ8ONQTSkC+QqLjJLulgshhXc1iF69HWKGR8lSoa9VNysU
-         aJBm0/4raz7TaCgLOF3QFnDQY4GQbtOI4PsgoVltVtZVqriYGvuNJ0r2fNvmlLdKVxQm
-         nzXw4j7LXmJPpmy+zFVsK6WFTsmz9ccKJEbsBZvJ11JXJdME7NXj4LyC7bsycychlAem
-         aTIncOt6F6hAgKZoJ1gYpc4DR9yhwjt3gH0xWInvzrm/vzMNg38eYIFHUSku1NxRfqu6
-         py0A==
-X-Gm-Message-State: AOJu0YxZkY74ndG69Sv+ZGxS3uKFscbi4S2jfx/lU2ye5aPvCJle3Hwz
-	3v3adB8ZXPHlnE0WHvYGG6tmOLtRfFnccaGcsuIPGgHjS3Dr3Si5HMY8fheDR6h08D1OsFdaenZ
-	9AHNBmrI=
-X-Gm-Gg: AR+sD13pnj+p+wqZ9zigI+is7BUMcWo/ouA/wNwuplxLJwZoK1SEqGhDUgvilKSufcr
-	Pf70t7Ks7nMSs6HX0qwl4Ww08RkCtUzG7mhcMD77YD+/yGmt3ZO1SQnC0wPz433tiIP8axBHyme
-	lbH+FQkW3D2aq5UAXnTZMciuJWPjPVg/EB+H8GwIUHnvIJ6Rdt67wT6CUDGkWPyxV1C3y+wL8El
-	TxjcKOZIW4u3YfP/DnA2DZH+RTL9o9GAqNLKNDrF9L64K6CbzEZ5S0jUXqQLkjF44XwTNvQvbyr
-	83QCnnFBNSCrmnZNTDhXBZ9LDnZQfeuXuzqrj5JXsEk8N2p+yJUuKRPQdrSvbYcpJJ4AC9zR1Pm
-	ThmF9wpwpyjDmvIxAzUiBy89bzT3JraqyORpFDBP9RAx50EmhBu4DtZIpO94xB3sjkqoWiRqB8+
-	JGvOEF2Mxev1qekISOsON2ZDdjdJq/oGi7Obgfyu9RtACoE4RGDT8kYi/j30LtJFaUEesEmhSMI
-	mycVsf+JF4cGXA=
-X-Received: by 2002:a17:90b:4d08:b0:37f:c22a:c188 with SMTP id 98e67ed59e1d1-3933b6f0622mr32621547a91.4.1787044793660;
-        Tue, 18 Aug 2026 02:19:53 -0700 (PDT)
+        bh=07XOPx54l7s5Zlbw7c6mFsCK4qlvfbIGfMYowZ1qxuo=;
+        b=NYx/QMi+ZDbHV4KW2TcjM/euERDPETcmKJ5kTHm1hh9RszEf4h5DFINqel93bWx9W+
+         RK1iuVFh2boVzra/GEUylWkfS5m+mIpnE6TVYYrAKjrYl4NyHnS8ODz5ety/drfTfBmr
+         5i9Qmr5zqY3mpqtQTLnW7qK9uiNlumoibelqD3zj8hdsUQYfdz4Q3J7nhPuWQJ/vB65u
+         /AqvnoAU2scQuIsdvOcOwLGXvWvTKGUBTLtd6UvhqNvV1h/KPFubFfJtFm14KwIceFJl
+         HwpPEB0daw72s+TeOjPzG+6sOAXy/tnbFNy6OBtJ3zRmYMX0gHWLQEznN+2FOZxkmAgQ
+         m53Q==
+X-Gm-Message-State: AOJu0Ywq5dgK/dV6M+NuEvmvzTtptMfuyyesrh60BmfRVux7pLcA6vvs
+	Ms7jI2rWceyKyS5hNsxmpg/5PXki/RAzK3ZqmsUvwlT1s9zTyL0F6SSnQley9mz6GspdL/FWeug
+	OFmh1AEM=
+X-Gm-Gg: AR+sD10d3eCMFKJew78Shcx9lYQ4ze/aG15nnOdv9WaA/cXoPPSJSD3whUu6PlJy+Si
+	pmdUYJZvFyqMBvLUaWyiltpratp8tGEiamjhciu7564jx1a+DH2emlGsfuR4OLbbER84nkJe/0M
+	ksHU/Fm2SDhBcB4oA+vGmy7OpP2yxQ9zMCAaIPz7IGgdUCPV3R9XKn2HL19xpUE5oP1rtB+mA28
+	NpCZz/uNt+arCaYxzWGKgQtPpUvSKy1tYrRCY2N+0zX+Ia0Ma79ReiWXISTxmr4ad2x7QpJIsML
+	XVka/IqrOc53x7HaTv13ukaZp76HT/9ef+UFBRmo0guZW7KkJyppOkz8oetumEh4fUAdz2bXkTl
+	JXoAmLTm457QBES/zTI4LkuS/lgEhk+0Iwtzapia5uKg244p/O7dyaptgtsHvY7uZRCR3jFNxgd
+	Ck/nypQgXh2v2XxL7uvbRrdl8AxGDcFugAgF/k6omslAGTGERHu13MR1kT5ATLevtQ6M0glTFqo
+	enb
+X-Received: by 2002:a17:90b:4fc2:b0:38e:2524:724f with SMTP id 98e67ed59e1d1-3955a7b4d0emr8961785a91.12.1787048092476;
+        Tue, 18 Aug 2026 03:14:52 -0700 (PDT)
 Received: from MVIN00352.mvista.com ([2401:4900:1f29:777d:ea96:6c89:c935:111e])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14152ea340csm14079367c88.0.2026.08.18.02.19.51
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-326793c43b7sm15369074eec.7.2026.08.18.03.14.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Aug 2026 02:19:52 -0700 (PDT)
+        Tue, 18 Aug 2026 03:14:51 -0700 (PDT)
 From: Vijay Anusuri <vanusuri@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][master][patch] giflib: Fix CVE-2026-26740
-Date: Tue, 18 Aug 2026 14:49:43 +0530
-Message-ID: <20260818091943.1172667-1-vanusuri@mvista.com>
+Subject: [oe][meta-oe][wrynose][patch] giflib: Fix CVE-2026-26740
+Date: Tue, 18 Aug 2026 15:44:41 +0530
+Message-ID: <20260818101442.1354019-1-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 09:20:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129230
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 10:15:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129231
 
 Pick patch according to [2]
 
@@ -73,7 +73,7 @@ Pick patch according to [2]
 Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
  .../giflib/giflib/CVE-2026-26740.patch        | 40 +++++++++++++++++++
- .../recipes-devtools/giflib/giflib_6.1.3.bb   |  1 +
+ .../recipes-devtools/giflib/giflib_6.1.2.bb   |  1 +
  2 files changed, 41 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/giflib/giflib/CVE-2026-26740.patch
 
@@ -123,10 +123,10 @@ index 0000000000..14ae97d23f
 +-- 
 +2.43.0
 +
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb b/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
-index 6add9d01ad..69dd46963c 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_6.1.3.bb
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb b/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb
+index 9cb2a51879..11f375ef27 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_6.1.2.bb
 @@ -9,6 +9,7 @@ DEPENDS = "xmlto-native"
  
  SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
