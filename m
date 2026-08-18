@@ -1,209 +1,143 @@
-Return-Path: <jaipaul.cheernam@est.tech>
+Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CED24C5DF7D
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 12:43:41 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.22])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7872.1787057019648540062
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D25FBC5DF7D
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:35 +0000 (UTC)
+Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15139.1787076932485178118
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2026 05:43:39 -0700
+ Tue, 18 Aug 2026 11:15:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=HPU67msK;
- spf=pass (domain: est.tech, ip: 52.101.70.22, mailfrom: jaipaul.cheernam@est.tech)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ks92JvF4tCWftgYXlMw9DVIPT7uh7rCwaaxGyaCDl4MqYg7y8O8N5VDEoi84EG3qa2mTTbdwWRppN55laUiiO/dem7FQ0UUE3S4f/r61vZmaSYwzqol5u/b+r5l/bpVVNOn+ZFECEU+I7nXUnUpzSKZdcOklLtQmk6VE0IXL8w/upZ3OvAKmUhHQcLjDH2cMtnrmKh4G1YElV4rZpVvwukdEKk5rLnxQvQVEAqsMIxIbo0mHMs+YfdU2gdAEAiBKCHTg+LIy3KWwLAHfpGUlBcc67BHoj474Yqhq+YNkM7jBkQIsiFtwIMD+PQ76kfs+e+eWL7681iCc4uOErH1CWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tfNW4VJ2ixBf4WkugI2yP9WxRsmR6QGId06P6VKug4M=;
- b=Tnz/AyBRUjmhlAPYsp25+4q0PGCHLqVBKgokSkFavXE+pi3CVZuTm2pSvg9xwQs49ngs+55K5ovXpFbvOjS3UERvhCA+ZetOr8GtubNnuYpnrpK1GLUdeWpI4sR1Ee2WM0M2V6pY2FqYAZbUMoCjRtAeo99N/bvJtp+KHxxE0lGqt4yaSNA6UHUKnYQktKm5UoqdsRGN+eLIH7P58p2zEqK6Sg1kY6DIzIK1/4kxmIOpMKpZ7W2lIrAcFtGhQLlZSo/qkFOTGN5yQAOjj3QP0AY6jlOt21Xxcdj4EZN2veom2GbLMI6xR5hYO2mCQepQ4VjzCpNqAQKvZkrzvAUojQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
- dkim=pass header.d=est.tech; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tfNW4VJ2ixBf4WkugI2yP9WxRsmR6QGId06P6VKug4M=;
- b=HPU67msKakcYiOYaPRnTX3VADfDQ4pVZHgHGkN31D65gc40F/yTJH5r1wmoZvTalMXqOZAoHba+wQBEozWBrMPOoY6h26Gxd4JdAdWDNgfNABjQBxnIjy/v5LihlJKc0Siwmqg+hB3Uj90Kd00jTwuPXsebX4dVt0sUPyA8mn1itBCtlmu77Xiq+9xjUvYIY5z3WfPmvlqdrnSGpBT/9zCEc2W7PL+Z3Q6VRAWYdepi4sk2x6oNNHvP2wZjBuQfrWucU371OevAie9Pih42iMJl6ryPibwLZI7iLV28inCDCORAkAESiExKx3Zk3tvbMmJvS4KwMWoOxum3ZBfyK8Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=est.tech;
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
- by DU0P189MB2370.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:478::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
- 2026 12:43:35 +0000
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0339.007; Tue, 18 Aug 2026
- 12:43:35 +0000
-From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=EUeFJRaE;
+ spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: dkelaiya@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=2764; q=dns/txt;
+  s=iport01; t=1787076932; x=1788286532;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=W/d8Hoif7VcAvh6dgi4eKhPjpTNuqGsnfbRLpOlin8U=;
+  b=EUeFJRaE+RMIZJwC7F2IZRaLRsOMZABmZF3OdY87cxH9loxNu1fZ8PiQ
+   3LxMItZUCKAq/OokHUxobeF9SiEgjXrI0KzvtRKBAlb+mcvxjcje/qn+j
+   Xge7TQXdu00zf/ZKnaeA+FLMuZwWGyTnS6mOT3mZ19JxjyGtsziSjuvJK
+   MEral/qbXaIRB2eUl11dZrRjWP7RJogIgBJOTdhSh/yCjlU6DiQiD2U/X
+   OwNsU4JIQHjVBSmFWB6uwkY1A2Dw+UzIR+exHBeXjhrY/pnMY5Gv88lIk
+   RJGSODJPCu1c5CoWyWD/DbdenO0yTtB5qtNa5A1xDwjgbdM+jD6Z3DicX
+   A==;
+X-CSE-ConnectionGUID: 8y3caTbKSKKGycVsonGbyQ==
+X-CSE-MsgGUID: FaRdmxD0Rm6UHKmi1OACEA==
+X-IPAS-Result: =?us-ascii?q?A0BaAwDJn4Rq/4sQJK1aglmDS15DSZNZAYJwnh6Bfg8BA?=
+ =?us-ascii?q?QEPNxoEAQGFBY1tAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
+ =?us-ascii?q?Q4ThlyGXTYBGAEtMFxEgwIBgnQDxDCCLIEBgygBgVTbPBUFgTOFP4gidoR8J?=
+ =?us-ascii?q?xsbgXKEfoQ0XIV4BIIiehKTMEiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjP?=
+ =?us-ascii?q?heBDRsGBYEdgSiENyMZNnqBCV6BKyphARIXgQmCCgKCc4IGAgFJRQ4LGA1IE?=
+ =?us-ascii?q?Sw3FBkEPm4HjjgggkOBDzB2IIERGKVeoQ8KKIN2jCGVOhozqmyZCKQNTYRpg?=
+ =?us-ascii?q?Wg8gVlwFYMiCUoZD95cJzICOwIHAgcOAwuRai2BTwEB?=
+IronPort-Data: A9a23:y7JBgaCWmhbiexVW/3jiw5YqxClBgxIJ4kV8jS/XYbTApDt00jQGx
+ mQaCD+EPvuMM2Twf491at6z8U5Q7J7SzNQ3OVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
+ fuo+5eBYA/8hGYvWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEk+Q1B0gKN64j2cVYEGpw7
+ vseBzocV0XW7w626OrTpuhEj8AnKozveYgYoHwllWufBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
+ YxAMmsHgBfoO3WjPn8bC586lea5j1H0ciZTrxSeoq9fD237nFQgiOe8YIaNEjCMbetcpEqdt
+ k6exWGnPzE5Md3G7hOu31v504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
+ UsM9ywjqKI/+ECmQp/6RRLQnZKflhcYX9wVF6gx7xuAj/KOpQ2YHWMDCDVGbbTKqfMLeNDj7
+ XfR9/uBONClmOT9pa61nltMkQ6PBA==
+IronPort-HdrOrdr: A9a23:LYHOUaq6FLlEJXtSGflr/TcaV5oHeYIsimQD101hICG9vPb2qy
+ nIpoV/6faaslcssR0b9OxoW5PwI080i6QU3WB5B97LN2PbUQCTQr2Kg7GP/9TIIVybygck79
+ YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
+X-Talos-CUID: =?us-ascii?q?9a23=3A6m08imnkRh2PyXeYE0xP/OiXE8zXOS3Ml3zZH0W?=
+ =?us-ascii?q?bMkVKZ6yed0SX/oxugvM7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3ArMV+Ow7tPIyEp3dhpSM+BtOnxoxG6p6iDVAhya8?=
+ =?us-ascii?q?D5fSkFilxYhC0pxmeF9o=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,230,1779148800"; 
+   d="scan'208";a="809079840"
+Received: from alln-l-core-02.cisco.com ([173.36.16.139])
+  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:31 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id 7FC01180001B8;
+	Tue, 18 Aug 2026 18:15:31 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id 1A6A7CCA79B; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-CC: RAJ.KHEM@gmail.com,
-	Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: [PATCH] libtracefs: remove recipe (moved to oe-core)
-Date: Tue, 18 Aug 2026 14:43:29 +0200
-Message-ID: <20260818124329.54509-1-jaipaul.cheernam@est.tech>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: DU7P189CA0003.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:10:552::9) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:18:3::ad4)
+Cc: xe-linux-external@cisco.com,
+	Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 0/10] python3-aiohttp: fix multiple CVEs
+Date: Tue, 18 Aug 2026 11:15:18 -0700
+Message-Id: <20260818181528.3405276-1-dkelaiya@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|DU0P189MB2370:EE_
-X-MS-Office365-Filtering-Correlation-Id: dad22a63-97f7-4322-2463-08defd2651bd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|3023799007|18002099003|11063799006|56012099006|10067099003;
-X-Microsoft-Antispam-Message-Info: 
-	pbV7q0HWlW3cZMZdj7+934I/6wW25VCvwi53XlbWmbDcVJG+KC69HRsZlcVw2svXkUBQuMa8ou1CPwOBriTYxHBsWFdrqGesdPAg053TfYx2TJvgi9QrAL4T2rRi0vgOWckAHcWM/kNxH2TnD3i0CDsWT9Pe1RzfQ8rdTM16udNw4ibJU8WHPBb+Ddf6MJmIwRCquncU+FAAuVri+miiD0I64DCiW8lqWQnp8nMGRkJRnPhQ10m3iVjwvC+1xzBQCx0/B+p7h/KcQ+e9luS8O4k2gb9iKbo2aH1P3jtZzP3s+rhVCB4MpXevwyAvQ+BzbVetZEyVuyz/sN0vrx0tG2yb9qhK39LVp/IUgf5c8rMNW1lx/R0siKdxi0/GnekjFw9KW4ShnNZXkBIqD8uEn3NyI0TPA2LW8r4s5wLdxZBwigk0Wg+1bMjKy2REp7hOUr7Zq7UfDJKMPoACOLxn+vMHPKORbbUA4Qozx2//TkDc714HFW0AdAdWdulb4uGspNnUASIqAgI1t64dKzQpPO23dG2pICpRZwCk3YFY+kLQIuQPIbyzjtGPaCSfAwnH+8MY10OoPMpjmoyII9hWR3NfDprmyE0pHQNF4TiJZDH9snNPfOqzMWmVam2D/5oQ
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(3023799007)(18002099003)(11063799006)(56012099006)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?6BExVlWOId3Qsk4z/DVp0PVG+hPPiTOR/A+oaxTXf1/YqqMwcSZzEePeQpZO?=
- =?us-ascii?Q?4Vqv/mINUN+YHKmRyJjL7JpW/t0JXkotA70tlYVD0CJ6cnblLwzopOV8k4L2?=
- =?us-ascii?Q?Uw0pT3J8nYuajEqQtPEipU7kMI4PQmnZLVee3uIm/1FinTyC7qeR8SP70f/L?=
- =?us-ascii?Q?boRkCS9/21AzZwPkgjSWVIWlKK3YHO+Ehdsb4FIMO6A2o+0d92c3cqXy2mK7?=
- =?us-ascii?Q?SiostEIPPNt1GyYo6ukCOqHLF4WDUyDiuWgnc3K9JTzJdmIvR175xUuggxcX?=
- =?us-ascii?Q?+pb/MFvj1KM8FMzpGSYbwsG3V91v7jeyXVwHSnLc46REi10mes2teV6NbAn9?=
- =?us-ascii?Q?5m2rAC+Xku/BoIqgnPNgLnKO5fdJPZP6Up40duKiN+CtAYgMky2t01BmUnvl?=
- =?us-ascii?Q?6bu6CBjyWYv2F1mW+0Fs9jd4tFYxEYg0+3+4vOwDj2E/H7Lj9wfRaSQ28b0e?=
- =?us-ascii?Q?5eN85eUnBjFjAi3c+wQif6FzLZcsquOHItfUQf4U1BVGatniWSYOu2WHwcC4?=
- =?us-ascii?Q?DvfJF/d6racqblhTtpPfDYbV4DMYjJ5t/soyd3QV2i9BXIgB5oEVMHkCQGEl?=
- =?us-ascii?Q?whywif9IEgYPDeMk2hY922HkDp9T6/nRWAdKE7dUvSqJaOEaDj6yeC0+7taU?=
- =?us-ascii?Q?xxKUzi+9iOSHJhfqMctduWszmGjFN0sr6gmo7fBHPbyNngYdYCsc/uDZSWuV?=
- =?us-ascii?Q?6BddQ4DC+8r5iOKwIME3P4kc2ewd/3VbydFjNYXkuYTOOWTrJe+GqVGjJrv/?=
- =?us-ascii?Q?66PZhYx7G3aH4SBobcagYJt5N3Xo7uNus9y8GX6ju4XivqvJA3G6vkCiQAeP?=
- =?us-ascii?Q?kJMQSD7X70SdX4sc9P6FrCXaUgb0qV0p0I9AF6ShFo7mroSUJgyNbxwuCAka?=
- =?us-ascii?Q?tHqfN1AL5VFiub8D8LGoCapqH7vI5xD2gGKiOe0/UYHj3mdki0zBGgQsjUrT?=
- =?us-ascii?Q?XEbef/Ypvrs/yYulzuoSdk/rGal+PPHHZhJz/jSFKT+pyolHOivyeSRWz4P6?=
- =?us-ascii?Q?4QzAjeIBOjc7KW4QZb/QSKnKF4eovzDYWu0vickf5JxoItBLkLoSMuXRpE6u?=
- =?us-ascii?Q?rUli+OmNXnltmdTkwyUX1x8fAx1KUl0YxR4Uc7hRVqhcsODzr+G0qP62FThi?=
- =?us-ascii?Q?pO6pQcaSR5TABdhM5cv3U7tV6SJGa8fCpOy4+WLHGsiGjPw80wVoUKBP4J9w?=
- =?us-ascii?Q?d5YtRtpb0vevEomaq1WrjSbCv1DwzxEUBJps1GoYNF9Z8jE9EdChVpqQ72AB?=
- =?us-ascii?Q?8VOqIDlqVAp5HK70q2r4TJlHM5FbE08jSQXIQSZO0EjDEO2acWSDdztRu8rv?=
- =?us-ascii?Q?89knLJpMnTcJD4PzOoxVLBz+r6xEFBOSLs1o0RWrd4M0d1Wy8AhrF/Hip42V?=
- =?us-ascii?Q?2INWIs7Q1IZTttz3KDh8J4eeoPabCttPAOktqamcK9iViXIdOXwA96Ed01fR?=
- =?us-ascii?Q?GM1rOig0N/SRfmPghDRMV+8+IFX9HtYVU9ofSf7ab5AHaU5gS4uKL+jV41P+?=
- =?us-ascii?Q?GzLkvC1RnsSqsSzSuE8zAY1N1rNWRF8osN91HvYiLjLcmpZqHTnL4EjFGpKx?=
- =?us-ascii?Q?4jPqIkqe3pg91kugWG9/guHwA8AZHUgRnqynXDltZyUJ4uStCy+y9QqpPHSo?=
- =?us-ascii?Q?P69lMWir3Fmj+3nsxXK8yeDOTCoBSJj2V7lHTvBFAiJS36pG0wA3lHCIP/iL?=
- =?us-ascii?Q?EhrGhc30/xeokX/lrqtm9FeMt99izKfBUmRtKWyA6w4MspA2Kg2/bnNs5lhB?=
- =?us-ascii?Q?GOZJZI+k7j1nlJX2viaf7SUPJypDUrA=3D?=
-X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: dad22a63-97f7-4322-2463-08defd2651bd
-X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 12:43:35.6732
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FncHzMqvooeMukR6LUNOfInMQKZf2RuPH1Z4k9hv/2OP9Dey/oxDneScoX9hLB01NrHcTpbY7Md6xAb1MMi2UMfiC+ggryueEqIFFOIhPiA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P189MB2370
+Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: alln-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 12:43:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129232
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129233
 
-libtracefs has been imported into openembedded-core [1] as it is now
-required by powertop 2.16 (upstream commit 2b133ed [2]). Remove it
-from meta-oe to avoid duplicate recipes.
+From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-- This commit is depends on [1]
+Backport ten upstream aiohttp security fixes to the 3.13.5 recipe on
+wrynose.
 
-[1] https://lists.openembedded.org/g/openembedded-core/topic/120806764
-[2] https://github.com/fenrus75/powertop/commit/2b133ed512c6852cf81cb98831b=
-dfd585c0317bf
+The corresponding fixes are available in aiohttp 3.14.0 and 3.14.1.
+Carry them as focused backports instead of upgrading the recipe because
+the 3.14 release also introduces new APIs, deprecations, and
+backward-incompatible behavior outside the security scope.
 
-Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
----
- ...not-preserve-ownership-in-cp-command.patch | 28 -------------------
- .../libtracefs/libtracefs_1.8.3.bb            | 25 -----------------
- 2 files changed, 53 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makef=
-ile-Do-not-preserve-ownership-in-cp-command.patch
- delete mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+The individual commits retain the upstream fix provenance and public
+advisory references for each CVE.
 
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-=
-not-preserve-ownership-in-cp-command.patch b/meta-oe/recipes-kernel/libtrac=
-efs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch
-deleted file mode 100644
-index 7eaf29e4c4..0000000000
---- a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-pre=
-serve-ownership-in-cp-command.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From ab6f78bfd6811c648ee71663cfc4dc8be151a519 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 21 Dec 2022 22:50:56 -0800
--Subject: [PATCH] makefile: Do not preserve ownership in cp command
--
--Fixes
--ERROR: libtracefs-1.6.3-r0 do_package_qa: QA Issue: libtracefs: /usr/lib/l=
-ibtracefs.so is owned by uid 1000, which is the same as the user running bi=
-tbake. This may be due to host contamination [host-user-contaminated]
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile b/Makefile
--index 7f4f5c3..1ba7b9d 100644
----- a/Makefile
--+++ b/Makefile
--@@ -296,7 +296,7 @@ endif # DESTDIR =3D ""
--=20
-- install_libs: libs install_pkgconfig
-- 	$(Q)$(call do_install,$(LIBTRACEFS_SHARED),$(libdir_SQ)); \
---		cp -fpR $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
--+		cp --no-preserve=3Downership --recursive $(LIB_INSTALL) $(DESTDIR)$(lib=
-dir_SQ)
-- 	$(Q)$(call do_install,$(src)/include/tracefs.h,$(includedir_SQ),644)
-- 	$(Q)$(call install_ld_config)
--=20
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb b/meta-o=
-e/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
-deleted file mode 100644
-index 117716dad2..0000000000
---- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
--# Released under the MIT license (see COPYING.MIT for the terms)
--
--SUMMARY =3D "Library to parse raw trace event formats	"
--HOMEPAGE =3D "https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.g=
-it/"
--LICENSE =3D "GPL-2.0-or-later AND LGPL-2.1-or-later"
--LIC_FILES_CHKSUM =3D "file://LICENSES/GPL-2.0;md5=3De6a75371ba4d16749254a5=
-1215d13f97 \
--                    file://LICENSES/LGPL-2.1;md5=3Db370887980db5dd40659b50=
-909238dbd"
--SECTION =3D "libs"
--DEPENDS =3D "libtraceevent bison-native flex-native"
--
--SRCREV =3D "6fad6a14ba0d4c4b437d9e4eed7098d4bb07b4fc"
--SRC_URI =3D "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;bra=
-nch=3D${BPN};protocol=3Dhttps \
--           file://0001-makefile-Do-not-preserve-ownership-in-cp-command.pa=
-tch \
--           "
--
--inherit pkgconfig bash-completion
--
--do_compile:prepend() {
--    touch ${S}/src/sqlhist.tab.c
--}
--
--do_install() {
--    oe_runmake install DESTDIR=3D${D} pkgconfig_dir=3D${libdir}/pkgconfig
--}
+Testing:
+- Applied the ten layer commits to the upstream wrynose baseline.
+- Applied all ten embedded patches to aiohttp 3.13.5 in series order
+  with no conflicts or fuzz.
+- Package build and image build validation completed successfully.
+
+Darsh Kelaiya (10):
+  python3-aiohttp: fix CVE-2026-34993
+  python3-aiohttp: fix CVE-2026-47265
+  python3-aiohttp: fix CVE-2026-50269
+  python3-aiohttp: fix CVE-2026-54274
+  python3-aiohttp: fix CVE-2026-54275
+  python3-aiohttp: fix CVE-2026-54276
+  python3-aiohttp: fix CVE-2026-54277
+  python3-aiohttp: fix CVE-2026-54278
+  python3-aiohttp: fix CVE-2026-54279
+  python3-aiohttp: fix CVE-2026-54280
+
+ .../python3-aiohttp/CVE-2026-34993.patch      | 478 ++++++++++++++++++
+ .../python3-aiohttp/CVE-2026-47265.patch      |  64 +++
+ .../python3-aiohttp/CVE-2026-50269.patch      |  81 +++
+ .../python3-aiohttp/CVE-2026-54274.patch      | 182 +++++++
+ .../python3-aiohttp/CVE-2026-54275.patch      | 115 +++++
+ .../python3-aiohttp/CVE-2026-54276.patch      | 287 +++++++++++
+ .../python3-aiohttp/CVE-2026-54277.patch      | 249 +++++++++
+ .../python3-aiohttp/CVE-2026-54278.patch      | 182 +++++++
+ .../python3-aiohttp/CVE-2026-54279.patch      | 295 +++++++++++
+ .../python3-aiohttp/CVE-2026-54280.patch      | 138 +++++
+ .../python/python3-aiohttp_3.13.5.bb          |  13 +
+ 11 files changed, 2084 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34993.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-47265.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54274.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54275.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54276.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54279.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54280.patch
+
+-- 
+2.35.6
 
