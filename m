@@ -1,100 +1,143 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BCFAC5DF74
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 05:02:59 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2357.1787029375656633729
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C30ABC5DF74
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 05:28:09 +0000 (UTC)
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2572.1787030814786717912
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Aug 2026 22:02:55 -0700
+ Mon, 17 Aug 2026 22:26:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=DGopTiLr;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-c9aea40d799so2388238a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Aug 2026 22:02:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=l4hxI7Wh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: ericyunlinchiang@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-836c8bde2dcso53587027b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Aug 2026 22:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787029375; x=1787634175; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=t/tMOkI0VVUSlq8/A9hSVvsKd86ArwlmK/BKLlxZlpQ=;
-        b=DGopTiLrI+fKjU0j5pireC4YWiSlOJm27fi0uMqqZaReAJmU5aKgLxxnuGZHr//Xvc
-         MxaStqdMf87eyIlxbx77VQCKIrAKpjS+V+R5ShV93fnV/eMhLRqT447AP5dP0mACUR3q
-         EQ04d0U/8mMdEkzbdQnT2pDosCtw8ohtNdcUIFSrpwlhOSRF5E/Npt6fw/N9Znp87Fgo
-         NgATawO72/liVytfdEgPa7whLWn4Y4MJy/p9Eh6aW/KV38um/tC46sN2JSYTwS5BXNLk
-         4R7MRLNCwdLbGMR1WgnmnPdLgv0lroUonJvvX2RoHBUCBJwa9bBbAUrRhKOKUQnVtp6O
-         Z1rA==
+        d=gmail.com; s=20251104; t=1787030814; x=1787635614; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3SLimiQwNw5hP2dVxB38JKDklWMHgCdFoMFGDM9Nuos=;
+        b=l4hxI7WhmRz2Y2wennYmew3ryilYs0nmtXdqMp+1RNlKyYeqvMBg7Dhh3o+SEMdcgk
+         /z3ajaldr86/iw6dh5SoLUw85LpKsqbrtnOrIK2CFbA66rH1NveymgCbw+dpoBcCvnZb
+         SNQt93lL8zji9tWOJdSTW2RrKODyPCTM8UbbfjAGgVOfP/o8OZSWER0UM0K9QVMp4w+x
+         RSP7yjcOgTqemOUP1tFwT/Inf0GqbR5R8WakgsOsdJtzHccUyYJASbLvgURggbEvlxlk
+         odj6U0LNfleU0Isht6ghKbkEDOTJ5fz0bfUiEL/7jbQoJT3WAHEmA5DhOgVTyWNYchCN
+         180g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787029375; x=1787634175;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t/tMOkI0VVUSlq8/A9hSVvsKd86ArwlmK/BKLlxZlpQ=;
-        b=cBTWY/Ae0hvQ8LCB4i5n5XEKArLcjKVe2BKBQec1uwK1Z9cbIYEO6BGkXRWKD4gEvo
-         2B9nb+ThWY3LrRoxa3C0uMQC5Jid/alzHjpXkeLloQtzej87pJ2IjETMoIQinEfRzGUN
-         CFsS+MyaljcUpEQH8kGzmOUX9VD9z+PyuFGJkr4VQAPO/cHTLpfPGy+931HomJZOIPzc
-         Cqr6NvKwz0R4//pUrZB1oGNinzomxRE7rpve6Ql/fFBmkzQ9AqFNW8d1ESDZVKfuq8Cc
-         H1cNOaviS+NpiLPe17RfNehx2fgSgDbul/zuC7RdSFvh1+e1ANmwpPBqX9Tqu92wY9qT
-         HUqw==
-X-Gm-Message-State: AOJu0YwD5qgqvxl/Y1WtKb5/eqF7xNKpas762P3+Ny3WeFAPJISUzlUo
-	PZeFIjBLnPanQZMP0ms392DL5EziV3jjALb6lo/3BUaFZyzUgRfIoP0uHAYZxLhM
-X-Gm-Gg: AR+sD12HHTVA6xnNcb7StWlgJWnUQFa49buWG6IBfGX7e5tT/VwfnNkS11saAPFymfR
-	Mz4YP4J3ZilsNYt63BPqxCfGfrxYewMNes5WT9K7QqsKBvDGnCf4DX93+UkeTIKb7u6WVTkn1ZV
-	f+rYrWNVIVsbF2uodWus1cLlDfKCfn/PAlfqHeN9Z7ySnMCbZrHVQ2ZSE93djqqYwF6+1ZbFJ4n
-	Fim/KvHWPq2Hyc3nEQ3iBRWjR3N8OHFiKIypEI34HBz94BDsAJfoFGA42RrXaZTrivioQ+r0/gE
-	PzHMeClTgA0qIW+iUYxiOtrWSJJ58lSDuV8s+1adgmQ2Dut5KDQthNPGbsaj+brlWzABIraRrro
-	OMRQyy6sqzgYAQSQuo3BL6EKuaYCljsrZXUBa15XdtR0Id4MgPESA5J0lA3EP8PSWKqal172FHu
-	RZdI6xkWXUmEF2CHFPVAVK6Byyc9Gc2EhKs0lzBy0p0TIKSNtTh+MzHuqvrSDbRM5dpBuzX1lkw
-	w==
-X-Received: by 2002:a05:6a20:d48e:b0:3bf:7e2a:e874 with SMTP id adf61e73a8af0-3cc7196e77amr34404791637.1.1787029374863;
-        Mon, 17 Aug 2026 22:02:54 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3267be8e5c8sm12840095eec.16.2026.08.17.22.02.52
+        d=1e100.net; s=20251104; t=1787030814; x=1787635614;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3SLimiQwNw5hP2dVxB38JKDklWMHgCdFoMFGDM9Nuos=;
+        b=H+Pko4s11VwiBsT19s8+qnCFww5m/U6V1e+IXohk9E7w9RQc05hIJ6UZFMaQfAJpyO
+         eLc5+LyvXP3rYflPWu4ErP7Ykn9IDZlMgOVnL4uk8MkPiR+ukxRAhoGd1OvlIEEuJU24
+         +kiQkH/TQXf3447pvPTSWGahOCTzpTyIVvzjQD3xxFjDkrVBHLFR+zhga1hwgxGWp7z0
+         gn+iSw3cQcV3sRVQvupRhu+Nq/ZqHC1eP/ceIRq2OT53adX0icWt5vHaADoInjyZBBGO
+         UWB2ZO1U13jMo1skEXCWQIMYKzpvtmqzeU8wwgO1qmwr17uBG1oiR4KmLNc+//Z8Z0K9
+         pjwA==
+X-Gm-Message-State: AOJu0Yzjkl+2Vb8h/ubkX4Y/rqjFiGClr6hQvDzaWXjJPWrVMajfJuED
+	YiURbetRh41LCMyzgYSQAc5KXDuLJLb8Vm8C0R4hs1W6EaGkgWsXKU0hkcApAAxX
+X-Gm-Gg: AR+sD11U2RqOoxh+lbSFUZJdi+jFcjDxIF5sGAWJpUZ+wIDeX/WO0bWR5AqLO6XtIup
+	8Q800DA1hjY8TypxLInc/AR97Lqb0lexf7stOmzBJscVjVtKt3LbrNaXAqcuo2tEXpJXRE17gj3
+	tJ2b0QHQNx7T6pXt62FLtx2U3VIPGCwKogCMEi1SrquGV40yurVi1LTafc8hl36cMZs1JMPyHFo
+	KUXDZXSyCoO8/nEkiw52D8+tr2TjJNYaNOhjX3WyElRs1QzwHSfAhc4b36QP+vKTmlThXijzVG0
+	cR9nltF60478OHoPgrbR8SEhS1wK9MP+U2C6Q9UNqlAFhKfE8YjUc3xV9NkU85RjjyoYaZq3+yV
+	deEXv3/Zv7oKQMyLvdKU1QEUGCPizQMB/0nOmdZezE4/8uLudT3B6iz5SiEHTul4GtBIBfb6Fab
+	AX8CG+OBRKgd/jM6hGoAmjWUtypZX7wkmnzDhGw63DtaAhFWbdNz8FwnC03HGD9w79WPzW0UDm6
+	aHqwzJi1CgB0fVnR8v6sTmQVWJ+/g==
+X-Received: by 2002:a17:902:e80f:b0:2ca:e9dc:7357 with SMTP id d9443c01a7336-2d3b0d31815mr315028085ad.9.1787030347693;
+        Mon, 17 Aug 2026 22:19:07 -0700 (PDT)
+Received: from eric-N-A (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d5bb499ec7sm12986565ad.13.2026.08.17.22.19.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Aug 2026 22:02:54 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+        Mon, 17 Aug 2026 22:19:07 -0700 (PDT)
+From: Eric Chiang <ericyunlinchiang@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 27/27] tcpreplay: upgrade 4.6.0 -> 4.6.1
-Date: Tue, 18 Aug 2026 17:01:22 +1200
-Message-ID: <20260818050123.2901739-27-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260818050123.2901739-1-ankur.tyagi85@gmail.com>
-References: <20260818050123.2901739-1-ankur.tyagi85@gmail.com>
+Cc: raj.khem@gmail.com,
+	khem.raj@oss.qualcomm.com,
+	potin.lai.pt@gmail.com,
+	Eric Chiang <ericyunlinchiang@gmail.com>
+Subject: [meta-oe][PATCH] usbmuxd: create the usbmux user the udev rule requires
+Date: Tue, 18 Aug 2026 13:17:53 +0800
+Message-ID: <20260818051753.772159-1-ericyunlinchiang@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 05:02:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129226
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 05:28:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129227
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+usbmuxd ships 39-usbmuxd.rules, which starts the daemon when an Apple
+device appears:
 
-Release Notes:
-https://github.com/appneta/tcpreplay/releases/tag/v4.6.1
+  ACTION=="add", ..., OWNER="usbmux", ENV{SYSTEMD_WANTS}="usbmuxd.service"
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+The recipe never creates that account. Up to systemd v257 udev only
+logged a warning and the rest of the line still ran. systemd a1ee55e3c9
+("udev-rules: ignore OWNER=/GROUP= with unknown user/group", first
+released in v258) makes udev drop the whole rule line instead, so
+SYSTEMD_WANTS is never applied and usbmuxd is never started when a
+device is plugged in.
+
+Creating the account is what the rule already expects, and it preserves
+the intent of the systemd change: that change guards against a rule
+naming a nonexistent user silently clearing a valid earlier ownership
+assignment, and with the account present there is no nonexistent user.
+Removing OWNER= from the rule would evade that check instead of
+satisfying it. The daemon still runs as root, so nothing else changes.
+
+Also ship a sysusers.d fragment. Systems that modified a user or
+password at runtime carry a copied-up /etc/passwd in a writable /etc,
+which masks an account added at image build time even after an update;
+systemd-sysusers recreates it there. The uid may then differ, but the
+udev rule resolves the account by name and the daemon runs as root, so
+only the name matters.
+
+Distros that keep /etc on persistent storage may also need
+systemd-sysusers to actually run on boot; that is outside the scope of
+this recipe.
+
+Signed-off-by: Eric Chiang <ericyunlinchiang@gmail.com>
 ---
- .../tcpreplay/{tcpreplay_4.6.0.bb => tcpreplay_4.6.1.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.6.0.bb => tcpreplay_4.6.1.bb} (93%)
+ .../recipes-connectivity/usbmuxd/usbmuxd_git.bb   | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
-similarity index 93%
-rename from meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb
-rename to meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
-index 368308408f..8259c4ef1f 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.0.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
-@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
-     file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
- "
+diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+index c5e0fbee1a..6258bc5134 100644
+--- a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
++++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
  
--SRC_URI[sha256sum] = "30f73b901e74b6ffc36c0f82afccc9d5740e70ba214a15763631a59dd2cc3564"
-+SRC_URI[sha256sum] = "cc3642816073fb1d96b3af36df4fb66c11f523da427f95b7b0c4c99deaa53afb"
+ DEPENDS = "udev libusb1 libplist libimobiledevice-glue"
  
- UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
- UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+-inherit autotools pkgconfig gitpkgv systemd
++inherit autotools pkgconfig gitpkgv systemd useradd
+ 
+ PKGV = "${GITPKGVTAG}"
+ PV = "1.1.2+git"
+@@ -22,5 +22,18 @@ UPSTREAM_CHECK_COMMITS = "1"
+ EXTRA_OECONF += "--without-preflight"
+ 
+ FILES:${PN} += "${base_libdir}/udev/rules.d/"
++FILES:${PN} += "${nonarch_libdir}/sysusers.d"
+ 
+ SYSTEMD_SERVICE:${PN} = "usbmuxd.service"
++
++# 39-usbmuxd.rules carries OWNER="usbmux"; from systemd v258 udev drops the
++# whole rule line when the user does not exist, so the daemon is never
++# started. Create the account, and ship a sysusers.d fragment so it is also
++# recreated on systems whose /etc predates this recipe.
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM:${PN} = "--system --no-create-home --shell /bin/false --user-group usbmux"
++
++do_install:append() {
++    install -d ${D}${nonarch_libdir}/sysusers.d
++    printf 'u usbmux - "usbmux daemon"\n' > ${D}${nonarch_libdir}/sysusers.d/usbmuxd.conf
++}
+-- 
+2.53.0
+
 
