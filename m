@@ -1,207 +1,346 @@
-Return-Path: <dkelaiya@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CEC34C5DF8D
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 18:15:37 +0000 (UTC)
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15139.1787076932485178118
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F9CEC5B572
+	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 03:44:23 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.25055.1787111053321363045
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2026 11:15:32 -0700
+ Tue, 18 Aug 2026 20:44:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=UVrFqAws;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: dkelaiya@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=MI8ITNxC;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-69fab5a852cso896010a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 20:44:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787111051; cv=none;
+        d=google.com; s=arc-20260327;
+        b=GpjmUEBFSigcy4QE3FC+xbOyVYJyTvfbcD6VhH0hlqkg3pApQly6ganthD9ER0lBEw
+         tg/h0aq3cjs0ESh5lLQibjNfaOeD87tdh7FsYrc1AMinbEsbHzLwSRpVuwBmrLXwpshF
+         H5m9MmwuJIctlHv0SEkc7pIk0WoDVmT3vSMbtqKW1AagYA7eXDWFCXp8DpMB+Opq8Qjz
+         huzSg1X9k1XjdUwGQtX3QvlL40sWxqJ/bjQUGCCvGbRTkZIWvxrACCm2ew9fkQ3RRfIo
+         T5mgqF3CYHlxST0NvqKjY3DsDJy8CyQuJIadgn4jrqGjAB0vF1SxPSKx/uIXPZgkitrT
+         ha0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=G3SCwEceX+b9GvS7uytxaq+M9BvAXGBVRoEckzyoqJs=;
+        fh=Nt0SiAbLnLwrEcefm911TIzysFSRtVFtN7eq+bt+gQ4=;
+        b=mz6kgQ6osByIIckzCZXrpypaDw8ek3vfdikflxvbVs5yOvlEZt7E36JYtQWHJGmX8v
+         JfT0MycLjBEQcde9GKs5QTWu4lk+nJEFqKroamr3rxTKIS6WWuGdhe0OCuG6RfpQt/fj
+         b5SCqn4g8bfi3LVv630sHJbGKLpxyGi6HJdLG7dGJjm78nBLZBQT/2DpnnmR8Rz4WS8W
+         K7pLsblB6j5ELjAYdxP9T2gpFh1WhPtSx+1clK9Zy9A+2gygBqhEs7AOnnW9dBngUDA9
+         AkJM2DfG1ud1bN0gatuRTkh0PbjGDODpuuV/iT/3Fae8newvGdeq4oSsK+vypo1fxEla
+         Twdg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4460; q=dns/txt;
-  s=iport01; t=1787076932; x=1788286532;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=YNx4hI1zFv0AajteU5N/fu4vAxmlNLMr8VPmu0Hp3ns=;
-  b=UVrFqAwsma12zi2IHScThXKnRcYmPvtb4OPnvn2so90Xs/4oHJOAbijx
-   rX7CI6VfLkxP6fvUimA9/PJgnSYVYELZMH3wJoVdt1h9aoRcuX+CgnlD6
-   pthbnOBbAiYA5uADGPDkMOPV9rlpsUvP4EoC0gvZVm9xogbWpxoBRtzRk
-   zjz06d8Ab1UuRBgNc7Cql//l2spcKGo6CJRna8hqmXce/NMsMPkOGOkRO
-   JbFkOJizhzX/6sS9XNyRdTu3SfrkOZ7fbnmdVL/oMX9r1W872hirLuwTM
-   LziVRzgYZ8N6hzEp6Xr7X8EkO9Q8sGu7ctm9KGondCVurnzQnZS3ZCtKI
-   Q==;
-X-CSE-ConnectionGUID: Y3F1DKpkRU6Q+V+1Iw39ww==
-X-CSE-MsgGUID: QVAwFYoMSxOgkP1PpoPQkg==
-X-IPAS-Result: =?us-ascii?q?A0BHAgDJn4Rq/40QJK1aHgEBCxIMggULgld0XkNJlkoDn?=
- =?us-ascii?q?huBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBB?=
- =?us-ascii?q?QEBAQIBBwWBDhOGTw2GWgECAQMnCwEYAS0QHAMBAi8rIwgZgwIBgnQDEcQfg?=
- =?us-ascii?q?XkzgQGDKAGBVNswAQsUAQWBM4U/iCJdGAFEhDgnGxuBcoEVgTuCLoEFgVwCi?=
- =?us-ascii?q?CUEgiKBDIFakVZIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQ0bBgWBH?=
- =?us-ascii?q?YEohDcjGTZ6gQlegSsqYQESF4EJggoCgnOCBgIBSUUOCxgNSBEsNxQZBD5uB?=
- =?us-ascii?q?444IIJDgQ4BKxdogUkCpVihDwoog3aMIZU6GjOFW6URC5h9jgqWUIRpgWg8g?=
- =?us-ascii?q?VlwFYMiCUoZD44qDguDYIVkxlUnMgIJMgEBBwIHDgMLgWiRfgEB?=
-IronPort-Data: A9a23:KqNvvqK4X5QfckqEFE+RgJQlxSXFcZb7ZxGr2PjKsXjdYENS3zMPm
- 2IYDT+Cb6nZZDDzfN0kO97n/RhTuJLWzYU2Hlcd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
- 63yUvGZcoZsCCSa/kvxWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnQ0
- T/Oi5eHYgH9i2crajl8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
- vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
- /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1fV29vEa4A+dxKX1gNy
- 79BCS9WPw+c0rfeLLKTEoGAh+wqKM3teYdasXZ6wHSBUbAtQIvIROPB4towMDUY358VW62AI
- ZNHL2MzNXwsYDUXUrsTIJ49keOhh2j2WzZZs1mS46Ew5gA/ySQhiOm1b4uFJoXiqcN9p3ixu
- Uz3+EHCEjYVN+TG8SKCykuvibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0Ut5UFag+rQqK0KeRu1rfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:cjkYy64fCiGMGdo6+QPXwBDXdLJyesId70hD6qm+c3Nom6uj5q
- eTdZsgtCMc5Ax9ZJhko6HjBEDiewK5yXcK2+ks1N6ZNWGM0ldAbrsSiLcKqAePJ8SRzIJgPI
- 5bAs5D4aXLfDtHpPe/xhWkGNA9x9TC2qWpieDCi0pJd2hRGthdB8MTMHfhLqWwLzM2faYEKA
- ==
-X-Talos-CUID: 9a23:YLPDGWMn4y5pO+5DaXJJrWI3AsMfTyPkj0mTem6nUjd2V+jA
-X-Talos-MUID: =?us-ascii?q?9a23=3AdO4MaA7Mqaj8+yVNq+ng0v+3xoxR3Y2xJnEKtK4?=
- =?us-ascii?q?WnMaHDXVIIzCltTe4F9o=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.25,230,1779148800"; 
-   d="scan'208";a="809079841"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Aug 2026 18:15:31 +0000
-Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id 824E7180004A8;
-	Tue, 18 Aug 2026 18:15:31 +0000 (GMT)
-Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 26753CD02BA; Tue, 18 Aug 2026 11:15:31 -0700 (PDT)
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com,
-	Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 03/10] python3-aiohttp: fix CVE-2026-50269
-Date: Tue, 18 Aug 2026 11:15:21 -0700
-Message-Id: <20260818181528.3405276-4-dkelaiya@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260818181528.3405276-1-dkelaiya@cisco.com>
-References: <20260818181528.3405276-1-dkelaiya@cisco.com>
+        d=gmail.com; s=20251104; t=1787111051; x=1787715851; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=G3SCwEceX+b9GvS7uytxaq+M9BvAXGBVRoEckzyoqJs=;
+        b=MI8ITNxC2BKGighZG1lxtySPIAr44XCYv6UUTGJh/JvaxB70BsfsmVezVOl+aco8Rt
+         noi4IUs92mcZmE9BeM5P0nqRJnYaTI5lm05X/06UUOCFvAc9f/bUPeJNUkDB9CflkdRi
+         gwhiheb/SdQ12bBM8/3eNZumQqVQcSAQUsFg7kHlmm1ZgzW7MU4eo6n1GFBC5LiRwiXB
+         FPQ6tg3zo5ijr6Il9hWXwmv5+E6Ha9dLoAp8Y9erq0G/TYMJ11uojmgHcXs2SbEj0sus
+         GExi/jDXvkzxPKQzcgjw80Ur9szyQSg9flxOnas5JQt3bx2Vpo+EOPU73zY9fVUWD03r
+         TGmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787111051; x=1787715851;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=G3SCwEceX+b9GvS7uytxaq+M9BvAXGBVRoEckzyoqJs=;
+        b=Y+AjBTW2bmLrNMzGKhq+blKCXYrzZGFSIvkomg4UceK+5NKKGfgkKYYD/PEGN1exI0
+         y3z/apDMrE/QQ8wAKeHH2dl6tYxQlivWHqkcsR0oS/gts2RU34lHmWpbxfZVWQQBDz7j
+         ib7TytMo1mzyS2eGOgVFa45Kjicm+pHn0JAjllXoyjcxbiH6VZZktrMPv2mFASyN4bXf
+         A4GASNIVQj/uWY/ytthXoy1Q/7pJFD38HH8SBr+2ZHZIFw5XUMM3m5B5czcciFw6uVT7
+         vQvv+ecgyM7nk4UMkCI0RgAu3rsNTllIcj7jIXc5aih0AqcvVNJ2b5vNTS7ehxrwom8D
+         2pbA==
+X-Gm-Message-State: AOJu0YxiEm43J9dFk6MMJMkh7ZeNr6HcQgOm+nDKlmIf0xCASJNW4aE6
+	F6B0Wc7sC0Qi22Y3VzK4DG/PKOF8Nv8dYqKtCIyUEKF3Sqc8CZEvRgGx+F/aS0U2TQ9b7rQjCTa
+	RooVlzPD2OI3DD9wHPnCEWRu9N5AKs+w=
+X-Gm-Gg: AR+sD10NaIxa1GJiCKXjUfbMaodbW5kfF79Y4oe1mOcaDeP5eUiByO3ZZ2l0Wk3P33c
+	SfZ+1sG53m91YiNB5ri9y4GH8Lf1tDLwPsMhmq5pYjTur0qS4zq4g6PhfIqKJ204Rhrc5D8bsgk
+	eCrcqEdgksNjG/F/a53awvOfiWPac3/kf4lNbzuplUWjvfL64SIdNkLloBeTexoTvIO/8Qp6h5L
+	ZO1Q77EFNOOjyiZ/K9S5Zp+PvD4PycVAJTIlIYgfrTalC1PQryIxWMTJevW3rz+cZp5tfRAdMZb
+	HjzSjE0VF4mbNeNdCZRajzPZolHpL8sYB/3N9F2tpBPKKQa3S0O7R6Ag3ohciLIR1vkh76LeI/Q
+	DUHfTvPCFWQDqejj02AeeIaxMQBvSek3I2lq27GxON6V+CfOHXVuPBs6SIcjGc4QXqM/p0F05ra
+	mlSEz9cNH4F3FT0CfyXoNbwEsni0Cs7butILQZvBS5ApvnpbbGIqJG10dZKn3rltCPpKlp6eJPm
+	/WDBE/aqmzgendQ
+X-Received: by 2002:a05:6402:a0c6:b0:697:e953:d14d with SMTP id
+ 4fb4d7f45d1cf-6a403327980mr473350a12.17.1787111051258; Tue, 18 Aug 2026
+ 20:44:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
+References: <20260818124329.54509-1-jaipaul.cheernam@est.tech>
+In-Reply-To: <20260818124329.54509-1-jaipaul.cheernam@est.tech>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Aug 2026 20:43:42 -0700
+X-Gm-Features: AcwNN1Xb1eNScUGWoSBFFLs-5pdKtYSlkZ1x4e1E7hp-ZVe6rZimlqJ6RfzGRKU
+Message-ID: <CAMKF1spj4D9ozv7HPnb62ANB9kg_kdy1Yp+YMYVtBbT6LkPK=Q@mail.gmail.com>
+Subject: Re: [PATCH] libtracefs: remove recipe (moved to oe-core)
+To: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000626e8506595e37f8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2026 18:15:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129235
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 03:44:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129244
 
-From: Darsh Kelaiya <dkelaiya@cisco.com>
+--000000000000626e8506595e37f8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This patch applies the upstream fix as referenced in [2], using
-the commit shown in [1].
+Please ping again when it gets applied in core.
 
-[1] https://github.com/aio-libs/aiohttp/commit/bf88077ebb14f4c29924b8e8904cba20c55c28b8
-[2] https://github.com/advisories/GHSA-m6qw-4cw2-hm4m
+On Tue, Aug 18, 2026 at 5:43=E2=80=AFAM Jaipaul Cheernam <jaipaul.cheernam@=
+est.tech>
+wrote:
 
-Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
----
- .../python3-aiohttp/CVE-2026-50269.patch      | 81 +++++++++++++++++++
- .../python/python3-aiohttp_3.13.5.bb          |  1 +
- 2 files changed, 82 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch
+> libtracefs has been imported into openembedded-core [1] as it is now
+> required by powertop 2.16 (upstream commit 2b133ed [2]). Remove it
+> from meta-oe to avoid duplicate recipes.
+>
+> - This commit is depends on [1]
+>
+> [1] https://lists.openembedded.org/g/openembedded-core/topic/120806764
+> [2]
+> https://github.com/fenrus75/powertop/commit/2b133ed512c6852cf81cb98831bdf=
+d585c0317bf
+>
+> Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+> ---
+>  ...not-preserve-ownership-in-cp-command.patch | 28 -------------------
+>  .../libtracefs/libtracefs_1.8.3.bb            | 25 -----------------
+>  2 files changed, 53 deletions(-)
+>  delete mode 100644
+> meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-preserv=
+e-ownership-in-cp-command.patch
+>  delete mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+>
+> diff --git
+> a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-prese=
+rve-ownership-in-cp-command.patch
+> b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-prese=
+rve-ownership-in-cp-command.patch
+> deleted file mode 100644
+> index 7eaf29e4c4..0000000000
+> ---
+> a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-prese=
+rve-ownership-in-cp-command.patch
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -From ab6f78bfd6811c648ee71663cfc4dc8be151a519 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Wed, 21 Dec 2022 22:50:56 -0800
+> -Subject: [PATCH] makefile: Do not preserve ownership in cp command
+> -
+> -Fixes
+> -ERROR: libtracefs-1.6.3-r0 do_package_qa: QA Issue: libtracefs:
+> /usr/lib/libtracefs.so is owned by uid 1000, which is the same as the use=
+r
+> running bitbake. This may be due to host contamination
+> [host-user-contaminated]
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - Makefile | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/Makefile b/Makefile
+> -index 7f4f5c3..1ba7b9d 100644
+> ---- a/Makefile
+> -+++ b/Makefile
+> -@@ -296,7 +296,7 @@ endif # DESTDIR =3D ""
+> -
+> - install_libs: libs install_pkgconfig
+> -       $(Q)$(call do_install,$(LIBTRACEFS_SHARED),$(libdir_SQ)); \
+> --              cp -fpR $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
+> -+              cp --no-preserve=3Downership --recursive $(LIB_INSTALL)
+> $(DESTDIR)$(libdir_SQ)
+> -       $(Q)$(call
+> do_install,$(src)/include/tracefs.h,$(includedir_SQ),644)
+> -       $(Q)$(call install_ld_config)
+> -
+> diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+> b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+> deleted file mode 100644
+> index 117716dad2..0000000000
+> --- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
+> -# Released under the MIT license (see COPYING.MIT for the terms)
+> -
+> -SUMMARY =3D "Library to parse raw trace event formats    "
+> -HOMEPAGE =3D "
+> https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/"
+> -LICENSE =3D "GPL-2.0-or-later AND LGPL-2.1-or-later"
+> -LIC_FILES_CHKSUM =3D
+> "file://LICENSES/GPL-2.0;md5=3De6a75371ba4d16749254a51215d13f97 \
+> -
+> file://LICENSES/LGPL-2.1;md5=3Db370887980db5dd40659b50909238dbd"
+> -SECTION =3D "libs"
+> -DEPENDS =3D "libtraceevent bison-native flex-native"
+> -
+> -SRCREV =3D "6fad6a14ba0d4c4b437d9e4eed7098d4bb07b4fc"
+> -SRC_URI =3D "git://
+> git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=3D${BPN};proto=
+col=3Dhttps
+> <http://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=3D$%7B=
+BPN%7D;protocol=3Dhttps>
+> \
+> -
+>  file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
+> -           "
+> -
+> -inherit pkgconfig bash-completion
+> -
+> -do_compile:prepend() {
+> -    touch ${S}/src/sqlhist.tab.c
+> -}
+> -
+> -do_install() {
+> -    oe_runmake install DESTDIR=3D${D} pkgconfig_dir=3D${libdir}/pkgconfi=
+g
+> -}
+>
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch
-new file mode 100644
-index 0000000000..1bde87e4e8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch
-@@ -0,0 +1,81 @@
-+From 7fb9ddce2c1a376ef46f9ec2195e5d75db60c227 Mon Sep 17 00:00:00 2001
-+From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
-+Date: Thu, 28 May 2026 23:57:41 +0100
-+Subject: [PATCH] [PR #12719/879d48d1 backport][3.14] Reject invalid bytes in
-+ multipart/payload headers (#12720)
-+
-+**This is a backport of PR #12719 as merged into master
-+(879d48d1619b9bc3662037afcb8bfa790a205e9b).**
-+
-+CVE: CVE-2026-50269
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/bf88077ebb14f4c29924b8e8904cba20c55c28b8]
-+
-+Co-authored-by: Sam Bull <git@sambull.org>
-+(cherry picked from commit bf88077ebb14f4c29924b8e8904cba20c55c28b8)
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ CHANGES/12706.bugfix.rst |  1 +
-+ aiohttp/payload.py       |  8 +++++---
-+ tests/test_payload.py    | 15 +++++++++++++++
-+ 3 files changed, 21 insertions(+), 3 deletions(-)
-+ create mode 100644 CHANGES/12706.bugfix.rst
-+
-+diff --git a/CHANGES/12706.bugfix.rst b/CHANGES/12706.bugfix.rst
-+new file mode 100644
-+index 000000000..9248585f9
-+--- /dev/null
-++++ b/CHANGES/12706.bugfix.rst
-+@@ -0,0 +1 @@
-++Fixed invalid bytes being allowed in multipart/payload headers -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/payload.py b/aiohttp/payload.py
-+index 5b88fa094..23d127056 100644
-+--- a/aiohttp/payload.py
-++++ b/aiohttp/payload.py
-+@@ -35,6 +35,7 @@ from .helpers import (
-+     parse_mimetype,
-+     sentinel,
-+ )
-++from .http_writer import _safe_header
-+ from .streams import StreamReader
-+ from .typedefs import JSONEncoder, _CIMultiDict
-+ 
-+@@ -209,9 +210,10 @@ class Payload(ABC):
-+     @property
-+     def _binary_headers(self) -> bytes:
-+         return (
-+-            "".join([k + ": " + v + "\r\n" for k, v in self.headers.items()]).encode(
-+-                "utf-8"
-+-            )
-++            "".join(
-++                _safe_header(k) + ": " + _safe_header(v) + "\r\n"
-++                for k, v in self.headers.items()
-++            ).encode("utf-8")
-+             + b"\r\n"
-+         )
-+ 
-+diff --git a/tests/test_payload.py b/tests/test_payload.py
-+index 9aa97b20d..b60aa7e7c 100644
-+--- a/tests/test_payload.py
-++++ b/tests/test_payload.py
-+@@ -101,6 +101,21 @@ def test_payload_content_type() -> None:
-+     assert p.content_type == "application/json"
-+ 
-+ 
-++@pytest.mark.parametrize("bad_byte", ("\r", "\n", "\x00"))
-++def test_binary_headers_reject_injection_in_value(bad_byte: str) -> None:
-++    p = Payload("test", headers={"X-Custom": f"value{bad_byte}Injected: bad"})
-++    with pytest.raises(ValueError, match="header injection"):
-++        p._binary_headers
-++
-++
-++@pytest.mark.parametrize("bad_byte", ("\r", "\n", "\x00"))
-++def test_binary_headers_reject_injection_in_name(bad_byte: str) -> None:
-++    p = Payload("test")
-++    p.headers[f"X-Custom{bad_byte}Injected"] = "value"
-++    with pytest.raises(ValueError, match="header injection"):
-++        p._binary_headers
-++
-++
-+ def test_bytes_payload_default_content_type() -> None:
-+     p = payload.BytesPayload(b"data")
-+     assert p.content_type == "application/octet-stream"
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index d17043bc3e..33ef64a59b 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -9,6 +9,7 @@ SRC_URI[sha256sum] = "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209
- SRC_URI += " \
-     file://CVE-2026-34993.patch \
-     file://CVE-2026-47265.patch \
-+    file://CVE-2026-50269.patch \
- "
- 
- CVE_PRODUCT = "aiohttp"
--- 
-2.35.6
+--000000000000626e8506595e37f8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">Please ping again when it gets applied in core.</div><br><=
+div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"g=
+mail_attr">On Tue, Aug 18, 2026 at 5:43=E2=80=AFAM Jaipaul Cheernam &lt;jai=
+paul.cheernam@est.tech&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">libtracefs has been imported into openembedded-core [1] a=
+s it is now<br>
+required by powertop 2.16 (upstream commit 2b133ed [2]). Remove it<br>
+from meta-oe to avoid duplicate recipes.<br>
+<br>
+- This commit is depends on [1]<br>
+<br>
+[1] <a href=3D"https://lists.openembedded.org/g/openembedded-core/topic/120=
+806764" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-core/topic/120806764</a><br>
+[2] <a href=3D"https://github.com/fenrus75/powertop/commit/2b133ed512c6852c=
+f81cb98831bdfd585c0317bf" rel=3D"noreferrer" target=3D"_blank">https://gith=
+ub.com/fenrus75/powertop/commit/2b133ed512c6852cf81cb98831bdfd585c0317bf</a=
+><br>
+<br>
+Signed-off-by: Jaipaul Cheernam &lt;jaipaul.cheernam@est.tech&gt;<br>
+---<br>
+=C2=A0...not-preserve-ownership-in-cp-command.patch | 28 ------------------=
+-<br>
+=C2=A0.../libtracefs/<a href=3D"http://libtracefs_1.8.3.bb" rel=3D"noreferr=
+er" target=3D"_blank">libtracefs_1.8.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 25 -----------------<br>
+=C2=A02 files changed, 53 deletions(-)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs/0001-=
+makefile-Do-not-preserve-ownership-in-cp-command.patch<br>
+=C2=A0delete mode 100644 meta-oe/recipes-kernel/libtracefs/<a href=3D"http:=
+//libtracefs_1.8.3.bb" rel=3D"noreferrer" target=3D"_blank">libtracefs_1.8.=
+3.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-=
+not-preserve-ownership-in-cp-command.patch b/meta-oe/recipes-kernel/libtrac=
+efs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch<=
+br>
+deleted file mode 100644<br>
+index 7eaf29e4c4..0000000000<br>
+--- a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-pre=
+serve-ownership-in-cp-command.patch<br>
++++ /dev/null<br>
+@@ -1,28 +0,0 @@<br>
+-From ab6f78bfd6811c648ee71663cfc4dc8be151a519 Mon Sep 17 00:00:00 2001<br>
+-From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
+>raj.khem@gmail.com</a>&gt;<br>
+-Date: Wed, 21 Dec 2022 22:50:56 -0800<br>
+-Subject: [PATCH] makefile: Do not preserve ownership in cp command<br>
+-<br>
+-Fixes<br>
+-ERROR: libtracefs-1.6.3-r0 do_package_qa: QA Issue: libtracefs: /usr/lib/l=
+ibtracefs.so is owned by uid 1000, which is the same as the user running bi=
+tbake. This may be due to host contamination [host-user-contaminated]<br>
+-<br>
+-Upstream-Status: Pending<br>
+-<br>
+-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
+=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+----<br>
+- Makefile | 2 +-<br>
+- 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+-<br>
+-diff --git a/Makefile b/Makefile<br>
+-index 7f4f5c3..1ba7b9d 100644<br>
+---- a/Makefile<br>
+-+++ b/Makefile<br>
+-@@ -296,7 +296,7 @@ endif # DESTDIR =3D &quot;&quot;<br>
+- <br>
+- install_libs: libs install_pkgconfig<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0$(Q)$(call do_install,$(LIBTRACEFS_SHARED),$(li=
+bdir_SQ)); \<br>
+--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cp -fpR $(LIB_INSTALL) $=
+(DESTDIR)$(libdir_SQ)<br>
+-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cp --no-preserve=3Downer=
+ship --recursive $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0$(Q)$(call do_install,$(src)/include/tracefs.h,=
+$(includedir_SQ),644)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0$(Q)$(call install_ld_config)<br>
+- <br>
+diff --git a/meta-oe/recipes-kernel/libtracefs/<a href=3D"http://libtracefs=
+_1.8.3.bb" rel=3D"noreferrer" target=3D"_blank">libtracefs_1.8.3.bb</a> b/m=
+eta-oe/recipes-kernel/libtracefs/<a href=3D"http://libtracefs_1.8.3.bb" rel=
+=3D"noreferrer" target=3D"_blank">libtracefs_1.8.3.bb</a><br>
+deleted file mode 100644<br>
+index 117716dad2..0000000000<br>
+--- a/meta-oe/recipes-kernel/libtracefs/<a href=3D"http://libtracefs_1.8.3.=
+bb" rel=3D"noreferrer" target=3D"_blank">libtracefs_1.8.3.bb</a><br>
++++ /dev/null<br>
+@@ -1,25 +0,0 @@<br>
+-# Copyright (C) 2022 Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" ta=
+rget=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+-# Released under the MIT license (see COPYING.MIT for the terms)<br>
+-<br>
+-SUMMARY =3D &quot;Library to parse raw trace event formats=C2=A0 =C2=A0 &q=
+uot;<br>
+-HOMEPAGE =3D &quot;<a href=3D"https://git.kernel.org/pub/scm/libs/libtrace=
+/libtraceevent.git/" rel=3D"noreferrer" target=3D"_blank">https://git.kerne=
+l.org/pub/scm/libs/libtrace/libtraceevent.git/</a>&quot;<br>
+-LICENSE =3D &quot;GPL-2.0-or-later AND LGPL-2.1-or-later&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSES/GPL-2.0;md5=3De6a75371ba4d16749=
+254a51215d13f97 \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/LGPL-2.1;md5=3Db370887980db5dd40659b50909238dbd&quot;<br>
+-SECTION =3D &quot;libs&quot;<br>
+-DEPENDS =3D &quot;libtraceevent bison-native flex-native&quot;<br>
+-<br>
+-SRCREV =3D &quot;6fad6a14ba0d4c4b437d9e4eed7098d4bb07b4fc&quot;<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://git.kernel.org/pub/scm/libs/libt=
+race/libtracefs.git;branch=3D$%7BBPN%7D;protocol=3Dhttps" rel=3D"noreferrer=
+" target=3D"_blank">git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;bra=
+nch=3D${BPN};protocol=3Dhttps</a> \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-makefile-Do-not-prese=
+rve-ownership-in-cp-command.patch \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
+-<br>
+-inherit pkgconfig bash-completion<br>
+-<br>
+-do_compile:prepend() {<br>
+-=C2=A0 =C2=A0 touch ${S}/src/sqlhist.tab.c<br>
+-}<br>
+-<br>
+-do_install() {<br>
+-=C2=A0 =C2=A0 oe_runmake install DESTDIR=3D${D} pkgconfig_dir=3D${libdir}/=
+pkgconfig<br>
+-}<br>
+</blockquote></div>
+
+--000000000000626e8506595e37f8--
 
