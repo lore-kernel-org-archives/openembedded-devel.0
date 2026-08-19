@@ -2,78 +2,77 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E36EEC5DF6D
-	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 11:11:06 +0000 (UTC)
-Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4696.1787137856728755382
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A07FC5DF87
+	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 11:11:07 +0000 (UTC)
+Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4701.1787137858007544142
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 04:10:56 -0700
+ Wed, 19 Aug 2026 04:11:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=UxA6kwBX;
- spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=fH04i3L7;
+ spf=pass (domain: cisco.com, ip: 173.37.142.95, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4549; q=dns/txt;
-  s=iport01; t=1787137856; x=1788347456;
+  d=cisco.com; i=@cisco.com; l=3089; q=dns/txt;
+  s=iport01; t=1787137861; x=1788347461;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=UMm/Sg/0QBumGTBTu3U6SJIw0cTrVURvaImPUlcwCx4=;
-  b=UxA6kwBXjZv3Un4Z7b0TBHQRhjPCY048lqBQfu/clYQnbvIh9hxkgACM
-   Qx+6tcSB+3zvzRA/zc0TwAOvp9GvF1d67Ebeaay+TFNrX28xvYGbB+G6i
-   vk/T6H4TOmfhW5RSiiw63WUp07KQsjgyakVlgqTzk1n7N7ujVh+gakCo0
-   ST0ckP54RhdpC4tiPlgCi2lxmknhLXddqlTgDwf40ICPExwnj8Qy/9zSn
-   tE6Xl9XV7DKSBF2TAVit6elrAVf2ukkoiuLjJDR4LhurOwHbzSU8mT9jo
-   4RQPfMa5o8lyrn8eqw3WF645JBnKs0rXDurx9yaeJ9jAacR3Coa8RtGzN
-   A==;
-X-CSE-ConnectionGUID: wxBQjMc3QU6yhXlNBymqqA==
-X-CSE-MsgGUID: /TvnSa3CSciE/aOywt7jHg==
-X-IPAS-Result: =?us-ascii?q?A0AEAwDSjYVq/5MQJK1aglmCV3ReQ0kDhFSRcwOeG4F+D?=
- =?us-ascii?q?wEBAQ9EDQQBAYUFAo1rAiY2Bw4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
+  bh=kkw5+OuoK8hy+jWIYH7lccG/oiAQnaFOo2wAiX32ViM=;
+  b=fH04i3L7ezubA6cKQTovGUU1f+zhZstYO2he9FBXGFlJGpAG9RbXhn4Q
+   heRAVHCvZjBvf4FLI6sREyhwZk6FQQNk84vREtvDs4crySOSnxUn1E509
+   SycD4xp9J/+GQ8Ov6AYo2QUCRzAaOWzaFM58HcpK9AatQiWxfHKMEWs/g
+   DTzhlGh6oOrTsXg8GKj+N8zimcfhLOyRsjf0lC3BvbkjogRrayiH9OEOJ
+   zoXqp2I7/9iZzjOgHXSNq6gu/VrDPaXMndJbhXi/SINMPwveGfHtthmAV
+   kKoyn/zZ81N4QyQczyjrvui+Q4m4aK5kPbj9CYBhp/SrUquV9pDpUqn4a
+   g==;
+X-CSE-ConnectionGUID: Swv2hfimQimtFLjvabhlVQ==
+X-CSE-MsgGUID: MQ71PMR7TRW7H3OXe/Dmsw==
+X-IPAS-Result: =?us-ascii?q?A0DPAgBMjoVq/48QJK1aglmCV3ReQ0kDhFSRcwOeG4F+D?=
+ =?us-ascii?q?wEBAQ9EDQQBAYUFAo1rAiY1CA4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
  =?us-ascii?q?QcFgQ4Thk8NhloBAgEDIwQLARgBLRAJEwMBAgMCJgICKyMIEAmDAgGCdAMRB?=
  =?us-ascii?q?qgjmyN6fzOBAYMoAT8CQ1DbMAELFAEFgQUuhT+DHwGFAl0YAYR8JxsbgXKBF?=
- =?us-ascii?q?YNpgQWBXAQYhSGCagSCInoSgVqJeodrSIECHANZLAFVEw0KCwcFgWYDNRIqF?=
- =?us-ascii?q?W4yHYEjPhc1WBsGBYEdgSiENyMZNnqBCV6BKyphARIXgQmCCgKCc4IGAgFJR?=
- =?us-ascii?q?REKCwsYDUgRLDcUGQQ9AW4HjkkggkdkFxMBKxQDCXFYKxgFCQM4pS2hDwoog?=
- =?us-ascii?q?3aMIZU6GjOqbAuYfY4KlgBQhGmBbworgVlwFYMiCUoZD444iH7HJicyAgkDL?=
- =?us-ascii?q?wEBBwIHAQELAQMLgWiRfgEB?=
-IronPort-Data: A9a23:kgl0XKzfYmVpTy9kdGl6t+dhxyrEfRIJ4+MujC+fZmUNrF6WrkUHm
- DMWWD+GPPvYYDSnL991Ptmz9x4HvcSEmIMxTlFrqFhgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 46aT/H3Ygf/hWYkazNMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJF4mF7Qa3+0sOFwQ5
- PwoLBYnfxWansvjldpXSsE07igiBMDvOIVavjRryivUSK9+B5vCWK7No9Rf2V/chOgXQq2YP
- JRfMGQpNUifC/FMEg9/5JYWnPuoj3r2aRVTqUmeouw85G27IAlZgOG3bouJI4bTLSlTtgGku
- GT99j/SORobGZuW7iua7i2upuCayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl/BQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSn1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:KqG4pKw4JTlVtE6N5nbtKrPw8r1zdoMgy1knxilNoNJuHfBw8P
+ =?us-ascii?q?YNpgQWBXAQYhSGCagSCInoSgVpukHdIgQIcA1ksAVUTDQoLBwWBZgM1EioVb?=
+ =?us-ascii?q?jIdgSM+FzVYGwYFgR2BKIQ3Ixk2eoEJXoErKmEBEheBCYIKAoJzggYCAUlFE?=
+ =?us-ascii?q?QoLCxgNSBEsNxQZBD0BbgeOSSCCQAcOVioBK4IUGAUJA5MAkmWhDwoog3aMI?=
+ =?us-ascii?q?ZU6GjOqbAuYfY4KllCEaYFqAjiBWXAVgyIJShkPjjiIfscmJzICCQMvAQEHA?=
+ =?us-ascii?q?gcBAQsBAwuBaJF+AQE?=
+IronPort-Data: A9a23:+nONdq2Y3DfOmhUM5PbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2ZUy
+ 2AbWm2PbPjbN2Kked12PYS3o00CuZbWyNNgSgo/3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ Lsen+WFYAX7g24tYzpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGN14oZ40W++NOAGRS2
+ 9gaNjkHbhS9vrfjqF67YrEEasULJc3vOsYb/3pn1zycVahgSpHYSKKM7thdtNsyrpkRRrCFO
+ YxAN3w2ME+ojx5nYj/7DLo+gOehhXDlWzZZs1mS46Ew5gA/ySQhieOzYIGOIILiqcN9u3/H/
+ 1rjxTvFOC5FFIe4+TfC3ne3mbqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0Ut5UFag+rQqK0KeRu1jfDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:23GTkKw8gBugfLoBVYdUKrPw8r1zdoMgy1knxilNoNJuHfBw8P
  re+sjztCWE7wr5N0tApTntAsS9qDbnhPxICOoqTNOftXfd2FdARbsKheCJ/9SjIVyaygc378
  ldmsZFZOEYJGIK9PoSmDPIcOoI8Z2g7L2ig/vYwjNGSAFnbLwl0iJCYzzranGfgGJ9dOAE/F
  323Ls9mwad
-X-Talos-CUID: =?us-ascii?q?9a23=3A4SmHVGhqU88/D1Oa5TIdH0JHcjJubW339XX1KBS?=
- =?us-ascii?q?BNDh4SI2Rb3WB/bp9up87?=
-X-Talos-MUID: 9a23:xHvUSwjOrKe8sJ4o/ebpq8Mpc/t25Z+nU2s2mpQr/MCjJDNsZDW9g2Hi
+X-Talos-CUID: 9a23:kvTQoW+0s1JimkcCdj+Vv3ULBJolfHzY9XbVP2GcC3hgQr2Rd2bFrQ==
+X-Talos-MUID: 9a23:2aBDRgnTxRmic1rsqH8FdnpHDZgx24GUV3w3rsom4O60OGtcPiyC2WE=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,231,1779148800"; 
-   d="scan'208";a="812694121"
-Received: from alln-l-core-10.cisco.com ([173.36.16.147])
-  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Aug 2026 11:10:55 +0000
+   d="scan'208";a="813683326"
+Received: from alln-l-core-06.cisco.com ([173.36.16.143])
+  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Aug 2026 11:11:01 +0000
 Received: from sjc-ads-5471.cisco.com (sjc-ads-5471.cisco.com [10.28.23.235])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-10.cisco.com (Postfix) with ESMTPS id C45C31800054D;
-	Wed, 19 Aug 2026 11:10:55 +0000 (GMT)
+	by alln-l-core-06.cisco.com (Postfix) with ESMTPS id 47A3B180005BE;
+	Wed, 19 Aug 2026 11:11:01 +0000 (GMT)
 Received: by sjc-ads-5471.cisco.com (Postfix, from userid 1887505)
-	id 68528CC12A6; Wed, 19 Aug 2026 04:10:55 -0700 (PDT)
+	id DDE03CC12A6; Wed, 19 Aug 2026 04:11:00 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-oe][scarthgap][PATCH 1/5] libssh: Fix CVE-2026-59843
-Date: Wed, 19 Aug 2026 04:10:43 -0700
-Message-Id: <20260819111047.44043-2-hthakar@cisco.com>
+Subject: [meta-oe][scarthgap][PATCH 5/5] libssh: Fix CVE-2026-59850
+Date: Wed, 19 Aug 2026 04:10:47 -0700
+Message-Id: <20260819111047.44043-6-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260819111047.44043-1-hthakar@cisco.com>
 References: <20260819111047.44043-1-hthakar@cisco.com>
@@ -83,128 +82,84 @@ Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-5471.cisco.com [10.28.23.235];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.23.235, sjc-ads-5471.cisco.com
-X-Outbound-Node: alln-l-core-10.cisco.com
+X-Outbound-Node: alln-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 11:11:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129348
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 11:11:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129351
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
 The stable-0.11 commit shown in [1] is the upstream fix selected for
-this backport. The upstream advisory [2] documents CVE-2026-59843 and
+this backport. The upstream advisory [2] documents CVE-2026-59850 and
 identifies libssh 0.11.5 as the fixed release for the 0.11 series.
 
-[1] https://git.libssh.org/projects/libssh.git/commit/?id=687ef1c44b646b9db0b1c6e8f987edb7c9e4d919
-[2] https://www.libssh.org/security/advisories/CVE-2026-59843.txt
+[1] https://git.libssh.org/projects/libssh.git/commit/?id=6edfb52b3b364577d2db0334c0514a977efceed2
+[2] https://www.libssh.org/security/advisories/CVE-2026-59850.txt
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../libssh/libssh/CVE-2026-59843.patch        | 84 +++++++++++++++++++
+ .../libssh/libssh/CVE-2026-59850.patch        | 40 +++++++++++++++++++
  .../recipes-support/libssh/libssh_0.10.6.bb   |  1 +
- 2 files changed, 85 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-59850.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
+diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-59850.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59850.patch
 new file mode 100644
-index 0000000000..03d3ce6ea2
+index 0000000000..61e502c796
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
-@@ -0,0 +1,84 @@
-+From d965eb941a9a83a0643570a93d8997b91e248fc1 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Pavol=20=C5=BD=C3=A1=C4=8Dik?= <pzacik@redhat.com>
-+Date: Fri, 6 Mar 2026 13:58:30 +0100
-+Subject: [PATCH] CVE-2026-59843 channels: Fail when receiving max packet size
-+ 0
++++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59850.patch
+@@ -0,0 +1,40 @@
++From a207ee3b4244c0e5da902245f8b81f3617b416f3 Mon Sep 17 00:00:00 2001
++From: Jakub Jelen <jjelen@redhat.com>
++Date: Wed, 1 Jul 2026 16:43:08 +0200
++Subject: [PATCH] CVE-2026-59850 channels: Avoid processing DATA packets on
++ closed channels
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+Do this both for SSH2_MSG_CHANNEL_OPEN and for
-+SSH2_MSG_CHANNEL_OPEN_CONFIRMATION. Using the
-+max packet size 0 would lead to an infinite loop
-+in channel_write_common.
++Signed-off-by: Jakub Jelen <jjelen@redhat.com>
++Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
 +
-+Originally reported by Rinku Das on on 23th February.
-+Independently reported by Yi Lin on 26th February and
-+Haruto Kimura on 22nd March.
++CVE: CVE-2026-59850
++Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=6edfb52b3b364577d2db0334c0514a977efceed2]
 +
-+We do not consider this as a security issue as connecting
-+to untrusted servers on the internet brings much worse
-+security consequences than hanging your clinet.
-+
-+Signed-off-by: Pavol Žáčik <pzacik@redhat.com>
-+Reviewed-by: Jakub Jelen <jjelen@redhat.com>
-+
-+CVE: CVE-2026-59843
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=687ef1c44b646b9db0b1c6e8f987edb7c9e4d919]
-+
-+(cherry picked from commit 44b186fa17aff497dae420c59c003222e438103c)
-+(cherry picked from commit 687ef1c44b646b9db0b1c6e8f987edb7c9e4d919)
++(cherry picked from commit a8a3fa352bb5213e08a35e4494c6e44360e2e38a)
++(cherry picked from commit 6edfb52b3b364577d2db0334c0514a977efceed2)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/channels.c |  7 +++++++
-+ src/messages.c | 19 +++++++++++++++----
-+ 2 files changed, 22 insertions(+), 4 deletions(-)
++ src/channels.c | 7 +++++++
++ 1 file changed, 7 insertions(+)
 +
 +diff --git a/src/channels.c b/src/channels.c
-+index 8290dbd1..3afdcf11 100644
++index 3afdcf11..1543c792 100644
 +--- a/src/channels.c
 ++++ b/src/channels.c
-+@@ -192,6 +192,13 @@ SSH_PACKET_CALLBACK(ssh_packet_channel_open_conf){
-+   if (rc != SSH_OK)
-+       goto error;
++@@ -575,6 +575,13 @@ SSH_PACKET_CALLBACK(channel_rcv_data){
++       channel->local_window,
++       channel->remote_window);
 + 
-++  if (channel->remote_maxpacket == 0) {
-++      SSH_LOG(SSH_LOG_RARE,
-++              "Invalid maximum packet size 0 in "
-++              "SSH2_MSG_CHANNEL_OPEN_CONFIRMATION");
-++      goto error;
-++  }
+++    if (channel->flags & SSH_CHANNEL_FLAG_CLOSED_REMOTE) {
+++        SSH_LOG(SSH_LOG_WARNING, "Received data on (remotely) closed channel");
+++        ssh_set_error(session, SSH_FATAL, "Received data on (remotely) closed channel");
+++        SSH_STRING_FREE(str);
+++        return SSH_PACKET_USED;
+++    }
 ++
-+   SSH_LOG(SSH_LOG_PROTOCOL,
-+       "Received a CHANNEL_OPEN_CONFIRMATION for channel %d:%d",
-+       channel->local_channel,
-+diff --git a/src/messages.c b/src/messages.c
-+index 6dadabf0..e79ecec2 100644
-+--- a/src/messages.c
-++++ b/src/messages.c
-+@@ -1160,10 +1160,21 @@ SSH_PACKET_CALLBACK(ssh_packet_channel_open){
-+   SSH_LOG(SSH_LOG_PACKET,
-+       "Clients wants to open a %s channel", type_c);
-+ 
-+-  ssh_buffer_unpack(packet,"ddd",
-+-          &msg->channel_request_open.sender,
-+-          &msg->channel_request_open.window,
-+-          &msg->channel_request_open.packet_size);
-++  rc = ssh_buffer_unpack(packet,
-++                         "ddd",
-++                         &msg->channel_request_open.sender,
-++                         &msg->channel_request_open.window,
-++                         &msg->channel_request_open.packet_size);
-++  if (rc != SSH_OK){
-++      goto error;
-++  }
-++
-++  if (msg->channel_request_open.packet_size == 0) {
-++      ssh_set_error(session,
-++                    SSH_FATAL,
-++                    "Invalid maximum packet size 0 in SSH2_MSG_CHANNEL_OPEN");
-++      goto error;
-++  }
-+ 
-+   if (session->session_state != SSH_SESSION_STATE_AUTHENTICATED){
-+     ssh_set_error(session,SSH_FATAL, "Invalid state when receiving channel open request (must be authenticated)");
++   /* What shall we do in this case? Let's accept it anyway */
++   if (len > channel->local_window) {
++     SSH_LOG(SSH_LOG_RARE,
 diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 1f64920a50..381b3efc7d 100644
+index 1a5f521f6a..cc957d62ca 100644
 --- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -32,6 +32,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2026-0968-2.patch \
-            file://CVE-2026-0967.patch \
-            file://CVE-2026-0965.patch \
-+           file://CVE-2026-59843.patch \
+@@ -37,6 +37,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+            file://CVE-2026-59846.patch \
+            file://CVE-2026-59848.patch \
+            file://CVE-2026-59848-regression.patch \
++           file://CVE-2026-59850.patch \
            "
  SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
  
