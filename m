@@ -2,166 +2,103 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0D4DC5B572
-	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 22:06:24 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1234.1787177176227883671
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24951C5B572
+	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 23:57:25 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2974.1787183842301942950
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 15:06:16 -0700
+ Wed, 19 Aug 2026 16:57:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=foYu0CYS;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-836cbcd0a48so24635987b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 15:06:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787177175; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ooxtBalP4NWWilzXcLbHBz8qQNYK4rb68yQC0rXgKuf7ySwvz0gjoVvrX8ZpEpZihR
-         G8Ui03VfJ5w8pf/slebnwUy5sR6lGQSzXAo+sCbyvKJhtlo7PRWp1vJAuWTAyQAecJ1p
-         KYOFWT+TeS86LV7A57lm9so8b0V9zWLSR6SpvVOeoTjdMKEkPclTAimWUr5bi+vfCAv/
-         7tkjyx66ccHmqr3qfdfZSauebuZwIgSWQ0a6bF74ZlS62n7Dy+rujNuuY4coXHRgkTTz
-         piuQM2cHn7WcuSZaFUaivghzfdvT/UxjneNJjY79hWnriSwgdUTM9kzA8sVm8aNSXRBz
-         iYOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=/0c68u8hqyKu8u9QO4luBKOhMHSg5o3TjkYmSz50s/8=;
-        fh=dz80R/ANer/tTKnFUKbHHPAtVJQ496f0Tb/SEnVRJXc=;
-        b=oAzwSQ6O1xDQlQ3iO4NFwPRFMvl95ALPWsVcdP2Po77FAENq5VCu8MlotoKxnfNZaw
-         AVj5xAydhC3heZPWFgghCMP4OxB1OJvqgeEBbxIKtAD3zzMFNf81B77QQaHEAA1ie4AD
-         6mDHChazrClbBdB4LmdKDtUPwVW4PxqNr2Vh5zo9bSQRzW0M/vKPRAti/5wlQhzD7rkj
-         GfLWWLJdMwteqlF2OTcpJimnYP0deaKxOjVHxiDTUQaDq8Fa0ivFdcYY+nNjoRtvr6J/
-         /UrX6DPoYfGhCTOXB0u7JKQvefX0+Hy0LWxTfomoxSFKR/+rOsbq/UCca/vyVB2xeLOf
-         36tw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=G1u+nvXK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cf50c6f235so16162685ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 16:57:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787177175; x=1787781975; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/0c68u8hqyKu8u9QO4luBKOhMHSg5o3TjkYmSz50s/8=;
-        b=foYu0CYS2FyFqrCHRlk03DpyZ2oh0zRkucOB86C1BCyGa/EqpzzefNdpf8LkphzJjY
-         TN2ENRlF8cfbYIP0htQe2Ng1ISMqXNK6Bn1btOsscVKfoL9SBEHgMwMhNjfYJ6qgtRja
-         1XH5A89FDhBISjKvwPNRK0eD3aTG4ed5YB4fjmBMcyTjsZF6QdIik+ncjI/vyJ24aQhj
-         uYdQjyXTjor3YW+s2WjH2epYO/nRKwu2wSXHdzn9q/rTO2HPLKH1qPwtn+RCuZLTwbGW
-         t/qsa5ZXz+FPSqsDRipqjnD6sj6FFAJWOgcqJttVJofdPrYnc12opIG06jchpBMiMRk0
-         cnBQ==
+        d=gmail.com; s=20251104; t=1787183842; x=1787788642; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2TgeTST0Vg9eYPiaQ81xnv4NpAQglgOEhAObjWhkY9Y=;
+        b=G1u+nvXKop0NgYDiKepW5uUGWdcorDWAARa3qdsQ6GWjzTFkT+grZDt0C7UnrXndyq
+         YnQT8GVyEPEme5d2NlZYBuOTJQzLnm96ATEBvzDBKoBL3ga6sXvLUNx4B/qbS0pgVIJt
+         Wt8Ud4EyggyK4p9aHbH/AE/OhueBZohU1GD28dIUXQ43Kn1x5z7n55l7DmXoOVYSo7zl
+         lfaHtnLfnAOvutIKONcbm65F3+FC2/LloX12Oq11Hqo4QgEDsFkbT17zalnGn3ABFNwN
+         /8zFhAgPwPLgbtjwvviWPBXGXDkCKtPXWo63boi8NnUM4o1SQfoAvI+QQHNgyxPWJdw4
+         ar3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787177175; x=1787781975;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=/0c68u8hqyKu8u9QO4luBKOhMHSg5o3TjkYmSz50s/8=;
-        b=XujgDwC1cIkX5gOQgfUtK89QJO9DyxZ2mPiigtnXWVNLQs+r1KuOd4HBKgduqf1z/C
-         Fx8tQwT6+oDWZ8dAu0owQTnLnJI8AyTFkBHv3K0fIwJIrLNtTioqM2SPgWJBhgwaNpvT
-         br95Ly64VAFI/yGhLyWyEAx9kiK4nkz/mGczxB8YT014nNUfsagO5f30+Dp7qRp1muM6
-         VT+0+CUmmuCGyV9OKAMBFQ9SrkqBGgaeWYec2hX3llQiKw8Os31qbK46MzpfK9uZJVXj
-         rfZjfB/aRXrL7nZaCwHLdt6JQoLb7F1awEobsq/Ff0kJbpJYG3g85JoZPyDNwVbuhPLD
-         +YMg==
-X-Gm-Message-State: AFuF++mYilom2UUtOyUNd0DfHNXMR3tVLJMLjTiqcyuASDQtcZ1KA9DS
-	VS3l/eTIhyzm5A+wmKBfFiQLL+IoTyA75b22IqJemyPEqOH732j5WD49Ao2Ee3waiVs2i7J9CrP
-	haXgrPuqcSY62BzBpMQMPX4XS4IYXCwg=
-X-Gm-Gg: AR+sD10iBy5O/7ZAkLx/rCFVbKHnrCmEC7gxFod6wTIpOZgRD21NtcfUcz+W6DKP369
-	6pNLUEcQ/6LgImhUtPLpZ0lIbSd8ty0xHdFutFZ6OAkdOIN9SkdOFJLn7I1lYcdtteRptifrv5S
-	zbsmy+J4wM99+95E4q8z7KWqviHN5Z7KZ9lDbQkEkcmgexYG1H87d/phiUcI8e0uju9dILtU1iL
-	Ht4vjtxXI4PSEc1flIdzMLdyXOZrAYtK/S48ip6+b7gkd0GtjwU0yaVzY+ggbkzwbM6D1eiCCCl
-	Rit305daCp5qjnVvTgrHEgv90CJCA2bXdNUTiAAAoPqj6JtLcY7rlNwQE/FSHm52nVtnl2y1nif
-	LNBsqkl1TtO07Em24GS5fj0E/9yqIIoa5hdSD+csn1yigefmqyqtzUCmX2CVGym+SDiKvi7l+x4
-	gI3f0Fl7v0+Ufpu9mMA+dzblpyIt834uE18UR5psIdNJ94KlYVJ7Hp+hwvJ4VcixyT0Do1DscNB
-	XKEvngTFf2WLtYAcIebhCJh
-X-Received: by 2002:a05:690c:e684:20b0:80c:5ce9:8f1a with SMTP id
- 00721157ae682-844e34a8387mr31148467b3.34.1787177175109; Wed, 19 Aug 2026
- 15:06:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230316033356.2199649-1-zhixiong.chi@windriver.com> <1818840.1787148388748094144@lists.openembedded.org>
-In-Reply-To: <1818840.1787148388748094144@lists.openembedded.org>
+        d=1e100.net; s=20251104; t=1787183842; x=1787788642;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2TgeTST0Vg9eYPiaQ81xnv4NpAQglgOEhAObjWhkY9Y=;
+        b=P9e/MPI9wf9uMoxpBz0Ce43tK2JMpXynMc+FSgusgfDeMI3tx2UElMC8QGuMoZu4EO
+         VehzPpWKKy+OtFntNeItGvax25VrzBzZ/5Qlnu+PVVLjT1Co5Kh15EwYYlSs2qYqVl6X
+         dNRhxWxdCLFEyzlYwhQQ94GuI5OkG98cifx0oMOXdm/3io/oaAtqvJNYBjD5cwLl0p7M
+         RxdZ+QdD/KrnSazHPOYIVUz96W7jhdxke/lg2FadEB/Yg1i5joheE5cEJalIqp4z5ZbZ
+         6xfkiS+l8cHCZFpaLvlJqIZpbynfB9aEWegO9KcxRdrxuENquFa8DBRqo9NtroxdSLbN
+         t6RA==
+X-Gm-Message-State: AFuF++nuVbPNljXqX1dixgDDtZINhBqY+tB6UITlUHnVAUoM8QxVNNMQ
+	QiQblkKclEsrg72mDr6OB7V+5tzp1Z+0qq08PIzCZzY9Q5ziY5L/QE/KB85fKcZM
+X-Gm-Gg: AR+sD10CrQ/kDn2ryyNBg4cVQh9d/0sBnRziytiQpNnnlEcFRbJ7KWM3speQvrSdQa/
+	YjJ/BxvkWJqQB1MIdW/YtmPDW/9Lh6FiGxoRck13iJwe20KopkFuXvBp7pMW5xguUtafiGvA4iv
+	c24b+jeTl9zt7rLxaSuJMZtn9KU0gFBOJE9stlZ0fBMEsAjR4e9yGk5Uc8uNhP2K3n7vPnBx3NJ
+	i+ye16zrovMY+6HFrfIaqj2nCtFWxKW3jFYLWTv7HWnN0gto75ciSqsQChqNvso4JnCY+YgorrD
+	PBC05TcrJ2/FESc58oCCz085BqkrYnMUeu2oe6uEaQ8ChZgW7BfCz67BM9ISTH1LKkzXs98otjV
+	LltkOKdy29Nhtn7nOZEdSU0znJ5F7nPxsCcRhBgf/QHm71FQdBI/atv6QA9T4zaVni4z24vUP02
+	HxOZV99IVQ+ANcLhJbCSboptLRdCXkxfUmktX5c4ktHX6SvUcuE2Po29nhdywpPodHyx3X1J3l1
+	TTqMs5slw4qTQsCqbP8/luxzb0gI3ECftMhg49LZmRoc79U/HghLJeLZ+Cf8wr6i1jWhbAYyTP8
+	JvNJPMCnBBdzc47H3E3KzOEBGkuIO5UMiu4K4ekRiD4cHjD6IE00ExxOUDsP2KgfEm0F225eOEp
+	odnmdwalHC/ZZPSwQgqWhi40Um1liw4pgODKW5XzVtecBig==
+X-Received: by 2002:a17:902:d2c8:b0:2b7:975c:dacc with SMTP id d9443c01a7336-2d5fd5eb7fbmr149031905ad.1.1787183841455;
+        Wed, 19 Aug 2026 16:57:21 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bf175399sm18411174eec.26.2026.08.19.16.57.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Aug 2026 16:57:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Aug 2026 15:05:48 -0700
-X-Gm-Features: AcwNN1XaRfy1WncFfiwoem18k6ep8-EqMzR120TCUG3t3Eeh2Iph64EcmbN7s98
-Message-ID: <CAMKF1sr0oXtP7y2Nu9cSo5kKvBuCk9Y2iF99JNk69QUjTd-NTg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] ntp: drop the deprecated ntpdate
-To: michalwsieron@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000ac539c06596d9cab"
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/3] openl2tp: do not clobber the ptest-runner RRECOMMENDS
+Date: Wed, 19 Aug 2026 16:57:16 -0700
+Message-ID: <20260819235718.3372843-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 22:06:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129367
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 23:57:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129368
 
---000000000000ac539c06596d9cab
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Khem Raj <raj.khem@gmail.com>
 
-On Wed, Aug 19, 2026 at 7:06=E2=80=AFAM Michal Sieron via lists.openembedde=
-d.org
-<michalwsieron=3Dgmail.com@lists.openembedded.org> wrote:
+ptest.bbclass pulls ptest-runner into the -ptest package with
 
-> I know this is an old topic, but I just noticed that ntpdate is still
-> being built and packaged as part of ntp-utils.
-> Is this intended, or should we `rm -f ${D}${sbindir}/ntpdate` in
-> do_install (or patch ntpdate subdir out of Makefile.am)?
->
+    RRECOMMENDS:${PN}-ptest += "ptest-runner"
 
-hmm that should be fixed yes.
+but the recipe then used a hard assignment for its own recommendation,
+which overwrote that and left openl2tp-ptest recommending only
+kernel-module-l2tp-ppp. ptest-runner was therefore never installed in
+the ptest image, and meta-networking-image-ptest-openl2tp skipped the
+whole run with "Test requires ptest-runner to be installed" instead of
+executing any test.
 
+Append instead of assigning, so both recommendations survive. The
+openl2tp ptest now runs and passes.
 
->
-> Br,
-> Michal
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#129362):
-> https://lists.openembedded.org/g/openembedded-devel/message/129362
-> Mute This Topic: https://lists.openembedded.org/mt/97643958/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---000000000000ac539c06596d9cab
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+index 789ffc86ce..0d3953d35c 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+@@ -97,4 +97,4 @@ do_install_ptest () {
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 19,=
- 2026 at 7:06=E2=80=AFAM Michal Sieron via <a href=3D"http://lists.openembe=
-dded.org">lists.openembedded.org</a> &lt;michalwsieron=3D<a href=3D"mailto:=
-gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; =
-wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div>I kn=
-ow this is an old topic, but I just noticed that ntpdate is still being bui=
-lt and packaged as part of ntp-utils.</div>
-<div>Is this intended, or should we `rm -f ${D}${sbindir}/ntpdate` in do_in=
-stall (or patch ntpdate subdir out of Makefile.am)?</div></blockquote><div>=
-<br></div><div>hmm that should be fixed yes.</div><div>=C2=A0</div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex">
-<div>=C2=A0</div>
-<div>Br,</div>
-<div>Michal</div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#129362): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/129362" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/129362</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/97643958/1997=
-914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/97643958/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000ac539c06596d9cab--
+ RDEPENDS:${PN} = "ppp ppp-l2tp bash"
+ RDEPENDS:${PN}-ptest += "rpcbind procps-ps tcl"
+-RRECOMMENDS:${PN}-ptest = "kernel-module-l2tp-ppp"
++RRECOMMENDS:${PN}-ptest += "kernel-module-l2tp-ppp"
 
