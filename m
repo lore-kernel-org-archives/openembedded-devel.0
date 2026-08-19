@@ -2,101 +2,99 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52536C5DF6D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60A19C5DF86
 	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 11:26:07 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4902.1787138762447010018
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4903.1787138764466507874
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 04:26:02 -0700
+ Wed, 19 Aug 2026 04:26:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Bx/kF713;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2d5cad1a6baso7065735ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 04:26:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=S8PjT5NS;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-ca97d139d5fso667167a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 04:26:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787138762; x=1787743562; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8mrd9uCkqnJkb7W1zarrVXFr+ECK+4pC1tmf7nZvgVE=;
-        b=Bx/kF713BqQ8DWJlPbp2fZw4h+XJyVXtAKYCi7nTuKkLFhR9TG4BijGEhaj1lSmJ/S
-         hGX/maugg95Ox8R/V0tqYAse7IE++rjzGKcjwF+nNWyd2n1ZWiomFmWnSvwMXftIyJ1s
-         nvQKsTyRMVNTyfsg8jungii2lrh6FUE38AxfC2mgluXYVB4VouQDqNotJ4sgAncIcQzq
-         CmWyKwURUhv6/hJ9432bYzMir7w/l6cNTynIV2vJBWoO8XfEU7A+NI6tZSJhnhK8OB1Y
-         cOdF5XagDiCyoU1JUB3MZPLaLGYWgi1A4Jzt4b/GBoF2/WJM4oPx4DqMcmoowWxcIetT
-         k/AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787138762; x=1787743562;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1787138764; x=1787743564; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8mrd9uCkqnJkb7W1zarrVXFr+ECK+4pC1tmf7nZvgVE=;
-        b=FWIYAz1NbxueAjakKl3dvmA/aSPqYRn8wibKJtyg4vuBTIhb9YfZ7GhfHq4txrGyxo
-         IJkA0gbMa9CV5PnPTQ1rhbpyohCfD6U3OMbpFkUzqHqfT4pmmQJlueYZ6a2CVGfMvC1N
-         Obj4R6+hVxMMpclnAp+gHefwiE92+ZIcpISa9DKdYQRZh7INyhBRKPLm4YlodND/uYlb
-         8kY+18j0gI/fwh/XyU/DvPSzZlfIdop9eP8F2rcWNfsNmV9tCUVVvqS3sCsrooDIEWqo
-         /cS0vM6Eqz5g4mXpRg6OURI74VqDFEQS3vu6vJlnYfTqvKuJ+LNPg4sl0O+2lchRJrbq
-         QTuA==
-X-Gm-Message-State: AFuF++na624sB9WTpf2TT/2+TvvUqEjwr/eHJIAN/42LFScWqvCZ63zi
-	T8FauRXKO2so0psggh4nZC8eRmqlCDgDQH9vWveX0hsplgOcS4rPkgqvTZaljagZ
-X-Gm-Gg: AR+sD12s2caMmfVtF6QCDBGkn6FBz2UQH037UATJeVVMnvxxZaAnomci4ZBkXH5BD99
-	WukqjD90Hjr7aW/ZEajnYYuR4iWegP5cABKxwIDPhVckNhTpdsERmzPpzkV7dQjpufQf8aYXPXx
-	AG5X94xrJTrw1qk1qL7+gI3jPQh/JxSz/IBcBpxZwqGBfF1+Mc/W+z4RAzooSmYZWrmegJZfxb9
-	DNnlPPLEAw3QhwHG1OLnm6azeEyJ0GzowQGIrP5fZpsXlcE23hcKkBKte5da7Pcf55kHHAYd6ZF
-	9J9nsK7cD4Lu+t91PTFG6TqKH2ONOdSRFYbRRIWnfUTINrm9f+tbU3ta3kgxu67zcbjIz0LfmPW
-	3vi6UmOyEuQgZTkz1WkGP8wusKGnnDQHCs/UDtCovwDYUGbW7nBdqXPmfl+NRb/RY3VdcIcKoMX
-	6wVn9J6NOFwfBCVyw0bkmdqYbR/z6V6reaqYTmHQB8OMrWAlw/2MdNMyndiC3pdLR9IMQYrJrDH
+        bh=4IEoEQBNgrjz0yD/nV3SLOHRC+RXnfrN1lLqGPfdcDo=;
+        b=S8PjT5NSDi3fZ5RjYTRyXoUNDDADNkOT2UFXn6LOpFgRjy6Czshlf6mHsX28FdjTX4
+         K6ERsb4a0tOnsOPZ0gWFyp+pPOkeT/kfwragprqB8v4v1iaQDQgvr/GNNex/K8xXJCBw
+         FtiOfQoC5OeNLVbyG3TLIfyZCCsCA/SSN+UarpT+wikiimjSNcYXPM/pFrpvJ8gx0HAZ
+         zlZsJ99FBDFg74An018ZebduhjFB/UKECykEJ4Wg/jwCBNCQ5qDoXOJsA9ZEpwhmm/Zp
+         pEeVWqeIbZmzb0mx5u+jlNqOkfYt4wND3bWSD8sDOZVpC2Ms0iME9ehCi1jtigUXYP04
+         UpjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787138764; x=1787743564;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4IEoEQBNgrjz0yD/nV3SLOHRC+RXnfrN1lLqGPfdcDo=;
+        b=TOQDqodpsZnsipVS0nCakbKjinlKKo4fThU+SQHP6hizsvFsER+Gt67rjja9b7Rem7
+         92XICxm2qvuU2JVjT9pyyCb7yq9NNlpdUl1M1KYWpYqIsBo+lV/mGRZLssd/zrUlohQv
+         s9XSkAIleD2YoO9Uzv3c0JsY/VnTLnTtftrgWtRgR7OOFg64Q+kxk9S/q98Frb29T1w3
+         j3P8cLiNBQc5Uksf4MWYacQE40LasblK0dXx1rlSoDo/aZtra5pATL0EOpyb6Iz5Cb1Z
+         on+l+0arLwAy6d1G0NDrFrOUSgTm+lcUTRtK0ZZc7KzkKHzL+skr8Rov5VCdXsuExbMN
+         weRA==
+X-Gm-Message-State: AOJu0YyqGvh4NSY406Dko+loIqHTcKu2V6L52eMgDoMXgT4F/Of3AlS/
+	N0oDzovcQkPTxybL5P9/TV/cdcbkRBgUw5NwnoxbnSpwHfyBWk8+8ExnuQJ7PDnC
+X-Gm-Gg: AR+sD101fdD5e1tea/8HdK8SfiQJhVGEmYF0YqMRt10qeXZUHid5nGkvI8auCYKb8s7
+	JKXS4DVve20kJtGtM67zXS+HlodQ5MBJS5RshJCkRcmTRt2cEVi1sFadfzNG55Jb39a8cQxKGRM
+	Zlfhnn2zY5k3zQiFKJ4AdDfeoYdIcgAtza0+a9fpwY7jaDDoctzvMN0+CWkDrD4MN3trV8xfT28
+	qCT8ZLJCkgVblsUh2bMrlYWgpiQ4H7WhSV4k4HG6qB9NpWSp+WKfPy3SUXnGyDkw1zKbFRNUkjn
+	UFsJBjvShB/YVw8nRBLSVxYtI4fV/cz/e9g46oafqA0vmUYlZzZQbN4VvMYTzKUb/h5z571bnFd
+	UXQphLLIMPUaWUKoiNkWv4JrGJdZ54NuE4JzwWKwLlcNTPYjnGJW1LsRmKuD2Dkz30Df2it0+CL
+	/OqxfC6q/cQHp19s7odEiavjswgq6mfZuoHp/7VEoQTzILULZ3HUWD6ikanPvVfEF+eD6M4AE+Z
 	A==
-X-Received: by 2002:a17:902:e5c5:b0:2c9:e9db:8167 with SMTP id d9443c01a7336-2d601860803mr66798085ad.7.1787138761662;
-        Wed, 19 Aug 2026 04:26:01 -0700 (PDT)
+X-Received: by 2002:a05:6a20:2446:b0:3cc:22bb:8911 with SMTP id adf61e73a8af0-3cd00e65097mr6664364637.6.1787138763755;
+        Wed, 19 Aug 2026 04:26:03 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327c2a92406sm5073764eec.11.2026.08.19.04.25.59
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327c2a92406sm5073764eec.11.2026.08.19.04.26.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 04:26:00 -0700 (PDT)
+        Wed, 19 Aug 2026 04:26:03 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/7] wtmpdb: upgrade 0.75.0 -> 0.76.0
-Date: Wed, 19 Aug 2026 23:25:47 +1200
-Message-ID: <20260819112553.971109-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/7] graphviz: upgrade 15.1.0 -> 15.1.1
+Date: Wed, 19 Aug 2026 23:25:48 +1200
+Message-ID: <20260819112553.971109-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260819112553.971109-1-ankur.tyagi85@gmail.com>
+References: <20260819112553.971109-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 11:26:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129354
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129355
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Also add tag in the SRC_URI
-
 Changelog:
-https://github.com/thkukuk/wtmpdb/blob/v0.76.0/NEWS
+https://gitlab.com/graphviz/graphviz/-/blob/15.1.1/CHANGELOG.md?ref_type=tags#1511--2026-08-05
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wtmpdb/{wtmpdb_0.75.0.bb => wtmpdb_0.76.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/wtmpdb/{wtmpdb_0.75.0.bb => wtmpdb_0.76.0.bb} (94%)
+ .../graphviz/{graphviz_15.1.0.bb => graphviz_15.1.1.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/graphviz/{graphviz_15.1.0.bb => graphviz_15.1.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.75.0.bb b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.76.0.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/wtmpdb/wtmpdb_0.75.0.bb
-rename to meta-oe/recipes-extended/wtmpdb/wtmpdb_0.76.0.bb
-index 4de0a300d4..ebbfc7e994 100644
---- a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.75.0.bb
-+++ b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.76.0.bb
-@@ -5,9 +5,9 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_15.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_15.1.1.bb
+similarity index 97%
+rename from meta-oe/recipes-graphics/graphviz/graphviz_15.1.0.bb
+rename to meta-oe/recipes-graphics/graphviz/graphviz_15.1.1.bb
+index 6771a41757..7ea33b8d8a 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_15.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_15.1.1.bb
+@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
+ SRC_URI:append:class-nativesdk = "\
+            file://graphviz-setup.sh \
+ "
+-SRC_URI[sha256sum] = "4c44f9f6654d39638db7cdb6a088735117469015299298d82087b24dd4042b16"
++SRC_URI[sha256sum] = "afc7c28dd43d3639910f58820bdce7d89655aa9ac0a4961ac67ffcf77e6a9ac3"
  
--SRCREV = "a6f185a241ee633cbba600029ec153feb2665cf8"
-+SRCREV = "89c0861f74e576c5ad0ec9f5302aa635a4e50dc6"
- 
--SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https"
-+SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https;tag=v${PV}"
- 
- 
- inherit meson pkgconfig systemd features_check
+ UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
