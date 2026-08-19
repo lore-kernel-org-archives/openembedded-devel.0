@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AAE3C5DF89
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 650B9C5DF88
 	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 09:37:13 +0000 (UTC)
 Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
  by mx.groups.io with SMTP id smtpd.msgproc02-g2.3352.1787132221133633110
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 02:37:05 -0700
+ Wed, 19 Aug 2026 02:37:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=dCm80Gwg;
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=O7wuntXQ;
  spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1787132225; x=1818668225;
+  t=1787132229; x=1818668229;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=95gzY9NPJCGXDhs0cLybCPnOoHIIanQHWmhC+PjUiIc=;
-  b=dCm80GwgVbQLgGHlUcyaBv07SOFpOiMZpERFBa4xxf/qJgLiK3ynxC+5
-   5xgKgtFUg8+gYew3SL3u8bqRJ3ay0qJghJhZk+XjxecY8qf/uOnPJDClU
-   phL2i0vrJQmnv+z+rggEIICwsCApJ1Bhy7auSAaS8HusmU78ku8SfrVxz
-   wOx4dt/Bj+JVCtlIXaaELiMLTwmvdkxv49vJPK7Z+TcFny6KO3BkgEEgN
-   YGI6Pg0uBGrfQG5fWrEjKnUMa/TJ1EOwZSb/astDy/DqOO23/Ln9u/Ox/
-   opFc30Co2IwkgGZWMhbm8D1+wi+Uhpc1+P2ujU1r2/GBdPuR6Fnl9XmO9
-   Q==;
-X-CSE-ConnectionGUID: VUPtcEN1SFmUqGmEdjhxHw==
-X-CSE-MsgGUID: 9TRgAgD9SwO0k0XmpbgnXQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11879"; a="251797127"
+  bh=2mDBEITCIBmF994lBihBiGNAyEIMjmPUZyw5xN3prc8=;
+  b=O7wuntXQOO/b8tXMM2AtOfjDusVZHYJnIfkUv+LCv/sBac9keGnw3XRX
+   ytxSKEvh5kiKy+TcppCQx0mWnLyiZZOVwvpmyFFAS4CLW6NhksJJJWZhT
+   Rc86Iz9dMPeNh9PcyHcLT+BXGcd2L/+WSnSuzocpnwjNa8hHQR9W7LxPF
+   4Q6dk7cATiOZ6UjfSGHETCE4xDqAMAWeRPP9R7pCORK/YbREVJ5mMwDvO
+   3+M+zsy/CRl273NXFWRMjwsuXIDDHUnILVeB4/ZATpypxAVNOPNlp98EJ
+   tB26GoHv0bj1a0KHfNZMtHbYeLvmn6sxiPo1to3p4cU+fr8lgz5AjnhAQ
+   w==;
+X-CSE-ConnectionGUID: H3Hs+jC/SLO39GXkb/57+g==
+X-CSE-MsgGUID: GOT+fF3IQO2M7rOqydkj9w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11879"; a="251797136"
 X-IronPort-AV: E=Sophos;i="6.25,231,1779116400"; 
-   d="scan'208";a="251797127"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 18:37:05 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="251797136"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 18:37:08 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id B2665C020DF
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:37:04 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 6135D100037B
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:37:08 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 6EC35148CE5F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:37:04 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 10FA4C073C3
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:37:08 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 6EE781801C0A;
-	Wed, 19 Aug 2026 09:37:02 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 07E771801C0A;
+	Wed, 19 Aug 2026 09:37:05 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 59/70] python3-telnetlib3: upgrade 4.0.5 -> 5.0.0
-Date: Wed, 19 Aug 2026 17:35:03 +0800
-Message-ID: <20260819093514.1101-59-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 61/70] python3-tox: upgrade 4.58.0 -> 4.60.0
+Date: Wed, 19 Aug 2026 17:35:05 +0800
+Message-ID: <20260819093514.1101-61-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20260819093514.1101-1-wangmy@fujitsu.com>
 References: <20260819093514.1101-1-wangmy@fujitsu.com>
@@ -61,32 +61,47 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:37:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129329
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129331
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+===========
+- fix(type): cast set value in _render_options
+- docs: fix typo 'set the the' -> 'set then the' in config reference
+- ci: pin coverage to the ctrace core
+- chore: remove the misc changelog category
+- test: seed the virtualenv wheel image up front
+- feat(plugin): type the plugin and internal API surfaces
+- test: raise timeout for missing-interpreter discovery tests
+- docs: mark the INI configuration format as deprecated
+- docs: publish llms.txt from the docs build
+- Provision before loading env_list
+- docs: repoint nine dead source links in the onboarding guide
+- Add {home} and {tox_root_name} substitutions
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{python3-telnetlib3_4.0.5.bb => python3-telnetlib3_5.0.0.bb} | 2 +-
+ .../python/{python3-tox_4.58.0.bb => python3-tox_4.60.0.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-telnetlib3_4.0.5.bb => python3-telnetlib3_5.0.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-tox_4.58.0.bb => python3-tox_4.60.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-telnetlib3_4.0.5.bb b/meta-python/recipes-devtools/python/python3-telnetlib3_5.0.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-telnetlib3_4.0.5.bb
-rename to meta-python/recipes-devtools/python/python3-telnetlib3_5.0.0.bb
-index 0024908347..f0cf5c3450 100644
---- a/meta-python/recipes-devtools/python/python3-telnetlib3_4.0.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-telnetlib3_5.0.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jquast/telnetlib3"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=15abe157ad6f0b483975cc34bcc1aa99"
+diff --git a/meta-python/recipes-devtools/python/python3-tox_4.58.0.bb b/meta-python/recipes-devtools/python/python3-tox_4.60.0.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-tox_4.58.0.bb
+rename to meta-python/recipes-devtools/python/python3-tox_4.60.0.bb
+index 30b3056621..43ac28cd6a 100644
+--- a/meta-python/recipes-devtools/python/python3-tox_4.58.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tox_4.60.0.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://tox.readthedocs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
  
--SRC_URI[sha256sum] = "37f584609917a3394302cac6c2f78683add80115820c19a4ce35e0fd499f6ad6"
-+SRC_URI[sha256sum] = "b5387d811a270b98698081083a7843530c44765c0a023e3cab6fe8d81f8a2c73"
+-SRC_URI[sha256sum] = "ab0b126a04dd56bc18e6d216386db09335247f2289b54cf534deb5c4ae3a8d2e"
++SRC_URI[sha256sum] = "6f93bb580d35e00fc69cfec1116eecbe21155f747753ca5019374f7c69b2eac9"
  
- PYPI_PACKAGE = "telnetlib3"
- 
+ BBCLASSEXTEND = "native nativesdk"
+ inherit pypi python_hatchling
 -- 
 2.43.0
 
