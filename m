@@ -1,111 +1,110 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C174C5DF88
-	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 11:26:17 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4904.1787138771459260146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 590EFC5DF6D
+	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 13:54:18 +0000 (UTC)
+Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7524.1787147648070998864
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 04:26:11 -0700
+ Wed, 19 Aug 2026 06:54:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ehocwga5;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2d58efc7356so9517945ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 04:26:11 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=d/4vP/dS;
+ spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787138771; x=1787743571; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cnVzTbARb9kvsCxtOnhs/MFqsbXqKksS1IoegWY5gTI=;
-        b=Ehocwga5sPHFPgDk+1r5ahLmN9PvraeuEnQ+emashRNfBjPZAa+eC6FQhIWvbitWyM
-         o2MWN4bVubdtkK22hAkW5d1QM2ZOSusXCssGYjSa0+lSAyd5TkK9ye90GowCuhpdWceR
-         RTVkL2Ad6rhjKtLhkP8MYKCsapn9r2IVAOwtBNihiHZQo+lsJWrnp7fu4b8IgXplFtTt
-         42uYUSlqm9JKfR2cHUw6EPBAlw4bYBiBygAiibKaueJ5K6IpPvjuoowFDk27arg9jihZ
-         88RgmMmwzQoV7nKlG5IAofJ2yHyaUrJR5ehkSsc8aNg4uVoRec8olNTMcCmdGNuMAftC
-         e5MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787138771; x=1787743571;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cnVzTbARb9kvsCxtOnhs/MFqsbXqKksS1IoegWY5gTI=;
-        b=FiNJ/MApEll/5m3CRtE3PRSg9dJtgP19GrXb42+2EzcooNy9iz904RtZDQN1GmWDZp
-         zHyUX3+BEQv2EH5qPpX8XjlXtniOmMwDpBnmndQY2rTmagKeTLHZAZ/BaByGKj+/DPw2
-         lfy/K6nhriMJimTCKw0ZAwrAD3+UM1UBGfuc4j2OC3q2P2YR/duqt9g9Hde2NH+xihw1
-         vB9dlKYM6897poGrr/8AemdNaPA57+5keT429dCIn3PDxh8whGV0djpVYq7PJkyMUn+X
-         vfi3nZsIixo03wArqH8XyzreAYC0APk+/Y6zif1vK90gNcK/iQAikaO/gMlbZyOKBScF
-         WuNA==
-X-Gm-Message-State: AFuF++kxmeojGHoxkE6PwLeG8SchYRqB97xjU6eRgfZxmCaf98xWgwyu
-	fplHqhWh0FgNIKUUQhxsOF1av+Hi/VaeWk9hb8E1GhtZ+jjWbUhk2fiMrT/Ah/ib
-X-Gm-Gg: AR+sD13ChQcaj5J7eXS5j6UoCQdBf8FLgBVWciD0s08naXlg7uqC5GHaY1vvNE4KEDc
-	v37bC1i6XBdvRtYQ89dm9GNiEI8YYByctFQBWlGi4IoJR+bNMpWXttJbD1CknDrb3UDsO/ELQow
-	4X3tBA3D94uEluzH44Q6pfHApr8TUX+CgrV5Aya0Y9+6yTI6sxMaoNK2hCCTYZLplzzIDEV9ryw
-	DOm+tSZwJPWxUWBaVIGEbIhsv/dzyoMk956yze10Unp5TUhZUbLAORoDm6cczJSrd9xfRRiFzy+
-	kInq7THfc80L1d9QGw36NktDXjqlzJQtk4yMJSzRtU7D4UBQMWdcmBrYxJi8zLqCZgSP6btvXnH
-	H7JfWlD3ta8l4v+zZ55ofDk9iyU01sGgtd6TNhKEqbtkLEed3fyWk3mv98KepZwlkLEDuufDeEX
-	sm7K+KU+k4o6/5JNlLLF34K5wFkV8TaeGh7xpGXYXEOxFRzMkHc7guLNB6HGHx9V2ZdHaB27fbf
-	PaNpzfxVHOI
-X-Received: by 2002:a17:903:2f92:b0:2cf:47c4:3d1a with SMTP id d9443c01a7336-2d5fd59f9e4mr67059505ad.3.1787138770779;
-        Wed, 19 Aug 2026 04:26:10 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327c2a92406sm5073764eec.11.2026.08.19.04.26.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 04:26:10 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+  d=cisco.com; i=@cisco.com; l=820; q=dns/txt;
+  s=iport01; t=1787147648; x=1788357248;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=6DTei09uskvyskl2syEek/I87wz4c+z1w6xxk45tPOI=;
+  b=d/4vP/dS9fJdvf1FjpBD4HcyxX6/zVL9XrQbIw9oDsBtNg3L4y1OYydo
+   ddahzq/h5Wq3CV/Q9KbVDC3W0JB61bGtVU4cTrizNFTyFRCfarIbNIjr2
+   h91fyWbZU9K4XwLMo0G/i21CcD8q5hXFzW/3FWeZDX1TbdTIXzANtIpQr
+   VLBOTWCMkM1VHFONtygu43oV9xq/WoKLaMCgP7KmeV80D/wXrdklJ1Fwm
+   LtU4gwozaXKv/h1qeWtJwQcWYNyDJ3d5jGSeGBa+kOVOfrNKCk3Ge+fkw
+   HwaAYYib/3/PPLrPy+KUx3P5+3h8+hofRbBFo8/ZpvzfUcp4ND0UXv7Kd
+   g==;
+X-CSE-ConnectionGUID: O0aw9NNhS06GdpAjmdOc8g==
+X-CSE-MsgGUID: mfPnLD8XSf21gfLHAjd31Q==
+X-IPAS-Result: =?us-ascii?q?A0BCAgDutIVq/4wQJK1RCYJZgld0XkNJk1kBoQ6Bfg8BA?=
+ =?us-ascii?q?QEPNxoEAQGFBY1tAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
+ =?us-ascii?q?Q4ThlyGXTYBGAEtMFxEgwIBgnQDw3eCLIEBgygBgVTbMAELFAEFgTOFP4gid?=
+ =?us-ascii?q?oR8JxsbgXKEfoQKDXmFeASCIoEMgXiRSUiBHgNZLAFVEw0KCwcFgWYDNRIqF?=
+ =?us-ascii?q?W4yHYEjPheBDRsGBYEdgSiENyMZNnyBCV6BKyphARIXgQmCCgKCcIIGAgFJR?=
+ =?us-ascii?q?Q4JCwsYDUgRLDcUGQQ+bgeOSSCCS4EOllSReqEPCiiDdowhlToaM6psLphap?=
+ =?us-ascii?q?FqEaYFoPIFZcBWDIglKGQ/eXCcyAjsCBwIHDgMLkWiBfgEB?=
+IronPort-Data: A9a23:n2Fha6nWZwX+7fUXkl/MICvo5gzQJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJMWTvXbqnYYWvwKIwnbN+39EhSvsfcndVhT1Q4qCxgFVtH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+ZC31GONgWYubDpEsvPb8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FapA8/kmJ0dOz
+ qRGBzwVRxKGi8W9kL3uH4GAhux7RCXqFIobvnclyXTSCuwrBMiYBa7L/tRfmjw3g6iiH96HO
+ JFfMmQpNUqGOkEXUrsUIMpWcOOAinThejtDqEq9rqss6G+Vxwt0uFToGIqMIoTUGpQLxC50o
+ ErD8Vz/Jj1KBOeRk2OK/FaMr+3DxnrCDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
+ 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUz7AWLj66R6AGDCy1cFXhKaccts4k9QjlCO
+ kK1ou4FzAdH6NW9IU9xPJ/Lxd9uEUD59VM/WBI=
+IronPort-HdrOrdr: A9a23:G6pjQa2T0THSo204spEtpQqjBJ4kLtp133Aq2lEZdPWaSKOlfq
+ eV7ZEmPHDP6Qr5NEtMpTniAtjjfZqjz/5ICOAqVN/INjUO01HHEGgN1+ffKhTbaknDH5ZmpM
+ RdWpk7LsHsBl5nisu/ygy5H9E8hOSjysmT9IDjJ7MHd3ASV0mmhD0JbDqmLg==
+X-Talos-CUID: 9a23:vbffBmxe2GT3vaoCsqn8BgUzQsk6I1v7zEyIfWC0EU9rTbGyQg+frfY=
+X-Talos-MUID: =?us-ascii?q?9a23=3AOABcLg4ibv5HbQrLYUWJgTCExoxt7ZyoLGxdoa4?=
+ =?us-ascii?q?I4ZCLOwhQEjWR122OF9o=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,231,1779148800"; 
+   d="scan'208";a="810067962"
+Received: from alln-l-core-03.cisco.com ([173.36.16.140])
+  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Aug 2026 13:53:58 +0000
+Received: from sjc-ads-5197.cisco.com (sjc-ads-5197.cisco.com [10.28.35.211])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by alln-l-core-03.cisco.com (Postfix) with ESMTPS id B4234180001ED;
+	Wed, 19 Aug 2026 13:53:58 +0000 (GMT)
+Received: by sjc-ads-5197.cisco.com (Postfix, from userid 1887503)
+	id 488F6CC12A6; Wed, 19 Aug 2026 06:53:58 -0700 (PDT)
+From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 5/7] libyui-ncurses: add UPSTREAM_CHECK_GITTAGREGEX
-Date: Wed, 19 Aug 2026 23:25:51 +1200
-Message-ID: <20260819112553.971109-5-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260819112553.971109-1-ankur.tyagi85@gmail.com>
-References: <20260819112553.971109-1-ankur.tyagi85@gmail.com>
+Cc: xe-linux-external@cisco.com
+Subject: [meta-python][PATCH] python3-cbor2: use exact CVE_PRODUCT mapping
+Date: Wed, 19 Aug 2026 06:53:58 -0700
+Message-Id: <20260819135358.16960-1-devanshp@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-5197.cisco.com [10.28.35.211];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.28.35.211, sjc-ads-5197.cisco.com
+X-Outbound-Node: alln-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 11:26:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129358
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 13:54:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129361
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Devansh Patel <devanshp@cisco.com>
 
-Also add tag in the SRC_URI
+The product-only cbor2 mapping uses a wildcard vendor. Use
+agronholm:cbor2, the NVD identity for the packaged source.
 
-Fixes:
-$ devtool latest-version libyui-ncurses
-...
-INFO: Current version: 4.6.2
-INFO: Latest version: 43018
-INFO: Latest version's commit: 7009e514ecafb1e25e0cc5a4ec1e731ff8af30ee
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
-index 43a79e26ff..d2d786c66f 100644
---- a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
-+++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://../COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad0
-     file://../COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
+index d7f08c6cbc..fdd206cf97 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
+@@ -19,6 +19,6 @@ RDEPENDS:${PN} += " \
+     python3-datetime \
  "
  
--SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https;tag=${PV} \
-            file://0001-NCurses-cast-wchar_t-before-streaming-to-narrow-ostr.patch \
-           "
+-CVE_PRODUCT = "cbor2"
++CVE_PRODUCT = "agronholm:cbor2"
  
-@@ -12,6 +12,8 @@ SRC_URI:append:class-target = " file://0001-Fix-the-error-of-can-t-find-header-f
- 
- SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
- 
-+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
-+
- S = "${UNPACKDIR}/${BP}/libyui-ncurses"
- 
- inherit cmake gettext pkgconfig
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.35.6
 
