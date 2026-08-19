@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1526FC5DF88
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CE9BC5DF89
 	for <webhook@archiver.kernel.org>; Wed, 19 Aug 2026 09:36:32 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3330.1787132187341698754
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3312.1787132179675746840
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 02:36:30 -0700
+ Wed, 19 Aug 2026 02:36:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=e5QS/BEx;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Ii8krKRX;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1787132193; x=1818668193;
+  t=1787132186; x=1818668186;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=K21d7YWeWo3MG6j4IWMe0dL7/XlNoY0+Kpjvm80RNhs=;
-  b=e5QS/BExjwD2b9xMoHmlaFoDC4mfw9fBVS+8bm63v6E2dRH9XNYehpmM
-   N7HHPfgvPSMvZSQzZ9PeQZcn6wAqRH0APWogEuPieHXSSmXVJoiCbXrsk
-   34O6lyFDQiI7RaeLSe6umgZvu6M8PxW3L++mHwnLxyDEtmeHghuCFn+kF
-   8simyz3cU3F7GoKFCXQJPesHFdfLW4zB0I9+5AItnlXhFAfxOvKZ9RHw/
-   yEnTb0rhyLR/cpnpPUHQbSXycE5LQozBExGcZHpS7CwNPBbnsPHHDgjZP
-   YiINe0aGjn6FM/ePcxX3zoP354Wm/hcum5wXeEK8rj+4K2rVVPAepJRZf
-   A==;
-X-CSE-ConnectionGUID: BysAWG+GReG7lICER7NYGQ==
-X-CSE-MsgGUID: pBoTtnwXT6y3lCoK+kOJtg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11879"; a="230759463"
+  bh=zo9c0NOo79oftFxwxfV0gEgtdL7vCdC3m4hOofasahw=;
+  b=Ii8krKRXHiaYw6rO/bF/j3fRfsCUwI/aJAHPJGWh1OQm2KNOzZtgWc4K
+   jvHxg59IydTLzTxWJL0JptWp97JM7Ms0QvGn4dshY65Q2ehb94fnZBvg0
+   XRntZ5AyQn9vpM5Zz+mieAqrBnPoo9CxfRkIbe2y4JvFSNaKxh9D+KeSX
+   9KutFJbL2Ul/1x0gZNEk8kFtHjSgk7EaxOBpcYgevt6Mq1gxRuo7ryysH
+   ih/7CSq381O7qLJbTjEYGQ1eQ9KkZPqo9TLK+ww/Ogt/F9wrAHVcbSGcK
+   c+gxzsQvHkzeUbxOpsEv3AFVecOSeAIvtxJtCwYXbiduJlc+fiwpGG+80
+   Q==;
+X-CSE-ConnectionGUID: /TL7Hx48T0uS6AsotlxkiA==
+X-CSE-MsgGUID: 9qyUitehTnSqkpHOAPhlaQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11879"; a="251357060"
 X-IronPort-AV: E=Sophos;i="6.25,231,1779116400"; 
-   d="scan'208";a="230759463"
+   d="scan'208";a="251357060"
 Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 18:36:33 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 18:36:25 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 4535B406EF5
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:36:29 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id B19C3100037B
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:36:21 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (unknown [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id E57BB1C00101
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:36:28 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 6255410003A0
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:36:21 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id E3C1F1801C0A;
-	Wed, 19 Aug 2026 09:36:26 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 536B71801C0A;
+	Wed, 19 Aug 2026 09:36:19 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 39/70] python3-jdatetime: upgrade 6.0.1 -> 6.1.0
-Date: Wed, 19 Aug 2026 17:34:43 +0800
-Message-ID: <20260819093514.1101-39-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 35/70] python3-httpx2: upgrade 2.9.1 -> 2.10.0
+Date: Wed, 19 Aug 2026 17:34:39 +0800
+Message-ID: <20260819093514.1101-35-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20260819093514.1101-1-wangmy@fujitsu.com>
 References: <20260819093514.1101-1-wangmy@fujitsu.com>
@@ -61,46 +61,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2026 09:36:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129309
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129305
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-- fix: define datetime resolution attribute
-- Adapt to Ruff v0.16 defaults
-- fix: preserve instance locale in datetime.astimezone()
-- fix(datetime.dst): pass Gregorian to tzinfo.dst()
-- typing: use int for fold
-- Fix %I/%-I strftime directives to use the 12-hour clock
-- Fix Windows Persian locale test
-- Add pyright type checking to CI workflow
-- Fix Windows test failure for %-I strftime
-- migrate tests to pytest
-- Add date.strptime and match stdlib subclass behavior
+=============
+- Add support for running on WebAssembly / Emscripten via Pyodide, using a
+  JavaScript fetch-based transport defined in httpx2-jsfetch.
+- Add max_event_size to cap SSE event buffering.
+- Add RFC 9110 status code constants.
+- Add support for Python 3.15.
+- Improve SSE chunk buffering performance.
+- Skip cookie extraction for responses without Set-Cookie headers.
+- Return str | None instead of Any from Headers.get.
+- Enforce the WebSocket max message size across fragmented messages.
+- Ignore unsolicited and duplicate WebSocket Pong frames.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-jdatetime_6.0.1.bb => python3-jdatetime_6.1.0.bb}  | 2 +-
+ .../{python3-httpx2_2.9.1.bb => python3-httpx2_2.10.0.bb}       | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-jdatetime_6.0.1.bb => python3-jdatetime_6.1.0.bb} (94%)
+ rename meta-python/recipes-devtools/python/{python3-httpx2_2.9.1.bb => python3-httpx2_2.10.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jdatetime_6.0.1.bb b/meta-python/recipes-devtools/python/python3-jdatetime_6.1.0.bb
-similarity index 94%
-rename from meta-python/recipes-devtools/python/python3-jdatetime_6.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-jdatetime_6.1.0.bb
-index 396793ac3a..5a7fcd7931 100644
---- a/meta-python/recipes-devtools/python/python3-jdatetime_6.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-jdatetime_6.1.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
+diff --git a/meta-python/recipes-devtools/python/python3-httpx2_2.9.1.bb b/meta-python/recipes-devtools/python/python3-httpx2_2.10.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-httpx2_2.9.1.bb
+rename to meta-python/recipes-devtools/python/python3-httpx2_2.10.0.bb
+index ed067f73db..1be888ed00 100644
+--- a/meta-python/recipes-devtools/python/python3-httpx2_2.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-httpx2_2.10.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "The next generation HTTP client."
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=166cfc32dc0986f87a7e950553b52e5e"
  
- # The PyPI package omits some files for testing like tests/__init__.py
- # so use the GitHub source instead.
--SRCREV = "8a5acc4aa0cef2f39a0ad089b7ca7e4b89626994"
-+SRCREV = "480b637d024555e1523b4652bd2b6c5b5fac33d4"
- SRC_URI = " \
-     git://github.com/slashmili/jdatetime;branch=main;protocol=https;tag=v${PV} \
-     file://run-ptest \
+-SRC_URI[sha256sum] = "1932a768737e3666291582833da748cc4e563c337cf96706fccc04fa6e58764a"
++SRC_URI[sha256sum] = "8741d7329fe2c7885fc9ceb61c8217acfb87a85f75723714b89ebf7ad7196338"
+ 
+ inherit pypi python_hatchling
+ 
 -- 
 2.43.0
 
