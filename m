@@ -2,113 +2,118 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA69CC5DF81
-	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C16FEC5DF82
+	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:47:05 +0000 (UTC)
 Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.818.1787204567413775421
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.787.1787204821946704479
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 22:42:47 -0700
+ Wed, 19 Aug 2026 22:47:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LQ1AMrsz;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hnGTT76x;
  spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=31031; q=dns/txt;
-  s=iport01; t=1787204567; x=1788414167;
+  d=cisco.com; i=@cisco.com; l=17073; q=dns/txt;
+  s=iport01; t=1787204821; x=1788414421;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=W8DhV0cBpLYwQu737b8VaUYGcMz9lazFGTyCYKfqeT8=;
-  b=LQ1AMrszN5e1CouF0U8XtVwHBfENK8tN1w9VdG7a3wfWMwR8IeN+ZZvL
-   XUDjdwBKZ91dS3VWusqAC6geE1tOw7MJdYCAEKNr/Pro8j3J0mntm74e1
-   FeOlt8Lw4M5Sd9KLQBLfP9ktw/4YXNOgf6prBSbkci5fwShQuT1O6qE96
-   hZb8hXCqB/t8BS8/Bq4U/LTYPIgoWshUlrwOHi59z5kbzReXeVmc6TZK2
-   9qkuCnxxpaooosnOCRQTim6buOLdvb2RP29Csi4gXwcGEG8njvHtgZjEx
-   5A5CBcdAeB/fQb5B6xfDf+U94eYhsCxTGDiN9nEAQkSK7nNlOpQEYe6Ag
-   g==;
-X-CSE-ConnectionGUID: y1PQ+AXsRbWNqE66DLmzwQ==
-X-CSE-MsgGUID: dxf/B9WUSBieHvJiesY1BA==
-X-IPAS-Result: =?us-ascii?q?A0BLAgBXk4Zq/4sQJK1aAQoTAQELEgyCBQuCV3ReQyseh?=
- =?us-ascii?q?FeRB2yLZ5I3gX4PAQEBD0QNBAEBhQWNbQImNAkOAQIEAwIDAQEBAQEBAQEBA?=
- =?us-ascii?q?QELAQEFAQEBAgEHBYEOE4ZPDYZaAQIBHQkECwEYAS0sAwECAwImAiILIxgJg?=
- =?us-ascii?q?wIBgjoDNwMICcIxen8zgQGDKAGBVNhLDYJYAQsUAQWBBS6FP4J/IAGFAl0YA?=
- =?us-ascii?q?USEOCcbG4FygRWDaYEFgRo3CwKFO4JqBIIigQyBWAKCHgFijm9IgQIcA1ksA?=
- =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+FzVYGwYFgR2BKIQ3Ixk2fIEJXoErKmEBE?=
- =?us-ascii?q?heBCYIKAoJwggYCAUlFDgkXCxgNSBEsNxQZBD0BbgeOURULgVlgEi1OEwEqA?=
- =?us-ascii?q?RcLfhSBBg4JkxISJ49lgiGBNZ5pcQoog3aMIY8+hXwaM4QEgVeSQJJRC5h9i?=
- =?us-ascii?q?x4JD4JUhAmCBoFNjV9FUIRpgWg8gVlwFYMiCRY0GQ+OKgQKC4NghU4WxlUnM?=
- =?us-ascii?q?gIJMgEBBwIHDgMLgWiQAi2BTwEB?=
-IronPort-Data: A9a23:IXn9P6kUQ9ou68VE4k0CloXo5gzQJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xJJD2GOMqyLZWGgKN0nPIu090wAucfSmtcwQFY5/HszH1tH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+ZC31GONgWYubDpEsvPb8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FZxBwt80KFFVz
- /YnDikgME6vo+ek34vuH4GAhux7RCXqFIobvnclyXTSCuwrBMiZBa7L/tRfmjw3g6iiH96HO
- JFfMmQpNUqGOkYeUrsUIMpWcOOAhmX/ej5RsnqepLE85C7YywkZPL3FYIOPJILUGZ4E9qqej
- m7W8SPTUy4nD/aexBqb0HOhnd6WtwquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBeCDVAc9ch8sQxQFTGy
- 2O0oj8gPhQ32JX9dJ5X3u7Nxd9uEUD59VM/WBI=
-IronPort-HdrOrdr: A9a23:l/i4fa1UwXVGTg6YjoXB9wqjBJAkLtp133Aq2lEZdPWaSKOlfq
- eV7ZAmPH7P+VMssR4b+OxoVJPsfZq+z+8W3WBuB9eftWDd0QPCRr2KhrGN/9SPIUHDH8dmpM
- BdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPGdXg2UK1XYANu5deXcGPTV7OQ==
-X-Talos-CUID: 9a23:QBgDPWyUZnsNGiDm5SFPBgUFQ/gcMVTt103aHGmhJDg3ZJmQW0CprfY=
-X-Talos-MUID: 9a23:5gLqGwbL9rkmCOBTuy/iwxszC/pTyaWjKF4vkJgdipCuHHkl
+  bh=6qrwXLIG0T678vvG0tQKBefmtM16x6g900UASey3PLQ=;
+  b=hnGTT76xh9jRK0Bj7vRmW+M/Fb9N8FXnkxwiZJxV96Rax3Siak0THstE
+   s+gKMuCZZZP8qozsdSGAP/krO4eirq9nHk5T68JbTwROyupyO8cRf07pK
+   8C3QiwuMicReEIJqLR0sSzUkq8dZc8Qpr7nig34WhXTn169v/lCaCnXCt
+   TFWKypXvH43DcIiaB/rm6hJRAHRuPtMBJ9y1Hx5qRSQc/bVcWvDTo7sr6
+   EA9WF1P7a87Htv3+IUxTmZvDk4hJsbXWQdJ4oqrTTggmsu5C//tIWnmK/
+   +DY1FGuZosfe2Tq837UseRjWbDZqFuH9iNKcNHisfqWXzHCgqk5VQpgtp
+   A==;
+X-CSE-ConnectionGUID: Symctp6FRGOb+HwsFZHIDw==
+X-CSE-MsgGUID: efAQT5sIRwe3CTxa4xqcNg==
+X-IPAS-Result: =?us-ascii?q?A0AnAABXk4Zq/5MQJK1aHQEBAQEJARIBBQUBgXwIAQsBg?=
+ =?us-ascii?q?lZ0XkNJA4RUiBuJWItnkjeBfg8BAQEPRA0EAQGFBY1tAiY0CQ4BAgQDAgMBA?=
+ =?us-ascii?q?QEBAQEBAQEBAQsBAQUBAQECAQcFgQ4Thk8NhloBAgEmBAsBGAEtLAMBAgMCJ?=
+ =?us-ascii?q?gIiCyMYCYMCAYI6AzcDEcIxen8zgQGDKAGBVNhLDYJYAQsUAQWBBS4BhT6Cf?=
+ =?us-ascii?q?yABhQJdGAFEhDgnGxuBcoEVg2mBBYEaQgKFO4JqBIIigQyBWAKBLXEBYo5vS?=
+ =?us-ascii?q?IECHANZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPhc1WBsGBYEdgSiENyMZNnyBC?=
+ =?us-ascii?q?V6BKyphARIXgQmCCgKCcIIGAgFJRQ4JFwsYDUgRLDcUGQQ9AW4HjlEggX5NL?=
+ =?us-ascii?q?SsjEwEqAYEgFHgFCQ4IAaVRoB5xCiiDdowhjz6FfBozhASBV5JAklELmH2CW?=
+ =?us-ascii?q?YsxhAmRMkVQhGmBaDyBWXAVO4JnCUoZD44qBAoLg2CFZMZVJzICCQMvAQEHA?=
+ =?us-ascii?q?gcOAwuBaJACLYFPAQE?=
+IronPort-Data: A9a23:rJnlKq5mVKrgeE4+k8f+owxRtG7GchMFZxGqfqrLsTDasY5as4F+v
+ mUbDDyAPfyMN2Dxetlwa4Tlox8OvZfcn4I2TQE5pHs2Zn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa/lH2dOC98RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/qUzBHf/g2QqajJNuvrZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eBpwd8fpvX0902
+ tsSaxASdT6xp8Oa3+fuIgVsrpxLwMjDNYcbvDRkiDreF/tjGMiFSKTR7tge1zA17ixMNa+BP
+ IxCN3w2MlKZP0In1lQ/UPrSmM+omnn2cDRCgFmUvqEwpWPUyWSd1ZC9aYCLJYTbFZs9ckCwq
+ 2zvxlikGTAgK9HE4gaV+y68n+TpknauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
+ 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4Guk+7kSJj6HT+QvcXzBCRT9aY9tgv8gzLdA36
+ mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
+IronPort-HdrOrdr: A9a23:J/L0RKiFpIT8hWH7kDhPsG818HBQXvgji2hC6mlwRA09TyVXra
+ +TdZMgpHvJYVcqKRQdcL+7WZVoLUmwyXcX2/hyAV7dZmnbUQKTRekIh7cKqAePJ8SRzIJgPI
+ 5bAs9D4aXLfDtHpPe/xhWkGNA9x9TC2qWpieDCi0pJd2hRGsddB8MTMHfiLqWwLzM2fKYEKA
+ ==
+X-Talos-CUID: =?us-ascii?q?9a23=3AXlpH2moksqSjEDmb+hAeNuHmUfs0d3bB1Cn+GWC?=
+ =?us-ascii?q?fAyVJV6a7e3+x1Lwxxg=3D=3D?=
+X-Talos-MUID: 9a23:BUhfygZpyxrvWuBTujHFvQ0/L+ZS/Kn1I3wdmMkWosKiOnkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,232,1779148800"; 
-   d="scan'208";a="812666439"
-Received: from alln-l-core-02.cisco.com ([173.36.16.139])
-  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:42:41 +0000
-Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
+   d="scan'208";a="812670986"
+Received: from alln-l-core-10.cisco.com ([173.36.16.147])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:47:01 +0000
+Received: from sjc-ads-5471.cisco.com (sjc-ads-5471.cisco.com [10.28.23.235])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id AE64518000199;
-	Thu, 20 Aug 2026 05:42:41 +0000 (GMT)
-Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 4E6CFCCA79B; Wed, 19 Aug 2026 22:42:41 -0700 (PDT)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by alln-l-core-10.cisco.com (Postfix) with ESMTPS id C81AD18000174;
+	Thu, 20 Aug 2026 05:47:00 +0000 (GMT)
+Received: by sjc-ads-5471.cisco.com (Postfix, from userid 1887505)
+	id 65F7BCC12A6; Wed, 19 Aug 2026 22:47:00 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-python][wrynose][PATCH] python3-web3: Fix CVE-2026-40072
-Date: Wed, 19 Aug 2026 22:42:39 -0700
-Message-Id: <20260820054239.1363898-1-hthakar@cisco.com>
+Subject: [meta-python][scarthgap][PATCH] python3-web3: Fix CVE-2026-40072
+Date: Wed, 19 Aug 2026 22:45:38 -0700
+Message-Id: <20260820054538.26512-1-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: alln-l-core-02.cisco.com
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-5471.cisco.com [10.28.23.235];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.28.23.235, sjc-ads-5471.cisco.com
+X-Outbound-Node: alln-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:42:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129378
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:47:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129379
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-This patch applies the upstream v7 backport for
-CVE-2026-40072. The upstream fix commit is referenced in [1],
-and the public CVE advisory is referenced in [2].
+This patch applies the v7 upstream fix for CVE-2026-40072 shown in [1].
+The security advisory [2] references the patch-equivalent v8/main fix [3].
+The v7 commit was selected because it is the nearest source baseline to
+Scarthgap's web3.py 6.17.0 recipe.
 
 [1] https://github.com/ApeWorX/web3.py/commit/d62e67d3b636bd4c5a929696c0f5c4167c31625b
-[2] https://github.com/advisories/GHSA-5hr4-253g-cpx2
+[2] https://github.com/ApeWorX/web3.py/security/advisories/GHSA-5hr4-253g-cpx2
+[3] https://github.com/ApeWorX/web3.py/commit/b1c57bb0a124359c9902daaefab4d8af7c3c4c1e
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python/files/CVE-2026-40072.patch         | 861 ++++++++++++++++++
- .../python/python3-web3_7.12.1.bb             |   1 +
- 2 files changed, 862 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
+ .../python/python3-web3/CVE-2026-40072.patch  | 434 ++++++++++++++++++
+ .../python/python3-web3_6.17.0.bb             |   1 +
+ 2 files changed, 435 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-web3/CVE-2026-40072.patch
 
-diff --git a/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch b/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
+diff --git a/meta-python/recipes-devtools/python/python3-web3/CVE-2026-40072.patch b/meta-python/recipes-devtools/python/python3-web3/CVE-2026-40072.patch
 new file mode 100644
-index 0000000000..d32438290b
+index 0000000000..35e94cde60
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
-@@ -0,0 +1,861 @@
-+From 694a1217581e39036e0c174ab85616ee6656139d Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-web3/CVE-2026-40072.patch
+@@ -0,0 +1,434 @@
++From 21ee858ea75287d781eb0a878d9463346da648b3 Mon Sep 17 00:00:00 2001
 +From: fselmo <fselmo2@gmail.com>
 +Date: Fri, 13 Mar 2026 15:38:09 -0600
 +Subject: [PATCH] feat: added restrictions on CCIP read durin calls
@@ -140,466 +145,42 @@ index 0000000000..d32438290b
 +CVE: CVE-2026-40072
 +Upstream-Status: Backport [https://github.com/ApeWorX/web3.py/commit/d62e67d3b636bd4c5a929696c0f5c4167c31625b]
 +
++Backport Changes:
++- Retained the v6.17 request helper APIs and passed
++  `allow_redirects=False` through them instead of using the newer direct
++  session APIs.
++- Retained the v6.17 POST `data` payload and malformed-URL checks; the
++  newer source uses a `json` payload and a generic POST fallback.
++- Exported the validator aliases through the v6.17 utility imports; this
++  version has no utility `__all__` list to update.
++- Kept the v6.17 timeout and POST-payload assertions in the request mocks
++  while adding the upstream redirect assertions.
++- Reformatted the synchronous `_durin_call` arguments so the new provider
++  options can be passed on the v6.17 call site.
++- Omitted changes under `tests/core` and `tests/ens` because the PyPI
++  source archive used by this recipe does not ship those directories.
++  The omitted tests were validated separately against the v6.17 Git tag.
++
 +(cherry picked from commit d62e67d3b636bd4c5a929696c0f5c4167c31625b)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ tests/core/contracts/test_offchain_lookup.py  | 200 ++++++++++++++++++
-+ .../utilities/test_ccip_url_validation.py     | 122 +++++++++++
-+ tests/ens/test_offchain_resolution.py         |  26 +++
-+ .../module_testing/module_testing_utils.py    |  24 +++
++ .../module_testing/module_testing_utils.py    |  26 ++++-
 + web3/eth/async_eth.py                         |   2 +
-+ web3/eth/eth.py                               |   2 +
++ web3/eth/eth.py                               |   5 +-
 + web3/providers/async_base.py                  |   5 +
 + web3/providers/base.py                        |   5 +
-+ web3/utils/__init__.py                        |   6 +
-+ web3/utils/async_exception_handling.py        |  20 +-
-+ web3/utils/ccip_url_validation.py             | 105 +++++++++
-+ web3/utils/exception_handling.py              |  22 +-
-+ 12 files changed, 537 insertions(+), 2 deletions(-)
-+ create mode 100644 tests/core/utilities/test_ccip_url_validation.py
++ web3/utils/__init__.py                        |   4 +
++ web3/utils/async_exception_handling.py        |  21 +++-
++ web3/utils/ccip_url_validation.py             | 105 ++++++++++++++++++
++ web3/utils/exception_handling.py              |  21 +++-
++ 9 files changed, 190 insertions(+), 4 deletions(-)
 + create mode 100644 web3/utils/ccip_url_validation.py
 +
-+diff --git a/tests/core/contracts/test_offchain_lookup.py b/tests/core/contracts/test_offchain_lookup.py
-+index eed8ae23..c6ddb760 100644
-+--- a/tests/core/contracts/test_offchain_lookup.py
-++++ b/tests/core/contracts/test_offchain_lookup.py
-+@@ -1,4 +1,5 @@
-+ import pytest
-++import socket
-+ 
-+ from eth_abi import (
-+     abi,
-+@@ -14,10 +15,14 @@ from web3._utils.type_conversion import (
-+     to_hex_if_bytes,
-+ )
-+ from web3.exceptions import (
-++    MultipleFailedRequests,
-+     OffchainLookup,
-+     TooManyRequests,
-+     Web3ValidationError,
-+ )
-++from web3.utils import (
-++    handle_offchain_lookup,
-++)
-+ 
-+ # "test offchain lookup" as an abi-encoded string
-+ OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA = "0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001474657374206f6666636861696e206c6f6f6b7570000000000000000000000000"  # noqa: E501
-+@@ -208,3 +213,198 @@ def test_offchain_lookup_raises_on_continuous_redirect(
-+     )
-+     with pytest.raises(TooManyRequests, match="Too many CCIP read redirects"):
-+         offchain_lookup_contract.caller.continuousOffchainLookup()
-++
-++
-++# -- SSRF mitigation tests -- #
-++
-++
-++def test_offchain_lookup_rejects_http_urls_by_default(
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """HTTP URLs should be rejected by default (only HTTPS allowed)."""
-++    to_hex_if_bytes(offchain_lookup_contract.address).lower()
-++
-++    # Patch getaddrinfo so host validation passes
-++    def _mock_getaddrinfo(host, port, *args, **kwargs):
-++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    payload = {
-++        "sender": offchain_lookup_contract.address,
-++        "urls": [
-++            "http://web3.py/gateway/{sender}/{data}.json",
-++        ],
-++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
-++        "callbackFunction": b"\x00\x00\x00\x00",
-++        "extraData": b"",
-++    }
-++    transaction = {"to": offchain_lookup_contract.address}
-++
-++    with pytest.raises(MultipleFailedRequests):
-++        handle_offchain_lookup(payload, transaction)
-++
-++
-++def test_offchain_lookup_allows_http_urls_when_configured(
-++    w3,
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """HTTP URLs should be allowed when ccip_read_allow_http=True on provider."""
-++    normalized_address = to_hex_if_bytes(offchain_lookup_contract.address)
-++    mock_offchain_lookup_request_response(
-++        monkeypatch,
-++        mocked_request_url=f"https://web3.py/gateway/{normalized_address}/{OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA}.json",  # noqa: E501
-++        mocked_json_data=WEB3PY_AS_HEXBYTES,
-++    )
-++
-++    w3.provider.ccip_read_allow_http = True
-++    try:
-++        response = offchain_lookup_contract.caller.testOffchainLookup(
-++            OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA
-++        )
-++        assert abi.decode(["string"], response)[0] == "web3py"
-++    finally:
-++        w3.provider.ccip_read_allow_http = False
-++
-++
-++def test_offchain_lookup_custom_url_validator_rejects(
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """Custom url_validator on provider that rejects should skip URLs."""
-++    from web3.utils.exception_handling import (
-++        handle_offchain_lookup,
-++    )
-++
-++    # Patch getaddrinfo so host validation passes
-++    def _mock_getaddrinfo(host, port, *args, **kwargs):
-++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    def reject_all(url):
-++        raise Web3ValidationError(f"Rejected by policy: {url}")
-++
-++    payload = {
-++        "sender": offchain_lookup_contract.address,
-++        "urls": [
-++            "https://web3.py/gateway/{sender}/{data}.json",
-++        ],
-++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
-++        "callbackFunction": b"\x00\x00\x00\x00",
-++        "extraData": b"",
-++    }
-++    transaction = {"to": offchain_lookup_contract.address}
-++
-++    with pytest.raises(MultipleFailedRequests):
-++        handle_offchain_lookup(payload, transaction, url_validator=reject_all)
-++
-++
-++def test_offchain_lookup_custom_url_validator_on_provider(
-++    w3,
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """Custom url_validator set on provider is honored via _durin_call."""
-++
-++    # Patch getaddrinfo so host validation passes
-++    def _mock_getaddrinfo(host, port, *args, **kwargs):
-++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    validator_calls = []
-++
-++    def tracking_validator(url):
-++        validator_calls.append(url)
-++        raise Web3ValidationError(f"Rejected by policy: {url}")
-++
-++    w3.provider.ccip_read_url_validator = tracking_validator
-++    try:
-++        with pytest.raises(MultipleFailedRequests):
-++            offchain_lookup_contract.caller.testOffchainLookup(
-++                OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA
-++            )
-++        assert len(validator_calls) > 0
-++    finally:
-++        w3.provider.ccip_read_url_validator = None
-++
-++
-++def test_offchain_lookup_rejects_private_ip(
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """URLs resolving to private IPs should be rejected."""
-++    from web3.utils.exception_handling import (
-++        handle_offchain_lookup,
-++    )
-++
-++    def _mock_getaddrinfo(host, port, *args, **kwargs):
-++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("127.0.0.1", 0))]
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    payload = {
-++        "sender": offchain_lookup_contract.address,
-++        "urls": [
-++            "https://web3.py/gateway/{sender}/{data}.json",
-++        ],
-++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
-++        "callbackFunction": b"\x00\x00\x00\x00",
-++        "extraData": b"",
-++    }
-++    transaction = {"to": offchain_lookup_contract.address}
-++
-++    with pytest.raises(MultipleFailedRequests):
-++        handle_offchain_lookup(payload, transaction)
-++
-++
-++def test_offchain_lookup_redirect_not_followed(
-++    offchain_lookup_contract,
-++    monkeypatch,
-++):
-++    """302 redirects should not be followed (treated as non-2xx, try next URL)."""
-++    from web3.utils.exception_handling import (
-++        handle_offchain_lookup,
-++    )
-++
-++    # Patch getaddrinfo so host validation passes
-++    def _mock_getaddrinfo(host, port, *args, **kwargs):
-++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    class Mock302Response:
-++        status_code = 302
-++
-++        @staticmethod
-++        def raise_for_status():
-++            raise Exception("called raise_for_status()")
-++
-++    def _mock_get(*args, **kwargs):
-++        assert kwargs.get("allow_redirects") is False
-++        return Mock302Response()
-++
-++    def _mock_post(*args, **kwargs):
-++        assert kwargs.get("allow_redirects") is False
-++        return Mock302Response()
-++
-++    monkeypatch.setattr("requests.Session.get", _mock_get)
-++    monkeypatch.setattr("requests.Session.post", _mock_post)
-++
-++    payload = {
-++        "sender": offchain_lookup_contract.address,
-++        "urls": [
-++            "https://web3.py/gateway/{sender}/{data}.json",
-++            "https://web3.py/gateway",
-++        ],
-++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
-++        "callbackFunction": b"\x00\x00\x00\x00",
-++        "extraData": b"",
-++    }
-++    transaction = {"to": offchain_lookup_contract.address}
-++
-++    with pytest.raises(MultipleFailedRequests):
-++        handle_offchain_lookup(payload, transaction)
-+diff --git a/tests/core/utilities/test_ccip_url_validation.py b/tests/core/utilities/test_ccip_url_validation.py
-+new file mode 100644
-+index 00000000..3bb75f96
-+--- /dev/null
-++++ b/tests/core/utilities/test_ccip_url_validation.py
-+@@ -0,0 +1,122 @@
-++import pytest
-++import socket
-++
-++from web3.exceptions import (
-++    Web3ValidationError,
-++)
-++from web3.utils.ccip_url_validation import (
-++    validate_ccip_url_host,
-++    validate_ccip_url_scheme,
-++)
-++
-++# -- validate_ccip_url_scheme tests -- #
-++
-++
-++class TestValidateCcipUrlScheme:
-++    def test_https_passes(self):
-++        validate_ccip_url_scheme("https://example.com/api", allow_http=False)
-++
-++    def test_http_fails_by_default(self):
-++        with pytest.raises(Web3ValidationError, match="non-HTTPS"):
-++            validate_ccip_url_scheme("http://example.com/api")
-++
-++    def test_http_passes_with_allow_http(self):
-++        validate_ccip_url_scheme("http://example.com/api", allow_http=True)
-++
-++    def test_ftp_always_fails(self):
-++        with pytest.raises(Web3ValidationError, match="not allowed"):
-++            validate_ccip_url_scheme("ftp://example.com/file")
-++
-++    def test_ftp_fails_even_with_allow_http(self):
-++        with pytest.raises(Web3ValidationError, match="not allowed"):
-++            validate_ccip_url_scheme("ftp://example.com/file", allow_http=True)
-++
-++    def test_file_scheme_fails(self):
-++        with pytest.raises(Web3ValidationError, match="not allowed"):
-++            validate_ccip_url_scheme("file:///etc/passwd")
-++
-++    def test_file_scheme_fails_with_allow_http(self):
-++        with pytest.raises(Web3ValidationError, match="not allowed"):
-++            validate_ccip_url_scheme("file:///etc/passwd", allow_http=True)
-++
-++
-++# -- validate_ccip_url_host tests -- #
-++
-++
-++class TestValidateCcipUrlHost:
-++    def _patch_getaddrinfo(self, monkeypatch, ip):
-++        def _mock_getaddrinfo(host, port, *args, **kwargs):
-++            return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", (ip, 0))]
-++
-++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++
-++    def test_public_ip_passes(self, monkeypatch):
-++        self._patch_getaddrinfo(monkeypatch, "8.8.8.8")
-++        validate_ccip_url_host("https://example.com/api")
-++
-++    @pytest.mark.parametrize(
-++        "blocked_ip",
-++        [
-++            "127.0.0.1",
-++            "127.0.0.2",
-++            "10.0.0.1",
-++            "10.255.255.255",
-++            "172.16.0.1",
-++            "172.31.255.255",
-++            "192.168.0.1",
-++            "192.168.1.100",
-++            "169.254.0.1",
-++            "0.0.0.0",
-++        ],
-++    )
-++    def test_blocked_ipv4(self, monkeypatch, blocked_ip):
-++        self._patch_getaddrinfo(monkeypatch, blocked_ip)
-++        with pytest.raises(Web3ValidationError, match="blocked private/reserved"):
-++            validate_ccip_url_host("https://example.com/api")
-++
-++    def test_blocked_ipv6_loopback(self, monkeypatch):
-++        def _mock_getaddrinfo(host, port, *args, **kwargs):
-++            return [(socket.AF_INET6, socket.SOCK_STREAM, 0, "", ("::1", 0, 0, 0))]
-++
-++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++        with pytest.raises(Web3ValidationError, match="blocked private/reserved"):
-++            validate_ccip_url_host("https://example.com/api")
-++
-++    def test_unresolvable_hostname(self, monkeypatch):
-++        def _mock_getaddrinfo(host, port, *args, **kwargs):
-++            raise socket.gaierror("Name or service not known")
-++
-++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
-++        with pytest.raises(Web3ValidationError, match="could not be resolved"):
-++            validate_ccip_url_host("https://nonexistent.invalid/api")
-++
-++    def test_no_hostname(self):
-++        with pytest.raises(Web3ValidationError, match="no hostname"):
-++            validate_ccip_url_host("https:///path")
-++
-++
-++# -- custom validator tests -- #
-++
-++
-++class TestCustomUrlValidator:
-++    def test_custom_validator_called_and_can_reject(self):
-++        calls = []
-++
-++        def reject_validator(url):
-++            calls.append(url)
-++            raise Web3ValidationError(f"Rejected: {url}")
-++
-++        with pytest.raises(Web3ValidationError, match="Rejected"):
-++            reject_validator("https://example.com/api")
-++
-++        assert len(calls) == 1
-++        assert calls[0] == "https://example.com/api"
-++
-++    def test_custom_validator_can_allow(self):
-++        calls = []
-++
-++        def allow_validator(url):
-++            calls.append(url)
-++
-++        allow_validator("https://example.com/api")
-++        assert len(calls) == 1
-+diff --git a/tests/ens/test_offchain_resolution.py b/tests/ens/test_offchain_resolution.py
-+index 9e4f3b16..fc479d36 100644
-+--- a/tests/ens/test_offchain_resolution.py
-++++ b/tests/ens/test_offchain_resolution.py
-+@@ -1,4 +1,5 @@
-+ import pytest
-++import socket
-+ 
-+ from aiohttp import (
-+     ClientSession,
-+@@ -13,6 +14,19 @@ from web3.exceptions import (
-+     Web3ValidationError,
-+ )
-+ 
-++
-++def _mock_getaddrinfo_public(monkeypatch):
-++    """Patch socket.getaddrinfo to return a public IP for CCIP test domains."""
-++    _original = socket.getaddrinfo
-++
-++    def _patched(host, port, *args, **kwargs):
-++        if host == "web3.py":
-++            return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
-++        return _original(host, port, *args, **kwargs)
-++
-++    monkeypatch.setattr("socket.getaddrinfo", _patched)
-++
-++
-+ # the encoded calldata for the initiating ``addr(namehash(name))`` call
-+ ENCODED_ADDR_CALLDATA = "0x3b3b57de42041b0018edd29d7c17154b0c671acc0502ea0b3693cafbeadf58e6beaaa16c"  # noqa: E501
-+ 
-+@@ -124,6 +138,8 @@ class AsyncMockHttpBadFormatResponse:
-+ 
-+ 
-+ def test_offchain_resolution_with_get_request(ens, monkeypatch):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     # mock GET response with real return data from 'offchainexample.eth' resolver
-+     def mock_get(*args, **kwargs):
-+         return MockHttpSuccessResponse("get", *args, **kwargs)
-+@@ -134,6 +150,8 @@ def test_offchain_resolution_with_get_request(ens, monkeypatch):
-+ 
-+ 
-+ def test_offchain_resolution_with_post_request(ens, monkeypatch):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     # mock POST response with real return data from 'offchainexample.eth' resolver
-+     def mock_post(*args, **kwargs):
-+         return MockHttpSuccessResponse("post", *args, **kwargs)
-+@@ -150,6 +168,8 @@ def test_offchain_resolution_raises_when_all_supplied_urls_fail(ens):
-+ 
-+ 
-+ def test_offchain_resolution_with_improperly_formatted_http_response(ens, monkeypatch):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     def mock_get(*args, **_):
-+         return MockHttpBadFormatResponse(*args)
-+ 
-+@@ -189,6 +209,8 @@ def test_offchain_resolver_function_call_raises_with_ccip_read_disabled(
-+ 
-+ @pytest.mark.asyncio
-+ async def test_async_offchain_resolution_with_get_request(async_ens, monkeypatch):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     # mock GET response with real return data from 'offchainexample.eth' resolver
-+     async def mock_get(*args, **kwargs):
-+         return AsyncMockHttpSuccessResponse("get", *args, **kwargs)
-+@@ -200,6 +222,8 @@ async def test_async_offchain_resolution_with_get_request(async_ens, monkeypatch
-+ 
-+ @pytest.mark.asyncio
-+ async def test_async_offchain_resolution_with_post_request(async_ens, monkeypatch):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     # mock POST response with real return data from 'offchainexample.eth' resolver
-+     async def mock_post(*args, **kwargs):
-+         return AsyncMockHttpSuccessResponse("post", *args, **kwargs)
-+@@ -220,6 +244,8 @@ async def test_async_offchain_resolution_raises_when_all_supplied_urls_fail(asyn
-+ async def test_async_offchain_resolution_with_improperly_formatted_http_response(
-+     async_ens, monkeypatch
-+ ):
-++    _mock_getaddrinfo_public(monkeypatch)
-++
-+     async def mock_get(*args, **_):
-+         return AsyncMockHttpBadFormatResponse(*args)
-+ 
 +diff --git a/web3/_utils/module_testing/module_testing_utils.py b/web3/_utils/module_testing/module_testing_utils.py
-+index f369d078..96623833 100644
++index 46c82c22..7b05702b 100644
 +--- a/web3/_utils/module_testing/module_testing_utils.py
 ++++ b/web3/_utils/module_testing/module_testing_utils.py
-+@@ -62,6 +62,24 @@ def assert_contains_log(
++@@ -89,6 +89,24 @@ def assert_contains_log(
 +     assert log_entry["transactionHash"] == HexBytes(txn_hash_with_log)
 + 
 + 
@@ -624,7 +205,7 @@ index 0000000000..d32438290b
 + def mock_offchain_lookup_request_response(
 +     monkeypatch: "MonkeyPatch",
 +     http_method: Literal["GET", "POST"] = "GET",
-+@@ -73,6 +91,8 @@ def mock_offchain_lookup_request_response(
++@@ -100,6 +118,8 @@ def mock_offchain_lookup_request_response(
 +     sender: str = None,
 +     calldata: str = None,
 + ) -> None:
@@ -633,15 +214,15 @@ index 0000000000..d32438290b
 +     class MockedResponse:
 +         status_code = mocked_status_code
 + 
-+@@ -92,6 +112,7 @@ def mock_offchain_lookup_request_response(
++@@ -119,6 +139,7 @@ def mock_offchain_lookup_request_response(
 +         # mock response only to specified url while validating appropriate fields
 +         if url_from_args == mocked_request_url:
-+             assert kwargs["timeout"] == DEFAULT_HTTP_TIMEOUT
++             assert kwargs["timeout"] == 10
 ++            assert kwargs.get("allow_redirects") is False
 +             if http_method.upper() == "POST":
-+                 assert kwargs["json"] == {"data": calldata, "sender": sender}
++                 assert kwargs["data"] == {"data": calldata, "sender": sender}
 +             return MockedResponse()
-+@@ -119,6 +140,8 @@ def async_mock_offchain_lookup_request_response(
++@@ -146,6 +167,8 @@ def async_mock_offchain_lookup_request_response(
 +     sender: str = None,
 +     calldata: str = None,
 + ) -> None:
@@ -650,19 +231,21 @@ index 0000000000..d32438290b
 +     class AsyncMockedResponse:
 +         status = mocked_status_code
 + 
-+@@ -142,6 +165,7 @@ def async_mock_offchain_lookup_request_response(
++@@ -169,7 +192,8 @@ def async_mock_offchain_lookup_request_response(
 +         # mock response only to specified url while validating appropriate fields
 +         if url_from_args == mocked_request_url:
-+             assert kwargs["timeout"] == ClientTimeout(DEFAULT_HTTP_TIMEOUT)
++             assert kwargs["timeout"] == ClientTimeout(10)
++-            if http_method.upper() == "post":
 ++            assert kwargs.get("allow_redirects") is False
-+             if http_method.upper() == "POST":
-+                 assert kwargs["json"] == {"data": calldata, "sender": sender}
+++            if http_method.upper() == "POST":
++                 assert kwargs["data"] == {"data": calldata, "sender": sender}
 +             return AsyncMockedResponse()
++ 
 +diff --git a/web3/eth/async_eth.py b/web3/eth/async_eth.py
-+index 2339ac3b..43a17666 100644
++index b6412a59..14d5679a 100644
 +--- a/web3/eth/async_eth.py
 ++++ b/web3/eth/async_eth.py
-+@@ -289,6 +289,8 @@ class AsyncEth(BaseEth):
++@@ -293,6 +293,8 @@ class AsyncEth(BaseEth):
 +                 durin_calldata = await async_handle_offchain_lookup(
 +                     offchain_lookup.payload,
 +                     transaction,
@@ -672,25 +255,28 @@ index 0000000000..d32438290b
 +                 transaction["data"] = durin_calldata
 + 
 +diff --git a/web3/eth/eth.py b/web3/eth/eth.py
-+index d459f964..3b6709fa 100644
++index 6e1700ca..e11623a7 100644
 +--- a/web3/eth/eth.py
 ++++ b/web3/eth/eth.py
-+@@ -268,6 +268,8 @@ class Eth(BaseEth):
++@@ -279,7 +279,10 @@ class Eth(BaseEth):
++                 return self._call(transaction, block_identifier, state_override)
++             except OffchainLookup as offchain_lookup:
 +                 durin_calldata = handle_offchain_lookup(
-+                     offchain_lookup.payload,
-+                     transaction,
++-                    offchain_lookup.payload, transaction
+++                    offchain_lookup.payload,
+++                    transaction,
 ++                    allow_http=self.w3.provider.ccip_read_allow_http,
 ++                    url_validator=self.w3.provider.ccip_read_url_validator,
 +                 )
 +                 transaction["data"] = durin_calldata
 + 
 +diff --git a/web3/providers/async_base.py b/web3/providers/async_base.py
-+index b1f6314f..2abed58b 100644
++index 30404b6b..64b9f7f8 100644
 +--- a/web3/providers/async_base.py
 ++++ b/web3/providers/async_base.py
-+@@ -68,6 +68,9 @@ if TYPE_CHECKING:
-+     from web3.providers.persistent import (  # noqa: F401
-+         RequestProcessor,
++@@ -38,6 +38,9 @@ if TYPE_CHECKING:
++         AsyncWeb3,
++         WebsocketProviderV2,
 +     )
 ++    from web3.utils.ccip_url_validation import (
 ++        AsyncCcipUrlValidator,
@@ -698,67 +284,58 @@ index 0000000000..d32438290b
 + 
 + 
 + class AsyncBaseProvider:
-+@@ -83,6 +86,8 @@ class AsyncBaseProvider:
++@@ -54,6 +57,8 @@ class AsyncBaseProvider:
 +     has_persistent_connection = False
 +     global_ccip_read_enabled: bool = True
 +     ccip_read_max_redirects: int = 4
 ++    ccip_read_allow_http: bool = False
 ++    ccip_read_url_validator: "AsyncCcipUrlValidator | None" = None
 + 
-+     def __init__(
-+         self,
++     @property
++     def middlewares(self) -> Tuple[AsyncMiddleware, ...]:
 +diff --git a/web3/providers/base.py b/web3/providers/base.py
-+index 1d8072f3..7be74c28 100644
++index d7877546..5d91f635 100644
 +--- a/web3/providers/base.py
 ++++ b/web3/providers/base.py
-+@@ -54,6 +54,9 @@ if TYPE_CHECKING:
-+     from web3._utils.batching import (
-+         RequestBatcher,
-+     )
++@@ -32,6 +32,9 @@ from web3.types import (
++ 
++ if TYPE_CHECKING:
++     from web3 import Web3  # noqa: F401
 ++    from web3.utils.ccip_url_validation import (
 ++        CcipUrlValidator,
 ++    )
 + 
 + 
 + class BaseProvider:
-+@@ -69,6 +72,8 @@ class BaseProvider:
++@@ -46,6 +49,8 @@ class BaseProvider:
 +     has_persistent_connection = False
 +     global_ccip_read_enabled: bool = True
 +     ccip_read_max_redirects: int = 4
 ++    ccip_read_allow_http: bool = False
 ++    ccip_read_url_validator: "CcipUrlValidator | None" = None
 + 
-+     def __init__(
-+         self,
++     @property
++     def middlewares(self) -> Tuple[Middleware, ...]:
 +diff --git a/web3/utils/__init__.py b/web3/utils/__init__.py
-+index f603daea..248e88ed 100644
++index 13c24de6..2c4f1d94 100644
 +--- a/web3/utils/__init__.py
 ++++ b/web3/utils/__init__.py
-+@@ -39,6 +39,10 @@ from .caching import (
-+     RequestCacheValidationThreshold,
++@@ -14,6 +14,10 @@ from .async_exception_handling import (  # NOQA
++ from .caching import (  # NOQA
 +     SimpleCache,
 + )
-++from .ccip_url_validation import (
+++from .ccip_url_validation import (  # NOQA
 ++    AsyncCcipUrlValidator,
 ++    CcipUrlValidator,
 ++)
-+ from .exception_handling import (
++ from .exception_handling import (  # NOQA
 +     handle_offchain_lookup,
 + )
-+@@ -73,6 +77,8 @@ __all__ = [
-+     "async_handle_offchain_lookup",
-+     "RequestCacheValidationThreshold",
-+     "SimpleCache",
-++    "AsyncCcipUrlValidator",
-++    "CcipUrlValidator",
-+     "EthSubscription",
-+     "handle_offchain_lookup",
-+ ]
 +diff --git a/web3/utils/async_exception_handling.py b/web3/utils/async_exception_handling.py
-+index ea42d4d5..6a874201 100644
++index 0619bd5b..e4fa933d 100644
 +--- a/web3/utils/async_exception_handling.py
 ++++ b/web3/utils/async_exception_handling.py
-+@@ -28,11 +28,18 @@ from web3.exceptions import (
++@@ -26,11 +26,18 @@ from web3.exceptions import (
 + from web3.types import (
 +     TxParams,
 + )
@@ -777,7 +354,7 @@ index 0000000000..d32438290b
 + ) -> bytes:
 +     formatted_sender = to_hex_if_bytes(offchain_lookup_payload["sender"]).lower()
 +     formatted_data = to_hex_if_bytes(offchain_lookup_payload["callData"]).lower()
-+@@ -51,16 +58,27 @@ async def async_handle_offchain_lookup(
++@@ -48,13 +55,25 @@ async def async_handle_offchain_lookup(
 +             .replace("{data}", str(formatted_data))
 +         )
 + 
@@ -791,21 +368,19 @@ index 0000000000..d32438290b
 ++
 +         try:
 +             if "{data}" in url and "{sender}" in url:
-+                 response = await session.get(
-+-                    formatted_url, timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT)
++-                response = await async_get_response_from_get_request(formatted_url)
+++                response = await async_get_response_from_get_request(
 ++                    formatted_url,
-++                    timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT),
+++                    allow_redirects=False,
+++                )
++             elif "{sender}" in url:
++                 response = await async_get_response_from_post_request(
++                     formatted_url,
++                     data={"data": formatted_data, "sender": formatted_sender},
 ++                    allow_redirects=False,
 +                 )
 +             else:
-+                 response = await session.post(
-+                     formatted_url,
-+                     json={"data": formatted_data, "sender": formatted_sender},
-+                     timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT),
-++                    allow_redirects=False,
-+                 )
-+         except Exception:
-+             continue  # try next url if timeout or issues making the request
++                 raise Web3ValidationError("url not formatted properly.")
 +diff --git a/web3/utils/ccip_url_validation.py b/web3/utils/ccip_url_validation.py
 +new file mode 100644
 +index 00000000..a86618d8
@@ -918,7 +493,7 @@ index 0000000000..d32438290b
 ++                f"resolved IP '{ip_str}' is in a blocked private/reserved range."
 ++            )
 +diff --git a/web3/utils/exception_handling.py b/web3/utils/exception_handling.py
-+index 7aa89910..9fc2cf6e 100644
++index 77a46fc6..1d5ee0bd 100644
 +--- a/web3/utils/exception_handling.py
 ++++ b/web3/utils/exception_handling.py
 +@@ -25,11 +25,18 @@ from web3.exceptions import (
@@ -940,7 +515,7 @@ index 0000000000..d32438290b
 + ) -> bytes:
 +     formatted_sender = to_hex_if_bytes(offchain_lookup_payload["sender"]).lower()
 +     formatted_data = to_hex_if_bytes(offchain_lookup_payload["callData"]).lower()
-+@@ -48,14 +55,27 @@ def handle_offchain_lookup(
++@@ -47,9 +54,20 @@ def handle_offchain_lookup(
 +             .replace("{data}", str(formatted_data))
 +         )
 + 
@@ -954,31 +529,34 @@ index 0000000000..d32438290b
 ++
 +         try:
 +             if "{data}" in url and "{sender}" in url:
-+-                response = session.get(formatted_url, timeout=DEFAULT_HTTP_TIMEOUT)
-++                response = session.get(
++-                response = get_response_from_get_request(formatted_url)
+++                response = get_response_from_get_request(
 ++                    formatted_url,
-++                    timeout=DEFAULT_HTTP_TIMEOUT,
 ++                    allow_redirects=False,
 ++                )
-+             else:
-+                 response = session.post(
++             elif "{sender}" in url:
++                 response = get_response_from_post_request(
 +                     formatted_url,
-+                     json={"data": formatted_data, "sender": formatted_sender},
-+                     timeout=DEFAULT_HTTP_TIMEOUT,
++@@ -57,6 +75,7 @@ def handle_offchain_lookup(
++                         "data": formatted_data,
++                         "sender": formatted_sender,
++                     },
 ++                    allow_redirects=False,
 +                 )
-+         except Exception:
-+             continue  # try next url if timeout or issues making the request
-diff --git a/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb b/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
-index fe5886692d..09a1140681 100644
---- a/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
++             else:
++                 raise Web3ValidationError("url not formatted properly.")
++-- 
++2.35.6
+diff --git a/meta-python/recipes-devtools/python/python3-web3_6.17.0.bb b/meta-python/recipes-devtools/python/python3-web3_6.17.0.bb
+index f1be4dcf4d..6c093c794d 100644
+--- a/meta-python/recipes-devtools/python/python3-web3_6.17.0.bb
++++ b/meta-python/recipes-devtools/python/python3-web3_6.17.0.bb
 @@ -4,6 +4,7 @@ SECTION = "devel/python"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1d34d9701a1461e4bd71a904ac4cf7be"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=373fede350846fdffd23648fba504635"
  
 +SRC_URI += "file://CVE-2026-40072.patch"
- SRC_URI[sha256sum] = "97f6a116ccaeb5907bb4cb6c771cc23bc942bf09528a840189e9b509b7b8347c"
+ SRC_URI[sha256sum] = "1b535272a40da3d8d2b120856edb53b84b0c08bcc8fe1a5bbd5f816fd72f4ec6"
  
  inherit pypi setuptools3
 -- 
