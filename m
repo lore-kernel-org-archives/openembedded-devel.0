@@ -1,870 +1,986 @@
-Return-Path: <dkelaiya@cisco.com>
+Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6895C5DF87
-	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:28:45 +0000 (UTC)
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.701.1787203723525687441
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA69CC5DF81
+	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:42:55 +0000 (UTC)
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.818.1787204567413775421
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 22:28:43 -0700
+ Wed, 19 Aug 2026 22:42:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=FMLTrDeo;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LQ1AMrsz;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=26599; q=dns/txt;
-  s=iport01; t=1787203723; x=1788413323;
+  d=cisco.com; i=@cisco.com; l=31031; q=dns/txt;
+  s=iport01; t=1787204567; x=1788414167;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=7IrCQ+ng/nKT73VGQL2Ex1WclMWEOCyJ+15NmHfVk3U=;
-  b=FMLTrDeovVyc3ZHlhu6yFa1mWzU2VWUaS0MV5FJCMP8DeswNm8PWpQdt
-   FuGKTF0syo29D46TlbWVNI41XAFO1P+r+4WMiq04ud/ReYCy459plWAxL
-   oNrHPI3GYjWt0lvEXANRVr5lp+zrnN4uJFwAPH1Ebkl0ajUh1koFU+F7+
-   7QjjRDRg8YSd63/P1Ir/w/KB2j+qaMk+6IvtMDNXMeFTAT5jFdQRMdwwB
-   hwjr+7U3jfWAbnt5inilQQdS2/+SH5LlmMzm3tQnFWtV/dE/eFXz/Zcpi
-   0wVrjjlSRNhK5sZIN3m0aoxpEuSYXfpZlUU0r3fV+emB6rtQcJzv51+Ni
-   w==;
-X-CSE-ConnectionGUID: QGz4rqLNT1iJa3/lPNRkHg==
-X-CSE-MsgGUID: APZ9SZb0SYu+ZQB0rNO8xg==
-X-IPAS-Result: =?us-ascii?q?A0AFAABhj4Zq/4sQJK1aGgEBAQEBAQEBAQEDAQEBARIBA?=
- =?us-ascii?q?QEBAgIBAQEBgX0EAQEBAQsBghc/dF5DSQOEVJEHbItnhWaMURSBag8BAQEPR?=
- =?us-ascii?q?A0EAQGEP0aNbQImNQgOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHBYEOE?=
- =?us-ascii?q?4ZPDYZaAQIBHQkECwEYAS0sAwECAwImAiILIyGDAgGCOgM3AxHCSXp/M4EBg?=
- =?us-ascii?q?ygBgVTYSw2CWAELFAGBCi4BhT6CfyABhQJdGAFEhDgnGxuBcoEVgTuCLoEFg?=
- =?us-ascii?q?RpCAoEjCgoBhAOCagSCInoSgVoeggFijm9IgQIcA1ksAVUTDQoLBwWBZgM1E?=
- =?us-ascii?q?ioVbjIdgSM+FzVYGwYFgR2BKIQ3Ixk2fIEJXoErKmEBEheBCYIKAoJwggYCA?=
- =?us-ascii?q?UlFDgkXCxgNSBEsNxQZBD0BbgeOUSCCFy0GAQEsAkwTARsPAQRLLBYHCBQRJ?=
- =?us-ascii?q?xEGAicRkx0HAhKQDIIhgTWeaXEKKIN2jCGPPoV8GjOEBIFXkkCSUQuYfYJZi?=
- =?us-ascii?q?zGECZEtMhhQhGmBaQE6gVlwFYMiCUoZD44qBAoLgRQBAoJJhAeBXcZVJzICC?=
- =?us-ascii?q?QMvAQEHAgcBDAEDC4FokAABASYHgU8BAQ?=
-IronPort-Data: A9a23:AvyU2KiezRqb1KgJ4zlHIhzrX161MREKZh0ujC45NGQN5FlHY01je
- htvWGyBO/yDamSnf91zaY6x8EhXu8CHmN9kHQBl/C5jFnhjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeCULOZ82QsaDxMu/vS8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUh1fQrG3hq0
- 8BBKRIENVeHv8SMw5K0H7wEasQLdKEHPasWvnVmiDWcBvE8TNWbGePB5MRT23E7gcUm8fT2P
- pVCL2ExKk2eJUQUaz/7C7pm9AusrnX8fjlRqUOcjaE2+GPUigd21dABNfKFI4TaFJQLzh3wS
- mTu1lzLUyooPoSk+CfGwEuG3vXpunPrV9dHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
- kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QWJzO/Qpg2eHGVBFmQHY909v8hwTjsvv
- rOUo+7U6fVUmOX9YRqgGn2891te5QB9wbc+WBI5
-IronPort-HdrOrdr: A9a23:Nzkwaqrm/Wz+fbsWX9lXa4oaV5oHeYIsimQD101hICG9vPb2qy
- nIpoV+6faUskd1ZJhOo7G90cW7LE80lqQFg7X5Q43DYOCOggLBR+tfBODZrQEIdReTygck79
- YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
-X-Talos-CUID: =?us-ascii?q?9a23=3AystUYGhm0RWA2zpccIcXEE1gUTJuS1LPkG3JB2m?=
- =?us-ascii?q?EUGdLQebSTWe2wqBEnJ87?=
-X-Talos-MUID: 9a23:3L0Ylwkydpvmn3N6JAMsdnpLDPU52JakUHs8jNY0guPcLwpXayeS2WE=
+  bh=W8DhV0cBpLYwQu737b8VaUYGcMz9lazFGTyCYKfqeT8=;
+  b=LQ1AMrszN5e1CouF0U8XtVwHBfENK8tN1w9VdG7a3wfWMwR8IeN+ZZvL
+   XUDjdwBKZ91dS3VWusqAC6geE1tOw7MJdYCAEKNr/Pro8j3J0mntm74e1
+   FeOlt8Lw4M5Sd9KLQBLfP9ktw/4YXNOgf6prBSbkci5fwShQuT1O6qE96
+   hZb8hXCqB/t8BS8/Bq4U/LTYPIgoWshUlrwOHi59z5kbzReXeVmc6TZK2
+   9qkuCnxxpaooosnOCRQTim6buOLdvb2RP29Csi4gXwcGEG8njvHtgZjEx
+   5A5CBcdAeB/fQb5B6xfDf+U94eYhsCxTGDiN9nEAQkSK7nNlOpQEYe6Ag
+   g==;
+X-CSE-ConnectionGUID: y1PQ+AXsRbWNqE66DLmzwQ==
+X-CSE-MsgGUID: dxf/B9WUSBieHvJiesY1BA==
+X-IPAS-Result: =?us-ascii?q?A0BLAgBXk4Zq/4sQJK1aAQoTAQELEgyCBQuCV3ReQyseh?=
+ =?us-ascii?q?FeRB2yLZ5I3gX4PAQEBD0QNBAEBhQWNbQImNAkOAQIEAwIDAQEBAQEBAQEBA?=
+ =?us-ascii?q?QELAQEFAQEBAgEHBYEOE4ZPDYZaAQIBHQkECwEYAS0sAwECAwImAiILIxgJg?=
+ =?us-ascii?q?wIBgjoDNwMICcIxen8zgQGDKAGBVNhLDYJYAQsUAQWBBS6FP4J/IAGFAl0YA?=
+ =?us-ascii?q?USEOCcbG4FygRWDaYEFgRo3CwKFO4JqBIIigQyBWAKCHgFijm9IgQIcA1ksA?=
+ =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+FzVYGwYFgR2BKIQ3Ixk2fIEJXoErKmEBE?=
+ =?us-ascii?q?heBCYIKAoJwggYCAUlFDgkXCxgNSBEsNxQZBD0BbgeOURULgVlgEi1OEwEqA?=
+ =?us-ascii?q?RcLfhSBBg4JkxISJ49lgiGBNZ5pcQoog3aMIY8+hXwaM4QEgVeSQJJRC5h9i?=
+ =?us-ascii?q?x4JD4JUhAmCBoFNjV9FUIRpgWg8gVlwFYMiCRY0GQ+OKgQKC4NghU4WxlUnM?=
+ =?us-ascii?q?gIJMgEBBwIHDgMLgWiQAi2BTwEB?=
+IronPort-Data: A9a23:IXn9P6kUQ9ou68VE4k0CloXo5gzQJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJJD2GOMqyLZWGgKN0nPIu090wAucfSmtcwQFY5/HszH1tH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+ZC31GONgWYubDpEsvPb8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FZxBwt80KFFVz
+ /YnDikgME6vo+ek34vuH4GAhux7RCXqFIobvnclyXTSCuwrBMiZBa7L/tRfmjw3g6iiH96HO
+ JFfMmQpNUqGOkYeUrsUIMpWcOOAhmX/ej5RsnqepLE85C7YywkZPL3FYIOPJILUGZ4E9qqej
+ m7W8SPTUy4nD/aexBqb0HOhnd6WtwquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBeCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u7Nxd9uEUD59VM/WBI=
+IronPort-HdrOrdr: A9a23:l/i4fa1UwXVGTg6YjoXB9wqjBJAkLtp133Aq2lEZdPWaSKOlfq
+ eV7ZAmPH7P+VMssR4b+OxoVJPsfZq+z+8W3WBuB9eftWDd0QPCRr2KhrGN/9SPIUHDH8dmpM
+ BdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPGdXg2UK1XYANu5deXcGPTV7OQ==
+X-Talos-CUID: 9a23:QBgDPWyUZnsNGiDm5SFPBgUFQ/gcMVTt103aHGmhJDg3ZJmQW0CprfY=
+X-Talos-MUID: 9a23:5gLqGwbL9rkmCOBTuy/iwxszC/pTyaWjKF4vkJgdipCuHHkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,232,1779148800"; 
-   d="scan'208";a="810899683"
+   d="scan'208";a="812666439"
 Received: from alln-l-core-02.cisco.com ([173.36.16.139])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:28:42 +0000
-Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:42:41 +0000
+Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id 1288E180001BD;
-	Thu, 20 Aug 2026 05:28:42 +0000 (GMT)
-Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 9D3BFCCA79B; Wed, 19 Aug 2026 22:28:41 -0700 (PDT)
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id AE64518000199;
+	Thu, 20 Aug 2026 05:42:41 +0000 (GMT)
+Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
+	id 4E6CFCCA79B; Wed, 19 Aug 2026 22:42:41 -0700 (PDT)
+From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH] python3-httplib2: fix CVE-2026-59939
-Date: Wed, 19 Aug 2026 22:28:39 -0700
-Message-Id: <20260820052839.1468207-1-dkelaiya@cisco.com>
+Cc: xe-linux-external@cisco.com,
+	Hetvi Thakar <hthakar@cisco.com>
+Subject: [meta-python][wrynose][PATCH] python3-web3: Fix CVE-2026-40072
+Date: Wed, 19 Aug 2026 22:42:39 -0700
+Message-Id: <20260820054239.1363898-1-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
 X-Outbound-Node: alln-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:28:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129377
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:42:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129378
 
-From: Darsh Kelaiya <dkelaiya@cisco.com>
+From: Hetvi Thakar <hthakar@cisco.com>
 
-This patch applies the upstream fix for CVE-2026-59939 as referenced
-in [2], using the upstream commit identified in [1].
+This patch applies the upstream v7 backport for
+CVE-2026-40072. The upstream fix commit is referenced in [1],
+and the public CVE advisory is referenced in [2].
 
-[1] https://github.com/httplib2/httplib2/commit/87581ad6cf752fe3da2090c59058261d2d00a427
-[2] https://github.com/httplib2/httplib2/security/advisories/GHSA-j5g9-f88f-gfj3
+[1] https://github.com/ApeWorX/web3.py/commit/d62e67d3b636bd4c5a929696c0f5c4167c31625b
+[2] https://github.com/advisories/GHSA-5hr4-253g-cpx2
 
-Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python3-httplib2/CVE-2026-59939.patch     | 745 ++++++++++++++++++
- .../python/python3-httplib2_0.22.0.bb         |   2 +
- 2 files changed, 747 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
+ .../python/files/CVE-2026-40072.patch         | 861 ++++++++++++++++++
+ .../python/python3-web3_7.12.1.bb             |   1 +
+ 2 files changed, 862 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch b/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
+diff --git a/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch b/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
 new file mode 100644
-index 0000000000..3b14162da3
+index 0000000000..d32438290b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
-@@ -0,0 +1,745 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Sergey Shepelev <temotor@gmail.com>
-+Date: Wed, 24 Jun 2026 12:34:50 +0300
-+Subject: [PATCH] decompression limited by size and ratio; require python 3.8+
++++ b/meta-python/recipes-devtools/python/files/CVE-2026-40072.patch
+@@ -0,0 +1,861 @@
++From 694a1217581e39036e0c174ab85616ee6656139d Mon Sep 17 00:00:00 2001
++From: fselmo <fselmo2@gmail.com>
++Date: Fri, 13 Mar 2026 15:38:09 -0600
++Subject: [PATCH] feat: added restrictions on CCIP read durin calls
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+CVE: CVE-2026-59939
-+Upstream-Status: Backport [https://github.com/httplib2/httplib2/commit/87581ad6cf752fe3da2090c59058261d2d00a427]
++SSRF Mitigation for CCIP Read:
 +
-+Backport Changes:
-+- Place httplib2 sources under python3/httplib2 to match the
-+  Scarthgap 0.22.0 source layout.
-+- Cap each zlib decompression call with max_length derived from the
-+  remaining hard and ratio allowance, requeue unconsumed_tail, and
-+  enforce both limits immediately after each returned output chunk.
-+- Reject empty gzip and deflate bodies through the existing
-+  FailedToDecompressContent contract.
-+- Add constrained-memory and empty encoded-body regression tests.
-+- Keep Scarthgap's Python version metadata; the upstream Python 3.8
-+  minimum is unrelated to the security fix.
-+- Omit .github/workflows updates because those CI files are absent
-+  from the extracted source and are not part of the security fix.
++- validate_ccip_url_scheme() — HTTPS-only by default; HTTP allowed via opt-in
++- validate_ccip_url_host() / async_validate_ccip_url_host() — resolves hostname and blocks private/reserved IP ranges (127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, etc.)
++- Type aliases: CcipUrlValidator, AsyncCcipUrlValidator
++- Provider config (base.py, async_base.py):
++- ccip_read_allow_http: bool = False
++- ccip_read_url_validator — optional user-supplied hook to reject/allow URLs
++- Handler changes (exception_handling.py, async_exception_handling.py):
++- Scheme + host validation before each HTTP request
++- allow_redirects=False on all requests
++- Validation failures continue to next URL (consistent with existing error handling)
 +
-+(cherry picked from commit 87581ad6cf752fe3da2090c59058261d2d00a427)
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++- Wiring (eth.py, async_eth.py):
++- _durin_call passes provider config to handlers
++
++Tests:
++- tests/core/utilities/test_ccip_url_validation.py — 23 unit tests for scheme/host validation
++- tests/core/contracts/test_offchain_lookup.py — 6 new integration tests (HTTP rejection, allow_http, custom validator, private IP blocking, redirect prevention)
++- Updated test mocks to patch socket.getaddrinfo and assert allow_redirects=False
++
++CVE: CVE-2026-40072
++Upstream-Status: Backport [https://github.com/ApeWorX/web3.py/commit/d62e67d3b636bd4c5a929696c0f5c4167c31625b]
++
++(cherry picked from commit d62e67d3b636bd4c5a929696c0f5c4167c31625b)
++Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ README.md                    |  37 ++++++--
-+ python3/httplib2/__init__.py |  71 +++++++++++---
-+ python3/httplib2/decode.py   | 209 ++++++++++++++++++++++++++++++++++++++++
-+ setup.cfg                    |   2 +-
-+ tests/__init__.py            |   8 ++
-+ tests/test_encoding.py       | 221 +++++++++++++++++++++++++++++++++++++++++--
-+ 6 files changed, 517 insertions(+), 31 deletions(-)
++ tests/core/contracts/test_offchain_lookup.py  | 200 ++++++++++++++++++
++ .../utilities/test_ccip_url_validation.py     | 122 +++++++++++
++ tests/ens/test_offchain_resolution.py         |  26 +++
++ .../module_testing/module_testing_utils.py    |  24 +++
++ web3/eth/async_eth.py                         |   2 +
++ web3/eth/eth.py                               |   2 +
++ web3/providers/async_base.py                  |   5 +
++ web3/providers/base.py                        |   5 +
++ web3/utils/__init__.py                        |   6 +
++ web3/utils/async_exception_handling.py        |  20 +-
++ web3/utils/ccip_url_validation.py             | 105 +++++++++
++ web3/utils/exception_handling.py              |  22 +-
++ 12 files changed, 537 insertions(+), 2 deletions(-)
++ create mode 100644 tests/core/utilities/test_ccip_url_validation.py
++ create mode 100644 web3/utils/ccip_url_validation.py
 +
-+diff --git a/README.md b/README.md
-+index 6193699..99a0d3b 100644
-+--- a/README.md
-++++ b/README.md
-+@@ -10,13 +10,13 @@ If you want to help this project by bug report or code change, [contribution gui
++diff --git a/tests/core/contracts/test_offchain_lookup.py b/tests/core/contracts/test_offchain_lookup.py
++index eed8ae23..c6ddb760 100644
++--- a/tests/core/contracts/test_offchain_lookup.py
+++++ b/tests/core/contracts/test_offchain_lookup.py
++@@ -1,4 +1,5 @@
++ import pytest
+++import socket
 + 
-+ HTTPS support is only available if the socket module was
-+ compiled with SSL support.
-+-    
-++
-+ ### Keep-Alive
++ from eth_abi import (
++     abi,
++@@ -14,10 +15,14 @@ from web3._utils.type_conversion import (
++     to_hex_if_bytes,
++ )
++ from web3.exceptions import (
+++    MultipleFailedRequests,
++     OffchainLookup,
++     TooManyRequests,
++     Web3ValidationError,
++ )
+++from web3.utils import (
+++    handle_offchain_lookup,
+++)
 + 
-+ Supports HTTP 1.1 Keep-Alive, keeping the socket open and
-+ performing multiple requests over the same connection if
-+ possible.
-+-    
-++
-+ ### Authentication
-+ 
-+ The following three types of HTTP Authentication are
-+@@ -31,26 +31,26 @@ supported. These can be used over both HTTP and HTTPS.
-+ The module can optionally operate with a private cache that
-+ understands the Cache-Control: header and uses both the ETag
-+ and Last-Modified cache validators.
-+-    
-++
-+ ### All Methods
-+ 
-+ The module can handle any HTTP request method, not just GET
-+ and POST.
-+-    
-++
-+ ### Redirects
-+ 
-+ Automatically follows 3XX redirects on GETs.
-+-    
-++
-+ ### Compression
-+ 
-+ Handles both 'deflate' and 'gzip' types of compression.
-+-    
-++
-+ ### Lost update support
-+ 
-+ Automatically adds back ETags into PUT requests to resources
-+ we have already cached. This implements Section 3.2 of
-+ Detecting the Lost Update Problem Using Unreserved Checkout.
-+-    
-++
-+ ### Unit Tested
-+ 
-+ A large and growing set of unit tests.
-+@@ -113,3 +113,26 @@ More example usage can be found at:
-+ 
-+  * https://github.com/httplib2/httplib2/wiki/Examples
-+  * https://github.com/httplib2/httplib2/wiki/Examples-Python3
++ # "test offchain lookup" as an abi-encoded string
++ OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA = "0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001474657374206f6666636861696e206c6f6f6b7570000000000000000000000000"  # noqa: E501
++@@ -208,3 +213,198 @@ def test_offchain_lookup_raises_on_continuous_redirect(
++     )
++     with pytest.raises(TooManyRequests, match="Too many CCIP read redirects"):
++         offchain_lookup_contract.caller.continuousOffchainLookup()
 ++
 ++
-++### Decompression Limits
+++# -- SSRF mitigation tests -- #
 ++
-++To mitigate denial-of-service risks from maliciously crafted compressed responses, the library enforces configurable limits during decompression. Limits are checked in fixed order: **hard limit** → **safe limit** → **ratio**.
 ++
-++- **hard limit**
-++  Absolute maximum decompressed output size (bytes). Exceeding it raises `DecodeLimitError`. Default: `10 GiB`.
-++- **safe limit**
-++  Output size below which the ratio check is skipped (avoids false positives on small payloads). Default: `10 MiB`.
-++- **ratio**
-++  Maximum allowed inflation factor (`output_bytes ÷ consumed_input_bytes`). Once output exceeds `safe_limit`, the ratio is enforced. Default: `100`.
-++- **chunk size**
-++  Internal processing chunk size in bytes (affects granularity of limit checks). Default: `65536` (64 KiB).
+++def test_offchain_lookup_rejects_http_urls_by_default(
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """HTTP URLs should be rejected by default (only HTTPS allowed)."""
+++    to_hex_if_bytes(offchain_lookup_contract.address).lower()
 ++
-++Configuration priority (highest first):
-++1. `Http()` constructor arguments: `decode_limit_hard`, `decode_limit_safe`, `decode_limit_ratio`, `decode_limit_chunk`
-++2. Environment variables: `httplib2_decode_limit_hard`, `httplib2_decode_limit_safe`, `httplib2_decode_limit_ratio`, `httplib2_decode_limit_chunk` (case-insensitive, uppercase also accepted)
-++3. Library defaults (listed above)
+++    # Patch getaddrinfo so host validation passes
+++    def _mock_getaddrinfo(host, port, *args, **kwargs):
+++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
 ++
-++Example:
-++```python
-++h = Http(decode_limit_hard=50_000_000, decode_limit_ratio=50)
-+diff --git a/python3/httplib2/__init__.py b/python3/httplib2/__init__.py
-+index 723a63c..ca2868a 100644
-+--- a/python3/httplib2/__init__.py
-++++ b/python3/httplib2/__init__.py
-+@@ -1,6 +1,10 @@
-+ # -*- coding: utf-8 -*-
-+ """Small, fast HTTP client library for Python."""
-+ 
-++import functools
+++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
 ++
-++from httplib2.decode import ZlibDecoder, DecoderProtocol, LimitDecoder, DeflateDecoder
+++    payload = {
+++        "sender": offchain_lookup_contract.address,
+++        "urls": [
+++            "http://web3.py/gateway/{sender}/{data}.json",
+++        ],
+++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
+++        "callbackFunction": b"\x00\x00\x00\x00",
+++        "extraData": b"",
+++    }
+++    transaction = {"to": offchain_lookup_contract.address}
 ++
-+ __author__ = "Joe Gregorio (joe@bitworking.org)"
-+ __copyright__ = "Copyright 2006, Joe Gregorio"
-+ __contributors__ = [
-+@@ -386,26 +390,27 @@ def _entry_disposition(response_headers, request_headers):
-+     return retval
-+ 
-+ 
-+-def _decompressContent(response, new_content):
-++def _decompressContent(response, new_content, limit_kwargs):
-+     content = new_content
-++    encoding_header = "content-encoding"
-++    encoding = response.get(encoding_header, None)
-++    limit_wrap = functools.partial(LimitDecoder, **limit_kwargs)
-+     try:
-+-        encoding = response.get("content-encoding", None)
-+-        if encoding in ["gzip", "deflate"]:
-+-            if encoding == "gzip":
-+-                content = gzip.GzipFile(fileobj=io.BytesIO(new_content)).read()
-+-            if encoding == "deflate":
-+-                try:
-+-                    content = zlib.decompress(content, zlib.MAX_WBITS)
-+-                except (IOError, zlib.error):
-+-                    content = zlib.decompress(content, -zlib.MAX_WBITS)
-++        if encoding in ["gzip", "deflate", "zlib"]:
-++            if not new_content:
-++                raise zlib.error("empty compressed response")
-++            try:
-++                content = limit_wrap(ZlibDecoder()).consume_bytes(new_content, 0)
-++            except (IOError, zlib.error):
-++                content = limit_wrap(DeflateDecoder()).consume_bytes(new_content, 0)
-+             response["content-length"] = str(len(content))
-+             # Record the historical presence of the encoding in a way the won't interfere.
-+-            response["-content-encoding"] = response["content-encoding"]
-+-            del response["content-encoding"]
-++            response["-content-encoding"] = response.pop(encoding_header)
-+     except (IOError, zlib.error):
-+         content = ""
-+         raise FailedToDecompressContent(
-+-            _("Content purported to be compressed with %s but failed to decompress.") % response.get("content-encoding"),
-++            _("Content purported to be compressed with %s but failed to decompress.")
-++            % encoding,
-+             response,
-+             content,
-+         )
-+@@ -1232,6 +1237,10 @@ class Http(object):
-+         disable_ssl_certificate_validation=False,
-+         tls_maximum_version=None,
-+         tls_minimum_version=None,
-++        decode_limit_hard=None,
-++        decode_limit_safe=None,
-++        decode_limit_ratio=None,
-++        decode_limit_chunk=None,
-+     ):
-+         """If 'cache' is a string then it is used as a directory name for
-+         a disk cache. Otherwise it must be an object that supports the
-+@@ -1258,6 +1267,11 @@ class Http(object):
-+ 
-+         tls_maximum_version / tls_minimum_version require Python 3.7+ /
-+         OpenSSL 1.1.0g+. A value of "TLSv1_3" requires OpenSSL 1.1.1+.
+++    with pytest.raises(MultipleFailedRequests):
+++        handle_offchain_lookup(payload, transaction)
 ++
-++        `decode_limit_{hard,safe,ratio,chunk}` options configure `httplib2.decode.LimitDecoder` in attempt order:
-++          - Http() argument - top priority
-++          - environment httplib2_decode_limit_{hard,safe,ratio,chunk}
-++          - LimitDecoder defaults - least priority
-+         """
-+         self.proxy_info = proxy_info
-+         self.ca_certs = ca_certs
-+@@ -1306,6 +1320,22 @@ class Http(object):
-+         # Keep Authorization: headers on a redirect.
-+         self.forward_authorization_headers = False
-+ 
-++        limit_kwargs = dict(
-++            hard_limit=try_value_or_env(
-++                int, decode_limit_hard, "httplib2_decode_limit_hard"
-++            ),
-++            safe_limit=try_value_or_env(
-++                int, decode_limit_safe, "httplib2_decode_limit_safe"
-++            ),
-++            ratio=try_value_or_env(
-++                float, decode_limit_ratio, "httplib2_decode_limit_ratio"
-++            ),
-++            chunk_size=try_value_or_env(
-++                int, decode_limit_chunk, "httplib2_decode_limit_chunk"
-++            ),
+++
+++def test_offchain_lookup_allows_http_urls_when_configured(
+++    w3,
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """HTTP URLs should be allowed when ccip_read_allow_http=True on provider."""
+++    normalized_address = to_hex_if_bytes(offchain_lookup_contract.address)
+++    mock_offchain_lookup_request_response(
+++        monkeypatch,
+++        mocked_request_url=f"https://web3.py/gateway/{normalized_address}/{OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA}.json",  # noqa: E501
+++        mocked_json_data=WEB3PY_AS_HEXBYTES,
+++    )
+++
+++    w3.provider.ccip_read_allow_http = True
+++    try:
+++        response = offchain_lookup_contract.caller.testOffchainLookup(
+++            OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA
 ++        )
-++        self.limit_kwargs = {k: v for k, v in limit_kwargs.items() if v is not None}
-++
-+     def close(self):
-+         """Close persistent connections, clear sensitive data.
-+         Not thread-safe, requires external synchronization against concurrent requests.
-+@@ -1425,7 +1455,7 @@ class Http(object):
-+                     content = response.read()
-+                 response = Response(response)
-+                 if method != "HEAD":
-+-                    content = _decompressContent(response, content)
-++                    content = _decompressContent(response, content, self.limit_kwargs)
-+ 
-+             break
-+         return (response, content)
-+@@ -1797,3 +1827,16 @@ class Response(dict):
-+             return self
-+         else:
-+             raise AttributeError(name)
+++        assert abi.decode(["string"], response)[0] == "web3py"
+++    finally:
+++        w3.provider.ccip_read_allow_http = False
 ++
 ++
-++def try_value_or_env(to, value, env_key, default=None):
-++    candidates = (value, os.environ.get(env_key), os.environ.get(env_key.upper()))
-++    # same as `to(x1) or to(x2) or to(x3)` except accepting falsey values like 0
-++    for x in candidates:
-++        if x is None:
-++            continue
-++        try:
-++            return to(x)
-++        except ValueError:
-++            pass
-++    return default
-+diff --git a/python3/httplib2/decode.py b/python3/httplib2/decode.py
+++def test_offchain_lookup_custom_url_validator_rejects(
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """Custom url_validator on provider that rejects should skip URLs."""
+++    from web3.utils.exception_handling import (
+++        handle_offchain_lookup,
+++    )
+++
+++    # Patch getaddrinfo so host validation passes
+++    def _mock_getaddrinfo(host, port, *args, **kwargs):
+++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++
+++    def reject_all(url):
+++        raise Web3ValidationError(f"Rejected by policy: {url}")
+++
+++    payload = {
+++        "sender": offchain_lookup_contract.address,
+++        "urls": [
+++            "https://web3.py/gateway/{sender}/{data}.json",
+++        ],
+++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
+++        "callbackFunction": b"\x00\x00\x00\x00",
+++        "extraData": b"",
+++    }
+++    transaction = {"to": offchain_lookup_contract.address}
+++
+++    with pytest.raises(MultipleFailedRequests):
+++        handle_offchain_lookup(payload, transaction, url_validator=reject_all)
+++
+++
+++def test_offchain_lookup_custom_url_validator_on_provider(
+++    w3,
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """Custom url_validator set on provider is honored via _durin_call."""
+++
+++    # Patch getaddrinfo so host validation passes
+++    def _mock_getaddrinfo(host, port, *args, **kwargs):
+++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++
+++    validator_calls = []
+++
+++    def tracking_validator(url):
+++        validator_calls.append(url)
+++        raise Web3ValidationError(f"Rejected by policy: {url}")
+++
+++    w3.provider.ccip_read_url_validator = tracking_validator
+++    try:
+++        with pytest.raises(MultipleFailedRequests):
+++            offchain_lookup_contract.caller.testOffchainLookup(
+++                OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA
+++            )
+++        assert len(validator_calls) > 0
+++    finally:
+++        w3.provider.ccip_read_url_validator = None
+++
+++
+++def test_offchain_lookup_rejects_private_ip(
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """URLs resolving to private IPs should be rejected."""
+++    from web3.utils.exception_handling import (
+++        handle_offchain_lookup,
+++    )
+++
+++    def _mock_getaddrinfo(host, port, *args, **kwargs):
+++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("127.0.0.1", 0))]
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++
+++    payload = {
+++        "sender": offchain_lookup_contract.address,
+++        "urls": [
+++            "https://web3.py/gateway/{sender}/{data}.json",
+++        ],
+++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
+++        "callbackFunction": b"\x00\x00\x00\x00",
+++        "extraData": b"",
+++    }
+++    transaction = {"to": offchain_lookup_contract.address}
+++
+++    with pytest.raises(MultipleFailedRequests):
+++        handle_offchain_lookup(payload, transaction)
+++
+++
+++def test_offchain_lookup_redirect_not_followed(
+++    offchain_lookup_contract,
+++    monkeypatch,
+++):
+++    """302 redirects should not be followed (treated as non-2xx, try next URL)."""
+++    from web3.utils.exception_handling import (
+++        handle_offchain_lookup,
+++    )
+++
+++    # Patch getaddrinfo so host validation passes
+++    def _mock_getaddrinfo(host, port, *args, **kwargs):
+++        return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++
+++    class Mock302Response:
+++        status_code = 302
+++
+++        @staticmethod
+++        def raise_for_status():
+++            raise Exception("called raise_for_status()")
+++
+++    def _mock_get(*args, **kwargs):
+++        assert kwargs.get("allow_redirects") is False
+++        return Mock302Response()
+++
+++    def _mock_post(*args, **kwargs):
+++        assert kwargs.get("allow_redirects") is False
+++        return Mock302Response()
+++
+++    monkeypatch.setattr("requests.Session.get", _mock_get)
+++    monkeypatch.setattr("requests.Session.post", _mock_post)
+++
+++    payload = {
+++        "sender": offchain_lookup_contract.address,
+++        "urls": [
+++            "https://web3.py/gateway/{sender}/{data}.json",
+++            "https://web3.py/gateway",
+++        ],
+++        "callData": OFFCHAIN_LOOKUP_CONTRACT_TEST_DATA,
+++        "callbackFunction": b"\x00\x00\x00\x00",
+++        "extraData": b"",
+++    }
+++    transaction = {"to": offchain_lookup_contract.address}
+++
+++    with pytest.raises(MultipleFailedRequests):
+++        handle_offchain_lookup(payload, transaction)
++diff --git a/tests/core/utilities/test_ccip_url_validation.py b/tests/core/utilities/test_ccip_url_validation.py
 +new file mode 100644
-+index 0000000..588cf42
++index 00000000..3bb75f96
 +--- /dev/null
-++++ b/python3/httplib2/decode.py
-+@@ -0,0 +1,209 @@
-++from typing import Protocol
-++import zlib
-++
-++
-++class DecodeRatioError(Exception):
-++    """Output-to-input amplification ratio exceeded the configured limit."""
-++
-++
-++class DecodeLimitError(Exception):
-++    """Total output length exceeded the hard limit."""
-++
-++
-++class DecoderProtocol(Protocol):
-++    @property
-++    def needs_input(self) -> bool:
-++        ...
-++
-++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
-++        ...
-++
-++    @property
-++    def unconsumed_tail(self) -> bytes:
-++        ...
-++
-++    def flush(self) -> bytes:
-++        ...
-++
-++    def consume_bytes(self, data: bytes, chunk_size: int = 64 << 10) -> bytes:
-++        out = bytearray()
-++        if not data:
-++            return self.flush()
-++        if chunk_size == 0:
-++            chunk_size = len(data)
-++        for i in range(0, len(data), chunk_size):
-++            chunk = data[i : i + chunk_size]
-++            out.extend(self.decode(chunk))
-++        out.extend(self.flush())
-++        return bytes(out)
-++
-++
-++class ZlibDecoder(DecoderProtocol):
-++    """
-++    Thin wrapper around zlib.Decompressor conforming to the Decoder interface.
-++
-++    When max_length caps output, zlib exposes input that still needs processing
-++    through unconsumed_tail.
-++    """
-++
-++    __slots__ = ("_decoder",)
-++
-++    WBITS_DEFLATE = -15
-++    WBITS_ZLIB = 15
-++    WBITS_GZIP = 15 | 16
-++    WBITS_AUTO_GZIP_ZLIB = 15 | 32  # but not deflate
-++
-++    def __init__(self, wbits: int = WBITS_AUTO_GZIP_ZLIB):
-++        self._decoder: zlib._Decompress | None = zlib.decompressobj(wbits)
-++
-++    @property
-++    def needs_input(self) -> bool:
-++        if self._decoder is None:
-++            raise RuntimeError("used after flush()")
-++        return not self._decoder.unconsumed_tail and not self._decoder.eof
-++
-++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
-++        if self._decoder is None:
-++            raise RuntimeError("used after flush()")
-++        return self._decoder.decompress(b, max_length)
-++
-++    @property
-++    def unconsumed_tail(self) -> bytes:
-++        if self._decoder is None:
-++            raise RuntimeError("used after flush()")
-++        return self._decoder.unconsumed_tail
-++
-++    def flush(self) -> bytes:
-++        if self._decoder is None:
-++            raise RuntimeError("used after flush()")
-++        result = self._decoder.flush()
-++        self._decoder = None
-++        return result
-++
-++
-++def DeflateDecoder() -> ZlibDecoder:
-++    return ZlibDecoder(ZlibDecoder.WBITS_DEFLATE)
-++
-++
-++class LimitDecoder(DecoderProtocol):
-++    __slots__ = (
-++        "_decoder",
-++        "_ratio",
-++        "_chunk_size",
-++        "_safe_limit",
-++        "_hard_limit",
-++        "_consumed_length",
-++        "_output_length",
-++        "_input_buffer",
-++        "_flushed",
-++    )
-++
-++    def __init__(
-++        self,
-++        decoder: DecoderProtocol,
-++        ratio: float = 100,
-++        chunk_size: int = 64 << 10,
-++        safe_limit: int = 10 << 20,
-++        hard_limit: int = 10 << 30,
-++    ) -> None:
-++        if ratio < 0:
-++            raise ValueError(f"LimitDecoder() ratio={ratio} expected >= 0")
-++        if chunk_size < 0:
-++            raise ValueError(f"LimitDecoder() chunk_size={chunk_size} expected >= 0")
-++        if safe_limit < 0:
-++            raise ValueError(f"LimitDecoder() safe_limit={safe_limit} expected >= 0")
-++        if hard_limit < 0:
-++            raise ValueError(f"LimitDecoder() safe_limit={safe_limit} expected >= 0")
-++
-++        self._decoder: DecoderProtocol = decoder
-++        self._ratio: float = ratio
-++        self._chunk_size: int = chunk_size
-++        self._safe_limit: int = safe_limit
-++        self._hard_limit: int = hard_limit
-++        self._consumed_length: int = 0
-++        self._output_length: int = 0
-++        self._input_buffer: bytearray = bytearray()
-++        self._flushed: bool = False
-++
-++    def _check_limits(self) -> None:
-++        if (self._hard_limit > 0) and (self._output_length > self._hard_limit):
-++            raise DecodeLimitError(f"Output length {self._output_length} exceeds hard limit {self._hard_limit}")
-++        if (self._safe_limit > 0) and (self._output_length < self._safe_limit):
-++            return
-++        if (self._ratio > 0) and (self._output_length > self._consumed_length * self._ratio):
-++            actual_ratio = self._output_length / self._consumed_length if self._consumed_length > 0 else float("inf")
-++            raise DecodeRatioError(
-++                f"Amplification ratio {actual_ratio:.1f} ({self._output_length}/{self._consumed_length})"
-++                f" exceeds limit {self._ratio}"
-++            )
-++
-++    def _decode_max_length(self, input_length: int) -> int:
-++        limits = []
-++        if self._hard_limit > 0:
-++            limits.append(self._hard_limit)
-++        if self._ratio > 0:
-++            ratio_limit = int(
-++                (self._consumed_length + input_length) * self._ratio
-++            )
-++            if self._safe_limit > 0:
-++                ratio_limit = max(ratio_limit, self._safe_limit - 1)
-++            limits.append(ratio_limit)
-++        if not limits:
-++            return 0
-++        return max(1, min(limits) - self._output_length + 1)
-++
-++    @property
-++    def needs_input(self) -> bool:
-++        return self._decoder.needs_input
-++
-++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
-++        if self._flushed:
-++            raise RuntimeError("decode() called after flush()")
-++        output = self._pump(b)
-++        return bytes(output)
-++
-++    def flush(self) -> bytes:
-++        if self._flushed:
-++            raise RuntimeError("flush() called more than once")
-++        self._flushed = True
-++
-++        output = self._pump(b"")
-++
-++        data = self._decoder.flush()
-++        output.extend(data)
-++        self._output_length += len(data)
-++        self._check_limits()
-++
-++        return bytes(output)
-++
-++    def _pump(self, b: bytes) -> bytearray:
-++        self._input_buffer.extend(b)
-++
-++        output = bytearray()
-++        drain = False
-++        while True:
-++            if self._input_buffer:
-++                chunk = bytes(self._input_buffer[: self._chunk_size])
-++                del self._input_buffer[: self._chunk_size]
-++            elif drain:
-++                chunk = b""
-++            else:
-++                break
-++
-++            max_length = self._decode_max_length(len(chunk))
-++            data = self._decoder.decode(chunk, max_length)
-++            tail = self._decoder.unconsumed_tail
-++            consumed = len(chunk) - len(tail)
-++            self._consumed_length += consumed
-++            if tail:
-++                self._input_buffer[:0] = tail
-++
-++            output.extend(data)
-++            self._output_length += len(data)
-++            self._check_limits()
-++
-++            drain = bool(max_length and len(data) == max_length)
-++            if not data and not consumed and not tail:
-++                break
-++
-++        return output
-+diff --git a/setup.cfg b/setup.cfg
-+index fa392d1..93641b0 100644
-+--- a/setup.cfg
-++++ b/setup.cfg
-+@@ -2,7 +2,7 @@
-+ 
-+ [flake8]
-+ exclude = *.egg*,.env,.git,.tox,_*,build*,dist*,venv*,python2/,python3/
-+-ignore = E261,E731,W503
-++ignore = E203,E261,E731,W503
-+ max-line-length = 121
-+ 
-+ [tool:pytest]
-+diff --git a/tests/__init__.py b/tests/__init__.py
-+index b5c76a2..d0f4538 100644
-+--- a/tests/__init__.py
-++++ b/tests/__init__.py
-+@@ -818,3 +818,11 @@ def rebuild_uri(old, scheme=_missing, netloc=_missing, host=_missing, port=_miss
-+         path = u.path
-+     new = (scheme, netloc, path) + u[3:]
-+     return urllib.parse.urlunsplit(new)
-++
-++
-++# remove when python version is raised to 3.9+
-++try:
-++    randbytes = random.randbytes
-++except AttributeError:
-++    def randbytes(n):
-++        return random.getrandbits(n * 8).to_bytes(n, "little")
-+diff --git a/tests/test_encoding.py b/tests/test_encoding.py
-+index 1d9770a..7431e24 100644
-+--- a/tests/test_encoding.py
-++++ b/tests/test_encoding.py
-+@@ -1,13 +1,17 @@
-++import subprocess
-++import sys
-++
+++++ b/tests/core/utilities/test_ccip_url_validation.py
++@@ -0,0 +1,122 @@
 ++import pytest
+++import socket
 ++
-+ import httplib2
-++from httplib2.decode import LimitDecoder, ZlibDecoder, DecodeLimitError, DecodeRatioError
-+ import tests
-+ 
-+ 
-+ def test_gzip_head():
-+     # Test that we don't try to decompress a HEAD response
-+     http = httplib2.Http()
-+-    response = tests.http_response_bytes(
-+-        headers={"content-encoding": "gzip", "content-length": 42}
-+-    )
-++    response = tests.http_response_bytes(headers={"content-encoding": "gzip", "content-length": 42})
-+     with tests.server_const_bytes(response) as uri:
-+         response, content = http.request(uri, "HEAD")
-+         assert response.status == 200
-+@@ -48,9 +52,7 @@ def test_gzip_malformed_response():
-+     http = httplib2.Http()
-+     # Test that we raise a good exception when the gzip fails
-+     http.force_exception_to_status_code = False
-+-    response = tests.http_response_bytes(
-+-        headers={"content-encoding": "gzip"}, body=b"obviously not compressed"
-+-    )
-++    response = tests.http_response_bytes(headers={"content-encoding": "gzip"}, body=b"obviously not compressed")
-+     with tests.server_const_bytes(response, request_count=2) as uri:
-+         with tests.assert_raises(httplib2.FailedToDecompressContent):
-+             http.request(uri, "GET")
-+@@ -82,9 +84,7 @@ def test_deflate_malformed_response():
-+     # Test that we raise a good exception when the deflate fails
-+     http = httplib2.Http()
-+     http.force_exception_to_status_code = False
-+-    response = tests.http_response_bytes(
-+-        headers={"content-encoding": "deflate"}, body=b"obviously not compressed"
-+-    )
-++    response = tests.http_response_bytes(headers={"content-encoding": "deflate"}, body=b"obviously not compressed")
-+     with tests.server_const_bytes(response, request_count=2) as uri:
-+         with tests.assert_raises(httplib2.FailedToDecompressContent):
-+             http.request(uri, "GET")
-+@@ -97,6 +97,18 @@ def test_deflate_malformed_response():
-+         assert response.reason.startswith("Content purported")
-+ 
-+ 
-++@pytest.mark.parametrize("encoding", ("gzip", "deflate"))
-++def test_empty_encoded_response(encoding):
-++    http = httplib2.Http()
-++    http.force_exception_to_status_code = False
-++    response = tests.http_response_bytes(
-++        headers={"content-encoding": encoding}, body=b""
-++    )
-++    with tests.server_const_bytes(response) as uri:
-++        with tests.assert_raises(httplib2.FailedToDecompressContent):
-++            http.request(uri, "GET")
-++
-++
-+ def test_zlib_get():
-+     # Test that we support zlib compression
-+     http = httplib2.Http()
-+@@ -110,3 +122,194 @@ def test_zlib_get():
-+         assert "content-encoding" not in response
-+         assert int(response["content-length"]) == len(b"properly compressed")
-+         assert content == b"properly compressed"
-++
-++
-++def test_gzip_excess_ratio():
-++    http = httplib2.Http()
-++    original = b"\x00" * (50 << 20)  # 50 MiB to ~50 KiB
-++    response = tests.http_response_bytes(
-++        headers={"content-encoding": "gzip"},
-++        body=tests.gzip_compress(original),
-++    )
-++    with tests.server_const_bytes(response) as uri:
-++        try:
-++            http.request(uri, "GET")
-++            assert False, "expected DecodeRatioError"
-++        except DecodeRatioError:
-++            pass
-++
-++
-++@pytest.mark.parametrize("safe_limit", (0, 1000, 20000))
-++def test_limitdecoder_normal_decompression_no_limits(safe_limit):
-++    """Standard decompression of random data should pass with any safe_limit"""
-++    original = tests.randbytes(10 << 10)
-++    compressed = tests.zlib_compress(original)
-++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=10,
-++        safe_limit=safe_limit,
-++        hard_limit=len(original) + 1,
-++    )
-++    result = decoder.consume_bytes(compressed)
-++    assert result == original
-++    assert decoder._output_length == len(original)
-++
-++
-++def test_limitdecoder_normal_rechunking():
-++    """Passing a massive single chunk should be re-chunked internally without error"""
-++    original = b"\x00" * (10 << 20)
-++    compressed = tests.zlib_compress(original)
-++    assert len(compressed) > 2000
-++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=2000,
-++        chunk_size=512,
-++        safe_limit=0,
-++        hard_limit=len(original) + 1,
-++    )
-++    result = decoder.consume_bytes(compressed, chunk_size=0)
-++    assert result == original
-++    assert decoder._consumed_length == len(compressed)
-++
-++
-++def test_limitdecoder_amplification_ratio_exceeded():
-++    """High ratio should trigger DecodeRatioError above safe_limit"""
-++    original = b"\x00" * (1 << 20)
-++    compressed = tests.zlib_compress(original)
-++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=10,
-++        chunk_size=512,
-++        safe_limit=0,
-++        hard_limit=len(original) + 1,
-++    )
-++    try:
-++        decoder.consume_bytes(compressed, chunk_size=0)
-++        assert False, "expected DecodeRatioError"
-++    except DecodeRatioError:
-++        pass
-++    assert 0 < decoder._consumed_length <= 512
-++
-++
-++@pytest.mark.parametrize("ratio", (0, 10, 1000))
-++def test_limitdecoder_hard_limit_exceeded(ratio):
-++    """Output exceeding hard_limit must trigger DecodeLimitError regardless of ratio"""
-++    original = b"\x00" * (10 << 10)
-++    compressed = tests.zlib_compress(original)
-++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=ratio,
-++        safe_limit=len(original) + 1,
-++        hard_limit=len(original) - 1,
-++    )
-++    try:
-++        decoder.consume_bytes(compressed)
-++        assert False, "expected DecodeLimitError"
-++    except DecodeLimitError:
-++        pass
-++
-++
-++def test_limitdecoder_bounds_allocation_before_hard_limit():
-++    code = r"""
-++import os
-++import resource
-++import zlib
-++
-++from httplib2.decode import DecodeLimitError, DecodeRatioError, LimitDecoder
-++from httplib2.decode import ZlibDecoder
-++
-++compressor = zlib.compressobj(wbits=31)
-++compressed = b"".join(
-++    compressor.compress(b"\x00" * (1 << 20)) for _ in range(50)
+++from web3.exceptions import (
+++    Web3ValidationError,
 ++)
-++compressed += compressor.flush()
-++page_size = os.sysconf("SC_PAGE_SIZE")
-++with open("/proc/self/statm", "r") as statm:
-++    current_vms = int(statm.read().split()[0]) * page_size
-++_, hard = resource.getrlimit(resource.RLIMIT_AS)
-++resource.setrlimit(resource.RLIMIT_AS, (current_vms + (30 << 20), hard))
-++decoder = LimitDecoder(
-++    ZlibDecoder(), ratio=100, safe_limit=0, hard_limit=1 << 20
+++from web3.utils.ccip_url_validation import (
+++    validate_ccip_url_host,
+++    validate_ccip_url_scheme,
 ++)
-++try:
-++    decoder.consume_bytes(compressed, chunk_size=0)
-++except (DecodeLimitError, DecodeRatioError):
-++    pass
-++except MemoryError:
-++    raise AssertionError("decompressor allocated past the configured limit")
-++else:
-++    raise AssertionError("expected a decompression limit error")
-++"""
-++    result = subprocess.run(
-++        [sys.executable, "-c", code], capture_output=True, text=True
+++
+++# -- validate_ccip_url_scheme tests -- #
+++
+++
+++class TestValidateCcipUrlScheme:
+++    def test_https_passes(self):
+++        validate_ccip_url_scheme("https://example.com/api", allow_http=False)
+++
+++    def test_http_fails_by_default(self):
+++        with pytest.raises(Web3ValidationError, match="non-HTTPS"):
+++            validate_ccip_url_scheme("http://example.com/api")
+++
+++    def test_http_passes_with_allow_http(self):
+++        validate_ccip_url_scheme("http://example.com/api", allow_http=True)
+++
+++    def test_ftp_always_fails(self):
+++        with pytest.raises(Web3ValidationError, match="not allowed"):
+++            validate_ccip_url_scheme("ftp://example.com/file")
+++
+++    def test_ftp_fails_even_with_allow_http(self):
+++        with pytest.raises(Web3ValidationError, match="not allowed"):
+++            validate_ccip_url_scheme("ftp://example.com/file", allow_http=True)
+++
+++    def test_file_scheme_fails(self):
+++        with pytest.raises(Web3ValidationError, match="not allowed"):
+++            validate_ccip_url_scheme("file:///etc/passwd")
+++
+++    def test_file_scheme_fails_with_allow_http(self):
+++        with pytest.raises(Web3ValidationError, match="not allowed"):
+++            validate_ccip_url_scheme("file:///etc/passwd", allow_http=True)
+++
+++
+++# -- validate_ccip_url_host tests -- #
+++
+++
+++class TestValidateCcipUrlHost:
+++    def _patch_getaddrinfo(self, monkeypatch, ip):
+++        def _mock_getaddrinfo(host, port, *args, **kwargs):
+++            return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", (ip, 0))]
+++
+++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++
+++    def test_public_ip_passes(self, monkeypatch):
+++        self._patch_getaddrinfo(monkeypatch, "8.8.8.8")
+++        validate_ccip_url_host("https://example.com/api")
+++
+++    @pytest.mark.parametrize(
+++        "blocked_ip",
+++        [
+++            "127.0.0.1",
+++            "127.0.0.2",
+++            "10.0.0.1",
+++            "10.255.255.255",
+++            "172.16.0.1",
+++            "172.31.255.255",
+++            "192.168.0.1",
+++            "192.168.1.100",
+++            "169.254.0.1",
+++            "0.0.0.0",
+++        ],
 ++    )
-++    assert result.returncode == 0, result.stderr
+++    def test_blocked_ipv4(self, monkeypatch, blocked_ip):
+++        self._patch_getaddrinfo(monkeypatch, blocked_ip)
+++        with pytest.raises(Web3ValidationError, match="blocked private/reserved"):
+++            validate_ccip_url_host("https://example.com/api")
+++
+++    def test_blocked_ipv6_loopback(self, monkeypatch):
+++        def _mock_getaddrinfo(host, port, *args, **kwargs):
+++            return [(socket.AF_INET6, socket.SOCK_STREAM, 0, "", ("::1", 0, 0, 0))]
+++
+++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++        with pytest.raises(Web3ValidationError, match="blocked private/reserved"):
+++            validate_ccip_url_host("https://example.com/api")
+++
+++    def test_unresolvable_hostname(self, monkeypatch):
+++        def _mock_getaddrinfo(host, port, *args, **kwargs):
+++            raise socket.gaierror("Name or service not known")
+++
+++        monkeypatch.setattr("socket.getaddrinfo", _mock_getaddrinfo)
+++        with pytest.raises(Web3ValidationError, match="could not be resolved"):
+++            validate_ccip_url_host("https://nonexistent.invalid/api")
+++
+++    def test_no_hostname(self):
+++        with pytest.raises(Web3ValidationError, match="no hostname"):
+++            validate_ccip_url_host("https:///path")
 ++
 ++
-++@pytest.mark.parametrize("ratio", (0, 10, 1000))
-++def test_limitdecoder_safe_limit_bypass(ratio):
-++    """Any ratio allowed if total output < safe_limit"""
-++    original = b"\x00" * (10 << 10)
-++    compressed = tests.zlib_compress(original)
+++# -- custom validator tests -- #
 ++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=ratio,
-++        safe_limit=len(original) + 1,
-++        hard_limit=len(original) + 1,
+++
+++class TestCustomUrlValidator:
+++    def test_custom_validator_called_and_can_reject(self):
+++        calls = []
+++
+++        def reject_validator(url):
+++            calls.append(url)
+++            raise Web3ValidationError(f"Rejected: {url}")
+++
+++        with pytest.raises(Web3ValidationError, match="Rejected"):
+++            reject_validator("https://example.com/api")
+++
+++        assert len(calls) == 1
+++        assert calls[0] == "https://example.com/api"
+++
+++    def test_custom_validator_can_allow(self):
+++        calls = []
+++
+++        def allow_validator(url):
+++            calls.append(url)
+++
+++        allow_validator("https://example.com/api")
+++        assert len(calls) == 1
++diff --git a/tests/ens/test_offchain_resolution.py b/tests/ens/test_offchain_resolution.py
++index 9e4f3b16..fc479d36 100644
++--- a/tests/ens/test_offchain_resolution.py
+++++ b/tests/ens/test_offchain_resolution.py
++@@ -1,4 +1,5 @@
++ import pytest
+++import socket
++ 
++ from aiohttp import (
++     ClientSession,
++@@ -13,6 +14,19 @@ from web3.exceptions import (
++     Web3ValidationError,
++ )
++ 
+++
+++def _mock_getaddrinfo_public(monkeypatch):
+++    """Patch socket.getaddrinfo to return a public IP for CCIP test domains."""
+++    _original = socket.getaddrinfo
+++
+++    def _patched(host, port, *args, **kwargs):
+++        if host == "web3.py":
+++            return [(socket.AF_INET, socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
+++        return _original(host, port, *args, **kwargs)
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _patched)
+++
+++
++ # the encoded calldata for the initiating ``addr(namehash(name))`` call
++ ENCODED_ADDR_CALLDATA = "0x3b3b57de42041b0018edd29d7c17154b0c671acc0502ea0b3693cafbeadf58e6beaaa16c"  # noqa: E501
++ 
++@@ -124,6 +138,8 @@ class AsyncMockHttpBadFormatResponse:
++ 
++ 
++ def test_offchain_resolution_with_get_request(ens, monkeypatch):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     # mock GET response with real return data from 'offchainexample.eth' resolver
++     def mock_get(*args, **kwargs):
++         return MockHttpSuccessResponse("get", *args, **kwargs)
++@@ -134,6 +150,8 @@ def test_offchain_resolution_with_get_request(ens, monkeypatch):
++ 
++ 
++ def test_offchain_resolution_with_post_request(ens, monkeypatch):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     # mock POST response with real return data from 'offchainexample.eth' resolver
++     def mock_post(*args, **kwargs):
++         return MockHttpSuccessResponse("post", *args, **kwargs)
++@@ -150,6 +168,8 @@ def test_offchain_resolution_raises_when_all_supplied_urls_fail(ens):
++ 
++ 
++ def test_offchain_resolution_with_improperly_formatted_http_response(ens, monkeypatch):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     def mock_get(*args, **_):
++         return MockHttpBadFormatResponse(*args)
++ 
++@@ -189,6 +209,8 @@ def test_offchain_resolver_function_call_raises_with_ccip_read_disabled(
++ 
++ @pytest.mark.asyncio
++ async def test_async_offchain_resolution_with_get_request(async_ens, monkeypatch):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     # mock GET response with real return data from 'offchainexample.eth' resolver
++     async def mock_get(*args, **kwargs):
++         return AsyncMockHttpSuccessResponse("get", *args, **kwargs)
++@@ -200,6 +222,8 @@ async def test_async_offchain_resolution_with_get_request(async_ens, monkeypatch
++ 
++ @pytest.mark.asyncio
++ async def test_async_offchain_resolution_with_post_request(async_ens, monkeypatch):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     # mock POST response with real return data from 'offchainexample.eth' resolver
++     async def mock_post(*args, **kwargs):
++         return AsyncMockHttpSuccessResponse("post", *args, **kwargs)
++@@ -220,6 +244,8 @@ async def test_async_offchain_resolution_raises_when_all_supplied_urls_fail(asyn
++ async def test_async_offchain_resolution_with_improperly_formatted_http_response(
++     async_ens, monkeypatch
++ ):
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     async def mock_get(*args, **_):
++         return AsyncMockHttpBadFormatResponse(*args)
++ 
++diff --git a/web3/_utils/module_testing/module_testing_utils.py b/web3/_utils/module_testing/module_testing_utils.py
++index f369d078..96623833 100644
++--- a/web3/_utils/module_testing/module_testing_utils.py
+++++ b/web3/_utils/module_testing/module_testing_utils.py
++@@ -62,6 +62,24 @@ def assert_contains_log(
++     assert log_entry["transactionHash"] == HexBytes(txn_hash_with_log)
++ 
++ 
+++def _mock_getaddrinfo_public(
+++    monkeypatch: "MonkeyPatch",
+++) -> None:
+++    # Patch socket.getaddrinfo to return a public IP for CCIP test domains
+++    # so that CCIP URL host validation passes during tests. Pass through
+++    # to the real getaddrinfo for all other hosts (e.g. 127.0.0.1 for geth).
+++    import socket as _socket
+++
+++    _original_getaddrinfo = _socket.getaddrinfo
+++
+++    def _patched_getaddrinfo(host: Any, port: Any, *args: Any, **kwargs: Any) -> Any:
+++        if host == "web3.py":
+++            return [(_socket.AF_INET, _socket.SOCK_STREAM, 0, "", ("1.2.3.4", 0))]
+++        return _original_getaddrinfo(host, port, *args, **kwargs)
+++
+++    monkeypatch.setattr("socket.getaddrinfo", _patched_getaddrinfo)
+++
+++
++ def mock_offchain_lookup_request_response(
++     monkeypatch: "MonkeyPatch",
++     http_method: Literal["GET", "POST"] = "GET",
++@@ -73,6 +91,8 @@ def mock_offchain_lookup_request_response(
++     sender: str = None,
++     calldata: str = None,
++ ) -> None:
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     class MockedResponse:
++         status_code = mocked_status_code
++ 
++@@ -92,6 +112,7 @@ def mock_offchain_lookup_request_response(
++         # mock response only to specified url while validating appropriate fields
++         if url_from_args == mocked_request_url:
++             assert kwargs["timeout"] == DEFAULT_HTTP_TIMEOUT
+++            assert kwargs.get("allow_redirects") is False
++             if http_method.upper() == "POST":
++                 assert kwargs["json"] == {"data": calldata, "sender": sender}
++             return MockedResponse()
++@@ -119,6 +140,8 @@ def async_mock_offchain_lookup_request_response(
++     sender: str = None,
++     calldata: str = None,
++ ) -> None:
+++    _mock_getaddrinfo_public(monkeypatch)
+++
++     class AsyncMockedResponse:
++         status = mocked_status_code
++ 
++@@ -142,6 +165,7 @@ def async_mock_offchain_lookup_request_response(
++         # mock response only to specified url while validating appropriate fields
++         if url_from_args == mocked_request_url:
++             assert kwargs["timeout"] == ClientTimeout(DEFAULT_HTTP_TIMEOUT)
+++            assert kwargs.get("allow_redirects") is False
++             if http_method.upper() == "POST":
++                 assert kwargs["json"] == {"data": calldata, "sender": sender}
++             return AsyncMockedResponse()
++diff --git a/web3/eth/async_eth.py b/web3/eth/async_eth.py
++index 2339ac3b..43a17666 100644
++--- a/web3/eth/async_eth.py
+++++ b/web3/eth/async_eth.py
++@@ -289,6 +289,8 @@ class AsyncEth(BaseEth):
++                 durin_calldata = await async_handle_offchain_lookup(
++                     offchain_lookup.payload,
++                     transaction,
+++                    allow_http=self.w3.provider.ccip_read_allow_http,
+++                    url_validator=self.w3.provider.ccip_read_url_validator,
++                 )
++                 transaction["data"] = durin_calldata
++ 
++diff --git a/web3/eth/eth.py b/web3/eth/eth.py
++index d459f964..3b6709fa 100644
++--- a/web3/eth/eth.py
+++++ b/web3/eth/eth.py
++@@ -268,6 +268,8 @@ class Eth(BaseEth):
++                 durin_calldata = handle_offchain_lookup(
++                     offchain_lookup.payload,
++                     transaction,
+++                    allow_http=self.w3.provider.ccip_read_allow_http,
+++                    url_validator=self.w3.provider.ccip_read_url_validator,
++                 )
++                 transaction["data"] = durin_calldata
++ 
++diff --git a/web3/providers/async_base.py b/web3/providers/async_base.py
++index b1f6314f..2abed58b 100644
++--- a/web3/providers/async_base.py
+++++ b/web3/providers/async_base.py
++@@ -68,6 +68,9 @@ if TYPE_CHECKING:
++     from web3.providers.persistent import (  # noqa: F401
++         RequestProcessor,
++     )
+++    from web3.utils.ccip_url_validation import (
+++        AsyncCcipUrlValidator,
 ++    )
-++    result = decoder.consume_bytes(compressed)
-++    assert result == original
-++    assert decoder._output_length == len(original)
-++
-++
-++def test_limitdecoder_single_byte_feeding():
-++    """Feeding compressed data 1 byte at a time should still decode correctly"""
-++    original = tests.randbytes(10 << 10)
-++    compressed = tests.zlib_compress(original)
-++
-++    decoder = LimitDecoder(
-++        ZlibDecoder(),
-++        ratio=10,
-++        safe_limit=5 << 10,
-++        hard_limit=len(original) + 1,
++ 
++ 
++ class AsyncBaseProvider:
++@@ -83,6 +86,8 @@ class AsyncBaseProvider:
++     has_persistent_connection = False
++     global_ccip_read_enabled: bool = True
++     ccip_read_max_redirects: int = 4
+++    ccip_read_allow_http: bool = False
+++    ccip_read_url_validator: "AsyncCcipUrlValidator | None" = None
++ 
++     def __init__(
++         self,
++diff --git a/web3/providers/base.py b/web3/providers/base.py
++index 1d8072f3..7be74c28 100644
++--- a/web3/providers/base.py
+++++ b/web3/providers/base.py
++@@ -54,6 +54,9 @@ if TYPE_CHECKING:
++     from web3._utils.batching import (
++         RequestBatcher,
++     )
+++    from web3.utils.ccip_url_validation import (
+++        CcipUrlValidator,
 ++    )
-++    result = decoder.consume_bytes(compressed, chunk_size=1)
-++    assert result == original
-++
-++
-++def test_limitdecoder_invalid_argument():
-++    checks = (
-++        ("ratio", dict(ratio=-1)),
-++        ("chunk_size", dict(chunk_size=-1)),
-++        ("safe_limit", dict(safe_limit=-1)),
-++        ("hard_limit", dict(hard_limit=-1)),
-++    )
-++    for name, check in checks:
-++        zd = ZlibDecoder()
++ 
++ 
++ class BaseProvider:
++@@ -69,6 +72,8 @@ class BaseProvider:
++     has_persistent_connection = False
++     global_ccip_read_enabled: bool = True
++     ccip_read_max_redirects: int = 4
+++    ccip_read_allow_http: bool = False
+++    ccip_read_url_validator: "CcipUrlValidator | None" = None
++ 
++     def __init__(
++         self,
++diff --git a/web3/utils/__init__.py b/web3/utils/__init__.py
++index f603daea..248e88ed 100644
++--- a/web3/utils/__init__.py
+++++ b/web3/utils/__init__.py
++@@ -39,6 +39,10 @@ from .caching import (
++     RequestCacheValidationThreshold,
++     SimpleCache,
++ )
+++from .ccip_url_validation import (
+++    AsyncCcipUrlValidator,
+++    CcipUrlValidator,
+++)
++ from .exception_handling import (
++     handle_offchain_lookup,
++ )
++@@ -73,6 +77,8 @@ __all__ = [
++     "async_handle_offchain_lookup",
++     "RequestCacheValidationThreshold",
++     "SimpleCache",
+++    "AsyncCcipUrlValidator",
+++    "CcipUrlValidator",
++     "EthSubscription",
++     "handle_offchain_lookup",
++ ]
++diff --git a/web3/utils/async_exception_handling.py b/web3/utils/async_exception_handling.py
++index ea42d4d5..6a874201 100644
++--- a/web3/utils/async_exception_handling.py
+++++ b/web3/utils/async_exception_handling.py
++@@ -28,11 +28,18 @@ from web3.exceptions import (
++ from web3.types import (
++     TxParams,
++ )
+++from web3.utils.ccip_url_validation import (
+++    AsyncCcipUrlValidator,
+++    async_validate_ccip_url_host,
+++    validate_ccip_url_scheme,
+++)
++ 
++ 
++ async def async_handle_offchain_lookup(
++     offchain_lookup_payload: Dict[str, Any],
++     transaction: TxParams,
+++    allow_http: bool = False,
+++    url_validator: AsyncCcipUrlValidator | None = None,
++ ) -> bytes:
++     formatted_sender = to_hex_if_bytes(offchain_lookup_payload["sender"]).lower()
++     formatted_data = to_hex_if_bytes(offchain_lookup_payload["callData"]).lower()
++@@ -51,16 +58,27 @@ async def async_handle_offchain_lookup(
++             .replace("{data}", str(formatted_data))
++         )
++ 
 ++        try:
-++            LimitDecoder(zd, **check)
-++            assert False, f"check={name} expected ValueError"
-++        except ValueError as e:
-++            assert "expected >= 0" in str(e).lower(), str(e)
+++            validate_ccip_url_scheme(formatted_url, allow_http=allow_http)
+++            await async_validate_ccip_url_host(formatted_url)
+++            if url_validator is not None:
+++                await url_validator(formatted_url)
+++        except Web3ValidationError:
+++            continue
+++
++         try:
++             if "{data}" in url and "{sender}" in url:
++                 response = await session.get(
++-                    formatted_url, timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT)
+++                    formatted_url,
+++                    timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT),
+++                    allow_redirects=False,
++                 )
++             else:
++                 response = await session.post(
++                     formatted_url,
++                     json={"data": formatted_data, "sender": formatted_sender},
++                     timeout=ClientTimeout(DEFAULT_HTTP_TIMEOUT),
+++                    allow_redirects=False,
++                 )
++         except Exception:
++             continue  # try next url if timeout or issues making the request
++diff --git a/web3/utils/ccip_url_validation.py b/web3/utils/ccip_url_validation.py
++new file mode 100644
++index 00000000..a86618d8
++--- /dev/null
+++++ b/web3/utils/ccip_url_validation.py
++@@ -0,0 +1,105 @@
+++import asyncio
+++import ipaddress
+++import socket
+++from typing import (
+++    Awaitable,
+++    Callable,
+++)
+++from urllib.parse import (
+++    urlparse,
+++)
+++
+++from web3.exceptions import (
+++    Web3ValidationError,
+++)
+++
+++CcipUrlValidator = Callable[[str], None]
+++AsyncCcipUrlValidator = Callable[[str], Awaitable[None]]
+++
+++BLOCKED_IP_NETWORKS = [
+++    ipaddress.ip_network("127.0.0.0/8"),
+++    ipaddress.ip_network("10.0.0.0/8"),
+++    ipaddress.ip_network("172.16.0.0/12"),
+++    ipaddress.ip_network("192.168.0.0/16"),
+++    ipaddress.ip_network("169.254.0.0/16"),
+++    ipaddress.ip_network("0.0.0.0/8"),
+++    ipaddress.ip_network("::1/128"),
+++    ipaddress.ip_network("fe80::/10"),
+++    ipaddress.ip_network("fc00::/7"),
+++    ipaddress.ip_network("::/128"),
+++]
 ++
 ++
-++def test_zlibdecoder_invalid_after_flush():
-++    checks = (
-++        ("needs_input", lambda d: d.needs_input),
-++        ("decode", lambda d: d.decode(b"")),
-++        ("flush", lambda d: d.flush()),
+++def validate_ccip_url_scheme(url: str, allow_http: bool = False) -> None:
+++    parsed = urlparse(url)
+++    scheme = parsed.scheme.lower()
+++
+++    if scheme == "https":
+++        return
+++
+++    if scheme == "http" and allow_http:
+++        return
+++
+++    if scheme == "http":
+++        raise Web3ValidationError(
+++            f"CCIP Read request to non-HTTPS URL '{url}' is not allowed. "
+++            "Set ``ccip_read_allow_http=True`` on the provider to allow HTTP URLs."
+++        )
+++
+++    raise Web3ValidationError(
+++        f"CCIP Read request with scheme '{scheme}' is not allowed. "
+++        "Only HTTPS URLs are permitted."
 ++    )
-++    for name, check in checks:
-++        d = ZlibDecoder()
-++        d.decode(tests.zlib_compress(b""))
-++        d.flush()
+++
+++
+++def _check_ip_blocked(ip_str: str) -> bool:
+++    try:
+++        addr = ipaddress.ip_address(ip_str)
+++    except ValueError:
+++        return False
+++    return any(addr in network for network in BLOCKED_IP_NETWORKS)
+++
+++
+++def validate_ccip_url_host(url: str) -> None:
+++    parsed = urlparse(url)
+++    hostname = parsed.hostname
+++    if not hostname:
+++        raise Web3ValidationError(f"CCIP Read URL '{url}' has no hostname.")
+++
+++    try:
+++        addrinfos = socket.getaddrinfo(hostname, None)
+++    except socket.gaierror:
+++        raise Web3ValidationError(
+++            f"CCIP Read URL hostname '{hostname}' could not be resolved."
+++        )
+++
+++    for addrinfo in addrinfos:
+++        ip_str = str(addrinfo[4][0])
+++        if _check_ip_blocked(ip_str):
+++            raise Web3ValidationError(
+++                f"CCIP Read request to '{url}' is not allowed: "
+++                f"resolved IP '{ip_str}' is in a blocked private/reserved range."
+++            )
+++
+++
+++async def async_validate_ccip_url_host(url: str) -> None:
+++    parsed = urlparse(url)
+++    hostname = parsed.hostname
+++    if not hostname:
+++        raise Web3ValidationError(f"CCIP Read URL '{url}' has no hostname.")
+++
+++    loop = asyncio.get_running_loop()
+++    try:
+++        addrinfos = await loop.run_in_executor(None, socket.getaddrinfo, hostname, None)
+++    except socket.gaierror:
+++        raise Web3ValidationError(
+++            f"CCIP Read URL hostname '{hostname}' could not be resolved."
+++        )
+++
+++    for addrinfo in addrinfos:
+++        ip_str = str(addrinfo[4][0])
+++        if _check_ip_blocked(ip_str):
+++            raise Web3ValidationError(
+++                f"CCIP Read request to '{url}' is not allowed: "
+++                f"resolved IP '{ip_str}' is in a blocked private/reserved range."
+++            )
++diff --git a/web3/utils/exception_handling.py b/web3/utils/exception_handling.py
++index 7aa89910..9fc2cf6e 100644
++--- a/web3/utils/exception_handling.py
+++++ b/web3/utils/exception_handling.py
++@@ -25,11 +25,18 @@ from web3.exceptions import (
++ from web3.types import (
++     TxParams,
++ )
+++from web3.utils.ccip_url_validation import (
+++    CcipUrlValidator,
+++    validate_ccip_url_host,
+++    validate_ccip_url_scheme,
+++)
++ 
++ 
++ def handle_offchain_lookup(
++     offchain_lookup_payload: Dict[str, Any],
++     transaction: TxParams,
+++    allow_http: bool = False,
+++    url_validator: CcipUrlValidator | None = None,
++ ) -> bytes:
++     formatted_sender = to_hex_if_bytes(offchain_lookup_payload["sender"]).lower()
++     formatted_data = to_hex_if_bytes(offchain_lookup_payload["callData"]).lower()
++@@ -48,14 +55,27 @@ def handle_offchain_lookup(
++             .replace("{data}", str(formatted_data))
++         )
++ 
 ++        try:
-++            check(d)
-++            assert False, f"check={name} expected RuntimeError"
-++        except RuntimeError as e:
-++            assert "used after flush" in str(e).lower(), str(e)
-diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
-index 9318ad9182..db7477fab2 100644
---- a/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
+++            validate_ccip_url_scheme(formatted_url, allow_http=allow_http)
+++            validate_ccip_url_host(formatted_url)
+++            if url_validator is not None:
+++                url_validator(formatted_url)
+++        except Web3ValidationError:
+++            continue
+++
++         try:
++             if "{data}" in url and "{sender}" in url:
++-                response = session.get(formatted_url, timeout=DEFAULT_HTTP_TIMEOUT)
+++                response = session.get(
+++                    formatted_url,
+++                    timeout=DEFAULT_HTTP_TIMEOUT,
+++                    allow_redirects=False,
+++                )
++             else:
++                 response = session.post(
++                     formatted_url,
++                     json={"data": formatted_data, "sender": formatted_sender},
++                     timeout=DEFAULT_HTTP_TIMEOUT,
+++                    allow_redirects=False,
++                 )
++         except Exception:
++             continue  # try next url if timeout or issues making the request
+diff --git a/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb b/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
+index fe5886692d..09a1140681 100644
+--- a/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
++++ b/meta-python/recipes-devtools/python/python3-web3_7.12.1.bb
+@@ -4,6 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1d34d9701a1461e4bd71a904ac4cf7be"
  
- SRC_URI[sha256sum] = "d7a10bc5ef5ab08322488bde8c726eeee5c8618723fdb399597ec58f3d82df81"
++SRC_URI += "file://CVE-2026-40072.patch"
+ SRC_URI[sha256sum] = "97f6a116ccaeb5907bb4cb6c771cc23bc942bf09528a840189e9b509b7b8347c"
  
-+SRC_URI += "file://CVE-2026-59939.patch"
-+
- inherit pypi python_setuptools_build_meta
- 
- RDEPENDS:${PN} += "\
+ inherit pypi setuptools3
 -- 
 2.35.6
 
