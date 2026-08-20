@@ -1,188 +1,870 @@
-Return-Path: <hthakar@cisco.com>
+Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2965C5DF81
-	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:21:25 +0000 (UTC)
-Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.636.1787203284354275697
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6895C5DF87
+	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 05:28:45 +0000 (UTC)
+Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.701.1787203723525687441
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2026 22:21:24 -0700
+ Wed, 19 Aug 2026 22:28:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LErPbGB2;
- spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=FMLTrDeo;
+ spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3508; q=dns/txt;
-  s=iport01; t=1787203284; x=1788412884;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=0C0oNvsVhwOicgp5WHQEQBycI0iDjNQrQlx1jYKdy14=;
-  b=LErPbGB2/S2Fn6aZHvKd6I6NuX9k3A2s1nVlZ8SivH8hq3TfDiwnocnR
-   RKfaUg3515Juws9D8BVXUZ2Mavt8bFDW1sI6kDqQrQ9jf6190RNKyeVLO
-   u8Q54s9/ViBtg5NBkNkr7ZUDHp1Jnp8hkoNevvzn2bUUv97IsLFNEN3nG
-   AIhxz+/VIW5TvcWyoruB1GuOarFvi7U+GT3pw/K/lx2aOTwHS2RXGPZRa
-   f7GKu2NnAdk9rlkgZxE7O409C5/vN7SQsgc9yQSL05EEX7iwdBftmdDAs
-   mDW4JstvnT0tJJ4zhO2Ba9C3f5H9CGRIDo++OixL80z7bjrkPWHdp5go5
-   Q==;
-X-CSE-ConnectionGUID: 1nGpROkRQbaWjQdLbMqhpQ==
-X-CSE-MsgGUID: J+ke2GJnSKqnrfWDV5IbbQ==
-X-IPAS-Result: =?us-ascii?q?A0BHAgADjoZq/5EQJK1aHgEBCxIMggULgld0XkNJlk2LZ?=
- =?us-ascii?q?JI3gX4PAQEBD0QNBAEBhD9GAo1rAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4Thk8NhloBAgEDMgEYAS0QHAMBAi8gCyMIGYMCAYI6AzcDE?=
- =?us-ascii?q?cJIgiyBAYMoAT8CQ1DYSw2CWAELFAEFgTOFP4J/hSNdGAGEfCcbG4FygRWDa?=
- =?us-ascii?q?YEFgRpCAQGBJ4Z+BIIigQyBWpFwSIEeA1ksAVUTDQoLBwWBZgM1EioVbjIdg?=
- =?us-ascii?q?SM+F4ENGwYFgR2BKIQ3Ixk2fIEJXoErKmEBEheBCYIKAoJwggYCAUlFDgkXC?=
- =?us-ascii?q?xgNSBEsNxQZBD5uB45RIIJLgQ4BK6YBgiGgHnEKKIN2jCGPPoV8GjOqbAuYf?=
- =?us-ascii?q?Y4KhAmSR4RpgWg8gUcLB3AVgyIJShkPji0LC4NggX+CUcdpJzICCTIBAQcCB?=
- =?us-ascii?q?w4DC4FokACBfgEB?=
-IronPort-Data: A9a23:KIti2q6/BLVEHI6bhzuPLwxRtGvGchMFZxGqfqrLsTDasY5as4F+v
- mZLWmiOPPbZMGb8ftsnPoWy9xwFupXQzIdkSFdorSA0Zn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa/lH2dOC98RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/qUzBHf/g2QqajJNuvrZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eZIs34txQAlt3/
- /UnKgkBShqmnuKu+efuIgVsrpxLwMjDNYcbvDRkiDreF/tjGcCFSKTR7tge1zA17ixMNa+BP
- IxCN3w2MlKZP0An1lQ/UPrSmM+omnn2cDRCgFmUvqEwpWPUyWSd1ZC9aYqEIIzRG589ckCwh
- CHF8j7WIBchF8WZ0zS63kzxp+XFpHauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4Guk+7kSJj6HT+QvcXjhCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1qOzL9Fte5QB9wbc+WBI5
-IronPort-HdrOrdr: A9a23:R5LmHKPws2LhD8BcThmjsMiBIKoaSvp037Dk7S9MoHtuA6ulfq
- +V/cjzuSWYtN9VYgBDpTniAtjlfZqjz/5ICOAqVN/INjUO+lHYSb2KhrGN/9SPIUHDH8dmpM
- FdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPHhXg2UK1XYDNu5deXcGPDV7OQ==
-X-Talos-CUID: =?us-ascii?q?9a23=3AaxBnZWu/K02sodK3xFW1F1U96It8dFLF9lDTGXa?=
- =?us-ascii?q?yAFlrcbGxQ3qJ+Ltdxp8=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3ARbT3Ng3xaSwM7AkhMWQSTwhNxjUjweetBRois5M?=
- =?us-ascii?q?9mNCCLyJPFwnArT69e9py?=
+  d=cisco.com; i=@cisco.com; l=26599; q=dns/txt;
+  s=iport01; t=1787203723; x=1788413323;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=7IrCQ+ng/nKT73VGQL2Ex1WclMWEOCyJ+15NmHfVk3U=;
+  b=FMLTrDeovVyc3ZHlhu6yFa1mWzU2VWUaS0MV5FJCMP8DeswNm8PWpQdt
+   FuGKTF0syo29D46TlbWVNI41XAFO1P+r+4WMiq04ud/ReYCy459plWAxL
+   oNrHPI3GYjWt0lvEXANRVr5lp+zrnN4uJFwAPH1Ebkl0ajUh1koFU+F7+
+   7QjjRDRg8YSd63/P1Ir/w/KB2j+qaMk+6IvtMDNXMeFTAT5jFdQRMdwwB
+   hwjr+7U3jfWAbnt5inilQQdS2/+SH5LlmMzm3tQnFWtV/dE/eFXz/Zcpi
+   0wVrjjlSRNhK5sZIN3m0aoxpEuSYXfpZlUU0r3fV+emB6rtQcJzv51+Ni
+   w==;
+X-CSE-ConnectionGUID: QGz4rqLNT1iJa3/lPNRkHg==
+X-CSE-MsgGUID: APZ9SZb0SYu+ZQB0rNO8xg==
+X-IPAS-Result: =?us-ascii?q?A0AFAABhj4Zq/4sQJK1aGgEBAQEBAQEBAQEDAQEBARIBA?=
+ =?us-ascii?q?QEBAgIBAQEBgX0EAQEBAQsBghc/dF5DSQOEVJEHbItnhWaMURSBag8BAQEPR?=
+ =?us-ascii?q?A0EAQGEP0aNbQImNQgOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHBYEOE?=
+ =?us-ascii?q?4ZPDYZaAQIBHQkECwEYAS0sAwECAwImAiILIyGDAgGCOgM3AxHCSXp/M4EBg?=
+ =?us-ascii?q?ygBgVTYSw2CWAELFAGBCi4BhT6CfyABhQJdGAFEhDgnGxuBcoEVgTuCLoEFg?=
+ =?us-ascii?q?RpCAoEjCgoBhAOCagSCInoSgVoeggFijm9IgQIcA1ksAVUTDQoLBwWBZgM1E?=
+ =?us-ascii?q?ioVbjIdgSM+FzVYGwYFgR2BKIQ3Ixk2fIEJXoErKmEBEheBCYIKAoJwggYCA?=
+ =?us-ascii?q?UlFDgkXCxgNSBEsNxQZBD0BbgeOUSCCFy0GAQEsAkwTARsPAQRLLBYHCBQRJ?=
+ =?us-ascii?q?xEGAicRkx0HAhKQDIIhgTWeaXEKKIN2jCGPPoV8GjOEBIFXkkCSUQuYfYJZi?=
+ =?us-ascii?q?zGECZEtMhhQhGmBaQE6gVlwFYMiCUoZD44qBAoLgRQBAoJJhAeBXcZVJzICC?=
+ =?us-ascii?q?QMvAQEHAgcBDAEDC4FokAABASYHgU8BAQ?=
+IronPort-Data: A9a23:AvyU2KiezRqb1KgJ4zlHIhzrX161MREKZh0ujC45NGQN5FlHY01je
+ htvWGyBO/yDamSnf91zaY6x8EhXu8CHmN9kHQBl/C5jFnhjpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeCULOZ82QsaDxMu/vS8EkHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUh1fQrG3hq0
+ 8BBKRIENVeHv8SMw5K0H7wEasQLdKEHPasWvnVmiDWcBvE8TNWbGePB5MRT23E7gcUm8fT2P
+ pVCL2ExKk2eJUQUaz/7C7pm9AusrnX8fjlRqUOcjaE2+GPUigd21dABNfKFI4TaFJQLzh3wS
+ mTu1lzLUyooPoSk+CfGwEuG3vXpunPrV9dHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QWJzO/Qpg2eHGVBFmQHY909v8hwTjsvv
+ rOUo+7U6fVUmOX9YRqgGn2891te5QB9wbc+WBI5
+IronPort-HdrOrdr: A9a23:Nzkwaqrm/Wz+fbsWX9lXa4oaV5oHeYIsimQD101hICG9vPb2qy
+ nIpoV+6faUskd1ZJhOo7G90cW7LE80lqQFg7X5Q43DYOCOggLBR+tfBODZrQEIdReTygck79
+ YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
+X-Talos-CUID: =?us-ascii?q?9a23=3AystUYGhm0RWA2zpccIcXEE1gUTJuS1LPkG3JB2m?=
+ =?us-ascii?q?EUGdLQebSTWe2wqBEnJ87?=
+X-Talos-MUID: 9a23:3L0Ylwkydpvmn3N6JAMsdnpLDPU52JakUHs8jNY0guPcLwpXayeS2WE=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,232,1779148800"; 
-   d="scan'208";a="818928362"
-Received: from alln-l-core-08.cisco.com ([173.36.16.145])
-  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:17:55 +0000
-Received: from sjc-ads-5471.cisco.com (sjc-ads-5471.cisco.com [10.28.23.235])
+   d="scan'208";a="810899683"
+Received: from alln-l-core-02.cisco.com ([173.36.16.139])
+  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 05:28:42 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-08.cisco.com (Postfix) with ESMTPS id AFBAD1802EB8A;
-	Thu, 20 Aug 2026 05:16:33 +0000 (GMT)
-Received: by sjc-ads-5471.cisco.com (Postfix, from userid 1887505)
-	id 18ED6CC12A6; Wed, 19 Aug 2026 22:16:33 -0700 (PDT)
-From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id 1288E180001BD;
+	Thu, 20 Aug 2026 05:28:42 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id 9D3BFCCA79B; Wed, 19 Aug 2026 22:28:41 -0700 (PDT)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com,
-	Hetvi Thakar <hthakar@cisco.com>
-Subject: [meta-python][scarthgap][PATCH 2/4] python3-ujson: Fix CVE-2026-32874
-Date: Wed, 19 Aug 2026 22:16:28 -0700
-Message-Id: <20260820051630.63383-2-hthakar@cisco.com>
+Cc: Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH] python3-httplib2: fix CVE-2026-59939
+Date: Wed, 19 Aug 2026 22:28:39 -0700
+Message-Id: <20260820052839.1468207-1-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260820051630.63383-1-hthakar@cisco.com>
-References: <20260820051630.63383-1-hthakar@cisco.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-5471.cisco.com [10.28.23.235];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.28.23.235, sjc-ads-5471.cisco.com
-X-Outbound-Node: alln-l-core-08.cisco.com
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: alln-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:21:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129376
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 05:28:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129377
 
-From: Hetvi Thakar <hthakar@cisco.com>
+From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-This patch applies the upstream fix referenced in [2], using the
-commit shown in [1].
+This patch applies the upstream fix for CVE-2026-59939 as referenced
+in [2], using the upstream commit identified in [1].
 
-[1] https://github.com/ultrajson/ultrajson/commit/4baeb950df780092bd3c89fc702a868e99a3a1d2
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-32874
+[1] https://github.com/httplib2/httplib2/commit/87581ad6cf752fe3da2090c59058261d2d00a427
+[2] https://github.com/httplib2/httplib2/security/advisories/GHSA-j5g9-f88f-gfj3
 
-Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python/python3-ujson/CVE-2026-32874.patch | 61 +++++++++++++++++++
- .../python/python3-ujson_5.9.0.bb             |  1 +
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-ujson/CVE-2026-32874.patch
+ .../python3-httplib2/CVE-2026-59939.patch     | 745 ++++++++++++++++++
+ .../python/python3-httplib2_0.22.0.bb         |   2 +
+ 2 files changed, 747 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-ujson/CVE-2026-32874.patch b/meta-python/recipes-devtools/python/python3-ujson/CVE-2026-32874.patch
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch b/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
 new file mode 100644
-index 0000000000..09730b9623
+index 0000000000..3b14162da3
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ujson/CVE-2026-32874.patch
-@@ -0,0 +1,61 @@
-+From cf988dbccb1b71cc1cb27c59ac73e09f3a68c3c1 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Br=C3=A9nainn=20Woodsend?= <bwoodsend@gmail.com>
-+Date: Wed, 10 Dec 2025 22:37:20 +0000
-+Subject: [PATCH] Fix memory leak parsing large integers
++++ b/meta-python/recipes-devtools/python/python3-httplib2/CVE-2026-59939.patch
+@@ -0,0 +1,745 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Sergey Shepelev <temotor@gmail.com>
++Date: Wed, 24 Jun 2026 12:34:50 +0300
++Subject: [PATCH] decompression limited by size and ratio; require python 3.8+
 +
-+CVE: CVE-2026-32874
-+Upstream-Status: Backport [https://github.com/ultrajson/ultrajson/commit/4baeb950df780092bd3c89fc702a868e99a3a1d2]
++CVE: CVE-2026-59939
++Upstream-Status: Backport [https://github.com/httplib2/httplib2/commit/87581ad6cf752fe3da2090c59058261d2d00a427]
 +
 +Backport Changes:
-+- Adjusted source paths for ujson 5.9.0's pre-src-layout tree.
++- Place httplib2 sources under python3/httplib2 to match the
++  Scarthgap 0.22.0 source layout.
++- Cap each zlib decompression call with max_length derived from the
++  remaining hard and ratio allowance, requeue unconsumed_tail, and
++  enforce both limits immediately after each returned output chunk.
++- Reject empty gzip and deflate bodies through the existing
++  FailedToDecompressContent contract.
++- Add constrained-memory and empty encoded-body regression tests.
++- Keep Scarthgap's Python version metadata; the upstream Python 3.8
++  minimum is unrelated to the security fix.
++- Omit .github/workflows updates because those CI files are absent
++  from the extracted source and are not part of the security fix.
 +
-+(cherry picked from commit 4baeb950df780092bd3c89fc702a868e99a3a1d2)
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
++(cherry picked from commit 87581ad6cf752fe3da2090c59058261d2d00a427)
++Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ python/JSONtoObj.c  |  4 +++-
-+ tests/test_ujson.py | 14 ++++++++++++++
-+ 2 files changed, 17 insertions(+), 1 deletion(-)
++ README.md                    |  37 ++++++--
++ python3/httplib2/__init__.py |  71 +++++++++++---
++ python3/httplib2/decode.py   | 209 ++++++++++++++++++++++++++++++++++++++++
++ setup.cfg                    |   2 +-
++ tests/__init__.py            |   8 ++
++ tests/test_encoding.py       | 221 +++++++++++++++++++++++++++++++++++++++++--
++ 6 files changed, 517 insertions(+), 31 deletions(-)
 +
-+diff --git a/python/JSONtoObj.c b/python/JSONtoObj.c
-+index 208055c..93e87f3 100644
-+--- a/python/JSONtoObj.c
-++++ b/python/JSONtoObj.c
-+@@ -136,7 +136,9 @@ static JSOBJ Object_newIntegerFromString(void *prv, char *value, size_t length)
-+   char *buf = PyObject_Malloc(length + 1);
-+   memcpy(buf, value, length);
-+   buf[length] = '\0';
-+-  return PyLong_FromString(buf, NULL, 10);
-++  PyObject *ret = PyLong_FromString(buf, NULL, 10);
-++  PyObject_Free(buf);
-++  return ret;
-+ }
++diff --git a/README.md b/README.md
++index 6193699..99a0d3b 100644
++--- a/README.md
+++++ b/README.md
++@@ -10,13 +10,13 @@ If you want to help this project by bug report or code change, [contribution gui
 + 
-+ static JSOBJ Object_newDouble(void *prv, double value)
-+diff --git a/tests/test_ujson.py b/tests/test_ujson.py
-+index d24edb0..9ba6f55 100644
-+--- a/tests/test_ujson.py
-++++ b/tests/test_ujson.py
-+@@ -653,6 +653,20 @@ def test_encode_decode_big_int(i, mode):
-+             assert ujson.decode(json_string) == python_object
++ HTTPS support is only available if the socket module was
++ compiled with SSL support.
++-    
+++
++ ### Keep-Alive
++ 
++ Supports HTTP 1.1 Keep-Alive, keeping the socket open and
++ performing multiple requests over the same connection if
++ possible.
++-    
+++
++ ### Authentication
++ 
++ The following three types of HTTP Authentication are
++@@ -31,26 +31,26 @@ supported. These can be used over both HTTP and HTTPS.
++ The module can optionally operate with a private cache that
++ understands the Cache-Control: header and uses both the ETag
++ and Last-Modified cache validators.
++-    
+++
++ ### All Methods
++ 
++ The module can handle any HTTP request method, not just GET
++ and POST.
++-    
+++
++ ### Redirects
++ 
++ Automatically follows 3XX redirects on GETs.
++-    
+++
++ ### Compression
++ 
++ Handles both 'deflate' and 'gzip' types of compression.
++-    
+++
++ ### Lost update support
++ 
++ Automatically adds back ETags into PUT requests to resources
++ we have already cached. This implements Section 3.2 of
++ Detecting the Lost Update Problem Using Unreserved Checkout.
++-    
+++
++ ### Unit Tested
++ 
++ A large and growing set of unit tests.
++@@ -113,3 +113,26 @@ More example usage can be found at:
++ 
++  * https://github.com/httplib2/httplib2/wiki/Examples
++  * https://github.com/httplib2/httplib2/wiki/Examples-Python3
+++
+++
+++### Decompression Limits
+++
+++To mitigate denial-of-service risks from maliciously crafted compressed responses, the library enforces configurable limits during decompression. Limits are checked in fixed order: **hard limit** → **safe limit** → **ratio**.
+++
+++- **hard limit**
+++  Absolute maximum decompressed output size (bytes). Exceeding it raises `DecodeLimitError`. Default: `10 GiB`.
+++- **safe limit**
+++  Output size below which the ratio check is skipped (avoids false positives on small payloads). Default: `10 MiB`.
+++- **ratio**
+++  Maximum allowed inflation factor (`output_bytes ÷ consumed_input_bytes`). Once output exceeds `safe_limit`, the ratio is enforced. Default: `100`.
+++- **chunk size**
+++  Internal processing chunk size in bytes (affects granularity of limit checks). Default: `65536` (64 KiB).
+++
+++Configuration priority (highest first):
+++1. `Http()` constructor arguments: `decode_limit_hard`, `decode_limit_safe`, `decode_limit_ratio`, `decode_limit_chunk`
+++2. Environment variables: `httplib2_decode_limit_hard`, `httplib2_decode_limit_safe`, `httplib2_decode_limit_ratio`, `httplib2_decode_limit_chunk` (case-insensitive, uppercase also accepted)
+++3. Library defaults (listed above)
+++
+++Example:
+++```python
+++h = Http(decode_limit_hard=50_000_000, decode_limit_ratio=50)
++diff --git a/python3/httplib2/__init__.py b/python3/httplib2/__init__.py
++index 723a63c..ca2868a 100644
++--- a/python3/httplib2/__init__.py
+++++ b/python3/httplib2/__init__.py
++@@ -1,6 +1,10 @@
++ # -*- coding: utf-8 -*-
++ """Small, fast HTTP client library for Python."""
++ 
+++import functools
+++
+++from httplib2.decode import ZlibDecoder, DecoderProtocol, LimitDecoder, DeflateDecoder
+++
++ __author__ = "Joe Gregorio (joe@bitworking.org)"
++ __copyright__ = "Copyright 2006, Joe Gregorio"
++ __contributors__ = [
++@@ -386,26 +390,27 @@ def _entry_disposition(response_headers, request_headers):
++     return retval
 + 
 + 
-++@pytest.mark.xfail(
-++    sys.implementation.name == "pypy",
-++    reason="PyPy's PyNumber_ToBase ignores sys.get_int_max_str_digits()",
++-def _decompressContent(response, new_content):
+++def _decompressContent(response, new_content, limit_kwargs):
++     content = new_content
+++    encoding_header = "content-encoding"
+++    encoding = response.get(encoding_header, None)
+++    limit_wrap = functools.partial(LimitDecoder, **limit_kwargs)
++     try:
++-        encoding = response.get("content-encoding", None)
++-        if encoding in ["gzip", "deflate"]:
++-            if encoding == "gzip":
++-                content = gzip.GzipFile(fileobj=io.BytesIO(new_content)).read()
++-            if encoding == "deflate":
++-                try:
++-                    content = zlib.decompress(content, zlib.MAX_WBITS)
++-                except (IOError, zlib.error):
++-                    content = zlib.decompress(content, -zlib.MAX_WBITS)
+++        if encoding in ["gzip", "deflate", "zlib"]:
+++            if not new_content:
+++                raise zlib.error("empty compressed response")
+++            try:
+++                content = limit_wrap(ZlibDecoder()).consume_bytes(new_content, 0)
+++            except (IOError, zlib.error):
+++                content = limit_wrap(DeflateDecoder()).consume_bytes(new_content, 0)
++             response["content-length"] = str(len(content))
++             # Record the historical presence of the encoding in a way the won't interfere.
++-            response["-content-encoding"] = response["content-encoding"]
++-            del response["content-encoding"]
+++            response["-content-encoding"] = response.pop(encoding_header)
++     except (IOError, zlib.error):
++         content = ""
++         raise FailedToDecompressContent(
++-            _("Content purported to be compressed with %s but failed to decompress.") % response.get("content-encoding"),
+++            _("Content purported to be compressed with %s but failed to decompress.")
+++            % encoding,
++             response,
++             content,
++         )
++@@ -1232,6 +1237,10 @@ class Http(object):
++         disable_ssl_certificate_validation=False,
++         tls_maximum_version=None,
++         tls_minimum_version=None,
+++        decode_limit_hard=None,
+++        decode_limit_safe=None,
+++        decode_limit_ratio=None,
+++        decode_limit_chunk=None,
++     ):
++         """If 'cache' is a string then it is used as a directory name for
++         a disk cache. Otherwise it must be an object that supports the
++@@ -1258,6 +1267,11 @@ class Http(object):
++ 
++         tls_maximum_version / tls_minimum_version require Python 3.7+ /
++         OpenSSL 1.1.0g+. A value of "TLSv1_3" requires OpenSSL 1.1.1+.
+++
+++        `decode_limit_{hard,safe,ratio,chunk}` options configure `httplib2.decode.LimitDecoder` in attempt order:
+++          - Http() argument - top priority
+++          - environment httplib2_decode_limit_{hard,safe,ratio,chunk}
+++          - LimitDecoder defaults - least priority
++         """
++         self.proxy_info = proxy_info
++         self.ca_certs = ca_certs
++@@ -1306,6 +1320,22 @@ class Http(object):
++         # Keep Authorization: headers on a redirect.
++         self.forward_authorization_headers = False
++ 
+++        limit_kwargs = dict(
+++            hard_limit=try_value_or_env(
+++                int, decode_limit_hard, "httplib2_decode_limit_hard"
+++            ),
+++            safe_limit=try_value_or_env(
+++                int, decode_limit_safe, "httplib2_decode_limit_safe"
+++            ),
+++            ratio=try_value_or_env(
+++                float, decode_limit_ratio, "httplib2_decode_limit_ratio"
+++            ),
+++            chunk_size=try_value_or_env(
+++                int, decode_limit_chunk, "httplib2_decode_limit_chunk"
+++            ),
+++        )
+++        self.limit_kwargs = {k: v for k, v in limit_kwargs.items() if v is not None}
+++
++     def close(self):
++         """Close persistent connections, clear sensitive data.
++         Not thread-safe, requires external synchronization against concurrent requests.
++@@ -1425,7 +1455,7 @@ class Http(object):
++                     content = response.read()
++                 response = Response(response)
++                 if method != "HEAD":
++-                    content = _decompressContent(response, content)
+++                    content = _decompressContent(response, content, self.limit_kwargs)
++ 
++             break
++         return (response, content)
++@@ -1797,3 +1827,16 @@ class Response(dict):
++             return self
++         else:
++             raise AttributeError(name)
+++
+++
+++def try_value_or_env(to, value, env_key, default=None):
+++    candidates = (value, os.environ.get(env_key), os.environ.get(env_key.upper()))
+++    # same as `to(x1) or to(x2) or to(x3)` except accepting falsey values like 0
+++    for x in candidates:
+++        if x is None:
+++            continue
+++        try:
+++            return to(x)
+++        except ValueError:
+++            pass
+++    return default
++diff --git a/python3/httplib2/decode.py b/python3/httplib2/decode.py
++new file mode 100644
++index 0000000..588cf42
++--- /dev/null
+++++ b/python3/httplib2/decode.py
++@@ -0,0 +1,209 @@
+++from typing import Protocol
+++import zlib
+++
+++
+++class DecodeRatioError(Exception):
+++    """Output-to-input amplification ratio exceeded the configured limit."""
+++
+++
+++class DecodeLimitError(Exception):
+++    """Total output length exceeded the hard limit."""
+++
+++
+++class DecoderProtocol(Protocol):
+++    @property
+++    def needs_input(self) -> bool:
+++        ...
+++
+++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
+++        ...
+++
+++    @property
+++    def unconsumed_tail(self) -> bytes:
+++        ...
+++
+++    def flush(self) -> bytes:
+++        ...
+++
+++    def consume_bytes(self, data: bytes, chunk_size: int = 64 << 10) -> bytes:
+++        out = bytearray()
+++        if not data:
+++            return self.flush()
+++        if chunk_size == 0:
+++            chunk_size = len(data)
+++        for i in range(0, len(data), chunk_size):
+++            chunk = data[i : i + chunk_size]
+++            out.extend(self.decode(chunk))
+++        out.extend(self.flush())
+++        return bytes(out)
+++
+++
+++class ZlibDecoder(DecoderProtocol):
+++    """
+++    Thin wrapper around zlib.Decompressor conforming to the Decoder interface.
+++
+++    When max_length caps output, zlib exposes input that still needs processing
+++    through unconsumed_tail.
+++    """
+++
+++    __slots__ = ("_decoder",)
+++
+++    WBITS_DEFLATE = -15
+++    WBITS_ZLIB = 15
+++    WBITS_GZIP = 15 | 16
+++    WBITS_AUTO_GZIP_ZLIB = 15 | 32  # but not deflate
+++
+++    def __init__(self, wbits: int = WBITS_AUTO_GZIP_ZLIB):
+++        self._decoder: zlib._Decompress | None = zlib.decompressobj(wbits)
+++
+++    @property
+++    def needs_input(self) -> bool:
+++        if self._decoder is None:
+++            raise RuntimeError("used after flush()")
+++        return not self._decoder.unconsumed_tail and not self._decoder.eof
+++
+++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
+++        if self._decoder is None:
+++            raise RuntimeError("used after flush()")
+++        return self._decoder.decompress(b, max_length)
+++
+++    @property
+++    def unconsumed_tail(self) -> bytes:
+++        if self._decoder is None:
+++            raise RuntimeError("used after flush()")
+++        return self._decoder.unconsumed_tail
+++
+++    def flush(self) -> bytes:
+++        if self._decoder is None:
+++            raise RuntimeError("used after flush()")
+++        result = self._decoder.flush()
+++        self._decoder = None
+++        return result
+++
+++
+++def DeflateDecoder() -> ZlibDecoder:
+++    return ZlibDecoder(ZlibDecoder.WBITS_DEFLATE)
+++
+++
+++class LimitDecoder(DecoderProtocol):
+++    __slots__ = (
+++        "_decoder",
+++        "_ratio",
+++        "_chunk_size",
+++        "_safe_limit",
+++        "_hard_limit",
+++        "_consumed_length",
+++        "_output_length",
+++        "_input_buffer",
+++        "_flushed",
+++    )
+++
+++    def __init__(
+++        self,
+++        decoder: DecoderProtocol,
+++        ratio: float = 100,
+++        chunk_size: int = 64 << 10,
+++        safe_limit: int = 10 << 20,
+++        hard_limit: int = 10 << 30,
+++    ) -> None:
+++        if ratio < 0:
+++            raise ValueError(f"LimitDecoder() ratio={ratio} expected >= 0")
+++        if chunk_size < 0:
+++            raise ValueError(f"LimitDecoder() chunk_size={chunk_size} expected >= 0")
+++        if safe_limit < 0:
+++            raise ValueError(f"LimitDecoder() safe_limit={safe_limit} expected >= 0")
+++        if hard_limit < 0:
+++            raise ValueError(f"LimitDecoder() safe_limit={safe_limit} expected >= 0")
+++
+++        self._decoder: DecoderProtocol = decoder
+++        self._ratio: float = ratio
+++        self._chunk_size: int = chunk_size
+++        self._safe_limit: int = safe_limit
+++        self._hard_limit: int = hard_limit
+++        self._consumed_length: int = 0
+++        self._output_length: int = 0
+++        self._input_buffer: bytearray = bytearray()
+++        self._flushed: bool = False
+++
+++    def _check_limits(self) -> None:
+++        if (self._hard_limit > 0) and (self._output_length > self._hard_limit):
+++            raise DecodeLimitError(f"Output length {self._output_length} exceeds hard limit {self._hard_limit}")
+++        if (self._safe_limit > 0) and (self._output_length < self._safe_limit):
+++            return
+++        if (self._ratio > 0) and (self._output_length > self._consumed_length * self._ratio):
+++            actual_ratio = self._output_length / self._consumed_length if self._consumed_length > 0 else float("inf")
+++            raise DecodeRatioError(
+++                f"Amplification ratio {actual_ratio:.1f} ({self._output_length}/{self._consumed_length})"
+++                f" exceeds limit {self._ratio}"
+++            )
+++
+++    def _decode_max_length(self, input_length: int) -> int:
+++        limits = []
+++        if self._hard_limit > 0:
+++            limits.append(self._hard_limit)
+++        if self._ratio > 0:
+++            ratio_limit = int(
+++                (self._consumed_length + input_length) * self._ratio
+++            )
+++            if self._safe_limit > 0:
+++                ratio_limit = max(ratio_limit, self._safe_limit - 1)
+++            limits.append(ratio_limit)
+++        if not limits:
+++            return 0
+++        return max(1, min(limits) - self._output_length + 1)
+++
+++    @property
+++    def needs_input(self) -> bool:
+++        return self._decoder.needs_input
+++
+++    def decode(self, b: bytes, max_length: int = 0) -> bytes:
+++        if self._flushed:
+++            raise RuntimeError("decode() called after flush()")
+++        output = self._pump(b)
+++        return bytes(output)
+++
+++    def flush(self) -> bytes:
+++        if self._flushed:
+++            raise RuntimeError("flush() called more than once")
+++        self._flushed = True
+++
+++        output = self._pump(b"")
+++
+++        data = self._decoder.flush()
+++        output.extend(data)
+++        self._output_length += len(data)
+++        self._check_limits()
+++
+++        return bytes(output)
+++
+++    def _pump(self, b: bytes) -> bytearray:
+++        self._input_buffer.extend(b)
+++
+++        output = bytearray()
+++        drain = False
+++        while True:
+++            if self._input_buffer:
+++                chunk = bytes(self._input_buffer[: self._chunk_size])
+++                del self._input_buffer[: self._chunk_size]
+++            elif drain:
+++                chunk = b""
+++            else:
+++                break
+++
+++            max_length = self._decode_max_length(len(chunk))
+++            data = self._decoder.decode(chunk, max_length)
+++            tail = self._decoder.unconsumed_tail
+++            consumed = len(chunk) - len(tail)
+++            self._consumed_length += consumed
+++            if tail:
+++                self._input_buffer[:0] = tail
+++
+++            output.extend(data)
+++            self._output_length += len(data)
+++            self._check_limits()
+++
+++            drain = bool(max_length and len(data) == max_length)
+++            if not data and not consumed and not tail:
+++                break
+++
+++        return output
++diff --git a/setup.cfg b/setup.cfg
++index fa392d1..93641b0 100644
++--- a/setup.cfg
+++++ b/setup.cfg
++@@ -2,7 +2,7 @@
++ 
++ [flake8]
++ exclude = *.egg*,.env,.git,.tox,_*,build*,dist*,venv*,python2/,python3/
++-ignore = E261,E731,W503
+++ignore = E203,E261,E731,W503
++ max-line-length = 121
++ 
++ [tool:pytest]
++diff --git a/tests/__init__.py b/tests/__init__.py
++index b5c76a2..d0f4538 100644
++--- a/tests/__init__.py
+++++ b/tests/__init__.py
++@@ -818,3 +818,11 @@ def rebuild_uri(old, scheme=_missing, netloc=_missing, host=_missing, port=_miss
++         path = u.path
++     new = (scheme, netloc, path) + u[3:]
++     return urllib.parse.urlunsplit(new)
+++
+++
+++# remove when python version is raised to 3.9+
+++try:
+++    randbytes = random.randbytes
+++except AttributeError:
+++    def randbytes(n):
+++        return random.getrandbits(n * 8).to_bytes(n, "little")
++diff --git a/tests/test_encoding.py b/tests/test_encoding.py
++index 1d9770a..7431e24 100644
++--- a/tests/test_encoding.py
+++++ b/tests/test_encoding.py
++@@ -1,13 +1,17 @@
+++import subprocess
+++import sys
+++
+++import pytest
+++
++ import httplib2
+++from httplib2.decode import LimitDecoder, ZlibDecoder, DecodeLimitError, DecodeRatioError
++ import tests
++ 
++ 
++ def test_gzip_head():
++     # Test that we don't try to decompress a HEAD response
++     http = httplib2.Http()
++-    response = tests.http_response_bytes(
++-        headers={"content-encoding": "gzip", "content-length": 42}
++-    )
+++    response = tests.http_response_bytes(headers={"content-encoding": "gzip", "content-length": 42})
++     with tests.server_const_bytes(response) as uri:
++         response, content = http.request(uri, "HEAD")
++         assert response.status == 200
++@@ -48,9 +52,7 @@ def test_gzip_malformed_response():
++     http = httplib2.Http()
++     # Test that we raise a good exception when the gzip fails
++     http.force_exception_to_status_code = False
++-    response = tests.http_response_bytes(
++-        headers={"content-encoding": "gzip"}, body=b"obviously not compressed"
++-    )
+++    response = tests.http_response_bytes(headers={"content-encoding": "gzip"}, body=b"obviously not compressed")
++     with tests.server_const_bytes(response, request_count=2) as uri:
++         with tests.assert_raises(httplib2.FailedToDecompressContent):
++             http.request(uri, "GET")
++@@ -82,9 +84,7 @@ def test_deflate_malformed_response():
++     # Test that we raise a good exception when the deflate fails
++     http = httplib2.Http()
++     http.force_exception_to_status_code = False
++-    response = tests.http_response_bytes(
++-        headers={"content-encoding": "deflate"}, body=b"obviously not compressed"
++-    )
+++    response = tests.http_response_bytes(headers={"content-encoding": "deflate"}, body=b"obviously not compressed")
++     with tests.server_const_bytes(response, request_count=2) as uri:
++         with tests.assert_raises(httplib2.FailedToDecompressContent):
++             http.request(uri, "GET")
++@@ -97,6 +97,18 @@ def test_deflate_malformed_response():
++         assert response.reason.startswith("Content purported")
++ 
++ 
+++@pytest.mark.parametrize("encoding", ("gzip", "deflate"))
+++def test_empty_encoded_response(encoding):
+++    http = httplib2.Http()
+++    http.force_exception_to_status_code = False
+++    response = tests.http_response_bytes(
+++        headers={"content-encoding": encoding}, body=b""
+++    )
+++    with tests.server_const_bytes(response) as uri:
+++        with tests.assert_raises(httplib2.FailedToDecompressContent):
+++            http.request(uri, "GET")
+++
+++
++ def test_zlib_get():
++     # Test that we support zlib compression
++     http = httplib2.Http()
++@@ -110,3 +122,194 @@ def test_zlib_get():
++         assert "content-encoding" not in response
++         assert int(response["content-length"]) == len(b"properly compressed")
++         assert content == b"properly compressed"
+++
+++
+++def test_gzip_excess_ratio():
+++    http = httplib2.Http()
+++    original = b"\x00" * (50 << 20)  # 50 MiB to ~50 KiB
+++    response = tests.http_response_bytes(
+++        headers={"content-encoding": "gzip"},
+++        body=tests.gzip_compress(original),
+++    )
+++    with tests.server_const_bytes(response) as uri:
+++        try:
+++            http.request(uri, "GET")
+++            assert False, "expected DecodeRatioError"
+++        except DecodeRatioError:
+++            pass
+++
+++
+++@pytest.mark.parametrize("safe_limit", (0, 1000, 20000))
+++def test_limitdecoder_normal_decompression_no_limits(safe_limit):
+++    """Standard decompression of random data should pass with any safe_limit"""
+++    original = tests.randbytes(10 << 10)
+++    compressed = tests.zlib_compress(original)
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=10,
+++        safe_limit=safe_limit,
+++        hard_limit=len(original) + 1,
+++    )
+++    result = decoder.consume_bytes(compressed)
+++    assert result == original
+++    assert decoder._output_length == len(original)
+++
+++
+++def test_limitdecoder_normal_rechunking():
+++    """Passing a massive single chunk should be re-chunked internally without error"""
+++    original = b"\x00" * (10 << 20)
+++    compressed = tests.zlib_compress(original)
+++    assert len(compressed) > 2000
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=2000,
+++        chunk_size=512,
+++        safe_limit=0,
+++        hard_limit=len(original) + 1,
+++    )
+++    result = decoder.consume_bytes(compressed, chunk_size=0)
+++    assert result == original
+++    assert decoder._consumed_length == len(compressed)
+++
+++
+++def test_limitdecoder_amplification_ratio_exceeded():
+++    """High ratio should trigger DecodeRatioError above safe_limit"""
+++    original = b"\x00" * (1 << 20)
+++    compressed = tests.zlib_compress(original)
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=10,
+++        chunk_size=512,
+++        safe_limit=0,
+++        hard_limit=len(original) + 1,
+++    )
+++    try:
+++        decoder.consume_bytes(compressed, chunk_size=0)
+++        assert False, "expected DecodeRatioError"
+++    except DecodeRatioError:
+++        pass
+++    assert 0 < decoder._consumed_length <= 512
+++
+++
+++@pytest.mark.parametrize("ratio", (0, 10, 1000))
+++def test_limitdecoder_hard_limit_exceeded(ratio):
+++    """Output exceeding hard_limit must trigger DecodeLimitError regardless of ratio"""
+++    original = b"\x00" * (10 << 10)
+++    compressed = tests.zlib_compress(original)
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=ratio,
+++        safe_limit=len(original) + 1,
+++        hard_limit=len(original) - 1,
+++    )
+++    try:
+++        decoder.consume_bytes(compressed)
+++        assert False, "expected DecodeLimitError"
+++    except DecodeLimitError:
+++        pass
+++
+++
+++def test_limitdecoder_bounds_allocation_before_hard_limit():
+++    code = r"""
+++import os
+++import resource
+++import zlib
+++
+++from httplib2.decode import DecodeLimitError, DecodeRatioError, LimitDecoder
+++from httplib2.decode import ZlibDecoder
+++
+++compressor = zlib.compressobj(wbits=31)
+++compressed = b"".join(
+++    compressor.compress(b"\x00" * (1 << 20)) for _ in range(50)
 ++)
-++def test_encode_too_big_int_error():
-++    with pytest.raises(ValueError, match="integer string conversion"):
-++        ujson.dumps(pow(10, 10_000))
+++compressed += compressor.flush()
+++page_size = os.sysconf("SC_PAGE_SIZE")
+++with open("/proc/self/statm", "r") as statm:
+++    current_vms = int(statm.read().split()[0]) * page_size
+++_, hard = resource.getrlimit(resource.RLIMIT_AS)
+++resource.setrlimit(resource.RLIMIT_AS, (current_vms + (30 << 20), hard))
+++decoder = LimitDecoder(
+++    ZlibDecoder(), ratio=100, safe_limit=0, hard_limit=1 << 20
+++)
+++try:
+++    decoder.consume_bytes(compressed, chunk_size=0)
+++except (DecodeLimitError, DecodeRatioError):
+++    pass
+++except MemoryError:
+++    raise AssertionError("decompressor allocated past the configured limit")
+++else:
+++    raise AssertionError("expected a decompression limit error")
+++"""
+++    result = subprocess.run(
+++        [sys.executable, "-c", code], capture_output=True, text=True
+++    )
+++    assert result.returncode == 0, result.stderr
 ++
 ++
-++def test_decode_too_big_int_error():
-++    with pytest.raises(ValueError, match="integer string conversion"):
-++        ujson.loads("9" * 10_000)
+++@pytest.mark.parametrize("ratio", (0, 10, 1000))
+++def test_limitdecoder_safe_limit_bypass(ratio):
+++    """Any ratio allowed if total output < safe_limit"""
+++    original = b"\x00" * (10 << 10)
+++    compressed = tests.zlib_compress(original)
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=ratio,
+++        safe_limit=len(original) + 1,
+++        hard_limit=len(original) + 1,
+++    )
+++    result = decoder.consume_bytes(compressed)
+++    assert result == original
+++    assert decoder._output_length == len(original)
 ++
 ++
-+ @pytest.mark.parametrize(
-+     "test_input, expected",
-+     [
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_5.9.0.bb b/meta-python/recipes-devtools/python/python3-ujson_5.9.0.bb
-index c6b69790e8..8b970ee564 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_5.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_5.9.0.bb
-@@ -12,6 +12,7 @@ SRC_URI += " \
-     file://run-ptest \
-     file://0001-setup.py-Do-not-strip-debugging-symbols.patch \
-     file://CVE-2026-32875.patch \
-+    file://CVE-2026-32874.patch \
- "
+++def test_limitdecoder_single_byte_feeding():
+++    """Feeding compressed data 1 byte at a time should still decode correctly"""
+++    original = tests.randbytes(10 << 10)
+++    compressed = tests.zlib_compress(original)
+++
+++    decoder = LimitDecoder(
+++        ZlibDecoder(),
+++        ratio=10,
+++        safe_limit=5 << 10,
+++        hard_limit=len(original) + 1,
+++    )
+++    result = decoder.consume_bytes(compressed, chunk_size=1)
+++    assert result == original
+++
+++
+++def test_limitdecoder_invalid_argument():
+++    checks = (
+++        ("ratio", dict(ratio=-1)),
+++        ("chunk_size", dict(chunk_size=-1)),
+++        ("safe_limit", dict(safe_limit=-1)),
+++        ("hard_limit", dict(hard_limit=-1)),
+++    )
+++    for name, check in checks:
+++        zd = ZlibDecoder()
+++        try:
+++            LimitDecoder(zd, **check)
+++            assert False, f"check={name} expected ValueError"
+++        except ValueError as e:
+++            assert "expected >= 0" in str(e).lower(), str(e)
+++
+++
+++def test_zlibdecoder_invalid_after_flush():
+++    checks = (
+++        ("needs_input", lambda d: d.needs_input),
+++        ("decode", lambda d: d.decode(b"")),
+++        ("flush", lambda d: d.flush()),
+++    )
+++    for name, check in checks:
+++        d = ZlibDecoder()
+++        d.decode(tests.zlib_compress(b""))
+++        d.flush()
+++        try:
+++            check(d)
+++            assert False, f"check={name} expected RuntimeError"
+++        except RuntimeError as e:
+++            assert "used after flush" in str(e).lower(), str(e)
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
+index 9318ad9182..db7477fab2 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.22.0.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
  
- DEPENDS += "python3-setuptools-scm-native"
+ SRC_URI[sha256sum] = "d7a10bc5ef5ab08322488bde8c726eeee5c8618723fdb399597ec58f3d82df81"
+ 
++SRC_URI += "file://CVE-2026-59939.patch"
++
+ inherit pypi python_setuptools_build_meta
+ 
+ RDEPENDS:${PN} += "\
 -- 
 2.35.6
 
