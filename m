@@ -2,145 +2,209 @@ Return-Path: <hjadon@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 137DBC5DF81
-	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 12:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B3A5C5DF81
+	for <webhook@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:12 +0000 (UTC)
 Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6216.1787229582913784770
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6654.1787231046797490275
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2026 05:39:43 -0700
+ Thu, 20 Aug 2026 06:04:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=i4Kprf0x;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ljFrdTi/;
  spf=pass (domain: cisco.com, ip: 173.37.142.95, mailfrom: hjadon@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=2629; q=dns/txt;
-  s=iport01; t=1787229582; x=1788439182;
+  d=cisco.com; i=@cisco.com; l=4969; q=dns/txt;
+  s=iport01; t=1787231046; x=1788440646;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=KWl/3SqGAeoYVjus8bLSKdDzHcJvOjHREUJZZCaRVD4=;
-  b=i4Kprf0xhbQpNA5uU312mpJvhtudcb6rcUDn7pWUqKpNqaelViQRWD3d
-   r/ly0FwnjMvxlOvxBzKDYQx0Mk70Jf0d4LsJTqdlZ5gezJ/2DIUdcHxSe
-   tPoFMxtAd70Dxe2Z1OYlHFezVVETYaFiC9ieA+BMe02ezrwWwTKCI9aP/
-   MCRE4BgNLmsJtHPKBXnPKow9gCCjQeOD1kX+24ryORcF4cYpTm4Ks8DYy
-   xRNrb7s72bULwK4TVS5aUM4cR3P4L2u3wUd16ylEAwpG5fRbWss8ujcnJ
-   MSW51OjUeVm5xukR0t+2Kxc9enf80l45crWpzFCB3d2WygKKUoP25T46e
-   g==;
-X-CSE-ConnectionGUID: YM/atvyIQPK7Fu7x8etGmw==
-X-CSE-MsgGUID: N7Vuy+tNTSquUvJ5sAl7Rw==
-X-IPAS-Result: =?us-ascii?q?A0D2AgCr9IZq/4wQJK1aglmCV3ReQ0mTWQFPgiGeHoF+D?=
- =?us-ascii?q?wEBAQ9EDQQBAZJyAiY2Bw4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
- =?us-ascii?q?Q4Thk8NhxMBGAFdXESDAgGCdAMRwkqCLIEBgygBgVTbMAELFAGBOIU/iCKFc?=
- =?us-ascii?q?icbG4FyhH6CYQQYghOFeASCIoEMgXiRUkiBHgNZLAFVEw0KCwcFgWYDNRIqF?=
- =?us-ascii?q?W4yHYEjPheBDRsGBYEdgSiENyMZNnyBCV6BKypiEheBCYIKAoJwggYCAUlFD?=
- =?us-ascii?q?gkXCxgNSBEsNxQZBD5uB45RIIJKAT1RASsFgRZiQKVloQ8KKIN2jCGIBAeNL?=
- =?us-ascii?q?xozqUaBJpkIjgqWUIRpgW8OJ4FZcBWDIglKGQ+XNoFdxUknMgIJMgIHAgcOA?=
- =?us-ascii?q?wuGS40bAQE?=
-IronPort-Data: A9a23:IlsHOagG+frFs1Bl6Jxt8QLqX161NxEKZh0ujC45NGQN5FlHY01je
- htvDGuPaaqKZWHxetsnOoXjoUkOu5LTnYNqSgdtrno3HntjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeCULOZ82QsaDxMu/jb8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUp36F+HX9f1
- MUgC28jc0+T1++q77ekH7wEasQLdKEHPasWvnVmiDWcBvE8TNWbGOPB5MRT23E7gcUm8fT2P
- pVCL2ExKk2eJUQTYj/7C7pm9Ausrnn9ejFfrnqepLE85C7YywkZPL3FYIOII4fQFJ4E9qqej
- kSZwXnoQQ08COeG1Aeb0C+3r+uQpzyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBfCDVAc9ch8sQxQFTGy
- 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
-IronPort-HdrOrdr: A9a23:1sGV1q6IvBgwj+8FlgPXwPjXdLJyesId70hD6qkXc202TiX2ra
- 6TdZgguCMc6wxhO03I5+rgBEDoexq1nvRICOIqUotKMjOLhILRFuFfxLqn5SH8ECvj8eMY/6
- Jhf69iTODUNzFB/KPHCM3SKadG/DFBm5rY4dvj8w==
-X-Talos-CUID: 9a23:Yc7aZ2xz3INfM2ixZA0OBgUlP4csbmPM7U7oABCWFDl5GLCJZlqPrfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3A3CtW/AxpjBHjK792T8Oc6iYVWQeaqILxNl0c0ok?=
- =?us-ascii?q?gh/KdKBFuGWqGpTDoeJByfw=3D=3D?=
+  bh=K1YpOKu6N5JmdyJmhBn7MmAbPJxNBNzhcjLt6ySWNKM=;
+  b=ljFrdTi/RjuQYyjEj/rSO9YMIqa/v4I+DKmMsqdatIDXveII4Q8JAqZC
+   yDlzBLNDBXaIW5Vh0KoxD+NjEW+lSYg/8agDLF6y334ee9wtD0HU59BSx
+   R/967zZQW5VSFxbix5PeWec5MpS2DzJ+MABWNQrdRatBOg/oVxQsiuMRy
+   8cuPZZE6CX2O7Uxvgc0MFNMquVC5jN7EWtQ9V093uRP/4jGDvxh1FmBBD
+   7AY6qxhdD4o+BUtx74Cf3hV9p+pAFQDp210ZhUSKmWEthJ5/sRRUv0nRd
+   xkDR2N1Nz808oAonSrLp9JvTwrTmJInQhFoyg9qyEuctCng/zctXCN+aJ
+   Q==;
+X-CSE-ConnectionGUID: 9W+4xE7ZSRO1xzkciEZcWQ==
+X-CSE-MsgGUID: mJVwKUMFR3CXwkxsabLSBQ==
+X-IPAS-Result: =?us-ascii?q?A0BFAgCk+oZq/5AQJK1aHgEBCxIMggULgld0XkNJlCmCI?=
+ =?us-ascii?q?YtnkjeBfg8BAQEPRA0EAQGEP0YCjWsCJjQJDgECBAMCAwEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?wEBBQEBAQIBBwWBDhOGTw2GWgE4ARgBGz4DAQJPCyMhgwIBgjoDNwMRwjGCL?=
+ =?us-ascii?q?IEBgygBgVTYSw2CWAELFAGBOIU/gn+FI10ZhHwnGxuBcoR+HoIBQgKIJQSCD?=
+ =?us-ascii?q?RV6EoFaHoJjg0iLJ0iBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBDRsGB?=
+ =?us-ascii?q?YEdgSiENyMZNnyBCV6BKypiEheBCYIKAoJwggYCAUlFDgkXCxgNSBEsNxQZB?=
+ =?us-ascii?q?D5uB45RIIJKAYEECgErggM4kzCSN6AecQoog3aMIY8+hXwaM4QEgVelEZkIg?=
+ =?us-ascii?q?lmIXoJThAmRd1CEaYFoPIFZcBWDIglKGQ+SI8w5JzICCTICBwIHDgMLk2YBA?=
+ =?us-ascii?q?Q?=
+IronPort-Data: A9a23:P2+7Xq/SdQveDj+99DlXDrUD13+TJUtcMsCJ2f8bNWPcYEJGY0x3n
+ zdNWmuEOveKZWX2eo90a4nk/U5SsJeEy9diSQNprX9EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmE4EzrauS9xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mvyyHjEAX9gWAsYjhMs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2lnAs5E6ssoM1p00
+ qUIOjMGbz2xjN2PlefTpulE3qzPLeHiOIcZ/3UlxjbDALN+HtbIQr7B4plT2zJYasJmRKmFI
+ ZFHL2MxKk2cP3WjOX9PYH46tOeqj3X4dRVTqUmeouw85G27IAlZgOGwaYeLI4LWLSlTtkO6m
+ H3lwkHXOEoxBMOc2SGM+FaXrNaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl7GQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:z0O3Xapj3MHikoTiE1k21tgaV5obeYIsimQD101hICG9Ffbo9f
+ xG88506faZslsssRIb6LO90de7IE80nKQdieJ6AV7IZmbbUQWTQL2KlbGD/xTQXwvj6+Vaya
+ BsN4J6CNH2EBxGqPyS2njcLz7lq+P3l5xBQozlvhNQcT0=
+X-Talos-CUID: 9a23:fFSHU2P9qaBbBu5DCRYkqF45RfIeSFqE3GXTKE6VO21WcejA
+X-Talos-MUID: 9a23:ziQSgwtPdIvJW1bvcs2ngRNcK+RVxoqUU2s9jpYWoMCOERdaAmLI
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,233,1779148800"; 
-   d="scan'208";a="815132939"
-Received: from alln-l-core-03.cisco.com ([173.36.16.140])
-  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 12:39:41 +0000
+   d="scan'208";a="815156164"
+Received: from alln-l-core-07.cisco.com ([173.36.16.144])
+  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 20 Aug 2026 13:04:06 +0000
 Received: from sjc-ads-21441.cisco.com (sjc-ads-21441.cisco.com [10.128.164.182])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-03.cisco.com (Postfix) with ESMTPS id BFAE0180001E5
-	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 12:39:41 +0000 (GMT)
+	by alln-l-core-07.cisco.com (Postfix) with ESMTPS id D6492180001C3
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 13:04:05 +0000 (GMT)
 Received: by sjc-ads-21441.cisco.com (Postfix, from userid 1879343)
-	id 4DAA8CC1611; Thu, 20 Aug 2026 05:39:41 -0700 (PDT)
+	id 74B0DCC1611; Thu, 20 Aug 2026 06:04:05 -0700 (PDT)
 From: "Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hjadon@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][master][PATCH] samba, libldb: add package conflicts
-Date: Thu, 20 Aug 2026 05:39:32 -0700
-Message-Id: <20260820123932.2335696-1-hjadon@cisco.com>
+Subject: [meta-oe][master][PATCH 1/2] suitesparse: fix CMake 4 configure failure
+Date: Thu, 20 Aug 2026 06:03:57 -0700
+Message-Id: <20260820130358.2402128-1-hjadon@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-21441.cisco.com [10.128.164.182];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.128.164.182, sjc-ads-21441.cisco.com
-X-Outbound-Node: alln-l-core-03.cisco.com
+X-Outbound-Node: alln-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 12:39:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129391
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 13:04:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129392
 
 From: Himanshu Jadon <hjadon@cisco.com>
 
-samba package also installs LDB command line tools and python LDB
-module. libldb package installs the same tools and pyldb module from
-standalone LDB source.
+SuiteSparse 5.10.1 still carries bundled CMake entry points with
+2.x minimum versions. CMake 4 rejects projects which request
+compatibility with versions older than 3.5, so configure fails before
+SuiteSparse can build.
 
-pkgdata shows the conflict clearly:
-
-  samba: /usr/bin/ldbadd
-  libldb: /usr/bin/ldbadd
-  samba-python3: site-packages/ldb.so
-  pyldb: site-packages/ldb.so
-
-So when both samba and libldb are added in same image, rootfs can fail
-because package manager sees same files from two different packages.
-Both package sets are not expected to be installed together.
-
-Add RCONFLICTS for samba/libldb and samba-python3/pyldb. This makes the
-conflict explicit during dependency resolution instead of failing later
-as file install conflict.
-
-Older meta-networking had similar conflict handling for samba/libldb in
-commit: https://git.openembedded.org/meta-openembedded/commit/?id=8e641e28f630dac61a03373ad70c72a2370ad11e
-
-This change adds the same handling again with current python3 package names.
+Backport the upstream SuiteSparse change which raises the bundled
+Mongoose, METIS and GKlib minimum version to 3.13. This version also
+reaches two bundled GraphBLAS CMake entry points with the same old
+minimum, so update those in the backport as well.
 
 Signed-off-by: Himanshu Jadon <hjadon@cisco.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.23.11.bb | 3 +++
- meta-networking/recipes-support/libldb/libldb_2.9.2.bb      | 2 ++
- 2 files changed, 5 insertions(+)
+ .../0004-Allow-build-with-CMake-4.patch       | 86 +++++++++++++++++++
+ .../suitesparse/suitesparse_5.10.1.bb         |  1 +
+ 2 files changed, 87 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/0004-Allow-build-with-CMake-4.patch
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-index 67c2646011..e498b30bcb 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.23.11.bb
-@@ -50,6 +50,9 @@ CVE_STATUS[CVE-2011-2411] = "not-applicable-platform: vulnerable only on HP NonS
- # remove default added RDEPENDS on perl
- RDEPENDS:${PN}:remove = "perl"
- 
-+RCONFLICTS:${PN} = "libldb"
-+RCONFLICTS:${PN}-python3 = "pyldb"
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/0004-Allow-build-with-CMake-4.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/0004-Allow-build-with-CMake-4.patch
+new file mode 100644
+index 0000000000..5fc3f666c3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/0004-Allow-build-with-CMake-4.patch
+@@ -0,0 +1,86 @@
++From 57e1fd1a4bf7878136a9f5070dadb310f233f489 Mon Sep 17 00:00:00 2001
++From: Tim Davis <DrTimothyAldenDavis@gmail.com>
++Date: Wed, 9 Mar 2022 10:33:33 -0600
++Subject: [PATCH] require cmake 3.13
 +
- DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libaio libpam libtasn1 libtasn1-native jansson libparse-yapp-perl-native gnutls cmocka ngtcp2 bison-native"
++Upstream-Status: Backport [https://github.com/DrTimothyAldenDavis/SuiteSparse/commit/ae0be0028e68d429feb565f093aec875235447cc]
++Backport-Changes:
++ * Also update the two bundled GraphBLAS CMake entry points reached by
++   the SuiteSparse 5.10.1 build.
++ * Preserve the METIS_VERSION value supplied by the existing OE patch
++   after CMake policy CMP0048 becomes NEW.
++
++(cherry picked from commit ae0be0028e68d429feb565f093aec875235447cc)
++Signed-off-by: Deepak Rathore <deeratho@cisco.com>
++---
++ GraphBLAS/CMakeLists.txt           | 2 +-
++ GraphBLAS/GraphBLAS/CMakeLists.txt | 2 +-
++ Mongoose/CMakeLists.txt            | 2 +-
++ metis-5.1.0/CMakeLists.txt         | 2 +-
++ metis-5.1.0/GKlib/CMakeLists.txt   | 2 +-
++ 5 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/GraphBLAS/CMakeLists.txt b/GraphBLAS/CMakeLists.txt
++index 7eb999189..eecfa0ac5 100644
++--- a/GraphBLAS/CMakeLists.txt
+++++ b/GraphBLAS/CMakeLists.txt
++@@ -12,7 +12,7 @@
++ #-------------------------------------------------------------------------------
++ 
++ # cmake 3.13 is preferred.
++-cmake_minimum_required ( VERSION 2.8.12 )
+++cmake_minimum_required ( VERSION 3.13 )
++ 
++ message ( STATUS "CMake version: " ${CMAKE_VERSION} )
++ 
++diff --git a/GraphBLAS/GraphBLAS/CMakeLists.txt b/GraphBLAS/GraphBLAS/CMakeLists.txt
++index f365251db..26928dc0a 100644
++--- a/GraphBLAS/GraphBLAS/CMakeLists.txt
+++++ b/GraphBLAS/GraphBLAS/CMakeLists.txt
++@@ -17,7 +17,7 @@
++ #-------------------------------------------------------------------------------
++ 
++ # cmake 3.13 is preferred.
++-cmake_minimum_required ( VERSION 2.8.12 )
+++cmake_minimum_required ( VERSION 3.13 )
++ 
++ message ( STATUS "CMake version: " ${CMAKE_VERSION} )
++ 
++diff --git a/Mongoose/CMakeLists.txt b/Mongoose/CMakeLists.txt
++index 91a7f70ef..361fa1239 100644
++--- a/Mongoose/CMakeLists.txt
+++++ b/Mongoose/CMakeLists.txt
++@@ -20,7 +20,7 @@
++ #
++ #   make distclean
++ 
++-cmake_minimum_required(VERSION 2.8)
+++cmake_minimum_required(VERSION 3.13)
++ include(CMake/cmake_colors.cmake)
++ 
++ if (POLICY CMP0048)
++diff --git a/metis-5.1.0/CMakeLists.txt b/metis-5.1.0/CMakeLists.txt
++index 318019bfc..1a72ed0d0 100644
++--- a/metis-5.1.0/CMakeLists.txt
+++++ b/metis-5.1.0/CMakeLists.txt
++@@ -1,5 +1,5 @@
++-cmake_minimum_required(VERSION 2.8)
++-project(METIS)
+++cmake_minimum_required(VERSION 3.13)
+++project(METIS VERSION ${METIS_VERSION})
++ 
++ set(GKLIB_PATH "GKlib" CACHE PATH "path to GKlib")
++ set(SHARED FALSE CACHE BOOL "build a shared library")
++diff --git a/metis-5.1.0/GKlib/CMakeLists.txt b/metis-5.1.0/GKlib/CMakeLists.txt
++index 67b600aa6..2f4ae75d7 100644
++--- a/metis-5.1.0/GKlib/CMakeLists.txt
+++++ b/metis-5.1.0/GKlib/CMakeLists.txt
++@@ -1,4 +1,4 @@
++-cmake_minimum_required(VERSION 2.8)
+++cmake_minimum_required(VERSION 3.13)
++ project(GKlib)
++ 
++ get_filename_component(abs "." ABSOLUTE)
++-- 
++2.35.6
++
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+index 377801579e..f655ac17fd 100644
+--- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+@@ -5,6 +5,7 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branc
+            file://0002-Preserve-links-when-installing-libmetis.patch \
+            file://0003-Add-version-information-to-libmetis.patch \
+            file://makefile-quoting.patch \
++           file://0004-Allow-build-with-CMake-4.patch \
+            "
+ SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
  
- inherit features_check
-diff --git a/meta-networking/recipes-support/libldb/libldb_2.9.2.bb b/meta-networking/recipes-support/libldb/libldb_2.9.2.bb
-index a212b6d2ef..c5699ad189 100644
---- a/meta-networking/recipes-support/libldb/libldb_2.9.2.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_2.9.2.bb
-@@ -5,6 +5,8 @@ LICENSE = "GPL-3.0-or-later AND LGPL-2.1-or-later AND LGPL-3.0-or-later"
- 
- DEPENDS += "libtdb libtalloc libtevent popt cmocka"
- RDEPENDS:pyldb += "python3"
-+RCONFLICTS:${PN} = "samba"
-+RCONFLICTS:pyldb = "samba-python3"
- 
- export PYTHONHASHSEED = "1"
- export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
 -- 
 2.35.6
 
