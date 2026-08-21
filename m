@@ -1,116 +1,162 @@
-Return-Path: <devanshp@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F38E2C5DF94
-	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 12:59:51 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6755.1787317186477579452
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7FA1C5DF98
+	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 16:41:55 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11529.1787330508949476022
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Aug 2026 05:59:46 -0700
+ Fri, 21 Aug 2026 09:41:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=TKqVrLTl;
- spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: devanshp@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=C6iS1rLu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3900e39d935so1132587a91.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 09:41:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1202; q=dns/txt;
-  s=iport01; t=1787317186; x=1788526786;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=bKxO1nJc+xKM3WaeAvKCh8b/3+S6GjgB2gthQ8A1yjE=;
-  b=TKqVrLTl5muvwhjW5w7LL1VDiq7z61Q9p3oyoVypGDLOtI0FXyQDT3Sd
-   TpyY/UypVqucpijl3/og4d+8DKP3EYmP+7Lb970dVLcmP2WKvzmaqQKr1
-   KA98ZQpMQDyEjhG8FxwhsiaFpJfxBUdW8zzdOXqU+RbLwY2S0G24MO3dP
-   K8QSMqILBjuhYylhawzc607lfutHXH+BX8eqAGBtwauTYJGC9s0JnGl8y
-   IagbJm/odbyOb594hdRPY1E//EreFXzzzHcOdEMu+Z9YjuKvffZ1MkL1N
-   VQMqCT0QFWmKq5Gr61G1URlfjYWwfPg44HXVq9PpX6WE3jSnh39oIyFtJ
-   A==;
-X-CSE-ConnectionGUID: P332O5goS9iRIO/4hDscyA==
-X-CSE-MsgGUID: pF+06YcJQPWyxQxz2Be5Ng==
-X-IPAS-Result: =?us-ascii?q?A0AxAwBhSohq/40QJK1RCYJZgld0XkNJk1kBowwPAQEBD?=
- =?us-ascii?q?zcaBAEBhQWNbgImNwYOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHBYEOE?=
- =?us-ascii?q?4Zchl02ARgBLTBcRIMCAYJ0AxHBHoIsgQGDKAGBVNsvAQsUAQWBM4U/iCJ2h?=
- =?us-ascii?q?HwnGxuBcoR+hAoNeYV4BIIigQyBeJFeSIEeA1ksAVUTDQoLBwWBZgM1EioVb?=
- =?us-ascii?q?jIdgSM+F4ENGwYFgR2BKIQ3Ixk2fIEJXoErKmEBEheBCYIKAoJfggUCAUlDD?=
- =?us-ascii?q?gc6CxgNSBEsNxQZBD5uB45aIIJGATxRllSReqEPCiiDdowhlToaM6psLphap?=
- =?us-ascii?q?FqEaYF+JoFZcBWDIglKGQ/eXCcyAj0HAgcPApFzgX4BAQ?=
-IronPort-Data: A9a23:5hEvCKp+sTzPn7wKpJhIS7/Gl4JeBmJJZBIvgKrLsJaIsI4StFCzt
- garIBmDMviKMDPyKNxwO4y18UMBu5fdxtVjS1E5+yBmEH8b8OPIVI+TRqvS04x+DSFioGZPt
- Zh2hgzodZhsJpPkjk7zdOCn9j8kif3gqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
- T/Ji5OZYgLNNwJcaDpOtfrT8ko35ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
- 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
- I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0t4sWjtpq
- PMfE2EMVDGkwL627KmwW8A506zPLOGzVG8eknhkyTecCbMtRorOBv2Wo9RZxzw3wMtJGJ4yZ
- eJANmEpN0qGOkMJYwtOYH49tL/Aan3XfzBGoVSOpbIf6GnIxws327/oWDbQUozTGZQNzhzF/
- goq+UzhLFJCau2U6wO9zWO8v//dxwn2BaQdQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
- lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymEzq7SpgLcDW8eQ3sZNJottdQ9Qnoh0
- Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
-IronPort-HdrOrdr: A9a23:CYEx6qDMOqncZWflHemA55DYdb4zR+YMi2TDGXofdfUzSL38qy
- nAppUmPHPP5Qr5O0tQ++xoRpPhfZq0z/cciuMs1NyZMjUO1lHFEGhK1/qH/9SZIVycysdtkY
- F9bqN5FNr8SXJ+jcr8/U2ENuxI+qjhzEht7t2utkuEimpRGsdd0zs=
-X-Talos-CUID: =?us-ascii?q?9a23=3AYhoqWmtdqZOd8MbYkRdtPHrA6IsdKSaH6yrfJHT?=
- =?us-ascii?q?pCFxIb/rJSXOL87JNxp8=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3Am2Ceug27vTHJ0ZwuJS5O8isrszUj+4rtUB48mrc?=
- =?us-ascii?q?/g/aVJRVgKW23gWmRTdpy?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.25,235,1779148800"; 
-   d="scan'208";a="814908250"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 21 Aug 2026 12:59:45 +0000
-Received: from sjc-ads-5197.cisco.com (sjc-ads-5197.cisco.com [10.28.35.211])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id 7514C18000B48;
-	Fri, 21 Aug 2026 12:59:45 +0000 (GMT)
-Received: by sjc-ads-5197.cisco.com (Postfix, from userid 1887503)
-	id 127AECC12A6; Fri, 21 Aug 2026 05:59:45 -0700 (PDT)
-From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
+        d=gmail.com; s=20251104; t=1787330508; x=1787935308; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=CKkMnKqv/e2ckagyFtsQ/MgUDry1xs3UGbrGL0BDwBE=;
+        b=C6iS1rLu1WwnqGHe1H36W5kR9fu3IKfBpB+cRXaHkgi+mPjB5UqXxi/Uene8Pd2D3T
+         dudGpn3gOO5vFLXnuXFB8Ue/pd9+oNVPabWNJZbjvJjxQEmgATxWwKjBW3Y4zv9vbKfP
+         sm8cC66dLfk0KSKM5ZKWoR30vYvSJAXq44lN7pIIkSypnYpuAmqodYj7URy1uMy89Eo2
+         9R8cZCI6yZ5xvL9IAXx58aCkwqeHo2+9LFLipLeLgZTDlTrzrlD8xxP0zAZKYt5+lEiP
+         nZb2EueNmo0HIG3EfH1p8GZQIVpDZP0S2ei5zj6AJayq/tv5K9neQ95F4N5VO0x6DoEj
+         KBVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787330508; x=1787935308;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CKkMnKqv/e2ckagyFtsQ/MgUDry1xs3UGbrGL0BDwBE=;
+        b=T3KZzxk0g97IYG0seXTfXIQWH3+mTPiwXXYGWa6L56IOHkdXaE8XfDzDmLSys5s0aG
+         JXhqyeo7LhDj4VKqexeRg6tI3qEY4Ut8NOJ3X77Ksr7XrN3m2Kd5jmQMQxSphsXoZRKL
+         lR7GSEk6u1jcF7p+dwK1+dfYvK3Pm4W5rJxfrq1a1TaM7Z9UsmToRH8SBEZ6DasGu4gU
+         xTPU1vW7oi9pPAMbxXQdNzfXAatB71TY3I7nIxazirrH21vqfb+vuB3t0H8VrHJ6SIEJ
+         matZJZU70RjsGj+vf2zy9ZVnEnBvmxxOWDwTWFYmn/aA8ZUBprftIXUholTj7BAZdAwu
+         ARgg==
+X-Gm-Message-State: AFuF++lb6x/aw52S5pnSKsVNi7UerYrsYfLuxXTY6ms4GQ69p/7gtFWa
+	9QS8I+9ZIroove3S+BpHCyCRfaB6OZzf6zySnpNIaiIXQy85sSJ79keW8L575NPL
+X-Gm-Gg: AR+sD137lAy6k6vufzrur3XzAUMGSMNWNTsQ+/h2v5yiYJMwSJq2pszz5SHYiXmUUy4
+	QNOP8dB1NBJqO5X2U9j2C+wqYwTS8vMpAKKVI3AMEP7lZtdypm38wV+LAwxsFuVVKkFLWg40hUw
+	UDcos8AeETSuiBGhDX6NEsJzSqYonXBJcgN/slaxqIDGIBI4StunJop6MFgnbBkHfjLZVQokU+C
+	+0pHPDo0EGWk+xLYkNg+gmF/27wOaW0adefGDFrfoekGouxmPnxLCpuynvXfRAvhv1CS6QEozIM
+	3oHJjFZL5au/yc6r0DZEZKjNSr47ulI8e+1IzmlzlUIcD2udqbmym97PKOxoR/gLlVyyXAWvd7c
+	R5EMOPqw9og9asSaWgNmbC3neve2xiQKaabHO7Ohj/jIewA18Wox+RR61ziEyjk+8ZjhenJdfya
+	0pI5662F1oKLOAo9Kr+kGA4qttnjn+sufOGoHvR12AKoAcj2x4f1CAX5EOt3+fDJy5+b+lB/LFk
+	m6+0sVFPvlm+7av4brxSz3J6aGJFkEUnb/UZdS1riPUMXnl2/ESPZeNEEEaX3x1R50f5Ns9HbFJ
+	POZIV8QOmUUoPZJOEnwaenTdQgF3O85i24X0qoLdxOrhRN2MAuMLyW8MPceNckWWW4RaFIj3XNt
+	r6UXPS0aZqfcSeHScEKumWlHgl4EG3sXahoKWCa5innlC+w==
+X-Received: by 2002:a17:90b:394b:b0:381:9028:5945 with SMTP id 98e67ed59e1d1-395c384d95bmr14531805a91.14.1787330508149;
+        Fri, 21 Aug 2026 09:41:48 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1416ae89189sm27634802c88.14.2026.08.21.09.41.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Aug 2026 09:41:47 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com
-Subject: [meta-python][PATCH] python3-m2crypto: correct CVE_PRODUCT mapping
-Date: Fri, 21 Aug 2026 05:59:45 -0700
-Message-Id: <20260821125945.59676-1-devanshp@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] vboxguestdrivers: Only expect vboxvideo on kernels older than 7.x
+Date: Fri, 21 Aug 2026 09:41:44 -0700
+Message-ID: <20260821164145.7081-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-5197.cisco.com [10.28.35.211];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.28.35.211, sjc-ads-5197.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 12:59:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129419
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 16:41:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129423
 
-From: Devansh Patel <devanshp@cisco.com>
+VirtualBox's own top-level Makefile gates the out-of-tree vboxvideo DRM
+module on the kernel major version:
 
-The current product-only "m2crypto" mapping generates a wildcard-vendor
-identity instead of the two vendors used for the packaged source.
+  all: vboxguest vboxsf $(if $(shell [ "$(KERN_MAJ)" -lt 7 ] && echo y),vboxvideo,)
 
-Use "heikkitoivonen:m2crypto" and "m2crypto_project:m2crypto" for their
-exact NVD dictionary CPE and NVD configuration identities. This changes
-the generated CPE set, but sbom-cve-check 1.3.3 with the pinned NVD
-snapshot has no current CVE report delta.
+From 7.x on the in-tree drivers/gpu/drm/vboxvideo driver is expected to
+be used instead, so "make all" builds vboxguest and vboxsf only. Since
+cd774fc8b6 ("vboxguestdrivers: Provide target kernel version") KERN_MAJ
+reflects the target kernel, so building against linux-yocto 7.2 now hits:
 
-Signed-off-by: Devansh Patel <devanshp@cisco.com>
+  | ERROR: One of vbox*.ko modules wasn't built
+
+The recipe still hard-required vboxvideo.ko in do_compile,
+module_do_install, PACKAGES, RRECOMMENDS and KERNEL_MODULE_AUTOLOAD.
+Derive the module list from KERN_MAJ instead so recipe and Makefile agree.
+Behaviour on kernels older than 7.x is unchanged.
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../vboxguestdrivers_7.2.14.bb                | 36 +++++++++++++------
+ 1 file changed, 25 insertions(+), 11 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb
-index b9e872fe67..98db2eceb1 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.49.0.bb
-@@ -53,6 +53,6 @@ do_install:append() {
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/__pycache__/*.cpython-*.pyc
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+index 45f3f22481..dcffe0475a 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.14.bb
+@@ -32,7 +32,18 @@ S:task-patch = "${UNPACKDIR}/${BP}"
+ export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
+ export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
+
+-EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${@(oe.kernel.get_version_file('${STAGING_KERNEL_BUILDDIR}') or '').split('.')[0]}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
++# The Makefile uses KERN_MAJ to decide whether vboxvideo is built. It defaults to
++# the *host* kernel version (uname -r), so pass the target one instead.
++KERN_MAJ = "${@(oe.kernel.get_version_file(d.getVar('STAGING_KERNEL_BUILDDIR')) or '').split('.')[0]}"
++
++# VirtualBox only ships the out-of-tree vboxvideo DRM module for kernels older
++# than 7.x - from 7.x on the in-tree drivers/gpu/drm/vboxvideo driver is used
++# instead. Mirror that decision so the compile check, the install step and the
++# packaging stay in sync with what "make all" actually produced.
++VBOX_VIDEO_MODULE = "${@'vboxvideo' if (d.getVar('KERN_MAJ') or '').isdigit() and int(d.getVar('KERN_MAJ')) < 7 else ''}"
++VBOX_MODULES = "vboxguest vboxsf ${VBOX_VIDEO_MODULE}"
++
++EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${KERN_MAJ}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
+
+ # otherwise 5.2.22 builds just vboxguest
+ MAKE_TARGETS = "all"
+@@ -72,18 +83,20 @@ do_configure:prepend() {
+ do_compile() {
+     oe_runmake all
+     oe_runmake 'LD=${CC}' 'EXTRA_CFLAGS=-I${STAGING_KERNEL_BUILDDIR}/include/' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
+-    if ! [ -e vboxguest.ko -a -e vboxsf.ko -a -e vboxvideo.ko ] ; then
+-        echo "ERROR: One of vbox*.ko modules wasn't built"
+-        exit 1
+-    fi
++    for m in ${VBOX_MODULES} ; do
++        if ! [ -e $m.ko ] ; then
++            echo "ERROR: kernel module $m.ko wasn't built"
++            exit 1
++        fi
++    done
  }
- 
--CVE_PRODUCT = "m2crypto"
-+CVE_PRODUCT = "heikkitoivonen:m2crypto m2crypto_project:m2crypto"
- 
- BBCLASSEXTEND = "native"
--- 
-2.35.6
+
+ module_do_install() {
+     MODULE_DIR=${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/misc
+     install -d $MODULE_DIR
+-    install -m 644 vboxguest.ko $MODULE_DIR
+-    install -m 644 vboxsf.ko $MODULE_DIR
+-    install -m 644 vboxvideo.ko $MODULE_DIR
++    for m in ${VBOX_MODULES} ; do
++        install -m 644 $m.ko $MODULE_DIR
++    done
+ }
+
+ do_install:append() {
+@@ -91,10 +104,11 @@ do_install:append() {
+     install -m 755 ${S}/utils/mount.vboxsf ${D}${base_sbindir}
+ }
+
+-PACKAGES += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
+-RRECOMMENDS:${PN} += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
++VBOX_MODULE_PACKAGES = "${@' '.join('kernel-module-' + m for m in d.getVar('VBOX_MODULES').split())}"
++PACKAGES += "${VBOX_MODULE_PACKAGES}"
++RRECOMMENDS:${PN} += "${VBOX_MODULE_PACKAGES}"
+
+ FILES:${PN} = "${base_sbindir}"
+
+ # autoload if installed
+-KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
++KERNEL_MODULE_AUTOLOAD += "${VBOX_MODULES}"
 
