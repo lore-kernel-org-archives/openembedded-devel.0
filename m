@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 674FAC5DF88
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AD5CC5DF7D
 	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 04:35:59 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.662.1787286950105592782
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.687.1787286952817650086
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2026 21:35:50 -0700
+ Thu, 20 Aug 2026 21:35:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=mKRJ15kz;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2cf50c6f235so7576915ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 21:35:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=k1M1j7hc;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-395cf2535acso130398a91.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 21:35:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787286949; x=1787891749; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787286952; x=1787891752; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WGnX59Bwxc2ONFM3GH7u6q6k13D1Mjw40gsgxana6mg=;
-        b=mKRJ15kzYfTB5Rqf5H51qiPSC1szc6AS4Anaom1P+3mnQhIN5XNcSGC3nd2R18GAkT
-         gNZcWoyWhro9KB9JPTysUdjt3xtnotFW2xV3RsTVyXOYRGLTPMpPKIxwQo5N8KiyXJNf
-         YPP56UnbnKEPY7a+u7BpI5rC0aJ/5uAHUKqRsSszMvsH6dPD0TET0TVbHJUX8lXcBllA
-         hL2kAGE2uxYxiJeradsFAjvdIWxk6IJJ63RnvaX1qalfNNQeuCAx0nxDPx7ceGu0SDxL
-         90qdTrIaQWxrABwP7F8MrAdqZwWEKJOmpTFZ+zJQe4aYpBaPZnXB0do2t3Rr5MgzvURW
-         dptg==
+        bh=Oge0uvMmYW42Ne9KKCd7puSwUDTi37oGgzsXKKheDds=;
+        b=k1M1j7hcoEqgC1A+/dZm/x2fzSbm5dVh+EiDnDZPLeLMs1CDoNtugjuEEdKZbDbad0
+         TVI4Il3lhsItk7xbxILBx8Rw8PyUthvFSj+pjNVX5VCEy7ca5YbSMLFwr0SBssiKpowt
+         oWUhxON6R0u2IT1YqRIorp3u0VlX7Elr8/9N6TUPaQq/Oja30sO+Z9eNVp45JVa7cUPr
+         nf3uBE5+kgTNGHLO3eTPbm4u6sBd/6dWlPr6KyDDzWmSdm/IoMGb83QsZNsH/5danNwZ
+         WjimHP7Mr6086bud9piONvGKa5s0qKkgAF3Hp2v3KzJswJyJxx6YrXYmFjne0EcVBkgo
+         b6WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787286949; x=1787891749;
+        d=1e100.net; s=20251104; t=1787286952; x=1787891752;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WGnX59Bwxc2ONFM3GH7u6q6k13D1Mjw40gsgxana6mg=;
-        b=bYGjnchmUpji99z0K8sGaV3gDMwlkfhjJls7pizBFqoWS3FGYKWRC1Dy5fWemLCKil
-         3264S8sf//m/bO84DdLY9iY/DseiF1PnASZ1tir6A5prx80Ze8sQWgQTOAU80wpqi8st
-         d/GpQrta2HhpBKWOlgNOmPqAhFtKl14esApQETe4BNBHlIwIoudY4yG43D5C5qsO2a22
-         go3AIcoJHBuAafIrfXnfJ9ulwiHfBt9HhN/xKOKI8cywDAPp7br5LOkMY3UGXQbuCPCq
-         KA3QDpxY8TmrYriZyO/jyM7lv0DkqN12nGzBa3U9IpA59hBTCYHDwTQMOaQSgpZADLsk
-         GU9w==
-X-Gm-Message-State: AFuF++lx4oKm2qUKKTp+KdTAOUTvMNhcPhmWr30wGFXDfTmK9Q+tKBNR
-	HS51oEh7SiRCLdCXzZt2e/0Y5IjTeOJquWJYSi3dLYPe6Vv6U2NtIj3ORlwkAg==
-X-Gm-Gg: AR+sD10YkMYUyKaCH60ug3tKtdU5ogYvQrqm7IARb/ISqeWl12q5F73CR2IsgTdpJw/
-	SsyhTxwb0n9niZ+83Yc709P5ACvKRvQkdG0+0omzi850aN4a/mrMijsLm2Mcw42sNpCdoCnOYDo
-	HDPo6BMA8uDCLGlzCsUqifV9JpyEB+mTo0goUVpep0IUC/dFb2tyUg0hjl/8l0zL642EZArqKmo
-	FGLS2/mqnLcN2YWZCTKC8LCi2rcYVz07js7UUb1S8wjtnwLG3d2cvQvgTyLgLXd6K02KYUwY3wS
-	jS9jZXhoKHeGWXqMdrYWbX5Ka/cNU7lhDT8NE9fs6p4YE1h0YaOOI9oT0BTqZx0ltErwnTFg2Ad
-	fXI1wB0xZnZBNDSoODyC96IoCjzdnI7H8rLAGKLS4zUdJhDYcKEGNHpImMl4fcndSPfFTxGdvyE
-	w6pWzmcWICePNW0Cg+xzXCQWyLZp2FbvpQTSXa1wCW/nU/1ta0pvZowp8e6qhLz0LidkiVvkbnI
-	6bjCdcsNQ==
-X-Received: by 2002:a17:902:e785:b0:2ca:6eca:492f with SMTP id d9443c01a7336-2d64b0e2c7fmr74709525ad.14.1787286949194;
-        Thu, 20 Aug 2026 21:35:49 -0700 (PDT)
+        bh=Oge0uvMmYW42Ne9KKCd7puSwUDTi37oGgzsXKKheDds=;
+        b=QMJk4Av21bLlYdIp9JTt2TgEWvMf2CkMw8VxsN9QoSvc+T/sR93Y2YVY4C3xHO3SHf
+         I7+q1wDR63qBg/lIqo9cVSKMm5gvVPMlVWEnhQoGTTBF3IBxqiVA8xvB8s2OaY+GKtBW
+         LpwtYbPF3Xi7/drlU+W2dRPuHTVtWWwOtREDYYyOYGQqwRjK0eZF6zOAokX8MKu4+hNn
+         1fk+I2lLefb0dUrEdRBsw+b4OL8B8GRKkeyeMXsdbLNlOTjNucEQQ51MuZpzBSZSGikK
+         5BRamfFxC+NnKUnTabWlIYExcys5m9vcsM2wbRDiA/Oij2d+x/1YrTVJ12zOorrqz639
+         dTlQ==
+X-Gm-Message-State: AFuF++lDlhBvqLkt+zkQeeSX7+EqJHQfL2xcyMguGrJvByqPhBP+G+sE
+	P6HquNfpWbmk6YL3Knt8ilz/toNAZhKtXevVGJAFnDfUaOhoKocHW1Bb8+ctoQ==
+X-Gm-Gg: AR+sD13uu11MMjJBCtfL6W6kgBWo5cafyhGtLPwmHXG5nYpGpAp5pvPkmpxvhq5FO0r
+	8nS2Y2gie6aGYRox3taP4fmQzsERUTh/VgM4No07RwJtBAbc8Ua1HZ03g/c3L8yb8fWBLNe6dD5
+	Gn3LKE1WXbdz9CjtcZE0R5FrdRdgdEidbu3apa8SSGvehviiXct8sNwEmwMeRWEjcFgFbEsEELz
+	vh/A1E0n5Wj4KuPdIFouVsMweLfHnIm6wGEWFFoRS0YRNDYjYWi7PJrtQhn+cUEL9mm2Ah2jNDt
+	7nMugCSL3HKOndtgzqPjXMmJnhYwnUuzBCglyaPNCvBXyKwUj6vna3wlAz4G1JEhqS2dIlZG5H2
+	R4YWBslFukxvpkA7HMP6KdCoWhyh/V+jDPE6cMuzi9elEBYnhXKaLTa2hUvTLndfnb+/PrclmnB
+	uPOzLt4tmKrStfdW9OmGbxaPF71+oK6CcBzAwh4xHT2I5u7YEhEXJZ5hOZXGzrJpfMCKL/gLXah
+	2aDmXuDFyOnQA==
+X-Received: by 2002:a17:90b:57ef:b0:36d:b12b:f57d with SMTP id 98e67ed59e1d1-395a06363a2mr14288961a91.12.1787286952098;
+        Thu, 20 Aug 2026 21:35:52 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([161.29.95.207])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef6ec40sm23626097eec.7.2026.08.20.21.35.47
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef6ec40sm23626097eec.7.2026.08.20.21.35.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 21:35:48 -0700 (PDT)
+        Thu, 20 Aug 2026 21:35:51 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 7/15] libp11: upgrade 0.4.19 -> 0.4.20
-Date: Fri, 21 Aug 2026 16:35:16 +1200
-Message-ID: <20260821043525.448011-7-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 8/15] libpaper: fix UPSTREAM_CHECK_REGEX
+Date: Fri, 21 Aug 2026 16:35:17 +1200
+Message-ID: <20260821043525.448011-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260821043525.448011-1-ankur.tyagi85@gmail.com>
 References: <20260821043525.448011-1-ankur.tyagi85@gmail.com>
@@ -68,80 +68,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 04:35:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129402
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129403
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Drop patch that is part of the upstream version
-
-Changelog:
-https://github.com/OpenSC/libp11/releases/tag/libp11-0.4.20
+Fixes:
+$ devtool latest-version libpaper
+...
+INFO: Current version: 2.2.8
+INFO: Latest version: 11.28
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...-p11_ver.h-file-to-installed-headers.patch | 32 -------------------
- .../{libp11_0.4.19.bb => libp11_0.4.20.bb}    |  6 ++--
- 2 files changed, 2 insertions(+), 36 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libp11/libp11/0001-Add-missing-p11_ver.h-file-to-installed-headers.patch
- rename meta-oe/recipes-support/libp11/{libp11_0.4.19.bb => libp11_0.4.20.bb} (86%)
+ meta-oe/recipes-support/libpaper/libpaper_2.2.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libp11/libp11/0001-Add-missing-p11_ver.h-file-to-installed-headers.patch b/meta-oe/recipes-support/libp11/libp11/0001-Add-missing-p11_ver.h-file-to-installed-headers.patch
-deleted file mode 100644
-index a8276179a1..0000000000
---- a/meta-oe/recipes-support/libp11/libp11/0001-Add-missing-p11_ver.h-file-to-installed-headers.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 007043d355a9f7f1cd3cb6e80d16cad609fdf2a1 Mon Sep 17 00:00:00 2001
--From: botantony <antonsm21@gmail.com>
--Date: Wed, 22 Jul 2026 02:50:28 +0200
--Subject: [PATCH] Add missing `p11_ver.h` file to installed headers
--
--Running `make install` does not install `p11_ver.h` header which is used
--by `p11_err.h`. This PR fixes it
--
--Found in https://github.com/Homebrew/homebrew-core/pull/294427
--
--Signed-off-by: botantony <antonsm21@gmail.com>
--
--Upstream-Status: Backport [https://github.com/OpenSC/libp11/commit/007043d355a9f7f1cd3cb6e80d16cad609fdf2a1]
-----
-- src/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/Makefile.am b/src/Makefile.am
--index 92d3fdb..549ac67 100644
----- a/src/Makefile.am
--+++ b/src/Makefile.am
--@@ -9,7 +9,7 @@ EXTRA_DIST = Makefile.mak libp11.rc.in pkcs11.rc.in
--
-- # Headers
-- noinst_HEADERS= libp11-int.h pkcs11.h p11_pthread.h provider_helpers.h util.h
---include_HEADERS= libp11.h p11_err.h
--+include_HEADERS= libp11.h p11_err.h p11_ver.h
--
-- lib_LTLIBRARIES = libp11.la
-- enginesexec_LTLIBRARIES =
----
--2.43.0
-diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.19.bb b/meta-oe/recipes-support/libp11/libp11_0.4.20.bb
-similarity index 86%
-rename from meta-oe/recipes-support/libp11/libp11_0.4.19.bb
-rename to meta-oe/recipes-support/libp11/libp11_0.4.20.bb
-index ea40e6d4b4..259ecb04b8 100644
---- a/meta-oe/recipes-support/libp11/libp11_0.4.19.bb
-+++ b/meta-oe/recipes-support/libp11/libp11_0.4.20.bb
-@@ -9,11 +9,9 @@ LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
- DEPENDS = "libtool openssl"
+diff --git a/meta-oe/recipes-support/libpaper/libpaper_2.2.8.bb b/meta-oe/recipes-support/libpaper/libpaper_2.2.8.bb
+index c8680eb128..83932d3830 100644
+--- a/meta-oe/recipes-support/libpaper/libpaper_2.2.8.bb
++++ b/meta-oe/recipes-support/libpaper/libpaper_2.2.8.bb
+@@ -5,7 +5,7 @@ SRC_URI = "https://github.com/rrthomas/libpaper/releases/download/v${PV}/libpape
+ SRC_URI[sha256sum] = "1e330571690191874eca415ec76889dd11bab9887a2302d6a3665cd081c4d77b"
  
--SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https;tag=${BPN}-${PV} \
--           file://0001-Add-missing-p11_ver.h-file-to-installed-headers.patch \
--           "
-+SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https;tag=${BPN}-${PV}"
+ UPSTREAM_CHECK_URI = "https://github.com/rrthomas/libpaper/releases"
+-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
++UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
  
--SRCREV = "ae5756ccf5cb7929bb8edc986a9e6a65584406bd"
-+SRCREV = "61dc3acf95b859c88844e000001a99948c0abb48"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
+ inherit perlnative autotools
  
 
