@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9175C5DF8F
-	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 04:36:09 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.691.1787286963946342713
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCDFDC5DF88
+	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 04:36:19 +0000 (UTC)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.694.1787286971495585376
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2026 21:36:04 -0700
+ Thu, 20 Aug 2026 21:36:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YVj/r2uZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-84f3ab8750cso403116b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 21:36:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YsQzpb0l;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-38f0f132f56so1193130a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 21:36:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787286963; x=1787891763; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787286971; x=1787891771; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rJVWpRb+UDFQ+i25KsdYNqlohksM/Nu8A88LcAfXBEk=;
-        b=YVj/r2uZUwVTBI9Yk6qQ3ZjOa8i923Zs/uMxtbrhKDO5Cz9lzty4xtOBytbYSCPod5
-         jZjP3HlB5tQPoONGlA3JDVEArtXGM3Kxo7XZJiD/jJsCtgABLZCIWPqqH/bbyW9cxBFL
-         w5QLVTvMlhdLlTD4ap5t+crmyYYBtgjmwdSSwV9/rSrlp4GHqrJPjG744Ck4AcHgPRVC
-         nl6SeVithTeY6JbMuGJiygFFlU0fHV3KVIMXYQYRg0uQZ6rYksNsQGJj0Q5YQdvK3byF
-         cSJ3EFJ0x5CSUGhSIlmywyRXT+fwwf8VhnyiimUiY6mYJ0DTsSmgFQbFKvTn1922ik7e
-         cQWw==
+        bh=91HD9I6tDvq3Y5hZ5vluyr0kkszPwgvqHGto2GvT6Y4=;
+        b=YsQzpb0lP8vcijsDmZvRbbTLW6z3pGbZsPKxs05WVKCrHPAwfXinb2I/X2CTowOGkO
+         SsjZOKdwUnTO0o4J27QYuurZq7ORa2LEEfm2EbTWIXPT2vIgYOtUAo/HmevrxgHBbdlR
+         rbwlQUBFGaMBOp933lEtv0HDVNk9fmfLtXRKUuN++95pVFyEn0F3Ch8F2gdwlNWxoBPz
+         +v7YB+w2UGat7CMUWHjbSTsSjXiTfWk/UzzthjxTHThtaN7kgZCLB/gkiMTvdQTskVYG
+         BFVUPvUV0nCHW8stTiMhtHTxa+8RDVeIgm9VUZBmMy5NY4WGv4g4HRs5PnLsYLn9f4K3
+         1BMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787286963; x=1787891763;
+        d=1e100.net; s=20251104; t=1787286971; x=1787891771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rJVWpRb+UDFQ+i25KsdYNqlohksM/Nu8A88LcAfXBEk=;
-        b=BCTzWOLRzyYP7z5Jdpm51q2vxpS4nsX1vuWNDEqAD7EFGU+yUY+7Fj86JiK99eAzWb
-         x4+OukLrm7e1pjzdOKD/3cQ8M16bg3M3K3Olje6Jp0WPkIuTHk3jXDF+Zshbplh4beBm
-         zKPawyWcr3WLPdbiREd1D946sBKd4zyHvLW14uZBUD2+cqblecQ+burhnlcItot+DVlI
-         VPQGQ40M1qOQQ1qIGYQVHm6KanC6Y4PbvSA2r46knyM/PQ1wAg6EYAe7WE4aooYrFqyW
-         l2fHklOCQ46dXMHFYvz5HIRiT7OFyRSvhTAld5JeOnRxW934dIz7LouOEmAFSDKBcSj0
-         z3JA==
-X-Gm-Message-State: AOJu0YzeXqpDBg7+vsaaE2NQE85Y5hlAnicJIWe1kQRT/gY3yLd7tgOB
-	u+1FIDLvJ42ilGxXvzTBINvtrqDXma4+fmd2P+C8R0dtYXI4zAcOyGYbZ++3xA==
-X-Gm-Gg: AR+sD10ZXeOve/Qm93w4mwXzY2q8CzqE3Kk4UdzgJHaXH4TqGZDBByDpmyIOpxAwTC8
-	FxYEeL3l/g78tjT3+VagPtHBae5pKs41jougu3ClVe+w77l4G1FcewSxY/sf2dc4AM6pEUn4Kjc
-	l2bMAnHKEGWniReS99pHW/lc8i0fCxg4jww9PqSa8rKhpft1LE5+Ssf1pG9yFzCTruX6kCju/Sa
-	wA5xxN+QaOBoZTxbIHnkWVUCJBZumREM87ajKwpj29WL8PdCG6RqB4riSRW6MRj0rQUaYdPUgvh
-	5TlJOCb3kvq7z2O8cX6FGvKo8oJ+jtFtROalz3aJfz6jp1IsF9Hfpmi1A5x9muAWxbnDWIPXmmk
-	m3qRBusDMXK5iLENEBS8/nN2oFhHUJLBkPLcw3u5ZHPvbE0dx7LGZnGTEUenvjsM11GjWRPgen6
-	7YxZLr+8aSbo0Fqjav1VvPNjqAVewBNOfr6QbwDu86aa1Ndbw8WndpJ/38IBtxufrheuXAsLKGz
-	6AMuRFXijUZVkg483o=
-X-Received: by 2002:a05:6a21:3a46:b0:3bf:63af:855 with SMTP id adf61e73a8af0-3cd2fddf03emr6644341637.1.1787286962989;
-        Thu, 20 Aug 2026 21:36:02 -0700 (PDT)
+        bh=91HD9I6tDvq3Y5hZ5vluyr0kkszPwgvqHGto2GvT6Y4=;
+        b=iHjh/Rp9O61mvhisk2NEYvmxVkiirGU8epVO8lmFsKPNFps8MTxbuBLY+sUe/0on1m
+         pk9FRVFYCNqBxqgHRSvRyreDqVvDtYqOf4+K5PZVur4DbKogNfiShNB+e62Jk4rmzSLX
+         AiCk9mwCjujzYUbhz8jFfWXFUwmIV8Qev5m3VR8iTRi8v6O/PSU5Wrz+7u4JaQtqkw9q
+         nqJcWJZfWsrTmw3ha1xIjjLNMMoS+SjU67Pis5OI7DAeaMPBFOllHrh5eMMFbI3Q+1QM
+         BzXVQ4ph/0weMRVHtUi3p3lSBFcjuphZvIdHp9Bb+A8z4EzbNmRAzahaJh1jy12ZjV3+
+         wVJg==
+X-Gm-Message-State: AFuF++nUz73xGmZL+SUYabJwCLYT9rUOjbUt3rniYFzSe4juY9jY0dX7
+	osoL4lxZEytKEu8FncTk42o+0uuSRWzl1UWSLI1o7nrWlpGA8gGX9FKOOht7BQ==
+X-Gm-Gg: AR+sD11RCw+dIvuLqOj7w3xwipQO+0z2N4v4R6Chf2gKJe7hsYlJoyibpLqzu1bHNZP
+	TJZTeVZnVFyJlOJ+7ozSFAE/7NitEUt8J0zklHGP/sM8lQIYzgE8ufawWSDMhQWQb7l3prEtYdR
+	egmCQPkzZCdqkHrInWqRX8ZHnhNnz8KZR9V6n+wdlsIShLcpOhXm28rjeWYouVywV4Wv6tPVq1B
+	TMdEWvRz4D7Ww8uiHLiBlhajJiTr9pBMe/ztNZtJYuJS584OxGqH39Ajxk6oIvGjVyQIIx1XSWX
+	OY0vDQRdYyUZfHCeLhdY9XGMlMdaQ/p8HZjdHrcOZd6LA88pbNJAmDCTPY45cmEEjspkZEdSgtU
+	JwwSLMawCO6GAB0YgzL8SVr92CPoUXAt1r6CcXYooOR0eWujFDcfdqGsXcWUINOTU/LvGHGLUWa
+	cHzv6ki/Kvfsy4MVi5IZ+yfTL7fOhAYb5/0QiiBcKS61XqmSPYt7TvK/IRBViVtslAx/Etj6Qoh
+	LUoSKsqSMypTZs2UcY=
+X-Received: by 2002:a17:90b:54ce:b0:394:ed5c:ff9f with SMTP id 98e67ed59e1d1-395a06c097bmr15057494a91.17.1787286970827;
+        Thu, 20 Aug 2026 21:36:10 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([161.29.95.207])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef6ec40sm23626097eec.7.2026.08.20.21.36.00
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef6ec40sm23626097eec.7.2026.08.20.21.36.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 21:36:02 -0700 (PDT)
+        Thu, 20 Aug 2026 21:36:10 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 12/15] onig: fix UPSTREAM_CHECK_REGEX
-Date: Fri, 21 Aug 2026 16:35:21 +1200
-Message-ID: <20260821043525.448011-12-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][PATCH 15/15] cockpit: add UPSTREAM_CHECK variables
+Date: Fri, 21 Aug 2026 16:35:24 +1200
+Message-ID: <20260821043525.448011-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260821043525.448011-1-ankur.tyagi85@gmail.com>
 References: <20260821043525.448011-1-ankur.tyagi85@gmail.com>
@@ -67,33 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 04:36:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129407
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 04:36:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129410
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Fixes:
-$ devtool latest-version onig
+$ devtool latest-version cockpit
 ...
-INFO: Current version: 6.9.10
-INFO: Latest version: 11.28
+INFO: Current version: 364
+INFO: Latest version:
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/onig/onig_6.9.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/onig/onig_6.9.10.bb b/meta-oe/recipes-support/onig/onig_6.9.10.bb
-index d7419b4ace..36f943e816 100644
---- a/meta-oe/recipes-support/onig/onig_6.9.10.bb
-+++ b/meta-oe/recipes-support/onig/onig_6.9.10.bb
-@@ -17,7 +17,7 @@ SRC_URI = "\
- SRC_URI[sha256sum] = "2a5cfc5ae259e4e97f86b68dfffc152cdaffe94e2060b770cb827238d769fc05"
+diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
+index 07e2b9d163..2b9c7677fe 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
++++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_364.bb
+@@ -11,6 +11,9 @@ SRC_URI += " \
+     "
+ SRC_URI[sha256sum] = "514cea072e1ef137323ab92bdb07a66bbb5106ecd584e7a046294cf0170cb690"
  
- UPSTREAM_CHECK_URI = "https://github.com/kkos/oniguruma/releases/"
--UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
++UPSTREAM_CHECK_URI = "https://github.com/cockpit-project/cockpit/tags"
++UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)*)"
++
+ inherit gettext pkgconfig autotools systemd features_check python3targetconfig
  
- BINCONFIG = "${bindir}/onig-config"
- 
+ DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd python3-pip-native python3-setuptools-native"
 
