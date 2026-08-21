@@ -1,125 +1,97 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C00CAC5DF87
-	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 02:52:06 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2280.1787280717055119935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29C2EC5DF7D
+	for <webhook@archiver.kernel.org>; Fri, 21 Aug 2026 04:35:39 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.657.1787286934666499041
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2026 19:51:57 -0700
+ Thu, 20 Aug 2026 21:35:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=A/PDb/GF;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1787280717; x=1818816717;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=60f6qj1PMWvA8JKgWVJ8fdNLgqnqOYd+T2/BhRtDdo0=;
-  b=A/PDb/GFj2W/lpi9a9GY26LEMaE6ySLfHv2Upcg/D8yrOVspi8fTPG+7
-   rL4Ee/42zV1TW3+s0dV/JosXhXMWjphJXAll3oCsGrWJkRumG9S6pP4pl
-   +xn10oJRa3s8sn/5CvFDxzurkJ3Xe4c9lOV/Pv+wqozTN/kPyZON6FweJ
-   k/9ALUneOVUIfXAr/dDgYTKWgsf4OGxF/oTpHJ9uzPEcOsTP9kfhAknaA
-   if3iPiKujsgrIIFAxftSjxQNtwbmkUWo5vTM7GizBmZFWULohlTkLhJco
-   SwMmzGLM/GjMCxPFLifSFQMOtPzEAZMH7B8sHY10ah2QJgN7FJIC8F3tH
-   Q==;
-X-CSE-ConnectionGUID: g5maUGgkTIeWFxb1v9Y62Q==
-X-CSE-MsgGUID: pvZtsGQvTZKEn/MdUu1awg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11881"; a="251600940"
-X-IronPort-AV: E=Sophos;i="6.25,234,1779116400"; 
-   d="scan'208";a="251600940"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Aug 2026 11:51:55 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 0C2B840610D
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 02:51:55 +0000 (UTC)
-Received: from az2uksmom4.o.css.fujitsu.com (unknown [10.151.22.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id B524B18ABD22
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 02:51:54 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.167.135.148])
-	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id 152D9408272
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 02:51:52 +0000 (UTC)
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gvrbEgFM;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2cacf197759so8651545ad.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2026 21:35:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787286934; x=1787891734; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qLWAGSbxQEbIPNVjruG1s0E8eRZC8mp00xioe3B9DrM=;
+        b=gvrbEgFMKss7PA7IpkfKDegleFfmkJi38N4NuvBWbxkRkkCosppfXk4Qp/Z24mCPD3
+         o/42LDRmcC6P8blHnhJgqLCHxIImV2Ya2lvplO8GrmSCNggXAifau6TaklKi8JOzkAi7
+         EBOvF4iFx/8hd9j9AmXhfSnbfKU5mgNvis93ikKxRPNeZzw3j4FqMHRD8uqARJZKtYgp
+         VodtxAoBIOi2JZJ8Efdpu35syR4UiY3sOTXDJ3ZhfoFPxdCEffMa1mXrOD4bZDnYsABS
+         cDXSrZe8YlaP0GSOGN8S0SGewmp+/edELp8pmhxlzj5Dsl5D5kos5LmOavgdYPVFFjiY
+         JxaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787286934; x=1787891734;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qLWAGSbxQEbIPNVjruG1s0E8eRZC8mp00xioe3B9DrM=;
+        b=c5jWfABIojVwvMzv/68SAdZoNHy5oWBTyYw0Y+UbD8OnnHODhKss6COyBM5lcR+vgG
+         NMFd3e3Q8lKU0pEKDvVsRlCZYodlkjKYy5Yz8XGGmnVXfXQVrC3VP/yE5c2HNDw2eKGc
+         7FRqc6vF4IgGwGM62rkpxNGBcuwHSXbaLjSGicr6UO3U1zPsZ6dOeOUS3DLfYRsARS90
+         q2L52AntQ59FGNAxExm7jp6psy7Rpv1On7KfWvJTdrzmt/n0julX9zSw6qMbLZQKjuuA
+         LQ3fQOlJRo9LqkwdvMB3PFmBRQiSNZg73Sob+KxqvhznyyogbkB+vC9aq9tl1V1g5llL
+         Zviw==
+X-Gm-Message-State: AFuF++nImjOyw7fySZpemBQ7sK4/JsbCtwjnECZ9ONnLUmymMTlMFYtS
+	U5dwrS3OqFFVDdT3wyluhtUYFD6CX4/BU5inQMUILta46LMCp3NKnpO64FiHJQ==
+X-Gm-Gg: AR+sD117CKgSh42d78StAg4/I5p9TWpAq1Ydzxa9fdNvdz/LWmLssNTZ80XEiq881k8
+	NxHhKQij+YgJNi69TGZIWhKwTpI5N+lcr9Eql+iM07fYRIK/CQiZYRXeriGgbbWRxg/huA27MhX
+	PiijuNPjDpuc8XetpQDqmAyOrbBIOHrZgGomo/c5BmxiwqOx6rDXnf+XhEeKIuLzt2X1fFrvoiJ
+	wY/ctn7kbCQhYJqJxWLVCgXTFECfMF2QV+zxifzwi32Nt/iPVwkSK9zS8LN7U7G8Cu/IXmPkZ4o
+	VmRg8y7U8K47mW/g3COy0T+vCq3GQ1d3Z51PnsoFsHIhfSYOBvDAYSMj3jLNts5iYpVOunLYEhz
+	bbSB8ZzwCXquC4Z/Ob3AmcPkHSyBPptZHmbnNLwM4g9RKHP4f0bGNhlYz7UmE+Fs243z+llrf/G
+	thzoxA49qymT/N2Hi7OlgpbfLVGtK+7ub75mfaboWq6BmTzOvonrwkYndFW1vAofR3uJc/mg1tJ
+	QF/rFEQWMyJvwJllgca
+X-Received: by 2002:a17:90b:3c84:b0:390:b41a:b92b with SMTP id 98e67ed59e1d1-395c3542369mr6947713a91.4.1787286933805;
+        Thu, 20 Aug 2026 21:35:33 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([161.29.95.207])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef6ec40sm23626097eec.7.2026.08.20.21.35.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 21:35:33 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-networking][PATCH] freeradius: Fix permissions after generating certificates with make
-Date: Fri, 21 Aug 2026 10:51:42 +0800
-Message-ID: <20260821025142.571-1-zhengrq.fnst@fujitsu.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 1/15] cabextract: add UPSTREAM_CHECK variables
+Date: Fri, 21 Aug 2026 16:35:10 +1200
+Message-ID: <20260821043525.448011-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 02:52:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129395
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2026 04:35:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129396
 
-To fix Permissions denied error of certificate files
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Fixes:
+$ devtool latest-version cabextract
+...
+INFO: Current version: 1.11
+INFO: Latest version: 1.11-1
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...after-generating-certificates-with-m.patch | 32 +++++++++++++++++++
- .../freeradius/freeradius_3.2.10.bb           |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0018-Fix-permissions-after-generating-certificates-with-m.patch
+ meta-oe/recipes-support/cabextract/cabextract_1.11.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-permissions-after-generating-certificates-with-m.patch b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-permissions-after-generating-certificates-with-m.patch
-new file mode 100644
-index 0000000000..3a0447c75e
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-permissions-after-generating-certificates-with-m.patch
-@@ -0,0 +1,32 @@
-+From 20473b50925ede8a00c19be50ad8d6ae77b37fd9 Mon Sep 17 00:00:00 2001
-+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-+Date: Tue, 18 Aug 2026 12:43:22 +0900
-+Subject: [PATCH] Fix permissions after generating certificates with make
-+
-+To fix Permissions denied error
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-+---
-+ raddb/certs/bootstrap | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/raddb/certs/bootstrap b/raddb/certs/bootstrap
-+index 4641c71700..37e0469e41 100755
-+--- a/raddb/certs/bootstrap
-++++ b/raddb/certs/bootstrap
-+@@ -29,7 +29,9 @@ make -h > /dev/null 2>&1
-+ #
-+ if [ "$?" = "0" ]; then
-+   make all
-+-  exit $?
-++  ret=$?
-++  chown root:radiusd ca.* client.* server.*
-++  exit $ret
-+ fi
-+ 
-+ #
-+-- 
-+2.43.0
-+
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.10.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.10.bb
-index a2e4d4d88f..19d8e69db0 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.10.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.10.bb
-@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;tag=$
-     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
-     file://0016-version.c-don-t-print-build-flags.patch \
-     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
-+    file://0018-Fix-permissions-after-generating-certificates-with-m.patch \
- "
+diff --git a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb b/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
+index 0f06489ca9..96e29aef2b 100644
+--- a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
++++ b/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
+@@ -13,6 +13,9 @@ SRC_URI = "\
  
- raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
--- 
-2.43.0
-
+ SRC_URI[sha256sum] = "b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6"
+ 
++UPSTREAM_CHECK_URI = "https://github.com/kyz/libmspack/tags"
++UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
++
+ DEPENDS = "libmspack"
+ 
+ EXTRA_OECONF = "--with-external-libmspack"
 
