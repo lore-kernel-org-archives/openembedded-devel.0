@@ -2,65 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C04E2C5DF81
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7FBFC5DF8C
 	for <webhook@archiver.kernel.org>; Sun, 23 Aug 2026 11:52:58 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12929.1787485976133692677
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13154.1787485969918636776
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Aug 2026 04:52:56 -0700
+ Sun, 23 Aug 2026 04:52:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rMNi/qZE;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-38125cebfdaso3660459a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 04:52:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=S346jSxk;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-38e69bdb0fcso2123355a91.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787485975; x=1788090775; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787485969; x=1788090769; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bHScx5IZxqxLi3BM5Snq/9usHWNy37nxwJkrKHa8ajc=;
-        b=rMNi/qZE69TJ1QrIy4cpWmHxc6Znosov93hVlUAeNempdaO1ObU9JHPYEc2WfNcyq2
-         h+O0JH4jonNTIm6Vg98hBDKEnT53f9NQCTk3C6Bfz//NRB7GZSwzNjM5k4Hm7b+TWApQ
-         CCumEfi/aBjxprX1eTPb0fVb/2njVBE+dGRYKKXJu3G+3qkUbVvHS8CQYK1CoIA8LTx2
-         KSqTZiChKxcev+rrhB7X7TRDiLjE2bVselnbarX678Mo28za69GVQoT6GEntIz+B0n33
-         F5A8CdoeulRePL1GhDdk2UmR1KXcagM9QCG6yQwE5LfyJFk5Xw0CHzYVHiZsDQlxDGDP
-         KlLA==
+        bh=uUnNBYYfv6uaCX9U6HIWa4DNxDI2FXUDlAghEusxXjc=;
+        b=S346jSxkVlCp7uumXXgksHD7b0DcPFzuOtkswzwsWP3SBjKUSzVIM1iLR41WPEDzJP
+         JIBb4UIb0NPHVQCrFR6yU3579CmBPcn46nLfQJv7SeMm7qPVfDc3VTEqfaaWhOGMucpt
+         WYqlF89Kq1384JChssGHPu7hBlBdOXTnF2IeHSh3nXDQxi8+Qphbpal0yjTcBTwMdAd8
+         1/8Ytzfpm4aUsSDeAwZP2poACg6fYrgcqUN1aAhuFc4X5omdF/tvqRNCLqegv1UfX7Cz
+         t/A0MVcDinxU/5GRtvySJi09k35kt1ObXiDkgyBGliLPA+lQPCVjm+mNjY8Q7roMql++
+         V5IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787485975; x=1788090775;
+        d=1e100.net; s=20251104; t=1787485969; x=1788090769;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bHScx5IZxqxLi3BM5Snq/9usHWNy37nxwJkrKHa8ajc=;
-        b=JR1zWbkiVL6fkJV5MEPiJNFG2iSsTiU9g95yMDNvvDzsfXczAKnE9ggczNvcckucAr
-         XX/ltpeTSJ/JswRsQK1S66yFc+1aQM5/pyDWRiILU43XpPBd07fRaBh4QmMSwCrPG6Ma
-         sqZZIuk13y4HrLOwdp6k/yXl34ptA5Y4qaI3fnkvMXk0EjzH7MA9AVoBxFK1P82maWLz
-         dikAMYIwRqaRV9qgR/saYOl71+kwgRZ4wOMMnaXbRZTu0oMBqxfh+OI8yfuPPpeW4PIp
-         mM6GJQec4cyIlOAHGtZ0wQcFwRMjJJk+39JCHcpTSUDAxueFH8eoQASzlRhIuDqTlSfs
-         Lz6Q==
-X-Gm-Message-State: AFuF++luVRE6jzbt478YgVBX7+KAjCeeIu+EE8DzY/ywSsRI5pq46mpz
-	/rPmnzatx5OtZbhxEbY6AH9Gt6AHMrKT61fsuJx7Ub07lJ6ZgmNuzg7omY+soA==
-X-Gm-Gg: AR+sD10aNMarvm7usdt33C4TCWqEn2RSUYkBFye3kP7obZxcaCnFgWQSD4jPanIsYDm
-	zi54LtxPQIm+qVVJghSq4pcwYZM2EseVZph8H6brUmOtPOqeYXuL5SpW3Ihvm0+2Hs1u0t/cQRs
-	+/pI6iBcPqoHAzyn9mggTB4MdALLRrRQlf6cFuBxMphnAUR21hFqgVlgVwTTOssvK+C2sV6z0/8
-	bZsx4ZMQcB2nISl5PHRef8wTR6C+ctOxYHae+/R2o6sgAfynL5LkrboPJdGCmDRhGqa4gPACXAd
-	c96czOI68XgyW4d4swFWxznqRDRtlNIT7RwBNc30twpJZe/xgjN6zWtMdILEbd6/eeTDTKkQ5Wx
-	T7QGVx90EpVl6onC4BOvUl60jqFu+wcqT/q6UVeooeS8rxN5aGQzK0zyv2pN6bIBXoqMX9rT7xr
-	344pXuzw5mqJOuPs5KdYu/FyWDURvD42In3y0gznCoUk6oWgaqaiM6Y37VsXYVoGaYQM3n9NOzw
-	yBc+wHU8t1d
-X-Received: by 2002:a17:90b:2687:b0:38f:26c7:165e with SMTP id 98e67ed59e1d1-395c383cae0mr36856498a91.9.1787485975577;
-        Sun, 23 Aug 2026 04:52:55 -0700 (PDT)
+        bh=uUnNBYYfv6uaCX9U6HIWa4DNxDI2FXUDlAghEusxXjc=;
+        b=HabpavLQFOr7AjI8TuszuTDkBazvURuVd1qxdZjoFdHq8wBVdDhaWP4wa10RXt4D8k
+         z8qkqV7k6w/acDTiFTyTcF+GLpsEUDk3ZcwX50LH/mXuHLtFtYvwwDG7Wm5WzoSsPWNK
+         kZ9JZq+LkOWFw2IpdqMFyJeCTHDC0U+ayj66mBSAHPsjfxL8uXWAO9G64xkDbGJojGkp
+         rhsMk65WZb5uw9WYLRkgMFfPoUFicCHkM6CBOtphklwp9eS3Wl49Be0ooI0cKjrqI8mm
+         9w/zAYsPPcL+ml5Nq6azG6FLxUTbxl6bDezuz35Y/PrQxnLdOZqcAgSteGVOAiZOHp2j
+         ccSw==
+X-Gm-Message-State: AFuF++kBuijo79QFUwC/RxRCL1o3MX8D94SE8VvfKCZSjlO2F4DE2rV8
+	Mwh5c/CQblnT7IEt1OUdwFM9JMjG/2/ViiqKu8ORaYcaeEWCKawSbquW0Fv2fA==
+X-Gm-Gg: AR+sD11jJrmz8eJF8P8Z6egbvoEdBxYwI64mYe5TlYeELP/sa9pWsU7/1zf8Lspg/Gi
+	kvVkFJTjRnrwzdzgDQ7BLL50d7I+SDOOVcOtbON0ZpPIhsjV3XzzBpHfZON9tYrIg5Dyi1ktzTw
+	ye2E3gcQjxil8yVVm2fNtMcPz3tqh538zjcQvV4XO5IiJguIFTZS8Q3Ag/Rq6dyLbnJ6SFnd7Ga
+	KOgvvYK3rimlXsQf2WI4X2thNkYGjsjKqwiwnn4y/tY/P4JOb6RgjtYP19l3+rXQyVboRdnkaAE
+	VQUAenEWw0w2Jzr60axuhPgSNy05gY3nNozgg01pnp0eD0NrAHgcOTHaM/SLPCatEyrMBFB1V+I
+	WOC8iL6rfa6s4DAAEGWSZjEaqUZicmgD344jxwOkLNoPjKO2aUlCboJN9orUaaI114lMYpCUuio
+	HffwxkcCXss0q1YZHelEkYNLH4DNqY7rIl237AL4nX2D1Kkdi5chaZ/lR2uvE/zpCxs6s/5f5Gv
+	w==
+X-Received: by 2002:a17:90b:39ab:b0:393:19a3:4e5 with SMTP id 98e67ed59e1d1-395df686f1dmr18297089a91.16.1787485969285;
+        Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e494fa7esm5793398a91.1.2026.08.23.04.52.52
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e494fa7esm5793398a91.1.2026.08.23.04.52.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 Aug 2026 04:52:55 -0700 (PDT)
+        Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][wrynose][PATCH 18/20] swagger-ui: upgrade 5.32.12 -> 5.32.13
-Date: Sun, 23 Aug 2026 23:51:56 +1200
-Message-ID: <20260823115158.1582363-18-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [oe][meta-oe][wrynose][PATCH 16/20] cjose: upgrade 0.6.2.7 -> 0.6.2.8
+Date: Sun, 23 Aug 2026 23:51:54 +1200
+Message-ID: <20260823115158.1582363-16-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260823115158.1582363-1-ankur.tyagi85@gmail.com>
 References: <20260823115158.1582363-1-ankur.tyagi85@gmail.com>
@@ -70,46 +69,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 11:52:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129452
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129450
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+
+Drop patch that is part of the upstream version.
 
 Changelog:
-===========
-- a11y: add aria-labels to copy-to-clipboard buttons
-- a11y: add skip-to-operations link, banner and main landmarks
-- a11y: close Authorization popup with Escape key and backdrop click
-- a11y: name and state for dark-mode toggle button
-- a11y: restore icon visibility in Windows High Contrast Mode
-- a11y: topbar logo and dark-mode toggle visible in HCM
-- a11y: use for model titles to convey emphasis semantically
-- ci: bump cycjimmy/semantic-release-action to v6.0.0
-- ci: fix Trivy security scan and add dependency vulnerability scan
-- style: reduce padding on inline code blocks in markdown
+https://github.com/OpenIDC/cjose/releases/tag/v0.6.2.8
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit e0346def92a658ef0af074cdc054debcc40472fa)
+(cherry picked from commit b7c1c19585d7614fcc51e368405835c3abd9c740)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../swagger-ui/{swagger-ui_5.32.12.bb => swagger-ui_5.32.13.bb} | 2 +-
+ .../cjose/{cjose_0.6.2.7.bb => cjose_0.6.2.8.bb}                | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.12.bb => swagger-ui_5.32.13.bb} (94%)
+ rename meta-oe/recipes-support/cjose/{cjose_0.6.2.7.bb => cjose_0.6.2.8.bb} (88%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb
-index bfeb75f6ca..8916b7788e 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.12.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb b/meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
+similarity index 88%
+rename from meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
+rename to meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
+index b35cf349f1..492ee0d143 100644
+--- a/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
++++ b/meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7249e2f9437adfb8c88d870438042f0e"
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+ SRC_URI = "git://github.com/OpenIDC/cjose;protocol=https;branch=version-0.6.2.x;tag=v${PV}"
  
--SRCREV = "9b5acf38723108ac816dcb7303897e87f933ac4e"
-+SRCREV = "2a33d7805eb5fff693952cebb9203ee113ab4663"
+-SRCREV = "10af8915a666b50caa5500cdc3f2523b916be720"
++SRCREV = "e787ace6a203d483038a793fd58f958a2f9b48c1"
  
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ DEPENDS = "openssl libcheck jansson"
  
 
