@@ -2,64 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7FBFC5DF8C
-	for <webhook@archiver.kernel.org>; Sun, 23 Aug 2026 11:52:58 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13154.1787485969918636776
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1205C5DF81
+	for <webhook@archiver.kernel.org>; Sun, 23 Aug 2026 11:53:08 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12932.1787485981248949199
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Aug 2026 04:52:49 -0700
+ Sun, 23 Aug 2026 04:53:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=S346jSxk;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-38e69bdb0fcso2123355a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ob/WoCrT;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso1851019a91.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 04:53:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787485969; x=1788090769; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787485981; x=1788090781; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uUnNBYYfv6uaCX9U6HIWa4DNxDI2FXUDlAghEusxXjc=;
-        b=S346jSxkVlCp7uumXXgksHD7b0DcPFzuOtkswzwsWP3SBjKUSzVIM1iLR41WPEDzJP
-         JIBb4UIb0NPHVQCrFR6yU3579CmBPcn46nLfQJv7SeMm7qPVfDc3VTEqfaaWhOGMucpt
-         WYqlF89Kq1384JChssGHPu7hBlBdOXTnF2IeHSh3nXDQxi8+Qphbpal0yjTcBTwMdAd8
-         1/8Ytzfpm4aUsSDeAwZP2poACg6fYrgcqUN1aAhuFc4X5omdF/tvqRNCLqegv1UfX7Cz
-         t/A0MVcDinxU/5GRtvySJi09k35kt1ObXiDkgyBGliLPA+lQPCVjm+mNjY8Q7roMql++
-         V5IQ==
+        bh=/ForOsCj82Ct/4MSB0rKBKRw2XBj1cMXMkNnX7//MiQ=;
+        b=ob/WoCrTHVwTDDRQBhn51LqpJMY5X7tlR0E/ZVcmfN7EHoMQkGcTgt7BOQz24klGAw
+         ViVAyJLdRLq8wuOWNVJ+c4OTANgwNC6dVNvRQW4Or5ND9l1ONEsJY1KSw+iJyp/pwOJg
+         nfHCDaoWek0s4jeJH16sblX5twD8Ii/UxmXpg7ByfI8GWmY8sYF8IvBktNzJ7pkIlTgy
+         2W5hBFnPDnoWvKqxqps2fRC+FtmntyFU0ht3ER787IQSz6lUVBoIO7FnOlGuQB+3kZb1
+         nabLTKmfo9aLzZJG5qGSrPm5rRbRSGhrMpr6ed/9SH1MA92tkD2bU6QARmcM851macTw
+         yW3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787485969; x=1788090769;
+        d=1e100.net; s=20251104; t=1787485981; x=1788090781;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uUnNBYYfv6uaCX9U6HIWa4DNxDI2FXUDlAghEusxXjc=;
-        b=HabpavLQFOr7AjI8TuszuTDkBazvURuVd1qxdZjoFdHq8wBVdDhaWP4wa10RXt4D8k
-         z8qkqV7k6w/acDTiFTyTcF+GLpsEUDk3ZcwX50LH/mXuHLtFtYvwwDG7Wm5WzoSsPWNK
-         kZ9JZq+LkOWFw2IpdqMFyJeCTHDC0U+ayj66mBSAHPsjfxL8uXWAO9G64xkDbGJojGkp
-         rhsMk65WZb5uw9WYLRkgMFfPoUFicCHkM6CBOtphklwp9eS3Wl49Be0ooI0cKjrqI8mm
-         9w/zAYsPPcL+ml5Nq6azG6FLxUTbxl6bDezuz35Y/PrQxnLdOZqcAgSteGVOAiZOHp2j
-         ccSw==
-X-Gm-Message-State: AFuF++kBuijo79QFUwC/RxRCL1o3MX8D94SE8VvfKCZSjlO2F4DE2rV8
-	Mwh5c/CQblnT7IEt1OUdwFM9JMjG/2/ViiqKu8ORaYcaeEWCKawSbquW0Fv2fA==
-X-Gm-Gg: AR+sD11jJrmz8eJF8P8Z6egbvoEdBxYwI64mYe5TlYeELP/sa9pWsU7/1zf8Lspg/Gi
-	kvVkFJTjRnrwzdzgDQ7BLL50d7I+SDOOVcOtbON0ZpPIhsjV3XzzBpHfZON9tYrIg5Dyi1ktzTw
-	ye2E3gcQjxil8yVVm2fNtMcPz3tqh538zjcQvV4XO5IiJguIFTZS8Q3Ag/Rq6dyLbnJ6SFnd7Ga
-	KOgvvYK3rimlXsQf2WI4X2thNkYGjsjKqwiwnn4y/tY/P4JOb6RgjtYP19l3+rXQyVboRdnkaAE
-	VQUAenEWw0w2Jzr60axuhPgSNy05gY3nNozgg01pnp0eD0NrAHgcOTHaM/SLPCatEyrMBFB1V+I
-	WOC8iL6rfa6s4DAAEGWSZjEaqUZicmgD344jxwOkLNoPjKO2aUlCboJN9orUaaI114lMYpCUuio
-	HffwxkcCXss0q1YZHelEkYNLH4DNqY7rIl237AL4nX2D1Kkdi5chaZ/lR2uvE/zpCxs6s/5f5Gv
-	w==
-X-Received: by 2002:a17:90b:39ab:b0:393:19a3:4e5 with SMTP id 98e67ed59e1d1-395df686f1dmr18297089a91.16.1787485969285;
-        Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
+        bh=/ForOsCj82Ct/4MSB0rKBKRw2XBj1cMXMkNnX7//MiQ=;
+        b=WAIFXxhVwSKRPlfpRp534ISXzVkJCO1jPw2q6P4OB78YCmw5nsZG3XgVtYdEDaLVSi
+         bgPLLVbzg9I/da/Wml7kzMx8i1dO860zaS+JY/2SHoD8DXxh9Fm5fvFMSvwwpw7ZSPWy
+         JD0eZplKxpPnWFGc8x86HBirKLdufUrZxDWxWSTRxkYrhEaPp4fi9EJB2RHhBwGrEbTr
+         wnwMu3KCjpQTzeYg/EvaH0yu8THzL/rupL0lvBQk2Ddzw1tdibl1l+3nd6ejFl/fhjtZ
+         oCTK1zMZxs9Gl4bTmSQrPcaUT+6t+2DpzuwXmLLMsf+JqZ77N6XBJn0P/4h9xsPcDqwF
+         209Q==
+X-Gm-Message-State: AFuF++n0QgMGuvEZqxk0877QfoWE7NfI8cTVKxd+KX8Ma2SI8LpUePJG
+	yd6qzP5r9UYFGjDxWb1QPVS0GF0hUuKWNtzQ9OevBe2ll7bi8sW9yXNapK5TsA==
+X-Gm-Gg: AR+sD13dOSOiu+0+iwbvH5VTaIZxa+WGul2lkfcGdBtQ1RKbucQRHUnOLoY25CBxB37
+	RS0B64sTEkb7yRSOD6W35/rbb+Nhi7JNyH7E+usWJRY0cEj3RrWnsGy3gcGZuVMN52FRNKDLpDm
+	jyOtY2VotxmF3J+xTYkCVBjwckeBwDHih9pV+vHQ40u1KjmPMScOm4o9wYxrnqn3OnyiUw1rrlk
+	btUAAlsmnlkyMFI5Ne3kiOjOP1lqnj4BbAKlb58sEfdbfvEzA5AuRoIxQlW7eRKYfSjgBa/8uSr
+	G1zRX0g7ZkSfdEcp210bgZBrW3njxvo5jylYNfgSyfoRDUgouGx7WMJNN125kQ8nU3k5JFJAqaU
+	GDKvWx2zsrhXWfKXvkQvqMrAjbLGCrCrR7yAMWHMsatU2yvLy0V54qNHKDV7ZwFyBvHFFtN9c2v
+	bjzC6ahG2MejCZDqQZanrI3N6LA1ipWwww1LlLimkys+RbjZ45TdW46Aww5V1LRMuOfUhLcB2/I
+	A==
+X-Received: by 2002:a17:90b:1dc4:b0:395:5f43:4ec4 with SMTP id 98e67ed59e1d1-395c31f194emr35702570a91.0.1787485980576;
+        Sun, 23 Aug 2026 04:53:00 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e494fa7esm5793398a91.1.2026.08.23.04.52.47
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e494fa7esm5793398a91.1.2026.08.23.04.52.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 Aug 2026 04:52:49 -0700 (PDT)
+        Sun, 23 Aug 2026 04:53:00 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [oe][meta-oe][wrynose][PATCH 16/20] cjose: upgrade 0.6.2.7 -> 0.6.2.8
-Date: Sun, 23 Aug 2026 23:51:54 +1200
-Message-ID: <20260823115158.1582363-16-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][wrynose][PATCH 20/20] swagger-ui: upgrade 5.32.13 -> 5.32.14
+Date: Sun, 23 Aug 2026 23:51:58 +1200
+Message-ID: <20260823115158.1582363-20-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260823115158.1582363-1-ankur.tyagi85@gmail.com>
 References: <20260823115158.1582363-1-ankur.tyagi85@gmail.com>
@@ -68,39 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 11:52:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129450
+ <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2026 11:53:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129454
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Drop patch that is part of the upstream version.
-
 Changelog:
-https://github.com/OpenIDC/cjose/releases/tag/v0.6.2.8
+https://github.com/swagger-api/swagger-ui/releases/tag/v5.32.14
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit b7c1c19585d7614fcc51e368405835c3abd9c740)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cjose/{cjose_0.6.2.7.bb => cjose_0.6.2.8.bb}                | 2 +-
+ .../swagger-ui/{swagger-ui_5.32.13.bb => swagger-ui_5.32.14.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/cjose/{cjose_0.6.2.7.bb => cjose_0.6.2.8.bb} (88%)
+ rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.13.bb => swagger-ui_5.32.14.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb b/meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
-similarity index 88%
-rename from meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
-rename to meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
-index b35cf349f1..492ee0d143 100644
---- a/meta-oe/recipes-support/cjose/cjose_0.6.2.7.bb
-+++ b/meta-oe/recipes-support/cjose/cjose_0.6.2.8.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7249e2f9437adfb8c88d870438042f0e"
+diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb
+similarity index 94%
+rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb
+rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb
+index 8916b7788e..5bb5a66021 100644
+--- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.13.bb
++++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- SRC_URI = "git://github.com/OpenIDC/cjose;protocol=https;branch=version-0.6.2.x;tag=v${PV}"
+ SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
  
--SRCREV = "10af8915a666b50caa5500cdc3f2523b916be720"
-+SRCREV = "e787ace6a203d483038a793fd58f958a2f9b48c1"
+-SRCREV = "2a33d7805eb5fff693952cebb9203ee113ab4663"
++SRCREV = "6e8ce248db64190e4113676aba996943c56f2491"
  
- DEPENDS = "openssl libcheck jansson"
+ CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
  
 
