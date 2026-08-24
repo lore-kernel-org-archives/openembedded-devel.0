@@ -1,94 +1,117 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 585D6C5DF94
-	for <webhook@archiver.kernel.org>; Mon, 24 Aug 2026 10:34:22 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13807.1787567658887104367
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69016C5DF9C
+	for <webhook@archiver.kernel.org>; Mon, 24 Aug 2026 10:51:02 +0000 (UTC)
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13935.1787568659021763412
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Aug 2026 03:34:19 -0700
+ Mon, 24 Aug 2026 03:50:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YCzDZO5A;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c214e625259so470281166b.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2026 03:34:18 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=kd3jcU0a;
+ spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787567657; x=1788172457; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=esF9FjUccZ1RziKXitSjVZT6UXmbHEEF1UGelESc74k=;
-        b=YCzDZO5A/rGm/pSNnF3Dv1eCksOkPBjn5OClhkLm6aJKhS/fc6RDCjNDrjZyJeD+Et
-         zBNtu3MM4feip4UqiM7ObXzX/1u6pCqKNFUIcCQ50wTHioriYQBRRVqoo5aE2gGDp+gE
-         C+Pggr7TeVgGdPW0Wjv6dKI6e8EsFjF621ripqKtWRd48MdCeLmNGpBcL3PPbUoxmMXu
-         vJeJnPOFGgFVCFcIqTJrlLQgf9bUBuVhYuNL6MghJJcvU+V2yE5gWU1DzDUpNdX75db6
-         jC8V7Y1nsEi73yVQ1I960LhxaTWRG5rp0Jj3sRsqhuTFI5FecUrUGyLai+P0ctvrClNL
-         lThA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787567657; x=1788172457;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=esF9FjUccZ1RziKXitSjVZT6UXmbHEEF1UGelESc74k=;
-        b=klzDEX40ioHOe7N3urUCGhcT8ehGiSkwoZ8Z5UkkRrN04gnvsH7KPHaO3tRmddw8kv
-         KgRj9DrTY5BbdfX/iG1zGIqdTz8vVgmeWnmP9wr/loMnbAIPvQb1etMP1Iis64tM9+ag
-         gcZaPAB8Okmi05mQE11fR7vX6MgCFsQwnsXEUAfqDD3Q4703znMHhGR0dFWZOun77RR0
-         e5FwC+xzBFWIT65bytwEjly5egd22+QlUj4wUQO3zz/LfEozf4QFt68hzSA4QZZVm8Th
-         nGMfgREEbO8Y0lWrpmPuFtwkktnXMnichXJekvvu+0NpRaIj+17CCEJnCg0IsDSzSX2a
-         6yuw==
-X-Gm-Message-State: AFuF++k6K2YydCB5yN4/goYLLR5xelilaL1N0sJ65ZS6jp3BmT/EXLWK
-	9+2KLelNtx6/FSU/OBtx7J6Ff8OeytLbA53gq35F87aAyomd+lwzjGMAe6DAUTLaGA8=
-X-Gm-Gg: AR+sD13VoYgW9eQOHYZhu+hMKe6MNPf7jtPgZlVtNNa2/Ifm2OkFWhaBq2pD+9PtmPt
-	J+c0fzzNguoZCIL9gOitUrf30tj/MqrqYht0Ws/kd18DsBXzU9Rm4+oLmONGuiDdMkq+Rh12Kw4
-	i6X3vVJ7Nq+eFxtkR9iPQ35rhsXHypTcVsugxffzQaJGYN9eln4T7TLpeAL+bgBSIhFdCDnL59+
-	p3qAaM/Z3Y57sCmswiVEnYKqpaI19zGxX7Z5RuRAYzck0l3nFmZEpZsl6JKHcrtPoiqYn4NV3mL
-	Xu+HEYrx0WGY4Uw0B8Rksk30ViRJTaU4PLk70x6AIp8y6+Io219rRPXdi9VZZgac9T3YH6Kx4d6
-	CODUL34e0e+m78GQ4Ycv5UM28Q4mydwwy7x18cBunowcMx90LKiXUr06I7JQLQGtEsA/4zy4wXH
-	0UZmlZ4Ayi9imcuE8/K317SEqNjTTlFy1rCbJi+YoDDGKC0IPrwYd8Sj1r3AHvsRge1DbfeMJBe
-	UTII/qn
-X-Received: by 2002:a17:907:d78b:b0:c24:d6f0:a53 with SMTP id a640c23a62f3a-c24d6f078dcmr273292566b.23.1787567656623;
-        Mon, 24 Aug 2026 03:34:16 -0700 (PDT)
-Received: from dld58y9k4-lin.dl.net ([2a02:b025:10:2b61:2067:3222:ac59:1d40])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2496297c7dsm1171146066b.20.2026.08.24.03.34.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Aug 2026 03:34:16 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <locutusofborg@debian.org>
+  d=cisco.com; i=@cisco.com; l=1446; q=dns/txt;
+  s=iport01; t=1787568659; x=1788778259;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=CRGyh69PDMWsMBMZA1g1o94zJ+RM7Q3qkNVZGNf9ZoE=;
+  b=kd3jcU0a1lGKIG32qJH0nFk0jdvdhrWiNm3L5rKTHioS0ktChbxBJhTN
+   oaSVDTe5/WYI0EAzyOZTlYOLBx4hiwH/AECm6oaGXaq2SsKaVA5vVYtB+
+   l4wS+WqZwfnUCQfuFqFB6/F2o/mDk1ZE0ptml7q73jZ4zK4xxeBDh/GHd
+   dc3rFofqjEDRIYsFUYovR8HljPJQV2oVkaUFLPjQ2dF7Uc8+QY8pbMI/a
+   sD/vXc/I6/N5y3H5LRBCYUVJfuIA+3qbxGSKnpzoI7CEStdFodwLdnEZS
+   F01VFrUhAAvjcYSrmziZIcYoikb0Q6VzFY1bLl1pIBnj5EEavncWuwvJh
+   g==;
+X-CSE-ConnectionGUID: 8snxxUnwSwCbSBK7HPeyjw==
+X-CSE-MsgGUID: SBR0SoYoSnKx+KMCJBHkNQ==
+X-IPAS-Result: =?us-ascii?q?A0BCAgAvIYxq/5EQJK1RCYJZgld0XkNJk1kBggRsnh6Bf?=
+ =?us-ascii?q?g8BAQEPNxoEAQGFBY1uAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
+ =?us-ascii?q?QcFgQ4ThlyGXTYBGAEtMFxEgwIBgnQDwxiCLIEBgygBgVTbMAELFAEFgTOFP?=
+ =?us-ascii?q?4gidoR8JxsbgXKEfoQKDXmFeASCIoEMk1pIgR4DWSwBVRMNCgsHBYFmAzUSK?=
+ =?us-ascii?q?hVuMh2BIz4XgQ0bBgWBHYEohBAjGTZ8gQlegSspZAESF4EJggcCglqCBQIBS?=
+ =?us-ascii?q?UMOB0ciCxgNSBEsNxQZBD5uB45eH4JHATxRllSReqEPCiiDdowilToaM6psL?=
+ =?us-ascii?q?phapFqEaYFoPIFZcBWDIglKGQ+OLhXQGScyAj0HAgcPApFzgX4BAQ?=
+IronPort-Data: A9a23:NJuxSK090e7gNb7YsvbD5YJwkn2cJEfYwER7XKvMYLTBsI5bp2dVy
+ mIZD2+Pbq3eMTD9L9pzYd/l8ksAvMKEx4dqGgNu3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ Lsen+WFYAX7g24ubjpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGXFowLZ0l/PlMHkpEz
+ tY7dxA1YwGBmLfjqF67YrEEasULJc3vOsYb/3pn1zycVaZgSpHYSKKM7thdtNsyrpkRRrCFO
+ YxAN3w2MEmojx5nYj/7DLoykfmhgGL/axVTqUmeouw85G27IAlZgOG9YIeIJYXSLSlTtn2yn
+ Dr9+FX+ORc5JJ+87BGn2FKvoNaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc9NUF+t/7ESGzbDZpl7JQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSj1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:3mwo1Kk2H9rsoVEdFBg5JmsnlW7pDfIA3DAbv31ZSRFFG/FwWf
+ rAoB19726QtN9/YhAdcLy7VZVoIkmsl6Kdn7NwAV7KZmCP0wGVxepZg7cKrQeNJ8TWzJ846U
+ 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYLcemvAJsQljuQzW2gYytLeDU=
+X-Talos-CUID: 9a23:rCaZJm44+eJja37xC9sspFUSCtAYdGLm01zaGGWbVkZRRayXVgrF
+X-Talos-MUID: 9a23:9M9fgAZv+tyeSOBTjBXW3AplBcBT5Ye+S2Mourcsm8qiDHkl
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,240,1779148800"; 
+   d="scan'208";a="818855710"
+Received: from alln-l-core-08.cisco.com ([173.36.16.145])
+  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Aug 2026 10:50:58 +0000
+Received: from sjc-ads-5197.cisco.com (sjc-ads-5197.cisco.com [10.28.35.211])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by alln-l-core-08.cisco.com (Postfix) with ESMTPS id 1371F18000474;
+	Mon, 24 Aug 2026 10:50:58 +0000 (GMT)
+Received: by sjc-ads-5197.cisco.com (Postfix, from userid 1887503)
+	id A7A5FCC124A; Mon, 24 Aug 2026 03:50:57 -0700 (PDT)
+From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] vboxguestdrivers: update sha256sum hash for new release
-Date: Mon, 24 Aug 2026 12:29:07 +0200
-Message-ID: <20260824102907.2341187-1-locutusofborg@debian.org>
-X-Mailer: git-send-email 2.43.0
+Cc: xe-linux-external@cisco.com
+Subject: [meta-python][PATCH] python3-aiohttp: correct CVE_PRODUCT mapping
+Date: Mon, 24 Aug 2026 03:50:57 -0700
+Message-Id: <20260824105057.64813-1-devanshp@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-5197.cisco.com [10.28.35.211];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.28.35.211, sjc-ads-5197.cisco.com
+X-Outbound-Node: alln-l-core-08.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2026 10:34:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129457
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2026 10:51:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129463
 
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+From: Devansh Patel <devanshp@cisco.com>
+
+The current "aiohttp" mapping emits the wildcard-vendor *:aiohttp CPE
+instead of the exact NVD identity for the packaged aio-libs/aiohttp
+source.
+
+Use "aiohttp:aiohttp", which is both an NVD dictionary CPE and an NVD
+configuration identity. CNA affected data uses "aio-libs:aiohttp" and
+remains covered by scanner aliases. With sbom-cve-check 1.3.3 and the
+pinned 2026-08-12 data, the generated identity changes but the current
+CVE report does not.
+
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.16.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.16.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.16.bb
-index 952eca1a06..f12270680c 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.16.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.16.bb
-@@ -24,7 +24,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
-     file://Makefile.utils \
-     file://0001-vboxvideo-let-the-build-decide-if-drm_fb_helper_alloc.patch \
- "
--SRC_URI[sha256sum] = "384f293184c52fd51bc941c17d753b4019446f53a6b07c828adfb3e61fe0a500"
-+SRC_URI[sha256sum] = "50356ccdaefe8f03537600ec31898b506e3a85ce79b94f26fb6cc1920c9e18eb"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
+index 033fc7c804..b862076869 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.14.3.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b5e9e27554f71f0f132919037cb967b2"
  
- S ?= "${UNPACKDIR}/vbox_module"
- S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
+ SRC_URI[sha256sum] = "9491196535a88924a60afd5b5f434b5b203b6cc616250878dbdb223a8f7844bc"
+ 
+-CVE_PRODUCT = "aiohttp"
++CVE_PRODUCT = "aiohttp:aiohttp"
+ CVE_STATUS_GROUPS = "CVE_AIOHTTP_FIX_3_13_4"
+ CVE_AIOHTTP_FIX_3_13_4[status] = "fixed-version: fixed in 3.13.4"
+ CVE_AIOHTTP_FIX_3_13_4 = "CVE-2026-22815 CVE-2026-34513 CVE-2026-34514 \
 -- 
-2.43.0
-
+2.35.6
 
