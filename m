@@ -2,114 +2,112 @@ Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 435EFC61DB4
-	for <webhook@archiver.kernel.org>; Mon, 24 Aug 2026 10:51:04 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14019.1787568658783296705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5BC5C61CE3
+	for <webhook@archiver.kernel.org>; Mon, 24 Aug 2026 10:51:02 +0000 (UTC)
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13935.1787568659021763412
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 24 Aug 2026 03:50:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ARKoc611;
- spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=DVKnXK0G;
+ spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1189; q=dns/txt;
-  s=iport01; t=1787568658; x=1788778258;
+  d=cisco.com; i=@cisco.com; l=1298; q=dns/txt;
+  s=iport01; t=1787568659; x=1788778259;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=r96SIucT/qNKn8V3v7rZLNoZ6aIa1D2piPl6cSpeNRY=;
-  b=ARKoc611wrSNf6lu7xt6JQbvxsyeyQrPbb2iKaFG9wzbIVdzh/QM0DM3
-   X7G4PHSl7AoqXVHlKZJp3J3TjlCFKMIOg8MWmdvmGgjTvyp+BF5iQm1/Q
-   Q0b4V4iDBcSoz+QQ6tYREh5AecjJzEqWHhtcUJhUg2+5PJJ08BcfyFH6b
-   U7xLPGIqXL/ZCRSTT8Vvm5wvkG+slRb1sV+sv8MWYyw1VwHgjqU/B9QvF
-   0TvWg1LBIv7/0n42+P+PDVkdWe47usmwfFR92sQh/02Dix8o9kBalr36S
-   z4HYfCwTy49821o4ybi41GzBw725d12NfGLJ+3vBe9ATyiGl/3wnIr5ST
+  bh=JCzzF4wCXRLNX6jq5qhY8SnCzg27UbeDJwcydbYHmXY=;
+  b=DVKnXK0G/uHNrcGIBx5hmCJrLIFfn196Jdn60X8mU8U5UnpVwfjgb4fU
+   C2oVLjEKfbIqkjCuBgFmgUZDPgU6S7psHiRhORi8gacMt468Ug21Q/g/t
+   R5addaihEfR2t6MxxOL/JHHPfSZfQ44/rVWO7YFF0NqFr8ucjhImLHdZc
+   ef3/7v7CzhUkFce7fsZvSdF8BL0kstLSpsJzss2FWDTnGbIwUXObJ9Ft6
+   8eXN++CphgPGtrgYXbkHe/GhEx6PtMHGCwFzLBDAKWd9a/yN4/DCXqXOD
+   2z1kpgb4+LO2skzL5L/9kK38GLOVFvb46KX5RvVnT6EFJyj/vwsZpLgQC
    Q==;
-X-CSE-ConnectionGUID: gzHFF44jRqWsgsT0eUd56g==
-X-CSE-MsgGUID: L5GZJgxTQQqSenJzTlpg0A==
-X-IPAS-Result: =?us-ascii?q?A0D3AgC0IIxq/5EQJK1RCYJZgld0XkNJk1kBgnCeHoF+D?=
- =?us-ascii?q?wEBAQ83GgQBAYUFjW4CJjYHDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBB?=
- =?us-ascii?q?wWBDhOGXIZdNgEYAS0wXESDAgGCdAPDY4IsgQGDKAGBVNswAQsUAQWBM4U/i?=
- =?us-ascii?q?CJ2hHwnGxuBcoR+hAoNeYV4BIIigQyBeJFiSIEeA1ksAVUTDQoLBwWBZgM1E?=
- =?us-ascii?q?ioVbjIdgSM+F4ENGwYFgR2BKIQQIxk2fIEJXoErKWQBEheBCYIHAoJaggUCA?=
- =?us-ascii?q?UlDDgdHIgsYDUgRLDcUGQQ+bgeOXh+CRwE8UZZUkXqhDwoog3aMIpU6GjOqb?=
- =?us-ascii?q?C6YWqRahGmBbwUwRoETcBWDIglKGQ/eXCcyAj0HAgcPApFzgX4BAQ?=
-IronPort-Data: A9a23:C9bBG64YPef3fQNbm8H0NQxRtGnGchMFZxGqfqrLsTDasY5as4F+v
- mNOUW+BafqPZWaketB3aYu29UhS6pWBmoBgTlE/+Sg9Zn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa/lH2dOC98RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/qUzBHf/g2QqajJOt/rawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eMp841MgrXWN07
- MMDJysxNh2+i7/oz+fuIgVsrpxLwMjDNYcbvDRkiDreF/tjGcCFSKTR7tge1zA17ixMNa+BP
- IxCN3w2MlKZP0An1lQ/UPrSmM+ki2f2dSZYsHqepLE85C7YywkZPL3FYIOLKoTQHpUK9qqej
- kab0FbbDQEmDeWG8jeD0GCQgvfAxQquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBUCDVAc9ch8sQxQFTGy
- 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
-IronPort-HdrOrdr: A9a23:emIB/a3Sb1ocO5fHnTpNqgqjBJ4kLtp133Aq2lEZdPWaSKOlfq
- eV7ZEmPHDP6Qr5NEtMpTniAtjjfZqjz/5ICOAqVN/INjUO01HHEGgN1+ffKhTbaknDH5ZmpM
- RdWpk7LsHsBl5nisu/ygy5H9E8hOSjysmT9IDjJ7MHd3ASV0mmhD0JbDqmLg==
-X-Talos-CUID: =?us-ascii?q?9a23=3A8S9kZGiWvu+FRdEFRcMi9nc9vTJufW/94lmMf02?=
- =?us-ascii?q?CEFlyR6apEVKt9P46nJ87?=
-X-Talos-MUID: =?us-ascii?q?9a23=3ASh3CVA/Rc9WOgGfQJfMK6C2Qf+M1zJaMB1AxqKw?=
- =?us-ascii?q?fgMSCFz5MPy+S1B3iFw=3D=3D?=
+X-CSE-ConnectionGUID: eSwQtqtQSbiAtE/m5KWE/g==
+X-CSE-MsgGUID: S6o4E/SOSz2sWcYVzB4EQA==
+X-IPAS-Result: =?us-ascii?q?A0D4AgAvIYxq/48QJK1RCYJZgld0XkNJk1kBggRsnh6Bf?=
+ =?us-ascii?q?g8BAQEPNxoEAQGFBY1uAiY2Bw4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
+ =?us-ascii?q?QcFgQ4ThlyGXTYBGAEtMFxEgwIBgnQDwxiCLIEBgygBgVTbMAELFAEFgTOFP?=
+ =?us-ascii?q?4gidoR8JxsbgXKEfoQKDXmFeASCInoSk1pIgR4DWSwBVRMNCgsHBYFmAzUSK?=
+ =?us-ascii?q?hVuMh2BIz4XgQ0bBgWBHYEohBAjGTZ8gQlegSspZAESF4EJggcCglqCBQIBS?=
+ =?us-ascii?q?UMOB0ciCxgNSBEsNxQZBD5uB45eH4JHATxRllSReqEPCiiDdowilToaM6psL?=
+ =?us-ascii?q?phapFqEaYFuATWBWXAVgyIJShkPji4V0BknMgI9BwIHDwKRc4F+AQE?=
+IronPort-Data: A9a23:g8xnC6jBsP9y0q5ZaooMr6a4X161MREKZh0ujC45NGQN5FlHY01je
+ htvCjqGPKmKYjH2KIwjOdiw8RwF78DVzNYwSFFvpCBgQy1jpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeCULOZ82QsaDxMu/jf8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUVwflOHXhSz
+ McSKRkRQ1eG2sGJ7fW0H7wEasQLdKEHPasWvnVmiDWcBvE8TNWbHePB5MRT23E7gcUm8fT2P
+ pVCL2ExKk2eJUQTYT/7C7pm9AusrnXybTRes1KNjaE2+GPUigd21dABNfKFI4zaGJgKxhbwS
+ mTuxDr+XjxdD/uk22CezXmduP3lwQ7CcddHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QWJzO/Qpg2eHGVBFmAHY909v8hwTjsvv
+ rOUo+7U6fVUmOX9YRqgGn289Fte5QB9wbc+WBI5
+IronPort-HdrOrdr: A9a23:v+JoyqnokfRDtbF+gCFuVvim1G3pDfIA3DAbv31ZSRFFG/FwWf
+ rAoB19726QtN9/YhAdcLy7VZVoIkmsl6Kdn7NwAV7KZmCP0wGVxepZg7cKrQeNJ8TWzJ846U
+ 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYLcemvAJsQljuQzW2gYytLeDU=
+X-Talos-CUID: =?us-ascii?q?9a23=3AbRl8iWkPX3YQbfH14z+AWazbDozXOXDm007MOlO?=
+ =?us-ascii?q?BMmxoYaG4DlrN25xJ1MU7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AJrdr3AxA5hEWLWOtPcQElT629l+aqJ/wDxwg1q4?=
+ =?us-ascii?q?hgNveLhN7CgmPpmiae6Zyfw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,240,1779148800"; 
-   d="scan'208";a="816802387"
-Received: from alln-l-core-08.cisco.com ([173.36.16.145])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Aug 2026 10:50:57 +0000
+   d="scan'208";a="818855708"
+Received: from alln-l-core-06.cisco.com ([173.36.16.143])
+  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 24 Aug 2026 10:50:58 +0000
 Received: from sjc-ads-5197.cisco.com (sjc-ads-5197.cisco.com [10.28.35.211])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-08.cisco.com (Postfix) with ESMTPS id A3C1E18000443;
+	by alln-l-core-06.cisco.com (Postfix) with ESMTPS id EDF3E18000116;
 	Mon, 24 Aug 2026 10:50:57 +0000 (GMT)
 Received: by sjc-ads-5197.cisco.com (Postfix, from userid 1887503)
-	id 3BE80CC12A6; Mon, 24 Aug 2026 03:50:57 -0700 (PDT)
+	id 88CDECC12A9; Mon, 24 Aug 2026 03:50:57 -0700 (PDT)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-python][PATCH] python3-twitter: correct Tweepy CVE_PRODUCT mapping
+Subject: [meta-python][PATCH] python3-werkzeug: correct CVE_PRODUCT mapping
 Date: Mon, 24 Aug 2026 03:50:57 -0700
-Message-Id: <20260824105057.64542-1-devanshp@cisco.com>
+Message-Id: <20260824105057.64743-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-5197.cisco.com [10.28.35.211];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.35.211, sjc-ads-5197.cisco.com
-X-Outbound-Node: alln-l-core-08.cisco.com
+X-Outbound-Node: alln-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2026 10:51:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129458
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2026 10:51:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129461
 
 From: Devansh Patel <devanshp@cisco.com>
 
-The product-only "tweepy" value emits a wildcard-vendor identity and
-hides the distinct NVD identities assigned to the packaged Tweepy source.
+The current product-only "werkzeug" mapping emits a wildcard-vendor identity instead of the exact identities assigned to the packaged Pallets source.
 
-Use "josh_roesslein:tweepy" for its NVD dictionary CPE and
-"tweepy:tweepy" for the NVD configuration-only identity. With
-sbom-cve-check 1.3.3 and the pinned database snapshots, the generated
-product identity changes; the current CVE report is unchanged.
+Use "pallets:werkzeug" for the CNA affected-data identity and "palletsprojects:werkzeug" for the NVD dictionary CPE and configuration identity. This changes the generated product identity, but sbom-cve-check 1.3.3 with the pinned databases leaves the current CVE report unchanged.
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
-index 5386e90d42..6f9c886c35 100644
---- a/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twitter_4.17.0.bb
-@@ -18,5 +18,5 @@ RDEPENDS:${PN} += "\
-     python3-six \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
+index 4e1be5cb2f..fae4de2a3f 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
  
--CVE_PRODUCT = "tweepy"
-+CVE_PRODUCT = "josh_roesslein:tweepy tweepy:tweepy"
- CVE_STATUS[CVE-2012-5825] = "fixed-version: The vulnerability has been fixed since v3.1.0"
+ SRC_URI[sha256sum] = "9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44"
+ 
+-CVE_PRODUCT = "werkzeug"
++CVE_PRODUCT = "pallets:werkzeug palletsprojects:werkzeug"
+ 
+ inherit pypi python_flit_core
+ 
 -- 
 2.35.6
 
