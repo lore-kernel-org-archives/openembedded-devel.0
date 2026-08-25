@@ -1,240 +1,154 @@
-Return-Path: <jaipaul.cheernam@est.tech>
+Return-Path: <ricardo.salveti@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A031C61DBE
-	for <webhook@archiver.kernel.org>; Tue, 25 Aug 2026 15:02:18 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24086.1787670129015584401
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69CB8C61DB9
+	for <webhook@archiver.kernel.org>; Tue, 25 Aug 2026 20:05:27 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.30869.1787688320757968836
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2026 08:02:09 -0700
+ Tue, 25 Aug 2026 13:05:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=XG7KF04k;
- spf=pass (domain: est.tech, ip: 52.101.70.44, mailfrom: jaipaul.cheernam@est.tech)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u4Q5n14e2pBd+aw+/KwyoK87XrWH3OjTTrW7YoPpeeZlrAQxw+Rm/jYLqjUILsY1AWQlFb0McgS2fqoAIjEcxee6t6Lp9VZMfa9Ji+fFSvCbNqaqVfTYwNzXag3P0esFeJh/Xrq1oDI4R5o+1aKaDmkzNNrwECjqnF0LRKyZlOHhBgSIKxCAOjXG1zLvf5vU4RCL463V7fS/CkoSj54VwedQrdUB+riv8CVuws8ku0m0m2iRmaitt7GirWDw8o4KbqYAz90TprDIswRGpLdz5wNcUIckOg3OR+Fq/+hE0krfqCCg33jJABLjh+WFNixeab/d3w3pryvLuycr27tl/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Jjt8Xz7zL6Nxoqut0cYnhoubDX4F9YUjsAuoVqJe8s=;
- b=svFVxskfAHTyjXf1QnddKkJNIOP+D+/4BKMhs7Evbh9c1oJmH52nC185Zj+b1BCf/plOE0uDl2z1t0gkNlE5QC82v43hAOa6w2sB7HU+pG+n4LD09bLqVKr5aM7vg6NLuDz92uq1zFS6359dEExIhEBUrj5sbbM2tg/bkWELRkOiJgpz4EygS+XDPeY39jLG1DLyBFtFpO7EZA1jYN5yRLi3ACElQ9YIeiLPFfpFuQbFO8TiaNnxFOENKbc1gek7iifg9v1AJzGtFL+zT/svEheSwyNtwg5tbdFONWcvkv7cS9d/qJkLouiVmO4xTecWjb6rmA77c5pPLw4RBpYRdw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
- dkim=pass header.d=est.tech; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1Jjt8Xz7zL6Nxoqut0cYnhoubDX4F9YUjsAuoVqJe8s=;
- b=XG7KF04km2PiIBsW3FQA1TI/Z7DksMHM+l8v0Wu4+Ys6XQx4YphIGkuKa7jlbw6wJKEQLE2DBCsdX9VkS3zQW1frBYYAtocfPWyv63ZfpDlxabKhu9EdjmeytvGbwSTAbhtZWC+4oAbbjUNgTUoBBrOs1nUI81JmE5JjszvQ6z3x/B9YXG7ywX2s2EMCmaTucpL0Ds+D/vGBP2j01Gl5tAdCD0Uwq0Eav/0I3Um+ycub1XBzwnCwDADLhgKtu4guZfKV6eDUwP6dftB61Elc7mcPDlLolvigQiEpaTIOkgGLkB+tS0LOtMX/nGxBr4idL/1SmKicuL+vrf3gwizE3g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=est.tech;
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
- by PR3P189MB1068.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:40::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.6; Tue, 25 Aug
- 2026 15:02:06 +0000
-Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0360.005; Tue, 25 Aug 2026
- 15:02:06 +0000
-From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=TvkD8bSo;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=g0cBA6kf;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67PICeSY2738707
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 20:05:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Bbhl+uEqE4Bbokc/Hd3apq8mLBbop+CSaNE
+	4B2LDhWc=; b=TvkD8bSoI1HENvEgZ8KpNIkP65HGjJl6wkK7t0Hd++ooUEJdrMV
+	tClXSaiWakKeJReU5uYGaw0dcI2+Yldu5xTEwuvhY3asxeRpwa0KcmC6XZ0H8jc5
+	PuWy03DIk4scy+5m8P3S6Jkw1XYrXqJC4bzuptEBaHFGEj0IRsXRNSuRuwqlzRwe
+	FTB5WxkttET5OEwnIC+G3H1hl7IatUjlqa16k0r7aziTZqJWwNKp471zBFycR4Q/
+	OPWqDLhdyD/EbaybaHZNEptldXJwin3gV3LslhBI9l1uoJAHnyu5SlxeNx+ihAEv
+	6lMagNoyJYxdGFok8+bAfVll0LBH8S7DVVA==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9g4mrc73-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 20:05:19 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d6fed0652bso3263445ad.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 13:05:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787688318; x=1788293118; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Bbhl+uEqE4Bbokc/Hd3apq8mLBbop+CSaNE4B2LDhWc=;
+        b=g0cBA6kfx4fISi9WLsLi1gxcQqhFiWYNuaz/Y03WlMN4Zn94IIziDbJnramz08Y2Mx
+         yDog1NaFCvXJ7bRZw9kaoBiEOJuDMoaV4wh8DX7FtdV0twRqjxdGzdnHGsOlrbf+VqUB
+         2jeux8ZRamk5nBwPRyG1cUwtjpGpNJH2JRLw+uVcbvSbWlM6AM9KYjL+fcVahIevqCRU
+         9IWcPik7mB8YYv/9lAKn0BiJ+upMVvmFdmWR+qHg9jGdpzCtvJhk5dvb8dkQcH+Idmsh
+         9AqQZ0YGPcYyHxAsKvH/4SBEnaTQjh+xR/QHeJzSVuIuHxMLKFeNX4vOG2A08v7zvPxk
+         d20w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787688318; x=1788293118;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Bbhl+uEqE4Bbokc/Hd3apq8mLBbop+CSaNE4B2LDhWc=;
+        b=XzH5CI4m+k6Et4U8EpsTIxFWYIWt8EboCE8ehv9D7TfI+fQKHcqBTE/+A6PzAXTrJg
+         GW9KPotaU09pYAbctxPfHxqdIcnRxdAEe4ZPEfdXoIh6YdNHNheSgO5DaidGqWLvqtfb
+         1CzxWuq/Ui+tU+qTwyLe40BySbI4dr8zYYFHGKJN8rulCxeBqkdEmChOkysrUlaRJQoF
+         sbnzApvOO9dqZUAVth96cSR9wrYPrIUzi39/DHQXhGDJ8JSgp7PIOEi2663NisFXM5HO
+         atmW1HUf+iiYxtQnBYPcPL1/80qM+/Fq4CuuEoprFEgFpfcYq/CDbbIkhmErLyY0NZDV
+         M7kw==
+X-Gm-Message-State: AFuF++mVkUvhGyVNIPNhoJVeQg0BK/yINTXHLowFhjVc0yXPxTcU7EKy
+	xOViR05oLClHF3mdCeznbPXc58Bxp6yc8bdRmmPQxlQwwLKIa0uh8uB8h7C0XWVZw8pQ2Dtd5yR
+	o4nC1OO4dB1WUHhLKypOFELGoe2kFxvRlQjsaONscop17b4rUd7VySlQJ3egnuL/YLMx8hCB+DN
+	dlABXSRppRZJUNffyIAbQ=
+X-Gm-Gg: AR+sD13LfBbXmPOHEgVeOTM29DcWkbjSaufjAjwsjDELhYi131tbJJdExwudVE2YsQg
+	J7NiNHuW21ofUw2Mh4nBv9QcHSDXsoMX2H+qmb99U9dmWNBWGz2F+hR76am+rdKV6yJls8ylNpT
+	nhmTrOHAiZgQEO0JHlPikb8G0pJUN0SyUNgSIiATs/25kUPKpVKOswrI/XjUa1hOFK94KOkGEhB
+	o6eLfoys8kVtExZFeGuNelNMA9d5BR7z1rJnVJxdk9MKJnKR0jCP/YQvC2FqTTNSmFd1zsg9lQy
+	t83RqwG3o6vJU396EN7Cq8Vm6yOl5BHuyTVeFiNIuWWxPWbcxqur7hJJvco4AVOTx61O6yIAwaw
+	QpKgeHBXEsHtnNO6yxJl3t4z2+7cl6upNlabIAir9eII7vV8YDXmrUGJn+uV43xUiKTB21FuA0p
+	Yi/u3BWnHonHexr4s+1+fU8/zSZ2QPRCztEzfl3pc=
+X-Received: by 2002:a05:6a21:730e:b0:3cc:92d9:80cb with SMTP id adf61e73a8af0-3cf83c17b2bmr1788556637.12.1787688318036;
+        Tue, 25 Aug 2026 13:05:18 -0700 (PDT)
+X-Received: by 2002:a05:6a21:730e:b0:3cc:92d9:80cb with SMTP id adf61e73a8af0-3cf83c17b2bmr1788451637.12.1787688317491;
+        Tue, 25 Aug 2026 13:05:17 -0700 (PDT)
+Received: from ip-172-31-25-255.us-west-2.compute.internal (ec2-35-83-207-173.us-west-2.compute.amazonaws.com. [35.83.207.173])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc1bec83527sm112501a12.26.2026.08.25.13.05.16
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Aug 2026 13:05:16 -0700 (PDT)
+From: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: [PATCH 2/2] meta-networking: fix trailing whitespace
-Date: Tue, 25 Aug 2026 17:01:45 +0200
-Message-ID: <20260825150145.64061-3-jaipaul.cheernam@est.tech>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-In-Reply-To: <20260825150145.64061-1-jaipaul.cheernam@est.tech>
-References: <20260825150145.64061-1-jaipaul.cheernam@est.tech>
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P265CA0021.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2ae::22) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:18:3::ad4)
+Subject: [meta-oe][PATCH] redis: fix the install prefix
+Date: Tue, 25 Aug 2026 20:05:15 +0000
+Message-ID: <20260825200515.1831303-1-ricardo.salveti@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|PR3P189MB1068:EE_
-X-MS-Office365-Filtering-Correlation-Id: c41dad5c-f3a8-4046-c39c-08df02b9d45f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|23010399003|366016|376014|10070799003|1800799024|10067099003|6133799003|3023799007|22082099003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	jf30TA4xmFLZWwoaW2jPgsofaQDTWbr2lo5gPLQViJkc5P/hz939jmMOyJBuRGlvDLoN+i1qzei/jXGTNjZVWu0aHzf7707DqVtqFwzVD9ncr437L52DdUU5nf5b3h4uhxQlLFs9T4TTotJ7CwG6imm5GJmDp03bHC2RbBj9+AWdZ5ci3Z24p2KXr5RaRyTPNSwSmS9xfQHyGu10QKS+K7/mlLeTY77H8sOqP7ZHJs5qtPJaEtTM4qph6+tuBU2sSwD5EuflN/CZucmc0anep54/hC3LDVpaalqwnydTlRs4hlMBBXIzJM8U4DAVs08eRSkmhE0w+jVZhUPEqId6zdOAPBE+Y+lCcYNnjiJvvd7PVrA4Z4mMx520rCgojzmlceJ7BT5lTt1rm09EPzh5svY3RKft1zPDByzwlv6I1+PX3NIbQvtcnmiutDgFYI2M/8NSCSWxFjnD/h6bxP8Ak9YYR6P2ga8H9WvB+5/POWfy08XW4tomHWh/KTWXt/RVcPNpQYxRDOYRvI9P6Hha1r5g0pDOTbbZ+wHbIFMJPTCeLhXMPr32K8T3ZVYFD5HNOv8HmTA+9P8uHqvLBLGb1SEYCMt0Cu4LcWsRn3Vk4nBF4SJpvm+I5dRwW9Mg+Cyz
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(376014)(10070799003)(1800799024)(10067099003)(6133799003)(3023799007)(22082099003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?yhPrd2PejcnNGNqshaQ8f3lltdEvoeAgwFC75t66OnXFGrAQsADTXmUjAYQd?=
- =?us-ascii?Q?xGn9yUFTHOxgjE37FZx/1khFMIj7SDi807yFuvoKbWrQVl8ErLt3EICfSjb4?=
- =?us-ascii?Q?y4zmdiZYuWGpq+YYqnSS/u1509Zu3be0LS+5xpVH7vW7G9vdxnYIaS/JQuLr?=
- =?us-ascii?Q?fTgcFAwsLlbYb/uJKxkXDgXq//3xwxCnkGvAWscSSkXj2p5nJ6X9pftrxCD4?=
- =?us-ascii?Q?zWDR65JC+13BMzd4B/GLml8SCSxv2xe5er1DlIela0nOkzYcu2xFQfpZnoQ9?=
- =?us-ascii?Q?9SFuMqxXBP1F0UxvT6aL9xvZ0qwH5X6RCIiEGVTn/3z9zOvsCsxFEY82AgAE?=
- =?us-ascii?Q?dn7RVK/KIgioG+pTeo4MJcA3Qc7CnCJoB+bnV9kb+1W23zyH8C/Hw/sIPA9F?=
- =?us-ascii?Q?5EFPQTppX2wuHohev58MLbOyXPjkZSb+dylluRFpI3tJkwelxaRTsz/o/oD9?=
- =?us-ascii?Q?iFpSigpXrd+OC/PWum9o14Fc91L3a8r52DJoT3M9698ZoE1c02+VLrtn9UY3?=
- =?us-ascii?Q?9KkbWTrZv9sqZMXxXPvQmmu1vWKZQNxGN73nyy02ysYI2HgtRV2SUvoQxPCF?=
- =?us-ascii?Q?vQqUrE2mAxmqRH5GQqm6fR4EOcIt5sZAjzqZiLhCUJsUOQWW+p73qrlNim2y?=
- =?us-ascii?Q?G+wy2aoI/htPF3OU28RD7lM0NlLQTNo2mDbkDyoWgtooCCh205AcfN0j/PMA?=
- =?us-ascii?Q?f4JbmM6f1aXQGeJWOBnt1kenjo5Ga/jL22gzdhxaL6dT9w6mBwNVjJtuOLC7?=
- =?us-ascii?Q?xww3L0bgEDdjaWsjWxaqGK86bBky7kgTEmDdAoBiN8c3T2B1yC++4Zcc29cy?=
- =?us-ascii?Q?1zFUKXiTVeaZDg2TUTpLypgBelQRV8NwcIb7g44dgdrQauaSaTEA/Al8nSUQ?=
- =?us-ascii?Q?E1Uzri6z6RvILNW3grQyH+iyHGBgF0RH1+MRIPtS/1KHpdS+uG4j6PZPtUsU?=
- =?us-ascii?Q?CrrJHR1uAvYaKHwAH0AyvmVIoHo/Ts7rsyUe/H14ySXcmBR1r3JDNoXQz+5z?=
- =?us-ascii?Q?qnG4p3sG8vfsEMNQDgwAB+uesaXjc7rjGNpZeTWqoV7FCt56oW+EqWU5SFAK?=
- =?us-ascii?Q?dVqpVarQ9qh9paMt9oBUiTYfoQy7lXs3VSrC31DlKc+2hFIEyCtlkSn6hG9t?=
- =?us-ascii?Q?ag9QTwFvwAlib+CyOQX6NvF+Cm4D3ai1o8jlrjqpUq/5gy/uu1xoITIHBMAD?=
- =?us-ascii?Q?ousDa+kQLgFA7T6VZqarpDKQAWhgioVXsugkYdL0r78aWlqFyfLNobSNedNU?=
- =?us-ascii?Q?oyBl6wTNyZkdti+pWy6nv14f7sTEUXEke4tJavqysGmyYB+GILDe/L3Rs1rY?=
- =?us-ascii?Q?PZoJHhHIHlFTPyLjr6xR8suDQ+L7A3B+PGPWa19t52VOG8un8SRbPN672NM5?=
- =?us-ascii?Q?S6OpPd+y5E1LCVWlc1PEqVGlykh4Aena6AIsYs47v/Q4fGJC89PbSbARulZ3?=
- =?us-ascii?Q?auXdmeg7nIqYtaBq2dhcf1FGdGH87UxXAbCE2l6g5EKDtPdU0vlrSQ3NEgYi?=
- =?us-ascii?Q?NFSlPcnKUKunMAJqcgG/GLGD8HxXfxyI9FXuPoAGoMHtGl/cj+F2s+ODlGra?=
- =?us-ascii?Q?Eq3gKyEHLvlcXGSgIUWI2wlwoiYX75WKC/qfpzHeJqBASp+Y8NM311GAAvaB?=
- =?us-ascii?Q?3C6yyp+lTr9nl1H2RsHVF0+EmT9v/eb2MtznnI4gjyEA+BTmg+9z4a4TjWSM?=
- =?us-ascii?Q?uUGNUVpI+k+cb6waQLvwQiOZpmjUHF+UXQmi7NRWSqMKR41Ul/nzIqA5/6oc?=
- =?us-ascii?Q?/NPksJ1SPS4OnhUq7iDUkrtc+QuDrOAWErv1kqs8TiBPSH0NXh0sRju02SRy?=
-X-MS-Exchange-AntiSpam-MessageData-1: M++Rg4rCY1JJuIStY/mXw1VtijogWXQeUYE=
-X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: c41dad5c-f3a8-4046-c39c-08df02b9d45f
-X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2026 15:02:06.6281
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cE4EcNK91PKU+loJbPFQtoUs0zAkr3jDysZHoaIluJ/3k6gsvGMOf8QNwvR9Pue2u5ukXCCSnR1RFSuNzvvNd0c/1sPM6kx0lbMlBz5GryY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P189MB1068
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDE3MSBTYWx0ZWRfXwjcFnV/SNbC/
+ gbwC+ew/IwRZ8aoOTKCEYpexJqGy1pzlKTHP4Ruxlcb9AF4oRsx/DIHzVRtjTFUKO3LssLSNUVu
+ gXDRRTBnQUphj4Es+2XyaHVpJaVu61k=
+X-Proofpoint-ORIG-GUID: JCxeh_MWkex2spqFEz6EYVeKDmun2REp
+X-Authority-Analysis: v=2.4 cv=eYgNubEH c=1 sm=1 tr=0 ts=6a8df57f cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=P2/bgbqRawb6I1+7fxbs5g==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=DTc3mt1XSLuoO12XzmEA:9 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDE3MSBTYWx0ZWRfX2x9qz2xg9/47
+ CRu6pK/MKCIBHekvSGf30o2kgihmRTTQi6sKkZ+sSDPd59HKMZYZC/UXuc4H9BT7heLXY4Tdsqd
+ BEwGtgxvN3M1Fk7/jeSy8bF9nc4lHq2ABMb7fjmTYkTrY6+gpefjoOZdZ32nbHNittE99UeJNb2
+ WXg6KKsn/98EUOtPN7n42PSF1D/H+GBKax/HOsfvX9hsOa2D+hhXvHDmsBgwYRP4kRTYjS+BxlO
+ rovpLQqy5UzGKl1DAdBmT4MIUvK7F/6jldy7kkFQgvoaQslVrQ0vukY8kAlyR1oVUBOaM4jpwV1
+ oboZb3qd1Nz4y6By0fSCSqQsCDghgsBf6xlCXZQ95RInlnHbnBDKxMQnRyUGYnzhcMHwFMQlp4C
+ eWuLuddnJx9enzIRMAsR0AxRR7PqNG65pivU/nWQaJrhx91Z/psACLCK/OakeeEsm55aBUSsPy7
+ gXwIdHzk9MerHo3l5Nw==
+X-Proofpoint-GUID: JCxeh_MWkex2spqFEz6EYVeKDmun2REp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-25_05,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 impostorscore=0 suspectscore=0
+ clxscore=1015 lowpriorityscore=0 bulkscore=0 phishscore=0 spamscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608250171
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 15:02:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129473
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 20:05:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129474
 
-Bitbake now warns about trailing whitespace in parsed metadata lines.
-Fix the affected files to silence the warnings during parsing.
+redis 8.10.0 added "deploy: PREFIX ?= /usr/local" to the top level
+Makefile. Assigning PREFIX there, even for an unrelated target, clears
+the export flag it inherited from the environment, so recipe shells no
+longer see it. As the install target recurses with "$(MAKE) -C src
+install" from a recipe shell, the sub-make falls back to src/Makefile's
+"PREFIX?=/usr/local" and installs outside ${D}:
 
-Reported on:
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/89/builds/4284/ste=
-ps/15/logs/warnings
+  install: cannot create regular file '/usr/local/bin/redis-server': Permission denied
+  make[1]: *** [Makefile:576: install] Error 1
 
-Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+Releases up to 8.8.1 had no PREFIX assignment there, so the exported
+value propagated. Pass PREFIX on the make command line instead, which
+is propagated to sub-makes.
+
+AI-Generated: Uses Claude Code
+Signed-off-by: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 ---
- meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb   | 2 +-
- .../recipes-core/images/meta-networking-image-ptest.bb        | 2 +-
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb     | 2 +-
- meta-networking/recipes-support/openvpn/openvpn_2.7.6.bb      | 4 ++--
- meta-networking/recipes-support/spice/spice_0.16.0.bb         | 4 ++--
- .../recipes-support/strongswan/strongswan_6.0.7.bb            | 2 +-
- 6 files changed, 8 insertions(+), 8 deletions(-)
+ meta-oe/recipes-extended/redis/redis_8.10.1.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb b/=
-meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-index 17ef3c99cb..561edb48e7 100644
---- a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-+++ b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-@@ -30,7 +30,7 @@ SRC_URI =3D "git://www.bearssl.org/git/BearSSL;protocol=
-=3Dhttps;branch=3Dmaster \
-            "
-=20
- SONAME =3D "libbearssl.so.6"
--# without compile errors like=20
-+# without compile errors like
- # <..>/ld: build/obj/ghash_pclmul.o: warning: relocation against `br_ghash=
-_pclmul' in read-only section `.text'
- CFLAGS +=3D "-fPIC"
-=20
-diff --git a/meta-networking/recipes-core/images/meta-networking-image-ptes=
-t.bb b/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-index b6238d6100..0149cb69c6 100644
---- a/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-+++ b/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-@@ -20,7 +20,7 @@ BBCLASSEXTEND =3D "${@' '.join(['mcextend:'+x for x in d.=
-getVar('PTESTS_META_NETWO
- # box) and explicitly add up to 1500MB.
- IMAGE_OVERHEAD_FACTOR =3D "1.0"
- IMAGE_ROOTFS_EXTRA_SPACE =3D "324288"
--IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-wolfssl =3D "714288"=20
-+IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-wolfssl =3D "714288"
- # If a particular ptest needs more space, it can be customized:
- #IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-<pn> =3D "1024288"
-=20
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb b/me=
-ta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
-index 95c9f3919c..28cab7d47e 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
-@@ -128,7 +128,7 @@ do_install () {
-         -e 's|-ffile-prefix-map=3D[^ ]*||g' \
-         -e 's|-fdebug-prefix-map=3D[^ ]*||g' \
-         -e 's|-fmacro-prefix-map=3D[^ ]*||g' \
--        -i ${D}/${bindir}/prxs ${D}${includedir}/proftpd/Make.rules ${D}${=
-includedir}/proftpd/config.h=20
-+        -i ${D}/${bindir}/prxs ${D}${includedir}/proftpd/Make.rules ${D}${=
-includedir}/proftpd/config.h
-=20
-     # ftpmail perl script, which reads the proftpd log file and sends
-     # automatic email notifications once an upload finishs,
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.6.bb b/met=
-a-networking/recipes-support/openvpn/openvpn_2.7.6.bb
-index d6c8a0e34d..930193af7b 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.7.6.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.6.bb
-@@ -74,10 +74,10 @@ do_compile_ptest () {
-     for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l chec=
-k_PROGRAMS {} \;`; do
-         dir=3D`dirname ${x}`
-         case $dir in
--            *example*)  =20
-+            *example*)
-                 echo "Skipping directory: $dir"
-                 ;;
--            *)          =20
-+            *)
-                 oe_runmake -C ${dir} check-am
-                 ;;
-         esac
-diff --git a/meta-networking/recipes-support/spice/spice_0.16.0.bb b/meta-n=
-etworking/recipes-support/spice/spice_0.16.0.bb
-index 3d7788f749..b437008430 100644
---- a/meta-networking/recipes-support/spice/spice_0.16.0.bb
-+++ b/meta-networking/recipes-support/spice/spice_0.16.0.bb
-@@ -5,7 +5,7 @@
- SUMMARY =3D "Simple Protocol for Independent Computing Environments"
- DESCRIPTION =3D "SPICE (the Simple Protocol for Independent Computing \
- Environments) is a remote-display system built for virtual \
--environments which allows users to view a computing 'desktop' \=20
-+environments which allows users to view a computing 'desktop' \
- environment - not only on its computer-server machine, but also from \
- anywhere on the Internet and using a wide variety of machine \
- architectures."
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd25=
-5951079008b364516c"
- SRCREV =3D "a6668fff651726e5d4cfd52cbf8669540970452c"
-=20
- SRC_URI =3D "gitsm://gitlab.freedesktop.org/spice/spice;branch=3Dmaster;pr=
-otocol=3Dhttps;tag=3Dv0.16.0 \
--           file://0001-test-gst-Fix-compilation-error.patch \ =20
-+           file://0001-test-gst-Fix-compilation-error.patch \
-            file://0002-test-display-base-fix.patch \
- "
-=20
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb=
- b/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
-index 9283815705..117c148865 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
-@@ -62,7 +62,7 @@ PACKAGECONFIG[tpm2] =3D "--enable-tpm,--disable-tpm,,${PN=
-}-plugin-tpm"
-=20
-=20
- # integraty configuration needs meta-integraty
--#imc=20
-+#imc
- PACKAGECONFIG[tnc-imc] =3D "--enable-tnc-imc,--disable-tnc-imc,,  ${PN}-pl=
-ugin-tnc-imc ${PN}-plugin-tnc-tnccs"
- PACKAGECONFIG[imc-test] =3D "--enable-imc-test,--disable-imc-test,,"
- PACKAGECONFIG[imc-scanner] =3D "--enable-imc-scanner,--disable-imc-scanner=
-,,"
+diff --git a/meta-oe/recipes-extended/redis/redis_8.10.1.bb b/meta-oe/recipes-extended/redis/redis_8.10.1.bb
+index 7c017e9579..d0220d228b 100644
+--- a/meta-oe/recipes-extended/redis/redis_8.10.1.bb
++++ b/meta-oe/recipes-extended/redis/redis_8.10.1.bb
+@@ -65,8 +65,7 @@ do_compile() {
+ }
+ 
+ do_install() {
+-    export PREFIX=${D}/${prefix}
+-    oe_runmake install
++    oe_runmake install PREFIX=${D}${prefix}
+     install -d ${D}/${sysconfdir}/redis
+     install -m 0644 ${UNPACKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
+     install -d ${D}/${sysconfdir}/init.d
+-- 
+2.43.0
+
 
