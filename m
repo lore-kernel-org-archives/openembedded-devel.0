@@ -2,1263 +2,681 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00800C5DF97
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E8A3C61DC6
 	for <webhook@archiver.kernel.org>; Wed, 26 Aug 2026 05:27:05 +0000 (UTC)
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6022.1787722019444507014
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6021.1787722018714000830
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2026 22:26:59 -0700
+ Tue, 25 Aug 2026 22:27:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=V4EH8pGS;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=NYKk2v0h;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=47801; q=dns/txt;
-  s=iport01; t=1787722019; x=1788931619;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=6LpyxjStbSRa2bOGTv/AGpxZkVdoAJWa2Uj8Y+MjL7Q=;
-  b=V4EH8pGScwmeBihNrQWIu/LrzTDRMWJoZP6LX1knQKexulvm99lZIz7L
-   vqMj7G7gvC9w3KUXAk4CHtEqzVf0dQ9gHQWopyOeWhhWY/9Qpl44v2IiI
-   TLS0jK7yMoCRpKxmlflMRp1vN478L9ouv+0QTqpluwDhdiOVJL5HLTtaw
-   yZZ2LuZGCcMaL9j1VoEG1vQoOfE7D7Dqrld9mb+v1i3bZboJNx9HA3PrN
-   WfEnkEbxDPnh/VOvADFe03WZC0RMU386+CJdmcnlmiwn/YrSuUgTv8zhS
-   KWZsiG7AGGgdUCvRRjz2Mf1pLjdoGWHoeWO+BkIEO/nxVfBE9QjWFfNpp
+  d=cisco.com; i=@cisco.com; l=23414; q=dns/txt;
+  s=iport01; t=1787722020; x=1788931620;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=7h5HXG5jvqZBwJAQReP/edXqJaZ2HrXoKhsdKaU0J/A=;
+  b=NYKk2v0hF1NCQR6nRqKnKg8w4aKmgjC6xpR2jMfx2225qcr6Jmm/3W3X
+   VUq43UjNvS+BHs8N4Rt2iV8uoGBh0sxcfaxxkcazOxiUCzmRydpufzFK+
+   iPmKUDsvdzQM79jMExUDsMV4iuvGVBWT/jrqss4FUe1srDjECDpJwcxy4
+   rj/fBSlnI5G1jeKq+4QXgAw2G532qRPDf2+FRPx+tCLxDYHYx7Rx+h7HT
+   Er5F/DKKC3ouvHZxevVI2OhQ6RAdNO9kIPB7VTxa40sBUXsJDyYJZHfww
+   soCu4D45YYqEhSaMGPKTx78figvetN45s2fAfwOTvZWpz9K9JsZU9otu+
    w==;
-X-CSE-ConnectionGUID: 1pIUfMwUS9yXaXEQ6ipoQA==
-X-CSE-MsgGUID: My1MlJW2Td6Sy229G9QtDQ==
-X-IPAS-Result: =?us-ascii?q?A0BKAgDId45q/48QJK1aHgEBCxIMggULgld0XkNJlkoDi?=
- =?us-ascii?q?2SSNxSBag8BAQEPRA0EAQGEP0YCjWwCJjQJDgECBAMCAwEBAQEBAQEBAQEBC?=
- =?us-ascii?q?wEBBQEBAQIBBwWBDhOGTw2GWgECAQMaAQwLARgBLRAcAwECLyALIwgZgwIBg?=
- =?us-ascii?q?joDNwMRvk2BeTOBATuCbQE/AkNQ2EsNglgBCxQBgTiFP4J/hSNdGAFEhDgnG?=
- =?us-ascii?q?xuBcoEVgimBQIEFgRpCAQECGIEdAQ6GXwSCDRV6EoFabohpA4guSIEeA1ksA?=
- =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+F4ENGwYFgR2BKIQQIxk2fIEJXoErKWABE?=
- =?us-ascii?q?heBCYIHAoJaggUCAUlDDgdHPgsYDUgRLDcUGQQ+bgeOax+BQYEIASwEDCQJE?=
- =?us-ascii?q?RMBCgYbBAUOLwkqDFItESgRGJJXFBAKMY9lgiGBNZ5pcQoog3aMIo8+hXwaM?=
- =?us-ascii?q?4FWgi6BV5JAklELmH2CWYsxhAmFBo1BhGmBaDxGgQELB3AVgyIJShkPjioDC?=
- =?us-ascii?q?wuDYIF/ZYEUgWzGVScyAgEBBzIBAQcCBw4DC4FokAABASYHgU8BAQ?=
-IronPort-Data: A9a23:tWq49KwdCpquRKCxPTJ6t+dmxyrEfRIJ4+MujC+fZmUNrF6WrkUDz
- GUYC2DQPfbcamvxeYsnaN+28EMFv8DQxtJjQANs+FhgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 46aT/H3Ygf/hWYkaDxMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJBguHLAW3/lKOjBfx
- fUoBQlTbwiEvsvjldpXSsE07igiBMDvOIVavjRryivUSK54B5vCWK7No9Rf2V/chOgXQq2YP
- JRfMGQpNUibC/FMEg9/5JYWkOSlgnD+YjRwo1OOrq1x6G/WpOB0+Oi0b4OMIYzUGa25mG69t
- zvj+0bGWC0WaueOk2DU3SOVmsP2yHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZF+k8rQXIwa3O7kPBWC4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:mVPpV6rN7d9iscbgvMmgb3oaV5oJeYIsimQD101hICG9vPb2qy
- nIpoV96faaslcssR0b9OxofZPwI080lqQFhbX5Q43DYOCOggLBR+tfBMnZsljd8kbFmNK1u5
- 0NT0EHMqySMXFKyeDn/QK/D9EshPOD8KyumKPi6k0Fd3ANV0mlhD0Jcjpy1SZNNXB7OaY=
-X-Talos-CUID: 9a23:A371vW1oxS5UULRF2335iLxfQ9gET3P400rrcl6IAFZEceOUUVip0fYx
-X-Talos-MUID: 9a23:ggi6EgXjcrkALOfq/Br93RRmFvgy36jwM1FXy8Qp6vCYGRUlbg==
+X-CSE-ConnectionGUID: rkPiVYxJTceGb+H5D6G0+w==
+X-CSE-MsgGUID: a/WiY5aATmugumjIZgq68A==
+X-IPAS-Result: =?us-ascii?q?A0BMAABDeI5q/4sQJK1aGQEBAQEBAQEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?RIBAQEBAQEBAQEBAQGBfAQBAQEBAQsBglZ0XkNJA4xviViBFopRhWaLOYEYF?=
+ =?us-ascii?q?IFqDwEBAQ9EDQQBAYQ/Ro1uAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBA?=
+ =?us-ascii?q?QECAQcFgQ4Thk8NhloBAgEdGAEYASAKAywDAQIZNgsjIYMCAYI6AzcDEQa+U?=
+ =?us-ascii?q?IIsgQGDKAE/AkNQ2EsNglgBCxQBgTgBhT6Cf4UjXRgBRIQ4FxAbG4FygRWCK?=
+ =?us-ascii?q?Up2gQWBGkIBAQGBRWqFdQSCInoSgVpuKIhEiC5IgR4DWSwBVRMNCgsHBYFmA?=
+ =?us-ascii?q?zUSKhVuMh2BIz4XgQ0bBgWBHYEohBAjGTZ8gQlegSspYAESF4EJggcCglqCB?=
+ =?us-ascii?q?QIBSUMOB0c+CxgNSBEsNxQZBD5uB45rH4FYagYBARUnGwkaCQgCAQofAQEXR?=
+ =?us-ascii?q?jQPDxQUPhccAgQDFw8DkkMdETGPZYIhgTWeHE1xCiiDdowijz6FfBozgVaCL?=
+ =?us-ascii?q?oFXkkCSUQuYfY4KhAmDU41aBS0YUIRpgWg8gUcLB3AVO4JnCRY0GQ+OKgMLC?=
+ =?us-ascii?q?4NggX+DFFHGVScyAgkDLwEBBwIHDgMLgWiQAAIkAgdEgQsBAQ?=
+IronPort-Data: A9a23:/Rn7t6j+X/oWKrHXxXQnLP/iX161MREKZh0ujC45NGQN5FlHY01je
+ htvXziGbK2MNmTzc9Ejbomxp0tVu8LRm4NrGQE+/iFgE3ljpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeCULOZ82QsaDxMu/jd8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUC+d52P1Be1
+ 8ATJR8HLTDeq7yZmPGkH7wEasQLdKEHPasWvnVmiDWcBvE8TNWbGePB5MRT23E7gcUm8fT2P
+ pVCL2ExKk2eJUQUaz/7C7pm9AusrnX8fjlRqUOcjaE2+GPUigd21dABNfKFI43bHpoIxxbwS
+ mTu9iPGAyBHPfWjzCeK73eup93AhH2rcddHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QWJzO/Qpg2eHGVBFmQHY909v8hwTjsvv
+ rOUo+7U6fVUmOX9YRqgGn289lte5QB9wbc+WBI5
+IronPort-HdrOrdr: A9a23:ZECBaqAFwy1dbvnlHema55DYdb4zR+YMi2TDGXofdfUzSL38qy
+ nAppUmPHPP5Qr5O0tQ++xoRpPhfZq0z/cciuMs1NyZMjUO1lHFEGgb1/qA/xTQXwvj6+Vaya
+ BsN4J6CNH2EBxGqPyS2njdLz7lq+P3lpxBQozlvhBQcT0=
+X-Talos-CUID: 9a23:nRX+imMF/oe2q+5DQipf9XAlCuIZeXDyxjTwfmPmJj4qV+jA
+X-Talos-MUID: 9a23:T+3ZygRNEIB6AeWYRXTlww5jBZphypirFU8QlJcnicada3xZbmI=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,244,1779148800"; 
-   d="scan'208";a="817113864"
-Received: from alln-l-core-06.cisco.com ([173.36.16.143])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Aug 2026 05:26:57 +0000
+   d="scan'208";a="819937518"
+Received: from alln-l-core-02.cisco.com ([173.36.16.139])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Aug 2026 05:26:57 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-06.cisco.com (Postfix) with ESMTPS id 84F5D18000139;
+	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id 7ED3818000218;
 	Wed, 26 Aug 2026 05:26:57 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 1FA19CD02B9; Tue, 25 Aug 2026 22:26:57 -0700 (PDT)
+	id 15F21CCA79B; Tue, 25 Aug 2026 22:26:57 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 3/3] python3-django: fix CVE-2026-15830
-Date: Tue, 25 Aug 2026 22:26:54 -0700
-Message-Id: <20260826052654.723156-3-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 1/3] python3-django: fix CVE-2026-15307
+Date: Tue, 25 Aug 2026 22:26:52 -0700
+Message-Id: <20260826052654.723156-1-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260826052654.723156-1-dkelaiya@cisco.com>
-References: <20260826052654.723156-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-06.cisco.com
+X-Outbound-Node: alln-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 05:27:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129478
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 05:27:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129479
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the upstream fix as referenced in [2],
 using the commit shown in [1].
 
-[1] https://github.com/django/django/commit/ba80833fa656dd09660b97c4429331067db1b080
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-15830
+[1] https://github.com/django/django/commit/115ffd0463a765ab1cc93de18e94b5459b8a300e
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-15307
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../CVE-2026-15830.patch                      | 1144 +++++++++++++++++
- .../python/python3-django_5.0.14.bb           |    1 +
- 2 files changed, 1145 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15830.patch
+ .../CVE-2026-15307.patch                      | 563 ++++++++++++++++++
+ .../python/python3-django_5.0.14.bb           |   1 +
+ 2 files changed, 564 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15307.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15830.patch b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15830.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15307.patch b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15307.patch
 new file mode 100644
-index 0000000000..7ef20fe1c9
+index 0000000000..ce45e92faf
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15830.patch
-@@ -0,0 +1,1144 @@
-+From 72d8819eef87adbcbbedc80084a2e6652447619f Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15307.patch
+@@ -0,0 +1,563 @@
++From 1776209a7609053b6afe6cb0f14960c478de5424 Mon Sep 17 00:00:00 2001
 +From: Jacob Walls <jacobtylerwalls@gmail.com>
-+Date: Wed, 15 Jul 2026 15:39:27 -0400
-+Subject: [PATCH] [5.2.x] Fixed CVE-2026-15830 -- Mitigated potential DoS via
-+ nested geometry collections.
++Date: Thu, 9 Jul 2026 11:07:28 -0400
++Subject: [PATCH] [5.2.x] Fixed CVE-2026-15307 -- Blocked raster strings and
++ dicts in spatial lookups.
 +
-+Since deeply nested geometry collections can lead to fatal errors in
-+GEOS, a new `max_geom_collections` argument on geometry model and form
-+fields, passed down to `GEOSGeometry` itself, allows limiting either
-+depth (WKT) or total number (WKB) before reaching GEOS.
++Spatial lookups optimistically parse values as rasters before retrying
++as geometries. If a malicious value reached the GDALRaster constructor,
++depending on the raster driver, it might write to disk or fetch from the
++network regardless of the constructor's `write=False` default argument.
 +
-+Thanks Andrew MacPherson and kimchunbok_ for the reports, and Natalia
-+Bidart, Simon Charette, and Sarah Boyce for reviews.
++Although this works as designed for model field assignment, this is
++potentially unexpected for querying, for example, in the admin's
++changelist view, which allows staff users to execute arbitrary lookups
++on models registered with the admin.
 +
-+Backport of d2e59b77fe18de318a8272c2a7bbc798d84d1d0d from main.
++Network rasters didn't even work in lookup contexts before, providing
++further evidence that this use case was unintentional. (The failure
++point was after the fetching, however.)
 +
-+CVE: CVE-2026-15830
-+Upstream-Status: Backport [https://github.com/django/django/commit/ba80833fa656dd09660b97c4429331067db1b080]
++Now, strings and dicts representing rasters are rejected by spatial
++lookups. To opt in to using them, wrap them in a `GDALRaster` first.
++
++Although it would simplify the implementation to try geometries before
++rasters (instead of stashing a raster exception and raising it later),
++we maintain the current order, which has been stable for a decade.
++
++Thanks Bence Nagy, localhost-detect, and kimchunbok_ for providing
++information useful in evaluating this report. Thanks Simon Charette,
++Natalia Bidart, and Sarah Boyce for reviews.
++
++Backport of f1949c1f9758947ade984c895ff16bef46f56520 from main.
++
++CVE: CVE-2026-15307
++Upstream-Status: Backport [https://github.com/django/django/commit/115ffd0463a765ab1cc93de18e94b5459b8a300e]
 +
 +Backport Changes:
-+- Dropped the docs/releases/5.2.17.txt file as
++- Dropped the file docs/releases/5.2.17.txt as
 +  current version for Scarthgap is 5.0.14
 +
-+(cherry picked from commit ba80833fa656dd09660b97c4429331067db1b080)
++(cherry picked from commit 115ffd0463a765ab1cc93de18e94b5459b8a300e)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ .../contrib/gis/db/backends/mysql/features.py |  14 ++
-+ .../gis/db/backends/mysql/operations.py       |   4 +-
-+ .../gis/db/backends/oracle/features.py        |   4 +
-+ .../gis/db/backends/oracle/operations.py      |   5 +-
-+ .../gis/db/backends/postgis/operations.py     |   9 +-
-+ .../gis/db/backends/spatialite/operations.py  |   5 +-
-+ django/contrib/gis/db/models/fields.py        |  18 +-
-+ django/contrib/gis/db/models/proxy.py         |   7 +-
-+ django/contrib/gis/forms/fields.py            |  16 +-
-+ django/contrib/gis/forms/widgets.py           |   4 +-
-+ django/contrib/gis/geos/geometry.py           |  31 ++-
-+ django/contrib/gis/geos/prototypes/io.py      | 161 ++++++++++++++--
-+ docs/ref/contrib/gis/forms-api.txt            |  24 +++
-+ docs/ref/contrib/gis/geos.txt                 |   8 +-
-+ docs/ref/contrib/gis/model-api.txt            |  14 ++
-+ tests/gis_tests/geoapp/models.py              |   4 +
-+ tests/gis_tests/geoapp/tests.py               |  59 +++++-
-+ tests/gis_tests/geos_tests/test_geos_limit.py | 176 ++++++++++++++++++
-+ tests/gis_tests/rasterapp/test_rasterfield.py |  16 ++
-+ tests/gis_tests/test_fields.py                |  33 ++++
-+ tests/gis_tests/test_geoforms.py              |  50 +++++
-+ 21 files changed, 629 insertions(+), 33 deletions(-)
-+ create mode 100644 tests/gis_tests/geos_tests/test_geos_limit.py
++ django/contrib/gis/db/models/fields.py        | 37 +++++---
++ django/contrib/gis/gdal/raster/source.py      | 46 ++++++++--
++ docs/ref/contrib/gis/db-api.txt               | 12 ++-
++ docs/ref/contrib/gis/gdal.txt                 | 34 +++++++
++ tests/gis_tests/geoadmin/tests.py             | 25 ++++-
++ tests/gis_tests/geoapp/tests.py               | 91 +++++++++++++++++++
++ tests/gis_tests/rasterapp/test_rasterfield.py | 25 ++---
++ tests/gis_tests/test_geoforms.py              | 15 +++
++ 8 files changed, 246 insertions(+), 39 deletions(-)
 +
-+diff --git a/django/contrib/gis/db/backends/mysql/features.py b/django/contrib/gis/db/backends/mysql/features.py
-+index cd99420374..78e58617ec 100644
-+--- a/django/contrib/gis/db/backends/mysql/features.py
-++++ b/django/contrib/gis/db/backends/mysql/features.py
-+@@ -19,3 +19,17 @@ class DatabaseFeatures(BaseSpatialFeatures, MySQLDatabaseFeatures):
-+     def supports_geometry_field_unique_index(self):
-+         # Not supported in MySQL since https://dev.mysql.com/worklog/task/?id=11808
-+         return self.connection.mysql_is_mariadb
-++
-++    @cached_property
-++    def django_test_skips(self):
-++        skips = super().django_test_skips
-++        if self.connection.mysql_is_mariadb:
-++            skips.update(
-++                {
-++                    "MariaDB doesn't support nested geometry collections.": {
-++                        "gis_tests.geoapp.tests.SaveLoadTests."
-++                        "test_geometrycollectionfield_default_max_ignored_on_read",
-++                    },
-++                }
-++            )
-++        return skips
-+diff --git a/django/contrib/gis/db/backends/mysql/operations.py b/django/contrib/gis/db/backends/mysql/operations.py
-+index 886db605cd..4d6103dc5b 100644
-+--- a/django/contrib/gis/db/backends/mysql/operations.py
-++++ b/django/contrib/gis/db/backends/mysql/operations.py
-+@@ -122,7 +122,9 @@ class MySQLOperations(BaseSpatialOperations, DatabaseOperations):
-+ 
-+         def converter(value, expression, connection):
-+             if value is not None:
-+-                geom = GEOSGeometryBase(read(memoryview(value)), geom_class)
-++                geom = GEOSGeometryBase(
-++                    read(memoryview(value), max_geom_collections=None), geom_class
-++                )
-+                 if srid:
-+                     geom.srid = srid
-+                 return geom
-+diff --git a/django/contrib/gis/db/backends/oracle/features.py b/django/contrib/gis/db/backends/oracle/features.py
-+index f346d93573..16279b8a1e 100644
-+--- a/django/contrib/gis/db/backends/oracle/features.py
-++++ b/django/contrib/gis/db/backends/oracle/features.py
-+@@ -23,6 +23,10 @@ class DatabaseFeatures(BaseSpatialFeatures, OracleDatabaseFeatures):
-+                     "gis_tests.gis_migrations.test_operations.OperationTests."
-+                     "test_add_check_constraint",
-+                 },
-++                "Oracle doesn't support nested geometry collections.": {
-++                    "gis_tests.geoapp.tests.SaveLoadTests."
-++                    "test_geometrycollectionfield_default_max_ignored_on_read",
-++                },
-+             }
-+         )
-+         return skips
-+diff --git a/django/contrib/gis/db/backends/oracle/operations.py b/django/contrib/gis/db/backends/oracle/operations.py
-+index eb86dc39de..59366eadc0 100644
-+--- a/django/contrib/gis/db/backends/oracle/operations.py
-++++ b/django/contrib/gis/db/backends/oracle/operations.py
-+@@ -236,7 +236,10 @@ class OracleOperations(BaseSpatialOperations, DatabaseOperations):
-+ 
-+         def converter(value, expression, connection):
-+             if value is not None:
-+-                geom = GEOSGeometryBase(read(memoryview(value.read())), geom_class)
-++                geom = GEOSGeometryBase(
-++                    read(memoryview(value.read()), max_geom_collections=None),
-++                    geom_class,
-++                )
-+                 if srid:
-+                     geom.srid = srid
-+                 return geom
-+diff --git a/django/contrib/gis/db/backends/postgis/operations.py b/django/contrib/gis/db/backends/postgis/operations.py
-+index b68db377f8..381e408bc7 100644
-+--- a/django/contrib/gis/db/backends/postgis/operations.py
-++++ b/django/contrib/gis/db/backends/postgis/operations.py
-+@@ -413,9 +413,12 @@ class PostGISOperations(BaseSpatialOperations, DatabaseOperations):
-+         geom_class = expression.output_field.geom_class
-+ 
-+         def converter(value, expression, connection):
-+-            if isinstance(value, str):  # Coming from hex strings.
-+-                value = value.encode("ascii")
-+-            return None if value is None else GEOSGeometryBase(read(value), geom_class)
-++            if value is not None:
-++                if isinstance(value, str):  # Coming from hex strings.
-++                    value = value.encode("ascii")
-++                return GEOSGeometryBase(
-++                    read(value, max_geom_collections=None), geom_class
-++                )
-+ 
-+         return converter
-+ 
-+diff --git a/django/contrib/gis/db/backends/spatialite/operations.py b/django/contrib/gis/db/backends/spatialite/operations.py
-+index d39f7a9e0d..721d9fa047 100644
-+--- a/django/contrib/gis/db/backends/spatialite/operations.py
-++++ b/django/contrib/gis/db/backends/spatialite/operations.py
-+@@ -223,6 +223,9 @@ class SpatiaLiteOperations(BaseSpatialOperations, DatabaseOperations):
-+         read = wkb_r().read
-+ 
-+         def converter(value, expression, connection):
-+-            return None if value is None else GEOSGeometryBase(read(value), geom_class)
-++            if value is not None:
-++                return GEOSGeometryBase(
-++                    read(value, max_geom_collections=None), geom_class
-++                )
-+ 
-+         return converter
 +diff --git a/django/contrib/gis/db/models/fields.py b/django/contrib/gis/db/models/fields.py
-+index 15d9ae3c57..d3f9b1b2ff 100644
++index 889c1cfe84..15d9ae3c57 100644
 +--- a/django/contrib/gis/db/models/fields.py
 ++++ b/django/contrib/gis/db/models/fields.py
-+@@ -17,6 +17,7 @@ from django.contrib.gis.geos import (
-+     Point,
-+     Polygon,
-+ )
-++from django.contrib.gis.geos.prototypes.io import MAX_GEOM_COLLECTIONS
-+ from django.core.exceptions import ImproperlyConfigured
-+ from django.db.models import Field
-+ from django.utils.translation import gettext_lazy as _
-+@@ -215,8 +216,11 @@ class BaseSpatialField(Field):
++@@ -3,6 +3,9 @@ from collections import defaultdict, namedtuple
++ from django.contrib.gis import forms, gdal
++ from django.contrib.gis.db.models.proxy import SpatialProxy
++ from django.contrib.gis.gdal.error import GDALException
+++from django.contrib.gis.gdal.raster.const import VSI_FILESYSTEM_PREFIX
+++from django.contrib.gis.gdal.raster.source import DisallowedRasterLookup
+++from django.contrib.gis.geometry import json_regex
++ from django.contrib.gis.geos import (
++     GeometryCollection,
++     GEOSException,
++@@ -172,21 +175,19 @@ class BaseSpatialField(Field):
++     def get_raster_prep_value(self, value, is_candidate):
++         """
++         Return a GDALRaster if conversion is successful, otherwise return None.
+++
+++        Unless the user opts in by wrapping values in a GDALRaster, raise
+++        DisallowedRasterLookup for values that fetch or write to disk.
++         """
++         if isinstance(value, gdal.GDALRaster):
++             return value
++-        elif is_candidate:
+++        gdal.GDALRaster.check_raster_lookup_value(value)
+++        if is_candidate:
++             try:
++                 return gdal.GDALRaster(value)
++             except GDALException:
++                 pass
++-        elif isinstance(value, dict):
++-            try:
++-                return gdal.GDALRaster(value)
++-            except GDALException:
++-                raise ValueError(
++-                    "Couldn't create spatial object from lookup value '%s'." % value
++-                )
+++        return None
++ 
++     def get_prep_value(self, value):
++         obj = super().get_prep_value(value)
++@@ -202,22 +203,36 @@ class BaseSpatialField(Field):
++                 obj, "__geo_interface__"
++             )
++             # Try to convert the input to raster.
++-            raster = self.get_raster_prep_value(obj, is_candidate)
++-
+++            raster = None
+++            blocked_err = None
+++            try:
+++                raster = self.get_raster_prep_value(obj, is_candidate)
+++            except DisallowedRasterLookup as err:
+++                if isinstance(obj, dict):
+++                    raise err
+++                # Don't immediately raise in case this is a valid GEOSGeometry.
+++                blocked_err = err
 +             if raster:
 +                 obj = raster
 +             elif is_candidate:
-++                max_geom_collections = getattr(
-++                    self, "max_geom_collections", MAX_GEOM_COLLECTIONS
-++                )
 +                 try:
-+-                    obj = GEOSGeometry(obj)
-++                    obj = GEOSGeometry(obj, max_geom_collections=max_geom_collections)
-+                 except (TypeError, ValueError) as err:
-+                     if isinstance(obj, str) and obj.startswith(VSI_FILESYSTEM_PREFIX):
-+                         raise blocked_err
-+@@ -260,6 +264,7 @@ class GeometryField(BaseSpatialField):
-+         *,
-+         extent=(-180.0, -90.0, 180.0, 90.0),
-+         tolerance=0.05,
-++        max_geom_collections=MAX_GEOM_COLLECTIONS,
-+         **kwargs,
-+     ):
-+         """
-+@@ -278,6 +283,10 @@ class GeometryField(BaseSpatialField):
-+         tolerance:
-+          Define the tolerance, in meters, to use for the geometry field
-+          entry in the `USER_SDO_GEOM_METADATA` table.  Defaults to 0.05.
-++
-++        max_geom_collections:
-++         The maximum number of geometry collections accepted before parsing is
-++         refused, forwarded to the form field.
-+         """
-+         # Setting the dimension of the geometry field.
-+         self.dim = dim
-+@@ -290,6 +299,10 @@ class GeometryField(BaseSpatialField):
-+         self._extent = extent
-+         self._tolerance = tolerance
-+ 
-++        # Limit on nested/total geometry collections, forwarded to the form
-++        # field to guard against crashes in GEOS from deeply nested input.
-++        self.max_geom_collections = max_geom_collections
-++
-+         super().__init__(verbose_name=verbose_name, **kwargs)
-+ 
-+     def deconstruct(self):
-+@@ -303,6 +316,8 @@ class GeometryField(BaseSpatialField):
-+             kwargs["extent"] = self._extent
-+         if self._tolerance != 0.05:
-+             kwargs["tolerance"] = self._tolerance
-++        if self.max_geom_collections != MAX_GEOM_COLLECTIONS:
-++            kwargs["max_geom_collections"] = self.max_geom_collections
-+         return name, path, args, kwargs
-+ 
-+     def contribute_to_class(self, cls, name, **kwargs):
-+@@ -320,6 +335,7 @@ class GeometryField(BaseSpatialField):
-+             "form_class": self.form_class,
-+             "geom_type": self.geom_type,
-+             "srid": self.srid,
-++            "max_geom_collections": self.max_geom_collections,
-+             **kwargs,
-+         }
-+         if self.dim > 2 and not getattr(
-+diff --git a/django/contrib/gis/db/models/proxy.py b/django/contrib/gis/db/models/proxy.py
-+index b415e147fc..e842ad0f22 100644
-+--- a/django/contrib/gis/db/models/proxy.py
-++++ b/django/contrib/gis/db/models/proxy.py
-+@@ -43,7 +43,12 @@ class SpatialProxy(DeferredAttribute):
-+         else:
-+             # Otherwise, a geometry or raster object is built using the field's
-+             # contents, and the model's corresponding attribute is set.
-+-            geo_obj = self._load_func(geo_value)
-++            try:
-++                max_geoms = self.field.max_geom_collections
-++            except AttributeError:
-++                geo_obj = self._load_func(geo_value)
-++            else:
-++                geo_obj = self._load_func(geo_value, max_geom_collections=max_geoms)
-+             setattr(instance, self.field.attname, geo_obj)
-+         return geo_obj
-+ 
-+diff --git a/django/contrib/gis/forms/fields.py b/django/contrib/gis/forms/fields.py
-+index 1fd31530c1..7835b22ced 100644
-+--- a/django/contrib/gis/forms/fields.py
-++++ b/django/contrib/gis/forms/fields.py
-+@@ -1,6 +1,7 @@
-+ from django import forms
-+ from django.contrib.gis.gdal import GDALException
-+ from django.contrib.gis.geos import GEOSException, GEOSGeometry
-++from django.contrib.gis.geos.prototypes.io import MAX_GEOM_COLLECTIONS
-+ from django.core.exceptions import ValidationError
-+ from django.utils.translation import gettext_lazy as _
-+ 
-+@@ -16,6 +17,7 @@ class GeometryField(forms.Field):
-+ 
-+     widget = OpenLayersWidget
-+     geom_type = "GEOMETRY"
-++    max_geom_collections = MAX_GEOM_COLLECTIONS
-+ 
-+     default_error_messages = {
-+         "required": _("No geometry value provided."),
-+@@ -27,12 +29,20 @@ class GeometryField(forms.Field):
-+         ),
-+     }
-+ 
-+-    def __init__(self, *, srid=None, geom_type=None, **kwargs):
-++    def __init__(
-++        self, *, srid=None, geom_type=None, max_geom_collections=None, **kwargs
-++    ):
-+         self.srid = srid
-+         if geom_type is not None:
-+             self.geom_type = geom_type
-++        if max_geom_collections is not None:
-++            self.max_geom_collections = max_geom_collections
-+         super().__init__(**kwargs)
-+         self.widget.attrs["geom_type"] = self.geom_type
-++        # Propagate the limit to the (per-field) widget instance, which does
-++        # the actual parsing. Custom widgets that override deserialize() and
-++        # ignore this attribute still get the default limit via GEOSGeometry.
-++        self.widget.max_geom_collections = self.max_geom_collections
-+ 
-+     def to_python(self, value):
-+         """Transform the value to a Geometry object."""
-+@@ -47,7 +57,9 @@ class GeometryField(forms.Field):
-+                     value = None
++                     obj = GEOSGeometry(obj)
+++                except (TypeError, ValueError) as err:
+++                    if isinstance(obj, str) and obj.startswith(VSI_FILESYSTEM_PREFIX):
+++                        raise blocked_err
+++                    raise err
++                 except (GEOSException, GDALException):
+++                    if isinstance(obj, str) and json_regex.match(obj):
+++                        raise blocked_err
++                     raise ValueError(
++                         "Couldn't create spatial object from lookup value '%s'." % obj
++                     )
 +             else:
-+                 try:
-+-                    value = GEOSGeometry(value)
-++                    value = GEOSGeometry(
-++                        value, max_geom_collections=self.max_geom_collections
-++                    )
-+                 except (GEOSException, ValueError, TypeError):
-+                     value = None
-+             if value is None:
-+diff --git a/django/contrib/gis/forms/widgets.py b/django/contrib/gis/forms/widgets.py
-+index 49ca48794b..6c9fac774c 100644
-+--- a/django/contrib/gis/forms/widgets.py
-++++ b/django/contrib/gis/forms/widgets.py
-+@@ -5,6 +5,7 @@ from django.conf import settings
-+ from django.contrib.gis import gdal
++-                raise ValueError(
+++                msg = (
++                     "Cannot use object with type %s for a spatial lookup parameter."
++                     % type(obj).__name__
++                 )
+++                raise blocked_err or ValueError(msg)
++ 
++         # Assigning the SRID value.
++         obj.srid = self.get_srid(obj)
++diff --git a/django/contrib/gis/gdal/raster/source.py b/django/contrib/gis/gdal/raster/source.py
++index b33eb11c0f..f63e7d0f30 100644
++--- a/django/contrib/gis/gdal/raster/source.py
+++++ b/django/contrib/gis/gdal/raster/source.py
++@@ -28,10 +28,19 @@ from django.contrib.gis.gdal.raster.const import (
++ )
++ from django.contrib.gis.gdal.srs import SpatialReference, SRSException
 + from django.contrib.gis.geometry import json_regex
-+ from django.contrib.gis.geos import GEOSException, GEOSGeometry
-++from django.contrib.gis.geos.prototypes.io import MAX_GEOM_COLLECTIONS
-+ from django.forms.widgets import Widget
-+ from django.utils import translation
-+ from django.utils.deprecation import RemovedInDjango51Warning
-+@@ -23,6 +24,7 @@ class BaseGeometryWidget(Widget):
-+     map_width = 600  # RemovedInDjango51Warning
-+     map_height = 400  # RemovedInDjango51Warning
-+     display_raw = False
-++    max_geom_collections = MAX_GEOM_COLLECTIONS
-+ 
-+     supports_3d = False
-+     template_name = ""  # set on subclasses
-+@@ -50,7 +52,7 @@ class BaseGeometryWidget(Widget):
-+ 
-+     def deserialize(self, value):
-+         try:
-+-            return GEOSGeometry(value)
-++            return GEOSGeometry(value, max_geom_collections=self.max_geom_collections)
-+         except (GEOSException, ValueError, TypeError) as err:
-+             logger.error("Error creating geometry from value '%s' (%s)", value, err)
-+         return None
-+diff --git a/django/contrib/gis/geos/geometry.py b/django/contrib/gis/geos/geometry.py
-+index 8bbe2c264a..a505f03ee7 100644
-+--- a/django/contrib/gis/geos/geometry.py
-++++ b/django/contrib/gis/geos/geometry.py
-+@@ -15,7 +15,14 @@ from django.contrib.gis.geos.error import GEOSException
-+ from django.contrib.gis.geos.libgeos import GEOM_PTR, geos_version_tuple
-+ from django.contrib.gis.geos.mutable_list import ListMixin
-+ from django.contrib.gis.geos.prepared import PreparedGeometry
-+-from django.contrib.gis.geos.prototypes.io import ewkb_w, wkb_r, wkb_w, wkt_r, wkt_w
-++from django.contrib.gis.geos.prototypes.io import (
-++    MAX_GEOM_COLLECTIONS,
-++    ewkb_w,
-++    wkb_r,
-++    wkb_w,
-++    wkt_r,
-++    wkt_w,
-++)
-+ from django.utils.deconstruct import deconstructible
+++from django.core.exceptions import SuspiciousOperation
 + from django.utils.encoding import force_bytes, force_str
-+ 
-+@@ -113,8 +120,8 @@ class GEOSGeometryBase(GEOSBase):
-+         self.srid = srid
-+ 
-+     @classmethod
-+-    def _from_wkb(cls, wkb):
-+-        return wkb_r().read(wkb)
-++    def _from_wkb(cls, wkb, max_geom_collections=MAX_GEOM_COLLECTIONS):
-++        return wkb_r().read(wkb, max_geom_collections)
-+ 
-+     @staticmethod
-+     def from_ewkt(ewkt):
-+@@ -134,8 +141,8 @@ class GEOSGeometryBase(GEOSBase):
-+         return GEOSGeometry(GEOSGeometry._from_wkt(wkt), srid=srid)
-+ 
-+     @staticmethod
-+-    def _from_wkt(wkt):
-+-        return wkt_r().read(wkt)
-++    def _from_wkt(wkt, max_geom_collections=MAX_GEOM_COLLECTIONS):
-++        return wkt_r().read(wkt, max_geom_collections)
-+ 
-+     @classmethod
-+     def from_gml(cls, gml_string):
-+@@ -720,7 +727,9 @@ class LinearGeometryMixin:
-+ class GEOSGeometry(GEOSGeometryBase, ListMixin):
-+     "A class that, generally, encapsulates a GEOS geometry."
-+ 
-+-    def __init__(self, geo_input, srid=None):
-++    def __init__(
-++        self, geo_input, srid=None, *, max_geom_collections=MAX_GEOM_COLLECTIONS
-++    ):
-+         """
-+         The base constructor for GEOS geometry objects. It may take the
-+         following inputs:
-+@@ -734,6 +743,10 @@ class GEOSGeometry(GEOSGeometryBase, ListMixin):
-+ 
-+         The `srid` keyword specifies the Source Reference Identifier (SRID)
-+         number for this Geometry. If not provided, it defaults to None.
-++
-++        The `max_geom_collections` keyword limits how many nested (WKT) or
-++        total (WKB) geometry collections the input may contain before parsing
-++        is refused, guarding against segfaults from deeply nested input.
-+         """
-+         input_srid = None
-+         if isinstance(geo_input, bytes):
-+@@ -744,10 +757,10 @@ class GEOSGeometry(GEOSGeometryBase, ListMixin):
-+                 # Handle WKT input.
-+                 if wkt_m["srid"]:
-+                     input_srid = int(wkt_m["srid"])
-+-                g = self._from_wkt(force_bytes(wkt_m["wkt"]))
-++                g = self._from_wkt(force_bytes(wkt_m["wkt"]), max_geom_collections)
-+             elif hex_regex.match(geo_input):
-+                 # Handle HEXEWKB input.
-+-                g = wkb_r().read(force_bytes(geo_input))
-++                g = wkb_r().read(force_bytes(geo_input), max_geom_collections)
-+             elif json_regex.match(geo_input):
-+                 # Handle GeoJSON input.
-+                 ogr = gdal.OGRGeometry.from_json(geo_input)
-+@@ -760,7 +773,7 @@ class GEOSGeometry(GEOSGeometryBase, ListMixin):
-+             g = geo_input
-+         elif isinstance(geo_input, memoryview):
-+             # When the input is a memoryview (WKB).
-+-            g = wkb_r().read(geo_input)
-++            g = wkb_r().read(geo_input, max_geom_collections)
-+         elif isinstance(geo_input, GEOSGeometry):
-+             g = capi.geom_clone(geo_input.ptr)
-+         else:
-+diff --git a/django/contrib/gis/geos/prototypes/io.py b/django/contrib/gis/geos/prototypes/io.py
-+index efe9ec159f..c57145f85c 100644
-+--- a/django/contrib/gis/geos/prototypes/io.py
-++++ b/django/contrib/gis/geos/prototypes/io.py
-+@@ -1,3 +1,4 @@
-++import re
-+ import threading
-+ from ctypes import POINTER, Structure, byref, c_byte, c_char_p, c_int, c_size_t
-+ 
-+@@ -15,6 +16,7 @@ from django.contrib.gis.geos.prototypes.errcheck import (
-+ from django.contrib.gis.geos.prototypes.geom import c_uchar_p, geos_char_p
-+ from django.utils.encoding import force_bytes
-+ from django.utils.functional import SimpleLazyObject
-++from django.utils.regex_helper import _lazy_re_compile
++ from django.utils.functional import cached_property
 + 
 + 
-+ # ### The WKB/WKT Reader/Writer structures and pointers ###
-+@@ -145,6 +147,58 @@ class IOBase(GEOSBase):
-+ 
-+ # ### Base WKB/WKT Reading and Writing objects ###
-+ 
-++# Sits just under PostGIS's effective ceiling: liblwgeom's LW_PARSER_MAX_DEPTH
-++# is 200 and counts the leaf geometry, so PostGIS rejects at 199 nested
-++# collections. 198 keeps Django's guard below that (and far below the GEOS
-++# segfault threshold) so it rejects before any backend supporting nested
-++# geometries does. (Oracle and MariaDB don't support nesting.)
-++MAX_GEOM_COLLECTIONS = 198
-++
-++# GEOS accepts any amount of whitespace around the optional dimension marker,
-++# so the separators must be \s*, not \s? or \s+. The root variants also allow
-++# leading whitespace, which GEOS skips before the geometry type.
-++_WKT_COLLECTION_START_RE = _lazy_re_compile(
-++    r"\bGEOMETRYCOLLECTION(?:\s*(?:ZM|Z|M))?\s*\(",
-++    re.IGNORECASE,
-++)
-++_WKT_COLLECTION_START_BYTES_RE = _lazy_re_compile(
-++    rb"\bGEOMETRYCOLLECTION(?:\s*(?:ZM|Z|M))?\s*\(",
-++    re.IGNORECASE,
-++)
-++_WKT_COLLECTION_ROOT_RE = _lazy_re_compile(
-++    r"\s*\bGEOMETRYCOLLECTION(?:\s*(?:ZM|Z|M))?\s*\(",
-++    re.IGNORECASE,
-++)
-++_WKT_COLLECTION_ROOT_BYTES_RE = _lazy_re_compile(
-++    rb"\s*\bGEOMETRYCOLLECTION(?:\s*(?:ZM|Z|M))?\s*\(",
-++    re.IGNORECASE,
-++)
-++
-++
-++def _build_collection_header_re():
-++    """GEOS normalizes WKB types using: (type_code & 0xFFFF) % 1000
-++
-++    Therefore, every low 16-bit value congruent to 7 modulo 1000 is interpreted
-++    as a GeometryCollection. Upper 16 bits may contain arbitrary EWKB flags.
+++class DisallowedRasterLookup(SuspiciousOperation):
 ++    """
-++    low_types = range(7, 0x10000, 1000)
-++    little_endian_types = b"|".join(
-++        re.escape(type_code.to_bytes(2, "little")) for type_code in low_types
-++    )
-++    big_endian_types = b"|".join(
-++        re.escape(type_code.to_bytes(2, "big")) for type_code in low_types
-++    )
-++    return _lazy_re_compile(
-++        rb"(?=("
-++        rb"\x01(?:" + little_endian_types + rb")[\x00-\xff]{2}"
-++        rb"|"
-++        rb"\x00[\x00-\xff]{2}(?:" + big_endian_types + rb")"
-++        rb"))"
-++    )
+++    Types that force GDALRaster to open in write mode (dict) or values that
+++    could be virtual filesystem paths (str) are not allowed in lookup contexts.
+++    Instead, wrap values in GDALRaster explicitly.
+++    """
 ++
 ++
-++_COLLECTION_HEADER_RE = _build_collection_header_re()
-++
++ class TransformPoint(list):
++     indices = {
++         "origin": (0, 3),
++@@ -78,14 +87,10 @@ class GDALRaster(GDALRasterBase):
++         self._write = 1 if write else 0
++         Driver.ensure_registered()
 + 
-+ # Non-public WKB/WKT reader classes for internal use because
-+ # their `read` methods return _pointers_ instead of GEOSGeometry
-+@@ -154,9 +208,48 @@ class _WKTReader(IOBase):
-+     ptr_type = WKT_READ_PTR
-+     destructor = wkt_reader_destroy
++-        # Preprocess json inputs. This converts json strings to dictionaries,
++-        # which are parsed below the same way as direct dictionary inputs.
++-        if isinstance(ds_input, str) and json_regex.match(ds_input):
++-            ds_input = json.loads(ds_input)
+++        ds_input = self._preprocess_input(ds_input)
 + 
-+-    def read(self, wkt):
-++    def limit(self, wkt, max_geom_collections):
-++        if max_geom_collections is None:
-++            return
-++        if isinstance(wkt, str):
-++            pattern = _WKT_COLLECTION_START_RE
-++            root_pattern = _WKT_COLLECTION_ROOT_RE
-++            open_paren = "("
-++            close_paren = ")"
-++        else:
-++            pattern = _WKT_COLLECTION_START_BYTES_RE
-++            root_pattern = _WKT_COLLECTION_ROOT_BYTES_RE
-++            open_paren = ord("(")
-++            close_paren = ord(")")
-++        if root_pattern.match(wkt) is None:
-++            # Fast path: If the beginning does not match GEOMETRYCOLLECTION(,
-++            # then GEOS rejects early (no need to limit):
-++            # GEOS_ERROR: countered : 'GEOMETRYCOLLECTION'
-++            return
-++        collection_starts = {match.end() - 1 for match in pattern.finditer(wkt)}
-++        # Nesting depth can't exceed the total number of collections, so if the
-++        # total is already within the limit, there is nothing to walk.
-++        if len(collection_starts) <= max_geom_collections:
-++            return
-++        collection_depth = 0
-++        parentheses = []
-++        for index, char in enumerate(wkt):
-++            if char == open_paren:
-++                is_collection = index in collection_starts
-++                parentheses.append(is_collection)
-++                if is_collection:
-++                    collection_depth += 1
-++            elif char == close_paren and parentheses:
-++                if parentheses.pop():
-++                    collection_depth -= 1
-++            if collection_depth > max_geom_collections:
-++                msg = "WKT contains too many possible GeometryCollections."
-++                raise ValueError(msg)
++         # If input is a valid file path, try setting file as source.
++-        if isinstance(ds_input, (str, Path)):
++-            ds_input = str(ds_input)
+++        if isinstance(ds_input, str):
++             if not ds_input.startswith(VSI_FILESYSTEM_PREFIX) and not os.path.exists(
++                 ds_input
++             ):
++@@ -226,6 +231,35 @@ class GDALRaster(GDALRasterBase):
++         """
++         return "<Raster object at %s>" % hex(addressof(self._ptr))
++ 
+++    @classmethod
+++    def _preprocess_input(cls, ds_input):
+++        """
+++        Preprocess json and Path inputs. This converts json strings to
+++        dictionaries, which are then parsed just like direct dictionary inputs.
+++        This also stringifies Path objects.
+++        """
+++        if isinstance(ds_input, str) and json_regex.match(ds_input):
+++            ds_input = json.loads(ds_input)
+++        if isinstance(ds_input, Path):
+++            ds_input = str(ds_input)
+++        return ds_input
 ++
-++    def read(self, wkt, max_geom_collections=MAX_GEOM_COLLECTIONS):
-+         if not isinstance(wkt, (bytes, str)):
-+-            raise TypeError
-++            raise TypeError(f"'wkt' must be bytes or str (got {wkt!r} instead).")
-++        self.limit(wkt, max_geom_collections)
-+         return wkt_reader_read(self.ptr, force_bytes(wkt))
-+ 
-+ 
-+@@ -165,18 +258,64 @@ class _WKBReader(IOBase):
-+     ptr_type = WKB_READ_PTR
-+     destructor = wkb_reader_destroy
-+ 
-+-    def read(self, wkb):
-++    def limit_wkb(self, wkb, max_geom_collections):
-++        if max_geom_collections is None:
-++            return
-++        for count, _ in enumerate(_COLLECTION_HEADER_RE.finditer(wkb), 1):
-++            if count > max_geom_collections:
-++                msg = "WKB contains too many possible GeometryCollections."
-++                raise ValueError(msg)
-++
-++    def limit_hex(self, wkb, max_geom_collections):
-++        if max_geom_collections is None:
-++            return
-++
-++        def _byteswap_uint32(value):
-++            return (
-++                ((value & 0x000000FF) << 24)
-++                | ((value & 0x0000FF00) << 8)
-++                | ((value & 0x00FF0000) >> 8)
-++                | ((value & 0xFF000000) >> 24)
+++    @classmethod
+++    def check_raster_lookup_value(cls, ds_input):
+++        """
+++        Raise DisallowedRasterLookup for values inappropriate in lookups:
+++        - No dicts, which GDALRaster(write=False) might still write to.
+++        - No strings or Paths, which might fetch over the virtual filesystem.
+++        """
+++        normalized = cls._preprocess_input(ds_input)
+++        if isinstance(normalized, (dict, str)):
+++            msg = (
+++                f"Cannot use object {normalized!r} for a spatial lookup "
+++                "parameter. If this is a raster, wrap it with GDALRaster() "
+++                "before using it in a lookup to enable writing or fetching."
 ++            )
+++            raise DisallowedRasterLookup(msg)
 ++
-++        count = 0
-++        for index in range(0, len(wkb) - 9, 2):
-++            byte_order = wkb[index : index + 2]
-++            if byte_order not in (b"00", b"01"):
-++                continue
-++            try:
-++                geometry_type = int(wkb[index + 2 : index + 10], 16)
-++            except ValueError:
-++                continue
-++            geometry_type = _byteswap_uint32(geometry_type)
-++            # Match GEOS WKBReader's geometry-type normalization.
-++            if (geometry_type & 0xFFFF) % 1000 == 7:  # GeometryCollection.
-++                count += 1
-++                if count > max_geom_collections:
-++                    msg = "WKB contains too many possible GeometryCollections."
-++                    raise ValueError(msg)
-++
-++    def read(self, wkb, max_geom_collections=MAX_GEOM_COLLECTIONS):
-+         "Return a _pointer_ to C GEOS Geometry object from the given WKB."
-++        limiter = self.limit_hex
-++        reader = wkb_reader_read_hex
-++
-+         if isinstance(wkb, memoryview):
-+-            wkb_s = bytes(wkb)
-+-            return wkb_reader_read(self.ptr, wkb_s, len(wkb_s))
-+-        elif isinstance(wkb, bytes):
-+-            return wkb_reader_read_hex(self.ptr, wkb, len(wkb))
-++            wkb = bytes(wkb)
-++            limiter = self.limit_wkb
-++            reader = wkb_reader_read
-+         elif isinstance(wkb, str):
-+-            wkb_s = wkb.encode()
-+-            return wkb_reader_read_hex(self.ptr, wkb_s, len(wkb_s))
-+-        else:
-+-            raise TypeError
-++            wkb = wkb.encode()
-++        elif not isinstance(wkb, bytes):
-++            raise TypeError(
-++                f"'wkb' must be bytes, str or memoryview (got {wkb!r} instead)."
-++            )
-++
-++        # Limit nested geometry collections. Should become unnecessary when
-++        # GEOS 3.15.0 is the minimum supported version. See:
-++        # https://github.com/libgeos/geos/commit/8b8b3da7a3d9fb8953ff60bc49aa0320d51ae45c
-++        limiter(wkb, max_geom_collections)
-++        return reader(self.ptr, wkb, len(wkb))
++     def _flush(self):
++         """
++         Flush all data from memory into the source file if it exists.
++diff --git a/docs/ref/contrib/gis/db-api.txt b/docs/ref/contrib/gis/db-api.txt
++index df1d3847e6..51dece9b63 100644
++--- a/docs/ref/contrib/gis/db-api.txt
+++++ b/docs/ref/contrib/gis/db-api.txt
++@@ -146,11 +146,21 @@ GeoDjango are only available on spatial fields.
 + 
++ Filters on 'normal' fields (e.g. :class:`~django.db.models.CharField`)
++ may be chained with those on geographic fields. Geographic lookups accept
++-geometry and raster input on both sides and input types can be mixed freely.
+++geometry and raster input on both sides, and input types can be mixed freely in
+++most cases. However, unlike assignments to model fields, with lookups,
+++types such as ``str``, :class:`pathlib.Path`, and ``dict`` must be wrapped by
+++:class:`~django.contrib.gis.gdal.GDALRaster` to signify that the potential for
+++file writing or network fetching is acceptable. For the rationale, see
+++:ref:`raster security considerations <raster-security>`.
 + 
-+ def default_trim_value():
-+diff --git a/docs/ref/contrib/gis/forms-api.txt b/docs/ref/contrib/gis/forms-api.txt
-+index 11e1bc77f4..9c8ed88676 100644
-+--- a/docs/ref/contrib/gis/forms-api.txt
-++++ b/docs/ref/contrib/gis/forms-api.txt
-+@@ -36,6 +36,30 @@ GeoDjango form fields take the following optional arguments.
-+     be set up depending on the field class. It matches the OpenGIS standard
-+     geometry name.
-+ 
-++``max_geom_collections``
-++------------------------
-++
-++.. attribute:: Field.max_geom_collections
-++
-++    .. versionadded:: 5.2.17
-++
-++    The maximum number of geometry collections the field accepts before
-++    refusing to parse the input and raising a
-++    :exc:`~django.core.exceptions.ValidationError`. This guards against crashes
-++    in the underlying GEOS library when parsing deeply nested
-++    ``GEOMETRYCOLLECTION`` input. It defaults to ``198``.
-++
-++    The limit is applied differently depending on the input format: for
-++    well-known text (WKT) it bounds the nesting *depth*, while for well-known
-++    binary (WKB and hex-encoded WKB) it bounds the *total* number of geometry
-++    collections (both breadth and depth). As a result, the same value may
-++    accept a wide, shallow collection as WKT but reject it as WKB. For GeoJSON,
-++    the limit is not applied at all, since GDAL parses that input type instead.
-++
-++    Increase this value (or set to ``None``) only if you must accept
-++    legitimately deep geometries, since doing so reduces protection against
-++    fatal errors.
-++
-+ Form field classes
-+ ==================
-+ 
-+diff --git a/docs/ref/contrib/gis/geos.txt b/docs/ref/contrib/gis/geos.txt
-+index 173e51979c..8acae7cde8 100644
-+--- a/docs/ref/contrib/gis/geos.txt
-++++ b/docs/ref/contrib/gis/geos.txt
-+@@ -207,10 +207,12 @@ Geometry Objects
-+ ``GEOSGeometry``
-+ ----------------
-+ 
-+-.. class:: GEOSGeometry(geo_input, srid=None)
-++.. class:: GEOSGeometry(geo_input, srid=None, *, max_geom_collections=198)
-+ 
-+     :param geo_input: Geometry input value (string or :class:`memoryview`)
-+     :param srid: spatial reference identifier
-++    :param max_geom_collections: maximum number of nested (WKT) or total (WKB)
-++        geometry collections accepted before parsing is refused
-+     :type srid: int
-+ 
-+ This is the base class for all GEOS geometry objects.  It initializes on the
-+@@ -248,6 +250,10 @@ WKB / EWKB               ``memoryview``
-+ For the GeoJSON format, the SRID is set based on the ``crs`` member. If ``crs``
-+ isn't provided, the SRID defaults to 4326.
++ The general structure of geographic lookups is described below. A complete
++ reference can be found in the :ref:`spatial lookup reference<spatial-lookups>`.
 + 
 ++.. versionchanged:: 5.2.17
 ++
-++    The ``max_geom_collections`` parameter was added.
+++    In earlier versions, spatial lookups accepted ``str`` and ``dict`` types
+++    for new rasters, allowing file writes and network fetches.
 ++
-+ .. classmethod:: GEOSGeometry.from_gml(gml_string)
++ Geometry Lookups
++ ----------------
 + 
-+     Constructs a :class:`GEOSGeometry` from the given GML string.
-+diff --git a/docs/ref/contrib/gis/model-api.txt b/docs/ref/contrib/gis/model-api.txt
-+index 981581cbf2..35fd0ea92b 100644
-+--- a/docs/ref/contrib/gis/model-api.txt
-++++ b/docs/ref/contrib/gis/model-api.txt
-+@@ -223,6 +223,20 @@ details.
++diff --git a/docs/ref/contrib/gis/gdal.txt b/docs/ref/contrib/gis/gdal.txt
++index 9011aa6e2b..2df807ee74 100644
++--- a/docs/ref/contrib/gis/gdal.txt
+++++ b/docs/ref/contrib/gis/gdal.txt
++@@ -2068,6 +2068,40 @@ previously configured for authentication and possibly other settings (see the
 + 
-+     Geography support is limited to PostGIS and will force the SRID to be 4326.
++ .. _`GDAL Virtual Filesystems documentation`: https://gdal.org/user/virtual_file_systems.html
 + 
-++``max_geom_collections``
-++------------------------
+++.. _raster-security:
 ++
-++.. attribute:: GeometryField.max_geom_collections
+++Security considerations
+++~~~~~~~~~~~~~~~~~~~~~~~
 ++
-++.. versionadded:: 5.2.17
+++Since :class:`GDALRaster` always opens new rasters in write mode, it is
+++essential to prevent instantiating one from untrusted input. Otherwise, an
+++attacker might gain the ability to write a file or make a network request.
 ++
-++This option is forwarded to the :attr:`form field
-++<django.contrib.gis.forms.Field.max_geom_collections>` generated for this model
-++field, bounding how many geometry collections may be contained in submitted
-++WKB/WKT inputs before raising :exc:`ValueError`. Since spatial field
-++assignments are lazy, it is also checked when values are accessed, e.g. when
-++saving an instance, but not when read from a database. It defaults to ``198``.
+++To mitigate this, :ref:`spatial lookups <spatial-lookups-intro>` prevent
+++``str``, :class:`pathlib.Path`, and ``dict`` values from reaching
+++:class:`GDALRaster` altogether. To use these types with lookups, wrap them
+++explicitly with :class:`GDALRaster`, indicating that the value is trusted.
+++Bytes are accepted without being wrapped in :class:`GDALRaster` because they
+++are opened through GDAL's memory-based :ref:`virtual filesystem
+++<gdal-raster-vsimem>`.
 ++
-+ .. _geography-type:
+++This protection applies only to spatial lookups. Assigning a ``dict`` value to
+++a :class:`~django.contrib.gis.db.models.RasterField` will still open a new
+++raster, and assigning a ``str`` or ``Path`` will still fetch and open the
+++referenced raster.
+++
+++When validating geometry inputs, the
+++:class:`~django.contrib.gis.forms.GeometryField` form field will reject raster
+++values. When validating raster inputs, you should write custom validation.
+++
+++For defense-in-depth strategies for limiting the available raster drivers, see
+++`GDAL security considerations <https://gdal.org/user/security.html>`_.
+++
+++.. versionchanged:: 5.2.17
+++
+++    In earlier versions, spatial lookups accepted ``str`` and ``dict`` types
+++    for new rasters, allowing file writes and network fetches.
+++
++ Settings
++ ========
 + 
-+ Geography Type
-+diff --git a/tests/gis_tests/geoapp/models.py b/tests/gis_tests/geoapp/models.py
-+index 2c13c827c6..58b92d550f 100644
-+--- a/tests/gis_tests/geoapp/models.py
-++++ b/tests/gis_tests/geoapp/models.py
-+@@ -102,3 +102,7 @@ class ManyPointModel(NamedModel):
-+     point1 = models.PointField()
-+     point2 = models.PointField()
-+     point3 = models.PointField(srid=3857)
++diff --git a/tests/gis_tests/geoadmin/tests.py b/tests/gis_tests/geoadmin/tests.py
++index e101050464..2db36b49de 100644
++--- a/tests/gis_tests/geoadmin/tests.py
+++++ b/tests/gis_tests/geoadmin/tests.py
++@@ -1,13 +1,26 @@
+++from django.contrib.auth.models import Permission, User
+++from django.contrib.contenttypes.models import ContentType
++ from django.contrib.gis.geos import Point
++-from django.test import SimpleTestCase, override_settings
+++from django.core.exceptions import SuspiciousOperation
+++from django.test import RequestFactory, TestCase, override_settings
++ 
++ from .models import City, site, site_gis, site_gis_custom
++ 
++ 
++ @override_settings(ROOT_URLCONF="django.contrib.gis.tests.geoadmin.urls")
++-class GeoAdminTest(SimpleTestCase):
+++class GeoAdminTest(TestCase):
++     admin_site = site  # ModelAdmin
++ 
+++    @classmethod
+++    def setUpTestData(cls):
+++        cls.user = User.objects.create_user("test", password="password", is_staff=True)
+++        cls.user.user_permissions.add(
+++            Permission.objects.get(
+++                codename="view_city",
+++                content_type=ContentType.objects.get_for_model(City),
+++            )
+++        )
 ++
++     def test_widget_empty_string(self):
++         geoadmin = self.admin_site.get_model_admin(City)
++         form = geoadmin.get_changelist_form(None)({"point": ""})
++@@ -54,6 +67,14 @@ class GeoAdminTest(SimpleTestCase):
++         self.assertIs(has_changed(initial, data_almost_same), False)
++         self.assertIs(has_changed(initial, data_changed), True)
++ 
+++    def test_raster_lookup_not_allowed(self):
+++        geoadmin = self.admin_site.get_model_admin(City)
+++        request = RequestFactory().get("/city/", data={"point": "/vsicurl/someurl"})
+++        request.user = self.user
+++        msg = "Cannot use object '/vsicurl/someurl' for a spatial lookup parameter."
+++        with self.assertRaisesMessage(SuspiciousOperation, msg):
+++            geoadmin.get_changelist_instance(request)
 ++
-++class GeometryCollectionModel(models.Model):
-++    geom = models.GeometryCollectionField(max_geom_collections=5)
++ 
++ class GISAdminTests(GeoAdminTest):
++     admin_site = site_gis  # GISModelAdmin
 +diff --git a/tests/gis_tests/geoapp/tests.py b/tests/gis_tests/geoapp/tests.py
-+index 6be13d4907..ae3470a899 100644
++index 7ee47ee9a8..6be13d4907 100644
 +--- a/tests/gis_tests/geoapp/tests.py
 ++++ b/tests/gis_tests/geoapp/tests.py
-+@@ -1,6 +1,7 @@
-+ import json
++@@ -1,7 +1,10 @@
+++import json
 + from io import StringIO
-+ from pathlib import Path
-++from unittest import mock
+++from pathlib import Path
 + 
 + from django.contrib.gis import gdal
 + from django.contrib.gis.db.models import Extent, MakeLine, Union, functions
-+@@ -21,7 +22,7 @@ from django.core.files.temp import NamedTemporaryFile
-+ from django.core.management import call_command
-+ from django.db import DatabaseError, NotSupportedError, connection
-+ from django.db.models import F, OuterRef, Subquery
-+-from django.test import TestCase, skipUnlessDBFeature
-++from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+++from django.contrib.gis.gdal.raster.source import DisallowedRasterLookup
++ from django.contrib.gis.geos import (
++     GeometryCollection,
++     GEOSGeometry,
++@@ -21,6 +24,7 @@ from django.db.models import F, OuterRef, Subquery
++ from django.test import TestCase, skipUnlessDBFeature
 + from django.test.utils import CaptureQueriesContext
 + 
-+ from ..data.rasters.textrasters import JSON_RASTER
-+@@ -30,6 +31,7 @@ from .models import (
+++from ..data.rasters.textrasters import JSON_RASTER
++ from ..utils import skipUnlessGISLookup
++ from .models import (
 +     City,
-+     Country,
-+     Feature,
-++    GeometryCollectionModel,
-+     MinusOneSRID,
-+     MultiFields,
-+     NonConcreteModel,
-+@@ -273,6 +275,52 @@ class GeoModelTest(TestCase):
-+             self.assertEqual(feature.geom.srid, g.srid)
++@@ -598,6 +602,93 @@ class GeoLookupTest(TestCase):
++         )
++         self.assertEqual(qs.get(), multifields)
 + 
-+ 
-++class SaveLoadTests(TestCase):
+++    def test_lookup_rejects_writing_or_fetching_rasters(self):
+++        """
+++        GDALRaster enables write mode in the following cases even when the
+++        value of the `write` parameter is False (default):
+++        - dicts
+++        - strings matching a json regex
+++        - bytes
 ++
-++    def test_geometrycollectionfield_max(self):
-++        geom = "POINT(0 0)"
-++        for _ in range(6):
-++            geom = f"GEOMETRYCOLLECTION({geom})"
-++        msg = "WKT contains too many possible GeometryCollections."
-++        with self.assertRaisesMessage(ValueError, msg):
-++            GeometryCollectionModel.objects.create(geom=geom)
-++        with self.assertRaisesMessage(ValueError, msg):
-++            GeometryCollectionModel.objects.bulk_create(
-++                [GeometryCollectionModel(geom=geom), GeometryCollectionModel(geom=geom)]
+++        Since this could be unexpected in a lookup context, disallow dicts
+++        and strings: instead, explicitly wrap with GDALRaster() to signal that
+++        a write or fetch is expected. Bytes only write to the in-memory virtual
+++        filesystem, so allow them.
+++
+++        Disallowing strings also disallows paths to local or network rasters,
+++        but those didn't work in the lookup context anyway, since they were
+++        never opened for writing, and lookups failed on setting the SRID with:
+++
+++        GDALException: Raster needs to be opened in write mode to change values
+++
+++        Still, a network fetch might have occurred before that failure point,
+++        so disallow strings altogether.
+++        """
+++        # Create a vsi-based raster from scratch.
+++        vsimem_path = "/vsimem/raster.tif"
+++        # Keep a reference to this raster while it is being re-parsed below.
+++        # Otherwise, GDALRaster.__del__() will delete the in-memory raster.
+++        _rast = gdal.GDALRaster(  # NOQA: F841
+++            {
+++                "name": vsimem_path,
+++                "driver": "tif",
+++                "width": 4,
+++                "height": 4,
+++                "srid": 4326,
+++                "bands": [
+++                    {
+++                        "data": range(16),
+++                    }
+++                ],
+++            }
+++        )
+++        existing_path = Path(__file__).parent.parent / "data" / "rasters" / "raster.tif"
+++        disallowed_cases = [
+++            JSON_RASTER,
+++            json.loads(JSON_RASTER),
+++            "/vsicurl/someurl",
+++            "/vsicurl_streaming/someurl",
+++            "/vsis3/someurl",
+++            vsimem_path,
+++            existing_path,
+++        ]
+++        for obj in disallowed_cases:
+++            try:
+++                msg_obj = json.loads(obj)
+++            except Exception:
+++                if isinstance(obj, Path):
+++                    msg_obj = str(obj)
+++                else:
+++                    msg_obj = obj
+++            msg = (
+++                f"Cannot use object {msg_obj!r} for a spatial lookup parameter. "
+++                "If this is a raster, wrap it with GDALRaster() before using "
+++                "it in a lookup to enable writing or fetching."
 ++            )
+++            with (
+++                self.subTest(obj=obj),
+++                self.assertRaisesMessage(DisallowedRasterLookup, msg),
+++            ):
+++                City.objects.filter(point__contained=obj)
 ++
-++    def test_geometrycollectionfield_default_max_ignored_on_read(self):
-++        geom = "POINT(0 0)"
-++        for _ in range(5):
-++            geom = f"GEOMETRYCOLLECTION({geom})"
-++        obj = GeometryCollectionModel.objects.create(geom=geom)
-++        with (
-++            mock.patch(
-++                "django.contrib.gis.geos.prototypes.io._WKBReader.limit_hex"
-++            ) as hex_limit_mock,
-++            mock.patch(
-++                "django.contrib.gis.geos.prototypes.io._WKBReader.limit_wkb"
-++            ) as wkb_limit_mock,
-++        ):
-++            obj.refresh_from_db()
-++        limit_mock = hex_limit_mock if hex_limit_mock.call_count else wkb_limit_mock
-++        limit_mock.assert_called_once()
-++        max_geom_collections = limit_mock.call_args.args[1]
-++        self.assertIsNone(max_geom_collections)
+++        # Strings having nothing to do with rasters raise a more generic error.
+++        for obj in str(existing_path), "invalid":
+++            msg = "String input unrecognized as WKT EWKT, and HEXEWKB."
+++            with self.subTest(obj=obj), self.assertRaisesMessage(ValueError, msg):
+++                City.objects.filter(point__contained=obj)
 ++
+++    def test_lookup_allows_writing_raster_from_bytes(self):
+++        raster_path = Path(__file__).parent.parent / "data" / "rasters" / "raster.tif"
+++        with open(raster_path, "rb") as raster_file:
+++            raster_bytes = raster_file.read()
+++        # Just get SQL to avoid gating on connection.supports_raster.
+++        City.objects.filter(point__contained=raster_bytes).query
 ++
-++class ValidationTests(SimpleTestCase):
-++    def test_geometrycollectionfield_max(self):
-++        geom = "POINT(0 0)"
-++        for _ in range(6):
-++            geom = f"GEOMETRYCOLLECTION({geom})"
-++        obj = GeometryCollectionModel(geom=geom)
-++        msg = "WKT contains too many possible GeometryCollections."
-++        # Spatial fields do not re-raise ValueError as ValidationError.
-++        with self.assertRaisesMessage(ValueError, msg):
-++            obj.full_clean()
-++
-++
-+ class GeoLookupTest(TestCase):
-+     fixtures = ["initial"]
-+ 
-+@@ -689,6 +737,15 @@ class GeoLookupTest(TestCase):
-+         # Just get SQL to avoid gating on connection.supports_raster.
-+         City.objects.filter(point__contained=geojson).query
-+ 
-++    @skipUnlessGISLookup("exact")
-++    def test_lookup_against_nested_geometry_collection(self):
-++        geom = "POINT(0 0)"
-++        for _ in range(6):
-++            geom = f"GEOMETRYCOLLECTION({geom})"
-++        msg = "WKT contains too many possible GeometryCollections."
-++        with self.assertRaisesMessage(ValueError, msg):
-++            GeometryCollectionModel.objects.filter(geom=geom)
+++    def test_lookup_allows_geos_geometry_string(self):
+++        geojson = json.dumps({"type": "Point", "coordinates": [2, 49]})
+++        # Just get SQL to avoid gating on connection.supports_raster.
+++        City.objects.filter(point__contained=geojson).query
 ++
 + 
 + class GeoQuerySetTest(TestCase):
 +     # TODO: GeoQuerySet is removed, organize these test better.
-+diff --git a/tests/gis_tests/geos_tests/test_geos_limit.py b/tests/gis_tests/geos_tests/test_geos_limit.py
-+new file mode 100644
-+index 0000000000..1904436eaf
-+--- /dev/null
-++++ b/tests/gis_tests/geos_tests/test_geos_limit.py
-+@@ -0,0 +1,176 @@
-++import struct
-++
-++from django.contrib.gis.geos import GEOSGeometry, WKTReader
-++from django.contrib.gis.geos.error import GEOSException
-++from django.contrib.gis.geos.prototypes.io import MAX_GEOM_COLLECTIONS
-++from django.test import SimpleTestCase
-++
-++
-++class GEOSLimitTest(SimpleTestCase):
-++    def _generate_geometry_collection_payloads(self, depth):
-++        def point(endian="<", type_code=1, dims=2, srid=None):
-++            marker = b"\x01" if endian == "<" else b"\x00"
-++            head = marker + struct.pack(f"{endian}I", type_code)
-++            if srid is not None:
-++                head += struct.pack(f"{endian}I", srid)
-++            return head + struct.pack(f"{endian}{'d' * dims}", *((0.0,) * dims))
-++
-++        def layer(endian="<", type_code=7, srid=None):
-++            marker = b"\x01" if endian == "<" else b"\x00"
-++            head = marker + struct.pack(f"{endian}I", type_code)
-++            if srid is not None:
-++                head += struct.pack(f"{endian}I", srid)
-++            return head + struct.pack(f"{endian}I", 1)
-++
-++        def wkb(coll=7, child=1, dims=2, srid=None):
-++            return layer(type_code=coll, srid=srid) * depth + point(
-++                type_code=child, dims=dims, srid=srid
-++            )
-++
-++        # (label, collection type code, child type code, child dims, srid, ...
-++        # check_geos).
-++        variants = [
-++            ("ISO WKB Z", 1007, 1001, 3, None, True),
-++            ("ISO WKB M", 2007, 2001, 3, None, True),
-++            ("ISO WKB ZM", 3007, 3001, 4, None, True),
-++            ("EWKB Z", 0x80000007, 0x80000001, 3, None, True),
-++            ("EWKB M", 0x40000007, 0x40000001, 3, None, True),
-++            ("EWKB ZM", 0xC0000007, 0xC0000001, 4, None, True),
-++            ("EWKB SRID", 0x20000007, 0x20000001, 2, 4326, True),
-++            ("EWKB Z and SRID", 0xA0000007, 0xA0000001, 3, 4326, True),
-++            ("EWKB ZM and SRID", 0xE0000007, 0xE0000001, 4, 4326, True),
-++            # Undoc'd high-bit combinations accepted by some GEOS versions.
-++            # These only verify that Django's limiter recognizes the normalized
-++            # GeometryCollection type before GEOS parses the payload.
-++            ("EWKB BBOX", 0x10000007, 0x10000001, 2, None, False),
-++            ("EWKB BBOX and Z", 0x90000007, 0x90000001, 3, None, False),
-++            ("EWKB BBOX and M", 0x50000007, 0x50000001, 3, None, False),
-++            ("EWKB BBOX and ZM", 0xD0000007, 0xD0000001, 4, None, False),
-++            ("EWKB BBOX and SRID", 0x30000007, 0x30000001, 2, 4326, False),
-++            ("EWKB BBOX, Z, and SRID", 0xB0000007, 0xB0000001, 3, 4326, False),
-++            ("EWKB BBOX, M, and SRID", 0x70000007, 0x70000001, 3, 4326, False),
-++            ("EWKB BBOX, ZM, and SRID", 0xF0000007, 0xF0000001, 4, 4326, False),
-++            ("EWKB unknown high flag", 0x01000007, 0x01000001, 2, None, False),
-++        ]
-++        binary = [
-++            (layer() * depth + point(), "little-endian WKB", True),
-++            (layer(endian=">") * depth + point(endian=">"), "big-endian WKB", True),
-++            (
-++                b"".join(layer(endian="<" if i % 2 == 0 else ">") for i in range(depth))
-++                + point(endian=">"),
-++                "mixed-endian WKB",
-++                True,
-++            ),
-++        ]
-++        binary += [(wkb(c, ch, d, s), label, cg) for label, c, ch, d, s, cg in variants]
-++
-++        payloads = []
-++        for data, label, check_geos in binary:
-++            payloads += [
-++                (data.hex().upper(), f"{label}, uppercase hex string", check_geos),
-++                (data.hex().encode("ascii"), f"{label}, lower hex bytes", check_geos),
-++                (memoryview(data), f"{label}, memoryview", check_geos),
-++            ]
-++        wkt = "GEOMETRYCOLLECTION(" * depth + "POINT(0 0)" + ")" * depth
-++        payloads += [(wkt, "WKT", True), (wkt.encode("ascii"), "WKT bytes", True)]
-++        return payloads
-++
-++    def test_geometry_collection_limit_exceeded(self):
-++        msg = "contains too many possible GeometryCollections."
-++        payloads = self._generate_geometry_collection_payloads(depth=6)
-++        for payload, label, check_geos in payloads:
-++            with self.subTest(payload=label):
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    GEOSGeometry(payload, max_geom_collections=5)
-++                # Valid cases.
-++                if check_geos:
-++                    GEOSGeometry(payload, max_geom_collections=6)
-++                    GEOSGeometry(payload, max_geom_collections=None)
-++
-++    def test_wkt_geometry_collection_flat(self):
-++        def wkt_payload_no_nesting(num_points):
-++            # Many parentheses, but only one collection level.
-++            return (
-++                "GEOMETRYCOLLECTION("
-++                + ",".join("POINT(0 0)" for _ in range(num_points))
-++                + ")"
-++            )
-++
-++        GEOSGeometry(wkt_payload_no_nesting(num_points=5), max_geom_collections=1)
-++
-++    def test_wkt_mixed_case_and_inner_whitespace_is_limited(self):
-++        two_collections = (
-++            "GEOMETRYCOLLECTION   ( "
-++            "geometrycollection ( "
-++            "POINT (0 0), POINT(1 1)"
-++            ") )"
-++        )
-++        msg = "WKT contains too many possible GeometryCollections."
-++        with self.assertRaisesMessage(ValueError, msg):
-++            GEOSGeometry(two_collections, max_geom_collections=1)
-++        GEOSGeometry(two_collections, max_geom_collections=2)
-++
-++    def test_from_ewkt_leading_whitespace_is_limited(self):
-++        # from_ewkt() hands the part after the SRID to the low-level reader,
-++        # so leading whitespace never passes through wkt_regex.
-++        wkt = " " + "GEOMETRYCOLLECTION(" * 200 + "POINT(0 0)" + ")" * 200
-++        msg = "WKT contains too many possible GeometryCollections."
-++        for value in wkt, wkt.encode():
-++            with self.subTest(value=value):
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    GEOSGeometry.from_ewkt(value)
-++
-++    def test_wkt_dimension_marker_whitespace_is_limited(self):
-++        def two_collections(separator):
-++            collection = f"GEOMETRYCOLLECTION{separator}ZM"
-++            return f"{collection}({collection}(POINT ZM (0 0 0 0)))"
-++
-++        msg = "WKT contains too many possible GeometryCollections."
-++        # GEOS accepts any amount of whitespace before the dimension marker.
-++        for separator in "", " ", "   ":
-++            with self.subTest(separator=separator):
-++                value = two_collections(separator)
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    GEOSGeometry(value, max_geom_collections=1)
-++                GEOSGeometry(value, max_geom_collections=2)
-++
-++    def test_wkt_reader_whitespace_is_limited(self):
-++        # WKTReader.read() takes str and bytes directly, so the whitespace
-++        # GEOS tolerates but wkt_regex rejects reaches the limiter.
-++        reader = WKTReader()
-++        msg = "WKT contains too many possible GeometryCollections."
-++        for prefix in "", " ", "\t\n ":
-++            for separator in "", " ", "   ", "\t", "\n", " \t\n ":
-++                collection = f"GEOMETRYCOLLECTION{separator}ZM"
-++                point = "POINT ZM (0 0 0 0)"
-++                depth = MAX_GEOM_COLLECTIONS + 1
-++                over = prefix + f"{collection}(" * depth + point + ")" * depth
-++                with self.subTest(prefix=prefix, separator=separator):
-++                    for value in over, over.encode():
-++                        with self.assertRaisesMessage(ValueError, msg):
-++                            reader.read(value)
-++                    under = f"{prefix}{collection}({point})"
-++                    self.assertEqual(reader.read(under).geom_type, "GeometryCollection")
-++
-++    def test_non_collection_wkt_root_fast_path(self):
-++        def make_geom(depth):
-++            return "GEOMETRYCOLLECTION(" * depth + "POINT(0 0)" + ")" * depth
-++
-++        invalid_wkt = "POLYGON(" + make_geom(6) + ")"
-++        # Instead of raising a ValueError, a fast path skips the limit and
-++        # depends on GEOS to reject collections found anywhere but the root.
-++        with self.assertRaises(GEOSException):
-++            GEOSGeometry(invalid_wkt, max_geom_collections=5)
-++
-++    def test_malformed_multi_wkb_child_is_limited(self):
-++        def make_invalid_geom(depth):
-++            point = b"\x01" + struct.pack("<I", 1) + struct.pack("<dd", 0.0, 0.0)
-++            collection = b"\x01" + struct.pack("<I", 7) + struct.pack("<I", 1)
-++            multipolygon = b"\x01" + struct.pack("<I", 6) + struct.pack("<I", 1)
-++            return (multipolygon + collection * depth + point).hex().upper()
-++
-++        msg = "WKB contains too many possible GeometryCollections."
-++        # Depending on a GEOSException here would be unsafe, because the WKB
-++        # grammar still allows recursion below the root.
-++        with self.assertRaisesMessage(ValueError, msg):
-++            GEOSGeometry(make_invalid_geom(6), max_geom_collections=5)
 +diff --git a/tests/gis_tests/rasterapp/test_rasterfield.py b/tests/gis_tests/rasterapp/test_rasterfield.py
-+index 37eec50027..289e71a4fa 100644
++index 3f2ce770a9..37eec50027 100644
 +--- a/tests/gis_tests/rasterapp/test_rasterfield.py
 ++++ b/tests/gis_tests/rasterapp/test_rasterfield.py
-+@@ -1,4 +1,5 @@
-+ import json
-++from unittest import mock
++@@ -207,7 +207,7 @@ class RasterFieldTest(TransactionTestCase):
++                     (stx_pnt, 0, 500),
++                     (stx_pnt, D(km=1000)),
++                     (rast, 500),
++-                    (json.loads(JSON_RASTER), 500),
+++                    (GDALRaster(json.loads(JSON_RASTER)), 500),
++                 ]
++             elif name == "relate":
++                 # Set lookup values for the relate lookup.
++@@ -218,7 +218,7 @@ class RasterFieldTest(TransactionTestCase):
++                     (stx_pnt, 0, "T*T***FF*"),
++                     (stx_pnt, "T*T***FF*"),
++                     (rast, "T*T***FF*"),
++-                    (json.loads(JSON_RASTER), "T*T***FF*"),
+++                    (GDALRaster(json.loads(JSON_RASTER)), "T*T***FF*"),
++                 ]
++             elif name == "isvalid":
++                 # The isvalid lookup doesn't make sense for rasters.
++@@ -232,7 +232,7 @@ class RasterFieldTest(TransactionTestCase):
++                     (stx_pnt, 0),
++                     stx_pnt,
++                     rast,
++-                    json.loads(JSON_RASTER),
+++                    GDALRaster(json.loads(JSON_RASTER)),
++                 ]
++             else:
++                 # Override band lookup for these, as it's not supported.
++@@ -245,7 +245,7 @@ class RasterFieldTest(TransactionTestCase):
++                     stx_pnt,
++                     stx_pnt,
++                     rast,
++-                    json.loads(JSON_RASTER),
+++                    GDALRaster(json.loads(JSON_RASTER)),
++                 ]
 + 
-+ from django.contrib.gis.db.models.fields import BaseSpatialField
-+ from django.contrib.gis.db.models.functions import Distance
-+@@ -273,6 +274,21 @@ class RasterFieldTest(TransactionTestCase):
-+             qs = RasterModel.objects.filter(Q(**combos[0]) & Q(**combos[1]))
-+             self.assertIn(qs.count(), [0, 1])
++             # Create query filter combinations.
++@@ -287,14 +287,6 @@ class RasterFieldTest(TransactionTestCase):
++         qs = RasterModel.objects.filter(rastprojected__dwithin=(rast, D(km=1)))
++         self.assertEqual(qs.count(), 1)
 + 
-++    def test_geometry_lookup_falls_back_to_default_max_geom_collections(self):
-++        def make_geom(depth):
-++            geom = "POINT(0 0)"
-++            for _ in range(depth):
-++                geom = f"GEOMETRYCOLLECTION({geom})"
-++            return geom
-++
-++        msg = "WKT contains too many possible GeometryCollections."
-++        # RasterField has no max_geom_collections, so the module default
-++        # (patched here) applies. Under the limit parses; over it is rejected.
-++        with mock.patch("django.contrib.gis.db.models.fields.MAX_GEOM_COLLECTIONS", 5):
-++            self.assertEqual(RasterModel.objects.filter(rast=make_geom(4)).count(), 0)
-++            with self.assertRaisesMessage(ValueError, msg):
-++                RasterModel.objects.filter(rast=make_geom(6))
-++
-+     def test_dwithin_gis_lookup_output_with_rasters(self):
-+         """
-+         Check the logical functionality of the dwithin lookup for different
-+diff --git a/tests/gis_tests/test_fields.py b/tests/gis_tests/test_fields.py
-+index 933514fee7..7ee17c0ebd 100644
-+--- a/tests/gis_tests/test_fields.py
-++++ b/tests/gis_tests/test_fields.py
-+@@ -1,6 +1,8 @@
-+ import copy
-++from unittest import mock
++-        qs = RasterModel.objects.filter(
++-            rastprojected__dwithin=(json.loads(JSON_RASTER), D(km=1))
++-        )
++-        self.assertEqual(qs.count(), 1)
++-
++-        qs = RasterModel.objects.filter(rastprojected__dwithin=(JSON_RASTER, D(km=1)))
++-        self.assertEqual(qs.count(), 1)
++-
++         # Filter in an unprojected coordinate system.
++         qs = RasterModel.objects.filter(rast__dwithin=(rast, 40))
++         self.assertEqual(qs.count(), 1)
++@@ -414,13 +406,8 @@ class RasterFieldTest(TransactionTestCase):
++         self.assertEqual(qs.count(), 0)
 + 
-+ from django.contrib.gis.db.models import GeometryField
-++from django.contrib.gis.db.models.fields import BaseSpatialField
-+ from django.contrib.gis.db.models.sql import AreaField, DistanceField
-+ from django.test import SimpleTestCase
-+ 
-+@@ -54,3 +56,34 @@ class GeometryFieldTests(SimpleTestCase):
-+                 "tolerance": 0.01,
-+             },
-+         )
-++
-++    def test_deconstruct_max_geom_collections(self):
-++        # The default is omitted, a custom value is preserved.
-++        field = GeometryField()
-++        *_, kwargs = field.deconstruct()
-++        self.assertNotIn("max_geom_collections", kwargs)
-++
-++        field = GeometryField(max_geom_collections=128)
-++        *_, kwargs = field.deconstruct()
-++        self.assertEqual(kwargs["max_geom_collections"], 128)
-++
-++    def test_formfield_forwards_max_geom_collections(self):
-++        field = GeometryField(max_geom_collections=128)
-++        self.assertEqual(field.formfield().max_geom_collections, 128)
-++
-++    def test_get_prep_value_without_max_geom_collections_uses_default(self):
-++        # A spatial field that is not RASTER nor defines max_geom_collections
-++        # still applies the default limit when preparing a lookup value.
-++        class AttrlessSpatialField(BaseSpatialField):
-++            geom_type = "GEOMETRY"
-++
-++        field = AttrlessSpatialField()
-++        geom = "POINT(0 0)"
-++        for _ in range(6):
-++            geom = f"GEOMETRYCOLLECTION({geom})"
-++        msg = "WKT contains too many possible GeometryCollections."
-++        with (
-++            mock.patch("django.contrib.gis.db.models.fields.MAX_GEOM_COLLECTIONS", 5),
-++            self.assertRaisesMessage(ValueError, msg),
-++        ):
-++            field.get_prep_value(geom)
++     def test_lookup_value_error(self):
++-        # Test with invalid dict lookup parameter
++-        obj = {}
++-        msg = "Couldn't create spatial object from lookup value '%s'." % obj
++-        with self.assertRaisesMessage(ValueError, msg):
++-            RasterModel.objects.filter(geom__intersects=obj)
++         # Test with invalid string lookup parameter
++-        obj = "00000"
+++        obj = "POINT()"
++         msg = "Couldn't create spatial object from lookup value '%s'." % obj
++         with self.assertRaisesMessage(ValueError, msg):
++             RasterModel.objects.filter(geom__intersects=obj)
++@@ -449,7 +436,7 @@ class RasterFieldTest(TransactionTestCase):
++     def test_lhs_with_index_rhs_without_index(self):
++         with CaptureQueriesContext(connection) as queries:
++             RasterModel.objects.filter(
++-                rast__0__contains=json.loads(JSON_RASTER)
+++                rast__0__contains=GDALRaster(json.loads(JSON_RASTER))
++             ).exists()
++         # It's easier to check the indexes in the generated SQL than to write
++         # tests that cover all index combinations.
 +diff --git a/tests/gis_tests/test_geoforms.py b/tests/gis_tests/test_geoforms.py
-+index b980892790..6ee6e13f19 100644
++index b8105645bf..b980892790 100644
 +--- a/tests/gis_tests/test_geoforms.py
 ++++ b/tests/gis_tests/test_geoforms.py
-+@@ -3,6 +3,7 @@ import re
-+ from django.contrib.gis import forms
-+ from django.contrib.gis.forms import BaseGeometryWidget, OpenLayersWidget
-+ from django.contrib.gis.geos import GEOSGeometry
-++from django.contrib.gis.geos.prototypes.io import MAX_GEOM_COLLECTIONS
-+ from django.core.exceptions import ValidationError
-+ from django.test import SimpleTestCase, override_settings
++@@ -8,6 +8,8 @@ from django.test import SimpleTestCase, override_settings
 + from django.utils.deprecation import RemovedInDjango51Warning
-+@@ -43,6 +44,55 @@ class GeometryFieldTest(SimpleTestCase):
-+         self.assertEqual(cleaned_geom.srid, 32140)
-+         self.assertTrue(xform_geom.equals_exact(cleaned_geom, tol))
++ from django.utils.html import escape
 + 
-++    def test_max_geom_collections_default(self):
-++        """The limit has a default and reaches the widget."""
+++from .data.rasters.textrasters import JSON_RASTER
+++
++ 
++ class GeometryFieldTest(SimpleTestCase):
++     def test_init(self):
++@@ -82,6 +84,19 @@ class GeometryFieldTest(SimpleTestCase):
++         with self.assertRaises(ValidationError):
++             pnt_fld.clean("LINESTRING(0 0, 1 1)")
++ 
+++    def test_raster_types(self):
 ++        fld = forms.GeometryField()
-++        self.assertEqual(fld.max_geom_collections, MAX_GEOM_COLLECTIONS)
-++        self.assertEqual(fld.widget.max_geom_collections, MAX_GEOM_COLLECTIONS)
+++        for value in (
+++            JSON_RASTER,
+++            str(JSON_RASTER),
+++            "/vsicurl/http://example.com/raster.tif",
+++        ):
+++            with (
+++                self.subTest(value=value),
+++                self.assertRaisesMessage(ValidationError, "Invalid geometry value."),
+++            ):
+++                fld.clean(value)
 ++
-++    def test_max_geom_collections_override(self):
-++        """A per-field limit is enforced when cleaning nested collections."""
-++        fld = forms.GeometryField(max_geom_collections=5)
-++        # The override is propagated to the widget that does the parsing.
-++        self.assertEqual(fld.widget.max_geom_collections, 5)
-++
-++        def make_geom(depth):
-++            return "GEOMETRYCOLLECTION(" * depth + "POINT(0 0)" + ")" * depth
-++
-++        with self.assertRaisesMessage(ValidationError, "Invalid geometry value."):
-++            fld.clean(make_geom(6))
-++        self.assertIsNotNone(fld.clean(make_geom(5)))
-++
-++    def test_max_geom_collections_widget_without_deserialize(self):
-++        # A widget without deserialize() (e.g. TextInput) uses to_python's
-++        # fallback, which still applies the field's limit.
-++        fld = forms.GeometryField(max_geom_collections=5, widget=forms.TextInput)
-++
-++        def make_geom(depth):
-++            return "GEOMETRYCOLLECTION(" * depth + "POINT(0 0)" + ")" * depth
-++
-++        with self.assertRaisesMessage(ValidationError, "Invalid geometry value."):
-++            fld.clean(make_geom(6))
-++        self.assertIsNotNone(fld.clean(make_geom(5)))
-++
-++    def test_max_geom_collections_custom_widget_uses_default(self):
-++        # A custom widget overriding deserialize() and ignoring the field's
-++        # max_geom_collections still gets the default limit via GEOSGeometry.
-++        class IgnoringWidget(BaseGeometryWidget):
-++            def deserialize(self, value):
-++                return GEOSGeometry(value)  # no limit -> default applies
-++
-++        fld = forms.GeometryField(max_geom_collections=5, widget=IgnoringWidget)
-++
-++        def make_geom(depth):
-++            return "GEOMETRYCOLLECTION(" * depth + "POINT(0 0)" + ")" * depth
-++
-++        # The field's low limit (5) is ignored by the widget...
-++        self.assertIsNotNone(fld.clean(make_geom(6)))
-++        # ...but the default (198) still guards against deeper input.
-++        with self.assertRaises(ValueError):
-++            fld.clean(make_geom(MAX_GEOM_COLLECTIONS + 1))
-++
-+     def test_null(self):
-+         "Testing GeometryField's handling of null (None) geometries."
-+         # Form fields, by default, are required (`required=True`)
++     def test_to_python(self):
++         """
++         to_python() either returns a correct GEOSGeometry object or
 +-- 
 +2.44.4
-+
 diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.14.bb b/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
-index 8e98efcdac..96b2dec26f 100644
+index 8a7cd2be16..c54e96fd7a 100644
 --- a/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
-@@ -11,6 +11,7 @@ SRC_URI += "file://CVE-2025-64460.patch \
+@@ -9,6 +9,7 @@ SRC_URI += "file://CVE-2025-64460.patch \
+             file://CVE-2025-64459-2.patch \
+             file://CVE-2025-57833.patch \
              file://CVE-2025-59681.patch \
-             file://CVE-2026-15307.patch \
-             file://CVE-2026-15337.patch \
-+            file://CVE-2026-15830.patch \
++            file://CVE-2026-15307.patch \
             "
  SRC_URI[sha256sum] = "29019a5763dbd48da1720d687c3522ef40d1c61be6fb2fad27ed79e9f655bc11"
  
