@@ -2,113 +2,114 @@ Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E0B3C61DCD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8E5AC61DD2
 	for <webhook@archiver.kernel.org>; Wed, 26 Aug 2026 07:54:11 +0000 (UTC)
-Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7458.1787730845210793848
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7455.1787730844674875049
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2026 00:54:05 -0700
+ Wed, 26 Aug 2026 00:54:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=DlL8mcbO;
- spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: devanshp@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=XOtTg4LR;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: devanshp@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1217; q=dns/txt;
-  s=iport01; t=1787730845; x=1788940445;
+  d=cisco.com; i=@cisco.com; l=1032; q=dns/txt;
+  s=iport01; t=1787730844; x=1788940444;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=ozU8yKK9AQN6adEXsOzlqQaGOrbyHm0lsmlvItw7msg=;
-  b=DlL8mcbOQv/C7O9FI0tlNXJbWMev08aEbC8OcvlwLcS465HqQVqxtnaR
-   BxNeOzp1YvwUlqxgHE7b+K3MkNY3x+KoS+y93MkGNV1e3SwFBPYxoe+J7
-   AtL/Q0Co5z9akjtZelRzCOLJxvlWGA7NUTLMbAB1rmxKGJvgVi6P/+PUz
-   SQIYj7b4/KXETmhNTf+xtm4QwMpGfmmabtAFT7nF94uo+LhIAhvmwQ+FB
-   jXd/TxUm/gTAUyhu4wyEBRhv117Z1YggG5XunzRg6dBQs/EZSTcV4nBwR
-   STkBtCkFl522lc8P8pShCwKL5dPkrHfDPG7pwVWqfiD0YIWuQC0Gu50lG
-   g==;
-X-CSE-ConnectionGUID: 366nO9CPQg6kdqHSf1tisA==
-X-CSE-MsgGUID: FaclWgUnSv2oc7SxdF4CHQ==
-X-IPAS-Result: =?us-ascii?q?A0BCAgBqmo5q/40QJK1RCYJZgld0XkNJk1kBggRsnh6Bf?=
- =?us-ascii?q?g8BAQEPNxoEAQGFBY1uAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
- =?us-ascii?q?QcFgQ4ThlyGXTYBGAEtMFxEgwIBgnQDvwOCLIEBgygBgVTbMAELFAEFgTOFP?=
- =?us-ascii?q?4gidoR8JxsbgXKEfoQKDXmFeASCInoSk2JIgR4DWSwBVRMNCgsHBYFmAzUSK?=
- =?us-ascii?q?hVuMh2BIz4XgQ0bBgWBHYEohBAjGTZ8gQlegSspYAESF4EJggcCglqCBQIBS?=
- =?us-ascii?q?UMOB0c+CxgNSBEsNxQZBD5uB45rH4JJATxRllSReqEPCiiDdowilToaM6psL?=
- =?us-ascii?q?phapFqEaYFoPEaBE3AVgyIJShkPji4V0BknMgI9BwIHDwKRc4F+AQE?=
-IronPort-Data: A9a23:vaqWd6Aio5wwJBVW/3niw5YqxClBgxIJ4kV8jS/XYbTApGwjgjdRm
- jZJWTiGb/+KZ2agKIx3bd7n9x9Su5/RnNRiOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
- fuo+5eBYA//hWYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEmKswCmZnFrUh9bh0DXhuz
- vJBNDEWR0XW7w626OrTpuhEj8AnKozveYgYoHwllW2fBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
- YxANWMHgBfoO3WjPn8bBYw3mvyonlH0ciZTrxSeoq9fD237nFYoi+e3b4KPEjCMbetclUKnq
- V/AxHqjBRpFD8yT52au0kv504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
- UsM9ywjqKI/+ECmQp/6RRLQnZKflhcYX9wVF6gx7xuAj/KIpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOTEIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:kVNhjKvRGv5wrDHwO0h5LbjH7skDWtV00zEX/kB9WHVpmwKj+P
- xG+85rsCMc5wxxZJhNo7290cq7MBHhHOBOgbX5VI3KNGKNhILCFu9fBOXZrwEIMheOktK1rZ
- 0QEJRWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqEuEiWpRGthdB8ATMHf8LnFL
-X-Talos-CUID: 9a23:l0yI5WH8PCU9JVM0qmI8qhASPZEOSkTSknTcOm+DBz91Saa8HAo=
-X-Talos-MUID: 9a23:DILUtQpQkNQaFx95Y+Mezx9rP8NX7JmoM15Xlp5ZgNmIG3BbGw7I2Q==
+  bh=Usv0j1MNJLn/ybXIEzFLbMm35meut29Skex3ALj+2gs=;
+  b=XOtTg4LRPfVm0ZR8Yv3420IP7AiTuZt7Y+gA1+bmK5KTIpLaz8WYfocY
+   l3hz/3mJo4W+ym7vENeIqOoK6ylDwAzBHs2WQ2e0cQOyTdydfWUvMCKUR
+   JxaL+clrE1xyRgnN55bIKbEmk6fFtECdy9c/LsZPSy5KJDuZplaHtqvAp
+   HzSi7JsEBnLLNwvw7aNPwciRvdprMrYjEVDaCZ47fuj/JHXgO0XP1Bs/C
+   UOkCkbnanDiZc+lQHVABy+2Skn2OVLCM4B2pwrGF3Uy0SPS7cDiFb1iaj
+   npViZbLT/AVPy9GWK8tCBpjp2Kh+za/IUMOCrzDlB2j1wvxoDARYVu9Lc
+   Q==;
+X-CSE-ConnectionGUID: BBKAWlzETUCIK2iSH91zdA==
+X-CSE-MsgGUID: P27RsYqbS8u5hivH7jOP/Q==
+X-IPAS-Result: =?us-ascii?q?A0BCAgBqmo5q/5MQJK1RCYJZgld0XkNJk1kBgnCeHoF+D?=
+ =?us-ascii?q?wEBAQ83GgQBAYUFjW4CJjQJDgECBAMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBB?=
+ =?us-ascii?q?wWBDhOGXIZdNgEYAS0wXESDAgGCdAO/A4IsgQGDKAGBVNswAQsUAQWBM4U/i?=
+ =?us-ascii?q?CKFcicbG4FyhH6EF3mFeASCInoSk2JIgR4DWSwBVRMNCgsHBYFmAzUSKhVuM?=
+ =?us-ascii?q?h2BIz4XgQ0bBgWBHYEohBAjGTZ8gQlegSspYAESF4EJggcCglqCBQIBSUMOB?=
+ =?us-ascii?q?0c+CxgNSBEsNxQZBD5uB45rH4JJATxRGYIAFpQlkXqhDwoog3aMIpU6GjOqb?=
+ =?us-ascii?q?C6YWqRahGmBaDxGgRNwFYMiCUoZD95cJzICPQcCBw8Ck3EBAQ?=
+IronPort-Data: A9a23:8RwJWaiTx9zGC/q+35yrqUKCX161MxEKZh0ujC45NGQN5FlHY01je
+ htvWmGBPPiLYWLxfogjaYvipkxV6JHTy9FjQVA4pX8xQiljpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeCULOZ82QsaDxMu/jd8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUy0MVePmVc2
+ MAlAxEuNBG4p7Pv0r6SH7wEasQLdKEHPasWvnVmiDWcBvE8TNWaG+PB5MRT23E7gcUm8fT2P
+ pVCL2ExKk2eJUQTZT/7C7pm9AusrnXybTRes1KNjaE2+GPUigd21dABNfKFI43SGp0Pxx3wS
+ mTuxz6mOAorLdakmSfY8nOyprDNuhu8YddHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
+ kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS4QWJzO/Qpg2eHGVBF2YHY909v8hwTjsvv
+ rOUo+7U6fVUmOX9YRqgGn289m7oUcTJBQfuvRM5cDY=
+IronPort-HdrOrdr: A9a23:dEt6vaMaJW9RJsBcTu2jsMiBIKoaSvp037Dk7S9MoHtuA6mlfq
+ +V/cjzuSWYtN9zYgBDpTn/Asm9qBrnnPYfi7X5Vo3NYOCJggeVxahZnO/fKkXbak7D398Y87
+ t8eK5jD9C1J117gcHmpDScKb8bsb66GGTCv5am85+rJjsaDZ1d0w==
+X-Talos-CUID: 9a23:GI8A+WA4I0XvEu/6EwNN12crHtIITkD27VSKInSYWD97RJTAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3AFgDMtQ+b4N8EDuGS/fluLXqQf/8yvJ61OVkHqsU?=
+ =?us-ascii?q?b5smFKwwvORClyw3iFw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,244,1779148800"; 
-   d="scan'208";a="821372702"
-Received: from alln-l-core-04.cisco.com ([173.36.16.141])
-  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Aug 2026 07:53:48 +0000
+   d="scan'208";a="819070213"
+Received: from alln-l-core-10.cisco.com ([173.36.16.147])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Aug 2026 07:53:48 +0000
 Received: from sjc-ads-5197.cisco.com (sjc-ads-5197.cisco.com [10.28.35.211])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-04.cisco.com (Postfix) with ESMTPS id 7F24118000B7A;
-	Wed, 26 Aug 2026 07:53:47 +0000 (GMT)
+	by alln-l-core-10.cisco.com (Postfix) with ESMTPS id 367901800054E;
+	Wed, 26 Aug 2026 07:53:48 +0000 (GMT)
 Received: by sjc-ads-5197.cisco.com (Postfix, from userid 1887503)
-	id 17FBBCC12A6; Wed, 26 Aug 2026 00:53:47 -0700 (PDT)
+	id C97CBCC12A8; Wed, 26 Aug 2026 00:53:47 -0700 (PDT)
 From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-python][PATCH] python3-twisted: correct CVE_PRODUCT mapping
+Subject: [meta-oe][PATCH] mariadb: correct CVE_PRODUCT mapping
 Date: Wed, 26 Aug 2026 00:53:47 -0700
-Message-Id: <20260826075347.63268-1-devanshp@cisco.com>
+Message-Id: <20260826075347.63790-1-devanshp@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-5197.cisco.com [10.28.35.211];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.28.35.211, sjc-ads-5197.cisco.com
-X-Outbound-Node: alln-l-core-04.cisco.com
+X-Outbound-Node: alln-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 07:54:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129489
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129486
 
 From: Devansh Patel <devanshp@cisco.com>
 
-The product-only "twisted" value emits a wildcard-vendor identity
-instead of the active identity assigned to the packaged Twisted source.
+The default product-only mapping generates a vendor-wildcard CPE.
+mariadb:mariadb is the active NVD dictionary CPE and configuration identity,
+and is also used by CNA affected data for the packaged MariaDB source.
+Deprecated mariadb_project records describe a separate Node.js connector.
 
-Use "twisted:twisted" for its NVD dictionary CPE, NVD configuration,
-and CNA affected-data identities. With sbom-cve-check 1.3.3 and the
-pinned database snapshots, the generated product identity changes; the
-current CVE report is unchanged.
+This changes the generated product identity to an exact CPE, but the
+frozen sbom-cve-check database leaves the 420-entry CVE report unchanged,
+with no current CVE delta.
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- meta-python/recipes-devtools/python/python3-twisted_26.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_26.4.0.bb b/meta-python/recipes-devtools/python/python3-twisted_26.4.0.bb
-index 7d7f5d3053..c294bd2933 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_26.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_26.4.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff950f7bafa004a86f478dc9eaf8106f"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
+index b1d1355e2b..71c91f0b2f 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
+@@ -1,5 +1,7 @@
+ require mariadb.inc
  
- SRC_URI[sha256sum] = "dbfd0fe1ee409d0243fdd7a6a6ff14f4948cec1fd78e0376291f805e1501fae9"
- 
--CVE_PRODUCT = "twisted"
-+CVE_PRODUCT = "twisted:twisted"
- 
- inherit pypi python_hatchling
++CVE_PRODUCT = "mariadb:mariadb"
++
+ inherit ptest
+ inherit useradd
  
 -- 
 2.35.6
