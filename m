@@ -1,185 +1,289 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC604C61DB9
-	for <webhook@archiver.kernel.org>; Tue, 25 Aug 2026 22:07:10 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.247.1787695624200219125
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5ACAC61DBD
+	for <webhook@archiver.kernel.org>; Wed, 26 Aug 2026 05:27:04 +0000 (UTC)
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6021.1787722018714000830
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2026 15:07:04 -0700
+ Tue, 25 Aug 2026 22:26:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=FSxSY5lm;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=bGq7FXV2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67PLA1Zw1924697
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 22:07:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=U1SJS8fFtwtFhnpK0+9uL1fV2Ydf6CMgzJz
-	uW6dVP6k=; b=FSxSY5lmREmTmuOVtajYz/ctne3g/QgThIuXtBP+lr9tRsiYksB
-	sTWNoxFu5uzJzh6twDBtJFDWd6IMDVOv3wCeRpaw8ZozHutCEqRvKr4jNPE/WkiD
-	OH0fNi58VUJVTsMwA83JP4Vw9du0wPDDhSS4rnbAsodVk9Klc1FgsGsfJV7Ek3QE
-	0MnmUFxmQogf2m3Rg+M0p5utmYt6YJy3rwA8tKl8JapEz4+P5u3CbjvRTbRfAnBk
-	gyMyLUYhAKgZWBtYtE1VYre/Hijc9kE2JpfNc8qY078r/xyVsPcp3sK9JPzfspiH
-	9FwdrjM3l+sjTs5fRD4ARMrF90eis+XPOVQ==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9f9urxxv-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 22:07:02 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c1a9764f0so3454421cf.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 15:07:02 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=WwGd3bb6;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787695622; x=1788300422; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=U1SJS8fFtwtFhnpK0+9uL1fV2Ydf6CMgzJzuW6dVP6k=;
-        b=bGq7FXV2RoypO7+C92n/F8qBWJDJ5d/9QFLBeKMeq+AeauJ476VFOpB4ympo9NXiIA
-         e+jS3AQDLrUfulBFQjUD2LCTZ/TxINjGd4/U1aAtHwg/7gPiGfJr4BTofpqdwuFfyBVn
-         6amxcbtD9jGSAgf8vlt/cLXX3dP84YdE0wOSJCW7FACahBC7rkMJBjLO34VIB/u7nfqg
-         OteOHZ8GWZvAsytpXnbNLG5YL9GrcAilf3eYJkWDR90P+gxa4Bf8bJYcdYnAsoceoG9A
-         i+TMsI3PbNX3l/DUXTLZO13cH8HmbHW3IHVc/2IDg5g3I3ytIO+OwUd/0mJUwPWU8r1p
-         Z9pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787695622; x=1788300422;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=U1SJS8fFtwtFhnpK0+9uL1fV2Ydf6CMgzJzuW6dVP6k=;
-        b=bw2YcgNG4ptnLe1JEJvwJyVR6pwMPwIKFLvxt+TfylJfkxELhH0REghZgAeIMaAwhO
-         3arv7SOMzGoXqCt8AZWoGOVBN74w4hVad+DTzn3cjuI4emYm263dmX0DWi87OuJykZ/U
-         37cHpOtJ/11DV0gRYy9zKJQQyEJI0oXV0I9o38CnTup519iXr5IQjRFxB8cOiRbMNK+o
-         jG+f+5+LGb5TO7aNvhUzTsyEv2MVwNvyycs1F2iFTkNTTdW7QzA7aSbShSb3IELw4h8c
-         K8+GLjneoZZQey6/ktOXDTTH9y/tVAc8qnRqKlLYg4RKLyEiGpPRdn9dBtY+/Dsx9vCv
-         h8TA==
-X-Gm-Message-State: AFuF++lYcUmC6MuBWxFTU0kP3EpSYyb6Ey0H+4R7loqsbqjObjb+irZo
-	04tVkLlX9MQXtifCAIr2XcTPFrrvqbbcNhPdBTvMtdcTF/qPAwO0/LmU5Otiw0OqF3gJS87gyrQ
-	X+iAxHOGJUcPMihB66qqvGVW7T9Z8ysr08BeTXx3azbm9aeLjxyufmsG0M9Gnl1n24s1+QFBzJD
-	6MKJdKTCkG58pgXIoT
-X-Gm-Gg: AR+sD13lnSxazMzhOXt/pF06ChN46XTmTp7+ONe7VCZ1OFMIlek7iO1MCQKHPvVIqUe
-	a+aKVSz8DMQeyL/z69l5ILjfePrhCgKG+L7qwWzYkbup1MUGa6SX6eMED/gC9NGwKKHJIqLQiF4
-	TuR2/2ibfxxLfKnxeYQeItQnFUFkQYNlQ6I/t35+K1H4zgFy6tZpNOA6fJWECG+z/UWMwGkbAl+
-	Lx2s+7s3c04FxaFjQ31pOaWhc0YwQbovWF0HS/A0/B+G/87WIFTU+XvERsIRcbQg9AA8zrxMadc
-	jftgFOHFncxBVof17t9FfVo74byt3nWgqeyYlpWYJK6/J1W6leRO5T5nFF7H17SFpJByyiroxi+
-	aqj7EenIyLeti1BMzvYIKuvLZhgw1mwUxjb7qiyr701QGg5KQyoHNAlaKNdRm1bZ30SDDiOThQX
-	5tosVJgmBO0mid
-X-Received: by 2002:a05:622a:148:b0:52e:12e6:6d7b with SMTP id d75a77b69052e-52e423f69fcmr21194931cf.39.1787695621952;
-        Tue, 25 Aug 2026 15:07:01 -0700 (PDT)
-X-Received: by 2002:a05:622a:148:b0:52e:12e6:6d7b with SMTP id d75a77b69052e-52e423f69fcmr21194231cf.39.1787695621361;
-        Tue, 25 Aug 2026 15:07:01 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4a41aef4esm176344e87.60.2026.08.25.15.06.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Aug 2026 15:06:58 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+  d=cisco.com; i=@cisco.com; l=8132; q=dns/txt;
+  s=iport01; t=1787722018; x=1788931618;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=e4W0Uo4TXKu9Np03p6q8Hbi8OG4x5zJ/cjvrRVichmc=;
+  b=WwGd3bb678ZgA+yGpxT1UOs1BF67fRuYRPxciqtpGu6FpO8w8v6TB50U
+   tATgy1Ir7816pCloWAiU21wXQzM+NNpb5wSNJLQqR55R2a6QNaT4r4K9U
+   AW5qY9nqzmXlaopG8Rw+CiCXlJJ0Nnt7e8gCTiHQHJHm0Pu2QVa1amaP3
+   GTIU5ZEkMu0BaEG9Zhy72lUpLEDLmXFm6btHD8Cqq7wqpesnJGmkXNC9w
+   Od1rCwG09ThEWws7DbH/jFctLRZf0lcwIPRiP84cZLtKY5b6sRkC4TjDV
+   jreEr1hw7Anz0L1oiOFkXMLyx0BFvbO7RPxF4rk2HxnV33K/zyvZR5zeE
+   g==;
+X-CSE-ConnectionGUID: XyX/yt6FTpGGgCQsyWxplA==
+X-CSE-MsgGUID: YSfmKydYQKmJ5/kXQAIxoA==
+X-IPAS-Result: =?us-ascii?q?A0BKAgBDeI5q/5QQJK1aHgEBCxIMggULgld0XkNJA4RUk?=
+ =?us-ascii?q?XMDnhuBfg8BAQEPRA0EAQGEP0YCjWwCJjQJDgECBAMCAwEBAQEBAQEBAQEBC?=
+ =?us-ascii?q?wEBBQEBAQIBBwWBDhOGTw2GWgECAQMjDwEYAS0QHAMBAgMCJgICKyMIGYMCA?=
+ =?us-ascii?q?YJ0AxG+VnqBMoEBgygBPwJDUNswAQsUAYEKLoU/gx8BhQJdGAGEfCcbG4Fyh?=
+ =?us-ascii?q?Ah2gQWBXAEBgTiEA4JqBIIiehKBWoIIh1KILkiBAhwDWSwBVRMNCgsHBYFmA?=
+ =?us-ascii?q?zUSKhVuMh2BIz4XNVgbBgWBHYEohBAjGTZ8gQlegSspYAESF4EJggcCglqCB?=
+ =?us-ascii?q?QIBSUMOB0c+CxgNSBEsNxQZBD0BbgeOax+CSQEVJyQtASoBfwY+CkgXBRcCH?=
+ =?us-ascii?q?pJdMCeCao8cgTWfWgoog3aMIpIwgwoaM4FWhAWlEQuYfY4KlgBQhGmBaDyBK?=
+ =?us-ascii?q?AEeCwdwFUgUghIBAQExCUoZD444g2uBf4NlxlUnMgIJAy8BAQcCBw4DC4Fok?=
+ =?us-ascii?q?AGBfQEB?=
+IronPort-Data: A9a23:KpeS26CcUjyd0RVW/3jiw5YqxClBgxIJ4kV8jS/XYbTApDN01jJTz
+ WccW2uHOarZNzTzc912Od+0pkMO7cCEz99jOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
+ fuo+5eBYA//hWYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE8+ReS1AqY6Mk4slYDkp37
+ u0nOCgJR0XW7w626OrTpuhEj8AnKozveYgYoHwllGifBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
+ YxANWoHgBfoO3WjPn8bC586lea5j1H0ciZTrxSeoq9fD237nFUggeOybYOPEjCMbfRukEO7t
+ 273xkf8IExdN+ym4BuV9Vv504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
+ UsM9ywjqKI/+ECmQp/6RRLQnZKflhcYX9wVF6gx7xuAj/ONpQ2YHWMDCDVGbbTKqfMLeNDj7
+ XfR9/uBONClmOf9pa61nltMkQ6PBA==
+IronPort-HdrOrdr: A9a23:9HkK5a8IHg2gzGyXzv5uk+AAI+orL9Y04lQ7vn2ZhyY7TiX+rb
+ HJoB17726StN9/YhAdcLy7VZVoBEmsl6KdgrNhWYtKIjOHhILAFugLhuHfKn/bakjDH4Vmu5
+ uIHZITNDSJNykYse/KpC+lDt0n3N6LtIqshevY0jNRaDsCUdAY0++8YTzraXGfg2J9dOIEKK
+ Y=
+X-Talos-CUID: 9a23:qZoOem/+gXPUedKeMmOVv34FKoc0biPz8G//DECTMH14d62NTXbFrQ==
+X-Talos-MUID: 9a23:ygo80AtAVqjQPPkiT82ntQpsMeR575WXK0UvzNIFi/CtFDx3EmLI
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.25,244,1779148800"; 
+   d="scan'208";a="819937512"
+Received: from alln-l-core-11.cisco.com ([173.36.16.148])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Aug 2026 05:26:57 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by alln-l-core-11.cisco.com (Postfix) with ESMTPS id 7F51518000994;
+	Wed, 26 Aug 2026 05:26:57 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id 18CE2CCD9B2; Tue, 25 Aug 2026 22:26:57 -0700 (PDT)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] thermald: fix building on 32-bit ARM systems
-Date: Wed, 26 Aug 2026 01:06:57 +0300
-Message-ID: <20260825220657.2121461-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+Cc: Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 2/3] python3-django: fix CVE-2026-15337
+Date: Tue, 25 Aug 2026 22:26:53 -0700
+Message-Id: <20260826052654.723156-2-dkelaiya@cisco.com>
+X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20260826052654.723156-1-dkelaiya@cisco.com>
+References: <20260826052654.723156-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 7uSZe52Ib8pfbpZ7HKgwWu3Nz4CN4kpO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDE4OCBTYWx0ZWRfX7sr7sRNTojrC
- yMh2+va3q2r7f7q2HueaiW2ktnBmJ6hEy62ar4ge5zh0YCbpJbs39eXOSgC2gOV9eLUx+jt0PHj
- 0xP1OYBChodOSUqWFtz5l9OfXG8PTZHfSjwcpm0TQBbtpTYLbI1Z17c5ZFPBLc5cDEJJ3IVcTJc
- 10hRSxghrvj9NYxh8EnP92hgp/D48TNqhoVdGPGISLff//6JJ7ZRrCsJ8y6A9st57umvtNc+pH/
- mZWd1ArNxuBlyMIGvNtN8sogFm9tbIhwu2GHEqiw0wQkRNkz8TtJIsVYwjB9BFa+hXhwgU0f5Mo
- uUBPuc33sQbk4lq/o86hOCv4NjFXZ8yzkgz15Ln6+SZolhqw9Rkni4qeG+8aqQZssZrL3DYZKfw
- 6LecJi4ZpESVes5f0iasPl5hHo50+oLtRuCchMULkGMEsJMJIZwwWISOouxxh4SftBym2XhTQ6y
- OvXZ09DjtPhwyPlnqPQ==
-X-Authority-Analysis: v=2.4 cv=acNRWxot c=1 sm=1 tr=0 ts=6a8e1206 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=Sv0fKeRqtYgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8
- a=pqIWkkr7sL1niNfngmUA:9 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDE4OCBTYWx0ZWRfX+YO2SYgpRsTh
- Rfc7HLvYdtLgqC2KCfs1eddY1inItOnpC+Zksqe6yhe++GgwBpyhVHcaYltXl0P4LwvmJceP64V
- B5p2lk4FWFSuWt0GmKrVQ9EEc2Ukch0=
-X-Proofpoint-ORIG-GUID: 7uSZe52Ib8pfbpZ7HKgwWu3Nz4CN4kpO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-25_06,2026-08-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 clxscore=1011 phishscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250188
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: alln-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2026 22:07:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129476
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 05:27:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129477
 
-Apply a patch fixing the following error:
+From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-thd_gddv.cpp: In member function 'int thd_gddv::evaluate_condition(condition&)':
-thd_gddv.cpp:1721:39: error: format '%ld' expects argument of type 'long int', but argument 4 has type 'time_t' {aka 'long long int'} [-Werror=format=]
+This patch applies the upstream fix as referenced in [2],
+using the commit shown in [1].
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+[1] https://github.com/django/django/commit/c72a5dbb64d0777f3f471f1be94e8b2ca91e0959
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-15337
+
+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- ..._gddv-fix-building-on-32-bit-systems.patch | 32 +++++++++++++++++++
- .../recipes-bsp/thermald/thermald_2.5.12.bb   |  5 ++-
- 2 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-bsp/thermald/thermald/0001-thd_gddv-fix-building-on-32-bit-systems.patch
+ .../CVE-2026-15337.patch                      | 163 ++++++++++++++++++
+ .../python/python3-django_5.0.14.bb           |   1 +
+ 2 files changed, 164 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15337.patch
 
-diff --git a/meta-oe/recipes-bsp/thermald/thermald/0001-thd_gddv-fix-building-on-32-bit-systems.patch b/meta-oe/recipes-bsp/thermald/thermald/0001-thd_gddv-fix-building-on-32-bit-systems.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15337.patch b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15337.patch
 new file mode 100644
-index 000000000000..9e74e144fe58
+index 0000000000..4cd5022034
 --- /dev/null
-+++ b/meta-oe/recipes-bsp/thermald/thermald/0001-thd_gddv-fix-building-on-32-bit-systems.patch
-@@ -0,0 +1,32 @@
-+From 30251d7754fe308251747dc40328a52a6b0e0601 Mon Sep 17 00:00:00 2001
-+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-+Date: Sat, 8 Aug 2026 00:27:15 +0300
-+Subject: [PATCH] thd_gddv: fix building on 32-bit systems
++++ b/meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2026-15337.patch
+@@ -0,0 +1,163 @@
++From 8c63ca97dd33e3cb7e4a6f78c5f616f2e45ecaf1 Mon Sep 17 00:00:00 2001
++From: Natalia <124304+nessita@users.noreply.github.com>
++Date: Fri, 10 Jul 2026 18:30:21 -0300
++Subject: [PATCH] [5.2.x] Fixed CVE-2026-15337 -- Mitigated potential DoS in
++ check_for_language().
 +
-+Fix the error caused by type mismatch:
++Language codes longer than 500 characters are now rejected before the
++cached lookup, so they are no longer retained as cache keys consuming
++memory from each process.
 +
-+src/thd_gddv.cpp: In member function 'int cthd_gddv::evaluate_condition(condition&)':
-+src/thd_gddv.cpp:1721:39: error: format '%ld' expects argument of type 'long int', but argument 4 has type 'time_t' {aka 'long long int'} [-Werror=format=]
++Thanks Jaeyoung Jang for the report, and Sarah Boyce for reviews.
 +
-+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-+Upstream-Status: Submitted [https://github.com/intel/thermal_daemon/pull/596]
++Backport of 27137e655e442e81095f1f8f77ff3870d9fdf169 from main.
++
++CVE: CVE-2026-15337
++Upstream-Status: Backport [https://github.com/django/django/commit/c72a5dbb64d0777f3f471f1be94e8b2ca91e0959]
++
++Backport Changes:
++- Dropped the docs/release file as current version
++  is 5.0.14 for Scarthgap.
++
++(cherry picked from commit c72a5dbb64d0777f3f471f1be94e8b2ca91e0959)
++Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ src/thd_gddv.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ django/test/signals.py                 |  2 +-
++ django/utils/translation/trans_real.py | 27 ++++++++++++++++++--------
++ docs/ref/utils.txt                     |  3 +++
++ tests/i18n/tests.py                    | 24 ++++++++++++++++++++++-
++ 4 files changed, 46 insertions(+), 10 deletions(-)
 +
-+diff --git a/src/thd_gddv.cpp b/src/thd_gddv.cpp
-+index e822b9f72f45..a2691594960d 100644
-+--- a/src/thd_gddv.cpp
-++++ b/src/thd_gddv.cpp
-+@@ -1718,7 +1718,7 @@ int cthd_gddv::evaluate_condition(struct condition& condition) {
-+ 			return ret;
++diff --git a/django/test/signals.py b/django/test/signals.py
++index c16f4aa5ee..51ff9c3d98 100644
++--- a/django/test/signals.py
+++++ b/django/test/signals.py
++@@ -152,7 +152,7 @@ def language_changed(*, setting, **kwargs):
++         from django.utils.translation import trans_real
 + 
-+ 		if (condition.time) {
-+-			thd_log_debug("time condition matched %ld \n", condition.state_entry_time);
-++			thd_log_debug("time condition matched %jd \n", (intmax_t)condition.state_entry_time);
-+ 			if (condition.state_entry_time == 0) {
-+ 				condition.state_entry_time = time(nullptr);
-+ 				return THD_ERROR;
++         trans_real._translations = {}
++-        trans_real.check_for_language.cache_clear()
+++        trans_real.translation_catalog_exists.cache_clear()
++ 
++ 
++ @receiver(setting_changed)
++diff --git a/django/utils/translation/trans_real.py b/django/utils/translation/trans_real.py
++index 1c42330451..67937a6470 100644
++--- a/django/utils/translation/trans_real.py
+++++ b/django/utils/translation/trans_real.py
++@@ -31,9 +31,10 @@ _default = None
++ # magic gettext number to separate context from message
++ CONTEXT_SEPARATOR = "\x04"
++ 
++-# Maximum number of characters that will be parsed from the Accept-Language
++-# header or cookie to prevent possible denial of service or memory exhaustion
++-# attacks. About 10x longer than the longest value shown on MDN’s
+++# Maximum length of a language code that will be processed, to prevent possible
+++# denial of service or memory exhaustion attacks. Language codes are taken from
+++# the Accept-Language header, the language cookie, the URL path prefix, or the
+++# set_language() view. 500 is about 10x the longest value shown on MDN's
++ # Accept-Language page.
++ LANGUAGE_CODE_MAX_LENGTH = 500
++ 
++@@ -65,7 +66,7 @@ def reset_cache(*, setting, **kwargs):
++     languages should no longer be accepted.
++     """
++     if setting in ("LANGUAGES", "LANGUAGE_CODE"):
++-        check_for_language.cache_clear()
+++        translation_catalog_exists.cache_clear()
++         get_languages.cache_clear()
++         get_supported_language_variant.cache_clear()
++ 
++@@ -461,19 +462,29 @@ def all_locale_paths():
++     return [globalpath, *settings.LOCALE_PATHS, *app_paths]
++ 
++ 
++-@functools.lru_cache(maxsize=1000)
++ def check_for_language(lang_code):
++     """
++     Check whether there is a global language file for the given language
++     code. This is used to decide whether a user-provided language is
++     available.
++ 
++-    lru_cache should have a maxsize to prevent from memory exhaustion attacks,
++-    as the provided language codes are taken from the HTTP request. See also
+++    Reject over-length codes before the cached lookup so that oversized,
+++    attacker-controlled values are not retained as cache keys.
+++    """
+++    if lang_code is None or len(lang_code) > LANGUAGE_CODE_MAX_LENGTH:
+++        return False
+++    return translation_catalog_exists(lang_code)
+++
+++
+++@functools.lru_cache(maxsize=1000)
+++def translation_catalog_exists(lang_code):
+++    """Return whether a translation catalog exists for the given language code.
+++
+++    lru_cache should have a maxsize to prevent memory exhaustion attacks. See:
++     <https://www.djangoproject.com/weblog/2007/oct/26/security-fix/>.
++     """
++     # First, a quick check to make sure lang_code is well-formed (#21458)
++-    if lang_code is None or not language_code_re.search(lang_code):
+++    if not language_code_re.search(lang_code):
++         return False
++     return any(
++         gettext_module.find("django", path, [to_locale(lang_code)]) is not None
++diff --git a/docs/ref/utils.txt b/docs/ref/utils.txt
++index 1d0178a263..1f44b4eb85 100644
++--- a/docs/ref/utils.txt
+++++ b/docs/ref/utils.txt
++@@ -1082,6 +1082,9 @@ For a complete discussion on the usage of the following see the
++     code (e.g. 'fr', 'pt_BR'). This is used to decide whether a user-provided
++     language is available.
++ 
+++    ``lang_code`` has a maximum accepted length of 500 characters. ``False``
+++    is returned if it exceeds this limit, before any language-file lookup.
+++
++ .. function:: get_language()
++ 
++     Returns the currently selected language code. Returns ``None`` if
++diff --git a/tests/i18n/tests.py b/tests/i18n/tests.py
++index f74e33bf79..b83c9d6a68 100644
++--- a/tests/i18n/tests.py
+++++ b/tests/i18n/tests.py
++@@ -58,7 +58,10 @@ from django.utils.translation.reloader import (
++     translation_file_changed,
++     watch_for_translation_changes,
++ )
++-from django.utils.translation.trans_real import LANGUAGE_CODE_MAX_LENGTH
+++from django.utils.translation.trans_real import (
+++    LANGUAGE_CODE_MAX_LENGTH,
+++    translation_catalog_exists,
+++)
++ 
++ from .forms import CompanyForm, I18nForm, SelectDateForm
++ from .models import Company, TestModel
++@@ -1995,6 +1998,25 @@ class CountrySpecificLanguageTests(SimpleTestCase):
++         self.assertFalse(check_for_language("tr-TR.UTF8"))
++         self.assertFalse(check_for_language("de-DE.utf-8"))
++ 
+++    def test_check_for_language_lang_code_max_length(self):
+++        self.addCleanup(translation_catalog_exists.cache_clear)
+++
+++        # Overly long codes are rejected before the cached lookup, so they are
+++        # not retained as cache keys, potentially consuming too much memory.
+++        # Codes at the maximum length can reach the cached lookup.
+++        for length, cache_size in [
+++            (LANGUAGE_CODE_MAX_LENGTH - 1, 1),
+++            (LANGUAGE_CODE_MAX_LENGTH, 1),
+++            (LANGUAGE_CODE_MAX_LENGTH + 1, 0),
+++        ]:
+++            translation_catalog_exists.cache_clear()
+++            with self.subTest(length=length):
+++                self.assertIs(check_for_language("a" * length), False)
+++                self.assertEqual(
+++                    translation_catalog_exists.cache_info().currsize,
+++                    cache_size,
+++                )
+++
++     def test_check_for_language_null(self):
++         self.assertIs(trans_null.check_for_language("en"), True)
++ 
 +-- 
-+2.47.3
++2.44.4
 +
-diff --git a/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb b/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-index 6b193466a367..937e9a5705c2 100644
---- a/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-+++ b/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-@@ -12,7 +12,10 @@ DEPENDS += "autoconf-archive-native"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ea8831610e926e2e469075b52bf08848"
- 
--SRC_URI = "git://github.com/intel/thermal_daemon/;branch=master;protocol=https;tag=v${PV}"
-+SRC_URI = " \
-+    git://github.com/intel/thermal_daemon/;branch=master;protocol=https;tag=v${PV} \
-+    file://0001-thd_gddv-fix-building-on-32-bit-systems.patch \
-+"
- 
- SRCREV = "9996a1a1cdd01d32cd411459368a177f463d0047"
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.14.bb b/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
+index c54e96fd7a..8e98efcdac 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.0.14.bb
+@@ -10,6 +10,7 @@ SRC_URI += "file://CVE-2025-64460.patch \
+             file://CVE-2025-57833.patch \
+             file://CVE-2025-59681.patch \
+             file://CVE-2026-15307.patch \
++            file://CVE-2026-15337.patch \
+            "
+ SRC_URI[sha256sum] = "29019a5763dbd48da1720d687c3522ef40d1c61be6fb2fad27ed79e9f655bc11"
  
 -- 
-2.47.3
+2.35.6
 
 
