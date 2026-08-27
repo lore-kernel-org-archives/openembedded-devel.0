@@ -2,196 +2,214 @@ Return-Path: <jaipaul.cheernam@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BF10C61DCD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54ACDC61DB9
 	for <webhook@archiver.kernel.org>; Thu, 27 Aug 2026 18:54:03 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.11])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1798.1787856836066463489
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.37])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1881.1787856839229758022
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2026 11:53:56 -0700
+ Thu, 27 Aug 2026 11:53:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=Tci4sCss;
- spf=pass (domain: est.tech, ip: 52.101.65.11, mailfrom: jaipaul.cheernam@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=E0zSuJs9;
+ spf=pass (domain: est.tech, ip: 52.101.65.37, mailfrom: jaipaul.cheernam@est.tech)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b1iC8hD7wU8ZfsYpIfxMU2lQ2FFJmlnCMNli1IhlZQAXOKdbr5nm42/r02r8a0zhlRc82es5SjmCSOO/oBatrT6zoh3excBqfVyw04lEhw+EBrCEyJLPh1wzDYI3LhBPIi5tJb6XT0NeOh7ifKrsGlGyqJk5r/0eBFiDjVdn0QSp+fE0HWWPs8RXc+HIxid/klhqGkThOm28pFs/INI+Yi1tj4knqdM7cE1EXrKKv3vWCuFTtW+KiJS2G5LMbH3RpupXZJId+Tipqr+cyKonmhbquIYWgz2ZvZ6ECnvirmfhqkrUrcbnurUm7kFeefb8myT3IwmhFUr3yjvmJwE8vQ==
+ b=uF45eWM8YKJTBe8c8dOI0FbwPmFWqQMBLqzNju1fEKA5SsdILltjHFPML+Xf/ylchUGTyyeqnTVVaXk/3twZvoDiAmhCB4k4Ivb0rQVThPG4XkdirbPG3/vTRM7RPOuek4hvsMd5xbnKO93QUWmy2gocy9hgdwALfYqB317R2FRLKJKfkDEs+bL85MHlkj+KkoktyWi7wiCdt154aQaN803PCptrmOd8VhmdfFbdE/KeQt4jz6iCATNZoxgaceuHFWxN/h/Vih58ZVX4NIdlHR55KWUblC12H3+IkQEF32uN9xe59NYTpumyIMCv1dCsk9ndicjFuF3JOoeT62HmYg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UIQw/Y0D4wULQxQeMgBGRB9Bn85AZ/oQjA9BUGNydvE=;
- b=bGfw8DdZ3+nbO+COxknZz2jAe5m9vlSlDvG9wUkvDnbt+8OYvcCW/m0lDwJmcZCSWG3aJb0tgVaEBw5mFHvydAR05FmWLP4S1ViE+bkzAqQGD3r4AvZtEhq8ovXkMUi8dOGjMY2xnwpOKpD5DYjtDonL3p3eTijanbfNZ1gbmGwzUgwTnqHGBURHrG1vFk0Q+qM+jdn+lgJ6UExKkXw8/Ek+fQ7C0Xb+M+SX5nypklYTwtzprvzYPd8mNm1Y65zusBlgKeC5EkPPBpTcKlRrGN1JPlU6pUmuZiP+A9UM2Wds3+Bv6v6kIUn7mK7z61aKX79xd2+ND+tqAT6Rbje9uA==
+ bh=HtjwWOwBbacWyKYkZJ31drK4XpD6NcjlQk6m62LdJBs=;
+ b=BbUpbPwrcqIx6wtStc4rb0Q7cRNlkxyZf+aXTtxpOO8o4OU46ML0fMlBniiR6AQ6gFSFHvd5Jk2tGTK72gw3FP0uPlOT2iyPjDjvnApldmPnKHjRNNpqm66Co522kPMwElTECvbrxQcUGRedfdsra6YuyKRMb4ru3deu1McF+aN7UJybIdAYeqAmPvnllj9q9V34qn6xJCCgbkv2nkBxHZLL/HGLy+VzaYjO3QhGnLTrjTiWGm//B8jC4ivV+/vyV2R2IJqtyNXHNjop14lZNzLk8+GV1vzPBo+L9x8gGd3xcU2sotkw8iJtmeAbtkFuaCmRtugoYD3JJyh8YKTTlQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
  dkim=pass header.d=est.tech; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UIQw/Y0D4wULQxQeMgBGRB9Bn85AZ/oQjA9BUGNydvE=;
- b=Tci4sCssii+CW0bNy4lYppW3zTuO3PQm2wjjAraWi64vkowmDQNsU06/wqxrHBzrDjSJfHOW0Ic35J8tc1FLRbup18JQr/34b10fjXV3aw5ru2xhl4YwNonOkrSHbqm4+qE1OuOeInvAsIK/20TxzKgbX0r0BYQLvh6zBPmQpT8QofmScBtY3IXppnvs7mj5IYIGbaJOD1aBjR7Ijszr29pD9E5Fs8rD9wqZRz6CF1113eu6NpZMY5YqaVRqzNtOFMuAT4tr8al1EmGukXQizIr2dCO0bGVsXn4ZVgy9HmR27anPYIKEsStY7IfH8P2p/D2KEuNC6bjgf+lVVlTiIA==
+ bh=HtjwWOwBbacWyKYkZJ31drK4XpD6NcjlQk6m62LdJBs=;
+ b=E0zSuJs9P0qHb/k6rcnJSuaCRrITmRviDl4Adwa+ubZ5RHfOXBSPkqVwuwFGBhEZnooYWCmy7Tnx3sF6BXOATBzBF1DliBl2XXGefVGKr9xrepQu2wrQIsk+BawCPQr49ELSie2swhDpIrXabpseEvMQSRRvZWPXIwnTbtJxujCHaf2bEknKzbPOFSp5biH5FCp4mC4ApkzvmlMYnVE1L6iu29Iw8RPn236iAFaxumBDet+7tUgebLVnUKtXGEXGojkozlHGBfVJ1tVJwuHgOdOpNs42SCWlpHbyS0h1VPYPbfnxOuyD3eWHc3Jl7GMOiE8KtJ5ECfFvnYx6uAf3Mg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=est.tech;
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
  by DB9P189MB3598.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:5fc::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
- 2026 18:53:53 +0000
+ 2026 18:53:56 +0000
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 18:53:53 +0000
+ 18:53:56 +0000
 From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 To: openembedded-devel@lists.openembedded.org
 CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: [meta-oe][RFC 11/20] imapfilter: fix build with OpenSSL 4.0
-Date: Thu, 27 Aug 2026 20:53:15 +0200
-Message-ID: <20260827185324.78997-12-jaipaul.cheernam@est.tech>
+Subject: [meta-networking][RFC 12/20] lftp: fix build with OpenSSL 4.0
+Date: Thu, 27 Aug 2026 20:53:16 +0200
+Message-ID: <20260827185324.78997-13-jaipaul.cheernam@est.tech>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 In-Reply-To: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 References: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: LO6P123CA0040.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:2fe::18) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+X-ClientProxiedBy: LO6P123CA0039.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:2fe::19) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  (2603:10a6:18:3::ad4)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|DB9P189MB3598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0350245f-1912-442e-36b3-08df046c8a96
+X-MS-Office365-Filtering-Correlation-Id: e2cf6920-dee9-45f3-e73e-08df046c8bfc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10070799003|10067099003|56012099006|11063799006|3023799007|22082099003|18002099003|13003099007;
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10070799003|10067099003|56012099006|11063799006|12006099003|3023799007|22082099003|18002099003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	avSxJIv8GrYyIRoqzv3VutQ3PMrRHxEBzQfl52A1SYZDw9rIZljt1jR8YUth3J0PDW2b6AMA9Q0nUv5WiKPe7/sM3mHA9UPV/vEZ+GyuCVrjIuS1OrejNEZK76ZBdpKYuedy3bgKp0FcTlgJeiqUONozvK93JF3ixi0zKho8+LJlC21HnnfuPgPzx6Tdu8oan0ibbi/CN0rhcOy7hIrDYh0Miuhe4iBsEZcHdtrVXss92nbVGL4YcKeNPR0+t9LGhYWpbM2SThlTL6Z7NvtRroy1QOn8d9iNz3qkryNlFPr20I3aKYe2tUklJGN1Ys0DaZA8A5vAB7BLCvYzAK/ttT/+N6qOHpYm/ANOk7BIviIDm+dBeeSjrhTp2llz0bWAp56HLE0Gj+ElZyP4wTMEtkuVA1yA0jgXum8Z0Jy2HRiBcKvTFICB0JagOxABOm3BjxGsYT/b08OtDcJkpr7ffB9l4kjQKvOlkFLRnKp5IXhPvH8uCIz2BAVJo++Y5FIBhaPRAMKhK7WwYKrHfQbBuJv/qXDpTSSg1p7GACKODoGUYwQnOM5qpFW3WsD8kljMHwal08DxotHTJB2CtP8bMhaqjSov79PNAEHMvT28rVOB7nryp/EdmAIcGhP47JlWKbwAoxvNTJq7XhLBG0+clAVqFWzY5eKXIBEbKrJl7XM=
+	UByva7wBraUQd9cKUrgbY6b1l/LdDM3OxXSXqU8Zh9O/fb2kiOJhXymvm72WADPUarifEJpoxMRB6APZrQ2M2NjTkm5hThVf2ugtd6QYtz87coAlcyte3IqgA1auA/5u0Kj4u+76zzqJ/AlBLDCi3btc8aJw5TRF38ovNAjm/mJ7RNPXpgc3oD+RzlQ0OF1VaWcbhxGOIVIFGTKDrXafDgsNPkHVfZQvP10uduAZ0OcmXQhdROWqVeNnQFta+8R92Ex+WeRSLewzkcnOJmjWjh5VcxMG+v/g5RmsycdXQFFOWzeQpRrhKnDwReugSsRKGblOrx5Rgrcm21ayDi0L0uJH0266GLrABzKapE+veSdSApO5w7lxmA0fKdmZR7MAVHeEN7yw2pah2Ls1xsCNIYj1MyQzSuBkzWozCQ6Hf3LqGc8VFshwmI/os9K0QrMjJoTyj80tFSR3NCL8AlyDwBfjxYwRARQ9IggS9bhd673c/eAVGOwoTmRz+8K3EMwZPfBk8wFxhihk2akLnCnLPj9yclssoz7l3BbfZTxdKPjfVAeOAdjNTi8cSpIi91Ux+vyuAvKY+VvgDzJhtu2lzHbHQg5XfVIcwPj3ilWgyYfIfULrLRQnQn3LRgRV4q0F
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10070799003)(10067099003)(56012099006)(11063799006)(3023799007)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10070799003)(10067099003)(56012099006)(11063799006)(12006099003)(3023799007)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?lhrl85fQ7x8MfHpAPwAFSLb3GAhUXhlJ6edZgSm6fSwnWQx4khJojCJ6pxdO?=
- =?us-ascii?Q?L8KLg3MX6/eEQfJnil2RCqogcyfODjuPz40L+VTVB2bOY6HGsYOEPjs5Kd40?=
- =?us-ascii?Q?n/6QaYMa7jJP5288A2/N2oSZwOlGqKC3zlDWzP6gDWVDfSuYCuSDvBz9C/FS?=
- =?us-ascii?Q?LCf1p89kFoY+RJRsp7Bbd72D2Pyez/eZKDvVYXu9bHr22O+czaClMUuOvBD7?=
- =?us-ascii?Q?4kOKTSvY9YDRfyH82hbn2c6BqlCnPoleWHhNOLesd8cbPM9dp8Yhz0gsws0/?=
- =?us-ascii?Q?+QY3yHxjYZ9+eK+6AwCcrkOjByAruPv2jTUvbbMk0psO+u0w/ho/YZfdNUM9?=
- =?us-ascii?Q?RjhQlhI2mgET3cVic0W0+0lZC0RTPbWugvH1qzPH41pWzuDN9w1riivoLDnN?=
- =?us-ascii?Q?f7UzqICvCWpDYoXPJ14ysCnRNwcJ/lGkaiy3Mppz3BTN3Bl4xUp2XrGTs3nJ?=
- =?us-ascii?Q?KSfRAUKRZ8jjuct4prIfFf98wYoaTBrg0K8bBEevwPrTF+aaA8u3mh7ftR7s?=
- =?us-ascii?Q?JrenOQgh1N4l4A/7BsbopZFwu9Bs8qgq+zE9gXGbG5V7vm4nmRXgn1mOFFB9?=
- =?us-ascii?Q?CaNAniYzk7xs/K8/xbIR86ElrNAltbKFm6lLQkiqjdLLtMsoYCautHZmcJeo?=
- =?us-ascii?Q?WuZMh4awMULurtgekAciDIqeJr9UxJPk/KRxYc9eReOhIHtNLuuQd625gEu5?=
- =?us-ascii?Q?DfeLesWLJVZJDrgBVAhkAXs3jTHP+lZKsqZ99Ahk60KOoM7luZGbsk4KbyR5?=
- =?us-ascii?Q?5rXzcT5UfRwWONazffCCbkxpsVbJvAlOWHPx1jp7KTOuFA0mBsSGD/FI4YQm?=
- =?us-ascii?Q?vXDmnbD80K1kZinMqBsswXmJOpb94rOLCN5yjLxMDzkmPlGpUrSrg1i4Mlt/?=
- =?us-ascii?Q?2z+bLxfmtV/VJflfrnesPBtgvm9XR2+rSUJpo79eGt67G0BsRb2uewhfOlNd?=
- =?us-ascii?Q?BzX0Y0/Bc8cqmFct7S0EBqnYC+0jDb0EB6jLqnEVufjOxsiU5Uv6jWcB2kQl?=
- =?us-ascii?Q?3WNVd2ZITocVkK9ajqmxJ8KmgtprcvTRZ38q+L0DFBpzy2RV12CikSKW7XS5?=
- =?us-ascii?Q?pFGv+PF542/hzwEmwjDD2z5QQ/zx/JzEO/8r+1y3OlE25FZIdvLaxmhdMqJB?=
- =?us-ascii?Q?Xeqw461yViqSIDwov3cJ5EIUlIOIcmCoZYT3Di3VCVumRc2pS3O9e/EGX82Q?=
- =?us-ascii?Q?iqq5VamoCHfTOKGUFoQXY44e4XXlW02EXG2XGu8uNCG/ZaIGN/E3TZa5DDIS?=
- =?us-ascii?Q?KhS1FR9m8oqU4CZ1z5uyqye+/28oGi+0duzWOXdtkXWHgiHLkniTnVZeNkr4?=
- =?us-ascii?Q?lF9NSoXM5T+9NvlLRc1Uex8APoDq3xuZxm1QSrF2vocBn1Du7qFUxn1xej9H?=
- =?us-ascii?Q?HfLX9xtJ4+r8gvXF2sVl70Z+R3PFoHmyLJh5l4ThN99yn5omcLEr/+4k5mPk?=
- =?us-ascii?Q?cSqXp/6Uj0MhIYh6OYrikWaRUmhuv8zwcZDpJjiVhCFzDLURM1l7HltrqYbH?=
- =?us-ascii?Q?IFYkdCQe/Mf7q2+YUY//ZyolP2SwfDY/jNWZ60yL3rvTLiYeYbAo2L3BNoQv?=
- =?us-ascii?Q?9W3+xAjQhneD/Sz4JVhSIYzWfUZA2ULGTSJZBVQGvw7Tt/xEp0vF5UWCXVB9?=
- =?us-ascii?Q?4sSubGjtvoBmNSspR9m0USREfOdaZLhVwKHkj6fZrSBCvT50AhEB5+zMfO90?=
- =?us-ascii?Q?lgworqk2Hx5mW9FJiyN1biJDkL+PwRaKqxtXLGULdjN8QXLCiFYVEM1akvGi?=
- =?us-ascii?Q?s9PBD0msig2EG7HKY84SyVVo7tQyFbj2bXTvqhSY3tFIQWaw1Gg7g1ftWdEE?=
-X-MS-Exchange-AntiSpam-MessageData-1: DvDuAGyoE/OvX5wMq4Zu7Z/F15QRd1KoDgg=
+	=?us-ascii?Q?9Wr3JBLaUMrLAJq3lwa4dA4NuNpSAqFP8sIOXm2fYj/eQ6J7l8FhXVzqud5h?=
+ =?us-ascii?Q?wmJSjp8Ssmwe0QJVQ1iyfVjR/uFyiMhlHxSrGLcDJ+t0lNbPDiFdhNp2lzF7?=
+ =?us-ascii?Q?a+FR1AHb8LNkwRviHYhqGQhjep3iMKKwQ7iEIviKzJ3Q1JQp9diGem5ZlUqF?=
+ =?us-ascii?Q?p5erN4UY+uOJ8fmND39WegXv8F0ZAqSrQDBIPTDZ480873dCXzc4OrzDAhkV?=
+ =?us-ascii?Q?WSaR5BoSV5ypAP/03iXtormCfRowZaedFgiQbiVlr6Z8oh5eDSdjgkf4L/p1?=
+ =?us-ascii?Q?eQ9btvIJdrEqHVv4qU00pKNESXtoR0FNNPinzIWcEUM/ROx1VfBUsW1Avoqh?=
+ =?us-ascii?Q?m/1T5or4O/Y8Ag3Oj3L+xjZddHfK7J2Z3w9SQ+CXaG3MTEwNRNIZwcU0MpH/?=
+ =?us-ascii?Q?Vy9/1VN7mDOjRhy8DcX4Oi4ljrnkMdgzQgZKuL+vImhsdGeOjV0cYQO40x3A?=
+ =?us-ascii?Q?5KWidWdlYRKwPankeyDv+i4np25NMly+csK9lxtnONuvK4nE0qiO3KT8CyOz?=
+ =?us-ascii?Q?qFZX6OnLS5IfvODJ+MCQ7XwN4Fm6pOjhZu454jzsFDf+GfbbCe0BupZZf78c?=
+ =?us-ascii?Q?OxH4O4ZhXctvfM7MWxyhwjjCTjx74NVcDBbBpSDHk4zaN4jkON54vIrdZgVb?=
+ =?us-ascii?Q?hTSRR5Ws2jcPUkRBilsgDmAiKdm8GbFbwk3y9I/G/ml7oSw+wQ/cROVHEKPq?=
+ =?us-ascii?Q?Q5eAWnVS8XU9R1sKGKMAVygGPBJf4OhcQOJGspkVZpLgKiwDE/HZI2OsuDVZ?=
+ =?us-ascii?Q?7mW003mmQFfHPMg3UtI6f+Hr02Oi9ajknNwq+K6oCgODM6jF1F9Mu6woyx2t?=
+ =?us-ascii?Q?L4ENVhOUEI7PivZ1+EB9+osd6bsUtp97OKBVOFx0B+WEJfhyaKTpncrFbZoh?=
+ =?us-ascii?Q?J+y+UUO3+hU9FticrIKTYE/8JNrdbG9FqqVaPMsbImYLUgh4cm8cGTVReXs4?=
+ =?us-ascii?Q?xmMTPe5r0GpGZ7HTKjmGZ/a5qMdXT7e6H6Ih4vNdC7fEQpgDWA0h8G7gfZ/z?=
+ =?us-ascii?Q?lXqU4jaXwSOosAGLT9iPYrT3DUVYl8mwgawGW08zafN3lZmwPpIMSEI/80NY?=
+ =?us-ascii?Q?Kl9mNPtZYOl38epQyNhJpxLbZV450hjQvbZyiO3l3loEEuj3Xp0vpXerFUzZ?=
+ =?us-ascii?Q?VqzJEwlEe4ttb6wdR2Fmyb3g2k2oku5oMonXtHhYj0NIPP9mfeU5OKwly1xk?=
+ =?us-ascii?Q?2mav0uFB3KM7zsNNRhKIHzLp1Z7qsz7tPekCBbYsTsNjXXwbXe2hfT5jkpTT?=
+ =?us-ascii?Q?IapUqSG1YfJ3r8P0d7wIvfRCApd5HrD49W7xqoGeXF42cIYDLeVa3d3DNtBl?=
+ =?us-ascii?Q?ou4VdHemmRf9LDZ/q6E/ZDF4LELlxgtXw6ryGg4P9/4q1YfZT4CNnuIinp6Y?=
+ =?us-ascii?Q?ZMLpQNuM1bJXz2qrSx1VgQMyMbx3xye2rnj2lSK/UUt0JIVPPZlnTBv1zOsK?=
+ =?us-ascii?Q?QAA1LO2JxeO7pr8yq5eY34/ezj97qE7r40RMD+VINjMF31CYwx0aEMDFIVJZ?=
+ =?us-ascii?Q?FXTzavKU5z9Rm3RLxcbBsLaQMoapjoYEXZw8WU1wksn4X3BVnVbI8JZy6M8O?=
+ =?us-ascii?Q?RUsNeTInmc3+aU7nmYMcjmBH6T+/YlYuHD0AKoTMehHhEo2NZsXKBEE1UqFb?=
+ =?us-ascii?Q?lU6t73m4zESObOZUeEUfZuKYReBOt26KD0W4aYGaF3xV/R+EDcXgRa9vb+k7?=
+ =?us-ascii?Q?JXAMvpIMM5/+jjKfXul9srKzrgEhkAERmxuJA6Rj0dxCerzh+2Tdy25TzYjw?=
+ =?us-ascii?Q?2c52UGOFcxXDPkgjtLQUQdsRKijT0k+kFBGQqnBY77JPq5uszCZStJMgULg9?=
+X-MS-Exchange-AntiSpam-MessageData-1: buEMUzw2CegJoRIK2zF+wof/ZtagvvYAjws=
 X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0350245f-1912-442e-36b3-08df046c8a96
+X-MS-Exchange-CrossTenant-Network-Message-Id: e2cf6920-dee9-45f3-e73e-08df046c8bfc
 X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:53:53.8959
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:53:56.2489
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: frc899rE8r8xj18XseLQWVyujyuFG8s/HGTqWtjyo7P+DIgE+uOaBJw26+7QmvLUvxwf18ucVS/oVh4QFInxQUpUMeU55cGbafMFDkPTOQc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: WUACNcn4QAMFEgirK190ZMPvjaTDhLD45FT0ELMBDpw7qs0L6dUSfLdMoCyFspsycKQ9dQsgOtSFy7KQFLHiht7IUL46wkEGCgA2uYP1wT4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P189MB3598
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 18:54:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129546
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129547
 
-OpenSSL 4.0 makes ASN1_INTEGER opaque. Use ASN1_STRING accessors.
+Backport upstream fix allowing build with OpenSSL 4.x.
 
-Upstream-Status: Submitted [https://github.com/lefcha/imapfilter/pull/317]
+Upstream-Status: Backport [https://github.com/lavv17/lftp/commit/68d42105d7=
+88]
 Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 ---
- ...NG-accessors-for-opaque-ASN1_INTEGER.patch | 45 +++++++++++++++++++
- .../imapfilter/imapfilter_2.8.5.bb            |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-support/imapfilter/imapfilter/0001-Use-=
-ASN1_STRING-accessors-for-opaque-ASN1_INTEGER.patch
+ .../0001-allow-build-with-OpenSSL-4.x.patch   | 55 +++++++++++++++++++
+ .../recipes-connectivity/lftp/lftp_4.9.3.bb   |  1 +
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/lftp/lftp/0001-all=
+ow-build-with-OpenSSL-4.x.patch
 
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter/0001-Use-ASN1_ST=
-RING-accessors-for-opaque-ASN1_INTEGER.patch b/meta-oe/recipes-support/imap=
-filter/imapfilter/0001-Use-ASN1_STRING-accessors-for-opaque-ASN1_INTEGER.pa=
-tch
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp/0001-allow-buil=
+d-with-OpenSSL-4.x.patch b/meta-networking/recipes-connectivity/lftp/lftp/0=
+001-allow-build-with-OpenSSL-4.x.patch
 new file mode 100644
-index 0000000000..4342de42c9
+index 0000000000..f617a0e269
 --- /dev/null
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter/0001-Use-ASN1_STRING-ac=
-cessors-for-opaque-ASN1_INTEGER.patch
-@@ -0,0 +1,45 @@
-+From d0e1b29ee5ae0e6e91944fd5c04b943fc810e13c Mon Sep 17 00:00:00 2001
-+From: Ravi Kant Sharma <ravi.kant.sharma@canonical.com>
-+Date: Mon, 3 Aug 2026 23:02:04 +0200
-+Subject: [PATCH] Use ASN1_STRING accessors for opaque ASN1_INTEGER
++++ b/meta-networking/recipes-connectivity/lftp/lftp/0001-allow-build-with-=
+OpenSSL-4.x.patch
+@@ -0,0 +1,55 @@
++From 68d42105d78838d0ab155296b69fcb99d28d22c2 Mon Sep 17 00:00:00 2001
++From: Rudi Heitbaum <rudi@heitbaum.com>
++Date: Sat, 21 Mar 2026 03:56:46 +0000
++Subject: [PATCH] allow build with OpenSSL 4.x
 +
-+OpenSSL 4.0 made ASN1_INTEGER opaque. Replace direct struct member
-+access (->length, ->type, ->data) with ASN1_STRING_length(),
-+ASN1_STRING_type(), ASN1_STRING_get0_data().
-+Upstream-Status: Submitted [https://github.com/lefcha/imapfilter/pull/317]
++Upstream-Status: Backport [https://github.com/lavv17/lftp/commit/68d42105d=
+788]
 +Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 +---
-+ src/cert.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
++ src/lftp_ssl.cc | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
 +
-+diff --git a/src/cert.c b/src/cert.c
-+index a6f614a..b188dd0 100644
-+--- a/src/cert.c
-++++ b/src/cert.c
-+@@ -186,21 +186,21 @@ get_serial(X509 *cert)
-+ 	serial =3D X509_get_serialNumber(cert);
-+ 	buf =3D xmalloc(LINE_MAX);
-+ 	*buf =3D '\0';
-+-	if (serial->length <=3D (int)sizeof(long)) {
-++	if (ASN1_STRING_length(serial) <=3D (int)sizeof(long)) {
-+ 		num =3D ASN1_INTEGER_get(serial);
-+-		if (serial->type =3D=3D V_ASN1_NEG_INTEGER) {
-++		if (ASN1_STRING_type(serial) =3D=3D V_ASN1_NEG_INTEGER) {
-+ 			snprintf(buf, LINE_MAX, "-%lX", -num);
-+ 		} else {
-+ 			snprintf(buf, LINE_MAX, "%lX", num);
-+ 		}
-+ 	} else {
-+-		if (serial->type =3D=3D V_ASN1_NEG_INTEGER) {
-++		if (ASN1_STRING_type(serial) =3D=3D V_ASN1_NEG_INTEGER) {
-+ 			snprintf(buf, LINE_MAX, "-");
-+ 		}
-+-		for (i =3D 0; i < serial->length; i++) {
-++		for (i =3D 0; i < ASN1_STRING_length(serial); i++) {
-+ 			len =3D strlen(buf);
-+ 			snprintf(buf + len, LINE_MAX - len, "%02X",
-+-			    serial->data[i]);
-++			    ASN1_STRING_get0_data(serial)[i]);
-+ 		}
-+ 	}
-+ 	return buf;
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb b/meta-=
-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-index 754e793faa..3e449523ca 100644
---- a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc9e8d74e78283c63=
-19317d3cb15eded4"
- SRCREV =3D "23b693f7f7cad8b459beb5cf748078f9cc0e5dc8"
- SRC_URI =3D "git://github.com/lefcha/imapfilter;protocol=3Dhttps;branch=3D=
-master;tag=3Dv${PV} \
-            file://ldflags.patch \
-+           file://0001-Use-ASN1_STRING-accessors-for-opaque-ASN1_INTEGER.p=
-atch \
- "
++diff --git a/src/lftp_ssl.cc b/src/lftp_ssl.cc
++index f53edf24..49328f74 100644
++--- a/src/lftp_ssl.cc
+++++ b/src/lftp_ssl.cc
++@@ -1022,8 +1022,8 @@ const char *lftp_ssl_openssl::strerror()
++ int lftp_ssl_openssl::verify_crl(X509_STORE_CTX *ctx)
++ {
++     X509_OBJECT *obj=3D0;
++-    X509_NAME *subject=3D0;
++-    X509_NAME *issuer=3D0;
+++    const X509_NAME *subject=3D0;
+++    const X509_NAME *issuer=3D0;
++     X509 *xs=3D0;
++     X509_CRL *crl=3D0;
++     X509_REVOKED *revoked=3D0;
++@@ -1436,7 +1436,7 @@ void lftp_ssl_openssl::check_certificate()
++     unsigned char *nulstr =3D (unsigned char *)"";
++     unsigned char *peer_CN =3D nulstr;
++=20
++-    X509_NAME *name =3D X509_get_subject_name(server_cert) ;
+++    const X509_NAME *name =3D X509_get_subject_name(server_cert) ;
++     if(name)
++       while((j =3D X509_NAME_get_index_by_NID(name, NID_commonName, i))>=
+=3D0)
++         i=3Dj;
++@@ -1446,7 +1446,7 @@ void lftp_ssl_openssl::check_certificate()
++        UTF8 etc. */
++=20
++     if(i>=3D0) {
++-      ASN1_STRING *tmp =3D X509_NAME_ENTRY_get_data(X509_NAME_get_entry(n=
+ame,i));
+++      const ASN1_STRING *tmp =3D X509_NAME_ENTRY_get_data(X509_NAME_get_e=
+ntry(name,i));
++=20
++       /* In OpenSSL 0.9.7d and earlier, ASN1_STRING_to_UTF8 fails if the =
+input
++          is already UTF-8 encoded. We check for this case and copy the ra=
+w
++@@ -1522,8 +1522,8 @@ int lftp_ssl_openssl::verify_callback(int ok,X509_ST=
+ORE_CTX *ctx)
++    if(cert!=3Dprev_cert)
++    {
++       int depth          =3D X509_STORE_CTX_get_error_depth(ctx);
++-      X509_NAME *subject =3D X509_get_subject_name(cert);
++-      X509_NAME *issuer  =3D X509_get_issuer_name(cert);
+++      const X509_NAME *subject =3D X509_get_subject_name(cert);
+++      const X509_NAME *issuer  =3D X509_get_issuer_name(cert);
++       char *subject_line =3D X509_NAME_oneline(subject, NULL, 0);
++       char *issuer_line  =3D X509_NAME_oneline(issuer, NULL, 0);
++       Log::global->Format(3,"Certificate depth: %d; subject: %s; issuer: =
+%s\n",
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb b/meta=
+-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
+index d132813403..e46b5c7f10 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463a=
+b874e80d47fae504"
 =20
- DEPENDS =3D "openssl lua libpcre2"
+ SRC_URI =3D "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
+            file://0001-gnulib-fix-lftp-build-with-clang-lld-and-gcc16.patc=
+h \
++           file://0001-allow-build-with-OpenSSL-4.x.patch \
+            "
+=20
+ SRC_URI[sha256sum] =3D "adceaef1bd21a38d07c973233fab603813c431f0a8dcbd2323=
+9fa9a41ae17b6e"
 
