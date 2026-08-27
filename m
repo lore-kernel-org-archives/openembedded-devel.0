@@ -2,62 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62A05C61DCD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F653C61DCB
 	for <webhook@archiver.kernel.org>; Thu, 27 Aug 2026 02:53:54 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28016.1787799234033647901
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28014.1787799231571358737
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2026 19:53:54 -0700
+ Wed, 26 Aug 2026 19:53:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Iit+0qE0;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-8534d507f59so1864739b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 19:53:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=sH3/mB7K;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cc1c9879395so1246056a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 19:53:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787799233; x=1788404033; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787799231; x=1788404031; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2o26WmKpt+gQT4cP+4hb3YAViY+vpcLG+rRHaeGBHlU=;
-        b=Iit+0qE0inrnZcBaHEfk7qkNf3T5TzRP2ux6hNbb60OSXzzpsa/BLB7347V/e2TS1N
-         S2X9FPySRHKgWIatPvSB0aIJl7866eVbjaG0PKbSB/Dd3EOe2/PXWVwk1840gJoLQ5em
-         1WwawSr7Lg/q1YsKPJQzED9QDusWZuCp9WGNmMqAs3PJxWQE/kuyy9/YFTUsiTVSIKgA
-         39dHuhHWr1WJ6rbxsnfGjvK8kF0X6T8CcdChg3XBR7F5qojHjd67aWBaB8VMbAM22rh6
-         5H39xnWGb+rMypLdhRsyxJSuI5pd3MTup1bl8PvHDF2f1lSYxOTHfkuzveaqXn4y2UyA
-         yEiA==
+        bh=tp/3zJ8nw8VXKpRbfFYkNVRsOAlyf+Xpakjv4XV/PEM=;
+        b=sH3/mB7KwOeJqy8ExGllo1UWBXahP8862oHX1hYjVzDmxzVu1pDX3Qhbln8zXALWaV
+         kSLgikqgECNjYLPujh1z5O5MnBBKxMEpqQwlUSJB4N8u3aMAt3tlMXFY9z2gEQNICeJP
+         S40MYGiU5WNlR3WqtJqVouYeUgbYBhSc/I/YQW8B0aoQ+T6JjrI8TonmbreKXXlpgMtx
+         4lWuyL5oDFcX7wIPA9XCUBlCOiLmwiweJF3GJtISwXSm2XomY4ShfhQrf8TN7i1LoJY7
+         nnH6y6YrtJ2tvqJLwp9AN9oBX7c6nVZGLjRgFJAZXiIli8v5NtIqWPCz9koGdTDro3Q1
+         k1tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787799233; x=1788404033;
+        d=1e100.net; s=20251104; t=1787799231; x=1788404031;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2o26WmKpt+gQT4cP+4hb3YAViY+vpcLG+rRHaeGBHlU=;
-        b=S+224MYC556NYjVgP/p0vjdqxA7WduKyQp1qNehKBS7mHr2jnqEQEyKFAUBRXdNOos
-         nIRNdj20z3NHe7JGHNyW+mTuig6KX1UQMNMY4XgiWFI5nY0qVXd4xqhHndf594yLfBGC
-         me9ECCsRSSkbQX1vjImSpcKI63+Q6+jjlKNT/vKAe3Tc9gfh7GSNoAzXk4Ygr/QM8ryd
-         sCrACpk+RGJFDnafYdjIxDiMGANzLwEBF11Bof5tGhMFRCrLdGFYeLKapBNioMOPwyQo
-         UQM+TQltT/Mhv88Y0i/LFj8CBExSsbCcAAwIwWNyUtWPMmOjgi68B40KCnE05UoAq9i9
-         WheQ==
-X-Gm-Message-State: AFuF++k3iTaT0DiUQD8e9ip5teD/Rd52F8oXqG05z1diza09couLDGVB
-	qJ0YyNXGHA8mYk9e4DKWPXBGWnhHPHqm1qiLoVVe5q5ps+tmKxHUenitARMscw==
-X-Gm-Gg: AR+sD107AvN2opqecVx0yktVGhyHNoX1lmlshGG8742ZqSDDCln3WWuklh8KzGjGmmh
-	VlyXbt/qrIA5A+xbObGXezc4vJoufBj/S1AQlhlVFGvdy0gAyJM00S9YGdwy7a0dzMNcJVoHNDC
-	CtcATUOeV2th+oVRqbUKEB3Ytz3iBj7dUWg8ZclrRWmYAhfNoW3ooykMqfWXr1HPEWGDzEdD8Ep
-	tTclBXH+JR5iWOspfR5LDpPX49VGEYaXiOSIImfVDSL95RGqQuf8j/TGR3E3IUaFtDc7NI85Vvf
-	SHJGgWJq4xuCLAOzHtoDhQ2bpM/hB0QO5SjGsGzl01IrbxDaOS2qmotP3BIZ/1dg+yoSfBwRdeF
-	5anqoZPnlHsBEVcO/r9AO0nhNl5qEsfwJMaA2lUSZ2be4omnBjOTvlA87oastbAroR5jY4hdp67
-	j+0o7zdr2xUlB03jqsi90vDD2vhrhamUnnVUvBHwJb8BtlORW4mqdNz33zj0cqhCCXuEDcgvf7
-X-Received: by 2002:a05:6a00:2da0:b0:853:5152:a3e9 with SMTP id d2e1a72fcca58-853744affadmr21392228b3a.11.1787799233396;
-        Wed, 26 Aug 2026 19:53:53 -0700 (PDT)
+        bh=tp/3zJ8nw8VXKpRbfFYkNVRsOAlyf+Xpakjv4XV/PEM=;
+        b=YajsO7wNvJK1T4tQXyHonEJLTuXaIN9cvxI9Frv+YnIZSrskejJ/akb5eZ9eadOc6i
+         xfsrR3Rj00/peZZo7iDC3g1wljYgV9pvFUBSPwtSIhHkAaigoFNEgd3pqPVh1pznmtud
+         roZahXpdxRhlxmZxVWDJcmFB4VkRhkr8SW4VE4JX1Sk6P9PH+KWDRS2OH7a7Vxum1NkY
+         S9Bg9rE57tJ251DrFlkiupsigyh06li4GRte4FVL+UE/TSmJFbAIAT6HGUQQ58oK50kS
+         7WOhFvtmYLOC37Z9Bz58QZr0CWxvoFQjM+m0mTYeErluP4GbboEpRawWngpXxTO72sh6
+         Jgfg==
+X-Gm-Message-State: AFuF++lEDOqTRx3SgfhM1X78z4RpWdbU5ZkrhAf21GsU8//F6LugY7Jo
+	sLrrjgKBxluB+0eF8gr682Jf4vVDpv1IoeNEs9dd2Rhq8DIenuBCUAYT20fwpw==
+X-Gm-Gg: AR+sD12VaJrgQYuq3k0rnp58ehozkFijBWRMhsDGrbVV1AxRzsT2qUOhHAHvpUfMCtI
+	Mm53iiZ+9eTCB5fwC2BhinfLoK7SQ3G7j7iFmVfgONj4s1Tz3SZtaNcGfgqMI7kE4E5iLZaPXMe
+	sRuNqpSBuWRodVu2awoxsoy7CVo7R8+J2Az6NbFxw4Pg6wRerwWDEKosm2rxoVOzNsG5JhrP8dT
+	4h32YqWN0DJ3CF0BgeukE631ewGMvRMq7nO/vy43yNo9j9EdDsmmWFU+Egj5OkWqWQvjTdkICbc
+	5WvtqFjqFWPSG2gTsJy7Hs2uQxHyUfXSIMNHH0Sr8pRZj8nOpMVUuyBWTfmOq0tCs58gduXPOqI
+	PPkibKKCZ9HDaf+oMwO++XhSZSunL+5tEwTINoF9Hlgtz5b/5K+1P5SGkX4ZRUjQr+KEsCeMVYU
+	hIFyDOsHwwzj6UEPs4UXSr22mQWLykqtEu7bnvApfPiQB6/5E2BBdQ8qHT+E9w4WfwCgemspSrL
+	EASUVS6X8I=
+X-Received: by 2002:a05:6a00:21c8:b0:846:8b22:4933 with SMTP id d2e1a72fcca58-85375fa1548mr16136207b3a.17.1787799230960;
+        Wed, 26 Aug 2026 19:53:50 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8556db7ab0esm5787b3a.48.2026.08.26.19.53.51
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8556db7ab0esm5787b3a.48.2026.08.26.19.53.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 19:53:53 -0700 (PDT)
+        Wed, 26 Aug 2026 19:53:50 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 9/11] libsrtp: add UPSTREAM_CHECK_GITTAGREGEX
-Date: Thu, 27 Aug 2026 14:53:21 +1200
-Message-ID: <20260827025323.1433982-9-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 8/11] proftpd: upgrade 1.3.9c -> 1.3.9d
+Date: Thu, 27 Aug 2026 14:53:20 +1200
+Message-ID: <20260827025323.1433982-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260827025323.1433982-1-ankur.tyagi85@gmail.com>
 References: <20260827025323.1433982-1-ankur.tyagi85@gmail.com>
@@ -67,32 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 02:53:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129529
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129528
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Fixes:
-$ devtool latest-version libsrtp
-...
-INFO: Current version: 2.8.0
-INFO: Latest version: 27
-INFO: Latest version's commit: 8ca9b9e50743a9d2192dba5e26183121adb33d46
+Changelog:
+https://github.com/proftpd/proftpd/blob/v1.3.9d/NEWS
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-multimedia/recipes-support/libsrtp/libsrtp_2.8.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../proftpd/{proftpd_1.3.9c.bb => proftpd_1.3.9d.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9c.bb => proftpd_1.3.9d.bb} (99%)
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.8.0.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.8.0.bb
-index 19cb9ae061..c8db49c8b6 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.8.0.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.8.0.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2909fcf6f09ffff8430463d91c08c4e1"
- SRC_URI = "git://github.com/cisco/libsrtp.git;branch=2_x_dev;protocol=https;tag=v${PV}"
- SRCREV = "24b3bf8f19b6f5ab4cd2bcceb4f4064efca86fd5"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+similarity index 99%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+index 95c9f3919c..8172ba3018 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
  
-+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+-SRCREV = "78a1bea439969913d7002bfb16ee7f0f60e262b4"
++SRCREV = "f59f248e26bdfa514443e42bf72a145641df635d"
+ BRANCH = "1.3.9"
  
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[nss] = "-Dcrypto-library=nss,, nss,,, openssl"
+ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
 
