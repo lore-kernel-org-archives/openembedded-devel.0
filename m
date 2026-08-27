@@ -2,178 +2,191 @@ Return-Path: <jaipaul.cheernam@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49B40C61DCB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4877CC61DC4
 	for <webhook@archiver.kernel.org>; Thu, 27 Aug 2026 18:54:03 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.60])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1801.1787856842746752130
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.56])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1797.1787856833544892600
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2026 11:54:03 -0700
+ Thu, 27 Aug 2026 11:53:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=xF0TVT1F;
- spf=pass (domain: est.tech, ip: 52.101.65.60, mailfrom: jaipaul.cheernam@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=DKWTzuvF;
+ spf=pass (domain: est.tech, ip: 52.101.65.56, mailfrom: jaipaul.cheernam@est.tech)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=acCOp/nHrvIMnKHb0S1R945d4EB6rvHOFpa+eUos5bFHvqN3oPPiUsHvgJc86DDUXO4H3hyZmhXjXQpRn18NXeQrYKUEEWtJzLnbtt4AKptNTdv5RgRaJplWNjLF87LEJ0RupYj4qz1mLDaihsnQ5f2IPfqyNvKpwiE2JLS56FW2CA310sQyAtjBWBpvVtXNfqAGHThnMGyO7sPEnt6Kqz0E1qJ2Ro91nHO7OR5ZVLYquppxIPFYILqwMr6a3nlUkGRl12Mp96fTu/LXZdrdmOfZgek9F2qcWSs3QPsSDa+x3fu6XHRcKXk7iE7pursh10M0xI0Lu+OA/Dchme/32Q==
+ b=xC/n8O223zPbgJipGJwZTOsdtk/lo/pe3/5r0a8x1GhdKDZC98i7AGFeNzPRmAzLZtHo7TPcq2RCQdv+sw8L+7EtOjL3iAy8PPBpX9hi5Gz+kYHtNS30aR+5V+yXo4Kc8BbBA9y4mGlKUpl8xwI/KMECCrPNtQzJd6KfuhjCJOxL2kB5DSXfMx/zCCv0NtoRu/hRK4ezqT7zT14/Rs3yU09QAhTXhdYeX+/oVM7LeQbHfJE2G11CIJwE60+zNsGGvi69vEViGalEu18jkUf82T1aZsfOfO5am0w/BjFRFY/iPGWwuCPOGgxgCOOm/+qD8ys3suRLbMrNDQyneoBq5Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=voVf3ZTSP6G1NingBNt/Vl5TvpwZpx/qMMQlHPaUd0g=;
- b=fi7I9MxV31zgv2ee6/VvNo4UiL5pIMIEspIxr3J6Cfp+UPLzOg1xHDxYnKy9RmoAWAxUKfa4HNednKJfsXttu+gpkw01DNPpJbfNxyKxGznnjCl/5ZKFVILQ0hNHLkUqiXaJI89jH3dL7pZlaa0w5qzQq1im3ldkkjMzuI0vuaxQ18BLdP/d/GT0PbUzXtg7uOH9IAfuscrOT+V6NGn1ABgGqMJAAPHYamSO56wpvu8qOUwrVb9nOHUCFjbQCTb0thQ6E8rVDTjMyGV+c1tGvc/4ycby+KBB6+IdsrCZNyxop/uY9qAf/xtmL5seSdkjG2wVCvIdxBUXMWTpzpmVbg==
+ bh=ir3box3ZQXJY0/CSJlB9OOdmfrtD2n0dmKhqOqaNVR4=;
+ b=Pj9idFkQku8w8COUNGQufr37M/8H6xfM0+qfWTrM0YQTPu84dScnuwtjmQB5soWFWya8m3Gp/Y9wVusxk7nttgSyr1lvN/C/xqRFO4XCI2OLQNUlQNjCI12fhnvUZAU6eY1xNjYbbrxhvEg+9XS1vpHIVBghZ5z4YIJ3EkZlX0e2Cu5BWYPJgCAVGuiKd3YbF2USTxHjqEbKMT/0vBWcHGg6ReTbCV+g6dKOaD/bXZP0VXy2uVTbpF1F/KVANu0F5DavSWYoZE33HNJVJgivr5nsnKbmZedJQ0EXs0YdYkV7IWMXKeYc/gu8ZtoRRfeIYf9RS34YRBCoqkNBrawIrQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
  dkim=pass header.d=est.tech; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=voVf3ZTSP6G1NingBNt/Vl5TvpwZpx/qMMQlHPaUd0g=;
- b=xF0TVT1FDla3jBjYSyRl1CvBNjlykRly7VEdzOw+6HqK8GZabcQJDPqq7Y0qbq8Ax+akSm4ZZzQu0zSNtEgkAB4GSFCh7o3PIa8kU4TvdSwP15zFAPbNghfod7hA2GA2XN+inJwDb2Axi5BqhJx5NLDkA4/Egc7DHZEpYMj4v4bNrEiCBfEmBHFvQ7xghzfRhlk3KnwlZXHHCCSW5NtgiqkyR2+PBvftWYOYkRR7G/KuBpDeNaQPZghBys2MzWk1svBFMJx0JYimpzW8mhDeR5yuHQ8l8ASs7+/TzMYBTDlxLZnC79J3sXg/EpdB7EEKdFefCil+IlSptqWif2de2A==
+ bh=ir3box3ZQXJY0/CSJlB9OOdmfrtD2n0dmKhqOqaNVR4=;
+ b=DKWTzuvF6t9En8Z0zEr/sfp+1+c0yw4CJEo6sIqPuDfDr4+kbu84VAulPkFXaSvk21hNoUKYDFtO8DGjhHUBdtT0EsF9Js0mGN9DP+e3khj1iPPVkHcaF4BoA7+fd4e9JE2TOFVT2HTi2G9jyEw7eC312t1zTNPYPvGBUxus3aN0F5gkPp1AqztiWPCcTomDKLhXIU3ohm7JUKUgjaovccO2ITxRAZ4rYTO6Dnbi8nGHPSpmSCA265A/0iAtybE6nCzJo3HAOBUBLHBIf8II4Jy0oLtw6PSThcxW2J1l+pYjSi5DXC6PcGFOv1O3KdK9vfXkOb7zUsy2Lzchk44HXg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=est.tech;
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
  by DB9P189MB3598.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:5fc::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
- 2026 18:54:00 +0000
+ 2026 18:53:51 +0000
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 18:54:00 +0000
+ 18:53:51 +0000
 From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 To: openembedded-devel@lists.openembedded.org
 CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: [meta-networking][RFC 13/20] civetweb: fix build with OpenSSL 4.0
-Date: Thu, 27 Aug 2026 20:53:17 +0200
-Message-ID: <20260827185324.78997-14-jaipaul.cheernam@est.tech>
+Subject: [meta-oe][RFC 10/20] boinc-client: fix build with OpenSSL 4.0
+Date: Thu, 27 Aug 2026 20:53:14 +0200
+Message-ID: <20260827185324.78997-11-jaipaul.cheernam@est.tech>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 In-Reply-To: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 References: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0244.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a7::15) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+X-ClientProxiedBy: LO2P123CA0090.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:138::23) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  (2603:10a6:18:3::ad4)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|DB9P189MB3598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 13abc91e-c24e-4af2-4347-08df046c8e83
+X-MS-Office365-Filtering-Correlation-Id: 7cd0a7ba-90df-4a61-5044-08df046c8935
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10070799003|10067099003|56012099006|11063799006|3023799007|22082099003|18002099003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	c2zW9pSfZ3FDVMAn4U2VK+oN4za8dsh11D0XNK1MqL5aINyd4llPnJYsT5UuapP/UJATdoWsGPRLIhTWs3hQfB5ztRFZSbTQFBB0FNJigLXMoMDMpcGlN4LoXSnitlDHkKaoappB3AhG/DzKyaTnQEwf/U9mw8dbn7M6inwMadA28nPvskR+PMClUzdyC9nDPVGSTBlbDDXe7NvzfDuRxf6xeTqEAjED0+JqJJnbbn7XaqXzfO7R3vaRjzMF5h38M3Ygds5wwrhYAWnDQyH/TC2g/rcvLygpwPAbxuIz80IWU5QkssMGTY42uKpjI7qNc3ZitO4u4SEncubgMBF+xvuoGrN4evdBr8LNiuAgnG0fgc1QSR/xfsxkYrsilGTHGHTcsDJlExpTN7L05vCWQtQMmlhVdc+7LugHGvyojCw8msosAvIiUhsOX5I6DL0d++0LOYCjP9Dhac0KZbUhil5XUTm8H2yLWCuBriJ5GCwDNE1OBy8sIowheMd9JCUnFCrFWZjBcUZULHFK+jOYC1KNcTeidhT2VXIOk8HYsh1p2/6WxS18JpVUGqCEmZOIkqRVA4HiMbOHU1kf6nsvs3J57lkQvaVRAiL3obpsCoXCdJUPtuZyC+/Kk8J6nl1vjR+hHR1dkQhyl5vxMmjL1RI5mH5DaM6RBB1OuWJZMdk=
+	7L8mVcJ6p+y0gdQMkBzYkqHyIxau7dkfPMWbCm3NAtkDww3FcEakCDZqyQeX3MmQtCRrj8V32D5v9N6Lc2VHGTc12qsiG82SjiuuxkOe5KroWzPTHnaqC17uaIAinEFLK9RwwHBwzKgOgp5Chpvh3EmwsaInozry28KWbwbO2wRTgHk0aao/CRGDMVqVFkuWxmK2mWA/3lu5FdYsSXrGTW7oqaIbCQ9W2N65jahkaFbKRR+VWuzprNX1rrg0JkE8xCaUSC3RSUYoBnped9LZZ9tlB4DYW1O51j5H/6jtQZgZrTky151prVkFfnK+CHSuTtSd5hB2a9acI32SPc/G9u3ZmENJWRz4yfH1srI5llfRe8uFHWgSHqsTEWVbKFdb1kKnCXXbYH3dPyXnr1vm3rdObkQgulEKJw79qWJFsNKJJlg9onmYXdZTZ6oGCOuSqLRaZrLYtkCgE23NP22E4l7eDDGT00LR0qW+6DKrFwniEE7ydlx54Atsb/Q7Ctb5JfPVF1vkiKuuvNmwG6NUCmCK3J1ZoWbWRW/N16PNEiXW5RI0JdHnHaQm6P5DtgrennehWN9UONm4Vorh1t8wO6EOHVt+/wXqxZ+XIhiCDmPnIuPwsIdyCtlzYlhj7W2ddy4LdR7DCNJ0WDBky1Iyiq3VMIoDx6N8cQD1Kc6d5yw=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10070799003)(10067099003)(56012099006)(11063799006)(3023799007)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?g3PkcHC3RWyA1J1AB+qO8YEaTvMKJFoD8mZ4RI/gR9Zio41cD09aXI8XgiiG?=
- =?us-ascii?Q?jSsNqPi00jNZnTuRI1zSiKs5r9PIbEh54FeAl5d3b273iUzx6L2XqypB4AIV?=
- =?us-ascii?Q?7chn5lzXvK4HnHSeox7M3gNqFlaZRhnzWLZd7ihoX7qXmeKvnBddKqugYuQ/?=
- =?us-ascii?Q?0YRUItrS8NkQLRrVafxxUpdSeAczzzE+Klwqa/B3qXArMcX+C0VxMnYxaed7?=
- =?us-ascii?Q?WnFUk/AME+c4FGcRa+iy1uFKtzPCyqOfjt6U3iqk9Pc4ZOezpQwZTI9HjSY6?=
- =?us-ascii?Q?tBWOMNiDmzeYBnT81BmWTE4QoMNHBj0uMOEl69HRrmI7gbkWIi5m27vgZciT?=
- =?us-ascii?Q?lxfheQZTJophI4RRfk4vWsLlwWCqcBn2Tht+HoXhliPuHX1KXiBVFjIzFFZl?=
- =?us-ascii?Q?mabI+PaAZaH7WIhmIuKW7aFw/ogi41Uvk+OHXa4VrAbwGnpsiCQufuB03rND?=
- =?us-ascii?Q?Z16tgWtZioFmPV1KMsiGDpKoYvi5Tfwdr6CJL2hCtrI8IAmEK2jr7JLzDxq6?=
- =?us-ascii?Q?jZYM2J8WXJgfTzdeEi8I27kMQNBe2iBATe7m9lXIDvDPmor/y5C3Mdqsqm5p?=
- =?us-ascii?Q?cd+o8AKrNvOzFpnFyPQ6TzQVl9aO+aE2GYtBqtSp4fnsA258uzX1BSch7TKh?=
- =?us-ascii?Q?bEloe1cmruXVkWosQLzjJr/nAMWbLobbAO5Nt2g4pKIgHF89Qe9h7Eb4X5Wf?=
- =?us-ascii?Q?IVWbHMeRPpX/zmStKdLWdaVHMRmn+lTLRvs2TCv+IUOy0THWd93i9iUzMcMJ?=
- =?us-ascii?Q?ysLIOjd0M50eSeoGCcjuoELLxsb1qBdT1aNJr/SPffd2r6A9Aw++M/r+vJNa?=
- =?us-ascii?Q?nN8jSqFy1wx552IzD6/uo5smVDqT6C8EaOfz+/baE8GJ9ZzUj+Kn2uB8ZByl?=
- =?us-ascii?Q?1H/SJVzKRWIteGAhYoQ5GOR3q5jiNf4R+b4tKcrXYLaNTCxo7JwY/b3L6AbN?=
- =?us-ascii?Q?BZ6Y13BlczGP8WlXlLIwwqto9jRsJdf+25nWAAxp/0TipcBG98PKjZiQYFWD?=
- =?us-ascii?Q?TjnqR5ddYvKTqRnICh/AYzi1z4GXvJau1IOrYue6lISOt+GA2OPbJhLd5gjF?=
- =?us-ascii?Q?qQSbqpXRSj4t74WvqO9UV4Vj+ufskYG2IrIEY1ysq3IktjioE90mrxp+MXdX?=
- =?us-ascii?Q?I44KN4IsEh3xr0/J4WVeMtrRC+mwPik7shy2GWoGl6DeRUEiy6IT0zT8uN5Z?=
- =?us-ascii?Q?DlmEdJfqyG51FEm8cZg6I26TpHt+cPbpqBsSw2DC2C/Pfa9KMpN8pvZDdwc0?=
- =?us-ascii?Q?kKAiQv0cZOh6xAXY3TMjhYGYeiKfTqu/fjeuGYzYMmWEmKCzw8hWKXlXlChV?=
- =?us-ascii?Q?CMycFJ6OmA/a6kOIFhVpwa5KV/KXoCwRFVRGYQGGaQjMBhfjNnR7e//A4FRS?=
- =?us-ascii?Q?CCps4BFbcMbaRFUeutLxdcfe4q66dQ8hK9JekUSAVPjuMS7STIEias5M2j5Y?=
- =?us-ascii?Q?yBx/rs++WJmgpexMXp4UyTKKhMmea0W24/cZ38EQGKGCqWjrn60wIviy6Vj0?=
- =?us-ascii?Q?ukkOhEZY80cjPxxTDlKy5tNGa+DgscMqV7CrMoCZv+g/HjiWRg/Sv2wEpt3E?=
- =?us-ascii?Q?2Ed+z2a0Xzaj+a1T5F0nasBG8Ay7LfuAyrgzdXN46Gng/csn3EiWaMRhKc0p?=
- =?us-ascii?Q?oYuTxz4cupWAG4i+zqhFZj2atMyJYnLIZG2lJwi0d6tsWPkfxVgsTCxcH/fh?=
- =?us-ascii?Q?eQE27PKiLRtQvXErlRm+SXJffK1sJXE6msyEwnNG07SThXLkEr0w4zjwfmUP?=
- =?us-ascii?Q?8ENpl7vAZ4n42HQrXWk6R45WnKdBPquWIR7NTmAxc1hTPVJEwGG51YO5h3hQ?=
-X-MS-Exchange-AntiSpam-MessageData-1: CGEq8n8uA1/+iBZ/uzuk2GJ7Ect7vlCCsHE=
+	=?us-ascii?Q?Q66lmKVvabB2xcRD7z7qBYxvkP8TQWcUb8VfGPf2nvj48vC9jG/sfji2LFB6?=
+ =?us-ascii?Q?W0yr5iBWgbPNuDQdQ82LBkrSQnrBgidKwX8aVeLIjPneZc48H4ZKWPQt4HUv?=
+ =?us-ascii?Q?W/jqoc8jAeBf1AkH9lP6cyOazuISoMKhFSRxxgQyAWZQYMQCZfMroZudfqd9?=
+ =?us-ascii?Q?BUsOIiAJucP8JXvo4Jr4kixX2Y1o3qqiHNGodI3FUdaCtvXFhZ5U39FLgamr?=
+ =?us-ascii?Q?6vbjUsiWleVoUbE9YcPPZ2D9N3I8U1sBY0jPlpLBzYiYDM7bB7uQDBkRpz/N?=
+ =?us-ascii?Q?cEUtyxkbkrMYS8Da4YHaZ2s9VW5hZGkX9zP+CI1JL1E27A2Titi/pm6YTy3B?=
+ =?us-ascii?Q?T6KPIN8tJhgmS7f9slofN2PFxlZ5hGCpM/aASwAE/eFqzjcrs/dPANBOkx4w?=
+ =?us-ascii?Q?sst3+XI+BGOuB5FaUGgfMt5F/hLlfAqag2ulTOLF9v/BWLksVZPaMCLgWDC1?=
+ =?us-ascii?Q?Hy4JKaxU/Ihzol4va8+Wp2JwrEXCVEIuA378BPbziJSgt5UP3mlPlkF/mzyc?=
+ =?us-ascii?Q?mG6W1j+GuPCXhkO4+LuEhgHlqbnQaxFkIOi5ZcXJGRr0Sy7UOLmTh8vX1csX?=
+ =?us-ascii?Q?Y0VF2AjkcLEYbZ1DgPtEN1Lm9WJp9kC92A6EB+aGu9VHCKkJ1CmZaTx9egEW?=
+ =?us-ascii?Q?5lO2N8p6O7uwIUg+sGTXTRGm+V4LBd5drMs24X7SFT8eOubBXKItvc4I8Akn?=
+ =?us-ascii?Q?6194v69VVUD8I9SdS1dIdV7xryDbEDmxVcy2DQipEiLyubctGPhOhzyzP+eD?=
+ =?us-ascii?Q?0wOVnJf0kwRYiPf7Em3nhK4q38yYBl9P0aQAOcGLS43UpAboBH3tEttG5x9K?=
+ =?us-ascii?Q?mZoXMeoYq8lHVwC7a/3BIenQJTUN5WDO/b7fHC0h7/RWajhzRnztZ1adez7D?=
+ =?us-ascii?Q?GYDkUmi8toRCNW3648THyQ4B3ujrPIA1zi4CvIAwC50sMUv0VOoINfdpm9mD?=
+ =?us-ascii?Q?r/yNATOYFbP6fa7H53+NYVtePkj5Ro2VoLN4oR5lI7ddDskEmdlGkq4gG4g8?=
+ =?us-ascii?Q?XZVBcWW3KdWTEzdj45XrgZcRTsikbnnzRd5pfwWT/0EHpFmxhzRlBreiXk2J?=
+ =?us-ascii?Q?GFxe04AAsfUNLKrj8eA15ER+iOPprR11u8s7Vd3KCDH73uq7mvGv7/3XUs8L?=
+ =?us-ascii?Q?P93tKaNYVA2nbunW2zNIdQ3ahoxuor1LBOTJa97ahNIkM3XxdAmLyyYUVgyC?=
+ =?us-ascii?Q?Mvu5gcugtiVEHk7irs+vKpRGpHRHcypoGyViZjjiKviZ2VW/TZXI4Ju8HbNs?=
+ =?us-ascii?Q?kf/uDOlwxbA1SGD/siZ90nsoyV1NZ7ND+bD3p4Ll75Pb1tfunNuqcwg1Af8N?=
+ =?us-ascii?Q?WylbXS50atRHz2/ChCP1jbJsSSLsoJf451meX9n2tQoVYlyJM5iuuNjhEQ5a?=
+ =?us-ascii?Q?XKOOqVkXzP9GG+6/AxMsrJQDiz2iai+EN+YxskJJGJJ43KZJh3/st82jA8oa?=
+ =?us-ascii?Q?rrYhTRs1O08b/lFaQc9y7Bxmh2Xd3wk5TwpFlwEtkUyyF78LoLYcbBBFJzXn?=
+ =?us-ascii?Q?rpn90EHd+srL/JyboB/eomc6k7WGMfa69QmQgIB9Glxg1x0YOslZ1K6Wo7TL?=
+ =?us-ascii?Q?dRq5cGNnKNmdz+FpCtIt353dQU5fX5tgxxn/uAZJ9aWGvt+TCegs4wJS/s9I?=
+ =?us-ascii?Q?YA3qJwrRU6ylzPgz0gsA5i1RXl9f1k3glUPsGVLOP3d4nRzjMh6E9NQWMaRA?=
+ =?us-ascii?Q?IqDxM5SPUFAUCU49x5z1IqjNpHAC8itj0qIryQTprmOUYzw+ht30BMoiIXLg?=
+ =?us-ascii?Q?rzWxJQHFXfPctuEUKJ8nM2Sx3tevmYMpSc99hYiLmYT0l2wkk4gqCQmLGNfq?=
+X-MS-Exchange-AntiSpam-MessageData-1: Zd3BEoxhL30yssAxrO563wUGFtzMS1lH5Y0=
 X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13abc91e-c24e-4af2-4347-08df046c8e83
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cd0a7ba-90df-4a61-5044-08df046c8935
 X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:54:00.4868
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:53:51.5835
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: C5Z8Pqs1sO87a1M3YQA+JpzWp/bU09y6Ax1EDd/zlyiriT0XqXwMSU87A/CXnebP+bkHRwYKhRF5hsy1YxaKCgGLRuIUQ+iztqFPWGFwkiQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: CUV5Di9oxyTge0HpGOLMfX9a4XIiEYIP6hJXbbVfCAZwzh/5QZODm4a/hnudgYDh1Ig/MaGLapQ8JJNCnIIAt746XhIBhRAGwjJOC/LP6uo=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P189MB3598
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 18:54:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129548
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129545
 
-OpenSSL 4.0 adds const qualifiers to X509_NAME returns.
+OpenSSL 4.0 returns const X509_NAME* from X509_get_subject_name().
+Minimal fix for the const qualifier issue in cert_verify_file.
 
-Upstream-Status: Submitted [https://github.com/civetweb/civetweb/pull/1423]
+Upstream-Status: Submitted [https://github.com/BOINC/boinc/pull/7209]
 Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 ---
- .../0001-Fix-compilation-with-openssl-4.patch | 27 +++++++++++++++++++
- .../civetweb/civetweb_1.16.bb                 |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/=
-0001-Fix-compilation-with-openssl-4.patch
+ .../0001-Fix-build-with-OpenSSL-4.0.patch     | 41 +++++++++++++++++++
+ .../boinc/boinc-client_8.2.15.bb              |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/0001-Fix-bu=
+ild-with-OpenSSL-4.0.patch
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fi=
-x-compilation-with-openssl-4.patch b/meta-networking/recipes-connectivity/c=
-ivetweb/civetweb/0001-Fix-compilation-with-openssl-4.patch
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client/0001-Fix-build-wit=
+h-OpenSSL-4.0.patch b/meta-oe/recipes-extended/boinc/boinc-client/0001-Fix-=
+build-with-OpenSSL-4.0.patch
 new file mode 100644
-index 0000000000..134760d8ea
+index 0000000000..71162ac3af
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fix-compi=
-lation-with-openssl-4.patch
-@@ -0,0 +1,27 @@
-+From b3449269bbf13852824d19f164d00810432649d0 Mon Sep 17 00:00:00 2001
-+From: Mattias Ellert <mattias.ellert@physics.uu.se>
-+Date: Thu, 20 Aug 2026 21:04:22 +0200
-+Subject: [PATCH] Fix compilation with openssl 4
++++ b/meta-oe/recipes-extended/boinc/boinc-client/0001-Fix-build-with-OpenS=
+SL-4.0.patch
+@@ -0,0 +1,41 @@
++From 910aad27e06cf7180599c1dc5649a2dfadae6597 Mon Sep 17 00:00:00 2001
++From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
++Date: Thu, 27 Aug 2026 09:14:24 +0000
++Subject: [PATCH] lib/crypt: fix const X509_NAME for OpenSSL 4.0
 +
-+X509_get_subject_name() and X509_get_issuer_name() now return const.
-+Upstream-Status: Submitted [https://github.com/civetweb/civetweb/pull/1423=
-]
++OpenSSL 4.0 returns const X509_NAME* from X509_get_subject_name().
++Cast where X509_NAME_oneline requires non-const.
++
++Upstream-Status: Submitted [https://github.com/BOINC/boinc/pull/7209]
++
++Note: The upstream fix is part of a large 29-commit refactoring PR
++that rewrites the entire crypt.cpp. This is a minimal standalone fix
++for the const X509_NAME issue only.
++
 +Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 +---
-+ src/civetweb.c | 4 ++--
++ lib/crypt.cpp | 4 ++--
 + 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/civetweb.c b/src/civetweb.c
-+index f6a60e214..e093e094e 100644
-+--- a/src/civetweb.c
-++++ b/src/civetweb.c
-+@@ -17125,8 +17125,8 @@ ssl_get_client_cert_info(const struct mg_connectio=
-n *conn,
-+ 		const EVP_MD *digest =3D EVP_get_digestbyname("sha1");
++diff --git a/lib/crypt.cpp b/lib/crypt.cpp
++index 904fe2736c..a06b453324 100644
++--- a/lib/crypt.cpp
+++++ b/lib/crypt.cpp
++@@ -774,7 +774,7 @@ int cert_verify_file(
++     DATA_BLOCK sig_db;
++     BIO *bio;
++     X509 *cert;
++-    X509_NAME *subj;
+++    const X509_NAME *subj;
 +=20
-+ 		/* Get Subject and issuer */
-+-		X509_NAME *subj =3D X509_get_subject_name(cert);
-+-		X509_NAME *iss =3D X509_get_issuer_name(cert);
-++		const X509_NAME *subj =3D X509_get_subject_name(cert);
-++		const X509_NAME *iss =3D X509_get_issuer_name(cert);
-+=20
-+ 		/* Get serial number */
-+ 		ASN1_INTEGER *serial =3D X509_get_serialNumber(cert);
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb=
- b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-index 0e13bc6deb..d9ca7ccd53 100644
---- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-@@ -8,6 +8,7 @@ SRCREV =3D "b6ef58f4c4c7fbe90fd1065bccf45b143345f1a6"
- PV .=3D "+git"
- SRC_URI =3D "git://github.com/civetweb/civetweb.git;branch=3Dmaster;protoc=
-ol=3Dhttps \
-            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
-+           file://0001-Fix-compilation-with-openssl-4.patch \
-            "
++     if (signatures->signatures.size() =3D=3D 0) {
++         printf("No signatures available for file ('%s').\n", origFile);
++@@ -824,7 +824,7 @@ int cert_verify_file(
++             }
++             fflush(stdout);
++             subj =3D X509_get_subject_name(cert);
++-            X509_NAME_oneline(subj, buf, 256);
+++            X509_NAME_oneline((X509_NAME *)subj, buf, 256);
++             // ???
++             //X509_NAME_free(subj);
++             X509_free(cert);
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_8.2.15.bb b/meta-o=
+e/recipes-extended/boinc/boinc-client_8.2.15.bb
+index 62aa757a59..2d386d066c 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_8.2.15.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_8.2.15.bb
+@@ -39,6 +39,7 @@ TAG =3D "client_release/8.2/8.2.15"
+ SRC_URI =3D "git://github.com/BOINC/boinc;protocol=3Dhttps;branch=3D${BRAN=
+CH};tag=3D${TAG} \
+            file://boinc-AM_CONDITIONAL.patch \
+            file://0001-scripts-Do-not-check-for-files-on-build-host.patch =
+\
++           file://0001-Fix-build-with-OpenSSL-4.0.patch \
+ "
 =20
- CVE_STATUS[CVE-2025-55763] =3D "fixed-version: The vulnerability is fixed =
-in the used revision"
+ UPSTREAM_CHECK_GITTAGREGEX =3D "client_release/8.2/(?P<pver>\d+(\.\d+)+)"
 
