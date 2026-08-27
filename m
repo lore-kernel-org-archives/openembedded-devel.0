@@ -2,62 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DEE9C61DC6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20D09C61DBE
 	for <webhook@archiver.kernel.org>; Thu, 27 Aug 2026 02:53:54 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28399.1787799227023191328
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28013.1787799224655195363
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2026 19:53:47 -0700
+ Wed, 26 Aug 2026 19:53:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=is7WtzBd;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8556ec44e9aso3727b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 19:53:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Xpz5i6bk;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-84e04df8c46so2111731b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2026 19:53:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787799226; x=1788404026; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1787799224; x=1788404024; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Q8UpYBoc/M1BkcYKHAYSrQ2SzHDTpmMXyDtNhyPg3wM=;
-        b=is7WtzBdaI6XQkCgl/qVdaxAAbDZZBk0hRne77IDkTc1M8oS5PaCBnx065Nrjm5wuj
-         O+g0NstKJ8DpIPgK5mJDDR/P9mhz1uWd2iOp9KfMTVBmda5gLMwvDDgJWDPm3vlQrIA+
-         EAlphpUQBmnTA58M7nYi02P9yhSAJjShxMfT/ftmfh/fpSmSca4F6bVZpAQfYfdjS71G
-         YYkd+zdPRE8u5tYIsH+tY2VPBwjJ6t326X/kbxdmB4xTKPlgaDVs/SuXxxmoZ4i+AARl
-         Xn2Wj4co/s86ehPdYC06vfWeoG5VSUKqfZE61ukX+Cti8gr2mdVXbK+ND0Ef9Bxpt9ke
-         vpIw==
+        bh=/sC9L0C+gwdBW1UaMYN3QxeBdoydHf+9wtu9BWcglD4=;
+        b=Xpz5i6bkECW71/TLC49dvbL5ZHy/1cJ/TbeDlZGD77lglNxjs85L+Bk+1RCtSJY++t
+         fYkk3Q0lgiSoBef+pk6wOXezULVlwNtkcYYWXjDL0gOlw9lEzRzxZaZ0k9y1G9/PboFN
+         cBOsE3QmCYXiDrBjyuOKJNK7hoxqrlBvKVeoCK8CtY0Hhvw5z5Cx+edDxEYM7KsHYIst
+         w/yTxbb2n/XKSDpSOcn4rWlnJ2zctKpYWckKtmGeBlMhcFOaBvG/xDnJyyjb6B3dJcjM
+         MRhGMiuHvMYS9tYgXIVD4Y1D3JCfH/lbL8mo37u6H75zXRjr9+OEwnuq1gw2aGZlIALz
+         NcKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787799226; x=1788404026;
+        d=1e100.net; s=20251104; t=1787799224; x=1788404024;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Q8UpYBoc/M1BkcYKHAYSrQ2SzHDTpmMXyDtNhyPg3wM=;
-        b=TQe+Jy5wbgtkEX3vMDA++HLOim+1c9KVBeHzjJus8EkWCWRt9SfEjZFza1JLOURY3X
-         T7T2j9EVVAQC4vtsSLE8zJ1y8pDhh6xzJlxvh6SWk2EZsQPvuwoW8krk/XRPNEDFKJ2t
-         q5PH4mMXZLhu2aprod7lHR+S50d/R0ZhmuvGI9o88yLo2iDPvFPWHMR6A9vL2Y5IsjeH
-         vcQLsb+N4eTT9tYcEUxj+fqGDX37zsQLmDuzVPynMW0hAQAYiHzOHLUqVV45e+T/IMDL
-         ri2+h4zvAQH8kLlK1LVW9Z8EXF6jHTF0T3dNmJEfrntatWNJ5qoI8wTOSRnFHP59PinL
-         22Dw==
-X-Gm-Message-State: AFuF++kju1pvwWAK5hdAf5o/okoyoaR205/zt6554orcZ6sO/EL7j9yX
-	aRhAnCyRth9rt9S/DoqQxN/QNk4rowN65WK8q99Im4hxpAO9Hlf9fd7s2svjbA==
-X-Gm-Gg: AR+sD12wdHHmoilqX+kolX1i5mvj03Id1FeOapVVbKI5LF8xufJm62N2s47FL/aPjWe
-	OLgjygM5vGv1k7CCQweUXaVLkyKNZg3O62fpBHKIKJoRed7re6NU9W1ZGN3Fwc2wDq8Tvd94RXq
-	GQdmBQBcw0UOd84ndgRM6cVLDYD1OfbzYRTjlqqNIAZ6+oEXHjUdz4Z5X8Wr1Xs2NnDGgLGaA6m
-	tFNNfEZxMArdQfc0kJM8F8gOVZEHBqg/L+aDI9cv6OAy80Ugwjm8OV56XaUqUdYPAiDv/RdbUOM
-	RDwvu72rUEaX1BTpTDUeMSc+7J4qAzVgcTNfXToWLpUpv94VaIfFxHlG3Q9rMOMniJQ0k8mCs+I
-	BEkPumZ8r6TF2PiyJA2ITEGNQe5H7hyRNXkGTpDU+SId7frBeNg8vSXaT506DolFiTni+B0Cs2+
-	rkzwRK0Sdtvc38UOr7tcjS7+uMxAZzSAVKFnYCGGW3JpO+xc43z5K4OOPaYRrOXjplbZDxLzUD
-X-Received: by 2002:a05:6a00:178c:b0:848:6c9c:4074 with SMTP id d2e1a72fcca58-85371cb5696mr20533163b3a.1.1787799226337;
-        Wed, 26 Aug 2026 19:53:46 -0700 (PDT)
+        bh=/sC9L0C+gwdBW1UaMYN3QxeBdoydHf+9wtu9BWcglD4=;
+        b=UD5gdXQlTOhmu3RnqQuUzG4zfFkkxkWY4D0rG6OEFPPyVeeEb1oXgSO6vXjbhwwkdB
+         PBtksr8UIZVIq0L/EFTbbPp0FQs5nDnl0/bfCPjuu/r3XbQt670Z6Hn0k7POI4e6sv+z
+         MKNocbLB1YSkVavQeCQJ8lWBQ/IVjOQYpCPIRTd0x1GvwTdCXGqvdvU0T2si3ut3gqcg
+         tW3v9oKiJuodTPWzqKmEL03K7g6jEkaJ/W8FBymMeRJvSQm3NhtBcKcANgDKvA7pb6n2
+         QdtH5iTVtAyJ6CXUY02YIUSBIsgLLN9E3KrF/2b7Somgfu2Am9E6wrmJUBNiVvPotP0j
+         GAJg==
+X-Gm-Message-State: AFuF++kFGjIYcR5lat8ImoDxLNsvZ6R7QtnfSiQjpnGEbe+QKQHwHFzq
+	/i4eOMtc2YrwJ2ztFcU4nG1+WHc8fv51gHBbQRGAMqY/gxo4X/Zd2kW0paVCPw==
+X-Gm-Gg: AR+sD11gIsLzptIQhucwxaERuhAdDBM55STZE6FhjHgdlyrJEA4O2mk7aMapJS3wyiJ
+	b6h8DGa2J0QQ2CKbgoWe/63q82o+XgWY2y6vb7RnPCfS5rp1ouB8S2zGLAAuqK9112TNkHSkWyQ
+	/tV6H6eiDQ4PVp5unTZUm/QfiMHzwN7EvIjtTBCL2RRuYhvyUIT11tP4LufPNd+Pdy/9U5gyGYc
+	GoT57YBYJSB/hAPFSOKPqrVKst9wUdPNvQpbdOyVpIlUsaEmet12eRCHqb1XSe/bvEkkk6cUl6u
+	WBS26gDfNPl7HqGMD/0fuHdxP1dhyqiXvvhisnGgk6cnwkZSJmxz88Z0LknGigsIrIPvJItg94+
+	9D5ifl4XiiDRkFmld6w7ERHPhgVUWRotg7B6JZn0byj/R5q7BRHm54Tp3npvEaL/A16xlM/81l0
+	4LNMBh4LmyEunjPgeMzXWygRv5cs9cxk6bBKfLOKe1yAtVek7g4hIt7p2uvnNb1At51aF8LnYE6
+	AEjRDugbrd1
+X-Received: by 2002:a05:6a00:2342:b0:851:c2a6:172f with SMTP id d2e1a72fcca58-85373bb5653mr22159399b3a.7.1787799224012;
+        Wed, 26 Aug 2026 19:53:44 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8556db7ab0esm5787b3a.48.2026.08.26.19.53.44
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8556db7ab0esm5787b3a.48.2026.08.26.19.53.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 19:53:46 -0700 (PDT)
+        Wed, 26 Aug 2026 19:53:43 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 6/11] srt: upgrade 1.5.6 -> 1.5.7
-Date: Thu, 27 Aug 2026 14:53:18 +1200
-Message-ID: <20260827025323.1433982-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 5/11] ncmpc: upgrade 0.53 -> 0.54
+Date: Thu, 27 Aug 2026 14:53:17 +1200
+Message-ID: <20260827025323.1433982-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260827025323.1433982-1-ankur.tyagi85@gmail.com>
 References: <20260827025323.1433982-1-ankur.tyagi85@gmail.com>
@@ -67,33 +68,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 02:53:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129526
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129525
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/Haivision/srt/releases/tag/v1.5.7
+https://github.com/MusicPlayerDaemon/ncmpc/blob/v0.54/NEWS
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-support/srt/{srt_1.5.6.bb => srt_1.5.7.bb}          | 2 +-
+ .../recipes-multimedia/musicpd/{ncmpc_0.53.bb => ncmpc_0.54.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-support/srt/{srt_1.5.6.bb => srt_1.5.7.bb} (95%)
+ rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.53.bb => ncmpc_0.54.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-support/srt/srt_1.5.6.bb b/meta-multimedia/recipes-support/srt/srt_1.5.7.bb
-similarity index 95%
-rename from meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-rename to meta-multimedia/recipes-support/srt/srt_1.5.7.bb
-index b4ae8bed09..2796ee443e 100644
---- a/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
-+++ b/meta-multimedia/recipes-support/srt/srt_1.5.7.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/Haivision/srt"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.53.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.53.bb
+rename to meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb
+index 0c8f450687..81ded9db1b 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.53.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.54.bb
+@@ -34,4 +34,4 @@ PACKAGECONFIG[outputs_screen] = "-Doutputs_screen=true,-Doutputs_screen=false"
+ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
  
--SRCREV = "c63c311e88aa55e430e3b7d94b89d790994f88c4"
-+SRCREV = "d99d2e1a3b1a213b03c7dfbea5133898935fdeea"
- SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master;tag=v${PV} \
-            file://0001-don-t-install-srt-ffplay.patch \
-            "
+ SRC_URI = "git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https"
+-SRCREV = "b6b1116709a6981d432cd2455bff4c35e4b96213"
++SRCREV = "55a7653d82eada7e6813dcb1e965969ceeb74dc2"
 
