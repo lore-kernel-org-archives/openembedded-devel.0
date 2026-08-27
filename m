@@ -2,255 +2,201 @@ Return-Path: <jaipaul.cheernam@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 971F1C61DB9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCADCC61DCD
 	for <webhook@archiver.kernel.org>; Thu, 27 Aug 2026 18:54:23 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.8])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1896.1787856862427402475
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1809.1787856856359493811
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2026 11:54:22 -0700
+ Thu, 27 Aug 2026 11:54:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=UYg11mbb;
- spf=pass (domain: est.tech, ip: 52.101.65.8, mailfrom: jaipaul.cheernam@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=jT6VlkQz;
+ spf=pass (domain: est.tech, ip: 52.101.65.52, mailfrom: jaipaul.cheernam@est.tech)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AcgHE1lps9GxbK/Up7NPcvaHQv+d5ItnVmg7A9jC0n7qjNxkD7LYBzvBl43CzCzGcKhQBj3y6TujzON1OFRs1s3FwXshdWf5pjXWJLLX/GH8Frz2YirUYx8ucLSLt6o8onYaCpuU0mIXHIShXhoePmJg7KlcIYWr1dYZROazcXT987A4udtz1LAhuhBOZC1pj1F5luNFLubikEA0pciiBiCxFsS6kFJYV/NDvv0LOxc97VjZpZF2QZ/pI6Fe1nYnZ2Ry5ravLubzBRYUi5l+/uLLwUnz7CdIErpPdL157XQ9fegBGsXRFbZ13EMZeT9R7pB7jQX9N/wU6NRzTQ2pTw==
+ b=yAWdra5o4ALsCy8BnRPdjc0xfqOuYSxXUdLcjSABfL66k1r3Ix1uxm+d2RgRPiB+Ap6N849yqR/KaaFiDlVp2ClSVI9jfDNuTrS2TZOcqVqvhRq0qA79zfrou7jOXM7cF/SDFuSNTshhg9mvwd1bIcFgAJGaWRCJ7RLhf/ZcyxRwCCcd/Et+Rae1wRrfVcOaF1ZbgrbeioE+4TRKKdPSHUndqfT1YlUL4QMvkFi9QMi8pzUbF88i9W1AxM2SbJOGXJnuNc57MSPYvgU1wq0qxLV4rpZh9Sn/6zjiwERmM2efV7EmoEek6btEzn+5S0BTH8QYcqyoGSHpv7sWLfGHBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LtKTByfJXL6BQAVUIjhwFUilu2MtoOBN5FT1fpD2Od0=;
- b=ruxXbeYAL8BsOq3/J6JVJQqKXQlGVpFFgoT0KaJMrSl2lTb+TRax0cH9dm654iOITGyAFHUvpAkSFa9I2YX7hn/hVUpkdOwXqIUbcgyNS5iqIG9BLE8QRcCsxfnxZGGrc+bi0xUdJgkh5sy26os6twU0BaSsVf1oQH6AU+XUlNWyNXA4LEIlt6lqea3qsnia+5nK71sa8acTtsmblo7eA0LkvHHJC/Eae9pgZfcilPs5z6UBYoNMVxFl/Dc8jEnhmLMoWUQU52OeJASlOx8tXK3Bacy3OXhDXTx7TxeNSoUdXRazEwvV1rASms0SAf6uW5JTPVsf+v/UfWzerHh6ww==
+ bh=+7asEosE/LmtwwdPTchAGQOrLLrQN5TjDPCePjV/fCY=;
+ b=EoZ65U8m39qLIvrwYyTYx3AB7EVk/bCE/5yqPBsZgIP9fmgd9/Yrl9VTS41U4AvZEqpSPyP8B5oppIMGrHw0g7JQDq/StU0FNhoA0a6GWvJmYGhx7menzBaB5GKt5Wm8EPHvXRcnfl6j4d7SsosJgJX/GVb6pRnePwtFdggsQEXF2gB7VXAgMEWH+nf3sIysPzdhEwRXfdI1jHw0gVgyDA8X83YoyIGIsDJj6xZp9x/ljehkyLXIS3peSYOfig4PXTJ5roqLtQCxylfIC1Z4LyPgRfoNaOmInV/35jQh3py7clOyMsQAfTK7GYdokg/KiBpZXsPMkuhyLCKElr549w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
  dkim=pass header.d=est.tech; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LtKTByfJXL6BQAVUIjhwFUilu2MtoOBN5FT1fpD2Od0=;
- b=UYg11mbbqwbJMYaMIs6aaM6tkpkmjzzBJhD08aOgeZGoBaebLZ7o40tJoPbb9BeCF0WJXsd2vkrPynI0nqwcfBtXrEKoxDh2hXMUquQbsGX3e6H+rTmYz3oLFfSLjqO7M0ty2YiYZtoPOE8Tqu/HZs11Zlk7Umu76I28dRDfnEJIUjMQjdnFOQMwo4gmrp4ZnPNlxlrVyAs1kYT+q1g+HVlXnraGZRBbl5HCoDlwaY2gAZg6I5lZGUY9PAo9f22K5RWaRCgkxseV0h4LkTWszf9XLa3OO2ue01Pr/x8NI+wFm/9Z5mj4/8WB0lvEuDcS5dnJQ+1gTJN7imyJAx29XQ==
+ bh=+7asEosE/LmtwwdPTchAGQOrLLrQN5TjDPCePjV/fCY=;
+ b=jT6VlkQzCV2Vq+PWdxmF0zOuQI2h3AaAsuzqSEkoUHrkLXSdFqlhcBaDJ2AwssHz3onMF+NFecZgtsMNfFnDfxuKwXM/GTfOc2IIrN4URcZByHTaXNpFV8zC6/KKhInA7THAfFjCt+oH9lIYhlAbSQ8Lr57JUMSv7Dp5Ch9VgTO9F81vEAZVD3DzSZte5I0tH6RPZhDNkbDIIvpzMAz6A6h3XvIpXuv4R5HMzAZwhzwGTAb/ork4x35AcZFhLADsqSlAIRhi+nQ2FbnuDCGB6Dnm2IXhfZLjnvm/0Op3snId/sIElqUOrL7V1CKnTyfopR96CVsAvFOumqBU3lo6Jg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=est.tech;
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
  by DB9P189MB3598.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:5fc::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Thu, 27 Aug
- 2026 18:54:20 +0000
+ 2026 18:54:14 +0000
 Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 18:54:20 +0000
+ 18:54:13 +0000
 From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 To: openembedded-devel@lists.openembedded.org
 CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: [meta-multimedia][RFC 20/20] pjproject: fix build with OpenSSL 4.0
-Date: Thu, 27 Aug 2026 20:53:24 +0200
-Message-ID: <20260827185324.78997-21-jaipaul.cheernam@est.tech>
+Subject: [meta-networking][RFC 18/20] ntopng: fix build with OpenSSL 4.0
+Date: Thu, 27 Aug 2026 20:53:22 +0200
+Message-ID: <20260827185324.78997-19-jaipaul.cheernam@est.tech>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 In-Reply-To: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 References: <20260827185324.78997-1-jaipaul.cheernam@est.tech>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: DU2PR04CA0001.eurprd04.prod.outlook.com
- (2603:10a6:10:3b::6) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+X-ClientProxiedBy: DU2PR04CA0245.eurprd04.prod.outlook.com
+ (2603:10a6:10:28e::10) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
  (2603:10a6:18:3::ad4)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|DB9P189MB3598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f4ae3d4-62b4-4bf0-2bc1-08df046c9a3f
+X-MS-Office365-Filtering-Correlation-Id: 85682b87-2236-4553-c325-08df046c968b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10070799003|10067099003|56012099006|11063799006|6133799003|3023799007|22082099003|18002099003|13003099007;
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10070799003|10067099003|56012099006|11063799006|3023799007|22082099003|18002099003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	o8DCC2Nfn+zy54/thcGx25XX7o+puoorOan3R1qYx2CRDIUKea4dRX5vlfjzoYjt5kXhmxLDvG7ejCyV1jmnOnqZ4VZok4DuWQSgcQTiLfvybkvnNR0gexewoAPyjTKo3T5WCsMbutt0iWcbsm8AWXOLNxG9HWeB+DH3lWQbcgOhtzcUA0djOa7+w8278WIrK0Qh8j9gpb2OQObZfbXwGu2pmJ3XsRXgoXYSoWQNcF+Fe0RAL2p9HSOebjA9aLdw8XKkojVttxB+OLrrARTDlwuGOC4e9Disowq2p9nIgxLmqUGd8mmp6LLkGlsduEXcD4FHJs9hk5fWPb+48SOzMLkjC/rLCl2zivMBkyXnIXtSuVdiqbENhtKv9S0E38bAMJNJzI3Pvg3Z+3nqqvFd/IAKmKqHHganGTKD552Zk5HD/nehtg+UJoc4FMcGVThqbWujTQxqPYadQ76cMnp7qyFEj2FQ+v56486eK7xOx3/9ZMEpccjBtJSCM+y7qGqWDQ+D3AJ0vHfFQfvh822rJu4zg/6lhuFdsv0Dssqmsf1huIZxgO1gHDYzuNmx0y/OS8qRqomCl4wN5eLO5JhBs2KVHfB3oCl+c6JtHK6JN9yETEECmHiXpquiN9rt4rWIsz4URFz1ZrMhx+bRqrzsYK5mpFgrd7CJgxwUDZD5H/w=
+	KAEfN0izN3MnRFlZOM/U3gl+r3TYoNZaNvP6Y4g6/cCSjzrSK/+dQb5TST+sNtYZNFUvprvJcx6HY+DAfVdgZ7mDXNF4/VQWcODsAVRL1OMEhd2X2HWCZ2nU4cviFXsBdHk5g+C8ACaLX3SA0FL9CmaDSCX0DEg/6B7LGhGZAehLuS1f/T+pihlRn00yub6IDdeUsmw2UmPJ8S0/JtH0CzKks/cGHJf6Ga7tIrnYPxjzbDzNcksAWgRYPtgEAZBMGsvbncfyVxWkTLFpOxDzIlo++TCkptrIPtOWK9WSD1qIG99m2LCFQheXXcfbnBQMg+f//AnjO0DiCKn5gmudFSbrou267kTv3uOBoIado6VRAJx5xG8N7mylqjxKcUZYkWW/+N8Hc33S6WcnZPQ/A+yi2nb15B0vEItKixHhG0GeClcW4Dyzrt962Jua9hs+0CY3nSlM1L275GKcmB0Scq8QxexjW2VwpeYSQwl0fDxyceqkl/x6xJTJ4yCf/iklPYhnOa7CRDedpW3aP1fMwUUDhzmXiZ3jtNM2dL6jOv9OeAgySu/FmT1mzBR1RA9A2+DaARLUaj4VVXT+7Ns5nhahLMGM0Lmsdz+T/a7k3dRQbWAyJhTlRNbBqWsYfMtXi7509i0ZymTrERCcr6MRdA81BPg/3ai3ejLjYLkdse0=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10070799003)(10067099003)(56012099006)(11063799006)(6133799003)(3023799007)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10070799003)(10067099003)(56012099006)(11063799006)(3023799007)(22082099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?AoIe+AAMPmq0zNXpFl0QHsip/Y9XZV5sY8TQeApXed/1A5JVTlV9WCXNvIWn?=
- =?us-ascii?Q?yBKziwSugBVFabrlCrDq9w68vbJ3WpxIZElJNAaCFPU4Eg8sso2riuaDVOI1?=
- =?us-ascii?Q?jDtHayXiusgAd8MIscMjsxsHWD7E6JceSJsmlgn08dgzBogk1z2gH9kkhHZK?=
- =?us-ascii?Q?dYoeUfE7cBJ8dInIDtjJkVjK8XgUqp/bB8o78dJ0nkvamfwJvhHN/vE7ls5u?=
- =?us-ascii?Q?BBL9IP2n8MjXgTdwXIY5SCucR3DptNoAh1qelq/HbYVHF7eTvEdO+2iSTYrt?=
- =?us-ascii?Q?j2xHwAF+rvO8EgYfOx1j6fAkdB6e+l3iztf2cuF3hlrPEOAhWCyyj8HuqWXI?=
- =?us-ascii?Q?HjVzPYSYk0ULuTqIFFq67hMx8VGHd2MFAwx/MmN61DZvLzo8SeT8Tm9jIWxS?=
- =?us-ascii?Q?OR1ZjDdbRRsjaizZ8w6UH3hIPJFY5irqrW0GsZJ7j6Ws6BQHvsKWvfLrwgnn?=
- =?us-ascii?Q?lxCLlaBijb5i1LplxIU3ghs1mqj3ydgFmtkLDi2Tf7qits+bX3u1B3ThHd3J?=
- =?us-ascii?Q?XQo2d02rxgkm8Of8An3lEy1UNIfZT2bbF7j5uKVSII+NniFfFsHm34U2Zp6u?=
- =?us-ascii?Q?E9H5LssdPTy75O/ydzKhYi4O9od576qs/TnyhW95qGkvUrbFfSqfK62gRe5j?=
- =?us-ascii?Q?bWwfoIst3r0bES2JGymaNTCQy22A2HQnrToakkR1NHuYJt0ZPQdCLpqpdjoa?=
- =?us-ascii?Q?l6OAeBt4vtttLkol5DcDZLlFY37HeE7U5eRxr2HcFb/NFQD513aQOEd7ci5o?=
- =?us-ascii?Q?cwe99Rh12GDnosx8sPJB6mn5bMoqyLoaf40pZMNLHpZpZDzLfIMcMlSENMO9?=
- =?us-ascii?Q?VSF+X9ndUwhKpsLQYkezVfKIDAbPUDAGZPAMhoPPV/Yd8/5ZDiK38sQj0EJP?=
- =?us-ascii?Q?EPOMATxT6yqug94m8NdArT0zfNSGND65DUficngnHjeTmRm37Zv7DRm8lL2t?=
- =?us-ascii?Q?ciZWcP3z880Cw+D1r+XH4j3WTNUIxuQJw+3VFOzXgsyW5vqzVrmNIiKarlEu?=
- =?us-ascii?Q?HPsMQyRxUWoTRxIxwcwy+8TVLNMgZAjIOZHW0G1cJDOPD5Gijb7Tj4gcmdCX?=
- =?us-ascii?Q?3mZ+zsZRsCRGPJiVGFw7sCZQx5zpzUIFlURFNqpkzmqDuX5vAclQXIExSYiK?=
- =?us-ascii?Q?Csvd9ORjR0ScC2fEx3gvF2N+QnD9xURsMoS/XykNHOBSOkR5bTsWuNBJt2LM?=
- =?us-ascii?Q?z5vdxkmtqin5ZwDMB63x+bXDvpjZbBulKTv/dqEMub2B4RRIy9wTJ9g5WjtX?=
- =?us-ascii?Q?03VBMmlCJqMQN2kBKySt3nHj37tsspnA8wQ5HdZvRSX84spWDuKKt04FZsS9?=
- =?us-ascii?Q?Ju42oCjXtAYtib/+4OLgkdVaLrUrA1nh7kH96trLR2O9jBU8kIbgioZ9vzG6?=
- =?us-ascii?Q?tPa53yaC/qKFYQdeTizgmXsYiO7F7jWEU1bVj+axIPUSubiF7zShOQb/HpQX?=
- =?us-ascii?Q?EXQAJ+OP1GzUD8bWt3FUzJNehLoJbJHMdL1hRnr3v9JySUJ4ZnZwYM73stnV?=
- =?us-ascii?Q?9TmJunL5P92WFdx4/ACy4TokPzZiz25eL1Xf8m/FkD2gj8Jd2iYi9VpKGir5?=
- =?us-ascii?Q?RVXNdUzWZR5A6//ljhk74rr6GsYps+T4D6HKgm0hCp+2hhCvM4BpyZy+0EVd?=
- =?us-ascii?Q?ciGcQ6ymDmJeh++4u4tn136eb9qn960/vTbtbOu3jLGiSKZ4YINDZJ1mrH/0?=
- =?us-ascii?Q?p+pJBsycxE2DWhIGYT8ytdlaQi++I6kn5DLMX1+XkkA3+NCzYnFSnQqXBSw5?=
- =?us-ascii?Q?r66Niv6CJIz7+jGLC+Z+DtQcF+FNHVE4NwFatdK0uzOkYjGojGDR5JKyUv5Q?=
-X-MS-Exchange-AntiSpam-MessageData-1: /hdry0HlGkv+x7NY9kBJrEpYk7+xm5KOqWc=
+	=?us-ascii?Q?ECq80UpounujWgviOYihjHfJfZQyF3wg5nAJPZqKFS54ZIc2bctjoxqG/JTx?=
+ =?us-ascii?Q?0jLbhI/b1b60M4MQ3kn0pa30a2EVNlitA8GNyxMZ/cF7U/XEri9qsNMzfM7p?=
+ =?us-ascii?Q?Ru5tIUlCuaLlKhAes0nRo0LdclFXvyc5CY9WQ7xbyqLqblVYr4QiaUNoWK7c?=
+ =?us-ascii?Q?iiRjPB8Ew4N0lChH3db7b0oMk+vAPvUKMSThWzNs08ol6cnWPZUxgaeqFmkw?=
+ =?us-ascii?Q?48tOla7GLXgieN52woLwPFvk1lVHHnO4+OUfeAvpsJue4Bde17GZKeXauzxG?=
+ =?us-ascii?Q?fQz7WfGBbID0VWS3Gw9kl4FkRXYb+q/HU8aXP4gOMx8hwqg2DeNDoCfWaQf5?=
+ =?us-ascii?Q?CeGaoicpqXk4RjIvL8rsorEPNdvvZznQbUsav3ey/aHwQC7qf7j6y+gM5WhO?=
+ =?us-ascii?Q?PfAvNXCOz3lB+JKGQc4QVFiePHesav+jlZQFivRBPFx5TE5DdsUTCIo4ateB?=
+ =?us-ascii?Q?DuDh/7Vs9gUgnPrGIOloPX2rT14HWWSjvJoFOE5I/JT8wkwsFs/MD9iJFifE?=
+ =?us-ascii?Q?jF3BT5JIoq1Rphd97IvTKLzFXlL2UiPO9qRImMMY9LdVr92zT80OR+5viC3+?=
+ =?us-ascii?Q?vtKPDJ+N5lIYBqqYBgNCCqjpAjrt0Qt9Q/gXKP2RUcAldIBXuKjFpD0qPj6W?=
+ =?us-ascii?Q?aqpo209/XLR0W7JbDX8YUzHsbELtqQeQ2u5HXHSeQ19rFCVfE7Jkf65S/2x5?=
+ =?us-ascii?Q?3KPh9bgOcSAMGjYU8b7eXtINpjgW9s99K64IuVpKGYxt9K894+mr7jYObK/j?=
+ =?us-ascii?Q?BnAFPPQeoSkRCBF+1KbBITAW4SDLidbN1jl2QQWn4bGCosEsTh8uKCh4GWlZ?=
+ =?us-ascii?Q?nydqMjvThBEht+qDy30XWrl2sGhfbdX/Qy0w0KizLYO0HBbIIX+d06uDfBe4?=
+ =?us-ascii?Q?g1seTko9lKp0HbiN5KEuY8GD5lrBiG9dU5FzGHsT3yRzef2CAbaiZpA63jRQ?=
+ =?us-ascii?Q?dsUMp9jVsCWRGtexWNvAo8QxfRYct1F9/+e0bbcZp6x/O3U5hHhwI0DUFLaZ?=
+ =?us-ascii?Q?tZ4MFvxhzlZimQYHiNNbjhBpZiJl77CL0tFwU6gp4EZDh2BRzvvkocfxPMd3?=
+ =?us-ascii?Q?KcKMu3nuWgspwgB+oic0fnBRtC9hC3IilbXYhUP2BJkUJylqwGiQZGdwL5s9?=
+ =?us-ascii?Q?0KI+bF5D9cLA1/4ze8IUHJrCbrLZdzDj8e8HWxSapO4/UUMKU/xDFz7iwAuh?=
+ =?us-ascii?Q?e64YZqKVjRy4tzBkdnb3S4FgKKljj8QJf8TLfsJsiCFb+BcAywMt83nYFG4g?=
+ =?us-ascii?Q?erPtto7iL8BYmWawIRTGWExTMdf96cdNd5muzLpH4AG28dGUlW5opGm7+3E7?=
+ =?us-ascii?Q?kF0mItJuCLnXOf03aYMBw2I/hWeB9bHFXd10GakRzTrSpsL2vck0DwjtfE8X?=
+ =?us-ascii?Q?V82UQbnmUoy5HlP8swqKpR4adIOKIBRy0J8cftGUY/DJeFrzVMwrV5sp6kYU?=
+ =?us-ascii?Q?UOqR3JKv2ltXzGipgri9Uqoiz1SBvC41bUGLS8uUzHgRuS1ru3fs3ZrqeWOu?=
+ =?us-ascii?Q?6zpfYVqTH7/JjxeC9YyWKiwdsaydUgActNhbvafst7+QYWMRjKn7eowa6byo?=
+ =?us-ascii?Q?tpXEAdsn2U5dCMn1dnFSE7eB/7dcFAsTxS788v6JkxzfeySd8kdVZ+uXI2Jl?=
+ =?us-ascii?Q?MyuI6JDmAiDoLn5uUWRTH57bwt82v6AiGdTtejvrLPjks44gVVZAyEI4maDU?=
+ =?us-ascii?Q?QPqWGA4mFeNdbD/lVyjiJJc55dv8OFwNSNrSYQtyWwnB4AbbHU47x01sqsaX?=
+ =?us-ascii?Q?UdaTc2SN1ZsO+GN7tdwLXy5FCwongOM+7E3z7BVfQBVp6ZWwSODEZ3HR3lXb?=
+X-MS-Exchange-AntiSpam-MessageData-1: cqHbPbV8IjM3oi2r7PIikdkwGCwz+tqYLew=
 X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f4ae3d4-62b4-4bf0-2bc1-08df046c9a3f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85682b87-2236-4553-c325-08df046c968b
 X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:54:20.1589
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 18:54:13.9690
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: stU4vFBzXHZeuGj6e4rk3o9Bu6HKea2PXk5MgUKjmqsQQBjzw8KdUdg40UFC6VQmKlSvdtTM3yHFwOwEmvTkh2YwZwU7blGf7yoA79CuMso=
+X-MS-Exchange-CrossTenant-UserPrincipalName: EFBXTYRCvtbLAGCutB9j0Yins4K7AAMoAon1Us671LhH+CYyemi54xaFcztdykZ1dt8koyA+xLxbk2Bu0pg1D7A3NGDjQteMmjs6VbDwwNs=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P189MB3598
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 18:54:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129555
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129553
 
-OpenSSL 4.0 makes ASN1_TIME opaque. Backport upstream fix using
-ASN1_TIME_to_tm() API.
+OpenSSL 4.0 returns const X509_NAME* from X509_get_subject_name().
+Cast where non-const API (X509_NAME_oneline, X509_NAME_get_text_by_NID)
+requires it.
 
-Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/3923fa=
-d2e4f6]
+Upstream-Status: Backport [https://github.com/ntop/ntopng/pull/10830]
 Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 ---
- ...k_ossl-fix-OpenSSL-4.0-compatibility.patch | 40 +++++++++++++++++++
- .../pjproject/pjproject_2.17.bb               |  4 +-
- ...L-4.0-const-and-opaque-compatibility.patch |  2 +
- ...sport_security_utils-for-OpenSSL-4.0.patch |  2 +
- ...ing-const-qualifiers-for-OpenSSL-4.0.patch |  2 +
- 5 files changed, 49 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/=
-0001-ssl_sock_ossl-fix-OpenSSL-4.0-compatibility.patch
+ .../0001-Fix-build-with-OpenSSL-4.0.patch     | 42 +++++++++++++++++++
+ .../recipes-support/ntopng/ntopng_6.6.bb      |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntopng/ntopng/0001-Fix-=
+build-with-OpenSSL-4.0.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/0001-ss=
-l_sock_ossl-fix-OpenSSL-4.0-compatibility.patch b/meta-multimedia/recipes-m=
-ultimedia/pjproject/pjproject/0001-ssl_sock_ossl-fix-OpenSSL-4.0-compatibil=
-ity.patch
+diff --git a/meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-w=
+ith-OpenSSL-4.0.patch b/meta-networking/recipes-support/ntopng/ntopng/0001-=
+Fix-build-with-OpenSSL-4.0.patch
 new file mode 100644
-index 0000000000..938eb6620f
+index 0000000000..4f142092c3
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/0001-ssl_sock_=
-ossl-fix-OpenSSL-4.0-compatibility.patch
-@@ -0,0 +1,40 @@
-+From 3923fad2e4f6f3403c3d6f1176b113c1c1b91066 Mon Sep 17 00:00:00 2001
-+From: Ravi Kant Sharma <rks1986@gmail.com>
-+Date: Wed, 24 Jun 2026 11:30:40 +0200
-+Subject: [PATCH] ssl_sock_ossl: fix OpenSSL 4.0 compatibility (#5036)
++++ b/meta-networking/recipes-support/ntopng/ntopng/0001-Fix-build-with-Ope=
+nSSL-4.0.patch
+@@ -0,0 +1,42 @@
++From 0c9dcc44df3592d8e08b46f5dfca664de5918bc5 Mon Sep 17 00:00:00 2001
++From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
++Date: Thu, 27 Aug 2026 09:13:35 +0000
++Subject: [PATCH] HTTPserver: fix const X509_NAME for OpenSSL 4.0
 +
-+Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/3923f=
-ad2e4f6]
++OpenSSL 4.0 changed X509_get_subject_name() to return const X509_NAME*.
++Update the local variable to match and cast where non-const API requires i=
+t.
++
++Upstream-Status: Backport [https://github.com/ntop/ntopng/pull/10830]
 +Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 +---
-+ pjlib/src/pj/ssl_sock_ossl.c | 11 ++++-------
-+ 1 file changed, 4 insertions(+), 7 deletions(-)
++ src/HTTPserver.cpp | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/pjlib/src/pj/ssl_sock_ossl.c b/pjlib/src/pj/ssl_sock_ossl.c
-+index 000aabad61..93fcf10f14 100644
-+--- a/pjlib/src/pj/ssl_sock_ossl.c
-++++ b/pjlib/src/pj/ssl_sock_ossl.c
-+@@ -1645,10 +1645,7 @@ static pj_status_t init_ossl_ctx(pj_ssl_sock_t *sso=
-ck)
-+                     if (PEM_read_bio_X509(new_bio, &x, NULL, NULL) =3D=3D=
- NULL)
-+                         break;
++diff --git a/src/HTTPserver.cpp b/src/HTTPserver.cpp
++index 21895bf10e..f7b4164ab4 100644
++--- a/src/HTTPserver.cpp
+++++ b/src/HTTPserver.cpp
++@@ -403,7 +403,7 @@ static bool ssl_client_x509_auth(const struct mg_conne=
+ction *const conn,
++ 				 char *const group, bool *const localuser) {
++   bool ret =3D false;
++   X509 *cert =3D NULL;
++-  X509_NAME *subj =3D NULL;
+++  const X509_NAME *subj =3D NULL;
++   char subject[256];
++   char key[CONST_MAX_LEN_REDIS_KEY];
 +=20
-+-                    if ((xn =3D X509_get_subject_name(x)) =3D=3D NULL)
-+-                        break;
-+-
-+-                    if ((xn =3D X509_NAME_dup(xn)) =3D=3D NULL )
-++                    if ((xn =3D X509_NAME_dup(X509_get_subject_name(x))) =
-=3D=3D NULL )
-+                         break;
++@@ -411,12 +411,12 @@ static bool ssl_client_x509_auth(const struct mg_con=
+nection *const conn,
 +=20
-+ #if !USING_BORINGSSL
-+@@ -2105,9 +2102,9 @@ static pj_bool_t parse_ossl_asn1_time(pj_time_val *t=
-v, pj_bool_t *gmt,
-+     pj_parsed_time pt;
-+     int i;
++   if ((cert =3D SSL_get_peer_certificate(conn->ssl))) {
++     if ((subj =3D X509_get_subject_name(cert))) {
++-      X509_NAME_oneline(subj, subject, sizeof(subject));
+++      X509_NAME_oneline((X509_NAME *)subj, subject, sizeof(subject));
++      =20
++       ntop->getTrace()->traceEvent(TRACE_INFO, "Client X.509 certificate =
+subject name: '%s'", subject);
 +=20
-+-    utc =3D tm->type =3D=3D V_ASN1_UTCTIME;
-+-    p =3D (char*)tm->data;
-+-    len =3D tm->length;
-++    utc =3D ASN1_STRING_type(tm) =3D=3D V_ASN1_UTCTIME;
-++    p =3D (char*)M_ASN1_STRING_data(tm);
-++    len =3D M_ASN1_STRING_length(tm);
-+     end =3D p + len - 1;
-+=20
-+     /* GMT */
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb=
- b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-index 44100c8231..8aa7775205 100644
---- a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-@@ -12,7 +12,9 @@ SECTION =3D "libs"
- LICENSE =3D "GPL-2.0-or-later"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
-3"
++       if (SSL_get_verify_result(conn->ssl) =3D=3D X509_V_OK &&
++-          X509_NAME_get_text_by_NID(subj, NID_commonName, username, NTOP_=
+USERNAME_MAXLEN) >=3D 0) {
+++          X509_NAME_get_text_by_NID((X509_NAME *)subj, NID_commonName, us=
+ername, NTOP_USERNAME_MAXLEN) >=3D 0) {
++         snprintf(key, sizeof(key), CONST_STR_USER_GROUP, username);
++      =20
++         ntop->getTrace()->traceEvent(TRACE_INFO, "Client X.509 certificat=
+e CN: '%s'", username);
+diff --git a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb b/meta-ne=
+tworking/recipes-support/ntopng/ntopng_6.6.bb
+index 3c039781d8..03350f240c 100644
+--- a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
++++ b/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
+@@ -18,6 +18,7 @@ SRC_URI =3D "gitsm://github.com/ntop/ntopng;protocol=3Dht=
+tps;branch=3D6.6-stable \
+            file://0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-=
+3.patch \
+            file://0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstat=
+e.patch \
+            file://ntopng.service \
++           file://0001-Fix-build-with-OpenSSL-4.0.patch \
+            "
 =20
--SRC_URI =3D "git://github.com/pjsip/pjproject.git;protocol=3Dhttps;branch=
-=3Dmaster;tag=3D${PV}"
-+SRC_URI =3D "git://github.com/pjsip/pjproject.git;protocol=3Dhttps;branch=
-=3Dmaster;tag=3D${PV} \
-+           file://0001-ssl_sock_ossl-fix-OpenSSL-4.0-compatibility.patch \
-+           "
- SRCREV =3D "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
-=20
- DEPENDS =3D "swig-native python3-setuptools-native"
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-co=
-nst-and-opaque-compatibility.patch b/meta-oe/recipes-devtools/grpc/grpc/000=
-2-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch
-index afaaf509ad..91f9c7e815 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and=
--opaque-compatibility.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and=
--opaque-compatibility.patch
-@@ -10,6 +10,8 @@ and use ASN1_STRING accessors for opaque struct access.
-=20
- Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/41932]
-=20
-+Note: Our fix for areas not covered by the upstream PR.
-+
- Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
- ---
-  src/core/tsi/ssl_transport_security.cc | 10 +++++-----
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0003-tsi-fix-ssl_transport_=
-security_utils-for-OpenSSL-4.0.patch b/meta-oe/recipes-devtools/grpc/grpc/0=
-003-tsi-fix-ssl_transport_security_utils-for-OpenSSL-4.0.patch
-index a7d6c0f789..56eaa50ad4 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0003-tsi-fix-ssl_transport_securit=
-y_utils-for-OpenSSL-4.0.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0003-tsi-fix-ssl_transport_securit=
-y_utils-for-OpenSSL-4.0.patch
-@@ -9,6 +9,8 @@ auto* for X509_NAME and const for ASN1_OCTET_STRING.
-=20
- Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/41932]
-=20
-+Note: Our fix for areas not covered by the upstream PR.
-+
- Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
- ---
-  src/core/tsi/ssl_transport_security_utils.cc | 10 +++++-----
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-cons=
-t-qualifiers-for-OpenSSL-4.0.patch b/meta-oe/recipes-devtools/grpc/grpc/000=
-4-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch
-index 468aa9d669..956ea64f33 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-quali=
-fiers-for-OpenSSL-4.0.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-quali=
-fiers-for-OpenSSL-4.0.patch
-@@ -10,6 +10,8 @@ to avoid const-to-non-const assignment.
-=20
- Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/41932]
-=20
-+Note: Our fix for areas not covered by the upstream PR.
-+
- Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
- ---
-  src/core/tsi/ssl_transport_security.cc | 7 +++----
+ # don't use the lua under thirdparty as it supports cross compiling badly
 
