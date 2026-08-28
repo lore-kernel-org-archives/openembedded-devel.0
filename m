@@ -1,100 +1,146 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <jaipaul.cheernam@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F141DC61DB9
-	for <webhook@archiver.kernel.org>; Fri, 28 Aug 2026 04:07:40 +0000 (UTC)
-Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.548.1787890057932596011
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6974CC61DC6
+	for <webhook@archiver.kernel.org>; Fri, 28 Aug 2026 08:00:44 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.8])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1514.1787904040132141795
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2026 21:07:38 -0700
+ Fri, 28 Aug 2026 01:00:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=fC642wlV;
- spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-66d116f0de8so886243d50.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2026 21:07:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787890057; x=1788494857; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fo8l2fgCfY8bPAshKz3aM+bnE7i5HmDsgNjKMx1ez7s=;
-        b=fC642wlVo+FBK1U9X86vs77H8aVTgecBOZM4T+s7HRtpGLhpkk7B2D3gcGRS76p23a
-         3aUTPm8YQSCL5zkedB0KKxwsJKksccsbMu0aRGv/iQLuEVIpHrbJ1IL4Rs2BJWH1k2Y4
-         Z6wwiX3gCF0NzYLM1MyIKo3p+q4SnOFEmlD5n674q7BcwizGeo4q5r46cM0dJDbPONd0
-         lG8skEMa643k/9AOCaESdlP0zC5IXRzX7QP3ANE1mrxN5XgUR3iInDEups/EU0/4FtBl
-         Ke1o6CZ0CQzuQJNU944/lsH9destYLtb+Nhlm8EUQEoRsuyaLtTAeUWyVDv5hUGJc8xj
-         xFGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787890057; x=1788494857;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fo8l2fgCfY8bPAshKz3aM+bnE7i5HmDsgNjKMx1ez7s=;
-        b=W0pJ9dTVH46zqRw74IoS8ztthuBBCZ0cSjDG/JcYLt8SYl92FIycxZN3jaqv8E6NlR
-         kR28QEcf9Wf+NDIjTqMg0aAUZ6fDEbtA/8imOocBr43sEyKKvUiLeeWwR4yt4ZlFuo7d
-         fN/YrJtME6Ko3MVdr5RlGQUPw9hRvLmX+Oz3dHnHfV/y2WFubFzCV7tzQj51puO4AMLn
-         yG9DxCLozgvG0clL5a/564a6PyX3NfvD/XHV9XCdqQxC+wb6tpTOKk/BrbCHphoIyZSK
-         159DEW/C+ljQ7QxIREn63SxMDKgWY+t6GUtiCBtd8Oi93n9TC25GE/ZGWZWR/jIh1vne
-         px/Q==
-X-Gm-Message-State: AFuF++nq6G4Nv2CXNQAtmLULs6hC5txqF8JVEKRH+yVsa9h3V8IpXEXW
-	SfEtkchLN37vqdLL7FMZnVA/G40+6RR2/HW62jqTKMnBRBnheX///9cPcr9k1vBy
-X-Gm-Gg: AR+sD108V9qQQZjZI4EFWyOuwRgt03JYRkDh01xRZiF2VEyLr+mLYRaMNUxniDn7UQa
-	By9HmZdE/zFetsM68VQLbt6LZ/1IHxwN4k/r6+kOTPu6syUB27HSi+gTh+9e1FLzw8BUbUwIHxA
-	quoTbJAmOcGmp5OGdccfM9Ym26kyReL0RVW+qhzUQsU0dPUZwMHIQ7tF309BvqKOX/loFdQTSNW
-	0THKiAJZgpmTjadPyAAU5ueTMMDO5J6Vupf396y5DTJkCcUPo/AAnKyGcJu3chZK0t4LNqns5+U
-	8i8zQKL0yE9a0t91J73kQxa4SQsggVjL4VFzN9fHN/LuO/2VVBusYvllYQ6QNFfGtlakeQkX3eA
-	M+MbQ+lxGqsDxu6bg0VyqPnmvh6SgbOepCi33NIfnEiTgt0JQ/kKi/p8rdii46o/WJ+SqULLCXA
-	v/J2zR0JiuAemiNHYw/McW0bYpQ9+Q4coMzXxwBZDTio8ZNciXUZDYVlVE8dJRiyThpwv6isCa+
-	Ylz3dpWeTd10IVlrtctWAUJzV5hgl9K5RB1dAvXNPLlfrhjbOFev26+n9dEUHfv7aA2w14/rTt/
-	B1XKTOAk8pU=
-X-Received: by 2002:a05:690e:16a0:b0:66e:3f45:b7fe with SMTP id 956f58d0204a3-66e4c680f5emr1086377d50.20.1787890056675;
-        Thu, 27 Aug 2026 21:07:36 -0700 (PDT)
-Received: from localhost.localdomain ([67.7.72.170])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-66e4ed163bcsm275050d50.16.2026.08.27.21.07.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Aug 2026 21:07:36 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=L4YM2eov;
+ spf=pass (domain: est.tech, ip: 52.101.69.8, mailfrom: jaipaul.cheernam@est.tech)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IAikXpQocNDY8OqJ9zkJMCiImGEQ6rlOVKbO+JBwHAYxtmNW1OijLq+k9C5zwoxm2ijUZDwWbtiLyZfvzJEfucd9bTsBGilJ/TyymITNef0hjQxTebc5x4VKAub0ENOnogMsl0QSRZ7cR8QhkViEw2vddoet+Fxfw/DOQKhfq0mOpDAfJvsUXflU2iuAsjJT07CYN+Kdt1ewPE3efW7RDDC868Hph+xp4XYfF1ooSrOFFltRMgzfP4A4Nrj+4tm0BysB1ASv5sFlsKw2/6Uh6HgVlUwQjRd/GGBdfhYR87k5V/KgGlHpwo6loLbziqPr4gkgCNS9zHkNE9OhFFkFiQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UDSlzcxTMvUbnmHYOGCE0850lcikd+nDhIq5XkuVxfo=;
+ b=P3DFhGyyzuAhYSQJ1vP9RRXIWHngmaiW7zSbTp9PEWuTb4EiWMIejTdPLdsKGXoEMbdumPWsm9PdMpQKGXOdSxw5Bn99vuocWKxDHcYXzFBun7HLeN30nh+FMr5i6MkRE1M5qnNiY+vFAavHK7nwWaeB6yiQXhwcMie+pd/FA112Nf9BUt71NzOlt+4am/0fXYlSs+o1oWcc/CcmExPiqXIIaPYQvjpbn1lKy+/W7GwWCtVABi6tsNeQg3vdj+mqmdE0GkKKdwcxauUILjcww9xD9O5j/aG0RS2de7OJqHQ27kdGRvdatc/MT88iLNecZtdNeSSHwqyziovNcY0CjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
+ dkim=pass header.d=est.tech; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UDSlzcxTMvUbnmHYOGCE0850lcikd+nDhIq5XkuVxfo=;
+ b=L4YM2eovoCWinMtmlGfY9irCIVmfO75ZTgv2b23xSS5SXJNtLcuMmmvGl3aGkqs8RcoOMy/Lh6Yhmc2VXeL06CMSFOpVLkm/OtOcUnnu/Y4EA/wzOL9axQrntp/w8BnC99MNlCUL14233AzGT9Br6J0ekiOQWz+Y5GLRU3zdBhflh4SdRBi2eBlJb3THBz/8xDfX/JnPk7pHGJtiDgX8PU7UbB+3gLZMsPuKe2QVU6TzQCtSMwJfqcVUN5Y6qXAt2U29i1Lgdyt7mOeG4Z2F7BsmPnOTZ+Zoeiqx4/QN0AMJ/eSHjUnYEuCAhf3Cwawq+m1FGTkBLmcpjl8LOW5TuA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=est.tech;
+Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::ad4)
+ by DU4P189MB3750.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:617::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.11; Fri, 28 Aug
+ 2026 08:00:35 +0000
+Received: from DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+ ([fe80::7ab2:c6af:6760:5c85]) by DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+ ([fe80::7ab2:c6af:6760:5c85%7]) with mapi id 15.21.0360.008; Fri, 28 Aug 2026
+ 08:00:35 +0000
+From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] php: upgrade 8.5.9 -> 8.5.10
-Date: Fri, 28 Aug 2026 00:07:14 -0400
-Message-ID: <20260828040714.618944-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+Subject: [meta-oe][PATCH] googletest: upgrade 1.17.0 -> 1.18.0
+Date: Fri, 28 Aug 2026 10:00:28 +0200
+Message-ID: <20260828080028.7645-1-jaipaul.cheernam@est.tech>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: LO3P123CA0017.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:ba::22) To DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:18:3::ad4)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU7PPF66507B2D7:EE_|DU4P189MB3750:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94b9a749-76a2-45f2-e922-08df04da709b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|23010399003|376014|1800799024|10067099003|3023799007|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: 
+	TJTB3skH2n5bRnU7wK1rWZadBTZb639nlNmAmJpxdwala30sc+1drroZSu+Jm2xOZhK0AaH/+U1+OCv4QXhs3bMG/gMqr0+1S+DOcJEVYDjvOhXG+tToTo4lG25PSbk6jJMSgPhyvkSpUVC/GgLy/EQSPGhFhEQuoyHQKXS83ouPWXjtY3F6J4D+7PaLYJRZ56y+hEj1//xn7XsAR3IRBmu5r5s+783Fye50k/6aDQrdZnyeafQ3EKfMuMCjNaP3PvriqqtZp2veVRJKrI49HOn4M3O+GYnujbVl7gNaasS1N8TMfn8XrU0aVsuntXvHyt2Z9cYWKqQFEVbMS8NjO+QSgF9XHZmfaqPl5dAEzpqqLYTYrMwO3uv6PA72e0bUmFb/b2evHCJr/SnGEDYXKqoGtqOmF+dHJRCsA6Y40YsUOK0DXs+/zPnYmasR1hmUH2yI97BRR1zC/7NpJRepz8rK2EWvMLFd6S1F5BllQ/VAfgUg0SCUUfyUnWQ3b4WUmWJU+cRk1TmHo7SmjvER5HZ2pEUmLe5JGWl1DlzdobXsIDbCXuA7dK9JaSotGcAS7oeMtvDmz8D8Iaw9duwZaeT82Q6uvC/8gpmu0GBYG0xXE8A9jgkEJqQ8pit2sgN5vrSsiucwEVp8kcFosJ9ZMHjlD2d6iTb8laoUWURXlk8=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(10067099003)(3023799007)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?HhGpXwSwwow/VaLuBRgIUy+vCsZsqEn4obY2auX6+ZJ91QVcQYPDMD3BEOsr?=
+ =?us-ascii?Q?WCQj+/8p/Wy58eWrXSqRdnwYm74WUU7f7OG3r51Q/DPeE0C+MMZK3HwLBLTQ?=
+ =?us-ascii?Q?E9/qqu0pdomG4VUEv5ZIWY5nTHFOrMuFIRmCldM3d64ngmtU4p3KBoMjRuRJ?=
+ =?us-ascii?Q?PlnsmDufm/Xg4bm1SqAtva3Dz9MazMwGILit0O4OVXiqIayJRYOT9dn7B030?=
+ =?us-ascii?Q?BxfTk4svF+OAJjn7uH5K7DA/2sAJl3ne54SyYImntyVDnDPBczpin3BKf9Pa?=
+ =?us-ascii?Q?OAySYrer3N+wwthCz/xrwMBkPvvtJKUXrRg5C/exnKdDtVMBre2jGnqRJLaU?=
+ =?us-ascii?Q?ruzOSvkXbME7Grt3+WFMsrOp1V102KiTDZ9fokYk4RnuNgEIbFgy47ixEtfk?=
+ =?us-ascii?Q?n3lZ6fcG/Y2d6FLaToF6FvGje0SGIY9INGxhODEuju1dKFwQnZpkU5X61JRE?=
+ =?us-ascii?Q?H+18fdFjIIdLOSKAWlCeKFGSt9nFKTnTnJiyrRS72wZNHkh14NUorgVv7Lk3?=
+ =?us-ascii?Q?BQxVT3xc3hAJDPZMknOl5vpAPhpw1ddtm/3pvauSiV2OcJLLMR3J9ScqPz6Y?=
+ =?us-ascii?Q?7PsRCsgEDf0RgomJwsMIhJHC5MXBbgolv/2kePGRArzXoSmp5ZjHwWB/b+YX?=
+ =?us-ascii?Q?BN0LhVTh8CJDHXKBEr3jmlvI6nv2vkcrSjbEOm/yDgkBxeggZT01VMl2DXmC?=
+ =?us-ascii?Q?2RizL6lZH9t/GRNpQ/UQyd9usi6vDL2TJm2O9ymMdoaOg0ZGBx2jv8B8h4w+?=
+ =?us-ascii?Q?8sRmWfDMJosbhj+sKu4BTxiSeYs8LiKlyS/TVQUBUtyi1L3lbR/5jFT1prOZ?=
+ =?us-ascii?Q?XgABJpp7Xgx9NrTlM5mOk5OP03Y+2liTwfb0KqU2UAZwnbXSK5Thqv0DgHqy?=
+ =?us-ascii?Q?46KOrSY1gc0LQcnZfjqrU7ybDxgxc7rYgdYH8He9qMJy6+A5LdTIsiIUWPgV?=
+ =?us-ascii?Q?n4CXwgsRHu1dQeUh307UiyrpxEivRzGBzQusKoW6CcFNmy8c6yaUm0O4+8Sd?=
+ =?us-ascii?Q?z6jNxk8GIvVxthqrSOxrVVBMWItu7akEMB4bjBlJwxEi81wj7mYgKzWSubnx?=
+ =?us-ascii?Q?S+NZSqES0Fh7wbtHTUZh2j1bxQAXdYsgy17IZanaCO0CssWOZmLAP1i7qTOp?=
+ =?us-ascii?Q?heFY7oaJiXv4nNdEoxECLdZpqVfFJgga+7M0VYRBEWtEbmesGAuJGDPWPPHh?=
+ =?us-ascii?Q?rzmVv2nou/deGabNEA+wdpScvS0b6R9IilXq0Qeu0kydztgrGNnAkyqtJdBt?=
+ =?us-ascii?Q?x4uqf+ZhFsbZ0KMH3vUNiFg0DnisIvdRjaG+cAqbSAFER8vVStL86y0+p0hR?=
+ =?us-ascii?Q?Myg94CoJXsPmqh+DCpcZatqltfFZMyLAvKndJUu4Vs9DEPHqqwE8UkmdEdkq?=
+ =?us-ascii?Q?DoCwEhUByVmmRsPfCDUOEnfybRMAH2W19ZqR4EJxoYb4n76/1skSFG0UfuP+?=
+ =?us-ascii?Q?W/uCAlt04z5+wYqIzMfDze3XUnDSnUcgq7NF3vzYxkTBJbVFA7Czes3BvY3I?=
+ =?us-ascii?Q?5xTAAGMpWAbRpG/zbyxWbBkfo0lwbVt64UaBaQ1J3x8ClfXp/cBMFu5FB2jS?=
+ =?us-ascii?Q?TTisKd19m2A/hC2EkL4dubaKOgD0s1OFzU3vzI/Gtn2PZkF7XGKrHRon5ijZ?=
+ =?us-ascii?Q?J3e6p5eW0FGEQtSXvVgCAKIOC00F/QugUyNH36TNCWAPdymD+StLXOrAUZP1?=
+ =?us-ascii?Q?wEb5djUZIdMI8LuFJNPvHn0S+fc6ITivZ1d3SFM3i5NI04GPBYZZ4nFrSvf6?=
+ =?us-ascii?Q?xF3ZNN6hCGCcOq8nZQYSBNKenGz6Myw=3D?=
+X-OriginatorOrg: est.tech
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94b9a749-76a2-45f2-e922-08df04da709b
+X-MS-Exchange-CrossTenant-AuthSource: DU7PPF66507B2D7.EURP189.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 08:00:35.1212
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1wm5IDMgYsTE7NxNAMh42qODHU9VK6jhKp3LniwvJUF97UlW6D55B4uEvKs+ofS9TrPLdFvjRh7iBNKH3GmW+a3VHaRem4A6P8uKgSUU590=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4P189MB3750
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Aug 2026 04:07:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129556
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Aug 2026 08:00:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129557
 
-This is a bug fix release.
+Release Log: https://github.com/google/googletest/releases/tag/v1.18.0
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.5.10
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 ---
- meta-oe/recipes-devtools/php/{php_8.5.9.bb => php_8.5.10.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.5.9.bb => php_8.5.10.bb} (99%)
+ .../{googletest_1.17.0.bb =3D> googletest_1.18.0.bb}          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-test/googletest/{googletest_1.17.0.bb =3D> googlete=
+st_1.18.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.5.9.bb b/meta-oe/recipes-devtools/php/php_8.5.10.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.5.9.bb
-rename to meta-oe/recipes-devtools/php/php_8.5.10.bb
-index 710d5b0506..130a98f634 100644
---- a/meta-oe/recipes-devtools/php/php_8.5.9.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.5.10.bb
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
- 
- S = "${UNPACKDIR}/php-${PV}"
- 
--SRC_URI[sha256sum] = "703c082ad9d2946ac647f3596812300d2c62b360d2f31a999021692a9b39476c"
-+SRC_URI[sha256sum] = "d79bd4f3a9248e5cb5833766ba0d51cd35dd01b8727f23f30bcdba6fabc51d3e"
- 
- CVE_PRODUCT = "php:php php_group:php"
- 
--- 
-2.43.0
-
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb b/meta-oe=
+/recipes-test/googletest/googletest_1.18.0.bb
+similarity index 96%
+rename from meta-oe/recipes-test/googletest/googletest_1.17.0.bb
+rename to meta-oe/recipes-test/googletest/googletest_1.18.0.bb
+index 4d5340b994..3be3e37f72 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.18.0.bb
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcbbd27594afd08=
+9daa160d3a16dd515a"
+=20
+ PROVIDES +=3D "gmock gtest"
+=20
+-SRC_URI =3D "git://github.com/google/googletest.git;branch=3Dv1.17.x;proto=
+col=3Dhttps \
++SRC_URI =3D "git://github.com/google/googletest.git;branch=3Dv1.18.x;proto=
+col=3Dhttps \
+            file://run-ptest \
+-          "
+-SRCREV =3D "52eb8108c5bdec04579160ae17225d66034bd723"
++           "
++SRCREV =3D "063de7e9578f82b369302001269680b4b1553359"
+=20
+ inherit cmake pkgconfig ptest
+=20
 
