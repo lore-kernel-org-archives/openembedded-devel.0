@@ -1,111 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 587FBC61DD9
-	for <webhook@archiver.kernel.org>; Sun, 30 Aug 2026 18:19:37 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13448.1788113975261827888
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34F46C61DE1
+	for <webhook@archiver.kernel.org>; Sun, 30 Aug 2026 18:20:07 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13436.1788113999026107032
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2026 11:19:35 -0700
+ Sun, 30 Aug 2026 11:19:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=oBGU0PZ7;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3964e480f76so3355301a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2026 11:19:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=id/RkZ2E;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-81f36179d72so31471367b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2026 11:19:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788113998; cv=none;
+        d=google.com; s=arc-20260327;
+        b=HDqXuaFIHu+ffrWxjG66wnN58YmE5rAdwu8toqgck3QGgsTGF2xcLnsQHAJyqYnRCu
+         +lmBRvB5ztdpnzTjsOb8lFsGdLPkCq4NJFdLhniyCf1ehyU3C0OD5Jyy0IeTYp++ZZxe
+         54ETbym8jKqGJrdH/wRcJkeG1jRWPide6dOj/SEz7d5x6ZknEov4c++d99DvAW8TrXj1
+         RCY2/7ZvjvfBePxR8N79iSM6qNvQx7FtkKEAwBuCTc8WIe8/9DCT/j0KnBX4PLSN13Fr
+         e/zoeIApo51jWScHnfpfQJ1RFXPTw/QoxOf8k7Dz8ubrA9KTWO92wDKkxyoD+nBVFxn/
+         xg3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:subject:message-id:date:from
+         :mime-version:dkim-signature;
+        bh=j7e6U3GK0DJEQUkA7vkuVxlqRO6mPhbx0jyBFX0Dr7k=;
+        fh=ft9o+otwsIY1Xrcr1W3RWScU1Y/oskc36I9yKMW7j60=;
+        b=BZ+PY9cBY5dUpEgreHfDaEHM/j720sYyFOe3P9ZBOQsz9k2dEVZQ+WGxygR2unacFZ
+         R4PMONcXpzc5FOZJyUCLUEbonOMrTyncSVpH15tDmwntoTj6lifSuVs8Z5FIlc4wgznv
+         w2y2sWyt4F2xiZJWuPZ2uZE14Z2PcEMrqvL+lfjdft8L6r6gxmFr3vZHaQogr2x96lmV
+         MR/U9ytlgSaYesa3KS5IDJpA1fmIYRh2ysnMoyDhu7fNbUNplz7oLJgb7M5d5/sxCV6a
+         wMgv3ogqnjY85JYXOxooOUe6q/NTl/T5Kv6Dou8CH8uMhlCjPxiZzLGTOkLIPgVGNDTx
+         TFug==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788113974; x=1788718774; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dNyevnd8aMTX4gAL8u5jVf006orTX++X52ET00U5TJs=;
-        b=oBGU0PZ7Od8Ih8ebw8jlrJugM1DrFqGzsuRAS3M0s5iIVQ6Nhnz6WWbUGznscMpT0g
-         I8tNk/LdFlVqiq71gf2oujNFG+2GtsjTE472meTUWo93jdqm08A2XJh5vPThEZakMEcq
-         B9Vaiq14vhR2gRwjP9e7sFbN5q917p7g3dNbwLJP4OPKzAhGjFbjdkYwitVRLfMXOvJ/
-         zmt1u+SXwS5IBejdXPkUfSyzyyXYR98TA7JrtUsid91hv1ZrOXh16fIxsDyY4mD3WMZf
-         A46ENE1l9aOJYFIso3iA5qnNs/FT7rx7lAezQM12QwccKBTMr96zH9T189xpl99tBTYn
-         x/Yg==
+        d=gmail.com; s=20251104; t=1788113998; x=1788718798; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:subject:message-id:date
+         :from:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=j7e6U3GK0DJEQUkA7vkuVxlqRO6mPhbx0jyBFX0Dr7k=;
+        b=id/RkZ2EVhfV6jV0qGXuRfp5v/WSpwnNkuMi1+kb4FGx+bk3z2SjvgLIUhIUjEQCRB
+         +U3Cs11cxFZtZzkFeY1AO8LVxj+oFciNZrpX/JToJQZw2q3X7rYnuxPXyxnsTHTCvAnn
+         lnVwwhkXn4cgQ5DJWWrcqJmhiRDDsIPZgTe6AwdZuls2KKukzN8vzGUDtZESd4QlfdT8
+         pY0BK3RkTyvJt5CgdF3eJrwpYn26iWzAmH5XwrNCwYHutMC9HJjWvQtNuYHD49//d4TK
+         R4W2uFYJdI6pgJA26rmH0A9JQFRHArONQ2UiLimPoKxCz8AeB1Aou4Qz3MhGGYfVF63S
+         hyTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788113974; x=1788718774;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dNyevnd8aMTX4gAL8u5jVf006orTX++X52ET00U5TJs=;
-        b=b3BUzZg2MSojt1U5iui+2y1jQdD1+2Ysq5t2xGAayROZr9QB0FCATBmCxcm5FrMYhP
-         u6QaGovdyVdDixlm3mE7qHy9KpPrcUG/STMHwk0S8xw4ortj8aHA+Uji5k/pZO3sl/A+
-         zsf+mDoonpsWXQ8lWhYhe1PrEhzkUoY+amidNE70wBC64vMmqnHcyvG1jKZHBOcoEmuk
-         PkcfbxwcV6C5DvLtf60xXlrVSgVTw3VP1rGL5a6w8ce0qc7T10R+J2ra2Qq+nXFFuNhh
-         HcMYIAMWD9233ebfkwfAj3HS5ZfaQMtZFObIyIva8U/UzkAInQJ7KiPfkDiSJyR/V4tG
-         H+Sg==
-X-Gm-Message-State: AFuF++kjLMt6voUWOMavNC/NXJdqAiwnTUjpcUX/UOFYhyWtX86opDdp
-	FsgGtt4wghZsO6yPDT8hQQuBj9TYAOOdi301i7pMqZX0ZgmRjUblCR7yE0wrfg==
-X-Gm-Gg: AYBFou2lDRV2MLgmxtc5aWbUjvOw0lgtsJO+gvrFCEEWhHnEkYE3h1rroF4Pay3lnI2
-	sLmSoWTmUsCiHyvjyd9Bf+UHJaJ4rlzLI8t2QBkvGQXYxruyahBgcxWtvXfY75K88UPPyBmD+Ii
-	FtWeaDeOTP7c36FR+R/45TW9VS3k3phAVeJZCio+fsCxvPun/NkvlM3NDJx9YFiVBAP11rBrUh6
-	vH/R68IqMimb7C58WoZoQmypgdepMOtxprfuigQ2FgZNWa3ZJM9X7G9osIR6bLYFYDFSecaC5vW
-	WAxekzwc7tmPxT1vxc+1xqTgIHrcje2091rAxPOJ/8Ot1dRV9G7Q0KVq+c+uUegfSnYX0vSuDSh
-	zMzTmT0vfwlCpDOEf/W8J/8YKfAq5X811FDrK2MGLC6psLO0l4G1pABKolj9Nk346/hvAmS5KsU
-	skV5iPZIW5I5wJ0aOgFkDaAdha4ltSfzei9iJ1RWXpBKGEHjBpn7FnFp3fhRuu13am53mQShqDQ
-	HW9d+i291/fV1N0erEEOupxVyLBSe6gT/53t48zu3YR82Yr2orvXmf5q+dPi50lA9102B1JIIvv
-	GhW2AIAqV6LnagBYek0EN7CstoZ4Q4/ovsMjAAHYgaQLiTKlmPbTNQ9rlnlePGWY5jcrLCNZ4+h
-	fSy4fSFlOPRG/eXvefJuGwiX4iP4+oZuu0zhfGVumW0zpVA==
-X-Received: by 2002:a17:90a:fc4e:b0:395:5eec:b932 with SMTP id 98e67ed59e1d1-396d0f8fdbemr36521017a91.11.1788113974523;
-        Sun, 30 Aug 2026 11:19:34 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-142e0d3fdf6sm23068739c88.6.2026.08.30.11.19.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 Aug 2026 11:19:34 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] doxygen: strip build paths from the generated sources
-Date: Sun, 30 Aug 2026 11:19:31 -0700
-Message-ID: <20260830181931.1617283-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+        d=1e100.net; s=20251104; t=1788113998; x=1788718798;
+        h=content-transfer-encoding:content-type:cc:subject:message-id:date
+         :from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=j7e6U3GK0DJEQUkA7vkuVxlqRO6mPhbx0jyBFX0Dr7k=;
+        b=r2hd97dzuF1DnNh3BDyCtbTK9Vr4pzUviVqe3HcG86JMEWWEKZOtTR8ue3Cd4wmDeH
+         FfxYvI3c3kKfZrp6W4wBz6Q9gARaXTSgtFR8pORcuR2K1dxSU928MjN9FgrGxB2VhXZq
+         CVG3PnspzhD/WHtWxJJ9dhiON/mWZEvaePgICo5X4wLPjjjRZsv+Ya3BxMkKSGtwSkLN
+         Sqhr97uuPSpdQaqOEsTst8v5AhD0WzLz0Ue7+KppmpC/v9WZo+NmOdNSiCHwtrAWoWCJ
+         xiWnJCl/NPrXCKe/vDje3YBrlYEFjKLErwb+lYwOtTDZGI+dgzk8RsyLsi8wFIYa00W5
+         iF8g==
+X-Gm-Message-State: AFuF++m/IDXed+N0G7y726l8I2COa+AwN7dJMB/GQAqmtVEqu6JlvEaG
+	GE5Z38FkAD2LyKsMkDUwkpEg9s+kmyngbBGN9bKqbJ5iwR5wSAj8e2UfEJarzNvp5obtdWMPaDQ
+	5376wXwh1wuQK6YV1fNxYG8xlNfAZWp/9x+W4tsc=
+X-Gm-Gg: AYBFou3ZEVLMremErIvUKdfQb7YDvRZoL+R/+o2cE5yOzL1UeIIZhxVjqKKOJwKnuS/
+	aaob56dT400RMhG+okZ6xOZTBtSbj2tB3ezBpr0vH8ZQ5WzsQXyG/9JgtjOzlaFKntrVcj9VlQ5
+	UMx/5wY7RP21qpPTZUWVmmvmfutveWGHoVyxpXh80jJW5bXr1BWaGfxak3Vq2g9xG3QcDybgniX
+	bcgRFL0TCiLgBuG6lH5gYu4fAKwjhLViEGJenFo+zyYAWYadady72GO1f9ZbQTffRUf9Jsv4m1R
+	scNV5TF9A7QfhUq0EXUy9T+gCED7+C2uZAVDO20rElaGnYFqQx+f3jOWhq0SGdjcxEWz7AZj4r+
+	L/yxRCYvPcMRCFJF+jFQJL/tNvW9DE/MRqVGvecEyKAlk
+X-Received: by 2002:a05:690c:660b:b0:857:97ce:dfa5 with SMTP id
+ 00721157ae682-85d684bd753mr75524377b3.10.1788113997942; Sun, 30 Aug 2026
+ 11:19:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Sun, 30 Aug 2026 20:19:47 +0200
+X-Gm-Features: AcwNN1UuNvTB5rVI1baCsvdVbrIaJH460NwH-vJ3xP5IIP5K13vj4aSCmabZr0o
+Message-ID: <CABF_=yheHCLAo=jCHROfC6k99652Kg73tZBJie1woRcgA8ccFw@mail.gmail.com>
+Subject: When can a recipe scattered around be ready to promote to meta-openembedded?
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2026 18:19:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129596
+ <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2026 18:20:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129597
 
-configgen.py writes the absolute path of config.xml into the header of
-every file it generates, so generated_src/configvalues.h, which is
-shipped in the doxygen-src package, carries the recipe build directory:
+For example the recipe python3-construct
+(https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dpyth=
+on3-construct)
+exist in 5 different layers
 
-  WARNING: doxygen-1.18.0-r0 do_package_qa: QA Issue: File
-  /usr/src/debug/doxygen/1.18.0/generated_src/configvalues.h in package
-  doxygen-src contains reference to TMPDIR [buildpaths]
 
-On builders whose HOME is a parent of the build tree the same file e.g.
-yocto autobuilder, also trips the build-host HOME variant of the check.
+openembedded-devel@lists.openembedded.org
 
-flex leaks the path of the lex file the same way: it emits a #line
-directive for the %top{} block even when called with --noline, and
-post_lex.py rewrites it to the absolute path of the original .l file.
-Those .cpp files are not shipped today, but the leak is the same one.
-
-Strip ${B}/ and ${S}/ from everything under generated_src/ during
-do_install, before do_package picks the sources up, so the references
-become relative.
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- meta-oe/recipes-devtools/doxygen/doxygen_1.18.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.18.0.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.18.0.bb
-index 0ee18042e3..a9c82be929 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen_1.18.0.bb
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.18.0.bb
-@@ -23,6 +23,8 @@ EXTRA_OECMAKE += "\
- "
-
- do_install:append() {
-+    find ${B}/generated_src -type f -exec sed -i -e 's;${B}/;;g' -e 's;${S}/;;g' {} +
-+
-     sed -i -e 's;^#ifndef.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED$;#ifndef GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED;g' ${B}/generated_src/mscgen_language.hpp
-     sed -i -e 's;^# define.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED$;# define GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED;g' ${B}/generated_src/mscgen_language.hpp
-     sed -i -e 's;^#endif.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED.*$;#endif;g' ${B}/generated_src/mscgen_language.hpp
+--=20
+Jan Vermaete
+=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
