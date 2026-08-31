@@ -2,75 +2,76 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94C1FC61DD3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD941C61DF0
 	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 04:57:50 +0000 (UTC)
-Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22959.1788152269771553020
+Received: from alln-iport-3.cisco.com (alln-iport-3.cisco.com [173.37.142.90])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22958.1788152269429499428
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2026 21:57:50 -0700
+ Sun, 30 Aug 2026 21:57:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Vbsl8INJ;
- spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=dXH6CwhS;
+ spf=pass (domain: cisco.com, ip: 173.37.142.90, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=39712; q=dns/txt;
-  s=iport01; t=1788152270; x=1789361870;
+  d=cisco.com; i=@cisco.com; l=3860; q=dns/txt;
+  s=iport01; t=1788152269; x=1789361869;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tcMmzsj1Aw+v9AE46QNdiIKKYUB3ak72vdPUb+R0e4Y=;
-  b=Vbsl8INJbajfUi4vKdrBfsin6XO9M1T2aQJqsNCrGm9B3If1342oI688
-   dmqdZ0l8XVb2antRjxBu1yVNqQPKuOx9Kl6EKMnoZpGS2rzw78mlLvVo3
-   8yElb+9/L2ABklAwKmGgI5fc8pTKGES4pNZxMMg9lEYqALwYwdhgdq1IB
-   dgxrHLRGGAouCRY7FG3GHwjobCc1iWQG72OhE9KTkKKyJWDUMs5lx72nV
-   oD7xVcEK0DVuV3jStXBtgq9/Q1r/7+3nY5UsWRHljZEB80Mr58zC7DVh9
-   P3nV56/YfUZxkpKF0u5qiNO7tVzvB3+uX+1IpdCoy1/zwKZw2Np1+sqpN
-   w==;
-X-CSE-ConnectionGUID: bLHrwnYaSm2RiAWhUbwuag==
-X-CSE-MsgGUID: 9B2h1k+VRJeZIhcfIXG/hg==
-X-IPAS-Result: =?us-ascii?q?A0BKAgAsCZVq/44QJK1aHgEBCxIMggULghg/dF5DSZZKA?=
- =?us-ascii?q?4ETnQgUgWoPAQEBD0QNBAEBhD9GAo1zAiY0CQ4BAgQDAgMBAQEBAQEBAQEBA?=
- =?us-ascii?q?QsBAQUBAQECAQcFgQ4Thk8NhloBAgEDGgEMCwEYAS0QHAMBAi8rIwgQCYMCA?=
- =?us-ascii?q?YJ0AxHCAYF5M4EBgygBPwJDUNswAQsUAYE4hT+IIl0YAYNrgREnGxuBcoEVg?=
- =?us-ascii?q?TuBOHaBBYFcAQECgTYPAQmGVASCIoEMgVqBF5EISIEeA1ksAVUTDQoLBwWBZ?=
- =?us-ascii?q?gM1EioVbjIdgSM+F4ENGwYFgR2BKIQPIxk2eoEJXoErKWABEheBCYIIAoJag?=
- =?us-ascii?q?gUCAUlDDgdHUwkECxgNSBEsNxUZBD5uB456H4FYcwFYCC0BGBEBAYEFgQ8mC?=
- =?us-ascii?q?AaTGwFCj1uCIaEPCiiDdowilToaM4QEgVeSQJJRC5h9jgqWAFCEaYFoPIFHC?=
- =?us-ascii?q?wdwFTuCZwlKGQ+OKg4LgRQBAoJJgTRLgxRRxjQhJzICCTIBAQcCBw4DC4Foh?=
- =?us-ascii?q?GECix4BJoFWAQE?=
-IronPort-Data: A9a23:uYAEq6uT4r3/xAGKr1FJCvFseefnVAdfMUV32f8akzHdYApBsoF/q
- tZmKWqAOfmPYGOjKt91OY22900DusSEmoQ3HQFtqiowHy4TgMeUXt7xwmUckM+xwmwvaGo9s
- q3yv/GZdJhcokf0/0nrav666yEgiclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
- eja/YuFZTdJ5xYuajhKs/LY8Es21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw8MJXG35Ix
- PUjLWo3bzm8h9+836+yRbw57igjBJGD0II3s3Vky3TdSP0hW52GG/iM7t5D1zB2jcdLdRrcT
- 5NGMnw0MlKZPVsWZg1/5JEWxI9EglHzcDBcoVOErII84nPYy0p6172F3N/9KobXGp4PwBzCz
- o7A1zXTWBFDN5+h8xiIwFOsjeHurQy8WI1HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwAiJzqyR50OSAXIJC2YcLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWja1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:F4VbLa78StJ9mfS36wPXwOrXdLJyesId70hD6qm+c3Nom6uj5q
- eTdZsgtCMc5Ax9ZJhko6HjBEDiewK5yXcK2+ks1N6ZNWGM0ldAbrsSiLcKqAePJ8SRzIJgPN
- 9bAstDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhFQpcUAUdAZ0++/YTzra3FLeA==
-X-Talos-CUID: 9a23:88WdRWBYzqDqVOf6EyND1FQLHPEsSXiH9nb5HE+FA3l0QbLAHA==
-X-Talos-MUID: 9a23:TxH6mgh91p4SCV17N/4YrsMpZe0y4/2tS343s5g0msmPOw1AFHCdg2Hi
+  bh=QrMr3RSojK9Y9MIyoQ+2Nsyu4puB+6Rczbnzw1RvvOA=;
+  b=dXH6CwhSRwvsuy4oDxQk9X5uOaf/tgk0nymPN0Uccz2pmUu4FgsJEiWL
+   CNQxXhPUCN7ot0NZiSghY07wr0I33C+9sSmEEg2pxISlQ9vhj1vKXn6m/
+   ngusKBRJHomnRjvE9Qtv9TXMzeelqXCXoq6jERph/S4UfBav2uGaXTK2s
+   qCeZSF7WkI0q8sKckY4A61C5DvqEvoZ5Ev042w/RoFXWgz8QhwpgEPQCr
+   jC+7WdJpKCOXIYUfWcBhtKT8FgRMoTwH0CxoOo70RDjgRWyz6Ir2c9h+l
+   zwntKbhSypPGgNGBpsP5kmatDZ5pfRzobwjdExZcBe47RTnMu9NLc+4Qx
+   A==;
+X-CSE-ConnectionGUID: bdKbC57sSeOthcBInwNWuQ==
+X-CSE-MsgGUID: 5HsgDoA0S5S0uY7oieHaYQ==
+X-IPAS-Result: =?us-ascii?q?A0BJAgCvCJVq/4wQJK1agRWBRIJXdF5DSZZKA54bgX4PA?=
+ =?us-ascii?q?QEBD0QNBAEBhD9GAk8VjQ8CJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
+ =?us-ascii?q?QECAQcFgQ4Thk8NhloBAgEDMgEYAS0QHAMBAi8rIwgZgwIBgnQDEcIDgiyBA?=
+ =?us-ascii?q?YMoAT8CQ1DbMAELFAGBOIU/iCJdGAGEfCcbG4FyhH6BBUsBgRABAYEnhn4Eg?=
+ =?us-ascii?q?iKBDIFakh9IgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQ0bBgWBHYEoh?=
+ =?us-ascii?q?A8jGTZ6gQlegSspYAESF4EJgggCglqCBQIBSUMOB0dTCQQLGA1IESw3FRkEP?=
+ =?us-ascii?q?m4HjnofgVhzgQ4BK4EgdDSlWqEPCiiDdowilToaM4VbpRELmH2OCoVVkCtQh?=
+ =?us-ascii?q?GmBaDyBKBwDCwdwFYMiCUoZD444g2uBfzeDLsZVJzICCTIBAQcCBw4DC4Fok?=
+ =?us-ascii?q?ACBfgEB?=
+IronPort-Data: A9a23:6plfOa4Oe12nVeFcZ7OQpgxRtGnGchMFZxGqfqrLsTDasY5as4F+v
+ jNJXWyCOqyNa2ejKYpwbY+1pENQsZTcx4NjGwNqryw8Zn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/qUzBHf/g2QqajJPs/rawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eN4E78M0qXnp1+
+ NsEKDsnTxacod2r+efuIgVsrpxLwMjDNYcbvDRkiDreF/tjGcuFSKTR7tge1zA17ixMNa+BP
+ IxCN3w2MlKZP0Un1lQ/UPrSmM+khXT7ejxJoXqepLE85C7YywkZPL3FYIaMIYzVGZQF9qqej
+ j/m5GvVBThCD4GkkSe0rXWti8/GrBquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBfCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:9FK/gq+vsqvuDjAqk21uk+D6I+orL9Y04lQ7vn2ZhyY7TiX+rb
+ HIoB11737JYVoqNU3I3OrwWpVoIkmskaKdn7NwAV7KZmCP0wGVxcNZnO7fKlbbdREWmNQw6U
+ 4ZSdkcNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYKcemvAJsQlzuQzW2gYzRLeDU=
+X-Talos-CUID: =?us-ascii?q?9a23=3AHuCpy2uIkhGxHQSbytMWygg66Isvfl7X5yqPOHS?=
+ =?us-ascii?q?1LnppQ5e0T0C2x75dxp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3ANjhSCQ0Z+2gHmirbbNJfKaFK+jUjvoS1B2wKuM0?=
+ =?us-ascii?q?95vLcKB0vPDaQrD2Ge9py?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,252,1779148800"; 
-   d="scan'208";a="825732622"
-Received: from alln-l-core-05.cisco.com ([173.36.16.142])
-  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 31 Aug 2026 04:57:48 +0000
+   d="scan'208";a="841387498"
+Received: from alln-l-core-03.cisco.com ([173.36.16.140])
+  by alln-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 31 Aug 2026 04:57:48 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-05.cisco.com (Postfix) with ESMTPS id 9B0A618000481;
+	by alln-l-core-03.cisco.com (Postfix) with ESMTPS id AE9491800042F;
 	Mon, 31 Aug 2026 04:57:48 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id D91F8CD02BC; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
+	id EBCC8CD03C3; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 5/9] python3-aiohttp: fix CVE-2026-22815
-Date: Sun, 30 Aug 2026 21:57:40 -0700
-Message-Id: <20260831045744.3321483-6-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 9/9] python3-aiohttp: fix CVE-2026-34518
+Date: Sun, 30 Aug 2026 21:57:44 -0700
+Message-Id: <20260831045744.3321483-10-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260831045744.3321483-1-dkelaiya@cisco.com>
 References: <20260831045744.3321483-1-dkelaiya@cisco.com>
@@ -78,1071 +79,109 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-05.cisco.com
+X-Outbound-Node: alln-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 04:57:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129609
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129607
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the reviewed upstream fix commits shown in
-[1], [2], and [3]. The advisory identifying the fix is referenced in
-[4].
+[1] and [2]. The advisory identifying the fix is referenced in
+[3].
 
-The generated aiohttp/_http_parser.c changes are omitted. The
-recipe-time Cython regeneration introduced with CVE-2025-69224
-regenerates that file from the patched _http_parser.pyx before the
-accelerated parser is compiled.
-
-[1] https://github.com/aio-libs/aiohttp/commit/0c2e9da51126238a421568eb7c5b53e5b5d17b36
-[2] https://github.com/aio-libs/aiohttp/commit/ed6440ca49ef4907ab9d99ba7e329aab702b7173
-[3] https://github.com/aio-libs/aiohttp/commit/30ec25f8a58c5dc3f8fdb3eec31f555eeaabd30a
-[4] https://nvd.nist.gov/vuln/detail/CVE-2026-22815
+[1] https://github.com/aio-libs/aiohttp/commit/5351c980dcec7ad385730efdf4e1f4338b24fdb6
+[2] https://github.com/aio-libs/aiohttp/commit/6e8f393330f9bd6d7b24a146124ebc42eaa727b9
+[3] https://nvd.nist.gov/vuln/detail/CVE-2026-34518
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-22815.patch      | 1020 +++++++++++++++++
- .../python/python3-aiohttp_3.9.5.bb           |    1 +
- 2 files changed, 1021 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
+ .../python3-aiohttp/CVE-2026-34518.patch      | 64 +++++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |  1 +
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34518.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34518.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34518.patch
 new file mode 100644
-index 0000000000..16c2bf9c76
+index 0000000000..98417f13e9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
-@@ -0,0 +1,1020 @@
-+From 397155d08683c97a24d7dfc245d45d13941aca1e Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34518.patch
+@@ -0,0 +1,64 @@
++From 528611956c8ea77e8dddc312b64baa3549697bdf Mon Sep 17 00:00:00 2001
 +From: Sam Bull <git@sambull.org>
-+Date: Mon, 12 Jan 2026 18:49:19 +0000
-+Subject: [PATCH] Add max_headers parameter (#11955) (#11959) (#11960)
++Date: Fri, 27 Feb 2026 01:31:07 +0000
++Subject: [PATCH] Drop additional headers on redirect (#12146) (#12150)
 +
-+CVE: CVE-2026-22815
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/0c2e9da51126238a421568eb7c5b53e5b5d17b36]
++CVE: CVE-2026-34518
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/5351c980dcec7ad385730efdf4e1f4338b24fdb6]
 +
-+Backport Changes:
-+- Retained the Scarthgap bytearray and CIMultiDict parser model.
-+- Added header-count enforcement to the existing header processor.
-+- Reset header-name size while retaining Scarthgap buffer handling.
-+- Added max_headers to the legacy client request path.
-+- Preserved Scarthgap connection and exception-handling logic.
-+- Omitted newer middleware, TypedDict, retry, and SSL API context.
-+- Adapted documentation and tests for the Scarthgap API.
-+- Omitted the generated aiohttp/_http_parser.c changes. The Scarthgap
-+  recipe regenerates this file from the patched _http_parser.pyx using
-+  python3-cython-native before compilation.
++(cherry picked from commit 6e8f393330f9bd6d7b24a146124ebc42eaa727b9)
 +
-+(cherry picked from commit ed6440ca49ef4907ab9d99ba7e329aab702b7173)
-+(cherry picked from commit 30ec25f8a58c5dc3f8fdb3eec31f555eeaabd30a)
-+(cherry picked from commit 0c2e9da51126238a421568eb7c5b53e5b5d17b36)
++(cherry picked from commit 5351c980dcec7ad385730efdf4e1f4338b24fdb6)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/11955.feature.rst       |   1 +
-+ aiohttp/_http_parser.pyx        |  31 ++++----
-+ aiohttp/client.py               |   9 ++-
-+ aiohttp/client_proto.py         |   2 +
-+ aiohttp/http_exceptions.py      |   9 +--
-+ aiohttp/http_parser.py          |  83 +++++++++++++---------
-+ aiohttp/web_protocol.py         |   2 +-
-+ docs/client_reference.rst       |  26 ++++++-
-+ docs/web_reference.rst          |   5 +-
-+ tests/test_client_functional.py | 117 +++++++++++++++++++++---------
-+ tests/test_http_exceptions.py   |  18 ++---
-+ tests/test_http_parser.py       | 121 +++++++++++++++++++++++++-------
-+ 12 files changed, 302 insertions(+), 122 deletions(-)
-+ create mode 100644 CHANGES/11955.feature.rst
++ aiohttp/client.py               | 2 ++
++ tests/test_client_functional.py | 9 ++++++++-
++ 2 files changed, 10 insertions(+), 1 deletion(-)
 +
-+diff --git a/CHANGES/11955.feature.rst b/CHANGES/11955.feature.rst
-+new file mode 100644
-+index 000000000..eaea1016e
-+--- /dev/null
-++++ b/CHANGES/11955.feature.rst
-+@@ -0,0 +1 @@
-++Added ``max_headers`` parameter to limit the number of headers that should be read from a response -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
-+index 4dca08f35..72454dfd3 100644
-+--- a/aiohttp/_http_parser.pyx
-++++ b/aiohttp/_http_parser.pyx
-+@@ -278,6 +278,7 @@ cdef class HttpParser:
-+         bytearray _raw_name
-+         bytearray _raw_value
-+         bint      _has_value
-++        int _header_name_size
-+ 
-+         object _protocol
-+         object _loop
-+@@ -328,7 +329,7 @@ cdef class HttpParser:
-+         self, cparser.llhttp_type mode,
-+         object protocol, object loop, int limit,
-+         object timer=None,
-+-        size_t max_line_size=8190, size_t max_headers=32768,
-++        size_t max_line_size=8190, size_t max_headers=128,
-+         size_t max_field_size=8190, payload_exception=None,
-+         bint response_with_body=True, bint read_until_eof=False,
-+         bint auto_decompress=True,
-+@@ -351,6 +352,7 @@ cdef class HttpParser:
-+         self._raw_name = bytearray()
-+         self._raw_value = bytearray()
-+         self._has_value = False
-++        self._header_name_size = 0
-+ 
-+         self._max_line_size = max_line_size
-+         self._max_headers = max_headers
-+@@ -384,6 +386,8 @@ cdef class HttpParser:
-+             value = raw_value.decode('utf-8', 'surrogateescape')
-+ 
-+             self._headers.add(name, value)
-++            if len(self._headers) > self._max_headers:
-++                raise BadHttpMessage("Too many headers received")
-+ 
-+             if name is CONTENT_ENCODING:
-+                 self._content_encoding = value
-+@@ -391,6 +395,7 @@ cdef class HttpParser:
-+             PyByteArray_Resize(self._raw_name, 0)
-+             PyByteArray_Resize(self._raw_value, 0)
-+             self._has_value = False
-++            self._header_name_size = 0
-+             self._raw_headers.append((raw_name, raw_value))
-+ 
-+     cdef _on_header_field(self, char* at, size_t length):
-+@@ -582,7 +587,7 @@ cdef class HttpRequestParser(HttpParser):
-+ 
-+     def __init__(
-+         self, protocol, loop, int limit, timer=None,
-+-        size_t max_line_size=8190, size_t max_headers=32768,
-++        size_t max_line_size=8190, size_t max_headers=128,
-+         size_t max_field_size=8190, payload_exception=None,
-+         bint response_with_body=True, bint read_until_eof=False,
-+         bint auto_decompress=True,
-+@@ -646,7 +651,7 @@ cdef class HttpResponseParser(HttpParser):
-+ 
-+     def __init__(
-+         self, protocol, loop, int limit, timer=None,
-+-            size_t max_line_size=8190, size_t max_headers=32768,
-++            size_t max_line_size=8190, size_t max_headers=128,
-+             size_t max_field_size=8190, payload_exception=None,
-+             bint response_with_body=True, bint read_until_eof=False,
-+             bint auto_decompress=True
-+@@ -685,8 +690,8 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
-+     cdef HttpParser pyparser = <HttpParser>parser.data
-+     try:
-+         if length > pyparser._max_line_size:
-+-            raise LineTooLong(
-+-                'Status line is too long', pyparser._max_line_size, length)
-++            status = pyparser._buf + at[:length]
-++            raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
-+         extend(pyparser._buf, at, length)
-+     except BaseException as ex:
-+         pyparser._last_error = ex
-+@@ -698,11 +703,10 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
-+ cdef int cb_on_status(cparser.llhttp_t* parser,
-+                       const char *at, size_t length) except -1:
-+     cdef HttpParser pyparser = <HttpParser>parser.data
-+-    cdef str reason
-+     try:
-+         if length > pyparser._max_line_size:
-+-            raise LineTooLong(
-+-                'Status line is too long', pyparser._max_line_size, length)
-++            reason = pyparser._buf + at[:length]
-++            raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
-+         extend(pyparser._buf, at, length)
-+     except BaseException as ex:
-+         pyparser._last_error = ex
-+@@ -719,8 +723,9 @@ cdef int cb_on_header_field(cparser.llhttp_t* parser,
-+         pyparser._on_status_complete()
-+         size = len(pyparser._raw_name) + length
-+         if size > pyparser._max_field_size:
-+-            raise LineTooLong(
-+-                'Header name is too long', pyparser._max_field_size, size)
-++            name = pyparser._raw_name + at[:length]
-++            raise LineTooLong(name[:100] + b"...", pyparser._max_field_size)
-++        pyparser._header_name_size = size
-+         pyparser._on_header_field(at, length)
-+     except BaseException as ex:
-+         pyparser._last_error = ex
-+@@ -735,9 +740,9 @@ cdef int cb_on_header_value(cparser.llhttp_t* parser,
-+     cdef Py_ssize_t size
-+     try:
-+         size = len(pyparser._raw_value) + length
-+-        if size > pyparser._max_field_size:
-+-            raise LineTooLong(
-+-                'Header value is too long', pyparser._max_field_size, size)
-++        if pyparser._header_name_size + size > pyparser._max_field_size:
-++            value = pyparser._raw_value + at[:length]
-++            raise LineTooLong(value[:100] + b"...", pyparser._max_field_size)
-+         pyparser._on_header_value(at, length)
-+     except BaseException as ex:
-+         pyparser._last_error = ex
 +diff --git a/aiohttp/client.py b/aiohttp/client.py
-+index 32d2c3b71..1d10fc84c 100644
++index e30b880e9..0b87d7eec 100644
 +--- a/aiohttp/client.py
 ++++ b/aiohttp/client.py
-+@@ -136,7 +136,6 @@ if TYPE_CHECKING:
-+ else:
-+     SSLContext = None
++@@ -684,6 +684,8 @@ class ClientSession:
++                         if url.origin() != parsed_url.origin():
++                             auth = None
++                             headers.pop(hdrs.AUTHORIZATION, None)
+++                            headers.pop(hdrs.COOKIE, None)
+++                            headers.pop(hdrs.PROXY_AUTHORIZATION, None)
 + 
-+-
-+ @attr.s(auto_attribs=True, frozen=True, slots=True)
-+ class ClientTimeout:
-+     total: Optional[float] = None
-+@@ -195,6 +194,7 @@ class ClientSession:
-+             "_read_bufsize",
-+             "_max_line_size",
-+             "_max_field_size",
-++            "_max_headers",
-+             "_resolve_charset",
-+         ]
-+     )
-+@@ -232,6 +232,7 @@ class ClientSession:
-+         read_bufsize: int = 2**16,
-+         max_line_size: int = 8190,
-+         max_field_size: int = 8190,
-++        max_headers: int = 128,
-+         fallback_charset_resolver: _CharsetResolver = lambda r, b: "utf-8",
-+     ) -> None:
-+         # We initialise _connector to None immediately, as it's referenced in __del__()
-+@@ -316,6 +317,7 @@ class ClientSession:
-+         self._read_bufsize = read_bufsize
-+         self._max_line_size = max_line_size
-+         self._max_field_size = max_field_size
-++        self._max_headers = max_headers
-+ 
-+         # Convert to list of tuples
-+         if headers:
-+@@ -418,6 +420,7 @@ class ClientSession:
-+         auto_decompress: Optional[bool] = None,
-+         max_line_size: Optional[int] = None,
-+         max_field_size: Optional[int] = None,
-++        max_headers: Optional[int] = None,
-+     ) -> ClientResponse:
-+ 
-+         # NOTE: timeout clamps existing connect and read timeouts.  We cannot
-+@@ -490,6 +493,9 @@ class ClientSession:
-+         if max_field_size is None:
-+             max_field_size = self._max_field_size
-+ 
-++        if max_headers is None:
-++            max_headers = self._max_headers
-++
-+         traces = [
-+             Trace(
-+                 self,
-+@@ -599,6 +605,7 @@ class ClientSession:
-+                         timeout_ceil_threshold=self._connector._timeout_ceil_threshold,
-+                         max_line_size=max_line_size,
-+                         max_field_size=max_field_size,
-++                        max_headers=max_headers,
-+                     )
-+ 
-+                     try:
-+diff --git a/aiohttp/client_proto.py b/aiohttp/client_proto.py
-+index 723f5aae5..10852efc0 100644
-+--- a/aiohttp/client_proto.py
-++++ b/aiohttp/client_proto.py
-+@@ -180,6 +180,7 @@ class ResponseHandler(BaseProtocol, DataQueue[Tuple[RawResponseMessage, StreamRe
-+         timeout_ceil_threshold: float = 5,
-+         max_line_size: int = 8190,
-+         max_field_size: int = 8190,
-++        max_headers: int = 128,
-+     ) -> None:
-+         self._skip_payload = skip_payload
-+ 
-+@@ -198,6 +199,7 @@ class ResponseHandler(BaseProtocol, DataQueue[Tuple[RawResponseMessage, StreamRe
-+             auto_decompress=auto_decompress,
-+             max_line_size=max_line_size,
-+             max_field_size=max_field_size,
-++            max_headers=max_headers,
-+         )
-+ 
-+         if self._tail:
-+diff --git a/aiohttp/http_exceptions.py b/aiohttp/http_exceptions.py
-+index 877b07d4c..201fe0bcc 100644
-+--- a/aiohttp/http_exceptions.py
-++++ b/aiohttp/http_exceptions.py
-+@@ -81,11 +81,12 @@ class DecompressSizeError(PayloadEncodingError):
-+ 
-+ class LineTooLong(BadHttpMessage):
-+     def __init__(
-+-        self, line: str, limit: str = "Unknown", actual_size: str = "Unknown"
-++        self,
-++        line: Union[str, bytes],
-++        limit: Union[str, int] = "Unknown",
-++        actual_size: str = "Unknown",
-+     ) -> None:
-+-        super().__init__(
-+-            f"Got more than {limit} bytes ({actual_size}) when reading {line}."
-+-        )
-++        super().__init__(f"Got more than {limit} bytes when reading: {line!r}.")
-+         self.args = (line, limit, actual_size)
-+ 
-+ 
-+diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index cdf3fc89a..2c1e4b17a 100644
-+--- a/aiohttp/http_parser.py
-++++ b/aiohttp/http_parser.py
-+@@ -167,20 +167,10 @@ class HeadersParser:
-+                 raise InvalidHeader(line)
-+ 
-+             bvalue = bvalue.lstrip(b" \t")
-+-            if len(bname) > self.max_field_size:
-+-                raise LineTooLong(
-+-                    "request header name {}".format(
-+-                        bname.decode("utf8", "backslashreplace")
-+-                    ),
-+-                    str(self.max_field_size),
-+-                    str(len(bname)),
-+-                )
-+             name = bname.decode("utf-8", "surrogateescape")
-+             if not TOKENRE.fullmatch(name):
-+                 raise InvalidHeader(bname)
-+ 
-+-            header_length = len(bvalue)
-+-
-+             # next line
-+             lines_idx += 1
-+             line = lines[lines_idx]
-+@@ -190,16 +180,14 @@ class HeadersParser:
-+ 
-+             # Deprecated: https://www.rfc-editor.org/rfc/rfc9112.html#name-obsolete-line-folding
-+             if continuation:
-++                header_length = len(bvalue)
-+                 bvalue_lst = [bvalue]
-+                 while continuation:
-+                     header_length += len(line)
-+                     if header_length > self.max_field_size:
-++                        header_line = bname + b": " + b"".join(bvalue_lst)
-+                         raise LineTooLong(
-+-                            "request header field {}".format(
-+-                                bname.decode("utf8", "backslashreplace")
-+-                            ),
-+-                            str(self.max_field_size),
-+-                            str(header_length),
-++                            header_line[:100] + b"...", self.max_field_size
-+                         )
-+                     bvalue_lst.append(line)
-+ 
-+@@ -213,15 +201,6 @@ class HeadersParser:
-+                         line = b""
-+                         break
-+                 bvalue = b"".join(bvalue_lst)
-+-            else:
-+-                if header_length > self.max_field_size:
-+-                    raise LineTooLong(
-+-                        "request header field {}".format(
-+-                            bname.decode("utf8", "backslashreplace")
-+-                        ),
-+-                        str(self.max_field_size),
-+-                        str(header_length),
-+-                    )
-+ 
-+             bvalue = bvalue.strip(b" \t")
-+             value = bvalue.decode("utf-8", "surrogateescape")
-+@@ -252,7 +231,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+         loop: Optional[asyncio.AbstractEventLoop] = None,
-+         limit: int = 2**16,
-+         max_line_size: int = 8190,
-+-        max_headers: int = 32768,
-++        max_headers: int = 128,
-+         max_field_size: int = 8190,
-+         timer: Optional[BaseTimerContext] = None,
-+         code: Optional[int] = None,
-+@@ -325,6 +304,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+         data_len = len(data)
-+         start_pos = 0
-+         loop = self.loop
-++        max_line_length = self.max_line_size
-+ 
-+         while start_pos < data_len:
-+ 
-+@@ -342,11 +322,21 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+                     line = data[start_pos:pos]
-+                     if SEP == b"\n":  # For lax response parsing
-+                         line = line.rstrip(b"\r")
-++                    if len(line) > max_line_length:
-++                        raise LineTooLong(line[:100] + b"...", max_line_length)
-++
-+                     self._lines.append(line)
-++                    # After processing the status/request line, everything is a header.
-++                    max_line_length = self.max_field_size
-++
-++                    if len(self._lines) > self.max_headers:
-++                        raise BadHttpMessage("Too many headers received")
-++
-+                     start_pos = pos + len(SEP)
-+ 
-+                     # \r\n\r\n found
-+                     if self._lines[-1] == EMPTY:
-++                        max_trailers = self.max_headers - len(self._lines)
-+                         try:
-+                             msg: _MsgT = self.parse_message(self._lines)
-+                         finally:
-+@@ -406,6 +396,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+                                 auto_decompress=self._auto_decompress,
-+                                 lax=self.lax,
-+                                 headers_parser=self._headers_parser,
-++                                max_line_size=self.max_line_size,
-++                                max_field_size=self.max_field_size,
-++                                max_trailers=max_trailers,
-+                             )
-+                             if not payload_parser.done:
-+                                 self._payload_parser = payload_parser
-+@@ -426,6 +419,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+                                 auto_decompress=self._auto_decompress,
-+                                 lax=self.lax,
-+                                 headers_parser=self._headers_parser,
-++                                max_line_size=self.max_line_size,
-++                                max_field_size=self.max_field_size,
-++                                max_trailers=max_trailers,
-+                             )
-+                         elif not empty_body and length is None and self.read_until_eof:
-+                             payload = StreamReader(
-+@@ -446,6 +442,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+                                 auto_decompress=self._auto_decompress,
-+                                 lax=self.lax,
-+                                 headers_parser=self._headers_parser,
-++                                max_line_size=self.max_line_size,
-++                                max_field_size=self.max_field_size,
-++                                max_trailers=max_trailers,
-+                             )
-+                             if not payload_parser.done:
-+                                 self._payload_parser = payload_parser
-+@@ -455,6 +454,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
-+                         messages.append((msg, payload))
-+                 else:
-+                     self._tail = data[start_pos:]
-++                    if len(self._tail) > self.max_line_size:
-++                        raise LineTooLong(self._tail[:100] + b"...", self.max_line_size)
-+                     data = EMPTY
-+                     break
-+ 
-+@@ -594,11 +595,6 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
-+         except ValueError:
-+             raise BadStatusLine(line) from None
-+ 
-+-        if len(path) > self.max_line_size:
-+-            raise LineTooLong(
-+-                "Status line is too long", str(self.max_line_size), str(len(path))
-+-            )
-+-
-+         # method
-+         if not TOKENRE.fullmatch(method):
-+             raise BadStatusLine(method)
-+@@ -706,11 +702,6 @@ class HttpResponseParser(HttpParser[RawResponseMessage]):
-+             status = status.strip()
-+             reason = ""
-+ 
-+-        if len(reason) > self.max_line_size:
-+-            raise LineTooLong(
-+-                "Status line is too long", str(self.max_line_size), str(len(reason))
-+-            )
-+-
-+         # version
-+         match = VERSRE.fullmatch(version)
-+         if match is None:
-+@@ -772,6 +763,9 @@ class HttpPayloadParser:
-+         lax: bool = False,
-+         *,
-+         headers_parser: HeadersParser,
-++        max_line_size: int = 8190,
-++        max_field_size: int = 8190,
-++        max_trailers: int = 128,
-+     ) -> None:
-+         self._length = 0
-+         self._type = ParseState.PARSE_NONE
-+@@ -781,6 +775,9 @@ class HttpPayloadParser:
-+         self._auto_decompress = auto_decompress
-+         self._lax = lax
-+         self._headers_parser = headers_parser
-++        self._max_line_size = max_line_size
-++        self._max_field_size = max_field_size
-++        self._max_trailers = max_trailers
-+         self._trailer_lines: list[bytes] = []
-+         self.done = False
-+ 
-+@@ -855,6 +852,15 @@ class HttpPayloadParser:
-+         # Chunked transfer encoding parser
-+         elif self._type == ParseState.PARSE_CHUNKED:
-+             if self._chunk_tail:
-++                # We should never have a tail if we're inside the payload body.
-++                assert self._chunk != ChunkState.PARSE_CHUNKED_CHUNK
-++                # We should check the length is sane.
-++                max_line_length = self._max_line_size
-++                if self._chunk == ChunkState.PARSE_TRAILERS:
-++                    max_line_length = self._max_field_size
-++                if len(self._chunk_tail) > max_line_length:
-++                    raise LineTooLong(self._chunk_tail[:100] + b"...", max_line_length)
-++
-+                 chunk = self._chunk_tail + chunk
-+                 self._chunk_tail = b""
-+ 
-+@@ -938,8 +944,15 @@ class HttpPayloadParser:
-+                     chunk = chunk[pos + len(SEP) :]
-+                     if SEP == b"\n":  # For lax response parsing
-+                         line = line.rstrip(b"\r")
-++
-++                    if len(line) > self._max_field_size:
-++                        raise LineTooLong(line[:100] + b"...", self._max_field_size)
-++
-+                     self._trailer_lines.append(line)
-+ 
-++                    if len(self._trailer_lines) > self._max_trailers:
-++                        raise BadHttpMessage("Too many trailers received")
-++
-+                     # \r\n\r\n found, end of stream
-+                     if self._trailer_lines[-1] == b"":
-+                         # Headers and trailers are defined the same way,
-+diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
-+index f083b13eb..a06503e0c 100644
-+--- a/aiohttp/web_protocol.py
-++++ b/aiohttp/web_protocol.py
-+@@ -177,7 +177,7 @@ class RequestHandler(BaseProtocol):
-+         access_log_format: str = AccessLogger.LOG_FORMAT,
-+         debug: bool = False,
-+         max_line_size: int = 8190,
-+-        max_headers: int = 32768,
-++        max_headers: int = 128,
-+         max_field_size: int = 8190,
-+         lingering_time: float = 10.0,
-+         read_bufsize: int = 2**16,
-+diff --git a/docs/client_reference.rst b/docs/client_reference.rst
-+index fdf66e1be..49a2dfe58 100644
-+--- a/docs/client_reference.rst
-++++ b/docs/client_reference.rst
-+@@ -52,6 +52,9 @@ The client session supports the context manager protocol for self closing.
-+                          requote_redirect_url=True, \
-+                          trust_env=False, \
-+                          trace_configs=None, \
-++                         max_line_size=8190, \
-++                         max_field_size=8190, \
-++                         max_headers=128, \
-+                          fallback_charset_resolver=lambda r, b: "utf-8")
-+ 
-+    The class for creating client sessions and making requests.
-+@@ -227,6 +230,17 @@ The client session supports the context manager protocol for self closing.
-+                          disabling.  See :ref:`aiohttp-client-tracing-reference` for
-+                          more information.
-+ 
-++   :param int read_bufsize: Size of the read buffer (:attr:`ClientResponse.content`).
-++                            64 KiB by default.
-++
-++      .. versionadded:: 3.7
-++
-++   :param int max_line_size: Maximum allowed size of lines in responses.
-++
-++   :param int max_field_size: Maximum allowed size of header name and value combined in responses.
-++
-++   :param int max_headers: Maximum number of headers and trailers combined in responses.
-++
-+    :param Callable[[ClientResponse,bytes],str] fallback_charset_resolver:
-+       A :term:`callable` that accepts a :class:`ClientResponse` and the
-+       :class:`bytes` contents, and returns a :class:`str` which will be used as
-+@@ -376,7 +390,11 @@ The client session supports the context manager protocol for self closing.
-+                          timeout=sentinel, ssl=None, \
-+                          verify_ssl=None, fingerprint=None, \
-+                          ssl_context=None, proxy_headers=None, \
-+-                         server_hostname=None, auto_decompress=None)
-++                         server_hostname=None, \
-++                         auto_decompress=None, \
-++                         max_line_size=None, \
-++                         max_field_size=None, \
-++                         max_headers=None)
-+       :async:
-+       :noindexentry:
-+ 
-+@@ -561,6 +579,12 @@ The client session supports the context manager protocol for self closing.
-+          Overrides :attr:`ClientSession.auto_decompress`.
-+          May be used to enable/disable auto decompression on a per-request basis.
-+ 
-++      :param int max_line_size: Maximum allowed size of lines in responses.
-++
-++      :param int max_field_size: Maximum allowed size of header name and value combined in responses.
-++
-++      :param int max_headers: Maximum number of headers and trailers combined in responses.
-++
-+       :return ClientResponse: a :class:`client response <ClientResponse>`
-+          object.
-+ 
-+diff --git a/docs/web_reference.rst b/docs/web_reference.rst
-+index aedac0e54..cc6201b42 100644
-+--- a/docs/web_reference.rst
-++++ b/docs/web_reference.rst
-+@@ -2709,9 +2709,10 @@ application on specific TCP or Unix socket, e.g.::
-+         :attr:`helpers.AccessLogger.LOG_FORMAT`.
-+    :param int max_line_size: Optional maximum header line size. Default:
-+         ``8190``.
-+-   :param int max_headers: Optional maximum header size. Default: ``32768``.
-+-   :param int max_field_size: Optional maximum header field size. Default:
-++   :param int max_field_size: Optional maximum header combined name and value size. Default:
-+         ``8190``.
-++   :param int max_headers: Optional maximum number of headers and trailers combined. Default:
-++        ``128``.
-+ 
-+    :param float lingering_time: Maximum time during which the server
-+         reads and ignores additional data coming from the client when
++                         url = parsed_url
++                         params = {}
 +diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
-+index 7d126d185..55115fd6f 100644
++index c8d4e0aab..3ca1716ba 100644
 +--- a/tests/test_client_functional.py
 ++++ b/tests/test_client_functional.py
-+@@ -3361,17 +3361,17 @@ async def test_http_empty_data_text(aiohttp_client) -> None:
-+         assert resp.headers["Content-Type"] == "text/plain; charset=utf-8"
++@@ -2604,6 +2604,8 @@ async def test_drop_auth_on_redirect_to_other_host(
++     async def srv_to(request):
++         assert request.host == url_to.host
++         assert "Authorization" not in request.headers, "Header wasn't dropped"
+++        assert "Proxy-Authorization" not in request.headers
+++        assert "Cookie" not in request.headers
++         return web.Response()
 + 
-+ 
-+-async def test_max_field_size_session_default(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(headers={"Custom": "x" * 8190})
-++async def test_max_field_size_session_default(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={"Custom": "x" * 8182})
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+     client = await aiohttp_client(app)
-+ 
-+-    async with await client.get("/") as resp:
-+-        assert resp.headers["Custom"] == "x" * 8190
-++    async with client.get("/") as resp:
-++        assert resp.headers["Custom"] == "x" * 8182
-+ 
-+ 
-+ async def test_max_field_size_session_default_fail(aiohttp_client) -> None:
-+@@ -3386,43 +3386,96 @@ async def test_max_field_size_session_default_fail(aiohttp_client) -> None:
-+         await client.get("/")
-+ 
-+ 
-+-async def test_max_field_size_session_explicit(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(headers={"Custom": "x" * 8191})
-++async def test_max_field_size_session_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={"Custom": "x" * 8192})
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+-    client = await aiohttp_client(app, max_field_size=8191)
-++    client = await aiohttp_client(app, max_field_size=8200)
-+ 
-+-    async with await client.get("/") as resp:
-+-        assert resp.headers["Custom"] == "x" * 8191
-++    async with client.get("/") as resp:
-++        assert resp.headers["Custom"] == "x" * 8192
-+ 
-+ 
-+-async def test_max_field_size_request_explicit(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(headers={"Custom": "x" * 8191})
-++async def test_max_headers_session_default(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={f"Custom-{i}": "x" for i in range(120)})
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+     client = await aiohttp_client(app)
-+ 
-+-    async with await client.get("/", max_field_size=8191) as resp:
-+-        assert resp.headers["Custom"] == "x" * 8191
-++    async with client.get("/") as resp:
-++        assert resp.headers["Custom-119"] == "x"
-+ 
-+ 
-+-async def test_max_line_size_session_default(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(status=200, reason="x" * 8190)
-++async def test_max_headers_session_default_fail(
-++    aiohttp_client: AiohttpClient,
-++) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={f"Custom-{i}": "x" for i in range(129)})
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+     client = await aiohttp_client(app)
-++    with pytest.raises(aiohttp.ClientResponseError):
-++        await client.get("/")
-+ 
-+-    async with await client.get("/") as resp:
-+-        assert resp.reason == "x" * 8190
-++
-++async def test_max_headers_session_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={f"Custom-{i}": "x" for i in range(130)})
-++
-++    app = web.Application()
-++    app.add_routes([web.get("/", handler)])
-++
-++    client = await aiohttp_client(app, max_headers=140)
-++
-++    async with client.get("/") as resp:
-++        assert resp.headers["Custom-129"] == "x"
-++
-++
-++async def test_max_headers_request_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={f"Custom-{i}": "x" for i in range(130)})
-++
-++    app = web.Application()
-++    app.add_routes([web.get("/", handler)])
-++
-++    client = await aiohttp_client(app)
-++
-++    async with client.get("/", max_headers=140) as resp:
-++        assert resp.headers["Custom-129"] == "x"
-++
-++
-++async def test_max_field_size_request_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(headers={"Custom": "x" * 8192})
-++
-++    app = web.Application()
-++    app.add_routes([web.get("/", handler)])
-++
-++    client = await aiohttp_client(app)
-++
-++    async with client.get("/", max_field_size=8200) as resp:
-++        assert resp.headers["Custom"] == "x" * 8192
-++
-++
-++async def test_max_line_size_session_default(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(status=200, reason="x" * 8177)
-++
-++    app = web.Application()
-++    app.add_routes([web.get("/", handler)])
-++
-++    client = await aiohttp_client(app)
-++
-++    async with client.get("/") as resp:
-++        assert resp.reason == "x" * 8177
-+ 
-+ 
-+ async def test_max_line_size_session_default_fail(aiohttp_client) -> None:
-+@@ -3437,30 +3490,30 @@ async def test_max_line_size_session_default_fail(aiohttp_client) -> None:
-+         await client.get("/")
-+ 
-+ 
-+-async def test_max_line_size_session_explicit(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(status=200, reason="x" * 8191)
-++async def test_max_line_size_session_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(status=200, reason="x" * 8197)
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+-    client = await aiohttp_client(app, max_line_size=8191)
-++    client = await aiohttp_client(app, max_line_size=8210)
-+ 
-+-    async with await client.get("/") as resp:
-+-        assert resp.reason == "x" * 8191
-++    async with client.get("/") as resp:
-++        assert resp.reason == "x" * 8197
-+ 
-+ 
-+-async def test_max_line_size_request_explicit(aiohttp_client) -> None:
-+-    async def handler(request):
-+-        return web.Response(status=200, reason="x" * 8191)
-++async def test_max_line_size_request_explicit(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.Response:
-++        return web.Response(status=200, reason="x" * 8197)
-+ 
-+     app = web.Application()
-+     app.add_routes([web.get("/", handler)])
-+ 
-+     client = await aiohttp_client(app)
-+ 
-+-    async with await client.get("/", max_line_size=8191) as resp:
-+-        assert resp.reason == "x" * 8191
-++    async with client.get("/", max_line_size=8210) as resp:
-++        assert resp.reason == "x" * 8197
-+ 
-+ 
-+ @pytest.mark.xfail(raises=asyncio.TimeoutError, reason="#7599")
-+diff --git a/tests/test_http_exceptions.py b/tests/test_http_exceptions.py
-+index 24944d9fc..6186a71c6 100644
-+--- a/tests/test_http_exceptions.py
-++++ b/tests/test_http_exceptions.py
-+@@ -69,32 +69,32 @@ class TestBadHttpMessage:
-+ 
-+ class TestLineTooLong:
-+     def test_ctor(self) -> None:
-+-        err = http_exceptions.LineTooLong("spam", "10", "12")
-++        err = http_exceptions.LineTooLong(b"spam", 10)
-+         assert err.code == 400
-+-        assert err.message == "Got more than 10 bytes (12) when reading spam."
-++        assert err.message == "Got more than 10 bytes when reading: b'spam'."
-+         assert err.headers is None
-+ 
-+     def test_pickle(self) -> None:
-+-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
-++        err = http_exceptions.LineTooLong(line=b"spam", limit=10, actual_size="12")
-+         err.foo = "bar"
-+         for proto in range(pickle.HIGHEST_PROTOCOL + 1):
-+             pickled = pickle.dumps(err, proto)
-+             err2 = pickle.loads(pickled)
-+             assert err2.code == 400
-+-            assert err2.message == ("Got more than 10 bytes (12) " "when reading spam.")
-++            assert err2.message == ("Got more than 10 bytes when reading: b'spam'.")
-+             assert err2.headers is None
-+             assert err2.foo == "bar"
-+ 
-+     def test_str(self) -> None:
-+-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
-+-        expected = "400, message:\n  Got more than 10 bytes (12) when reading spam."
-++        err = http_exceptions.LineTooLong(line=b"spam", limit=10)
-++        expected = "400, message:\n  Got more than 10 bytes when reading: b'spam'."
-+         assert str(err) == expected
-+ 
-+     def test_repr(self) -> None:
-+-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
-++        err = http_exceptions.LineTooLong(line=b"spam", limit=10)
-+         assert repr(err) == (
-+-            "<LineTooLong: 400, message='Got more than "
-+-            "10 bytes (12) when reading spam.'>"
-++            '<LineTooLong: 400, message="Got more than '
-++            "10 bytes when reading: b'spam'.\">"
++     server_from = await create_server_for_url_and_handler(url_from, srv_from)
++@@ -2646,11 +2648,16 @@ async def test_drop_auth_on_redirect_to_other_host(
++         resp = await client.get(
++             url_from,
++             auth=aiohttp.BasicAuth("user", "pass"),
+++            headers={"Proxy-Authorization": "Basic dXNlcjpwYXNz", "Cookie": "a=b"},
 +         )
-+ 
-+ 
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 9449c4061..ea8c338e0 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -20,7 +20,9 @@ from aiohttp.http_parser import (
-+     NO_EXTENSIONS,
-+     DeflateBuffer,
-+     HttpPayloadParser,
-++    HttpRequestParser,
-+     HttpRequestParserPy,
-++    HttpResponseParser,
-+     HttpResponseParserPy,
-+     HttpVersion,
-+ )
-+@@ -66,7 +68,7 @@ def parser(loop: Any, protocol: Any, request: Any):
-+         loop,
-+         2**16,
-+         max_line_size=8190,
-+-        max_headers=32768,
-++        max_headers=128,
-+         max_field_size=8190,
-+     )
-+ 
-+@@ -85,7 +87,7 @@ def response(loop: Any, protocol: Any, request: Any):
-+         loop,
-+         2**16,
-+         max_line_size=8190,
-+-        max_headers=32768,
-++        max_headers=128,
-+         max_field_size=8190,
-+     )
-+ 
-+@@ -297,9 +299,20 @@ def test_parse_headers_longline(parser: Any) -> None:
-+         parser.feed_data(text)
-+ 
-+ 
-++@pytest.fixture
-++def xfail_c_parser_status(request) -> None:
-++    if isinstance(request.getfixturevalue("parser"), HttpRequestParserPy):
-++        return
-++    request.node.add_marker(
-++        pytest.mark.xfail(
-++            reason="Regression test for Py parser. May match C behaviour later.",
-++            raises=http_exceptions.BadStatusLine,
-++        )
-++    )
-++
-++
-++@pytest.mark.usefixtures("xfail_c_parser_status")
-+ def test_parse_unusual_request_line(parser) -> None:
-+-    if not isinstance(response, HttpResponseParserPy):
-+-        pytest.xfail("Regression test for Py parser. May match C behaviour later.")
-+     text = b"#smol //a HTTP/1.3\r\n\r\n"
-+     messages, upgrade, tail = parser.feed_data(text)
-+     assert len(messages) == 1
-+@@ -696,13 +709,14 @@ def test_max_header_field_size(parser, size) -> None:
-+     name = b"t" * size
-+     text = b"GET /test HTTP/1.1\r\n" + name + b":data\r\n\r\n"
-+ 
-+-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-+     with pytest.raises(http_exceptions.LineTooLong, match=match):
-+-        parser.feed_data(text)
-++        for i in range(0, len(text), 5000):  # pragma: no branch
-++            parser.feed_data(text[i : i + 5000])
-+ 
-+ 
-+-def test_max_header_field_size_under_limit(parser) -> None:
-+-    name = b"t" * 8190
-++def test_max_header_size_under_limit(parser: HttpRequestParser) -> None:
-++    name = b"t" * 8185
-+     text = b"GET /test HTTP/1.1\r\n" + name + b":data\r\n\r\n"
-+ 
-+     messages, upgrade, tail = parser.feed_data(text)
-+@@ -724,14 +738,68 @@ def test_max_header_value_size(parser, size) -> None:
-+     name = b"t" * size
-+     text = b"GET /test HTTP/1.1\r\n" b"data:" + name + b"\r\n\r\n"
-+ 
-+-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-++    with pytest.raises(http_exceptions.LineTooLong, match=match):
-++        for i in range(0, len(text), 4000):  # pragma: no branch
-++            parser.feed_data(text[i : i + 4000])
-++
-++
-++def test_max_header_combined_size(parser: HttpRequestParser) -> None:
-++    k = b"t" * 4100
-++    text = b"GET /test HTTP/1.1\r\n" + k + b":" + k + b"\r\n\r\n"
-++
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-+     with pytest.raises(http_exceptions.LineTooLong, match=match):
-+         parser.feed_data(text)
-+ 
-+ 
-+-def test_max_header_value_size_under_limit(parser) -> None:
-+-    value = b"A" * 8190
-+-    text = b"GET /test HTTP/1.1\r\n" b"data:" + value + b"\r\n\r\n"
-++@pytest.mark.parametrize("size", [40960, 8191])
-++async def test_max_trailer_size(parser: HttpRequestParser, size: int) -> None:
-++    value = b"t" * size
-++    text = (
-++        b"GET /test HTTP/1.1\r\nTransfer-Encoding: chunked\r\n\r\n"
-++        + hex(4000)[2:].encode()
-++        + b"\r\n"
-++        + b"b" * 4000
-++        + b"\r\n0\r\ntest: "
-++        + value
-++        + b"\r\n\r\n"
-++    )
-++
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-++    with pytest.raises(http_exceptions.LineTooLong, match=match):
-++        payload = None
-++        for i in range(0, len(text), 3000):  # pragma: no branch
-++            messages, upgrade, tail = parser.feed_data(text[i : i + 3000])
-++            if messages:
-++                payload = messages[0][-1]
-++        # Trailers are not seen until payload is read.
-++        assert payload is not None
-++        await payload.read()
-++
-++
-++@pytest.mark.parametrize("headers,trailers", ((129, 0), (0, 129), (64, 65)))
-++async def test_max_headers(
-++    parser: HttpRequestParser, headers: int, trailers: int
-++) -> None:
-++    text = (
-++        b"GET /test HTTP/1.1\r\nTransfer-Encoding: chunked"
-++        + b"".join(b"\r\nHeader-%d: Value" % i for i in range(headers))
-++        + b"\r\n\r\n4\r\ntest\r\n0"
-++        + b"".join(b"\r\nTrailer-%d: Value" % i for i in range(trailers))
-++        + b"\r\n\r\n"
-++    )
-++
-++    match = "Too many (headers|trailers) received"
-++    with pytest.raises(http_exceptions.BadHttpMessage, match=match):
-++        messages, upgrade, tail = parser.feed_data(text)
-++        # Trailers are not seen until payload is read.
-++        await messages[0][-1].read()
-++
-++
-++def test_max_header_value_size_under_limit(parser: HttpRequestParser) -> None:
-++    value = b"A" * 8185
-++    text = b"GET /test HTTP/1.1\r\ndata:" + value + b"\r\n\r\n"
-+ 
-+     messages, upgrade, tail = parser.feed_data(text)
-+     msg = messages[0][0]
-+@@ -752,13 +820,16 @@ def test_max_header_value_size_continuation(response, size) -> None:
-+     name = b"T" * (size - 5)
-+     text = b"HTTP/1.1 200 Ok\r\ndata: test\r\n " + name + b"\r\n\r\n"
-+ 
-+-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-+     with pytest.raises(http_exceptions.LineTooLong, match=match):
-+-        response.feed_data(text)
-++        for i in range(0, len(text), 9000):  # pragma: no branch
-++            response.feed_data(text[i : i + 9000])
-+ 
-+ 
-+-def test_max_header_value_size_continuation_under_limit(response) -> None:
-+-    value = b"A" * 8185
-++def test_max_header_value_size_continuation_under_limit(
-++    response: HttpResponseParser,
-++) -> None:
-++    value = b"A" * 8179
-+     text = b"HTTP/1.1 200 Ok\r\ndata: test\r\n " + value + b"\r\n\r\n"
-+ 
-+     messages, upgrade, tail = response.feed_data(text)
-+@@ -956,13 +1027,13 @@ def test_http_request_parser_bad_nonascii_uri(parser: Any) -> None:
-+ @pytest.mark.parametrize("size", [40965, 8191])
-+ def test_http_request_max_status_line(parser, size) -> None:
-+     path = b"t" * (size - 5)
-+-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-+     with pytest.raises(http_exceptions.LineTooLong, match=match):
-+         parser.feed_data(b"GET /path" + path + b" HTTP/1.1\r\n\r\n")
-+ 
-+ 
-+-def test_http_request_max_status_line_under_limit(parser) -> None:
-+-    path = b"t" * (8190 - 5)
-++def test_http_request_max_status_line_under_limit(parser: HttpRequestParser) -> None:
-++    path = b"t" * 8172
-+     messages, upgraded, tail = parser.feed_data(
-+         b"GET /path" + path + b" HTTP/1.1\r\n\r\n"
-+     )
-+@@ -1039,13 +1110,15 @@ def test_http_response_parser_strict_obs_line_folding(response: Any) -> None:
-+ @pytest.mark.parametrize("size", [40962, 8191])
-+ def test_http_response_parser_bad_status_line_too_long(response, size) -> None:
-+     reason = b"t" * (size - 2)
-+-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
-++    match = "400, message:\n  Got more than 8190 bytes when reading"
-+     with pytest.raises(http_exceptions.LineTooLong, match=match):
-+         response.feed_data(b"HTTP/1.1 200 Ok" + reason + b"\r\n\r\n")
-+ 
-+ 
-+-def test_http_response_parser_status_line_under_limit(response) -> None:
-+-    reason = b"O" * 8190
-++def test_http_response_parser_status_line_under_limit(
-++    response: HttpResponseParser,
-++) -> None:
-++    reason = b"O" * 8177
-+     messages, upgraded, tail = response.feed_data(
-+         b"HTTP/1.1 200 " + reason + b"\r\n\r\n"
-+     )
-+@@ -1552,7 +1625,7 @@ def test_parse_bad_method_for_c_parser_raises(loop, protocol):
-+         loop,
-+         2**16,
-+         max_line_size=8190,
-+-        max_headers=32768,
-++        max_headers=128,
-+         max_field_size=8190,
-+     )
-+ 
-+@@ -1867,7 +1940,7 @@ class TestDeflateBuffer:
-+         dbuf = DeflateBuffer(buf, "deflate")
-+ 
-+         # Feed compressed data in chunks (simulating network streaming)
-+-        for i in range(0, len(compressed), chunk_size):
-++        for i in range(0, len(compressed), chunk_size):  # pragma: no branch
-+             chunk = compressed[i : i + chunk_size]
-+             dbuf.feed_data(chunk, len(chunk))
++         assert resp.status == 200
++         resp = await client.get(
++             url_from,
++-            headers={"Authorization": "Basic dXNlcjpwYXNz"},
+++            headers={
+++                "Authorization": "Basic dXNlcjpwYXNz",
+++                "Proxy-Authorization": "Basic dXNlcjpwYXNz",
+++                "Cookie": "a=b",
+++            },
++         )
++         assert resp.status == 200
 + 
 +-- 
 +2.35.6
 +
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index feb9039ae1..8b835341f3 100644
+index 245abe4b89..3e4513b811 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -16,6 +16,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
-            file://CVE-2025-69229_p2.patch \
-            file://CVE-2025-69227.patch \
-            file://CVE-2025-69223.patch \
-+           file://CVE-2026-22815.patch \
+@@ -20,6 +20,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
+            file://CVE-2026-34514.patch \
+            file://CVE-2026-34513.patch \
+            file://CVE-2026-34993.patch \
++           file://CVE-2026-34518.patch \
             "
  
  PYPI_PACKAGE = "aiohttp"
