@@ -1,96 +1,167 @@
-Return-Path: <claus.stovgaard@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7BA5C624A4
-	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 12:33:30 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28465.1788179603181662800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DAD6C61DFD
+	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 18:20:58 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2787.1788200447920397710
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Aug 2026 05:33:23 -0700
+ Mon, 31 Aug 2026 11:20:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JmsR27p8;
- spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: claus.stovgaard@gmail.com)
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6a6108734d5so4962918a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 05:33:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bgGYHIvH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-867a943b149so13525787b3.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 11:20:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788200447; cv=none;
+        d=google.com; s=arc-20260327;
+        b=SBqSXaMlDeqpz5gSZa6IfBpVlNdhSb1IF6rw0wsDy9hCorVtBRPMMrCZPoIKs5bxcw
+         9AqwMUQkROsvagVyXDwHo1B+7hsf33qm7/a/CbwvvUpy+1l9wea38H/ffg6HJWvyfmR5
+         4mNRlAYZyr8iUX5Cz2Xwrmovfk4Rb7TwuMsCBH/WkyYNspvyhj8L5q7C6RnTK6sRaa6m
+         21pJZJDAKzEGKDI3mz78QOEjp1qoQpydBr38hy1QZH3hhHFU8NtyOI1VX6XKJnTk/Y3P
+         DDuW5wK9BcJLTdjULsFytPEDOIj6W2CkYEQvxdl4fw2TyDWjdeA2wvfYR9TLrU5VW1Bu
+         r2ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=HL9BT29o6XHCx7uG1nxRLmmWcL93uwTQL3zsb50iUgk=;
+        fh=XyteQOs12r/HTT1NfTJVcWKVKgrmlF3PZh/pATJLdJk=;
+        b=IYoCPnh9vvqIjJDvTjNEBgjdOf/9zditHntCREMOSy2YfuGSqCs676/Hw/hYtNX/QP
+         vcxpScOfEfW2W/tZlxK1OQafuHf7sOj7tBHPfkmQPuAOvTmJRN/uZLag4Xfsq/nm1C9w
+         LNDr8ogoToauU7hUjo3Ibpmhq2zuMQubCJbcC/FM5RS/9iceZF0XyHZjL0/S98Y+QGtA
+         TQOTiXVLDCb9tB8TKwxL3+oJiGTQTPb7wCYsIsd4YeoDrRxZ+CosX4KfeuEvQA5UADcJ
+         oK87UCin0GrQnXvU12GwVghjw+zZCvEBHCtu/qzac7XXpRWSzR7qM1Yms3E53W63sY1P
+         NRaw==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788179601; x=1788784401; darn=lists.openembedded.org;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=McqlbsIOJ1KdeMcke2fBpRuLTjrP6HjNa4Sa2hFOZLw=;
-        b=JmsR27p8N0S60SNHddrzfK1FTqchurne5h3ALRq2dSnFUuwwJoEAW3XF4+6KmV4SFa
-         iQM7xC2aTE8EG2iACnGqWeZQZ+NOT3e9OH4wTD7rBo2KlGkFkCshUH3JIkRlzad8bX/j
-         idiJmtu0SaHBVRrH685s0IpxKKWsl93ita0lfUSI7DsIBRvKsfaQE9f8bnVmjUs0+HwI
-         ZfdCGhSQFkg/7UR9/DxoKxXoHNXV3KuGTLiX+iskr8aJUw7GQjnp7/gGt6L1Mv72ZEZk
-         0ZBvv3KWsv3yg53Fn03dwjC1IdifPqjzIAwsEVmsRn0HkW9wnFLMkPkI3FdJkb+Ylcjz
-         8BrQ==
+        d=gmail.com; s=20251104; t=1788200447; x=1788805247; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=HL9BT29o6XHCx7uG1nxRLmmWcL93uwTQL3zsb50iUgk=;
+        b=bgGYHIvH2rPr5D+l690lksza9kBrQa/WKD5xG8Y67qQq9Ots1oBOIRb+OTxbYAMfvd
+         hl2Z+Ta4OPurkwAwJHfgWmWYHdmWjc+ZIk12R9E6GZXbR7qP6EeTwtgurueBdI5EsxGY
+         IqYSwybfWj6vj0XucVy2uYTFEgslXuWRv2eG7fUEwED8Z2cNoeXT8UeMcWkceNMsKCXv
+         xnWiCo2LdB6arpHFEcP/OEEliEo3t18FQe5RmnRZ/Bjuac41cNvBVnTTRSrj9gJAY0Xz
+         725uyiZeX6OumdOq/68VI1hxsA0aNIDOE37/rcsIz/DMQ1q2g4eStKeTLtG/zQ2RALHI
+         1VWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788179601; x=1788784401;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+        d=1e100.net; s=20251104; t=1788200447; x=1788805247;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=McqlbsIOJ1KdeMcke2fBpRuLTjrP6HjNa4Sa2hFOZLw=;
-        b=PUgGQWHZTmxRDo9x0XdXKJhG9Cpuu1a8gD/wU8790TqID1iq9DJ1GRZx+5YOdswR7z
-         2UDSk5/2TI2K40ETrWqprobPiZuNWJjW5YEARq7gdmNW4mpYnWcJZWswczNNnOgXhHE5
-         Wy1qfPWI02/sGBDu+UJ0I6CU/jjUgCs8GD7oUkG1sE3ZccfUZC0e0C9Pxd5fQg6P1B1g
-         /FuhnxIGBA8RhFNj512/F0Hr3+Ta9wFSI76+elbsG9v6HEw5ryzhIh4HO8PHcT7qAn93
-         b0m7U/3D4rpBk7BCcQcFbslqGeTHOa7ew8Gs3FPNlpjZ8mMO6qRvWvfV7/Cx50gF1mD0
-         8law==
-X-Gm-Message-State: AFuF++lLeIw9aiIqF5+SkmpgDKgY2JHmQab9WIQ9bRjOxUjE66m6a9z8
-	f+/a4Y5VOXTWJVuwagAJMoeGCuyQ7YR/ckWk9SeqROktLV0Pt+o6Dvqn2qB+fg==
-X-Gm-Gg: AR+sD10qYRbTyrUGlHTi4PGcDCIbgysmrX3br1qgZPyNsF13hLf+C2wa2EZCBaU33LI
-	WyNieqZvoeZegL8RpRw52LuzWqquRVW87vTuBj7/Jg21Hps+YAtCiUaYB74PFB1dYRGdybJnNg3
-	0oT5XpBByOojJ6KYQDNjLmmerEanb1j4oOcnwhhVCrCafKUMQa6roFvFd5CXbEPmSIvK55zcGg5
-	BTCe3nDN20cEnaxS8hF7X/Fua+fVy4mSPTvkDPK0pgN/iXjGmcyltBAmy8KbpMjuOfIm9txebBX
-	QLFWdqf9T2+s99kVyhruEkUAJvsHJOx1vEND9suot27jjze0Lh3uO6xLj0AIK+Vf9Op7r3zS6UO
-	kY+omvPZMLxS7IiwcS79PnM0Npvp1mhRi6JUrA/1AK72NLZiC55cHREpIUGYrGmdLj+pVFnAJXt
-	u1kF1KTQJLGhCRseBkkYxqEI/lXz5Xft7WTIV0B7Ep4u+5cp28jmfEgK7HoKtyegIeljbF39K2r
-	10rJYw9qhWGPAuRDVbU+X0tEpS/trQ=
-X-Received: by 2002:a17:906:4ed4:b0:c25:6c9a:88bc with SMTP id a640c23a62f3a-c25b3d8a1d8mr7246666b.19.1788179601169;
-        Mon, 31 Aug 2026 05:33:21 -0700 (PDT)
-Received: from [10.6.153.68] ([92.241.207.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255ee09f4dsm450398466b.6.2026.08.31.05.33.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 05:33:20 -0700 (PDT)
-Message-ID: <103f7572ffdb430fe8b62a5952a2d1f8259a6c96.camel@gmail.com>
-Subject: Re: [oe] [PATCH] android-tools: Install bootimg utilities
-From: Claus Stovgaard <claus.stovgaard@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Claus Stovgaard <claus@stovgaard.com>, dmitry.baryshkov@oss.qualcomm.com
-Date: Mon, 31 Aug 2026 14:33:19 +0200
-In-Reply-To: <18D0DE585042602A.892917@lists.openembedded.org>
-References: <18D0DE585042602A.892917@lists.openembedded.org>
+        bh=HL9BT29o6XHCx7uG1nxRLmmWcL93uwTQL3zsb50iUgk=;
+        b=mMkw1KSVCxQb1lyOI6Bj5RlMMhJmqi0HwiIJfTeHT9fxi4gHtjo+8+FDkKPLBIgOKa
+         8RBPU4EF7KC+SYoYzrjIiFpPM10+G78Okd/1PHZCGvBieek8EUjnIWVjx1VtwbNCf0Xh
+         gTD5tYlkQEqgDm8fr5dhWcEVFFrA4FjA7hQkLKDwZveCGl8e+ikH4JQIouNp6SIUpmAc
+         QKjkQuS5+8CuOXu/6n5gjNWAClMkBC1plkdefU0evKDyhZIr15pjfj9bLc7U1EUIrKoL
+         Y36E0q/4/h+EklUxVhY0Dhet1gsRcTPQaqogpTshm5F8CDnfjipnmolwebVYl1rjst7d
+         wLpQ==
+X-Gm-Message-State: AFuF++mFl5Ywf+uAyfOr7J4afeUOnXSrf82x0X2f27waGNSJXjSVrvfS
+	q+guvdtiDsBtjtbsFfVRx0VYuCnSlPJMME7PBMzL+ATWiNUQi3U0ZoQEh6nCPiL73kPlYkaow/M
+	wWmMnUQ0NTmKQKUDivc2FECJHy48utaw8BRtO
+X-Gm-Gg: AYBFou3Z8FQy+VhMYUTun4cOP6dRqWHLJRpZ7pryUIv8X9D/1UOm0/GqJaMs62hyIP0
+	cfDP5NjqYxgi80uKAzgd80Nv2Dooz2qBwCvjQl+HFUZigFIUQqlKgrzMA5Awe8zMIYLkj8RAbPT
+	WqmG8JRahvusj1pNe0lPdv25h4DaSei5nip/gNkmi/eQPgZrKHoLkGnNGlqkFgPFpf6X1oq7rxX
+	lBPNDc6/g8Z7HQXFxNRAagf62SSXwS8t2cku0ovE6QONw8+hsyQ46Sr8ogQUmons8YlRg3Vn3ay
+	y4dihNIYUjKsXprXSneAI7OTF9ssGplvSEh+e/r+r27SasZXjVcXHXmRXPbHt4Uxp6S05PcZhys
+	P4XV94+IhbQ4VYelSJnX5jAnEuzmHqyau
+X-Received: by 2002:a05:690c:4017:b0:85d:42c3:d00b with SMTP id
+ 00721157ae682-8686f52b910mr14399017b3.9.1788200441946; Mon, 31 Aug 2026
+ 11:20:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <CABF_=yheHCLAo=jCHROfC6k99652Kg73tZBJie1woRcgA8ccFw@mail.gmail.com>
+ <CABF_=yird-Xz_nEWtVbgeve0WC2FH_Bq8Nu39kx2-DveyaHZZA@mail.gmail.com> <CAMKF1spidgd5zZgf98evVWEHgPeMXTg99tc6F7pojOhnuZZVLw@mail.gmail.com>
+In-Reply-To: <CAMKF1spidgd5zZgf98evVWEHgPeMXTg99tc6F7pojOhnuZZVLw@mail.gmail.com>
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Mon, 31 Aug 2026 20:20:17 +0200
+X-Gm-Features: AcwNN1WrpoQmUID9BG81cu10XHSDKaCI-tnr21iAWF4wBz3aCBR1_6aNk6SQnew
+Message-ID: <CABF_=yi3d7PaBu+ps1yHFx42PtPKMJRhziJJJ25HDmr1uA2YxQ@mail.gmail.com>
+Subject: Re: [oe] When can a recipe scattered around be ready to promote to meta-openembedded?
+To: raj.khem@gmail.com, Tom Geelen <t.f.g.geelen@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 
-MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 12:33:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129613
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 18:20:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129614
 
-On Mon, 2026-08-31 at 12:51 +0200, Claus Stovgaard via
-lists.openembedded.org wrote:
-> =C2=A0
-> +do_install:append:class-native() {
-> +=C2=A0=C2=A0=C2=A0 install -d ${D}${bindir}
-> +=C2=A0=C2=A0=C2=A0 install -m0755 ${S}/system/tools/mkbootimg/mkbootimg.=
-py
-> ${D}${bindir}
-> +=C2=A0=C2=A0=C2=A0 install -m0755 ${S}/system/tools/mkbootimg/unpack_boo=
-timg.py
-> ${D}${bindir}
-> +}
->=20
+Tom,
 
-Hi folks. I am a bit in doubt about if RDEPENDS for the python scripts
-is needed. As the scripts are using "core" functions, I would expect
-the python available from the env is able to run them and have not
-added any RDEPENDS.
+Would you mind if I bring your version of python3-construct of
+meta-homeassistant to meta-python?
+And update to the latest release?
 
-Regards
-Claus
+br
+
+On Sun, Aug 30, 2026 at 8:31=E2=80=AFPM Khem Raj via lists.openembedded.org
+<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> Being in multiple layers is a good argument to bring it into common layer=
+s along with that it should be a maintained package upstream. I would also =
+suggest to add ptests when bringing in and update to latest version. Once m=
+erged, notify the respective layers about the move as they might need to ad=
+just for future releases. Ensure that it does not create additional layer d=
+ependency for the target layer where it is being proposed for.
+>
+> On Sun, Aug 30, 2026 at 11:22=E2=80=AFAM Jan Vermaete via lists.openembed=
+ded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org> wrote:
+>>
+>> Let me redo, without sending it too fast :-(
+>>
+>> For example the recipe python3-construct
+>> (https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dp=
+ython3-construct)
+>> exist in 5 different layers.
+>>
+>> Although it didn't had a release in the near past
+>> (https://pypi.org/project/construct/), those 5 layers kind of prove
+>> it's a useful thing to have.
+>>
+>> So, when and how to promote this to meta-python?
+>>
+>> On Sun, Aug 30, 2026 at 8:19=E2=80=AFPM jan vermaete <jan.vermaete@gmail=
+.com> wrote:
+>> >
+>> > For example the recipe python3-construct
+>> > (https://layers.openembedded.org/layerindex/branch/master/recipes/?q=
+=3Dpython3-construct)
+>> > exist in 5 different layers
+>> >
+>> >
+>> > openembedded-devel@lists.openembedded.org
+>> >
+>> > --
+>> > Jan Vermaete
+>> > =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Ham=
+el
+>>
+>>
+>>
+>> --
+>> Jan Vermaete
+>> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
+>>
+>>
+>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#129599): https://lists.openembedded.org/g/openembedde=
+d-devel/message/129599
+> Mute This Topic: https://lists.openembedded.org/mt/121002496/2167232
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [j=
+an.vermaete@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+
+
+--=20
+Jan Vermaete
+=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
