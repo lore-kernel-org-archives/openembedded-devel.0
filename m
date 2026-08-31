@@ -2,80 +2,82 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECA6FC624C9
-	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 04:57:51 +0000 (UTC)
-Received: from alln-iport-3.cisco.com (alln-iport-3.cisco.com [173.37.142.90])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22958.1788152269429499428
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1283FC624C8
+	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 04:57:52 +0000 (UTC)
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22957.1788152269275233289
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 30 Aug 2026 21:57:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=gcQHYdZx;
- spf=pass (domain: cisco.com, ip: 173.37.142.90, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=f6F+eVjv;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=15818; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=8351; q=dns/txt;
   s=iport01; t=1788152269; x=1789361869;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=7GFiNmy6LGnB0nWc7KXsar3NRs8VKjyVJwkueT62OeI=;
-  b=gcQHYdZxDQaMHW80haywSzHFExvnTVRaE6JDIOIJOzWC2rXfHJ5QWhPy
-   XAblPaVKWb2Vpv1hyij5wQl+PLZ/FtfQ81Mfpa4MxG0l0kFdzF7/5CxXR
-   S3A04FxW37ZxESb7xGGbAVMpKLbc+Mb1LflSTxpjmBGIng9Wpx6jr4rEb
-   X6/Gq3OZ0ZmrhfsQcS1Pb+9GVFGjBohaLKwp/fDqyEEywok9b0xZ3IfH4
-   OzyalcX5/exivLDI3X2LIxtlsKL4XP2wI1ecRZN3q2SB0XTrFpCUE1xu6
-   5hbytykPyxp8dMsLjQy4ew4hVYxOZQhArScugei3OIzdFLzqjnzCk+N7F
-   A==;
-X-CSE-ConnectionGUID: msKgOcuZS7+EGfKuIEPm4A==
-X-CSE-MsgGUID: g0HuDPdBSLOV0pOlWoi90A==
-X-IPAS-Result: =?us-ascii?q?A0DNAgCvCJVq/5UQJK1aglmCGD90XkNJlkoDi2SSN4F+D?=
- =?us-ascii?q?wEBAQ9EDQQBAYQ/RgKNcwImNQgOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBA?=
- =?us-ascii?q?QIBBwWBDhOGFQEHMg2GWgECAQMnCwEYAS0QHAMBAi8gCyMIGYIqWAGCOgM3A?=
- =?us-ascii?q?xHCA4F5M4EBgygBPwJDUNhLDYJYAQsUAYE4hT+CfwSBEIQPXRgBhHwnGxuBc?=
- =?us-ascii?q?oR+gQWBGkIBAYEnBguGbQSCInoSgVqBF4hIiEBIgR4DWSwBVRMNCgsHBYFmA?=
- =?us-ascii?q?zUSKhVuMh2BIz4XgQ0bBgWBHYEohA8jGTZ6gQlegSspYAESF4EJgggCglqCB?=
- =?us-ascii?q?QIBSUMOB0dTCQQLGA1IESw3FRkEPm4HjnofgVhTID03GgEqASJjPkEQUhGlK?=
- =?us-ascii?q?6AecQoog3aMIo8+hXwaM4QEgVeSQJJRC5h9jgqECZFXcIRpgWoCOIFHCwdwF?=
- =?us-ascii?q?TuCZwlKGQ+DN4oOZQ4Lg2CBf4NlxlUnMgIJMgEBBwIHDgMLgWiQAAEngVYBA?=
- =?us-ascii?q?Q?=
-IronPort-Data: A9a23:b+O+VKlfdG5Oq1W25bFWYgjo5gzQJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xJKXmHQafaIZWWnLtF0PI22/UMEvJPUyoBlTVNqrChnHltH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4Errav6+/SEUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+ZC31GONgWYubDpEsPrb8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FYgD2elQCnx8z
- qNbBR8DTQ2iqtqznJvuH4GAhux7RCXqFIobvnclyXTSCuwrBMmZBa7L/tRfmjw3g6iiH96HO
- JFfMmQpNUqGOkEeUrsUIMpWcOOAinrydzRZuVu9rqss6G+Vxwt0uFToGIqJI4faGpkExy50o
- ErJp0TkLikWHue77gTd6lWouejOzHvSDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
- 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUz7AWLj66R6AGDCy1dFHhKaccts4k9QjlCO
- kK1ou4FzAdH6NW9IU9xPJ/Oxd9uEUD59VM/WBI=
-IronPort-HdrOrdr: A9a23:3BAzI6D+kgQQHzLlHemO55DYdb4zR+YMi2TDGXofdfUzSL3+qy
- nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygck79
- YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a585+oJjsaE52JKGxCe3+mLnE=
-X-Talos-CUID: 9a23:3VsKH2PJsyJ/0O5DXTJE+2kfB/IeLT7w43nzPm6VMWM1YejA
-X-Talos-MUID: =?us-ascii?q?9a23=3Aj5EG0Qwr4br+l6m4hegqstkUhvmaqKv2KF0hqZk?=
- =?us-ascii?q?sgO2jC3RoHDOiizXmGqZyfw=3D=3D?=
+  bh=LEs985LE3WRjSvdleMTa3lNSEc2CXA7+w/sYRat5l7Q=;
+  b=f6F+eVjvhC9mmqr34GerUvaZ+zHF6GtSMwkrqKjfrVnPAH+6G0uKjxYT
+   NZZ5L6m5C1uwb2zSmZrWIe2A7in5ILOWbKCQVyYxdtplAZl7U08/ICFfH
+   VbzvzzA+2NeBHxj011y7JQy1JF87iVpRElzRAjvSklWZ55Ww/OtStYd6F
+   PNJQNEvF0L+9mXbdMJnFhug/OB1oazmv1QF1qixORepeTBlQaKE6L5kBa
+   jhBsEFofcgopEXIKIiNT7A1VOA2CqTCEOnpaRxYhCWexv0SaodR7yd1qL
+   /ycknPjeZfWjjWaOGUM72hmTf8IxO3rCKSOZBzwpGKLyyhe9iVvhVvgoI
+   Q==;
+X-CSE-ConnectionGUID: g95PSEaVQ8Kw2U6XGcAKgg==
+X-CSE-MsgGUID: SotVk6j+QHm30PxzyB7MNg==
+X-IPAS-Result: =?us-ascii?q?A0BLAgAsCZVq/5UQJK1aHgEBCxIMggULgld0XkNJhFeRc?=
+ =?us-ascii?q?wOeG4F+DwEBAQ9EDQQBAYQ/RgKNcwImNAkOAQIEAwIDAQEBAQEBAQEBAQELA?=
+ =?us-ascii?q?QEFAQEBAgEHBYEOE4ZPDYZaAQIBAyMECwEYAS0QHAMBAgMCJgICKyMIEAmDA?=
+ =?us-ascii?q?gGCdAMRwgF6fzOBAYMoAT8CQ1DbMAELFAGBCi6FP4MfAYUCXRgBhHwnGxuBc?=
+ =?us-ascii?q?oQIdoEFgVwBAYU7gmoEgiKBDIFaHpIBSIECHANZLAFVEw0KCwcFgWYDNRIqF?=
+ =?us-ascii?q?W4yHYEjPhc1WBsGBYEdgSiEDyMZNnqBCV6BKylgARIXgQmCCAKCWoIFAgFJQ?=
+ =?us-ascii?q?w4HR1MJBAsYDUgRLDcVGQQ9AW4HjnofgksBgQ0BKgEXgX0pEZNYkXyhDwoog?=
+ =?us-ascii?q?3aMIpU6GjOqbAuYfY4KlgBQhGmBaDyBRwsHcBWDIglKGQ+OKg4Lg2CBf8o6J?=
+ =?us-ascii?q?zICCTIBAQcCBw4DC4FokAItgU8BAQ?=
+IronPort-Data: A9a23:zQ8YJKzfA93y0ajmDVJ6t+dmxyrEfRIJ4+MujC+fZmUNrF6WrkUFm
+ mEdWW/UbPjeazb1KdxwYIywoRkAvZDWy9JgSgo9+1hgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ 46aT/H3Ygf/hWYkaTpMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJE5nYLUj1+9JODFt6
+ qYldgAiZTmgiO3jldpXSsE07igiBMDvOIVavjRryivUSK98B5vCWK7No9Rf2V/chOgXQq2YP
+ JRfMGQpNUiRC/FMEg9/5JYWkOSlgnD+YjRwo1OOrq1x6G/WpOB0+Oi3a4aJJoLUHa25mG6jo
+ X74/Dr7QSg6MYfH8SqX41jzo8nAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZF+k8rQXIwa3O7kPAXC4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:d28VO6mVu2P/h0MA4q/Thn1nH3rpDfL03DAbv31ZSRFFG/FwWf
+ rAoB19726TtN9xYgBGpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdAUrsD0WKK+VSJcEfDH6xmpM
+ JdmsNFZuEYY2IXsS+D2njaL/8QhP+a7auvmeDSi11pTQ1sduVcyj0RMHfjLqWzLzM2fqbQ0/
+ Gnl7J6mwY=
+X-Talos-CUID: =?us-ascii?q?9a23=3A1adXZWnFAM1Ak/7g1CXRGeDL3UrXOXKMkU/rDka?=
+ =?us-ascii?q?GMDZKV+eoF2+/84pHnMU7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AxoeM/A9QIgLXG9o65bZdN1OQf/xv/5qtVkJOqLU?=
+ =?us-ascii?q?D4JG8JT5hEWi4qjviFw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,252,1779148800"; 
-   d="scan'208";a="841387491"
+   d="scan'208";a="823444660"
 Received: from alln-l-core-12.cisco.com ([173.36.16.149])
-  by alln-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 31 Aug 2026 04:57:48 +0000
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 31 Aug 2026 04:57:48 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 37E2818000159;
+	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 37DAD18000149;
 	Mon, 31 Aug 2026 04:57:48 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id CF22BCD02BA; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
+	id C5E16CCD9B2; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 3/9] python3-aiohttp: fix CVE-2025-69229
-Date: Sun, 30 Aug 2026 21:57:38 -0700
-Message-Id: <20260831045744.3321483-4-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 1/9] python3-aiohttp: fix CVE-2025-69224
+Date: Sun, 30 Aug 2026 21:57:36 -0700
+Message-Id: <20260831045744.3321483-2-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260831045744.3321483-1-dkelaiya@cisco.com>
 References: <20260831045744.3321483-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
@@ -83,424 +85,225 @@ X-Outbound-Node: alln-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 04:57:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129603
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 04:57:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129602
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the reviewed upstream fix commits shown in
-[1], [2], [3], and [4].
-The advisory identifying the fix is referenced in [5].
+[1] and [2]. The advisory identifying the fix is referenced in
+[3].
 
-[1] https://github.com/aio-libs/aiohttp/commit/dc3170b56904bdf814228fae70a5501a42a6c712
-[2] https://github.com/aio-libs/aiohttp/commit/271532ea355c65480c8ecc14137dfbb72aec8f6f
-[3] https://github.com/aio-libs/aiohttp/commit/4ed97a4e46eaf61bd0f05063245f613469700229
-[4] https://github.com/aio-libs/aiohttp/commit/1e4120e87daec963c67f956111e6bca44d7c3dea
-[5] https://nvd.nist.gov/vuln/detail/CVE-2025-69229
+The generated aiohttp/_http_parser.c changes are omitted. Add
+python3-cython-native and regenerate the C source from the patched
+_http_parser.pyx during do_configure.
+
+[1] https://github.com/aio-libs/aiohttp/commit/32677f2adfd907420c078dda6b79225c6f4ebce0
+[2] https://github.com/aio-libs/aiohttp/commit/5affd64f86d28a16a8f8e6fea2d217c99bf7831f
+[3] https://nvd.nist.gov/vuln/detail/CVE-2025-69224
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2025-69229_p1.patch   | 113 ++++++++
- .../python3-aiohttp/CVE-2025-69229_p2.patch   | 256 ++++++++++++++++++
- .../python/python3-aiohttp_3.9.5.bb           |   2 +
- 3 files changed, 371 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p2.patch
+ .../python3-aiohttp/CVE-2025-69224.patch      | 161 ++++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |  10 ++
+ 2 files changed, 171 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p1.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
 new file mode 100644
-index 0000000000..363b0c442e
+index 0000000000..d1a830e077
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p1.patch
-@@ -0,0 +1,113 @@
-+From cf6672ba61da0d4e52483ade0b06dea11cf4be55 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+@@ -0,0 +1,161 @@
++From 4c27b675ef3d1c5b3b0f379525be575ec0d8d15e Mon Sep 17 00:00:00 2001
 +From: Sam Bull <git@sambull.org>
-+Date: Sat, 3 Jan 2026 03:57:17 +0000
-+Subject: [PATCH] Use collections.deque for chunk splits (#11892) (#11912)
++Date: Sat, 3 Jan 2026 00:02:45 +0000
++Subject: [PATCH] Reject non-ascii characters in some headers (#11886) (#11902)
 +
-+CVE: CVE-2025-69229
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/dc3170b56904bdf814228fae70a5501a42a6c712]
-+
-+(cherry picked from commit 271532ea355c65480c8ecc14137dfbb72aec8f6f)
-+
-+---------
-+
-+Co-authored-by: Finder <nakamurajames123@gmail.com>
-+(cherry picked from commit dc3170b56904bdf814228fae70a5501a42a6c712)
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ aiohttp/streams.py        |  8 ++++----
-+ tests/test_http_parser.py | 14 +++++++++-----
-+ 2 files changed, 13 insertions(+), 9 deletions(-)
-+
-+diff --git a/aiohttp/streams.py b/aiohttp/streams.py
-+index b9b9c3fd9..eb652ff45 100644
-+--- a/aiohttp/streams.py
-++++ b/aiohttp/streams.py
-+@@ -122,7 +122,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+         self._loop = loop
-+         self._size = 0
-+         self._cursor = 0
-+-        self._http_chunk_splits: Optional[List[int]] = None
-++        self._http_chunk_splits: Optional[Deque[int]] = None
-+         self._buffer: Deque[bytes] = collections.deque()
-+         self._buffer_offset = 0
-+         self._eof = False
-+@@ -263,7 +263,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+                 raise RuntimeError(
-+                     "Called begin_http_chunk_receiving when" "some data was already fed"
-+                 )
-+-            self._http_chunk_splits = []
-++            self._http_chunk_splits = collections.deque()
-+ 
-+     def end_http_chunk_receiving(self) -> None:
-+         if self._http_chunk_splits is None:
-+@@ -419,7 +419,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+                 raise self._exception
-+ 
-+             while self._http_chunk_splits:
-+-                pos = self._http_chunk_splits.pop(0)
-++                pos = self._http_chunk_splits.popleft()
-+                 if pos == self._cursor:
-+                     return (b"", True)
-+                 if pos > self._cursor:
-+@@ -491,7 +491,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+         chunk_splits = self._http_chunk_splits
-+         # Prevent memory leak: drop useless chunk splits
-+         while chunk_splits and chunk_splits[0] < self._cursor:
-+-            chunk_splits.pop(0)
-++            chunk_splits.popleft()
-+ 
-+         if self._size < self._low_water and self._protocol._reading_paused:
-+             self._protocol.resume_reading()
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 0a868f286..62830c2bd 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -1188,7 +1188,8 @@ def test_http_request_chunked_payload(parser) -> None:
-+     parser.feed_data(b"4\r\ndata\r\n4\r\nline\r\n0\r\n\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-+@@ -1203,7 +1204,8 @@ def test_http_request_chunked_payload_and_next_message(parser) -> None:
-+     )
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+     assert len(messages) == 1
-+@@ -1227,12 +1229,13 @@ def test_http_request_chunked_payload_chunks(parser) -> None:
-+     parser.feed_data(b"test: test\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert not payload.is_eof()
-+ 
-+     parser.feed_data(b"\r\n")
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-+@@ -1243,7 +1246,8 @@ def test_parse_chunked_payload_chunk_extension(parser) -> None:
-+     parser.feed_data(b"4;test\r\ndata\r\n4\r\nline\r\n0\r\ntest: test\r\n\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p2.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p2.patch
-new file mode 100644
-index 0000000000..48c5695c6d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229_p2.patch
-@@ -0,0 +1,256 @@
-+From 3f47a9e32de41ca21d63510eec253f6e5aed55f2 Mon Sep 17 00:00:00 2001
-+From: Sam Bull <git@sambull.org>
-+Date: Sat, 3 Jan 2026 15:23:14 +0000
-+Subject: [PATCH] Limit number of chunks before pausing reading (#11894)
-+ (#11916)
-+
-+CVE: CVE-2025-69229
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/4ed97a4e46eaf61bd0f05063245f613469700229]
++CVE: CVE-2025-69224
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/32677f2adfd907420c078dda6b79225c6f4ebce0]
 +
 +Backport Changes:
-+- Omitted the entire `StreamReader.__slots__` block because
-+  aiohttp 3.9.5 does not use `__slots__` and allows instance
-+  attributes through its normal instance dictionary.
-+  The new `_high_water_chunks` and `_low_water_chunks`
-+  attributes are initialized directly in `__init__`, so no
-+  slots declaration is required.
++- Adapted the pure-Python `Transfer-Encoding` validation inline because
++  aiohttp 3.9.5 lacks the upstream `_is_chunked_te()` call path.
++- Backported the request/response upgrade distinction needed to apply the
++  non-ASCII request-header check while preserving CONNECT and HTTP 101
++  response handling.
++- Added the `ALLOWED_UPGRADES` definition from upstream prerequisite commit
++  c99a1e27375285149ea82cbdcc2f2c40e57596dc because aiohttp 3.9.5
++  predates it and the Cython parser otherwise fails to compile.
++- Retained aiohttp 3.9.5's supported `gzip`, `deflate`, and `br` content
++  encodings; omitted upstream zstd-specific code and test context because
++  this version lacks zstd decompression support.
++- Retained target-compatible `Any` test annotations because the older test
++  module does not import `HttpRequestParser`.
 +
-+(cherry picked from commit 1e4120e87daec963c67f956111e6bca44d7c3dea)
-+
-+Co-authored-by: J. Nick Koston <nick@koston.org>
-+(cherry picked from commit 4ed97a4e46eaf61bd0f05063245f613469700229)
++(cherry picked from commit 5affd64f86d28a16a8f8e6fea2d217c99bf7831f)
++(cherry picked from commit 32677f2adfd907420c078dda6b79225c6f4ebce0)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ aiohttp/streams.py    |  23 +++++-
-+ tests/test_streams.py | 170 ++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 192 insertions(+), 1 deletion(-)
++ aiohttp/_http_parser.pyx  | 18 +++++++++++++-----
++ aiohttp/http_parser.py    |  8 +++++---
++ tests/test_http_parser.py | 32 ++++++++++++++++++++++++++++++--
++ 3 files changed, 48 insertions(+), 10 deletions(-)
 +
-+diff --git a/aiohttp/streams.py b/aiohttp/streams.py
-+index eb652ff45..121528842 100644
-+--- a/aiohttp/streams.py
-++++ b/aiohttp/streams.py
-+@@ -119,6 +119,11 @@ class StreamReader(AsyncStreamReaderMixin):
-+         self._high_water = limit * 2
-+         if loop is None:
-+             loop = asyncio.get_event_loop()
-++        # Ensure high_water_chunks >= 3 so it's always > low_water_chunks.
-++        self._high_water_chunks = max(3, limit // 4)
-++        # Use max(2, ...) because there's always at least 1 chunk split remaining
-++        # (the current position), so we need low_water >= 2 to allow resume.
-++        self._low_water_chunks = max(2, self._high_water_chunks // 2)
-+         self._loop = loop
-+         self._size = 0
-+         self._cursor = 0
-+@@ -289,6 +294,15 @@ class StreamReader(AsyncStreamReaderMixin):
++diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
++index 7ea9b32ca..f1c130395 100644
++--- a/aiohttp/_http_parser.pyx
+++++ b/aiohttp/_http_parser.pyx
++@@ -47,6 +47,7 @@ include "_headers.pxi"
 + 
-+         self._http_chunk_splits.append(self.total_bytes)
++ from aiohttp cimport _find_header
 + 
-++        # If we get too many small chunks before self._high_water is reached, then any
-++        # .read() call becomes computationally expensive, and could block the event loop
-++        # for too long, hence an additional self._high_water_chunks here.
-++        if (
-++            len(self._http_chunk_splits) > self._high_water_chunks
-++            and not self._protocol._reading_paused
-++        ):
-++            self._protocol.pause_reading()
-++
-+         # wake up readchunk when end of http chunk received
-+         waiter = self._waiter
-+         if waiter is not None:
-+@@ -493,7 +507,14 @@ class StreamReader(AsyncStreamReaderMixin):
-+         while chunk_splits and chunk_splits[0] < self._cursor:
-+             chunk_splits.popleft()
+++ALLOWED_UPGRADES = frozenset({"websocket"})
++ DEF DEFAULT_FREELIST_SIZE = 250
 + 
-+-        if self._size < self._low_water and self._protocol._reading_paused:
-++        if (
-++            self._protocol._reading_paused
-++            and self._size < self._low_water
-++            and (
-++                self._http_chunk_splits is None
-++                or len(self._http_chunk_splits) < self._low_water_chunks
-++            )
-++        ):
-+             self._protocol.resume_reading()
-+         return data
++ cdef extern from "Python.h":
++@@ -425,8 +426,14 @@ cdef class HttpParser:
++         raw_headers = tuple(self._raw_headers)
++         headers = CIMultiDictProxy(self._headers)
 + 
-+diff --git a/tests/test_streams.py b/tests/test_streams.py
-+index 115371c80..ed65b567a 100644
-+--- a/tests/test_streams.py
-++++ b/tests/test_streams.py
-+@@ -1550,3 +1550,173 @@ async def test_stream_reader_iter_chunks_chunked_encoding(protocol) -> None:
++-        if upgrade or self._cparser.method == cparser.HTTP_CONNECT:
++-            self._upgraded = True
+++        if self._cparser.type == cparser.HTTP_REQUEST:
+++            h_upg = headers.get("upgrade", "")
+++            allowed = upgrade and h_upg.isascii() and h_upg.lower() in ALLOWED_UPGRADES
+++            if allowed or self._cparser.method == cparser.HTTP_CONNECT:
+++                self._upgraded = True
+++        else:
+++            if upgrade and self._cparser.status_code == 101:
+++                self._upgraded = True
 + 
-+ def test_isinstance_check() -> None:
-+     assert isinstance(streams.EMPTY_PAYLOAD, streams.StreamReader)
++         # do not support old websocket spec
++         if SEC_WEBSOCKET_KEY1 in headers:
++@@ -436,9 +443,10 @@ cdef class HttpParser:
++         enc = self._content_encoding
++         if enc is not None:
++             self._content_encoding = None
++-            enc = enc.lower()
++-            if enc in ('gzip', 'deflate', 'br'):
++-                encoding = enc
+++            if enc.isascii():
+++                enc = enc.lower()
+++                if enc in ('gzip', 'deflate', 'br'):
+++                    encoding = enc
++ 
++         if self._cparser.type == cparser.HTTP_REQUEST:
++             msg = _new_request_message(
++diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
++index 0a80c5c6d..5768bd623 100644
++--- a/aiohttp/http_parser.py
+++++ b/aiohttp/http_parser.py
++@@ -232,7 +232,9 @@ class HeadersParser:
++ 
++ def _is_supported_upgrade(headers: CIMultiDictProxy[str]) -> bool:
++     """Check if the upgrade header is supported."""
++-    return headers.get(hdrs.UPGRADE, "").lower() in {"tcp", "websocket"}
+++    u = headers.get(hdrs.UPGRADE, "")
+++    # .lower() can transform non-ascii characters.
+++    return u.isascii() and u.lower() in {"tcp", "websocket"}
++ 
++ 
++ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -542,7 +544,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++ 
++         # encoding
++         enc = headers.get(hdrs.CONTENT_ENCODING)
++-        if enc:
+++        if enc and enc.isascii():
++             enc = enc.lower()
++             if enc in ("gzip", "deflate", "br"):
++                 encoding = enc
++@@ -550,7 +552,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++         # chunking
++         te = headers.get(hdrs.TRANSFER_ENCODING)
++         if te is not None:
++-            if "chunked" == te.lower():
+++            if te.isascii() and "chunked" == te.lower():
++                 chunked = True
++             else:
++                 raise BadHttpMessage("Request has invalid `Transfer-Encoding`")
++diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
++index 2f34f0bc0..021b6e4ae 100644
++--- a/tests/test_http_parser.py
+++++ b/tests/test_http_parser.py
++@@ -482,6 +482,20 @@ def test_request_chunked(parser) -> None:
++     assert isinstance(payload, streams.StreamReader)
++ 
++ 
+++def test_te_header_non_ascii(parser: Any) -> None:
+++    # K = Kelvin sign, not valid ascii.
+++    text = "GET /test HTTP/1.1\r\nTransfer-Encoding: chunKed\r\n\r\n"
+++    with pytest.raises(http_exceptions.BadHttpMessage):
+++        parser.feed_data(text.encode())
 ++
 ++
-++async def test_stream_reader_pause_on_high_water_chunks(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading is paused when chunk count exceeds high water mark."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    assert stream._high_water_chunks == 10
-++    assert stream._low_water_chunks == 5
-++
-++    # Feed chunks until we exceed high_water_chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")  # 1 byte per chunk
-++        stream.end_http_chunk_receiving()
-++
-++    # pause_reading should have been called when chunk count exceeded 10
-++    protocol.pause_reading.assert_called()
+++def test_upgrade_header_non_ascii(parser: Any) -> None:
+++    # K = Kelvin sign, not valid ascii.
+++    text = "GET /test HTTP/1.1\r\nUpgrade: websocKet\r\n\r\n"
+++    messages, upgrade, tail = parser.feed_data(text.encode())
+++    assert not upgrade
 ++
 ++
-++async def test_stream_reader_resume_on_low_water_chunks(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading resumes when chunk count drops below low water mark."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    assert stream._high_water_chunks == 10
-++    assert stream._low_water_chunks == 5
-++
-++    # Feed chunks until we exceed high_water_chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")  # 1 byte per chunk
-++        stream.end_http_chunk_receiving()
-++
-++    # Simulate that reading was paused
-++    protocol._reading_paused = True
-++    protocol.pause_reading.reset_mock()
-++
-++    # Read data to reduce both size and chunk count
-++    # Reading will consume chunks and reduce _http_chunk_splits
-++    data = await stream.read(10)
-++    assert data == b"xxxxxxxxxx"
-++
-++    # resume_reading should have been called when both size and chunk count
-++    # dropped below their respective low water marks
-++    protocol.resume_reading.assert_called()
++ def test_request_te_chunked_with_content_length(parser: Any) -> None:
++     text = (
++         b"GET /test HTTP/1.1\r\n"
++@@ -555,8 +569,22 @@ def test_compression_brotli(parser) -> None:
++     assert msg.compression == "br"
++ 
++ 
++-def test_compression_unknown(parser) -> None:
++-    text = b"GET /test HTTP/1.1\r\n" b"content-encoding: compress\r\n\r\n"
+++@pytest.mark.parametrize(
+++    "enc",
+++    (
+++        "deﬂate".encode(),  # "ﬂ".upper() == "FL"
+++    ),
+++)
+++def test_compression_non_ascii(parser: Any, enc: bytes) -> None:
+++    text = b"GET /test HTTP/1.1\r\ncontent-encoding: " + enc + b"\r\n\r\n"
+++    messages, upgrade, tail = parser.feed_data(text)
+++    msg = messages[0][0]
+++    # Non-ascii input should not evaluate to a valid encoding scheme.
+++    assert msg.compression is None
 ++
 ++
-++async def test_stream_reader_no_resume_when_chunks_still_high(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading doesn't resume if chunk count is still above low water."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    # Feed many chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")
-++        stream.end_http_chunk_receiving()
-++
-++    # Simulate that reading was paused
-++    protocol._reading_paused = True
-++
-++    # Read only a few bytes - chunk count will still be high
-++    data = await stream.read(2)
-++    assert data == b"xx"
-++
-++    # resume_reading should NOT be called because chunk count is still >= low_water_chunks
-++    protocol.resume_reading.assert_not_called()
-++
-++
-++async def test_stream_reader_read_non_chunked_response(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that non-chunked responses work correctly (no chunk tracking)."""
-++    loop = asyncio.get_event_loop()
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    # Non-chunked: just feed data without begin/end_http_chunk_receiving
-++    stream.feed_data(b"Hello World")
-++
-++    # _http_chunk_splits should be None for non-chunked responses
-++    assert stream._http_chunk_splits is None
-++
-++    # Reading should work without issues
-++    data = await stream.read(5)
-++    assert data == b"Hello"
-++
-++    data = await stream.read(6)
-++    assert data == b" World"
-++
-++
-++async def test_stream_reader_resume_non_chunked_when_paused(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that resume works for non-chunked responses when paused due to size."""
-++    loop = asyncio.get_event_loop()
-++    # Small limit so we can trigger pause via size
-++    stream = streams.StreamReader(protocol, limit=10, loop=loop)
-++
-++    # Feed data that exceeds high_water (limit * 2 = 20)
-++    stream.feed_data(b"x" * 25)
-++
-++    # Simulate that reading was paused due to size
-++    protocol._reading_paused = True
-++    protocol.pause_reading.assert_called()
-++
-++    # Read enough to drop below low_water (limit = 10)
-++    data = await stream.read(20)
-++    assert data == b"x" * 20
-++
-++    # resume_reading should be called (size is now 5 < low_water 10)
-++    protocol.resume_reading.assert_called()
-++
-++
-++@pytest.mark.parametrize("limit", [1, 2, 4])
-++async def test_stream_reader_small_limit_resumes_reading(
-++    protocol: mock.Mock,
-++    limit: int,
-++) -> None:
-++    """Test that small limits still allow resume_reading to be called.
-++
-++    Even with very small limits, high_water_chunks should be at least 3
-++    and low_water_chunks should be at least 2, with high > low to ensure
-++    proper flow control.
-++    """
-++    loop = asyncio.get_event_loop()
-++    stream = streams.StreamReader(protocol, limit=limit, loop=loop)
-++
-++    # Verify minimum thresholds are enforced and high > low
-++    assert stream._high_water_chunks >= 3
-++    assert stream._low_water_chunks >= 2
-++    assert stream._high_water_chunks > stream._low_water_chunks
-++
-++    # Set up pause/resume side effects
-++    def pause_reading() -> None:
-++        protocol._reading_paused = True
-++
-++    protocol.pause_reading.side_effect = pause_reading
-++
-++    def resume_reading() -> None:
-++        protocol._reading_paused = False
-++
-++    protocol.resume_reading.side_effect = resume_reading
-++
-++    # Feed 4 chunks (triggers pause at > high_water_chunks which is >= 3)
-++    for char in b"abcd":
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(bytes([char]))
-++        stream.end_http_chunk_receiving()
-++
-++    # Reading should now be paused
-++    assert protocol._reading_paused is True
-++    assert protocol.pause_reading.called
-++
-++    # Read all data - should resume (chunk count drops below low_water_chunks)
-++    data = stream.read_nowait()
-++    assert data == b"abcd"
-++    assert stream._size == 0
-++
-++    protocol.resume_reading.assert_called()
-++    assert protocol._reading_paused is False
+++def test_compression_unknown(parser: Any) -> None:
+++    text = b"GET /test HTTP/1.1\r\ncontent-encoding: compress\r\n\r\n"
++     messages, upgrade, tail = parser.feed_data(text)
++     msg = messages[0][0]
++     assert msg.compression is None
 +-- 
 +2.35.6
 +
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index 765796b8cd..69cad8cb44 100644
+index 84a9f2e668..ffdc25791b 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -12,6 +12,8 @@ SRC_URI += "file://CVE-2024-52304.patch \
+@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "edea7d15772ceeb29db4aff55e482d4bcfb6ae160ce144f2682de02f6d
+ 
+ SRC_URI += "file://CVE-2024-52304.patch \
+            file://CVE-2025-53643.patch \
++           file://CVE-2025-69224.patch \
             file://CVE-2025-69225.patch \
             file://CVE-2025-69226.patch \
             file://CVE-2025-69228.patch \
-+           file://CVE-2025-69229_p1.patch \
-+           file://CVE-2025-69229_p2.patch \
-            file://CVE-2025-69227.patch \
-            "
+@@ -16,6 +17,15 @@ SRC_URI += "file://CVE-2024-52304.patch \
+ PYPI_PACKAGE = "aiohttp"
+ inherit python_setuptools_build_meta pypi
  
++DEPENDS += "python3-cython-native"
++
++do_configure:prepend() {
++    cython3 -3 -Werror \
++        -I ${S}/aiohttp \
++        -o ${S}/aiohttp/_http_parser.c \
++        ${S}/aiohttp/_http_parser.pyx
++}
++
+ RDEPENDS:${PN} = "\
+     python3-aiohappyeyeballs \
+     python3-aiosignal \
 -- 
 2.35.6
 
