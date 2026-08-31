@@ -2,980 +2,1147 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD60EC624A4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94C1FC61DD3
 	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 04:57:50 +0000 (UTC)
 Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.22959.1788152269771553020
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2026 21:57:49 -0700
+ Sun, 30 Aug 2026 21:57:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=RfS5nV7t;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Vbsl8INJ;
  spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=33266; q=dns/txt;
-  s=iport01; t=1788152269; x=1789361869;
+  d=cisco.com; i=@cisco.com; l=39712; q=dns/txt;
+  s=iport01; t=1788152270; x=1789361870;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=MsnMvl9K2CW4ZlDEdCMMuFvrQ7tnIYCb/iseg6XYxPw=;
-  b=RfS5nV7tQ2lIFPe7V0UMO01q/wLcYHVY6mwjUY2FVXOW83LXXChCUawS
-   IC9i7zPhC/Z04DeJ2pnAkDjD5VJUSRo/1Xr3opt0neu1lkPW7a23/zfsC
-   rxL7H4L0xmVL/GY2mNSWBM04haZarVUBp6Rn1EHtoPXWqB3HB3GXXs0Ci
-   bGe7SyxCqHIKfUR3UzrnkAYnA/WpNig174JxwjVQw/mHut8qWB8c4a3Cz
-   Jkjtxo7njd0qvWFJAPKYDiT7EEzJwl/29h8A9NXFmFGvn5x4M7PHfrxB5
-   9PZPNYUAfOQo1+ky0QOCYRKDLmP+U6IU590ojROERvadS/FvicbcyXcCh
-   A==;
-X-CSE-ConnectionGUID: gOup6JJWTWap5PmvYQ04TQ==
-X-CSE-MsgGUID: vGxuAlEzR6SBmVSzoG0bsQ==
-X-IPAS-Result: =?us-ascii?q?A0ArAAAsCZVq/5MQJK1RCR0BAQEBCQESAQUFAYF8CAELA?=
- =?us-ascii?q?YJWdF4KOUmEV4gbiVgDnhuBfg8BAQEPRA0EAQGEP0YCjXMCJjQJDgECBAMCA?=
- =?us-ascii?q?wEBAQEBAQEBAQEBCwEBBQEBAQIBBwWBDhOGTw2GWgECAQMaAQgECwEYAS0QC?=
- =?us-ascii?q?RMDAQIDAiYCAisjCBmDAgGCdAMRpl6bI3p/M4EBgygBPwJDUNswAQsUAYEKL?=
- =?us-ascii?q?gGFPoMfAYUCXRgBRIQ4JxsbgXKCUIIugQWBXAEBAoErBwSEA4JqBIIigQyBW?=
- =?us-ascii?q?oEXkQhIgQIcA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+FzVYGwYFgR2BKIQPI?=
- =?us-ascii?q?xk2eoEJXoErKWABEheBCYIIAoJaggUCAUlDDgdHUwkECxgNSBEsNxUZBD0Bb?=
- =?us-ascii?q?geOeh+CBxcsAQFXAgctAQogAQSBDQc1NxAeCwsGLJJpAQcTHgqPW4IhgTWfW?=
- =?us-ascii?q?goog3aMIpU6GjOEBIFXiz2HA5JRC5h9jgqVPSMgUIRpgWg8gUcLB3AVO4JnC?=
- =?us-ascii?q?QpAGQ+OKgMLC4NggX9Xgw7GVScyAgkyAQEHAgcOAwuBaJABgX0BAQ?=
-IronPort-Data: A9a23:sZ7p1aBvXxiaIxVW/3jiw5YqxClBgxIJ4kV8jS/XYbTApDMr0zUPn
- DFJW2DVPfaPNGX1ett1Ot/g8h9T7MLUmtZjOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXmthh
- fuo+5eBYA/+g2YtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEzNJzFB8UH7Ikxe9vXFlL6
- 80hcGwxV0XW7w626OrTpuhEj8AnKozveYgYoHwllGmfBvc9SpeFSKLPjTNa9G5v3YYVQ7CHO
- YxANWUHgBfoO3WjPn8bC586lea5j1H0ciZTrxSeoq9fD237nFYsj+O3boOLEjCMbdt6jluxo
- k/UxTrCKBQkD86Y5mKP6Uv504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
- UsM9ywjqKI/+ECmQp/6RRLQnZKflhcYX9wVF6gx7xuAj/OMpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOf9pa61nltMkQ6PBA==
-IronPort-HdrOrdr: A9a23:spPnrq2AIMCcHhDohS5twAqjBGokLtp133Aq2lEZdPWaSKOlfq
- eV7ZImPH7P+VEssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCZgguVxehZhOOIqQEIWReOk9K1vp
- 0PT0ERMrHN5CBB/KXHyTj9Nco8y9+a963tr+Lfw3BxCTxOUchbnn5E4sLxKDwMeOGAbqBJbK
- ah2g==
-X-Talos-CUID: 9a23:0Shn0G4g9R7fbb/hRNss+2kJAp4HUELh837Ifne9F1dQEOGpcArF
-X-Talos-MUID: =?us-ascii?q?9a23=3AW7QLzg/wXC8VOSrNQyvaOrKQf9lH87mHDG0fq8s?=
- =?us-ascii?q?9kcy6Dj53FG+Xlw3iFw=3D=3D?=
+  bh=tcMmzsj1Aw+v9AE46QNdiIKKYUB3ak72vdPUb+R0e4Y=;
+  b=Vbsl8INJbajfUi4vKdrBfsin6XO9M1T2aQJqsNCrGm9B3If1342oI688
+   dmqdZ0l8XVb2antRjxBu1yVNqQPKuOx9Kl6EKMnoZpGS2rzw78mlLvVo3
+   8yElb+9/L2ABklAwKmGgI5fc8pTKGES4pNZxMMg9lEYqALwYwdhgdq1IB
+   dgxrHLRGGAouCRY7FG3GHwjobCc1iWQG72OhE9KTkKKyJWDUMs5lx72nV
+   oD7xVcEK0DVuV3jStXBtgq9/Q1r/7+3nY5UsWRHljZEB80Mr58zC7DVh9
+   P3nV56/YfUZxkpKF0u5qiNO7tVzvB3+uX+1IpdCoy1/zwKZw2Np1+sqpN
+   w==;
+X-CSE-ConnectionGUID: bLHrwnYaSm2RiAWhUbwuag==
+X-CSE-MsgGUID: 9B2h1k+VRJeZIhcfIXG/hg==
+X-IPAS-Result: =?us-ascii?q?A0BKAgAsCZVq/44QJK1aHgEBCxIMggULghg/dF5DSZZKA?=
+ =?us-ascii?q?4ETnQgUgWoPAQEBD0QNBAEBhD9GAo1zAiY0CQ4BAgQDAgMBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QsBAQUBAQECAQcFgQ4Thk8NhloBAgEDGgEMCwEYAS0QHAMBAi8rIwgQCYMCA?=
+ =?us-ascii?q?YJ0AxHCAYF5M4EBgygBPwJDUNswAQsUAYE4hT+IIl0YAYNrgREnGxuBcoEVg?=
+ =?us-ascii?q?TuBOHaBBYFcAQECgTYPAQmGVASCIoEMgVqBF5EISIEeA1ksAVUTDQoLBwWBZ?=
+ =?us-ascii?q?gM1EioVbjIdgSM+F4ENGwYFgR2BKIQPIxk2eoEJXoErKWABEheBCYIIAoJag?=
+ =?us-ascii?q?gUCAUlDDgdHUwkECxgNSBEsNxUZBD5uB456H4FYcwFYCC0BGBEBAYEFgQ8mC?=
+ =?us-ascii?q?AaTGwFCj1uCIaEPCiiDdowilToaM4QEgVeSQJJRC5h9jgqWAFCEaYFoPIFHC?=
+ =?us-ascii?q?wdwFTuCZwlKGQ+OKg4LgRQBAoJJgTRLgxRRxjQhJzICCTIBAQcCBw4DC4Foh?=
+ =?us-ascii?q?GECix4BJoFWAQE?=
+IronPort-Data: A9a23:uYAEq6uT4r3/xAGKr1FJCvFseefnVAdfMUV32f8akzHdYApBsoF/q
+ tZmKWqAOfmPYGOjKt91OY22900DusSEmoQ3HQFtqiowHy4TgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrav666yEgiclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZTdJ5xYuajhKs/LY8Es21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw8MJXG35Ix
+ PUjLWo3bzm8h9+836+yRbw57igjBJGD0II3s3Vky3TdSP0hW52GG/iM7t5D1zB2jcdLdRrcT
+ 5NGMnw0MlKZPVsWZg1/5JEWxI9EglHzcDBcoVOErII84nPYy0p6172F3N/9KobXGp4PwBzCz
+ o7A1zXTWBFDN5+h8xiIwFOsjeHurQy8WI1HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
+ UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwAiJzqyR50OSAXIJC2YcLtcnr8QxAzct0
+ zdlgu/UONCmi5XNIVr1y1tehWja1fQ9RYPaWRI5cA==
+IronPort-HdrOrdr: A9a23:F4VbLa78StJ9mfS36wPXwOrXdLJyesId70hD6qm+c3Nom6uj5q
+ eTdZsgtCMc5Ax9ZJhko6HjBEDiewK5yXcK2+ks1N6ZNWGM0ldAbrsSiLcKqAePJ8SRzIJgPN
+ 9bAstDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhFQpcUAUdAZ0++/YTzra3FLeA==
+X-Talos-CUID: 9a23:88WdRWBYzqDqVOf6EyND1FQLHPEsSXiH9nb5HE+FA3l0QbLAHA==
+X-Talos-MUID: 9a23:TxH6mgh91p4SCV17N/4YrsMpZe0y4/2tS343s5g0msmPOw1AFHCdg2Hi
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,252,1779148800"; 
-   d="scan'208";a="825732616"
-Received: from alln-l-core-10.cisco.com ([173.36.16.147])
+   d="scan'208";a="825732622"
+Received: from alln-l-core-05.cisco.com ([173.36.16.142])
   by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 31 Aug 2026 04:57:48 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-10.cisco.com (Postfix) with ESMTPS id 448E71800014C;
+	by alln-l-core-05.cisco.com (Postfix) with ESMTPS id 9B0A618000481;
 	Mon, 31 Aug 2026 04:57:48 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id D3DA4CD02BB; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
+	id D91F8CD02BC; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 4/9] python3-aiohttp: fix CVE-2025-69223
-Date: Sun, 30 Aug 2026 21:57:39 -0700
-Message-Id: <20260831045744.3321483-5-dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 5/9] python3-aiohttp: fix CVE-2026-22815
+Date: Sun, 30 Aug 2026 21:57:40 -0700
+Message-Id: <20260831045744.3321483-6-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260831045744.3321483-1-dkelaiya@cisco.com>
 References: <20260831045744.3321483-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: alln-l-core-10.cisco.com
+X-Outbound-Node: alln-l-core-05.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2026 04:57:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129608
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129609
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
 This patch applies the reviewed upstream fix commits shown in
-[1] and [2]. The advisory identifying the fix is referenced in
-[3].
+[1], [2], and [3]. The advisory identifying the fix is referenced in
+[4].
 
-The python3-brotli 1.2.0 upgrade commit [4] is omitted because
-Scarthgap currently provides python3-brotli 1.1.0. Brotli 1.2.0
-adds the bounded decompression API required by the upstream aiohttp
-fix. Consequently, this backport disables optional Brotli response
-decoding while retaining bounded decompression for the supported
-zlib path.
+The generated aiohttp/_http_parser.c changes are omitted. The
+recipe-time Cython regeneration introduced with CVE-2025-69224
+regenerates that file from the patched _http_parser.pyx before the
+accelerated parser is compiled.
 
-[1] https://github.com/aio-libs/aiohttp/commit/2b920c39002cee0ec5b402581779bbaaf7c9138a
-[2] https://github.com/aio-libs/aiohttp/commit/92477c5a74c43dfe0474bd24f8de11875daa2298
-[3] https://nvd.nist.gov/vuln/detail/CVE-2025-69223
-[4] https://github.com/openembedded/meta-openembedded/commit/382e4de7d8b7d0e980fefcda7a06e5f20f5f26c0
+[1] https://github.com/aio-libs/aiohttp/commit/0c2e9da51126238a421568eb7c5b53e5b5d17b36
+[2] https://github.com/aio-libs/aiohttp/commit/ed6440ca49ef4907ab9d99ba7e329aab702b7173
+[3] https://github.com/aio-libs/aiohttp/commit/30ec25f8a58c5dc3f8fdb3eec31f555eeaabd30a
+[4] https://nvd.nist.gov/vuln/detail/CVE-2026-22815
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2025-69223.patch      | 848 ++++++++++++++++++
- .../python/python3-aiohttp_3.9.5.bb           |   1 +
- 2 files changed, 849 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69223.patch
+ .../python3-aiohttp/CVE-2026-22815.patch      | 1020 +++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |    1 +
+ 2 files changed, 1021 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69223.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69223.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
 new file mode 100644
-index 0000000000..e1fca9b8b9
+index 0000000000..16c2bf9c76
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69223.patch
-@@ -0,0 +1,848 @@
-+From 7c9340cd2be5c8dd6d829a62220bb9129e7a9d8a Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-22815.patch
+@@ -0,0 +1,1020 @@
++From 397155d08683c97a24d7dfc245d45d13941aca1e Mon Sep 17 00:00:00 2001
 +From: Sam Bull <git@sambull.org>
-+Date: Sat, 3 Jan 2026 15:56:02 +0000
-+Subject: [PATCH] Use decompressor max_length parameter (#11898) (#11918)
++Date: Mon, 12 Jan 2026 18:49:19 +0000
++Subject: [PATCH] Add max_headers parameter (#11955) (#11959) (#11960)
 +
-+---------
-+
-+CVE: CVE-2025-69223
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/2b920c39002cee0ec5b402581779bbaaf7c9138a]
++CVE: CVE-2026-22815
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/0c2e9da51126238a421568eb7c5b53e5b5d17b36]
 +
 +Backport Changes:
-+- Adapted the decompression base class to aiohttp 3.9.5's
-+  direct `zlib` implementation because the newer upstream
-+  buffer and backend wrappers are absent.
-+- Kept `BodyPartReader.decode()` and `_decode_content()`
-+  synchronous. Applied the output limit through
-+  `ZLibDecompressor.decompress_sync()` to preserve the
-+  aiohttp 3.9.5 API while bounding gzip and deflate output.
-+- Omitted the upstream `aiohttp/web_request.py` change from
-+  `field.decode(chunk)` to `await field.decode(chunk)`.
-+  That change is required only for upstream's asynchronous
-+  `BodyPartReader.decode()` conversion. This backport keeps
-+  synchronous decoding, so the existing call remains valid.
-+- Did not carry the Brotli 1.2 dependency updates from
-+  `pyproject.toml` and `requirements/runtime-deps.in`.
-+  Scarthgap supplies python3-brotli 1.1.0, which lacks the
-+  bounded-output API required by the upstream fix.
-+- Disabled Brotli decoding by forcing `HAS_BROTLI` to
-+  `False`. As a result, `Content-Encoding: br` is rejected
-+  before a Brotli decoder is created. This closes the
-+  decompression-bomb path at the cost of Brotli support.
-+- Omitted upstream Zstandard implementation, dependency,
-+  and test changes because aiohttp 3.9.5 does not support
-+  Zstandard content decoding.
-+- Adapted the client, parser, and multipart tests to the
-+  aiohttp 3.9.5 fixtures and synchronous decoding API.
++- Retained the Scarthgap bytearray and CIMultiDict parser model.
++- Added header-count enforcement to the existing header processor.
++- Reset header-name size while retaining Scarthgap buffer handling.
++- Added max_headers to the legacy client request path.
++- Preserved Scarthgap connection and exception-handling logic.
++- Omitted newer middleware, TypedDict, retry, and SSL API context.
++- Adapted documentation and tests for the Scarthgap API.
++- Omitted the generated aiohttp/_http_parser.c changes. The Scarthgap
++  recipe regenerates this file from the patched _http_parser.pyx using
++  python3-cython-native before compilation.
 +
-+(cherry picked from commit 92477c5a74c43dfe0474bd24f8de11875daa2298)
-+Co-authored-by: J. Nick Koston <nick@koston.org>
-+(cherry picked from commit 2b920c39002cee0ec5b402581779bbaaf7c9138a)
++(cherry picked from commit ed6440ca49ef4907ab9d99ba7e329aab702b7173)
++(cherry picked from commit 30ec25f8a58c5dc3f8fdb3eec31f555eeaabd30a)
++(cherry picked from commit 0c2e9da51126238a421568eb7c5b53e5b5d17b36)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/11898.breaking.rst      |  3 ++
-+ aiohttp/compression_utils.py    | 92 +++++++++++++++++++++------------
-+ aiohttp/http_exceptions.py      |  4 ++
-+ aiohttp/http_parser.py          | 29 +++++++++--
-+ aiohttp/multipart.py            | 19 +++++--
-+ docs/spelling_wordlist.txt      |  1 +
-+ tests/test_client_functional.py | 80 +++++++++++++++++++++++++++-
-+ tests/test_http_parser.py       | 44 +++++++++++++++-
-+ tests/test_multipart.py         | 92 +++++++++++++++++++++++++--------
-+ 9 files changed, 299 insertions(+), 65 deletions(-)
-+ create mode 100644 CHANGES/11898.breaking.rst
++ CHANGES/11955.feature.rst       |   1 +
++ aiohttp/_http_parser.pyx        |  31 ++++----
++ aiohttp/client.py               |   9 ++-
++ aiohttp/client_proto.py         |   2 +
++ aiohttp/http_exceptions.py      |   9 +--
++ aiohttp/http_parser.py          |  83 +++++++++++++---------
++ aiohttp/web_protocol.py         |   2 +-
++ docs/client_reference.rst       |  26 ++++++-
++ docs/web_reference.rst          |   5 +-
++ tests/test_client_functional.py | 117 +++++++++++++++++++++---------
++ tests/test_http_exceptions.py   |  18 ++---
++ tests/test_http_parser.py       | 121 +++++++++++++++++++++++++-------
++ 12 files changed, 302 insertions(+), 122 deletions(-)
++ create mode 100644 CHANGES/11955.feature.rst
 +
-+diff --git a/CHANGES/11898.breaking.rst b/CHANGES/11898.breaking.rst
++diff --git a/CHANGES/11955.feature.rst b/CHANGES/11955.feature.rst
 +new file mode 100644
-+index 000000000..228b69baa
++index 000000000..eaea1016e
 +--- /dev/null
-++++ b/CHANGES/11898.breaking.rst
-+@@ -0,0 +1,3 @@
-++``Brotli`` decoding is disabled in the Scarthgap backport because its
-++``python3-brotli`` recipe provides version 1.1.0, not the required 1.2.
-++Decompression now has a default maximum output size of 32MiB per decompress call -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/compression_utils.py b/aiohttp/compression_utils.py
-+index 9631d377e..fe762c755 100644
-+--- a/aiohttp/compression_utils.py
-++++ b/aiohttp/compression_utils.py
-+@@ -1,5 +1,6 @@
-+ import asyncio
-+ import zlib
-++from abc import ABC, abstractmethod
-+ from concurrent.futures import Executor
-+ from typing import Optional, cast
+++++ b/CHANGES/11955.feature.rst
++@@ -0,0 +1 @@
+++Added ``max_headers`` parameter to limit the number of headers that should be read from a response -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
++index 4dca08f35..72454dfd3 100644
++--- a/aiohttp/_http_parser.pyx
+++++ b/aiohttp/_http_parser.pyx
++@@ -278,6 +278,7 @@ cdef class HttpParser:
++         bytearray _raw_name
++         bytearray _raw_value
++         bint      _has_value
+++        int _header_name_size
 + 
-+@@ -13,7 +14,17 @@ try:
-+ except ImportError:  # pragma: no cover
-+     HAS_BROTLI = False
++         object _protocol
++         object _loop
++@@ -328,7 +329,7 @@ cdef class HttpParser:
++         self, cparser.llhttp_type mode,
++         object protocol, object loop, int limit,
++         object timer=None,
++-        size_t max_line_size=8190, size_t max_headers=32768,
+++        size_t max_line_size=8190, size_t max_headers=128,
++         size_t max_field_size=8190, payload_exception=None,
++         bint response_with_body=True, bint read_until_eof=False,
++         bint auto_decompress=True,
++@@ -351,6 +352,7 @@ cdef class HttpParser:
++         self._raw_name = bytearray()
++         self._raw_value = bytearray()
++         self._has_value = False
+++        self._header_name_size = 0
 + 
-+-MAX_SYNC_CHUNK_SIZE = 1024
-++# Scarthgap provides python3-brotli 1.1.0, whose Decompressor API does not
-++# support the max_length argument required by the bounded decoder below.
-++# Do not advertise or instantiate Brotli decoding until the recipe provides
-++# Brotli 1.2 or newer.
-++HAS_BROTLI = False
-++
-++MAX_SYNC_CHUNK_SIZE = 4096
-++DEFAULT_MAX_DECOMPRESS_SIZE = 2**25  # 32MiB
-++
-++# Unlimited decompression constant
-++ZLIB_MAX_LENGTH_UNLIMITED = 0  # zlib uses 0 to mean unlimited
++         self._max_line_size = max_line_size
++         self._max_headers = max_headers
++@@ -384,6 +386,8 @@ cdef class HttpParser:
++             value = raw_value.decode('utf-8', 'surrogateescape')
 + 
++             self._headers.add(name, value)
+++            if len(self._headers) > self._max_headers:
+++                raise BadHttpMessage("Too many headers received")
 + 
-+ def encoding_to_mode(
-+@@ -26,19 +37,37 @@ def encoding_to_mode(
-+     return -zlib.MAX_WBITS if suppress_deflate_header else zlib.MAX_WBITS
++             if name is CONTENT_ENCODING:
++                 self._content_encoding = value
++@@ -391,6 +395,7 @@ cdef class HttpParser:
++             PyByteArray_Resize(self._raw_name, 0)
++             PyByteArray_Resize(self._raw_value, 0)
++             self._has_value = False
+++            self._header_name_size = 0
++             self._raw_headers.append((raw_name, raw_value))
 + 
++     cdef _on_header_field(self, char* at, size_t length):
++@@ -582,7 +587,7 @@ cdef class HttpRequestParser(HttpParser):
 + 
-+-class ZlibBaseHandler:
-++class DecompressionBaseHandler(ABC):
 +     def __init__(
-+         self,
-+-        mode: int,
-+         executor: Optional[Executor] = None,
-+         max_sync_chunk_size: Optional[int] = MAX_SYNC_CHUNK_SIZE,
-+     ):
-+-        self._mode = mode
-++        """Base class for decompression handlers."""
-+         self._executor = executor
-+         self._max_sync_chunk_size = max_sync_chunk_size
++         self, protocol, loop, int limit, timer=None,
++-        size_t max_line_size=8190, size_t max_headers=32768,
+++        size_t max_line_size=8190, size_t max_headers=128,
++         size_t max_field_size=8190, payload_exception=None,
++         bint response_with_body=True, bint read_until_eof=False,
++         bint auto_decompress=True,
++@@ -646,7 +651,7 @@ cdef class HttpResponseParser(HttpParser):
 + 
-++    @abstractmethod
-++    def decompress_sync(
-++        self, data: bytes, max_length: int = ZLIB_MAX_LENGTH_UNLIMITED
-++    ) -> bytes:
-++        """Decompress the given data."""
-++
-++    async def decompress(
-++        self, data: bytes, max_length: int = ZLIB_MAX_LENGTH_UNLIMITED
-++    ) -> bytes:
-++        """Decompress the given data."""
-++        if (
-++            self._max_sync_chunk_size is not None
-++            and len(data) > self._max_sync_chunk_size
-++        ):
-++            return await asyncio.get_event_loop().run_in_executor(
-++                self._executor, self.decompress_sync, data, max_length
-++            )
-++        return self.decompress_sync(data, max_length)
-++
-+ 
-+-class ZLibCompressor(ZlibBaseHandler):
-++class ZLibCompressor:
 +     def __init__(
-+         self,
-+         encoding: Optional[str] = None,
-+@@ -49,12 +78,12 @@ class ZLibCompressor(ZlibBaseHandler):
-+         executor: Optional[Executor] = None,
-+         max_sync_chunk_size: Optional[int] = MAX_SYNC_CHUNK_SIZE,
-+     ):
-+-        super().__init__(
-+-            mode=encoding_to_mode(encoding, suppress_deflate_header)
-++        self._executor = executor
-++        self._max_sync_chunk_size = max_sync_chunk_size
-++        self._mode = (
-++            encoding_to_mode(encoding, suppress_deflate_header)
-+             if wbits is None
-+-            else wbits,
-+-            executor=executor,
-+-            max_sync_chunk_size=max_sync_chunk_size,
-++            else wbits
-+         )
-+         if level is None:
-+             self._compressor = zlib.compressobj(wbits=self._mode, strategy=strategy)
-+@@ -86,7 +115,7 @@ class ZLibCompressor(ZlibBaseHandler):
-+         return self._compressor.flush(mode)
++         self, protocol, loop, int limit, timer=None,
++-            size_t max_line_size=8190, size_t max_headers=32768,
+++            size_t max_line_size=8190, size_t max_headers=128,
++             size_t max_field_size=8190, payload_exception=None,
++             bint response_with_body=True, bint read_until_eof=False,
++             bint auto_decompress=True
++@@ -685,8 +690,8 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
++     cdef HttpParser pyparser = <HttpParser>parser.data
++     try:
++         if length > pyparser._max_line_size:
++-            raise LineTooLong(
++-                'Status line is too long', pyparser._max_line_size, length)
+++            status = pyparser._buf + at[:length]
+++            raise LineTooLong(status[:100] + b"...", pyparser._max_line_size)
++         extend(pyparser._buf, at, length)
++     except BaseException as ex:
++         pyparser._last_error = ex
++@@ -698,11 +703,10 @@ cdef int cb_on_url(cparser.llhttp_t* parser,
++ cdef int cb_on_status(cparser.llhttp_t* parser,
++                       const char *at, size_t length) except -1:
++     cdef HttpParser pyparser = <HttpParser>parser.data
++-    cdef str reason
++     try:
++         if length > pyparser._max_line_size:
++-            raise LineTooLong(
++-                'Status line is too long', pyparser._max_line_size, length)
+++            reason = pyparser._buf + at[:length]
+++            raise LineTooLong(reason[:100] + b"...", pyparser._max_line_size)
++         extend(pyparser._buf, at, length)
++     except BaseException as ex:
++         pyparser._last_error = ex
++@@ -719,8 +723,9 @@ cdef int cb_on_header_field(cparser.llhttp_t* parser,
++         pyparser._on_status_complete()
++         size = len(pyparser._raw_name) + length
++         if size > pyparser._max_field_size:
++-            raise LineTooLong(
++-                'Header name is too long', pyparser._max_field_size, size)
+++            name = pyparser._raw_name + at[:length]
+++            raise LineTooLong(name[:100] + b"...", pyparser._max_field_size)
+++        pyparser._header_name_size = size
++         pyparser._on_header_field(at, length)
++     except BaseException as ex:
++         pyparser._last_error = ex
++@@ -735,9 +740,9 @@ cdef int cb_on_header_value(cparser.llhttp_t* parser,
++     cdef Py_ssize_t size
++     try:
++         size = len(pyparser._raw_value) + length
++-        if size > pyparser._max_field_size:
++-            raise LineTooLong(
++-                'Header value is too long', pyparser._max_field_size, size)
+++        if pyparser._header_name_size + size > pyparser._max_field_size:
+++            value = pyparser._raw_value + at[:length]
+++            raise LineTooLong(value[:100] + b"...", pyparser._max_field_size)
++         pyparser._on_header_value(at, length)
++     except BaseException as ex:
++         pyparser._last_error = ex
++diff --git a/aiohttp/client.py b/aiohttp/client.py
++index 32d2c3b71..1d10fc84c 100644
++--- a/aiohttp/client.py
+++++ b/aiohttp/client.py
++@@ -136,7 +136,6 @@ if TYPE_CHECKING:
++ else:
++     SSLContext = None
 + 
-+ 
-+-class ZLibDecompressor(ZlibBaseHandler):
-++class ZLibDecompressor(DecompressionBaseHandler):
-+     def __init__(
-+         self,
-+         encoding: Optional[str] = None,
-+@@ -94,26 +123,15 @@ class ZLibDecompressor(ZlibBaseHandler):
-+         executor: Optional[Executor] = None,
-+         max_sync_chunk_size: Optional[int] = MAX_SYNC_CHUNK_SIZE,
-+     ):
-+-        super().__init__(
-+-            mode=encoding_to_mode(encoding, suppress_deflate_header),
-+-            executor=executor,
-+-            max_sync_chunk_size=max_sync_chunk_size,
-+-        )
-++        super().__init__(executor=executor, max_sync_chunk_size=max_sync_chunk_size)
-++        self._mode = encoding_to_mode(encoding, suppress_deflate_header)
-+         self._decompressor = zlib.decompressobj(wbits=self._mode)
-+ 
-+-    def decompress_sync(self, data: bytes, max_length: int = 0) -> bytes:
-++    def decompress_sync(
-++        self, data: bytes, max_length: int = ZLIB_MAX_LENGTH_UNLIMITED
-++    ) -> bytes:
-+         return self._decompressor.decompress(data, max_length)
-+ 
-+-    async def decompress(self, data: bytes, max_length: int = 0) -> bytes:
-+-        if (
-+-            self._max_sync_chunk_size is not None
-+-            and len(data) > self._max_sync_chunk_size
-+-        ):
-+-            return await asyncio.get_event_loop().run_in_executor(
-+-                self._executor, self.decompress_sync, data, max_length
-+-            )
-+-        return self.decompress_sync(data, max_length)
 +-
-+     def flush(self, length: int = 0) -> bytes:
-+         return (
-+             self._decompressor.flush(length)
-+@@ -134,24 +152,34 @@ class ZLibDecompressor(ZlibBaseHandler):
-+         return self._decompressor.unused_data
++ @attr.s(auto_attribs=True, frozen=True, slots=True)
++ class ClientTimeout:
++     total: Optional[float] = None
++@@ -195,6 +194,7 @@ class ClientSession:
++             "_read_bufsize",
++             "_max_line_size",
++             "_max_field_size",
+++            "_max_headers",
++             "_resolve_charset",
++         ]
++     )
++@@ -232,6 +232,7 @@ class ClientSession:
++         read_bufsize: int = 2**16,
++         max_line_size: int = 8190,
++         max_field_size: int = 8190,
+++        max_headers: int = 128,
++         fallback_charset_resolver: _CharsetResolver = lambda r, b: "utf-8",
++     ) -> None:
++         # We initialise _connector to None immediately, as it's referenced in __del__()
++@@ -316,6 +317,7 @@ class ClientSession:
++         self._read_bufsize = read_bufsize
++         self._max_line_size = max_line_size
++         self._max_field_size = max_field_size
+++        self._max_headers = max_headers
 + 
++         # Convert to list of tuples
++         if headers:
++@@ -418,6 +420,7 @@ class ClientSession:
++         auto_decompress: Optional[bool] = None,
++         max_line_size: Optional[int] = None,
++         max_field_size: Optional[int] = None,
+++        max_headers: Optional[int] = None,
++     ) -> ClientResponse:
 + 
-+-class BrotliDecompressor:
-++class BrotliDecompressor(DecompressionBaseHandler):
-+     # Supports both 'brotlipy' and 'Brotli' packages
-+     # since they share an import name. The top branches
-+     # are for 'brotlipy' and bottom branches for 'Brotli'
-+-    def __init__(self) -> None:
-++    def __init__(
-++        self,
-++        executor: Optional[Executor] = None,
-++        max_sync_chunk_size: Optional[int] = MAX_SYNC_CHUNK_SIZE,
-++    ) -> None:
-++        """Decompress data using the Brotli library."""
-+         if not HAS_BROTLI:
-+             raise RuntimeError(
-+                 "The brotli decompression is not available. "
-+                 "Please install `Brotli` module"
-+             )
-+         self._obj = brotli.Decompressor()
-++        super().__init__(executor=executor, max_sync_chunk_size=max_sync_chunk_size)
++         # NOTE: timeout clamps existing connect and read timeouts.  We cannot
++@@ -490,6 +493,9 @@ class ClientSession:
++         if max_field_size is None:
++             max_field_size = self._max_field_size
 + 
-+-    def decompress_sync(self, data: bytes) -> bytes:
-++    def decompress_sync(
-++        self, data: bytes, max_length: int = ZLIB_MAX_LENGTH_UNLIMITED
-++    ) -> bytes:
-++        """Decompress the given data."""
-+         if hasattr(self._obj, "decompress"):
-+-            return cast(bytes, self._obj.decompress(data))
-+-        return cast(bytes, self._obj.process(data))
-++            return cast(bytes, self._obj.decompress(data, max_length))
-++        return cast(bytes, self._obj.process(data, max_length))
+++        if max_headers is None:
+++            max_headers = self._max_headers
+++
++         traces = [
++             Trace(
++                 self,
++@@ -599,6 +605,7 @@ class ClientSession:
++                         timeout_ceil_threshold=self._connector._timeout_ceil_threshold,
++                         max_line_size=max_line_size,
++                         max_field_size=max_field_size,
+++                        max_headers=max_headers,
++                     )
 + 
-+     def flush(self) -> bytes:
-++        """Flush the decompressor."""
-+         if hasattr(self._obj, "flush"):
-+             return cast(bytes, self._obj.flush())
-+         return b""
++                     try:
++diff --git a/aiohttp/client_proto.py b/aiohttp/client_proto.py
++index 723f5aae5..10852efc0 100644
++--- a/aiohttp/client_proto.py
+++++ b/aiohttp/client_proto.py
++@@ -180,6 +180,7 @@ class ResponseHandler(BaseProtocol, DataQueue[Tuple[RawResponseMessage, StreamRe
++         timeout_ceil_threshold: float = 5,
++         max_line_size: int = 8190,
++         max_field_size: int = 8190,
+++        max_headers: int = 128,
++     ) -> None:
++         self._skip_payload = skip_payload
++ 
++@@ -198,6 +199,7 @@ class ResponseHandler(BaseProtocol, DataQueue[Tuple[RawResponseMessage, StreamRe
++             auto_decompress=auto_decompress,
++             max_line_size=max_line_size,
++             max_field_size=max_field_size,
+++            max_headers=max_headers,
++         )
++ 
++         if self._tail:
 +diff --git a/aiohttp/http_exceptions.py b/aiohttp/http_exceptions.py
-+index 72eac3a3c..877b07d4c 100644
++index 877b07d4c..201fe0bcc 100644
 +--- a/aiohttp/http_exceptions.py
 ++++ b/aiohttp/http_exceptions.py
-+@@ -75,6 +75,10 @@ class ContentLengthError(PayloadEncodingError):
-+     """Not enough data for satisfy content length header."""
++@@ -81,11 +81,12 @@ class DecompressSizeError(PayloadEncodingError):
 + 
-+ 
-++class DecompressSizeError(PayloadEncodingError):
-++    """Decompressed size exceeds the configured limit."""
-++
-++
 + class LineTooLong(BadHttpMessage):
 +     def __init__(
-+         self, line: str, limit: str = "Unknown", actual_size: str = "Unknown"
++-        self, line: str, limit: str = "Unknown", actual_size: str = "Unknown"
+++        self,
+++        line: Union[str, bytes],
+++        limit: Union[str, int] = "Unknown",
+++        actual_size: str = "Unknown",
++     ) -> None:
++-        super().__init__(
++-            f"Got more than {limit} bytes ({actual_size}) when reading {line}."
++-        )
+++        super().__init__(f"Got more than {limit} bytes when reading: {line!r}.")
++         self.args = (line, limit, actual_size)
++ 
++ 
 +diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 5768bd623..cdf3fc89a 100644
++index cdf3fc89a..2c1e4b17a 100644
 +--- a/aiohttp/http_parser.py
 ++++ b/aiohttp/http_parser.py
-+@@ -26,7 +26,12 @@ from yarl import URL
++@@ -167,20 +167,10 @@ class HeadersParser:
++                 raise InvalidHeader(line)
 + 
-+ from . import hdrs
-+ from .base_protocol import BaseProtocol
-+-from .compression_utils import HAS_BROTLI, BrotliDecompressor, ZLibDecompressor
-++from .compression_utils import (
-++    DEFAULT_MAX_DECOMPRESS_SIZE,
-++    HAS_BROTLI,
-++    BrotliDecompressor,
-++    ZLibDecompressor,
-++)
-+ from .helpers import (
-+     _EXC_SENTINEL,
-+     DEBUG,
-+@@ -41,6 +46,7 @@ from .http_exceptions import (
-+     BadStatusLine,
-+     ContentEncodingError,
-+     ContentLengthError,
-++    DecompressSizeError,
-+     InvalidHeader,
-+     InvalidURLError,
-+     LineTooLong,
-+@@ -959,7 +965,12 @@ class DeflateBuffer:
++             bvalue = bvalue.lstrip(b" \t")
++-            if len(bname) > self.max_field_size:
++-                raise LineTooLong(
++-                    "request header name {}".format(
++-                        bname.decode("utf8", "backslashreplace")
++-                    ),
++-                    str(self.max_field_size),
++-                    str(len(bname)),
++-                )
++             name = bname.decode("utf-8", "surrogateescape")
++             if not TOKENRE.fullmatch(name):
++                 raise InvalidHeader(bname)
 + 
-+     decompressor: Any
++-            header_length = len(bvalue)
++-
++             # next line
++             lines_idx += 1
++             line = lines[lines_idx]
++@@ -190,16 +180,14 @@ class HeadersParser:
 + 
-+-    def __init__(self, out: StreamReader, encoding: Optional[str]) -> None:
-++    def __init__(
-++        self,
-++        out: StreamReader,
-++        encoding: Optional[str],
-++        max_decompress_size: int = DEFAULT_MAX_DECOMPRESS_SIZE,
-++    ) -> None:
-+         self.out = out
-+         self.size = 0
-+         self.encoding = encoding
-+@@ -976,6 +987,8 @@ class DeflateBuffer:
-+         else:
-+             self.decompressor = ZLibDecompressor(encoding=encoding)
++             # Deprecated: https://www.rfc-editor.org/rfc/rfc9112.html#name-obsolete-line-folding
++             if continuation:
+++                header_length = len(bvalue)
++                 bvalue_lst = [bvalue]
++                 while continuation:
++                     header_length += len(line)
++                     if header_length > self.max_field_size:
+++                        header_line = bname + b": " + b"".join(bvalue_lst)
++                         raise LineTooLong(
++-                            "request header field {}".format(
++-                                bname.decode("utf8", "backslashreplace")
++-                            ),
++-                            str(self.max_field_size),
++-                            str(header_length),
+++                            header_line[:100] + b"...", self.max_field_size
++                         )
++                     bvalue_lst.append(line)
 + 
-++        self._max_decompress_size = max_decompress_size
++@@ -213,15 +201,6 @@ class HeadersParser:
++                         line = b""
++                         break
++                 bvalue = b"".join(bvalue_lst)
++-            else:
++-                if header_length > self.max_field_size:
++-                    raise LineTooLong(
++-                        "request header field {}".format(
++-                            bname.decode("utf8", "backslashreplace")
++-                        ),
++-                        str(self.max_field_size),
++-                        str(header_length),
++-                    )
++ 
++             bvalue = bvalue.strip(b" \t")
++             value = bvalue.decode("utf-8", "surrogateescape")
++@@ -252,7 +231,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++         loop: Optional[asyncio.AbstractEventLoop] = None,
++         limit: int = 2**16,
++         max_line_size: int = 8190,
++-        max_headers: int = 32768,
+++        max_headers: int = 128,
++         max_field_size: int = 8190,
++         timer: Optional[BaseTimerContext] = None,
++         code: Optional[int] = None,
++@@ -325,6 +304,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++         data_len = len(data)
++         start_pos = 0
++         loop = self.loop
+++        max_line_length = self.max_line_size
++ 
++         while start_pos < data_len:
++ 
++@@ -342,11 +322,21 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++                     line = data[start_pos:pos]
++                     if SEP == b"\n":  # For lax response parsing
++                         line = line.rstrip(b"\r")
+++                    if len(line) > max_line_length:
+++                        raise LineTooLong(line[:100] + b"...", max_line_length)
 ++
-+     def set_exception(
-+         self,
-+         exc: BaseException,
-+@@ -1004,7 +1017,10 @@ class DeflateBuffer:
-+             )
-+ 
-+         try:
-+-            chunk = self.decompressor.decompress_sync(chunk)
-++            # Decompress with limit + 1 so we can detect if output exceeds limit
-++            chunk = self.decompressor.decompress_sync(
-++                chunk, max_length=self._max_decompress_size + 1
-++            )
-+         except Exception:
-+             raise ContentEncodingError(
-+                 "Can not decode content-encoding: %s" % self.encoding
-+@@ -1012,6 +1028,13 @@ class DeflateBuffer:
-+ 
-+         self._started_decoding = True
-+ 
-++        # Check if decompression limit was exceeded
-++        if len(chunk) > self._max_decompress_size:
-++            raise DecompressSizeError(
-++                "Decompressed data exceeds the configured limit of %d bytes"
-++                % self._max_decompress_size
-++            )
++                     self._lines.append(line)
+++                    # After processing the status/request line, everything is a header.
+++                    max_line_length = self.max_field_size
 ++
-+         if chunk:
-+             self.out.feed_data(chunk, len(chunk))
+++                    if len(self._lines) > self.max_headers:
+++                        raise BadHttpMessage("Too many headers received")
+++
++                     start_pos = pos + len(SEP)
 + 
-+diff --git a/aiohttp/multipart.py b/aiohttp/multipart.py
-+index 9e5ff9b41..baf07fd16 100644
-+--- a/aiohttp/multipart.py
-++++ b/aiohttp/multipart.py
-+@@ -27,7 +27,12 @@ from urllib.parse import parse_qsl, unquote, urlencode
++                     # \r\n\r\n found
++                     if self._lines[-1] == EMPTY:
+++                        max_trailers = self.max_headers - len(self._lines)
++                         try:
++                             msg: _MsgT = self.parse_message(self._lines)
++                         finally:
++@@ -406,6 +396,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++                                 auto_decompress=self._auto_decompress,
++                                 lax=self.lax,
++                                 headers_parser=self._headers_parser,
+++                                max_line_size=self.max_line_size,
+++                                max_field_size=self.max_field_size,
+++                                max_trailers=max_trailers,
++                             )
++                             if not payload_parser.done:
++                                 self._payload_parser = payload_parser
++@@ -426,6 +419,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++                                 auto_decompress=self._auto_decompress,
++                                 lax=self.lax,
++                                 headers_parser=self._headers_parser,
+++                                max_line_size=self.max_line_size,
+++                                max_field_size=self.max_field_size,
+++                                max_trailers=max_trailers,
++                             )
++                         elif not empty_body and length is None and self.read_until_eof:
++                             payload = StreamReader(
++@@ -446,6 +442,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++                                 auto_decompress=self._auto_decompress,
++                                 lax=self.lax,
++                                 headers_parser=self._headers_parser,
+++                                max_line_size=self.max_line_size,
+++                                max_field_size=self.max_field_size,
+++                                max_trailers=max_trailers,
++                             )
++                             if not payload_parser.done:
++                                 self._payload_parser = payload_parser
++@@ -455,6 +454,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++                         messages.append((msg, payload))
++                 else:
++                     self._tail = data[start_pos:]
+++                    if len(self._tail) > self.max_line_size:
+++                        raise LineTooLong(self._tail[:100] + b"...", self.max_line_size)
++                     data = EMPTY
++                     break
 + 
-+ from multidict import CIMultiDict, CIMultiDictProxy
++@@ -594,11 +595,6 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
++         except ValueError:
++             raise BadStatusLine(line) from None
 + 
-+-from .compression_utils import ZLibCompressor, ZLibDecompressor
-++from .abc import AbstractStreamWriter
-++from .compression_utils import (
-++    DEFAULT_MAX_DECOMPRESS_SIZE,
-++    ZLibCompressor,
-++    ZLibDecompressor,
-++)
-+ from .hdrs import (
-+     CONTENT_DISPOSITION,
-+     CONTENT_ENCODING,
-+@@ -263,6 +268,7 @@ class BodyPartReader:
++-        if len(path) > self.max_line_size:
++-            raise LineTooLong(
++-                "Status line is too long", str(self.max_line_size), str(len(path))
++-            )
++-
++         # method
++         if not TOKENRE.fullmatch(method):
++             raise BadStatusLine(method)
++@@ -706,11 +702,6 @@ class HttpResponseParser(HttpParser[RawResponseMessage]):
++             status = status.strip()
++             reason = ""
++ 
++-        if len(reason) > self.max_line_size:
++-            raise LineTooLong(
++-                "Status line is too long", str(self.max_line_size), str(len(reason))
++-            )
++-
++         # version
++         match = VERSRE.fullmatch(version)
++         if match is None:
++@@ -772,6 +763,9 @@ class HttpPayloadParser:
++         lax: bool = False,
 +         *,
-+         subtype: str = "mixed",
-+         default_charset: Optional[str] = None,
-++        max_decompress_size: int = DEFAULT_MAX_DECOMPRESS_SIZE,
++         headers_parser: HeadersParser,
+++        max_line_size: int = 8190,
+++        max_field_size: int = 8190,
+++        max_trailers: int = 128,
 +     ) -> None:
-+         self.headers = headers
-+         self._boundary = boundary
-+@@ -278,6 +284,7 @@ class BodyPartReader:
-+         self._prev_chunk: Optional[bytes] = None
-+         self._content_eof = 0
-+         self._cache: Dict[str, Any] = {}
-++        self._max_decompress_size = max_decompress_size
++         self._length = 0
++         self._type = ParseState.PARSE_NONE
++@@ -781,6 +775,9 @@ class HttpPayloadParser:
++         self._auto_decompress = auto_decompress
++         self._lax = lax
++         self._headers_parser = headers_parser
+++        self._max_line_size = max_line_size
+++        self._max_field_size = max_field_size
+++        self._max_trailers = max_trailers
++         self._trailer_lines: list[bytes] = []
++         self.done = False
 + 
-+     def __aiter__(self) -> AsyncIterator["BodyPartReader"]:
-+         return self  # type: ignore[return-value]
-+@@ -471,7 +478,7 @@ class BodyPartReader:
-+             return ZLibDecompressor(
-+                 encoding=encoding,
-+                 suppress_deflate_header=True,
-+-            ).decompress_sync(data)
-++            ).decompress_sync(data, max_length=self._max_decompress_size)
++@@ -855,6 +852,15 @@ class HttpPayloadParser:
++         # Chunked transfer encoding parser
++         elif self._type == ParseState.PARSE_CHUNKED:
++             if self._chunk_tail:
+++                # We should never have a tail if we're inside the payload body.
+++                assert self._chunk != ChunkState.PARSE_CHUNKED_CHUNK
+++                # We should check the length is sane.
+++                max_line_length = self._max_line_size
+++                if self._chunk == ChunkState.PARSE_TRAILERS:
+++                    max_line_length = self._max_field_size
+++                if len(self._chunk_tail) > max_line_length:
+++                    raise LineTooLong(self._chunk_tail[:100] + b"...", max_line_length)
+++
++                 chunk = self._chunk_tail + chunk
++                 self._chunk_tail = b""
 + 
-+         raise RuntimeError(f"unknown content encoding: {encoding}")
++@@ -938,8 +944,15 @@ class HttpPayloadParser:
++                     chunk = chunk[pos + len(SEP) :]
++                     if SEP == b"\n":  # For lax response parsing
++                         line = line.rstrip(b"\r")
+++
+++                    if len(line) > self._max_field_size:
+++                        raise LineTooLong(line[:100] + b"...", self._max_field_size)
+++
++                     self._trailer_lines.append(line)
 + 
-+@@ -528,7 +535,7 @@ class BodyPartReaderPayload(Payload):
-+         if params:
-+             self.set_content_disposition("attachment", True, **params)
+++                    if len(self._trailer_lines) > self._max_trailers:
+++                        raise BadHttpMessage("Too many trailers received")
+++
++                     # \r\n\r\n found, end of stream
++                     if self._trailer_lines[-1] == b"":
++                         # Headers and trailers are defined the same way,
++diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
++index f083b13eb..a06503e0c 100644
++--- a/aiohttp/web_protocol.py
+++++ b/aiohttp/web_protocol.py
++@@ -177,7 +177,7 @@ class RequestHandler(BaseProtocol):
++         access_log_format: str = AccessLogger.LOG_FORMAT,
++         debug: bool = False,
++         max_line_size: int = 8190,
++-        max_headers: int = 32768,
+++        max_headers: int = 128,
++         max_field_size: int = 8190,
++         lingering_time: float = 10.0,
++         read_bufsize: int = 2**16,
++diff --git a/docs/client_reference.rst b/docs/client_reference.rst
++index fdf66e1be..49a2dfe58 100644
++--- a/docs/client_reference.rst
+++++ b/docs/client_reference.rst
++@@ -52,6 +52,9 @@ The client session supports the context manager protocol for self closing.
++                          requote_redirect_url=True, \
++                          trust_env=False, \
++                          trace_configs=None, \
+++                         max_line_size=8190, \
+++                         max_field_size=8190, \
+++                         max_headers=128, \
++                          fallback_charset_resolver=lambda r, b: "utf-8")
 + 
-+-    async def write(self, writer: Any) -> None:
-++    async def write(self, writer: AbstractStreamWriter) -> None:
-+         field = self._value
-+         chunk = await field.read_chunk(size=2**16)
-+         while chunk:
-+@@ -927,7 +934,9 @@ class MultipartWriter(Payload):
-+         total += 2 + len(self._boundary) + 4  # b'--'+self._boundary+b'--\r\n'
-+         return total
++    The class for creating client sessions and making requests.
++@@ -227,6 +230,17 @@ The client session supports the context manager protocol for self closing.
++                          disabling.  See :ref:`aiohttp-client-tracing-reference` for
++                          more information.
 + 
-+-    async def write(self, writer: Any, close_boundary: bool = True) -> None:
-++    async def write(
-++        self, writer: AbstractStreamWriter, close_boundary: bool = True
-++    ) -> None:
-+         """Write body."""
-+         for part, encoding, te_encoding in self._parts:
-+             if self._is_form_data:
-+@@ -956,7 +965,7 @@ class MultipartWriter(Payload):
+++   :param int read_bufsize: Size of the read buffer (:attr:`ClientResponse.content`).
+++                            64 KiB by default.
+++
+++      .. versionadded:: 3.7
+++
+++   :param int max_line_size: Maximum allowed size of lines in responses.
+++
+++   :param int max_field_size: Maximum allowed size of header name and value combined in responses.
+++
+++   :param int max_headers: Maximum number of headers and trailers combined in responses.
+++
++    :param Callable[[ClientResponse,bytes],str] fallback_charset_resolver:
++       A :term:`callable` that accepts a :class:`ClientResponse` and the
++       :class:`bytes` contents, and returns a :class:`str` which will be used as
++@@ -376,7 +390,11 @@ The client session supports the context manager protocol for self closing.
++                          timeout=sentinel, ssl=None, \
++                          verify_ssl=None, fingerprint=None, \
++                          ssl_context=None, proxy_headers=None, \
++-                         server_hostname=None, auto_decompress=None)
+++                         server_hostname=None, \
+++                         auto_decompress=None, \
+++                         max_line_size=None, \
+++                         max_field_size=None, \
+++                         max_headers=None)
++       :async:
++       :noindexentry:
 + 
++@@ -561,6 +579,12 @@ The client session supports the context manager protocol for self closing.
++          Overrides :attr:`ClientSession.auto_decompress`.
++          May be used to enable/disable auto decompression on a per-request basis.
 + 
-+ class MultipartPayloadWriter:
-+-    def __init__(self, writer: Any) -> None:
-++    def __init__(self, writer: AbstractStreamWriter) -> None:
-+         self._writer = writer
-+         self._encoding: Optional[str] = None
-+         self._compress: Optional[ZLibCompressor] = None
-+diff --git a/docs/spelling_wordlist.txt b/docs/spelling_wordlist.txt
-+index 514477e8f..34399e6ba 100644
-+--- a/docs/spelling_wordlist.txt
-++++ b/docs/spelling_wordlist.txt
-+@@ -182,6 +182,7 @@ lowercased
-+ Mako
-+ manylinux
-+ metadata
-++MiB
-+ microservice
-+ middleware
-+ middlewares
+++      :param int max_line_size: Maximum allowed size of lines in responses.
+++
+++      :param int max_field_size: Maximum allowed size of header name and value combined in responses.
+++
+++      :param int max_headers: Maximum number of headers and trailers combined in responses.
+++
++       :return ClientResponse: a :class:`client response <ClientResponse>`
++          object.
++ 
++diff --git a/docs/web_reference.rst b/docs/web_reference.rst
++index aedac0e54..cc6201b42 100644
++--- a/docs/web_reference.rst
+++++ b/docs/web_reference.rst
++@@ -2709,9 +2709,10 @@ application on specific TCP or Unix socket, e.g.::
++         :attr:`helpers.AccessLogger.LOG_FORMAT`.
++    :param int max_line_size: Optional maximum header line size. Default:
++         ``8190``.
++-   :param int max_headers: Optional maximum header size. Default: ``32768``.
++-   :param int max_field_size: Optional maximum header field size. Default:
+++   :param int max_field_size: Optional maximum header combined name and value size. Default:
++         ``8190``.
+++   :param int max_headers: Optional maximum number of headers and trailers combined. Default:
+++        ``128``.
++ 
++    :param float lingering_time: Maximum time during which the server
++         reads and ignores additional data coming from the client when
 +diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
-+index dbb2dff5a..7d126d185 100644
++index 7d126d185..55115fd6f 100644
 +--- a/tests/test_client_functional.py
 ++++ b/tests/test_client_functional.py
-+@@ -8,9 +8,18 @@ import json
-+ import pathlib
-+ import socket
-+ import ssl
-++import zlib
-+ from typing import Any, AsyncIterator
-+ from unittest import mock
-+ 
-++try:
-++    try:
-++        import brotlicffi as brotli
-++    except ImportError:
-++        import brotli
-++except ImportError:
-++    brotli = None  # pragma: no cover
-++
-+ import pytest
-+ from multidict import MultiDict
-+ from yarl import URL
-+@@ -19,6 +28,8 @@ import aiohttp
-+ from aiohttp import Fingerprint, ServerFingerprintMismatch, hdrs, web
-+ from aiohttp.abc import AbstractResolver
-+ from aiohttp.client_exceptions import TooManyRedirects
-++from aiohttp.compression_utils import DEFAULT_MAX_DECOMPRESS_SIZE, HAS_BROTLI
-++from aiohttp.http_exceptions import DecompressSizeError
-+ from aiohttp.pytest_plugin import AiohttpClient, TestClient
-+ from aiohttp.test_utils import unused_port
-+ 
-+@@ -1903,8 +1914,73 @@ async def test_bad_payload_compression(aiohttp_client) -> None:
-+     resp.close()
++@@ -3361,17 +3361,17 @@ async def test_http_empty_data_text(aiohttp_client) -> None:
++         assert resp.headers["Content-Type"] == "text/plain; charset=utf-8"
 + 
 + 
-+-async def test_bad_payload_chunked_encoding(aiohttp_client) -> None:
++-async def test_max_field_size_session_default(aiohttp_client) -> None:
 +-    async def handler(request):
-++async def test_payload_decompress_size_limit(aiohttp_client: AiohttpClient) -> None:
-++    """Test that decompression size limit triggers DecompressSizeError.
-++
-++    When a compressed payload expands beyond the configured limit,
-++    we raise DecompressSizeError.
-++    """
-++    # Create a highly compressible payload that exceeds the decompression limit.
-++    # 64MiB of repeated bytes compresses to ~32KB but expands beyond the
-++    # 32MiB per-call limit.
-++    original = b"A" * (64 * 2**20)
-++    compressed = zlib.compress(original)
-++    assert len(original) > DEFAULT_MAX_DECOMPRESS_SIZE
-++
++-        return web.Response(headers={"Custom": "x" * 8190})
+++async def test_max_field_size_session_default(aiohttp_client: AiohttpClient) -> None:
 ++    async def handler(request: web.Request) -> web.Response:
-++        # Send compressed data with Content-Encoding header
-++        resp = web.Response(body=compressed)
-++        resp.headers["Content-Encoding"] = "deflate"
-++        return resp
-++
-++    app = web.Application()
-++    app.router.add_get("/", handler)
-++    client = await aiohttp_client(app)
-++
+++        return web.Response(headers={"Custom": "x" * 8182})
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++     client = await aiohttp_client(app)
++ 
++-    async with await client.get("/") as resp:
++-        assert resp.headers["Custom"] == "x" * 8190
 ++    async with client.get("/") as resp:
-++        assert resp.status == 200
-++
-++        with pytest.raises(aiohttp.ClientPayloadError) as exc_info:
-++            await resp.read()
-++
-++        assert isinstance(exc_info.value.__cause__, DecompressSizeError)
-++        assert "Decompressed data exceeds" in str(exc_info.value.__cause__)
-++
-++
-++@pytest.mark.skipif(
-++    brotli is None or not HAS_BROTLI, reason="brotli decoding is unavailable"
-++)
-++async def test_payload_decompress_size_limit_brotli(
+++        assert resp.headers["Custom"] == "x" * 8182
++ 
++ 
++ async def test_max_field_size_session_default_fail(aiohttp_client) -> None:
++@@ -3386,43 +3386,96 @@ async def test_max_field_size_session_default_fail(aiohttp_client) -> None:
++         await client.get("/")
++ 
++ 
++-async def test_max_field_size_session_explicit(aiohttp_client) -> None:
++-    async def handler(request):
++-        return web.Response(headers={"Custom": "x" * 8191})
+++async def test_max_field_size_session_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(headers={"Custom": "x" * 8192})
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++-    client = await aiohttp_client(app, max_field_size=8191)
+++    client = await aiohttp_client(app, max_field_size=8200)
++ 
++-    async with await client.get("/") as resp:
++-        assert resp.headers["Custom"] == "x" * 8191
+++    async with client.get("/") as resp:
+++        assert resp.headers["Custom"] == "x" * 8192
++ 
++ 
++-async def test_max_field_size_request_explicit(aiohttp_client) -> None:
++-    async def handler(request):
++-        return web.Response(headers={"Custom": "x" * 8191})
+++async def test_max_headers_session_default(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(headers={f"Custom-{i}": "x" for i in range(120)})
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++     client = await aiohttp_client(app)
++ 
++-    async with await client.get("/", max_field_size=8191) as resp:
++-        assert resp.headers["Custom"] == "x" * 8191
+++    async with client.get("/") as resp:
+++        assert resp.headers["Custom-119"] == "x"
++ 
++ 
++-async def test_max_line_size_session_default(aiohttp_client) -> None:
++-    async def handler(request):
++-        return web.Response(status=200, reason="x" * 8190)
+++async def test_max_headers_session_default_fail(
 ++    aiohttp_client: AiohttpClient,
 ++) -> None:
-++    """Test that brotli decompression size limit triggers DecompressSizeError."""
-++    assert brotli is not None
-++    # Create a highly compressible payload that exceeds the decompression limit.
-++    original = b"A" * (64 * 2**20)
-++    compressed = brotli.compress(original)
-++    assert len(original) > DEFAULT_MAX_DECOMPRESS_SIZE
-++
 ++    async def handler(request: web.Request) -> web.Response:
-++        resp = web.Response(body=compressed)
-++        resp.headers["Content-Encoding"] = "br"
-++        return resp
+++        return web.Response(headers={f"Custom-{i}": "x" for i in range(129)})
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++     client = await aiohttp_client(app)
+++    with pytest.raises(aiohttp.ClientResponseError):
+++        await client.get("/")
++ 
++-    async with await client.get("/") as resp:
++-        assert resp.reason == "x" * 8190
+++
+++async def test_max_headers_session_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(headers={f"Custom-{i}": "x" for i in range(130)})
 ++
 ++    app = web.Application()
-++    app.router.add_get("/", handler)
+++    app.add_routes([web.get("/", handler)])
+++
+++    client = await aiohttp_client(app, max_headers=140)
+++
+++    async with client.get("/") as resp:
+++        assert resp.headers["Custom-129"] == "x"
+++
+++
+++async def test_max_headers_request_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(headers={f"Custom-{i}": "x" for i in range(130)})
+++
+++    app = web.Application()
+++    app.add_routes([web.get("/", handler)])
+++
+++    client = await aiohttp_client(app)
+++
+++    async with client.get("/", max_headers=140) as resp:
+++        assert resp.headers["Custom-129"] == "x"
+++
+++
+++async def test_max_field_size_request_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(headers={"Custom": "x" * 8192})
+++
+++    app = web.Application()
+++    app.add_routes([web.get("/", handler)])
+++
+++    client = await aiohttp_client(app)
+++
+++    async with client.get("/", max_field_size=8200) as resp:
+++        assert resp.headers["Custom"] == "x" * 8192
+++
+++
+++async def test_max_line_size_session_default(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(status=200, reason="x" * 8177)
+++
+++    app = web.Application()
+++    app.add_routes([web.get("/", handler)])
+++
 ++    client = await aiohttp_client(app)
 ++
 ++    async with client.get("/") as resp:
-++        assert resp.status == 200
-++
-++        with pytest.raises(aiohttp.ClientPayloadError) as exc_info:
-++            await resp.read()
-++
-++        assert isinstance(exc_info.value.__cause__, DecompressSizeError)
-++        assert "Decompressed data exceeds" in str(exc_info.value.__cause__)
-++
-++
-++async def test_bad_payload_chunked_encoding(aiohttp_client: AiohttpClient) -> None:
-++    async def handler(request: web.Request) -> web.StreamResponse:
-+         resp = web.StreamResponse()
-+         resp.force_close()
-+         resp._length_check = False
+++        assert resp.reason == "x" * 8177
++ 
++ 
++ async def test_max_line_size_session_default_fail(aiohttp_client) -> None:
++@@ -3437,30 +3490,30 @@ async def test_max_line_size_session_default_fail(aiohttp_client) -> None:
++         await client.get("/")
++ 
++ 
++-async def test_max_line_size_session_explicit(aiohttp_client) -> None:
++-    async def handler(request):
++-        return web.Response(status=200, reason="x" * 8191)
+++async def test_max_line_size_session_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(status=200, reason="x" * 8197)
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++-    client = await aiohttp_client(app, max_line_size=8191)
+++    client = await aiohttp_client(app, max_line_size=8210)
++ 
++-    async with await client.get("/") as resp:
++-        assert resp.reason == "x" * 8191
+++    async with client.get("/") as resp:
+++        assert resp.reason == "x" * 8197
++ 
++ 
++-async def test_max_line_size_request_explicit(aiohttp_client) -> None:
++-    async def handler(request):
++-        return web.Response(status=200, reason="x" * 8191)
+++async def test_max_line_size_request_explicit(aiohttp_client: AiohttpClient) -> None:
+++    async def handler(request: web.Request) -> web.Response:
+++        return web.Response(status=200, reason="x" * 8197)
++ 
++     app = web.Application()
++     app.add_routes([web.get("/", handler)])
++ 
++     client = await aiohttp_client(app)
++ 
++-    async with await client.get("/", max_line_size=8191) as resp:
++-        assert resp.reason == "x" * 8191
+++    async with client.get("/", max_line_size=8210) as resp:
+++        assert resp.reason == "x" * 8197
++ 
++ 
++ @pytest.mark.xfail(raises=asyncio.TimeoutError, reason="#7599")
++diff --git a/tests/test_http_exceptions.py b/tests/test_http_exceptions.py
++index 24944d9fc..6186a71c6 100644
++--- a/tests/test_http_exceptions.py
+++++ b/tests/test_http_exceptions.py
++@@ -69,32 +69,32 @@ class TestBadHttpMessage:
++ 
++ class TestLineTooLong:
++     def test_ctor(self) -> None:
++-        err = http_exceptions.LineTooLong("spam", "10", "12")
+++        err = http_exceptions.LineTooLong(b"spam", 10)
++         assert err.code == 400
++-        assert err.message == "Got more than 10 bytes (12) when reading spam."
+++        assert err.message == "Got more than 10 bytes when reading: b'spam'."
++         assert err.headers is None
++ 
++     def test_pickle(self) -> None:
++-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
+++        err = http_exceptions.LineTooLong(line=b"spam", limit=10, actual_size="12")
++         err.foo = "bar"
++         for proto in range(pickle.HIGHEST_PROTOCOL + 1):
++             pickled = pickle.dumps(err, proto)
++             err2 = pickle.loads(pickled)
++             assert err2.code == 400
++-            assert err2.message == ("Got more than 10 bytes (12) " "when reading spam.")
+++            assert err2.message == ("Got more than 10 bytes when reading: b'spam'.")
++             assert err2.headers is None
++             assert err2.foo == "bar"
++ 
++     def test_str(self) -> None:
++-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
++-        expected = "400, message:\n  Got more than 10 bytes (12) when reading spam."
+++        err = http_exceptions.LineTooLong(line=b"spam", limit=10)
+++        expected = "400, message:\n  Got more than 10 bytes when reading: b'spam'."
++         assert str(err) == expected
++ 
++     def test_repr(self) -> None:
++-        err = http_exceptions.LineTooLong(line="spam", limit="10", actual_size="12")
+++        err = http_exceptions.LineTooLong(line=b"spam", limit=10)
++         assert repr(err) == (
++-            "<LineTooLong: 400, message='Got more than "
++-            "10 bytes (12) when reading spam.'>"
+++            '<LineTooLong: 400, message="Got more than '
+++            "10 bytes when reading: b'spam'.\">"
++         )
++ 
++ 
 +diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 0fcefdefd..9449c4061 100644
++index 9449c4061..ea8c338e0 100644
 +--- a/tests/test_http_parser.py
 ++++ b/tests/test_http_parser.py
-+@@ -2,6 +2,7 @@
-+ 
-+ import asyncio
-+ import re
-++import zlib
-+ from contextlib import nullcontext
-+ from typing import Any, Dict, List
-+ from unittest import mock
-+@@ -14,6 +15,7 @@ from yarl import URL
-+ import aiohttp
-+ from aiohttp import http_exceptions, streams
-+ from aiohttp.base_protocol import BaseProtocol
-++from aiohttp.compression_utils import HAS_BROTLI
-+ from aiohttp.http_parser import (
++@@ -20,7 +20,9 @@ from aiohttp.http_parser import (
 +     NO_EXTENSIONS,
 +     DeflateBuffer,
-+@@ -561,7 +563,9 @@ def test_compression_gzip(parser) -> None:
-+     assert msg.compression == "gzip"
++     HttpPayloadParser,
+++    HttpRequestParser,
++     HttpRequestParserPy,
+++    HttpResponseParser,
++     HttpResponseParserPy,
++     HttpVersion,
++ )
++@@ -66,7 +68,7 @@ def parser(loop: Any, protocol: Any, request: Any):
++         loop,
++         2**16,
++         max_line_size=8190,
++-        max_headers=32768,
+++        max_headers=128,
++         max_field_size=8190,
++     )
++ 
++@@ -85,7 +87,7 @@ def response(loop: Any, protocol: Any, request: Any):
++         loop,
++         2**16,
++         max_line_size=8190,
++-        max_headers=32768,
+++        max_headers=128,
++         max_field_size=8190,
++     )
++ 
++@@ -297,9 +299,20 @@ def test_parse_headers_longline(parser: Any) -> None:
++         parser.feed_data(text)
 + 
 + 
-+-@pytest.mark.skipif(brotli is None, reason="brotli is not installed")
-++@pytest.mark.skipif(
-++    brotli is None or not HAS_BROTLI, reason="brotli decoding is unavailable"
-++)
-+ def test_compression_brotli(parser) -> None:
-+     text = b"GET /test HTTP/1.1\r\n" b"content-encoding: br\r\n\r\n"
+++@pytest.fixture
+++def xfail_c_parser_status(request) -> None:
+++    if isinstance(request.getfixturevalue("parser"), HttpRequestParserPy):
+++        return
+++    request.node.add_marker(
+++        pytest.mark.xfail(
+++            reason="Regression test for Py parser. May match C behaviour later.",
+++            raises=http_exceptions.BadStatusLine,
+++        )
+++    )
+++
+++
+++@pytest.mark.usefixtures("xfail_c_parser_status")
++ def test_parse_unusual_request_line(parser) -> None:
++-    if not isinstance(response, HttpResponseParserPy):
++-        pytest.xfail("Regression test for Py parser. May match C behaviour later.")
++     text = b"#smol //a HTTP/1.3\r\n\r\n"
 +     messages, upgrade, tail = parser.feed_data(text)
-+@@ -1736,7 +1740,9 @@ class TestParsePayload:
-+         assert p.done
-+         assert out.is_eof()
++     assert len(messages) == 1
++@@ -696,13 +709,14 @@ def test_max_header_field_size(parser, size) -> None:
++     name = b"t" * size
++     text = b"GET /test HTTP/1.1\r\n" + name + b":data\r\n\r\n"
 + 
-+-    @pytest.mark.skipif(brotli is None, reason="brotli is not installed")
-++    @pytest.mark.skipif(
-++        brotli is None or not HAS_BROTLI, reason="brotli decoding is unavailable"
++-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
++     with pytest.raises(http_exceptions.LineTooLong, match=match):
++-        parser.feed_data(text)
+++        for i in range(0, len(text), 5000):  # pragma: no branch
+++            parser.feed_data(text[i : i + 5000])
++ 
++ 
++-def test_max_header_field_size_under_limit(parser) -> None:
++-    name = b"t" * 8190
+++def test_max_header_size_under_limit(parser: HttpRequestParser) -> None:
+++    name = b"t" * 8185
++     text = b"GET /test HTTP/1.1\r\n" + name + b":data\r\n\r\n"
++ 
++     messages, upgrade, tail = parser.feed_data(text)
++@@ -724,14 +738,68 @@ def test_max_header_value_size(parser, size) -> None:
++     name = b"t" * size
++     text = b"GET /test HTTP/1.1\r\n" b"data:" + name + b"\r\n\r\n"
++ 
++-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
+++    with pytest.raises(http_exceptions.LineTooLong, match=match):
+++        for i in range(0, len(text), 4000):  # pragma: no branch
+++            parser.feed_data(text[i : i + 4000])
+++
+++
+++def test_max_header_combined_size(parser: HttpRequestParser) -> None:
+++    k = b"t" * 4100
+++    text = b"GET /test HTTP/1.1\r\n" + k + b":" + k + b"\r\n\r\n"
+++
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
++     with pytest.raises(http_exceptions.LineTooLong, match=match):
++         parser.feed_data(text)
++ 
++ 
++-def test_max_header_value_size_under_limit(parser) -> None:
++-    value = b"A" * 8190
++-    text = b"GET /test HTTP/1.1\r\n" b"data:" + value + b"\r\n\r\n"
+++@pytest.mark.parametrize("size", [40960, 8191])
+++async def test_max_trailer_size(parser: HttpRequestParser, size: int) -> None:
+++    value = b"t" * size
+++    text = (
+++        b"GET /test HTTP/1.1\r\nTransfer-Encoding: chunked\r\n\r\n"
+++        + hex(4000)[2:].encode()
+++        + b"\r\n"
+++        + b"b" * 4000
+++        + b"\r\n0\r\ntest: "
+++        + value
+++        + b"\r\n\r\n"
 ++    )
-+     async def test_http_payload_brotli(self, stream) -> None:
-+         compressed = brotli.compress(b"brotli data")
-+         out = aiohttp.FlowControlDataQueue(
-+@@ -1816,6 +1822,7 @@ class TestDeflateBuffer:
-+         dbuf.feed_eof()
-+         assert [b"line"] == list(d for d, _ in buf._buffer)
-+ 
-++    @pytest.mark.skipif(not HAS_BROTLI, reason="brotli decoding is unavailable")
-+     async def test_feed_eof_no_err_brotli(self, stream) -> None:
-+         buf = aiohttp.FlowControlDataQueue(
-+             stream, 2**16, loop=asyncio.get_event_loop()
-+@@ -1837,3 +1844,36 @@ class TestDeflateBuffer:
-+         dbuf.feed_eof()
-+ 
-+         assert buf.at_eof()
 ++
-++    @pytest.mark.parametrize(
-++        "chunk_size",
-++        [1024, 2**14, 2**16],  # 1KB, 16KB, 64KB
-++        ids=["1KB", "16KB", "64KB"],
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
+++    with pytest.raises(http_exceptions.LineTooLong, match=match):
+++        payload = None
+++        for i in range(0, len(text), 3000):  # pragma: no branch
+++            messages, upgrade, tail = parser.feed_data(text[i : i + 3000])
+++            if messages:
+++                payload = messages[0][-1]
+++        # Trailers are not seen until payload is read.
+++        assert payload is not None
+++        await payload.read()
+++
+++
+++@pytest.mark.parametrize("headers,trailers", ((129, 0), (0, 129), (64, 65)))
+++async def test_max_headers(
+++    parser: HttpRequestParser, headers: int, trailers: int
+++) -> None:
+++    text = (
+++        b"GET /test HTTP/1.1\r\nTransfer-Encoding: chunked"
+++        + b"".join(b"\r\nHeader-%d: Value" % i for i in range(headers))
+++        + b"\r\n\r\n4\r\ntest\r\n0"
+++        + b"".join(b"\r\nTrailer-%d: Value" % i for i in range(trailers))
+++        + b"\r\n\r\n"
 ++    )
-++    async def test_streaming_decompress_large_payload(
-++        self, protocol: BaseProtocol, chunk_size: int
-++    ) -> None:
-++        """Test that large payloads decompress correctly when streamed in chunks.
 ++
-++        This simulates real HTTP streaming where compressed data arrives in
-++        small network chunks. Each chunk's decompressed output should be within
-++        the max_decompress_size limit, allowing full recovery of the original data.
-++        """
-++        # Create a large payload (3MiB) that compresses well
-++        original = b"A" * (3 * 2**20)
-++        compressed = zlib.compress(original)
+++    match = "Too many (headers|trailers) received"
+++    with pytest.raises(http_exceptions.BadHttpMessage, match=match):
+++        messages, upgrade, tail = parser.feed_data(text)
+++        # Trailers are not seen until payload is read.
+++        await messages[0][-1].read()
 ++
-++        buf = aiohttp.StreamReader(protocol, 2**16, loop=asyncio.get_running_loop())
-++        dbuf = DeflateBuffer(buf, "deflate")
 ++
-++        # Feed compressed data in chunks (simulating network streaming)
-++        for i in range(0, len(compressed), chunk_size):
-++            chunk = compressed[i : i + chunk_size]
-++            dbuf.feed_data(chunk, len(chunk))
-++
-++        dbuf.feed_eof()
-++
-++        # Read all decompressed data
-++        result = b"".join(buf._buffer)
-++        assert len(result) == len(original)
-++        assert result == original
-+diff --git a/tests/test_multipart.py b/tests/test_multipart.py
-+index e4a2be1f3..553085ca5 100644
-+--- a/tests/test_multipart.py
-++++ b/tests/test_multipart.py
-+@@ -9,6 +9,7 @@ import pytest
+++def test_max_header_value_size_under_limit(parser: HttpRequestParser) -> None:
+++    value = b"A" * 8185
+++    text = b"GET /test HTTP/1.1\r\ndata:" + value + b"\r\n\r\n"
 + 
-+ import aiohttp
-+ from aiohttp import payload
-++from aiohttp.abc import AbstractStreamWriter
-+ from aiohttp.hdrs import (
-+     CONTENT_DISPOSITION,
-+     CONTENT_ENCODING,
-+@@ -32,14 +33,14 @@ def buf():
++     messages, upgrade, tail = parser.feed_data(text)
++     msg = messages[0][0]
++@@ -752,13 +820,16 @@ def test_max_header_value_size_continuation(response, size) -> None:
++     name = b"T" * (size - 5)
++     text = b"HTTP/1.1 200 Ok\r\ndata: test\r\n " + name + b"\r\n\r\n"
++ 
++-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
++     with pytest.raises(http_exceptions.LineTooLong, match=match):
++-        response.feed_data(text)
+++        for i in range(0, len(text), 9000):  # pragma: no branch
+++            response.feed_data(text[i : i + 9000])
 + 
 + 
-+ @pytest.fixture
-+-def stream(buf):
-+-    writer = mock.Mock()
-++def stream(buf: bytearray) -> AbstractStreamWriter:
-++    writer = mock.create_autospec(AbstractStreamWriter, instance=True, spec_set=True)
-+ 
-+     async def write(chunk):
-+         buf.extend(chunk)
-+ 
-+     writer.write.side_effect = write
-+-    return writer
-++    return writer  # type: ignore[no-any-return]
-+ 
-+ 
-+ @pytest.fixture
-+@@ -336,6 +337,17 @@ class TestPartReader:
-+             result = await obj.read(decode=True)
-+         assert b"Time to Relax!" == result
-+ 
-++    def test_decode_remains_synchronous(self) -> None:
-++        data = b"\x0b\xc9\xccMU(\xc9W\x08J\xcdI\xacP\x04\x00"
-++        with Stream(b"") as stream:
-++            obj = aiohttp.BodyPartReader(
-++                BOUNDARY,
-++                {CONTENT_ENCODING: "deflate"},
-++                stream,
-++            )
-++            result = obj.decode(data)
-++        assert b"Time to Relax!" == result
-++
-+     async def test_read_with_content_encoding_identity(self) -> None:
-+         thing = (
-+             b"\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03\x0b\xc9\xccMU"
-+@@ -1012,7 +1024,9 @@ async def test_writer(writer) -> None:
-+     assert writer.boundary == ":"
-+ 
-+ 
-+-async def test_writer_serialize_io_chunk(buf, stream, writer) -> None:
-++async def test_writer_serialize_io_chunk(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
++-def test_max_header_value_size_continuation_under_limit(response) -> None:
++-    value = b"A" * 8185
+++def test_max_header_value_size_continuation_under_limit(
+++    response: HttpResponseParser,
 ++) -> None:
-+     with io.BytesIO(b"foobarbaz") as file_handle:
-+         writer.append(file_handle)
-+         await writer.write(stream)
-+@@ -1022,7 +1036,9 @@ async def test_writer_serialize_io_chunk(buf, stream, writer) -> None:
+++    value = b"A" * 8179
++     text = b"HTTP/1.1 200 Ok\r\ndata: test\r\n " + value + b"\r\n\r\n"
++ 
++     messages, upgrade, tail = response.feed_data(text)
++@@ -956,13 +1027,13 @@ def test_http_request_parser_bad_nonascii_uri(parser: Any) -> None:
++ @pytest.mark.parametrize("size", [40965, 8191])
++ def test_http_request_max_status_line(parser, size) -> None:
++     path = b"t" * (size - 5)
++-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
++     with pytest.raises(http_exceptions.LineTooLong, match=match):
++         parser.feed_data(b"GET /path" + path + b" HTTP/1.1\r\n\r\n")
++ 
++ 
++-def test_http_request_max_status_line_under_limit(parser) -> None:
++-    path = b"t" * (8190 - 5)
+++def test_http_request_max_status_line_under_limit(parser: HttpRequestParser) -> None:
+++    path = b"t" * 8172
++     messages, upgraded, tail = parser.feed_data(
++         b"GET /path" + path + b" HTTP/1.1\r\n\r\n"
++     )
++@@ -1039,13 +1110,15 @@ def test_http_response_parser_strict_obs_line_folding(response: Any) -> None:
++ @pytest.mark.parametrize("size", [40962, 8191])
++ def test_http_response_parser_bad_status_line_too_long(response, size) -> None:
++     reason = b"t" * (size - 2)
++-    match = f"400, message:\n  Got more than 8190 bytes \\({size}\\) when reading"
+++    match = "400, message:\n  Got more than 8190 bytes when reading"
++     with pytest.raises(http_exceptions.LineTooLong, match=match):
++         response.feed_data(b"HTTP/1.1 200 Ok" + reason + b"\r\n\r\n")
++ 
++ 
++-def test_http_response_parser_status_line_under_limit(response) -> None:
++-    reason = b"O" * 8190
+++def test_http_response_parser_status_line_under_limit(
+++    response: HttpResponseParser,
+++) -> None:
+++    reason = b"O" * 8177
++     messages, upgraded, tail = response.feed_data(
++         b"HTTP/1.1 200 " + reason + b"\r\n\r\n"
++     )
++@@ -1552,7 +1625,7 @@ def test_parse_bad_method_for_c_parser_raises(loop, protocol):
++         loop,
++         2**16,
++         max_line_size=8190,
++-        max_headers=32768,
+++        max_headers=128,
++         max_field_size=8190,
 +     )
 + 
++@@ -1867,7 +1940,7 @@ class TestDeflateBuffer:
++         dbuf = DeflateBuffer(buf, "deflate")
 + 
-+-async def test_writer_serialize_json(buf, stream, writer) -> None:
-++async def test_writer_serialize_json(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     writer.append_json({"привет": "мир"})
-+     await writer.write(stream)
-+     assert (
-+@@ -1031,7 +1047,9 @@ async def test_writer_serialize_json(buf, stream, writer) -> None:
-+     )
++         # Feed compressed data in chunks (simulating network streaming)
++-        for i in range(0, len(compressed), chunk_size):
+++        for i in range(0, len(compressed), chunk_size):  # pragma: no branch
++             chunk = compressed[i : i + chunk_size]
++             dbuf.feed_data(chunk, len(chunk))
 + 
-+ 
-+-async def test_writer_serialize_form(buf, stream, writer) -> None:
-++async def test_writer_serialize_form(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     data = [("foo", "bar"), ("foo", "baz"), ("boo", "zoo")]
-+     writer.append_form(data)
-+     await writer.write(stream)
-+@@ -1039,7 +1057,9 @@ async def test_writer_serialize_form(buf, stream, writer) -> None:
-+     assert b"foo=bar&foo=baz&boo=zoo" in buf
-+ 
-+ 
-+-async def test_writer_serialize_form_dict(buf, stream, writer) -> None:
-++async def test_writer_serialize_form_dict(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     data = {"hello": "мир"}
-+     writer.append_form(data)
-+     await writer.write(stream)
-+@@ -1047,7 +1067,9 @@ async def test_writer_serialize_form_dict(buf, stream, writer) -> None:
-+     assert b"hello=%D0%BC%D0%B8%D1%80" in buf
-+ 
-+ 
-+-async def test_writer_write(buf, stream, writer) -> None:
-++async def test_writer_write(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     writer.append("foo-bar-baz")
-+     writer.append_json({"test": "passed"})
-+     writer.append_form({"test": "passed"})
-+@@ -1093,7 +1115,9 @@ async def test_writer_write(buf, stream, writer) -> None:
-+     ) == bytes(buf)
-+ 
-+ 
-+-async def test_writer_write_no_close_boundary(buf, stream) -> None:
-++async def test_writer_write_no_close_boundary(
-++    buf: bytearray, stream: AbstractStreamWriter
-++) -> None:
-+     writer = aiohttp.MultipartWriter(boundary=":")
-+     writer.append("foo-bar-baz")
-+     writer.append_json({"test": "passed"})
-+@@ -1125,12 +1149,18 @@ async def test_writer_write_no_close_boundary(buf, stream) -> None:
-+     ) == bytes(buf)
-+ 
-+ 
-+-async def test_writer_write_no_parts(buf, stream, writer) -> None:
-++async def test_writer_write_no_parts(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     await writer.write(stream)
-+     assert b"--:--\r\n" == bytes(buf)
-+ 
-+ 
-+-async def test_writer_serialize_with_content_encoding_gzip(buf, stream, writer):
-++async def test_writer_serialize_with_content_encoding_gzip(
-++    buf: bytearray,
-++    stream: AbstractStreamWriter,
-++    writer: aiohttp.MultipartWriter,
-++) -> None:
-+     writer.append("Time to Relax!", {CONTENT_ENCODING: "gzip"})
-+     await writer.write(stream)
-+     headers, message = bytes(buf).split(b"\r\n\r\n", 1)
-+@@ -1146,7 +1176,9 @@ async def test_writer_serialize_with_content_encoding_gzip(buf, stream, writer):
-+     assert b"Time to Relax!" == data
-+ 
-+ 
-+-async def test_writer_serialize_with_content_encoding_deflate(buf, stream, writer):
-++async def test_writer_serialize_with_content_encoding_deflate(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     writer.append("Time to Relax!", {CONTENT_ENCODING: "deflate"})
-+     await writer.write(stream)
-+     headers, message = bytes(buf).split(b"\r\n\r\n", 1)
-+@@ -1160,7 +1192,9 @@ async def test_writer_serialize_with_content_encoding_deflate(buf, stream, write
-+     assert thing == message
-+ 
-+ 
-+-async def test_writer_serialize_with_content_encoding_identity(buf, stream, writer):
-++async def test_writer_serialize_with_content_encoding_identity(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     thing = b"\x0b\xc9\xccMU(\xc9W\x08J\xcdI\xacP\x04\x00"
-+     writer.append(thing, {CONTENT_ENCODING: "identity"})
-+     await writer.write(stream)
-+@@ -1175,12 +1209,16 @@ async def test_writer_serialize_with_content_encoding_identity(buf, stream, writ
-+     assert thing == message.split(b"\r\n")[0]
-+ 
-+ 
-+-def test_writer_serialize_with_content_encoding_unknown(buf, stream, writer):
-++def test_writer_serialize_with_content_encoding_unknown(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     with pytest.raises(RuntimeError):
-+         writer.append("Time to Relax!", {CONTENT_ENCODING: "snappy"})
-+ 
-+ 
-+-async def test_writer_with_content_transfer_encoding_base64(buf, stream, writer):
-++async def test_writer_with_content_transfer_encoding_base64(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     writer.append("Time to Relax!", {CONTENT_TRANSFER_ENCODING: "base64"})
-+     await writer.write(stream)
-+     headers, message = bytes(buf).split(b"\r\n\r\n", 1)
-+@@ -1193,7 +1231,9 @@ async def test_writer_with_content_transfer_encoding_base64(buf, stream, writer)
-+     assert b"VGltZSB0byBSZWxheCE=" == message.split(b"\r\n")[0]
-+ 
-+ 
-+-async def test_writer_content_transfer_encoding_quote_printable(buf, stream, writer):
-++async def test_writer_content_transfer_encoding_quote_printable(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     writer.append("Привет, мир!", {CONTENT_TRANSFER_ENCODING: "quoted-printable"})
-+     await writer.write(stream)
-+     headers, message = bytes(buf).split(b"\r\n\r\n", 1)
-+@@ -1209,7 +1249,9 @@ async def test_writer_content_transfer_encoding_quote_printable(buf, stream, wri
-+     )
-+ 
-+ 
-+-def test_writer_content_transfer_encoding_unknown(buf, stream, writer) -> None:
-++def test_writer_content_transfer_encoding_unknown(
-++    buf: bytearray, stream: AbstractStreamWriter, writer: aiohttp.MultipartWriter
-++) -> None:
-+     with pytest.raises(RuntimeError):
-+         writer.append("Time to Relax!", {CONTENT_TRANSFER_ENCODING: "unknown"})
-+ 
-+@@ -1333,7 +1375,9 @@ class TestMultipartWriter:
-+             with aiohttp.MultipartWriter(boundary=":") as writer:
-+                 writer.append(None)
-+ 
-+-    async def test_write_preserves_content_disposition(self, buf, stream) -> None:
-++    async def test_write_preserves_content_disposition(
-++        self, buf: bytearray, stream: AbstractStreamWriter
-++    ) -> None:
-+         with aiohttp.MultipartWriter(boundary=":") as writer:
-+             part = writer.append(b"foo", headers={CONTENT_TYPE: "test/passed"})
-+             part.set_content_disposition("form-data", filename="bug")
-+@@ -1350,7 +1394,9 @@ class TestMultipartWriter:
-+         )
-+         assert message == b"foo\r\n--:--\r\n"
-+ 
-+-    async def test_preserve_content_disposition_header(self, buf, stream):
-++    async def test_preserve_content_disposition_header(
-++        self, buf: bytearray, stream: AbstractStreamWriter
-++    ) -> None:
-+         # https://github.com/aio-libs/aiohttp/pull/3475#issuecomment-451072381
-+         with pathlib.Path(__file__).open("rb") as fobj:
-+             with aiohttp.MultipartWriter("form-data", boundary=":") as writer:
-+@@ -1374,7 +1420,9 @@ class TestMultipartWriter:
-+             b'Content-Disposition: attachments; filename="bug.py"'
-+         )
-+ 
-+-    async def test_set_content_disposition_override(self, buf, stream):
-++    async def test_set_content_disposition_override(
-++        self, buf: bytearray, stream: AbstractStreamWriter
-++    ) -> None:
-+         # https://github.com/aio-libs/aiohttp/pull/3475#issuecomment-451072381
-+         with pathlib.Path(__file__).open("rb") as fobj:
-+             with aiohttp.MultipartWriter("form-data", boundary=":") as writer:
-+@@ -1398,7 +1446,9 @@ class TestMultipartWriter:
-+             b'Content-Disposition: attachments; filename="bug.py"'
-+         )
-+ 
-+-    async def test_reset_content_disposition_header(self, buf, stream):
-++    async def test_reset_content_disposition_header(
-++        self, buf: bytearray, stream: AbstractStreamWriter
-++    ) -> None:
-+         # https://github.com/aio-libs/aiohttp/pull/3475#issuecomment-451072381
-+         with pathlib.Path(__file__).open("rb") as fobj:
-+             with aiohttp.MultipartWriter("form-data", boundary=":") as writer:
 +-- 
 +2.35.6
 +
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index 69cad8cb44..feb9039ae1 100644
+index feb9039ae1..8b835341f3 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -15,6 +15,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
-            file://CVE-2025-69229_p1.patch \
+@@ -16,6 +16,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
             file://CVE-2025-69229_p2.patch \
             file://CVE-2025-69227.patch \
-+           file://CVE-2025-69223.patch \
+            file://CVE-2025-69223.patch \
++           file://CVE-2026-22815.patch \
             "
  
  PYPI_PACKAGE = "aiohttp"
