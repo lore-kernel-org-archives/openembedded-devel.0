@@ -1,97 +1,129 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C676CC61DD6
-	for <webhook@archiver.kernel.org>; Tue,  1 Sep 2026 07:13:44 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2334.1788246815474167261
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2026 00:13:35 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=KH+EIej5;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49b0d78a801so34647105e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2026 00:13:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788246814; x=1788851614; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+fC/eT2JnKkz5B3XfImtctX79YyQVrnp/98wsPaaY0o=;
-        b=KH+EIej5GtfBs9jfAJi75TUD4WoL0WhTvnPv7Dwa1QKHe8zTOR1nBnFPLurIFSVFLU
-         2h2gJcpQGnWfeozYrs14E+gO5HJlxTYNIm/Wb1r7JOV7zjT71/JyaDDU/QQsgzvbbPAG
-         vC2oXHP1UmPgIRc6S6ZCy9wGddAx/F2OB8TyKcRH1ZtYLhhe3S2+mUwTDUCjL80Shuem
-         oCkL+cXuqcbwdio/JAruxYlna9LyzQ1kBlHT9mCKq6XUWai5DjZTws4Par7E/uXalKD/
-         5QCxbJho/Wuk/ZSWZUGuoTE6r6GMQ+fcRtj+czpILCOJoRg0jFNxnXlaqpWF0B7caUMx
-         zV6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788246814; x=1788851614;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+fC/eT2JnKkz5B3XfImtctX79YyQVrnp/98wsPaaY0o=;
-        b=URtrIpERNBXqLglJM9uK0I50aSI+6wXWJ7GLBG00Ucx9gwVNycr7Xy1+dtRkPf2tm5
-         C3Gn1r6CJFodXgjpPgUqTsxFKATz5ZkrGEqYv1N7ub/mLTYxc90lmAXkMT2aowha2/Oh
-         45RgvsjngctiXk+DBr2IbzARetSdOWlPykkNiSELJ2MG+QIbMYrjUY7zzO0/gp/Url9p
-         KR9xLJQ75/FHZpBM8sbdQyvyy1Hdb46/BzBwKIchXSXV2DeuOFSIMT2r+Tlfnd7eQPMk
-         jj7/OeqkXhgWgGnNS9rqI+U5H332MlRtPCFw7bXKWfF0Vh7KUg90vFWEPb8OxHB23siT
-         pdVA==
-X-Gm-Message-State: AFuF++m0vpnxRAxusNomv7jgpBKWc/UsqhD0MfddxFIyXEqsV56NG5Zy
-	y1P3A3Pi18euJAMoyDePeie0/cNUnSjZYrYOcxcglXZdA80ZWPin1lv7qxbjjw==
-X-Gm-Gg: AR+sD12ZUrHFSvEpxB6kKtVF2nj4EqY86HOzH/rnJOk/PMZtJ3bq/Yp24ksZpinib+R
-	Je7Y3zO0UKCGbu0CuBt64Yd+Ejc+kKF7uq3SO4SdEsyGjBEskqhN3+qaKRSvl/ieyO9k6ripmnJ
-	jRXJhYAc7MNwrcpR8bqOmNAkz5hk/zj9VK5DP+FzGpxTwBf7/dp6R4APjnd4TmsjNpmOAn1j8UX
-	/F4mX0x5IUN7Qhev7aO40qr+TOC9iDqsvne630xUQvQMLKucgeERrZVWk/Cdc0hvZcWgFdx/sHQ
-	WCAXrBMppEMR6T7X96M5gvotITDK6GqZRSifb6wB4pVxgE11YtEsqqpU2FPISGrefirvY7fo0+J
-	bJpwLSZ0KrBDgkKTXXkmyjqZ+6mZYWhn1GXbmQHyAwQ/p10zAbutepFVgA2rRNRQ93cpnBVLTxS
-	chKUtZAnm8rVeJkeRKi6VDw5ywrL2d7lBwfTAUX3HXSCY31r6fntACy3HU1KhuENrHLh2aIRqIz
-	NXHam5GPcaDEHlWYZCSafcb9/ewiP0ppNa4+lVlbgeZ7rc/0Q==
-X-Received: by 2002:a05:600c:8107:b0:49c:d26a:cf70 with SMTP id 5b1f17b1804b1-49cd26ad005mr290639475e9.15.1788246813496;
-        Tue, 01 Sep 2026 00:13:33 -0700 (PDT)
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce4a804sm52866595e9.15.2026.09.01.00.13.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2026 00:13:32 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C73BC61DD6
+	for <webhook@archiver.kernel.org>; Tue,  1 Sep 2026 08:24:05 +0000 (UTC)
+Subject: Re: [meta-oe][scarthgap][PATCH 0/5] libssh: Fix multiple CVEs
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-python][PATCH] python3-qrcode: Convert optional dependencies into PACKAGECONFIG
-Date: Tue,  1 Sep 2026 08:13:08 +0100
-Message-ID: <20260901071307.741947-2-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.43.0
+From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
+X-Originating-Location: Mumbai, Maharashtra, IN (151.186.177.21)
+X-Originating-Platform: Windows Edge 152
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 01 Sep 2026 01:23:55 -0700
+References: <20260819111047.44043-1-hthakar@cisco.com> <CA+s=J=wUKLeAd2UNi-krDvXyyQG73H_XXcm9oLU4D1jQeTwf8Q@mail.gmail.com>
+In-Reply-To: <CA+s=J=wUKLeAd2UNi-krDvXyyQG73H_XXcm9oLU4D1jQeTwf8Q@mail.gmail.com>
+Message-ID: <2992798.1788251035800302150@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="MAJU3ZSvfwddu8XQavbm"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2026 07:13:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129618
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2026 08:24:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129619
 
-Both python3-pillow and python3-pypng are optional, make them
-PACKAGECONFIG entries and enable both so that the default stays the
-same. Drop python3-six which was removed in 4d80a78 ("Remove six").
+--MAJU3ZSvfwddu8XQavbm
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
- meta-python/recipes-devtools/python/python3-qrcode_8.2.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+On Tue, Sep 1, 2026 at 07:07 AM, Anuj Mittal wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python3-qrcode_8.2.bb b/meta-python/recipes-devtools/python/python3-qrcode_8.2.bb
-index 1671864c1f6e..78532d9cec9f 100644
---- a/meta-python/recipes-devtools/python/python3-qrcode_8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-qrcode_8.2.bb
-@@ -7,9 +7,10 @@ SRC_URI[sha256sum] = "35c3f2a4172b33136ab9f6b3ef1c00260dd2f66f858f24d88418a015f4
- 
- inherit pypi python_poetry_core
- 
-+PACKAGECONFIG ?= "pillow png"
-+PACKAGECONFIG[pillow] = ",,,python3-pillow"
-+PACKAGECONFIG[png] = ",,,python3-pypng"
-+
- RDEPENDS:${PN} = " \
--    python3-six \
--    python3-pillow \
--    python3-pypng \
-     python3-typing-extensions \
- "
+>=20
+> On Wed, Aug 19, 2026 at 7:10=E2=80=AFPM Hetvi Thakar -X (hthakar - E INFO=
+CHIPS
+> PRIVATE LIMITED at Cisco) via lists.openembedded.org
+> <hthakar=3Dcisco.com@lists.openembedded.org> wrote:
+>=20
+>> From: Hetvi Thakar <hthakar@cisco.com>
+>>=20
+>> Backport five upstream libssh security fixes to the 0.10.6 recipe on
+>> scarthgap:
+>>=20
+>> - CVE-2026-59843
+>> - CVE-2026-59844
+>> - CVE-2026-59846
+>> - CVE-2026-59848
+>> - CVE-2026-59850
+>>=20
+>> Carry these as focused backports instead of upgrading libssh because
+>> newer releases include API and functional changes outside the security
+>> scope.
+>>=20
+>> CVE-2026-15370 and CVE-2026-59849 affect libssh >=3D 0.11.0.
+>> CVE-2026-59842 and CVE-2026-59851 affect only libssh 0.12.0 and rely on
+>> code or features absent from 0.10.6. NVD correction requests have been
+>> submitted for these inaccurate affected-version entries; therefore, no
+>> CVE_STATUS entries are added.
+>>=20
+>> The individual commits retain the upstream fix provenance and advisory
+>> references for each CVE.
+>>=20
+>> Testing:
+>> - Applied all five patches to libssh 0.10.6 in series order without
+>> conflicts or fuzz.
+>> - Package build completed successfully.
+>>=20
+>> Hetvi Thakar (5):
+>> libssh: Fix CVE-2026-59843
+>> libssh: Fix CVE-2026-59844
+>> libssh: Fix CVE-2026-59846
+>> libssh: Fix CVE-2026-59848
+>> libssh: Fix CVE-2026-59850
+>=20
+> 3/5 is adding unresolved merge markers to recipe that 4/5 is then
+> removing. Please fix the patches, rebase them on current scarthgap and
+> resend.
+>=20
+> Thanks,
+>=20
+> Anuj
+
+Hi,
+
+Thanks for pointing this out.
+
+I will fix the unresolved merge markers, rebase the patch series on
+the current scarthgap branch, and resend the updated series.
+
+Regards,
+Hetvi
+
+--MAJU3ZSvfwddu8XQavbm
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>On Tue, Sep 1, 2026 at 07:07 AM, Anuj Mittal wrote:</div>
+<div>
+<blockquote>On Wed, Aug 19, 2026 at 7:10=E2=80=AFPM Hetvi Thakar -X (hthaka=
+r - E INFOCHIPS<br />PRIVATE LIMITED at Cisco) via lists.openembedded.org<b=
+r />&lt;hthakar=3Dcisco.com@lists.openembedded.org&gt; wrote:<br />
+<blockquote>From: Hetvi Thakar &lt;hthakar@cisco.com&gt;<br /><br />Backpor=
+t five upstream libssh security fixes to the 0.10.6 recipe on<br />scarthga=
+p:<br /><br />- CVE-2026-59843<br />- CVE-2026-59844<br />- CVE-2026-59846<=
+br />- CVE-2026-59848<br />- CVE-2026-59850<br /><br />Carry these as focus=
+ed backports instead of upgrading libssh because<br />newer releases includ=
+e API and functional changes outside the security<br />scope.<br /><br />CV=
+E-2026-15370 and CVE-2026-59849 affect libssh &gt;=3D 0.11.0.<br />CVE-2026=
+-59842 and CVE-2026-59851 affect only libssh 0.12.0 and rely on<br />code o=
+r features absent from 0.10.6. NVD correction requests have been<br />submi=
+tted for these inaccurate affected-version entries; therefore, no<br />CVE_=
+STATUS entries are added.<br /><br />The individual commits retain the upst=
+ream fix provenance and advisory<br />references for each CVE.<br /><br />T=
+esting:<br />- Applied all five patches to libssh 0.10.6 in series order wi=
+thout<br />conflicts or fuzz.<br />- Package build completed successfully.<=
+br /><br />Hetvi Thakar (5):<br />libssh: Fix CVE-2026-59843<br />libssh: F=
+ix CVE-2026-59844<br />libssh: Fix CVE-2026-59846<br />libssh: Fix CVE-2026=
+-59848<br />libssh: Fix CVE-2026-59850</blockquote>
+3/5 is adding unresolved merge markers to recipe that 4/5 is then<br />remo=
+ving. Please fix the patches, rebase them on current scarthgap and<br />res=
+end.<br /><br />Thanks,<br /><br />Anuj</blockquote>
+<p class=3D"isSelectedEnd"><span>Hi,</span></p>
+<p class=3D"isSelectedEnd"><span>Thanks for pointing this out.</span></p>
+<p class=3D"isSelectedEnd"><span>I will fix the unresolved merge markers, r=
+ebase the patch series on</span><br /><span>the current scarthgap branch, a=
+nd resend the updated series.</span></p>
+<p><span>Regards,</span><br /><span>Hetvi</span></p>
+</div>
+
+--MAJU3ZSvfwddu8XQavbm--
 
