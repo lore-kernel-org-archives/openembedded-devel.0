@@ -2,79 +2,79 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94E97C61DD6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F009FC624D4
 	for <webhook@archiver.kernel.org>; Tue,  1 Sep 2026 08:54:26 +0000 (UTC)
-Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3309.1788252860626039236
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3399.1788252849698623592
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2026 01:54:20 -0700
+ Tue, 01 Sep 2026 01:54:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=eVdrIaih;
- spf=pass (domain: cisco.com, ip: 173.37.142.95, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=eriD7cJQ;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=5055; q=dns/txt;
-  s=iport01; t=1788252860; x=1789462460;
+  d=cisco.com; i=@cisco.com; l=4545; q=dns/txt;
+  s=iport01; t=1788252849; x=1789462449;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=fg+WyYGiUpsDVOkRePQVcsL2NKfldO5kn8iYHtHWkJc=;
-  b=eVdrIaihetjEpbuYKmyAw2Wdif0WziloGyFoHaJAiqo5tv8qRZcV1skO
-   mjoCoK1NI7jIKEWzo/Ufu4zKhL3GxLpSTgTPX9OxzDhVQebZJ4XXWJKkZ
-   2DyNEPSEbcJHS+5huVQ3vslMVvkd362AeExZH76wiZfsp1dL+LtvNBlPm
-   P3pDGAQdRyJeERXTB+RnKzuPJ29kYxfgWVYL0pdxazjpKE/EIG5BGpCJC
-   lhO1kTh1+aANwNsuw0P+JqUpbffSOmirOFnWm6ZE5nbhMDd1gbMogaLIX
-   Es/bREu4dtGQmi1qkBg55gwfSCJbQcqNGZU5Y6PGGnnXXdZwtUlJQcmVj
-   w==;
-X-CSE-ConnectionGUID: jyGzd99YSneU+mK89l1K0A==
-X-CSE-MsgGUID: veD0MIxjTVy8/2mXqwY89g==
-X-IPAS-Result: =?us-ascii?q?A0BMAgBIkpZq/5UQJK1aglmCV3RfQkkDhFSRcwOeG4F+D?=
+  bh=KTVBUOA1fGEYZD3D6S1xT3jXOIsACxhHqmFoB3gno4M=;
+  b=eriD7cJQDTdvJwEQQ3UwSvlIroJNGrPGfgeq1vZVIpf3EUMdkrcNjzl6
+   lPBtamGFqZJRgkmk40y1gIP0S/5SlTPbg6t462I6wbHiaj58ivm3y7x9h
+   YdlZDhz5qK7DDRtFvs7PTkYjGUw61T6t7bgidE5vW8GkrEsQTEDbLNj9b
+   reDUt8kOAGn+pm8B1qdWPgWSfC30xRJhXgRhB5xBBqxcBPEYC/OGue0KD
+   Hz18PRV6ymDaidoGchgXXXQiZE97/05rm97i8729nj1+M3Zl9dIxIcCAG
+   hmJafMW1gfvb3PJvltUaCG5Y97KEgvzBABiQ9YfqKRVai9p0ygW9z9H12
+   A==;
+X-CSE-ConnectionGUID: /QCksJx/S3G5JflD+CY5CQ==
+X-CSE-MsgGUID: 0lWk54IqQjOmNrEgoMvCng==
+X-IPAS-Result: =?us-ascii?q?A0BLAgCMkZZq/4sQJK1aglmCV3RfQkkDhFSRcwOeG4F+D?=
  =?us-ascii?q?wEBAQ9EDQQBAYUFAo13AiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
- =?us-ascii?q?QcFgQ4Thk8NhloBAgEDIwQLARgBHg8QCRMDAQIDAiYCAisjCBAJgwIBgnQCA?=
- =?us-ascii?q?REGoEubI3p/M4EBgygBPwJDUNswAQsUAQWBBS6FP4MfAYUCXRgBhHwnGxuBc?=
- =?us-ascii?q?oEVg2mBBYFcBBiFIYJqBIIiehKBWh5wkHtIgQIcA1ksAVUTDQoLBwWBZgM1E?=
- =?us-ascii?q?ioVbjIdgSM+FzVYGwYFgR2BKINEIxk2eoEJXoErKWABEheBCYIIAoJXggMCA?=
- =?us-ascii?q?UlDDgdHUwkqAgkLGA1IESw3FRkEPQFuB45fH4IyGQcBPFEBExgXgX0YDgMLA?=
- =?us-ascii?q?aVZn1GBPgoog3aMIpU6GjOqbAuYfY4KlgZKhGmBaDyBWXAVO4JnCUoZD44tC?=
- =?us-ascii?q?wuDYIUTxyYkNQIJAy8BAQcCBwEBCwEDC4FokAItgU8BAQ?=
-IronPort-Data: A9a23:xhIfnqqApUUM3FMy1wxGof2vmMBeBmJOZBIvgKrLsJaIsI4StFCzt
- garIBmPOPzYNzHyLd53Pti3/EsG6JbVzdRlT1M6+ShkHngRpePIVI+TRqvS04x+DSFioGZPt
- Zh2hgzodZhsJpPkjk7zdOCn9j8kif3gqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
- T/Ji5OZYgLNNwJcaDpOtfrS8Eo35ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
- 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
- I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0uRmLnNCp
- K0pEzYAU1OGpLLnxOuYEsA506zPLOGzVG8eknhkyTecCbMtRorOBvyQo9RZxzw3wMtJGJ4yZ
- eJANmEpN0qGOkMJYwtGYH49tL/Aan3XcyFYoVGcv4I84nPYy0p6172F3N/9KobUGpwJzhrCz
- o7A13r0Lkk/Fcyd9QSUojX2g9/WghKrCY1HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwAiJzqyR50OSAXIJC2cbLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWna1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:MwEtS61aNZGZdYuKusxLiQqjBGwkLtp133Aq2lEZdPWaSKOlfq
- eV7ZImPH7P+VEssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCZgguVxehZhOOIqQEIWReOk9K1vp
- 0PT0ERMrHN5HFB/L/HCXGDYrUd6ejC1ry0juHDyHooZwRrZ6Z8qzpdMG+gYzVLrM0sP+tCKH
- JajfA33AadRQ==
-X-Talos-CUID: =?us-ascii?q?9a23=3A5OEwd2m6slnkSDAhZO5XJ7l/a5nXOX/M42Xcch6?=
- =?us-ascii?q?JMmBkdf6Qag/B/PpHy+M7zg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AqcsY+w1oCM3d0kIl7G7MNZEDIjUj/amCUGUsgZc?=
- =?us-ascii?q?6hdjUcnZ1Cy6CvWTmTdpy?=
+ =?us-ascii?q?QcFgQ4Thk8NhloBAgEDIwQLARgBLRAJEwMBAgMCJgICKyMIEAmDAgGCdAIBE?=
+ =?us-ascii?q?QagY5sjen8zgQGDKAE/AkNQ2zABCxQBBYEFLoU/gx8BhQJdGAGEfCcbG4Fyg?=
+ =?us-ascii?q?RWDaYEFgVwEGIUhgmoEgiJ6EoFaiSiIYUiBAhwDWSwBVRMNCgsHBYFmAzUSK?=
+ =?us-ascii?q?hVuMh2BIz4XNVgbBgWBHYEog0QjGTZ6gQlegSspYAESF4EJgggCgleCAwIBS?=
+ =?us-ascii?q?UMOB0dTCSoCCQsYDUgRLDcVGQQ9AW4Hjl8fglJkFxMBKxQDCXFYKxgFCQM4p?=
+ =?us-ascii?q?S2hDwoog3aMIpU6GjOqbAuYfY4KlgBQhGmBaDyBWXAVgyIJShkPjjiIfscmJ?=
+ =?us-ascii?q?DUCCQMvAQEHAgcBAQsBAwuBaJF+AQE?=
+IronPort-Data: A9a23:0LJZqq954qkE1SkFt9P5DrUD1n+TJUtcMsCJ2f8bNWPcYEJGY0x3x
+ 2ZLD2jUOPzeNmqgL9ojPd7i9B9V757VnN9nTQU6/3pEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmE4EzrauS9xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mvyyHjEAX9gWAsYzpNs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2lxBKYb4cRnRloV2
+ qE6JjQhLTuy2smPlefTpulE3qzPLeHiOIcZ/3UlxjbDALN+G9bIQr7B4plT2zJYasJmRKmFI
+ ZFHL2MxKk2bMnWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+Oi3bYWJJIHaGq25mG7Ao
+ l3FojjYGygYE9m50xeK9VeyrenAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJZF+k8rQXIwa3O7kPBXC4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:seZs5K8C2SgiNsrnbCFuk+AGI+orL9Y04lQ7vn2ZhyY7TiX+rb
+ HJoB17726StN9/YhAdcLy7VZVoBEmsl6KdgrNhWYtKIjOHhILAFugLhuHfKn/bakjDH4Vmu5
+ uIHZITNDTYNykCsS+D2njaL/8QhP+a7auvmeDSi11pTQ1sduVcyj0RMHfiLqWzLzM2f6bQ0/
+ Gnl7F6mwY=
+X-Talos-CUID: =?us-ascii?q?9a23=3Ahx2semvmVlzabEJlhS8RwXnh6ItiS1be11XAZHT?=
+ =?us-ascii?q?jJjtLRrm5CnShpYhdxp8=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3A60fHeA9kt0q0Hr807OtBwvSQf59s3KfzVGEUqJc?=
+ =?us-ascii?q?hvu+eGCN3Him2ijviFw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.25,255,1779148800"; 
-   d="scan'208";a="826714842"
-Received: from alln-l-core-12.cisco.com ([173.36.16.149])
-  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 01 Sep 2026 08:54:19 +0000
+   d="scan'208";a="825746587"
+Received: from alln-l-core-02.cisco.com ([173.36.16.139])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 01 Sep 2026 08:54:08 +0000
 Received: from sjc-ads-4178.cisco.com (sjc-ads-4178.cisco.com [171.70.54.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 8920F18000164;
-	Tue,  1 Sep 2026 08:54:19 +0000 (GMT)
+	by alln-l-core-02.cisco.com (Postfix) with ESMTPS id 919701800020D;
+	Tue,  1 Sep 2026 08:54:08 +0000 (GMT)
 Received: by sjc-ads-4178.cisco.com (Postfix, from userid 1887505)
-	id 27F56CE1C04; Tue,  1 Sep 2026 01:54:19 -0700 (PDT)
+	id 2EA04CE1C04; Tue,  1 Sep 2026 01:54:08 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com,
 	Hetvi Thakar <hthakar@cisco.com>
-Subject: [OE-core][scarthgap][Patch v2 3/5] libssh: Fix CVE-2026-59846
-Date: Tue,  1 Sep 2026 01:53:55 -0700
-Message-Id: <20260901085357.1254306-4-hthakar@cisco.com>
+Subject: [OE-core][scarthgap][Patch v2 1/5] libssh: Fix CVE-2026-59843
+Date: Tue,  1 Sep 2026 01:53:53 -0700
+Message-Id: <20260901085357.1254306-2-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20260901085357.1254306-1-hthakar@cisco.com>
 References: <20260901085357.1254306-1-hthakar@cisco.com>
@@ -84,138 +84,128 @@ Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-4178.cisco.com [171.70.54.199];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 171.70.54.199, sjc-ads-4178.cisco.com
-X-Outbound-Node: alln-l-core-12.cisco.com
+X-Outbound-Node: alln-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2026 08:54:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129623
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129621
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-libssh 0.10.6 predates the username-validation helper used by the
-stable-0.11 fix, so the upstream commit in [1] cannot be applied as-is.
-Adapt the same dangerous-character check directly at the ProxyCommand %r
-expansion sink and add focused regression coverage.
+The stable-0.11 commit shown in [1] is the upstream fix selected for
+this backport. The upstream advisory [2] documents CVE-2026-59843 and
+identifies libssh 0.11.5 as the fixed release for the 0.11 series.
 
-The upstream advisory [2] identifies libssh 0.11.5 and 0.12.1 as the
-fixed releases.
-
-[1] https://gitlab.com/libssh/libssh-mirror/-/commit/56ce3c193eb06af5bf3b07ec0b4c7308b5c72130
-[2] https://www.libssh.org/security/advisories/CVE-2026-59846.txt
+[1] https://git.libssh.org/projects/libssh.git/commit/?id=687ef1c44b646b9db0b1c6e8f987edb7c9e4d919
+[2] https://www.libssh.org/security/advisories/CVE-2026-59843.txt
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
-Changes in v2
-- rebase the patch on the current scarthgap branch
----
- .../libssh/libssh/CVE-2026-59846.patch        | 87 +++++++++++++++++++
+ .../libssh/libssh/CVE-2026-59843.patch        | 84 +++++++++++++++++++
  .../recipes-support/libssh/libssh_0.10.6.bb   |  1 +
- 2 files changed, 88 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-59846.patch
+ 2 files changed, 85 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-59846.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59846.patch
+diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
 new file mode 100644
-index 000000000..9c626d113
+index 000000000..03d3ce6ea
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59846.patch
-@@ -0,0 +1,87 @@
-+From 19fe4c9fc7b3bd3553250bf9ddea03ed1dcf044f Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Thu, 2 Apr 2026 15:39:25 +0200
-+Subject: [PATCH] CVE-2026-59846 Block shell metacharacters from usernames
++++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-59843.patch
+@@ -0,0 +1,84 @@
++From d965eb941a9a83a0643570a93d8997b91e248fc1 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Pavol=20=C5=BD=C3=A1=C4=8Dik?= <pzacik@redhat.com>
++Date: Fri, 6 Mar 2026 13:58:30 +0100
++Subject: [PATCH] CVE-2026-59843 channels: Fail when receiving max packet size
++ 0
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+When an attacker could sneak the dollar sign or backslash into the username
-+expanded for example in proxy command, it can result in printing environment
-+variables that might contain secrets.
++Do this both for SSH2_MSG_CHANNEL_OPEN and for
++SSH2_MSG_CHANNEL_OPEN_CONFIRMATION. Using the
++max packet size 0 would lead to an infinite loop
++in channel_write_common.
 +
-+This is a fixup of CVE-2023-6004 which fixed this for hostnames, but these
-+two metacharacters were left out from the username filter.
++Originally reported by Rinku Das on on 23th February.
++Independently reported by Yi Lin on 26th February and
++Haruto Kimura on 22nd March.
 +
-+This keeps the list in one place to simplify maintenance.
++We do not consider this as a security issue as connecting
++to untrusted servers on the internet brings much worse
++security consequences than hanging your clinet.
 +
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-+(cherry picked from commit 6309df220e3431deb41946f892f4bb5af8b59dba)
++Signed-off-by: Pavol Žáčik <pzacik@redhat.com>
++Reviewed-by: Jakub Jelen <jjelen@redhat.com>
 +
-+CVE: CVE-2026-59846
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=56ce3c193eb06af5bf3b07ec0b4c7308b5c72130]
++CVE: CVE-2026-59843
++Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=687ef1c44b646b9db0b1c6e8f987edb7c9e4d919]
 +
-+Backport Changes:
-+- libssh 0.10.6 predates ssh_check_username_syntax() and the centralized
-+  SSH_DANGEROUS_SHELL_CHARS definition, so enforce the same character list
-+  directly at the %r expansion sink in ssh_path_expand_escape().
-+- Add focused regression coverage to the existing path-expansion unit test
-+  for dollar-sign, backslash, and command-separator usernames.
-+
-+(cherry picked from commit 56ce3c193eb06af5bf3b07ec0b4c7308b5c72130)
++(cherry picked from commit 44b186fa17aff497dae420c59c003222e438103c)
++(cherry picked from commit 687ef1c44b646b9db0b1c6e8f987edb7c9e4d919)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/misc.c                     |  9 +++++++++
-+ tests/unittests/torture_misc.c | 18 ++++++++++++++++++
-+ 2 files changed, 27 insertions(+)
++ src/channels.c |  7 +++++++
++ src/messages.c | 19 +++++++++++++++----
++ 2 files changed, 22 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/misc.c b/src/misc.c
-+index e78c92ba..15b427d7 100644
-+--- a/src/misc.c
-++++ b/src/misc.c
-+@@ -1262,6 +1262,15 @@ char *ssh_path_expand_escape(ssh_session session, const char *s)
-+                 break;
-+             case 'r':
-+                 if (session->opts.username) {
-++                    if (strpbrk(session->opts.username,
-++                                "'`\";&<>|(){}$\\,") != NULL) {
-++                        ssh_set_error(session,
-++                                      SSH_FATAL,
-++                                      "Invalid shell metacharacter in username");
-++                        free(buf);
-++                        free(r);
-++                        return NULL;
-++                    }
-+                     x = strdup(session->opts.username);
-+                 } else {
-+                     ssh_set_error(session, SSH_FATAL,
-+diff --git a/tests/unittests/torture_misc.c b/tests/unittests/torture_misc.c
-+index 82d6cf16..66d392ed 100644
-+--- a/tests/unittests/torture_misc.c
-++++ b/tests/unittests/torture_misc.c
-+@@ -194,6 +194,24 @@ static void torture_path_expand_escape(void **state) {
-+     assert_non_null(e);
-+     assert_string_equal(e, "guru/meditation/222/by/root");
-+     ssh_string_free_char(e);
-++
-++    free(session->opts.username);
-++    session->opts.username = strdup("root$HOME");
-++    assert_non_null(session->opts.username);
-++    e = ssh_path_expand_escape(session, s);
-++    assert_null(e);
-++
-++    free(session->opts.username);
-++    session->opts.username = strdup("root\\user");
-++    assert_non_null(session->opts.username);
-++    e = ssh_path_expand_escape(session, s);
-++    assert_null(e);
-++
-++    free(session->opts.username);
-++    session->opts.username = strdup("root;id");
-++    assert_non_null(session->opts.username);
-++    e = ssh_path_expand_escape(session, s);
-++    assert_null(e);
-+ }
++diff --git a/src/channels.c b/src/channels.c
++index 8290dbd1..3afdcf11 100644
++--- a/src/channels.c
+++++ b/src/channels.c
++@@ -192,6 +192,13 @@ SSH_PACKET_CALLBACK(ssh_packet_channel_open_conf){
++   if (rc != SSH_OK)
++       goto error;
 + 
-+ static void torture_path_expand_known_hosts(void **state) {
+++  if (channel->remote_maxpacket == 0) {
+++      SSH_LOG(SSH_LOG_RARE,
+++              "Invalid maximum packet size 0 in "
+++              "SSH2_MSG_CHANNEL_OPEN_CONFIRMATION");
+++      goto error;
+++  }
+++
++   SSH_LOG(SSH_LOG_PROTOCOL,
++       "Received a CHANNEL_OPEN_CONFIRMATION for channel %d:%d",
++       channel->local_channel,
++diff --git a/src/messages.c b/src/messages.c
++index 6dadabf0..e79ecec2 100644
++--- a/src/messages.c
+++++ b/src/messages.c
++@@ -1160,10 +1160,21 @@ SSH_PACKET_CALLBACK(ssh_packet_channel_open){
++   SSH_LOG(SSH_LOG_PACKET,
++       "Clients wants to open a %s channel", type_c);
++ 
++-  ssh_buffer_unpack(packet,"ddd",
++-          &msg->channel_request_open.sender,
++-          &msg->channel_request_open.window,
++-          &msg->channel_request_open.packet_size);
+++  rc = ssh_buffer_unpack(packet,
+++                         "ddd",
+++                         &msg->channel_request_open.sender,
+++                         &msg->channel_request_open.window,
+++                         &msg->channel_request_open.packet_size);
+++  if (rc != SSH_OK){
+++      goto error;
+++  }
+++
+++  if (msg->channel_request_open.packet_size == 0) {
+++      ssh_set_error(session,
+++                    SSH_FATAL,
+++                    "Invalid maximum packet size 0 in SSH2_MSG_CHANNEL_OPEN");
+++      goto error;
+++  }
++ 
++   if (session->session_state != SSH_SESSION_STATE_AUTHENTICATED){
++     ssh_set_error(session,SSH_FATAL, "Invalid state when receiving channel open request (must be authenticated)");
 diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 5c40b80b4..669e229ee 100644
+index 1e1b5fb0a..10d063f6d 100644
 --- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -34,6 +34,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+@@ -32,6 +32,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+            file://CVE-2026-0968-2.patch \
+            file://CVE-2026-0967.patch \
             file://CVE-2026-0965.patch \
-            file://CVE-2026-59843.patch \
-            file://CVE-2026-59844.patch \
-+           file://CVE-2026-59846.patch \
++           file://CVE-2026-59843.patch \
            "
  SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
  
