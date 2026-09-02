@@ -1,117 +1,107 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FB87C624D3
-	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 17:46:57 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.335.1788367997749296832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28AADC624D4
+	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 18:48:18 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3011.1788374896367613709
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 09:53:17 -0700
+ Wed, 02 Sep 2026 11:48:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yi+lr+Vj;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: joel.winarske@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-85590c5aeabso1169457b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 09:53:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=iGc9hepY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-398a4dcf289so1673641a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 11:48:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788367997; x=1788972797; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788374896; x=1788979696; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fDMoe+brS8suLF/0i2GstG2Mu0uzP4BIIwO4VwaVWBg=;
-        b=Yi+lr+VjKrXEVkjTeX+jECChJq04m5s5cjoNRQtFhKKQCtchyF2ukV1Gw87RF/wKps
-         PQPfYuMmVRy1jRDCE1V/ubXKcf+qt34o3zVKUh0KbYrBQ6KGwa+8HZ78OTO0eAYBsw22
-         yvEMl0VW9xhuUpxgdzizOtBSWqFcauLgbMB5E+VK3JG8X7G0PDEWQ9xKjK8yKXLmKrZf
-         pfGcy3WQBCPQv1T9EjjhoGouFfgcqOXUfNDbO43Yo1udjhefQClrDE3fEYs1M9xaf5U+
-         S0kW2cA+jZUiywfmSuPlD7TuISYMr69oBXPlFqOYMekyrOGMsz0ay9MgOF9IaGf3bGH8
-         Ikww==
+        bh=y/2OJRhyi6EBfHij83tGUErw3adoigsw3GY8mrUQWp8=;
+        b=iGc9hepYJWon7DeaF3zBSGte0jzRoa815u+zkY0L/CoG/lVYLObPAK83/5d63pBlZh
+         hkbVKIv9RTJBaqOpArUCehdwPFDvcWPk4mLX5LmneOCW4CPX8/EoTe0DEVXLJrLWvV6d
+         Hxh8lNjDBS3/VObIpp1S62cvKXFJp/cZ8MGEev7LXshSDl1707Nb5V36atPU6ML69++C
+         bOxX6HLWaJG7y8V0B1H1Q/xB/ecGCXIY7J0gD5pzT6+HBcfeNhOVHLNW52HvXfvBclI6
+         RcbO8poG3SH+9U8jv2nm4kuOCTp7U1j6gI21sIsHrZg3ZYdEzgBdwwCc+fEK4AqmG3Xp
+         VFow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788367997; x=1788972797;
+        d=1e100.net; s=20251104; t=1788374896; x=1788979696;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fDMoe+brS8suLF/0i2GstG2Mu0uzP4BIIwO4VwaVWBg=;
-        b=f5jJr4sVy6t5r+EVoKxIA2wrR2WlMbeDLHr6XUyuXCU1vaTRqPxcIJKf+W9pd20p+g
-         uj+AjM3TQwi+04v2NiOrq0b28pHnr29UFLlWttXOtWne+KaVUvHrjlQeyHYVGBzv1Usy
-         dFfgUxtfwcaDwgzYWG5PRVn006DqjgPDt+gtyRv1pLL0y/htdzhYOeynB9fwl2X0ll8e
-         Nt+VBSEkm8Oq8th1lEA/Z2VwLyle6W8dtq/1o8UzLkph/fQomVAQ9e33hOGNedqEdrch
-         Fs4Mb7UCCDx+4yOq1FrTpu2tm599fYlthidi7K/zzjb8e+7uux5Lae+0KaPFtdauSi1v
-         urrg==
-X-Gm-Message-State: AFuF++nuOsPH1jABV9FUtMXEpNe7vTnVSkAfo+8gxaFlh2I++CA1zExN
-	p2lGgm6VZFq5BfTuUbsjevb/doFRffy9IwGLjm2DKJNyOu7UzCgKwd9Mxo+TevCC3E9jXg==
-X-Gm-Gg: AYBFou0jtrRN5yvzLsRFYi9L2Ze51ZnoN3hFSAUKHzbSOGbT4U3VAJY+9GOcX+kql8f
-	k+VZ9a0IP2IWb8KK6ayvD2ixXQyhGBaWx4E1bqyqgzVRRqW+SjajqCJse7fD8Dy9pXKxVVJpWDe
-	avW9IsJZz2xaIC8cSAu9V4NfpYrkNNKOSEyCBqw3j1N4026GsbloePDPVy1ghbjX0pEjggw/Y53
-	odw9JbOYfPoTuY17CqiH3webx2qEiOdNxl1zisxGSLMZhJKaG2X0rGeh04QeSHx9ChCEecTq/NH
-	G4qkzVx/ofFbNH485VYadHm2UxtihNxU9rciLBzJu15ch+Ce9+bzwOjn9p3JuQneR2BYQhUL9Ue
-	qPgVS4InVEEE+qEhtKPs6wsBiuzGSWZnLm7MxH/QDPKcqvzg+EEFQzNbNMKCbHVVDom4gdLPmWx
-	YDoNGbhng4IpOfvLvrwezPH1d15L3E8KMmZpQVP863F6MGWlXHP66PTmulaumwIG9tQvkw+4+Zq
-	L6Us982ZaSKaD+E6tZqE677GJ3oEYaB/cF+jZ9u+l+BYQ==
-X-Received: by 2002:a05:6a00:4510:b0:857:7317:cff4 with SMTP id d2e1a72fcca58-85ed47375cfmr10610685b3a.21.1788367997096;
-        Wed, 02 Sep 2026 09:53:17 -0700 (PDT)
-Received: from air.lan ([2601:602:57f:c7b0:d6fc:cce0:dbc5:cca6])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc34d0022c7sm1383024a12.15.2026.09.02.09.53.16
+        bh=y/2OJRhyi6EBfHij83tGUErw3adoigsw3GY8mrUQWp8=;
+        b=BcakjHO5LPgNNX3Javz145oWEP0NarrkLLyN9SFgo9bdYkfAZL51ak3/kwl1D3NWnm
+         x9AA5ppkhMMzcA7AIqGQB9bav5qKOAstEEFCCx5uyNibGN6DlwtCScvFfXsPy2yOOEyQ
+         Ov5wObVMtlPs4DJ/AhxeJL8D5bBM4REcaxhMkhbPSCq+/hGCniLSeWHAx17ajFWyempf
+         zM9jTUoGVxcKUIBgKrkVZFoQJemwIQo3UP/V2Pl/mm5fb2SBNRzauutMEODYyx8q7Uki
+         QpvxG7F3mpec5qtvw5LzYeCh6hUhQdbtARJoleG2GeGMAZ16irFUntPWO34FnZC8B5PZ
+         lm7Q==
+X-Gm-Message-State: AFuF++nl/z+fBasnxyHtM9AVPRlfPSyo1rDVCZye6h0RHWTGNO2n9SeK
+	fJDGOGASD7hEFR1HalnzqGf5L8bASLNP4ENTODFfqjJS6vI02gfBW4kh2QoayDi0
+X-Gm-Gg: AYBFou3pQ8bC/36585U3WAqxZZH8I8u08gy0K956ad17umjxUgn41M05CZ7s+ZdXU/c
+	hfY1Jn9MVv6KtmJGf4bouulhTh+vQEAEcELUufJfOAuRpjXQZPwZkTsRPGvCe81iEAHkMmYZQ2v
+	L1seBtvnKyUGoiTUiuMzaJDrJ1o4+vrmR3KK4NCZgiDWoe9LUUp7fWPuGrW/nBrE3fvDFlIAnYQ
+	BIP3hQTWApL5Zfw4JKs4xVceTr1xrCollXCmJJgT1ujszz+XoPZzVYWJv0AKS5YoGX6X73dEC8Q
+	Eafszm6skFBGxDfv0I3Mbq7Z5Ba0l/icpXMFUc4UmnqASr7TOBiWNp41AfSZxsyGF+ngMOAROZf
+	fzMN3j8AVW7kscvfQvkO5ltvfRdZ1n8qeMp5vSbpW2ub7aINJaHp8zol6AMpI0RSqd64Lxe8vFn
+	PbIJcTUhinoXsRcF7t36sspTjgUDhdchnql1nqxBql+/+Gn4gTuIj9ZjNM9nAMNLts/WDSceq/t
+	9SqYYGn0ORvyufd2kJzZwgOK8x3PReM/NdTcSG+Td1re983ZyYvFabh3QbuaYWWguZVYcafywh2
+	xZpekXquReQT+utxsMTyC5mYSteTSxkocvGbBEtytyTPLVdLzdX1bMrMWNU2CAV5Y7HIDGj8hFC
+	gen0F+ClLtIBlKuSdx0YkQFZgBgfUgwVzn2SItnntUND7A30=
+X-Received: by 2002:a17:90b:524c:b0:390:8361:a532 with SMTP id 98e67ed59e1d1-39aedfb8ebcmr10608807a91.7.1788374892899;
+        Wed, 02 Sep 2026 11:48:12 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-332501e5447sm228567eec.0.2026.09.02.11.48.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 09:53:16 -0700 (PDT)
-From: "Joel Winarske" <joel.winarske@gmail.com>
+        Wed, 02 Sep 2026 11:48:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Joel Winarske <joel.winarske@gmail.com>
-Subject: [meta-oe][wrynose][PATCH] capnproto: build position independent code
-Date: Wed,  2 Sep 2026 09:53:07 -0700
-Message-ID: <20260902165307.1259305-1-joel.winarske@gmail.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] ldns: Disable GOST support
+Date: Wed,  2 Sep 2026 11:48:09 -0700
+Message-ID: <20260902184809.473100-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 17:46:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129699
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 18:48:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129700
 
-The recipe produces static archives only, and does not compile them PIC, so
-linking capnp or kj into a shared library fails:
+ldns implements GOST exclusively through the OpenSSL ENGINE API, which was
+removed in OpenSSL 4.0
 
-  libkj.a(exception.c++.o): relocation R_X86_64_TPOFF32 against
-  `kj::(anonymous namespace)::threadLocalCallback' can not be used when making
-  a shared object; local-exec is incompatible with -shared
+Causes
 
-kj/exception.c++ has a file-scope thread_local, which non-PIC code compiles to
-the local-exec TLS model. A shared object cannot use that model, so the link
-fails on any consumer that puts capnp inside a .so. Debian and Fedora do not
-hit this because they ship shared libcapnp.
+  ./keys.c:664:5: error: use of undeclared identifier 'ldns_key_new_frm_fp_gost_l'
+    664 |                                 ldns_key_new_frm_fp_gost_l(fp, line_nr));
+        |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Set CMAKE_POSITION_INDEPENDENT_CODE. Packaging is unchanged: still static,
-still no .so, no new packages and no ABI surface, only the code model differs.
+USE_GOST gets defined because configure probes for a
+working GOST engine using AC_RUN_IFELSE, which cannot run when cross
+compiling and therefore falls back to "maybe", which is treated as success.
 
-Backport of the same change sent for master, where the recipe is 1.5.0.
+Pass --disable-gost since the feature cannot work at all without ENGINE
+support.
 
-Signed-off-by: Joel Winarske <joel.winarske@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ meta-oe/recipes-devtools/ldns/ldns_1.9.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
-index 948ff80345..8c914d96bd 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
-@@ -19,8 +19,17 @@ CXXFLAGS:append:mips = " -latomic"
- CXXFLAGS:append:powerpc = " -latomic"
- CXXFLAGS:append:riscv32 = " -latomic"
- 
-+# The build produces static archives only. Compile them position independent so
-+# they can be linked into shared libraries; without this any consumer that does
-+# so fails on the thread-local in kj/exception.c++, which non-PIC code compiles
-+# to the local-exec TLS model:
-+#
-+#   libkj.a(exception.c++.o): relocation R_X86_64_TPOFF32 against
-+#   `kj::(anonymous namespace)::threadLocalCallback' can not be used when making
-+#   a shared object; local-exec is incompatible with -shared
- EXTRA_OECMAKE += "\
-     -DBUILD_TESTING=OFF \
-+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
- "
- 
- FILES:${PN}-compiler = "${bindir}"
--- 
-2.55.0
+diff --git a/meta-oe/recipes-devtools/ldns/ldns_1.9.2.bb b/meta-oe/recipes-devtools/ldns/ldns_1.9.2.bb
+index 6e50cc2b1e..d7a4e31422 100644
+--- a/meta-oe/recipes-devtools/ldns/ldns_1.9.2.bb
++++ b/meta-oe/recipes-devtools/ldns/ldns_1.9.2.bb
+@@ -15,7 +15,7 @@ inherit autotools-brokensep
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[drill] = "--with-drill,--without-drill"
 
+-EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR}"
++EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR} --disable-gost"
+
+ do_install:append() {
+     sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
 
