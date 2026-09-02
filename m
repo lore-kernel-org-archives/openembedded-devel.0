@@ -2,39 +2,39 @@ Return-Path: <OmkarAbaji.Patil@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75754C624D0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AF00C624D6
 	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 12:12:44 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10987.1788351158362957101
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11385.1788351157774633857
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 02 Sep 2026 05:12:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bpSd/832;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=pIGJ/3tu;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3705188636=omkarabaji.patil@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6829NNkV104031
-	for <openembedded-devel@lists.openembedded.org>; Wed, 2 Sep 2026 05:12:38 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6829NNkU104031
+	for <openembedded-devel@lists.openembedded.org>; Wed, 2 Sep 2026 05:12:37 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=+qZOl9NdzqQdX/kfFwRkC8MM51k4Jx0aosUPtg5MJek=; b=bpSd/832lcNQ
-	tMlVTkARpGN2b8MbuxwnJgCjQotogvZg+MY3VSHFii2Fpx7B59s7pFPUM3H7q4Bz
-	+49Gl+tH0BCewknlZGRcfp/Y70aA9CHlNPALwL4xjlTf6/58MkHh10l8YOWXnCAn
-	3xAN46CmmsKXVPbSqE1v1rZFIOZ9/MVdQFQFbBD1Ga0dSk63CY+oYaOHuc3EI5/4
-	wNB0YhPyQ9KWHbiBsJFcIH9yegoLIBCs+1qz4gLYIDJLCuMCrAtX4BYYAgRwSlSq
-	RXsoXzNC1HQy9QOtFSM2I6Bg7p00jqXf7BmkVflSIY3GMtVFkXev0i8nN3ZjJirB
-	ecbokQOF/A==
+	 bh=+F6pEASSavFdjBDWfWZOm/ICGBKUTAc2gA0U+zHAaMs=; b=pIGJ/3tuqagF
+	tX5BDpbjFgxmNir7xraznVhSn+IhiwQlqVJXOYNOpWc657vA8h46LVxYo0cs0JIL
+	yWcQVgtb/nlDbd3cgfO0SpUSY6pXCfyCiQFM2ZBE+6UTb7eGV4uWyIQBuaP7W6fY
+	F4/CBH5m0ImAOw48WWITzKhBHZlACFs8WcaAz58s9y04bT0e6/8aR5rTk6rMKsth
+	cCp+kbh6pyIacItczX/g4FmJGsbwTgOdI247rk7ZEQAhMYJ8UNQ7QucI+8snMynV
+	q+oe7/XJTYovel6cnRuP+BIZNhgBGa9cSdfTDSirozsuAXlNbL595i4CY6zyu5YM
+	1VHj5UCiQw==
 Received: from cy7pr03cu001.outbound.protection.outlook.com (mail-westcentralusazon11020120.outbound.protection.outlook.com [40.93.198.120])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4gbxxee3cv-3
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4gbxxee3cv-2
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 05:12:37 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GVw5DrOeeu1Ikp2SC6arzl7mBP5r+ZAa6qJBJgAxg36Il6vo4mfCbK/FcqdL3Q+yY8kvvL6VKkHEwlM3oSjb5wnW7LTFeilDqv4IxxF1EC2eGAatO+Px/Ogt6kppiXTGCy9p/r/1iLqLN1O4ieeauRXdYVSZ0siQRIhhb2YOWjqyCFLFwpMfKdSwWD8IZGIbhdYWI9cMbej3oCSx+5mtk9PgBv6isK0thQO0gffe45Se2EE+KFLS5VOyKgugqzWXwHhsI0KF7q1sKvlKhpnx9qqz8tkPzQp3Cobf064wqW7U2oVx8Sh8tZXX84zqZz8g7FQ5h+lrVcAkvrsHr+AvcA==
+ b=aynhhu7ayDMVlPfJHEsZaTMnCAqKgVxgLQd1O1ryc4Hlzb7tnB2U6cR/4uYstLD6hauEuhCOV+Wwyq6u0IDTNBGwy6+SMh5hFYiEaIAdAZoSuoaYSAX0eRqhorp4RzVaAa19oXOkobGpvxwyY/fBhKrhYVFC6wUixd1TGajeZghjdpcuDebmsppJ+Gwhp/u4w6wSqmGMTcLmb7l8RAiHWdQJ7rYRGLtKpkQH2Sqx8ff6cSZ+Dk1Jb3jCkFY6llTVwYN6kCGK2Z0IFivAYG8Os1QWcmkbvPhGUXqldGrjN7IhLhZE1uUhjXXagfsx3y70vrLqMRT1H/JfqsixLum/ow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+qZOl9NdzqQdX/kfFwRkC8MM51k4Jx0aosUPtg5MJek=;
- b=Qa+YicvdFZ1PucUkvFGDtjnaRQL4EekO691KioTQCVjTyKA3PUfQeVxSt0fpnwpZuNlFoUoydFkkUv6Nuq/jBQnm8773KnG4eynHAzBPl0SVCoPEQ8SKSKXcRCFckVxbT4jU4Qqf0qIz7O54DxxYP5LjOxEeVAHcQyC1QzZcoZivRc12hlmEVz2A3ergURtxsfSbosFPS6bJ24sUp3GFVkQRbMvNBAK2fIoZsw6xUywcrHk0D7/XGMvzPmJ+cMFRdWXG6tRZWUhEdrXfWMdVNgkPHH/bIaL/4rNCmnQJX7+rdWmTtZcS4W07wXbZNyQtyD3faVNOqzFPxvuMmIMXQg==
+ bh=+F6pEASSavFdjBDWfWZOm/ICGBKUTAc2gA0U+zHAaMs=;
+ b=P69k3A+MPYksYDoyln/uYQCvEZjfwxDwKTM70tARNpvLFLfpx279g6/rM3LarTK9y2W2DVum7eDtoMvGxWruiZOVLNzG2gSNweBiAoFQGwKJ02+2X2B0Ig1A63XDpFm3+d/L9TxzWCxTsXhcTXtR0UMUCRIGDLPYj/alDFwpVV8BLWYfmCn7m9Ag/rnk3/222kgYSZKoqJfMh8UHpJ+uFojprjO8R/h1X+06mJA/yty3Ex/VWl8N112LrsjAdA89mFSbKm0O/QGEWVSMhUA/e6StUJ+WJ7tKMyTjM1fzNpZXgu1ZSDbcMzKFYaitkSOzZWiGLMeUc5fAzoz9zBr8Xw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -42,16 +42,16 @@ Received: from PH3PPF3ECB6A513.namprd11.prod.outlook.com
  (2603:10b6:518:1::d19) by CH3PR11MB8442.namprd11.prod.outlook.com
  (2603:10b6:610:1ae::12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Wed, 2 Sep
- 2026 12:12:34 +0000
+ 2026 12:12:33 +0000
 Received: from PH3PPF3ECB6A513.namprd11.prod.outlook.com
  ([fe80::c5c6:cca3:ec27:580d]) by PH3PPF3ECB6A513.namprd11.prod.outlook.com
  ([fe80::c5c6:cca3:ec27:580d%8]) with mapi id 15.21.0360.008; Wed, 2 Sep 2026
- 12:12:34 +0000
+ 12:12:33 +0000
 From: Omkar Patil <OmkarAbaji.Patil@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH][wrynose 2/2] openvpn: upgrade 2.7.0 -> 2.7.5
-Date: Wed,  2 Sep 2026 17:42:08 +0530
-Message-Id: <20260902121208.3587748-3-OmkarAbaji.Patil@windriver.com>
+Subject: [meta-networking][PATCH][wrynose 1/2] openvpn: create an extra package for the dns-updown script
+Date: Wed,  2 Sep 2026 17:42:07 +0530
+Message-Id: <20260902121208.3587748-2-OmkarAbaji.Patil@windriver.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20260902121208.3587748-1-OmkarAbaji.Patil@windriver.com>
 References: <20260902121208.3587748-1-OmkarAbaji.Patil@windriver.com>
@@ -63,83 +63,80 @@ X-ClientProxiedBy: SI2PR02CA0051.apcprd02.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH3PPF3ECB6A513:EE_|CH3PR11MB8442:EE_
-X-MS-Office365-Filtering-Correlation-Id: 25141d16-f577-47c7-c4e5-08df08eb78b3
+X-MS-Office365-Filtering-Correlation-Id: 473074d4-1d11-4599-8823-08df08eb77ec
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|23010399003|1800799024|52116014|376014|366016|38350700014|6133799003|29003799003|56012099006|11063799006|10067099003|12006099003|25016099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|23010399003|1800799024|52116014|376014|366016|38350700014|56012099006|11063799006|10067099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	3msF8u3Yyx6G9kLQOX5R8OIx5hwD6ToGQdf1M8gWLkicWAMMEEoK1LqQKfCV/ovUmCaxf7v/Yv0bKIDrbguQMwtK7lD4LFRlbOpxlRCsRFoXFV2tovPJI+C6q4/9IsW86wZNDa5wlLpmhxDJrivRyHCRXN1tIwsXVDor/PvFyGVWSz3hmSz9AK1gkvA5jjLG+xhwXzjw8INa4vd96lOX54rzzvFQ9B3JHtq0rDyrMKWYQjvA2W1+eB7uCxJQGzBkSN4FC3qpjF+Ml+PBvdb4vI+4zfa4RUj8T/BqTKytcBl7KH4QXeYfpNo0VFZ/4RZ3dwkI8HOhS2kUKBs4tKzr8WSDbwSNIZvjiFmeJHqEMYuNdDMi9DlFlwY2ocGU6kAk0Ky5rAdeX5mW5q5NaUThHXo3q5Z7gLTXk+8fsCP+BobUsTS9gnw6o6AtvWo5pLQ1ZMDrGU7WHiolrlFnbToA9+qdN4r03lZRA+d9gSqPur/C2QvVCUfcxnTp7RvODEbzOYzTW3G+P1YXD4hrZMivCVAewLdMsTyQ9Y3CVecHDFZDl6tH68Ype51T0nqk2jL4qqDfmZw2kQVz7Bw/h+A3C5KevMaP1wN10RzKzNlu32RIrA7ZoZ0HQdvhKyz3R4fCWVzCAjObr/6kqdSpfTi4KRe7tKe9bWStO4DqcS/4sKA=
+	mI22Qxi7C71kkqzD6/nWtsTfD85W6uzwu2iNoqfxkuXzbumzseIgaCi0ZUD0HGwXsZFPbpz0ABkUDSCFY63M6AzthbdFvL/n7sd4tlnbGLyLT0S2R2rUX6cNTuQEd4Lz6K8a6DwuZaGL+n3jL1xmWc7BlwYmvvHctgdoby2To0NXjwwCvtukEJzXgCc/XTS1Gz942hU7u74OjdlQZaoJAXUx8xgX6SjHn9lpUD673R2vkgxBzJimU1ThT+XtFMlb1tITWicoqlBZ6mQ1GA0EwEiAOGAy8ihq69QUhGd4Hjf9GQi3JUBlB5WtNG82IKkaK8F+DefApDd8p0PGhR91sDmw5iv/YrO6hG3ErDp/a5UXfzGWnzzFTF8oHcxNHQXHFWNWNMNoAT0HHGZ0hW5np4+qBcNbN6tWWta73iuzgOdOX7NPkW9pcTzCpAB6f0WW68B4edVsyewlDB9mwn+I98L0R0mtg5682oKzUb4G/AMn1A801fWTe7qYYjAf0/2Mhdw/I8HKtoVqzLZZzjfuLUEn4WzH0k7GkYiQbAMnC/6hFmVih7Pt9cKWpT5iq5mg+WysGc2wN/fAbQ9GDZhXWjWRvDcMqtSINA3LmO2a8OunMw1XPYh8xRumkeo9xPj0TLb+InB7247AYUnVXevHw2uDKrTqhfU91uoZCmp5msI5ByT+IKwxI58H0vpMwDTCtuOIwb4l06v7cuY3FyB1aaGKwmOwHnIBhde83Cayf6A=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH3PPF3ECB6A513.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(52116014)(376014)(366016)(38350700014)(6133799003)(29003799003)(56012099006)(11063799006)(10067099003)(12006099003)(25016099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH3PPF3ECB6A513.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(52116014)(376014)(366016)(38350700014)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?2rQ4DecahdoUqhyFfHDubmBjhWkVbCADIs9jNU+9dGuwSoC12tcd/zjntCPN?=
- =?us-ascii?Q?BrrbVva8kiAILbMHBad0K6126S1SbFlJiadnRrc8CwwXSA9v0+OMz2Rev2js?=
- =?us-ascii?Q?y3vA31QECqpyK5BMaJMmunNACV7oX50U9FXlOB7NVmCjOPlGZBJyoOeSKGsT?=
- =?us-ascii?Q?rsGv8jsQXVMrjIrTzK/UnjqH/CV7/FH7ioLtzo6EAfjNY2FAorR11aMUAGaf?=
- =?us-ascii?Q?f+CPbKmO9L3j41pYrWfC1citmxfRwx9YaFDwcm3+R6ByJHc3SlEvhFMlGzHQ?=
- =?us-ascii?Q?vM4If88bZi0lTkf+mjWGAyYtZjPZi45TG3bw3NWxA9zBFJSnPW5dY7K1VUt3?=
- =?us-ascii?Q?ujWyyCQ+328BeOczew7xW5gpzMrTZImIZ9XQiILmwV+Ncbal6hQLVjXMftQN?=
- =?us-ascii?Q?DtfRiKZ46I9NtLxqy6zwhj+ZPLrvtKV5+xHBiEWFhSycdWuRY/PquJtCYq6/?=
- =?us-ascii?Q?gaUUYAhW/DvEF0UiQqTrNAyiWkeS+7bHD7pWAq8FAaCKPyJw/8FAKZ1V0mmJ?=
- =?us-ascii?Q?wHCofd0brLYPqDUW9uVll9Bf7sfIA6pz1TRwEZcaDgTHdumIPClD2lKtOx6U?=
- =?us-ascii?Q?sO2KLojZnoM5XK8v3bhHpIu0mnuaHFK2ZL8CnhF1OjCej+F21Fyne1AKUBCt?=
- =?us-ascii?Q?pIYUZJjbtyVn504XLfHdu79rI7HwAM48mECExqwtsNm0yo7/1qhcsJEBCifw?=
- =?us-ascii?Q?EG2HhJ/N4KbPo2edBWWPu92RHLYDFP0C+QaAsH76SqpycMSou6N2z+7AYoYw?=
- =?us-ascii?Q?yo37nnuKFGYmOFlu7yZckqzflnwMexR+oDytKyaia+LoHHTovm3nceE6oqBF?=
- =?us-ascii?Q?M8+Ih6X8Wf0kDlnN9+Hc/a8pYRZ7ys9LHC99yllD4yABcvevzRV8j1wYsIro?=
- =?us-ascii?Q?vT3Zg1t3qv2eoTrEsqae0knJLyPgJbUvtdvxn1QiBgC/cL+kuDAr1dW89lOh?=
- =?us-ascii?Q?Y0SvlMDV4AdEBPZJUvBpvbPxLhw0xfyyBzHrt9/p8Kp7oRAdqCdMcJaeDTIU?=
- =?us-ascii?Q?c1t5HV2ShjjE1lnRtkD2GSe/S7yS7jElIiyIxZ+PNvnAMGgWCd95/rIvxWhP?=
- =?us-ascii?Q?dsMo9XZ2L9gBIm0tUi969ALTjzPskEAQq4V4QxgKY/45H2a2HrIsElYm1wJi?=
- =?us-ascii?Q?+ZHKAajpMDPs2zsFepLLxKofKshO5fgdhsD6C1zRa1LDjIxS3EFUnkyaN4I6?=
- =?us-ascii?Q?avHtD5fJVeShSsiOVsMCsnNbsc8HV1OCnXqBaLla7mAsoxuNB0PwWvoNDx/q?=
- =?us-ascii?Q?EDoLeHtXeK2dmHtkLmpIHY0dPDuWVgrsXj+TuRsWTVbI3jWEFB5H0q/CObj0?=
- =?us-ascii?Q?lPxE6YN7RTiJ9v9FwW/SS52lJXUPPrIlJetI2eCvk84dXpqpoRAccmKqnO3N?=
- =?us-ascii?Q?FYSFRnVSwKiGVusTJuoxAPsnjBJKvCbZRC87tWX8LA1onj7Ypr0+doqoLOBe?=
- =?us-ascii?Q?Awk0UuMe+yLVmZsr5HZL6vW6Y46ddo3OIyv1Lun+ramLbjyKE68VEVqSBMYm?=
- =?us-ascii?Q?69jF6IUNzPH7JII0AGUMyTwik2+eoTrkR+S8MNLmt3ljvRwMJlkWWRBco7BU?=
- =?us-ascii?Q?TgFVRknyCdr2QYNl0FvfRNdTyKG7NaqLwhyaLQ8YGVSTeuGj3dBQrqnBadmm?=
- =?us-ascii?Q?p2YCymiHQ2sG4i9a9SeDqfESM3Jq0LfskCNHDjXKSXcn0CJPNzwuffImf+XW?=
- =?us-ascii?Q?47S3SQWAXwav4Zx5EBWLrDTvhygNngJCOOfhLNJuCUezlXtCE2JYHme+iaKV?=
- =?us-ascii?Q?GKbtJohJun8on5ud5C8uROkSkR5WPgQ=3D?=
+	=?us-ascii?Q?RzPK7jxfiZ9uYCHzpNwBHvIJAkT6YXOtPaIib/EIANt/NoMz+3Rp8TLMxrnC?=
+ =?us-ascii?Q?+iJxBedI1JuJ9tSQ6Y4lroofprUSGu77+gvxyIw84BNyrRj/fCpOuXomjniD?=
+ =?us-ascii?Q?WCmo9+uaxMMkzPXBPB+Jrho31Dl5ajhiLenqlQ8A4a1TPnxOMdzDXQvFtU5a?=
+ =?us-ascii?Q?2VSGOKVKwUPNVesoT7hJNS5ERfjPnMnkAGSo5QSdOS0535ESClG/Ws5owwhc?=
+ =?us-ascii?Q?WQqck51Ymxqx6h3PQm07A6in2O4ZvlZTYQeiOCNyxM7xd/Furq/5DfP4xPSv?=
+ =?us-ascii?Q?G3mBTUMy66JG/nVGQ7co0nMGTJ2vchIAyo5qQKadutlgmw4xQHfqvA/RjPIh?=
+ =?us-ascii?Q?dSyKBwXanUvvgV/3RbQJ324wo/HVWFM4b0bUmCyANci/yDvgP0cqdd8Dyxkw?=
+ =?us-ascii?Q?vWwr0K71yrt0r1wXsv1KPMMl88NiS+YixeJ019Hioz2ZztdZz0YceMgI7UIQ?=
+ =?us-ascii?Q?zmoRM1OHoV8irWRDt8LfX3OQG0QDLSzArbThjdfsZvxAnEC+7DcOOkSZXwFu?=
+ =?us-ascii?Q?gd7iHFLQhnYfe2g9ZFil0KTNm/Jot/+1X9RWg5R8T+6aPpZLjTi9vCLJqli9?=
+ =?us-ascii?Q?Z7PYARka28Vosow09W6Evm6amP8ysMNQz6EAQQqMPIlMGqYepkYtgIJlDasc?=
+ =?us-ascii?Q?tNdbMIDlz2xeC0A0Ev8ihjBVuTksizexqkil6LvaTI/EIyBgZe7qkSmHp9Tk?=
+ =?us-ascii?Q?YQRDgJ2vos4UvePGMr0CiN0+L3oINiw6h/tWyeApd/NllLw5Um+ULqP3DQqq?=
+ =?us-ascii?Q?QlyC181gXvbeobcPE7aP4e0Nq4Dher3VUrmftewNfepYEsjPrRag51GYrQX1?=
+ =?us-ascii?Q?V9m1HLJrVf8FPAj07XgpgkvpSCFYdsrNmQPCa3sk/Ubshi9p8qMYnu7FOq19?=
+ =?us-ascii?Q?2rxEIV0h+VTfZth11w/P9iXqZxGNO7vF2Iwz5+kMjK7UXVh24t8WejiDXnj4?=
+ =?us-ascii?Q?WZypVMnVDf1g8N64Fs+CU4ma9bwFeNTILoghnLWMta71nmCAZ7pYS/ucTAV6?=
+ =?us-ascii?Q?gLcgErUxsqI4fc+oRGhh6UytXv2rSw4gkzB9XH/I9ZNEJ5F2oypGb+pdSkpB?=
+ =?us-ascii?Q?IGW86V416IOeSk8vXB6lfebH7kOrJuuX1c03v8/VGvNfe96ymxeXJPeL0LqW?=
+ =?us-ascii?Q?53toXyjkVUtUoiEKHj0TWG8VZ1vUgGXOXNK7OY6dM8ctyQzRplGOGTWez/Ea?=
+ =?us-ascii?Q?ycvTimRtgrhZQwpJ8wF+c/PCuJfM1tv83xHWyEdiakCxRyHFDcn0RaM6Lj1L?=
+ =?us-ascii?Q?g8Wvmr8WNMUd4IWOcN1BMcnFk0qvIGysulzStXGMM0cO65yAcHqr1ULsnWvF?=
+ =?us-ascii?Q?fCH1DTKSzUz5ldz68NDz1+XWau4QFIN7tc+rk6o9GwelLlXhCpYwz/M6lEcC?=
+ =?us-ascii?Q?F4uhs9/jL/OEO3kg0eo8D8ygr3M/dYgJ+Ld6JWjh3ly8eX/y+W+QTRVo1ky7?=
+ =?us-ascii?Q?Z/7141Qvqr7sySSSdoBZXryh380Dg9143ubbx1LDojxYDfqObxLo+HK8Ex5i?=
+ =?us-ascii?Q?2WoclXPW5IRvhx36ReRABIgw8GCdYookhNMAtxdFC8AXGjXVxIMjjVrzwWAN?=
+ =?us-ascii?Q?rlhVfZGYkK9hkPT4617vO1lEc5lu++YrKAtY9iY+Pe3a8gCtcmbaGAwTLTDa?=
+ =?us-ascii?Q?RD5jijdywu70SEmxKfkVT0O7gAa8+AwNsxoKLpGwXeB+GwdR6M4CpXiHk68I?=
+ =?us-ascii?Q?cTDzoOb8noTHRKfqbf51ThVc+pPigPw7tEtCYVUkPI28vhDLowj5v4oZSwph?=
+ =?us-ascii?Q?3E4iRTUREfZ1hhE7YFYTixI3F/npbLQ=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	2AlgFnC/dJtanLzIQ1cJtVzBmgNSDk1hUnllwkO9315dbkc01hNYlja4SaGJ9aY9LmYgjvwoe2HzlmseaawzDoNU8+kJ5hrYOaqKzAlwRa1hpGGFaYq7qBerksowrlSGQqKPD1B064I1XYDFWvJkwmtP4cerlR8/5VPo6AiT0Uo+4Knr67tj9l/vsoa8p03NQCKciviKNhmQEMC/SP2pDxhctl2v4SDwhIUcXGo4cqrRCNwO98aELAlpWsYOB5KG+iJApUxC2H/1boiDuGM7h5s3ZC34LSb+YFGTtajggGMt18Kpb2f5d2wA/f/JwkO1o2I8v5k8Oge/gX3SppYKoA==
+	e1TL4p8NS6Ax3Xi8/3etjKwujqyCU9umR9HKr6TWjv1MCZ2y9Tm8Gbdm/jTIG/0FYTHs8SjEXlzUzMgxCdu2yKsIoDL19Xl0PmxRRkUOeJ7NrPPJY2/nQqC8GyvyQTdl0gB85nCQhtfDUv6NM1bd5l4wflWzVxzeSEQnBCrRWp7kV/gnaxp6WTHQNpYQNCyYc5W7MRwwowIRqoaM2C4JplSWOfMw9Qqcn9xu0tzZNbwDKLUb3tM6/u5mNZsTpEC+jPyslKY+Gz3Bh5mymZzl/toWMOmVqPxYEq4L0/RuL7mLiST3ywWtpldYdAJgki5odfisW9QwffDae7tcuj68IA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25141d16-f577-47c7-c4e5-08df08eb78b3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 473074d4-1d11-4599-8823-08df08eb77ec
 X-MS-Exchange-CrossTenant-AuthSource: PH3PPF3ECB6A513.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2026 12:12:34.6140
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2026 12:12:33.3647
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sGQ/Tdgj5alpRBZHjaDBrw4oUHLfyum/PQk10sYRNfgVdvV7F32XsvcECfvhIOuGBjrBsj/6iuLeTYzFXxXN5SESsa5MPU7QPKqXCBJJvvk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5UFRQBpP3vpC8E610zM+Hc/exWA686t1UbFG+gcnHegcuyVNhApaV0ggy29JxUv7KOsj/G1V0dzUr1fXe86SG7QBOz9++eQFTNrW+HzTXeM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR11MB8442
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEwOCBTYWx0ZWRfX4xd+DTEJVShz
- 5Npgoljm7TLLLtnFoh6mAfGn2Ok66gSPicsiYDhP17+yZf/Jetms/6f/F7PiFBH0J3qJ7lShquM
- COCR3W9ZwppRJvgshakZhzPoD5iNlTafGGuoD6F9gXvzzYM1El2w10kvR3vV6mz0GKMUwpJBv6A
- ceczYfP/PNdShtF8WBvqK21aP2ElwEwb2AfREUfOgl70NNhOjBEl7BSkwhz9DklKYfTuQyPzyEh
- vCqs6aiXt8pOvGlcexkwglu8Upsd3BinR90b2XoE7inHeN3n0Uj4sFy4V+46S9yadsOsQ3Rg81e
- vfgkDUmLr8rSzd+2Xs+iytuTauvESMDoNo5z6LAuwWpxZr16dG3X0Nd49j7CSuLx3VzypHdnC5S
- XGvdObcULEesM8o2ZIsT+FfKFrDh6+r7oKD1tMisf8QYiCc44fYH1uCpDxzTiQlFbJW34Kw/ZaH
- SuVF1U7kwLjYE56a2Jw==
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEwOCBTYWx0ZWRfX5h3FVp748eS8
+ EKmZDtM6Aw+LPBPT9Vp9qYUWhKyCwxBWwrq4kET4nQX2zY30f1OzuFRtFfh/UkWXKb7ebI6Lpdo
+ HSxfd2kJ3qpYy2tBykG+kMlFbtAhmmNPs4lBdBFOUcAc6bUOwOvPvuA8SPc78woh1Ij6SpLc2sO
+ 0C5y0Cz+YcbTFNSa5fDIVgUmf7cRRG0zdLusudgWTeE6Ec0wT3T9ssNoYA7Mdt0j0oGBgGQNbNR
+ BmMh/SlS94Etusk1/86a2dddsiUBpluB96bdK32SNkVhJHaCY0ArzVt9JG2zXoRtNIYxTsGQQxj
+ pNrSzcV5UkTPz+ieMR+jFKn7TXdegGf3GgedLOqmFZi7c7L7mqUEcdrh0FqEXQhAxj6xJvtTum9
+ Yk6o4oRNHgZ+1/lf19sU9NplhQfF3WfZJ1N4ubpaLnVuHNobLEYmqL3qjCqCg9GwJPD0SwSf36k
+ ajUx+SkIuu225f2Uqqw==
 X-Authority-Analysis: v=2.4 cv=BJaDalQG c=1 sm=1 tr=0 ts=6a9812b5 cx=c_pps
  a=OsHIvx7z5txkqQhXuj38dg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=aX25-iPZAAAA:20
- a=NEAV23lmAAAA:8 a=9dNbsytUAAAA:8 a=uDo-SIiEAAAA:8 a=EUspDBNiAAAA:8
- a=omOdbC7AAAAA:8 a=t7CeM3EgAAAA:8 a=FqYEshwvAAAA:8 a=pGLkceISAAAA:8
- a=xeC3QtFAAAAA:8 a=GvQkQWPkAAAA:8 a=TyYgJJx3BB2W2if4R-YA:9
- a=gPpeecpFUKP6j8iU7U-x:22 a=Rkhf4GTZPwEC63LfVcCP:22 a=FdTzh2GWekK77mhwV6Dw:22
- a=whVU-vuORgf30j0UdIXk:22 a=9XEOD9pWidfRTSXZEhnp:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEwOCBTYWx0ZWRfX9/pDyt5X0dc1
- Uf/iJgviFtr8OKQdnyAGNeSQseueUdk9GLUyfMTaB5feZfwTKpkh8QcFMcekHKffYYc1LOfnOjX
- 8vItCrZD0bDPNrrN6qSUw4w9d3pOaK4ZWfjb4zyVDR1aCbcR/aXS
-X-Proofpoint-ORIG-GUID: QibIEJml_CwmC3XRm45Sx988VHGLelMq
-X-Proofpoint-GUID: QibIEJml_CwmC3XRm45Sx988VHGLelMq
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=LA4-PlVrAAAA:8
+ a=EUspDBNiAAAA:8 a=t7CeM3EgAAAA:8 a=4-1-fA6p189Jh3Z-_lYA:9
+ a=Vl2fjF2eAE7ISOjF8jEI:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEwOCBTYWx0ZWRfXwnnAZ9lg+E4k
+ EhT64cL+PwrzFUBOP8Nq375P6zeD5hi3uHKyYDxV1wwSci/Idt9ZRbkyF75TULNx4DhaAtxSQpI
+ vkBynI4z5ESeCgeqw2/3MAttO1f8kqfdUr+Djluqi1qkI4G8nWrI
+X-Proofpoint-ORIG-GUID: WjbTQ4InjG9adDUuR4vw1FTtb32Ka9fU
+X-Proofpoint-GUID: WjbTQ4InjG9adDUuR4vw1FTtb32Ka9fU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-02_02,2026-09-01_03,2025-10-01_01
@@ -152,235 +149,50 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 12:12:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129695
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129696
 
-From: Khem Raj <khem.raj@oss.qualcomm.com>
+From: Louis Rannou <louis.rannou@non.se.com>
 
-Upgrade openvpn from 2.7.0 to 2.7.5.
+The dns-updown script is written in bash which is under the GPLv3
+license. As this script is optional, it is preferred to have it in an extra
+package.
 
-Changes:
-* Drop 0001-tests-skip-test-execution-when-cross-compiling.patch
-  This release already guards the auth-pam unit test TESTS assignment with
-  "if !CROSS_COMPILING" in tests/unit_tests/plugins/auth-pam/Makefile.am
-* Drop CVE-2026-40215.patch - fixed upstream in 2.7.2.
-* Drop CVE-2026-13117.patch - fixed upstream in 2.7.5.
-
-Security fixes included in this upgrade:
-
-Fixed in 2.7.2:
-* CVE-2026-40215: race condition in TLS handshake that could leak
-  packet data from a previous handshake
-* CVE-2026-35058: server ASSERT() on a malformed packet with a valid
-  tls-crypt-v2 key
-
-Fixed in 2.7.5:
-* CVE-2026-13379: openvpnserv (Windows) DNS SearchList state pollution
-* CVE-2026-12996: use-after-free in ack_write_buf()
-* CVE-2026-13117: use-after-free in tls_wrap_reneg()
-* CVE-2026-13122: server crash on malformed auth-token
-* CVE-2026-12932: memory leak in tls-crypt-v2 client key handling
-* CVE-2026-11771: 1-byte buffer overrun on NTLMv2 proxy responses
-* CVE-2026-13698: memory leak on tls-crypt-v2 packets
-
-Release notes:
-https://github.com/openvpn/openvpn/releases
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 Signed-off-by: Omkar Patil <OmkarAbaji.Patil@windriver.com>
 ---
- ...-test-execution-when-cross-compiling.patch | 34 -----------
- .../openvpn/openvpn/CVE-2026-13117.patch      | 46 ---------------
- .../openvpn/openvpn/CVE-2026-40215.patch      | 59 -------------------
- .../{openvpn_2.7.0.bb => openvpn_2.7.5.bb}    |  5 +-
- 4 files changed, 1 insertion(+), 143 deletions(-)
- delete mode 100644 meta-networking/recipes-support/openvpn/openvpn/0001-tests-skip-test-execution-when-cross-compiling.patch
- delete mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2026-13117.patch
- delete mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
- rename meta-networking/recipes-support/openvpn/{openvpn_2.7.0.bb => openvpn_2.7.5.bb} (95%)
+ meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/0001-tests-skip-test-execution-when-cross-compiling.patch b/meta-networking/recipes-support/openvpn/openvpn/0001-tests-skip-test-execution-when-cross-compiling.patch
-deleted file mode 100644
-index f8f2d2907f..0000000000
---- a/meta-networking/recipes-support/openvpn/openvpn/0001-tests-skip-test-execution-when-cross-compiling.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 93f7f6ca0c916427d28610d3e263fa556587532d Mon Sep 17 00:00:00 2001
--From: Haixiao Yan <haixiao.yan.cn@windriver.com>
--Date: Thu, 26 Mar 2026 13:43:50 +0800
--Subject: [PATCH] tests: skip test execution when cross-compiling
--
--The auth-pam unit test Makefile.am unconditionally assigns the TESTS variable,
--causing test execution to fail during cross-compilation because the target
--binaries are not executable on the build host.
--
--Upstream-Status: Pending
--
--Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
-----
-- tests/unit_tests/plugins/auth-pam/Makefile.am | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/tests/unit_tests/plugins/auth-pam/Makefile.am b/tests/unit_tests/plugins/auth-pam/Makefile.am
--index ba32013ac920..7da299ccde92 100644
----- a/tests/unit_tests/plugins/auth-pam/Makefile.am
--+++ b/tests/unit_tests/plugins/auth-pam/Makefile.am
--@@ -4,8 +4,10 @@ AM_TESTSUITE_SUMMARY_HEADER = ' for $(PACKAGE_STRING) auth_pam Plugin Unit-Tests
-- 
-- if ENABLE_PLUGIN_AUTH_PAM
-- check_PROGRAMS = auth_pam_testdriver
--+if !CROSS_COMPILING
-- TESTS = $(check_PROGRAMS)
-- endif
--+endif
-- 
-- auth_pam_testdriver_SOURCES = test_search_and_replace.c  $(top_srcdir)/src/plugins/auth-pam/utils.h $(top_srcdir)/src/plugins/auth-pam/utils.c
-- auth_pam_testdriver_CFLAGS  = @TEST_CFLAGS@ -I$(top_srcdir)/src/plugins/auth-pam
---- 
--2.43.0
--
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-13117.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-13117.patch
-deleted file mode 100644
-index ea2e32bdcb..0000000000
---- a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-13117.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 3ce0242e68527fd1e8d378aecb57c466e8058b44 Mon Sep 17 00:00:00 2001
--From: Max Fillinger <maximilian.fillinger@sentyron.com>
--Date: Fri, 22 May 2026 14:34:57 +0200
--Subject: [PATCH] Fix tls_wrap_reneg use after free
--
--When dynamic tls-crypt is active, it is possible for tls_multi_process
--to set to_link to session->tls_wrap_reneg.work and later free that
--session, leaving to_link.data pointing to freed memory.
--
--This is not caught by the function check_session_buf_not_used because it
--checks only tls_wrap, not tls_wrap_reneg. This commit adds that check.
--
--CVE: 2026-13117
--Github: OpenVPN/openvpn-private-issues#119
--Github: OpenVPN/openvpn-private-issues#125
--Reported-By: Trace37 Labs (https://github.com/trace37labs)
--Github: OpenVPN/openvpn-private-issues#131
--Reported-By: Haiyang Huang <huanghaiyang83@gmail.com>
--Signed-off-by: Max Fillinger <maximilian.fillinger@sentyron.com>
--Acked-By: Arne Schwabe <arne@rfc2549.org>
--(cherry picked from commit 2745768d6181c1d54ebfc5ef81f924a127f4f015)
--
--CVE: CVE-2026-13117
--Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/3ce0242e68527fd1e8d378aecb57c466e8058b44]
--Signed-off-by: Omkar Patil <OmkarAbaji.Patil@windriver.com>
-----
-- src/openvpn/ssl.c | 6 ++++++
-- 1 file changed, 6 insertions(+)
--
--diff --git a/src/openvpn/ssl.c b/src/openvpn/ssl.c
--index c0ab6d3dfbe..d7e93bd41ab 100644
----- a/src/openvpn/ssl.c
--+++ b/src/openvpn/ssl.c
--@@ -3154,6 +3154,12 @@ check_session_buf_not_used(struct buffer *to_link, struct tls_session *session)
--                     "still in use (tls_wrap.work.data)");
--         goto used;
--     }
--+    if (session->tls_wrap_reneg.work.data == dataptr)
--+    {
--+        msg(M_INFO, "Warning buffer of freed TLS session is "
--+                    "still in use (tls_wrap_reneg.work.data)");
--+        goto used;
--+    }
-- 
--     for (int i = 0; i < KS_SIZE; i++)
--     {
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
-deleted file mode 100644
-index e1bd0c99df..0000000000
---- a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-40215.patch
-+++ /dev/null
-@@ -1,59 +0,0 @@
--From 4a2c827c2536aa03a1d6c7cc916689a46c067187 Mon Sep 17 00:00:00 2001
--From: Arne Schwabe <arne@rfc2549.org>
--Date: Fri, 10 Apr 2026 16:59:53 +0200
--Subject: [PATCH] Ensure that buffer of freed session are not used
--
--In a race condition an old TLS session could still try to send a packet but
--also get replaced by a new session. In this case, the buffer of the new
--session is still referenced. Add the check_session_buf_not_used function
--to mitigate this problem.
--
--Also make the check if the to_link pointer is in one of the memory
--regions a bit better even though this not make a difference with the
--way we use these structs. But better safe than sorry.
--
--A better solution to remove the TM_INITIAL state and handle reconnecting
--session in their own complete tls_multi is a more involved fix that requires
--a lot more refactoring.
--
--CVE: 2026-40215
--Reported-By: XlabAI Team of Tencent Xuanwu Lab (xlabai@tencent.com)
--Reported-By: Guannan Wang (wgnbuaa@gmail.com
--Reported-By: Zhanpeng Liu (pkugenuine@gmail.com)
--Reported-By: Guancheng Li (lgcpku@gmail.com)
--Signed-off-by: Arne Schwabe <arne@rfc2549.org>
--
--Change-Id: I7c5fa2a7a2563b7a8955d386411f3ceffe5b092f
--Private-URL: https://github.com/OpenVPN/openvpn-private-issues/issues/112
--Acked-by: Gert Doering <gert@greenie.muc.de>
--
--CVE: CVE-2026-40215
--Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/4a2c827c2536aa03a1d6c7cc916689a46c067187]
--
--Signed-off-by: Gert Doering <gert@greenie.muc.de>
--(cherry picked from commit b2a15fb84d85790eeae4a2e12b431cbfd0b0302f)
--Signed-off-by: Omkar Patil <OmkarAbaji.Patil@windriver.com>
-----
-- src/openvpn/ssl.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/src/openvpn/ssl.c b/src/openvpn/ssl.c
--index b188b4e9b32..a63d142ec46 100644
----- a/src/openvpn/ssl.c
--+++ b/src/openvpn/ssl.c
--@@ -3280,6 +3280,7 @@ tls_multi_process(struct tls_multi *multi, struct buffer *to_link,
--                 if (i == TM_ACTIVE && ks_lame->state >= S_GENERATED_KEYS
--                     && !multi->opt.single_session)
--                 {
--+                    check_session_buf_not_used(to_link, session);
--                     move_session(multi, TM_LAME_DUCK, TM_ACTIVE, true);
--                 }
--                 else
--@@ -3353,6 +3354,7 @@ tls_multi_process(struct tls_multi *multi, struct buffer *to_link,
--      */
--     if (TLS_AUTHENTICATED(multi, &multi->session[TM_INITIAL].key[KS_PRIMARY]))
--     {
--+        check_session_buf_not_used(to_link, &multi->session[TM_ACTIVE]);
--         move_session(multi, TM_ACTIVE, TM_INITIAL, true);
--         tas = tls_authentication_status(multi);
--         msg(D_TLS_DEBUG_LOW,
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.5.bb
-similarity index 95%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.7.5.bb
-index 5cf7735eea..0aea6b7e74 100644
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+index 4d7258bfe8..5cf7735eea 100644
 --- a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.5.bb
-@@ -9,16 +9,13 @@ inherit autotools systemd update-rc.d pkgconfig ptest
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+@@ -49,7 +49,7 @@ PACKAGECONFIG[iproute2] = "--enable-iproute2,,iproute2,iproute2-ip"
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
  
- SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
-            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
--           file://0001-tests-skip-test-execution-when-cross-compiling.patch \
-            file://openvpn \
-            file://run-ptest \
--           file://CVE-2026-40215.patch \
--           file://CVE-2026-13117.patch \
-           "
+-RDEPENDS:${PN}:append = " bash"
++RDEPENDS:${PN}-dns-updown:append = " bash"
+ RDEPENDS:${PN}-ptest:append = " bash"
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ do_install:append() {
+@@ -116,7 +116,7 @@ do_install_ptest() {
+     cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}
+ }
  
--SRC_URI[sha256sum] = "2f0e10eb272be61e8fb25fe1cfa20875ff30ac857ef1418000c02290bd6dfa45"
-+SRC_URI[sha256sum] = "c6864b3c7d4e059c7d6ce22d1b5fa646c8b379a06af872eeb9792b6083a44ac4"
+-PACKAGES =+ " ${PN}-sample "
++PACKAGES =+ " ${PN}-dns-updown ${PN}-sample "
  
- CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ RRECOMMENDS:${PN} = "kernel-module-tun"
  
+@@ -126,5 +126,6 @@ FILES:${PN} += "${systemd_system_unitdir}/openvpn-server@.service \
+                 ${systemd_system_unitdir}/openvpn-client@.service \
+                 ${nonarch_libdir}/tmpfiles.d \
+                "
++FILES:${PN}-dns-updown = "${libexecdir}/openvpn/dns-updown"
+ FILES:${PN}-sample = "${sysconfdir}/openvpn/sample/ \
+                      "
 -- 
 2.40.0
 
