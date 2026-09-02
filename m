@@ -2,62 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE6FDC624D0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9F62C624D7
 	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 10:05:56 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9051.1788343552431088292
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9349.1788343547709249339
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 03:05:52 -0700
+ Wed, 02 Sep 2026 03:05:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=cO4GlwQr;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3964dfb5b9aso1074313a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:05:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=AmSvpIxM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3964dfb5b9aso1074231a91.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:05:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788343552; x=1788948352; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788343547; x=1788948347; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4o99LDLQvCP6InGqJmy0+x4rInCYHJPoPzbB/aJo+WI=;
-        b=cO4GlwQrFptaZVm/FbtZackcAosP7E49XYa6iCzhShaCg7KpLlCvjc6b7yixuW9uDy
-         0CF7V3DhSk/U9dALMVlOdwycFJBjTrmhZhIx2pkmlPJw/+TfD74RoNKbk9LxsiAjSdrD
-         z3pXMfwkY+cNk/9MFY1UvzckRmHfwwc0xA8tuPp/o80TzAhoKtYUOF4ey96L4rnll1Wk
-         OMi6DS82ilqxQqdlKEZ++EZ7D37U6bUBGgyQRHcin6S0Lg2nhTa95Jtt4eqNnKze4Gkk
-         NqqYf3mhYRAml8fXohHSmroQHXnauTblcW4MUAWF0lC+uIeiEKy7V0QEVsr0FwEJH5nY
-         IqCw==
+        bh=Y8zVPyoCBe+vl7KXLE+AA8t7aRK1svBx1A08i3bRO7c=;
+        b=AmSvpIxMRGbI2WEmwfyzog7+C8PJTNUpkSh1daW1Wkkg3j+sSg8kfGbmAmuPBBuUX6
+         acLIr4k/ELm9W0aHGYS/MbFu0ubOTzC3uAaeySZ9DhPX8eo+7FqGV+63gVI6+ySaaH77
+         eToy/sO1is9z9d55YbPPxmmuqKeLi5FjjWtnJ/6nrHwZUzEsbImMrPQnuFRXLskIy3J4
+         OSh698xoT9H2V4N8G0S0aVWvrpqE6SvWb8uKScKKqJZQXc9FkQucseC3jckIhvqWFz64
+         tcgnrXyc1+SChLwI4kxk8E4oe+/N0RH9SVSnoFyu21zbyGOIDgTii0MHP17ej6q1+8ej
+         Oi0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788343552; x=1788948352;
+        d=1e100.net; s=20251104; t=1788343547; x=1788948347;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4o99LDLQvCP6InGqJmy0+x4rInCYHJPoPzbB/aJo+WI=;
-        b=GZZeKGMZGrrmTcMcKoGsESvedtwSEwhCISxTcni8XdM+FrlHDEUyTFZMUPpbAvdgfD
-         JD89wm1iQ0pkodPXpHCytb9XnZsyubKsz+0pNRgruM0LdEnqKTnqiajDMPPwdEeZUsy/
-         X6zbg+c4v9k6oXU5lrtgbA/5TTtI91/NknjoILz4PoSIMT/V1KyaV4tcSWMoILpHAeIf
-         qVnXIgV3c9IAYkrfbf4QakWi4/v5NJPWnrQRyIEak4YFEI1Os3MXsw0cw1cPhYpp6tJj
-         84t9p9USkqXUyqg15DySdXtjVL0p32y75fvRAOmYNb99/MY+cUbNjNZ2YHy/9iop9l9B
-         oY3w==
-X-Gm-Message-State: AFuF++nI2id0pmYSVgFkf1jyrk4mB1XezgBLPZftM7AekNnb9aUF6cyK
-	c5XX/i8aIJCEwbPpJVhSg14lNcjCcJtMnMCb0/YsYEbujRPaLRR6Sb2j56pdeA==
-X-Gm-Gg: AYBFou2V6fykPuEcKUNnfr4mefQPUTNDzrtOMqkNi0yWhmqUmgsVnnYlxOvpfJejT40
-	ZhlMad7iTc3xxEJCYA6EWkca+yClSB8ThccKwRU7lBZJYkV4sfIH+xFviek4ApVaAztJzv+VWad
-	wMoRd6WNlp3r4y2pNCM1vxPHJBUowa5lcmMd7mUOtyCMUhvpNLCi07S3/PVnQEZ8FBP4lnqlHJg
-	GUGgfXyG+FGbEpdGracDHW+RQXW1GUNi9/JB1h2TGcBSgzVaavypFA+B7rM/eQGv0R6v3oCCXm2
-	F1aqWrdYJM1CjUg/P7Fp/yTckkbmx6Cih02Idavs65wmtBMGkSX481rgQTQIBsk2HY7wkq53D0m
-	xCrwck2rVazZwwxOxgjzodePzl0rgtWqSC0Tb+J0KUyT+JblAOaVkHDhsLxeThzgZfX47Vw0h69
-	gPSgVrCPrwp+VStu/3QN7RyGayJ/8c8aDrRafe9jZeJ3MPN8t8vxhQwJq+3xO9YSq33xoxQK/Z
-X-Received: by 2002:a17:90b:5824:b0:38e:bfe:81e9 with SMTP id 98e67ed59e1d1-39aedf66687mr5862942a91.1.1788343551668;
-        Wed, 02 Sep 2026 03:05:51 -0700 (PDT)
+        bh=Y8zVPyoCBe+vl7KXLE+AA8t7aRK1svBx1A08i3bRO7c=;
+        b=oHKURri4GpO8ihS0SZN9wmGyGhHIAXzIpUx2ebrqZIr3Muhb12PUvpDovf7vntlu+b
+         2lAYJASoXC8xBOPE/g6ph04gdeYfdGt56wxqYXXVKfFVb8/oN4ahAD3LmWVlSdBlaFAX
+         pSjs96URd0K9OY/TeIzWAlMpe7f4M4WhvcISUQS0sXUfIkQ+TaU/GJjomgnC7M5Z9BNb
+         ucyhnFH/DkMJPcWm1lvhKLjkyv7S4apI3oHgy4q75aoPG5KE+Sg2SK39G9rqfzJjlyiR
+         Y/bHzl/rUpHQ50ShHrb7bR+nOiY1nGOUy1xqd+O4N2bNqLBkhM8pa0jyLRZj1/liOz+S
+         ipWQ==
+X-Gm-Message-State: AFuF++ndkTy3Z4o9H0jbM/QMCLbJjVQThRW9zDS/wmjbNdws2Z2WW4tW
+	sUc9Jrj6HGyUOBueVp33dQMn6L7hMiR0VibEip5K53T6+MCU6EBKn3z2xHH18g==
+X-Gm-Gg: AYBFou00nOn2Q0nft69rwRGh16hsisjGf32XzP8M8LFYPZFIxtdw9kUOW1e5VxbCJDH
+	D7KiNf6HRZorpmQoaxfHHrxG/BolQr4k0Rn2ncauOT8J6sA8uORfLn5k9XxcvqrtVl1Mu71c+vZ
+	c0qoCgCH2mq38dcsJtkzuebS3Qj56nFW3H1KeJrOlcqEcWxgQkr9gtb5L8+wuOvUz4c8DFmaX3K
+	GVhutj0z2EKVFLIj7rJLWN30cW7bw6SRS3KnAickVMiUnci/LwgL/Q03pceYIhnSxOO3CZNAQN3
+	Bx9mEB9R4wnlf5ya3myA1A8AcbvHPQ+pvd+579kaLdOhGdG4hkVXUXHIl277vXXpz/YaE1HWhv6
+	gvTGmSz4M0l8dBbIOzvQEJPsqbERvwijY7HdY0IMIgbuqqq4YHQcDPrd+hKPInZE7hmjDxSdk4e
+	pTidinn3j6wkkCWDm3C613x2V4HjpniJzE9pp7xlsBdHIgN7CRO5j4vFXROEcgSRy1g7mlUSTjw
+	+/NzSEM9Hc=
+X-Received: by 2002:a17:90b:2649:b0:398:d6e6:4671 with SMTP id 98e67ed59e1d1-39aee249be6mr5290460a91.25.1788343547038;
+        Wed, 02 Sep 2026 03:05:47 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.05.49
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.05.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 03:05:51 -0700 (PDT)
+        Wed, 02 Sep 2026 03:05:46 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 13/28] editorconfig-core-c: patch CVE-2026-40489
-Date: Wed,  2 Sep 2026 22:04:55 +1200
-Message-ID: <20260902100511.2105916-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 11/28] dovecot: ignore already fixed CVEs
+Date: Wed,  2 Sep 2026 22:04:53 +1200
+Message-ID: <20260902100511.2105916-11-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
 References: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
@@ -67,78 +68,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 10:05:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129644
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129642
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-40489
+Upstream has confirmed that these vulnerabilities are fixed,
+and Debian has also identified the relevant commits:
+
+CVE-2025-59028: https://security-tracker.debian.org/tracker/CVE-2025-59028
+CVE-2025-59032: https://security-tracker.debian.org/tracker/CVE-2025-59032
+CVE-2026-27859: https://security-tracker.debian.org/tracker/CVE-2026-27859
+CVE-2026-27851: https://security-tracker.debian.org/tracker/CVE-2026-27851
+CVE-2026-33603: https://security-tracker.debian.org/tracker/CVE-2026-33603
+CVE-2026-40016: https://security-tracker.debian.org/tracker/CVE-2026-40016
+CVE-2026-40020: https://security-tracker.debian.org/tracker/CVE-2026-40020
+CVE-2026-42006: https://security-tracker.debian.org/tracker/CVE-2026-42006
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../editorconfig-core-c/CVE-2026-40489.patch  | 39 +++++++++++++++++++
- .../editorconfig-core-c_0.12.9.bb             |  4 +-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/editorconfig/editorconfig-core-c/CVE-2026-40489.patch
+ meta-networking/recipes-support/dovecot/dovecot_2.4.4.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c/CVE-2026-40489.patch b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c/CVE-2026-40489.patch
-new file mode 100644
-index 0000000000..e328052314
---- /dev/null
-+++ b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c/CVE-2026-40489.patch
-@@ -0,0 +1,39 @@
-+From 4d5fcd42739f0ae349efe4e9208c0f109bb7c141 Mon Sep 17 00:00:00 2001
-+From: Hong Xu <hong@topbug.net>
-+Date: Tue, 14 Apr 2026 23:11:39 -0700
-+Subject: [PATCH] Merge commit from fork
-+
-+Completes the buffer-overflow fix from #87, which bounded writes into
-+`pcre_str` but left the initial `strcpy` of `pattern` into `l_pattern`
-+at the top of `ec_glob` unguarded. Sufficiently long patterns smash the
-+stack before any of the bounds-checked code runs.
-+
-+Fix CVE-2026-40489
-+
-+(cherry picked from commit 5159be88ad50641d9843289adda791ba300421ff)
-+
-+CVE: CVE-2026-40489
-+Upstream-Status: Backport [https://github.com/editorconfig/editorconfig-core-c/commit/5159be88ad50641d9843289adda791ba300421ff]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/lib/ec_glob.c | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/ec_glob.c b/src/lib/ec_glob.c
-+index d36076d..0e7f7ac 100644
-+--- a/src/lib/ec_glob.c
-++++ b/src/lib/ec_glob.c
-+@@ -96,8 +96,12 @@ int ec_glob(const char *pattern, const char *string)
-+     _Bool                     are_braces_paired = 1;
-+     UT_array *                nums;     /* number ranges */
-+     int                       ret = 0;
-++    size_t                    pattern_len = strlen(pattern);
-+ 
-+-    strcpy(l_pattern, pattern);
-++    /* Reject patterns that would overflow l_pattern in the copy below. */
-++    if (pattern_len >= sizeof(l_pattern))
-++        return -1;
-++    memcpy(l_pattern, pattern, pattern_len + 1);
-+     p_pcre = pcre_str + 1;
-+     pcre_str_end = pcre_str + 2 * PATTERN_MAX;
-+ 
-diff --git a/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
-index 319c1724c0..8d182d0cd0 100644
---- a/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
-+++ b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
-@@ -4,7 +4,9 @@ SECTION = "libs"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=38f617473e9f7373b5e79baf437accf8"
- 
--SRC_URI = "git://github.com/editorconfig/editorconfig-core-c.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/editorconfig/editorconfig-core-c.git;protocol=https;branch=master \
-+           file://CVE-2026-40489.patch \
-+"
- 
- SRCREV = "e082c947e7f7b14240195d55c060a6e1eda1b0a1"
- 
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.4.bb b/meta-networking/recipes-support/dovecot/dovecot_2.4.4.bb
+index 6cac8de964..1edb8f50e3 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.4.4.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.4.bb
+@@ -86,3 +86,11 @@ CVE_STATUS[CVE-2026-0394] = "fixed-version: fixed since v2.4.1"
+ CVE_STATUS[CVE-2026-24031] = "fixed-version: fixed since v2.4.3"
+ CVE_STATUS[CVE-2026-27855] = "fixed-version: fixed since v2.4.3"
+ CVE_STATUS[CVE-2026-27860] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2025-59028] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2025-59032] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2026-27859] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2026-27851] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-33603] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-40016] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-40020] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-42006] = "fixed-version: fixed in v2.4.4"
 
