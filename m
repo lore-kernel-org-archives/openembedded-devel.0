@@ -2,62 +2,62 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD071C61DD6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FB87C624D3
 	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 17:46:57 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.283.1788367875351406355
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.335.1788367997749296832
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 09:51:15 -0700
+ Wed, 02 Sep 2026 09:53:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=FlhMTzrM;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: joel.winarske@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cc1cc97b84bso1155782a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 09:51:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yi+lr+Vj;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: joel.winarske@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-85590c5aeabso1169457b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 09:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788367875; x=1788972675; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788367997; x=1788972797; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gAOCukuh26QXqEp3ucfZN0Uk8IIL/CXPZGh3BvkUSZg=;
-        b=FlhMTzrM1pNLRuaRS89C1bCwfp1jcyb7En+JpsOSxO0G/YtnoYmH0dgqsCVIS2kRdY
-         twOwUDvCj8x6y6cWQ6QRJqsHmWrq00ajr7Y3JHanhJCgDicYzj6DTaF6xgVmUCJqozrh
-         IGZBzpLGD+MqaYBnNgx3jLXGh0aKAxhvJXDLTScIWcD2diWOSlmsKTwyE+dgWMRBOzY9
-         0qzdIWB1k0pFIJKcWi84rXpkzBeINki4F88zBSrUSX2B4Ch4O18oJCVBpDorMOXJ15Yn
-         WIR9CJPYTTROokTgZh8ajFT+bVWiP9pmPgVOcC0H+Y7lXb2wTg8Kg9Dk0uICx02BrxmT
-         NN7Q==
+        bh=fDMoe+brS8suLF/0i2GstG2Mu0uzP4BIIwO4VwaVWBg=;
+        b=Yi+lr+VjKrXEVkjTeX+jECChJq04m5s5cjoNRQtFhKKQCtchyF2ukV1Gw87RF/wKps
+         PQPfYuMmVRy1jRDCE1V/ubXKcf+qt34o3zVKUh0KbYrBQ6KGwa+8HZ78OTO0eAYBsw22
+         yvEMl0VW9xhuUpxgdzizOtBSWqFcauLgbMB5E+VK3JG8X7G0PDEWQ9xKjK8yKXLmKrZf
+         pfGcy3WQBCPQv1T9EjjhoGouFfgcqOXUfNDbO43Yo1udjhefQClrDE3fEYs1M9xaf5U+
+         S0kW2cA+jZUiywfmSuPlD7TuISYMr69oBXPlFqOYMekyrOGMsz0ay9MgOF9IaGf3bGH8
+         Ikww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788367875; x=1788972675;
+        d=1e100.net; s=20251104; t=1788367997; x=1788972797;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gAOCukuh26QXqEp3ucfZN0Uk8IIL/CXPZGh3BvkUSZg=;
-        b=VPSahgG/sjkq9Zz/Qpx04WBHt6ONoPbERah7zbJkLHD5Xpe4bbQjiDBEW7jRfa069H
-         pKcIOmoRCJLGVnNM6jJ2LL+ISiRwTgiF58VWpAL48VP0XzPBr5Ygf4xEGmIgSCjixsLw
-         QH2aDBtMjnZp2tB1ODbUxa4O2TVYuHU97QT+bDumS9ncB/aCYcowb8F7zVFVKKekyT4t
-         ZlLfFPeuMjTQBDAWBMsx4QluTHz5TV0G5UkfQkiLWQPOof+RNw8lbQaxf7BlKcQqw1eT
-         szGkZGBVebIX8sccHjBsY3YJ1oaG7ZhcSV5P0GU6440SKbYlhObey30hW9j9ZF6wwGio
-         KMlA==
-X-Gm-Message-State: AFuF++n3XcHfezn3lzDeQ7YPptOfvJCUHwF0zZeGbNUw94VhI69gFhI8
-	e7BDXHBhKDEuYCPIvM3H9YAhduBEzWmKmrR+P0o3GOrVf1yE0azyFoTPqDnueQ==
-X-Gm-Gg: AYBFou3MS6tA+jgp77e9WAU1wdAdpWbQHhntTFyI0UN50NLf4JE0shyQ6Gq3dj8fQqp
-	njYfCutAsmDnIS8mRiASZmAvAyFLdcBsg4B6THkjdlZ+4ObjFwAL8Tkc5NyUSJav5giU22NI7mZ
-	slgRHjmhX6SPf5OLSGwlxS3B4EQC8J/63C99/gfkpaBwWFuvqX6DKuh/l2nANaE/kJoiVsi0Fjq
-	hJzS7cOf9HAycddtGXN9rlmsPg+0RB8MlIFYp2qOnH6M1ToWbmr8svAESKSsGy7zc9fp2K7R4wx
-	A9Oj7y0KdWXF3oLvACQPgwRPnx2174wczm3IKFLJH2yUy9hpzWXf4wOEDmqLdiOmAGHIUEC9OSd
-	g2+r4DyVGxztR9wjVo7MErYV5ed13ijugIA5AkuEWl5iaEJHNUEy+YgUMrdFLc2RppEu4d4C/ox
-	d2mzb3PE0mRBbdxblLDMaYhbFtxeReQ11tfkCHPd8v1p9PpZZTytFMVsrrq74H2mwgCUzx6myAi
-	zhaR2kKIwDngK0Y+wVUqVVNh0QL0v53/n3Np3X6+Pzugg==
-X-Received: by 2002:a17:90b:4c4e:b0:38e:bbf1:de3f with SMTP id 98e67ed59e1d1-39aee0674ecmr8733997a91.12.1788367874534;
-        Wed, 02 Sep 2026 09:51:14 -0700 (PDT)
+        bh=fDMoe+brS8suLF/0i2GstG2Mu0uzP4BIIwO4VwaVWBg=;
+        b=f5jJr4sVy6t5r+EVoKxIA2wrR2WlMbeDLHr6XUyuXCU1vaTRqPxcIJKf+W9pd20p+g
+         uj+AjM3TQwi+04v2NiOrq0b28pHnr29UFLlWttXOtWne+KaVUvHrjlQeyHYVGBzv1Usy
+         dFfgUxtfwcaDwgzYWG5PRVn006DqjgPDt+gtyRv1pLL0y/htdzhYOeynB9fwl2X0ll8e
+         Nt+VBSEkm8Oq8th1lEA/Z2VwLyle6W8dtq/1o8UzLkph/fQomVAQ9e33hOGNedqEdrch
+         Fs4Mb7UCCDx+4yOq1FrTpu2tm599fYlthidi7K/zzjb8e+7uux5Lae+0KaPFtdauSi1v
+         urrg==
+X-Gm-Message-State: AFuF++nuOsPH1jABV9FUtMXEpNe7vTnVSkAfo+8gxaFlh2I++CA1zExN
+	p2lGgm6VZFq5BfTuUbsjevb/doFRffy9IwGLjm2DKJNyOu7UzCgKwd9Mxo+TevCC3E9jXg==
+X-Gm-Gg: AYBFou0jtrRN5yvzLsRFYi9L2Ze51ZnoN3hFSAUKHzbSOGbT4U3VAJY+9GOcX+kql8f
+	k+VZ9a0IP2IWb8KK6ayvD2ixXQyhGBaWx4E1bqyqgzVRRqW+SjajqCJse7fD8Dy9pXKxVVJpWDe
+	avW9IsJZz2xaIC8cSAu9V4NfpYrkNNKOSEyCBqw3j1N4026GsbloePDPVy1ghbjX0pEjggw/Y53
+	odw9JbOYfPoTuY17CqiH3webx2qEiOdNxl1zisxGSLMZhJKaG2X0rGeh04QeSHx9ChCEecTq/NH
+	G4qkzVx/ofFbNH485VYadHm2UxtihNxU9rciLBzJu15ch+Ce9+bzwOjn9p3JuQneR2BYQhUL9Ue
+	qPgVS4InVEEE+qEhtKPs6wsBiuzGSWZnLm7MxH/QDPKcqvzg+EEFQzNbNMKCbHVVDom4gdLPmWx
+	YDoNGbhng4IpOfvLvrwezPH1d15L3E8KMmZpQVP863F6MGWlXHP66PTmulaumwIG9tQvkw+4+Zq
+	L6Us982ZaSKaD+E6tZqE677GJ3oEYaB/cF+jZ9u+l+BYQ==
+X-Received: by 2002:a05:6a00:4510:b0:857:7317:cff4 with SMTP id d2e1a72fcca58-85ed47375cfmr10610685b3a.21.1788367997096;
+        Wed, 02 Sep 2026 09:53:17 -0700 (PDT)
 Received: from air.lan ([2601:602:57f:c7b0:d6fc:cce0:dbc5:cca6])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b08624f11sm270775a91.11.2026.09.02.09.51.13
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc34d0022c7sm1383024a12.15.2026.09.02.09.53.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 09:51:14 -0700 (PDT)
+        Wed, 02 Sep 2026 09:53:16 -0700 (PDT)
 From: "Joel Winarske" <joel.winarske@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Joel Winarske <joel.winarske@gmail.com>
-Subject: [meta-oe][PATCH] capnproto: build position independent code
-Date: Wed,  2 Sep 2026 09:51:08 -0700
-Message-ID: <20260902165108.1200976-1-joel.winarske@gmail.com>
+Subject: [meta-oe][wrynose][PATCH] capnproto: build position independent code
+Date: Wed,  2 Sep 2026 09:53:07 -0700
+Message-ID: <20260902165307.1259305-1-joel.winarske@gmail.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -65,7 +65,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 17:46:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129698
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129699
 
 The recipe produces static archives only, and does not compile them PIC, so
 linking capnp or kj into a shared library fails:
@@ -82,15 +82,17 @@ hit this because they ship shared libcapnp.
 Set CMAKE_POSITION_INDEPENDENT_CODE. Packaging is unchanged: still static,
 still no .so, no new packages and no ABI surface, only the code model differs.
 
+Backport of the same change sent for master, where the recipe is 1.5.0.
+
 Signed-off-by: Joel Winarske <joel.winarske@gmail.com>
 ---
- meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb | 9 +++++++++
+ meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb | 9 +++++++++
  1 file changed, 9 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-index b867c72e36..9909afb0e9 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
+index 948ff80345..8c914d96bd 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.4.0.bb
 @@ -19,8 +19,17 @@ CXXFLAGS:append:mips = " -latomic"
  CXXFLAGS:append:powerpc = " -latomic"
  CXXFLAGS:append:riscv32 = " -latomic"
