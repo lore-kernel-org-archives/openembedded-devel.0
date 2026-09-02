@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 565F3C61DD6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70885C624D0
 	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 10:06:17 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9065.1788343574049599293
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9366.1788343576709349968
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 03:06:14 -0700
+ Wed, 02 Sep 2026 03:06:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JW+FR1Tk;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2d6e954afbdso5171635ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:06:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kiWBZeHi;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-398d2b28acfso681915a91.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:06:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788343573; x=1788948373; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788343576; x=1788948376; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fowu6XI+DUSRHXo45Qm1TWU8fLj7OAHlch8GTHzWiz0=;
-        b=JW+FR1Tk4mmPQTJ2EdDW/8d/rU964O+Zmu+hCAEtURECWcvmddc5Fp5QAQFX9CiMyP
-         1iWX7z5NUroYhyBokFwO9PTUhEkVg1AmJxgOaNy7T3YMYWBCRF3r0ehYeUW1tNxv0lMC
-         QLLyk/b+UEeqxqOSrufE4hpjqJcowXbB6yTw6kWiHJ/+J1PGzIdHR64mgg0y4ZWiVO4/
-         5oz9cez3LZTyboD0jmX3CYdiAXq55RBFojVhSgjqIf0ySsbeVrtyM2BfiIxRJuEfeQWv
-         flKIHrnpaCLQ7yOKWf6UQWphHBX2vTuIrEPSbFuEG2GlAxQmq8kiOFxgwo0VfwjZO5o3
-         i54w==
+        bh=BKzn0n2pLlKo179kVdmLYmDuB95iwSvtweMvRUWXOYk=;
+        b=kiWBZeHiSPqr2RFx403nH7lElQ4RIhb3DKW31LKUOy6hO/tFrHXQ1qiLp5ILWD4jRR
+         PEdUJPTd679GZglCQFXdLPdw+4a/QTX6clYbMpVos/zmfhH1sLeLxi5L/IrjoZ3+84Ac
+         Y5UM3fcHhAqXScxyBGMcURgHeCwy+EfiR05VsixUSx7kRF6N98MWJi5KGDIncw3ddTWG
+         ls2my/bafonobqsA7pbC8PhorlRlbq10Z7VMsvKb3qi0caKY0gkMOMcxjnFxYhbjHn1U
+         oDEe+UOj6JuyLuduSkvuAoux6ZHalRUUw/lhtcWJvs1b1CTQGBZLctauk5mbXDeFB2Y1
+         wBOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788343573; x=1788948373;
+        d=1e100.net; s=20251104; t=1788343576; x=1788948376;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fowu6XI+DUSRHXo45Qm1TWU8fLj7OAHlch8GTHzWiz0=;
-        b=sRPwhH6vtnmdftr71q2LD9Y3Gs+0X/DQeEviaRYdfwqZllhyL0op1A0TCVMrLO387m
-         EvU52Hng+Lr2etYcEJ0E4vmPM8Es9102NvGGUS3LyEeqO7gBTgNW0iP7YfLipl/izmnN
-         13Ndxod+An/YgRVFx6PdOEPU5QbRIoX2J/KjBAIQ7Q8wCoFLEZjbUrcV0+BSPQdvl3VG
-         EVq2JIx2mz8NHIV+I0BDIbXt4oGJ6yT4UuueeO86Bno2cAS9KXxzUXXEnX71ITgIezPj
-         7wb8gIZcQZkM0IkfRKepxYVTswvo6J6QJcvk/g/JXalRyy7OkaUQPiPg+i0FwlP1MGia
-         +aQQ==
-X-Gm-Message-State: AFuF++leFeXP8FEw9MHkWLKTMLeyPeEfmI3SloqaFbBmkDe5r5CdYgmk
-	KJM0dEOmzZyA6JKA3dbBRrm1CeqYfioso3pvvOBKIdvW7jhFVM7vz7FB+1qDkw==
-X-Gm-Gg: AYBFou3cHxEubDAwQJw49QLr9TsaekgkWUAbkHkTsprOLCcimo+VAgMHeaDvUtC3d8u
-	unxqbjFtFUNqh5y7+NxP7NnGzDWmb+1Onux5/H1lX1G17zM7wldGU3VUIaksppSMvZWFBM/sOio
-	Aa0dTJVqxyb+tCiX1boAYakVl73rbT9uWIFOxzFk9WZmRczXck7HRBI2UEzCX/aiskK8g6XbTEJ
-	rmBQ14KKsBNwYFz2hM79wwT2tePNct+iApIrH2XmaKEfv6xV9T4P4/jNCMIDmjIiXrKlKVJKRdq
-	zcPAfq7QtBPyjkJQFvG+lTpNQF7mHdR/ZKTkVfi8qu5kY2YOL61VtK3ElJNU04KNEBfhiLLc3mq
-	0suRViICoPnglL2e6mTJDBz1kR1SBhjOSWguK9iG4FJwza2qz5H193n0QtDAaM9m0/obCRDIIp4
-	sceTpwxVpDEzs2ZPZQyyXzhyRp0tqP+lAP9Avojj52xL5yAz6GKGZhQWpLDkCNILNW86s4v7mE
-X-Received: by 2002:a17:90b:4d06:b0:398:bf7e:b267 with SMTP id 98e67ed59e1d1-39aedec7bd8mr4901111a91.2.1788343573232;
-        Wed, 02 Sep 2026 03:06:13 -0700 (PDT)
+        bh=BKzn0n2pLlKo179kVdmLYmDuB95iwSvtweMvRUWXOYk=;
+        b=GYi/xQt2LQxpuTpkT/VlJuDBuUGTPglkQPRpcg09tED+4EXZ3riOOxgcPqcH1X2kun
+         wz7kpwlJvdNxzmAZyLgUkQW8Qf6b604IdyWTpQzPF2E6NvsPO/M0J7HEDH70FFj0xALJ
+         DrcojK2sG+HEv+6nOqqLPMeC12gNvS9vQXN6vpDeBS7fk/dsYdZNGtrT2AAhawzHG7zF
+         yzJIS0gN4QoV7/bSVsen5jK1aWB2uCXJqL8jI6Wwmofe8WoMoMzCltc4uN9oG3h8az1x
+         wC1I7bgwm5snEeMa6H7F81p9ASWPtiEQ0dXy7uMVAvh/Jy61TvRI1FGskUSZH3XERUev
+         QyGg==
+X-Gm-Message-State: AFuF++lU2abH3huuQvl2vDtM5Yxscyn4nEPOtsYCZOQvSHazqzth8hIO
+	Zrx6U84FEDqm9faAo3Yq5okkr8rjealtmhTMj1oXGuQWvQy8xD81GgrAoWDDHRVo
+X-Gm-Gg: AYBFou11nhe648H1cvZbOx3dlaR2RJ0jbZ+mPZKcvd7+MFMMDey9rYEHpl1K7AXtndE
+	+HKAmqUdsAhXpKXQ2l4Ej59nxwf93FC03+obd1+ARDzVfkvzXou4pncerNAoLjRFhhqNV2s13dE
+	ROjBcGwFGPPuzkP3qCuGXyAhpPERpbhHw3yVuZX4F0c5sonByOmhhou4ElqFdRmAPwG6ran8eCQ
+	RwuAoi6KMZPtDRXII4bH6Sshj6No+xKbFy+qaB8GsUtW7q2XkCF1/pXBXTpvSTlmR8sID+wciwn
+	ohMCoHb/OMI8Gb66giC7CA8mpahF2NagGpCDqZRnHpR2cHT5S/lANm2vDwei6notZdIayc5udJ7
+	4cX/+0PixTXhP2Qyn7viH9o1d/vPR5oYkS3q1jLRu2/Mintfwj+xqEKIiEnKnk2LAf+gJenwfmF
+	oataHLFwWuJ5eJVijCSExU3H8KKcdNUj2IrWJO+IMBOLmP0jmOyRnPMHeHVPtCbcx0pGPphnzu
+X-Received: by 2002:a17:90b:3907:b0:381:11eb:d78e with SMTP id 98e67ed59e1d1-39aee066e04mr4451133a91.14.1788343575884;
+        Wed, 02 Sep 2026 03:06:15 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.06.11
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.06.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 03:06:12 -0700 (PDT)
+        Wed, 02 Sep 2026 03:06:15 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 22/28] hostapd: patch CVE-2026-58374
-Date: Wed,  2 Sep 2026 22:05:04 +1200
-Message-ID: <20260902100511.2105916-22-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 23/28] hdf5: patch CVE-2026-17572
+Date: Wed,  2 Sep 2026 22:05:05 +1200
+Message-ID: <20260902100511.2105916-23-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
 References: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
@@ -67,139 +67,294 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 10:06:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129653
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129654
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Apply hostapd patches recommended by upstream[1] as mentioned in the NVD[2]
+Backport patch from the PR[1] fixing the issue[2] mentioned in the NVD[3].
+Debian[4] has also identified the commit.
 
-[1] https://w1.fi/security/2026-1/
-[2] https://nvd.nist.gov/vuln/detail/cve-2026-58374
+[1] https://github.com/HDFGroup/hdf5/pull/6499
+[2] https://github.com/HDFGroup/hdf5/issues/6501
+[3] https://nvd.nist.gov/vuln/detail/cve-2026-17572
+[4] https://security-tracker.debian.org/tracker/CVE-2026-17572
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hostapd/hostapd/CVE-2026-58374-1.patch    | 49 +++++++++++++++++++
- .../hostapd/hostapd/CVE-2026-58374-2.patch    | 43 ++++++++++++++++
- .../hostapd/hostapd_2.11.bb                   |  2 +
- 3 files changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-1.patch
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-2.patch
+ .../hdf5/files/CVE-2026-17572.patch           | 253 ++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
+ 2 files changed, 254 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-1.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-1.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
 new file mode 100644
-index 0000000000..9bb8974c50
+index 0000000000..373a6c374e
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-1.patch
-@@ -0,0 +1,49 @@
-+From 7ab2de9eecf5409f6af1461cf89dbf217930bd45 Mon Sep 17 00:00:00 2001
-+From: Jouni Malinen <jouni.malinen@oss.qualcomm.com>
-+Date: Tue, 31 Mar 2026 23:24:04 +0300
-+Subject: [PATCH] AP MLD: Fix link ID validation in Basic MLE parsing
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
+@@ -0,0 +1,253 @@
++From 606bb0a0282d0b056a3bdda1d489a608deee78d2 Mon Sep 17 00:00:00 2001
++From: Nayyar <nayyar@bugqore.com>
++Date: Tue, 14 Jul 2026 23:39:56 +0530
++Subject: [PATCH] reject SOHM list message count exceeding list_max (#6499)
 +
-+Link ID 15 can be indicated in the field, but that is not a valid value
-+and must be rejected to avoid issues pointing beyond the array of links
-+for a non-AP MLD. Without this, an invalid MLE could result in writing
-+beyond the end of the buffer and causing process termination or
-+unexpected behavior.
++* bound SOHM list decode to list_max messages
 +
-+Fixes: 5f5db9366cde ("AP: MLO: Process Multi-Link element from (Re)Association Request frame")
-+Signed-off-by: Jouni Malinen <jouni.malinen@oss.qualcomm.com>
++* Add tsohm test for out-of-range SOHM list message count
 +
-+CVE: CVE-2026-58374
-+Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=46dd5a4ffc9bcf44cf8fc45120b3e1e5ec922187]
++Create a file with a shared-message list index, corrupt the on-disk
++message count so it exceeds list_max (repairing the table checksum),
++and confirm reopening rejects the file instead of overrunning the
++list image buffer and message array.
++
++---------
++
++Co-authored-by: H. Joe Lee <hyoklee@hdfgroup.org>
++Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
++
++CVE: CVE-2026-17572
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/20f0b9564bc46154e60f8d35578720a599d41552]
++
++Dropped changes to the CHANGELOG file.
++
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/ap/ieee802_11_eht.c | 10 ++++++++--
-+ 1 file changed, 8 insertions(+), 2 deletions(-)
++ src/H5SMcache.c |  14 ++++
++ test/tsohm.c    | 173 ++++++++++++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 187 insertions(+)
 +
-+diff --git a/src/ap/ieee802_11_eht.c b/src/ap/ieee802_11_eht.c
-+index b935ee8..804808c 100644
-+--- a/src/ap/ieee802_11_eht.c
-++++ b/src/ap/ieee802_11_eht.c
-+@@ -1262,6 +1262,7 @@ u16 hostapd_process_ml_assoc_req(struct hostapd_data *hapd,
-+ 		size_t sub_elem_len = *(pos + 1);
-+ 		size_t sta_info_len;
-+ 		u16 control;
-++		u8 link_id;
++diff --git a/src/H5SMcache.c b/src/H5SMcache.c
++index eb6d612a78..96687ffed9 100644
++--- a/src/H5SMcache.c
+++++ b/src/H5SMcache.c
++@@ -489,6 +489,12 @@ H5SM__cache_list_verify_chksum(const void *_image, size_t H5_ATTR_UNUSED len, vo
++     assert(image);
++     assert(udata);
 + 
-+ 		wpa_printf(MSG_DEBUG, "MLD: sub element len=%zu",
-+ 			   sub_elem_len);
-+@@ -1302,8 +1303,13 @@ u16 hostapd_process_ml_assoc_req(struct hostapd_data *hapd,
-+ 			goto out;
-+ 		}
-+ 		control = WPA_GET_LE16(pos);
-+-		link_info = &info->links[control &
-+-					 EHT_PER_STA_CTRL_LINK_ID_MSK];
-++		link_id = control & BASIC_MLE_STA_CTRL_LINK_ID_MASK;
-++		if (link_id >= MAX_NUM_MLD_LINKS) {
-++			wpa_printf(MSG_DEBUG,
-++				   "MLD: Invalid Link ID in Per-STA Profile subelement");
-++			goto out;
-++		}
-++		link_info = &info->links[link_id];
-+ 		pos += 2;
-+ 		ml_len -= 2;
-+ 		sub_elem_len -= 2;
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-2.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-2.patch
-new file mode 100644
-index 0000000000..7881e687ff
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2026-58374-2.patch
-@@ -0,0 +1,43 @@
-+From 86cefb9f27e0e2d31d857bea483b0735e6441801 Mon Sep 17 00:00:00 2001
-+From: Jouni Malinen <jouni.malinen@oss.qualcomm.com>
-+Date: Mon, 18 May 2026 15:45:15 +0300
-+Subject: [PATCH] AP MLD: Verify AP MLD link ID validity before updating bitmap
-+ of links
-+
-+Link ID is 0..14, so ignore value 15 if an invalid frame is processed.
-+It does not look like the invalid value was actually used to reference
-+any local array, but in any case, it is better to not mark an invalid
-+link as being specified.
-+
-+Signed-off-by: Jouni Malinen <jouni.malinen@oss.qualcomm.com>
-+
-+CVE: CVE-2026-58374
-+Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=ce1a8612e309fe86133ecf05ffb452b0bdf3b035]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/ap/beacon.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/ap/beacon.c b/src/ap/beacon.c
-+index cec0c98..cc295c1 100644
-+--- a/src/ap/beacon.c
-++++ b/src/ap/beacon.c
-+@@ -1305,6 +1305,7 @@ static bool parse_ml_probe_req(const struct ieee80211_eht_ml *ml, size_t ml_len,
-+ 	for_each_element_id(sub, 0, pos, len) {
-+ 		const struct ieee80211_eht_per_sta_profile *sta;
-+ 		u16 sta_control;
-++		u8 link_id;
+++    /* The buffer only holds list_max messages; a corrupted header whose message
+++     * count exceeds that would size the checksum region past the end of it.
+++     */
+++    if (udata->header->num_messages > udata->header->list_max)
+++        HGOTO_ERROR(H5E_SOHM, H5E_BADVALUE, FAIL, "number of SOHM messages exceeds list size");
+++
++     /* Exact size with checksum at the end */
++     chk_size = H5SM_LIST_SIZE(udata->f, udata->header->num_messages);
 + 
-+ 		if (*links == 0xffff)
-+ 			*links = 0;
-+@@ -1324,7 +1325,9 @@ static bool parse_ml_probe_req(const struct ieee80211_eht_ml *ml, size_t ml_len,
-+ 		 * partial profile was requested.
-+ 		 */
-+ 		sta_control = le_to_host16(sta->sta_control);
-+-		*links |= BIT(sta_control & EHT_PER_STA_CTRL_LINK_ID_MSK);
-++		link_id = sta_control & BASIC_MLE_STA_CTRL_LINK_ID_MASK;
-++		if (link_id < MAX_NUM_MLD_LINKS)
-++			*links |= BIT(link_id);
-+ 	}
++@@ -552,6 +558,14 @@ H5SM__cache_list_deserialize(const void *_image, size_t H5_ATTR_NDEBUG_UNUSED le
++         HGOTO_ERROR(H5E_SOHM, H5E_CANTLOAD, NULL, "bad SOHM list signature");
++     image += H5_SIZEOF_MAGIC;
 + 
-+ 	if (!for_each_element_completed(sub, pos, len)) {
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-index ce1c145fd7..f98bad9ef6 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-@@ -15,6 +15,8 @@ SRC_URI = " \
-     file://hostapd.service \
-     file://CVE-2025-24912-01.patch \
-     file://CVE-2025-24912-02.patch \
-+    file://CVE-2026-58374-1.patch \
-+    file://CVE-2026-58374-2.patch \
- "
- 
+++    /* The message array is sized for list_max entries; a list index always
+++     * holds at most that many before it is promoted to a B-tree. Reject a
+++     * corrupted header whose message count would drive the decode loop past
+++     * the allocation and the input buffer.
+++     */
+++    if (udata->header->num_messages > udata->header->list_max)
+++        HGOTO_ERROR(H5E_SOHM, H5E_CANTLOAD, NULL, "number of SOHM messages exceeds list size");
+++
++     /* Read messages into the list array */
++     ctx.sizeof_addr = H5F_SIZEOF_ADDR(udata->f);
++     for (u = 0; u < udata->header->num_messages; u++) {
++diff --git a/test/tsohm.c b/test/tsohm.c
++index 1652c9b044..61036e7dc3 100644
++--- a/test/tsohm.c
+++++ b/test/tsohm.c
++@@ -3702,6 +3702,175 @@ test_sohm_external_dtype(void)
++     free(orig);
++ } /* test_sohm_external_dtype */
++ 
+++/*-------------------------------------------------------------------------
+++ * Function:    test_sohm_reject_bad_count
+++ *
+++ * Purpose:     A shared-message list index holds at most list_max messages
+++ *              on disk before it is promoted to a B-tree, and both the list
+++ *              image buffer and the in-memory message array are sized for
+++ *              list_max entries. Corrupt the on-disk message count so it
+++ *              exceeds list_max and verify the list load rejects the file
+++ *              instead of sizing a read or indexing the array past its end.
+++ *
+++ *-------------------------------------------------------------------------
+++ */
+++static void
+++test_sohm_reject_bad_count(void)
+++{
+++    hid_t    fcpl_id   = H5I_INVALID_HID;
+++    hid_t    fid       = H5I_INVALID_HID;
+++    hid_t    sid       = H5I_INVALID_HID;
+++    hid_t    did       = H5I_INVALID_HID;
+++    hsize_t  dims[1]   = {4};
+++    FILE    *fp        = NULL;
+++    uint8_t *buf       = NULL;
+++    long     fsize     = 0;
+++    long     table_off = -1;
+++    unsigned list_max  = 100;
+++    uint32_t chksum;
+++    size_t   pos;
+++    int      i;
+++    herr_t   ret;
+++
+++    /* On-disk shared-message table layout for a file with a single index and
+++     * 8-byte addresses: a 4-byte "SMTB" signature, one index record, then a
+++     * 4-byte checksum. Within the record the 16-bit message count follows the
+++     * (version, index type, message types, minimum size) prefix and the 16-bit
+++     * list and B-tree cutoffs.
+++     */
+++    const size_t rec_size     = 1 + 1 + 2 + 4 + 3 * 2 + 8 + 8;                     /* 30 */
+++    const size_t table_body   = (size_t)H5_SIZEOF_MAGIC + rec_size;                /* 34 */
+++    const size_t num_msgs_off = (size_t)H5_SIZEOF_MAGIC + (1 + 1 + 2 + 4 + 2 + 2); /* 16 */
+++
+++    MESSAGE(5, ("Testing rejection of an out-of-range SOHM list message count\n"));
+++
+++    /* Create a file whose single shared-message index is a list that can hold
+++     * up to list_max messages before converting to a B-tree.
+++     */
+++    fcpl_id = H5Pcreate(H5P_FILE_CREATE);
+++    CHECK_I(fcpl_id, "H5Pcreate");
+++    ret = H5Pset_shared_mesg_nindexes(fcpl_id, 1);
+++    CHECK_I(ret, "H5Pset_shared_mesg_nindexes");
+++    ret = H5Pset_shared_mesg_index(fcpl_id, 0, H5O_SHMESG_SDSPACE_FLAG | H5O_SHMESG_DTYPE_FLAG, 1);
+++    CHECK_I(ret, "H5Pset_shared_mesg_index");
+++    ret = H5Pset_shared_mesg_phase_change(fcpl_id, list_max, 0);
+++    CHECK_I(ret, "H5Pset_shared_mesg_phase_change");
+++
+++    fid = H5Fcreate(FILENAME, H5F_ACC_TRUNC, fcpl_id, H5P_DEFAULT);
+++    CHECK_I(fid, "H5Fcreate");
+++
+++    /* Several datasets sharing one dataspace and datatype leave the index a
+++     * list holding a couple of messages, well under list_max.
+++     */
+++    sid = H5Screate_simple(1, dims, NULL);
+++    CHECK_I(sid, "H5Screate_simple");
+++    for (i = 0; i < 5; i++) {
+++        char name[16];
+++
+++        snprintf(name, sizeof(name), "dset%d", i);
+++        did = H5Dcreate2(fid, name, H5T_NATIVE_INT, sid, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+++        CHECK_I(did, "H5Dcreate2");
+++        ret = H5Dclose(did);
+++        CHECK_I(ret, "H5Dclose");
+++    }
+++    ret = H5Sclose(sid);
+++    CHECK_I(ret, "H5Sclose");
+++    ret = H5Fclose(fid);
+++    CHECK_I(ret, "H5Fclose");
+++
+++    /* Read the whole file so the shared-message table can be located and edited. */
+++    fp = fopen(FILENAME, "rb");
+++    CHECK_PTR(fp, "fopen");
+++    if (fp) {
+++        if (fseek(fp, 0, SEEK_END) != 0)
+++            TestErrPrintf("fseek failed at line %d\n", __LINE__);
+++        fsize = ftell(fp);
+++        if (fsize <= (long)(table_body + 4))
+++            TestErrPrintf("unexpected file size %ld at line %d\n", fsize, __LINE__);
+++        rewind(fp);
+++
+++        buf = (uint8_t *)malloc((size_t)fsize);
+++        CHECK_PTR(buf, "malloc");
+++        if (buf && fread(buf, 1, (size_t)fsize, fp) != (size_t)fsize)
+++            TestErrPrintf("fread failed at line %d\n", __LINE__);
+++        if (fclose(fp) != 0)
+++            TestErrPrintf("fclose failed at line %d\n", __LINE__);
+++        fp = NULL;
+++    }
+++
+++    /* Find the shared-message table by signature, confirming the match with the
+++     * stored checksum so the correct bytes are edited.
+++     */
+++    for (pos = 0; buf && (pos + table_body + 4) <= (size_t)fsize; pos++) {
+++        if (memcmp(buf + pos, H5SM_TABLE_MAGIC, (size_t)H5_SIZEOF_MAGIC) != 0)
+++            continue;
+++
+++        chksum = (uint32_t)buf[pos + table_body] | ((uint32_t)buf[pos + table_body + 1] << 8) |
+++                 ((uint32_t)buf[pos + table_body + 2] << 16) | ((uint32_t)buf[pos + table_body + 3] << 24);
+++        if (chksum == H5_checksum_metadata(buf + pos, table_body, 0)) {
+++            table_off = (long)pos;
+++            break;
+++        }
+++    }
+++    if (table_off < 0)
+++        TestErrPrintf("could not locate the shared-message table in %s\n", FILENAME);
+++
+++    if (buf && table_off >= 0) {
+++        unsigned bad_count = list_max + 200; /* well past the list_max cutoff */
+++        size_t   base      = (size_t)table_off;
+++
+++        /* Overwrite the 16-bit message count and repair the table checksum so
+++         * the table loads and the corruption is only caught at the list.
+++         */
+++        buf[base + num_msgs_off]     = (uint8_t)(bad_count & 0xff);
+++        buf[base + num_msgs_off + 1] = (uint8_t)((bad_count >> 8) & 0xff);
+++
+++        chksum                     = H5_checksum_metadata(buf + base, table_body, 0);
+++        buf[base + table_body]     = (uint8_t)(chksum & 0xff);
+++        buf[base + table_body + 1] = (uint8_t)((chksum >> 8) & 0xff);
+++        buf[base + table_body + 2] = (uint8_t)((chksum >> 16) & 0xff);
+++        buf[base + table_body + 3] = (uint8_t)((chksum >> 24) & 0xff);
+++
+++        fp = fopen(FILENAME, "r+b");
+++        CHECK_PTR(fp, "fopen");
+++        if (fp) {
+++            if (fwrite(buf, 1, (size_t)fsize, fp) != (size_t)fsize)
+++                TestErrPrintf("fwrite failed at line %d\n", __LINE__);
+++            if (fclose(fp) != 0)
+++                TestErrPrintf("fclose failed at line %d\n", __LINE__);
+++            fp = NULL;
+++        }
+++
+++        /* Reopen and share a new message, which protects the list and drives
+++         * the vulnerable decode. The load should reject the file cleanly.
+++         */
+++        fid = H5Fopen(FILENAME, H5F_ACC_RDWR, H5P_DEFAULT);
+++        CHECK_I(fid, "H5Fopen");
+++        sid = H5Screate_simple(1, dims, NULL);
+++        CHECK_I(sid, "H5Screate_simple");
+++
+++        H5E_BEGIN_TRY
+++        {
+++            did = H5Dcreate2(fid, "trigger", H5T_NATIVE_INT, sid, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+++        }
+++        H5E_END_TRY
+++
+++        if (did >= 0) {
+++            TestErrPrintf("dataset creation succeeded on a corrupted SOHM list at line %d\n", __LINE__);
+++            H5Dclose(did);
+++        }
+++
+++        ret = H5Sclose(sid);
+++        CHECK_I(ret, "H5Sclose");
+++        ret = H5Fclose(fid);
+++        CHECK_I(ret, "H5Fclose");
+++    }
+++
+++    free(buf);
+++    ret = H5Pclose(fcpl_id);
+++    CHECK_I(ret, "H5Pclose");
+++} /* test_sohm_reject_bad_count */
+++
++ /****************************************************************
++ **
++ **  test_sohm(): Main Shared Object Header Message testing routine.
++@@ -3755,6 +3924,10 @@ test_sohm(void H5_ATTR_UNUSED *params)
++ 
++     test_sohm_extend_dset();    /* Test extending shared datasets */
++     test_sohm_external_dtype(); /* Test using datatype in another file */
+++
+++    /* Editing the on-disk table in place needs the single-file sec2 layout */
+++    if (default_driver)
+++        test_sohm_reject_bad_count(); /* Test rejecting a bad SOHM list message count */
++ } /* test_sohm */
++ 
++ /*-------------------------------------------------------------------------
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+index 20b2f1100e..cd489bdc3f 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+@@ -18,6 +18,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
+            file://0001-cmake-remove-build-flags.patch \
+            file://CVE-2026-26199.patch \
+            file://CVE-2026-26197.patch \
++           file://CVE-2026-17572.patch \
+            "
+ SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
  
 
