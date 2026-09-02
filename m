@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15F32C61DD6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25448C624D0
 	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 10:05:36 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9340.1788343533890909958
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9336.1788343528823856887
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 03:05:33 -0700
+ Wed, 02 Sep 2026 03:05:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Jkui5Lpf;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-398b1e63c49so2027035a91.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:05:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=rt1cYGcB;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-ca12086c06eso719351a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 03:05:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788343533; x=1788948333; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788343528; x=1788948328; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jGDgyQN9x+2JwhBJleGRBrk6VEpgl1RgfkWUp96un/I=;
-        b=Jkui5LpfgZ6ghqG3R1lI8PaeczELVGB8CgZRJYAqBngXQPPXgMxZvpuTzICgasWLKo
-         AzsxIQt3f/z7EcmW84Dj4LiOq1xMbhKqhsML8B936Uh64ZVI3HkArxVLQQjFQeQhniBb
-         u3b0kBsngp8bDswXkLFuXttOxKnTTPn54ELf+TM+B7/uJiQxgUHpDYTUk1nL+iMwyeV8
-         I6nB9ua9bGtkaNU4eOTib3ogctkilvQvXelgw+6fXfICwH2yOwT7hiBci3BhkfpyN48m
-         wskz69CGEm37HA15h6nuxZiPATwxOa2r5/9sul4JfdRvwJbHT/3XSrnJsA7uTNzG+Zop
-         1MjQ==
+        bh=n/lamRA8E4r4uT6kZQuydpvY62itbZPxjzpYwKDjY3c=;
+        b=rt1cYGcBbZkwfy5GUo9DPNxoKwA6pfk0w10q/7AdQ8Pm04m9Hqc25QFDXTlOrD4B2I
+         MkbJAcQ2R0GNW5W66ssuCdYXkIT80nyaMIxFmJJ7+BtJkoEbew8Mvj8w7P4/7seHcXm5
+         uoXk1vRkg5cpjHKt7OUI8s+MytwftC+FmRX+buj+tp2XlMD5M/8faA8YlszVoBSQJBen
+         s7YsZzALIZA1YJNEIdi/YZOvv+7XWG9e0wZdS9726SBavfUsU0IKjqfPrbrQCnD3klIk
+         J8R60JWHu4zgMtnNEA/ZtQySn8GqTTnqehjE9oRGDZT7m+ucab4Wc9C24ue45D8Hne1m
+         v1tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788343533; x=1788948333;
+        d=1e100.net; s=20251104; t=1788343528; x=1788948328;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jGDgyQN9x+2JwhBJleGRBrk6VEpgl1RgfkWUp96un/I=;
-        b=ZyUhIWdn0XJWpbTZ5ZFAxa9TvgHZPbSVTuqMJR0ty5U2YfzBrjy0cTNFjpykfV2bQG
-         f8I0RvX4Q5NTGLiMXgJyRQ7N/3SAIpjxrArsL4DiDyyp9fWqjRa1owS5/hyvin11+vjI
-         qpG0qpK+Tg2+cg8s6TodDI6aGW6ncbxPTORAheQDp/cWoBb9xH6R75C7YGoCxJzN8CKz
-         Mzn8JNNaCh+W/5SwzlfQZ9tO3MRi0Ew8do0hXvf/NKCyhyB8l8UHR6Qqpe7bMuUlwppZ
-         p6mshUboK1Uc8vr9KLWsINhxRW/JzXVLpH4nT1d11QK/qHw/vF7LwbbNHr8k6YUdoF5D
-         jVSg==
-X-Gm-Message-State: AFuF++lMSqqf1l95abgOW6XGICpwd1pMe7qwXeY/6zNjQu19VJGax9M+
-	gOgorF3E/GuS2+DgZEeVrxaNq/aEkiQNe3RBlYzTXt4562UmiP9fnsk+mdL9K6EV
-X-Gm-Gg: AYBFou0rtjxm45bFqC1Gk5bXyjNtYTqHY/YWi2DPzW2BlCGf3F5+GARiTSX+zwhj8GI
-	hWIUS3JfQh8OYGAxdS9ImeWIfiLy5yZnWiVB+mFxc3VMF9p7YlKxVy/xhxdpxAKTqJAcj9YWts3
-	/M/cDA86/Jkl1Y7RBiGXRYkjNu/JLl+vzlhEZYJR/8nSk4FsOCt22UXNLo1fp9oQ2ByuyQ16dxF
-	yd2+iaomuXw267HmLkTlXGCCkt5yQJGveDx7hHx1pJqXNFNJGXv+KMmvdNqzB7Da1eulx2cIdXU
-	4QAyVCsJ0i04kBcu732/R/dLSxxmQPr8Lznvwx8pfhfR+IkpTKjroZwH2SkJVVde9+kwEQNq78w
-	z/1Rs9udy1i5+jBJDjm3HV5lzapG8fgIzI9pTU2H40AVS1Lhhcv90g10mQa6srMO1C23Zofxxfv
-	TCVNrmhCkcxwAEkOyOs7QwZSjwTXvfKAwJGvC+iF7r/5rD5jSQa7CDovviOnlROLQnBCUfN6Uiz
-	JOn00/ORls=
-X-Received: by 2002:a17:90b:5445:b0:38f:657:6823 with SMTP id 98e67ed59e1d1-39af63f7f7amr1488504a91.8.1788343533189;
-        Wed, 02 Sep 2026 03:05:33 -0700 (PDT)
+        bh=n/lamRA8E4r4uT6kZQuydpvY62itbZPxjzpYwKDjY3c=;
+        b=NJYlbMh47joaebM3PB5I24P46aWzaUSXtE1mXoYxTdsA8c7MObVg6RmXyOQmcD4O8e
+         AiZS8tThwuhiH8rkHBkjHAdgz0TQCtrpPt5brsBzXe8hdNbnBg1WOD5abb84xdjyQmKm
+         1DJllVfYZUUL77T863N3X/IvQsZyvMEIlvWBImnN1dAW36oKG7btGK1dh/h1yhQEgvGr
+         vjWQa1G7Jt9PnigZC4IU2TUQXxeFOygn+yfNl663YpDoMAYGfV7t0z+ynYzURU6cYNj1
+         4Vrze3/PqfChEOHYoURnQMAqrchlbpkZajQ88bnP3NQctPiaYZjgF/xDvFZqqZJESM85
+         Ktcw==
+X-Gm-Message-State: AFuF++kbhd+KKl/M8sIgVOMcD70QxtPVz6hRWjEK1YpjlSHRM6851avm
+	BjvtQAs/QWRsn76xC7Pf29k/Dh/wCYredt72TglgsB5EQkuiKKkHJJMiusJX5gEG
+X-Gm-Gg: AYBFou3E7fhRAnMe2J2sp0DXoMx2EvEecRsHXSy5JzAJoJm4TOy4faqwoST9stV1WpF
+	ej6NnNHjN/2eaIuZIJgqG1pgT43JN6Y9/7HOFy02CVC3weZZJxLPoYvfzZ6d8MYfz/0MW1VBLLT
+	A42sNAxqF6rm18ZrQA7wzkHRNtge10cao8dZ5aiEl3FtwqDqPcUfGihRFTRO8HUm8qoBs6f+SBp
+	BSOxjPdu553b58gwlmYpB/SqdFX+Do6kOZFCWAZxe3qRrV4uFqXXV0GOWMKyieFiAKfb9KqwjCz
+	EQkFz69YAJFtlatiC/7CJCghB/bA+a/uwXFDYd+RQvMOq/K+qid/zGChPtKanKTP8Db9CAGoFm6
+	rQmj0iYipc1IVP+/MlgFSitb1pvgZT0xHKahtTDbHoP3R/QX4CAxj5zFS0Mv+98/4u9MC/EGlsw
+	J4vL06SkaZ/BRWCYSXmJ9PEU6Y3uAmGbkN9Ukeghi/jYKUKFU4vE9lhgIcA7tWtskWoo2fEmF5
+X-Received: by 2002:a17:90b:4d87:b0:398:e436:370 with SMTP id 98e67ed59e1d1-39aedf66692mr4646663a91.2.1788343528057;
+        Wed, 02 Sep 2026 03:05:28 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.05.31
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bd1dcfbsm10766784a91.2.2026.09.02.03.05.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 03:05:32 -0700 (PDT)
+        Wed, 02 Sep 2026 03:05:27 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 6/28] bubblewrap: mark CVE-2026-41163 patched
-Date: Wed,  2 Sep 2026 22:04:48 +1200
-Message-ID: <20260902100511.2105916-6-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [oe][meta-networking][wrynose][PATCH 4/28] proftpd: upgrade 1.3.9c -> 1.3.9d
+Date: Wed,  2 Sep 2026 22:04:46 +1200
+Message-ID: <20260902100511.2105916-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
 References: <20260902100511.2105916-1-ankur.tyagi85@gmail.com>
@@ -68,29 +68,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 10:05:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129637
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129635
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-41163
-
-Fixes:
-WARNING: bubblewrap-0.11.2-r0 do_sbom_cve_check_recipe: bubblewrap-0.11.2: Found unpatched CVEs: CVE-2026-41163
+Changelog:
+https://github.com/proftpd/proftpd/blob/v1.3.9d/NEWS
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit f4b73e8ec1c5cbeac6a1cea104db3a30dadb41e3)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../proftpd/{proftpd_1.3.9c.bb => proftpd_1.3.9d.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9c.bb => proftpd_1.3.9d.bb} (99%)
 
-diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.2.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.2.bb
-index 7e63435e90..c9aa04891b 100644
---- a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.2.bb
-+++ b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.2.bb
-@@ -23,3 +23,5 @@ PACKAGES += "${PN}-zsh-completion"
- FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+similarity index 99%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+index 95c9f3919c..8172ba3018 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9d.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
  
- BBCLASSEXTEND = "native"
-+
-+CVE_STATUS[CVE-2026-41163] = "fixed-version: fixed in 0.11.2"
+-SRCREV = "78a1bea439969913d7002bfb16ee7f0f60e262b4"
++SRCREV = "f59f248e26bdfa514443e42bf72a145641df635d"
+ BRANCH = "1.3.9"
+ 
+ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
 
