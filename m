@@ -1,100 +1,115 @@
-Return-Path: <emailaddress.ashish@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2004EC61DD6
-	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 16:20:21 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1202.1788366015279775326
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD071C61DD6
+	for <webhook@archiver.kernel.org>; Wed,  2 Sep 2026 17:46:57 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.283.1788367875351406355
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2026 09:20:15 -0700
+ Wed, 02 Sep 2026 09:51:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=eorlt4uv;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2d8fd3b729dso11510445ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 09:20:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FlhMTzrM;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: joel.winarske@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cc1cc97b84bso1155782a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 09:51:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788366015; x=1788970815; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788367875; x=1788972675; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hH6oAG35PaJ0eDN7dCMlbW9L0vsc6RCPPPSOyZnjers=;
-        b=eorlt4uvWu4JjhQBQBRu4cbPV7qD4RucTfer6iCD0cCQRMpEZgRefPHRvoaunNxxDC
-         QVSmRvsWhszdX35KIJINugolwcwwL2mhfeztoeDLAX7pPg4H79Y4ft9JSIuHpec5OPGL
-         tZ97orjcjbvqZzzb+aztG/RSmRjizCS8Pcv0cRuPmR7iw0ogD5k8KE7phr/O3a32tS92
-         R14HYVM+YcW720JinDNNAyFPt1jCJtEUlJnKlBi0UFu05DImZIJxYC3dx/NReuLo/fr8
-         r3hUnGclO5lP33swcuASHMT+82Xf5+Tr1kPbWGPbf2WMkixQKDLRwD0JOq2v8j7y7zeH
-         M25Q==
+        bh=gAOCukuh26QXqEp3ucfZN0Uk8IIL/CXPZGh3BvkUSZg=;
+        b=FlhMTzrM1pNLRuaRS89C1bCwfp1jcyb7En+JpsOSxO0G/YtnoYmH0dgqsCVIS2kRdY
+         twOwUDvCj8x6y6cWQ6QRJqsHmWrq00ajr7Y3JHanhJCgDicYzj6DTaF6xgVmUCJqozrh
+         IGZBzpLGD+MqaYBnNgx3jLXGh0aKAxhvJXDLTScIWcD2diWOSlmsKTwyE+dgWMRBOzY9
+         0qzdIWB1k0pFIJKcWi84rXpkzBeINki4F88zBSrUSX2B4Ch4O18oJCVBpDorMOXJ15Yn
+         WIR9CJPYTTROokTgZh8ajFT+bVWiP9pmPgVOcC0H+Y7lXb2wTg8Kg9Dk0uICx02BrxmT
+         NN7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788366015; x=1788970815;
+        d=1e100.net; s=20251104; t=1788367875; x=1788972675;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hH6oAG35PaJ0eDN7dCMlbW9L0vsc6RCPPPSOyZnjers=;
-        b=RFxg2Eeks0OGexpoT2Po7BqyK55IoysHBxGrk7hxjZCHzzry3x+RhPupiV4y2gQ1GD
-         EUI2Od68AQVwotBBYp44IdPKrtWeG3EBMU9+ggeZdM5ULag5+2PlXuW6kyMl+zlMGCr4
-         wUmAoTTC1C1xOTSi7O+Jjg/4QPFsd3zJ/BBXOv5BF7M3SLUb6ZDVpHL6/2WeQH2fCR4H
-         lqxskzB4vkeLoToHlKfYWiOcdAFBI2FJYuiNYLWI5GQg2yEzX2L6kms23N3Kq1NcKDFx
-         lQJZHo11WjSODi2bwblE9bfhj6IXQSJBYO9v+6w0PWGk3haJ6s8D5kAJESWsdUlYwt8k
-         ILrQ==
-X-Gm-Message-State: AFuF++niRTqJF87OWeJOTsA4+NMhuX7chjemQQR9xsFOCdYtcNR6HECs
-	ahxe/o0JBLE+ND1y7OBKispkKPMdcXOxmJ3iTFr2SLDT9Yo4npxY5hgZ036CcA==
-X-Gm-Gg: AYBFou0pS7OKQOCsNcz5FhPKw9nwefJp5W2BaP8FZp2l23gq3/wYhsUg4N3cZXFBEmt
-	i8ekn0DqAjPoB8NT+0b7kt9c03g229y3TzuSP5efGJYL/jFElDIxbR+qZ96V6jxZ+qjO7Xxu9ke
-	4t294NxjDCxe6IDXOwmmAanaOe6wD32/NcywNa1LEXlvWTx9+OiDX2PNbDDh0iUoZPEN94/jZdl
-	5NvjUmKszGmVW205SP7EpvrylM7KnnGPD9dpblA+sFKAI9sR0BtRlDHyqJ791z79WGry8Gl/oyh
-	KHWQTMzIHSo1yjBxgsBVa1ixJzIDthlDyGrZ0Du7KJvuyb9Uc1139NYgP7ntCwPwEq2T/MgOzy2
-	72yyDjfF0/sRgmx0dHB/e0QDYfNmtowgKqPUQZIDPE6nOBVkLBWi2orG324HcnkmuJUUvDdm8p1
-	2quENzjsQt0cJaQZuB4kVjo8lAfF+jCh/h+aHtfTJpxQ+ZEHjW2SIXrPS0CcyBWC+2Zob4jpX+K
-	4pEEA==
-X-Received: by 2002:a17:90b:1dd1:b0:398:a486:81ec with SMTP id 98e67ed59e1d1-39aedf5b05fmr10435374a91.11.1788366014540;
-        Wed, 02 Sep 2026 09:20:14 -0700 (PDT)
-Received: from ashishkumar.. ([2406:7400:12b:df65:2028:f94d:4945:bb18])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1430ea0b459sm8778051c88.5.2026.09.02.09.20.12
+        bh=gAOCukuh26QXqEp3ucfZN0Uk8IIL/CXPZGh3BvkUSZg=;
+        b=VPSahgG/sjkq9Zz/Qpx04WBHt6ONoPbERah7zbJkLHD5Xpe4bbQjiDBEW7jRfa069H
+         pKcIOmoRCJLGVnNM6jJ2LL+ISiRwTgiF58VWpAL48VP0XzPBr5Ygf4xEGmIgSCjixsLw
+         QH2aDBtMjnZp2tB1ODbUxa4O2TVYuHU97QT+bDumS9ncB/aCYcowb8F7zVFVKKekyT4t
+         ZlLfFPeuMjTQBDAWBMsx4QluTHz5TV0G5UkfQkiLWQPOof+RNw8lbQaxf7BlKcQqw1eT
+         szGkZGBVebIX8sccHjBsY3YJ1oaG7ZhcSV5P0GU6440SKbYlhObey30hW9j9ZF6wwGio
+         KMlA==
+X-Gm-Message-State: AFuF++n3XcHfezn3lzDeQ7YPptOfvJCUHwF0zZeGbNUw94VhI69gFhI8
+	e7BDXHBhKDEuYCPIvM3H9YAhduBEzWmKmrR+P0o3GOrVf1yE0azyFoTPqDnueQ==
+X-Gm-Gg: AYBFou3MS6tA+jgp77e9WAU1wdAdpWbQHhntTFyI0UN50NLf4JE0shyQ6Gq3dj8fQqp
+	njYfCutAsmDnIS8mRiASZmAvAyFLdcBsg4B6THkjdlZ+4ObjFwAL8Tkc5NyUSJav5giU22NI7mZ
+	slgRHjmhX6SPf5OLSGwlxS3B4EQC8J/63C99/gfkpaBwWFuvqX6DKuh/l2nANaE/kJoiVsi0Fjq
+	hJzS7cOf9HAycddtGXN9rlmsPg+0RB8MlIFYp2qOnH6M1ToWbmr8svAESKSsGy7zc9fp2K7R4wx
+	A9Oj7y0KdWXF3oLvACQPgwRPnx2174wczm3IKFLJH2yUy9hpzWXf4wOEDmqLdiOmAGHIUEC9OSd
+	g2+r4DyVGxztR9wjVo7MErYV5ed13ijugIA5AkuEWl5iaEJHNUEy+YgUMrdFLc2RppEu4d4C/ox
+	d2mzb3PE0mRBbdxblLDMaYhbFtxeReQ11tfkCHPd8v1p9PpZZTytFMVsrrq74H2mwgCUzx6myAi
+	zhaR2kKIwDngK0Y+wVUqVVNh0QL0v53/n3Np3X6+Pzugg==
+X-Received: by 2002:a17:90b:4c4e:b0:38e:bbf1:de3f with SMTP id 98e67ed59e1d1-39aee0674ecmr8733997a91.12.1788367874534;
+        Wed, 02 Sep 2026 09:51:14 -0700 (PDT)
+Received: from air.lan ([2601:602:57f:c7b0:d6fc:cce0:dbc5:cca6])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b08624f11sm270775a91.11.2026.09.02.09.51.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 09:20:13 -0700 (PDT)
-From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+        Wed, 02 Sep 2026 09:51:14 -0700 (PDT)
+From: "Joel Winarske" <joel.winarske@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: AshishKumar Mishra <emailaddress.ashish@gmail.com>
-Subject: [meta-oe][PATCH] image_types_sparse: create symlinks for generated sparse images
-Date: Wed,  2 Sep 2026 21:49:46 +0530
-Message-ID: <20260902161946.13068-1-emailaddress.ashish@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Joel Winarske <joel.winarske@gmail.com>
+Subject: [meta-oe][PATCH] capnproto: build position independent code
+Date: Wed,  2 Sep 2026 09:51:08 -0700
+Message-ID: <20260902165108.1200976-1-joel.winarske@gmail.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 16:20:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129697
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2026 17:46:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129698
 
-Ensure that symbolic links (${IMAGE_LINK_NAME}) are created for both
-sparse images, matching standard Yocto image deployment behavior
+The recipe produces static archives only, and does not compile them PIC, so
+linking capnp or kj into a shared library fails:
 
-Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+  libkj.a(exception.c++.o): relocation R_X86_64_TPOFF32 against
+  `kj::(anonymous namespace)::threadLocalCallback' can not be used when making
+  a shared object; local-exec is incompatible with -shared
+
+kj/exception.c++ has a file-scope thread_local, which non-PIC code compiles to
+the local-exec TLS model. A shared object cannot use that model, so the link
+fails on any consumer that puts capnp inside a .so. Debian and Fedora do not
+hit this because they ship shared libcapnp.
+
+Set CMAKE_POSITION_INDEPENDENT_CODE. Packaging is unchanged: still static,
+still no .so, no new packages and no ABI surface, only the code model differs.
+
+Signed-off-by: Joel Winarske <joel.winarske@gmail.com>
 ---
- meta-oe/classes/image_types_sparse.bbclass | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-index 5c1d92bd18..2ee4aa1159 100644
---- a/meta-oe/classes/image_types_sparse.bbclass
-+++ b/meta-oe/classes/image_types_sparse.bbclass
-@@ -16,11 +16,13 @@ CONVERSION_CMD:sparse = " \
-     case '${type}' in \
-         ext*) \
-             bbnote 'Running e2fsprogs-derived ext2simg_android..' ; \
--            ext2simg_android '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.simg' || bberror 'ext2simg_android failed' \
-+            ext2simg_android '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.simg' || bberror 'ext2simg_android failed' ;\
-+            ln -sf '${IMAGE_NAME}.${type}.simg' '${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${type}.simg'; \
-             ;; \
-         *) \
-             bbnote 'Generating sparse image for non-ext filesystem...'; \
-             img2simg -s '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.sparse' ${SPARSE_BLOCK_SIZE}; \
-+            ln -sf '${IMAGE_NAME}.${type}.sparse' '${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${type}.sparse'; \
-             ;; \
-     esac; \
-     if [ "${DELETE_RAWIMAGE_AFTER_SPARSE_CMD}" = "1" ]; then \
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
+index b867c72e36..9909afb0e9 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
+@@ -19,8 +19,17 @@ CXXFLAGS:append:mips = " -latomic"
+ CXXFLAGS:append:powerpc = " -latomic"
+ CXXFLAGS:append:riscv32 = " -latomic"
+ 
++# The build produces static archives only. Compile them position independent so
++# they can be linked into shared libraries; without this any consumer that does
++# so fails on the thread-local in kj/exception.c++, which non-PIC code compiles
++# to the local-exec TLS model:
++#
++#   libkj.a(exception.c++.o): relocation R_X86_64_TPOFF32 against
++#   `kj::(anonymous namespace)::threadLocalCallback' can not be used when making
++#   a shared object; local-exec is incompatible with -shared
+ EXTRA_OECMAKE += "\
+     -DBUILD_TESTING=OFF \
++    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+ "
+ 
+ FILES:${PN}-compiler = "${bindir}"
 -- 
-2.43.0
+2.55.0
 
 
