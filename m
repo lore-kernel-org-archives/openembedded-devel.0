@@ -2,62 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64297C624DB
-	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 09:50:45 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4202.1788429045025929557
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C691C624DA
+	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 09:50:55 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4062.1788429047051646716
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2026 02:50:45 -0700
+ Thu, 03 Sep 2026 02:50:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QO8sdYOZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-853c947bfefso764678b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=q8j32drn;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8557c3f270eso1325444b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788429044; x=1789033844; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788429046; x=1789033846; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hd7E1sEUC/HcjkD9UYyEWS3F/fe11mHX2jxjGBGlC3E=;
-        b=QO8sdYOZAIsSUpm3Tht5CfABoiQs7CWdeHfyhnl5hAA6cSnrVAF5P8/5WlcPSIRsV6
-         yvA5zLJATkTB6Zqu4EBUgAZsObvFFWMO/H3I9BHyS/FgU4KCbpLmRiTI1ERfoDzTF/a+
-         hgwdJN0ltX8uSexF7JJE/U6ct3g5SyxHb2BJimKN9n/aEMM2atbb8o35reM4ylyvoZx8
-         RYzlnHn+K1kiqg6/QIwYbahLYqtaYqjlSZoJjeGmtBxllo33T6Cy3f/TNZ26WLkBvHoV
-         RTzbXkHw39UpRXFEivZgm4K3zF9PC9Rp0zxxDnhWJNoHLltsfqYXQ7cgCS3XWXUjyDUI
-         u25g==
+        bh=h7OINWDWkPFWoalCyjxjfpFoGHkJ625GNxys0namKfs=;
+        b=q8j32drng1FCfuhlqEdJzzWvi8FiYiFEnsIN1iLcWLtTAskv7k2441Jkj+lBIJeCbq
+         WnAJiQRWK4YNWG8abLkoZwDirB3OiLPw+W3x1R0BHuoZ0rsr8Vj+1k7vhnb8E9x+cAgh
+         UZD9PCWRtZ6ksZOmKGwgSXfgNsHfswoK/X7BGi1jQzQuT4gJ8bqcPtHNqje2pKF/4O+O
+         lrePzLdVta7tV0zz4By1eOKW0kp09lzs2wTldtKcKWbalZkAccGcEWfI8g8yWA+c2j9j
+         gic3KUrPaWfW66dociHkWr8z6lCnqHOlR23TR6GrpAG4W5xVAROCoIQeWlH0EhRSewqB
+         kydQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788429044; x=1789033844;
+        d=1e100.net; s=20251104; t=1788429046; x=1789033846;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hd7E1sEUC/HcjkD9UYyEWS3F/fe11mHX2jxjGBGlC3E=;
-        b=OGnTtSleTH1/RgFKnxSsztY/GfRiVogbifEMIOdM+0JDPKAdamWf+GUYmB2oTy3n4K
-         47lmVtQfR0yuoF7WqgIXHjYf49IeJ70qNOQzAwyrk1cpPHLlwMjwAxJmPcLxKNq5drRq
-         s7c9eXBW+oLsSdijmvQOk3qPEqI/LHOc/J3useYsnDkHR7i2WKKE2PwYcTzAFad5+gh3
-         BkIjwvCYB8UficeVSNp/e+roXJvHnk5kALvtkARlEUInEjb6dMnquyNjbYqJBWQvRFms
-         EFs4pzVbXqg59AdUUt4Ho8QHmPeuggN/1hVbsw1UgJ7JJuRVzRRQIr4tORr1U7Gr6TCL
-         zQAQ==
-X-Gm-Message-State: AFuF++nyeJ0cJ3R2HepT3aehA3Go9B0EWFm5bBAa4snYRk2nVC4pQlZw
-	5ImCoEbzNOPTBM6pTHquTPPmIQFjcvdES8+0PgRs9r0MBwgImEWHHea+v9RoToA7
-X-Gm-Gg: AYBFou1zBKdyIj4j0TKLaGCT1zfJ3A9+nxtLLUtYvWaSLZYQTy4dEFPXOmvy6SRyS1G
-	bar8XH0HU8kbvO9vB9hJG+i12LwmzoVRLwkDneJz8eG6lSkZCDpWUprTWEqlq38Sp01WE4TVArp
-	TQH5Fc023/0Rq02l2KUuL3F7SMcZxL1zkRqMohkl38NUMadZ8lGI/YiIoCbSbyP4Ylowc+0oPmc
-	3QkVFyJV//exKgVQtmNMsx+cE/Tk/p0tPOFR6ycM7jcrpd2Fc8LECn4o5BQvfAwPXKXU2xFXZB4
-	o9UhnAE09pZQMR/7o/SyVOE5OibDFOAtsVIPsQwsk6DKjOaxs9xOiT3646UWvhtulEBrmUa1JQ+
-	XdWutMbM5ZqLKPah/t4DilRjnDT53oFdJklNls0Cxca2Bcx0CgMWQyqYyGRPiVmFkrH7q46q8xb
-	Th7oFqgRcfst8vmOpFUOFR5wkzPH3ZIIrTs+eN8c1DCLHFvPHlKGR+/lvCytSuYfNf2DwDgtWd
-X-Received: by 2002:a05:6a00:3020:b0:858:ea6a:4415 with SMTP id d2e1a72fcca58-85ffc18a8femr3996145b3a.2.1788429044017;
-        Thu, 03 Sep 2026 02:50:44 -0700 (PDT)
+        bh=h7OINWDWkPFWoalCyjxjfpFoGHkJ625GNxys0namKfs=;
+        b=aInyC3SrORyLzB8a257QVFrQqGmSo2YiuTlR9cyJ6po/IiiluyyqoqcUdwD2zdROPQ
+         B0bNI2wmF+ClJ6t7korIcEcB7zUSOltrQvpI5MpTnHSgD3eXCrpyE5jbVUulR4XiFMwS
+         HDc6eXrOt3jjZjoBwPz+8NdIGawIerXwRcxyaSb9Edxqvwf2VkBNGm6l8QPD8ijmsS0X
+         YyoLPxxVuSZD24JwD4IxEbUwSqzFJQdBubMmBAvPkpA4F9g0Cf4I52bJcFeRxe+/Wg7Z
+         j7m+YPvuoxeRUtaipcKbPE7Zr+7uk+XoF38V6SwbIC4nl5G5cXyMfkw0sV8JK+T2OMNV
+         I4Mg==
+X-Gm-Message-State: AFuF++l2xbzsRwzqKGoUGhoWbtvA3gbAratiLuXwwKUtiU94nU4pFAH7
+	HgD+7Hu5UcISTQvSstVjjFziNF1sMCYWywKBJb/Co+lmSQu4VT3IV4zfUhaGuCk+
+X-Gm-Gg: AYBFou1ab9DkUh05FJEwVB+doSIk41fivqxC72mmyTXMzrLXRSVwtUt+PVVWF1MoWQu
+	MDJWar9GC8RuypDwohoHNGwiSSyOLEhx+GcTKlpMI7cLB2+aqJjEVIFB3OR8yTvrc8dE2yX4zY1
+	bdmYyboF8Hn77iWO9h3L9/E77LtLmj3KO+cNM6lfBHhojLNzIF8u0ws14RJvGHOEVnrGHY1S2RQ
+	GYyOr+6hgLRgI3IAdc6G1iYk13FpPExcEJXPTt7MVS/gjJKBfKw2iw7obPk+Zyfmchg+VVZCIvf
+	W79Bx28k3bu7ZQcD5Znnw3DJFKGq297cmhxktl0h1EvWedOzJSr+4HQT/AHvrW+6E50U/2hJjPD
+	Vnqu0KjMO9rjFuUDE58ktk84PLswwWEMxvyx2twgCVAZawy/AbIRIV9+AJDOoHpdit4xW3Md0ht
+	QNZp/SQurVRkqVhI9KZzw3P/V6e80gFGznv/7ZBQuuBgEzyF0G6n3hbOutx6wGwwwgLtrp3R0dH
+	IevKLH4DMw=
+X-Received: by 2002:a05:6a00:bd8c:b0:847:770f:da4c with SMTP id d2e1a72fcca58-85ed8ed841fmr17615752b3a.16.1788429046328;
+        Thu, 03 Sep 2026 02:50:46 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.41
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 02:50:43 -0700 (PDT)
+        Thu, 03 Sep 2026 02:50:45 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 20/22] libkcapi: patch CVE-2026-71226
-Date: Thu,  3 Sep 2026 21:49:51 +1200
-Message-ID: <20260903094954.3240723-20-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 21/22] libkcapi: patch CVE-2026-71227
+Date: Thu,  3 Sep 2026 21:49:52 +1200
+Message-ID: <20260903094954.3240723-21-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
 References: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
@@ -66,813 +67,80 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 09:50:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129736
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 09:50:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129737
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commits[1][2] needed to cherry pick fix for the CVE as per the
-release notes[3]
+Backport commit fixing the CVE as per the release notes[1]
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-71226
+https://nvd.nist.gov/vuln/detail/cve-2026-71227
 
-[1]https://github.com/smuellerDD/libkcapi/commit/e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd
-[2]https://github.com/smuellerDD/libkcapi/commit/d9f16d5fbcf8270110a8f6f35523525f345ca311
-[3]https://github.com/smuellerDD/libkcapi/releases/tag/v1.5.1
+[1]https://github.com/smuellerDD/libkcapi/releases/tag/v1.5.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libkcapi/libkcapi/CVE-2026-71226-1.patch  | 604 ++++++++++++++++++
- .../libkcapi/libkcapi/CVE-2026-71226-2.patch  |  55 ++
- .../libkcapi/libkcapi/CVE-2026-71226-3.patch  |  93 +++
- .../recipes-crypto/libkcapi/libkcapi_1.5.0.bb |   3 +
- 4 files changed, 755 insertions(+)
- create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
- create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
- create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
+ .../libkcapi/libkcapi/CVE-2026-71227.patch    | 40 +++++++++++++++++++
+ .../recipes-crypto/libkcapi/libkcapi_1.5.0.bb |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
 new file mode 100644
-index 0000000000..d53d29423c
+index 0000000000..6074c0da27
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
-@@ -0,0 +1,604 @@
-+From 73a34808912e3cfea8d88f0a2c08fc0ed107a9d8 Mon Sep 17 00:00:00 2001
-+From: Markus Theil <markus.theil@secunet.com>
-+Date: Fri, 3 Apr 2026 15:06:53 +0200
-+Subject: [PATCH] fixes found by analysis with LLM
-+
-+Signed-off-by: Markus Theil <markus.theil@secunet.com>
-+Signed-off-by: Stephan Mueller <smueller@chronox.de>
-+(cherry picked from commit e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd)
-+
-+CVE: CVE-2026-71226
-+Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ apps/app-internal.c   | 15 +++++++++---
-+ apps/kcapi-dgst.c     | 11 ++++++---
-+ apps/kcapi-enc.c      |  9 ++++---
-+ apps/kcapi-hasher.c   | 12 ++++++---
-+ apps/kcapi-rng.c      | 24 ++++++++++++------
-+ configure.ac          |  3 ++-
-+ lib/kcapi-aead.c      | 12 +++++++--
-+ lib/kcapi-kdf.c       |  6 +++--
-+ lib/kcapi-kernel-if.c | 57 +++++++++++++++++++++++++++++--------------
-+ lib/kcapi-kpp.c       |  4 +--
-+ lib/kcapi-md.c        |  2 +-
-+ lib/kcapi-sym.c       |  6 +++++
-+ lib/kcapi-utils.c     |  7 ++++--
-+ 13 files changed, 118 insertions(+), 50 deletions(-)
-+
-+diff --git a/apps/app-internal.c b/apps/app-internal.c
-+index 7e01dd7..724b0b1 100644
-+--- a/apps/app-internal.c
-++++ b/apps/app-internal.c
-+@@ -173,18 +173,24 @@ static uint8_t bin_char(char hex)
-+ void hex2bin(const char *hex, uint32_t hexlen, uint8_t *bin, uint32_t binlen)
-+ {
-+ 	uint32_t i;
-+-	uint32_t chars = (binlen > (hexlen / 2)) ? (hexlen / 2) : binlen;
-++	uint32_t chars;
-+ 
-+ 	/*
-+ 	 * handle odd-length of strings where the first digit is the least
-+ 	 * significant nibble
-+ 	 */
-+ 	if (hexlen & 1) {
-++		if (!binlen)
-++			return;
-+ 		bin[0] = bin_char(hex[0]);
-+ 		bin++;
-+ 		hex++;
-++		hexlen--;
-++		binlen--;
-+ 	}
-+ 
-++	chars = (binlen > (hexlen / 2)) ? (hexlen / 2) : binlen;
-++
-+ 	for (i = 0; i < chars; i++) {
-+ 		bin[i] = (uint8_t)(bin_char(hex[(i*2)]) << 4);
-+ 		bin[i] |= bin_char(hex[((i*2)+1)]);
-+@@ -238,13 +244,14 @@ ssize_t read_complete(int fd, uint8_t *buf, size_t buflen)
-+ 		if (0 < ret) {
-+ 			buflen -= (size_t)ret;
-+ 			buf += ret;
-++			rc += ret;
-+ 		}
-+-		rc += ret;
-+-		if (ret)
-+-			break;
-+ 	} while ((0 < ret || EINTR == errno || ERESTART == errno)
-+ 		 && buflen > 0);
-+ 
-++	if (ret < 0)
-++		return -errno;
-++
-+ 	return rc;
-+ }
-+ 
-+diff --git a/apps/kcapi-dgst.c b/apps/kcapi-dgst.c
-+index 591a7fb..42d099c 100644
-+--- a/apps/kcapi-dgst.c
-++++ b/apps/kcapi-dgst.c
-+@@ -128,6 +128,11 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
-+ 	}
-+ 
-+ 	outlen = kcapi_md_digestsize(handle);
-++	if (!outlen) {
-++		dolog(KCAPI_LOG_ERR, "Cipher has zero digest size");
-++		ret = -EINVAL;
-++		goto out;
-++	}
-+ 
-+ 	if (opts->hexout)
-+ 		outlen *= 2;
-+@@ -285,8 +290,8 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
-+ 			}
-+ 
-+ 			while (j < saltbuflen) {
-+-				ret = kcapi_rng_generate(rng, saltbuf,
-+-							 (size_t)saltbuflen);
-++				ret = kcapi_rng_generate(rng, saltbuf + j,
-++							 (size_t)(saltbuflen - j));
-+ 				if (ret < 0) {
-+ 					kcapi_rng_destroy(rng);
-+ 					free(saltbuf);
-+@@ -320,7 +325,7 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
-+ 	if (opts->key_fd != -1) {
-+ 		ret = read_complete(opts->key_fd, keybuf, sizeof(keybuf));
-+ 		if (ret < 0)
-+-			return (int)ret;
-++			goto out;
-+ 
-+ 		have_key = 1;
-+ 		keybuflen = (uint32_t)ret;
-+diff --git a/apps/kcapi-enc.c b/apps/kcapi-enc.c
-+index 68cf2f7..e7aa9db 100644
-+--- a/apps/kcapi-enc.c
-++++ b/apps/kcapi-enc.c
-+@@ -218,7 +218,7 @@ static ssize_t return_data_fd(struct kcapi_handle *handle,
-+ 	}
-+ 
-+ out:
-+-	munmap(outmem, outsize);
-++	munmap(outmem, outsize + offset);
-+ 	return (ret < 0) ? ret : generated_bytes;
-+ }
-+ 
-+@@ -609,7 +609,7 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
-+ 		}
-+ 
-+ 	/* Get data from file. */
-+-	} else {
-++	} else if (insb.st_size) {
-+ 		uint32_t sent_data = 0;
-+ 
-+ 		inmem = mmap(NULL, (size_t)insb.st_size, PROT_READ, MAP_SHARED,
-+@@ -636,6 +636,7 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
-+ 			 * we will not apply padding.
-+ 			 */
-+ 			if (!opts->decrypt &&
-++			    insb.st_size >= 2 &&
-+ 			    !(insb.st_size % opts->func_blocksize(handle)) &&
-+ 			    (uint32_t)padbyte < opts->func_blocksize(handle)) {
-+ 				uint32_t i;
-+@@ -803,8 +804,8 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
-+ 			}
-+ 
-+ 			while (j < saltbuflen) {
-+-				ret = kcapi_rng_generate(rng, saltbuf,
-+-							 saltbuflen);
-++				ret = kcapi_rng_generate(rng, saltbuf + j,
-++							 saltbuflen - j);
-+ 				if (ret < 0) {
-+ 					kcapi_rng_destroy(rng);
-+ 					free(saltbuf);
-+diff --git a/apps/kcapi-hasher.c b/apps/kcapi-hasher.c
-+index 217f59d..90dc34d 100644
-+--- a/apps/kcapi-hasher.c
-++++ b/apps/kcapi-hasher.c
-+@@ -271,7 +271,7 @@ static int load_file(const char *filename, uint8_t **memory, off_t *size)
-+ 				fprintf(stderr, "Key longer than UINT32_MAX\n");
-+ 				ret = -ERANGE;
-+ 				goto out;
-+-			} else if (buffer_size * 2 < buffer_size)
-++			} else if (buffer_size > UINT32_MAX / 2)
-+ 				buffer_size = UINT32_MAX;
-+ 			else
-+ 				buffer_size *= 2;
-+@@ -340,7 +340,7 @@ static int hasher(struct kcapi_handle *handle, const struct hash_params *params,
-+ 			} while (left);
-+ 			munmap(memblock, mapped);
-+ 			offset = offset + (off_t)mapped;
-+-		} while (offset ^ size);
-++		} while (offset != size);
-+ 	} else {
-+ 		uint8_t tmpbuf[TMPBUFLEN] __aligned(KCAPI_APP_ALIGN);
-+ 		uint32_t bufsize;
-+@@ -647,11 +647,17 @@ static int process_checkfile(const struct hash_params *params,
-+ 			hexhash = buf;
-+ 
-+ 		if (bsd_style) {
-++			if (bsd_style > linelen) {
-++				fprintf(stderr, "Invalid checkfile format\n");
-++				ret = 1;
-++				goto out;
-++			}
-++
-+ 			/* Hash starts after separator */
-+ 			hexhashlen = linelen - bsd_style + 1;
-+ 
-+ 			/* remove closing parenthesis behind filename */
-+-			if (buf[(bsd_style - 4)] == ')')
-++			if (bsd_style >= 4 && buf[(bsd_style - 4)] == ')')
-+ 				buf[(bsd_style - 4)] = '\0';
-+ 		}
-+ 
-+diff --git a/apps/kcapi-rng.c b/apps/kcapi-rng.c
-+index 9e025cd..46dab02 100644
-+--- a/apps/kcapi-rng.c
-++++ b/apps/kcapi-rng.c
-+@@ -282,16 +282,18 @@ int main(int argc, char *argv[])
-+ 	      seedsize);
-+ 
-+ 	if (!isatty(0) && (errno == EINVAL || errno == ENOTTY)) {
-+-		while (fgets((char *)seedbuf, (int)seedsize, stdin)) {
-+-			ret = kcapi_rng_seed(rng, seedbuf, seedsize);
-++		ssize_t rret;
-++
-++		while ((rret = read(STDIN_FILENO, seedbuf, seedsize)) > 0) {
-++			ret = kcapi_rng_seed(rng, seedbuf, (uint32_t)rret);
-+ 			if (ret)
-+ 				dolog(KCAPI_LOG_WARN,
-+-				      "User-provided seed of %lu bytes not accepted by DRNG (error: %ld)",
-+-				      (unsigned long)sizeof(buf), ret);
-++				      "User-provided seed of %zd bytes not accepted by DRNG (error: %ld)",
-++				      rret, ret);
-+ 			else
-+ 				dolog(KCAPI_LOG_DEBUG,
-+-				      "User-provided seed of %u bytes",
-+-				      seedsize);
-++				      "User-provided seed of %zd bytes",
-++				      rret);
-+ 		}
-+ 	}
-+ 
-+@@ -312,9 +314,15 @@ int main(int argc, char *argv[])
-+ 			char hexbuf[2 * KCAPI_RNG_BUFSIZE];
-+ 
-+ 			bin2hex(buf, (size_t)ret, hexbuf, sizeof(hexbuf), 0);
-+-			fwrite(hexbuf, 2 * (size_t)ret, 1, stdout);
-++			if (fwrite(hexbuf, 2 * (size_t)ret, 1, stdout) != 1) {
-++				ret = -EIO;
-++				goto out;
-++			}
-+ 		} else {
-+-			fwrite(buf, (size_t)ret, 1, stdout);
-++			if (fwrite(buf, (size_t)ret, 1, stdout) != 1) {
-++				ret = -EIO;
-++				goto out;
-++			}
-+ 		}
-+ 
-+ 		outlen -= (size_t)ret;
-+diff --git a/configure.ac b/configure.ac
-+index fbae4f9..446b8a8 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -14,16 +14,17 @@ m4_define([__KCAPI_MINVERSION], [5])
-+ m4_define([__KCAPI_PATCHLEVEL], [0])
-+ m4_define([KCAPI_VERSION], [__KCAPI_MAJVERSION.__KCAPI_MINVERSION.__KCAPI_PATCHLEVEL])
-+ 
-++AC_PREREQ([2.69])
-+ AC_INIT([libkcapi], [KCAPI_VERSION])
-+ AC_DEFINE([KCAPI_MAJVERSION], [__KCAPI_MAJVERSION])
-+ AC_DEFINE([KCAPI_MINVERSION], [__KCAPI_MINVERSION])
-+ AC_DEFINE([KCAPI_PATCHLEVEL], [__KCAPI_PATCHLEVEL])
-++AC_CONFIG_MACRO_DIRS([m4])
-+ AM_INIT_AUTOMAKE([foreign])
-+ LT_INIT([pic-only])
-+ AC_SUBST([LIBTOOL_DEPS])
-+ AC_PROG_CC
-+ AC_CONFIG_FILES([Makefile])
-+-AC_CONFIG_MACRO_DIR([m4])
-+ AX_PROG_CC_FOR_BUILD
-+ AX_CHECK_PIE
-+ 
-+diff --git a/lib/kcapi-aead.c b/lib/kcapi-aead.c
-+index b52dda0..3a7d711 100644
-+--- a/lib/kcapi-aead.c
-++++ b/lib/kcapi-aead.c
-+@@ -566,7 +566,11 @@ size_t impl_aead_outbuflen_enc(struct kcapi_handle *handle,
-+ {
-+ 	struct kcapi_handle_tfm *tfm = handle->tfm;
-+ 	uint32_t bs = tfm->info.blocksize;
-+-	size_t outlen = (inlen + bs - 1) / bs * bs + taglen + assoclen;
-++	size_t outlen;
-++
-++	if (!bs)
-++		return 0;
-++	outlen = (inlen + bs - 1) / bs * bs + taglen + assoclen;
-+ 
-+ 	/* the kernel does not like zero length output buffers */
-+ 	if (!outlen)
-+@@ -591,7 +595,11 @@ size_t impl_aead_outbuflen_dec(struct kcapi_handle *handle,
-+ {
-+ 	struct kcapi_handle_tfm *tfm = handle->tfm;
-+ 	uint32_t bs = tfm->info.blocksize;
-+-	size_t outlen = (inlen + bs - 1) / bs * bs + assoclen;
-++	size_t outlen;
-++
-++	if (!bs)
-++		return 0;
-++	outlen = (inlen + bs - 1) / bs * bs + assoclen;
-+ 
-+ 	if (!handle->flags.ge_v4_9 == true)
-+ 		outlen += taglen;
-+diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
-+index 54dc1ec..5f389b6 100644
-+--- a/lib/kcapi-kdf.c
-++++ b/lib/kcapi-kdf.c
-+@@ -54,6 +54,8 @@
-+ #include "kcapi.h"
-+ #include "internal.h"
-+ 
-++#define MAX_DIGESTSIZE 64
-++
-+ #ifndef __has_builtin
-+ # define __has_builtin(x) 0
-+ #endif
-+@@ -101,7 +103,7 @@ ssize_t impl_kdf_dpi(struct kcapi_handle *handle,
-+ 	ssize_t err = 0;
-+ 	uint8_t *dst_orig = dst;
-+ 	size_t dlen_orig = dlen;
-+-	uint8_t Ai[h];
-++	uint8_t Ai[MAX_DIGESTSIZE];
-+ 	uint32_t i = 1;
-+ 
-+ 	if (dlen > INT_MAX)
-+@@ -448,7 +450,7 @@ static inline uint64_t kcapi_get_time(void)
-+ {
-+ 	struct timespec time;
-+ 
-+-	if (clock_gettime(CLOCK_REALTIME, &time) == 0)
-++	if (clock_gettime(CLOCK_MONOTONIC, &time) == 0)
-+ 		return (uint64_t)time.tv_nsec;
-+ 
-+ 	return 0;
-+diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
-+index 835e45a..b37f0dc 100644
-+--- a/lib/kcapi-kernel-if.c
-++++ b/lib/kcapi-kernel-if.c
-+@@ -216,7 +216,7 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
-+ 		}
-+ 		header->cmsg_level = SOL_ALG;
-+ 		header->cmsg_type = ALG_SET_IV;
-+-		header->cmsg_len = kcapi_downcast_socklen_t(iv_msg_size);
-++		header->cmsg_len = CMSG_LEN(iv_msg_size);
-+ 		alg_iv = (void*)CMSG_DATA(header);
-+ 		alg_iv->ivlen = tfm->info.ivsize;
-+ 		memcpy(alg_iv->iv, handle->cipher.iv, tfm->info.ivsize);
-+@@ -409,8 +409,10 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
-+ 				    "AF_ALG: splice syscall returned %zd", ret);
-+ 		}
-+ 
-++		if (ret == 0)
-++			return -EPIPE;
-+ 		processed += ret;
-+-		inlen -= (uint32_t)ret;
-++		inlen -= (size_t)ret;
-+ 	}
-+ 
-+ 	return processed;
-+@@ -434,14 +436,17 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 
-+ 		for (i = 0; i < rc; i++) {
-+ 			struct iocb *cb;
-++			unsigned int idx = (unsigned int)events[i].data;
-++
-++			if (idx >= KCAPI_AIO_CONCURRENT)
-++				return -EOVERFLOW;
-+ 
-+ 			/*
-+ 			 * If one cipher operation fails, so will the entire
-+ 			 * AIO operation
-+ 			 */
-+ 			if (events[i].res < 0) {
-+-				handle->aio.iocb_ret[events[i].data] =
-+-							events[i].res;
-++				handle->aio.iocb_ret[idx] = events[i].res;
-+ 				return (int)events[i].res;
-+ 			}
-+ 
-+@@ -452,16 +457,15 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 			 * return code.
-+ 			 */
-+ 			if (events[i].res > 0) {
-+-				handle->aio.iocb_ret[events[i].data] =
-+-								events[i].res;
-++				handle->aio.iocb_ret[idx] = events[i].res;
-+ 			} else {
-+-				handle->aio.iocb_ret[events[i].data] =
-++				handle->aio.iocb_ret[idx] =
-+ 							(__s64)cb->aio_nbytes;
-+ 			}
-+ 
-+ 			cb->aio_fildes = 0;
-+ 		}
-+-		toread -= (uint32_t)rc;
-++		toread -= (size_t)rc;
-+ 	}
-+ 
-+ 	return 0;
-+@@ -613,7 +617,7 @@ ssize_t _kcapi_common_read_data(struct kcapi_handle *handle,
-+ 			ret = read(*_kcapi_get_opfd(handle), out, outlen);
-+ 			if (ret > 0) {
-+ 				out += ret;
-+-				outlen -= (uint32_t)ret;
-++				outlen -= (size_t)ret;
-+ 				totallen += ret;
-+ 			}
-+ 			kcapi_dolog(KCAPI_LOG_DEBUG,
-+@@ -722,13 +726,13 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 		goto out;
-+ 	}
-+ 	if (addr_len != sizeof(nl)) {
-+-		ret = -errno;
-++		ret = -EPROTO;
-+ 		kcapi_dolog(KCAPI_LOG_ERR,
-+ 			    "Netlink error: wrong address length %d", addr_len);
-+ 		goto out;
-+ 	}
-+ 	if (nl.nl_family != AF_NETLINK) {
-+-		ret = -errno;
-++		ret = -EPROTO;
-+ 		kcapi_dolog(KCAPI_LOG_ERR,
-+ 			    "Netlink error: wrong address family %d",
-+ 			    nl.nl_family);
-+@@ -764,12 +768,12 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 			goto out;
-+ 		}
-+ 		if (rc == 0) {
-+-			ret = -errno;
-++			ret = -ENODATA;
-+ 			kcapi_dolog(KCAPI_LOG_ERR, "Netlink error: no data");
-+ 			goto out;
-+ 		}
-+ 		if (rc > (ssize_t)sizeof(buf)) {
-+-			ret = -errno;
-++			ret = -EOVERFLOW;
-+ 			kcapi_dolog(KCAPI_LOG_ERR,
-+ 				    "Netlink error: received too much data");
-+ 			goto out;
-+@@ -779,6 +783,12 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 
-+ 	ret = -EFAULT;
-+ 	res_len = res_n->nlmsg_len;
-++	if (res_len > sizeof(buf)) {
-++		kcapi_dolog(KCAPI_LOG_ERR,
-++			    "Netlink error: nlmsg_len %lu exceeds buffer",
-++			    res_len);
-++		goto out;
-++	}
-+ 	if (res_n->nlmsg_type == NLMSG_ERROR) {
-+ 		/*
-+ 		 * return -EAGAIN -- this error will occur if we received a
-+@@ -819,6 +829,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 
-+ 	if (tb[CRYPTOCFGA_REPORT_HASH]) {
-+ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_HASH];
-++
-++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_hash))
-++			goto out;
-+ 		struct crypto_report_hash *rsh =
-+ 			(struct crypto_report_hash *) RTA_DATA(rta);
-+ 		tfm->info.hash_digestsize = rsh->digestsize;
-+@@ -831,6 +844,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 	}
-+ 	if (tb[CRYPTOCFGA_REPORT_BLKCIPHER]) {
-+ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_BLKCIPHER];
-++
-++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_blkcipher))
-++			goto out;
-+ 		struct crypto_report_blkcipher *rblk =
-+ 			(struct crypto_report_blkcipher *) RTA_DATA(rta);
-+ 		tfm->info.blocksize = rblk->blocksize;
-+@@ -845,6 +861,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 	}
-+ 	if (tb[CRYPTOCFGA_REPORT_AEAD]) {
-+ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_AEAD];
-++
-++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_aead))
-++			goto out;
-+ 		struct crypto_report_aead *raead =
-+ 			(struct crypto_report_aead *) RTA_DATA(rta);
-+ 		tfm->info.blocksize = raead->blocksize;
-+@@ -858,6 +877,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
-+ 	}
-+ 	if (tb[CRYPTOCFGA_REPORT_RNG]) {
-+ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_RNG];
-++
-++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_rng))
-++			goto out;
-+ 		struct crypto_report_rng *rrng =
-+ 			(struct crypto_report_rng *) RTA_DATA(rta);
-+ 		tfm->info.rng_seedsize = rrng->seedsize;
-+@@ -981,19 +1003,19 @@ static int _kcapi_get_kernver(struct kcapi_handle *handle)
-+ 	/* 3.15.0 */
-+ 	res = strtok_r(kernel.release, ".", &saveptr);
-+ 	if (!res) {
-+-		printf("Could not parse kernel version");
-++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
-+ 		return -EFAULT;
-+ 	}
-+ 	tfm->sysinfo.kernel_maj = strtoul(res, NULL, 10);
-+ 	res = strtok_r(NULL, ".", &saveptr);
-+ 	if (!res) {
-+-		printf("Could not parse kernel version");
-++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
-+ 		return -EFAULT;
-+ 	}
-+ 	tfm->sysinfo.kernel_minor = strtoul(res, NULL, 10);
-+ 	res = strtok_r(NULL, ".", &saveptr);
-+ 	if (!res) {
-+-		printf("Could not parse kernel version");
-++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
-+ 		return -EFAULT;
-+ 	}
-+ 	tfm->sysinfo.kernel_patchlevel = strtoul(res, NULL, 10);
-+@@ -1217,7 +1239,6 @@ static int _kcapi_handle_init_tfm(struct kcapi_handle *handle, const char *type,
-+ 
-+ 	ret = _kcapi_common_getinfo(handle, ciphername);
-+ 	if (ret) {
-+-		ret = -errno;
-+ 		kcapi_dolog(KCAPI_LOG_ERR, "NETLINK_CRYPTO: cannot obtain cipher information for %s (is required crypto_user.c patch missing? see documentation)",
-+ 			    ciphername);
-+ 		return ret;
-+@@ -1368,7 +1389,7 @@ ssize_t _kcapi_cipher_crypt_chunk(struct kcapi_handle *handle,
-+ 		in += inprocess;
-+ 		inlen -= inprocess;
-+ 		out += ret;
-+-		outlen -= (uint32_t)ret;
-++		outlen -= (size_t)ret;
-+ 	}
-+ 
-+ 	return totallen;
-+diff --git a/lib/kcapi-kpp.c b/lib/kcapi-kpp.c
-+index 814485a..d0383d6 100644
-+--- a/lib/kcapi-kpp.c
-++++ b/lib/kcapi-kpp.c
-+@@ -52,12 +52,12 @@ int kcapi_kpp_ecdh_setcurve(struct kcapi_handle *handle,
-+ 			    unsigned long curve_id)
-+ {
-+ 	struct kcapi_handle_tfm *tfm = handle->tfm;
-+-	char curve_id_str[sizeof(unsigned long)];
-++	char curve_id_str[24];
-+ 	int ret = 0;
-+ 
-+ 	snprintf(curve_id_str, sizeof(curve_id_str), "%lu", curve_id);
-+ 	ret = setsockopt(tfm->tfmfd, SOL_ALG, ALG_SET_ECDH_CURVE,
-+-			 curve_id_str, sizeof(curve_id_str));
-++			 curve_id_str, (socklen_t)strlen(curve_id_str));
-+ 	return (ret >= 0) ? ret : -errno;
-+ }
-+ 
-+diff --git a/lib/kcapi-md.c b/lib/kcapi-md.c
-+index bddd76b..5f493eb 100644
-+--- a/lib/kcapi-md.c
-++++ b/lib/kcapi-md.c
-+@@ -196,7 +196,7 @@ ssize_t impl_md_sha256(const uint8_t *in, size_t inlen,
-+ }
-+ 
-+ ORIG_SYMVER(md_sha256, "1.0.0")
-+-ssize_t orig_md_sha256(const uint8_t *in, uint32_t inlen,
-++int32_t orig_md_sha256(const uint8_t *in, uint32_t inlen,
-+ 		       uint8_t *out, uint32_t outlen)
-+ {
-+ 	return (int32_t)kcapi_md_conv_common("sha256", in, inlen, out, outlen);
-+diff --git a/lib/kcapi-sym.c b/lib/kcapi-sym.c
-+index 911ec1e..d500061 100644
-+--- a/lib/kcapi-sym.c
-++++ b/lib/kcapi-sym.c
-+@@ -47,6 +47,9 @@ ssize_t impl_cipher_encrypt(struct kcapi_handle *handle,
-+ 	struct kcapi_handle_tfm *tfm = handle->tfm;
-+ 	uint32_t bs = tfm->info.blocksize;
-+ 
-++	if (!bs)
-++		return -EINVAL;
-++
-+ 	/* require properly sized output data size */
-+ 	if (outlen < ((inlen + bs - 1) / bs * bs))
-+ 		kcapi_dolog(KCAPI_LOG_WARN,
-+@@ -120,6 +123,9 @@ ssize_t impl_cipher_decrypt(struct kcapi_handle *handle,
-+ {
-+ 	struct kcapi_handle_tfm *tfm = handle->tfm;
-+ 
-++	if (!tfm->info.blocksize)
-++		return -EINVAL;
-++
-+ 	/* require properly sized output data size */
-+ 	if (inlen % tfm->info.blocksize)
-+ 		kcapi_dolog(KCAPI_LOG_WARN,
-+diff --git a/lib/kcapi-utils.c b/lib/kcapi-utils.c
-+index 46fd330..e801d29 100644
-+--- a/lib/kcapi-utils.c
-++++ b/lib/kcapi-utils.c
-+@@ -96,7 +96,7 @@ err:
-+ 	} else {
-+ 		kcapi_dolog(KCAPI_LOG_WARN,
-+ 			    "AF_ALG: setting maximum splice pipe size to %u failed: %s",
-+-			    size, strerror(ret));
-++			    size, strerror(-ret));
-+ 	}
-+ 	return ret;
-+ }
-+@@ -109,7 +109,10 @@ int kcapi_get_maxsplicesize(struct kcapi_handle *handle)
-+ 		return -EINVAL;
-+ 
-+ 	/* Both pipe endpoints should have the same pipe size */
-+-	handle->pipesize = (unsigned int)fcntl(handle->pipes[0], F_GETPIPE_SZ);
-++	int ret = fcntl(handle->pipes[0], F_GETPIPE_SZ);
-++	if (ret < 0)
-++		return -errno;
-++	handle->pipesize = (unsigned int)ret;
-+ 
-+ 	/*
-+ 	 * For vmsplice to allow the maximum number of 16 pages, we need to
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
-new file mode 100644
-index 0000000000..856d7a9879
---- /dev/null
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
-@@ -0,0 +1,55 @@
-+From 79198067bdf027f5d4d5e2804b086a0a37b277ec Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
+@@ -0,0 +1,40 @@
++From d85279e3bec7578f8c238aec92539985c2032616 Mon Sep 17 00:00:00 2001
 +From: Stephan Mueller <smueller@chronox.de>
-+Date: Fri, 3 Apr 2026 17:43:05 +0200
-+Subject: [PATCH] fix kernel invocation
-+
-+Signed-off-by: Stephan Mueller <smueller@chronox.de>
-+(cherry picked from commit d9f16d5fbcf8270110a8f6f35523525f345ca311)
-+
-+CVE: CVE-2026-71226
-+Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/d9f16d5fbcf8270110a8f6f35523525f345ca311]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ lib/kcapi-kernel-if.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
-+index b37f0dc..5d3b352 100644
-+--- a/lib/kcapi-kernel-if.c
-++++ b/lib/kcapi-kernel-if.c
-+@@ -216,7 +216,7 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
-+ 		}
-+ 		header->cmsg_level = SOL_ALG;
-+ 		header->cmsg_type = ALG_SET_IV;
-+-		header->cmsg_len = CMSG_LEN(iv_msg_size);
-++		header->cmsg_len = kcapi_downcast_socklen_t(iv_msg_size);
-+ 		alg_iv = (void*)CMSG_DATA(header);
-+ 		alg_iv->ivlen = tfm->info.ivsize;
-+ 		memcpy(alg_iv->iv, handle->cipher.iv, tfm->info.ivsize);
-+@@ -411,6 +411,7 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
-+ 
-+ 		if (ret == 0)
-+ 			return -EPIPE;
-++
-+ 		processed += ret;
-+ 		inlen -= (size_t)ret;
-+ 	}
-+@@ -436,7 +437,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 
-+ 		for (i = 0; i < rc; i++) {
-+ 			struct iocb *cb;
-+-			unsigned int idx = (unsigned int)events[i].data;
-++			uint64_t idx = events[i].data;
-+ 
-+ 			if (idx >= KCAPI_AIO_CONCURRENT)
-+ 				return -EOVERFLOW;
-+@@ -459,8 +460,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 			if (events[i].res > 0) {
-+ 				handle->aio.iocb_ret[idx] = events[i].res;
-+ 			} else {
-+-				handle->aio.iocb_ret[idx] =
-+-							(__s64)cb->aio_nbytes;
-++				handle->aio.iocb_ret[idx] = (__s64)cb->aio_nbytes;
-+ 			}
-+ 
-+ 			cb->aio_fildes = 0;
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
-new file mode 100644
-index 0000000000..591c32412b
---- /dev/null
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
-@@ -0,0 +1,93 @@
-+From 8ab3c8939276848ec8f43156a7658f7c5dae4026 Mon Sep 17 00:00:00 2001
-+From: Stephan Mueller <smueller@chronox.de>
-+Date: Thu, 30 Jul 2026 08:36:32 +0200
-+Subject: [PATCH] fix memory corruption
++Date: Thu, 30 Jul 2026 08:38:10 +0200
++Subject: [PATCH] Fix potential infinite loop
 +
 +Signed-off-by: Zoltan Fridrich <zfridric@redhat.com>
 +Signed-off-by: Stephan Mueller <smueller@chronox.de>
 +
-+CVE: CVE-2026-71226
-+Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/cd966ffa08cf605ae5853d2f9a42fdd2b6df8bb4]
++CVE: CVE-2026-71227
++Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/9a29cc2ce0fa87ec212d58118402eafe07db3f60]
 +
 +Dropped changes to the CHANGES.md file.
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ lib/kcapi-kernel-if.c | 33 ++++++++++++++-------------------
-+ 1 file changed, 14 insertions(+), 19 deletions(-)
++ lib/kcapi-kernel-if.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
 +diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
-+index 5d3b352..8a12c09 100644
++index 8a12c09..a54cdaa 100644
 +--- a/lib/kcapi-kernel-if.c
 ++++ b/lib/kcapi-kernel-if.c
-+@@ -423,6 +423,8 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
-+ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 			struct timespec *timeout)
-+ {
-++	int err = 0;
-++
-+ 	if (toread > KCAPI_AIO_CONCURRENT)
-+ 		return -EINVAL;
-+ 
-+@@ -433,34 +435,26 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 				      events, timeout);
++@@ -436,6 +436,8 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
 + 
 + 		if (rc < 0)
-+-			return rc;
-++			return err == 0 ? rc : err;
++ 			return err == 0 ? rc : err;
+++		if (rc == 0)
+++			return err == 0 ? -ETIMEDOUT : err;
 + 
 + 		for (i = 0; i < rc; i++) {
 + 			struct iocb *cb;
-+ 			uint64_t idx = events[i].data;
-+ 
-+-			if (idx >= KCAPI_AIO_CONCURRENT)
-+-				return -EOVERFLOW;
-+-
-+-			/*
-+-			 * If one cipher operation fails, so will the entire
-+-			 * AIO operation
-+-			 */
-+-			if (events[i].res < 0) {
-+-				handle->aio.iocb_ret[idx] = events[i].res;
-+-				return (int)events[i].res;
-++			if (idx >= KCAPI_AIO_CONCURRENT) {
-++				if (err == 0)
-++					err = -EOVERFLOW;
-++				continue;
-+ 			}
-+ 
-+ 			cb = (struct iocb *)(uintptr_t)events[i].obj;
-+ 
-+-			/*
-+-			 * Older symmetric AIO implementations used a wrong
-+-			 * return code.
-+-			 */
-+-			if (events[i].res > 0) {
-+-				handle->aio.iocb_ret[idx] = events[i].res;
-+-			} else {
-++			if (events[i].res == 0) {
-+ 				handle->aio.iocb_ret[idx] = (__s64)cb->aio_nbytes;
-++			} else {
-++				handle->aio.iocb_ret[idx] = events[i].res;
-++				if (events[i].res < 0 && err == 0)
-++					err = (int)events[i].res;
-+ 			}
-+ 
-+ 			cb->aio_fildes = 0;
-+@@ -468,7 +462,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
-+ 		toread -= (size_t)rc;
-+ 	}
-+ 
-+-	return 0;
-++	return err;
-+ }
-+ 
-+ int _kcapi_aio_send_iov(struct kcapi_handle *handle, struct iovec *iov,
-+@@ -544,6 +538,7 @@ int _kcapi_aio_read_iov(struct kcapi_handle *handle,
-+ 		} else {
-+ 			kcapi_dolog(KCAPI_LOG_ERR,
-+ 				    "Could not sumbit AIO read\n");
-++			_kcapi_aio_read_all(handle, (size_t)ret, NULL);
-+ 			return -EIO;
++@@ -509,7 +511,7 @@ int _kcapi_aio_read_iov(struct kcapi_handle *handle,
++ 			timeout.tv_sec = 0;
++ 			timeout.tv_nsec = 10000;
++ 			ret = _kcapi_aio_read_all(handle, iovlen, &timeout);
++-			if (ret < 0)
+++			if (ret < 0 && ret != -ETIMEDOUT)
++ 				return ret;
 + 		}
-+ 	}
++ 
 diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
-index 532c9e29df..f2ddc25336 100644
+index f2ddc25336..f1fe6a0940 100644
 --- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
 +++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
-@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
- 
- SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
- SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
-+           file://CVE-2026-71226-1.patch \
-+           file://CVE-2026-71226-2.patch \
-+           file://CVE-2026-71226-3.patch \
+@@ -8,6 +8,7 @@ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https
+            file://CVE-2026-71226-1.patch \
+            file://CVE-2026-71226-2.patch \
+            file://CVE-2026-71226-3.patch \
++           file://CVE-2026-71227.patch \
            "
  
  inherit autotools
