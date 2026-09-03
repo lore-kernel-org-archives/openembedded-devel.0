@@ -1,185 +1,131 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EEECC624D4
-	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 08:27:19 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2869.1788424029255392026
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E89B8C61DD3
+	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 09:21:23 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3445.1788427275303828269
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2026 01:27:09 -0700
+ Thu, 03 Sep 2026 02:21:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=PKjaYaoZ;
- spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout10.t-online.de (Postfix) with SMTP id 66A5537DBD
-	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Sep 2026 10:27:07 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.164.36]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x22mg-3ayjom0; Thu, 3 Sep 2026 10:26:58 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=sWhMNKdy;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-499ac87c92bso21348065e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:21:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1788427273; x=1789032073; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GY0bnB0lz4mKug5ct2q1q47mht6TNnNFLROx0kQlMk8=;
+        b=sWhMNKdyGAo9bWmgwkqp/3BbhfKa/MABHrhajVj0AvrTT9kBEezsoUVyjB8ZNI3pRu
+         5PabaZPqgLQs6mU8neQ9o0cNQyJmtJGhJT22De2/dGK2Zdy1Zg/mNscFQapG2tbPaefp
+         bQBBF1Vz+dMKH/KZixfwVSbDELxcqhhdVGwVQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788427273; x=1789032073;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GY0bnB0lz4mKug5ct2q1q47mht6TNnNFLROx0kQlMk8=;
+        b=PZ7GSLMOrUdjV/me4vc1KG2/mC5/szbScz0i89fFXB1zo/vUJ2WCyO8H1MO5pTN5RJ
+         vHKvJUVjWp7PbxiPQUQ+rceiAIjoQ6FmjOjU5u13d0bA/iAqRY9/YIW8wqTuZ/55szQ1
+         JwgnH/LkeLXTJPnCJ3G46pu2W655nbflixTrWtB+T8xW22xX0/FUZrG6R9cGAPs2Blzb
+         UR7rsrf7JF/tkFMpDjvSU5ZMsPLCVOXBFQywWDskofAgCgX0pktp7akWL8fUERRfL/AI
+         BmL1+MjGaf+xQI9Pm0tbFrSpfWux/K4hEBClpH201zfRUbuqsMMyjttZsVLvYknWlTzr
+         /x4g==
+X-Gm-Message-State: AFuF++nS+4t7vRjZaJYsB0o1RC3bAW310T6A8uIn6F980IreQvU3nHwO
+	u55ILy3PcK5HAd7V33ztubmeBCyz32t72bLhp7TjnFwkcy6kMI+z+rfx6YUOUzlywePSld4fShE
+	vCkrR
+X-Gm-Gg: AYBFou3cyBhowBSbCtq8qJiQcCRS3peBKPmyxWBbtdGAiZVjKbqdQZqg5j3CDCkTuK6
+	oUwNhTxZncU5RT5Tvv/wYgxDILpd1gagF5MatrEsF123mZfbBJA4QVbQH508fvrfLzBwAK4P3+5
+	pXU+vAP1oiYFNNyOojxTXwipCSpheUr8yz81K+wav+dUmNTKvubnO7v9zT3gbAvUbU3uWf0Y3Sy
+	byCLJe3A4owkw97QsgIHsJe4tm5qjS8tTn/RB8FyLbhYqZOQt+1cyRPyPv0QpJdkdgmRgUvygJf
+	cNgx/oN6PBPMAeNzm1si36yQOJ1eerOeX2NLyWl8eONh1iCurBnWFP5IC3eTES0giy7KUBJJXr0
+	sIO2E2OYAE5vGaH1v+jodgsNF1n2+qm560/NQGLAidPCNw08JIwaBEr784DK+gjXWnEOtxGLH76
+	zu4QSb9PgZ5o0xPY+5OT8DstltSJnwNJfH8Jt5YNwFuRXSpZismsUZcBNTI3RWySavl0jL8WwMs
+	dBoztLAy36cxGQcF9Ofdg6pQfWPl571RofqgTz338Fxl15U46Y2ipiemm2tcPZ0b27ovMMIi4sv
+	GW8XK1f8cJ3xCLVZcNdj3qVj
+X-Received: by 2002:a05:600c:1395:b0:495:4d88:e630 with SMTP id 5b1f17b1804b1-49ce5812c52mr160379165e9.10.1788427273308;
+        Thu, 03 Sep 2026 02:21:13 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cee5d2019sm55305085e9.2.2026.09.03.02.21.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Sep 2026 02:21:12 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv2] gjs: update 1.84.2 -> 1.88.1
-Date: Thu,  3 Sep 2026 10:26:52 +0200
-Message-ID: <20260903082652.158524-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-charset-normalizer: Upgrade 3.4.9 -> 3.5.1
+Date: Thu,  3 Sep 2026 12:21:08 +0300
+Message-ID: <20260903092109.1641069-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260903092109.1641069-1-leon.anavi@konsulko.com>
+References: <20260903092109.1641069-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1788424018-F17F99D1-6A7E6978/0/0 CLEAN NORMAL
-X-TOI-MSGID: cb06bc2a-5178-4302-8740-da61f5900b61
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1788424027; i=f_l_k@t-online.de;
-	bh=zMiN7gZvXxx60xNFjVHieNKR5JZq2L+h+Jv45lgqMbU=;
-	h=From:To:Subject:Date;
-	b=PKjaYaoZ9pT9qGp/eBfi4QKFvgS6kDHJr+gsvTQuRef/yZn5Gxa05zV3eGO7TnF7R
-	 /I/repdyZlEPNtuhgqpG6VwxUcQMurkvKTnuu2MSkVhTxOnoIhAYTx0hxxK06MiUZX
-	 gjMmZ5bCM9lygxCIawkK81wBoHsskYreIKsxuKwZ1qmEwJMSu/KAoqVjg/vkzJ7D7g
-	 /7zMbtXFh+08JOUaDezIqaOvpumKzKmoWrlrMlUY6uzpWjInKTihCJMTEPQS/xjPEU
-	 d4xxpyomowtrWoPduthYZYrqM0nmFTYKDMKbhY7slE9j6hBwzwIB3oVqMYpBTJRsIk
-	 fZA+3hY6jRPSw==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 08:27:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129713
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 09:21:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129715
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Upgrade to release 3.5.1:
+
+- Raised upper bound of setuptools to v84 (#794)
+- Cache performance access optimization for our CharInfo struct
+  (prebuilt only).
+- No longer decoding large content when the noise detector output
+  give a high entropy. Only impacted large content input >1M bytes.
+
+Deploy sample data files to fix tests.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb | 45 ------------------
- meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb | 53 ++++++++++++++++++++++
- 2 files changed, 53 insertions(+), 45 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb
- create mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb
+ ...0001-pyproject.toml-relax-setuptools-upper-bound.patch | 2 +-
+ ...lizer_3.4.9.bb => python3-charset-normalizer_3.5.1.bb} | 8 +++++++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.4.9.bb => python3-charset-normalizer_3.5.1.bb} (78%)
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.84.2.bb
-deleted file mode 100644
-index 1330342426..0000000000
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--SUMMARY =3D "Javascript bindings for GNOME"
--LICENSE =3D "LGPL-2.0-or-later AND MIT"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6acf45d856abfeb2d51e=
-c48"
--
--
--DEPENDS =3D "mozjs-128 cairo"
--
--inherit gnomebase gobject-introspection gettext features_check upstream-=
-version-is-even pkgconfig multilib_script
--
--SRC_URI[archive.sha256sum] =3D "35142edf345705636300291ec3a7d583f14969ff=
-3fae0ff30f4a95b1e6740166"
--SRC_URI +=3D " \
--    file://0001-Support-cross-builds-a-bit-better.patch \
--    file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.pat=
-ch \
--"
--
--# gobject-introspection is mandatory and cannot be configured
--REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
--GIR_MESON_OPTION =3D ""
--
--EXTRA_OEMESON =3D " \
--    -Dinstalled_tests=3Dfalse \
--    -Dskip_dbus_tests=3Dtrue \
--    -Dskip_gtk_tests=3Dtrue \
--"
--
--LDFLAGS:append:mipsarch =3D " -latomic"
--LDFLAGS:append:powerpc =3D " -latomic"
--LDFLAGS:append:powerpc64 =3D " -latomic"
--LDFLAGS:append:riscv32 =3D " -latomic"
--
--FILES:${PN} +=3D "${datadir}/gjs-1.0/lsan"
--
--PACKAGES =3D+ "${PN}-valgrind"
--FILES:${PN}-valgrind =3D "${datadir}/gjs-1.0/valgrind"
--RDEPENDS:${PN}-valgrind +=3D "valgrind"
--
--# Valgrind not yet available on rv32/rv64
--RDEPENDS:${PN}-valgrind:remove:riscv32 =3D "valgrind"
--RDEPENDS:${PN}-valgrind:remove:riscv64 =3D "valgrind"
--
--MULTILIB_SCRIPTS:append =3D "${PN}:${libexecdir}/installed-tests/gjs/GIM=
-arshallingTests-1.0.typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/Regress-1.0.=
-typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/Utility-1.0.=
-typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/WarnLib-1.0.=
-typelib \
--                    "
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.88.1.bb
-new file mode 100644
-index 0000000000..16c8636d84
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb
-@@ -0,0 +1,53 @@
-+SUMMARY =3D "Javascript bindings for GNOME"
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/gjs"
-+LICENSE =3D "LGPL-2.0-or-later AND MIT"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6acf45d856abfeb2d51e=
-c48"
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-relax-setuptools-upper-bound.patch b/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-relax-setuptools-upper-bound.patch
+index 508debc340..f73a6ef803 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-relax-setuptools-upper-bound.patch
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-relax-setuptools-upper-bound.patch
+@@ -19,6 +19,6 @@ index 1111111..2222222 100644
+ +++ b/pyproject.toml
+ @@ -1,3 +1,3 @@
+  [build-system]
+--requires = ["setuptools>=68,<83.1"]
++-requires = ["setuptools>=68,<84.1"]
+ +requires = ["setuptools>=68"]
+  build-backend = "backend"
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb
+index 6df52a23d4..b5e20f449c 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.9.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
+ 
+ SRC_URI += "file://0001-pyproject.toml-relax-setuptools-upper-bound.patch"
+-SRC_URI[sha256sum] = "673611bbd43f0810bec0b0f028ddeaaa501190339cac411f347ac76917c3ae7b"
++SRC_URI[sha256sum] = "6117b84ea48435e5356dc737f5121485c30920ba43375fa7b434fd753df0eac3"
+ 
+ DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
+ 
+@@ -21,4 +21,10 @@ RDEPENDS:${PN} += " \
+ "
+ 
+ RDEPENDS:${PN}-ptest:append:libc-glibc  = " glibc-charmap-gb18030 glibc-charmaps"
 +
-+DEPENDS =3D "mozjs-140 cairo glib-2.0 glib-2.0-native libffi"
++do_install_ptest:append() {
++    install -d ${D}${PTEST_PATH}/data
++    install -m 0644 ${S}/data/* ${D}${PTEST_PATH}/data/
++}
 +
-+inherit meson pkgconfig gettext gobject-introspection features_check
-+
-+SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${@oe.utils.trim_version("${PV}", 2)=
-}/${BP}.tar.xz;name=3Darchive"
-+SRC_URI +=3D "file://0001-Support-cross-builds-a-bit-better.patch"
-+SRC_URI +=3D "file://0002-meson.build-Do-not-add-dir-installed-tests-whe=
-n-inst.patch"
-+SRC_URI[archive.sha256sum] =3D "767bab80e665d672cb00563c25f0b392a9ec8c29=
-96ed1d4454c698b4c2f0a3d9"
-+
-+# gobject-introspection is mandatory and cannot be configured
-+REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
-+GIR_MESON_OPTION =3D ""
-+
-+# readline and profiler are meson features with value 'auto' and would o=
-therwise
-+# be picked up from whatever happens to be in the sysroot.
-+PACKAGECONFIG ??=3D "readline"
-+PACKAGECONFIG[readline] =3D "-Dreadline=3Denabled,-Dreadline=3Ddisabled,=
-readline"
-+PACKAGECONFIG[profiler] =3D "-Dprofiler=3Denabled,-Dprofiler=3Ddisabled,=
-sysprof"
-+
-+EXTRA_OEMESON =3D " \
-+    -Dinstalled_tests=3Dfalse \
-+    -Dskip_dbus_tests=3Dtrue \
-+    -Dskip_gtk_tests=3Dtrue \
-+    -Ddtrace=3Dfalse \
-+    -Dsystemtap=3Dfalse \
-+    -Dverbose_logs=3Dfalse \
-+    -Dbsymbolic_functions=3Dtrue \
-+"
-+
-+LDFLAGS:append:mipsarch =3D " -latomic"
-+LDFLAGS:append:powerpc =3D " -latomic"
-+LDFLAGS:append:powerpc64 =3D " -latomic"
-+LDFLAGS:append:riscv32 =3D " -latomic"
-+
-+FILES:${PN} +=3D "${datadir}/gjs-1.0/lsan"
-+
-+PACKAGES =3D+ "${PN}-valgrind"
-+FILES:${PN}-valgrind =3D "${datadir}/gjs-1.0/valgrind"
-+RDEPENDS:${PN}-valgrind +=3D "valgrind"
-+
-+# Valgrind not yet available on rv32/rv64
-+RDEPENDS:${PN}-valgrind:remove:riscv32 =3D "valgrind"
-+RDEPENDS:${PN}-valgrind:remove:riscv64 =3D "valgrind"
-+
-+# The GIMarshallingTests/Regress/Utility/WarnLib typelibs that the 1.84 =
-recipe
-+# listed in MULTILIB_SCRIPTS are no longer produced by the build system.
-+
-+UPSTREAM_CHECK_GITTAGREGEX =3D "^(?P<pver>\d+\.\d*[02468]\.\d+)$"
---=20
-2.55.0
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.47.3
 
 
