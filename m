@@ -2,185 +2,1271 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0D67C624A4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F18DBC624D4
 	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 08:19:28 +0000 (UTC)
 Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2794.1788423568013758529
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2793.1788423567892173321
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 03 Sep 2026 01:19:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=vY8guKBJ;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=pdWjcQwq;
  spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout02.t-online.de (Postfix) with SMTP id A8203EA88
+	by mailout02.t-online.de (Postfix) with SMTP id 98999EA4B
 	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Sep 2026 10:19:25 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([84.154.164.36]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x22fK-44btZJ0; Thu, 3 Sep 2026 10:19:22 +0200
+	esmtp id 1x22fK-44btZI0; Thu, 3 Sep 2026 10:19:22 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/6] gjs: update
-Date: Thu,  3 Sep 2026 10:19:12 +0200
-Message-ID: <20260903081916.156273-2-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/6] glycin: add recipe
+Date: Thu,  3 Sep 2026 10:19:11 +0200
+Message-ID: <20260903081916.156273-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260903081916.156273-1-f_l_k@t-online.de>
-References: <20260903081916.156273-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1788423563-A9FF89C8-2DD8C199/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5e8d14e5-6f05-4090-8d5f-89a4dc314597
+X-TOI-EXPURGATEID: 150726::1788423562-46FFA9C8-1E7EC102/0/0 CLEAN NORMAL
+X-TOI-MSGID: 0ec241cf-b2b1-4092-81b4-4d39af52f4ae
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
 	s=20260216; t=1788423565; i=f_l_k@t-online.de;
-	bh=zMiN7gZvXxx60xNFjVHieNKR5JZq2L+h+Jv45lgqMbU=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=vY8guKBJiOKn0hUInnR1ufUt19G64XEhrpJ+g1WvuJ1GJ9hiPscEBqRxToFMuMZ3M
-	 3RXnIFsPsw0C68a6nZPYuydBZrLwf4TDy2tgqf2Ve1GqKPd0OFk9ko8E4xPildV+IT
-	 Z4AexzVmpfCua8g8QMN+CBFA3mBquqm1r7b6rFqaB3GTe025ukyB3JlD+KzlRsUd2q
-	 HHy/fZnq37LTDlaLEz+UO1PYf/hqAG3w/crd/9CvhP8Ln2MBgR8Tbc6QX5WgeyHgIK
-	 1BdwPW6bk4g6AtnLWTOPLQGr1o9Sw6fGo6euyqkuP6qviLOWLB0zELsQjAs9kkOSM7
-	 ty48fBqkmPb2w==
+	bh=ufEWR4Oai261y8lgRJFd1T6IpplfVHLIy5onlYGkKUE=;
+	h=From:To:Subject:Date;
+	b=pdWjcQwqUe/wyyEJTJfwbK0jNlCjMrciH8Dv1oRh+r6WPeAR1SKaxVCjDfjJC/Mkl
+	 2t6HPjI9Hwt9QQ8X0994IikBqAEBX9mLco1/1sxIR6FBCNTWTbJ7yx7+246mbu96+c
+	 cCKIMpVXLQTAH0b5X4CXR51eA2W8jh3P08RcuRdOPBxgLzvVRs5zCurQ4JK9QDLyyS
+	 0E011iYeKSFF9M+bxV+JM5Ik6DOoqBoQFLRyyaO1C7HHTMvtp4sUzlKMkETNVJLfdB
+	 PgIm0H7IwYwNh5MHvsLXpxbJKbmmjaThrJYEdvhFS+grlOgc8ljZoK6ytkEujfdPxG
+	 mT6mlsQR+613Q==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 08:19:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129703
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129704
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb | 45 ------------------
- meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb | 53 ++++++++++++++++++++++
- 2 files changed, 53 insertions(+), 45 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb
- create mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb
+ .../recipes-gnome/glycin/glycin-crates.inc    | 612 ++++++++++++++++++
+ ...oss-compilation-via-a-rust_target-cr.patch |  97 +++
+ ...argo-artifacts-from-the-per-target-s.patch |  31 +
+ .../recipes-gnome/glycin/glycin_2.1.5.bb      | 106 +++
+ 4 files changed, 846 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/glycin/glycin-crates.inc
+ create mode 100644 meta-gnome/recipes-gnome/glycin/glycin/0001-meson-Sup=
+port-cross-compilation-via-a-rust_target-cr.patch
+ create mode 100644 meta-gnome/recipes-gnome/glycin/glycin/0002-libglycin=
+-Read-cargo-artifacts-from-the-per-target-s.patch
+ create mode 100644 meta-gnome/recipes-gnome/glycin/glycin_2.1.5.bb
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.84.2.bb
-deleted file mode 100644
-index 1330342426..0000000000
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.84.2.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--SUMMARY =3D "Javascript bindings for GNOME"
--LICENSE =3D "LGPL-2.0-or-later AND MIT"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6acf45d856abfeb2d51e=
-c48"
--
--
--DEPENDS =3D "mozjs-128 cairo"
--
--inherit gnomebase gobject-introspection gettext features_check upstream-=
-version-is-even pkgconfig multilib_script
--
--SRC_URI[archive.sha256sum] =3D "35142edf345705636300291ec3a7d583f14969ff=
-3fae0ff30f4a95b1e6740166"
--SRC_URI +=3D " \
--    file://0001-Support-cross-builds-a-bit-better.patch \
--    file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.pat=
-ch \
--"
--
--# gobject-introspection is mandatory and cannot be configured
--REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
--GIR_MESON_OPTION =3D ""
--
--EXTRA_OEMESON =3D " \
--    -Dinstalled_tests=3Dfalse \
--    -Dskip_dbus_tests=3Dtrue \
--    -Dskip_gtk_tests=3Dtrue \
--"
--
--LDFLAGS:append:mipsarch =3D " -latomic"
--LDFLAGS:append:powerpc =3D " -latomic"
--LDFLAGS:append:powerpc64 =3D " -latomic"
--LDFLAGS:append:riscv32 =3D " -latomic"
--
--FILES:${PN} +=3D "${datadir}/gjs-1.0/lsan"
--
--PACKAGES =3D+ "${PN}-valgrind"
--FILES:${PN}-valgrind =3D "${datadir}/gjs-1.0/valgrind"
--RDEPENDS:${PN}-valgrind +=3D "valgrind"
--
--# Valgrind not yet available on rv32/rv64
--RDEPENDS:${PN}-valgrind:remove:riscv32 =3D "valgrind"
--RDEPENDS:${PN}-valgrind:remove:riscv64 =3D "valgrind"
--
--MULTILIB_SCRIPTS:append =3D "${PN}:${libexecdir}/installed-tests/gjs/GIM=
-arshallingTests-1.0.typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/Regress-1.0.=
-typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/Utility-1.0.=
-typelib \
--                    ${PN}:${libexecdir}/installed-tests/gjs/WarnLib-1.0.=
-typelib \
--                    "
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.88.1.bb
+diff --git a/meta-gnome/recipes-gnome/glycin/glycin-crates.inc b/meta-gno=
+me/recipes-gnome/glycin/glycin-crates.inc
 new file mode 100644
-index 0000000000..16c8636d84
+index 0000000000..b1a982eff2
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.88.1.bb
-@@ -0,0 +1,53 @@
-+SUMMARY =3D "Javascript bindings for GNOME"
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/gjs"
-+LICENSE =3D "LGPL-2.0-or-later AND MIT"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6acf45d856abfeb2d51e=
-c48"
++++ b/meta-gnome/recipes-gnome/glycin/glycin-crates.inc
+@@ -0,0 +1,612 @@
++# Autogenerated with 'bitbake -c update_crates glycin'
 +
-+DEPENDS =3D "mozjs-140 cairo glib-2.0 glib-2.0-native libffi"
-+
-+inherit meson pkgconfig gettext gobject-introspection features_check
-+
-+SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${@oe.utils.trim_version("${PV}", 2)=
-}/${BP}.tar.xz;name=3Darchive"
-+SRC_URI +=3D "file://0001-Support-cross-builds-a-bit-better.patch"
-+SRC_URI +=3D "file://0002-meson.build-Do-not-add-dir-installed-tests-whe=
-n-inst.patch"
-+SRC_URI[archive.sha256sum] =3D "767bab80e665d672cb00563c25f0b392a9ec8c29=
-96ed1d4454c698b4c2f0a3d9"
-+
-+# gobject-introspection is mandatory and cannot be configured
-+REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
-+GIR_MESON_OPTION =3D ""
-+
-+# readline and profiler are meson features with value 'auto' and would o=
-therwise
-+# be picked up from whatever happens to be in the sysroot.
-+PACKAGECONFIG ??=3D "readline"
-+PACKAGECONFIG[readline] =3D "-Dreadline=3Denabled,-Dreadline=3Ddisabled,=
-readline"
-+PACKAGECONFIG[profiler] =3D "-Dprofiler=3Denabled,-Dprofiler=3Ddisabled,=
-sysprof"
-+
-+EXTRA_OEMESON =3D " \
-+    -Dinstalled_tests=3Dfalse \
-+    -Dskip_dbus_tests=3Dtrue \
-+    -Dskip_gtk_tests=3Dtrue \
-+    -Ddtrace=3Dfalse \
-+    -Dsystemtap=3Dfalse \
-+    -Dverbose_logs=3Dfalse \
-+    -Dbsymbolic_functions=3Dtrue \
++# from Cargo.lock
++SRC_URI +=3D " \
++    crate://crates.io/adler2/2.0.1 \
++    crate://crates.io/ahash/0.8.12 \
++    crate://crates.io/aho-corasick/1.1.4 \
++    crate://crates.io/allocator-api2/0.2.21 \
++    crate://crates.io/android_system_properties/0.1.5 \
++    crate://crates.io/anyhow/1.0.102 \
++    crate://crates.io/approx/0.5.1 \
++    crate://crates.io/async-broadcast/0.7.2 \
++    crate://crates.io/async-channel/2.5.0 \
++    crate://crates.io/async-executor/1.14.0 \
++    crate://crates.io/async-fs/2.2.0 \
++    crate://crates.io/async-global-executor/3.1.0 \
++    crate://crates.io/async-io/2.6.0 \
++    crate://crates.io/async-lock/3.4.2 \
++    crate://crates.io/async-process/2.5.0 \
++    crate://crates.io/async-recursion/1.1.1 \
++    crate://crates.io/async-signal/0.2.13 \
++    crate://crates.io/async-task/4.7.1 \
++    crate://crates.io/async-trait/0.1.89 \
++    crate://crates.io/atomic-waker/1.1.2 \
++    crate://crates.io/autocfg/1.5.0 \
++    crate://crates.io/bit_field/0.10.3 \
++    crate://crates.io/bitflags/2.11.0 \
++    crate://crates.io/bitreader/0.3.11 \
++    crate://crates.io/blocking/1.6.2 \
++    crate://crates.io/bon/3.9.0 \
++    crate://crates.io/bon-macros/3.9.0 \
++    crate://crates.io/bumpalo/3.20.2 \
++    crate://crates.io/bytemuck/1.25.0 \
++    crate://crates.io/byteorder/1.5.0 \
++    crate://crates.io/byteorder-lite/0.1.0 \
++    crate://crates.io/bytes/1.11.1 \
++    crate://crates.io/cairo-rs/0.22.0 \
++    crate://crates.io/cairo-sys-rs/0.22.0 \
++    crate://crates.io/cc/1.2.56 \
++    crate://crates.io/cfg-expr/0.20.7 \
++    crate://crates.io/cfg-if/1.0.4 \
++    crate://crates.io/cfg_aliases/0.2.1 \
++    crate://crates.io/chrono/0.4.44 \
++    crate://crates.io/color_quant/1.1.0 \
++    crate://crates.io/concurrent-queue/2.5.0 \
++    crate://crates.io/core-foundation-sys/0.8.7 \
++    crate://crates.io/crc32fast/1.5.0 \
++    crate://crates.io/crossbeam-deque/0.8.6 \
++    crate://crates.io/crossbeam-epoch/0.9.18 \
++    crate://crates.io/crossbeam-utils/0.8.21 \
++    crate://crates.io/crunchy/0.2.4 \
++    crate://crates.io/darling/0.23.0 \
++    crate://crates.io/darling_core/0.23.0 \
++    crate://crates.io/darling_macro/0.23.0 \
++    crate://crates.io/dlib/0.5.3 \
++    crate://crates.io/dunce/1.0.5 \
++    crate://crates.io/either/1.15.0 \
++    crate://crates.io/encoding_rs/0.8.35 \
++    crate://crates.io/endi/1.1.1 \
++    crate://crates.io/enumflags2/0.7.12 \
++    crate://crates.io/enumflags2_derive/0.7.12 \
++    crate://crates.io/enumn/0.1.14 \
++    crate://crates.io/env_filter/1.0.0 \
++    crate://crates.io/env_logger/0.11.9 \
++    crate://crates.io/equivalent/1.0.2 \
++    crate://crates.io/errno/0.3.14 \
++    crate://crates.io/event-listener/5.4.1 \
++    crate://crates.io/event-listener-strategy/0.5.4 \
++    crate://crates.io/exr/1.74.0 \
++    crate://crates.io/fallible_collections/0.5.1 \
++    crate://crates.io/fastrand/2.3.0 \
++    crate://crates.io/fax/0.2.6 \
++    crate://crates.io/fax_derive/0.2.0 \
++    crate://crates.io/fdeflate/0.3.7 \
++    crate://crates.io/fearless_simd/0.3.0 \
++    crate://crates.io/find-msvc-tools/0.1.9 \
++    crate://crates.io/flate2/1.1.9 \
++    crate://crates.io/foldhash/0.1.5 \
++    crate://crates.io/foreign-types/0.5.0 \
++    crate://crates.io/foreign-types-macros/0.2.3 \
++    crate://crates.io/foreign-types-shared/0.3.1 \
++    crate://crates.io/four-cc/0.4.0 \
++    crate://crates.io/futures-channel/0.3.32 \
++    crate://crates.io/futures-core/0.3.32 \
++    crate://crates.io/futures-executor/0.3.32 \
++    crate://crates.io/futures-io/0.3.32 \
++    crate://crates.io/futures-lite/2.6.1 \
++    crate://crates.io/futures-macro/0.3.32 \
++    crate://crates.io/futures-task/0.3.32 \
++    crate://crates.io/futures-timer/3.0.3 \
++    crate://crates.io/futures-util/0.3.32 \
++    crate://crates.io/gdk-pixbuf/0.22.0 \
++    crate://crates.io/gdk-pixbuf-sys/0.22.0 \
++    crate://crates.io/gdk4/0.11.0 \
++    crate://crates.io/gdk4-sys/0.11.0 \
++    crate://crates.io/getopts/0.2.24 \
++    crate://crates.io/getrandom/0.3.4 \
++    crate://crates.io/getrandom/0.4.1 \
++    crate://crates.io/gif/0.14.1 \
++    crate://crates.io/gio/0.22.2 \
++    crate://crates.io/gio-sys/0.22.0 \
++    crate://crates.io/gio-unix/0.22.0 \
++    crate://crates.io/gio-unix-sys/0.22.0 \
++    crate://crates.io/glib/0.22.2 \
++    crate://crates.io/glib-macros/0.22.2 \
++    crate://crates.io/glib-sys/0.22.0 \
++    crate://crates.io/gobject-sys/0.22.0 \
++    crate://crates.io/gufo/0.4.1 \
++    crate://crates.io/gufo-common/1.1.0 \
++    crate://crates.io/gufo-exif/0.4.0 \
++    crate://crates.io/gufo-jpeg/0.4.0 \
++    crate://crates.io/gufo-png/0.4.1 \
++    crate://crates.io/gufo-tiff/0.4.0 \
++    crate://crates.io/gufo-webp/0.4.0 \
++    crate://crates.io/gufo-xmp/0.4.0 \
++    crate://crates.io/half/2.7.1 \
++    crate://crates.io/hashbrown/0.14.5 \
++    crate://crates.io/hashbrown/0.15.5 \
++    crate://crates.io/hashbrown/0.16.1 \
++    crate://crates.io/hayro-jpeg2000/0.3.4 \
++    crate://crates.io/heck/0.5.0 \
++    crate://crates.io/hermit-abi/0.5.2 \
++    crate://crates.io/hex/0.4.3 \
++    crate://crates.io/iana-time-zone/0.1.65 \
++    crate://crates.io/iana-time-zone-haiku/0.1.2 \
++    crate://crates.io/id-arena/2.3.0 \
++    crate://crates.io/ident_case/1.0.1 \
++    crate://crates.io/image/0.25.10 \
++    crate://crates.io/image-extras/0.1.0 \
++    crate://crates.io/image-webp/0.2.4 \
++    crate://crates.io/indexmap/2.13.0 \
++    crate://crates.io/itoa/1.0.17 \
++    crate://crates.io/jiff/0.2.23 \
++    crate://crates.io/jiff-static/0.2.23 \
++    crate://crates.io/jobserver/0.1.34 \
++    crate://crates.io/jpeg-decoder/0.3.2 \
++    crate://crates.io/jpeg-encoder/0.7.0 \
++    crate://crates.io/jpegxl-rs/0.12.0+libjxl-0.11.1 \
++    crate://crates.io/jpegxl-sys/0.12.0+libjxl-0.11.1 \
++    crate://crates.io/js-sys/0.3.91 \
++    crate://crates.io/lazy_static/1.5.0 \
++    crate://crates.io/lcms2/6.1.1 \
++    crate://crates.io/lcms2-sys/4.0.6 \
++    crate://crates.io/leb128fmt/0.1.0 \
++    crate://crates.io/lebe/0.5.3 \
++    crate://crates.io/libc/0.2.183 \
++    crate://crates.io/libheif-rs/2.7.0 \
++    crate://crates.io/libheif-sys/5.2.0+1.21.2 \
++    crate://crates.io/libloading/0.8.9 \
++    crate://crates.io/libopenraw/0.4.0-alpha.12 \
++    crate://crates.io/librsvg-rebind/0.3.0 \
++    crate://crates.io/librsvg-rebind-sys/0.3.0 \
++    crate://crates.io/libseccomp/0.4.0 \
++    crate://crates.io/libseccomp-sys/0.3.0 \
++    crate://crates.io/linux-raw-sys/0.12.1 \
++    crate://crates.io/log/0.4.29 \
++    crate://crates.io/matchers/0.2.0 \
++    crate://crates.io/matrixmultiply/0.3.10 \
++    crate://crates.io/memchr/2.8.0 \
++    crate://crates.io/memfd/0.6.5 \
++    crate://crates.io/memmap2/0.9.11 \
++    crate://crates.io/memoffset/0.9.1 \
++    crate://crates.io/miniz_oxide/0.8.9 \
++    crate://crates.io/miniz_oxide/0.9.0 \
++    crate://crates.io/mio/1.1.1 \
++    crate://crates.io/moxcms/0.8.1 \
++    crate://crates.io/multiversion/0.8.0 \
++    crate://crates.io/multiversion-macros/0.8.0 \
++    crate://crates.io/nalgebra/0.33.2 \
++    crate://crates.io/nalgebra-macros/0.2.2 \
++    crate://crates.io/nix/0.30.1 \
++    crate://crates.io/nu-ansi-term/0.50.3 \
++    crate://crates.io/num-bigint/0.4.6 \
++    crate://crates.io/num-complex/0.4.6 \
++    crate://crates.io/num-integer/0.1.46 \
++    crate://crates.io/num-rational/0.4.2 \
++    crate://crates.io/num-traits/0.2.19 \
++    crate://crates.io/num_enum/0.7.5 \
++    crate://crates.io/num_enum_derive/0.7.5 \
++    crate://crates.io/once_cell/1.21.3 \
++    crate://crates.io/ordered-stream/0.2.0 \
++    crate://crates.io/pango/0.22.0 \
++    crate://crates.io/pango-sys/0.22.0 \
++    crate://crates.io/parking/2.2.1 \
++    crate://crates.io/paste/1.0.15 \
++    crate://crates.io/pin-project-lite/0.2.17 \
++    crate://crates.io/piper/0.2.5 \
++    crate://crates.io/pkg-config/0.3.32 \
++    crate://crates.io/png/0.18.1 \
++    crate://crates.io/polling/3.11.0 \
++    crate://crates.io/portable-atomic/1.13.1 \
++    crate://crates.io/portable-atomic-util/0.2.5 \
++    crate://crates.io/prettyplease/0.2.37 \
++    crate://crates.io/proc-macro-crate/3.4.0 \
++    crate://crates.io/proc-macro2/1.0.106 \
++    crate://crates.io/pxfm/0.1.28 \
++    crate://crates.io/qoi/0.4.1 \
++    crate://crates.io/quick-error/2.0.1 \
++    crate://crates.io/quote/1.0.45 \
++    crate://crates.io/r-efi/5.3.0 \
++    crate://crates.io/rawpointer/0.2.1 \
++    crate://crates.io/rayon/1.11.0 \
++    crate://crates.io/rayon-core/1.13.0 \
++    crate://crates.io/regex-automata/0.4.14 \
++    crate://crates.io/regex-syntax/0.8.10 \
++    crate://crates.io/rmp/0.8.15 \
++    crate://crates.io/rmp-serde/1.3.1 \
++    crate://crates.io/rustix/1.1.4 \
++    crate://crates.io/rustversion/1.0.22 \
++    crate://crates.io/ryu/1.0.23 \
++    crate://crates.io/safe-transmute/0.11.3 \
++    crate://crates.io/safe_arch/0.7.4 \
++    crate://crates.io/same-file/1.0.6 \
++    crate://crates.io/semver/1.0.27 \
++    crate://crates.io/serde/1.0.228 \
++    crate://crates.io/serde_core/1.0.228 \
++    crate://crates.io/serde_derive/1.0.228 \
++    crate://crates.io/serde_json/1.0.149 \
++    crate://crates.io/serde_repr/0.1.20 \
++    crate://crates.io/serde_spanned/1.0.4 \
++    crate://crates.io/serde_yaml_ng/0.10.0 \
++    crate://crates.io/sharded-slab/0.1.7 \
++    crate://crates.io/shell-words/1.1.1 \
++    crate://crates.io/shlex/1.3.0 \
++    crate://crates.io/signal-hook-registry/1.4.8 \
++    crate://crates.io/simba/0.9.1 \
++    crate://crates.io/simd-adler32/0.3.8 \
++    crate://crates.io/simple_logger/5.2.0 \
++    crate://crates.io/slab/0.4.12 \
++    crate://crates.io/smallvec/1.15.1 \
++    crate://crates.io/socket2/0.6.3 \
++    crate://crates.io/static_assertions/1.1.0 \
++    crate://crates.io/strsim/0.11.1 \
++    crate://crates.io/syn/2.0.117 \
++    crate://crates.io/system-deps/7.0.7 \
++    crate://crates.io/target-features/0.1.6 \
++    crate://crates.io/target-lexicon/0.13.3 \
++    crate://crates.io/tempfile/3.26.0 \
++    crate://crates.io/thiserror/2.0.18 \
++    crate://crates.io/thiserror-impl/2.0.18 \
++    crate://crates.io/thread_local/1.1.9 \
++    crate://crates.io/tiff/0.11.3 \
++    crate://crates.io/tokio/1.50.0 \
++    crate://crates.io/tokio-stream/0.1.18 \
++    crate://crates.io/toml/0.9.12+spec-1.1.0 \
++    crate://crates.io/toml_datetime/0.7.5+spec-1.1.0 \
++    crate://crates.io/toml_edit/0.23.10+spec-1.0.0 \
++    crate://crates.io/toml_parser/1.0.9+spec-1.1.0 \
++    crate://crates.io/toml_writer/1.0.6+spec-1.1.0 \
++    crate://crates.io/tracing/0.1.44 \
++    crate://crates.io/tracing-attributes/0.1.31 \
++    crate://crates.io/tracing-core/0.1.36 \
++    crate://crates.io/tracing-log/0.2.0 \
++    crate://crates.io/tracing-subscriber/0.3.22 \
++    crate://crates.io/typenum/1.19.0 \
++    crate://crates.io/uds_windows/1.2.1 \
++    crate://crates.io/unicode-ident/1.0.24 \
++    crate://crates.io/unicode-width/0.2.2 \
++    crate://crates.io/unicode-xid/0.2.6 \
++    crate://crates.io/unsafe-libyaml/0.2.11 \
++    crate://crates.io/uuid/1.22.0 \
++    crate://crates.io/valuable/0.1.1 \
++    crate://crates.io/vcpkg/0.2.15 \
++    crate://crates.io/version-compare/0.2.1 \
++    crate://crates.io/version_check/0.9.5 \
++    crate://crates.io/walkdir/2.5.0 \
++    crate://crates.io/wasi/0.11.1+wasi-snapshot-preview1 \
++    crate://crates.io/wasip2/1.0.2+wasi-0.2.9 \
++    crate://crates.io/wasip3/0.4.0+wasi-0.3.0-rc-2026-01-06 \
++    crate://crates.io/wasm-bindgen/0.2.114 \
++    crate://crates.io/wasm-bindgen-macro/0.2.114 \
++    crate://crates.io/wasm-bindgen-macro-support/0.2.114 \
++    crate://crates.io/wasm-bindgen-shared/0.2.114 \
++    crate://crates.io/wasm-encoder/0.244.0 \
++    crate://crates.io/wasm-metadata/0.244.0 \
++    crate://crates.io/wasmparser/0.244.0 \
++    crate://crates.io/weezl/0.1.12 \
++    crate://crates.io/wide/0.7.33 \
++    crate://crates.io/winapi-util/0.1.11 \
++    crate://crates.io/windows-core/0.62.2 \
++    crate://crates.io/windows-implement/0.60.2 \
++    crate://crates.io/windows-interface/0.59.3 \
++    crate://crates.io/windows-link/0.2.1 \
++    crate://crates.io/windows-result/0.4.1 \
++    crate://crates.io/windows-strings/0.5.1 \
++    crate://crates.io/windows-sys/0.61.2 \
++    crate://crates.io/winnow/0.7.15 \
++    crate://crates.io/wit-bindgen/0.51.0 \
++    crate://crates.io/wit-bindgen-core/0.51.0 \
++    crate://crates.io/wit-bindgen-rust/0.51.0 \
++    crate://crates.io/wit-bindgen-rust-macro/0.51.0 \
++    crate://crates.io/wit-component/0.244.0 \
++    crate://crates.io/wit-parser/0.244.0 \
++    crate://crates.io/xml-rs/0.8.28 \
++    crate://crates.io/yeslogic-fontconfig-sys/6.0.0 \
++    crate://crates.io/zbus/5.14.0 \
++    crate://crates.io/zbus_macros/5.14.0 \
++    crate://crates.io/zbus_names/4.3.1 \
++    crate://crates.io/zerocopy/0.8.42 \
++    crate://crates.io/zerocopy-derive/0.8.42 \
++    crate://crates.io/zmij/1.0.21 \
++    crate://crates.io/zune-core/0.5.1 \
++    crate://crates.io/zune-inflate/0.2.54 \
++    crate://crates.io/zune-jpeg/0.5.12 \
++    crate://crates.io/zvariant/5.10.0 \
++    crate://crates.io/zvariant_derive/5.10.0 \
++    crate://crates.io/zvariant_utils/3.3.0 \
 +"
 +
-+LDFLAGS:append:mipsarch =3D " -latomic"
-+LDFLAGS:append:powerpc =3D " -latomic"
-+LDFLAGS:append:powerpc64 =3D " -latomic"
-+LDFLAGS:append:riscv32 =3D " -latomic"
++SRC_URI[adler2-2.0.1.sha256sum] =3D "320119579fcad9c21884f5c4861d16174d0=
+e06250625266f50fe6898340abefa"
++SRC_URI[ahash-0.8.12.sha256sum] =3D "5a15f179cd60c4584b8a8c596927aadc462=
+e27f2ca70c04e0071964a73ba7a75"
++SRC_URI[aho-corasick-1.1.4.sha256sum] =3D "ddd31a130427c27518df266943a53=
+08ed92d4b226cc639f5a8f1002816174301"
++SRC_URI[allocator-api2-0.2.21.sha256sum] =3D "683d7910e743518b0e34f1186f=
+92494becacb047c7b6bf616c96772180fef923"
++SRC_URI[android_system_properties-0.1.5.sha256sum] =3D "819e7219dbd41043=
+ac279b19830f2efc897156490d7fd6ea916720117ee66311"
++SRC_URI[anyhow-1.0.102.sha256sum] =3D "7f202df86484c868dbad7eaa557ef785d=
+5c66295e41b460ef922eca0723b842c"
++SRC_URI[approx-0.5.1.sha256sum] =3D "cab112f0a86d568ea0e627cc1d6be74a1e9=
+cd55214684db5561995f6dad897c6"
++SRC_URI[async-broadcast-0.7.2.sha256sum] =3D "435a87a52755b8f27fcf321ac4=
+f04b2802e337c8c4872923137471ec39c37532"
++SRC_URI[async-channel-2.5.0.sha256sum] =3D "924ed96dd52d1b75e9c1a3e62757=
+15fd320f5f9439fb5a4a11fa51f4221158d2"
++SRC_URI[async-executor-1.14.0.sha256sum] =3D "c96bf972d85afc50bf5ab8fe2d=
+54d1586b4e0b46c97c50a0c9e71e2f7bcd812a"
++SRC_URI[async-fs-2.2.0.sha256sum] =3D "8034a681df4aed8b8edbd7fbe472401ec=
+f009251c8b40556b304567052e294c5"
++SRC_URI[async-global-executor-3.1.0.sha256sum] =3D "13f937e26114b9319306=
+5fd44f507aa2e9169ad0cdabbb996920b1fe1ddea7ba"
++SRC_URI[async-io-2.6.0.sha256sum] =3D "456b8a8feb6f42d237746d4b3e9a17849=
+4627745c3c56c6ea55d92ba50d026fc"
++SRC_URI[async-lock-3.4.2.sha256sum] =3D "290f7f2596bd5b78a9fec8088ccd891=
+80d7f9f55b94b0576823bbbdc72ee8311"
++SRC_URI[async-process-2.5.0.sha256sum] =3D "fc50921ec0055cdd8a16de48773b=
+feec5c972598674347252c0399676be7da75"
++SRC_URI[async-recursion-1.1.1.sha256sum] =3D "3b43422f69d8ff38f95f1b2bb7=
+6517c91589a924d1559a0e935d7c8ce0274c11"
++SRC_URI[async-signal-0.2.13.sha256sum] =3D "43c070bbf59cd3570b6b2dd54cd7=
+72527c7c3620fce8be898406dd3ed6adc64c"
++SRC_URI[async-task-4.7.1.sha256sum] =3D "8b75356056920673b02621b35afd0f7=
+dda9306d03c79a30f5c56c44cf256e3de"
++SRC_URI[async-trait-0.1.89.sha256sum] =3D "9035ad2d096bed7955a320ee7e223=
+0574d28fd3c3a0f186cbea1ff3c7eed5dbb"
++SRC_URI[atomic-waker-1.1.2.sha256sum] =3D "1505bd5d3d116872e7271a6d4e16d=
+81d0c8570876c8de68093a09ac269d8aac0"
++SRC_URI[autocfg-1.5.0.sha256sum] =3D "c08606f8c3cbf4ce6ec8e28fb0014a2c08=
+6708fe954eaa885384a6165172e7e8"
++SRC_URI[bit_field-0.10.3.sha256sum] =3D "1e4b40c7323adcfc0a41c4b88143ed5=
+8346ff65a288fc144329c5c45e05d70c6"
++SRC_URI[bitflags-2.11.0.sha256sum] =3D "843867be96c8daad0d758b57df9392b6=
+d8d271134fce549de6ce169ff98a92af"
++SRC_URI[bitreader-0.3.11.sha256sum] =3D "886559b1e163d56c765bc3a985febb4=
+eee8009f625244511d8ee3c432e08c066"
++SRC_URI[blocking-1.6.2.sha256sum] =3D "e83f8d02be6967315521be875afa792a3=
+16e28d57b5a2d401897e2a7921b7f21"
++SRC_URI[bon-3.9.0.sha256sum] =3D "2d13a61f2963b88eef9c1be03df65d42f6996d=
+feac1054870d950fcf66686f83"
++SRC_URI[bon-macros-3.9.0.sha256sum] =3D "d314cc62af2b6b0c65780555abb4d02=
+a03dd3b799cd42419044f0c38d99738c0"
++SRC_URI[bumpalo-3.20.2.sha256sum] =3D "5d20789868f4b01b2f2caec9f5c4e0213=
+b41e3e5702a50157d699ae31ced2fcb"
++SRC_URI[bytemuck-1.25.0.sha256sum] =3D "c8efb64bd706a16a1bdde310ae86b351=
+e4d21550d98d056f22f8a7f7a2183fec"
++SRC_URI[byteorder-1.5.0.sha256sum] =3D "1fd0f2584146f6f2ef48085050886acf=
+353beff7305ebd1ae69500e27c67f64b"
++SRC_URI[byteorder-lite-0.1.0.sha256sum] =3D "8f1fe948ff07f4bd06c30984e69=
+f5b4899c516a3ef74f34df92a2df2ab535495"
++SRC_URI[bytes-1.11.1.sha256sum] =3D "1e748733b7cbc798e1434b6ac524f0c1ff2=
+ab456fe201501e6497c8417a4fc33"
++SRC_URI[cairo-rs-0.22.0.sha256sum] =3D "5cc8d9aa793480744cd9a0524fef1a2e=
+197d9eaa0f739cde19d16aba530dcb95"
++SRC_URI[cairo-sys-rs-0.22.0.sha256sum] =3D "f8b4985713047f5faee02b8db6a6=
+ef32bbb50269ff53c1aee716d1d195b76d54"
++SRC_URI[cc-1.2.56.sha256sum] =3D "aebf35691d1bfb0ac386a69bac2fde4dd276fb=
+618cf8bf4f5318fe285e821bb2"
++SRC_URI[cfg-expr-0.20.7.sha256sum] =3D "3c6b04e07d8080154ed4ac03546d9a2b=
+303cc2fe1901ba0b35b301516e289368"
++SRC_URI[cfg-if-1.0.4.sha256sum] =3D "9330f8b2ff13f34540b44e946ef35111825=
+727b38d33286ef986142615121801"
++SRC_URI[cfg_aliases-0.2.1.sha256sum] =3D "613afe47fcd5fac7ccf1db93babcb0=
+82c5994d996f20b8b159f2ad1658eb5724"
++SRC_URI[chrono-0.4.44.sha256sum] =3D "c673075a2e0e5f4a1dde27ce9dee1ea455=
+8c7ffe648f576438a20ca1d2acc4b0"
++SRC_URI[color_quant-1.1.0.sha256sum] =3D "3d7b894f5411737b7867f482795592=
+4d7c254fc9f4d91a6aad6b097804b1018b"
++SRC_URI[concurrent-queue-2.5.0.sha256sum] =3D "4ca0197aee26d1ae37445ee53=
+2fefce43251d24cc7c166799f4d46817f1d3973"
++SRC_URI[core-foundation-sys-0.8.7.sha256sum] =3D "773648b94d0e5d620f64f2=
+80777445740e61fe701025087ec8b57f45c791888b"
++SRC_URI[crc32fast-1.5.0.sha256sum] =3D "9481c1c90cbf2ac953f07c8d4a58aa39=
+45c425b7185c9154d67a65e4230da511"
++SRC_URI[crossbeam-deque-0.8.6.sha256sum] =3D "9dd111b7b7f7d55b72c0a6ae36=
+1660ee5853c9af73f70c3c2ef6858b950e2e51"
++SRC_URI[crossbeam-epoch-0.9.18.sha256sum] =3D "5b82ac4a3c2ca9c3460964f02=
+0e1402edd5753411d7737aa39c3714ad1b5420e"
++SRC_URI[crossbeam-utils-0.8.21.sha256sum] =3D "d0a5c400df2834b80a4c3327b=
+3aad3a4c4cd4de0629063962b03235697506a28"
++SRC_URI[crunchy-0.2.4.sha256sum] =3D "460fbee9c2c2f33933d720630a6a0bac33=
+ba7053db5344fac858d4b8952d77d5"
++SRC_URI[darling-0.23.0.sha256sum] =3D "25ae13da2f202d56bd7f91c25fba009e7=
+717a1e4a1cc98a76d844b65ae912e9d"
++SRC_URI[darling_core-0.23.0.sha256sum] =3D "9865a50f7c335f53564bb694ef66=
+0825eb8610e0a53d3e11bf1b0d3df31e03b0"
++SRC_URI[darling_macro-0.23.0.sha256sum] =3D "ac3984ec7bd6cfa798e62b4a642=
+426a5be0e68f9401cfc2a01e3fa9ea2fcdb8d"
++SRC_URI[dlib-0.5.3.sha256sum] =3D "ab8ecd87370524b461f8557c119c405552c39=
+6ed91fc0a8eec68679eab26f94a"
++SRC_URI[dunce-1.0.5.sha256sum] =3D "92773504d58c093f6de2459af4af33faa518=
+c13451eb8f2b5698ed3d36e7c813"
++SRC_URI[either-1.15.0.sha256sum] =3D "48c757948c5ede0e46177b7add2e67155f=
+70e33c07fea8284df6576da70b3719"
++SRC_URI[encoding_rs-0.8.35.sha256sum] =3D "75030f3c4f45dafd7586dd6780965=
+a8c7e8e285a5ecb86713e63a79c5b2766f3"
++SRC_URI[endi-1.1.1.sha256sum] =3D "66b7e2430c6dff6a955451e2cfc438f09cea1=
+965a9d6f87f7e3b90decc014099"
++SRC_URI[enumflags2-0.7.12.sha256sum] =3D "1027f7680c853e056ebcec683615fb=
+6fbbc07dbaa13b4d5d9442b146ded4ecef"
++SRC_URI[enumflags2_derive-0.7.12.sha256sum] =3D "67c78a4d8fdf9953a5c9d45=
+8f9efe940fd97a0cab0941c075a813ac594733827"
++SRC_URI[enumn-0.1.14.sha256sum] =3D "2f9ed6b3789237c8a0c1c505af1c7eb2c56=
+0df6186f01b098c3a1064ea532f38"
++SRC_URI[env_filter-1.0.0.sha256sum] =3D "7a1c3cc8e57274ec99de65301228b53=
+7f1e4eedc1b8e0f9411c6caac8ae7308f"
++SRC_URI[env_logger-0.11.9.sha256sum] =3D "b2daee4ea451f429a58296525ddf28=
+b45a3b64f1acf6587e2067437bb11e218d"
++SRC_URI[equivalent-1.0.2.sha256sum] =3D "877a4ace8713b0bcf2a4e7eec82529c=
+029f1d0619886d18145fea96c3ffe5c0f"
++SRC_URI[errno-0.3.14.sha256sum] =3D "39cab71617ae0d63f51a36d69f866391735=
+b51691dbda63cf6f96d042b63efeb"
++SRC_URI[event-listener-5.4.1.sha256sum] =3D "e13b66accf52311f30a0db42147=
+dadea9850cb48cd070028831ae5f5d4b856ab"
++SRC_URI[event-listener-strategy-0.5.4.sha256sum] =3D "8be9f3dfaaffdae297=
+2880079a491a1a8bb7cbed0b8dd7a347f668b4150a3b93"
++SRC_URI[exr-1.74.0.sha256sum] =3D "4300e043a56aa2cb633c01af81ca8f699a321=
+879a7854d3896a0ba89056363be"
++SRC_URI[fallible_collections-0.5.1.sha256sum] =3D "8b3e85d14d419ba3e1db9=
+25519461c0d17a49bdd2d67ea6316fa965ca7acdf74"
++SRC_URI[fastrand-2.3.0.sha256sum] =3D "37909eebbb50d72f9059c3b6d82c0463f=
+2ff062c9e95845c43a6c9c0355411be"
++SRC_URI[fax-0.2.6.sha256sum] =3D "f05de7d48f37cd6730705cbca900770cab77a8=
+9f413d23e100ad7fad7795a0ab"
++SRC_URI[fax_derive-0.2.0.sha256sum] =3D "a0aca10fb742cb43f9e7bb8467c91aa=
+9bcb8e3ffbc6a6f7389bb93ffc920577d"
++SRC_URI[fdeflate-0.3.7.sha256sum] =3D "1e6853b52649d4ac5c0bd02320cddc5ba=
+956bdb407c4b75a2c6b75bf51500f8c"
++SRC_URI[fearless_simd-0.3.0.sha256sum] =3D "8fb2907d1f08b2b316b9223ced5b=
+0e89d87028ba8deae9764741dba8ff7f3903"
++SRC_URI[find-msvc-tools-0.1.9.sha256sum] =3D "5baebc0774151f905a1a2cc419=
+89300b1e6fbb29aff0ceffa1064fdd3088d582"
++SRC_URI[flate2-1.1.9.sha256sum] =3D "843fba2746e448b37e26a819579957415c8=
+cef339bf08564fe8b7ddbd959573c"
++SRC_URI[foldhash-0.1.5.sha256sum] =3D "d9c4f5dac5e15c24eb999c26181a6ca40=
+b39fe946cbe4c263c7209467bc83af2"
++SRC_URI[foreign-types-0.5.0.sha256sum] =3D "d737d9aa519fb7b749cbc3b962ed=
+cf310a8dd1f4b67c91c4f83975dbdd17d965"
++SRC_URI[foreign-types-macros-0.2.3.sha256sum] =3D "1a5c6c585bc94aaf2c7b5=
+1dd4c2ba22680844aba4c687be581871a6f518c5742"
++SRC_URI[foreign-types-shared-0.3.1.sha256sum] =3D "aa9a19cbb55df58761df4=
+9b23516a86d432839add4af60fc256da840f66ed35b"
++SRC_URI[four-cc-0.4.0.sha256sum] =3D "795cbfc56d419a7ce47ccbb7504dd9a5b7=
+c484c083c356e797de08bd988d9629"
++SRC_URI[futures-channel-0.3.32.sha256sum] =3D "07bbe89c50d7a535e539b8c17=
+bc0b49bdb77747034daa8087407d655f3f7cc1d"
++SRC_URI[futures-core-0.3.32.sha256sum] =3D "7e3450815272ef58cec6d564423f=
+6e755e25379b217b0bc688e295ba24df6b1d"
++SRC_URI[futures-executor-0.3.32.sha256sum] =3D "baf29c38818342a3b26b5b92=
+3639e7b1f4a61fc5e76102d4b1981c6dc7a7579d"
++SRC_URI[futures-io-0.3.32.sha256sum] =3D "cecba35d7ad927e23624b22ad55235=
+f2239cfa44fd10428eecbeba6d6a717718"
++SRC_URI[futures-lite-2.6.1.sha256sum] =3D "f78e10609fe0e0b3f4157ffab1876=
+319b5b0db102a2c60dc4626306dc46b44ad"
++SRC_URI[futures-macro-0.3.32.sha256sum] =3D "e835b70203e41293343137df5c0=
+664546da5745f82ec9b84d40be8336958447b"
++SRC_URI[futures-task-0.3.32.sha256sum] =3D "037711b3d59c33004d3856fbdc83=
+b99d4ff37a24768fa1be9ce3538a1cde4393"
++SRC_URI[futures-timer-3.0.3.sha256sum] =3D "f288b0a4f20f9a56b5d1da57e222=
+7c661b7b16168e2f72365f57b63326e29b24"
++SRC_URI[futures-util-0.3.32.sha256sum] =3D "389ca41296e6190b48053de0321d=
+02a77f32f8a5d2461dd38762c0593805c6d6"
++SRC_URI[gdk-pixbuf-0.22.0.sha256sum] =3D "25f420376dbee041b2db374ce45738=
+92a36222bb3f6c0c43e24f0d67eae9b646"
++SRC_URI[gdk-pixbuf-sys-0.22.0.sha256sum] =3D "48f31b37b1fc4b48b54f6b91b7=
+ef04c18e00b4585d98359dd7b998774bbd91fb"
++SRC_URI[gdk4-0.11.0.sha256sum] =3D "2e9a95621b043a35e70ea9f6da89e1a47165=
+8ee5771258874f000a11f6a9cb89"
++SRC_URI[gdk4-sys-0.11.0.sha256sum] =3D "4d322515677e4a12e10efe7e758743c3=
+e5faa56940237f19ba6890ba8edbbb76"
++SRC_URI[getopts-0.2.24.sha256sum] =3D "cfe4fbac503b8d1f88e6676011885f34b=
+7174f46e59956bba534ba83abded4df"
++SRC_URI[getrandom-0.3.4.sha256sum] =3D "899def5c37c4fd7b2664648c28120ece=
+c138e4d395b459e5ca34f9cce2dd77fd"
++SRC_URI[getrandom-0.4.1.sha256sum] =3D "139ef39800118c7683f2fd3c98c1b23c=
+09ae076556b435f8e9064ae108aaeeec"
++SRC_URI[gif-0.14.1.sha256sum] =3D "f5df2ba84018d80c213569363bdcd0c64e693=
+3c67fe4c1d60ecf822971a3c35e"
++SRC_URI[gio-0.22.2.sha256sum] =3D "816b6743c46b217aa8fba679095ac6f2162fd=
+53259dc8f186fcdbff9c555db03"
++SRC_URI[gio-sys-0.22.0.sha256sum] =3D "64729ba2772c080448f9f966dba8f4456=
+beeb100d8c28a865ef8a0f2ef4987e1"
++SRC_URI[gio-unix-0.22.0.sha256sum] =3D "69db2f0bb80c9d97c315720c395db76d=
+4649969bce3a130aea6c5c9d757bf80f"
++SRC_URI[gio-unix-sys-0.22.0.sha256sum] =3D "44bab97ce39112040216e268f074=
+645f50b31caeb53af708ab5d7e4e67f0dbfd"
++SRC_URI[glib-0.22.2.sha256sum] =3D "16877c6e619447e0bcb6de326a42a8bd02b3=
+6328cfeeda210135425e576efa3d"
++SRC_URI[glib-macros-0.22.2.sha256sum] =3D "bda575994e3689b1bc12f89c3df62=
+1ead46ff292623b76b4710a3a5b79be54bb"
++SRC_URI[glib-sys-0.22.0.sha256sum] =3D "48073e3b228419faa80b9b7f7122759d=
+4ab2f44cd52a065fde7ca08f34c03147"
++SRC_URI[gobject-sys-0.22.0.sha256sum] =3D "18eda93f09d3778f38255b231b17e=
+f67195013a592c91624a4daf8bead875565"
++SRC_URI[gufo-0.4.1.sha256sum] =3D "99a86855fe55303654418ebd8b07312057a32=
+b5887fb768a38170fd54ed944db"
++SRC_URI[gufo-common-1.1.0.sha256sum] =3D "9f23bc0d0e791259ce4fe703c4d988=
+c64317e33477bc4d1d7526ab8eb9fcaab6"
++SRC_URI[gufo-exif-0.4.0.sha256sum] =3D "ad61fccc591119491879e7bee63ebbfb=
+d27811b35367b4728a857119fde78843"
++SRC_URI[gufo-jpeg-0.4.0.sha256sum] =3D "5606b919ea2538d6e761781be87eaf51=
+86427c3d64849c1013359aa3681e68d2"
++SRC_URI[gufo-png-0.4.1.sha256sum] =3D "aa9d6a919b2c9f4b5f344bf0e2991b08b=
+23ab69ab336b65195657a6c624fb8a5"
++SRC_URI[gufo-tiff-0.4.0.sha256sum] =3D "51743619d12e8ead9fdd3cdd2ad3d0ed=
+994a538542857f5115d74d6547a0083b"
++SRC_URI[gufo-webp-0.4.0.sha256sum] =3D "218ea90042f1766b38b487dfbb261b6f=
+21636e5cfd570e1ac6709119dae92fe2"
++SRC_URI[gufo-xmp-0.4.0.sha256sum] =3D "020d604dbaf16f257f9d8bf7c11095510=
+89be459ad8dc54c4205d28fe1688399"
++SRC_URI[half-2.7.1.sha256sum] =3D "6ea2d84b969582b4b1864a92dc5d27cd2b77b=
+622a8d79306834f1be5ba20d84b"
++SRC_URI[hashbrown-0.14.5.sha256sum] =3D "e5274423e17b7c9fc20b6e7e208532f=
+9b19825d82dfd615708b70edd83df41f1"
++SRC_URI[hashbrown-0.15.5.sha256sum] =3D "9229cfe53dfd69f0609a49f65461bd9=
+3001ea1ef889cd5529dd176593f5338a1"
++SRC_URI[hashbrown-0.16.1.sha256sum] =3D "841d1cc9bed7f9236f321df97703037=
+3f4a4163ae1a7dbfe1a51a2c1a51d9100"
++SRC_URI[hayro-jpeg2000-0.3.4.sha256sum] =3D "c1a74cfc18c0093ef8009a0d6c1=
+ba3024df0cce228503a14c1372e1e23eed43e"
++SRC_URI[heck-0.5.0.sha256sum] =3D "2304e00983f87ffb38b55b444b5e3b60a884b=
+5d30c0fca7d82fe33449bbe55ea"
++SRC_URI[hermit-abi-0.5.2.sha256sum] =3D "fc0fef456e4baa96da950455cd02c08=
+1ca953b141298e41db3fc7e36b1da849c"
++SRC_URI[hex-0.4.3.sha256sum] =3D "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e=
+486a595ed5fd8f86ba55232a70"
++SRC_URI[iana-time-zone-0.1.65.sha256sum] =3D "e31bc9ad994ba00e440a8aa5c9=
+ef0ec67d5cb5e5cb0cc7f8b744a35b389cc470"
++SRC_URI[iana-time-zone-haiku-0.1.2.sha256sum] =3D "f31827a206f56af32e590=
+ba56d5d2d085f558508192593743f16b2306495269f"
++SRC_URI[id-arena-2.3.0.sha256sum] =3D "3d3067d79b975e8844ca9eb072e16b31c=
+3c1c36928edf9c6789548c524d0d954"
++SRC_URI[ident_case-1.0.1.sha256sum] =3D "b9e0384b61958566e926dc50660321d=
+12159025e767c18e043daf26b70104c39"
++SRC_URI[image-0.25.10.sha256sum] =3D "85ab80394333c02fe689eaf900ab500fbd=
+0c2213da414687ebf995a65d5a6104"
++SRC_URI[image-extras-0.1.0.sha256sum] =3D "86d29ba92ef6970a2685cc758b455=
+d190842b8b9e96c865ffd31cdb9954b7548"
++SRC_URI[image-webp-0.2.4.sha256sum] =3D "525e9ff3e1a4be2fbea1fdf0e98686a=
+6d98b4d8f937e1bf7402245af1909e8c3"
++SRC_URI[indexmap-2.13.0.sha256sum] =3D "7714e70437a7dc3ac8eb7e6f8df75fd8=
+eb422675fc7678aff7364301092b1017"
++SRC_URI[itoa-1.0.17.sha256sum] =3D "92ecc6618181def0457392ccd0ee51198e06=
+5e016d1d527a7ac1b6dc7c1f09d2"
++SRC_URI[jiff-0.2.23.sha256sum] =3D "1a3546dc96b6d42c5f24902af9e2538e82e3=
+9ad350b0c766eb3fbf2d8f3d8359"
++SRC_URI[jiff-static-0.2.23.sha256sum] =3D "2a8c8b344124222efd714b73bb41f=
+8b5120b27a7cc1c75593a6ff768d9d05aa4"
++SRC_URI[jobserver-0.1.34.sha256sum] =3D "9afb3de4395d6b3e67a780b6de64b51=
+c978ecf11cb9a462c66be7d4ca9039d33"
++SRC_URI[jpeg-decoder-0.3.2.sha256sum] =3D "00810f1d8b74be64b13dbf3db89ac=
+67740615d6c891f0e7b6179326533011a07"
++SRC_URI[jpeg-encoder-0.7.0.sha256sum] =3D "0b0b36cbb4e6704f12f5b5d7b01da=
+c593982c6550859ebd5a66fb15c9ea27fd5"
++SRC_URI[jpegxl-rs-0.12.0+libjxl-0.11.1.sha256sum] =3D "4bc73de4d7188a80b=
+adb62062780510e402a17947f663e50f6390ebb6e7b90ed"
++SRC_URI[jpegxl-sys-0.12.0+libjxl-0.11.1.sha256sum] =3D "d07cb5b362c69ced=
+9ebfcdb3301dc6cadf7d186a3e6a3d8f4fcb9094a83ab408"
++SRC_URI[js-sys-0.3.91.sha256sum] =3D "b49715b7073f385ba4bc528e5747d02e66=
+cb39c6146efb66b781f131f0fb399c"
++SRC_URI[lazy_static-1.5.0.sha256sum] =3D "bbd2bcb4c963f2ddae06a2efc7e9f3=
+591312473c50c6685e1f298068316e66fe"
++SRC_URI[lcms2-6.1.1.sha256sum] =3D "b75877b724685dd49310bdbadbf973fc69b1=
+d01992a6d4a861b928fc3943f87b"
++SRC_URI[lcms2-sys-4.0.6.sha256sum] =3D "1c2604b23848ca80b2add60f0fb2270f=
+d980e622c25029b6597fa01cfd5f8d5f"
++SRC_URI[leb128fmt-0.1.0.sha256sum] =3D "09edd9e8b54e49e587e4f6295a7d29c3=
+ea94d469cb40ab8ca70b288248a81db2"
++SRC_URI[lebe-0.5.3.sha256sum] =3D "7a79a3332a6609480d7d0c9eab957bca6b455=
+b91bb84e66d19f5ff66294b85b8"
++SRC_URI[libc-0.2.183.sha256sum] =3D "b5b646652bf6661599e1da8901b3b952289=
+6f01e736bad5f723fe7a3a27f899d"
++SRC_URI[libheif-rs-2.7.0.sha256sum] =3D "39c4e7037b43e1431961745e5c4004e=
+edae3735a4fddd687810ff9d70beb9882"
++SRC_URI[libheif-sys-5.2.0+1.21.2.sha256sum] =3D "107c0d813a0cf5ddf7af2c5=
+8a60611f18efdb2830e84d9b37580fb20e6e27a2b"
++SRC_URI[libloading-0.8.9.sha256sum] =3D "d7c4b02199fee7c5d21a5ae7d8cfa79=
+a6ef5bb2fc834d6e9058e89c825efdc55"
++SRC_URI[libopenraw-0.4.0-alpha.12.sha256sum] =3D "cb7af949edc773f32dd45f=
+f5a0692860b619b03d2fa3741c1db1acfd1db3a553"
++SRC_URI[librsvg-rebind-0.3.0.sha256sum] =3D "8e29b54b27b49901092b20ef117=
+7d42a068beec0ce5f3344a664118d586d2443"
++SRC_URI[librsvg-rebind-sys-0.3.0.sha256sum] =3D "4ab4a782ee37dfa57e9f03a=
+169cc7ea652d20164e9e023f3df355d5d8b4e6c34"
++SRC_URI[libseccomp-0.4.0.sha256sum] =3D "0e5310a2c5b6ffbc094b5f70a2ca7b7=
+9ed36ad90e6f90994b166489a1bce3fcc"
++SRC_URI[libseccomp-sys-0.3.0.sha256sum] =3D "60276e2d41bbb68b323e566047a=
+1bfbf952050b157d8b5cdc74c07c1bf4ca3b6"
++SRC_URI[linux-raw-sys-0.12.1.sha256sum] =3D "32a66949e030da00e8c7d4434b2=
+51670a91556f4144941d37452769c25d58a53"
++SRC_URI[log-0.4.29.sha256sum] =3D "5e5032e24019045c762d3c0f28f5b6b8bbf38=
+563a65908389bf7978758920897"
++SRC_URI[matchers-0.2.0.sha256sum] =3D "d1525a2a28c7f4fa0fc98bb91ae755d1e=
+2d1505079e05539e35bc876b5d65ae9"
++SRC_URI[matrixmultiply-0.3.10.sha256sum] =3D "a06de3016e9fae57a36fd14dba=
+131fccf49f74b40b7fbdb472f96e361ec71a08"
++SRC_URI[memchr-2.8.0.sha256sum] =3D "f8ca58f447f06ed17d5fc4043ce1b10dd20=
+5e060fb3ce5b979b8ed8e59ff3f79"
++SRC_URI[memfd-0.6.5.sha256sum] =3D "ad38eb12aea514a0466ea40a80fd8cc83637=
+065948eb4a426e4aa46261175227"
++SRC_URI[memmap2-0.9.11.sha256sum] =3D "d1219ed1b7f229ee7104d281dd01d6802=
+fe28bb6e95d292942c4daacdeb798c0"
++SRC_URI[memoffset-0.9.1.sha256sum] =3D "488016bfae457b036d996092f6cb4486=
+77611ce4449e970ceaf42695203f218a"
++SRC_URI[miniz_oxide-0.8.9.sha256sum] =3D "1fa76a2c86f704bdb222d66965fb3d=
+63269ce38518b83cb0575fca855ebb6316"
++SRC_URI[miniz_oxide-0.9.0.sha256sum] =3D "5faa9f23e86bd5768d76def086192f=
+f5f869fb088da12a976ea21e9796b975f6"
++SRC_URI[mio-1.1.1.sha256sum] =3D "a69bcab0ad47271a0234d9422b131806bf3968=
+021e5dc9328caf2d4cd58557fc"
++SRC_URI[moxcms-0.8.1.sha256sum] =3D "bb85c154ba489f01b25c0d36ae69a87e4a1=
+c73a72631fc6c0eb6dde34a73e44b"
++SRC_URI[multiversion-0.8.0.sha256sum] =3D "7edb7f0ff51249dfda9ab96b58236=
+95e15a052dc15074c9dbf3d118afaf2c201"
++SRC_URI[multiversion-macros-0.8.0.sha256sum] =3D "b093064383341eb3271f42=
+e381cb8f10a01459478446953953c75d24bd339fc0"
++SRC_URI[nalgebra-0.33.2.sha256sum] =3D "26aecdf64b707efd1310e3544d709c5c=
+0ac61c13756046aaaba41be5c4f66a3b"
++SRC_URI[nalgebra-macros-0.2.2.sha256sum] =3D "254a5372af8fc138e36684761d=
+3c0cdb758a4410e938babcff1c860ce14ddbfc"
++SRC_URI[nix-0.30.1.sha256sum] =3D "74523f3a35e05aba87a1d978330aef40f67b0=
+304ac79c1c00b294c9830543db6"
++SRC_URI[nu-ansi-term-0.50.3.sha256sum] =3D "7957b9740744892f114936ab4a57=
+b3f487491bbeafaf8083688b16841a4240e5"
++SRC_URI[num-bigint-0.4.6.sha256sum] =3D "a5e44f723f1133c9deac646763579fd=
+b3ac745e418f2a7af9cd0c431da1f20b9"
++SRC_URI[num-complex-0.4.6.sha256sum] =3D "73f88a1307638156682bada9d76041=
+35552957b7818057dcef22705b4d509495"
++SRC_URI[num-integer-0.1.46.sha256sum] =3D "7969661fd2958a5cb096e56c8e1ad=
+0444ac2bbcd0061bd28660485a44879858f"
++SRC_URI[num-rational-0.4.2.sha256sum] =3D "f83d14da390562dca69fc84082e73=
+e548e1ad308d24accdedd2720017cb37824"
++SRC_URI[num-traits-0.2.19.sha256sum] =3D "071dfc062690e90b734c0b2273ce72=
+ad0ffa95f0c74596bc250dcfd960262841"
++SRC_URI[num_enum-0.7.5.sha256sum] =3D "b1207a7e20ad57b847bbddc6776b96842=
+0d38292bbfe2089accff5e19e82454c"
++SRC_URI[num_enum_derive-0.7.5.sha256sum] =3D "ff32365de1b6743cb203b71078=
+8263c44a03de03802daf96092f2da4fe6ba4d7"
++SRC_URI[once_cell-1.21.3.sha256sum] =3D "42f5e15c9953c5e4ccceeb2e7382a71=
+6482c34515315f7b03532b8b4e8393d2d"
++SRC_URI[ordered-stream-0.2.0.sha256sum] =3D "9aa2b01e1d916879f73a53d01d1=
+d6cee68adbb31d6d9177a8cfce093cced1d50"
++SRC_URI[pango-0.22.0.sha256sum] =3D "25d8f224eddef627b896d2f7b05725b3fae=
+dbd140e0e8343446f0d34f34238ee"
++SRC_URI[pango-sys-0.22.0.sha256sum] =3D "bbd111a20ca90fedf03e09c59783c67=
+9c00900f1d8491cca5399f5e33609d5d6"
++SRC_URI[parking-2.2.1.sha256sum] =3D "f38d5652c16fde515bb1ecef450ab0f6a2=
+19d619a7274976324d5e377f7dceba"
++SRC_URI[paste-1.0.15.sha256sum] =3D "57c0d7b74b563b49d38dae00a0c37d4d6de=
+9b432382b2892f0574ddcae73fd0a"
++SRC_URI[pin-project-lite-0.2.17.sha256sum] =3D "a89322df9ebe1c1578d689c9=
+2318e070967d1042b512afbe49518723f4e6d5cd"
++SRC_URI[piper-0.2.5.sha256sum] =3D "c835479a4443ded371d6c535cbfd8d31ad92=
+c5d23ae9770a61bc155e4992a3c1"
++SRC_URI[pkg-config-0.3.32.sha256sum] =3D "7edddbd0b52d732b21ad9a5fab5c70=
+4c14cd949e5e9a1ec5929a24fded1b904c"
++SRC_URI[png-0.18.1.sha256sum] =3D "60769b8b31b2a9f263dae2776c37b1b28ae24=
+6943cf719eb6946a1db05128a61"
++SRC_URI[polling-3.11.0.sha256sum] =3D "5d0e4f59085d47d8241c88ead0f274e8a=
+0cb551f3625263c05eb8dd897c34218"
++SRC_URI[portable-atomic-1.13.1.sha256sum] =3D "c33a9471896f1c69cecef8d20=
+cbe2f7accd12527ce60845ff44c153bb2a21b49"
++SRC_URI[portable-atomic-util-0.2.5.sha256sum] =3D "7a9db96d7fa8782dd8c15=
+ce32ffe8680bbd1e978a43bf51a34d39483540495f5"
++SRC_URI[prettyplease-0.2.37.sha256sum] =3D "479ca8adacdd7ce8f1fb39ce9ecc=
+cbfe93a3f1344b3d0d97f20bc0196208f62b"
++SRC_URI[proc-macro-crate-3.4.0.sha256sum] =3D "219cb19e96be00ab2e37d6e29=
+9658a0cfa83e52429179969b0f0121b4ac46983"
++SRC_URI[proc-macro2-1.0.106.sha256sum] =3D "8fd00f0bb2e90d81d1044c2b3261=
+7f68fcb9fa3bb7640c23e9c748e53fb30934"
++SRC_URI[pxfm-0.1.28.sha256sum] =3D "b5a041e753da8b807c9255f28de81879c78c=
+876392ff2469cde94799b2896b9d"
++SRC_URI[qoi-0.4.1.sha256sum] =3D "7f6d64c71eb498fe9eae14ce4ec935c555749a=
+ef511cca85b5568910d6e48001"
++SRC_URI[quick-error-2.0.1.sha256sum] =3D "a993555f31e5a609f617c12db6250d=
+edcac1b0a85076912c436e6fc9b2c8e6a3"
++SRC_URI[quote-1.0.45.sha256sum] =3D "41f2619966050689382d2b44f664f4bc593=
+e129785a36d6ee376ddf37259b924"
++SRC_URI[r-efi-5.3.0.sha256sum] =3D "69cdb34c158ceb288df11e18b4bd39de994f=
+6657d83847bdffdbd7f346754b0f"
++SRC_URI[rawpointer-0.2.1.sha256sum] =3D "60a357793950651c4ed0f3f52338f53=
+b2f809f32d83a07f72909fa13e4c6c1e3"
++SRC_URI[rayon-1.11.0.sha256sum] =3D "368f01d005bf8fd9b1206fb6fa653e6c4a8=
+1ceb1466406b81792d87c5677a58f"
++SRC_URI[rayon-core-1.13.0.sha256sum] =3D "22e18b0f0062d30d4230b2e85ff77f=
+dfe4326feb054b9783a3460d8435c8ab91"
++SRC_URI[regex-automata-0.4.14.sha256sum] =3D "6e1dd4122fc1595e8162618945=
+476892eefca7b88c52820e74af6262213cae8f"
++SRC_URI[regex-syntax-0.8.10.sha256sum] =3D "dc897dd8d9e8bd1ed8cdad82b596=
+6c3e0ecae09fb1907d58efaa013543185d0a"
++SRC_URI[rmp-0.8.15.sha256sum] =3D "4ba8be72d372b2c9b35542551678538b562e7=
+cf86c3315773cae48dfbfe7790c"
++SRC_URI[rmp-serde-1.3.1.sha256sum] =3D "72f81bee8c8ef9b577d1681a70ebbc96=
+2c232461e397b22c208c43c04b67a155"
++SRC_URI[rustix-1.1.4.sha256sum] =3D "b6fe4565b9518b83ef4f91bb47ce29620ca=
+828bd32cb7e408f0062e9930ba190"
++SRC_URI[rustversion-1.0.22.sha256sum] =3D "b39cdef0fa800fc44525c84ccb54a=
+029961a8215f9619753635a9c0d2538d46d"
++SRC_URI[ryu-1.0.23.sha256sum] =3D "9774ba4a74de5f7b1c1451ed6cd5285a32edd=
+b5cccb8cc655a4e50009e06477f"
++SRC_URI[safe-transmute-0.11.3.sha256sum] =3D "3944826ff8fa8093089aba3acb=
+4ef44b9446a99a16f3bf4e74af3f77d340ab7d"
++SRC_URI[safe_arch-0.7.4.sha256sum] =3D "96b02de82ddbe1b636e6170c21be6222=
+23aea188ef2e139be0a5b219ec215323"
++SRC_URI[same-file-1.0.6.sha256sum] =3D "93fc1dc3aaa9bfed95e02e6eadabb4ba=
+f7e3078b0bd1b4d7b6b0b68378900502"
++SRC_URI[semver-1.0.27.sha256sum] =3D "d767eb0aabc880b29956c35734170f26ed=
+551a859dbd361d140cdbeca61ab1e2"
++SRC_URI[serde-1.0.228.sha256sum] =3D "9a8e94ea7f378bd32cbbd37198a4a91436=
+180c5bb472411e48b5ec2e2124ae9e"
++SRC_URI[serde_core-1.0.228.sha256sum] =3D "41d385c7d4ca58e59fc732af25c39=
+83b67ac852c1a25000afe1175de458b67ad"
++SRC_URI[serde_derive-1.0.228.sha256sum] =3D "d540f220d3187173da220f885ab=
+66608367b6574e925011a9353e4badda91d79"
++SRC_URI[serde_json-1.0.149.sha256sum] =3D "83fc039473c5595ace860d8c4fafa=
+220ff474b3fc6bfdb4293327f1a37e94d86"
++SRC_URI[serde_repr-0.1.20.sha256sum] =3D "175ee3e80ae9982737ca543e961330=
+87cbd9a485eecc3bc4de9c1a37b47ea59c"
++SRC_URI[serde_spanned-1.0.4.sha256sum] =3D "f8bbf91e5a4d6315eee45e704372=
+590b30e260ee83af6639d64557f51b067776"
++SRC_URI[serde_yaml_ng-0.10.0.sha256sum] =3D "7b4db627b98b36d4203a7b458cf=
+3573730f2bb591b28871d916dfa9efabfd41f"
++SRC_URI[sharded-slab-0.1.7.sha256sum] =3D "f40ca3c46823713e0d4209592e8d6=
+e826aa57e928f09752619fc696c499637f6"
++SRC_URI[shell-words-1.1.1.sha256sum] =3D "dc6fe69c597f9c37bfeeeeeb33da35=
+30379845f10be461a66d16d03eca2ded77"
++SRC_URI[shlex-1.3.0.sha256sum] =3D "0fda2ff0d084019ba4d7c6f371c95d8fd75c=
+e3524c3cb8fb653a3023f6323e64"
++SRC_URI[signal-hook-registry-1.4.8.sha256sum] =3D "c4db69cba1110affc0e9f=
+7bcd48bbf87b3f4fc7c61fc9155afd4c469eb3d6c1b"
++SRC_URI[simba-0.9.1.sha256sum] =3D "c99284beb21666094ba2b75bbceda012e610=
+f5479dfcc2d6e2426f53197ffd95"
++SRC_URI[simd-adler32-0.3.8.sha256sum] =3D "e320a6c5ad31d271ad523dcf3ad13=
+e2767ad8b1cb8f047f75a8aeaf8da139da2"
++SRC_URI[simple_logger-5.2.0.sha256sum] =3D "c7038d0e96661bf9ce647e1a6f6e=
+f6d6f3663f66d9bf741abf14ba4876071c17"
++SRC_URI[slab-0.4.12.sha256sum] =3D "0c790de23124f9ab44544d7ac05d60440adc=
+586479ce501c1d6d7da3cd8c9cf5"
++SRC_URI[smallvec-1.15.1.sha256sum] =3D "67b1b7a3b5fe4f1376887184045fcf45=
+c69e92af734b7aaddc05fb777b6fbd03"
++SRC_URI[socket2-0.6.3.sha256sum] =3D "3a766e1110788c36f4fa1c2b71b387a781=
+5aa65f88ce0229841826633d93723e"
++SRC_URI[static_assertions-1.1.0.sha256sum] =3D "a2eb9349b6444b326872e140=
+eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
++SRC_URI[strsim-0.11.1.sha256sum] =3D "7da8b5736845d9f2fcb837ea5d9e262856=
+4b3b043a70948a3f0b778838c5fb4f"
++SRC_URI[syn-2.0.117.sha256sum] =3D "e665b8803e7b1d2a727f4023456bbbbe74da=
+67099c585258af0ad9c5013b9b99"
++SRC_URI[system-deps-7.0.7.sha256sum] =3D "48c8f33736f986f16d69b6cb8b03f5=
+5ddcad5c41acc4ccc39dd88e84aa805e7f"
++SRC_URI[target-features-0.1.6.sha256sum] =3D "c1bbb9f3c5c463a01705937a24=
+fdabc5047929ac764b2d5b9cf681c1f5041ed5"
++SRC_URI[target-lexicon-0.13.3.sha256sum] =3D "df7f62577c25e07834649fc3b3=
+9fafdc597c0a3527dc1c60129201ccfcbaa50c"
++SRC_URI[tempfile-3.26.0.sha256sum] =3D "82a72c767771b47409d2345987fda862=
+8641887d5466101319899796367354a0"
++SRC_URI[thiserror-2.0.18.sha256sum] =3D "4288b5bcbc7920c07a1149a35cf9590=
+a2aa808e0bc1eafaade0b80947865fbc4"
++SRC_URI[thiserror-impl-2.0.18.sha256sum] =3D "ebc4ee7f67670e9b64d05fa425=
+3e753e016c6c95ff35b89b7941d6b856dec1d5"
++SRC_URI[thread_local-1.1.9.sha256sum] =3D "f60246a4944f24f6e018aa17cdeff=
+b7818b76356965d03b07d6a9886e8962185"
++SRC_URI[tiff-0.11.3.sha256sum] =3D "b63feaf3343d35b6ca4d50483f94843803b0=
+f51634937cc2ec519fc32232bc52"
++SRC_URI[tokio-1.50.0.sha256sum] =3D "27ad5e34374e03cfffefc301becb44e9dc3=
+c17584f414349ebe29ed26661822d"
++SRC_URI[tokio-stream-0.1.18.sha256sum] =3D "32da49809aab5c3bc678af03902d=
+4ccddea2a87d028d86392a4b1560c6906c70"
++SRC_URI[toml-0.9.12+spec-1.1.0.sha256sum] =3D "cf92845e79fc2e2def6a5d828=
+f0801e29a2f8acc037becc5ab08595c7d5e9863"
++SRC_URI[toml_datetime-0.7.5+spec-1.1.0.sha256sum] =3D "92e1cfed4a3038bc5=
+a127e35a2d360f145e1f4b971b551a2ba5fd7aedf7e1347"
++SRC_URI[toml_edit-0.23.10+spec-1.0.0.sha256sum] =3D "84c8b9f757e028cee9f=
+a244aea147aab2a9ec09d5325a9b01e0a49730c2b5269"
++SRC_URI[toml_parser-1.0.9+spec-1.1.0.sha256sum] =3D "702d4415e08923e7e1e=
+f96cd5727c0dfed80b4d2fa25db9647fe5eb6f7c5a4c4"
++SRC_URI[toml_writer-1.0.6+spec-1.1.0.sha256sum] =3D "ab16f14aed21ee8bfd8=
+ec22513f7287cd4a91aa92e44edfe2c17ddd004e92607"
++SRC_URI[tracing-0.1.44.sha256sum] =3D "63e71662fa4b2a2c3a26f570f037eb95b=
+b1f85397f3cd8076caed2f026a6d100"
++SRC_URI[tracing-attributes-0.1.31.sha256sum] =3D "7490cfa5ec963746568740=
+651ac6781f701c9c5ea257c58e057f3ba8cf69e8da"
++SRC_URI[tracing-core-0.1.36.sha256sum] =3D "db97caf9d906fbde555dd62fa95d=
+dba9eecfd14cb388e4f491a66d74cd5fb79a"
++SRC_URI[tracing-log-0.2.0.sha256sum] =3D "ee855f1f400bd0e5c02d150ae5de38=
+40039a3f54b025156404e34c23c03f47c3"
++SRC_URI[tracing-subscriber-0.3.22.sha256sum] =3D "2f30143827ddab0d256fd8=
+43b7a66d164e9f271cfa0dde49142c5ca0ca291f1e"
++SRC_URI[typenum-1.19.0.sha256sum] =3D "562d481066bde0658276a35467c4af00b=
+dc6ee726305698a55b86e61d7ad82bb"
++SRC_URI[uds_windows-1.2.1.sha256sum] =3D "f2f6fb2847f6742cd76af783a2a2c4=
+9e9375d0a111c7bef6f71cd9e738c72d6e"
++SRC_URI[unicode-ident-1.0.24.sha256sum] =3D "e6e4313cd5fcd3dad5cafa17970=
+2e2b244f760991f45397d14d4ebf38247da75"
++SRC_URI[unicode-width-0.2.2.sha256sum] =3D "b4ac048d71ede7ee76d585517add=
+45da530660ef4390e49b098733c6e897f254"
++SRC_URI[unicode-xid-0.2.6.sha256sum] =3D "ebc1c04c71510c7f702b52b7c35073=
+4c9ff1295c464a03335b00bb84fc54f853"
++SRC_URI[unsafe-libyaml-0.2.11.sha256sum] =3D "673aac59facbab8a9007c7f610=
+8d11f63b603f7cabff99fabf650fea5c32b861"
++SRC_URI[uuid-1.22.0.sha256sum] =3D "a68d3c8f01c0cfa54a75291d83601161799e=
+4a89a39e0929f4b0354d88757a37"
++SRC_URI[valuable-0.1.1.sha256sum] =3D "ba73ea9cf16a25df0c8caa16c51acb937=
+d5712a8429db78a3ee29d5dcacd3a65"
++SRC_URI[vcpkg-0.2.15.sha256sum] =3D "accd4ea62f7bb7a82fe23066fb0957d48ef=
+677f6eeb8215f372f52e48bb32426"
++SRC_URI[version-compare-0.2.1.sha256sum] =3D "03c2856837ef78f57382f06b2b=
+8563a2f512f7185d732608fd9176cb3b8edf0e"
++SRC_URI[version_check-0.9.5.sha256sum] =3D "0b928f33d975fc6ad9f86c8f2838=
+53ad26bdd5b10b7f1542aa2fa15e2289105a"
++SRC_URI[walkdir-2.5.0.sha256sum] =3D "29790946404f91d9c5d06f9874efddea1d=
+c06c5efe94541a7d6863108e3a5e4b"
++SRC_URI[wasi-0.11.1+wasi-snapshot-preview1.sha256sum] =3D "ccf3ec651a847=
+eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
++SRC_URI[wasip2-1.0.2+wasi-0.2.9.sha256sum] =3D "9517f9239f02c069db75e65f=
+174b3da828fe5f5b945c4dd26bd25d89c03ebcf5"
++SRC_URI[wasip3-0.4.0+wasi-0.3.0-rc-2026-01-06.sha256sum] =3D "5428f8bf88=
+ea5ddc08faddef2ac4a67e390b88186c703ce6dbd955e1c145aca5"
++SRC_URI[wasm-bindgen-0.2.114.sha256sum] =3D "6532f9a5c1ece3798cb1c2cfdba=
+640b9b3ba884f5db45973a6f442510a87d38e"
++SRC_URI[wasm-bindgen-macro-0.2.114.sha256sum] =3D "18a2d50fcf105fb33bb15=
+f00e7a77b772945a2ee45dcf454961fd843e74c18e6"
++SRC_URI[wasm-bindgen-macro-support-0.2.114.sha256sum] =3D "03ce4caeaac54=
+7cdf713d280eda22a730824dd11e6b8c3ca9e42247b25c631e3"
++SRC_URI[wasm-bindgen-shared-0.2.114.sha256sum] =3D "75a326b8c223ee17883a=
+4251907455a2431acc2791c98c26279376490c378c16"
++SRC_URI[wasm-encoder-0.244.0.sha256sum] =3D "990065f2fe63003fe337b932cfb=
+5e3b80e0b4d0f5ff650e6985b1048f62c8319"
++SRC_URI[wasm-metadata-0.244.0.sha256sum] =3D "bb0e353e6a2fbdc176932bbaab=
+493762eb1255a7900fe0fea1a2f96c296cc909"
++SRC_URI[wasmparser-0.244.0.sha256sum] =3D "47b807c72e1bac69382b3a6fb3dbe=
+8ea4c0ed87ff5629b8685ae6b9a611028fe"
++SRC_URI[weezl-0.1.12.sha256sum] =3D "a28ac98ddc8b9274cb41bb4d9d4d5c425b6=
+020c50c46f25559911905610b4a88"
++SRC_URI[wide-0.7.33.sha256sum] =3D "0ce5da8ecb62bcd8ec8b7ea19f69a51275e9=
+1299be594ea5cc6ef7819e16cd03"
++SRC_URI[winapi-util-0.1.11.sha256sum] =3D "c2a7b1c03c876122aa43f3020e6c3=
+c3ee5c05081c9a00739faf7503aeba10d22"
++SRC_URI[windows-core-0.62.2.sha256sum] =3D "b8e83a14d34d0623b51dce958119=
+9302a221863196a1dde71a7663a4c2be9deb"
++SRC_URI[windows-implement-0.60.2.sha256sum] =3D "053e2e040ab57b9dc951b72=
+c264860db7eb3b0200ba345b4e4c3b14f67855ddf"
++SRC_URI[windows-interface-0.59.3.sha256sum] =3D "3f316c4a2570ba26bbec722=
+032c4099d8c8bc095efccdc15688708623367e358"
++SRC_URI[windows-link-0.2.1.sha256sum] =3D "f0805222e57f7521d6a62e36fa916=
+3bc891acd422f971defe97d64e70d0a4fe5"
++SRC_URI[windows-result-0.4.1.sha256sum] =3D "7781fa89eaf60850ac3d2da7af8=
+e5242a5ea78d1a11c49bf2910bb5a73853eb5"
++SRC_URI[windows-strings-0.5.1.sha256sum] =3D "7837d08f69c77cf6b076895445=
+38e017c1bfcf57e34b4c0ff58e6c2cd3b37091"
++SRC_URI[windows-sys-0.61.2.sha256sum] =3D "ae137229bcbd6cdf0f7b80a31df61=
+766145077ddf49416a728b02cb3921ff3fc"
++SRC_URI[winnow-0.7.15.sha256sum] =3D "df79d97927682d2fd8adb29682d1140b34=
+3be4ac0f08fd68b7765d9c059d3945"
++SRC_URI[wit-bindgen-0.51.0.sha256sum] =3D "d7249219f66ced02969388cf2bb04=
+4a09756a083d0fab1e566056b04d9fbcaa5"
++SRC_URI[wit-bindgen-core-0.51.0.sha256sum] =3D "ea61de684c3ea68cb082b7a8=
+8508a8b27fcc8b797d738bfc99a82facf1d752dc"
++SRC_URI[wit-bindgen-rust-0.51.0.sha256sum] =3D "b7c566e0f4b284dd6561c786=
+d9cb0142da491f46a9fbed79ea69cdad5db17f21"
++SRC_URI[wit-bindgen-rust-macro-0.51.0.sha256sum] =3D "0c0f9bfd77e6a48ecc=
+f51359e3ae77140a7f50b1e2ebfe62422d8afdaffab17a"
++SRC_URI[wit-component-0.244.0.sha256sum] =3D "9d66ea20e9553b30172b5e8319=
+94e35fbde2d165325bec84fc43dbf6f4eb9cb2"
++SRC_URI[wit-parser-0.244.0.sha256sum] =3D "ecc8ac4bc1dc3381b7f59c34f00b6=
+7e18f910c2c0f50015669dde7def656a736"
++SRC_URI[xml-rs-0.8.28.sha256sum] =3D "3ae8337f8a065cfc972643663ea4279e04=
+e7256de865aa66fe25cec5fb912d3f"
++SRC_URI[yeslogic-fontconfig-sys-6.0.0.sha256sum] =3D "503a066b4c037c4401=
+69d995b869046827dbc71263f6e8f3be6d77d4f3229dbd"
++SRC_URI[zbus-5.14.0.sha256sum] =3D "ca82f95dbd3943a40a53cfded6c2d0a2ca26=
+192011846a1810c4256ef92c60bc"
++SRC_URI[zbus_macros-5.14.0.sha256sum] =3D "897e79616e84aac4b2c46e9132a4f=
+63b93105d54fe8c0e8f6bffc21fa8d49222"
++SRC_URI[zbus_names-4.3.1.sha256sum] =3D "ffd8af6d5b78619bab301ff3c560a5b=
+d22426150253db278f164d6cf3b72c50f"
++SRC_URI[zerocopy-0.8.42.sha256sum] =3D "f2578b716f8a7a858b7f02d5bd870c14=
+bf4ddbbcf3a4c05414ba6503640505e3"
++SRC_URI[zerocopy-derive-0.8.42.sha256sum] =3D "7e6cc098ea4d3bd6246687de6=
+5af3f920c430e236bee1e3bf2e441463f08a02f"
++SRC_URI[zmij-1.0.21.sha256sum] =3D "b8848ee67ecc8aedbaf3e4122217aff89263=
+9231befc6a1b58d29fff4c2cabaa"
++SRC_URI[zune-core-0.5.1.sha256sum] =3D "cb8a0807f7c01457d0379ba880ba6322=
+660448ddebc890ce29bb64da71fb40f9"
++SRC_URI[zune-inflate-0.2.54.sha256sum] =3D "73ab332fe2f6680068f3582b16a2=
+4f90ad7096d5d39b974d1c0aff0125116f02"
++SRC_URI[zune-jpeg-0.5.12.sha256sum] =3D "410e9ecef634c709e3831c2cfdb8d9c=
+32164fae1c67496d5b68fff728eec37fe"
++SRC_URI[zvariant-5.10.0.sha256sum] =3D "5708299b21903bbe348e94729f22c49c=
+55d04720a004aa350f1f9c122fd2540b"
++SRC_URI[zvariant_derive-5.10.0.sha256sum] =3D "5b59b012ebe9c46656f9cc08d=
+8da8b4c726510aef12559da3e5f1bf72780752c"
++SRC_URI[zvariant_utils-3.3.0.sha256sum] =3D "f75c23a64ef8f40f13a6989991e=
+643554d9bef1d682a281160cf0c1bc389c5e9"
+diff --git a/meta-gnome/recipes-gnome/glycin/glycin/0001-meson-Support-cr=
+oss-compilation-via-a-rust_target-cr.patch b/meta-gnome/recipes-gnome/gly=
+cin/glycin/0001-meson-Support-cross-compilation-via-a-rust_target-cr.patc=
+h
+new file mode 100644
+index 0000000000..9d14326214
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/glycin/glycin/0001-meson-Support-cross-com=
+pilation-via-a-rust_target-cr.patch
+@@ -0,0 +1,97 @@
++From b4fac7e77a2a88be19fc83b3890711e2e3165859 Mon Sep 17 00:00:00 2001
++From: Anton Politov <ampernic@inbox.ru>
++Date: Thu, 18 Jun 2026 14:03:36 +0300
++Subject: [PATCH] meson: Support cross-compilation via a rust_target cros=
+s
++ property
 +
-+FILES:${PN} +=3D "${datadir}/gjs-1.0/lsan"
++cargo was always invoked without --target and the artifact paths assumed
++the native layout (cargo-target/<profile>/), so the Rust components coul=
+d
++not be cross-compiled. Read the rust target triple from the cross file's
++[properties] (rust_target); when set, pass it as --target and read the
++artifacts from the per-target subdirectory cargo writes to. When it is
++unset the build is unchanged.
 +
-+PACKAGES =3D+ "${PN}-valgrind"
-+FILES:${PN}-valgrind =3D "${datadir}/gjs-1.0/valgrind"
-+RDEPENDS:${PN}-valgrind +=3D "valgrind"
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/glycin/-/commi=
+t/13b6b060d41aa4cdce3eb878e83c6dd01014e669]
++---
++ glycin-loaders/meson.build     | 4 ++--
++ glycin-thumbnailer/meson.build | 3 ++-
++ libglycin/meson.build          | 2 +-
++ meson.build                    | 9 +++++++++
++ 4 files changed, 14 insertions(+), 4 deletions(-)
 +
-+# Valgrind not yet available on rv32/rv64
-+RDEPENDS:${PN}-valgrind:remove:riscv32 =3D "valgrind"
-+RDEPENDS:${PN}-valgrind:remove:riscv64 =3D "valgrind"
++diff --git a/glycin-loaders/meson.build b/glycin-loaders/meson.build
++index 805a646..03db09e 100644
++--- a/glycin-loaders/meson.build
+++++ b/glycin-loaders/meson.build
++@@ -49,7 +49,7 @@ manifest =3D meson.project_source_root() / 'Cargo.toml=
+'
++ cargo_options =3D [
++   '--profile', cargo_profile,
++   '--manifest-path', manifest,
++-]
+++] + cargo_target_args
++=20
++ git_version =3D ''
++=20
++@@ -103,7 +103,7 @@ foreach loader : get_option('loaders')
++     output: loader,
++     command: [
++       'cp',
++-      cargo_target_dir / rust_target / loader,
+++      cargo_artifact_dir / rust_target / loader,
++       '@OUTPUT@',
++     ],
++   )
++diff --git a/glycin-thumbnailer/meson.build b/glycin-thumbnailer/meson.b=
+uild
++index 3e205e3..1580378 100644
++--- a/glycin-thumbnailer/meson.build
+++++ b/glycin-thumbnailer/meson.build
++@@ -21,6 +21,7 @@ cargo_build =3D custom_target(
++         '--profile', cargo_profile,
++         '--manifest-path', cargo_manifest,
++         '--package=3Dglycin-thumbnailer',
+++        cargo_target_args,
++     ],
++ )
++=20
++@@ -34,7 +35,7 @@ custom_target(
++     output: 'glycin-thumbnailer',
++     command: [
++         'cp',
++-        cargo_target_dir / rust_target / 'glycin-thumbnailer',
+++        cargo_artifact_dir / rust_target / 'glycin-thumbnailer',
++         '@OUTPUT@',
++     ],
++ )
++diff --git a/libglycin/meson.build b/libglycin/meson.build
++index 12cbd5f..3a2a8b6 100644
++--- a/libglycin/meson.build
+++++ b/libglycin/meson.build
++@@ -17,7 +17,7 @@ cargo_options =3D [
++     '--target-dir', cargo_target_dir,
++     '--profile', cargo_profile,
++     '--manifest-path', manifest,
++-]
+++] + cargo_target_args
++=20
++ cargo_env_module =3D cargo_env
++=20
++diff --git a/meson.build b/meson.build
++index bb4a5e4..72d1ae8 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -25,6 +25,15 @@ cargo_target_dir =3D meson.project_build_root() / 'ca=
+rgo-target'
++ cargo_home =3D meson.project_build_root() / 'cargo-home'
++ cargo_manifest =3D meson.project_source_root() / 'Cargo.toml'
++=20
+++cargo_build_target =3D meson.get_external_property('rust_target', '')
+++if cargo_build_target !=3D ''
+++  cargo_target_args =3D ['--target', cargo_build_target]
+++  cargo_artifact_dir =3D cargo_target_dir / cargo_build_target
+++else
+++  cargo_target_args =3D []
+++  cargo_artifact_dir =3D cargo_target_dir
+++endif
+++
++ cargo_bin =3D find_program('cargo')
++ crate_version_bin =3D find_program(meson.project_source_root() / 'build=
+-aux/crates-version.py')
++=20
+diff --git a/meta-gnome/recipes-gnome/glycin/glycin/0002-libglycin-Read-c=
+argo-artifacts-from-the-per-target-s.patch b/meta-gnome/recipes-gnome/gly=
+cin/glycin/0002-libglycin-Read-cargo-artifacts-from-the-per-target-s.patc=
+h
+new file mode 100644
+index 0000000000..5f431e25cf
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/glycin/glycin/0002-libglycin-Read-cargo-ar=
+tifacts-from-the-per-target-s.patch
+@@ -0,0 +1,31 @@
++From 6fa1351e99a52e9efc8724952275ee51a15afc7e Mon Sep 17 00:00:00 2001
++From: x <a@b.c>
++Date: Wed, 2 Sep 2026 19:57:42 +0000
++Subject: [PATCH] libglycin: Read cargo artifacts from the per-target
++ subdirectory
 +
-+# The GIMarshallingTests/Regress/Utility/WarnLib typelibs that the 1.84 =
-recipe
-+# listed in MULTILIB_SCRIPTS are no longer produced by the build system.
++Commit 13b6b06 ("meson: Support cross-compilation via a rust_target cros=
+s
++property") converted the loaders and the thumbnailer to cargo_artifact_d=
+ir
++but left the libglycin shared object path pointing at cargo_target_dir.
++When --target is passed, cargo writes to cargo-target/<triple>/<profile>=
+/
++and the copy step fails. Upstream fixed this as part of the much larger
++windows-gnu commit 4d1a505, so only the relevant hunk is taken here.
 +
-+UPSTREAM_CHECK_GITTAGREGEX =3D "^(?P<pver>\d+\.\d*[02468]\.\d+)$"
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/glycin/-/commi=
+t/4d1a505]
++---
++ libglycin/meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libglycin/meson.build b/libglycin/meson.build
++index 3a2a8b6..dbadf49 100644
++--- a/libglycin/meson.build
+++++ b/libglycin/meson.build
++@@ -72,7 +72,7 @@ foreach package : packages
++         endif
++     endif
++=20
++-    cargo_output =3D cargo_target_dir / rust_target / f'libglycin@suffi=
+x@.so'.replace('-', '_')
+++    cargo_output =3D cargo_artifact_dir / rust_target / f'libglycin@suf=
+fix@.so'.replace('-', '_')
++=20
++     # Build library with Rust
++     libglycin =3D custom_target(
+diff --git a/meta-gnome/recipes-gnome/glycin/glycin_2.1.5.bb b/meta-gnome=
+/recipes-gnome/glycin/glycin_2.1.5.bb
+new file mode 100644
+index 0000000000..91734e2bf9
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/glycin/glycin_2.1.5.bb
+@@ -0,0 +1,106 @@
++SUMMARY =3D "Sandboxed and extendable image decoding"
++DESCRIPTION =3D "Glycin decodes images in sandboxed subprocesses. It shi=
+ps a set of \
++image loaders, the libglycin C library with GObject introspection bindin=
+gs, and a \
++thumbnailer implementing the freedesktop thumbnail specification."
++HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/glycin"
++BUGTRACKER =3D "https://gitlab.gnome.org/GNOME/glycin/-/issues"
++SECTION =3D "graphics"
++
++LICENSE =3D "MPL-2.0 OR LGPL-2.1-or-later"
++LIC_FILES_CHKSUM =3D "file://LICENSE-MPL-2.0;md5=3Df75d2927d3c1ed2414ef7=
+2048f5ad640 \
++                    file://LICENSE-LGPL-2.1;md5=3De5dba73410bf27bc90d66e=
+56336c7e2b"
++
++
++inherit cargo_common cargo-update-recipe-crates meson pkgconfig gettext =
+gobject-introspection
++
++SRC_URI =3D "git://gitlab.gnome.org/GNOME/glycin.git;protocol=3Dhttps;br=
+anch=3D2.1;tag=3D${PV} \
++           file://0001-meson-Support-cross-compilation-via-a-rust_target=
+-cr.patch \
++           file://0002-libglycin-Read-cargo-artifacts-from-the-per-targe=
+t-s.patch \
++           "
++SRCREV =3D "62c5096eaac2c92dab84c2eb896936d8da3dd9c1"
++
++UPSTREAM_CHECK_URI =3D "https://gitlab.gnome.org/GNOME/glycin/-/tags"
++UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
++
++require ${BPN}-crates.inc
++
++DEPENDS =3D "glib-2.0 glib-2.0-native libseccomp lcms fontconfig"
++
++do_write_config:append:class-target() {
++	cat > ${WORKDIR}/meson-rust.cross <<-EOF
++	[properties]
++	rust_target =3D '${RUST_HOST_SYS}'
++	EOF
++}
++
++EXTRA_OEMESON:append:class-target =3D " --cross-file ${WORKDIR}/meson-ru=
+st.cross"
++
++do_configure:prepend() {
++	cargo_common_do_configure
++}
++
++
++do_compile:prepend() {
++	mkdir -p ${B}/cargo-home
++	install -m 0644 ${CARGO_HOME}/config.toml ${B}/cargo-home/config.toml
++}
++
++
++EXTRA_OEMESON +=3D "-Dprofile=3Drelease \
++                  -Dlto=3Dfalse \
++                  -Dtests=3Dfalse \
++                  -Dtest_tokio=3Dfalse \
++                  -Dpython_tests=3Dfalse \
++                  -Dcapi_docs=3Dfalse \
++                  "
++
++export CARGO_NET_OFFLINE =3D "1"
++export CARGO_BUILD_JOBS =3D "${@oe.utils.cpu_count()}"
++export RUSTFLAGS
++export SYSTEM_DEPS_GLYCIN_2_NO_PKG_CONFIG =3D "1"
++export SYSTEM_DEPS_GLYCIN_2_LIB =3D "glycin-2"
++export SYSTEM_DEPS_GLYCIN_2_SEARCH_NATIVE =3D "${B}/libglycin"
++
++PACKAGECONFIG ??=3D "libglycin thumbnailer image-rs heif jxl svg \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gt=
+k4', '', d)}"
++
++PACKAGECONFIG[libglycin] =3D "-Dlibglycin=3Dtrue,-Dlibglycin=3Dfalse"
++PACKAGECONFIG[gtk4] =3D "-Dlibglycin-gtk4=3Dtrue,-Dlibglycin-gtk4=3Dfals=
+e,gtk4"
++PACKAGECONFIG[thumbnailer] =3D "-Dglycin-thumbnailer=3Dtrue,-Dglycin-thu=
+mbnailer=3Dfalse"
++PACKAGECONFIG[vapi] =3D "-Dvapi=3Dtrue,-Dvapi=3Dfalse,vala-native"
++PACKAGECONFIG[image-rs] =3D ",,"
++PACKAGECONFIG[heif] =3D ",,libheif"
++PACKAGECONFIG[jxl] =3D ",,libjxl"
++PACKAGECONFIG[raw] =3D ",,"
++PACKAGECONFIG[svg] =3D ",,librsvg cairo"
++
++def glycin_loaders(d):
++    known =3D (("heif", "glycin-heif"), ("image-rs", "glycin-image-rs"),
++             ("jxl", "glycin-jxl"), ("raw", "glycin-raw"), ("svg", "glyc=
+in-svg"))
++    enabled =3D d.getVar("PACKAGECONFIG").split()
++    loaders =3D [name for flag, name in known if flag in enabled]
++    if not loaders:
++        return "-Dglycin-loaders=3Dfalse"
++    return "-Dglycin-loaders=3Dtrue -Dloaders=3D" + ",".join(loaders)
++
++EXTRA_OEMESON +=3D "${@glycin_loaders(d)}"
++EXTRA_OEMESON[vardeps] +=3D "PACKAGECONFIG"
++
++GLYCIN_COMPAT_VERSION =3D "2+"
++
++PACKAGES =3D+ "${PN}-loaders ${PN}-thumbnailer ${PN}-gtk4"
++
++FILES:${PN}-loaders =3D "${libexecdir}/glycin-loaders \
++                       ${datadir}/glycin-loaders \
++                       "
++
++FILES:${PN}-gtk4 =3D "${libdir}/libglycin-gtk4-2.so.* \
++                    ${libdir}/girepository-1.0/GlyGtk4-2.typelib \
++                    "
++FILES:${PN}-thumbnailer =3D "${bindir}/glycin-thumbnailer \
++                           ${datadir}/thumbnailers \
++                           "
++
++RDEPENDS:${PN}-loaders +=3D "${@bb.utils.contains('PACKAGECONFIG', 'thum=
+bnailer', '${PN}-thumbnailer', '', d)}"
++RDEPENDS:${PN}-thumbnailer +=3D "${PN}"
++
 --=20
 2.55.0
 
