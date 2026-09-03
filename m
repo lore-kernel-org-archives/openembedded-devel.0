@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DB08C624DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64297C624DB
 	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 09:50:45 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4061.1788429042335738083
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4202.1788429045025929557
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2026 02:50:42 -0700
+ Thu, 03 Sep 2026 02:50:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=crLlKCAI;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-853c947bfefso764646b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QO8sdYOZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-853c947bfefso764678b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788429042; x=1789033842; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788429044; x=1789033844; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YJc8GFdgocD5qlrAVZjY5VVNh1aL+ZloB8bpH0lk3Ck=;
-        b=crLlKCAIRWGJngJSq+NqnU68oYZMZwHTKozODzmrSSpqz+XBuKILp82ijAJ5RU18RV
-         GdfoTfh5JmVWSFRoDFETtXwMMNXcFFx30UYv38B6o0K1k+80oqzk6VO06XBFP2seajKk
-         sTNhCzX6XshRahVvc6g3BOrREUfgfZnzuSbZppfw3d8zvsxjbjz1NWxyN+pf9J2eaIJB
-         SS+AypTmIBnMFfexbGRnOJy+/LF6fhmBejnfGL80rXXaAn1hOjIgajltXp9tG8yZsDwO
-         upZEpqxN/fvvNrsf2Z0mQri8neoOiDO2FcTxv976EjmwAS7dpVBA9gB709AixQ3pJEPS
-         OcCw==
+        bh=hd7E1sEUC/HcjkD9UYyEWS3F/fe11mHX2jxjGBGlC3E=;
+        b=QO8sdYOZAIsSUpm3Tht5CfABoiQs7CWdeHfyhnl5hAA6cSnrVAF5P8/5WlcPSIRsV6
+         yvA5zLJATkTB6Zqu4EBUgAZsObvFFWMO/H3I9BHyS/FgU4KCbpLmRiTI1ERfoDzTF/a+
+         hgwdJN0ltX8uSexF7JJE/U6ct3g5SyxHb2BJimKN9n/aEMM2atbb8o35reM4ylyvoZx8
+         RYzlnHn+K1kiqg6/QIwYbahLYqtaYqjlSZoJjeGmtBxllo33T6Cy3f/TNZ26WLkBvHoV
+         RTzbXkHw39UpRXFEivZgm4K3zF9PC9Rp0zxxDnhWJNoHLltsfqYXQ7cgCS3XWXUjyDUI
+         u25g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788429042; x=1789033842;
+        d=1e100.net; s=20251104; t=1788429044; x=1789033844;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=YJc8GFdgocD5qlrAVZjY5VVNh1aL+ZloB8bpH0lk3Ck=;
-        b=izpbWk0y6s6IuLt9M6o4Z70Ai14hxn8lfUrExzqasVgGwHrWKZWEEJdUJApouJ0O+8
-         nrYd3NLXsE8g2wsxNPL87X9K0brUsWGoiG4zpORuSyr3URmCj5uvHrhe69nGG3bQJU1J
-         ahndVIA9w2+8GJ+QWvtdQb3ekJxNHqxsu06i9xu9UlTRlUNIddsuROf+mGj1eWEMKQkO
-         KHo/3mfFEdFi+uJnqHAEXAIrye3PTIbGRMIaYeQxerMJ7G2UITPWoJlknBVPxiVzRl9W
-         oNFW7bkNOJfil/RNREla2Z7/o83PAkGE7Ch/KbFBR3uWCU1cKgDaY9KKhQM6Ia0/yRxC
-         go2A==
-X-Gm-Message-State: AFuF++luUsHQVWGgozoxhJYRvvm1WxieWqzvx5tOBBm9SCYFIP8MPq75
-	mLJtQTwmcOjQrm000R4a2wXXV1K1VCc2KZnR049H4G6NBY8N0l/KE/3xSPmidc+o
-X-Gm-Gg: AYBFou3ft+WFhUkpJ4nivKHPWMkAN81SKJlYf+cfKj61qdQJsQvJUGOWiGvPdiLueKl
-	514ksGqsu94BO0/KNp0NwfCCLn4AMf9aC/lChX9otkuKnzqQtvhzuqOZWCHxrDg8koypSxwhdSX
-	R89lbPVKwEdpwDlbTPRKheFLm+vXyq7zd4aLRfIxs1MZj9RRmZ2Y9JnkH+dlercIbfkeYa5Ydea
-	SpJXoo37wYdij4ISLYk38e1R7UahZfzFEZESU5n5CGsHrKZxX8sAlG8z6EPphRrBxLEuWI8K7Ld
-	3Uwu/iU/nY7yiPTSyZrGOSsw79k0lrJJUKA9kljYJOKUzQZRUrK11oDzayVr67z3kxKXuvdUJOt
-	lDaR9BEPGQ9uoUXj9zQdEe71+YPvjgSC8sYaXvMIo32fvpKvRovLVBdSfmG1/UB63NmYdlJZspd
-	dfWdQjL+T8j3cqixc+t9dSmDXVYSj4BwlYPHBH/aOeEZUX4s/2arWWakuXF7g7G8qBiynPYFs1
-X-Received: by 2002:aa7:8894:0:b0:857:73c3:446a with SMTP id d2e1a72fcca58-85fff0c85d0mr3902356b3a.25.1788429041560;
-        Thu, 03 Sep 2026 02:50:41 -0700 (PDT)
+        bh=hd7E1sEUC/HcjkD9UYyEWS3F/fe11mHX2jxjGBGlC3E=;
+        b=OGnTtSleTH1/RgFKnxSsztY/GfRiVogbifEMIOdM+0JDPKAdamWf+GUYmB2oTy3n4K
+         47lmVtQfR0yuoF7WqgIXHjYf49IeJ70qNOQzAwyrk1cpPHLlwMjwAxJmPcLxKNq5drRq
+         s7c9eXBW+oLsSdijmvQOk3qPEqI/LHOc/J3useYsnDkHR7i2WKKE2PwYcTzAFad5+gh3
+         BkIjwvCYB8UficeVSNp/e+roXJvHnk5kALvtkARlEUInEjb6dMnquyNjbYqJBWQvRFms
+         EFs4pzVbXqg59AdUUt4Ho8QHmPeuggN/1hVbsw1UgJ7JJuRVzRRQIr4tORr1U7Gr6TCL
+         zQAQ==
+X-Gm-Message-State: AFuF++nyeJ0cJ3R2HepT3aehA3Go9B0EWFm5bBAa4snYRk2nVC4pQlZw
+	5ImCoEbzNOPTBM6pTHquTPPmIQFjcvdES8+0PgRs9r0MBwgImEWHHea+v9RoToA7
+X-Gm-Gg: AYBFou1zBKdyIj4j0TKLaGCT1zfJ3A9+nxtLLUtYvWaSLZYQTy4dEFPXOmvy6SRyS1G
+	bar8XH0HU8kbvO9vB9hJG+i12LwmzoVRLwkDneJz8eG6lSkZCDpWUprTWEqlq38Sp01WE4TVArp
+	TQH5Fc023/0Rq02l2KUuL3F7SMcZxL1zkRqMohkl38NUMadZ8lGI/YiIoCbSbyP4Ylowc+0oPmc
+	3QkVFyJV//exKgVQtmNMsx+cE/Tk/p0tPOFR6ycM7jcrpd2Fc8LECn4o5BQvfAwPXKXU2xFXZB4
+	o9UhnAE09pZQMR/7o/SyVOE5OibDFOAtsVIPsQwsk6DKjOaxs9xOiT3646UWvhtulEBrmUa1JQ+
+	XdWutMbM5ZqLKPah/t4DilRjnDT53oFdJklNls0Cxca2Bcx0CgMWQyqYyGRPiVmFkrH7q46q8xb
+	Th7oFqgRcfst8vmOpFUOFR5wkzPH3ZIIrTs+eN8c1DCLHFvPHlKGR+/lvCytSuYfNf2DwDgtWd
+X-Received: by 2002:a05:6a00:3020:b0:858:ea6a:4415 with SMTP id d2e1a72fcca58-85ffc18a8femr3996145b3a.2.1788429044017;
+        Thu, 03 Sep 2026 02:50:44 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.39
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 02:50:41 -0700 (PDT)
+        Thu, 03 Sep 2026 02:50:43 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 19/22] libiec61850: patch CVE-2026-19206
-Date: Thu,  3 Sep 2026 21:49:50 +1200
-Message-ID: <20260903094954.3240723-19-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 20/22] libkcapi: patch CVE-2026-71226
+Date: Thu,  3 Sep 2026 21:49:51 +1200
+Message-ID: <20260903094954.3240723-20-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
 References: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
@@ -67,437 +67,813 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 09:50:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129735
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129736
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commits[1][2] in order to cherry pick fix mentioned in NVD.
+Backport commits[1][2] needed to cherry pick fix for the CVE as per the
+release notes[3]
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-19206
+https://nvd.nist.gov/vuln/detail/cve-2026-71226
 
-[1]https://github.com/mz-automation/libiec61850/commit/c85175ddf7018beb753d85a740d4c2c77f61c96c
-[2]https://github.com/mz-automation/libiec61850/commit/6178540e8cdd26b7884a482905140cc9084966a1
+[1]https://github.com/smuellerDD/libkcapi/commit/e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd
+[2]https://github.com/smuellerDD/libkcapi/commit/d9f16d5fbcf8270110a8f6f35523525f345ca311
+[3]https://github.com/smuellerDD/libkcapi/releases/tag/v1.5.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libiec61850/files/CVE-2026-19206-1.patch  | 129 +++++++++++++++++
- .../libiec61850/files/CVE-2026-19206-2.patch  | 134 ++++++++++++++++++
- .../libiec61850/files/CVE-2026-19206-3.patch  | 115 +++++++++++++++
- .../libiec61850/libiec61850_1.6.1.bb          |   3 +
- 4 files changed, 381 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-1.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-2.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-3.patch
+ .../libkcapi/libkcapi/CVE-2026-71226-1.patch  | 604 ++++++++++++++++++
+ .../libkcapi/libkcapi/CVE-2026-71226-2.patch  |  55 ++
+ .../libkcapi/libkcapi/CVE-2026-71226-3.patch  |  93 +++
+ .../recipes-crypto/libkcapi/libkcapi_1.5.0.bb |   3 +
+ 4 files changed, 755 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
 
-diff --git a/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-1.patch b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-1.patch
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
 new file mode 100644
-index 0000000000..b7b86b3f64
+index 0000000000..d53d29423c
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-1.patch
-@@ -0,0 +1,129 @@
-+From 04f95bf3e54614122621b520eac29dea160de1c7 Mon Sep 17 00:00:00 2001
-+From: Michael Zillgith <michael.zillgith@mz-automation.de>
-+Date: Tue, 17 Mar 2026 12:41:32 +0000
-+Subject: [PATCH] - fixed memory-safety issues and potential NULL pointer
-+ dereferenciations in SV parser (#585)
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-1.patch
+@@ -0,0 +1,604 @@
++From 73a34808912e3cfea8d88f0a2c08fc0ed107a9d8 Mon Sep 17 00:00:00 2001
++From: Markus Theil <markus.theil@secunet.com>
++Date: Fri, 3 Apr 2026 15:06:53 +0200
++Subject: [PATCH] fixes found by analysis with LLM
 +
-+(cherry picked from commit c85175ddf7018beb753d85a740d4c2c77f61c96c)
++Signed-off-by: Markus Theil <markus.theil@secunet.com>
++Signed-off-by: Stephan Mueller <smueller@chronox.de>
++(cherry picked from commit e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd)
 +
-+CVE: CVE-2026-19206
-+Upstream-Status: Backport [https://github.com/mz-automation/libiec61850/commit/c85175ddf7018beb753d85a740d4c2c77f61c96c]
++CVE: CVE-2026-71226
++Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/e8396c28c2cd2b81f69fc68500fcb2ec7163b4fd]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/sampled_values/sv_subscriber.c | 35 +++++++++++++++++++++++-------
-+ 1 file changed, 27 insertions(+), 8 deletions(-)
++ apps/app-internal.c   | 15 +++++++++---
++ apps/kcapi-dgst.c     | 11 ++++++---
++ apps/kcapi-enc.c      |  9 ++++---
++ apps/kcapi-hasher.c   | 12 ++++++---
++ apps/kcapi-rng.c      | 24 ++++++++++++------
++ configure.ac          |  3 ++-
++ lib/kcapi-aead.c      | 12 +++++++--
++ lib/kcapi-kdf.c       |  6 +++--
++ lib/kcapi-kernel-if.c | 57 +++++++++++++++++++++++++++++--------------
++ lib/kcapi-kpp.c       |  4 +--
++ lib/kcapi-md.c        |  2 +-
++ lib/kcapi-sym.c       |  6 +++++
++ lib/kcapi-utils.c     |  7 ++++--
++ 13 files changed, 118 insertions(+), 50 deletions(-)
 +
-+diff --git a/src/sampled_values/sv_subscriber.c b/src/sampled_values/sv_subscriber.c
-+index 221eb1a8..bb82818e 100644
-+--- a/src/sampled_values/sv_subscriber.c
-++++ b/src/sampled_values/sv_subscriber.c
-+@@ -423,16 +423,24 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+             return;
-+         }
++diff --git a/apps/app-internal.c b/apps/app-internal.c
++index 7e01dd7..724b0b1 100644
++--- a/apps/app-internal.c
+++++ b/apps/app-internal.c
++@@ -173,18 +173,24 @@ static uint8_t bin_char(char hex)
++ void hex2bin(const char *hex, uint32_t hexlen, uint8_t *bin, uint32_t binlen)
++ {
++ 	uint32_t i;
++-	uint32_t chars = (binlen > (hexlen / 2)) ? (hexlen / 2) : binlen;
+++	uint32_t chars;
 + 
-++        if (bufPos + elementLength > length)
-++        {
-++            if (DEBUG_SV_SUBSCRIBER) printf("SV_SUBSCRIBER: Malformed message: element length exceeds buffer length!\n");
-++            return;
-++        }
++ 	/*
++ 	 * handle odd-length of strings where the first digit is the least
++ 	 * significant nibble
++ 	 */
++ 	if (hexlen & 1) {
+++		if (!binlen)
+++			return;
++ 		bin[0] = bin_char(hex[0]);
++ 		bin++;
++ 		hex++;
+++		hexlen--;
+++		binlen--;
++ 	}
++ 
+++	chars = (binlen > (hexlen / 2)) ? (hexlen / 2) : binlen;
 ++
-+         switch (tag)
-+         {
-+         case 0x80:
-+             asdu.svId = (char*) (buffer + bufPos);
-+             svIdLength = elementLength;
-++            asdu.svId[svIdLength] = 0;
-+             break;
++ 	for (i = 0; i < chars; i++) {
++ 		bin[i] = (uint8_t)(bin_char(hex[(i*2)]) << 4);
++ 		bin[i] |= bin_char(hex[((i*2)+1)]);
++@@ -238,13 +244,14 @@ ssize_t read_complete(int fd, uint8_t *buf, size_t buflen)
++ 		if (0 < ret) {
++ 			buflen -= (size_t)ret;
++ 			buf += ret;
+++			rc += ret;
++ 		}
++-		rc += ret;
++-		if (ret)
++-			break;
++ 	} while ((0 < ret || EINTR == errno || ERESTART == errno)
++ 		 && buflen > 0);
 + 
-+         case 0x81:
-+             asdu.datSet = (char*) (buffer + bufPos);
-+             datSetLength = elementLength;
-++            asdu.datSet[datSetLength] = 0;
-+             break;
+++	if (ret < 0)
+++		return -errno;
+++
++ 	return rc;
++ }
 + 
-+         case 0x82:
-+@@ -471,22 +479,17 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
++diff --git a/apps/kcapi-dgst.c b/apps/kcapi-dgst.c
++index 591a7fb..42d099c 100644
++--- a/apps/kcapi-dgst.c
+++++ b/apps/kcapi-dgst.c
++@@ -128,6 +128,11 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
++ 	}
 + 
-+         bufPos += elementLength;
-+     }
++ 	outlen = kcapi_md_digestsize(handle);
+++	if (!outlen) {
+++		dolog(KCAPI_LOG_ERR, "Cipher has zero digest size");
+++		ret = -EINVAL;
+++		goto out;
+++	}
++ 
++ 	if (opts->hexout)
++ 		outlen *= 2;
++@@ -285,8 +290,8 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
++ 			}
++ 
++ 			while (j < saltbuflen) {
++-				ret = kcapi_rng_generate(rng, saltbuf,
++-							 (size_t)saltbuflen);
+++				ret = kcapi_rng_generate(rng, saltbuf + j,
+++							 (size_t)(saltbuflen - j));
++ 				if (ret < 0) {
++ 					kcapi_rng_destroy(rng);
++ 					free(saltbuf);
++@@ -320,7 +325,7 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
++ 	if (opts->key_fd != -1) {
++ 		ret = read_complete(opts->key_fd, keybuf, sizeof(keybuf));
++ 		if (ret < 0)
++-			return (int)ret;
+++			goto out;
++ 
++ 		have_key = 1;
++ 		keybuflen = (uint32_t)ret;
++diff --git a/apps/kcapi-enc.c b/apps/kcapi-enc.c
++index 68cf2f7..e7aa9db 100644
++--- a/apps/kcapi-enc.c
+++++ b/apps/kcapi-enc.c
++@@ -218,7 +218,7 @@ static ssize_t return_data_fd(struct kcapi_handle *handle,
++ 	}
++ 
++ out:
++-	munmap(outmem, outsize);
+++	munmap(outmem, outsize + offset);
++ 	return (ret < 0) ? ret : generated_bytes;
++ }
++ 
++@@ -609,7 +609,7 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
++ 		}
++ 
++ 	/* Get data from file. */
++-	} else {
+++	} else if (insb.st_size) {
++ 		uint32_t sent_data = 0;
++ 
++ 		inmem = mmap(NULL, (size_t)insb.st_size, PROT_READ, MAP_SHARED,
++@@ -636,6 +636,7 @@ static int cipher_op(struct kcapi_handle *handle, struct opt_data *opts)
++ 			 * we will not apply padding.
++ 			 */
++ 			if (!opts->decrypt &&
+++			    insb.st_size >= 2 &&
++ 			    !(insb.st_size % opts->func_blocksize(handle)) &&
++ 			    (uint32_t)padbyte < opts->func_blocksize(handle)) {
++ 				uint32_t i;
++@@ -803,8 +804,8 @@ static int set_key(struct kcapi_handle *handle, struct opt_data *opts)
++ 			}
++ 
++ 			while (j < saltbuflen) {
++-				ret = kcapi_rng_generate(rng, saltbuf,
++-							 saltbuflen);
+++				ret = kcapi_rng_generate(rng, saltbuf + j,
+++							 saltbuflen - j);
++ 				if (ret < 0) {
++ 					kcapi_rng_destroy(rng);
++ 					free(saltbuf);
++diff --git a/apps/kcapi-hasher.c b/apps/kcapi-hasher.c
++index 217f59d..90dc34d 100644
++--- a/apps/kcapi-hasher.c
+++++ b/apps/kcapi-hasher.c
++@@ -271,7 +271,7 @@ static int load_file(const char *filename, uint8_t **memory, off_t *size)
++ 				fprintf(stderr, "Key longer than UINT32_MAX\n");
++ 				ret = -ERANGE;
++ 				goto out;
++-			} else if (buffer_size * 2 < buffer_size)
+++			} else if (buffer_size > UINT32_MAX / 2)
++ 				buffer_size = UINT32_MAX;
++ 			else
++ 				buffer_size *= 2;
++@@ -340,7 +340,7 @@ static int hasher(struct kcapi_handle *handle, const struct hash_params *params,
++ 			} while (left);
++ 			munmap(memblock, mapped);
++ 			offset = offset + (off_t)mapped;
++-		} while (offset ^ size);
+++		} while (offset != size);
++ 	} else {
++ 		uint8_t tmpbuf[TMPBUFLEN] __aligned(KCAPI_APP_ALIGN);
++ 		uint32_t bufsize;
++@@ -647,11 +647,17 @@ static int process_checkfile(const struct hash_params *params,
++ 			hexhash = buf;
++ 
++ 		if (bsd_style) {
+++			if (bsd_style > linelen) {
+++				fprintf(stderr, "Invalid checkfile format\n");
+++				ret = 1;
+++				goto out;
+++			}
+++
++ 			/* Hash starts after separator */
++ 			hexhashlen = linelen - bsd_style + 1;
++ 
++ 			/* remove closing parenthesis behind filename */
++-			if (buf[(bsd_style - 4)] == ')')
+++			if (bsd_style >= 4 && buf[(bsd_style - 4)] == ')')
++ 				buf[(bsd_style - 4)] = '\0';
++ 		}
++ 
++diff --git a/apps/kcapi-rng.c b/apps/kcapi-rng.c
++index 9e025cd..46dab02 100644
++--- a/apps/kcapi-rng.c
+++++ b/apps/kcapi-rng.c
++@@ -282,16 +282,18 @@ int main(int argc, char *argv[])
++ 	      seedsize);
++ 
++ 	if (!isatty(0) && (errno == EINVAL || errno == ENOTTY)) {
++-		while (fgets((char *)seedbuf, (int)seedsize, stdin)) {
++-			ret = kcapi_rng_seed(rng, seedbuf, seedsize);
+++		ssize_t rret;
+++
+++		while ((rret = read(STDIN_FILENO, seedbuf, seedsize)) > 0) {
+++			ret = kcapi_rng_seed(rng, seedbuf, (uint32_t)rret);
++ 			if (ret)
++ 				dolog(KCAPI_LOG_WARN,
++-				      "User-provided seed of %lu bytes not accepted by DRNG (error: %ld)",
++-				      (unsigned long)sizeof(buf), ret);
+++				      "User-provided seed of %zd bytes not accepted by DRNG (error: %ld)",
+++				      rret, ret);
++ 			else
++ 				dolog(KCAPI_LOG_DEBUG,
++-				      "User-provided seed of %u bytes",
++-				      seedsize);
+++				      "User-provided seed of %zd bytes",
+++				      rret);
++ 		}
++ 	}
++ 
++@@ -312,9 +314,15 @@ int main(int argc, char *argv[])
++ 			char hexbuf[2 * KCAPI_RNG_BUFSIZE];
++ 
++ 			bin2hex(buf, (size_t)ret, hexbuf, sizeof(hexbuf), 0);
++-			fwrite(hexbuf, 2 * (size_t)ret, 1, stdout);
+++			if (fwrite(hexbuf, 2 * (size_t)ret, 1, stdout) != 1) {
+++				ret = -EIO;
+++				goto out;
+++			}
++ 		} else {
++-			fwrite(buf, (size_t)ret, 1, stdout);
+++			if (fwrite(buf, (size_t)ret, 1, stdout) != 1) {
+++				ret = -EIO;
+++				goto out;
+++			}
++ 		}
++ 
++ 		outlen -= (size_t)ret;
++diff --git a/configure.ac b/configure.ac
++index fbae4f9..446b8a8 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -14,16 +14,17 @@ m4_define([__KCAPI_MINVERSION], [5])
++ m4_define([__KCAPI_PATCHLEVEL], [0])
++ m4_define([KCAPI_VERSION], [__KCAPI_MAJVERSION.__KCAPI_MINVERSION.__KCAPI_PATCHLEVEL])
++ 
+++AC_PREREQ([2.69])
++ AC_INIT([libkcapi], [KCAPI_VERSION])
++ AC_DEFINE([KCAPI_MAJVERSION], [__KCAPI_MAJVERSION])
++ AC_DEFINE([KCAPI_MINVERSION], [__KCAPI_MINVERSION])
++ AC_DEFINE([KCAPI_PATCHLEVEL], [__KCAPI_PATCHLEVEL])
+++AC_CONFIG_MACRO_DIRS([m4])
++ AM_INIT_AUTOMAKE([foreign])
++ LT_INIT([pic-only])
++ AC_SUBST([LIBTOOL_DEPS])
++ AC_PROG_CC
++ AC_CONFIG_FILES([Makefile])
++-AC_CONFIG_MACRO_DIR([m4])
++ AX_PROG_CC_FOR_BUILD
++ AX_CHECK_PIE
++ 
++diff --git a/lib/kcapi-aead.c b/lib/kcapi-aead.c
++index b52dda0..3a7d711 100644
++--- a/lib/kcapi-aead.c
+++++ b/lib/kcapi-aead.c
++@@ -566,7 +566,11 @@ size_t impl_aead_outbuflen_enc(struct kcapi_handle *handle,
++ {
++ 	struct kcapi_handle_tfm *tfm = handle->tfm;
++ 	uint32_t bs = tfm->info.blocksize;
++-	size_t outlen = (inlen + bs - 1) / bs * bs + taglen + assoclen;
+++	size_t outlen;
+++
+++	if (!bs)
+++		return 0;
+++	outlen = (inlen + bs - 1) / bs * bs + taglen + assoclen;
++ 
++ 	/* the kernel does not like zero length output buffers */
++ 	if (!outlen)
++@@ -591,7 +595,11 @@ size_t impl_aead_outbuflen_dec(struct kcapi_handle *handle,
++ {
++ 	struct kcapi_handle_tfm *tfm = handle->tfm;
++ 	uint32_t bs = tfm->info.blocksize;
++-	size_t outlen = (inlen + bs - 1) / bs * bs + assoclen;
+++	size_t outlen;
+++
+++	if (!bs)
+++		return 0;
+++	outlen = (inlen + bs - 1) / bs * bs + assoclen;
++ 
++ 	if (!handle->flags.ge_v4_9 == true)
++ 		outlen += taglen;
++diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
++index 54dc1ec..5f389b6 100644
++--- a/lib/kcapi-kdf.c
+++++ b/lib/kcapi-kdf.c
++@@ -54,6 +54,8 @@
++ #include "kcapi.h"
++ #include "internal.h"
++ 
+++#define MAX_DIGESTSIZE 64
+++
++ #ifndef __has_builtin
++ # define __has_builtin(x) 0
++ #endif
++@@ -101,7 +103,7 @@ ssize_t impl_kdf_dpi(struct kcapi_handle *handle,
++ 	ssize_t err = 0;
++ 	uint8_t *dst_orig = dst;
++ 	size_t dlen_orig = dlen;
++-	uint8_t Ai[h];
+++	uint8_t Ai[MAX_DIGESTSIZE];
++ 	uint32_t i = 1;
++ 
++ 	if (dlen > INT_MAX)
++@@ -448,7 +450,7 @@ static inline uint64_t kcapi_get_time(void)
++ {
++ 	struct timespec time;
++ 
++-	if (clock_gettime(CLOCK_REALTIME, &time) == 0)
+++	if (clock_gettime(CLOCK_MONOTONIC, &time) == 0)
++ 		return (uint64_t)time.tv_nsec;
++ 
++ 	return 0;
++diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
++index 835e45a..b37f0dc 100644
++--- a/lib/kcapi-kernel-if.c
+++++ b/lib/kcapi-kernel-if.c
++@@ -216,7 +216,7 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
++ 		}
++ 		header->cmsg_level = SOL_ALG;
++ 		header->cmsg_type = ALG_SET_IV;
++-		header->cmsg_len = kcapi_downcast_socklen_t(iv_msg_size);
+++		header->cmsg_len = CMSG_LEN(iv_msg_size);
++ 		alg_iv = (void*)CMSG_DATA(header);
++ 		alg_iv->ivlen = tfm->info.ivsize;
++ 		memcpy(alg_iv->iv, handle->cipher.iv, tfm->info.ivsize);
++@@ -409,8 +409,10 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
++ 				    "AF_ALG: splice syscall returned %zd", ret);
++ 		}
++ 
+++		if (ret == 0)
+++			return -EPIPE;
++ 		processed += ret;
++-		inlen -= (uint32_t)ret;
+++		inlen -= (size_t)ret;
++ 	}
++ 
++ 	return processed;
++@@ -434,14 +436,17 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 
++ 		for (i = 0; i < rc; i++) {
++ 			struct iocb *cb;
+++			unsigned int idx = (unsigned int)events[i].data;
+++
+++			if (idx >= KCAPI_AIO_CONCURRENT)
+++				return -EOVERFLOW;
++ 
++ 			/*
++ 			 * If one cipher operation fails, so will the entire
++ 			 * AIO operation
++ 			 */
++ 			if (events[i].res < 0) {
++-				handle->aio.iocb_ret[events[i].data] =
++-							events[i].res;
+++				handle->aio.iocb_ret[idx] = events[i].res;
++ 				return (int)events[i].res;
++ 			}
++ 
++@@ -452,16 +457,15 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 			 * return code.
++ 			 */
++ 			if (events[i].res > 0) {
++-				handle->aio.iocb_ret[events[i].data] =
++-								events[i].res;
+++				handle->aio.iocb_ret[idx] = events[i].res;
++ 			} else {
++-				handle->aio.iocb_ret[events[i].data] =
+++				handle->aio.iocb_ret[idx] =
++ 							(__s64)cb->aio_nbytes;
++ 			}
++ 
++ 			cb->aio_fildes = 0;
++ 		}
++-		toread -= (uint32_t)rc;
+++		toread -= (size_t)rc;
++ 	}
++ 
++ 	return 0;
++@@ -613,7 +617,7 @@ ssize_t _kcapi_common_read_data(struct kcapi_handle *handle,
++ 			ret = read(*_kcapi_get_opfd(handle), out, outlen);
++ 			if (ret > 0) {
++ 				out += ret;
++-				outlen -= (uint32_t)ret;
+++				outlen -= (size_t)ret;
++ 				totallen += ret;
++ 			}
++ 			kcapi_dolog(KCAPI_LOG_DEBUG,
++@@ -722,13 +726,13 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 		goto out;
++ 	}
++ 	if (addr_len != sizeof(nl)) {
++-		ret = -errno;
+++		ret = -EPROTO;
++ 		kcapi_dolog(KCAPI_LOG_ERR,
++ 			    "Netlink error: wrong address length %d", addr_len);
++ 		goto out;
++ 	}
++ 	if (nl.nl_family != AF_NETLINK) {
++-		ret = -errno;
+++		ret = -EPROTO;
++ 		kcapi_dolog(KCAPI_LOG_ERR,
++ 			    "Netlink error: wrong address family %d",
++ 			    nl.nl_family);
++@@ -764,12 +768,12 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 			goto out;
++ 		}
++ 		if (rc == 0) {
++-			ret = -errno;
+++			ret = -ENODATA;
++ 			kcapi_dolog(KCAPI_LOG_ERR, "Netlink error: no data");
++ 			goto out;
++ 		}
++ 		if (rc > (ssize_t)sizeof(buf)) {
++-			ret = -errno;
+++			ret = -EOVERFLOW;
++ 			kcapi_dolog(KCAPI_LOG_ERR,
++ 				    "Netlink error: received too much data");
++ 			goto out;
++@@ -779,6 +783,12 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 
++ 	ret = -EFAULT;
++ 	res_len = res_n->nlmsg_len;
+++	if (res_len > sizeof(buf)) {
+++		kcapi_dolog(KCAPI_LOG_ERR,
+++			    "Netlink error: nlmsg_len %lu exceeds buffer",
+++			    res_len);
+++		goto out;
+++	}
++ 	if (res_n->nlmsg_type == NLMSG_ERROR) {
++ 		/*
++ 		 * return -EAGAIN -- this error will occur if we received a
++@@ -819,6 +829,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 
++ 	if (tb[CRYPTOCFGA_REPORT_HASH]) {
++ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_HASH];
+++
+++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_hash))
+++			goto out;
++ 		struct crypto_report_hash *rsh =
++ 			(struct crypto_report_hash *) RTA_DATA(rta);
++ 		tfm->info.hash_digestsize = rsh->digestsize;
++@@ -831,6 +844,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 	}
++ 	if (tb[CRYPTOCFGA_REPORT_BLKCIPHER]) {
++ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_BLKCIPHER];
+++
+++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_blkcipher))
+++			goto out;
++ 		struct crypto_report_blkcipher *rblk =
++ 			(struct crypto_report_blkcipher *) RTA_DATA(rta);
++ 		tfm->info.blocksize = rblk->blocksize;
++@@ -845,6 +861,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 	}
++ 	if (tb[CRYPTOCFGA_REPORT_AEAD]) {
++ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_AEAD];
+++
+++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_aead))
+++			goto out;
++ 		struct crypto_report_aead *raead =
++ 			(struct crypto_report_aead *) RTA_DATA(rta);
++ 		tfm->info.blocksize = raead->blocksize;
++@@ -858,6 +877,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 	}
++ 	if (tb[CRYPTOCFGA_REPORT_RNG]) {
++ 		struct rtattr *rta = tb[CRYPTOCFGA_REPORT_RNG];
+++
+++		if (RTA_PAYLOAD(rta) < sizeof(struct crypto_report_rng))
+++			goto out;
++ 		struct crypto_report_rng *rrng =
++ 			(struct crypto_report_rng *) RTA_DATA(rta);
++ 		tfm->info.rng_seedsize = rrng->seedsize;
++@@ -981,19 +1003,19 @@ static int _kcapi_get_kernver(struct kcapi_handle *handle)
++ 	/* 3.15.0 */
++ 	res = strtok_r(kernel.release, ".", &saveptr);
++ 	if (!res) {
++-		printf("Could not parse kernel version");
+++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
++ 		return -EFAULT;
++ 	}
++ 	tfm->sysinfo.kernel_maj = strtoul(res, NULL, 10);
++ 	res = strtok_r(NULL, ".", &saveptr);
++ 	if (!res) {
++-		printf("Could not parse kernel version");
+++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
++ 		return -EFAULT;
++ 	}
++ 	tfm->sysinfo.kernel_minor = strtoul(res, NULL, 10);
++ 	res = strtok_r(NULL, ".", &saveptr);
++ 	if (!res) {
++-		printf("Could not parse kernel version");
+++		kcapi_dolog(KCAPI_LOG_ERR, "Could not parse kernel version");
++ 		return -EFAULT;
++ 	}
++ 	tfm->sysinfo.kernel_patchlevel = strtoul(res, NULL, 10);
++@@ -1217,7 +1239,6 @@ static int _kcapi_handle_init_tfm(struct kcapi_handle *handle, const char *type,
++ 
++ 	ret = _kcapi_common_getinfo(handle, ciphername);
++ 	if (ret) {
++-		ret = -errno;
++ 		kcapi_dolog(KCAPI_LOG_ERR, "NETLINK_CRYPTO: cannot obtain cipher information for %s (is required crypto_user.c patch missing? see documentation)",
++ 			    ciphername);
++ 		return ret;
++@@ -1368,7 +1389,7 @@ ssize_t _kcapi_cipher_crypt_chunk(struct kcapi_handle *handle,
++ 		in += inprocess;
++ 		inlen -= inprocess;
++ 		out += ret;
++-		outlen -= (uint32_t)ret;
+++		outlen -= (size_t)ret;
++ 	}
++ 
++ 	return totallen;
++diff --git a/lib/kcapi-kpp.c b/lib/kcapi-kpp.c
++index 814485a..d0383d6 100644
++--- a/lib/kcapi-kpp.c
+++++ b/lib/kcapi-kpp.c
++@@ -52,12 +52,12 @@ int kcapi_kpp_ecdh_setcurve(struct kcapi_handle *handle,
++ 			    unsigned long curve_id)
++ {
++ 	struct kcapi_handle_tfm *tfm = handle->tfm;
++-	char curve_id_str[sizeof(unsigned long)];
+++	char curve_id_str[24];
++ 	int ret = 0;
++ 
++ 	snprintf(curve_id_str, sizeof(curve_id_str), "%lu", curve_id);
++ 	ret = setsockopt(tfm->tfmfd, SOL_ALG, ALG_SET_ECDH_CURVE,
++-			 curve_id_str, sizeof(curve_id_str));
+++			 curve_id_str, (socklen_t)strlen(curve_id_str));
++ 	return (ret >= 0) ? ret : -errno;
++ }
++ 
++diff --git a/lib/kcapi-md.c b/lib/kcapi-md.c
++index bddd76b..5f493eb 100644
++--- a/lib/kcapi-md.c
+++++ b/lib/kcapi-md.c
++@@ -196,7 +196,7 @@ ssize_t impl_md_sha256(const uint8_t *in, size_t inlen,
++ }
++ 
++ ORIG_SYMVER(md_sha256, "1.0.0")
++-ssize_t orig_md_sha256(const uint8_t *in, uint32_t inlen,
+++int32_t orig_md_sha256(const uint8_t *in, uint32_t inlen,
++ 		       uint8_t *out, uint32_t outlen)
++ {
++ 	return (int32_t)kcapi_md_conv_common("sha256", in, inlen, out, outlen);
++diff --git a/lib/kcapi-sym.c b/lib/kcapi-sym.c
++index 911ec1e..d500061 100644
++--- a/lib/kcapi-sym.c
+++++ b/lib/kcapi-sym.c
++@@ -47,6 +47,9 @@ ssize_t impl_cipher_encrypt(struct kcapi_handle *handle,
++ 	struct kcapi_handle_tfm *tfm = handle->tfm;
++ 	uint32_t bs = tfm->info.blocksize;
++ 
+++	if (!bs)
+++		return -EINVAL;
+++
++ 	/* require properly sized output data size */
++ 	if (outlen < ((inlen + bs - 1) / bs * bs))
++ 		kcapi_dolog(KCAPI_LOG_WARN,
++@@ -120,6 +123,9 @@ ssize_t impl_cipher_decrypt(struct kcapi_handle *handle,
++ {
++ 	struct kcapi_handle_tfm *tfm = handle->tfm;
++ 
+++	if (!tfm->info.blocksize)
+++		return -EINVAL;
+++
++ 	/* require properly sized output data size */
++ 	if (inlen % tfm->info.blocksize)
++ 		kcapi_dolog(KCAPI_LOG_WARN,
++diff --git a/lib/kcapi-utils.c b/lib/kcapi-utils.c
++index 46fd330..e801d29 100644
++--- a/lib/kcapi-utils.c
+++++ b/lib/kcapi-utils.c
++@@ -96,7 +96,7 @@ err:
++ 	} else {
++ 		kcapi_dolog(KCAPI_LOG_WARN,
++ 			    "AF_ALG: setting maximum splice pipe size to %u failed: %s",
++-			    size, strerror(ret));
+++			    size, strerror(-ret));
++ 	}
++ 	return ret;
++ }
++@@ -109,7 +109,10 @@ int kcapi_get_maxsplicesize(struct kcapi_handle *handle)
++ 		return -EINVAL;
++ 
++ 	/* Both pipe endpoints should have the same pipe size */
++-	handle->pipesize = (unsigned int)fcntl(handle->pipes[0], F_GETPIPE_SZ);
+++	int ret = fcntl(handle->pipes[0], F_GETPIPE_SZ);
+++	if (ret < 0)
+++		return -errno;
+++	handle->pipesize = (unsigned int)ret;
++ 
++ 	/*
++ 	 * For vmsplice to allow the maximum number of 16 pages, we need to
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
+new file mode 100644
+index 0000000000..856d7a9879
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-2.patch
+@@ -0,0 +1,55 @@
++From 79198067bdf027f5d4d5e2804b086a0a37b277ec Mon Sep 17 00:00:00 2001
++From: Stephan Mueller <smueller@chronox.de>
++Date: Fri, 3 Apr 2026 17:43:05 +0200
++Subject: [PATCH] fix kernel invocation
++
++Signed-off-by: Stephan Mueller <smueller@chronox.de>
++(cherry picked from commit d9f16d5fbcf8270110a8f6f35523525f345ca311)
++
++CVE: CVE-2026-71226
++Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/d9f16d5fbcf8270110a8f6f35523525f345ca311]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ lib/kcapi-kernel-if.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
++index b37f0dc..5d3b352 100644
++--- a/lib/kcapi-kernel-if.c
+++++ b/lib/kcapi-kernel-if.c
++@@ -216,7 +216,7 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
++ 		}
++ 		header->cmsg_level = SOL_ALG;
++ 		header->cmsg_type = ALG_SET_IV;
++-		header->cmsg_len = CMSG_LEN(iv_msg_size);
+++		header->cmsg_len = kcapi_downcast_socklen_t(iv_msg_size);
++ 		alg_iv = (void*)CMSG_DATA(header);
++ 		alg_iv->ivlen = tfm->info.ivsize;
++ 		memcpy(alg_iv->iv, handle->cipher.iv, tfm->info.ivsize);
++@@ -411,6 +411,7 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
++ 
++ 		if (ret == 0)
++ 			return -EPIPE;
+++
++ 		processed += ret;
++ 		inlen -= (size_t)ret;
++ 	}
++@@ -436,7 +437,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 
++ 		for (i = 0; i < rc; i++) {
++ 			struct iocb *cb;
++-			unsigned int idx = (unsigned int)events[i].data;
+++			uint64_t idx = events[i].data;
++ 
++ 			if (idx >= KCAPI_AIO_CONCURRENT)
++ 				return -EOVERFLOW;
++@@ -459,8 +460,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 			if (events[i].res > 0) {
++ 				handle->aio.iocb_ret[idx] = events[i].res;
++ 			} else {
++-				handle->aio.iocb_ret[idx] =
++-							(__s64)cb->aio_nbytes;
+++				handle->aio.iocb_ret[idx] = (__s64)cb->aio_nbytes;
++ 			}
++ 
++ 			cb->aio_fildes = 0;
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
+new file mode 100644
+index 0000000000..591c32412b
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71226-3.patch
+@@ -0,0 +1,93 @@
++From 8ab3c8939276848ec8f43156a7658f7c5dae4026 Mon Sep 17 00:00:00 2001
++From: Stephan Mueller <smueller@chronox.de>
++Date: Thu, 30 Jul 2026 08:36:32 +0200
++Subject: [PATCH] fix memory corruption
++
++Signed-off-by: Zoltan Fridrich <zfridric@redhat.com>
++Signed-off-by: Stephan Mueller <smueller@chronox.de>
++
++CVE: CVE-2026-71226
++Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/cd966ffa08cf605ae5853d2f9a42fdd2b6df8bb4]
++
++Dropped changes to the CHANGES.md file.
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ lib/kcapi-kernel-if.c | 33 ++++++++++++++-------------------
++ 1 file changed, 14 insertions(+), 19 deletions(-)
++
++diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
++index 5d3b352..8a12c09 100644
++--- a/lib/kcapi-kernel-if.c
+++++ b/lib/kcapi-kernel-if.c
++@@ -423,6 +423,8 @@ ssize_t _kcapi_common_vmsplice_chunk(struct kcapi_handle *handle,
++ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 			struct timespec *timeout)
++ {
+++	int err = 0;
+++
++ 	if (toread > KCAPI_AIO_CONCURRENT)
++ 		return -EINVAL;
++ 
++@@ -433,34 +435,26 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 				      events, timeout);
++ 
++ 		if (rc < 0)
++-			return rc;
+++			return err == 0 ? rc : err;
++ 
++ 		for (i = 0; i < rc; i++) {
++ 			struct iocb *cb;
++ 			uint64_t idx = events[i].data;
++ 
++-			if (idx >= KCAPI_AIO_CONCURRENT)
++-				return -EOVERFLOW;
 +-
-+-    if (asdu.svId != NULL)
-+-        asdu.svId[svIdLength] = 0;
-+-    if (asdu.datSet != NULL)
-+-        asdu.datSet[datSetLength] = 0;
-+     
-+     if (DEBUG_SV_SUBSCRIBER)
-+     {
-+         printf("SV_SUBSCRIBER:   SV ASDU: ----------------\n");
-+         printf("SV_SUBSCRIBER:     DataLength: %d\n", asdu.dataBufferLength);
-+-        printf("SV_SUBSCRIBER:     SvId: %s\n", asdu.svId);
-++        printf("SV_SUBSCRIBER:     SvId: %s\n", asdu.svId ? asdu.svId : "(empty)");
-+         printf("SV_SUBSCRIBER:     SmpCnt: %u\n", SVSubscriber_ASDU_getSmpCnt(&asdu));
-+         printf("SV_SUBSCRIBER:     ConfRev: %u\n", SVSubscriber_ASDU_getConfRev(&asdu));
-+         
-+         if (SVSubscriber_ASDU_hasDatSet(&asdu))
-+-            printf("SV_SUBSCRIBER:     DatSet: %s\n", asdu.datSet);
-++            printf("SV_SUBSCRIBER:     DatSet: %s\n", asdu.datSet ? asdu.datSet : "(empty)");
++-			/*
++-			 * If one cipher operation fails, so will the entire
++-			 * AIO operation
++-			 */
++-			if (events[i].res < 0) {
++-				handle->aio.iocb_ret[idx] = events[i].res;
++-				return (int)events[i].res;
+++			if (idx >= KCAPI_AIO_CONCURRENT) {
+++				if (err == 0)
+++					err = -EOVERFLOW;
+++				continue;
++ 			}
 + 
-+         if (SVSubscriber_ASDU_hasRefrTm(&asdu))
-+ #ifndef _MSC_VER
-+@@ -598,7 +601,8 @@ exit_error:
-+ static void
-+ handleSVApdu(SVReceiver self, uint16_t appId, uint8_t* apdu, int apduLength, uint8_t* dstAddr)
-+ {
-+-    if (DEBUG_SV_SUBSCRIBER) {
-++    if (DEBUG_SV_SUBSCRIBER)
-++    {
-+         printf("SV_SUBSCRIBER: SV message: ----------------\n");
-+         printf("SV_SUBSCRIBER:   APPID: %u\n", appId);
-+         printf("SV_SUBSCRIBER:   APDU length: %i\n", apduLength);
-+@@ -791,6 +795,9 @@ SVSubscriber_setListener(SVSubscriber self,  SVUpdateListener listener, void* pa
-+ uint8_t
-+ SVSubscriber_ASDU_getSmpSynch(SVSubscriber_ASDU self)
-+ {
-++    if (self->smpSynch == NULL)
-++        return 0;
-++
-+     return self->smpSynch[0];
++ 			cb = (struct iocb *)(uintptr_t)events[i].obj;
++ 
++-			/*
++-			 * Older symmetric AIO implementations used a wrong
++-			 * return code.
++-			 */
++-			if (events[i].res > 0) {
++-				handle->aio.iocb_ret[idx] = events[i].res;
++-			} else {
+++			if (events[i].res == 0) {
++ 				handle->aio.iocb_ret[idx] = (__s64)cb->aio_nbytes;
+++			} else {
+++				handle->aio.iocb_ret[idx] = events[i].res;
+++				if (events[i].res < 0 && err == 0)
+++					err = (int)events[i].res;
++ 			}
++ 
++ 			cb->aio_fildes = 0;
++@@ -468,7 +462,7 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++ 		toread -= (size_t)rc;
++ 	}
++ 
++-	return 0;
+++	return err;
 + }
 + 
-+@@ -800,6 +807,9 @@ SVSubscriber_ASDU_getSmpCnt(SVSubscriber_ASDU self)
-+     uint16_t retVal;
-+     uint8_t* valBytes = (uint8_t*) &retVal;
-+ 
-++    if (self->smpCnt == NULL)
-++        return 0;
-++
-+ #if (ORDER_LITTLE_ENDIAN == 1)
-+     valBytes[0] = self->smpCnt[1];
-+     valBytes[1] = self->smpCnt[0];
-+@@ -912,6 +922,9 @@ SVSubscriber_ASDU_getConfRev(SVSubscriber_ASDU self)
-+ {
-+     uint32_t retVal;
-+ 
-++    if (self->confRev == NULL)
-++        return 0;
-++
-+ #if (ORDER_LITTLE_ENDIAN == 1)
-+     memcpy_reverse(&retVal, self->confRev, sizeof(uint32_t));
-+ #else
-+@@ -924,6 +937,9 @@ SVSubscriber_ASDU_getConfRev(SVSubscriber_ASDU self)
-+ uint8_t
-+ SVSubscriber_ASDU_getSmpMod(SVSubscriber_ASDU self)
-+ {
-++    if (self->smpMod == NULL)
-++        return 0;
-++
-+     uint8_t retVal = *((uint8_t*) (self->smpMod));
-+ 
-+     return retVal;
-+@@ -932,6 +948,9 @@ SVSubscriber_ASDU_getSmpMod(SVSubscriber_ASDU self)
-+ uint16_t
-+ SVSubscriber_ASDU_getSmpRate(SVSubscriber_ASDU self)
-+ {
-++    if (self->smpRate == NULL)
-++        return 0;
-++
-+     uint16_t retVal;
-+ 
-+ #if (ORDER_LITTLE_ENDIAN == 1)
-diff --git a/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-2.patch b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-2.patch
-new file mode 100644
-index 0000000000..e39cc3e17a
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-2.patch
-@@ -0,0 +1,134 @@
-+From 62741cc994ae02ef95e664b9470a22089788cff4 Mon Sep 17 00:00:00 2001
-+From: Michael Zillgith <michael.zillgith@mz-automation.de>
-+Date: Wed, 17 Jun 2026 12:22:34 +0100
-+Subject: [PATCH] - SV subscriber: fixed - null terminator for svId and datSet
-+ overwrites tag and can cause OOB write (LIB61850-563)
-+
-+(cherry picked from commit 6178540e8cdd26b7884a482905140cc9084966a1)
-+
-+CVE: CVE-2026-19206
-+Upstream-Status: Backport [https://github.com/mz-automation/libiec61850/commit/6178540e8cdd26b7884a482905140cc9084966a1]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ .../sv_subscriber/sv_subscriber_example.c     |  4 ++
-+ src/sampled_values/sv_subscriber.c            | 56 ++++++++++++++-----
-+ 2 files changed, 46 insertions(+), 14 deletions(-)
-+
-+diff --git a/examples/sv_subscriber/sv_subscriber_example.c b/examples/sv_subscriber/sv_subscriber_example.c
-+index 0e3ff720..6487052b 100644
-+--- a/examples/sv_subscriber/sv_subscriber_example.c
-++++ b/examples/sv_subscriber/sv_subscriber_example.c
-+@@ -30,6 +30,10 @@ svUpdateListener (SVSubscriber subscriber, void* parameter, SVSubscriber_ASDU as
-+     if (svID != NULL)
-+         printf("  svID=(%s)\n", svID);
-+ 
-++    const char* dataSet = SVSubscriber_ASDU_getDatSet(asdu);
-++    if (dataSet != NULL)
-++        printf("  dataSet=(%s)\n", dataSet);
-++
-+     printf("  smpCnt: %i\n", SVSubscriber_ASDU_getSmpCnt(asdu));
-+     printf("  confRev: %u\n", SVSubscriber_ASDU_getConfRev(asdu));
-+ 
-+diff --git a/src/sampled_values/sv_subscriber.c b/src/sampled_values/sv_subscriber.c
-+index bb82818e..97f881f6 100644
-+--- a/src/sampled_values/sv_subscriber.c
-++++ b/src/sampled_values/sv_subscriber.c
-+@@ -81,8 +81,12 @@ struct sSVSubscriber
-+ 
-+ struct sSVSubscriber_ASDU
-+ {
-+-    char* svId;
-+-    char* datSet;
-++    char svIdBuf[130];   /* copy of svId - only copied when the user requests the svId */
-++    char datSetBuf[130]; /* copy of datSet - only copied when the user requests the datSet */
-++    char* svId;          /* pointer to the start of the svId in the ASDU buffer */
-++    char* datSet;        /* pointer to the start of the datSet in the ASDU buffer */
-++    uint8_t svIdSize;    /* size of the svId in the ASDU buffer */
-++    uint8_t datSetSize;  /* size of the datSet in the ASDU buffer */
-+ 
-+     uint8_t* smpCnt;
-+     uint8_t* confRev;
-+@@ -432,15 +436,27 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+         switch (tag)
-+         {
-+         case 0x80:
-+-            asdu.svId = (char*) (buffer + bufPos);
-+-            svIdLength = elementLength;
-+-            asdu.svId[svIdLength] = 0;
-++            if (elementLength > 129)
-++            {
-++                if (DEBUG_SV_SUBSCRIBER) printf("SV_SUBSCRIBER: svId too long!\n");
-++            }
-++            else
-++            {
-++                asdu.svId = (char*) (buffer + bufPos);
-++                asdu.svIdSize = elementLength;
-++            }
-+             break;
-+ 
-+         case 0x81:
-+-            asdu.datSet = (char*) (buffer + bufPos);
-+-            datSetLength = elementLength;
-+-            asdu.datSet[datSetLength] = 0;
-++            if (elementLength > 129)
-++            {
-++                if (DEBUG_SV_SUBSCRIBER) printf("SV_SUBSCRIBER: datSet too long!\n");
-++            }
-++            else
-++            {
-++                asdu.datSet = (char*) (buffer + bufPos);
-++                asdu.datSetSize = elementLength;
-++            }
-+             break;
-+ 
-+         case 0x82:
-+@@ -479,17 +495,17 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+ 
-+         bufPos += elementLength;
-+     }
-+-    
-++
-+     if (DEBUG_SV_SUBSCRIBER)
-+     {
-+         printf("SV_SUBSCRIBER:   SV ASDU: ----------------\n");
-+         printf("SV_SUBSCRIBER:     DataLength: %d\n", asdu.dataBufferLength);
-+-        printf("SV_SUBSCRIBER:     SvId: %s\n", asdu.svId ? asdu.svId : "(empty)");
-++        printf("SV_SUBSCRIBER:     SvId: %s\n", SVSubscriber_ASDU_getSvId(&asdu));
-+         printf("SV_SUBSCRIBER:     SmpCnt: %u\n", SVSubscriber_ASDU_getSmpCnt(&asdu));
-+         printf("SV_SUBSCRIBER:     ConfRev: %u\n", SVSubscriber_ASDU_getConfRev(&asdu));
-+-        
-++
-+         if (SVSubscriber_ASDU_hasDatSet(&asdu))
-+-            printf("SV_SUBSCRIBER:     DatSet: %s\n", asdu.datSet ? asdu.datSet : "(empty)");
-++            printf("SV_SUBSCRIBER:     DatSet: %s\n", SVSubscriber_ASDU_getDatSet(&asdu));
-+ 
-+         if (SVSubscriber_ASDU_hasRefrTm(&asdu))
-+ #ifndef _MSC_VER
-+@@ -899,13 +915,25 @@ SVSubscriber_ASDU_hasSmpMod(SVSubscriber_ASDU self)
-+ const char*
-+ SVSubscriber_ASDU_getSvId(SVSubscriber_ASDU self)
-+ {
-+-    return self->svId;
-++    if (self->svId == NULL)
-++        return NULL;
-++
-++    memcpy(self->svIdBuf, self->svId, self->svIdSize);
-++    self->svIdBuf[self->svIdSize] = 0; /* ensure null termination */
-++
-++    return self->svIdBuf;
-+ }
-+ 
-+ const char*
-+ SVSubscriber_ASDU_getDatSet(SVSubscriber_ASDU self)
-+ {
-+-    return self->datSet;
-++    if (self->datSet == NULL)
-++        return NULL;
-++
-++    memcpy(self->datSetBuf, self->datSet, self->datSetSize);
-++    self->datSetBuf[self->datSetSize] = 0; /* ensure null termination */
-++
-++    return self->datSetBuf;
-+ }
-+ 
-+ static inline void
-diff --git a/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-3.patch b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-3.patch
-new file mode 100644
-index 0000000000..75e476c6c5
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2026-19206-3.patch
-@@ -0,0 +1,115 @@
-+From 03841913e3b8220f1ceb2ab5493bc31b769113bd Mon Sep 17 00:00:00 2001
-+From: Michael Zillgith <michael.zillgith@mz-automation.de>
-+Date: Wed, 1 Jul 2026 11:32:34 +0100
-+Subject: [PATCH] - SV subscriber: fixed missing length validation of some ASDU
-+ elements that can cause OOB reads when these fields are later used by the
-+ application (LIB61850-574)
-+
-+(cherry picked from commit a96bd674e0238276dd1387d31d52e55229d0771e)
-+
-+CVE: CVE-2026-19206
-+Upstream-Status: Backport [https://github.com/mz-automation/libiec61850/commit/a96bd674e0238276dd1387d31d52e55229d0771e]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/sampled_values/sv_subscriber.c | 48 +++++++++++++++++++++++++-----
-+ 1 file changed, 40 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/sampled_values/sv_subscriber.c b/src/sampled_values/sv_subscriber.c
-+index 97f881f6..55422d87 100644
-+--- a/src/sampled_values/sv_subscriber.c
-++++ b/src/sampled_values/sv_subscriber.c
-+@@ -402,6 +402,20 @@ SVReceiver_stopThreadless(SVReceiver self)
-+     self->running = false;
-+ }
-+ 
-++static void
-++invalidFieldSize(const char* fieldName, int expectedSize, int actualSize)
-++{
-++    if (DEBUG_SV_SUBSCRIBER)
-++        printf("SV_SUBSCRIBER: Invalid %s size: expected %d, got %d\n", fieldName, expectedSize, actualSize);
-++}
-++
-++static void
-++fieldTooLong(const char* fieldName, int maxSize, int actualSize)
-++{
-++    if (DEBUG_SV_SUBSCRIBER)
-++        printf("SV_SUBSCRIBER: %s too long: max %d, got %d\n", fieldName, maxSize, actualSize);
-++}
-++
-+ static void
-+ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+ {
-+@@ -438,7 +452,7 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+         case 0x80:
-+             if (elementLength > 129)
-+             {
-+-                if (DEBUG_SV_SUBSCRIBER) printf("SV_SUBSCRIBER: svId too long!\n");
-++                return fieldTooLong("svId", 129, elementLength);
-+             }
-+             else
-+             {
-+@@ -450,7 +464,7 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+         case 0x81:
-+             if (elementLength > 129)
-+             {
-+-                if (DEBUG_SV_SUBSCRIBER) printf("SV_SUBSCRIBER: datSet too long!\n");
-++                return fieldTooLong("datSet", 129, elementLength);
-+             }
-+             else
-+             {
-+@@ -460,23 +474,38 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+             break;
-+ 
-+         case 0x82:
-+-            asdu.smpCnt = buffer + bufPos;
-++            if (elementLength != 2)
-++                return invalidFieldSize("SmpCnt", 2, elementLength);
-++            else
-++                asdu.smpCnt = buffer + bufPos;
-+             break;
-+ 
-+         case 0x83:
-+-            asdu.confRev = buffer + bufPos;
-++            if (elementLength != 4)
-++                return invalidFieldSize("ConfRev", 4, elementLength);
-++            else
-++                asdu.confRev = buffer + bufPos;
-+             break;
-+ 
-+         case 0x84:
-+-            asdu.refrTm = buffer + bufPos;
-++            if (elementLength != 8)
-++                return invalidFieldSize("RefrTm", 8, elementLength);
-++            else
-++                asdu.refrTm = buffer + bufPos;
-+             break;
-+ 
-+         case 0x85:
-+-            asdu.smpSynch = buffer + bufPos;
-++            if (elementLength != 1)
-++                return invalidFieldSize("SmpSynch", 1, elementLength);
-++            else
-++                asdu.smpSynch = buffer + bufPos;
-+             break;
-+ 
-+         case 0x86:
-+-            asdu.smpRate = buffer + bufPos;
-++            if (elementLength != 2)
-++                return invalidFieldSize("SmpRate", 2, elementLength);
-++            else
-++                asdu.smpRate = buffer + bufPos;
-+             break;
-+ 
-+         case 0x87:
-+@@ -485,7 +514,10 @@ parseASDU(SVReceiver self, SVSubscriber subscriber, uint8_t* buffer, int length)
-+             break;
-+ 
-+         case 0x88:
-+-            asdu.smpMod = buffer + bufPos;
-++            if (elementLength != 1)
-++                return invalidFieldSize("SmpMod", 1, elementLength);
-++            else
-++                asdu.smpMod = buffer + bufPos;
-+             break;
-+ 
-+         default: /* ignore unknown tag */
-diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
-index c0e6efedd6..c0a3d1d29b 100644
---- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
-+++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
-@@ -20,6 +20,9 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.6;protocol=https;
-            file://CVE-2026-18582.patch \
-            file://CVE-2026-18583.patch \
-            file://CVE-2026-19108.patch \
-+           file://CVE-2026-19206-1.patch \
-+           file://CVE-2026-19206-2.patch \
-+           file://CVE-2026-19206-3.patch \
- "
++ int _kcapi_aio_send_iov(struct kcapi_handle *handle, struct iovec *iov,
++@@ -544,6 +538,7 @@ int _kcapi_aio_read_iov(struct kcapi_handle *handle,
++ 		} else {
++ 			kcapi_dolog(KCAPI_LOG_ERR,
++ 				    "Could not sumbit AIO read\n");
+++			_kcapi_aio_read_all(handle, (size_t)ret, NULL);
++ 			return -EIO;
++ 		}
++ 	}
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+index 532c9e29df..f2ddc25336 100644
+--- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
  
+ SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
+ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
++           file://CVE-2026-71226-1.patch \
++           file://CVE-2026-71226-2.patch \
++           file://CVE-2026-71226-3.patch \
+           "
  
+ inherit autotools
 
