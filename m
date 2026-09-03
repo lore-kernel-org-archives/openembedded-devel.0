@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C691C624DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E0A9C624A4
 	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 09:50:55 +0000 (UTC)
 Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4062.1788429047051646716
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4203.1788429049566614891
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2026 02:50:47 -0700
+ Thu, 03 Sep 2026 02:50:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=q8j32drn;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=pGfg6in+;
  spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8557c3f270eso1325444b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:47 -0700 (PDT)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-84e27035206so1965891b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 02:50:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788429046; x=1789033846; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788429049; x=1789033849; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=h7OINWDWkPFWoalCyjxjfpFoGHkJ625GNxys0namKfs=;
-        b=q8j32drng1FCfuhlqEdJzzWvi8FiYiFEnsIN1iLcWLtTAskv7k2441Jkj+lBIJeCbq
-         WnAJiQRWK4YNWG8abLkoZwDirB3OiLPw+W3x1R0BHuoZ0rsr8Vj+1k7vhnb8E9x+cAgh
-         UZD9PCWRtZ6ksZOmKGwgSXfgNsHfswoK/X7BGi1jQzQuT4gJ8bqcPtHNqje2pKF/4O+O
-         lrePzLdVta7tV0zz4By1eOKW0kp09lzs2wTldtKcKWbalZkAccGcEWfI8g8yWA+c2j9j
-         gic3KUrPaWfW66dociHkWr8z6lCnqHOlR23TR6GrpAG4W5xVAROCoIQeWlH0EhRSewqB
-         kydQ==
+        bh=kEI6p+CRA9EMBL6/HGN7/awslcYQEBdet1Ze67a8jUA=;
+        b=pGfg6in+TYORfEno3tsM+iZ+Vwlh3zJW8gBVNoRySYP8wHtYklE64zGHzKm8a+aKDn
+         7S7Otq3nJCYdCGXrpgNSLCw1gsO4WLbO+Iel2RW/Lz9ARDvZySShxIcbyPnfxY8U9n3o
+         QiklwfsXqIQelhJwwvPEuezgWaZT50/0Lec1DxZlloj7CO/JxqADTAyH0LJGggQlXZwz
+         V7qPVJp74cPOGOvrniuk8VqlVVaHZVo4peWakmkfhzApq63sVHytVu2Vwt9wqQM5R8xK
+         wHpdhaVVSoD4a8U0UWTSeVJlIPlstHbz/8grGo5C8AjgeSSCzHX9GdH/+ovN2mU0MRFd
+         fEeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788429046; x=1789033846;
+        d=1e100.net; s=20251104; t=1788429049; x=1789033849;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=h7OINWDWkPFWoalCyjxjfpFoGHkJ625GNxys0namKfs=;
-        b=aInyC3SrORyLzB8a257QVFrQqGmSo2YiuTlR9cyJ6po/IiiluyyqoqcUdwD2zdROPQ
-         B0bNI2wmF+ClJ6t7korIcEcB7zUSOltrQvpI5MpTnHSgD3eXCrpyE5jbVUulR4XiFMwS
-         HDc6eXrOt3jjZjoBwPz+8NdIGawIerXwRcxyaSb9Edxqvwf2VkBNGm6l8QPD8ijmsS0X
-         YyoLPxxVuSZD24JwD4IxEbUwSqzFJQdBubMmBAvPkpA4F9g0Cf4I52bJcFeRxe+/Wg7Z
-         j7m+YPvuoxeRUtaipcKbPE7Zr+7uk+XoF38V6SwbIC4nl5G5cXyMfkw0sV8JK+T2OMNV
-         I4Mg==
-X-Gm-Message-State: AFuF++l2xbzsRwzqKGoUGhoWbtvA3gbAratiLuXwwKUtiU94nU4pFAH7
-	HgD+7Hu5UcISTQvSstVjjFziNF1sMCYWywKBJb/Co+lmSQu4VT3IV4zfUhaGuCk+
-X-Gm-Gg: AYBFou1ab9DkUh05FJEwVB+doSIk41fivqxC72mmyTXMzrLXRSVwtUt+PVVWF1MoWQu
-	MDJWar9GC8RuypDwohoHNGwiSSyOLEhx+GcTKlpMI7cLB2+aqJjEVIFB3OR8yTvrc8dE2yX4zY1
-	bdmYyboF8Hn77iWO9h3L9/E77LtLmj3KO+cNM6lfBHhojLNzIF8u0ws14RJvGHOEVnrGHY1S2RQ
-	GYyOr+6hgLRgI3IAdc6G1iYk13FpPExcEJXPTt7MVS/gjJKBfKw2iw7obPk+Zyfmchg+VVZCIvf
-	W79Bx28k3bu7ZQcD5Znnw3DJFKGq297cmhxktl0h1EvWedOzJSr+4HQT/AHvrW+6E50U/2hJjPD
-	Vnqu0KjMO9rjFuUDE58ktk84PLswwWEMxvyx2twgCVAZawy/AbIRIV9+AJDOoHpdit4xW3Md0ht
-	QNZp/SQurVRkqVhI9KZzw3P/V6e80gFGznv/7ZBQuuBgEzyF0G6n3hbOutx6wGwwwgLtrp3R0dH
-	IevKLH4DMw=
-X-Received: by 2002:a05:6a00:bd8c:b0:847:770f:da4c with SMTP id d2e1a72fcca58-85ed8ed841fmr17615752b3a.16.1788429046328;
-        Thu, 03 Sep 2026 02:50:46 -0700 (PDT)
+        bh=kEI6p+CRA9EMBL6/HGN7/awslcYQEBdet1Ze67a8jUA=;
+        b=iDXOv46dyN7YvxGnvTSw0rFvBudJzDkmh/IQFirIZ9+y30g+DdY/voilUgiJ3gvJvB
+         30vWH9/ywMZLima2sK9v+Q+2rd77vkyza7gObvIVdXKy05gHxB2fSbY5SUaxw7WoNfAZ
+         qgwGe/1+c59gBCzHXCEIXolh9zm3+agTadWRgzq7ws7FeFETkBTG7AnNPMkK4dYbRnAY
+         rgIs9FKY5xzqhumpTPDm0F7K3O/WGstH+1bVT1F5w2CVkdFFogoSjmEOQlZ7jFupbykN
+         7DljY2eCXnH9h4h+JQhrKDqfupJ8iqa8Ss5XJl8LfXfY1fvy//9i7ZEf+XjET7RB9HrA
+         i3sg==
+X-Gm-Message-State: AFuF++kg5+VDTgJ0s1YCVDcqyuBGGUsdyIFkLgvHcclQWGVUp0w+fi3K
+	a8tOEi8K4A9wMKXTd+y2ty9RxFDF+gnpgraySanjnn1GkTC3CI8WZmCx6/UUqcFE
+X-Gm-Gg: AYBFou0XRMTCyUTsLp6CoS8tFOjdx6DVNOwMh6Y88kp7soNXZrDE3KNnU/GS3TghHpM
+	ujrP/exq7r5xC7IuuEs+NFi8HMWSNgTqkJx25bdeYVMgtMwD0pj08QRhWeDa97TphFO3FuBhq9Q
+	eo0O8miaqTzxZWNWYztWgn0jqt7XunP6nTG5hcA6l9OXoY02+xDzYBoL216aQBiKjozvf2lLO5H
+	Kvd+jESy9eEtt9JfJIQH5FgpyCpYpvejbsdYY6u58/PIT7fHJQBFf1yza7JwDzHHdqHbid79x/2
+	6jFDjiYwC8ywq9S2Yr11uHrxq4vo/QqXKWJLKsHJKzH3aeDQIWg46YuTLtiJ8pKhq7OvXs5ff7c
+	hJuIiI5g3PhGiisKhK+a4iZ85jpiM3VOiPXsKBQrlapciQN8UE4JWYasJJNfTcl6EaI/v6QxoD7
+	O2UuMvJsHmKtAC2nnf9Uj4Ry9a7DIDVFoRdFb2VtRMGxQlcJ8vA0EQ++oQ+z4T0JJuqCuBxc1Po
+	nAj1hMZXvzhYg==
+X-Received: by 2002:a05:6a00:230a:b0:857:726d:2e97 with SMTP id d2e1a72fcca58-85ed3f6e665mr14853712b3a.20.1788429048791;
+        Thu, 03 Sep 2026 02:50:48 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.44
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc003aebdsm2581265b3a.39.2026.09.03.02.50.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 02:50:45 -0700 (PDT)
+        Thu, 03 Sep 2026 02:50:48 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 21/22] libkcapi: patch CVE-2026-71227
-Date: Thu,  3 Sep 2026 21:49:52 +1200
-Message-ID: <20260903094954.3240723-21-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 22/22] libkcapi: patch CVE-2026-71225
+Date: Thu,  3 Sep 2026 21:49:53 +1200
+Message-ID: <20260903094954.3240723-22-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
 References: <20260903094954.3240723-1-ankur.tyagi85@gmail.com>
@@ -68,79 +68,77 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 09:50:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129737
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129738
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Backport commit fixing the CVE as per the release notes[1]
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-71227
+https://nvd.nist.gov/vuln/detail/cve-2026-71225
 
 [1]https://github.com/smuellerDD/libkcapi/releases/tag/v1.5.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libkcapi/libkcapi/CVE-2026-71227.patch    | 40 +++++++++++++++++++
+ .../libkcapi/libkcapi/CVE-2026-71225.patch    | 38 +++++++++++++++++++
  .../recipes-crypto/libkcapi/libkcapi_1.5.0.bb |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71225.patch
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71225.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71225.patch
 new file mode 100644
-index 0000000000..6074c0da27
+index 0000000000..8a2e4220e7
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71227.patch
-@@ -0,0 +1,40 @@
-+From d85279e3bec7578f8c238aec92539985c2032616 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/CVE-2026-71225.patch
+@@ -0,0 +1,38 @@
++From ca418d6cc684057bcead18b3dd68d64cb3e156af Mon Sep 17 00:00:00 2001
 +From: Stephan Mueller <smueller@chronox.de>
-+Date: Thu, 30 Jul 2026 08:38:10 +0200
-+Subject: [PATCH] Fix potential infinite loop
++Date: Thu, 30 Jul 2026 08:39:37 +0200
++Subject: [PATCH] Add safety measure to prevent IV reuse
 +
 +Signed-off-by: Zoltan Fridrich <zfridric@redhat.com>
 +Signed-off-by: Stephan Mueller <smueller@chronox.de>
 +
-+CVE: CVE-2026-71227
-+Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/9a29cc2ce0fa87ec212d58118402eafe07db3f60]
++CVE: CVE-2026-71225
++Upstream-Status: Backport [https://github.com/smuellerDD/libkcapi/commit/017adba8f54f36f92e1919687fb67a89c4d299c6]
 +
 +Dropped changes to the CHANGES.md file.
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ lib/kcapi-kernel-if.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
++ lib/kcapi-kernel-if.c | 9 +++++++++
++ 1 file changed, 9 insertions(+)
 +
 +diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
-+index 8a12c09..a54cdaa 100644
++index a54cdaa..859ecdf 100644
 +--- a/lib/kcapi-kernel-if.c
 ++++ b/lib/kcapi-kernel-if.c
-+@@ -436,6 +436,8 @@ int _kcapi_aio_read_all(struct kcapi_handle *handle, size_t toread,
++@@ -1387,6 +1387,15 @@ ssize_t _kcapi_cipher_crypt_chunk(struct kcapi_handle *handle,
++ 		inlen -= inprocess;
++ 		out += ret;
++ 		outlen -= (size_t)ret;
+++
+++		/*
+++		 * Clear the IV so subsequent chunks do not override the
+++		 * kernel's chained IV via ALG_SET_IV.  The kernel updates
+++		 * its internal IV after each operation; by not sending
+++		 * ALG_SET_IV for later chunks, the next chunk continues
+++		 * where the previous one left off.
+++		 */
+++		handle->cipher.iv = NULL;
++ 	}
 + 
-+ 		if (rc < 0)
-+ 			return err == 0 ? rc : err;
-++		if (rc == 0)
-++			return err == 0 ? -ETIMEDOUT : err;
-+ 
-+ 		for (i = 0; i < rc; i++) {
-+ 			struct iocb *cb;
-+@@ -509,7 +511,7 @@ int _kcapi_aio_read_iov(struct kcapi_handle *handle,
-+ 			timeout.tv_sec = 0;
-+ 			timeout.tv_nsec = 10000;
-+ 			ret = _kcapi_aio_read_all(handle, iovlen, &timeout);
-+-			if (ret < 0)
-++			if (ret < 0 && ret != -ETIMEDOUT)
-+ 				return ret;
-+ 		}
-+ 
++ 	return totallen;
 diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
-index f2ddc25336..f1fe6a0940 100644
+index f1fe6a0940..edc8c0e47a 100644
 --- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
 +++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
-@@ -8,6 +8,7 @@ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https
-            file://CVE-2026-71226-1.patch \
+@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https
             file://CVE-2026-71226-2.patch \
             file://CVE-2026-71226-3.patch \
-+           file://CVE-2026-71227.patch \
+            file://CVE-2026-71227.patch \
++           file://CVE-2026-71225.patch \
            "
  
  inherit autotools
