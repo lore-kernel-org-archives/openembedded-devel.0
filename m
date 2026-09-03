@@ -2,218 +2,234 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD327C624A4
-	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 08:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00E0FC61DD3
+	for <webhook@archiver.kernel.org>; Thu,  3 Sep 2026 08:19:39 +0000 (UTC)
 Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2917.1788423568093823595
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2920.1788423568608123775
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2026 01:19:28 -0700
+ Thu, 03 Sep 2026 01:19:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=iiqpkLUw;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=RPT07R4P;
  spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout02.t-online.de (Postfix) with SMTP id C4757EC29
+	by mailout02.t-online.de (Postfix) with SMTP id E2B02EC38
 	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Sep 2026 10:19:25 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([84.154.164.36]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x22fL-44btZK0; Thu, 3 Sep 2026 10:19:23 +0200
+	esmtp id 1x22fL-44btZM0; Thu, 3 Sep 2026 10:19:23 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 3/6] mutter: update 48.7 -> 50.4
-Date: Thu,  3 Sep 2026 10:19:13 +0200
-Message-ID: <20260903081916.156273-3-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 5/6] gnome-shell: update
+Date: Thu,  3 Sep 2026 10:19:15 +0200
+Message-ID: <20260903081916.156273-5-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260903081916.156273-1-f_l_k@t-online.de>
 References: <20260903081916.156273-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1788423563-A8FF69C8-D9D421C3/0/0 CLEAN NORMAL
-X-TOI-MSGID: 516ce09d-66e4-492d-9776-ee3d8f670a16
+X-TOI-EXPURGATEID: 150726::1788423563-87FFC9C8-A0241443/0/0 CLEAN NORMAL
+X-TOI-MSGID: 9d290582-2928-4bc9-9475-1afbf171a853
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
 	s=20260216; t=1788423565; i=f_l_k@t-online.de;
-	bh=Fm3hFy61B/ExeJB+cP0mm5X4sfg/9scAOQlkHpwWa00=;
+	bh=0Al01A76QRdgBLFiifGe9+yIq8iTp/G8OD7ackrL/DE=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=iiqpkLUwSm+Fa80jLzE6p4gXQfk0dYfNMHAIKqfQQiaIiG6U/qW0lrHATqxBEsg3w
-	 W4lRK2G6QztmcsR2tISUvwB6OgAQ9JU/3NG6bqBZkSr68I4zCIQBKlGyMEAjho0+mT
-	 XBGNGN+waFCirK1qmqnp9l1Xa5Kww3U37JXcx1f+pGtr6ZFP8zq8v01c6W6GMdCqom
-	 HYOnOqBcxzqVCQTRw1OHZF1ggu3fC8IhP9PNV6UE49lNkwb6twz33WGzkDhdOY9hMl
-	 DrArMCmHeAfJ6zyobYCQA98MC/pCMhMsXm4b+kzDJ4U6Jmww0OjR4c4HwQQ7qc3+J4
-	 S5d5/4wJrwkmQ==
+	b=RPT07R4PiGH4hvOfXohG5gvSacmNc7OMhaWxFjmZ8QdZR1EvB5LxJTIZVBkknP8MI
+	 YDyDYdOHICpPxRUIExnXy0h0eYF50HPjSGhmcX4TjZASvxi6S2c27nOrszcikyIYfg
+	 Zmno1WQEFp/Ed4fTneOuNk4MuCs3wR0y7eC7zS8mHqrpJLXx/Ro6EMtwifz+ibcViM
+	 /K4u1okhAkv6iuBs4OtTJGGgmGGEv4sNGXaQS80oEgqiyPnXx7p6fEmlk3vmwpKwuu
+	 EEkQvs7DUJYjrhyv7W+hJy+E4d9pMhCMmc2xcjiw+TZluOaZgiPkl7jalIGWnEzB0/
+	 qzYM02yKWeUOw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 08:19:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129705
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2026 08:19:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129707
 
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../mutter/{mutter_48.7.bb =3D> mutter_50.4.bb} | 77 ++++++++++++-------
- 1 file changed, 48 insertions(+), 29 deletions(-)
- rename meta-gnome/recipes-gnome/mutter/{mutter_48.7.bb =3D> mutter_50.4.=
-bb} (66%)
+ ...ver-Fix-build-failure-with-libical-4.patch | 44 ++++++++++++++++++
+ ...nome-shell_48.8.bb =3D> gnome-shell_50.4.bb} | 45 ++++++++++++-------
+ 2 files changed, 73 insertions(+), 16 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002=
+-calendar-server-Fix-build-failure-with-libical-4.patch
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_48.8.bb =3D> gn=
+ome-shell_50.4.bb} (65%)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_48.7.bb b/meta-gnome/=
-recipes-gnome/mutter/mutter_50.4.bb
-similarity index 66%
-rename from meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-rename to meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
-index bc1fe52b3b..91ba3f5489 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
-@@ -3,16 +3,23 @@ LICENSE =3D "GPL-2.0-only"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calend=
+ar-server-Fix-build-failure-with-libical-4.patch b/meta-gnome/recipes-gno=
+me/gnome-shell/gnome-shell/0002-calendar-server-Fix-build-failure-with-li=
+bical-4.patch
+new file mode 100644
+index 0000000000..d64cf38ccc
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calendar-serv=
+er-Fix-build-failure-with-libical-4.patch
+@@ -0,0 +1,44 @@
++From 91eaa9221b45b506d7a5d84a9ec8c204b5c8c34f Mon Sep 17 00:00:00 2001
++From: Xi Ruoyao <xry111@xry111.site>
++Date: Fri, 8 May 2026 13:13:37 +0800
++Subject: [PATCH] calendar-server: Fix build failure with libical 4
++
++Fix the following build error with libical 4 due to function signature c=
+hanges:
++
++    error: passing argument 4 of 'get_time_from_property' from incompati=
+ble pointer type [-Wincompatible-pointer-types]
++    note: expected 'ICalTime * (*)(ICalProperty *)' but argument is of t=
+ype 'ICalTime * (*)(const ICalProperty *)'
++
++Link: https://github.com/libical/libical/blob/4.0/docs/MigrationGuide_to=
+_4.md
++Part-of: <https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/42=
+15>
++
++Only the gnome-shell-calendar-server.c hunk of the upstream commit is ta=
+ken;
++src/calendar-server/reminder-watcher.c does not exist in the 50.x series=
+.
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-shell/-/=
+commit/b34766f3992c7616b7816a47249fb463c053e5fa]
++---
++ src/calendar-server/gnome-shell-calendar-server.c | 8 +++++++-
++ 1 file changed, 7 insertions(+), 1 deletion(-)
++
++diff --git a/src/calendar-server/gnome-shell-calendar-server.c b/src/cal=
+endar-server/gnome-shell-calendar-server.c
++index 0b2f88eb7..622c16181 100644
++--- a/src/calendar-server/gnome-shell-calendar-server.c
+++++ b/src/calendar-server/gnome-shell-calendar-server.c
++@@ -112,11 +112,17 @@ typedef struct
++   time_t  end_time;
++ } CalendarAppointment;
++=20
+++#if ICAL_CHECK_VERSION(4, 0, 0)
+++typedef ICalTime * (* GetICalPropFunc) (const ICalProperty *prop);
+++#else
+++typedef ICalTime * (* GetICalPropFunc) (ICalProperty *prop);
+++#endif
+++
++ static gboolean
++ get_time_from_property (ECalClient            *cal,
++                         ICalComponent         *icomp,
++                         ICalPropertyKind       prop_kind,
++-                        ICalTime * (* get_prop_func) (ICalProperty *pro=
+p),
+++                        GetICalPropFunc        get_prop_func,
++                         ICalTimezone          *default_zone,
++                         ICalTime              **out_itt,
++                         ICalTimezone          **out_timezone)
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.8.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
+similarity index 65%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.8.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
+index e8b1bd6d0c..f39d72532e 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.8.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
+@@ -2,48 +2,58 @@ SUMMARY =3D "GNOME Shell is the graphical shell of the =
+GNOME desktop environment"
+ LICENSE =3D "GPL-2.0-only"
  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
 263"
 =20
+-
  DEPENDS =3D " \
-+    atk \
-+    cairo \
-     colord \
--    graphene \
+     libxml2-native \
 -    gtk4 \
-+    fribidi \
-     gdk-pixbuf \
--    cairo \
--    pango \
-+    glycin \
-+    graphene \
+-    mutter \
++    at-spi2-core \
+     evolution-data-server \
+     gcr \
+-    geocode-glib \
++    gdk-pixbuf \
+     gjs \
+     gnome-autoar \
+     gnome-desktop \
+-    gnome-control-center \
+-    polkit \
+-    pipewire \
+-    libsoup-3.0 \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'startup-noti=
+fication', d)} \
+-    ibus \
      gsettings-desktop-schemas \
--    json-glib \
 +    gtk4 \
-+    harfbuzz \
-+    lcms \
-     libdisplay-info \
-+    libdrm \
-     libei \
-+    libxkbcommon \
++    libsoup-3.0 \
++    libxml2 \
++    mutter \
 +    pango \
-+    pixman \
-     python3-argcomplete-native \
-     python3-docutils-native \
-     virtual/egl \
-@@ -20,14 +27,12 @@ DEPENDS =3D " \
-     wayland \
-     wayland-native \
-     wayland-protocols \
--    libxcvt-native \
-     "
-=20
--
- inherit gnomebase gsettings gobject-introspection gettext features_check
-=20
- SRC_URI +=3D "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
--SRC_URI[archive.sha256sum] =3D "ec102aa3cbb0e39001206627aca3055314555f70=
-609de5e6c2b7efcd1fa90f20"
-+SRC_URI[archive.sha256sum] =3D "273d33c875abcb4b6cbea3f4ec045d18155fbc51=
-0c3521fc7e47926371310988"
-=20
- REQUIRED_DISTRO_FEATURES =3D "wayland polkit"
- ANY_OF_DISTRO_FEATURES =3D "opengl vulkan"
-@@ -37,38 +42,53 @@ ANY_OF_DISTRO_FEATURES =3D "opengl vulkan"
- LOGIND ?=3D "systemd"
- REQUIRED_DISTRO_FEATURES +=3D "systemd"
-=20
--# profiler requires sysprof 3.34 which is not willing to build atow
- PACKAGECONFIG ??=3D " \
-     native-backend \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 opengl glx sm xw=
-ayland startup-notification', '', d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'logind udev', ''=
-, d)} \
--    gnome-desktop \
-     egl \
-+    gles2 \
-+    opengl \
-+    fonts \
-+    bash-completion \
-+    gnome-desktop \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'logind udev', ''=
-, d)} \
++    polkit \
  "
 =20
--EXTRA_OEMESON +=3D " \
--    -Dtests=3Ddisabled \
--"
+ inherit gnomebase gsettings gettext gobject-introspection gtk-icon-cache=
+ features_check bash-completion
+=20
+-REQUIRED_DISTRO_FEATURES =3D "polkit systemd pam"
++REQUIRED_DISTRO_FEATURES =3D "polkit systemd pam wayland"
+=20
+ GTKIC_VERSION =3D "4"
+-GTKDOC_MESON_OPTION =3D "gtk_doc"
+ GIR_MESON_OPTION =3D ""
+=20
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
+=20
+ SRC_URI +=3D "file://0001-shell-app-usage.c-only-include-x11-headers-if-=
+HAVE_X.patch"
+-SRC_URI[archive.sha256sum] =3D "cb9b7d86cf362530e648e68caaf109a32af4e832=
+874a26791ca8789773efd233"
 -
--# combi-config - see meson_options.txt for more details
--PACKAGECONFIG[native-backend] =3D "-Dnative_backend=3Dtrue -Dudev=3Dtrue=
-, -Dnative_backend=3Dfalse -Dudev=3Dfalse, libdrm virtual/libgbm libinput=
- ${LOGIND} virtual/egl virtual/libgles2 udev"
--PACKAGECONFIG[glx] =3D "-Dglx=3Dtrue, -Dglx=3Dfalse"
--PACKAGECONFIG[opengl] =3D "-Dopengl=3Dtrue, -Dopengl=3Dfalse,virtual/lib=
-gl"
--PACKAGECONFIG[egl] =3D "-Degl=3Dtrue,-Degl=3Dfalse,virtual/egl"
-+PACKAGECONFIG[native-backend] =3D "-Dnative_backend=3Dtrue -Dudev=3Dtrue=
-, -Dnative_backend=3Dfalse -Dudev=3Dfalse, libdrm virtual/libgbm libinput=
- ${LOGIND} virtual/egl virtual/libgles2 udev libxcvt-native"
-+PACKAGECONFIG[opengl] =3D "-Dopengl=3Dtrue, -Dopengl=3Dfalse, virtual/li=
-bgl"
-+PACKAGECONFIG[gles2] =3D "-Dgles2=3Dtrue, -Dgles2=3Dfalse, virtual/libgl=
-es2"
-+PACKAGECONFIG[egl] =3D "-Degl=3Dtrue, -Degl=3Dfalse, virtual/egl"
-+PACKAGECONFIG[egl-device] =3D "-Degl_device=3Dtrue, -Degl_device=3Dfalse=
-"
-+PACKAGECONFIG[wayland-eglstream] =3D "-Dwayland_eglstream=3Dtrue, -Dwayl=
-and_eglstream=3Dfalse, wayland-eglstream-protocols"
-+PACKAGECONFIG[udev] =3D "-Dudev=3Dtrue, -Dudev=3Dfalse, udev"
-+PACKAGECONFIG[logind] =3D "-Dlogind=3Dtrue, -Dlogind=3Dfalse, systemd"
- PACKAGECONFIG[libwacom] =3D "-Dlibwacom=3Dtrue, -Dlibwacom=3Dfalse, libw=
-acom"
--# Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
- PACKAGECONFIG[remote-desktop] =3D "-Dremote_desktop=3Dtrue, -Dremote_des=
-ktop=3Dfalse, pipewire"
- PACKAGECONFIG[gnome-desktop] =3D "-Dlibgnome_desktop=3Dtrue, -Dlibgnome_=
-desktop=3Dfalse, gnome-desktop gnome-settings-daemon"
--PACKAGECONFIG[sm] =3D "-Dsm=3Dtrue, -Dsm=3Dfalse, libsm"
--PACKAGECONFIG[udev] =3D "-Dudev=3Dtrue, -Dudev=3Dfalse"
--PACKAGECONFIG[logind] =3D "-Dlogind=3Dtrue, -Dlogind=3Dfalse, systemd"
- PACKAGECONFIG[sound-player] =3D "-Dsound_player=3Dtrue, -Dsound_player=3D=
-false, libcanberra"
--PACKAGECONFIG[profiler] =3D "-Dprofiler=3Dtrue,-Dprofiler=3Dfalse,syspro=
-f"
-+PACKAGECONFIG[profiler] =3D "-Dprofiler=3Dtrue, -Dprofiler=3Dfalse, sysp=
-rof"
- PACKAGECONFIG[startup-notification] =3D "-Dstartup_notification=3Dtrue, =
--Dstartup_notification=3Dfalse, startup-notification, startup-notificatio=
-n"
--PACKAGECONFIG[x11] =3D "-Dx11=3Dtrue, -Dx11=3Dfalse, virtual/libx11"
- PACKAGECONFIG[xwayland] =3D "-Dxwayland=3Dtrue, -Dxwayland=3Dfalse, libx=
-cb libxi xcomposite libxcursor xdamage xext libxkbfile libxfixes xkeyboar=
-d-config virtual/libx11 xinerama xau xwayland"
-+# 'auto' would probe the xwayland pkg-config for -initfd support in the =
-sysroot.
-+PACKAGECONFIG[xwayland-initfd] =3D "-Dxwayland_initfd=3Denabled, -Dxwayl=
-and_initfd=3Ddisabled"
-+PACKAGECONFIG[fonts] =3D "-Dfonts=3Dtrue, -Dfonts=3Dfalse, pango harfbuz=
-z fribidi"
-+PACKAGECONFIG[bash-completion] =3D "-Dbash_completion=3Dtrue, -Dbash_com=
-pletion=3Dfalse, bash-completion"
-+PACKAGECONFIG[docs] =3D "-Ddocs=3Dtrue, -Ddocs=3Dfalse, gi-docgen-native=
-"
-+PACKAGECONFIG[devkit] =3D "-Ddevkit=3Denabled, -Ddevkit=3Ddisabled, gtk4=
-"
+-PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
++SRC_URI +=3D "file://0002-calendar-server-Fix-build-failure-with-libical=
+-4.patch"
++SRC_URI[archive.sha256sum] =3D "c531939539db316a41aef23670370abd1330d325=
+4f84bcb0f9f4dae5d6e362cf"
 +
-+EXTRA_OEMESON +=3D " \
-+    -Dtests=3Ddisabled \
-+    -Dinstalled_tests=3Dfalse \
-+    -Dcogl_tests=3Dfalse \
-+    -Dclutter_tests=3Dfalse \
-+    -Dmutter_tests=3Dfalse \
-+    -Dkvm_tests=3Dfalse \
-+    -Dtty_tests=3Dfalse \
-+    -Dcatch=3Dfalse \
-+    -Dverbose=3Dtrue \
++PACKAGECONFIG ??=3D " \
++    camera-monitor \
++    extensions-tool \
++    nm \
++    portal-helper \
++    bluetooth \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
 +"
+ PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
+-PACKAGECONFIG[nm] =3D "-Dnetworkmanager=3Dtrue, -Dnetworkmanager=3Dfalse=
+,networkmanager libsecret,networkmanager"
++PACKAGECONFIG[camera-monitor] =3D "-Dcamera_monitor=3Dtrue, -Dcamera_mon=
+itor=3Dfalse, pipewire"
++PACKAGECONFIG[extensions-app] =3D "-Dextensions_app=3Dtrue, -Dextensions=
+_app=3Dfalse"
++PACKAGECONFIG[extensions-tool] =3D "-Dextensions_tool=3Dtrue, -Dextensio=
+ns_tool=3Dfalse, gnome-autoar json-glib libsoup-3.0"
++PACKAGECONFIG[nm] =3D "-Dnetworkmanager=3Dtrue, -Dnetworkmanager=3Dfalse=
+, networkmanager libsecret, networkmanager"
++PACKAGECONFIG[portal-helper] =3D "-Dportal_helper=3Dtrue, -Dportal_helpe=
+r=3Dfalse"
+ PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue, -Dsystemd=3Dfalse, systemd=
+"
 =20
--MUTTER_API_NAME =3D "mutter-16"
-+MUTTER_API_NAME =3D "mutter-18"
-=20
- do_install:prepend() {
-     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
-@@ -112,4 +132,3 @@ FILES:${PN}-dev +=3D " \
+ EXTRA_OEMESON +=3D " \
+     -Dtests=3Dfalse \
+     -Dman=3Dfalse \
++    -Dgtk_doc=3Dfalse \
+     --cross-file=3D${WORKDIR}/meson-${PN}.cross \
  "
 =20
- RDEPENDS:${PN} +=3D "${PN}-gsettings gsettings-desktop-schemas"
--
+@@ -88,6 +98,9 @@ RDEPENDS:${PN} +=3D " \
+ 	librsvg-gtk \
+ "
+=20
++# The extensions app is a GJS application and pulls libadwaita at runtim=
+e only.
++RDEPENDS:${PN} +=3D "${@bb.utils.contains('PACKAGECONFIG', 'extensions-a=
+pp', 'libadwaita', '', d)}"
++
+ PACKAGES =3D+ "${PN}-tools ${PN}-gsettings"
+ FILES:${PN}-tools =3D "${bindir}/*-tool"
+ RDEPENDS:${PN}-tools =3D "python3-core"
 --=20
 2.55.0
 
