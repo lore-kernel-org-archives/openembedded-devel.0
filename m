@@ -2,107 +2,131 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF646C79F80
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D07AFC79F83
 	for <webhook@archiver.kernel.org>; Fri,  4 Sep 2026 09:49:10 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10391.1788515345586151544
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10392.1788515347182565279
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Sep 2026 02:49:05 -0700
+ Fri, 04 Sep 2026 02:49:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=BAdaiWYX;
- spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-49cf4f81d86so5648915e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2026 02:49:05 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=WdS+oyVp;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-495437bb891so5974445e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2026 02:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1788515344; x=1789120144; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/Z+YbhjwBmJie76TnyZmV+EDTnMwRg+S6HFDugUUkus=;
-        b=BAdaiWYX9pq4bUD28xm6rn1QzWGtGiaxzY6nxeEIKZZQs8iUt6rl4PWJmRcoaW1mf8
-         7pg/8cWX7C6+PbTq+CCKwsmYVzxzqH3nPizhECh571+Y8RQrUv7YmAwGXjrw2Rwxc5L1
-         sDWiTox07qf90Jlkglh2/uKGh3snqUVW+AtYQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788515344; x=1789120144;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1788515345; x=1789120145; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/Z+YbhjwBmJie76TnyZmV+EDTnMwRg+S6HFDugUUkus=;
-        b=pchrUTyZdKxNoY2NAqC8jgefLJMwpbWggtmOQ2QSXtscczMpNGQ/Ex2jKC0BDKbMv1
-         IhPz+fDEOhCW6+9AdSRSyjYFq7CyQQVZF3F05XABYYlAiZg/LyQ73nrEI5zmdVI+vT2L
-         krUi9Nzu+xmLgETvPzvfrG8mvRlXqMZAS8UMJnifPDcWkln8lmQ79s1CTFdee+md3AZd
-         Y0nUK3zmAtoJJBxbeIWj4K64ziNgHy14dNfPPr8M2bkFRiArTpMf5oShwTUCip0PRcJj
-         StKuyRqPBhdc6DnVya0HW/jzmKcXGl+Co0HYu2/82KuAOrQgq6kAIoKh5CI5yJETqtHf
-         lszg==
-X-Gm-Message-State: AFuF++mCMHhfbZwJN6cOdQdHZdf5DyGBkTFcOgUpxrcCjPvWfAXCC4cX
-	M5nGH0TL8bBrhOndumj2/23JZK41dovxoe2hfNyZO7mjYl3Tf5Q+L6ZLqeFqJWGr21oUJyNfaDF
-	pfRaD
-X-Gm-Gg: AYBFou1o8hXaytvI9ZpKElD2rlfcIr9Gt1jT1f1mFUllCJghy7Xuuss2qUCtEs9tn+7
-	7Pty/JyTQpP7BZr1Tgt9cwwJwkpixxwM87W+Ug3ocZUh//7uMYECm+ptEgu88eJsPh2Iz9JdzzL
-	MOvES8EZhrhLyKFMRD60075NT++y3AA6B7LgkjMV/9T1g/Cg8xKH8prQkBT7Plv9HkqsTNGnEu1
-	144RstpS+daZFEKQ7oSv4jSvNGOeYeIL0c5Cf1qn+HrGZmm576wGleTft4amK3HaePMk3EjJKiO
-	J/T0VvXkkmJ9ipMdSIzayS3w/ZE6P4rSGv0DeJH6X764I2TwDkjiZJwDaFhW1rOu7/L4iFCYYS0
-	ROsuWBpOfZVnGFRGB5Xl6QXmIv8gK6WMnY72IJSF7zVgOTRtQlJ73o9sPKsFO/wRxVJDvvZJukU
-	SDaRR1q4McdOTrNEQbFtfO/9kAkS13QR6bNaj+Q5a0rIU/KRmDDmWaTENezL6V15urS/zU3Gdr+
-	17X5XABzGeB/79SbHtffozqdlG8U0TrjHYi24/I/5H+Mg0Hq6znSPUK/aFbw9DZpFO7XqHHkNed
-	wE6bOQnSuOYrwA==
-X-Received: by 2002:a05:600c:3551:b0:499:8b13:3a98 with SMTP id 5b1f17b1804b1-49cf8224cd8mr50452825e9.4.1788515343432;
-        Fri, 04 Sep 2026 02:49:03 -0700 (PDT)
+        bh=m9MJZNFjRteUoWxnwZXEtpqhRQmrbviszqaYVyvNYbo=;
+        b=WdS+oyVpPNUDGoGnes81tXoRAT0mkJoRIRBvofW1mjSf78pf8Sh3sxaL3JVCHld1t3
+         mC/4r6qW43tLvq0rbP5S80ciEQ3lZ+SW17nKXU+VrgTivHfY1S9CfR+AwiTF+HMIA4kq
+         OguyoxlKgkTijDONAAR9WU1Q+7IV8RZ+oC3Xk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788515345; x=1789120145;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=m9MJZNFjRteUoWxnwZXEtpqhRQmrbviszqaYVyvNYbo=;
+        b=hHbgepqAE3BqtfCtWtz3ZqNsypl6kS2DUqWGBkuw5u+T98aNr1SltSHW/FAH6Jb6+p
+         coRUPrQE9g8/ydONvlLTGnuZU1o4Lbr3cUtGdpq3YaMZ0NWXfl6vtvhMghyyiu/WopXB
+         z8PY0uP9EWzahFRNCRam43p4dEmDquMRQ4QmHXOAbeMdNTxUE5dsDCmDqzVDfhVd73Tj
+         Aevx8eD9aloB44H0btS+CxO8eWVJSD4uAvClwS8WTgb0/4TZmh7ZSdZFEhk6kZA6MBIL
+         HibJQJaGFQYhLPHZa35CsA9dab9nh430/sVXLb0ympahHuMh8U7UYlQhgLU/kcjV2H6T
+         CRRw==
+X-Gm-Message-State: AFuF++knekmIyuhPbTc25c3szXT0GXAYiisnhK220wLpCXh4/wZ8j5Z5
+	7Nfk4iMK/ZKEtZg7zhj63VNvfpzlvbrOSO3YKs9lg4CGiU8oPuNGNzMNnIwygOecn+wwhF7bnug
+	YYaIQ
+X-Gm-Gg: AYBFou0fO0n4dKT9sq7EZc3oEBcnoZc//mNGy2cpDtOGzuFbHjjUclKTF2Wji1UieKn
+	AiHNhlkJBq6I7nl2Ea/ZGgdbUmEfZqybg2gcwrecbuZY6ra15UuK3I5EfjtAJodZu++If4HgcGD
+	vDrbzQvKFtZdKdp9FWnSd9lFIIogwEPy+q6QJw8CfnMtXn6yHpOR5qJVaAwEZiFDAspz2v7XZ1S
+	Hn3K/1o+bl3S0qBC2h7JzcIMWt3SwM9lJRvk9LDTrwcb31cm8JZqQQwi1b3Ko1bWOQNlDob638B
+	zAq2nJQhLt1WBYtTRVj5wITs2jTYdK0vJkzAAvHscbudw45taozf50EKZDQxrxjP/aY3CcqEUQa
+	yrcLnHqusTYS8Ogd8ownQ7WdW1J5BuQatvrfO4LIsPVgoBgrv+0c7o93iXRJM8kRW1tzH/QJzPV
+	JRuhPtwgL7npnpfi5KuaknmYEMRH7v0miWJ1HIV1/OZwC8Q/BoygT0cyCaRP/2Al9UkJf9i9vVr
+	05GqG5LVCoQTYbLnCODb+mK3zsf6Gk3DuHVUEKcp+h4cFCqEAtnIDIvogyvCy73h1Rl9IJmhepg
+	Fpe+N4v94f2QQ+ClTqiH1uRc
+X-Received: by 2002:a05:600c:871b:b0:49b:4eb6:6ffd with SMTP id 5b1f17b1804b1-49cf82cbac2mr36349935e9.5.1788515345352;
+        Fri, 04 Sep 2026 02:49:05 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cee5d4938sm141045965e9.2.2026.09.04.02.49.02
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cee5d4938sm141045965e9.2.2026.09.04.02.49.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 02:49:02 -0700 (PDT)
+        Fri, 04 Sep 2026 02:49:03 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-cmd2: Upgrade 4.2.2 -> 4.2.3
-Date: Fri,  4 Sep 2026 12:48:53 +0300
-Message-ID: <20260904094854.3706560-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-glances: Upgrade 4.3.2 -> 4.5.6
+Date: Fri,  4 Sep 2026 12:48:54 +0300
+Message-ID: <20260904094854.3706560-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260904094854.3706560-1-leon.anavi@konsulko.com>
+References: <20260904094854.3706560-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2026 09:49:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129753
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129754
 
-Upgrade to release 4.2.3:
+Upgrade to release 4.5.6:
 
-- Fix ty unresolved-attribute warnings and add mypy back
-- Update ruff to version 0.16.5
-- Bump github/codeql-action
-- Update readme
+Bugs corrected:
+
+- Alert level decided by dict ordering: a failing+slow URL is
+  downgraded to WARNING, an unscanned URL reports CRITICAL
+- GPU plugin duplicates card name and omits N/A for unavailable
+  metrics in multi-GPU
+- GPU plugin duplicates the utilisation value and paints it with
+  the memory colour in multi-GPU
+- IP plugin displays wrong interface: outer loop in get_ip_address()
+  never breaks
+- VideoCore (v3d) memory shows ~93% on Raspberry Pi 5 with
+  gpu_mem=4M - misleading denominator from drm-total-memory
+- CSV export: --stdout-csv data rows desync from header when
+  network interfaces change count at runtime
+- Glances Network plugin with mismatched schema not logging in
+  TimescaleDB export
+
+Security patches:
+
+- as_dict_secure() Value-Level Bypass Leaks Credentials in URL
+  Values via /api/4/config - CVE-2026-68520
+- --disable-config-exec does not cover on-alert action commands
+  - CVE-2026-68519
+- Command injection bypass of action-template sanitizer via
+  cross-field shell-operator reconstruction - CVE-2026-68518
+- Incomplete fix of CVE-2026-32608: action-template sanitizer is
+  bypassed by nested stat values - CVE-2026-62982
+- REST API CORS Credentials Guard Uses Exact-Match Instead of
+  Membership Test - CVE-2026-68517
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cmd2_4.2.2.bb => python3-cmd2_4.2.3.bb}    | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_4.2.2.bb => python3-cmd2_4.2.3.bb} (82%)
+ .../{python3-glances_4.3.2.bb => python3-glances_4.5.6.bb}    | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-glances_4.3.2.bb => python3-glances_4.5.6.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_4.2.2.bb b/meta-python/recipes-devtools/python/python3-cmd2_4.2.3.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-cmd2_4.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_4.2.3.bb
-index e5916dedb9..b1de6df644 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_4.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_4.2.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2a861642858e0858af9dd4e4716bae0"
+diff --git a/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-glances_4.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
+index e4cd7d59e7..8738d5c7b1 100644
+--- a/meta-python/recipes-devtools/python/python3-glances_4.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
+@@ -1,9 +1,11 @@
+ SUMMARY = "Glances is an open-source system cross-platform monitoring tool."
++DESCRIPTION = "Glances an Eye on your system. A top/htop alternative for \
++GNU/Linux, BSD, macOS and Windows operating systems."
+ HOMEPAGE = "https://nicolargo.github.io/glances/"
+ LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=852ecadc0ac7e6f4d7144d5544a3815b"
  
- DEPENDS += "python3-setuptools-scm-native"
+-SRC_URI[sha256sum] = "736faa7faea3bcd58afffd6443974b4ed4b498627a71ce5d6c9640b7b5ddbd94"
++SRC_URI[sha256sum] = "8a26329f0a25e878d53c2558f1eb0615b09acc1dce2ba523cab32dbe175fe8bf"
  
--SRC_URI[sha256sum] = "8f1aff338f693be4c5ae0a1c928b17d728940e03386018615b25cdcd4abd6df3"
-+SRC_URI[sha256sum] = "b5543c81e01eea9445f1248879855b727c949d5af27c0390fbb8796f782783e9"
+ PYPI_PACKAGE = "glances"
  
- inherit pypi python_setuptools_build_meta python3native
- 
-@@ -19,6 +19,7 @@ RDEPENDS:${PN} += "\
-     python3-json \
-     python3-numbers \
-     python3-rich-argparse \
-+    python3-prompt-toolkit \
- "
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
