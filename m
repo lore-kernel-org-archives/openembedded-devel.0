@@ -2,107 +2,97 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B806C79F82
-	for <webhook@archiver.kernel.org>; Sat,  5 Sep 2026 01:52:55 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.871.1788573173923372495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79116C79F82
+	for <webhook@archiver.kernel.org>; Sat,  5 Sep 2026 01:54:15 +0000 (UTC)
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.903.1788573246186331288
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Sep 2026 18:52:53 -0700
+ Fri, 04 Sep 2026 18:54:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ls5wXs21;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2d91ded8174so13228805ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2026 18:52:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=egc4wAKk;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2d53197d8b5so14912995ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2026 18:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788573173; x=1789177973; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788573245; x=1789178045; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=39OEXEHpQWuCH8EORp8l4f3V3hMujW/z196Mryu7vKo=;
-        b=Ls5wXs211NtfpCco/Bnq1KE/NJZP0HarIt6fJrsiTNROCKQbblh/VIOgFIZABt0rMh
-         7Ln/2Y4uS64Q0qALHowF1d+eGQco+FpUkE7e1x+KECxPsR5eIGJfa4xdMlX1ruVHpu22
-         Xk7xXydFeA1ko6ljET9BE3jQVNT4c8NkOJtr4+Bw0RCJ1YjJmq7mIB+TWqWKycDYFFfJ
-         MMsrvhbFNn6OE9ScOt3igTp6f4l8Gydywmyo4h8MKZP6er7dTNG0xUqaLnrpBuoY+Hli
-         QG8Hx3vwXbA7zp9jXz3fpAHPW46vhUoZ7stgVyLQTVujDHIw6uJA0rpX3QNlsXFRwSnK
-         2HNg==
+        bh=UxxgNPHYxw72Sdriw2G6G7hSY8dH3a6xRL2zjy5XkDo=;
+        b=egc4wAKkrqXt1bMnSw2u/yAhdO4ZVU/JQC/T5MW8oYwhaUOIsm4keDhFns8fQXN3f5
+         lThKELqY3cWOV43EYni3XOhtOYftpQnD1Iokic+1bDOeRuL9QeKx0x2gjmY4Ni/4v+ki
+         FxIVK1XUsQ57zP98jdF7SwhBYceyIw31b8jVVEKzTgK/W7tUB0y2W/Wl6alpAqg4Pi6W
+         ZN6AsUhuowWnw4iDJMszEbQb/h0jqBzlpFZoIBiC8roj3ig7c+yo1Ie9qr86Pp8ZuDff
+         Oj1LADC84ftYnFFDF856dhQScnC/qPs3POFqH87ZXN5dOEYbPc/j2aQx4SAyhvaGIie3
+         Fmlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788573173; x=1789177973;
+        d=1e100.net; s=20251104; t=1788573245; x=1789178045;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=39OEXEHpQWuCH8EORp8l4f3V3hMujW/z196Mryu7vKo=;
-        b=jcMVLf8LpenyZDTN5elvbDT7JdPCpLGk8GmYl6fns7Wf43C6VnM+OoZF9CUwluDLjq
-         P8ec0InthLp1qhWq2jYphocyvaZM27BBqs89FRUFqK+SipSueUCe9gvjWcJF5t6wR0q9
-         LfO8jCcsM0Dr0UKhsBPlwBQET5KMMLKyCdYu3/JtBT85EdQka2o0sqAjJwVbx5XmxNdJ
-         De3J7Ji0pr792nYS5Axn1SyzvUJVna9xqEj48+bMwkrqV6XjeClFCplp5VGEKvv/xliL
-         9T8sNyklb68kluCmhsK+Lm7s4c9J0WZhPSJRPMg6wWkxvcm/odaCH2iVv32z/RdXTzXw
-         9Pow==
-X-Gm-Message-State: AFuF++kKyn2FuNNC8C1yZpLeyFwUuAwhgte0gcjZnES2s5BXf+y/92xS
-	cbegQv1Rt2QM6UU8Oc+tKOE3pJwpjxSQuS1VsfASAy3jUeHDKjylVtjgDDJRbQ==
-X-Gm-Gg: AYBFou2V+04bZCz9sA3YIL47v/aEuiGhE8dIoXZEkYwjmogkliuXsqTDxAYJhpYg4yE
-	VAFhiAhgZNdqLY7GsrpY44lSxYvv857MGrDiEj70Ix9+U4ad3bcbbbb02qM9n7qbItiZJG34e67
-	zv8SssCn3r0uCNypq1M7fOYYBXNtxkzWeGTHGtfpsEHvE/IghEOPTs5LRqmjNSV1GyG53vTcdqt
-	pPg5o2lIp+wwmMOAnzLxxCYJHfIeiFgvtu4elgqRcM1bUcoWlDaLZvy3NBdkH/KagzSHZ/RzLU6
-	AuHtaiXCyNlJIc7oVcgROi6qvFVwfJ7D7kARuXwVFTVDr/ZHzVDUO54KruA8ovgmPUZQxLY2qSI
-	7Rx8s4pfiGdc0iK/eSg19raelZ7eglZAJnpqyntK8H11BflqNoeu8cywXBDNwlYH/Ake5O9GPuc
-	Cc7++8YPTUCFIgvFygo9TsDCX0QeQNwE5p597adaolpmU1rV0PH5z0kUoCnT8wkT3D9zlJeAskn
-	6nA/MtiL3SbBxB9QKOmbP5OeI6szzyqbgzl02YN0iIzwhLBQunsrOEY2PBwuBnv7NpkKxCzU+4I
-	hWzBus1lBzg3nC4paJbM5/FPovfBSYWkB6NzU8V2ftOIovhIV0wlQXTq+7y0M2avuaFaeJwhTCP
-	p71n3AxlU2RtAXKqutd/CgMQDFKWupKZEidkuS2i0ZzZ4gI+rhF1JAcEz
-X-Received: by 2002:a17:90b:3852:b0:38e:9ef9:eb97 with SMTP id 98e67ed59e1d1-39b26272d69mr14625529a91.16.1788573173220;
-        Fri, 04 Sep 2026 18:52:53 -0700 (PDT)
+        bh=UxxgNPHYxw72Sdriw2G6G7hSY8dH3a6xRL2zjy5XkDo=;
+        b=qZ3j3YOxnAkvC6terRTtd2RZBkh/j3HKS4GWPImATEXILmvfkMCZgGVzSU1kKMcf5W
+         kWL7K67YK5/qoHrkyXvwIwp4tr65P+ldulOCN4RVFL+sZTR6Hp+AwmdnbzeC6Jp/kXJI
+         BtZRprJhU1NYNVDgrwoe7ROxBtydKZyIzgY+hKfBWsSyp98E1bWP2L7IBzxRnEcEa3Ps
+         1WxjLf1hWua+awPGwcth2MaBj7lwS/DTyXJ6MPqAPSZeyrgjsXiyqttMi3L4CgKnZ3h9
+         q7O/N7kCutwQ+BiZ2QajVvEqYB3ATul/nYbB8AGLfvERgQEl6uzTj97Hi56nSiZS1wbB
+         44mg==
+X-Gm-Message-State: AFuF++nacLA/lTOUFfJmGNaiu+i8hYO8fwjL8TgIwRP/RDJdswOA+2yV
+	2gyP3n9b24dl8KFL98WJ6gclQaFXOToKYykQrNRyrAy6+w5uuWdP6cxB0bhPUA==
+X-Gm-Gg: AYBFou13ESnlKPLZjd8vywXV2nwWA3NlmLcLeqPJ5HRtLq3BkrJa/QUuxw6uCnGnf96
+	/FvowfYdbAm8B21XoP8FZgOVtzHyjgpBljb3UnnU4xTyoDlfLuDZ0hqxnbIr5NtD+wCaICrBocB
+	IKxInB75FR5JtksAGF4vAuz9QzOdikSUm+3pJJMnbEtwNJr1QSzl7KP7jXRok8ob65FqBOYFSsq
+	0IbEkqr1Zcmde0FHJZ1lh0jB2lkV/nb9rs98iKLE3KKkMgBWzsuaMe3nz8JtJOjiD62egopsWnC
+	5yWWK8yOWFZ2Pk3ON4cFwC/QJxNhyc98D+7J6o4pa3H0bKZfKz2MUQ4Cee5J8biSF5TLBYvXPci
+	ocuTcM44QDem83MLIrjWWAKRBUcFFcuQW/bhHt9VpKdE5Ks6bbb7F9exKsVubFMbOxwySXrjG6J
+	asG82m6xudFRL/sGln5OkUXc0wEICnyQcjPTP5j46HjMqejqLKkkCRS9FusoG1a0RtAQluyeze1
+	//4dFDXFXdOhTfC3+eAY+0CtTpvoptafx7pEfkRJ04G0QzcEWc4LiGpe0Xlj8Y0iGKuC/TIBO0w
+	Tsc5P9lt1UKCiZCxbq85VpFjlY5m2+iiqnkqQfHxQlVu7faMMSYonWXvieJXQG1Es/4aMW+UNhy
+	GUF08NFGv10GdGGO1gLn4PWzFJfI+NcQQZbr5NTi3qc/630LQQ3G5kSu4
+X-Received: by 2002:a17:90a:e703:b0:398:e969:87ef with SMTP id 98e67ed59e1d1-39b2629926dmr14769008a91.24.1788573245485;
+        Fri, 04 Sep 2026 18:54:05 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339bdf26c5sm9273446eec.27.2026.09.04.18.52.52
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm2505284c88.12.2026.09.04.18.54.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 18:52:52 -0700 (PDT)
+        Fri, 04 Sep 2026 18:54:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] thermald: Fix build with clang 23
-Date: Fri,  4 Sep 2026 18:52:49 -0700
-Message-ID: <20260905015249.598172-1-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] dovecot: Work around clang 23 hang
+Date: Fri,  4 Sep 2026 18:54:02 -0700
+Message-ID: <20260905015402.689119-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2026 01:52:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129773
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2026 01:54:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129774
 
-configure.ac appends -Werror on top of -Wall unless --disable-werror is
-passed, so every warning a newer compiler learns turns into a hard build
-failure.
+clang 23 gets stuck in an infinite loop compiling dovecot, so the build
+never completes.
 
-clang 23 added -Wunused-but-set-global and enabled it under -Wall. It
-fires on the "static gpointer <t_n>_parent_class = NULL" that glib's
-G_DEFINE_TYPE() emits, which is assigned in the generated class_intern_init
-but never read unless the type chains up to a parent vfunc. PrefObject in
-thd_dbus_interface.cpp never does:
+turn off loop strenght reduction opt pass
 
-  src/thd_dbus_interface.cpp:48:1: error: variable 'pref_object_parent_class'
-      set but not used [-Werror,-Wunused-but-set-global]
-     48 | G_DEFINE_TYPE(PrefObject, pref_object, G_TYPE_OBJECT)
-
-Pass --disable-werror, the escape hatch upstream added for exactly this,
-rather than suppressing the individual warning - gcc does not know
--Wno-unused-but-set-global. OE's own -Werror=format-security is unaffected.
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb b/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-index 937e9a5705..275fbf2b41 100644
---- a/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-+++ b/meta-oe/recipes-bsp/thermald/thermald_2.5.12.bb
-@@ -29,6 +29,7 @@ do_configure:prepend () {
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb b/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
+index 2f4981bee1..27d19f178e 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
+@@ -20,6 +20,9 @@ SRC_URI[sha256sum] = "868c2686a61b5f8e00a3e4721789b1ab46e6528fd773a5fbed07a6ecba
 
- EXTRA_OECONF = " \
-                  --with-systemdsystemunitdir=${systemd_system_unitdir} \
-+                 --disable-werror \
-                  "
+ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++# clang 23 runs into infinite loop while compiling it
++CFLAGS:append:toolchain-clang = " -mllvm -disable-lsr"
++
+ LDFLAGS += "-ltirpc"
 
- FILES:${PN} += "${datadir}/dbus-1"
+ inherit autotools pkgconfig systemd useradd gettext multilib_header
 
