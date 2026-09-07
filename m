@@ -2,62 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59EE1C79F99
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7127FC79FA7
 	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:29 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31925.1788776667248683172
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31924.1788776661668999151
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:24:27 -0700
+ Mon, 07 Sep 2026 03:24:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rws8gEzq;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c9e7391839cso3528052a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jmLYtWdV;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-6b145a9623fso1558911eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788776667; x=1789381467; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788776661; x=1789381461; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3ZpoZYRb+PI+XuevsLNMuvxoN3s9INh+91e/35w6yKE=;
-        b=rws8gEzqgsfHXA4RJc92v8MyOj4AYcRCi9vDcGQ2/zwejVRJEHfsBB/r6TPjMdmlpE
-         HYVraXkh87msZcG0YraHJez0FEr4bkbDNhr6DOpm+a8NTfsA6EfHsELhZf2sH9qW+cdh
-         7B/Uxj7PogXDrvZyZGGizZp6ahBponPhQhGaAVUhN1nC224UEDWjw6sJQYit+7SctY+k
-         jN6qvbO8uK/oN2eg2t6TleP+LnV3uFPRs1JhgmVKVf6KtDmBX9OcFaGgUmM3OkZV8bRh
-         hTlIqimAWf1kTbAorRMditbDopa7THr1/HD6wVpr39NQ+Qcfdys171Micyl6T3Mx0cm8
-         wP/g==
+        bh=8U4dnXA0L2t0AJS602QpK+TT+qumjXIhGnhFU3JtyoY=;
+        b=jmLYtWdVjU7h4QRjibtxfGRIvKCEwpJpdlTYlJ1RU+Z7QWnxmIRhTZpmx9NqoLIoot
+         d6qmem64Mdh89NdlSzwNeAvYK404A01Q51NqKl180qKN+0mk3weX88HTnerKF0ZNEkL7
+         45U5b/29h4kbDcz6B9082nm16NOtOci0xn9J32D/OXnfZfv5rLXae7FC7MHDvkj3igAr
+         9ZAJpCiDHXvsdqHUjhAVMSoimlYPh8qrDKrEqDu7y5F1FPQ3Bq5t5THf9NDjw81C3u+S
+         LhUZkJOykyfSkkFMjK3X68TKeXfRbM/XWxMeYOPJTch+GRh2JVCwtTBpu8NdW7jmfqYq
+         rbFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788776667; x=1789381467;
+        d=1e100.net; s=20251104; t=1788776661; x=1789381461;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3ZpoZYRb+PI+XuevsLNMuvxoN3s9INh+91e/35w6yKE=;
-        b=ARJaSmiMXPjksgOXRvT+fY99w94zanVypm9hKuRFA3IbOseEtkujca+VcEWnQbGvUX
-         0xMezZy99kuyDgvNl4N91PgCevVeCbLup6yIO0iK3nbt1Y5TVcRARwGXXXHIgAXjBj7w
-         s+QXU2SqNU4A0w1xg2O1RHIZgCaBnHkSAOD0QOYIlI+xj4vRatTiFeuW9YujAzTFrdgK
-         ytjd9TGMnb/hI8d6VTK5rmD9uijvOhUdnEVybyfoeO7OgxgL+mcVOmmu+odZVEdo+zx2
-         xm9U+QXNNy+7KhVvhMx63ZddDaPsE8s71fKcs46Q9WPuuxoREahpXSD39CcKpeMPuqSK
-         DiWw==
-X-Gm-Message-State: AFuF++n5H5OdTcTX9DflGCqMIEwXsKgLtNMbu1/3bKVE2RwLRZVOh1tP
-	+7VOJxtaQXZPgp23ER3MSDKf6KH1wx+UtMetQzkr8vwGhyyXyMVQF2/7eQtYBw==
-X-Gm-Gg: AYBFou37fvzloTCDNvwKMDjvcGQA38WiKxT6VSSqhKxttGTYiUCtgFK6v2EMV+HVSCl
-	uv/rm5hb3F/yUFIYzaPn3DObqnQQfOcjhPNXaridxvxYRr2f5v6o0tgJO78sgIrFt8uXEGV/BM8
-	e/k4cZtFx0bR9xNOKosQqTYlAseVZXa3VjLLoJk/2XdlAtMF5nJQf/V5E694Hj0Y5iDFgQn90G1
-	MGY1yk5blgGKdOH6c16WjUGsNavTgUSYvOY9t4GQNGMHvxayqfYGb63P4qXPcmcL0FoAKrHOic5
-	XUz+rnCeZjQEM6NhIY+tZ6onCC9OFLydrkdAmFJLlqm575FqZ7+GXeaHCpNiOxQgC6XgkbjJTh5
-	cBb6CJ1CxG+f4ixhaeK9WAD07Mu9Ekusm1Ph2orVOKkI78jVhiONhsbpB7xWx2dy4iYelbWSVWm
-	9e1BMszT0yOllNLBY7i9399yqZiWJ1FtTZEkXKugDGEhuAsOgudvcOotj8bQkFBdTHCx6hbwXi
-X-Received: by 2002:a17:90b:3943:b0:398:d8eb:cb2a with SMTP id 98e67ed59e1d1-39b26273e31mr36401170a91.23.1788776666367;
-        Mon, 07 Sep 2026 03:24:26 -0700 (PDT)
+        bh=8U4dnXA0L2t0AJS602QpK+TT+qumjXIhGnhFU3JtyoY=;
+        b=MBmVKig+tD23E+CCdmzaOHPrJCqn25egW5QpGLzR2DfZFsgbJQXiVVOykDX5wO8nTk
+         VQki/8ZTE+mYu8piRCVDGTH0KAw97CPII4nYOMAbaUpvYdAiqPHuzvh1G0FZXRzD6dEG
+         guvPhmjUPqRQUNRQFcqWQ/IH4Hob44zsZLkYsE26ETqmLgI/8OJNG9mp7H0eBUJ/srAr
+         lf3xA5kauEUnAntfq8M2/YMeNvmgE9X+lY3ps+mh/8BiHIM5u/vvnZLR8CnCHp470Reg
+         Q7hwkrLKS2PvqvcczPOrmF5CXZ3TysEAxVejEIXSw4yB4CmG68JXzhcUu+0SMpn8mtnU
+         y7Tw==
+X-Gm-Message-State: AFuF++lCdjVHR+sTebLeK1+WcLxRSz4bBeG/zxFpSwvWS0q3/lFGE1Uv
+	lP68nP9xzjnOwEEXLjRHSw7HOrtugKpBGFS9XnAWfMzJtqE/hWZ4KWkLAH3OaHKu
+X-Gm-Gg: AYBFou3G0r5EoeNWmJE9R85eHwCzq65Is8nxISguNOu1UaGVq+OFJM3EFK8DGEPK0oE
+	0fLPJq77V9pcAab6LoyxNOS0pIkVFcw93HtC+yxxEsIYm3V3ezYyabg+4syEjqDoFvLntmOHF3c
+	mD+5dbWGXCvT3Th6Fwz0GjV7GZ24SXZnWKLtYB9QZctmdLh5QlOFnoBdcKauQQtfsyiS+QCtxGe
+	Dms+PdvPdiUrE+UcG+rvfALWvQcIdikTzacq+Hm5jwJY9NmkX9KoFh1j03dPGjn49JXwgX+WctU
+	x+MvTJpEaYvKewEI2TMOvaok2Zmx0ZehZ7O/4NZt0E4/3A+CV2zg81V+JduUjcVlNpRAL3pN44H
+	7j1mln/kCEb25ptc/tIbEkfeUd0HTBwOh2Zu2Xolih0UqclKm0UGdXE4QrwkvWIMxJfwebmX0pO
+	JTE06r3VgyXVXzTKLK4MAdNX3Z5q+naXOikyUldyoW0dNClWFBTIkkMSMJsKCVF3xHv5/BmzE+H
+	Fh/AGaZl1g=
+X-Received: by 2002:a05:6820:2906:b0:6a3:8738:4106 with SMTP id 006d021491bc7-6b6fdbbfe7fmr13023943eaf.26.1788776660613;
+        Mon, 07 Sep 2026 03:24:20 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.23
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 03:24:25 -0700 (PDT)
+        Mon, 07 Sep 2026 03:24:20 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 21/33] wolfssl: patch CVE-2026-10098
-Date: Mon,  7 Sep 2026 22:23:05 +1200
-Message-ID: <20260907102318.2459883-21-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 19/33] tesseract: patch CVE-2026-73067
+Date: Mon,  7 Sep 2026 22:23:03 +1200
+Message-ID: <20260907102318.2459883-19-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
 References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
@@ -67,544 +68,564 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129833
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129831
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-CVE-2026-10098-1.patch is needed to cherry-pick the commit mentioned in the
-PR[1]
-
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-10098
-
-[1]https://github.com/wolfSSL/wolfssl/pull/10554/commits
+https://nvd.nist.gov/vuln/detail/cve-2026-73067
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-10098-1.patch      | 368 ++++++++++++++++++
- .../wolfssl/files/CVE-2026-10098-2.patch      | 126 ++++++
- .../wolfssl/wolfssl_5.9.1.bb                  |   2 +
- 3 files changed, 496 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-1.patch
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-2.patch
+ .../tesseract/CVE-2026-73067-1.patch          | 423 ++++++++++++++++++
+ .../tesseract/CVE-2026-73067-2.patch          |  96 ++++
+ .../tesseract/tesseract_5.5.2.bb              |   2 +
+ 3 files changed, 521 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-1.patch
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-2.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-1.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-1.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-1.patch
 new file mode 100644
-index 0000000000..86f1c8a9a0
+index 0000000000..95fd102ebf
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-1.patch
-@@ -0,0 +1,368 @@
-+From d2dca1bdcb6dc5f6fb02c44a042130cd11d27cd0 Mon Sep 17 00:00:00 2001
-+From: Colton Willey <colton@wolfssl.com>
-+Date: Mon, 13 Apr 2026 20:29:50 -0700
-+Subject: [PATCH] Fix NULL derefs, buffer overflow, and i2d contract in
-+ EVP/OCSP/X509
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-1.patch
+@@ -0,0 +1,423 @@
++From 9d83107c2511e7e2a7dc649c7bb1633da746669f Mon Sep 17 00:00:00 2001
++From: Stefan Weil <sw@weilnetz.de>
++Date: Sun, 12 Jul 2026 13:49:46 +0200
++Subject: [PATCH] Fix memory-safety issues in .traineddata deserialization
 +
-+Harden OpenSSL compatibility layer against NULL pointers, negative lengths,
-+and buffer overflows across EVP, OCSP, and X509 APIs. Fix DSA SignFinal
-+write-before-check overflow, add missing i2d_OCSP_RESPONSE allocation path,
-+and fix unaligned keyUsage access.
++Add bounds checking on count/length fields read from untrusted
++.traineddata files before they are used to size allocations or index
++arrays. Use unsigned types where negative values make no sense.
 +
-+(cherry picked from commit 58a27848a800aadca91f606dc4fe5234b9971011)
++Key changes:
++- serialis.cpp: overflow check in DeSerializeSkip, size limits for
++  DeSerialize(string) and DeSerialize(vector<char>)
++- unicharcompress.h: validate RecodedCharID length before reading
++  into fixed-size code array (buffer overflow fix), change length_
++  to uint32_t, use unsigned types for Set() index and length()
++- dawg.cpp/h: use uint32_t for num_edges_, add bounds checks on all
++  edge traversal loops, replace no-op ASSERT_HOST with proper errors
++- fontinfo.cpp: bounds check font name size to prevent integer
++  overflow in size+1, use uint32_t for spacing vector size
++- tessdatamanager.cpp: validate offsets are within file bounds
++- bitvector.cpp, weightmatrix.cpp, plumbing.cpp: add size limits
 +
-+CVE: CVE-2026-10098
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/58a27848a800aadca91f606dc4fe5234b9971011]
++Assisted-by: OpenCode / big-pickle (opencode)
++Signed-off-by: Stefan Weil <stweil@tessus.org>
++(cherry picked from commit 82727cc11c34eaf1249af002d69f6bbae70993b9)
++
++CVE: CVE-2026-73067
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/82727cc11c34eaf1249af002d69f6bbae70993b9]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/ocsp.c               | 39 +++++++++++++++++++++++++------
-+ src/ssl.c                |  8 ++++++-
-+ src/x509.c               | 12 ++++++++--
-+ tests/api.c              |  2 +-
-+ wolfcrypt/src/evp.c      | 50 ++++++++++++++++++++++++++++++++--------
-+ wolfcrypt/src/pwdbased.c |  3 +++
-+ 6 files changed, 94 insertions(+), 20 deletions(-)
++ src/ccstruct/fontinfo.cpp      | 10 ++++++---
++ src/ccstruct/fontinfo.h        |  2 +-
++ src/ccutil/bitvector.cpp       |  4 ++++
++ src/ccutil/serialis.cpp        | 10 +++++++++
++ src/ccutil/tessdatamanager.cpp |  9 ++++++++
++ src/ccutil/unicharcompress.h   | 19 ++++++++++------
++ src/dict/dawg.cpp              | 40 ++++++++++++++++++++++++++--------
++ src/dict/dawg.h                | 16 +++++++++-----
++ src/lstm/plumbing.cpp          |  4 ++++
++ src/lstm/weightmatrix.cpp      |  4 ++++
++ 10 files changed, 92 insertions(+), 26 deletions(-)
 +
-+diff --git a/src/ocsp.c b/src/ocsp.c
-+index 2fff7ced5..9de23cb9e 100644
-+--- a/src/ocsp.c
-++++ b/src/ocsp.c
-+@@ -749,7 +749,9 @@ int wolfSSL_OCSP_resp_find_status(WOLFSSL_OCSP_BASICRESP *bs,
++diff --git a/src/ccstruct/fontinfo.cpp b/src/ccstruct/fontinfo.cpp
++index 65d4d032..9984469f 100644
++--- a/src/ccstruct/fontinfo.cpp
+++++ b/src/ccstruct/fontinfo.cpp
++@@ -145,6 +145,10 @@ bool read_info(TFile *f, FontInfo *fi) {
++   if (!f->DeSerialize(&size)) {
++     return false;
++   }
+++  // Reject unreasonably large font names to prevent overflow in size + 1.
+++  if (size > 100000) {
+++    return false;
+++  }
++   char *font_name = new char[size + 1];
++   fi->name = font_name;
++   if (!f->DeSerialize(font_name, size)) {
++@@ -161,16 +165,16 @@ bool write_info(FILE *f, const FontInfo &fi) {
++ }
 + 
-+     single = bs->single;
-+     while (single != NULL) {
-+-        if ((XMEMCMP(single->status->serial, id->status->serial, (size_t)single->status->serialSz) == 0)
-++        if (single->status != NULL && id->status != NULL &&
-++            (XMEMCMP(single->status->serial, id->status->serial,
-++                     (size_t)single->status->serialSz) == 0)
-+          && (XMEMCMP(single->issuerHash, id->issuerHash, OCSP_DIGEST_SIZE) == 0)
-+          && (XMEMCMP(single->issuerKeyHash, id->issuerKeyHash, OCSP_DIGEST_SIZE) == 0)) {
-+             break;
-+@@ -757,7 +759,7 @@ int wolfSSL_OCSP_resp_find_status(WOLFSSL_OCSP_BASICRESP *bs,
-+         single = single->next;
++ bool read_spacing_info(TFile *f, FontInfo *fi) {
++-  int32_t vec_size, kern_size;
+++  uint32_t vec_size;
+++  int32_t kern_size;
++   if (!f->DeSerialize(&vec_size)) {
++     return false;
++   }
++-  ASSERT_HOST(vec_size >= 0);
++   if (vec_size == 0) {
++     return true;
++   }
++   fi->init_spacing(vec_size);
++-  for (int i = 0; i < vec_size; ++i) {
+++  for (uint32_t i = 0; i < vec_size; ++i) {
++     auto *fs = new FontSpacingInfo();
++     if (!f->DeSerialize(&fs->x_gap_before) || !f->DeSerialize(&fs->x_gap_after) ||
++         !f->DeSerialize(&kern_size)) {
++diff --git a/src/ccstruct/fontinfo.h b/src/ccstruct/fontinfo.h
++index 1a84a567..cfb19e06 100644
++--- a/src/ccstruct/fontinfo.h
+++++ b/src/ccstruct/fontinfo.h
++@@ -76,7 +76,7 @@ struct FontInfo {
++   bool DeSerialize(TFile *fp);
++ 
++   // Reserves unicharset_size spots in spacing_vec.
++-  void init_spacing(int unicharset_size) {
+++  void init_spacing(uint32_t unicharset_size) {
++     spacing_vec = new std::vector<FontSpacingInfo *>(unicharset_size);
++   }
++   // Adds the given pointer to FontSpacingInfo to spacing_vec member
++diff --git a/src/ccutil/bitvector.cpp b/src/ccutil/bitvector.cpp
++index a02781a8..2b8b7f00 100644
++--- a/src/ccutil/bitvector.cpp
+++++ b/src/ccutil/bitvector.cpp
++@@ -102,6 +102,10 @@ bool BitVector::DeSerialize(bool swap, FILE *fp) {
++   if (swap) {
++     ReverseN(&new_bit_size, sizeof(new_bit_size));
++   }
+++  // Reject unreasonably large bit vectors.
+++  if (new_bit_size > 500000000) {
+++    return false;
+++  }
++   Alloc(new_bit_size);
++   int wordlen = WordLength();
++   if (!tesseract::DeSerialize(fp, &array_[0], wordlen)) {
++diff --git a/src/ccutil/serialis.cpp b/src/ccutil/serialis.cpp
++index d9c9a8d4..cb663094 100644
++--- a/src/ccutil/serialis.cpp
+++++ b/src/ccutil/serialis.cpp
++@@ -88,6 +88,10 @@ bool TFile::DeSerializeSkip(size_t size) {
++   if (!DeSerialize(&len)) {
++     return false;
++   }
+++  // Check for overflow: len * size must not overflow size_t.
+++  if (size != 0 && len > SIZE_MAX / size) {
+++    return false;
+++  }
++   return Skip(len * size);
++ }
++ 
++@@ -95,6 +99,9 @@ bool TFile::DeSerialize(std::string &data) {
++   uint32_t size;
++   if (!DeSerialize(&size)) {
++     return false;
+++  } else if (size > 50000000) {
+++    // Arbitrarily limit the size to protect against bad data.
+++    return false;
++   } else if (size > 0) {
++     // TODO: optimize.
++     data.resize(size);
++@@ -113,6 +120,9 @@ bool TFile::DeSerialize(std::vector<char> &data) {
++   uint32_t size;
++   if (!DeSerialize(&size)) {
++     return false;
+++  } else if (size > 50000000) {
+++    // Arbitrarily limit the size to protect against bad data.
+++    return false;
++   } else if (size > 0) {
++     // TODO: optimize.
++     data.resize(size);
++diff --git a/src/ccutil/tessdatamanager.cpp b/src/ccutil/tessdatamanager.cpp
++index 8ab26506..67e86dc0 100644
++--- a/src/ccutil/tessdatamanager.cpp
+++++ b/src/ccutil/tessdatamanager.cpp
++@@ -132,14 +132,23 @@ bool TessdataManager::LoadMemBuffer(const char *name, const char *data, int size
++   }
++   for (unsigned i = 0; i < num_entries && i < TESSDATA_NUM_ENTRIES; ++i) {
++     if (offset_table[i] >= 0) {
+++      if (offset_table[i] > size) {
+++        return false;
+++      }
++       int64_t entry_size = size - offset_table[i];
++       unsigned j = i + 1;
++       while (j < num_entries && offset_table[j] == -1) {
++         ++j;
++       }
++       if (j < num_entries) {
+++        if (offset_table[j] < 0 || offset_table[j] > size) {
+++          return false;
+++        }
++         entry_size = offset_table[j] - offset_table[i];
++       }
+++      if (entry_size < 0) {
+++        return false;
+++      }
++       entries_[i].resize(entry_size);
++       if (!fp.DeSerialize(&entries_[i][0], entry_size)) {
++         return false;
++diff --git a/src/ccutil/unicharcompress.h b/src/ccutil/unicharcompress.h
++index 2e81bbde..67a441e8 100644
++--- a/src/ccutil/unicharcompress.h
+++++ b/src/ccutil/unicharcompress.h
++@@ -41,7 +41,7 @@ public:
++     length_ = length;
++   }
++   // Sets the code value at the given index in the code.
++-  void Set(int index, int value) {
+++  void Set(uint32_t index, int value) {
++     code_[index] = value;
++     if (length_ <= index) {
++       length_ = index + 1;
++@@ -59,7 +59,7 @@ public:
++     return length_ == 0;
++   }
++   // Accessors
++-  int length() const {
+++  uint32_t length() const {
++     return length_;
++   }
++   int operator()(int index) const {
++@@ -73,14 +73,19 @@ public:
++   }
++   // Reads from the given file. Returns false in case of error.
++   bool DeSerialize(TFile *fp) {
++-    return fp->DeSerialize(&self_normalized_) && fp->DeSerialize(&length_) &&
++-           fp->DeSerialize(&code_[0], length_);
+++    if (!fp->DeSerialize(&self_normalized_) || !fp->DeSerialize(&length_)) {
+++      return false;
+++    }
+++    if (length_ > kMaxCodeLen) {
+++      return false;
+++    }
+++    return fp->DeSerialize(&code_[0], length_);
++   }
++   bool operator==(const RecodedCharID &other) const {
++     if (length_ != other.length_) {
++       return false;
 +     }
-+ 
-+-    if (single == NULL)
-++    if (single == NULL || single->status == NULL)
-+         return WOLFSSL_FAILURE;
-+ 
-+     if (status != NULL)
-+@@ -1108,6 +1110,9 @@ int wolfSSL_OCSP_basic_verify(WOLFSSL_OCSP_BASICRESP* bs,
-+     int embedded;
-+     DecodedCert *cert = NULL;
-+ 
-++    if (bs == NULL)
-++        return WOLFSSL_FAILURE;
-++
-+     ret = OcspFindSigner(bs, certs, &cert, &embedded, flags);
-+     if (ret != 0) {
-+         WOLFSSL_MSG("OCSP no signer found");
-+@@ -1300,15 +1305,31 @@ int wolfSSL_i2d_OCSP_RESPONSE(OcspResponse* response,
-+     if (response == NULL)
-+         return BAD_FUNC_ARG;
-+ 
-++    if (response->source == NULL)
-++        return BAD_FUNC_ARG;
-++
-+     if (data == NULL)
-+         return (int)response->maxIdx;
-+ 
-+-    XMEMCPY(*data, response->source, response->maxIdx);
-++    if (*data == NULL) {
-++        *data = (unsigned char*)XMALLOC(response->maxIdx, NULL,
-++                                        DYNAMIC_TYPE_OPENSSL);
-++        if (*data == NULL)
-++            return -1;
-++        XMEMCPY(*data, response->source, response->maxIdx);
-++    }
-++    else {
-++        XMEMCPY(*data, response->source, response->maxIdx);
-++        *data += response->maxIdx;
-++    }
-++
-+     return (int)response->maxIdx;
-+ }
-+ 
-+ int wolfSSL_OCSP_response_status(OcspResponse *response)
-+ {
-++    if (response == NULL)
-++        return -1;
-+     return response->responseStatus;
-+ }
-+ 
-+@@ -1335,8 +1356,12 @@ const char *wolfSSL_OCSP_response_status_str(long s)
-+ WOLFSSL_OCSP_BASICRESP* wolfSSL_OCSP_response_get1_basic(OcspResponse* response)
-+ {
-+     WOLFSSL_OCSP_BASICRESP* bs;
-+-    const unsigned char *ptr = response->source;
-++    const unsigned char *ptr;
-+ 
-++    if (response == NULL || response->source == NULL)
-++        return NULL;
-++
-++    ptr = response->source;
-+     bs = wolfSSL_d2i_OCSP_RESPONSE(NULL, &ptr, response->maxIdx);
-+     return bs;
-+ }
-+@@ -1637,8 +1662,8 @@ int wolfSSL_OCSP_single_get0_status(WOLFSSL_OCSP_SINGLERESP *single,
-+                                     WOLFSSL_ASN1_TIME **thisupd,
-+                                     WOLFSSL_ASN1_TIME **nextupd)
-+ {
-+-    if (single == NULL)
-+-        return WOLFSSL_FAILURE;
-++    if (single == NULL || single->status == NULL)
-++        return -1;
-+ 
-+ #ifdef WOLFSSL_OCSP_PARSE_STATUS
-+     if (thisupd != NULL)
-+@@ -1784,7 +1809,7 @@ int wolfSSL_OCSP_REQ_CTX_add1_header(WOLFSSL_OCSP_REQ_CTX *ctx,
-+ {
-+     WOLFSSL_ENTER("wolfSSL_OCSP_REQ_CTX_add1_header");
-+ 
-+-    if (name == NULL) {
-++    if (ctx == NULL || name == NULL) {
-+         WOLFSSL_MSG("Bad parameter");
-+         return WOLFSSL_FAILURE;
-+     }
-+diff --git a/src/ssl.c b/src/ssl.c
-+index 58cd6701c..7d6ca462b 100644
-+--- a/src/ssl.c
-++++ b/src/ssl.c
-+@@ -11699,13 +11699,19 @@ char* wolfSSL_CIPHER_description(const WOLFSSL_CIPHER* cipher, char* in,
-+ int wolfSSL_OCSP_parse_url(const char* url, char** host, char** port,
-+         char** path, int* ssl)
-+ {
-+-    const char* u = url;
-++    const char* u;
-+     const char* upath; /* path in u */
-+     const char* uport; /* port in u */
-+     const char* hostEnd;
-+ 
-+     WOLFSSL_ENTER("OCSP_parse_url");
-+ 
-++    if (url == NULL || host == NULL || port == NULL || path == NULL ||
-++            ssl == NULL) {
-++        return WOLFSSL_FAILURE;
-++    }
-++
-++    u = url;
-+     *host = NULL;
-+     *port = NULL;
-+     *path = NULL;
-+diff --git a/src/x509.c b/src/x509.c
-+index 46dfd38ed..b92f7d735 100644
-+--- a/src/x509.c
-++++ b/src/x509.c
-+@@ -1317,7 +1317,9 @@ int wolfSSL_X509_add_ext(WOLFSSL_X509 *x509, WOLFSSL_X509_EXTENSION *ext,
-+         if (ext && ext->value.data) {
-+             if (ext->value.length == sizeof(word16)) {
-+                 /* if ext->value is already word16, set directly */
-+-                x509->keyUsage = *(word16*)ext->value.data;
-++                word16 ku;
-++                XMEMCPY(&ku, ext->value.data, sizeof(word16));
-++                x509->keyUsage = ku;
-+ #ifdef BIG_ENDIAN_ORDER
-+                 x509->keyUsage = rotlFixed16(x509->keyUsage, 8U);
-+ #endif
-+@@ -10998,6 +11000,11 @@ WOLFSSL_ASN1_INTEGER* wolfSSL_X509_get_serialNumber(WOLFSSL_X509* x509)
-+     if (x509->serialNumber != NULL)
-+        return x509->serialNumber;
-+ 
-++    if (x509->serialSz < 0) {
-++        WOLFSSL_MSG("Invalid serial number size");
-++        return NULL;
-++    }
-++
-+     a = wolfSSL_ASN1_INTEGER_new();
-+     if (a == NULL)
-+         return NULL;
-+@@ -16120,7 +16127,8 @@ int wolfSSL_X509_set1_notBefore(WOLFSSL_X509* x509, const WOLFSSL_ASN1_TIME *t)
-+ int wolfSSL_X509_set_serialNumber(WOLFSSL_X509* x509, WOLFSSL_ASN1_INTEGER* s)
-+ {
-+     WOLFSSL_ENTER("wolfSSL_X509_set_serialNumber");
-+-    if (x509 == NULL || s == NULL || s->length >= EXTERNAL_SERIAL_SIZE)
-++    if (x509 == NULL || s == NULL || s->data == NULL ||
-++            s->length >= EXTERNAL_SERIAL_SIZE)
-+         return WOLFSSL_FAILURE;
-+ 
-+     /* WOLFSSL_ASN1_INTEGER has type | size | data
-+diff --git a/tests/api.c b/tests/api.c
-+index 5eca4071a..919b951b3 100644
-+--- a/tests/api.c
-++++ b/tests/api.c
-+@@ -20274,7 +20274,7 @@ static int test_wolfSSL_OCSP_single_get0_status(void)
-+     ExpectPtrEq(nextDate, &certStatus.nextDateParsed);
-+ 
-+     ExpectIntEQ(wolfSSL_OCSP_single_get0_status(NULL, NULL, NULL, NULL, NULL),
-+-        CERT_GOOD);
-++        -1);
-+     ExpectIntEQ(wolfSSL_OCSP_single_get0_status(&single, NULL, NULL, NULL,
-+         NULL), CERT_GOOD);
-+ #endif
-+diff --git a/wolfcrypt/src/evp.c b/wolfcrypt/src/evp.c
-+index 05e406883..996f31f86 100644
-+--- a/wolfcrypt/src/evp.c
-++++ b/wolfcrypt/src/evp.c
-+@@ -1314,7 +1314,11 @@ int wolfSSL_EVP_CipherFinal(WOLFSSL_EVP_CIPHER_CTX *ctx, unsigned char *out,
-+ #ifndef WOLFSSL_AESGCM_STREAM
-+             if ((ctx->authBuffer && ctx->authBufferLen > 0)
-+              || (ctx->authBufferLen == 0)) {
-+-                if (ctx->enc)
-++                if (ctx->authBufferLen > 0 && out == NULL) {
-++                    ret = WOLFSSL_FAILURE;
-++                    *outl = 0;
-++                }
-++                else if (ctx->enc)
-+                     ret = wc_AesGcmEncrypt(&ctx->cipher.aes, out,
-+                             ctx->authBuffer, ctx->authBufferLen,
-+                             ctx->iv, ctx->ivSz, ctx->authTag, ctx->authTagSz,
-+@@ -1397,7 +1401,11 @@ int wolfSSL_EVP_CipherFinal(WOLFSSL_EVP_CIPHER_CTX *ctx, unsigned char *out,
-+         case WC_AES_256_CCM_TYPE:
-+             if ((ctx->authBuffer && ctx->authBufferLen > 0)
-+              || (ctx->authBufferLen == 0)) {
-+-                if (ctx->enc) {
-++                if (ctx->authBufferLen > 0 && out == NULL) {
-++                    ret = WOLFSSL_FAILURE;
-++                    *outl = 0;
-++                }
-++                else if (ctx->enc) {
-+                     ret = wc_AesCcmEncrypt(&ctx->cipher.aes, out,
-+                         ctx->authBuffer, (word32)ctx->authBufferLen,
-+                         ctx->iv, (word32)ctx->ivSz, ctx->authTag,
-+@@ -4309,16 +4317,19 @@ int wolfSSL_EVP_SignFinal(WOLFSSL_EVP_MD_CTX *ctx, unsigned char *sigret,
-+ #ifndef NO_DSA
-+     case WC_EVP_PKEY_DSA: {
-+         int bytes;
-+-        ret = wolfSSL_DSA_do_sign(md, sigret, pkey->dsa);
-++        unsigned char tmpSig[DSA_MAX_SIG_SIZE];
-++        ret = wolfSSL_DSA_do_sign(md, tmpSig, pkey->dsa);
-+         /* wolfSSL_DSA_do_sign() can return WOLFSSL_FATAL_ERROR */
-+         if (ret != WOLFSSL_SUCCESS)
-+             return ret;
-+         bytes = wolfSSL_BN_num_bytes(pkey->dsa->q);
-+         if (bytes == WC_NO_ERR_TRACE(WOLFSSL_FAILURE) ||
-+-            (int)*siglen < bytes * 2)
-++            bytes > DSA_MAX_HALF_SIZE ||
-++            bytes * 2 > (int)*siglen)
-+         {
-+             return WOLFSSL_FAILURE;
++-    for (int i = 0; i < length_; ++i) {
+++    for (uint32_t i = 0; i < length_; ++i) {
++       if (code_[i] != other.code_[i]) {
++         return false;
++       }
++@@ -91,7 +96,7 @@ public:
++   struct RecodedCharIDHash {
++     uint64_t operator()(const RecodedCharID &code) const {
++       uint64_t result = 0;
++-      for (int i = 0; i < code.length_; ++i) {
+++      for (uint32_t i = 0; i < code.length_; ++i) {
++         result ^= static_cast<uint64_t>(code(i)) << (7 * i);
++       }
++       return result;
++@@ -103,7 +108,7 @@ private:
++   // that map to the same code. Has boolean value, but int8_t for serialization.
++   int8_t self_normalized_;
++   // The number of elements in use in code_;
++-  int32_t length_;
+++  uint32_t length_;
++   // The re-encoded form of the unichar-id to which this RecodedCharID relates.
++   int32_t code_[kMaxCodeLen];
++ };
++diff --git a/src/dict/dawg.cpp b/src/dict/dawg.cpp
++index af45176f..dab4dfc2 100644
++--- a/src/dict/dawg.cpp
+++++ b/src/dict/dawg.cpp
++@@ -221,7 +221,11 @@ EDGE_REF SquishedDawg::edge_char_of(NODE_REF node, UNICHAR_ID unichar_id,
++             (!word_end || end_of_word_from_edge_rec(edges_[edge]))) {
++           return (edge);
 +         }
-++        XMEMCPY(sigret, tmpSig, bytes * 2);
-+         *siglen = (unsigned int)(bytes * 2);
-+         return WOLFSSL_SUCCESS;
++-      } while (!last_edge(edge++));
+++        if (last_edge(edge)) {
+++          break;
+++        }
+++        ++edge;
+++      } while (edge < num_edges_);
 +     }
-+@@ -4398,7 +4409,8 @@ int wolfSSL_EVP_VerifyFinal(WOLFSSL_EVP_MD_CTX *ctx,
-+     unsigned char md[WC_MAX_DIGEST_SIZE];
-+     unsigned int mdsize;
++   }
++   return (NO_EDGE); // not found
++@@ -234,7 +238,11 @@ int32_t SquishedDawg::num_forward_edges(NODE_REF node) const {
++   if (forward_edge(edge)) {
++     do {
++       num++;
++-    } while (!last_edge(edge++));
+++      if (last_edge(edge)) {
+++        break;
+++      }
+++      ++edge;
+++    } while (edge < num_edges_);
++   }
 + 
-+-    if (ctx == NULL) return WOLFSSL_FAILURE;
-++    if (ctx == NULL || pkey == NULL || sig == NULL)
-++        return WOLFSSL_FAILURE;
-+     WOLFSSL_ENTER("EVP_VerifyFinal");
-+     ret = wolfSSL_EVP_DigestFinal(ctx, md, &mdsize);
-+     if (ret <= 0)
-+@@ -4459,6 +4471,9 @@ WOLFSSL_EVP_PKEY* wolfSSL_EVP_PKEY_new_mac_key(int type, WOLFSSL_ENGINE* e,
-+     if (type != WC_EVP_PKEY_HMAC || (key == NULL && keylen != 0))
-+         return NULL;
++   return (num);
++@@ -274,7 +282,11 @@ void SquishedDawg::print_node(NODE_REF node, int max_num_edges) const {
++       if (edge - node > max_num_edges) {
++         return;
++       }
++-    } while (!last_edge(edge++));
+++      if (last_edge(edge)) {
+++        break;
+++      }
+++      ++edge;
+++    } while (edge < num_edges_);
 + 
-++    if (keylen < 0)
-++        return NULL;
-++
-+     pkey = wolfSSL_EVP_PKEY_new();
-+     if (pkey != NULL) {
-+         pkey->pkey.ptr = (char*)XMALLOC((size_t)keylen, NULL,
-+@@ -4870,6 +4885,9 @@ int wolfSSL_EVP_DigestSignFinal(WOLFSSL_EVP_MD_CTX *ctx, unsigned char *sig,
-+             return WOLFSSL_SUCCESS;
++     if (edge < num_edges_ && edge_occupied(edge) && backward_edge(edge)) {
++       do {
++@@ -290,7 +302,11 @@ void SquishedDawg::print_node(NODE_REF node, int max_num_edges) const {
++         if (edge - node > MAX_NODE_EDGES_DISPLAY) {
++           return;
 +         }
++-      } while (!last_edge(edge++));
+++        if (last_edge(edge)) {
+++          break;
+++        }
+++        ++edge;
+++      } while (edge < num_edges_);
 +     }
-++    else if (ctx->pctx == NULL || ctx->pctx->pkey == NULL) {
-++        return WOLFSSL_FAILURE;
++   } else {
++     tprintf(REFFORMAT " : no edges in this node\n", node);
++@@ -326,14 +342,17 @@ bool SquishedDawg::read_squished_dawg(TFile *file) {
++     return false;
++   }
++ 
++-  int32_t unicharset_size;
+++  uint32_t unicharset_size;
++   if (!file->DeSerialize(&unicharset_size)) {
++     return false;
++   }
++   if (!file->DeSerialize(&num_edges_)) {
++     return false;
++   }
++-  ASSERT_HOST(num_edges_ > 0); // DAWG should not be empty
+++  if (num_edges_ == 0) {
+++    tprintf("Empty dawg: num_edges is 0\n");
+++    return false;
+++  }
++   Dawg::init(unicharset_size);
++ 
++   edges_ = new EDGE_RECORD[num_edges_];
++@@ -341,7 +360,7 @@ bool SquishedDawg::read_squished_dawg(TFile *file) {
++     return false;
++   }
++   if (debug_level_ > 2) {
++-    tprintf("type: %d lang: %s perm: %d unicharset_size: %d num_edges: %d\n",
+++    tprintf("type: %d lang: %s perm: %d unicharset_size: %d num_edges: %" PRIu32 "\n",
++             type_, lang_.c_str(), perm_, unicharset_size_, num_edges_);
++     for (EDGE_REF edge = 0; edge < num_edges_; ++edge) {
++       print_edge(edge);
++@@ -378,8 +397,11 @@ std::unique_ptr<EDGE_REF[]> SquishedDawg::build_node_map(
++         break;
++       }
++       if (backward_edge(edge)) {
++-        while (!last_edge(edge++)) {
++-          ;
+++        while (edge < num_edges_ && !last_edge(edge)) {
+++          ++edge;
+++        }
+++        if (edge < num_edges_) {
+++          ++edge; // Skip past the last backward edge.
++         }
++       }
++       edge--;
++diff --git a/src/dict/dawg.h b/src/dict/dawg.h
++index b87b3880..d0f412c3 100644
++--- a/src/dict/dawg.h
+++++ b/src/dict/dawg.h
++@@ -418,7 +418,7 @@ public:
++     ASSERT_HOST(read_squished_dawg(&file));
++     num_forward_edges_in_node0 = num_forward_edges(0);
++   }
++-  SquishedDawg(EDGE_ARRAY edges, int num_edges, DawgType type,
+++  SquishedDawg(EDGE_ARRAY edges, uint32_t num_edges, DawgType type,
++                const std::string &lang, PermuterType perm, int unicharset_size,
++                int debug_level)
++       : Dawg(type, lang, perm, debug_level),
++@@ -441,7 +441,7 @@ public:
++     return true;
++   }
++ 
++-  int NumEdges() {
+++  uint32_t NumEdges() const {
++     return num_edges_;
++   }
++ 
++@@ -462,7 +462,11 @@ public:
++       if (!word_end || end_of_word_from_edge_rec(edges_[edge])) {
++         vec->push_back(NodeChild(unichar_id_from_edge_rec(edges_[edge]), edge));
++       }
++-    } while (!last_edge(edge++));
+++      if (last_edge(edge)) {
+++        break;
+++      }
+++      ++edge;
+++    } while (edge < num_edges_);
++   }
++ 
++   /// Returns the next node visited by following the edge
++@@ -516,7 +520,7 @@ private:
++   }
++   /// Goes through all the edges and clears each one out.
++   inline void clear_all_edges() {
++-    for (int edge = 0; edge < num_edges_; edge++) {
+++    for (uint32_t edge = 0; edge < num_edges_; edge++) {
++       set_empty_edge(edge);
++     }
++   }
++@@ -555,7 +559,7 @@ private:
++   /// Prints the contents of the SquishedDawg.
++   void print_all(const char *msg) {
++     tprintf("\n__________________________\n%s\n", msg);
++-    for (int i = 0; i < num_edges_; ++i) {
+++    for (uint32_t i = 0; i < num_edges_; ++i) {
++       print_edge(i);
++     }
++     tprintf("__________________________\n");
++@@ -565,7 +569,7 @@ private:
++ 
++   // Member variables.
++   EDGE_ARRAY edges_ = nullptr;
++-  int32_t num_edges_ = 0;
+++  uint32_t num_edges_ = 0;
++   int num_forward_edges_in_node0 = 0;
++ };
++ 
++diff --git a/src/lstm/plumbing.cpp b/src/lstm/plumbing.cpp
++index ebb6612e..f0133148 100644
++--- a/src/lstm/plumbing.cpp
+++++ b/src/lstm/plumbing.cpp
++@@ -222,6 +222,10 @@ bool Plumbing::DeSerialize(TFile *fp) {
++   if (!fp->DeSerialize(&size)) {
++     return false;
++   }
+++  // Reject unreasonably large network stacks.
+++  if (size > 10000) {
+++    return false;
+++  }
++   for (uint32_t i = 0; i < size; ++i) {
++     Network *network = CreateFromFile(fp);
++     if (network == nullptr) {
++diff --git a/src/lstm/weightmatrix.cpp b/src/lstm/weightmatrix.cpp
++index 86255266..d40e9373 100644
++--- a/src/lstm/weightmatrix.cpp
+++++ b/src/lstm/weightmatrix.cpp
++@@ -295,6 +295,10 @@ bool WeightMatrix::DeSerialize(bool training, TFile *fp) {
++     if (!fp->DeSerialize(&size)) {
++       return false;
++     }
+++    // Reject unreasonably large scale vectors.
+++    if (size > 100000000) {
+++      return false;
 ++    }
-+ #ifndef NO_RSA
-+     else if (ctx->pctx->pkey->type == WC_EVP_PKEY_RSA) {
-+         if (sig == NULL) {
-+@@ -5007,6 +5025,8 @@ int wolfSSL_EVP_DigestVerifyFinal(WOLFSSL_EVP_MD_CTX *ctx,
-+         return WOLFSSL_FAILURE;
-+     }
-+     else {
-++        if (ctx->pctx == NULL || ctx->pctx->pkey == NULL)
-++            return WOLFSSL_FAILURE;
-+         /* Verify the signature with the digest. */
-+         switch (ctx->pctx->pkey->type) {
-+     #if !defined(NO_RSA)
-+@@ -10232,6 +10252,9 @@ int wolfSSL_EVP_Digest(const unsigned char* in, int inSz, unsigned char* out,
-+         return WOLFSSL_FAILURE;
-+     }
-+ 
-++    if (inSz < 0)
-++        return WOLFSSL_FAILURE;
-++
-+     err = wolfSSL_EVP_get_hashinfo(evp, &hashType, &hashSz);
-+     if (err != WOLFSSL_SUCCESS)
-+         return err;
-+@@ -11279,6 +11302,7 @@ int wolfSSL_EVP_MD_type(const WOLFSSL_EVP_MD* type)
-+         enum wc_HashType macType;
-+ 
-+         WOLFSSL_ENTER("wolfSSL_EVP_DigestFinal");
-++
-+         macType = EvpMd2MacType(wolfSSL_EVP_MD_CTX_md(ctx));
-+         switch (macType) {
-+             case WC_HASH_TYPE_MD4:
-+@@ -11304,16 +11328,18 @@ int wolfSSL_EVP_MD_type(const WOLFSSL_EVP_MD* type)
-+ 
-+             case WC_HASH_TYPE_SHAKE128:
-+         #if defined(WOLFSSL_SHA3) && defined(WOLFSSL_SHAKE128)
-+-                *s = 16; /* if mixing up XOF with plain digest 128 bit is
-+-                          * default for SHAKE128 */
-++                if (s != NULL)
-++                    *s = 16; /* if mixing up XOF with plain digest 128 bit is
-++                              * default for SHAKE128 */
-+         #else
-+                 return WOLFSSL_FAILURE;
-+         #endif
-+                 break;
-+             case WC_HASH_TYPE_SHAKE256:
-+         #if defined(WOLFSSL_SHA3) && defined(WOLFSSL_SHAKE256)
-+-                *s = 32; /* if mixing up XOF with plain digest 256 bit is
-+-                          * default for SHAKE256 */
-++                if (s != NULL)
-++                    *s = 32; /* if mixing up XOF with plain digest 256 bit is
-++                              * default for SHAKE256 */
-+         #else
-+                 return WOLFSSL_FAILURE;
-+         #endif
-+@@ -12881,6 +12907,9 @@ int wolfSSL_EVP_EncodeBlock(unsigned char *out, const unsigned char *in,
-+     if (out == NULL || in == NULL)
-+         return WOLFSSL_FATAL_ERROR;
-+ 
-++    if (inLen < 0)
-++        return WOLFSSL_FATAL_ERROR;
-++
-+     if (Base64_Encode_NoNl(in, (word32)inLen, out, &ret) == 0)
-+         return (int)ret;
-+     else
-+@@ -12897,6 +12926,9 @@ int wolfSSL_EVP_DecodeBlock(unsigned char *out, const unsigned char *in,
-+     if (out == NULL || in == NULL)
-+         return WOLFSSL_FATAL_ERROR;
-+ 
-++    if (inLen < 0)
-++        return WOLFSSL_FATAL_ERROR;
-++
-+     if (Base64_Decode(in, (word32)inLen, out, &ret) == 0)
-+         return (int)ret;
-+     else
-+diff --git a/wolfcrypt/src/pwdbased.c b/wolfcrypt/src/pwdbased.c
-+index c2ed5c042..4b9502a8c 100644
-+--- a/wolfcrypt/src/pwdbased.c
-++++ b/wolfcrypt/src/pwdbased.c
-+@@ -76,6 +76,9 @@ int wc_PBKDF1_ex(byte* key, int keyLen, byte* iv, int ivLen,
-+         return BAD_FUNC_ARG;
-+     }
-+ 
-++    if (keyLen > INT_MAX - ivLen)
-++        return BAD_FUNC_ARG;
-++
-+     if (iterations <= 0)
-+         iterations = 1;
-+ 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-2.patch
++ #ifdef FAST_FLOAT
++     scales_.reserve(size);
++     for (auto n = size; n > 0; n--) {
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-2.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-2.patch
 new file mode 100644
-index 0000000000..0c28dbbba0
+index 0000000000..04d1db2dc5
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-10098-2.patch
-@@ -0,0 +1,126 @@
-+From 1260ee5fe45c6e4c0aeb62c26a04db5faec6ff08 Mon Sep 17 00:00:00 2001
-+From: Reda Chouk <reda@wolfssl.com>
-+Date: Fri, 29 May 2026 05:10:21 -0700
-+Subject: [PATCH] Require equal serial lengths before comparing serial bytes so
-+ a response serial that is only a prefix of the requested serial is not
-+ treated as a match
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-73067-2.patch
+@@ -0,0 +1,96 @@
++From 364a1a76ed19fd2f975f267405f8e36f521e7175 Mon Sep 17 00:00:00 2001
++From: Stefan Weil <sw@weilnetz.de>
++Date: Sun, 12 Jul 2026 18:04:46 +0200
++Subject: [PATCH] Fix unbounded allocation and validate DAWG edge structure
 +
-+(cherry picked from commit 53e1db478b62f40ad6ce9b1a1d65d593a9d3d9fb)
++Bound num_edges_ against remaining component bytes before allocating
++the edges_ array in read_squished_dawg. This prevents a crafted
++num_edges_ = 0x7FFFFFFF from requesting ~17 GB and aborting via
++uncaught std::bad_alloc.
 +
-+CVE: CVE-2026-10098
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/53e1db478b62f40ad6ce9b1a1d65d593a9d3d9fb]
++After loading, validate the edge structure:
++- Reject edges whose next_node value exceeds num_edges_ (wild-index
++  read during dictionary lookup).
++- Reject unterminated forward edge runs (the original heap OOB read).
++
++Also add TFile::RemainingBytes() to query how many bytes are left to
++read from the current position.
++
++Assisted-by: OpenCode / big-pickle (opencode)
++Reported-by: GitHub Copilot
++Signed-off-by: Stefan Weil <stweil@tessus.org>
++(cherry picked from commit 55287a94b8044c05ce3fd10f5aca6ebbd238e518)
++
++CVE: CVE-2026-73067
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/55287a94b8044c05ce3fd10f5aca6ebbd238e518]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/ocsp.c            |  3 ++-
-+ tests/api.c           |  1 +
-+ tests/api/test_ocsp.c | 57 +++++++++++++++++++++++++++++++++++++++++++
-+ tests/api/test_ocsp.h |  1 +
-+ 4 files changed, 61 insertions(+), 1 deletion(-)
++ src/ccutil/serialis.h |  4 ++++
++ src/dict/dawg.cpp     | 32 ++++++++++++++++++++++++++++++++
++ 2 files changed, 36 insertions(+)
 +
-+diff --git a/src/ocsp.c b/src/ocsp.c
-+index 9de23cb9e..b8352ee72 100644
-+--- a/src/ocsp.c
-++++ b/src/ocsp.c
-+@@ -750,7 +750,8 @@ int wolfSSL_OCSP_resp_find_status(WOLFSSL_OCSP_BASICRESP *bs,
-+     single = bs->single;
-+     while (single != NULL) {
-+         if (single->status != NULL && id->status != NULL &&
-+-            (XMEMCMP(single->status->serial, id->status->serial,
-++            (single->status->serialSz == id->status->serialSz)
-++         && (XMEMCMP(single->status->serial, id->status->serial,
-+                      (size_t)single->status->serialSz) == 0)
-+          && (XMEMCMP(single->issuerHash, id->issuerHash, OCSP_DIGEST_SIZE) == 0)
-+          && (XMEMCMP(single->issuerKeyHash, id->issuerKeyHash, OCSP_DIGEST_SIZE) == 0)) {
-+diff --git a/tests/api.c b/tests/api.c
-+index 919b951b3..ad5f84573 100644
-+--- a/tests/api.c
-++++ b/tests/api.c
-+@@ -35924,6 +35924,7 @@ TEST_CASE testCases[] = {
-+     TEST_DECL(test_ocsp_response_parsing),
-+     TEST_DECL(test_ocsp_certid_enc_dec),
-+     TEST_DECL(test_ocsp_certid_dup),
-++    TEST_DECL(test_ocsp_resp_find_status_serial_prefix),
-+     TEST_DECL(test_ocsp_tls_cert_cb),
-+     TEST_DECL(test_ocsp_cert_unknown_crl_fallback),
-+     TEST_DECL(test_ocsp_cert_unknown_crl_fallback_nonleaf),
-+diff --git a/tests/api/test_ocsp.c b/tests/api/test_ocsp.c
-+index 02938adfd..1f1055fc6 100644
-+--- a/tests/api/test_ocsp.c
-++++ b/tests/api/test_ocsp.c
-+@@ -723,6 +723,63 @@ int test_ocsp_certid_dup(void)
-+ }
-+ #endif
++diff --git a/src/ccutil/serialis.h b/src/ccutil/serialis.h
++index d6e4a996..59a4e1f1 100644
++--- a/src/ccutil/serialis.h
+++++ b/src/ccutil/serialis.h
++@@ -75,6 +75,10 @@ public:
++   void set_swap(bool value) {
++     swap_ = value;
++   }
+++  // Returns the number of bytes remaining to be read.
+++  size_t RemainingBytes() const {
+++    return data_ != nullptr && offset_ < data_->size() ? data_->size() - offset_ : 0;
+++  }
 + 
-++int test_ocsp_resp_find_status_serial_prefix(void)
-++{
-++    EXPECT_DECLS;
-++#if defined(HAVE_OCSP) && defined(OPENSSL_EXTRA) && !defined(NO_SHA)
-++    OcspResponse response;
-++    OcspEntry    single;
-++    CertStatus   responseStatus;
-++    OcspEntry    requestedId;
-++    CertStatus   requestedStatus;
-++    int          status;
-++
-++    XMEMSET(&response, 0, sizeof(response));
-++    XMEMSET(&single, 0, sizeof(single));
-++    XMEMSET(&responseStatus, 0, sizeof(responseStatus));
-++    XMEMSET(&requestedId, 0, sizeof(requestedId));
-++    XMEMSET(&requestedStatus, 0, sizeof(requestedStatus));
-++
-++    single.status   = &responseStatus;
-++    requestedId.status = &requestedStatus;
-++    response.single  = &single;
-++
-++    /* Matching issuer name and key hashes on both sides. */
-++    XMEMSET(single.issuerHash, 0x41, OCSP_DIGEST_SIZE);
-++    XMEMSET(single.issuerKeyHash, 0x42, OCSP_DIGEST_SIZE);
-++    XMEMCPY(requestedId.issuerHash, single.issuerHash, OCSP_DIGEST_SIZE);
-++    XMEMCPY(requestedId.issuerKeyHash, single.issuerKeyHash, OCSP_DIGEST_SIZE);
-++
-++    /* Response carries a CERT_GOOD status for serial 01:02 (2 bytes). */
-++    responseStatus.serial[0] = 0x01;
-++    responseStatus.serial[1] = 0x02;
-++    responseStatus.serialSz  = 2;
-++    responseStatus.status    = CERT_GOOD;
-++
-++    /* Sanity check: an exact serial match must be found and report CERT_GOOD. */
-++    requestedStatus.serial[0] = 0x01;
-++    requestedStatus.serial[1] = 0x02;
-++    requestedStatus.serialSz  = 2;
-++    status = -1;
-++    ExpectIntEQ(wolfSSL_OCSP_resp_find_status(&response, &requestedId, &status,
-++                    NULL, NULL, NULL, NULL), WOLFSSL_SUCCESS);
-++    ExpectIntEQ(status, CERT_GOOD);
-++
-++    /* Request serial 01:02:03 (3 bytes) shares the 01:02 prefix of the
-++     * response serial.
-++     * The lookup must not bind the good response to this longer and
-++     * differing serial. */
-++    requestedStatus.serial[0] = 0x01;
-++    requestedStatus.serial[1] = 0x02;
-++    requestedStatus.serial[2] = 0x03;
-++    requestedStatus.serialSz  = 3;
-++    status = -1;
-++    ExpectIntEQ(wolfSSL_OCSP_resp_find_status(&response, &requestedId, &status,
-++                    NULL, NULL, NULL, NULL), WOLFSSL_FAILURE);
-++#endif
-++    return EXPECT_RESULT();
-++}
-++
-+ #if defined(HAVE_OCSP) && defined(WOLFSSL_CERT_SETUP_CB) && \
-+     defined(HAVE_SSL_MEMIO_TESTS_DEPENDENCIES) && !defined(NO_RSA) && \
-+     (defined(HAVE_CERTIFICATE_STATUS_REQUEST) || \
-+diff --git a/tests/api/test_ocsp.h b/tests/api/test_ocsp.h
-+index 6df114b87..2ad56ce55 100644
-+--- a/tests/api/test_ocsp.h
-++++ b/tests/api/test_ocsp.h
-+@@ -24,6 +24,7 @@
++   // Deserialize data.
++   bool DeSerializeSize(int32_t *data);
++diff --git a/src/dict/dawg.cpp b/src/dict/dawg.cpp
++index dab4dfc2..75cb9a1f 100644
++--- a/src/dict/dawg.cpp
+++++ b/src/dict/dawg.cpp
++@@ -353,12 +353,44 @@ bool SquishedDawg::read_squished_dawg(TFile *file) {
++     tprintf("Empty dawg: num_edges is 0\n");
++     return false;
++   }
+++  // Reject if the declared edge count exceeds the remaining component bytes.
+++  if (num_edges_ > file->RemainingBytes() / sizeof(EDGE_RECORD)) {
+++    tprintf("Dawg num_edges %u exceeds remaining data\n", num_edges_);
+++    return false;
+++  }
++   Dawg::init(unicharset_size);
 + 
-+ int test_ocsp_certid_enc_dec(void);
-+ int test_ocsp_certid_dup(void);
-++int test_ocsp_resp_find_status_serial_prefix(void);
-+ int test_ocsp_status_callback(void);
-+ int test_ocsp_basic_verify(void);
-+ int test_ocsp_response_parsing(void);
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-index 295029246c..094bf8d78b 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-@@ -15,6 +15,8 @@ RPROVIDES:${PN} = "cyassl"
- SRC_URI = " \
-     git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master;tag=v${PV}-stable \
-     file://run-ptest \
-+    file://CVE-2026-10098-1.patch \
-+    file://CVE-2026-10098-2.patch \
++   edges_ = new EDGE_RECORD[num_edges_];
++   if (!file->DeSerialize(&edges_[0], num_edges_)) {
++     return false;
++   }
+++  // Validate the loaded edge structure: check that next_node values are in
+++  // bounds and that forward edge runs are properly terminated.
+++  for (uint32_t i = 0; i < num_edges_; ++i) {
+++    if (edges_[i] == next_node_mask_) {
+++      continue; // Empty slot.
+++    }
+++    NODE_REF next = next_node_from_edge_rec(edges_[i]);
+++    if (next != 0 && static_cast<uint32_t>(next) >= num_edges_) {
+++      tprintf("Dawg edge %u has out-of-bounds next_node\n", i);
+++      return false;
+++    }
+++    if (forward_edge(i)) {
+++      uint32_t j = i;
+++      bool terminated = false;
+++      do {
+++        if (last_edge(j)) {
+++          terminated = true;
+++          break;
+++        }
+++        ++j;
+++      } while (j < num_edges_);
+++      if (!terminated) {
+++        tprintf("Dawg forward edge run starting at %u is not terminated\n", i);
+++        return false;
+++      }
+++    }
+++  }
++   if (debug_level_ > 2) {
++     tprintf("type: %d lang: %s perm: %d unicharset_size: %d num_edges: %" PRIu32 "\n",
++             type_, lang_.c_str(), perm_, unicharset_size_, num_edges_);
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
+index 1b5a5fe2df..f26d2f36a1 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
+@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRCREV = "6e1d56a847e697de07b38619356550e5cf4e8633"
+ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
+            file://CVE-2026-73066.patch \
++           file://CVE-2026-73067-1.patch \
++           file://CVE-2026-73067-2.patch \
  "
  
- SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
+ 
 
