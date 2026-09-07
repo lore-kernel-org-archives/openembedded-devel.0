@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFEF0C79F99
-	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:59 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31934.1788776690928682585
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2062BC79FA7
+	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:25:00 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31938.1788776699779099777
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:24:50 -0700
+ Mon, 07 Sep 2026 03:24:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ThFscdHq;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-ca97d139d5fso3120287a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bk1H++wW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2d5335cf904so32744275ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788776690; x=1789381490; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788776699; x=1789381499; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mQlYGAtHaJZXMEbHQKrgByntMCHVWO72pU3Joy7ZYi4=;
-        b=ThFscdHqUqk504Ym3vEWj6iaEREJ+J6PWIJ9Ei0G9ZAa4xRUGATmXuUTIgGVr8aAe2
-         uU8N0Iiymgcqz064hykZST48wpcxqyKfc8sv0uEi15zjPirkwmySgGO6WqFrVKfUtEqB
-         6VjqvS/RHpkDWLELFZeAOzOhX4EoxBIgdJKyegXU1/il4Zckc0xqCqBhl/olGhOIcOar
-         5yLH53tagOiBbVVVgogYs7ITKrLLKiFJp8jxhan30mDutkV0S1FNwtGD4mqTQVa31p73
-         Gc5Xt/gPDjvwZqTovExEHyY1vXi2JycA7uo+O2OCl1Y9DjLgZQYEaRdcgWo5oX8NzQgE
-         1WRA==
+        bh=E8oUiDUqX1XiMgv3N4W8AISM0vVaqVQQhClNJN+j2S4=;
+        b=bk1H++wWfuh6lGxbbxtlrwS0RTW66HX9yu2GQxDcMIeXSKBEPUMVn6BMh8Ev0OtD8d
+         HNe2jPrZNi48lzmLMmGiLNGw0NFnmze/EZ4grg///J+H9CdIxOIREjB9tz2mD0yckNj4
+         gSCwVQ5zKYQ++TUnXY6rtcwC06WfVQfqiKCj1e17UDOS4MgZxMu2utP43+P3XAe/TnEW
+         TFtG4Eooy8+dvDWIu6zDkCoacrmM/2cAxRDrW9uyu0hvdKatociYNBF9VYCGnfm7HBLY
+         HpqUyzQi53q+XDtsgSYOA77OSVK3ehNfbr1ODMUtBu4uugsH07hmywn3PDMgA1FINQiZ
+         wM7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788776690; x=1789381490;
+        d=1e100.net; s=20251104; t=1788776699; x=1789381499;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mQlYGAtHaJZXMEbHQKrgByntMCHVWO72pU3Joy7ZYi4=;
-        b=W0Lgz/e4PV7hvAlBzjG3dDYlISHMLA1NysO2v/u/IITfYaG9fOnaqqZh9bxd7Q5ew5
-         6DVh9GDUJPcxHcTR8b3lZB+Eh/rYyNs2kgaJGQhIFJU+BS7raISMFq7BJNodpJy+T1zX
-         7MRSUFbgtB/fHJ9NMzkSi9z21YT4npsb3u7kr83NCeUo6IAdDKR3cVlnK39QnqQzCcQ0
-         FJmzpm51IawzQVaifBw5Na7rg4GlHIyPxSIEwmLOTwhxabYVdNMO2iKhZAjwGPTcKvYK
-         +7rYq+OdgdlZT9wy9tT1PC0gRANXe5fcpOZPDXQ2F3WrRK0qkjKxqNLwGayhtiq1ThVr
-         aKCQ==
-X-Gm-Message-State: AFuF++m+aiAFedgNTiduHHxRcEYST+LewaIwVq/ydqp+H3JVbOzQU41H
-	ovLw4a7Vgv5YB+vdIsPanHsAUSxoMotq21106xuEYAiAPy1Sc+BdM8+EbkBLphSz
-X-Gm-Gg: AYBFou2r8AHPgmkN9JBfeQLAZ1cinwc6Bk5kl6kSoUBVaAAYmJD+Ybhn4FooISmS5AF
-	3E1Fzw1TIbv57PwmC0aZAQvRd9C1BT8TtUuGRqU9zgXWJ0EBOkZvmnXIDuV8PH9fW9DZaH787o1
-	sVeH/0TKGWRpym/F4GPA7RpcotCrffBVp/rQe7OxX93RhWxryO8hJddiOVBjYz2kTMuUt/3DQIB
-	2fAZcnmo3v4et0uc78fkSk2F7Pmi77X7XyLYlRCHU1y2wNq/VN0St6mk9YMm6z2WtB0qDMenSG8
-	OhDB1L1Y63cwIjMP5E85o7DBkR2oMp6OzGG5+1mQNmCp4YO2kWzE/g9Gu77WqW/+/ai/Pjs3txc
-	XjTWGuD9N5Bdb2JiVe876fyN1U2SZ/RWczBCq5ktTPKqXvwQGw0/ULcIgl720k+slVPASKVZU6e
-	DyLVY3WvvAXvFBfBBkK6W1alMVjRH6oAy/OToBpYgkmCpW13qD24KHlk9dDC9l/9NE5jEzzFGo
-X-Received: by 2002:a05:6a21:e081:b0:3b4:61f:1fec with SMTP id adf61e73a8af0-3da39bb593dmr33455823637.2.1788776689947;
-        Mon, 07 Sep 2026 03:24:49 -0700 (PDT)
+        bh=E8oUiDUqX1XiMgv3N4W8AISM0vVaqVQQhClNJN+j2S4=;
+        b=OARrgzCz51PE8eFC0IuAYVtXb/owblpsIHYZpSI6F354p+dfwDXv5ZHNYe+B7Lq6D4
+         SeIFROBvy9L/538p9+z1lENj3bxOjiSpYpy6ZST9Ybc7Js5pjBwFC4a0B+GSCYoq6piZ
+         acDAKkBg6DNMP22QlrNdkXS4Yq3TlJItJHzsfM82DLC8yQURuNU1Y5Kr5/L02TlD342S
+         y0oPt0I27YKSKAT48C4qAS6BDPUzH4pTB24yAP6jlh+X6uMLjIQHyECjM5uAusJI16ZQ
+         LXPOekoMuus2DZY16GgT5VThiOGm5BTh3GoV+IfXrl7zIKQ32P2vT81upeQB1bdlCdY5
+         IzoA==
+X-Gm-Message-State: AFuF++kNoKLyiWy83bSJCQ17j9f+mwqEh9YHm6XyuCIkM/pOW2brA28t
+	RRcmzaXDmCzrer9dA/PEj6+sQTPl17AlUfKwmKZK2E7gbe8/MLpaNN7Igw6oXg==
+X-Gm-Gg: AYBFou2z25dIFZj7GkOMGncdcR6jd1bOuZETcC0hO+TYsqBu12JmxYTmFd2cgSnKK54
+	TbGTjl6Y4mVuoi7rIwAf/BHg2eQJiEHOAiX+lBJKzrjDrsZ7QfX1TG+DR5z7H+LWQPEZUMrM937
+	ooyJ/kwLaw43Yvzdd8f4CH6h0FWzyh/xOfIK9arIB2x/KZh2UWUak2waM/4P7t//uIM7E7pCMJ1
+	SwkRKUYjdF+IcDdDjToUQoiZkNjqRm6XB4hzhkAVUGF9lZIDRBHa5oXj7V5ZOn6gDZ0C2lnOFMF
+	txBih4BK664g33KUBI5ky7wV4MEPDAOcM0YeXyMVAb8dOx4L89KdrAJVp548l5aKBZb5/L+43Gm
+	ONwqliIXjZB1iEInKvoFNVAdqNskYw3gcMH3H1lF+9gpVjoRTa4u7DeqNOqNW8AQ0ivfmsafH7n
+	BmhHrSD/gNHIKG0m8XfmN2WrG8SYL+mG3EvIHT5o7+CL7ZJNqTeMnZnSPjygghXxRBEJhG7XHH
+X-Received: by 2002:a17:90b:4a48:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-39b260d2d58mr32030094a91.6.1788776699047;
+        Mon, 07 Sep 2026 03:24:59 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.47
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 03:24:49 -0700 (PDT)
+        Mon, 07 Sep 2026 03:24:58 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 29/33] wolfssl: patch CVE-2026-6325
-Date: Mon,  7 Sep 2026 22:23:13 +1200
-Message-ID: <20260907102318.2459883-29-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 32/33] wolfssl: patch CVE-2026-6731
+Date: Mon,  7 Sep 2026 22:23:16 +1200
+Message-ID: <20260907102318.2459883-32-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
 References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
@@ -66,159 +66,255 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129841
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:25:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129844
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-6325
+https://nvd.nist.gov/vuln/detail/cve-2026-6731
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-6325.patch         | 123 ++++++++++++++++++
- .../wolfssl/wolfssl_5.9.1.bb                  |   1 +
- 2 files changed, 124 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6325.patch
+ .../wolfssl/files/CVE-2026-6731-1.patch       |  39 ++++
+ .../wolfssl/files/CVE-2026-6731-2.patch       | 171 ++++++++++++++++++
+ .../wolfssl/wolfssl_5.9.1.bb                  |   2 +
+ 3 files changed, 212 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-2.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6325.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6325.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-1.patch
 new file mode 100644
-index 0000000000..5a67a30dc0
+index 0000000000..c6a1762b27
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6325.patch
-@@ -0,0 +1,123 @@
-+From b47170ed386de50deb3f1ce7c9f39cdb17630fc0 Mon Sep 17 00:00:00 2001
-+From: Sean Parkinson <sean@wolfssl.com>
-+Date: Wed, 15 Apr 2026 11:39:26 +1000
-+Subject: [PATCH] Merge pull request #10204 from mattia-moffa/20260413-fixes
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-1.patch
+@@ -0,0 +1,39 @@
++From df2df57a027066708b498f41ce0b591704b579cc Mon Sep 17 00:00:00 2001
++From: Ruby Martin <ruby@wolfssl.com>
++Date: Tue, 14 Apr 2026 12:39:34 -0600
++Subject: [PATCH] Apply DNS constraints to subject CN when SAN is not
++ available.
 +
-+SetSuitesHashSigAlgo fix
++(cherry picked from commit e7b7fddacb4cc794e5dfc7693586d87a539f5aad)
 +
-+(cherry picked from commit 6ac0f82b8589736e15683b7d94a822681b8949fc)
-+
-+CVE: CVE-2026-6325
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/6ac0f82b8589736e15683b7d94a822681b8949fc]
++CVE: CVE-2026-6731
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/e7b7fddacb4cc794e5dfc7693586d87a539f5aad]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/internal.c | 11 ++++++++++
-+ tests/api.c    | 58 +++++++++++++++++++++++++++-----------------------
-+ 2 files changed, 42 insertions(+), 27 deletions(-)
++ wolfcrypt/src/asn.c | 11 +++++++++--
++ 1 file changed, 9 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/internal.c b/src/internal.c
-+index 267c75a5d..769ba6764 100644
-+--- a/src/internal.c
-++++ b/src/internal.c
-+@@ -29546,6 +29546,17 @@ int SetSuitesHashSigAlgo(Suites* suites, const char* list)
-+                     break;
-+                 }
-+             }
-++            {
-++                word32 needed = 2;
-++#if defined(WC_RSA_PSS) && defined(WOLFSSL_TLS13)
-++                if (sig_alg == rsa_pss_sa_algo)
-++                    needed = 4;
++diff --git a/wolfcrypt/src/asn.c b/wolfcrypt/src/asn.c
++index f8db5c457..d12a78850 100644
++--- a/wolfcrypt/src/asn.c
+++++ b/wolfcrypt/src/asn.c
++@@ -17665,9 +17665,16 @@ static int ConfirmNameConstraints(Signer* signer, DecodedCert* cert)
++         XMEMSET(&subjectDnsName, 0, sizeof(DNS_entry));
++         switch (nameType) {
++             case ASN_DNS_TYPE:
++-                /* Should it also consider CN in subject? It could use
++-                 * subjectDnsName too */
++                 name = cert->altNames;
+++
+++                /* When no SAN is present, apply DNS name constraints to the
+++                 * Subject CN. */
+++                if (cert->subjectCN != NULL && cert->altNames == NULL) {
+++                    subjectDnsName.next = NULL;
+++                    subjectDnsName.type = ASN_DNS_TYPE;
+++                    subjectDnsName.len  = cert->subjectCNLen;
+++                    subjectDnsName.name = cert->subjectCN;
+++                }
++                 break;
++             case ASN_IP_TYPE:
++                 /* IP addresses are stored in altNames with type ASN_IP_TYPE */
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-2.patch
+new file mode 100644
+index 0000000000..be5132048e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6731-2.patch
+@@ -0,0 +1,171 @@
++From 9d1ee979f67c8e31a04b73fadac61f4697bcb7c6 Mon Sep 17 00:00:00 2001
++From: Ruby Martin <ruby@wolfssl.com>
++Date: Tue, 14 Apr 2026 12:44:21 -0600
++Subject: [PATCH] test DNS name constraints on CA are applied against Subject
++ CN name when SAN name is unavailable
++
++test correct CN with no SAN available is accepted
++
++(cherry picked from commit 797ba3f03b1a8dc05c7b91a86c2e6698d76bfc8a)
++
++CVE: CVE-2026-6731
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/797ba3f03b1a8dc05c7b91a86c2e6698d76bfc8a]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ tests/api/test_certman.c | 121 +++++++++++++++++++++++++++++++++++++++
++ tests/api/test_certman.h |   2 +
++ 2 files changed, 123 insertions(+)
++
++diff --git a/tests/api/test_certman.c b/tests/api/test_certman.c
++index 7405f4bff..c76902af2 100644
++--- a/tests/api/test_certman.c
+++++ b/tests/api/test_certman.c
++@@ -1584,6 +1584,127 @@ int test_wolfSSL_CertManagerNameConstraint5(void)
++     return EXPECT_RESULT();
++ }
++ 
+++int test_wolfSSL_CertManagerNameConstraint_DNS_CN(void)
+++{
+++    EXPECT_DECLS;
+++#if !defined(NO_FILESYSTEM) && !defined(NO_CERTS) && \
+++    !defined(NO_WOLFSSL_CM_VERIFY) && !defined(NO_RSA) && \
+++    defined(OPENSSL_EXTRA) && defined(WOLFSSL_CERT_GEN) && \
+++    defined(WOLFSSL_CERT_EXT) && defined(WOLFSSL_ALT_NAMES) && \
+++    !defined(NO_SHA256)
+++    /* Test that DNS name constraints are enforced against the Subject CN
+++     * when no SAN extension is present. The CA cert (cert-ext-ncdns.der)
+++     * permits only DNS:wolfssl.com and DNS:example.com. A leaf cert with
+++     * CN=evil.attacker.com and no SAN should be REJECTED. */
+++    WOLFSSL_CERT_MANAGER* cm = NULL;
+++    WOLFSSL_EVP_PKEY *priv = NULL;
+++    WOLFSSL_X509_NAME* name = NULL;
+++    const char* ca_cert = "./certs/test/cert-ext-ncdns.der";
+++    const char* server_cert = "./certs/test/server-goodcn.pem";
+++
+++    byte    *der = NULL;
+++    int     derSz;
+++    byte    *pt;
+++    WOLFSSL_X509 *x509 = NULL;
+++    WOLFSSL_X509 *ca = NULL;
+++
+++    pt = (byte*)server_key_der_2048;
+++    ExpectNotNull(priv = wolfSSL_d2i_PrivateKey(EVP_PKEY_RSA, NULL,
+++                (const unsigned char**)&pt, sizeof_server_key_der_2048));
+++
+++    ExpectNotNull(cm = wolfSSL_CertManagerNew());
+++    ExpectNotNull(ca = wolfSSL_X509_load_certificate_file(ca_cert,
+++                WOLFSSL_FILETYPE_ASN1));
+++    ExpectNotNull((der = (byte*)wolfSSL_X509_get_der(ca, &derSz)));
+++    ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, der, derSz,
+++                WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
+++
+++    /* Sanity check: cert with SAN=evil.attacker.com is correctly rejected */
+++    ExpectNotNull(x509 = wolfSSL_X509_load_certificate_file(server_cert,
+++                WOLFSSL_FILETYPE_PEM));
+++    ExpectNotNull(name = wolfSSL_X509_get_subject_name(ca));
+++    ExpectIntEQ(wolfSSL_X509_set_issuer_name(x509, name), WOLFSSL_SUCCESS);
+++    name = NULL;
+++
+++    ExpectNotNull(name = X509_NAME_new());
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "countryName", MBSTRING_UTF8,
+++                                       (byte*)"US", 2, -1, 0), SSL_SUCCESS);
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "commonName", MBSTRING_UTF8,
+++                             (byte*)"evil.attacker.com", 17, -1, 0),
+++                SSL_SUCCESS);
+++    ExpectIntEQ(wolfSSL_X509_set_subject_name(x509, name), WOLFSSL_SUCCESS);
+++    X509_NAME_free(name);
+++    name = NULL;
+++
+++    ExpectIntEQ(wolfSSL_X509_add_altname(x509, "evil.attacker.com",
+++                                         ASN_DNS_TYPE), WOLFSSL_SUCCESS);
+++    ExpectIntGT(wolfSSL_X509_sign(x509, priv, EVP_sha256()), 0);
+++    ExpectNotNull((der = (byte*)wolfSSL_X509_get_der(x509, &derSz)));
+++    ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
+++                WOLFSSL_FILETYPE_ASN1), WC_NO_ERR_TRACE(ASN_NAME_INVALID_E));
+++    wolfSSL_X509_free(x509);
+++    x509 = NULL;
+++
+++    /* NOW the actual vulnerability test: cert with CN=evil.attacker.com
+++     * but NO SAN. The DNS name constraint should still reject this, since
+++     * wolfSSL's hostname verification falls back to CN when no SAN exists. */
+++    ExpectNotNull(x509 = wolfSSL_X509_load_certificate_file(server_cert,
+++                WOLFSSL_FILETYPE_PEM));
+++    ExpectNotNull(name = wolfSSL_X509_get_subject_name(ca));
+++    ExpectIntEQ(wolfSSL_X509_set_issuer_name(x509, name), WOLFSSL_SUCCESS);
+++    name = NULL;
+++
+++    ExpectNotNull(name = X509_NAME_new());
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "countryName", MBSTRING_UTF8,
+++                                       (byte*)"US", 2, -1, 0), SSL_SUCCESS);
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "commonName", MBSTRING_UTF8,
+++                             (byte*)"evil.attacker.com", 17, -1, 0),
+++                SSL_SUCCESS);
+++    ExpectIntEQ(wolfSSL_X509_set_subject_name(x509, name), WOLFSSL_SUCCESS);
+++    X509_NAME_free(name);
+++    name = NULL;
+++
+++    /* Do NOT add any SAN this is the bypass vector */
+++    ExpectIntGT(wolfSSL_X509_sign(x509, priv, EVP_sha256()), 0);
+++    ExpectNotNull((der = (byte*)wolfSSL_X509_get_der(x509, &derSz)));
+++    /* Should be ASN_NAME_INVALID_E because CN violates the constraint */
+++    ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
+++                WOLFSSL_FILETYPE_ASN1), WC_NO_ERR_TRACE(ASN_NAME_INVALID_E));
+++    wolfSSL_X509_free(x509);
+++    x509 = NULL;
+++
+++    /* Positive test: CN matches a permitted name (wolfssl.com) and no SAN is
+++     * present. The CN fallback should accept this cert. */
+++    ExpectNotNull(x509 = wolfSSL_X509_load_certificate_file(server_cert,
+++                WOLFSSL_FILETYPE_PEM));
+++    ExpectNotNull(name = wolfSSL_X509_get_subject_name(ca));
+++    ExpectIntEQ(wolfSSL_X509_set_issuer_name(x509, name), WOLFSSL_SUCCESS);
+++    name = NULL;
+++
+++    ExpectNotNull(name = X509_NAME_new());
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "countryName", MBSTRING_UTF8,
+++                                       (byte*)"US", 2, -1, 0), SSL_SUCCESS);
+++    ExpectIntEQ(X509_NAME_add_entry_by_txt(name, "commonName", MBSTRING_UTF8,
+++                             (byte*)"wolfssl.com", 11, -1, 0),
+++                SSL_SUCCESS);
+++    ExpectIntEQ(wolfSSL_X509_set_subject_name(x509, name), WOLFSSL_SUCCESS);
+++    X509_NAME_free(name);
+++    name = NULL;
+++
+++    /* No SAN added; CN=wolfssl.com matches the permitted DNS constraint. */
+++    ExpectIntGT(wolfSSL_X509_sign(x509, priv, EVP_sha256()), 0);
+++    ExpectNotNull((der = (byte*)wolfSSL_X509_get_der(x509, &derSz)));
+++    ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
+++                WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
+++
+++    wolfSSL_CertManagerFree(cm);
+++    wolfSSL_X509_free(x509);
+++    wolfSSL_X509_free(ca);
+++    wolfSSL_EVP_PKEY_free(priv);
 ++#endif
-++                if ((word32)idx + needed > WOLFSSL_MAX_SIGALGO) {
-++                    ret = 0;
-++                    break;
-++                }
-++            }
-+             AddSuiteHashSigAlgo(suites->hashSigAlgo, mac_alg, sig_alg, 0, &idx);
-+             sig_alg = 0;
-+             mac_alg = no_mac;
-+diff --git a/tests/api.c b/tests/api.c
-+index 78fcf13ce..739cf0c68 100644
-+--- a/tests/api.c
-++++ b/tests/api.c
-+@@ -15878,6 +15878,33 @@ static int test_wolfSSL_set1_sigalgs_list(void)
-+                     WC_NO_ERR_TRACE(WOLFSSL_FAILURE));
-+         ExpectIntEQ(wolfSSL_set1_sigalgs_list(ssl, "RSA+SHA256+RSA"),
-+                     WC_NO_ERR_TRACE(WOLFSSL_FAILURE));
+++    return EXPECT_RESULT();
+++}
 ++
-++        {
-++            const char entry[] = "RSA+SHA256";
-++            const int entryLen = (int)sizeof(entry) - 1;
-++            const int entries = WOLFSSL_MAX_SIGALGO + 1;
-++            int listSz = entries * (entryLen + 1);
-++            char* longList = (char*)XMALLOC(listSz, NULL,
-++                DYNAMIC_TYPE_TMP_BUFFER);
-++            int i;
-++            int pos = 0;
-++
-++            ExpectNotNull(longList);
-++            if (longList != NULL) {
-++                for (i = 0; i < entries; i++) {
-++                    if (i != 0)
-++                        longList[pos++] = ':';
-++                    XMEMCPY(longList + pos, entry, entryLen);
-++                    pos += entryLen;
-++                }
-++                longList[pos] = '\0';
-++                ExpectIntEQ(wolfSSL_CTX_set1_sigalgs_list(ctx, longList),
-++                    WC_NO_ERR_TRACE(WOLFSSL_FAILURE));
-++                ExpectIntEQ(wolfSSL_set1_sigalgs_list(ssl, longList),
-++                    WC_NO_ERR_TRACE(WOLFSSL_FAILURE));
-++                XFREE(longList, NULL, DYNAMIC_TYPE_TMP_BUFFER);
-++            }
-++        }
-+     #endif
-+ #endif
-+ #ifdef HAVE_ECC
-+@@ -35744,7 +35771,6 @@ static int test_pkcs7_padding(void)
-+     int outSz;
-+     int ctOff = -1;
-+     int ctLen = 0;
-+-    int i;
-+ 
-+     XMEMSET(key, 0xAA, sizeof(key));
-+     XMEMSET(plaintext, 'X', sizeof(plaintext));
-+@@ -35767,32 +35793,10 @@ static int test_pkcs7_padding(void)
-+         (word32)encodedSz, output, sizeof(output)), (int)sizeof(plaintext));
-+     wc_PKCS7_Free(&pkcs7);
-+ 
-+-    /* Find ciphertext block in encoded DER */
-+-    if (EXPECT_SUCCESS()) {
-+-        for (i = encodedSz - 10; i > 10; i--) {
-+-            if (encoded[i] == 0x04 || encoded[i] == 0x80) {
-+-                int len, lbytes;
-+-
-+-                if (encoded[i+1] < 0x80) {
-+-                    len = encoded[i+1]; lbytes = 1;
-+-                }
-+-                else if (encoded[i+1] == 0x81) {
-+-                    len = encoded[i+2]; lbytes = 2;
-+-                }
-+-                else {
-+-                    continue;
-+-                }
-+-                if (len > 0 && len % 16 == 0 &&
-+-                    i + 1 + lbytes + len <= encodedSz) {
-+-                    ctOff = i + 1 + lbytes;
-+-                    ctLen = len;
-+-                    break;
-+-                }
-+-            }
-+-        }
-+-    }
-+-    ExpectIntGT(ctOff, 0);
-+-    ExpectIntGE(ctLen, 32);
-++    /* encryptedContent is the last element in the DER, so it ends at encodedSz;
-++     * 27-byte plaintext -> 32-byte AES-256-CBC ciphertext. */
-++    ctLen = 32;
-++    ctOff = encodedSz - ctLen;
-+ 
-+     /* Corrupt an interior padding byte via CBC bit-flip */
-+     if (EXPECT_SUCCESS()) {
++ int test_wolfSSL_CertManagerCRL(void)
++ {
++     EXPECT_DECLS;
++diff --git a/tests/api/test_certman.h b/tests/api/test_certman.h
++index 3b6afd0fc..60047cfa3 100644
++--- a/tests/api/test_certman.h
+++++ b/tests/api/test_certman.h
++@@ -35,6 +35,7 @@ int test_wolfSSL_CertManagerNameConstraint2(void);
++ int test_wolfSSL_CertManagerNameConstraint3(void);
++ int test_wolfSSL_CertManagerNameConstraint4(void);
++ int test_wolfSSL_CertManagerNameConstraint5(void);
+++int test_wolfSSL_CertManagerNameConstraint_DNS_CN(void);
++ int test_wolfSSL_CertManagerCRL(void);
++ int test_wolfSSL_CRL_reason_extensions_cleanup(void);
++ int test_wolfSSL_CRL_static_revoked_list(void);
++@@ -57,6 +58,7 @@ int test_wolfSSL_CertManagerRejectMD5Cert(void);
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerNameConstraint3),    \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerNameConstraint4),    \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerNameConstraint5),    \
+++    TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerNameConstraint_DNS_CN), \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerCRL),                \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_reason_extensions_cleanup), \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_static_revoked_list),      \
 diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-index 5569df4d56..843d5071b4 100644
+index 26b86c1b2b..ef03d0c9ff 100644
 --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
 +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-@@ -29,6 +29,7 @@ SRC_URI = " \
-     file://CVE-2026-6094-4.patch \
-     file://CVE-2026-6094-5.patch \
-     file://CVE-2026-6291.patch \
-+    file://CVE-2026-6325.patch \
+@@ -34,6 +34,8 @@ SRC_URI = " \
+     file://CVE-2026-6412-2.patch \
+     file://CVE-2026-6450-1.patch \
+     file://CVE-2026-6450-2.patch \
++    file://CVE-2026-6731-1.patch \
++    file://CVE-2026-6731-2.patch \
  "
  
  SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
