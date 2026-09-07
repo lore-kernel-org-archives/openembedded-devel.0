@@ -2,57 +2,57 @@ Return-Path: <abhishek.bachiphale@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 881B9C79F99
-	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:21:48 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31868.1788776502790052133
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6710DC79F89
+	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:21:58 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.31648.1788776508807167657
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:21:43 -0700
+ Mon, 07 Sep 2026 03:21:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=WbykTeTz;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3710b275f7=abhishek.bachiphale@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6879dgI93526099
-	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Sep 2026 10:21:41 GMT
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Hxu0kLWh;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3710b275f7=abhishek.bachiphale@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6879cjnL3809206
+	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Sep 2026 03:21:48 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=cc:content-transfer-encoding:content-type:date:from
 	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	PPS06212021; bh=b/Yxl5bTh5ASQdEY8ABZ12EiT0AkXhfaw/U2XegZRng=; b=
-	WbykTeTziTuvi6DvXOEowrtNbfbcfe1QiELa+RqQhMo5CC6Yq37JMJjLWSKXsmci
-	y390ZWPO9cKaaJFQ5RllZvsNmtvA1Odml4eMch80zU8EeHOG+otQZjBzgmzgRxWY
-	irPcGCBT2kYNJfAMl50YiyLrAC33CNVOosuLsmpRmVmJ+DrRQSANoH1w0QbuJuqq
-	rfzDn4jC+H0OXQwz+hPyIv9XIJSmslHEF1696h4ZELLqP+ztywUl659Zah4cecWv
-	YC9Ml6KwYf888WOMOgHxJNqYuNdsDXmwCl8F330rweeW6tgHeXJEqFtqdyzyvMXE
-	0gmAIY8XfpjbqTpNcArdmQ==
-Received: from ph8pr06cu001.outbound.protection.outlook.com (mail-westus3azon11022122.outbound.protection.outlook.com [40.107.209.122])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4gga25t7xd-2
+	PPS06212021; bh=c3ORsVEVXCIK3ArvoGDJ+7oWQMDWYR/DsaA+mu+JzDs=; b=
+	Hxu0kLWhOkKrC5IsZZBtXWPgvIx2dsjgjFOFxcOGErijAoMY7IWE18A7MzbwqU7Q
+	qsr5VO2M5aq4aLDzbGFlCoErh1kuDYFw9DrJBHrLpWQrbYWOtpZCSoqTA1QiWeND
+	htu5RlEztAyfA8BC6AlKi3X1dNLeG9V3IfXBWYEJ03b4z/lMdInLK+ZA+Rwf0oQT
+	ShPVmdZS2R1iqJyx/mlbXAIPlfQEBsubkBrcTX3LkCpnXpBljMPxT5uASQFWvn/u
+	cOFn0bb2lRHy2yk3NCCP9gDTbOBzCqtGn9077kmTYKlsiT78LF5Klvw7YppDSTXJ
+	q0PXq9Yv+8C2H9JanETjuQ==
+Received: from dm5pr21cu001.outbound.protection.outlook.com (mail-centralusazon11021123.outbound.protection.outlook.com [52.101.62.123])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ggec0t36w-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:21:41 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:21:48 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=c7YzQnJ7ht5Rgydyev4cwWyBQpMk5wVr6O4UbKCworklgW+GbwGGZoI7N7hhMAqF+NyNoBQC8U0m/IS9+s2OqXEh2UlousnNR6xnhQhn4/+Mvyo9eMSv/QAH44kPZurrzh9qBdnFJkMZ4nnJ9P1QmjD2Ko9/cbHly1chl0OTHKH1h0+xBM/KDT5uDbI2xEgpSi1Z2XaWkAaq8hx1vIAqS/Fqq0ePx/0wurJtjc1QxMQgNUI5njSVGScMRIQMkzZBVH3fBcprq72t8GIBU/BrmsZmIc8ckk6GFY5H4uD16meU3iJj1KIHh4qSU+g1C57IhLJNEtGT7scaO4hEWXSm7w==
+ b=lzpLxNGZjic56RqKtCTg8xYqjnpgeTdsVQQISRx50b1CIW4rRgDGx9OgdW2FDd2v0DYyb0Lx5JlMsb4bTCYPg2arl0OeD+ygACkH/LX7Tt0kjf7eOaYqafb1ax62YO1RlJttN9s+FQMCITydhjVBgzaLEqGcxUjAHl7I7ZfZjr5WjsobeGJUPNQtcOJxUt0kzCnZsq73ujwfDTx7nic+3mnfnYiqa9YORiFdOOE7J+0Vwzca/8gr2cZGM+2CgTSbV77cdv6zwmcBDi5FAA/rvu5GAWhDawmyBpANokCe/zcFSyBSavgdroO+hSMJiFY/rGQOOqEmAwN/917sVUyesQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b/Yxl5bTh5ASQdEY8ABZ12EiT0AkXhfaw/U2XegZRng=;
- b=jeeNl7nC95rTMhWwaD3gQYyf39YlxrkMSFfgjkTLP1NizCwNRdJM+Dir63tBLGng2kFMshHezxsyVgZbxn8XMGASqMpTCxy3w3kYxVj1pNOPVrHAzSrzhNtPq0suFvUxAw1kRXd/7hmo3rlvQwHiKPRgsI7Hhki0zhQ/1ZI/nw+zNTO5Lk7Oc3cnY0kq85kanwbX0c+hWr7N4m/giGhYYZgISTnyrbLnAQ+PJ2jjHgZAqxtEj0Bnt0wcRIv2nBow+MsAAe4fi3K8b1Bs6klkjeij4uWfTpRx4Y5DP/0u2AmhdgICHlRcJ9HM9CANOjKw7k+uDyhbXsfn0fTrIJf65g==
+ bh=c3ORsVEVXCIK3ArvoGDJ+7oWQMDWYR/DsaA+mu+JzDs=;
+ b=rFQ19Tr5wW4HeJc3smg7PQKteLBJ3wLPP8ZmS1/36+3LVe6Fyulj0CzV4ww5KPBFqYhoADJ2kLk9WhZkRcxowF7eK89yrsTayXkpwLhiu2GVmblXQiZlzeel1L0EPz32FGy2Lnj4eqzRdgeKUxHQ/3BTc3F5E1QeIp01/oqIqYWHaK/Hp2VqyPvp9giKbf4jLM0uTOEDcPMGHvyGy0jLB/ipfUQ89a0U7zMwyktePQ3wG7kxz3V1nm95rAXUJ1SnsYwWsWjwHU2+eXgjVotAJ2fvggKD1oi1pQoyiFvniIXLUvtAcw/LisPxsa+iKgc06Ovg5AjTiVsno+o/gp02Pw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from MW6PR11MB8410.namprd11.prod.outlook.com (2603:10b6:303:249::17)
- by CH3PR11MB7179.namprd11.prod.outlook.com (2603:10b6:610:142::8) with
+ by DS0PR11MB8738.namprd11.prod.outlook.com (2603:10b6:8:192::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.14; Mon, 7 Sep
- 2026 10:21:39 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.13; Mon, 7 Sep
+ 2026 10:21:42 +0000
 Received: from MW6PR11MB8410.namprd11.prod.outlook.com
  ([fe80::cb25:91f6:670d:3578]) by MW6PR11MB8410.namprd11.prod.outlook.com
  ([fe80::cb25:91f6:670d:3578%6]) with mapi id 15.21.0382.014; Mon, 7 Sep 2026
- 10:21:39 +0000
+ 10:21:42 +0000
 From: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Randy.MacLeod@windriver.com
-Subject: [meta-oe][wrynose][PATCH 1/4] thrift: fix CVE-2026-55969
-Date: Mon,  7 Sep 2026 15:51:04 +0530
-Message-Id: <20260907102107.4007371-2-Abhishek.Bachiphale@windriver.com>
+Subject: [meta-oe][wrynose][PATCH 2/4] thrift: fix CVE-2026-48586
+Date: Mon,  7 Sep 2026 15:51:05 +0530
+Message-Id: <20260907102107.4007371-3-Abhishek.Bachiphale@windriver.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20260907102107.4007371-1-Abhishek.Bachiphale@windriver.com>
 References: <20260907102107.4007371-1-Abhishek.Bachiphale@windriver.com>
@@ -63,422 +63,327 @@ X-ClientProxiedBy: SE2P216CA0130.KORP216.PROD.OUTLOOK.COM
  (2603:10b6:a03:545::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW6PR11MB8410:EE_|CH3PR11MB7179:EE_
-X-MS-Office365-Filtering-Correlation-Id: 861a1f24-9c41-4665-d61a-08df0cc9cd7e
+X-MS-TrafficTypeDiagnostic: MW6PR11MB8410:EE_|DS0PR11MB8738:EE_
+X-MS-Office365-Filtering-Correlation-Id: 190c5c3b-9a3e-4318-0847-08df0cc9cf41
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|366016|376014|52116014|23010399003|13003099007|38350700014|6133799003|3023799007|10067099003|56012099006|11063799006|20052099010|22082099003|18002099003|12006099003;
+	BCL:0;ARA:13230040|1800799024|23010399003|366016|376014|52116014|10067099003|56012099006|11063799006|6133799003|12006099003|18002099003|22082099003|13003099007|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	OzpO+99/AKIekVGwJXqDs9RWVSxsEc1oFdnYK/LB4w7AQAJ9CPOSDfee1mQx4KrY1WqeB+NJqG9c7J4L1/r/eRvm1/eHP6FI2PVeIKcplWJMt3JdCsRR+ny5MTm2qqaFaDhUqwOifI8ZObcMJjoPduQD9a4t7/8jCyKV64Wpwk6FT7KJp6eGy1Sj0UScjs2+hmODZO02i5E7E2TGugUCocjZ8FeABTuUs9xK8HN9AdZFtvaoIO19To7d52D85DpvYcwSdWNXA/AXVfE0+SxJ1pxa6nd2gO2WRFERZAl363KJCAcHpdMIBaABviefO0HljbQPpLPyyR+Jijz7geZkCY7KSR6Je780gBejWEbD0ePl2uLfpilijPYG+HtD4iuJunqWu3UF1FycG1ecAj6f9v21fABs/7RT3+PyaB5a1RKEROSmQagGzP+V+c+8ACOWil7zeQt5jIyKV2TT6WBDnBH02eBAqDPfjBMTXRllK83sXDNCWxqzeMD03GbTLNGkq4kODpsyDfMoTl+X+Jj92BDleLKRAg5Ew9zcVHltwQDOG77UeqIRE0mVbAi8Wcgn2/3POCu/fSi26LRfL7Xx2PFlk7TuCutojAorI3tDL64uhVKfxiiWXfJHtnXctuh4iRK+4aH6f3H4aNA24jEtdlZ09qcu3zxH/UTSj5mErpoonBds0iWQCWyEzM3Z7g3bHZZX2mNXcsPP6Nohed8woqGKnUZfkY/oU7v6BxrPeAM=
+	kUr/H37pKuF818A4BjNPxDtLQGl+coRiaZW5mQdJCi5acH/MeTEyW04uDrNPCHoS5MkBaxN5gKipU3NijvSVqGUofTmpJ9asbxMpkv9fvAq2JHgDV/3tufenarPxyfk+XTe1iVd4d/FIn/Lsq/QMuY23BM7pDeLwxeuAZbrtr7vY4EN4FJCwNRKJaygjXkIsZ+3oXYJsXzeOc7FUD030+Y+aB4Cnb19CRisy0htLHHh3uyimN4/weJl/bFgVUTLWVjduYbQqSW/yBBT+XYewBmbwzaqYnqalnfGqPY96TXmkgJ2uaxyOL3E+VTqLOZM3mRndmioTypASaW7neTmCRO8bkf3dRiSfCzM2i9Xw0XG14JzSkAryTTZfNAR/mp+epswkNu77hW3pEGYDeM3lIPg7dtNQWZ2BmSq8d0EVWMd/BBG8ujbv3k6THd9L6G1geiTwa3t9cJJonMAZso41eDeA5/0E56/vj6JcphvKjaftP+ILU0qAuazCfTtBHYGj4eRjjHyVB8Tm+lC5DpahLTnAjpZnTRB+ZnXJ0lU9HMMueb9cktHoCLf8A8IMxw0znN5HD4va8G9X47y51YbNdd72kxecJhsFJUnGcPO6hbcoWe6yO/7oaNdK9Zrd+b4IkOMP6IRSfQC2wZDU3kfdaAxkFiaLli+PTH0vZrvgA4iSu3fv7TwV2Kzq/CIizUNPGqFZ1tDxPfpeJagnHwF5bmrL/vJTDCDO2aJaVzgkVdQ=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW6PR11MB8410.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(52116014)(23010399003)(13003099007)(38350700014)(6133799003)(3023799007)(10067099003)(56012099006)(11063799006)(20052099010)(22082099003)(18002099003)(12006099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW6PR11MB8410.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(52116014)(10067099003)(56012099006)(11063799006)(6133799003)(12006099003)(18002099003)(22082099003)(13003099007)(38350700014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?V50XsyM1lhiXPiWMZ4gsuI9TsUOph4yj+iAaiLZUCjWgyRscjCcBn++cm3Ko?=
- =?us-ascii?Q?M2ljhw1zyAeu2J4LWVAIpC5cnwVhltBblJUfdZ13/YdTbLzxSVo6vvwsIxS+?=
- =?us-ascii?Q?NRhlcv3N0Q0SRhhmwX+8hAY0xWzlXbEjAZ3DObGbhRVJtgyogNBVNSLXXiEq?=
- =?us-ascii?Q?RKJxABMWNFNPIbPc+j8gi8iaqWLp8WRZsh728ryTjeYKbhI0ZCHxMYbAe5kS?=
- =?us-ascii?Q?iAMfjXudP/ZV2flJ5RH1W1tPFTwvFxsZvIu4uYb0btfYiwlz1d4LzDWFV/WI?=
- =?us-ascii?Q?g2vKp4P+xovKTlJwCawy0xonlR24XAE+1K3hi+Y+s5cFSa9mfxxGpfFmEL6R?=
- =?us-ascii?Q?ggb5QQXG0Yj9u7HfzJEgpYClBqY9u4Zhq/4l1TFshguzpugC2BJO/E0tJIGe?=
- =?us-ascii?Q?ihAqOMbu8lxS76FRMg/BfLrzsnzT9CCw6IgHavZHfqRqogHL52q7FnOl2xOG?=
- =?us-ascii?Q?IvysuWQHOqSDlOVC72sEqgxJ7JKgUyozO24rEVTVQ7ZT3qUnIQOkC3Q2cAcz?=
- =?us-ascii?Q?wWR0VTr9wGA35vorc2x42HoJaTG2UbELfyhjtsdM94c9WV0M/eErpyGPRgYo?=
- =?us-ascii?Q?ixv8QVd9MWh8PoctTLqKONtgSt4XOLzFHL84eIzRySZxEfgNTx0ZiR27YHiX?=
- =?us-ascii?Q?VDhBL2d5eS19qKwZRTNLS+sZAw/8J8OInGrtGCIEZ3u+bcEhtUEG7j7robip?=
- =?us-ascii?Q?qEtVCMd84rBX+KWMhUu9ivWIyljUHWJZSSJZ+7xhknsF/bmTvMz4lEdVpjoH?=
- =?us-ascii?Q?NkjceQs4pDvoDX9wJaG/SrrGYG6H9t+RhPbBpgaLlXWZzni7s8MIBLng8zF1?=
- =?us-ascii?Q?SGs8SuOOQ8lTccRAYGA3r8ZRLmzUQRu5XIXhpWZTUjKQLo3WPnCvUejE634Z?=
- =?us-ascii?Q?YefgTrSQpG6jtRMzXEYLWHjlgqRWao+pt5erdL0xIjjWejcG0jIInn/a20Cz?=
- =?us-ascii?Q?puIv4d7JPTbJc/LuTxNZVhqsS+FQtkVqR8hGn0C1o0NH9piMI7jt1ElYaFOX?=
- =?us-ascii?Q?J+8E9WFgc/+GwZETel0pvZez9yzW9ygmeSZXHclVWojdtjX5ifRnwyxxwSf4?=
- =?us-ascii?Q?Q2ChQcwA9cHea8MZszLQ2vMtX1ycutTYxBSPEAjpFQqabTaq5gRCGJaEkd1W?=
- =?us-ascii?Q?4xKjBg/2+1HqnTfYljZUJjIDM0jbx7J2EYvoxDLT/ikXnwZzhzLmhXgnxEx5?=
- =?us-ascii?Q?hH8c3qNafzHVFXG6fylWdYmfNYcUxRaD82rkFAkhP0f8FTjCCFIxIDPO4UjW?=
- =?us-ascii?Q?lIOZWmnyZkfvmQYN5RA18Ac37lnpxzwqFN6Vj482NcviOhTO0NcEIuFP8JHR?=
- =?us-ascii?Q?7v1DvAIssiCQeask18SqaVzDQkGfEGqF2fIEFNf/KoqJ14k9bP11z0DL49zA?=
- =?us-ascii?Q?hH8Zn4XmMP0PtVLeRvKXYPvZoJeMuxdAyTuCM7sIBOOVd9sj9SLIGoZZr9AS?=
- =?us-ascii?Q?B2PhBQIs29N3M+eFaaR8QDY9NjB67xCVKwAineGwCVi76Fj12M/vzSWyOd64?=
- =?us-ascii?Q?tqlG+2kPWFLy57NWZY3mi8aflusWSoehVLtqZNi4XcWRsO16m3cjaLw7LqmV?=
- =?us-ascii?Q?5eM2/0esppXWb/W8joy8/wFl35xmMSKikfvm3uVbmmNYslaTP1Nk+NyvANKM?=
- =?us-ascii?Q?9gr8SMxCYxLU/yrq6xs1WwpD8aVMzuKChU4Rt2cXtjq6fh0++T2WS9p0c1iv?=
- =?us-ascii?Q?wWmV5glOG6DIHOGURM3yD93FZ6td2tyHDViUD6F7KyADvtlwPeQbfgxjD5/8?=
- =?us-ascii?Q?0jBoRYjlDe29uxECzfWYm3AL0XacqmXUqdhNXI2jjepyEiORI5u+?=
+	=?us-ascii?Q?P8UeUIGZjIqFcVBHQvRjOQsDrCpgFrU5ghc5FZx/qCCcQUBnkmwUcMJV18yp?=
+ =?us-ascii?Q?AJDjWT70udG5+hbc0dSAQDIEP8SIoWTXDeKY/cstjc9zsdlgDEWlJpvulCF4?=
+ =?us-ascii?Q?0VwNKee/QL3beg1rp3lRgtm4DtgdF31dhHZb6iaCh6WAWYC0MZ8sfQDRpYR4?=
+ =?us-ascii?Q?9QgTjdTLQM9ZY9darGYZFifrbZriG2strfiC4dRbHnQOJhguPxoVGJ+5kh7h?=
+ =?us-ascii?Q?wFrk2Tq0HPPH/zr8g+up/iTpzk9dnLRtCfNrAODsQwqvHP8CNX1dFuSbHHTL?=
+ =?us-ascii?Q?I5TiPsfKV53ZwQ/elswyc58P4/5by5zhtqjUOjCXlu9XOLAHyNc9V506XvTh?=
+ =?us-ascii?Q?c+DAf3l1UMTiNLHn7QMShGdJD+/3tO5nCLQtDmVyriGeEVYx5lZEN06FyCwG?=
+ =?us-ascii?Q?egTIO0bdfQV/8yF+ig9s6HoGwenbqrU33jNmfvfJeZOfD029HrAIhTiWHouf?=
+ =?us-ascii?Q?RiGLyDWC0ulKbcI5O5me4mFqMvpAL+q7m2g4sE1WDWwEfH0MCES51TdEk2IH?=
+ =?us-ascii?Q?Gi5e9v7r+2Qpn20t1lQA3KbG7D5bWyEXdVOe6naY+AJsDy9qgV7/a5coko7G?=
+ =?us-ascii?Q?vE0jJmoJQTrL+ugfj3J46rU1KtN6ZBklV0HoalXYmv6SQROxEHElUgoTSp/R?=
+ =?us-ascii?Q?IkRkBCv0NI+TswwJhrmHjVoWpEcXc1vhZpSO9nl7JvhEOutUcfpA9mQ7wOdg?=
+ =?us-ascii?Q?n+QQdrDOQFzzUQGDzq44B/pZk2jtGFwsKygHSiyR8HcVKVOhGxg66Vyx+yF5?=
+ =?us-ascii?Q?J8PQredjVsqbpQi4bWFnSdq3zNXJB88vs8RIlweUQHo9CfYzLH1jtf1kvctC?=
+ =?us-ascii?Q?djAcoHBzwz7fAaSN6azNBh0YZ/DNPaixYtkINRh3UEXuI6wBzXqR+L4s7ufu?=
+ =?us-ascii?Q?ib6yATJHRl8T7O5S5CCchcvXsUSwS+fvzAaY4VD1r9zZIW7mCm2OsI075IOl?=
+ =?us-ascii?Q?NKa7OYLMI/LjXJTE1EIBpohekmvY7C9A2aeShxJ0X6msz6SVOvCp5PbNOhh8?=
+ =?us-ascii?Q?bmyhdEzKHHF886XgdKSVejgnWlx9Y5CtgGumyFCBMA/cg9B9CRGIUrhQmlW7?=
+ =?us-ascii?Q?xGCmvubn2LjGZgZ3O3di4QzRdn9pVGXDhIZhF1AVyIw4Lgpo6quD+fCQoQbJ?=
+ =?us-ascii?Q?RVWw7/rZeSQrgxl8lJ3l0jfmZ4uxIEB2kDB2nWpSg+wMtxmy4cEgWruLDyNU?=
+ =?us-ascii?Q?H0C+6jvtNM98o44p+qC+ZRATrxZ7IzOrx03yEfETNyh9ugwkQkSm3bZcvFAe?=
+ =?us-ascii?Q?MWrj5DDao4v5cI3j8PEiwGCOLrDUTW2yB+62aSEQuv+64RP9E4yAR8qUGrtK?=
+ =?us-ascii?Q?jmriybrIZVIRJgmFJCeGBHcWp396lFwGcNW6fYFJ5fSTSNgZ2fRDieWaL733?=
+ =?us-ascii?Q?muLntdel9z2uL4Wytwy9Lt/zuW6sFUmf5SV2VCzOdH2gFPrk4ngUvbrXVBHB?=
+ =?us-ascii?Q?ni0Ql99j6xNEWvlQl173y9niRQsH++MMv3OoNUfEY9pYugt12kK4Oof7MUmj?=
+ =?us-ascii?Q?AmUCDiOhE1cXStmTUZArIGjD48F4U8+E5Yfk1Iis/X4WAbI8G+JNomMsg6g9?=
+ =?us-ascii?Q?4LF7hVO5RHPWHpDeUjtXkOZX8H+qj+D1uhrj9UJLGIvImOQkvT6QCBxH5jPh?=
+ =?us-ascii?Q?ZN77KonIWrQ8gg0rlSO3qCdJZqJJzhTAeqAf0v5bGKn7aQhFg2ms3iuwUX93?=
+ =?us-ascii?Q?VtiIBvZz2SSX4KP5Q9b9kXyyGnXIvERP5EClfzDoO8T48Ij7P6O/3Y+Asy6w?=
+ =?us-ascii?Q?4ZdjN8XwZsJVtpssXOa/EKjHIYKbUcJVeKImVEFsAQ8gVUE1Wmgz?=
 X-Exchange-RoutingPolicyChecked: 
-	e7lCgU93ZHuFQczMdRAJOKNwlP710ciBl5c2ND8+EH38SL2rRMQJiUKaa/O2yQ8aXF22QQpjd9Z5/DNKDWxwwtoRVk+ZGdo/XJLjeiOyoKAjliS2y0dbbaWwRsnkhKEEnAG5o9cJH1nj6I5AK0JLhmPpEYyf4F2Hn7EDpMMoAHjv3TnfWLcvZUgH9V7/EtplxWwQ111VsUk7ccuQC4ZXpYUmXcvMLiMMR+MYZA1qU8Z0wnFPSbFO0SnRdeMvIYd0wKVhKWbiale8ZcyaSp8tk/DpxBbV5vLi61e8H9+f3fexho9TZWuDDkNgpAE0oQQSRlAdw239Rb3rCqTy+HG2rA==
+	CsDwUR6JWS+T9WZa6QrLfLZ+F5lWrhsvvguejmmJCPnOndr4uFkZYPAiiIQBax9zkQllcEuhP/5CshzoqcgIZ8sv1oyfBhfOSv4/nDzHL9+vXbDJ2xTCvO9zxVlYxmTuGv3s7mUloh23mYS5FjwV2vI9shoV/JlM5JgbQIX4PBbDcxBjcA3xfZuLX3PIbhUQFWsTko2r1nVGXpuaQ2Scbxu96RtNKjj8vCwiEnQYWrdCETiOSlQrkUzcJk6ZHggFvgnBOQ3cQZce4Nc+yABPtAv+mG32e6LFdkgGUccGjJIPT6QkWX7GOR2MkzhvsI0iEQFtrPtDexki1LSIo+eGbw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 861a1f24-9c41-4665-d61a-08df0cc9cd7e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 190c5c3b-9a3e-4318-0847-08df0cc9cf41
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB8402.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 10:21:39.4479
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 10:21:42.0241
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D2DO4sAwFfYHpqMLT8ywvByy9CNubbd2UBKRZH75v62Cu6PQB831X9dkuiD/rXF9DmrYK0cu9/oFHrqSQ3rHWCYgiGOpInSgU7VSKd8SbZniXOssDGcACi2PGzfwyVnS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR11MB7179
-X-Authority-Analysis: v=2.4 cv=IqAutr/g c=1 sm=1 tr=0 ts=6a9e9035 cx=c_pps
- a=Ms9fQC66fVli3+vYcCKl2w==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-MS-Exchange-CrossTenant-UserPrincipalName: s920xQmLrxC3Ht1WVNdw7c2P6ECEsGZfxEsFVPE1tSqwBa23fFjwT8VJj15PTQnjv82pabMD2rwrvAbnOM9eEFxs2XYPywtEcJ8AXdyJGT5I+DUrpyjOuPLunciHGubd
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB8738
+X-Authority-Analysis: v=2.4 cv=E+v9Y6dl c=1 sm=1 tr=0 ts=6a9e903c cx=c_pps
+ a=rsLAoTD1kIcpcG7DHw0aAw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22 a=PYnjg3YJAAAA:8
- a=NEAV23lmAAAA:8 a=mV9VRH-2AAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
- a=0U6tx8ruAZu_xXCQbYQA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: 6h_lffvfpy8vs-1djSDw56YcwpVgvyWq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDExMSBTYWx0ZWRfX4sELVnIP9a9X
- cl6prw8QPAclZf2xMxOubxqP7at6HU+YSp/7TYsohKWAEKtBD0HpyEvLJSsNc/3XgU18JBFUa+U
- Qc3NY/5Bk7ry00BKWQOmvjiY6VpHUXaDCCT+WilS8QgKEhZS81OKf8F/VZfodCcN1ABxefPWJ22
- 7Cg0ySFLPyTSwOBu5mz1eGeusLYPUsDqhWt/7mF/3ms/mpgCuBkxJfbN98RBukFtaQxm5YtveTR
- vpGYjQjcKvGAS20iQxtGwZqOxE7Cotx61Z6BH/rMRruOJw+Nw3FJw30DN+qTWMB6IbYf3UpEL6b
- SsZ46nC4CpvnRWkXPTTkXWO8/rHvfFLoxCjnFcV92r9us57h8yRRuSBFmcoKQ+z72xRDd9+Nk7n
- C6JHjc7dZIKDlXwrZ9UC4+qJCo7mgceDybzfjdrUr3Wmj6GVtTvQywwRjE7U6NEjCqBHeYweSsM
- nwIjwccMUZmtzEsMJEA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDExMSBTYWx0ZWRfXz0GyS866OGkM
- Fnh8zKkqVJ3/E0oseyaZmzcLwR3VddMR/IlXe9S2CL+4LrT5Kp6ruCGn6uu8e97AcMaxpT5fSsh
- xBp/lQC9pgS1nMvMol2/Di8+QsO/X/ESiQAkElz85gwo/A8xN+40
-X-Proofpoint-GUID: 6h_lffvfpy8vs-1djSDw56YcwpVgvyWq
+ a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=PYnjg3YJAAAA:8
+ a=NEAV23lmAAAA:8 a=mV9VRH-2AAAA:8 a=t7CeM3EgAAAA:8 a=6gl_cCoBAAAA:8
+ a=2xrm0QnkwNtaVoLOhK0A:9 a=FdTzh2GWekK77mhwV6Dw:22 a=Bor9z-CvbNo2M6AZn8_k:22
+X-Proofpoint-ORIG-GUID: my4BK3ECvSvQpfL4pPEzk8Cmrx47dn0-
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDExMSBTYWx0ZWRfXyyhDYdJueqeM
+ uTAT8BH5SjwoZx/m3WROty2p01gau1+svIGozbkPc8tJ6LLDQJq6wZmsPeJ0H5E3iHi9twBUwWx
+ qeKcfpSLXiocsrkQNIC1CCAOGps7RC/ScHzIHGeP7nvNXSqIkh5L
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDExMSBTYWx0ZWRfXxaNn9wK2T62/
+ 53CqFD6UAXXgzavMZyHU6KnkOsGv61M7QVtEV+1S1yUzNgOYkJ7vkC2TjN2FMd+uI4gPiIScJNx
+ nc2MS70/D3mi6dyWS9LbrOEObdRHTAME1fQzUvZ/OE6P1eFA4Iu9dbB7BdAGKVN82uFq5NHJnth
+ KIENLha2v1ymrIkWVl/aq/9Gd5/qFEMQxEpQiiPn7ykZdHksmaLIRaLYRlOfaU8F1Q71LqgjoB3
+ tPyuAKfsMpOZ9y3+x9VCNFOWIdBXkqeaxcnvFsPohQ7DN5Ef5YSpod8gxpshaNIpMwRLYwEMZfF
+ tUr0aPNptLIFCZydAviEJ1QWtQJAycPdr2A9LS/CV0hpnXAtoqSO3k6sB5WW/0b5RTCpaG56k7B
+ za+wdB/ihUvaSkgi15lss1NiBJzTYbYj+nooblDQr+5IKXSIJeUpyC5fb/nhDRuDlCJifzSqn6Y
+ nf1fX8vxHmr22YIdm6A==
+X-Proofpoint-GUID: my4BK3ECvSvQpfL4pPEzk8Cmrx47dn0-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_02,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 spamscore=0 lowpriorityscore=0
- priorityscore=1501 clxscore=1015 bulkscore=0 malwarescore=0 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 impostorscore=0 clxscore=1015 adultscore=0 bulkscore=0
+ spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
  definitions=main-2609070111
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:21:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129808
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:21:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129810
 
-Integer Overflow or Wraparound vulnerability in Apache Thrift C++,
-c_glib, Go, netstd, Delphi and Haxe bindings. This issue affects Apache
-Thrift: before 0.24.0.
+Improper Handling of Highly Compressed Data (Data Amplification)
+vulnerability in Apache Thrift C++, Java, Python, Go, D, C/GLib
+bindings. This issue affects Apache Thrift: before 0.24.0.
 
-Backport patch to fix CVE-2026-55969.
+Backport patch to fix CVE-2026-48586.
 
 Reference:
-[https://nvd.nist.gov/vuln/detail/cve-2026-55969]
+[https://nvd.nist.gov/vuln/detail/cve-2026-48586]
 
 Upstream Patch:
-[https://github.com/apache/thrift/commit/983c813c9a1a2302d9a3ae23d7368beceaac2d0a]
+[https://github.com/apache/thrift/commit/e3c8c534cacdbef039f4bb0bcf4b2744a982e3bf]
+[https://github.com/apache/thrift/commit/702d00f9053133aba7186f2dbb242a91a1ddd491]
 
 Signed-off-by: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 ---
- .../thrift/thrift/CVE-2026-55969.patch        | 292 ++++++++++++++++++
- .../thrift/thrift_0.22.0.bb                   |   1 +
- 2 files changed, 293 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55969.patch
+ .../thrift/thrift/CVE-2026-48586-01.patch     | 109 ++++++++++++++++++
+ .../thrift/thrift/CVE-2026-48586-02.patch     |  78 +++++++++++++
+ .../thrift/thrift_0.22.0.bb                   |   2 +
+ 3 files changed, 189 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-01.patch
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-02.patch
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55969.patch b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55969.patch
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-01.patch b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-01.patch
 new file mode 100644
-index 0000000000..a7fe218432
+index 0000000000..aaa40ed843
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-55969.patch
-@@ -0,0 +1,292 @@
-+From fa23b5c1c92f2df60c700935dd57295924bc2999 Mon Sep 17 00:00:00 2001
-+From: dxbjavid <dxbjavid@gmail.com>
-+Date: Tue, 9 Jun 2026 16:35:58 +0530
-+Subject: [PATCH] Widen multiplication operands in container size prechecks to
++++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-01.patch
+@@ -0,0 +1,109 @@
++From e3c8c534cacdbef039f4bb0bcf4b2744a982e3bf Mon Sep 17 00:00:00 2001
++From: Jens Geyer <jensg@apache.org>
++Date: Thu, 21 May 2026 14:24:28 +0200
++Subject: [PATCH] Add decompressed byte tracking to C++ TZlibTransport Client:
++ cpp
 +
-+ prevent arithmetic overflow on LLP64 platforms Client: cpp,c_glib Patch:
-+ Javid Khan
++TZlibTransport::read() called checkReadBytesAvailable() but never
++called countConsumedMessageBytes(), so remainingMessageSize_ was never
++decremented. Each read() call would pass the check regardless of how
++many bytes had already been decompressed. Add countConsumedMessageBytes()
++after each copy from the inflate buffer so that the TConfiguration
++maxMessageSize limit is correctly enforced across the lifetime of a
++decompression session.
 +
-+CVE: CVE-2026-55969
-+Upstream-Status: Backport [https://github.com/apache/thrift/commit/983c813c9a1a2302d9a3ae23d7368beceaac2d0a]
-+Signed-off-by: Abhishek Bachiphale <abhishek.bachiphale@windriver.com>
++Also adds test_message_size_limit() to ZlibTest to cover this path.
 +
-+This closes #3590
++Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
++
++CVE: CVE-2026-48586
++Upstream-Status: Backport [https://github.com/apache/thrift/commit/e3c8c534cacdbef039f4bb0bcf4b2744a982e3bf]
++Signed-off-by: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 +---
-+ .../c_glib/protocol/thrift_binary_protocol.c  | 10 ++--
-+ .../c_glib/protocol/thrift_compact_protocol.c | 10 ++--
-+ .../c_glib/transport/thrift_transport.c       |  2 +-
-+ .../c_glib/transport/thrift_transport.h       |  2 +-
-+ lib/cpp/src/thrift/protocol/TBinaryProtocol.h |  6 +--
-+ .../src/thrift/protocol/TCompactProtocol.h    |  6 +--
-+ lib/cpp/src/thrift/protocol/TJSONProtocol.h   |  6 +--
-+ lib/cpp/src/thrift/protocol/TProtocol.h       |  6 +--
-+ lib/cpp/src/thrift/transport/TTransport.h     |  3 +-
-+ lib/cpp/test/ThrifttReadCheckTests.cpp        | 48 +++++++++++++++++++
-+ 10 files changed, 74 insertions(+), 25 deletions(-)
++ .../src/thrift/transport/TZlibTransport.cpp   |  1 +
++ lib/cpp/test/ZlibTest.cpp                     | 37 +++++++++++++++++++
++ 2 files changed, 38 insertions(+)
 +
-+diff --git a/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.c b/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.c
-+index 9e80e10..c3b00b0 100644
-+--- a/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.c
-++++ b/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.c
-+@@ -561,9 +561,9 @@ thrift_binary_protocol_read_map_begin (ThriftProtocol *protocol,
-+     return -1;
-+   }
++diff --git a/lib/cpp/src/thrift/transport/TZlibTransport.cpp b/lib/cpp/src/thrift/transport/TZlibTransport.cpp
++index 1a171109837..d6161a129d9 100644
++--- a/lib/cpp/src/thrift/transport/TZlibTransport.cpp
+++++ b/lib/cpp/src/thrift/transport/TZlibTransport.cpp
++@@ -149,6 +149,7 @@ uint32_t TZlibTransport::read(uint8_t* buf, uint32_t len) {
++     need -= give;
++     buf += give;
++     urpos_ += give;
+++    countConsumedMessageBytes(give);
 + 
-+-  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT(tp->transport), 
-+-                                    sizei * thrift_binary_protocol_get_min_serialized_size(protocol, k, error) + 
-+-                                    sizei * thrift_binary_protocol_get_min_serialized_size(protocol, v, error),
-++  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT(tp->transport),
-++                                    (gint64) sizei * thrift_binary_protocol_get_min_serialized_size(protocol, k, error) +
-++                                    (gint64) sizei * thrift_binary_protocol_get_min_serialized_size(protocol, v, error),
-+                                     error))
-+   {
-+     return -1;
-+@@ -618,8 +618,8 @@ thrift_binary_protocol_read_list_begin (ThriftProtocol *protocol,
-+     return -1;
-+   }
++     // If they were satisfied, we are done.
++     if (need == 0) {
++diff --git a/lib/cpp/test/ZlibTest.cpp b/lib/cpp/test/ZlibTest.cpp
++index ea9c617f625..8f8f5a8e7cf 100644
++--- a/lib/cpp/test/ZlibTest.cpp
+++++ b/lib/cpp/test/ZlibTest.cpp
++@@ -45,8 +45,10 @@
 + 
-+-  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT(tp->transport), 
-+-                                    (sizei * thrift_binary_protocol_get_min_serialized_size(protocol, e, error)),
-++  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT(tp->transport),
-++                                    ((gint64) sizei * thrift_binary_protocol_get_min_serialized_size(protocol, e, error)),
-+                                     error))
-+   {
-+     return -1;
-+diff --git a/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.c b/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.c
-+index 0aa9a6f..f6ad36b 100644
-+--- a/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.c
-++++ b/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.c
-+@@ -1108,9 +1108,9 @@ thrift_compact_protocol_read_map_begin (ThriftProtocol *protocol,
-+     return -1;
-+   }
++ #include <thrift/transport/TBufferTransports.h>
++ #include <thrift/transport/TZlibTransport.h>
+++#include <thrift/TConfiguration.h>
 + 
-+-  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT (tp->transport), 
-+-                                    msize * thrift_protocol_get_min_serialized_size (protocol, *key_type, error) + 
-+-                                    msize * thrift_protocol_get_min_serialized_size (protocol, *value_type, error),
-++  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT (tp->transport),
-++                                    (gint64) msize * thrift_protocol_get_min_serialized_size (protocol, *key_type, error) +
-++                                    (gint64) msize * thrift_protocol_get_min_serialized_size (protocol, *value_type, error),
-+                                     error))
-+   {
-+     return -1;
-+@@ -1183,8 +1183,8 @@ thrift_compact_protocol_read_list_begin (ThriftProtocol *protocol,
-+   *element_type = ret;
-+   *size = (guint32) lsize;
++ using namespace apache::thrift::transport;
+++using apache::thrift::TConfiguration;
++ using std::shared_ptr;
++ using std::string;
 + 
-+-  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT (tp->transport), 
-+-                                    (lsize * thrift_protocol_get_min_serialized_size (protocol, *element_type, error)),
-++  if(!ttc->checkReadBytesAvailable (THRIFT_TRANSPORT (tp->transport),
-++                                    ((gint64) lsize * thrift_protocol_get_min_serialized_size (protocol, *element_type, error)),
-+                                     error))
-+   {
-+     return -1;
-+diff --git a/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.c b/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.c
-+index 9d3f25e..7e18f71 100644
-+--- a/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.c
-++++ b/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.c
-+@@ -160,7 +160,7 @@ thrift_transport_updateKnownMessageSize(ThriftTransport *transport, glong size,
++@@ -338,6 +340,38 @@ void test_get_underlying_transport() {
++   BOOST_CHECK_EQUAL(membuf.get(), zlib_trans->getUnderlyingTransport().get());
 + }
 + 
-+ gboolean
-+-thrift_transport_checkReadBytesAvailable(ThriftTransport *transport, glong numBytes, GError **error)
-++thrift_transport_checkReadBytesAvailable(ThriftTransport *transport, gint64 numBytes, GError **error)
+++void test_message_size_limit() {
+++  // Write 4 KB of compressible data, then read it back with a 1 KB limit.
+++  const uint32_t write_len = 4096;
+++  boost::shared_array<uint8_t> buf = gen_uniform_buffer(write_len, 'a');
+++
+++  shared_ptr<TMemoryBuffer> membuf(new TMemoryBuffer());
+++  {
+++    shared_ptr<TZlibTransport> writer(new TZlibTransport(membuf));
+++    writer->write(buf.get(), write_len);
+++    writer->finish();
+++  }
+++
+++  auto config = std::make_shared<TConfiguration>();
+++  config->setMaxMessageSize(1024);
+++  shared_ptr<TZlibTransport> reader(new TZlibTransport(
+++      membuf,
+++      TZlibTransport::DEFAULT_URBUF_SIZE,
+++      TZlibTransport::DEFAULT_CRBUF_SIZE,
+++      TZlibTransport::DEFAULT_UWBUF_SIZE,
+++      TZlibTransport::DEFAULT_CWBUF_SIZE,
+++      Z_DEFAULT_COMPRESSION,
+++      config));
+++
+++  boost::shared_array<uint8_t> mirror(new uint8_t[write_len]);
+++  try {
+++    reader->readAll(mirror.get(), write_len);
+++    BOOST_ERROR("readAll() should have thrown when maxMessageSize is exceeded");
+++  } catch (TTransportException& ex) {
+++    BOOST_CHECK_EQUAL(ex.getType(), TTransportException::END_OF_FILE);
+++  }
+++}
+++
++ /*
++  * Initialization
++  */
++@@ -441,6 +475,7 @@ bool init_unit_test_suite() {
++ 
++   suite->add(BOOST_TEST_CASE(test_no_write));
++   suite->add(BOOST_TEST_CASE(test_get_underlying_transport));
+++  suite->add(BOOST_TEST_CASE(test_message_size_limit));
++ 
++   return true;
++ }
++@@ -467,6 +502,8 @@ boost::unit_test::test_suite* init_unit_test_suite(int argc, char* argv[]) {
++   add_tests(suite, gen_random_buffer(buf_len), buf_len, "random");
++ 
++   suite->add(BOOST_TEST_CASE(test_no_write));
+++  suite->add(BOOST_TEST_CASE(test_get_underlying_transport));
+++  suite->add(BOOST_TEST_CASE(test_message_size_limit));
++ 
++   return nullptr;
++ }
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-02.patch b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-02.patch
+new file mode 100644
+index 0000000000..5f03f64346
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/thrift/thrift/CVE-2026-48586-02.patch
+@@ -0,0 +1,78 @@
++From 702d00f9053133aba7186f2dbb242a91a1ddd491 Mon Sep 17 00:00:00 2001
++From: Jens Geyer <jensg@apache.org>
++Date: Thu, 21 May 2026 22:29:35 +0200
++Subject: [PATCH] Add consumed byte tracking to ThriftZlibTransport read
++ Client: c_glib
++
++Call countConsumedMessageBytes() after each successful read so that
++the pre-existing checkReadBytesAvailable() limit is decremented per
++the transport's message size configuration.
++
++Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
++CVE: CVE-2026-48586
++Upstream-Status: Backport [https://github.com/apache/thrift/commit/e3c8c534cacdbef039f4bb0bcf4b2744a982e3bf]
++Signed-off-by: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
++---
++ .../c_glib/transport/thrift_zlib_transport.c  |  4 +++
++ lib/c_glib/test/testzlibtransport.c           | 26 +++++++++++++++++++
++ 2 files changed, 30 insertions(+)
++
++diff --git a/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.c b/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.c
++index 32f1ba27d74..459d08f79bc 100644
++--- a/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.c
+++++ b/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.c
++@@ -238,6 +238,10 @@ thrift_zlib_transport_read (ThriftTransport *transport, gpointer buf,
++       break;
++   }
++ 
+++  if (!ttc->countConsumedMessageBytes (transport, i, error)) {
+++    return -1;
+++  }
+++
++   return len;
++ }
++ 
++diff --git a/lib/c_glib/test/testzlibtransport.c b/lib/c_glib/test/testzlibtransport.c
++index 04e368ffa93..531241acd7f 100644
++--- a/lib/c_glib/test/testzlibtransport.c
+++++ b/lib/c_glib/test/testzlibtransport.c
++@@ -214,6 +214,31 @@ thrift_server (const int port)
++   g_object_unref (tsocket);
++ }
++ 
+++static void
+++test_message_size_limit(void)
+++{
+++  ThriftSocket *tsocket = NULL;
+++  ThriftTransport *transport = NULL;
+++  gchar readbuf[4096];
+++  GError *err = NULL;
+++  gint32 ret;
+++
+++  /* checkReadBytesAvailable fires before any I/O, so the underlying transport
+++   * does not need to be connected or contain data. */
+++  tsocket = g_object_new (THRIFT_TYPE_SOCKET, "hostname", "localhost",
+++                          "port", 9999, NULL);
+++  transport = g_object_new (THRIFT_TYPE_ZLIB_TRANSPORT,
+++                            "transport", THRIFT_TRANSPORT (tsocket),
+++                            "remainingmessagesize", (glong) 1024,
+++                            NULL);
+++
+++  ret = thrift_zlib_transport_read (transport, readbuf, sizeof (readbuf), &err);
+++  g_assert (ret < 0);
+++  if (err) g_error_free (err);
+++  g_object_unref (transport);
+++  g_object_unref (tsocket);
+++}
+++
++ int
++ main(int argc, char *argv[])
 + {
-+   gboolean boolean = TRUE;
-+   ThriftTransport *tt = THRIFT_TRANSPORT (transport);
-+diff --git a/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.h b/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.h
-+index 83fb5da..01365ba 100644
-+--- a/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.h
-++++ b/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.h
-+@@ -83,7 +83,7 @@ struct _ThriftTransportClass
-+   gint32 (*read_all) (ThriftTransport *transport, gpointer buf,
-+                       guint32 len, GError **error);
-+   gboolean (*updateKnownMessageSize) (ThriftTransport *transport, glong size, GError **error);
-+-  gboolean (*checkReadBytesAvailable) (ThriftTransport *transport, glong numBytes, GError **error);
-++  gboolean (*checkReadBytesAvailable) (ThriftTransport *transport, gint64 numBytes, GError **error);
-+   gboolean (*resetConsumedMessageSize) (ThriftTransport *transport, glong newSize, GError **error);
-+   gboolean (*countConsumedMessageBytes) (ThriftTransport *transport, glong numBytes, GError **error);
-+ };
-+diff --git a/lib/cpp/src/thrift/protocol/TBinaryProtocol.h b/lib/cpp/src/thrift/protocol/TBinaryProtocol.h
-+index cba6e69..1a7410c 100644
-+--- a/lib/cpp/src/thrift/protocol/TBinaryProtocol.h
-++++ b/lib/cpp/src/thrift/protocol/TBinaryProtocol.h
-+@@ -174,18 +174,18 @@ public:
++@@ -226,6 +251,7 @@ main(int argc, char *argv[])
++   g_test_add_func ("/testzlibtransport/CreateAndDestroy", test_create_and_destroy);
++   g_test_add_func ("/testzlibtransport/OpenAndClose", test_open_and_close);
++   g_test_add_func ("/testzlibtransport/ReadAndWrite", test_read_and_write);
+++  g_test_add_func ("/testzlibtransport/MessageSizeLimit", test_message_size_limit);
 + 
-+   void checkReadBytesAvailable(TSet& set) override
-+   {
-+-      trans_->checkReadBytesAvailable(set.size_ * getMinSerializedSize(set.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(set.size_) * getMinSerializedSize(set.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TList& list) override
-+   {
-+-      trans_->checkReadBytesAvailable(list.size_ * getMinSerializedSize(list.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(list.size_) * getMinSerializedSize(list.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TMap& map) override
-+   {
-+       int elmSize = getMinSerializedSize(map.keyType_) + getMinSerializedSize(map.valueType_);
-+-      trans_->checkReadBytesAvailable(map.size_ * elmSize);
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(map.size_) * elmSize);
-+   }
-+ 
-+ protected:
-+diff --git a/lib/cpp/src/thrift/protocol/TCompactProtocol.h b/lib/cpp/src/thrift/protocol/TCompactProtocol.h
-+index c7d81ee..97ca460 100644
-+--- a/lib/cpp/src/thrift/protocol/TCompactProtocol.h
-++++ b/lib/cpp/src/thrift/protocol/TCompactProtocol.h
-+@@ -146,18 +146,18 @@ public:
-+ 
-+   void checkReadBytesAvailable(TSet& set) override
-+   {
-+-      trans_->checkReadBytesAvailable(set.size_ * getMinSerializedSize(set.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(set.size_) * getMinSerializedSize(set.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TList& list) override
-+   {
-+-      trans_->checkReadBytesAvailable(list.size_ * getMinSerializedSize(list.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(list.size_) * getMinSerializedSize(list.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TMap& map) override
-+   {
-+       int elmSize = getMinSerializedSize(map.keyType_) + getMinSerializedSize(map.valueType_);
-+-      trans_->checkReadBytesAvailable(map.size_ * elmSize);
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(map.size_) * elmSize);
-+   }
-+ 
-+   /**
-+diff --git a/lib/cpp/src/thrift/protocol/TJSONProtocol.h b/lib/cpp/src/thrift/protocol/TJSONProtocol.h
-+index 09eb6ea..265b339 100644
-+--- a/lib/cpp/src/thrift/protocol/TJSONProtocol.h
-++++ b/lib/cpp/src/thrift/protocol/TJSONProtocol.h
-+@@ -253,18 +253,18 @@ public:
-+ 
-+   void checkReadBytesAvailable(TSet& set) override
-+   {
-+-      trans_->checkReadBytesAvailable(set.size_ * getMinSerializedSize(set.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(set.size_) * getMinSerializedSize(set.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TList& list) override
-+   {
-+-      trans_->checkReadBytesAvailable(list.size_ * getMinSerializedSize(list.elemType_));
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(list.size_) * getMinSerializedSize(list.elemType_));
-+   }
-+ 
-+   void checkReadBytesAvailable(TMap& map) override
-+   {
-+       int elmSize = getMinSerializedSize(map.keyType_) + getMinSerializedSize(map.valueType_);
-+-      trans_->checkReadBytesAvailable(map.size_ * elmSize);
-++      trans_->checkReadBytesAvailable(static_cast<int64_t>(map.size_) * elmSize);
-+   }
-+ 
-+   class LookaheadReader {
-+diff --git a/lib/cpp/src/thrift/protocol/TProtocol.h b/lib/cpp/src/thrift/protocol/TProtocol.h
-+index 37b0db7..4eedc5e 100644
-+--- a/lib/cpp/src/thrift/protocol/TProtocol.h
-++++ b/lib/cpp/src/thrift/protocol/TProtocol.h
-+@@ -604,18 +604,18 @@ protected:
-+ 
-+   virtual void checkReadBytesAvailable(TSet& set)
-+   {
-+-      ptrans_->checkReadBytesAvailable(set.size_ * getMinSerializedSize(set.elemType_));
-++      ptrans_->checkReadBytesAvailable(static_cast<int64_t>(set.size_) * getMinSerializedSize(set.elemType_));
-+   }
-+ 
-+   virtual void checkReadBytesAvailable(TList& list)
-+   {
-+-      ptrans_->checkReadBytesAvailable(list.size_ * getMinSerializedSize(list.elemType_));
-++      ptrans_->checkReadBytesAvailable(static_cast<int64_t>(list.size_) * getMinSerializedSize(list.elemType_));
-+   }
-+ 
-+   virtual void checkReadBytesAvailable(TMap& map)
-+   {
-+       int elmSize = getMinSerializedSize(map.keyType_) + getMinSerializedSize(map.valueType_);
-+-      ptrans_->checkReadBytesAvailable(map.size_ * elmSize);
-++      ptrans_->checkReadBytesAvailable(static_cast<int64_t>(map.size_) * elmSize);
-+   }
-+ 
-+   std::shared_ptr<TTransport> ptrans_;
-+diff --git a/lib/cpp/src/thrift/transport/TTransport.h b/lib/cpp/src/thrift/transport/TTransport.h
-+index 52b3a0a..1269593 100644
-+--- a/lib/cpp/src/thrift/transport/TTransport.h
-++++ b/lib/cpp/src/thrift/transport/TTransport.h
-+@@ -23,6 +23,7 @@
-+ #include <thrift/Thrift.h>
-+ #include <thrift/TConfiguration.h>
-+ #include <thrift/transport/TTransportException.h>
-++#include <cstdint>
-+ #include <memory>
-+ #include <string>
-+ 
-+@@ -272,7 +273,7 @@ public:
-+    *
-+    * @param numBytes  numBytes bytes of data
-+    */
-+-  void checkReadBytesAvailable(long int numBytes)
-++  void checkReadBytesAvailable(int64_t numBytes)
-+   {
-+     if (remainingMessageSize_ < numBytes)
-+       throw TTransportException(TTransportException::END_OF_FILE, "MaxMessageSize reached");
-+diff --git a/lib/cpp/test/ThrifttReadCheckTests.cpp b/lib/cpp/test/ThrifttReadCheckTests.cpp
-+index 2a92160..1370d84 100644
-+--- a/lib/cpp/test/ThrifttReadCheckTests.cpp
-++++ b/lib/cpp/test/ThrifttReadCheckTests.cpp
-+@@ -243,6 +243,54 @@ BOOST_AUTO_TEST_CASE(test_tthriftcompactprotocol_read_check_pass) {
-+   BOOST_CHECK_NO_THROW(protocol->readString(eleven));
++   return g_test_run ();
 + }
-+ 
-++BOOST_AUTO_TEST_CASE(test_tthriftbinaryprotocol_container_size_overflow) {
-++  std::shared_ptr<TConfiguration> config (new TConfiguration(1024));
-++  std::shared_ptr<TMemoryBuffer> transport(new TMemoryBuffer(config));
-++  std::shared_ptr<TBinaryProtocol> protocol(new TBinaryProtocol(transport));
-++
-++  uint32_t val = 0;
-++  TType elemType = apache::thrift::protocol::T_STOP;
-++  // 0x40000000 elements of min size 4 require 4 GiB; the product wraps to 0 in
-++  // 32-bit math and used to slip past the MaxMessageSize check.
-++  TList list(T_I32, 0x40000000);
-++  protocol->writeListBegin(list.elemType_, list.size_);
-++  protocol->writeListEnd();
-++  BOOST_CHECK_THROW(protocol->readListBegin(elemType, val), TTransportException);
-++  protocol->readListEnd();
-++}
-++
-++BOOST_AUTO_TEST_CASE(test_tthriftcompactprotocol_container_size_overflow) {
-++  std::shared_ptr<TConfiguration> config (new TConfiguration(1024));
-++  std::shared_ptr<TMemoryBuffer> transport(new TMemoryBuffer(config));
-++  std::shared_ptr<TCompactProtocol> protocol(new TCompactProtocol(transport));
-++
-++  uint32_t val = 0;
-++  TType elemType = apache::thrift::protocol::T_STOP;
-++  // 0x10000000 elements of min size 16 (UUID) require 4 GiB; the product wraps
-++  // to 0 in 32-bit math and used to slip past the MaxMessageSize check.
-++  TList list(T_UUID, 0x10000000);
-++  protocol->writeListBegin(list.elemType_, list.size_);
-++  protocol->writeListEnd();
-++  BOOST_CHECK_THROW(protocol->readListBegin(elemType, val), TTransportException);
-++  protocol->readListEnd();
-++}
-++
-++BOOST_AUTO_TEST_CASE(test_tthriftjsonprotocol_container_size_overflow) {
-++  std::shared_ptr<TConfiguration> config (new TConfiguration(1024));
-++  std::shared_ptr<TMemoryBuffer> transport(new TMemoryBuffer(config));
-++  std::shared_ptr<TJSONProtocol> protocol(new TJSONProtocol(transport));
-++
-++  uint32_t val = 0;
-++  TType elemType = apache::thrift::protocol::T_STOP;
-++  // 0x10000000 elements of min size 16 (UUID) require 4 GiB; the product wraps
-++  // to 0 in 32-bit math and used to slip past the MaxMessageSize check.
-++  TList list(T_UUID, 0x10000000);
-++  protocol->writeListBegin(list.elemType_, list.size_);
-++  protocol->writeListEnd();
-++  BOOST_CHECK_THROW(protocol->readListBegin(elemType, val), TTransportException);
-++  protocol->readListEnd();
-++}
-++
-+ BOOST_AUTO_TEST_CASE(test_tthriftjsonprotocol_read_check_exception) {
-+   std::shared_ptr<TConfiguration> config (new TConfiguration(MAX_MESSAGE_SIZE));
-+   std::shared_ptr<TMemoryBuffer> transport(new TMemoryBuffer(config));
 diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-index 949ffc3e70..45eaea5c0e 100644
+index 45eaea5c0e..0d804b9831 100644
 --- a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
 +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-@@ -18,6 +18,7 @@ SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
-            file://CVE-2026-48144.patch \
+@@ -19,6 +19,8 @@ SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
             file://CVE-2026-58389.patch \
             file://CVE-2026-58662.patch \
-+           file://CVE-2026-55969.patch \
+            file://CVE-2026-55969.patch \
++           file://CVE-2026-48586-01.patch \
++           file://CVE-2026-48586-02.patch \
             "
  SRC_URI[sha256sum] = "794a0e455787960d9f27ab92c38e34da27e8deeda7a5db0e59dc64a00df8a1e5"
  
