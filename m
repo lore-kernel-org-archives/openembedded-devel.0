@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3A01C79F9E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA79FC79F89
 	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:59 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31936.1788776693797183540
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31937.1788776697551896171
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:24:53 -0700
+ Mon, 07 Sep 2026 03:24:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=GkfSLd/z;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-38e58034d05so2702097a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=svTCuDIN;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cc439bfb2d8so2062043a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788776693; x=1789381493; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788776697; x=1789381497; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3Q0AnwnnzA5EhZWeGFmkxu3nw2tc44QV4zSf60KTbJ0=;
-        b=GkfSLd/zEOaYJDh435aIAWWXljf/x40fjADsWkbk42V2oxtOqemhXzewWLEZ4wMZNv
-         STlCvBnK6oQo/DsKd0Qgbr6MjjV94tYKDPyWvi8D7yWXR0+g47suyiZ7+q4jlfnIvXc+
-         jHJ+3VpNCACkhuB8MjIBmi/RlVkbmTZfsJZhyJiAyUK2fT/rJEACybsEGAeXr5g1SO0v
-         XA/wCeetP8QEwlO8eGtqRZivCdOvcsQ56hSC7gvJJBh6BRUxfG9ZBr3UyPjuhCxZd6jy
-         K95uo9iqfB8D/y3IND6/2Yi03cTITATbwBNkQLJF4IIpsApi+MP7LuTYYkjnBWCW9bTF
-         WklQ==
+        bh=tjzh77E/Rpe2xgYO3ANHSZG+5Pkepzyjgmd9Btc6eFc=;
+        b=svTCuDINLKE93T95hU2nvBOJN2fyLI9YaRq0XrQc167irUYfnDVTzEjZcUACOmmL+K
+         /WdVcql/CyB2C8ZkcOFRNjdnyuv1gF9Oz9Pn5XPmcB6SAcoESbSG0vDSTI7fxwv6rUK2
+         X8F8Bre0rrgkW3KKiRB42RBZqrBi9Y6jADa2ttBEw1KubJrfQoL+SEYjcN+Zh5PlJpgN
+         vRbu/8IIljv5/VGOCNUD17OkSfD2IZeF9VZOS/S9OF0vAEjV7YpnxrFgpZ32ZcRPT37W
+         49eh5pNfYHfGIZm+C9G1arv1kIXA/NgomX2T3Lxi57mW9waAwE/wosHjGLN0u6DlYC4n
+         Be+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788776693; x=1789381493;
+        d=1e100.net; s=20251104; t=1788776697; x=1789381497;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3Q0AnwnnzA5EhZWeGFmkxu3nw2tc44QV4zSf60KTbJ0=;
-        b=PxDeDLRd08juTTS2oWwzGdYLL+2vGUmvQMqMLRndJ3nAsLTJXmV5bp9gsvDqWrAvyM
-         n/lvlJktBY8DR4BKXUsjtBGuWi3QeT0rIj/rBh5tqd5scD/N2TtDl3g0wJuhrq7vEE/m
-         EQhAiy/na9tJ/cKsOCFBgOh2Zxj+ig5W5KotYR/rnQzYisJi69Reo3PKVAjqzeFNwep7
-         Dy1Et/6pfRf1gyX0EAvakGC+jy8dz9bHw4bnTcHuWtgwhWjeWUD2noKILvFvPTPdrYbi
-         qW25Y/BDn+YwRXqKHtxkxA+q26w4GgpUFDnw3/rImftA5GYRoVb6iAqGiFyz4tLd7eCv
-         m9aw==
-X-Gm-Message-State: AFuF++ljR0BUCehzlT1jgAe+aAvbIXBnSWsbcEKGx8xLGgDe+H1WjkZR
-	khyBnA5B3FS5D7Skd0PWD+T3xra4guQXbxJUz3COJuECWzXcp6aJ1rmVLgIG1j/j
-X-Gm-Gg: AYBFou0+StpkLYuFe/mH08fLitUqmExx3J+6qnkKdPoaYXiYJ/G3u0d+Qsq3InFk+8u
-	w/gIbwhxWYsXv8RlALxMivlcmKqdfAON1IffBxiedQwKRHtkewBipVZjMs9XM7ECEsDJ/rDD6JC
-	prnSa82f4Xk6hKdcTJU4tig516Q8MQ3TJb+D75vXAncRzWt8cJzgl7kG92dxNQ5gUhtJYmGladw
-	mG+rE6lHrdTnBY28qzcHTp41yom7Zgysk40N9e90OrfbMXWNcp10AUUpo1doSEWG7I+nLFeTkCw
-	TnTlFAEL6K3a74gMFHOeTTAb4hjH3rqmrfn5D0BvReSj4h6g7af1UnG+OGTYJmSikplROKcHCpV
-	jrYRpOpGNHpwIi+VDbvsUZKH3n5rT4lg+L79WVnrcrWBG/to+lB5+HkD2gZAZxd/50Hxi6uRNcE
-	n/VOHVdojCadcMXSbE8qjK0aPuoXx/arLQqV+53sNH3yIKgfXxoIHwyys40G5PgrzC/vlB7if6
-X-Received: by 2002:a17:90b:510c:b0:398:9be6:f999 with SMTP id 98e67ed59e1d1-39b262e27a9mr36574485a91.24.1788776693031;
-        Mon, 07 Sep 2026 03:24:53 -0700 (PDT)
+        bh=tjzh77E/Rpe2xgYO3ANHSZG+5Pkepzyjgmd9Btc6eFc=;
+        b=E8/4RsoRJMuSpUpUe8m7OkxXxYYVYb/LoyNDVWqCp7zPh+j0RBXDDrZTXa76DgQgcu
+         ntG+5O80xXdjuqufWmiyB1JEskc253RPIoz1MNcrTf42gcwtv7vzUlauwPGCHeXhMF49
+         7UY5IzlfHURe/OiHBOCKsbdMwutjX5OmtpB/Tj56m919W4UZkdcaMJnW9PSYPYnV7cqe
+         Vjv7XcS9PSyVIAmetUKEm3OS+b+tzLL5PCrLCsmfIi1nimDx/gULl9m/95ymegvWHwyB
+         5yv1OCT2Tc4I66XnQnKG9jE6jMjlijk3No41UxJRUmoiQrg0sFNJ8slhkGh9PTmaTx6M
+         k3AQ==
+X-Gm-Message-State: AFuF++lq7lOr2yWsWvNSFvFr3F98g2dpYj4pp+ts/FDTUdHjM59g2C6N
+	L2rs3iSOyMkyiUfsRY6xZPKh2B4VfSPDVbDpPuLhDLSpxl6jFj5K0Id6/8kKgg==
+X-Gm-Gg: AYBFou2COh4dec414GXDV5z92K4IO4JPsDYQR6KFrcDsE4nnOXnXgIeDzp/u2XLJzbo
+	+6JmHebJUbMk7sNfQ3nRFoEIlY762JlBpnZQutPLhUvdIuhLP/p2afU8/u+zVRiKCu+BA26a4Aa
+	P1JkwyS8HJ8F8xbtFTZ5C05CtXhCrDrjZgNufrgPldAXIQNSCMs54xzVhBp6hvpswPYgKjCojLV
+	exES9lvT15ggoyES7R3IgzIMm1/ofngw8jZLHDprjwW5tbI9mkE4E2iaRXCt6wQYYyO9k5Mx9SW
+	xHzulg1mZA5v0xrM7ow7OsIK4oJSCZOrR5YxKOZCvbd7S20HzoFXluCnzBxopS4+Nl+uzXqcl7d
+	P3vB4pWJcHtSVirMi6BnrMiCDwg3DL2bnfeKX6WfC5he7bbtckem3h83lBulpr02APUIdOY/fRS
+	LbP8MsfsPdtN3/8G74hUSMcGpPdFGp0pxCQ9qZsb7VYqfXAa8i3eIeUX3c2o4OdxJzumbZjqtz
+X-Received: by 2002:a17:90b:33c1:b0:398:9bd1:3214 with SMTP id 98e67ed59e1d1-39b262dfa81mr30756334a91.21.1788776696170;
+        Mon, 07 Sep 2026 03:24:56 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.50
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 03:24:52 -0700 (PDT)
+        Mon, 07 Sep 2026 03:24:55 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 30/33] wolfssl: patch CVE-2026-6412
-Date: Mon,  7 Sep 2026 22:23:14 +1200
-Message-ID: <20260907102318.2459883-30-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 31/33] wolfssl: patch CVE-2026-6450
+Date: Mon,  7 Sep 2026 22:23:15 +1200
+Message-ID: <20260907102318.2459883-31-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
 References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
@@ -67,259 +67,908 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129842
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129843
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Also backport follow-up PR[1] to the initial PR mentioned in the NVD.
+
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-6412
+https://nvd.nist.gov/vuln/detail/cve-2026-6450
+
+[1]https://github.com/wolfSSL/wolfssl/pull/10274
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-6412-1.patch       | 159 ++++++++++++++++++
- .../wolfssl/files/CVE-2026-6412-2.patch       |  56 ++++++
+ .../wolfssl/files/CVE-2026-6450-1.patch       | 456 ++++++++++++++++++
+ .../wolfssl/files/CVE-2026-6450-2.patch       | 404 ++++++++++++++++
  .../wolfssl/wolfssl_5.9.1.bb                  |   2 +
- 3 files changed, 217 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-1.patch
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-2.patch
+ 3 files changed, 862 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-2.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-1.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-1.patch
 new file mode 100644
-index 0000000000..4d1d3b71cb
+index 0000000000..a754fc3e33
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-1.patch
-@@ -0,0 +1,159 @@
-+From eda0a3001ebe036da39f8911a347174a759ffce0 Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Tue, 14 Apr 2026 12:26:45 -0500
-+Subject: [PATCH] Report cert verify failure with MD5
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-1.patch
+@@ -0,0 +1,456 @@
++From b60e4b6fc0d757f5983a803ad02a1a57c0d0a463 Mon Sep 17 00:00:00 2001
++From: Reda Chouk <reda@wolfssl.com>
++Date: Thu, 16 Apr 2026 19:45:09 +0200
++Subject: [PATCH] reject crls with unrecognized critical extensions per rfc
++ 5280 section 5.2
 +
-+(cherry picked from commit 4a13896b2ea6d6080d41cd32539193713e69935f)
++(cherry picked from commit 857141da35b67a14a580fb26ec57af1efa68a1d9)
 +
-+CVE: CVE-2026-6412
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/4a13896b2ea6d6080d41cd32539193713e69935f]
++CVE: CVE-2026-6450
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/857141da35b67a14a580fb26ec57af1efa68a1d9]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ .wolfssl_known_macro_extras |  1 +
-+ tests/api/test_certman.c    | 81 +++++++++++++++++++++++++++++++++++++
-+ tests/api/test_certman.h    |  4 +-
-+ wolfcrypt/src/asn.c         |  7 ++++
-+ 4 files changed, 92 insertions(+), 1 deletion(-)
++ tests/api/test_certman.c | 342 +++++++++++++++++++++++++++++++++++++++
++ tests/api/test_certman.h |   4 +
++ wolfcrypt/src/asn.c      |   7 +-
++ wolfcrypt/src/asn_orig.c |   9 +-
++ 4 files changed, 359 insertions(+), 3 deletions(-)
 +
-+diff --git a/.wolfssl_known_macro_extras b/.wolfssl_known_macro_extras
-+index 3e411ca86..3233644ba 100644
-+--- a/.wolfssl_known_macro_extras
-++++ b/.wolfssl_known_macro_extras
-+@@ -680,6 +680,7 @@ WOLFSSL_ALLOW_CRIT_AIA
-+ WOLFSSL_ALLOW_CRIT_AKID
-+ WOLFSSL_ALLOW_CRIT_SKID
-+ WOLFSSL_ALLOW_MAX_FRAGMENT_ADJUST
-++WOLFSSL_ALLOW_MD5_CERT_SIGS
-+ WOLFSSL_ALLOW_NO_CN_IN_SAN
-+ WOLFSSL_ALLOW_NO_SUITES
-+ WOLFSSL_ALLOW_SERVER_SC_EXT
 +diff --git a/tests/api/test_certman.c b/tests/api/test_certman.c
-+index dfce12334..9f87f4535 100644
++index 6c5875dc5..7405f4bff 100644
 +--- a/tests/api/test_certman.c
 ++++ b/tests/api/test_certman.c
-+@@ -2540,3 +2540,84 @@ int test_various_pathlen_chains(void)
-+ #endif
++@@ -1964,6 +1964,348 @@ int test_wolfSSL_CRL_duplicate_extensions(void)
 +     return EXPECT_RESULT();
 + }
-++
-++/* Verify that certificates signed with MD5 (md5WithRSAEncryption) are
-++ * rejected during chain verification. MD5 must not be acceptable as a
-++ * certificate signature hash, even when MD5 is compiled in (e.g. for TLS
-++ * 1.0 PRF or HMAC uses). Trust anchors are exempt from this check because
-++ * ParseCertRelative skips ConfirmSignature for CA_TYPE. */
-++int test_wolfSSL_CertManagerRejectMD5Cert(void)
++ 
+++int test_wolfSSL_CRL_critical_idp(void)
 ++{
 ++    EXPECT_DECLS;
-++#if !defined(NO_CERTS) && !defined(NO_RSA) && !defined(NO_MD5) && \
-++    !defined(WOLFSSL_ALLOW_MD5_CERT_SIGS) && defined(WOLFSSL_CERT_GEN) && \
-++    !defined(NO_WOLFSSL_CM_VERIFY) && !defined(NO_ASN_CRYPT) && \
-++    !defined(USE_CERT_BUFFERS_1024)
+++#if !defined(NO_CERTS) && defined(HAVE_CRL) && !defined(NO_RSA)
+++
+++    /* CA cert (CN=claim-root), self-signed, 799 bytes DER */
+++    static const unsigned char ca_cert_idp[] = {
+++        0x30, 0x82, 0x03, 0x1b, 0x30, 0x82, 0x02, 0x03, 0xa0, 0x03, 0x02,
+++        0x01, 0x02, 0x02, 0x14, 0x1e, 0x25, 0xc1, 0x5d, 0x6f, 0x02, 0x21,
+++        0xa0, 0xf0, 0x14, 0x15, 0x9c, 0x3b, 0x4d, 0x1d, 0x73, 0x16, 0x00,
+++        0xe4, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7,
+++        0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00, 0x30, 0x15, 0x31, 0x13, 0x30,
+++        0x11, 0x06, 0x03, 0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61,
+++        0x69, 0x6d, 0x2d, 0x72, 0x6f, 0x6f, 0x74, 0x30, 0x1e, 0x17, 0x0d,
+++        0x32, 0x36, 0x30, 0x34, 0x31, 0x36, 0x31, 0x31, 0x33, 0x38, 0x35,
+++        0x35, 0x5a, 0x17, 0x0d, 0x33, 0x36, 0x30, 0x34, 0x31, 0x33, 0x31,
+++        0x31, 0x33, 0x38, 0x35, 0x35, 0x5a, 0x30, 0x15, 0x31, 0x13, 0x30,
+++        0x11, 0x06, 0x03, 0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61,
+++        0x69, 0x6d, 0x2d, 0x72, 0x6f, 0x6f, 0x74, 0x30, 0x82, 0x01, 0x22,
+++        0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01,
+++        0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00, 0x30, 0x82,
+++        0x01, 0x0a, 0x02, 0x82, 0x01, 0x01, 0x00, 0xba, 0x49, 0x8c, 0xb5,
+++        0x17, 0xc1, 0x01, 0x24, 0x6f, 0x56, 0x1a, 0xa9, 0x3b, 0x03, 0xe2,
+++        0x9f, 0x24, 0xb1, 0x25, 0x98, 0xfb, 0x38, 0x82, 0x78, 0x54, 0xa7,
+++        0x1f, 0x69, 0x87, 0xe4, 0x96, 0x1b, 0x81, 0x18, 0x10, 0xb0, 0xc0,
+++        0x5b, 0x4b, 0xbf, 0xb8, 0x1d, 0xf4, 0xee, 0x75, 0x0f, 0xb5, 0x45,
+++        0x72, 0x70, 0xce, 0x65, 0x84, 0x44, 0x3e, 0x30, 0x78, 0xc4, 0xf3,
+++        0xec, 0xba, 0x96, 0x78, 0xa4, 0x65, 0xfc, 0x62, 0x8d, 0xf5, 0x29,
+++        0xf9, 0x7c, 0x3d, 0x78, 0x6c, 0x1d, 0x4a, 0x4c, 0xc9, 0x15, 0x2d,
+++        0x22, 0x10, 0xea, 0x93, 0x26, 0xb8, 0xa6, 0x17, 0xd3, 0x0e, 0xbc,
+++        0x0c, 0xab, 0x83, 0x63, 0xf6, 0x1c, 0xcc, 0x83, 0x73, 0x29, 0x7e,
+++        0x7f, 0x83, 0x7f, 0xbd, 0x63, 0xaa, 0x8d, 0xfa, 0x78, 0x85, 0xd2,
+++        0x3e, 0x60, 0x95, 0x5a, 0x8d, 0xfa, 0x8f, 0xcd, 0x94, 0x3f, 0x13,
+++        0x28, 0xd9, 0xd0, 0x87, 0x28, 0x17, 0x78, 0xe2, 0x61, 0x8d, 0x79,
+++        0x97, 0x01, 0xa9, 0x7c, 0x84, 0xc0, 0x1c, 0xbe, 0x5f, 0x5d, 0xca,
+++        0x28, 0x6b, 0x5e, 0xdd, 0x83, 0xa5, 0x55, 0x34, 0x11, 0xba, 0xfa,
+++        0x8b, 0x92, 0xa3, 0xde, 0xb6, 0xf3, 0xba, 0xab, 0x7f, 0x1a, 0x67,
+++        0xfd, 0x6f, 0x20, 0x85, 0x4c, 0x77, 0xa7, 0x8e, 0xbe, 0xb8, 0xf8,
+++        0x8f, 0x70, 0xe3, 0x5a, 0xd3, 0x77, 0xc9, 0x9e, 0x10, 0x60, 0xb4,
+++        0xdb, 0x0c, 0xc5, 0x05, 0xe1, 0x1f, 0xbd, 0xe6, 0x79, 0xee, 0x82,
+++        0x3f, 0x51, 0x76, 0xe2, 0x7f, 0x5c, 0x11, 0x6d, 0xd3, 0x21, 0x69,
+++        0xec, 0x05, 0x11, 0x8b, 0xc8, 0x39, 0xb3, 0x2c, 0xa6, 0x83, 0xb4,
+++        0x6f, 0xac, 0x19, 0xd6, 0x6a, 0x65, 0x0d, 0x08, 0x94, 0x58, 0xde,
+++        0x3d, 0xc9, 0x0c, 0x54, 0x03, 0x73, 0x0c, 0x8d, 0x24, 0x09, 0xf3,
+++        0xb1, 0x5d, 0xd2, 0xe3, 0xeb, 0x56, 0xd6, 0x28, 0x66, 0x5b, 0x02,
+++        0x03, 0x01, 0x00, 0x01, 0xa3, 0x63, 0x30, 0x61, 0x30, 0x0f, 0x06,
+++        0x03, 0x55, 0x1d, 0x13, 0x01, 0x01, 0xff, 0x04, 0x05, 0x30, 0x03,
+++        0x01, 0x01, 0xff, 0x30, 0x0e, 0x06, 0x03, 0x55, 0x1d, 0x0f, 0x01,
+++        0x01, 0xff, 0x04, 0x04, 0x03, 0x02, 0x01, 0x06, 0x30, 0x1d, 0x06,
+++        0x03, 0x55, 0x1d, 0x0e, 0x04, 0x16, 0x04, 0x14, 0x52, 0x97, 0x58,
+++        0x47, 0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e,
+++        0xea, 0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x1f, 0x06, 0x03, 0x55,
+++        0x1d, 0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x52, 0x97, 0x58,
+++        0x47, 0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e,
+++        0xea, 0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x0d, 0x06, 0x09, 0x2a,
+++        0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00, 0x03,
+++        0x82, 0x01, 0x01, 0x00, 0x7d, 0x30, 0xd4, 0x6a, 0x01, 0x89, 0x3b,
+++        0x62, 0xed, 0x16, 0x46, 0x59, 0x0f, 0xf2, 0x3b, 0xb5, 0xde, 0x89,
+++        0x08, 0x17, 0x68, 0xcb, 0x46, 0xdc, 0x39, 0xa6, 0xcb, 0x56, 0xb0,
+++        0x91, 0xeb, 0x03, 0xb2, 0x15, 0xc4, 0x3b, 0x4d, 0x63, 0x55, 0x22,
+++        0x0a, 0x26, 0xe6, 0x64, 0x46, 0xe8, 0x0f, 0xa8, 0xf3, 0xde, 0xe1,
+++        0x43, 0x54, 0xe6, 0xd7, 0x8a, 0xf4, 0x4f, 0xab, 0x56, 0x93, 0x12,
+++        0x71, 0x4b, 0x25, 0x71, 0x0a, 0x31, 0x18, 0x79, 0xee, 0x45, 0xa4,
+++        0xf5, 0x72, 0x67, 0xfa, 0x41, 0xd9, 0x87, 0x97, 0x09, 0xef, 0x55,
+++        0xad, 0x6f, 0x47, 0x1d, 0x5a, 0xb2, 0xe9, 0xf7, 0x22, 0x05, 0x2d,
+++        0x5a, 0x81, 0xa8, 0xe8, 0x53, 0xb0, 0x94, 0xf6, 0x63, 0xff, 0x3f,
+++        0x51, 0x7a, 0x08, 0xac, 0x27, 0x9a, 0x57, 0x11, 0x22, 0xa4, 0x00,
+++        0x84, 0x70, 0x86, 0x76, 0x39, 0x0f, 0x4f, 0x57, 0xcf, 0x8e, 0x94,
+++        0xd2, 0x8e, 0x43, 0xc0, 0xd5, 0x34, 0x7d, 0xf5, 0xa1, 0x45, 0x1e,
+++        0xb7, 0xc8, 0x7e, 0x7c, 0xfe, 0x5d, 0x4d, 0x53, 0x43, 0x25, 0x15,
+++        0x9e, 0x08, 0x01, 0x56, 0xa4, 0xff, 0x79, 0x59, 0x25, 0xc9, 0x23,
+++        0x98, 0xaf, 0x05, 0xaf, 0xc1, 0x0b, 0x29, 0xf1, 0xe2, 0xc4, 0x36,
+++        0x31, 0x91, 0xfa, 0xf2, 0xbb, 0x12, 0xe8, 0x67, 0xf9, 0xc7, 0xa1,
+++        0x5e, 0x8c, 0xed, 0x92, 0x12, 0xa3, 0x2b, 0xe1, 0xc2, 0xe1, 0xa0,
+++        0xb0, 0x0e, 0x12, 0xa7, 0xd0, 0xa2, 0xae, 0xd6, 0xfa, 0x30, 0x21,
+++        0x0f, 0x73, 0xfe, 0x24, 0x21, 0x5f, 0x03, 0x86, 0x69, 0xcd, 0xec,
+++        0x76, 0x18, 0xe1, 0xfd, 0xb6, 0x64, 0x90, 0xa6, 0x06, 0x2e, 0x19,
+++        0x40, 0x93, 0x50, 0x37, 0xe4, 0x90, 0xe3, 0x1f, 0x07, 0xae, 0xfb,
+++        0x89, 0xc3, 0xf6, 0xc4, 0x90, 0xab, 0x40, 0x67, 0x4c, 0x43, 0x2c,
+++        0xa2, 0xb0, 0x3e, 0x61, 0x16, 0x69, 0x8f
+++    };
+++
+++    /* CRL with critical IDP onlyuser=TRUE, revokes serial 0x1000, 480 bytes */
+++    static const unsigned char crl_user_idp[] = {
+++        0x30, 0x82, 0x01, 0xdc, 0x30, 0x81, 0xc5, 0x02, 0x01, 0x01, 0x30,
+++        0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01,
+++        0x0b, 0x05, 0x00, 0x30, 0x15, 0x31, 0x13, 0x30, 0x11, 0x06, 0x03,
+++        0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61, 0x69, 0x6d, 0x2d,
+++        0x72, 0x6f, 0x6f, 0x74, 0x17, 0x0d, 0x32, 0x36, 0x30, 0x34, 0x31,
+++        0x36, 0x31, 0x31, 0x33, 0x38, 0x35, 0x35, 0x5a, 0x17, 0x0d, 0x33,
+++        0x36, 0x30, 0x34, 0x31, 0x33, 0x31, 0x31, 0x33, 0x38, 0x35, 0x35,
+++        0x5a, 0x30, 0x15, 0x30, 0x13, 0x02, 0x02, 0x10, 0x00, 0x17, 0x0d,
+++        0x32, 0x36, 0x30, 0x34, 0x31, 0x36, 0x31, 0x31, 0x33, 0x38, 0x35,
+++        0x35, 0x5a, 0xa0, 0x65, 0x30, 0x63, 0x30, 0x1f, 0x06, 0x03, 0x55,
+++        0x1d, 0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x52, 0x97, 0x58,
+++        0x47, 0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e,
+++        0xea, 0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x33, 0x06, 0x03, 0x55,
+++        0x1d, 0x1c, 0x01, 0x01, 0xff, 0x04, 0x29, 0x30, 0x27, 0xa0, 0x22,
+++        0xa0, 0x20, 0x86, 0x1e, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f,
+++        0x63, 0x6c, 0x61, 0x69, 0x6d, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x2f,
+++        0x63, 0x72, 0x6c, 0x2d, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x65,
+++        0x6d, 0x81, 0x01, 0xff, 0x30, 0x0b, 0x06, 0x03, 0x55, 0x1d, 0x14,
+++        0x04, 0x04, 0x02, 0x02, 0x20, 0x00, 0x30, 0x0d, 0x06, 0x09, 0x2a,
+++        0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00, 0x03,
+++        0x82, 0x01, 0x01, 0x00, 0x9b, 0x1a, 0x70, 0xba, 0xf8, 0x38, 0xff,
+++        0xc6, 0x36, 0x59, 0x6e, 0xab, 0x87, 0x74, 0x04, 0xe3, 0x17, 0xb3,
+++        0xdd, 0x62, 0x03, 0x25, 0x9e, 0xff, 0x53, 0xf7, 0xde, 0x48, 0xb0,
+++        0x56, 0x0c, 0x19, 0xea, 0x86, 0x30, 0x21, 0x01, 0x63, 0xd6, 0xd2,
+++        0xef, 0xd1, 0x0e, 0x1d, 0xde, 0xc1, 0x18, 0x33, 0xd2, 0x1b, 0x79,
+++        0x2e, 0xa1, 0xd5, 0x51, 0xcc, 0x31, 0x35, 0x28, 0xa6, 0x6f, 0xc0,
+++        0xcf, 0x78, 0xbf, 0x5d, 0xdd, 0x66, 0x81, 0x71, 0xa3, 0x52, 0xb5,
+++        0x48, 0x81, 0x1a, 0x34, 0xf1, 0x03, 0x37, 0x3a, 0x97, 0x02, 0xd6,
+++        0x56, 0x4a, 0x24, 0xeb, 0x93, 0x47, 0xb6, 0xc3, 0x69, 0xc6, 0x2b,
+++        0xd8, 0xfc, 0xf9, 0x9f, 0x85, 0xab, 0xe2, 0x81, 0x66, 0x8f, 0xcf,
+++        0x7a, 0x81, 0xd7, 0x46, 0xb4, 0x8d, 0x44, 0x05, 0x40, 0xd2, 0x3b,
+++        0x1c, 0xb8, 0x4a, 0x88, 0xb8, 0x65, 0x69, 0x5e, 0x7f, 0x6c, 0x43,
+++        0x1c, 0x4f, 0xbf, 0x48, 0x55, 0x6b, 0xb0, 0xb3, 0x70, 0x49, 0x1a,
+++        0xfa, 0xd1, 0x55, 0xe7, 0xb9, 0x5d, 0x4f, 0x2d, 0x7e, 0xc1, 0xa5,
+++        0x5f, 0x5e, 0x38, 0xef, 0x74, 0xe8, 0x72, 0x89, 0x9c, 0x86, 0x24,
+++        0x65, 0x2d, 0x38, 0x88, 0x53, 0x81, 0x48, 0x8a, 0x7d, 0xc3, 0x0d,
+++        0x87, 0xaf, 0xd3, 0xf7, 0x39, 0xeb, 0xac, 0x36, 0xc2, 0xc9, 0x1f,
+++        0x78, 0xa9, 0x53, 0x1c, 0x4a, 0xa6, 0xba, 0x63, 0xd1, 0xc2, 0x62,
+++        0x81, 0x00, 0x39, 0xb1, 0x1c, 0x1c, 0xad, 0x96, 0x83, 0xf7, 0x99,
+++        0x34, 0xc6, 0x9c, 0x93, 0xbb, 0x6a, 0x7c, 0xf5, 0x18, 0xed, 0xbd,
+++        0x29, 0xe4, 0x29, 0x50, 0x3c, 0xcb, 0x94, 0x72, 0x8f, 0xad, 0x15,
+++        0x91, 0x38, 0x4a, 0xb4, 0xde, 0x98, 0x3e, 0xd6, 0xb2, 0xd1, 0x2a,
+++        0x8c, 0xa2, 0xc9, 0x0f, 0x2f, 0x7c, 0x4a, 0xd6, 0x56, 0x02, 0x9f,
+++        0x6c, 0xda, 0xa9, 0x4c, 0x04, 0x64, 0x7c
+++    };
+++
+++    /* CRL with critical IDP onlyCA=TRUE, empty revocation list, 459 bytes */
+++    static const unsigned char crl_caonly_idp[] = {
+++        0x30, 0x82, 0x01, 0xc7, 0x30, 0x81, 0xb0, 0x02, 0x01, 0x01, 0x30,
+++        0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01,
+++        0x0b, 0x05, 0x00, 0x30, 0x15, 0x31, 0x13, 0x30, 0x11, 0x06, 0x03,
+++        0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61, 0x69, 0x6d, 0x2d,
+++        0x72, 0x6f, 0x6f, 0x74, 0x17, 0x0d, 0x32, 0x36, 0x30, 0x34, 0x31,
+++        0x36, 0x31, 0x31, 0x33, 0x38, 0x35, 0x35, 0x5a, 0x17, 0x0d, 0x33,
+++        0x36, 0x30, 0x34, 0x31, 0x33, 0x31, 0x31, 0x33, 0x38, 0x35, 0x35,
+++        0x5a, 0xa0, 0x67, 0x30, 0x65, 0x30, 0x1f, 0x06, 0x03, 0x55, 0x1d,
+++        0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x52, 0x97, 0x58, 0x47,
+++        0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e, 0xea,
+++        0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x35, 0x06, 0x03, 0x55, 0x1d,
+++        0x1c, 0x01, 0x01, 0xff, 0x04, 0x2b, 0x30, 0x29, 0xa0, 0x24, 0xa0,
+++        0x22, 0x86, 0x20, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x63,
+++        0x6c, 0x61, 0x69, 0x6d, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63,
+++        0x72, 0x6c, 0x2d, 0x63, 0x61, 0x6f, 0x6e, 0x6c, 0x79, 0x2e, 0x70,
+++        0x65, 0x6d, 0x82, 0x01, 0xff, 0x30, 0x0b, 0x06, 0x03, 0x55, 0x1d,
+++        0x14, 0x04, 0x04, 0x02, 0x02, 0x20, 0x01, 0x30, 0x0d, 0x06, 0x09,
+++        0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00,
+++        0x03, 0x82, 0x01, 0x01, 0x00, 0x9d, 0x6e, 0x0d, 0x93, 0x89, 0xab,
+++        0x6e, 0x74, 0x52, 0x2c, 0xe6, 0x89, 0xcb, 0x72, 0x49, 0x90, 0x0d,
+++        0x91, 0x80, 0xb5, 0xca, 0x7b, 0x95, 0x0d, 0xa8, 0x05, 0x31, 0x04,
+++        0x50, 0xb8, 0xf3, 0xce, 0x9c, 0xbb, 0x05, 0x38, 0x0a, 0x64, 0x1a,
+++        0x61, 0x68, 0xa7, 0xa8, 0xa0, 0x69, 0x2a, 0x79, 0x01, 0x42, 0x67,
+++        0xf5, 0x72, 0xdf, 0x37, 0x5b, 0x42, 0x6d, 0x3c, 0x59, 0x95, 0x09,
+++        0x34, 0xb3, 0xb6, 0x8b, 0x2b, 0xd8, 0xab, 0xb6, 0x8b, 0xff, 0x8e,
+++        0xae, 0xd0, 0xc6, 0x9a, 0xbe, 0x7e, 0x29, 0xbc, 0x4d, 0xfb, 0xe1,
+++        0xac, 0xd8, 0x23, 0x1a, 0xec, 0x0d, 0xa1, 0xa0, 0xf6, 0x52, 0x8e,
+++        0x64, 0xc4, 0x11, 0x0f, 0x7c, 0x5b, 0x9f, 0x65, 0x4f, 0x5a, 0xd6,
+++        0x64, 0xe0, 0x64, 0xf6, 0xac, 0x9d, 0xdc, 0x21, 0x3f, 0xa8, 0x5c,
+++        0xd2, 0xf5, 0x87, 0xec, 0x49, 0x19, 0xff, 0x01, 0x9e, 0x8d, 0x83,
+++        0x08, 0xd2, 0xdc, 0x83, 0xf6, 0x03, 0xc4, 0x6f, 0xf6, 0xa2, 0x13,
+++        0x41, 0xfe, 0x66, 0xcd, 0xeb, 0xe8, 0x0f, 0x28, 0x7d, 0xd2, 0xcd,
+++        0xfa, 0x7a, 0xd7, 0xae, 0x08, 0xa1, 0x31, 0x17, 0x60, 0x59, 0x39,
+++        0x98, 0x85, 0xe1, 0xa4, 0xd2, 0x35, 0x70, 0xb7, 0xff, 0xf3, 0x2f,
+++        0xee, 0x45, 0x9c, 0xbe, 0xcc, 0x18, 0x49, 0x94, 0xe9, 0xf6, 0xd0,
+++        0x45, 0x54, 0x6f, 0xe4, 0xe8, 0x3a, 0x0d, 0x5b, 0x05, 0xe8, 0x02,
+++        0x51, 0x5b, 0x63, 0xb5, 0xf2, 0x47, 0x86, 0x9b, 0xf3, 0x07, 0xc2,
+++        0x49, 0x26, 0xa0, 0x77, 0x94, 0xe7, 0x4f, 0xbc, 0x5f, 0x9f, 0xf9,
+++        0x06, 0x0e, 0xcb, 0x45, 0x9c, 0x02, 0x11, 0xfc, 0xcb, 0x12, 0x7f,
+++        0xba, 0x7d, 0x93, 0x5b, 0x57, 0x6a, 0x15, 0x5e, 0xd2, 0xc1, 0x97,
+++        0xb2, 0xbb, 0x00, 0x2c, 0xdd, 0x41, 0x97, 0x2a, 0xe4, 0x53, 0x40,
+++        0xf8, 0xb5, 0x56, 0xf2, 0x9a, 0x04, 0xe6, 0x89
+++    };
+++
 ++    WOLFSSL_CERT_MANAGER* cm = NULL;
-++    RsaKey  caKey;
-++    WC_RNG  rng;
-++    Cert    leaf;
-++    byte*   der = NULL;
-++    int     derSz = 0;
-++    word32  idx = 0;
-++    int     caKeyInit = 0;
-++    int     rngInit = 0;
 ++
-++    XMEMSET(&caKey, 0, sizeof(caKey));
-++    XMEMSET(&rng,   0, sizeof(rng));
-++
-++    ExpectIntEQ(wc_InitRng(&rng), 0);
-++    if (EXPECT_SUCCESS()) rngInit = 1;
-++
-++    ExpectIntEQ(wc_InitRsaKey_ex(&caKey, HEAP_HINT, testDevId), 0);
-++    if (EXPECT_SUCCESS()) caKeyInit = 1;
-++    ExpectIntEQ(wc_RsaPrivateKeyDecode(ca_key_der_2048, &idx, &caKey,
-++                sizeof_ca_key_der_2048), 0);
-++
-++    ExpectNotNull(der = (byte*)XMALLOC(FOURK_BUF, HEAP_HINT,
-++                DYNAMIC_TYPE_TMP_BUFFER));
-++
-++    /* Build a leaf certificate whose issuer is the built-in 2048-bit
-++     * wolfSSL test CA and sign it with MD5+RSA using the matching CA
-++     * private key. */
-++    ExpectIntEQ(wc_InitCert(&leaf), 0);
-++    leaf.sigType = CTC_MD5wRSA;
-++    leaf.isCA    = 0;
-++    XSTRNCPY(leaf.subject.country,    "US",              CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.state,      "MT",              CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.locality,   "Bozeman",         CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.org,        "wolfSSL",         CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.unit,       "Test",            CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.commonName, "md5-leaf",        CTC_NAME_SIZE);
-++    XSTRNCPY(leaf.subject.email,      "info@wolfssl.com", CTC_NAME_SIZE);
-++
-++    ExpectIntEQ(wc_SetIssuerBuffer(&leaf, ca_cert_der_2048,
-++                sizeof_ca_cert_der_2048), 0);
-++
-++    /* wc_MakeCert needs an RSA public key for the subject; reuse caKey
-++     * for simplicity (we only care about signature-side verification). */
-++    ExpectIntGT((derSz = wc_MakeCert(&leaf, der, FOURK_BUF, &caKey, NULL,
-++                &rng)), 0);
-++    ExpectIntGT((derSz = wc_SignCert(leaf.bodySz, leaf.sigType, der,
-++                FOURK_BUF, &caKey, NULL, &rng)), 0);
-++
-++    /* Load the SHA-256 signed CA cert as a trust anchor and attempt
-++     * to verify the MD5-signed leaf: it must be rejected because
-++     * HashForSignature() now returns HASH_TYPE_E for MD5 in verify mode,
-++     * which surfaces as ASN_SIG_CONFIRM_E from ConfirmSignature(). */
 ++    ExpectNotNull(cm = wolfSSL_CertManagerNew());
-++    ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, ca_cert_der_2048,
-++                sizeof_ca_cert_der_2048, WOLFSSL_FILETYPE_ASN1),
-++                WOLFSSL_SUCCESS);
 ++
-++    ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
-++                WOLFSSL_FILETYPE_ASN1),
-++                WC_NO_ERR_TRACE(HASH_TYPE_E));
+++    ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, ca_cert_idp,
+++        sizeof(ca_cert_idp), WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
+++
+++    ExpectIntEQ(wolfSSL_CertManagerEnableCRL(cm, WOLFSSL_CRL_CHECKALL),
+++        WOLFSSL_SUCCESS);
+++
+++    /* User-scope CRL has a critical IDP extension, must be rejected */
+++    ExpectIntNE(wolfSSL_CertManagerLoadCRLBuffer(cm, crl_user_idp,
+++        sizeof(crl_user_idp), WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
+++
+++    /* CA-only CRL also has a critical IDP extension, must be rejected */
+++    ExpectIntNE(wolfSSL_CertManagerLoadCRLBuffer(cm, crl_caonly_idp,
+++        sizeof(crl_caonly_idp), WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
 ++
 ++    wolfSSL_CertManagerFree(cm);
-++    XFREE(der, HEAP_HINT, DYNAMIC_TYPE_TMP_BUFFER);
-++    if (caKeyInit) wc_FreeRsaKey(&caKey);
-++    if (rngInit)   wc_FreeRng(&rng);
 ++#endif
 ++    return EXPECT_RESULT();
 ++}
+++
+++int test_wolfSSL_CRL_unknown_critical_ext(void)
+++{
+++    EXPECT_DECLS;
+++#if !defined(NO_CERTS) && defined(HAVE_CRL) && !defined(NO_RSA)
+++
+++    static const unsigned char ca_cert[] = {
+++        0x30, 0x82, 0x03, 0x1b, 0x30, 0x82, 0x02, 0x03, 0xa0, 0x03, 0x02,
+++        0x01, 0x02, 0x02, 0x14, 0x1e, 0x25, 0xc1, 0x5d, 0x6f, 0x02, 0x21,
+++        0xa0, 0xf0, 0x14, 0x15, 0x9c, 0x3b, 0x4d, 0x1d, 0x73, 0x16, 0x00,
+++        0xe4, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7,
+++        0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00, 0x30, 0x15, 0x31, 0x13, 0x30,
+++        0x11, 0x06, 0x03, 0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61,
+++        0x69, 0x6d, 0x2d, 0x72, 0x6f, 0x6f, 0x74, 0x30, 0x1e, 0x17, 0x0d,
+++        0x32, 0x36, 0x30, 0x34, 0x31, 0x36, 0x31, 0x31, 0x33, 0x38, 0x35,
+++        0x35, 0x5a, 0x17, 0x0d, 0x33, 0x36, 0x30, 0x34, 0x31, 0x33, 0x31,
+++        0x31, 0x33, 0x38, 0x35, 0x35, 0x5a, 0x30, 0x15, 0x31, 0x13, 0x30,
+++        0x11, 0x06, 0x03, 0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61,
+++        0x69, 0x6d, 0x2d, 0x72, 0x6f, 0x6f, 0x74, 0x30, 0x82, 0x01, 0x22,
+++        0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01,
+++        0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00, 0x30, 0x82,
+++        0x01, 0x0a, 0x02, 0x82, 0x01, 0x01, 0x00, 0xba, 0x49, 0x8c, 0xb5,
+++        0x17, 0xc1, 0x01, 0x24, 0x6f, 0x56, 0x1a, 0xa9, 0x3b, 0x03, 0xe2,
+++        0x9f, 0x24, 0xb1, 0x25, 0x98, 0xfb, 0x38, 0x82, 0x78, 0x54, 0xa7,
+++        0x1f, 0x69, 0x87, 0xe4, 0x96, 0x1b, 0x81, 0x18, 0x10, 0xb0, 0xc0,
+++        0x5b, 0x4b, 0xbf, 0xb8, 0x1d, 0xf4, 0xee, 0x75, 0x0f, 0xb5, 0x45,
+++        0x72, 0x70, 0xce, 0x65, 0x84, 0x44, 0x3e, 0x30, 0x78, 0xc4, 0xf3,
+++        0xec, 0xba, 0x96, 0x78, 0xa4, 0x65, 0xfc, 0x62, 0x8d, 0xf5, 0x29,
+++        0xf9, 0x7c, 0x3d, 0x78, 0x6c, 0x1d, 0x4a, 0x4c, 0xc9, 0x15, 0x2d,
+++        0x22, 0x10, 0xea, 0x93, 0x26, 0xb8, 0xa6, 0x17, 0xd3, 0x0e, 0xbc,
+++        0x0c, 0xab, 0x83, 0x63, 0xf6, 0x1c, 0xcc, 0x83, 0x73, 0x29, 0x7e,
+++        0x7f, 0x83, 0x7f, 0xbd, 0x63, 0xaa, 0x8d, 0xfa, 0x78, 0x85, 0xd2,
+++        0x3e, 0x60, 0x95, 0x5a, 0x8d, 0xfa, 0x8f, 0xcd, 0x94, 0x3f, 0x13,
+++        0x28, 0xd9, 0xd0, 0x87, 0x28, 0x17, 0x78, 0xe2, 0x61, 0x8d, 0x79,
+++        0x97, 0x01, 0xa9, 0x7c, 0x84, 0xc0, 0x1c, 0xbe, 0x5f, 0x5d, 0xca,
+++        0x28, 0x6b, 0x5e, 0xdd, 0x83, 0xa5, 0x55, 0x34, 0x11, 0xba, 0xfa,
+++        0x8b, 0x92, 0xa3, 0xde, 0xb6, 0xf3, 0xba, 0xab, 0x7f, 0x1a, 0x67,
+++        0xfd, 0x6f, 0x20, 0x85, 0x4c, 0x77, 0xa7, 0x8e, 0xbe, 0xb8, 0xf8,
+++        0x8f, 0x70, 0xe3, 0x5a, 0xd3, 0x77, 0xc9, 0x9e, 0x10, 0x60, 0xb4,
+++        0xdb, 0x0c, 0xc5, 0x05, 0xe1, 0x1f, 0xbd, 0xe6, 0x79, 0xee, 0x82,
+++        0x3f, 0x51, 0x76, 0xe2, 0x7f, 0x5c, 0x11, 0x6d, 0xd3, 0x21, 0x69,
+++        0xec, 0x05, 0x11, 0x8b, 0xc8, 0x39, 0xb3, 0x2c, 0xa6, 0x83, 0xb4,
+++        0x6f, 0xac, 0x19, 0xd6, 0x6a, 0x65, 0x0d, 0x08, 0x94, 0x58, 0xde,
+++        0x3d, 0xc9, 0x0c, 0x54, 0x03, 0x73, 0x0c, 0x8d, 0x24, 0x09, 0xf3,
+++        0xb1, 0x5d, 0xd2, 0xe3, 0xeb, 0x56, 0xd6, 0x28, 0x66, 0x5b, 0x02,
+++        0x03, 0x01, 0x00, 0x01, 0xa3, 0x63, 0x30, 0x61, 0x30, 0x0f, 0x06,
+++        0x03, 0x55, 0x1d, 0x13, 0x01, 0x01, 0xff, 0x04, 0x05, 0x30, 0x03,
+++        0x01, 0x01, 0xff, 0x30, 0x0e, 0x06, 0x03, 0x55, 0x1d, 0x0f, 0x01,
+++        0x01, 0xff, 0x04, 0x04, 0x03, 0x02, 0x01, 0x06, 0x30, 0x1d, 0x06,
+++        0x03, 0x55, 0x1d, 0x0e, 0x04, 0x16, 0x04, 0x14, 0x52, 0x97, 0x58,
+++        0x47, 0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e,
+++        0xea, 0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x1f, 0x06, 0x03, 0x55,
+++        0x1d, 0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x52, 0x97, 0x58,
+++        0x47, 0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e,
+++        0xea, 0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x0d, 0x06, 0x09, 0x2a,
+++        0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00, 0x03,
+++        0x82, 0x01, 0x01, 0x00, 0x7d, 0x30, 0xd4, 0x6a, 0x01, 0x89, 0x3b,
+++        0x62, 0xed, 0x16, 0x46, 0x59, 0x0f, 0xf2, 0x3b, 0xb5, 0xde, 0x89,
+++        0x08, 0x17, 0x68, 0xcb, 0x46, 0xdc, 0x39, 0xa6, 0xcb, 0x56, 0xb0,
+++        0x91, 0xeb, 0x03, 0xb2, 0x15, 0xc4, 0x3b, 0x4d, 0x63, 0x55, 0x22,
+++        0x0a, 0x26, 0xe6, 0x64, 0x46, 0xe8, 0x0f, 0xa8, 0xf3, 0xde, 0xe1,
+++        0x43, 0x54, 0xe6, 0xd7, 0x8a, 0xf4, 0x4f, 0xab, 0x56, 0x93, 0x12,
+++        0x71, 0x4b, 0x25, 0x71, 0x0a, 0x31, 0x18, 0x79, 0xee, 0x45, 0xa4,
+++        0xf5, 0x72, 0x67, 0xfa, 0x41, 0xd9, 0x87, 0x97, 0x09, 0xef, 0x55,
+++        0xad, 0x6f, 0x47, 0x1d, 0x5a, 0xb2, 0xe9, 0xf7, 0x22, 0x05, 0x2d,
+++        0x5a, 0x81, 0xa8, 0xe8, 0x53, 0xb0, 0x94, 0xf6, 0x63, 0xff, 0x3f,
+++        0x51, 0x7a, 0x08, 0xac, 0x27, 0x9a, 0x57, 0x11, 0x22, 0xa4, 0x00,
+++        0x84, 0x70, 0x86, 0x76, 0x39, 0x0f, 0x4f, 0x57, 0xcf, 0x8e, 0x94,
+++        0xd2, 0x8e, 0x43, 0xc0, 0xd5, 0x34, 0x7d, 0xf5, 0xa1, 0x45, 0x1e,
+++        0xb7, 0xc8, 0x7e, 0x7c, 0xfe, 0x5d, 0x4d, 0x53, 0x43, 0x25, 0x15,
+++        0x9e, 0x08, 0x01, 0x56, 0xa4, 0xff, 0x79, 0x59, 0x25, 0xc9, 0x23,
+++        0x98, 0xaf, 0x05, 0xaf, 0xc1, 0x0b, 0x29, 0xf1, 0xe2, 0xc4, 0x36,
+++        0x31, 0x91, 0xfa, 0xf2, 0xbb, 0x12, 0xe8, 0x67, 0xf9, 0xc7, 0xa1,
+++        0x5e, 0x8c, 0xed, 0x92, 0x12, 0xa3, 0x2b, 0xe1, 0xc2, 0xe1, 0xa0,
+++        0xb0, 0x0e, 0x12, 0xa7, 0xd0, 0xa2, 0xae, 0xd6, 0xfa, 0x30, 0x21,
+++        0x0f, 0x73, 0xfe, 0x24, 0x21, 0x5f, 0x03, 0x86, 0x69, 0xcd, 0xec,
+++        0x76, 0x18, 0xe1, 0xfd, 0xb6, 0x64, 0x90, 0xa6, 0x06, 0x2e, 0x19,
+++        0x40, 0x93, 0x50, 0x37, 0xe4, 0x90, 0xe3, 0x1f, 0x07, 0xae, 0xfb,
+++        0x89, 0xc3, 0xf6, 0xc4, 0x90, 0xab, 0x40, 0x67, 0x4c, 0x43, 0x2c,
+++        0xa2, 0xb0, 0x3e, 0x61, 0x16, 0x69, 0x8f
+++    };
+++
+++    /* CRL with critical obsolete extension OID 2.5.29.1, 422 bytes DER.
+++     * OID 2.5.29.1 is the old X.509v2 Authority Key Identifier, permanently
+++     * superseded by 2.5.29.35. No implementation will ever support it. */
+++    static const unsigned char crl_obsolete_critical[] = {
+++        0x30, 0x82, 0x01, 0xa6, 0x30, 0x81, 0x8f, 0x02, 0x01, 0x01, 0x30,
+++        0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01,
+++        0x0b, 0x05, 0x00, 0x30, 0x15, 0x31, 0x13, 0x30, 0x11, 0x06, 0x03,
+++        0x55, 0x04, 0x03, 0x0c, 0x0a, 0x63, 0x6c, 0x61, 0x69, 0x6d, 0x2d,
+++        0x72, 0x6f, 0x6f, 0x74, 0x17, 0x0d, 0x32, 0x36, 0x30, 0x34, 0x31,
+++        0x36, 0x31, 0x35, 0x32, 0x31, 0x30, 0x37, 0x5a, 0x17, 0x0d, 0x33,
+++        0x36, 0x30, 0x34, 0x31, 0x33, 0x31, 0x35, 0x32, 0x31, 0x30, 0x37,
+++        0x5a, 0xa0, 0x46, 0x30, 0x44, 0x30, 0x1f, 0x06, 0x03, 0x55, 0x1d,
+++        0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x52, 0x97, 0x58, 0x47,
+++        0x98, 0xca, 0xf8, 0x99, 0xa0, 0x7e, 0x8e, 0x1c, 0x38, 0x2e, 0xea,
+++        0xbb, 0xea, 0x9b, 0x74, 0x30, 0x30, 0x14, 0x06, 0x03, 0x55, 0x1d,
+++        0x01, 0x01, 0x01, 0xff, 0x04, 0x0a, 0x0c, 0x08, 0x6f, 0x62, 0x73,
+++        0x6f, 0x6c, 0x65, 0x74, 0x65, 0x30, 0x0b, 0x06, 0x03, 0x55, 0x1d,
+++        0x14, 0x04, 0x04, 0x02, 0x02, 0x20, 0x02, 0x30, 0x0d, 0x06, 0x09,
+++        0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x0b, 0x05, 0x00,
+++        0x03, 0x82, 0x01, 0x01, 0x00, 0x05, 0xf3, 0x8f, 0xdb, 0x7f, 0x75,
+++        0x2c, 0x34, 0x4b, 0x7e, 0x70, 0x17, 0x5e, 0x34, 0xc6, 0xdb, 0xcb,
+++        0x54, 0x33, 0x06, 0x58, 0x6d, 0xae, 0x9c, 0xc8, 0xe3, 0xaf, 0x82,
+++        0xe5, 0xf6, 0x86, 0x42, 0xb3, 0x01, 0x72, 0x1a, 0xca, 0xf9, 0x10,
+++        0x5d, 0x14, 0xe6, 0x84, 0x34, 0x56, 0x55, 0x74, 0xb5, 0x06, 0x64,
+++        0x49, 0x1d, 0xb3, 0xb0, 0x13, 0xff, 0x1c, 0x05, 0x4f, 0x43, 0x29,
+++        0xbc, 0xfe, 0xb5, 0x92, 0x54, 0xf6, 0x9b, 0x81, 0x07, 0x5e, 0x2e,
+++        0x75, 0xd8, 0xfd, 0x9b, 0x5b, 0xc9, 0xd3, 0xc2, 0x15, 0xa7, 0x6e,
+++        0x2f, 0x4b, 0x3a, 0x27, 0x57, 0xef, 0x40, 0x61, 0x8c, 0x11, 0x9d,
+++        0x0a, 0xb1, 0x2b, 0x0e, 0xed, 0x5d, 0xf2, 0xf5, 0x1a, 0xce, 0xdc,
+++        0xd7, 0x75, 0xc6, 0x25, 0x22, 0xe4, 0x70, 0xad, 0x93, 0xff, 0x36,
+++        0xa1, 0xa2, 0xa0, 0xd9, 0x82, 0x23, 0x6e, 0xc8, 0x3a, 0x80, 0x82,
+++        0xbf, 0x12, 0xac, 0xa1, 0xf9, 0x03, 0x9c, 0xb9, 0x20, 0x91, 0x33,
+++        0x80, 0x7b, 0xb7, 0x6e, 0xa5, 0x32, 0x98, 0xd6, 0x2c, 0x5d, 0x9d,
+++        0x3b, 0x64, 0x3b, 0xb4, 0xea, 0x03, 0x2d, 0x65, 0xcf, 0x7f, 0x0f,
+++        0x97, 0xef, 0x5b, 0x17, 0x8c, 0xcf, 0x98, 0x69, 0xba, 0x2d, 0x62,
+++        0xe9, 0x40, 0xe2, 0x3d, 0xbd, 0xd2, 0x0f, 0x4a, 0xf8, 0xb0, 0xa7,
+++        0xdb, 0x80, 0xa3, 0x47, 0x56, 0xe5, 0xe6, 0x6f, 0x93, 0x5c, 0x6f,
+++        0xdd, 0x62, 0x43, 0x28, 0x5c, 0xe5, 0x8f, 0x0e, 0x11, 0xa6, 0x1f,
+++        0x61, 0xaf, 0x39, 0x15, 0x40, 0xf4, 0x6e, 0x79, 0x40, 0xf6, 0x28,
+++        0xf3, 0xd4, 0x30, 0x3b, 0x25, 0xb6, 0xf0, 0x4a, 0x51, 0xc3, 0x18,
+++        0xff, 0xad, 0x4d, 0x6e, 0x10, 0x73, 0x68, 0xfa, 0x54, 0x9e, 0xdc,
+++        0x34, 0x70, 0xe4, 0x5d, 0x9e, 0x7c, 0xfa, 0x59, 0x97, 0xde, 0x35,
+++        0x17, 0xbb, 0xaf, 0xa0, 0x28, 0x78, 0x13, 0xbf
+++    };
+++
+++    WOLFSSL_CERT_MANAGER* cm = NULL;
+++
+++    ExpectNotNull(cm = wolfSSL_CertManagerNew());
+++    ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, ca_cert,
+++        sizeof(ca_cert), WOLFSSL_FILETYPE_ASN1), WOLFSSL_SUCCESS);
+++    ExpectIntEQ(wolfSSL_CertManagerEnableCRL(cm, WOLFSSL_CRL_CHECKALL),
+++        WOLFSSL_SUCCESS);
+++
+++    ExpectIntNE(wolfSSL_CertManagerLoadCRLBuffer(cm, crl_obsolete_critical,
+++        sizeof(crl_obsolete_critical), WOLFSSL_FILETYPE_ASN1),
+++        WOLFSSL_SUCCESS);
+++
+++    wolfSSL_CertManagerFree(cm);
+++#endif
+++    return EXPECT_RESULT();
+++}
+++
++ int test_wolfSSL_CertManagerCheckOCSPResponse(void)
++ {
++     EXPECT_DECLS;
 +diff --git a/tests/api/test_certman.h b/tests/api/test_certman.h
-+index 1588c81ec..a0b5d9548 100644
++index a0b5d9548..3b6afd0fc 100644
++--- a/tests/api/test_certman.h
+++++ b/tests/api/test_certman.h
++@@ -39,6 +39,8 @@ int test_wolfSSL_CertManagerCRL(void);
++ int test_wolfSSL_CRL_reason_extensions_cleanup(void);
++ int test_wolfSSL_CRL_static_revoked_list(void);
++ int test_wolfSSL_CRL_duplicate_extensions(void);
+++int test_wolfSSL_CRL_critical_idp(void);
+++int test_wolfSSL_CRL_unknown_critical_ext(void);
++ int test_wolfSSL_CertManagerCheckOCSPResponse(void);
++ int test_various_pathlen_chains(void);
++ int test_wolfSSL_CertManagerRejectMD5Cert(void);
++@@ -59,6 +61,8 @@ int test_wolfSSL_CertManagerRejectMD5Cert(void);
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_reason_extensions_cleanup), \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_static_revoked_list),      \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_duplicate_extensions),      \
+++    TEST_DECL_GROUP("certman", test_wolfSSL_CRL_critical_idp),             \
+++    TEST_DECL_GROUP("certman", test_wolfSSL_CRL_unknown_critical_ext),     \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerCheckOCSPResponse),  \
++     TEST_DECL_GROUP("certman", test_various_pathlen_chains),                \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerRejectMD5Cert)
++diff --git a/wolfcrypt/src/asn.c b/wolfcrypt/src/asn.c
++index 8d4f40a70..f8db5c457 100644
++--- a/wolfcrypt/src/asn.c
+++++ b/wolfcrypt/src/asn.c
++@@ -34497,14 +34497,17 @@ static int ParseCRL_Extensions(DecodedCRL* dcrl, const byte* buf, word32 idx,
++                     mp_free(m);
++                     FREE_MP_INT_SIZE(m, NULL, DYNAMIC_TYPE_TMP_BUFFER);
++                 }
+++                else if (critical) {
+++                    WOLFSSL_MSG("Unknown critical CRL extension");
+++                    ret = ASN_CRIT_EXT_E;
+++                }
++             }
++-            /* TODO: check criticality */
++             /* Move index on to next extension. */
++             idx += (word32)length;
++         }
++     }
++ 
++-    if (ret < 0) {
+++    if (ret < 0 && ret != WC_NO_ERR_TRACE(ASN_CRIT_EXT_E)) {
++         ret = ASN_PARSE_E;
++     }
++ 
++diff --git a/wolfcrypt/src/asn_orig.c b/wolfcrypt/src/asn_orig.c
++index 9ecb821d3..d6568aa5d 100644
++--- a/wolfcrypt/src/asn_orig.c
+++++ b/wolfcrypt/src/asn_orig.c
++@@ -9327,6 +9327,7 @@ static int ParseCRL_Extensions(DecodedCRL* dcrl, const byte* buf,
++     while (idx < (word32)ext_bound) {
++         word32 localIdx;
++         int ret;
+++        int critical = 0;
++ 
++         if (GetSequence(buf, &idx, &length, sz) < 0) {
++             WOLFSSL_MSG("\tfail: should be a SEQUENCE");
++@@ -9346,11 +9347,13 @@ static int ParseCRL_Extensions(DecodedCRL* dcrl, const byte* buf,
++         }
++ 
++         localIdx = idx;
++-        if (GetASNTag(buf, &localIdx, &tag, sz) == 0 && tag == ASN_BOOLEAN) {
+++        if (GetASNTag(buf, &localIdx, &tag, sz) == 0 &&
+++                tag == ASN_BOOLEAN) {
++             WOLFSSL_MSG("\tfound optional critical flag, moving past");
++             ret = GetBoolean(buf, &idx, sz);
++             if (ret < 0)
++                 return ret;
+++            critical = ret;
++         }
++ 
++         ret = GetOctetString(buf, &idx, &length, sz);
++@@ -9428,6 +9431,10 @@ static int ParseCRL_Extensions(DecodedCRL* dcrl, const byte* buf,
++                 }
++             }
++         }
+++        else if (critical) {
+++            WOLFSSL_MSG("Unknown critical CRL extension");
+++            return ASN_CRIT_EXT_E;
+++        }
++ 
++         idx += length;
++     }
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-2.patch
+new file mode 100644
+index 0000000000..0118a8d1ab
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6450-2.patch
+@@ -0,0 +1,404 @@
++From 501762b4913f744f42605f8cdb3e3ac6dd37916e Mon Sep 17 00:00:00 2001
++From: Reda Chouk <reda@wolfssl.com>
++Date: Tue, 21 Apr 2026 16:53:59 +0200
++Subject: [PATCH] reject crls with unrecognized critical entry extensions per
++ rfc 5280 section 5.3
++
++(cherry picked from commit 6111c60ea69fa02e1a74cf432c20bd6b789eae67)
++
++CVE: CVE-2026-6450
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/6111c60ea69fa02e1a74cf432c20bd6b789eae67]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ certs/crl/extra-crls/claim-root.pem         |  19 +++
++ certs/crl/extra-crls/crl_critical_entry.pem |  11 ++
++ certs/crl/include.am                        |   4 +-
++ tests/api/test_certman.c                    |  25 ++++
++ tests/api/test_certman.h                    |   2 +
++ wolfcrypt/src/asn.c                         | 133 +++++++++++++-------
++ wolfcrypt/src/asn_orig.c                    |  28 ++++-
++ 7 files changed, 171 insertions(+), 51 deletions(-)
++ create mode 100644 certs/crl/extra-crls/claim-root.pem
++ create mode 100644 certs/crl/extra-crls/crl_critical_entry.pem
++
++diff --git a/certs/crl/extra-crls/claim-root.pem b/certs/crl/extra-crls/claim-root.pem
++new file mode 100644
++index 000000000..a212501aa
++--- /dev/null
+++++ b/certs/crl/extra-crls/claim-root.pem
++@@ -0,0 +1,19 @@
+++-----BEGIN CERTIFICATE-----
+++MIIDGzCCAgOgAwIBAgIUHiXBXW8CIaDwFBWcO00dcxYA5FEwDQYJKoZIhvcNAQEL
+++BQAwFTETMBEGA1UEAwwKY2xhaW0tcm9vdDAeFw0yNjA0MTYxMTM4NTVaFw0zNjA0
+++MTMxMTM4NTVaMBUxEzARBgNVBAMMCmNsYWltLXJvb3QwggEiMA0GCSqGSIb3DQEB
+++AQUAA4IBDwAwggEKAoIBAQC6SYy1F8EBJG9WGqk7A+KfJLElmPs4gnhUpx9ph+SW
+++G4EYELDAW0u/uB307nUPtUVycM5lhEQ+MHjE8+y6lnikZfxijfUp+Xw9eGwdSkzJ
+++FS0iEOqTJrimF9MOvAyrg2P2HMyDcyl+f4N/vWOqjfp4hdI+YJVajfqPzZQ/EyjZ
+++0IcoF3jiYY15lwGpfITAHL5fXcooa17dg6VVNBG6+ouSo96287qrfxpn/W8ghUx3
+++p46+uPiPcONa03fJnhBgtNsMxQXhH73mee6CP1F24n9cEW3TIWnsBRGLyDmzLKaD
+++tG+sGdZqZQ0IlFjePckMVANzDI0kCfOxXdLj61bWKGZbAgMBAAGjYzBhMA8GA1Ud
+++EwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBRSl1hHmMr4maB+
+++jhw4Luq76pt0MDAfBgNVHSMEGDAWgBRSl1hHmMr4maB+jhw4Luq76pt0MDANBgkq
+++hkiG9w0BAQsFAAOCAQEAfTDUagGJO2LtFkZZD/I7td6JCBdoy0bcOabLVrCR6wOy
+++FcQ7TWNVIgom5mRG6A+o897hQ1Tm14r0T6tWkxJxSyVxCjEYee5FpPVyZ/pB2YeX
+++Ce9VrW9HHVqy6fciBS1agajoU7CU9mP/P1F6CKwnmlcRIqQAhHCGdjkPT1fPjpTS
+++jkPA1TR99aFFHrfIfnz+XU1TQyUVnggBVqT/eVklySOYrwWvwQsp8eLENjGR+vK7
+++Euhn+cehXoztkhKjK+HC4aCwDhKn0KKu1vowIQ9z/iQhXwOGac3sdhjh/bZkkKYG
+++LhlAk1A35JDjHweu+4nD9sSQq0BnTEMsorA+YRZpjw==
+++-----END CERTIFICATE-----
++diff --git a/certs/crl/extra-crls/crl_critical_entry.pem b/certs/crl/extra-crls/crl_critical_entry.pem
++new file mode 100644
++index 000000000..11d9d31ab
++--- /dev/null
+++++ b/certs/crl/extra-crls/crl_critical_entry.pem
++@@ -0,0 +1,11 @@
+++-----BEGIN X509 CRL-----
+++MIIBjDB2AgEBMA0GCSqGSIb3DQEBCwUAMBUxEzARBgNVBAMMCmNsYWltLXJvb3QX
+++DTI2MDQyMTEyMzM0OFoXDTM2MDQxODEyMzM0OFowLTArAgIQABcNMjYwNDIxMTIz
+++MzQ4WjAWMBQGA1UdAQEB/wQKDAhvYnNvbGV0ZTANBgkqhkiG9w0BAQsFAAOCAQEA
+++PPG5bodrM2jK+6KcqRh9vEkWhLyxCkJij1om7R8BMO5bpvxZFOSqdN9GvIqYANYT
+++ZNQzZZOer9DSXc1I9Cha179dyGnBsX33geSdhF99JxA/kZUVynfOn56El7iywkPQ
+++yEpuY7uQQRfcp7D7tGz8S7mNhOMAeaN+jR2Psmn8q1Yc3W01vwYZos3qjHG1xDZ6
+++97QVFX6tbnbeu/hBsF87oiAyCbXnhRQOvrVsKqjrZXGkfRKfJ1deHc1vWgio7fhr
+++A1/Hb4sdfTWZUwtduTRI9Vyaw1IL41d+0ExdzTshIHbddB/dyByrRqlIzJdeiigt
+++d1Gcf1EYSoWiV8Xaj9SFng==
+++-----END X509 CRL-----
++diff --git a/certs/crl/include.am b/certs/crl/include.am
++index 46d0ed3e7..a0c526d91 100644
++--- a/certs/crl/include.am
+++++ b/certs/crl/include.am
++@@ -27,7 +27,9 @@ EXTRA_DIST += \
++ 		certs/crl/extra-crls/large_crlnum.pem \
++ 		certs/crl/extra-crls/large_crlnum2.pem \
++ 		certs/crl/extra-crls/crlnum_57oct.pem \
++-		certs/crl/extra-crls/crlnum_64oct.pem
+++		certs/crl/extra-crls/crlnum_64oct.pem \
+++		certs/crl/extra-crls/claim-root.pem \
+++		certs/crl/extra-crls/crl_critical_entry.pem
++ 
++ # Intermediate cert CRL's
++ EXTRA_DIST += \
++diff --git a/tests/api/test_certman.c b/tests/api/test_certman.c
++index 7405f4bff..d9000c7cf 100644
++--- a/tests/api/test_certman.c
+++++ b/tests/api/test_certman.c
++@@ -2306,6 +2306,31 @@ int test_wolfSSL_CRL_unknown_critical_ext(void)
++     return EXPECT_RESULT();
++ }
++ 
+++int test_wolfSSL_CRL_unknown_critical_entry_ext(void)
+++{
+++    EXPECT_DECLS;
+++#if !defined(NO_CERTS) && defined(HAVE_CRL) && !defined(NO_RSA) && \
+++    !defined(NO_FILESYSTEM)
+++    WOLFSSL_CERT_MANAGER* cm = NULL;
+++
+++    ExpectNotNull(cm = wolfSSL_CertManagerNew());
+++    ExpectIntEQ(wolfSSL_CertManagerLoadCA(cm,
+++        "./certs/crl/extra-crls/claim-root.pem", NULL), WOLFSSL_SUCCESS);
+++    ExpectIntEQ(wolfSSL_CertManagerEnableCRL(cm, WOLFSSL_CRL_CHECKALL),
+++        WOLFSSL_SUCCESS);
+++
+++    /* CRL with a revoked entry that carries a critical unknown extension
+++     * (OID 2.5.29.1, old X.509v2 AKI, permanently superseded).
+++     * Per RFC 5280 Section 5.3, the CRL must not be used. */
+++    ExpectIntNE(wolfSSL_CertManagerLoadCRLFile(cm,
+++        "./certs/crl/extra-crls/crl_critical_entry.pem", WOLFSSL_FILETYPE_PEM),
+++        WOLFSSL_SUCCESS);
+++
+++    wolfSSL_CertManagerFree(cm);
+++#endif
+++    return EXPECT_RESULT();
+++}
+++
++ int test_wolfSSL_CertManagerCheckOCSPResponse(void)
++ {
++     EXPECT_DECLS;
++diff --git a/tests/api/test_certman.h b/tests/api/test_certman.h
++index 3b6afd0fc..0962b0228 100644
 +--- a/tests/api/test_certman.h
 ++++ b/tests/api/test_certman.h
 +@@ -41,6 +41,7 @@ int test_wolfSSL_CRL_static_revoked_list(void);
 + int test_wolfSSL_CRL_duplicate_extensions(void);
++ int test_wolfSSL_CRL_critical_idp(void);
++ int test_wolfSSL_CRL_unknown_critical_ext(void);
+++int test_wolfSSL_CRL_unknown_critical_entry_ext(void);
 + int test_wolfSSL_CertManagerCheckOCSPResponse(void);
 + int test_various_pathlen_chains(void);
-++int test_wolfSSL_CertManagerRejectMD5Cert(void);
-+ 
-+ #define TEST_CERTMAN_DECLS                                                  \
-+     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerAPI),                \
-+@@ -59,7 +60,8 @@ int test_various_pathlen_chains(void);
-+     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_static_revoked_list),      \
++ int test_wolfSSL_CertManagerRejectMD5Cert(void);
++@@ -63,6 +64,7 @@ int test_wolfSSL_CertManagerRejectMD5Cert(void);
 +     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_duplicate_extensions),      \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_critical_idp),             \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CRL_unknown_critical_ext),     \
+++    TEST_DECL_GROUP("certman", test_wolfSSL_CRL_unknown_critical_entry_ext), \
 +     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerCheckOCSPResponse),  \
-+-    TEST_DECL_GROUP("certman", test_various_pathlen_chains)
-++    TEST_DECL_GROUP("certman", test_various_pathlen_chains),                \
-++    TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerRejectMD5Cert)
-+ 
-+ #endif /* WOLFCRYPT_TEST_CERTMAN_H */
-+ 
++     TEST_DECL_GROUP("certman", test_various_pathlen_chains),                \
++     TEST_DECL_GROUP("certman", test_wolfSSL_CertManagerRejectMD5Cert)
 +diff --git a/wolfcrypt/src/asn.c b/wolfcrypt/src/asn.c
-+index fea449863..8d4f40a70 100644
++index f8db5c457..1dc27cfd0 100644
 +--- a/wolfcrypt/src/asn.c
 ++++ b/wolfcrypt/src/asn.c
-+@@ -15880,6 +15880,13 @@ static int HashForSignature(const byte* buf, word32 bufSz, word32 sigOID,
-+     #endif
-+     #ifndef NO_MD5
-+         case CTC_MD5wRSA:
-++        #ifndef WOLFSSL_ALLOW_MD5_CERT_SIGS
-++            if (verify) {
-++                ret = HASH_TYPE_E;
-++                WOLFSSL_MSG("MD5 not supported for certificate verification");
++@@ -34039,16 +34039,22 @@ enum {
++ /* CRL Reason Code OID: 2.5.29.21 */
++ static const byte crlReasonOid[] = { 0x55, 0x1d, 0x15 };
++ 
++-/* Parse CRL entry extensions to extract the reason code.
++- * Sets *reasonCode if found, otherwise leaves it unchanged. */
++-static void ParseCRL_ReasonCode(const byte* buff, word32 idx, word32 maxIdx,
++-                                int* reasonCode)
+++/* Parse CRL entry extensions.
+++ * Extracts the reason code into *reasonCode if the CRL Reason extension
+++ * is present. Per RFC 5280 Section 5.3, returns ASN_CRIT_EXT_E if any
+++ * unknown extension is marked critical. Returns 0 on success. */
+++static int ParseCRL_EntryExtensions(const byte* buff, word32 idx, word32 maxIdx,
+++                                    int* reasonCode)
++ {
++     while (idx < maxIdx) {
++         int len;
+++        int oidLen;
++         word32 end;
++         word32 localIdx;
+++        word32 oidContent;
++         byte tag;
+++        int critical = 0;
+++        int isReasonOid = 0;
++ 
++         /* Each extension is a SEQUENCE */
++         if (GetSequence(buff, &idx, &len, maxIdx) < 0) {
++@@ -34056,23 +34062,39 @@ static void ParseCRL_ReasonCode(const byte* buff, word32 idx, word32 maxIdx,
++         }
++         end = idx + (word32)len;
++ 
++-        /* Check for CRL Reason OID: 2.5.29.21 */
++-        if (end - idx >= (word32)(2 + sizeof(crlReasonOid)) &&
++-                buff[idx] == ASN_OBJECT_ID &&
++-                buff[idx + 1] == sizeof(crlReasonOid) &&
++-                XMEMCMP(buff + idx + 2, crlReasonOid,
+++        /* Parse OID: tag, length (short or long form), content */
+++        if (GetASNTag(buff, &idx, &tag, end) < 0 ||
+++                tag != ASN_OBJECT_ID) {
+++            break;
+++        }
+++        if (GetLength(buff, &idx, &oidLen, end) < 0) {
+++            break;
+++        }
+++        oidContent = idx;
+++        if (idx + (word32)oidLen > end) {
+++            break;
+++        }
+++
+++        /* Check if it's the CRL Reason OID: 2.5.29.21 */
+++        if ((word32)oidLen == sizeof(crlReasonOid) &&
+++                XMEMCMP(buff + oidContent, crlReasonOid,
++                         sizeof(crlReasonOid)) == 0) {
++-            /* Skip past the OID */
++-            idx += 2 + (word32)sizeof(crlReasonOid);
++-            /* Skip optional critical BOOLEAN */
++-            localIdx = idx;
++-            if (GetASNTag(buff, &localIdx, &tag, end) == 0 &&
++-                    tag == ASN_BOOLEAN) {
++-                /* Consume full BOOLEAN TLV (tag + length + value). */
++-                if (GetBoolean(buff, &idx, end) < 0) {
++-                    break;
++-                }
+++            isReasonOid = 1;
+++        }
+++        idx = oidContent + (word32)oidLen;
+++
+++        /* Parse optional critical BOOLEAN */
+++        localIdx = idx;
+++        if (GetASNTag(buff, &localIdx, &tag, end) == 0 &&
+++                tag == ASN_BOOLEAN) {
+++            int ret = GetBoolean(buff, &idx, end);
+++            if (ret < 0) {
 ++                break;
++             }
+++            critical = ret;
+++        }
+++
+++        if (isReasonOid) {
++             /* Get OCTET STRING wrapping the ENUMERATED */
++             if (GetOctetString(buff, &idx, &len, end) >= 0) {
++                 /* Parse ENUMERATED reason value */
++@@ -34088,8 +34110,15 @@ static void ParseCRL_ReasonCode(const byte* buff, word32 idx, word32 maxIdx,
++                 }
++             }
++         }
+++        else if (critical) {
+++            /* RFC 5280 Section 5.3: reject CRL with unknown critical
+++             * entry extension. */
+++            WOLFSSL_MSG("Unknown critical CRL entry extension");
+++            return ASN_CRIT_EXT_E;
+++        }
++         idx = end;
++     }
+++    return 0;
++ }
++ 
++ #ifdef HAVE_CRL
++@@ -34102,8 +34131,7 @@ WOLFSSL_TEST_VIS int wc_ParseCRLReasonFromExtensions(const byte* ext,
++         return BAD_FUNC_ARG;
++     }
++ 
++-    ParseCRL_ReasonCode(ext, 0, extSz, reasonCode);
++-    return 0;
+++    return ParseCRL_EntryExtensions(ext, 0, extSz, reasonCode);
++ }
++ #endif
++ 
++@@ -34166,49 +34194,58 @@ static int GetRevoked(RevokedCert* rcert, const byte* buff, word32* idx,
++         /* Parse CRL entry extensions (v2 only) */
++         if (dataASN[REVOKEDASN_IDX_TIME_EXT].length > 0) {
++             word32 extOff = dataASN[REVOKEDASN_IDX_TIME_EXT].offset;
++-            word32 extLen = dataASN[REVOKEDASN_IDX_TIME_EXT].length;
++-            word32 extEnd = extOff + extLen;
++-            word32 extIdx2 = extOff;
+++            word32 extTagEnd = extOff +
+++                    dataASN[REVOKEDASN_IDX_TIME_EXT].length + 6;
+++            int extLen;
+++
+++            /* .offset points at the outer SEQUENCE tag. Re-parse the
+++             * SEQUENCE header to locate the content start (list of
+++             * Extension SEQUENCEs), which handles long-form length.
+++             * extTagEnd adds 6 to cover the worst-case tag+long-form-length
+++             * header for the outer SEQUENCE. */
+++            if (GetSequence(buff, &extOff, &extLen, extTagEnd) < 0) {
+++                ret = ASN_PARSE_E;
 ++            }
-++        #endif
-+             if ((ret = wc_Md5Hash_ex(buf, bufSz, digest, heap, devId)) == 0) {
-+                 *typeH    = MD5h;
-+                 *digestSz = WC_MD5_DIGEST_SIZE;
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-2.patch
-new file mode 100644
-index 0000000000..0747e9dd99
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6412-2.patch
-@@ -0,0 +1,56 @@
-+From ab4cfd06ce09ca6aa33e06ca12bcfc1186c9f357 Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Tue, 14 Apr 2026 13:39:17 -0500
-+Subject: [PATCH] Fix from review
-+
-+(cherry picked from commit a8ea8a898c45a4199ac196044ac14314dc82d981)
-+
-+CVE: CVE-2026-6412
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/a8ea8a898c45a4199ac196044ac14314dc82d981]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ tests/api/test_certman.c | 20 +++++++++++++-------
-+ 1 file changed, 13 insertions(+), 7 deletions(-)
-+
-+diff --git a/tests/api/test_certman.c b/tests/api/test_certman.c
-+index 9f87f4535..6c5875dc5 100644
-+--- a/tests/api/test_certman.c
-++++ b/tests/api/test_certman.c
-+@@ -2576,6 +2576,9 @@ int test_wolfSSL_CertManagerRejectMD5Cert(void)
+++            else {
+++                word32 extEnd = extOff + (word32)extLen;
 + 
-+     ExpectNotNull(der = (byte*)XMALLOC(FOURK_BUF, HEAP_HINT,
-+                 DYNAMIC_TYPE_TMP_BUFFER));
-++    if (der == NULL) {
-++        goto cleanup;
-++    }
++ #if defined(OPENSSL_EXTRA)
++-            /* Store raw DER of extensions for OpenSSL compat API.
++-             * Include the outer SEQUENCE tag+length. */
++-            {
++-                /* Back up to include the SEQUENCE header. We know the
++-                 * content starts at extOff, so the header is just before.
++-                 * Use the raw buffer start from before GetASN_Items. */
++-                word32 seqHdrSz = 0;
++-                /* The outer SEQUENCE header is at most 4 bytes before
++-                 * content. Rather than guess, store just the content. */
++-                rc->extensions = (byte*)XMALLOC(extLen, dcrl->heap,
+++                /* Store raw DER of extension contents for OpenSSL compat. */
+++                rc->extensions = (byte*)XMALLOC((size_t)extLen, dcrl->heap,
++                                                 DYNAMIC_TYPE_REVOKED);
++                 if (rc->extensions != NULL) {
++-                    XMEMCPY(rc->extensions, buff + extOff, extLen);
++-                    rc->extensionsSz = extLen;
+++                    XMEMCPY(rc->extensions, buff + extOff, (size_t)extLen);
+++                    rc->extensionsSz = (word32)extLen;
++                 }
++-                (void)seqHdrSz;
++-            }
++ #endif
 + 
-+     /* Build a leaf certificate whose issuer is the built-in 2048-bit
-+      * wolfSSL test CA and sign it with MD5+RSA using the matching CA
-+@@ -2604,16 +2607,19 @@ int test_wolfSSL_CertManagerRejectMD5Cert(void)
-+     /* Load the SHA-256 signed CA cert as a trust anchor and attempt
-+      * to verify the MD5-signed leaf: it must be rejected because
-+      * HashForSignature() now returns HASH_TYPE_E for MD5 in verify mode,
-+-     * which surfaces as ASN_SIG_CONFIRM_E from ConfirmSignature(). */
-++     * and wolfSSL_CertManagerVerifyBuffer() returns that error. */
-+     ExpectNotNull(cm = wolfSSL_CertManagerNew());
-+-    ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, ca_cert_der_2048,
-+-                sizeof_ca_cert_der_2048, WOLFSSL_FILETYPE_ASN1),
-+-                WOLFSSL_SUCCESS);
-++    if (cm != NULL) {
-++        ExpectIntEQ(wolfSSL_CertManagerLoadCABuffer(cm, ca_cert_der_2048,
-++                    sizeof_ca_cert_der_2048, WOLFSSL_FILETYPE_ASN1),
-++                    WOLFSSL_SUCCESS);
++-            ParseCRL_ReasonCode(buff, extIdx2, extEnd, &rc->reasonCode);
+++                ret = ParseCRL_EntryExtensions(buff, extOff, extEnd,
+++                    &rc->reasonCode);
+++            }
++         }
 + 
-+-    ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
-+-                WOLFSSL_FILETYPE_ASN1),
-+-                WC_NO_ERR_TRACE(HASH_TYPE_E));
-++        ExpectIntEQ(wolfSSL_CertManagerVerifyBuffer(cm, der, derSz,
-++                    WOLFSSL_FILETYPE_ASN1),
-++                    WC_NO_ERR_TRACE(HASH_TYPE_E));
-++    }
++-        /* Add revoked certificate to chain. */
+++        if (ret == 0) {
+++            /* Add revoked certificate to chain. */
++ #ifndef CRL_STATIC_REVOKED_LIST
++-        rc->next = dcrl->certs;
++-        dcrl->certs = rc;
+++            rc->next = dcrl->certs;
+++            dcrl->certs = rc;
++ #endif
++-        dcrl->totalCerts++;
+++            dcrl->totalCerts++;
+++        }
++     }
 + 
-++cleanup:
-+     wolfSSL_CertManagerFree(cm);
-+     XFREE(der, HEAP_HINT, DYNAMIC_TYPE_TMP_BUFFER);
-+     if (caKeyInit) wc_FreeRsaKey(&caKey);
++     FREE_ASNGETDATA(dataASN, dcrl->heap);
++-#ifndef CRL_STATIC_REVOKED_LIST
++     if ((ret != 0) && (rc != NULL)) {
++ #if defined(OPENSSL_EXTRA)
++         XFREE(rc->extensions, dcrl->heap, DYNAMIC_TYPE_REVOKED);
+++        rc->extensions = NULL;
+++        rc->extensionsSz = 0;
++ #endif
+++#ifndef CRL_STATIC_REVOKED_LIST
++         XFREE(rc, dcrl->heap, DYNAMIC_TYPE_CRL);
+++#endif
++     }
+++#ifndef CRL_STATIC_REVOKED_LIST
++     (void)rcert;
++ #endif
++     return ret;
++@@ -34232,7 +34269,13 @@ static int ParseCRL_RevokedCerts(RevokedCert* rcert, DecodedCRL* dcrl,
++     /* Parse each revoked certificate. */
++     while ((ret == 0) && (idx < maxIdx)) {
++         /* Parse a revoked certificate. */
++-        if (GetRevoked(rcert, buff, &idx, dcrl, maxIdx) < 0) {
+++        int r = GetRevoked(rcert, buff, &idx, dcrl, maxIdx);
+++        if (r == WC_NO_ERR_TRACE(ASN_CRIT_EXT_E)) {
+++            /* Preserve the specific error so callers can distinguish a
+++             * rejected critical extension from a generic parse failure. */
+++            ret = r;
+++        }
+++        else if (r < 0) {
++             ret = ASN_PARSE_E;
++         }
++     }
++diff --git a/wolfcrypt/src/asn_orig.c b/wolfcrypt/src/asn_orig.c
++index d6568aa5d..bb58eb6d4 100644
++--- a/wolfcrypt/src/asn_orig.c
+++++ b/wolfcrypt/src/asn_orig.c
++@@ -9061,18 +9061,17 @@ static int GetRevoked(RevokedCert* rcert, const byte* buff, word32* idx,
++         XFREE(rc, dcrl->heap, DYNAMIC_TYPE_REVOKED);
++         return ret;
++     }
++-    /* add to list */
++-    rc->next = dcrl->certs;
++-    dcrl->certs = rc;
++ 
++     (void)rcert;
++ #endif /* CRL_STATIC_REVOKED_LIST */
++-    dcrl->totalCerts++;
++     /* get date */
++ #ifndef NO_ASN_TIME
++     ret = GetBasicDate(buff, idx, rc->revDate, &rc->revDateFormat, maxIdx);
++     if (ret < 0) {
++         WOLFSSL_MSG("Expecting Date");
+++#ifndef CRL_STATIC_REVOKED_LIST
+++        XFREE(rc, dcrl->heap, DYNAMIC_TYPE_REVOKED);
+++#endif
++         return ret;
++     }
++ #endif
++@@ -9106,11 +9105,30 @@ static int GetRevoked(RevokedCert* rcert, const byte* buff, word32* idx,
++                 }
++ #endif
++ 
++-                ParseCRL_ReasonCode(buff, seqIdx, extEnd, &rc->reasonCode);
+++                ret = ParseCRL_EntryExtensions(buff, seqIdx, extEnd,
+++                    &rc->reasonCode);
+++                if (ret != 0) {
+++#if defined(OPENSSL_EXTRA)
+++                    XFREE(rc->extensions, dcrl->heap, DYNAMIC_TYPE_REVOKED);
+++                    rc->extensions = NULL;
+++                    rc->extensionsSz = 0;
+++#endif
+++#ifndef CRL_STATIC_REVOKED_LIST
+++                    XFREE(rc, dcrl->heap, DYNAMIC_TYPE_REVOKED);
+++#endif
+++                    return ret;
+++                }
++             }
++         }
++     }
++ 
+++#ifndef CRL_STATIC_REVOKED_LIST
+++    /* add to list only after all parsing succeeded */
+++    rc->next = dcrl->certs;
+++    dcrl->certs = rc;
+++#endif
+++    dcrl->totalCerts++;
+++
++     *idx = end;
++ 
++     return 0;
 diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-index 843d5071b4..4ca330b029 100644
+index 4ca330b029..26b86c1b2b 100644
 --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
 +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-@@ -30,6 +30,8 @@ SRC_URI = " \
-     file://CVE-2026-6094-5.patch \
-     file://CVE-2026-6291.patch \
+@@ -32,6 +32,8 @@ SRC_URI = " \
      file://CVE-2026-6325.patch \
-+    file://CVE-2026-6412-1.patch \
-+    file://CVE-2026-6412-2.patch \
+     file://CVE-2026-6412-1.patch \
+     file://CVE-2026-6412-2.patch \
++    file://CVE-2026-6450-1.patch \
++    file://CVE-2026-6450-2.patch \
  "
  
  SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
