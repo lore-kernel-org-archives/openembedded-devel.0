@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D206C79F99
-	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:09 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31919.1788776647104488116
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F8FDC79F9E
+	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:19 +0000 (UTC)
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31922.1788776655748392840
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:24:07 -0700
+ Mon, 07 Sep 2026 03:24:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pNb55apF;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-cbee846deecso4187658a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=AVoCAOpq;
+ spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-6b8ef7de4bdso645341eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788776646; x=1789381446; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788776655; x=1789381455; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OoZWQ6ygMclgKLKRfspTV7c1jd5UDBOL1bIpZJulkDc=;
-        b=pNb55apF/I+xeinsW3d7gCOiCGQgMencM7sIRBelH4nNyXlgqTl2Lq57hEmDVgAfYD
-         HWCa1L3tO2bNJnM06wFmr4zxI5vqeJSe3hJuxgJvMPsalsaR9SUKJU330dNUY+x76zoE
-         JJLevMHoaVja727TD6clerbJXVVwjTABltHKIjEl1WTmSn/kfYUDivVaz4+l1X/u//o0
-         swdGxXRJIRsyfQmW7Z2UXgfZyzlGRoO4kfG+xaz03Z9aEUqft9+MNgOkk8hwfKH9XtLq
-         bPEvIFggVbcnTWGZ59PFT3BUHfRfiTWRxNSnMBlBYEXQNIb88q405revyDzRWZB+vu10
-         cwGQ==
+        bh=QvZ3KPmnIjghgdLR/tfGlDwOykvlEnyivhXa/nkEc5M=;
+        b=AVoCAOpqCe3r2iEtNhOy6tWqnOZbGl+FbM5o1YzS3N2HVcF3+g+I72ESKe43auNWaM
+         gCYzgJcNtTRocsOzGb/zJya7QR0TP+yYU2sOJWiG01grubuj/Y/MKw/cRexVOP53PM+l
+         GcqFowcINPfooSt0qDjhajtOEmqVAJC/EZPUR0tOAtjkIXwqVvndyOx01zv2R965307O
+         dqq9vyPmDCNCFMB+DOmZgjj7y6Z4wqd/wNhIqUxk3XulEeWhR32PpzlLD0Fw5w8jRojn
+         tFKPWpQBawYdm0rlbUxUIAY84H4EVg5cgRT3xrzHD9wOS9Txm9iZdZLpNuczIdPo7iZ9
+         84og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788776646; x=1789381446;
+        d=1e100.net; s=20251104; t=1788776655; x=1789381455;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OoZWQ6ygMclgKLKRfspTV7c1jd5UDBOL1bIpZJulkDc=;
-        b=NPDKAtfFXe3gCOEvzFS4OPonZV/ebb/1yUISzytgZsv48MGsvLSw+aAZAdC1wwzXtZ
-         AxYfewLCrF0L1VheYK8eGmUoXnljBlJ5caAjJI1RbpQ5wd3s9+0Xaa1WEH9J25htw/1H
-         tLpTmZrIt2L6D4HaiAi8KH7fzeGqOswHxwU/xxNo2F+flhie7O1BOMVt6eqpLBQaUV9C
-         IQbJJCDogWdTqoK0PbKRUQjTeafAw8GleEoGfjGw4C0645hlqw3RR2m1zXq+K/bQzNIl
-         HOcvMMtX6LsgQ2qowjPZ7ZeJVpN2qMJiA0cmArzu2IoHR+pOArSaa03ABCj7R1RAUr6S
-         cDYg==
-X-Gm-Message-State: AFuF++nhjVz6Y6uv3rl/q+7w4YqutMT40NEAGXY7dXUJzF95reGdj6zq
-	5jR80A6mxP349sbY2Xhu8RD1poKkqa1h54a7axP7vOW0iO2G8rzYsg0m++F1Iw==
-X-Gm-Gg: AYBFou0FNpoZPaSNTak7+gpJhdWRAT1n3lVDF6N1V7jWq2qRa1XCiRVSaA/Srl84dsu
-	Yv6uMTR84tQrM1MDiYLeYSseP3LWx8z3Ra68Z5E0flybvECYMVw/ZyZ4PPrJmRYsA2skLvfFfNX
-	TtiO7nwkSrXfDkysDXdcdl4uDmV0Z441yXvNF3iur1VaSbHvQgN/NbbdVuURFMIAUUFNeQq5dNj
-	izu/OWXE05tYHLK6xqorbc/j+i/bnATWddHWN4c0uUnhh7xt0z7BBgaBv9BHAugjIRzpA4Uq3Xs
-	OmT+OxDs6cK4R16EHKgGEuHTQyqoyBo97wajGBggxQPo/7O7ctbB7Ocfkq2Z6QnAKo3HmJM3GvP
-	moEocMDs3werem0ghGE2RHvwqyCq9fAQ/8LMnHBmBj9iRPGRNnkvN6REg9u32N68sL85PLUh9+p
-	bKWMVZuJKDf6TVw+kQXoF6k1WliTXkTGZdtQFuCEK5dt7t+Dp9S4e5j+MMe7GJ9r3DtebGP+Sz
-X-Received: by 2002:a17:90b:5344:b0:38e:4f41:83df with SMTP id 98e67ed59e1d1-39b261e0f14mr33729839a91.15.1788776646360;
-        Mon, 07 Sep 2026 03:24:06 -0700 (PDT)
+        bh=QvZ3KPmnIjghgdLR/tfGlDwOykvlEnyivhXa/nkEc5M=;
+        b=VqA/NOzHWh0YaKDTl/2PVqB8tp3eDiNwcc9VZIYNVdtzEcuDWjdjgWA76nhJnPnLRi
+         +8wfgSUdaY2DlFx6VyjP6ziVrmTN0KY657m1FN3GPJ8OG4dSn4qlbZqNq3U8pV5AJG9r
+         11CUN6HTG6elTNliP/Lu9XWviObl02vGmV4GqmaVw9/qwe/uWQ7szMXFWkyghchR8mOE
+         lIBh43GF9jyiaaepmZBlqxdaOpo11fwNT8yKO+HUIcVCYlfe7dbI3FRuWpPQxglniV59
+         Bh169TiB+NqDNv2XxTXcr/VrBQn7laXdV7ofTscHZZNcDI6mzn4gCby9LuDZdy52/WRt
+         rgPw==
+X-Gm-Message-State: AFuF++n+tyF/8+HMLzcRZIHC98bN/RNFnJELdoCFyAvN7tbnnNwVkLMW
+	PDB5yl9n9YOq25eSWzmQ6AtHxl4siHYlmLCA+PIRWqR8cEirRNN6+4AHfT1j7lBS
+X-Gm-Gg: AYBFou1ZMoKPNWzHBUysLFrUDs0KMlgnr2WaJwUKB9FxvpT6aRm122IbX/LwEy3mIkr
+	KWngr3XY4dFedtXpSJgvOFMnlaU/yCd21uxsLuQTKS34ObMDPTnUSteq9CBxbnyOHhHjcjfTRoy
+	KsIBxGx8TG8CHv6OHt0MzjhGBt5lbzTVJb1NZTJUVEhHTzx4e9bDW+EK8i8Gy0FQmo5O4DQY3QZ
+	NWsWsSWKxpYSg89nWWUZCSFI9tTnKOzUWdl57K3JsvsqBHw9+wCVlhL3A++hvbjFpuDNTfl9i2P
+	oNK+oAb9tyP7TMaXHulk2Ayv0di4zyiAqLKn6B+ChEpSi++Gy3AQGDX1LgAGJbXzF+YepXGXSVi
+	esXdEhgXAUbhdrB15m/qTeJm2+nx/bbEKkG3j7f8+yrXTJNrL6ieB4jgeJSuoRoYrvoNXp9bCGm
+	6TpWrFl8YiSUJrBAWJv0ao/Gl5DOGypsX2xFMCCjoxAwOv3YiFPHrXfTeMx5yPKGpFDPmd9r0A
+X-Received: by 2002:a05:6820:f02c:b0:6b7:8396:f3c4 with SMTP id 006d021491bc7-6b78396f8b9mr12562022eaf.38.1788776654824;
+        Mon, 07 Sep 2026 03:24:14 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.04
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 03:24:06 -0700 (PDT)
+        Mon, 07 Sep 2026 03:24:14 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 14/33] tinyproxy: patch CVE-2026-55202
-Date: Mon,  7 Sep 2026 22:22:58 +1200
-Message-ID: <20260907102318.2459883-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 17/33] smarty: mark CVEs patched
+Date: Mon,  7 Sep 2026 22:23:01 +1200
+Message-ID: <20260907102318.2459883-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
 References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
@@ -66,148 +66,38 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129826
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129829
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commit identified by Debian[1]
+CVE-2024-35226[1], CVE-2026-62992[2], CVE-2026-62996[3] are patched in
+current version.
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-55202
+https://nvd.nist.gov/vuln/detail/cve-2024-35226
+https://nvd.nist.gov/vuln/detail/cve-2026-62992
+https://nvd.nist.gov/vuln/detail/cve-2026-62996
 
-[1]https://security-tracker.debian.org/tracker/CVE-2026-55202
+[1]https://github.com/smarty-php/smarty/commit/0be92bc8a6fb83e6e0d883946f7e7c09ba4e857a
+[2]https://github.com/smarty-php/smarty/commit/99c048ce7a590c519b79fbd38ad0143a08183a1f
+[3]https://github.com/smarty-php/smarty/commit/3c9f77a2e06ce319ae0092496af32cc8f3adc52e
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tinyproxy/tinyproxy/CVE-2026-55202.patch  | 107 ++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.3.bb             |   1 +
- 2 files changed, 108 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
+ meta-oe/recipes-support/smarty/smarty_5.8.4.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
-new file mode 100644
-index 0000000000..4e446542e2
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
-@@ -0,0 +1,107 @@
-+From 04b34f814076d790db26925d7df7c30798910c99 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Sat, 18 Apr 2026 00:03:15 +0200
-+Subject: [PATCH] reqs: improve stathost detection (#606)
-+
-+until now, only the basicauth code checked the host header, regular connections didn't.
-+
-+- add a new helper function to compare a hostname with optional
-+  trailingcolon/port against the stathost.
-+- add stathost check via host header before transparent proxy check,
-+  else stathost might be misdetected as a trans host request.
-+- refactor existing stathost checks to use the new helper
-+
-+this should make it easier to access the stathost, for example by
-+injecting a host header into a curl command line with -H:
-+
-+    $ curl -H "Host: tinyproxy.stats" 127.0.0.1:8080
-+
-+the stathost can also be specified as an ip address, e.g.
-+Stathost "127.0.0.10" + a separate Listen statement for that ip.
-+in such a case e.g.
-+
-+    $ curl http://127.0.0.10:8080
-+
-+would work too, even if curl didn't add a Host header (but it does anyway).
-+
-+(cherry picked from commit 09312a185ae25cc486b4ff5987638a7917a48bce)
-+
-+CVE: CVE-2026-55202
-+Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/09312a185ae25cc486b4ff5987638a7917a48bce]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/reqs.c | 37 +++++++++++++++++++++++++------------
-+ 1 file changed, 25 insertions(+), 12 deletions(-)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index e3cfe76..d5037cf 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -316,6 +316,17 @@ static int send_connect_method_response (struct conn_s *connptr)
-+                                       connptr->protocol.minor);
-+ }
-+ 
-++/* determine whether a hostname with optional trailing colon/port is the
-++   stathost */
-++static int is_stathost (const char* host)
-++{
-++        const char *p = config->stathost;
-++        const char *q = host;
-++        if (!p || !q) return 0;
-++        while (*p && *(p++) == *(q++));
-++        return *p == 0 && (*q == 0 || *q == ':');
-++}
-++
-+ /*
-+  * Break the request line apart and figure out where to connect and
-+  * build a new request line. Finally connect to the remote server.
-+@@ -384,6 +395,16 @@ BAD_REQUEST_ERROR:
-+                 goto fail;
-+         }
-+ 
-++        /*
-++         * Check to see if they're requesting the stat host
-++         */
-++        if (is_stathost (pseudomap_find (hashofheaders, "host"))) {
-++got_stathost:
-++                log_message (LOG_NOTICE, "Request for the stathost.");
-++                connptr->show_stats = TRUE;
-++                goto fail;
-++        }
-++
-+ #ifdef REVERSE_SUPPORT
-+         if (config->reversepath_list != NULL) {
-+                 /*
-+@@ -497,19 +518,11 @@ BAD_REQUEST_ERROR:
-+                 }
-+         }
-+ #endif
-+-
-+-
-+-        /*
-+-         * Check to see if they're requesting the stat host
-+-         */
-+-        if (config->stathost && strcmp (config->stathost, request->host) == 0) {
-+-                log_message (LOG_NOTICE, "Request for the stathost.");
-+-                connptr->show_stats = TRUE;
-+-                goto fail;
-+-        }
-++        /* check whether hostname from url is the stathost */
-++        if (is_stathost (request->host))
-++                goto got_stathost;
-+ 
-+         safefree (url);
-+-
-+         return request;
-+ 
-+ fail:
-+@@ -1688,7 +1701,7 @@ void handle_connection (struct conn_s *connptr, union sockaddr_union* addr)
-+ 
-+                 if (!authstring && config->stathost) {
-+                         authstring = pseudomap_find (hashofheaders, "host");
-+-                        if (authstring && !strncmp(authstring, config->stathost, strlen(config->stathost))) {
-++                        if (authstring && is_stathost(authstring)) {
-+                                 authstring = pseudomap_find (hashofheaders, "authorization");
-+                                 stathost_connect = 1;
-+                         } else authstring = 0;
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-index b8a508d8d4..f9d425b45a 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://CVE-2026-3945-2.patch \
-            file://CVE-2026-31842.patch \
-            file://CVE-2026-54387.patch \
-+           file://CVE-2026-55202.patch \
-            "
+diff --git a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb b/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
+index dcb7c85a80..cf6c42345c 100644
+--- a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
++++ b/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
+@@ -35,3 +35,7 @@ FILES:${PN} += "${datadir}/php/smarty3/"
+ RDEPENDS:${PN} = "php"
  
- SRC_URI[sha256sum] = "9bcf46db1a2375ff3e3d27a41982f1efec4706cce8899ff9f33323a8218f7592"
+ CVE_PRODUCT = "smarty:smarty smarty-php:smarty"
++
++CVE_STATUS[CVE-2024-35226] = "fixed-version: fixed since v5.2.0"
++CVE_STATUS[CVE-2026-62992] = "fixed-version: fixed since v5.8.2"
++CVE_STATUS[CVE-2024-62996] = "fixed-version: fixed in v5.8.4"
 
