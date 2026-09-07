@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9638DC79F9E
-	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:39 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31708.1788776678320320513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD7F5C79F9F
+	for <webhook@archiver.kernel.org>; Mon,  7 Sep 2026 10:24:49 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31931.1788776684425673340
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 03:24:38 -0700
+ Mon, 07 Sep 2026 03:24:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=R1+iEX4n;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38d489b6b71so3898486a91.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=DxW/yT3W;
+ spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7f0167e59a3so2285115a34.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 03:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788776678; x=1789381478; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788776683; x=1789381483; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Cr9wcImjSA5SstHSdqZ391WKyH+6CGibg+RQ8cwlIb8=;
-        b=R1+iEX4nGl556MWHky9gQF8anBV4nFb68fPBFhiUQg7z2gYTubfZaxrRiJBNi33sI7
-         rmJGmA0nkgxdQvBBQw9QdhrZA7fbg/3o36V1C3065lnKIwsZ6/dxRfMLvmsh1ZfoGKUj
-         pP35ldxOY9jrxf4Qmlb0v2YRwlNRz3kS4WqQIFlDaiTBnzmKXo3FNV83ebuelg/qv/Ca
-         GXre3f0OtMlPCYs7/ypkGe0JEb0zB7yGl9TJaB72r3Tcg8C8Vq5kjkSyrSLA2cRrvYWO
-         mbcGfga8qXuKIkgd/5Y9LYhOJsug4jUVPO0/F8FozW7nhGe4KrXnI/qmkOgeBKRHmpL2
-         2Lyw==
+        bh=sh5dHMOiqpi5SSfO8YOnCXhGP3wDVWtZr3JBczcmXm0=;
+        b=DxW/yT3WGpQ1c8P3mQOweULM3psK7qXte6dwxNoch1B6qO1/3+ORid7RAX43HXQooR
+         HlMWNgEImtPQlDF4baIbzX3uhlHKbR4Mdp3Jz0e9aoXrqGoa1iTuqnX2dtoRwuGhTqcO
+         E1v6i6tyk3KLOw+G3k0dcbSVfKiwDEY5xAhJIkuv7vdbiAPhztQPMAILS1Hf2vVAcB7G
+         pcpRzr1dzg6JdYnu7U4cYapDFp0XoZ6A3lheIJXGMIYrtMvrOhO83CbHV5tNZ+t0Fdp+
+         WkRqq+Jm+Qw1FYO8lRtATnUBaBJJoOnUc0QTyCk1Vahp3avnFHyjGAfHmqB5ZcqAywE3
+         hagw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788776678; x=1789381478;
+        d=1e100.net; s=20251104; t=1788776683; x=1789381483;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Cr9wcImjSA5SstHSdqZ391WKyH+6CGibg+RQ8cwlIb8=;
-        b=Ou5wZHgH1ssSdR3/S9y+y+1dDWNCoOn7SGIbfCg0lKU7neNImmsyJBC2EyCp2Tm7n1
-         nVuU1IXhqs4/NSu5LlOyaS+4jadTwc2wgarleh6gTIc4mRAVIC7vnDFKVvdx/92KJ/9X
-         9rKDxcjuti0WiFdANzuyeYW4EfeZJcIf+arAWr9/R6Dfl4gZXGykytyKCgQC4buuMiYW
-         aSZtdeK94SlX5jH/gp6ti3J6RlxSAIKW80UORzye7O9Cbrw9ely4hYFde1DywH2Wy/Qd
-         OjbCbr83uA8dptVfqXaE61NJVyjF8iO//f+rfnYLymKwMLXlC3bYGSLu17/QLUS+iuYz
-         yNvw==
-X-Gm-Message-State: AFuF++mh+QbPHWQ6xoJtLaKI+b3cEEh0L00oDQP9teFkRv2xhwcwaeB9
-	h3iavQnexlMknTHPMTbXKtlXpeSIfUK4NydjMcxgS7aGtCD42ck34Ae8wU5xOBMB
-X-Gm-Gg: AYBFou0RfpCkhB+3K9evjOnw5k+j0+rcPZX6Z7nN0sVhknJ/8UZ6FtizHoL8i/Qo3ac
-	kvQu7XQPJeFhFyqpYB+hR8qwHDVHB4VEkIYMSdJFCd1yUWLlQTYmXm9SJcb+mvuo67ytdASL4dq
-	GoD/ER/qjAmcOE/TjNqw5lLJE9ncPqs6CunWqqgvh0IBjZkNmLetWpPXN/BEu7T5fqaugNgVCAg
-	n8T8h428ZC3sLvNED9ERmROf+NS4wbFLFXJJ/vHIwQVCrl0ohvAgoBUOqObEha/kleZ3Krf6OQa
-	CQZJiAKx0cQ2iZdcAgFgwrMOXLjtdIgZrcwAe94YdxQKrwcQVToL0vUqma7Ee2Z1SMNaowuzo4n
-	OjUUuUfzZMWHiMOItpSVLIouwLu+1f6vmEVBt+FwIeoK5tVmCJYDweNPZFmTx+tSHt/Y7fhEZ0m
-	ByEQURaXzHTQip9Pev3eVAokaXoGoKyAKHVOn4KhydGLbn9m/XQzZiORtX1/dac9GOlrBKE/zj
-X-Received: by 2002:a17:90b:28ce:b0:38d:fda6:4873 with SMTP id 98e67ed59e1d1-39b26100cbfmr35688511a91.10.1788776677434;
-        Mon, 07 Sep 2026 03:24:37 -0700 (PDT)
+        bh=sh5dHMOiqpi5SSfO8YOnCXhGP3wDVWtZr3JBczcmXm0=;
+        b=RrmV8Iix41HSWznE5711m81PLaMirFXW3f3UHd+xEAFeZDgex6P2BD+4fYg+9JIqFH
+         qp8LH1OBjy46IDXqwvouRK00Eub7SrOee1m5WhzbvWKhyuSMaukZJ0zcZVmFISmybf1D
+         p8ymxN9aSZJj8RHhzWgFioI5u9vYr2VSxmhsO/8iVKJ+EPbAEvUJ1d5dRIrRQm63epnz
+         kgUu8Yq05/IIgt6+0dkO/7sXXaGyfgzxLryHcr4uQfebjoLbHTlRi66iZCcrz7GThoSF
+         WyO3AvSYfvSiY2oUKsONUKLKaJ2tF1zi/tJHs0NCCfSCj6HtkKkb7VUzDrUX3EboPUHZ
+         ttrA==
+X-Gm-Message-State: AFuF++l+SrGinMz2fgUJj9NnsK9fSwGGLTpPtXd+PpUSrreAGCSzmIQa
+	/UyIo0buQD1ROFCrAYC98HLq9vFAHb+PrBjgspwHXmReikvJWEbdKKdybw7X9dmo
+X-Gm-Gg: AYBFou2yNw/SF3s4Y0PQ4vPZie9NDUibCy29wmVynGlWxdwJr48WknVwexRV1P45Zur
+	/As/WLnj8KoQ2vPjpjUZGURvXiyL5jlFkE3SYbxR6BS8IGICD1mtAKYKUUogsUlVVF9JFJA3JN8
+	aAUH+ydoIwyOTLFS8CNsN2yzGnc9DfgdMf63J7pZz2s6QL9j8eDgpLgzJu84RYsN/HRSNSiJ4ar
+	vsXLAKn1n2nwtYwDfKLFVBdqn8VZ0JGwHC5OT/qYXEXNsDrE1AWAnxPYn6ekv7SQWW6twv+PuDn
+	eikAGGYrfu+XoaacoTqAkcGpCAsZ3dVBsMAf4kAhe+xikL5I5c4xipsvbG2Oo/P8BWWZOOAXbuG
+	6W45gH5PQM6aZNRYUNxRw3+ZQu+scyleozz6KJsghXCbr3iYMeUHiHziTa/d1RlJloICF81SGkH
+	hFe93MiFXI9EHgUu93x2r0JMhosBCn8BLvlizrQdOWbJ99KdDc0zY5NVt4CBaMlQzX/6sHS5Tp
+X-Received: by 2002:a05:6820:4b94:b0:6b7:8396:f3de with SMTP id 006d021491bc7-6b78396f966mr9379044eaf.64.1788776683362;
+        Mon, 07 Sep 2026 03:24:43 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.35
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432441f5f2sm30215104c88.15.2026.09.07.03.24.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 03:24:37 -0700 (PDT)
+        Mon, 07 Sep 2026 03:24:42 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 25/33] wolfssl: patch CVE-2026-6091
-Date: Mon,  7 Sep 2026 22:23:09 +1200
-Message-ID: <20260907102318.2459883-25-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 27/33] wolfssl: patch CVE-2026-6094
+Date: Mon,  7 Sep 2026 22:23:11 +1200
+Message-ID: <20260907102318.2459883-27-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
 References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
@@ -66,415 +66,287 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129837
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 10:24:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129839
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-6091
+Details
+https://nvd.nist.gov/vuln/detail/cve-2026-6094
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-6091-1.patch       | 295 ++++++++++++++++++
- .../wolfssl/files/CVE-2026-6091-2.patch       |  30 ++
- .../wolfssl/files/CVE-2026-6091-3.patch       |  36 +++
- .../wolfssl/wolfssl_5.9.1.bb                  |   3 +
- 4 files changed, 364 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-1.patch
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-2.patch
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-3.patch
+ .../wolfssl/files/CVE-2026-6094-1.patch       | 32 ++++++++
+ .../wolfssl/files/CVE-2026-6094-2.patch       | 35 +++++++++
+ .../wolfssl/files/CVE-2026-6094-3.patch       | 39 ++++++++++
+ .../wolfssl/files/CVE-2026-6094-4.patch       | 36 +++++++++
+ .../wolfssl/files/CVE-2026-6094-5.patch       | 73 +++++++++++++++++++
+ .../wolfssl/wolfssl_5.9.1.bb                  |  5 ++
+ 6 files changed, 220 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-2.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-3.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-4.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-5.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-1.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-1.patch
 new file mode 100644
-index 0000000000..644797266e
+index 0000000000..c9a7c1867e
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-1.patch
-@@ -0,0 +1,295 @@
-+From 54bce5dd1dce8839ea64e0bddebe4c6f8fd2cc6c Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Wed, 8 Apr 2026 16:27:07 -0500
-+Subject: [PATCH] Fix partial chain verification
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-1.patch
+@@ -0,0 +1,32 @@
++From f162b7679bafacd5b9866d72400b1115f8fbc7b7 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Fri, 3 Apr 2026 16:05:44 -0700
++Subject: [PATCH] Ensure esd->signedAttribsCount contains the correct count in
++ case some are skipped by using the current idx rather than the total array
++ size.
 +
-+(cherry picked from commit a6fd25b94e0c03c1be265a4454390d7225e81129)
++Thanks to Zou Dikai for the report.
 +
-+CVE: CVE-2026-6091
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/a6fd25b94e0c03c1be265a4454390d7225e81129]
++(cherry picked from commit 7f218574c4d30a8aa8c520c7023c3d017fc13b86)
++
++CVE: CVE-2026-6094
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/7f218574c4d30a8aa8c520c7023c3d017fc13b86]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/x509_str.c                 |  90 ++++++++++++++++++++++-
-+ tests/api/test_ossl_x509_str.c | 127 +++++++++++++++++++++++++++++++++
-+ 2 files changed, 216 insertions(+), 1 deletion(-)
++ wolfcrypt/src/pkcs7.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/x509_str.c b/src/x509_str.c
-+index 90113caed..01e975198 100644
-+--- a/src/x509_str.c
-++++ b/src/x509_str.c
-+@@ -552,6 +552,53 @@ static int X509VerifyCertSetupRetry(WOLFSSL_X509_STORE_CTX* ctx,
-+     return ret;
-+ }
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 3f6649d0a..67803f84d 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -2253,7 +2253,7 @@ static int wc_PKCS7_BuildSignedAttributes(wc_PKCS7* pkcs7, ESD* esd,
++             idx++;
++         }
 + 
-++/* Returns 1 if cur and x509 have identical DER encodings, 0 otherwise. */
-++static int X509DerEquals(WOLFSSL_X509* cur, WOLFSSL_X509* x509)
-++{
-++    if (cur == NULL || cur->derCert == NULL ||
-++        x509 == NULL || x509->derCert == NULL) {
-++        return 0;
-++    }
-++    if (cur->derCert->length != x509->derCert->length)
-++        return 0;
-++    return XMEMCMP(cur->derCert->buffer, x509->derCert->buffer,
-++                   x509->derCert->length) == 0;
-++}
-++
-++/* Returns 1 if x509's DER matches an entry in either origTrustedSk (an
-++ * immutable snapshot of the caller's trusted set captured before any
-++ * intermediates were injected for this verification call) or in
-++ * store->trusted.  Returns 0 otherwise.  Used by the
-++ * X509_V_FLAG_PARTIAL_CHAIN fallback to confirm that a chain actually
-++ * terminates at a caller-trusted certificate. */
-++static int X509StoreCertIsTrusted(WOLFSSL_X509_STORE* store,
-++        WOLFSSL_X509* x509, WOLF_STACK_OF(WOLFSSL_X509)* origTrustedSk)
-++{
-++    int i;
-++    int n;
-++
-++    if (x509 == NULL || x509->derCert == NULL)
-++        return 0;
-++
-++    if (origTrustedSk != NULL) {
-++        n = wolfSSL_sk_X509_num(origTrustedSk);
-++        for (i = 0; i < n; i++) {
-++            if (X509DerEquals(wolfSSL_sk_X509_value(origTrustedSk, i), x509))
-++                return 1;
-++        }
-++    }
-++
-++    if (store != NULL && store->trusted != NULL) {
-++        n = wolfSSL_sk_X509_num(store->trusted);
-++        for (i = 0; i < n; i++) {
-++            if (X509DerEquals(wolfSSL_sk_X509_value(store->trusted, i), x509))
-++                return 1;
-++        }
-++    }
-++
-++    return 0;
-++}
-++
-+ /* Verifies certificate chain using WOLFSSL_X509_STORE_CTX
-+  * returns 1 on success or <= 0 on failure.
-+  */
-+@@ -570,6 +617,7 @@ int wolfSSL_X509_verify_cert(WOLFSSL_X509_STORE_CTX* ctx)
-+     WOLF_STACK_OF(WOLFSSL_X509)* certs = NULL;
-+     WOLF_STACK_OF(WOLFSSL_X509)* certsToUse = NULL;
-+     WOLF_STACK_OF(WOLFSSL_X509)* failedCerts = NULL;
-++    WOLF_STACK_OF(WOLFSSL_X509)* origTrustedSk = NULL;
-+     WOLFSSL_ENTER("wolfSSL_X509_verify_cert");
-+ 
-+     if (ctx == NULL || ctx->store == NULL || ctx->store->cm == NULL
-+@@ -586,9 +634,37 @@ int wolfSSL_X509_verify_cert(WOLFSSL_X509_STORE_CTX* ctx)
-+     if (certs == NULL &&
-+         wolfSSL_sk_X509_num(ctx->ctxIntermediates) > 0) {
-+         certsToUse = wolfSSL_sk_X509_new_null();
-++        if (certsToUse == NULL) {
-++            ret = WOLFSSL_FAILURE;
-++            goto exit;
-++        }
-+         ret = addAllButSelfSigned(certsToUse, ctx->ctxIntermediates, NULL);
-++        /* certsToUse holds only injected intermediates, none are trusted, so
-++         * leave origTrustedSk NULL (empty snapshot). */
-++        certs = certsToUse;
-+     }
-+     else {
-++        /* Snapshot the caller-trusted entries before injecting the
-++         * caller-supplied untrusted intermediates.  Only the entries already
-++         * present count as trusted for the partial-chain check below, and
-++         * we need a stable reference because X509VerifyCertSetupRetry may
-++         * remove nodes from `certs` during chain building. */
-++        if (certs != NULL && wolfSSL_sk_X509_num(certs) > 0) {
-++            int j;
-++            int n = wolfSSL_sk_X509_num(certs);
-++            origTrustedSk = wolfSSL_sk_X509_new_null();
-++            if (origTrustedSk == NULL) {
-++                ret = WOLFSSL_FAILURE;
-++                goto exit;
-++            }
-++            for (j = 0; j < n; j++) {
-++                if (wolfSSL_sk_X509_push(origTrustedSk,
-++                        wolfSSL_sk_X509_value(certs, j)) <= 0) {
-++                    ret = WOLFSSL_FAILURE;
-++                    goto exit;
++-        esd->signedAttribsCount += cannedAttribsCount;
+++        esd->signedAttribsCount += idx;
++         esd->signedAttribsSz += (word32)EncodeAttributes(
++             &esd->signedAttribs[atrIdx], (int)idx, cannedAttribs,
++             (int)cannedAttribsCount);
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-2.patch
+new file mode 100644
+index 0000000000..8df72e6f5b
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-2.patch
+@@ -0,0 +1,35 @@
++From 6d7fe2926a18982278c53b4ec413fe7b2349a019 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Fri, 3 Apr 2026 16:06:35 -0700
++Subject: [PATCH] In wc_PKCS7_DecodeEnvelopedData, confirm
++ encryptedContentTotalSz does not exceed the total message size before using
++ it in the non-streaming case.
++
++Thanks to Zou Dikai for the report.
++
++(cherry picked from commit 1397268aa12e2cf3f80c3acfa9b6036b809c08ef)
++
++CVE: CVE-2026-6094
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/1397268aa12e2cf3f80c3acfa9b6036b809c08ef]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ wolfcrypt/src/pkcs7.c | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 67803f84d..43bcf3ee4 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -13231,6 +13231,11 @@ int wc_PKCS7_DecodeEnvelopedData(wc_PKCS7* pkcs7, byte* in,
++                 }
++                 wc_PKCS7_DecryptContentFree(pkcs7, encOID, pkcs7->heap);
++             } else {
+++                if ((idx + (word32)encryptedContentTotalSz) > pkiMsgSz) {
+++                    ret = BUFFER_E;
+++                    break;
 ++                }
-++            }
-++        }
-+         /* Add the intermediates provided on init to the list of untrusted
-+          * intermediates to be used */
-+         ret = addAllButSelfSigned(certs, ctx->ctxIntermediates, &numInterAdd);
-+@@ -677,9 +753,17 @@ int wolfSSL_X509_verify_cert(WOLFSSL_X509_STORE_CTX* ctx)
-+              * a trusted CA in the CM */
-+             ret = X509StoreVerifyCert(ctx);
-+             if (ret != WOLFSSL_SUCCESS) {
-++                /* WOLFSSL_PARTIAL_CHAIN may only terminate the chain at a
-++                 * certificate the caller actually trusts.  The previous
-++                 * "added == 1" guard merely confirmed that some untrusted
-++                 * intermediate had been temporarily loaded into the
-++                 * CertManager during chain building, which would accept
-++                 * chains that never reach a trust anchor.  Verify that
-++                 * ctx->current_cert is itself in the original trust set. */
-+                 if (((ctx->flags & WOLFSSL_PARTIAL_CHAIN) ||
-+                      (ctx->store->param->flags & WOLFSSL_PARTIAL_CHAIN)) &&
-+-                    (added == 1)) {
-++                    X509StoreCertIsTrusted(ctx->store, ctx->current_cert,
-++                        origTrustedSk)) {
-+                     wolfSSL_sk_X509_push(ctx->chain, ctx->current_cert);
-+                     ret = WOLFSSL_SUCCESS;
-+                 } else {
-+@@ -749,6 +833,10 @@ exit:
-+     if (certsToUse != NULL) {
-+         wolfSSL_sk_X509_free(certsToUse);
-+     }
-++    if (origTrustedSk != NULL) {
-++        /* Shallow free: only the snapshot's stack nodes, not the X509s. */
-++        wolfSSL_sk_X509_free(origTrustedSk);
-++    }
-+ 
-+     /* Enforce hostname / IP verification from X509_VERIFY_PARAM if set.
-+      * Always check against the leaf (end-entity) certificate, captured in
-+diff --git a/tests/api/test_ossl_x509_str.c b/tests/api/test_ossl_x509_str.c
-+index 99b82877c..01ed9edfb 100644
-+--- a/tests/api/test_ossl_x509_str.c
-++++ b/tests/api/test_ossl_x509_str.c
-+@@ -785,6 +785,127 @@ static int test_wolfSSL_X509_STORE_CTX_ex11(X509_STORE_test_data *testData)
-+     return EXPECT_RESULT();
-+ }
-+ 
-++static int test_wolfSSL_X509_STORE_CTX_ex_partial_chain_neg(
-++    X509_STORE_test_data *testData)
-++{
-++    EXPECT_DECLS;
-++    X509_STORE* store = NULL;
-++    X509_STORE_CTX* ctx = NULL;
-++    STACK_OF(X509)* untrusted = NULL;
 ++
-++    /* Negative partial-chain test: with X509_V_FLAG_PARTIAL_CHAIN set, the
-++     * intermediates are supplied ONLY as untrusted (passed through the
-++     * X509_STORE_CTX_init "chain" argument and never added to the store).
-++     * No certificate in the chain is in the store, so verification must
-++     * fail.  Pre-fix, wolfSSL_X509_verify_cert would incorrectly accept
-++     * this chain because its partial-chain fallback only checked that some
-++     * intermediate had been temporarily loaded into the CertManager, not
-++     * that any chain certificate was actually trusted. */
-++    ExpectNotNull(store = X509_STORE_new());
-++    /* Intentionally do NOT add x509CaInt, x509CaInt2, or x509Ca. */
-++    ExpectIntEQ(X509_STORE_set_flags(store, X509_V_FLAG_PARTIAL_CHAIN), 1);
-++
-++    ExpectNotNull(untrusted = sk_X509_new_null());
-++    ExpectIntGT(sk_X509_push(untrusted, testData->x509CaInt2), 0);
-++    ExpectIntGT(sk_X509_push(untrusted, testData->x509CaInt), 0);
-++
-++    ExpectNotNull(ctx = X509_STORE_CTX_new());
-++    ExpectIntEQ(X509_STORE_CTX_init(ctx, store, testData->x509Leaf, untrusted),
-++        1);
-++    /* Must NOT verify: partial-chain does not relax the trust requirement. */
-++    ExpectIntNE(X509_verify_cert(ctx), 1);
-++    /* Verify the failure is specifically due to missing trust anchor, not
-++     * some unrelated error. */
-++    ExpectIntEQ(X509_STORE_CTX_get_error(ctx),
-++        X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY);
-++
-++    X509_STORE_CTX_free(ctx);
-++    X509_STORE_free(store);
-++    sk_X509_free(untrusted);
-++    return EXPECT_RESULT();
-++}
-++
-++static int test_wolfSSL_X509_STORE_CTX_ex_partial_chain_mixed(
-++    X509_STORE_test_data *testData)
-++{
-++    EXPECT_DECLS;
-++    X509_STORE* store = NULL;
-++    X509_STORE_CTX* ctx = NULL;
-++    STACK_OF(X509)* untrusted = NULL;
-++
-++    /* Mixed trusted-store + untrusted-chain partial-chain test: the store
-++     * trusts an intermediate (x509CaInt2, the leaf's direct issuer), while
-++     * an additional intermediate (x509CaInt) is supplied only as untrusted
-++     * via the chain argument.  With X509_V_FLAG_PARTIAL_CHAIN, verification
-++     * must succeed by terminating at the trusted intermediate.  This test
-++     * exercises the snapshot-based trust check in X509StoreCertIsTrusted:
-++     * the untrusted intermediate injected during verification must not be
-++     * treated as a trust anchor, but the intermediate already in the store
-++     * must be. */
-++    ExpectNotNull(store = X509_STORE_new());
-++    ExpectIntEQ(X509_STORE_add_cert(store, testData->x509CaInt2), 1);
-++    ExpectIntEQ(X509_STORE_set_flags(store, X509_V_FLAG_PARTIAL_CHAIN), 1);
-++
-++    ExpectNotNull(untrusted = sk_X509_new_null());
-++    ExpectIntGT(sk_X509_push(untrusted, testData->x509CaInt), 0);
-++
-++    ExpectNotNull(ctx = X509_STORE_CTX_new());
-++    ExpectIntEQ(X509_STORE_CTX_init(ctx, store, testData->x509Leaf, untrusted),
-++        1);
-++    /* Must verify: chain terminates at trusted intermediate in the store. */
-++    ExpectIntEQ(X509_verify_cert(ctx), 1);
-++
-++    X509_STORE_CTX_free(ctx);
-++    X509_STORE_free(store);
-++    sk_X509_free(untrusted);
-++    return EXPECT_RESULT();
-++}
-++
-++static int test_wolfSSL_X509_STORE_CTX_ex_partial_chain_untrusted_terminal(
-++    X509_STORE_test_data *testData)
-++{
-++    EXPECT_DECLS;
-++    X509_STORE* store = NULL;
-++    X509_STORE_CTX* ctx = NULL;
-++    STACK_OF(X509)* untrusted = NULL;
-++
-++    /* Partial-chain boundary test: the store trusts a CA (x509Ca) that is
-++     * NOT reachable from the leaf given the supplied untrusted intermediates,
-++     * and an untrusted intermediate (x509CaInt2) IS the terminal of the
-++     * (truncated) chain.  With X509_V_FLAG_PARTIAL_CHAIN set, verification
-++     * must FAIL because the chain terminates at an untrusted certificate.
-++     *
-++     * This test specifically targets the snapshot-based trust check in
-++     * X509StoreCertIsTrusted.  Before addAllButSelfSigned injects
-++     * x509CaInt2, origTrustedSk is snapshotted from the caller-trusted set
-++     * and contains only x509Ca.  When the chain terminates at x509CaInt2,
-++     * the trust check consults origTrustedSk (not the mutated working
-++     * stack) and correctly finds no match.  A regression that consulted
-++     * the post-injection working stack instead of the snapshot would
-++     * incorrectly mark x509CaInt2 as trusted and cause verification to
-++     * succeed. */
-++    ExpectNotNull(store = X509_STORE_new());
-++    ExpectIntEQ(X509_STORE_add_cert(store, testData->x509Ca), 1);
-++    ExpectIntEQ(X509_STORE_set_flags(store, X509_V_FLAG_PARTIAL_CHAIN), 1);
-++
-++    /* Only x509CaInt2 supplied as untrusted; x509CaInt is intentionally
-++     * withheld so the chain cannot actually reach the trusted x509Ca. */
-++    ExpectNotNull(untrusted = sk_X509_new_null());
-++    ExpectIntGT(sk_X509_push(untrusted, testData->x509CaInt2), 0);
-++
-++    ExpectNotNull(ctx = X509_STORE_CTX_new());
-++    ExpectIntEQ(X509_STORE_CTX_init(ctx, store, testData->x509Leaf, untrusted),
-++        1);
-++    /* Must NOT verify: the chain terminal (x509CaInt2) is not in the
-++     * original trust set, even though the store is non-empty. */
-++    ExpectIntNE(X509_verify_cert(ctx), 1);
-++
-++    X509_STORE_CTX_free(ctx);
-++    X509_STORE_free(store);
-++    sk_X509_free(untrusted);
-++    return EXPECT_RESULT();
-++}
-++
-+ #ifdef HAVE_ECC
-+ static int test_wolfSSL_X509_STORE_CTX_ex12(void)
-+ {
-+@@ -870,6 +991,12 @@ int test_wolfSSL_X509_STORE_CTX_ex(void)
-+     ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex9(&testData), 1);
-+     ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex10(&testData), 1);
-+     ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex11(&testData), 1);
-++    ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex_partial_chain_neg(&testData), 1);
-++    ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex_partial_chain_mixed(&testData),
-++        1);
-++    ExpectIntEQ(
-++        test_wolfSSL_X509_STORE_CTX_ex_partial_chain_untrusted_terminal(
-++            &testData), 1);
-+ #ifdef HAVE_ECC
-+     ExpectIntEQ(test_wolfSSL_X509_STORE_CTX_ex12(), 1);
-+ #endif
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-2.patch
++                 pkcs7->cachedEncryptedContentSz =
++                     (word32)encryptedContentTotalSz;
++                 pkcs7->totalEncryptedContentSz =
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-3.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-3.patch
 new file mode 100644
-index 0000000000..373f942496
+index 0000000000..6e0d902c85
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-2.patch
-@@ -0,0 +1,30 @@
-+From 62e57461f512849af4f466f77594085c90ffad73 Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Tue, 14 Apr 2026 07:58:43 -0500
-+Subject: [PATCH] Fix from review
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-3.patch
+@@ -0,0 +1,39 @@
++From c7f7a8ef00e6a7a33a623543507f8fa089f6037b Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Fri, 3 Apr 2026 16:56:04 -0700
++Subject: [PATCH] Code review feedback
 +
-+(cherry picked from commit c873f3f77da8273e160612468f08892b2ba0ed99)
++(cherry picked from commit ebdcc03b718cd7175355097b1a3831a0eb4875b2)
 +
-+CVE: CVE-2026-6091
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/c873f3f77da8273e160612468f08892b2ba0ed99]
++CVE: CVE-2026-6094
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/ebdcc03b718cd7175355097b1a3831a0eb4875b2]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/x509_str.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ wolfcrypt/src/pkcs7.c | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/x509_str.c b/src/x509_str.c
-+index 01e975198..67e3fcae6 100644
-+--- a/src/x509_str.c
-++++ b/src/x509_str.c
-+@@ -765,6 +765,10 @@ int wolfSSL_X509_verify_cert(WOLFSSL_X509_STORE_CTX* ctx)
-+                     X509StoreCertIsTrusted(ctx->store, ctx->current_cert,
-+                         origTrustedSk)) {
-+                     wolfSSL_sk_X509_push(ctx->chain, ctx->current_cert);
-++                    /* Clear error set by the failed X509StoreVerifyCert
-++                     * attempt; the partial-chain fallback accepted the
-++                     * chain at a caller-trusted certificate. */
-++                    ctx->error = 0;
-+                     ret = WOLFSSL_SUCCESS;
-+                 } else {
-+                     X509VerifyCertSetupRetry(ctx, certs, failedCerts,
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-3.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-3.patch
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 43bcf3ee4..50d33bdb8 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -2256,7 +2256,7 @@ static int wc_PKCS7_BuildSignedAttributes(wc_PKCS7* pkcs7, ESD* esd,
++         esd->signedAttribsCount += idx;
++         esd->signedAttribsSz += (word32)EncodeAttributes(
++             &esd->signedAttribs[atrIdx], (int)idx, cannedAttribs,
++-            (int)cannedAttribsCount);
+++            (int)idx);
++         atrIdx += idx;
++     } else {
++         esd->signedAttribsCount = 0;
++@@ -13231,7 +13231,9 @@ int wc_PKCS7_DecodeEnvelopedData(wc_PKCS7* pkcs7, byte* in,
++                 }
++                 wc_PKCS7_DecryptContentFree(pkcs7, encOID, pkcs7->heap);
++             } else {
++-                if ((idx + (word32)encryptedContentTotalSz) > pkiMsgSz) {
+++                word32 tmpSum;
+++                if (!WC_SAFE_SUM_WORD32(idx, (word32)encryptedContentTotalSz, tmpSum) ||
+++                    tmpSum > pkiMsgSz) {
++                     ret = BUFFER_E;
++                     break;
++                 }
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-4.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-4.patch
 new file mode 100644
-index 0000000000..418e45fc13
+index 0000000000..3c49028ec4
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6091-3.patch
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-4.patch
 @@ -0,0 +1,36 @@
-+From 13c4a12c9904a2e50d1729d8a6899f111f3bcd2a Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Tue, 14 Apr 2026 07:41:30 -0500
-+Subject: [PATCH] Fix from review
++From a9015491db03d415f766f47c139841249adce843 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Mon, 6 Apr 2026 11:58:12 -0700
++Subject: [PATCH] Fix unused variable error
 +
-+(cherry picked from commit 2b503dae543d09c63a08b1e24238e0e9ce1ac6c5)
++(cherry picked from commit 3e04475875a4942652fdf6794a01fdfd65801fdc)
 +
-+CVE: CVE-2026-6091
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/2b503dae543d09c63a08b1e24238e0e9ce1ac6c5]
++CVE: CVE-2026-6094
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/3e04475875a4942652fdf6794a01fdfd65801fdc]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ tests/api/test_ossl_x509_str.c | 3 +++
-+ 1 file changed, 3 insertions(+)
++ wolfcrypt/src/pkcs7.c | 3 ---
++ 1 file changed, 3 deletions(-)
 +
-+diff --git a/tests/api/test_ossl_x509_str.c b/tests/api/test_ossl_x509_str.c
-+index 01ed9edfb..14f3538a4 100644
-+--- a/tests/api/test_ossl_x509_str.c
-++++ b/tests/api/test_ossl_x509_str.c
-+@@ -854,6 +854,7 @@ static int test_wolfSSL_X509_STORE_CTX_ex_partial_chain_mixed(
-+         1);
-+     /* Must verify: chain terminates at trusted intermediate in the store. */
-+     ExpectIntEQ(X509_verify_cert(ctx), 1);
-++    ExpectIntEQ(X509_STORE_CTX_get_error(ctx), X509_V_OK);
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 50d33bdb8..2cde73846 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -2197,7 +2197,6 @@ static int wc_PKCS7_BuildSignedAttributes(wc_PKCS7* pkcs7, ESD* esd,
++ #endif
++     word32 idx    = 0;
++     word32 atrIdx = 0;
++-    word32 cannedAttribsCount;
 + 
-+     X509_STORE_CTX_free(ctx);
-+     X509_STORE_free(store);
-+@@ -899,6 +900,8 @@ static int test_wolfSSL_X509_STORE_CTX_ex_partial_chain_untrusted_terminal(
-+     /* Must NOT verify: the chain terminal (x509CaInt2) is not in the
-+      * original trust set, even though the store is non-empty. */
-+     ExpectIntNE(X509_verify_cert(ctx), 1);
-++    ExpectIntEQ(X509_STORE_CTX_get_error(ctx),
-++        X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY);
++     if (pkcs7 == NULL || esd == NULL || contentType == NULL ||
++         contentTypeOid == NULL || messageDigestOid == NULL ||
++@@ -2220,8 +2219,6 @@ static int wc_PKCS7_BuildSignedAttributes(wc_PKCS7* pkcs7, ESD* esd,
++             return timeSz;
++     #endif
 + 
-+     X509_STORE_CTX_free(ctx);
-+     X509_STORE_free(store);
++-        cannedAttribsCount = sizeof(cannedAttribs)/sizeof(PKCS7Attrib);
++-
++         XMEMSET(&cannedAttribs[idx], 0, sizeof(cannedAttribs[idx]));
++ 
++         if ((pkcs7->defaultSignedAttribs & WOLFSSL_CONTENT_TYPE_ATTRIBUTE) ||
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-5.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-5.patch
+new file mode 100644
+index 0000000000..a0dcd8ce72
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-6094-5.patch
+@@ -0,0 +1,73 @@
++From c27fbdecfd2f4a31acdc73229a5bc631184265f1 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Mon, 6 Apr 2026 16:41:32 -0700
++Subject: [PATCH] Add additional checks for encryptedContentSz exceeding
++ pkiMsgSz.
++
++(cherry picked from commit b3c2877a146e0c75715368ca5dfe2387bfc2cadf)
++
++CVE: CVE-2026-6094
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/b3c2877a146e0c75715368ca5dfe2387bfc2cadf]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ wolfcrypt/src/pkcs7.c | 38 ++++++++++++++++++++++++++------------
++ 1 file changed, 26 insertions(+), 12 deletions(-)
++
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 2cde73846..8df3a2430 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -14380,9 +14380,17 @@ int wc_PKCS7_DecodeAuthEnvelopedData(wc_PKCS7* pkcs7, byte* in,
++             }
++ 
++             if (ret == 0) {
++-                XMEMCPY(encryptedContent, &pkiMsg[idx],
+++                word32 tmpSum;
+++                if (!WC_SAFE_SUM_WORD32(idx, (word32)encryptedContentSz,
+++                                        tmpSum) ||
+++                    tmpSum > pkiMsgSz) {
+++                    ret = BUFFER_E;
+++                    break;
+++                } else {
+++                    XMEMCPY(encryptedContent, &pkiMsg[idx],
++                                                     (word32)encryptedContentSz);
++-                idx += (word32)encryptedContentSz;
+++                    idx += (word32)encryptedContentSz;
+++                }
++             }
++         #ifndef NO_PKCS7_STREAM
++             pkcs7->stream->bufferPt = encryptedContent;
++@@ -15316,16 +15324,22 @@ int wc_PKCS7_DecodeEncryptedData(wc_PKCS7* pkcs7, byte* in, word32 inSz,
++             }
++ 
++             if (ret == 0) {
++-                XMEMCPY(encryptedContent, &pkiMsg[idx],
++-                    (unsigned int)encryptedContentSz);
++-                idx += (word32)encryptedContentSz;
++-
++-                /* decrypt encryptedContent */
++-                ret = wc_PKCS7_DecryptContent(pkcs7, encOID,
++-                              pkcs7->encryptionKey, pkcs7->encryptionKeySz,
++-                              tmpIv, expBlockSz, NULL, 0, NULL, 0,
++-                              encryptedContent, encryptedContentSz,
++-                              encryptedContent, pkcs7->devId, pkcs7->heap);
+++                word32 tmpSum;
+++                if (!WC_SAFE_SUM_WORD32(idx, (word32)encryptedContentSz, tmpSum) ||
+++                    tmpSum > pkiMsgSz) {
+++                    ret = BUFFER_E;
+++                } else {
+++                    XMEMCPY(encryptedContent, &pkiMsg[idx],
+++                        (unsigned int)encryptedContentSz);
+++                    idx += (word32)encryptedContentSz;
+++
+++                    /* decrypt encryptedContent */
+++                    ret = wc_PKCS7_DecryptContent(pkcs7, encOID,
+++                                pkcs7->encryptionKey, pkcs7->encryptionKeySz,
+++                                tmpIv, expBlockSz, NULL, 0, NULL, 0,
+++                                encryptedContent, encryptedContentSz,
+++                                encryptedContent, pkcs7->devId, pkcs7->heap);
+++                }
++                 if (ret != 0) {
++                     XFREE(encryptedContent, pkcs7->heap, DYNAMIC_TYPE_PKCS7);
++                 }
 diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-index e2bb53a646..139d73c572 100644
+index ce3839e9a2..8802202114 100644
 --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
 +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.1.bb
-@@ -19,6 +19,9 @@ SRC_URI = " \
-     file://CVE-2026-10098-2.patch \
-     file://CVE-2026-10512.patch \
-     file://CVE-2026-55958.patch \
-+    file://CVE-2026-6091-1.patch \
-+    file://CVE-2026-6091-2.patch \
-+    file://CVE-2026-6091-3.patch \
+@@ -23,6 +23,11 @@ SRC_URI = " \
+     file://CVE-2026-6091-2.patch \
+     file://CVE-2026-6091-3.patch \
+     file://CVE-2026-6092.patch \
++    file://CVE-2026-6094-1.patch \
++    file://CVE-2026-6094-2.patch \
++    file://CVE-2026-6094-3.patch \
++    file://CVE-2026-6094-4.patch \
++    file://CVE-2026-6094-5.patch \
  "
  
  SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
