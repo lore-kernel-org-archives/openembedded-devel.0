@@ -2,10 +2,10 @@ Return-Path: <f.pflug@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0CB1C79FA1
-	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 11:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04CF5C79FAD
+	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 11:22:56 +0000 (UTC)
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4792.1788866565871959171
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4793.1788866566202258804
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 08 Sep 2026 04:22:47 -0700
 Authentication-Results: mx.groups.io;
@@ -13,15 +13,17 @@ Authentication-Results: mx.groups.io;
 Received: from dude06.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::5c])
 	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
 	(envelope-from <f.pflug@pengutronix.de>)
-	id 1x3tuV-0001f2-Vp; Tue, 08 Sep 2026 13:22:43 +0200
+	id 1x3tuW-0001f2-0d; Tue, 08 Sep 2026 13:22:44 +0200
 From: Fabian Pflug <f.pflug@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: yocto@pengutronix.de,
 	Ahmad Fatoum <a.fatoum@pengutronix.de>
-Subject: [PATCH 1/2] fitimage: add support for specifying FITIMAGE_CONFIG_FDTO_PREFIX
-Date: Tue,  8 Sep 2026 13:22:42 +0200
-Message-ID: <20260908112243.1085856-1-f.pflug@pengutronix.de>
+Subject: [PATCH 2/2] fitimage: strip pkcs11: prefix in FITIMAGE_SIGN_KEYDIR example
+Date: Tue,  8 Sep 2026 13:22:43 +0200
+Message-ID: <20260908112243.1085856-2-f.pflug@pengutronix.de>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260908112243.1085856-1-f.pflug@pengutronix.de>
+References: <20260908112243.1085856-1-f.pflug@pengutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::5c
@@ -32,52 +34,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 11:22:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129858
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129859
 
 From: Ahmad Fatoum <a.fatoum@pengutronix.de>
 
-FITIMAGE_CONFIG_PREFIX is only used for configurations that contain a
-kernel image, but not for mere overlay configurations.
+Following the example in the comment as-is will lead to an error at
+do_fitimage time:
 
-This is inconsistent with the original kernel-fitimage.bbclass.
-As the name may be hardcoded in the bootloader, add a new
-FITIMAGE_CONFIG_FDTO_PREFIX to be able to customize the prefix for
-device tree overlay configuration nodes as well.
+  The key ID is not a valid PKCS#11 URI
+  The PKCS#11 URI format is defined by RFC7512
+  The key ID is not a valid PKCS#11 URI
+  The PKCS#11 URI format is defined by RFC7512
+  PKCS11_get_private_key returned NULL
+  Failure loading private key from engine: error:40000064:pkcs11 engine::invalid id
+  uboot-mkimage Can't add hashes to FIT blob: -1
+
+Strip the pkcs11: prefix to resolve this and save future users the
+hassle.
 
 Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
 Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
 ---
- meta-oe/classes/fitimage.bbclass | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ meta-oe/classes/fitimage.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/classes/fitimage.bbclass b/meta-oe/classes/fitimage.bbclass
-index 0e2a02636c..adcfec0f0e 100644
+index adcfec0f0e..109b3b421b 100644
 --- a/meta-oe/classes/fitimage.bbclass
 +++ b/meta-oe/classes/fitimage.bbclass
-@@ -88,7 +88,9 @@ FITIMAGE_HASH_ALGO[doc] = "Hash algorithm to use"
- FITIMAGE_ENCRYPT_ALGO ?= "rsa2048"
- FITIMAGE_ENCRYPT_ALGO[doc] = "Signature algorithm to use"
- FITIMAGE_CONFIG_PREFIX ?= "conf-"
--FITIMAGE_CONFIG_PREFIX[doc] = "Prefix to use for FIT configuration node name"
-+FITIMAGE_CONFIG_PREFIX[doc] = "Prefix to use for bootable FIT configuration node name"
-+FITIMAGE_CONFIG_FDTO_PREFIX ?= ""
-+FITIMAGE_CONFIG_FDTO_PREFIX[doc] = "Prefix to use for fdto FIT configuration node name"
- FITIMAGE_CMDLINE ?= ""
- FITIMAGE_CMDLINE[doc] = "Kernel command line to embed in the FIT configuration node"
- 
-@@ -347,9 +349,11 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
+@@ -62,7 +62,7 @@
  #
- def fitimage_emit_section_config_fdto(d, fd, dtb, compatible):
-     sign = d.getVar("FITIMAGE_SIGN")
-+    conf_prefix = d.getVar('FITIMAGE_CONFIG_FDTO_PREFIX') or ""
-+
-     bb.note("Adding overlay config section to ITS file")
+ #    FITIMAGE_SIGN = "1"
+ #    FITIMAGE_MKIMAGE_EXTRA_ARGS = "--engine pkcs11"
+-#    FITIMAGE_SIGN_KEYDIR = "${PKCS11_URI}"
++#    FITIMAGE_SIGN_KEYDIR = "${PKCS11_URI#pkcs11:}"
  
--    fd.write(f'\t\t{dtb} {{\n')
-+    fd.write(f'\t\t{conf_prefix}{dtb} {{\n')
-     fd.write(f'\t\t\tdescription = "Device Tree Overlay";\n')
-     fd.write(f'\t\t\tfdt = "fdt-{dtb}";\n')
-     if compatible:
+ 
+ LICENSE ?= "MIT"
 -- 
 2.47.3
 
