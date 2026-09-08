@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFFCEC79FA1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0569C79FAC
 	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 02:08:07 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.523.1788833278263619530
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.525.1788833281616836291
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 19:07:58 -0700
+ Mon, 07 Sep 2026 19:08:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=m15nVDcN;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-c9aea40d799so2189450a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 19:07:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=RnNz4piN;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-38ea87caafeso3280009a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 19:08:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788833278; x=1789438078; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788833281; x=1789438081; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Tcpu2tayQ3MjjMQOJ/znVq+TC/V7Sziy0CWcjxvoMig=;
-        b=m15nVDcNgvbiRYuNBc/IC9UYFmXcxMmkcsUg/tK//2re8nL/xlgojCcse/EhhGQAYd
-         5UQi7tlSW9w1GXn1aPUxTAhGYnNvzh4PRpH5pHbzhmwV1L8GJtIYO2MLuleqwgdCbxU7
-         bgZAgl8UDK6Vf+HZVj3QpwhRlLb4L4eqhnFCJPKLrGcDHRPRCjfbx+g1mt8GE17yESm5
-         QspJb9HrAt6hbhQL4uHEInUxuL+8g+N4hjqX+gQpMoO8GRkqfl0vYFTowwufo5VNgO+P
-         BHnPOr2oxgYchzHhVQ5bPqK3gWjteiS9DU+zZFGMZ7GhXs/443cCJRANpjVDQcmeuSwL
-         s1qA==
+        bh=UdUAch8b6daIrNIEI68Eee+H3eZtjb7LAOqRHLnqwbs=;
+        b=RnNz4piN8gimQH4rQBBDHbo1xpoLg2mGRIVJW0vD7k7KEHG/S5R1v6wKs0o8s9to6T
+         2w1QbaTgxNnAdnHBqfVKiZswC7Rcc/549R2TRxucP0aSad7a0KaDAyCHtwNJ+HqcQui9
+         5EVy1OD6bDso1NclC0F5f0QJawjRY5CJkwIdY65zUfUEoAnI9Dz1RpLPZFC1HvCKVHrN
+         sCM4TuCJUMCwV+wXr+MWs3kzZ20AsiBpVL9y5TC7UgVZEEHMrtO7gNt+fmFVSJEuTty7
+         b0k57Z9UPhC6hBiocJ4vZqV8V1n11Qlo9zkrLYaFLIx/vLNsz/N4XNwq+5V5zQGldGRj
+         211A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788833278; x=1789438078;
+        d=1e100.net; s=20251104; t=1788833281; x=1789438081;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Tcpu2tayQ3MjjMQOJ/znVq+TC/V7Sziy0CWcjxvoMig=;
-        b=PCw+Xw1zeSbiJ1+z1RiiPB0aFjaKGJMG5z07u+JiZNPDedHXkH2YjkUqNsmLfiW4Tj
-         lKbg+v98DCqoE+kg37L7s2Xew05AC5XYZ/VzUEtLXOMjklSrHvFXG1u9WhMo7wC0loa6
-         dAzVv0Ve6pvY71ob2bKKqaDsGiIHY9Xf2T3ZSwoKDhvvdoCWPaYQ0d1vxp579HXQjAix
-         W194t2yATJLkbASj9fRuvTFbKjxkUKUQ70I+r4ktnv2WyFUIZDPFbLYj5pkhwos2Jg1I
-         eq6S5SZGNFLdT7cS6hcE0Y3jAFq7mGDTMnYdIccbmbAYI85CFf2i+eeSlTUruYHD2lIp
-         MFiQ==
-X-Gm-Message-State: AFuF++nIPrFfJIieWf9X4vJIj/hSr6ajG4Kxkd2Wm7e0RnPZM+4BsH0K
-	IMMT3+scmqjdKo1r8ZxQ1P8+JTvvKiNn0SeyS68jqwnvf47MsJv/ASNE/eJjUQ==
-X-Gm-Gg: AYBFou1qb2AtBAMVK32M6DWNztQSPG+cwNkN3S2horpvfLyKwf+abiSMWwD+4VZa3OF
-	QrqBNpRfvgaHXJtrFMD5gXyKWBYnRVBmHP0nieQY8VHVawT44PZMJLVk2sGRSNi/iUVd6KlzksN
-	wpwJdLUxtoZoB+tOaMGPmkb+Z3SXk3gWQeAtBkdJ4vVBbcnguqZUSQnKKdM7kiFmrpOeJKFhV7F
-	L6KwCCaCLw9JoDk6nEbKROvM/6Ku+uLikPOTjw5Z+bs6Fvrhbq/9lRk64XRYPv1vzO+PtdCy7cm
-	bJ/DSHG+5xMBsRJ8qILgFfAPjEaUpDaWhCTMw/8ty6Zvi2o1SzTvQoNHnlpRLilh2MUqg7u0aiW
-	Rqs60vYaP3zyD4e+b9uYALe/RiYTZjpgJ1MIrH6GeXvxnmvdJj/b68u1byl2nAxGwy086rJ2t4X
-	1Aen2mACBOlHRXGT0KS6Aq8oqO2DGF6wa4c/0lwedu1Vip8tjhU6d3ZTv/U5pe7PF4e01U6fm+0
-	36Z8QvEeClqNMdQlUbzUX06ln9R8AYqHLQkbvOmIJb1cvnEJriYGhcyqZTfu8IzcHJR1ZzQ5O6x
-	vqoPHquaBMheGv7z12kZ3plqJfMjcRUnrcBFG6etHCoO7wzI4+HWUTkfQ6cf6CKQ8v+mqfBXxP3
-	jXIoYF4KzN+zxTHnttJVdn8hX4DhFM89UdrCLUp3j5+OsY4C9w16p6hiHXg==
-X-Received: by 2002:a17:90b:2ccf:b0:398:a2a3:b631 with SMTP id 98e67ed59e1d1-39b262aaf3dmr41856426a91.19.1788833277454;
-        Mon, 07 Sep 2026 19:07:57 -0700 (PDT)
+        bh=UdUAch8b6daIrNIEI68Eee+H3eZtjb7LAOqRHLnqwbs=;
+        b=s5deDiVrpCUiApc8PT4KGBmHziV7zowhBlDVs/tPddtdlc4sfqlf40L5GlI2pCqsc9
+         Jau0pKzz8SnMrW8+LgUwZ6n1QUZRGuFiJx9QSmojCATD6HedizZ4c5H8t4XxX0aJEt4d
+         1XlnK/FIcyQADRA08YGBYCSqJwZvu0wBeAE5vFTPQApa48SqxFMyTQQPOanLpqSWjbBH
+         /GtiDeUupWtG/WB0L9Q12y5x5eGXOAdg23Tzl1z2SLeFVQltPDk1O/ozgO91XLocYNb+
+         GpknSxctlC9g2bf4//jIr3dGU0qwLG54PeFY0R2ZwieSe3vd2IonvVDQuYittB9/REEw
+         ABMw==
+X-Gm-Message-State: AFuF++kziMpDt67ehHEQI8Z982nctqoLq1RHMlsB7ymbIjnkkdXtNZuD
+	G+V2pUQf+HHdgM3cvo0LbaxVAK1QbzMIlQyY0CQzae1cHbvwgFOqkjCs9xs5rQ==
+X-Gm-Gg: AYBFou1t8yZKdm3ElGzjAGL/2scotsejlX2QqAPYyvxjp61DIy1pIDQ/6HCwbQc2S38
+	AuXq8qFXQEtVklTcEhbmygDyUUbvE90LxPCHtsYdvb469Yucv12mIgqCon8CQ7EL8l5YIzrqB+c
+	W8EA3nxTnK7J3cAr6qYncOXZmaPsXRt9+5U3xTHR/JiuLW31G7+hl5ZJQIchZ0qqC2Wj/25LUKD
+	r+Im/4u+xvXWxsaRNuJHsdMTqbKyvaM5aD/laRSpTp1ZkOx4jL4VzhAOFib5sEmRENry9k6aVkl
+	idaEWD/IxeDyFK5Ig+24xVSBFMZSsZGRcAO/ILw1J10hTuEc2adfM1Rap3W2D//z3DbxLBFvAGn
+	iiP3VGRQ2SkYORvihBkjQWUQCkkoo9BZNhcDSSQiv8GkLUctsFcUVLUI7YrZSfkmFv1OI2SsjYR
+	j3jd8qv9lCrep8/Pz7TfwXkbgYD11bxv4uFfgedquG1UzMol3uhxJOwqVnhP6Lu4hL2o0bkQtAY
+	54mJx/CZahQnIPIo6yFRqJg1LKW6K0SCj7lM4l5S95/scygfjwPhikoBezGtCd2Zi8CMOHadCCZ
+	Ik8q5kluIPHCMrtRV/RevLpg1km5HS1yDEPh9PrueEK+WyURpx7Oy76oyUYGjM1xNStkpBbuCyu
+	2rvrEcSuhI0H4QYuoaeZi0w5d4Hr7ijqnE+QreY5QvvBQbAY=
+X-Received: by 2002:a17:90b:2f87:b0:38e:250b:122f with SMTP id 98e67ed59e1d1-39b261e75femr39268134a91.16.1788833280827;
+        Mon, 07 Sep 2026 19:08:00 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33688cfc714sm14044803eec.20.2026.09.07.19.07.56
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33688cfc714sm14044803eec.20.2026.09.07.19.07.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 19:07:56 -0700 (PDT)
+        Mon, 07 Sep 2026 19:07:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/6] bpftrace: Upgrade to 0.26.1
-Date: Mon,  7 Sep 2026 19:07:48 -0700
-Message-ID: <20260908020752.2748681-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 4/6] libcamera: Fix build with clang 23
+Date: Mon,  7 Sep 2026 19:07:50 -0700
+Message-ID: <20260908020752.2748681-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260908020752.2748681-1-khem.raj@oss.qualcomm.com>
 References: <20260908020752.2748681-1-khem.raj@oss.qualcomm.com>
@@ -71,198 +71,116 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 02:08:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129850
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129852
 
-Fix build with LLVM 23
+clang 23 enables -Wunused-template as part of -Wall (via -Wmost ->
+-Wunused), where previously neither -Wall nor -Wextra turned it on.
+libcamera builds with -Werror, so this now breaks the build:
+
+  In file included from include/libcamera/ipa/core_ipa_serializer.h:18:
+  include/libcamera/internal/ipa_data_serializer.h:57:3: error: unused
+      function template 'readPOD' [-Werror,-Wunused-template]
+     57 | T readPOD(std::vector<uint8_t> &vec, size_t pos)
+        |   ^~~~~~~
+
+The POD helpers sit in an anonymous namespace, so they have internal
+linkage and clang diagnoses them per translation unit. appendPOD() and
+the iterator overload of readPOD() are referenced by the
+IPADataSerializer specialisations in the header itself, so they count as
+used everywhere. The std::vector overload of readPOD() is not: nothing
+in libcamera calls it, its only callers are the IPA proxies and proxy
+workers generated at build time from the mojom templates. So it is
+genuinely unused in every translation unit that is not generated proxy
+code, which is what [[maybe_unused]] exists for.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ....txt-allow-to-set-BISON_FLAGS-like-l.patch | 39 -------------------
- ...lderBPF-Fix-HasTerminator-on-LLVM-23.patch | 38 ++++++++++++++++++
- ...5-CMakeLists-Add-support-for-LLVM-23.patch | 36 +++++++++++++++++
- ...{bpftrace_0.25.1.bb => bpftrace_0.26.1.bb} | 14 +++----
- 4 files changed, 80 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0005-CMakeLists-Add-support-for-LLVM-23.patch
- rename meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/{bpftrace_0.25.1.bb => bpftrace_0.26.1.bb} (87%)
+ ...er-Mark-vector-readPOD-overload-as-m.patch | 65 +++++++++++++++++++
+ .../libcamera/libcamera_0.7.2.bb              |  1 +
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch
-deleted file mode 100644
-index c9e1749dd5..0000000000
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From ce5d908bb1256ede680fbfd521f087060a567dca Mon Sep 17 00:00:00 2001
--From: Martin Jansa <martin.jansa@gmail.com>
--Date: Tue, 3 Sep 2024 14:17:51 +0200
--Subject: [PATCH] CMakeLists.txt: allow to set BISON_FLAGS like -l
--
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
--
--Upstream-Status: Pending
-----
-- CMakeLists.txt | 10 +++++++---
-- 1 file changed, 7 insertions(+), 3 deletions(-)
--
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -108,16 +108,21 @@ include_directories(SYSTEM ${LIBCEREAL_I
-- 
-- find_package(BISON REQUIRED)
-- find_package(FLEX REQUIRED)
--+
--+# avoid buildpaths in generated #line statements and allow to pass --file-prefix-map=OLD=NEW
--+set(BISON_FLAGS "${BISON_FLAGS} -l")
--+set(FLEX_FLAGS "${FLEX_FLAGS} -L")
--+
-- # `parser_class_name` is deprecated and generates warnings in bison >= 3.3.
-- # But `api.parser.class` is not supported in bison < 3.3. So we must inject
-- # the %define based on the bison version here.
-- if(${BISON_VERSION} VERSION_GREATER_EQUAL 3.3)
---  set(BISON_FLAGS "-Dapi.parser.class={Parser} -Wcounterexamples")
--+  set(BISON_FLAGS "${BISON_FLAGS} -Dapi.parser.class={Parser} -Wcounterexamples")
-- else()
---  set(BISON_FLAGS "-Dparser_class_name={Parser} -Wcounterexamples")
--+  set(BISON_FLAGS "${BISON_FLAGS} -Dparser_class_name={Parser} -Wcounterexamples")
-- endif()
-- bison_target(bison_parser src/parser.yy ${CMAKE_BINARY_DIR}/parser.tab.cc COMPILE_FLAGS ${BISON_FLAGS} VERBOSE)
---flex_target(flex_lexer src/lexer.l ${CMAKE_BINARY_DIR}/lex.yy.cc)
--+flex_target(flex_lexer src/lexer.l ${CMAKE_BINARY_DIR}/lex.yy.cc COMPILE_FLAGS ${FLEX_FLAGS})
-- add_flex_bison_dependency(flex_lexer bison_parser)
-- add_library(parser STATIC ${BISON_bison_parser_OUTPUTS} ${FLEX_flex_lexer_OUTPUTS})
-- target_compile_options(parser PRIVATE "-w")
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch
 new file mode 100644
-index 0000000000..f224ca3d81
+index 0000000000..4cb8c47050
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch
-@@ -0,0 +1,38 @@
-+From d09a791bb88c69c34dd2e294213ed2a47568267f Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Viktor=20Mal=C3=ADk?= <viktor.malik@gmail.com>
-+Date: Tue, 18 Aug 2026 21:47:37 +0200
-+Subject: [PATCH] IRBuilderBPF: Fix HasTerminator on LLVM 23 (#5298)
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch
+@@ -0,0 +1,65 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Sun, 6 Sep 2026 22:40:00 -0700
++Subject: [PATCH] ipa_data_serializer: Mark vector readPOD() overload as
++ maybe_unused
 +
-+LLVM 23 changed the implementation of BasicBlock::getTerminator(), which
-+now doesn't check that a basic block actually has a terminator and
-+should only be called after a successful BasicBlock::hasTerminator()
-+check. Add the check to IRBuilderBPF::HasTerminator() for LLVM 23.
++clang 23 enables -Wunused-template as part of -Wall (via -Wmost ->
++-Wunused; it was not enabled by -Wall or -Wextra before). Combined with
++libcamera's -Werror this breaks the build:
 +
-+Signed-off-by: Viktor Malik <viktor.malik@gmail.com>
++  In file included from include/libcamera/ipa/core_ipa_serializer.h:18:
++  include/libcamera/internal/ipa_data_serializer.h:57:3: error: unused
++      function template 'readPOD' [-Werror,-Wunused-template]
++     57 | T readPOD(std::vector<uint8_t> &vec, size_t pos)
++        |   ^~~~~~~
 +
-+Upstream-Status: Backport [https://github.com/bpftrace/bpftrace/commit/d09a791bb88c69c34dd2e294213ed2a47568267f]
++The POD helpers live in an anonymous namespace, so they have internal
++linkage and clang diagnoses them per translation unit. appendPOD() and
++the iterator overload of readPOD() are referenced by the IPADataSerializer
++specialisations in this header, so they are seen as used everywhere.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++The std::vector overload of readPOD() is different: nothing in libcamera
++itself calls it. Its only callers are the IPA proxies and proxy workers
++generated at build time from the mojom templates, for example
++
++  [[maybe_unused]] const size_t ipaControlsBufSize =
++          readPOD<uint32_t>(_ipcOutputBuf.data(), 4);
++
++in src/libcamera/proxy/soft_ipa_proxy.cpp. It is therefore genuinely
++unused in every translation unit that includes this header without being
++generated proxy code, which is exactly what [[maybe_unused]] is for.
++
++Note the overload cannot simply be dropped: doing so breaks the generated
++proxies with "no matching function for call to 'readPOD'".
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ src/ast/irbuilderbpf.cpp | 8 +++++++-
++ include/libcamera/internal/ipa_data_serializer.h | 8 +++++++-
 + 1 file changed, 7 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/ast/irbuilderbpf.cpp b/src/ast/irbuilderbpf.cpp
-+index fb94f9bdde6b..2a2ac6209c19 100644
-+--- a/src/ast/irbuilderbpf.cpp
-++++ b/src/ast/irbuilderbpf.cpp
-+@@ -2512,7 +2512,13 @@ llvm::Value *IRBuilderBPF::CreateCheckedBinop(Binop &binop,
-+ bool IRBuilderBPF::HasTerminator()
-+ {
-+   BasicBlock *current_block = GetInsertBlock();
-+-  return current_block && current_block->getTerminator();
-++  if (!current_block)
-++    return false;
-++#if LLVM_VERSION_MAJOR >= 23
-++  if (!current_block->hasTerminator())
-++    return false;
-++#endif
-++  return current_block->getTerminator();
++diff --git a/include/libcamera/internal/ipa_data_serializer.h b/include/libcamera/internal/ipa_data_serializer.h
++index 0dda76d..528527d 100644
++--- a/include/libcamera/internal/ipa_data_serializer.h
+++++ b/include/libcamera/internal/ipa_data_serializer.h
++@@ -52,9 +52,15 @@ T readPOD(std::vector<uint8_t>::const_iterator it, size_t pos,
++ 	return ret;
 + }
-+ 
-+ } // namespace bpftrace::ast
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0005-CMakeLists-Add-support-for-LLVM-23.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0005-CMakeLists-Add-support-for-LLVM-23.patch
-new file mode 100644
-index 0000000000..b5f7f0e3dc
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0005-CMakeLists-Add-support-for-LLVM-23.patch
-@@ -0,0 +1,36 @@
-+From f0768d0a3d08b4ba7fbc85f874fbe905cd4a6880 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Viktor=20Mal=C3=ADk?= <viktor.malik@gmail.com>
-+Date: Wed, 19 Aug 2026 09:25:25 +0200
-+Subject: [PATCH] Add support for LLVM 23 (#5299)
 +
-+- Bump MAX_LLVM_MAJOR
-+- Add new Nix targets
-+- Bump BCC version to the commit fixing LLVM 23 build
-+- Adjust CI jobs
+++/*
+++ * This overload is only used by the generated IPA proxies and proxy workers,
+++ * and thus is unused in translation units that include this header without
+++ * being generated proxy code. Mark it as such to avoid -Wunused-template
+++ * warnings, which clang enables as part of -Wall since version 23.
+++ */
++ template<typename T,
++ 	 std::enable_if_t<std::is_arithmetic_v<T>> * = nullptr>
++-T readPOD(std::vector<uint8_t> &vec, size_t pos)
+++[[maybe_unused]] T readPOD(std::vector<uint8_t> &vec, size_t pos)
++ {
++ 	return readPOD<T>(vec.cbegin(), pos, vec.end());
++ }
++--
++2.51.0
 +
-+Also drop support for LLVM 18. Since the Nix fuzz shell depended on LLVM
-+18, move that to 22.
-+
-+Signed-off-by: Viktor Malik <viktor.malik@gmail.com>
-+
-+Only the CMakeLists.txt hunk is backported here; the Nix and CI changes of
-+the original commit do not apply to an OE build, and the BCC bump is
-+handled by the bcc recipe.
-+
-+Upstream-Status: Backport [https://github.com/bpftrace/bpftrace/commit/f0768d0a3d08b4ba7fbc85f874fbe905cd4a6880]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index baea14e65c60..a781bf347d61 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -156,7 +156,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-+   # releases.
-+   set(MAX_LLVM_MAJOR 999)
-+ else()
-+-  set(MAX_LLVM_MAJOR 22)
-++  set(MAX_LLVM_MAJOR 23)
-+ endif()
-+ 
-+ if((${LLVM_VERSION_MAJOR} VERSION_LESS ${MIN_LLVM_MAJOR}) OR (${LLVM_VERSION_MAJOR} VERSION_GREATER ${MAX_LLVM_MAJOR}))
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.25.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-similarity index 87%
-rename from meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.25.1.bb
-rename to meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-index 7daf02ba1c..44e32cb9a4 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.25.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-@@ -3,9 +3,7 @@ HOMEPAGE = "https://github.com/iovisor/bpftrace"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--DEPENDS += "bison-native \
--            flex-native \
--            gzip-native \
-+DEPENDS += "gzip-native \
-             elfutils \
-             bpftool-native \
-             bcc \
-@@ -13,15 +11,16 @@ DEPENDS += "bison-native \
-             libbpf \
-             xxd-native \
-             "
--DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native', '', d)}"
-+DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native zip-native', '', d)}"
- 
--SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.25.x;protocol=https;tag=v${PV} \
-+SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.26.x;protocol=https;tag=v${PV} \
-            file://run-ptest \
--           file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
-            file://0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch \
-            file://0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch \
-+           file://0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch \
-+           file://0005-CMakeLists-Add-support-for-LLVM-23.patch \
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb
+index 3199ad8a4f..955cf041ba 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.7.2.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "\
+
+ SRC_URI = " \
+         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
++        file://0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch \
  "
--SRCREV = "e491811e5d648288c01f42ce087967b271f504a0"
-+SRCREV = "1bac8a8daad6e0aa579980e877d0c9d5fc296593"
- 
- inherit bash-completion cmake ptest pkgconfig
- 
-@@ -64,7 +63,6 @@ EXTRA_OECMAKE = " \
-     -DUSE_SYSTEM_BPF_BCC=ON \
-     -DUSE_SYSTEM_LIBBPF=ON \
-     -DENABLE_MAN=OFF \
--    -DBISON_FLAGS='--file-prefix-map=${WORKDIR}=' \
- "
- 
- PACKAGES:remove:powerpc64 = "${PN}-ptest"
+
+ SRCREV = "191e202178f02430b5942397c70d215cdd2056fa"
 
