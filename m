@@ -1,460 +1,187 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DC83C79F82
-	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 03:56:06 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.254.1788839756196414745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA4A8C79F82
+	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 09:31:01 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3188.1788859859106684873
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2026 20:55:56 -0700
+ Tue, 08 Sep 2026 02:30:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=KDMwCcjs;
- spf=pass (domain: mvista.com, ip: 209.85.216.54, mailfrom: hprajapati@mvista.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so3335434a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2026 20:55:56 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=XBg4KYhq;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48584dc164fso4125747f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 02:30:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1788839755; x=1789444555; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1788859857; x=1789464657; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/RPCATxFl3uc13agdcZssKSptRmYrgrs5MdFJArdOSU=;
-        b=KDMwCcjsfE7As2A1VAGZjJG9IMNix0Fmq8tN6NkmS6NPldzX6yM2IzzRGlG1Kvye6c
-         lzUkUoISd8yMT4W2MC2xtr7lYrbVhDkPsIZhiNcgnsGYLO51kpr0ZcYeQkROC28JiKBu
-         LaH3r0TRIi1kWhoeuw0LezsuFZwqvA2EPY8ek=
+        bh=UTKnzuGoal7kAjKTN8LHuYGlhoX7w4us58Zj5aNbUrc=;
+        b=XBg4KYhqYb4pBspGUO/b9/78sU7JTz1Hg8FNRhmyO+D/7CkDPnukzZKhK8kpC5zGGC
+         5PBMHRA4snSxGtX4g8bXSzXsvVxxuFGm7hw1QqRLNwCmnv8dzo0iD4AAgAEEQ/14haaf
+         kT/pqBRxrpj92ZhGbrIlqvryYUGxN26eef8bI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788839755; x=1789444555;
+        d=1e100.net; s=20251104; t=1788859857; x=1789464657;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/RPCATxFl3uc13agdcZssKSptRmYrgrs5MdFJArdOSU=;
-        b=hubmD0DvcRKbBMZ35mYZnJsXjpfL6cQFFa2nPRtNA6BDOKlMyHKaPGaBtJvhxoIPi9
-         o4PU5Fd3830t6pmM/YPjXfSX5eXpCadmXGuXjbrwySqlBVPeJh9NoZEvDMZaySNC7dxb
-         m4O4RJv8UkzjR0yUD9vprxygkhhn3FiKb3MfEKog/Z1HPT5HXXseRiWu+HP8HItT/IRi
-         9dUD0+DBVRT7/5FINAmJusTpJ9ZzOTIJZwCDuC4L+rpTUO9I/iECP5S+zpgoKyYTiZl8
-         ITZudDW4oEPAVjkRjJNfLDaCiqqhZWIK7mzha4v4YsQ45hgUCPIlB32P+x5tK+B2ZWG9
-         pHZA==
-X-Gm-Message-State: AFuF++nPDmp6wN+KInPlZOpLjOlYLwhH3woJJVNjAfPOdUpptCYUW73t
-	7TCMeUFcn3ypMGuCfnkW0fPcWrFZ30pkahcEQNQx7AhRr1BtWhi7fhOOqPk4hyyFlLDpq0dCOqv
-	81JZC
-X-Gm-Gg: AYBFou3P2kFBiGbH8H1PkQPzLHRejokiNkshzya63tcYM2IArEvftK0wStWM/eIkA1e
-	YMX1opGbCRe2anV/hhmi0rfF4+VcUe1f32CgZvf1CnwPV9cMceRN9s6iXDsod61UuvAi7lB8d0w
-	gmINpijOY/VrhwI4swaO1XN1B7YuyaTQk7rG7jAvqmazMd2K4WiuHXZe5kaLgWh7s/PGNTnRakO
-	T51QA9XeIvd9TRRXAP62S5JW/6Nv81khsF8ej/8rBrkj/BYjdUbu0UH//Uwp67+LuS0D0jufqwA
-	pM+ycJnsss035rJThmYqaa11OCMwkjwbxJWCMhSZity+PbnLKRDRI8+6JwB/Dzcla3LRXiupsmW
-	6e/tMa6U8FpK7SS8sgAXHip86JWhWfpD+X+GciVRPK/DtJjYgcaJRpw542SnoUuYT5a8xJ+TrqQ
-	V8vQyxXTnQmoer3JJL2ITli753Zjs6LuwQu4i+Dj2ZDXaQnIBGAqnxJzIFSfcIxi2MAB8kJz9/b
-	g==
-X-Received: by 2002:a17:90b:5826:b0:38e:7168:281 with SMTP id 98e67ed59e1d1-39b261b07b6mr41844340a91.10.1788839755184;
-        Mon, 07 Sep 2026 20:55:55 -0700 (PDT)
-Received: from MVIN00013.mvista.com ([103.250.136.160])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432424d27asm42597421c88.2.2026.09.07.20.55.52
+        bh=UTKnzuGoal7kAjKTN8LHuYGlhoX7w4us58Zj5aNbUrc=;
+        b=COenEKiNljrHa+hoDy8Epz5NUYS1cfTvfhQVqghAuvHNdya+uPY2023DH73nhzv5iX
+         2Rlw4zo9Cg3xRCFU693J4aiYWDUxcxck81Dx1+6Mxrqi+4IycSK4TjB5qD3lOpYhgT0u
+         lhka8ACUISnSodUgqNOo5pH1vZutCFvb/2H65gRLBmg7hOZIpxoOSd29bSxqL37IZGwA
+         AxXbsiytcriqCRi0VzU99J8476BBK0/N3YJx6u+F33jNyNWye9KPXqd8rQliACnwPMHb
+         /n9f3+vgye4UffK0bnXdrtKV+hn0ErxtxibuPP8ehfskBeOYe6h6xT/+WI9XfqZc/ksK
+         0WnQ==
+X-Gm-Message-State: AFuF++l4Xa5g75wj4GSVIgDXxyTQYhlXJ45k+B1bbhELC3OVItjLUs+K
+	OJk8lt1nZpP/1EXlyv2ERBjrGt2w8jeSEGs/92jLE/Pd1wEDrVO/DL3rRRP4BtlIld/sB9r4tLV
+	p0GdV
+X-Gm-Gg: AYBFou2EY96MjKjQbOBCYOWggZM5nRA3nFR0HuWf59IHP9NXFUqFlZ4t7eMbY/L1kbG
+	hr8YRkJpDrBpuzcLqNXLenWl1rHe5+fmYlmFFWPi9xIhs3ovpnwmimlB1PPid5Zuq0p6cOHkIOV
+	dZfhH+zaZGUsvAsaeVkzRvd4Xvj7CabihTslpH6EeWVFCaJs3ceBQB6ZZJOyJHkKpATjw34dVB6
+	exG5dtW0oCWynl7pwuAd1j74wCAcfC55EHtS3cj45HIkZdULhZIiNnxxGYjJtwbDnZrDlWr4W6x
+	lsWWZQBv2ke+Sy13ECqsxTdt3wNQ1g7M6E43mCmMWwTYrOxNSyYckbYf+BqeLySP+fYZEYFtaYH
+	iY3ve7TCQWaq9Vnaptydkhr/7XqKMqyBG7PjCYlonmh3qZqBFOKKevOBQMK5Oxyans6isUdEJb2
+	VVhOSJAM0cD9PyiXqj0lpFwJFDV6uJbCoDBQn5Lvat84ESn5rH1J20ofAF+ryclKqyZE09gGvHT
+	ur6xFdTiXvN1ojHs4WSm0B2eoQOKvug0M27cLg+XbZYuqydErPUCsFyIm6UCrz2HcvjfgRw/CLU
+	iNTjr8KIXbEeeg==
+X-Received: by 2002:a05:6000:4304:b0:484:3310:f395 with SMTP id ffacd0b85a97d-485872d2dbamr30874901f8f.24.1788859856733;
+        Tue, 08 Sep 2026 02:30:56 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858ac2b4cdsm33664644f8f.16.2026.09.08.02.30.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 20:55:54 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
+        Tue, 08 Sep 2026 02:30:56 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-python][scarthgap][PATCHv2] python3-pillow: fix CVE-2026-42311
-Date: Tue,  8 Sep 2026 09:25:47 +0530
-Message-ID: <20260908035547.8571-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 1/2] valkey: Upgrade 9.1.1 -> 9.1.2
+Date: Tue,  8 Sep 2026 12:30:42 +0300
+Message-ID: <20260908093043.249127-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 03:56:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129855
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 09:31:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129856
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-42311
+Upgrade to release 9.1.2:
 
-Pick patch from [1] & [2] also mentioned at Debian report in [3]
+Security Fixes
 
-[1] https://github.com/python-pillow/Pillow/commit/58f9a1d166dcb0c274807d4423522d205b0c35ea
-[2] https://github.com/python-pillow/Pillow/commit/3b1f70da
-[3] https://security-tracker.debian.org/tracker/CVE-2026-42311
+- GHSA-jcj7-v34w-v9vv: Fix a use-after-free in RDMA connection
+  handling that could allow an authenticated client to crash the
+  server using CLIENT KILL. Only affects servers built with
+  USE_RDMA and configured with an RDMA listener
+- GHSA-fq2f-crmw-q97r: Fix an unauthenticated use-after-free of the
+  Lua interpreter state, caused by a process-global script debugger
+  command table that cached a raw pointer to a freed interpreter
+  and was never invalidated
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Bug Fixes
+
+- Fix a double-free crash when a module timer callback stops its
+  own timer with ValkeyModule_StopTimer
+- Fix torn RESP3 push frames when a client publishes to a channel
+  it is also subscribed to, which could desync client libraries
+- Listpacks are now always validated on RDB load and RESTORE,
+  preventing deferred assertion crashes; sanitize-dump-payload and
+  its ACL flags become no-ops
+- Fix crashes, hangs, and CPU spinning when the RDMA transport is
+  used together with I/O threads
+- RESET now clears the CLIENT IMPORT-SOURCE flag, so reused pooled
+  connections return to normal expiration semantics
+- Truncate a partially written MULTI block from the AOF on short
+  read, preventing loss of newer writes after a later restart
+- Fix an ACL bypass where duplicate STORE/STOREDIST options let
+  GEORADIUS write or delete keys outside the user's permitted patterns
+- Fix command log redaction leaking between commands in a MULTI
+  transaction and missing for commands executed from scripts
+- Fix a use-after-free crash when a module's cluster message type
+  is received after the module is unloaded
+- Fix out-of-bounds access for cluster module message type 255,
+  which is now a valid, dispatchable message type
+- AOF loading no longer performs ACL checks on replayed commands,
+  preventing silent data loss when the default user is disabled
+- Fix a client memory accounting leak on replicas that inflated
+  the mem_clients_normal INFO field after primary disconnections
+- Fix a permanent client deadlock when a blocking command like
+  BLPOP is followed by a partially delivered pipelined command
+- HGETEX now requires write permission on the key, closing an
+  ACL gap that let read-only users change field TTLs or delete
+  fields
+- Compare the whole TLS certificate CN during authentication,
+  so an embedded NUL can no longer impersonate another ACL user
+- Fix atomic slot migration failures with I/O threads by not
+  offloading the export job's writes while snapshotting
+- Reject invalid slot import ranges when loading an RDB, so
+  corrupted files can no longer create bad migration jobs
+- Reject RDB slot import records with an invalid job name length,
+  preventing an out-of-bounds read at startup
+- MOVE and COPY now check ACL access to the current database, so
+  users can no longer exfiltrate keys from an unauthorized DB
+- Fix a crash on COPY with a trailing DB option during slot
+  migration, and block cross-DB COPY regardless of option order
+- Fix a server panic when pipelined commands with invalid arity
+  reach the key prefetcher with I/O threads enabled
+- HPERSIST, HTTL, HPTTL, HEXPIRETIME, and HPEXPIRETIME now return a
+  syntax error when the FIELDS keyword is missing
+- Fix a race between TLS I/O-thread writes and reads that could
+  leave slot migration export jobs stuck until timeout
+- Fix a signed overflow that let very large hash field expiration
+  times (e.g. via HPEXPIREAT) crash the server
+- Fix a frozen monotonic clock on hosts with unsynchronized TSC
+  that stopped background tasks and key expiration
+- Fix a stack overflow crash when retrying a failed TLS write
+  with a large reply
+- Fix the --check-system clocksource check to skip hosts using a
+  hardware clock and suggest only actually available clocksources
+- Fix an assertion failure with I/O threads when a blocked
+  client's pending command was processed again before unblocking
+- Sentinel no longer loads the built-in Lua scripting engine,
+  removing a spurious warning at startup
+- Validate channel, message, and module payload lengths in cluster
+  bus packets, preventing forged packets from crashing nodes
+- Harden stream validation on RDB load and RESTORE so crafted
+  payloads can no longer crash the server on later commands
+- Reject stream payloads with mismatched live/deleted record
+  counts, preventing XDEL from destroying unaccounted entries
+- Skip unnecessary post-read processing with I/O threads on socket
+  and TLS connections, restoring small-payload throughput
+- Fix a use-after-free crash when serving clients blocked on the
+  same key if one client is freed during processing
+- Avoid an unneeded client lookup per write completion with I/O
+  threads on socket and TLS connections, improving pipelined
+  throughput
+- Fix CLUSTER SLOT-STATS ORDERBY returning wrong ordering when slot
+  counters differ by more than 2^31
+- Fix slot migration failures with I/O threads and TLS by keeping
+  the export job's ACK reads on the main thread while snapshotting
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python3-pillow/CVE-2026-42311.patch       | 356 ++++++++++++++++++
- .../python/python3-pillow_10.3.0.bb           |   1 +
- 2 files changed, 357 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-42311.patch
+ .../valkey/{valkey_9.1.1.bb => valkey_9.1.2.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/valkey/{valkey_9.1.1.bb => valkey_9.1.2.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-42311.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-42311.patch
-new file mode 100644
-index 0000000000..326b747d1b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-42311.patch
-@@ -0,0 +1,356 @@
-+From 4bada07dc6c24319edd1eb76f1dd28d968d58207 Mon Sep 17 00:00:00 2001
-+From: Andrew Murray <radarhere@users.noreply.github.com>
-+Date: Wed, 18 Feb 2026 22:24:03 +1100
-+Subject: [PATCH] Avoid overflow by not adding extents together
-+
-+Reference : https://security-tracker.debian.org/tracker/DSA-6357-1
-+
-+CVE: CVE-2026-42311
-+Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/58f9a1d166dcb0c274807d4423522d205b0c35ea]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ Tests/test_imagefile.py | 70 +++++++++++++++++++++++++++++++++++++++--
-+ src/PIL/Image.py        |  4 +--
-+ src/PIL/ImageFile.py    | 18 ++++-------
-+ src/decode.c            | 61 +++++++++++++++++++++++------------
-+ src/encode.c            | 60 ++++++++++++++++++++++-------------
-+ 5 files changed, 156 insertions(+), 57 deletions(-)
-+
-+diff --git a/Tests/test_imagefile.py b/Tests/test_imagefile.py
-+index 8aa102729..a00f111e1 100644
-+--- a/Tests/test_imagefile.py
-++++ b/Tests/test_imagefile.py
-+@@ -142,6 +142,27 @@ class TestImageFile:
-+         with pytest.raises(SystemError, match="tile cannot extend outside image"):
-+             ImageFile._save(im, fp, [ImageFile._Tile("raw", xy + (1, 1), 0, "1")])
-+ 
-++    def test_extents_none(self) -> None:
-++        with Image.open("Tests/images/hopper.jpg") as im:
-++            im.tile = [im.tile[0]._replace(extents=None)]
-++            im.load()
-++
-++        for extents in ("invalid", (0,), ("0", "0", "0", "0")):
-++            with Image.open("Tests/images/hopper.jpg") as im:
-++                im.tile = [im.tile[0]._replace(extents=extents)]  # type: ignore[arg-type]
-++                with pytest.raises(ValueError, match="invalid extents"):
-++                    im.load()
-++
-++        im2 = Image.new("L", (1, 1))
-++        fp = BytesIO()
-++        tile = ImageFile._Tile("jpeg", None, 0, "L")
-++        ImageFile._save(im2, fp, [tile])
-++
-++        for extents in ("invalid", (0,), ("0", "0", "0", "0")):
-++            tile = tile._replace(extents=extents)  # type: ignore[arg-type]
-++            with pytest.raises(ValueError, match="invalid extents"):
-++                ImageFile._save(im2, fp, [tile])
-++
-+     def test_no_format(self) -> None:
-+         buf = BytesIO(b"\x00" * 255)
-+ 
-+@@ -279,7 +300,20 @@ class TestPyDecoder(CodecsTest):
-+         assert MockPyDecoder.last.state.xsize == 200
-+         assert MockPyDecoder.last.state.ysize == 200
-+ 
-+-    def test_negsize(self) -> None:
-++    def test_negative_offset(self) -> None:
-++        buf = BytesIO(b"\x00" * 255)
-++
-++        im = MockImageFile(buf)
-++        im.tile = [ImageFile._Tile("MOCK", (-10, yoff, xsize, ysize), 32, None)]
-++
-++        with pytest.raises(ValueError):
-++            im.load()
-++
-++        im.tile = [ImageFile._Tile("MOCK", (xoff, -10, xsize, ysize), 32, None)]
-++        with pytest.raises(ValueError):
-++            im.load()
-++
-++    def test_negative_size(self) -> None:
-+         buf = BytesIO(b"\x00" * 255)
-+ 
-+         im = MockImageFile(buf)
-+@@ -341,7 +375,39 @@ class TestPyEncoder(CodecsTest):
-+         assert MockPyEncoder.last.state.xsize == 200
-+         assert MockPyEncoder.last.state.ysize == 200
-+ 
-+-    def test_negsize(self) -> None:
-++    def test_negative_offset(self) -> None:
-++        buf = BytesIO(b"\x00" * 255)
-++
-++        im = MockImageFile(buf)
-++
-++        fp = BytesIO()
-++        MockPyEncoder.last = None
-++        with pytest.raises(ValueError):
-++            ImageFile._save(
-++                im,
-++                fp,
-++                [
-++                    ImageFile._Tile(
-++                        "MOCK", (-10, yoff, xoff + xsize, yoff + ysize), 0, "RGB"
-++                    )
-++                ],
-++            )
-++        last: MockPyEncoder | None = MockPyEncoder.last
-++        assert last
-++        assert last.cleanup_called
-++
-++        with pytest.raises(ValueError):
-++            ImageFile._save(
-++                im,
-++                fp,
-++                [
-++                    ImageFile._Tile(
-++                        "MOCK", (xoff, -10, xoff + xsize, yoff + ysize), 0, "RGB"
-++                    )
-++                ],
-++            )
-++
-++    def test_negative_size(self) -> None:
-+         buf = BytesIO(b"\x00" * 255)
-+ 
-+         im = MockImageFile(buf)
-+diff --git a/src/PIL/Image.py b/src/PIL/Image.py
-+index baef0aa11..94e021a48 100644
-+--- a/src/PIL/Image.py
-++++ b/src/PIL/Image.py
-+@@ -759,7 +759,7 @@ class Image:
-+ 
-+         # unpack data
-+         e = _getencoder(self.mode, encoder_name, args)
-+-        e.setimage(self.im)
-++        e.setimage(self.im, (0, 0) + self.size)
-+ 
-+         bufsize = max(65536, self.size[0] * 4)  # see RawEncode.c
-+ 
-+@@ -822,7 +822,7 @@ class Image:
-+ 
-+         # unpack data
-+         d = _getdecoder(self.mode, decoder_name, args)
-+-        d.setimage(self.im)
-++        d.setimage(self.im, (0, 0) + self.size)
-+         s = d.decode(data)
-+ 
-+         if s[0] >= 0:
-+diff --git a/src/PIL/ImageFile.py b/src/PIL/ImageFile.py
-+index 0283fa2fd..ac14d53ed 100644
-+--- a/src/PIL/ImageFile.py
-++++ b/src/PIL/ImageFile.py
-+@@ -666,28 +666,22 @@ class PyCodec:
-+ 
-+         if extents:
-+             (x0, y0, x1, y1) = extents
-+-        else:
-+-            (x0, y0, x1, y1) = (0, 0, 0, 0)
-+ 
-+-        if x0 == 0 and x1 == 0:
-+-            self.state.xsize, self.state.ysize = self.im.size
-+-        else:
-++            if x0 < 0 or y0 < 0 or x1 > self.im.size[0] or y1 > self.im.size[1]:
-++                msg = "Tile cannot extend outside image"
-++                raise ValueError(msg)
-++
-+             self.state.xoff = x0
-+             self.state.yoff = y0
-+             self.state.xsize = x1 - x0
-+             self.state.ysize = y1 - y0
-++        else:
-++            self.state.xsize, self.state.ysize = self.im.size
-+ 
-+         if self.state.xsize <= 0 or self.state.ysize <= 0:
-+             msg = "Size cannot be negative"
-+             raise ValueError(msg)
-+ 
-+-        if (
-+-            self.state.xsize + self.state.xoff > self.im.size[0]
-+-            or self.state.ysize + self.state.yoff > self.im.size[1]
-+-        ):
-+-            msg = "Tile cannot extend outside image"
-+-            raise ValueError(msg)
-+-
-+ 
-+ class PyDecoder(PyCodec):
-+     """
-+diff --git a/src/decode.c b/src/decode.c
-+index 43fa0ae3e..2b12a29bf 100644
-+--- a/src/decode.c
-++++ b/src/decode.c
-+@@ -154,44 +154,65 @@ PyImaging_AsImaging(PyObject *op);
-+ 
-+ static PyObject *
-+ _setimage(ImagingDecoderObject *decoder, PyObject *args) {
-+-    PyObject *op;
-++    PyObject *op, *extents;
-+     Imaging im;
-+     ImagingCodecState state;
-+     int x0, y0, x1, y1;
-+ 
-+-    x0 = y0 = x1 = y1 = 0;
-+-
-+     /* FIXME: should publish the ImagingType descriptor */
-+-    if (!PyArg_ParseTuple(args, "O|(iiii)", &op, &x0, &y0, &x1, &y1)) {
-++    if (!PyArg_ParseTuple(args, "OO", &op, &extents)) {
-+         return NULL;
-+     }
-+     im = PyImaging_AsImaging(op);
-+     if (!im) {
-+         return NULL;
-+     }
-+-
-+-    decoder->im = im;
-+-
-+-    state = &decoder->state;
-+-
-+-    /* Setup decoding tile extent */
-+-    if (x0 == 0 && x1 == 0) {
-+-        state->xsize = im->xsize;
-+-        state->ysize = im->ysize;
-++    if (extents == Py_None) {
-++        x0 = 0;
-++        y0 = 0;
-++        x1 = im->xsize;
-++        y1 = im->ysize;
-+     } else {
-+-        state->xoff = x0;
-+-        state->yoff = y0;
-+-        state->xsize = x1 - x0;
-+-        state->ysize = y1 - y0;
-++        if (!PyTuple_Check(extents) || PyTuple_GET_SIZE(extents) != 4) {
-++            PyErr_SetString(PyExc_ValueError, "invalid extents");
-++            return NULL;
-++        }
-++        for (int i = 0; i < 4; i++) {
-++            PyObject *extent = PyTuple_GetItem(extents, i);
-++            if (!PyLong_Check(extent)) {
-++                PyErr_SetString(PyExc_ValueError, "invalid extents");
-++                return NULL;
-++            }
-++            int e = (int)PyLong_AsLong(extent);
-++
-++            if (i == 0) {
-++                x0 = e;
-++            } else if (i == 1) {
-++                y0 = e;
-++            } else if (i == 2) {
-++                x1 = e;
-++            } else {
-++                y1 = e;
-++            }
-++        }
-+     }
-+ 
-+-    if (state->xoff < 0 || state->xsize <= 0 ||
-+-        state->xsize + state->xoff > (int)im->xsize || state->yoff < 0 ||
-+-        state->ysize <= 0 || state->ysize + state->yoff > (int)im->ysize) {
-++    if (x0 < 0 || y0 < 0 || x1 <= x0 || y1 <= y0 || x1 > (int)im->xsize ||
-++        y1 > (int)im->ysize) {
-+         PyErr_SetString(PyExc_ValueError, "tile cannot extend outside image");
-+         return NULL;
-+     }
-+ 
-++    decoder->im = im;
-++
-++    state = &decoder->state;
-++
-++    /* Setup decoding tile extent */
-++    state->xoff = x0;
-++    state->yoff = y0;
-++    state->xsize = x1 - x0;
-++    state->ysize = y1 - y0;
-++
-+     /* Allocate memory buffer (if bits field is set) */
-+     if (state->bits > 0) {
-+         if (!state->bytes) {
-+diff --git a/src/encode.c b/src/encode.c
-+index 87426cdec..360f26f97 100644
-+--- a/src/encode.c
-++++ b/src/encode.c
-+@@ -218,45 +218,63 @@ PyImaging_AsImaging(PyObject *op);
-+ 
-+ static PyObject *
-+ _setimage(ImagingEncoderObject *encoder, PyObject *args) {
-+-    PyObject *op;
-++    PyObject *op, *extents;
-+     Imaging im;
-+     ImagingCodecState state;
-+     Py_ssize_t x0, y0, x1, y1;
-+ 
-+-    /* Define where image data should be stored */
-+-
-+-    x0 = y0 = x1 = y1 = 0;
-+-
-+     /* FIXME: should publish the ImagingType descriptor */
-+-    if (!PyArg_ParseTuple(args, "O|(nnnn)", &op, &x0, &y0, &x1, &y1)) {
-++    if (!PyArg_ParseTuple(args, "OO", &op, &extents)) {
-+         return NULL;
-+     }
-+     im = PyImaging_AsImaging(op);
-+     if (!im) {
-+         return NULL;
-+     }
-+-
-+-    encoder->im = im;
-+-
-+-    state = &encoder->state;
-+-
-+-    if (x0 == 0 && x1 == 0) {
-+-        state->xsize = im->xsize;
-+-        state->ysize = im->ysize;
-++    if (extents == Py_None) {
-++        x0 = 0;
-++        y0 = 0;
-++        x1 = im->xsize;
-++        y1 = im->ysize;
-+     } else {
-+-        state->xoff = x0;
-+-        state->yoff = y0;
-+-        state->xsize = x1 - x0;
-+-        state->ysize = y1 - y0;
-++        if (!PyTuple_Check(extents) || PyTuple_GET_SIZE(extents) != 4) {
-++            PyErr_SetString(PyExc_ValueError, "invalid extents");
-++            return NULL;
-++        }
-++        for (int i = 0; i < 4; i++) {
-++            PyObject *extent = PyTuple_GetItem(extents, i);
-++            if (!PyLong_Check(extent)) {
-++                PyErr_SetString(PyExc_ValueError, "invalid extents");
-++                return NULL;
-++            }
-++            Py_ssize_t e = (Py_ssize_t)PyLong_AsLong(extent);
-++
-++            if (i == 0) {
-++                x0 = e;
-++            } else if (i == 1) {
-++                y0 = e;
-++            } else if (i == 2) {
-++                x1 = e;
-++            } else {
-++                y1 = e;
-++            }
-++        }
-+     }
-+ 
-+-    if (state->xoff < 0 || state->xsize <= 0 ||
-+-        state->xsize + state->xoff > im->xsize || state->yoff < 0 ||
-+-        state->ysize <= 0 || state->ysize + state->yoff > im->ysize) {
-++    if (x0 < 0 || y0 < 0 || x1 <= x0 || y1 <= y0 || x1 > im->xsize || y1 > im->ysize) {
-+         PyErr_SetString(PyExc_SystemError, "tile cannot extend outside image");
-+         return NULL;
-+     }
-+ 
-++    encoder->im = im;
-++
-++    state = &encoder->state;
-++
-++    state->xoff = x0;
-++    state->yoff = y0;
-++    state->xsize = x1 - x0;
-++    state->ysize = y1 - y0;
-++
-+     /* Allocate memory buffer (if bits field is set) */
-+     if (state->bits > 0) {
-+         if (state->xsize > ((INT_MAX / state->bits) - 7)) {
-+-- 
-+2.50.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-index 9f1ef87a46..8f7d11195d 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
-            file://run-ptest \
-            file://CVE-2026-25990.patch \
-            file://CVE-2026-40192.patch \
-+           file://CVE-2026-42311.patch \
+diff --git a/meta-oe/recipes-extended/valkey/valkey_9.1.1.bb b/meta-oe/recipes-extended/valkey/valkey_9.1.2.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/valkey/valkey_9.1.1.bb
+rename to meta-oe/recipes-extended/valkey/valkey_9.1.2.bb
+index 92cb1cf2f2..187c9a046e 100644
+--- a/meta-oe/recipes-extended/valkey/valkey_9.1.1.bb
++++ b/meta-oe/recipes-extended/valkey/valkey_9.1.2.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version
+            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+            file://GNU_SOURCE-7.patch \
             "
- SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
+-SRCREV = "d27f9ba65a04e80d9c417112a7621fc98a56f70d"
++SRCREV = "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+ 
+ RPROVIDES:${PN} = "virtual-redis"
  
 -- 
-2.50.1
+2.47.3
 
 
