@@ -2,127 +2,125 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EEECC79FB7
-	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 19:51:40 +0000 (UTC)
-Received: from mail-lr2-f12.google.com (mail-lr2-f12.google.com [74.125.230.76])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21416.1788983494070432139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 291EBC79FB6
+	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 20:07:23 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.86.1788984433355974449
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 12:51:34 -0700
+ Wed, 09 Sep 2026 13:07:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=G3qp5Lr4;
- spf=pass (domain: gmail.com, ip: 74.125.230.76, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a3156692c6so5621811fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 12:51:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QyZ+KSDb;
+ spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-3a2e985245eso45457431fa.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 13:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788983492; x=1789588292; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788984431; x=1789589231; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=c1DUJSDGvdZI4ExSQOV+UFqCR/imf9Ulkr7J4Szng+w=;
-        b=G3qp5Lr4dUGvYvcurR0YYAG/dnaVuNPa5PRNCrDb5zL5GT6OqMaPnxTG4euOBrIk7o
-         6EEsdyey2ZjkIIWnkhSEHhsSOcQhEhVC1sTZZRY8LcSs/8n84CMfQhPYu8z86jHBltNl
-         0JJ3aXNM1clEgLLS0ZQOabYPH6MM4a15lMVnqsShCOrA7MheQ4SyLMyNVA+f1qtb+r1e
-         vnqD++W+gT22JJlcv9sEiPOKFCO/bGmOVaZ0qcfnrQZIk/zD6r2StRQyjxHrB0wF6xUW
-         5kvoBl7LFnf7ncYx2b/z9TMc7VVDnkcVLK8AxcPWpp8QCUv1aK4cnxcOY9omPzmcGvpF
-         HG9g==
+        bh=iY4Iecz/ZPqzY7lvxx93aEPBHNLxXl7YhwabS0lK6jM=;
+        b=QyZ+KSDbf2iiq/8gn0I6m7PGdkenG/y5d/Z5MMiZYj5UTRdehCHh24GW4++9yOsXBo
+         8Lxbii6sMbEC3mup1adARvPTQuX0ZlPxZly6g0NnJs4uHE/C4Gx7ZMVeSbVeebq0pQQn
+         yQeyViJnCCgZHbbp1JpSnSgzSHraTKLUQYnBWFHJS4Zvl1DI0W9Pvm82qSCr61WqXA1r
+         gi8SvxnfS/k//fLKEH6YOD3GQu1UrabitedxYug49u2CeAt/nRBjdCx4abgbYyzEa0sm
+         Of+LsNr6INFHVThF34PRZD76QtXjVrTl6L+gPx+ILh24E1D1XaF8d8HuzlACd55ph9rK
+         Ewmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788983492; x=1789588292;
+        d=1e100.net; s=20251104; t=1788984431; x=1789589231;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=c1DUJSDGvdZI4ExSQOV+UFqCR/imf9Ulkr7J4Szng+w=;
-        b=T3FjUlPgkywbuXNJhBQ9ixdLMnWSsNhEI5mAtPrGev4PTsvrQWjmtTIiJja31809BC
-         piNIo4BmC1TZbaNeguFpWe0sU8bV/IaSLSb6HJR56NS/1m4xtvNti2EYFoIw9OWO7IsD
-         YqrvPA0d4Fr+VqOYHt+VP/ZU7yRE/RbOv0rGE+kxt9wiw0iIzS8FrOjYNolCXcDSJhSW
-         CCjDD2IRFJtPnsSfXbn3xTAA+6UI3D4Tnbxj//qraEC3QlYfxHQPmo0V2hrgknhs21UP
-         2TJuG2UnJo5Or+E/xV/uDB+kAzie+7bXjpGol/A4hBj0GQbkmskp7qfmWucyY3IGmWXq
-         0nCw==
-X-Gm-Message-State: AFuF++mYGtuez/UJ46v+psb15vmxfHOgJNyOhsEZWoNVW0DCNtqXPsJ4
-	xfyJnogVTtmtX1CUs0i8O6s2a2M1lqAzMjnlmwI9LB0vDGecBTNgN2xmt3vMdA==
-X-Gm-Gg: AYBFou147kSPcekgbu+6I7/LLDvHfKVYawkZtnK957RyvWLpJm8ICjtx7YQbv2T5OTD
-	S6b28zMfN5bXIXt5M0uUpLG6rXCjdm5cca1gwBcuNke8W65j6+oI+xTzYCBi36mkJPrrnSUWL1c
-	gs5FPQwFmgotTNyKmF61X9L1Ea8moVM0tH4bxtEBXt/JGHFDSLzrWHEohV1w0S5TeT3a+ybVek/
-	DponBveTp541KDGbZ5gCx+4M5uCkm/PWIlDMv7odDJ3XFSoyPwc6EHQuKAG130AMQrFt9GZ65MH
-	9hkpiKfdkX84KfEvFEUao+wSld5tacFxQgMNA7I/WOpW/eYiXcVhh4W+94EBY6eLeES6Bzha0UA
-	BGe12dnC0ZRrQZZcO/po/1FMdPCXM0Il+s/OP1bci2DpNO5NFEF9eOpIuCSEXOYNQg2lCBjBPu/
-	j9bItSqIyXHABIfQdBsoIgEMMhFkpCih1OXclRHdsqFNqqLmRAOHudRVtecduXcPRB1sSMfbCkZ
-	jfkX2pbiNu4S20y2bLj+4wm31ICLZtTg0pkdJqY8uQmS3WWX92Bx+AAn/eWw08vBrrrbQCnYOkp
-X-Received: by 2002:a05:651c:19a0:b0:3a3:3170:5420 with SMTP id 38308e7fff4ca-3a58d33c3f5mr4041991fa.3.1788983491576;
-        Wed, 09 Sep 2026 12:51:31 -0700 (PDT)
+        bh=iY4Iecz/ZPqzY7lvxx93aEPBHNLxXl7YhwabS0lK6jM=;
+        b=rfVE//ATd/i10i2mBqbEkDiC9N4WLCRecAPJYEKit7j/ANxCLBdJMfN3ygwqsTCSu7
+         Y1v/AJZvlbbi186m67hvFSIMBg+UqHa0CozjV6FQ8xtMCm1FXYip6bmMR6qSZzkmCanV
+         IiZ7iZH5YrH7X9ncf8Kz/+g+GtIcIdcjCPP03g4V5xgviLJyxALjYiulPI+DNUQPJAxh
+         rS3MWSFLPrYmf43PrL9KPcZfP54X9hvj7KyvEdKgy+P84jAmxU0eKbBqcZdfv1JyUwas
+         kxXeciUwAUl1igJU2BetKDTHTtO20OzgsQ9C0iv2OynPlUjYAhn6xVr9aJUrg6v1BHdP
+         DQ0g==
+X-Gm-Message-State: AFuF++nigDhCysmpt7nIjaXuMWLjaRgIKmKTQ7n18oTsIrHQ+ZYp97y4
+	EQUlHKl9J0qd23cs+YE31USAC1sgSuA69FvhJsP9q4aFssNB+n5cyJ81SkjedQ==
+X-Gm-Gg: AYBFou2ApVdWvx5gAgJy2V8JJ0/lB2V2vrKSFt/9WBy6gi6/0ucqSrBJANPs22DUf80
+	fhX3favZ3y2ziqq/M65MzwkfsLEooyK0OT7kfMP0zxaTsHzJRCIN8+DlwzjrAJ/fTxBNATQxmmM
+	k3rYV0/ktvTHbNJUTpprIs2cZAvUUR0f25iTy/QgbTgX9kr3ySF14iytOsvATObZQ1Yvu+0uS2D
+	QmZ4PoJ0mPPqPLs33MgUvim6loR5p3YWrpX9QiYwZFzyeJS4cVp84/BCf2ns4BP932ja4e8TCsi
+	syiaLL1TLM3Wd1l/CpWkK3kknG8OUOBXj3RwZwjls3GXGLr1evheduUiyA5SLMoJCj4B3HwwzTq
+	OqrI/3kEIJ62Ev+5CxP+Gd65R6msSccYEFs1miA1Z/t89nHmtXaAKaMHBcAwrZdgoCQ674Mpyyb
+	mZtK8vANpXXMi9qkQZXUPTCxYEd1LEfwWAWR8gQTCnN+jc/hoiAZP7Y0msT06rf4DILVBLEH7aJ
+	uJva5C5U2nU55GiV7qDjVOdYcyxfoVCt/gXI6YkMGgXABFyHYY8YdzyGppVGw7ZLBSJw0C+Mv+i
+X-Received: by 2002:a2e:a991:0:b0:3a1:ee68:5082 with SMTP id 38308e7fff4ca-3a371aa9204mr47579321fa.2.1788984431047;
+        Wed, 09 Sep 2026 13:07:11 -0700 (PDT)
 Received: from localhost.localdomain ([176.88.90.107])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a370599810sm45706921fa.24.2026.09.09.12.51.30
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a49e959082sm6248011fa.20.2026.09.09.13.07.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 12:51:31 -0700 (PDT)
+        Wed, 09 Sep 2026 13:07:10 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] loudmouth: remove recipe
-Date: Wed,  9 Sep 2026 22:51:18 +0300
-Message-ID: <20260909195118.191319-1-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] ipmiutil: fix build with OpenSSL 4.0
+Date: Wed,  9 Sep 2026 23:07:06 +0300
+Message-ID: <20260909200706.202485-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 19:51:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129897
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 20:07:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129898
 
-do_compile fails with OpenSSL 4.0:
+do_compile fails with:
 
-  lm-ssl-openssl.c:281:92: error: invalid use of incomplete typedef
-  'ASN1_IA5STRING' {aka 'struct asn1_string_st'}
-
-This break is a three line change to the ASN1_STRING accessors, but
-upstream is dead. The last release is 1.5.4 from January 2021 and the
-last commit in the mcabber fork is from June 2022, so every future
-toolchain or dependency change is ours to carry.
-
-Nothing in any layer depends on it, the only reference was the meta-oe
-packagegroup.
+  lanplus_crypt_impl.c:233:24: error: storage size of 'ctx' isn't known
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../loudmouth/loudmouth_1.5.4.bb               | 18 ------------------
- .../packagegroups/packagegroup-meta-oe.bb      |  1 -
- 2 files changed, 19 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
+ ...configure-enable-SSL11-for-OpenSSL-4.patch | 25 +++++++++++++++++++
+ .../recipes-kernel/ipmiutil/ipmiutil_3.2.2.bb |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/ipmiutil/ipmiutil/0002-configure-enable-SSL11-for-OpenSSL-4.patch
 
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
-deleted file mode 100644
-index 83a366a8df..0000000000
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
--HOMEPAGE = "http://www.loudmouth-project.org/"
--
--LICENSE = "LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
--
--DEPENDS = "glib-2.0 libcheck openssl libidn"
--
--GNOMEBASEBUILDCLASS = "autotools"
--
--inherit gnomebase gtk-doc
--
--SRC_URI = "https://github.com/mcabber/${BPN}/releases/download/${PV}/${BP}.tar.bz2"
--UPSTREAM_CHECK_URI = "https://github.com/mcabber/loudmouth/releases"
--UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
--SRC_URI[sha256sum] = "31cbc91c1fddcc5346b3373b8fb45594e9ea9cc7fe36d0595e8912c47ad94d0d"
--
--EXTRA_OECONF = "--with-ssl=openssl --with-compile-warnings=no"
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 084d5a201f..225cd95604 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -147,7 +147,6 @@ RDEPENDS:packagegroup-meta-oe-connectivity = "\
-     libuv \
-     libwebsockets \
-     linuxptp \
--    loudmouth \
-     modemmanager \
-     mosh \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obex-data-server", "", d)} \
+diff --git a/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0002-configure-enable-SSL11-for-OpenSSL-4.patch b/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0002-configure-enable-SSL11-for-OpenSSL-4.patch
+new file mode 100644
+index 0000000000..ae790f1909
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0002-configure-enable-SSL11-for-OpenSSL-4.patch
+@@ -0,0 +1,25 @@
++From: Alper Ak <alperyasinak1@gmail.com>
++Date: Wed, 9 Sep 2026 23:00:00 +0300
++Subject: [PATCH] configure: enable SSL11 for OpenSSL 4
++
++OpenSSL 4 keeps EVP_CIPHER_CTX opaque, so it cannot go on the stack.
++The heap path behind SSL11 is already there, configure just does not
++turn it on for major version 4.
++
++Upstream-Status: Submitted [https://sourceforge.net/p/ipmiutil/feature-requests/13/]
++Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- a/configure.ac
+++++ b/configure.ac
++@@ -443,7 +443,7 @@
++ 		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
++ 		sslnew=1
++ 	fi
++-	if test "$sslrel" = "3"; then
+++	if test "$sslrel" = "3" -o "$sslrel" = "4"; then
++ 		echo "Detected openssl-$sslver" 
++ 		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
++ 		sslnew=1
+diff --git a/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.2.2.bb b/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.2.2.bb
+index 7945c6f535..4bcf627672 100644
+--- a/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.2.2.bb
++++ b/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.2.2.bb
+@@ -22,6 +22,7 @@ PARALLEL_MAKE = ""
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
+            file://fix_systemd_path.patch \
+            file://0001-ihpm-Include-stdlib.h-for-malloc-free-atoi-functions.patch \
++           file://0002-configure-enable-SSL11-for-OpenSSL-4.patch \
+           "
+ SRC_URI[sha256sum] = "37f9bc8e6b18c1155e4d5ea38c87b83908b7acc7a44fbc5e3af493f26ef8b767"
+ 
 -- 
 2.43.0
 
