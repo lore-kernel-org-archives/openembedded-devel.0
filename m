@@ -1,83 +1,101 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82060C79FB6
-	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 15:51:27 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15928.1788969083458370642
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B30EC79FB7
+	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 15:55:57 +0000 (UTC)
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16048.1788969348537160267
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 08:51:23 -0700
+ Wed, 09 Sep 2026 08:55:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=u+9s/AFQ;
- spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout12.t-online.de (Postfix) with SMTP id 009DCE70F
-	for <openembedded-devel@lists.openembedded.org>; Wed,  9 Sep 2026 17:51:18 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.237.113]) by fwd86.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x4KZt-004wsa0; Wed, 9 Sep 2026 17:51:13 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EsnO0Lkl;
+ spf=pass (domain: konsulko.com, ip: 74.125.225.76, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4843cedd129so777365f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 08:55:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1788969347; x=1789574147; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ArOelljF42uDMGdHZdWbWXArOYx1Wdllx224Q3HdcGA=;
+        b=EsnO0LklYOhQMxQcAIdT11lZuDffqV3yi6wmIfoQx5DR87Tq9s3tAdKMzdf3WKZyvi
+         qTtROPPHZOmKExzUqG/QTb3hX08XPk/PMcY+PlGdH4GIDWrA4ltzZWr6UlHbtjV4EVo7
+         DlXKDxu4S4QFaJ9DW0T/NdBde5s4zqN1eWnv0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788969347; x=1789574147;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ArOelljF42uDMGdHZdWbWXArOYx1Wdllx224Q3HdcGA=;
+        b=FGTPrJ+S56yoHyZB0hP+py35HGeYPObnWjCuygdZXe9iVYr6/0hXBpt+crGEX3gHt/
+         6mMJYCSjAOL2uItj9iKi5gBMtN38M/UhS7vW7DjK//+kfYUYqaE0zEjuz/2q+0PtKelb
+         pX8MMGoAzBRHPq4wteCc1dlYuVNzcnNiKqqtfvAG+8imgBuhmMIoDBIy9Ts9/ahxzrOh
+         +s5QurG5qqSmh297o1cAE+TlVSM5vfa5oBciPgP+6VsCSb+VJbg/0q0A88JciIPetW5V
+         61VRRJVtZkULXx8WvxIf8YHPV1R+vx59sFGcuWbLF4ZSTLQsgfYGVtXhq+AHRKBJmh8i
+         wJbQ==
+X-Gm-Message-State: AFuF++mGq675meWMl/S8je8y2/0fAhxCwFRIAjYKNBMJuSQcEnJTfFWz
+	zsys4WGoGEzPi5KXWZveMrtFm+sugPo88Q6MT2R96Kx1c8q+j/tkN1vx+JGSsuDiBQLdXLePfBU
+	cWk9S
+X-Gm-Gg: AYBFou06M4/Wjz8W/Y78uOzOV7ky2P3A4YWcBmun0X/bLQeBaH0CJqYctw95yCZnzhi
+	XJzq3v6GYioN8ja6fdvna1C0HpW5lS8o/I5cddD/wwIDLP14PgMMo/fvl++Yp2AlpQvX0xQmOVq
+	RRCvXvyh+k8KDagddpD13fVRvT+23yP1DQYA1wStYTZ+d69D9sHv+hW0uoAw0zR0AaxCYDn0bea
+	HpWZZGvTHBfL/ckHxggUREG9HTH2wMMx5Z/D7xzMzGdvFPKstP4r4LHptNQx+M3DMuStgPlBvvS
+	Tp1z4NVsuL/Ee0hCoU6Ego2WmmCkMwz0XAktamGFGihMu58Go7CuTYSLqAtZFtSapfg8fQTMIqb
+	vRIJbt5WPxRRb7yLjzPSKn9N6Fwjcbh0hqHqHpEI0ZwvAZRSz7/z81BrYHf30xDOwfHjUIZYhIi
+	YBLNq1h+9EgGBw01oJN6pK4iEHzA+KMIL5Fty/CVmINRJ9VRTG7XB+swFiC37qJ8smxsR+Q4Fqk
+	P6mx7W7LINAnnvY2cFDHPcBHxYK1KTO3zz4pQVKwO4TUllfJid3EMh7+qsiGHUrJlU/v5fKUf6N
+	pSaDBWCLQBE5VYc4bSoiwngw
+X-Received: by 2002:a05:6000:4b0c:b0:482:dac8:cd0d with SMTP id ffacd0b85a97d-485aaddef7amr14089107f8f.21.1788969346541;
+        Wed, 09 Sep 2026 08:55:46 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48588135600sm39511740f8f.2.2026.09.09.08.55.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 08:55:45 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cyrus-sasl: add login PACKAGECONFIG
-Date: Wed,  9 Sep 2026 17:51:08 +0200
-Message-ID: <20260909155108.9017-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 1/2] 7zip: Upgrade 26.02 -> 26.03
+Date: Wed,  9 Sep 2026 18:55:42 +0300
+Message-ID: <20260909155543.2469658-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1788969073-DD9419C6-0B4CB341/0/0 CLEAN NORMAL
-X-TOI-MSGID: c939230d-647b-428a-860b-1adefd1a9f4b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1788969077; i=f_l_k@t-online.de;
-	bh=foxQ74CsKVVL+Z5QQEU3zPZ/VZXdlI+X2O6h3Q2Kc5s=;
-	h=From:To:Subject:Date;
-	b=u+9s/AFQMMRbrPINZnJwhvBWTUSTtarsUqIoB75TaP82gRLm0lBAOdfPvGb+WjSfr
-	 x/CqzOFA4hUUhtBX8F3oaKLwvIj4dKPVKRzOU2VeR4JuQb5+UCHik6FEJ4o5pv0JqK
-	 2CYWRy8POoq15Hvr+k/Cit+HFDOOMyoCjcjjdirLzDMM/EpF9Hu3la4xUrrta6aq/i
-	 7MUVoBh982EOeM7RBEAHZzLjnL6daURbk8SEHGwVZfHpa4fWVnruA0injxtbX0PCc0
-	 GeBnUDqYKOideeGWdLLSiRkNz2G7Bn/fMwuXqrrF8yWbijyENkyxnyO70k7ZEeazVj
-	 +cMOn1y5ZTI+g==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 15:51:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129888
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 15:55:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129889
 
-The LOGIN mechanism is disabled by default in the configure script,
-so libsasl2 clients fail with "no mechanism available" as soon as a
-peer only offers AUTH LOGIN or the client is configured to use it.
-Mail servers still commonly advertise AUTH LOGIN PLAIN and clients like
-KMail default to LOGIN for SMTP transports. Debian, Fedora and Gentoo
-all ship the plugin.
+Upgrade to release 26.03:
 
-Add an opt-in PACKAGECONFIG that builds liblogin.so, off by default to
-keep the current behaviour.
+- Improved support for Joliet ISO images and Compound archives.
+- Some bugs and vulnerabilities were fixed.
+- CVE-2026-58052 : 7-Zip failed to preserve the Mark-of-the-Web
+  when extracting a crafted archive.
 
-Tested on corei7-64 with the option enabled, liblogin.so is packaged
-into ${libdir}/sasl2 next to the other mechanism plugins.
-
-AI-Generated: Uses Claude Code (Claude Fable 5.1)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-extended/7zip/{7zip_26.02.bb => 7zip_26.03.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/7zip/{7zip_26.02.bb => 7zip_26.03.bb} (98%)
 
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b=
-/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-index 26ec8a71a1..4f15a666ac 100644
---- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-@@ -41,6 +41,7 @@ PACKAGECONFIG[opie] =3D "--with-opie,--without-opie,opi=
-e,"
- PACKAGECONFIG[des] =3D "--with-des,--without-des,,"
- PACKAGECONFIG[ldap] =3D "--with-ldap=3D${STAGING_LIBDIR} --enable-ldapdb=
-,--without-ldap --disable-ldapdb,openldap,"
- PACKAGECONFIG[ntlm] =3D "--enable-ntlm=3Dyes,--enable-ntlm=3Dno,,"
-+PACKAGECONFIG[login] =3D "--enable-login,--disable-login,,"
-=20
- CFLAGS +=3D "-fPIC"
-=20
---=20
-2.55.0
+diff --git a/meta-oe/recipes-extended/7zip/7zip_26.02.bb b/meta-oe/recipes-extended/7zip/7zip_26.03.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/7zip/7zip_26.02.bb
+rename to meta-oe/recipes-extended/7zip/7zip_26.03.bb
+index 1e29ad5d9c..ca50aed8ea 100644
+--- a/meta-oe/recipes-extended/7zip/7zip_26.02.bb
++++ b/meta-oe/recipes-extended/7zip/7zip_26.03.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
+            file://0001-Remove-treating-warning-as-errors.patch \
+            file://7z_wrapper.sh \
+            "
+-SRCREV = "f9d78aff31a5f2521ae7ddbdc97c4a8855808959"
++SRCREV = "0766b733fe3e06dd2a7f9a3cfbf2108ac73abd17"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
+ 
+-- 
+2.47.3
 
 
