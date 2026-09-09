@@ -2,191 +2,149 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD19FC79FB8
-	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 08:31:55 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6994.1788942715070674758
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBD66C79FB9
+	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 08:32:05 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6995.1788942717609594245
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 01:31:55 -0700
+ Wed, 09 Sep 2026 01:31:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ABKELcj3;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38ec1402b05so5461203a91.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 01:31:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=W77gMZvf;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-38dfe7eb825so4630807a91.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 01:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788942714; x=1789547514; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Slagt7ZkauVRnXIn4JMpfNJeCX304POspLpIpJGGAHY=;
-        b=ABKELcj3vBdTinsuI2w23aL1cpWKktxl0eS6f0tLogSieY1I8utYKcpYkQyQL37O1o
-         DL8biG7WOmghoA6Ho2PUZwoQlVsIQ5l/oZif2oOQFMJT5rnxDA5yMC0lwEoqg/twIRPB
-         wrFoC4sCjKtOYUhGUmI5zkfiXOWUuGzWfEcV8aVBWlVLWhCguuOws2omctxiF8T233OT
-         WkdUgHX944ObQSE9XfpCp3Vcck1oJO70K136GE+IQzvndonmQ762iT3Bwzhr/jTw6Wy5
-         1p0v+avlzW+dD+fW/G2Wrg8V7IxOAv+ZTGjri7MwohUF6HCfCxi9sihisrsOB/nd3U44
-         0tCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788942714; x=1789547514;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1788942717; x=1789547517; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Slagt7ZkauVRnXIn4JMpfNJeCX304POspLpIpJGGAHY=;
-        b=qpo1t5SDHkG1LpwOX2IkfDU9XiMeWHlW/juG8VEfPm4wfjOrO1m1zTmlzPRie0/06B
-         ++lc2ykRv/rjHksXzX+C9fPiiCUS5XrEC2A/seaW0bwKudEQa0AizyrW9+GVW/kNtPqV
-         9F3PTGV2gb8j6jGt8WDNX8ONhPrXOXoWt841y7bZ8Ff9XKj+JU3EO/Uv4crKhHBbxLXu
-         K6ccF69tpBqLivU4A3SKhSycNjxecreIxUU1EKx9YZ3Y435SlkRndzFTbVtkS9H5G1DR
-         Bs1v1RkK3iLbEV06dsHH/XZoO7vEZQLSBNBlxfIZrxt1nyxenPRgdh7YkY/DB+wJTCfl
-         Jt4g==
-X-Gm-Message-State: AFuF++mm5Ogmu/lLvJ3WOkf5RtKI1CtumqsQvvYubdvy+6TxXSB+mDQW
-	ye4meMYUF+1WoOMePsw2+55zgNGev0q3S/8B06/zFj0SP52IKduO/muLZ1ooUw==
-X-Gm-Gg: AYBFou3qcw2QlUzpB4o4smOwBAivhzuwOxzQDK5MrDVpjHUlOG1isGKWn275UnqlQHl
-	XFoVaE8G4dIQu9X0W2jTDXdNOEO1ur5f3muga1TYivObjP0k9qG+VCqEnVUANMY2HVRenlNG2CY
-	nJgZIDB/mwyNgg89Y58nV9pOH9kBjSQs1AMIGtq20PuBHOQTkHMPLwI1PV9KpctVotmNvawxLdL
-	xoP4HmAtiNEt22cPly7JMLXbwnz/TD3sFZ1WOr7TiDsCAJAzfdq5AGzf98MB7OVNgAoeKH1Y/no
-	cyW49UFHIcP6p5JLbTxgcvFocECaayDkRc+iPjZUmbYRLppN1JukdHSW3yvFGPi/7MLfkt1I/s3
-	WrAO0i0ly8uyuoerlnxyIawjOuk29sszYa+IFj4f7+MS8qkS4njd/ChwQ60MhOtUC0tAE8aRU+Q
-	7lKMz5WpNR+bpyFHXup2VUCrh+KZ3/FvwICYF0gAIaqCeHLA0Nr1ct0cbz7YOsqJZWqRwK1znjg
-	w1YC188q67IjSs2Xa+n5Zk=
-X-Received: by 2002:a17:90b:5807:b0:398:9be9:ab8c with SMTP id 98e67ed59e1d1-39b26229bd7mr52331970a91.17.1788942714163;
-        Wed, 09 Sep 2026 01:31:54 -0700 (PDT)
+        bh=2IqYya7Cy5WjvcmmmdhCTCegyifBW9NJy0t3o8J3/OQ=;
+        b=W77gMZvfoIrFE2jvEHZnS+zFPoA6T7B4SazSfiVk1VBPBOszRqYrd6u9z9CWTJ3q8r
+         s3ygENFhX56Q0hyX//bvs0Vrt+xiWVsxDlkP1+u0ybEMtECRnP313my9K421XhLdcudr
+         xccsHxpQM8e3gO1LrUY3lhcLK8p5EIdOKJ9KdZctwyVSN27Pav/h+tvi2dcOph66gsLO
+         MxdJYkLESnOGeHOY8jcCck1zpOJ+G3zKPa8XXTZLvuCOX5CD3kxqbkkJ1mHTNXck5rxe
+         D5p6u4/86+ja3JnuWhPefajSFpqpXKx6uCaKVZ5RXnN5UEfx+twiiV6qaVcPHYtkI+Ul
+         eUdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788942717; x=1789547517;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2IqYya7Cy5WjvcmmmdhCTCegyifBW9NJy0t3o8J3/OQ=;
+        b=mAr1iShVDPW10/wJMacC/20b0BQ9tYeJiwoXVm9yqFPzJlPp5ldVCE6SLKfZvmnf6b
+         14Mm1ESKQy9hayb1jXH9phY8SWSx7kck01ObUAS3nh2dEFQaX5qCI5f2/pY4TpjQaRZD
+         I9OsCWI9frwpQdO9JyXvgAY9yIidJ7W+PXT98M4fxki1HbhEk6uHdULWspIAJJi5gMNq
+         9e0ad/QabjJVZaWdku8K3qbK4XVjt9igcU+CBobTJXFJxFcvpnB1oARznxSNNAec1RpA
+         Z+ap6SsDSth4TeCP+c44ep4mjfMpD5hyFY2zERwJOQx4C5jZJlkAU+JdBknU+LuypX0L
+         wKpA==
+X-Gm-Message-State: AFuF++m14+AcZIGjW8mcka8Kie3WU8IqQPQ+ePZYs03NbqneTWMorNRs
+	892BZl/tK7kTOw/+TSWROd8kcGDu8mPjOqNR/xcA1zHmH4G1Ga32ihpYF1c0Wg==
+X-Gm-Gg: AYBFou2REQ1dEqgwIUw+9SbEMl0HWujx/929KxlhaZYHRigrLYl0Brjgv/WWBHfhyL/
+	M6bYmBd30Suo+H2C1j0j3+Gx5cLP+CUQfTY526n52IFti6p/Yqo47wINqsrHyAINdpKVDc484oC
+	4KkjIJt0Jt11dVVV2C2OsOyhvXxcGIyC0cpY5dfewZHrY03A75V6murCsAGq6m6HUyOMMfM4gyE
+	hO6HP3zkWq+d9eoiFEXDL46FhPZdnMxRVVUcFEaFKz9ahCFs2R0Xgjmyo8B/eqpxsHKaxqcoC2R
+	bPW/jwKp/eYk46Dv1dE/wYnRgR0BIZKqVbFgOBg8plrvg8ZzYyGGRHam1h5V/dXimK7i2bO1D/U
+	fgNBqt0xIjYp+vd1v7WESU1DBRblVpk52TeTBR2t1m/ggyHjeaNriHQi3YzKpBTc4m0kNpRujSA
+	zOi0eGsP/qt329NHP9JJtHpqF5+WGsIvgfWu4f046g7ljAnryyq5ksU1uwgYPC1VPzoc+5RycL0
+	BYRUjC80e0aXt/09J8KINw=
+X-Received: by 2002:a17:90b:4fca:b0:38e:5b59:c2ff with SMTP id 98e67ed59e1d1-39b260dd278mr50218984a91.3.1788942716838;
+        Wed, 09 Sep 2026 01:31:56 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39cfa5c1d17sm788649a91.4.2026.09.09.01.31.51
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39cfa5c1d17sm788649a91.4.2026.09.09.01.31.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 01:31:53 -0700 (PDT)
+        Wed, 09 Sep 2026 01:31:56 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 1/15] freerdp3: patch CVE-2026-40254
-Date: Wed,  9 Sep 2026 20:31:26 +1200
-Message-ID: <20260909083140.2494932-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 2/15] freerdp3: patch CVE-2026-55191
+Date: Wed,  9 Sep 2026 20:31:27 +1200
+Message-ID: <20260909083140.2494932-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260909083140.2494932-1-ankur.tyagi85@gmail.com>
+References: <20260909083140.2494932-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 08:31:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129872
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 08:32:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129873
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commits matching advisory[1] mentioned in the NVD.
-
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-40254
-
-[1]https://github.com/FreeRDP/FreeRDP/security/advisories/GHSA-3xpj-m4hx-8vmx
+https://nvd.nist.gov/vuln/detail/cve-2026-55191
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2026-40254-1.patch   | 46 +++++++++++++++++++
- .../freerdp/freerdp3/CVE-2026-40254-2.patch   | 30 ++++++++++++
- .../freerdp/freerdp3_3.24.2.bb                |  5 +-
- 3 files changed, 80 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
+ .../freerdp/freerdp3/CVE-2026-55191.patch     | 47 +++++++++++++++++++
+ .../freerdp/freerdp3_3.24.2.bb                |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-55191.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-55191.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-55191.patch
 new file mode 100644
-index 0000000000..b758877882
+index 0000000000..0881d671bf
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
-@@ -0,0 +1,46 @@
-+From 11b850f6181cb607c7fa4ac7a4fa09d203e0aaf6 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-55191.patch
+@@ -0,0 +1,47 @@
++From 4234cf72c4e9095c163405c4b5c5d41dd4775f81 Mon Sep 17 00:00:00 2001
 +From: Armin Novak <armin.novak@thincast.com>
-+Date: Fri, 10 Apr 2026 08:45:55 +0200
-+Subject: [PATCH] [channels,drive] refine bounds checks
++Date: Thu, 11 Jun 2026 08:10:58 +0200
++Subject: [PATCH] [codec,h264] fix buffer bounds checks
 +
-+* better logging, fix wrong path component printed
-+* ensure path does not end with path/..
++(cherry picked from commit 97f40b9e766af375f4e41ac6a3f4397d708d249c)
 +
-+(cherry picked from commit f502dbb8462597fbe5b97f890359dfdecb525bf7)
-+
-+CVE: CVE-2026-40254
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/f502dbb8462597fbe5b97f890359dfdecb525bf7]
++CVE: CVE-2026-55191
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/97f40b9e766af375f4e41ac6a3f4397d708d249c]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ channels/drive/client/drive_file.c | 9 +++++----
-+ 1 file changed, 5 insertions(+), 4 deletions(-)
++ libfreerdp/codec/h264.c | 16 +++++++++++++---
++ 1 file changed, 13 insertions(+), 3 deletions(-)
 +
-+diff --git a/channels/drive/client/drive_file.c b/channels/drive/client/drive_file.c
-+index 8ea7552a7..3d87d8e6b 100644
-+--- a/channels/drive/client/drive_file.c
-++++ b/channels/drive/client/drive_file.c
-+@@ -113,6 +113,8 @@ static BOOL contains_dotdot(const WCHAR* path, size_t base_length, size_t path_l
-+ 				if ((tst[2] == '/') || (tst[2] == '\\'))
-+ 					return TRUE;
-+ 			}
-++			else
-++				return TRUE;
-+ 		}
-+ 		tst += 2;
-+ 	} while (TRUE);
-+@@ -147,11 +149,10 @@ static WCHAR* drive_file_combine_fullpath(const WCHAR* base_path, const WCHAR* p
-+ 		/* Ensure the path does not contain sequences like '..' */
-+ 		if (contains_dotdot(&fullpath[base_path_length], base_path_length, PathWCharLength))
++diff --git a/libfreerdp/codec/h264.c b/libfreerdp/codec/h264.c
++index 3b837601c..ce7776b40 100644
++--- a/libfreerdp/codec/h264.c
+++++ b/libfreerdp/codec/h264.c
++@@ -495,14 +495,24 @@ static BOOL avc444_ensure_buffer(H264_CONTEXT* h264, DWORD nDstHeight)
++ 	if (pad != 0)
++ 		padDstHeight += 16 - pad;
++ 
++-	if ((piMainStride[0] != piDstStride[0]) ||
++-	    (piDstSize[0] != 1ull * piMainStride[0] * padDstHeight))
+++	if ((piMainStride[0] == 0) || (padDstHeight == 0))
+++		return FALSE;
+++
+++	const uint64_t dstsize = 1ull * piMainStride[0] * padDstHeight;
+++	if (dstsize > UINT32_MAX)
+++		return FALSE;
+++
+++	if ((piMainStride[0] != piDstStride[0]) || (piDstSize[0] != dstsize))
++ 	{
++ 		for (UINT32 x = 0; x < 3; x++)
 + 		{
-+-			char abuffer[MAX_PATH] = WINPR_C_ARRAY_INIT;
-+-			(void)ConvertWCharToUtf8(&fullpath[base_path_length], abuffer, ARRAYSIZE(abuffer));
-+-
-++			char* abuffer = ConvertWCharToUtf8Alloc(&fullpath[base_path_length], nullptr);
-+ 			WLog_WARN(TAG, "[rdpdr] received invalid file path '%s' from server, aborting!",
-+-			          &abuffer[base_path_length]);
-++			          abuffer);
-++			free(abuffer);
-+ 			goto fail;
-+ 		}
-+ 	}
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
-new file mode 100644
-index 0000000000..ac727b5235
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
-@@ -0,0 +1,30 @@
-+From 3b1f9e5690d60c6a070e40587c5b23e56b172684 Mon Sep 17 00:00:00 2001
-+From: Sayed Kaif <metsw24@gmail.com>
-+Date: Sun, 28 Jun 2026 16:55:01 +0530
-+Subject: [PATCH] [channels,drive] reject trailing '..' in contains_dotdot
-+
-+The trailing '..' check never fired because PathLength counts the NUL terminator, leaving path_length one WCHAR longer than the string; treat '\0' as a component terminator so a final '..' is rejected like '../'.
-+
-+(cherry picked from commit 17543c9ae0a72a5413e19741cf0203ab519fb3fd)
-+
-+CVE: CVE-2026-40254
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/17543c9ae0a72a5413e19741cf0203ab519fb3fd]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ channels/drive/client/drive_file.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/channels/drive/client/drive_file.c b/channels/drive/client/drive_file.c
-+index 3d87d8e6b..fa93946e2 100644
-+--- a/channels/drive/client/drive_file.c
-++++ b/channels/drive/client/drive_file.c
-+@@ -110,7 +110,7 @@ static BOOL contains_dotdot(const WCHAR* path, size_t base_length, size_t path_l
-+ 		{
-+ 			if (tst + 2 < path + path_length)
-+ 			{
-+-				if ((tst[2] == '/') || (tst[2] == '\\'))
-++				if ((tst[2] == '/') || (tst[2] == '\\') || (tst[2] == '\0'))
-+ 					return TRUE;
-+ 			}
-+ 			else
++ 			piDstStride[x] = piMainStride[0];
++-			piDstSize[x] = piDstStride[x] * padDstHeight;
++ 
+++			const uint64_t dstride = 1ull * piDstStride[x] * padDstHeight;
+++			if (dstride > UINT32_MAX)
+++				return FALSE;
+++
+++			piDstSize[x] = WINPR_ASSERTING_INT_CAST(UINT32, dstride);
++ 			if (piDstSize[x] == 0)
++ 				return FALSE;
++ 
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
-index a4561495cf..7164a81e9d 100644
+index 7164a81e9d..e014196f18 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
-@@ -10,7 +10,10 @@ inherit pkgconfig cmake ptest
- 
- SRCREV = "3028b706908f81767d9b9c744a90778c28f57d61"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
--           file://run-ptest"
-+           file://run-ptest \
-+           file://CVE-2026-40254-1.patch \
-+           file://CVE-2026-40254-2.patch \
-+"
+@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${
+            file://run-ptest \
+            file://CVE-2026-40254-1.patch \
+            file://CVE-2026-40254-2.patch \
++           file://CVE-2026-55191.patch \
+ "
  
  
- CVE_PRODUCT = "freerdp"
 
