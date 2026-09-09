@@ -1,239 +1,192 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02953C79FAE
-	for <webhook@archiver.kernel.org>; Tue,  8 Sep 2026 17:14:09 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.488.1788887640683666722
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD19FC79FB8
+	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 08:31:55 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6994.1788942715070674758
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Sep 2026 10:14:00 -0700
+ Wed, 09 Sep 2026 01:31:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=hRUbHM58;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2d032846c95so56666915ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 10:14:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ABKELcj3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38ec1402b05so5461203a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 01:31:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788887640; x=1789492440; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9kRWP7NZ80J9znu7U7vmMQ9AYSB9q3tzXfXmuXYMasY=;
-        b=hRUbHM58rFypLCNGt+J/TsSbKHNfN/r+tqEEAh0+bk2HC9l7gATkXo2wqMBE36lyWK
-         dhhgpZpKfpYbNuOU8LgBZ2nc9LCu5DQxyPEd4HuM0aF8Jgl7pCkmTeutIwcENbKVqsqs
-         CCQF56EPRFy6WLG4WuI6Mm4/hmIa3VLEw/Q7zwvAa8QSHwB+5k7z0BIKpMk2s+iGFOsc
-         eRsKy+r624xnJRyB7/74mztqRuwuAc1A1R0zrn+C06XJGu9uamOFBDkENuJLNvlEzGmZ
-         cnJMsJYPHnR9/Fg8DpUh77rVMzY2Rezcj6X0vCY8jc4D0LY9APNcZiJZXwEdorXGhSKj
-         LKow==
+        d=gmail.com; s=20251104; t=1788942714; x=1789547514; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Slagt7ZkauVRnXIn4JMpfNJeCX304POspLpIpJGGAHY=;
+        b=ABKELcj3vBdTinsuI2w23aL1cpWKktxl0eS6f0tLogSieY1I8utYKcpYkQyQL37O1o
+         DL8biG7WOmghoA6Ho2PUZwoQlVsIQ5l/oZif2oOQFMJT5rnxDA5yMC0lwEoqg/twIRPB
+         wrFoC4sCjKtOYUhGUmI5zkfiXOWUuGzWfEcV8aVBWlVLWhCguuOws2omctxiF8T233OT
+         WkdUgHX944ObQSE9XfpCp3Vcck1oJO70K136GE+IQzvndonmQ762iT3Bwzhr/jTw6Wy5
+         1p0v+avlzW+dD+fW/G2Wrg8V7IxOAv+ZTGjri7MwohUF6HCfCxi9sihisrsOB/nd3U44
+         0tCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788887640; x=1789492440;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9kRWP7NZ80J9znu7U7vmMQ9AYSB9q3tzXfXmuXYMasY=;
-        b=NfNksBjwy7xbYpJ5CiKB2a1hGLTpU00GbkBhW7XG55EoUxGitAaJish7YfA1kH0b7X
-         bIp+8Z94yOnbGx/4vyXbciEl/JZvasfiZ3rcDQX2lEyQ1noRh9gUwRar30CQNeKM0S7w
-         BfDZyF0AYNfSSH3qeJiDNeHOnQA8YStWAZVkVtFCIhg1FULdyU9jtJ7CaGY+qcQ2ct41
-         jLbS82cXFUeNN92OmsPuKrTmFRJUy7ymqZ9WkKSb5inrUgVwiiJE5A1Fq6HnmTzkTbrh
-         fEmlsGXEv21zl9KTuDzFjl3D+82ZUFiu7D+Dggb9+UPXZx98fiYe2sh0esulDlYrNcdF
-         /F0g==
-X-Gm-Message-State: AFuF++kvOBkn67dpTmnLefmRe8sKBJXRx7U67ab/ofIWTIzxJnmvQ+6y
-	gAAwiHWASwU3+ZUCAc6hH9x8RN6RijuMCQyNZaZQ/mGAYlTund7+5ueLCtY/6w==
-X-Gm-Gg: AYBFou3MBfXmopw4QT12OHFsiYhSYowCZQ3+GSfntgXqa2udvln7C5kT5xHLs+I32jU
-	5rdt4SQ1GcEIIA5zOBJhGL6GtTAeg4RJUXR7sUk8Iy+duLRPBdkYHirU9rnPDf87O1EgJ/vuQF+
-	8moNzCviBCWiZ87+sLToWhr3PqzW8NUAey3ahl3MSKpZs4C5tKNsrsmPDz1AW5O8ANyqSLRow26
-	kT89vRD797QdR8T/XQZ8xWyI4bXfBctIQgIgfvT539AQe+NYwMhuQN0jk2rSZIXJbsDI6JsORj7
-	/xdWykMCr1xiIxFzs8xCwldYzVjZmZGLponv8M72uLaUiub62AvrSoFgZ0MG+Vb8MjTI/Tea19a
-	hJCAvaEDrk/ixkPCkfQdrDDNvhb9G1//+3zDnqACOB0ICPhQgamzunW+g+Yqjvf1eXu6p0p3mJ2
-	ekFGJbtHXwk2ICUNABAUO1W/Qqp4p441qMxc2h+DOaLee3fHRWAmBbJbIiIp821oBsI//m5c4u2
-	cg4qesILNw4+g38CLzfa99mW/fqoPoneCv8Yzt0azBnM+XxjcgdrNaOPkWe8/g17uGmsawSwL9s
-	wzrhSNj5Bl+Ej9US59oJkzQekDTGkCWifIFQp4l6X7q9tAWsaa6DOgZjzaYYSqje8jrBj91NKd1
-	6dS3vdShg+TLvGcTEYwn+OYBQPOaaAax2MtOVjMCI5iUVmQ==
-X-Received: by 2002:a17:90b:4c51:b0:38e:57a3:f218 with SMTP id 98e67ed59e1d1-39b26204e5bmr42095203a91.13.1788887639890;
-        Tue, 08 Sep 2026 10:13:59 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm39566297c88.12.2026.09.08.10.13.58
+        d=1e100.net; s=20251104; t=1788942714; x=1789547514;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Slagt7ZkauVRnXIn4JMpfNJeCX304POspLpIpJGGAHY=;
+        b=qpo1t5SDHkG1LpwOX2IkfDU9XiMeWHlW/juG8VEfPm4wfjOrO1m1zTmlzPRie0/06B
+         ++lc2ykRv/rjHksXzX+C9fPiiCUS5XrEC2A/seaW0bwKudEQa0AizyrW9+GVW/kNtPqV
+         9F3PTGV2gb8j6jGt8WDNX8ONhPrXOXoWt841y7bZ8Ff9XKj+JU3EO/Uv4crKhHBbxLXu
+         K6ccF69tpBqLivU4A3SKhSycNjxecreIxUU1EKx9YZ3Y435SlkRndzFTbVtkS9H5G1DR
+         Bs1v1RkK3iLbEV06dsHH/XZoO7vEZQLSBNBlxfIZrxt1nyxenPRgdh7YkY/DB+wJTCfl
+         Jt4g==
+X-Gm-Message-State: AFuF++mm5Ogmu/lLvJ3WOkf5RtKI1CtumqsQvvYubdvy+6TxXSB+mDQW
+	ye4meMYUF+1WoOMePsw2+55zgNGev0q3S/8B06/zFj0SP52IKduO/muLZ1ooUw==
+X-Gm-Gg: AYBFou3qcw2QlUzpB4o4smOwBAivhzuwOxzQDK5MrDVpjHUlOG1isGKWn275UnqlQHl
+	XFoVaE8G4dIQu9X0W2jTDXdNOEO1ur5f3muga1TYivObjP0k9qG+VCqEnVUANMY2HVRenlNG2CY
+	nJgZIDB/mwyNgg89Y58nV9pOH9kBjSQs1AMIGtq20PuBHOQTkHMPLwI1PV9KpctVotmNvawxLdL
+	xoP4HmAtiNEt22cPly7JMLXbwnz/TD3sFZ1WOr7TiDsCAJAzfdq5AGzf98MB7OVNgAoeKH1Y/no
+	cyW49UFHIcP6p5JLbTxgcvFocECaayDkRc+iPjZUmbYRLppN1JukdHSW3yvFGPi/7MLfkt1I/s3
+	WrAO0i0ly8uyuoerlnxyIawjOuk29sszYa+IFj4f7+MS8qkS4njd/ChwQ60MhOtUC0tAE8aRU+Q
+	7lKMz5WpNR+bpyFHXup2VUCrh+KZ3/FvwICYF0gAIaqCeHLA0Nr1ct0cbz7YOsqJZWqRwK1znjg
+	w1YC188q67IjSs2Xa+n5Zk=
+X-Received: by 2002:a17:90b:5807:b0:398:9be9:ab8c with SMTP id 98e67ed59e1d1-39b26229bd7mr52331970a91.17.1788942714163;
+        Wed, 09 Sep 2026 01:31:54 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39cfa5c1d17sm788649a91.4.2026.09.09.01.31.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 10:13:59 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Wed, 09 Sep 2026 01:31:53 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 3/6] libfaketime: Upgrade to 0.9.13
-Date: Tue,  8 Sep 2026 10:13:50 -0700
-Message-ID: <20260908171353.701307-3-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260908171353.701307-1-khem.raj@oss.qualcomm.com>
-References: <20260908171353.701307-1-khem.raj@oss.qualcomm.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 1/15] freerdp3: patch CVE-2026-40254
+Date: Wed,  9 Sep 2026 20:31:26 +1200
+Message-ID: <20260909083140.2494932-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2026 17:14:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129868
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 08:31:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129872
 
-Release notes:
-https://github.com/wolfcw/libfaketime/blob/v0.9.13/NEWS
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Drop 0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch, it is
-merged upstream via PR #525.
+Backport commits matching advisory[1] mentioned in the NVD.
 
-Add a patch to fix the build with clang 23, which added
--Wunused-but-set-global and turns the -Werror in src/Makefile into:
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-40254
 
-  libfaketime.c:340:23: error: variable 'real_lstat' set but not used
-    [-Werror,-Wunused-but-set-global]
+[1]https://github.com/FreeRDP/FreeRDP/security/advisories/GHSA-3xpj-m4hx-8vmx
 
-ftpl_init() resolves every real_* pointer up front by design, so the
-ones whose wrappers are not compiled on Linux/glibc end up written and
-never read. Annotate those with __attribute__((unused)) rather than
-adding -Wno-error=unused-but-set-global to CFLAGS, since the Makefile
-has no flag-probing and older clang rejects the unknown warning group
-under the same -Werror.
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...qualifiers-to-fix-build-with-ISO-C23.patch | 34 ----------
- ...-write-only-real_-pointers-as-unused.patch | 68 +++++++++++++++++++
- ...ketime_0.9.12.bb => libfaketime_0.9.13.bb} |  4 +-
- 3 files changed, 70 insertions(+), 36 deletions(-)
- delete mode 100644 meta-oe/recipes-test/libfaketime/libfaketime/0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch
- create mode 100644 meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
- rename meta-oe/recipes-test/libfaketime/{libfaketime_0.9.12.bb => libfaketime_0.9.13.bb} (85%)
+ .../freerdp/freerdp3/CVE-2026-40254-1.patch   | 46 +++++++++++++++++++
+ .../freerdp/freerdp3/CVE-2026-40254-2.patch   | 30 ++++++++++++
+ .../freerdp/freerdp3_3.24.2.bb                |  5 +-
+ 3 files changed, 80 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
 
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch b/meta-oe/recipes-test/libfaketime/libfaketime/0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch
-deleted file mode 100644
-index 1696e7146e..0000000000
---- a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From dbe865dfdba0145d993d70b7fd4ec88b2f47554b Mon Sep 17 00:00:00 2001
--From: Tomas Korbar <tkorbar@redhat.com>
--Date: Mon, 15 Dec 2025 11:03:21 +0100
--Subject: [PATCH] Add const qualifiers to fix build with ISO C23
--
--Fix https://github.com/wolfcw/libfaketime/issues/524
--
--Upstream-Status: Backport [https://github.com/wolfcw/libfaketime/pull/525]
-----
-- src/libfaketime.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/libfaketime.c b/src/libfaketime.c
--index ef1dca9..02839c8 100644
----- a/src/libfaketime.c
--+++ b/src/libfaketime.c
--@@ -2666,7 +2666,7 @@ int timespec_get(struct timespec *ts, int base)
-- static void parse_ft_string(const char *user_faked_time)
-- {
--   struct tm user_faked_time_tm;
---  char * tmp_time_fmt;
--+  const char * tmp_time_fmt;
--   char * nstime_str;
--
--   if (!strncmp(user_faked_time, user_faked_time_saved, BUFFERLEN))
--@@ -3338,7 +3338,7 @@ static void prepare_config_contents(char *contents)
-- bool str_array_contains(const char *haystack, const char *needle)
-- {
--   size_t needle_len = strlen(needle);
---  char *pos = strstr(haystack, needle);
--+  const char *pos = strstr(haystack, needle);
--   while (pos) {
--     if (pos == haystack || *(pos - 1) == ',') {
--       char nextc = *(pos + needle_len);
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch b/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
 new file mode 100644
-index 0000000000..c7a854a196
+index 0000000000..b758877882
 --- /dev/null
-+++ b/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
-@@ -0,0 +1,68 @@
-+From d0fd7b4be89feb6a8809216b0dc1d84299bbad96 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Mon, 7 Sep 2026 19:27:57 -0700
-+Subject: [PATCH] Mark write-only real_* pointers as unused
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-1.patch
+@@ -0,0 +1,46 @@
++From 11b850f6181cb607c7fa4ac7a4fa09d203e0aaf6 Mon Sep 17 00:00:00 2001
++From: Armin Novak <armin.novak@thincast.com>
++Date: Fri, 10 Apr 2026 08:45:55 +0200
++Subject: [PATCH] [channels,drive] refine bounds checks
 +
-+clang 23 added -Wunused-but-set-global, which together with the -Werror
-+in src/Makefile breaks the build:
++* better logging, fix wrong path component printed
++* ensure path does not end with path/..
 +
-+  libfaketime.c:340:23: error: variable 'real_lstat' set but not used
-+    [-Werror,-Wunused-but-set-global]
++(cherry picked from commit f502dbb8462597fbe5b97f890359dfdecb525bf7)
 +
-+ftpl_init() deliberately resolves every real_* pointer up front ('Look
-+up all real_* functions. NULL will mark missing ones.'), but several of
-+them are only consumed on other platforms or under build options that
-+are off by default, so on Linux/glibc they are written and never read.
++CVE: CVE-2026-40254
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/f502dbb8462597fbe5b97f890359dfdecb525bf7]
 +
-+Annotate exactly those with __attribute__((unused)). This is understood
-+by every gcc and clang that can build libfaketime, unlike a
-+-Wno-error=unused-but-set-global flag, which older compilers reject.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/libfaketime.c | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
++ channels/drive/client/drive_file.c | 9 +++++----
++ 1 file changed, 5 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/libfaketime.c b/src/libfaketime.c
-+index e674883..2addaab 100644
-+--- a/src/libfaketime.c
-++++ b/src/libfaketime.c
-+@@ -337,26 +337,26 @@ static __thread bool dont_fake = false;
-+ /* pointers to real (not faked) functions */
-+ static int          (*real_stat)            (const char *, struct stat *);
-+ static int          (*real_fstat)           (int, struct stat *);
-+-static int          (*real_lstat)           (const char *, struct stat *);
-++static int          (*real_lstat)           (const char *, struct stat *) __attribute__((unused));
-+ #ifndef __ANDROID__
-+ static int          (*real_xstat)           (int, const char *, struct stat *);
-+ static int          (*real_fxstat)          (int, int, struct stat *);
-+-static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int);
-+-static int          (*real_lxstat)          (int, const char *, struct stat *);
-++static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int) __attribute__((unused));
-++static int          (*real_lxstat)          (int, const char *, struct stat *) __attribute__((unused));
-+ #endif
-+ #if !defined(__APPLE__) || !__DARWIN_ONLY_64_BIT_INO_T
-+ #ifndef __ANDROID__
-+-static int          (*real_stat64)          (const char *, struct stat64 *);
-+-static int          (*real_xstat64)         (int, const char *, struct stat64 *);
-+-static int          (*real_fxstat64)        (int, int , struct stat64 *);
-+-static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int);
-+-static int          (*real_lxstat64)        (int, const char *, struct stat64 *);
-++static int          (*real_stat64)          (const char *, struct stat64 *) __attribute__((unused));
-++static int          (*real_xstat64)         (int, const char *, struct stat64 *) __attribute__((unused));
-++static int          (*real_fxstat64)        (int, int , struct stat64 *) __attribute__((unused));
-++static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int) __attribute__((unused));
-++static int          (*real_lxstat64)        (int, const char *, struct stat64 *) __attribute__((unused));
-+ #endif
-+ #endif
-+ #ifdef STATX_TYPE
-+-static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf);
-++static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf) __attribute__((unused));
-+ #endif
-+-static time_t       (*real_time)            (time_t *);
-++static time_t       (*real_time)            (time_t *) __attribute__((unused));
-+ #ifndef __ANDROID__
-+ static int          (*real_ftime)           (struct timeb *);
-+ #endif
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.12.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
-similarity index 85%
-rename from meta-oe/recipes-test/libfaketime/libfaketime_0.9.12.bb
-rename to meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
-index a434584c47..22c908f335 100644
---- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.12.bb
-+++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
-@@ -3,10 +3,10 @@ SECTION = "libs"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++diff --git a/channels/drive/client/drive_file.c b/channels/drive/client/drive_file.c
++index 8ea7552a7..3d87d8e6b 100644
++--- a/channels/drive/client/drive_file.c
+++++ b/channels/drive/client/drive_file.c
++@@ -113,6 +113,8 @@ static BOOL contains_dotdot(const WCHAR* path, size_t base_length, size_t path_l
++ 				if ((tst[2] == '/') || (tst[2] == '\\'))
++ 					return TRUE;
++ 			}
+++			else
+++				return TRUE;
++ 		}
++ 		tst += 2;
++ 	} while (TRUE);
++@@ -147,11 +149,10 @@ static WCHAR* drive_file_combine_fullpath(const WCHAR* base_path, const WCHAR* p
++ 		/* Ensure the path does not contain sequences like '..' */
++ 		if (contains_dotdot(&fullpath[base_path_length], base_path_length, PathWCharLength))
++ 		{
++-			char abuffer[MAX_PATH] = WINPR_C_ARRAY_INIT;
++-			(void)ConvertWCharToUtf8(&fullpath[base_path_length], abuffer, ARRAYSIZE(abuffer));
++-
+++			char* abuffer = ConvertWCharToUtf8Alloc(&fullpath[base_path_length], nullptr);
++ 			WLog_WARN(TAG, "[rdpdr] received invalid file path '%s' from server, aborting!",
++-			          &abuffer[base_path_length]);
+++			          abuffer);
+++			free(abuffer);
++ 			goto fail;
++ 		}
++ 	}
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
+new file mode 100644
+index 0000000000..ac727b5235
+--- /dev/null
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-40254-2.patch
+@@ -0,0 +1,30 @@
++From 3b1f9e5690d60c6a070e40587c5b23e56b172684 Mon Sep 17 00:00:00 2001
++From: Sayed Kaif <metsw24@gmail.com>
++Date: Sun, 28 Jun 2026 16:55:01 +0530
++Subject: [PATCH] [channels,drive] reject trailing '..' in contains_dotdot
++
++The trailing '..' check never fired because PathLength counts the NUL terminator, leaving path_length one WCHAR longer than the string; treat '\0' as a component terminator so a final '..' is rejected like '../'.
++
++(cherry picked from commit 17543c9ae0a72a5413e19741cf0203ab519fb3fd)
++
++CVE: CVE-2026-40254
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/17543c9ae0a72a5413e19741cf0203ab519fb3fd]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ channels/drive/client/drive_file.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/channels/drive/client/drive_file.c b/channels/drive/client/drive_file.c
++index 3d87d8e6b..fa93946e2 100644
++--- a/channels/drive/client/drive_file.c
+++++ b/channels/drive/client/drive_file.c
++@@ -110,7 +110,7 @@ static BOOL contains_dotdot(const WCHAR* path, size_t base_length, size_t path_l
++ 		{
++ 			if (tst + 2 < path + path_length)
++ 			{
++-				if ((tst[2] == '/') || (tst[2] == '\\'))
+++				if ((tst[2] == '/') || (tst[2] == '\\') || (tst[2] == '\0'))
++ 					return TRUE;
++ 			}
++ 			else
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
+index a4561495cf..7164a81e9d 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
+@@ -10,7 +10,10 @@ inherit pkgconfig cmake ptest
  
--SRCREV = "3ccdd344aadf1e317156fa5fb7c881f2c4404778"
-+SRCREV = "86b37fde2fed7336ea2d0c17928e3015a55d9b4a"
+ SRCREV = "3028b706908f81767d9b9c744a90778c28f57d61"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
+-           file://run-ptest"
++           file://run-ptest \
++           file://CVE-2026-40254-1.patch \
++           file://CVE-2026-40254-2.patch \
++"
  
- SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;tag=v${PV};protocol=https \
--           file://0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch \
-+           file://0001-Mark-write-only-real_-pointers-as-unused.patch \
- "
  
- CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+ CVE_PRODUCT = "freerdp"
 
