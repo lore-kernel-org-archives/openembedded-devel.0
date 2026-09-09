@@ -2,109 +2,127 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25825C79FB7
-	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 19:41:40 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21196.1788982899229592379
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EEECC79FB7
+	for <webhook@archiver.kernel.org>; Wed,  9 Sep 2026 19:51:40 +0000 (UTC)
+Received: from mail-lr2-f12.google.com (mail-lr2-f12.google.com [74.125.230.76])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21416.1788983494070432139
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 12:41:39 -0700
+ Wed, 09 Sep 2026 12:51:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Bo0ODqS3;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b5e907853eso104204e87.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 12:41:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=G3qp5Lr4;
+ spf=pass (domain: gmail.com, ip: 74.125.230.76, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a3156692c6so5621811fa.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 12:51:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788982897; x=1789587697; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1788983492; x=1789588292; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zzcxqS0LDH434sn1tw6e8YxTF+2vTckX90p1aHcLdPM=;
-        b=Bo0ODqS3Nouj8C/s9F/NCJ3ZPmpdB9CUZcfNRK2EMl5uzAKOBs3yHLeGFM9DWgjMJb
-         uuQusH/JahP7U/yqFSYTl5ZKd1E275HMEY9y8RiMsf5NpViEKZEV+Yh4MZugZv16fk8v
-         nCP70guxmS3J7TVjolyMa70t2ablBtRjGNo0d3erutXdd52vSKt/rpmE5Qsedv3d+AAa
-         8TeowugROVGNcZW9j1ax6NjZBskI8kyfPR0m/0pe/pbWQv+b77JZ6n7fBse61CW0GpPR
-         NNpAAaV4DtBToXkBwY8HZepMorjKemJIpR9jnN+FfNMbWBB5BZrFxVHaZ1CQj7YTSQaG
-         DrBA==
+        bh=c1DUJSDGvdZI4ExSQOV+UFqCR/imf9Ulkr7J4Szng+w=;
+        b=G3qp5Lr4dUGvYvcurR0YYAG/dnaVuNPa5PRNCrDb5zL5GT6OqMaPnxTG4euOBrIk7o
+         6EEsdyey2ZjkIIWnkhSEHhsSOcQhEhVC1sTZZRY8LcSs/8n84CMfQhPYu8z86jHBltNl
+         0JJ3aXNM1clEgLLS0ZQOabYPH6MM4a15lMVnqsShCOrA7MheQ4SyLMyNVA+f1qtb+r1e
+         vnqD++W+gT22JJlcv9sEiPOKFCO/bGmOVaZ0qcfnrQZIk/zD6r2StRQyjxHrB0wF6xUW
+         5kvoBl7LFnf7ncYx2b/z9TMc7VVDnkcVLK8AxcPWpp8QCUv1aK4cnxcOY9omPzmcGvpF
+         HG9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788982897; x=1789587697;
+        d=1e100.net; s=20251104; t=1788983492; x=1789588292;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zzcxqS0LDH434sn1tw6e8YxTF+2vTckX90p1aHcLdPM=;
-        b=CO4dRTt1F3OF2au2JgRnatSrPzF/5paYo6dQNQqZ6JnLlg2BP7nfOQ+uISTZ0LCN7z
-         UzGhTAV8Pgdv5aQmA+QUeDqdhbKdyVdG/+YH8D33Tj9xxGuZwaUsFja2mJLZQfFZm/iV
-         MZlCUr8y0dp+I0Pwgr1/Qb1DIjWA+Mv9zblnN4+fuZlPz7A+vEiNoWwtoiEouaDQb31+
-         iYu2p8OybIreJQOqxR8haLpflRspbWYZtRmcbTlVnf0s9llJTuCh957Icb9IMUsA+hvL
-         Qf1BdksjhvR7kYh2cSIXu1RDmjyP/SAvOQz6QNi8BHP1VvSDHTPL+DrbIH7QhLNNZI+o
-         HbRQ==
-X-Gm-Message-State: AFuF++k+2W1p/MM/vFPIPorngzR9UahhvpQ4MH44Fl9pr4pWSxbdPDCJ
-	t4+D+CZ/6AiZXS/hjrLz/EBvgNcjgoB+mdKr6CtfBkzcvuoUdzlln5SR0jU/BQ==
-X-Gm-Gg: AYBFou2d5e2Wv9xg9OXCRQaq/oC2JNcXwa5kQK9UcZynLspSt1P2/m+mUHO3xBmsTwx
-	O7zhp7uacQWBEwFJwtqwGhnl/Vd1v6i6Xk08boao4L/QicdiWt5tUdkrFmJj1IZ4PjIR8MDhhQz
-	BaUO8ctZ3h8fO+0r/ybaLXAiLhpZ8GA2K482ykdiYPqEwdyH/DRY5RbT3YQOGkKpc4lqOEeJOAk
-	0E5mtjWZmVZ6l/Mns52EdKiG/WXDx08apd4AGmNbtVItWZ1AlOsdB3m+vXlXeGYSSjvIp/w3MXM
-	oIGf/EB2T2PELn1ZzCaVnwMezRp12iwX6mr9E/prybe0j+L5rkvti3/o86W1nxvs1HPn20J6TRJ
-	Dea5sNCBldVjJuyPQ48HDj/cbVepCdbsoXlgx0/ktJ/1o2cgEpAKiwqm848bRjBJMwS3pR8WMXj
-	p+Z5KJexZ3sLg/ty/wUiDlpNDC+rgjwFATM+11vK1KHRgHCDQZE3o1T9DRlMQVzzKXDGpiUZVoz
-	HriP83IC2TtU4rBpTJLRs0yGykPbfTlTnq2QQTMRy06Vy60N3HyWFXOQFXXGKDdoZ3YW1VSX9P0
-	qFZDsaE3anM=
-X-Received: by 2002:a05:6512:2308:b0:5b6:1a7c:59cf with SMTP id 2adb3069b0e04-5b61a7c5ae7mr6568860e87.41.1788982896751;
-        Wed, 09 Sep 2026 12:41:36 -0700 (PDT)
+        bh=c1DUJSDGvdZI4ExSQOV+UFqCR/imf9Ulkr7J4Szng+w=;
+        b=T3FjUlPgkywbuXNJhBQ9ixdLMnWSsNhEI5mAtPrGev4PTsvrQWjmtTIiJja31809BC
+         piNIo4BmC1TZbaNeguFpWe0sU8bV/IaSLSb6HJR56NS/1m4xtvNti2EYFoIw9OWO7IsD
+         YqrvPA0d4Fr+VqOYHt+VP/ZU7yRE/RbOv0rGE+kxt9wiw0iIzS8FrOjYNolCXcDSJhSW
+         CCjDD2IRFJtPnsSfXbn3xTAA+6UI3D4Tnbxj//qraEC3QlYfxHQPmo0V2hrgknhs21UP
+         2TJuG2UnJo5Or+E/xV/uDB+kAzie+7bXjpGol/A4hBj0GQbkmskp7qfmWucyY3IGmWXq
+         0nCw==
+X-Gm-Message-State: AFuF++mYGtuez/UJ46v+psb15vmxfHOgJNyOhsEZWoNVW0DCNtqXPsJ4
+	xfyJnogVTtmtX1CUs0i8O6s2a2M1lqAzMjnlmwI9LB0vDGecBTNgN2xmt3vMdA==
+X-Gm-Gg: AYBFou147kSPcekgbu+6I7/LLDvHfKVYawkZtnK957RyvWLpJm8ICjtx7YQbv2T5OTD
+	S6b28zMfN5bXIXt5M0uUpLG6rXCjdm5cca1gwBcuNke8W65j6+oI+xTzYCBi36mkJPrrnSUWL1c
+	gs5FPQwFmgotTNyKmF61X9L1Ea8moVM0tH4bxtEBXt/JGHFDSLzrWHEohV1w0S5TeT3a+ybVek/
+	DponBveTp541KDGbZ5gCx+4M5uCkm/PWIlDMv7odDJ3XFSoyPwc6EHQuKAG130AMQrFt9GZ65MH
+	9hkpiKfdkX84KfEvFEUao+wSld5tacFxQgMNA7I/WOpW/eYiXcVhh4W+94EBY6eLeES6Bzha0UA
+	BGe12dnC0ZRrQZZcO/po/1FMdPCXM0Il+s/OP1bci2DpNO5NFEF9eOpIuCSEXOYNQg2lCBjBPu/
+	j9bItSqIyXHABIfQdBsoIgEMMhFkpCih1OXclRHdsqFNqqLmRAOHudRVtecduXcPRB1sSMfbCkZ
+	jfkX2pbiNu4S20y2bLj+4wm31ICLZtTg0pkdJqY8uQmS3WWX92Bx+AAn/eWw08vBrrrbQCnYOkp
+X-Received: by 2002:a05:651c:19a0:b0:3a3:3170:5420 with SMTP id 38308e7fff4ca-3a58d33c3f5mr4041991fa.3.1788983491576;
+        Wed, 09 Sep 2026 12:51:31 -0700 (PDT)
 Received: from localhost.localdomain ([176.88.90.107])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b6166fea24sm4222799e87.48.2026.09.09.12.41.35
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a370599810sm45706921fa.24.2026.09.09.12.51.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 12:41:36 -0700 (PDT)
+        Wed, 09 Sep 2026 12:51:31 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] intel-speed-select: inherit pkgconfig
-Date: Wed,  9 Sep 2026 22:41:26 +0300
-Message-ID: <20260909194126.172815-1-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] loudmouth: remove recipe
+Date: Wed,  9 Sep 2026 22:51:18 +0300
+Message-ID: <20260909195118.191319-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 19:41:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129896
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 19:51:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129897
 
-do_compile fails with:
+do_compile fails with OpenSSL 4.0:
 
-  cc1: error: include location "/usr/include/libnl3" is unsafe for
-  cross-compilation [-Werror=poison-system-directories]
+  lm-ssl-openssl.c:281:92: error: invalid use of incomplete typedef
+  'ASN1_IA5STRING' {aka 'struct asn1_string_st'}
 
-The kernel tools Makefile gets the libnl flags from pkg-config. The
-recipe does not inherit pkgconfig, so there is no PKG_CONFIG_SYSROOT_DIR
-and the host pkg-config answers with the host include path.
+This break is a three line change to the ASN1_STRING accessors, but
+upstream is dead. The last release is 1.5.4 from January 2021 and the
+last commit in the mcabber fork is from June 2022, so every future
+toolchain or dependency change is ours to carry.
 
-Drop the manual CFLAGS entry, pkg-config now gives the same path.
+Nothing in any layer depends on it, the only reference was the meta-oe
+packagegroup.
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../recipes-kernel/intel-speed-select/intel-speed-select.bb    | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ .../loudmouth/loudmouth_1.5.4.bb               | 18 ------------------
+ .../packagegroups/packagegroup-meta-oe.bb      |  1 -
+ 2 files changed, 19 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
 
-diff --git a/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
-index 3b5866180d..cecf310189 100644
---- a/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
-+++ b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
-@@ -6,7 +6,7 @@ for optimized total cost of ownership."
- 
- LICENSE = "GPL-2.0-only"
- 
--inherit kernelsrc
-+inherit kernelsrc pkgconfig
- 
- COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
- COMPATIBLE_HOST:libc-musl = 'null'
-@@ -17,7 +17,6 @@ do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
- 
- B = "${WORKDIR}/${BPN}-${PV}"
- 
--CFLAGS += "-I${STAGING_INCDIR}/libnl3"
- EXTRA_OEMAKE = "-C ${S}/tools/power/x86/intel-speed-select O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
+deleted file mode 100644
+index 83a366a8df..0000000000
+--- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
+-HOMEPAGE = "http://www.loudmouth-project.org/"
+-
+-LICENSE = "LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+-
+-DEPENDS = "glib-2.0 libcheck openssl libidn"
+-
+-GNOMEBASEBUILDCLASS = "autotools"
+-
+-inherit gnomebase gtk-doc
+-
+-SRC_URI = "https://github.com/mcabber/${BPN}/releases/download/${PV}/${BP}.tar.bz2"
+-UPSTREAM_CHECK_URI = "https://github.com/mcabber/loudmouth/releases"
+-UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
+-SRC_URI[sha256sum] = "31cbc91c1fddcc5346b3373b8fb45594e9ea9cc7fe36d0595e8912c47ad94d0d"
+-
+-EXTRA_OECONF = "--with-ssl=openssl --with-compile-warnings=no"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 084d5a201f..225cd95604 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -147,7 +147,6 @@ RDEPENDS:packagegroup-meta-oe-connectivity = "\
+     libuv \
+     libwebsockets \
+     linuxptp \
+-    loudmouth \
+     modemmanager \
+     mosh \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obex-data-server", "", d)} \
 -- 
 2.43.0
 
