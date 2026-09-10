@@ -1,217 +1,158 @@
-Return-Path: <potin.lai.pt@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24C25C79FB7
-	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 01:41:59 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4089.1789004518492834008
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFC66C79FB7
+	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 05:21:40 +0000 (UTC)
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6986.1789017697510807693
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 18:41:58 -0700
+ Wed, 09 Sep 2026 22:21:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=klO0elv+;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: potin.lai.pt@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc48fe04342so467369a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 18:41:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=r/1RFgTt;
+ spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-396ccda24afso778709a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 22:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789004518; x=1789609318; darn=lists.openembedded.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=mqa7VfNDoDy5kvcisCnxUhZZafprysnKseDEVn4pN04=;
-        b=klO0elv+cn4f1FL/djQSadFhYo83pe3oVV+4KEtqMO98v32/FvIrxTb7wQ2Kwy4S0x
-         ptXrYFnFA4Qd6vDxGfE2tCyzwKq2GMhP4yZ4r4S0JSD36dDo0ff2GfLtS9oZOl61/u3r
-         KLqsqH7VOMs+fPMs5kA/zj4uPyCBkM4z3ihy+lJx+H5xJWRhpg4QoLnQh84tOgYcUSBi
-         uHWQSbeXZ/vZW5hvBttlbK7v+dV05mGWeep/9W6UJdcEV2Wj1V1w1HSqkzgI1+m4FH67
-         5+a1Yvf7h05lesJ9fbppLvEd29MXdAeRBOLDSfa7lLry/pVEtworJ9ctnlBH8vJg1JAI
-         P+5w==
+        d=gmail.com; s=20251104; t=1789017697; x=1789622497; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cWUXTuTaRQf3PnyqUvzuC2CPaWFnJ3vbnfKPdFufLDo=;
+        b=r/1RFgTtxRd7OFZR4g0XEy/fFgvv5/cf4zlwyBxuvcNl/r81ZsdTOiVc5WSD8Zc6sA
+         6/Yl/pc1brVYjFZqzuxKPo2bAsJDGhaaR/SXL0j1Wr4E8cH6+MRFqblpb/CSEBSy2wik
+         n4hfD3tWJwYK+SNDMyQI3XKGOz1bUO1kd7vBgEuai09MQniahUdRwmZ2CHGtTR5bCIGp
+         KhL7PPx7yB9oE42QXSTeJxQ5TqqVz33y/Le6JiCiHyTVceh8ck+gVPnVep5xa1ESjI1g
+         dr1hF6PDOpmDjXAiAPK/NEAdjtUBndK8JdCSSbMnosMD4zudofzuMXOBZcHZ6Xiq+Bt1
+         cJug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789004518; x=1789609318;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=mqa7VfNDoDy5kvcisCnxUhZZafprysnKseDEVn4pN04=;
-        b=IvWz5c+Yj494YvJ3qN9m7X/ca3WgxLfbFOJN+yAtyz55B5KfKijk+KgRSKD7DH+BRc
-         5gAoXp+O5OsSXaIeJkuAav4L5Trm84jgm0p3YpPf/PALwUUY2JXW/l17L0whm89WtqIm
-         yiPtMZaw1KoIN3hcVxfKIlmIYwpRBBjY3eelfO4ZAXaGGfyqLd70GbljSzRB8a9itnbB
-         wnSKcAMTZthWjJFQHZJQcgYTIO/GnS1AF1lnyfraLJb9zktXTRUDxdtHOBmLzGswBj6C
-         TtOCQs8R1rxQPyDgxcIk2gRJakm5yyJrpdR+ba0vIYOzoTXzgAVF/V1vm7Dpn3O5bzNM
-         RZiQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwpQM8CAWQpuZTaWMy93s31pIK8kHmr9Ik3OFxk4EKYgs1r6CbvV3tcPSaSMhk2lHileyoT94xeSa6aRrnMex4/+iM=@lists.openembedded.org
-X-Gm-Message-State: AFuF++mvUBhfStplWNcQ+jce7SR1pVERclPi2zP0nRVNKv7E36hwtuw1
-	GX5m7rmREWWobPBtFIs3zVtSr3uxgraTkDIoUwS8m6j5mmfFMa2EBy8h
-X-Gm-Gg: AYBFou3LbXxxoy11rBBeJBGS2C7yzRyHisI9Fg2c+fe/undehXxP/m/pdtto6DwecjJ
-	NSrCRpYO1L0trZ+r8MT4emtNdEs3VcItz0tf4KHvfT5ewejwy7R59Ai/mJyB6Mpi0GDZto9/g0b
-	Ht6C2v7uOp3WszHoIqCRpFLzoQ0AiU8YKy5lfcdTVpsh9GdPsrnbhlOiEjkZarQKESEewkRJ6ex
-	H7bM6WDu8cbeUUaDC521ihiIyslcVBEoESsEPLSOj4kwuBGttqzkWo9INm4RODe4TaVgDxo7lWs
-	51hy6hAcU63Ak5E6tLqbC4MNVyAfU/fLbZ7FM82ihOQVzs0+XSdQzSJBoSkATBcJSA1hcf4SwcC
-	ICVsyzO3iZtI8LmDuYw59KmCX6CpE5+hfeZJTW+OdvwU8oaE5q1FwiXEEMoi8PaS5RCAb63o6pJ
-	/DnquYMw2fuNc122bVQU2nCD59XUCr+0Au0xoUfxnyAJKTLxWl/WjQ6XfMAeTtGgJ578zM7i+wN
-	Qbf4ZI1TuVTcpHcoZRmI1iuoIVXe3vQQ2Yrvyg5
-X-Received: by 2002:a17:90b:1d4f:b0:398:9be5:b417 with SMTP id 98e67ed59e1d1-39b26221eb1mr56691510a91.18.1789004517712;
-        Wed, 09 Sep 2026 18:41:57 -0700 (PDT)
-Received: from [10.10.15.228] (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d7e9014cbsm965865a91.16.2026.09.09.18.41.56
+        d=1e100.net; s=20251104; t=1789017697; x=1789622497;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cWUXTuTaRQf3PnyqUvzuC2CPaWFnJ3vbnfKPdFufLDo=;
+        b=NjJa8M1ILS6RYK220fIpmAvKBmf16okUUbf81JFdKuvtaQNsYcBX2EGymzZMuu1rdt
+         OBOAiIdMrjmACLIgYdp+kJRnJzzB9/v/yhBR+sQq7D8haljqhloHQVz70Ex9FeGemPXA
+         xzw0935OTm4TgP/LCGpMqqDTMxAwz/FfLlA17dA0nLw0l1FZP1dVuIsuWt9bGefKqeLU
+         Yjw7eNCUoyv7YrHM1qEcJbIXEuvF22/dm41Fp+KS2hTGAkBS0+DM67owKcY33oPxkHiu
+         xFd0Y2532IO1KZl0e+WS31XYiyW13M0T0qQxQ176KWeq5ke1m1r7c41AuhWkjGEwoWki
+         SCCA==
+X-Gm-Message-State: AFuF++nb/T/uyvD0xnv87U0moCliAEMfRlgSvS0HTCTLroSSyr0HQj8M
+	Zj9dhznmvUoaOYjm5O8NMzRSdNeHWZU+WA+k0uvhtVMkCR/lShvpRWaqQbPzmw==
+X-Gm-Gg: AYBFou2Yil4yCSkG0c+zFAc4k2fiC76vi97RaRYNXSNPzW7e0KRAO/bKiM/FADXpIBQ
+	Ne0KKfu3fixKYFJbfggjGU2IEXKlG3uAA6r9WRLePhpJuOAUdG6PXihpaC8RwTnWF6NZJGm7YRC
+	PhW6k74EzzBdInKrZMdmsagLYYOfxfZQw4VaZOFhbbQPhj+jxCH8Ikb2xCaIf1LvPm/qoNHaGu6
+	Rvxbb65kyr8q9dvv/a/VhQNM0etJt3b3K9mFLGEEwZMFzvOVbIeVFmtgN06GTU/OWbyFV+KXoTi
+	S6BUHdsbiNPNC7JqLj078eXuMh3TQ1hbgU43mqPcqAHsGKH01uys2wivNO/OTRKBj75HnSTPf6P
+	dzy3KS5m2NdmRmM5PrjDpFmzYcw1km4wKMgFpBL636j+8AJqgYGD0V+aplQEvjHC8+DTX/GOqyD
+	4Rp4wGe3rREQ20dem1raUPtsj0lOTkSxUnTpXj/fsXs2kuWavDx+E1xuK13eog8/t1jmJC0EZka
+	ZH4/4k55nhnakQO/DXyC6YugCnTbJnAE4rMkXRLb+Nj/Oc0O5DPp2FQE0D+O8sgfFtMI0x32Vrh
+	zdCA+8YUq/DW06xfQ4hvNOSDaQwD3TxVNc18+fy2lwaCbou/A2LmxZjmaVseK6L41JIKToF0qGJ
+	PJ1JclGpIGij2qHmwEyKhT82NcLj8ivZbQe3euqZaB+p2BjEUhOvFmyQc
+X-Received: by 2002:a17:90a:d44b:b0:398:d93a:b343 with SMTP id 98e67ed59e1d1-39d709e7326mr8759221a91.3.1789017696614;
+        Wed, 09 Sep 2026 22:21:36 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm54554111c88.12.2026.09.09.22.21.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 18:41:57 -0700 (PDT)
-From: Potin Lai <potin.lai.pt@gmail.com>
-Date: Thu, 10 Sep 2026 09:39:20 +0800
-Subject: [meta-oe][PATCH] libgpiod: handle disappearing chips during
- iteration for v1.6.x
+        Wed, 09 Sep 2026 22:21:35 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] dlt-daemon: Fix build with clang-23
+Date: Wed,  9 Sep 2026 22:21:32 -0700
+Message-ID: <20260910052133.2153716-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-libgpiod-v1-6-5-handle-disappearing-chips-v1-1-fd2dfad2ca0f@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAEcKomoC/yXNywqDMBCF4VeRWXcgsdQ0fRVxkcsYp9gYEpWC+
- O5N2+UHh/MfUCgzFXg0B2TaufASK+SlATeZGAjZV0Mr2k5oKXBmGxIvHneJHd6wjvxM6LmYlMh
- kjgHdxKmguqpRWeH1XWiofynTyO9fqx/+Lpt9klu/gf5Fq8GFBjjPDwfYNxqWAAAA
-X-Change-ID: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-To: Khem Raj <raj.khem@gmail.com>, 
- openembedded-devel@lists.openembedded.org
-Cc: Potin Lai <potin.lai.pt@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789004516; l=4620;
- i=potin.lai.pt@gmail.com; s=20260522; h=from:subject:message-id;
- bh=mBSUZdgBQtGQhcY8gjyGmw0Rie2rp1ufsCuXvS75DIo=;
- b=0X/cUyqYaYFiqseLzAhKfBd/cfGioKjETM+6gi6XI3ASsOTxOklM+6GKeFXftvXWJWRBQzvsT
- GaILqiikgvkAKhdpRxM/VwkaePEDB7X9byDWE7NLBfcunG9mv3wyG1A
-X-Developer-Key: i=potin.lai.pt@gmail.com; a=ed25519;
- pk=j3/nMxzz1ZPpp1revghyZ8IqOnwi6RWfuxXN2XrNMRE=
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 01:41:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129902
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 05:21:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129903
 
-When hotpluggable GPIO controllers (like USB devices) are dynamically
-added or removed, a race condition can occur. A chip's device node might
-be present when iterating through /dev, but the chip could disappear by
-the time we try to open it or query its lines.
+clang 23 added -Wunused-but-set-global, enabled by -Wall, and the build
+uses -Werror -Wfatal-errors, so this is now a hard failure:
 
-Previously, this caused tools like 'gpiofind' to incorrectly abort with
-a 'No such device' (ENODEV) error if any chip on the system vanished
-during the search.
+  src/lib/dlt_user.c:132:20: fatal error: variable
+    'dlt_user_housekeeper_exit_requested' set but not used
+    [-Wunused-but-set-global]
+    132 | static atomic_bool dlt_user_housekeeper_exit_requested = false;
 
-Fix this by ignoring ENODEV errors when searching for a line
-(in gpiod_line_find()) and by silently skipping chips that fail to open
-during iteration (in gpiod_chip_iter_new()).
+The diagnostic is pointing at a real bug: dlt_user_atexit_handler() sets
+the flag to "Signal housekeeper thread to exit", but nothing ever reads
+it, so the housekeeper thread only ever stops when dlt_stop_threads()
+cancels it. Not fixed upstream, master still has the same dead store.
 
-Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+Add a patch checking the flag in the housekeeper loop condition. Leaving
+the loop that way is equivalent to being cancelled, pthread_cleanup_pop(1)
+at the end of the function runs dlt_user_cleanup_handler() either way.
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ully-handle-disappearing-chips-during-ite.patch | 81 ++++++++++++++++++++++
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb |  5 +-
- 2 files changed, 85 insertions(+), 1 deletion(-)
+ ...t_user_housekeeper_exit_requested-in.patch | 43 +++++++++++++++++++
+ .../dlt-daemon/dlt-daemon_3.0.0.bb            |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
 new file mode 100644
-index 0000000000..bbf650e565
+index 0000000000..a3adbd9d76
 --- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
-@@ -0,0 +1,81 @@
-+From f6b384d2b906581e3cf072329e9bd03f3241c61d Mon Sep 17 00:00:00 2001
-+From: Potin Lai <potin.lai.pt@gmail.com>
-+Date: Tue, 8 Sep 2026 10:48:36 +0800
-+Subject: [PATCH 1/1] core: gracefully handle disappearing chips during
-+ iteration
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
+@@ -0,0 +1,43 @@
++From 9ddee0a5f46a1d7fea81228e6905ebc485e678a7 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 9 Sep 2026 20:24:55 -0700
++Subject: [PATCH] dlt_user: Honor dlt_user_housekeeper_exit_requested in
++ housekeeper loop
 +
-+When hotpluggable GPIO controllers (like USB devices) are dynamically
-+added or removed, a race condition can occur. A chip's device node might
-+be present when iterating through /dev, but the chip could disappear by
-+the time we try to open it or query its lines.
++dlt_user_atexit_handler() sets dlt_user_housekeeper_exit_requested to
++signal the housekeeper thread to exit, but nothing ever reads the flag,
++so the housekeeper thread keeps running until dlt_stop_threads() cancels
++it with pthread_cancel().
 +
-+Previously, this caused tools like 'gpiofind' to incorrectly abort with
-+a 'No such device' (ENODEV) error if any chip on the system vanished
-+during the search.
++clang 23 added -Wunused-but-set-global (enabled by -Wall) which spots
++this dead store, and since the build uses -Werror -Wfatal-errors it is
++now a hard build failure:
 +
-+Fix this by ignoring ENODEV errors when searching for a line
-+(in gpiod_line_find()) and by silently skipping chips that fail to open
-+during iteration (in gpiod_chip_iter_new()).
++  src/lib/dlt_user.c:132:20: fatal error: variable
++    'dlt_user_housekeeper_exit_requested' set but not used
++    [-Wunused-but-set-global]
++    132 | static atomic_bool dlt_user_housekeeper_exit_requested = false;
 +
-+Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
++Check the flag in the housekeeper loop condition, which is what the
++"Signal housekeeper thread to exit" comment intends. Leaving the loop
++this way is equivalent to being cancelled: pthread_cleanup_pop(1) at the
++end of the function runs dlt_user_cleanup_handler() either way.
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ lib/helpers.c |  2 +-
-+ lib/iter.c    | 16 ++++------------
-+ 2 files changed, 5 insertions(+), 13 deletions(-)
++ src/lib/dlt_user.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/lib/helpers.c b/lib/helpers.c
-+index 479f370..6d1836a 100644
-+--- a/lib/helpers.c
-++++ b/lib/helpers.c
-+@@ -423,7 +423,7 @@ struct gpiod_line *gpiod_line_find(const char *name)
-+ 			return line;
-+ 		}
-+ 
-+-		if (errno != ENOENT)
-++		if (errno != ENOENT && errno != ENODEV)
-+ 			goto out;
-+ 	}
-+ 
-+diff --git a/lib/iter.c b/lib/iter.c
-+index bfd2852..7f5ad9a 100644
-+--- a/lib/iter.c
-++++ b/lib/iter.c
-+@@ -51,7 +51,7 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 	if (!iter)
-+ 		goto err_free_dirs;
-+ 
-+-	iter->num_chips = num_chips;
-++	iter->num_chips = 0;
-+ 	iter->offset = 0;
-+ 
-+ 	if (num_chips == 0) {
-+@@ -64,23 +64,15 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 		goto err_free_iter;
-+ 
-+ 	for (i = 0; i < num_chips; i++) {
-+-		iter->chips[i] = gpiod_chip_open_by_name(dirs[i]->d_name);
-+-		if (!iter->chips[i])
-+-			goto err_close_chips;
-++		iter->chips[iter->num_chips] = gpiod_chip_open_by_name(dirs[i]->d_name);
-++		if (iter->chips[iter->num_chips])
-++			iter->num_chips++;
-+ 	}
-+ 
-+ 	free_dirs(dirs, num_chips);
-+ 
-+ 	return iter;
-+ 
-+-err_close_chips:
-+-	for (i = 0; i < num_chips; i++) {
-+-		if (iter->chips[i])
-+-			gpiod_chip_close(iter->chips[i]);
-+-	}
-+-
-+-	free(iter->chips);
-+-
-+ err_free_iter:
-+ 	free(iter);
-+ 
-+-- 
-+2.52.0
++diff --git a/src/lib/dlt_user.c b/src/lib/dlt_user.c
++index daf5e8b..9fa2906 100644
++--- a/src/lib/dlt_user.c
+++++ b/src/lib/dlt_user.c
++@@ -4850,7 +4850,7 @@ void *dlt_user_housekeeperthread_function(void *ptr)
 +
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-index 45af4f8bb0..d43fe90480 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-@@ -3,7 +3,10 @@ require libgpiod.inc
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
- 
--SRC_URI += "file://0001-bindings-cxx-disable-tests.patch"
-+SRC_URI += " \
-+    file://0001-bindings-cxx-disable-tests.patch \
-+    file://0002-core-gracefully-handle-disappearing-chips-during-ite.patch \
-+"
- 
- SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
- 
-
----
-base-commit: cbec9a20d78add94235042c601e991574151e36e
-change-id: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-
-Best regards,
---  
-Potin Lai <potin.lai.pt@gmail.com>
++     pthread_mutex_unlock(&dlt_housekeeper_running_mutex);
++
++-    while (in_loop) {
+++    while (in_loop && !dlt_user_housekeeper_exit_requested) {
++         /* Check for new messages from DLT daemon */
++         if (!dlt_user.disable_injection_msg)
++             if (dlt_user_log_check_user_message() < DLT_RETURN_OK)
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
+index 6de62c2a3d..79f28c2901 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
+@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
+            file://0001-warnings-Fix-clang-generated-warnings.patch \
+            file://0001-dlt-daemon.c-fix-wrong-len.patch \
+            file://char_conversion.patch \
++           file://0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch \
+            "
+ SRCREV = "f595ea29d1007ca1c3b2d1fd3a88adf7d3db6320"
 
 
