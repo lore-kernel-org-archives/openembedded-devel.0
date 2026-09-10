@@ -2,157 +2,203 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFC66C79FB7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE971C88E40
 	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 05:21:40 +0000 (UTC)
 Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6986.1789017697510807693
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6988.1789017698807617445
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2026 22:21:37 -0700
+ Wed, 09 Sep 2026 22:21:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=r/1RFgTt;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YbwYaCYP;
  spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-396ccda24afso778709a91.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 22:21:37 -0700 (PDT)
+Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-396ccc02279so938490a91.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2026 22:21:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789017697; x=1789622497; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cWUXTuTaRQf3PnyqUvzuC2CPaWFnJ3vbnfKPdFufLDo=;
-        b=r/1RFgTtxRd7OFZR4g0XEy/fFgvv5/cf4zlwyBxuvcNl/r81ZsdTOiVc5WSD8Zc6sA
-         6/Yl/pc1brVYjFZqzuxKPo2bAsJDGhaaR/SXL0j1Wr4E8cH6+MRFqblpb/CSEBSy2wik
-         n4hfD3tWJwYK+SNDMyQI3XKGOz1bUO1kd7vBgEuai09MQniahUdRwmZ2CHGtTR5bCIGp
-         KhL7PPx7yB9oE42QXSTeJxQ5TqqVz33y/Le6JiCiHyTVceh8ck+gVPnVep5xa1ESjI1g
-         dr1hF6PDOpmDjXAiAPK/NEAdjtUBndK8JdCSSbMnosMD4zudofzuMXOBZcHZ6Xiq+Bt1
-         cJug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789017697; x=1789622497;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1789017698; x=1789622498; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cWUXTuTaRQf3PnyqUvzuC2CPaWFnJ3vbnfKPdFufLDo=;
-        b=NjJa8M1ILS6RYK220fIpmAvKBmf16okUUbf81JFdKuvtaQNsYcBX2EGymzZMuu1rdt
-         OBOAiIdMrjmACLIgYdp+kJRnJzzB9/v/yhBR+sQq7D8haljqhloHQVz70Ex9FeGemPXA
-         xzw0935OTm4TgP/LCGpMqqDTMxAwz/FfLlA17dA0nLw0l1FZP1dVuIsuWt9bGefKqeLU
-         Yjw7eNCUoyv7YrHM1qEcJbIXEuvF22/dm41Fp+KS2hTGAkBS0+DM67owKcY33oPxkHiu
-         xFd0Y2532IO1KZl0e+WS31XYiyW13M0T0qQxQ176KWeq5ke1m1r7c41AuhWkjGEwoWki
-         SCCA==
-X-Gm-Message-State: AFuF++nb/T/uyvD0xnv87U0moCliAEMfRlgSvS0HTCTLroSSyr0HQj8M
-	Zj9dhznmvUoaOYjm5O8NMzRSdNeHWZU+WA+k0uvhtVMkCR/lShvpRWaqQbPzmw==
-X-Gm-Gg: AYBFou2Yil4yCSkG0c+zFAc4k2fiC76vi97RaRYNXSNPzW7e0KRAO/bKiM/FADXpIBQ
-	Ne0KKfu3fixKYFJbfggjGU2IEXKlG3uAA6r9WRLePhpJuOAUdG6PXihpaC8RwTnWF6NZJGm7YRC
-	PhW6k74EzzBdInKrZMdmsagLYYOfxfZQw4VaZOFhbbQPhj+jxCH8Ikb2xCaIf1LvPm/qoNHaGu6
-	Rvxbb65kyr8q9dvv/a/VhQNM0etJt3b3K9mFLGEEwZMFzvOVbIeVFmtgN06GTU/OWbyFV+KXoTi
-	S6BUHdsbiNPNC7JqLj078eXuMh3TQ1hbgU43mqPcqAHsGKH01uys2wivNO/OTRKBj75HnSTPf6P
-	dzy3KS5m2NdmRmM5PrjDpFmzYcw1km4wKMgFpBL636j+8AJqgYGD0V+aplQEvjHC8+DTX/GOqyD
-	4Rp4wGe3rREQ20dem1raUPtsj0lOTkSxUnTpXj/fsXs2kuWavDx+E1xuK13eog8/t1jmJC0EZka
-	ZH4/4k55nhnakQO/DXyC6YugCnTbJnAE4rMkXRLb+Nj/Oc0O5DPp2FQE0D+O8sgfFtMI0x32Vrh
-	zdCA+8YUq/DW06xfQ4hvNOSDaQwD3TxVNc18+fy2lwaCbou/A2LmxZjmaVseK6L41JIKToF0qGJ
-	PJ1JclGpIGij2qHmwEyKhT82NcLj8ivZbQe3euqZaB+p2BjEUhOvFmyQc
-X-Received: by 2002:a17:90a:d44b:b0:398:d93a:b343 with SMTP id 98e67ed59e1d1-39d709e7326mr8759221a91.3.1789017696614;
-        Wed, 09 Sep 2026 22:21:36 -0700 (PDT)
+        bh=afWD0+n2/iSfou9BuKcm2nGJ3VlXBIxSvEG3XT9pqWk=;
+        b=YbwYaCYPrpzRGg6jLL/aMlvL1YUNbx7Sot4Oye3C8ZBe76FQYaDsdKaf4CiBLG9JAF
+         GusyXi8+fUsao1QS8DNGLUUFrGBzrAhuB+wL+70aJ5gXR1Zpv2GVUEPDxXRiq62KCMmz
+         KCrqxbwmVsULzJt6QIC9xR/GhqZlCU4HTn4Qijqw5np9mgADj1EQKN7oh5/893I3H/Uc
+         dd8WjkBrrFiuMYwPd54p7A3tZqFkU0rSvmuGa97LqsSzX56w9htR3kkNECvnJ6PZ49QH
+         +QybRjSoaZ8VgRG9Q9yoFZbi3SeG/39KdD+tyAlp32Vz6uuMKSF0QK5yq6ooKngDLh1N
+         LE0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789017698; x=1789622498;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=afWD0+n2/iSfou9BuKcm2nGJ3VlXBIxSvEG3XT9pqWk=;
+        b=ksEnvwOeNldQzogfn29LeTu1gkySTi09yt4N/YBGGszsSI7ETgUwdH+082uQClqDkt
+         P3kAiprDQYoCgIGMOETJqQk5SsSlWgurhwkQyA0jOTuVvbzoWRjfy3WMcH8V7c39J3LR
+         fsUFpRFwOrMn+WPG1/hxPPW5CF19LIaYhF32ykw3nqSxrZ8tyxaU9dCdfmk5BWyrQYds
+         KpnpZsV5wqsoMR/JHfs0KieLtiPu+WeVAOmYzinD/SdFU2n8dwn0SicD+v+OLGPQOPoi
+         6Q7kGDJxJ9vdw8S+GO3LEK2ASAN//k6BV5X5RRQeryUDD7R4JKN5N+sQyUnlzmkqu2v8
+         XnJw==
+X-Gm-Message-State: AFuF++kcCQrVUe9/K7FAlHvfB/H4vxojF4z/E6qkYdBZOEa7AxxF6F4q
+	w13zJ9yTNuq4C37tcC2loeoyeI4lMkRyQbls/rWzQnQSYh0c9jT7rDwlK8WLxA==
+X-Gm-Gg: AYBFou3c3/Bn7J5VWdiO+bPYaliCVmOemm2v35a2ad3kKML1p7yMBlnLUGmyAIfW++o
+	tefk8+rp3ltffuQJzOb/kpFoLyMuiPlflIbIjPWDyiWlfLnaUkzUobow4UCR6eCIPvKZ3RI1aGA
+	f6U3OMHHz48iZUILSs5N7ynP2cFMD+5m8aLf6FElSp91+E33giplkYQJVm9huovFkqASYphGuFc
+	ddEtVF3Liw8oxNaM8wH2WgBpewCcCvw7Vyama9yBxGqfadEwqeCaiKj3fqd2YObJh64JfNCJI+A
+	a2bxXkBIlsTrvKnJO6qcsWtrTGwnTYnGkvJuRyZ5lM0PZOXH/XjnGhxOAV2uGf7SosbebJuFy33
+	DTrYWvFqu3F+P8abCCGgB0ED2eoFqXLHRxyZ20Okjs12OlgcyklGSPQq4eWHberfr+MCTa2r/32
+	BQd9T/+1RMxCpiMfcaZABoqdBMxk62tvvZE/rWcRASHbM1DBiY3TFNYCSdKGO3FgoSq8J/E9EZ3
+	oWA83gXmccA2S8Ro3rulU5LX7fCyx4eVCnsiXXftOfNY7vUs1LT83oAbmAwsqk9zKIDIfYtQuG1
+	Hkl18SB5kowGvi8NwwcUiXTp1gnT+3sU4BMDorErt8j7WhxcxJ0stFhOxj4ZKDVjHykzOzbbn5w
+	JxRQsM44RekkvkCXPxlSqTsA8YtkyJx4++o0AHkKmOePoDlquh3XterFkV9Onfg+0mKM=
+X-Received: by 2002:a17:90b:558c:b0:38e:57a3:f218 with SMTP id 98e67ed59e1d1-39d70ae1a5emr8565516a91.13.1789017697850;
+        Wed, 09 Sep 2026 22:21:37 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm54554111c88.12.2026.09.09.22.21.35
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm54554111c88.12.2026.09.09.22.21.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 22:21:35 -0700 (PDT)
+        Wed, 09 Sep 2026 22:21:37 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 1/2] dlt-daemon: Fix build with clang-23
-Date: Wed,  9 Sep 2026 22:21:32 -0700
-Message-ID: <20260910052133.2153716-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 2/2] ot-br-posix: Update to latest tip on trunk
+Date: Wed,  9 Sep 2026 22:21:33 -0700
+Message-ID: <20260910052133.2153716-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260910052133.2153716-1-khem.raj@oss.qualcomm.com>
+References: <20260910052133.2153716-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 05:21:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129903
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129904
 
-clang 23 added -Wunused-but-set-global, enabled by -Wall, and the build
-uses -Werror -Wfatal-errors, so this is now a hard failure:
+Fixes build with clang-23, which enables -Wunused-template in a way that
+trips over openthread's parse_cmdline.hpp. With -Werror -Wfatal-errors
+that is fatal:
 
-  src/lib/dlt_user.c:132:20: fatal error: variable
-    'dlt_user_housekeeper_exit_requested' set but not used
-    [-Wunused-but-set-global]
-    132 | static atomic_bool dlt_user_housekeeper_exit_requested = false;
+  third_party/openthread/repo/src/core/utils/parse_cmdline.hpp:240:48:
+    fatal error: unused function template 'ParseAsHexString'
+    [-Wunused-template]
 
-The diagnostic is pointing at a real bug: dlt_user_atexit_handler() sets
-the flag to "Signal housekeeper thread to exit", but nothing ever reads
-it, so the housekeeper thread only ever stops when dlt_stop_threads()
-cancels it. Not fixed upstream, master still has the same dead store.
+Already fixed upstream in openthread commit 30c3569ac5ca ("[parse-cmdline]
+make ParseAsHexString() inline"), which the openthread submodule of the
+new SRCREV includes, so bump instead of carrying a backport.
 
-Add a patch checking the flag in the housekeeper loop condition. Leaving
-the loop that way is equivalent to being cancelled, pthread_cleanup_pop(1)
-at the end of the function runs dlt_user_cleanup_handler() either way.
+Adapt the recipe to upstream changes made since the previous SRCREV:
+
+ * ot-br-posix commit cf4877d68af8 ("[mdns] remove avahi publisher option
+   and dependencies") deleted the avahi mDNS publisher; OTBR_MDNS=avahi
+   is now a configure-time FATAL_ERROR. Switch to OTBR_MDNS=openthread,
+   the new upstream default, and drop the avahi/avahi-daemon dependencies
+   the same way upstream did in their own etc/yocto/otbr_git.bb.
+
+ * The advertising and discovery proxies grew OT core implementations
+   (OTBR_OT_SRP_ADV_PROXY, OTBR_OT_DISCOVERY_PROXY) which default to ON
+   whenever OTBR_MDNS is set, and enabling both variants is now a
+   FATAL_ERROR ("Only one Advertising Proxy can be enabled."). Drop the
+   explicit OTBR_SRP_ADVERTISING_PROXY/OTBR_DNSSD_DISCOVERY_PROXY=ON so
+   the OT core ones are used.
+
+ * Drop 0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch.
+   With OTBR_MDNS=openthread src/agent/CMakeLists.txt never sets
+   EXEC_START_PRE, so the generated otbr-agent.service already has a bare
+   ExecStart= and the patch has nothing left to do.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...t_user_housekeeper_exit_requested-in.patch | 43 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_3.0.0.bb            |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
+ ...ce.in-remove-pre-exec-hook-for-mdns-.patch | 35 -------------------
+ .../openthread/ot-br-posix_git.bb             | 11 +++---
+ 2 files changed, 4 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
-new file mode 100644
-index 0000000000..a3adbd9d76
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch
-@@ -0,0 +1,43 @@
-+From 9ddee0a5f46a1d7fea81228e6905ebc485e678a7 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 9 Sep 2026 20:24:55 -0700
-+Subject: [PATCH] dlt_user: Honor dlt_user_housekeeper_exit_requested in
-+ housekeeper loop
-+
-+dlt_user_atexit_handler() sets dlt_user_housekeeper_exit_requested to
-+signal the housekeeper thread to exit, but nothing ever reads the flag,
-+so the housekeeper thread keeps running until dlt_stop_threads() cancels
-+it with pthread_cancel().
-+
-+clang 23 added -Wunused-but-set-global (enabled by -Wall) which spots
-+this dead store, and since the build uses -Werror -Wfatal-errors it is
-+now a hard build failure:
-+
-+  src/lib/dlt_user.c:132:20: fatal error: variable
-+    'dlt_user_housekeeper_exit_requested' set but not used
-+    [-Wunused-but-set-global]
-+    132 | static atomic_bool dlt_user_housekeeper_exit_requested = false;
-+
-+Check the flag in the housekeeper loop condition, which is what the
-+"Signal housekeeper thread to exit" comment intends. Leaving the loop
-+this way is equivalent to being cancelled: pthread_cleanup_pop(1) at the
-+end of the function runs dlt_user_cleanup_handler() either way.
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/dlt_user.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/lib/dlt_user.c b/src/lib/dlt_user.c
-+index daf5e8b..9fa2906 100644
-+--- a/src/lib/dlt_user.c
-++++ b/src/lib/dlt_user.c
-+@@ -4850,7 +4850,7 @@ void *dlt_user_housekeeperthread_function(void *ptr)
-+
-+     pthread_mutex_unlock(&dlt_housekeeper_running_mutex);
-+
-+-    while (in_loop) {
-++    while (in_loop && !dlt_user_housekeeper_exit_requested) {
-+         /* Check for new messages from DLT daemon */
-+         if (!dlt_user.disable_injection_msg)
-+             if (dlt_user_log_check_user_message() < DLT_RETURN_OK)
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
-index 6de62c2a3d..79f28c2901 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
-            file://0001-warnings-Fix-clang-generated-warnings.patch \
-            file://0001-dlt-daemon.c-fix-wrong-len.patch \
-            file://char_conversion.patch \
-+           file://0001-dlt_user-Honor-dlt_user_housekeeper_exit_requested-in.patch \
-            "
- SRCREV = "f595ea29d1007ca1c3b2d1fd3a88adf7d3db6320"
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
+deleted file mode 100644
+index 250de4bdd8..0000000000
+--- a/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From ed60d4605b81c43b9ba9504a37835109c247c6f8 Mon Sep 17 00:00:00 2001
+-From: Stefan Schmidt <stefan.schmidt@huawei.com>
+-Date: Fri, 1 Apr 2022 21:46:03 +0200
+-Subject: [PATCH] otbr-agent.service.in: remove pre exec hook for mdns service
+-
+-It uses the service command which is not available in all cases under
+-Yocto/OE. The upstream project uses this mainly with Ubuntu and Raspian
+-as testbeds.
+-
+-In our case we simply ensure that avahi-daemon is installed on the
+-system inside the recipe.
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
+----
+- src/agent/otbr-agent.service.in | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/agent/otbr-agent.service.in b/src/agent/otbr-agent.service.in
+-index 8314121347..4c97869def 100644
+---- a/src/agent/otbr-agent.service.in
+-+++ b/src/agent/otbr-agent.service.in
+-@@ -6,7 +6,7 @@ After=dbus.socket
+-
+- [Service]
+- EnvironmentFile=-@CMAKE_INSTALL_FULL_SYSCONFDIR@/default/otbr-agent
+--@EXEC_START_PRE@ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OTBR_AGENT_OPTS
+-+ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OTBR_AGENT_OPTS
+- KillMode=mixed
+- Restart=on-failure
+- RestartSec=5
+---
+-2.35.1
+-
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+index d1938e12a1..8c49a30327 100644
+--- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+@@ -9,12 +9,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=87109e44b2fda96a8991f27684a7349c \
+                     file://third_party/cpp-httplib/repo/LICENSE;md5=1321bdf796c67e3a8ab8e352dd81474b \
+                     file://third_party/openthread/repo/LICENSE;md5=543b6fe90ec5901a683320a36390c65f \
+                     "
+-DEPENDS = "autoconf-archive dbus readline avahi jsoncpp boost libnetfilter-queue protobuf protobuf-native"
+-SRCREV = "0700948634b85947e893a65e3d510ed870a5755b"
++DEPENDS = "autoconf-archive dbus readline jsoncpp boost libnetfilter-queue protobuf protobuf-native"
++SRCREV = "cb0bfde934ad7519610a63b75c067f8d7601fe21"
+ PV = "0.3.0+git"
+
+ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
+-           file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
+            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
+            file://default-cxx-std.patch \
+            file://0001-x509_crt-Zero-initialize-mbedtls_x509_time-at-declar.patch;patchdir=third_party/openthread/repo \
+@@ -36,10 +35,9 @@ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
+                  -DCMAKE_LIBRARY_PATH=${libdir} \
+                  -DOT_POSIX_PRODUCT_CONFIG=${sysconfdir}/openthread.conf.example \
+                  -DOT_POSIX_FACTORY_CONFIG=${sysconfdir}/openthread.conf.example \
+-                 -DOTBR_MDNS=avahi \
++                 -DOTBR_MDNS=openthread \
+                  -DOTBR_BACKBONE_ROUTER=ON \
+                  -DOTBR_BORDER_ROUTING=ON \
+-                 -DOTBR_SRP_ADVERTISING_PROXY=ON \
+                  -DOTBR_BORDER_AGENT=ON \
+                  -DOT_SPINEL_RESET_CONNECTION=ON \
+                  -DOT_TREL=ON \
+@@ -50,7 +48,6 @@ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
+                  -DOTBR_DUA_ROUTING=ON \
+                  -DOT_DUA=ON \
+                  -DOT_BORDER_ROUTING_NAT64=ON \
+-                 -DOTBR_DNSSD_DISCOVERY_PROXY=ON \
+                  -DOTBR_INFRA_IF_NAME=eth0 \
+                  -DOTBR_NO_AUTO_ATTACH=1 \
+                  -DOT_REFERENCE_DEVICE=ON \
+@@ -59,7 +56,7 @@ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+                  "
+
+-RDEPENDS:${PN} = "iproute2 ipset avahi-daemon"
++RDEPENDS:${PN} = "iproute2 ipset"
+
+ RCONFLICTS:${PN} = "ot-daemon"
 
 
