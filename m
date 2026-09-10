@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 734D1C79FBB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CC84C88E41
 	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 23:10:37 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27849.1789081829294254325
+Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27776.1789081834842101892
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Sep 2026 16:10:29 -0700
+ Thu, 10 Sep 2026 16:10:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pvGE4hBa;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so274441a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 16:10:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=J+Z753D0;
+ spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f12.google.com with SMTP id 41be03b00d2f7-cc4c3304784so348023a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 16:10:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789081829; x=1789686629; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1789081834; x=1789686634; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SPaSuiideSO7RsoEkXuvfVLb8kbd/nD1c3cECf405dU=;
-        b=pvGE4hBaGOAqBif6BzXpNqOpQhhyakchYiZo5chcIiD7jugGt54kwktVRVh/eIhzAD
-         6sHsPm+O8h9iql5TLO6UYXefO0DexZ5alJ6XSia7TP4psPXJFNa+jXcrqhCxgTIvwhYy
-         70uJPHg5iO1p/IaxSI/d4xuk15dyBYLkop0MXqkZY2n79ItT4O2xLd/84Vz6T+CUSfhE
-         j2MGo7P7UmDJu+XwAfj3zKuIQHwBm50ljVJdK6l1kg9VE+LUBrmcqZP2heBysNLsF1zZ
-         f/tcP9GgfqKmyMObdGRb1tVaKWj7a6kE9RnSY1l4nS0r8nqZjGL5Ty+SOutdSZTKxC65
-         iO8g==
+        bh=MlYoj5vNmoQSYQNpQ54F3i+Us5K+qjI3WRzjVCbJUnI=;
+        b=J+Z753D0E41zLwdhkfld4vsz6j01/P1HiyudSdAIHMGn1a/8UBlSP7Z8yIfzfVNZwz
+         G8WTAPkIEaUg45wJDS0Iq+iK9sUxx9umEnZjC1IZeQ/J3UHzXi0cTu4rl9y4/REtBcB8
+         SIgIrp6v8bKnpJfcMdjMFw5BHUy0PeUT1s1BNbXHQ09TkELnM0Ac/l5LluD+cdac6RL0
+         UkQ+tIPBDzbO4W3mirAin12PcI7+ko3VuPMiAYO30SRtY9cVT7DfsXe7D8RTTtRjrSxp
+         Ek1tcOd0RRpM1wvq0jEK/lQRGxosuaCqqIPg7d87dfn40mykUxZ7ML0kKRcCxlAYA6kd
+         hQcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789081829; x=1789686629;
+        d=1e100.net; s=20251104; t=1789081834; x=1789686634;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SPaSuiideSO7RsoEkXuvfVLb8kbd/nD1c3cECf405dU=;
-        b=OQ8eQ/bSICdHqOdux2yYTKtyikO2UOWMC7CKniPHHxE9nemvxEkJEHrrDCp5C2qQE7
-         gDXagHF8wubeXAR0YcJCSrrOL0EFp7CKIWns0L/RTqF9wi2q7TljxZEkYQ9rGuxtACpH
-         Kq+RQ6whBxlV9kXX2orFT+1Y7TRj3/m8ElOSSjII3/oWtTCagmAcPcZazaZllpsHfA8G
-         09KAEGfA3klOTCUyL8wjwDRlBOE3vsE0GQ04+sLQoGNAgjmF7MPi/86kyJsbNDlWXWDI
-         7kcE/HLltgcV3PDxDmwBcC8hdtbNpA3TuMg27Z8hBq0WgCW106GGOFJpdm9AcNc/6S5i
-         WvfQ==
-X-Gm-Message-State: AFuF++kb7pg1nOxAhdxI2Z/0uLV6F9LHAeoY4jq/f6X4/JhT+wGfRY6x
-	1clK8R6kmiyPG120yqDK1h9yDRdVvE/vhFeUNrmSb5cK5AT8d43QBubXFQN4BQ==
-X-Gm-Gg: AYBFou2hM4Vl92UukCGCi1+Hi58LdxLN2Brrd5qx1IdhXJAYRU7rq7srYOpqZxzRu38
-	WM41ZBFP0nR8Gtff17Plc36yx27oamLM2K7zRDDGvJFkQxYGINI8F+ld2gHpUn/vImidogKdoue
-	l8L+S5QkC0iUEIJcfkGaumB4gOJG26Xo6p3j7f9/0aHt4W+6JsW2Hbvcin3enOIwEtKu8ErW77h
-	p0cbDAKBA1k9qOWd28t2ytrqPaCFskT7tHMav66KnVxFGXCb/qZ8UUciZnEcA1ojd08m9lGDLDa
-	rDeBYSZhCOJDuWUvWDeqQ+rzcf7OSNtj70hmPFN5FvdOiyXW6BFiafBqET3hM5+z6a2WGVQk3se
-	hFqwUly6qBykhxaNJ3+cTO/AGYlFdcDvP+m6aWGZf6txbipsKqU+Ulvd+PDlxXx8T4346XKRfoj
-	0Ztpa57YqRmOMzMTgk+JSrey0EWUA6yBwx7HX47yQtHuKc99QhLStmqtxRtztMvkFhn+kCxQ6iy
-	3k5EORTw5DZ9WsuDENspuY=
-X-Received: by 2002:a17:90b:4d0c:b0:395:5f43:4ec4 with SMTP id 98e67ed59e1d1-39d9b97d29emr1764829a91.0.1789081828618;
-        Thu, 10 Sep 2026 16:10:28 -0700 (PDT)
+        bh=MlYoj5vNmoQSYQNpQ54F3i+Us5K+qjI3WRzjVCbJUnI=;
+        b=I+XfNxFuJIomTmSlJxgVI/ffSJ8L9cfp6kabTC++z8fElSUnnyP/GzU0x25PikyzkO
+         KwqnnILEi/FSOvl/bJRIcLRwrHFWu9IbTrDOZjN3taU5VpR6x4kNT5TYwfReh/wtfYSA
+         AIOOlFiqteOcZfNodOueMaN84AU7OQGhcWeus5Me2eIMYflcjvd/A8pUmz+U2N/ghuId
+         KlR5XmqW+xrC+fr/3+TcjeipqmmQRfdrVpQy9INsuQul+VEvKkwabjyeKJZzK7j0NCWa
+         vUX7HBZiwPB4/igBju/Iqj+g0HExUXrY+lLr+50nHqUI/KRkArpTKEROnHe3NMSxnYJQ
+         7LyA==
+X-Gm-Message-State: AFuF++lvYU1/w9nP+rIjNS5AYz/3SXO5161zk9W6SxD5iwQY2HAU/10x
+	AUIWtmHqT4k7EGYJmSwsZZ/K+WipZ3am6B50bIk4OCyWNCsUOaOslEv6OAmIFQ==
+X-Gm-Gg: AYBFou3mykpeHqKk8JY3/p0zV0Ld3QAfKfIAuMEOsovwar1VFMB6TTAjw8kFmzzJECv
+	imDdxntKEMcreTq9msxW39N8Ty+VPocGQAeQzaOUEDUrYWeeGaZJ28m0wk877a+DbQLFtRfCEUX
+	+crFP6SFwaRR6X9+Y6JsADz5TxoiemE3SpcgIXFt9xw5WKjz4Hc5XU9AFG1y0tJ0p1L3wwoZTMh
+	lOjju1k3wOGqJjIdIf4BNmQ4zlJRp1XU8d0/fir/yB2UllBTvvJYrmQUS3i45CkGu+0g9ITbnwH
+	lDKUGF7do4Broweh4RSttx7hKMPSdMLTiIlRmIF7g8v8A01wstzVXT2ESXL5tiCP4sbed8lec4z
+	2oekaIhLgps64Ij1JCGxwOVNnT2Am6zws2GSWVZ19qKOL2u3ettsuiijyO0qvcDGCD8PcSqpJem
+	OVECF9HRZ0z6OzqW2iQFXyI25L7gKhplfhrhe90gBVHDGLNPaDEETgHizVOrWSEZ8SbfyLsxUCo
+	QJkGewZKUPLhVH5JgzujsE=
+X-Received: by 2002:a17:90b:4cce:b0:398:c9be:cca8 with SMTP id 98e67ed59e1d1-39d9bbe1915mr2029672a91.2.1789081834018;
+        Thu, 10 Sep 2026 16:10:34 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d98e602d8sm1265496a91.3.2026.09.10.16.10.26
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d98e602d8sm1265496a91.3.2026.09.10.16.10.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 16:10:28 -0700 (PDT)
+        Thu, 10 Sep 2026 16:10:33 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 16/32] unbound: patch CVE-2026-44621
-Date: Fri, 11 Sep 2026 11:09:15 +1200
-Message-ID: <20260910230932.173913-16-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 18/32] unbound: patch CVE-2026-50045
+Date: Fri, 11 Sep 2026 11:09:17 +1200
+Message-ID: <20260910230932.173913-18-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260910230932.173913-1-ankur.tyagi85@gmail.com>
 References: <20260910230932.173913-1-ankur.tyagi85@gmail.com>
@@ -68,133 +68,313 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 23:10:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129934
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129936
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-44621
+https://nvd.nist.gov/vuln/detail/cve-2026-50045
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../unbound/unbound/CVE-2026-44621.patch      | 98 +++++++++++++++++++
- .../recipes-support/unbound/unbound_1.24.2.bb |  1 +
- 2 files changed, 99 insertions(+)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2026-44621.patch
+ .../unbound/unbound/CVE-2026-50045.patch      | 278 ++++++++++++++++++
+ .../recipes-support/unbound/unbound_1.24.2.bb |   1 +
+ 2 files changed, 279 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2026-50045.patch
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2026-44621.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2026-44621.patch
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2026-50045.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2026-50045.patch
 new file mode 100644
-index 0000000000..2c581a30be
+index 0000000000..39c786e9a1
 --- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/CVE-2026-44621.patch
-@@ -0,0 +1,98 @@
-+From 3abdb762310bb50ef03f1ee0bbd4e09cb814fbb1 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2026-50045.patch
+@@ -0,0 +1,278 @@
++From ceadb55a62fb7f503b13e238043a68573890db97 Mon Sep 17 00:00:00 2001
 +From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
-+Date: Wed, 22 Jul 2026 10:11:26 +0200
-+Subject: [PATCH] - Fix CVE-2026-44621, Libunbound applications configured with
-+   'unwanted-reply-threshold' could eventually be abruptly   terminated.
-+ Thanks to Qifan Zhang, Palo Alto Networks, for the   report.
++Date: Wed, 22 Jul 2026 10:13:14 +0200
++Subject: [PATCH] - Fix CVE-2026-50045, 'max-global-quota' reset by DNSSEC
++ validation   restarts. Thanks to Kunjie Shang, University of Science and  
++ Technology of China, for the report.
 +
-+(cherry picked from commit f52a9e864bfa0f10d8816b64130586b1d224c474)
++(cherry picked from commit 364ac737f713b2a606f0fddecddb675d72a6a991)
 +
-+CVE: CVE-2026-44621
-+Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/f52a9e864bfa0f10d8816b64130586b1d224c474]
++CVE: CVE-2026-50045
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/364ac737f713b2a606f0fddecddb675d72a6a991]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ daemon/worker.c                | 5 +++++
-+ dnstap/unbound-dnstap-socket.c | 5 +++++
-+ smallapp/worker_cb.c           | 6 ++++++
-+ testcode/doqclient.c           | 5 +++++
-+ util/fptr_wlist.c              | 1 +
-+ 5 files changed, 22 insertions(+)
++ iterator/iterator.c   | 67 ++++++++++++++++++++++++++++++-------------
++ util/module.h         |  6 ++++
++ validator/validator.c | 13 +++++++++
++ 3 files changed, 66 insertions(+), 20 deletions(-)
 +
-+diff --git a/daemon/worker.c b/daemon/worker.c
-+index 8e4a9b3d6..b9fac0406 100644
-+--- a/daemon/worker.c
-++++ b/daemon/worker.c
-+@@ -2560,6 +2560,11 @@ void libworker_event_done_cb(void* ATTR_UNUSED(arg), int ATTR_UNUSED(rcode),
-+ 	log_assert(0);
++diff --git a/iterator/iterator.c b/iterator/iterator.c
++index 71e64655f..16dbc19de 100644
++--- a/iterator/iterator.c
+++++ b/iterator/iterator.c
++@@ -81,7 +81,8 @@ int BLACKLIST_PENALTY = (120000*4);
++ /** Timeout when only a single probe query per IP is allowed. */
++ int PROBE_MAXRTO = PROBE_MAXRTO_DEFAULT; /* in msec */
++ 
++-static void target_count_increase_nx(struct iter_qstate* iq, int num);
+++static void target_count_increase_nx(struct module_qstate* qstate,
+++	struct iter_qstate* iq, int num);
++ 
++ int 
++ iter_init(struct module_env* env, int id)
++@@ -250,7 +251,7 @@ error_supers(struct module_qstate* qstate, int id, struct module_qstate* super)
++ 		if((dpns->got4 == 2 || (!ie->supports_ipv4 && !ie->nat64.use_nat64)) &&
++ 			(dpns->got6 == 2 || !ie->supports_ipv6)) {
++ 			dpns->resolved = 1; /* mark as failed */
++-			target_count_increase_nx(super_iq, 1);
+++			target_count_increase_nx(super, super_iq, 1);
++ 		}
++ 	}
++ 	if(qstate->qinfo.qtype == LDNS_RR_TYPE_NS) {
++@@ -733,7 +734,7 @@ is_caps_whitelisted(struct iter_env* ie, struct iter_qstate* iq)
++  * created for the parent query.
++  */
++ static void
++-target_count_create(struct iter_qstate* iq)
+++target_count_create(struct module_qstate* qstate, struct iter_qstate* iq)
++ {
++ 	if(!iq->target_count) {
++ 		iq->target_count = (int*)calloc(TARGET_COUNT_MAX, sizeof(int));
++@@ -741,33 +742,57 @@ target_count_create(struct iter_qstate* iq)
++ 		if(iq->target_count) {
++ 			iq->target_count[TARGET_COUNT_REF] = 1;
++ 			iq->nxns_dp = (uint8_t**)calloc(1, sizeof(uint8_t*));
+++			/* continue global quota from where it was. */
+++			if(qstate->global_quota_reached >
+++				iq->target_count[TARGET_COUNT_GLOBAL_QUOTA])
+++				iq->target_count[TARGET_COUNT_GLOBAL_QUOTA] =
+++					qstate->global_quota_reached;
++ 		}
++ 	}
 + }
 + 
-++void libworker_alloc_cleanup(void* ATTR_UNUSED(arg))
-++{
-++	log_assert(0);
++ static void
++-target_count_increase(struct iter_qstate* iq, int num)
+++target_count_store(struct module_qstate* qstate, struct iter_qstate* iq)
++ {
++-	target_count_create(iq);
+++	if(iq->target_count) {
+++		/* By storing the global quota counter, it stays
+++		 * there to be picked up if the module is restarted,
+++		 * eg. due to a validator retry, and then the
+++		 * target_count_create routine picks it up. */
+++		if(iq->target_count[TARGET_COUNT_GLOBAL_QUOTA] >
+++			qstate->global_quota_reached)
+++			qstate->global_quota_reached =
+++			  iq->target_count[TARGET_COUNT_GLOBAL_QUOTA];
+++	}
 ++}
 ++
-+ int context_query_cmp(const void* ATTR_UNUSED(a), const void* ATTR_UNUSED(b))
-+ {
-+ 	log_assert(0);
-+diff --git a/dnstap/unbound-dnstap-socket.c b/dnstap/unbound-dnstap-socket.c
-+index a01627de9..7d01eb220 100644
-+--- a/dnstap/unbound-dnstap-socket.c
-++++ b/dnstap/unbound-dnstap-socket.c
-+@@ -1725,6 +1725,11 @@ void libworker_event_done_cb(void* ATTR_UNUSED(arg), int ATTR_UNUSED(rcode),
-+ 	log_assert(0);
-+ }
-+ 
-++void libworker_alloc_cleanup(void* ATTR_UNUSED(arg))
+++static void
+++target_count_increase(struct module_qstate* qstate,
+++	struct iter_qstate* iq, int num)
 ++{
-++	log_assert(0);
-++}
-++
-+ int context_query_cmp(const void* ATTR_UNUSED(a), const void* ATTR_UNUSED(b))
-+ {
-+ 	log_assert(0);
-+diff --git a/smallapp/worker_cb.c b/smallapp/worker_cb.c
-+index 92ebe386d..876c7db4e 100644
-+--- a/smallapp/worker_cb.c
-++++ b/smallapp/worker_cb.c
-+@@ -128,6 +128,12 @@ worker_alloc_cleanup(void* ATTR_UNUSED(arg))
-+ 	log_assert(0);
+++	target_count_create(qstate, iq);
++ 	if(iq->target_count)
++ 		iq->target_count[TARGET_COUNT_QUERIES] += num;
++ 	iq->dp_target_count++;
 + }
 + 
-++void
-++libworker_alloc_cleanup(void* ATTR_UNUSED(arg))
-++{
-++	log_assert(0);
-++}
-++
-+ struct outbound_entry* libworker_send_query(
-+ 	struct query_info* ATTR_UNUSED(qinfo), uint16_t ATTR_UNUSED(flags),
-+ 	int ATTR_UNUSED(dnssec), int ATTR_UNUSED(want_dnssec),
-+diff --git a/testcode/doqclient.c b/testcode/doqclient.c
-+index 238a93803..1994cd097 100644
-+--- a/testcode/doqclient.c
-++++ b/testcode/doqclient.c
-+@@ -2671,6 +2671,11 @@ void libworker_event_done_cb(void* ATTR_UNUSED(arg), int ATTR_UNUSED(rcode),
-+ 	log_assert(0);
++ static void
++-target_count_increase_nx(struct iter_qstate* iq, int num)
+++target_count_increase_nx(struct module_qstate* qstate,
+++	struct iter_qstate* iq, int num)
++ {
++-	target_count_create(iq);
+++	target_count_create(qstate, iq);
++ 	if(iq->target_count)
++ 		iq->target_count[TARGET_COUNT_NX] += num;
 + }
 + 
-++void libworker_alloc_cleanup(void* ATTR_UNUSED(arg))
-++{
-++	log_assert(0);
-++}
-++
-+ int context_query_cmp(const void* ATTR_UNUSED(a), const void* ATTR_UNUSED(b))
++ static void
++-target_count_increase_global_quota(struct iter_qstate* iq, int num)
+++target_count_increase_global_quota(struct module_qstate* qstate,
+++	struct iter_qstate* iq, int num)
 + {
-+ 	log_assert(0);
-+diff --git a/util/fptr_wlist.c b/util/fptr_wlist.c
-+index c6f3ca24a..3c863d5e1 100644
-+--- a/util/fptr_wlist.c
-++++ b/util/fptr_wlist.c
-+@@ -609,6 +609,7 @@ int
-+ fptr_whitelist_alloc_cleanup(void (*fptr)(void*))
-+ {
-+ 	if(fptr == &worker_alloc_cleanup) return 1;
-++	else if(fptr == &libworker_alloc_cleanup) return 1;
-+ 	return 0;
++-	target_count_create(iq);
+++	target_count_create(qstate, iq);
++ 	if(iq->target_count)
++ 		iq->target_count[TARGET_COUNT_GLOBAL_QUOTA] += num;
+++	target_count_store(qstate, iq);
 + }
 + 
++ /**
++@@ -860,7 +885,7 @@ generate_sub_request(uint8_t* qname, size_t qnamelen, uint16_t qtype,
++ 		subiq = (struct iter_qstate*)subq->minfo[id];
++ 		memset(subiq, 0, sizeof(*subiq));
++ 		subiq->num_target_queries = 0;
++-		target_count_create(iq);
+++		target_count_create(qstate, iq);
++ 		subiq->target_count = iq->target_count;
++ 		if(iq->target_count) {
++ 			iq->target_count[TARGET_COUNT_REF] ++; /* extra reference */
++@@ -2233,7 +2258,7 @@ processLastResort(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			return error_response_cache(qstate, id, LDNS_RCODE_SERVFAIL);
++ 		}
++ 		iq->num_target_queries += qs;
++-		target_count_increase(iq, qs);
+++		target_count_increase(qstate, iq, qs);
++ 		if(qs != 0) {
++ 			qstate->ext_state[id] = module_wait_subquery;
++ 			return 0; /* and wait for them */
++@@ -2289,7 +2314,7 @@ processLastResort(struct module_qstate* qstate, struct iter_qstate* iq,
++ 				 * lookups at a time. */
++ 				verbose(VERB_ALGO, "try parent-side glue lookup");
++ 				iq->num_target_queries += query_count;
++-				target_count_increase(iq, query_count);
+++				target_count_increase(qstate, iq, query_count);
++ 				qstate->ext_state[id] = module_wait_subquery;
++ 				return 0;
++ 			}
++@@ -2309,7 +2334,7 @@ processLastResort(struct module_qstate* qstate, struct iter_qstate* iq,
++ 		if(query_count != 0) { /* suspend to await results */
++ 			verbose(VERB_ALGO, "try parent-side glue lookup");
++ 			iq->num_target_queries += query_count;
++-			target_count_increase(iq, query_count);
+++			target_count_increase(qstate, iq, query_count);
++ 			qstate->ext_state[id] = module_wait_subquery;
++ 			return 0;
++ 		}
++@@ -2789,7 +2814,7 @@ processQueryTargets(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			return error_response_cache(qstate, id, LDNS_RCODE_SERVFAIL);
++ 		}
++ 		iq->num_target_queries += extra;
++-		target_count_increase(iq, extra);
+++		target_count_increase(qstate, iq, extra);
++ 		if(iq->num_target_queries > 0) {
++ 			/* wait to get all targets, we want to try em */
++ 			verbose(VERB_ALGO, "wait for all targets for fallback");
++@@ -2840,7 +2865,7 @@ processQueryTargets(struct module_qstate* qstate, struct iter_qstate* iq,
++ 		/* errors ignored, these targets are not strictly necessary for
++ 		 * this result, we do not have to reply with SERVFAIL */
++ 		iq->num_target_queries += extra;
++-		target_count_increase(iq, extra);
+++		target_count_increase(qstate, iq, extra);
++ 	}
++ 
++ 	/* Add the current set of unused targets to our queue. */
++@@ -2963,7 +2988,7 @@ processQueryTargets(struct module_qstate* qstate, struct iter_qstate* iq,
++ 						LDNS_RCODE_SERVFAIL);
++ 				}
++ 				iq->num_target_queries += qs;
++-				target_count_increase(iq, qs);
+++				target_count_increase(qstate, iq, qs);
++ 			}
++ 			/* Since a target query might have been made, we 
++ 			 * need to check again. */
++@@ -3023,7 +3048,7 @@ processQueryTargets(struct module_qstate* qstate, struct iter_qstate* iq,
++ 		* this result, we do not have to reply with SERVFAIL */
++ 		if(extra > 0) {
++ 			iq->num_target_queries += extra;
++-			target_count_increase(iq, extra);
+++			target_count_increase(qstate, iq, extra);
++ 			check_waiting_queries(iq, qstate, id);
++ 			/* undo qname minimise step because we'll get back here
++ 			 * to do it again */
++@@ -3036,7 +3061,7 @@ processQueryTargets(struct module_qstate* qstate, struct iter_qstate* iq,
++ 		}
++ 	}
++ 
++-	target_count_increase_global_quota(iq, 1);
+++	target_count_increase_global_quota(qstate, iq, 1);
++ 	if(iq->target_count && iq->target_count[TARGET_COUNT_GLOBAL_QUOTA]
++ 		> MAX_GLOBAL_QUOTA) {
++ 		char s[LDNS_MAX_DOMAINLEN];
++@@ -3880,7 +3905,7 @@ processTargetResponse(struct module_qstate* qstate, int id,
++ 			/* no new addresses, increase the nxns counter, like
++ 			 * this could be a list of wildcards with no new
++ 			 * addresses */
++-			target_count_increase_nx(foriq, 1);
+++			target_count_increase_nx(qstate, foriq, 1);
++ 		}
++ 		verbose(VERB_ALGO, "added target response");
++ 		delegpt_log(VERB_ALGO, foriq->dp);
++@@ -3892,7 +3917,7 @@ processTargetResponse(struct module_qstate* qstate, int id,
++ 			dpns->resolved = 1; /* fail the target */
++ 			/* do not count cached answers */
++ 			if(qstate->reply_origin && qstate->reply_origin->len != 0) {
++-				target_count_increase_nx(foriq, 1);
+++				target_count_increase_nx(qstate, foriq, 1);
++ 			}
++ 		}
++ 	}
++@@ -4117,6 +4142,7 @@ processFinished(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			iter_store_parentside_neg(qstate->env, &qstate->qinfo,
++ 				iq->deleg_msg?iq->deleg_msg->rep:
++ 				(iq->response?iq->response->rep:NULL));
+++	target_count_store(qstate, iq);
++ 	if(!iq->response) {
++ 		verbose(VERB_ALGO, "No response is set, servfail");
++ 		errinf(qstate, "(no response found at query finish)");
++@@ -4532,6 +4558,7 @@ iter_clear(struct module_qstate* qstate, int id)
++ 	iq = (struct iter_qstate*)qstate->minfo[id];
++ 	if(iq) {
++ 		outbound_list_clear(&iq->outlist);
+++		target_count_store(qstate, iq);
++ 		if(iq->target_count && --iq->target_count[TARGET_COUNT_REF] == 0) {
++ 			free(iq->target_count);
++ 			if(*iq->nxns_dp) free(*iq->nxns_dp);
++diff --git a/util/module.h b/util/module.h
++index edce4a523..b13b8de2f 100644
++--- a/util/module.h
+++++ b/util/module.h
++@@ -712,6 +712,12 @@ struct module_qstate {
++ 
++ 	/** whether the reply should be dropped */
++ 	int is_drop;
+++	/** the global quota that was reached, by one of the modules.
+++	 * So that continued counting can go on from that point. */
+++	int global_quota_reached;
+++	/** the global quota that a query started with, it is a subquery,
+++	 * so that calling mesh states can see the increase. */
+++	int global_quota_started;
++ };
++ 
++ /** 
++diff --git a/validator/validator.c b/validator/validator.c
++index 68c4bf643..c9896e4fb 100644
++--- a/validator/validator.c
+++++ b/validator/validator.c
++@@ -517,6 +517,14 @@ generate_request(struct module_qstate* qstate, int id, uint8_t* name,
++ 		/* add our blacklist to the query blacklist */
++ 		sock_list_merge(&(*newq)->blacklist, (*newq)->region,
++ 			vq->chain_blacklist);
+++		/* start its global quota counter where this one is. */
+++		if(qstate->global_quota_reached >
+++			(*newq)->global_quota_reached) {
+++			(*newq)->global_quota_started =
+++				qstate->global_quota_reached;
+++			(*newq)->global_quota_reached =
+++				qstate->global_quota_reached;
+++		}
++ 	}
++ 	qstate->ext_state[id] = module_wait_subquery;
++ 	return 1;
++@@ -3476,6 +3484,11 @@ val_inform_super(struct module_qstate* qstate, int id,
++ 		verbose(VERB_ALGO, "super: has no validator state");
++ 		return;
++ 	}
+++	/* Pick up the global quota limit from the subquery. */
+++	if(qstate->global_quota_reached > qstate->global_quota_started) {
+++		super->global_quota_reached += qstate->global_quota_reached -
+++			qstate->global_quota_started;
+++	}
++ 	if(vq->wait_prime_ta) {
++ 		vq->wait_prime_ta = 0;
++ 		process_prime_response(super, vq, id, qstate->return_rcode,
 diff --git a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-index 5c798c00d3..ac8cd281d6 100644
+index 6cae8632ae..28214dea19 100644
 --- a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
 +++ b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
-            file://CVE-2026-46582.patch \
-            file://CVE-2026-32665.patch \
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
             file://CVE-2026-42955.patch \
-+           file://CVE-2026-44621.patch \
+            file://CVE-2026-44621.patch \
+            file://CVE-2026-44687.patch \
++           file://CVE-2026-50045.patch \
             "
  
  SRCREV = "f6269baa605d31859f28770e01a24e3677e5f82c"
