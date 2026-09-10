@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5F59C88E41
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD278C88E45
 	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 23:10:57 +0000 (UTC)
 Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27787.1789081856453926778
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27785.1789081853787502642
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Sep 2026 16:10:56 -0700
+ Thu, 10 Sep 2026 16:10:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Q4cQcSOX;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=LnMmxTYV;
  spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-398beb616f5so90545a91.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 16:10:56 -0700 (PDT)
+Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d90ba1d807so2692135ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 16:10:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789081856; x=1789686656; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1789081853; x=1789686653; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=idPz84pCpMSmNlxNc1cH6FmUspn+JaYACcTJokSIXf0=;
-        b=Q4cQcSOXjr7STlhm8xb/5K6+JIJa7K6HSDb8rOves1M0LIelAQhWMRG+VMxVTPE5No
-         B20GWcj9AnaxMdG6vjXIfPzsPzroY9OL52SKdq0VQNZF29wauQlasVQM3jS06K1y96oC
-         vgDNJ1aCYdFMoyND0nIhHVIdbBA6JB6NQi13mJi1nmOdmeuy5wc1zRVUnoJotDWPOm/i
-         DKnOjMC46sMC/I03a1Ffh5+s4pn34pOaPQAyeSDD7XiqcHpaHhsfd0WJD0uKiEEDcRUO
-         wquuI71FDHmL9gHMic9TLvH1vNf3kii3mqcc4Nz5RBhHMt2+fS8gHQ0bjrsYdwGGG01Z
-         NUXA==
+        bh=hmf6kn/dh/xIaEcQJ9E3foESLqAmsxuGTMN6jm2PH3w=;
+        b=LnMmxTYV+OUbGeO7b/Nu4mYLSqSE3FMB6jXuyJWhpGRJDVSjddb6rpHObdIGi9NwFU
+         U/zohbKKPy08YwDO2Q7hROV5p4HsIlJoVD5ulTdnyzXu9q0F11r+ZwTINyj0FVstgaW5
+         y+4VbwUCTiVsoHk0sWslLzks8TScB9l/VTXjppGQUUtTbb/PW81tWo7iErz1XfXdmtAd
+         1VEQT7te2PmXrHEhsk08apx0a9Idp5HWK6lsRUPYNKxXjNdPd8bZ2DOfEc381I5JsJly
+         NHk2u/LrE5caGwlp1ipt2NP9CYXYJe2kH9PMrX3dl4oI7VJsJ5Hmmx1vFIl4zndu2Wx0
+         cWLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789081856; x=1789686656;
+        d=1e100.net; s=20251104; t=1789081853; x=1789686653;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=idPz84pCpMSmNlxNc1cH6FmUspn+JaYACcTJokSIXf0=;
-        b=odKp+cL0V9mOpUC93px8HKOTvEq8dvJP2M0Ua8SEqR4brHs9kNxI9AgkMYGZqWqn23
-         uBuADY8Ux/o2cnKF5/JPzE/FxJb8MIsOSujS4YJ9Pv1C7P8EG80M9naggbqbOzOugXia
-         Oz46euiVl21EOki9XkMqm1q/QNxI8uW7At1mQUtflSMlUferpITqeypSK0/lvBIUB2IG
-         a2Js1teChH+BRFD8qwc3sjNR1j5k/SoCRwMuWeDxsjbtC7Nb4/tzgEQx3BEKKkwwRGbW
-         /99dEJkwv64o+BgjE4HJmGd/2agL54S82z6kVeiKKT2StgvVTp/mrJvNDdlLyBazUSMV
-         /pWw==
-X-Gm-Message-State: AFuF++l/am+A+0DMnHkjCPk52QnUMEA9X5YIP1Ggq6Y7ornwrB6UkKdr
-	qQyCp1NAQuz4d/VtrGbdTdvnWkrIwnonRVFcNU6aWasOXBtgGoKb4mfB5H5Y2g==
-X-Gm-Gg: AYBFou1+3nca3XG13a7h73irbTZLDe0YDR6YXcMVnkhuEruDU+jWSxP42iJOXZDGJEP
-	WqRffVF6OBM9czTyrhZQqqxOaHebzeQZ3ca3DblPbJ3vlMkWZ4FeZ5eunYkVtEAmQgK1NBOjPfG
-	Fbt1J9zeqpe5/O4t+TVPAwex9KU3crxI/i0/byjK9iqO0b6ESseAno1pix5QS+lVWO9vdYOrk4e
-	1duUqiaR2TuPKplfllXzDFQKhHr9fypooRdXVFSLw7vfiAMADllIjWM/VEFKXDrVtqbAKDW44nL
-	fEzYYsN7hTMFPIJFNqfA/60gpgpwOoxaJme/U4rMblqOxkzFF4gK42c9PKK/XrObtzFaK/PgJrw
-	iTrsFN4HfducC7iTUCVt0DwMpopIuk/uSyek4CADXVlpKNLVJIs/nZL94D/xc3qWNsOIEZnsJBI
-	n2tXH0nnkxTjFoFSKlcdII1onDSbMOy5jE1vT4SkSpeocG6uYx0dOV9Mi7hjVwoqdvJuRt22iLl
-	iPUVIycnLJS8vdMddnEBls=
-X-Received: by 2002:a17:90b:5108:b0:38f:657:6823 with SMTP id 98e67ed59e1d1-39d97f392d3mr1589477a91.8.1789081855775;
-        Thu, 10 Sep 2026 16:10:55 -0700 (PDT)
+        bh=hmf6kn/dh/xIaEcQJ9E3foESLqAmsxuGTMN6jm2PH3w=;
+        b=Yk/vtfLVIoPfu9IpTgAY7vVRooJZ6InAZRV5bBmD169j0BHmbrfiuvOpBMl4GiCEAj
+         owEpl8Z5FQLON5dFYOpyZz0JQWum7RDnfBbvIGzX18D1bOEToFy9p+BS4pGfCZPK51xo
+         ksbWzVC+aa1gKlYJiM03dOIyKIE12nGGLGeNWmiDJlvd1Dvpnw9FaL/tAgsll+1/UTZv
+         /NJWR0YoDAt2Qt0rGYGtqJk4/PzkLLxpR9+BdZ9ceHB458yhwIVhi1pOHH6XsnKO5bqM
+         +n4h9f5eAceFeRYB8VYUbyEDVbz9RMO3grGR/T+CFiMkP/sRkmqCczn5a9W2iyC4ggLZ
+         kZzA==
+X-Gm-Message-State: AFuF++lIlvve1yPCkLmBxqAxcWjqpsnMlJ6nrH6lAoPtPyb6FT2kdjBF
+	38rzqyXOtg/I9Ap+hgYu0LA2F/nhGpgMnqNeeHjEXu2IDP2YdWWETa9xlZuVYQ==
+X-Gm-Gg: AYBFou05qlRaeUa9k9Pl3gLY6yAJT107HuBVSpxeDI+4dtuMFDSXraFB0D27l+7yPNg
+	zf+qQlDZX1OfQqqYwV1DwMOVXZ+CJhAoZTYNZdb5n+2XOTXq3mQhQvvZ1f9wcuTDnfJwLd0Z0ya
+	OexYMGuS5FZFiW8kQDgR/0Ag3Dbl+wT+9SVCFPZk5snpL5d4mbd5MfcLqbUWzQm1mbitlD0uWdC
+	xTKvX5VFvDKJ06c39LFdAewaDfXwK6ode30jeWEybF83zT/0ox3LPBd8WXY7Li6rzmGkryyJmx2
+	7v0JFkXyx7HVlb41ElSBXdkMU33iha+CLWFSTdQ9ZR+G+6OCP6Euok5WoLV2h4LObU83dR5N7QQ
+	/hG0UpXLOv0sk69uiBG+td8tYeYkcSiGFCcYJTi0r4YYJne83JJkUBrJnoZNe1QBPVHrNZ58lg4
+	yOy/SHnsy+ahNUiVcIMjDkwd68d0nOGZE1n4NqThBFm2amh9J5Few3cpG3JYd74UvhPTa5f6VVm
+	J93Nx8Sl88pKd3bxIXWZnqtbg==
+X-Received: by 2002:a17:90b:5246:b0:398:d2a0:87ff with SMTP id 98e67ed59e1d1-39d9bc67660mr1895524a91.1.1789081853138;
+        Thu, 10 Sep 2026 16:10:53 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d98e602d8sm1265496a91.3.2026.09.10.16.10.53
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d98e602d8sm1265496a91.3.2026.09.10.16.10.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 16:10:55 -0700 (PDT)
+        Thu, 10 Sep 2026 16:10:52 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 26/32] unbound: patch CVE-2026-55708
-Date: Fri, 11 Sep 2026 11:09:25 +1200
-Message-ID: <20260910230932.173913-26-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 25/32] unbound: patch CVE-2026-54478
+Date: Fri, 11 Sep 2026 11:09:24 +1200
+Message-ID: <20260910230932.173913-25-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260910230932.173913-1-ankur.tyagi85@gmail.com>
 References: <20260910230932.173913-1-ankur.tyagi85@gmail.com>
@@ -68,86 +68,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 23:10:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129944
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129943
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-55708
+https://nvd.nist.gov/vuln/detail/cve-2026-54478
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../unbound/unbound/CVE-2026-55708.patch      | 51 +++++++++++++++++++
+ .../unbound/unbound/CVE-2026-54478.patch      | 38 +++++++++++++++++++
  .../recipes-support/unbound/unbound_1.24.2.bb |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2026-55708.patch
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2026-54478.patch
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2026-55708.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2026-55708.patch
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2026-54478.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2026-54478.patch
 new file mode 100644
-index 0000000000..402e38c737
+index 0000000000..3580815477
 --- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/CVE-2026-55708.patch
-@@ -0,0 +1,51 @@
-+From 1138101d9147db0539c27e9c19525223f32de84c Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2026-54478.patch
+@@ -0,0 +1,38 @@
++From 44af1c8b392afb7d14ae0814fb9c6c037a5bf18a Mon Sep 17 00:00:00 2001
 +From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
-+Date: Wed, 22 Jul 2026 10:17:10 +0200
-+Subject: [PATCH] - Fix CVE-2026-55708, Privacy/configuration issue when adding
-+ local   data in views through 'unbound-control'. Thanks to Qifan Zhang,  
-+ Palo Alto Networks, for the report.
++Date: Wed, 22 Jul 2026 10:16:42 +0200
++Subject: [PATCH] - Fix CVE-2026-54478, DNS Cookie bypass when combined with  
++ proxy-protocol use. Thanks to Qifan Zhang, Palo Alto Networks,   for the
++ report.
 +
-+(cherry picked from commit c29ff70f6aa9bb2f02e5f21001832f2b4791bd76)
++(cherry picked from commit 8a15ffee620bce05fbfd2c69b0d4c31c10a02431)
 +
-+CVE: CVE-2026-55708
-+Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/c29ff70f6aa9bb2f02e5f21001832f2b4791bd76]
++CVE: CVE-2026-54478
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/8a15ffee620bce05fbfd2c69b0d4c31c10a02431]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ daemon/remote.c | 16 ++++++++++++++++
-+ 1 file changed, 16 insertions(+)
++ util/data/msgparse.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/daemon/remote.c b/daemon/remote.c
-+index d8ee7fa7d..8a26dadc7 100644
-+--- a/daemon/remote.c
-++++ b/daemon/remote.c
-+@@ -1634,6 +1634,14 @@ do_view_data_add(RES* ssl, struct worker* worker, char* arg)
-+ 			ssl_printf(ssl,"error out of memory\n");
-+ 			return;
-+ 		}
-++		if(!v->isfirst) {
-++			/* Global local-zone is not used for this view,
-++			 * therefore add defaults to this view-specific
-++			 * local-zone. */
-++			struct config_file lz_cfg;
-++			memset(&lz_cfg, 0, sizeof(lz_cfg));
-++			local_zone_enter_defaults(v->local_zones, &lz_cfg);
-++		}
-+ 	}
-+ 	do_data_add(ssl, v->local_zones, arg2);
-+ 	lock_rw_unlock(&v->lock);
-+@@ -1659,6 +1667,14 @@ do_view_datas_add(struct daemon_remote* rc, RES* ssl, struct worker* worker,
-+ 			ssl_printf(ssl,"error out of memory\n");
-+ 			return;
-+ 		}
-++		if(!v->isfirst) {
-++			/* Global local-zone is not used for this view,
-++			 * therefore add defaults to this view-specific
-++			 * local-zone. */
-++			struct config_file lz_cfg;
-++			memset(&lz_cfg, 0, sizeof(lz_cfg));
-++			local_zone_enter_defaults(v->local_zones, &lz_cfg);
-++		}
-+ 	}
-+ 	/* put the view name in the command buf */
-+ 	(void)snprintf(buf+strlen(buf), sizeof(buf)-strlen(buf), "%s ", arg);
++diff --git a/util/data/msgparse.c b/util/data/msgparse.c
++index 169709b7e..3dc2e1264 100644
++--- a/util/data/msgparse.c
+++++ b/util/data/msgparse.c
++@@ -1068,13 +1068,13 @@ parse_edns_options_from_query(uint8_t* rdata_ptr, size_t rdata_len,
++ 			 * purposes. It will be overwritten if (re)creation
++ 			 * is needed.
++ 			 */
++-			if(repinfo->remote_addr.ss_family == AF_INET) {
+++			if(repinfo->client_addr.ss_family == AF_INET) {
++ 				memcpy(server_cookie + 16,
++-					&((struct sockaddr_in*)&repinfo->remote_addr)->sin_addr, 4);
+++					&((struct sockaddr_in*)&repinfo->client_addr)->sin_addr, 4);
++ 			} else {
++ 				cookie_is_v4 = 0;
++ 				memcpy(server_cookie + 16,
++-					&((struct sockaddr_in6*)&repinfo->remote_addr)->sin6_addr, 16);
+++					&((struct sockaddr_in6*)&repinfo->client_addr)->sin6_addr, 16);
++ 			}
++ 
++ 			if(cfg->cookie_secret_file &&
 diff --git a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-index 1e3bd6f5c6..a04080c751 100644
+index a03dcf4193..1e3bd6f5c6 100644
 --- a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
 +++ b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-@@ -36,6 +36,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
+@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
+            file://CVE-2026-50251.patch \
             file://CVE-2026-50252.patch \
             file://CVE-2026-52863.patch \
-            file://CVE-2026-54478.patch \
-+           file://CVE-2026-55708.patch \
++           file://CVE-2026-54478.patch \
             "
  
  SRCREV = "f6269baa605d31859f28770e01a24e3677e5f82c"
