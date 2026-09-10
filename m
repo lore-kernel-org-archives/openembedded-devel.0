@@ -2,74 +2,74 @@ Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBA4AC79F9F
-	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 09:26:58 +0000 (UTC)
-Received: from aer-iport-4.cisco.com (aer-iport-4.cisco.com [173.38.203.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9671.1789032412116157541
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A690DC79FBF
+	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 09:27:38 +0000 (UTC)
+Received: from aer-iport-6.cisco.com (aer-iport-6.cisco.com [173.38.203.68])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9681.1789032454909514392
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Sep 2026 02:26:52 -0700
+ Thu, 10 Sep 2026 02:27:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=XKVjb24n;
- spf=pass (domain: cisco.com, ip: 173.38.203.54, mailfrom: deeratho@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=TKJLfm4W;
+ spf=pass (domain: cisco.com, ip: 173.38.203.68, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=6753; q=dns/txt;
-  s=iport01; t=1789032412; x=1790242012;
+  d=cisco.com; i=@cisco.com; l=6704; q=dns/txt;
+  s=iport01; t=1789032455; x=1790242055;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=BxagLAO3EPFWd8hn3wHVHTBed1bqu/H7vwN3jiOYjjI=;
-  b=XKVjb24nACQM03qIkGdTMeF4Yae/l6F7enQlfL/aGKhuRWkH4cjAwTM9
-   LgSwqIRfIZF56NRmHm/1X3x0pwQIMTw7DXkCn4MksIaVboZQPbvboJ3EY
-   3c4FwwG44cu+bAfBmZMH/KlM3a3eJ1B4UUVQ3KzhN0eNXkkDxK9ZGhhXV
-   5Sv6KYnv9tju6xc/xriOk4WTEXBDiE3wg4WlaiRxXp8IlVpGG5aXhPRyn
-   Ujap+/ZK2A0aAn/b+XSQPcYtuR8q9mfUQa1aubvLxoKkJRhwz2pHvDaEs
-   csj6WYqQEMTqd9LxC9dZINxl2PI275ncAcItKsVddZoVE1Ibzdvigzx4p
-   w==;
-X-CSE-ConnectionGUID: nyjtSLO8TiuvcXGJs8fqhg==
-X-CSE-MsgGUID: iSnJXSWHS+uNW5/nnys8nQ==
-X-IPAS-Result: =?us-ascii?q?A0BFAgAFd6Jq/85K/pBaHgEBCxIMggULgld0YUJJA5Qmg?=
+  bh=7wSgfGhHonZAR0zmuN7k+t1xoupVsPvJe/7Yw+olwO8=;
+  b=TKJLfm4WgD1UGsLaxS4HKHFrqggczFGUHScE1lya1uQEz9NSSWyLoWZD
+   sBEn4elrLYpuNC6m2hnVmTh8iMJH8xzpvAwPdh4PFT2mBRLdr+Dn2FHrD
+   VqrxO74iZbYR/7walX6z2dSu3qxOz6Vuhaqy1bQhWfj/8AT+5gM9z66bP
+   YmIqq24fxhcIOkiErDGECsxME0obZZhwmpu5IE0gOa2hr74yGXFZKdsiq
+   4T3cpMFsuKSkQJb1dglgCBrvvc6QQPdTDutZrkvHRQeRABGlq7BcKF/da
+   XZxy4TxCFq45OEaM3gSnMN5SJ1qGhbVLAwNgzIOUMHrC5nLUhrkOxneie
+   A==;
+X-CSE-ConnectionGUID: +2xZsLroQc68otMCSh3crw==
+X-CSE-MsgGUID: xGd1xM12QVmmJr7ee+X0bg==
+X-IPAS-Result: =?us-ascii?q?A0BFAgCYd6Jq/85K/pBaHgEBCxIMggULgld0YUJJA5Qmg?=
  =?us-ascii?q?iGRTYxRgX4PAQEBD0QNBAEBhD9GAo4FAiY0CQ4BAgQDAgMBAQEBAQEBAQEBA?=
- =?us-ascii?q?QEKAQEFAQEBAgEHBYEOE4ZPDZASAS0LAXIDAQJaIxkIgwIBgnQDEcEYGjeBe?=
+ =?us-ascii?q?QEKAQEFAQEBAgEHBYEOE4ZPDZASAS0LAXIDAQJaIxkIgwIBgnQDEcEOGjeBe?=
  =?us-ascii?q?TOBAYNuQFDbMQELFAGBOIU/iCJdGAGEfCcbG4FygRWDaYEFgVwCgScRhm0Eg?=
  =?us-ascii?q?g0VgQyBWhgGgWGDQYxgSIEeA1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4EHG?=
  =?us-ascii?q?wYFgR2BJ4JkIxk2eoEJXoErKWESF4EJgggCglSCAQIBSUMOB0VTCSdLEkwpG?=
- =?us-ascii?q?AsYDUgRLDcVGQQ+bgeOex+CXQFYCisBCiEXgQlIRAYJK6U5oRIKKIN2jCKVO?=
- =?us-ascii?q?hozhVuje4EXC5h9iRyEbpVoCw1QhGmBaDyBWXAVgyIJShkPji4LC4NghlDFU?=
- =?us-ascii?q?Tw1AgkDLwEBBwIHDgMLgWiQAAEngVYBAQ?=
-IronPort-Data: A9a23:6pAh3a22MqupHMLzr/bD5YRwkn2cJEfYwER7XKvMYLTBsI5bpzEPz
- WUfD2mAbqncNzb2fdFwO4Tg9x5UusCEzYVrTwM/3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ =?us-ascii?q?AsYDUgRLDcVGQQ+bgeOex+CXQFYCisBCiEXgVFEDyulOaESCiiDdowilToaM?=
+ =?us-ascii?q?4Vbo3uBFwuYfYkchG6VaAsNUIRpgWg8gVlwFYMiCUoZD44uCwuDYIZQxVE8N?=
+ =?us-ascii?q?QIJAy8BAQcCBw4DC4FokAABJ4FWAQE?=
+IronPort-Data: A9a23:b5LnaK3jm3+Rvqt/4vbD5YRwkn2cJEfYwER7XKvMYLTBsI5bp2MEz
+ mJMUT3SbPuONGXxc4tyYI+w90pX6MeAx4IxTFA/3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
  512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
  rsen+WFYAX7g28tajpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
  u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGClA0IbY83bZLAHxQ/
- sw3CitdYAmDiLfjqF67YrEEasULJcTxeYdasXZ6wHSBULAtQIvIROPB4towMDUY35wSW6yDO
- 4xGNXw1NEqojx5nYj/7DLoykeqyj2X/dBVTqUmeouw85G27IAlZjuC0a4ONJIDiqcN9n32eh
- FL9wETCQQw8C4HYzzyU6SKqv7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGTxsmD5Y84OFOCj8e8
+ uA9AwsNNRuZmLfjqF67YrEEasULJcTxeYdasXZ6wHSBULAtQIvIROPB4towMDUY35wSW6yDO
+ 4xGNXw1NEqojx5nYj/7DLoykeqyj2X/dBVTqUmeouw85G27IAlZjee2YYCLIIziqcN9jmmU/
+ 3Ljpj7APBQfFsbAxDfGwiqmibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
  1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0UtdKVul/4waXx++MvkCSB3MPSXhKb9lOWNIKeAHGH
  2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:ww5coaGXGRPHIwFNpLqE2MeALOsnbusQ8zAXPidKOH5om6Oj+f
- xG8M536faWskdzZJhfo7G90cC7KBu2n6KdirN/AV7NZmXbUROTTL1K3M/F3yDqHTH4+6p20K
- dtdLU7NfjLZGIK6PoTJGKDYrEdKB7tytHNudvj
-X-Talos-CUID: 9a23:sxYfCm6fcqK0PTodldss8l8WBvsBVS3hzWrOKH+XK305RqSVRgrF
-X-Talos-MUID: 9a23:rNuS1AWm5WRxE8bq/D7XghNSD/hI2OezLn9Q1pMAqtLUMxUlbg==
+IronPort-HdrOrdr: A9a23:9Y/s9q5oXp1GOXHLsgPXwPjXdLJyesId70hD6qkXc202TiX2ra
+ 6TdZgguCMc6wxhO03I5+rgBEDoexq1nvRICOIqUotKMjOLhILRFuFfxLqn5SH8ECvj8eMY/6
+ Jhf69iTODUNzFB/KPHCM3SKadG/DFBm5rY4dvj8w==
+X-Talos-CUID: 9a23:Z8ldZG4InN3sp+CuztsstxQEKNsBaHrkxymAJFOdIl1pE7aPVgrF
+X-Talos-MUID: 9a23:i3PuogX6zUNwEVbq/C/DiGhyEZ4y2pqrDWIXzpgL+PncPyMlbg==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,95,1787011200"; 
-   d="scan'208";a="60131064"
+   d="scan'208";a="57392628"
 Received: from aer-l-core-05.cisco.com ([144.254.74.206])
-  by aer-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 10 Sep 2026 09:26:47 +0000
+  by aer-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 10 Sep 2026 09:27:11 +0000
 Received: from bgl-ads-3413.cisco.com (bgl-ads-3413.cisco.com [173.39.60.50])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by aer-l-core-05.cisco.com (Postfix) with ESMTPS id B21541800023A
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 09:26:47 +0000 (GMT)
+	by aer-l-core-05.cisco.com (Postfix) with ESMTPS id 32BDB1800023A
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 09:27:11 +0000 (GMT)
 Received: by bgl-ads-3413.cisco.com (Postfix, from userid 1795984)
-	id 6F71FCC1636; Thu, 10 Sep 2026 14:56:46 +0530 (IST)
+	id EEC96CC1636; Thu, 10 Sep 2026 14:57:09 +0530 (IST)
 From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH] rsyslog: Fix CVE-2026-19654
-Date: Thu, 10 Sep 2026 14:55:29 +0530
-Message-Id: <20260910092529.3739156-1-deeratho@cisco.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] rsyslog: Fix CVE-2026-19654
+Date: Thu, 10 Sep 2026 14:57:00 +0530
+Message-Id: <20260910092700.3740102-1-deeratho@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -79,8 +79,8 @@ X-Outbound-Node: aer-l-core-05.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 09:26:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129911
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Sep 2026 09:27:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129912
 
 From: Deepak Rathore <deeratho@cisco.com>
 
@@ -97,20 +97,20 @@ in [3] and the individual commit is reference in [4].
 
 Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 ---
- .../rsyslog/rsyslog/CVE-2026-19654.patch      | 51 +++++++++++++++++
+ .../rsyslog/rsyslog/CVE-2026-19654.patch      | 52 +++++++++++++++++
  .../rsyslog/CVE-2026-19654-regression.patch   | 56 +++++++++++++++++++
- .../rsyslog/rsyslog_8.2512.0.bb               |  2 +
- 3 files changed, 109 insertions(+)
+ .../rsyslog/rsyslog_8.2402.0.bb               |  2 +
+ 3 files changed, 110 insertions(+)
  create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654.patch
  create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654-regression.patch
 
 diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654.patch
 new file mode 100644
-index 0000000000..1e6b390646
+index 000000000..4371a0715
 --- /dev/null
 +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654.patch
-@@ -0,0 +1,51 @@
-+From a680861018de25b2fb2e83d64c725ddbbb91a7db Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,52 @@
++From b80f0ee2a0e42bafdd9c13f9d6155b4c8b425a9a Mon Sep 17 00:00:00 2001
 +From: Rainer Gerhards <rgerhards@adiscon.com>
 +Date: Mon, 20 Jul 2026 17:19:28 +0200
 +Subject: [PATCH 1/2] imptcp: guard regex framing match at line start
@@ -147,27 +147,28 @@ index 0000000000..1e6b390646
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/plugins/imptcp/imptcp.c b/plugins/imptcp/imptcp.c
-+index 363d8fa5a..8470e93eb 100644
++index 351dee077..9e16e4b19 100644
 +--- a/plugins/imptcp/imptcp.c
 ++++ b/plugins/imptcp/imptcp.c
-+@@ -1009,7 +1009,7 @@ static rsRetVal ATTR_NONNULL() processDataRcvd_regexFraming(ptcpsess_t *const __
-+         pThis->iCurrLine = pThis->iMsg;
-+     } else {
-+         const int isMatch = !regexec(&inst->start_preg, (char *)pThis->pMsg + pThis->iCurrLine, 0, NULL, 0);
-+-        if (isMatch) {
-++        if (pThis->iCurrLine > 0 && isMatch) {
-+             DBGPRINTF("regex match (%d), framing line: %s\n", pThis->iCurrLine, pThis->pMsg);
-+             strcpy((char *)pThis->pMsg_save, (char *)pThis->pMsg + pThis->iCurrLine);
-+             pThis->iMsg = pThis->iCurrLine - 1;
++@@ -1053,7 +1053,7 @@ processDataRcvd_regexFraming(ptcpsess_t *const __restrict__ pThis,
++ 		pThis->iCurrLine = pThis->iMsg;
++ 	} else {
++ 		const int isMatch = !regexec(&inst->start_preg, (char*)pThis->pMsg+pThis->iCurrLine, 0, NULL, 0);
++-		if(isMatch) {
+++		if (pThis->iCurrLine > 0 && isMatch) {
++ 			DBGPRINTF("regex match (%d), framing line: %s\n", pThis->iCurrLine, pThis->pMsg);
++ 			strcpy((char*)pThis->pMsg_save, (char*) pThis->pMsg+pThis->iCurrLine);
++ 			pThis->iMsg = pThis->iCurrLine - 1;
 +-- 
-+2.53.0
++2.44.4
++
 diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654-regression.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654-regression.patch
 new file mode 100644
-index 0000000000..afab77b172
+index 000000000..d33188617
 --- /dev/null
 +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654-regression.patch
 @@ -0,0 +1,56 @@
-+From fd358cb6b9a773d6c4c223735745104c0deacc4f Mon Sep 17 00:00:00 2001
++From 49d897a9fb76d340978b24ced7d63b3786bb1c51 Mon Sep 17 00:00:00 2001
 +From: Rainer Gerhards <rgerhards@adiscon.com>
 +Date: Mon, 20 Jul 2026 18:19:17 +0200
 +Subject: [PATCH 2/2] tests: assert imptcp regex oversize diagnostics
@@ -221,16 +222,16 @@ index 0000000000..afab77b172
 ++content_check --regex "message too long" "${RSYSLOG2_OUT_LOG}"
 + exit_test
 +-- 
-+2.53.0
++2.44.4
 +
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2512.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2512.0.bb
-index 186e1ccf24..9a0702af93 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2512.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2512.0.bb
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+index c5bd9be5b..7c5687f76 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
 @@ -25,6 +25,8 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
+            file://use-pkgconfig-to-check-libgcrypt.patch \
             file://run-ptest \
             file://0001-tests-disable-the-check-for-inotify.patch \
-            file://0001-tests-tcpflood.c-Pass-correct-parameter-type-to-send.patch \
 +           file://CVE-2026-19654.patch \
 +           file://CVE-2026-19654-regression.patch \
  "
@@ -238,4 +239,5 @@ index 186e1ccf24..9a0702af93 100644
  SRC_URI:append:libc-musl = " \
 -- 
 2.43.7
+
 
