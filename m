@@ -1,74 +1,89 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1338C88E4C
-	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 11:17:57 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37290.1789125328416290806
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAEF6C88E4C
+	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 11:21:57 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37349.1789125705927660423
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2026 04:15:28 -0700
+ Fri, 11 Sep 2026 04:21:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=k20260515 header.b=SVJchcLR;
- spf=pass (domain: kernel.org, ip: 172.105.4.254, mailfrom: brgl@kernel.org)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id 2F01D602C2
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 11:15:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA08F1F000FF
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 11:15:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789125326;
-	bh=gLehc8uMoxhiGuvT71fkYM+KWdg8f04SqHasHRztFtc=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=SVJchcLRBbo0i/JkNp68cBuX18dfJa3rWVlnZQUbu2ioG5i8ZyidDImAKppuHe9ZI
-	 yKrd+sxkE+/XXXFeRsQL03SAO4H0+d6M7mqUvd1tqYLLyYVwSQ+uMOKSoVI/03TFVT
-	 oJKAeDRK1eKwgJqjhITUxA0+ViA11JIOh1QdmTYYr6LRviZStqTQ67jDUNuSVtXsVX
-	 Y3M5kHbaDrvC3bJ52bCeBWhu5RARjJt03Vz0CxSSy9KLW2IxMLbiULif59i8FOr2dM
-	 sMtpaY0JlETCrkrfxraP+LFp0LzrN1XI73kpcyEN/YRJrF1RjEBLVOktz02nivEBAH
-	 GqZmZHhXEtEeg==
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b5607bd3b5so866133e87.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 04:15:26 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBydFcUEAU/J3QAaEOZpXFTx3GhQblONNt4tPzgWZitNkJ9MYnkIAOYchYMkFd6KeEgz3mzev1u6qssG3wzwWgF/2Yk=@lists.openembedded.org
-X-Gm-Message-State: AFuF++lSVOpX9dE5GEHcLnJOywyxulZ90u4YsgHuWlaYM1FbN8qguMws
-	Rj6PzaJa9OepQ0TE0ZyXY0V0FQBpjTvWXfEBuO+GfcsIZCpC7ohXupqyRn9buB9Qn70RAox7j8d
-	VWrkm6bADlwhnld6n/8VmOR1AgE+FrjFtNcdyidwtPQ==
-X-Received: by 2002:a05:6512:1255:b0:5b6:1870:268d with SMTP id
- 2adb3069b0e04-5b8a0326b25mr850594e87.62.1789125324325; Fri, 11 Sep 2026
- 04:15:24 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 11 Sep 2026 04:15:22 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 11 Sep 2026 04:15:22 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=XrfPOO1M;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8B404143D
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 04:21:41 -0700 (PDT)
+Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D92753F59E
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 04:21:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1789125705; bh=fG0aXrtdwyBXv+17/mFA1OojywrLSfjSlfNSg4clwqU=;
+	h=From:To:Subject:Date:From;
+	b=XrfPOO1Mv/pD+zeOBjSa0KdclzlaP+BikHxyEtBQsow23yPsTWAZ5pF0kai6+Yzm1
+	 JJFHqIue4XDFD15S3DjE32ghhgJdBl3+UWMdV4iB0uenKLegg4M4fBNwzbObQkxg6T
+	 ZOEffQdk3b+7jmJzCKEimOLJWXG818mZXwAaLZhI=
+From: Ross Burton <ross.burton@arm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] tomcli: add new recipe
+Date: Fri, 11 Sep 2026 12:21:41 +0100
+Message-ID: <20260911112141.2673836-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com>
-Date: Fri, 11 Sep 2026 04:15:22 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Mds=MUhEd0OXQ_7J1d2JYdnuecUhqgaOO2W3dy-eD3wog@mail.gmail.com>
-X-Gm-Features: AcwNN1VM0MiY8tyJnJiPsDWbl22EJlJ1sEFAozbUqQrmZvITjne7whzD1GOaieg
-Message-ID: <CAMRc=Mds=MUhEd0OXQ_7J1d2JYdnuecUhqgaOO2W3dy-eD3wog@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v3] libgpiod: handle disappearing chips during iteration for v1.6.x
-To: Potin Lai <potin.lai.pt@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 11:17:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129961
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 11:21:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129962
 
-On Fri, 11 Sep 2026 11:15:32 +0200, Potin Lai <potin.lai.pt@gmail.com> said:
-> Add a patch fixing an issue where tools like 'gpiofind' incorrectly abort
-> with a 'No such device' (ENODEV) error if a hotpluggable GPIO controller
-> (like a USB device) vanishes from /dev during the search.
->
-> This patch gracefully handles the race condition by ignoring ENODEV errors
-> when searching for a line and silently skipping chips that fail to open
-> during iteration.
->
-> Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
-> ---
+tomcli is a CLI for working with TOML files.
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ .../include/ptest-packagelists-meta-python.inc    |  1 +
+ .../recipes-devtools/python/tomcli_0.10.1.bb      | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/tomcli_0.10.1.bb
+
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc =
+b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 6904b5b3d9..e4eae4ef43 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -129,6 +129,7 @@ PTESTS_FAST_META_PYTHON =3D "\
+     python3-xmltodict \
+     python3-xxhash \
+     python3-yarl \
++    tomcli \
+ "
+=20
+ PTESTS_SLOW_META_PYTHON =3D "\
+diff --git a/meta-python/recipes-devtools/python/tomcli_0.10.1.bb b/meta-=
+python/recipes-devtools/python/tomcli_0.10.1.bb
+new file mode 100644
+index 0000000000..d219f820dd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/tomcli_0.10.1.bb
+@@ -0,0 +1,15 @@
++SUMMARY =3D "CLI for working with TOML files"
++HOMEPAGE =3D "https://tomcli.gtmx.me"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3c5eb6b1eb58832012789763a45d0=
+51f"
++
++SRC_URI[sha256sum] =3D "0a27c685620b10a0f389b1d55dc66ea904054b178176d414=
+40de55d296e1109d"
++
++inherit pypi python_flit_core ptest-python-pytest
++
++RDEPENDS:${PN} =3D "python3-click python3-tomlkit"
++
++# NOTE: There are lots of skips in the ptest from tomli and tomli_w
++# but we only care about the tomlkit backend.
++
++BBCLASSEXTEND =3D "native nativesdk"
+--=20
+2.43.0
+
 
