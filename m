@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E8E7C88E50
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B75FC88E58
 	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 14:18:16 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.40466.1789136286374447069
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.40468.1789136288543614342
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2026 07:18:06 -0700
+ Fri, 11 Sep 2026 07:18:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=kdzPf5wM;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-38ea87caafeso934497a91.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 07:18:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=nqAZboAK;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cbedd5aece4so1479545a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 07:18:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789136286; x=1789741086; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1789136288; x=1789741088; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1OYmyb4vlal9EO4Vha8rzLkOf6iLujtxN1ZB3zLlKJ4=;
-        b=kdzPf5wMlb5fH2ySmfwzQxJbMqSiaUwzjS01AwJWk1kYsHtEHSEPSqOmpRZr6nXJBE
-         1HoV+NwzvcdjWAYdm5sYGRWiB+DaMJIkHauxnOCExwgfcfpFcDYtF2zpLxhUskG+J9Ln
-         tsLwkgzwZ4xRI14FqZbrZXFDMV6RRPWzoIh7TEvK4QZdTxr+VoHb2oFa4q/7t7Y3b2Ii
-         lAUorHZpnoj6HIDo1ljGxhytPaGFoKoxPbMVQqR+7ZZuN7UfJ2WhYWRfjiOtUo/eygmt
-         3i9R7Q09QFBB06L4T50RJxNeYIo0aOkltw/boTRMVTevRsz0trx/01rKcNZh6ZZ3E2xl
-         v19A==
+        bh=HDKuqVpilpY4QQQtNnbbBq3253SQs6AU5YSkRM317vA=;
+        b=nqAZboAK/d3IyYKrYb8o8TEJCab0lcLWJrVm7hG4Fxg2BD74K+LiNkjgeYdddtluVq
+         WG3R2+GjGsaR34sJJA1z31fvbC6G5g8Q9YsrORYMMMC/7gM7Aduz3cDEEP+V2U5C5ATd
+         iSPrtEiKAuzVUfr7FTE1T4wPqZXZS3wrHx6gYt5XZHecG+68f1Kw+IlhF3s1rgTJUA6h
+         t9HIn2IWQbSTvC08Eu4zzgeP1f1VVjJSQE147rD6ZBuOXVji8j2p9NkPIVynWRo6zatI
+         b6iEr6nFTdVXwBToXtGbLp8ER0gq8p1UaTCio30yYe1WKPt6RCoaGJFE6ApVNfdh3tSI
+         oGgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789136286; x=1789741086;
+        d=1e100.net; s=20251104; t=1789136288; x=1789741088;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1OYmyb4vlal9EO4Vha8rzLkOf6iLujtxN1ZB3zLlKJ4=;
-        b=Mx2LEovDzfN5ztxj2AvMo/4Lplj9hs8w89CgGSPt1tESUDmrGVKgnnPCaD/jhexwf3
-         QpFzKcZA+xQNNXwKaNvQxDN+FaNl8OzV/u6CCo3m3Y6o+vNkfl+MF4bpRoz/jWVUAaWd
-         7z4SkNtJuM/V29H+Weebh3XQPwVJsjtE7g/dTpBF8+wUiuZwlBjQY6M/GNrtb3DYIWo5
-         7sh2qBul5V2dmM1yY++sBePb0NhpUvoUYyUiYShun2CraMuS3j0IOwIfkfUHFIGaUoVM
-         xG7uegduun6divQmqru/MRkGC2UakeVs9QklfiuuO0JMzX4NiGFXvqvJGrmqfo/kXcqq
-         jypA==
-X-Gm-Message-State: AFuF++m5FhrG8FAei8FJya9sourYE6XyLrffKR4/PQVPbzK+qB8xVnrp
-	AYByBjNOdcOUDEWbQshbP0vj7DFvlDbQT3BamTIzt97AKDnmDRBgmzJYGYYVCA==
-X-Gm-Gg: AYBFou3lvtTaMPmMLtr7Z/MC4gFVJJnL+3BqdQ1xaOegYarHcmcMeAUL4g91MZYCstG
-	rm6PmQvCMBiLwQgrVnm9+izbHgvaHV1QtQN3+NqOhAEJoDn+rttr+oo/B3zMp5tMqjIQzeIU0o7
-	Mp6niCR5I1XkAAWZKHqkrkTIQ3j5XxyGFvQ/5cqJQmbHeCRJQryl8zalOv87d44S5F1mzeFFVUD
-	UhXDeGi7dosue0qPrZo50BxeVuRVxaBs5Row4ocTdTUABJtZQ07k6hwHneFiHTQVE+TRoSBbCRa
-	mD1YXrEq30II0+wXdH/1TObKvL9MZxYWpNelVesfkjhq/rS2n4H35ITe0XckUXnOIEXAcio9Ab9
-	8VYrzPOw+f5Vg7fAp3XlZegR1ouNZLfOu71m0WDuOVoWvB/1/GU4Q9Eg3zXSvwBCDFCSN2RpDBI
-	UDO8f7XeFUEUpL7Wu0aqBogl1UtuhKg53wT0giiRA6xPniZUGhK176EstWGQqE4/rR8fa6953n+
-	S9FvGnZkjIZYiVa1LrzdFbiRu5uFDAusEM5RkQTe28TNh3wetKeRWtyEvtC4tAsWho8peAWkVFp
-	pWec5MZW0VpoJOUk2bwlYdMAaVg4gtDDU0m3a4cEmwSkF1ZUfgPrZSY4CAsuSNbzPziE3pvN8we
-	Tv7IRvtnIYeDYvH6bZrJRkBmmsI/aAy38b/SBQaMWETzq0We2ItSr2hYepw==
-X-Received: by 2002:a17:90b:51c8:b0:38e:5b59:c2ff with SMTP id 98e67ed59e1d1-39d9bbc802bmr7093993a91.3.1789136285661;
-        Fri, 11 Sep 2026 07:18:05 -0700 (PDT)
+        bh=HDKuqVpilpY4QQQtNnbbBq3253SQs6AU5YSkRM317vA=;
+        b=nb425bvwBf4C/eGsfkKcPQSIbAu/hiuNUXV9amrPwe8oPOcVEHVM60O9CCbC8F4uX7
+         QSsLDoiGSqQUqr/pQWm/pwvS568Zwva1vLjOK0MgiPDfXP5Q6ZX2k0S103h5/VOLPN/V
+         LM3D9EByKamhi5jP5JIcVcxMQXGFhB57GwUNhW3KOmvAbvELaenurFUDSXe1kZWjhP3N
+         hy1DWQavuPkm6BOdd0u5LY/OlxuuiPPo42Y1XOK1qxYBPUV7dCsgQTienHm8gQdAgkBR
+         LC1PlIcKqUX58p+QdvYnv7WsSdJiScmhsdi/luVc0P9CioKWQpApeq15wGdY9Z9qJ+Gc
+         rk7Q==
+X-Gm-Message-State: AFuF++kB7TRFQPDlrWwruuwfKgT/3EFgztW5o+a9X5RXMrDhGL8lPu8T
+	XthMTqpJUR/giX9lD70ClGrkWeCrPFaWBUPlIABVdMQo5tL2xBDI88RlaAe/gQ==
+X-Gm-Gg: AYBFou1q07mZR9LvsLFXalHQYDOWp3yxGGm+AqzaJvT6ix5upDVXozBn5mxTfVWUmHb
+	eM8VP3lsoK/pcz33LpsnL3aHFqIXDe5irxjsfLqbDymcrdoUYVBRzzQ+HJBCAEveTuNlBd68YH4
+	0f9a1QlI5Rdj3FoehllxniqIVyO9FLzg509unRKM82Ugv149NuzwiaKOO6taQbOKA3wEgrYczgi
+	OHFTuug58+bGriKT4Ni5axDUQ5E+vhN0ZM5wseEx1i32SOyAn+dNIhHSuwJ6VtZXQvP8rb4lWrz
+	G1eWP/njSd6jnxuFNCb2aqw1ZtHGGEvZBpLog1mjc/0zo4gEV7N1EUeiwtpO9r7icOJQtyySq9U
+	8jNXb1GqI7eJBusaYdDxS4Y4cwi2xM9UM6KAUh/U+87n9yYJXSemLLjU40i+MP7kL8pfaTUrDO2
+	qZZ6P/sl/xS3xA8i0LUI2dPXS2hwp+rUH7gnSJ93GJvtEtxYNpgj650YtQ10H9qYal5QSguU6HW
+	bWMUzGPdn1YIhHPVgW5t0DVMf1IjoLpjPwV1azlP34hAYHG55Hsvl5mOkZ+7l9v8gNRPz/aoJv+
+	aXiCcvlzlW9xsDBKR3XetYlD76gROJG4uqtfj0tgrR8wUfsMmH1mypLAiN31JtoEGerpapjmlq+
+	sby71kLwaRJDS2FD+sRWcv/A2MVAvchvIdZDQJFLu1Ylgv9Dmjtuh2pMl3IhHDIZfQ2E=
+X-Received: by 2002:a17:90b:3e47:b0:36b:de66:92c3 with SMTP id 98e67ed59e1d1-39d77964296mr14149204a91.10.1789136287121;
+        Fri, 11 Sep 2026 07:18:07 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4fa50efsm7840791eec.28.2026.09.11.07.18.04
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4fa50efsm7840791eec.28.2026.09.11.07.18.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 07:18:05 -0700 (PDT)
+        Fri, 11 Sep 2026 07:18:06 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 6/7] imx-cst: fix remaining build failures with OpenSSL 4
-Date: Fri, 11 Sep 2026 07:17:55 -0700
-Message-ID: <20260911141756.2275517-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 7/7] synergy: fix build with OpenSSL 4
+Date: Fri, 11 Sep 2026 07:17:56 -0700
+Message-ID: <20260911141756.2275517-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260911141756.2275517-1-khem.raj@oss.qualcomm.com>
 References: <20260911141756.2275517-1-khem.raj@oss.qualcomm.com>
@@ -72,182 +72,180 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 14:18:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129970
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129971
 
-Two more OpenSSL 4.0 breakages on top of the ASN.1 opacity already
-handled by 0012-fix-openssl-4-asn1-opaque.patch.
+TLSv1_2_server_method() and TLSv1_2_client_method() were deprecated in
+OpenSSL 1.1.0 and removed in OpenSSL 4.0, so do_compile fails:
 
-The ENGINE API is gone. <openssl/engine.h> is still shipped as a
-source-compatibility stub, so linking fails on ENGINE_free,
-ENGINE_load_builtin_engines, ENGINE_by_id, ENGINE_init, ENGINE_finish,
-ENGINE_ctrl_cmd and ENGINE_load_private_key. Define OPENSSL_ENGINE_STUBS,
-which OpenSSL 4 provides for exactly this case: the declarations become
-inline no-ops returning failure, so the file compiles and links unchanged.
-OPENSSL_SUPPRESS_DEPRECATED is already defined there, so the stubs'
-deprecation attributes do not trip -Werror. That leaves ENGINE_by_id()
-returning NULL, which the existing code fed straight into ENGINE_init() -
-a NULL dereference predating OpenSSL 4 - so check it and report what went
-wrong, mentioning OpenSSL 4 so the failure is not mistaken for a missing
-module. PKCS#11 backed signing genuinely is unavailable there, as no
-provider exposes an equivalent of the pkcs11 engine's LOAD_CERT_CTRL.
+  SecureSocket.cpp:386:18: error: use of undeclared identifier 'TLSv1_2_server_method'; did you mean 'TLS_server_method'?
+  SecureSocket.cpp:389:18: error: use of undeclared identifier 'TLSv1_2_client_method'; did you mean 'TLS_client_method'?
 
-X509_get_subject_name() now returns const X509_NAME *, so its result can
-no longer be the destination of X509_NAME_add_entry_by_txt():
+Backport the two upstream commits that deal with this, neither of which
+is in the v1.10.1 SRCREV pinned here - they first shipped in v1.11.0:
 
-  src/tools/pki_tree/pki_helper.c:440:10: error: assigning to 'X509_NAME *' from 'const X509_NAME *' discards qualifiers
+  4fea67e078479cc00afe6b1201c54c997a41fc70
+    "#6390 Updated OpenSSL For better security with TLS1.3"
+  4d3cf2c6 "Preventing older insecure version of TLS/SSL"
 
-There is no mutable counterpart, so build the subject name standalone and
-install it with X509_set_subject_name(); both setters copy it, so it is
-freed once the issuer name has been set from it too.
+The first swaps the removed version specific methods for the version
+flexible ones; the second restores the TLS 1.2 floor with
+SSL_CTX_set_options(). Both are needed: the first on its own silently
+drops the minimum version the original code deliberately enforced, for
+the PCI compliance reasons its comment describes. Since TLS 1.3 can now
+be negotiated, the hardcoded "TLSv1.2" reported to the user is replaced
+with the version actually in use, retiring k_tlsString.
+
+Upgrading the recipe instead is not an option today. Upstream renamed the
+repository to symless/synergy and the latest release, v1.20.4, is the
+rebranded deskflow codebase with a different cmake layout, a Qt6 GUI and
+a changed LICENSE; more importantly it hard requires the ext/synergy-extra
+submodule, declared with an ssh URL and carrying no license at all, and
+its cmake aborts without it. That has been true since v1.16.x. No pending
+upstream pull request addresses the build failure either, since upstream
+fixed it in tree back in 2019.
+
+The backport differs from upstream in two intentional ways, both noted in
+the patch: upstream's pre-1.1.0 fallback defines the client method to
+SSLv23_server_method, and upstream sets the context options before
+checking SSL_CTX_new() for NULL.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...015-fix-openssl-4-engine-api-removal.patch | 67 +++++++++++++++++++
- ...016-fix-openssl-4-const-subject-name.patch | 48 +++++++++++++
- .../recipes-support/imx-cst/imx-cst_4.0.1.bb  |  2 +
- 3 files changed, 117 insertions(+)
- create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst/0015-fix-openssl-4-engine-api-removal.patch
- create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst/0016-fix-openssl-4-const-subject-name.patch
+ ...ot-use-the-removed-TLSv1_2_-method-c.patch | 113 ++++++++++++++++++
+ .../recipes-support/synergy/synergy_git.bb    |   1 +
+ 2 files changed, 114 insertions(+)
+ create mode 100644 meta-oe/recipes-support/synergy/synergy/0001-SecureSocket-do-not-use-the-removed-TLSv1_2_-method-c.patch
 
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst/0015-fix-openssl-4-engine-api-removal.patch b/meta-oe/recipes-support/imx-cst/imx-cst/0015-fix-openssl-4-engine-api-removal.patch
+diff --git a/meta-oe/recipes-support/synergy/synergy/0001-SecureSocket-do-not-use-the-removed-TLSv1_2_-method-c.patch b/meta-oe/recipes-support/synergy/synergy/0001-SecureSocket-do-not-use-the-removed-TLSv1_2_-method-c.patch
 new file mode 100644
-index 0000000000..d4a3f0ff2e
+index 0000000000..890cba69cc
 --- /dev/null
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst/0015-fix-openssl-4-engine-api-removal.patch
-@@ -0,0 +1,67 @@
++++ b/meta-oe/recipes-support/synergy/synergy/0001-SecureSocket-do-not-use-the-removed-TLSv1_2_-method-c.patch
+@@ -0,0 +1,113 @@
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 3 Sep 2026 01:30:00 +0000
-+Subject: Fix FTBFS with OpenSSL 4.0: ENGINE API removal
++Date: Thu, 10 Sep 2026 19:20:00 +0000
++Subject: [PATCH] SecureSocket: do not use the removed TLSv1_2_*_method calls
 +
-+OpenSSL 4.0 removed the ENGINE API. <openssl/engine.h> is still shipped,
-+but only as a source-compatibility stub, so linking fails:
++The version specific TLSv1_2_server_method() and TLSv1_2_client_method()
++were deprecated in OpenSSL 1.1.0 and removed outright in OpenSSL 4.0, so
++do_compile fails:
 +
-+  ld.lld: error: undefined symbol: ENGINE_free
-+  ld.lld: error: undefined symbol: ENGINE_load_builtin_engines
-+  ld.lld: error: undefined symbol: ENGINE_by_id
-+  ld.lld: error: undefined symbol: ENGINE_init
-+  ld.lld: error: undefined symbol: ENGINE_finish
-+  ld.lld: error: undefined symbol: ENGINE_ctrl_cmd
-+  ld.lld: error: undefined symbol: ENGINE_load_private_key
++  SecureSocket.cpp:386:18: error: use of undeclared identifier 'TLSv1_2_server_method'; did you mean 'TLS_server_method'?
++  SecureSocket.cpp:389:18: error: use of undeclared identifier 'TLSv1_2_client_method'; did you mean 'TLS_client_method'?
 +
-+Define OPENSSL_ENGINE_STUBS, which OpenSSL 4 offers exactly for this
-+case: the ENGINE_* declarations become inline no-ops returning failure,
-+so the file compiles and links unchanged. OPENSSL_SUPPRESS_DEPRECATED is
-+already defined here, so the stubs' deprecation attributes do not trip
-+-Werror either.
++Pick the version flexible method instead and keep the TLS 1.2 floor the
++old code was after by excluding every earlier version through
++SSL_CTX_set_options(). Since TLS 1.3 can now be negotiated, the hardcoded
++"TLSv1.2" that was reported to the user is replaced with the version
++actually in use, which also retires k_tlsString.
 +
-+That leaves ENGINE_by_id() returning NULL at runtime, which the existing
-+code fed straight into ENGINE_init() - a NULL dereference that predates
-+OpenSSL 4. Check the result and print what went wrong instead, noting the
-+OpenSSL 4 situation so the failure is not mistaken for a missing module.
++This is a backport of two upstream commits, neither of which is in the
++v1.10.1 SRCREV this recipe pins (they first shipped in v1.11.0):
 +
-+Providers replace engines upstream, but nothing exposes an equivalent of
-+the pkcs11 engine's LOAD_CERT_CTRL command yet, so PKCS#11 backed signing
-+genuinely is unavailable with OpenSSL 4.
++  4fea67e078479cc00afe6b1201c54c997a41fc70
++    "#6390 Updated OpenSSL For better security with TLS1.3"
++  4d3cf2c6 "Preventing older insecure version of TLS/SSL"
 +
-+Upstream-Status: Pending
++Two deliberate differences from upstream:
 +
++ - upstream's pre-1.1.0 fallback defines SSL_CLIENT_METHOD to
++   SSLv23_server_method, so a client would ask for a server method. That
++   typo is still present upstream; use SSLv23_client_method here. Only the
++   OPENSSL_VERSION_NUMBER > 0x10100000L branch is taken in this build, so
++   the difference is inert here, but there is no reason to copy the bug.
++
++ - upstream calls SSL_CTX_set_options() before checking SSL_CTX_new() for
++   NULL, which dereferences a NULL context on allocation failure. Check
++   first and return, then set the options.
++
++Upstream-Status: Backport [4fea67e078479cc00afe6b1201c54c997a41fc70 and
++4d3cf2c6, adapted to v1.10.1; the two differences above are not upstream]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+--- a/src/lib/back_end/engine.c
-++++ b/src/lib/back_end/engine.c
-+@@ -4,6 +4,13 @@
-+  */
-+
-+ #define OPENSSL_SUPPRESS_DEPRECATED
-++/*
-++ * OpenSSL 4.0 removed the ENGINE API.  <openssl/engine.h> still declares
-++ * it for source compatibility, and defining OPENSSL_ENGINE_STUBS turns the
-++ * declarations into inline no-ops so this file keeps linking.  The pkcs11
-++ * engine simply does not exist there, which engine_ctx_init() reports.
-++ */
-++#define OPENSSL_ENGINE_STUBS
-+
-+ #include "engine.h"
-+ #include "err.h"
-+@@ -63,6 +70,16 @@
-+
-+ 	ctx->engine = ENGINE_by_id("pkcs11");
-+
-++	if (!ctx->engine) {
-++		fprintf(stderr, "ERROR: cannot load the pkcs11 OpenSSL engine\n");
-++#if OPENSSL_VERSION_MAJOR >= 4
-++		fprintf(stderr,
-++			"ERROR: OpenSSL 4.0 removed ENGINE support, so PKCS#11 "
-++			"backed signing is unavailable\n");
++diff --git a/src/lib/net/SecureSocket.cpp b/src/lib/net/SecureSocket.cpp
++index 1111111..2222222 100644
++--- a/src/lib/net/SecureSocket.cpp
+++++ b/src/lib/net/SecureSocket.cpp
++@@ -37,8 +37,16 @@
++ 
++ #define MAX_ERROR_SIZE 65535
++ 
+++//Add the new function names in case older ones are deprecated
+++#if OPENSSL_VERSION_NUMBER > 0x10100000L
+++#define SSL_SERVER_METHOD TLS_server_method
+++#define SSL_CLIENT_METHOD TLS_client_method
+++#else
+++#define SSL_SERVER_METHOD SSLv23_server_method
+++#define SSL_CLIENT_METHOD SSLv23_client_method
 ++#endif
-++		return 0;
-++	}
 ++
-+ #ifdef DEBUG
-+ 	ENGINE_ctrl_cmd_string(ctx->engine, "VERBOSE", NULL, 0);
-+ #endif
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst/0016-fix-openssl-4-const-subject-name.patch b/meta-oe/recipes-support/imx-cst/imx-cst/0016-fix-openssl-4-const-subject-name.patch
-new file mode 100644
-index 0000000000..3cea584983
---- /dev/null
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst/0016-fix-openssl-4-const-subject-name.patch
-@@ -0,0 +1,48 @@
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 3 Sep 2026 01:30:00 +0000
-+Subject: Fix FTBFS with OpenSSL 4.0: const X509_get_subject_name()
-+
-+OpenSSL 4.0 changed X509_get_subject_name() to return a const X509_NAME *,
-+so using its result as the destination of X509_NAME_add_entry_by_txt() no
-+longer compiles:
-+
-+  src/tools/pki_tree/pki_helper.c:440:10: error: assigning to 'X509_NAME *'
-+    from 'const X509_NAME *' discards qualifiers
-+    [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
-+
-+There is no mutable counterpart to the getter (unlike X509_getm_notAfter),
-+so build the subject name as a standalone X509_NAME and install it with
-+X509_set_subject_name(). Both setters copy the name, so it is freed once
-+the issuer name has been set from it too.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+--- a/src/tools/pki_tree/pki_helper.c
-++++ b/src/tools/pki_tree/pki_helper.c
-+@@ -437,11 +437,15 @@
-+     if (X509_set_pubkey(x509, pkey) != 1)
-+         handle_errors();
-+
-+-    name = X509_get_subject_name(x509);
-++    name = X509_NAME_new();
-++    if (!name)
-++        handle_errors();
-+     if (X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC,
-+                                    (const unsigned char *) subj, -1, -1,
-+                                    0) != 1)
-+         handle_errors();
-++    if (X509_set_subject_name(x509, name) != 1)
-++        handle_errors();
-+     if (sign_cert)
-+     {
-+         if (X509_set_issuer_name(x509, X509_get_subject_name(sign_cert)) != 1)
-+@@ -452,6 +456,7 @@
-+         if (X509_set_issuer_name(x509, name) != 1)
-+             handle_errors();
++ static const float s_retryDelay = 0.01f;
++-const char* k_tlsString = "TLSv1.2";
++ 
++ enum {
++     kMsgSize = 128
++@@ -376,26 +384,33 @@
++         showSecureLibInfo();
 +     }
-++    X509_NAME_free(name);
-+
-+     if (is_ca)
-+     {
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb b/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
-index 03dfdbd6f7..ec6838e95d 100644
---- a/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst_4.0.1.bb
-@@ -27,6 +27,8 @@ SRC_URI = "\
-     file://0012-fix-openssl-4-asn1-opaque.patch \
-     file://0013-convlb-remove-redundant-NULL-definition.patch \
-     file://0014-fix-pointer-sign-errors-with-clang.patch \
-+    file://0015-fix-openssl-4-engine-api-removal.patch \
-+    file://0016-fix-openssl-4-const-subject-name.patch \
- "
- SRC_URI[sha256sum] = "fd92a1a9faa10fb81bbf752c7ee1e257f17e1ec4c2964f8a47adf8a3eaa7df41"
-
++ 
++-    // only use TLS 1.2 (latest as of 27 jul 18). previously we were using
++-    // the SSLv23_server_method and SSLv23_client_method functions with
+++    // only use TLS 1.2 or newer. previously we were using the
+++    // SSLv23_server_method and SSLv23_client_method functions with
++     // SSL_OP_NO_SSLv3, but not SSL_OP_NO_SSLv2, so there was a potential
++     // vulnerability where it could fall back to SSLv2 (not TLS). also,
++     // the SSLv23_*_method functions could fall back to TLS 1.0 and 1.1,
++-    // which are nolonger PCI compliant.
+++    // which are nolonger PCI compliant. the version specific
+++    // TLSv1_2_*_method functions were removed in OpenSSL 4.0, so pick the
+++    // version flexible method and exclude everything below TLS 1.2 below.
++     if (server) {
++-        method = TLSv1_2_server_method();
+++        method = SSL_SERVER_METHOD();
++     }
++     else {
++-        method = TLSv1_2_client_method();
+++        method = SSL_CLIENT_METHOD();
++     }
++-    
+++
++     // create new context from method
++     SSL_METHOD* m = const_cast<SSL_METHOD*>(method);
++     m_ssl->m_context = SSL_CTX_new(m);
++ 
++     if (m_ssl->m_context == NULL) {
++         showError();
+++        return;
++     }
+++
+++    // prevent the use of every version prior to TLS 1.2, as they are known
+++    // to be vulnerable
+++    SSL_CTX_set_options(m_ssl->m_context, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);
++ }
++ 
++ void
++@@ -848,9 +863,7 @@
++         LOG((CLOG_DEBUG "openssl cipher: %s", msg));
++ 
++         // show user a simpler version of the openssl cipher output
++-        if (std::string(msg).find(k_tlsString) != std::string::npos) {
++-            LOG((CLOG_INFO "network encryption protocol: %s", k_tlsString));
++-        }
+++        LOG((CLOG_INFO "network encryption protocol: %s", SSL_CIPHER_get_version(cipher)));
++     }
++     else {
++         LOG((CLOG_ERR "could not get secure socket cipher"));
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index cf411b7c78..7f508177b1 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -11,6 +11,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI = "git://github.com/symless/synergy-core;protocol=https;nobranch=1"
+ SRC_URI += "file://CVE-2020-15117.patch"
++SRC_URI += "file://0001-SecureSocket-do-not-use-the-removed-TLSv1_2_-method-c.patch"
+ 
+ # Version 1.10.1-stable
+ SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
 
