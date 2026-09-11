@@ -1,225 +1,122 @@
-Return-Path: <potin.lai.pt@gmail.com>
+Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 250D1C88E50
-	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 09:17:57 +0000 (UTC)
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.35504.1789118275475061607
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51ECCC88E4C
+	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 09:23:37 +0000 (UTC)
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35568.1789118611124744124
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2026 02:17:55 -0700
+ Fri, 11 Sep 2026 02:23:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=e9DqRg7f;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: potin.lai.pt@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-cc147d86bebso860217a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 02:17:55 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=dY9LwPZS;
+ spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789118275; x=1789723075; darn=lists.openembedded.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Oc8RNZ1SF/Tm0hVYw3m120AIeUkQsIiL7gsGCiAUzdA=;
-        b=e9DqRg7f9bVXHlVe7vDE0m3y9MKN+Vb5QA+gC9tIuiSxB5DcpTefjjR0cXT1axgH65
-         tphbYBO5Mm7AjMjSPTI/v0wZQNUy7cVYfa1gFNsSsEUXLbCL1UDzqtxFuzvKqE5TGTSP
-         8iNFES0Ao+momDLxVOgTXUKmpJw36ZbXEkXcKBWXB/TYruGvRKiL/rtTWo+dgiKnhO4O
-         O/VqP2Vru4Vy4weLPi6NRWs7pRu/C0Mklnloq9G8rFUWtYYXsLqZnjZoyVGiHYub9w17
-         /Xs+j3VyueiIaVEp9I+C35gaQR0+K31QobPcVYSJXltGGfLEasTBkcoWNgzlL0kKcQIT
-         BBmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789118275; x=1789723075;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Oc8RNZ1SF/Tm0hVYw3m120AIeUkQsIiL7gsGCiAUzdA=;
-        b=EBZv08Z/UhpnsBhYrOQOhoJL9aXOfenkncaCcIniwqjPMmRcWpGr+UvSVpmG+iMNdz
-         xQCnrJet8dXnZ6ZeAadipi+iTri8R3nrXg2F+6v/qQZdHCheOBAdevrSU0H5TRXPZgJB
-         Um4v1+Hs/KnZm2xmBpXyySfjxBQKasKVCncrpuxi5VP7mr86a54WRuWuka5XOe9khmDa
-         pjhzq9DUxQAXAq/yKNnsvL7yJgwo5ICxbGCyEDpIBRVdZ3qcZSv9Xp6iGzOsfgZmtT0J
-         JiFne7hDzOdKghbkpP+8WJeOsNnpPpZKdd+I5MJhUxw6dptQdlwHexSceE0rfk7d6bkj
-         OcIA==
-X-Forwarded-Encrypted: i=1; AKwUvBxkYQFsQvndvSIDuFwMJGyq9ogw0Ir7RkXBRMTW0RLE2m9MvNyVuCfhjODuDxPp4g/Dr1zXXfunJwzkJtOcdz95MBc=@lists.openembedded.org
-X-Gm-Message-State: AFuF++mUfjAnIVQr6CTQI5Uvpk1wSCaNipmtmMuLVxGqFrZHgWzO6zUS
-	BpAf2lNIgfR90/q0uc2FpfTha0RpzBF0DTyuGWSLYfAEi6hnCCrxRJM2
-X-Gm-Gg: AYBFou01i524VUCeYD6LWcbdSJ+4J2mXeLVqfU3XDnIUGQfLnFOleJZlOoA0K0tDTcd
-	3yLDyhMJy9FeQczD5Vr1kyD9nWQlpxy8Usva8h6CNQWCg4r0JLGyqzE6oTLlHai9onggki96bHE
-	51L1L1ZJGeYzmm2fE6PJ7/7PTQf2+Jpffyp6OKeUFaAvSNcQUzaOHrvK9dERG7FrcJzGJtxJvjW
-	2fzmiAzXdogPhGU5tsMwGwx/1xX48w0MJaE3jd2mBDamh1UK41n+Lu53B0UnIONk9R3sWFkE7w/
-	P5q87TrbviEBRRCKgpx/640PbscNlmi9BIeayE6o4m7NgIaF3UU1JWZ75W5g+pfZ200Cm+hcoOG
-	7ZnWFqYRaEoro4NpgK5Z4pZt2Ab50vVAUogCTGFdd5duTBQ5Rxxa7mE1kRHhVPaDNn6r6cgOKgn
-	SY5YFcCINSax4Y2yQ5u4J3jo765V7r1M9sK9URml3M1h/tOkfxwTY4GUKp5yjzrvt/feF/m/LKU
-	Hp/Co0t/U6Efy9TNOWcfY57MJ+QXypuMRTsR8jZ
-X-Received: by 2002:a05:6a21:e587:b0:3ba:d7b0:fcac with SMTP id adf61e73a8af0-3dad26c3a0cmr10898194637.5.1789118274558;
-        Fri, 11 Sep 2026 02:17:54 -0700 (PDT)
-Received: from [10.10.15.228] (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc4c6036fd7sm903192a12.0.2026.09.11.02.17.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 02:17:54 -0700 (PDT)
-From: Potin Lai <potin.lai.pt@gmail.com>
-Date: Fri, 11 Sep 2026 17:15:32 +0800
-Subject: [meta-oe][PATCH v3] libgpiod: handle disappearing chips during
- iteration for v1.6.x
+  d=cisco.com; i=@cisco.com; l=1508; q=dns/txt;
+  s=iport01; t=1789118611; x=1790328211;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=2BvRUTvIh1M9hSFmibO2ZZetiXbAKqUzjg0KKAbbfyA=;
+  b=dY9LwPZStwQJYEMU8FIb4367Zx6QsV8LatiAXdxmtCYGTlQLMvoCBQGF
+   tTEPaeRrTBq1j7bcIkg2+UCbGw5Y7p8br20u15eKNZym0DouaODw0fOcy
+   1dCd8kW2uda1MnP4ZHJQte7ObQ0XwfrjKx7MG9JWhK12QJOgM4/fzj5sh
+   5tMayadsrNk0omJBiudJ95epZgw05XZrHrrENyWPigskNlYnLcJeDC1DH
+   480HG6QiXY2mLwx9+PYyJ3EgMGCBknrV5+tD8KXRBYZWPzry4RIgoWiZ2
+   BDcRGmGvgGEtofwAi3AK14igDBQVAbdjIlPuAq4iNdbl/mTzd461aLrXM
+   Q==;
+X-CSE-ConnectionGUID: r212IRE8TymPm6yY8dm25Q==
+X-CSE-MsgGUID: STTbstKZTVqR2WWi+dE+zw==
+X-IPAS-Result: =?us-ascii?q?A0DEAgDGx6Nq/48QJK1RCYJZgld0YENJk1kBggRsnh6Bf?=
+ =?us-ascii?q?g8BAQEPNxoEAQGFBY4HAiY1CA4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4ZckBU2ARgBLTBcRIMCAYJ0A8MFgiyBAYMpAd0FAQsUAYE4hT+II?=
+ =?us-ascii?q?naEfCcbG4FyhH6ECg15hXgEgiKBDJQISIEeA1ksAVUTDQoLBwWBZgM1EioVb?=
+ =?us-ascii?q?jIdgSM+F4EHGwYFgR2BJ4JiIxk2eoEJXoErKWABEheBCYIIAoJUggECAUlDD?=
+ =?us-ascii?q?gdFUwknQQoSTCkiCAULGA1IESw3FRkEPm4HjwMfgl0BPFGWVJF6oQ8KKIN2j?=
+ =?us-ascii?q?CKVOhozqm0umFqkWoRpgWoBOUaBE3AVgyIJShkPji8V0BknMgI7AgcCBw4DC?=
+ =?us-ascii?q?5FoKnRgAQE?=
+IronPort-Data: A9a23:/3wxM6+3QMvQirCv3h5eDrUD6n+TJUtcMsCJ2f8bNWPcYEJGY0x3y
+ 2sXDDjUOfiJNmPxeNBxYYi39hgCv5PSyoRmS1ZoqX9EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmB4E/rbei5xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mtyyHjEAX9gWAsYztNs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2ksZ9RC29xaUV1f8
+ MQddiE8PhyG3b+PlefTpulE3qzPLeHiOIcZ/3UlxjbDALN+H9bIQr7B4plT2zJYasJmRKmFI
+ ZFHL2MxKk2cOHWjOX9PYH46tOuri332cixRgFmUvqEwpWPUyWSd1ZC9bIKMJIXaHpk9ckCwn
+ V769X/lISMmCsWlkwW68zGgq6zdgnauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
+ 00P5jFoqrA/8kGuRNTxUxC05nmesXY0WNpdFqsg4QOlzbHPpR+ED2wPSTtELtchsacLqScC3
+ 1uNmZbtQDdoqrDQESzb/baPpjT0Mi8QRYMfWRI5ocI+y4GLiOkOYtjnFL6PzIbdYgXJJAzN
+IronPort-HdrOrdr: A9a23:Sr1DVa3KZOGOZdbaIqsg4gqjBIQkLtp133Aq2lEZdPWaSKOlfq
+ eV7ZEmPHDP6Qr5NEtMpTniAtjjfZqjz/5ICOAqVN/INjUO01HHEGgN1+ffKkXbak7D398Y87
+ t8eK5jD9C1J117gcHmpDScKb8bsb26GGTCv5a585+rJjsaDJ1d0w==
+X-Talos-CUID: =?us-ascii?q?9a23=3AVrlivGj/whoCTJ6O+1kEK41ixDJuaCeEllbqDh+?=
+ =?us-ascii?q?EGGNRTeOEeA+c/fk5qp87?=
+X-Talos-MUID: 9a23:a2NRnAhJx3FZGedZCWtGv8MpD/tU6b+yK3Ixr4w84fa7NG98FnSPk2Hi
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,97,1787011200"; 
+   d="scan'208";a="840161834"
+Received: from alln-l-core-06.cisco.com ([173.36.16.143])
+  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Sep 2026 09:23:30 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by alln-l-core-06.cisco.com (Postfix) with ESMTPS id 2DD3218000121;
+	Fri, 11 Sep 2026 09:23:30 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id C43F0CC1611; Fri, 11 Sep 2026 02:23:29 -0700 (PDT)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Devansh Patel <devanshp@cisco.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH] python3-py: correct CVE_PRODUCT mapping
+Date: Fri, 11 Sep 2026 02:22:56 -0700
+Message-Id: <20260911092256.1015805-1-dkelaiya@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com>
-X-B4-Tracking: v=1; b=H4sIALPGo2oC/52OQQ6CMBREr2K69pu2RBBX3oOwKO0vfAO0abHRG
- O5u0Y1bXU4y8+Y9WcRAGNl592QBE0Vycw7Ffsf0oOYegUzOTHJZ8lpwGKnrPTkDSUAJR8glMyI
- Yisp7VIHmHvRAPkJVVLbquKlPvGaZ5wNaur+/mvaT4627ol62g2bCRYHDdqsOFBcXHm+rJLbBP
- wK5IMAaaawyUituL/2kaDxoN7FNIMlvsviFLDO5qLpjyUWBUutv8rquL1rLZqtXAQAA
-X-Change-ID: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-To: Khem Raj <raj.khem@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
- openembedded-devel@lists.openembedded.org
-Cc: Potin Lai <potin.lai.pt@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789118272; l=5150;
- i=potin.lai.pt@gmail.com; s=20260522; h=from:subject:message-id;
- bh=dbmnp06drd5xgvSsDEPWBnG664jAZ4JMaz3iHEhQlOE=;
- b=uKr10RrysEQN2czouNyuxHGGB66WMTian1+PAy8TNX+aifl285ZYrjzr3eYI24eaap6HSNAJY
- R2E6XDYIkCGA0k2vmwdimjsLgzQLxA7JpzocGU6cmr8/MfJ9acENzHi
-X-Developer-Key: i=potin.lai.pt@gmail.com; a=ed25519;
- pk=j3/nMxzz1ZPpp1revghyZ8IqOnwi6RWfuxXN2XrNMRE=
+Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: alln-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:17:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129958
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:23:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129959
 
-Add a patch fixing an issue where tools like 'gpiofind' incorrectly abort
-with a 'No such device' (ENODEV) error if a hotpluggable GPIO controller
-(like a USB device) vanishes from /dev during the search.
+From: Devansh Patel <devanshp@cisco.com>
 
-This patch gracefully handles the race condition by ignoring ENODEV errors
-when searching for a line and silently skipping chips that fail to open
-during iteration.
+The product-only "py" mapping generates a wildcard-vendor identity
+instead of the exact NVD identity for the packaged pytest-dev py
+source. Use "pytest:py" for its NVD dictionary CPE and configuration
+matches.
 
-Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+This changes the generated product identity. With sbom-cve-check 1.3.3,
+the current CVE report is unchanged using the pinned database snapshots;
+both mappings report CVE-2020-29651 and CVE-2022-42969.
+
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 26fa8b053b71d1f3f8da359abaef578c671c692f)
+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
-Changes in v3:
-- Take the patch directly from the upstream libgpiod v1.6.x branch
-- Change patch file Upstream-Status to "Accepted"
-- Link to v2: https://patch.msgid.link/20260911-libgpiod-v1-6-5-handle-disappearing-chips-v2-1-37b56013e2cc@gmail.com
+ meta-python/recipes-devtools/python/python3-py_1.11.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes in v2:
-- Revise commit message
-- Add Upstream-Status tag into patch file
-- Link to v1: https://patch.msgid.link/20260910-libgpiod-v1-6-5-handle-disappearing-chips-v1-1-fd2dfad2ca0f@gmail.com
----
- ...ully-handle-disappearing-chips-during-ite.patch | 83 ++++++++++++++++++++++
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb |  5 +-
- 2 files changed, 87 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
-new file mode 100644
-index 0000000000..ab8d5a673c
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
-@@ -0,0 +1,83 @@
-+From 40f18f16f573e6bf091d83cb1677e7386d0b8495 Mon Sep 17 00:00:00 2001
-+From: Potin Lai <potin.lai.pt@gmail.com>
-+Date: Tue, 8 Sep 2026 21:05:07 +0800
-+Subject: core: gracefully handle disappearing chips during iteration
-+
-+When hotpluggable GPIO controllers (like USB devices) are dynamically
-+added or removed, a race condition can occur. A chip's device node might
-+be present when iterating through /dev, but the chip could disappear by
-+the time we try to open it or query its lines.
-+
-+Previously, this caused tools like 'gpiofind' to incorrectly abort with
-+a 'No such device' (ENODEV) error if any chip on the system vanished
-+during the search.
-+
-+Fix this by ignoring ENODEV errors when searching for a line
-+(in gpiod_line_find()) and by silently skipping chips that fail to open
-+during iteration (in gpiod_chip_iter_new()).
-+
-+Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
-+Link: https://patch.msgid.link/20260908-gpiofind-error-enodev-v1-1-c7756aab9568@gmail.com
-+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-+Upstream-Status: Accepted [https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=40f18f16f573e6bf091d83cb1677e7386d0b8495]
-+---
-+ lib/helpers.c |  2 +-
-+ lib/iter.c    | 16 ++++------------
-+ 2 files changed, 5 insertions(+), 13 deletions(-)
-+
-+diff --git a/lib/helpers.c b/lib/helpers.c
-+index 479f370..6d1836a 100644
-+--- a/lib/helpers.c
-++++ b/lib/helpers.c
-+@@ -423,7 +423,7 @@ struct gpiod_line *gpiod_line_find(const char *name)
-+ 			return line;
-+ 		}
-+ 
-+-		if (errno != ENOENT)
-++		if (errno != ENOENT && errno != ENODEV)
-+ 			goto out;
-+ 	}
-+ 
-+diff --git a/lib/iter.c b/lib/iter.c
-+index bfd2852..7f5ad9a 100644
-+--- a/lib/iter.c
-++++ b/lib/iter.c
-+@@ -51,7 +51,7 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 	if (!iter)
-+ 		goto err_free_dirs;
-+ 
-+-	iter->num_chips = num_chips;
-++	iter->num_chips = 0;
-+ 	iter->offset = 0;
-+ 
-+ 	if (num_chips == 0) {
-+@@ -64,23 +64,15 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 		goto err_free_iter;
-+ 
-+ 	for (i = 0; i < num_chips; i++) {
-+-		iter->chips[i] = gpiod_chip_open_by_name(dirs[i]->d_name);
-+-		if (!iter->chips[i])
-+-			goto err_close_chips;
-++		iter->chips[iter->num_chips] = gpiod_chip_open_by_name(dirs[i]->d_name);
-++		if (iter->chips[iter->num_chips])
-++			iter->num_chips++;
-+ 	}
-+ 
-+ 	free_dirs(dirs, num_chips);
-+ 
-+ 	return iter;
-+ 
-+-err_close_chips:
-+-	for (i = 0; i < num_chips; i++) {
-+-		if (iter->chips[i])
-+-			gpiod_chip_close(iter->chips[i]);
-+-	}
-+-
-+-	free(iter->chips);
-+-
-+ err_free_iter:
-+ 	free(iter);
-+ 
-+-- 
-+cgit 1.3.1-korg
-+
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-index 45af4f8bb0..d43fe90480 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-@@ -3,7 +3,10 @@ require libgpiod.inc
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+diff --git a/meta-python/recipes-devtools/python/python3-py_1.11.0.bb b/meta-python/recipes-devtools/python/python3-py_1.11.0.bb
+index 61f3873b4c..76cb4ce745 100644
+--- a/meta-python/recipes-devtools/python/python3-py_1.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-py_1.11.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
  
--SRC_URI += "file://0001-bindings-cxx-disable-tests.patch"
-+SRC_URI += " \
-+    file://0001-bindings-cxx-disable-tests.patch \
-+    file://0002-core-gracefully-handle-disappearing-chips-during-ite.patch \
-+"
+ SRC_URI[sha256sum] = "51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"
  
- SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
+-CVE_PRODUCT = "py"
++CVE_PRODUCT = "pytest:py"
+ CVE_STATUS[CVE-2022-42969] = "disputed: upstream could not reproduce it, github also revoked the advisory"
  
-
----
-base-commit: cbec9a20d78add94235042c601e991574151e36e
-change-id: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-
-Best regards,
---  
-Potin Lai <potin.lai.pt@gmail.com>
+ DEPENDS += "python3-setuptools-scm-native"
+-- 
+2.35.6
 
 
