@@ -1,136 +1,205 @@
-Return-Path: <viswanath.kraleti@oss.qualcomm.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42BCCC88E50
-	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 09:17:17 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.35233.1789118229205056178
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 259BBC88E50
+	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 09:17:47 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35503.1789118260741484981
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2026 02:17:09 -0700
+ Fri, 11 Sep 2026 02:17:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=hJMRhcUy;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=FoB2wGCj;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: viswanath.kraleti@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B7klO34046186
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:17:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=tqOQWVDlq12FLu+ISAmYWf2zjdXFArUfOYB
-	YQU1ylyc=; b=hJMRhcUyM3brXP80fXb13om81w7CmDPya6tVVEXBABv+UdN2mQv
-	CIIoFV2ZI1W82QpmrcROVb+ajZTH8FoAg5ME1VuwyHt1MgvZJTExudV2oPfqjHhL
-	2UlgiWDzXpLT6bmSrNJCb326oSa0cJT3/egq21lm7x0Fr4HS6GjpF9lQQA/S2kI+
-	dMCNRiuhQsxx3MCmzDr3odOFHfQ7Yy3tG5Yo4S3nRBVSkvgWEMDva7gY8qPFPSgg
-	uDkGGiiEsE6jS+CC+H7LndubVqh7FS6tB6Q5tr7zxFAqPhLE/mBSZ00dZVllKes6
-	GQsPH04k943bj8+yXQFCLzdPGrOL+valZOQ==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gm2q12r1k-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:17:07 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc2229450b4so678345a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 02:17:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789118227; x=1789723027; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tqOQWVDlq12FLu+ISAmYWf2zjdXFArUfOYBYQU1ylyc=;
-        b=FoB2wGCjhSuoBIr32Nl/MhGqBlp/NtqpMicLgAa4UIxlffJDyHFKQRWIoiovLw8XsV
-         YQT5icP7ewVuY0jfA0chUoeDN4vBn0sjVbdDmEVcjNedWawTE3yL+HRikCTMAFM+dEzZ
-         Fmw/4UqLtLU3B3WCCaNSNLsLk5loi2BMUTDAmOoOxKf6l296gUn0dLZT9fOOPan9zA2y
-         OfrMxrFREvvrc/gGYcDt0Ew6mtNY0+7RsHpO1huYP0f5RBR8hTQHZUQ3fcELLQNkNakN
-         Erww66RJ1zzIZKRKlU8xdBxZDJ8QP/oQNAjB2qwGmVz2rUrEKSpAZzal3LyX7zy1GPvQ
-         Sptw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789118227; x=1789723027;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tqOQWVDlq12FLu+ISAmYWf2zjdXFArUfOYBYQU1ylyc=;
-        b=k2ZVzGwc+vb4xg66vTQbAqNhOzk/l9JtTRpCPA5vPu2kgg6shABLkP9eU/Sw6+zEIV
-         61sqmzAT2fv/YF2eY1DL3zFchKADTUe0G0yTo7uxyHpMJ1FT43NRn4jPJToALMmToZwF
-         +5vSlmyEthT19BX/en1SL1gOlwz52WkSjmSE00vJmY6zsKUry7uTJQt2LhiuZjzr3Xl0
-         g9E6laSqR+IrXHq1rNwbZiBxxoltoakfSzqBF4O54tMgO/bFrNCoQe4RsWTAU4pRxJIL
-         +VHZLawW+6uKHcORyfePt12gsKw23QNJWLOLazXAZ7iG6yEMojY68QgAz75hB9+PGoA8
-         ldNg==
-X-Gm-Message-State: AFuF++l15MrsPE89KuLw/ka4r5zcsALBaJKJKDhrf5bDfSCsDwjJL/L3
-	PyTOAVTCTdEtpVmd3kXdKaygU+rRpHUIMG3ps2s4y0VpItgr8IvsDT6tDsbr4X0KeJB447yFJjL
-	Y0lnctKjigcqg+iw/SetsRNSs/LeSgyGiuRrwEM7AYkqnXUCYI0KYnP5BV8LMZmyiI6eBs7KhCD
-	jv3eQEE6x/GV4D2S6V
-X-Gm-Gg: AYBFou2fbJRCo07aG2BJ8lcfj/N+HfYhb7EqksTxqa1hWDqvUsAQyFeRpGtw3YbviR/
-	Rz3UtxpaAeTdPu4vfsx2/0ShDTz3dNCMI6aCsPWWv+clhT/z9E5JLX7WiTdrwb4zi+08q9uMYjS
-	adFBoQM/bmn8Ipm/h2CXIpqV1mBrMMjwx3y8sMyPsUkz9El3Olb3fgT0lEc+1Xh9yG3ix0ik0sR
-	150fMg4PWiVt5PUprPgpgce10KwY2O1LboqPJcP5Mzu4ebNRRqGiiKHmOUkyW3UVIK79aaNAApg
-	BfiRHBHRddJIeg5kNmeNo2qRDUomXpmflqDEUS6Ol2TyIhk0yAahwan5MdJOeBgXYd9lVHlWq0u
-	9bufYkos0VK4pUnf9h0PFuKa93tPq1PgTa/lxDzk1gsSv1blVyhs3TeiEMDtdEMdXYdmo60Q=
-X-Received: by 2002:a17:90b:35d2:b0:396:41d1:cbc7 with SMTP id 98e67ed59e1d1-39d9bc0dca0mr5667207a91.3.1789118227013;
-        Fri, 11 Sep 2026 02:17:07 -0700 (PDT)
-X-Received: by 2002:a17:90b:35d2:b0:396:41d1:cbc7 with SMTP id 98e67ed59e1d1-39d9bc0dca0mr5667139a91.3.1789118226493;
-        Fri, 11 Sep 2026 02:17:06 -0700 (PDT)
-Received: from hyd-e160-a52-10.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365a598aasm4948236c88.1.2026.09.11.02.17.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 02:17:05 -0700 (PDT)
-From: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=OyTD+Y35;
+ spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd97.aul.t-online.de (fwd97.aul.t-online.de [10.223.144.123])
+	by mailout03.t-online.de (Postfix) with SMTP id 3EC50E476
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 11:17:38 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.228.20]) by fwd97.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1x4xO4-3qOZou0; Fri, 11 Sep 2026 11:17:36 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-Subject: [oe][meta-oe][PATCH] libfastjson: switch git branch from master to main
-Date: Fri, 11 Sep 2026 14:46:48 +0530
-Message-ID: <20260911091648.3184712-1-viswanath.kraleti@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-multimedia][PATCH] wireplumber: update 0.5.15 -> 0.5.17
+Date: Fri, 11 Sep 2026 11:17:32 +0200
+Message-ID: <20260911091732.20761-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=d6lgWhjE c=1 sm=1 tr=0 ts=6aa3c713 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=NEAV23lmAAAA:8 a=sZ_Kt6tmpOMTrNQfupwA:9 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDEyOSBTYWx0ZWRfX+78BH11onpAf
- VgpCeKXukQ2gpUaqrlWi+k+Cxj8QaBiFAuPNIhV6jN6CRxPKTq94e/POkagg/KbsIIEN5Sb8g0q
- QZj7NsldkkuLU85Zdx9v2aqmKDCBeCLB9/MtPlgoseXVXq7y5SEPFxhLDGw2tMdZSNkTaUwrWrN
- qmPzmLx8uNqcXw0fKHBOqiZQ55y6PE/t5hgQMTqvIM15B/nTxR/T+6lhdfHTgEj1u4o8FIuMOmu
- ZRhxWWlg6wBzSlUv3vCOTpTFUvHKry+y8xW6id7TlyAz5nkrDz8IDlIdP7gJVVIxsk3CTuIyEmS
- zYyQGeTRbEhBxXTbbIqweTLp4FCwAbZR8W5dRMXjuaqSNh3VSYI2G985m8gLP/U/T22U1XlNh3e
- IZapuaz3Qw7SW13/BvTfAl/PJ34vLS5Iqb4oP/v4m955cRPLErbPntWJGhcWiEg3J3DxnHr1EJe
- KvkgFN3pm5RGsoUJasA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDEyOSBTYWx0ZWRfX/Ybc/pcHoaNA
- O58e9cYdjLg315/S7FXZ5ZKay2A+R1897fz/7cH5zivQYKPZ/xOAe0OvFWVj4tC13k4u6omARx6
- 9Ek/H5W0Joi008MGtKdxLuQJx5NU/to=
-X-Proofpoint-GUID: CIf4X7NqeDJEEGc2QNaMJDDOIcI2I3ai
-X-Proofpoint-ORIG-GUID: CIf4X7NqeDJEEGc2QNaMJDDOIcI2I3ai
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-11_03,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 spamscore=0 priorityscore=1501 bulkscore=0
- adultscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110129
+X-TOI-EXPURGATEID: 150726::1789118256-19FF89A9-1E88268B/0/0 CLEAN NORMAL
+X-TOI-MSGID: 8d2d960d-557e-405c-82b0-507f43403901
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1789118258; i=f_l_k@t-online.de;
+	bh=cElcSzpxHAzkVetzhjhtX9qX+8vS2KkmuAB0TgvhuZQ=;
+	h=From:To:Subject:Date;
+	b=OyTD+Y35syB1evPlsylpi0hdDLrA1KKl3xxpCofYHDr6PRlGVSIArksmutpuwja9T
+	 gE7QwPtQ9BWcHiyR5loU23ZQ8U1aOw5vaWs5STXk8cYkJqro8gKR4HFQ2/ChxBnr5I
+	 xV8ysAJ2cbC76pqhztcOSM+IGMqlgMLWCWe4ZwxenkAUrqkdcOJ5tfpwLhmu28WW0z
+	 TZe9wKE7z5/j7NaFJCQoaxBlHewhDf9KNIEnKpaCEIXax1bH4aWH+TIdUCVY8aQ+Sf
+	 TyJ1JueQCo9pgrJJc2z0jIpyj2yGno07oexjI7cn9kGqYBZLonwE7foZwIsGtRpB8I
+	 P9WwYETudGlFw==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:17:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129956
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 09:17:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129957
 
-Update SRC_URI to use the 'main' branch instead of 'master' since
-the upstream GitHub repository has renamed its default branch.
+0.5.16 is skipped because it contains a regression that broke object
+destruction in the monitor scripts; upstream recommends to avoid it.
 
-Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+WirePlumber 0.5.17
+~~~~~~~~~~~~~~~~~~
+
+Fixes:
+
+  - Fixed factory-created device, node and link objects to stop sharing
+    ownership with their registry global, fixing a regression from the
+    ``WpClientContext`` introduced in 0.5.16 that broke proper object
+    destruction in the monitor scripts (#999; !890, !891)
+
+  - Improved ``default-nodes`` to also rank on the object.serial of a nod=
+e's
+    device and on the node's own object.serial, so that route priorities =
+are
+    only compared between nodes of the same card, and the election no lon=
+ger
+    changes for no apparent reason when all other keys are equal (!893)
+
+  - Fixed ``m-lua-scripting`` to include the offending Lua type name in P=
+OD
+    build errors (!889)
+
+WirePlumber 0.5.16
+~~~~~~~~~~~~~~~~~~
+
+Additions & Enhancements:
+
+  - Added ``WpClientContext``, a second PipeWire connection running on it=
+s own
+    thread that hosts WirePlumber's in-process media objects (loopback an=
+d
+    filter-chain modules, ``LocalNode()``, ``SpaDevice()``), so that slow=
+ Lua
+    event hooks on the main thread no longer stall their control path; th=
+e
+    export core is retired in favor of this new client context (!873)
+
+  - Added new ``WpDynamicRules`` class for matching rules with conditions=
+, and
+    updated ``filter-graph.lua`` to use it, allowing filter-graphs to be =
+loaded
+    and unloaded dynamically depending on whether other objects exist or =
+not
+    (!872)
+
+  - Added ``wp_impl_module_unload()`` and ``LocalModule:unload()``, givin=
+g
+    scripts control to unload implemented modules at any time (!881)
+
+  - Added a ``volume-set`` action to ``module-mpris`` to allow adjusting =
+the
+    volume of a remote MPRIS2 player from Lua (!860)
+
+  - Added ``--yes`` flag to ``wpctl reset`` to skip the confirmation prom=
+pt
+    (!850)
+
+  - Added ``device.form-factor`` ALSA node property for use in ALSA rules=
+, and
+    made HDMI node descriptions include the name of the connected display=
+ when
+    available (!862, !874)
+
+  - Refactored the Bluetooth monitor to use event hooks for handling devi=
+ces
+    and nodes, matching the design already used by the v4l2 and libcamera
+    monitors (#916; !803)
+
+  - Overhauled the documentation: filled in every stub and missing Lua AP=
+I and
+    C API page, added a getting started guide, new ``wireplumber(1)`` and
+    ``wpexec(1)`` man pages, and removed stale pages describing features
+    renamed or removed in the 0.4 to 0.5 transition (!877)
+
+Fixes:
+
+  - Fixed monitors to always activate all device and node features, and m=
+ade
+    monitors wait for successful device activation before storing the dev=
+ices
+    and nodes as a managed objects (#986, #996; !883, !886, !876)
+
+  - Fixed ``find-preferred-profile`` to skip a configured preferred profi=
+le
+    that is not available, instead of leaving no profile selected (#993; =
+!884)
+
+  - Fixed ``permission-manager`` to not include destroyed globals when
+    rebuilding the permissions array on ``objects-changed``, fixing some
+    pipewire warnings in the log (!882, !888)
+
+  - Fixed a memory leak in ``WpSpaDevice`` by only collecting params from=
+ our
+    own requests (#988; !879)
+
+  - Fixed ``filter-graph`` to correctly apply graphs defined for the same=
+ node
+    across multiple configuration files (!870)
+
+  - Fixed several nil-related crashes and correctness issues in Lua scrip=
+ts
+    (#972; !861, !864, !866, !869)
+
+  - Improved ``apply-access`` to directly attach an already-active permis=
+sion
+    manager to the client instead of wastefully re-running activation on =
+it
+    (#973; !868)
+
+  - Improved ``state-stream`` change detection to avoid spurious state wr=
+ites
+    from volume rounding and from unset or empty properties (#974; !867)
+
+  - Fixed ``default-nodes`` to ignore smart filters when selecting the be=
+st
+    default node (!857)
+
+  - Removed the ``node.filter.forward-format`` setting and its script, wh=
+ich
+    only worked with 0.4 and never really worked with 0.5 (!878)
+
+AI-Generated: Uses Claude Code (Claude Opus 5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb | 2 +-
+ .../{wireplumber_0.5.15.bb =3D> wireplumber_0.5.17.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.1=
+5.bb =3D> wireplumber_0.5.17.bb} (99%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-index 324c0cfbe8..8ffa433c3e 100644
---- a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a958bb07122368f3e1d9b2efe07d231f"
- 
- DEPENDS = ""
- 
--SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=main"
- 
- SRCREV = "3a8402c1de7c7747c95229db26d8d32fb85a7a52"
- 
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
+.5.15.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5=
+.17.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
+5.15.bb
+rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
+17.bb
+index 9f7092dfa9..3dd58a70c4 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.15.b=
+b
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.17.b=
+b
+@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
+     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
+, "python3-native python3-lxml-native doxygen-native", "", d)} \
+ "
+=20
+-SRCREV =3D "bc4fa8f5e84806f86530c97cb35283eecc3ec081"
++SRCREV =3D "11e501181fb87dc8e72e55156d672109fbad2434"
+ SRC_URI =3D " \
+     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
+r;protocol=3Dhttps;tag=3D${PV} \
+     file://run-ptest \
+--=20
+2.55.0
+
 
