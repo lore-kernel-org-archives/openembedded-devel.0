@@ -2,187 +2,104 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15DC8C88E58
-	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 15:09:29 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.41762.1789139359817803906
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFB0FC88E45
+	for <webhook@archiver.kernel.org>; Fri, 11 Sep 2026 23:43:52 +0000 (UTC)
+Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.52206.1789170224838208318
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2026 08:09:19 -0700
+ Fri, 11 Sep 2026 16:43:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pcuzvFc2;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cc4902427c1so889241a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 08:09:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=HmYQn4tx;
+ spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: raj.khem@gmail.com)
+Received: by mail-pz2-f12.google.com with SMTP id 41be03b00d2f7-cc1cea4bfd1so371494a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 16:43:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789139359; x=1789744159; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1789170224; x=1789775024; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LQw7MtdKzuH9wkkWNFJFmdLQGU8lfK8NAj/v0sYCXo4=;
-        b=pcuzvFc2LgWMuhw6kSNuX7XNsDjYGtpLcYPjkSbz1Pvl1ZzcVkzCu6S2HBhCTh0pXo
-         8fZ51KyG9HeEplTNNmIilfI39tBHkGL/vNJjeluKDJkI46bfKeYnGcTLhcA6xjtcKS6q
-         EVYpjCnlOnH8zSpYx0TA0usmoipA1T9xw/Ju3xC5AGJF7C6zPPsQauiJoi2Z6A/RxgA2
-         2cxijIHY2h+GOIFI8ExycRjG6s/ZbLMUK5BbE+fsFdta9TtHfiQmjpJHrzaG/X7F2f3q
-         L1PoWnx6NA3+qrvsxhRkimtozvgt1cENtJZoVZ6biS/vkAk+yz89PV7/izKUZlCn1UUG
-         lwLg==
+        bh=AFwBJk527hDtxMMRZBP8f8L1Sgyky5BlvEQu8aNyt5Y=;
+        b=HmYQn4txirpaY4P9CkDwgxygKvvNyH8/i1Wigp81+t4Y8Ohj3/Ha1hyKaMUgUeZ6Vj
+         fYspmOz4EKDC2DnoD40NPgUBlhWPnR2sUKZLrjqSrJvhwaYMD9JaG1qUHf41BQWxRLz3
+         220UsVIK7vdUOSgfMzLUs7q+V+fQLWzjf7JNgTfVbmjpwnUakn/UJdMdLCnHxT8ybOlC
+         tVxzx8ZRjXUdtDoJ0W6ecPD8pElzCoTgg1lXLIsUrjn7cfOTsuExuyLjestwljeYx1jf
+         VHWwK2+Z561dOGIQQitSyd9fMgmw1Ogk5I2+ML1LplMPgU2GQjd31KNIV2Gce678kk46
+         oCcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789139359; x=1789744159;
+        d=1e100.net; s=20251104; t=1789170224; x=1789775024;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LQw7MtdKzuH9wkkWNFJFmdLQGU8lfK8NAj/v0sYCXo4=;
-        b=eNVMQbfoj1w8ZV6j+FI3dI6/f9B00TFZypAC+BZ+hyE8utIWKKugFzlRXil6mThBmQ
-         qOQ6kT9jiMee6pYTpUL9FHjpyZHPobxYRc8c/xueu4cOgF2J56UX2vllwyU06mZM0Nbe
-         5Y+Y+PAwRMqJQ8vAyBEhXZtMpsQE21WJ4FVB4IquCSWyNI7caG03mmsx18u3qxslCZOB
-         g6Pf7Fr4ZqpBTUDcCGpu0+Av4wOjLCknXnmBxbfL2IPHwU4GLgjK7H55xN5tLP4i2af6
-         SwEWvMigfS/fKUuIE4fWkq2YRsxWM6BqXD0eopM6ran9SuvS6hADS7ZCNjqd8k2W+UAT
-         Frzw==
-X-Gm-Message-State: AFuF++nsj5s5i7bPADiIAs9KCutKkJ71CeNalcl47Iy1EJGgWkcFFGL5
-	lPDUvwSnUBEVW1vUdxzILKB8n35CHxB/vAq5DGBQ3HR8K5QQzQ99QKyp23730A==
-X-Gm-Gg: AYBFou25mkedjJJ1rxUFj3KnZ0A7EQpd9NK4CTPLsSnnZXs5fXpMQzE4bouN/nKf+8L
-	WYkzCqI9HjZn0v9FudGE9j9dkJN/C6aqOq1TvfSPAfgk2exk9FNlZvUotd+2+5INsnwuX55zyHH
-	Msa5ARzRnLh47YVUn1R4t8+M1yFIL8BeMK37sBYySpQ+JYhbWnCgmiOs69jL3xqjI2ywDJBD09R
-	Cm0x/ca0RL1IJbdigf0ZIifoYst37sMEs+RbMb7asHabOU3879FJXP7D3YG4W/iLppVFMpPmyoh
-	rqScqa4sx2PP+8Nby9igcdXI9xGM5DTyZTAMfK6R5IJXlT8kdeWkFcy/k3Rvh1YEaLZ8dR00yzc
-	3PAQxX5sRNZNEu/ToxkbzfSW12kf8IKN5W0FWXDGyzR2jHPQQAd128inzYIUoQ69hAYD4KNSTid
-	dGm3CofgZQFixj4plQZ8nfwPtO2DKK2B28H9N7zLmCselW+QK/Dm4Mm10FyhT81fS0qSAAcF2BD
-	x+qJ0eKfpW7VtsESKh6L3VtCI3PkRg2f6CQZVNBe7uAa8jYMQ+OSME9RreimKfI+J3fVnvChAyT
-	EmFsno817d48r8DtB+EBQERWT5iAaQ9RAYtCKTakbVneG74ofp4txo62QUjnvWsZLzLoliuCsKb
-	t3tYIZCTV7E8r2MDZyze1qecpCSh9hVF2VQPW8UyaxCE3yXUoG3RAeR0g
-X-Received: by 2002:a17:90b:380d:b0:396:4ce0:6400 with SMTP id 98e67ed59e1d1-39d7790f8b8mr12970400a91.2.1789139358823;
-        Fri, 11 Sep 2026 08:09:18 -0700 (PDT)
+        bh=AFwBJk527hDtxMMRZBP8f8L1Sgyky5BlvEQu8aNyt5Y=;
+        b=aJ7Tr41q2Y9i2AfFx24kSjWh7fqwatJPybsuR8FJ9nUoeh2NqE2TlvNkOcSv8BLeff
+         /Ln7jOE7u1QaMmLGP989vtVg2pFt/Vq7RG3T6mXfah8LxuvK13VXGtdDYKbV4knr/987
+         E6dtWm1o7CrpbBfNZcwtNX1eDDVgv3IM+NPCO0ed0PnSXbEb9u/7GPjqvWhm6dXpXidm
+         MCWJNWeAkb9aTCzcv9VXIZOZl+nl9isuvPel2PYlpU34Rv51ziT9s5qn06PwaBQsB7Vd
+         3YzU2GRHaf9yZ8b26Gl5NnC5QvrMNsel7IzTSz1oIUbIaxNMEfWFa/enMV0KVNGaJTgp
+         uZRw==
+X-Gm-Message-State: AFuF++mg0X1PK6Yuzp1xnsIskf2rkk7fUw+ga0onpRB+bpKjBGomgTbl
+	GCA5esF5pOzZeMZqkTsvNoxtYiMnvsI3WZkQ6Nw7VFKEbk6pHntYxDXgu96aJw==
+X-Gm-Gg: AYBFou0xQK1qyXHKKlIpNSl0Daodc+y9pr6O3u20CiaW0RAdfT00PeSx9Bl8Vz5EwdP
+	AVX6ptT7NbNA2vunviMjrxZAM4OLveZgzh0VcL35l9M1L0nps69OlIqvjkqjNmeFbeBvb8w/3Sn
+	4FaUjmzYALLyffaMBnex65zxbmdX3xuTERoOHlLAxgvkdTovmbNjFOXIjrjFE/ljXtWX5HjdduY
+	7kkacFHa/2wMJ2xtACXmC1fveqKcmMP47E+cLpiUQJoIQDbdvdVjLMJUwh/Vum0EwzvGLJU4FRD
+	DfcsdCGKDSXk/iK1llMRY6UGD8ooNyEHpyXSHFHkn7+mlODrWEYs8PsFEO64DO0CMvhJuA+cSmx
+	Q7zF9RBV3iqNp7gljQ5gck9+JZsVZez0yRzbtA2vYsq2QQTwtQGNkU+6GwJltyQybGIiAGe6FWu
+	HYSdeN49hqrr3hLr8ujxLOFZVLdR6ZCkCu58qwOfFYTYvGH6dU8I9t/QPoIADOrBd+Ch/KiSmsJ
+	4xoRZhzbeh0I9+UL6o5ic4JAUBXqdyMdMh9qQDs9bzb6RnW52Lp0yZ0bR9PLEyRfZtAusnYmIqv
+	rM9TfBRyTodCz3PQQpgKkZp+SJ/6XhA2d1Z0Gob1nPk5bhkDubJftVqO/tJcimNuJ81pw5mXyVD
+	kOJUny+mDPVJNp8HkQVCyg/Y4Ci1C78bsB5Ryu5I9rOoyYg0JuciSEexJ
+X-Received: by 2002:a17:90b:270e:b0:398:dcf6:d40e with SMTP id 98e67ed59e1d1-39d9c1fe880mr11975436a91.17.1789170224093;
+        Fri, 11 Sep 2026 16:43:44 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e9a3casm7263888eec.12.2026.09.11.08.09.17
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4f06423sm10278654eec.20.2026.09.11.16.43.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 08:09:18 -0700 (PDT)
+        Fri, 11 Sep 2026 16:43:42 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] sedutil: upgrade to 1.49.13
-Date: Fri, 11 Sep 2026 08:09:15 -0700
-Message-ID: <20260911150915.2320557-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] polkit-group-rule: Set S to UNPACKDIR
+Date: Fri, 11 Sep 2026 16:43:39 -0700
+Message-ID: <20260911234340.1192939-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 15:09:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129975
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2026 23:43:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129976
 
-The 1.4x releases are cut on the "develop" branch,
+It only install local files from SRC_URI, so nothing is ever
+unpacked into ${UNPACKDIR}/${BP} and the default S never exists, making
+do_unpack warn for each of them:
 
-Add UPSTREAM_CHECK_GITTAGREGEX to keep the version check sane.
+  WARNING: polkit-group-rule-datetime-1.0-r0 do_unpack:
+  polkit-group-rule-datetime: the directory ${UNPACKDIR}/${BP} pointed
+  to by the S variable doesn't exist - please set S within the recipe to
+  point to where the source has been unpacked to
 
-The release needs a few adjustments beyond the version bump:
-
- * linux/DtaLinux.cpp now includes <systemd/sd-device.h> and
-   <nvme/types.h> unconditionally, and Makefile.am hardcodes
-   LDADD = -lsystemd, with no non-systemd fallback. Add the systemd and
-   libnvme dependencies (matching the package list in the BUILDING file)
-   and require the systemd distro feature.
-
- * Makefile.am declares .INTERMEDIATE, which automake defines itself in
-   distdir.am, and configure.ac uses AM_INIT_AUTOMAKE([-Wall -Werror]),
-   so autoreconf fails with automake 1.19:
-
-     automake: warnings are treated as errors
-     Makefile.am:152: warning: user target '.INTERMEDIATE' defined here ...
-     .../am/distdir.am: ... overrides Automake target '.INTERMEDIATE' defined here
-
-   Add a patch dropping the declaration.
-
- * Clear WERROR so that upstream's -Werror does not turn new compiler
-   diagnostics into build failures. clang 23 enables -Wunused-template,
-   which fires on the deliberately unused sd_device_new_from_devname()
-   SFINAE fallback.
-
- * Generate linux/Version.h up front instead of letting Makefile.am run
-   "git describe --dirty", which needs git at build time and reports
-   "1.49.13-dirty" because do_patch leaves the tree modified.
+Point S at ${UNPACKDIR} in the shared include, which is what oe-core
+does for file-only recipes such as init-ifupdown and keymaps. This
+covers polkit-group-rule-{datetime,network,udisks2} in one place; the
+do_install tasks already reference ${UNPACKDIR} directly, so packaging
+is unchanged.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...rride-Automake-s-own-.INTERMEDIATE-t.patch | 35 +++++++++++++++++++
- .../{sedutil_git.bb => sedutil_1.49.13.bb}    | 20 ++++++++---
- 2 files changed, 50 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-extended/sedutil/files/0001-build-do-not-override-Automake-s-own-.INTERMEDIATE-t.patch
- rename meta-oe/recipes-extended/sedutil/{sedutil_git.bb => sedutil_1.49.13.bb} (53%)
+ meta-oe/recipes-extended/polkit/polkit-group-rule.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/sedutil/files/0001-build-do-not-override-Automake-s-own-.INTERMEDIATE-t.patch b/meta-oe/recipes-extended/sedutil/files/0001-build-do-not-override-Automake-s-own-.INTERMEDIATE-t.patch
-new file mode 100644
-index 0000000000..4a6df1000e
---- /dev/null
-+++ b/meta-oe/recipes-extended/sedutil/files/0001-build-do-not-override-Automake-s-own-.INTERMEDIATE-t.patch
-@@ -0,0 +1,35 @@
-+From 2ef56c134de35938119105dd92ca5ae4842ab338 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 11 Sep 2026 07:46:11 -0700
-+Subject: [PATCH] build: do not override Automake's own .INTERMEDIATE target
-+
-+Automake defines .INTERMEDIATE itself in distdir.am, so declaring it in
-+Makefile.am makes automake complain, and since configure.ac uses
-+AM_INIT_AUTOMAKE([-Wall -Werror]) the warning is fatal:
-+
-+  automake: warnings are treated as errors
-+  Makefile.am:152: warning: user target '.INTERMEDIATE' defined here ...
-+  .../automake-1.19/am/distdir.am: ... overrides Automake target '.INTERMEDIATE' defined here
-+  autoreconf: error: automake failed with exit status: 1
-+
-+The declaration only asked make to remove the generated linux/Version.h
-+again once the build is done, which is not worth breaking the build over.
-+Drop it.
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile.am | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 112e172..8110fae 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -149,7 +149,6 @@ man_MANS = docs/sedutil-cli.8
-+ linux/Version.h:
-+ 	$(srcdir)/Customizations/linux/CLI/GitVersion.sh > linux/Version.h
-+
-+-.INTERMEDIATE: linux/Version.h
-+
-+ maintainer-clean-local:
-+ 	rm config.status configure config.log
-diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_1.49.13.bb
-similarity index 53%
-rename from meta-oe/recipes-extended/sedutil/sedutil_git.bb
-rename to meta-oe/recipes-extended/sedutil/sedutil_1.49.13.bb
-index e8987b2dd0..1290b7508b 100644
---- a/meta-oe/recipes-extended/sedutil/sedutil_git.bb
-+++ b/meta-oe/recipes-extended/sedutil/sedutil_1.49.13.bb
-@@ -7,12 +7,22 @@ LICENSE = "GPL-3.0-only"
+diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+index e8bbf48c43..0c2531b3e6 100644
+--- a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
++++ b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+@@ -1,5 +1,7 @@
+ HOMEPAGE = "https://www.yoctoproject.org/"
 
- LIC_FILES_CHKSUM = "file://Common/LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
-
--PV = "1.20.0+git"
--
--SRCREV = "6270fb0e3c110572d96936a473b5e0d21a39884d"
--SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git;branch=master;protocol=https \
-+SRCREV = "1b0633afbe02bf5aa084f1efbedeeb065b00d209"
-+SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git;branch=develop;protocol=https;tag=${PV} \
-            file://0001-Fix-build-on-big-endian-architectures.patch \
-+           file://0001-build-do-not-override-Automake-s-own-.INTERMEDIATE-t.patch \
-            "
-
-+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
++S = "${UNPACKDIR}"
 +
-+DEPENDS = "systemd libnvme"
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+inherit autotools-brokensep features_check
-+
-+EXTRA_OEMAKE += "WERROR="
+ # polkit must prepare polkitd group
+ DEPENDS += "polkit"
 
--inherit autotools-brokensep
-+do_compile:prepend() {
-+    mkdir -p ${B}/linux
-+    echo '#define GIT_VERSION "${PV}"' > ${B}/linux/Version.h
-+}
 
