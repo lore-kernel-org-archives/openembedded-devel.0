@@ -2,103 +2,120 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04B99C88E53
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FF00C88E63
 	for <webhook@archiver.kernel.org>; Sat, 12 Sep 2026 23:51:51 +0000 (UTC)
-Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16568.1789257105775887830
+Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16731.1789257106488076251
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Sep 2026 16:51:45 -0700
+ Sat, 12 Sep 2026 16:51:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=F7F8F87E;
- spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: raj.khem@gmail.com)
-Received: by mail-pz2-f12.google.com with SMTP id 41be03b00d2f7-cc4aa0f1766so566596a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 16:51:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KswJZUQ6;
+ spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-396ccd66bb5so676445a91.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 16:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789257105; x=1789861905; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gIlSg1sDcIyfJJfNlVA453Qun8wNaJXnSQcrDz/QXlM=;
-        b=F7F8F87ECrAKyrneiHgnrNYtQeQ8r5dFk3Mnn4EWIfwqxlZ3cmIdeGRiOmvQm3mWaF
-         RLN1qTIyly4ek6wrJv8tVWZLecMRcG/T84Uv3idtX8oRbm33PSl+6jQbjiCCWTogwP34
-         3IT9A2WqM+S61U5Zy4yPIFC6L1rZTaSMA+jorvuWcHK+NRhAv1Bi47WUWZooASoXEhRj
-         vlOtkyHMyNsD2xUGrfIioSi9ZNDuMNCosck4t+aRevBZZLUxSmCszI2K4TU+o1Igl371
-         cyoZgYauJBopmdIpMHNvCP6CCN3RRnuk5NHoaxY9JyCq5Y/G5teZYZETAeX4xTJxMbxN
-         fm9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789257105; x=1789861905;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1789257106; x=1789861906; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gIlSg1sDcIyfJJfNlVA453Qun8wNaJXnSQcrDz/QXlM=;
-        b=sTu8j0mfur4MLVo8cP+bgPRR9KB2+rUeGzrtBOGoPGohbvhb7+NE9rJmuvabKykgTJ
-         rF8IBChDT7MDe757ycUIWdHxHOfOKfZayErrBYTqp0Scn69kR73QZr+VjxUNykf/urJb
-         niIijzojqDQWZbXmx/3fR7KxguJs9WR2rT5gmuv+pyQ6drFcd3ywTxkPQPftE14my7aF
-         DhleW3yHOaWAoj5bS2GfvF30x+SgzI4RvsEWZGU6k7P8kQf4drG/yhn+Yb4+twquJ64c
-         4u/9zdinnVZQOqGRcRWgvC4e469+j4acZ+AkoVn6jdsePKEOFEDNWVtB44Rio9HOWevw
-         ty/A==
-X-Gm-Message-State: AFuF++ndotp4E7VcOQ1aN0otBklojAcLnchc+9JpHSChQJ51qAIemsY5
-	kf0fyioFAkTXZGdUgYnlN9INx9J70fgEFpoWsEH6NqRFWn+GlCnqPGtqnzPkkw==
-X-Gm-Gg: AYBFou2gttH2DqA9SfoswQGwQ1+Bv2sj/CocM5guJK+k2xW3uWMgqDYkUDrdTBDpwZS
-	IfltD+u2JS5aeJH7ka2aGIe8+ITbDPblaoxm7cyXScXAHtn2+ijmPPVIUFmk0EJZCPEQctXsxke
-	L+ANCwWqFy661H0aGY54vFVjIgiJvrIQ87CoqaFSXOFkA5BxbU7lJ9ywpc5+PQrtM5IOprUuUaL
-	axWdwdShl7DC5HdwwBLiqLUS9OwTENkv5wfunk39s/WO7zMeDgAZCC+pNAdeipb0cizhRymoi8L
-	JBVgs/NYeCsYpSL/pUVREfl+kBBze6MgyyHY3OxfHbd/emrcs1CSTtlfitYlTuJRi5DxuMpyH1a
-	OLG6M+YlE35TANeNOKMuzq0EWngEkJ/STVLi4Ry9ndDmfPxltq3FyIduTKpR2eoO8wGVKJ4RYFj
-	ohh8OwZhkrR7PtGqeUViUZXQprbZ+Z5yKN7/Ot5zbE6hw9swpI3/b/OdKA5GGL4k0VpsZ122hPx
-	YsFo9wz1yEsquqlhNEqS/+AGVq04btAcYfCQgU0AbPbYGs+rgGAFkpruHr6mhDmsbkYLdjJZ3GJ
-	YD1cLD75VFqVSACfLEdwUgb3nGkc6uxbaJObywlY7fCtH4Jacdh8GH3yQz7/9EkHpccNAgGdhoE
-	e5xQdJiJ4KPOupFTL8CXsseILC3MVqRk8O3VnfEDQHm6L9uMZicVlu6mK
-X-Received: by 2002:a17:90b:2c90:b0:36b:bec8:94c5 with SMTP id 98e67ed59e1d1-39dbc1d2546mr8646168a91.10.1789257104838;
-        Sat, 12 Sep 2026 16:51:44 -0700 (PDT)
+        bh=WCfMwhbNzSK3H/l3WnsZ92zNJTldP8iWxwLNVBYNejg=;
+        b=KswJZUQ6V+HyQiQfLpWoDaiX8HDf2Q4WiSMCxjJdmwQjPEB81krFwkjGqf+LgHzpw3
+         TW70YqKepFJWzyukKex4IRi/u0/+2JcIms4/Hrl+C9FCy5nCx8A2jLEut6PlcSYtSxet
+         ZoDCGdfg/773CgKGHvEZZc+eYEzjVp6SA1oZxx8LEyX3jMkWgl6GATtkN1HFjxlQgyWv
+         yvJ8/1fnm3oneiAgtXPXym50GOMxSYQE0sYSHMtAtnIwqpn7SEVa4x6ziJE99VZdCBzc
+         wMOw/CONARofBWLHORyo/uFbkhB02NsNsWvxkHrg41V+hA0xH3CkK5He3zmUQMyDFTdz
+         OfPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789257106; x=1789861906;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=WCfMwhbNzSK3H/l3WnsZ92zNJTldP8iWxwLNVBYNejg=;
+        b=byWHSbMgFPy+SfF+jfFEh0DUZqzI//DPAWFnMS/7/glLkAHitQBgqpkq/iEhn9AdV1
+         paQQPYjDVux14RLwO96P7XBca9bfXwml1Re51Ez3gy/vr3ZquTLHZ8rC7eNX6hApkfYh
+         INNzKbXKZl82ksz1OyxKGUJdVCPogf+3YdUnc+sDNGj6Hdpj99wXhaQK8sSdox5qnAJd
+         rahOLtrn2z/WcxnipVrelCeFblIOu/2Oewh1KAy1HJmMcJApobELuIcd7XSFzkzT0KTo
+         jiXAq/4QH6LPx0YtugyoNB22T9yJ4k8jXO4Q/Zb0zP7kU+iq5ni1HWSq7wpwNDbrMYQs
+         7ckA==
+X-Gm-Message-State: AFuF++nImFl+fY7+/lLf4K2en8G5sH3HSFoN2512UCdK0NFYc/hpj/8m
+	ztgQTwaD6NQFdolVkIexNx/S2GGTG+QNDocH+ftmC2nEZAcqqBDAs+9v0wP/tQ==
+X-Gm-Gg: AYBFou2rhKYby1MXxsMwIub68K5J8jf/1oraSx1VUkwcAaREmalWDhRG01KeE0KVcSb
+	B8kU+dxWJE5M14AebRkxvnZgRDWl3rSysvomsmoja/HYsnv8puqG1pRB5JhqqZ/LBM06eQT1sQ6
+	pqDIXVZFGRxwbR0bpmK7fp8aaG4hAuRj1eMwhu1ceTNaR1huBkj5DG1VdnFqV+ZccvKePTpx/BU
+	41XDED/+HoYzvjeWHxrQgIwliilhDAr/iS/knpgFTxwetgekFZeZyc/rZ9R/kRbZ2drQchsofZ1
+	oM+VGkpcydRiCaZlYvysP0VrOEXGDEAYQETAbl7+HM9YQQrtB/SL+SnY+w9rRRIsl/ek2LumZCi
+	JVUCrkFn1BWKy/fUA9tUspN2q6Pj1YJhxQCCzIGxr51q2XJWfk7lU/DUNs2Xc1LNNfq4KM9sm0e
+	n15bhm/lRw4OuVctR73I3K/pa9srsAmtyt4gDM2zuTvbYw4hzOL6N7YzgGex2Pr+tgbIcxfWCPZ
+	Cu/d/RazAF7CRA+2sdbDW5ky5TQwDL5Yb6bEnnuMfQFeeoyYlIn6TJeqqak+76huDY3HcGMHXo4
+	lzVRrkx4QcPNRbYvCgTVG4IOjiY7QYzl5/9KDe60b1QhZwh6dKALTIUCrdcZSs2knGPqI9Wtl8R
+	W9Y0aqSpSi+SntAL1lpJn6n33hVSJ+R+nARtylZWBh0nSyXfKyF7FG4EO
+X-Received: by 2002:a17:90b:5408:b0:39b:3109:10ce with SMTP id 98e67ed59e1d1-39dbc6a0196mr9153580a91.16.1789257105801;
+        Sat, 12 Sep 2026 16:51:45 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e52a60sm16093307eec.6.2026.09.12.16.51.43
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e52a60sm16093307eec.6.2026.09.12.16.51.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2026 16:51:44 -0700 (PDT)
+        Sat, 12 Sep 2026 16:51:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 1/5] python3-betamax: skip the live-network hook tests in ptest
-Date: Sat, 12 Sep 2026 16:51:36 -0700
-Message-ID: <20260912235141.2355852-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 2/5] python3-glances: install config and test data for ptest
+Date: Sat, 12 Sep 2026 16:51:37 -0700
+Message-ID: <20260912235141.2355852-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260912235141.2355852-1-khem.raj@oss.qualcomm.com>
+References: <20260912235141.2355852-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 23:51:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129981
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129982
 
-tests/integration/test_hooks.py records live https://httpbin.org
-requests (no cassettes are shipped for them), so the ptest fails
-whenever the service resets the connection, e.g.:
+tests/test_core.py runs glances with ./conf/glances.conf and reads plugin
+test data from ./tests-data, both relative to the ptest directory.
+Neither was installed, and tests-data is not part of the pypi sdist, so
+four tests failed:
 
-  FAIL: tests/integration/test_hooks.py:TestHooks.test_post_start_hook
-  requests.exceptions.ConnectionError: ('Connection aborted.',
-    ConnectionResetError(104, 'Connection reset by peer'))
+  test_023_get_alert: AssertionError: 'DEFAULT' != 'OK_LOG'
+  test_025_npu: IndexError: list index out of range
+  test_026_mpp: AssertionError: 0 != 3 : Expected 3 MPP engines
+  test_108_fs_zfs_: AssertionError: False is not true
 
-The same tests pass when the service behaves (3 out of 3 runs in a
-qemux86-64 VM), so they are flaky rather than broken. Leave them out
-of the ptest run.
+Fetch tests-data from the v4.5.6 tag and install it, together with
+conf/, next to the tests. Only tests-data/plugins is used by the tests.
+
+With these in place tests/test_core.py passes 52/52 on qemux86-64.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-devtools/python/python3-betamax/run-ptest        | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-glances_4.5.6.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-betamax/run-ptest b/meta-python/recipes-devtools/python/python3-betamax/run-ptest
-index 531af4d015..0acad79f97 100644
---- a/meta-python/recipes-devtools/python/python3-betamax/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-betamax/run-ptest
-@@ -8,4 +8,7 @@ if ! nslookup httpbin.org >/dev/null 2>&1 ; then
-     echo "nameserver 8.8.8.8" > /etc/resolv.conf
- fi
+diff --git a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
+index 41516e07bc..311d38cac3 100644
+--- a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
++++ b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
+@@ -11,7 +11,19 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
--pytest --automake
-+# tests/integration/test_hooks.py records live https://httpbin.org requests
-+# (no cassettes are shipped for it) and fails whenever the service resets
-+# the connection, so leave it out.
-+pytest --automake --ignore=tests/integration/test_hooks.py
+ SRC_URI += " \
+ 	file://run-ptest \
++	git://github.com/nicolargo/glances.git;protocol=https;branch=master;name=testsdata;subpath=tests-data;destsuffix=glances-tests-data \
+ "
++# tests-data/ is used by tests/test_core.py but not shipped in the pypi sdist,
++# take it from the v4.5.6 tag
++SRCREV_testsdata = "ce2f8506289c71e48ed8bf186f2c04d8256203d5"
++
++# tests/test_core.py runs glances with ./conf/glances.conf and reads plugin
++# test data from ./tests-data, both relative to the ptest directory
++do_install_ptest:append() {
++	install -d ${D}${PTEST_PATH}/conf ${D}${PTEST_PATH}/tests-data
++	cp -rf ${S}/conf/* ${D}${PTEST_PATH}/conf/
++	cp -rf ${UNPACKDIR}/glances-tests-data/plugins ${D}${PTEST_PATH}/tests-data/
++}
+ 
+ # psutil/jinja2/packaging are oe-core; fastapi/uvicorn/defusedxml are
+ # meta-python.
 
