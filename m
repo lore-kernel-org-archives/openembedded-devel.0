@@ -2,120 +2,160 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FF00C88E63
-	for <webhook@archiver.kernel.org>; Sat, 12 Sep 2026 23:51:51 +0000 (UTC)
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16731.1789257106488076251
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FCFBC88E66
+	for <webhook@archiver.kernel.org>; Sat, 12 Sep 2026 23:51:52 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16571.1789257111047899735
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Sep 2026 16:51:46 -0700
+ Sat, 12 Sep 2026 16:51:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=KswJZUQ6;
- spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-396ccd66bb5so676445a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 16:51:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jks6c404;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cc4902427c1so1727722a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 16:51:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789257106; x=1789861906; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WCfMwhbNzSK3H/l3WnsZ92zNJTldP8iWxwLNVBYNejg=;
-        b=KswJZUQ6V+HyQiQfLpWoDaiX8HDf2Q4WiSMCxjJdmwQjPEB81krFwkjGqf+LgHzpw3
-         TW70YqKepFJWzyukKex4IRi/u0/+2JcIms4/Hrl+C9FCy5nCx8A2jLEut6PlcSYtSxet
-         ZoDCGdfg/773CgKGHvEZZc+eYEzjVp6SA1oZxx8LEyX3jMkWgl6GATtkN1HFjxlQgyWv
-         yvJ8/1fnm3oneiAgtXPXym50GOMxSYQE0sYSHMtAtnIwqpn7SEVa4x6ziJE99VZdCBzc
-         wMOw/CONARofBWLHORyo/uFbkhB02NsNsWvxkHrg41V+hA0xH3CkK5He3zmUQMyDFTdz
-         OfPQ==
+        d=gmail.com; s=20251104; t=1789257110; x=1789861910; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3eQ64dybskEOOIGjNAus/5xvuGcoyewGRNeH5KgowXE=;
+        b=jks6c404UI8+pu0shDjZDmeSNIJAzcWw0krfdWz8kSOSIN114jZs1uETwFuUe4zDWX
+         0AWpDG3BSiJNVgq8m13McvTGTeMZGBTPp7kNZAzrgT3vE+4vqUkgorOcNiw/rqHnvhZf
+         URsrGtQu+z0y+OqeXkBFZmn8pt4dFJ+bSw+gSDoBq1AmPqDUgw4qdQk4uIfIKXzQANKI
+         P+6MldaAxCV0NNE+MmFFLv/Hpq0fry1T3cgCvvWyaHT+CL9fZNTkvwgO2cXlwBID8A8D
+         LQ7vhopoHgwBkowgaAEZTauv8bYi7e+soA2LaT2xLeMRfuQIfNx0Fh3Q0VIF9QV73uNY
+         8s2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789257106; x=1789861906;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WCfMwhbNzSK3H/l3WnsZ92zNJTldP8iWxwLNVBYNejg=;
-        b=byWHSbMgFPy+SfF+jfFEh0DUZqzI//DPAWFnMS/7/glLkAHitQBgqpkq/iEhn9AdV1
-         paQQPYjDVux14RLwO96P7XBca9bfXwml1Re51Ez3gy/vr3ZquTLHZ8rC7eNX6hApkfYh
-         INNzKbXKZl82ksz1OyxKGUJdVCPogf+3YdUnc+sDNGj6Hdpj99wXhaQK8sSdox5qnAJd
-         rahOLtrn2z/WcxnipVrelCeFblIOu/2Oewh1KAy1HJmMcJApobELuIcd7XSFzkzT0KTo
-         jiXAq/4QH6LPx0YtugyoNB22T9yJ4k8jXO4Q/Zb0zP7kU+iq5ni1HWSq7wpwNDbrMYQs
-         7ckA==
-X-Gm-Message-State: AFuF++nImFl+fY7+/lLf4K2en8G5sH3HSFoN2512UCdK0NFYc/hpj/8m
-	ztgQTwaD6NQFdolVkIexNx/S2GGTG+QNDocH+ftmC2nEZAcqqBDAs+9v0wP/tQ==
-X-Gm-Gg: AYBFou2rhKYby1MXxsMwIub68K5J8jf/1oraSx1VUkwcAaREmalWDhRG01KeE0KVcSb
-	B8kU+dxWJE5M14AebRkxvnZgRDWl3rSysvomsmoja/HYsnv8puqG1pRB5JhqqZ/LBM06eQT1sQ6
-	pqDIXVZFGRxwbR0bpmK7fp8aaG4hAuRj1eMwhu1ceTNaR1huBkj5DG1VdnFqV+ZccvKePTpx/BU
-	41XDED/+HoYzvjeWHxrQgIwliilhDAr/iS/knpgFTxwetgekFZeZyc/rZ9R/kRbZ2drQchsofZ1
-	oM+VGkpcydRiCaZlYvysP0VrOEXGDEAYQETAbl7+HM9YQQrtB/SL+SnY+w9rRRIsl/ek2LumZCi
-	JVUCrkFn1BWKy/fUA9tUspN2q6Pj1YJhxQCCzIGxr51q2XJWfk7lU/DUNs2Xc1LNNfq4KM9sm0e
-	n15bhm/lRw4OuVctR73I3K/pa9srsAmtyt4gDM2zuTvbYw4hzOL6N7YzgGex2Pr+tgbIcxfWCPZ
-	Cu/d/RazAF7CRA+2sdbDW5ky5TQwDL5Yb6bEnnuMfQFeeoyYlIn6TJeqqak+76huDY3HcGMHXo4
-	lzVRrkx4QcPNRbYvCgTVG4IOjiY7QYzl5/9KDe60b1QhZwh6dKALTIUCrdcZSs2knGPqI9Wtl8R
-	W9Y0aqSpSi+SntAL1lpJn6n33hVSJ+R+nARtylZWBh0nSyXfKyF7FG4EO
-X-Received: by 2002:a17:90b:5408:b0:39b:3109:10ce with SMTP id 98e67ed59e1d1-39dbc6a0196mr9153580a91.16.1789257105801;
-        Sat, 12 Sep 2026 16:51:45 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1789257110; x=1789861910;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3eQ64dybskEOOIGjNAus/5xvuGcoyewGRNeH5KgowXE=;
+        b=Jvfb+Cyd4Tt6BMKupiYRhlqs+Ei4JYQ67e9tN6ecN8l4n/5ADQIii717uskVyOfKPz
+         1yBEhK//SiQtqixvgkxhyt2p/3OB2IxDmiQ7P8Qm6FQweOnPAs74w6dBqtIc7UTTuF1d
+         5yQF0Q/42dAUnPpCC0YbegN4vZcx15A6fD8Jw5gUnMT2lBAtFI8pQCbmfZpzj5nQGBSb
+         9+dm/AUteQyORwVWN751T2c+cozmKMFVezri99ROnESoJfdJPQEFw6nN6tAQDv1XHkva
+         pnVmKw1PQa/Bc3QX26O9rCLHi7032VE/pI3mi1mLeXMcv6R6nix/9egcB9qmuFotHLG4
+         EpPg==
+X-Gm-Message-State: AFuF++mXM7+g/WPWNKvnyLQgSByr/jskRoxm27zhfH6U2VLZCedh4LiN
+	FeQ9GopqGJYRmCpuqHquol0Qv6F40Lbxxq0nzspGsbed3QwNMH03KUb1eTCJSg==
+X-Gm-Gg: AYBFou3W1vMbkrpfVzsfewljUtUp5nPjyhDR8fK/HswgE57WPB6kmdD9wUn2hLdPRAJ
+	kYIkUo3B0JDTs88ciQwspMqJr9SKW6wuwDW5q1ngWgJtY4phNzrTjiZmHg6LPeRmNyuYHDQJ65f
+	EiDyc3yjJVm55YKWUe+i5D89Q6hP1ZfGP2NnEYpmtTlruNlNAf/ZisX3QpreXrnmw/a7J056Vvj
+	B+cxbJaYbXzBMGxQmlWMaQsUaZVQ8zwB83tLetLQ11p4rHuD7V3jHgTqBQi5IM8wTW18GqyN7CO
+	JMU6Gmn7Snyw8WZYfm0MqVoVni0M+PAp9tGE9/JveTvXVAmwUhKVTxqBEiY4ctl+hc4JaJYq+CP
+	GJR/19ac0VE/7fheXwnU+NowimUSD8hJjR4iZ28d5iBmn9wcdPDO6Kq9EGR0xdMh9S9DudZHxtz
+	I81QFE6QT842KNuGO03HaxdPSGh3WW9dA+atCNVjqawIUsaXe7NIhwIJotEEp8+ReHBhfxJ4qq/
+	BVA1moFp2hl7ZYMnhgX19TaHdHjuWle5XlmqZThjgmE1IovImbvDzFqrYcsFSDLEtL5H18dgzi0
+	iZaxj7MgJZzyyiz4YScXfv9cD2vWiARMfx7dlRBb4FYtEbIgcHsAgAOJ4jC7cwYhSbxCemuAsgL
+	ZgK6J1Muchxja43v8ZRfE8Nj+OrOe9eFDMLcwnfuwIJDaYxPGQ5V1JvrOHpOnP72yd4Mw
+X-Received: by 2002:a05:6a20:4327:b0:3db:b3b:5343 with SMTP id adf61e73a8af0-3db26cf8ce7mr374924637.12.1789257110221;
+        Sat, 12 Sep 2026 16:51:50 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e52a60sm16093307eec.6.2026.09.12.16.51.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e52a60sm16093307eec.6.2026.09.12.16.51.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2026 16:51:45 -0700 (PDT)
+        Sat, 12 Sep 2026 16:51:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 2/5] python3-glances: install config and test data for ptest
-Date: Sat, 12 Sep 2026 16:51:37 -0700
-Message-ID: <20260912235141.2355852-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 5/5] python3-pylint: fix crash with astroid >= 4.2
+Date: Sat, 12 Sep 2026 16:51:40 -0700
+Message-ID: <20260912235141.2355852-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260912235141.2355852-1-khem.raj@oss.qualcomm.com>
 References: <20260912235141.2355852-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 23:51:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129982
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2026 23:51:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129985
 
-tests/test_core.py runs glances with ./conf/glances.conf and reads plugin
-test data from ./tests-data, both relative to the ptest directory.
-Neither was installed, and tests-data is not part of the pypi sdist, so
-four tests failed:
+pylint 4.0.8 passes asname=False to Import.infer(), a keyword argument
+astroid 4.2 removed. With the astroid 4.3.1 in meta-python this makes
+pylint crash on any import of a missing submodule:
 
-  test_023_get_alert: AssertionError: 'DEFAULT' != 'OK_LOG'
-  test_025_npu: IndexError: list index out of range
-  test_026_mpp: AssertionError: 0 != 3 : Expected 3 MPP engines
-  test_108_fs_zfs_: AssertionError: False is not true
+  TypeError: NodeNG.infer() got an unexpected keyword argument 'asname'
 
-Fetch tests-data from the v4.5.6 tag and install it, together with
-conf/, next to the tests. Only tests-data/plugins is used by the tests.
+which shows up in ptest as astroid-error in three functional tests:
 
-With these in place tests/test_core.py passes 52/52 on qemux86-64.
+  FAIL: tests/test_functional.py:test_functional[fallback_import_enabled]
+  FAIL: tests/test_functional.py:test_functional[import_error]
+  FAIL: tests/test_functional.py:test_functional[no_name_in_module]
+
+Backport the pylint/ part of upstream commit 554b1d192434 ("Bump
+astroid to 4.2.0b4"), which drops the argument.
+
+meta-python-image-ptest-python3-pylint on qemux86-64 now passes
+872 tests with none failing.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-devtools/python/python3-glances_4.5.6.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ ...s-do-not-pass-asname-to-Import.infer.patch | 39 +++++++++++++++++++
+ .../python/python3-pylint_4.0.8.bb            |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
-index 41516e07bc..311d38cac3 100644
---- a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
-@@ -11,7 +11,19 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
- SRC_URI += " \
- 	file://run-ptest \
-+	git://github.com/nicolargo/glances.git;protocol=https;branch=master;name=testsdata;subpath=tests-data;destsuffix=glances-tests-data \
- "
-+# tests-data/ is used by tests/test_core.py but not shipped in the pypi sdist,
-+# take it from the v4.5.6 tag
-+SRCREV_testsdata = "ce2f8506289c71e48ed8bf186f2c04d8256203d5"
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch b/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
+new file mode 100644
+index 0000000000..411ba313fc
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
+@@ -0,0 +1,39 @@
++From 554b1d1924342ce2e5b4d8f79dd62eab7cd67501 Mon Sep 17 00:00:00 2001
++From: Daniël van Noord <13665637+DanielNoord@users.noreply.github.com>
++Date: Sat, 4 Jul 2026 23:17:33 +0200
++Subject: [PATCH] checkers/variables: do not pass asname to Import.infer()
 +
-+# tests/test_core.py runs glances with ./conf/glances.conf and reads plugin
-+# test data from ./tests-data, both relative to the ptest directory
-+do_install_ptest:append() {
-+	install -d ${D}${PTEST_PATH}/conf ${D}${PTEST_PATH}/tests-data
-+	cp -rf ${S}/conf/* ${D}${PTEST_PATH}/conf/
-+	cp -rf ${UNPACKDIR}/glances-tests-data/plugins ${D}${PTEST_PATH}/tests-data/
-+}
++astroid 4.2 removed the asname keyword argument from Import/ImportFrom
++inference (astroid commit fe29fb1f7e3e, "Remove `asname` kwarg from
++Import/ImportFrom `_infer`"). With astroid >= 4.2, pylint 4.0.8 then
++crashes on any module that imports a missing submodule of a package:
++
++  TypeError: NodeNG.infer() got an unexpected keyword argument 'asname'
++  ... (astroid-error)
++
++which breaks the fallback_import_enabled, import_error and
++no_name_in_module functional tests with the astroid 4.3.1 in meta-python.
++
++This is the pylint/ part of upstream commit 554b1d192434
++("Bump `astroid` to `4.2.0b4` (#11153)"); the astroid version pin
++changes in pyproject.toml and requirements_test_min.txt are left out.
++
++Upstream-Status: Backport [https://github.com/pylint-dev/pylint/commit/554b1d192434]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ pylint/checkers/variables.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pylint/checkers/variables.py b/pylint/checkers/variables.py
++index 3ce7dc63410..7e5f27b70ef 100644
++--- a/pylint/checkers/variables.py
+++++ b/pylint/checkers/variables.py
++@@ -217,7 +217,7 @@ class C: ...
++ def _infer_name_module(node: nodes.Import, name: str) -> Generator[InferenceResult]:
++     context = astroid.context.InferenceContext()
++     context.lookupname = name
++-    return node.infer(context, asname=False)  # type: ignore[no-any-return]
+++    return node.infer(context)  # type: ignore[no-any-return]
++ 
++ 
++ def _fix_dot_imports(
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb b/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb
+index 90ee93e4f9..9ae03295e7 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb
+@@ -8,6 +8,7 @@ SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v$
+            file://0001-Adjust-test-expectations-for-ptest.patch \
+            file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
+            file://0003-astroid-4.1.2-endlineno.patch \
++           file://0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch \
+            file://run-ptest \
+            "
  
- # psutil/jinja2/packaging are oe-core; fastapi/uvicorn/defusedxml are
- # meta-python.
 
