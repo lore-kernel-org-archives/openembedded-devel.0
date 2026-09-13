@@ -2,35 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C0F5C88E65
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 15:23:59 +0000 (UTC)
-Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.999.1789313026233200567
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AD41C88E5C
+	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 15:24:19 +0000 (UTC)
+Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1008.1789313056609972876
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 08:23:49 -0700
+ Sun, 13 Sep 2026 08:24:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=qpEoBY3U;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-20260913152348f9e6806da80002073c-3nzjlj@rts-flowmailer.siemens.com)
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 20260913152348f9e6806da80002073c
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=M+2WhqwF;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-2026091315241415359ad6bc00020709-d4orpa@rts-flowmailer.siemens.com)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 2026091315241415359ad6bc00020709
         for <openembedded-devel@lists.openembedded.org>;
-        Sun, 13 Sep 2026 17:23:48 +0200
+        Sun, 13 Sep 2026 17:24:14 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=5fDq8QiRVH+NnaUfeGqRY5Luy8gy3MBCxw5xfNQ2+Vk=;
- b=qpEoBY3Uk5HRSMZ8fIWHJX+nUbtzj0G4uutzkZizMOsg9L+g1t29FHjWyUFgdZcD32liqn
- 4WH5MNYpqzbvcGvuWj8Xn2q65Rj+BMsLG/9G13fPmUpMuejdi9/WSxiRFYh3X/tryi18baSo
- vvtBu+14tM+bSiRGhY1DUYr77VMDV4CQbypUCF4OeCn1sTjoiS0wkaZiTCSMspuQn3J5bZ/K
- tlRz0Oqj0t6IQ/IR9ku2on12WCLp1IambjjbeKFWYcuja7ungHYNA++9Gc0qGuuiGKsQ2Yt+
- LmZlzuLej7tZHU2DgilUdbzRup3nAUXVzWnHmCDaAXm/zebWC6dgI+5g==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=qmUjRMUv6CSmjijsPuppSWLX+9Ro9XtPVPKZOqX07ww=;
+ b=M+2WhqwFURXF8i6wtqtDpvx0Sia7wmtm6ahgPWGHWb6mfN/Rx0bSkS8re6tswEuGLoZ4Yo
+ lW7P/qmvBfmZWTTjdSzC+MxWn2C08BrX/WYw7tt1LefQCvsRACmZ0rWpvhpqb+DtCYiz+xqe
+ r5y3bOzPwMYctvpLLtra0IFx/aLAkVdBaTLiE/qhA0Pb7gbdpvhmGgDANW2zMD3bKUVedIkn
+ JwYsint9BYzvZBhZRA6ZFEJRXF/ZECyNnGzceS/i6np2HwS1U3+ZUkj99Df7t2O267VmS2rA
+ CuTyeq9BeCpTBJQeCHDcilWV/j3tyWKhfpUMEh6LD4sgPIZYoOdLuRyw==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 3/4] msgpack-cpp: fix upstream check
-Date: Sun, 13 Sep 2026 17:22:52 +0200
-Message-ID: <20260913152253.3201491-3-peter.marko@siemens.com>
-In-Reply-To: <20260913152253.3201491-1-peter.marko@siemens.com>
-References: <20260913152253.3201491-1-peter.marko@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] msgpack-c: patch CVE-2026-72854
+Date: Sun, 13 Sep 2026 17:24:11 +0200
+Message-ID: <20260913152411.3201743-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -38,30 +36,168 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 15:23:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129997
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 15:24:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/129998
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Without any prefix/suffix, it picks the highest version-like string.
-Set REGEX to pick msgpack-cpp version.
+Pick patch from [1] linked from [2] mentioned in [3].
+Drop version bump related changes.
+
+[1] https://github.com/msgpack/msgpack-c/pull/1182/commits
+[2] https://github.com/msgpack/msgpack-c/issues/1181
+[3] https://nvd.nist.gov/vuln/detail/cve-2026-72854
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-devtools/msgpack/msgpack-cpp_8.0.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../msgpack/msgpack-c/CVE-2026-72854.patch    | 127 ++++++++++++++++++
+ .../msgpack/msgpack-c_6.0.0.bb                |   1 +
+ 2 files changed, 128 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_8.0.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_8.0.0.bb
-index 87f11d279b..0d741c5212 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_8.0.0.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_8.0.0.bb
-@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/msgpack/msgpack-c/releases/download/cpp-${PV}/msgp
- SRC_URI[sha256sum] = "4a3c0c0ac55ef4456c2d0b93c21b5d105aa3a8f21ef8fa9758550feaf989b92f"
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
+new file mode 100644
+index 0000000000..0e90deb13e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
+@@ -0,0 +1,127 @@
++From 8a48af0e3ed15ce0e60273de30a073ae6419489e Mon Sep 17 00:00:00 2001
++From: Takatoshi Kondo <redboltz@gmail.com>
++Date: Tue, 25 Aug 2026 11:44:54 +0900
++Subject: [PATCH] Fix #1181
++
++Fix integer overflow on msgpack_unpacker_expand_buffer().
++
++CVE: CVE-2026-72854
++Upstream-Status: Backport [https://github.com/msgpack/msgpack-c/commit/8a48af0e3ed15ce0e60273de30a073ae6419489e]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ .gitignore           |  2 ++
++ CHANGELOG.md         |  3 +++
++ src/unpack.c         |  9 +++++++-
++ test/streaming_c.cpp | 51 ++++++++++++++++++++++++++++++++++++++++++++
++ 4 files changed, 64 insertions(+), 1 deletion(-)
++
++diff --git a/.gitignore b/.gitignore
++index b9dc789b..f046aab4 100644
++--- a/.gitignore
+++++ b/.gitignore
++@@ -27,6 +27,8 @@ Makefile
++ .deps
++ .libs
++ 
+++build
+++
++ # Files generated by make.
++ *.o
++ *.so
++diff --git a/CHANGELOG.md b/CHANGELOG.md
++index fc2ffa5b..9e30edfe 100644
++--- a/CHANGELOG.md
+++++ b/CHANGELOG.md
++@@ -1,3 +1,6 @@
+++# 2026-08-25 version 6.0.0-patched
+++  * Fix  integer overflow on msgpack_unpacker_expand_buffer(). (#1182)
+++
++ # 2023-03-02 version 6.0.0
++   * Remove C++ requirement if test is disabled (#1055)
++ ## << breaking changes >>
++diff --git a/src/unpack.c b/src/unpack.c
++index 9341cb08..2d02a721 100644
++--- a/src/unpack.c
+++++ b/src/unpack.c
++@@ -442,7 +442,11 @@ bool msgpack_unpacker_expand_buffer(msgpack_unpacker* mpac, size_t size)
++ 
++     if(mpac->off == COUNTER_SIZE) {
++         char* tmp;
++-        size_t next_size = (mpac->used + mpac->free) * 2;  // include COUNTER_SIZE
+++        size_t next_size;
+++        if(size > SIZE_MAX - mpac->used) {
+++            return false;
+++        }
+++        next_size = (mpac->used + mpac->free) * 2;  // include COUNTER_SIZE
++         while(next_size < size + mpac->used) {
++             size_t tmp_next_size = next_size * 2;
++             if (tmp_next_size <= next_size) {
++@@ -464,6 +468,9 @@ bool msgpack_unpacker_expand_buffer(msgpack_unpacker* mpac, size_t size)
++         char* tmp;
++         size_t next_size = mpac->initial_buffer_size;  // include COUNTER_SIZE
++         size_t not_parsed = mpac->used - mpac->off;
+++        if(size > SIZE_MAX - not_parsed - COUNTER_SIZE) {
+++            return false;
+++        }
++         while(next_size < size + not_parsed + COUNTER_SIZE) {
++             size_t tmp_next_size = next_size * 2;
++             if (tmp_next_size <= next_size) {
++diff --git a/test/streaming_c.cpp b/test/streaming_c.cpp
++index d75bfbe5..ebf73362 100644
++--- a/test/streaming_c.cpp
+++++ b/test/streaming_c.cpp
++@@ -192,3 +192,54 @@ TEST(streaming, basic_with_size)
++     msgpack_unpacker_free(unp);
++     msgpack_sbuffer_free(buffer);
++ }
+++
+++// https://github.com/msgpack/msgpack-c/issues/1181
+++TEST(streaming, reserve_buffer_overflow_rewound)
+++{
+++    msgpack_unpacker mpac;
+++    ASSERT_TRUE(msgpack_unpacker_init(&mpac, 8));
+++
+++    // off == COUNTER_SIZE path: size + used would wrap
+++    size_t request = SIZE_MAX - 2;
+++    EXPECT_FALSE(msgpack_unpacker_reserve_buffer(&mpac, request));
+++
+++    // a sane request still works
+++    EXPECT_TRUE(msgpack_unpacker_reserve_buffer(&mpac, 64));
+++    EXPECT_GE(msgpack_unpacker_buffer_capacity(&mpac), static_cast<size_t>(64));
+++
+++    msgpack_unpacker_destroy(&mpac);
+++}
+++
+++TEST(streaming, reserve_buffer_overflow_not_rewound)
+++{
+++    msgpack_unpacker mpac;
+++    ASSERT_TRUE(msgpack_unpacker_init(&mpac, 8));
+++
+++    // consume part of the buffer so off != COUNTER_SIZE
+++    msgpack_sbuffer sbuf;
+++    msgpack_sbuffer_init(&sbuf);
+++    msgpack_packer pk;
+++    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+++    msgpack_pack_int(&pk, 1);
+++    msgpack_pack_int(&pk, 2);
+++
+++    ASSERT_TRUE(msgpack_unpacker_reserve_buffer(&mpac, sbuf.size));
+++    memcpy(msgpack_unpacker_buffer(&mpac), sbuf.data, sbuf.size);
+++    msgpack_unpacker_buffer_consumed(&mpac, sbuf.size);
+++
+++    msgpack_unpacked result;
+++    msgpack_unpacked_init(&result);
+++    ASSERT_EQ(MSGPACK_UNPACK_SUCCESS, msgpack_unpacker_next(&mpac, &result));
+++    EXPECT_EQ(1, result.data.via.i64);
+++
+++    size_t request = SIZE_MAX - 2;
+++    EXPECT_FALSE(msgpack_unpacker_reserve_buffer(&mpac, request));
+++
+++    // remaining data must still be parsable
+++    ASSERT_EQ(MSGPACK_UNPACK_SUCCESS, msgpack_unpacker_next(&mpac, &result));
+++    EXPECT_EQ(2, result.data.via.i64);
+++
+++    msgpack_unpacked_destroy(&result);
+++    msgpack_sbuffer_destroy(&sbuf);
+++    msgpack_unpacker_destroy(&mpac);
+++}
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
+index 40d997a52c..786055cae1 100644
+--- a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
+                    "
  
- UPSTREAM_CHECK_URI = "https://github.com/msgpack/msgpack-c/releases"
--UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+) C++"
- 
- S = "${UNPACKDIR}/msgpack-cxx-${PV}"
+ SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https \
++           file://CVE-2026-72854.patch \
+            "
+ SRCREV = "8160ede5e20fd3019a77eea46d9c72cf6163f802"
  
 
