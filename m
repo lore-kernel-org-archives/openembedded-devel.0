@@ -2,205 +2,135 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CA8FC88E65
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 15:25:59 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1030.1789313153520832022
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83A91C88E65
+	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 15:33:49 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1156.1789313620244596393
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 08:25:53 -0700
+ Sun, 13 Sep 2026 08:33:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=UFgzEvV7;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202609131525518c8c6085770002078a-4rqbxl@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202609131525518c8c6085770002078a
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=gqnJuqTW;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20260913153336f9a2ca7a8e000207fe-jrngnu@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20260913153336f9a2ca7a8e000207fe
         for <openembedded-devel@lists.openembedded.org>;
-        Sun, 13 Sep 2026 17:25:51 +0200
+        Sun, 13 Sep 2026 17:33:37 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=BvvzO/M1sgZfjfCGu1SjhZEnwVy9I3pOfcgT0xiVEwY=;
- b=UFgzEvV7YAuDSLQMYkdKzx9qKRWlBaEDa1vs5lHNiHthjP0SdSUCz5JykQuojjVrJ0fsma
- nH6EwordtsMjZJ+5iYeq1BJizf7v2WVkr4rkNBu7/i6EsiNlZFiZwIUaQVshpy66kEzyTv9P
- QJShUp3EB//Fe3mYd1gywIcHruKuBAG4S8BtsUK532vDps/iZ7JIT6jEQ3F9znog6MBefFMO
- +ANKYerGAyS+kArImYPKWmByfsa9BFzwew4PjJoUc02eby3TCeQ7OYJdbiq9NorhSPDLxTFV
- cFlXx8S4/Z6IghTqOYSbHzC1g9QOkfS3bOBta3uQ6OccyLCRzgupYwxw==;
+ bh=qmFQowcqRunC8hB1EXQ3Z1ZjhNH/SjU4x28SELrMyVM=;
+ b=gqnJuqTWu6VzHYlo1LAQiDC41J3spku7xaFoPewslvYL4cDw94X81LU7aLOXNHZGqxVUqC
+ 8uSu0Wcpf4vNwCjVmuoOQ08ETMe6P13iVAZAmDK3M4cuBICkJvAG1JBGk9nyoXmSuvKzgtm0
+ MUbJxXsxwVAjYlo2f9WpbMX51q4lyMT0fDuTilnpdfm3tYmRaRVYD/Tf1S74tTk6xcR9SiAX
+ 7rLfIFBJPrtImYPg/ObA4OGKZ6NyO3kpCx/ymuixJV9Syky/Ub3SceuC8/Du5cGCeRDmdLFz
+ xAAosbn+1Ur0MK/yEO9ijetMGdDuYze0Hs+4aq5kbZJTaegFvMQmXDbg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][wrynose][PATCH] msgpack-c: patch CVE-2026-72854
-Date: Sun, 13 Sep 2026 17:23:57 +0200
-Message-ID: <20260913152357.3201681-1-peter.marko@siemens.com>
+Cc: peter.marko@siemens.com
+Subject: [meta-oe][scarthgap][PATCH] recipes: correct homepage
+Date: Sun, 13 Sep 2026 17:33:26 +0200
+Message-ID: <20260913153327.3204016-1-peter.marko@siemens.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
 Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 15:25:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130000
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 15:33:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130001
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Pick patch from [1] linked from [2] mentioned in [3].
-Drop version bump related changes.
-
-[1] https://github.com/msgpack/msgpack-c/pull/1182/commits
-[2] https://github.com/msgpack/msgpack-c/issues/1181
-[3] https://nvd.nist.gov/vuln/detail/cve-2026-72854
+Leading space leads to SPDX document validation errors for url in
+some tools.
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(From meta-oe rev: 64dcb55dc5a21c66f9520a0670f4256558c866f8)
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../msgpack/msgpack-c/CVE-2026-72854.patch    | 127 ++++++++++++++++++
- .../msgpack/msgpack-c_6.1.0.bb                |   4 +-
- 2 files changed, 130 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
+ .../recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-colorzero_2.0.bb    | 2 +-
+ .../recipes-devtools/python/python3-flask-login_0.6.3.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb | 2 +-
+ .../recipes-devtools/python/python3-flask-user_0.6.19.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-pyexpect_1.0.22.bb  | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
-new file mode 100644
-index 0000000000..852a09c08f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
-@@ -0,0 +1,127 @@
-+From 8a48af0e3ed15ce0e60273de30a073ae6419489e Mon Sep 17 00:00:00 2001
-+From: Takatoshi Kondo <redboltz@gmail.com>
-+Date: Tue, 25 Aug 2026 11:44:54 +0900
-+Subject: [PATCH] Fix #1181
-+
-+Fix integer overflow on msgpack_unpacker_expand_buffer().
-+
-+CVE: CVE-2026-72854
-+Upstream-Status: Backport [https://github.com/msgpack/msgpack-c/commit/8a48af0e3ed15ce0e60273de30a073ae6419489e]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ .gitignore           |  2 ++
-+ CHANGELOG.md         |  3 +++
-+ src/unpack.c         |  9 +++++++-
-+ test/streaming_c.cpp | 51 ++++++++++++++++++++++++++++++++++++++++++++
-+ 4 files changed, 64 insertions(+), 1 deletion(-)
-+
-+diff --git a/.gitignore b/.gitignore
-+index b9dc789b..f046aab4 100644
-+--- a/.gitignore
-++++ b/.gitignore
-+@@ -27,6 +27,8 @@ Makefile
-+ .deps
-+ .libs
-+ 
-++build
-++
-+ # Files generated by make.
-+ *.o
-+ *.so
-+diff --git a/CHANGELOG.md b/CHANGELOG.md
-+index fc2ffa5b..9e30edfe 100644
-+--- a/CHANGELOG.md
-++++ b/CHANGELOG.md
-+@@ -1,3 +1,6 @@
-++# 2026-08-25 version 6.1.0-patched
-++  * Fix  integer overflow on msgpack_unpacker_expand_buffer(). (#1182)
-++
-+ # 2024-08-17 version 6.1.0
-+   * Add object initializer functions (#1137)
-+   * Fix cmake warnings (#1133, #1137)
-+diff --git a/src/unpack.c b/src/unpack.c
-+index 9341cb08..2d02a721 100644
-+--- a/src/unpack.c
-++++ b/src/unpack.c
-+@@ -442,7 +442,11 @@ bool msgpack_unpacker_expand_buffer(msgpack_unpacker* mpac, size_t size)
-+ 
-+     if(mpac->off == COUNTER_SIZE) {
-+         char* tmp;
-+-        size_t next_size = (mpac->used + mpac->free) * 2;  // include COUNTER_SIZE
-++        size_t next_size;
-++        if(size > SIZE_MAX - mpac->used) {
-++            return false;
-++        }
-++        next_size = (mpac->used + mpac->free) * 2;  // include COUNTER_SIZE
-+         while(next_size < size + mpac->used) {
-+             size_t tmp_next_size = next_size * 2;
-+             if (tmp_next_size <= next_size) {
-+@@ -464,6 +468,9 @@ bool msgpack_unpacker_expand_buffer(msgpack_unpacker* mpac, size_t size)
-+         char* tmp;
-+         size_t next_size = mpac->initial_buffer_size;  // include COUNTER_SIZE
-+         size_t not_parsed = mpac->used - mpac->off;
-++        if(size > SIZE_MAX - not_parsed - COUNTER_SIZE) {
-++            return false;
-++        }
-+         while(next_size < size + not_parsed + COUNTER_SIZE) {
-+             size_t tmp_next_size = next_size * 2;
-+             if (tmp_next_size <= next_size) {
-+diff --git a/test/streaming_c.cpp b/test/streaming_c.cpp
-+index d75bfbe5..ebf73362 100644
-+--- a/test/streaming_c.cpp
-++++ b/test/streaming_c.cpp
-+@@ -192,3 +192,54 @@ TEST(streaming, basic_with_size)
-+     msgpack_unpacker_free(unp);
-+     msgpack_sbuffer_free(buffer);
-+ }
-++
-++// https://github.com/msgpack/msgpack-c/issues/1181
-++TEST(streaming, reserve_buffer_overflow_rewound)
-++{
-++    msgpack_unpacker mpac;
-++    ASSERT_TRUE(msgpack_unpacker_init(&mpac, 8));
-++
-++    // off == COUNTER_SIZE path: size + used would wrap
-++    size_t request = SIZE_MAX - 2;
-++    EXPECT_FALSE(msgpack_unpacker_reserve_buffer(&mpac, request));
-++
-++    // a sane request still works
-++    EXPECT_TRUE(msgpack_unpacker_reserve_buffer(&mpac, 64));
-++    EXPECT_GE(msgpack_unpacker_buffer_capacity(&mpac), static_cast<size_t>(64));
-++
-++    msgpack_unpacker_destroy(&mpac);
-++}
-++
-++TEST(streaming, reserve_buffer_overflow_not_rewound)
-++{
-++    msgpack_unpacker mpac;
-++    ASSERT_TRUE(msgpack_unpacker_init(&mpac, 8));
-++
-++    // consume part of the buffer so off != COUNTER_SIZE
-++    msgpack_sbuffer sbuf;
-++    msgpack_sbuffer_init(&sbuf);
-++    msgpack_packer pk;
-++    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
-++    msgpack_pack_int(&pk, 1);
-++    msgpack_pack_int(&pk, 2);
-++
-++    ASSERT_TRUE(msgpack_unpacker_reserve_buffer(&mpac, sbuf.size));
-++    memcpy(msgpack_unpacker_buffer(&mpac), sbuf.data, sbuf.size);
-++    msgpack_unpacker_buffer_consumed(&mpac, sbuf.size);
-++
-++    msgpack_unpacked result;
-++    msgpack_unpacked_init(&result);
-++    ASSERT_EQ(MSGPACK_UNPACK_SUCCESS, msgpack_unpacker_next(&mpac, &result));
-++    EXPECT_EQ(1, result.data.via.i64);
-++
-++    size_t request = SIZE_MAX - 2;
-++    EXPECT_FALSE(msgpack_unpacker_reserve_buffer(&mpac, request));
-++
-++    // remaining data must still be parsable
-++    ASSERT_EQ(MSGPACK_UNPACK_SUCCESS, msgpack_unpacker_next(&mpac, &result));
-++    EXPECT_EQ(2, result.data.via.i64);
-++
-++    msgpack_unpacked_destroy(&result);
-++    msgpack_sbuffer_destroy(&sbuf);
-++    msgpack_unpacker_destroy(&mpac);
-++}
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb
-index b7f3625c2a..9c2f4cbfcc 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
-                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
-                    "
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb
+index 14dedba922..54bc45d3d4 100644
+--- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Screen-scraping library"
+-HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
++HOMEPAGE = "https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=96e0034f7c9443910c486773aa1ed9ac"
  
--SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https"
-+SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https \
-+    file://CVE-2026-72854.patch \
-+"
- SRCREV = "445880108a1d171f755ff6ac77e03fbebbb23729"
+diff --git a/meta-python/recipes-devtools/python/python3-colorzero_2.0.bb b/meta-python/recipes-devtools/python/python3-colorzero_2.0.bb
+index fc1615e670..4f0706f8f4 100644
+--- a/meta-python/recipes-devtools/python/python3-colorzero_2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-colorzero_2.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "colorzero is a color manipulation library for Python"
+ DESCRIPTION = "colorzero is a color manipulation library for Python \
+ (yes, another one) which aims to be reasonably simple to use and \
+ "pythonic" in nature."
+-HOMEPAGE = " https://github.com/waveform80/colorzero "
++HOMEPAGE = "https://github.com/waveform80/colorzero "
  
- inherit cmake pkgconfig
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ae6c62710c0646f3c60d1ad812ea9bf9"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-login_0.6.3.bb b/meta-python/recipes-devtools/python/python3-flask-login_0.6.3.bb
+index d990d4e80b..df22ca112c 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-login_0.6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-login_0.6.3.bb
+@@ -2,7 +2,7 @@ SUMMARY = "User session management for Flask"
+ DESCRIPTION = "Flask-Login provides user session management for Flask. \
+ It handles the common tasks of logging in, logging out, and remembering \
+ your users’ sessions over extended periods of time."
+-HOMEPAGE = " https://github.com/maxcountryman/flask-login"
++HOMEPAGE = "https://github.com/maxcountryman/flask-login"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8aa87a1cd9fa41d969ad32cfdac2c596"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb b/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
+index 1aca3a1619..1b2d431ad0 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Flask extension for sending email"
+ DESCRIPTION = "A Flask extension for sending email"
+-HOMEPAGE = " https://github.com/rduplain/flask-email"
++HOMEPAGE = "https://github.com/rduplain/flask-email"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5b16dfa6d3f275ace5985bb92949f770"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+index ac449361a4..f722eca4b5 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Customizable user account management for Flask"
+ DESCRIPTION = "Customizable User Account Management for Flask; Register \
+ Confirm email, Login, Change username, Change password, Forgot Password \
+ and more."
+-HOMEPAGE = " https://github.com/lingthio/Flask-User"
++HOMEPAGE = "https://github.com/lingthio/Flask-User"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.22.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.22.bb
+index 1cbd2384a3..f1f1bc538c 100644
+--- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.22.bb
++++ b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.22.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Python expectaton library"
+ DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
+ SECTION = "devel/python"
+-HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
++HOMEPAGE = "https://bitbucket.org/dwt/pyexpect"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158"
+ 
 
