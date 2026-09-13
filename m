@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3908EC88E64
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:01 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8622.1789340391199325294
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E43CDC88E5C
+	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:00 +0000 (UTC)
+Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8628.1789340399363962088
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 15:59:53 -0700
+ Sun, 13 Sep 2026 15:59:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=AEaiWwrs;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20260913225947f44a6f8ee400020706-pe2fwl@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20260913225947f44a6f8ee400020706
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=mdPe7LBj;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-20260913225956dad37d467b000207d4-spdn2v@rts-flowmailer.siemens.com)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20260913225956dad37d467b000207d4
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 14 Sep 2026 00:59:48 +0200
+        Mon, 14 Sep 2026 00:59:57 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=J9jqBBzLq3lLWPY1jzyimHhd3eNLr0G+Lx7MBJB/T1A=;
- b=AEaiWwrsX+VPRAkjYmTNr9KUBmN6sKgLg+stcv8+ELvzS+E0r+caRBu3zFkPq6cFdaUwo0
- RsaqjE/M1m4KLhHfB5UpWdOTJoskaaw4YfFu3J2hviGMJwnequh2rAiaSTr/mZGYbMgqrqtp
- bOC9ChMAbEUuMuztTSVY3mElwfWBImADnVvS5lazEpRM7p/uWfO1/rBtDQ+cT8MmdN38uTfH
- kycl89n2UZ3rd03V9cvPQ0JNIEhv7ys40xpcu1klh/yJj+s0NgGvJTOjPhIIyMmvZuefgE5S
- p9YwzOUFrzkt/XL4S3PYW15T+NrhsFrESBQJCDzRpVrJXhd/vgCMyNGg==;
+ bh=JV2NXLvZKFCxzKDsdgocesxigSy7Qry4rSk7WAV9ICQ=;
+ b=mdPe7LBjMveDfc6+0orCTwwMT/c3DcRD9LdJYLTd2Un3qYHXzDKbz4hSqaLfaQrbCfprAC
+ fg65eUm8htavX404yrzfJdXm1T2Tn/Mwxk6+tYL9rg1QyV7uYObRpDWC+9sj9qF/5rnsx/PH
+ 1v9JwI4bc7BmAQqLwHZm2SYWTLZ5Jkhl7B9YcwYpIbAHsRZz4rZeN+ZOLCUKDfwYfRs+trpA
+ PNAiyuF8MI3cvZHuzwlhaVCeTjcJJlXFlPVdS9WYcSyEjGHJmYI1p3ZG4+sBsQLc7nuj/5CV
+ LRUqJYCUXpamu7lY+spN/16naK4S6Wf9ap4hINIbcTVsodyxWXjxjfyg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
-Date: Mon, 14 Sep 2026 00:52:39 +0200
-Message-ID: <20260913225239.569594-1-peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
+Date: Mon, 14 Sep 2026 00:52:50 +0200
+Message-ID: <20260913225250.569699-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130005
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130006
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -210,7 +210,7 @@ index 0000000000..891d9215c9
 +         {
 +           errno = EOVERFLOW;
 diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/recipes-extended/polkit/polkit_127.bb
-index c0a301c8b0..91be8858cd 100644
+index f97c6efbf7..8c0a2d75d1 100644
 --- a/meta-oe/recipes-extended/polkit/polkit_127.bb
 +++ b/meta-oe/recipes-extended/polkit/polkit_127.bb
 @@ -5,7 +5,12 @@ LICENSE = "LGPL-2.0-or-later"
