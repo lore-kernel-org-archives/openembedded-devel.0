@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87D46C88E63
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 19:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3908EC88E64
+	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:01 +0000 (UTC)
 Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4801.1789326368629091386
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8622.1789340391199325294
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 12:06:09 -0700
+ Sun, 13 Sep 2026 15:59:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=kEeOTGrG;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-2026091319060452e5dbcf3d00020730-x3jpjj@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 2026091319060452e5dbcf3d00020730
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=AEaiWwrs;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20260913225947f44a6f8ee400020706-pe2fwl@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20260913225947f44a6f8ee400020706
         for <openembedded-devel@lists.openembedded.org>;
-        Sun, 13 Sep 2026 21:06:05 +0200
+        Mon, 14 Sep 2026 00:59:48 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=Y5yBdYWWta2/Ao2dC9y0GrWcAGWAG70HeLR/ts7XElw=;
- b=kEeOTGrGAEQFdpOJDJBx0NDzJwKybLnA2h3kinMQ3MGcOTJaI04lKb0KAEeoiNZGL0psTQ
- 1971xTsBS6l2RhELCniYZdjP0+DwTCNt3qSMbmbfZx9OC4JOpDxGOyUltGO+5YnJpeVzlpxu
- yYYi+lUhl4Jg0vT4bWI4FjSiX1TwExaMNTcFnbXGmUEy20/bQdYHaZNuuRNLgtHIL72dimHC
- 3aG/j6/1pk2gpJvW21ItAiY2w10mDVoY3/aAwjBLSI1ZQ+tfY+yzbMjZ0qA+2ugvUtZn/rJB
- lxsuInKLuqh9peO7zTZ50zOSTPlJi46OrFcNRCoa/Ys4oyswa5VIfuzA==;
+ bh=J9jqBBzLq3lLWPY1jzyimHhd3eNLr0G+Lx7MBJB/T1A=;
+ b=AEaiWwrsX+VPRAkjYmTNr9KUBmN6sKgLg+stcv8+ELvzS+E0r+caRBu3zFkPq6cFdaUwo0
+ RsaqjE/M1m4KLhHfB5UpWdOTJoskaaw4YfFu3J2hviGMJwnequh2rAiaSTr/mZGYbMgqrqtp
+ bOC9ChMAbEUuMuztTSVY3mElwfWBImADnVvS5lazEpRM7p/uWfO1/rBtDQ+cT8MmdN38uTfH
+ kycl89n2UZ3rd03V9cvPQ0JNIEhv7ys40xpcu1klh/yJj+s0NgGvJTOjPhIIyMmvZuefgE5S
+ p9YwzOUFrzkt/XL4S3PYW15T+NrhsFrESBQJCDzRpVrJXhd/vgCMyNGg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH v2 2/4] msgpack-c: upgrade 6.1.0 -> 7.0.2
-Date: Sun, 13 Sep 2026 21:04:37 +0200
-Message-ID: <20260913190437.3233830-1-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
+Date: Mon, 14 Sep 2026 00:52:39 +0200
+Message-ID: <20260913225239.569594-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,48 +36,195 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 19:06:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130004
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130005
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Handles CVE-2026-72854 (in 7.0.2).
-Add tag to git SRC_URI.
-
-Release notes:
-* https://github.com/msgpack/msgpack-c/releases/tag/c-7.0.0
-    Refine CI (#1152)
-  << breaking changes >>
-    Updated cmake minimum required to 3.5-4.0 (#1160)
-
-* https://github.com/msgpack/msgpack-c/releases/tag/c-7.0.1
-  Set INSTALL_INTERFACE to CMAKE_INSTALL_INCLUDEDIR (#1177)
-
-* https://github.com/msgpack/msgpack-c/releases/tag/c-7.0.2
-  Fix integer overflow on msgpack_unpacker_expand_buffer(). (#1182)
+Pick patches mentioning these CVEs in their commit messages.
+Note that patch for CVE-2026-4897 introduces CVE-2026-85498.
+Also pick additional patch introduced between these commits which
+touches the added code so the final patch applies cleanly.
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../msgpack/{msgpack-c_6.1.0.bb => msgpack-c_7.0.2.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/msgpack/{msgpack-c_6.1.0.bb => msgpack-c_7.0.2.bb} (90%)
+ .../polkit/files/CVE-2026-4897-01.patch       | 64 +++++++++++++++++++
+ .../polkit/files/CVE-2026-4897-02.patch       | 32 ++++++++++
+ .../polkit/files/CVE-2026-85498.patch         | 38 +++++++++++
+ meta-oe/recipes-extended/polkit/polkit_127.bb |  7 +-
+ 4 files changed, 140 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
+ create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
+ create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_7.0.2.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb
-rename to meta-oe/recipes-devtools/msgpack/msgpack-c_7.0.2.bb
-index 1061c37345..6d71a5dfbf 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.1.0.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_7.0.2.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
-                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
-                    "
+diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
+new file mode 100644
+index 0000000000..96548ca771
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
+@@ -0,0 +1,64 @@
++From 7e122c8a5120c2aae2d9d44a26796dc18f5b677c Mon Sep 17 00:00:00 2001
++From: Jan Rybar <jrybar@redhat.com>
++Date: Fri, 27 Mar 2026 15:57:01 +0100
++Subject: [PATCH] CVE-2026-4897 - getline() string overflow
++
++Report and fix by Aisle.com
++Pavel Kohout, Aisle Research
++
++Signed-off-by: Jan Rybar jrybar@redhat.com
++
++CVE: CVE-2026-4897
++Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/7e122c8a5120c2aae2d9d44a26796dc18f5b677c]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/polkitagent/polkitagenthelperprivate.c | 23 +++++++++++++---------
++ 1 file changed, 14 insertions(+), 9 deletions(-)
++
++diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
++index 35bca85..7e4f94e 100644
++--- a/src/polkitagent/polkitagenthelperprivate.c
+++++ b/src/polkitagent/polkitagenthelperprivate.c
++@@ -24,6 +24,7 @@
++ #include <stdio.h>
++ #include <string.h>
++ #include <stdlib.h>
+++#include <errno.h>
++ #include <unistd.h>
++ 
++ #ifndef HAVE_CLEARENV
++@@ -59,21 +60,25 @@ read_cookie (int argc, char **argv)
++     return strdup (argv[2]);
++   else
++     {
++-      char *ret = NULL;
++-      size_t n = 0;
++-      ssize_t r = getline (&ret, &n, stdin);
++-      if (r == -1)
+++      #define POLKIT_AGENT_MAX_COOKIE 4096
+++      char buf[POLKIT_AGENT_MAX_COOKIE + 2]; /* +1 for newline, +1 for NUL */
+++      if (fgets (buf, sizeof(buf), stdin) == NULL)
++         {
++           if (!feof (stdin))
++-            perror ("getline");
++-          free (ret);
+++            perror ("fgets");
++           return NULL;
++         }
++-      else
+++      if (buf[strlen (buf) - 1] != '\n')
++         {
++-          g_strchomp (ret);
++-          return ret;
+++          /* Cookie too long - drain remaining input and reject */
+++          int c;
+++          while ((c = getchar ()) != '\n' && c != EOF)
+++            ;
+++          errno = EOVERFLOW;
+++          return NULL;
++         }
+++      g_strchomp (buf);
+++      return strdup (buf);
++     }
++ }
++ 
+diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
+new file mode 100644
+index 0000000000..c47eee2014
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
+@@ -0,0 +1,32 @@
++From 39601309eb3e5e88a1c1fbda9a272ba8691f1bf3 Mon Sep 17 00:00:00 2001
++From: Jan Rybar <jrybar@redhat.com>
++Date: Wed, 13 May 2026 14:58:32 +0200
++Subject: [PATCH] Draining loop can keep polkit busy
++
++The draining loop is not really appropriate for pipe input, especially
++in a daemon.
++
++Co-authored-by: Frantisek Sumsal <fsumsal@redhat.com>
++
++CVE: CVE-2026-4897
++Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/39601309eb3e5e88a1c1fbda9a272ba8691f1bf3]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/polkitagent/polkitagenthelperprivate.c | 4 ----
++ 1 file changed, 4 deletions(-)
++
++diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
++index 7e4f94e..c0a9825 100644
++--- a/src/polkitagent/polkitagenthelperprivate.c
+++++ b/src/polkitagent/polkitagenthelperprivate.c
++@@ -70,10 +70,6 @@ read_cookie (int argc, char **argv)
++         }
++       if (buf[strlen (buf) - 1] != '\n')
++         {
++-          /* Cookie too long - drain remaining input and reject */
++-          int c;
++-          while ((c = getchar ()) != '\n' && c != EOF)
++-            ;
++           errno = EOVERFLOW;
++           return NULL;
++         }
+diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
+new file mode 100644
+index 0000000000..891d9215c9
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
+@@ -0,0 +1,38 @@
++From eea172967848bb4c5a407329f40c0e45de0d187e Mon Sep 17 00:00:00 2001
++From: Jan Rybar <jrybar@redhat.com>
++Date: Thu, 27 Aug 2026 15:02:45 +0200
++Subject: [PATCH] CVE-2026-85498: Unsanitized underflow in cookie input
++
++Credits for the report:
++Sunwoo Lee, Korea Institute of Energy Technology (KENTECH)
++Daeyoung Kang, Korea Institute of Energy Technology (KENTECH)
++Haeryong Park, Korea Internet & Security Agency (KISA)
++Hyuk Lim, Korea Institute of Energy Technology (KENTECH)
++Seunghyun Yoon, Korea Institute of Energy Technology (KENTECH)
++Juthawong Naisanguansee
++
++Co-authored-by: Jan Rybar <jrybar@redhat.com>
++
++CVE: CVE-2026-85498
++Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/eea172967848bb4c5a407329f40c0e45de0d187e]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/polkitagent/polkitagenthelperprivate.c | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
++index c0a9825..e2d2c9b 100644
++--- a/src/polkitagent/polkitagenthelperprivate.c
+++++ b/src/polkitagent/polkitagenthelperprivate.c
++@@ -68,6 +68,11 @@ read_cookie (int argc, char **argv)
++             perror ("fgets");
++           return NULL;
++         }
+++      if (buf[0] == '\0')
+++        {
+++          errno = EINVAL;
+++          return NULL;
+++        }
++       if (buf[strlen (buf) - 1] != '\n')
++         {
++           errno = EOVERFLOW;
+diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/recipes-extended/polkit/polkit_127.bb
+index c0a301c8b0..91be8858cd 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_127.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_127.bb
+@@ -5,7 +5,12 @@ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
+ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
  
--SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https"
--SRCREV = "445880108a1d171f755ff6ac77e03fbebbb23729"
-+SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https;tag=c-${PV}"
-+SRCREV = "e17beb371b59459a13b48e166a11e123bda5bf93"
+-SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV}"
++SRC_URI = "\
++    git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV} \
++    file://CVE-2026-4897-01.patch \
++    file://CVE-2026-4897-02.patch \
++    file://CVE-2026-85498.patch \
++"
  
- UPSTREAM_CHECK_GITTAGREGEX = "c-(?P<pver>\d+(\.\d+)+)"
+ SRCREV = "9e4894c969eecf26a3ba762f4f7a268aa0fb3e51"
  
 
