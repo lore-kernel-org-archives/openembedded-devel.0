@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E43CDC88E5C
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:00 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8628.1789340399363962088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CFE6C88E5C
+	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:31 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8701.1789340422741317713
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 15:59:59 -0700
+ Sun, 13 Sep 2026 16:00:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=mdPe7LBj;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-20260913225956dad37d467b000207d4-spdn2v@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20260913225956dad37d467b000207d4
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=dBpDRdPk;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20260913230020e394630115000207c9-q_v5hp@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20260913230020e394630115000207c9
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 14 Sep 2026 00:59:57 +0200
+        Mon, 14 Sep 2026 01:00:20 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=JV2NXLvZKFCxzKDsdgocesxigSy7Qry4rSk7WAV9ICQ=;
- b=mdPe7LBjMveDfc6+0orCTwwMT/c3DcRD9LdJYLTd2Un3qYHXzDKbz4hSqaLfaQrbCfprAC
- fg65eUm8htavX404yrzfJdXm1T2Tn/Mwxk6+tYL9rg1QyV7uYObRpDWC+9sj9qF/5rnsx/PH
- 1v9JwI4bc7BmAQqLwHZm2SYWTLZ5Jkhl7B9YcwYpIbAHsRZz4rZeN+ZOLCUKDfwYfRs+trpA
- PNAiyuF8MI3cvZHuzwlhaVCeTjcJJlXFlPVdS9WYcSyEjGHJmYI1p3ZG4+sBsQLc7nuj/5CV
- LRUqJYCUXpamu7lY+spN/16naK4S6Wf9ap4hINIbcTVsodyxWXjxjfyg==;
+ bh=ZOuHciJ1iEi2ec7XGIOpnqxcpnBQz2dlodrqye3lEiA=;
+ b=dBpDRdPkpQQLa1xYdxrTia5R1cHQ/f3/JzIIrpWU99uzF0WaNaGnye6hySKzSu1DBEgXZ7
+ u7Uxa6jCOOph7RqdSgKcaV2gMLOAOj/wQXNT2LrVlAx8f3I+MiEOVVFvhUEt3C6k7Y3Z/gBk
+ 5vOsycCiDjFiV7tvsrJdsbhXVzd2Nf2QDc5faky6sDPreGz61BOWdLWwleroPmze0nnf24mS
+ ynTy+Mf00i3Qko0NXCG9i/m+d43ryUt9vAUa8EqFuwn4QCUVPM/Rw62UERe2Z90Ru7fF4QFV
+ CIVJ8FClZHIsKQSarwE2c4bjJp4k/f8a/lUBOZ1A8xCxlSYaCuIw+a/g==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][wrynose][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
-Date: Mon, 14 Sep 2026 00:52:50 +0200
-Message-ID: <20260913225250.569699-1-peter.marko@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
+Date: Mon, 14 Sep 2026 00:53:01 +0200
+Message-ID: <20260913225301.569833-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130006
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130007
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -51,15 +51,15 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
  .../polkit/files/CVE-2026-4897-01.patch       | 64 +++++++++++++++++++
  .../polkit/files/CVE-2026-4897-02.patch       | 32 ++++++++++
  .../polkit/files/CVE-2026-85498.patch         | 38 +++++++++++
- meta-oe/recipes-extended/polkit/polkit_127.bb |  7 +-
- 4 files changed, 140 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/polkit/polkit_124.bb |  3 +
+ 4 files changed, 137 insertions(+)
  create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
  create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
  create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
 
 diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
 new file mode 100644
-index 0000000000..96548ca771
+index 0000000000..cd5f58c4f8
 --- /dev/null
 +++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
 @@ -0,0 +1,64 @@
@@ -84,7 +84,7 @@ index 0000000000..96548ca771
 +index 35bca85..7e4f94e 100644
 +--- a/src/polkitagent/polkitagenthelperprivate.c
 ++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -24,6 +24,7 @@
++@@ -25,6 +25,7 @@
 + #include <stdio.h>
 + #include <string.h>
 + #include <stdlib.h>
@@ -92,7 +92,7 @@ index 0000000000..96548ca771
 + #include <unistd.h>
 + 
 + #ifndef HAVE_CLEARENV
-+@@ -59,21 +60,25 @@ read_cookie (int argc, char **argv)
++@@ -60,21 +61,25 @@ read_cookie (int argc, char **argv)
 +     return strdup (argv[2]);
 +   else
 +     {
@@ -129,7 +129,7 @@ index 0000000000..96548ca771
 + 
 diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
 new file mode 100644
-index 0000000000..c47eee2014
+index 0000000000..d9fb0e7e27
 --- /dev/null
 +++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
 @@ -0,0 +1,32 @@
@@ -154,7 +154,7 @@ index 0000000000..c47eee2014
 +index 7e4f94e..c0a9825 100644
 +--- a/src/polkitagent/polkitagenthelperprivate.c
 ++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -70,10 +70,6 @@ read_cookie (int argc, char **argv)
++@@ -71,10 +71,6 @@ read_cookie (int argc, char **argv)
 +         }
 +       if (buf[strlen (buf) - 1] != '\n')
 +         {
@@ -167,7 +167,7 @@ index 0000000000..c47eee2014
 +         }
 diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
 new file mode 100644
-index 0000000000..891d9215c9
+index 0000000000..b66d1e12d8
 --- /dev/null
 +++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
 @@ -0,0 +1,38 @@
@@ -197,7 +197,7 @@ index 0000000000..891d9215c9
 +index c0a9825..e2d2c9b 100644
 +--- a/src/polkitagent/polkitagenthelperprivate.c
 ++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -68,6 +68,11 @@ read_cookie (int argc, char **argv)
++@@ -69,6 +69,11 @@ read_cookie (int argc, char **argv)
 +             perror ("fgets");
 +           return NULL;
 +         }
@@ -209,22 +209,18 @@ index 0000000000..891d9215c9
 +       if (buf[strlen (buf) - 1] != '\n')
 +         {
 +           errno = EOVERFLOW;
-diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/recipes-extended/polkit/polkit_127.bb
-index f97c6efbf7..8c0a2d75d1 100644
---- a/meta-oe/recipes-extended/polkit/polkit_127.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_127.bb
-@@ -5,7 +5,12 @@ LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
- BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
+diff --git a/meta-oe/recipes-extended/polkit/polkit_124.bb b/meta-oe/recipes-extended/polkit/polkit_124.bb
+index ba0fe47d7c..b7c167ac79 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_124.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_124.bb
+@@ -9,6 +9,9 @@ SRC_URI = "\
+      git://github.com/polkit-org/polkit.git;protocol=https;branch=main \
+      file://CVE-2025-7519.patch \
+      file://meson-build-Support-openembedded-OS-for-PAM-config.patch \
++     file://CVE-2026-4897-01.patch \
++     file://CVE-2026-4897-02.patch \
++     file://CVE-2026-85498.patch \
+ "
  
--SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV}"
-+SRC_URI = "\
-+    git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV} \
-+    file://CVE-2026-4897-01.patch \
-+    file://CVE-2026-4897-02.patch \
-+    file://CVE-2026-85498.patch \
-+"
- 
- SRCREV = "9e4894c969eecf26a3ba762f4f7a268aa0fb3e51"
- 
+ S = "${WORKDIR}/git"
 
