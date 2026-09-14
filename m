@@ -1,231 +1,150 @@
-Return-Path: <potin.lai.pt@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9D9DC88E64
-	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 01:06:31 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10523.1789347989295983811
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C3F6C88E5C
+	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 03:13:12 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12074.1789355589436338270
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 18:06:29 -0700
+ Sun, 13 Sep 2026 20:13:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Q7aOxM+4;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: potin.lai.pt@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2cfbbdfa60bso27911305ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 18:06:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=VIIAFYwe;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-86959a6f7f6so2166909b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 20:13:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789347989; x=1789952789; darn=lists.openembedded.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=JdNVP5MTr/DX/SH9GHys0stwZclb+utI4JQliIrbXiw=;
-        b=Q7aOxM+4iLtGtrnQYh9ndrg63ulyNGL4REsfBJtoRlXu5TV7d2oOlX6+fuSk+keYfQ
-         yvOyHRPzzrvlHW4MG8yhwWMsUuE3HMq9tmuQS6vGas785+6OJAcMaY+ewM0ahpMX7zHw
-         NeMN/Y6YtSRQZI2H5yuNgzmnVhpM9YRGBspxsiusU6qgctMZKlLR+fuMcmeDWoRiO7Zx
-         gceoepnZnPaNdkxm1CHw2tQo/7tYS3MCImbzibCmFF8/BRrFtA67ln96WMG4HGfewqeZ
-         y/FmqmWLBcgB+Zrsekf4eNrG9opGfzr99hVxNLPOhTDM4yLQ3KsON4g0nqjUCUfo7brr
-         PxKA==
+        d=gmail.com; s=20251104; t=1789355589; x=1789960389; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hdfR3hspc4XMllBn+YHDmeCYofjcWQ6JPF8DWcfxMi4=;
+        b=VIIAFYwevAnim8l85PaGecIWxWTzFNnJwndugXmkkcalCkripDgVqTiRw1vvBfY+kN
+         wItOyM02Vj5R2Jt2YpSCHHi+JQErF5pUzRIFE4NLfPDxkbaocUbf8EbT7i9uC5BsboFq
+         LSE+kvgFCfZivEhvtFMxretJApI3yrRXIr1A/M/RUVh6fCWxbv0Bz3CXwUXpZI0RsqLB
+         wgmVSRfqM2+dZPR/1r7V9wNXQX2Z0H+VVPtYBbeYe1fGaMVLMCtrK5L1i4ea2Ytkq9jL
+         A8IKhWc2OOEA159CoM0oKar7f/rGhvO5/Nmtb8jqdIbXCz4XYkHG3+sqXqxx/rWiFyxm
+         m9rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789347989; x=1789952789;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=JdNVP5MTr/DX/SH9GHys0stwZclb+utI4JQliIrbXiw=;
-        b=AOAWZZSVdPNYosVeGeyORn70WvdgMNkxDB5UE0iGjAvItmXT6HQXNBKhmrCrEZNmrI
-         IAcm8Uljc9NGXq8eAyOqXw0ECSQL8C/Uf+Zkb03PhegZp04D6shkO5vjFNN6UhF2DNwa
-         lpueBIwdvTxHxF5FJ07UMi6//4XX82Ytmf2KLTIlKTLx38HccIPOtg7SNV5/t/Wh/+iR
-         B53JhzmJSd1FUA6NfnC9p1tv7ZGjLv7+lOL9/ISiECLgNwVVhFP5wQzw0EuopGP2C1b8
-         30sGcRz8/SdZGDgF6esfQ9kPFbgZBpQUJLaJ1GWito+faL2wAO/REmDAifm+qCC2mgql
-         DmVg==
-X-Forwarded-Encrypted: i=1; AKwUvBwVqrjg3djngMz13NiDv09cU77AhuvPfMRCCI1FRt0NWWLG9XX8/ITnLsaHyk2bClVFCgUkztNUCPdQEvp0nv8Puug=@lists.openembedded.org
-X-Gm-Message-State: AFuF++llpjeSaEhrUX/ei2gplSaMp9Ep6+qV6JBN/92fUNA7VjXq9zw7
-	hrq3JIYsPeMCwZCGFJ+fHz6bj92ZUa/q3AIGrzmaV9o4X51Md1/+v6OkPMYh0A==
-X-Gm-Gg: AYBFou3LYCYfCNVnByvCNVoFjLN75pX+P/G3CdKrOHjI8uV9Em97CcA/eO+g27XXUGt
-	tj8azWYijtNYbrCmtUIQYqYeUrF8dILecHRnFtQnBNiL15itFhmFJO4dgI+tixye0jTF3UkIyuj
-	WHQsnU60PM5X0pWdRRBrSoqrd8sqIzBITKX71u60yc/3CpktYU/blT+Tqhk+W1yzy3NubO3ZkCG
-	o9rF3qoxYh0azwXLf7I9NIyq674yDAuqJUpa5SegWPeQnrqUIOeadKLoEkm8upo7DkvNjVB5K1S
-	gfhdDxo2y1JdW+cf5zvCR5/+6L/WkYOsG/xjuI7dXCJI8AMEMa5X2RIKjFKwuq+HyKNv+/AJHZY
-	J/N1SwKGugpGXb31slwVjz+pY/iljG6BTQFOuAxGIa6YSPqLN9wKbT8MrW0CTyvD9THq9b/ZxdF
-	S//7DRT8rBbDJZfstuw0FQUvEkWGD/RI9dRacMeHrhj3y4kbh8XM9NghNUpbnUnD6Btomq16439
-	zQJQMN8MBWt8385IRNNmIZbfFE+Z/YiC94rciDZ
-X-Received: by 2002:a17:902:f644:b0:2d9:3636:d01a with SMTP id d9443c01a7336-2dd6c725048mr8089175ad.15.1789347988495;
-        Sun, 13 Sep 2026 18:06:28 -0700 (PDT)
-Received: from [10.10.15.228] (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd4007bd4dsm31308355ad.4.2026.09.13.18.06.26
+        d=1e100.net; s=20251104; t=1789355589; x=1789960389;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hdfR3hspc4XMllBn+YHDmeCYofjcWQ6JPF8DWcfxMi4=;
+        b=P7KJZX1S1MefZa0or4xnQxilc2Rrhz8yPj7Ce5BDlQf9CmWu5TX0G5f7jLOvitCbSR
+         ul9YmealMxwsit2ktqG9rUvJnihamimFAliPu++1KR4B0rFU+nzXJG86JolEQFVDGZws
+         d0c6vpBnVbZENIJWPfxLu3DfJ1eeQffl0fvKtDSoAXJwq8P5Y433Uu9sGoWxEyxqIIG8
+         Bi2iy2OrJyRjkzdy0ThHdQg+B1xejG5P84o2hkqoeAyDIryNkivJRqItMLAblU6Ob4Wr
+         qSc66gmeRThezd9mLD0GE3LNA8S6ikYv9u2GT1exw7a66U02ETtSx4jYxfv9k3h2G4Rq
+         kveA==
+X-Gm-Message-State: AFuF++mzeD1Drn2Y+3Mwpn9+fBygMiJWwf9sLf9lmqpcJo7bYBSf5ojh
+	iOYd16zr5NBYR/LjxUlU1I1JU/2/Lsq2do5WiyFmaFkJjkDbLRD84omJxqFtEt7Z
+X-Gm-Gg: AYBFou1twH6m4b33JxFd4hfUK1nSu9A1ymQMFXm2vCogeneLwZGkmAcj+YxFPq3D/wX
+	SAyYa9k1Pl1I8tDSpR9BGfOHZA73siFWfjzmxPeYO7iz6G1+E5VTGiWAhaHHZTNTueGOU/FM3ml
+	6beGlcFkbWnDLVkePFPfgm+l8KE4RDRFpTGI8QXab6CCK8lqNDrWk8dJw8aHpuE3FW7aQan0eAC
+	7QKx+xxjLSinAjbKRo7N8lIYkJ96mk/k+dtAaJg+J+qI2T/j0XHUDXxwYcsxzCejzpKHrra9Hsq
+	IgAlEOuFzOm4SQn0BnpucJ4uYzatHo9856fmMqhJ7spUyoT1NO3ATL6oFQu9mIRjcHKyyg2RvGh
+	J9ONcC/CekDdX1gVvq5IlnMBqpunyrVVjVmC8kWBmNXAbeTXtFp+/nSZjov5Mt9ajK95aMytTY5
+	AU+OkxW+9petJXn9qHWuAQW+JSB+OyT8dFQO5Gc5+Re/ULjKxj4MGb682yJ+VIS1DT6rsFiJiNH
+	zUATWMQQIJOmWwqNMb7
+X-Received: by 2002:a05:6a00:950b:b0:869:8620:26d2 with SMTP id d2e1a72fcca58-86f82f51c34mr1773606b3a.1.1789355588593;
+        Sun, 13 Sep 2026 20:13:08 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([202.170.174.3])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-86b2a2b5c72sm3712425b3a.52.2026.09.13.20.13.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Sep 2026 18:06:27 -0700 (PDT)
-From: Potin Lai <potin.lai.pt@gmail.com>
-Date: Mon, 14 Sep 2026 09:03:52 +0800
-Subject: [meta-oe][PATCH v4] libgpiod: handle disappearing chips during
- iteration for v1.6.x
+        Sun, 13 Sep 2026 20:13:08 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 1/10] python3-django: upgrade 6.0.7 -> 6.0.8
+Date: Mon, 14 Sep 2026 15:12:49 +1200
+Message-ID: <20260914031300.3677365-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260914-libgpiod-v1-6-5-handle-disappearing-chips-v4-1-a3cda65885f3@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAPdHp2oC/53OO27DMBAE0KsYrLMGPxEVpco9DBf8LKUNJJEgF
- SGBobubshvDXVwOMPt2LqxgJizs83BhGVcqFOca3t8OzA1m7hHI18wkl5p3gsNItk8UPawCNDR
- QS35E8FRMSmgyzT24gVKBVrWhtdx3H7xj1UsZA/3efp3O91x+7De6ZX9wmnAxEPG8VwcqS8x/t
- 1Wr2A9eGVALAoKXPhgvneHhq58MjUcXJ7YPWOWjLP4jyyqr1jaaC4XSuWdZvSyrKgvssNGNt8b
- qR3nbtitFxiWKsQEAAA==
-X-Change-ID: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-To: Khem Raj <raj.khem@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
- openembedded-devel@lists.openembedded.org
-Cc: Potin Lai <potin.lai.pt@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789347986; l=5411;
- i=potin.lai.pt@gmail.com; s=20260522; h=from:subject:message-id;
- bh=G8ExBy6YJ6uNslwtj+beja+hvy8JXAwZWRZIUQVb+BI=;
- b=ySA4z0m4et2nDbkswRyCxbw77xLKX/6TrjI6N6MQ1GKlab0xvbHFf1Ww5Jd48gCMlQA1qmKQb
- DipOIxtl7+NDcliF4W4ts2mqhOC8GwcSU5tgDb7G6JGD13cTx/35obn
-X-Developer-Key: i=potin.lai.pt@gmail.com; a=ed25519;
- pk=j3/nMxzz1ZPpp1revghyZ8IqOnwi6RWfuxXN2XrNMRE=
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 01:06:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130008
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 03:13:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130009
 
-Add a patch fixing an issue where tools like 'gpiofind' incorrectly abort
-with a 'No such device' (ENODEV) error if a hotpluggable GPIO controller
-(like a USB device) vanishes from /dev during the search.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-This patch gracefully handles the race condition by ignoring ENODEV errors
-when searching for a line and silently skipping chips that fail to open
-during iteration.
+Also revert bump in the minimum setuptools version.
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+Release Notes:
+https://docs.djangoproject.com/en/dev/releases/6.0.8/
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
-Changes in v4:
-- Change patch file Upstream-Status to "Backport"
-- Link to v3: https://patch.msgid.link/20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com
+ ...ped-minimum-setuptools-version-to-83.patch | 42 +++++++++++++++++++
+ ...jango_6.0.7.bb => python3-django_6.0.8.bb} |  3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django/0001-Revert-Bumped-minimum-setuptools-version-to-83.patch
+ rename meta-python/recipes-devtools/python/{python3-django_6.0.7.bb => python3-django_6.0.8.bb} (62%)
 
-Changes in v3:
-- Take the patch directly from the upstream libgpiod v1.6.x branch
-- Change patch file Upstream-Status to "Accepted"
-- Link to v2: https://patch.msgid.link/20260911-libgpiod-v1-6-5-handle-disappearing-chips-v2-1-37b56013e2cc@gmail.com
-
-Changes in v2:
-- Revise commit message
-- Add Upstream-Status tag into patch file
-- Link to v1: https://patch.msgid.link/20260910-libgpiod-v1-6-5-handle-disappearing-chips-v1-1-fd2dfad2ca0f@gmail.com
----
- ...ully-handle-disappearing-chips-during-ite.patch | 83 ++++++++++++++++++++++
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb |  5 +-
- 2 files changed, 87 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django/0001-Revert-Bumped-minimum-setuptools-version-to-83.patch b/meta-python/recipes-devtools/python/python3-django/0001-Revert-Bumped-minimum-setuptools-version-to-83.patch
 new file mode 100644
-index 0000000000..3a777010f5
+index 0000000000..5913287038
 --- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
-@@ -0,0 +1,83 @@
-+From 40f18f16f573e6bf091d83cb1677e7386d0b8495 Mon Sep 17 00:00:00 2001
-+From: Potin Lai <potin.lai.pt@gmail.com>
-+Date: Tue, 8 Sep 2026 21:05:07 +0800
-+Subject: core: gracefully handle disappearing chips during iteration
++++ b/meta-python/recipes-devtools/python/python3-django/0001-Revert-Bumped-minimum-setuptools-version-to-83.patch
+@@ -0,0 +1,42 @@
++From 2c7d43e13909886bbb0b6b5dcd5e718c67818031 Mon Sep 17 00:00:00 2001
++From: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Date: Mon, 14 Sep 2026 11:37:53 +1200
++Subject: [PATCH] Revert "Bumped minimum setuptools version to 83."
 +
-+When hotpluggable GPIO controllers (like USB devices) are dynamically
-+added or removed, a race condition can occur. A chip's device node might
-+be present when iterating through /dev, but the chip could disappear by
-+the time we try to open it or query its lines.
++This reverts commit 8362cdc7efc9c881fdba48ce19e89b9194de7c46.
 +
-+Previously, this caused tools like 'gpiofind' to incorrectly abort with
-+a 'No such device' (ENODEV) error if any chip on the system vanished
-+during the search.
++Upstream precautionarily bumped minimum setuptools version[1]
++Revert the change to allow building new versions of Django.
 +
-+Fix this by ignoring ENODEV errors when searching for a line
-+(in gpiod_line_find()) and by silently skipping chips that fail to open
-+during iteration (in gpiod_chip_iter_new()).
++[1]https://github.com/django/django/pull/21691
 +
-+Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
-+Link: https://patch.msgid.link/20260908-gpiofind-error-enodev-v1-1-c7756aab9568@gmail.com
-+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-+Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=40f18f16f573e6bf091d83cb1677e7386d0b8495]
++Upstream-Status: Inappropriate [oe-specific]
 +---
-+ lib/helpers.c |  2 +-
-+ lib/iter.c    | 16 ++++------------
-+ 2 files changed, 5 insertions(+), 13 deletions(-)
++ docs/intro/reusable-apps.txt | 2 +-
++ pyproject.toml               | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/lib/helpers.c b/lib/helpers.c
-+index 479f370..6d1836a 100644
-+--- a/lib/helpers.c
-++++ b/lib/helpers.c
-+@@ -423,7 +423,7 @@ struct gpiod_line *gpiod_line_find(const char *name)
-+ 			return line;
-+ 		}
++diff --git a/docs/intro/reusable-apps.txt b/docs/intro/reusable-apps.txt
++index 41122dff9a..bb33dc0197 100644
++--- a/docs/intro/reusable-apps.txt
+++++ b/docs/intro/reusable-apps.txt
++@@ -211,7 +211,7 @@ this. For a small app like polls, this process isn't too difficult.
++        :caption: ``django-polls/pyproject.toml``
 + 
-+-		if (errno != ENOENT)
-++		if (errno != ENOENT && errno != ENODEV)
-+ 			goto out;
-+ 	}
++        [build-system]
++-       requires = ["setuptools>83"]
+++       requires = ["setuptools>=77.0.3"]
++        build-backend = "setuptools.build_meta"
 + 
-+diff --git a/lib/iter.c b/lib/iter.c
-+index bfd2852..7f5ad9a 100644
-+--- a/lib/iter.c
-++++ b/lib/iter.c
-+@@ -51,7 +51,7 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 	if (!iter)
-+ 		goto err_free_dirs;
++        [project]
++diff --git a/pyproject.toml b/pyproject.toml
++index 1c5f5fbbe0..2b8ddbf314 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -1,5 +1,5 @@
++ [build-system]
++-requires = ["setuptools>=83"]
+++requires = ["setuptools>=77.0.3"]
++ build-backend = "setuptools.build_meta"
 + 
-+-	iter->num_chips = num_chips;
-++	iter->num_chips = 0;
-+ 	iter->offset = 0;
-+ 
-+ 	if (num_chips == 0) {
-+@@ -64,23 +64,15 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
-+ 		goto err_free_iter;
-+ 
-+ 	for (i = 0; i < num_chips; i++) {
-+-		iter->chips[i] = gpiod_chip_open_by_name(dirs[i]->d_name);
-+-		if (!iter->chips[i])
-+-			goto err_close_chips;
-++		iter->chips[iter->num_chips] = gpiod_chip_open_by_name(dirs[i]->d_name);
-++		if (iter->chips[iter->num_chips])
-++			iter->num_chips++;
-+ 	}
-+ 
-+ 	free_dirs(dirs, num_chips);
-+ 
-+ 	return iter;
-+ 
-+-err_close_chips:
-+-	for (i = 0; i < num_chips; i++) {
-+-		if (iter->chips[i])
-+-			gpiod_chip_close(iter->chips[i]);
-+-	}
-+-
-+-	free(iter->chips);
-+-
-+ err_free_iter:
-+ 	free(iter);
-+ 
-+-- 
-+cgit 1.3.1-korg
-+
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-index 45af4f8bb0..d43fe90480 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
-@@ -3,7 +3,10 @@ require libgpiod.inc
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
++ [project]
+diff --git a/meta-python/recipes-devtools/python/python3-django_6.0.7.bb b/meta-python/recipes-devtools/python/python3-django_6.0.8.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-django_6.0.7.bb
+rename to meta-python/recipes-devtools/python/python3-django_6.0.8.bb
+index 4542485154..f8a5d6962c 100644
+--- a/meta-python/recipes-devtools/python/python3-django_6.0.7.bb
++++ b/meta-python/recipes-devtools/python/python3-django_6.0.8.bb
+@@ -1,7 +1,8 @@
+ require python3-django.inc
+ inherit python_setuptools_build_meta
  
--SRC_URI += "file://0001-bindings-cxx-disable-tests.patch"
-+SRC_URI += " \
-+    file://0001-bindings-cxx-disable-tests.patch \
-+    file://0002-core-gracefully-handle-disappearing-chips-during-ite.patch \
-+"
+-SRC_URI[sha256sum] = "2998503fc083124fb58037084bfa00de323c7c743f05f1b4284e77bff0ab8890"
++SRC_URI[sha256sum] = "cb0bd962d27fc866f3c514b20aae6a7df56ec80b488f9899da46d675cd051526"
++SRC_URI += "file://0001-Revert-Bumped-minimum-setuptools-version-to-83.patch"
  
- SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
- 
-
----
-base-commit: cbec9a20d78add94235042c601e991574151e36e
-change-id: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
-
-Best regards,
---  
-Potin Lai <potin.lai.pt@gmail.com>
-
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 6.x branch,
 
