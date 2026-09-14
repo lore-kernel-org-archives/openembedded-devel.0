@@ -1,146 +1,276 @@
-Return-Path: <philip@balister.org>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94979C88E6F
-	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 20:49:10 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6416.1789415231815100753
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3777CC88E73
+	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 20:59:00 +0000 (UTC)
+Received: from mail-oa2-f12.google.com (mail-oa2-f12.google.com [74.125.231.76])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8237.1789419534034744868
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2026 12:47:11 -0700
+ Mon, 14 Sep 2026 13:58:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=cbcuuNAg;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=YheTD1Iy;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: daiane.angolini@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EJYcuG262569
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 19:47:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=CX8SI1dP0nFhHYjy7V/oDqIut63L3Sy3fhI
-	QKsjuiWA=; b=cbcuuNAgBNh8dVVjickqBxPm/9TEXCrNcQxHHb9NkvPx3F+WFKc
-	rVXX64LIhJCRKp43KGU3r2ZYmbCuxbh898FFH1Y/hNRCQaQ6nRxLMsR4Cg1soWwI
-	2qExPy1T6pdNYHnxH5IwLOmdHbq6FdJytZ0tSAphvEymy4gBaGYHA46qpXdBlKXS
-	vuPfvou4o/08bEvskUGYPEQxn24dQyX8lWfmcx/MKeZya4LLAHcM1rJdN9YSoS+E
-	ucEHXG5M8HIcLgtYIfC0dBPe32iS6u3MsMTVniJM8364bP5VToLs3GKt/ZYEkN26
-	GalterRXwJcL9XeYcS1txynCKj6nVw/hJQA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpergabvd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 19:47:10 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e54b6556aso4686960a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 12:47:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gPsTZF4F;
+ spf=pass (domain: gmail.com, ip: 74.125.231.76, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa2-f12.google.com with SMTP id 586e51a60fabf-466cc9ab650so2878846fac.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 13:58:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789419533; cv=none;
+        d=google.com; s=arc-20260327;
+        b=gXntuPD6VQnElWD8fLOyEWZHy8lg+2fG7S67k8XeJmL4gjwaYTAHzJ8Gc7JtXujyM6
+         EkT5TFw59LUt6PSbur+O+adS27R1TlWtVWinEBaqnc7pIgOnQaLPvnTiQVs+qkNKBSf6
+         kF3eNduINdCWtm/Q58Cz/t3ZFDwQv/xBtjoVk2BTv9cnnDzelAxqHa8lw1N7ewvzElJR
+         8QEkyW5o5pmKw7OgZBNhrViAJ2z6enL6A29wLj8SOuu2TPPqQ0L2KBihHjRcHtumkpje
+         cj6MmTFCOGWmihSjt8gQizJi/JPpVy0206BncQq0Jq2p6lvpKpeswOmpOXI81730DXQE
+         72Bw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
+        fh=TgccigWwEISedZ7pLwzNLSIkGSpM8CuRZo1QBMHDyHA=;
+        b=If5DHVuvudXfVSGtwAIraD8DnnxKr4ejGm4SedtO89Y7e/8Zn4JC+38XXhu69fZJ8W
+         mfR3nmge+g3MK8QYpVROS8oThS6JebUJ0VAbYT33WqeaGkeVN9sKwcP8j5EDOV9jVWyD
+         h1IK9t+R4sUNjkRqy2QO0oSlrTNH7yFTFxAPqbf1vVD9tc0NHKoLU3SHHnsOm+eJ4S46
+         45WcDqsxLCYZxLz8Pbfk/CnSldB/8YjFpiWlGa5ZWixtgsZxuAu4yGIScmLpaANN8BwB
+         IweEG5ZVnrKd7zYLBxPfuFKA7EnuEaTR1mKjm9WeF17twV29vVXI4D/a6504u5oQ2pdW
+         I3VA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789415230; x=1790020030; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CX8SI1dP0nFhHYjy7V/oDqIut63L3Sy3fhIQKsjuiWA=;
-        b=YheTD1IybqEahKHvGTPAj2gApdtrIwB/w9/6InAmiQENGrE7Ia6JoJUKAoqQkHlsj0
-         nulWKIRD6XkJThUJK+MNx68zTMycAVFLYg9QHhd/4oLDaIZ3i6QMPJNLQ4JBzV5Z1Utk
-         5Spa28g2fkR4pFzgq+UcwRQcZVX/cZPCCdU64cp2qUKJjiTa8UaXMccgq7oZCsmuR4un
-         +IDMweejC+B3oG9IF3jUpED4AcGUUpdtadPesc6QaimC6u3IhwNQLQnpp3f4UeljmG0l
-         bXKa2aRaYpQQVcmdMfx1StHggQndukhNMZZaUvXuUObjOQVKux6rdWxDWg6hx7oz1q8s
-         8arA==
+        d=gmail.com; s=20251104; t=1789419533; x=1790024333; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
+        b=gPsTZF4FSdDe07vWasUQFf31xS6bntRoGF7pQdpl+u6QBJKca12/bG/6lAHpNybzM0
+         hsy2KFS37vKk1P86lP33u4ZY0M8xNYZstfv6kujqow4n2gPPk8mttDWIR2KQEvHwsxy8
+         5tfQOm1/kwpSzb4HMcBMKeMvj7g1n+3Ugg5fWBoDzzlPvINHJZ8rT5XVFF0odjuM8HWV
+         9AitUzjQEM3dsOKUkdygzfCVwzllZhIZgOiEq5DvVy1psgE3ZE1WAtO//d/uPYrUMF2d
+         yd9VN61ibUUsimlYsqijumdmhp4FHN9JC8EEK9F/WMBLr3+f9+0ZGg4bHoUeqrR4gorV
+         /5hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789415230; x=1790020030;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CX8SI1dP0nFhHYjy7V/oDqIut63L3Sy3fhIQKsjuiWA=;
-        b=a2EgR+5cQc09LxLAOsmcapQr2ypVeG1t1bbwmhLU0YOo1DKz0tLnGXpelKO/2HMfmA
-         oMyQaJZp387G3SuKry+xL/DOqgXM8hICYK1F/QqW7tzcYTgxNHiH2VziORIiBZF3wGfA
-         8sdapUC/45JEYpe85GpuX6LFf3noZN+DUJAUgqNSZaePLgupZQaB43BSCp/q4m9udell
-         7Wf6WZ2D5uD95KF/Fua5kKf13xn17k9tx0fxDVQLcM9lga1KetCe5STRu+RrRRIrGWcp
-         YvCfGsf7nDP07uszhFqr2OaRILy3JxtSA43qIGQ59jtTNJymKiYIBCaDT8NttUJnzL8C
-         7HMw==
-X-Gm-Message-State: AFuF++nWetUv77J2Ayl/l5mhsoSo7OC8SHmqq5BJiWYIemsIWHOU617c
-	1a1/cbYVHLupLtQqHbUE7nVcNDNstGYo8ofsUV1uR8zxcsrnI8WB8MUVMgLvZ+5yewHrT5+Ln0R
-	7eJ/nMPW9L1gWKR35tp37boZHmj9nE8grfNlgC2znF3zLg1Q5V70L85bPNMxy3UPSj813OI+Vye
-	EAbJx8HI03WPRvmHCt
-X-Gm-Gg: AYBFou3XKu3TavCPM7M/Z5aDtUdf8kT/eaa4C3OF+Hy3a/ML8tTNVweGQPl/mdBK+La
-	3Ene8x5KbSB0b+AWlMZ9WgbWUt5Jk3TKmpkJXMsR2okQHmhlvvzolNeJI0lEcM0xRjtO8EBa/x4
-	fvNJqqHnzz7kt5cmgPObJc1ij+zQZTH6UxeEhvWEMEhsOvlK1ekHbAFtN8XNmCrnl8nWPq6jJqS
-	NvLQItgi9wEUNMH6XppfsR/PB2/y1qUOVWFKL2THKgsQp6yiT2j5WSALCxfTwdMXFPU1Me+0mPd
-	b/ojcfNxb7a4eFI/dFFXs/DrrLLZqIoOCqLEw4/xJBdwAb3AytFPeCsxMiCLqRPvdxKKSffsStY
-	U+kSXOXS9To3oaA==
-X-Received: by 2002:a17:90a:4ce5:b0:39d:e523:8f3e with SMTP id 98e67ed59e1d1-39dec170bb0mr5680580a91.3.1789415230259;
-        Mon, 14 Sep 2026 12:47:10 -0700 (PDT)
-X-Received: by 2002:a17:90a:4ce5:b0:39d:e523:8f3e with SMTP id 98e67ed59e1d1-39dec170bb0mr5680558a91.3.1789415229749;
-        Mon, 14 Sep 2026 12:47:09 -0700 (PDT)
-Received: from nina.lan ([187.183.48.203])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365b345a4sm25806186c88.5.2026.09.14.12.47.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2026 12:47:09 -0700 (PDT)
-From: "Daiane Angolini" <daiane.angolini@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Daiane Angolini <daiane.angolini@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] android-tools: recommend the USB gadget modules adbd needs
-Date: Mon, 14 Sep 2026 16:46:53 -0300
-Message-ID: <20260914194653.1984445-1-daiane.angolini@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20260707; t=1789419533; x=1790024333;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
+        b=k6sBwqQoFDAilmTkIhV+o3x/J7FkxB5ui2RtxOqGLtHGbUefm6L39/6PhTelMwRQH2
+         fEcAOl0/PZeS+zKc6kCZpQ3CxCmNkYeX0n3d8Fg78DfLmQ3iTKON4KTyrWkV5yjHsF81
+         oYASNZgy456sy7PYgIoX92fj8hH8ktGoJlbz97LLehu4DP9/CHdpQdZ0gLlIE99TUN5P
+         vCehgexWZAuv2hkjqhSqA1avfg9AzVbZ4Pq3ePEy0K4KSPNOVf6ihCDlFUCmLMEAZQKE
+         YS73dPkIkBR8bir7XdAfOtlgapzk0dGl+orQEeEy6oZo0aj7OzkafQWtdVIs3rPnkkhc
+         47rw==
+X-Gm-Message-State: AFuF++lyVldomheJmiTIS2aLatXj8G0qhM8XvEGaL8kwUwAUNfVcwHte
+	XFdAKUgkEd4giQu5Y7nrK55XleE26Bhpids57Ox7iLiu+eMxeSc5V+tQkzVWBBghJmuGdaG6h/P
+	TyfsXYrKCB65BA4fEqJ/mpQvnpTnvvdU=
+X-Gm-Gg: AYBFou321DVpr+ajVOilGUK15asxst8xNFb16qeSNiskfYvR2eX//Rekwpedn7MCp5I
+	4ToEQ3IKDcL7rBZspGr/aXkHHR5kd3jipFcviIi7lYKzcvoAWbqYutL0J01gIqN2pOmVQqCXt0m
+	8BirJHzcJ/3OExq8LDRqX2iZBK7PgkeB5i3n6mRzH1fTOIeVG5xn/s7Rg3cxDTPFxRMz5xqkX0+
+	eNIznOngmFDz1uoWo3zaHJy6EG7p691jP6wduQr39KOh4hPgiL5u52aE5DCCKWjLhrNTYpViRrP
+	gp+rCG1WIDnpsAJkvbUnZutSEdaCsNwSmoj48KooeYeTpErCJvcTmtKPvYT60Ec4wdYlaw==
+X-Received: by 2002:a05:6870:1649:b0:479:7931:cd6a with SMTP id
+ 586e51a60fabf-481fa2428c3mr2844420fac.32.1789419533021; Mon, 14 Sep 2026
+ 13:58:53 -0700 (PDT)
 MIME-Version: 1.0
-X-Authority-Analysis: v=2.4 cv=QK/91QLL c=1 sm=1 tr=0 ts=6aa84f3e cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=XAuqcxNhqWdpT/c4fHa+Hw==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=kbNtS3R_HzE7tKUi0_MA:9 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: lpGOUmqrnW9NLyFG_fH7I-z1SGLgeKdU
-X-Proofpoint-ORIG-GUID: lpGOUmqrnW9NLyFG_fH7I-z1SGLgeKdU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDI4MiBTYWx0ZWRfXyqrZ9zJYRMHl
- DpFWYjVAaYbA3AD64PYx85i9grjfP+vb7byU+XZmCDptM0ipJm32MlLKKNlzVM0eJ6L6g+fDou8
- LWmA4O0khA9lHlllxQK0euev5vulGV22Ejc2QpLIc4ajPKOeCtCtBzaM3YFg1u5oDI63jzgyxCr
- ejnVHSJZX2UcWiPupDl3Mg2ae3DhxDFi2+lLIn3znliV+V8tNgKyAV8xQrB+gfiyOKhvWt5SlX1
- aLPXk52vh4z6VBep8fO1Kup/rsq7fdmN8ZyqiWp0pBKmoPDhTY1Ag5bJaAtNrAxicI1z6Ovzmqh
- ZLZi7GzjTKN+mc7Vept2zJLxyFHJVJCFHs/QqM4/BVepTsBtp67sTTKzXn/RHlIVQs0n2XFShx/
- P8aLUHAiakogUlm2LquDMJ2+LKZLzBu2d81FDfXyL4/vXdUBr472AstlNawkdMCGqhTQzLazh7g
- qMJHa95BUjmr9zYZLXA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDI4MiBTYWx0ZWRfX91VJCDIQVj/m
- Pl2Cz226KufMrsYTcLq8lzWDuS0iLQBD1mDyaMB1TQspwJ0vu1zdqWG8DxNdUIeUfGXpvhfSoFC
- nn16lzT1a4f+S9wbLTcHNcs1x8uLtCg=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-14_04,2026-09-14_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- priorityscore=1501 spamscore=0 adultscore=0 bulkscore=0 clxscore=1015
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609140282
-Content-Transfer-Encoding: 8bit
+References: <20260914092745.20027-1-jan.vermaete@gmail.com>
+In-Reply-To: <20260914092745.20027-1-jan.vermaete@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Tue, 15 Sep 2026 08:58:41 +1200
+X-Gm-Features: AcwNN1XAZzmz2g_qHU1IBw0nk-bktjj9Ss1Pp0mYJwUPTyL66HeJNhQxLlGddBE
+Message-ID: <CADySD0FjZs2RK_dC7PcddEVuhLZwnc+892xjKmRR0tAq+4bk5g@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-construct: new recipe version 2.10.70
+To: jan.vermaete@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, tfggeelen@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 20:49:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130024
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 20:59:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130025
 
-Recommend libcomposite and usb_f_fs from the adbd package.
+On Mon, Sep 14, 2026 at 9:27=E2=80=AFPM Jan Vermaete via
+lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Recipe taken from meta-homeassistant of Tom Geelen.
+>
+> Added ptests.  But removed the tests with binary data (e.g. .so file).
+> Those tests gave to much issues with QA rules of Yocto/Openembedded.
+>
+> Moved from pypi to github to have all test code.
+>
+> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> ---
+>  .../ptest-packagelists-meta-python.inc        |  1 +
+>  ...ile-to-enable-pytest-8.x.y-to-find-t.patch | 25 ++++++++++++
+>  ...002-pytest.ini-disable-the-benchmark.patch | 26 ++++++++++++
+>  .../python3-construct_2.10.70.bb              | 40 +++++++++++++++++++
+>  4 files changed, 92 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
+3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
+>  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
+3-construct/0002-pytest.ini-disable-the-benchmark.patch
+>  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
+3-construct_2.10.70.bb
+>
+> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc =
+b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> index e4eae4ef43..9b3a535e55 100644
+> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> @@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON =3D "\
+>      python3-cachetools \
+>      python3-cbor2 \
+>      python3-configobj \
+> +    python3-construct \
+>      python3-pyconnman \
+>      python3-click \
+>      python3-dasbus \
+> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
+ruct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch b/meta=
+-python/recipes-devtools/python3-construct/python3-construct/0001-add-pytes=
+t.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
+> new file mode 100644
+> index 0000000000..3e9e73bd45
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct/00=
+01-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
+> @@ -0,0 +1,25 @@
+> +From b8d0ba87f629cc6065a2d06cedc5e850407c45de Mon Sep 17 00:00:00 2001
+> +From: Franz Haas <franz.dominik.haas@gmail.com>
+> +Date: Tue, 17 Sep 2024 11:23:28 +0200
+> +Subject: [PATCH 1/1] - add pytest.ini file to enable pytest 8.x.y to fin=
+d the
+> + tests
+> +
+> +Upstream-Status: Backport [https://github.com/construct/construct/commit=
+/b8d0ba87f629cc6065a2d06cedc5e850407c45de]
+> +
+> +---
+> + pytest.ini | 3 +++
+> + 1 file changed, 3 insertions(+)
+> + create mode 100644 pytest.ini
+> +
+> +diff --git a/pytest.ini b/pytest.ini
+> +new file mode 100644
+> +index 0000000..f5a52af
+> +--- /dev/null
+> ++++ b/pytest.ini
+> +@@ -0,0 +1,3 @@
+> ++[pytest]
+> ++pythonpath =3D .
+> ++
+> +--
+> +2.47.3
+> +
+> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
+ruct/0002-pytest.ini-disable-the-benchmark.patch b/meta-python/recipes-devt=
+ools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchm=
+ark.patch
+> new file mode 100644
+> index 0000000000..bc89546c82
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct/00=
+02-pytest.ini-disable-the-benchmark.patch
+> @@ -0,0 +1,26 @@
+> +From 7acb7aa51db762a723d85b81262ca14614dbeac0 Mon Sep 17 00:00:00 2001
+> +From: Jan Vermaete <jan.vermaete@gmail.com>
+> +Date: Mon, 14 Sep 2026 10:24:51 +0200
+> +Subject: [PATCH 2/2] pytest.ini: disable the benchmark
+> +
+> +Benchmark is also disabled in the github workflow of the project
+> +
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> +---
+> + pytest.ini | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/pytest.ini b/pytest.ini
+> +index f5a52af..4b1b4b6 100644
+> +--- a/pytest.ini
+> ++++ b/pytest.ini
+> +@@ -1,3 +1,3 @@
+> + [pytest]
+> + pythonpath =3D .
+> +-
+> ++addopts =3D --benchmark-disable
+> +--
+> +2.43.0
+> +
+> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
+ruct_2.10.70.bb b/meta-python/recipes-devtools/python3-construct/python3-co=
+nstruct_2.10.70.bb
+> new file mode 100644
+> index 0000000000..681c43122a
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct_2.=
+10.70.bb
+> @@ -0,0 +1,40 @@
+> +SUMMARY =3D "A powerful declarative symmetric parser/builder for binary =
+data"
+> +HOMEPAGE =3D "http://construct.readthedocs.org"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D202b39559c1c79fe4715ce81e9e0a=
+c02"
+> +RECIPE_MAINTAINER =3D "Tom Geelen <t.f.g.geelen@gmail.com>"
+> +
+> +SRC_URI =3D "\
+> +    git://github.com/construct/construct.git;protocol=3Dhttps;branch=3Dm=
+aster \
 
-adbd needs both loaded: android-gadget-setup modprobes the first, and
-the second comes in via request_module when the ffs function is
-created. Nothing in an image pulls them in, so adbd fails to start on
-kernels that build them as modules. A kernel with gadget support built
-in ships no kernel-module packages, which recommendations tolerate.
+please include tag=3Dv${PV} in the SRC_URI
 
-Assisted-by: Claude Code:claude-opus-5
+> +    file://0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.pat=
+ch \
+> +    file://0002-pytest.ini-disable-the-benchmark.patch \
+> +"
+> +
+> +PV =3D "1.0+git"
 
-Signed-off-by: Daiane Angolini <daiane.angolini@oss.qualcomm.com>
----
- meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+No need to set PV in the recipe, this can be dropped
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-index 761c98f5d7..623dfa7717 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-@@ -228,6 +228,7 @@ do_install:append:class-native() {
- PACKAGES =+ "${PN}-adbd"
- RDEPENDS:${PN}:class-target = "android-tools-conf-configfs 7zip android-libboringssl"
- RDEPENDS:${PN}-adbd += "${PN}"
-+RRECOMMENDS:${PN}-adbd += "kernel-module-libcomposite kernel-module-usb-f-fs"
- PRIVATE_LIBS:${PN} = "liblog.so.0 libbase.so.0 libcutils.so.0"
- 
- inherit useradd
--- 
-2.43.0
-
+> +SRCREV =3D "c25a47172d4bde392b7ad188175b07b319d3dea4"
+> +
+> +inherit setuptools3 ptest-python-pytest
+> +
+> +PACKAGECONFIG ?=3D "extras"
+> +PACKAGECONFIG[extras] =3D ",,,python3-arrow python3-cloudpickle python3-=
+cryptography python3-lz4 python3-numpy python3-ruamel-yaml"
+> +
+> +RDEPENDS:${PN} +=3D "\
+> +    python3-compression \
+> +    python3-core \
+> +    python3-crypt \
+> +    python3-cryptography \
+> +    python3-debugger \
+> +    python3-misc \
+> +    python3-pickle \
+> +"
+> +
+> +RDEPENDS:${PN}-ptest +=3D "python3-pytest-benchmark"
+> +
+> +do_install_ptest:append() {
+> +    # *.so files gives issues with QA of Yocto/OpenEmbedded
+> +    rm -rf ${D}${PTEST_PATH}/tests/deprecated_gallery
+> +    rm -rf ${D}${PTEST_PATH}/tests/gallery
+> +
+> +    install -d ${D}${PTEST_PATH}
+> +    install -m 0644 ${S}/pytest.ini ${D}${PTEST_PATH}
+> +}
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#130020): https://lists.openembedded.org/g/openembedde=
+d-devel/message/130020
+> Mute This Topic: https://lists.openembedded.org/mt/121239797/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
