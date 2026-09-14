@@ -1,226 +1,231 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <potin.lai.pt@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CFE6C88E5C
-	for <webhook@archiver.kernel.org>; Sun, 13 Sep 2026 23:00:31 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8701.1789340422741317713
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9D9DC88E64
+	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 01:06:31 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10523.1789347989295983811
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Sep 2026 16:00:23 -0700
+ Sun, 13 Sep 2026 18:06:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=dBpDRdPk;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20260913230020e394630115000207c9-q_v5hp@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20260913230020e394630115000207c9
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 14 Sep 2026 01:00:20 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=ZOuHciJ1iEi2ec7XGIOpnqxcpnBQz2dlodrqye3lEiA=;
- b=dBpDRdPkpQQLa1xYdxrTia5R1cHQ/f3/JzIIrpWU99uzF0WaNaGnye6hySKzSu1DBEgXZ7
- u7Uxa6jCOOph7RqdSgKcaV2gMLOAOj/wQXNT2LrVlAx8f3I+MiEOVVFvhUEt3C6k7Y3Z/gBk
- 5vOsycCiDjFiV7tvsrJdsbhXVzd2Nf2QDc5faky6sDPreGz61BOWdLWwleroPmze0nnf24mS
- ynTy+Mf00i3Qko0NXCG9i/m+d43ryUt9vAUa8EqFuwn4QCUVPM/Rw62UERe2Z90Ru7fF4QFV
- CIVJ8FClZHIsKQSarwE2c4bjJp4k/f8a/lUBOZ1A8xCxlSYaCuIw+a/g==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH] polkit: patch CVE-2026-4897 and CVE-2026-85498
-Date: Mon, 14 Sep 2026 00:53:01 +0200
-Message-ID: <20260913225301.569833-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Q7aOxM+4;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: potin.lai.pt@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2cfbbdfa60bso27911305ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 18:06:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789347989; x=1789952789; darn=lists.openembedded.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JdNVP5MTr/DX/SH9GHys0stwZclb+utI4JQliIrbXiw=;
+        b=Q7aOxM+4iLtGtrnQYh9ndrg63ulyNGL4REsfBJtoRlXu5TV7d2oOlX6+fuSk+keYfQ
+         yvOyHRPzzrvlHW4MG8yhwWMsUuE3HMq9tmuQS6vGas785+6OJAcMaY+ewM0ahpMX7zHw
+         NeMN/Y6YtSRQZI2H5yuNgzmnVhpM9YRGBspxsiusU6qgctMZKlLR+fuMcmeDWoRiO7Zx
+         gceoepnZnPaNdkxm1CHw2tQo/7tYS3MCImbzibCmFF8/BRrFtA67ln96WMG4HGfewqeZ
+         y/FmqmWLBcgB+Zrsekf4eNrG9opGfzr99hVxNLPOhTDM4yLQ3KsON4g0nqjUCUfo7brr
+         PxKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789347989; x=1789952789;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=JdNVP5MTr/DX/SH9GHys0stwZclb+utI4JQliIrbXiw=;
+        b=AOAWZZSVdPNYosVeGeyORn70WvdgMNkxDB5UE0iGjAvItmXT6HQXNBKhmrCrEZNmrI
+         IAcm8Uljc9NGXq8eAyOqXw0ECSQL8C/Uf+Zkb03PhegZp04D6shkO5vjFNN6UhF2DNwa
+         lpueBIwdvTxHxF5FJ07UMi6//4XX82Ytmf2KLTIlKTLx38HccIPOtg7SNV5/t/Wh/+iR
+         B53JhzmJSd1FUA6NfnC9p1tv7ZGjLv7+lOL9/ISiECLgNwVVhFP5wQzw0EuopGP2C1b8
+         30sGcRz8/SdZGDgF6esfQ9kPFbgZBpQUJLaJ1GWito+faL2wAO/REmDAifm+qCC2mgql
+         DmVg==
+X-Forwarded-Encrypted: i=1; AKwUvBwVqrjg3djngMz13NiDv09cU77AhuvPfMRCCI1FRt0NWWLG9XX8/ITnLsaHyk2bClVFCgUkztNUCPdQEvp0nv8Puug=@lists.openembedded.org
+X-Gm-Message-State: AFuF++llpjeSaEhrUX/ei2gplSaMp9Ep6+qV6JBN/92fUNA7VjXq9zw7
+	hrq3JIYsPeMCwZCGFJ+fHz6bj92ZUa/q3AIGrzmaV9o4X51Md1/+v6OkPMYh0A==
+X-Gm-Gg: AYBFou3LYCYfCNVnByvCNVoFjLN75pX+P/G3CdKrOHjI8uV9Em97CcA/eO+g27XXUGt
+	tj8azWYijtNYbrCmtUIQYqYeUrF8dILecHRnFtQnBNiL15itFhmFJO4dgI+tixye0jTF3UkIyuj
+	WHQsnU60PM5X0pWdRRBrSoqrd8sqIzBITKX71u60yc/3CpktYU/blT+Tqhk+W1yzy3NubO3ZkCG
+	o9rF3qoxYh0azwXLf7I9NIyq674yDAuqJUpa5SegWPeQnrqUIOeadKLoEkm8upo7DkvNjVB5K1S
+	gfhdDxo2y1JdW+cf5zvCR5/+6L/WkYOsG/xjuI7dXCJI8AMEMa5X2RIKjFKwuq+HyKNv+/AJHZY
+	J/N1SwKGugpGXb31slwVjz+pY/iljG6BTQFOuAxGIa6YSPqLN9wKbT8MrW0CTyvD9THq9b/ZxdF
+	S//7DRT8rBbDJZfstuw0FQUvEkWGD/RI9dRacMeHrhj3y4kbh8XM9NghNUpbnUnD6Btomq16439
+	zQJQMN8MBWt8385IRNNmIZbfFE+Z/YiC94rciDZ
+X-Received: by 2002:a17:902:f644:b0:2d9:3636:d01a with SMTP id d9443c01a7336-2dd6c725048mr8089175ad.15.1789347988495;
+        Sun, 13 Sep 2026 18:06:28 -0700 (PDT)
+Received: from [10.10.15.228] (61-220-246-151.hinet-ip.hinet.net. [61.220.246.151])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd4007bd4dsm31308355ad.4.2026.09.13.18.06.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 13 Sep 2026 18:06:27 -0700 (PDT)
+From: Potin Lai <potin.lai.pt@gmail.com>
+Date: Mon, 14 Sep 2026 09:03:52 +0800
+Subject: [meta-oe][PATCH v4] libgpiod: handle disappearing chips during
+ iteration for v1.6.x
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260914-libgpiod-v1-6-5-handle-disappearing-chips-v4-1-a3cda65885f3@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAPdHp2oC/53OO27DMBAE0KsYrLMGPxEVpco9DBf8LKUNJJEgF
+ SGBobubshvDXVwOMPt2LqxgJizs83BhGVcqFOca3t8OzA1m7hHI18wkl5p3gsNItk8UPawCNDR
+ QS35E8FRMSmgyzT24gVKBVrWhtdx3H7xj1UsZA/3efp3O91x+7De6ZX9wmnAxEPG8VwcqS8x/t
+ 1Wr2A9eGVALAoKXPhgvneHhq58MjUcXJ7YPWOWjLP4jyyqr1jaaC4XSuWdZvSyrKgvssNGNt8b
+ qR3nbtitFxiWKsQEAAA==
+X-Change-ID: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
+To: Khem Raj <raj.khem@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+ openembedded-devel@lists.openembedded.org
+Cc: Potin Lai <potin.lai.pt@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789347986; l=5411;
+ i=potin.lai.pt@gmail.com; s=20260522; h=from:subject:message-id;
+ bh=G8ExBy6YJ6uNslwtj+beja+hvy8JXAwZWRZIUQVb+BI=;
+ b=ySA4z0m4et2nDbkswRyCxbw77xLKX/6TrjI6N6MQ1GKlab0xvbHFf1Ww5Jd48gCMlQA1qmKQb
+ DipOIxtl7+NDcliF4W4ts2mqhOC8GwcSU5tgDb7G6JGD13cTx/35obn
+X-Developer-Key: i=potin.lai.pt@gmail.com; a=ed25519;
+ pk=j3/nMxzz1ZPpp1revghyZ8IqOnwi6RWfuxXN2XrNMRE=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Sep 2026 23:00:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130007
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 01:06:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130008
 
-From: Peter Marko <peter.marko@siemens.com>
+Add a patch fixing an issue where tools like 'gpiofind' incorrectly abort
+with a 'No such device' (ENODEV) error if a hotpluggable GPIO controller
+(like a USB device) vanishes from /dev during the search.
 
-Pick patches mentioning these CVEs in their commit messages.
-Note that patch for CVE-2026-4897 introduces CVE-2026-85498.
-Also pick additional patch introduced between these commits which
-touches the added code so the final patch applies cleanly.
+This patch gracefully handles the race condition by ignoring ENODEV errors
+when searching for a line and silently skipping chips that fail to open
+during iteration.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
 ---
- .../polkit/files/CVE-2026-4897-01.patch       | 64 +++++++++++++++++++
- .../polkit/files/CVE-2026-4897-02.patch       | 32 ++++++++++
- .../polkit/files/CVE-2026-85498.patch         | 38 +++++++++++
- meta-oe/recipes-extended/polkit/polkit_124.bb |  3 +
- 4 files changed, 137 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
+Changes in v4:
+- Change patch file Upstream-Status to "Backport"
+- Link to v3: https://patch.msgid.link/20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com
 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
+Changes in v3:
+- Take the patch directly from the upstream libgpiod v1.6.x branch
+- Change patch file Upstream-Status to "Accepted"
+- Link to v2: https://patch.msgid.link/20260911-libgpiod-v1-6-5-handle-disappearing-chips-v2-1-37b56013e2cc@gmail.com
+
+Changes in v2:
+- Revise commit message
+- Add Upstream-Status tag into patch file
+- Link to v1: https://patch.msgid.link/20260910-libgpiod-v1-6-5-handle-disappearing-chips-v1-1-fd2dfad2ca0f@gmail.com
+---
+ ...ully-handle-disappearing-chips-during-ite.patch | 83 ++++++++++++++++++++++
+ meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb |  5 +-
+ 2 files changed, 87 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
 new file mode 100644
-index 0000000000..cd5f58c4f8
+index 0000000000..3a777010f5
 --- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
-@@ -0,0 +1,64 @@
-+From 7e122c8a5120c2aae2d9d44a26796dc18f5b677c Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Fri, 27 Mar 2026 15:57:01 +0100
-+Subject: [PATCH] CVE-2026-4897 - getline() string overflow
++++ b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0002-core-gracefully-handle-disappearing-chips-during-ite.patch
+@@ -0,0 +1,83 @@
++From 40f18f16f573e6bf091d83cb1677e7386d0b8495 Mon Sep 17 00:00:00 2001
++From: Potin Lai <potin.lai.pt@gmail.com>
++Date: Tue, 8 Sep 2026 21:05:07 +0800
++Subject: core: gracefully handle disappearing chips during iteration
 +
-+Report and fix by Aisle.com
-+Pavel Kohout, Aisle Research
++When hotpluggable GPIO controllers (like USB devices) are dynamically
++added or removed, a race condition can occur. A chip's device node might
++be present when iterating through /dev, but the chip could disappear by
++the time we try to open it or query its lines.
 +
-+Signed-off-by: Jan Rybar jrybar@redhat.com
++Previously, this caused tools like 'gpiofind' to incorrectly abort with
++a 'No such device' (ENODEV) error if any chip on the system vanished
++during the search.
 +
-+CVE: CVE-2026-4897
-+Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/7e122c8a5120c2aae2d9d44a26796dc18f5b677c]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
++Fix this by ignoring ENODEV errors when searching for a line
++(in gpiod_line_find()) and by silently skipping chips that fail to open
++during iteration (in gpiod_chip_iter_new()).
++
++Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
++Link: https://patch.msgid.link/20260908-gpiofind-error-enodev-v1-1-c7756aab9568@gmail.com
++Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=40f18f16f573e6bf091d83cb1677e7386d0b8495]
 +---
-+ src/polkitagent/polkitagenthelperprivate.c | 23 +++++++++++++---------
-+ 1 file changed, 14 insertions(+), 9 deletions(-)
++ lib/helpers.c |  2 +-
++ lib/iter.c    | 16 ++++------------
++ 2 files changed, 5 insertions(+), 13 deletions(-)
 +
-+diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
-+index 35bca85..7e4f94e 100644
-+--- a/src/polkitagent/polkitagenthelperprivate.c
-++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -25,6 +25,7 @@
-+ #include <stdio.h>
-+ #include <string.h>
-+ #include <stdlib.h>
-++#include <errno.h>
-+ #include <unistd.h>
++diff --git a/lib/helpers.c b/lib/helpers.c
++index 479f370..6d1836a 100644
++--- a/lib/helpers.c
+++++ b/lib/helpers.c
++@@ -423,7 +423,7 @@ struct gpiod_line *gpiod_line_find(const char *name)
++ 			return line;
++ 		}
 + 
-+ #ifndef HAVE_CLEARENV
-+@@ -60,21 +61,25 @@ read_cookie (int argc, char **argv)
-+     return strdup (argv[2]);
-+   else
-+     {
-+-      char *ret = NULL;
-+-      size_t n = 0;
-+-      ssize_t r = getline (&ret, &n, stdin);
-+-      if (r == -1)
-++      #define POLKIT_AGENT_MAX_COOKIE 4096
-++      char buf[POLKIT_AGENT_MAX_COOKIE + 2]; /* +1 for newline, +1 for NUL */
-++      if (fgets (buf, sizeof(buf), stdin) == NULL)
-+         {
-+           if (!feof (stdin))
-+-            perror ("getline");
-+-          free (ret);
-++            perror ("fgets");
-+           return NULL;
-+         }
-+-      else
-++      if (buf[strlen (buf) - 1] != '\n')
-+         {
-+-          g_strchomp (ret);
-+-          return ret;
-++          /* Cookie too long - drain remaining input and reject */
-++          int c;
-++          while ((c = getchar ()) != '\n' && c != EOF)
-++            ;
-++          errno = EOVERFLOW;
-++          return NULL;
-+         }
-++      g_strchomp (buf);
-++      return strdup (buf);
-+     }
-+ }
++-		if (errno != ENOENT)
+++		if (errno != ENOENT && errno != ENODEV)
++ 			goto out;
++ 	}
 + 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
-new file mode 100644
-index 0000000000..d9fb0e7e27
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
-@@ -0,0 +1,32 @@
-+From 39601309eb3e5e88a1c1fbda9a272ba8691f1bf3 Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Wed, 13 May 2026 14:58:32 +0200
-+Subject: [PATCH] Draining loop can keep polkit busy
++diff --git a/lib/iter.c b/lib/iter.c
++index bfd2852..7f5ad9a 100644
++--- a/lib/iter.c
+++++ b/lib/iter.c
++@@ -51,7 +51,7 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
++ 	if (!iter)
++ 		goto err_free_dirs;
++ 
++-	iter->num_chips = num_chips;
+++	iter->num_chips = 0;
++ 	iter->offset = 0;
++ 
++ 	if (num_chips == 0) {
++@@ -64,23 +64,15 @@ struct gpiod_chip_iter *gpiod_chip_iter_new(void)
++ 		goto err_free_iter;
++ 
++ 	for (i = 0; i < num_chips; i++) {
++-		iter->chips[i] = gpiod_chip_open_by_name(dirs[i]->d_name);
++-		if (!iter->chips[i])
++-			goto err_close_chips;
+++		iter->chips[iter->num_chips] = gpiod_chip_open_by_name(dirs[i]->d_name);
+++		if (iter->chips[iter->num_chips])
+++			iter->num_chips++;
++ 	}
++ 
++ 	free_dirs(dirs, num_chips);
++ 
++ 	return iter;
++ 
++-err_close_chips:
++-	for (i = 0; i < num_chips; i++) {
++-		if (iter->chips[i])
++-			gpiod_chip_close(iter->chips[i]);
++-	}
++-
++-	free(iter->chips);
++-
++ err_free_iter:
++ 	free(iter);
++ 
++-- 
++cgit 1.3.1-korg
 +
-+The draining loop is not really appropriate for pipe input, especially
-+in a daemon.
-+
-+Co-authored-by: Frantisek Sumsal <fsumsal@redhat.com>
-+
-+CVE: CVE-2026-4897
-+Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/39601309eb3e5e88a1c1fbda9a272ba8691f1bf3]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ src/polkitagent/polkitagenthelperprivate.c | 4 ----
-+ 1 file changed, 4 deletions(-)
-+
-+diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
-+index 7e4f94e..c0a9825 100644
-+--- a/src/polkitagent/polkitagenthelperprivate.c
-++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -71,10 +71,6 @@ read_cookie (int argc, char **argv)
-+         }
-+       if (buf[strlen (buf) - 1] != '\n')
-+         {
-+-          /* Cookie too long - drain remaining input and reject */
-+-          int c;
-+-          while ((c = getchar ()) != '\n' && c != EOF)
-+-            ;
-+           errno = EOVERFLOW;
-+           return NULL;
-+         }
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
-new file mode 100644
-index 0000000000..b66d1e12d8
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
-@@ -0,0 +1,38 @@
-+From eea172967848bb4c5a407329f40c0e45de0d187e Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Thu, 27 Aug 2026 15:02:45 +0200
-+Subject: [PATCH] CVE-2026-85498: Unsanitized underflow in cookie input
-+
-+Credits for the report:
-+Sunwoo Lee, Korea Institute of Energy Technology (KENTECH)
-+Daeyoung Kang, Korea Institute of Energy Technology (KENTECH)
-+Haeryong Park, Korea Internet & Security Agency (KISA)
-+Hyuk Lim, Korea Institute of Energy Technology (KENTECH)
-+Seunghyun Yoon, Korea Institute of Energy Technology (KENTECH)
-+Juthawong Naisanguansee
-+
-+Co-authored-by: Jan Rybar <jrybar@redhat.com>
-+
-+CVE: CVE-2026-85498
-+Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/eea172967848bb4c5a407329f40c0e45de0d187e]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ src/polkitagent/polkitagenthelperprivate.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
-+index c0a9825..e2d2c9b 100644
-+--- a/src/polkitagent/polkitagenthelperprivate.c
-++++ b/src/polkitagent/polkitagenthelperprivate.c
-+@@ -69,6 +69,11 @@ read_cookie (int argc, char **argv)
-+             perror ("fgets");
-+           return NULL;
-+         }
-++      if (buf[0] == '\0')
-++        {
-++          errno = EINVAL;
-++          return NULL;
-++        }
-+       if (buf[strlen (buf) - 1] != '\n')
-+         {
-+           errno = EOVERFLOW;
-diff --git a/meta-oe/recipes-extended/polkit/polkit_124.bb b/meta-oe/recipes-extended/polkit/polkit_124.bb
-index ba0fe47d7c..b7c167ac79 100644
---- a/meta-oe/recipes-extended/polkit/polkit_124.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_124.bb
-@@ -9,6 +9,9 @@ SRC_URI = "\
-      git://github.com/polkit-org/polkit.git;protocol=https;branch=main \
-      file://CVE-2025-7519.patch \
-      file://meson-build-Support-openembedded-OS-for-PAM-config.patch \
-+     file://CVE-2026-4897-01.patch \
-+     file://CVE-2026-4897-02.patch \
-+     file://CVE-2026-85498.patch \
- "
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+index 45af4f8bb0..d43fe90480 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+@@ -3,7 +3,10 @@ require libgpiod.inc
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
  
- S = "${WORKDIR}/git"
+-SRC_URI += "file://0001-bindings-cxx-disable-tests.patch"
++SRC_URI += " \
++    file://0001-bindings-cxx-disable-tests.patch \
++    file://0002-core-gracefully-handle-disappearing-chips-during-ite.patch \
++"
+ 
+ SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
+ 
+
+---
+base-commit: cbec9a20d78add94235042c601e991574151e36e
+change-id: 20260910-libgpiod-v1-6-5-handle-disappearing-chips-737f7b0d9809
+
+Best regards,
+--  
+Potin Lai <potin.lai.pt@gmail.com>
+
 
