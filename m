@@ -1,214 +1,306 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31D4CC88E6A
-	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 09:28:01 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16321.1789378075541267807
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1240C88E64
+	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 11:29:34 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18105.1789385374255179358
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2026 02:27:55 -0700
+ Mon, 14 Sep 2026 04:29:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=fxf4AOTn;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-49e6deb520eso22959295e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 02:27:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=TL1jxTQr;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-66c744a00edso2347272d50.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 04:29:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789385373; cv=none;
+        d=google.com; s=arc-20260327;
+        b=GfCBqwZYltR3+f5ytWv36xi56aGAUJvzj8BbcNRS07mXFNwhY14mGoThlw1yT0NEV4
+         76JbbzNU8e0R6U72sF2Fm76pv1EsVZmUqeD+gp/hA6HbyaBqE08Nuci6GEb8N5+1sL/A
+         7E5iTNkkxyW0WJOR7njyg46mttBDTNzGVI2bg6wbE7c6ACeEmTh9C5jlaSABEr1PAKJx
+         1BXiO1sekrwf7WZD2j6uqllHHttK4IeWFu65CEwoICNN4FRCPCQvMoL9F/ssizu4oewp
+         Saidcqh43S2k5rO+W2oNHxBZN8tfiuqQy67B9TZ2etALHrkmO/DKmx1WWsThGdcgLqYj
+         sTBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=JEESaj6cjdW+yQrkUPlbqzKG3VQGnMFRcsuAs/OBWaA=;
+        fh=DXQCmsT/VsZ1HSXcYzFH2WXbZpFZ7typrNlBUqGPTCQ=;
+        b=pY9ODJq88KldbTFYxlCcxuQPGRQ+IsQUABXG7NEUl8UjCBS2qZ79kAEqAwAZK0FI98
+         64bqxW8jtuVpYAYPUGUvYuYEDzCCmE7RtsietsQnes5uX7eyZMyUiZX1+otYRMqlIw04
+         pKcnoCgWRW1rWV2nNRKkxnSgP9gNnWkuP/oSrfZcBfL+OLCckSFggoLy1CAuyGtirH1i
+         hbYW502ZuCyfl9EFd2xd+hw5nVwaHMtHYTaWDbgQEeFYcr2sVewucLLJNn+ve1MvKYQH
+         FqdMpcCKPMU40wBLLUMwZ3IuYwp6jUCt0rEB62iiwu2ejPmde+KPoua1eiaU1NFVSLZh
+         CZvA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789378074; x=1789982874; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pAIot3eV75aI7dCSHYTcXmDiZ+xeIghQsuUY0WMWxtQ=;
-        b=fxf4AOTny2Bw93eBlgY48mtROnWnsmwTIWFc57AFHVGr9sOxrP6LdIOLUgCN3J0R88
-         JonmHJhY+2ExHC71n14Ddgruxl7phhc9Q+jyNRZn0XHrVrTgeSFJ0rSJ2B6MLYORf95S
-         94bC3w14k5bSf75VbVsSPUTtPdYy35DdWRwNP5vOGpirK+uacZwHdSLK0DmLbw0ZKBWh
-         HH0K3fWyRX5Yelr9xLqyK/9CDXN0V6TmT6rEZnkbcOUc6aefxEJRe4o7CPPbvHYMKC1Q
-         l8AoojBPD7dpWFrz3qoTcOefjbJuO8a/C+igov2IP1zfZF+BRmvTSft5M+DUnVyUASTc
-         LiAg==
+        d=gmail.com; s=20251104; t=1789385373; x=1789990173; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JEESaj6cjdW+yQrkUPlbqzKG3VQGnMFRcsuAs/OBWaA=;
+        b=TL1jxTQrh1EUX2ag0FG0cCwpZNjOsnPiyzPxH1+5XyvS6YmL3ypc4+ZX0jQPfzIDnu
+         LS+NLIcz2mr4Sy078xN+nqI48r0y1VIWnYdown+MQpwZS4wWV46bfn5YF8ItjMIklE7X
+         IlGEWlax/gnwiei/V7DoTi0SuvR4RLtQYkDg4Igp21n/K01rC9Cgj7xKeKsJ9DUSbfLW
+         isoLy3rA9bnjKLeiQWzB+TCG6iHjJQYbHHONUFpgQlwHJh2Jogt5WToCpfTv4VIED5/q
+         /nqKIIxqfFSJZzhroX0lZUo0uJY5/xNNe58GMH0LlCU5fRoS4MhPt7Xg57lx4sIDs8wz
+         sCWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789378074; x=1789982874;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pAIot3eV75aI7dCSHYTcXmDiZ+xeIghQsuUY0WMWxtQ=;
-        b=WU3UuGOD9b+0fE3SAI03Oa7gWJ2k5CgzefoQ3Z7jRwyM4iW6vpsK2XJgWKFbXk7yvL
-         iveUTX+/cWUgzTsq1G2NYcJErVG/wUNuGBfT4g7lTvTddelvwESsOuICr7uTGdyq3Lx4
-         uqFuRUywq2uyNLmUrD+pEHreNZ/w5brvyI2F9rFTKIbATlZGqO3kcMe4D6TzYQ3aUona
-         IGRbo5nUH+AcHh/mFVQwVFvuRwlrFhtjZ+cM++wusnJPYffClZCipwBTyCEO9PYFk2NS
-         9xLmT+N+gRV1QI5YIzUaktdtttLfyTcCMpY7Djz13fIwQZqCaQXdnWbZ4iG71xPux1OQ
-         YInQ==
-X-Gm-Message-State: AFuF++luTAzSQFh2Ba6ypNERRnDxjPEaOYo+3Zyse0LomHNafn3xj+Xi
-	0U+BzJfHhwadAPrO2upC+iOYW0U6Rt6IvLXDLoE8JHkT5oxj3T2dIhw6a8J3+RjN
-X-Gm-Gg: AYBFou3/eqbxGxAv/wocF+bX+prTpo/7fQR6xJsWAqjXY9y4Ntb45xnTnQX/z7s8ECU
-	38T68ZnSyP8vobWbpsrPuvRhq6rv0RJuF4n5n8DnKnG28NC0kxukOvWeouDC/Q/uzQcIC9apBpp
-	/VuyfICuJsU2Kuv02l1Ex0TM63FUZfRGXzbMztbWzcqOP4aU043V/IM4UUzVzakOQ5SnWGrp6eH
-	6EUtAIEqN3c2mPSwpuj/SdiJOk5OeOcCa+p2DVqHoAr0R2jiG7Q2VkmVbCKN10TB0M8BBhPmJBb
-	12wQLrzTEM8Zn9PprjGJQ6J8WS5n30Lot+SEiGFWMCThhOGEk3OqHdb8/HnkJAc3xGj1gyS1pXY
-	hQ9VPw3vwPywfNil5mRxJGmOLJ8d8xLzyIKssjoot5mXycyGj6ZHNPoYhpXyvlwhL2YwCAwL4KO
-	3NTK2r+VaCezMDziy1NXzEY1HJT+E1cpNdZTdq+xbcG9WC4vEZWGHOrx716uQIGPk59vOBA/o/S
-	WNx55n/iVm/UhCnFt7pUVbLkqyPSn9wZyQG0g+nfZWjkRw4TgylW2fZHoiaoCYkOc8McSFxOBh/
-	3hL35mDomUTnbeIIRePO7dzJSX6B2rZX0Wv++blhKLiw
-X-Received: by 2002:a05:600c:4e4a:b0:49c:edd8:ba35 with SMTP id 5b1f17b1804b1-49e7a65c908mr20615745e9.6.1789378073338;
-        Mon, 14 Sep 2026 02:27:53 -0700 (PDT)
-Received: from localhost.localdomain (2a02-1812-512-2c00-7d69-2c97-3436-ad5f.ip6.access.telenet.be. [2a02:1812:512:2c00:7d69:2c97:3436:ad5f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e71adc2ecsm175521085e9.4.2026.09.14.02.27.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2026 02:27:52 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: tfggeelen@gmail.com,
-	Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-construct: new recipe version 2.10.70
-Date: Mon, 14 Sep 2026 11:27:45 +0200
-Message-ID: <20260914092745.20027-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.47.3
+        d=1e100.net; s=20251104; t=1789385373; x=1789990173;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=JEESaj6cjdW+yQrkUPlbqzKG3VQGnMFRcsuAs/OBWaA=;
+        b=qVwFrMhpl+lkiD/SWiPiHdmPOnh678E3iD1xJ4Y2L/q3yzb+c+d8A5uBEPrfivYkyS
+         vqqfWb0BGuL8/Dma4rdTQeZyNtpPX1Mqbrqv+w+lFk+H3u27mh6koi35gmtPrOALrzsY
+         Fitho081ChyfThAPCL9+0THgHHOhvpKgwrpLL9SMe+uVloDMXtIg6vkcDZUBQGmLsc3g
+         QciKrKvJwZnkezgkrR607Scymn5k+RsaGVn9ZNJ9fkX58sIFvJE9tZRGv6GW0pktdfqv
+         Ts83o9ASRRyhUgOHbP7bem9YXMsmPhxwiBYUj2+8AxBp+008IRLRvhBzOAUmOhAkviGG
+         0MXQ==
+X-Forwarded-Encrypted: i=1; AKwUvByD807t11P4ADJcfoaTApC9HxgbQauNCItM3srkG3YYHaNv+CeIZi6rASvhyRQZh/LVZ1SPJBAMENwTFp4mX4qK0wc=@lists.openembedded.org
+X-Gm-Message-State: AFuF++lCY0zJJw1xIEFOjYhQl8vQ5yYArKG6We00zJjx6+g/juMLFMej
+	y6c3dM1ZzWqJ+BdorRXjXFdMUO6NxFbXLXEOz4DOZcy71Cqu6Eu+5IjK+yjWr1VmXfZNxBCG8IT
+	YKL4czYsqzbFAKNQ5SM0iwLjn2JXmp9U=
+X-Gm-Gg: AYBFou3pI8jH8wwiYQ6KfWc7WaY2ZTlSJ3dIY0+tuTXX5tj1eM8z8SUYYEcvpJoHUrK
+	zl2mOOi7LO2eAgKpxqKvMSV0IWt9i7T9dq8G4Bzz2l8enDHVmd3N3uxYupR8oB78377x/iVpIFF
+	y2umXj1pfYqSKMD4tgAqsc61X1pVplHkUQQ1ub+ivIxgpTPnpkn2Yi114t4oln9VQdHRPO8UU0X
+	iMqlrCQKlcZXk3fPHohI2nOejJabydJyK1i4u5U0T8o6WHRubWEJ1hRTaLyhXUmP30PUJnnps1/
+	uy01t4WV0RqpCXcUV58lZalEel5D8WuCWq3s3nzLFzUbcWPW1/UhXAcnUPdyEvolYKZGh3F3RcH
+	oJkHmCt256i57zsz8jAsCnVfa0erVjXGyyrQeTxTk/5u4b3N7ZzETLnxn39vpHJZSYLnZh08LWL
+	+m0vUSiXwhiTrrg05nUU2SiirhH/iFfx4caX4y33v4ui+J7SjbH2oSbmSGntNbuQJu8drvkYXLm
+	6PSlava0yVr+mfMAWc7qUszesYhG8UUkLhC
+X-Received: by 2002:a05:690e:4008:b0:66e:5884:a0c with SMTP id
+ 956f58d0204a3-6714dff4181mr377273d50.34.1789385373127; Mon, 14 Sep 2026
+ 04:29:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260911-libgpiod-v1-6-5-handle-disappearing-chips-v3-1-1e9e565dbab6@gmail.com>
+ <CAMKF1soH4p+tYg5bfWQBmUe-fXS-JPxO09L_H94bkwannL=Thg@mail.gmail.com> <CAMRc=Mfz+iDE6AUuw1DgZMbmx09Ws-ENxAKYWZ_85ScfN0Rvgg@mail.gmail.com>
+In-Reply-To: <CAMRc=Mfz+iDE6AUuw1DgZMbmx09Ws-ENxAKYWZ_85ScfN0Rvgg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 14 Sep 2026 13:29:21 +0200
+X-Gm-Features: AcwNN1WmnYsXA2KLIjXuDxrq0fGVGNn8eDIaIjDZgx9NHMlyPdSC7FDa5cXWLaw
+Message-ID: <CAMKF1srxk2SJjyggUFdomGL0PsFG+odpPUW=qVdQUNEwskfmVw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3] libgpiod: handle disappearing chips
+ during iteration for v1.6.x
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: "Khem Raj via lists.openembedded.org" <raj.khem=gmail.com@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Potin Lai <potin.lai.pt@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000881a3a065b6fbfa1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 09:28:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130020
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 11:29:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130021
 
-Recipe taken from meta-homeassistant of Tom Geelen.
+--000000000000881a3a065b6fbfa1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Added ptests.  But removed the tests with binary data (e.g. .so file).
-Those tests gave to much issues with QA rules of Yocto/Openembedded.
+These should be corrected to Backport since we do not test meta-gnome on
+yocto AB this does not get caught. Care to send a patch ?
 
-Moved from pypi to github to have all test code.
+On Mon, Sep 14, 2026, 9:38=E2=80=AFAM Bartosz Golaszewski <brgl@kernel.org>=
+ wrote:
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
----
- .../ptest-packagelists-meta-python.inc        |  1 +
- ...ile-to-enable-pytest-8.x.y-to-find-t.patch | 25 ++++++++++++
- ...002-pytest.ini-disable-the-benchmark.patch | 26 ++++++++++++
- .../python3-construct_2.10.70.bb              | 40 +++++++++++++++++++
- 4 files changed, 92 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python3-construct/python3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
- create mode 100644 meta-python/recipes-devtools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchmark.patch
- create mode 100644 meta-python/recipes-devtools/python3-construct/python3-construct_2.10.70.bb
+> On Sat, 12 Sep 2026 07:46:52 +0200, "Khem Raj via
+> lists.openembedded.org" <raj.khem=3Dgmail.com@lists.openembedded.org>
+> said:
+> > On Fri, Sep 11, 2026 at 2:17=E2=80=AFAM Potin Lai <potin.lai.pt@gmail.c=
+om>
+> wrote:
+> >
+> >> +
+> >> +Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+> >> +Link:
+> >>
+> https://patch.msgid.link/20260908-gpiofind-error-enodev-v1-1-c7756aab9568=
+@gmail.com
+> >> +Signed-off-by: Bartosz Golaszewski <
+> bartosz.golaszewski@oss.qualcomm.com>
+> >> +Upstream-Status: Accepted [
+> >>
+> https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=3D40=
+f18f16f573e6bf091d83cb1677e7386d0b8495
+> >> ]
+> >>
+> >
+> > Accepted is not a valid status, for details see -
+> >
+> https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html#p=
+atch-upstream-status
+> >
+>
+> Sorry my bad. I really thought this was a status I've seen before. In fac=
+t:
+>
+> $ git log | grep "Upstream-Status: Accepted"
+>     meta-gnome.qa-patches-Upstream-Status: Accepted
+> [
+> https://gitlab.gnome.org/GNOME/gnome-tweaks/-/commit/dc9701e18775c01d0b69=
+fabaa350147f70096da8
+> ]'
+>
+> (/OE/layers/meta-openembedded/meta-gnome/recipes-gnome/gnome-tweaks/gnome=
+-tweaks/0002-meson-fix-invalid-positional-argument.patch)
+>     Upstream-Status: Accepted
+>     Upstream-Status: Accepted
+> [
+> https://github.com/libesmtp/libESMTP/commit/1c304e7886a08fb56485e41614ff3=
+f8685afb59d
+> ]
+>           Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/pull/1587/commits/e6a0982f7cd9282052b6e348=
+5a458d60629ffa0b
+> ]
+>           Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/pull/1581/commits/6628a69c036df2aa036290e6=
+cd71767c159c79ed
+> ]
+>               Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/commit/f9308839198aca5e68a65194f151a1de923=
+98f54
+> ]
+>           Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/pull/1523/commits/22ea582c6b74ada30bec3a6b=
+15de3c3e52f2b4da
+> ]
+>           Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/commit/783b3a6ff15ed6f82a8f8e6c8a6f3b84a9b=
+04d4b
+> ]
+>           Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/pull/1536/commits/06d2db6e5fd2fcca9c060e95=
+fc97f8a5b5d4c22d
+> ]
+>       Upstream-Status: Accepted
+> [
+> https://github.com/Exiv2/exiv2/commit/0230620e6ea5e2da0911318e07ce6e66d1e=
+bdf22
+> ]
+>
+> There seem to be some in the git log so maybe used to be a valid one?
+>
+> Anyway, please keep my R-b after the change.
+>
+> Bart
+>
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index e4eae4ef43..9b3a535e55 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-cachetools \
-     python3-cbor2 \
-     python3-configobj \
-+    python3-construct \
-     python3-pyconnman \
-     python3-click \
-     python3-dasbus \
-diff --git a/meta-python/recipes-devtools/python3-construct/python3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch b/meta-python/recipes-devtools/python3-construct/python3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
-new file mode 100644
-index 0000000000..3e9e73bd45
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-construct/python3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
-@@ -0,0 +1,25 @@
-+From b8d0ba87f629cc6065a2d06cedc5e850407c45de Mon Sep 17 00:00:00 2001
-+From: Franz Haas <franz.dominik.haas@gmail.com>
-+Date: Tue, 17 Sep 2024 11:23:28 +0200
-+Subject: [PATCH 1/1] - add pytest.ini file to enable pytest 8.x.y to find the
-+ tests
-+
-+Upstream-Status: Backport [https://github.com/construct/construct/commit/b8d0ba87f629cc6065a2d06cedc5e850407c45de]
-+
-+---
-+ pytest.ini | 3 +++
-+ 1 file changed, 3 insertions(+)
-+ create mode 100644 pytest.ini
-+
-+diff --git a/pytest.ini b/pytest.ini
-+new file mode 100644
-+index 0000000..f5a52af
-+--- /dev/null
-++++ b/pytest.ini
-+@@ -0,0 +1,3 @@
-++[pytest]
-++pythonpath = .
-++
-+-- 
-+2.47.3
-+
-diff --git a/meta-python/recipes-devtools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchmark.patch b/meta-python/recipes-devtools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchmark.patch
-new file mode 100644
-index 0000000000..bc89546c82
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchmark.patch
-@@ -0,0 +1,26 @@
-+From 7acb7aa51db762a723d85b81262ca14614dbeac0 Mon Sep 17 00:00:00 2001
-+From: Jan Vermaete <jan.vermaete@gmail.com>
-+Date: Mon, 14 Sep 2026 10:24:51 +0200
-+Subject: [PATCH 2/2] pytest.ini: disable the benchmark
-+
-+Benchmark is also disabled in the github workflow of the project
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-+---
-+ pytest.ini | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/pytest.ini b/pytest.ini
-+index f5a52af..4b1b4b6 100644
-+--- a/pytest.ini
-++++ b/pytest.ini
-+@@ -1,3 +1,3 @@
-+ [pytest]
-+ pythonpath = .
-+-
-++addopts = --benchmark-disable
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/python3-construct/python3-construct_2.10.70.bb b/meta-python/recipes-devtools/python3-construct/python3-construct_2.10.70.bb
-new file mode 100644
-index 0000000000..681c43122a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-construct/python3-construct_2.10.70.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "A powerful declarative symmetric parser/builder for binary data"
-+HOMEPAGE = "http://construct.readthedocs.org"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=202b39559c1c79fe4715ce81e9e0ac02"
-+RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
-+
-+SRC_URI = "\
-+    git://github.com/construct/construct.git;protocol=https;branch=master \
-+    file://0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch \
-+    file://0002-pytest.ini-disable-the-benchmark.patch \
-+"
-+
-+PV = "1.0+git"
-+SRCREV = "c25a47172d4bde392b7ad188175b07b319d3dea4"
-+
-+inherit setuptools3 ptest-python-pytest
-+
-+PACKAGECONFIG ?= "extras"
-+PACKAGECONFIG[extras] = ",,,python3-arrow python3-cloudpickle python3-cryptography python3-lz4 python3-numpy python3-ruamel-yaml"
-+
-+RDEPENDS:${PN} += "\
-+    python3-compression \
-+    python3-core \
-+    python3-crypt \
-+    python3-cryptography \
-+    python3-debugger \
-+    python3-misc \
-+    python3-pickle \
-+"
-+
-+RDEPENDS:${PN}-ptest += "python3-pytest-benchmark"
-+
-+do_install_ptest:append() {
-+    # *.so files gives issues with QA of Yocto/OpenEmbedded
-+    rm -rf ${D}${PTEST_PATH}/tests/deprecated_gallery
-+    rm -rf ${D}${PTEST_PATH}/tests/gallery
-+
-+    install -d ${D}${PTEST_PATH}
-+    install -m 0644 ${S}/pytest.ini ${D}${PTEST_PATH}
-+}
--- 
-2.47.3
+--000000000000881a3a065b6fbfa1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"auto">These should be corrected to Backport since we do not tes=
+t meta-gnome on yocto AB this does not get caught. Care to send a patch ?</=
+div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Mon, Sep 14, 2026, 9:38=E2=80=AFAM Bartosz Golaszews=
+ki &lt;<a href=3D"mailto:brgl@kernel.org">brgl@kernel.org</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex">On Sat, 12 Sep 202=
+6 07:46:52 +0200, &quot;Khem Raj via<br>
+<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer noreferrer" tar=
+get=3D"_blank">lists.openembedded.org</a>&quot; &lt;raj.khem=3D<a href=3D"m=
+ailto:gmail.com@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer=
+">gmail.com@lists.openembedded.org</a>&gt;<br>
+said:<br>
+&gt; On Fri, Sep 11, 2026 at 2:17=E2=80=AFAM Potin Lai &lt;<a href=3D"mailt=
+o:potin.lai.pt@gmail.com" target=3D"_blank" rel=3D"noreferrer">potin.lai.pt=
+@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt;&gt; +<br>
+&gt;&gt; +Signed-off-by: Potin Lai &lt;<a href=3D"mailto:potin.lai.pt@gmail=
+.com" target=3D"_blank" rel=3D"noreferrer">potin.lai.pt@gmail.com</a>&gt;<b=
+r>
+&gt;&gt; +Link:<br>
+&gt;&gt; <a href=3D"https://patch.msgid.link/20260908-gpiofind-error-enodev=
+-v1-1-c7756aab9568@gmail.com" rel=3D"noreferrer noreferrer" target=3D"_blan=
+k">https://patch.msgid.link/20260908-gpiofind-error-enodev-v1-1-c7756aab956=
+8@gmail.com</a><br>
+&gt;&gt; +Signed-off-by: Bartosz Golaszewski &lt;<a href=3D"mailto:bartosz.=
+golaszewski@oss.qualcomm.com" target=3D"_blank" rel=3D"noreferrer">bartosz.=
+golaszewski@oss.qualcomm.com</a>&gt;<br>
+&gt;&gt; +Upstream-Status: Accepted [<br>
+&gt;&gt; <a href=3D"https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.g=
+it/commit/?id=3D40f18f16f573e6bf091d83cb1677e7386d0b8495" rel=3D"noreferrer=
+ noreferrer" target=3D"_blank">https://git.kernel.org/pub/scm/libs/libgpiod=
+/libgpiod.git/commit/?id=3D40f18f16f573e6bf091d83cb1677e7386d0b8495</a><br>
+&gt;&gt; ]<br>
+&gt;&gt;<br>
+&gt;<br>
+&gt; Accepted is not a valid status, for details see -<br>
+&gt; <a href=3D"https://docs.yoctoproject.org/contributor-guide/recipe-styl=
+e-guide.html#patch-upstream-status" rel=3D"noreferrer noreferrer" target=3D=
+"_blank">https://docs.yoctoproject.org/contributor-guide/recipe-style-guide=
+.html#patch-upstream-status</a><br>
+&gt;<br>
+<br>
+Sorry my bad. I really thought this was a status I&#39;ve seen before. In f=
+act:<br>
+<br>
+$ git log | grep &quot;Upstream-Status: Accepted&quot;<br>
+=C2=A0 =C2=A0 meta-gnome.qa-patches-Upstream-Status: Accepted<br>
+[<a href=3D"https://gitlab.gnome.org/GNOME/gnome-tweaks/-/commit/dc9701e187=
+75c01d0b69fabaa350147f70096da8" rel=3D"noreferrer noreferrer" target=3D"_bl=
+ank">https://gitlab.gnome.org/GNOME/gnome-tweaks/-/commit/dc9701e18775c01d0=
+b69fabaa350147f70096da8</a>]&#39;<br>
+(/OE/layers/meta-openembedded/meta-gnome/recipes-gnome/gnome-tweaks/gnome-t=
+weaks/0002-meson-fix-invalid-positional-argument.patch)<br>
+=C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+=C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/libesmtp/libESMTP/commit/1c304e7886a08fb5648=
+5e41614ff3f8685afb59d" rel=3D"noreferrer noreferrer" target=3D"_blank">http=
+s://github.com/libesmtp/libESMTP/commit/1c304e7886a08fb56485e41614ff3f8685a=
+fb59d</a>]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/pull/1587/commits/e6a0982f7cd928=
+2052b6e3485a458d60629ffa0b" rel=3D"noreferrer noreferrer" target=3D"_blank"=
+>https://github.com/Exiv2/exiv2/pull/1587/commits/e6a0982f7cd9282052b6e3485=
+a458d60629ffa0b</a>]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/pull/1581/commits/6628a69c036df2=
+aa036290e6cd71767c159c79ed" rel=3D"noreferrer noreferrer" target=3D"_blank"=
+>https://github.com/Exiv2/exiv2/pull/1581/commits/6628a69c036df2aa036290e6c=
+d71767c159c79ed</a>]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<=
+br>
+[<a href=3D"https://github.com/Exiv2/exiv2/commit/f9308839198aca5e68a65194f=
+151a1de92398f54" rel=3D"noreferrer noreferrer" target=3D"_blank">https://gi=
+thub.com/Exiv2/exiv2/commit/f9308839198aca5e68a65194f151a1de92398f54</a>]<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/pull/1523/commits/22ea582c6b74ad=
+a30bec3a6b15de3c3e52f2b4da" rel=3D"noreferrer noreferrer" target=3D"_blank"=
+>https://github.com/Exiv2/exiv2/pull/1523/commits/22ea582c6b74ada30bec3a6b1=
+5de3c3e52f2b4da</a>]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/commit/783b3a6ff15ed6f82a8f8e6c8=
+a6f3b84a9b04d4b" rel=3D"noreferrer noreferrer" target=3D"_blank">https://gi=
+thub.com/Exiv2/exiv2/commit/783b3a6ff15ed6f82a8f8e6c8a6f3b84a9b04d4b</a>]<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/pull/1536/commits/06d2db6e5fd2fc=
+ca9c060e95fc97f8a5b5d4c22d" rel=3D"noreferrer noreferrer" target=3D"_blank"=
+>https://github.com/Exiv2/exiv2/pull/1536/commits/06d2db6e5fd2fcca9c060e95f=
+c97f8a5b5d4c22d</a>]<br>
+=C2=A0 =C2=A0 =C2=A0 Upstream-Status: Accepted<br>
+[<a href=3D"https://github.com/Exiv2/exiv2/commit/0230620e6ea5e2da0911318e0=
+7ce6e66d1ebdf22" rel=3D"noreferrer noreferrer" target=3D"_blank">https://gi=
+thub.com/Exiv2/exiv2/commit/0230620e6ea5e2da0911318e07ce6e66d1ebdf22</a>]<b=
+r>
+<br>
+There seem to be some in the git log so maybe used to be a valid one?<br>
+<br>
+Anyway, please keep my R-b after the change.<br>
+<br>
+Bart<br>
+</blockquote></div>
+
+--000000000000881a3a065b6fbfa1--
 
