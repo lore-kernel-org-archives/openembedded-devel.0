@@ -1,141 +1,78 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4230AC88E75
-	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 06:49:37 +0000 (UTC)
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17532.1789454976615366293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 063E8C88E53
+	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 07:44:28 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18074.1789458262036944242
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2026 23:49:36 -0700
+ Tue, 15 Sep 2026 00:44:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=pcc9y7OO;
- spf=pass (domain: konsulko.com, ip: 74.125.225.76, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485984ebf5cso2230734f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 23:49:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1789454975; x=1790059775; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dByH1CeVOY+I5K0BYUCBAal3WscH75tGAJxjZdXV+uI=;
-        b=pcc9y7OOyRaImChERapbef2Pgpr/8gntVEejLKm8n9jpJVZ4K+ajrvG9cgDMAipgCz
-         BoCkNxXPsOY9pcNW5Soazh6PHdFFkd7sKYQ3uyRy5hdEGJE0Jib+JHS73a7xpTLqamAf
-         7T5l0ypgJu0ukrj2fnEwKk8p9o0BCcseFuJ3k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789454975; x=1790059775;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dByH1CeVOY+I5K0BYUCBAal3WscH75tGAJxjZdXV+uI=;
-        b=vnwWSILtAy0wfIvJJunus/+w7XeCuK8cK+zcvBgSL351rymZB2FTqNbryvwGA6rPJz
-         0pFbYu5m6ev677VpQqiKTW1pNhX43qil/Yg8RrTL6mKoBRNGT0OCfqQ5k2j6CEJ/VwaJ
-         O0l9OM1ex4knl/k91YcUS3ub928y2ZzlblSYFjpzinMRTOSBv34TXRtUQ53BdZdI8BIF
-         j/bjO15Uh9ubFV03m6dRd8ZsEq7ZdqJmaWQywtpYWWqLR/05g59iETY9NbXmmLuY0fxw
-         oaQjYtr08y1E3tS3GD7VgUGUvsLGHYNfPTFFA6qx4BUrq2nkDGV2jI6G31mvaKIA2Ho+
-         95oQ==
-X-Gm-Message-State: AFuF++mPlTJ6EGJgy9KtuJ7u4FydaWRfP42U0+6eyOoID8iABUuIjed/
-	ArTo9HfuWnEH3Pb0ppeZWdBF6F+yQUYpIbmX/SNkIiAuhG+Px+jNQ/X0lDQ2413rYCfoHPv6dSb
-	80W0w
-X-Gm-Gg: AYBFou2FlloSTuAkTmsdzuSEpunQXB+Eukdj5Bluz15glZtwKqjg5MW5XLn+UIib4v7
-	j1budKMEtyY7ls27sJ63bBC650wd1vW+CHQ6RwJbYmkN0aqVHbkC3RMGr1y4JqSIeiLWM46pH4A
-	rBde63gczwMJK0ASIBtflZi702khUiiFp4ZFrVpsvS0Ek9hEEXCoBrmowTxayVEBfEpXTVC+DBK
-	yapHtjNPh0YdwFaHuQGqXQsv0kWiOs3JOQIEY8SumlBh9NBWB1bJUhOfdmdbUU4+7DC/ELSP2n0
-	UEDsmyfSpPKQJEyhi3apZKZHN3kmsOXGGJeA0Iij8OngQnufMnjqU6B9tF6LJt/gSryRmzO08el
-	OsG3Ncfqh9NsBwRlTO27HdAb9UPCKexdwg1aOJ/apewlFBYa7Jsogda8jOaGgU8N1D4GnmJmAZu
-	Q9rfs3EbdIElB2oxJ2Tv9UiqBk/CWqKxVQAHwx9BEfI54dpw2fztzGkzHzSzY/94r6ZyUKPr0G+
-	+zEEicjmbEPMD1ppofxJ8fS1eLRHfKrHZp+ML4Q7kd/VYunw2IrG19y1/G3lJ/XOlBkwNGDj1Qs
-	Zh2qW+5jvhFTiY2eE5DR1/IN
-X-Received: by 2002:a05:6000:1ac7:b0:487:6d9:dbe5 with SMTP id ffacd0b85a97d-48706d9dc9fmr2132584f8f.9.1789454974360;
-        Mon, 14 Sep 2026 23:49:34 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb32d3c7sm30002992f8f.10.2026.09.14.23.49.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2026 23:49:33 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=H4gpAlZS;
+ spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout10.t-online.de (Postfix) with SMTP id 04CFF37C28
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 09:44:20 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.162.202]) by fwd81.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1x6Npq-00ds5p0; Tue, 15 Sep 2026 09:44:10 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-multimedia][PATCH] rygel: Upgrade 45.2 -> 46.0
-Date: Tue, 15 Sep 2026 09:49:31 +0300
-Message-ID: <20260915064931.1383007-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+Subject: [meta-gnome][PATCH 10/31] gnome-console: upgrade 50.0 -> 51.0
+Date: Tue, 15 Sep 2026 09:43:26 +0200
+Message-ID: <20260915074347.6003-10-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260915074347.6003-1-f_l_k@t-online.de>
+References: <20260915074347.6003-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1789458250-A27FB9B9-8EF0D462/0/0 CLEAN NORMAL
+X-TOI-MSGID: 662bd381-9800-4705-93df-5aa628cacf6e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1789458259; i=f_l_k@t-online.de;
+	bh=ktWSUHAdJIEK4YxcfrmJftp0s6KVr7Cg+92uIO1IOns=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=H4gpAlZSDnD7dwfdDOda1+khghXTL80A9u4aLyddey71DtbkUg6EbiODrh9EDh7jk
+	 cQFCCtESp9yS9Hijaz3NShofXtEtus9861111fnlx+b7mtYkPGCGzGaUkzaoAreM6o
+	 fmj/rvUonj5jRgFBX9IKynreHd0snjb+ljSkAiy8vFbULLt3tGXHxn+fTU8g7Sbvl5
+	 sDlKKmC0cafxy3n5LMlWuQzVkNQpuv/APW+maztYgFdTkjM16m37RMFZtkQ33pPDhW
+	 aR15lNe6gVRc1IroVahGETwaejdZgY9kJhdAZ9E6Tq6C7phpWWEfUyDv1lW/y3TeqW
+	 9/0/qTOgL1CzA==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 06:49:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130035
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 07:44:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130036
 
-Upgrade to release 46.0:
-
-- Translation updates
-- Add missing "dlnaprofile" description for GstLaunch
-- Fix rendering issues for web docs
-- Remove RUIH implementation
-- Allow proper boolean settings through environment variables
-- Align list definition through environment with config file
-- Remove BasicManagement and EnergyManagement
-
-Remove RUIH from PACKAGECONFIG. Add Python packages PyYAML and
-Docutils to the dependencies.
-
-Change HOMEPAGE to https://rygel-project.org which redirects to
-the Rygel 46.0 documentation.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+AI-Generated: Uses Claude Code (Claude Opus 5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../rygel/{rygel_45.2.bb => rygel_46.0.bb}             | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-multimedia/recipes-connectivity/rygel/{rygel_45.2.bb => rygel_46.0.bb} (92%)
+ .../{gnome-console_50.0.bb =3D> gnome-console_51.0.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-console/{gnome-console_50.0.bb =3D=
+> gnome-console_51.0.bb} (85%)
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_45.2.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_46.0.bb
-similarity index 92%
-rename from meta-multimedia/recipes-connectivity/rygel/rygel_45.2.bb
-rename to meta-multimedia/recipes-connectivity/rygel/rygel_46.0.bb
-index 363f71b989..b27b452ed3 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_45.2.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_46.0.bb
-@@ -3,14 +3,15 @@ DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
- allow you to easily share audio, video and pictures to other devices. \
- Additionally, media player software may use Rygel to become a MediaRenderer \
- that may be controlled remotely by a UPnP or DLNA Controller."
--HOMEPAGE = "http://live.gnome.org/Rygel"
-+HOMEPAGE = "https://rygel-project.org"
- 
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 \
-            gstreamer1.0-plugins-base libgee libsoup libmediaart-2.0 \
--           libunistring sqlite3 intltool-native gst-editing-services"
-+           libunistring sqlite3 intltool-native gst-editing-services \
-+           python3-pyyaml-native python3-docutils-native"
- 
- RDEPENDS:${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
- RRECOMMENDS:${PN} = "rygel-plugin-media-export"
-@@ -20,7 +21,7 @@ inherit gnomebase features_check vala gobject-introspection gettext systemd
- # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
- 
--SRC_URI[archive.sha256sum] = "20e57b70b15a865d77dc38f9f786abc52c64b111fe5f938a62c28d712df1331d"
-+SRC_URI[archive.sha256sum] = "b61512c99307e2de7081f96b002427bbf23b25d5b0c3f6ae8d7798caebce4a86"
- 
- GIR_MESON_ENABLE_FLAG = 'enabled'
- GIR_MESON_DISABLE_FLAG = 'disabled'
-@@ -28,11 +29,10 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
- EXTRA_OEMESON = "-Dengines=gstreamer -Dplugins=${@strip_comma('${RYGEL_PLUGINS}')}"
- PACKAGECONFIG:append = "${@bb.utils.contains_any("DISTRO_FEATURES", "opengl vulkan", " gtk4", "", d)}"
- 
--PACKAGECONFIG ?= "external mpris ruih gst-launch media-export"
-+PACKAGECONFIG ?= "external mpris gst-launch media-export"
- 
- PACKAGECONFIG[external] = ""
- PACKAGECONFIG[mpris] = ""
--PACKAGECONFIG[ruih] = ""
- PACKAGECONFIG[media-export] = ""
- PACKAGECONFIG[gst-launch] = ""
- PACKAGECONFIG[localsearch] = ""
--- 
-2.47.3
+diff --git a/meta-gnome/recipes-gnome/gnome-console/gnome-console_50.0.bb=
+ b/meta-gnome/recipes-gnome/gnome-console/gnome-console_51.0.bb
+similarity index 85%
+rename from meta-gnome/recipes-gnome/gnome-console/gnome-console_50.0.bb
+rename to meta-gnome/recipes-gnome/gnome-console/gnome-console_51.0.bb
+index 0ec64f9cc8..d76feff13f 100644
+--- a/meta-gnome/recipes-gnome/gnome-console/gnome-console_50.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-console/gnome-console_51.0.bb
+@@ -18,7 +18,7 @@ DEPENDS =3D " \
+     vte \
+ "
+=20
+-SRC_URI[archive.sha256sum] =3D "e4950207f0547e6a6c0f18eebfcf6e1a10461eab=
+0f2fae0aae512b1044c7ac6e"
++SRC_URI[archive.sha256sum] =3D "f40d13903b1f067f0c02e0812f78df8ec25d8cd1=
+29794e7e46bd56ca0c156f2f"
+=20
+ PACKAGECONFIG ?=3D ""
+ PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
+--=20
+2.55.0
 
 
