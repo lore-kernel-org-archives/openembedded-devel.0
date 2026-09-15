@@ -2,84 +2,176 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26237C982CE
-	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 07:44:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1309C982CF
+	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 07:44:40 +0000 (UTC)
 Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18078.1789458271433288534
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18118.1789458273904928262
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Sep 2026 00:44:31 -0700
+ Tue, 15 Sep 2026 00:44:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=bSW2JByP;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=QbbPEIyN;
  spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
 Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout01.t-online.de (Postfix) with SMTP id A58501C3B7
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 09:44:19 +0200 (CEST)
+	by mailout01.t-online.de (Postfix) with SMTP id 1AC461C42D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 09:44:20 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([84.154.162.202]) by fwd81.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x6Npp-00ds5h0; Tue, 15 Sep 2026 09:44:09 +0200
+	esmtp id 1x6Npq-00ds5u0; Tue, 15 Sep 2026 09:44:10 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 02/31] gnome-remote-desktop: upgrade 50.2 -> 51.0
-Date: Tue, 15 Sep 2026 09:43:18 +0200
-Message-ID: <20260915074347.6003-2-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 15/31] gnome-shell: upgrade 50.4 -> 51.0
+Date: Tue, 15 Sep 2026 09:43:31 +0200
+Message-ID: <20260915074347.6003-15-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260915074347.6003-1-f_l_k@t-online.de>
 References: <20260915074347.6003-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1789458249-C4FF69B9-83766EA2/0/0 CLEAN NORMAL
-X-TOI-MSGID: 323adca8-f3b1-4b7e-8289-cfab8a47e896
+X-TOI-EXPURGATEID: 150726::1789458250-17FFC9B9-84B5DBC3/0/0 CLEAN NORMAL
+X-TOI-MSGID: cf2db11a-712a-4df8-8438-4784fdbe701a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1789458259; i=f_l_k@t-online.de;
-	bh=z/P4GK+UWWP+ldPsEM3WtDrx67CKqSStzTCcrtUSFP4=;
+	s=20260216; t=1789458260; i=f_l_k@t-online.de;
+	bh=4I8xx4vo/l6Q6RmnyCxWQR7+2RrOls/o6J6mRvqbUjc=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=bSW2JByPOrYoF32C8074s1wvogb42X+QCQFEzvwONnHlQBYd1INdg5AqoZcrYB+RR
-	 v3a12gqThtf5J6OTxz8y+I2haQHHcoIKsP/HiYnrUNWjGdK68Ilo9L4W1tKDLgthnN
-	 KeFkziv4EV9H2gQ+OK6mGG0UdRrD7R4g3JHLz/nnnuAbceQvRvNmigCaS0Sq4S/zSE
-	 Ynnf+q6VRz98fwjWgp2oBd7cQ0xSOwSUVwrY0oB9i9552hhqCQRX3Gvq/IOcLYDULH
-	 3LDajScnTtKBM9LpYHfAnsJFz9xb/wLwZ9gH5+SSSQQtLzanL93mcrEFqoCikQ+EZg
-	 jHCEtTf6mVJQQ==
+	b=QbbPEIyNT3H8Ai9m52TC4SkQMb8+r/6LZtTk6+clNmzfvXWHHVYTyMYvtJVoEQ848
+	 BH9v1357wr7d7EJceOE/N/Cd4+HAXKUZxSl8Wzj4PocuqzCL5BWU0pvo+62jqmFPBf
+	 jJkP6d5GaHoxH4VauEV1QNCZB4+WYVf9COvHM49MaXENh9JIDKL9F4u4jk34HvaXYM
+	 S1LHs7+9i+U0NzSqbBVFYvKwREx9Ec/HFyHr4iuMmOP0UwNGKrOZQ8RD1FqamE8cZ6
+	 +6Nz2yDgO+FeUJM4p+AtPuAko/OUYqcalkGL/K0FXb1i6YoER6z1f/NeHiWv1LD1qu
+	 myUlWcHha83sQ==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 07:44:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130050
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 07:44:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130060
+
+The libical 4 fix is part of the release now.
+
+The extensions app was dropped from the module, so its meson option and
+the libadwaita runtime dependency that went with it are gone.
 
 AI-Generated: Uses Claude Code (Claude Opus 5)
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...nome-remote-desktop_50.2.bb =3D> gnome-remote-desktop_51.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remot=
-e-desktop/{gnome-remote-desktop_50.2.bb =3D> gnome-remote-desktop_51.0.bb=
-} (94%)
+ ...ver-Fix-build-failure-with-libical-4.patch | 44 -------------------
+ ...nome-shell_50.4.bb =3D> gnome-shell_51.0.bb} |  7 +--
+ 2 files changed, 1 insertion(+), 50 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002=
+-calendar-server-Fix-build-failure-with-libical-4.patch
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_50.4.bb =3D> gn=
+ome-shell_51.0.bb} (86%)
 
-diff --git a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-=
-remote-desktop/gnome-remote-desktop_50.2.bb b/meta-gnome/dynamic-layers/m=
-eta-security/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_51.0=
-.bb
-similarity index 94%
-rename from meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-r=
-emote-desktop/gnome-remote-desktop_50.2.bb
-rename to meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-rem=
-ote-desktop/gnome-remote-desktop_51.0.bb
-index 51076d004c..cf6132fa97 100644
---- a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-=
-desktop/gnome-remote-desktop_50.2.bb
-+++ b/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-=
-desktop/gnome-remote-desktop_51.0.bb
-@@ -8,7 +8,7 @@ inherit gnomebase pkgconfig gettext gsettings features_ch=
-eck useradd
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calend=
+ar-server-Fix-build-failure-with-libical-4.patch b/meta-gnome/recipes-gno=
+me/gnome-shell/gnome-shell/0002-calendar-server-Fix-build-failure-with-li=
+bical-4.patch
+deleted file mode 100644
+index d64cf38ccc..0000000000
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calendar-serv=
+er-Fix-build-failure-with-libical-4.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From 91eaa9221b45b506d7a5d84a9ec8c204b5c8c34f Mon Sep 17 00:00:00 2001
+-From: Xi Ruoyao <xry111@xry111.site>
+-Date: Fri, 8 May 2026 13:13:37 +0800
+-Subject: [PATCH] calendar-server: Fix build failure with libical 4
+-
+-Fix the following build error with libical 4 due to function signature c=
+hanges:
+-
+-    error: passing argument 4 of 'get_time_from_property' from incompati=
+ble pointer type [-Wincompatible-pointer-types]
+-    note: expected 'ICalTime * (*)(ICalProperty *)' but argument is of t=
+ype 'ICalTime * (*)(const ICalProperty *)'
+-
+-Link: https://github.com/libical/libical/blob/4.0/docs/MigrationGuide_to=
+_4.md
+-Part-of: <https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/42=
+15>
+-
+-Only the gnome-shell-calendar-server.c hunk of the upstream commit is ta=
+ken;
+-src/calendar-server/reminder-watcher.c does not exist in the 50.x series=
+.
+-
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-shell/-/=
+commit/b34766f3992c7616b7816a47249fb463c053e5fa]
+----
+- src/calendar-server/gnome-shell-calendar-server.c | 8 +++++++-
+- 1 file changed, 7 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/calendar-server/gnome-shell-calendar-server.c b/src/cal=
+endar-server/gnome-shell-calendar-server.c
+-index 0b2f88eb7..622c16181 100644
+---- a/src/calendar-server/gnome-shell-calendar-server.c
+-+++ b/src/calendar-server/gnome-shell-calendar-server.c
+-@@ -112,11 +112,17 @@ typedef struct
+-   time_t  end_time;
+- } CalendarAppointment;
+-=20
+-+#if ICAL_CHECK_VERSION(4, 0, 0)
+-+typedef ICalTime * (* GetICalPropFunc) (const ICalProperty *prop);
+-+#else
+-+typedef ICalTime * (* GetICalPropFunc) (ICalProperty *prop);
+-+#endif
+-+
+- static gboolean
+- get_time_from_property (ECalClient            *cal,
+-                         ICalComponent         *icomp,
+-                         ICalPropertyKind       prop_kind,
+--                        ICalTime * (* get_prop_func) (ICalProperty *pro=
+p),
+-+                        GetICalPropFunc        get_prop_func,
+-                         ICalTimezone          *default_zone,
+-                         ICalTime              **out_itt,
+-                         ICalTimezone          **out_timezone)
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb
+similarity index 86%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb
+index f39d72532e..549a3d5971 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb
+@@ -31,8 +31,7 @@ GIR_MESON_OPTION =3D ""
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
 =20
- REQUIRED_DISTRO_FEATURES =3D "opengl polkit"
+ SRC_URI +=3D "file://0001-shell-app-usage.c-only-include-x11-headers-if-=
+HAVE_X.patch"
+-SRC_URI +=3D "file://0002-calendar-server-Fix-build-failure-with-libical=
+-4.patch"
+-SRC_URI[archive.sha256sum] =3D "c531939539db316a41aef23670370abd1330d325=
+4f84bcb0f9f4dae5d6e362cf"
++SRC_URI[archive.sha256sum] =3D "2179bab13af353427065096af8bf3d30da7b86e0=
+c516e5ba86a14998af9575f6"
 =20
--SRC_URI[archive.sha256sum] =3D "31df628f4113573f136ffc8dc001763aed633cd8=
-5bed21e58bc61f8a17df091f"
-+SRC_URI[archive.sha256sum] =3D "c7954b34da5766288ea19b56026421c9c1fe2c23=
-ef379e57ec209dc0cf13df2b"
+ PACKAGECONFIG ??=3D " \
+     camera-monitor \
+@@ -44,7 +43,6 @@ PACKAGECONFIG ??=3D " \
+ "
+ PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
+ PACKAGECONFIG[camera-monitor] =3D "-Dcamera_monitor=3Dtrue, -Dcamera_mon=
+itor=3Dfalse, pipewire"
+-PACKAGECONFIG[extensions-app] =3D "-Dextensions_app=3Dtrue, -Dextensions=
+_app=3Dfalse"
+ PACKAGECONFIG[extensions-tool] =3D "-Dextensions_tool=3Dtrue, -Dextensio=
+ns_tool=3Dfalse, gnome-autoar json-glib libsoup-3.0"
+ PACKAGECONFIG[nm] =3D "-Dnetworkmanager=3Dtrue, -Dnetworkmanager=3Dfalse=
+, networkmanager libsecret, networkmanager"
+ PACKAGECONFIG[portal-helper] =3D "-Dportal_helper=3Dtrue, -Dportal_helpe=
+r=3Dfalse"
+@@ -98,9 +96,6 @@ RDEPENDS:${PN} +=3D " \
+ 	librsvg-gtk \
+ "
 =20
- DEPENDS =3D " \
-     asciidoc-native \
+-# The extensions app is a GJS application and pulls libadwaita at runtim=
+e only.
+-RDEPENDS:${PN} +=3D "${@bb.utils.contains('PACKAGECONFIG', 'extensions-a=
+pp', 'libadwaita', '', d)}"
+-
+ PACKAGES =3D+ "${PN}-tools ${PN}-gsettings"
+ FILES:${PN}-tools =3D "${bindir}/*-tool"
+ RDEPENDS:${PN}-tools =3D "python3-core"
 --=20
 2.55.0
 
