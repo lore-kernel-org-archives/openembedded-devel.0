@@ -2,134 +2,112 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61A84C88E72
-	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 01:54:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62F63C88E75
+	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 01:55:04 +0000 (UTC)
 Received: from mail-oa2-f12.google.com (mail-oa2-f12.google.com [74.125.231.76])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13982.1789437259319942580
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14104.1789437294279928474
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2026 18:54:19 -0700
+ Mon, 14 Sep 2026 18:54:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=r+iDLI3R;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=mhgmFotF;
  spf=pass (domain: gmail.com, ip: 74.125.231.76, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa2-f12.google.com with SMTP id 586e51a60fabf-466ccde2a99so1914234fac.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 18:54:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789437258; cv=none;
+Received: by mail-oa2-f12.google.com with SMTP id 586e51a60fabf-466ccdd76a9so2218065fac.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 18:54:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789437293; cv=none;
         d=google.com; s=arc-20260327;
-        b=pb/+lWXP0lMRsoaxWr8aVmHg4M+zAOlSmXuOZKqOKmiXbHpjKImtO219MNMRYSaU2v
-         3pICs7xiUerGOkjBXDSkpiCzv3zaTux1Obw7nsg+XpLHuAcdXUVTKPNWQOuXa0dAHGe/
-         a0gfFelbQ0PK6MuaZFAlvbFJSGuzOYsMz2eIiE4y75bipkYryd19u5lzHj5uSsslMces
-         +rTtXZb/GU8ys7ss+ylDh/jDOETPOw9XgpmVPPgFgtaDZRMT1zB6vXeui8nzWod7ZVOo
-         dxK2yo11E+8Aw/rMpoqlsUMt1sq3gjI6dm3CXQRVc+ry4wtfmDeEt0ezy9WY7K6m7jWM
-         uE5A==
+        b=P+KYhXioUu141Si4ZXYcBjWTU0bBvZD1nFS8PaQGiw+nDQ1zwAwMlxcSV2w7Tv5Mvk
+         K6BQjCVIKzFhv+DfrB44UojAbNHyYEcvHkmNgatWTJzrjBTE9/gKXb7t9SGFsVN2J1GH
+         9hcqfs9CHRIoh6cyj1TOuWKGME5rzFhf5Eiv31VbmfvuZqetU5JdjNqL10/HoaL5sCO/
+         +rtSlmMbJ+VtGfJukcq4ZLU0CDoFmm4QlBETRO4slzIclOX+kTpcj/7shILqrIxSZqe8
+         sN8GDcW92M1y0VAuI9UmdUbNsu+M6QKvDocXEeiU7XqsebiT9Q4mCh3SpUNBwDFmeTfe
+         fbBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=N7qTJGjfgnWFS+GWaMuOw9Dnq6lADmDRY8jCksHhDr8=;
-        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
-        b=cBEbNYm4aYMDvms5wT/YOYtZerYpiycM9cXehxggXOaZPXYuKY3uAc9suxLSwLJLpb
-         /HCnzKgIUYvfqwER5rXPHqJR50rKaMMtXuWXtRdJDUKdmB6PlX6Sy44NKWZ8trnmfkfx
-         6gLnO86z6T6tVG7JJTEBI24syTZFqTeysXzFHSy2MfeNJBWADQu8cpgItQ8p2jSzCx4w
-         x8u+G4Fpt1KbcmHsCradtTIRaH6xd0rvwnpuWX5LpsffOJ1bE8ZpqT4g5oZFalUwBpgq
-         iKz8C3yoRLdxpNXJbJjCRQs0fQeazfTJ3iSUoLViN2oDxsLmkzzG1T9zznMH8S2/E6Wu
-         mCEg==;
+        bh=zSIYXYquwTozzTDUmRc0pTgx2bdLsg9RrzIywnOiz5E=;
+        fh=cAJEf28kSw1dr5OZCJIkyh9mT48QJVsDxho0UgnDHyE=;
+        b=jchMah43pNIH4Lv94/0vF5sjJEYXyTqF12OkgcoBEqNH+RyAGm3B+NiZpnuvYix64R
+         qaFcd0Qu+KHgsRUEjlYvyLz7Us5fmOIgMJRC2+sGVNCNo+9wylpS5Tc8HpZQTGuw5oON
+         kVQMuGDmxiqT3tAM1+5sMKpwHIWpNXVKbS/M5DOhq9PUwJv/YL5HZMJLAmfNAHUQe2+j
+         p/c5pdc7wuAydH2yc6FkSkk4Kg8A0hi8ZxA8dIY5zZg4PKs/ElrJUveJHgQJKdPc20fm
+         YNCJTc8aPX9Qc0HawT/mfDdQx34/PYgKu/y8rwo3LlNH+oYuFv2SCLk67szXJBYR1oaC
+         B8/w==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789437258; x=1790042058; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1789437293; x=1790042093; darn=lists.openembedded.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=N7qTJGjfgnWFS+GWaMuOw9Dnq6lADmDRY8jCksHhDr8=;
-        b=r+iDLI3RdeK7jrN2bLVnNQd1zAntbL5vBdXoLD3mRXBfE1W0JvNmk45Q+1NllrdrYl
-         OzYOsGdCsNyUasdExtk393kQeYn4KLf2iLj6yQj2w4356aWEji3f1AiVhdS83/Ig+O03
-         xRXnm4RzSsYcF2Aqs/EYr/MKRxdAQmB99uqFjMTrFCGcFrDaSfScS4IriznjxLj3isK5
-         NTpCTpJ4E0bd+NfXF6yul7sr/pQRSCBAFtVhRN0wGnTk2ykmpLYVxjUqy+nnx+VYu3B4
-         FJGJEZz1GqvrAEmx+EvM5Dz1pup36WZba1hB3caUvHc8lsyotdVlmzSlvKQgudxQQwEK
-         3Lvg==
+        bh=zSIYXYquwTozzTDUmRc0pTgx2bdLsg9RrzIywnOiz5E=;
+        b=mhgmFotFzDkUmNfZ3kbNDXex0+bJe7v2uFpZjUJvaWDdDHadOcs+wpJLLd00DDVKkM
+         HeGknd75aYmN5T104xDAEZe9TMq2fO8m+tTYGdo9jwvx207kjaB7ZDjCyi3XHK8mzARE
+         UxLt1B6k9XXZIjbcWdqsfmKtvB3ybHNw9w0243u6/LLD7u/dKOfaWTfr9mnMKJEZtuW6
+         sFDGWD4KGsvYxoBtK8AjtQK1m/LZGH+HVC46bSyvBfV93w7tQVG1QtHwBQbNUkN3dJrs
+         cAY/9o1lt9u39QkBkiiPtwNzrEh1cB3OS5MZ0wq0omTLcgKeQbn9sDMmDVNk2eL7XET8
+         Aqcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789437258; x=1790042058;
+        d=1e100.net; s=20260707; t=1789437293; x=1790042093;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=N7qTJGjfgnWFS+GWaMuOw9Dnq6lADmDRY8jCksHhDr8=;
-        b=zfqYRaro35H800vZCmfY2zDyTGmlJ96WIh6JPLdwAP1+XdzfCuT+lwH2GiggoHY05Q
-         7c26FVOL+w3MQsBgpLR0mBxcGiRlqL7/vnGk/is9Ze/TrU5qdYha8hDAit6ZRBA4MSMm
-         GtItHRhj6V5eWSccIbqJwmJcvZYNKXP63vaRzZcc/sjkcecjiBs8M1YA1CpIUf9oBzpS
-         zTXmHH54CNmr0+VwSxiYQB/zaTS1nxBNS0xqXMYIy4EBeDzGXLppl915DhJ3wk/CIMpf
-         IOyr5/WCU7QTl8pT9pO4AnrWkhhm0LLMJeIHY2AvpmPGXdPOpV1h7e7Z3YS1bOwJaMMS
-         K4UQ==
-X-Gm-Message-State: AFuF++n6dXNKyb4YsQDh6LH0ud+SEaEIMNUQBBI9K7HYkUgLP6T9BLmt
-	BgqyDIhrGlMGdi9fT7poOnK8MDWBZuJrqXoH6m1hKoBVFQMjTCJodKIZDgp+yQVCriHq7GekMGz
-	jCHC0vVB7ebUhjqTD0n4fzLpikzbCPGE=
-X-Gm-Gg: AYBFou2dwrerOiG3U5KnCdc9Tm02YxBAK/esQj50Fbnst4qdib2aK18hGNspweQ+UPV
-	zOejvHhm1oJ7tAexGZ6bTBToN6whXWLYGr+EIlc0+hzc6R95XPQ7aYaIttx8cM5IN2Mu17Y5YzB
-	bzk77z9ak4h/3lofxFcZxS+3mCjeCIr2p/sEr61pRcXHQIDvtHgpiyXq1O9Yas1aRaAqLb+wrEx
-	R2imBYZwNAi2tKDSYHgi6+Ns6Ot3t+Sc/Ge4scaO31ArM4nlLzdD6HyAcwZYT4EAbgpyyz3baUe
-	YOmH5zhfExT6s0aBo4ku5+SNA9E4hGoaUKgkOP1EPRhZtdg7VzGiLuVvexVToCzgz3aPJyTa
-X-Received: by 2002:a05:6820:806:b0:6b1:a812:987b with SMTP id
- 006d021491bc7-6c540674253mr4966442eaf.14.1789437258404; Mon, 14 Sep 2026
- 18:54:18 -0700 (PDT)
+        bh=zSIYXYquwTozzTDUmRc0pTgx2bdLsg9RrzIywnOiz5E=;
+        b=OZ1pwwDJahgoco8lNI8hz+G+BZa3fuJbSEWBJ24iYQoKelPetma6uRMXG+p26olGw/
+         rVZsNb3FF2aVwxyQEzIUwggTWiCLiZ+XqzNbetw3XZ7YgMQjCMC7uehsorOtdX1nq6TK
+         gVS3pGgwNTzHVltFV7GjqP2ohjWD4ymw3xN7nelakqc+ctN7n7A3zvugVzoROd793kmQ
+         UaJD+yjtBsg8i/y7C/TK48PC51IXJJXTGbggEoMI9SWBsf2e5GvNMj0eedfd/dxPfdaD
+         Fw/+ekh6k7Iazi6SBgMwyNenioEiMB6V6MG3yUNh46VgUnb50ufFHOOJr6DXej9jE7cg
+         f3rA==
+X-Gm-Message-State: AFuF++ltYOOdJAMTjYxYlFPW1dt41bzU2Ica9GPt8erKLMSj11pzPzpj
+	Ro8BZ1H12djOoe+Z/hmcqL9JEsSL7Y6TaHj6YInLo4UQKd+p3rYYNFU7pkjU7RC8Wzbe8aHAjqW
+	rpxA5dDKyFsNSea7PVNud6W4J5hCp1rk=
+X-Gm-Gg: AYBFou2TANx1rIypC+XQfVCNMI5cFiHqBAZEUxvzbHhKalzEApcPHKi9EOxP2/Mnuxj
+	0JdKVyTPKlros38cyNiiUzG4eptlNGK3QywmVSUdhZ3XpmYmV+nVLIRL4+rzViX/92HubVUy1rt
+	RXafBIUBL20A6IoIeYOfKaMjsuouhYW9h/Q8K+EAKShtP0JmQxhMugLMXbjUJJ+WJ0pLY1Lwm+v
+	14XzSRbqnH00GcG2ZwdNKw2P02dzEedgxzPfkkJyK26feWe2Bz/vkWdzYd5dpU4gGsboyWhDDOF
+	YBxK60EC9ygNNm22x74+46Rua0c7Qax/nTsJDSVeIVdd7Bpbbk8g7h+QdEs+yAKp5qXhD6/u
+X-Received: by 2002:a05:6870:176c:b0:447:24bf:ec47 with SMTP id
+ 586e51a60fabf-481f814a551mr3343022fac.10.1789437293406; Mon, 14 Sep 2026
+ 18:54:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com>
- <20260907102318.2459883-5-ankur.tyagi85@gmail.com> <CA+s=J=zsKdTwRRPvzsBHT3eNUz8tGpr8yfcuNY1qNMP=bKTM7w@mail.gmail.com>
-In-Reply-To: <CA+s=J=zsKdTwRRPvzsBHT3eNUz8tGpr8yfcuNY1qNMP=bKTM7w@mail.gmail.com>
+References: <20260902100511.2105916-1-ankur.tyagi85@gmail.com> <CA+s=J=w5ijzWh8yNY37tuOqxOjLiBZmGtks8CPgGsgCZMRqTRg@mail.gmail.com>
+In-Reply-To: <CA+s=J=w5ijzWh8yNY37tuOqxOjLiBZmGtks8CPgGsgCZMRqTRg@mail.gmail.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Tue, 15 Sep 2026 13:54:07 +1200
-X-Gm-Features: AcwNN1VlG_VAcc5jndWmm9_6a4LS4x_niscI-8y_UdHuTiBCQnejC_6epkuIleM
-Message-ID: <CADySD0FMba+69bh1Wz3WzSffkRdVtQmfzCMLZbuFGQo4zdc1FA@mail.gmail.com>
-Subject: Re: [oe][meta-oe][wrynose][PATCH 5/33] libssh: ignore CVE-2025-59842
+Date: Tue, 15 Sep 2026 13:54:42 +1200
+X-Gm-Features: AcwNN1U07cAaebKnATJDNps3yDHKJg9WFm9qfFYosXqR23TJTh1aZwuvYO5pu1A
+Message-ID: <CADySD0GPY6PhYnnEHbk8Dp45em63Tf7=bS98vxx1vOtqkF3euA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][wrynose][PATCH 1/28] libmxml: upgrade 4.0.4 -> 4.0.5
 To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Cc: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@lists.openembedded.org, 
+	Wang Mingyu <wangmy@fujitsu.com>, Khem Raj <khem.raj@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 01:54:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130031
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 01:55:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130032
 
-On Tue, Sep 15, 2026 at 1:29=E2=80=AFPM Anuj Mittal
+On Tue, Sep 15, 2026 at 1:34=E2=80=AFPM Anuj Mittal
 <anuj.mittal@oss.qualcomm.com> wrote:
 >
-> On Mon, Sep 7, 2026 at 6:24=E2=80=AFPM Ankur Tyagi via lists.openembedded=
+> On Wed, Sep 2, 2026 at 6:08=E2=80=AFPM Ankur Tyagi via lists.openembedded=
 .org
 > <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 > >
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> > From: Wang Mingyu <wangmy@fujitsu.com>
 > >
-> > The vulnerability exists in GSSAPI key exchange introduced in v0.12.0[1=
-]
-> > Also confirmed by libssh security advisory[2]
+> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+> > (cherry picked from commit 7e505c34533b265a6da539126f4b25b9c6843f40)
 > >
-> > Details:
-> > https://nvd.nist.gov/vuln/detail/cve-2026-59842
-> >
-> > [1]https://gitlab.com/libssh/libssh-mirror/-/commit/88c2ea6752fab7b3da9=
-cc4c51eaf632361a44080
-> > [2]https://www.libssh.org/security/advisories/CVE-2026-59842.txt
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/libssh/libssh_0.11.5.bb | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.5.bb b/meta-oe/=
-recipes-support/libssh/libssh_0.11.5.bb
-> > index 752bded528..5cc270477e 100644
-> > --- a/meta-oe/recipes-support/libssh/libssh_0.11.5.bb
-> > +++ b/meta-oe/recipes-support/libssh/libssh_0.11.5.bb
-> > @@ -58,3 +58,4 @@ CVE_STATUS[CVE-2026-59847] =3D "fixed-version: fixed =
-in v0.11.5"
-> >  CVE_STATUS[CVE-2026-59848] =3D "fixed-version: fixed in v0.11.5"
-> >  CVE_STATUS[CVE-2026-59849] =3D "fixed-version: fixed in v0.11.5"
-> >  CVE_STATUS[CVE-2026-59850] =3D "fixed-version: fixed in v0.11.5"
-> > +CVE_STATUS[CVE-2025-59842] =3D "cpe-incorrect: the current version (0.=
-11.5) is not affected"
+> > Changelog:
+> > https://github.com/michaelrsweet/mxml/releases/tag/v4.0.5
 >
-> Should this be CVE-2026-59842?
+> This isn't a bug fix only release so will drop this.
 
-yep, I'll send v2
+hmm, you are right.
 
 >
 > Thanks,
