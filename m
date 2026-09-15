@@ -1,276 +1,183 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3777CC88E73
-	for <webhook@archiver.kernel.org>; Mon, 14 Sep 2026 20:59:00 +0000 (UTC)
-Received: from mail-oa2-f12.google.com (mail-oa2-f12.google.com [74.125.231.76])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8237.1789419534034744868
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CF03C88E72
+	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 01:28:54 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13734.1789435729099736697
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2026 13:58:54 -0700
+ Mon, 14 Sep 2026 18:28:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gPsTZF4F;
- spf=pass (domain: gmail.com, ip: 74.125.231.76, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa2-f12.google.com with SMTP id 586e51a60fabf-466cc9ab650so2878846fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 13:58:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789419533; cv=none;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=R5fkLeg6;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=IdDR73xZ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EN06IX689539
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 01:28:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	KqokMfnqefFv82SI3QY6BUss/RZpbvMi0LWYaai5Kpk=; b=R5fkLeg6slBqs+gx
+	mdGIEO5aBP0TK+28ikiV1YG5/a6G3OtShA3/UWHn9CTtQ/R8xGUIfuu3w7ownMJJ
+	KCYGuwKL/boUdS8YFmMJpGRy4JIC4HvpnJbiFju6L1Zj+nbioaWTANl/yabNSFzI
+	lgOeD20rBODIqqCjAQYUuXLer/mqPR4PTK3Qj35pGzMx/rg6hANdlSnAontDblgB
+	7ERIOj8xcbbFo2lYpg2OXTutUFRt2epxj4OKJj0/mSteIsslkA/GX9bEzmbNrMsJ
+	e52dS2W1KptckJ2Pp4DdHvIEckpbjZ9KtOdWDgfoEAXGNbQ9elle4ZXQDlGskkEn
+	ikIQZw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpergbayg-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 01:28:48 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93a1d44c437so279944085a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 18:28:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789435727; cv=none;
         d=google.com; s=arc-20260327;
-        b=gXntuPD6VQnElWD8fLOyEWZHy8lg+2fG7S67k8XeJmL4gjwaYTAHzJ8Gc7JtXujyM6
-         EkT5TFw59LUt6PSbur+O+adS27R1TlWtVWinEBaqnc7pIgOnQaLPvnTiQVs+qkNKBSf6
-         kF3eNduINdCWtm/Q58Cz/t3ZFDwQv/xBtjoVk2BTv9cnnDzelAxqHa8lw1N7ewvzElJR
-         8QEkyW5o5pmKw7OgZBNhrViAJ2z6enL6A29wLj8SOuu2TPPqQ0L2KBihHjRcHtumkpje
-         cj6MmTFCOGWmihSjt8gQizJi/JPpVy0206BncQq0Jq2p6lvpKpeswOmpOXI81730DXQE
-         72Bw==
+        b=FAFlqFd09U5APpZcCJOk4lHh1If5WxCXgot7lR6dv+Yedd6wwL9NrFipCoiPd0TPIS
+         hp9JFRbl7bEiM4vEkafK+xfqpKDqwG+pMBZBgJE40dKndEcSuJx++5a9eDgUeNTkY/TP
+         rY91WjMVWrGQVfGknC6be+tr1nLxk0otQlMqKexWnXdzg6fYkpMLPQ7cNf9+yfOiYEAb
+         6GiaYowIMaU61jCKVzuq1dLm1hQmv9U4caYttb6WUqbtRRCeC9mtrFHIb676fviZAoGj
+         tDqz4z40aNnC8DU7CybFesFra3cvhPZyEk351Gwo2vKIk2zhsUnZ2BN+w7XVVwxBbOPS
+         IDuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
-        fh=TgccigWwEISedZ7pLwzNLSIkGSpM8CuRZo1QBMHDyHA=;
-        b=If5DHVuvudXfVSGtwAIraD8DnnxKr4ejGm4SedtO89Y7e/8Zn4JC+38XXhu69fZJ8W
-         mfR3nmge+g3MK8QYpVROS8oThS6JebUJ0VAbYT33WqeaGkeVN9sKwcP8j5EDOV9jVWyD
-         h1IK9t+R4sUNjkRqy2QO0oSlrTNH7yFTFxAPqbf1vVD9tc0NHKoLU3SHHnsOm+eJ4S46
-         45WcDqsxLCYZxLz8Pbfk/CnSldB/8YjFpiWlGa5ZWixtgsZxuAu4yGIScmLpaANN8BwB
-         IweEG5ZVnrKd7zYLBxPfuFKA7EnuEaTR1mKjm9WeF17twV29vVXI4D/a6504u5oQ2pdW
-         I3VA==;
+        bh=KqokMfnqefFv82SI3QY6BUss/RZpbvMi0LWYaai5Kpk=;
+        fh=n0ZnAkKOhGDmrf8RLpwnC7FQ6xmEY5rofL6wXnjsXjs=;
+        b=RXvTm+uhkXOGNYTqOcjNCKNWaOFRerGjJp9y5HF3WLlQWZB2tLiwj7qGky2UfP3VGH
+         B2WYydRG+Ic8pqV94OnUDyhJXrYyuFuXnFnc0O2sJBoq9gOGHKdDuYH5D1xWksdkiE/K
+         rJHveCGx7UD7jG41La9gzZSNU0vD+925s9cRT3TwkdnPnflk2MA9ZAkBASOnsLi5QqqC
+         83asq1A1Ws7DCz8kpJoDGr3QXisuCAD226vON2znYK5kT1lMyjExzJ+yiv3c0fMg4GHi
+         pLi31zZvicrrs8u/IdDjn+7GeJa8Y5aq5G2vaKC1cy34pyAKaK/+Eqo2mhZY7N8+/obk
+         vV4g==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789419533; x=1790024333; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1789435727; x=1790040527; darn=lists.openembedded.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
-        b=gPsTZF4FSdDe07vWasUQFf31xS6bntRoGF7pQdpl+u6QBJKca12/bG/6lAHpNybzM0
-         hsy2KFS37vKk1P86lP33u4ZY0M8xNYZstfv6kujqow4n2gPPk8mttDWIR2KQEvHwsxy8
-         5tfQOm1/kwpSzb4HMcBMKeMvj7g1n+3Ugg5fWBoDzzlPvINHJZ8rT5XVFF0odjuM8HWV
-         9AitUzjQEM3dsOKUkdygzfCVwzllZhIZgOiEq5DvVy1psgE3ZE1WAtO//d/uPYrUMF2d
-         yd9VN61ibUUsimlYsqijumdmhp4FHN9JC8EEK9F/WMBLr3+f9+0ZGg4bHoUeqrR4gorV
-         /5hg==
+        bh=KqokMfnqefFv82SI3QY6BUss/RZpbvMi0LWYaai5Kpk=;
+        b=IdDR73xZJcHKE1kNjqpXjFoJePZ1jzvvkvDDtTsnvf6otxyiVs8yJOYj5cV9d1+Qzj
+         THgJkC0ILNZnF5LhLLRmP1AEdgeQnjwYcYVqsxlNnivQcVO8b8c5myXMmWrBOPaoTRBJ
+         Ft7YYal9aRbAFY7KC4/+dOX6WNC+Hg0bsOoKJAvCAG1jIILGHyHb49cf716H1zk7nPM8
+         AFn1oE3hK/xag9VFjsscc54alImiqgNGLTQfPHm2IUs9Ys68npNVV6TK7yCadYIskoHb
+         e2C4t6GKNSuwMT3qC12OJVqzCMkeNJ0fEgj1W0ofzGpSSKRDyBdEP5Zp32cl4SR4cpRX
+         ikcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789419533; x=1790024333;
+        d=1e100.net; s=20260707; t=1789435727; x=1790040527;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=F7tRZNtMNVXbCprdpdNfmV18K3WBCNAHB1PrvEPe5O0=;
-        b=k6sBwqQoFDAilmTkIhV+o3x/J7FkxB5ui2RtxOqGLtHGbUefm6L39/6PhTelMwRQH2
-         fEcAOl0/PZeS+zKc6kCZpQ3CxCmNkYeX0n3d8Fg78DfLmQ3iTKON4KTyrWkV5yjHsF81
-         oYASNZgy456sy7PYgIoX92fj8hH8ktGoJlbz97LLehu4DP9/CHdpQdZ0gLlIE99TUN5P
-         vCehgexWZAuv2hkjqhSqA1avfg9AzVbZ4Pq3ePEy0K4KSPNOVf6ihCDlFUCmLMEAZQKE
-         YS73dPkIkBR8bir7XdAfOtlgapzk0dGl+orQEeEy6oZo0aj7OzkafQWtdVIs3rPnkkhc
-         47rw==
-X-Gm-Message-State: AFuF++lyVldomheJmiTIS2aLatXj8G0qhM8XvEGaL8kwUwAUNfVcwHte
-	XFdAKUgkEd4giQu5Y7nrK55XleE26Bhpids57Ox7iLiu+eMxeSc5V+tQkzVWBBghJmuGdaG6h/P
-	TyfsXYrKCB65BA4fEqJ/mpQvnpTnvvdU=
-X-Gm-Gg: AYBFou321DVpr+ajVOilGUK15asxst8xNFb16qeSNiskfYvR2eX//Rekwpedn7MCp5I
-	4ToEQ3IKDcL7rBZspGr/aXkHHR5kd3jipFcviIi7lYKzcvoAWbqYutL0J01gIqN2pOmVQqCXt0m
-	8BirJHzcJ/3OExq8LDRqX2iZBK7PgkeB5i3n6mRzH1fTOIeVG5xn/s7Rg3cxDTPFxRMz5xqkX0+
-	eNIznOngmFDz1uoWo3zaHJy6EG7p691jP6wduQr39KOh4hPgiL5u52aE5DCCKWjLhrNTYpViRrP
-	gp+rCG1WIDnpsAJkvbUnZutSEdaCsNwSmoj48KooeYeTpErCJvcTmtKPvYT60Ec4wdYlaw==
-X-Received: by 2002:a05:6870:1649:b0:479:7931:cd6a with SMTP id
- 586e51a60fabf-481fa2428c3mr2844420fac.32.1789419533021; Mon, 14 Sep 2026
- 13:58:53 -0700 (PDT)
+        bh=KqokMfnqefFv82SI3QY6BUss/RZpbvMi0LWYaai5Kpk=;
+        b=oWthbMW7UZW++kKv5+gSVDFtNJlzIUC0e6SudVdIXznpTjYsCHyXc0kgriAiTBwCRA
+         y2w8jfRyMC9VwdYiIUbkT+1KExy/k2AMDGO31KPmClyWY3g5dLhXHbZzQtzaKJftDlhX
+         /RRt2ADC2t7Pe0M4F4mrIfIPjowfrbnO/naH2jxRZjb6DE53JVaqzR2PjmUklvtjrU17
+         dkwDG5UO8W2hEEnkEXvgc3UGwKin8goEoaWIxwpkZr35rts4YfAxug5NxKhce1m7RDx6
+         XWjLgqEhFLkXZn6BUNDEgDxJ2pTu/XY6FAKizjRf9/xONOaN1/fziQgZnLyL4rUv/oZe
+         7h4Q==
+X-Gm-Message-State: AFuF++k/8nNY2s20t9K/vx0GtbbgYyqV1GG8WYKyEAoiZg6giqgJMlyS
+	wYc7v+BWM7c/xgLji5Hv+auVGVeVdEFL63S0c1Opk+BIDihp9SYSppmjDlk/0HXh8PjnebNKSsm
+	F9eDCuhrKzrXnYR3EJzcRqIfFDzortyebCpqwtvl61alPrmVRez9Dku2EAvTqChoiqwSwfz//pj
+	C32ObZPK2QuUHXNj2YbYi/ThjcJJCb97QVSw958lAOYr/xw7J5ZdN6rQ9+XfY=
+X-Gm-Gg: AYBFou2SmDpu7Iydg5Dse622Ok6LzWA2IwECigNJLb59MbEWpqY5ztSvlGVp2vwISlv
+	H4cWeAlY18J9s6ykw1rPYYH0Fw3h6l0bMCk+J0h9WNFIv/sjgq0JCNRutcoK3zRAwIJ2sTGOG/t
+	Bi0YAKqzHriuAZCUCBrZd2XTcRgLiY45bLrjx4Ca0Zv+UcvSnnpeseNOvqpQ==
+X-Received: by 2002:a05:620a:2702:b0:939:ed4a:dd75 with SMTP id af79cd13be357-93a297ee817mr916018585a.21.1789435727155;
+        Mon, 14 Sep 2026 18:28:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:2702:b0:939:ed4a:dd75 with SMTP id
+ af79cd13be357-93a297ee817mr916015785a.21.1789435726752; Mon, 14 Sep 2026
+ 18:28:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260914092745.20027-1-jan.vermaete@gmail.com>
-In-Reply-To: <20260914092745.20027-1-jan.vermaete@gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Tue, 15 Sep 2026 08:58:41 +1200
-X-Gm-Features: AcwNN1XAZzmz2g_qHU1IBw0nk-bktjj9Ss1Pp0mYJwUPTyL66HeJNhQxLlGddBE
-Message-ID: <CADySD0FjZs2RK_dC7PcddEVuhLZwnc+892xjKmRR0tAq+4bk5g@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-construct: new recipe version 2.10.70
-To: jan.vermaete@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, tfggeelen@gmail.com
+References: <20260907102318.2459883-1-ankur.tyagi85@gmail.com> <20260907102318.2459883-17-ankur.tyagi85@gmail.com>
+In-Reply-To: <20260907102318.2459883-17-ankur.tyagi85@gmail.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Tue, 15 Sep 2026 09:28:45 +0800
+X-Gm-Features: AcwNN1XcSGXAopw-qH-NSwYXFCFKDtgpXTTmdWbvhJraV_ZWthNFkRrHQeTzmPI
+Message-ID: <CA+s=J=z+RK=jzDJTuWt9C1d1MVt09upLgvGvn1ZszjxGAu8KQQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][wrynose][PATCH 17/33] smarty: mark CVEs patched
+To: ankur.tyagi85@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=QK/91QLL c=1 sm=1 tr=0 ts=6aa89f50 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=DJpcGTmdVt4CTyJn9g5Z:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
+ a=pGLkceISAAAA:8 a=ZbtevqZpaFFbEQ-rG7MA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-GUID: Hx8py9HzzLe2sbRLkZpZTkXD-V_d6ExH
+X-Proofpoint-ORIG-GUID: Hx8py9HzzLe2sbRLkZpZTkXD-V_d6ExH
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDAxNyBTYWx0ZWRfX4Zo80RIepz3c
+ fqCoabUeyUvlJiu8NEME1fXOo7J+xkDRRlqmmOT5SbjhzavCa4MXZwkBO1c5XHIxcxhSxNpFjyw
+ P1XrjzXp4XUrwrecTOM2jeO5Bbh0NUiWBwtNTark9qRkqxUIJa8jocgA/wvH2NRGO1fD/b0OlZE
+ rKaCC7TQnCcBgZqkYKJv3EKe51O1s10mC2gmU5R+DG9HNwpj9xwVcOrNz7fFzPrcUNluNBxW3SV
+ s/uGAkE+oOGP1LugEz+OsL7I5QF3YVhNn/zhs446hd4phngnlx1gU4sCdl8ZccnH0e0BpQmXEaF
+ m9JI+ydPCEluCra4D71tB+SpvT6W9qZX+0Vn05zgQxWhU3uHzmc8+bGA5ldy+0COZm8PCRw5EVr
+ z2WVvyLrIRGetEE6wLwo3WIlbBpiCD7tUG6LlRlJT8lDi2DYzJ5d30ylmDtbJm1W6JywcM5YObk
+ r76MHK68H8Orywju+yw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDAxNyBTYWx0ZWRfXyM0GM4HN8YeC
+ DXtRgt150avKbyheaBaY4cudh7a66uqawgLNOO0gA5ODcPYy3Y+um+LneaM2xPdf9HGezFqQpNf
+ 9OnVBKlqKEPkcXCZpR4pUVDlWwStmIk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-14_05,2026-09-14_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ priorityscore=1501 spamscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609150017
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2026 20:59:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130025
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2026 01:28:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130026
 
-On Mon, Sep 14, 2026 at 9:27=E2=80=AFPM Jan Vermaete via
-lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
-wrote:
+On Mon, Sep 7, 2026 at 6:25=E2=80=AFPM Ankur Tyagi via lists.openembedded.o=
+rg
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> Recipe taken from meta-homeassistant of Tom Geelen.
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 >
-> Added ptests.  But removed the tests with binary data (e.g. .so file).
-> Those tests gave to much issues with QA rules of Yocto/Openembedded.
+> CVE-2024-35226[1], CVE-2026-62992[2], CVE-2026-62996[3] are patched in
+> current version.
 >
-> Moved from pypi to github to have all test code.
+> Details:
+> https://nvd.nist.gov/vuln/detail/cve-2024-35226
+> https://nvd.nist.gov/vuln/detail/cve-2026-62992
+> https://nvd.nist.gov/vuln/detail/cve-2026-62996
 >
-> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> [1]https://github.com/smarty-php/smarty/commit/0be92bc8a6fb83e6e0d883946f=
+7e7c09ba4e857a
+> [2]https://github.com/smarty-php/smarty/commit/99c048ce7a590c519b79fbd38a=
+d0143a08183a1f
+> [3]https://github.com/smarty-php/smarty/commit/3c9f77a2e06ce319ae0092496a=
+f32cc8f3adc52e
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 > ---
->  .../ptest-packagelists-meta-python.inc        |  1 +
->  ...ile-to-enable-pytest-8.x.y-to-find-t.patch | 25 ++++++++++++
->  ...002-pytest.ini-disable-the-benchmark.patch | 26 ++++++++++++
->  .../python3-construct_2.10.70.bb              | 40 +++++++++++++++++++
->  4 files changed, 92 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
-3-construct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
->  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
-3-construct/0002-pytest.ini-disable-the-benchmark.patch
->  create mode 100644 meta-python/recipes-devtools/python3-construct/python=
-3-construct_2.10.70.bb
+>  meta-oe/recipes-support/smarty/smarty_5.8.4.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc =
-b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> index e4eae4ef43..9b3a535e55 100644
-> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> @@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON =3D "\
->      python3-cachetools \
->      python3-cbor2 \
->      python3-configobj \
-> +    python3-construct \
->      python3-pyconnman \
->      python3-click \
->      python3-dasbus \
-> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
-ruct/0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch b/meta=
--python/recipes-devtools/python3-construct/python3-construct/0001-add-pytes=
-t.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
-> new file mode 100644
-> index 0000000000..3e9e73bd45
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct/00=
-01-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.patch
-> @@ -0,0 +1,25 @@
-> +From b8d0ba87f629cc6065a2d06cedc5e850407c45de Mon Sep 17 00:00:00 2001
-> +From: Franz Haas <franz.dominik.haas@gmail.com>
-> +Date: Tue, 17 Sep 2024 11:23:28 +0200
-> +Subject: [PATCH 1/1] - add pytest.ini file to enable pytest 8.x.y to fin=
-d the
-> + tests
-> +
-> +Upstream-Status: Backport [https://github.com/construct/construct/commit=
-/b8d0ba87f629cc6065a2d06cedc5e850407c45de]
-> +
-> +---
-> + pytest.ini | 3 +++
-> + 1 file changed, 3 insertions(+)
-> + create mode 100644 pytest.ini
-> +
-> +diff --git a/pytest.ini b/pytest.ini
-> +new file mode 100644
-> +index 0000000..f5a52af
-> +--- /dev/null
-> ++++ b/pytest.ini
-> +@@ -0,0 +1,3 @@
-> ++[pytest]
-> ++pythonpath =3D .
-> ++
-> +--
-> +2.47.3
-> +
-> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
-ruct/0002-pytest.ini-disable-the-benchmark.patch b/meta-python/recipes-devt=
-ools/python3-construct/python3-construct/0002-pytest.ini-disable-the-benchm=
-ark.patch
-> new file mode 100644
-> index 0000000000..bc89546c82
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct/00=
-02-pytest.ini-disable-the-benchmark.patch
-> @@ -0,0 +1,26 @@
-> +From 7acb7aa51db762a723d85b81262ca14614dbeac0 Mon Sep 17 00:00:00 2001
-> +From: Jan Vermaete <jan.vermaete@gmail.com>
-> +Date: Mon, 14 Sep 2026 10:24:51 +0200
-> +Subject: [PATCH 2/2] pytest.ini: disable the benchmark
-> +
-> +Benchmark is also disabled in the github workflow of the project
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-> +---
-> + pytest.ini | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/pytest.ini b/pytest.ini
-> +index f5a52af..4b1b4b6 100644
-> +--- a/pytest.ini
-> ++++ b/pytest.ini
-> +@@ -1,3 +1,3 @@
-> + [pytest]
-> + pythonpath =3D .
-> +-
-> ++addopts =3D --benchmark-disable
-> +--
-> +2.43.0
-> +
-> diff --git a/meta-python/recipes-devtools/python3-construct/python3-const=
-ruct_2.10.70.bb b/meta-python/recipes-devtools/python3-construct/python3-co=
-nstruct_2.10.70.bb
-> new file mode 100644
-> index 0000000000..681c43122a
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python3-construct/python3-construct_2.=
-10.70.bb
-> @@ -0,0 +1,40 @@
-> +SUMMARY =3D "A powerful declarative symmetric parser/builder for binary =
-data"
-> +HOMEPAGE =3D "http://construct.readthedocs.org"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D202b39559c1c79fe4715ce81e9e0a=
-c02"
-> +RECIPE_MAINTAINER =3D "Tom Geelen <t.f.g.geelen@gmail.com>"
-> +
-> +SRC_URI =3D "\
-> +    git://github.com/construct/construct.git;protocol=3Dhttps;branch=3Dm=
-aster \
-
-please include tag=3Dv${PV} in the SRC_URI
-
-> +    file://0001-add-pytest.ini-file-to-enable-pytest-8.x.y-to-find-t.pat=
-ch \
-> +    file://0002-pytest.ini-disable-the-benchmark.patch \
-> +"
-> +
-> +PV =3D "1.0+git"
-
-No need to set PV in the recipe, this can be dropped
-
-> +SRCREV =3D "c25a47172d4bde392b7ad188175b07b319d3dea4"
-> +
-> +inherit setuptools3 ptest-python-pytest
-> +
-> +PACKAGECONFIG ?=3D "extras"
-> +PACKAGECONFIG[extras] =3D ",,,python3-arrow python3-cloudpickle python3-=
-cryptography python3-lz4 python3-numpy python3-ruamel-yaml"
-> +
-> +RDEPENDS:${PN} +=3D "\
-> +    python3-compression \
-> +    python3-core \
-> +    python3-crypt \
-> +    python3-cryptography \
-> +    python3-debugger \
-> +    python3-misc \
-> +    python3-pickle \
-> +"
-> +
-> +RDEPENDS:${PN}-ptest +=3D "python3-pytest-benchmark"
-> +
-> +do_install_ptest:append() {
-> +    # *.so files gives issues with QA of Yocto/OpenEmbedded
-> +    rm -rf ${D}${PTEST_PATH}/tests/deprecated_gallery
-> +    rm -rf ${D}${PTEST_PATH}/tests/gallery
-> +
-> +    install -d ${D}${PTEST_PATH}
-> +    install -m 0644 ${S}/pytest.ini ${D}${PTEST_PATH}
-> +}
-> --
-> 2.47.3
+> diff --git a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb b/meta-oe/rec=
+ipes-support/smarty/smarty_5.8.4.bb
+> index dcb7c85a80..cf6c42345c 100644
+> --- a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
+> +++ b/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
+> @@ -35,3 +35,7 @@ FILES:${PN} +=3D "${datadir}/php/smarty3/"
+>  RDEPENDS:${PN} =3D "php"
 >
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#130020): https://lists.openembedded.org/g/openembedde=
-d-devel/message/130020
-> Mute This Topic: https://lists.openembedded.org/mt/121239797/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+>  CVE_PRODUCT =3D "smarty:smarty smarty-php:smarty"
+> +
+> +CVE_STATUS[CVE-2024-35226] =3D "fixed-version: fixed since v5.2.0"
+> +CVE_STATUS[CVE-2026-62992] =3D "fixed-version: fixed since v5.8.2"
+> +CVE_STATUS[CVE-2024-62996] =3D "fixed-version: fixed in v5.8.4"
+
+Should this be CVE-2026-62996?
+
+Thanks,
+
+Anuj
 
