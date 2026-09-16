@@ -1,100 +1,354 @@
-Return-Path: <philip@balister.org>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84486C88E5C
-	for <webhook@archiver.kernel.org>; Wed, 16 Sep 2026 13:58:28 +0000 (UTC)
-Received: from mail-vs2-f43.google.com (mail-vs2-f43.google.com [74.125.227.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14995.1789565365999997572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5F09C982C3
+	for <webhook@archiver.kernel.org>; Wed, 16 Sep 2026 14:36:08 +0000 (UTC)
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16548.1789569359316733138
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Sep 2026 06:29:26 -0700
+ Wed, 16 Sep 2026 07:35:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@b2open-com.20251104.gappssmtp.com header.s=20251104 header.b=daRsGVgD;
- spf=pass (domain: b2open.com, ip: 74.125.227.43, mailfrom: cleiton.bueno@b2open.com)
-Received: by mail-vs2-f43.google.com with SMTP id ada2fe7eead31-78565b4db79so435851137.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Sep 2026 06:29:25 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=uf9bAEmG;
+ spf=pass (domain: konsulko.com, ip: 74.125.225.140, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912d3931so7322315e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Sep 2026 07:35:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=b2open-com.20251104.gappssmtp.com; s=20251104; t=1789565365; x=1790170165; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1789569357; x=1790174157; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AgY10jdC/lhWruxm6XFAuVTQz32OrCpo2+sNUkbfVpI=;
-        b=daRsGVgDZ7VOTpIx3tEDbt4FQdxpXkeHF7vFa7v9LBIINnJZ3K7Bf79hm7zC8vGNHh
-         bsnHBXFXG2hwvaxpIPo64yjQ/xLToSq9xeyvp0KZmXMjLgjA+rjcW6G61WeXjntm1KJo
-         kYxxCCiGGJjZ3XDwwTKIMx+1B6It5mWkwqhOiuY3ImbnTAZK5MmnzCaxMjxLB/XhPXVi
-         YvErtuEPd5vEdq3KPO6eUK/2B9ytlko2K33HLqBKqN1CqIwuxiotiQ3LN7lgZstcx69p
-         QXmEVo2gOraIRSqWHYjCzazkoUVUmILPcaydnlox/N/uDs9Ug4WIkgdXw3aiNTZY5irG
-         S3vA==
+        bh=lWDDntU5xeSmlIPASXv/SDQtQhpEwo6W+eD2FZZX6dk=;
+        b=uf9bAEmGsDf5U0oWlZmLdW9z0yrawWImzjCVKwBH4pJGnusyezQRYYFStinO+Ze9V+
+         HS9w5jYzad9JrOsfntD0mxULEbm5L422ch/JQ4uBi1J73i9xwoin2gfZex38wDj1clPn
+         z5+xOP73uF8X1Yh5BejISz+JBQf23U4sycWLc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789565365; x=1790170165;
+        d=1e100.net; s=20260707; t=1789569357; x=1790174157;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AgY10jdC/lhWruxm6XFAuVTQz32OrCpo2+sNUkbfVpI=;
-        b=MSBm1IhMffw9eJ/v6pthm4MdUxgUftacZXghjD78t49mTsS/fn48rq7Xo0IDYWTOjM
-         M9Pcw/gPd+DFba2IQEAfiXo9ZuvVybpT/nwL3wzcjNEqg5i/pS0SoBqQg5cb0Gst9YAk
-         qRawPNLEFzlSKfKrPWxSxBJe5t0UfPIgwOkJCTuw/t2BZv1MT1zCeOdZX8BxoRKgmpxM
-         mPssJLGrVIlJXSHw2+ikd8X9Ri0kk0miHINGPXC9xuVhi6FIx6OGtv2/C44bHqvX7HR7
-         MStQKW1FNuUMGqkQZUuoclbP+JxRZi+LO611fSyaEg6N4P866qxrBNiaQfM8clG7N9I7
-         GRsw==
-X-Gm-Message-State: AFuF++kGjv2vgCg1HO2fgFTjxUMqZXX++B4nfHNq4SdLYp6Q2TsRlSuk
-	hpyNOM6TxHJraZSVhaBWUD7DW2cQaZFzo4DFHmcCVqVKtr44glbBrURbcH0YchhtFFCjTXsKOg1
-	oXOHy4UA=
-X-Gm-Gg: AYBFou3WhiKcGN4d7POKiD4FfSWlUnpltTWi89370eEmPAF6ZAqglj1qG2gAx+MIKjw
-	MiGTxuvyTxK9Ks3xh48QVcy8ipQt7u17o9bNlb51viXgcM+aqSoVHelSyObQv5zRG4Dnd1vpWL3
-	LBd2ZMFD5Z3JVIki/+j4csQdU00DwdeDuQ6a4uOyyWVgOw7++h86PDwFGBuEXdzzFnbsV6luzNV
-	Ap+xIZPuqP9IZe24qBUxjD3IMR7mhZ3qj5Csns2LcpGU6ZD4kR+yNRQlSTp8gr+ghDqnc6Sgv6a
-	E8Y439aJqqOnrfpc/2+7fD57oD96hYzmaPo+HhrmFYXfcgkj40r+WVfz0BDlrcwq87qMUQfEcHN
-	PgcF6rnWvL+N7lsS1lNt4Gd7OZoBMjVhZZEkLTKc11G71o07OqQt87A6aJkTuWDj9VJTMaSMi6E
-	9js79ikxlpC9uPY0o1M39Z8kN5diLra3Fr92eySFVnZTVTzy8BtVUL+rjJH5vslWEUFLD87T8n+
-	HHgaw1+19vsthE7+IpJLF2Ee0hV2dbWIpKKVxswTCAi1oiv8jNDNFEcNg1s5zWWaRiUCVDeEBy8
-	Xfo5ECwlf6pY5/umxQ7WeVfOzMCHdescch6HpBmMwOxy9VPoXnbkarguVX6nm6ezSX2D/9TiOoT
-	rkZTMKwHTBrU=
-X-Received: by 2002:a17:90b:56c6:b0:39e:2e79:7ce7 with SMTP id 98e67ed59e1d1-39e2e797eb7mr1213466a91.6.1789564917427;
-        Wed, 16 Sep 2026 06:21:57 -0700 (PDT)
-Received: from b2open-a70-hyb.. ([2804:1b3:a300:a73f:ccef:7a6e:53c4:6e4d])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf56d7e5bsm8321382eec.0.2026.09.16.06.21.55
+        bh=lWDDntU5xeSmlIPASXv/SDQtQhpEwo6W+eD2FZZX6dk=;
+        b=ypqU9B2t2F7Rp8ZjNJUEVPE8xshJN0JWlm9b3oZ8LjHixD4bSDhaeUOdmrPMrO1SKP
+         cbdhIZpcSO/IUD0Bl5UHvoxB6DN60AIV9f1ZQS9qrThuyMg1Y8N0yxkn2fyK/U2Q677G
+         /zj3q6amQ4uXFDg9xBkTaYKCsyuRHMoAkBK94RfnS/VQQ/kfNPoe1tppVZ1egywg8ilv
+         Qb6Hi6Dc2KeMU4USTzoRxF5q+TDBQ4odaeq5Om5IiTrfC8WI3ONsnhqfqHQbAL9SxyRH
+         4INfXtjln4rmouB8eHahKAB8Bpou0mzoWP9/XWw0KdwbnLaZgQ2uqXsEGnHh3X4Si6nf
+         yXEQ==
+X-Gm-Message-State: AFuF++mifet55wf7ucIKNnmiRVcPiPCzTdfJWMImNQhMFOe4PLJRrB31
+	qz21cVZU5cYzFHE4vU1o+SyZ9PIH2gDZaOutcdb7E24n05s95brIAT/9yH9ZBOWhp6gSH2s9T1A
+	5pM0D
+X-Gm-Gg: AYBFou0avB/7q8emxFLfB9x90EVnRnqwnmO8mKQRPzBRYxGoQQl5WAYvdxyR49ID/yK
+	0kFllHXr4gjJlp97NLbVKbeIo3o1JBygS13IpUR7oWA1BupJxqsaBo4j2/P84CHMrPfyKqGRfc+
+	N+CSHSDQjU/BrMmq7ym7AW8bk7XKPHYjHqwRl0tMKD18A8ZqiVNi+jqr93uLMZfn5oyubv2pf1V
+	SPd1xnSvqOYhF1mgH7vExAteZLsFn5UWTmwIYpFTOnqfZgVjjlXinxwS9Iu7zbV2rV5Sc7ex0vQ
+	jHIl9P2C5csPatVgK+75DmGROF6XLUULe1InI83xXXQP2fRykSV57OM71gmRoI2CrKi3tnp8ydS
+	mIjwXd14A8OkR1RsTgWc6vRlEZUgikc2bl9OxkdXxPocY/xeJJlJzUxlFpMs5AsRb5i9yAqEJQh
+	8UfA5+n0ir4CCwiW94mTyObxmQBWqr2v6aO5oOMXj2ENG1AoP+wrXAni5zUSx6pUjUdaI1RGwGA
+	r2pTbJZGHpt+vvUAnsM4i+uv72635Y8VYxMdaoknUD/9yeJM2jJRlIgr71DVCC/WW4KCMTAU+8U
+	R9O9eyzSWz8MD9WSarBALw7aRvRkqGoCKGU=
+X-Received: by 2002:a05:600c:1d0d:b0:499:900c:9c69 with SMTP id 5b1f17b1804b1-49eb72f3835mr33238055e9.9.1789569357398;
+        Wed, 16 Sep 2026 07:35:57 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4870bf1f7cesm7373563f8f.10.2026.09.16.07.35.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 06:21:56 -0700 (PDT)
-From: Cleiton Bueno <cleiton.bueno@b2open.com>
+        Wed, 16 Sep 2026 07:35:56 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Cleiton Bueno <cleiton.bueno@b2open.com>
-Subject: [meta-oe][scarthgap][PATCH] libfastjson: fix branch name from master to main
-Date: Wed, 16 Sep 2026 10:21:47 -0300
-Message-Id: <20260916132147.3926195-1-cleiton.bueno@b2open.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] postgresql: Upgrade 18.4 -> 18.6
+Date: Wed, 16 Sep 2026 17:35:53 +0300
+Message-ID: <20260916143553.3818666-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Sep 2026 13:58:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130086
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Sep 2026 14:36:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130087
 
-libfastjson$ git branch -a --contains 3a8402c1de7c7747c95229db26d8d32fb85a7a52
-* main
-  remotes/origin/HEAD -> origin/main
-  remotes/origin/main
-  remotes/origin/stable
+Upgrade to release 18.6. For the full changelog have a look at:
+https://www.postgresql.org/docs/release/18.6/
 
-Signed-off-by: Cleiton Bueno <cleiton.bueno@b2open.com>
+Note: 18.5 was never released, due to a regression discovered
+post-wrap.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../files/0001-Add-support-for-RISC-V.patch     | 14 ++++++--------
+ .../files/0001-tcl.m4-Recognize-tclsh9.patch    |  3 ++-
+ .../files/0002-Improve-reproducibility.patch    |  5 +++--
+ ....ac-bypass-autoconf-2.69-version-check.patch |  9 ++++-----
+ ...04-config_info.c-not-expose-build-info.patch |  9 +++++----
+ ...stgresql-fix-ptest-failure-of-sysviews.patch | 17 +++++++++--------
+ .../postgresql/files/not-check-libperl.patch    |  7 ++++---
+ .../{postgresql_18.4.bb => postgresql_18.6.bb}  |  2 +-
+ 8 files changed, 34 insertions(+), 32 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_18.4.bb => postgresql_18.6.bb} (87%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-index f16126d936..2a8b52d720 100644
---- a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a958bb07122368f3e1d9b2efe07d231f"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+index ebd3e03685..8ab8f0970b 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+@@ -1,21 +1,22 @@
+-From ba079b8d6a50796db41bb0ddf4c22bfe022ef898 Mon Sep 17 00:00:00 2001
++From b61d11e4cd29671b88f43d114c69306639135e2f Mon Sep 17 00:00:00 2001
+ From: "Richard W.M. Jones" <rjones@redhat.com>
+ Date: Sun, 20 Nov 2016 15:04:52 +0000
+-Subject: [PATCH 1/5] Add support for RISC-V.
++Subject: [PATCH] Add support for RISC-V.
  
- DEPENDS = ""
+ The architecture is sufficiently similar to aarch64 that simply
+ extending the existing aarch64 macro works.
  
--SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=main"
+ Upstream-Status: Pending
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  src/include/storage/s_lock.h | 5 +++--
+  1 file changed, 3 insertions(+), 2 deletions(-)
  
- SRCREV = "3a8402c1de7c7747c95229db26d8d32fb85a7a52"
+ diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
+-index c9fa84c..9b491e8 100644
++index 2f73f9f..04b0f8a 100644
+ --- a/src/include/storage/s_lock.h
+ +++ b/src/include/storage/s_lock.h
+-@@ -252,11 +252,12 @@ spin_delay(void)
++@@ -243,11 +243,12 @@ spin_delay(void)
+  
+  /*
+   * On ARM and ARM64, we use __sync_lock_test_and_set(int *, int) if available.
+@@ -29,7 +30,7 @@ index c9fa84c..9b491e8 100644
+  #ifdef HAVE_GCC__SYNC_INT32_TAS
+  #define HAS_TEST_AND_SET
+  
+-@@ -290,7 +291,7 @@ spin_delay(void)
++@@ -287,7 +288,7 @@ spin_delay(void)
+  
+  #endif	 /* __aarch64__ */
+  #endif	 /* HAVE_GCC__SYNC_INT32_TAS */
+@@ -38,6 +39,3 @@ index c9fa84c..9b491e8 100644
+  
+  
+  /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-tcl.m4-Recognize-tclsh9.patch b/meta-oe/recipes-dbs/postgresql/files/0001-tcl.m4-Recognize-tclsh9.patch
+index 445a6d4910..91d5c74fe9 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-tcl.m4-Recognize-tclsh9.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-tcl.m4-Recognize-tclsh9.patch
+@@ -1,4 +1,4 @@
+-From ab23817b4f4a02de21f63800adc30d6236c15c8b Mon Sep 17 00:00:00 2001
++From 015a37e2e0bbf4e404e921e804ac5a5ca4343180 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sun, 3 Nov 2024 15:50:50 -0800
+ Subject: [PATCH] tcl.m4: Recognize tclsh9
+@@ -7,6 +7,7 @@ Add missing support to recognize tclsh9 as supported
  
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  config/tcl.m4 | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+index e0605347e3..1fa3594b26 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+@@ -1,4 +1,4 @@
+-From 736c190e0c8a1c5ce3dc84292d066292e969d81e Mon Sep 17 00:00:00 2001
++From b01a1303d4be1ef5fbfc355752146ce275f869a5 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 28 Dec 2020 16:38:21 +0800
+ Subject: [PATCH] Improve reproducibility,
+@@ -18,12 +18,13 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+ 
+ update patch for v13.1
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  src/common/Makefile | 3 ---
+  1 file changed, 3 deletions(-)
+ 
+ diff --git a/src/common/Makefile b/src/common/Makefile
+-index 3d83299..e14cda6 100644
++index 2c720ca..c3d889c 100644
+ --- a/src/common/Makefile
+ +++ b/src/common/Makefile
+ @@ -31,9 +31,6 @@ include $(top_builddir)/src/Makefile.global
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 8d1263432e..a874db39ff 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -1,4 +1,4 @@
+-From 29289c6f5b665ed9943bb7701a542fcdf64c4a22 Mon Sep 17 00:00:00 2001
++From 1709916e66485e9220526fbbefcdd5dd45acaed6 Mon Sep 17 00:00:00 2001
+ From: Yi Fan Yu <yifan.yu@windriver.com>
+ Date: Fri, 5 Feb 2021 17:15:42 -0500
+ Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
+@@ -8,17 +8,18 @@ for upgrade to autoconf 2.71
+ Upstream-Status: Inappropriate [disable feature]
+ 
+ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  configure.ac | 4 ----
+  1 file changed, 4 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 636ba54..14dc382 100644
++index 3081ad7..3a0fc92 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [18.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [18.6], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+@@ -27,5 +28,3 @@ index 636ba54..14dc382 100644
+  AC_COPYRIGHT([Copyright (c) 1996-2025, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+--- 
+-2.25.1
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+index 1514c223c1..25a9bff52c 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+@@ -1,4 +1,4 @@
+-From e4b32033827ed73c95e6e6aa26dd45e828ffc18b Mon Sep 17 00:00:00 2001
++From 108ab3c18b41883867fbdfa589687db3ef7397d6 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+ Date: Mon, 1 Aug 2022 15:44:38 +0800
+ Subject: [PATCH] config_info.c: not expose build info
+@@ -8,16 +8,17 @@ Don't collect the build information to fix the buildpaths issue.
+ Upstream-Status: Inappropriate [oe specific]
+ 
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  configure.ac             |  2 +-
+  src/common/config_info.c | 70 +---------------------------------------
+  2 files changed, 2 insertions(+), 70 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 646394c..f5a5590 100644
++index 3a0fc92..88b8f1c 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2024, PostgreSQL Global Development Group])
++@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2025, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+  AC_PREFIX_DEFAULT(/usr/local/pgsql)
+@@ -27,7 +28,7 @@ index 646394c..f5a5590 100644
+  [PG_MAJORVERSION=`expr "$PACKAGE_VERSION" : '\([0-9][0-9]*\)'`]
+  [PG_MINORVERSION=`expr "$PACKAGE_VERSION" : '.*\.\([0-9][0-9]*\)'`]
+ diff --git a/src/common/config_info.c b/src/common/config_info.c
+-index 89c1ccb..a2206de 100644
++index 113a8a6..b8f21c8 100644
+ --- a/src/common/config_info.c
+ +++ b/src/common/config_info.c
+ @@ -38,7 +38,7 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+index 7aab99e32e..4e9b1a27c2 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+@@ -1,4 +1,4 @@
+-From 220b65291734b81a3c232877cf5fced20fe773e3 Mon Sep 17 00:00:00 2001
++From 89302f7b17f70504ca3613c08307ea16a722b388 Mon Sep 17 00:00:00 2001
+ From: Manoj Saun <manojsingh.saun@windriver.com>
+ Date: Wed, 22 Mar 2023 08:07:26 +0000
+ Subject: [PATCH] postgresql: fix ptest failure of sysviews
+@@ -15,17 +15,19 @@ Rebased on 18.4: context shifted (offset only, same single-line change).
+ Upstream-Status: Inappropriate [oe specific]
+ 
+ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  src/test/regress/expected/sysviews.out | 2 +-
+  src/test/regress/sql/sysviews.sql      | 2 +-
+  2 files changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
++index 83228cf..c378012 100644
+ --- a/src/test/regress/expected/sysviews.out
+ +++ b/src/test/regress/expected/sysviews.out
+-@@ -66,7 +66,7 @@
++@@ -66,7 +66,7 @@ and c1.path[c2.level] = c2.path[c2.level];
+  (1 row)
+-
++ 
+  -- At introduction, pg_config had 23 entries; it may grow
+ -select count(*) > 20 as ok from pg_config;
+ +select count(*) > 13 as ok from pg_config;
+@@ -33,16 +35,15 @@ diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/
+  ----
+   t
+ diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
++index 66179f0..0f15661 100644
+ --- a/src/test/regress/sql/sysviews.sql
+ +++ b/src/test/regress/sql/sysviews.sql
+-@@ -43,7 +43,7 @@
++@@ -43,7 +43,7 @@ where c2.name = 'CacheMemoryContext'
+  and c1.path[c2.level] = c2.path[c2.level];
+-
++ 
+  -- At introduction, pg_config had 23 entries; it may grow
+ -select count(*) > 20 as ok from pg_config;
+ +select count(*) > 13 as ok from pg_config;
+-
++ 
+  -- We expect no cursors in this test; see also portals.sql
+  select count(*) = 0 as ok from pg_cursors;
+---
+-2.43.0
+diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+index 1142ff4878..0a1406bc8d 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+@@ -1,4 +1,4 @@
+-From 29e76cad362c7154920aa49aa0137e1773c4d3ec Mon Sep 17 00:00:00 2001
++From d7c047b2b1f6080b1012ffd765d778e9fe638157 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Tue, 27 Nov 2018 13:25:15 +0800
+ Subject: [PATCH] not check libperl under cross compiling
+@@ -15,15 +15,16 @@ Signed-off-by: Roy Li <rongqing.li@windriver.com>
+ 
+ update patch to version 11.1
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  configure.ac | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index ce0966f..856b091 100644
++index 527437e..3081ad7 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -2340,7 +2340,7 @@ Use --without-tcl to disable building PL/Tcl.])
++@@ -2354,7 +2354,7 @@ Use --without-tcl to disable building PL/Tcl.])
+  fi
+  
+  # check for <perl.h>
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_18.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_18.4.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb
+index 6bd09b7c1c..278d42ce3d 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_18.4.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_18.6.bb
+@@ -12,6 +12,6 @@ SRC_URI += "\
+    file://0001-tcl.m4-Recognize-tclsh9.patch \
+    "
+ 
+-SRC_URI[sha256sum] = "81a81ec695fb0c7901407defaa1d2f7973617154cf27ba74e3a7ab8e64436094"
++SRC_URI[sha256sum] = "555610c24d53e4316da5b7d3fc25c279d96856d5e0e23ee308c328c5fa881d9f"
+ 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Doesn't apply to our configuration of postgresql so we can safely ignore it."
 -- 
-2.34.1
+2.47.3
 
 
