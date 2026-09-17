@@ -2,156 +2,133 @@ Return-Path: <rsangam@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CA2DC982D0
-	for <webhook@archiver.kernel.org>; Thu, 17 Sep 2026 09:52:26 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.35675.1789638743633024542
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EB14C982D0
+	for <webhook@archiver.kernel.org>; Thu, 17 Sep 2026 09:55:16 +0000 (UTC)
+Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.35699.1789638907927965409
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2026 02:52:23 -0700
+ Thu, 17 Sep 2026 02:55:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=SzLMTE6B;
- spf=pass (domain: mvista.com, ip: 209.85.215.181, mailfrom: rsangam@mvista.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cc147d86bebso759955a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 02:52:23 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=f1Vye39E;
+ spf=pass (domain: mvista.com, ip: 74.125.227.141, mailfrom: rsangam@mvista.com)
+Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-396ccafb74fso633916a91.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 02:55:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1789638743; x=1790243543; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1789638907; x=1790243707; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=o2i1LhWiRsCyRghUjsPJXH6lvfbpdBZMD22+LHpF8mg=;
-        b=SzLMTE6B4QFWg5votyEbLYxEPqm7dlr0Aw0JCnTgRYuNiH7/EnH6kypjaNKKljqoKK
-         4F1pi5wLYE+wrtSGRDRVI9yG19es+IJUynh5wvp5TJGuBYfuY95SnU0g1y70e3Rdo+O/
-         q/7vGJtP8USYZXAaAkeUm3I/HBhhbt5MlFEis=
+        bh=kpBfJ+JJpjux//0/RKDVQ4iB8ZwzJRT/rXc/ptseVq8=;
+        b=f1Vye39EFbqFPa9G8soRgMxTL2kELz9zSP77jxENYKCs6oWJ3EpvMmR4ORp3GFHcwJ
+         YC5zEotcuB+cOriWm+h0SK2/W2LHqQXMlYjmIUgu8IRiVxS05WD5jq8Q6GTW+NlL8A8q
+         AbMQ86Ck0CXB3WlhGNy8tns6U2j9vS492b89M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789638743; x=1790243543;
+        d=1e100.net; s=20260707; t=1789638907; x=1790243707;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=o2i1LhWiRsCyRghUjsPJXH6lvfbpdBZMD22+LHpF8mg=;
-        b=vJgo0BwrZVdR2TZv5uPjW81dSjEVn/neTKOkzJ8r7MydJdfS2Wrw74QNlBdTEaFDkI
-         e+vCLBtqnS0i2oD/BDeCp21lZCWU232URYnwPsnRqTE0ZdFWWD/Fkyp9bBj2TQgSzSAO
-         4lNzcoDMkCKvBNtCPvaRj+0WVnkkWiPjRt330EvqqnWUkkV7bX+8M7rB9vtDKX8kAell
-         zRUDAkDVZCW9H3XFYaFPyNFEdrGY9R5HsfzkK8V9xiDwCsQbPJ0KvXEal9Qw82RGkkOA
-         2XzG0KdnILjSSiVFGV/x9n93pXIWfkNCp8w6jskyY07JW1Eu1sJlHKLQgRoxm3/y7j/E
-         h3Bw==
-X-Gm-Message-State: AFuF++nrlhiIEn9N2UQ9U4hr0MsqbgNqjvA/foKxiBU99V1oCu0mLsau
-	Y2S4y28OBFgc5e0Gil4eFc6GKLoBR093CX3hFr9DbHAQ5I4rueyrkA9lp6Jc09QDAn6F+MUnreL
-	gHrYd
-X-Gm-Gg: AYBFou3ZxPS39pSI/BczcOwEl8eOyUACxn78DbuEhOBxCU71qeuePCAFLE7dvW+bSNO
-	qi+w6mG742AJrUlB5SyO0rQBKwW8IVKknUo+fFlbTIsstxXncpwWqJkTIB5yYUJtLmJBMwsUAMt
-	tkNze0KCWMWs0U+ZApshhx/ot0McZr0yfDgTZftlkxecQHKtbrKl057o1yg1KPKXpXPhP2hH3OW
-	IBRtd3EKbt4aDj5MJdHYqUXTIIu0JNv3nRwNMHDWmpPtDkiswQi8Zctk3nHRXmoluAfUop7rvUA
-	/GQRB/1L8KAZoG8opHKph1HU3P5PEdx7wH8enN+Fy/zbzRFUxwzaB2S1diyWcdY4+cEhtUltyX9
-	f5on3CVtCVDsjKRyJDne1ECRMTkhLaxpY6bpHPAQFJrToDKhl6V5gAK2RCrkrqVpMnz29OethO9
-	Q3162AgjjbqC8miVlfG7CHLS/JRml0vI3oRdLrfj3FxLb/PLaaJSWUVNrH32hqFE8kDAZsVfbW0
-	uuZ7tcwYCQ=
-X-Received: by 2002:a05:6372:a749:b0:3da:f2e4:4ac7 with SMTP id adf61e73a8af0-3dd726e91camr3900107637.26.1789638742713;
-        Thu, 17 Sep 2026 02:52:22 -0700 (PDT)
+        bh=kpBfJ+JJpjux//0/RKDVQ4iB8ZwzJRT/rXc/ptseVq8=;
+        b=XK1UCq0q2RVwlCcZBCg8hQ0pWGV5rbRdqEoYX03yrjKzkk/3oXIwJfW+gHoWjPdkQ0
+         1qqFjVokzn09Oz1zZHsSOFc7PaBNatc139i0BReOoEfGEsaGNjREfwOc6j6qjuC9QOFt
+         NvCHTc2BaxSJ0aWI7NVVdgE5peUSgbfb8UTNTvgtCoAhzEOVWPItSUH8N1bZ8HgwGNrA
+         lPf1gfFOWk/+UdjTxU3WICWvBx+d/yiLMy0HarVkDrsTM7/qmWEQJLfIvglRP6KWQBGR
+         tntm5GRkrRHkrfxwCjamPloOgDNF3VM/+dXVQFB1fSB+7tu48fmQWtv2zn9E6HfqiNa7
+         879g==
+X-Gm-Message-State: AFuF++mqmPkTdCr0T56EtTIP5P88u6F4X/znIOHdPtmQ49gGq0aiDgq4
+	gVL/Qg6jtooHmEsNXHlRvDyt6lbw0BZwHP30tQyu980KRItmYkek4T3GU3XGkM/ze4wPAKO2QcI
+	WG6K+
+X-Gm-Gg: AYBFou1WRNBtR0kMtUWnnEayKN3S+iKMOssb6dmaerx5YAkheNVGAAZc+3mGES3X/8n
+	4tL8o0FY/3TRHHfDdf/fj6efGyuDYj8s1NYCoN7gUOlY/QjIp//L00sKyfqiJrvG9RcgzdsNnbn
+	T57F99T9hNiWVbSmnaeab6RAqoBgj1/+6O6ctaHM8Y5PXIM1dc2jXRm2dZjQAyOXrc/PnFpTcUC
+	NxPwHqhXvEAIKRgiu/XJo5T2QoNMKGjadfa05sMsokf8Q786oeYyuHbb4xRS7qDDR1qV5UnlpPG
+	wC9/UCz2hcpaPxqv+7LjSY9/eDlZQRTBkugdl6/874LcznH1XFdlNW5sw8E39KvsYiZ34KBqg3X
+	X+kKImCZecO1G3mR45+sbHE2x9j60oWNYg+fgMYspX1Tf5dw2+xpKt66h1oYSXJcGHDNKeUMjer
+	LLuPkeZB34RwY5go2siWX/GX1oJflBi56rGhpSXz0G7+3miCY1oJX6mT6S2ET/9ajJycj0T8dLM
+	KTR/Ajx4bg=
+X-Received: by 2002:a17:90b:4d0e:b0:39d:f5b6:ca47 with SMTP id 98e67ed59e1d1-39e1e47abbbmr17220412a91.12.1789638907099;
+        Thu, 17 Sep 2026 02:55:07 -0700 (PDT)
 Received: from MVIN00040.mvista.com ([2405:201:d00d:4190:4d82:51b8:3eaf:be4f])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5b0520asm15349099eec.27.2026.09.17.02.52.20
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5e40494sm14774556eec.15.2026.09.17.02.55.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 02:52:21 -0700 (PDT)
+        Thu, 17 Sep 2026 02:55:06 -0700 (PDT)
 From: Rohini Sangam <rsangam@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Rohini Sangam <rsangam@mvista.com>
-Subject: [meta-python][scarthgap][PATCH] python3-pillow: Security fix for CVE-2026-59198
-Date: Thu, 17 Sep 2026 15:22:13 +0530
-Message-Id: <20260917095213.17451-1-rsangam@mvista.com>
+Subject: [meta-python][scarthgap][PATCH] python3-pillow: Security fix for CVE-2026-59204
+Date: Thu, 17 Sep 2026 15:24:57 +0530
+Message-Id: <20260917095457.17838-1-rsangam@mvista.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 09:52:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130096
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 09:55:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130097
 
 Pick patch from [1] also mentioned at NVD report in [2]
 
-[1] https://github.com/python-pillow/Pillow/commit/eada3cbd7fb9963ee90673fb7b5270124a0d5f4b
-[2] https://nvd.nist.gov/vuln/detail/cve-2026-59198
+[1] https://github.com/python-pillow/Pillow/commit/13ada41172142f2fd9f0906f615a00ea623a11ca
+[2] https://nvd.nist.gov/vuln/detail/cve-2026-59204
 
 Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 ---
- .../python3-pillow/CVE-2026-59198.patch       | 60 +++++++++++++++++++
+ .../python3-pillow/CVE-2026-59204.patch       | 37 +++++++++++++++++++
  .../python/python3-pillow_10.3.0.bb           |  1 +
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
 new file mode 100644
-index 0000000000..eb8a6e5a1c
+index 0000000000..cc55b3c19f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
-@@ -0,0 +1,60 @@
-+From eada3cbd7fb9963ee90673fb7b5270124a0d5f4b Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
+@@ -0,0 +1,37 @@
++From 13ada41172142f2fd9f0906f615a00ea623a11ca Mon Sep 17 00:00:00 2001
 +From: Andrew Murray <3112309+radarhere@users.noreply.github.com>
-+Date: Tue, 23 Jun 2026 09:46:33 +1000
-+Subject: [PATCH] Prevent saving 1 mode images as TGA with run-length
-+encoding
-+ (#9709)
++Date: Mon, 22 Jun 2026 10:34:18 +1000
++Subject: [PATCH] Calculate JPEG2000 total_component_width for each tile in
++ isolation (#9704)
 +
-+CVE: CVE-2026-59198
-+Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/eada3cbd7fb9963ee90673fb7b5270124a0d5f4b]
++CVE: CVE-2026-59204
++Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/13ada41172142f2fd9f0906f615a00ea623a11ca]
 +
 +Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 +---
-+ Tests/test_file_tga.py    | 12 +++++++++++-
-+ src/PIL/TgaImagePlugin.py |  4 ++++
-+ 2 files changed, 15 insertions(+), 1 deletion(-)
++ src/libImaging/Jpeg2KDecode.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/Tests/test_file_tga.py b/Tests/test_file_tga.py
-+index ff6dab00d..c03282142 100644
-+--- a/Tests/test_file_tga.py
-++++ b/Tests/test_file_tga.py
-+@@ -147,10 +147,20 @@ def test_save_wrong_mode(tmp_path: Path) -> None:
-+     im = hopper("PA")
-+     out = str(tmp_path / "temp.tga")
++diff --git a/src/libImaging/Jpeg2KDecode.c b/src/libImaging/Jpeg2KDecode.c
++index 13f363422..9faacaca8 100644
++--- a/src/libImaging/Jpeg2KDecode.c
+++++ b/src/libImaging/Jpeg2KDecode.c
++@@ -657,7 +657,6 @@ j2k_decode_entry(Imaging im, ImagingCodecState state) {
++     size_t buffer_size = 0, tile_bytes = 0;
++     unsigned n, tile_height, tile_width;
++     int subsampling;
++-    int total_component_width = 0;
 + 
-+-    with pytest.raises(OSError):
-++    with pytest.raises(OSError, match="cannot write mode PA as TGA"):
-+         im.save(out)
++     stream = opj_stream_create(BUFFER_SIZE, OPJ_TRUE);
 + 
++@@ -863,6 +862,7 @@ j2k_decode_entry(Imaging im, ImagingCodecState state) {
++          a, and then a malicious file could have a smaller tile_bytes
++         */
 + 
-++def test_save_1_mode_rle(tmp_path: Path) -> None:
-++    im = Image.new("1", (1, 1))
-++    out = tmp_path / "temp.tga"
-++
-++    with pytest.raises(
-++        OSError, match="cannot write mode 1 as TGA with run-length encoding"
-++    ):
-++        im.save(out, compression="tga_rle")
-++
-++
-+ def test_save_mapdepth() -> None:
-+     # This image has been manually hexedited from 200x32_p_bl_raw.tga
-+     # to include an origin
-+diff --git a/src/PIL/TgaImagePlugin.py b/src/PIL/TgaImagePlugin.py
-+index 401a83f9f..e8fd297cf 100644
-+--- a/src/PIL/TgaImagePlugin.py
-++++ b/src/PIL/TgaImagePlugin.py
-+@@ -191,6 +191,10 @@ def _save(im: Image.Image, fp: IO[bytes], filename: str) -> None:
-+         compression = im.encoderinfo.get("compression", im.info.get("compression"))
-+         rle = compression == "tga_rle"
-+     if rle:
-++        if im.mode == "1":
-++            msg = f"cannot write mode {im.mode} as TGA with run-length encoding"
-++            raise OSError(msg)
-++
-+         imagetype += 8
-+ 
-+     id_section = im.encoderinfo.get("id_section", im.info.get("id_section", ""))
+++        int total_component_width = 0;
++         for (n=0; n < tile_info.nb_comps; n++) {
++             // see csize /acsize calcs
++             int csize = (image->comps[n].prec + 7) >> 3;
 +-- 
 +2.44.4
 +
 diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-index 9f1ef87a46..7e99860055 100644
+index 7e99860055..4a48210a34 100644
 --- a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
-@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
-            file://run-ptest \
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
             file://CVE-2026-25990.patch \
             file://CVE-2026-40192.patch \
-+           file://CVE-2026-59198.patch \
+            file://CVE-2026-59198.patch \
++           file://CVE-2026-59204.patch \
             "
  SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
  
