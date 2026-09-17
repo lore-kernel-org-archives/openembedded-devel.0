@@ -2,97 +2,100 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6743AC982D9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C068C982DA
 	for <webhook@archiver.kernel.org>; Thu, 17 Sep 2026 15:37:36 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.42956.1789659453605741440
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.42954.1789659452888948790
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2026 08:37:34 -0700
+ Thu, 17 Sep 2026 08:37:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=VKh4kd44;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=F4yjuKBT;
  spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 079D91596
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 08:37:30 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B5B561596
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 08:37:28 -0700 (PDT)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 4A1A23F7B4
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 08:37:33 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 02EB83F7B4
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 08:37:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1789659453; bh=HdBCs0roDWxscq/afnHgMDqDnOucz7ef/sH1tk9PK/s=;
+	t=1789659452; bh=+8Q0ns7RKkKA8WZYFuuPKTEf8Izc3569i7Qf9HkSVkk=;
 	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=VKh4kd440pQYicjYEhlQaXFMZheXmjX3jjT5+MUzIDNFNBpTe/35CWCLd/UbAV1h9
-	 K5vD04iXPg28T0WW6j44eZB75Jp79OorTd6Wg42bleTwdqDkP+kj1t/6a2H5fkPPoP
-	 VypHf3ZaxlZIRJscaAyR3Yt/WYPz+xVwRuBzVLaA=
+	b=F4yjuKBTX2BZJKHiZD/k40FXVR0aPjRD+ThQRsH/+FEMoG7EuC28x5lBfNX/E8U/Z
+	 Qj2L4i6tPQSAqcAMSkuBdcKxBfjJuaCJxDcgG5Hpmwb71uX7iRFvSnQqPA4mgrkKy2
+	 1Sqg8gyn1RI7QZxC+nfaTbI6sh1NF5Q7C2+fOLg4=
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 4/8] spice: clean up dependencies
-Date: Thu, 17 Sep 2026 16:37:21 +0100
-Message-ID: <20260917153727.3057505-4-ross.burton@arm.com>
+Subject: [PATCH v2 2/8] python3-networkmanager: remove abandoned recipe
+Date: Thu, 17 Sep 2026 16:37:19 +0100
+Message-ID: <20260917153727.3057505-2-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260917153727.3057505-1-ross.burton@arm.com>
 References: <20260917153727.3057505-1-ross.burton@arm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2026 15:37:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130101
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130099
 
-We can disable building the tests, and remove a few build dependencies.
+python-networkmanager was abandoned upstream in 2023:
 
-python3-six is no longer needed, remove that.
-
-openssl is always required, add to DEPENDS.
-
-Add lz4 PACKAGECONFIG as this is an option upstream, enabled by default
-to preserve behaviour.
+  =E2=9A=A0=EF=B8=8F This project is no longer maintained. =E2=9A=A0=EF=B8=
+=8F
+  If you are looking for an alternative, please try
+  https://github.com/python-sdbus/python-sdbus-networkmanager
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../recipes-support/spice/spice_0.16.0.bb            | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ .../python3-networkmanager_2.2.bb                   | 13 -------------
+ .../packagegroups/packagegroup-meta-networking.bb   |  1 -
+ 2 files changed, 14 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/python-networkma=
+nager/python3-networkmanager_2.2.bb
 
-diff --git a/meta-networking/recipes-support/spice/spice_0.16.0.bb b/meta=
--networking/recipes-support/spice/spice_0.16.0.bb
-index b4370084303..4d4086c1803 100644
---- a/meta-networking/recipes-support/spice/spice_0.16.0.bb
-+++ b/meta-networking/recipes-support/spice/spice_0.16.0.bb
-@@ -24,22 +24,22 @@ CVE_STATUS[CVE-2016-0749] =3D "fixed-version: patched=
- since 0.13.2"
- CVE_STATUS[CVE-2016-2150] =3D "fixed-version: patched since 0.13.2"
- CVE_STATUS[CVE-2018-10893] =3D "fixed-version: patched already, caused b=
-y inaccurate CPE in the NVD database."
-=20
--inherit meson gettext python3native python3-dir pkgconfig
-+inherit meson pkgconfig python3native
-=20
--DEPENDS =3D "spice-protocol jpeg pixman alsa-lib glib-2.0 gdk-pixbuf lz4=
- orc python3-pyparsing-native python3-six-native glib-2.0-native zlib"
--DEPENDS:append:class-nativesdk =3D " nativesdk-openssl"
+diff --git a/meta-networking/recipes-connectivity/python-networkmanager/p=
+ython3-networkmanager_2.2.bb b/meta-networking/recipes-connectivity/pytho=
+n-networkmanager/python3-networkmanager_2.2.bb
+deleted file mode 100644
+index 60cf3c2525d..00000000000
+--- a/meta-networking/recipes-connectivity/python-networkmanager/python3-=
+networkmanager_2.2.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY =3D "Easy communication with NetworkManager from Python"
+-HOMEPAGE =3D "https://github.com/seveas/python-networkmanager"
+-LICENSE =3D "Zlib"
 -
--export PYTHON =3D "${STAGING_BINDIR_NATIVE}/python3-native/python3"
-+DEPENDS =3D "spice-protocol glib-2.0 pixman openssl jpeg zlib python3-py=
-parsing-native"
-=20
- do_configure:prepend() {
- 	echo ${PV} > ${S}/.tarball-version
- }
-=20
-+EXTRA_OEMESON =3D "-Dtests=3Dfalse"
-+
- PACKAGECONFIG:class-native =3D ""
- PACKAGECONFIG:class-nativesdk =3D ""
--PACKAGECONFIG ?=3D "sasl opus smartcard gstreamer"
-+PACKAGECONFIG ?=3D "lz4 sasl opus smartcard gstreamer"
-=20
- PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3D1.0,-Dgstreamer=3Dno,gstream=
-er1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[lz4] =3D "-Dlz4=3Dtrue,-Dlz4=3Dfalse,lz4"
- PACKAGECONFIG[smartcard] =3D "-Dsmartcard=3Denabled,-Dsmartcard=3Ddisabl=
-ed,libcacard,libcacard"
- PACKAGECONFIG[sasl] =3D "-Dsasl=3Dtrue,-Dsasl=3Dfalse,cyrus-sasl,"
- PACKAGECONFIG[opus] =3D "-Dopus=3Denabled,-Dopus=3Ddisabled,libopus,"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9f8a5b5844f027357ab19ef3e3c6a=
+956"
+-
+-SRC_URI[md5sum] =3D "7e05d3ca40a4fa50222ba93cda3d0d02"
+-SRC_URI[sha256sum] =3D "de6eb921d94aba7549f428ed2b3aa482a5d543ecb6965cba=
+a0fbb555ab31b9d5"
+-
+-PYPI_PACKAGE =3D "python-networkmanager"
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} =3D "networkmanager python3-dbus python3-six"
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta=
+-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-=
+meta-networking.bb
+index 06cf5a70837..085aebd4559 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networ=
+king.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networ=
+king.bb
+@@ -57,7 +57,6 @@ RDEPENDS:packagegroup-meta-networking-connectivity =3D =
+"\
+     networkmanager-openvpn \
+     networkmanager \
+     openconnect \
+-    python3-networkmanager \
+     rdate \
+     rdist \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
 --=20
 2.43.0
 
