@@ -1,210 +1,535 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D32D1C88E75
-	for <webhook@archiver.kernel.org>; Fri, 18 Sep 2026 06:04:37 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.11])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5153.1789711468459445304
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AF4CC982D7
+	for <webhook@archiver.kernel.org>; Fri, 18 Sep 2026 09:33:27 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7232.1789724005293008657
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2026 23:04:30 -0700
+ Fri, 18 Sep 2026 02:33:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=DbktYO+U;
- spf=pass (domain: siemens.com, ip: 52.101.66.11, mailfrom: peter.marko@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CuRuUit8c3yewfg629Wk1rQOhq4eRe+NIURx5veFumViIoNpEYuHBSByl1fJYkqE8VBqB/SowHLnuZyN1LlX7RttJFRhT7h7Mo/Ekyou8fREFgBZT0hoTZxfPAruUb2hLwXR6ni8FyJVYJAcoAdCZ5tBBvnp4/vesPvazvgudC+ny8ePcYaNj6exGNd3KhbIWft9Uei5oEFqvI4mrFInaYvRteicXYly0z03spy/34S9PXqGyPTY6v1EuWBQ+4vny28kCpXgcwXXy5cM2WATqWzy7AfhCOdFLnTctTrGb+MFaY1tjRjtgLouW0u+liDuvYICaYixhWALCriOfbIHXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G2znn5U4YyNPAUBU5bIuHP8ugXlgkPmU4s7nrz3IDkI=;
- b=bOvkf8pylB7dssfrLRVdKvSGe7nik1Bw4kLXsoMbtrHXiJmanxTqBshIt5+wy7sCqRYvjKhhXukFNm9oP43UIxtHd9KGEcaAChf/guigFI075VQgvBYPY0XtEIaywLoYBDLu5ml5NU1Qvte46GK7RsOZbqwWelcMtOicaI/ypTMp4jDEbpTwPoMpyh1HqZ479J5AQMHMLrD4FSuCGeOsnN6PQPppCtzavdA9R3dph22bh0DIhAn0c4froItqcnpgi2JMvuXvxW0ioJEC8l6zCrkWbnxdul0Hz7klfMiR7VUOyqg0faYENqP1aDnQsRehwH9qQhef1yBzVj/CT4USYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G2znn5U4YyNPAUBU5bIuHP8ugXlgkPmU4s7nrz3IDkI=;
- b=DbktYO+U3i/bROys7ovgaYbSHmKUNxRON89fo+FULwxAaPK/cpOBDz/K4/hvGUnyi39Yogr1XrZiIs/71Qr9xSwb3RyZD96uyFWXBtWBsrWVAWU6wVSlEcZXDaTbVZx1Re8kJ6FxeS5x5bAnxp6K0pIv7DKnok+pSOnGnANcbwr9LyOuXKYz5LCZBR2ILlFUsR/iS5zDIpFqDP4e6TWvC0u0pcCNGgozXW+lHjIqcs/fRP/GSExQjPUuOnl3/nWZtU39DHjFLAZvSQXIB4+gCqm3uas6QYWkWe+4YhTOaEQKMtuwNRJNxnahkWEzyySEPsUuUniSkJDvkAdTonLzYw==
-Received: from AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:420::16)
- by PA2PR10MB9135.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:422::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Fri, 18 Sep
- 2026 06:04:22 +0000
-Received: from AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a905:57e5:8858:d008]) by AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a905:57e5:8858:d008%4]) with mapi id 15.21.0406.007; Fri, 18 Sep 2026
- 06:04:21 +0000
-From: "Marko, Peter" <Peter.Marko@siemens.com>
-To: "Tillmann.Severin@bmw.de" <Tillmann.Severin@bmw.de>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: "ross.burton@arm.com" <ross.burton@arm.com>
-Subject: RE: [oe] [meta-oe][PATCH v2] smolkit: Add low-footprint partial
- replacement for polkit
-Thread-Topic: [oe] [meta-oe][PATCH v2] smolkit: Add low-footprint partial
- replacement for polkit
-Thread-Index: AQHdRzHhjNIXAxK7lE22p1YpGTrMj7bT1tZA
-Date: Fri, 18 Sep 2026 06:04:21 +0000
-Message-ID: 
- <AS8PR10MB507311D2ABDAF561DD50CED2FD872@AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM>
-References: <20260918055108.3637556-1-tillmann.severin@bmw.de>
-In-Reply-To: <20260918055108.3637556-1-tillmann.severin@bmw.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=1fd4b5cd-9ae3-40bf-a8e3-0fd0805dff99;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2026-09-18T05:57:40Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Tag=10,
- 3, 0, 1;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB5073:EE_|PA2PR10MB9135:EE_
-x-ms-office365-filtering-correlation-id: 7b511644-8ddd-4108-f4cb-08df154aaf15
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|38070700021|5023799004|11063799006|10067099003|56012099006|55112099003|22082099003|18002099003|6133799003|3023799007;
-x-microsoft-antispam-message-info: 
- /gQMUbKqbqFKRElWOP7IxZpLJEvdNsRSuuyA7E3BFzvuQNqrNNYKEoCFQGSTR2xTlFFZopWsk4m36DE2VTFl1bK5sZP5O2JEOrwtfUZEYOX0PJ1VoBUDRH28X9Xm6usoMKIkGY2GXS74nexZiTCBuoy5tkd2V74YvLKg3A88NA4Qv7HofXfoGWO+QeLeU6990Nk/7oGJIZKEeAAg+oDx24DLKaT4C6KeVB4hS3A9jqhTT9UZBa9MnfFQqJXQGFnlE0g8oNGZHw10/rHZTf4+JY9GCz3pabltIoTqGAuHn/5FH7lMYiubXQEkWDfqpFDJoiCcu4R0MIEEUOzHw8x8kzXObfSToVlaxpdj2HTGWYVYwwGPr9hVEIGJ9CxR9MuX8tpO0oSiLms22whwXjpCgiSTw70FlUrILGrtTV9UU6Gmo+63is208DPvmHUgSrHcqAnADi2EB4aqS26VJWyetCOlwDo9Z+KleOjiaLDCWxECEAG+/NPUWi/rGPIAYLJ/aUMJa/nfG1qpbDgw22IZDYHh9/uTJLgWYm39AwwYMt56u6SPjM6OAXXIdYsFM6xup254CpjyhNQwp88KbaLE/+8ArwOvqXS55jlw0hd9QihsQ6ha+lDVMuhXCGNH645V3t4Q5p7V23QpjNjpdDnYiPS00sN6fjumm/4wqzCcq6RzUsg/Lp7l0J82iWNZozBW4fIfyZ+wfv+IoZ5an5y7a+7RuUjQCmFf2L2UpYDGagQ=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(38070700021)(5023799004)(11063799006)(10067099003)(56012099006)(55112099003)(22082099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?0NsPTNwHnX06R+yyCBILh+nWcP7x33cSO6z/aUuCOayib0tZlVJLombxgCTD?=
- =?us-ascii?Q?K5rq2EOwvqJBnRmCmelLL6vf3xSSaMFj28RlbdtSczRDfOPuYBenqHUl3tDh?=
- =?us-ascii?Q?f5LmBXQAWbzJZbUxa3z/+nekooueQZlnJCPrPVNrq/1QVxhql9Ahc6LHlNgy?=
- =?us-ascii?Q?2UXEWcNVmc0eJKT3UCfkdgriqBbBYkTEZb757S8h/Ahepjl+D2YFmgTiF+aw?=
- =?us-ascii?Q?DM8fchNh7WXmA3/LbwGdynF8ClanXZWYVLXlTcuMw/nFoNL9OErh8lS0IBtF?=
- =?us-ascii?Q?fvRcNPw/mWnsW3ZjR9Y1JhXx93N+iUxbmZVqhKzPBNRr393I2zxY03qL5eAq?=
- =?us-ascii?Q?j9QxnZrGbFHbkaosf9BBNBYuVAkPlUndSmvYd07fEZlxIct6JeeEwHBpyraj?=
- =?us-ascii?Q?aZixecj7/YzzafpuoW1JNJtcDA9PrNZGUKTHNCXNL5n00qCteOczqvRaj74c?=
- =?us-ascii?Q?h9wGffhv0mDFWorVQqt8oUyvlM7rwqtfqpDB50W5GC3Qvs7/YQxEMNzkvFNz?=
- =?us-ascii?Q?kXRo87ukeRDZmUoxf6qlkeeuEZ4TMjReXBHa/3fSaXWw4pbrI+QbJb8NVPqL?=
- =?us-ascii?Q?D0VycyCfAoec5lDS/l27WXeBlCq+BwytXeOjVs9NFbsot3O7vzwDpgPhfGau?=
- =?us-ascii?Q?JalGZhL3P+YFkMCmjh0iL5MRo1dhqcIzUDmsIxaq6ESadyi6X1rB7YfB7FwZ?=
- =?us-ascii?Q?lLYZvnxfz+8icFkwqpW+/XWTSzrEXUshAJmRysBBOmZMtTpV/1WcL5kAhI6D?=
- =?us-ascii?Q?aofoxQO2PPBciNTTp+eUkQ03HFgU+X2qVgkBQemJTLqDq96X0KVKV9nZ6ODz?=
- =?us-ascii?Q?EJxjDHvRS15PjBFYf/ZF7btNQutlIBoRjxb5GbYiLCTPgcCEimV3Rw7iNo/L?=
- =?us-ascii?Q?K4T8R4Farg6qRQzHy6HaNAcFqt+V6PuvzgS9t/yx2doclL3iKmTo3gyCeWyq?=
- =?us-ascii?Q?aCVDcb7MjYBpXu0KqJIup2rRB+kKlmAfRrP46vUtQW4ioNSmZqAcCesyj4RR?=
- =?us-ascii?Q?H5iF5h8S1NWCeZf+S0ZNginruVLtxdsPh7bf8lfuSX4mWUSdhYTthi0i2Txv?=
- =?us-ascii?Q?FGgqrtxwAay7Epy7JhF8YfOUiaYJLlveMZ4PK2tvzY0po2/RCdB35biLQ3gx?=
- =?us-ascii?Q?wCDgfgf+Mf2jIlCXHINb/CrndQtTPFoX2jAUvVgNRjeJ/6FDirEd+iU/zuiV?=
- =?us-ascii?Q?q3Ib6vEk2nMQS58f+cYwCu5KhCty+6fwPc1xwIjqLeG2ghfh6FiLoPlFJjQK?=
- =?us-ascii?Q?Bx0IgfUnW0JZwa2m5KGiQqr6IZ9/JGRzIQVnDC76vqy+szbtrG529ksMfeSm?=
- =?us-ascii?Q?3fjsQ5uDrciDSD+ly9VLszpfBU9gJZkrS2udKDypOnryX2Z2t8uwq8jIlgdm?=
- =?us-ascii?Q?ft6/+QWLv1eNNA7YSq1yhbXX3aTPFBXQ76eQTkToGAzefz8dHv3pzHIDG5BX?=
- =?us-ascii?Q?P8QHxk0wIeO4jmTBFUo7gxlpCB7SeEbPrcN5FOxlLgWItMymmcVQAwSBfF3b?=
- =?us-ascii?Q?6Mjy+WWjHD3SMGk9V93jiKpxFxRVfqztkeZAc/Pp4JQux+Iyf+6kldU/hPAg?=
- =?us-ascii?Q?WRHDeIcn5vARcvacZA3uAP8+/e6hBfW8c5Qjw0C4yvcFUGnzjOSpon9AKh09?=
- =?us-ascii?Q?oZB1nFnRUfsDPq57FXnT5JKjz8oTVDMmwFKcnOvWBAb7Et8TXNNvgvT/rz+K?=
- =?us-ascii?Q?Uly79JZdABp/LG6EduxGgdbxvTXf1EXQpnzQU5GS1oGZ0fJXgxXbaTrZ3IhC?=
- =?us-ascii?Q?yOpMCUAI4Q=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=I/DXhsQ/;
+ spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout08.t-online.de (Postfix) with SMTP id D8764E4B4
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 11:33:22 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.164.121]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1x7UyA-0EP8qm0; Fri, 18 Sep 2026 11:33:22 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-html5lib: drop the six dependency
+Date: Fri, 18 Sep 2026 11:33:15 +0200
+Message-ID: <20260918093315.337468-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b511644-8ddd-4108-f4cb-08df154aaf15
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Sep 2026 06:04:21.8946
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aYUqF0xbdLBqpr7VmEGqBroaCh5f1k22ZUWPi/0EZ8Xdl7bCD+uy3VSAHIJa83RDYLV1/n+BXMMmE/OqTFaEdg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB9135
+X-TOI-EXPURGATEID: 150726::1789724002-4D7F99BC-B9845707/0/0 CLEAN NORMAL
+X-TOI-MSGID: ffe4be8d-7033-4125-8e62-b6e0d0e8654f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1789724002; i=f_l_k@t-online.de;
+	bh=C89fCtDu0uAaxrDdmku+hVrpyLp35qm51+NTAznRynQ=;
+	h=From:To:Subject:Date;
+	b=I/DXhsQ//cNY0jF/bmNPDLUHJS9f4C6KmF321IDD/NFZReubBGRld/HjWT8/HT0HN
+	 Hkv5dZgwKCa6ybXVMZXqdoT6Bc3vjdCZkaB+dt2bq0o3t7YoIP7g8uOG19AP8xLW5z
+	 A/li8Mb/15fH8yOdbTQog+FqG0i14qbkppttCb+7ru4ClcN0xjgALsC3TXzi487bb0
+	 oRUsPLhU596t6S6kptYf70nJDB7k7WbCd0Wp2S7ZigB1Xxk4DETpUGDatN5Q/+isjB
+	 1b3B1c4AXQMV9z92BZlrgQJ1X2bWKWtz4pK/QSUvgLCT39Y9lmGPo+kcvgyWg9JN/H
+	 XMUNyTGsWB6YQ==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 06:04:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130111
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 09:33:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130112
 
+openembedded-core removed python3-six, so the recipe no longer resolves.
+html5lib 1.1 only used six as a Python 2 compatibility layer; patch the
+imports over to the Python 3 builtins and drop the runtime dependency.
 
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+AI-Generated: Uses Claude Code (Claude Fable 5.1)
+---
+ .../0001-Drop-the-six-dependency.patch        | 397 ++++++++++++++++++
+ .../python/python3-html5lib_1.1.bb            |   2 +-
+ 2 files changed, 398 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-html5lib/=
+0001-Drop-the-six-dependency.patch
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Severin Tillmann, DE-862 via
-> lists.openembedded.org
-> Sent: Friday, September 18, 2026 7:51 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: ross.burton@arm.com; Tillmann Severin <tillmann.severin@bmw.de>
-> Subject: [oe] [meta-oe][PATCH v2] smolkit: Add low-footprint partial repl=
-acement
-> for polkit
->=20
-> smolkit is a replacement for a subset of
-> polkit's interface, which is low-footprint in the
-> sense of not needing to have a javascript engine
-> available to do its job. polkit has this disadvantage
-> and even with a small javascript engine like duktape,
-> it is not worth to have turing-complete configuration
-> where you could also use static JSON on some embedded
-> devices.
->=20
-> Signed-off-by: Tillmann Severin <tillmann.severin@bmw.de>
-> ---
-> changes in v2:
-> - smolkit PROVIDES polkit instead of conflicting a distro feature
-> - Drop line setting `S`
-> - Tags are now available upstream
-> ---
-> ---
->  meta-oe/recipes-extended/smolkit/smolkit.bb | 24 +++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/smolkit/smolkit.bb
->=20
-> diff --git a/meta-oe/recipes-extended/smolkit/smolkit.bb b/meta-oe/recipe=
-s-
-> extended/smolkit/smolkit.bb
-> new file mode 100644
-> index 0000000000..47ca0c3740
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/smolkit/smolkit.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY =3D "low-footprint polkit replacement"
-> +HOMEPAGE =3D "https://github.com/bmwcarit/smolkit"
-> +DESCRIPTION =3D "\
-> +  Service that implements a subset of polkit's D-Bus interface with a st=
-atic
-> configuration language. \
-> +"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57"
-> +
-> +inherit cmake features_check pkgconfig
-> +
-> +DEPENDS =3D "\
-> +  rapidjson \
-> +  sdbus-c++ \
-> +"
-> +
-> +PROVIDES =3D "polkit"
-
-Doesn't this cause warnings when something in the build depends on polkit?
-I think there is a need for defining PREFERRED_PROVIDER definitions in laye=
-r.conf
-
-And you maybe also need to add RPROVIDES:${PN} for cases when something RDE=
-PENDS on polkit.
-
-> +
-> +PV =3D "0.2.0+git"
-> +
-> +SRC_URI =3D "\
-> +    git://github.com/bmwcarit/${BPN}.git;protocol=3Dhttps;branch=3Dmain =
-\
-
-Please add ;tag=3Dv${PV} to SRC_URI
-
-> +"
-> +SRCREV =3D "46bbfd5c922a8d03a534398ee129ded822dfcafe"
-> --
-> 2.43.0
+diff --git a/meta-python/recipes-devtools/python/python3-html5lib/0001-Dr=
+op-the-six-dependency.patch b/meta-python/recipes-devtools/python/python3=
+-html5lib/0001-Drop-the-six-dependency.patch
+new file mode 100644
+index 0000000000..f83c7de34e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-html5lib/0001-Drop-the-=
+six-dependency.patch
+@@ -0,0 +1,397 @@
++From 2d62ee4926f2597839b59201504a6075651b2978 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Fri, 18 Sep 2026 11:22:50 +0200
++Subject: [PATCH] Drop the six dependency
++
++html5lib only runs on Python 3 nowadays, so the six shims can be replace=
+d by
++their builtins: text_type/string_types by str, binary_type by bytes, uni=
+chr by
++chr, viewkeys by dict.keys, with_metaclass by the metaclass keyword and =
+the
++six.moves imports by http.client, urllib.response and urllib.parse. The =
+PY3
++branches collapse to their Python 3 half.
++
++Upstream-Status: Submitted [https://github.com/html5lib/html5lib-python/=
+pull/581]
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++---
++ html5lib/_inputstream.py            |  8 ++++----
++ html5lib/_tokenizer.py              |  1 -
++ html5lib/_trie/py.py                |  3 +--
++ html5lib/_utils.py                  | 14 +++-----------
++ html5lib/filters/lint.py            | 29 ++++++++++++++---------------
++ html5lib/filters/sanitizer.py       |  2 +-
++ html5lib/html5parser.py             |  5 ++---
++ html5lib/serializer.py              |  5 ++---
++ html5lib/treebuilders/base.py       |  5 ++---
++ html5lib/treebuilders/etree.py      |  3 +--
++ html5lib/treebuilders/etree_lxml.py |  6 +-----
++ html5lib/treewalkers/etree.py       |  3 +--
++ html5lib/treewalkers/etree_lxml.py  |  3 +--
++ setup.py                            |  1 -
++ 14 files changed, 33 insertions(+), 55 deletions(-)
++
++diff --git a/html5lib/_inputstream.py b/html5lib/_inputstream.py
++index 0207dd2..5a2fc8c 100644
++--- a/html5lib/_inputstream.py
+++++ b/html5lib/_inputstream.py
++@@ -1,7 +1,7 @@
++ from __future__ import absolute_import, division, unicode_literals
++=20
++-from six import text_type
++-from six.moves import http_client, urllib
+++import http.client as http_client
+++import urllib.response
++=20
++ import codecs
++ import re
++@@ -131,9 +131,9 @@ def HTMLInputStream(source, **kwargs):
++          isinstance(source.fp, http_client.HTTPResponse))):
++         isUnicode =3D False
++     elif hasattr(source, "read"):
++-        isUnicode =3D isinstance(source.read(0), text_type)
+++        isUnicode =3D isinstance(source.read(0), str)
++     else:
++-        isUnicode =3D isinstance(source, text_type)
+++        isUnicode =3D isinstance(source, str)
++=20
++     if isUnicode:
++         encodings =3D [x for x in kwargs if x.endswith("_encoding")]
++diff --git a/html5lib/_tokenizer.py b/html5lib/_tokenizer.py
++index 4748a19..5b20f49 100644
++--- a/html5lib/_tokenizer.py
+++++ b/html5lib/_tokenizer.py
++@@ -1,6 +1,5 @@
++ from __future__ import absolute_import, division, unicode_literals
++=20
++-from six import unichr as chr
++=20
++ from collections import deque, OrderedDict
++ from sys import version_info
++diff --git a/html5lib/_trie/py.py b/html5lib/_trie/py.py
++index c2ba3da..cfe7513 100644
++--- a/html5lib/_trie/py.py
+++++ b/html5lib/_trie/py.py
++@@ -1,5 +1,4 @@
++ from __future__ import absolute_import, division, unicode_literals
++-from six import text_type
++=20
++ from bisect import bisect_left
++=20
++@@ -8,7 +7,7 @@ from ._base import Trie as ABCTrie
++=20
++ class Trie(ABCTrie):
++     def __init__(self, data):
++-        if not all(isinstance(x, text_type) for x in data.keys()):
+++        if not all(isinstance(x, str) for x in data.keys()):
++             raise TypeError("All keys must be strings")
++=20
++         self._data =3D data
++diff --git a/html5lib/_utils.py b/html5lib/_utils.py
++index 9ea5794..5bc56ec 100644
++--- a/html5lib/_utils.py
+++++ b/html5lib/_utils.py
++@@ -7,15 +7,7 @@ try:
++ except ImportError:
++     from collections import Mapping
++=20
++-from six import text_type, PY3
++-
++-if PY3:
++-    import xml.etree.ElementTree as default_etree
++-else:
++-    try:
++-        import xml.etree.cElementTree as default_etree
++-    except ImportError:
++-        import xml.etree.ElementTree as default_etree
+++import xml.etree.ElementTree as default_etree
++=20
++=20
++ __all__ =3D ["default_etree", "MethodDispatcher", "isSurrogatePair",
++@@ -31,10 +23,10 @@ __all__ =3D ["default_etree", "MethodDispatcher", "i=
+sSurrogatePair",
++ # escapes.
++ try:
++     _x =3D eval('"\\uD800"')  # pylint:disable=3Deval-used
++-    if not isinstance(_x, text_type):
+++    if not isinstance(_x, str):
++         # We need this with u"" because of http://bugs.jython.org/issue=
+2039
++         _x =3D eval('u"\\uD800"')  # pylint:disable=3Deval-used
++-        assert isinstance(_x, text_type)
+++        assert isinstance(_x, str)
++ except Exception:
++     supports_lone_surrogates =3D False
++ else:
++diff --git a/html5lib/filters/lint.py b/html5lib/filters/lint.py
++index acd4d7a..e012fb8 100644
++--- a/html5lib/filters/lint.py
+++++ b/html5lib/filters/lint.py
++@@ -1,6 +1,5 @@
++ from __future__ import absolute_import, division, unicode_literals
++=20
++-from six import text_type
++=20
++ from . import base
++ from ..constants import namespaces, voidElements
++@@ -33,9 +32,9 @@ class Filter(base.Filter):
++             if type in ("StartTag", "EmptyTag"):
++                 namespace =3D token["namespace"]
++                 name =3D token["name"]
++-                assert namespace is None or isinstance(namespace, text_=
+type)
+++                assert namespace is None or isinstance(namespace, str)
++                 assert namespace !=3D ""
++-                assert isinstance(name, text_type)
+++                assert isinstance(name, str)
++                 assert name !=3D ""
++                 assert isinstance(token["data"], dict)
++                 if (not namespace or namespace =3D=3D namespaces["html"=
+]) and name in voidElements:
++@@ -45,18 +44,18 @@ class Filter(base.Filter):
++                 if type =3D=3D "StartTag" and self.require_matching_tag=
+s:
++                     open_elements.append((namespace, name))
++                 for (namespace, name), value in token["data"].items():
++-                    assert namespace is None or isinstance(namespace, t=
+ext_type)
+++                    assert namespace is None or isinstance(namespace, s=
+tr)
++                     assert namespace !=3D ""
++-                    assert isinstance(name, text_type)
+++                    assert isinstance(name, str)
++                     assert name !=3D ""
++-                    assert isinstance(value, text_type)
+++                    assert isinstance(value, str)
++=20
++             elif type =3D=3D "EndTag":
++                 namespace =3D token["namespace"]
++                 name =3D token["name"]
++-                assert namespace is None or isinstance(namespace, text_=
+type)
+++                assert namespace is None or isinstance(namespace, str)
++                 assert namespace !=3D ""
++-                assert isinstance(name, text_type)
+++                assert isinstance(name, str)
++                 assert name !=3D ""
++                 if (not namespace or namespace =3D=3D namespaces["html"=
+]) and name in voidElements:
++                     assert False, "Void element reported as EndTag toke=
+n: %(tag)s" % {"tag": name}
++@@ -66,26 +65,26 @@ class Filter(base.Filter):
++=20
++             elif type =3D=3D "Comment":
++                 data =3D token["data"]
++-                assert isinstance(data, text_type)
+++                assert isinstance(data, str)
++=20
++             elif type in ("Characters", "SpaceCharacters"):
++                 data =3D token["data"]
++-                assert isinstance(data, text_type)
+++                assert isinstance(data, str)
++                 assert data !=3D ""
++                 if type =3D=3D "SpaceCharacters":
++                     assert data.strip(spaceCharacters) =3D=3D ""
++=20
++             elif type =3D=3D "Doctype":
++                 name =3D token["name"]
++-                assert name is None or isinstance(name, text_type)
++-                assert token["publicId"] is None or isinstance(name, te=
+xt_type)
++-                assert token["systemId"] is None or isinstance(name, te=
+xt_type)
+++                assert name is None or isinstance(name, str)
+++                assert token["publicId"] is None or isinstance(name, st=
+r)
+++                assert token["systemId"] is None or isinstance(name, st=
+r)
++=20
++             elif type =3D=3D "Entity":
++-                assert isinstance(token["name"], text_type)
+++                assert isinstance(token["name"], str)
++=20
++             elif type =3D=3D "SerializerError":
++-                assert isinstance(token["data"], text_type)
+++                assert isinstance(token["data"], str)
++=20
++             else:
++                 assert False, "Unknown token type: %(type)s" % {"type":=
+ type}
++diff --git a/html5lib/filters/sanitizer.py b/html5lib/filters/sanitizer.=
+py
++index 70ef906..b949127 100644
++--- a/html5lib/filters/sanitizer.py
+++++ b/html5lib/filters/sanitizer.py
++@@ -12,7 +12,7 @@ import re
++ import warnings
++ from xml.sax.saxutils import escape, unescape
++=20
++-from six.moves import urllib_parse as urlparse
+++import urllib.parse as urlparse
++=20
++ from . import base
++ from ..constants import namespaces, prefixes
++diff --git a/html5lib/html5parser.py b/html5lib/html5parser.py
++index 74d829d..653f49a 100644
++--- a/html5lib/html5parser.py
+++++ b/html5lib/html5parser.py
++@@ -1,5 +1,4 @@
++ from __future__ import absolute_import, division, unicode_literals
++-from six import with_metaclass, viewkeys
++=20
++ import types
++=20
++@@ -423,7 +422,7 @@ def getPhases(debug):
++             return type
++=20
++     # pylint:disable=3Dunused-argument
++-    class Phase(with_metaclass(getMetaclass(debug, log))):
+++    class Phase(metaclass=3DgetMetaclass(debug, log)):
++         """Base class for helper object that implements each phase of p=
+rocessing
++         """
++         __slots__ =3D ("parser", "tree", "__startTagCache", "__endTagCa=
+che")
++@@ -2776,7 +2775,7 @@ def getPhases(debug):
++=20
++=20
++ def adjust_attributes(token, replacements):
++-    needs_adjustment =3D viewkeys(token['data']) & viewkeys(replacement=
+s)
+++    needs_adjustment =3D token['data'].keys() & replacements.keys()
++     if needs_adjustment:
++         token['data'] =3D type(token['data'])((replacements.get(k, k), =
+v)
++                                             for k, v in token['data'].i=
+tems())
++diff --git a/html5lib/serializer.py b/html5lib/serializer.py
++index c66df68..e3b8ea5 100644
++--- a/html5lib/serializer.py
+++++ b/html5lib/serializer.py
++@@ -1,5 +1,4 @@
++ from __future__ import absolute_import, division, unicode_literals
++-from six import text_type
++=20
++ import re
++=20
++@@ -222,14 +221,14 @@ class HTMLSerializer(object):
++         self.strict =3D False
++=20
++     def encode(self, string):
++-        assert(isinstance(string, text_type))
+++        assert(isinstance(string, str))
++         if self.encoding:
++             return string.encode(self.encoding, "htmlentityreplace")
++         else:
++             return string
++=20
++     def encodeStrict(self, string):
++-        assert(isinstance(string, text_type))
+++        assert(isinstance(string, str))
++         if self.encoding:
++             return string.encode(self.encoding, "strict")
++         else:
++diff --git a/html5lib/treebuilders/base.py b/html5lib/treebuilders/base.=
+py
++index e4a3d71..24759e9 100644
++--- a/html5lib/treebuilders/base.py
+++++ b/html5lib/treebuilders/base.py
++@@ -1,5 +1,4 @@
++ from __future__ import absolute_import, division, unicode_literals
++-from six import text_type
++=20
++ from ..constants import scopingElements, tableInsertModeElements, names=
+paces
++=20
++@@ -199,7 +198,7 @@ class TreeBuilder(object):
++         # match any node with that name
++         exactNode =3D hasattr(target, "nameTuple")
++         if not exactNode:
++-            if isinstance(target, text_type):
+++            if isinstance(target, str):
++                 target =3D (namespaces["html"], target)
++             assert isinstance(target, tuple)
++=20
++@@ -322,7 +321,7 @@ class TreeBuilder(object):
++=20
++     def insertElementNormal(self, token):
++         name =3D token["name"]
++-        assert isinstance(name, text_type), "Element %s not unicode" % =
+name
+++        assert isinstance(name, str), "Element %s not unicode" % name
++         namespace =3D token.get("namespace", self.defaultNamespace)
++         element =3D self.elementClass(name, namespace)
++         element.attributes =3D token["data"]
++diff --git a/html5lib/treebuilders/etree.py b/html5lib/treebuilders/etre=
+e.py
++index 086bed4..eb1f026 100644
++--- a/html5lib/treebuilders/etree.py
+++++ b/html5lib/treebuilders/etree.py
++@@ -1,7 +1,6 @@
++ from __future__ import absolute_import, division, unicode_literals
++ # pylint:disable=3Dprotected-access
++=20
++-from six import text_type
++=20
++ import re
++=20
++@@ -222,7 +221,7 @@ def getETreeBuilder(ElementTreeImplementation, fullT=
+ree=3DFalse):
++             elif element.tag =3D=3D ElementTreeCommentType:
++                 rv.append("|%s<!-- %s -->" % (' ' * indent, element.tex=
+t))
++             else:
++-                assert isinstance(element.tag, text_type), \
+++                assert isinstance(element.tag, str), \
++                     "Expected unicode, got %s, %s" % (type(element.tag)=
+, element.tag)
++                 nsmatch =3D tag_regexp.match(element.tag)
++=20
++diff --git a/html5lib/treebuilders/etree_lxml.py b/html5lib/treebuilders=
+/etree_lxml.py
++index e73de61..b13b23b 100644
++--- a/html5lib/treebuilders/etree_lxml.py
+++++ b/html5lib/treebuilders/etree_lxml.py
++@@ -28,7 +28,6 @@ from . import etree as etree_builders
++ from .. import _ihatexml
++=20
++ import lxml.etree as etree
++-from six import PY3, binary_type
++=20
++=20
++ fullTree =3D True
++@@ -207,10 +206,7 @@ class TreeBuilder(base.TreeBuilder):
++                 return name
++=20
++             def __getitem__(self, key):
++-                value =3D self._element._element.attrib[self._coerceKey=
+(key)]
++-                if not PY3 and isinstance(value, binary_type):
++-                    value =3D value.decode("ascii")
++-                return value
+++                return self._element._element.attrib[self._coerceKey(ke=
+y)]
++=20
++             def __setitem__(self, key, value):
++                 self._element._element.attrib[self._coerceKey(key)] =3D=
+ value
++diff --git a/html5lib/treewalkers/etree.py b/html5lib/treewalkers/etree.=
+py
++index 4465337..0bfd81f 100644
++--- a/html5lib/treewalkers/etree.py
+++++ b/html5lib/treewalkers/etree.py
++@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, unicod=
+e_literals
++ from collections import OrderedDict
++ import re
++=20
++-from six import string_types
++=20
++ from . import base
++ from .._utils import moduleFactoryFactory
++@@ -51,7 +50,7 @@ def getETreeBuilder(ElementTreeImplementation):
++                 return base.COMMENT, node.text
++=20
++             else:
++-                assert isinstance(node.tag, string_types), type(node.ta=
+g)
+++                assert isinstance(node.tag, str), type(node.tag)
++                 # This is assumed to be an ordinary element
++                 match =3D tag_regexp.match(node.tag)
++                 if match:
++diff --git a/html5lib/treewalkers/etree_lxml.py b/html5lib/treewalkers/e=
+tree_lxml.py
++index a614ac5..9514f57 100644
++--- a/html5lib/treewalkers/etree_lxml.py
+++++ b/html5lib/treewalkers/etree_lxml.py
++@@ -1,5 +1,4 @@
++ from __future__ import absolute_import, division, unicode_literals
++-from six import text_type
++=20
++ from collections import OrderedDict
++=20
++@@ -14,7 +13,7 @@ from .. import _ihatexml
++ def ensure_str(s):
++     if s is None:
++         return None
++-    elif isinstance(s, text_type):
+++    elif isinstance(s, str):
++         return s
++     else:
++         return s.decode("ascii", "strict")
++diff --git a/setup.py b/setup.py
++index f84c128..b195d30 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -104,7 +104,6 @@ setup(name=3D'html5lib',
++       maintainer_email=3D'james@hoppipolla.co.uk',
++       packages=3Dfind_packages(exclude=3D["*.tests", "*.tests.*", "test=
+s.*", "tests"]),
++       install_requires=3D[
++-          'six>=3D1.9',
++           'webencodings',
++       ],
++       python_requires=3D">=3D2.7, !=3D3.0.*, !=3D3.1.*, !=3D3.2.*, !=3D=
+3.3.*, !=3D3.4.*",
++--=20
++2.55.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb =
+b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+index 9c92164546..2447acde39 100644
+--- a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+@@ -4,13 +4,13 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1ba5ada9e6fe=
+ad1fdc32f43c9f10ba7c"
+=20
+ SRC_URI +=3D "file://0001-setup.py-fix-version-parsing-on-Python-3.14-as=
+t.Str-.patch"
+ SRC_URI +=3D "file://0001-setup.py-make-pkg_resources-import-optional-fo=
+r-Pyth.patch"
++SRC_URI +=3D "file://0001-Drop-the-six-dependency.patch"
+ SRC_URI[sha256sum] =3D "b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f=
+9c4eaf07c184146f"
+=20
+ inherit pypi setuptools3
+=20
+ RDEPENDS:${PN} +=3D "\
+     python3-lxml \
+-    python3-six \
+     python3-webencodings \
+     python3-xml \
+ "
+--=20
+2.55.0
 
 
