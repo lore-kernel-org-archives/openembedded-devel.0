@@ -1,535 +1,204 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <devanshp@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AF4CC982D7
-	for <webhook@archiver.kernel.org>; Fri, 18 Sep 2026 09:33:27 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7232.1789724005293008657
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BF78C982DC
+	for <webhook@archiver.kernel.org>; Fri, 18 Sep 2026 10:06:37 +0000 (UTC)
+Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7653.1789725987930565833
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Sep 2026 02:33:25 -0700
+ Fri, 18 Sep 2026 03:06:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=I/DXhsQ/;
- spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout08.t-online.de (Postfix) with SMTP id D8764E4B4
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 11:33:22 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.164.121]) by fwd76.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x7UyA-0EP8qm0; Fri, 18 Sep 2026 11:33:22 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=U09u/Ji5;
+ spf=pass (domain: cisco.com, ip: 173.37.86.74, mailfrom: devanshp@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=5222; q=dns/txt;
+  s=iport01; t=1789725987; x=1790935587;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=/4Waw1PufmU1Jw1ZGK3wrsq6JH9VPSzj9c0/GsHeNME=;
+  b=U09u/Ji5u2JR/8yG96VirzM8HSHXc4Y7ej1LzJe6EZ1XVMaYnRhAhsHM
+   xbOH61r5f+4zloMUtiia3iI4wi+yGW7mSsLPrVVXT/eHbgz22UUWOibOc
+   ZY6uSpfW4eb9r2C23WlW+ImilbGI8itdQumMdJnQR29hkaM92spq4GxA3
+   SbJcOYe+c1Crx6GPcKHUsbtzH4Gg5h8wweBowemO2f6ROKhkpLsTGpDWq
+   CS2T8weazy/YD/syHFnvf0B0ADHNZgwLV5kTQne+3vSkIcCTm+21jouN3
+   1tK00Ja7z/JDF0AC4VMa11uBpTmUWEQKVnnSaOXlNwb8Ap1DOebsKcJux
+   g==;
+X-CSE-ConnectionGUID: 6viE7xPYTbugU/7IE4xpcw==
+X-CSE-MsgGUID: qtYIVir1ScWxHaClVi79ZQ==
+X-IPAS-Result: =?us-ascii?q?A0BFAgCYDK1q/5D/Ja1aglmCV3VhQkkDlkeeHhSBag8BA?=
+ =?us-ascii?q?QEPRA0EAQGFBY4JAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDZASAQIBNQFGLAMBAlojIRuCZwGCdAIBEcJRgiyBAYR+2zIBCxQBB?=
+ =?us-ascii?q?YEzhT+IIl0ZhHwnGxuBcoEVg2mBBQGBWwKBIwSGfgSCInoSgVoebkqRFUiBH?=
+ =?us-ascii?q?gNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBBxsGBYEdgSeCGiMZNnqBCV6BK?=
+ =?us-ascii?q?ylgARAXgQeCCAKCVIIBAgFJQw4HRVMJJ0EKEkcpIggSCQETGjALfhgNSBEsN?=
+ =?us-ascii?q?xUZBD5uB49KH4JaAT1RAQckgQUqFkAJHhEMBaVUoQ8KKIN2jCKVOhozhVulE?=
+ =?us-ascii?q?pkIizeCU5YDTSuEPoFoPIFZcBU7gmcJShkPjjmDa8w5JDULAy8BAQcCBw4DC?=
+ =?us-ascii?q?4FokAACJgeBTwEB?=
+IronPort-Data: A9a23:g0wec6ICTQdW3Y/wFE+RgZQlxSXFcZb7ZxGr2PjKsXjdYENShTwHz
+ TFLWWGDb/bYa2ajfNh/aIWy9kxSvp+BndNjTwcd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZpCCea+Uf1WlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
+ T/Oi5eHYgH9imcoajh8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN0wEkAbYp0gy9p9HG5zs
+ qM5BWwddhuc0rfeLLKTEoGAh+w5J8XteYdasXZ6wHSBUrAtQIvIROPB4towMDUY358VW62BI
+ ZBENHw2MEiojx5nYj/7DLoykfmhgGL/axVTqUmeouw85G27IAlZjeKwbYWLJ4XTLSlTtl+El
+ 0P4/n6gORolJPyW4j678y39tNaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7GQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSn1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:NMYOX6qCrQYnNp9MfwvbkG8aV5oHeYIsimQD101hICG9vPb2qy
+ nIpoV/6faaslcssR0b9OxoW5PwI080i6QU3WB5B97LN2PbUQCTQr2Kg7GP/9TIIVybygck79
+ YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
+X-Talos-CUID: =?us-ascii?q?9a23=3A6ACX7moZG5FwKufaVvMJd/rmUZ47c1CC3E/hH0W?=
+ =?us-ascii?q?lBlsuF5y4FU+I87wxxg=3D=3D?=
+X-Talos-MUID: 9a23:6Zf9UQRXtfX+F3i/RXT1mABDCsZyup+lN1AtmL4ChcjbZB5JbmI=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,103,1787011200"; 
+   d="scan'208";a="525576511"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 18 Sep 2026 10:06:27 +0000
+Received: from sjc-ads-8099.cisco.com (sjc-ads-8099.cisco.com [171.68.208.137])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id C61B6180003DE;
+	Fri, 18 Sep 2026 10:06:26 +0000 (GMT)
+Received: by sjc-ads-8099.cisco.com (Postfix, from userid 1887503)
+	id 6E9EFCC1611; Fri, 18 Sep 2026 03:06:26 -0700 (PDT)
+From: "Devansh Patel -X (devanshp - E INFOCHIPS PRIVATE LIMITED at Cisco)" <devanshp@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-html5lib: drop the six dependency
-Date: Fri, 18 Sep 2026 11:33:15 +0200
-Message-ID: <20260918093315.337468-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: xe-linux-external@cisco.com
+Subject: [OE-core][wrynose][PATCH v2] vim: Fix CVE-2026-28417 hostname regression
+Date: Fri, 18 Sep 2026 03:06:26 -0700
+Message-Id: <20260918100626.2884271-1-devanshp@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1789724002-4D7F99BC-B9845707/0/0 CLEAN NORMAL
-X-TOI-MSGID: ffe4be8d-7033-4125-8e62-b6e0d0e8654f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1789724002; i=f_l_k@t-online.de;
-	bh=C89fCtDu0uAaxrDdmku+hVrpyLp35qm51+NTAznRynQ=;
-	h=From:To:Subject:Date;
-	b=I/DXhsQ//cNY0jF/bmNPDLUHJS9f4C6KmF321IDD/NFZReubBGRld/HjWT8/HT0HN
-	 Hkv5dZgwKCa6ybXVMZXqdoT6Bc3vjdCZkaB+dt2bq0o3t7YoIP7g8uOG19AP8xLW5z
-	 A/li8Mb/15fH8yOdbTQog+FqG0i14qbkppttCb+7ru4ClcN0xjgALsC3TXzi487bb0
-	 oRUsPLhU596t6S6kptYf70nJDB7k7WbCd0Wp2S7ZigB1Xxk4DETpUGDatN5Q/+isjB
-	 1b3B1c4AXQMV9z92BZlrgQJ1X2bWKWtz4pK/QSUvgLCT39Y9lmGPo+kcvgyWg9JN/H
-	 XMUNyTGsWB6YQ==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-8099.cisco.com [171.68.208.137];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 171.68.208.137, sjc-ads-8099.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 09:33:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130112
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2026 10:06:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130113
 
-openembedded-core removed python3-six, so the recipe no longer resolves.
-html5lib 1.1 only used six as a Python 2 compatibility layer; patch the
-imports over to the Python 3 builtins and drop the runtime dependency.
+From: Devansh Patel <devanshp@cisco.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
-AI-Generated: Uses Claude Code (Claude Fable 5.1)
+The older Vim patch 9.2.0073 fixed CVE-2026-28417 by tightening netrw
+hostname validation. That CVE fix requires follow-up regression patches
+because it rejects valid hostnames containing optional ports or
+underscores.
+
+Vim 9.2.0340 already contains that CVE fix and patch 9.2.0089, which
+corrects optional-port handling. It still needs patch 9.2.0553 to accept
+underscores, so backport that commit and retain its _gateway regression
+test.
+
+The netrw history hunk is adapted to preserve Wrynose's existing
+multi-line history and append the upstream 2026 May 28 entry. The
+src/version.c hunk is omitted because this backport does not change the
+recipe version or Vim's upstream patch-number table.
+
+[1] https://github.com/vim/vim/commit/79348dbbc09332130f4c86045e1541d68514fcc1
+[2] https://github.com/vim/vim/commit/a6198523fb28a50d96945458792cdb4787d3cdda
+[3] https://github.com/vim/vim/commit/93d177cd2b69bac58fc51a5a514d7bc71e264b11
+[4] https://github.com/vim/vim/security/advisories/GHSA-m3xh-9434-g336
+
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
 ---
- .../0001-Drop-the-six-dependency.patch        | 397 ++++++++++++++++++
- .../python/python3-html5lib_1.1.bb            |   2 +-
- 2 files changed, 398 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-html5lib/=
-0001-Drop-the-six-dependency.patch
+Changes in v2:
+- Refreshed the patch against current Wrynose so the netrw history hunk applies cleanly.
+- Renamed the embedded patch because Wrynose requires only one regression commit.
+- Clarified the netrw header adaptation in Backport Changes.
 
-diff --git a/meta-python/recipes-devtools/python/python3-html5lib/0001-Dr=
-op-the-six-dependency.patch b/meta-python/recipes-devtools/python/python3=
--html5lib/0001-Drop-the-six-dependency.patch
+ .../vim/files/CVE-2026-28417-regression.patch | 65 +++++++++++++++++++
+ meta/recipes-support/vim/vim.inc              |  1 +
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta/recipes-support/vim/files/CVE-2026-28417-regression.patch
+
+diff --git a/meta/recipes-support/vim/files/CVE-2026-28417-regression.patch b/meta/recipes-support/vim/files/CVE-2026-28417-regression.patch
 new file mode 100644
-index 0000000000..f83c7de34e
+index 0000000000..e5d947b737
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-html5lib/0001-Drop-the-=
-six-dependency.patch
-@@ -0,0 +1,397 @@
-+From 2d62ee4926f2597839b59201504a6075651b2978 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Fri, 18 Sep 2026 11:22:50 +0200
-+Subject: [PATCH] Drop the six dependency
++++ b/meta/recipes-support/vim/files/CVE-2026-28417-regression.patch
+@@ -0,0 +1,65 @@
++From a058d0dcd289ddb934b30125ac732f737bf89eb7 Mon Sep 17 00:00:00 2001
++From: Christian Brabandt <cb@256bit.org>
++Date: Thu, 28 May 2026 20:53:53 +0000
++Subject: [PATCH] patch 9.2.0553: runtime(netrw): netrw rejects hostnames
++ containing _
 +
-+html5lib only runs on Python 3 nowadays, so the six shims can be replace=
-d by
-+their builtins: text_type/string_types by str, binary_type by bytes, uni=
-chr by
-+chr, viewkeys by dict.keys, with_metaclass by the metaclass keyword and =
-the
-+six.moves imports by http.client, urllib.response and urllib.parse. The =
-PY3
-+branches collapse to their Python 3 half.
++Problem:  runtime(netrw): netrw rejects hostnames containing _
++          (lilydjwg)
++Solution: Relax the restriction and allow the underscore
 +
-+Upstream-Status: Submitted [https://github.com/html5lib/html5lib-python/=
-pull/581]
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
++fixes: #20344
++
++CVE: CVE-2026-28417
++Upstream-Status: Backport [https://github.com/vim/vim/commit/93d177cd2b69bac58fc51a5a514d7bc71e264b11]
++
++Backport Changes:
++- Wrynose's netrw header uses a chronological change-history list instead
++  of upstream's "Last Change:" field, so add the equivalent 2026 May 28
++  history entry.
++- Omitted src/version.c because this backport does not change the recipe's
++  Vim version or its upstream patch-number table.
++
++Signed-off-by: Christian Brabandt <cb@256bit.org>
++(cherry picked from commit 93d177cd2b69bac58fc51a5a514d7bc71e264b11)
++Signed-off-by: Devansh Patel <devanshp@cisco.com>
 +---
-+ html5lib/_inputstream.py            |  8 ++++----
-+ html5lib/_tokenizer.py              |  1 -
-+ html5lib/_trie/py.py                |  3 +--
-+ html5lib/_utils.py                  | 14 +++-----------
-+ html5lib/filters/lint.py            | 29 ++++++++++++++---------------
-+ html5lib/filters/sanitizer.py       |  2 +-
-+ html5lib/html5parser.py             |  5 ++---
-+ html5lib/serializer.py              |  5 ++---
-+ html5lib/treebuilders/base.py       |  5 ++---
-+ html5lib/treebuilders/etree.py      |  3 +--
-+ html5lib/treebuilders/etree_lxml.py |  6 +-----
-+ html5lib/treewalkers/etree.py       |  3 +--
-+ html5lib/treewalkers/etree_lxml.py  |  3 +--
-+ setup.py                            |  1 -
-+ 14 files changed, 33 insertions(+), 55 deletions(-)
++ runtime/pack/dist/opt/netrw/autoload/netrw.vim | 5 +++--
++ src/testdir/test_plugin_netrw.vim              | 1 +
++ 2 files changed, 4 insertions(+), 2 deletions(-)
 +
-+diff --git a/html5lib/_inputstream.py b/html5lib/_inputstream.py
-+index 0207dd2..5a2fc8c 100644
-+--- a/html5lib/_inputstream.py
-++++ b/html5lib/_inputstream.py
-+@@ -1,7 +1,7 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+=20
-+-from six import text_type
-+-from six.moves import http_client, urllib
-++import http.client as http_client
-++import urllib.response
-+=20
-+ import codecs
-+ import re
-+@@ -131,9 +131,9 @@ def HTMLInputStream(source, **kwargs):
-+          isinstance(source.fp, http_client.HTTPResponse))):
-+         isUnicode =3D False
-+     elif hasattr(source, "read"):
-+-        isUnicode =3D isinstance(source.read(0), text_type)
-++        isUnicode =3D isinstance(source.read(0), str)
-+     else:
-+-        isUnicode =3D isinstance(source, text_type)
-++        isUnicode =3D isinstance(source, str)
-+=20
-+     if isUnicode:
-+         encodings =3D [x for x in kwargs if x.endswith("_encoding")]
-+diff --git a/html5lib/_tokenizer.py b/html5lib/_tokenizer.py
-+index 4748a19..5b20f49 100644
-+--- a/html5lib/_tokenizer.py
-++++ b/html5lib/_tokenizer.py
-+@@ -1,6 +1,5 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+=20
-+-from six import unichr as chr
-+=20
-+ from collections import deque, OrderedDict
-+ from sys import version_info
-+diff --git a/html5lib/_trie/py.py b/html5lib/_trie/py.py
-+index c2ba3da..cfe7513 100644
-+--- a/html5lib/_trie/py.py
-++++ b/html5lib/_trie/py.py
-+@@ -1,5 +1,4 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+-from six import text_type
-+=20
-+ from bisect import bisect_left
-+=20
-+@@ -8,7 +7,7 @@ from ._base import Trie as ABCTrie
-+=20
-+ class Trie(ABCTrie):
-+     def __init__(self, data):
-+-        if not all(isinstance(x, text_type) for x in data.keys()):
-++        if not all(isinstance(x, str) for x in data.keys()):
-+             raise TypeError("All keys must be strings")
-+=20
-+         self._data =3D data
-+diff --git a/html5lib/_utils.py b/html5lib/_utils.py
-+index 9ea5794..5bc56ec 100644
-+--- a/html5lib/_utils.py
-++++ b/html5lib/_utils.py
-+@@ -7,15 +7,7 @@ try:
-+ except ImportError:
-+     from collections import Mapping
-+=20
-+-from six import text_type, PY3
-+-
-+-if PY3:
-+-    import xml.etree.ElementTree as default_etree
-+-else:
-+-    try:
-+-        import xml.etree.cElementTree as default_etree
-+-    except ImportError:
-+-        import xml.etree.ElementTree as default_etree
-++import xml.etree.ElementTree as default_etree
-+=20
-+=20
-+ __all__ =3D ["default_etree", "MethodDispatcher", "isSurrogatePair",
-+@@ -31,10 +23,10 @@ __all__ =3D ["default_etree", "MethodDispatcher", "i=
-sSurrogatePair",
-+ # escapes.
-+ try:
-+     _x =3D eval('"\\uD800"')  # pylint:disable=3Deval-used
-+-    if not isinstance(_x, text_type):
-++    if not isinstance(_x, str):
-+         # We need this with u"" because of http://bugs.jython.org/issue=
-2039
-+         _x =3D eval('u"\\uD800"')  # pylint:disable=3Deval-used
-+-        assert isinstance(_x, text_type)
-++        assert isinstance(_x, str)
-+ except Exception:
-+     supports_lone_surrogates =3D False
-+ else:
-+diff --git a/html5lib/filters/lint.py b/html5lib/filters/lint.py
-+index acd4d7a..e012fb8 100644
-+--- a/html5lib/filters/lint.py
-++++ b/html5lib/filters/lint.py
-+@@ -1,6 +1,5 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+=20
-+-from six import text_type
-+=20
-+ from . import base
-+ from ..constants import namespaces, voidElements
-+@@ -33,9 +32,9 @@ class Filter(base.Filter):
-+             if type in ("StartTag", "EmptyTag"):
-+                 namespace =3D token["namespace"]
-+                 name =3D token["name"]
-+-                assert namespace is None or isinstance(namespace, text_=
-type)
-++                assert namespace is None or isinstance(namespace, str)
-+                 assert namespace !=3D ""
-+-                assert isinstance(name, text_type)
-++                assert isinstance(name, str)
-+                 assert name !=3D ""
-+                 assert isinstance(token["data"], dict)
-+                 if (not namespace or namespace =3D=3D namespaces["html"=
-]) and name in voidElements:
-+@@ -45,18 +44,18 @@ class Filter(base.Filter):
-+                 if type =3D=3D "StartTag" and self.require_matching_tag=
-s:
-+                     open_elements.append((namespace, name))
-+                 for (namespace, name), value in token["data"].items():
-+-                    assert namespace is None or isinstance(namespace, t=
-ext_type)
-++                    assert namespace is None or isinstance(namespace, s=
-tr)
-+                     assert namespace !=3D ""
-+-                    assert isinstance(name, text_type)
-++                    assert isinstance(name, str)
-+                     assert name !=3D ""
-+-                    assert isinstance(value, text_type)
-++                    assert isinstance(value, str)
-+=20
-+             elif type =3D=3D "EndTag":
-+                 namespace =3D token["namespace"]
-+                 name =3D token["name"]
-+-                assert namespace is None or isinstance(namespace, text_=
-type)
-++                assert namespace is None or isinstance(namespace, str)
-+                 assert namespace !=3D ""
-+-                assert isinstance(name, text_type)
-++                assert isinstance(name, str)
-+                 assert name !=3D ""
-+                 if (not namespace or namespace =3D=3D namespaces["html"=
-]) and name in voidElements:
-+                     assert False, "Void element reported as EndTag toke=
-n: %(tag)s" % {"tag": name}
-+@@ -66,26 +65,26 @@ class Filter(base.Filter):
-+=20
-+             elif type =3D=3D "Comment":
-+                 data =3D token["data"]
-+-                assert isinstance(data, text_type)
-++                assert isinstance(data, str)
-+=20
-+             elif type in ("Characters", "SpaceCharacters"):
-+                 data =3D token["data"]
-+-                assert isinstance(data, text_type)
-++                assert isinstance(data, str)
-+                 assert data !=3D ""
-+                 if type =3D=3D "SpaceCharacters":
-+                     assert data.strip(spaceCharacters) =3D=3D ""
-+=20
-+             elif type =3D=3D "Doctype":
-+                 name =3D token["name"]
-+-                assert name is None or isinstance(name, text_type)
-+-                assert token["publicId"] is None or isinstance(name, te=
-xt_type)
-+-                assert token["systemId"] is None or isinstance(name, te=
-xt_type)
-++                assert name is None or isinstance(name, str)
-++                assert token["publicId"] is None or isinstance(name, st=
-r)
-++                assert token["systemId"] is None or isinstance(name, st=
-r)
-+=20
-+             elif type =3D=3D "Entity":
-+-                assert isinstance(token["name"], text_type)
-++                assert isinstance(token["name"], str)
-+=20
-+             elif type =3D=3D "SerializerError":
-+-                assert isinstance(token["data"], text_type)
-++                assert isinstance(token["data"], str)
-+=20
-+             else:
-+                 assert False, "Unknown token type: %(type)s" % {"type":=
- type}
-+diff --git a/html5lib/filters/sanitizer.py b/html5lib/filters/sanitizer.=
-py
-+index 70ef906..b949127 100644
-+--- a/html5lib/filters/sanitizer.py
-++++ b/html5lib/filters/sanitizer.py
-+@@ -12,7 +12,7 @@ import re
-+ import warnings
-+ from xml.sax.saxutils import escape, unescape
-+=20
-+-from six.moves import urllib_parse as urlparse
-++import urllib.parse as urlparse
-+=20
-+ from . import base
-+ from ..constants import namespaces, prefixes
-+diff --git a/html5lib/html5parser.py b/html5lib/html5parser.py
-+index 74d829d..653f49a 100644
-+--- a/html5lib/html5parser.py
-++++ b/html5lib/html5parser.py
-+@@ -1,5 +1,4 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+-from six import with_metaclass, viewkeys
-+=20
-+ import types
-+=20
-+@@ -423,7 +422,7 @@ def getPhases(debug):
-+             return type
-+=20
-+     # pylint:disable=3Dunused-argument
-+-    class Phase(with_metaclass(getMetaclass(debug, log))):
-++    class Phase(metaclass=3DgetMetaclass(debug, log)):
-+         """Base class for helper object that implements each phase of p=
-rocessing
-+         """
-+         __slots__ =3D ("parser", "tree", "__startTagCache", "__endTagCa=
-che")
-+@@ -2776,7 +2775,7 @@ def getPhases(debug):
-+=20
-+=20
-+ def adjust_attributes(token, replacements):
-+-    needs_adjustment =3D viewkeys(token['data']) & viewkeys(replacement=
-s)
-++    needs_adjustment =3D token['data'].keys() & replacements.keys()
-+     if needs_adjustment:
-+         token['data'] =3D type(token['data'])((replacements.get(k, k), =
-v)
-+                                             for k, v in token['data'].i=
-tems())
-+diff --git a/html5lib/serializer.py b/html5lib/serializer.py
-+index c66df68..e3b8ea5 100644
-+--- a/html5lib/serializer.py
-++++ b/html5lib/serializer.py
-+@@ -1,5 +1,4 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+-from six import text_type
-+=20
-+ import re
-+=20
-+@@ -222,14 +221,14 @@ class HTMLSerializer(object):
-+         self.strict =3D False
-+=20
-+     def encode(self, string):
-+-        assert(isinstance(string, text_type))
-++        assert(isinstance(string, str))
-+         if self.encoding:
-+             return string.encode(self.encoding, "htmlentityreplace")
-+         else:
-+             return string
-+=20
-+     def encodeStrict(self, string):
-+-        assert(isinstance(string, text_type))
-++        assert(isinstance(string, str))
-+         if self.encoding:
-+             return string.encode(self.encoding, "strict")
-+         else:
-+diff --git a/html5lib/treebuilders/base.py b/html5lib/treebuilders/base.=
-py
-+index e4a3d71..24759e9 100644
-+--- a/html5lib/treebuilders/base.py
-++++ b/html5lib/treebuilders/base.py
-+@@ -1,5 +1,4 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+-from six import text_type
-+=20
-+ from ..constants import scopingElements, tableInsertModeElements, names=
-paces
-+=20
-+@@ -199,7 +198,7 @@ class TreeBuilder(object):
-+         # match any node with that name
-+         exactNode =3D hasattr(target, "nameTuple")
-+         if not exactNode:
-+-            if isinstance(target, text_type):
-++            if isinstance(target, str):
-+                 target =3D (namespaces["html"], target)
-+             assert isinstance(target, tuple)
-+=20
-+@@ -322,7 +321,7 @@ class TreeBuilder(object):
-+=20
-+     def insertElementNormal(self, token):
-+         name =3D token["name"]
-+-        assert isinstance(name, text_type), "Element %s not unicode" % =
-name
-++        assert isinstance(name, str), "Element %s not unicode" % name
-+         namespace =3D token.get("namespace", self.defaultNamespace)
-+         element =3D self.elementClass(name, namespace)
-+         element.attributes =3D token["data"]
-+diff --git a/html5lib/treebuilders/etree.py b/html5lib/treebuilders/etre=
-e.py
-+index 086bed4..eb1f026 100644
-+--- a/html5lib/treebuilders/etree.py
-++++ b/html5lib/treebuilders/etree.py
-+@@ -1,7 +1,6 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+ # pylint:disable=3Dprotected-access
-+=20
-+-from six import text_type
-+=20
-+ import re
-+=20
-+@@ -222,7 +221,7 @@ def getETreeBuilder(ElementTreeImplementation, fullT=
-ree=3DFalse):
-+             elif element.tag =3D=3D ElementTreeCommentType:
-+                 rv.append("|%s<!-- %s -->" % (' ' * indent, element.tex=
-t))
-+             else:
-+-                assert isinstance(element.tag, text_type), \
-++                assert isinstance(element.tag, str), \
-+                     "Expected unicode, got %s, %s" % (type(element.tag)=
-, element.tag)
-+                 nsmatch =3D tag_regexp.match(element.tag)
-+=20
-+diff --git a/html5lib/treebuilders/etree_lxml.py b/html5lib/treebuilders=
-/etree_lxml.py
-+index e73de61..b13b23b 100644
-+--- a/html5lib/treebuilders/etree_lxml.py
-++++ b/html5lib/treebuilders/etree_lxml.py
-+@@ -28,7 +28,6 @@ from . import etree as etree_builders
-+ from .. import _ihatexml
-+=20
-+ import lxml.etree as etree
-+-from six import PY3, binary_type
-+=20
-+=20
-+ fullTree =3D True
-+@@ -207,10 +206,7 @@ class TreeBuilder(base.TreeBuilder):
-+                 return name
-+=20
-+             def __getitem__(self, key):
-+-                value =3D self._element._element.attrib[self._coerceKey=
-(key)]
-+-                if not PY3 and isinstance(value, binary_type):
-+-                    value =3D value.decode("ascii")
-+-                return value
-++                return self._element._element.attrib[self._coerceKey(ke=
-y)]
-+=20
-+             def __setitem__(self, key, value):
-+                 self._element._element.attrib[self._coerceKey(key)] =3D=
- value
-+diff --git a/html5lib/treewalkers/etree.py b/html5lib/treewalkers/etree.=
-py
-+index 4465337..0bfd81f 100644
-+--- a/html5lib/treewalkers/etree.py
-++++ b/html5lib/treewalkers/etree.py
-+@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, unicod=
-e_literals
-+ from collections import OrderedDict
-+ import re
-+=20
-+-from six import string_types
-+=20
-+ from . import base
-+ from .._utils import moduleFactoryFactory
-+@@ -51,7 +50,7 @@ def getETreeBuilder(ElementTreeImplementation):
-+                 return base.COMMENT, node.text
-+=20
-+             else:
-+-                assert isinstance(node.tag, string_types), type(node.ta=
-g)
-++                assert isinstance(node.tag, str), type(node.tag)
-+                 # This is assumed to be an ordinary element
-+                 match =3D tag_regexp.match(node.tag)
-+                 if match:
-+diff --git a/html5lib/treewalkers/etree_lxml.py b/html5lib/treewalkers/e=
-tree_lxml.py
-+index a614ac5..9514f57 100644
-+--- a/html5lib/treewalkers/etree_lxml.py
-++++ b/html5lib/treewalkers/etree_lxml.py
-+@@ -1,5 +1,4 @@
-+ from __future__ import absolute_import, division, unicode_literals
-+-from six import text_type
-+=20
-+ from collections import OrderedDict
-+=20
-+@@ -14,7 +13,7 @@ from .. import _ihatexml
-+ def ensure_str(s):
-+     if s is None:
-+         return None
-+-    elif isinstance(s, text_type):
-++    elif isinstance(s, str):
-+         return s
-+     else:
-+         return s.decode("ascii", "strict")
-+diff --git a/setup.py b/setup.py
-+index f84c128..b195d30 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -104,7 +104,6 @@ setup(name=3D'html5lib',
-+       maintainer_email=3D'james@hoppipolla.co.uk',
-+       packages=3Dfind_packages(exclude=3D["*.tests", "*.tests.*", "test=
-s.*", "tests"]),
-+       install_requires=3D[
-+-          'six>=3D1.9',
-+           'webencodings',
-+       ],
-+       python_requires=3D">=3D2.7, !=3D3.0.*, !=3D3.1.*, !=3D3.2.*, !=3D=
-3.3.*, !=3D3.4.*",
-+--=20
-+2.55.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb =
-b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-index 9c92164546..2447acde39 100644
---- a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-@@ -4,13 +4,13 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1ba5ada9e6fe=
-ad1fdc32f43c9f10ba7c"
-=20
- SRC_URI +=3D "file://0001-setup.py-fix-version-parsing-on-Python-3.14-as=
-t.Str-.patch"
- SRC_URI +=3D "file://0001-setup.py-make-pkg_resources-import-optional-fo=
-r-Pyth.patch"
-+SRC_URI +=3D "file://0001-Drop-the-six-dependency.patch"
- SRC_URI[sha256sum] =3D "b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f=
-9c4eaf07c184146f"
-=20
- inherit pypi setuptools3
-=20
- RDEPENDS:${PN} +=3D "\
-     python3-lxml \
--    python3-six \
-     python3-webencodings \
-     python3-xml \
- "
---=20
-2.55.0
-
++diff --git a/runtime/pack/dist/opt/netrw/autoload/netrw.vim b/runtime/pack/dist/opt/netrw/autoload/netrw.vim
++index c240bbd13..54be15b3f 100644
++--- a/runtime/pack/dist/opt/netrw/autoload/netrw.vim
+++++ b/runtime/pack/dist/opt/netrw/autoload/netrw.vim
++@@ -24,6 +24,7 @@
++ " 2026 Mar 01 by Vim Project include portnumber in hostname checking #19533
++ " 2026 Apr 01 by Vim Project use fnameescape() with netrw#FileUrlEdit()
++ " 2026 Apr 05 by Vim Project Fix netrw#RFC2396() #19913
+++" 2026 May 28 by Vim Project allow underscores in hostname checking #20344
++ " 2026 Jun 16 by Vim Project Fix filename escaping in local file deletion
++ " Copyright:  Copyright (C) 2016 Charles E. Campbell {{{1
++ "             Permission is hereby granted to use and distribute this code,
++@@ -2604,8 +2605,8 @@ function s:NetrwValidateHostname(hostname)
++   " Username:
++   let user_pat = '\%([a-zA-Z0-9._-]\+@\)\?'
++   " Hostname: 1-64 chars, alphanumeric/dots/hyphens.
++-  " No underscores. No leading/trailing dots/hyphens.
++-  let host_pat = '[a-zA-Z0-9]\%([-a-zA-Z0-9.]\{0,62}[a-zA-Z0-9]\)\?'
+++  " No leading/trailing dots/hyphens.
+++  let host_pat = '[a-zA-Z0-9_]\%([-a-zA-Z0-9._]\{0,62}[a-zA-Z0-9_]\)\?'
++   " Port: 16 bit unsigned integer
++   let port_pat = '\%(:\d\{1,5\}\)\?$'
++ 
++diff --git a/src/testdir/test_plugin_netrw.vim b/src/testdir/test_plugin_netrw.vim
++index a0a3915f5..8d7167793 100644
++--- a/src/testdir/test_plugin_netrw.vim
+++++ b/src/testdir/test_plugin_netrw.vim
++@@ -574,6 +574,7 @@ endfunc
++ func Test_netrw_hostname()
++   let valid_hostnames = [
++   \   'localhost',
+++  \   '_gateway',
++   \   '127.0.0.1',
++   \   '::1',
++   \   '0:0:0:0:0:0:0:1',
+diff --git a/meta/recipes-support/vim/vim.inc b/meta/recipes-support/vim/vim.inc
+index 77f681410a..ce02c8b92d 100644
+--- a/meta/recipes-support/vim/vim.inc
++++ b/meta/recipes-support/vim/vim.inc
+@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/vim/vim.git;branch=master;protocol=https;tag=v${PV}
+            file://CVE-2026-73076.patch \
+            file://CVE-2026-73077.patch \
+            file://CVE-2026-73078.patch \
++           file://CVE-2026-28417-regression.patch \
+            "
+ 
+ PV .= ".0340"
 
