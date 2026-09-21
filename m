@@ -1,109 +1,151 @@
-Return-Path: <joaohf@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA647C982E1
-	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 12:11:52 +0000 (UTC)
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.47658.1789992711358663579
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2AAAC982F1
+	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 12:22:32 +0000 (UTC)
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.47827.1789993351982438043
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2026 05:11:51 -0700
+ Mon, 21 Sep 2026 05:22:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BgQooesO;
- spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: joaohf@gmail.com)
-Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-39dec5de01eso601089a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 05:11:51 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=iccPKR/h;
+ spf=pass (domain: konsulko.com, ip: 74.125.225.141, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b91369d18so21576575e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 05:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789992711; x=1790597511; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WG0sqEAfMj6GkjxPV3i6O+hBGHrs78OZ5yHiX3PJSnU=;
-        b=BgQooesOMC3ueOpaZWZ+NpsHkQoXr6WyB2zvP9Ce4W8Kq9hnXYMr3SFcxVFHRq1uFg
-         7SKdBSnP4w6csfETazTgN00BIC91ZLzWxdY7KSGkaUa/FCP/ClbQum7W9NsukimTJTzm
-         EM84BPvY3ZEwqS5n+/L413DMizJVD5yTDivXbGyO3bl5sdCPI9BaV/nnNS7QWt+Yb3s2
-         YlpZeqXxM/yeZoqZUwH5yq3qrAFSNIWNrLolZJ47MU31reXSFeinvr3ZfMN69T7am4Ic
-         kWlhn8PBus1IBMpE5xwAWTU0r+NGWmyZbODbn8yNZLkCrdF6cp/JZLA4qMQbXOP8KW/c
-         LtRA==
+        d=konsulko.com; s=google; t=1789993350; x=1790598150; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fJGBglAQac/E8tCP0o+6iJTrYkrRZOwSbU8CSX6RAng=;
+        b=iccPKR/hKXWylmoQqPQZMrFr0GKHCb3k33/I6TtFq62Tr7sqypuL1L7oXgGUJDY30Y
+         NEsPnb0XazneXb10PzkEzZAiYVZuqnr5EnAgs+OZ3ppfpZ5I34ZjAJBIaAwiwEgc0S7m
+         zdievRvn72rrS05xkLSWrsDLrIzAJWDrzEjp4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789992711; x=1790597511;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=WG0sqEAfMj6GkjxPV3i6O+hBGHrs78OZ5yHiX3PJSnU=;
-        b=1BRFCuCb2u9/MmXg2qNqTCQocJ9d7nhZl6NXDTs+Okvs/7FUC+T8Y8vqo5qZaBQLxt
-         d+D9GGZzcJjfTUZ9ySDr9LihaRDc27RoMqFleWIym1GGwKixmLpbbVwbDqNo/rzYAdXY
-         GL6u2ffnmSFfhhh22oWFIjeKAedpbUL1rxiv6DDZQARYaqSA3/6j+PZSV2fG4CAyzQ3I
-         OOACHtttDfjGxQ4iLE7esIZG6IeGSkv0U468sy/GWIMhvY+QLY+BTHnaz87c0mFK793K
-         SobdiMY9qDrCaPc2YqS9Ix30hJ5wkD8O/BV1pIoByjvhOdX4tbqLKF4Bd8UKoomE0gwB
-         KZWA==
-X-Gm-Message-State: AFuF++kHjYwmB58wCQBVPlkFsD0sxi9Oa8eI4oWWQWe2jeMm8GusmofY
-	7GXVBzSRWeVku68630luq8YwOMDYCJAIQh4wvH8T8Opf765NG9KfSe6BY4lxAw==
-X-Gm-Gg: AYBFou3y6uW1dZRsN0kBzRabAL8DYUWE4Ey865VPOs0z1i3Eyu2IAqI+Dq4hQRQvACj
-	ACo3FVnvmn2PkKCHvFQ6PsVrsLK7zf4FcqDwmmAngMYDuCjDEBuJowU5z4TIdlj8zAr5ah3AZa4
-	uzknAwKwIp1rmxDQXotyiLPjlfuOy0YqhvvGjY28sOaEfYJcvoPD9fceXk6dQpOcNuttQNLMyHc
-	IxekLmoQjhHjOdsQf0drAsilvbaFNMqBi9Ad2qFBZtzXPtkFRR16N/OHXhT61jm8+qSBN08/62q
-	SwCzjKj+mf7F+GBOuwRZqweLMFqaf6OWzLeSOybF0TSk7w7odk8TwncGH+Tbb2ZvC8MYUOVL+op
-	5n8qHfoI5CRygY7S/FxCRbwrq5SEZ2MuGJr5YApOArvrQ/MIKL6lwP9SBwad/nXHPapX9z4CUoe
-	fz5TuhaApkaL27g60nI4UTuk/Zi+EDqx0Vsd+C4mWj2cWBy3pUBCH2L+3IPGrhRtTe+wDaKC00D
-	Xl8
-X-Received: by 2002:a17:90b:53c5:b0:39d:f130:8f12 with SMTP id 98e67ed59e1d1-39e5942a918mr18187644a91.2.1789992710565;
-        Mon, 21 Sep 2026 05:11:50 -0700 (PDT)
-Received: from porco.local ([179.228.7.180])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c3313d907sm18738943eec.11.2026.09.21.05.11.49
+        d=1e100.net; s=20260707; t=1789993350; x=1790598150;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fJGBglAQac/E8tCP0o+6iJTrYkrRZOwSbU8CSX6RAng=;
+        b=dyKYuo9cvW9LoELfaTqQML28/YoZUpZiMNZST87mlrCxMmkFntjO5Hq4dJt1GPvHMw
+         5F3hvbNpnph2dQvX/uwmm0Vc4t6HZ9y4II2rijuG52m4wC6ULSKrPGIgCOlNlbjgwrD+
+         OlneUaiHU6ruCIUuFox8evz+3vjnefwKO4bTV5l1VedyNdjR559rlzlCHI++5Nlwj7Sl
+         +CVHCHIC0qTRxAvXM6Yqh5Vwy2TYZCY4faHOWxikYk1St0ejmPsUXyK3ODdXfs/X7jZl
+         e8PdOjEGZ50mdZb5jg+w8R0LNj23wg6LKdxjdHqueqEOf/QmmvxU1YA/kYcN5bcoLhZC
+         1FGg==
+X-Gm-Message-State: AFuF++n185R50h++6RCPqcKE0Hiix/cRK+T7zlVNfer18Uzp07MS55Jw
+	E+FX5o98HlRV7bSnv9lT4eF9/55iGtfxTVHoOIqS4SZ/Bu5Ppshfp7P28UesanOCR/kdQx5eEUG
+	T0sQ/
+X-Gm-Gg: AYBFou0WEddmP1DMT1XoPsf80A1pNQSCyEzHgnnRgfxsT6VNrZuOebsec0NYNK0bV/y
+	PV9AgNlr3HbZxYehm0AS2WNczLCu2qGupm5klRZdL5dViQzuUCrXjHgCmPvN/xqDVKpIQO//FYR
+	3hIUQq0O3pIB1uXuugMiMZ10wOj3Om5+RfrXB+s2B5og1zSn+CGaEuKsiRkVngWERvICesqXepB
+	/eT6kJPWP37/PI2LB+bs6irdLpOXouD6Jqwn52UqPUAoVxVRwVZxgN7TGStIKhDrdLweOmb1bub
+	BAMj6pNXSrtq9ENxbwybL/NdDAGW92TGen4GuTTQns5755HVpugDaLuyTTzGKeownQpKTlSe+fc
+	qcMG4RAPDc9x+Ts5U6wx7lDa39nPE3ZnBlPmYVDU01jvoh4IHtQXKp9gWmdfVH2JtXSiKO0oUJH
+	hvrflYN8AVUnhxIVkL0qb7tU+vrHR7AXsfB624NpFK/jNh/JHHmT1Bwf8YuFYpJoyIWEFz+1HcM
+	//6YN9VkMJlXqeksJz4+aDUmF+xXpv473R4XXMpS8g2U/QCN7j0Bv/jsuXyQ375sINg991NGTl+
+	kalO9ABw18Bqws0Jt021XzSaSk6d/akxLvw=
+X-Received: by 2002:a05:600c:46cb:b0:49e:660a:935e with SMTP id 5b1f17b1804b1-49fc586827cmr129330375e9.29.1789993349998;
+        Mon, 21 Sep 2026 05:22:29 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc58a1176sm208150005e9.2.2026.09.21.05.22.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 05:11:50 -0700 (PDT)
-From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>
+        Mon, 21 Sep 2026 05:22:29 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>,
-	Ross Burton <Ross.Burton@arm.com>
-Subject: [meta-oe][PATCH v2] boardid: add recipe
-Date: Mon, 21 Sep 2026 09:11:33 -0300
-Message-ID: <20260921121133.3377823-1-joaohf@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-pybind11: Upgrade 3.0.4 -> 3.1.0
+Date: Mon, 21 Sep 2026 15:22:23 +0300
+Message-ID: <20260921122224.4185627-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260921122224.4185627-1-leon.anavi@konsulko.com>
+References: <20260921122224.4185627-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 12:11:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130161
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 12:22:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130165
 
-Signed-off-by: João Henrique Ferreira de Freitas <joaohf@gmail.com>
-CC: Ross Burton <Ross.Burton@arm.com>
+Upgrade to release 3.1.0:
+
+- Support for Python 3.8 was removed. The minimum supported version
+  is now Python 3.9.
+- Support for MSVC 2017 has been dropped. #6110
+- Changed strict-mode numeric conversions for PEP 484 compatibility:
+  float now accepts int, and complex now accepts int and float.
+- Small extra features added to the pybind11 command line tool
+  based on python-config.
+- Added subinterpreter_thread_state, an RAII wrapper that owns a
+  reusable PyThreadState for a sub-interpreter, together with a
+  subinterpreter_scoped_activate overload that activates it. This
+  lets an OS thread re-enter one or more sub-interpreters without
+  creating and destroying a PyThreadState on every activation.
+- Add py::mod_gil_used() as replacement spelling to
+  py::mod_gil_not_used(false).
+- Fixed a crash in py::subinterpreter::create() when called without
+  a current PyThreadState, which its documentation explicitly allows
+  - for example from an embedder that ended initialization with
+  PyEval_SaveThread(), or from a worker thread that has never
+  touched Python. error_scope is now constructed after a thread
+  state has been attached instead of before.
+- Make py::print delegate to the current frame/interpreter built-ins
+  print entry, fixing handling of sys.stdout = None, following the
+  active runtime's stream, keyword, and error semantics, and
+  remaining a no-op if the entry is unavailable during teardown.
+- Include the builtin complex type in the input annotation of the
+  std::complex<T> type caster.
+- String views (e.g. std::string_view) are now kept alive only when
+  loaded from a transient source (such as a generator), fixing both
+  a use-after-free and a regression where casting a view from a
+  durable object outside a bound function would throw.
+- Drop Python 2 prepend to evaluated source, causing errors to be
+  off by one.
+- Fix data race on last_storage_ptr_ cache in
+  gil_safe_call_once_and_store.
+- Allow user defined __str__ on enum_.
+- Fix generated Callable type annotations for Python callbacks
+  passed into C++ by inverting the callback's argument/return I/O
+  context relative to the enclosing function signature.
+- Correct __delitem__ for negative-step slices and re-enable
+  contiguous erase fast path.
+- Do not pass -fno-fat-lto-objects to GCC on macOS, which made all
+  LTO probes fail and silently disabled LTO.
+- Fixed cross-compilation to Emscripten/Pyodide with CMake >= 4.1
+  by no longer overriding an explicitly set
+  PYBIND11_USE_CROSSCOMPILING when CMAKE_CROSSCOMPILING_EMULATOR
+  is defined.
+- Unset stale PYTHON_MODULE_DEBUG_POSTFIX and correct
+  USE_PYTHON_INCLUDE_DIR variable.
+- Apply -undefined dynamic_lookup to all Apple platforms.
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
-changes in v2:
- - remove PV
- - remove do_configure and do_install
+ .../{python3-pybind11_3.0.4.bb => python3-pybind11_3.1.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pybind11_3.0.4.bb => python3-pybind11_3.1.0.bb} (92%)
 
- .../boardid/boardid_1.15.0.bb                 | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb b/meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
+index f3efed38b6..a032fc34d7 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
+@@ -7,7 +7,7 @@ DEPENDS = "\
+     python3-ninja-native \
+ "
+ 
+-SRCREV = "d03662f0984f652b60e7ddce53d3868002275197"
++SRCREV = "97bf890db679505a14dfe547a5e77bb2bd05dc90"
+ SRC_URI = "\
+     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
+ "
+-- 
+2.47.3
 
-diff --git a/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb b/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
-new file mode 100644
-index 0000000000..d77d91162c
---- /dev/null
-+++ b/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Print out a platform-specific board serial number"
-+DESCRIPTION = "This program looks up a device-specific serial number and prints it. \
-+The original use was to provide some non-changing and unique material for dynamically \
-+creating device names on a local LAN. There are implementation specific boards as well \
-+generic mechanisms for getting serial number."
-+HOMEPAGE = "https://github.com/nerves-project/boardid"
-+LICENSE = "Apache-2.0 AND CC-BY-4.0 AND CC0-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded4771514fcc \
-+                    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
-+                    file://LICENSES/CC-BY-4.0.txt;md5=9b33bbd06fb58995fb0e299cd38d1838"
-+
-+SRC_URI = "git://github.com/nerves-project/boardid/;protocol=https;branch=main"
-+
-+SRCREV = "2ccf22a8be22d7597e16fb225c1173876674f7a4"
-+
-+do_install () {
-+        install -d ${D}${bindir}
-+        install -m 0755 ${S}/boardid ${D}${bindir}
-+}
 
