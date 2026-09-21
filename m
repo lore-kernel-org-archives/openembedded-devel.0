@@ -2,46 +2,46 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B131AC982E1
-	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 12:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93BF8C982ED
+	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 12:04:02 +0000 (UTC)
 Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.47291.1789992183515289427
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.47309.1789992241014913733
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2026 05:03:03 -0700
+ Mon, 21 Sep 2026 05:04:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=vE9UTs7f;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=p1THcwpK;
  spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout06.t-online.de (Postfix) with SMTP id A38471E5
-	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 14:03:01 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.35.133]) by fwd80.t-online.de
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout06.t-online.de (Postfix) with SMTP id 7EB0D7A9
+	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 14:03:58 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.35.133]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x8cjb-43SOqu0; Mon, 21 Sep 2026 14:02:59 +0200
+	esmtp id 1x8ckX-1xicDI0; Mon, 21 Sep 2026 14:03:57 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] kmscon: open the pty only once a display is attached
-Date: Mon, 21 Sep 2026 14:02:52 +0200
-Message-ID: <20260921120252.56179-1-f_l_k@t-online.de>
+Subject: [qmeta-oe][PATCHv2] kmscon: open the pty only once a display is attached
+Date: Mon, 21 Sep 2026 14:03:51 +0200
+Message-ID: <20260921120351.56739-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1789992179-BDFF8950-55794487/0/0 CLEAN NORMAL
-X-TOI-MSGID: ae75cdbc-456f-4327-b456-b18d9d1bdcd0
+X-TOI-EXPURGATEID: 150726::1789992237-B7FFC839-C0B0CE1A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 934dd198-626d-478b-8d70-2a5aa39e95cd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1789992181; i=f_l_k@t-online.de;
-	bh=uuA1TQxGBylpAcwjLmnBOaF4Pqg2aV9v0rDmpNnxYas=;
+	s=20260216; t=1789992238; i=f_l_k@t-online.de;
+	bh=mdK6RLeAB4Oe4aSBpP4lpoDMbc+qqUFejlX4e8zFJWo=;
 	h=From:To:Subject:Date;
-	b=vE9UTs7fou7BV2v74BRfikmMXvn2oCHRdKwMeb66Qwk5cJXKPGRFn0mg2/ekBzPav
-	 Ivn98BG6P5sAvSUHtSK00nbgH6QIucM0MuO5eYbQqYFYYE3TWJUJz1giMdlM3m1OpM
-	 0aAZ5OhwN4TSAJ2bymV0ryAC6TdAuEhtHu7Pau1bgwuMwS6Yk4vbvQ8msyShED06hm
-	 0K5jtM55St4j9719uSIbmNitQXC3PfxbxN2rGBJ0wwi95KWvAYHLNM8+sy7p23Cdhz
-	 03a5gTfBESBFMTY/BmlQ0ILBJ3NtZGSsLWk+pRVDf+g0VvepbiEhUF4wVq31GT/Sgr
-	 yr4YUT4gSlIcA==
+	b=p1THcwpKwktCqwuo4JDqJAQy/nXOVCmUs2TxzvHOJ5QfkAq6YGm5V6METHlYVMLfN
+	 gGnbqsj5uTSTCxKQgaJ3wCaHbfXyxyONIEL6fWwfmug5pY25gtclYc34/mGkd6j01q
+	 uE98qj3vwFve5xKpSPu0yyUwxIZKwY24Fmz97O6mzIS80eWyEi2gW2SXhTvYqqgwoE
+	 5cbm+clN+x8c2Qs5Wvz0cRZQrYUXEf5Pa/zmF77JzzVVkTz7zWf0gbMiqRpVk6cLQ+
+	 NWCf3esXp1KyFqJZX3tf9SCIpO9xTv4S5zwUuEgUnSu8fvAbNhqqVPj07pb6KBnmVi
+	 wO4Qsp3CkhT/Q==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 12:03:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130157
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 12:04:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130158
 
 kmscon opened the pty as soon as the seat came up, so the shell started
 and drew its prompt before any display was attached; on a system that
@@ -50,6 +50,7 @@ cursor in the top left corner until the compositor took over. Defer the
 pty until a display is there.
 
 AI-Generated: Uses Claude Code (Claude Opus 5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  ...-pty-only-once-a-display-is-attached.patch | 64 +++++++++++++++++++
  .../recipes-graphics/kmscon/kmscon_10.0.1.bb  |  2 +
