@@ -2,62 +2,62 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2AAAC982F1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4F0DC982EE
 	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 12:22:32 +0000 (UTC)
 Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.47827.1789993351982438043
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.47822.1789993349685375843
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2026 05:22:32 -0700
+ Mon, 21 Sep 2026 05:22:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=iccPKR/h;
+ dkim=pass header.i=@konsulko.com header.s=google header.b=TCNUCqcl;
  spf=pass (domain: konsulko.com, ip: 74.125.225.141, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b91369d18so21576575e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 05:22:31 -0700 (PDT)
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49ce364488dso7668095e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 05:22:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1789993350; x=1790598150; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1789993348; x=1790598148; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fJGBglAQac/E8tCP0o+6iJTrYkrRZOwSbU8CSX6RAng=;
-        b=iccPKR/hKXWylmoQqPQZMrFr0GKHCb3k33/I6TtFq62Tr7sqypuL1L7oXgGUJDY30Y
-         NEsPnb0XazneXb10PzkEzZAiYVZuqnr5EnAgs+OZ3ppfpZ5I34ZjAJBIaAwiwEgc0S7m
-         zdievRvn72rrS05xkLSWrsDLrIzAJWDrzEjp4=
+        bh=Ija3EWhhUq4O9CujHZrb+EbPvh4cMyDbLJNGGn4voo4=;
+        b=TCNUCqcl8gPGfy38uTaeMGh6zQ7tkkq+HSmXb5gebW00w1cWWDoQ2qieViyD3zpJsn
+         bqxMLONAgS8l9DfyMLFhaRACvXDvi4hCxLT8lk2MDpEVTIs4/B7Lvwp5ZckY5SNIbGCi
+         PIqeccf1zdOqXubuYMYT35talf8z/G+GqCg84=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789993350; x=1790598150;
+        d=1e100.net; s=20260707; t=1789993348; x=1790598148;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fJGBglAQac/E8tCP0o+6iJTrYkrRZOwSbU8CSX6RAng=;
-        b=dyKYuo9cvW9LoELfaTqQML28/YoZUpZiMNZST87mlrCxMmkFntjO5Hq4dJt1GPvHMw
-         5F3hvbNpnph2dQvX/uwmm0Vc4t6HZ9y4II2rijuG52m4wC6ULSKrPGIgCOlNlbjgwrD+
-         OlneUaiHU6ruCIUuFox8evz+3vjnefwKO4bTV5l1VedyNdjR559rlzlCHI++5Nlwj7Sl
-         +CVHCHIC0qTRxAvXM6Yqh5Vwy2TYZCY4faHOWxikYk1St0ejmPsUXyK3ODdXfs/X7jZl
-         e8PdOjEGZ50mdZb5jg+w8R0LNj23wg6LKdxjdHqueqEOf/QmmvxU1YA/kYcN5bcoLhZC
-         1FGg==
-X-Gm-Message-State: AFuF++n185R50h++6RCPqcKE0Hiix/cRK+T7zlVNfer18Uzp07MS55Jw
-	E+FX5o98HlRV7bSnv9lT4eF9/55iGtfxTVHoOIqS4SZ/Bu5Ppshfp7P28UesanOCR/kdQx5eEUG
-	T0sQ/
-X-Gm-Gg: AYBFou0WEddmP1DMT1XoPsf80A1pNQSCyEzHgnnRgfxsT6VNrZuOebsec0NYNK0bV/y
-	PV9AgNlr3HbZxYehm0AS2WNczLCu2qGupm5klRZdL5dViQzuUCrXjHgCmPvN/xqDVKpIQO//FYR
-	3hIUQq0O3pIB1uXuugMiMZ10wOj3Om5+RfrXB+s2B5og1zSn+CGaEuKsiRkVngWERvICesqXepB
-	/eT6kJPWP37/PI2LB+bs6irdLpOXouD6Jqwn52UqPUAoVxVRwVZxgN7TGStIKhDrdLweOmb1bub
-	BAMj6pNXSrtq9ENxbwybL/NdDAGW92TGen4GuTTQns5755HVpugDaLuyTTzGKeownQpKTlSe+fc
-	qcMG4RAPDc9x+Ts5U6wx7lDa39nPE3ZnBlPmYVDU01jvoh4IHtQXKp9gWmdfVH2JtXSiKO0oUJH
-	hvrflYN8AVUnhxIVkL0qb7tU+vrHR7AXsfB624NpFK/jNh/JHHmT1Bwf8YuFYpJoyIWEFz+1HcM
-	//6YN9VkMJlXqeksJz4+aDUmF+xXpv473R4XXMpS8g2U/QCN7j0Bv/jsuXyQ375sINg991NGTl+
-	kalO9ABw18Bqws0Jt021XzSaSk6d/akxLvw=
-X-Received: by 2002:a05:600c:46cb:b0:49e:660a:935e with SMTP id 5b1f17b1804b1-49fc586827cmr129330375e9.29.1789993349998;
-        Mon, 21 Sep 2026 05:22:29 -0700 (PDT)
+        bh=Ija3EWhhUq4O9CujHZrb+EbPvh4cMyDbLJNGGn4voo4=;
+        b=Ae+BUYK7hhba0HPBtMmlQEcexNyVJIfmsOOqV0wL9iU0jntmnqhL1zFpySmh2cB/uV
+         oFqgZRnNbV/pBFnUbpImHrlq2ZeskI5+PH5XGpiWK110BKjeoblpRgLSaR78ljBEDmtY
+         4GeeJhFo+EfF1H5/7O8JgJNGHRLKZw8C6bT+IIJcLpPuyT1+lZD4S2H7shGUJOjutvof
+         yn6azEHBk3rqYHWix+OR67qgj87o5BOohPnwPlQSaE1Ka0Exrq0rCFKksfMul1ValXCC
+         xrbOTS5VAnQnBbIDoM2c/n8pee2hOGvMqzhPQgdhzbaO7lwbXxaoxJE01jKQgL/03Ggo
+         p8cg==
+X-Gm-Message-State: AFuF++nGYKmA01xRHCb3xrweCxPLleFhQS0nG7FYrSs/SPO/rwiG1XLx
+	rwjBbY75RtvxosuP2tKb1CzAz8gOuCVp89uPuH6sUVjwXToHBB5N2AV8EsHawDytuDBWqZ6LM9r
+	mIM3/
+X-Gm-Gg: AYBFou1Nc2alfSKgRBNGceqLjDLEPZlKbXxCBuIyxN4QoHCjX6P9PNetlKCg2w5GPV5
+	SAeRe1sMS0xryWCQN9A7Hw7TkzSnb0Kg8L9B8rUmEMLcO3SmfW/1epJOE7yJG6MMqJw1CuUyyzZ
+	Ci9FWoSSNsfni8/cxbKiQoRitO+WCGxTWmKfHp69A5MBWv0ixBfjenxDXB+g3owdSe09Nxdx2Dx
+	dpK/sE99AtwCoeNBnxtKFl+ntBUGp45YPOB9aUfn4IMh2gtzt8WKsUMzyhWNDOOgCT/YmU7AlOt
+	1cpz36tZbzEI9S9cJK0u0eHsWg/e48iPjSSg6Hj+vs1FzCEP8Pejz+UqNybfhIft2OQcpvrSY/D
+	YWrEhkowBIpQYz+CRJ5ThnEiv57WmjGEv6//SOENPG2py1ElFWYzoiZWrsChW6BnrxV4ILIuIJo
+	OiMlANcZ1ycpAFgdsvJwO/mg5g15bXDhQoI+jlU3y272MANCA7R+OPTvHVyPgYWf+me7A9eLCHR
+	VWv365v2OZ4x8Xh5BxoUtHae0odOX5lZ0yka/1HTsaVcabumyGEjF6T6ts2elraqXyZwt+8JWxZ
+	oaJRuSJiuBogSJAjMw4w15bi
+X-Received: by 2002:a05:600c:c1c8:20b0:49f:c5aa:9ef4 with SMTP id 5b1f17b1804b1-49fc5aa9f08mr107773695e9.8.1789993347827;
+        Mon, 21 Sep 2026 05:22:27 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc58a1176sm208150005e9.2.2026.09.21.05.22.28
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc58a1176sm208150005e9.2.2026.09.21.05.22.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 05:22:29 -0700 (PDT)
+        Mon, 21 Sep 2026 05:22:27 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-pybind11: Upgrade 3.0.4 -> 3.1.0
-Date: Mon, 21 Sep 2026 15:22:23 +0300
-Message-ID: <20260921122224.4185627-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-pikepdf: Upgrade 10.11.0 -> 10.13.0.post1
+Date: Mon, 21 Sep 2026 15:22:21 +0300
+Message-ID: <20260921122224.4185627-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260921122224.4185627-1-leon.anavi@konsulko.com>
 References: <20260921122224.4185627-1-leon.anavi@konsulko.com>
@@ -67,84 +67,115 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 12:22:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130165
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130163
 
-Upgrade to release 3.1.0:
+Upgrade to release 10.13.0.post1:
 
-- Support for Python 3.8 was removed. The minimum supported version
-  is now Python 3.9.
-- Support for MSVC 2017 has been dropped. #6110
-- Changed strict-mode numeric conversions for PEP 484 compatibility:
-  float now accepts int, and complex now accepts int and float.
-- Small extra features added to the pybind11 command line tool
-  based on python-config.
-- Added subinterpreter_thread_state, an RAII wrapper that owns a
-  reusable PyThreadState for a sub-interpreter, together with a
-  subinterpreter_scoped_activate overload that activates it. This
-  lets an OS thread re-enter one or more sub-interpreters without
-  creating and destroying a PyThreadState on every activation.
-- Add py::mod_gil_used() as replacement spelling to
-  py::mod_gil_not_used(false).
-- Fixed a crash in py::subinterpreter::create() when called without
-  a current PyThreadState, which its documentation explicitly allows
-  - for example from an embedder that ended initialization with
-  PyEval_SaveThread(), or from a worker thread that has never
-  touched Python. error_scope is now constructed after a thread
-  state has been attached instead of before.
-- Make py::print delegate to the current frame/interpreter built-ins
-  print entry, fixing handling of sys.stdout = None, following the
-  active runtime's stream, keyword, and error semantics, and
-  remaining a no-op if the entry is unavailable during teardown.
-- Include the builtin complex type in the input annotation of the
-  std::complex<T> type caster.
-- String views (e.g. std::string_view) are now kept alive only when
-  loaded from a transient source (such as a generator), fixing both
-  a use-after-free and a regression where casting a view from a
-  durable object outside a bound function would throw.
-- Drop Python 2 prepend to evaluated source, causing errors to be
-  off by one.
-- Fix data race on last_storage_ptr_ cache in
-  gil_safe_call_once_and_store.
-- Allow user defined __str__ on enum_.
-- Fix generated Callable type annotations for Python callbacks
-  passed into C++ by inverting the callback's argument/return I/O
-  context relative to the enclosing function signature.
-- Correct __delitem__ for negative-step slices and re-enable
-  contiguous erase fast path.
-- Do not pass -fno-fat-lto-objects to GCC on macOS, which made all
-  LTO probes fail and silently disabled LTO.
-- Fixed cross-compilation to Emscripten/Pyodide with CMake >= 4.1
-  by no longer overriding an explicitly set
-  PYBIND11_USE_CROSSCOMPILING when CMAKE_CROSSCOMPILING_EMULATOR
-  is defined.
-- Unset stale PYTHON_MODULE_DEBUG_POSTFIX and correct
-  USE_PYTHON_INCLUDE_DIR variable.
-- Apply -undefined dynamic_lookup to all Apple platforms.
+- Behavior change: pikepdf.DataDecodingError now derives from
+  pikepdf.PdfError. A stream that will not decode is a defect in
+  the document, and the same call that raises it -
+  Object.read_bytes() - already raised PdfError for other kinds of
+  damage, so except PdfError was a handler that looked correct,
+  passed on healthy files, and let a traceback escape on damaged
+  ones. Code catching DataDecodingError by name is unaffected. Code
+  that orders except PdfError before except DataDecodingError will
+  now take the first branch; if the distinction matters, reverse
+  the order.
+- Behavior change: pikepdf.PdfParsingError now derives from
+  pikepdf.PdfError, for the same reason.
+- pikepdf.PasswordError remains a sibling of PdfError, not a
+  subclass. A wrong password does not mean the document is
+  defective, and handlers that report the two separately depend on
+  except PdfError not catching it.
+- pikepdf.NotExtractableError is now exported. It was already the
+  base class of the exported HifiPrintImageNotTranscodableError but
+  could not be caught by name.
+- Fixed the exceptions documentation, which referenced a nonexistent
+  FormCopyWarning (the class is PageCopyWarning) and omitted
+  ReferenceCycleError, PageCopyWarning and NotExtractableError.
+- XMP assigns a type to every standard property, and software that
+  reads XMP discards a property whose type is wrong - Ghostscript
+  strips these silently, and PDF/A validators reject them. pikepdf
+  used to choose the RDF container from the Python type of the
+  value it was handed, so meta['dc:subject'] = ['a', 'b'] wrote an
+  rdf:Seq where the specification requires an rdf:Bag, and
+  meta['dc:creator'] = 'Author' wrote a bare string where an
+  rdf:Seq belongs. pikepdf now knows the type of the properties in
+  the standard schemas and converts values to it.
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pybind11_3.0.4.bb => python3-pybind11_3.1.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pybind11_3.0.4.bb => python3-pybind11_3.1.0.bb} (92%)
+ .../0001-pyproject.toml-Do-not-strip.patch          | 11 ++++-------
+ ..._10.11.0.bb => python3-pikepdf_10.13.0.post1.bb} | 13 ++++++++++++-
+ 2 files changed, 16 insertions(+), 8 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pikepdf_10.11.0.bb => python3-pikepdf_10.13.0.post1.bb} (53%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb b/meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
-index f3efed38b6..a032fc34d7 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_3.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_3.1.0.bb
-@@ -7,7 +7,7 @@ DEPENDS = "\
-     python3-ninja-native \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+index 7483ad413b..575c3abb7a 100644
+--- a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
++++ b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+@@ -1,4 +1,4 @@
+-From 22020dc444aaf3f98dc40f38c0a8aad48476db8f Mon Sep 17 00:00:00 2001
++From 1b326de10bee40f497386921072dd80e2d7ecbde Mon Sep 17 00:00:00 2001
+ From: Leon Anavi <leon.anavi@konsulko.com>
+ Date: Wed, 8 Jul 2026 11:45:11 +0000
+ Subject: [PATCH] pyproject.toml: Do not strip
+@@ -19,7 +19,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
  
--SRCREV = "d03662f0984f652b60e7ddce53d3868002275197"
-+SRCREV = "97bf890db679505a14dfe547a5e77bb2bd05dc90"
- SRC_URI = "\
-     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
- "
+ diff --git a/pyproject.toml b/pyproject.toml
+-index 06ccfbb..475af59 100644
++index 9e991c3..d7cee23 100644
+ --- a/pyproject.toml
+ +++ b/pyproject.toml
+ @@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
+@@ -30,8 +30,5 @@ index 06ccfbb..475af59 100644
+ +cmake.build-type = "RelWithDebInfo"
+ +install.strip = false
+  wheel.py-api = "cp314"
+- 
+- [project]
+--- 
+-2.47.3
+-
++ # The wheel-building CI jobs download qpdf's source into ./qpdf to compile
++ # libqpdf before building. Without this exclusion scikit-build-core sweeps that
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb b/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
+similarity index 53%
+rename from meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
+index b18632f926..df98507aae 100644
+--- a/meta-python/recipes-devtools/python/python3-pikepdf_10.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
+ 
+-SRC_URI[sha256sum] = "4bebc59ac74411064e7c97a4036174023e22ccbecd22b78750ab76551eb38988"
++SRC_URI[sha256sum] = "4b73f926ebae81f04bf14527af330bd00bb268be767e0f189f7c4c3e4ad7ae0a"
+ 
+ SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
+ 
+@@ -47,6 +47,17 @@ RDEPENDS:${PN}-ptest += " \
+ 
+ do_install_ptest:append() {
+     install -m 0644 ${S}/pyproject.toml ${D}${PTEST_PATH}/
++    install -m 0644 ${S}/LICENSE.txt ${D}${PTEST_PATH}/
++    install -d ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/README.md ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/GCC-exception-3.1.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/GPL-3.0.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/libjpeg-turbo-README.ijg.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/libjpeg-turbo.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/microsoft-visual-cpp-runtime.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/openssl.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/qpdf.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -m 0644 ${S}/third-party-licenses/zlib.txt ${D}${PTEST_PATH}/third-party-licenses/
+ }
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
