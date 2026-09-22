@@ -2,289 +2,1640 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B484C982F1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D818C982FE
 	for <webhook@archiver.kernel.org>; Tue, 22 Sep 2026 07:26:38 +0000 (UTC)
 Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4703.1790061997305027836
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4702.1790061996907058840
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 22 Sep 2026 00:26:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=HTYWg9FL;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=HhatRh+d;
  spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
 Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout01.t-online.de (Postfix) with SMTP id 9E4F71C7A4
+	by mailout01.t-online.de (Postfix) with SMTP id 811891C70E
 	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 09:26:34 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([84.163.38.249]) by fwd72.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x8utW-3wjFf00; Tue, 22 Sep 2026 09:26:26 +0200
+	esmtp id 1x8utV-3wjFey0; Tue, 22 Sep 2026 09:26:26 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv2 3/3] convey: add recipe
-Date: Tue, 22 Sep 2026 09:26:19 +0200
-Message-ID: <20260922072619.228493-3-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2 1/3] rclone: add recipe
+Date: Tue, 22 Sep 2026 09:26:17 +0200
+Message-ID: <20260922072619.228493-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922072619.228493-1-f_l_k@t-online.de>
-References: <20260922072619.228493-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790061986-837FD9F9-FD295EF5/0/0 CLEAN NORMAL
-X-TOI-MSGID: f53dee31-f36a-42fc-a4dd-048a77fe214e
+X-TOI-EXPURGATEID: 150726::1790061986-9E7FB9F9-93E11122/0/0 CLEAN NORMAL
+X-TOI-MSGID: fff5a142-531b-4e07-b762-112790e3b057
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
 	s=20260216; t=1790061994; i=f_l_k@t-online.de;
-	bh=SfGsd2eKAOgZNY3J12D3cDGkL1SUJg4oHysTr5lnkRc=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=HTYWg9FL+bashZrMg5Vp4K9zvdVefa5U/9QM03BVqJSK8mlDXvbJPk7a/IiDbBP0W
-	 K+l9vpr8AzXjXxeMsNgN7kskIT7wqTgh8knrB3JOZIVExgZDPpesYzl3HCBFtddFlk
-	 vBIk7XhoHvPz8cUlFv0ovO1UUESINcIKkNNFKJ6+GnSPcN4zCBbjyuw/WQQJjM3vAT
-	 I60bIgGvigq7OAzHHAgRuPJF+DYCDkNWua36M8IV/q+YTRNNcLyZhaIpf8mL+Y8L48
-	 70Q2+D2yF+xf+25iCVm/vlvFL4TkKq9S7sfZGnEH/5JIIOypiRQSU3aT9wAO/H9pOA
-	 xYQLhZX3yi9UQ==
+	bh=37NSOJpX1ShiQOnzLzTCMgK6tzCD71qdvT++htuOjsU=;
+	h=From:To:Subject:Date;
+	b=HhatRh+dxR+Lk91WhauQSnyCpKaF93PCzwL/xmBWSOpnQDh+mPexLfQChz56H+mFs
+	 Jbzx2A9ZoTcwYYmqbiA3v5d/Ohz7KD+B8QxpMgBkwuxhhIi+eUXIK5kicZb8Xb73Qe
+	 f9r05i2XXmaGiCTA6FdLO3luGzpAQcljGOFNyW8BJ1ir1cTlKI4v3Hzz0LDgo+DBRv
+	 2SywXkBwZ+U0lGedTHh+7pcJJbdEIP98d4Qi5UytaX8c4ajibkT6luyF0gHHFjSHCW
+	 +qfkAzaTNG4iXwAK3HKTjH44yM0Esioa7Bux47lhZnrK7wLEc49uSp7UN7Q4ODc0pN
+	 xaQ6BwZSkRDJw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 07:26:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130175
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130174
 
-Convey is a fork of geary ported to GTK4, libadwaita, gcr-4 and
-webkitgtk 6.0. The patches keep build paths out of the binary, drop
-host checks that do not apply when cross-compiling and let the vala-unit
-subproject find g-ir-compiler through the cross file.
+Command line tool to sync files with cloud storage providers. Built
+with the go-mod classes, the module list and licenses are generated
+with update_modules.
 
 AI-Generated: Uses Claude Code (Claude Fable 5.1)
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...-not-store-build-paths-in-the-binary.patch | 40 +++++++++++++
- ...ck-for-the-iso-xml-files-and-the-C.u.patch | 39 ++++++++++++
- ...k-up-g-ir-compiler-with-find_program.patch | 34 +++++++++++
- .../convey/convey_50.2.bb                     | 59 +++++++++++++++++++
- 4 files changed, 172 insertions(+)
- create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0001-me=
-son-do-not-store-build-paths-in-the-binary.patch
- create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0002-me=
-son-do-not-check-for-the-iso-xml-files-and-the-C.u.patch
- create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0003-va=
-la-unit-look-up-g-ir-compiler-with-find_program.patch
- create mode 100644 meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+ .../recipes-support/rclone/rclone-go-mods.inc | 418 ++++++++++++++++++
+ .../rclone/rclone-licenses.inc                | 266 +++++++++++
+ .../recipes-support/rclone/rclone_1.75.1.bb   |  21 +
+ 3 files changed, 705 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rclone/rclone-go-mods.inc
+ create mode 100644 meta-oe/recipes-support/rclone/rclone-licenses.inc
+ create mode 100644 meta-oe/recipes-support/rclone/rclone_1.75.1.bb
 
-diff --git a/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-=
-not-store-build-paths-in-the-binary.patch b/meta-gnome/recipes-connectivi=
-ty/convey/convey/0001-meson-do-not-store-build-paths-in-the-binary.patch
+diff --git a/meta-oe/recipes-support/rclone/rclone-go-mods.inc b/meta-oe/=
+recipes-support/rclone/rclone-go-mods.inc
 new file mode 100644
-index 0000000000..91e21fd0ec
+index 0000000000..df7a92d8c0
 --- /dev/null
-+++ b/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-sto=
-re-build-paths-in-the-binary.patch
-@@ -0,0 +1,40 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Tue, 22 Sep 2026 07:43:41 +0200
-+Subject: [PATCH] meson: do not store build paths in the binary
++++ b/meta-oe/recipes-support/rclone/rclone-go-mods.inc
+@@ -0,0 +1,418 @@
 +
-+The build root and source root are only used when convey runs
-+uninstalled, but storing them puts TMPDIR into the binary and breaks
-+reproducibility. Point them to /usr/src and the schema directory to the
-+installed location instead.
++# This file has been generated by go-mod-update-modules.bbclass
++#
++# Do not modify it by hand, as the contents will be replaced when
++# running the update-modules task.
 +
-+AI-Generated: Uses Claude Code (Claude Fable 5.1)
-+Upstream-Status: Inappropriate [oe-specific]
-+---
-+ src/meson.build | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/meson.build b/src/meson.build
-+index 87690ada..ce722126 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -4,8 +4,8 @@ conf =3D configuration_data()
-+ conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
-+ conf.set_quoted('G_LOG_DOMAIN', meson.project_name())
-+ conf.set_quoted('APP_ID', convey_id)
-+-conf.set_quoted('BUILD_ROOT_DIR', meson.project_build_root())
-+-conf.set_quoted('GSETTINGS_DIR', meson.project_build_root() / 'desktop'=
-)
-++conf.set_quoted('BUILD_ROOT_DIR', '/usr/src')
-++conf.set_quoted('GSETTINGS_DIR', data_dir / 'glib-2.0' / 'schemas')
-+ conf.set_quoted('INSTALL_PREFIX', convey_prefix)
-+ conf.set_quoted('ISO_CODE_3166_XML', iso_3166_xml)
-+ conf.set_quoted('ISO_CODE_639_XML', iso_639_xml)
-+@@ -14,7 +14,7 @@ conf.set_quoted('NAME_SUFFIX', name_suffix)
-+ conf.set_quoted('PLUGINS_DIR', plugins_dir)
-+ conf.set_quoted('PROFILE', profile)
-+ conf.set_quoted('REVNO', revno)
-+-conf.set_quoted('SOURCE_ROOT_DIR', meson.project_source_root())
-++conf.set_quoted('SOURCE_ROOT_DIR', '/usr/src')
-+ conf.set_quoted('VERSION', convey_version)
-+ conf.set_quoted('WEB_EXTENSIONS_DIR', web_extensions_dir)
-+ config_h =3D configure_file(output: 'config.h', configuration: conf)
-diff --git a/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-=
-not-check-for-the-iso-xml-files-and-the-C.u.patch b/meta-gnome/recipes-co=
-nnectivity/convey/convey/0002-meson-do-not-check-for-the-iso-xml-files-an=
-d-the-C.u.patch
-new file mode 100644
-index 0000000000..15836a7c52
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-che=
-ck-for-the-iso-xml-files-and-the-C.u.patch
-@@ -0,0 +1,39 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Tue, 22 Sep 2026 09:15:56 +0200
-+Subject: [PATCH] meson: do not check for the iso xml files and the C.utf=
-8
-+ locale during build
-+
-+The iso xml files are needed at runtime and live in the staging area
-+when cross-compiling, and the locale check runs the host's locale
-+command against the host's locales. Neither says anything about the
-+target, so drop both build-time checks.
-+
-+AI-Generated: Uses Claude Code (Claude Fable 5.1)
-+Upstream-Status: Pending
-+---
-+ meson.build | 11 -----------
-+ 1 file changed, 11 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index dfd919a7..51ab9015 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -195,17 +195,6 @@ if iso_3166_xml =3D=3D ''
-+   iso_3166_xml =3D iso_codes_dir / 'iso_3166.xml'
-+ endif
-+=20
-+-files(iso_639_xml, iso_3166_xml) # Check to make sure these exist
-+-
-+-# Make sure the locale C.UTF-8 is installed on the system
-+-
-+-c_utf8_check =3D run_command('locale', '-a', check: true).stdout()
-+-have_c_utf8 =3D 'C.utf8' in c_utf8_check.split('\n')
-+-
-+-if not have_c_utf8
-+-  warning('C.utf8 locale not available on this system.')
-+-endif
-+-
-+ # Post-install script
-+ gnome.post_install(
-+   gtk_update_icon_cache: true,
-diff --git a/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit=
--look-up-g-ir-compiler-with-find_program.patch b/meta-gnome/recipes-conne=
-ctivity/convey/convey/0003-vala-unit-look-up-g-ir-compiler-with-find_prog=
-ram.patch
-new file mode 100644
-index 0000000000..a07887c67c
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-u=
-p-g-ir-compiler-with-find_program.patch
-@@ -0,0 +1,34 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Tue, 22 Sep 2026 09:15:10 +0200
-+Subject: [PATCH] vala-unit: look up g-ir-compiler with find_program
-+
-+The path taken from the g_ir_compiler pkg-config variable is the
-+target path and is not usable when cross-compiling. find_program
-+honours the cross file, which is where the wrapper is set.
-+
-+AI-Generated: Uses Claude Code (Claude Fable 5.1)
-+Upstream-Status: Pending
-+---
-+ subprojects/vala-unit/meson.build | 8 +-------
-+ 1 file changed, 1 insertion(+), 7 deletions(-)
-+
-+diff --git a/subprojects/vala-unit/meson.build b/subprojects/vala-unit/m=
-eson.build
-+index a1822aa8..d04cc307 100644
-+--- a/subprojects/vala-unit/meson.build
-++++ b/subprojects/vala-unit/meson.build
-+@@ -31,13 +31,7 @@ gee =3D dependency('gee-0.8')
-+ gio =3D dependency('gio-2.0')
-+ glib =3D dependency('glib-2.0', version: '>=3D' + target_glib)
-+ gobject =3D dependency('gobject-2.0')
-+-gobject_introspection =3D dependency('gobject-introspection-1.0', requi=
-red: false)
-+-
-+-if gobject_introspection.found()
-+-  g_ir_compiler =3D gobject_introspection.get_variable('g_ir_compiler')
-+-else
-+-  g_ir_compiler =3D find_program('g-ir-compiler')
-+-endif
-++g_ir_compiler =3D find_program('g-ir-compiler')
-+ if enable_valadoc
-+   valadoc =3D find_program('valadoc')
-+ endif
-diff --git a/meta-gnome/recipes-connectivity/convey/convey_50.2.bb b/meta=
--gnome/recipes-connectivity/convey/convey_50.2.bb
-new file mode 100644
-index 0000000000..2a28f5aef5
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
-@@ -0,0 +1,59 @@
-+SUMMARY =3D "Email application built around conversations for the GNOME =
-desktop"
-+HOMEPAGE =3D "https://gitlab.gnome.org/donnybeelo/convey"
-+SECTION =3D "network"
-+LICENSE =3D "LGPL-2.1-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2a2244d5a13871ad950c55877546a=
-6a2"
-+
-+DEPENDS =3D " \
-+    appstream-native \
-+    cairo \
-+    desktop-file-utils-native \
-+    enchant2 \
-+    folks \
-+    gcr \
-+    gmime \
-+    gnome-online-accounts \
-+    gstreamer1.0 \
-+    gstreamer1.0-plugins-bad \
-+    gtk4 \
-+    icu \
-+    iso-codes \
-+    json-glib \
-+    libadwaita \
-+    libpeas \
-+    libsecret \
-+    libsoup \
-+    libstemmer \
-+    libxml2 \
-+    sqlite3 \
-+    webkitgtk \
-+"
-+
-+inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-intros=
-pection gnome-help vala features_check
-+
-+SRC_URI =3D " \
-+    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=3Dhttps;branch=
-=3Dmain;tag=3D${PV}-1 \
-+    file://0001-meson-do-not-store-build-paths-in-the-binary.patch \
-+    file://0002-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.pat=
-ch \
-+    file://0003-vala-unit-look-up-g-ir-compiler-with-find_program.patch =
++SRC_URI +=3D "\
++    gomod://bazil.org/fuse;version=3Dv0.0.0-20230120002735-62a210ff1fd5;=
+sha256sum=3D19365a1af7ccf66edf0a454e609133c52e71391c1756e381f988b716afe66=
+7cd \
++    gomod://cloud.google.com/go/auth;version=3Dv0.20.0;sha256sum=3D06371=
+584193bbb88a8f2c2931d85efaf45666cc52643be5b8aada6b053672f3a \
++    gomod://cloud.google.com/go/auth/oauth2adapt;version=3Dv0.2.8;sha256=
+sum=3D4cd64264bafc4dd05f645452d6e1485adf92309130bd82b4c595db10cd534963 \
++    gomod://cloud.google.com/go/compute/metadata;version=3Dv0.9.0;sha256=
+sum=3Df97e35d1c96239b8574054a77e312c95d2c82a89c21daf46ffeaea6d5fc59eca \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/azcore;version=3Dv1.22=
+.0;sha256sum=3Ddf94ae5d1b516886927962ee029be26832eb8d9ca6a81f14c568560c88=
+6387e0 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/azidentity;version=3Dv=
+1.14.0;sha256sum=3D044868f3512461266db8282dde160e28cb465daf58b040349e13cc=
+45f651a5d9 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/internal;version=3Dv1.=
+12.0;sha256sum=3D27800de3838500d4f3a0aaacea147fb49e0da3a7a6079a595c3e9d42=
+df116ecf \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/storage/azblob;version=
+=3Dv1.8.0;sha256sum=3Dff9c0d8c7a937cfb47bca75d86cf61642537886fb0352d1f119=
+d478257cd5921 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/storage/azfile;version=
+=3Dv1.7.0;sha256sum=3Df3d0a89e9b4c03104d37b77626377084e250cb67981bd88e13e=
+3c4d6e8be8530 \
++    gomod://github.com/Azure/go-ntlmssp;version=3Dv0.1.1;sha256sum=3D3b8=
+0d75f2e559d6568163e6da8119cb7118fc60288b0f62c80829ea855e1b4e5 \
++    gomod://github.com/AzureAD/microsoft-authentication-library-for-go;v=
+ersion=3Dv1.7.2;sha256sum=3Ddcd0ef2964e09743ceb7b6cff837253caab8f28ba92a4=
+0bfc6948eea4f667913 \
++    gomod://github.com/FilenCloudDienste/filen-sdk-go;version=3Dv0.0.39;=
+sha256sum=3Ddcc9ed019edc82f111f212477de7077751da7851468e119d8af988bb1fc9f=
+8e8 \
++    gomod://github.com/Files-com/files-sdk-go/v3;version=3Dv3.3.194;sha2=
+56sum=3Dba4078f3eb828d13e93c5094e16bd0c44bce9a5a25ecd71b7c37218038b299f6 =
 \
++    gomod://github.com/IBM/go-sdk-core/v5;version=3Dv5.23.1;sha256sum=3D=
+a6cb35cfdc492fb2032e3598c8ccd2b81ac90dc8ed8538caabf7f44d31b94839 \
++    gomod://github.com/Max-Sum/base32768;version=3Dv0.0.0-20230304063302=
+-18e6ce5945fd;sha256sum=3D884da69f365e677c1f1aa18e5404ae79324428c8063f61e=
+9b5f01f29274fb997 \
++    gomod://github.com/Microsoft/go-winio;version=3Dv0.5.2;mod=3D1;sha25=
+6sum=3D19b8fbe9d4419278bb1e9d0cf2fd5aec879e42829c53ba3efd5656b8d1b35ae7 \
++    gomod://github.com/Microsoft/go-winio;version=3Dv0.6.2;mod=3D1;sha25=
+6sum=3D47fb19990ebb31954f3aa784ff45f4c93a9e86ac3e1297d7ca87c614aeffe2cb \
++    gomod://github.com/ProtonMail/bcrypt;version=3Dv0.0.0-20210511135022=
+-227b4adcab57;mod=3D1;sha256sum=3Dba46c32eb08e270c6001d1b2e2f0aed2c0fe853=
+cc9545bc653fce94ae906b584 \
++    gomod://github.com/ProtonMail/bcrypt;version=3Dv0.0.0-20211005172633=
+-e235017c1baf;sha256sum=3D2d641d9fcf6c238813e254df6bb93724dc46543516df407=
+1efaf22f68ba337b0 \
++    gomod://github.com/ProtonMail/gluon;version=3Dv0.17.1-0.202307241340=
+00-308be39be96e;sha256sum=3D3fa88ebf957192f2061c9bdcd2f8e313311e131246d23=
+dedc2a596682cbb4645 \
++    gomod://github.com/ProtonMail/go-crypto;version=3Dv0.0.0-20230321155=
+629-9a39f2531310;mod=3D1;sha256sum=3D739bad42da3a041b6eadcdda6546affd42b3=
+5a87a23c8cd97f96594f3eb120db \
++    gomod://github.com/ProtonMail/go-crypto;version=3Dv1.4.1;sha256sum=3D=
+70bbdc0f9e926738193aed968f7901efab41493752277c4c94c9b751aa55c42a \
++    gomod://github.com/ProtonMail/go-srp;version=3Dv0.0.7;sha256sum=3Daa=
+ac72038a9ee29162137acf24e1c17ef0c2601d5fcaefd434c3da57be4471b8 \
++    gomod://github.com/ProtonMail/gopenpgp/v3;version=3Dv3.4.1;sha256sum=
+=3Dfbb45e4963cec3542c90f3a17f3611daec672f2d623a7e5de06469a93b48d7d5 \
++    gomod://github.com/PuerkitoBio/goquery;version=3Dv1.12.0;sha256sum=3D=
+a27ad64d6aa446c8943fb7097fb2bb5e22c806343016de82b0e99bfe85930b28 \
++    gomod://github.com/STARRY-S/zip;version=3Dv0.2.3;sha256sum=3D7b7af5c=
+34cdc6d4b55be309ef0c7bfa5147029f8484d799c092be3141463a76b \
++    gomod://github.com/a1ex3/zstd-seekable-format-go/pkg;version=3Dv0.10=
+.0;sha256sum=3Df848512376f410f227ff39e9368c6981a9fb23f6b707f40973f38b5185=
+c5a2c4 \
++    gomod://github.com/a8m/tree;version=3Dv0.0.0-20240104212747-2c8764a5=
+f17e;sha256sum=3Df80124210d32debcfbc545727eee84cad848c24df45ff3aed4df6981=
+d5b3cd33 \
++    gomod://github.com/aalpar/deheap;version=3Dv1.1.2;sha256sum=3D955772=
+1af9303b535cc4255a1f92f5237ff17d069c9110be8bfd177bf363e8b8 \
++    gomod://github.com/abbot/go-http-auth;version=3Dv0.4.0;sha256sum=3D8=
+204bca24734f55f179dd1c0b820ae5be83151268693a147086f33cd2d4d473c \
++    gomod://github.com/adrg/xdg;version=3Dv0.5.3;sha256sum=3D52847b48afc=
+d46cfd312bc857a8df08643cfffc4103d59a40c3ce648e0196c13 \
++    gomod://github.com/akavel/rsrc;version=3Dv0.10.2;mod=3D1;sha256sum=3D=
+18b7d6652beec9ed8b5a3e7d27a8765e5c3718fc819ee73b9e3b14effc15fdba \
++    gomod://github.com/anacrolix/dms;version=3Dv1.7.2;sha256sum=3Dbc2ecc=
+4f895eb32e194d3b30bb885265dc1bceb34f5087368404c2cc566dfbc4 \
++    gomod://github.com/anacrolix/generics;version=3Dv0.2.0;sha256sum=3D4=
+c72f083082130d4a1622a47516e6a2d79d19379aadcbe510224955ba8a15219 \
++    gomod://github.com/anacrolix/log;version=3Dv0.17.0;sha256sum=3De9d00=
+85bf19492bf2d973e1688b1f5d8c3498cef17c601d29db7fa92541046e0 \
++    gomod://github.com/anchore/go-lzo;version=3Dv0.1.1;sha256sum=3D75cba=
+b209e61945e91335de0a8ef98ba91f5ac27c47fa4fb385e5c5f9747848f \
++    gomod://github.com/andybalholm/brotli;version=3Dv1.2.2;sha256sum=3D9=
+443ca8c077ea0395906f9f25fd19c23a2fa61636ee43595aa811d7326d34390 \
++    gomod://github.com/andybalholm/cascadia;version=3Dv1.3.4;sha256sum=3D=
+b9c323146f294f32009a95edd68d3513911858aa18ddde903ccff2394abe90a4 \
++    gomod://github.com/apache/arrow-go/v18;version=3Dv18.7.0;sha256sum=3D=
+3c0ac1b2e30e5fcfce25116880f30cbfd6d70437f593ba209e29211f9d40a542 \
++    gomod://github.com/appscode/go-querystring;version=3Dv0.0.0-20170504=
+095604-0126cfb3f1dc;sha256sum=3D2b5f4c89fad59f1c218a4953b1507b572438fef6d=
+907d4da667882d44e941215 \
++    gomod://github.com/atotto/clipboard;version=3Dv0.1.4;sha256sum=3Dd67=
+b2c36c662751309fd2ec351df3651584bea840bd27be9a90702c3a238b43f \
++    gomod://github.com/aws/aws-sdk-go-v2;version=3Dv1.43.7;sha256sum=3D8=
+d2f7e68f25252204268db2fa4fc8df2d93a98dbb3d52236fd15fc8c97d7538b \
++    gomod://github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream;versio=
+n=3Dv1.7.18;sha256sum=3Ddf6b679e2d32e966cdd363be28264f226e25e1ad35030e793=
+add3816c11cc517 \
++    gomod://github.com/aws/aws-sdk-go-v2/config;version=3Dv1.32.30;sha25=
+6sum=3D51d36687bcd16c9578543d9b34cfa739189050878d394679b8658be20aa693bb \
++    gomod://github.com/aws/aws-sdk-go-v2/credentials;version=3Dv1.19.29;=
+sha256sum=3D78d6f8c2a19a544ead82afe3e531e61693e7736a075d6c60eda053b5b0a58=
+408 \
++    gomod://github.com/aws/aws-sdk-go-v2/feature/ec2/imds;version=3Dv1.1=
+8.30;sha256sum=3Dcf1fa965930afc3ab87e044a9e76b0a29862a50c9469187457fb10eb=
+f804597c \
++    gomod://github.com/aws/aws-sdk-go-v2/feature/s3/manager;version=3Dv1=
+.22.34;sha256sum=3Dba9958fc98e3dfa8ed0d7225ce75f78e93244cc3e7309b7b2f7d52=
+a89a8d763a \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/configsources;version=3D=
+v1.4.38;sha256sum=3Dfd438497aeb6d2391eaf6ebe315913f0ab5f7acab905a005f820c=
+ecf8b479bc6 \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/endpoints/v2;version=3D=
+v2.7.38;sha256sum=3D13e1f7fdfc742b42aff702ed59a347a795e30d55002f78d4cd75a=
+8c8149defe8 \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/v4a;version=3Dv1.4.39;=
+sha256sum=3Da2c9e46719e9283b448f99f1cee71c54140d13271da51263d485cdaa92e2e=
+11a \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/accept-encodin=
+g;version=3Dv1.13.17;sha256sum=3D5da6d06e605d71ee3202d46bf2b11c20512210a9=
+c641cb34541690995dcbb6d9 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/checksum;versi=
+on=3Dv1.9.31;sha256sum=3D4e65275e95fd6a167f3603bc16f19309cf7916ddc715332e=
+996375f4646e66cb \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/presigned-url;=
+version=3Dv1.13.38;sha256sum=3D9ae38588863d5ba8797d2023091970a8e0cb89f4f0=
+9160c311d0584fcf8c5cf0 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/s3shared;versi=
+on=3Dv1.19.39;sha256sum=3D134b908a404a1bba4c03d1539bbf083941e1141b3c9dceb=
+2ed847321f173a434 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/s3;version=3Dv1.107.3;s=
+ha256sum=3Dcfdb98d4e7d9384b709e2975d9411cc427cb5ef3894123cfa572332681924d=
+8e \
++    gomod://github.com/aws/aws-sdk-go-v2/service/signin;version=3Dv1.4.1=
+;sha256sum=3D150e3d58f7048813adb66afa3c2ffe5751a0033eaed76cd4e4215ed6e42b=
+e00a \
++    gomod://github.com/aws/aws-sdk-go-v2/service/sso;version=3Dv1.32.1;s=
+ha256sum=3D77951e65c854f249ce5c36355b97ed4c9feb5f9b40c3b56b2cc5e8a42ee5ee=
+22 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/ssooidc;version=3Dv1.37=
+.1;sha256sum=3Dad084079a7752992adbac8f1243757c08dba609b5c941a593048f999f1=
+ffd60c \
++    gomod://github.com/aws/aws-sdk-go-v2/service/sts;version=3Dv1.44.1;s=
+ha256sum=3D0a254a1fc91c4acffa69833dc9be50bc2d999c6db3b415172f619aeb1d22c1=
+15 \
++    gomod://github.com/aws/smithy-go;version=3Dv1.27.8;sha256sum=3D831b0=
+2e1447db3c2d47cefb15b184bd522f26db41cfd28e2635da87e030fdf69 \
++    gomod://github.com/bahlo/generic-list-go;version=3Dv0.2.0;sha256sum=3D=
+e773fa812176a62f1d27d7a1e7589683f5e5af2d36628fa6a5a522e59474c504 \
++    gomod://github.com/beorn7/perks;version=3Dv1.0.1;sha256sum=3D25bd9e2=
+d94aca770e6dbc1f53725f84f6af4432f631d35dd2c46f96ef0512f1a \
++    gomod://github.com/bodgit/plumbing;version=3Dv1.3.0;sha256sum=3D15c8=
+0dc98fd6b972798a6c24a002f6fb00b28abdc9928185206a5abc5e56a089 \
++    gomod://github.com/bodgit/sevenzip;version=3Dv1.6.5;sha256sum=3D9dba=
+d89992338ff0c408a351e9135221715d309acf4234f52fe69d23da7ace7c \
++    gomod://github.com/bodgit/windows;version=3Dv1.0.1;sha256sum=3Dcbe5f=
+1c687372fd463b19c05b2cfdd3cdcaad86baea38f83ebe580b26f19e956 \
++    gomod://github.com/boombuler/barcode;version=3Dv1.0.1-0.201902190625=
+09-6c824513bacc;mod=3D1;sha256sum=3Dc2405ce221f1d08638f38282a9bc43a079adc=
+b1b9515fe4e08ab494d0ef7fca3 \
++    gomod://github.com/boombuler/barcode;version=3Dv1.1.0;sha256sum=3Db8=
+e43377b2810f32ba102ccde887d32d2e05471a68122818173e85132debae76 \
++    gomod://github.com/bradenaw/juniper;version=3Dv0.15.3;sha256sum=3D09=
+769aeaec2ec25beea07719585352dcf66b665eb3655033b7ea30befafb775f \
++    gomod://github.com/buengese/sgzip;version=3Dv0.1.1;sha256sum=3D8df7f=
+b596efd83a7d87d34946bbc37fcd11d1fb11dbe4c5ec17a00ba546160d7 \
++    gomod://github.com/buger/jsonparser;version=3Dv1.2.0;sha256sum=3De14=
+fdde5ed2da541b69fd235075e1436a8188e78e52445840c4268794f359093 \
++    gomod://github.com/bwesterb/go-ristretto;version=3Dv1.2.0;mod=3D1;sh=
+a256sum=3D368aca1757be8745cce3b90deb401e7be5740963ca5359c4a954cc03502d8f0=
+3 \
++    gomod://github.com/calebcase/tmpfile;version=3Dv1.0.3;sha256sum=3D44=
+bb89c6e03a2cdbb36e7616392ebb96daf0d8bc0d3d91ce3709e62e4636d5e5 \
++    gomod://github.com/cespare/xxhash/v2;version=3Dv2.3.0;sha256sum=3D14=
+5a26cdc7c49db566017b807c4989ee7f7ddeb569423e9cb99f995fac3621d3 \
++    gomod://github.com/chilts/sid;version=3Dv0.0.0-20190607042430-660e94=
+789ec9;sha256sum=3D1a317f6b4c4fb11e90f5661c34703ba8b8a4ba248eaf3b4b6fe8a3=
+c11226b9b6 \
++    gomod://github.com/clipperhouse/uax29/v2;version=3Dv2.7.0;sha256sum=3D=
+67b1278f1ffb4e4d783a390e48fe7396864650138e785d4b4bfca5914333f761 \
++    gomod://github.com/cloudflare/circl;version=3Dv1.1.0;mod=3D1;sha256s=
+um=3D1db9d0f112f9ae8a72a06841f4f191d3545c144c6e05ed3cd816018a5882281a \
++    gomod://github.com/cloudflare/circl;version=3Dv1.6.4;sha256sum=3Dbc4=
+4d9316fad1a8657714cbf91ed2103bcc47934765e8ee471e174e8722e9242 \
++    gomod://github.com/cloudinary/cloudinary-go/v2;version=3Dv2.16.0;sha=
+256sum=3D184f3b799461381544c4fdf815262b21e17e56a4ec3110cf8659930eb86557f5=
+ \
++    gomod://github.com/cloudsoda/go-smb2;version=3Dv0.0.0-20260701064823=
+-d8c5600d73b8;sha256sum=3D0fd8b798fa487f674b7795ac2baf4c9742d99ef3edf0967=
+d584da98674f15224 \
++    gomod://github.com/cloudsoda/sddl;version=3Dv0.0.0-20250224235906-92=
+6454e91efc;sha256sum=3D4d8eb7d3d840c63755c01ed2e1500df655503b466b64102084=
+79debf4df98c16 \
++    gomod://github.com/colinmarc/hdfs/v2;version=3Dv2.4.0;sha256sum=3Db9=
+96584b71a7e8f337bb528cce3a28740687251d0dde7624b5487c447a7439f9 \
++    gomod://github.com/coreos/go-semver;version=3Dv0.3.1;sha256sum=3De72=
+820542b5913afe0a52e956e0b3834e9fbb080641fed183117f862fab74e8a \
++    gomod://github.com/coreos/go-systemd/v22;version=3Dv22.6.0;sha256sum=
+=3D7759d251cb9c2f020d8b7b5fa075653cb11cad4861e3e194bf3484267bbabc2f \
++    gomod://github.com/cpuguy83/go-md2man/v2;version=3Dv2.0.6;mod=3D1;sh=
+a256sum=3Dbb81a9e2d14d9a586f0591853bdaad230d8cdf0d8d6ffa71dddae249ad573cc=
+9 \
++    gomod://github.com/cpuguy83/go-md2man/v2;version=3Dv2.0.7;sha256sum=3D=
+9ad5f2cbc644c0bb648a9b182d6b70f92e7ac4dfab5cf0ef746bbeef944fda59 \
++    gomod://github.com/creasty/defaults;version=3Dv1.8.0;sha256sum=3Dd99=
+84bcd4b7326a6066f58bc94b46fe8657e50e1ba0a3ef6eb592b0ff96e6712 \
++    gomod://github.com/cronokirby/saferith;version=3Dv0.33.0;mod=3D1;sha=
+256sum=3D00534f8bf79ef5620c920e8d2cd35ef5cdb07b3a0ca70be0f616076f9d1b51d4=
+ \
++    gomod://github.com/cronokirby/saferith;version=3Dv0.33.1-0.202502261=
+74546-1f11f94ce488;sha256sum=3D63f9e49ce347804cc181503a1b7e9b5a3a485c9890=
+7af3b94ef3dcf81900ee5a \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.0;mod=3D1;sha256su=
+m=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.1;mod=3D1;sha256su=
+m=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.2-0.20180830191138=
+-d8f796af33cc;sha256sum=3Db4d0923b169b194f0016ec46f3df1ab0c68e27999743e43=
+fe2de59ecb2484128 \
++    gomod://github.com/diskfs/go-diskfs;version=3Dv1.9.4;sha256sum=3D4f8=
+acbe8da9b3fb057bcaff97ea2e2906a4c5e588d5c112420be6ced0b106934 \
++    gomod://github.com/dop251/scsu;version=3Dv0.0.0-20220106150536-84ac8=
+8021d00;mod=3D1;sha256sum=3De277ed1de33f7d9ede927776393645279a4ee03396603=
+a6f792b4bd0babfbac9 \
++    gomod://github.com/dromara/dongle;version=3Dv1.0.1;sha256sum=3Dc0070=
+691c99d3b163bf44c1e1dd8dd0564099515be1919d7e7af71a59c3d939c \
++    gomod://github.com/dropbox/dropbox-sdk-go-unofficial/v6;version=3Dv6=
+.4.0;sha256sum=3D9a574ccb65b9ad177baa0cd33fd149ec2c1211e15709287531556cbf=
+3033fb81 \
++    gomod://github.com/dsnet/compress;version=3Dv0.0.2-0.20230904184137-=
+39efe44ab707;sha256sum=3Dbc6111029c5b2a663b69e6d622d1082ccaf114b31162ea04=
+6681c2e4b689ee43 \
++    gomod://github.com/dsnet/golib;version=3Dv0.0.0-20171103203638-1ea16=
+6775780;mod=3D1;sha256sum=3D3b5266f69965a715f27de5d5e34da0ff809eb54a2ae6d=
+7f5453d064d5a3dd5df \
++    gomod://github.com/dustin/go-humanize;version=3Dv1.0.1;mod=3D1;sha25=
+6sum=3D4325999d0a6841031258a2561c22879d9fbdf77abc6b32a17b1cb6edf0810fb2 \
++    gomod://github.com/ebitengine/purego;version=3Dv0.10.1;mod=3D1;sha25=
+6sum=3D4920ecc5239d79446d9b61542c3749c7389d2178d3a142e557e0379051866514 \
++    gomod://github.com/emersion/go-message;version=3Dv0.18.2;sha256sum=3D=
+7bccb8ee87c818306ca54a4e868e7066985a51c523bf059a8aee142978cb1384 \
++    gomod://github.com/emersion/go-vcard;version=3Dv0.0.0-20260618161152=
+-d854b7e0e2d3;sha256sum=3D1c7f72fa119795c21f68b263dc2b887acc599ee4f510489=
+e80ecdcdff1bf9175 \
++    gomod://github.com/emmansun/gmsm;version=3Dv0.15.5;mod=3D1;sha256sum=
+=3Da57191060d493eb463ea7e1b413ce439978d3c9f9d61fb6237a2e57511048c12 \
++    gomod://github.com/felixge/httpsnoop;version=3Dv1.1.0;sha256sum=3De3=
+405a361843f8e69f64e41b523512925cd50fd5ea108b7912534922c31b00e7 \
++    gomod://github.com/flynn/noise;version=3Dv1.1.0;sha256sum=3D4925ada2=
+4731484e19b32ca5b06c46d1e102a0b7a8eaab750b11ef88ad8e661e \
++    gomod://github.com/gabriel-vasile/mimetype;version=3Dv1.4.13;sha256s=
+um=3D03b46aaa7bd4403d65dc23fb9d7e9b61214bb429491c864ee638490a42d55013 \
++    gomod://github.com/gdamore/encoding;version=3Dv1.0.1;sha256sum=3De58=
+4303c743306ae55be21a5703900d0628aa2ef840ce49d5f0bbf7c51379e33 \
++    gomod://github.com/gdamore/tcell/v2;version=3Dv2.9.0;sha256sum=3De36=
+d0cb01474c5456b4fd28dc6b0c1dc115d1788ed174885afd4bf5fa2b9af42 \
++    gomod://github.com/geoffgarside/ber;version=3Dv1.2.0;sha256sum=3Dcb2=
+9a3bef361e331d34f6aa5045d52d2fd0e50881814130c2e1985288131a4a7 \
++    gomod://github.com/go-chi/chi/v5;version=3Dv5.3.1;sha256sum=3Dea5f74=
+7c50955a7011224da8347e802b65d05800af39104670eaa950011b794f \
++    gomod://github.com/go-darwin/apfs;version=3Dv0.0.0-20211011131704-f8=
+4b94dbf348;mod=3D1;sha256sum=3Dc2ce3c59e1bfeb7fda32827ee8a776e9ba74b7db92=
+d97e7b11d345a26540f982 \
++    gomod://github.com/go-git/go-billy/v5;version=3Dv5.9.0;sha256sum=3D3=
+6f9638d2f60c2ef960881b5908cb17b215da8fff8a7c267b4b1200a3561fc60 \
++    gomod://github.com/go-logr/logr;version=3Dv1.2.2;mod=3D1;sha256sum=3D=
+519b1d6da5eeef675b4a1857d628f05f110a2b8cb3c423b715fea80d0975a518 \
++    gomod://github.com/go-logr/logr;version=3Dv1.4.3;sha256sum=3D523d7a3=
+587fe73f61ef41c8bc627f7d7f38de8104d46278154b307e60770ad70 \
++    gomod://github.com/go-logr/stdr;version=3Dv1.2.2;sha256sum=3D9dd6893=
+bf700198485ae699640b49bc1efbc6c73b37cb5792a0476e1fd8f7fef \
++    gomod://github.com/go-ole/go-ole;version=3Dv1.2.6;mod=3D1;sha256sum=3D=
+de7da59858d6121956da002ded711242cc14ecf597e932a8625246418fd3bbaa \
++    gomod://github.com/go-ole/go-ole;version=3Dv1.3.0;mod=3D1;sha256sum=3D=
+fcf0840f2ff50fbc3b5a54b9d4cb240c64d47003ab03e420aeff0057015a8953 \
++    gomod://github.com/go-openapi/errors;version=3Dv0.22.8;sha256sum=3D2=
+9105371e583abec5440063d20b77c67f67bf6b017c959c88934a5da6e65ae92 \
++    gomod://github.com/go-openapi/strfmt;version=3Dv0.27.0;sha256sum=3D6=
+e830c668d22047156cd9d1e991e9e2603a55fd2fbd7331ee2e4691e9646797e \
++    gomod://github.com/go-playground/locales;version=3Dv0.14.1;sha256sum=
+=3Df33b53f2eef290d8b43b1011285f1f9cfcb1295c690defcb452598773baace7b \
++    gomod://github.com/go-playground/universal-translator;version=3Dv0.1=
+8.1;sha256sum=3D77fc966f2d045c208ddeaa8343924f83688841b6f4c2ae005dc9ea555=
+0c7d171 \
++    gomod://github.com/go-playground/validator/v10;version=3Dv10.30.3;sh=
+a256sum=3D94b5f35c278e7f96b5a2ec2dfdbfafc554ac512e035af92b8663590cc7e8b05=
+2 \
++    gomod://github.com/go-resty/resty/v2;version=3Dv2.17.2;sha256sum=3D4=
+24588a1577747a23273e5ef9f75fdb9178b8d2a42fa37f2e0ed90bb2b957cd8 \
++    gomod://github.com/go-viper/mapstructure/v2;version=3Dv2.5.0;sha256s=
+um=3D326f8e00f648af4ae8e6e18c606325e4206a92d6ed42f486dc2f4da8e1897547 \
++    gomod://github.com/goccy/go-json;version=3Dv0.10.6;sha256sum=3D2296e=
+77cc44facf3596ddd7a5866578a8450b59ad1583cbb70bfbfa77fe0dadc \
++    gomod://github.com/gofrs/flock;version=3Dv0.13.0;sha256sum=3D171560e=
+83110e199cc9f4f8959d442c563c8ab6b26c100dd67b7a2fe265339ce \
++    gomod://github.com/gogo/protobuf;version=3Dv1.3.2;sha256sum=3Ddd2b73=
+f163c8183941626360196c8f844addd95423d341a0412e1b22d0104ff7 \
++    gomod://github.com/golang-jwt/jwt/v4;version=3Dv4.5.2;sha256sum=3Dec=
+5ee69a31fd478fc197fddce7c06dad1abe7543095a55c4ee6546ae79d99a0f \
++    gomod://github.com/golang-jwt/jwt/v5;version=3Dv5.3.1;sha256sum=3D5c=
+9a74494e2bc746cee56558b5473252af5767f7ea4044caa9ea0fa2a056fec7 \
++    gomod://github.com/google/btree;version=3Dv1.1.3;sha256sum=3D11b736b=
+c8252b52fecdf346d3707ccf3a2b6d458ba21b4f843616fc12eeb30b2 \
++    gomod://github.com/google/flatbuffers;version=3Dv25.12.19+incompatib=
+le;sha256sum=3De029cc5ea5f0661de945a92a8eeaa8372e6af5d0aac4c87e9bbe883ad5=
+7afd96 \
++    gomod://github.com/google/go-cmp;version=3Dv0.5.5;mod=3D1;sha256sum=3D=
+4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
++    gomod://github.com/google/s2a-go;version=3Dv0.1.9;sha256sum=3Dbf8f4b=
+159d3fc201477822ed2514e4f05f58c764b78ffed73ec0accce5fb7f07 \
++    gomod://github.com/google/uuid;version=3Dv1.6.0;sha256sum=3Dd0f02f37=
+7217f42702e259684e06441edbf5140dddcc34ba9bea56038b38a6ed \
++    gomod://github.com/googleapis/enterprise-certificate-proxy;version=3D=
+v0.3.18;sha256sum=3De77fe2aae601a0efca13a72cc746dbcc5d2be1fede0f73d424f07=
+0979d41b643 \
++    gomod://github.com/googleapis/gax-go/v2;version=3Dv2.22.0;sha256sum=3D=
+800a18188bf1222e7ce7b4a31c22ab807136e6d194507aa8cd822ba9dff00696 \
++    gomod://github.com/gorilla/schema;version=3Dv1.4.1;sha256sum=3D63885=
+f95be210851d623d464698326a202274e191f53f7b7905a150e9cf04494 \
++    gomod://github.com/gorilla/securecookie;version=3Dv1.1.1;mod=3D1;sha=
+256sum=3Dab87561203a98c2835787e44695890be78b7b961c04bad7241c83c0cc6b1d7a6=
+ \
++    gomod://github.com/gorilla/sessions;version=3Dv1.2.1;mod=3D1;sha256s=
+um=3D6772f11c4667facb2f2a3b95b48072cab336f996a5735308d3d286c94f24f3ae \
++    gomod://github.com/hanwen/go-fuse/v2;version=3Dv2.10.1;sha256sum=3D6=
+945a37ef334da27a747ddd6aacda04423d462d662e5035e367adec7ca8f4642 \
++    gomod://github.com/hashicorp/errwrap;version=3Dv1.0.0;sha256sum=3Dcc=
+df4c90f894d8a5fde4e79d5828c5d27a13e9f7ce3006dd72ce76e6e17cdeb2 \
++    gomod://github.com/hashicorp/go-cleanhttp;version=3Dv0.5.2;sha256sum=
+=3De9f3dcfcb33172ba499b4f8e888169252d7f1e072082182124a6e2053523f7df \
++    gomod://github.com/hashicorp/go-multierror;version=3Dv1.1.1;sha256su=
+m=3D972cd841ee51fdeac69c5a301e57f8ea27aebf15fddd7f621d5c240f28c3000c \
++    gomod://github.com/hashicorp/go-retryablehttp;version=3Dv0.7.8;sha25=
+6sum=3D9e2c175e4af37cdfeba28ed89250ad1fd691eda0fab167fafa9928222646b71e \
++    gomod://github.com/hashicorp/go-uuid;version=3Dv1.0.2;mod=3D1;sha256=
+sum=3D1c4a96ad155de1eab04062a5be4010bb9aaa371252aed524217c2e69c14adecf \
++    gomod://github.com/hashicorp/go-uuid;version=3Dv1.0.3;sha256sum=3D5e=
+9dc2bb3785d69a65d287a4b3fa7e9f583a127e41c6a2fd095ac862fed71dad \
++    gomod://github.com/hashicorp/golang-lru/v2;version=3Dv2.0.7;sha256su=
+m=3D2eb92ff13970bccd460efae14255bfc03bb51474da0137e477a60f95561acc30 \
++    gomod://github.com/inconshreveable/mousetrap;version=3Dv1.1.0;mod=3D=
+1;sha256sum=3D1c1b15911aa8a0bd5cd0f6670ec23d1086496f3615fdf53306aff2b476c=
+e9be1 \
++    gomod://github.com/internxt/rclone-adapter;version=3Dv0.0.0-20260708=
+165336-dd6561bacfa2;sha256sum=3Dcb356c6d3d7b525efbc14341d2651d20948085a99=
+d062b57bd4fc81dbd51ec4d \
++    gomod://github.com/jcmturner/aescts/v2;version=3Dv2.0.0;sha256sum=3D=
+717a211ad4aac248cf33cadde73059c13f8e9462123a0ab2fed5c5e61f7739d7 \
++    gomod://github.com/jcmturner/dnsutils/v2;version=3Dv2.0.0;sha256sum=3D=
+f9188186b672e547cfaef66107aa62d65054c5d4f10d4dcd1ff157d6bf8c275d \
++    gomod://github.com/jcmturner/gofork;version=3Dv1.7.6;sha256sum=3Db7e=
+42a499d6be8dd07069c031f9291a5615aa0d59660c7e322cff585ce39e8a2 \
++    gomod://github.com/jcmturner/goidentity/v6;version=3Dv6.0.1;sha256su=
+m=3D243e6fd6ea9f3094eea32c55febade6d8aaa1b563db655b0c5327940e4719beb \
++    gomod://github.com/jcmturner/gokrb5/v8;version=3Dv8.4.4;sha256sum=3D=
+8e468a1161302cb12b6e3f16bf31cd3b093f57c14325e11b348df1472860e313 \
++    gomod://github.com/jcmturner/rpc/v2;version=3Dv2.0.3;sha256sum=3D90c=
+595355e5e2c9dc1e1ae71a88491a04c34d8791180098da103217cbf5f5574 \
++    gomod://github.com/jlaffaye/ftp;version=3Dv0.2.1-0.20251026020404-66=
+02e981a1bb;sha256sum=3D9092783cd95e376018b0f96aa4c3f31a1011fe6e589d14d906=
+add196b11fa642 \
++    gomod://github.com/josephspurrier/goversioninfo;version=3Dv1.7.0;mod=
+=3D1;sha256sum=3Dd9b53badba01479688b78f3318c5a6dc931e9c9300cb74ab5c0da7a3=
+eac67c2c \
++    gomod://github.com/jtolio/noiseconn;version=3Dv0.0.0-20231127013910-=
+f6d9ecbf1de7;sha256sum=3Db7731fe9263cd320fd4ab4f537eaf904a01714c8afb0f718=
+ef1c0d6d1ab376f7 \
++    gomod://github.com/jzelinskie/whirlpool;version=3Dv0.0.0-20201016144=
+138-0675e54bb004;sha256sum=3D171380cee0b81436609d30e101fab6b51cd291eb0f1d=
+fb119e840b042b12959c \
++    gomod://github.com/kisielk/errcheck;version=3Dv1.5.0;mod=3D1;sha256s=
+um=3D107d26460d41b5322b6911c9b5eb233117421943b3a1453ba99f01c4fdf2f8e8 \
++    gomod://github.com/kisielk/gotool;version=3Dv1.0.0;mod=3D1;sha256sum=
+=3D77aca7bffc0ec29fc9f088d5962ab3128f405d7b10c7ceb9693ff7a08958955d \
++    gomod://github.com/klauspost/compress;version=3Dv1.19.0;sha256sum=3D=
+2eaca328cea81dd4797b6eeadc0fe56cfe501e43fca5d1512f12b39d47e0d8f6 \
++    gomod://github.com/klauspost/compress;version=3Dv1.4.1;mod=3D1;sha25=
+6sum=3D28a209d31984fd50b6724085eda0425f5d7b40de3b692bd98b296eac29fd1ed0 \
++    gomod://github.com/klauspost/cpuid;version=3Dv1.2.0;mod=3D1;sha256su=
+m=3D9b443b5b06355eca91f4e773a4df7d8a3bf0c9abad5ff472d6973e688e6a9392 \
++    gomod://github.com/klauspost/cpuid/v2;version=3Dv2.0.1;mod=3D1;sha25=
+6sum=3D66180bc563c8890e28b69ba64fbe6e1d2879a8574a3ffce7e597f1915f78bc6c \
++    gomod://github.com/klauspost/cpuid/v2;version=3Dv2.4.0;sha256sum=3D4=
+e0c1281558514efccc2cc3ab78d430426486fe9101d6dcc9a1b090e05c26c69 \
++    gomod://github.com/klauspost/crc32;version=3Dv1.3.0;mod=3D1;sha256su=
+m=3D4b89cabd895898e44c9a17efe25dd2cd26f5f2554bb298bd3da7082c8f6a7d6c \
++    gomod://github.com/klauspost/pgzip;version=3Dv1.2.6;sha256sum=3D8ac5=
+08e93b22dca1a731a3a4c921b57c5ed1daea7b3629a2cf85c3b7530dda84 \
++    gomod://github.com/koofr/go-httpclient;version=3Dv0.0.0-202405201113=
+29-e20f8f203988;sha256sum=3D2d0b34ddc40eb46cef1af87d7da4c8591a32995ce4e59=
+05add16095af41ef867 \
++    gomod://github.com/koofr/go-koofrclient;version=3Dv0.0.0-20221207135=
+200-cbd7fc9ad6a6;sha256sum=3D05efdb2708c42de96eb05a710bf146633b7cc0f75166=
+eebe394b0c7251308a00 \
++    gomod://github.com/kr/fs;version=3Dv0.1.0;sha256sum=3Dd376bd98e81aea=
+34585fc3b04bab76363e9e87cde69383964e57e9779f2af81e \
++    gomod://github.com/kr/pretty;version=3Dv0.2.1;mod=3D1;sha256sum=3Dc2=
+ae28bd5bb8e8f9076955126768ab7a147952deea9fdbcb373c53cc18870f82 \
++    gomod://github.com/kr/pty;version=3Dv1.1.1;mod=3D1;sha256sum=3D6da4c=
+9c7364446894e5ef877e19f985cd51d671ce6e8f4ca87862b449f6dd7f6 \
++    gomod://github.com/kr/text;version=3Dv0.1.0;mod=3D1;sha256sum=3D2fba=
+9529e5c13dde62f371ef7383baf04d7132501dac6aa08e910f9ec0bf85c5 \
++    gomod://github.com/kylelemons/godebug;version=3Dv1.1.0;sha256sum=3Dd=
+bbd0ce8c2f4932bb03704d73026b21af12bd68d5b8f4798dbf10a487a2b6d13 \
++    gomod://github.com/lanrat/extsort;version=3Dv1.4.2;sha256sum=3Db2bd2=
+46108536fdb504a9d6a2c6c2ee7b14e35ee250027b7443111d9b0d46781 \
++    gomod://github.com/leodido/go-urn;version=3Dv1.4.0;sha256sum=3D948fe=
+5f705b9eab6c3bc7e34a3ad2549ead87a8f5f73e5a85a8c66f347612ab2 \
++    gomod://github.com/lpar/calendar;version=3Dv0.2.0;sha256sum=3Dbd283e=
+d0c979f83c8ec9882245961507e9f59a4c41e5a9ffc6d83911d56b8860 \
++    gomod://github.com/lucasb-eyer/go-colorful;version=3Dv1.4.0;sha256su=
+m=3Df2c9689fc5ca32b6ed1436bcce879b44e7b9d14f670681ab41974213f2acb217 \
++    gomod://github.com/lufia/plan9stats;version=3Dv0.0.0-20260627054121-=
+477a66015f15;mod=3D1;sha256sum=3D37a53f16d9ab910339d4395983695afb4490aae0=
+1435c0a59980675c45d0bd95 \
++    gomod://github.com/mailru/easyjson;version=3Dv0.9.2;sha256sum=3Db9df=
+0a16e05ca83bd12e36f11fb6d35622fffdda8d18b83ab7c030d11903af73 \
++    gomod://github.com/mattn/go-colorable;version=3Dv0.1.15;sha256sum=3D=
+221144f51cc5eeda0a72bd7b5832181b94240c1d760bde0b3428895e63e63339 \
++    gomod://github.com/mattn/go-isatty;version=3Dv0.0.23;sha256sum=3D670=
+cdaa44183b9b7aac0078b1a4cba34a74a0a85e2b92d2434a6b2ccf3387fa6 \
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.12;mod=3D1;sha2=
+56sum=3D4136aaa23fcb3176a292822f2a8a98ccc7b2fde38a59922c152b006f59d59695 =
+\
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.24;sha256sum=3D=
+d517d2a2c73f75892a25c895ed40313b4906264e76a64509e3c2215800d34210 \
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.3;mod=3D1;sha25=
+6sum=3D7243936b0a7aadc7539411eb64063495df65b7a36f42d7ffef2eeba9f8c80acd \
++    gomod://github.com/mholt/archives;version=3Dv0.1.5;sha256sum=3D634be=
+5320d8da86e249cf0dcf01f00f6842651fb515f4519f0fb8a4c3e779254 \
++    gomod://github.com/mikelolasagasti/xz;version=3Dv1.0.1;sha256sum=3Da=
+4672995fd823a9d6793bcb8de131739d629438fe787c99985c69cf8638da8d5 \
++    gomod://github.com/minio/crc64nvme;version=3Dv1.1.1;mod=3D1;sha256su=
+m=3D27baad099eaa74eba11eb31490c260ea4eac9b94439ff92129b8a3ad6efc3f61 \
++    gomod://github.com/minio/md5-simd;version=3Dv1.1.2;mod=3D1;sha256sum=
+=3D7665f075b83ccb81c66de980da5f23e54e1479472aadd4166dfc26f8148a2fa3 \
++    gomod://github.com/minio/minio-go/v7;version=3Dv7.2.1;mod=3D1;sha256=
+sum=3D9ffdadc09db1dfce5d4986a06910b68d6941737658aec86a06afc4af5af6a7ce \
++    gomod://github.com/minio/minlz;version=3Dv1.2.0;sha256sum=3D63f40647=
+0535699c14af9b35486472c6e8fc8e894adbd4c8bde7635f80eea38e \
++    gomod://github.com/minio/xxml;version=3Dv0.0.3;sha256sum=3Deec7f9818=
+5f849ac85b798a4a7b2b1cbd5aea8ea360f563b47e715ee7fbb5c6d \
++    gomod://github.com/mitchellh/go-homedir;version=3Dv1.1.0;sha256sum=3D=
+fffec361fc7e776bb71433560c285ee2982d2c140b8f5bfba0db6033c0ade184 \
++    gomod://github.com/moby/sys/mountinfo;version=3Dv0.7.2;sha256sum=3D9=
+4f79687bc3b72ca4cc60fafda851454fefc0ef04bdb4499e8c7c2b2e231b5d3 \
++    gomod://github.com/muesli/reflow;version=3Dv0.3.0;mod=3D1;sha256sum=3D=
+f193cfd78694efff82f6226c1252ca9d1826dd6dd2c2662422be4c4de2cdb739 \
++    gomod://github.com/munnerz/goautoneg;version=3Dv0.0.0-20191010083416=
+-a7dc8b61c822;sha256sum=3D3d7ce17916779890be02ea6b3dd6345c3c30c1df502ad9d=
+8b5b9b310e636afd9 \
++    gomod://github.com/ncw/swift/v2;version=3Dv2.0.5;sha256sum=3D0c2253c=
+dfda2fe22b1b8d1ac23b504a00d48f7e2ddd9d98bc12f3d1b8b1bbee2 \
++    gomod://github.com/nwaples/rardecode/v2;version=3Dv2.2.5;sha256sum=3D=
+f3aade153b27b75d29a1fef232f4937c65fe629eac8a1676deb98ee3899e66f0 \
++    gomod://github.com/oklog/ulid/v2;version=3Dv2.1.1;sha256sum=3D312b5f=
+ea3f68df920adaffc327440efbaba43ad6a8df2f7e0c9e365743f6ff89 \
++    gomod://github.com/oracle/oci-go-sdk/v65;version=3Dv65.121.0;sha256s=
+um=3Dbb8fe697adc6490e435b82ddc84bec5bf109f9c17b49f21fb74161a3a383ac4b \
++    gomod://github.com/panjf2000/ants/v2;version=3Dv2.12.1;sha256sum=3Dd=
+770202456acd0bd6ab95e01454e17097d22ef5575c3c7451475cb46697f3c87 \
++    gomod://github.com/patrickmn/go-cache;version=3Dv2.1.0+incompatible;=
+sha256sum=3Dd5d1c13e3c9cfeb04a943f656333ec68627dd6ce136af67e2aa5881ad7353=
+c55 \
++    gomod://github.com/pborman/getopt;version=3Dv0.0.0-20170112200414-71=
+48bc3a4c30;mod=3D1;sha256sum=3D35411c4b33e0d9eb3a694855ac64f9889d85c957f8=
+6a4984ed7dcc123952ec9f \
++    gomod://github.com/pengsrc/go-shared;version=3Dv0.2.1-0.201901311016=
+55-1999055a4a14;sha256sum=3D27b2ba03dd2cdb2d83ecc4dd35dd9c9c620528d965c56=
+cf3760ecafca5598af8 \
++    gomod://github.com/peterh/liner;version=3Dv1.2.2;sha256sum=3De5fd4f6=
+cfd85c7162f41df79f528f941e0a3e45031582e7b2ff2e921b15fbe77 \
++    gomod://github.com/philhofer/fwd;version=3Dv1.2.0;mod=3D1;sha256sum=3D=
+3b980d413f4498590980f5e907f60c3a9b35e9ffdd78be493bec3e4a15e83ae6 \
++    gomod://github.com/pierrec/lz4/v4;version=3Dv4.1.27;sha256sum=3D702a=
+d206ffeec8d3ac8bc1ce7e2d0b201fbc7683c8ab8758210172c54f03353f \
++    gomod://github.com/pkg/browser;version=3Dv0.0.0-20240102092130-5ac0b=
+6a4141c;sha256sum=3D8524ae36d809564d1f218978593b5c565cf3ee8dccd035d66b336=
+ad0c56e60d1 \
++    gomod://github.com/pkg/diff;version=3Dv0.0.0-20200914180035-5b29258c=
+a4f7;mod=3D1;sha256sum=3D2404460a2259f7655b158d4826a61bd2de218b1f5114625e=
+32bbadf6acaf40e2 \
++    gomod://github.com/pkg/errors;version=3Dv0.9.1;sha256sum=3Dd4c36b8bc=
+d0616290a3913215e0f53b931bd6e00670596f2960df1b44af2bd07 \
++    gomod://github.com/pkg/sftp;version=3Dv1.13.11;sha256sum=3Df22fb06ec=
+b083adb09981b0a4554fa370f2cb5accc4837cdd038312008a384b5 \
++    gomod://github.com/pkg/xattr;version=3Dv0.4.12;sha256sum=3D3657614c6=
+f28f6298164935f48af2515835ae04190ed9f6954b5cdf89b1aee21 \
++    gomod://github.com/pmezard/go-difflib;version=3Dv1.0.0;mod=3D1;sha25=
+6sum=3D74b2e766eb215377864d587badf57e95521f692d2a7860b3c7759093f9c9bec2 \
++    gomod://github.com/pmezard/go-difflib;version=3Dv1.0.1-0.20181226105=
+442-5d4384ee4fb2;sha256sum=3D24ff45e356f638a53bd0c89fff961fbeaecfdb0dc5e4=
+82ceed0a2230e0e5f3b7 \
++    gomod://github.com/power-devops/perfstat;version=3Dv0.0.0-2024022122=
+4432-82ca36839d55;mod=3D1;sha256sum=3D05744a9262bcd294613e65624f3f8bae83d=
+79a58aa48b8328c7df91190aa07bf \
++    gomod://github.com/pquerna/otp;version=3Dv1.5.0;sha256sum=3D9b28aa98=
+d40a2d00fe4477d2468c933112ba1818782be349999ea98b5b44d885 \
++    gomod://github.com/prometheus/client_golang;version=3Dv1.23.2;sha256=
+sum=3Ddfcc6c52ad09e3d0dca2e9f41de7f8d1c0dde7baae4b867353d112918a1511de \
++    gomod://github.com/prometheus/client_model;version=3Dv0.6.2;sha256su=
+m=3D67017b19f220c6ab91ecfdd10a93824e2a8b09fcb6390054dbdc49df3354a9ca \
++    gomod://github.com/prometheus/common;version=3Dv0.70.0;sha256sum=3De=
+2d490e176cf115b087c97b5adcbf40af9e413c1e017bd4fe0c6fd8b25cae4e3 \
++    gomod://github.com/prometheus/procfs;version=3Dv0.21.1;sha256sum=3Db=
+417ab3081ad334ce4c6b367b2d5e74dea49e2eb3b5431c1dd5a65e1256736f9 \
++    gomod://github.com/putdotio/go-putio/putio;version=3Dv0.0.0-20200123=
+120452-16d982cac2b8;sha256sum=3Df69549147425ebbc5cfff2fd75f0dfcf9cfdb2c2f=
+fd1870688915b20641b424a \
++    gomod://github.com/quasilyte/go-ruleguard/dsl;version=3Dv0.3.23;mod=3D=
+1;sha256sum=3D2eff6aad7ded457fae06d7032b7725eaf5cbb49e2307106b3c8a8cec344=
+8be85 \
++    gomod://github.com/rasky/go-xdr;version=3Dv0.0.0-20170124162913-1a41=
+d1a06c93;sha256sum=3Db5ebee6d3d7abb3c8c11933dcf7e40982a9c37b975f9f1763b26=
+357217cfa019 \
++    gomod://github.com/rclone/Proton-API-Bridge;version=3Dv1.0.5;sha256s=
+um=3D7ecba409df35dbf570e345aab599cb7d1bc7ee57740bd8044e0a21d241853423 \
++    gomod://github.com/rclone/go-proton-api;version=3Dv1.0.4;sha256sum=3D=
+478b8876f9dbc1df7ca769d6119eeddf52786e5cae1a262462ec7c7eedcb50f9 \
++    gomod://github.com/rclone/gofakes3;version=3Dv0.0.9;sha256sum=3D74d6=
+164da0d0514d7b109268c605beffcdcc863adfd8f7f7c66655b85250ce33 \
++    gomod://github.com/relvacode/iso8601;version=3Dv1.7.0;sha256sum=3D04=
+4c39693337c25aeca570891dd334f9576d5f6b5d26be9c7e436de483a4d317 \
++    gomod://github.com/rfjakob/eme;version=3Dv1.2.0;sha256sum=3De233157a=
+745ba698a268b6b6630e923286b550a0caaeb8849b03f30841ed4dd0 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.1.0;mod=3D1;sha256sum=3D=
+6c7318a27a8d5473a8eb661e75fb00528176e0efc59310ed277ca13bd12a53f1 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.2.0;mod=3D1;sha256sum=3D=
+6c7318a27a8d5473a8eb661e75fb00528176e0efc59310ed277ca13bd12a53f1 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.4.7;sha256sum=3Db995e4aa=
+0cc1e5779cc61138ac925cb8c1e963e40c80e4b93ee8553812ebb792 \
++    gomod://github.com/rogpeppe/go-internal;version=3Dv1.15.0;mod=3D1;sh=
+a256sum=3D1ffa3f3c1d2ad9d40513af6610c21d52ae2839628679854df421212f6a29ec2=
+7 \
++    gomod://github.com/rs/xid;version=3Dv1.6.0;mod=3D1;sha256sum=3D2ebd8=
+a4c48bf66680d0fba5ca0d9ea1ec134396497802c75f3b39683e6e662ef \
++    gomod://github.com/russross/blackfriday/v2;version=3Dv2.1.0;sha256su=
+m=3D7852750d58a053ce38b01f2c203208817564f552ebf371b2b630081d7004c6ae \
++    gomod://github.com/ryszard/goskiplist;version=3Dv0.0.0-2015031222131=
+0-2dfbae5fcf46;sha256sum=3D12c65729fc31d5a9bf246eb387bd4c268d0d68bf33b913=
+cccd81bebd47d6f80d \
++    gomod://github.com/sabhiram/go-gitignore;version=3Dv0.0.0-2021092322=
+4102-525f6e181f06;sha256sum=3D18379d4fa60ed3050b651e51ecb48a21aba3bf951c8=
+1d359aadbc1d7601ffef5 \
++    gomod://github.com/samber/lo;version=3Dv1.53.0;sha256sum=3D4969cf009=
+4a1736a16ca0f89c42dea92369ba0ebacdbd9b22f1299ff7fe1f579 \
++    gomod://github.com/sergi/go-diff;version=3Dv1.0.0;mod=3D1;sha256sum=3D=
+3c33ca6c34b55597876e1b3ec55b717f899d94d66ad78d6f084b48e6e19b406e \
++    gomod://github.com/shabbyrobe/gocovmerge;version=3Dv0.0.0-2023050711=
+2040-c3350d9342df;mod=3D1;sha256sum=3D2d6cd5793ecd79794e9af1213be49ec7bc7=
+70d617bb4885da6a50faefe524482 \
++    gomod://github.com/shirou/gopsutil/v4;version=3Dv4.26.6;sha256sum=3D=
+76049a616fbe980670f733d430a1a3d4ee5d585cf22459fff9ae3b3b902936c4 \
++    gomod://github.com/sirupsen/logrus;version=3Dv1.7.0;mod=3D1;sha256su=
+m=3Dda2caaacef970c4c3f36c137d5567faef9403e6f62194804c7672a3975219322 \
++    gomod://github.com/sirupsen/logrus;version=3Dv1.9.4;sha256sum=3D3847=
+d00c5ee6948f1ff0d0120bc343c55ce852becb7720f8f08f53eecfe9e437 \
++    gomod://github.com/skratchdot/open-golang;version=3Dv0.0.0-202001160=
+55534-eef842397966;sha256sum=3D3ad7f856621f78b370a47bb05ce12c31bdee1014e5=
+96b7f565ee20dc8ac80c66 \
++    gomod://github.com/smartystreets/goconvey;version=3Dv1.8.1;mod=3D1;s=
+ha256sum=3D6e40d14f291ab6e567a4a260dab1c818cdcd8d580d375db33f5bb26bfe80e5=
+2c \
++    gomod://github.com/sony/gobreaker/v2;version=3Dv2.4.0;sha256sum=3Dc1=
+fb3bde7fee65b6162e0d9e59950a6789464ad4e4cfd2fdf28477a29c968434 \
++    gomod://github.com/sorairolake/lzip-go;version=3Dv0.3.8;sha256sum=3D=
+edfafbfe20952eb2140254adb2e5b9e0bb3ce1feb63e90b023f2226338dcca32 \
++    gomod://github.com/spacemonkeygo/monkit/v3;version=3Dv3.0.25-0.20251=
+022131615-eb24eb109368;sha256sum=3Ddabbbe36013d666a00190e9321174f404a07da=
+19df224e4eee909ae5b1016397 \
++    gomod://github.com/spf13/afero;version=3Dv1.15.0;sha256sum=3Dd03a0bb=
+ce87eeaa1c23f0c0276707bb2d59f46efee875d7d7f1d570201be6e1f \
++    gomod://github.com/spf13/cobra;version=3Dv1.10.2;sha256sum=3Da00aae6=
+fcd631e0fde52c98604452ff70e1b73c3b8a560d68db15aff5e26872d \
++    gomod://github.com/spf13/pflag;version=3Dv1.0.10;sha256sum=3Da246b8c=
+9d3daa87d6c634cdfee1bdf7fa53d5817eeef4fa0c6da43edd12de4ca \
++    gomod://github.com/spf13/pflag;version=3Dv1.0.9;mod=3D1;sha256sum=3D=
+16c6dfc0eb58eb3c9113ce197d460c6725c647e4688ac26d31c8ed69f1ebbc68 \
++    gomod://github.com/stangelandcl/ppmd;version=3Dv0.1.1;sha256sum=3De8=
+32489fca0e2a2455bc76235c9681509b3666b89f154afcd994814929a9081b \
++    gomod://github.com/stretchr/objx;version=3Dv0.1.0;mod=3D1;sha256sum=3D=
+1350354d52d2287a62336ecc0d56232d4c47699af9bba49c67c2b48254da98f1 \
++    gomod://github.com/stretchr/objx;version=3Dv0.4.0;mod=3D1;sha256sum=3D=
+31b2fdcdee870f0f61bffafafb96220967e5bca08a76a920d574216fc1f91355 \
++    gomod://github.com/stretchr/objx;version=3Dv0.5.0;mod=3D1;sha256sum=3D=
+cb326540efcb1274a6e4e970d7fc9de2e8062f08a058fc296d859025e62e807a \
++    gomod://github.com/stretchr/objx;version=3Dv0.5.2;mod=3D1;sha256sum=3D=
+58eca54d26728427806f40908828e8762d352cc3b0a0b0b60dc60ce61767fff6 \
++    gomod://github.com/stretchr/testify;version=3Dv1.11.1;sha256sum=3Db7=
+325b561ead5304b72b9f32aebc871ff49b3823667d530a49fd6c8f3adfc96e \
++    gomod://github.com/stretchr/testify;version=3Dv1.2.2;mod=3D1;sha256s=
+um=3D4ab463f68c370041f950c10cab5104903d4598c50cf824f9aad1b7b7f69255af \
++    gomod://github.com/stretchr/testify;version=3Dv1.3.0;mod=3D1;sha256s=
+um=3Dab063d5154a8e8730bced4c52698e5770eb50bfae347bebc35eca488b8e3f6e3 \
++    gomod://github.com/stretchr/testify;version=3Dv1.3.1-0.2019031116140=
+5-34c6fa2dc709;mod=3D1;sha256sum=3Dab063d5154a8e8730bced4c52698e5770eb50b=
+fae347bebc35eca488b8e3f6e3 \
++    gomod://github.com/stretchr/testify;version=3Dv1.4.0;mod=3D1;sha256s=
+um=3D6b0c7b71030d4fc55d4e6e6e24c0bfc025621341f76141e3aec0044c4ce89950 \
++    gomod://github.com/stretchr/testify;version=3Dv1.6.1;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.7.0;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.7.1;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.0;mod=3D1;sha256s=
+um=3De076074c1560ad1dda98b8b00fea6308c4b6ccd06ddd088d22db4626ed68f738 \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.1;mod=3D1;sha256s=
+um=3Daf1a5dcb331ace7a3f9fc1b5d7eee9c0bc82b4a2a182fe4cec2add217e2853d6 \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.4;mod=3D1;sha256s=
+um=3D05e26cd069285a33cf2af46fdacdef569d5ae185e7963a76c0178328f68e97f9 \
++    gomod://github.com/t3rm1n4l/go-mega;version=3Dv0.0.0-20260717075258-=
+c6acd6a5bd04;sha256sum=3Df9ca5fa581855a590c468b1d8b5e7d4869ccbee8c3918024=
+8f974bd5996c599b \
++    gomod://github.com/tailscale/depaware;version=3Dv0.0.0-2021062219402=
+5-720c4b409502;mod=3D1;sha256sum=3D1c78638fa57c4deec9ecee6c3c5aef8522cafd=
+2d0fe3d1049c0da9e7c2c4e156 \
++    gomod://github.com/tinylib/msgp;version=3Dv1.6.4;mod=3D1;sha256sum=3D=
+0a9f1c371dd41cbf543da2eadbade60b906ff1a80cb63c0939af7f89e5a28b8a \
++    gomod://github.com/tklauser/go-sysconf;version=3Dv0.4.0;mod=3D1;sha2=
+56sum=3D29bd839dcc5736ea8ebc4c2f4013db82c57cacd15a010d389579cde04f3336ae =
+\
++    gomod://github.com/tklauser/numcpus;version=3Dv0.12.0;mod=3D1;sha256=
+sum=3D03fbc174711500112a8ab1675893ecdbea2e155f3dcd5e357fb4a5619ed6b0d4 \
++    gomod://github.com/tyler-smith/go-bip39;version=3Dv1.1.0;sha256sum=3D=
+418226d3b0e8c7b1c869beb473d0d61445d9d9d3259e6fecb19aa94dc8898a3e \
++    gomod://github.com/ulikunitz/xz;version=3Dv0.5.15;sha256sum=3Dca1830=
+f9abc6c99a003ad28f2b145ea0af0c99d5769ddff08d23ce055959fd12 \
++    gomod://github.com/ulikunitz/xz;version=3Dv0.5.8;mod=3D1;sha256sum=3D=
+393876046d63d90f35f21c1bb4651b0985e76d8f14a48a7279ff947b96956e7b \
++    gomod://github.com/unknwon/goconfig;version=3Dv1.0.0;sha256sum=3D1a9=
+cf2086052925a275d5d25683bce7fd2f4458423e6888a447dba618967dae3 \
++    gomod://github.com/willscott/go-nfs;version=3Dv0.0.4;sha256sum=3Ddbd=
+f4f05fe8dc5c2abf94f282e26d7435f878299d88c0db76510ccfe25d68132 \
++    gomod://github.com/willscott/go-nfs-client;version=3Dv0.0.0-20251022=
+144359-801f10d98886;sha256sum=3Dc8d9eae7a99ef6a603ac1ac93c923047402428ca6=
+e62b87765df8a24e3eb524a \
++    gomod://github.com/winfsp/cgofuse;version=3Dv1.6.1-0.20260126094232-=
+f2c4fccdb286;mod=3D1;sha256sum=3De54d3ca8174a2765799c43985663080595fbd219=
+23042bd4ea036e807c1eb0e4 \
++    gomod://github.com/wk8/go-ordered-map/v2;version=3Dv2.1.8;sha256sum=3D=
+c1781435c64e4cd92dd3ca585d5075eda12c0bb719a0c5f9e6ed272b65282e38 \
++    gomod://github.com/xanzy/ssh-agent;version=3Dv0.3.3;sha256sum=3D19a8=
+6c2623b20cc98687bddd89e3f023db0ca51c8bc9e38b9ad9c56e5b7d110d \
++    gomod://github.com/youmark/pkcs8;version=3Dv0.0.0-20240726163527-a2c=
+0da244d78;sha256sum=3Dcdcf5e96850f9f60bc96ab512e4bd06ee19dd2dbe855260c358=
+9c6c79a1bcfb5 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.1.27;mod=3D1;sha256sum=
+=3De2c763f861ada05c6150c32f804bca31c96a18b944320e0ee9bbf0d6c6075ad7 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.2.1;mod=3D1;sha256sum=3D=
+e2c763f861ada05c6150c32f804bca31c96a18b944320e0ee9bbf0d6c6075ad7 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.4.13;mod=3D1;sha256sum=
+=3Dee7fe4466203a01d3ac19adc134cdec99bc6de71992c28f3dd9a74480bff0603 \
++    gomod://github.com/yunify/qingstor-sdk-go/v3;version=3Dv3.2.0;sha256=
+sum=3Dd691f22df98c43a35ff15c138e2436c5bcab66568f7141d399fed35f2a4a7fba \
++    gomod://github.com/yusufpapurcu/wmi;version=3Dv1.2.4;mod=3D1;sha256s=
+um=3Dff2a9c8c99aaed6bc6984eae094a9e8cdc36f6ab2ef2c56779dd98ecc583135b \
++    gomod://github.com/zeebo/blake3;version=3Dv0.2.4;sha256sum=3D65aaa34=
+87c097fa0140f52041e8e6fe8214c244a29223fd4caaa60986192a08f \
++    gomod://github.com/zeebo/errs;version=3Dv1.4.0;sha256sum=3D5b7fb5cbe=
+6bbd36933e8c98572f85121994e9842aefc90986f8d3a192cb69257 \
++    gomod://github.com/zeebo/xxh3;version=3Dv1.1.0;sha256sum=3D0cd366579=
+02317f81f3d31b217ebaca6f98dfb665f1af611d1db0904a689bcd1 \
++    gomod://go.etcd.io/bbolt;version=3Dv1.5.0;sha256sum=3D2c350ca36afba7=
+07b917529a8049b001c71915c99c152d5e2600ed4bac6fbc37 \
++    gomod://go.opentelemetry.io/auto/sdk;version=3Dv1.2.1;sha256sum=3Da0=
+8a16fc0a7041cdb875f47a260a56000632212c85f65a302a043c76380c8335 \
++    gomod://go.opentelemetry.io/contrib/instrumentation/net/http/otelhtt=
+p;version=3Dv0.69.0;sha256sum=3D6f2e1d300fe09d55ef13886efa33b06e9bcbd4d5f=
+04f0014b0a2871402a28a28 \
++    gomod://go.opentelemetry.io/otel;version=3Dv1.44.0;sha256sum=3D4b7ef=
+50caaf3dc6fc1a058f9ce2ccda6aad2ab3e8657acc4c8bb3102f79c53bc \
++    gomod://go.opentelemetry.io/otel/metric;version=3Dv1.44.0;sha256sum=3D=
+4442ba5f269f81251f549acb14ac16176f23967f4a0706163440b0df91592f96 \
++    gomod://go.opentelemetry.io/otel/trace;version=3Dv1.44.0;sha256sum=3D=
+cd1abf8dcec62fe9788fae9105760db1711e6e994d2e31cdda57ccb467e7ceec \
++    gomod://go.yaml.in/yaml/v2;version=3Dv2.4.4;sha256sum=3D1b98a6a498cf=
+255c5f2982d32c74633bc7969770957e98103ac1e14345aa4576 \
++    gomod://go.yaml.in/yaml/v3;version=3Dv3.0.4;sha256sum=3D0317dae56eaa=
+9e9954467c8768fd6a89ba2005f1534e2c26fce5163ad8d2ef31 \
++    gomod://go4.org;version=3Dv0.0.0-20260112195520-a5071408f32f;sha256s=
+um=3D11c8ccd8e5a90213e32b76666fa3d73cd481afc3d31c57669b76a186bd1aabe4 \
++    gomod://goftp.io/server/v2;version=3Dv2.0.3;sha256sum=3D3d9a67bf9083=
+60f30c27b0ea389c54b63234aa8eec9a390fe2904619a6c0c10b \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20190308221718-c2843e01=
+d9a2;mod=3D1;sha256sum=3D33ed070a5a66e0960685ac5386440e1b59899e74d8a38a11=
+80685e72a2195ded \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20191011191535-87dc89f0=
+1550;mod=3D1;sha256sum=3D3ab9f01f4610fe7b39bd85d68e8d97825351e7e282c39cda=
+41457c2a276f3be3 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20200622213623-75b28801=
+5ac9;mod=3D1;sha256sum=3Db2b12d09f81915fbcf4226009e50f9efda8bd3757d2055d8=
+ec07977e65bc6618 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20210322153248-0c34fe9e=
+7dc2;mod=3D1;sha256sum=3Ddda18d19fba9f47bca8269cf4aef580e0ce992c73e2aa54a=
+bf226216b1e3a729 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20210921155107-089bfa56=
+7519;mod=3D1;sha256sum=3Dcd6311612a2aa4d0d7e03c41b3aa1fbc2d5f895ab3f61089=
+fab80bfe9f8f5485 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20220622213112-05595931=
+fe9d;mod=3D1;sha256sum=3Daf2c88eebff03e3a2afecb1b03669fc54e9d122c88f7b2ec=
+fed051ec5dbc8bbb \
++    gomod://golang.org/x/crypto;version=3Dv0.4.0;mod=3D1;sha256sum=3Da02=
+49fae75d3543f8f30d70966302ccfb3f61fc438a0ec860733a22df7f950c1 \
++    gomod://golang.org/x/crypto;version=3Dv0.56.0;sha256sum=3Dfdffb67dc8=
+c0ecea55664eb42c323c2e3b5af9fa72cd120939106c2cdc11dcb4 \
++    gomod://golang.org/x/crypto;version=3Dv0.6.0;mod=3D1;sha256sum=3D1b6=
+a683455a3b882b6ac53f22752960e87bd91040a94d6f2c5cb61261e2389d8 \
++    gomod://golang.org/x/crypto;version=3Dv0.7.0;mod=3D1;sha256sum=3Dc89=
+fe22e73dac26a00a656ac11ff4c6e1a6b6cd2abcc57edcdacdec3fbdad82d \
++    gomod://golang.org/x/exp;version=3Dv0.0.0-20260709172345-9ea1abe5759=
+7;sha256sum=3Dffad724cf4b26cfc6b7c2fd02401375d82725f419a4765bc50be0560c28=
+1bf97 \
++    gomod://golang.org/x/image;version=3Dv0.45.0;sha256sum=3De6988c7fd5f=
+3ec02ae27d07e6ae6542e0d9ed7a6844b4e6a952518eafc618d8e \
++    gomod://golang.org/x/mobile;version=3Dv0.0.0-20260709172247-6129f5be=
+e9d5;mod=3D1;sha256sum=3D0e6228cdca3a9f8026a2fbb4ff68a1206adbb3e01683c424=
+8e31d3c55469aae3 \
++    gomod://golang.org/x/mod;version=3Dv0.2.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.3.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.4.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.6.0-dev.0.20220419223038-86c51=
+ed26bb4;mod=3D1;sha256sum=3D42d19023ff8f2eae700bc5495f371ecd998a22d19ba98=
+5d0af5f69900b254083 \
++    gomod://golang.org/x/mod;version=3Dv0.8.0;mod=3D1;sha256sum=3D624567=
+459c6e9947ac4abde0b7034ee61dcbb6a9373f5970094c0bb3e8121964 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20190404232315-eb5bcb51f2a=
+3;mod=3D1;sha256sum=3Df7046769daac02beb57cbcc481280df59fb403c96fe8262282a=
+ba858c7f7fa4d \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20190620200207-3b0461eec85=
+9;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20200114155413-6afb5195e5a=
+a;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20200226121028-0de0cce0169=
+b;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20201021035429-f5854403a97=
+4;mod=3D1;sha256sum=3D66fc44a0644a506da780f7a22a5d73dd025d44a6e58740b62d2=
+7f74d7c3a4948 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20210226172049-e18ecbb0511=
+0;mod=3D1;sha256sum=3Dfef5896d103a0bce5055fdb5e96e83094433479243786534771=
+8edceb633348a \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20211112202133-69e39bad7dc=
+2;mod=3D1;sha256sum=3Dfa915f5d022cfb0cb865aa2ee37d3a7741b406f84eb4a837862=
+e29cc69ab4ef4 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20220722155237-a158d28d115=
+b;mod=3D1;sha256sum=3Db315c52647d2da2f76e5cdb9d367e1d6727784236a9bffb6121=
+92b19b10a128d \
++    gomod://golang.org/x/net;version=3Dv0.3.0;mod=3D1;sha256sum=3D3c360a=
+3368c25f0b39a64b630fe74ed998df00e6abee93fd49f56ffe7590a131 \
++    gomod://golang.org/x/net;version=3Dv0.57.0;sha256sum=3Df8d652c629374=
+b43846ef4f2efd419e8d1c81779eb728306d09f0de1cc1bab80 \
++    gomod://golang.org/x/net;version=3Dv0.6.0;mod=3D1;sha256sum=3D41ec76=
+ea2172f3ee3031e38f9a535939a584d6bb35ef480854fdcb8c2026701b \
++    gomod://golang.org/x/net;version=3Dv0.7.0;mod=3D1;sha256sum=3D41ec76=
+ea2172f3ee3031e38f9a535939a584d6bb35ef480854fdcb8c2026701b \
++    gomod://golang.org/x/net;version=3Dv0.8.0;mod=3D1;sha256sum=3Deb6ef9=
+bd6405ace3d99e4381d0256ce41f83c66d1a20b4e2830a4c776245f71a \
++    gomod://golang.org/x/oauth2;version=3Dv0.36.0;sha256sum=3D15bf65ff10=
+3e5dafc809d78cd037a1d1e88ccb8451824e851156002a13304504 \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20190423024810-112230192c=
+58;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20190911185100-cd5d95a43a=
+6e;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20201020160332-67f06af15b=
+c9;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20220722155255-886fb9371e=
+b4;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.1.0;mod=3D1;sha256sum=3D421f6=
+139686d5891f3dc5a563d0995780d3279f65cad4d225cea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.22.0;sha256sum=3D4bc67d258ce7=
+867cfc1a43765c43d98b4c49b90c46dd0b86f896a5a4909fade0 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190215142949-d0b11bdaac8=
+a;mod=3D1;sha256sum=3D8969115e4a39108848324e79a1bd8a8445230e6e3aaccbe9f80=
+57fb50fffc8c1 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190412213103-97732733099=
+d;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190916202348-b4ddaad3f8a=
+3;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20191026070338-33540a1f603=
+7;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20200930185726-fdedc70b468=
+f;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20201119102817-f84b799fce6=
+8;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20201204225414-ed752295db8=
+8;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210124154548-22da62e12c0=
+c;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210423082822-04245dca01d=
+a;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210514084401-e8d321eab01=
+5;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210615035016-665e8c7367d=
+1;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20211007075335-d3039528d8a=
+c;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20211117180635-dee7805ff2e=
+1;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220408201424-a24fb2fb8a0=
+f;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220520151302-bc2c85ada10=
+a;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220715151400-c0bba94af5f=
+8;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220722155257-8c9f86f7a55=
+f;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.1.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.3.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.47.0;sha256sum=3Dcdac013ddced0=
+262926ec29ffcda645da39670e61c7e5b761e572b6b1809bb1b \
++    gomod://golang.org/x/sys;version=3Dv0.5.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.6.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/term;version=3Dv0.0.0-20201126162022-7de9c90e9d=
+d1;mod=3D1;sha256sum=3D4cbab14f7706771b271d995a1b3cc131fe5a246aadc7ee6d1b=
+a6f0bd894781fa \
++    gomod://golang.org/x/term;version=3Dv0.0.0-20210927222741-03fcf44c22=
+11;mod=3D1;sha256sum=3D740794e2914f5cc87e25656c5843222b2c65665821205f4563=
+2a0477c8d3f79b \
++    gomod://golang.org/x/term;version=3Dv0.3.0;mod=3D1;sha256sum=3D1e561=
+f7413b74b4d30ca2d6c9874ccd13bb8c94daa0e6c2377bad9e9cf6dbe58 \
++    gomod://golang.org/x/term;version=3Dv0.45.0;sha256sum=3Db3a3af689728=
+b43012ae1b21482571a35c033c545e98e021606bd4fcf1f79108 \
++    gomod://golang.org/x/term;version=3Dv0.5.0;mod=3D1;sha256sum=3D0d6f5=
+8228aadc1a6528e6755da018516566e3ae5c5201f7ade1773f56fa8d934 \
++    gomod://golang.org/x/term;version=3Dv0.6.0;mod=3D1;sha256sum=3D64359=
+b9c653708478f020729885044ff3d8007186d9d441125fe874817e71201 \
++    gomod://golang.org/x/text;version=3Dv0.14.0;mod=3D1;sha256sum=3D9715=
+79f17e9abc5926ab76214f533bd517cf4925c885243ac4755a1a0a7c69ef \
++    gomod://golang.org/x/text;version=3Dv0.3.0;mod=3D1;sha256sum=3D36879=
+d586fd8001e84da8787190a11e4f78749e2a81dfe8b9b6931899fff31cf \
++    gomod://golang.org/x/text;version=3Dv0.3.3;mod=3D1;sha256sum=3Dfbb7a=
+88ed140515e790eca7a10ffd319c9786b11c6a6c7e59f80f7fb37bb4542 \
++    gomod://golang.org/x/text;version=3Dv0.3.6;mod=3D1;sha256sum=3Dfbb7a=
+88ed140515e790eca7a10ffd319c9786b11c6a6c7e59f80f7fb37bb4542 \
++    gomod://golang.org/x/text;version=3Dv0.3.7;mod=3D1;sha256sum=3Dc45d6=
+69089427bc4635d07b185f9b9680332d1c48c75b3c49cb715b81a04a5b0 \
++    gomod://golang.org/x/text;version=3Dv0.41.0;sha256sum=3De63f35daaae7=
+49d0ffff97a295ad8f4837a662938a46b7a87f18a88e85a5cbf9 \
++    gomod://golang.org/x/text;version=3Dv0.5.0;mod=3D1;sha256sum=3D15929=
+e76fce04aea4c92a354426bb43370684645a4ee03f2e75d0c2eb1466304 \
++    gomod://golang.org/x/text;version=3Dv0.7.0;mod=3D1;sha256sum=3D15929=
+e76fce04aea4c92a354426bb43370684645a4ee03f2e75d0c2eb1466304 \
++    gomod://golang.org/x/text;version=3Dv0.8.0;mod=3D1;sha256sum=3D436f5=
+92e77b593b02fbea374e23ad3369c8623ff0d29c91de7de1e6672db9a41 \
++    gomod://golang.org/x/time;version=3Dv0.15.0;sha256sum=3D8cfb20e915fa=
+5d6c3fd264304233f8d71a3385e48a37819239c532ad9da27f84 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20180917221912-90fa682c2=
+a6e;mod=3D1;sha256sum=3Da0e02f0678fe62dc3c4b4bc77fa912c9b70de10fa9f7cf2f7=
+aad0337392b52af \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20190829051458-42f498d34=
+c4d;mod=3D1;sha256sum=3D88d479265f886f5e598d76c003d0f257b42dbf1b895d820a1=
+2b5ab0b3501aca1 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20191119224855-298f0cb18=
+81e;mod=3D1;sha256sum=3D88d479265f886f5e598d76c003d0f257b42dbf1b895d820a1=
+2b5ab0b3501aca1 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20200619180055-7c47624df=
+98f;mod=3D1;sha256sum=3Def6e2f94244214971780f9ba31d90806928ad410c82b04d88=
+88f815341f7a667 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20201211185031-d93e913c1=
+a58;mod=3D1;sha256sum=3D25d72c03e7aa571136087ebafc9e83d004d0bd8cd3864d78c=
+2f5813e122aba81 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20210106214847-113979e35=
+29a;mod=3D1;sha256sum=3D25d72c03e7aa571136087ebafc9e83d004d0bd8cd3864d78c=
+2f5813e122aba81 \
++    gomod://golang.org/x/tools;version=3Dv0.1.12;mod=3D1;sha256sum=3D2a8=
+b9365898f0822face65ba089a1353e68a65d342f300ca317cceccde6421f3 \
++    gomod://golang.org/x/tools;version=3Dv0.48.0;mod=3D1;sha256sum=3De6b=
+55566a172ecfd21e5f4a8750f2d25665287288b24ff8d4e6cea5d5078c608 \
++    gomod://golang.org/x/tools;version=3Dv0.6.0;mod=3D1;sha256sum=3D830e=
+d78dcd3e9927c412e2641230308447749d513d31024d276e2443b2016609 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20190717185122-a985d34=
+07aa7;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20191011141410-1b5146a=
+dd898;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20191204190536-9bdfabe=
+68543;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20200804184101-5ec99f8=
+3aff1;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://google.golang.org/api;version=3Dv0.279.0;sha256sum=3Dff75d28=
+5ffbf326f59417ed9c1b5576f2ad408bf6c890b8a57afbd1770a22e53 \
++    gomod://google.golang.org/genproto/googleapis/rpc;version=3Dv0.0.0-2=
+0260715232425-e75dac1f907d;sha256sum=3Ded5609068b408088bd42fe63eb4cdb5762=
+e6f61378b90d60313f5e491c2adfb0 \
++    gomod://google.golang.org/grpc;version=3Dv1.84.0-dev.0.2026072309343=
+7-b6eac429d7b6;sha256sum=3D66d8132f153efca923ecbc7b342e62d4b1dede50394eef=
+8c984a1d27446628b7 \
++    gomod://google.golang.org/protobuf;version=3Dv1.36.11;sha256sum=3D14=
+983d36c56a814ed91b6d652f2b8f895baba1b84eb43b28a0b132c8637cd274 \
++    gomod://gopkg.in/check.v1;version=3Dv0.0.0-20161208181325-20d25e2804=
+05;mod=3D1;sha256sum=3D5c306e0d633cd66a11b40e2e5fbbc6da42110db7d72ea3c152=
+4ceb45ee40c33f \
++    gomod://gopkg.in/check.v1;version=3Dv1.0.0-20201130134442-10cb98267c=
+6c;mod=3D1;sha256sum=3D6e6e2fca40eb8fe1455e6a08cd39833c7c2e9a2341a81fb181=
+b89d0b1c725f48 \
++    gomod://gopkg.in/ini.v1;version=3Dv1.67.3;mod=3D1;sha256sum=3Dbbaaff=
+022cbbee98f0c099e7217d0bde01261a518980d118423ed656406a5abf \
++    gomod://gopkg.in/natefinch/lumberjack.v2;version=3Dv2.2.1;sha256sum=3D=
+e28804b050e7debf4f5b2dd8d241d804f5d592d0519b6e7a3dc9d4cce6f075b3 \
++    gomod://gopkg.in/validator.v2;version=3Dv2.0.1;sha256sum=3D71ba069ff=
+408d982210bd0c9cedc2b42582d7fc7eeee8d5fca369b4574e5215c \
++    gomod://gopkg.in/yaml.v2;version=3Dv2.2.2;mod=3D1;sha256sum=3D88d979=
+d2f093d2397f756bc86efa2ca03f73a60d668ceb391b3510029f3f7cfc \
++    gomod://gopkg.in/yaml.v2;version=3Dv2.4.0;sha256sum=3Dede49e27c4cca6=
+cdd2ec719aed8ea4d363710cceb3d411e7a786fbdec0d391fd \
++    gomod://gopkg.in/yaml.v3;version=3Dv3.0.0-20200313102051-9f266ea9e77=
+c;mod=3D1;sha256sum=3D21579860a20306fcf43b1bd234d1fba319499c77611b71c05f9=
+bf3ba90dab939 \
++    gomod://gopkg.in/yaml.v3;version=3Dv3.0.1;sha256sum=3Daab8fbc4e6300e=
+a08e6afe1caea18a21c90c79f489f52c53e2f20431f1a9a015 \
++    gomod://moul.io/http2curl/v2;version=3Dv2.3.0;sha256sum=3Da622f88e88=
+2a55c2120029b6a688258692dcda47b60f3e66bb9283b29f7bdffa \
++    gomod://sigs.k8s.io/yaml;version=3Dv1.6.0;sha256sum=3Dcf88648a471581=
+817b00a42ee8d24fd73eb0e3503998cf46d8e63787e11e5052 \
++    gomod://storj.io/common;version=3Dv0.0.0-20260629224719-ba1bff0a7846=
+;sha256sum=3D825ec543e1ecb8bd7cf78f73044f62b5a7a7f2fd749b9fbbf1b29e19bf70=
+d1fa \
++    gomod://storj.io/drpc;version=3Dv1.0.0;sha256sum=3D9d1c86e384bb54330=
+6c2429b8b7fe3b3369f378939052e85b4565c119e20f50e \
++    gomod://storj.io/eventkit;version=3Dv0.0.0-20260716074419-6861a92e2a=
+a5;sha256sum=3D0b3fe22f730d257e44a7a224255b885aed61f485fa00017ec3d2124b06=
+db62f7 \
++    gomod://storj.io/infectious;version=3Dv0.0.2;sha256sum=3D453d3f57871=
+55a1e3227228a1ee77c37d5f1c6a3aeaf0be17288e64d6e7fb655 \
++    gomod://storj.io/picobuf;version=3Dv0.0.4;sha256sum=3D7f054dd3ec5472=
+b63f5b5390c6c7b6c429c38bd37286de540839a0e32137ccd1 \
++    gomod://storj.io/uplink;version=3Dv1.14.3;sha256sum=3D1170c4b061d02f=
+6beed75c1ad8ba5ff4150c2076b6a5b24319b3e89665b0476b \
 +"
-+SRCREV =3D "2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42"
+diff --git a/meta-oe/recipes-support/rclone/rclone-licenses.inc b/meta-oe=
+/recipes-support/rclone/rclone-licenses.inc
+new file mode 100644
+index 0000000000..76ab8005bf
+--- /dev/null
++++ b/meta-oe/recipes-support/rclone/rclone-licenses.inc
+@@ -0,0 +1,266 @@
 +
-+REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data opengl"
++# This file has been generated by go-mod-update-modules.bbclass
++#
++# Do not modify it by hand, as the contents will be replaced when
++# running the update-modules task.
 +
-+GTKIC_VERSION =3D "4"
-+GIR_MESON_OPTION =3D ""
++LICENSE +=3D "AND 0BSD AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause =
+AND CC0-1.0 AND ISC AND LGPL-3.0-only AND MIT AND MPL-2.0"
 +
-+EXTRA_OEMESON =3D " \
-+    -Dprofile=3Drelease \
-+    -Drevno=3D${PV} \
-+    -Diso_639_xml=3D${datadir}/xml/iso-codes/iso_639.xml \
-+    -Diso_3166_xml=3D${datadir}/xml/iso-codes/iso_3166.xml \
-+    -Dvaladoc=3Ddisabled \
++LIC_FILES_CHKSUM +=3D "\
++    file://pkg/mod/bazil.org/fuse@v0.0.0-20230120002735-62a210ff1fd5/LIC=
+ENSE;md5=3D383dc9a9437856075082259af51e3b6d;spdx=3DBSD-3-Clause \
++    file://pkg/mod/cloud.google.com/go/auth/oauth2adapt@v0.2.8/LICENSE;m=
+d5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/cloud.google.com/go/auth@v0.20.0/LICENSE;md5=3D3b83ef=
+96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/cloud.google.com/go/compute/metadata@v0.9.0/LICENSE;m=
+d5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/!azure!a!d/microsoft-authentication-librar=
+y-for-go@v1.7.2/LICENSE;md5=3De74f78882cab57fd1cc4c5482b9a214a;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/azcore@v1.22.0=
+/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/azidentity@v1.=
+14.0/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/internal@v1.12=
+.0/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/storage/azblob=
+@v1.8.0/LICENSE.txt;md5=3D261d8686a7cf1ce9570cdc99746659f8;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/storage/azfile=
+@v1.7.0/LICENSE.txt;md5=3D261d8686a7cf1ce9570cdc99746659f8;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/go-ntlmssp@v0.1.1/LICENSE;md5=3D7f7=
+cc56311d298677f304d0ffce374d8;spdx=3DMIT \
++    file://pkg/mod/github.com/!filen!cloud!dienste/filen-sdk-go@v0.0.39/=
+LICENSE;md5=3Dd8588c672c152b20b432865bd837f410;spdx=3DMIT \
++    file://pkg/mod/github.com/!files-com/files-sdk-go/v3@v3.3.194/LICENS=
+E;md5=3D5b1e5439f3483c0b3e5af1d44889d0f7;spdx=3DMIT \
++    file://pkg/mod/github.com/!i!b!m/go-sdk-core/v5@v5.23.1/LICENSE;md5=3D=
+86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/!max-!sum/base32768@v0.0.0-20230304063302-=
+18e6ce5945fd/LICENSE;md5=3D53a7faa559b046b1571765e974438d2c;spdx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/bcrypt@v0.0.0-20211005172633-=
+e235017c1baf/LICENSE;md5=3D94d9bbe24b03be19e69b3e9e8e7521a1;spdx=3DBSD-3-=
+Clause \
++    file://pkg/mod/github.com/!proton!mail/gluon@v0.17.1-0.2023072413400=
+0-308be39be96e/COPYING_NOTES.md;md5=3D3c7f65cc939ed17774f55642f2a27c2b;sp=
+dx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/go-crypto@v1.4.1/LICENSE;md5=3D=
+5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/!proton!mail/go-srp@v0.0.7/LICENSE.txt;md5=
+=3Dfdd3dd2144c32a9e32bd64b8170c4585;spdx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/gopenpgp/v3@v3.4.1/LICENSE;md=
+5=3D1081df8b971c929caed0f3de2bd9c235;spdx=3DMIT \
++    file://pkg/mod/github.com/!puerkito!bio/goquery@v1.12.0/LICENSE;md5=3D=
+4ee9bef45920e3fbd01226d1224b8215;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/!s!t!a!r!r!y-!s/zip@v0.2.3/LICENSE;md5=3D2=
+7ed59347818e59457f9e5a896283e09;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/a1ex3/zstd-seekable-format-go/pkg@v0.10.0/=
+LICENSE;md5=3D0301ea677edf4adc894d9e217774f8e5;spdx=3DMIT \
++    file://pkg/mod/github.com/a8m/tree@v0.0.0-20240104212747-2c8764a5f17=
+e/LICENSE;md5=3D3e88c68744f3946210bf9235cc30f23d;spdx=3DMIT \
++    file://pkg/mod/github.com/aalpar/deheap@v1.1.2/LICENSE;md5=3De725ea0=
+e59f9ea35163ae19e4a6c23fd;spdx=3DMIT \
++    file://pkg/mod/github.com/abbot/go-http-auth@v0.4.0/LICENSE;md5=3Dff=
+253ad767462c46be284da12dda33e8;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/adrg/xdg@v0.5.3/LICENSE;md5=3D65a17e806f0d=
+53da7257b100b42d2dba;spdx=3DMIT \
++    file://pkg/mod/github.com/anacrolix/dms@v1.7.2/LICENSE;md5=3Dd0d54f2=
+866dcc7a433a172dc95bfa18b;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/anacrolix/generics@v0.2.0/LICENSE;md5=3D97=
+41c346eef56131163e13b9db1241b3;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/anacrolix/log@v0.17.0/LICENSE;md5=3D9741c3=
+46eef56131163e13b9db1241b3;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/anchore/go-lzo@v0.1.1/LICENSE;md5=3D766db3=
+77f975691ab09c03aeb015fd5a;spdx=3DMIT \
++    file://pkg/mod/github.com/andybalholm/brotli@v1.2.2/LICENSE;md5=3D94=
+1ee9cd1609382f946352712a319b4b;spdx=3DMIT \
++    file://pkg/mod/github.com/andybalholm/brotli@v1.2.2/flate/LICENSE;md=
+5=3D5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/andybalholm/cascadia@v1.3.4/LICENSE;md5=3D=
+fd61b1ebe511f46d0dfcbbcc3f7d083a;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/apache/arrow-go/v18@v18.7.0/LICENSE.txt;md=
+5=3D6809686fee171a5b91c0fa6a6600ff14;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/appscode/go-querystring@v0.0.0-20170504095=
+604-0126cfb3f1dc/LICENSE;md5=3D29f156828ca5f2df0d1c12543a75f12a;spdx=3DBS=
+D-3-Clause \
++    file://pkg/mod/github.com/atotto/clipboard@v0.1.4/LICENSE;md5=3D4892=
+00b65f13bcbcb890a96b99a58a6f;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream=
+@v1.7.18/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache=
+-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/config@v1.32.30/LICENSE.=
+txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/credentials@v1.19.29/LIC=
+ENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/feature/ec2/imds@v1.18.3=
+0/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/feature/s3/manager@v1.22=
+.34/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 =
+\
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/configsources@v=
+1.4.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2=
+.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/endpoints/v2@v2=
+.7.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.=
+0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/v4a@v1.4.39/LIC=
+ENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/accept-=
+encoding@v1.13.17/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=
+=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/checksu=
+m@v1.9.31/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApach=
+e-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/presign=
+ed-url@v1.13.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3D=
+Apache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/s3share=
+d@v1.19.39/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApac=
+he-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/s3@v1.107.3/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/signin@v1.4.1/LI=
+CENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/sso@v1.32.1/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/ssooidc@v1.37.1/=
+LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/sts@v1.44.1/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2@v1.43.7/LICENSE.txt;md5=3D=
+3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2@v1.43.7/internal/sync/si=
+ngleflight/LICENSE;md5=3Dbdc234595bc2fe370918f5de5077c8e9;spdx=3DBSD-3-Cl=
+ause \
++    file://pkg/mod/github.com/aws/smithy-go@v1.27.8/LICENSE;md5=3D34400b=
+68072d710fecd0a2940a0d1658;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/smithy-go@v1.27.8/internal/sync/single=
+flight/LICENSE;md5=3Dbdc234595bc2fe370918f5de5077c8e9;spdx=3DBSD-3-Clause=
+ \
++    file://pkg/mod/github.com/bahlo/generic-list-go@v0.2.0/LICENSE;md5=3D=
+5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/beorn7/perks@v1.0.1/LICENSE;md5=3D0d0738f3=
+7ee8dc0b5f88a32e83c60198;spdx=3DMIT \
++    file://pkg/mod/github.com/bodgit/plumbing@v1.3.0/LICENSE;md5=3Dc0bea=
+59ab9d214598eed569eb9e710dc;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/bodgit/sevenzip@v1.6.5/LICENSE;md5=3Dd0597=
+73047cc6f74abb9232a0c9713b7;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/bodgit/windows@v1.0.1/LICENSE;md5=3Db241ce=
+f8b356f41cb612339930e60d1a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/boombuler/barcode@v1.1.0/LICENSE;md5=3Dd9c=
+4b9f155cefe2a7f441c187a253943;spdx=3DMIT \
++    file://pkg/mod/github.com/bradenaw/juniper@v0.15.3/LICENSE;md5=3D6a0=
+90fa2c652eef338ea5379f4502465;spdx=3DMIT \
++    file://pkg/mod/github.com/buengese/sgzip@v0.1.1/GO_LICENSE;md5=3D591=
+778525c869cdde0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/buger/jsonparser@v1.2.0/LICENSE;md5=3Db60a=
+e568cc483bde7743064a52388501;spdx=3DMIT \
++    file://pkg/mod/github.com/calebcase/tmpfile@v1.0.3/LICENSE;md5=3Db35=
+144eeb03d15b22d2450d1a7e9d674;spdx=3DMIT \
++    file://pkg/mod/github.com/cespare/xxhash/v2@v2.3.0/LICENSE.txt;md5=3D=
+802da049c92a99b4387d3f3d91b00fa9;spdx=3DMIT \
++    file://pkg/mod/github.com/chilts/sid@v0.0.0-20190607042430-660e94789=
+ec9/LICENSE;md5=3Dd05a98b9fccf30c831030b5a399905d0;spdx=3DMIT \
++    file://pkg/mod/github.com/clipperhouse/uax29/v2@v2.7.0/LICENSE;md5=3D=
+39b00daa69674119df37aadf8ab34aeb;spdx=3DMIT \
++    file://pkg/mod/github.com/cloudflare/circl@v1.6.4/LICENSE;md5=3D71d7=
+3ee3b01fb1fe8499f3da2593ecc7;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/cloudinary/cloudinary-go/v2@v2.16.0/LICENS=
+E;md5=3D9edb0b9f9cb1c9f76179099ba77ec01b;spdx=3DMIT \
++    file://pkg/mod/github.com/cloudsoda/go-smb2@v0.0.0-20260701064823-d8=
+c5600d73b8/LICENSE;md5=3D25ce52c09e04c514b0d7f783066437b2;spdx=3DBSD-2-Cl=
+ause \
++    file://pkg/mod/github.com/cloudsoda/sddl@v0.0.0-20250224235906-92645=
+4e91efc/LICENSE;md5=3D3000208d539ec061b899bce1d9ce9404;spdx=3DLGPL-3.0-on=
+ly \
++    file://pkg/mod/github.com/colinmarc/hdfs/v2@v2.4.0/LICENSE.txt;md5=3D=
+1f6732eb0b60117407685b62c5eef861;spdx=3DMIT \
++    file://pkg/mod/github.com/coreos/go-semver@v0.3.1/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/coreos/go-systemd/v22@v22.6.0/LICENSE;md5=3D=
+19cbd64715b51267a47bf3750cc6a8a5;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/cpuguy83/go-md2man/v2@v2.0.7/LICENSE.md;md=
+5=3D80794f9009df723bbc6fe19234c9f517;spdx=3DMIT \
++    file://pkg/mod/github.com/creasty/defaults@v1.8.0/LICENSE;md5=3D2a8e=
+c4176ecc68c1924bb7a5d481fe4c;spdx=3DMIT \
++    file://pkg/mod/github.com/cronokirby/saferith@v0.33.1-0.202502261745=
+46-1f11f94ce488/LICENSE;md5=3D12ae33e24b984e0e17c6d247eda9372f;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/davecgh/go-spew@v1.1.2-0.20180830191138-d8=
+f796af33cc/LICENSE;md5=3Dc06795ed54b2a35ebeeb543cd3a73e56;spdx=3DISC \
++    file://pkg/mod/github.com/diskfs/go-diskfs@v1.9.4/LICENSE;md5=3Da346=
+cc99f8bdb4f2cb18021ef39dedba;spdx=3DMIT \
++    file://pkg/mod/github.com/dromara/dongle@v1.0.1/LICENSE;md5=3Db42521=
+12929b7d12372b544e19b8d4fc;spdx=3DMIT \
++    file://pkg/mod/github.com/dropbox/dropbox-sdk-go-unofficial/v6@v6.4.=
+0/LICENSE;md5=3Defb2aa1cf82f675adabe9c3b0843a00c;spdx=3DMIT \
++    file://pkg/mod/github.com/dsnet/compress@v0.0.2-0.20230904184137-39e=
+fe44ab707/LICENSE.md;md5=3Df9a9166bea9f7824860e08378d6ca5e3;spdx=3DBSD-3-=
+Clause \
++    file://pkg/mod/github.com/emersion/go-message@v0.18.2/LICENSE;md5=3D=
+9b0a3b8006be4b746c6677242184c65b;spdx=3DMIT \
++    file://pkg/mod/github.com/emersion/go-vcard@v0.0.0-20260618161152-d8=
+54b7e0e2d3/LICENSE;md5=3Dac5a2269482607202afa3fc8d061665e;spdx=3DMIT \
++    file://pkg/mod/github.com/felixge/httpsnoop@v1.1.0/LICENSE.txt;md5=3D=
+684da2bf3eed8fc8860e75ad84638225;spdx=3DMIT \
++    file://pkg/mod/github.com/flynn/noise@v1.1.0/LICENSE;md5=3D1dc4e7f9b=
+3fd35ee39d507e94280bdfb;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gabriel-vasile/mimetype@v1.4.13/LICENSE;md=
+5=3Ddf3ca1fbe5632f81387306d9558a61c4;spdx=3DMIT \
++    file://pkg/mod/github.com/gdamore/encoding@v1.0.1/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/gdamore/tcell/v2@v2.9.0/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/geoffgarside/ber@v1.2.0/LICENSE;md5=3D5d49=
+50ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/go-chi/chi/v5@v5.3.1/LICENSE;md5=3Deef59fd=
+f1c5117072cbf52b79c6ea691;spdx=3DMIT \
++    file://pkg/mod/github.com/go-git/go-billy/v5@v5.9.0/LICENSE;md5=3D7b=
+6086dcb6977f0ca57a7c47167999e7;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-logr/logr@v1.4.3/LICENSE;md5=3De3fc50a8=
+8d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-logr/stdr@v1.2.2/LICENSE;md5=3D86d3f3a9=
+5c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-openapi/errors@v0.22.8/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-openapi/strfmt@v0.27.0/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-playground/locales@v0.14.1/LICENSE;md5=3D=
+3ccbda375ee345400ad1da85ba522301;spdx=3DMIT \
++    file://pkg/mod/github.com/go-playground/universal-translator@v0.18.1=
+/LICENSE;md5=3D2e2b21ef8f61057977d27c727c84bef1;spdx=3DMIT \
++    file://pkg/mod/github.com/go-playground/validator/v10@v10.30.3/LICEN=
+SE;md5=3Da718a0f318d76f7c5d510cbae84f0b60;spdx=3DMIT \
++    file://pkg/mod/github.com/go-resty/resty/v2@v2.17.2/LICENSE;md5=3D1f=
+d20eb7ff613b50e8e31a0006518a76;spdx=3DMIT \
++    file://pkg/mod/github.com/go-viper/mapstructure/v2@v2.5.0/LICENSE;md=
+5=3D3f7765c3d4f58e1f84c4313cecf0f5bd;spdx=3DMIT \
++    file://pkg/mod/github.com/goccy/go-json@v0.10.6/LICENSE;md5=3D33a071=
+64132d795872805bfc53f6097d;spdx=3DMIT \
++    file://pkg/mod/github.com/gofrs/flock@v0.13.0/LICENSE;md5=3Df852ccc6=
+01f58d934aff3a71b042ba08;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gogo/protobuf@v1.3.2/LICENSE;md5=3D38be95f=
+95200434dc208e2ee3dab5081;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/LICENSE;md5=3Da21=
+b708d8b320c68979c44ac9dba9b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/golang-jwt/jwt/v5@v5.3.1/LICENSE;md5=3Da21=
+b708d8b320c68979c44ac9dba9b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/google/btree@v1.1.3/LICENSE;md5=3D3b83ef96=
+387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/flatbuffers@v25.12.19+incompatible/=
+LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/s2a-go@v0.1.9/LICENSE.md;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/uuid@v1.6.0/LICENSE;md5=3D88073b6dd=
+8ec00fe09da59e0b6dfded1;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/googleapis/enterprise-certificate-proxy@v0=
+.3.18/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/googleapis/gax-go/v2@v2.22.0/LICENSE;md5=3D=
+0dd48ae8103725bd7b401261520cdfbb;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gorilla/schema@v1.4.1/LICENSE;md5=3Dc30eee=
+78985cf2584cded5f89ba3d787;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/hanwen/go-fuse/v2@v2.10.1/LICENSE;md5=3D18=
+4af88d5a6fdee1755dfff3df14a56f;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/hashicorp/errwrap@v1.0.0/LICENSE;md5=3Db27=
+8a92d2c1509760384428817710378;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-cleanhttp@v0.5.2/LICENSE;md5=3D=
+65d26fcc2f35ea6a181ac777e42db1ea;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-multierror@v1.1.1/LICENSE;md5=
+=3Dd44fdeb607e2d2614db9464dbedd4094;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-retryablehttp@v0.7.8/LICENSE;=
+md5=3Dbffc21c92b5f3adcbbb06f8e0067e786;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-uuid@v1.0.3/LICENSE;md5=3D169=
+4f6ca1fdc81a15c1fd408542d47e6;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/golang-lru/v2@v2.0.7/LICENSE;md5=
+=3Ddc2f3ee49116a594755b22b853cc8b6b;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/golang-lru/v2@v2.0.7/simplelru/L=
+ICENSE_list;md5=3D36e7e1c318b6301bd0c13090ed16adb2;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/internxt/rclone-adapter@v0.0.0-20260708165=
+336-dd6561bacfa2/LICENSE;md5=3D44a591f7bb5950c0dc3b63cd148ebfa7;spdx=3DMI=
+T \
++    file://pkg/mod/github.com/jcmturner/aescts/v2@v2.0.0/LICENSE;md5=3De=
+3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/dnsutils/v2@v2.0.0/LICENSE;md5=3D=
+86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/gofork@v1.7.6/LICENSE;md5=3D5d49=
+50ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/jcmturner/goidentity/v6@v6.0.1/LICENSE;md5=
+=3De3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/gokrb5/v8@v8.4.4/LICENSE;md5=3De=
+3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/rpc/v2@v2.0.3/LICENSE;md5=3D86d3=
+f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jlaffaye/ftp@v0.2.1-0.20251026020404-6602e=
+981a1bb/LICENSE;md5=3Dcfa6042baa2778b246a276734c00aa4d;spdx=3DISC \
++    file://pkg/mod/github.com/jtolio/noiseconn@v0.0.0-20231127013910-f6d=
+9ecbf1de7/LICENSE;md5=3D2e448287a2cf31846927205ee5737298;spdx=3DMIT \
++    file://pkg/mod/github.com/jzelinskie/whirlpool@v0.0.0-20201016144138=
+-0675e54bb004/LICENSE;md5=3D56ba9a7139fb128d57668c048a3231dd;spdx=3DBSD-3=
+-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/LICENSE;md5=3Dd=
+0fd9ebda39468b51ff4539c9fbb13a8;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/internal/snapre=
+f/LICENSE;md5=3Db8b79c7d4cda128290b98c6a21f9aac6;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/s2/LICENSE;md5=3D=
+2460814a2b25a7277556c2d89de915d1;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/zstd/internal/x=
+xhash/LICENSE.txt;md5=3D802da049c92a99b4387d3f3d91b00fa9;spdx=3DMIT \
++    file://pkg/mod/github.com/klauspost/cpuid/v2@v2.4.0/LICENSE;md5=3D00=
+d6f962401947482d082858f7ba2ff3;spdx=3DMIT \
++    file://pkg/mod/github.com/klauspost/pgzip@v1.2.6/GO_LICENSE;md5=3D59=
+1778525c869cdde0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/koofr/go-httpclient@v0.0.0-20240520111329-=
+e20f8f203988/LICENSE;md5=3Ddeb90a5b0cb13878aacdfd6572bc06d9;spdx=3DMIT \
++    file://pkg/mod/github.com/koofr/go-koofrclient@v0.0.0-20221207135200=
+-cbd7fc9ad6a6/LICENSE;md5=3Ddeb90a5b0cb13878aacdfd6572bc06d9;spdx=3DMIT \
++    file://pkg/mod/github.com/kr/fs@v0.1.0/LICENSE;md5=3D591778525c869cd=
+de0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/kylelemons/godebug@v1.1.0/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/lanrat/extsort@v1.4.2/LICENSE;md5=3D86d3f3=
+a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/leodido/go-urn@v1.4.0/LICENSE;md5=3D8f50db=
+5538ec1148a9b3d14ed96c3418;spdx=3DMIT \
++    file://pkg/mod/github.com/lpar/calendar@v0.2.0/LICENSE;md5=3De52edf7=
+e7ab720f605e5559f588f568c;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/lucasb-eyer/go-colorful@v1.4.0/LICENSE;md5=
+=3D00a5466a69069b14448ded7ed1f3125f;spdx=3DMIT \
++    file://pkg/mod/github.com/mailru/easyjson@v0.9.2/LICENSE;md5=3D819e8=
+1c2ec13e1bbc47dc5e90bb4d88b;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-colorable@v0.1.15/LICENSE;md5=3D2=
+4ce168f90aec2456a73de1839037245;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-isatty@v0.0.23/LICENSE;md5=3Df509=
+beadd5a11227c27b5d2ad6c9f2c6;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-runewidth@v0.0.24/LICENSE;md5=3D2=
+4ce168f90aec2456a73de1839037245;spdx=3DMIT \
++    file://pkg/mod/github.com/mholt/archives@v0.1.5/LICENSE;md5=3Df88772=
+24ca7a9c0bcc6cc552d818d0f7;spdx=3DMIT \
++    file://pkg/mod/github.com/mikelolasagasti/xz@v1.0.1/LICENSE;md5=3D72=
+c66b9ca7bb05f3e2296b4a3f2dd56b;spdx=3D0BSD \
++    file://pkg/mod/github.com/minio/minlz@v1.2.0/LICENSE;md5=3D559ed6d51=
+7f29f7a76202348f1068d09;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/minio/xxml@v0.0.3/LICENSE;md5=3D5d4950ecb7=
+b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/mitchellh/go-homedir@v1.1.0/LICENSE;md5=3D=
+3f7765c3d4f58e1f84c4313cecf0f5bd;spdx=3DMIT \
++    file://pkg/mod/github.com/moby/sys/mountinfo@v0.7.2/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/munnerz/goautoneg@v0.0.0-20191010083416-a7=
+dc8b61c822/LICENSE;md5=3D0c241922fc69330e2e5590de114f3bf5;spdx=3DBSD-3-Cl=
+ause \
++    file://pkg/mod/github.com/ncw/swift/v2@v2.0.5/COPYING;md5=3Dbed161b8=
+2a1ecab65ff7ba3c3b960439;spdx=3DMIT \
++    file://pkg/mod/github.com/nwaples/rardecode/v2@v2.2.5/LICENSE;md5=3D=
+00a9bc473bdc1f677bde54c760134fbe;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/oklog/ulid/v2@v2.1.1/LICENSE;md5=3D86d3f3a=
+95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/oracle/oci-go-sdk/v65@v65.121.0/LICENSE.tx=
+t;md5=3D8653873de1e9aacad9580639298c0be8;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/panjf2000/ants/v2@v2.12.1/LICENSE;md5=3D6a=
+4f7c52f1a52fc5da45e1529063dfe4;spdx=3DMIT \
++    file://pkg/mod/github.com/patrickmn/go-cache@v2.1.0+incompatible/LIC=
+ENSE;md5=3Dad59632c93a4b0296b360ba542decb5e;spdx=3DMIT \
++    file://pkg/mod/github.com/pengsrc/go-shared@v0.2.1-0.20190131101655-=
+1999055a4a14/LICENSE;md5=3D5d9119906713a6bff1bfa119605244ec;spdx=3DApache=
+-2.0 \
++    file://pkg/mod/github.com/peterh/liner@v1.2.2/COPYING;md5=3D7316a33d=
+f6826d7cc2854e686cb9279f;spdx=3DMIT \
++    file://pkg/mod/github.com/pierrec/lz4/v4@v4.1.27/LICENSE;md5=3D09ece=
+85f3c312a63b522bfc6ebd44943;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/pkg/browser@v0.0.0-20240102092130-5ac0b6a4=
+141c/LICENSE;md5=3D2c6b03e6a9b13bd75b50a8dbeed074da;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/errors@v0.9.1/LICENSE;md5=3D6fe682a02d=
+f52c6653f33bd0f7126b5a;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/sftp@v1.13.11/LICENSE;md5=3D452fc5cc5a=
+9127a0e828d73423d45035;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/xattr@v0.4.12/LICENSE;md5=3D4efd8bdbab=
+9cff00dcd75f2c3ee4e190;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pmezard/go-difflib@v1.0.1-0.20181226105442=
+-5d4384ee4fb2/LICENSE;md5=3De9a2ebb8de779a07500ddecca806145e;spdx=3DBSD-3=
+-Clause \
++    file://pkg/mod/github.com/pquerna/otp@v1.5.0/LICENSE;md5=3D3b83ef963=
+87f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/client_golang@v1.23.2/LICENSE;m=
+d5=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/client_golang@v1.23.2/internal/=
+github.com/golang/gddo/LICENSE;md5=3D4c728948788b1a02f33ae4e906546eef;spd=
+x=3DBSD-3-Clause \
++    file://pkg/mod/github.com/prometheus/client_model@v0.6.2/LICENSE;md5=
+=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/common@v0.70.0/LICENSE;md5=3D86=
+d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/procfs@v0.21.1/LICENSE;md5=3D86=
+d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/putdotio/go-putio/putio@v0.0.0-20200123120=
+452-16d982cac2b8/LICENSE;md5=3D843b68ce2d9f6f51c6bd8ba3835d5531;spdx=3DMI=
+T \
++    file://pkg/mod/github.com/rasky/go-xdr@v0.0.0-20170124162913-1a41d1a=
+06c93/LICENSE;md5=3Db48d4a6f448d246b1fe4e0600e79d0bf;spdx=3DISC \
++    file://pkg/mod/github.com/rclone/!proton-!a!p!i-!bridge@v1.0.5/LICEN=
+SE;md5=3D065cf81dcdc1d304be9de4cc73f65b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/rclone/go-proton-api@v1.0.4/COPYING_NOTES.=
+md;md5=3D7f616df7d323e03661a85766286d1781;spdx=3DMIT \
++    file://pkg/mod/github.com/rclone/gofakes3@v0.0.9/LICENSE;md5=3Db8827=
+4ccba75507dd63977b43dac8874;spdx=3DMIT \
++    file://pkg/mod/github.com/relvacode/iso8601@v1.7.0/LICENSE;md5=3D6c9=
+60305dc52f06752fe6d11bb000648;spdx=3DMIT \
++    file://pkg/mod/github.com/rfjakob/eme@v1.2.0/LICENSE;md5=3D6fee026f0=
+b48abb4d7cd72e25032503c;spdx=3DMIT \
++    file://pkg/mod/github.com/rivo/uniseg@v0.4.7/LICENSE.txt;md5=3D4393c=
+339bf180cf6e188b6ea32d8b93c;spdx=3DMIT \
++    file://pkg/mod/github.com/russross/blackfriday/v2@v2.1.0/LICENSE.txt=
+;md5=3Decf8a8a60560c35a862a4a545f2db1b3;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/ryszard/goskiplist@v0.0.0-20150312221310-2=
+dfbae5fcf46/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-=
+2.0 \
++    file://pkg/mod/github.com/sabhiram/go-gitignore@v0.0.0-2021092322410=
+2-525f6e181f06/LICENSE;md5=3Dbc1bb35f6ed8f35d0af3848bd675d349;spdx=3DMIT =
+\
++    file://pkg/mod/github.com/samber/lo@v1.53.0/LICENSE;md5=3D1cce9fea1b=
+d9690afd75f9941813586f;spdx=3DMIT \
++    file://pkg/mod/github.com/shirou/gopsutil/v4@v4.26.6/LICENSE;md5=3Da=
+e6de3dee02712a1e55b280671be53bf;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/sirupsen/logrus@v1.9.4/LICENSE;md5=3D8dadf=
+ef729c08ec4e631c4f6fc5d43a0;spdx=3DMIT \
++    file://pkg/mod/github.com/skratchdot/open-golang@v0.0.0-202001160555=
+34-eef842397966/LICENSE;md5=3Dbda6b231b2cd2a50379525e90c9e5040;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/sony/gobreaker/v2@v2.4.0/LICENSE;md5=3Dbc9=
+754edcba199de9bf88b85ff7d5d2c;spdx=3DMIT \
++    file://pkg/mod/github.com/sorairolake/lzip-go@v0.3.8/LICENSE-APACHE;=
+md5=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spacemonkeygo/monkit/v3@v3.0.25-0.20251022=
+131615-eb24eb109368/LICENSE;md5=3D19cbd64715b51267a47bf3750cc6a8a5;spdx=3D=
+Apache-2.0 \
++    file://pkg/mod/github.com/spf13/afero@v1.15.0/LICENSE.txt;md5=3D920d=
+76114a32b0fb75b3f2718c5a91be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spf13/cobra@v1.10.2/LICENSE.txt;md5=3D920d=
+76114a32b0fb75b3f2718c5a91be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spf13/pflag@v1.0.10/LICENSE;md5=3D1e8b7dc8=
+b906737639131047a590f21d;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/stangelandcl/ppmd@v0.1.1/LICENSE;md5=3D6c5=
+d96735d0135b701102478cf086eb0;spdx=3DMIT \
++    file://pkg/mod/github.com/stretchr/testify@v1.11.1/LICENSE;md5=3D188=
+f01994659f3c0d310612333d2a26f;spdx=3DMIT \
++    file://pkg/mod/github.com/t3rm1n4l/go-mega@v0.0.0-20260717075258-c6a=
+cd6a5bd04/LICENSE;md5=3D297dcd2957399448294b4cfa17d4031f;spdx=3DMIT \
++    file://pkg/mod/github.com/tyler-smith/go-bip39@v1.1.0/LICENSE;md5=3D=
+9380d72a13094f603bec718c10f56b4b;spdx=3DMIT \
++    file://pkg/mod/github.com/ulikunitz/xz@v0.5.15/LICENSE;md5=3D3c82255=
+323cf3d48815acdbf9068b715;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/unknwon/goconfig@v1.0.0/LICENSE;md5=3D554f=
+1a8b845d7b28c73f36b711b506be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/willscott/go-nfs-client@v0.0.0-20251022144=
+359-801f10d98886/LICENSE_BSD-2.txt;md5=3D862147293f339bce315b57b5953a1620=
+;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/willscott/go-nfs@v0.0.4/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/wk8/go-ordered-map/v2@v2.1.8/LICENSE;md5=3D=
+e3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/xanzy/ssh-agent@v0.3.3/LICENSE;md5=3Dfa818=
+a259cbed7ce8bc2a22d35a464fc;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/youmark/pkcs8@v0.0.0-20240726163527-a2c0da=
+244d78/LICENSE;md5=3D7e949f736d1222f15e83233702459f41;spdx=3DMIT \
++    file://pkg/mod/github.com/yunify/qingstor-sdk-go/v3@v3.2.0/LICENSE;m=
+d5=3D523134d2856772dc50dad91ab4a43caf;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/zeebo/blake3@v0.2.4/LICENSE;md5=3D7364d1e4=
+653d3584181e9d22d81f275f;spdx=3DCC0-1.0 \
++    file://pkg/mod/github.com/zeebo/errs@v1.4.0/LICENSE;md5=3D84914ab36f=
+c0eb48edbaa53e66e8d326;spdx=3DMIT \
++    file://pkg/mod/github.com/zeebo/xxh3@v1.1.0/LICENSE;md5=3Daaba054472=
+88333a478938c7e45c0cb2;spdx=3DBSD-2-Clause \
++    file://pkg/mod/go.etcd.io/bbolt@v1.5.0/LICENSE;md5=3D13b2a308eefa10d=
+841e3bf2467dbe07a;spdx=3DMIT \
++    file://pkg/mod/go.opentelemetry.io/auto/sdk@v1.2.1/LICENSE;md5=3D86d=
+3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/contrib/instrumentation/net/http/=
+otelhttp@v0.69.0/LICENSE;md5=3D24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DAp=
+ache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel/metric@v1.44.0/LICENSE;md5=3D=
+24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel/trace@v1.44.0/LICENSE;md5=3D=
+24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel@v1.44.0/LICENSE;md5=3D24dad3=
+abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.yaml.in/yaml/v2@v2.4.4/LICENSE;md5=3De3fc50a88d0a3=
+64313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/go.yaml.in/yaml/v3@v3.0.4/LICENSE;md5=3D3c91c17266710=
+e16afdbb2b6d15c761c;spdx=3DApache-2.0 \
++    file://pkg/mod/go4.org@v0.0.0-20260112195520-a5071408f32f/LICENSE;md=
+5=3Dfa818a259cbed7ce8bc2a22d35a464fc;spdx=3DApache-2.0 \
++    file://pkg/mod/goftp.io/server/v2@v2.0.3/LICENSE;md5=3Df13b0a36d1120=
+7262f14b7acef69dc2c;spdx=3DMIT \
++    file://pkg/mod/golang.org/x/crypto@v0.56.0/LICENSE;md5=3D7998cb338f8=
+2d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/exp@v0.0.0-20260709172345-9ea1abe57597/L=
+ICENSE;md5=3D7998cb338f82d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/image@v0.45.0/LICENSE;md5=3D7998cb338f82=
+d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/net@v0.57.0/LICENSE;md5=3D7998cb338f82d1=
+5c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/oauth2@v0.36.0/LICENSE;md5=3D7998cb338f8=
+2d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/sync@v0.22.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/sys@v0.47.0/LICENSE;md5=3D7998cb338f82d1=
+5c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/term@v0.45.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/text@v0.41.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/time@v0.15.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/google.golang.org/api@v0.279.0/LICENSE;md5=3Da651bb3d=
+8b1c412632e28823bb432b40;spdx=3DBSD-3-Clause \
++    file://pkg/mod/google.golang.org/api@v0.279.0/internal/third_party/u=
+ritemplates/LICENSE;md5=3D4ee4feb2b545c2231749e5c54ace343e;spdx=3DBSD-3-C=
+lause \
++    file://pkg/mod/google.golang.org/genproto/googleapis/rpc@v0.0.0-2026=
+0715232425-e75dac1f907d/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;sp=
+dx=3DApache-2.0 \
++    file://pkg/mod/google.golang.org/grpc@v1.84.0-dev.0.20260723093437-b=
+6eac429d7b6/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-=
+2.0 \
++    file://pkg/mod/google.golang.org/protobuf@v1.36.11/LICENSE;md5=3D02d=
+4002e9171d41a8fad93aa7faf3956;spdx=3DBSD-3-Clause \
++    file://pkg/mod/gopkg.in/natefinch/lumberjack.v2@v2.2.1/LICENSE;md5=3D=
+574cdb55b81249478f5af5f789e9e29f;spdx=3DMIT \
++    file://pkg/mod/gopkg.in/validator.v2@v2.0.1/LICENSE;md5=3D6c4db32a2f=
+a8717faffa1d4f10136f47;spdx=3DApache-2.0 \
++    file://pkg/mod/gopkg.in/yaml.v2@v2.4.0/LICENSE;md5=3De3fc50a88d0a364=
+313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/gopkg.in/yaml.v3@v3.0.1/LICENSE;md5=3D3c91c17266710e1=
+6afdbb2b6d15c761c;spdx=3DApache-2.0 \
++    file://pkg/mod/moul.io/http2curl/v2@v2.3.0/COPYRIGHT;md5=3Dcd9599a56=
+4a6135dff208e43a4692cf4;spdx=3DMIT \
++    file://pkg/mod/sigs.k8s.io/yaml@v1.6.0/LICENSE;md5=3Db5d30dd5bc47d1b=
+56b678ac06dead1c7;spdx=3DMIT \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/LI=
+CENSE;md5=3Db418b8bf34c5c954ad8d78427714088c;spdx=3DMIT \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/ba=
+se58/LICENSE;md5=3D7546df84e6da78f268b76fbaff6643a4;spdx=3DISC \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/in=
+ternal/hmacsha512/GO_LICENSE;md5=3D5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3D=
+BSD-3-Clause \
++    file://pkg/mod/storj.io/drpc@v1.0.0/LICENSE;md5=3Db418b8bf34c5c954ad=
+8d78427714088c;spdx=3DMIT \
++    file://pkg/mod/storj.io/eventkit@v0.0.0-20260716074419-6861a92e2aa5/=
+LICENSE;md5=3D2e448287a2cf31846927205ee5737298;spdx=3DMIT \
++    file://pkg/mod/storj.io/infectious@v0.0.2/LICENSE;md5=3Da6e9ba58e808=
+402fa1cadfd609314d58;spdx=3DMIT \
++    file://pkg/mod/storj.io/picobuf@v0.0.4/LICENSE;md5=3D1e43191ed0cdbce=
+85d6e8687d5ce0c11;spdx=3DMIT \
++    file://pkg/mod/storj.io/picobuf@v0.0.4/internal/protowire/LICENSE;md=
+5=3D02d4002e9171d41a8fad93aa7faf3956;spdx=3DBSD-3-Clause \
++    file://pkg/mod/storj.io/uplink@v1.14.3/LICENSE;md5=3Db418b8bf34c5c95=
+4ad8d78427714088c;spdx=3DMIT \
 +"
+diff --git a/meta-oe/recipes-support/rclone/rclone_1.75.1.bb b/meta-oe/re=
+cipes-support/rclone/rclone_1.75.1.bb
+new file mode 100644
+index 0000000000..ccf774359a
+--- /dev/null
++++ b/meta-oe/recipes-support/rclone/rclone_1.75.1.bb
+@@ -0,0 +1,21 @@
++SUMMARY =3D "Sync files and directories to and from cloud storage provid=
+ers"
++HOMEPAGE =3D "https://rclone.org"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://src/${GO_IMPORT}/COPYING;md5=3Dbed161b82a1e=
+cab65ff7ba3c3b960439"
 +
-+PACKAGECONFIG ??=3D ""
-+PACKAGECONFIG[libunwind] =3D "-Dlibunwind=3Denabled,-Dlibunwind=3Ddisabl=
-ed,libunwind"
-+PACKAGECONFIG[tnef] =3D "-Dtnef=3Denabled,-Dtnef=3Ddisabled,libytnef"
++SRC_URI =3D "git://${GO_IMPORT};protocol=3Dhttps;nobranch=3D1;tag=3Dv${P=
+V};destsuffix=3D${GO_SRCURI_DESTSUFFIX}"
++SRCREV =3D "687d264b689b8c49a67e2e52a8a5e0caa01c04ce"
 +
-+FILES:${PN} +=3D "${datadir}"
++require ${BPN}-licenses.inc
++require ${BPN}-go-mods.inc
++
++GO_IMPORT =3D "github.com/rclone/rclone"
++GO_INSTALL =3D "${GO_IMPORT}"
++
++inherit go-mod go-mod-update-modules
++
++GO_EXTRA_LDFLAGS =3D "-X ${GO_IMPORT}/fs.Version=3Dv${PV}"
++
++RRECOMMENDS:${PN} +=3D "fuse3"
++
++RDEPENDS:${PN}-dev +=3D "bash python3-core"
 --=20
 2.55.0
 
