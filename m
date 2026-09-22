@@ -1,108 +1,290 @@
-Return-Path: <joaohf@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98CEAC982ED
-	for <webhook@archiver.kernel.org>; Mon, 21 Sep 2026 22:31:44 +0000 (UTC)
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8584.1790029900983761300
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E214C982FA
+	for <webhook@archiver.kernel.org>; Tue, 22 Sep 2026 07:23:08 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4668.1790061787186238723
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2026 15:31:41 -0700
+ Tue, 22 Sep 2026 00:23:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=prF0/Mft;
- spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: joaohf@gmail.com)
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2db479a55b6so5906045ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 15:31:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790029900; x=1790634700; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZHn850ow7CZrGOuLmYZtOscprfAStVrcV7+yKCmYzIs=;
-        b=prF0/MfteasaC9Dnn4K30C/eVn8YBMhbflBOfgoWJELRPaKzm1AKjv/WqZttA1KB3R
-         PNm25H4KkV/0XrfYTkE+LxC37UJWzhH/GgyHlWE4GzfwAxxzqN99YSkqGIxRDzZAh5G4
-         y0s3FNNVhXEx/PZrMAqNmM1VdP5Q9dEE/12FvstFbBU1kR5rVEmYqClzHd6lmyUI8QBA
-         A/uDmetYcez6prgtfftfhpgQJyURCSQ4x4rWqkLFTYJrlYp39eR0diuw3WjdkIonxZ5X
-         uDkZWXv6tLOwB11BG3iz2OfGThQjhA1VLUeTto8chMZa190ppL6bOSrA/pyhwAVZAiWK
-         MaSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790029900; x=1790634700;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ZHn850ow7CZrGOuLmYZtOscprfAStVrcV7+yKCmYzIs=;
-        b=2rvssFSqaHqxQLMTC3cvz3xrkMRuEgJMsQR17fqD6JF+QilBMIuf0lwrp772LNqJji
-         Gb1BEXGVSjzwkpCz7VYPfYnDHecp7qKCGQ92RbhB7jp0jF6TH6tQ1KTmEk1Nr3NOd2Jb
-         SqYK0MCqHbvBEbv8D6NEjmQUMRdBtSsn1p1E8CWT+5kXPUsxMEPBP+dYpMdJB/Pd5qCV
-         m58Kk+DE7bIj3zD3Qa2I6DLZAjodh/NKiAQ54ChKuv7Eoy1uJ/nVmdwUvShizvbl9Ny7
-         B7GEa3zdk41DvuqUmaPo0cQ08r32Ks1LQ2iWRBHFo5/xm5wEM+rGKliSxRPRTXKP6lrh
-         cR/Q==
-X-Gm-Message-State: AFuF++mr20Ei4add3UiY/oWbkYALWhTjlAtem21Xjpep+7v60M1Xz3Rb
-	eFz3X45l9Fi6GygvlFbuPnShEbB0w717jgfhy0suqXvTMZ5I9kHP6hRPxrx9vQ==
-X-Gm-Gg: AYBFou3Zttd61DPD1FGF8ahCy+r3W7zMwS3Bs7QnKsatOy7yhxPM4p9Mm+MnLz0J/Ls
-	LUieWZjZ9ZqHhswVsVmKvDydGna6rCMA1H10U+/+gWkrKTdtCpd95dliEjyBupCRygKLwiEvhtl
-	ObPAkXLKZ1GGtf4IusJEl1MTkMX1uSBkCC/2lHaVAQOyXV8+401VGdtJ4ViKXeQcXHCG14sC4s3
-	puqQicbrrrRguhsji2WOttfdnu+2vSP1btkcQ/0zAgPOlK+gPiKIs1/5Ic6xK4wFMgPbsqrnwlo
-	FjNIButGDiBwjizcmgIIPVvlgG6bhGuXYWbhRZkvqLhvckUFrR66zvSyjiP85CNARvzsydaPYbj
-	La1UokB2HeVmnLxlrRmXkIt7O/x70vbgHCAqOJF3eh8kOoC0G3aZYr7M9v+elYVa4KdmNFdvDex
-	9es30pdRsNsSoEXz/wJ133UT+S+YvC14MAwG5Yz7inFG6FY1k3im9ysy1pGq6gfGRTlQczCSdrb
-	wy4
-X-Received: by 2002:a17:90b:3b4f:b0:39e:3728:3b11 with SMTP id 98e67ed59e1d1-39e598adb96mr21771664a91.3.1790029900105;
-        Mon, 21 Sep 2026 15:31:40 -0700 (PDT)
-Received: from porco.local ([179.228.7.180])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e61271695sm85109eec.8.2026.09.21.15.31.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 15:31:39 -0700 (PDT)
-From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=c3oLoHCp;
+ spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout11.t-online.de (Postfix) with SMTP id E2B7D1C77C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 09:23:03 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.38.249]) by fwd85.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1x8uq6-4Un7Gk0; Tue, 22 Sep 2026 09:22:54 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>,
-	Ross Burton <Ross.Burton@arm.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] boardid: remove default tasks and PV
-Date: Mon, 21 Sep 2026 19:31:12 -0300
-Message-ID: <20260921223112.125955-1-joaohf@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-gnome][PATCH 3/3] convey: add recipe
+Date: Tue, 22 Sep 2026 09:22:43 +0200
+Message-ID: <20260922072243.227406-3-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260922072243.227406-1-f_l_k@t-online.de>
+References: <20260922072243.227406-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1790061774-A27FB9B4-67333664/0/0 CLEAN NORMAL
+X-TOI-MSGID: 0a878942-5266-4f41-9fb5-30fd1fada3c1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1790061783; i=f_l_k@t-online.de;
+	bh=kZV7HC3op7eTv/Rcv2c8DWU8iF2hxZUOjJfe2SmxSmo=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=c3oLoHCpoVDmQWj5CwsXc2MZSXYPSSv8k/vRpG3YGHl6W/Z2loxKhIjmDon6vEeLk
+	 2RLnL3I46RzVdd6ujama1RLEiZlvf7ijsDavLpwWZlBykEwez63fnwuq9ZopcXnRAs
+	 7WxSxi/kXiMGi9xRPIsHH6drA5j+ulKY45gW4UWLl1VbK1K2xOFwQe0Eg8SpnL0r8w
+	 M37oRgV1lqMIv5WWIy6sbGaKNGaZuarZXPW12jmCyMBRS76N+F7ohIsAuar63hF9zz
+	 rjramEEMCz1NqliWrVJCAzAA+KkZ9Rg6yhLfuI1kfGaa2cJRr2//jsPDtSUgMlCflE
+	 Nb8Qp71e1AMaA==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2026 22:31:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130169
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 07:23:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130170
 
-Also pass tag= to SRC_URI in order to validate SRCREV.
+Convey is a fork of geary ported to GTK4, libadwaita, gcr-4 and
+webkitgtk 6.0. The patches keep build paths out of the binary, drop
+host checks that do not apply when cross-compiling and let the vala-unit
+subproject find g-ir-compiler through the cross file.
 
-Signed-off-by: João Henrique Ferreira de Freitas <joaohf@gmail.com>
-CC: Ross Burton <Ross.Burton@arm.com>
-CC: Khem Raj <raj.khem@gmail.com>
+AI-Generated: Uses Claude Code (Claude Fable 5.1)
 ---
- meta-oe/recipes-extended/boardid/boardid_1.15.0.bb | 11 +----------
- 1 file changed, 1 insertion(+), 10 deletions(-)
+ ...-not-store-build-paths-in-the-binary.patch | 40 +++++++++++++
+ ...ck-for-the-iso-xml-files-and-the-C.u.patch | 39 ++++++++++++
+ ...k-up-g-ir-compiler-with-find_program.patch | 34 +++++++++++
+ .../convey/convey_50.2.bb                     | 59 +++++++++++++++++++
+ 4 files changed, 172 insertions(+)
+ create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0001-me=
+son-do-not-store-build-paths-in-the-binary.patch
+ create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0002-me=
+son-do-not-check-for-the-iso-xml-files-and-the-C.u.patch
+ create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0003-va=
+la-unit-look-up-g-ir-compiler-with-find_program.patch
+ create mode 100644 meta-gnome/recipes-connectivity/convey/convey_50.2.bb
 
-diff --git a/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb b/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
-index 8e88ec9371..71cffdf1c4 100644
---- a/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
-+++ b/meta-oe/recipes-extended/boardid/boardid_1.15.0.bb
-@@ -9,19 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded477
-                     file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
-                     file://LICENSES/CC-BY-4.0.txt;md5=9b33bbd06fb58995fb0e299cd38d1838"
- 
--SRC_URI = "git://github.com/nerves-project/boardid/;protocol=https;branch=main"
-+SRC_URI = "git://github.com/nerves-project/boardid/;protocol=https;branch=main;tag=v${PV}"
- 
--PV = "1.15.0"
- SRCREV = "2ccf22a8be22d7597e16fb225c1173876674f7a4"
- 
--do_configure () {
--	:
--}
--
--do_compile () {
--	oe_runmake
--}
--
- do_install () {
-         install -d ${D}${bindir}
-         install -m 0755 ${S}/boardid ${D}${bindir}
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-=
+not-store-build-paths-in-the-binary.patch b/meta-gnome/recipes-connectivi=
+ty/convey/convey/0001-meson-do-not-store-build-paths-in-the-binary.patch
+new file mode 100644
+index 0000000000..91e21fd0ec
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-sto=
+re-build-paths-in-the-binary.patch
+@@ -0,0 +1,40 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 22 Sep 2026 07:43:41 +0200
++Subject: [PATCH] meson: do not store build paths in the binary
++
++The build root and source root are only used when convey runs
++uninstalled, but storing them puts TMPDIR into the binary and breaks
++reproducibility. Point them to /usr/src and the schema directory to the
++installed location instead.
++
++AI-Generated: Uses Claude Code (Claude Fable 5.1)
++Upstream-Status: Inappropriate [oe-specific]
++---
++ src/meson.build | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/meson.build b/src/meson.build
++index 87690ada..ce722126 100644
++--- a/src/meson.build
+++++ b/src/meson.build
++@@ -4,8 +4,8 @@ conf =3D configuration_data()
++ conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
++ conf.set_quoted('G_LOG_DOMAIN', meson.project_name())
++ conf.set_quoted('APP_ID', convey_id)
++-conf.set_quoted('BUILD_ROOT_DIR', meson.project_build_root())
++-conf.set_quoted('GSETTINGS_DIR', meson.project_build_root() / 'desktop'=
+)
+++conf.set_quoted('BUILD_ROOT_DIR', '/usr/src')
+++conf.set_quoted('GSETTINGS_DIR', data_dir / 'glib-2.0' / 'schemas')
++ conf.set_quoted('INSTALL_PREFIX', convey_prefix)
++ conf.set_quoted('ISO_CODE_3166_XML', iso_3166_xml)
++ conf.set_quoted('ISO_CODE_639_XML', iso_639_xml)
++@@ -14,7 +14,7 @@ conf.set_quoted('NAME_SUFFIX', name_suffix)
++ conf.set_quoted('PLUGINS_DIR', plugins_dir)
++ conf.set_quoted('PROFILE', profile)
++ conf.set_quoted('REVNO', revno)
++-conf.set_quoted('SOURCE_ROOT_DIR', meson.project_source_root())
+++conf.set_quoted('SOURCE_ROOT_DIR', '/usr/src')
++ conf.set_quoted('VERSION', convey_version)
++ conf.set_quoted('WEB_EXTENSIONS_DIR', web_extensions_dir)
++ config_h =3D configure_file(output: 'config.h', configuration: conf)
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-=
+not-check-for-the-iso-xml-files-and-the-C.u.patch b/meta-gnome/recipes-co=
+nnectivity/convey/convey/0002-meson-do-not-check-for-the-iso-xml-files-an=
+d-the-C.u.patch
+new file mode 100644
+index 0000000000..15836a7c52
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-che=
+ck-for-the-iso-xml-files-and-the-C.u.patch
+@@ -0,0 +1,39 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 22 Sep 2026 09:15:56 +0200
++Subject: [PATCH] meson: do not check for the iso xml files and the C.utf=
+8
++ locale during build
++
++The iso xml files are needed at runtime and live in the staging area
++when cross-compiling, and the locale check runs the host's locale
++command against the host's locales. Neither says anything about the
++target, so drop both build-time checks.
++
++AI-Generated: Uses Claude Code (Claude Fable 5.1)
++Upstream-Status: Pending
++---
++ meson.build | 11 -----------
++ 1 file changed, 11 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index dfd919a7..51ab9015 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -195,17 +195,6 @@ if iso_3166_xml =3D=3D ''
++   iso_3166_xml =3D iso_codes_dir / 'iso_3166.xml'
++ endif
++=20
++-files(iso_639_xml, iso_3166_xml) # Check to make sure these exist
++-
++-# Make sure the locale C.UTF-8 is installed on the system
++-
++-c_utf8_check =3D run_command('locale', '-a', check: true).stdout()
++-have_c_utf8 =3D 'C.utf8' in c_utf8_check.split('\n')
++-
++-if not have_c_utf8
++-  warning('C.utf8 locale not available on this system.')
++-endif
++-
++ # Post-install script
++ gnome.post_install(
++   gtk_update_icon_cache: true,
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit=
+-look-up-g-ir-compiler-with-find_program.patch b/meta-gnome/recipes-conne=
+ctivity/convey/convey/0003-vala-unit-look-up-g-ir-compiler-with-find_prog=
+ram.patch
+new file mode 100644
+index 0000000000..a07887c67c
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-u=
+p-g-ir-compiler-with-find_program.patch
+@@ -0,0 +1,34 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 22 Sep 2026 09:15:10 +0200
++Subject: [PATCH] vala-unit: look up g-ir-compiler with find_program
++
++The path taken from the g_ir_compiler pkg-config variable is the
++target path and is not usable when cross-compiling. find_program
++honours the cross file, which is where the wrapper is set.
++
++AI-Generated: Uses Claude Code (Claude Fable 5.1)
++Upstream-Status: Pending
++---
++ subprojects/vala-unit/meson.build | 8 +-------
++ 1 file changed, 1 insertion(+), 7 deletions(-)
++
++diff --git a/subprojects/vala-unit/meson.build b/subprojects/vala-unit/m=
+eson.build
++index a1822aa8..d04cc307 100644
++--- a/subprojects/vala-unit/meson.build
+++++ b/subprojects/vala-unit/meson.build
++@@ -31,13 +31,7 @@ gee =3D dependency('gee-0.8')
++ gio =3D dependency('gio-2.0')
++ glib =3D dependency('glib-2.0', version: '>=3D' + target_glib)
++ gobject =3D dependency('gobject-2.0')
++-gobject_introspection =3D dependency('gobject-introspection-1.0', requi=
+red: false)
++-
++-if gobject_introspection.found()
++-  g_ir_compiler =3D gobject_introspection.get_variable('g_ir_compiler')
++-else
++-  g_ir_compiler =3D find_program('g-ir-compiler')
++-endif
+++g_ir_compiler =3D find_program('g-ir-compiler')
++ if enable_valadoc
++   valadoc =3D find_program('valadoc')
++ endif
+diff --git a/meta-gnome/recipes-connectivity/convey/convey_50.2.bb b/meta=
+-gnome/recipes-connectivity/convey/convey_50.2.bb
+new file mode 100644
+index 0000000000..2a28f5aef5
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+@@ -0,0 +1,59 @@
++SUMMARY =3D "Email application built around conversations for the GNOME =
+desktop"
++HOMEPAGE =3D "https://gitlab.gnome.org/donnybeelo/convey"
++SECTION =3D "network"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2a2244d5a13871ad950c55877546a=
+6a2"
++
++DEPENDS =3D " \
++    appstream-native \
++    cairo \
++    desktop-file-utils-native \
++    enchant2 \
++    folks \
++    gcr \
++    gmime \
++    gnome-online-accounts \
++    gstreamer1.0 \
++    gstreamer1.0-plugins-bad \
++    gtk4 \
++    icu \
++    iso-codes \
++    json-glib \
++    libadwaita \
++    libpeas \
++    libsecret \
++    libsoup \
++    libstemmer \
++    libxml2 \
++    sqlite3 \
++    webkitgtk \
++"
++
++inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-intros=
+pection gnome-help vala features_check
++
++SRC_URI =3D " \
++    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=3Dhttps;branch=
+=3Dmain;tag=3D${PV}-1 \
++    file://0001-meson-do-not-store-build-paths-in-the-binary.patch \
++    file://0002-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.pat=
+ch \
++    file://0003-vala-unit-look-up-g-ir-compiler-with-find_program.patch =
+\
++"
++SRCREV =3D "2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42"
++
++REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data opengl"
++
++GTKIC_VERSION =3D "4"
++GIR_MESON_OPTION =3D ""
++
++EXTRA_OEMESON =3D " \
++    -Dprofile=3Drelease \
++    -Drevno=3D${PV} \
++    -Diso_639_xml=3D${datadir}/xml/iso-codes/iso_639.xml \
++    -Diso_3166_xml=3D${datadir}/xml/iso-codes/iso_3166.xml \
++    -Dvaladoc=3Ddisabled \
++"
++
++PACKAGECONFIG ??=3D ""
++PACKAGECONFIG[libunwind] =3D "-Dlibunwind=3Denabled,-Dlibunwind=3Ddisabl=
+ed,libunwind"
++PACKAGECONFIG[tnef] =3D "-Dtnef=3Denabled,-Dtnef=3Ddisabled,libytnef"
++
++FILES:${PN} +=3D "${datadir}"
+--=20
+2.55.0
+
 
