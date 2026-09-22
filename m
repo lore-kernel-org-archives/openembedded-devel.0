@@ -2,1320 +2,1639 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31E76C982F1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AFA5C982FA
 	for <webhook@archiver.kernel.org>; Tue, 22 Sep 2026 07:23:18 +0000 (UTC)
 Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4698.1790061791035621348
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4669.1790061790988984223
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 22 Sep 2026 00:23:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=nBiwVN+3;
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=OX0oYGZv;
  spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
 Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout05.t-online.de (Postfix) with SMTP id DA9B4A5C
+	by mailout05.t-online.de (Postfix) with SMTP id CA20F711
 	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 09:23:03 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([84.163.38.249]) by fwd85.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x8uq6-4Un7Gj0; Tue, 22 Sep 2026 09:22:54 +0200
+	esmtp id 1x8uq6-4Un7Gi0; Tue, 22 Sep 2026 09:22:54 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/3] papers: add recipe
-Date: Tue, 22 Sep 2026 09:22:42 +0200
-Message-ID: <20260922072243.227406-2-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/3] rclone: add recipe
+Date: Tue, 22 Sep 2026 09:22:41 +0200
+Message-ID: <20260922072243.227406-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922072243.227406-1-f_l_k@t-online.de>
-References: <20260922072243.227406-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790061774-3FFFC9B4-73581F1A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 28041b0b-1af9-479f-98a6-bd8585dea92d
+X-TOI-EXPURGATEID: 150726::1790061774-357F99B4-22FBF55A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 77336af4-4050-461d-b2b1-52407720f43f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
 	s=20260216; t=1790061783; i=f_l_k@t-online.de;
-	bh=vMxcjxgBjIzv2bjdQR8FvMf+K4fjkhZdqma90HzggxA=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=nBiwVN+3EIkFlDdyt9Y2PaOC0unZztG9JG9pIXRdeO7s38AcB5WsmYy9n2P1PFVn/
-	 Z7pUTNrtwOJGsR/a5LwHGDmnnabZcI6s96xSWgm/aFPogRlZe3gSrRuCrfe3bhWtq9
-	 nFo0CKuyQtyrJR2RXLER7no6bzzYAGaCMCfDuVEjZAZ6HJsoYrRkfthqxlUqDS9eNn
-	 iIFIwEhXndxQ2lr12IuvE3vOP5m33nVkYwzql8TjlKx2wIK5N7sl1YWY+KcWD4a4Lf
-	 g2TDLrBF0w6ZAS5kj1i4DOzyW1ifDw4izI1hoSq8k8FTNbN8ZyUiJU/m/gHAvhPvfl
-	 fz44AmYjvNP8g==
+	bh=k6irfvo0cmvYPIZZM8NRuQTGXQ4jdUk+PkfHIoCUiE0=;
+	h=From:To:Subject:Date;
+	b=OX0oYGZv18I+PGPoH1Dac9ZvZTphudq1kIQCUAfTGnNF/v376SQ18BC5sBC5BhLES
+	 HEH4od5hR1Q2dYYJU8WsKTVbib4OcSNQUeSONYLNy6l1SGbezv6y8mlZLvrPfsSI1d
+	 I0ZdTHMwKJmuB9eJhRbvr2xpZB95cXYSVzgU1NVEM1sBGjVYGuCst+tOU3qEeYacyG
+	 r21XDkWGngjRQiScDwyDLXD5tMWc2stj3W/NRZjZBqZSVEzQNIY7ZoNUt1tUY3ZmZh
+	 sHyF253gQUnYB4GOy9FGNDAMkwDVWyLV4KtvhRv7idzueef74GvoAf448XdQ9UQwZH
+	 N7+IbhE2gUtbQ==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 07:23:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130172
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130171
 
-Papers is the successor of evince, a document viewer built on GTK4 and
-libadwaita with the shell written in Rust. The cargo invocation in the
-meson build takes the target triple from a cross file property so the
-Rust parts are cross-compiled.
+Command line tool to sync files with cloud storage providers. Built
+with the go-mod classes, the module list and licenses are generated
+with update_modules.
 
 AI-Generated: Uses Claude Code (Claude Fable 5.1)
 ---
- .../recipes-gnome/papers/papers-crates.inc    | 704 ++++++++++++++++++
- ...oss-compilation-via-a-rust_target-cr.patch |  78 ++
- .../recipes-gnome/papers/papers_51.0.bb       |  89 +++
- 3 files changed, 871 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/papers/papers-crates.inc
- create mode 100644 meta-gnome/recipes-gnome/papers/papers/0001-meson-Sup=
-port-cross-compilation-via-a-rust_target-cr.patch
- create mode 100644 meta-gnome/recipes-gnome/papers/papers_51.0.bb
+ .../recipes-support/rclone/rclone-go-mods.inc | 418 ++++++++++++++++++
+ .../rclone/rclone-licenses.inc                | 266 +++++++++++
+ .../recipes-support/rclone/rclone_1.75.1.bb   |  21 +
+ 3 files changed, 705 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rclone/rclone-go-mods.inc
+ create mode 100644 meta-oe/recipes-support/rclone/rclone-licenses.inc
+ create mode 100644 meta-oe/recipes-support/rclone/rclone_1.75.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/papers/papers-crates.inc b/meta-gno=
-me/recipes-gnome/papers/papers-crates.inc
+diff --git a/meta-oe/recipes-support/rclone/rclone-go-mods.inc b/meta-oe/=
+recipes-support/rclone/rclone-go-mods.inc
 new file mode 100644
-index 0000000000..f3bfe733f4
+index 0000000000..df7a92d8c0
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/papers/papers-crates.inc
-@@ -0,0 +1,704 @@
-+# Autogenerated with 'bitbake -c update_crates papers'
++++ b/meta-oe/recipes-support/rclone/rclone-go-mods.inc
+@@ -0,0 +1,418 @@
 +
-+# from Cargo.lock
-+SRC_URI +=3D " \
-+    crate://crates.io/ab_glyph/0.2.32 \
-+    crate://crates.io/ab_glyph_rasterizer/0.1.10 \
-+    crate://crates.io/adler2/2.0.1 \
-+    crate://crates.io/aes/0.8.4 \
-+    crate://crates.io/aho-corasick/1.1.4 \
-+    crate://crates.io/aligned/0.4.3 \
-+    crate://crates.io/aligned-vec/0.6.4 \
-+    crate://crates.io/allocator-api2/0.2.21 \
-+    crate://crates.io/android_system_properties/0.1.5 \
-+    crate://crates.io/anstream/1.0.0 \
-+    crate://crates.io/anstyle/1.0.14 \
-+    crate://crates.io/anstyle-parse/1.0.0 \
-+    crate://crates.io/anstyle-query/1.1.5 \
-+    crate://crates.io/anstyle-wincon/3.0.11 \
-+    crate://crates.io/anyhow/1.0.102 \
-+    crate://crates.io/approx/0.5.1 \
-+    crate://crates.io/arbitrary/1.4.2 \
-+    crate://crates.io/arg_enum_proc_macro/0.3.4 \
-+    crate://crates.io/arrayvec/0.7.6 \
-+    crate://crates.io/as-slice/0.2.1 \
-+    crate://crates.io/ashpd/0.13.11 \
-+    crate://crates.io/async-broadcast/0.7.2 \
-+    crate://crates.io/async-channel/2.5.0 \
-+    crate://crates.io/async-executor/1.14.0 \
-+    crate://crates.io/async-fs/2.2.0 \
-+    crate://crates.io/async-io/2.6.0 \
-+    crate://crates.io/async-lock/3.4.2 \
-+    crate://crates.io/async-process/2.5.0 \
-+    crate://crates.io/async-recursion/1.1.1 \
-+    crate://crates.io/async-signal/0.2.14 \
-+    crate://crates.io/async-task/4.7.1 \
-+    crate://crates.io/async-trait/0.1.89 \
-+    crate://crates.io/atomic-waker/1.1.2 \
-+    crate://crates.io/autocfg/1.5.1 \
-+    crate://crates.io/av-scenechange/0.14.1 \
-+    crate://crates.io/av1-grain/0.2.5 \
-+    crate://crates.io/avif-serialize/0.8.9 \
-+    crate://crates.io/bit_field/0.10.3 \
-+    crate://crates.io/bitflags/2.13.0 \
-+    crate://crates.io/bitstream-io/4.10.0 \
-+    crate://crates.io/block/0.1.6 \
-+    crate://crates.io/block-buffer/0.10.4 \
-+    crate://crates.io/block-padding/0.3.3 \
-+    crate://crates.io/blocking/1.6.2 \
-+    crate://crates.io/built/0.8.1 \
-+    crate://crates.io/bumpalo/3.20.3 \
-+    crate://crates.io/bytemuck/1.25.0 \
-+    crate://crates.io/byteorder-lite/0.1.0 \
-+    crate://crates.io/cairo-rs/0.22.0 \
-+    crate://crates.io/cairo-sys-rs/0.22.0 \
-+    crate://crates.io/cbc/0.1.2 \
-+    crate://crates.io/cc/1.2.64 \
-+    crate://crates.io/cfg-expr/0.20.8 \
-+    crate://crates.io/cfg-if/1.0.4 \
-+    crate://crates.io/chrono/0.4.45 \
-+    crate://crates.io/cipher/0.4.4 \
-+    crate://crates.io/color_quant/1.1.0 \
-+    crate://crates.io/colorchoice/1.0.5 \
-+    crate://crates.io/concurrent-queue/2.5.0 \
-+    crate://crates.io/core-foundation-sys/0.8.7 \
-+    crate://crates.io/cpufeatures/0.2.17 \
-+    crate://crates.io/crc32fast/1.5.0 \
-+    crate://crates.io/crossbeam-deque/0.8.6 \
-+    crate://crates.io/crossbeam-epoch/0.9.18 \
-+    crate://crates.io/crossbeam-utils/0.8.21 \
-+    crate://crates.io/crunchy/0.2.4 \
-+    crate://crates.io/crypto-common/0.1.7 \
-+    crate://crates.io/digest/0.10.7 \
-+    crate://crates.io/either/1.16.0 \
-+    crate://crates.io/endi/1.1.1 \
-+    crate://crates.io/enumflags2/0.7.12 \
-+    crate://crates.io/enumflags2_derive/0.7.12 \
-+    crate://crates.io/env_filter/1.0.1 \
-+    crate://crates.io/env_logger/0.11.10 \
-+    crate://crates.io/equator/0.4.2 \
-+    crate://crates.io/equator-macro/0.4.2 \
-+    crate://crates.io/equivalent/1.0.2 \
-+    crate://crates.io/errno/0.3.14 \
-+    crate://crates.io/event-listener/5.4.1 \
-+    crate://crates.io/event-listener-strategy/0.5.4 \
-+    crate://crates.io/exr/1.74.0 \
-+    crate://crates.io/fastrand/2.4.1 \
-+    crate://crates.io/fax/0.2.7 \
-+    crate://crates.io/fdeflate/0.3.7 \
-+    crate://crates.io/field-offset/0.3.6 \
-+    crate://crates.io/find-msvc-tools/0.1.9 \
-+    crate://crates.io/flate2/1.1.9 \
-+    crate://crates.io/foldhash/0.1.5 \
-+    crate://crates.io/foldhash/0.2.0 \
-+    crate://crates.io/formatx/0.2.4 \
-+    crate://crates.io/futures/0.3.32 \
-+    crate://crates.io/futures-channel/0.3.32 \
-+    crate://crates.io/futures-core/0.3.32 \
-+    crate://crates.io/futures-executor/0.3.32 \
-+    crate://crates.io/futures-io/0.3.32 \
-+    crate://crates.io/futures-lite/2.6.1 \
-+    crate://crates.io/futures-macro/0.3.32 \
-+    crate://crates.io/futures-sink/0.3.32 \
-+    crate://crates.io/futures-task/0.3.32 \
-+    crate://crates.io/futures-util/0.3.32 \
-+    crate://crates.io/gdk-pixbuf/0.22.0 \
-+    crate://crates.io/gdk-pixbuf-sys/0.22.0 \
-+    crate://crates.io/gdk4/0.11.2 \
-+    crate://crates.io/gdk4-sys/0.11.2 \
-+    crate://crates.io/generic-array/0.14.7 \
-+    crate://crates.io/getrandom/0.3.4 \
-+    crate://crates.io/getrandom/0.4.2 \
-+    crate://crates.io/gettext-rs/0.7.7 \
-+    crate://crates.io/gettext-sys/0.26.0 \
-+    crate://crates.io/gif/0.14.2 \
-+    crate://crates.io/gio/0.22.6 \
-+    crate://crates.io/gio-sys/0.22.0 \
-+    crate://crates.io/git-version/0.3.9 \
-+    crate://crates.io/git-version-macro/0.3.9 \
-+    crate://crates.io/glam/0.14.0 \
-+    crate://crates.io/glam/0.15.2 \
-+    crate://crates.io/glam/0.16.0 \
-+    crate://crates.io/glam/0.17.3 \
-+    crate://crates.io/glam/0.18.0 \
-+    crate://crates.io/glam/0.19.0 \
-+    crate://crates.io/glam/0.20.5 \
-+    crate://crates.io/glam/0.21.3 \
-+    crate://crates.io/glam/0.22.0 \
-+    crate://crates.io/glam/0.23.0 \
-+    crate://crates.io/glam/0.24.2 \
-+    crate://crates.io/glam/0.25.0 \
-+    crate://crates.io/glam/0.27.0 \
-+    crate://crates.io/glam/0.28.0 \
-+    crate://crates.io/glam/0.29.3 \
-+    crate://crates.io/glam/0.30.10 \
-+    crate://crates.io/glam/0.31.1 \
-+    crate://crates.io/glam/0.32.1 \
-+    crate://crates.io/glib/0.22.7 \
-+    crate://crates.io/glib-macros/0.22.6 \
-+    crate://crates.io/glib-sys/0.22.6 \
-+    crate://crates.io/gobject-sys/0.22.6 \
-+    crate://crates.io/graphene-rs/0.22.0 \
-+    crate://crates.io/graphene-sys/0.22.0 \
-+    crate://crates.io/gsk4/0.11.1 \
-+    crate://crates.io/gsk4-sys/0.11.1 \
-+    crate://crates.io/gtk4/0.11.3 \
-+    crate://crates.io/gtk4-macros/0.11.0 \
-+    crate://crates.io/gtk4-sys/0.11.3 \
-+    crate://crates.io/half/2.7.1 \
-+    crate://crates.io/hashbrown/0.15.5 \
-+    crate://crates.io/hashbrown/0.16.1 \
-+    crate://crates.io/hashbrown/0.17.1 \
-+    crate://crates.io/heck/0.5.0 \
-+    crate://crates.io/hermit-abi/0.5.2 \
-+    crate://crates.io/hex/0.4.3 \
-+    crate://crates.io/hkdf/0.12.4 \
-+    crate://crates.io/hmac/0.12.1 \
-+    crate://crates.io/iana-time-zone/0.1.65 \
-+    crate://crates.io/iana-time-zone-haiku/0.1.2 \
-+    crate://crates.io/id-arena/2.3.0 \
-+    crate://crates.io/image/0.25.10 \
-+    crate://crates.io/image-webp/0.2.4 \
-+    crate://crates.io/imageproc/0.26.2 \
-+    crate://crates.io/imgref/1.12.2 \
-+    crate://crates.io/indexmap/2.14.0 \
-+    crate://crates.io/ink-stroke-modeler-rs/0.1.0 \
-+    crate://crates.io/inout/0.1.4 \
-+    crate://crates.io/interpolate_name/0.2.4 \
-+    crate://crates.io/is_terminal_polyfill/1.70.2 \
-+    crate://crates.io/itertools/0.14.0 \
-+    crate://crates.io/itoa/1.0.18 \
-+    crate://crates.io/jiff/0.2.28 \
-+    crate://crates.io/jiff-static/0.2.28 \
-+    crate://crates.io/jobserver/0.1.34 \
-+    crate://crates.io/js-sys/0.3.102 \
-+    crate://crates.io/lazy_static/1.5.0 \
-+    crate://crates.io/leb128fmt/0.1.0 \
-+    crate://crates.io/lebe/0.5.3 \
-+    crate://crates.io/libadwaita/0.9.1 \
-+    crate://crates.io/libadwaita-sys/0.9.1 \
-+    crate://crates.io/libc/0.2.186 \
-+    crate://crates.io/libfuzzer-sys/0.4.13 \
-+    crate://crates.io/libm/0.2.16 \
-+    crate://crates.io/linux-raw-sys/0.12.1 \
-+    crate://crates.io/locale_config/0.3.0 \
-+    crate://crates.io/log/0.4.32 \
-+    crate://crates.io/loop9/0.1.5 \
-+    crate://crates.io/lru/0.16.4 \
-+    crate://crates.io/malloc_buf/0.0.6 \
-+    crate://crates.io/matrixmultiply/0.3.10 \
-+    crate://crates.io/maybe-rayon/0.1.1 \
-+    crate://crates.io/md-5/0.10.6 \
-+    crate://crates.io/memchr/2.8.2 \
-+    crate://crates.io/memoffset/0.9.1 \
-+    crate://crates.io/miniz_oxide/0.8.9 \
-+    crate://crates.io/moxcms/0.8.1 \
-+    crate://crates.io/nalgebra/0.34.2 \
-+    crate://crates.io/new_debug_unreachable/1.0.6 \
-+    crate://crates.io/no_std_io2/0.9.4 \
-+    crate://crates.io/nom/8.0.0 \
-+    crate://crates.io/noop_proc_macro/0.3.0 \
-+    crate://crates.io/num/0.4.3 \
-+    crate://crates.io/num-bigint/0.4.6 \
-+    crate://crates.io/num-bigint-dig/0.9.1 \
-+    crate://crates.io/num-complex/0.4.6 \
-+    crate://crates.io/num-derive/0.4.2 \
-+    crate://crates.io/num-integer/0.1.46 \
-+    crate://crates.io/num-iter/0.1.45 \
-+    crate://crates.io/num-rational/0.4.2 \
-+    crate://crates.io/num-traits/0.2.19 \
-+    crate://crates.io/objc/0.2.7 \
-+    crate://crates.io/objc-foundation/0.1.1 \
-+    crate://crates.io/objc_id/0.1.1 \
-+    crate://crates.io/once_cell/1.21.4 \
-+    crate://crates.io/once_cell_polyfill/1.70.2 \
-+    crate://crates.io/oo7/0.6.0 \
-+    crate://crates.io/ordered-stream/0.2.0 \
-+    crate://crates.io/owned_ttf_parser/0.25.1 \
-+    crate://crates.io/pango/0.22.6 \
-+    crate://crates.io/pango-sys/0.22.0 \
-+    crate://crates.io/parking/2.2.1 \
-+    crate://crates.io/paste/1.0.15 \
-+    crate://crates.io/pastey/0.1.1 \
-+    crate://crates.io/pbkdf2/0.12.2 \
-+    crate://crates.io/pin-project-lite/0.2.17 \
-+    crate://crates.io/piper/0.2.5 \
-+    crate://crates.io/pkg-config/0.3.33 \
-+    crate://crates.io/png/0.18.1 \
-+    crate://crates.io/polling/3.11.0 \
-+    crate://crates.io/portable-atomic/1.13.1 \
-+    crate://crates.io/portable-atomic-util/0.2.7 \
-+    crate://crates.io/ppv-lite86/0.2.21 \
-+    crate://crates.io/prettyplease/0.2.37 \
-+    crate://crates.io/primal-check/0.3.4 \
-+    crate://crates.io/proc-macro-crate/3.5.0 \
-+    crate://crates.io/proc-macro2/1.0.106 \
-+    crate://crates.io/profiling/1.0.18 \
-+    crate://crates.io/profiling-procmacros/1.0.18 \
-+    crate://crates.io/pxfm/0.1.29 \
-+    crate://crates.io/qoi/0.4.1 \
-+    crate://crates.io/quick-error/2.0.1 \
-+    crate://crates.io/quote/1.0.45 \
-+    crate://crates.io/r-efi/5.3.0 \
-+    crate://crates.io/r-efi/6.0.0 \
-+    crate://crates.io/rand/0.9.4 \
-+    crate://crates.io/rand_chacha/0.9.0 \
-+    crate://crates.io/rand_core/0.9.5 \
-+    crate://crates.io/rand_distr/0.5.1 \
-+    crate://crates.io/rav1e/0.8.1 \
-+    crate://crates.io/ravif/0.13.0 \
-+    crate://crates.io/rawpointer/0.2.1 \
-+    crate://crates.io/rayon/1.12.0 \
-+    crate://crates.io/rayon-core/1.13.0 \
-+    crate://crates.io/regex/1.12.4 \
-+    crate://crates.io/regex-automata/0.4.14 \
-+    crate://crates.io/regex-syntax/0.8.11 \
-+    crate://crates.io/rgb/0.8.53 \
-+    crate://crates.io/rustc_version/0.4.1 \
-+    crate://crates.io/rustdct/0.7.1 \
-+    crate://crates.io/rustfft/6.4.1 \
-+    crate://crates.io/rustix/1.1.4 \
-+    crate://crates.io/rustversion/1.0.22 \
-+    crate://crates.io/safe_arch/0.7.4 \
-+    crate://crates.io/semver/1.0.28 \
-+    crate://crates.io/serde/1.0.228 \
-+    crate://crates.io/serde_bytes/0.11.19 \
-+    crate://crates.io/serde_core/1.0.228 \
-+    crate://crates.io/serde_derive/1.0.228 \
-+    crate://crates.io/serde_json/1.0.150 \
-+    crate://crates.io/serde_repr/0.1.20 \
-+    crate://crates.io/serde_spanned/1.1.1 \
-+    crate://crates.io/sha2/0.10.9 \
-+    crate://crates.io/shell-words/1.1.1 \
-+    crate://crates.io/shlex/2.0.1 \
-+    crate://crates.io/signal-hook-registry/1.4.8 \
-+    crate://crates.io/simba/0.9.1 \
-+    crate://crates.io/simd-adler32/0.3.9 \
-+    crate://crates.io/simd_helpers/0.1.0 \
-+    crate://crates.io/slab/0.4.12 \
-+    crate://crates.io/smallvec/1.15.2 \
-+    crate://crates.io/stable_deref_trait/1.2.1 \
-+    crate://crates.io/strength_reduce/0.2.4 \
-+    crate://crates.io/subtle/2.6.1 \
-+    crate://crates.io/syn/2.0.117 \
-+    crate://crates.io/system-deps/7.0.8 \
-+    crate://crates.io/target-lexicon/0.13.5 \
-+    crate://crates.io/temp-dir/0.1.16 \
-+    crate://crates.io/tempfile/3.27.0 \
-+    crate://crates.io/thiserror/2.0.18 \
-+    crate://crates.io/thiserror-impl/2.0.18 \
-+    crate://crates.io/tiff/0.11.3 \
-+    crate://crates.io/toml/1.1.2+spec-1.1.0 \
-+    crate://crates.io/toml_datetime/1.1.1+spec-1.1.0 \
-+    crate://crates.io/toml_edit/0.25.12+spec-1.1.0 \
-+    crate://crates.io/toml_parser/1.1.2+spec-1.1.0 \
-+    crate://crates.io/toml_writer/1.1.1+spec-1.1.0 \
-+    crate://crates.io/tracing/0.1.44 \
-+    crate://crates.io/tracing-attributes/0.1.31 \
-+    crate://crates.io/tracing-core/0.1.36 \
-+    crate://crates.io/transpose/0.2.3 \
-+    crate://crates.io/ttf-parser/0.25.1 \
-+    crate://crates.io/typenum/1.20.1 \
-+    crate://crates.io/uds_windows/1.2.1 \
-+    crate://crates.io/unicode-ident/1.0.24 \
-+    crate://crates.io/unicode-xid/0.2.6 \
-+    crate://crates.io/utf8parse/0.2.2 \
-+    crate://crates.io/uuid/1.23.3 \
-+    crate://crates.io/v_frame/0.3.9 \
-+    crate://crates.io/version-compare/0.2.1 \
-+    crate://crates.io/version_check/0.9.5 \
-+    crate://crates.io/wasip2/1.0.4+wasi-0.2.12 \
-+    crate://crates.io/wasip3/0.4.0+wasi-0.3.0-rc-2026-01-06 \
-+    crate://crates.io/wasm-bindgen/0.2.125 \
-+    crate://crates.io/wasm-bindgen-macro/0.2.125 \
-+    crate://crates.io/wasm-bindgen-macro-support/0.2.125 \
-+    crate://crates.io/wasm-bindgen-shared/0.2.125 \
-+    crate://crates.io/wasm-encoder/0.244.0 \
-+    crate://crates.io/wasm-metadata/0.244.0 \
-+    crate://crates.io/wasmparser/0.244.0 \
-+    crate://crates.io/weezl/0.1.12 \
-+    crate://crates.io/wide/0.7.33 \
-+    crate://crates.io/winapi/0.3.9 \
-+    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
-+    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
-+    crate://crates.io/windows-core/0.62.2 \
-+    crate://crates.io/windows-implement/0.60.2 \
-+    crate://crates.io/windows-interface/0.59.3 \
-+    crate://crates.io/windows-link/0.2.1 \
-+    crate://crates.io/windows-result/0.4.1 \
-+    crate://crates.io/windows-strings/0.5.1 \
-+    crate://crates.io/windows-sys/0.61.2 \
-+    crate://crates.io/winnow/1.0.3 \
-+    crate://crates.io/wit-bindgen/0.51.0 \
-+    crate://crates.io/wit-bindgen/0.57.1 \
-+    crate://crates.io/wit-bindgen-core/0.51.0 \
-+    crate://crates.io/wit-bindgen-rust/0.51.0 \
-+    crate://crates.io/wit-bindgen-rust-macro/0.51.0 \
-+    crate://crates.io/wit-component/0.244.0 \
-+    crate://crates.io/wit-parser/0.244.0 \
-+    crate://crates.io/y4m/0.8.0 \
-+    crate://crates.io/zbus/5.16.0 \
-+    crate://crates.io/zbus_macros/5.16.0 \
-+    crate://crates.io/zbus_names/4.3.2 \
-+    crate://crates.io/zerocopy/0.8.52 \
-+    crate://crates.io/zerocopy-derive/0.8.52 \
-+    crate://crates.io/zeroize/1.9.0 \
-+    crate://crates.io/zeroize_derive/1.5.0 \
-+    crate://crates.io/zmij/1.0.21 \
-+    crate://crates.io/zune-core/0.5.1 \
-+    crate://crates.io/zune-inflate/0.2.54 \
-+    crate://crates.io/zune-jpeg/0.5.15 \
-+    crate://crates.io/zvariant/5.12.0 \
-+    crate://crates.io/zvariant_derive/5.12.0 \
-+    crate://crates.io/zvariant_utils/3.4.0 \
++# This file has been generated by go-mod-update-modules.bbclass
++#
++# Do not modify it by hand, as the contents will be replaced when
++# running the update-modules task.
++
++SRC_URI +=3D "\
++    gomod://bazil.org/fuse;version=3Dv0.0.0-20230120002735-62a210ff1fd5;=
+sha256sum=3D19365a1af7ccf66edf0a454e609133c52e71391c1756e381f988b716afe66=
+7cd \
++    gomod://cloud.google.com/go/auth;version=3Dv0.20.0;sha256sum=3D06371=
+584193bbb88a8f2c2931d85efaf45666cc52643be5b8aada6b053672f3a \
++    gomod://cloud.google.com/go/auth/oauth2adapt;version=3Dv0.2.8;sha256=
+sum=3D4cd64264bafc4dd05f645452d6e1485adf92309130bd82b4c595db10cd534963 \
++    gomod://cloud.google.com/go/compute/metadata;version=3Dv0.9.0;sha256=
+sum=3Df97e35d1c96239b8574054a77e312c95d2c82a89c21daf46ffeaea6d5fc59eca \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/azcore;version=3Dv1.22=
+.0;sha256sum=3Ddf94ae5d1b516886927962ee029be26832eb8d9ca6a81f14c568560c88=
+6387e0 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/azidentity;version=3Dv=
+1.14.0;sha256sum=3D044868f3512461266db8282dde160e28cb465daf58b040349e13cc=
+45f651a5d9 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/internal;version=3Dv1.=
+12.0;sha256sum=3D27800de3838500d4f3a0aaacea147fb49e0da3a7a6079a595c3e9d42=
+df116ecf \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/storage/azblob;version=
+=3Dv1.8.0;sha256sum=3Dff9c0d8c7a937cfb47bca75d86cf61642537886fb0352d1f119=
+d478257cd5921 \
++    gomod://github.com/Azure/azure-sdk-for-go/sdk/storage/azfile;version=
+=3Dv1.7.0;sha256sum=3Df3d0a89e9b4c03104d37b77626377084e250cb67981bd88e13e=
+3c4d6e8be8530 \
++    gomod://github.com/Azure/go-ntlmssp;version=3Dv0.1.1;sha256sum=3D3b8=
+0d75f2e559d6568163e6da8119cb7118fc60288b0f62c80829ea855e1b4e5 \
++    gomod://github.com/AzureAD/microsoft-authentication-library-for-go;v=
+ersion=3Dv1.7.2;sha256sum=3Ddcd0ef2964e09743ceb7b6cff837253caab8f28ba92a4=
+0bfc6948eea4f667913 \
++    gomod://github.com/FilenCloudDienste/filen-sdk-go;version=3Dv0.0.39;=
+sha256sum=3Ddcc9ed019edc82f111f212477de7077751da7851468e119d8af988bb1fc9f=
+8e8 \
++    gomod://github.com/Files-com/files-sdk-go/v3;version=3Dv3.3.194;sha2=
+56sum=3Dba4078f3eb828d13e93c5094e16bd0c44bce9a5a25ecd71b7c37218038b299f6 =
+\
++    gomod://github.com/IBM/go-sdk-core/v5;version=3Dv5.23.1;sha256sum=3D=
+a6cb35cfdc492fb2032e3598c8ccd2b81ac90dc8ed8538caabf7f44d31b94839 \
++    gomod://github.com/Max-Sum/base32768;version=3Dv0.0.0-20230304063302=
+-18e6ce5945fd;sha256sum=3D884da69f365e677c1f1aa18e5404ae79324428c8063f61e=
+9b5f01f29274fb997 \
++    gomod://github.com/Microsoft/go-winio;version=3Dv0.5.2;mod=3D1;sha25=
+6sum=3D19b8fbe9d4419278bb1e9d0cf2fd5aec879e42829c53ba3efd5656b8d1b35ae7 \
++    gomod://github.com/Microsoft/go-winio;version=3Dv0.6.2;mod=3D1;sha25=
+6sum=3D47fb19990ebb31954f3aa784ff45f4c93a9e86ac3e1297d7ca87c614aeffe2cb \
++    gomod://github.com/ProtonMail/bcrypt;version=3Dv0.0.0-20210511135022=
+-227b4adcab57;mod=3D1;sha256sum=3Dba46c32eb08e270c6001d1b2e2f0aed2c0fe853=
+cc9545bc653fce94ae906b584 \
++    gomod://github.com/ProtonMail/bcrypt;version=3Dv0.0.0-20211005172633=
+-e235017c1baf;sha256sum=3D2d641d9fcf6c238813e254df6bb93724dc46543516df407=
+1efaf22f68ba337b0 \
++    gomod://github.com/ProtonMail/gluon;version=3Dv0.17.1-0.202307241340=
+00-308be39be96e;sha256sum=3D3fa88ebf957192f2061c9bdcd2f8e313311e131246d23=
+dedc2a596682cbb4645 \
++    gomod://github.com/ProtonMail/go-crypto;version=3Dv0.0.0-20230321155=
+629-9a39f2531310;mod=3D1;sha256sum=3D739bad42da3a041b6eadcdda6546affd42b3=
+5a87a23c8cd97f96594f3eb120db \
++    gomod://github.com/ProtonMail/go-crypto;version=3Dv1.4.1;sha256sum=3D=
+70bbdc0f9e926738193aed968f7901efab41493752277c4c94c9b751aa55c42a \
++    gomod://github.com/ProtonMail/go-srp;version=3Dv0.0.7;sha256sum=3Daa=
+ac72038a9ee29162137acf24e1c17ef0c2601d5fcaefd434c3da57be4471b8 \
++    gomod://github.com/ProtonMail/gopenpgp/v3;version=3Dv3.4.1;sha256sum=
+=3Dfbb45e4963cec3542c90f3a17f3611daec672f2d623a7e5de06469a93b48d7d5 \
++    gomod://github.com/PuerkitoBio/goquery;version=3Dv1.12.0;sha256sum=3D=
+a27ad64d6aa446c8943fb7097fb2bb5e22c806343016de82b0e99bfe85930b28 \
++    gomod://github.com/STARRY-S/zip;version=3Dv0.2.3;sha256sum=3D7b7af5c=
+34cdc6d4b55be309ef0c7bfa5147029f8484d799c092be3141463a76b \
++    gomod://github.com/a1ex3/zstd-seekable-format-go/pkg;version=3Dv0.10=
+.0;sha256sum=3Df848512376f410f227ff39e9368c6981a9fb23f6b707f40973f38b5185=
+c5a2c4 \
++    gomod://github.com/a8m/tree;version=3Dv0.0.0-20240104212747-2c8764a5=
+f17e;sha256sum=3Df80124210d32debcfbc545727eee84cad848c24df45ff3aed4df6981=
+d5b3cd33 \
++    gomod://github.com/aalpar/deheap;version=3Dv1.1.2;sha256sum=3D955772=
+1af9303b535cc4255a1f92f5237ff17d069c9110be8bfd177bf363e8b8 \
++    gomod://github.com/abbot/go-http-auth;version=3Dv0.4.0;sha256sum=3D8=
+204bca24734f55f179dd1c0b820ae5be83151268693a147086f33cd2d4d473c \
++    gomod://github.com/adrg/xdg;version=3Dv0.5.3;sha256sum=3D52847b48afc=
+d46cfd312bc857a8df08643cfffc4103d59a40c3ce648e0196c13 \
++    gomod://github.com/akavel/rsrc;version=3Dv0.10.2;mod=3D1;sha256sum=3D=
+18b7d6652beec9ed8b5a3e7d27a8765e5c3718fc819ee73b9e3b14effc15fdba \
++    gomod://github.com/anacrolix/dms;version=3Dv1.7.2;sha256sum=3Dbc2ecc=
+4f895eb32e194d3b30bb885265dc1bceb34f5087368404c2cc566dfbc4 \
++    gomod://github.com/anacrolix/generics;version=3Dv0.2.0;sha256sum=3D4=
+c72f083082130d4a1622a47516e6a2d79d19379aadcbe510224955ba8a15219 \
++    gomod://github.com/anacrolix/log;version=3Dv0.17.0;sha256sum=3De9d00=
+85bf19492bf2d973e1688b1f5d8c3498cef17c601d29db7fa92541046e0 \
++    gomod://github.com/anchore/go-lzo;version=3Dv0.1.1;sha256sum=3D75cba=
+b209e61945e91335de0a8ef98ba91f5ac27c47fa4fb385e5c5f9747848f \
++    gomod://github.com/andybalholm/brotli;version=3Dv1.2.2;sha256sum=3D9=
+443ca8c077ea0395906f9f25fd19c23a2fa61636ee43595aa811d7326d34390 \
++    gomod://github.com/andybalholm/cascadia;version=3Dv1.3.4;sha256sum=3D=
+b9c323146f294f32009a95edd68d3513911858aa18ddde903ccff2394abe90a4 \
++    gomod://github.com/apache/arrow-go/v18;version=3Dv18.7.0;sha256sum=3D=
+3c0ac1b2e30e5fcfce25116880f30cbfd6d70437f593ba209e29211f9d40a542 \
++    gomod://github.com/appscode/go-querystring;version=3Dv0.0.0-20170504=
+095604-0126cfb3f1dc;sha256sum=3D2b5f4c89fad59f1c218a4953b1507b572438fef6d=
+907d4da667882d44e941215 \
++    gomod://github.com/atotto/clipboard;version=3Dv0.1.4;sha256sum=3Dd67=
+b2c36c662751309fd2ec351df3651584bea840bd27be9a90702c3a238b43f \
++    gomod://github.com/aws/aws-sdk-go-v2;version=3Dv1.43.7;sha256sum=3D8=
+d2f7e68f25252204268db2fa4fc8df2d93a98dbb3d52236fd15fc8c97d7538b \
++    gomod://github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream;versio=
+n=3Dv1.7.18;sha256sum=3Ddf6b679e2d32e966cdd363be28264f226e25e1ad35030e793=
+add3816c11cc517 \
++    gomod://github.com/aws/aws-sdk-go-v2/config;version=3Dv1.32.30;sha25=
+6sum=3D51d36687bcd16c9578543d9b34cfa739189050878d394679b8658be20aa693bb \
++    gomod://github.com/aws/aws-sdk-go-v2/credentials;version=3Dv1.19.29;=
+sha256sum=3D78d6f8c2a19a544ead82afe3e531e61693e7736a075d6c60eda053b5b0a58=
+408 \
++    gomod://github.com/aws/aws-sdk-go-v2/feature/ec2/imds;version=3Dv1.1=
+8.30;sha256sum=3Dcf1fa965930afc3ab87e044a9e76b0a29862a50c9469187457fb10eb=
+f804597c \
++    gomod://github.com/aws/aws-sdk-go-v2/feature/s3/manager;version=3Dv1=
+.22.34;sha256sum=3Dba9958fc98e3dfa8ed0d7225ce75f78e93244cc3e7309b7b2f7d52=
+a89a8d763a \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/configsources;version=3D=
+v1.4.38;sha256sum=3Dfd438497aeb6d2391eaf6ebe315913f0ab5f7acab905a005f820c=
+ecf8b479bc6 \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/endpoints/v2;version=3D=
+v2.7.38;sha256sum=3D13e1f7fdfc742b42aff702ed59a347a795e30d55002f78d4cd75a=
+8c8149defe8 \
++    gomod://github.com/aws/aws-sdk-go-v2/internal/v4a;version=3Dv1.4.39;=
+sha256sum=3Da2c9e46719e9283b448f99f1cee71c54140d13271da51263d485cdaa92e2e=
+11a \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/accept-encodin=
+g;version=3Dv1.13.17;sha256sum=3D5da6d06e605d71ee3202d46bf2b11c20512210a9=
+c641cb34541690995dcbb6d9 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/checksum;versi=
+on=3Dv1.9.31;sha256sum=3D4e65275e95fd6a167f3603bc16f19309cf7916ddc715332e=
+996375f4646e66cb \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/presigned-url;=
+version=3Dv1.13.38;sha256sum=3D9ae38588863d5ba8797d2023091970a8e0cb89f4f0=
+9160c311d0584fcf8c5cf0 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/internal/s3shared;versi=
+on=3Dv1.19.39;sha256sum=3D134b908a404a1bba4c03d1539bbf083941e1141b3c9dceb=
+2ed847321f173a434 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/s3;version=3Dv1.107.3;s=
+ha256sum=3Dcfdb98d4e7d9384b709e2975d9411cc427cb5ef3894123cfa572332681924d=
+8e \
++    gomod://github.com/aws/aws-sdk-go-v2/service/signin;version=3Dv1.4.1=
+;sha256sum=3D150e3d58f7048813adb66afa3c2ffe5751a0033eaed76cd4e4215ed6e42b=
+e00a \
++    gomod://github.com/aws/aws-sdk-go-v2/service/sso;version=3Dv1.32.1;s=
+ha256sum=3D77951e65c854f249ce5c36355b97ed4c9feb5f9b40c3b56b2cc5e8a42ee5ee=
+22 \
++    gomod://github.com/aws/aws-sdk-go-v2/service/ssooidc;version=3Dv1.37=
+.1;sha256sum=3Dad084079a7752992adbac8f1243757c08dba609b5c941a593048f999f1=
+ffd60c \
++    gomod://github.com/aws/aws-sdk-go-v2/service/sts;version=3Dv1.44.1;s=
+ha256sum=3D0a254a1fc91c4acffa69833dc9be50bc2d999c6db3b415172f619aeb1d22c1=
+15 \
++    gomod://github.com/aws/smithy-go;version=3Dv1.27.8;sha256sum=3D831b0=
+2e1447db3c2d47cefb15b184bd522f26db41cfd28e2635da87e030fdf69 \
++    gomod://github.com/bahlo/generic-list-go;version=3Dv0.2.0;sha256sum=3D=
+e773fa812176a62f1d27d7a1e7589683f5e5af2d36628fa6a5a522e59474c504 \
++    gomod://github.com/beorn7/perks;version=3Dv1.0.1;sha256sum=3D25bd9e2=
+d94aca770e6dbc1f53725f84f6af4432f631d35dd2c46f96ef0512f1a \
++    gomod://github.com/bodgit/plumbing;version=3Dv1.3.0;sha256sum=3D15c8=
+0dc98fd6b972798a6c24a002f6fb00b28abdc9928185206a5abc5e56a089 \
++    gomod://github.com/bodgit/sevenzip;version=3Dv1.6.5;sha256sum=3D9dba=
+d89992338ff0c408a351e9135221715d309acf4234f52fe69d23da7ace7c \
++    gomod://github.com/bodgit/windows;version=3Dv1.0.1;sha256sum=3Dcbe5f=
+1c687372fd463b19c05b2cfdd3cdcaad86baea38f83ebe580b26f19e956 \
++    gomod://github.com/boombuler/barcode;version=3Dv1.0.1-0.201902190625=
+09-6c824513bacc;mod=3D1;sha256sum=3Dc2405ce221f1d08638f38282a9bc43a079adc=
+b1b9515fe4e08ab494d0ef7fca3 \
++    gomod://github.com/boombuler/barcode;version=3Dv1.1.0;sha256sum=3Db8=
+e43377b2810f32ba102ccde887d32d2e05471a68122818173e85132debae76 \
++    gomod://github.com/bradenaw/juniper;version=3Dv0.15.3;sha256sum=3D09=
+769aeaec2ec25beea07719585352dcf66b665eb3655033b7ea30befafb775f \
++    gomod://github.com/buengese/sgzip;version=3Dv0.1.1;sha256sum=3D8df7f=
+b596efd83a7d87d34946bbc37fcd11d1fb11dbe4c5ec17a00ba546160d7 \
++    gomod://github.com/buger/jsonparser;version=3Dv1.2.0;sha256sum=3De14=
+fdde5ed2da541b69fd235075e1436a8188e78e52445840c4268794f359093 \
++    gomod://github.com/bwesterb/go-ristretto;version=3Dv1.2.0;mod=3D1;sh=
+a256sum=3D368aca1757be8745cce3b90deb401e7be5740963ca5359c4a954cc03502d8f0=
+3 \
++    gomod://github.com/calebcase/tmpfile;version=3Dv1.0.3;sha256sum=3D44=
+bb89c6e03a2cdbb36e7616392ebb96daf0d8bc0d3d91ce3709e62e4636d5e5 \
++    gomod://github.com/cespare/xxhash/v2;version=3Dv2.3.0;sha256sum=3D14=
+5a26cdc7c49db566017b807c4989ee7f7ddeb569423e9cb99f995fac3621d3 \
++    gomod://github.com/chilts/sid;version=3Dv0.0.0-20190607042430-660e94=
+789ec9;sha256sum=3D1a317f6b4c4fb11e90f5661c34703ba8b8a4ba248eaf3b4b6fe8a3=
+c11226b9b6 \
++    gomod://github.com/clipperhouse/uax29/v2;version=3Dv2.7.0;sha256sum=3D=
+67b1278f1ffb4e4d783a390e48fe7396864650138e785d4b4bfca5914333f761 \
++    gomod://github.com/cloudflare/circl;version=3Dv1.1.0;mod=3D1;sha256s=
+um=3D1db9d0f112f9ae8a72a06841f4f191d3545c144c6e05ed3cd816018a5882281a \
++    gomod://github.com/cloudflare/circl;version=3Dv1.6.4;sha256sum=3Dbc4=
+4d9316fad1a8657714cbf91ed2103bcc47934765e8ee471e174e8722e9242 \
++    gomod://github.com/cloudinary/cloudinary-go/v2;version=3Dv2.16.0;sha=
+256sum=3D184f3b799461381544c4fdf815262b21e17e56a4ec3110cf8659930eb86557f5=
+ \
++    gomod://github.com/cloudsoda/go-smb2;version=3Dv0.0.0-20260701064823=
+-d8c5600d73b8;sha256sum=3D0fd8b798fa487f674b7795ac2baf4c9742d99ef3edf0967=
+d584da98674f15224 \
++    gomod://github.com/cloudsoda/sddl;version=3Dv0.0.0-20250224235906-92=
+6454e91efc;sha256sum=3D4d8eb7d3d840c63755c01ed2e1500df655503b466b64102084=
+79debf4df98c16 \
++    gomod://github.com/colinmarc/hdfs/v2;version=3Dv2.4.0;sha256sum=3Db9=
+96584b71a7e8f337bb528cce3a28740687251d0dde7624b5487c447a7439f9 \
++    gomod://github.com/coreos/go-semver;version=3Dv0.3.1;sha256sum=3De72=
+820542b5913afe0a52e956e0b3834e9fbb080641fed183117f862fab74e8a \
++    gomod://github.com/coreos/go-systemd/v22;version=3Dv22.6.0;sha256sum=
+=3D7759d251cb9c2f020d8b7b5fa075653cb11cad4861e3e194bf3484267bbabc2f \
++    gomod://github.com/cpuguy83/go-md2man/v2;version=3Dv2.0.6;mod=3D1;sh=
+a256sum=3Dbb81a9e2d14d9a586f0591853bdaad230d8cdf0d8d6ffa71dddae249ad573cc=
+9 \
++    gomod://github.com/cpuguy83/go-md2man/v2;version=3Dv2.0.7;sha256sum=3D=
+9ad5f2cbc644c0bb648a9b182d6b70f92e7ac4dfab5cf0ef746bbeef944fda59 \
++    gomod://github.com/creasty/defaults;version=3Dv1.8.0;sha256sum=3Dd99=
+84bcd4b7326a6066f58bc94b46fe8657e50e1ba0a3ef6eb592b0ff96e6712 \
++    gomod://github.com/cronokirby/saferith;version=3Dv0.33.0;mod=3D1;sha=
+256sum=3D00534f8bf79ef5620c920e8d2cd35ef5cdb07b3a0ca70be0f616076f9d1b51d4=
+ \
++    gomod://github.com/cronokirby/saferith;version=3Dv0.33.1-0.202502261=
+74546-1f11f94ce488;sha256sum=3D63f9e49ce347804cc181503a1b7e9b5a3a485c9890=
+7af3b94ef3dcf81900ee5a \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.0;mod=3D1;sha256su=
+m=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.1;mod=3D1;sha256su=
+m=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
++    gomod://github.com/davecgh/go-spew;version=3Dv1.1.2-0.20180830191138=
+-d8f796af33cc;sha256sum=3Db4d0923b169b194f0016ec46f3df1ab0c68e27999743e43=
+fe2de59ecb2484128 \
++    gomod://github.com/diskfs/go-diskfs;version=3Dv1.9.4;sha256sum=3D4f8=
+acbe8da9b3fb057bcaff97ea2e2906a4c5e588d5c112420be6ced0b106934 \
++    gomod://github.com/dop251/scsu;version=3Dv0.0.0-20220106150536-84ac8=
+8021d00;mod=3D1;sha256sum=3De277ed1de33f7d9ede927776393645279a4ee03396603=
+a6f792b4bd0babfbac9 \
++    gomod://github.com/dromara/dongle;version=3Dv1.0.1;sha256sum=3Dc0070=
+691c99d3b163bf44c1e1dd8dd0564099515be1919d7e7af71a59c3d939c \
++    gomod://github.com/dropbox/dropbox-sdk-go-unofficial/v6;version=3Dv6=
+.4.0;sha256sum=3D9a574ccb65b9ad177baa0cd33fd149ec2c1211e15709287531556cbf=
+3033fb81 \
++    gomod://github.com/dsnet/compress;version=3Dv0.0.2-0.20230904184137-=
+39efe44ab707;sha256sum=3Dbc6111029c5b2a663b69e6d622d1082ccaf114b31162ea04=
+6681c2e4b689ee43 \
++    gomod://github.com/dsnet/golib;version=3Dv0.0.0-20171103203638-1ea16=
+6775780;mod=3D1;sha256sum=3D3b5266f69965a715f27de5d5e34da0ff809eb54a2ae6d=
+7f5453d064d5a3dd5df \
++    gomod://github.com/dustin/go-humanize;version=3Dv1.0.1;mod=3D1;sha25=
+6sum=3D4325999d0a6841031258a2561c22879d9fbdf77abc6b32a17b1cb6edf0810fb2 \
++    gomod://github.com/ebitengine/purego;version=3Dv0.10.1;mod=3D1;sha25=
+6sum=3D4920ecc5239d79446d9b61542c3749c7389d2178d3a142e557e0379051866514 \
++    gomod://github.com/emersion/go-message;version=3Dv0.18.2;sha256sum=3D=
+7bccb8ee87c818306ca54a4e868e7066985a51c523bf059a8aee142978cb1384 \
++    gomod://github.com/emersion/go-vcard;version=3Dv0.0.0-20260618161152=
+-d854b7e0e2d3;sha256sum=3D1c7f72fa119795c21f68b263dc2b887acc599ee4f510489=
+e80ecdcdff1bf9175 \
++    gomod://github.com/emmansun/gmsm;version=3Dv0.15.5;mod=3D1;sha256sum=
+=3Da57191060d493eb463ea7e1b413ce439978d3c9f9d61fb6237a2e57511048c12 \
++    gomod://github.com/felixge/httpsnoop;version=3Dv1.1.0;sha256sum=3De3=
+405a361843f8e69f64e41b523512925cd50fd5ea108b7912534922c31b00e7 \
++    gomod://github.com/flynn/noise;version=3Dv1.1.0;sha256sum=3D4925ada2=
+4731484e19b32ca5b06c46d1e102a0b7a8eaab750b11ef88ad8e661e \
++    gomod://github.com/gabriel-vasile/mimetype;version=3Dv1.4.13;sha256s=
+um=3D03b46aaa7bd4403d65dc23fb9d7e9b61214bb429491c864ee638490a42d55013 \
++    gomod://github.com/gdamore/encoding;version=3Dv1.0.1;sha256sum=3De58=
+4303c743306ae55be21a5703900d0628aa2ef840ce49d5f0bbf7c51379e33 \
++    gomod://github.com/gdamore/tcell/v2;version=3Dv2.9.0;sha256sum=3De36=
+d0cb01474c5456b4fd28dc6b0c1dc115d1788ed174885afd4bf5fa2b9af42 \
++    gomod://github.com/geoffgarside/ber;version=3Dv1.2.0;sha256sum=3Dcb2=
+9a3bef361e331d34f6aa5045d52d2fd0e50881814130c2e1985288131a4a7 \
++    gomod://github.com/go-chi/chi/v5;version=3Dv5.3.1;sha256sum=3Dea5f74=
+7c50955a7011224da8347e802b65d05800af39104670eaa950011b794f \
++    gomod://github.com/go-darwin/apfs;version=3Dv0.0.0-20211011131704-f8=
+4b94dbf348;mod=3D1;sha256sum=3Dc2ce3c59e1bfeb7fda32827ee8a776e9ba74b7db92=
+d97e7b11d345a26540f982 \
++    gomod://github.com/go-git/go-billy/v5;version=3Dv5.9.0;sha256sum=3D3=
+6f9638d2f60c2ef960881b5908cb17b215da8fff8a7c267b4b1200a3561fc60 \
++    gomod://github.com/go-logr/logr;version=3Dv1.2.2;mod=3D1;sha256sum=3D=
+519b1d6da5eeef675b4a1857d628f05f110a2b8cb3c423b715fea80d0975a518 \
++    gomod://github.com/go-logr/logr;version=3Dv1.4.3;sha256sum=3D523d7a3=
+587fe73f61ef41c8bc627f7d7f38de8104d46278154b307e60770ad70 \
++    gomod://github.com/go-logr/stdr;version=3Dv1.2.2;sha256sum=3D9dd6893=
+bf700198485ae699640b49bc1efbc6c73b37cb5792a0476e1fd8f7fef \
++    gomod://github.com/go-ole/go-ole;version=3Dv1.2.6;mod=3D1;sha256sum=3D=
+de7da59858d6121956da002ded711242cc14ecf597e932a8625246418fd3bbaa \
++    gomod://github.com/go-ole/go-ole;version=3Dv1.3.0;mod=3D1;sha256sum=3D=
+fcf0840f2ff50fbc3b5a54b9d4cb240c64d47003ab03e420aeff0057015a8953 \
++    gomod://github.com/go-openapi/errors;version=3Dv0.22.8;sha256sum=3D2=
+9105371e583abec5440063d20b77c67f67bf6b017c959c88934a5da6e65ae92 \
++    gomod://github.com/go-openapi/strfmt;version=3Dv0.27.0;sha256sum=3D6=
+e830c668d22047156cd9d1e991e9e2603a55fd2fbd7331ee2e4691e9646797e \
++    gomod://github.com/go-playground/locales;version=3Dv0.14.1;sha256sum=
+=3Df33b53f2eef290d8b43b1011285f1f9cfcb1295c690defcb452598773baace7b \
++    gomod://github.com/go-playground/universal-translator;version=3Dv0.1=
+8.1;sha256sum=3D77fc966f2d045c208ddeaa8343924f83688841b6f4c2ae005dc9ea555=
+0c7d171 \
++    gomod://github.com/go-playground/validator/v10;version=3Dv10.30.3;sh=
+a256sum=3D94b5f35c278e7f96b5a2ec2dfdbfafc554ac512e035af92b8663590cc7e8b05=
+2 \
++    gomod://github.com/go-resty/resty/v2;version=3Dv2.17.2;sha256sum=3D4=
+24588a1577747a23273e5ef9f75fdb9178b8d2a42fa37f2e0ed90bb2b957cd8 \
++    gomod://github.com/go-viper/mapstructure/v2;version=3Dv2.5.0;sha256s=
+um=3D326f8e00f648af4ae8e6e18c606325e4206a92d6ed42f486dc2f4da8e1897547 \
++    gomod://github.com/goccy/go-json;version=3Dv0.10.6;sha256sum=3D2296e=
+77cc44facf3596ddd7a5866578a8450b59ad1583cbb70bfbfa77fe0dadc \
++    gomod://github.com/gofrs/flock;version=3Dv0.13.0;sha256sum=3D171560e=
+83110e199cc9f4f8959d442c563c8ab6b26c100dd67b7a2fe265339ce \
++    gomod://github.com/gogo/protobuf;version=3Dv1.3.2;sha256sum=3Ddd2b73=
+f163c8183941626360196c8f844addd95423d341a0412e1b22d0104ff7 \
++    gomod://github.com/golang-jwt/jwt/v4;version=3Dv4.5.2;sha256sum=3Dec=
+5ee69a31fd478fc197fddce7c06dad1abe7543095a55c4ee6546ae79d99a0f \
++    gomod://github.com/golang-jwt/jwt/v5;version=3Dv5.3.1;sha256sum=3D5c=
+9a74494e2bc746cee56558b5473252af5767f7ea4044caa9ea0fa2a056fec7 \
++    gomod://github.com/google/btree;version=3Dv1.1.3;sha256sum=3D11b736b=
+c8252b52fecdf346d3707ccf3a2b6d458ba21b4f843616fc12eeb30b2 \
++    gomod://github.com/google/flatbuffers;version=3Dv25.12.19+incompatib=
+le;sha256sum=3De029cc5ea5f0661de945a92a8eeaa8372e6af5d0aac4c87e9bbe883ad5=
+7afd96 \
++    gomod://github.com/google/go-cmp;version=3Dv0.5.5;mod=3D1;sha256sum=3D=
+4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
++    gomod://github.com/google/s2a-go;version=3Dv0.1.9;sha256sum=3Dbf8f4b=
+159d3fc201477822ed2514e4f05f58c764b78ffed73ec0accce5fb7f07 \
++    gomod://github.com/google/uuid;version=3Dv1.6.0;sha256sum=3Dd0f02f37=
+7217f42702e259684e06441edbf5140dddcc34ba9bea56038b38a6ed \
++    gomod://github.com/googleapis/enterprise-certificate-proxy;version=3D=
+v0.3.18;sha256sum=3De77fe2aae601a0efca13a72cc746dbcc5d2be1fede0f73d424f07=
+0979d41b643 \
++    gomod://github.com/googleapis/gax-go/v2;version=3Dv2.22.0;sha256sum=3D=
+800a18188bf1222e7ce7b4a31c22ab807136e6d194507aa8cd822ba9dff00696 \
++    gomod://github.com/gorilla/schema;version=3Dv1.4.1;sha256sum=3D63885=
+f95be210851d623d464698326a202274e191f53f7b7905a150e9cf04494 \
++    gomod://github.com/gorilla/securecookie;version=3Dv1.1.1;mod=3D1;sha=
+256sum=3Dab87561203a98c2835787e44695890be78b7b961c04bad7241c83c0cc6b1d7a6=
+ \
++    gomod://github.com/gorilla/sessions;version=3Dv1.2.1;mod=3D1;sha256s=
+um=3D6772f11c4667facb2f2a3b95b48072cab336f996a5735308d3d286c94f24f3ae \
++    gomod://github.com/hanwen/go-fuse/v2;version=3Dv2.10.1;sha256sum=3D6=
+945a37ef334da27a747ddd6aacda04423d462d662e5035e367adec7ca8f4642 \
++    gomod://github.com/hashicorp/errwrap;version=3Dv1.0.0;sha256sum=3Dcc=
+df4c90f894d8a5fde4e79d5828c5d27a13e9f7ce3006dd72ce76e6e17cdeb2 \
++    gomod://github.com/hashicorp/go-cleanhttp;version=3Dv0.5.2;sha256sum=
+=3De9f3dcfcb33172ba499b4f8e888169252d7f1e072082182124a6e2053523f7df \
++    gomod://github.com/hashicorp/go-multierror;version=3Dv1.1.1;sha256su=
+m=3D972cd841ee51fdeac69c5a301e57f8ea27aebf15fddd7f621d5c240f28c3000c \
++    gomod://github.com/hashicorp/go-retryablehttp;version=3Dv0.7.8;sha25=
+6sum=3D9e2c175e4af37cdfeba28ed89250ad1fd691eda0fab167fafa9928222646b71e \
++    gomod://github.com/hashicorp/go-uuid;version=3Dv1.0.2;mod=3D1;sha256=
+sum=3D1c4a96ad155de1eab04062a5be4010bb9aaa371252aed524217c2e69c14adecf \
++    gomod://github.com/hashicorp/go-uuid;version=3Dv1.0.3;sha256sum=3D5e=
+9dc2bb3785d69a65d287a4b3fa7e9f583a127e41c6a2fd095ac862fed71dad \
++    gomod://github.com/hashicorp/golang-lru/v2;version=3Dv2.0.7;sha256su=
+m=3D2eb92ff13970bccd460efae14255bfc03bb51474da0137e477a60f95561acc30 \
++    gomod://github.com/inconshreveable/mousetrap;version=3Dv1.1.0;mod=3D=
+1;sha256sum=3D1c1b15911aa8a0bd5cd0f6670ec23d1086496f3615fdf53306aff2b476c=
+e9be1 \
++    gomod://github.com/internxt/rclone-adapter;version=3Dv0.0.0-20260708=
+165336-dd6561bacfa2;sha256sum=3Dcb356c6d3d7b525efbc14341d2651d20948085a99=
+d062b57bd4fc81dbd51ec4d \
++    gomod://github.com/jcmturner/aescts/v2;version=3Dv2.0.0;sha256sum=3D=
+717a211ad4aac248cf33cadde73059c13f8e9462123a0ab2fed5c5e61f7739d7 \
++    gomod://github.com/jcmturner/dnsutils/v2;version=3Dv2.0.0;sha256sum=3D=
+f9188186b672e547cfaef66107aa62d65054c5d4f10d4dcd1ff157d6bf8c275d \
++    gomod://github.com/jcmturner/gofork;version=3Dv1.7.6;sha256sum=3Db7e=
+42a499d6be8dd07069c031f9291a5615aa0d59660c7e322cff585ce39e8a2 \
++    gomod://github.com/jcmturner/goidentity/v6;version=3Dv6.0.1;sha256su=
+m=3D243e6fd6ea9f3094eea32c55febade6d8aaa1b563db655b0c5327940e4719beb \
++    gomod://github.com/jcmturner/gokrb5/v8;version=3Dv8.4.4;sha256sum=3D=
+8e468a1161302cb12b6e3f16bf31cd3b093f57c14325e11b348df1472860e313 \
++    gomod://github.com/jcmturner/rpc/v2;version=3Dv2.0.3;sha256sum=3D90c=
+595355e5e2c9dc1e1ae71a88491a04c34d8791180098da103217cbf5f5574 \
++    gomod://github.com/jlaffaye/ftp;version=3Dv0.2.1-0.20251026020404-66=
+02e981a1bb;sha256sum=3D9092783cd95e376018b0f96aa4c3f31a1011fe6e589d14d906=
+add196b11fa642 \
++    gomod://github.com/josephspurrier/goversioninfo;version=3Dv1.7.0;mod=
+=3D1;sha256sum=3Dd9b53badba01479688b78f3318c5a6dc931e9c9300cb74ab5c0da7a3=
+eac67c2c \
++    gomod://github.com/jtolio/noiseconn;version=3Dv0.0.0-20231127013910-=
+f6d9ecbf1de7;sha256sum=3Db7731fe9263cd320fd4ab4f537eaf904a01714c8afb0f718=
+ef1c0d6d1ab376f7 \
++    gomod://github.com/jzelinskie/whirlpool;version=3Dv0.0.0-20201016144=
+138-0675e54bb004;sha256sum=3D171380cee0b81436609d30e101fab6b51cd291eb0f1d=
+fb119e840b042b12959c \
++    gomod://github.com/kisielk/errcheck;version=3Dv1.5.0;mod=3D1;sha256s=
+um=3D107d26460d41b5322b6911c9b5eb233117421943b3a1453ba99f01c4fdf2f8e8 \
++    gomod://github.com/kisielk/gotool;version=3Dv1.0.0;mod=3D1;sha256sum=
+=3D77aca7bffc0ec29fc9f088d5962ab3128f405d7b10c7ceb9693ff7a08958955d \
++    gomod://github.com/klauspost/compress;version=3Dv1.19.0;sha256sum=3D=
+2eaca328cea81dd4797b6eeadc0fe56cfe501e43fca5d1512f12b39d47e0d8f6 \
++    gomod://github.com/klauspost/compress;version=3Dv1.4.1;mod=3D1;sha25=
+6sum=3D28a209d31984fd50b6724085eda0425f5d7b40de3b692bd98b296eac29fd1ed0 \
++    gomod://github.com/klauspost/cpuid;version=3Dv1.2.0;mod=3D1;sha256su=
+m=3D9b443b5b06355eca91f4e773a4df7d8a3bf0c9abad5ff472d6973e688e6a9392 \
++    gomod://github.com/klauspost/cpuid/v2;version=3Dv2.0.1;mod=3D1;sha25=
+6sum=3D66180bc563c8890e28b69ba64fbe6e1d2879a8574a3ffce7e597f1915f78bc6c \
++    gomod://github.com/klauspost/cpuid/v2;version=3Dv2.4.0;sha256sum=3D4=
+e0c1281558514efccc2cc3ab78d430426486fe9101d6dcc9a1b090e05c26c69 \
++    gomod://github.com/klauspost/crc32;version=3Dv1.3.0;mod=3D1;sha256su=
+m=3D4b89cabd895898e44c9a17efe25dd2cd26f5f2554bb298bd3da7082c8f6a7d6c \
++    gomod://github.com/klauspost/pgzip;version=3Dv1.2.6;sha256sum=3D8ac5=
+08e93b22dca1a731a3a4c921b57c5ed1daea7b3629a2cf85c3b7530dda84 \
++    gomod://github.com/koofr/go-httpclient;version=3Dv0.0.0-202405201113=
+29-e20f8f203988;sha256sum=3D2d0b34ddc40eb46cef1af87d7da4c8591a32995ce4e59=
+05add16095af41ef867 \
++    gomod://github.com/koofr/go-koofrclient;version=3Dv0.0.0-20221207135=
+200-cbd7fc9ad6a6;sha256sum=3D05efdb2708c42de96eb05a710bf146633b7cc0f75166=
+eebe394b0c7251308a00 \
++    gomod://github.com/kr/fs;version=3Dv0.1.0;sha256sum=3Dd376bd98e81aea=
+34585fc3b04bab76363e9e87cde69383964e57e9779f2af81e \
++    gomod://github.com/kr/pretty;version=3Dv0.2.1;mod=3D1;sha256sum=3Dc2=
+ae28bd5bb8e8f9076955126768ab7a147952deea9fdbcb373c53cc18870f82 \
++    gomod://github.com/kr/pty;version=3Dv1.1.1;mod=3D1;sha256sum=3D6da4c=
+9c7364446894e5ef877e19f985cd51d671ce6e8f4ca87862b449f6dd7f6 \
++    gomod://github.com/kr/text;version=3Dv0.1.0;mod=3D1;sha256sum=3D2fba=
+9529e5c13dde62f371ef7383baf04d7132501dac6aa08e910f9ec0bf85c5 \
++    gomod://github.com/kylelemons/godebug;version=3Dv1.1.0;sha256sum=3Dd=
+bbd0ce8c2f4932bb03704d73026b21af12bd68d5b8f4798dbf10a487a2b6d13 \
++    gomod://github.com/lanrat/extsort;version=3Dv1.4.2;sha256sum=3Db2bd2=
+46108536fdb504a9d6a2c6c2ee7b14e35ee250027b7443111d9b0d46781 \
++    gomod://github.com/leodido/go-urn;version=3Dv1.4.0;sha256sum=3D948fe=
+5f705b9eab6c3bc7e34a3ad2549ead87a8f5f73e5a85a8c66f347612ab2 \
++    gomod://github.com/lpar/calendar;version=3Dv0.2.0;sha256sum=3Dbd283e=
+d0c979f83c8ec9882245961507e9f59a4c41e5a9ffc6d83911d56b8860 \
++    gomod://github.com/lucasb-eyer/go-colorful;version=3Dv1.4.0;sha256su=
+m=3Df2c9689fc5ca32b6ed1436bcce879b44e7b9d14f670681ab41974213f2acb217 \
++    gomod://github.com/lufia/plan9stats;version=3Dv0.0.0-20260627054121-=
+477a66015f15;mod=3D1;sha256sum=3D37a53f16d9ab910339d4395983695afb4490aae0=
+1435c0a59980675c45d0bd95 \
++    gomod://github.com/mailru/easyjson;version=3Dv0.9.2;sha256sum=3Db9df=
+0a16e05ca83bd12e36f11fb6d35622fffdda8d18b83ab7c030d11903af73 \
++    gomod://github.com/mattn/go-colorable;version=3Dv0.1.15;sha256sum=3D=
+221144f51cc5eeda0a72bd7b5832181b94240c1d760bde0b3428895e63e63339 \
++    gomod://github.com/mattn/go-isatty;version=3Dv0.0.23;sha256sum=3D670=
+cdaa44183b9b7aac0078b1a4cba34a74a0a85e2b92d2434a6b2ccf3387fa6 \
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.12;mod=3D1;sha2=
+56sum=3D4136aaa23fcb3176a292822f2a8a98ccc7b2fde38a59922c152b006f59d59695 =
+\
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.24;sha256sum=3D=
+d517d2a2c73f75892a25c895ed40313b4906264e76a64509e3c2215800d34210 \
++    gomod://github.com/mattn/go-runewidth;version=3Dv0.0.3;mod=3D1;sha25=
+6sum=3D7243936b0a7aadc7539411eb64063495df65b7a36f42d7ffef2eeba9f8c80acd \
++    gomod://github.com/mholt/archives;version=3Dv0.1.5;sha256sum=3D634be=
+5320d8da86e249cf0dcf01f00f6842651fb515f4519f0fb8a4c3e779254 \
++    gomod://github.com/mikelolasagasti/xz;version=3Dv1.0.1;sha256sum=3Da=
+4672995fd823a9d6793bcb8de131739d629438fe787c99985c69cf8638da8d5 \
++    gomod://github.com/minio/crc64nvme;version=3Dv1.1.1;mod=3D1;sha256su=
+m=3D27baad099eaa74eba11eb31490c260ea4eac9b94439ff92129b8a3ad6efc3f61 \
++    gomod://github.com/minio/md5-simd;version=3Dv1.1.2;mod=3D1;sha256sum=
+=3D7665f075b83ccb81c66de980da5f23e54e1479472aadd4166dfc26f8148a2fa3 \
++    gomod://github.com/minio/minio-go/v7;version=3Dv7.2.1;mod=3D1;sha256=
+sum=3D9ffdadc09db1dfce5d4986a06910b68d6941737658aec86a06afc4af5af6a7ce \
++    gomod://github.com/minio/minlz;version=3Dv1.2.0;sha256sum=3D63f40647=
+0535699c14af9b35486472c6e8fc8e894adbd4c8bde7635f80eea38e \
++    gomod://github.com/minio/xxml;version=3Dv0.0.3;sha256sum=3Deec7f9818=
+5f849ac85b798a4a7b2b1cbd5aea8ea360f563b47e715ee7fbb5c6d \
++    gomod://github.com/mitchellh/go-homedir;version=3Dv1.1.0;sha256sum=3D=
+fffec361fc7e776bb71433560c285ee2982d2c140b8f5bfba0db6033c0ade184 \
++    gomod://github.com/moby/sys/mountinfo;version=3Dv0.7.2;sha256sum=3D9=
+4f79687bc3b72ca4cc60fafda851454fefc0ef04bdb4499e8c7c2b2e231b5d3 \
++    gomod://github.com/muesli/reflow;version=3Dv0.3.0;mod=3D1;sha256sum=3D=
+f193cfd78694efff82f6226c1252ca9d1826dd6dd2c2662422be4c4de2cdb739 \
++    gomod://github.com/munnerz/goautoneg;version=3Dv0.0.0-20191010083416=
+-a7dc8b61c822;sha256sum=3D3d7ce17916779890be02ea6b3dd6345c3c30c1df502ad9d=
+8b5b9b310e636afd9 \
++    gomod://github.com/ncw/swift/v2;version=3Dv2.0.5;sha256sum=3D0c2253c=
+dfda2fe22b1b8d1ac23b504a00d48f7e2ddd9d98bc12f3d1b8b1bbee2 \
++    gomod://github.com/nwaples/rardecode/v2;version=3Dv2.2.5;sha256sum=3D=
+f3aade153b27b75d29a1fef232f4937c65fe629eac8a1676deb98ee3899e66f0 \
++    gomod://github.com/oklog/ulid/v2;version=3Dv2.1.1;sha256sum=3D312b5f=
+ea3f68df920adaffc327440efbaba43ad6a8df2f7e0c9e365743f6ff89 \
++    gomod://github.com/oracle/oci-go-sdk/v65;version=3Dv65.121.0;sha256s=
+um=3Dbb8fe697adc6490e435b82ddc84bec5bf109f9c17b49f21fb74161a3a383ac4b \
++    gomod://github.com/panjf2000/ants/v2;version=3Dv2.12.1;sha256sum=3Dd=
+770202456acd0bd6ab95e01454e17097d22ef5575c3c7451475cb46697f3c87 \
++    gomod://github.com/patrickmn/go-cache;version=3Dv2.1.0+incompatible;=
+sha256sum=3Dd5d1c13e3c9cfeb04a943f656333ec68627dd6ce136af67e2aa5881ad7353=
+c55 \
++    gomod://github.com/pborman/getopt;version=3Dv0.0.0-20170112200414-71=
+48bc3a4c30;mod=3D1;sha256sum=3D35411c4b33e0d9eb3a694855ac64f9889d85c957f8=
+6a4984ed7dcc123952ec9f \
++    gomod://github.com/pengsrc/go-shared;version=3Dv0.2.1-0.201901311016=
+55-1999055a4a14;sha256sum=3D27b2ba03dd2cdb2d83ecc4dd35dd9c9c620528d965c56=
+cf3760ecafca5598af8 \
++    gomod://github.com/peterh/liner;version=3Dv1.2.2;sha256sum=3De5fd4f6=
+cfd85c7162f41df79f528f941e0a3e45031582e7b2ff2e921b15fbe77 \
++    gomod://github.com/philhofer/fwd;version=3Dv1.2.0;mod=3D1;sha256sum=3D=
+3b980d413f4498590980f5e907f60c3a9b35e9ffdd78be493bec3e4a15e83ae6 \
++    gomod://github.com/pierrec/lz4/v4;version=3Dv4.1.27;sha256sum=3D702a=
+d206ffeec8d3ac8bc1ce7e2d0b201fbc7683c8ab8758210172c54f03353f \
++    gomod://github.com/pkg/browser;version=3Dv0.0.0-20240102092130-5ac0b=
+6a4141c;sha256sum=3D8524ae36d809564d1f218978593b5c565cf3ee8dccd035d66b336=
+ad0c56e60d1 \
++    gomod://github.com/pkg/diff;version=3Dv0.0.0-20200914180035-5b29258c=
+a4f7;mod=3D1;sha256sum=3D2404460a2259f7655b158d4826a61bd2de218b1f5114625e=
+32bbadf6acaf40e2 \
++    gomod://github.com/pkg/errors;version=3Dv0.9.1;sha256sum=3Dd4c36b8bc=
+d0616290a3913215e0f53b931bd6e00670596f2960df1b44af2bd07 \
++    gomod://github.com/pkg/sftp;version=3Dv1.13.11;sha256sum=3Df22fb06ec=
+b083adb09981b0a4554fa370f2cb5accc4837cdd038312008a384b5 \
++    gomod://github.com/pkg/xattr;version=3Dv0.4.12;sha256sum=3D3657614c6=
+f28f6298164935f48af2515835ae04190ed9f6954b5cdf89b1aee21 \
++    gomod://github.com/pmezard/go-difflib;version=3Dv1.0.0;mod=3D1;sha25=
+6sum=3D74b2e766eb215377864d587badf57e95521f692d2a7860b3c7759093f9c9bec2 \
++    gomod://github.com/pmezard/go-difflib;version=3Dv1.0.1-0.20181226105=
+442-5d4384ee4fb2;sha256sum=3D24ff45e356f638a53bd0c89fff961fbeaecfdb0dc5e4=
+82ceed0a2230e0e5f3b7 \
++    gomod://github.com/power-devops/perfstat;version=3Dv0.0.0-2024022122=
+4432-82ca36839d55;mod=3D1;sha256sum=3D05744a9262bcd294613e65624f3f8bae83d=
+79a58aa48b8328c7df91190aa07bf \
++    gomod://github.com/pquerna/otp;version=3Dv1.5.0;sha256sum=3D9b28aa98=
+d40a2d00fe4477d2468c933112ba1818782be349999ea98b5b44d885 \
++    gomod://github.com/prometheus/client_golang;version=3Dv1.23.2;sha256=
+sum=3Ddfcc6c52ad09e3d0dca2e9f41de7f8d1c0dde7baae4b867353d112918a1511de \
++    gomod://github.com/prometheus/client_model;version=3Dv0.6.2;sha256su=
+m=3D67017b19f220c6ab91ecfdd10a93824e2a8b09fcb6390054dbdc49df3354a9ca \
++    gomod://github.com/prometheus/common;version=3Dv0.70.0;sha256sum=3De=
+2d490e176cf115b087c97b5adcbf40af9e413c1e017bd4fe0c6fd8b25cae4e3 \
++    gomod://github.com/prometheus/procfs;version=3Dv0.21.1;sha256sum=3Db=
+417ab3081ad334ce4c6b367b2d5e74dea49e2eb3b5431c1dd5a65e1256736f9 \
++    gomod://github.com/putdotio/go-putio/putio;version=3Dv0.0.0-20200123=
+120452-16d982cac2b8;sha256sum=3Df69549147425ebbc5cfff2fd75f0dfcf9cfdb2c2f=
+fd1870688915b20641b424a \
++    gomod://github.com/quasilyte/go-ruleguard/dsl;version=3Dv0.3.23;mod=3D=
+1;sha256sum=3D2eff6aad7ded457fae06d7032b7725eaf5cbb49e2307106b3c8a8cec344=
+8be85 \
++    gomod://github.com/rasky/go-xdr;version=3Dv0.0.0-20170124162913-1a41=
+d1a06c93;sha256sum=3Db5ebee6d3d7abb3c8c11933dcf7e40982a9c37b975f9f1763b26=
+357217cfa019 \
++    gomod://github.com/rclone/Proton-API-Bridge;version=3Dv1.0.5;sha256s=
+um=3D7ecba409df35dbf570e345aab599cb7d1bc7ee57740bd8044e0a21d241853423 \
++    gomod://github.com/rclone/go-proton-api;version=3Dv1.0.4;sha256sum=3D=
+478b8876f9dbc1df7ca769d6119eeddf52786e5cae1a262462ec7c7eedcb50f9 \
++    gomod://github.com/rclone/gofakes3;version=3Dv0.0.9;sha256sum=3D74d6=
+164da0d0514d7b109268c605beffcdcc863adfd8f7f7c66655b85250ce33 \
++    gomod://github.com/relvacode/iso8601;version=3Dv1.7.0;sha256sum=3D04=
+4c39693337c25aeca570891dd334f9576d5f6b5d26be9c7e436de483a4d317 \
++    gomod://github.com/rfjakob/eme;version=3Dv1.2.0;sha256sum=3De233157a=
+745ba698a268b6b6630e923286b550a0caaeb8849b03f30841ed4dd0 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.1.0;mod=3D1;sha256sum=3D=
+6c7318a27a8d5473a8eb661e75fb00528176e0efc59310ed277ca13bd12a53f1 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.2.0;mod=3D1;sha256sum=3D=
+6c7318a27a8d5473a8eb661e75fb00528176e0efc59310ed277ca13bd12a53f1 \
++    gomod://github.com/rivo/uniseg;version=3Dv0.4.7;sha256sum=3Db995e4aa=
+0cc1e5779cc61138ac925cb8c1e963e40c80e4b93ee8553812ebb792 \
++    gomod://github.com/rogpeppe/go-internal;version=3Dv1.15.0;mod=3D1;sh=
+a256sum=3D1ffa3f3c1d2ad9d40513af6610c21d52ae2839628679854df421212f6a29ec2=
+7 \
++    gomod://github.com/rs/xid;version=3Dv1.6.0;mod=3D1;sha256sum=3D2ebd8=
+a4c48bf66680d0fba5ca0d9ea1ec134396497802c75f3b39683e6e662ef \
++    gomod://github.com/russross/blackfriday/v2;version=3Dv2.1.0;sha256su=
+m=3D7852750d58a053ce38b01f2c203208817564f552ebf371b2b630081d7004c6ae \
++    gomod://github.com/ryszard/goskiplist;version=3Dv0.0.0-2015031222131=
+0-2dfbae5fcf46;sha256sum=3D12c65729fc31d5a9bf246eb387bd4c268d0d68bf33b913=
+cccd81bebd47d6f80d \
++    gomod://github.com/sabhiram/go-gitignore;version=3Dv0.0.0-2021092322=
+4102-525f6e181f06;sha256sum=3D18379d4fa60ed3050b651e51ecb48a21aba3bf951c8=
+1d359aadbc1d7601ffef5 \
++    gomod://github.com/samber/lo;version=3Dv1.53.0;sha256sum=3D4969cf009=
+4a1736a16ca0f89c42dea92369ba0ebacdbd9b22f1299ff7fe1f579 \
++    gomod://github.com/sergi/go-diff;version=3Dv1.0.0;mod=3D1;sha256sum=3D=
+3c33ca6c34b55597876e1b3ec55b717f899d94d66ad78d6f084b48e6e19b406e \
++    gomod://github.com/shabbyrobe/gocovmerge;version=3Dv0.0.0-2023050711=
+2040-c3350d9342df;mod=3D1;sha256sum=3D2d6cd5793ecd79794e9af1213be49ec7bc7=
+70d617bb4885da6a50faefe524482 \
++    gomod://github.com/shirou/gopsutil/v4;version=3Dv4.26.6;sha256sum=3D=
+76049a616fbe980670f733d430a1a3d4ee5d585cf22459fff9ae3b3b902936c4 \
++    gomod://github.com/sirupsen/logrus;version=3Dv1.7.0;mod=3D1;sha256su=
+m=3Dda2caaacef970c4c3f36c137d5567faef9403e6f62194804c7672a3975219322 \
++    gomod://github.com/sirupsen/logrus;version=3Dv1.9.4;sha256sum=3D3847=
+d00c5ee6948f1ff0d0120bc343c55ce852becb7720f8f08f53eecfe9e437 \
++    gomod://github.com/skratchdot/open-golang;version=3Dv0.0.0-202001160=
+55534-eef842397966;sha256sum=3D3ad7f856621f78b370a47bb05ce12c31bdee1014e5=
+96b7f565ee20dc8ac80c66 \
++    gomod://github.com/smartystreets/goconvey;version=3Dv1.8.1;mod=3D1;s=
+ha256sum=3D6e40d14f291ab6e567a4a260dab1c818cdcd8d580d375db33f5bb26bfe80e5=
+2c \
++    gomod://github.com/sony/gobreaker/v2;version=3Dv2.4.0;sha256sum=3Dc1=
+fb3bde7fee65b6162e0d9e59950a6789464ad4e4cfd2fdf28477a29c968434 \
++    gomod://github.com/sorairolake/lzip-go;version=3Dv0.3.8;sha256sum=3D=
+edfafbfe20952eb2140254adb2e5b9e0bb3ce1feb63e90b023f2226338dcca32 \
++    gomod://github.com/spacemonkeygo/monkit/v3;version=3Dv3.0.25-0.20251=
+022131615-eb24eb109368;sha256sum=3Ddabbbe36013d666a00190e9321174f404a07da=
+19df224e4eee909ae5b1016397 \
++    gomod://github.com/spf13/afero;version=3Dv1.15.0;sha256sum=3Dd03a0bb=
+ce87eeaa1c23f0c0276707bb2d59f46efee875d7d7f1d570201be6e1f \
++    gomod://github.com/spf13/cobra;version=3Dv1.10.2;sha256sum=3Da00aae6=
+fcd631e0fde52c98604452ff70e1b73c3b8a560d68db15aff5e26872d \
++    gomod://github.com/spf13/pflag;version=3Dv1.0.10;sha256sum=3Da246b8c=
+9d3daa87d6c634cdfee1bdf7fa53d5817eeef4fa0c6da43edd12de4ca \
++    gomod://github.com/spf13/pflag;version=3Dv1.0.9;mod=3D1;sha256sum=3D=
+16c6dfc0eb58eb3c9113ce197d460c6725c647e4688ac26d31c8ed69f1ebbc68 \
++    gomod://github.com/stangelandcl/ppmd;version=3Dv0.1.1;sha256sum=3De8=
+32489fca0e2a2455bc76235c9681509b3666b89f154afcd994814929a9081b \
++    gomod://github.com/stretchr/objx;version=3Dv0.1.0;mod=3D1;sha256sum=3D=
+1350354d52d2287a62336ecc0d56232d4c47699af9bba49c67c2b48254da98f1 \
++    gomod://github.com/stretchr/objx;version=3Dv0.4.0;mod=3D1;sha256sum=3D=
+31b2fdcdee870f0f61bffafafb96220967e5bca08a76a920d574216fc1f91355 \
++    gomod://github.com/stretchr/objx;version=3Dv0.5.0;mod=3D1;sha256sum=3D=
+cb326540efcb1274a6e4e970d7fc9de2e8062f08a058fc296d859025e62e807a \
++    gomod://github.com/stretchr/objx;version=3Dv0.5.2;mod=3D1;sha256sum=3D=
+58eca54d26728427806f40908828e8762d352cc3b0a0b0b60dc60ce61767fff6 \
++    gomod://github.com/stretchr/testify;version=3Dv1.11.1;sha256sum=3Db7=
+325b561ead5304b72b9f32aebc871ff49b3823667d530a49fd6c8f3adfc96e \
++    gomod://github.com/stretchr/testify;version=3Dv1.2.2;mod=3D1;sha256s=
+um=3D4ab463f68c370041f950c10cab5104903d4598c50cf824f9aad1b7b7f69255af \
++    gomod://github.com/stretchr/testify;version=3Dv1.3.0;mod=3D1;sha256s=
+um=3Dab063d5154a8e8730bced4c52698e5770eb50bfae347bebc35eca488b8e3f6e3 \
++    gomod://github.com/stretchr/testify;version=3Dv1.3.1-0.2019031116140=
+5-34c6fa2dc709;mod=3D1;sha256sum=3Dab063d5154a8e8730bced4c52698e5770eb50b=
+fae347bebc35eca488b8e3f6e3 \
++    gomod://github.com/stretchr/testify;version=3Dv1.4.0;mod=3D1;sha256s=
+um=3D6b0c7b71030d4fc55d4e6e6e24c0bfc025621341f76141e3aec0044c4ce89950 \
++    gomod://github.com/stretchr/testify;version=3Dv1.6.1;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.7.0;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.7.1;mod=3D1;sha256s=
+um=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.0;mod=3D1;sha256s=
+um=3De076074c1560ad1dda98b8b00fea6308c4b6ccd06ddd088d22db4626ed68f738 \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.1;mod=3D1;sha256s=
+um=3Daf1a5dcb331ace7a3f9fc1b5d7eee9c0bc82b4a2a182fe4cec2add217e2853d6 \
++    gomod://github.com/stretchr/testify;version=3Dv1.8.4;mod=3D1;sha256s=
+um=3D05e26cd069285a33cf2af46fdacdef569d5ae185e7963a76c0178328f68e97f9 \
++    gomod://github.com/t3rm1n4l/go-mega;version=3Dv0.0.0-20260717075258-=
+c6acd6a5bd04;sha256sum=3Df9ca5fa581855a590c468b1d8b5e7d4869ccbee8c3918024=
+8f974bd5996c599b \
++    gomod://github.com/tailscale/depaware;version=3Dv0.0.0-2021062219402=
+5-720c4b409502;mod=3D1;sha256sum=3D1c78638fa57c4deec9ecee6c3c5aef8522cafd=
+2d0fe3d1049c0da9e7c2c4e156 \
++    gomod://github.com/tinylib/msgp;version=3Dv1.6.4;mod=3D1;sha256sum=3D=
+0a9f1c371dd41cbf543da2eadbade60b906ff1a80cb63c0939af7f89e5a28b8a \
++    gomod://github.com/tklauser/go-sysconf;version=3Dv0.4.0;mod=3D1;sha2=
+56sum=3D29bd839dcc5736ea8ebc4c2f4013db82c57cacd15a010d389579cde04f3336ae =
+\
++    gomod://github.com/tklauser/numcpus;version=3Dv0.12.0;mod=3D1;sha256=
+sum=3D03fbc174711500112a8ab1675893ecdbea2e155f3dcd5e357fb4a5619ed6b0d4 \
++    gomod://github.com/tyler-smith/go-bip39;version=3Dv1.1.0;sha256sum=3D=
+418226d3b0e8c7b1c869beb473d0d61445d9d9d3259e6fecb19aa94dc8898a3e \
++    gomod://github.com/ulikunitz/xz;version=3Dv0.5.15;sha256sum=3Dca1830=
+f9abc6c99a003ad28f2b145ea0af0c99d5769ddff08d23ce055959fd12 \
++    gomod://github.com/ulikunitz/xz;version=3Dv0.5.8;mod=3D1;sha256sum=3D=
+393876046d63d90f35f21c1bb4651b0985e76d8f14a48a7279ff947b96956e7b \
++    gomod://github.com/unknwon/goconfig;version=3Dv1.0.0;sha256sum=3D1a9=
+cf2086052925a275d5d25683bce7fd2f4458423e6888a447dba618967dae3 \
++    gomod://github.com/willscott/go-nfs;version=3Dv0.0.4;sha256sum=3Ddbd=
+f4f05fe8dc5c2abf94f282e26d7435f878299d88c0db76510ccfe25d68132 \
++    gomod://github.com/willscott/go-nfs-client;version=3Dv0.0.0-20251022=
+144359-801f10d98886;sha256sum=3Dc8d9eae7a99ef6a603ac1ac93c923047402428ca6=
+e62b87765df8a24e3eb524a \
++    gomod://github.com/winfsp/cgofuse;version=3Dv1.6.1-0.20260126094232-=
+f2c4fccdb286;mod=3D1;sha256sum=3De54d3ca8174a2765799c43985663080595fbd219=
+23042bd4ea036e807c1eb0e4 \
++    gomod://github.com/wk8/go-ordered-map/v2;version=3Dv2.1.8;sha256sum=3D=
+c1781435c64e4cd92dd3ca585d5075eda12c0bb719a0c5f9e6ed272b65282e38 \
++    gomod://github.com/xanzy/ssh-agent;version=3Dv0.3.3;sha256sum=3D19a8=
+6c2623b20cc98687bddd89e3f023db0ca51c8bc9e38b9ad9c56e5b7d110d \
++    gomod://github.com/youmark/pkcs8;version=3Dv0.0.0-20240726163527-a2c=
+0da244d78;sha256sum=3Dcdcf5e96850f9f60bc96ab512e4bd06ee19dd2dbe855260c358=
+9c6c79a1bcfb5 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.1.27;mod=3D1;sha256sum=
+=3De2c763f861ada05c6150c32f804bca31c96a18b944320e0ee9bbf0d6c6075ad7 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.2.1;mod=3D1;sha256sum=3D=
+e2c763f861ada05c6150c32f804bca31c96a18b944320e0ee9bbf0d6c6075ad7 \
++    gomod://github.com/yuin/goldmark;version=3Dv1.4.13;mod=3D1;sha256sum=
+=3Dee7fe4466203a01d3ac19adc134cdec99bc6de71992c28f3dd9a74480bff0603 \
++    gomod://github.com/yunify/qingstor-sdk-go/v3;version=3Dv3.2.0;sha256=
+sum=3Dd691f22df98c43a35ff15c138e2436c5bcab66568f7141d399fed35f2a4a7fba \
++    gomod://github.com/yusufpapurcu/wmi;version=3Dv1.2.4;mod=3D1;sha256s=
+um=3Dff2a9c8c99aaed6bc6984eae094a9e8cdc36f6ab2ef2c56779dd98ecc583135b \
++    gomod://github.com/zeebo/blake3;version=3Dv0.2.4;sha256sum=3D65aaa34=
+87c097fa0140f52041e8e6fe8214c244a29223fd4caaa60986192a08f \
++    gomod://github.com/zeebo/errs;version=3Dv1.4.0;sha256sum=3D5b7fb5cbe=
+6bbd36933e8c98572f85121994e9842aefc90986f8d3a192cb69257 \
++    gomod://github.com/zeebo/xxh3;version=3Dv1.1.0;sha256sum=3D0cd366579=
+02317f81f3d31b217ebaca6f98dfb665f1af611d1db0904a689bcd1 \
++    gomod://go.etcd.io/bbolt;version=3Dv1.5.0;sha256sum=3D2c350ca36afba7=
+07b917529a8049b001c71915c99c152d5e2600ed4bac6fbc37 \
++    gomod://go.opentelemetry.io/auto/sdk;version=3Dv1.2.1;sha256sum=3Da0=
+8a16fc0a7041cdb875f47a260a56000632212c85f65a302a043c76380c8335 \
++    gomod://go.opentelemetry.io/contrib/instrumentation/net/http/otelhtt=
+p;version=3Dv0.69.0;sha256sum=3D6f2e1d300fe09d55ef13886efa33b06e9bcbd4d5f=
+04f0014b0a2871402a28a28 \
++    gomod://go.opentelemetry.io/otel;version=3Dv1.44.0;sha256sum=3D4b7ef=
+50caaf3dc6fc1a058f9ce2ccda6aad2ab3e8657acc4c8bb3102f79c53bc \
++    gomod://go.opentelemetry.io/otel/metric;version=3Dv1.44.0;sha256sum=3D=
+4442ba5f269f81251f549acb14ac16176f23967f4a0706163440b0df91592f96 \
++    gomod://go.opentelemetry.io/otel/trace;version=3Dv1.44.0;sha256sum=3D=
+cd1abf8dcec62fe9788fae9105760db1711e6e994d2e31cdda57ccb467e7ceec \
++    gomod://go.yaml.in/yaml/v2;version=3Dv2.4.4;sha256sum=3D1b98a6a498cf=
+255c5f2982d32c74633bc7969770957e98103ac1e14345aa4576 \
++    gomod://go.yaml.in/yaml/v3;version=3Dv3.0.4;sha256sum=3D0317dae56eaa=
+9e9954467c8768fd6a89ba2005f1534e2c26fce5163ad8d2ef31 \
++    gomod://go4.org;version=3Dv0.0.0-20260112195520-a5071408f32f;sha256s=
+um=3D11c8ccd8e5a90213e32b76666fa3d73cd481afc3d31c57669b76a186bd1aabe4 \
++    gomod://goftp.io/server/v2;version=3Dv2.0.3;sha256sum=3D3d9a67bf9083=
+60f30c27b0ea389c54b63234aa8eec9a390fe2904619a6c0c10b \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20190308221718-c2843e01=
+d9a2;mod=3D1;sha256sum=3D33ed070a5a66e0960685ac5386440e1b59899e74d8a38a11=
+80685e72a2195ded \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20191011191535-87dc89f0=
+1550;mod=3D1;sha256sum=3D3ab9f01f4610fe7b39bd85d68e8d97825351e7e282c39cda=
+41457c2a276f3be3 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20200622213623-75b28801=
+5ac9;mod=3D1;sha256sum=3Db2b12d09f81915fbcf4226009e50f9efda8bd3757d2055d8=
+ec07977e65bc6618 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20210322153248-0c34fe9e=
+7dc2;mod=3D1;sha256sum=3Ddda18d19fba9f47bca8269cf4aef580e0ce992c73e2aa54a=
+bf226216b1e3a729 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20210921155107-089bfa56=
+7519;mod=3D1;sha256sum=3Dcd6311612a2aa4d0d7e03c41b3aa1fbc2d5f895ab3f61089=
+fab80bfe9f8f5485 \
++    gomod://golang.org/x/crypto;version=3Dv0.0.0-20220622213112-05595931=
+fe9d;mod=3D1;sha256sum=3Daf2c88eebff03e3a2afecb1b03669fc54e9d122c88f7b2ec=
+fed051ec5dbc8bbb \
++    gomod://golang.org/x/crypto;version=3Dv0.4.0;mod=3D1;sha256sum=3Da02=
+49fae75d3543f8f30d70966302ccfb3f61fc438a0ec860733a22df7f950c1 \
++    gomod://golang.org/x/crypto;version=3Dv0.56.0;sha256sum=3Dfdffb67dc8=
+c0ecea55664eb42c323c2e3b5af9fa72cd120939106c2cdc11dcb4 \
++    gomod://golang.org/x/crypto;version=3Dv0.6.0;mod=3D1;sha256sum=3D1b6=
+a683455a3b882b6ac53f22752960e87bd91040a94d6f2c5cb61261e2389d8 \
++    gomod://golang.org/x/crypto;version=3Dv0.7.0;mod=3D1;sha256sum=3Dc89=
+fe22e73dac26a00a656ac11ff4c6e1a6b6cd2abcc57edcdacdec3fbdad82d \
++    gomod://golang.org/x/exp;version=3Dv0.0.0-20260709172345-9ea1abe5759=
+7;sha256sum=3Dffad724cf4b26cfc6b7c2fd02401375d82725f419a4765bc50be0560c28=
+1bf97 \
++    gomod://golang.org/x/image;version=3Dv0.45.0;sha256sum=3De6988c7fd5f=
+3ec02ae27d07e6ae6542e0d9ed7a6844b4e6a952518eafc618d8e \
++    gomod://golang.org/x/mobile;version=3Dv0.0.0-20260709172247-6129f5be=
+e9d5;mod=3D1;sha256sum=3D0e6228cdca3a9f8026a2fbb4ff68a1206adbb3e01683c424=
+8e31d3c55469aae3 \
++    gomod://golang.org/x/mod;version=3Dv0.2.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.3.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.4.0;mod=3D1;sha256sum=3Db288f0=
+88fd851885a6d348339e2f588e58a94e6c76e5e634ae1d67c2749eb413 \
++    gomod://golang.org/x/mod;version=3Dv0.6.0-dev.0.20220419223038-86c51=
+ed26bb4;mod=3D1;sha256sum=3D42d19023ff8f2eae700bc5495f371ecd998a22d19ba98=
+5d0af5f69900b254083 \
++    gomod://golang.org/x/mod;version=3Dv0.8.0;mod=3D1;sha256sum=3D624567=
+459c6e9947ac4abde0b7034ee61dcbb6a9373f5970094c0bb3e8121964 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20190404232315-eb5bcb51f2a=
+3;mod=3D1;sha256sum=3Df7046769daac02beb57cbcc481280df59fb403c96fe8262282a=
+ba858c7f7fa4d \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20190620200207-3b0461eec85=
+9;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20200114155413-6afb5195e5a=
+a;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20200226121028-0de0cce0169=
+b;mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f5366=
+8eca2b4ab41da \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20201021035429-f5854403a97=
+4;mod=3D1;sha256sum=3D66fc44a0644a506da780f7a22a5d73dd025d44a6e58740b62d2=
+7f74d7c3a4948 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20210226172049-e18ecbb0511=
+0;mod=3D1;sha256sum=3Dfef5896d103a0bce5055fdb5e96e83094433479243786534771=
+8edceb633348a \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20211112202133-69e39bad7dc=
+2;mod=3D1;sha256sum=3Dfa915f5d022cfb0cb865aa2ee37d3a7741b406f84eb4a837862=
+e29cc69ab4ef4 \
++    gomod://golang.org/x/net;version=3Dv0.0.0-20220722155237-a158d28d115=
+b;mod=3D1;sha256sum=3Db315c52647d2da2f76e5cdb9d367e1d6727784236a9bffb6121=
+92b19b10a128d \
++    gomod://golang.org/x/net;version=3Dv0.3.0;mod=3D1;sha256sum=3D3c360a=
+3368c25f0b39a64b630fe74ed998df00e6abee93fd49f56ffe7590a131 \
++    gomod://golang.org/x/net;version=3Dv0.57.0;sha256sum=3Df8d652c629374=
+b43846ef4f2efd419e8d1c81779eb728306d09f0de1cc1bab80 \
++    gomod://golang.org/x/net;version=3Dv0.6.0;mod=3D1;sha256sum=3D41ec76=
+ea2172f3ee3031e38f9a535939a584d6bb35ef480854fdcb8c2026701b \
++    gomod://golang.org/x/net;version=3Dv0.7.0;mod=3D1;sha256sum=3D41ec76=
+ea2172f3ee3031e38f9a535939a584d6bb35ef480854fdcb8c2026701b \
++    gomod://golang.org/x/net;version=3Dv0.8.0;mod=3D1;sha256sum=3Deb6ef9=
+bd6405ace3d99e4381d0256ce41f83c66d1a20b4e2830a4c776245f71a \
++    gomod://golang.org/x/oauth2;version=3Dv0.36.0;sha256sum=3D15bf65ff10=
+3e5dafc809d78cd037a1d1e88ccb8451824e851156002a13304504 \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20190423024810-112230192c=
+58;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20190911185100-cd5d95a43a=
+6e;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20201020160332-67f06af15b=
+c9;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.0.0-20220722155255-886fb9371e=
+b4;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225c=
+ea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.1.0;mod=3D1;sha256sum=3D421f6=
+139686d5891f3dc5a563d0995780d3279f65cad4d225cea52686794161c \
++    gomod://golang.org/x/sync;version=3Dv0.22.0;sha256sum=3D4bc67d258ce7=
+867cfc1a43765c43d98b4c49b90c46dd0b86f896a5a4909fade0 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190215142949-d0b11bdaac8=
+a;mod=3D1;sha256sum=3D8969115e4a39108848324e79a1bd8a8445230e6e3aaccbe9f80=
+57fb50fffc8c1 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190412213103-97732733099=
+d;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20190916202348-b4ddaad3f8a=
+3;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20191026070338-33540a1f603=
+7;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20200930185726-fdedc70b468=
+f;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20201119102817-f84b799fce6=
+8;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20201204225414-ed752295db8=
+8;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210124154548-22da62e12c0=
+c;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210423082822-04245dca01d=
+a;mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431=
+ece4742aec343 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210514084401-e8d321eab01=
+5;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20210615035016-665e8c7367d=
+1;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20211007075335-d3039528d8a=
+c;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20211117180635-dee7805ff2e=
+1;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220408201424-a24fb2fb8a0=
+f;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220520151302-bc2c85ada10=
+a;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220715151400-c0bba94af5f=
+8;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.0.0-20220722155257-8c9f86f7a55=
+f;mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045=
+bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.1.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.3.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.47.0;sha256sum=3Dcdac013ddced0=
+262926ec29ffcda645da39670e61c7e5b761e572b6b1809bb1b \
++    gomod://golang.org/x/sys;version=3Dv0.5.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/sys;version=3Dv0.6.0;mod=3D1;sha256sum=3Df03333=
+3096fe198f3151deed93f2deba74e50bbfe7739134045bc3b7ce4a5024 \
++    gomod://golang.org/x/term;version=3Dv0.0.0-20201126162022-7de9c90e9d=
+d1;mod=3D1;sha256sum=3D4cbab14f7706771b271d995a1b3cc131fe5a246aadc7ee6d1b=
+a6f0bd894781fa \
++    gomod://golang.org/x/term;version=3Dv0.0.0-20210927222741-03fcf44c22=
+11;mod=3D1;sha256sum=3D740794e2914f5cc87e25656c5843222b2c65665821205f4563=
+2a0477c8d3f79b \
++    gomod://golang.org/x/term;version=3Dv0.3.0;mod=3D1;sha256sum=3D1e561=
+f7413b74b4d30ca2d6c9874ccd13bb8c94daa0e6c2377bad9e9cf6dbe58 \
++    gomod://golang.org/x/term;version=3Dv0.45.0;sha256sum=3Db3a3af689728=
+b43012ae1b21482571a35c033c545e98e021606bd4fcf1f79108 \
++    gomod://golang.org/x/term;version=3Dv0.5.0;mod=3D1;sha256sum=3D0d6f5=
+8228aadc1a6528e6755da018516566e3ae5c5201f7ade1773f56fa8d934 \
++    gomod://golang.org/x/term;version=3Dv0.6.0;mod=3D1;sha256sum=3D64359=
+b9c653708478f020729885044ff3d8007186d9d441125fe874817e71201 \
++    gomod://golang.org/x/text;version=3Dv0.14.0;mod=3D1;sha256sum=3D9715=
+79f17e9abc5926ab76214f533bd517cf4925c885243ac4755a1a0a7c69ef \
++    gomod://golang.org/x/text;version=3Dv0.3.0;mod=3D1;sha256sum=3D36879=
+d586fd8001e84da8787190a11e4f78749e2a81dfe8b9b6931899fff31cf \
++    gomod://golang.org/x/text;version=3Dv0.3.3;mod=3D1;sha256sum=3Dfbb7a=
+88ed140515e790eca7a10ffd319c9786b11c6a6c7e59f80f7fb37bb4542 \
++    gomod://golang.org/x/text;version=3Dv0.3.6;mod=3D1;sha256sum=3Dfbb7a=
+88ed140515e790eca7a10ffd319c9786b11c6a6c7e59f80f7fb37bb4542 \
++    gomod://golang.org/x/text;version=3Dv0.3.7;mod=3D1;sha256sum=3Dc45d6=
+69089427bc4635d07b185f9b9680332d1c48c75b3c49cb715b81a04a5b0 \
++    gomod://golang.org/x/text;version=3Dv0.41.0;sha256sum=3De63f35daaae7=
+49d0ffff97a295ad8f4837a662938a46b7a87f18a88e85a5cbf9 \
++    gomod://golang.org/x/text;version=3Dv0.5.0;mod=3D1;sha256sum=3D15929=
+e76fce04aea4c92a354426bb43370684645a4ee03f2e75d0c2eb1466304 \
++    gomod://golang.org/x/text;version=3Dv0.7.0;mod=3D1;sha256sum=3D15929=
+e76fce04aea4c92a354426bb43370684645a4ee03f2e75d0c2eb1466304 \
++    gomod://golang.org/x/text;version=3Dv0.8.0;mod=3D1;sha256sum=3D436f5=
+92e77b593b02fbea374e23ad3369c8623ff0d29c91de7de1e6672db9a41 \
++    gomod://golang.org/x/time;version=3Dv0.15.0;sha256sum=3D8cfb20e915fa=
+5d6c3fd264304233f8d71a3385e48a37819239c532ad9da27f84 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20180917221912-90fa682c2=
+a6e;mod=3D1;sha256sum=3Da0e02f0678fe62dc3c4b4bc77fa912c9b70de10fa9f7cf2f7=
+aad0337392b52af \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20190829051458-42f498d34=
+c4d;mod=3D1;sha256sum=3D88d479265f886f5e598d76c003d0f257b42dbf1b895d820a1=
+2b5ab0b3501aca1 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20191119224855-298f0cb18=
+81e;mod=3D1;sha256sum=3D88d479265f886f5e598d76c003d0f257b42dbf1b895d820a1=
+2b5ab0b3501aca1 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20200619180055-7c47624df=
+98f;mod=3D1;sha256sum=3Def6e2f94244214971780f9ba31d90806928ad410c82b04d88=
+88f815341f7a667 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20201211185031-d93e913c1=
+a58;mod=3D1;sha256sum=3D25d72c03e7aa571136087ebafc9e83d004d0bd8cd3864d78c=
+2f5813e122aba81 \
++    gomod://golang.org/x/tools;version=3Dv0.0.0-20210106214847-113979e35=
+29a;mod=3D1;sha256sum=3D25d72c03e7aa571136087ebafc9e83d004d0bd8cd3864d78c=
+2f5813e122aba81 \
++    gomod://golang.org/x/tools;version=3Dv0.1.12;mod=3D1;sha256sum=3D2a8=
+b9365898f0822face65ba089a1353e68a65d342f300ca317cceccde6421f3 \
++    gomod://golang.org/x/tools;version=3Dv0.48.0;mod=3D1;sha256sum=3De6b=
+55566a172ecfd21e5f4a8750f2d25665287288b24ff8d4e6cea5d5078c608 \
++    gomod://golang.org/x/tools;version=3Dv0.6.0;mod=3D1;sha256sum=3D830e=
+d78dcd3e9927c412e2641230308447749d513d31024d276e2443b2016609 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20190717185122-a985d34=
+07aa7;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20191011141410-1b5146a=
+dd898;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20191204190536-9bdfabe=
+68543;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20200804184101-5ec99f8=
+3aff1;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1e=
+aa27e78882db3d7f5 \
++    gomod://google.golang.org/api;version=3Dv0.279.0;sha256sum=3Dff75d28=
+5ffbf326f59417ed9c1b5576f2ad408bf6c890b8a57afbd1770a22e53 \
++    gomod://google.golang.org/genproto/googleapis/rpc;version=3Dv0.0.0-2=
+0260715232425-e75dac1f907d;sha256sum=3Ded5609068b408088bd42fe63eb4cdb5762=
+e6f61378b90d60313f5e491c2adfb0 \
++    gomod://google.golang.org/grpc;version=3Dv1.84.0-dev.0.2026072309343=
+7-b6eac429d7b6;sha256sum=3D66d8132f153efca923ecbc7b342e62d4b1dede50394eef=
+8c984a1d27446628b7 \
++    gomod://google.golang.org/protobuf;version=3Dv1.36.11;sha256sum=3D14=
+983d36c56a814ed91b6d652f2b8f895baba1b84eb43b28a0b132c8637cd274 \
++    gomod://gopkg.in/check.v1;version=3Dv0.0.0-20161208181325-20d25e2804=
+05;mod=3D1;sha256sum=3D5c306e0d633cd66a11b40e2e5fbbc6da42110db7d72ea3c152=
+4ceb45ee40c33f \
++    gomod://gopkg.in/check.v1;version=3Dv1.0.0-20201130134442-10cb98267c=
+6c;mod=3D1;sha256sum=3D6e6e2fca40eb8fe1455e6a08cd39833c7c2e9a2341a81fb181=
+b89d0b1c725f48 \
++    gomod://gopkg.in/ini.v1;version=3Dv1.67.3;mod=3D1;sha256sum=3Dbbaaff=
+022cbbee98f0c099e7217d0bde01261a518980d118423ed656406a5abf \
++    gomod://gopkg.in/natefinch/lumberjack.v2;version=3Dv2.2.1;sha256sum=3D=
+e28804b050e7debf4f5b2dd8d241d804f5d592d0519b6e7a3dc9d4cce6f075b3 \
++    gomod://gopkg.in/validator.v2;version=3Dv2.0.1;sha256sum=3D71ba069ff=
+408d982210bd0c9cedc2b42582d7fc7eeee8d5fca369b4574e5215c \
++    gomod://gopkg.in/yaml.v2;version=3Dv2.2.2;mod=3D1;sha256sum=3D88d979=
+d2f093d2397f756bc86efa2ca03f73a60d668ceb391b3510029f3f7cfc \
++    gomod://gopkg.in/yaml.v2;version=3Dv2.4.0;sha256sum=3Dede49e27c4cca6=
+cdd2ec719aed8ea4d363710cceb3d411e7a786fbdec0d391fd \
++    gomod://gopkg.in/yaml.v3;version=3Dv3.0.0-20200313102051-9f266ea9e77=
+c;mod=3D1;sha256sum=3D21579860a20306fcf43b1bd234d1fba319499c77611b71c05f9=
+bf3ba90dab939 \
++    gomod://gopkg.in/yaml.v3;version=3Dv3.0.1;sha256sum=3Daab8fbc4e6300e=
+a08e6afe1caea18a21c90c79f489f52c53e2f20431f1a9a015 \
++    gomod://moul.io/http2curl/v2;version=3Dv2.3.0;sha256sum=3Da622f88e88=
+2a55c2120029b6a688258692dcda47b60f3e66bb9283b29f7bdffa \
++    gomod://sigs.k8s.io/yaml;version=3Dv1.6.0;sha256sum=3Dcf88648a471581=
+817b00a42ee8d24fd73eb0e3503998cf46d8e63787e11e5052 \
++    gomod://storj.io/common;version=3Dv0.0.0-20260629224719-ba1bff0a7846=
+;sha256sum=3D825ec543e1ecb8bd7cf78f73044f62b5a7a7f2fd749b9fbbf1b29e19bf70=
+d1fa \
++    gomod://storj.io/drpc;version=3Dv1.0.0;sha256sum=3D9d1c86e384bb54330=
+6c2429b8b7fe3b3369f378939052e85b4565c119e20f50e \
++    gomod://storj.io/eventkit;version=3Dv0.0.0-20260716074419-6861a92e2a=
+a5;sha256sum=3D0b3fe22f730d257e44a7a224255b885aed61f485fa00017ec3d2124b06=
+db62f7 \
++    gomod://storj.io/infectious;version=3Dv0.0.2;sha256sum=3D453d3f57871=
+55a1e3227228a1ee77c37d5f1c6a3aeaf0be17288e64d6e7fb655 \
++    gomod://storj.io/picobuf;version=3Dv0.0.4;sha256sum=3D7f054dd3ec5472=
+b63f5b5390c6c7b6c429c38bd37286de540839a0e32137ccd1 \
++    gomod://storj.io/uplink;version=3Dv1.14.3;sha256sum=3D1170c4b061d02f=
+6beed75c1ad8ba5ff4150c2076b6a5b24319b3e89665b0476b \
 +"
-+
-+SRC_URI[ab_glyph-0.2.32.sha256sum] =3D "01c0457472c38ea5bd1c3b5ada5e3682=
-71cb550be7a4ca4a0b4634e9913f6cc2"
-+SRC_URI[ab_glyph_rasterizer-0.1.10.sha256sum] =3D "366ffbaa4442f4684d91e=
-2cd7c5ea7c4ed8add41959a31447066e279e432b618"
-+SRC_URI[adler2-2.0.1.sha256sum] =3D "320119579fcad9c21884f5c4861d16174d0=
-e06250625266f50fe6898340abefa"
-+SRC_URI[aes-0.8.4.sha256sum] =3D "b169f7a6d4742236a0a00c541b845991d0ac43=
-e546831af1249753ab4c3aa3a0"
-+SRC_URI[aho-corasick-1.1.4.sha256sum] =3D "ddd31a130427c27518df266943a53=
-08ed92d4b226cc639f5a8f1002816174301"
-+SRC_URI[aligned-0.4.3.sha256sum] =3D "ee4508988c62edf04abd8d92897fca0c29=
-95d907ce1dfeaf369dac3716a40685"
-+SRC_URI[aligned-vec-0.6.4.sha256sum] =3D "dc890384c8602f339876ded803c97a=
-d529f3842aba97f6392b3dba0dd171769b"
-+SRC_URI[allocator-api2-0.2.21.sha256sum] =3D "683d7910e743518b0e34f1186f=
-92494becacb047c7b6bf616c96772180fef923"
-+SRC_URI[android_system_properties-0.1.5.sha256sum] =3D "819e7219dbd41043=
-ac279b19830f2efc897156490d7fd6ea916720117ee66311"
-+SRC_URI[anstream-1.0.0.sha256sum] =3D "824a212faf96e9acacdbd09febd34438f=
-8f711fb84e09a8916013cd7815ca28d"
-+SRC_URI[anstyle-1.0.14.sha256sum] =3D "940b3a0ca603d1eade50a4846a2afffd5=
-ef57a9feac2c0e2ec2e14f9ead76000"
-+SRC_URI[anstyle-parse-1.0.0.sha256sum] =3D "52ce7f38b242319f7cabaa681305=
-5467063ecdc9d355bbb4ce0c68908cd8130e"
-+SRC_URI[anstyle-query-1.1.5.sha256sum] =3D "40c48f72fd53cd289104fc64099a=
-bca73db4166ad86ea0b4341abe65af83dadc"
-+SRC_URI[anstyle-wincon-3.0.11.sha256sum] =3D "291e6a250ff86cd4a820112fb8=
-898808a366d8f9f58ce16d1f538353ad55747d"
-+SRC_URI[anyhow-1.0.102.sha256sum] =3D "7f202df86484c868dbad7eaa557ef785d=
-5c66295e41b460ef922eca0723b842c"
-+SRC_URI[approx-0.5.1.sha256sum] =3D "cab112f0a86d568ea0e627cc1d6be74a1e9=
-cd55214684db5561995f6dad897c6"
-+SRC_URI[arbitrary-1.4.2.sha256sum] =3D "c3d036a3c4ab069c7b410a2ce876bd74=
-808d2d0888a82667669f8e783a898bf1"
-+SRC_URI[arg_enum_proc_macro-0.3.4.sha256sum] =3D "0ae92a5119aa49cdbcf6b9=
-f893fe4e1d98b04ccbf82ee0584ad948a44a734dea"
-+SRC_URI[arrayvec-0.7.6.sha256sum] =3D "7c02d123df017efcdfbd739ef81735b36=
-c5ba83ec3c59c80a9d7ecc718f92e50"
-+SRC_URI[as-slice-0.2.1.sha256sum] =3D "516b6b4f0e40d50dcda9365d53964ec74=
-560ad4284da2e7fc97122cd83174516"
-+SRC_URI[ashpd-0.13.11.sha256sum] =3D "340e0f6bf7f9ee78549c61454f1460a3ed=
-97c011902ee76b58301bbc6d502a32"
-+SRC_URI[async-broadcast-0.7.2.sha256sum] =3D "435a87a52755b8f27fcf321ac4=
-f04b2802e337c8c4872923137471ec39c37532"
-+SRC_URI[async-channel-2.5.0.sha256sum] =3D "924ed96dd52d1b75e9c1a3e62757=
-15fd320f5f9439fb5a4a11fa51f4221158d2"
-+SRC_URI[async-executor-1.14.0.sha256sum] =3D "c96bf972d85afc50bf5ab8fe2d=
-54d1586b4e0b46c97c50a0c9e71e2f7bcd812a"
-+SRC_URI[async-fs-2.2.0.sha256sum] =3D "8034a681df4aed8b8edbd7fbe472401ec=
-f009251c8b40556b304567052e294c5"
-+SRC_URI[async-io-2.6.0.sha256sum] =3D "456b8a8feb6f42d237746d4b3e9a17849=
-4627745c3c56c6ea55d92ba50d026fc"
-+SRC_URI[async-lock-3.4.2.sha256sum] =3D "290f7f2596bd5b78a9fec8088ccd891=
-80d7f9f55b94b0576823bbbdc72ee8311"
-+SRC_URI[async-process-2.5.0.sha256sum] =3D "fc50921ec0055cdd8a16de48773b=
-feec5c972598674347252c0399676be7da75"
-+SRC_URI[async-recursion-1.1.1.sha256sum] =3D "3b43422f69d8ff38f95f1b2bb7=
-6517c91589a924d1559a0e935d7c8ce0274c11"
-+SRC_URI[async-signal-0.2.14.sha256sum] =3D "52b5aaafa020cf5053a01f2a60e8=
-ff5dccf550f0f77ec54a4e47285ac2bab485"
-+SRC_URI[async-task-4.7.1.sha256sum] =3D "8b75356056920673b02621b35afd0f7=
-dda9306d03c79a30f5c56c44cf256e3de"
-+SRC_URI[async-trait-0.1.89.sha256sum] =3D "9035ad2d096bed7955a320ee7e223=
-0574d28fd3c3a0f186cbea1ff3c7eed5dbb"
-+SRC_URI[atomic-waker-1.1.2.sha256sum] =3D "1505bd5d3d116872e7271a6d4e16d=
-81d0c8570876c8de68093a09ac269d8aac0"
-+SRC_URI[autocfg-1.5.1.sha256sum] =3D "f2032f911046de80f0a198e0901378627c=
-33f59ea0ac00e363d481118bd70a53"
-+SRC_URI[av-scenechange-0.14.1.sha256sum] =3D "0f321d77c20e19b92c39e7471c=
-f986812cbb46659d2af674adc4331ef3f18394"
-+SRC_URI[av1-grain-0.2.5.sha256sum] =3D "8cfddb07216410377231960af4fcab83=
-8eaa12e013417781b78bd95ee22077f8"
-+SRC_URI[avif-serialize-0.8.9.sha256sum] =3D "e7178fe5f7d460b13895ebb9dcb=
-28a3a6216d2df2574a0806cb51b555d297f38"
-+SRC_URI[bit_field-0.10.3.sha256sum] =3D "1e4b40c7323adcfc0a41c4b88143ed5=
-8346ff65a288fc144329c5c45e05d70c6"
-+SRC_URI[bitflags-2.13.0.sha256sum] =3D "b4388bee8683e3d04af747c73422af53=
-102d2bd24d9eadb6cbc100baef4b43f8"
-+SRC_URI[bitstream-io-4.10.0.sha256sum] =3D "7eff00be299a18769011411c9def=
-0d827e8f2d7bf0c3dbf53633147a8867fd1f"
-+SRC_URI[block-0.1.6.sha256sum] =3D "0d8c1fef690941d3e7788d328517591fecc6=
-84c084084702d6ff1641e993699a"
-+SRC_URI[block-buffer-0.10.4.sha256sum] =3D "3078c7629b62d3f0439517fa3949=
-96acacc5cbc91c5a20d8c658e77abd503a71"
-+SRC_URI[block-padding-0.3.3.sha256sum] =3D "a8894febbff9f758034a5b8e12d8=
-7918f56dfc64a8e1fe757d65e29041538d93"
-+SRC_URI[blocking-1.6.2.sha256sum] =3D "e83f8d02be6967315521be875afa792a3=
-16e28d57b5a2d401897e2a7921b7f21"
-+SRC_URI[built-0.8.1.sha256sum] =3D "5c0e531d93d39c34eef561e929e8a7f86d77=
-a5af08aac4f6d6e39976c51858e9"
-+SRC_URI[bumpalo-3.20.3.sha256sum] =3D "72f5acc6cb2ba439de613abc23857ec3d=
-78374d8ed5ac84e9d11336e87da8649"
-+SRC_URI[bytemuck-1.25.0.sha256sum] =3D "c8efb64bd706a16a1bdde310ae86b351=
-e4d21550d98d056f22f8a7f7a2183fec"
-+SRC_URI[byteorder-lite-0.1.0.sha256sum] =3D "8f1fe948ff07f4bd06c30984e69=
-f5b4899c516a3ef74f34df92a2df2ab535495"
-+SRC_URI[cairo-rs-0.22.0.sha256sum] =3D "5cc8d9aa793480744cd9a0524fef1a2e=
-197d9eaa0f739cde19d16aba530dcb95"
-+SRC_URI[cairo-sys-rs-0.22.0.sha256sum] =3D "f8b4985713047f5faee02b8db6a6=
-ef32bbb50269ff53c1aee716d1d195b76d54"
-+SRC_URI[cbc-0.1.2.sha256sum] =3D "26b52a9543ae338f279b96b0b9fed9c8093744=
-685043739079ce85cd58f289a6"
-+SRC_URI[cc-1.2.64.sha256sum] =3D "dad887fd958be91b5098c0248def011f4523ab=
-786cd411be668777e55063501f"
-+SRC_URI[cfg-expr-0.20.8.sha256sum] =3D "fb693542bcafa528e198be0ebd9d3632=
-ca5b7c93dbe7237460e199910835997c"
-+SRC_URI[cfg-if-1.0.4.sha256sum] =3D "9330f8b2ff13f34540b44e946ef35111825=
-727b38d33286ef986142615121801"
-+SRC_URI[chrono-0.4.45.sha256sum] =3D "1aa79e62e7697b8e29b513a68abacf485a=
-dcd1fe8284a4316c5ae868e6633327"
-+SRC_URI[cipher-0.4.4.sha256sum] =3D "773f3b9af64447d2ce9850330c473515014=
-aa235e6a783b02db81ff39e4a3dad"
-+SRC_URI[color_quant-1.1.0.sha256sum] =3D "3d7b894f5411737b7867f482795592=
-4d7c254fc9f4d91a6aad6b097804b1018b"
-+SRC_URI[colorchoice-1.0.5.sha256sum] =3D "1d07550c9036bf2ae0c684c4297d50=
-3f838287c83c53686d05370d0e139ae570"
-+SRC_URI[concurrent-queue-2.5.0.sha256sum] =3D "4ca0197aee26d1ae37445ee53=
-2fefce43251d24cc7c166799f4d46817f1d3973"
-+SRC_URI[core-foundation-sys-0.8.7.sha256sum] =3D "773648b94d0e5d620f64f2=
-80777445740e61fe701025087ec8b57f45c791888b"
-+SRC_URI[cpufeatures-0.2.17.sha256sum] =3D "59ed5838eebb26a2bb2e58f6d5b53=
-16989ae9d08bab10e0e6d103e656d1b0280"
-+SRC_URI[crc32fast-1.5.0.sha256sum] =3D "9481c1c90cbf2ac953f07c8d4a58aa39=
-45c425b7185c9154d67a65e4230da511"
-+SRC_URI[crossbeam-deque-0.8.6.sha256sum] =3D "9dd111b7b7f7d55b72c0a6ae36=
-1660ee5853c9af73f70c3c2ef6858b950e2e51"
-+SRC_URI[crossbeam-epoch-0.9.18.sha256sum] =3D "5b82ac4a3c2ca9c3460964f02=
-0e1402edd5753411d7737aa39c3714ad1b5420e"
-+SRC_URI[crossbeam-utils-0.8.21.sha256sum] =3D "d0a5c400df2834b80a4c3327b=
-3aad3a4c4cd4de0629063962b03235697506a28"
-+SRC_URI[crunchy-0.2.4.sha256sum] =3D "460fbee9c2c2f33933d720630a6a0bac33=
-ba7053db5344fac858d4b8952d77d5"
-+SRC_URI[crypto-common-0.1.7.sha256sum] =3D "78c8292055d1c1df0cce5d180393=
-dc8cce0abec0a7102adb6c7b1eef6016d60a"
-+SRC_URI[digest-0.10.7.sha256sum] =3D "9ed9a281f7bc9b7576e61468ba615a66a5=
-c8cfdff42420a70aa82701a3b1e292"
-+SRC_URI[either-1.16.0.sha256sum] =3D "91622ff5e7162018101f2fea40d6ebf4a7=
-8bbe5a49736a2020649edf9693679e"
-+SRC_URI[endi-1.1.1.sha256sum] =3D "66b7e2430c6dff6a955451e2cfc438f09cea1=
-965a9d6f87f7e3b90decc014099"
-+SRC_URI[enumflags2-0.7.12.sha256sum] =3D "1027f7680c853e056ebcec683615fb=
-6fbbc07dbaa13b4d5d9442b146ded4ecef"
-+SRC_URI[enumflags2_derive-0.7.12.sha256sum] =3D "67c78a4d8fdf9953a5c9d45=
-8f9efe940fd97a0cab0941c075a813ac594733827"
-+SRC_URI[env_filter-1.0.1.sha256sum] =3D "32e90c2accc4b07a8456ea0debdc2e7=
-587bdd890680d71173a15d4ae604f6eef"
-+SRC_URI[env_logger-0.11.10.sha256sum] =3D "0621c04f2196ac3f488dd583365b9=
-c09be011a4ab8b9f37248ffcc8f6198b56a"
-+SRC_URI[equator-0.4.2.sha256sum] =3D "4711b213838dfee0117e3be6ac926007d7=
-f433d7bbe33595975d4190cb07e6fc"
-+SRC_URI[equator-macro-0.4.2.sha256sum] =3D "44f23cf4b44bfce11a86ace86f8a=
-73ffdec849c9fd00a386a53d278bd9e81fb3"
-+SRC_URI[equivalent-1.0.2.sha256sum] =3D "877a4ace8713b0bcf2a4e7eec82529c=
-029f1d0619886d18145fea96c3ffe5c0f"
-+SRC_URI[errno-0.3.14.sha256sum] =3D "39cab71617ae0d63f51a36d69f866391735=
-b51691dbda63cf6f96d042b63efeb"
-+SRC_URI[event-listener-5.4.1.sha256sum] =3D "e13b66accf52311f30a0db42147=
-dadea9850cb48cd070028831ae5f5d4b856ab"
-+SRC_URI[event-listener-strategy-0.5.4.sha256sum] =3D "8be9f3dfaaffdae297=
-2880079a491a1a8bb7cbed0b8dd7a347f668b4150a3b93"
-+SRC_URI[exr-1.74.0.sha256sum] =3D "4300e043a56aa2cb633c01af81ca8f699a321=
-879a7854d3896a0ba89056363be"
-+SRC_URI[fastrand-2.4.1.sha256sum] =3D "9f1f227452a390804cdb637b74a86990f=
-2a7d7ba4b7d5693aac9b4dd6defd8d6"
-+SRC_URI[fax-0.2.7.sha256sum] =3D "caf1079563223d5d59d83c85886a56e586cfd5=
-c1a26292e971a0fa266531ac5a"
-+SRC_URI[fdeflate-0.3.7.sha256sum] =3D "1e6853b52649d4ac5c0bd02320cddc5ba=
-956bdb407c4b75a2c6b75bf51500f8c"
-+SRC_URI[field-offset-0.3.6.sha256sum] =3D "38e2275cc4e4fc009b0669731a1e5=
-ab7ebf11f469eaede2bab9309a5b4d6057f"
-+SRC_URI[find-msvc-tools-0.1.9.sha256sum] =3D "5baebc0774151f905a1a2cc419=
-89300b1e6fbb29aff0ceffa1064fdd3088d582"
-+SRC_URI[flate2-1.1.9.sha256sum] =3D "843fba2746e448b37e26a819579957415c8=
-cef339bf08564fe8b7ddbd959573c"
-+SRC_URI[foldhash-0.1.5.sha256sum] =3D "d9c4f5dac5e15c24eb999c26181a6ca40=
-b39fe946cbe4c263c7209467bc83af2"
-+SRC_URI[foldhash-0.2.0.sha256sum] =3D "77ce24cb58228fbb8aa041425bb105085=
-0ac19177686ea6e0f41a70416f56fdb"
-+SRC_URI[formatx-0.2.4.sha256sum] =3D "d8866fac38f53fc87fa3ae1b09ddd723e0=
-482f8fa74323518b4c59df2c55a00a"
-+SRC_URI[futures-0.3.32.sha256sum] =3D "8b147ee9d1f6d097cef9ce628cd2ee622=
-88d963e16fb287bd9286455b241382d"
-+SRC_URI[futures-channel-0.3.32.sha256sum] =3D "07bbe89c50d7a535e539b8c17=
-bc0b49bdb77747034daa8087407d655f3f7cc1d"
-+SRC_URI[futures-core-0.3.32.sha256sum] =3D "7e3450815272ef58cec6d564423f=
-6e755e25379b217b0bc688e295ba24df6b1d"
-+SRC_URI[futures-executor-0.3.32.sha256sum] =3D "baf29c38818342a3b26b5b92=
-3639e7b1f4a61fc5e76102d4b1981c6dc7a7579d"
-+SRC_URI[futures-io-0.3.32.sha256sum] =3D "cecba35d7ad927e23624b22ad55235=
-f2239cfa44fd10428eecbeba6d6a717718"
-+SRC_URI[futures-lite-2.6.1.sha256sum] =3D "f78e10609fe0e0b3f4157ffab1876=
-319b5b0db102a2c60dc4626306dc46b44ad"
-+SRC_URI[futures-macro-0.3.32.sha256sum] =3D "e835b70203e41293343137df5c0=
-664546da5745f82ec9b84d40be8336958447b"
-+SRC_URI[futures-sink-0.3.32.sha256sum] =3D "c39754e157331b013978ec91992b=
-de1ac089843443c49cbc7f46150b0fad0893"
-+SRC_URI[futures-task-0.3.32.sha256sum] =3D "037711b3d59c33004d3856fbdc83=
-b99d4ff37a24768fa1be9ce3538a1cde4393"
-+SRC_URI[futures-util-0.3.32.sha256sum] =3D "389ca41296e6190b48053de0321d=
-02a77f32f8a5d2461dd38762c0593805c6d6"
-+SRC_URI[gdk-pixbuf-0.22.0.sha256sum] =3D "25f420376dbee041b2db374ce45738=
-92a36222bb3f6c0c43e24f0d67eae9b646"
-+SRC_URI[gdk-pixbuf-sys-0.22.0.sha256sum] =3D "48f31b37b1fc4b48b54f6b91b7=
-ef04c18e00b4585d98359dd7b998774bbd91fb"
-+SRC_URI[gdk4-0.11.2.sha256sum] =3D "fd42fdbbf48612c6e8f47c65fb92d2e8f39c=
-25aecd6af047e83897c1a22d2a4e"
-+SRC_URI[gdk4-sys-0.11.2.sha256sum] =3D "9d974ac4f15e67472c3a9728daf61259=
-0b4a5762a4b33f0edd298df0b80d043c"
-+SRC_URI[generic-array-0.14.7.sha256sum] =3D "85649ca51fd72272d7821adaf27=
-4ad91c288277713d9c18820d8499a7ff69e9a"
-+SRC_URI[getrandom-0.3.4.sha256sum] =3D "899def5c37c4fd7b2664648c28120ece=
-c138e4d395b459e5ca34f9cce2dd77fd"
-+SRC_URI[getrandom-0.4.2.sha256sum] =3D "0de51e6874e94e7bf76d726fc5d13ba7=
-82deca734ff60d5bb2fb2607c7406555"
-+SRC_URI[gettext-rs-0.7.7.sha256sum] =3D "5d5857dc1b7f0fee86961de833f434e=
-29494d72af102ce5355738c0664222bdf"
-+SRC_URI[gettext-sys-0.26.0.sha256sum] =3D "4ea859ab0dd7e70ff823032b3e077=
-d03d39c965d68c6c10775add60e999d8ee9"
-+SRC_URI[gif-0.14.2.sha256sum] =3D "ee8cfcc411d9adbbaba82fb72661cc1bcca13=
-e8bba98b364e62b2dba8f960159"
-+SRC_URI[gio-0.22.6.sha256sum] =3D "e3848bcba3a35cc0a71df8ba8ecfd799d6bfb=
-862342a53a4a915fb62213aa4e6"
-+SRC_URI[gio-sys-0.22.0.sha256sum] =3D "64729ba2772c080448f9f966dba8f4456=
-beeb100d8c28a865ef8a0f2ef4987e1"
-+SRC_URI[git-version-0.3.9.sha256sum] =3D "1ad568aa3db0fcbc81f2f116137f26=
-3d7304f512a1209b35b85150d3ef88ad19"
-+SRC_URI[git-version-macro-0.3.9.sha256sum] =3D "53010ccb100b96a67bc32c01=
-75f0ed1426b31b655d562898e57325f81c023ac0"
-+SRC_URI[glam-0.14.0.sha256sum] =3D "333928d5eb103c5d4050533cec0384302db6=
-be8ef7d3cebd30ec6a35350353da"
-+SRC_URI[glam-0.15.2.sha256sum] =3D "3abb554f8ee44336b72d522e0a7fe86a29e0=
-9f839a36022fa869a7dfe941a54b"
-+SRC_URI[glam-0.16.0.sha256sum] =3D "4126c0479ccf7e8664c36a2d719f5f2c140f=
-bb4f9090008098d2c291fa5b3f16"
-+SRC_URI[glam-0.17.3.sha256sum] =3D "e01732b97afd8508eee3333a541b9f7610f4=
-54bb818669e66e90f5f57c93a776"
-+SRC_URI[glam-0.18.0.sha256sum] =3D "525a3e490ba77b8e326fb67d4b44b4bd2f92=
-0f44d4cc73ccec50adc68e3bee34"
-+SRC_URI[glam-0.19.0.sha256sum] =3D "2b8509e6791516e81c1a630d0bd7fbac36d2=
-fa8712a9da8662e716b52d5051ca"
-+SRC_URI[glam-0.20.5.sha256sum] =3D "f43e957e744be03f5801a55472f593d43fab=
-debf25a4585db250f04d86b1675f"
-+SRC_URI[glam-0.21.3.sha256sum] =3D "518faa5064866338b013ff9b2350dc318e14=
-cc4fcd6cb8206d7e7c9886c98815"
-+SRC_URI[glam-0.22.0.sha256sum] =3D "12f597d56c1bd55a811a1be189459e8fad2b=
-bc272616375602443bdfb37fa774"
-+SRC_URI[glam-0.23.0.sha256sum] =3D "8e4afd9ad95555081e109fe1d21f2a30c691=
-b5f0919c67dfa690a2e1eb6bd51c"
-+SRC_URI[glam-0.24.2.sha256sum] =3D "b5418c17512bdf42730f9032c74e1ae39afc=
-408745ebb2acf72fbc4691c17945"
-+SRC_URI[glam-0.25.0.sha256sum] =3D "151665d9be52f9bb40fc7966565d39666f2d=
-1e69233571b71b87791c7e0528b3"
-+SRC_URI[glam-0.27.0.sha256sum] =3D "9e05e7e6723e3455f4818c7b26e855439f75=
-46cf617ef669d1adedb8669e5cb9"
-+SRC_URI[glam-0.28.0.sha256sum] =3D "779ae4bf7e8421cf91c0b3b64e7e8b40b862=
-fba4d393f59150042de7c4965a94"
-+SRC_URI[glam-0.29.3.sha256sum] =3D "8babf46d4c1c9d92deac9f7be466f76dfc44=
-82b6452fc5024b5e8daf6ffeb3ee"
-+SRC_URI[glam-0.30.10.sha256sum] =3D "19fc433e8437a212d1b6f1e68c7824af3ae=
-d907da60afa994e7f542d18d12aa9"
-+SRC_URI[glam-0.31.1.sha256sum] =3D "556f6b2ea90b8d15a74e0e7bb41671c9bdf3=
-8cd9f78c284d750b9ce58a2b5be7"
-+SRC_URI[glam-0.32.1.sha256sum] =3D "f70749695b063ecbf6b62949ccccde2e733e=
-c3ecbbd71d467dca4e5c6c97cca0"
-+SRC_URI[glib-0.22.7.sha256sum] =3D "c207e04e51605dcf7b2924c41591b3a10e14=
-38eaac5bcf448fb91f325381104a"
-+SRC_URI[glib-macros-0.22.6.sha256sum] =3D "506d23499707c7142898429757e8d=
-9a3871d965239a2cb66dfa05052be6d6f19"
-+SRC_URI[glib-sys-0.22.6.sha256sum] =3D "5f7fbac234ed5bc2a28359b7bde8e1b9=
-cdf1441cc2d7f068e4824672d7db9445"
-+SRC_URI[gobject-sys-0.22.6.sha256sum] =3D "22a861859b887a79cf461359c192c=
-97a57d8fb0229dd291232e57aa11f6fa72c"
-+SRC_URI[graphene-rs-0.22.0.sha256sum] =3D "c7d1b7881f96869f49808b6adfe90=
-6a93a57a34204952253444d68c3208d71f1"
-+SRC_URI[graphene-sys-0.22.0.sha256sum] =3D "517f062f3fd6b7fd3e57a3f038a7=
-4b3c23ca32f51199ff028aa704609943f79c"
-+SRC_URI[gsk4-0.11.1.sha256sum] =3D "53c912dfcbd28acace5fc99c40bb9f25e1dc=
-b73efb1f2608327f66a99acdcb62"
-+SRC_URI[gsk4-sys-0.11.1.sha256sum] =3D "d7d54bbc7a9d8b6ffe4f0c95eede15cc=
-fb365c8bf521275abe6bcfb57b18fb8a"
-+SRC_URI[gtk4-0.11.3.sha256sum] =3D "7181b837f04cbe93f79441475f7a00560a92=
-cba7a72e38cc1a68b6f8b78eaae2"
-+SRC_URI[gtk4-macros-0.11.0.sha256sum] =3D "3581b242ba62fdff122ebb626ea64=
-1582ec326031622bd19d60f85029c804a87"
-+SRC_URI[gtk4-sys-0.11.3.sha256sum] =3D "20ba8e695e2640455561274e65e45f0a=
-151619e450746007667f4b23ceae4e1b"
-+SRC_URI[half-2.7.1.sha256sum] =3D "6ea2d84b969582b4b1864a92dc5d27cd2b77b=
-622a8d79306834f1be5ba20d84b"
-+SRC_URI[hashbrown-0.15.5.sha256sum] =3D "9229cfe53dfd69f0609a49f65461bd9=
-3001ea1ef889cd5529dd176593f5338a1"
-+SRC_URI[hashbrown-0.16.1.sha256sum] =3D "841d1cc9bed7f9236f321df97703037=
-3f4a4163ae1a7dbfe1a51a2c1a51d9100"
-+SRC_URI[hashbrown-0.17.1.sha256sum] =3D "ed5909b6e89a2db4456e54cd5f67379=
-1d7eca6732202bbf2a9cc504fe2f9b84a"
-+SRC_URI[heck-0.5.0.sha256sum] =3D "2304e00983f87ffb38b55b444b5e3b60a884b=
-5d30c0fca7d82fe33449bbe55ea"
-+SRC_URI[hermit-abi-0.5.2.sha256sum] =3D "fc0fef456e4baa96da950455cd02c08=
-1ca953b141298e41db3fc7e36b1da849c"
-+SRC_URI[hex-0.4.3.sha256sum] =3D "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e=
-486a595ed5fd8f86ba55232a70"
-+SRC_URI[hkdf-0.12.4.sha256sum] =3D "7b5f8eb2ad728638ea2c7d47a21db23b7b58=
-a72ed6a38256b8a1849f15fbbdf7"
-+SRC_URI[hmac-0.12.1.sha256sum] =3D "6c49c37c09c17a53d937dfbb742eb3a961d6=
-5a994e6bcdcf37e7399d0cc8ab5e"
-+SRC_URI[iana-time-zone-0.1.65.sha256sum] =3D "e31bc9ad994ba00e440a8aa5c9=
-ef0ec67d5cb5e5cb0cc7f8b744a35b389cc470"
-+SRC_URI[iana-time-zone-haiku-0.1.2.sha256sum] =3D "f31827a206f56af32e590=
-ba56d5d2d085f558508192593743f16b2306495269f"
-+SRC_URI[id-arena-2.3.0.sha256sum] =3D "3d3067d79b975e8844ca9eb072e16b31c=
-3c1c36928edf9c6789548c524d0d954"
-+SRC_URI[image-0.25.10.sha256sum] =3D "85ab80394333c02fe689eaf900ab500fbd=
-0c2213da414687ebf995a65d5a6104"
-+SRC_URI[image-webp-0.2.4.sha256sum] =3D "525e9ff3e1a4be2fbea1fdf0e98686a=
-6d98b4d8f937e1bf7402245af1909e8c3"
-+SRC_URI[imageproc-0.26.2.sha256sum] =3D "645329c490783f3ea465d2b6c7c0828=
-6fece97f15e714fd533b6c70a3ead2252"
-+SRC_URI[imgref-1.12.2.sha256sum] =3D "89194689a993ab15268672e99e7b0e19da=
-2da3268ac682e8f02d29d4d1434cd7"
-+SRC_URI[indexmap-2.14.0.sha256sum] =3D "d466e9454f08e4a911e14806c24e16fb=
-a1b4c121d1ea474396f396069cf949d9"
-+SRC_URI[ink-stroke-modeler-rs-0.1.0.sha256sum] =3D "fd1c3066d5abcd42e8fc=
-fd14f76e5397b373e202b3fdf7628d269b05b889bdd6"
-+SRC_URI[inout-0.1.4.sha256sum] =3D "879f10e63c20629ecabbb64a8010319738c6=
-6a5cd0c29b02d63d272b03751d01"
-+SRC_URI[interpolate_name-0.2.4.sha256sum] =3D "c34819042dc3d3971c46c2190=
-835914dfbe0c3c13f61449b2997f4e9722dfa60"
-+SRC_URI[is_terminal_polyfill-1.70.2.sha256sum] =3D "a6cb138bb79a146c1bd4=
-60005623e142ef0181e3d0219cb493e02f7d08a35695"
-+SRC_URI[itertools-0.14.0.sha256sum] =3D "2b192c782037fadd9cfa75548310488=
-aabdbf3d2da73885b31bd0abd03351285"
-+SRC_URI[itoa-1.0.18.sha256sum] =3D "8f42a60cbdf9a97f5d2305f08a87dc4e0930=
-8d1276d28c869c684d7777685682"
-+SRC_URI[jiff-0.2.28.sha256sum] =3D "4603d3033e49e2b0e31229fcab20a5d40089=
-c607d975cd9c80551dc69eed9102"
-+SRC_URI[jiff-static-0.2.28.sha256sum] =3D "782d32378dddf207193ac91cefb84=
-8ad41abb58195c95168e1291227a0832b47"
-+SRC_URI[jobserver-0.1.34.sha256sum] =3D "9afb3de4395d6b3e67a780b6de64b51=
-c978ecf11cb9a462c66be7d4ca9039d33"
-+SRC_URI[js-sys-0.3.102.sha256sum] =3D "03d04c30968dffe80775bd4d7fb676131=
-cd04a1fb46d2686dbffbaec2d9dfd31"
-+SRC_URI[lazy_static-1.5.0.sha256sum] =3D "bbd2bcb4c963f2ddae06a2efc7e9f3=
-591312473c50c6685e1f298068316e66fe"
-+SRC_URI[leb128fmt-0.1.0.sha256sum] =3D "09edd9e8b54e49e587e4f6295a7d29c3=
-ea94d469cb40ab8ca70b288248a81db2"
-+SRC_URI[lebe-0.5.3.sha256sum] =3D "7a79a3332a6609480d7d0c9eab957bca6b455=
-b91bb84e66d19f5ff66294b85b8"
-+SRC_URI[libadwaita-0.9.1.sha256sum] =3D "bc0da4e27b20d3e71f830e5b0f0188d=
-22c257986bf421c02cfde777fe07932a4"
-+SRC_URI[libadwaita-sys-0.9.1.sha256sum] =3D "aaee067051c5d3c058d050d1676=
-88b80b67de1950cfca77730549aa761fc5d7d"
-+SRC_URI[libc-0.2.186.sha256sum] =3D "68ab91017fe16c622486840e4c83c9a37af=
-eff978bd239b5293d61ece587de66"
-+SRC_URI[libfuzzer-sys-0.4.13.sha256sum] =3D "a9fd2f41a1cba099f79a0b6b6c3=
-5656cf7c03351a7bae8ff0f28f25270f929d2"
-+SRC_URI[libm-0.2.16.sha256sum] =3D "b6d2cec3eae94f9f509c767b45932f1ada83=
-50c4bdb85af2fcab4a3c14807981"
-+SRC_URI[linux-raw-sys-0.12.1.sha256sum] =3D "32a66949e030da00e8c7d4434b2=
-51670a91556f4144941d37452769c25d58a53"
-+SRC_URI[locale_config-0.3.0.sha256sum] =3D "08d2c35b16f4483f6c26f0e4e955=
-0717a2f6575bcd6f12a53ff0c490a94a6934"
-+SRC_URI[log-0.4.32.sha256sum] =3D "953f07c43838f8e6f9758cab68bf5bed85465=
-e7587ebe0b823f1bcd81978ad3a"
-+SRC_URI[loop9-0.1.5.sha256sum] =3D "0fae87c125b03c1d2c0150c90365d7d6bcc5=
-3fb73a9acaef207d2d065860f062"
-+SRC_URI[lru-0.16.4.sha256sum] =3D "7f66e8d5d03f609abc3a39e6f08e4164ebf14=
-47a732906d39eb9b99b7919ef39"
-+SRC_URI[malloc_buf-0.0.6.sha256sum] =3D "62bb907fe88d54d8d9ce32a3cceab42=
-18ed2f6b7d35617cafe9adf84e43919cb"
-+SRC_URI[matrixmultiply-0.3.10.sha256sum] =3D "a06de3016e9fae57a36fd14dba=
-131fccf49f74b40b7fbdb472f96e361ec71a08"
-+SRC_URI[maybe-rayon-0.1.1.sha256sum] =3D "8ea1f30cedd69f0a2954655f7188c6=
-a834246d2bcf1e315e2ac40c4b24dc9519"
-+SRC_URI[md-5-0.10.6.sha256sum] =3D "d89e7ee0cfbedfc4da3340218492196241d8=
-9eefb6dab27de5df917a6d2e78cf"
-+SRC_URI[memchr-2.8.2.sha256sum] =3D "88904434abc2901f197fe8cc55f0445e7de=
-d921dba5911dad2e2b39b48e663c4"
-+SRC_URI[memoffset-0.9.1.sha256sum] =3D "488016bfae457b036d996092f6cb4486=
-77611ce4449e970ceaf42695203f218a"
-+SRC_URI[miniz_oxide-0.8.9.sha256sum] =3D "1fa76a2c86f704bdb222d66965fb3d=
-63269ce38518b83cb0575fca855ebb6316"
-+SRC_URI[moxcms-0.8.1.sha256sum] =3D "bb85c154ba489f01b25c0d36ae69a87e4a1=
-c73a72631fc6c0eb6dde34a73e44b"
-+SRC_URI[nalgebra-0.34.2.sha256sum] =3D "df76ea0ff5c7e6b88689085804d6132d=
-ed0ddb9de5ca5b8aeb9eeadc0508a70a"
-+SRC_URI[new_debug_unreachable-1.0.6.sha256sum] =3D "650eef8c711430f1a879=
-fdd01d4745a7deea475becfb90269c06775983bbf086"
-+SRC_URI[no_std_io2-0.9.4.sha256sum] =3D "418abd1b6d34fbf6cae440dc874771b=
-0525a604428704c76e48b29a5e67b8003"
-+SRC_URI[nom-8.0.0.sha256sum] =3D "df9761775871bdef83bee530e60050f7e54b11=
-05350d6884eb0fb4f46c2f9405"
-+SRC_URI[noop_proc_macro-0.3.0.sha256sum] =3D "0676bb32a98c1a483ce53e500a=
-81ad9c3d5b3f7c920c28c24e9cb0980d0b5bc8"
-+SRC_URI[num-0.4.3.sha256sum] =3D "35bd024e8b2ff75562e5f34e7f4905839deb4b=
-22955ef5e73d2fea1b9813cb23"
-+SRC_URI[num-bigint-0.4.6.sha256sum] =3D "a5e44f723f1133c9deac646763579fd=
-b3ac745e418f2a7af9cd0c431da1f20b9"
-+SRC_URI[num-bigint-dig-0.9.1.sha256sum] =3D "a7f9a86e097b0d187ad0e65667c=
-2f58b9254671e86e7dbb78036b16692eae099"
-+SRC_URI[num-complex-0.4.6.sha256sum] =3D "73f88a1307638156682bada9d76041=
-35552957b7818057dcef22705b4d509495"
-+SRC_URI[num-derive-0.4.2.sha256sum] =3D "ed3955f1a9c7c0c15e092f9c887db08=
-b1fc683305fdf6eb6684f22555355e202"
-+SRC_URI[num-integer-0.1.46.sha256sum] =3D "7969661fd2958a5cb096e56c8e1ad=
-0444ac2bbcd0061bd28660485a44879858f"
-+SRC_URI[num-iter-0.1.45.sha256sum] =3D "1429034a0490724d0075ebb2bc9e875d=
-6503c3cf69e235a8941aa757d83ef5bf"
-+SRC_URI[num-rational-0.4.2.sha256sum] =3D "f83d14da390562dca69fc84082e73=
-e548e1ad308d24accdedd2720017cb37824"
-+SRC_URI[num-traits-0.2.19.sha256sum] =3D "071dfc062690e90b734c0b2273ce72=
-ad0ffa95f0c74596bc250dcfd960262841"
-+SRC_URI[objc-0.2.7.sha256sum] =3D "915b1b472bc21c53464d6c8461c9d3af805ba=
-1ef837e1cac254428f4a77177b1"
-+SRC_URI[objc-foundation-0.1.1.sha256sum] =3D "1add1b659e36c9607c7aab864a=
-76c7a4c2760cd0cd2e120f3fb8b952c7e22bf9"
-+SRC_URI[objc_id-0.1.1.sha256sum] =3D "c92d4ddb4bd7b50d730c215ff871754d0d=
-a6b2178849f8a2a2ab69712d0c073b"
-+SRC_URI[once_cell-1.21.4.sha256sum] =3D "9f7c3e4beb33f85d45ae3e3a1792185=
-706c8e16d043238c593331cc7cd313b50"
-+SRC_URI[once_cell_polyfill-1.70.2.sha256sum] =3D "384b8ab6d37215f3c5301a=
-95a4accb5d64aa607f1fcb26a11b5303878451b4fe"
-+SRC_URI[oo7-0.6.0.sha256sum] =3D "78f2bfed90f1618b4b48dcad9307f25e14ae89=
-4e2949642c87c351601d62cebd"
-+SRC_URI[ordered-stream-0.2.0.sha256sum] =3D "9aa2b01e1d916879f73a53d01d1=
-d6cee68adbb31d6d9177a8cfce093cced1d50"
-+SRC_URI[owned_ttf_parser-0.25.1.sha256sum] =3D "36820e9051aca1014ddc7577=
-0aab4d68bc1e9e632f0f5627c4086bc216fb583b"
-+SRC_URI[pango-0.22.6.sha256sum] =3D "251bdc6e6487b811be0e406a21e301e07e4=
-5c0aa8fa39e00c0c8e12a91752438"
-+SRC_URI[pango-sys-0.22.0.sha256sum] =3D "bbd111a20ca90fedf03e09c59783c67=
-9c00900f1d8491cca5399f5e33609d5d6"
-+SRC_URI[parking-2.2.1.sha256sum] =3D "f38d5652c16fde515bb1ecef450ab0f6a2=
-19d619a7274976324d5e377f7dceba"
-+SRC_URI[paste-1.0.15.sha256sum] =3D "57c0d7b74b563b49d38dae00a0c37d4d6de=
-9b432382b2892f0574ddcae73fd0a"
-+SRC_URI[pastey-0.1.1.sha256sum] =3D "35fb2e5f958ec131621fdd531e9fc186ed7=
-68cbe395337403ae56c17a74c68ec"
-+SRC_URI[pbkdf2-0.12.2.sha256sum] =3D "f8ed6a7761f76e3b9f92dfb0a60a6a6477=
-c61024b775147ff0973a02653abaf2"
-+SRC_URI[pin-project-lite-0.2.17.sha256sum] =3D "a89322df9ebe1c1578d689c9=
-2318e070967d1042b512afbe49518723f4e6d5cd"
-+SRC_URI[piper-0.2.5.sha256sum] =3D "c835479a4443ded371d6c535cbfd8d31ad92=
-c5d23ae9770a61bc155e4992a3c1"
-+SRC_URI[pkg-config-0.3.33.sha256sum] =3D "19f132c84eca552bf34cab8ec81f1c=
-1dcc229b811638f9d283dceabe58c5569e"
-+SRC_URI[png-0.18.1.sha256sum] =3D "60769b8b31b2a9f263dae2776c37b1b28ae24=
-6943cf719eb6946a1db05128a61"
-+SRC_URI[polling-3.11.0.sha256sum] =3D "5d0e4f59085d47d8241c88ead0f274e8a=
-0cb551f3625263c05eb8dd897c34218"
-+SRC_URI[portable-atomic-1.13.1.sha256sum] =3D "c33a9471896f1c69cecef8d20=
-cbe2f7accd12527ce60845ff44c153bb2a21b49"
-+SRC_URI[portable-atomic-util-0.2.7.sha256sum] =3D "c2a106d1259c23fac8e54=
-3272398ae0e3c0b8d33c88ed73d0cc71b0f1d902618"
-+SRC_URI[ppv-lite86-0.2.21.sha256sum] =3D "85eae3c4ed2f50dcfe72643da4befc=
-30deadb458a9b590d720cde2f2b1e97da9"
-+SRC_URI[prettyplease-0.2.37.sha256sum] =3D "479ca8adacdd7ce8f1fb39ce9ecc=
-cbfe93a3f1344b3d0d97f20bc0196208f62b"
-+SRC_URI[primal-check-0.3.4.sha256sum] =3D "dc0d895b311e3af9902528fbb8f92=
-8688abbd95872819320517cc24ca6b2bd08"
-+SRC_URI[proc-macro-crate-3.5.0.sha256sum] =3D "e67ba7e9b2b56446f1d419b1d=
-807906278ffa1a658a8a5d8a39dcb1f5a78614f"
-+SRC_URI[proc-macro2-1.0.106.sha256sum] =3D "8fd00f0bb2e90d81d1044c2b3261=
-7f68fcb9fa3bb7640c23e9c748e53fb30934"
-+SRC_URI[profiling-1.0.18.sha256sum] =3D "3d595e54a326bc53c1c197b32d295e1=
-4b169e3cfeaa8dc82b529f947fba6bcf5"
-+SRC_URI[profiling-procmacros-1.0.18.sha256sum] =3D "4488a4a36b9a4ba6b933=
-4a32a39971f77c1436ec82c38707bce707699cc3bbcb"
-+SRC_URI[pxfm-0.1.29.sha256sum] =3D "e0c5ccf5294c6ccd63a74f1565028353830a=
-9c2f5eb0c682c355c471726a6e3f"
-+SRC_URI[qoi-0.4.1.sha256sum] =3D "7f6d64c71eb498fe9eae14ce4ec935c555749a=
-ef511cca85b5568910d6e48001"
-+SRC_URI[quick-error-2.0.1.sha256sum] =3D "a993555f31e5a609f617c12db6250d=
-edcac1b0a85076912c436e6fc9b2c8e6a3"
-+SRC_URI[quote-1.0.45.sha256sum] =3D "41f2619966050689382d2b44f664f4bc593=
-e129785a36d6ee376ddf37259b924"
-+SRC_URI[r-efi-5.3.0.sha256sum] =3D "69cdb34c158ceb288df11e18b4bd39de994f=
-6657d83847bdffdbd7f346754b0f"
-+SRC_URI[r-efi-6.0.0.sha256sum] =3D "f8dcc9c7d52a811697d2151c701e0d08956f=
-92b0e24136cf4cf27b57a6a0d9bf"
-+SRC_URI[rand-0.9.4.sha256sum] =3D "44c5af06bb1b7d3216d91932aed5265164bf3=
-84dc89cd6ba05cf59a35f5f76ea"
-+SRC_URI[rand_chacha-0.9.0.sha256sum] =3D "d3022b5f1df60f26e1ffddd6c66e8a=
-a15de382ae63b3a0c1bfc0e4d3e3f325cb"
-+SRC_URI[rand_core-0.9.5.sha256sum] =3D "76afc826de14238e6e8c374ddcc1fa19=
-e374fd8dd986b0d2af0d02377261d83c"
-+SRC_URI[rand_distr-0.5.1.sha256sum] =3D "6a8615d50dcf34fa31f7ab52692afec=
-947c4dd0ab803cc87cb3b0b4570ff7463"
-+SRC_URI[rav1e-0.8.1.sha256sum] =3D "43b6dd56e85d9483277cde964fd1bdb0428d=
-e4fec5ebba7540995639a21cb32b"
-+SRC_URI[ravif-0.13.0.sha256sum] =3D "e52310197d971b0f5be7fe6b57530dcd27b=
-eb35c1b013f29d66c1ad73fbbcc45"
-+SRC_URI[rawpointer-0.2.1.sha256sum] =3D "60a357793950651c4ed0f3f52338f53=
-b2f809f32d83a07f72909fa13e4c6c1e3"
-+SRC_URI[rayon-1.12.0.sha256sum] =3D "fb39b166781f92d482534ef4b4b1b2568f4=
-2613b53e5b6c160e24cfbfa30926d"
-+SRC_URI[rayon-core-1.13.0.sha256sum] =3D "22e18b0f0062d30d4230b2e85ff77f=
-dfe4326feb054b9783a3460d8435c8ab91"
-+SRC_URI[regex-1.12.4.sha256sum] =3D "f1292b7759ae1cb9ec195452d1390a074f0=
-cd8541ab7a5a8c31cd6db45d4a6ba"
-+SRC_URI[regex-automata-0.4.14.sha256sum] =3D "6e1dd4122fc1595e8162618945=
-476892eefca7b88c52820e74af6262213cae8f"
-+SRC_URI[regex-syntax-0.8.11.sha256sum] =3D "d6f6ff9a378485b298a5286656da=
-665ba74413d36db0979633275d2e708145d4"
-+SRC_URI[rgb-0.8.53.sha256sum] =3D "47b34b781b31e5d73e9fbc8689c70551fd1ad=
-e9a19e3e28cfec8580a79290cc4"
-+SRC_URI[rustc_version-0.4.1.sha256sum] =3D "cfcb3a22ef46e85b45de6ee7e79d=
-063319ebb6594faafcf1c225ea92ab6e9b92"
-+SRC_URI[rustdct-0.7.1.sha256sum] =3D "8b61555105d6a9bf98797c063c362a1d24=
-ed8ab0431655e38f1cf51e52089551"
-+SRC_URI[rustfft-6.4.1.sha256sum] =3D "21db5f9893e91f41798c88680037dba611=
-ca6674703c1a18601b01a72c8adb89"
-+SRC_URI[rustix-1.1.4.sha256sum] =3D "b6fe4565b9518b83ef4f91bb47ce29620ca=
-828bd32cb7e408f0062e9930ba190"
-+SRC_URI[rustversion-1.0.22.sha256sum] =3D "b39cdef0fa800fc44525c84ccb54a=
-029961a8215f9619753635a9c0d2538d46d"
-+SRC_URI[safe_arch-0.7.4.sha256sum] =3D "96b02de82ddbe1b636e6170c21be6222=
-23aea188ef2e139be0a5b219ec215323"
-+SRC_URI[semver-1.0.28.sha256sum] =3D "8a7852d02fc848982e0c167ef163aaff9c=
-d91dc640ba85e263cb1ce46fae51cd"
-+SRC_URI[serde-1.0.228.sha256sum] =3D "9a8e94ea7f378bd32cbbd37198a4a91436=
-180c5bb472411e48b5ec2e2124ae9e"
-+SRC_URI[serde_bytes-0.11.19.sha256sum] =3D "a5d440709e79d88e51ac01c4b72f=
-c6cb7314017bb7da9eeff678aa94c10e3ea8"
-+SRC_URI[serde_core-1.0.228.sha256sum] =3D "41d385c7d4ca58e59fc732af25c39=
-83b67ac852c1a25000afe1175de458b67ad"
-+SRC_URI[serde_derive-1.0.228.sha256sum] =3D "d540f220d3187173da220f885ab=
-66608367b6574e925011a9353e4badda91d79"
-+SRC_URI[serde_json-1.0.150.sha256sum] =3D "e8014e44b4736ed0538adeecded0f=
-ce2a272f22dc9578a7eb6b2d9993c74cfb9"
-+SRC_URI[serde_repr-0.1.20.sha256sum] =3D "175ee3e80ae9982737ca543e961330=
-87cbd9a485eecc3bc4de9c1a37b47ea59c"
-+SRC_URI[serde_spanned-1.1.1.sha256sum] =3D "6662b5879511e06e8999a8a235d8=
-48113e942c9124f211511b16466ee2995f26"
-+SRC_URI[sha2-0.10.9.sha256sum] =3D "a7507d819769d01a365ab707794a4084392c=
-824f54a7a6a7862f8c3d0892b283"
-+SRC_URI[shell-words-1.1.1.sha256sum] =3D "dc6fe69c597f9c37bfeeeeeb33da35=
-30379845f10be461a66d16d03eca2ded77"
-+SRC_URI[shlex-2.0.1.sha256sum] =3D "f8fadd59c855ef2080decdef8ff161eb6661=
-b86933c9d82e5ba29dc602a55aba"
-+SRC_URI[signal-hook-registry-1.4.8.sha256sum] =3D "c4db69cba1110affc0e9f=
-7bcd48bbf87b3f4fc7c61fc9155afd4c469eb3d6c1b"
-+SRC_URI[simba-0.9.1.sha256sum] =3D "c99284beb21666094ba2b75bbceda012e610=
-f5479dfcc2d6e2426f53197ffd95"
-+SRC_URI[simd-adler32-0.3.9.sha256sum] =3D "703d5c7ef118737c72f1af64ad2f6=
-f8c5e1921f818cdcb97b8fe6fc69bf66214"
-+SRC_URI[simd_helpers-0.1.0.sha256sum] =3D "95890f873bec569a0362c235787f3=
-aca6e1e887302ba4840839bcc6459c42da6"
-+SRC_URI[slab-0.4.12.sha256sum] =3D "0c790de23124f9ab44544d7ac05d60440adc=
-586479ce501c1d6d7da3cd8c9cf5"
-+SRC_URI[smallvec-1.15.2.sha256sum] =3D "8ed6a63f02c8539c91a8685a86f40996=
-61ba3da017932f6ebbea6de3f0fa7c90"
-+SRC_URI[stable_deref_trait-1.2.1.sha256sum] =3D "6ce2be8dc25455e1f91df71=
-bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
-+SRC_URI[strength_reduce-0.2.4.sha256sum] =3D "fe895eb47f22e2ddd4dabc02bc=
-e419d2e643c8e3b585c78158b349195bc24d82"
-+SRC_URI[subtle-2.6.1.sha256sum] =3D "13c2bddecc57b384dee18652358fb23172f=
-acb8a2c51ccc10d74c157bdea3292"
-+SRC_URI[syn-2.0.117.sha256sum] =3D "e665b8803e7b1d2a727f4023456bbbbe74da=
-67099c585258af0ad9c5013b9b99"
-+SRC_URI[system-deps-7.0.8.sha256sum] =3D "396a35feb67335377e0251fcbc1092=
-fc85c484bd4e3a7a54319399da127796e7"
-+SRC_URI[target-lexicon-0.13.5.sha256sum] =3D "adb6935a6f5c20170eeceb1a38=
-35a49e12e19d792f6dd344ccc76a985ca5a6ca"
-+SRC_URI[temp-dir-0.1.16.sha256sum] =3D "83176759e9416cf81ee66cb6508dbfe9=
-c96f20b8b56265a39917551c23c70964"
-+SRC_URI[tempfile-3.27.0.sha256sum] =3D "32497e9a4c7b38532efcdebeef879707=
-aa9f794296a4f0244f6f69e9bc8574bd"
-+SRC_URI[thiserror-2.0.18.sha256sum] =3D "4288b5bcbc7920c07a1149a35cf9590=
-a2aa808e0bc1eafaade0b80947865fbc4"
-+SRC_URI[thiserror-impl-2.0.18.sha256sum] =3D "ebc4ee7f67670e9b64d05fa425=
-3e753e016c6c95ff35b89b7941d6b856dec1d5"
-+SRC_URI[tiff-0.11.3.sha256sum] =3D "b63feaf3343d35b6ca4d50483f94843803b0=
-f51634937cc2ec519fc32232bc52"
-+SRC_URI[toml-1.1.2+spec-1.1.0.sha256sum] =3D "81f3d15e84cbcd896376e67303=
-14d59fb5a87f31e4b038454184435cd57defee"
-+SRC_URI[toml_datetime-1.1.1+spec-1.1.0.sha256sum] =3D "3165f65f62e28e011=
-5a00b2ebdd37eb6f3b641855f9d636d3cd4103767159ad7"
-+SRC_URI[toml_edit-0.25.12+spec-1.1.0.sha256sum] =3D "d2153edc6955a6c354f=
-ad8f5efd38b6a8769bdccf9fe50f8e1329f81b0baa5d7"
-+SRC_URI[toml_parser-1.1.2+spec-1.1.0.sha256sum] =3D "a2abe9b86193656635d=
-2411dc43050282ca48aa31c2451210f4202550afb7526"
-+SRC_URI[toml_writer-1.1.1+spec-1.1.0.sha256sum] =3D "756daf9b1013ebe47a8=
-776667b466417e2d4c5679d441c26230efd9ef78692db"
-+SRC_URI[tracing-0.1.44.sha256sum] =3D "63e71662fa4b2a2c3a26f570f037eb95b=
-b1f85397f3cd8076caed2f026a6d100"
-+SRC_URI[tracing-attributes-0.1.31.sha256sum] =3D "7490cfa5ec963746568740=
-651ac6781f701c9c5ea257c58e057f3ba8cf69e8da"
-+SRC_URI[tracing-core-0.1.36.sha256sum] =3D "db97caf9d906fbde555dd62fa95d=
-dba9eecfd14cb388e4f491a66d74cd5fb79a"
-+SRC_URI[transpose-0.2.3.sha256sum] =3D "1ad61aed86bc3faea4300c7aee358b4c=
-6d0c8d6ccc36524c96e4c92ccf26e77e"
-+SRC_URI[ttf-parser-0.25.1.sha256sum] =3D "d2df906b07856748fa3f6e0ad0cbaa=
-047052d4a7dd609e231c4f72cee8c36f31"
-+SRC_URI[typenum-1.20.1.sha256sum] =3D "b6f5e870be6c3b371b77fe0ee0bafb859=
-fa4964b4404c27de1d380043c4dda20"
-+SRC_URI[uds_windows-1.2.1.sha256sum] =3D "f2f6fb2847f6742cd76af783a2a2c4=
-9e9375d0a111c7bef6f71cd9e738c72d6e"
-+SRC_URI[unicode-ident-1.0.24.sha256sum] =3D "e6e4313cd5fcd3dad5cafa17970=
-2e2b244f760991f45397d14d4ebf38247da75"
-+SRC_URI[unicode-xid-0.2.6.sha256sum] =3D "ebc1c04c71510c7f702b52b7c35073=
-4c9ff1295c464a03335b00bb84fc54f853"
-+SRC_URI[utf8parse-0.2.2.sha256sum] =3D "06abde3611657adf66d383f00b093d7f=
-aecc7fa57071cce2578660c9f1010821"
-+SRC_URI[uuid-1.23.3.sha256sum] =3D "144d6b123cef80b301b8f72a9e2ca4370dde=
-c21950d0a103dd22c437006d2db7"
-+SRC_URI[v_frame-0.3.9.sha256sum] =3D "666b7727c8875d6ab5db9533418d7c7642=
-33ac9c0cff1d469aec8fa127597be2"
-+SRC_URI[version-compare-0.2.1.sha256sum] =3D "03c2856837ef78f57382f06b2b=
-8563a2f512f7185d732608fd9176cb3b8edf0e"
-+SRC_URI[version_check-0.9.5.sha256sum] =3D "0b928f33d975fc6ad9f86c8f2838=
-53ad26bdd5b10b7f1542aa2fa15e2289105a"
-+SRC_URI[wasip2-1.0.4+wasi-0.2.12.sha256sum] =3D "b67efb37e106e55ce722a51=
-0d6b5f9c17f083e5fc79afc2badeb12cc313d9487"
-+SRC_URI[wasip3-0.4.0+wasi-0.3.0-rc-2026-01-06.sha256sum] =3D "5428f8bf88=
-ea5ddc08faddef2ac4a67e390b88186c703ce6dbd955e1c145aca5"
-+SRC_URI[wasm-bindgen-0.2.125.sha256sum] =3D "8ddb3f79143bced6de842704116=
-22a2699cee572fc0875aeaf1e7867cf9fca1a"
-+SRC_URI[wasm-bindgen-macro-0.2.125.sha256sum] =3D "4e21a184b13fb19e15729=
-6e2c46056aec9092264fab83e4ba59e68c61b323c3d"
-+SRC_URI[wasm-bindgen-macro-support-0.2.125.sha256sum] =3D "fecefd9c35bd9=
-35a20fc3fc344b5f29138961e4f47fb03297d88f2587afb5ebd"
-+SRC_URI[wasm-bindgen-shared-0.2.125.sha256sum] =3D "23939e44bb9a5d7576fa=
-2b563dc2e136628f1224e88a8deed09e04858b77871f"
-+SRC_URI[wasm-encoder-0.244.0.sha256sum] =3D "990065f2fe63003fe337b932cfb=
-5e3b80e0b4d0f5ff650e6985b1048f62c8319"
-+SRC_URI[wasm-metadata-0.244.0.sha256sum] =3D "bb0e353e6a2fbdc176932bbaab=
-493762eb1255a7900fe0fea1a2f96c296cc909"
-+SRC_URI[wasmparser-0.244.0.sha256sum] =3D "47b807c72e1bac69382b3a6fb3dbe=
-8ea4c0ed87ff5629b8685ae6b9a611028fe"
-+SRC_URI[weezl-0.1.12.sha256sum] =3D "a28ac98ddc8b9274cb41bb4d9d4d5c425b6=
-020c50c46f25559911905610b4a88"
-+SRC_URI[wide-0.7.33.sha256sum] =3D "0ce5da8ecb62bcd8ec8b7ea19f69a51275e9=
-1299be594ea5cc6ef7819e16cd03"
-+SRC_URI[winapi-0.3.9.sha256sum] =3D "5c839a674fcd7a98952e593242ea400abe9=
-3992746761e38641405d28b00f419"
-+SRC_URI[winapi-i686-pc-windows-gnu-0.4.0.sha256sum] =3D "ac3b87c63620426=
-dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
-+SRC_URI[winapi-x86_64-pc-windows-gnu-0.4.0.sha256sum] =3D "712e227841d05=
-7c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
-+SRC_URI[windows-core-0.62.2.sha256sum] =3D "b8e83a14d34d0623b51dce958119=
-9302a221863196a1dde71a7663a4c2be9deb"
-+SRC_URI[windows-implement-0.60.2.sha256sum] =3D "053e2e040ab57b9dc951b72=
-c264860db7eb3b0200ba345b4e4c3b14f67855ddf"
-+SRC_URI[windows-interface-0.59.3.sha256sum] =3D "3f316c4a2570ba26bbec722=
-032c4099d8c8bc095efccdc15688708623367e358"
-+SRC_URI[windows-link-0.2.1.sha256sum] =3D "f0805222e57f7521d6a62e36fa916=
-3bc891acd422f971defe97d64e70d0a4fe5"
-+SRC_URI[windows-result-0.4.1.sha256sum] =3D "7781fa89eaf60850ac3d2da7af8=
-e5242a5ea78d1a11c49bf2910bb5a73853eb5"
-+SRC_URI[windows-strings-0.5.1.sha256sum] =3D "7837d08f69c77cf6b076895445=
-38e017c1bfcf57e34b4c0ff58e6c2cd3b37091"
-+SRC_URI[windows-sys-0.61.2.sha256sum] =3D "ae137229bcbd6cdf0f7b80a31df61=
-766145077ddf49416a728b02cb3921ff3fc"
-+SRC_URI[winnow-1.0.3.sha256sum] =3D "0592e1c9d151f854e6fd382574c3a085525=
-0e1d9b2f99d9281c6e6391af352f1"
-+SRC_URI[wit-bindgen-0.51.0.sha256sum] =3D "d7249219f66ced02969388cf2bb04=
-4a09756a083d0fab1e566056b04d9fbcaa5"
-+SRC_URI[wit-bindgen-0.57.1.sha256sum] =3D "1ebf944e87a7c253233ad6766e082=
-e3cd714b5d03812acc24c318f549614536e"
-+SRC_URI[wit-bindgen-core-0.51.0.sha256sum] =3D "ea61de684c3ea68cb082b7a8=
-8508a8b27fcc8b797d738bfc99a82facf1d752dc"
-+SRC_URI[wit-bindgen-rust-0.51.0.sha256sum] =3D "b7c566e0f4b284dd6561c786=
-d9cb0142da491f46a9fbed79ea69cdad5db17f21"
-+SRC_URI[wit-bindgen-rust-macro-0.51.0.sha256sum] =3D "0c0f9bfd77e6a48ecc=
-f51359e3ae77140a7f50b1e2ebfe62422d8afdaffab17a"
-+SRC_URI[wit-component-0.244.0.sha256sum] =3D "9d66ea20e9553b30172b5e8319=
-94e35fbde2d165325bec84fc43dbf6f4eb9cb2"
-+SRC_URI[wit-parser-0.244.0.sha256sum] =3D "ecc8ac4bc1dc3381b7f59c34f00b6=
-7e18f910c2c0f50015669dde7def656a736"
-+SRC_URI[y4m-0.8.0.sha256sum] =3D "7a5a4b21e1a62b67a2970e6831bc091d7b87e1=
-19e7f9791aef9702e3bef04448"
-+SRC_URI[zbus-5.16.0.sha256sum] =3D "eee682d202a77e4a9f3b2c2bdf48a7b28af5=
-c08c34ddf66f98c93e5e39464285"
-+SRC_URI[zbus_macros-5.16.0.sha256sum] =3D "adf1bd45a81a103745b1757754762=
-a26e8cd01e4532e4d6c8ec431624b80d1d6"
-+SRC_URI[zbus_names-4.3.2.sha256sum] =3D "7074f3e50b894eac91750142016d30d=
-0a89be8e67dbfd9704fb875825760e52d"
-+SRC_URI[zerocopy-0.8.52.sha256sum] =3D "ce1022995ff5ff5d841ad7d994facc23=
-098cd40152f2c1d11cd607c6f530653f"
-+SRC_URI[zerocopy-derive-0.8.52.sha256sum] =3D "1ae7f38b72ec2a254e2b87ef2=
-77cf2cd4fb97cbebf944faa6f33354da0867930"
-+SRC_URI[zeroize-1.9.0.sha256sum] =3D "e13c156562582aa81c60cb29407084cdb5=
-4c4164760106ab78e6c5b0858cf64e"
-+SRC_URI[zeroize_derive-1.5.0.sha256sum] =3D "3c50655cbb0fe3fc43170059e70=
-2f1ce5e19b84cec58dc87b037a09935c2f328"
-+SRC_URI[zmij-1.0.21.sha256sum] =3D "b8848ee67ecc8aedbaf3e4122217aff89263=
-9231befc6a1b58d29fff4c2cabaa"
-+SRC_URI[zune-core-0.5.1.sha256sum] =3D "cb8a0807f7c01457d0379ba880ba6322=
-660448ddebc890ce29bb64da71fb40f9"
-+SRC_URI[zune-inflate-0.2.54.sha256sum] =3D "73ab332fe2f6680068f3582b16a2=
-4f90ad7096d5d39b974d1c0aff0125116f02"
-+SRC_URI[zune-jpeg-0.5.15.sha256sum] =3D "27bc9d5b815bc103f142aa054f561d9=
-187d191692ec7c2d1e2b4737f8dbd7296"
-+SRC_URI[zvariant-5.12.0.sha256sum] =3D "a192a0bde63360d77a7523c833d4b4ce=
-6070a927e2c53246e4c540b1a3e27be0"
-+SRC_URI[zvariant_derive-5.12.0.sha256sum] =3D "90bc6cde9c01c511074be97f7=
-ccb6c19d0da89e3f8662e812e999dcfd4638737"
-+SRC_URI[zvariant_utils-3.4.0.sha256sum] =3D "1e8535915cfa75547e559d8c68e=
-8139909a4aeee076831e4ef7fc59d8172c4d6"
-diff --git a/meta-gnome/recipes-gnome/papers/papers/0001-meson-Support-cr=
-oss-compilation-via-a-rust_target-cr.patch b/meta-gnome/recipes-gnome/pap=
-ers/papers/0001-meson-Support-cross-compilation-via-a-rust_target-cr.patc=
-h
+diff --git a/meta-oe/recipes-support/rclone/rclone-licenses.inc b/meta-oe=
+/recipes-support/rclone/rclone-licenses.inc
 new file mode 100644
-index 0000000000..1ee7f50021
+index 0000000000..76ab8005bf
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/papers/papers/0001-meson-Support-cross-com=
-pilation-via-a-rust_target-cr.patch
-@@ -0,0 +1,78 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Tue, 22 Sep 2026 07:00:00 +0200
-+Subject: [PATCH] meson: Support cross-compilation via a rust_target cros=
-s
-+ property
++++ b/meta-oe/recipes-support/rclone/rclone-licenses.inc
+@@ -0,0 +1,266 @@
 +
-+cargo is always invoked without --target and the binaries are copied
-+from the native artifact layout (<profile>/), so papers cannot be
-+cross-compiled. Read the rust target triple from the cross file's
-+[properties] (rust_target); when set, pass it as --target and read the
-+binaries from the per-target subdirectory cargo writes to. When it is
-+unset the build is unchanged.
++# This file has been generated by go-mod-update-modules.bbclass
++#
++# Do not modify it by hand, as the contents will be replaced when
++# running the update-modules task.
 +
-+AI-Generated: Uses Claude Code (Claude Fable 5.1)
-+Upstream-Status: Pending
-+---
-+ rust/meson.build        | 9 +++++++++
-+ shell/src/meson.build   | 2 +-
-+ thumbnailer/meson.build | 2 +-
-+ 3 files changed, 11 insertions(+), 2 deletions(-)
++LICENSE +=3D "AND 0BSD AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause =
+AND CC0-1.0 AND ISC AND LGPL-3.0-only AND MIT AND MPL-2.0"
 +
-+diff --git a/rust/meson.build b/rust/meson.build
-+--- a/rust/meson.build
-++++ b/rust/meson.build
-+@@ -57,3 +57,12 @@ if get_option('optimization') =3D=3D '0'
-+ else
-+   rust_target =3D 'release'
-+ endif
-++
-++cargo_build_target =3D meson.get_external_property('rust_target', '')
-++if cargo_build_target !=3D ''
-++  cargo_target_options =3D ['--target', cargo_build_target]
-++  cargo_artifact_dir =3D cargo_build_target / rust_target
-++else
-++  cargo_target_options =3D []
-++  cargo_artifact_dir =3D rust_target
-++endif
-+diff --git a/shell/src/meson.build b/shell/src/meson.build
-+--- a/shell/src/meson.build
-++++ b/shell/src/meson.build
-+@@ -2,7 +2,7 @@ cargo =3D find_program('cargo', required: true)
-+=20
-+ cargo_options =3D [ '--manifest-path', shell_rs_root / 'Cargo.toml' ]
-+ cargo_options +=3D [ '--target-dir', meson.current_build_dir() ]
-+-
-++cargo_options +=3D cargo_target_options
-+ if rust_target =3D=3D 'release'
-+   cargo_options +=3D [ '--release' ]
-+ endif
-+@@ -48,7 +48,7 @@ custom_target(
-+   output: meson.project_name(),
-+   command: [
-+     'cp',
-+-    meson.current_build_dir() / rust_target / meson.project_name(),
-++    meson.current_build_dir() / cargo_artifact_dir / meson.project_name=
-(),
-+     '@OUTPUT@',
-+   ],
-+ )
-+diff --git a/thumbnailer/meson.build b/thumbnailer/meson.build
-+--- a/thumbnailer/meson.build
-++++ b/thumbnailer/meson.build
-+@@ -14,6 +14,7 @@ cargo =3D find_program('cargo', required: true)
-+ thumbnailer_root =3D meson.current_source_dir()
-+ cargo_options =3D ['--manifest-path', thumbnailer_root / 'Cargo.toml']
-+ cargo_options +=3D ['--target-dir', meson.current_build_dir()]
-++cargo_options +=3D cargo_target_options
-+=20
-+ if rust_target =3D=3D 'release'
-+   cargo_options +=3D [ '--release' ]
-+@@ -44,7 +45,7 @@ copy =3D custom_target(
-+   output: meson.project_name() + '-thumbnailer',
-+   command: [
-+     'cp',
-+-    meson.current_build_dir() / rust_target / meson.project_name()
-++    meson.current_build_dir() / cargo_artifact_dir / meson.project_name=
-()
-+     + '-thumbnailer',
-+     '@OUTPUT@',
-+   ],
-diff --git a/meta-gnome/recipes-gnome/papers/papers_51.0.bb b/meta-gnome/=
-recipes-gnome/papers/papers_51.0.bb
++LIC_FILES_CHKSUM +=3D "\
++    file://pkg/mod/bazil.org/fuse@v0.0.0-20230120002735-62a210ff1fd5/LIC=
+ENSE;md5=3D383dc9a9437856075082259af51e3b6d;spdx=3DBSD-3-Clause \
++    file://pkg/mod/cloud.google.com/go/auth/oauth2adapt@v0.2.8/LICENSE;m=
+d5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/cloud.google.com/go/auth@v0.20.0/LICENSE;md5=3D3b83ef=
+96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/cloud.google.com/go/compute/metadata@v0.9.0/LICENSE;m=
+d5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/!azure!a!d/microsoft-authentication-librar=
+y-for-go@v1.7.2/LICENSE;md5=3De74f78882cab57fd1cc4c5482b9a214a;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/azcore@v1.22.0=
+/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/azidentity@v1.=
+14.0/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/internal@v1.12=
+.0/LICENSE.txt;md5=3Da93cb0863fda8e7f177e09f6943951b4;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/storage/azblob=
+@v1.8.0/LICENSE.txt;md5=3D261d8686a7cf1ce9570cdc99746659f8;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/azure-sdk-for-go/sdk/storage/azfile=
+@v1.7.0/LICENSE.txt;md5=3D261d8686a7cf1ce9570cdc99746659f8;spdx=3DMIT \
++    file://pkg/mod/github.com/!azure/go-ntlmssp@v0.1.1/LICENSE;md5=3D7f7=
+cc56311d298677f304d0ffce374d8;spdx=3DMIT \
++    file://pkg/mod/github.com/!filen!cloud!dienste/filen-sdk-go@v0.0.39/=
+LICENSE;md5=3Dd8588c672c152b20b432865bd837f410;spdx=3DMIT \
++    file://pkg/mod/github.com/!files-com/files-sdk-go/v3@v3.3.194/LICENS=
+E;md5=3D5b1e5439f3483c0b3e5af1d44889d0f7;spdx=3DMIT \
++    file://pkg/mod/github.com/!i!b!m/go-sdk-core/v5@v5.23.1/LICENSE;md5=3D=
+86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/!max-!sum/base32768@v0.0.0-20230304063302-=
+18e6ce5945fd/LICENSE;md5=3D53a7faa559b046b1571765e974438d2c;spdx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/bcrypt@v0.0.0-20211005172633-=
+e235017c1baf/LICENSE;md5=3D94d9bbe24b03be19e69b3e9e8e7521a1;spdx=3DBSD-3-=
+Clause \
++    file://pkg/mod/github.com/!proton!mail/gluon@v0.17.1-0.2023072413400=
+0-308be39be96e/COPYING_NOTES.md;md5=3D3c7f65cc939ed17774f55642f2a27c2b;sp=
+dx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/go-crypto@v1.4.1/LICENSE;md5=3D=
+5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/!proton!mail/go-srp@v0.0.7/LICENSE.txt;md5=
+=3Dfdd3dd2144c32a9e32bd64b8170c4585;spdx=3DMIT \
++    file://pkg/mod/github.com/!proton!mail/gopenpgp/v3@v3.4.1/LICENSE;md=
+5=3D1081df8b971c929caed0f3de2bd9c235;spdx=3DMIT \
++    file://pkg/mod/github.com/!puerkito!bio/goquery@v1.12.0/LICENSE;md5=3D=
+4ee9bef45920e3fbd01226d1224b8215;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/!s!t!a!r!r!y-!s/zip@v0.2.3/LICENSE;md5=3D2=
+7ed59347818e59457f9e5a896283e09;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/a1ex3/zstd-seekable-format-go/pkg@v0.10.0/=
+LICENSE;md5=3D0301ea677edf4adc894d9e217774f8e5;spdx=3DMIT \
++    file://pkg/mod/github.com/a8m/tree@v0.0.0-20240104212747-2c8764a5f17=
+e/LICENSE;md5=3D3e88c68744f3946210bf9235cc30f23d;spdx=3DMIT \
++    file://pkg/mod/github.com/aalpar/deheap@v1.1.2/LICENSE;md5=3De725ea0=
+e59f9ea35163ae19e4a6c23fd;spdx=3DMIT \
++    file://pkg/mod/github.com/abbot/go-http-auth@v0.4.0/LICENSE;md5=3Dff=
+253ad767462c46be284da12dda33e8;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/adrg/xdg@v0.5.3/LICENSE;md5=3D65a17e806f0d=
+53da7257b100b42d2dba;spdx=3DMIT \
++    file://pkg/mod/github.com/anacrolix/dms@v1.7.2/LICENSE;md5=3Dd0d54f2=
+866dcc7a433a172dc95bfa18b;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/anacrolix/generics@v0.2.0/LICENSE;md5=3D97=
+41c346eef56131163e13b9db1241b3;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/anacrolix/log@v0.17.0/LICENSE;md5=3D9741c3=
+46eef56131163e13b9db1241b3;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/anchore/go-lzo@v0.1.1/LICENSE;md5=3D766db3=
+77f975691ab09c03aeb015fd5a;spdx=3DMIT \
++    file://pkg/mod/github.com/andybalholm/brotli@v1.2.2/LICENSE;md5=3D94=
+1ee9cd1609382f946352712a319b4b;spdx=3DMIT \
++    file://pkg/mod/github.com/andybalholm/brotli@v1.2.2/flate/LICENSE;md=
+5=3D5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/andybalholm/cascadia@v1.3.4/LICENSE;md5=3D=
+fd61b1ebe511f46d0dfcbbcc3f7d083a;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/apache/arrow-go/v18@v18.7.0/LICENSE.txt;md=
+5=3D6809686fee171a5b91c0fa6a6600ff14;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/appscode/go-querystring@v0.0.0-20170504095=
+604-0126cfb3f1dc/LICENSE;md5=3D29f156828ca5f2df0d1c12543a75f12a;spdx=3DBS=
+D-3-Clause \
++    file://pkg/mod/github.com/atotto/clipboard@v0.1.4/LICENSE;md5=3D4892=
+00b65f13bcbcb890a96b99a58a6f;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream=
+@v1.7.18/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache=
+-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/config@v1.32.30/LICENSE.=
+txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/credentials@v1.19.29/LIC=
+ENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/feature/ec2/imds@v1.18.3=
+0/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/feature/s3/manager@v1.22=
+.34/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 =
+\
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/configsources@v=
+1.4.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2=
+.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/endpoints/v2@v2=
+.7.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.=
+0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/internal/v4a@v1.4.39/LIC=
+ENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/accept-=
+encoding@v1.13.17/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=
+=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/checksu=
+m@v1.9.31/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApach=
+e-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/presign=
+ed-url@v1.13.38/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3D=
+Apache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/internal/s3share=
+d@v1.19.39/LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApac=
+he-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/s3@v1.107.3/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/signin@v1.4.1/LI=
+CENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/sso@v1.32.1/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/ssooidc@v1.37.1/=
+LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2/service/sts@v1.44.1/LICE=
+NSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2@v1.43.7/LICENSE.txt;md5=3D=
+3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/aws-sdk-go-v2@v1.43.7/internal/sync/si=
+ngleflight/LICENSE;md5=3Dbdc234595bc2fe370918f5de5077c8e9;spdx=3DBSD-3-Cl=
+ause \
++    file://pkg/mod/github.com/aws/smithy-go@v1.27.8/LICENSE;md5=3D34400b=
+68072d710fecd0a2940a0d1658;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/aws/smithy-go@v1.27.8/internal/sync/single=
+flight/LICENSE;md5=3Dbdc234595bc2fe370918f5de5077c8e9;spdx=3DBSD-3-Clause=
+ \
++    file://pkg/mod/github.com/bahlo/generic-list-go@v0.2.0/LICENSE;md5=3D=
+5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/beorn7/perks@v1.0.1/LICENSE;md5=3D0d0738f3=
+7ee8dc0b5f88a32e83c60198;spdx=3DMIT \
++    file://pkg/mod/github.com/bodgit/plumbing@v1.3.0/LICENSE;md5=3Dc0bea=
+59ab9d214598eed569eb9e710dc;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/bodgit/sevenzip@v1.6.5/LICENSE;md5=3Dd0597=
+73047cc6f74abb9232a0c9713b7;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/bodgit/windows@v1.0.1/LICENSE;md5=3Db241ce=
+f8b356f41cb612339930e60d1a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/boombuler/barcode@v1.1.0/LICENSE;md5=3Dd9c=
+4b9f155cefe2a7f441c187a253943;spdx=3DMIT \
++    file://pkg/mod/github.com/bradenaw/juniper@v0.15.3/LICENSE;md5=3D6a0=
+90fa2c652eef338ea5379f4502465;spdx=3DMIT \
++    file://pkg/mod/github.com/buengese/sgzip@v0.1.1/GO_LICENSE;md5=3D591=
+778525c869cdde0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/buger/jsonparser@v1.2.0/LICENSE;md5=3Db60a=
+e568cc483bde7743064a52388501;spdx=3DMIT \
++    file://pkg/mod/github.com/calebcase/tmpfile@v1.0.3/LICENSE;md5=3Db35=
+144eeb03d15b22d2450d1a7e9d674;spdx=3DMIT \
++    file://pkg/mod/github.com/cespare/xxhash/v2@v2.3.0/LICENSE.txt;md5=3D=
+802da049c92a99b4387d3f3d91b00fa9;spdx=3DMIT \
++    file://pkg/mod/github.com/chilts/sid@v0.0.0-20190607042430-660e94789=
+ec9/LICENSE;md5=3Dd05a98b9fccf30c831030b5a399905d0;spdx=3DMIT \
++    file://pkg/mod/github.com/clipperhouse/uax29/v2@v2.7.0/LICENSE;md5=3D=
+39b00daa69674119df37aadf8ab34aeb;spdx=3DMIT \
++    file://pkg/mod/github.com/cloudflare/circl@v1.6.4/LICENSE;md5=3D71d7=
+3ee3b01fb1fe8499f3da2593ecc7;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/cloudinary/cloudinary-go/v2@v2.16.0/LICENS=
+E;md5=3D9edb0b9f9cb1c9f76179099ba77ec01b;spdx=3DMIT \
++    file://pkg/mod/github.com/cloudsoda/go-smb2@v0.0.0-20260701064823-d8=
+c5600d73b8/LICENSE;md5=3D25ce52c09e04c514b0d7f783066437b2;spdx=3DBSD-2-Cl=
+ause \
++    file://pkg/mod/github.com/cloudsoda/sddl@v0.0.0-20250224235906-92645=
+4e91efc/LICENSE;md5=3D3000208d539ec061b899bce1d9ce9404;spdx=3DLGPL-3.0-on=
+ly \
++    file://pkg/mod/github.com/colinmarc/hdfs/v2@v2.4.0/LICENSE.txt;md5=3D=
+1f6732eb0b60117407685b62c5eef861;spdx=3DMIT \
++    file://pkg/mod/github.com/coreos/go-semver@v0.3.1/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/coreos/go-systemd/v22@v22.6.0/LICENSE;md5=3D=
+19cbd64715b51267a47bf3750cc6a8a5;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/cpuguy83/go-md2man/v2@v2.0.7/LICENSE.md;md=
+5=3D80794f9009df723bbc6fe19234c9f517;spdx=3DMIT \
++    file://pkg/mod/github.com/creasty/defaults@v1.8.0/LICENSE;md5=3D2a8e=
+c4176ecc68c1924bb7a5d481fe4c;spdx=3DMIT \
++    file://pkg/mod/github.com/cronokirby/saferith@v0.33.1-0.202502261745=
+46-1f11f94ce488/LICENSE;md5=3D12ae33e24b984e0e17c6d247eda9372f;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/davecgh/go-spew@v1.1.2-0.20180830191138-d8=
+f796af33cc/LICENSE;md5=3Dc06795ed54b2a35ebeeb543cd3a73e56;spdx=3DISC \
++    file://pkg/mod/github.com/diskfs/go-diskfs@v1.9.4/LICENSE;md5=3Da346=
+cc99f8bdb4f2cb18021ef39dedba;spdx=3DMIT \
++    file://pkg/mod/github.com/dromara/dongle@v1.0.1/LICENSE;md5=3Db42521=
+12929b7d12372b544e19b8d4fc;spdx=3DMIT \
++    file://pkg/mod/github.com/dropbox/dropbox-sdk-go-unofficial/v6@v6.4.=
+0/LICENSE;md5=3Defb2aa1cf82f675adabe9c3b0843a00c;spdx=3DMIT \
++    file://pkg/mod/github.com/dsnet/compress@v0.0.2-0.20230904184137-39e=
+fe44ab707/LICENSE.md;md5=3Df9a9166bea9f7824860e08378d6ca5e3;spdx=3DBSD-3-=
+Clause \
++    file://pkg/mod/github.com/emersion/go-message@v0.18.2/LICENSE;md5=3D=
+9b0a3b8006be4b746c6677242184c65b;spdx=3DMIT \
++    file://pkg/mod/github.com/emersion/go-vcard@v0.0.0-20260618161152-d8=
+54b7e0e2d3/LICENSE;md5=3Dac5a2269482607202afa3fc8d061665e;spdx=3DMIT \
++    file://pkg/mod/github.com/felixge/httpsnoop@v1.1.0/LICENSE.txt;md5=3D=
+684da2bf3eed8fc8860e75ad84638225;spdx=3DMIT \
++    file://pkg/mod/github.com/flynn/noise@v1.1.0/LICENSE;md5=3D1dc4e7f9b=
+3fd35ee39d507e94280bdfb;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gabriel-vasile/mimetype@v1.4.13/LICENSE;md=
+5=3Ddf3ca1fbe5632f81387306d9558a61c4;spdx=3DMIT \
++    file://pkg/mod/github.com/gdamore/encoding@v1.0.1/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/gdamore/tcell/v2@v2.9.0/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/geoffgarside/ber@v1.2.0/LICENSE;md5=3D5d49=
+50ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/go-chi/chi/v5@v5.3.1/LICENSE;md5=3Deef59fd=
+f1c5117072cbf52b79c6ea691;spdx=3DMIT \
++    file://pkg/mod/github.com/go-git/go-billy/v5@v5.9.0/LICENSE;md5=3D7b=
+6086dcb6977f0ca57a7c47167999e7;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-logr/logr@v1.4.3/LICENSE;md5=3De3fc50a8=
+8d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-logr/stdr@v1.2.2/LICENSE;md5=3D86d3f3a9=
+5c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-openapi/errors@v0.22.8/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-openapi/strfmt@v0.27.0/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/go-playground/locales@v0.14.1/LICENSE;md5=3D=
+3ccbda375ee345400ad1da85ba522301;spdx=3DMIT \
++    file://pkg/mod/github.com/go-playground/universal-translator@v0.18.1=
+/LICENSE;md5=3D2e2b21ef8f61057977d27c727c84bef1;spdx=3DMIT \
++    file://pkg/mod/github.com/go-playground/validator/v10@v10.30.3/LICEN=
+SE;md5=3Da718a0f318d76f7c5d510cbae84f0b60;spdx=3DMIT \
++    file://pkg/mod/github.com/go-resty/resty/v2@v2.17.2/LICENSE;md5=3D1f=
+d20eb7ff613b50e8e31a0006518a76;spdx=3DMIT \
++    file://pkg/mod/github.com/go-viper/mapstructure/v2@v2.5.0/LICENSE;md=
+5=3D3f7765c3d4f58e1f84c4313cecf0f5bd;spdx=3DMIT \
++    file://pkg/mod/github.com/goccy/go-json@v0.10.6/LICENSE;md5=3D33a071=
+64132d795872805bfc53f6097d;spdx=3DMIT \
++    file://pkg/mod/github.com/gofrs/flock@v0.13.0/LICENSE;md5=3Df852ccc6=
+01f58d934aff3a71b042ba08;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gogo/protobuf@v1.3.2/LICENSE;md5=3D38be95f=
+95200434dc208e2ee3dab5081;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/LICENSE;md5=3Da21=
+b708d8b320c68979c44ac9dba9b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/golang-jwt/jwt/v5@v5.3.1/LICENSE;md5=3Da21=
+b708d8b320c68979c44ac9dba9b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/google/btree@v1.1.3/LICENSE;md5=3D3b83ef96=
+387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/flatbuffers@v25.12.19+incompatible/=
+LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/s2a-go@v0.1.9/LICENSE.md;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/google/uuid@v1.6.0/LICENSE;md5=3D88073b6dd=
+8ec00fe09da59e0b6dfded1;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/googleapis/enterprise-certificate-proxy@v0=
+.3.18/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/googleapis/gax-go/v2@v2.22.0/LICENSE;md5=3D=
+0dd48ae8103725bd7b401261520cdfbb;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/gorilla/schema@v1.4.1/LICENSE;md5=3Dc30eee=
+78985cf2584cded5f89ba3d787;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/hanwen/go-fuse/v2@v2.10.1/LICENSE;md5=3D18=
+4af88d5a6fdee1755dfff3df14a56f;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/hashicorp/errwrap@v1.0.0/LICENSE;md5=3Db27=
+8a92d2c1509760384428817710378;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-cleanhttp@v0.5.2/LICENSE;md5=3D=
+65d26fcc2f35ea6a181ac777e42db1ea;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-multierror@v1.1.1/LICENSE;md5=
+=3Dd44fdeb607e2d2614db9464dbedd4094;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-retryablehttp@v0.7.8/LICENSE;=
+md5=3Dbffc21c92b5f3adcbbb06f8e0067e786;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/go-uuid@v1.0.3/LICENSE;md5=3D169=
+4f6ca1fdc81a15c1fd408542d47e6;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/golang-lru/v2@v2.0.7/LICENSE;md5=
+=3Ddc2f3ee49116a594755b22b853cc8b6b;spdx=3DMPL-2.0 \
++    file://pkg/mod/github.com/hashicorp/golang-lru/v2@v2.0.7/simplelru/L=
+ICENSE_list;md5=3D36e7e1c318b6301bd0c13090ed16adb2;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/internxt/rclone-adapter@v0.0.0-20260708165=
+336-dd6561bacfa2/LICENSE;md5=3D44a591f7bb5950c0dc3b63cd148ebfa7;spdx=3DMI=
+T \
++    file://pkg/mod/github.com/jcmturner/aescts/v2@v2.0.0/LICENSE;md5=3De=
+3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/dnsutils/v2@v2.0.0/LICENSE;md5=3D=
+86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/gofork@v1.7.6/LICENSE;md5=3D5d49=
+50ecb7b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/jcmturner/goidentity/v6@v6.0.1/LICENSE;md5=
+=3De3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/gokrb5/v8@v8.4.4/LICENSE;md5=3De=
+3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jcmturner/rpc/v2@v2.0.3/LICENSE;md5=3D86d3=
+f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/jlaffaye/ftp@v0.2.1-0.20251026020404-6602e=
+981a1bb/LICENSE;md5=3Dcfa6042baa2778b246a276734c00aa4d;spdx=3DISC \
++    file://pkg/mod/github.com/jtolio/noiseconn@v0.0.0-20231127013910-f6d=
+9ecbf1de7/LICENSE;md5=3D2e448287a2cf31846927205ee5737298;spdx=3DMIT \
++    file://pkg/mod/github.com/jzelinskie/whirlpool@v0.0.0-20201016144138=
+-0675e54bb004/LICENSE;md5=3D56ba9a7139fb128d57668c048a3231dd;spdx=3DBSD-3=
+-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/LICENSE;md5=3Dd=
+0fd9ebda39468b51ff4539c9fbb13a8;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/internal/snapre=
+f/LICENSE;md5=3Db8b79c7d4cda128290b98c6a21f9aac6;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/s2/LICENSE;md5=3D=
+2460814a2b25a7277556c2d89de915d1;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/klauspost/compress@v1.19.0/zstd/internal/x=
+xhash/LICENSE.txt;md5=3D802da049c92a99b4387d3f3d91b00fa9;spdx=3DMIT \
++    file://pkg/mod/github.com/klauspost/cpuid/v2@v2.4.0/LICENSE;md5=3D00=
+d6f962401947482d082858f7ba2ff3;spdx=3DMIT \
++    file://pkg/mod/github.com/klauspost/pgzip@v1.2.6/GO_LICENSE;md5=3D59=
+1778525c869cdde0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/koofr/go-httpclient@v0.0.0-20240520111329-=
+e20f8f203988/LICENSE;md5=3Ddeb90a5b0cb13878aacdfd6572bc06d9;spdx=3DMIT \
++    file://pkg/mod/github.com/koofr/go-koofrclient@v0.0.0-20221207135200=
+-cbd7fc9ad6a6/LICENSE;md5=3Ddeb90a5b0cb13878aacdfd6572bc06d9;spdx=3DMIT \
++    file://pkg/mod/github.com/kr/fs@v0.1.0/LICENSE;md5=3D591778525c869cd=
+de0ab5a1bf283cd81;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/kylelemons/godebug@v1.1.0/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/lanrat/extsort@v1.4.2/LICENSE;md5=3D86d3f3=
+a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/leodido/go-urn@v1.4.0/LICENSE;md5=3D8f50db=
+5538ec1148a9b3d14ed96c3418;spdx=3DMIT \
++    file://pkg/mod/github.com/lpar/calendar@v0.2.0/LICENSE;md5=3De52edf7=
+e7ab720f605e5559f588f568c;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/lucasb-eyer/go-colorful@v1.4.0/LICENSE;md5=
+=3D00a5466a69069b14448ded7ed1f3125f;spdx=3DMIT \
++    file://pkg/mod/github.com/mailru/easyjson@v0.9.2/LICENSE;md5=3D819e8=
+1c2ec13e1bbc47dc5e90bb4d88b;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-colorable@v0.1.15/LICENSE;md5=3D2=
+4ce168f90aec2456a73de1839037245;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-isatty@v0.0.23/LICENSE;md5=3Df509=
+beadd5a11227c27b5d2ad6c9f2c6;spdx=3DMIT \
++    file://pkg/mod/github.com/mattn/go-runewidth@v0.0.24/LICENSE;md5=3D2=
+4ce168f90aec2456a73de1839037245;spdx=3DMIT \
++    file://pkg/mod/github.com/mholt/archives@v0.1.5/LICENSE;md5=3Df88772=
+24ca7a9c0bcc6cc552d818d0f7;spdx=3DMIT \
++    file://pkg/mod/github.com/mikelolasagasti/xz@v1.0.1/LICENSE;md5=3D72=
+c66b9ca7bb05f3e2296b4a3f2dd56b;spdx=3D0BSD \
++    file://pkg/mod/github.com/minio/minlz@v1.2.0/LICENSE;md5=3D559ed6d51=
+7f29f7a76202348f1068d09;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/minio/xxml@v0.0.3/LICENSE;md5=3D5d4950ecb7=
+b26d2c5e4e7b4e0dd74707;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/mitchellh/go-homedir@v1.1.0/LICENSE;md5=3D=
+3f7765c3d4f58e1f84c4313cecf0f5bd;spdx=3DMIT \
++    file://pkg/mod/github.com/moby/sys/mountinfo@v0.7.2/LICENSE;md5=3D3b=
+83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/munnerz/goautoneg@v0.0.0-20191010083416-a7=
+dc8b61c822/LICENSE;md5=3D0c241922fc69330e2e5590de114f3bf5;spdx=3DBSD-3-Cl=
+ause \
++    file://pkg/mod/github.com/ncw/swift/v2@v2.0.5/COPYING;md5=3Dbed161b8=
+2a1ecab65ff7ba3c3b960439;spdx=3DMIT \
++    file://pkg/mod/github.com/nwaples/rardecode/v2@v2.2.5/LICENSE;md5=3D=
+00a9bc473bdc1f677bde54c760134fbe;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/oklog/ulid/v2@v2.1.1/LICENSE;md5=3D86d3f3a=
+95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/oracle/oci-go-sdk/v65@v65.121.0/LICENSE.tx=
+t;md5=3D8653873de1e9aacad9580639298c0be8;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/panjf2000/ants/v2@v2.12.1/LICENSE;md5=3D6a=
+4f7c52f1a52fc5da45e1529063dfe4;spdx=3DMIT \
++    file://pkg/mod/github.com/patrickmn/go-cache@v2.1.0+incompatible/LIC=
+ENSE;md5=3Dad59632c93a4b0296b360ba542decb5e;spdx=3DMIT \
++    file://pkg/mod/github.com/pengsrc/go-shared@v0.2.1-0.20190131101655-=
+1999055a4a14/LICENSE;md5=3D5d9119906713a6bff1bfa119605244ec;spdx=3DApache=
+-2.0 \
++    file://pkg/mod/github.com/peterh/liner@v1.2.2/COPYING;md5=3D7316a33d=
+f6826d7cc2854e686cb9279f;spdx=3DMIT \
++    file://pkg/mod/github.com/pierrec/lz4/v4@v4.1.27/LICENSE;md5=3D09ece=
+85f3c312a63b522bfc6ebd44943;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/pkg/browser@v0.0.0-20240102092130-5ac0b6a4=
+141c/LICENSE;md5=3D2c6b03e6a9b13bd75b50a8dbeed074da;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/errors@v0.9.1/LICENSE;md5=3D6fe682a02d=
+f52c6653f33bd0f7126b5a;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/sftp@v1.13.11/LICENSE;md5=3D452fc5cc5a=
+9127a0e828d73423d45035;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pkg/xattr@v0.4.12/LICENSE;md5=3D4efd8bdbab=
+9cff00dcd75f2c3ee4e190;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/pmezard/go-difflib@v1.0.1-0.20181226105442=
+-5d4384ee4fb2/LICENSE;md5=3De9a2ebb8de779a07500ddecca806145e;spdx=3DBSD-3=
+-Clause \
++    file://pkg/mod/github.com/pquerna/otp@v1.5.0/LICENSE;md5=3D3b83ef963=
+87f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/client_golang@v1.23.2/LICENSE;m=
+d5=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/client_golang@v1.23.2/internal/=
+github.com/golang/gddo/LICENSE;md5=3D4c728948788b1a02f33ae4e906546eef;spd=
+x=3DBSD-3-Clause \
++    file://pkg/mod/github.com/prometheus/client_model@v0.6.2/LICENSE;md5=
+=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/common@v0.70.0/LICENSE;md5=3D86=
+d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/prometheus/procfs@v0.21.1/LICENSE;md5=3D86=
+d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/putdotio/go-putio/putio@v0.0.0-20200123120=
+452-16d982cac2b8/LICENSE;md5=3D843b68ce2d9f6f51c6bd8ba3835d5531;spdx=3DMI=
+T \
++    file://pkg/mod/github.com/rasky/go-xdr@v0.0.0-20170124162913-1a41d1a=
+06c93/LICENSE;md5=3Db48d4a6f448d246b1fe4e0600e79d0bf;spdx=3DISC \
++    file://pkg/mod/github.com/rclone/!proton-!a!p!i-!bridge@v1.0.5/LICEN=
+SE;md5=3D065cf81dcdc1d304be9de4cc73f65b0d;spdx=3DMIT \
++    file://pkg/mod/github.com/rclone/go-proton-api@v1.0.4/COPYING_NOTES.=
+md;md5=3D7f616df7d323e03661a85766286d1781;spdx=3DMIT \
++    file://pkg/mod/github.com/rclone/gofakes3@v0.0.9/LICENSE;md5=3Db8827=
+4ccba75507dd63977b43dac8874;spdx=3DMIT \
++    file://pkg/mod/github.com/relvacode/iso8601@v1.7.0/LICENSE;md5=3D6c9=
+60305dc52f06752fe6d11bb000648;spdx=3DMIT \
++    file://pkg/mod/github.com/rfjakob/eme@v1.2.0/LICENSE;md5=3D6fee026f0=
+b48abb4d7cd72e25032503c;spdx=3DMIT \
++    file://pkg/mod/github.com/rivo/uniseg@v0.4.7/LICENSE.txt;md5=3D4393c=
+339bf180cf6e188b6ea32d8b93c;spdx=3DMIT \
++    file://pkg/mod/github.com/russross/blackfriday/v2@v2.1.0/LICENSE.txt=
+;md5=3Decf8a8a60560c35a862a4a545f2db1b3;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/ryszard/goskiplist@v0.0.0-20150312221310-2=
+dfbae5fcf46/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-=
+2.0 \
++    file://pkg/mod/github.com/sabhiram/go-gitignore@v0.0.0-2021092322410=
+2-525f6e181f06/LICENSE;md5=3Dbc1bb35f6ed8f35d0af3848bd675d349;spdx=3DMIT =
+\
++    file://pkg/mod/github.com/samber/lo@v1.53.0/LICENSE;md5=3D1cce9fea1b=
+d9690afd75f9941813586f;spdx=3DMIT \
++    file://pkg/mod/github.com/shirou/gopsutil/v4@v4.26.6/LICENSE;md5=3Da=
+e6de3dee02712a1e55b280671be53bf;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/sirupsen/logrus@v1.9.4/LICENSE;md5=3D8dadf=
+ef729c08ec4e631c4f6fc5d43a0;spdx=3DMIT \
++    file://pkg/mod/github.com/skratchdot/open-golang@v0.0.0-202001160555=
+34-eef842397966/LICENSE;md5=3Dbda6b231b2cd2a50379525e90c9e5040;spdx=3DMIT=
+ \
++    file://pkg/mod/github.com/sony/gobreaker/v2@v2.4.0/LICENSE;md5=3Dbc9=
+754edcba199de9bf88b85ff7d5d2c;spdx=3DMIT \
++    file://pkg/mod/github.com/sorairolake/lzip-go@v0.3.8/LICENSE-APACHE;=
+md5=3D86d3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spacemonkeygo/monkit/v3@v3.0.25-0.20251022=
+131615-eb24eb109368/LICENSE;md5=3D19cbd64715b51267a47bf3750cc6a8a5;spdx=3D=
+Apache-2.0 \
++    file://pkg/mod/github.com/spf13/afero@v1.15.0/LICENSE.txt;md5=3D920d=
+76114a32b0fb75b3f2718c5a91be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spf13/cobra@v1.10.2/LICENSE.txt;md5=3D920d=
+76114a32b0fb75b3f2718c5a91be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/spf13/pflag@v1.0.10/LICENSE;md5=3D1e8b7dc8=
+b906737639131047a590f21d;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/stangelandcl/ppmd@v0.1.1/LICENSE;md5=3D6c5=
+d96735d0135b701102478cf086eb0;spdx=3DMIT \
++    file://pkg/mod/github.com/stretchr/testify@v1.11.1/LICENSE;md5=3D188=
+f01994659f3c0d310612333d2a26f;spdx=3DMIT \
++    file://pkg/mod/github.com/t3rm1n4l/go-mega@v0.0.0-20260717075258-c6a=
+cd6a5bd04/LICENSE;md5=3D297dcd2957399448294b4cfa17d4031f;spdx=3DMIT \
++    file://pkg/mod/github.com/tyler-smith/go-bip39@v1.1.0/LICENSE;md5=3D=
+9380d72a13094f603bec718c10f56b4b;spdx=3DMIT \
++    file://pkg/mod/github.com/ulikunitz/xz@v0.5.15/LICENSE;md5=3D3c82255=
+323cf3d48815acdbf9068b715;spdx=3DBSD-3-Clause \
++    file://pkg/mod/github.com/unknwon/goconfig@v1.0.0/LICENSE;md5=3D554f=
+1a8b845d7b28c73f36b711b506be;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/willscott/go-nfs-client@v0.0.0-20251022144=
+359-801f10d98886/LICENSE_BSD-2.txt;md5=3D862147293f339bce315b57b5953a1620=
+;spdx=3DBSD-2-Clause \
++    file://pkg/mod/github.com/willscott/go-nfs@v0.0.4/LICENSE;md5=3D3b83=
+ef96387f14655fc854ddc3c6bd57;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/wk8/go-ordered-map/v2@v2.1.8/LICENSE;md5=3D=
+e3fc50a88d0a364313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/xanzy/ssh-agent@v0.3.3/LICENSE;md5=3Dfa818=
+a259cbed7ce8bc2a22d35a464fc;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/youmark/pkcs8@v0.0.0-20240726163527-a2c0da=
+244d78/LICENSE;md5=3D7e949f736d1222f15e83233702459f41;spdx=3DMIT \
++    file://pkg/mod/github.com/yunify/qingstor-sdk-go/v3@v3.2.0/LICENSE;m=
+d5=3D523134d2856772dc50dad91ab4a43caf;spdx=3DApache-2.0 \
++    file://pkg/mod/github.com/zeebo/blake3@v0.2.4/LICENSE;md5=3D7364d1e4=
+653d3584181e9d22d81f275f;spdx=3DCC0-1.0 \
++    file://pkg/mod/github.com/zeebo/errs@v1.4.0/LICENSE;md5=3D84914ab36f=
+c0eb48edbaa53e66e8d326;spdx=3DMIT \
++    file://pkg/mod/github.com/zeebo/xxh3@v1.1.0/LICENSE;md5=3Daaba054472=
+88333a478938c7e45c0cb2;spdx=3DBSD-2-Clause \
++    file://pkg/mod/go.etcd.io/bbolt@v1.5.0/LICENSE;md5=3D13b2a308eefa10d=
+841e3bf2467dbe07a;spdx=3DMIT \
++    file://pkg/mod/go.opentelemetry.io/auto/sdk@v1.2.1/LICENSE;md5=3D86d=
+3f3a95c324c9479bd8986968f4327;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/contrib/instrumentation/net/http/=
+otelhttp@v0.69.0/LICENSE;md5=3D24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DAp=
+ache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel/metric@v1.44.0/LICENSE;md5=3D=
+24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel/trace@v1.44.0/LICENSE;md5=3D=
+24dad3abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.opentelemetry.io/otel@v1.44.0/LICENSE;md5=3D24dad3=
+abbe7a8f390afc8ab967bfefa7;spdx=3DApache-2.0 \
++    file://pkg/mod/go.yaml.in/yaml/v2@v2.4.4/LICENSE;md5=3De3fc50a88d0a3=
+64313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/go.yaml.in/yaml/v3@v3.0.4/LICENSE;md5=3D3c91c17266710=
+e16afdbb2b6d15c761c;spdx=3DApache-2.0 \
++    file://pkg/mod/go4.org@v0.0.0-20260112195520-a5071408f32f/LICENSE;md=
+5=3Dfa818a259cbed7ce8bc2a22d35a464fc;spdx=3DApache-2.0 \
++    file://pkg/mod/goftp.io/server/v2@v2.0.3/LICENSE;md5=3Df13b0a36d1120=
+7262f14b7acef69dc2c;spdx=3DMIT \
++    file://pkg/mod/golang.org/x/crypto@v0.56.0/LICENSE;md5=3D7998cb338f8=
+2d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/exp@v0.0.0-20260709172345-9ea1abe57597/L=
+ICENSE;md5=3D7998cb338f82d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/image@v0.45.0/LICENSE;md5=3D7998cb338f82=
+d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/net@v0.57.0/LICENSE;md5=3D7998cb338f82d1=
+5c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/oauth2@v0.36.0/LICENSE;md5=3D7998cb338f8=
+2d15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/sync@v0.22.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/sys@v0.47.0/LICENSE;md5=3D7998cb338f82d1=
+5c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/term@v0.45.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/text@v0.41.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/golang.org/x/time@v0.15.0/LICENSE;md5=3D7998cb338f82d=
+15c0eff93b7004d272a;spdx=3DBSD-3-Clause \
++    file://pkg/mod/google.golang.org/api@v0.279.0/LICENSE;md5=3Da651bb3d=
+8b1c412632e28823bb432b40;spdx=3DBSD-3-Clause \
++    file://pkg/mod/google.golang.org/api@v0.279.0/internal/third_party/u=
+ritemplates/LICENSE;md5=3D4ee4feb2b545c2231749e5c54ace343e;spdx=3DBSD-3-C=
+lause \
++    file://pkg/mod/google.golang.org/genproto/googleapis/rpc@v0.0.0-2026=
+0715232425-e75dac1f907d/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;sp=
+dx=3DApache-2.0 \
++    file://pkg/mod/google.golang.org/grpc@v1.84.0-dev.0.20260723093437-b=
+6eac429d7b6/LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57;spdx=3DApache-=
+2.0 \
++    file://pkg/mod/google.golang.org/protobuf@v1.36.11/LICENSE;md5=3D02d=
+4002e9171d41a8fad93aa7faf3956;spdx=3DBSD-3-Clause \
++    file://pkg/mod/gopkg.in/natefinch/lumberjack.v2@v2.2.1/LICENSE;md5=3D=
+574cdb55b81249478f5af5f789e9e29f;spdx=3DMIT \
++    file://pkg/mod/gopkg.in/validator.v2@v2.0.1/LICENSE;md5=3D6c4db32a2f=
+a8717faffa1d4f10136f47;spdx=3DApache-2.0 \
++    file://pkg/mod/gopkg.in/yaml.v2@v2.4.0/LICENSE;md5=3De3fc50a88d0a364=
+313df4b21ef20c29e;spdx=3DApache-2.0 \
++    file://pkg/mod/gopkg.in/yaml.v3@v3.0.1/LICENSE;md5=3D3c91c17266710e1=
+6afdbb2b6d15c761c;spdx=3DApache-2.0 \
++    file://pkg/mod/moul.io/http2curl/v2@v2.3.0/COPYRIGHT;md5=3Dcd9599a56=
+4a6135dff208e43a4692cf4;spdx=3DMIT \
++    file://pkg/mod/sigs.k8s.io/yaml@v1.6.0/LICENSE;md5=3Db5d30dd5bc47d1b=
+56b678ac06dead1c7;spdx=3DMIT \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/LI=
+CENSE;md5=3Db418b8bf34c5c954ad8d78427714088c;spdx=3DMIT \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/ba=
+se58/LICENSE;md5=3D7546df84e6da78f268b76fbaff6643a4;spdx=3DISC \
++    file://pkg/mod/storj.io/common@v0.0.0-20260629224719-ba1bff0a7846/in=
+ternal/hmacsha512/GO_LICENSE;md5=3D5d4950ecb7b26d2c5e4e7b4e0dd74707;spdx=3D=
+BSD-3-Clause \
++    file://pkg/mod/storj.io/drpc@v1.0.0/LICENSE;md5=3Db418b8bf34c5c954ad=
+8d78427714088c;spdx=3DMIT \
++    file://pkg/mod/storj.io/eventkit@v0.0.0-20260716074419-6861a92e2aa5/=
+LICENSE;md5=3D2e448287a2cf31846927205ee5737298;spdx=3DMIT \
++    file://pkg/mod/storj.io/infectious@v0.0.2/LICENSE;md5=3Da6e9ba58e808=
+402fa1cadfd609314d58;spdx=3DMIT \
++    file://pkg/mod/storj.io/picobuf@v0.0.4/LICENSE;md5=3D1e43191ed0cdbce=
+85d6e8687d5ce0c11;spdx=3DMIT \
++    file://pkg/mod/storj.io/picobuf@v0.0.4/internal/protowire/LICENSE;md=
+5=3D02d4002e9171d41a8fad93aa7faf3956;spdx=3DBSD-3-Clause \
++    file://pkg/mod/storj.io/uplink@v1.14.3/LICENSE;md5=3Db418b8bf34c5c95=
+4ad8d78427714088c;spdx=3DMIT \
++"
+diff --git a/meta-oe/recipes-support/rclone/rclone_1.75.1.bb b/meta-oe/re=
+cipes-support/rclone/rclone_1.75.1.bb
 new file mode 100644
-index 0000000000..124fd68d09
+index 0000000000..ccf774359a
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/papers/papers_51.0.bb
-@@ -0,0 +1,89 @@
-+SUMMARY =3D "Document viewer for GNOME"
-+HOMEPAGE =3D "https://apps.gnome.org/Papers/"
-+BUGTRACKER =3D "https://gitlab.gnome.org/GNOME/papers/-/issues"
-+SECTION =3D "x11/office"
++++ b/meta-oe/recipes-support/rclone/rclone_1.75.1.bb
+@@ -0,0 +1,21 @@
++SUMMARY =3D "Sync files and directories to and from cloud storage provid=
+ers"
++HOMEPAGE =3D "https://rclone.org"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://src/${GO_IMPORT}/COPYING;md5=3Dbed161b82a1e=
+cab65ff7ba3c3b960439"
 +
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D96f2f8d5ee576a2163977938ea36f=
-a7b"
++SRC_URI =3D "git://${GO_IMPORT};protocol=3Dhttps;nobranch=3D1;tag=3Dv${P=
+V};destsuffix=3D${GO_SRCURI_DESTSUFFIX}"
++SRCREV =3D "687d264b689b8c49a67e2e52a8a5e0caa01c04ce"
 +
-+inherit cargo_common cargo-update-recipe-crates meson pkgconfig gettext =
-gnome-help gsettings gtk-icon-cache mime-xdg gobject-introspection featur=
-es_check
++require ${BPN}-licenses.inc
++require ${BPN}-go-mods.inc
 +
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
++GO_IMPORT =3D "github.com/rclone/rclone"
++GO_INSTALL =3D "${GO_IMPORT}"
 +
-+GTKIC_VERSION =3D "4"
++inherit go-mod go-mod-update-modules
 +
-+GIR_MESON_ENABLE_FLAG =3D "enabled"
-+GIR_MESON_DISABLE_FLAG =3D "disabled"
++GO_EXTRA_LDFLAGS =3D "-X ${GO_IMPORT}/fs.Version=3Dv${PV}"
 +
-+SRC_URI =3D "git://gitlab.gnome.org/GNOME/papers.git;protocol=3Dhttps;br=
-anch=3Dmain;tag=3D${PV} \
-+           file://0001-meson-Support-cross-compilation-via-a-rust_target=
--cr.patch \
-+           "
-+SRCREV =3D "6ca6e7ec685343cd4664f6253ab0f42d31e51bb3"
++RRECOMMENDS:${PN} +=3D "fuse3"
 +
-+UPSTREAM_CHECK_URI =3D "https://gitlab.gnome.org/GNOME/papers/-/tags"
-+UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
-+
-+require ${BPN}-crates.inc
-+
-+DEPENDS =3D " \
-+    appstream-native \
-+    blueprint-compiler-native \
-+    cairo \
-+    desktop-file-utils \
-+    exempi \
-+    gdk-pixbuf \
-+    glib-2.0 \
-+    glib-2.0-native \
-+    gtk4 \
-+    libadwaita \
-+    libarchive \
-+    poppler \
-+    tiff \
-+    zlib \
-+"
-+
-+do_write_config:append:class-target() {
-+	cat > ${WORKDIR}/meson-rust.cross <<-EOF
-+	[properties]
-+	rust_target =3D '${RUST_HOST_SYS}'
-+	EOF
-+}
-+
-+EXTRA_OEMESON:append:class-target =3D " --cross-file ${WORKDIR}/meson-ru=
-st.cross"
-+
-+do_configure:prepend() {
-+	cargo_common_do_configure
-+}
-+
-+do_compile:prepend() {
-+	mkdir -p ${B}/cargo-home
-+	install -m 0644 ${CARGO_HOME}/config.toml ${B}/cargo-home/config.toml
-+}
-+
-+EXTRA_OEMESON +=3D " \
-+    -Ddocumentation=3Dfalse \
-+    -Dtests=3Dfalse \
-+    -Dfile_tests=3Dfalse \
-+    -Dsysprof=3Ddisabled \
-+    -Ddjvu=3Ddisabled \
-+"
-+
-+export CARGO_NET_OFFLINE =3D "1"
-+export CARGO_BUILD_JOBS =3D "${@oe.utils.cpu_count()}"
-+export RUSTFLAGS
-+export GI_TYPELIB_PATH =3D "${STAGING_LIBDIR}/girepository-1.0/"
-+
-+PACKAGECONFIG ??=3D "spell_check"
-+PACKAGECONFIG[nautilus] =3D "-Dnautilus=3Dtrue,-Dnautilus=3Dfalse,nautil=
-us"
-+PACKAGECONFIG[spell_check] =3D "-Dspell_check=3Denabled,-Dspell_check=3D=
-disabled,libspelling"
-+
-+PACKAGES =3D+ "${PN}-nautilus-extension"
-+
-+FILES:${PN} +=3D " \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/metainfo \
-+    ${datadir}/thumbnailers \
-+"
-+FILES:${PN}-nautilus-extension =3D "${libdir}/nautilus/*/*.so"
-+
-+RRECOMMENDS:${PN} +=3D "adwaita-icon-theme"
++RDEPENDS:${PN}-dev +=3D "bash python3-core"
 --=20
 2.55.0
 
