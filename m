@@ -2,65 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38F15C9830B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72460C9830D
 	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 10:41:36 +0000 (UTC)
 Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4169.1790160094886418627
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4282.1790160090735276336
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 03:41:34 -0700
+ Wed, 23 Sep 2026 03:41:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=disb3Am4;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WAhb0asv;
  spf=pass (domain: gmail.com, ip: 74.125.228.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-8692a8568e9so378586b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:34 -0700 (PDT)
+Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-85469f20513so446125b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790160094; x=1790764894; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790160090; x=1790764890; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Leet9VqSkoS/0wdHq4QzIAVMYrHTW2gM2qLhsfTjB4U=;
-        b=disb3Am4/08UjUrolFDHkjFzR3SbxvzmBdZLcQwhsgVj6E0AKcWSr+UVivvlBM6509
-         4ZNu2DXl8gvj10e1lMalnP1z/a/vAPfffp0mBMYClPYBpG3gWZQLjTnxQGHQrPuGQ3iy
-         lQoi/sC0D7Pp3ar5cMAh8OPSaQJgVoJHRVqo3v++w3E+zLpS2vxCq1VxOZ/mjjV7kmaQ
-         QG4EhHhvkI7neW/idR/SXEZgvbmgggZ3sUByQWY6bVv8HiNfBkma1+Rz7vRKQInnO7UQ
-         lbD+U8ngDifkw40/UgxG/iWD/Wfa3NCeSc/kkyLKFW38b79hxhhztHUORx7fYe2daCK/
-         83Ow==
+        bh=YNtD4fpe/jm0FpYrQuG+XrYpmc5ErEi8i3qs3xQBZi8=;
+        b=WAhb0asvD5uapzeBZlPLQtlKJWzHEcyR/j2SSob6XK0mGXEuh+cssU6y81fXRM39nW
+         +nDfA6jqgqGdu1CbEZ81gprtaSqeCnlYTWQsIapJuEsOrpM/qWJg4SXoUCmsnpLy1I6s
+         oE5rtFjpGplx9YVKicOH6SWVLs50lNRChBYe7IVFCpnSHKad16TeTFU9m/MRDf6+JexA
+         OrylUf8whypK5zbRCJwWYwxcqEYKBEU5JVt8cpkSjIHhXstNoLW6UGJ87rpBS4Blc182
+         8QHMX6IyDIhkokr2heozNhYLgFCoZfWJbgxheChJfXDuWqUHtoH8AOcSFIax7+LnUgtZ
+         ocsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790160094; x=1790764894;
+        d=1e100.net; s=20260707; t=1790160090; x=1790764890;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Leet9VqSkoS/0wdHq4QzIAVMYrHTW2gM2qLhsfTjB4U=;
-        b=FoQ9Xmm/AxxxD1Dx1aU1z2CmmIA7FpjRfgHNbmXW8S3pTKZgvhEceJIFDy4oim7YwR
-         RDBbNCOfHru6dg/XE86kMQ6GFrxLfEWKb+dRxzlUYOChbD3tmV30y/uvgqHsAcHqaRsR
-         GFSp57PEJeQGiawu8NIfUcFpFqgxQcpLFRp6FYiKV1f1Q6ZgA/lQSMHHYWwRkN5NreDo
-         gY1v+B6tkyYNXZ7ZF21FB7e8+Wyy5xI21E8Koq8KskDehXOL79krHMizX2Djg/j/H/Q2
-         hO0OQd7BxNtkTIGD58mhbQgbyYOnUqMia1GzZHqTX8/jQWSFtdXHmvXhwWT4kg4X4KO1
-         aPiA==
-X-Gm-Message-State: AFuF++kNFZc+LkkOV7+au74JCvghSkCz5Hz05Qivak1EjKhaUQDP7LQk
-	7DMy/1S06Qp+ogxtK24ynu+eIlPX3mvv7h94IPkQRbNvljL+fiNjcalXG5N6gg==
-X-Gm-Gg: AYBFou2uaQEA+J125hzXJsAcgP4xzc07zQJMKNmr6tIJ5Sdx3G9yC34m44+v62fWX7e
-	AYt542raMmz8aDFa+7M1GHZ6PJs2TiFBafw6cKnyxtQd+8wwmZjeMDjtv4aQuKfxN9hFFzRB+Nn
-	HI/zAXKs+gBKD4AVVPhJNp/w3tmw4+vpXUQsHn6Dvc8INNEEU9F9SwnyRFfyJ+0XrP8+1LFFKHL
-	xoj8ezLesh8UQ42T4DhXYB3PUS7X8WjGGKEzo9cmUJf1xKjNudDhgofRn2xVBetM28UexxiUNpv
-	l5RNu9r4+N3EMjBXap3tYC/Xxu9bXP05pqFk9+6keEUH7dBbrv5NpJEihSftmcWoR45sLWOo/X7
-	w21BjwMEpxa1Ee3xJnFGQu5TQjHVm30/yblcmW20Lr7mh6xBOnQsOhWeOgisSXyEclSmXjOAbIu
-	t9WxkD8SSBf7iVUBlnyb6BdSePtBpRo4ae4KXy47RIQbDRGoqCUkEhDhDjj8NghqwoEzTNfKfZ/
-	93OjAR7V9PxMhjJPt/LjNdaunJezBiDMg==
-X-Received: by 2002:a05:6a00:399f:b0:878:3538:8f7a with SMTP id d2e1a72fcca58-87d1baae9demr2051376b3a.40.1790160094255;
-        Wed, 23 Sep 2026 03:41:34 -0700 (PDT)
+        bh=YNtD4fpe/jm0FpYrQuG+XrYpmc5ErEi8i3qs3xQBZi8=;
+        b=r6i+CUlZGtlxwRn2aBIW+TzKmp0mf85u8tRSoZxqe1EpcmSXXFFl7k8eRwim6OvFt6
+         JKODnWdaDDwPQ6LiQ6IFMHriFAll+B9WTMaR5OatwfgO7NYCByzX7POgPBDYuJi6N3hv
+         OHT/YsZgz4bInFLgXtQ3R2rFxfhWFHPvYmqabAdyv+wrUd/gqz0jpwB/e6n5LC4rprW9
+         Xg8Oz2yWgNl9/xZI1tfM79DZfewH9gf9eioAzv0MtUzoSG5lWB1dVb00RLWv/hpsj92q
+         Fql+QkkOafry8FyQ1Jx38CMvz34VF4waPdFdRBozTZSbVABN4JgA0QeqpBW9ZUAhXsL7
+         aWAA==
+X-Gm-Message-State: AFuF++njJqsAAbVA6qYK9K+6AT++vCltAuriahaQ4tX8rZtGmrLJZ16H
+	6OsiSZ/NddiPbYaGSGUXystc+47yGX6y/aC5gFqL5fr68kPyzL4LjqJ0S39AZA==
+X-Gm-Gg: AYBFou3IBYh74Pp/vRHayJQcobLcwmGHpjzP4RDn/owDXMqGD3oaxsMGjUG/63/kdVG
+	x0tM4cwP83conPPsrQe1EOZxREjQHPnOASMsX16b/FZU7/OJnIc9fuU5nBdtVI80ozWjpAHdku9
+	nrbU2eTuWbs+M2ZfeRwtR/2fTR/NU+VYWJivy6zx3mY+bJRT3es4iyrb0A/27P8k3TPWBFfhP9f
+	iyYufA5Giy88W0cJ3tMB6jiOVng7tAcQtqP6ck+WlhJ8t24x2FOB1ltA6prLr7ANDkDY+gGItqz
+	iB4M6y8oacfjphcOMfV8XadVybUs1pWYXTuhG1LHUW5QvYjgvfLFyBh1V2FXLA6Y5fmbIzTWZde
+	+l3hHrS3nAxSG4eBX7AWpEUC/tMZE0zVdUe7EjeQPmv0AHL+//9cvVcn/jRAn/rnh6+V0/Qi5MO
+	ppP0wZwQiTtGrME+wvIkKsA8fJypyXOv0vYC3GiFHG2mbqZuKwWzeFcDGBpc3gAq/UsTuXg1XfT
+	FCkXpX6tKMlbEfNCgXWVhs=
+X-Received: by 2002:a05:6a00:174c:b0:878:34b8:2325 with SMTP id d2e1a72fcca58-87d1d1c3b0dmr2133930b3a.45.1790160090092;
+        Wed, 23 Sep 2026 03:41:30 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.32
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 03:41:33 -0700 (PDT)
+        Wed, 23 Sep 2026 03:41:29 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 17/42] faad2: upgrade 2.11.2 -> 2.11.3
-Date: Wed, 23 Sep 2026 22:40:31 +1200
-Message-ID: <20260923104056.457360-17-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][wrynose][PATCH 15/42] libheif: ignore CVE-2026-84383
+Date: Wed, 23 Sep 2026 22:40:29 +1200
+Message-ID: <20260923104056.457360-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
 References: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
@@ -70,41 +68,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 10:41:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130204
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130202
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit c8d2af3641e1d694ee4eb6215a2f813b4390f1de)
-
-Changelog:
-https://github.com/knik0/faad2/blob/2.11.3/ChangeLog
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-84383
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../faad2/{faad2_2.11.2.bb => faad2_2.11.3.bb}              | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-multimedia/faad2/{faad2_2.11.2.bb => faad2_2.11.3.bb} (81%)
+ meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.11.3.bb
-similarity index 81%
-rename from meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb
-rename to meta-oe/recipes-multimedia/faad2/faad2_2.11.3.bb
-index 83fcaa248d..8dd09439f7 100644
---- a/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb
-+++ b/meta-oe/recipes-multimedia/faad2/faad2_2.11.3.bb
-@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
+index 165ed0ad2a..70176c7c52 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
+@@ -34,3 +34,5 @@ PACKAGECONFIG[jpeg2000] = "-DWITH_OpenJPEG_ENCODER=ON -DWITH_OpenJPEG_DECODER=ON
+ PACKAGECONFIG[openh264] = ",,openh264"
  
- LICENSE_FLAGS = "commercial"
- 
--PV .= "+git"
--
--SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
--SRCREV = "673a22a3c7c33e96e2ff7aae7c4d2bc190dfbf92"
-+SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https;tag=${PV}"
-+SRCREV = "6918ebb51b8f7e86278da15884bd7114e4b9661e"
- 
- 
- inherit cmake
+ FILES:${PN} += "${libdir}/libheif ${datadir}/thumbnailers ${libdir}/gdk-pixbuf*"
++
++CVE_STATUS[CVE-2026-84383] = "cpe-incorrect: This vulnerability was introduced in v1.22"
 
