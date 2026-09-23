@@ -1,160 +1,122 @@
-Return-Path: <Aravind.Bandari@windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F7B3C982FA
-	for <webhook@archiver.kernel.org>; Tue, 22 Sep 2026 16:28:42 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.122.1790094517505649696
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 332D1C982FA
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 02:58:58 +0000 (UTC)
+Received: from newzmoby.atcorp.com (newzmoby.atcorp.com [50.173.197.71])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2298.1790127071279461540
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Sep 2026 09:28:37 -0700
+ Tue, 22 Sep 2026 18:31:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=JJL0frsK;
- spf=none, err=permanent DNS error (domain: oak-lpgbuild11.wrs.com, ip: 205.220.166.238, mailfrom: prvs=3725b502de=abandari@oak-lpgbuild11.wrs.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEihXk208807
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 09:28:36 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=cc:content-transfer-encoding:content-type:date:from
-	:message-id:mime-version:subject:to; s=PPS06212021; bh=5u+w8JfHC
-	0hOcB4KPQWNopDyo/DhXzdgwaBwqqwmIeg=; b=JJL0frsK00a7mMd6ync7GMGam
-	EjkwZjIzTp+um4lSKPPpUsJh3Ix1fTj6wh512C7hY7PZY0/4uP9Nb1odKSk7mdhl
-	8HQkNHXoC2D2oRX2iPmK9fcXJjHETOxj39vAe7iI+BGYHCSTsCcTJsAOdn3XzWZu
-	dhvg3yPaO07e+Ur7xU2dUKSijvAwsDUI132lMcvWrLo4B7YV2c1r15ZONdaa7a3v
-	ph7oq5SNVDbY3Wa1+5EbZRKSzKTUHBoJKPByLKNhLBM0ezJls6KsL2zQ3yXlwMnD
-	hn9i/OvWqOhZaMs2eNRBAKF8lLw2GlwhsmRtybeBbMp/Gh6UGd4FSFjLB4Okg==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4gsswe4gj0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 09:28:36 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Tue, 22 Sep 2026 09:28:36 -0700
-Received: from oak-lpgbuild11.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Tue, 22 Sep 2026 09:28:36 -0700
-Received: by oak-lpgbuild11.wrs.com (Postfix, from userid 1762445477)
-	id DF9914040480; Tue, 22 Sep 2026 16:28:35 +0000 (UTC)
-From: Aravind Bandari <aravind.bandari@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <aravind.bandari@windriver.com>
-Subject: [meta-python,wrynose] python3-pillow: fix CVE-2026-59204
-Date: Tue, 22 Sep 2026 16:27:51 +0000
-Message-ID: <20260922162751.3658333-1-aravind.bandari@windriver.com>
-X-Mailer: git-send-email 2.53.0
+ dkim=pass header.i=@atcorp.com header.s=1376564E-C82E-11ED-954F-3FCE35F171BA header.b=WBf6lZKD;
+ spf=pass (domain: atcorp.com, ip: 50.173.197.71, mailfrom: csiltala@atcorp.com)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by newzmoby.atcorp.com (Postfix) with ESMTP id A50B835A1B3E;
+	Tue, 22 Sep 2026 20:24:44 -0500 (CDT)
+Authentication-Results: newzmoby.atcorp.com (amavis); dkim=pass (2048-bit key)
+ header.d=atcorp.com
+Received: from newzmoby.atcorp.com ([127.0.0.1])
+ by localhost (newzmoby.atcorp.com [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id wQi6jZLoa2Ug; Tue, 22 Sep 2026 20:24:44 -0500 (CDT)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by newzmoby.atcorp.com (Postfix) with ESMTP id 9D34E35A1B3F;
+	Tue, 22 Sep 2026 20:24:44 -0500 (CDT)
+DKIM-Filter: OpenDKIM Filter v2.10.3 newzmoby.atcorp.com 9D34E35A1B3F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=atcorp.com;
+	s=1376564E-C82E-11ED-954F-3FCE35F171BA; t=1790126684;
+	bh=O2Pt97qvpvhUh9tz6Ky3DVYLdnbf3mvyB5TOTnU/XME=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=WBf6lZKDobAay8r7cLJySzrmDCS9LOMxHf8U74cSW0qxeZijH5xdvDL3zwO9E++Ea
+	 ea+vDcSg+nC0Mdvm2w4OtI1BZt+1w/pndn/P5zUxPrKQd4VBOWPHJJpv3yr8ZpGUrt
+	 olzaOaTCsDBUPYvKSAWo8BR0EYnM0nD/R4OcP45Tr3KkiYk/zUOiIemL6fp2zOU6K9
+	 aT1/tHfs0tIiKDK9SsZjVMVl5gfOz2DRkkxI1PlEHodrt5uRiBP7WFUg+vwR5RVQTU
+	 kpcD2AILpru1Qlxwu2hOkNNl8PJdoDjSW1YJ2lvbudQaRTB/IjN9iE7yuOOSmkuLVz
+	 eOpekYyQCZ3kQ==
+Received: from newzmoby.atcorp.com ([127.0.0.1])
+ by localhost (newzmoby.atcorp.com [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id O3juDTzYeeeT; Tue, 22 Sep 2026 20:24:44 -0500 (CDT)
+Received: from cs-ubuntu.atcorp.priv (unknown [192.168.235.141])
+	by newzmoby.atcorp.com (Postfix) with ESMTPSA id 92D7535A1B3E;
+	Tue, 22 Sep 2026 20:24:44 -0500 (CDT)
+From: Corey Siltala <csiltala@atcorp.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Corey Siltala <csiltala@atcorp.com>
+Subject: [meta-networking][PATCH] bmon: upgrade 4.0 -> 5.0
+Date: Tue, 22 Sep 2026 20:24:42 -0500
+Message-Id: <20260923012442.3830864-1-csiltala@atcorp.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: zFwd_1LFYPv-es5vMWHwj2U8Ty944PBF
-X-Authority-Analysis: v=2.4 cv=WLrqzXsR c=1 sm=1 tr=0 ts=6ab2acb4 cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
- a=iKiJcTA2PjBS6x5JeXcw:22 a=NEAV23lmAAAA:8 a=PYnjg3YJAAAA:8 a=t7CeM3EgAAAA:8
- a=-YEQQrfU63PjvAhJpxAA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=cLmVwuuHqK9AzAu1PFJr:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI0MSBTYWx0ZWRfX46xynbpXRcIO
- vkzAdSGBeyuWsLqFM3hf1j0CgSyljWhZW2IQu6I3xri7CaB596gOCzTm+p0vUZjoUwS55fdwYAK
- zewWZc6EyoQ1H34rO7G7JroYs1pSEgpwHd/xb79MgARhTnehMYsHv0+g7fpj5DdMzRTResRw4/f
- ysmzKznppcFYPoNIswDB82mGwv27ML4X6UBt6rpA3QDUTlDS/7Qc21/FQqwfLQY1SrvjEfEUTAy
- D4CQegTlIkfY3h/CkJSWRkG/w6UvAB63oRX9EHdtjdzOIFTOXBCeXMd4v7hy7z7cUQBmMGAnQLR
- VPfFVKOUm8uKzPyhqZDunb3H/N0/GLKZkVaYriByGqkgByoUCAM2XL3jRQ/rtJewkGq9+FHCIFe
- uOhdLm2QrwR5Gwx2yiu6KpKCnNNM6OfS/SNGW00v53zmrNmW5s0yZplchBiAJqIrCg7Eqf/k6v7
- kLlj3xm5VdJOEW1LMIg==
-X-Proofpoint-ORIG-GUID: zFwd_1LFYPv-es5vMWHwj2U8Ty944PBF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI0MSBTYWx0ZWRfX5JjrD/m+HyWQ
- oV79H+M95AG0rX4f78aO1hg4gvhG7CUPhJa+yG7cEGD9cu9x48YOdtIF4NeQLtpeaiooEy1prgV
- u9RZ1CKR9vKtdS3RtRsfgD+Z5J1nof1/mf0yyWiWVo7GJ37Gdo96
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-22_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 clxscore=1015 spamscore=0
- priorityscore=1501 adultscore=0 bulkscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220241
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 16:28:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130176
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 02:58:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130177
 
-Pillow 8.2.0 through 12.2.0 accumulates total_component_width across
-every tile in a JPEG2000 image instead of recomputing it per tile,
-allowing a crafted tiled JPEG2000 file to force substantially higher
-transient memory usage and trigger out-of-memory failures during
-decoding.
+Fixes:
+- out_curses: use xcalloc instead of a fixed buffer
+- Avoid trying to include <values.h> on Android
+- Fix typographical errors
+- curses: Fix seperator lines
+- Fix build in FreeBSD/DragonflyBSD
+- fix segfault on element removal
+- fix: Fix memory leaks in module_set()
+- fix: Convert usage of strdup/free to xstrdup/xfree
+- Fix compile issue in OpenBSD
+- Fix spelling and grammar in docs and comments
 
-Calculate JPEG2000 total_component_width for each tile in isolation.
+Features:
+- Allow numeric colors in bmonrc
+- curses: Add CTRL-N/CTRL-P for next/previous element
+- feat: Add IPv4/IPv6 addresses to additional info
+- feat: Add configure option to disable IPv6 in netlink module
+- feat: Add ability to toggle TC elements
+- curses: render graphs with Braille cells
+- display filters for TC ingress and egress
+- Add support for JSON output
+- Remove the 'Really quit' dialog and just exit cleanly
 
-Backport the patch to fix CVE-2026-59204
-https://github.com/python-pillow/Pillow/commit/13ada41172142f2fd9f0906f615a00ea623a11ca
+Misc:
+- Update to autoconf of the common era
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2026-59204
+See full release notes at https://github.com/Jafaral/bmon/releases/tag/v5=
+.0
 
-Signed-off-by: Aravind Bandari <aravind.bandari@windriver.com>
+Signed-off-by: Corey Siltala <csiltala@atcorp.com>
 ---
- .../python3-pillow/CVE-2026-59204.patch       | 37 +++++++++++++++++++
- .../python/python3-pillow_12.2.0.bb           |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
+ .../recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.bb}        | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.b=
+b} (56%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
-new file mode 100644
-index 0000000000..a706271c00
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
-@@ -0,0 +1,37 @@
-+From ca189db3cc625bf06cef39b09c8a61d91e7be080 Mon Sep 17 00:00:00 2001
-+From: Andrew Murray <3112309+radarhere@users.noreply.github.com>
-+Date: Mon, 22 Jun 2026 10:34:18 +1000
-+Subject: [PATCH] Calculate JPEG2000 total_component_width for each tile in
-+ isolation (#9704)
-+
-+CVE: CVE-2026-59204
-+Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/13ada41172142f2fd9f0906f615a00ea623a11ca]
-+Signed-off-by: Aravind Bandari <aravind.bandari@windriver.com>
-+
-+---
-+ src/libImaging/Jpeg2KDecode.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libImaging/Jpeg2KDecode.c b/src/libImaging/Jpeg2KDecode.c
-+index 1123d7bc9..536313471 100644
-+--- a/src/libImaging/Jpeg2KDecode.c
-++++ b/src/libImaging/Jpeg2KDecode.c
-+@@ -645,7 +645,6 @@ j2k_decode_entry(Imaging im, ImagingCodecState state) {
-+     size_t tile_bytes = 0;
-+     unsigned n, tile_height, tile_width;
-+     int subsampling;
-+-    int total_component_width = 0;
-+ 
-+     stream = opj_stream_create(BUFFER_SIZE, OPJ_TRUE);
-+ 
-+@@ -851,6 +850,7 @@ j2k_decode_entry(Imaging im, ImagingCodecState state) {
-+          a, and then a malicious file could have a smaller tile_bytes
-+         */
-+ 
-++        int total_component_width = 0;
-+         for (n = 0; n < tile_info.nb_comps; n++) {
-+             // see csize /acsize calcs
-+             int csize = (image->comps[n].prec + 7) >> 3;
-+-- 
-+2.53.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
-index f3fcb2d3c1..1dcaeacd93 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f0ac3777cfc96ded1b825e32ae7c99"
- 
- SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
-            file://0001-support-cross-compiling.patch \
-+           file://CVE-2026-59204.patch \
-            "
- SRCREV = "3c41c095064200a02672d89cc5ff629eaf4b0d4f"
- 
--- 
-2.53.0
+diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb b/meta-netw=
+orking/recipes-support/bmon/bmon_5.0.bb
+similarity index 56%
+rename from meta-networking/recipes-support/bmon/bmon_4.0.bb
+rename to meta-networking/recipes-support/bmon/bmon_5.0.bb
+index f47069471a..0ceff05984 100644
+--- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
++++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb
+@@ -1,11 +1,10 @@
+ DESCRIPTION =3D "Portable Bandwidth Monitor and rate estimator"
+ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e=
+0bcf8506ecda2f7b4f302"
+-# only works with libnl-0.5.0
+ DEPENDS =3D "libnl libconfuse ncurses"
+=20
+-SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"
+-SRC_URI =3D "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3D=
+https"
++SRC_URI =3D "https://github.com/Jafaral/${BPN}/releases/download/v${PV}/=
+${BPN}-${PV}.tar.gz"
++SRC_URI[sha256sum] =3D "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c9=
+7a8a555459ad73c0"
+=20
+ inherit autotools pkgconfig
+=20
+--=20
+2.34.1
 
 
