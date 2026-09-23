@@ -1,395 +1,167 @@
-Return-Path: <benjamin.robin@bootlin.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A902C98302
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 13:30:49 +0000 (UTC)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6959.1790170232403275769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68C73C98304
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 14:31:50 +0000 (UTC)
+Received: from mail-wr2-f43.google.com (mail-wr2-f43.google.com [74.125.225.107])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8466.1790173901538921625
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 06:30:32 -0700
+ Wed, 23 Sep 2026 07:31:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=dkim header.b=2HMytdvR;
- spf=pass (domain: bootlin.com, ip: 185.246.85.4, mailfrom: benjamin.robin@bootlin.com)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id A8E844E4103B;
-	Wed, 23 Sep 2026 13:30:30 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 7768B60580;
-	Wed, 23 Sep 2026 13:30:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3384B10329163;
-	Wed, 23 Sep 2026 15:30:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790170229; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=gJypBRPdKFIKKFvqA9dfcpE5sOrhhYeuz1b6O8lY3mo=;
-	b=2HMytdvRouUh9X2C1TaEvUIRz1tWIBzffTbd3G+IU2gLcysc1MyVf0Zu94MCJ0+l5X4h2m
-	cvtYZCWM/q9r3Wl5brumOw/rI7KPyZWLiHQUjjuHtzTTtUsrJaXlO6IucHhlp8EarL5KAT
-	H0E0uh9tYPOX/moflm7ox9xsKzbRDXrwYccilgnAVp0+brmvGZ/vLJGxZxTZ1c4hxHyzaY
-	WC9E1Ejst+ANBjJH3S8kePdDUF7zMoWo68NLfYG3ljSamGZvhx8igNP3GVvvl5Fb0xMHTf
-	KkAc8+55C6ZenghZLoLBR4B4+ew+Eq6ys2656EUgXJ4P2Gyg+6eeB/1zDN/wmQ==
-From: "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
-Date: Wed, 23 Sep 2026 15:30:24 +0200
-Subject: [scarthgap][meta-oe][PATCH v2 1/2] libwebsockets: update to
- version 4.3.10
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-update-libwebsockets-fix-cve-2026-19773-v2-1-d20d96496e90@bootlin.com>
-References: <20260923-update-libwebsockets-fix-cve-2026-19773-v2-0-d20d96496e90@bootlin.com>
-In-Reply-To: <20260923-update-libwebsockets-fix-cve-2026-19773-v2-0-d20d96496e90@bootlin.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Adr5hGuG;
+ spf=pass (domain: konsulko.com, ip: 74.125.225.107, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr2-f43.google.com with SMTP id ffacd0b85a97d-482f62ccdb1so429814f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 07:31:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1790173900; x=1790778700; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HlrB/8m6AVIHgx6yXGKB3klKOyZ5HWvv1ZiJSDmH9og=;
+        b=Adr5hGuGsjVrtTJAg0MTbdmsxk9vA43NZ6/33fX5XdR0kPlH16QYIPk91h+gaMKgaq
+         feCKnyqHzvIAqm8IVJjzn7ZEt27opfGMf2X6M7DV8I8e8Z4c/YtWDytLwpSJbdqjA04H
+         iPu5iyyzL00LTEx0dHf+4WgpCK6ddK7pB2IEI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790173900; x=1790778700;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HlrB/8m6AVIHgx6yXGKB3klKOyZ5HWvv1ZiJSDmH9og=;
+        b=TTptAuBfziUx+BKNVY30nQ1UEtbp/+1mUiyvaUHe1KQjIlykqMledqDDBy/ROCiiEi
+         qVsR0oB1lMQ1P+gXkcAsiy5GQd0x3ToyxLTUCzCqYSpsshZdZIs6n5dFNGi//X0eEDx6
+         hClkxdvTSsPDP2n02C5RItWxukpMDLEIBULp+lDGMwi4muhRJSJ8PEAR68aavTFqR7hI
+         3u4ANNKQz14YtElERkWU+IL/Ci3XRktHeDInx+cnpXddOJHX9eQn7bTnaRK9zZlxS6+n
+         LnqgUmmkpTPy+YQsdorRxac5tAWwRCtuKbyp8+pbvkx8xBkq9XdGJjpZb+F8i1bwSxRa
+         BNKA==
+X-Gm-Message-State: AFuF++n35CVWEUOnDkhcnuvXR16IHCqLEBj9NtnaFnlevu+9B9bnkdgH
+	mlAhVpo17PagAIDv9x4kQHp0EF7uHpzgiM5WBh635JEdBeViyjuvZlBoW3Q4YgAQFVx7p60pPQd
+	4mHpb
+X-Gm-Gg: AYBFou0X3tvtsZotw89uVYv1QeOJiG7J3wjXH1b699AkMr5c+DFvKzwv4v9Pq6fwamh
+	OEpgi1CoN8xwmez49ijWYKJA3jXGnaZlyEwydv1B0SYQiDamjAhNKpPnuKCWOb9KE5OrFBFNn1U
+	xhqVSOSRh4XwAMXWRYPZQfMUB3SPl8VlCwDrIRk3YeBwipR//Z+7ewuKBx5jp6h13QY9T2n5GtP
+	ezbebbOZa9TvfcWpiupN/+kPMpX+t8sqTussxII22wOB4ucxmV6c2I1zrddsdiI9NYR08vLAjAK
+	b5zJRusdTZxUmw94rjgfbKgdzSkWcGHR2D94ZNLfAvcoKBTkTi4yhE8YgcKT8e6WM5YKmn192KU
+	M+MMhhbWsnhyyTj1/b8lJcvYu1Qkf5CR3i0fAuFxKV03HVtKT8WrgwYa/tFzc79P4zSRgUnDMYT
+	ulEjjMgwkfn9mhpm60K+lUHmWXte1LCVXCExpic0mElRVGxeug1pJJnjLwHmIwCwhCuvDQmJIhg
+	BmXvj8cKEyiZ4YdndbsbK4hqOL3bqH/48SSre42/StwdN3A+7Rka3hNFU8ApWTw+VOo+PuJwAFk
+	A95duMp4t8HqRfw27Jl9Ots=
+X-Received: by 2002:a05:6000:26c6:b0:488:5fa9:34aa with SMTP id ffacd0b85a97d-4886718e867mr5054392f8f.20.1790173899641;
+        Wed, 23 Sep 2026 07:31:39 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-488684864c8sm7381248f8f.13.2026.09.23.07.31.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Sep 2026 07:31:39 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: olivier.benjamin@bootlin.com, mathieu.dubois-briand@bootlin.com, 
- pascal.eberhard@se.com, wahid.essid@se.com, 
- "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
-X-Mailer: b4 0.15.2
-X-Last-TLS-Session-Version: TLSv1.3
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-multimedia][PATCH] libheif: Upgrade 1.23.2 -> 1.23.5
+Date: Wed, 23 Sep 2026 17:31:35 +0300
+Message-ID: <20260923143135.3362743-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 13:30:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130237
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 14:31:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130239
 
-This version already include the fixes for CVE-2025-11677 and for
-CVE-2025-11678. The LICENSE was slightly changed to clarify the license
-summary.
+Upgrade to release 1.23.5 with the following security issues:
 
-Signed-off-by: Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
+- CVE-2026-XXXXX (GHSA-v8qw-hwjv-44hw) Memory exhaustion through a
+  mismatch between the container and the bitstream image size. A
+  crafted image can declare a small size in its ispe property while
+  the bitstream declares a much larger coded frame. The
+  container-level checks used the ispe size, so the oversized
+  bitstream reached the decoder, which allocated a frame buffer for
+  the in-band size before libheif rejected the mismatch. The
+  advisory demonstrated this for AV1 with the libaom backend (a
+  351-byte AVIF declaring 64x64 but coding up to 27648x27648,
+  allocating hundreds of MB to more than 10 GB), but the same class
+  affects every codec whose real frame size lives in the bitstream.
+  The coded size is now checked against max_image_size_pixels in
+  the codec-independent decode path, before any bytes reach a
+  decoder plugin: all AV1 sequence headers, all HEVC/AVC/VVC SPS
+  NAL units (including those carried in the item data, not only the
+  ones in the configuration record), the JPEG SOF marker and the
+  JPEG 2000 SIZ reference grid are scanned for the largest coded
+  size. (high)
+- CVE-2026-XXXXX (GHSA-qwpf-5wf7-r996) Heap use-after-free and
+  double free when encoding an image that carries a TAI timestamp,
+  including transcoding a file with an itai property.
+  ImageDescription shallow-copied its raw heif_tai_timestamp_packet
+  pointer, and a temporary in ImageItem::encode_to_bitstream_and_boxes()
+  freed the packet while the item and the source image still held
+  it. The timestamp is now stored by value. (medium)
+- CVE-2026-XXXXX (GHSA-9c75-9g8r-4728) Memory amplification through
+  a JPEG 2000 pclr box declaring zero palette columns. The
+  entry-count bound was skipped for zero columns, so an 11-byte box
+  allocated 65,535 empty palette entries, and nested j2kH containers
+  could repeat this within the child and nesting limits: a 3 KB file
+  reached about 330 MB RSS, none of it charged to max_total_memory.
+  Zero columns are rejected (ISO/IEC 15444-1 requires 1 to 255),
+  the byte bound is unconditional, and the palette storage is
+  charged to the memory limits. (medium)
+- CVE-2026-XXXXX (GHSA-r7gr-2xm2-23wf) Heap out-of-bounds read in
+  alpha compositing for uncompressed (unci) images whose colour
+  planes have different bit depths. Op_flatten_alpha_plane read
+  every plane through the sample type of the first colour plane, so
+  an 8-bit blue plane next to 16-bit red and green planes was read
+  with a halved stride past its end, and the bytes ended up in the
+  composited output. ColorState now tracks one bit depth per plane,
+  and the operator declines mixed sample widths at planning time.
+  (medium)
+- CVE-2026-XXXXX (GHSA-q492-cfcm-895h) The OpenJPEG decoder
+  plugin's pre-decode size check bounded the JPEG 2000 window span
+  (x1-x0)*(y1-y0) but not the absolute reference-grid coordinates,
+  so a codestream with a 17-pixel window on a grid near the 32-bit
+  boundary reached opj_decode(). Against OpenJPEG 2.3.1 this
+  produced a heap-buffer-overflow write inside OpenJPEG (the class
+  of CVE-2020-6851); OpenJPEG 2.5.4 rejects the input. The
+  reference-grid area is now bounded as well. (low)
+- (GHSA-qfj5-c4pq-q998) Heap out-of-bounds read in the uncompressed
+  encoder when an application attached a separate alpha plane to an
+  image with an interleaved chroma format. The interleaved encoders
+  took their component list from the chroma format (three entries)
+  but decided whether to write alpha from the presence of an alpha
+  plane, and indexed the list at [3]. heif_image_add_plane() now
+  rejects a separate alpha plane on interleaved images, and the
+  encoders derive both decisions from the chroma format. Only
+  reachable through the public API; decoding never produces such an
+  image. (low)
+- (GHSA-7pwf-qh74-p35w) The caller's heif_security_limits were not
+  applied when parsing a mini box (the MIAF minimized image format)
+  or the av1C/hvcC blob embedded in it; the built-in defaults were
+  used instead. An application that tightened the limits got no
+  enforcement of its max_memory_block_size or max_total_memory on
+  such files. The allocations are bounded by the bytes present in
+  the box, so this could not amplify memory use. (low)
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../libwebsockets/CVE-2025-11677.patch             | 161 ---------------------
- .../libwebsockets/CVE-2025-11678.patch             | 128 ----------------
- ...websockets_4.3.3.bb => libwebsockets_4.3.10.bb} |   6 +-
- 3 files changed, 2 insertions(+), 293 deletions(-)
+ .../libheif/{libheif_1.23.2.bb => libheif_1.23.5.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/libheif/{libheif_1.23.2.bb => libheif_1.23.5.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11677.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11677.patch
-deleted file mode 100644
-index bf11a893f875..000000000000
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11677.patch
-+++ /dev/null
-@@ -1,161 +0,0 @@
--From c01cb06d99c08579ab33bef066fca8a5338b7c7b Mon Sep 17 00:00:00 2001
--From: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
--Date: Tue, 18 Nov 2025 16:59:22 +0100
--Subject: [PATCH] NN-2025-0102: UAF depending on upgrade allowed
--
--This document contains sensitive information collected during our
--security research activities related with the Libwebsockets library
--maintained by Andy Green (warmcat).
--
--+-------------------------------------------------------------------------------------------------------+
--| Report information                                                                                    |
--+:===================================:+:===============================================================:+
--| Vendor                              | warmcat                                                         |
--+-------------------------------------+-----------------------------------------------------------------+
--| Vendor URL                          | https://libwebsockets.org/git/libwebsockets                     |
--+-------------------------------------+-----------------------------------------------------------------+
--| Affected component                  | libwebsockets                                                   |
--+-------------------------------------+-----------------------------------------------------------------+
--| Affected version                    | 4.4                                                             |
--+-------------------------------------+-----------------------------------------------------------------+
--| Vulnerability                       | CWE-416: Use After Free                                         |
--+-------------------------------------+-----------------------------------------------------------------+
--| Proposed CVSS v3.1 Base Score       | 6.0                                                             |
--+-------------------------------------+-----------------------------------------------------------------+
--| Proposed CVSS v3.1 Vector           | CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N |
--+-------------------------------------+-----------------------------------------------------------------+
--
--+-----------------------------------------------------------------------------+
--| Security Researcher(s)                                                      |
--+:===================================:+:=====================================:+
--| Name                                | **Email address**                     |
--+-------------------------------------+---------------------------------------+
--| Raffaele Bova                       | labs-advisory@nozominetworks.com      |
--+-------------------------------------+---------------------------------------+
--
--Libwebsockes is a C library that provides client and server
--implementation for various protocols (e.g., HTTP, websockets, MQTT) and
--more.
--
--Nozomi Networks Lab discovered a "CWE-416: Use After Free" in the latest
--software version of libwebsockets, specifically in the WebSocket server
--implementation.
--
--Depending on the use of the API, the vulnerability may allow an attacker
--to read or write data, that could cause a loss of integrity or
--availability.
--
--The issue is caused by the `lws_handshake_protocol` function, specifically
--when the upgrade header is not valid, the function calls
--`lws_http_transaction_completed`, which frees some of the data in the wsi
--structure, then it calls `user_callback_handle_rxflow` passing the up
--pointer and uses it on following strcasecmp calls.
--
--From our understanding, for this vulnerability to have a meaningful
--impact, a user that implements the Websocket server, must provide a user
--callback function which is going to handle
--`LWS_CALLBACK_HTTP_CONFIRM_UPGRADE`, while ignoring the length and doing
--operations on the up pointer.
--
--It is possible to compile the minimal websocket server using address
--sanitizer, to quickly verify the use after free.
--
--From our understanding of the code, if the upgrade header does not match
--the intended contents, then the code after the if statement when
--`lws_http_transaction_completed` is called, should not be executed, thus
--simply enclosing all that code in the else branch solves the issue.
--
--CVE: CVE-2025-11677
--Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/2f082ec31261f556969160143ba94875d783971a]
--
--Signed-off-by: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
-----
-- lib/roles/http/server/server.c | 58 +++++++++++++++++-----------------
-- 1 file changed, 29 insertions(+), 29 deletions(-)
--
--diff --git a/lib/roles/http/server/server.c b/lib/roles/http/server/server.c
--index 6b132a42..e6d714e3 100644
----- a/lib/roles/http/server/server.c
--+++ b/lib/roles/http/server/server.c
--@@ -2375,49 +2375,49 @@ raw_transition:
-- 						HTTP_STATUS_FORBIDDEN, NULL) ||
-- 				    lws_http_transaction_completed(wsi))
-- 					goto bail_nuke_ah;
---			}
---
---			n = user_callback_handle_rxflow(wsi->a.protocol->callback,
---					wsi, LWS_CALLBACK_HTTP_CONFIRM_UPGRADE,
---					wsi->user_space, (char *)up, 0);
--+			} else {
--+				n = user_callback_handle_rxflow(wsi->a.protocol->callback,
--+						wsi, LWS_CALLBACK_HTTP_CONFIRM_UPGRADE,
--+						wsi->user_space, (char *)up, 0);
-- 
---			/* just hang up? */
--+				/* just hang up? */
-- 
---			if (n < 0)
---				goto bail_nuke_ah;
--+				if (n < 0)
--+					goto bail_nuke_ah;
-- 
---			/* callback returned headers already, do t_c? */
--+				/* callback returned headers already, do t_c? */
-- 
---			if (n > 0) {
---				if (lws_http_transaction_completed(wsi))
--+				if (n > 0) {
--+				    if (lws_http_transaction_completed(wsi))
-- 					goto bail_nuke_ah;
-- 
---				/* continue on */
--+				    /* continue on */
-- 
---				return 0;
---			}
--+				    return 0;
--+				}
-- 
---			/* callback said 0, it was allowed */
--+				/* callback said 0, it was allowed */
-- 
---			if (wsi->a.vhost->options &
---			    LWS_SERVER_OPTION_VHOST_UPG_STRICT_HOST_CHECK &&
---			    lws_confirm_host_header(wsi))
---				goto bail_nuke_ah;
--+				if (wsi->a.vhost->options &
--+					LWS_SERVER_OPTION_VHOST_UPG_STRICT_HOST_CHECK &&
--+					lws_confirm_host_header(wsi))
--+				    goto bail_nuke_ah;
-- 
---			if (!strcasecmp(up, "websocket")) {
--+				if (!strcasecmp(up, "websocket")) {
-- #if defined(LWS_ROLE_WS)
---				lws_metrics_tag_wsi_add(wsi, "upg", "ws");
---				lwsl_info("Upgrade to ws\n");
---				goto upgrade_ws;
--+					lws_metrics_tag_wsi_add(wsi, "upg", "ws");
--+					lwsl_info("Upgrade to ws\n");
--+					goto upgrade_ws;
-- #endif
---			}
--+				}
-- #if defined(LWS_WITH_HTTP2)
---			if (!strcasecmp(up, "h2c")) {
---				lws_metrics_tag_wsi_add(wsi, "upg", "h2c");
---				lwsl_info("Upgrade to h2c\n");
---				goto upgrade_h2c;
---			}
--+				if (!strcasecmp(up, "h2c")) {
--+				    lws_metrics_tag_wsi_add(wsi, "upg", "h2c");
--+				    lwsl_info("Upgrade to h2c\n");
--+				    goto upgrade_h2c;
--+				}
-- #endif
--+			}
-- 		}
-- 
-- 		/* no upgrade ack... he remained as HTTP */
---- 
--2.43.0
--
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11678.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11678.patch
-deleted file mode 100644
-index 3489a7e6a13d..000000000000
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11678.patch
-+++ /dev/null
-@@ -1,128 +0,0 @@
--From e1d4c32bf773b8cf01eb5e368a4a21679e0b670a Mon Sep 17 00:00:00 2001
--From: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
--Date: Tue, 18 Nov 2025 17:03:33 +0100
--Subject: [PATCH] NN-2025-0103: ADNS crafted response overflow
--
--This document contains sensitive information collected during our
--security research activities related with the Libwebsockets library made
--by Andy Green (warmcat).
--
--+-------------------------------------------------------------------------------------------------------+
--| Report information                                                                                    |
--+:===================================:+:===============================================================:+
--| Vendor                              | warmcat                                                         |
--+-------------------------------------+-----------------------------------------------------------------+
--| Vendor URL                          | https://libwebsockets.org/git/libwebsockets                     |
--+-------------------------------------+-----------------------------------------------------------------+
--| Affected component                  | Ecostruxure Automation Expert                                   |
--+-------------------------------------+-----------------------------------------------------------------+
--| Affected version                    | 4.4                                                             |
--+-------------------------------------+-----------------------------------------------------------------+
--| Vulnerability                       | CWE-121: Stack-based Buffer Overflow                            |
--+-------------------------------------+-----------------------------------------------------------------+
--| Proposed CVSS v3.1 Base Score       | 7.5                                                             |
--+-------------------------------------+-----------------------------------------------------------------+
--| Proposed CVSS v3.1 Vector           | CVSS:4.0/AV:A/AC:L/AT:P/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N |
--+-------------------------------------+-----------------------------------------------------------------+
--
--+-----------------------------------------------------------------------------+
--| Security Researcher(s)                                                      |
--+:===================================:+:=====================================:+
--| Name                                | **Email address**                     |
--+-------------------------------------+---------------------------------------+
--| Raffaele Bova                       | labs-advisory@nozominetworks.com      |
--+-------------------------------------+---------------------------------------+
--
--**\**
--
--Libwebsockes is a C library that provides client and server
--implementation for various protocols (e.g., HTTP, websockets, MQTT) and
--more.
--
--Nozomi Networks Lab discovered a "CWE-121: Stack-based Buffer Overflow"
--in the latest software version of libwebsockets, specifically in the
--async-dns component.
--
--The vulnerability allows an attacker that can inspect DNS requests made
--by the victim (e.g. being in the same wireless network) to forge a DNS
--response packet that overflows the stack and may lead to arbitrary code
--execution (depending on the platform and compiler options).
--
--The issue resides in `lws_adns_parse_label` function in
--`lib/system/async-dns/async-dns-parse.c`; this function iteratively parses
--a label however it does not correctly check the number of bytes written
--in the destination buffer.
--
--Specifically, the size of the dest output buffer is specified in the `dl`
--argument, however during the read of each substring of the label only
--the length of the current substring of the label is accounted for not
--overflowing the destination buffer, but previous reads are not accounted
--for.
--
--This means that a label of arbitrary size and content can be supplied
--and is copied onto the stack, however it must be split into substrings
--of size less than `dl`.
--
--To trigger the vulnerability an attacker must be able to sniff the DNS
--request packet to send a response with a matching identifier, otherwise
--the implantation correctly ignores the response.
--
--We have provided a harness for testing, for ease of use copy the harness
--in a subdirectory, for example in minimal-examples-lowlevel/api-tests/,
--and build it
--
--```
--cmake -B build -DLWS_WITH_SYS_ASYNC_DNS=1 -DLWS_WITH_SSL=0
---DCMAKE_C_FLAGS="-fsanitize=address" . && make -C build lws-test-async-dns
--```
--
--Then it can be run `./build/bin/lws-test-async-dns < poc_stackbof`
--
--![Address sanitizer report of stack buffer overflow](./NN-2025-0103_image.png)
--
--We suggest keeping track of the number of bytes currently written on the
--dest buffer, this could be done by saving the original dest pointer,
--decrementing dl on each substring memcpy, or using an auxiliary
--variable.
--
--CVE: CVE-2025-11678
--Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/2bb9598562b37c942ba5b04bcde3f7fdf66a9d3a]
--
--Signed-off-by: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
-----
-- lib/system/async-dns/async-dns-parse.c | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/lib/system/async-dns/async-dns-parse.c b/lib/system/async-dns/async-dns-parse.c
--index bdfe2050..81743b3f 100644
----- a/lib/system/async-dns/async-dns-parse.c
--+++ b/lib/system/async-dns/async-dns-parse.c
--@@ -35,7 +35,7 @@ lws_adns_parse_label(const uint8_t *pkt, int len, const uint8_t *ls, int budget,
-- 	const uint8_t *e = pkt + len, *ols = ls;
-- 	char pointer = 0, first = 1;
-- 	uint8_t ll;
---	int n;
--+	int n, readsize = 0;
-- 
-- 	if (budget < 1)
-- 		return 0;
--@@ -88,7 +88,7 @@ again1:
-- 		return -1;
-- 	}
-- 
---	if ((unsigned int)ll + 2 > dl) {
--+	if ((unsigned int)(ll + 2 + readsize) > dl) {
-- 		lwsl_notice("%s: qname too large\n", __func__);
-- 
-- 		return -1;
--@@ -101,6 +101,7 @@ again1:
-- 	(*dest)[ll + 1] = '\0';
-- 	*dest += ll + 1;
-- 	ls += ll;
--+	readsize += ll + 1;
-- 
-- 	if (pointer) {
-- 		if (*ls)
---- 
--2.43.0
--
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-similarity index 94%
-rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
-rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-index ed2ac9df4aa5..559253c9613b 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-@@ -1,16 +1,14 @@
- SUMMARY = "Canonical libwebsockets.org websocket library"
- HOMEPAGE = "https://libwebsockets.org/"
- LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f35efc0af624eea4864849b05ae9c7db"
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.2.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/libheif/libheif_1.23.2.bb
+rename to meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb
+index 05d1b8f63a..49802780c3 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.2.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb
+@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
  
- DEPENDS = "zlib"
- DEPENDS:append:class-native = " libcap-native"
+ SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master;tag=v${PV}"
  
- S = "${WORKDIR}/git"
--SRCREV = "4415e84c095857629863804e941b9e1c2e9347ef"
-+SRCREV = "2288cf200bc1c28680765bd4f07e437356106c2d"
- SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
--          file://CVE-2025-11677.patch \
--          file://CVE-2025-11678.patch \
-           file://CVE-2026-10650.patch \
-           "
+-SRCREV = "ac1cb05c39008f01525c991ff8b88f84ddf70fd2"
++SRCREV = "413e2a87e6a70b3eccc3a3adc5801179dd2d9e00"
  
-
+ inherit cmake pkgconfig
+ 
 -- 
-2.55.0
+2.47.3
 
 
