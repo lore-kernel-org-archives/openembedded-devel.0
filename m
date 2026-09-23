@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DB0EC9830C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DC7DC9830B
 	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 10:41:57 +0000 (UTC)
-Received: from mail-pz2-f43.google.com (mail-pz2-f43.google.com [74.125.228.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4293.1790160112749085340
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4292.1790160110330296138
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 03:41:52 -0700
+ Wed, 23 Sep 2026 03:41:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=g07ZJG8H;
- spf=pass (domain: gmail.com, ip: 74.125.228.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f43.google.com with SMTP id d2e1a72fcca58-8623e5d435cso247957b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=p1EEqqNS;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-86ec25cf7ecso1427272b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790160112; x=1790764912; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790160110; x=1790764910; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=22PIhhhtrrEAnJMy61c99rwBaZVQ24XfDHsj365IUU8=;
-        b=g07ZJG8HbkYU6pXJC7giIOUyd7CP8AXF4ycGAwmw7w6b7caCKtJ1u1YNyC/omWXpYU
-         JFV+vRTnIZCtnSsd2RFNytFgYC+ugMAioP7gbsMMFGbJ0D/5RwbNTD8OpJWvM39I9sLN
-         R9auqG0EqjwyQKb78xJ0ddWpBV2lKnwTPb1w1599swITHQQM66vpV8zFSFT+rHC8tKxV
-         euaBIZlmbWdwzj81mmm5KZdHZP18vWtp5iLmbvVOuTaaYBfz7OUwXdJMxYMxvbqouQpL
-         MJSc6FwRRx4kIDiWied2wxQRi5eQlNHKWB1n3IE40mQDCumcXGxdAdoLZUBegkttTT4M
-         QVGw==
+        bh=o3ZY2jy+57PoDgATXl/fwk2Wlwl4im4j0ZNO0xztVI0=;
+        b=p1EEqqNSucSSVpPhZnplAK3WIZE1EptFze/pLCuKJp7wjzQWDcWIpqDzZDBFkjkOBm
+         LNo8+bC+3rsM4wYZ2WQYjvlns8c1xVNA+mi1erSAmpRK6159BVbJOIe+s8n3jTHDwC/x
+         HGDTa3f4AY49+GCurvpvq+rgPpt2y9bX5X6GbUjaPQr6521P9hXci+kUG6mHHNRqjTfY
+         Ekor2YE/zhmGkgQU9E/DTH7LGGP3net15LxPdjKdpPrEDSJ79li16d1PXrk/iL5+5uRe
+         7CnI5vV+nLIKTQ/iOHg+IezhH+/gnaKFaTpOKhn0WDidHLkzckHdvijusfL/B2iOO49t
+         LtRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790160112; x=1790764912;
+        d=1e100.net; s=20260707; t=1790160110; x=1790764910;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=22PIhhhtrrEAnJMy61c99rwBaZVQ24XfDHsj365IUU8=;
-        b=yP8vlUly0Ss6b+k0keDQp+aR+x5eY+8q+CE9pmy+cMjzw9UwVG6j1GlCSXr48iybYR
-         9NUN8T+oFln0haOqbEHo0ugKNTqLHNXCIcUzj5aRH8ea9DqWqlG4kB15F1JElgyM8e24
-         4e5EM6Fte/+PHKDOzEA7FdGpNNNvZqJPq2yCvOz242j5X5DAczMkcpHC2Ej51sAjOaUk
-         BfO1CVxPdb3/RCPQsXZzEL6Cuuj7bpdrH1QauJz8ET8nWQRwLmd23K3jfIx7q6Zi/zpy
-         zZT7CA5fHNQCkQ9+si+vG+c0f6GukoQ+708+Efub1ulpd0mHC3UUgKK0hA91ldTulJPd
-         BIgg==
-X-Gm-Message-State: AFuF++nY1iLksnYZrsXZTSO+Xr6exvz6oHKG+3yYy6NAecveN1b8d9JH
-	WLX7jIVQupSFeUBd2mFGM5WILJwphUdxuKP2SVjDPSIkMuGbDhfRCOKUW2sJQg==
-X-Gm-Gg: AYBFou2GXY6sRoSmEzF9uK0dTBWlFjy+v11VyeENue5Ay//6w9C5VUW4pjCrNQej23a
-	H5XBDu4MUOWwvP5fQ1Io0NfVIxnNmySwKv4GNKj+TYQenA12W0gIOAF2MGftbbJYGjrG0t9h/8E
-	y9n3osYPuxSjHlbvK6PWgbCx6URdGmdR0EcYB6Qfee06Cuu+JEOPZNDHTloDslerBn6H0qLa8tR
-	ZMtdRve0Tq/GWKqCQXT4CUj5abjZok6dVyTGuzjGe3CdTW/C++yZoDSpgFmQfpXbNkUjNjjidT6
-	sQxVCU6tO2lKcLUBVAZ0D6u578zkiL9FXoKQvJFoYVbPleGMersyCKH2Zl2j8KNsTPFeue8q2w7
-	Dc7aT+vL81v+FL344wCxL8aA0bmmDVAMAPCNGsVHklJC8pr1l8eF3h1ZoPXsuk4sszOtAa/FVVN
-	fN7D37bas8sNJI85YjijbEnD0nhIm/js8a8vE+TBoyDlJhxmHbzfJsm5icTsifsFZSO18ZTqM23
-	gqmClpvg411PaJB2rPPs17F5otwxZsDYA==
-X-Received: by 2002:a05:6a00:4c91:b0:878:3704:e0ec with SMTP id d2e1a72fcca58-87d24c6887dmr1402546b3a.18.1790160111976;
-        Wed, 23 Sep 2026 03:41:51 -0700 (PDT)
+        bh=o3ZY2jy+57PoDgATXl/fwk2Wlwl4im4j0ZNO0xztVI0=;
+        b=UYrsJTLl1ghYWPFdVRu98oMluyGk0/m39FABpMBMBYZC3SKzqcaL+9Va6s+MWDcHSo
+         RprwZWdkWJXItHq9RnpOdbCueXpQ3WomhOH2yLvadfTEYnYoep5yrGuOaC14AW0eMts1
+         AZwU5JurmiYdfd5hd62AiNqygAdNFN8Bha/x5DM/bJHHXlbYY9nayroE3MwbWWnavtTu
+         u2PC6L5Q2JOQrycAH9VrJWSaE8KpHN/ip+ASaS3ysai0CdeAE8YbQzXzAhMG5s8S/FhS
+         33c26uMLwN3GPb3ZApeZvRnLf+zwJRJNtuwvDRQGXRtK2i0ibkVelyjUCRaPkWxPLVxO
+         Mn5g==
+X-Gm-Message-State: AFuF++lHsnDqaQ4GzwAni136TBenVr/8cTTmmKVeXDN3jBK0pJxmEKcc
+	dNnfhbI81Fx3rULtsq4jE83xQsVKf33tnCMQ4cM9CBZPc9/TUgPjyzt+qwHHEQ==
+X-Gm-Gg: AYBFou29o0HS145gePVpQZCMJ2HImiRkH7b2se/IAdQA9cHtVRnjdhG2mzMq00k2X+q
+	1UHCLo4AHzI8IR8AhD7zZkUl2kpMwM8vP2Resi0AqjTYvXMB+84KnpGNr5jpukM/yTV0JZIG18T
+	r02v43mzf08DTa67aCV22e8DrPzrBojkjAd1V25z05zwky9ujhhwvjSXHMJ3qRlqUQWYdWsFTZb
+	Dzyinpxpo1x8yzXrIgeyLbUxht8J6kt4OJV2Lbs15/DHm4jWlKVIkBzIcqUJOJ+lBtrdGkDq14/
+	8I/+C45i0b8WswIUlnEKHkQKql3MW95f6TEgaTcgW4AIxIx6Bz+anWbI5z7LqYcv14T87Kuxj+2
+	IId/sMwiACufccLurXmuuxIl2adVcBPyJdHnY96hDcD5p4BkpP4bfWnXdPnFgFfMp+4y+Nhj7EB
+	D5yaWo44MMIi3dcr4StFvuYU34dkq04Y/lZvgAeveztJgV4UVj/NwgnepvFk7k2HldT7rbaIG4f
+	NUIKRLpOqctE4y4VeUFw/4=
+X-Received: by 2002:a05:6a00:1a02:b0:871:a6f5:693a with SMTP id d2e1a72fcca58-87c8298f91cmr2310465b3a.11.1790160109681;
+        Wed, 23 Sep 2026 03:41:49 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.50
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 03:41:51 -0700 (PDT)
+        Wed, 23 Sep 2026 03:41:49 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 25/42] ntopng: ignore CVE-2026-84989
-Date: Wed, 23 Sep 2026 22:40:39 +1200
-Message-ID: <20260923104056.457360-25-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 24/42] libssh: ignore CVE-2026-59842
+Date: Wed, 23 Sep 2026 22:40:38 +1200
+Message-ID: <20260923104056.457360-24-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
 References: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
@@ -68,26 +68,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 10:41:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130212
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130211
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+The vulnerability exists in GSSAPI key exchange introduced in v0.12.0[1]
+Also confirmed by libssh security advisory[2]
+
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-84989
+https://nvd.nist.gov/vuln/detail/cve-2026-59842
+
+[1]https://gitlab.com/libssh/libssh-mirror/-/commit/88c2ea6752fab7b3da9cc4c51eaf632361a44080
+[2]https://www.libssh.org/security/advisories/CVE-2026-59842.txt
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-networking/recipes-support/ntopng/ntopng_6.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/libssh/libssh_0.11.5.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb b/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
-index 3c039781d8..57d2848ace 100644
---- a/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
-+++ b/meta-networking/recipes-support/ntopng/ntopng_6.6.bb
-@@ -49,3 +49,5 @@ do_configure:prepend() {
- }
- 
- SYSTEMD_SERVICE:${PN} = "ntopng.service"
-+
-+CVE_STATUS[CVE-2026-84989] = "cpe-incorrect: This vulnerability was introduced in v6.7"
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.5.bb b/meta-oe/recipes-support/libssh/libssh_0.11.5.bb
+index 752bded528..49ffd29403 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.11.5.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.11.5.bb
+@@ -58,3 +58,4 @@ CVE_STATUS[CVE-2026-59847] = "fixed-version: fixed in v0.11.5"
+ CVE_STATUS[CVE-2026-59848] = "fixed-version: fixed in v0.11.5"
+ CVE_STATUS[CVE-2026-59849] = "fixed-version: fixed in v0.11.5"
+ CVE_STATUS[CVE-2026-59850] = "fixed-version: fixed in v0.11.5"
++CVE_STATUS[CVE-2026-59842] = "cpe-incorrect: the current version (0.11.5) is not affected"
 
