@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1069DC9830C
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 10:42:18 +0000 (UTC)
-Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4184.1790160134074231087
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1D23C982FA
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 10:42:27 +0000 (UTC)
+Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4192.1790160146578185144
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 03:42:14 -0700
+ Wed, 23 Sep 2026 03:42:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZqkbuRjL;
- spf=pass (domain: gmail.com, ip: 74.125.228.40, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f40.google.com with SMTP id 41be03b00d2f7-cc74520b20bso248530a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:42:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=rYOF+jBk;
+ spf=pass (domain: gmail.com, ip: 74.125.228.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-86212a185dcso578711b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:42:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790160133; x=1790764933; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790160146; x=1790764946; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WPXG1iL1QSayKU3dSCpJ53msntwPv1/Iqr8mVa076AA=;
-        b=ZqkbuRjL7x7AK1xwQRnCJAkujk3vnywNuZStEH7/fjwt8prwPWt4E/Ydopp3xn2IUn
-         nqZE1pp2whI6LF3gWh+1/0WcHc7gSjnqm+Y+RGWVwAWxgGJVruRy1FSdD8io5D73a4/y
-         8jetPP+vUXtNe6Kb4rvttkLz2HIY4Jy6S9Ov9yE57QdRG3dh3EGdZQvufPzBQbHGfdmG
-         /QR+0KEbFyLPPqn8Q1BY/huI9qQ0X/gP2DQExaI2CaPd4pBrS2tnmKgedTj6gaRSRMQO
-         l0yD9QzS6CUDk+ow1YFGfDCQJ+EBNxYVb4KE45HM20tKNhvnaWIvQ83yf1KJeU32Sp18
-         uvLg==
+        bh=6oODtCWMSTJpLAE1P86XTxOTwW0ptBmn7n8wUDl3Jj8=;
+        b=rYOF+jBkh1du7N8i8elem2dZYyUCXh4ModH+FVJJ9TvLRZr7+qNVXE8I6pjQgUXRTt
+         HjphKrN572GQe+wtrYe1vw0racgDo3d3p5xGPFkLAE9tpzAfY+o/Sij6oG4g9+Yy3xhZ
+         h4CkLFG0GNdcf7nLSoCpcgBdgUe8sAYYeMPJR7q4HcEMBr0nG1Oy+gozrDN6quTXmEsZ
+         j+Bm55TYdgGpMV7zcPqjDo77GUQZgr5Np5in61RVa6nAd1ps5b6PXnk9Q81dBUyCX/cp
+         6srXicSg191lnvy38kPi3+SU2TEs3AkdEhcL9uPp4NyJSqLY78Vx7txzUV43zhcqCT69
+         3GRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790160133; x=1790764933;
+        d=1e100.net; s=20260707; t=1790160146; x=1790764946;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WPXG1iL1QSayKU3dSCpJ53msntwPv1/Iqr8mVa076AA=;
-        b=rKakV/BqlxpKq12vu/UyzCcNlpPWbFvrgt/FXB+3QU1fP+X0P1xb2pXQXB+gulv4e3
-         XfvzVUqpKaalpxiNuBUd3px2tof5t9yIcC+KVt14Yb/Hlqa+8sw1HNo+NEyDT+M4W0V/
-         /7EgvHmWXqcFOgpaxJKqXqA1m/N7bcZ5+XYIOn0O9PpL92MUpmajVnrMoXbVk50OdMA2
-         WVdMjjavwueGQFVPN1pWDzXvGs5RLepfTrPYjMM9am8/adoibXtPL14svsVoGZkomRZG
-         KfMfVXV1y0lcy/xVD8Nh8Ltj78v0/+SPM5Vm4KlzB0YlN1yeq+oIXCrVkh6BQQnUIDU4
-         6FOw==
-X-Gm-Message-State: AFuF++nBn4SleYe4F+PqRYyZzHam0E5fpgVGXmFaTPt5aAE7y0ntezrf
-	d5GhD1o8PCITWKrU6CTTQgQluo+XMqJ/n6SNKGWYwW+8uCGdXV7YeQuRrks/rw==
-X-Gm-Gg: AYBFou2ZdAOBAqu8QqEKHt7bMXfWdhMiQIaesMYiG1oiMbt6lP+4WrL590mTRoKBQ5N
-	DXYy9FKVRTVTC7oWUfNiJ5Dpd/sDyqtcqa4F7CZ5LYXm510KjZ9naap8oL3oBUHJANP5tv2tXwC
-	MDD1WsCDIQ6WOGkfffiP6LIsGkoBG+IzDj3XIf8COrBe7kpjMaOyitQBO2lXare7r7H1xwWGzEg
-	eqE8pLPZ0GxMZWRvM8xgZl24iciGW8FGZ1fyGJEEqojBmBU06An2zTeoVcIEoPJ0HP7YP6s9HkY
-	M1Li0r+9XEFR4zFhoSjAqXGpB2oyDhSsXqLQ7sMj2T7avKrU7CgkBpv76DXeU9V70TZA2+OYtnK
-	qedKYLnPfsEaj5aTluWTCsPsohijodVw3u0HqSF42BTNXALJLYIHCaCFb/9WXeUDqubzHOMQmiU
-	3Uyncbz5InCKTPdJG77zcAnaco8kEHUV8lYtueUcPPbCW5EoMUNEuZWMLccrbfuMTW/K7PKjapa
-	c3sZzTmBvc5J0Tu6jhwRgw=
-X-Received: by 2002:a05:6a21:1398:b0:3dd:a196:ffcd with SMTP id adf61e73a8af0-3ddf8354fd9mr1560845637.29.1790160133430;
-        Wed, 23 Sep 2026 03:42:13 -0700 (PDT)
+        bh=6oODtCWMSTJpLAE1P86XTxOTwW0ptBmn7n8wUDl3Jj8=;
+        b=FNY34Dd3GZ0VqxJFsruU1VV7an+o7gmLsiwCuCPp32Pql7Rs8Yk2VkQB/cXW+kssDs
+         MVCMtEiv4zoKHt7ql3/DIlAeVKQP9aXyFt5hb/ab+a7g92y62FEhmKwqxDvNFRtHJy0P
+         kWnTjUCK8eTCshv9ex04Qk5M88GP6MOKBlyBP/YIjaAE3pJ3qzxuobc2mIErl8EyF7cH
+         oJ3S+coSo2KXBHSFcQi/oWtpvEwoanucy0Y+bD4WZZFJT10/Q+7Amq8wh6h8N88S6d4H
+         1PrV/V/GVIyCuvC60A7uCzzhzwSEfVxXRItEyQ8aQ5onamTxCe8YROVQkgRj3k0CvPyW
+         re9Q==
+X-Gm-Message-State: AFuF++nXkXS+KWhvE6fXPMnqbTmytE/4YVIXc29FbOLQ69sSS5aoozbb
+	b2PPiiBv8ylf7cnImcIAQmeey0CD0H9vs7lnOq4XX2iGzGx8i74q2G08WPg4pg==
+X-Gm-Gg: AYBFou225qLtZVw28Wh74BKWdHpKQJIyFHv9/o+Pb74G03AE4QxYnW1pcC1Rz6xbzZD
+	NNFaHoafBaE2uVDnzojXP0bigi9bjxhburzuL0xEq34Q2fo09hrLNanQT8/dcEbojQwP+mW55mB
+	0jKSZ7NQjcTL4dM3LH/NP7IyyYCg9MuOVkHxpS3I3R649Sq+kW2h0YJpjyOz1/Aie/VNrkHkMe0
+	m9Ds8BMaqFg1HStnT6bGhoYEekZMxd7izTDVfup4N7zbtqTcE1QoB/eADfDqe3RDeX+NVfeccHa
+	0jz+IXkamjBZkURRGgO1Ls6uFn4LcEiKAywysRkukhTsi3M25EiuRABNZ4im+hMAV2uUfH1hEi0
+	HIe95r9g1HyL1EdeugBQNYdBh+eTBTC82gJnXUgioyCWARqE7/rOrn52blNvJ3v35b50Siqs+0W
+	rmcYAHPVuzst8Wug32nnWQXG7n/7FM0a5vJD6qxzVi5svhetoUlZI+eQlFmrEJdnMSQBpJa2UCb
+	CQVaV6U465ys2YFBFaPyB8=
+X-Received: by 2002:a05:6a00:3919:b0:86b:922d:6aa with SMTP id d2e1a72fcca58-87d1a5ad93cmr1757574b3a.1.1790160146001;
+        Wed, 23 Sep 2026 03:42:26 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.42.11
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.42.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 03:42:13 -0700 (PDT)
+        Wed, 23 Sep 2026 03:42:25 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Devansh Patel <devanshp@cisco.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 34/42] mariadb: correct CVE_PRODUCT mapping
-Date: Wed, 23 Sep 2026 22:40:48 +1200
-Message-ID: <20260923104056.457360-34-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 39/42] python3-flask: correct CVE_PRODUCT mapping
+Date: Wed, 23 Sep 2026 22:40:53 +1200
+Message-ID: <20260923104056.457360-39-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
 References: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
@@ -69,38 +69,40 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 10:42:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130221
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 10:42:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130226
 
 From: Devansh Patel <devanshp@cisco.com>
 
-The default product-only mapping generates a vendor-wildcard CPE.
-mariadb:mariadb is the active NVD dictionary CPE and configuration identity,
-and is also used by CNA affected data for the packaged MariaDB source.
-Deprecated mariadb_project records describe a separate Node.js connector.
+The current "flask" mapping emits the wildcard-vendor *:flask CPE
+instead of the exact NVD identity for the packaged pallets/flask
+source.
 
-This changes the generated product identity to an exact CPE, but the
-frozen sbom-cve-check database leaves the 420-entry CVE report unchanged,
-with no current CVE delta.
+Use "palletsprojects:flask", which is both an NVD dictionary CPE and
+an NVD configuration identity. CNA affected data uses "pallets:flask"
+and "The Pallets Project:Flask", which remain covered by scanner
+aliases. With sbom-cve-check 1.3.3 and the pinned 2026-08-12 data, the
+generated identity changes but the current CVE report does not.
 
 Signed-off-by: Devansh Patel <devanshp@cisco.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 099991739cb0805e63a11076d268dc7a99da8d1b)
+(cherry picked from commit 6cbb85db1a06202d3e2422d51f6c31dae7bbc881)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python3-flask_3.1.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
-index b1d1355e2b..71c91f0b2f 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb_11.4.12.bb
-@@ -1,5 +1,7 @@
- require mariadb.inc
+diff --git a/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb b/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
+index 559f781e7e..1e3890e7f5 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
-+CVE_PRODUCT = "mariadb:mariadb"
-+
- inherit ptest
- inherit useradd
+ SRC_URI[sha256sum] = "0ef0e52b8a9cd932855379197dd8f94047b359ca0a78695144304cb45f87c9eb"
+ 
+-CVE_PRODUCT = "flask"
++CVE_PRODUCT = "palletsprojects:flask"
+ 
+ inherit pypi python_flit_core ptest-python-pytest
  
 
