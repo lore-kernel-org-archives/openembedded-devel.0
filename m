@@ -1,244 +1,680 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00C30C98302
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 05:17:18 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.567.1790140544601835160
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DB78C982EA
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 05:56:48 +0000 (UTC)
+Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.919.1790143004568092490
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Sep 2026 22:15:44 -0700
+ Tue, 22 Sep 2026 22:56:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=sLzQG1fT;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=372678bdcb=himaniramesh.barde@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N4MnGZ1118238
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 22:00:56 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=cc:content-transfer-encoding:content-type:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	PPS06212021; bh=/5RiNHNkR8xgJz/jEZ9p8e9LxnR4MsrrJK0N/bVVWas=; b=
-	sLzQG1fTTqjSm1sszdjNy3iB1YLIhyWkG99QRoI6K8mZ59d9GfthITOnpK9LZmmt
-	vMq9AcRw1BPj9fm2PsCIpopQrXxgvnZNiOJQYVMa8oUW2Vm7BRoI2HnB3wdnAGNh
-	Efeits4eBD3seYvDsjFq9cX9TFqIvTMAbmoPsGQqG/rjcZMt+L3KMV7Cq805CEVK
-	75EObafLweIVvqmm+yHJjOkoDoHKfAWUMYyGh9dqQkZ1g5UjHh34cRVAhcdEF3Eq
-	d9fVGIS7r5u2dXu0Az+MLMqXiAY+oD/jzenFfWmW0VZA0l2K55O4tnDv7lJAVQYn
-	VyVmtBXR/v1HpOMLGltWyA==
-Received: from mw6pr02cu001.outbound.protection.outlook.com (mail-westus2azon11022078.outbound.protection.outlook.com [52.101.48.78])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4gsnp1dpqp-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 22:00:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o8jOymzWfxqIGKtFm7QTkD6gGEcvmVFw6LvTcx3Ixect4Mdam6Qs2wbTd0S9f28LO0zsEMmAP6GfFSrWnkqQ1IPS2fJXyh5GjLdfIhWngTt6JDs8IC5Ec438ds9Q9EZH9Hd8gQO1iIAtepNIKqBY1tH3HOSTNxjmo3GmonEXm+/qGh6xiY26QmGxgff3MHWRwMQLaCZT6h3iRZt8zbnU3ziPf94NtP+VR5k+seVG4jEokRPmXpW4G/G2VfBWPu7lRZnUFUCctpqybZdY66KWCWIG8U8rgrV50sLryUeH90F0IkUsR8H8u+JREN36WegHSTReHKARbHoZOr8T9hg8uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/5RiNHNkR8xgJz/jEZ9p8e9LxnR4MsrrJK0N/bVVWas=;
- b=y+aVLo5zkQ5RqABhk9+qTIyUUMjYwXvvA/K9v665H99nFA7Wp90bL7d8TzlWINUHO2QyymmWKCJ6FJqwDty6lZdLBITc2UrrMiygUk4HxUG7eRmzEgqp1jMA4k4pqU4yZ3L2p3qTThamfI83U+G9JYGZSi/HtcNcRSyXYCu3Xec3HLmTxphwqwVZmlfdTJzIzLpYTXFRr8kOhQRYjIk0s2QwkqckoGcRm1vGsjS9dftFFlSdrZfYvaUZYsCYSssk1WqJvgp2U8CoPAs04c0N0xfXBgHOBBAFJy05U5wQOB+9ez+34SUiPQp3AttaiXCa/5QFs9DZq2OfbgqaK5vJ1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=windriver.com;
-Received: from DM3PR11MB8758.namprd11.prod.outlook.com (2603:10b6:0:47::15) by
- PH7PR11MB6978.namprd11.prod.outlook.com (2603:10b6:510:206::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Wed, 23 Sep
- 2026 05:00:22 +0000
-Received: from DM3PR11MB8758.namprd11.prod.outlook.com
- ([fe80::a457:7d37:d8f:7340]) by DM3PR11MB8758.namprd11.prod.outlook.com
- ([fe80::a457:7d37:d8f:7340%5]) with mapi id 15.21.0451.014; Wed, 23 Sep 2026
- 05:00:22 +0000
-From: Himani Ramesh Barde <HimaniRamesh.Barde@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: changqing.li@windriver.com, Randy.MacLeod@windriver.com,
-        Himani Ramesh Barde <HimaniRamesh.Barde@windriver.com>
-Subject: [PATCH] systemd.bbclass: fix service enablement for cross-install scenarios
-Date: Wed, 23 Sep 2026 10:29:08 +0530
-Message-ID: <20260923045909.1561330-2-HimaniRamesh.Barde@windriver.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260923045909.1561330-1-HimaniRamesh.Barde@windriver.com>
-References: <20260923045909.1561330-1-HimaniRamesh.Barde@windriver.com>
-X-ClientProxiedBy: PN4PR01CA0046.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:279::7) To CH3PR11MB8774.namprd11.prod.outlook.com
- (2603:10b6:610:1cd::15)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YqR5cUay;
+ spf=pass (domain: gmail.com, ip: 74.125.224.141, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66e4ab22370so454416d50.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 22:56:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790143003; cv=none;
+        d=google.com; s=arc-20260327;
+        b=NEVdqrMaFJkaIF8BvfsUAtJbjGPPdf5jYXeY0X+LpOx/6cWnjCG1VOC/3x9Fw3YTL9
+         32SI23b9ZgiULwZ07/hFn8bklZ6GyynqxUkdCvMQkKw9VnhnAaXk/+461J5uQrlA5Ck5
+         S1RT5I9hrcrKx7GrNHb9aZ7iBZOitHRoWpjwYC7Sq+RWjND1XnXgYYEIzNt4/NcQDDl9
+         ZS04gBLIm+7QFR0q4JdFYVnycATg6QzUBXaa446m4AJMSLsmJ3UX/sZJSBt9E6fjf/ZX
+         zqANBldCK65SXU20t0lmYTTIhHTJSYolgSh6PYhpRjAal3S1UqMdhf5xAy1VORYGEoDg
+         yT1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=UCtCfNTRoFaLMDdkeRomhbErF4tiLS4Hf9zuK8eGH+w=;
+        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
+        b=oUPWQqWu5p9I876CHeW/rVFPQytY3RY8dJMgzBXml6K3UktK0HLzQfjKmKmoPwUA9N
+         zCIoPeAX2gvG59AQzlnrwvxsjRJWQ+DZH9B1LZWOB/1fjqNYIZu7TeuzM1k2Bq8YLLnq
+         vYE8UjUoxJ9eSXAC4N1FKRo7/fkeRWboPO+z4vZlAEzVI5T07uxmO1a78YYbthSA3op0
+         pKQvqweQZMnQX4MS40FjV2HfZtYUKIBQPFBHdAIjjPaGgNMPX38a3NE3NJYIi0n4BRMd
+         lvMZ1/VAFoSaWxifuU+NyTEaFc5THNh/44MVFIsFF6gr7C4MnGH2SVznZD+tytA2qEAq
+         qqig==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790143003; x=1790747803; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UCtCfNTRoFaLMDdkeRomhbErF4tiLS4Hf9zuK8eGH+w=;
+        b=YqR5cUay5d/Z+upL6sN6YKwLLzw9JpJLQstdd0gsvlO394HHzEdfUMJWrvJK/EAVmt
+         72aquBCAAEbjQZGrSCngB1m/ed9Y5c31pvrw5zo7yhJ7BSLXBUkqModnUHYQ/gAcA1q0
+         W7uBjjf2171c05xFpszOgIwLoPnJQyoKVKnWKan7CtrPYV+/1kRApODtTtKKQ0whdMlV
+         CCy4TTBykiNqfWswjyyE7nyC7r1NsX36b2tz+c8WDdcjMcPCvQWWzZn33fxrYy9TwTzR
+         3wU0Qxzr/G5oCxW5tuGv8kbCoQNA7JcnzF0N+5Roh025g7sMZsI+TaXtCN47Ihhj+sLJ
+         hRsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790143003; x=1790747803;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=UCtCfNTRoFaLMDdkeRomhbErF4tiLS4Hf9zuK8eGH+w=;
+        b=FXDE24QQo/QebY3q1GGznqRX+nYlWPyX+VfL3cC9U1s02lN7cNcbHdnFPn2BF3Ch0b
+         RqPNPMX4jHR5pRv9ovTsbvspczQgTgCJW2hhR+D/q84bkA8OiWyk+TYvf4VpSz/4PHes
+         gSfUtBM4/+yZlnRLaSx78YnvxEj3G+K22Wg6gxqk/zIU3Rc4iFpJtJOspNtGgsV56MDr
+         Oco1KONr5wdpfW2WCvQRIvHnsqSfan2ySVZ5L+jsfCQzoLnFzeLRJz5YooWtcQYSA/39
+         n9pcSQy5ZupHSBjdxFSO+ZGoom7q3k6gwUe90vSx/YSzYNh4MzxOyw63swe0VG4i21TA
+         d+oQ==
+X-Gm-Message-State: AFuF++lRF6pm/OW5URXBRvHFqg3mGGeR181OVuLvuNCuvGbN1vas2i7d
+	PMD7mAOpcZkbkZMY3kBJCHpS7Ixk0vqIASNxoHPrQmMQMMUbJqDUHX1LNsEXKQLeqMNcvAd99Ft
+	etgP6/iuZAjRYpEo0W+wD7O1KYXV5URU=
+X-Gm-Gg: AYBFou2rJ+7735Ir8n9mBz0LH5d3OR7Dnfhd6y17kazDoO9LLfx372SiqdNse/4OxP6
+	iA4CebAMYJzoGA882qbkuxyPx/Va2VTD9VVxJ4GJKuV4HTQhLHlmJRmUg9/m4bt5l7JXiEK45YE
+	lmfmm6wNN0iYLMpL22YZKs7bhlTJ1yyp8DVrxhz1wH5nrGEnQdQ9BW/YDvqkCkenz67IIa4u6SC
+	wIy5BqCvs2TMN2J7yw4g0j2+XfDcTEF9Kmvrbc85fg21j+RHvm4x3XqimwgC1hhxty18Pw8EJOp
+	8yYQgwmXzev//EqrU9sgyc3BumIE1NIfn06qTxX3R1PO2SENpCxtv7YnSQW8MdlwpmY3f1dx9gy
+	Iqtc0ABPRj5YwFDqHWI3eAH62n1gbI2jd6uQhFnVc0XjgPSx6MJ+hlyUBfrgGrGSzJAjmoUNIxl
+	2ZXEIYCNqLYkDEjF84XZjAjgRQCmnO6I/OlAo/ZSXV//1yKrLLWeWr1u3F0XRHJJ0GaYUQavS1z
+	dyHnM6BpQei+Ddq+3Kw+wM+/TZUWf8x41P5V+Y6/+E5xKrf6jUEjSEKFK1FOXq1u4Vt0YYRWqss
+	XE/Azsg/zYRqbILelsGQValErcsxOGJUq5cvezzx
+X-Received: by 2002:a05:690e:4401:b0:66f:c1be:315d with SMTP id
+ 956f58d0204a3-672d595346emr398234d50.52.1790143003378; Tue, 22 Sep 2026
+ 22:56:43 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM3PR11MB8758:EE_|PH7PR11MB6978:EE_
-X-MS-Office365-Filtering-Correlation-Id: c7852076-475c-4aa1-fca6-08df192f928d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|52116014|1800799024|23010399003|366016|38350700014|6133799003|10067099003|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	VSP4yfGZsEaew8PLS+I2htSqR1nuXRlOdrm/lpsVfBOh1Vn8O1luiL7R5+QC23qxDrHR93CbfqV1x+UPayKbbnc7wtA0Q2BcW/M0Zvjyz21t2taITPWglsqUH/JkVQOYBweL0erHXKlqKHYOPgP1MgFbfF7oyswIKKm7VWjVfxeOlj0s5uUnnFxP2xwXY6xmIKgwnshIuNxL2WQUPZGU8eYYgW71jJUecSsg9WR0ZXhsvaPt6dbDKgvSuk9y8tR9See8tO6fdQHtNjc4reGp19eNlGPiV76xtQNOGT6APSvwSGLsO3bs/fvX+wH43WW5IFPlKshKZA5BAj1WQtDsbOwMvGT2VBB3irUsGJtWRlJMbU0CCCyAZjkWHZe5MkBLCXl+k+wTzDd8Mu9gg8H9EugM0Zf2TDh02lHP2YBJeBDI9SvNO7vtbrXgViCwXRzVT7kzwl94ZJccuYJJZrzKhLx5UhSpogm0KX24MFAGbjamT/QHYk3GD23pHRBFkF/brw2ao1YQvgwVutIA5xlE44c2437yt9jg+UNp3KOtETfizcCAzlDgCfd1eeZwornBTsmVcTI9bsoRDrX/k1jA0Hiete5uEKp2ibQvsutlGgsDVplZ5nsyDrdPTNryRN7381QV6tdCZriy31ovR+4o8VLnBeUjFVQdxUxM5JuFsvRIU03DGEr7jVRl1K8OeH/3oNcPbxb1u/cZO228Gh6wA8jbmroi9LXmtkIPDI9/M4o=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM3PR11MB8758.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(1800799024)(23010399003)(366016)(38350700014)(6133799003)(10067099003)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?NierM77bFfVkfSTC5+phNA9ZYCj43f2pe2eq2MXeDgP8SdRRYGWEiDQGSmMl?=
- =?us-ascii?Q?oi3Gb07rF08NyA/nI2qqGeQfiAOeFGyE8cNGobjpBWbHJhDmPPThH1IS051O?=
- =?us-ascii?Q?hYQbjNcGzjiDQoggOUUjyYb9Tkqs52vusaeXoGSOWvjvS+lYS2bL3UUDtk+6?=
- =?us-ascii?Q?Ni18YvwJnGACt/MG1cMcM/X8RPuyHAjRnSzDcSqPXevqzUkFm95F0oO9E5dC?=
- =?us-ascii?Q?2pTchI8OB2R2l0civ8VfZ0+D2huEzt5aPKZBnx3cHZidj8rQTybUDoTGPSJ1?=
- =?us-ascii?Q?irpzU0nnBLVj3pRj5gU83WUiNhHBs3Z1vsHAFfiKUUrV/KH0avTvIaQAbadS?=
- =?us-ascii?Q?3oRIJEd5gmXbC5C2lWKFHW3FPXjH9tILVTeAe8owdpgqlT2JX0n98ohLwWc7?=
- =?us-ascii?Q?Twq+qmsnLVdAEkCu4QDnpMD9lAQbyfhL22xuxFuNc7YEGU/05YJ3bEpD1imf?=
- =?us-ascii?Q?7KyJ8OozWcVmTzWZnLJg0Dz6D3ANnLBt4vgrzBZX6q0wRhQ8VBcwmJr+7ef6?=
- =?us-ascii?Q?aoXEBY+gXpxcZQ8DVBZ69FR5QNyvvN+t27+ThJ+CsJ99X/9X9XTXAUk3MjOC?=
- =?us-ascii?Q?TLBvsJCwDb2EX5T6c3dRju96H/VNXI2TYN7Z9hr/7z1TEA3ydkkCdzv5jjxx?=
- =?us-ascii?Q?OZZ8W6v7il9sP5ltYLvp3H0IUn2rro0EMhmOrjn6CnaWDE+3nLES0E4xBGd3?=
- =?us-ascii?Q?kq8o389g7tkITbNsBLgIVqz1l0XfvJLsH8VAlxRhNFmUf9puee+rmHVqxup9?=
- =?us-ascii?Q?N+ep4NTUSmu2AVJLahAKZ7+/LBLEsxpTO5fyFujolvBy3qu28otYw+/hnoJ/?=
- =?us-ascii?Q?+5tpfyAmqSGI7DsKKDmj7uxcrbSuWvrTXbx4AS8GVa5HamGr0xofqNQdhlpd?=
- =?us-ascii?Q?/+wzOqnYgy0MKlTQOtEuzxot/KzqH0zmxy5axnMnHzrLJpqH/wtTJ7sqU+39?=
- =?us-ascii?Q?4hqDUMKNMSuNz1GPegw+GMRUHS0iJsMP3Dr/opEZU0yJGMSESLtT09eF2/sT?=
- =?us-ascii?Q?rshxXwWqHJI92AP5Va4OxP7yxY/rJmYAvuNuJBal5nI0i6yHmK8kliNp9ylX?=
- =?us-ascii?Q?aM7wksRqImWVanbK7UiwgcbKnU4lD5EWn6jJTOi1ZRqRPwAEnKU0DIqLfrul?=
- =?us-ascii?Q?ZcSK4fHwoaUb4U/A7BKZpcuJa65ZqglIkpbh+ohWH9R449BffOKilepeXWrj?=
- =?us-ascii?Q?4/3SisXuSYUAvimZQUlJv3MmQqdh1/fB1/IKPDVKBRNJ1iyVwaQgy2352CpF?=
- =?us-ascii?Q?AG4uCVUvxqfQCytiJf8UbLRH6epdpZJeufyIahFs3WQ8bc8m9sZkQQ1QpAT2?=
- =?us-ascii?Q?E+UUxlUiD3qn/ezOqMLpK/EqNRv80Q36WIB53V3w/crBKN36fmj055ehoj5I?=
- =?us-ascii?Q?x1WNXEJaEiFNocFnseYrfev+O+Acx7Y9+B9veztJ/se1c0UDu6VkMTfSA789?=
- =?us-ascii?Q?KBLUozT4Q6BBOsVvPSaKFEE/UR9pcoc/dVn0dconucAsB9sfuF4rFjBFih8w?=
- =?us-ascii?Q?ClVxroEm2pWLoAuE1WOY5Ki/g6VTIhbxzDjT0Vx3ozX7H3LkeFBiM6cOIoKP?=
- =?us-ascii?Q?hcBHn3qPqpnQlE29jsPbd3Ro2j5NFk6wRxVKFclRmRD38mTvfySzmq4Duyjx?=
- =?us-ascii?Q?c5CMbKzArzlWbVTWsEdCzLq6SGM3RyghNvZqO1KkkadcNXG1MbX8VMy1KjqL?=
- =?us-ascii?Q?mqiUouF9kiiBADwYFzuP+kjab++yZ2w2XFL91q5c4NJM2siXWCVF4y3MISsB?=
- =?us-ascii?Q?7r8VaKDu8z/0vZH0dqPYT+bniZuOYp+vvaDE1D1ZQFWMz5iUv/vH?=
-X-Exchange-RoutingPolicyChecked: 
-	bB91dn1Em9KLFrTJhxXPkM8Fczr2QJS/wS7Ec3hIBp8wZED9d5I3gc9CHzvsFQ/ufhZZEiR4eLqon8Qbg/62BPy6ixOEMZac99rpdLw1eqviP1oHtmEtXmQzhIZ5CPSJQ8PuMhRaEJafnwZG8EC/kLqfnLCBfeOsfIcA+lRyxxiZTUHbhriwaANWZmxjDvFlYwZ48GFClU7mPrsBp0yCxla29/uUYIswlcu6/8JXJPmHgNVAA1R0TiLfMGQQTIQQg0RgWp7cra/QTJ6jtcS2lEoHqGFuv67zBE/4QA363HrcHEdrdyBVGAC/nGKj6QvdAhz2u7B8X41LhNMASG88zg==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c7852076-475c-4aa1-fca6-08df192f928d
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8774.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 05:00:22.6533
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 43HMtbDYQ0yR0KRfvM/RuIPJnehFxO2cSJFAMhtiGFRrY66w6XMnRbOmrIrQYaWJKPK+XLi80foXfWM0amSDZyZZTm08IlCYi4GN952N5rMYIxY39uzh3f6blmuKCQwi
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6978
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAxOSBTYWx0ZWRfX+s3dDgKDsSal
- ip5NmAaT8R5TxwZF/vBF1bDKuy5+i0gCgenXCPMZqB36fkWf2tNTkXyvHouJFVx/H8Y+U1VyImY
- Vp62Sp+S6gWpfnq91Du/C/PzX4LNqMi4/z1ZA9/X8pvd5w8oRYujZjGWpJjuXRnquvxmMco0bTl
- 5YH6qAnK4cQRBJ/rkDLXPQic01FZR/ZDuLaKZBNDq0h7t6Isvw67hKLfHxO5r2S0fc0sM6reZMZ
- XnMWeclxRQ8Lk6e9nI/cX4UOE0lhs8RTKj90b5Kt4oe5n6RO2ucyd1nDunZlcdbczHdvNlevyaW
- AAO5U9O/QAD41owlnR25EjN+dnbcQsVp2qBAzR8/owf7FtyY53KOotnl/fUuWf5fmwGa+YRCagN
- b9Ewl1nGsvNthDrCDjMg8YoTQUJ7yfm78frcZUVGnakSscUKm9EaeJYLAui9DM4a/C5mAGiwQGE
- zjLZJeVurunrig8XFhA==
-X-Proofpoint-GUID: 329o0ENs-wGI3tXzGDnpnDvX5bbwU8xl
-X-Authority-Analysis: v=2.4 cv=V4foQuni c=1 sm=1 tr=0 ts=6ab35d08 cx=c_pps
- a=P9tLxss5Rj+yV0yjlYsIvQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=t7CeM3EgAAAA:8
- a=eqJagXuFR_UGHyBZsbkA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: 329o0ENs-wGI3tXzGDnpnDvX5bbwU8xl
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAxOSBTYWx0ZWRfX04Z4anLSHmkT
- T1Rej+s53AUKAM7diZsLXyTYn1MZKLaQOatq0oCuNMJX60JW+gpATfNRQOjt5AoD9xTyOIM4Vs1
- o5P1TmSNlGGBScQFGeuo/Yv1qZX1nKqsbUaoiWmWBlJz5URUahx0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 malwarescore=0 priorityscore=1501 adultscore=0
- phishscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0 clxscore=1011
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230019
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20260922072619.228493-1-f_l_k@t-online.de> <20260922072619.228493-3-f_l_k@t-online.de>
+In-Reply-To: <20260922072619.228493-3-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 Sep 2026 22:56:16 -0700
+X-Gm-Features: AcwNN1Un7aoQQ3QLkLhcvdpwhEtmkWY3urJys6yJWV8g0yDvlCp0CEI2zpX8ecs
+Message-ID: <CAMKF1sq+2HF4tyd0R7VUzYeE9B3b-PJ=6nK=-FQbu_fGR_p6Bw@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCHv2 3/3] convey: add recipe
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d0486a065c202565"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 05:17:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130184
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 05:56:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130185
 
-When packages are installed outside of Yocto's normal image creation
-(e.g., using multistrap, debootstrap, or dpkg directly on a host),
-the postinst script fails to enable systemd services.
+--000000000000d0486a065c202565
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The issue is that the entire enable logic is gated behind
-"if systemctl >/dev/null 2>/dev/null". In cross-install scenarios:
-- If systemctl is absent on the host: the check fails, script is skipped
-- If host systemctl is present: it cannot find target unit files
+when built for qemuarm64 on an arm64 build host it ends up with
 
-Fix this by separating the offline ($D set) and online ($D unset)
-code paths into distinct branches. The previous code used a single
-OPTS variable to switch between "--root=$D" (offline) and "" (online)
-within one unified block. This variable is removed because the two
-scenarios now have dedicated branches with different logic:
+https://errors.yoctoproject.org/Errors/Details/972887/
 
-- Offline ($D set): Tries "systemctl --root=$D preset" first, which
-  reads preset files from the target rootfs and creates symlinks
-  without needing the host systemctl to understand the target's unit
-  files. Falls back to "systemctl --root=$D enable" per service.
+On Tue, Sep 22, 2026 at 12:26=E2=80=AFAM Markus Volk via lists.openembedded=
+.org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 
-- Online ($D unset): Same as before - enable, daemon-reload, preset,
-  restart. No behavioral change for on-target installs.
+> Convey is a fork of geary ported to GTK4, libadwaita, gcr-4 and
+> webkitgtk 6.0. The patches keep build paths out of the binary, drop
+> host checks that do not apply when cross-compiling and let the vala-unit
+> subproject find g-ir-compiler through the cross file.
+>
+> AI-Generated: Uses Claude Code (Claude Fable 5.1)
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  ...-not-store-build-paths-in-the-binary.patch | 40 +++++++++++++
+>  ...ck-for-the-iso-xml-files-and-the-C.u.patch | 39 ++++++++++++
+>  ...k-up-g-ir-compiler-with-find_program.patch | 34 +++++++++++
+>  .../convey/convey_50.2.bb                     | 59 +++++++++++++++++++
+>  4 files changed, 172 insertions(+)
+>  create mode 100644
+> meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-store-bui=
+ld-paths-in-the-binary.patch
+>  create mode 100644
+> meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-check-for=
+-the-iso-xml-files-and-the-C.u.patch
+>  create mode 100644
+> meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-up-g-ir=
+-compiler-with-find_program.patch
+>  create mode 100644 meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+>
+> diff --git
+> a/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-store-b=
+uild-paths-in-the-binary.patch
+> b/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-store-b=
+uild-paths-in-the-binary.patch
+> new file mode 100644
+> index 0000000000..91e21fd0ec
+> --- /dev/null
+> +++
+> b/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-store-b=
+uild-paths-in-the-binary.patch
+> @@ -0,0 +1,40 @@
+> +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+> +From: Markus Volk <f_l_k@t-online.de>
+> +Date: Tue, 22 Sep 2026 07:43:41 +0200
+> +Subject: [PATCH] meson: do not store build paths in the binary
+> +
+> +The build root and source root are only used when convey runs
+> +uninstalled, but storing them puts TMPDIR into the binary and breaks
+> +reproducibility. Point them to /usr/src and the schema directory to the
+> +installed location instead.
+> +
+> +AI-Generated: Uses Claude Code (Claude Fable 5.1)
+> +Upstream-Status: Inappropriate [oe-specific]
+> +---
+> + src/meson.build | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/src/meson.build b/src/meson.build
+> +index 87690ada..ce722126 100644
+> +--- a/src/meson.build
+> ++++ b/src/meson.build
+> +@@ -4,8 +4,8 @@ conf =3D configuration_data()
+> + conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
+> + conf.set_quoted('G_LOG_DOMAIN', meson.project_name())
+> + conf.set_quoted('APP_ID', convey_id)
+> +-conf.set_quoted('BUILD_ROOT_DIR', meson.project_build_root())
+> +-conf.set_quoted('GSETTINGS_DIR', meson.project_build_root() / 'desktop'=
+)
+> ++conf.set_quoted('BUILD_ROOT_DIR', '/usr/src')
+> ++conf.set_quoted('GSETTINGS_DIR', data_dir / 'glib-2.0' / 'schemas')
+> + conf.set_quoted('INSTALL_PREFIX', convey_prefix)
+> + conf.set_quoted('ISO_CODE_3166_XML', iso_3166_xml)
+> + conf.set_quoted('ISO_CODE_639_XML', iso_639_xml)
+> +@@ -14,7 +14,7 @@ conf.set_quoted('NAME_SUFFIX', name_suffix)
+> + conf.set_quoted('PLUGINS_DIR', plugins_dir)
+> + conf.set_quoted('PROFILE', profile)
+> + conf.set_quoted('REVNO', revno)
+> +-conf.set_quoted('SOURCE_ROOT_DIR', meson.project_source_root())
+> ++conf.set_quoted('SOURCE_ROOT_DIR', '/usr/src')
+> + conf.set_quoted('VERSION', convey_version)
+> + conf.set_quoted('WEB_EXTENSIONS_DIR', web_extensions_dir)
+> + config_h =3D configure_file(output: 'config.h', configuration: conf)
+> diff --git
+> a/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-check-f=
+or-the-iso-xml-files-and-the-C.u.patch
+> b/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-check-f=
+or-the-iso-xml-files-and-the-C.u.patch
+> new file mode 100644
+> index 0000000000..15836a7c52
+> --- /dev/null
+> +++
+> b/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-check-f=
+or-the-iso-xml-files-and-the-C.u.patch
+> @@ -0,0 +1,39 @@
+> +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+> +From: Markus Volk <f_l_k@t-online.de>
+> +Date: Tue, 22 Sep 2026 09:15:56 +0200
+> +Subject: [PATCH] meson: do not check for the iso xml files and the C.utf=
+8
+> + locale during build
+> +
+> +The iso xml files are needed at runtime and live in the staging area
+> +when cross-compiling, and the locale check runs the host's locale
+> +command against the host's locales. Neither says anything about the
+> +target, so drop both build-time checks.
+> +
+> +AI-Generated: Uses Claude Code (Claude Fable 5.1)
+> +Upstream-Status: Pending
+> +---
+> + meson.build | 11 -----------
+> + 1 file changed, 11 deletions(-)
+> +
+> +diff --git a/meson.build b/meson.build
+> +index dfd919a7..51ab9015 100644
+> +--- a/meson.build
+> ++++ b/meson.build
+> +@@ -195,17 +195,6 @@ if iso_3166_xml =3D=3D ''
+> +   iso_3166_xml =3D iso_codes_dir / 'iso_3166.xml'
+> + endif
+> +
+> +-files(iso_639_xml, iso_3166_xml) # Check to make sure these exist
+> +-
+> +-# Make sure the locale C.UTF-8 is installed on the system
+> +-
+> +-c_utf8_check =3D run_command('locale', '-a', check: true).stdout()
+> +-have_c_utf8 =3D 'C.utf8' in c_utf8_check.split('\n')
+> +-
+> +-if not have_c_utf8
+> +-  warning('C.utf8 locale not available on this system.')
+> +-endif
+> +-
+> + # Post-install script
+> + gnome.post_install(
+> +   gtk_update_icon_cache: true,
+> diff --git
+> a/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-up-g-=
+ir-compiler-with-find_program.patch
+> b/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-up-g-=
+ir-compiler-with-find_program.patch
+> new file mode 100644
+> index 0000000000..a07887c67c
+> --- /dev/null
+> +++
+> b/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-up-g-=
+ir-compiler-with-find_program.patch
+> @@ -0,0 +1,34 @@
+> +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+> +From: Markus Volk <f_l_k@t-online.de>
+> +Date: Tue, 22 Sep 2026 09:15:10 +0200
+> +Subject: [PATCH] vala-unit: look up g-ir-compiler with find_program
+> +
+> +The path taken from the g_ir_compiler pkg-config variable is the
+> +target path and is not usable when cross-compiling. find_program
+> +honours the cross file, which is where the wrapper is set.
+> +
+> +AI-Generated: Uses Claude Code (Claude Fable 5.1)
+> +Upstream-Status: Pending
+> +---
+> + subprojects/vala-unit/meson.build | 8 +-------
+> + 1 file changed, 1 insertion(+), 7 deletions(-)
+> +
+> +diff --git a/subprojects/vala-unit/meson.build
+> b/subprojects/vala-unit/meson.build
+> +index a1822aa8..d04cc307 100644
+> +--- a/subprojects/vala-unit/meson.build
+> ++++ b/subprojects/vala-unit/meson.build
+> +@@ -31,13 +31,7 @@ gee =3D dependency('gee-0.8')
+> + gio =3D dependency('gio-2.0')
+> + glib =3D dependency('glib-2.0', version: '>=3D' + target_glib)
+> + gobject =3D dependency('gobject-2.0')
+> +-gobject_introspection =3D dependency('gobject-introspection-1.0',
+> required: false)
+> +-
+> +-if gobject_introspection.found()
+> +-  g_ir_compiler =3D gobject_introspection.get_variable('g_ir_compiler')
+> +-else
+> +-  g_ir_compiler =3D find_program('g-ir-compiler')
+> +-endif
+> ++g_ir_compiler =3D find_program('g-ir-compiler')
+> + if enable_valadoc
+> +   valadoc =3D find_program('valadoc')
+> + endif
+> diff --git a/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+> b/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+> new file mode 100644
+> index 0000000000..2a28f5aef5
+> --- /dev/null
+> +++ b/meta-gnome/recipes-connectivity/convey/convey_50.2.bb
+> @@ -0,0 +1,59 @@
+> +SUMMARY =3D "Email application built around conversations for the GNOME
+> desktop"
+> +HOMEPAGE =3D "https://gitlab.gnome.org/donnybeelo/convey"
+> +SECTION =3D "network"
+> +LICENSE =3D "LGPL-2.1-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2a2244d5a13871ad950c55877546a=
+6a2"
+> +
+> +DEPENDS =3D " \
+> +    appstream-native \
+> +    cairo \
+> +    desktop-file-utils-native \
+> +    enchant2 \
+> +    folks \
+> +    gcr \
+> +    gmime \
+> +    gnome-online-accounts \
+> +    gstreamer1.0 \
+> +    gstreamer1.0-plugins-bad \
+> +    gtk4 \
+> +    icu \
+> +    iso-codes \
+> +    json-glib \
+> +    libadwaita \
+> +    libpeas \
+> +    libsecret \
+> +    libsoup \
+> +    libstemmer \
+> +    libxml2 \
+> +    sqlite3 \
+> +    webkitgtk \
+> +"
+> +
+> +inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache
+> gobject-introspection gnome-help vala features_check
+> +
+> +SRC_URI =3D " \
+> +    git://
+> gitlab.gnome.org/donnybeelo/convey.git;protocol=3Dhttps;branch=3Dmain;tag=
+=3D${PV}-1
+> <http://gitlab.gnome.org/donnybeelo/convey.git;protocol=3Dhttps;branch=3D=
+main;tag=3D$%7BPV%7D-1>
+> \
+> +    file://0001-meson-do-not-store-build-paths-in-the-binary.patch \
+> +
+> file://0002-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.patch \
+> +    file://0003-vala-unit-look-up-g-ir-compiler-with-find_program.patch =
+\
+> +"
+> +SRCREV =3D "2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42"
+> +
+> +REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data opengl"
+> +
+> +GTKIC_VERSION =3D "4"
+> +GIR_MESON_OPTION =3D ""
+> +
+> +EXTRA_OEMESON =3D " \
+> +    -Dprofile=3Drelease \
+> +    -Drevno=3D${PV} \
+> +    -Diso_639_xml=3D${datadir}/xml/iso-codes/iso_639.xml \
+> +    -Diso_3166_xml=3D${datadir}/xml/iso-codes/iso_3166.xml \
+> +    -Dvaladoc=3Ddisabled \
+> +"
+> +
+> +PACKAGECONFIG ??=3D ""
+> +PACKAGECONFIG[libunwind] =3D
+> "-Dlibunwind=3Denabled,-Dlibunwind=3Ddisabled,libunwind"
+> +PACKAGECONFIG[tnef] =3D "-Dtnef=3Denabled,-Dtnef=3Ddisabled,libytnef"
+> +
+> +FILES:${PN} +=3D "${datadir}"
+> --
+> 2.55.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#130175):
+> https://lists.openembedded.org/g/openembedded-devel/message/130175
+> Mute This Topic: https://lists.openembedded.org/mt/121371091/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-The OPTS variable is no longer needed because each branch now directly
-uses the appropriate systemctl invocation for its context, making the
-intent clearer and the offline path functional.
+--000000000000d0486a065c202565
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Fixes [YOCTO #14118]
+<div dir=3D"ltr">when built for qemuarm64 on an arm64 build host it ends up=
+ with<div><br></div><div><a href=3D"https://errors.yoctoproject.org/Errors/=
+Details/972887/">https://errors.yoctoproject.org/Errors/Details/972887/</a>=
+</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Tue, Sep 22, 2026 at 12:26=E2=80=AFAM Mark=
+us Volk via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
+g</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-o=
+nline.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">Convey is a fork of geary ported to GTK4, =
+libadwaita, gcr-4 and<br>
+webkitgtk 6.0. The patches keep build paths out of the binary, drop<br>
+host checks that do not apply when cross-compiling and let the vala-unit<br=
+>
+subproject find g-ir-compiler through the cross file.<br>
+<br>
+AI-Generated: Uses Claude Code (Claude Fable 5.1)<br>
+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
+=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+---<br>
+=C2=A0...-not-store-build-paths-in-the-binary.patch | 40 +++++++++++++<br>
+=C2=A0...ck-for-the-iso-xml-files-and-the-C.u.patch | 39 ++++++++++++<br>
+=C2=A0...k-up-g-ir-compiler-with-find_program.patch | 34 +++++++++++<br>
+=C2=A0.../convey/<a href=3D"http://convey_50.2.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">convey_50.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 59 +++++++++++++++++++<br>
+=C2=A04 files changed, 172 insertions(+)<br>
+=C2=A0create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0001=
+-meson-do-not-store-build-paths-in-the-binary.patch<br>
+=C2=A0create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0002=
+-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.patch<br>
+=C2=A0create mode 100644 meta-gnome/recipes-connectivity/convey/convey/0003=
+-vala-unit-look-up-g-ir-compiler-with-find_program.patch<br>
+=C2=A0create mode 100644 meta-gnome/recipes-connectivity/convey/<a href=3D"=
+http://convey_50.2.bb" rel=3D"noreferrer" target=3D"_blank">convey_50.2.bb<=
+/a><br>
+<br>
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-no=
+t-store-build-paths-in-the-binary.patch b/meta-gnome/recipes-connectivity/c=
+onvey/convey/0001-meson-do-not-store-build-paths-in-the-binary.patch<br>
+new file mode 100644<br>
+index 0000000000..91e21fd0ec<br>
+--- /dev/null<br>
++++ b/meta-gnome/recipes-connectivity/convey/convey/0001-meson-do-not-store=
+-build-paths-in-the-binary.patch<br>
+@@ -0,0 +1,40 @@<br>
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001<br>
++From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"_blan=
+k">f_l_k@t-online.de</a>&gt;<br>
++Date: Tue, 22 Sep 2026 07:43:41 +0200<br>
++Subject: [PATCH] meson: do not store build paths in the binary<br>
++<br>
++The build root and source root are only used when convey runs<br>
++uninstalled, but storing them puts TMPDIR into the binary and breaks<br>
++reproducibility. Point them to /usr/src and the schema directory to the<br=
+>
++installed location instead.<br>
++<br>
++AI-Generated: Uses Claude Code (Claude Fable 5.1)<br>
++Upstream-Status: Inappropriate [oe-specific]<br>
++---<br>
++ src/meson.build | 6 +++---<br>
++ 1 file changed, 3 insertions(+), 3 deletions(-)<br>
++<br>
++diff --git a/src/meson.build b/src/meson.build<br>
++index 87690ada..ce722126 100644<br>
++--- a/src/meson.build<br>
+++++ b/src/meson.build<br>
++@@ -4,8 +4,8 @@ conf =3D configuration_data()<br>
++ conf.set_quoted(&#39;GETTEXT_PACKAGE&#39;, meson.project_name())<br>
++ conf.set_quoted(&#39;G_LOG_DOMAIN&#39;, meson.project_name())<br>
++ conf.set_quoted(&#39;APP_ID&#39;, convey_id)<br>
++-conf.set_quoted(&#39;BUILD_ROOT_DIR&#39;, meson.project_build_root())<br>
++-conf.set_quoted(&#39;GSETTINGS_DIR&#39;, meson.project_build_root() / &#3=
+9;desktop&#39;)<br>
+++conf.set_quoted(&#39;BUILD_ROOT_DIR&#39;, &#39;/usr/src&#39;)<br>
+++conf.set_quoted(&#39;GSETTINGS_DIR&#39;, data_dir / &#39;glib-2.0&#39; / =
+&#39;schemas&#39;)<br>
++ conf.set_quoted(&#39;INSTALL_PREFIX&#39;, convey_prefix)<br>
++ conf.set_quoted(&#39;ISO_CODE_3166_XML&#39;, iso_3166_xml)<br>
++ conf.set_quoted(&#39;ISO_CODE_639_XML&#39;, iso_639_xml)<br>
++@@ -14,7 +14,7 @@ conf.set_quoted(&#39;NAME_SUFFIX&#39;, name_suffix)<br>
++ conf.set_quoted(&#39;PLUGINS_DIR&#39;, plugins_dir)<br>
++ conf.set_quoted(&#39;PROFILE&#39;, profile)<br>
++ conf.set_quoted(&#39;REVNO&#39;, revno)<br>
++-conf.set_quoted(&#39;SOURCE_ROOT_DIR&#39;, meson.project_source_root())<b=
+r>
+++conf.set_quoted(&#39;SOURCE_ROOT_DIR&#39;, &#39;/usr/src&#39;)<br>
++ conf.set_quoted(&#39;VERSION&#39;, convey_version)<br>
++ conf.set_quoted(&#39;WEB_EXTENSIONS_DIR&#39;, web_extensions_dir)<br>
++ config_h =3D configure_file(output: &#39;config.h&#39;, configuration: co=
+nf)<br>
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-no=
+t-check-for-the-iso-xml-files-and-the-C.u.patch b/meta-gnome/recipes-connec=
+tivity/convey/convey/0002-meson-do-not-check-for-the-iso-xml-files-and-the-=
+C.u.patch<br>
+new file mode 100644<br>
+index 0000000000..15836a7c52<br>
+--- /dev/null<br>
++++ b/meta-gnome/recipes-connectivity/convey/convey/0002-meson-do-not-check=
+-for-the-iso-xml-files-and-the-C.u.patch<br>
+@@ -0,0 +1,39 @@<br>
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001<br>
++From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"_blan=
+k">f_l_k@t-online.de</a>&gt;<br>
++Date: Tue, 22 Sep 2026 09:15:56 +0200<br>
++Subject: [PATCH] meson: do not check for the iso xml files and the C.utf8<=
+br>
++ locale during build<br>
++<br>
++The iso xml files are needed at runtime and live in the staging area<br>
++when cross-compiling, and the locale check runs the host&#39;s locale<br>
++command against the host&#39;s locales. Neither says anything about the<br=
+>
++target, so drop both build-time checks.<br>
++<br>
++AI-Generated: Uses Claude Code (Claude Fable 5.1)<br>
++Upstream-Status: Pending<br>
++---<br>
++ meson.build | 11 -----------<br>
++ 1 file changed, 11 deletions(-)<br>
++<br>
++diff --git a/meson.build b/meson.build<br>
++index dfd919a7..51ab9015 100644<br>
++--- a/meson.build<br>
+++++ b/meson.build<br>
++@@ -195,17 +195,6 @@ if iso_3166_xml =3D=3D &#39;&#39;<br>
++=C2=A0 =C2=A0iso_3166_xml =3D iso_codes_dir / &#39;iso_3166.xml&#39;<br>
++ endif<br>
++ <br>
++-files(iso_639_xml, iso_3166_xml) # Check to make sure these exist<br>
++-<br>
++-# Make sure the locale C.UTF-8 is installed on the system<br>
++-<br>
++-c_utf8_check =3D run_command(&#39;locale&#39;, &#39;-a&#39;, check: true)=
+.stdout()<br>
++-have_c_utf8 =3D &#39;C.utf8&#39; in c_utf8_check.split(&#39;\n&#39;)<br>
++-<br>
++-if not have_c_utf8<br>
++-=C2=A0 warning(&#39;C.utf8 locale not available on this system.&#39;)<br>
++-endif<br>
++-<br>
++ # Post-install script<br>
++ gnome.post_install(<br>
++=C2=A0 =C2=A0gtk_update_icon_cache: true,<br>
+diff --git a/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-l=
+ook-up-g-ir-compiler-with-find_program.patch b/meta-gnome/recipes-connectiv=
+ity/convey/convey/0003-vala-unit-look-up-g-ir-compiler-with-find_program.pa=
+tch<br>
+new file mode 100644<br>
+index 0000000000..a07887c67c<br>
+--- /dev/null<br>
++++ b/meta-gnome/recipes-connectivity/convey/convey/0003-vala-unit-look-up-=
+g-ir-compiler-with-find_program.patch<br>
+@@ -0,0 +1,34 @@<br>
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001<br>
++From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"_blan=
+k">f_l_k@t-online.de</a>&gt;<br>
++Date: Tue, 22 Sep 2026 09:15:10 +0200<br>
++Subject: [PATCH] vala-unit: look up g-ir-compiler with find_program<br>
++<br>
++The path taken from the g_ir_compiler pkg-config variable is the<br>
++target path and is not usable when cross-compiling. find_program<br>
++honours the cross file, which is where the wrapper is set.<br>
++<br>
++AI-Generated: Uses Claude Code (Claude Fable 5.1)<br>
++Upstream-Status: Pending<br>
++---<br>
++ subprojects/vala-unit/meson.build | 8 +-------<br>
++ 1 file changed, 1 insertion(+), 7 deletions(-)<br>
++<br>
++diff --git a/subprojects/vala-unit/meson.build b/subprojects/vala-unit/mes=
+on.build<br>
++index a1822aa8..d04cc307 100644<br>
++--- a/subprojects/vala-unit/meson.build<br>
+++++ b/subprojects/vala-unit/meson.build<br>
++@@ -31,13 +31,7 @@ gee =3D dependency(&#39;gee-0.8&#39;)<br>
++ gio =3D dependency(&#39;gio-2.0&#39;)<br>
++ glib =3D dependency(&#39;glib-2.0&#39;, version: &#39;&gt;=3D&#39; + targ=
+et_glib)<br>
++ gobject =3D dependency(&#39;gobject-2.0&#39;)<br>
++-gobject_introspection =3D dependency(&#39;gobject-introspection-1.0&#39;,=
+ required: false)<br>
++-<br>
++-if gobject_introspection.found()<br>
++-=C2=A0 g_ir_compiler =3D gobject_introspection.get_variable(&#39;g_ir_com=
+piler&#39;)<br>
++-else<br>
++-=C2=A0 g_ir_compiler =3D find_program(&#39;g-ir-compiler&#39;)<br>
++-endif<br>
+++g_ir_compiler =3D find_program(&#39;g-ir-compiler&#39;)<br>
++ if enable_valadoc<br>
++=C2=A0 =C2=A0valadoc =3D find_program(&#39;valadoc&#39;)<br>
++ endif<br>
+diff --git a/meta-gnome/recipes-connectivity/convey/<a href=3D"http://conve=
+y_50.2.bb" rel=3D"noreferrer" target=3D"_blank">convey_50.2.bb</a> b/meta-g=
+nome/recipes-connectivity/convey/<a href=3D"http://convey_50.2.bb" rel=3D"n=
+oreferrer" target=3D"_blank">convey_50.2.bb</a><br>
+new file mode 100644<br>
+index 0000000000..2a28f5aef5<br>
+--- /dev/null<br>
++++ b/meta-gnome/recipes-connectivity/convey/<a href=3D"http://convey_50.2.=
+bb" rel=3D"noreferrer" target=3D"_blank">convey_50.2.bb</a><br>
+@@ -0,0 +1,59 @@<br>
++SUMMARY =3D &quot;Email application built around conversations for the GNO=
+ME desktop&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://gitlab.gnome.org/donnybeelo/convey" =
+rel=3D"noreferrer" target=3D"_blank">https://gitlab.gnome.org/donnybeelo/co=
+nvey</a>&quot;<br>
++SECTION =3D &quot;network&quot;<br>
++LICENSE =3D &quot;LGPL-2.1-only&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D2a2244d5a13871ad950c558775=
+46a6a2&quot;<br>
++<br>
++DEPENDS =3D &quot; \<br>
++=C2=A0 =C2=A0 appstream-native \<br>
++=C2=A0 =C2=A0 cairo \<br>
++=C2=A0 =C2=A0 desktop-file-utils-native \<br>
++=C2=A0 =C2=A0 enchant2 \<br>
++=C2=A0 =C2=A0 folks \<br>
++=C2=A0 =C2=A0 gcr \<br>
++=C2=A0 =C2=A0 gmime \<br>
++=C2=A0 =C2=A0 gnome-online-accounts \<br>
++=C2=A0 =C2=A0 gstreamer1.0 \<br>
++=C2=A0 =C2=A0 gstreamer1.0-plugins-bad \<br>
++=C2=A0 =C2=A0 gtk4 \<br>
++=C2=A0 =C2=A0 icu \<br>
++=C2=A0 =C2=A0 iso-codes \<br>
++=C2=A0 =C2=A0 json-glib \<br>
++=C2=A0 =C2=A0 libadwaita \<br>
++=C2=A0 =C2=A0 libpeas \<br>
++=C2=A0 =C2=A0 libsecret \<br>
++=C2=A0 =C2=A0 libsoup \<br>
++=C2=A0 =C2=A0 libstemmer \<br>
++=C2=A0 =C2=A0 libxml2 \<br>
++=C2=A0 =C2=A0 sqlite3 \<br>
++=C2=A0 =C2=A0 webkitgtk \<br>
++&quot;<br>
++<br>
++inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-introspe=
+ction gnome-help vala features_check<br>
++<br>
++SRC_URI =3D &quot; \<br>
++=C2=A0 =C2=A0 git://<a href=3D"http://gitlab.gnome.org/donnybeelo/convey.g=
+it;protocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7D-1" rel=3D"noreferrer" tar=
+get=3D"_blank">gitlab.gnome.org/donnybeelo/convey.git;protocol=3Dhttps;bran=
+ch=3Dmain;tag=3D${PV}-1</a> \<br>
++=C2=A0 =C2=A0 file://0001-meson-do-not-store-build-paths-in-the-binary.pat=
+ch \<br>
++=C2=A0 =C2=A0 file://0002-meson-do-not-check-for-the-iso-xml-files-and-the=
+-C.u.patch \<br>
++=C2=A0 =C2=A0 file://0003-vala-unit-look-up-g-ir-compiler-with-find_progra=
+m.patch \<br>
++&quot;<br>
++SRCREV =3D &quot;2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42&quot;<br>
++<br>
++REQUIRED_DISTRO_FEATURES =3D &quot;gobject-introspection-data opengl&quot;=
+<br>
++<br>
++GTKIC_VERSION =3D &quot;4&quot;<br>
++GIR_MESON_OPTION =3D &quot;&quot;<br>
++<br>
++EXTRA_OEMESON =3D &quot; \<br>
++=C2=A0 =C2=A0 -Dprofile=3Drelease \<br>
++=C2=A0 =C2=A0 -Drevno=3D${PV} \<br>
++=C2=A0 =C2=A0 -Diso_639_xml=3D${datadir}/xml/iso-codes/iso_639.xml \<br>
++=C2=A0 =C2=A0 -Diso_3166_xml=3D${datadir}/xml/iso-codes/iso_3166.xml \<br>
++=C2=A0 =C2=A0 -Dvaladoc=3Ddisabled \<br>
++&quot;<br>
++<br>
++PACKAGECONFIG ??=3D &quot;&quot;<br>
++PACKAGECONFIG[libunwind] =3D &quot;-Dlibunwind=3Denabled,-Dlibunwind=3Ddis=
+abled,libunwind&quot;<br>
++PACKAGECONFIG[tnef] =3D &quot;-Dtnef=3Denabled,-Dtnef=3Ddisabled,libytnef&=
+quot;<br>
++<br>
++FILES:${PN} +=3D &quot;${datadir}&quot;<br>
+-- <br>
+2.55.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#130175): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/130175" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/130175</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121371091/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/121371091/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
-Signed-off-by: Himani Ramesh Barde <HimaniRamesh.Barde@windriver.com>
----
- meta/classes-recipe/systemd.bbclass | 32 +++++++++++++++++------------
- 1 file changed, 19 insertions(+), 13 deletions(-)
-
-diff --git a/meta/classes-recipe/systemd.bbclass b/meta/classes-recipe/systemd.bbclass
-index 0f7e3b5..2f655c4 100644
---- a/meta/classes-recipe/systemd.bbclass
-+++ b/meta/classes-recipe/systemd.bbclass
-@@ -29,26 +29,32 @@ python __anonymous() {
- }
- 
- systemd_postinst() {
--if systemctl >/dev/null 2>/dev/null; then
--	OPTS=""
--
--	if [ -n "$D" ]; then
--		OPTS="--root=$D"
-+if [ -n "$D" ]; then
-+	# Offline/cross-install: apply presets to the target rootfs.
-+	# This handles multistrap, debootstrap, and similar tools that
-+	# install packages outside of Yocto's normal image creation.
-+	if [ "${SYSTEMD_AUTO_ENABLE}" = "enable" ]; then
-+		if systemctl --root=$D preset ${SYSTEMD_SERVICE_ESCAPED} 2>/dev/null; then
-+			:
-+		elif systemctl >/dev/null 2>/dev/null; then
-+			for service in ${SYSTEMD_SERVICE_ESCAPED}; do
-+				systemctl --root=$D enable "$service" 2>/dev/null || true
-+			done
-+		fi
- 	fi
--
-+elif systemctl >/dev/null 2>/dev/null; then
-+	# Online: running on the target system
- 	if [ "${SYSTEMD_AUTO_ENABLE}" = "enable" ]; then
- 		for service in ${SYSTEMD_SERVICE_ESCAPED}; do
--			systemctl ${OPTS} enable "$service"
-+			systemctl enable "$service"
- 		done
- 	fi
- 
--	if [ -z "$D" ]; then
--		systemctl daemon-reload
--		systemctl preset ${SYSTEMD_SERVICE_ESCAPED}
-+	systemctl daemon-reload
-+	systemctl preset ${SYSTEMD_SERVICE_ESCAPED}
- 
--		if [ "${SYSTEMD_AUTO_ENABLE}" = "enable" ]; then
--			systemctl --no-block restart ${SYSTEMD_SERVICE_ESCAPED}
--		fi
-+	if [ "${SYSTEMD_AUTO_ENABLE}" = "enable" ]; then
-+		systemctl --no-block restart ${SYSTEMD_SERVICE_ESCAPED}
- 	fi
- fi
- }
--- 
-2.54.0
-
+--000000000000d0486a065c202565--
 
