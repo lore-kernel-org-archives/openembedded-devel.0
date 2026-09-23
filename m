@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE747C9830C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDC2FC9830B
 	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 10:41:46 +0000 (UTC)
-Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4173.1790160102276610302
+Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4174.1790160106448138846
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 03:41:42 -0700
+ Wed, 23 Sep 2026 03:41:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=F9FxrZFK;
- spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f12.google.com with SMTP id d2e1a72fcca58-85469b2e1d5so435085b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qpBHN39y;
+ spf=pass (domain: gmail.com, ip: 74.125.228.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-8692a856865so353389b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790160102; x=1790764902; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790160106; x=1790764906; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hJUj2vV21/fjwzeOa5mXf3YH5LEV4qKJrM/0/46oLZE=;
-        b=F9FxrZFKVixfEqJlqpO1OGrfV9RzJFIX0Q83+8IGvcPTutVMCu63HqVe8poynawRH+
-         5l4g+POSjDf1IVH2T0Zu01jI+M0MBOzIrss9mNzsv+VY4m12OEE/Zda2xiGSQWY6Y/81
-         xBfoulny0qO+uO8jPZumfnUvBvIEohZO45OV2q52cpd/A/Hc+vezZ0WEldhuYtdSr2pJ
-         IDftpGC9ZdQmJLPFkH7xlYEWiwsQvWKBVU5lb3IkdU+iV+1h4im82KpkKyn+SltTgGJQ
-         15OM+U+eAIkmVBsXdQLoDyJajdth0sa94s1yYJw9O91vpxAUrDc8fiSAnW0G+ojU83Gx
-         +2TQ==
+        bh=/AvpKqoclm5C2c3KvBouB9VSCyiEaBHb93ovK3CGqFc=;
+        b=qpBHN39ysy4npwhd5dq5iS0k1w8ZDCNUdpL03oc3rwFitPUrdbJknAbljOEdsOMcm7
+         OuVLxQso9s38zkXw9uu5JJ39nN61Y65TtSG9ybAtxRZCTCXqaf1XDwSCfZ8v6czaUmqN
+         fyO23km/J/mvLLx6476ywUOexumag7TRQ7XL6W+dYH8jb2/aNdLeDvvqO1ep7zzxdmeG
+         0HJ9WTGf2bcy1HHVff5Qc/U42E4B8RgNlbhZEiJix4uUbP5sifcywEgkFmDKXU1yrPRL
+         QLhVaU6hXr5MdbtVDRBIftW1eiy65lp2YeSGTL2g+O4Qdbktmxj807l/LctJrs5lJzUk
+         lrYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790160102; x=1790764902;
+        d=1e100.net; s=20260707; t=1790160106; x=1790764906;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hJUj2vV21/fjwzeOa5mXf3YH5LEV4qKJrM/0/46oLZE=;
-        b=K4vVweFkWwSz4AevwqWDNvR663H8aQKAAuYEbwVI6l6DTo5jquB8Y8dLRm8abiQUjZ
-         EJRLxUKrA23WLAlulF47N/t69H2tAOsz5N4QhdmYC7nAIe/2DM1fVEm51oz44DAmB2KA
-         3eHPM2urji4w9aLoCgdiDHvD8PxHhRKWEJKGM8h3+26LsDgA3fG8uzVlwqqBxfbaHFgA
-         neG9KlRU8HS8lKbtFur/Y4CEbcfGOUQG3ngRlKzxpZBEkkQVG85Y+U6AufiCt/+5jE/q
-         ERBV1NSos2axk5CTqiLzPDIF0V6/tQiDmGq6+0CLUPa2mpE4wuuS3+ECYJXE4V+o3Nvl
-         0pyg==
-X-Gm-Message-State: AFuF++lg0K97xLiz7Bi10dIsxPsuvXVylN7q0OxJ7AtZXtUn0JDIoF1i
-	To+LjjJUfFGAZU34QHnoAuXtlbJvFnPEYMKBx+I0B9ka0jW8e2dZ0N3FeVPUCA==
-X-Gm-Gg: AYBFou2XiCIXR5VbHsvQ38qm2VqFKYy3zIBIkpN+LWEpVxVFD+hDvSps1qVQbumsIWD
-	FS9+8hW+89VjXr8jwDc50pcjHGErAncNnTrMAFMeLUzqkYH9btHc5kRasN3A+zAZfECVadYlTST
-	2CKU1Lat/Fo1p5REv9tqm3fMfgjQi+arFfeDSZtmSsDb5BwLbF5TFwlUPuXpUw7fXpKKLSiG7S+
-	4IR3lYNIExpDkq0B+uw/yv2t40kYHoyo+r1jPEmxOdbvmwmr/muVLd0O8uFvIiVgOswNdzDgBB6
-	66sCEMXVqNtiYMK0JqNR2Zjy+CzQjoIKSIaJiNJ/a0eVh0aobcvIBEHrow9pSfnC/Q9eobbFkvn
-	hD4dm2/Ei4EKiCWNMG/nCQ2Cj/Do7mKTUIDEAleK65O5+AdoBYjfzxUSOQct+QCwFw1VhlOfj9v
-	mdPzaefjK5dj/T9G1TCKmgRomJHS3nZN19Nqx2dKEuV04hSal48HkO8427Q8ON9p/0wj/uhG5t3
-	JBtQrajsOIEfRrHJ6djxf8=
-X-Received: by 2002:a05:6a00:408a:b0:874:705d:f653 with SMTP id d2e1a72fcca58-87d1b3b33ecmr1808154b3a.33.1790160101609;
-        Wed, 23 Sep 2026 03:41:41 -0700 (PDT)
+        bh=/AvpKqoclm5C2c3KvBouB9VSCyiEaBHb93ovK3CGqFc=;
+        b=J78S8k8ZxXEw1YyeE2u/Tb6Ko8gjC8IF/FqeYd6Uxq5ZCtsPCwwMo8M0staiutE92O
+         mART1sW7sQCyc3kM+16s4zkZRYZji9Az2eWWzlMBk2gFF+Q9nD0K6cWR4QRivGgLusQx
+         XKJyvIXo4ItmVhlHQ3pwqzjV+1STMpPfjLkcty9KykvvZHN9tpaw2gW5C21QFkdMT3le
+         AO+RFA6Kl6yQRwwMthZ8pfcVAqyOW7AGsqitf0jhAzda5sLi8ZF27rw1vjy+t12jlbwA
+         Pi/AgorlFhNt6Sjecx6UtCf/XSs5QAmb5srgMyafBmUE93b7mGJG+FkXJX9y+gljbDdy
+         av3w==
+X-Gm-Message-State: AFuF++nnlhDfwbbEAOCFFL+JovyiXcZjQ21rDfAGsRmkGouiFAWJ5/yt
+	qZc+aE3wmPO6Wy0KGvqjtK4hEY0IifXjPC/c1cDK/uff772kM9AOuU2p+q9dbg==
+X-Gm-Gg: AYBFou1D+BhgqxjhSsDpGOAEGmf/eGQJelhO7CRs8x75pCJlPGnMcme3U+ZXqQRA1kK
+	NUpmHiBF8+gHN4XdfhUx3MMuPOugPF3Ttp8oh/bKrieVpSwcdxOzNJIQQZxsxyDQKLNafEGN2Z7
+	yVRbRbVA0GJTLQbPKKBtSjrpqxq5pjHFrir/UtJxuMku+J+MagTo6O+fafo9kx9hdOGwa14WcDX
+	XPWgW7pNfDZYaX80YbnFHBgRq4v6Ly3a1aLojXGL405n8KXmaNnj/vYi/Q1D9Pm7A+kOOt8v6Py
+	clzI1qBmjD67/9m0Ms61a60ziEU7U37L0qKpYZvwxY/8eF03w/J+eWQ89QjOo9jmvnxhgJ6Ripa
+	1YYXkVHtPzWbkjLxrqxwsERcf2E/VJEAl8PIF+qIg1cGo4coj2bTxLS8mAEAa5rar4R1NfuXN88
+	8vKTWhqosfF2ThUkVFwqWMsOi3GuRlPozOvlxJtgTPtOF8S6acxXBxVtZIMYESm0FvwxPXX1VQl
+	so5jFOW689I7UzfDwEcNt8=
+X-Received: by 2002:a05:6a00:ad1:b0:872:dc9a:7f79 with SMTP id d2e1a72fcca58-87d18d6dcccmr2122012b3a.6.1790160105862;
+        Wed, 23 Sep 2026 03:41:45 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.39
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c1646sm1035870b3a.30.2026.09.23.03.41.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 03:41:41 -0700 (PDT)
+        Wed, 23 Sep 2026 03:41:45 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Nate Kent <nate@nkent.net>,
+Cc: Leon Anavi <leon.anavi@konsulko.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 20/42] nanomsg: upgrade 1.2.4 -> 1.2.5
-Date: Wed, 23 Sep 2026 22:40:34 +1200
-Message-ID: <20260923104056.457360-20-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 22/42] python3-tzdata: Upgrade 2026.3 -> 2026.4
+Date: Wed, 23 Sep 2026 22:40:36 +1200
+Message-ID: <20260923104056.457360-22-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
 References: <20260923104056.457360-1-ankur.tyagi85@gmail.com>
@@ -70,38 +70,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 10:41:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130207
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130209
 
-From: Nate Kent <nate@nkent.net>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Minor security fix for people using IPC transport.
+Upgrade to release 2026.4:
 
-Changelogs:
-* https://github.com/nanomsg/nanomsg/releases/tag/1.2.5
+- Canada's Northwest Territories moved to permanent -06 on
+  2026-08-21.
+- Obsolescent settings like TZ="EST5EDT" now conform better to
+  POSIX.
+- Fix security, performance and porting bugs in zic and localtime.
 
-Signed-off-by: Nate Kent <nate@nkent.net>
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 510601e79436e2120c0596dc6a53a0f503dde5b6)
+(cherry picked from commit 76eef1fd48d2a7ab321bb26a265bcf949b627a1a)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../nanomsg/{nanomsg_1.2.4.bb => nanomsg_1.2.5.bb}              | 2 +-
+ .../{python3-tzdata_2026.3.bb => python3-tzdata_2026.4.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/nanomsg/{nanomsg_1.2.4.bb => nanomsg_1.2.5.bb} (96%)
+ rename meta-python/recipes-devtools/python/{python3-tzdata_2026.3.bb => python3-tzdata_2026.4.bb} (86%)
 
-diff --git a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.4.bb b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.5.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.4.bb
-rename to meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.5.bb
-index 95b81869b5..cfd79487e9 100644
---- a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.4.bb
-+++ b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.5.bb
-@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master;tag
-            file://run-ptest \
-           "
+diff --git a/meta-python/recipes-devtools/python/python3-tzdata_2026.3.bb b/meta-python/recipes-devtools/python/python3-tzdata_2026.4.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-tzdata_2026.3.bb
+rename to meta-python/recipes-devtools/python/python3-tzdata_2026.4.bb
+index 3284b1bb51..91679e8bee 100644
+--- a/meta-python/recipes-devtools/python/python3-tzdata_2026.3.bb
++++ b/meta-python/recipes-devtools/python/python3-tzdata_2026.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=804220b73c90950be376e7ff7b2066bb \
+                     file://licenses/LICENSE_APACHE;md5=86d3f3a95c324c9479bd8986968f4327 \
+                     "
  
--SRCREV = "e6d0b8ddfc780eb89f8f6ef305e92c19e76bed6b"
-+SRCREV = "85856cb785ba6dd38c5e9757298a54d1bca55580"
+-SRC_URI[sha256sum] = "4a1518b8993086a7982523e071643f3c0e5f213e75b21318e78bcabfff9d1415"
++SRC_URI[sha256sum] = "f1b8bd365d8d210c55353f4d7f8d6d8561c0ba50d704b700d195a9424bba0d79"
  
- inherit cmake pkgconfig ptest
+ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
 
