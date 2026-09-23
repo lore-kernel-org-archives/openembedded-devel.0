@@ -1,197 +1,225 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FDF5C982FA
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 03:11:28 +0000 (UTC)
-Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3624.1790133080779342592
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 733F9C982FA
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 03:51:18 +0000 (UTC)
+Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4130.1790135475819589021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Sep 2026 20:11:21 -0700
+ Tue, 22 Sep 2026 20:51:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gY6g3OWZ;
- spf=pass (domain: gmail.com, ip: 74.125.229.204, mailfrom: ticotimo@gmail.com)
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f13d7aso556016e87.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 20:11:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790133079; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=b2jKqPQz;
+ spf=pass (domain: gmail.com, ip: 74.125.224.141, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66e4aac929eso457703d50.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Sep 2026 20:51:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790135475; cv=none;
         d=google.com; s=arc-20260327;
-        b=gDasI9gPKd7zW4j2eb2PbLqcNxlQC8ueA1dYAiOXn1f8TPN8zwXh5B6/b8XNKipttw
-         C6oE5+IM+l+owrg8T2VrYD7/iIwoAx1L5iydQ0oIwFPKwpqosQP3fS1e19AG75qn4HkI
-         LIX0r/VDI1Rfe4P2LDyydBm5tGXRdeot+HqccwkiOQp7DRBdEVNqrQsPU4B8fp6DLDSZ
-         tmeUuTjSlCezyE4FhPsVZE/rSyGVwRLTUND6dAHeFaGUuVbXb9z+LrGnk2jrZIOaqT+A
-         u0Y2PSv7VZNUgrEGOEzFbypI6stTlkAlw6JdD0QgTLWq6Y9rl3wc5lc/YR7D4FWBiWTu
-         X/EA==
+        b=HYhMC8zwU1BlUnug72m1ZWkhs3n8STAMbairzpCeJZ5hv5xRxY1eB4yw+HEGVTrKDP
+         /7P6iNk3Wbj4iUOQI/NJM5xq/ZphyQfhqpRURbbEymhwf+zJT3Nq4gYoh4IpaogYACEN
+         Qu/FI07JCOcXW4BjV539/hw912fWTifUXI2QxutOJ2dTQHNLren7+nVdIiICOBpVnUyy
+         U4w3/lRAfaZ/Vo3PQ2E6Wol0Zg1kwL3MgdyvuDO90/GUZh6/80/lOTvsCae3tpFGVc8I
+         PfFLLbQQ2Ixqt1wrGJCiKSyMlzNgea6dwmdGhuAfwFHJNQEmvTlDB4JVjZGkapdcqCuv
+         q+iw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=EjL60SaObStJmcjZly+2ffrJFSGEojxVEUewIZiETzg=;
-        fh=oNMxaqRmTMT50+RSmSWZvZdZ+7icpgzxn+z29CbRI/Y=;
-        b=lzvtbUE8jHSCITuI+iC+2mgW55Xr2BYty5fsUwsKlqzoJeFtPaXBrwP1idO/TF+EBB
-         dBOYwpXULenvdcnZlgECm10Xems88Gbn2P5RRFxj1wgOK3Pezu4jo9O08EoaV/Frmvjz
-         yQPeh1b+SxkLwqOdLW2Q4VgSKYStYIr5DEoFiyFoewxQKsyNgHCaXDZA9sstvtj5AxfS
-         4YeDcw1X6fQa45apVv6IbpTTYF9FHRi7FpEtYm6to05S3FwxE8P6MTX5JGILtg8rg4kj
-         yhSgNd/xf7mcPx2VAYajSZqFmUq9skL06K/WrUtvgIjoumlCp0HbQMMovxg35Okfneba
-         P5XA==;
+        bh=B7ARWVgACTGSnhgIPyPg1zTpaB6TWR5t2mn+AUBYFSs=;
+        fh=zMjjQ2/3xS5gOjCx82DbEQJVX07OSnRFcILHjF1qOQM=;
+        b=nQuQo/BAaQcsnTA2d2as26XiOHJNVL0VrgS2kkBvuCY9NZEsGVKf9HFLR1seBqX87n
+         nd89bkng5HcU775hALt9/M9BAHJ2eBiCOXQXTWAzadxWZLOA3KWPM0DQnV3lOlhqhLoo
+         hEa17vQj2ujiFyUNFvStefHFDd76tiVo3ZPpQswT2Utzh4twBSXPIN1Xgp2g/92xNteK
+         4H3BIHWjstMAA1OzAvwV5YRAYYrNrIzbDwQNbBMNqoUDIoor27DpeoXXwmv9S2VGJpkw
+         d/6nEtYO/EebvLrqaL7my6RRBER7jMU/U5O9qwAmxhe3h7esWV8yuVT0bMS7cNooJ4EL
+         ePng==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790133079; x=1790737879; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790135475; x=1790740275; darn=lists.openembedded.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EjL60SaObStJmcjZly+2ffrJFSGEojxVEUewIZiETzg=;
-        b=gY6g3OWZNxT0HuOPepFx0/18qcElzwTAOaFfeyrss3mgzKNZT6nmcOLUDZN5Cgpacv
-         wYF7nvq2ARzYt2kWRaczYjfI4sHc69ilHSpWV/dCH6G45aYjMrBst/u7W0JDQZZbjWKb
-         A+LEXXFM0SlERVmC40VX58UMlmvW5d7QsTQGUxQXj93D2O1KNiNkCtKE79Jw80Y+OLgb
-         5bpPURbqmmABr5SNu25pqVeQJaVViaHTwjx6FubHxQeC4ZnuJNlxTz9RDigaZOZZO8S7
-         ei1/561/6XOEVxypiJN2KZrWGPj3bhrP7CXdxX68MLwZdTWhPmzhGNF/3FtZTCTM8gDd
-         TV8A==
+        bh=B7ARWVgACTGSnhgIPyPg1zTpaB6TWR5t2mn+AUBYFSs=;
+        b=b2jKqPQzZiJ4shqYzWxF6Y2aeqXMPxsHUmNF2lslqqDi8fMuh0cOCxksl1+14IUgJb
+         tnqOTBm0hE9+tgdGdEOwC4/1+PH4A7Yzy7meJYXx6a3AzpHRe2WVMlfSzwg8U0LdCHgi
+         oKY1uqTip+Vd8ywmmm93qWdrIaGXOwyIVyMNTxYGigdL27YMp+Jznpiqxripr28BSllt
+         Tk1NodCKH5ibYDTU+uTpFnsTp9Waxsun3Z2C96wDc+qId+xGzF5oc4WJQpJAO4hN/sT5
+         +WgYLzutdFuRK6x1DKnHepPGpKlbfubSdIbZm7wmI5zZUipM9IIiUIwUOT+u0wv8oHmg
+         8Djw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790133079; x=1790737879;
+        d=1e100.net; s=20260707; t=1790135475; x=1790740275;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=EjL60SaObStJmcjZly+2ffrJFSGEojxVEUewIZiETzg=;
-        b=HhJveFBiSRZ1h6wTkGnPCf468+6NBVzSEZQ3yJWlIK8t0R/aE5f8tA9+dTnEKU5cQu
-         AfmeytucCmfPQHUpZGstHXKLzyDqf3ehADlY27W8DewemelBPSB3vbGua110ukRxMbQY
-         KEUCg44pr4hdDSx9JALGptIHfEPLC7zx1fhFcp1A7oIq4IN8MgejmvRBGFgDsxGyIFYB
-         TJE7iYiZ4gtafjQGei64nrcBebseShCphWVbyBTzsqOSPomWUAZNnwMPMYo2XhZFiqbb
-         RBoiE23clzxhcZYLtnafz7G4iOEtNH6QQDUD0CJxDhsbP8kMac86WjL8m1DOmzMbv09s
-         0NNA==
-X-Gm-Message-State: AFuF++nymIry0Hf5FqUbmPid0CEP1S7iYzt2EgGeBtDW5pE/CzxlIsVD
-	uMbUoVWg/N7zIdmSNeUnl9qz1o3MEWdpFlRTEixhDSZZcGPXGjiA20v7vnhZdNWzuDuHuGAnZfd
-	iIbZeayb7nLrbdLgUqXzfBVt6XDXJwxQ=
-X-Gm-Gg: AYBFou2Jq4/00Pw8sZwpybGr45fs7/pcgQfelNzGFY91xe0a0+QhRrEcUUfGg9rGPDE
-	MbPlEk4dkbrV+RAClPvUCUN5Z62saXckTxTPDs+Ovy9tw7hcIAvgwCQaSo2jb1Na+j8FcMFhobC
-	ssNRrszJJEIdToCKko3IXeSBwZ+y8HGfb5qxL52NdIJ+T21qRZRHOU7Gx8Y1/JuJZKeGAxLw+oT
-	qIJ6vCo1Wl8CqdQooxZej+9SioXUPDA0ySdQxrlZFRJQhOaDhJH+inDXbOcqC5iwe8FLenszUoD
-	QXYz5Kpqa353iRvlBaKaTijWDbBtb0CR7ZmkjRQaJsNxcY+MUKhC9kv4SDsUll/VLRQQR6wXa+q
-	MWN4uZhreebUB
-X-Received: by 2002:a05:6512:3b21:b0:5b7:6686:45a9 with SMTP id
- 2adb3069b0e04-5b8d89b69fbmr326152e87.37.1790133078174; Tue, 22 Sep 2026
- 20:11:18 -0700 (PDT)
+        bh=B7ARWVgACTGSnhgIPyPg1zTpaB6TWR5t2mn+AUBYFSs=;
+        b=SuJItnCBr33qlAV0bY7zGVCjodVh4rfjNKrru3GYV87TcXjEalLktBn/Yur/NOL5uy
+         CXlMS0H4xi9wLYfTFFImBbMu604nvW0JlP3LFF03Ab66avvXJUsIDgt1oQi0emPwS1ih
+         qqaZreGCD0m+pWS37qEp+8X1TgRzz09COsynZH3I5GW4zSTzODKnrfr7InhHD+51iRHY
+         sbZ3rmWzTaxrbvn98/+TJXcf6UaLw9/pzWnF7/uRjumemDdQ+1IUFrdrImwY3EwJJ2UB
+         0mR+6GXOp1kr8RxysUDw/eP0yT8k3wTJxBGWgJR+VF3cagtHUNeOJBFQdvpLCy9/jccs
+         QcUg==
+X-Forwarded-Encrypted: i=1; AKwUvBxVSD1spNMm8RF6i4lsIvNY7yqX1zPFxyXsfaiWQd9Y41Xdo09YClPs5eyTYbLZlVYOxtwoTRO3GIFW0o1Y9pZxIj4=@lists.openembedded.org
+X-Gm-Message-State: AFuF++nr6vjF1tNUT/Mb4n/ztGovpeLXJ7FBlerHyn5T1SCbmz57hflc
+	Z9pw3qnbQC5qyZkx2oV5vj3cwJaueDQ36aoBHeycX1zEnRms+RPL9xsFVxqOt1Aq526TeKocEUB
+	QOQmNuUYVPe1VQgv5D8OJn6H8GqOf0mg=
+X-Gm-Gg: AYBFou0NrWPuXehzmRku3izB02KUf5+PEzcqe/Z3Mjpkb2bpz8cn1Uz80lsFEjGOICa
+	GTeboFcmHvrNwUGcimHDr8aed9vrox+YanDF5HzCi2fg78J+ImMzgvFd91kC3zZGJBLNit2RGS4
+	4XYyLLruvYNZqJ7gi7Y2Mwts2mD/3HXrBVsfOQU+e0KpS6KT80G8sNX/P1saHjOq2P4XCOjjNEH
+	wsdwPNcmXz1YSAsCcD8VBvOQqnmFX1JhtQn9Yd0n/6+kRTltH8BEL7/f5hdmT9SYV5n6HMhPg7J
+	vvsgOjpdNY/APqbe2uIuyD1H4FjbG+3ZaOnobDtitUZyeaDP1rlV/OJbSUeaW8J7AcpKOr73fKK
+	Zs9gdMXITgDtirZidYwZql1gRdIevyBRl5ry99xxrthr5mOvSzNbsh+AJ8byFo419kryEzWcEq7
+	dBY0/FiRR11kmFVcXHeUuo3fBV1QO3Ghy2riVeSBxchkhfybtPRcgM/r2ELqduUGT/bSI30WAW7
+	ytwi2yW6Vh5FDg1xI3q15psOftioiF4xjElD1A2qoUJGa1rqacq6D2DXN4JQBTUxSEc9CqM4GOg
+	ST07311U6IqJz+PozHAVqfzKF2G4kOxpbmX1i/aN
+X-Received: by 2002:a05:690e:4499:b0:66f:c1be:a64f with SMTP id
+ 956f58d0204a3-672d589812fmr595290d50.65.1790135474696; Tue, 22 Sep 2026
+ 20:51:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260923012442.3830864-1-csiltala@atcorp.com>
-In-Reply-To: <20260923012442.3830864-1-csiltala@atcorp.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 22 Sep 2026 20:11:05 -0700
-X-Gm-Features: AclHuK82DW4bVO398d4BV5vjqhr7r8KWqzrGVNoWv2t0vSz1WZSDnhBgy9EXu10
-Message-ID: <CANx9H-DpC+P=Dn+z7dfTpYzerZGbgjZnF-4SuywLt-SzHGtRbw@mail.gmail.com>
+References: <20260923012442.3830864-1-csiltala@atcorp.com> <CANx9H-DpC+P=Dn+z7dfTpYzerZGbgjZnF-4SuywLt-SzHGtRbw@mail.gmail.com>
+In-Reply-To: <CANx9H-DpC+P=Dn+z7dfTpYzerZGbgjZnF-4SuywLt-SzHGtRbw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 Sep 2026 20:50:48 -0700
+X-Gm-Features: AcwNN1WErRi7Y9FWowWlAZPdNhPEX-IV3aXkR8xMt6wfaMOpuw_0omyVuTdFolA
+Message-ID: <CAMKF1spqyYgSRYjhjf0bwZLp0mx=dnXxYrYxCsjeiMXTZLjQsg@mail.gmail.com>
 Subject: Re: [oe] [meta-networking][PATCH] bmon: upgrade 4.0 -> 5.0
-To: csiltala@atcorp.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000039b11e065c1dd6e4"
+To: ticotimo@gmail.com
+Cc: csiltala@atcorp.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000011b8d8065c1e6542"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:11:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130178
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 03:51:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130179
 
---00000000000039b11e065c1dd6e4
+--00000000000011b8d8065c1e6542
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 22, 2026 at 7:58=E2=80=AFPM Corey Siltala via lists.openembedde=
-d.org
-<csiltala=3Datcorp.com@lists.openembedded.org> wrote:
-
-> Fixes:
-> - out_curses: use xcalloc instead of a fixed buffer
-> - Avoid trying to include <values.h> on Android
-> - Fix typographical errors
-> - curses: Fix seperator lines
-> - Fix build in FreeBSD/DragonflyBSD
-> - fix segfault on element removal
-> - fix: Fix memory leaks in module_set()
-> - fix: Convert usage of strdup/free to xstrdup/xfree
-> - Fix compile issue in OpenBSD
-> - Fix spelling and grammar in docs and comments
->
-> Features:
-> - Allow numeric colors in bmonrc
-> - curses: Add CTRL-N/CTRL-P for next/previous element
-> - feat: Add IPv4/IPv6 addresses to additional info
-> - feat: Add configure option to disable IPv6 in netlink module
-> - feat: Add ability to toggle TC elements
-> - curses: render graphs with Braille cells
-> - display filters for TC ingress and egress
-> - Add support for JSON output
-> - Remove the 'Really quit' dialog and just exit cleanly
->
-> Misc:
-> - Update to autoconf of the common era
->
-> See full release notes at
-> https://github.com/Jafaral/bmon/releases/tag/v5.0
->
-
-It would nice to explain why the git repo changed. There is no mention
-anywhere that I can find.
+On Tue, Sep 22, 2026 at 8:11=E2=80=AFPM Tim Orling via lists.openembedded.o=
+rg
+<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
 
 >
-> Signed-off-by: Corey Siltala <csiltala@atcorp.com>
-> ---
->  .../recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.bb}        | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-networking/recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.b=
-b}
-> (56%)
 >
-> diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb
-> b/meta-networking/recipes-support/bmon/bmon_5.0.bb
-> similarity index 56%
-> rename from meta-networking/recipes-support/bmon/bmon_4.0.bb
-> rename to meta-networking/recipes-support/bmon/bmon_5.0.bb
-> index f47069471a..0ceff05984 100644
-> --- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
-> +++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb
-> @@ -1,11 +1,10 @@
->  DESCRIPTION =3D "Portable Bandwidth Monitor and rate estimator"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D
-> "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302"
-> -# only works with libnl-0.5.0
->  DEPENDS =3D "libnl libconfuse ncurses"
+> On Tue, Sep 22, 2026 at 7:58=E2=80=AFPM Corey Siltala via lists.openembed=
+ded.org
+> <csiltala=3Datcorp.com@lists.openembedded.org> wrote:
 >
-> -SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"
-> -SRC_URI =3D "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3D=
-https"
-> +SRC_URI =3D "
-> https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${BPN}-${PV}.t=
-ar.gz
-> "
+>> Fixes:
+>> - out_curses: use xcalloc instead of a fixed buffer
+>> - Avoid trying to include <values.h> on Android
+>> - Fix typographical errors
+>> - curses: Fix seperator lines
+>> - Fix build in FreeBSD/DragonflyBSD
+>> - fix segfault on element removal
+>> - fix: Fix memory leaks in module_set()
+>> - fix: Convert usage of strdup/free to xstrdup/xfree
+>> - Fix compile issue in OpenBSD
+>> - Fix spelling and grammar in docs and comments
+>>
+>> Features:
+>> - Allow numeric colors in bmonrc
+>> - curses: Add CTRL-N/CTRL-P for next/previous element
+>> - feat: Add IPv4/IPv6 addresses to additional info
+>> - feat: Add configure option to disable IPv6 in netlink module
+>> - feat: Add ability to toggle TC elements
+>> - curses: render graphs with Braille cells
+>> - display filters for TC ingress and egress
+>> - Add support for JSON output
+>> - Remove the 'Really quit' dialog and just exit cleanly
+>>
+>> Misc:
+>> - Update to autoconf of the common era
+>>
+>> See full release notes at
+>> https://github.com/Jafaral/bmon/releases/tag/v5.0
+>>
+>
+> It would nice to explain why the git repo changed. There is no mention
+> anywhere that I can find.
+>
+>>
+>> Signed-off-by: Corey Siltala <csiltala@atcorp.com>
+>> ---
+>>  .../recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.bb}        | 5 ++--=
+-
+>>  1 file changed, 2 insertions(+), 3 deletions(-)
+>>  rename meta-networking/recipes-support/bmon/{bmon_4.0.bb =3D> bmon_5.0.=
+bb}
+>> (56%)
+>>
+>> diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb
+>> b/meta-networking/recipes-support/bmon/bmon_5.0.bb
+>> similarity index 56%
+>> rename from meta-networking/recipes-support/bmon/bmon_4.0.bb
+>> rename to meta-networking/recipes-support/bmon/bmon_5.0.bb
+>> index f47069471a..0ceff05984 100644
+>> --- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
+>> +++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb
+>> @@ -1,11 +1,10 @@
+>>  DESCRIPTION =3D "Portable Bandwidth Monitor and rate estimator"
+>>  LICENSE =3D "MIT"
+>>  LIC_FILES_CHKSUM =3D
+>> "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302=
+"
+>> -# only works with libnl-0.5.0
+>>  DEPENDS =3D "libnl libconfuse ncurses"
+>>
+>> -SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"
+>> -SRC_URI =3D "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=
+=3Dhttps"
+>> +SRC_URI =3D "
+>> https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${BPN}-${PV}.=
+tar.gz
+>> "
+>>
+>
+you can use BP here instead of BPN-PV which essentially is the same but
+concise.
+
+
 > +SRC_URI[sha256sum] =3D
-> "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0"
->
->  inherit autotools pkgconfig
->
-> --
-> 2.34.1
->
->
+>> "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0"
+>>
+>>  inherit autotools pkgconfig
+>>
+>> --
+>> 2.34.1
+>>
+>>
+>>
+>>
+>>
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#130177):
-> https://lists.openembedded.org/g/openembedded-devel/message/130177
-> Mute This Topic: https://lists.openembedded.org/mt/121387285/924729
+> View/Reply Online (#130178):
+> https://lists.openembedded.org/g/openembedded-devel/message/130178
+> Mute This Topic: https://lists.openembedded.org/mt/121387285/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
+> raj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---00000000000039b11e065c1dd6e4
+--00000000000011b8d8065c1e6542
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Tue, Sep 22, 2026 at 7:58=E2=80=AFPM=
- Corey Siltala via <a href=3D"http://lists.openembedded.org">lists.openembe=
-dded.org</a> &lt;csiltala=3D<a href=3D"mailto:atcorp.com@lists.openembedded=
-.org">atcorp.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote=
- class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
-lid rgb(204,204,204);padding-left:1ex">Fixes:<br>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Sep 22,=
+ 2026 at 8:11=E2=80=AFPM Tim Orling via <a href=3D"http://lists.openembedde=
+d.org">lists.openembedded.org</a> &lt;ticotimo=3D<a href=3D"mailto:gmail.co=
+m@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div><br></div><d=
+iv><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On =
+Tue, Sep 22, 2026 at 7:58=E2=80=AFPM Corey Siltala via <a href=3D"http://li=
+sts.openembedded.org" target=3D"_blank">lists.openembedded.org</a> &lt;csil=
+tala=3D<a href=3D"mailto:atcorp.com@lists.openembedded.org" target=3D"_blan=
+k">atcorp.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">Fixes:<br>
 - out_curses: use xcalloc instead of a fixed buffer<br>
 - Avoid trying to include &lt;values.h&gt; on Android<br>
 - Fix typographical errors<br>
@@ -267,7 +295,13 @@ uot;<br>
 +SRC_URI =3D &quot;<a href=3D"https://github.com/Jafaral/$%7BBPN%7D/release=
 s/download/v$%7BPV%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz" rel=3D"noreferrer" targe=
 t=3D"_blank">https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${B=
-PN}-${PV}.tar.gz</a>&quot;<br>
+PN}-${PV}.tar.gz</a>&quot;<br></blockquote></div></div></blockquote><div><b=
+r></div><div>you can use BP here instead of BPN-PV which essentially is the=
+ same but concise.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" =
+style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
+dding-left:1ex"><div><div class=3D"gmail_quote"><blockquote class=3D"gmail_=
+quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
+204);padding-left:1ex">
 +SRC_URI[sha256sum] =3D &quot;6016e41fdda9166b86b09a0ac601a0c453c3b35acdf90=
 4c97a8a555459ad73c0&quot;<br>
 <br>
@@ -277,24 +311,28 @@ PN}-${PV}.tar.gz</a>&quot;<br>
 2.34.1<br>
 <br>
 <br>
+<br>
+<br>
+</blockquote></div></div>
+<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#130177): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/130177" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/130177</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121387285/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/121387285/924729</a><br>
+View/Reply Online (#130178): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/130178" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/130178</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121387285/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/121387285/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
 Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
 /unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div></div>
 
---00000000000039b11e065c1dd6e4--
+--00000000000011b8d8065c1e6542--
 
