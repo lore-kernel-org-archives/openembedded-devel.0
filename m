@@ -2,42 +2,41 @@ Return-Path: <benjamin.robin@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E43CC982FA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10E1AC9830C
 	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 12:53:09 +0000 (UTC)
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6218.1790167984390002513
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6326.1790167985594644104
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 05:53:05 -0700
+ Wed, 23 Sep 2026 05:53:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=dkim header.b=WuCPkZvA;
+ dkim=pass header.i=@bootlin.com header.s=dkim header.b=Risz7x4z;
  spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: benjamin.robin@bootlin.com)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 2AF921A0FDE;
-	Wed, 23 Sep 2026 12:53:02 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id ED7301A0FE4;
+	Wed, 23 Sep 2026 12:53:03 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id EC1DF60580;
-	Wed, 23 Sep 2026 12:53:01 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 925A71032885A;
-	Wed, 23 Sep 2026 14:53:00 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id BBDFD60580;
+	Wed, 23 Sep 2026 12:53:03 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 885891032885A;
+	Wed, 23 Sep 2026 14:53:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790167981; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=jtZnLObY5LIf3Y0mBs637Ky2A8e3mGbggZywGmXU5gc=;
-	b=WuCPkZvAn5k+hBvL6M4wBgUfumsorXDsp43Dtqzo1K84ud2hrlgDrSbu0qceQL04GbhayS
-	A0ZWHlNL9BrRnKStnqxiD2ZYRPd+1fOunmdY7fpklIR8pvpVHXFQk2jhkHZ3Rx0A+5YsXI
-	VltXXnOJIx3Dw4V9Jxc7HQ5wADz32WFUjTh1X/q9U+so6QJLuxcjyzHe/8cfyxwKd9nhDH
-	pfl+XgCrTlvRMA/RCnigDfFcS3btsg1abxx5yAq//hvECtD/3i2EmDu5FWhbo3xbhuIFrP
-	YEQtKkpCDrRO3IEksn+3h2mFs2y91RBm73kI17hU1byIDgGffHIIBDO/wpGMtw==
+	t=1790167983; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=vhS3Se8W6WiTywl747Be2zJZgWn7qzQ5Y9euFqdjNlc=;
+	b=Risz7x4zJYA7Sgt09R7jAFVdHyDKwLswbV4F8/l5WXH5H+n3x0GQnxvS1AJCEMYaUOZX+0
+	kmSNgNr9JfopLTGPF3+CWxJwh+DFoUSpZ8nr5ZbK9HWns5+zWpDyu3m1WRgdMW/kQDPxjZ
+	xRqUnkI6bMWhrT1IwrFtwcjIZcc8h8TqXVHImgJFCvKwVqpO2Tn1WGPdWqGYydUDfykWwz
+	GLCcCN6f+2jnxPRyRrcuNFNESKlq2LDdun5eRrMYh7cqegDUBUixb804kHZlmy3wjHYifK
+	Xwb5Y/lAQoBXiK6bdSOxo54HjZ2MSeOIBUFNASxLEPNvvxMVOdA/mNPYT/dzZg==
 From: "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
-Subject: [PATCH 0/2] libwebsockets: update to 4.3.10 and fix CVE-2026-19773
-Date: Wed, 23 Sep 2026 14:52:39 +0200
-Message-Id: <20260923-update-libwebsockets-fix-cve-2026-19773-v1-0-33878fcb7190@bootlin.com>
+Date: Wed, 23 Sep 2026 14:52:41 +0200
+Subject: [PATCH 2/2] libwebsockets: fix CVE-2026-19773
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNywqDMBAAf0X23IU8oDH9ldKDiWu7bVHJRi2I/
- 260x4FhZgWhxCRwq1ZINLPw0BfQlwriq+mfhNwWBqPMVXljcRrbJhN+OSwUZIgfyoId/zDOhIe
- F2jtn0ejYeRVqVwcLpTYmKtZ5uj/+LFN4U8xHHrZtBz+9KFWLAAAA
-X-Change-ID: 20260923-update-libwebsockets-fix-cve-2026-19773-21cf90b878b3
+Message-Id: <20260923-update-libwebsockets-fix-cve-2026-19773-v1-2-33878fcb7190@bootlin.com>
+References: <20260923-update-libwebsockets-fix-cve-2026-19773-v1-0-33878fcb7190@bootlin.com>
+In-Reply-To: <20260923-update-libwebsockets-fix-cve-2026-19773-v1-0-33878fcb7190@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: olivier.benjamin@bootlin.com, mathieu.dubois-briand@bootlin.com, 
  pascal.eberhard@se.com, wahid.essid@se.com, 
@@ -48,28 +47,68 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 12:53:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130231
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130233
 
-This series updates libwebsockets to version 4.3.10 and also fixes the
-CVE-2026-19773 by backporting the fix from v5 branch.
+Backport the fix from v5 branch.
 
 Signed-off-by: Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
 ---
-Benjamin Robin (Schneider Electric) (2):
-      libwebsockets: update to version 4.3.10
-      libwebsockets: fix CVE-2026-19773
+ .../libwebsockets/CVE-2026-19773.patch             | 32 ++++++++++++++++++++++
+ .../libwebsockets/libwebsockets_4.3.10.bb          |  1 +
+ 2 files changed, 33 insertions(+)
 
- .../libwebsockets/CVE-2025-11677.patch             | 161 ---------------------
- .../libwebsockets/CVE-2025-11678.patch             | 128 ----------------
- .../libwebsockets/CVE-2026-19773.patch             |  32 ++++
- ...websockets_4.3.3.bb => libwebsockets_4.3.10.bb} |   7 +-
- 4 files changed, 35 insertions(+), 293 deletions(-)
----
-base-commit: b5874ea07d69919d9b40d59f2c2f0bbd24bc3259
-change-id: 20260923-update-libwebsockets-fix-cve-2026-19773-21cf90b878b3
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch
+new file mode 100644
+index 000000000000..fe814201ea81
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch
+@@ -0,0 +1,32 @@
++From 7a57bcaa5a6ef336d92759676b46d04e5a79e63d Mon Sep 17 00:00:00 2001
++From: Andy Green <andy@warmcat.com>
++Date: Fri, 3 Jul 2026 18:43:25 +0100
++Subject: [PATCH] zdi-can-31036: h2 bounds check on server
++
++This vulnerability was discovered by:
++Maher Azzouzi working with TrendAI Zero Day Initiative
++
++CVE: CVE-2026-19773
++Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/824151862f37bc72f46d9a3e01d5b9408d313a0b]
++
++Signed-off-by: Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
++---
++ lib/roles/h2/hpack.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/lib/roles/h2/hpack.c b/lib/roles/h2/hpack.c
++index f6aefd34ded3..e6d8d06c1d8f 100644
++--- a/lib/roles/h2/hpack.c
+++++ b/lib/roles/h2/hpack.c
++@@ -274,6 +274,9 @@ static int lws_frag_append(struct lws *wsi, unsigned char c)
++ {
++	struct allocated_headers *ah = wsi->http.ah;
++
+++	if ((unsigned int)ah->pos >= wsi->a.context->max_http_header_data)
+++		return 1;
+++
++	ah->data[ah->pos++] = (char)c;
++	ah->frags[ah->nfrag].len++;
++
++--
++2.55.0
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
+index 559253c9613b..57db93bc1d9f 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
+@@ -10,6 +10,7 @@ S = "${WORKDIR}/git"
+ SRCREV = "2288cf200bc1c28680765bd4f07e437356106c2d"
+ SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
+           file://CVE-2026-10650.patch \
++          file://CVE-2026-19773.patch \
+           "
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 
-Best regards,
---  
-Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
+-- 
+2.55.0
 
 
