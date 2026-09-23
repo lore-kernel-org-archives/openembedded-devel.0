@@ -1,634 +1,75 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <benjamin.robin@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F84FC9830B
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 12:28:49 +0000 (UTC)
-Received: from newzmoby.atcorp.com (newzmoby.atcorp.com [50.173.197.71])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5861.1790166377066792436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E43CC982FA
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 12:53:09 +0000 (UTC)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6218.1790167984390002513
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 05:26:17 -0700
+ Wed, 23 Sep 2026 05:53:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@atcorp.com header.s=1376564E-C82E-11ED-954F-3FCE35F171BA header.b=lPZ67Vee;
- spf=pass (domain: atcorp.com, ip: 50.173.197.71, mailfrom: csiltala@atcorp.com)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by newzmoby.atcorp.com (Postfix) with ESMTP id 0DA2E35A1B3B;
-	Wed, 23 Sep 2026 07:26:16 -0500 (CDT)
-Received: from newzmoby.atcorp.com ([127.0.0.1])
- by localhost (newzmoby.atcorp.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id PD9m-exCgvAr; Wed, 23 Sep 2026 07:26:15 -0500 (CDT)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by newzmoby.atcorp.com (Postfix) with ESMTP id D978E35A1B5B;
-	Wed, 23 Sep 2026 07:26:15 -0500 (CDT)
-DKIM-Filter: OpenDKIM Filter v2.10.3 newzmoby.atcorp.com D978E35A1B5B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=atcorp.com;
-	s=1376564E-C82E-11ED-954F-3FCE35F171BA; t=1790166375;
-	bh=aPIXT/J/q3OpisshePqBUgWeXYKYYgfWyWLThOSYIFs=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=lPZ67VeeRrBHAJpvJ4yI6tPmxhUYfconvVpJT4v1nbyupYO9AU4G5E2Zlzaerdxd7
-	 n1LEDPPgwdHePj3BV54GFuYT3R9rd5+P6OdJrGiBkTBYlx/ucqoYS2RbxMH00of9HB
-	 2nFfpk8zpuqFmiTv4h6O13WodFjezbEFAZNFhsqKx1hqS/3x1njG/v984kPp4So4hY
-	 tNAHClINJl8FLGUxnYM3PPlH7z2VlY6uu8L2Jtr2lcYYiJZ7GFFpeHdi4CLMoooMCN
-	 wLlm4KScyBR2Q8rBclQZeVZ56d1zCYJ6JHzpjx7C9fr/CYSLz9Oi+k+QScfnJABNnS
-	 JdDSmJDRANxhg==
-Received: from newzmoby.atcorp.com ([127.0.0.1])
- by localhost (newzmoby.atcorp.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id F8XB3lbiKedN; Wed, 23 Sep 2026 07:26:15 -0500 (CDT)
-Received: from [192.168.7.109] (unknown [50.173.197.66])
-	by newzmoby.atcorp.com (Postfix) with ESMTPSA id 50F7735A1B3B;
-	Wed, 23 Sep 2026 07:26:15 -0500 (CDT)
-Message-ID: <39ad6438-9787-4696-81aa-b0df5b86f027@atcorp.com>
-Date: Wed, 23 Sep 2026 07:26:13 -0500
+ dkim=pass header.i=@bootlin.com header.s=dkim header.b=WuCPkZvA;
+ spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: benjamin.robin@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 2AF921A0FDE;
+	Wed, 23 Sep 2026 12:53:02 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id EC1DF60580;
+	Wed, 23 Sep 2026 12:53:01 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 925A71032885A;
+	Wed, 23 Sep 2026 14:53:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790167981; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=jtZnLObY5LIf3Y0mBs637Ky2A8e3mGbggZywGmXU5gc=;
+	b=WuCPkZvAn5k+hBvL6M4wBgUfumsorXDsp43Dtqzo1K84ud2hrlgDrSbu0qceQL04GbhayS
+	A0ZWHlNL9BrRnKStnqxiD2ZYRPd+1fOunmdY7fpklIR8pvpVHXFQk2jhkHZ3Rx0A+5YsXI
+	VltXXnOJIx3Dw4V9Jxc7HQ5wADz32WFUjTh1X/q9U+so6QJLuxcjyzHe/8cfyxwKd9nhDH
+	pfl+XgCrTlvRMA/RCnigDfFcS3btsg1abxx5yAq//hvECtD/3i2EmDu5FWhbo3xbhuIFrP
+	YEQtKkpCDrRO3IEksn+3h2mFs2y91RBm73kI17hU1byIDgGffHIIBDO/wpGMtw==
+From: "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
+Subject: [PATCH 0/2] libwebsockets: update to 4.3.10 and fix CVE-2026-19773
+Date: Wed, 23 Sep 2026 14:52:39 +0200
+Message-Id: <20260923-update-libwebsockets-fix-cve-2026-19773-v1-0-33878fcb7190@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH] bmon: upgrade 4.0 -> 5.0
-To: Khem Raj <raj.khem@gmail.com>, ticotimo@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-References: <20260923012442.3830864-1-csiltala@atcorp.com>
- <CANx9H-DpC+P=Dn+z7dfTpYzerZGbgjZnF-4SuywLt-SzHGtRbw@mail.gmail.com>
- <CAMKF1spqyYgSRYjhjf0bwZLp0mx=dnXxYrYxCsjeiMXTZLjQsg@mail.gmail.com>
-From: "Corey J. Siltala" <csiltala@atcorp.com>
-In-Reply-To: <CAMKF1spqyYgSRYjhjf0bwZLp0mx=dnXxYrYxCsjeiMXTZLjQsg@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------PSRJf0j7MxH3AvsLKUZfEc0v"
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNywqDMBAAf0X23IU8oDH9ldKDiWu7bVHJRi2I/
+ 260x4FhZgWhxCRwq1ZINLPw0BfQlwriq+mfhNwWBqPMVXljcRrbJhN+OSwUZIgfyoId/zDOhIe
+ F2jtn0ejYeRVqVwcLpTYmKtZ5uj/+LFN4U8xHHrZtBz+9KFWLAAAA
+X-Change-ID: 20260923-update-libwebsockets-fix-cve-2026-19773-21cf90b878b3
+To: openembedded-devel@lists.openembedded.org
+Cc: olivier.benjamin@bootlin.com, mathieu.dubois-briand@bootlin.com, 
+ pascal.eberhard@se.com, wahid.essid@se.com, 
+ "Benjamin Robin (Schneider Electric)" <benjamin.robin@bootlin.com>
+X-Mailer: b4 0.15.2
+X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 12:28:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130230
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 12:53:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130231
 
---------------PSRJf0j7MxH3AvsLKUZfEc0v
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+This series updates libwebsockets to version 4.3.10 and also fixes the
+CVE-2026-19773 by backporting the fix from v5 branch.
 
-Tim, Khem,
-
-Thomas Graf (tgraf) no longer had time to maintain the project and=20
-transferred ownership of the repo to Jafar Al-Gharaibeh (Jafaral). I've=20
-added a note to the commit message, addressed the ${BP} comment and some=20
-other lints here:
-
- From ae973d210d65ce5f06c3502b8c311b5188228c65 Mon Sep 17 00:00:00 2001
-From: Corey Siltala <csiltala@atcorp.com>
-Date: Tue, 22 Sep 2026 19:01:49 -0500
-Subject: [PATCH] bmon: upgrade 4.0 -> 5.0
-
-Note: ownership of bmon repo was transferred from Thomas Graf (tgraf)
- =C2=A0 =C2=A0 =C2=A0 to Jafar Al-Gharaibeh (Jafaral)
-
-Fixes:
-- out_curses: use xcalloc instead of a fixed buffer
-- Avoid trying to include <values.h> on Android
-- Fix typographical errors
-- curses: Fix seperator lines
-- Fix build in FreeBSD/DragonflyBSD
-- fix segfault on element removal
-- fix: Fix memory leaks in module_set()
-- fix: Convert usage of strdup/free to xstrdup/xfree
-- Fix compile issue in OpenBSD
-- Fix spelling and grammar in docs and comments
-
-Features:
-- Allow numeric colors in bmonrc
-- curses: Add CTRL-N/CTRL-P for next/previous element
-- feat: Add IPv4/IPv6 addresses to additional info
-- feat: Add configure option to disable IPv6 in netlink module
-- feat: Add ability to toggle TC elements
-- curses: render graphs with Braille cells
-- display filters for TC ingress and egress
-- Add support for JSON output
-- Remove the 'Really quit' dialog and just exit cleanly
-
-Misc:
-- Update to autoconf of the common era
-
-See full release notes at https://github.com/Jafaral/bmon/releases/tag/v5.0
-
-Signed-off-by: Corey Siltala <csiltala@atcorp.com>
+Signed-off-by: Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
 ---
- =C2=A0meta-networking/recipes-support/bmon/bmon_4.0.bb | 11 -----------
- =C2=A0meta-networking/recipes-support/bmon/bmon_5.0.bb | 15 ++++++++++++++=
-+
- =C2=A02 files changed, 15 insertions(+), 11 deletions(-)
- =C2=A0delete mode 100644 meta-networking/recipes-support/bmon/bmon_4.0.bb
- =C2=A0create mode 100644 meta-networking/recipes-support/bmon/bmon_5.0.bb
+Benjamin Robin (Schneider Electric) (2):
+      libwebsockets: update to version 4.3.10
+      libwebsockets: fix CVE-2026-19773
 
-diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb=20
-b/meta-networking/recipes-support/bmon/bmon_4.0.bb
-deleted file mode 100644
-index f47069471a..0000000000
---- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--DESCRIPTION =3D "Portable Bandwidth Monitor and rate estimator"
--LICENSE =3D "MIT"
--LIC_FILES_CHKSUM =3D=20
-"file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302"
--# only works with libnl-0.5.0
--DEPENDS =3D "libnl libconfuse ncurses"
--
--SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"
--SRC_URI =3D "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3Dht=
-tps"
--
--inherit autotools pkgconfig
--
-diff --git a/meta-networking/recipes-support/bmon/bmon_5.0.bb=20
-b/meta-networking/recipes-support/bmon/bmon_5.0.bb
-new file mode 100644
-index 0000000000..07c680850b
---- /dev/null
-+++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb
-@@ -0,0 +1,15 @@
-+SUMMARY =3D "Portable Bandwidth Monitor and rate estimator"
-+HOMEPAGE =3D "https://github.com/Jafaral/bmon"
-+SECTION =3D "net"
-+
-+LICENSE =3D "BSD-2-Clause & MIT"
-+LIC_FILES_CHKSUM =3D=20
-"file://LICENSE.MIT;md5=3D544799d0b492f119fa04641d1b8868ed \
-+ file://LICENSE.BSD;md5=3D5c262c13b60ebefe3060aed37d334ab6 \
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"
-+DEPENDS =3D "libconfuse libnl ncurses"
-+
-+SRC_URI =3D=20
-"https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
-+SRC_URI[sha256sum] =3D=20
-"6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0"
-+
-+inherit autotools pkgconfig
-+
---=20
-2.34.1
+ .../libwebsockets/CVE-2025-11677.patch             | 161 ---------------------
+ .../libwebsockets/CVE-2025-11678.patch             | 128 ----------------
+ .../libwebsockets/CVE-2026-19773.patch             |  32 ++++
+ ...websockets_4.3.3.bb => libwebsockets_4.3.10.bb} |   7 +-
+ 4 files changed, 35 insertions(+), 293 deletions(-)
+---
+base-commit: b5874ea07d69919d9b40d59f2c2f0bbd24bc3259
+change-id: 20260923-update-libwebsockets-fix-cve-2026-19773-21cf90b878b3
 
-Note also that the BSD-2-Clause license is not new, but was not noted in=20
-the previous recipe.
+Best regards,
+--  
+Benjamin Robin (Schneider Electric) <benjamin.robin@bootlin.com>
 
-Thanks,
-Corey
-
-On 9/22/2026 10:50 PM, Khem Raj wrote:
->
->
-> On Tue, Sep 22, 2026 at 8:11=E2=80=AFPM Tim Orling via lists.openembedded=
-.org=20
-> <http://lists.openembedded.org>=20
-> <ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
->
->
->
->     On Tue, Sep 22, 2026 at 7:58=E2=80=AFPM Corey Siltala via
->     lists.openembedded.org <http://lists.openembedded.org>
->     <csiltala=3Datcorp.com@lists.openembedded.org> wrote:
->
->         Fixes:
->         - out_curses: use xcalloc instead of a fixed buffer
->         - Avoid trying to include <values.h> on Android
->         - Fix typographical errors
->         - curses: Fix seperator lines
->         - Fix build in FreeBSD/DragonflyBSD
->         - fix segfault on element removal
->         - fix: Fix memory leaks in module_set()
->         - fix: Convert usage of strdup/free to xstrdup/xfree
->         - Fix compile issue in OpenBSD
->         - Fix spelling and grammar in docs and comments
->
->         Features:
->         - Allow numeric colors in bmonrc
->         - curses: Add CTRL-N/CTRL-P for next/previous element
->         - feat: Add IPv4/IPv6 addresses to additional info
->         - feat: Add configure option to disable IPv6 in netlink module
->         - feat: Add ability to toggle TC elements
->         - curses: render graphs with Braille cells
->         - display filters for TC ingress and egress
->         - Add support for JSON output
->         - Remove the 'Really quit' dialog and just exit cleanly
->
->         Misc:
->         - Update to autoconf of the common era
->
->         See full release notes at
->         https://github.com/Jafaral/bmon/releases/tag/v5.0
->
->
->     It would nice to explain why the git repo changed. There is no
->     mention anywhere that I can find.
->
->
->         Signed-off-by: Corey Siltala <csiltala@atcorp.com>
->         ---
->         =C2=A0.../recipes-support/bmon/{bmon_4.0.bb <http://bmon_4.0.bb> =
-=3D>
->         bmon_5.0.bb <http://bmon_5.0.bb>} =C2=A0 =C2=A0 =C2=A0 | 5 ++---
->         =C2=A01 file changed, 2 insertions(+), 3 deletions(-)
->         =C2=A0rename meta-networking/recipes-support/bmon/{bmon_4.0.bb
->         <http://bmon_4.0.bb> =3D> bmon_5.0.bb <http://bmon_5.0.bb>} (56%)
->
->         diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb
->         <http://bmon_4.0.bb>
->         b/meta-networking/recipes-support/bmon/bmon_5.0.bb
->         <http://bmon_5.0.bb>
->         similarity index 56%
->         rename from meta-networking/recipes-support/bmon/bmon_4.0.bb
->         <http://bmon_4.0.bb>
->         rename to meta-networking/recipes-support/bmon/bmon_5.0.bb
->         <http://bmon_5.0.bb>
->         index f47069471a..0ceff05984 100644
->         --- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
->         <http://bmon_4.0.bb>
->         +++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb
->         <http://bmon_5.0.bb>
->         @@ -1,11 +1,10 @@
->         =C2=A0DESCRIPTION =3D "Portable Bandwidth Monitor and rate estima=
-tor"
->         =C2=A0LICENSE =3D "MIT"
->         =C2=A0LIC_FILES_CHKSUM =3D
->         "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f=
-7b4f302"
->         -# only works with libnl-0.5.0
->         =C2=A0DEPENDS =3D "libnl libconfuse ncurses"
->
->         -SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"
->         -SRC_URI =3D
->         "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3Dhttps
->         <http://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3Dhttp=
-s>"
->         +SRC_URI =3D
->         "https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${BPN=
-}-${PV}.tar.gz
->         <https://github.com/Jafaral/$%7BBPN%7D/releases/download/v$%7BPV%=
-7D/$%7BBPN%7D-$%7BPV%7D.tar.gz>"
->
->
-> you can use BP here instead of BPN-PV which essentially is the same=20
-> but concise.
->
->         +SRC_URI[sha256sum] =3D
->         "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0=
-"
->
->         =C2=A0inherit autotools pkgconfig
->
->         --=20
->         2.34.1
->
->
->
->
->
->    =20
->
---=20
-Corey Siltala
-csiltala@atcorp.com
-Office: 952-829-5864 ext. 175
-Mobile: 763-333-5985
-
---------------PSRJf0j7MxH3AvsLKUZfEc0v
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
-">
-  </head>
-  <body>
-    <p>Tim, Khem,</p>
-    <p>Thomas Graf (tgraf) no longer had time to maintain the project
-      and transferred ownership of the repo to Jafar Al-Gharaibeh
-      (Jafaral). I've added a note to the commit message, addressed the
-      ${BP} comment and some other lints here:</p>
-    <p>From ae973d210d65ce5f06c3502b8c311b5188228c65 Mon Sep 17 00:00:00
-      2001<br>
-      From: Corey Siltala <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto=
-:csiltala@atcorp.com">&lt;csiltala@atcorp.com&gt;</a><br>
-      Date: Tue, 22 Sep 2026 19:01:49 -0500<br>
-      Subject: [PATCH] bmon: upgrade 4.0 -&gt; 5.0<br>
-      <br>
-      Note: ownership of bmon repo was transferred from Thomas Graf
-      (tgraf)<br>
-      =C2=A0 =C2=A0 =C2=A0 to Jafar Al-Gharaibeh (Jafaral)<br>
-      <br>
-      Fixes:<br>
-      - out_curses: use xcalloc instead of a fixed buffer<br>
-      - Avoid trying to include &lt;values.h&gt; on Android<br>
-      - Fix typographical errors<br>
-      - curses: Fix seperator lines<br>
-      - Fix build in FreeBSD/DragonflyBSD<br>
-      - fix segfault on element removal<br>
-      - fix: Fix memory leaks in module_set()<br>
-      - fix: Convert usage of strdup/free to xstrdup/xfree<br>
-      - Fix compile issue in OpenBSD<br>
-      - Fix spelling and grammar in docs and comments<br>
-      <br>
-      Features:<br>
-      - Allow numeric colors in bmonrc<br>
-      - curses: Add CTRL-N/CTRL-P for next/previous element<br>
-      - feat: Add IPv4/IPv6 addresses to additional info<br>
-      - feat: Add configure option to disable IPv6 in netlink module<br>
-      - feat: Add ability to toggle TC elements<br>
-      - curses: render graphs with Braille cells<br>
-      - display filters for TC ingress and egress<br>
-      - Add support for JSON output<br>
-      - Remove the 'Really quit' dialog and just exit cleanly<br>
-      <br>
-      Misc:<br>
-      - Update to autoconf of the common era<br>
-      <br>
-      See full release notes at
-      <a class=3D"moz-txt-link-freetext" href=3D"https://github.com/Jafaral=
-/bmon/releases/tag/v5.0">https://github.com/Jafaral/bmon/releases/tag/v5.0<=
-/a><br>
-      <br>
-      Signed-off-by: Corey Siltala <a class=3D"moz-txt-link-rfc2396E" href=
-=3D"mailto:csiltala@atcorp.com">&lt;csiltala@atcorp.com&gt;</a><br>
-      ---<br>
-      =C2=A0meta-networking/recipes-support/bmon/bmon_4.0.bb | 11 ---------=
---<br>
-      =C2=A0meta-networking/recipes-support/bmon/bmon_5.0.bb | 15
-      +++++++++++++++<br>
-      =C2=A02 files changed, 15 insertions(+), 11 deletions(-)<br>
-      =C2=A0delete mode 100644
-      meta-networking/recipes-support/bmon/bmon_4.0.bb<br>
-      =C2=A0create mode 100644
-      meta-networking/recipes-support/bmon/bmon_5.0.bb<br>
-      <br>
-      diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb
-      b/meta-networking/recipes-support/bmon/bmon_4.0.bb<br>
-      deleted file mode 100644<br>
-      index f47069471a..0000000000<br>
-      --- a/meta-networking/recipes-support/bmon/bmon_4.0.bb<br>
-      +++ /dev/null<br>
-      @@ -1,11 +0,0 @@<br>
-      -DESCRIPTION =3D "Portable Bandwidth Monitor and rate estimator"<br>
-      -LICENSE =3D "MIT"<br>
-      -LIC_FILES_CHKSUM =3D
-      <a class=3D"moz-txt-link-rfc2396E" href=3D"file://${COMMON_LICENSE_DI=
-R}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302">"file://${COMMON_LICENSE_DIR=
-}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302"</a><br>
-      -# only works with libnl-0.5.0<br>
-      -DEPENDS =3D "libnl libconfuse ncurses"<br>
-      -<br>
-      -SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"<br>
-      -SRC_URI =3D
-      "git://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3Dhttps"<br=
->
-      -<br>
-      -inherit autotools pkgconfig<br>
-      -<br>
-      diff --git a/meta-networking/recipes-support/bmon/bmon_5.0.bb
-      b/meta-networking/recipes-support/bmon/bmon_5.0.bb<br>
-      new file mode 100644<br>
-      index 0000000000..07c680850b<br>
-      --- /dev/null<br>
-      +++ b/meta-networking/recipes-support/bmon/bmon_5.0.bb<br>
-      @@ -0,0 +1,15 @@<br>
-      +SUMMARY =3D "Portable Bandwidth Monitor and rate estimator"<br>
-      +HOMEPAGE =3D <a class=3D"moz-txt-link-rfc2396E" href=3D"https://gith=
-ub.com/Jafaral/bmon">"https://github.com/Jafaral/bmon"</a><br>
-      +SECTION =3D "net"<br>
-      +<br>
-      +LICENSE =3D "BSD-2-Clause &amp; MIT"<br>
-      +LIC_FILES_CHKSUM =3D
-      "<a class=3D"moz-txt-link-freetext" href=3D"file://LICENSE.MIT;md5=3D=
-544799d0b492f119fa04641d1b8868ed">file://LICENSE.MIT;md5=3D544799d0b492f119=
-fa04641d1b8868ed</a> \<br>
-      +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0
-      <a class=3D"moz-txt-link-freetext" href=3D"file://LICENSE.BSD;md5=3D5=
-c262c13b60ebefe3060aed37d334ab6">file://LICENSE.BSD;md5=3D5c262c13b60ebefe3=
-060aed37d334ab6</a> \<br>
-      +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0"<br>
-      +DEPENDS =3D "libconfuse libnl ncurses"<br>
-      +<br>
-      +SRC_URI =3D
-<a class=3D"moz-txt-link-rfc2396E" href=3D"https://github.com/Jafaral/${BPN=
-}/releases/download/v${PV}/${BP}.tar.gz">"https://github.com/Jafaral/${BPN}=
-/releases/download/v${PV}/${BP}.tar.gz"</a><br>
-      +SRC_URI[sha256sum] =3D
-      "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0"<br=
->
-      +<br>
-      +inherit autotools pkgconfig<br>
-      +<br>
-      --=C2=A0<br>
-      2.34.1<br>
-      <br>
-      Note also that the BSD-2-Clause license is not new, but was not
-      noted in the previous recipe.</p>
-    <p>Thanks,<br>
-      Corey</p>
-    <div class=3D"moz-cite-prefix">On 9/22/2026 10:50 PM, Khem Raj wrote:<b=
-r>
-    </div>
-    <blockquote type=3D"cite"
-cite=3D"mid:CAMKF1spqyYgSRYjhjf0bwZLp0mx=3DdnXxYrYxCsjeiMXTZLjQsg@mail.gmai=
-l.com">
-      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DUTF=
--8">
-      <div dir=3D"ltr">
-        <div dir=3D"ltr"><br>
-        </div>
-        <br>
-        <div class=3D"gmail_quote gmail_quote_container">
-          <div dir=3D"ltr" class=3D"gmail_attr">On Tue, Sep 22, 2026 at
-            8:11=E2=80=AFPM Tim Orling via <a
-              href=3D"http://lists.openembedded.org"
-              moz-do-not-send=3D"true">lists.openembedded.org</a>
-            &lt;ticotimo=3D<a
-              href=3D"mailto:gmail.com@lists.openembedded.org"
-              moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext">gmai=
-l.com@lists.openembedded.org</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class=3D"gmail_quote"
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">
-            <div><br>
-            </div>
-            <div><br>
-              <div class=3D"gmail_quote">
-                <div dir=3D"ltr" class=3D"gmail_attr">On Tue, Sep 22, 2026
-                  at 7:58=E2=80=AFPM Corey Siltala via <a
-                    href=3D"http://lists.openembedded.org" target=3D"_blank=
-"
-                    moz-do-not-send=3D"true">lists.openembedded.org</a>
-                  &lt;csiltala=3D<a
-                    href=3D"mailto:atcorp.com@lists.openembedded.org"
-                    target=3D"_blank" moz-do-not-send=3D"true"
-                    class=3D"moz-txt-link-freetext">atcorp.com@lists.openem=
-bedded.org</a>&gt;
-                  wrote:<br>
-                </div>
-                <blockquote class=3D"gmail_quote"
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">Fixes:<br>
-                  - out_curses: use xcalloc instead of a fixed buffer<br>
-                  - Avoid trying to include &lt;values.h&gt; on Android<br>
-                  - Fix typographical errors<br>
-                  - curses: Fix seperator lines<br>
-                  - Fix build in FreeBSD/DragonflyBSD<br>
-                  - fix segfault on element removal<br>
-                  - fix: Fix memory leaks in module_set()<br>
-                  - fix: Convert usage of strdup/free to xstrdup/xfree<br>
-                  - Fix compile issue in OpenBSD<br>
-                  - Fix spelling and grammar in docs and comments<br>
-                  <br>
-                  Features:<br>
-                  - Allow numeric colors in bmonrc<br>
-                  - curses: Add CTRL-N/CTRL-P for next/previous element<br>
-                  - feat: Add IPv4/IPv6 addresses to additional info<br>
-                  - feat: Add configure option to disable IPv6 in
-                  netlink module<br>
-                  - feat: Add ability to toggle TC elements<br>
-                  - curses: render graphs with Braille cells<br>
-                  - display filters for TC ingress and egress<br>
-                  - Add support for JSON output<br>
-                  - Remove the 'Really quit' dialog and just exit
-                  cleanly<br>
-                  <br>
-                  Misc:<br>
-                  - Update to autoconf of the common era<br>
-                  <br>
-                  See full release notes at <a
-href=3D"https://github.com/Jafaral/bmon/releases/tag/v5.0"
-                    rel=3D"noreferrer" target=3D"_blank"
-                    moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext=
-">https://github.com/Jafaral/bmon/releases/tag/v5.0</a><br>
-                </blockquote>
-                <div dir=3D"auto"><br>
-                </div>
-                <div dir=3D"auto">It would nice to explain why the git
-                  repo changed. There is no mention anywhere that I can
-                  find.</div>
-                <blockquote class=3D"gmail_quote"
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex"><br>
-                  Signed-off-by: Corey Siltala &lt;<a
-                    href=3D"mailto:csiltala@atcorp.com" target=3D"_blank"
-                    moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext=
-">csiltala@atcorp.com</a>&gt;<br>
-                  ---<br>
-                  =C2=A0.../recipes-support/bmon/{<a
-                    href=3D"http://bmon_4.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_4.0.bb<=
-/a>
-                  =3D&gt; <a href=3D"http://bmon_5.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_5.0.bb<=
-/a>}=C2=A0
-                  =C2=A0 =C2=A0 =C2=A0 | 5 ++---<br>
-                  =C2=A01 file changed, 2 insertions(+), 3 deletions(-)<br>
-                  =C2=A0rename meta-networking/recipes-support/bmon/{<a
-                    href=3D"http://bmon_4.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_4.0.bb<=
-/a>
-                  =3D&gt; <a href=3D"http://bmon_5.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_5.0.bb<=
-/a>}
-                  (56%)<br>
-                  <br>
-                  diff --git a/meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_4.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_4.0.bb<=
-/a>
-                  b/meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_5.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_5.0.bb<=
-/a><br>
-                  similarity index 56%<br>
-                  rename from meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_4.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_4.0.bb<=
-/a><br>
-                  rename to meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_5.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_5.0.bb<=
-/a><br>
-                  index f47069471a..0ceff05984 100644<br>
-                  --- a/meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_4.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_4.0.bb<=
-/a><br>
-                  +++ b/meta-networking/recipes-support/bmon/<a
-                    href=3D"http://bmon_5.0.bb" rel=3D"noreferrer"
-                    target=3D"_blank" moz-do-not-send=3D"true">bmon_5.0.bb<=
-/a><br>
-                  @@ -1,11 +1,10 @@<br>
-                  =C2=A0DESCRIPTION =3D "Portable Bandwidth Monitor and rat=
-e
-                  estimator"<br>
-                  =C2=A0LICENSE =3D "MIT"<br>
-                  =C2=A0LIC_FILES_CHKSUM =3D
-                  <a class=3D"moz-txt-link-rfc2396E" href=3D"file://${COMMO=
-N_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302">"file://${COMMON=
-_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302"</a><br>
-                  -# only works with libnl-0.5.0<br>
-                  =C2=A0DEPENDS =3D "libnl libconfuse ncurses"<br>
-                  <br>
-                  -SRCREV =3D "1b3f11bde315e221474f7d066ce4efb4ff4d39e3"<br=
->
-                  -SRC_URI =3D "git://<a
-href=3D"http://github.com/tgraf/bmon.git;branch=3Dmaster;protocol=3Dhttps"
-                    rel=3D"noreferrer" target=3D"_blank"
-                    moz-do-not-send=3D"true">github.com/tgraf/bmon.git;bran=
-ch=3Dmaster;protocol=3Dhttps</a>"<br>
-                  +SRC_URI =3D "<a
-href=3D"https://github.com/Jafaral/$%7BBPN%7D/releases/download/v$%7BPV%7D/=
-$%7BBPN%7D-$%7BPV%7D.tar.gz"
-                    rel=3D"noreferrer" target=3D"_blank"
-                    moz-do-not-send=3D"true">https://github.com/Jafaral/${B=
-PN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz</a>"<br>
-                </blockquote>
-              </div>
-            </div>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>you can use BP here instead of BPN-PV which essentially
-            is the same but concise.</div>
-          <div>=C2=A0</div>
-          <blockquote class=3D"gmail_quote"
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">
-            <div>
-              <div class=3D"gmail_quote">
-                <blockquote class=3D"gmail_quote"
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">
-                  +SRC_URI[sha256sum] =3D
-                  "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a5554=
-59ad73c0"<br>
-                  <br>
-                  =C2=A0inherit autotools pkgconfig<br>
-                  <br>
-                  -- <br>
-                  2.34.1<br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                </blockquote>
-              </div>
-            </div>
-            <br>
-            <br>
-            <br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-    <pre class=3D"moz-signature" cols=3D"72">--=20
-Corey Siltala
-<a class=3D"moz-txt-link-abbreviated" href=3D"mailto:csiltala@atcorp.com">c=
-siltala@atcorp.com</a>
-Office: 952-829-5864 ext. 175
-Mobile: 763-333-5985</pre>
-  </body>
-</html>
-
---------------PSRJf0j7MxH3AvsLKUZfEc0v--
 
