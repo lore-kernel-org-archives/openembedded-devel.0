@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0640DC98304
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C78F7C98312
 	for <webhook@archiver.kernel.org>; Thu, 24 Sep 2026 04:34:05 +0000 (UTC)
-Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.738.1790224440520370271
+Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.734.1790224434114041680
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2026 21:34:00 -0700
+ Wed, 23 Sep 2026 21:33:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WC4M29cn;
- spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f12.google.com with SMTP id d2e1a72fcca58-85469b35611so793616b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 21:34:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=IS1Y3RqX;
+ spf=pass (domain: gmail.com, ip: 74.125.228.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-868b2e5be4eso616766b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2026 21:33:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790224440; x=1790829240; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790224433; x=1790829233; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TzSXAoHqmEJVaPCu8o7JnI1isEp3RttYWKL4Quo+/iQ=;
-        b=WC4M29cn5gW78zDhocq6iXHUeDldm+nmixxojfewtRCZ/EWcACJlQNraRyd6pogcDU
-         GEgzHP3BQHttTFyKtQOEBSa3p4McVQnkyWCcDDd6nnTmSeOD171D7QeI5cziR1x/R1vF
-         wBTxFRQYt8e+hInsjfvNtXrbsn6Zd7qsPSOxoUaV1tqM618QhjyRylTQorUlWTGY3w+7
-         AgwwKKZ05fNfvBQh6/T+nx591AADwx5g7GJNGI4lC1BSO3Mb59y5LdsJt/qQ31s/0LJy
-         rzoIyt9FK15b/G8LruYZY0vZSXcmljJrvnUWVk/SbcI0i18Rrk+9MhkIUVNi0i0CUFgS
-         +XTQ==
+        bh=ArCG9NXBLrnh4ZSsBiw78bmnHdZwxGNQzwjZ67Kw3fI=;
+        b=IS1Y3RqXZ65EEbCg7l/tTH34va5kaMMylRDbS036euk6Y6EgOk1NqeL7dePq05C7TO
+         5HKMZ2f30ImK/I77TAQZSRvifgEvuaNsuU+r7QF3qu7eV6vy/AS4SUYHRMEm3RfzvDFZ
+         rVYCOP2vytatHk2UDfvQxPHNqaYdl+0HTBxh7KfQ16rL6B0XvQni/9byFL3rYHfkXJyH
+         FxLS+Bw316ebee1l8tPI2x5p4VtuccHdbsTCxj+Ekmn8rGLE7BRwpShGvvj1iCNv5vgK
+         LpLcK+VRl1dakypQxtum/zs6LuB4CfKfgJp70UbJJoxAsOkGKlXmw5JR5gDPKtgegE3u
+         8Hag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790224440; x=1790829240;
+        d=1e100.net; s=20260707; t=1790224433; x=1790829233;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TzSXAoHqmEJVaPCu8o7JnI1isEp3RttYWKL4Quo+/iQ=;
-        b=FnrQ8LtONt3SN2Wu7Yxl6LewFERiuYG25/91Nu31+WitQIakyqSIeJ3Mtaa8JOLgqu
-         Va04jKC7riQlBYpkmXVH7LE6/3ysE0P5fl3IH1xsFGMPqZWVGKcxXod5DywngEj+5EyU
-         OFmYAWix6hkKnDY+m4b6wlX4fljRFi9mBG+aZK/ojCvxg+486hIO3Vs3rDnghl71Tu49
-         peLirq8Hw1ctGtcrxwvVTtwhEgsrg5xfA2BkZW93NwaencOM+sdUNWsNCDV0VmEv/koR
-         qULKxVD9EooOxob7xhVgUj/1OibWUy//+CQvquIjJ9KoqJ6MQwEgESfK9lbhDQrWTG91
-         b7Aw==
-X-Gm-Message-State: AFuF++kD6aEa+HB4Kaa330fpcFl2cnclbltEQA1CtNZZ0aXNIWGi5uJX
-	ccQ+q274MJ5HNBf8E8v3Jrg0tDI8G6fliJuEFSNUCqnt7W6MmKlwKcSa4T4HUA==
-X-Gm-Gg: AYBFou3odnNo6r6x80KNJXkidHEUzA4l1HW2YqcnrhNVT1xEcF2qwzb3R0LUcqdGBdW
-	1EoORPwlZ1BPUzog+D+2T1GsGYbRyf7OaVD92fTdT2Z9KyyDOTXRxSQDZuONWJm9bHEhbypr1eg
-	v0PnRtBppD3j7zXyto5LjHRziKghDe3I2I+BtAOdR4dBP0qdpzz6Z2f0djPZCKm4NtT3A1qmQIe
-	Ex+zA7HE/nbS2URO6ZifnzeWfzhMu+zsrj1ls592B6DhzSVwGX/AiaUSBcl5EdlCqOIEp/mrRr0
-	5G9FukQjrgqzr3dXDJB3+WSOXlRT4iXAi59OEInZbFWhWGzOOMwXNo+nrQSozdLr+60r12HXjEB
-	R27cGbR1WBjJroQDhZPT3B76Db64vlUFuhmfLCs+RqyYubFasHIkmF4maxD1eHW7pLjkvYkqS0/
-	HmVImThDoQOaoqo1Zs5hfScjrHnvnetBGNVcui+YbZKwzYUgCpocjxQX9mw2LTcvPcziFnTKsd3
-	tDbkvvkcwGQg4yaeefo5lQ=
-X-Received: by 2002:a05:6a00:a244:b0:878:d57a:6d03 with SMTP id d2e1a72fcca58-87e9b79bcaamr964660b3a.45.1790224439766;
-        Wed, 23 Sep 2026 21:33:59 -0700 (PDT)
+        bh=ArCG9NXBLrnh4ZSsBiw78bmnHdZwxGNQzwjZ67Kw3fI=;
+        b=DBPMVBJqb0h4m64Kav6F9tDu4rklE2nsfunBa5Oqqb/RRtDL6K8orFf/Q00J4w5UIY
+         s27LFEKQ7yTezY+bycf4GzPtLInzRm07EQp1bG/GjmXFCkS+4ltIZvWKc5tYto5Q8EcR
+         7JMhAD06fjtMYDHRC+uBOQXN0Q9JbkML78RRMdkts+uIyiWcKG9PT3PBIDidBBD0LKbD
+         92X+OKljbS8bGjSM9bV+xfn40rQ7OOAx6OP9fpgdrPGIIDTD+2IkMtJ5BciZSyUj1f9J
+         SiDG0tmIe/Y732NkMHSzqjqdfAHf4nwMvloA6oloJ5vX7xf7jExFnELL0yK54yPpU8TB
+         UJHA==
+X-Gm-Message-State: AFuF++kGjZ5KOz9Z/2WcA8SxahU5PufHTDb2QjgYW06WwNnMq2CTCyYF
+	l5/KUw/n57mNGg0TrLCkon+mCQgbMs74mQ7eRg+s5yO63o3B7ftxuS6cuwe3uQ==
+X-Gm-Gg: AYBFou2Q6xCsYpKhpPG52/SoNIYx5b/iZ5xBHl5/smSSUmnBlAiskUCF+adCgvsd0zf
+	0seM/8Y4y5yfFzRFyR98Ccc7SsxUroALycAi08USMZpdBFT0NYDS5zTsy5ahdooqagcxnzxKNfR
+	Uj81cjoMHuPkr/L/Tol6h/Jos8+TwWXgaH9IdOvgZUjobtHu7iauOOGC8Qtg0vJHHY/risZgBxE
+	gblawI2hE8WyeOb2a4YBWai0NB1KyXgIFHXcWyTJkEqVdMTki/W4Cr/PYtsjje5SIYnlTu+f0Hk
+	Q9RkdvNySJG7KQanMbAa2abcfPoucCLsz/BXyYkqDzLb9sfM7uqGu2BcM8L/Sbn8sPkeYiCX84o
+	bu2pFwxz0kfBE3M5HEkH33Q4uZ3PB5TqZK4pukYLN7o4466Ib4/6Lo378LDXhwanStPNouBonLb
+	VIM0EgF7SNIHMYlvedhcYVK+AIO/GP3uNIMWtwjR3v6cFP62i9XaRHVZ2f4DGPFr4gUC/Fs2HjJ
+	ng+A84mCmvLVgkx/nzH/vc=
+X-Received: by 2002:a05:6a00:3e1e:b0:87a:2e3c:7892 with SMTP id d2e1a72fcca58-87e9a70b7b6mr1015333b3a.10.1790224433335;
+        Wed, 23 Sep 2026 21:33:53 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1e601b5dsm2189686b3a.61.2026.09.23.21.33.57
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1e601b5dsm2189686b3a.61.2026.09.23.21.33.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 21:33:59 -0700 (PDT)
+        Wed, 23 Sep 2026 21:33:52 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 18/24] tesseract: patch CVE-2026-88049
-Date: Thu, 24 Sep 2026 16:33:08 +1200
-Message-ID: <20260924043315.1663186-18-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 15/24] strongswan: patch CVE-2026-78134
+Date: Thu, 24 Sep 2026 16:33:05 +1200
+Message-ID: <20260924043315.1663186-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260924043315.1663186-1-ankur.tyagi85@gmail.com>
 References: <20260924043315.1663186-1-ankur.tyagi85@gmail.com>
@@ -68,352 +68,753 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 04:34:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130266
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130263
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Use patch[1] provided by strongSwan[2]
+
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-88049
+https://nvd.nist.gov/vuln/detail/cve-2026-78134
+
+[1]https://download.strongswan.org/security/CVE-2026-78134/strongswan-5.9.10-6.0.7_eap_inner_auth_cfg.patch
+[2]https://www.strongswan.org/blog/2026/09/07/strongswan-vulnerability-(cve-2026-78134).html
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tesseract/tesseract/CVE-2026-88049.patch  | 316 ++++++++++++++++++
- .../tesseract/tesseract_5.5.2.bb              |   1 +
- 2 files changed, 317 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
+ .../strongswan/CVE-2026-78134.patch           | 712 ++++++++++++++++++
+ .../strongswan/strongswan_6.0.6.bb            |   1 +
+ 2 files changed, 713 insertions(+)
+ create mode 100644 meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78134.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
+diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78134.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78134.patch
 new file mode 100644
-index 0000000000..d7528e1825
+index 0000000000..86646e5e96
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
-@@ -0,0 +1,316 @@
-+From 2a118419439d1bfeb2bf8a78732a0fb2ad33475d Mon Sep 17 00:00:00 2001
-+From: Stefan Weil <sw@weilnetz.de>
-+Date: Fri, 21 Aug 2026 16:41:51 +0200
-+Subject: [PATCH] Validate LSTM gate matrix dimensions against na_/no_ at load
++++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78134.patch
+@@ -0,0 +1,712 @@
++From d95e9d363b0e23d0ba3080bb518695e05a453748 Mon Sep 17 00:00:00 2001
++From: Tobias Brunner <tobias@strongswan.org>
++Date: Mon, 27 Jul 2026 15:05:45 +0200
++Subject: [PATCH] eap-ttls/peap: Return auth-cfg with details on TLS and inner
++ EAP method
 +
-+LSTM::DeSerialize read na_ from the untrusted TESSDATA_LSTM component
-+and derived ns_ from the CI gate matrix's dim1, but never checked that
-+the deserialized dimensions were mutually consistent. The forward pass
-+sizes its buffers from na_, no_ and ns_ while the gate matrices drive
-+their own dimensions, so a crafted .traineddata performed heap
-+out-of-bounds writes and reads during the first recognition step, e.g.
-+WriteTimeStepPart writing ns_ floats at offset ni_+nf_ into a source_
-+buffer sized from na_ (up to ~256 KB with an attacker-chosen gate
-+matrix dim1).
++This fixes several issues with binding identities to the IKE SA.
 +
-+The bounds assertions added by 2f4d2f4 (CVE-2026-73066) covered only
-+NetworkIO::CopyTimeStepGeneral and Randomize, leaving
-+WriteTimeStepPart and AddTimeStepPart unguarded.
++If the client is authenticated with a certificate, the previous code still
++used the client's proclaimed inner EAP-Identity when starting the EAP-TNC
++method.  So that method would potentially operate on an unverified
++identity.
 +
-+Key changes:
-+- weightmatrix.h: add Dim1()/Dim2() accessors for the active weight
-+  matrix (int or float), alongside the existing NumOutputs().
-+- lstm.cpp: reject the layer in DeSerialize unless na_ ==
-+  ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_, every deserialized gate has
-+  Dim1() == ns_ and Dim2() == na_ + 1 (the layout InitWeightsFloat
-+  always produces), ns_ == no_ for plain NT_LSTM/NT_LSTM_SUMMARY, and
-+  the softmax layer's sizes match ns_/no_ for the softmax variants.
-+- networkio.cpp: add the same defense-in-depth bounds assertions to
-+  WriteTimeStepPart and AddTimeStepPart as 2f4d2f4 added to
-+  CopyTimeStepGeneral and Randomize.
-+- unittest: add lstm_layer_test with crafted NT_LSTM layers for the
-+  na_ mismatch, gate dim1 mismatch, and gate dim2 mismatch cases
-+  (each rejected at load; on unpatched code the tests reach Forward
-+  and ASan catches the out-of-bounds write in WriteTimeStepPart),
-+  plus a positive control that a consistent layer loads and runs.
++Second, if the inner EAP method overrides the client identity (the only
++one is currently EAP-MSCHAPV2), the missing merge meant that the outer
++IKE/EAP identity could potentially be unconfirmed.
 +
-+Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
-+Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
-+Signed-off-by: Stefan Weil <sw@weilnetz.de>
-+(cherry picked from commit b494ac18925f9d9aff9ef5815475de9943ab19bf)
++For inner methods that don't override the identity (e.g. EAP-MD5), not
++propagating the inner EAP-Identity could potentially have the same
++effect.
 +
-+CVE: CVE-2026-88049
-+Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/b494ac18925f9d9aff9ef5815475de9943ab19bf]
++While the EAP-TTLS implementation returned the auth-cfg of the TLS
++exchange since the first referenced commit, this was mainly intended to
++enforce public key constraints.  So it didn't cover the phase 2 EAP
++methods.  For some reason EAP-PEAP did not get that method at all in that
++changeset, so we'll add that now.
++
++Additionally, the EAP-PEAP implementation now forwards the phase 2 EAP
++method type to EAP-TNC like the EAP-TTLS implementation already did,
++which allows a more informed decision on the client's identity.
++
++Fixes: 0864a31d13ff ("eap-ttls: Support EAP auth information getter in EAP-TTLS")
++Fixes: 79f2102cb442 ("implemented server side support for EAP-TTLS")
++Fixes: 2a421163bf4f ("make TNC client authentication type available to IMVs")
++Fixes: 1be296dfb2af ("implemented the PEAP tunneling protocol as an EAP plugin")
++Fixes: CVE-2026-78134
++
++CVE: CVE-2026-78134
++Upstream-Status: Backport [1][2]
++
++[1]https://github.com/strongswan/strongswan/commit/e059077d3f3e307e78be7f91e5648aa5f94916a8
++[2]https://github.com/strongswan/strongswan/commit/6a7210731f6dd2889d22bf20310ab0ed7274d0d8
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ Makefile.am                 |   5 +
-+ src/lstm/lstm.cpp           |  20 ++++
-+ src/lstm/networkio.cpp      |   2 +
-+ unittest/lstm_layer_test.cc | 177 ++++++++++++++++++++++++++++++++++++
-+ 4 files changed, 204 insertions(+)
-+ create mode 100644 unittest/lstm_layer_test.cc
++ src/libcharon/plugins/eap_peap/eap_peap.c     | 49 ++++++++++-
++ .../plugins/eap_peap/eap_peap_peer.c          | 20 +++++
++ .../plugins/eap_peap/eap_peap_peer.h          |  7 ++
++ .../plugins/eap_peap/eap_peap_server.c        | 81 ++++++++++++++++---
++ .../plugins/eap_peap/eap_peap_server.h        |  7 ++
++ src/libcharon/plugins/eap_ttls/eap_ttls.c     | 43 +++++++++-
++ .../plugins/eap_ttls/eap_ttls_peer.c          | 19 +++++
++ .../plugins/eap_ttls/eap_ttls_peer.h          |  7 ++
++ .../plugins/eap_ttls/eap_ttls_server.c        | 56 +++++++++++--
++ .../plugins/eap_ttls/eap_ttls_server.h        |  7 ++
++ 10 files changed, 278 insertions(+), 18 deletions(-)
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index ea722409..86ac9d0d 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1200,6 +1200,7 @@ check_PROGRAMS += layout_test
-+ check_PROGRAMS += ligature_table_test
-+ check_PROGRAMS += linlsq_test
-+ check_PROGRAMS += list_test
-++check_PROGRAMS += lstm_layer_test
-+ if ENABLE_TRAINING
-+ check_PROGRAMS += lstm_recode_test
-+ check_PROGRAMS += lstm_squashed_test
-+@@ -1381,6 +1382,10 @@ loadlang_test_SOURCES = unittest/loadlang_test.cc
-+ loadlang_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ loadlang_test_LDADD = $(TESS_LIBS) $(LEPTONICA_LIBS)
++diff --git a/src/libcharon/plugins/eap_peap/eap_peap.c b/src/libcharon/plugins/eap_peap/eap_peap.c
++index 3573cba..cd942f1 100644
++--- a/src/libcharon/plugins/eap_peap/eap_peap.c
+++++ b/src/libcharon/plugins/eap_peap/eap_peap.c
++@@ -40,6 +40,25 @@ struct private_eap_peap_t {
++ 	 * TLS stack, wrapped by EAP helper
++ 	 */
++ 	tls_eap_t *tls_eap;
+++
+++	/**
+++	 * Role
+++	 */
+++	bool is_server;
+++
+++	/**
+++	 * Actual server/client implementation
+++	 */
+++	union {
+++		tls_application_t *application;
+++		eap_peap_server_t *server;
+++		eap_peap_peer_t *client;
+++	} impl;
+++
+++	/**
+++	 * Cached auth data for TLS and inner EAP methods
+++	 */
+++	auth_cfg_t *auth;
++ };
 + 
-++lstm_layer_test_SOURCES = unittest/lstm_layer_test.cc
-++lstm_layer_test_CPPFLAGS = $(unittest_CPPFLAGS)
-++lstm_layer_test_LDADD = $(TESS_LIBS)
-++
-+ lstm_recode_test_SOURCES = unittest/lstm_recode_test.cc
-+ lstm_recode_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ lstm_recode_test_LDADD = $(TRAINING_LIBS)
-+diff --git a/src/lstm/lstm.cpp b/src/lstm/lstm.cpp
-+index 11722d79..4ce361eb 100644
-+--- a/src/lstm/lstm.cpp
-++++ b/src/lstm/lstm.cpp
-+@@ -274,12 +274,32 @@ bool LSTM::DeSerialize(TFile *fp) {
-+       is_2d_ = na_ - nf_ == ni_ + 2 * ns_;
-+     }
-+   }
-++  // The deserialized dimensions must be mutually consistent: the forward
-++  // pass sizes its buffers from na_, no_ and ns_ while the gate matrices
-++  // drive their own dimensions.
-++  if (na_ != ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_) {
-++    return false;
-++  }
-++  for (int w = 0; w < WT_COUNT; ++w) {
-++    if (w == GFS && !Is2D()) {
-++      continue;
-++    }
-++    if (gate_weights_[w].Dim1() != ns_ || gate_weights_[w].Dim2() != na_ + 1) {
-++      return false;
-++    }
-++  }
-++  if ((type_ == NT_LSTM || type_ == NT_LSTM_SUMMARY) && ns_ != no_) {
-++    return false;
-++  }
-+   delete softmax_;
-+   if (type_ == NT_LSTM_SOFTMAX || type_ == NT_LSTM_SOFTMAX_ENCODED) {
-+     softmax_ = static_cast<FullyConnected *>(Network::CreateFromFile(fp));
-+     if (softmax_ == nullptr) {
-+       return false;
-+     }
-++    if (softmax_->NumInputs() != ns_ || softmax_->NumOutputs() != no_) {
-++      return false;
-++    }
-+   } else {
-+     softmax_ = nullptr;
-+   }
-+diff --git a/src/lstm/networkio.cpp b/src/lstm/networkio.cpp
-+index 8636075b..929f5ac4 100644
-+--- a/src/lstm/networkio.cpp
-++++ b/src/lstm/networkio.cpp
-+@@ -641,6 +641,7 @@ void NetworkIO::AddTimeStep(int t, TFloat *inout) const {
++ /** Maximum number of EAP-PEAP messages/fragments allowed */
++@@ -113,10 +132,34 @@ METHOD(eap_method_t, is_mutual, bool,
++ 	return TRUE;
++ }
 + 
-+ // Adds part of a single timestep to floats.
-+ void NetworkIO::AddTimeStepPart(int t, int offset, int num_features, float *inout) const {
-++  ASSERT_HOST(offset + num_features <= NumFeatures());
-+   if (int_mode_) {
-+     const int8_t *line = i_[t] + offset;
-+     for (int i = 0; i < num_features; ++i) {
-+@@ -662,6 +663,7 @@ void NetworkIO::WriteTimeStep(int t, const TFloat *input) {
-+ // Writes a single timestep from floats in the range [-1, 1] writing only
-+ // num_features elements of input to (*this)[t], starting at offset.
-+ void NetworkIO::WriteTimeStepPart(int t, int offset, int num_features, const TFloat *input) {
-++  ASSERT_HOST(offset + num_features <= NumFeatures());
-+   if (int_mode_) {
-+     int8_t *line = i_[t] + offset;
-+     for (int i = 0; i < num_features; ++i) {
-+diff --git a/unittest/lstm_layer_test.cc b/unittest/lstm_layer_test.cc
-+new file mode 100644
-+index 00000000..2c874995
-+--- /dev/null
-++++ b/unittest/lstm_layer_test.cc
-+@@ -0,0 +1,177 @@
-++///////////////////////////////////////////////////////////////////////
-++// File:        lstm_layer_test.cc
-++// Description: Tests that an NT_LSTM network layer with mutually
-++//              inconsistent deserialized dimensions is rejected at
-++//              load. The forward pass sizes its buffers from na_, no_
-++//              and ns_ while the gate weight matrices drive their own
-++//              dimensions, so a crafted .traineddata performs heap
-++//              out-of-bounds writes/reads during the first
-++//              recognition step (e.g. WriteTimeStepPart writing ns_
-++//              floats into a source_ buffer sized from na_).
-++//
-++// Licensed under the Apache License, Version 2.0 (the "License");
-++// you may not use this file except in compliance with the License.
-++// You may obtain a copy of the License at
-++// http://www.apache.org/licenses/LICENSE-2.0
-++//
-++///////////////////////////////////////////////////////////////////////
+++METHOD(eap_method_t, get_auth, auth_cfg_t*,
+++	private_eap_peap_t *this)
+++{
+++	if (!this->auth)
+++	{
+++		auth_cfg_t *inner;
 ++
-++#include "include_gunit.h"
-++
-++#include "network.h" // for Network, NetworkType
-++#include "networkio.h"
-++#include "networkscratch.h"
-++#include "serialis.h" // for TFile
-++#include "stridemap.h"
-++
-++#include <cstdint>
-++#include <utility>
-++#include <vector>
-++
-++namespace tesseract {
-++namespace {
-++
-++// Appends raw little-endian values to a byte buffer.
-++class ByteWriter {
-++public:
-++  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
-++  void PutU32(uint32_t v) {
-++    for (int i = 0; i < 4; ++i) {
-++      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
-++    }
-++  }
-++  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
-++  const std::vector<char> &data() const { return data_; }
-++
-++private:
-++  std::vector<char> data_;
-++};
-++
-++void PutDoubleLE(ByteWriter *w, double d) {
-++  union {
-++    double d;
-++    uint64_t u;
-++  } conv;
-++  conv.d = d;
-++  w->PutU32(static_cast<uint32_t>(conv.u & 0xFFFFFFFF));
-++  w->PutU32(static_cast<uint32_t>(conv.u >> 32));
+++		this->auth = auth_cfg_create();
+++		this->auth->merge(this->auth,
+++						  this->tls_eap->get_auth(this->tls_eap), FALSE);
+++		if (this->is_server)
+++		{
+++			inner = this->impl.server->get_auth(this->impl.server);
+++		}
+++		else
+++		{
+++			inner = this->impl.client->get_auth(this->impl.client);
+++		}
+++		this->auth->merge(this->auth, inner, FALSE);
+++	}
+++	return this->auth;
 ++}
 ++
-++// A serialized float-mode WeightMatrix with the given dimensions,
-++// all weight data zeroed.
-++void PutGateMatrix(ByteWriter *w, int32_t dim1, int32_t dim2) {
-++  w->PutU8(128); // mode: kDoubleFlag, float mode
-++  w->PutS32(dim1);
-++  w->PutS32(dim2);
-++  PutDoubleLE(w, 0.0); // empty_ cell
-++  for (int32_t i = 0; i < dim1 * dim2; ++i) {
-++    PutDoubleLE(w, 0.0);
-++  }
++ METHOD(eap_method_t, destroy, void,
++ 	private_eap_peap_t *this)
++ {
++ 	this->tls_eap->destroy(this->tls_eap);
+++	DESTROY_IF(this->auth);
++ 	free(this);
++ }
++ 
++@@ -135,6 +178,7 @@ static private_eap_peap_t *eap_peap_create_empty(void)
++ 				.get_type = _get_type,
++ 				.is_mutual = _is_mutual,
++ 				.get_msk = _get_msk,
+++				.get_auth = _get_auth,
++ 				.get_identifier = _get_identifier,
++ 				.set_identifier = _set_identifier,
++ 				.destroy = _destroy,
++@@ -147,7 +191,7 @@ static private_eap_peap_t *eap_peap_create_empty(void)
++ /**
++  * Generic private constructor
++  */
++-static eap_peap_t *eap_peap_create(private_eap_peap_t * this,
+++static eap_peap_t *eap_peap_create(private_eap_peap_t *this,
++ 								   identification_t *server,
++ 								   identification_t *peer, bool is_server,
++ 								   tls_application_t *application)
++@@ -157,6 +201,9 @@ static eap_peap_t *eap_peap_create(private_eap_peap_t * this,
++ 	bool include_length;
++ 	tls_t *tls;
++ 
+++	this->is_server = is_server;
+++	this->impl.application = application;
+++
++ 	if (is_server && !lib->settings->get_bool(lib->settings,
++ 								"%s.plugins.eap-peap.request_peer_auth", FALSE,
++ 								lib->ns))
++diff --git a/src/libcharon/plugins/eap_peap/eap_peap_peer.c b/src/libcharon/plugins/eap_peap/eap_peap_peer.c
++index 95213a3..f6c087a 100644
++--- a/src/libcharon/plugins/eap_peap/eap_peap_peer.c
+++++ b/src/libcharon/plugins/eap_peap/eap_peap_peer.c
++@@ -52,6 +52,11 @@ struct private_eap_peap_peer_t {
++ 	 */
++ 	eap_method_t *ph2_method;
++ 
+++	/**
+++	 * Auth data for phase 2 methods
+++	 */
+++	auth_cfg_t *auth;
+++
++ 	/**
++      * Pending outbound EAP message
++ 	 */
++@@ -166,6 +171,12 @@ METHOD(tls_application_t, process, status_t,
++ 	switch (status)
++ 	{
++ 		case SUCCESS:
+++			if (this->ph2_method->get_auth)
+++			{
+++				this->auth->merge(this->auth,
+++								  this->ph2_method->get_auth(this->ph2_method),
+++								  FALSE);
+++			}
++ 			this->ph2_method->destroy(this->ph2_method);
++ 			this->ph2_method = NULL;
++ 			/* fall through to NEED_MORE */
++@@ -220,11 +231,18 @@ METHOD(tls_application_t, build, status_t,
++ 	return INVALID_STATE;
++ }
++ 
+++METHOD(eap_peap_peer_t, get_auth, auth_cfg_t*,
+++	private_eap_peap_peer_t *this)
+++{
+++	return this->auth;
 ++}
 ++
-++// A serialized 1-D NT_LSTM network: header with the given ni/no, na_,
-++// then the four gates CI, GI, GF1, GO (GFS is not serialized for 1-D).
-++std::vector<char> MakeLstmNetwork(int ni, int no, int32_t na,
-++                                  const int32_t gate_dim1[4], const int32_t gate_dim2[4]) {
-++  ByteWriter w;
-++  w.PutU8(static_cast<uint32_t>(NT_LSTM));
-++  w.PutU8(0); // training: TS_DISABLED
-++  w.PutU8(0); // needs_to_backprop
-++  w.PutU32(0); // network_flags
-++  w.PutU32(static_cast<uint32_t>(ni));
-++  w.PutU32(static_cast<uint32_t>(no));
-++  w.PutU32(0); // num_weights
-++  w.PutU32(0); // name (empty string)
-++  w.PutS32(na);
-++  for (int g = 0; g < 4; ++g) {
-++    PutGateMatrix(&w, gate_dim1[g], gate_dim2[g]);
-++  }
-++  return w.data();
++ METHOD(tls_application_t, destroy, void,
++ 	private_eap_peap_peer_t *this)
++ {
++ 	this->server->destroy(this->server);
++ 	this->peer->destroy(this->peer);
+++	this->auth->destroy(this->auth);
++ 	DESTROY_IF(this->ph2_method);
++ 	DESTROY_IF(this->out);
++ 	this->avp->destroy(this->avp);
++@@ -247,10 +265,12 @@ eap_peap_peer_t *eap_peap_peer_create(identification_t *server,
++ 				.build = _build,
++ 				.destroy = _destroy,
++ 			},
+++			.get_auth = _get_auth,
++ 		},
++ 		.server = server->clone(server),
++ 		.peer = peer->clone(peer),
++ 		.ph1_method = eap_method,
+++		.auth = auth_cfg_create(),
++ 		.avp = eap_peap_avp_create(FALSE),
++ 	);
++ 
++diff --git a/src/libcharon/plugins/eap_peap/eap_peap_peer.h b/src/libcharon/plugins/eap_peap/eap_peap_peer.h
++index 53c25cd..7d16957 100644
++--- a/src/libcharon/plugins/eap_peap/eap_peap_peer.h
+++++ b/src/libcharon/plugins/eap_peap/eap_peap_peer.h
++@@ -38,6 +38,13 @@ struct eap_peap_peer_t {
++ 	 * Implements the TLS application data handler.
++ 	 */
++ 	tls_application_t application;
+++
+++	/**
+++	 * Get authentication details of this EAP method and its inner method(s).
+++	 *
+++	 * @return				auth method, internal data
+++	 */
+++	auth_cfg_t *(*get_auth)(eap_peap_peer_t *this);
++ };
++ 
++ /**
++diff --git a/src/libcharon/plugins/eap_peap/eap_peap_server.c b/src/libcharon/plugins/eap_peap/eap_peap_server.c
++index 29ab9b4..388c3c6 100644
++--- a/src/libcharon/plugins/eap_peap/eap_peap_server.c
+++++ b/src/libcharon/plugins/eap_peap/eap_peap_server.c
++@@ -20,6 +20,8 @@
++ #include <utils/debug.h>
++ #include <daemon.h>
++ 
+++#include <sa/eap/eap_inner_method.h>
+++
++ typedef struct private_eap_peap_server_t private_eap_peap_server_t;
++ 
++ /**
++@@ -77,6 +79,16 @@ struct private_eap_peap_server_t {
++ 	 */
++ 	eap_method_t *ph2_method;
++ 
+++	/**
+++	 * Type of the completed phase 2 EAP method
+++	 */
+++	eap_type_t phase2_type;
+++
+++	/**
+++	 * Auth data for phase 2 method
+++	 */
+++	auth_cfg_t *auth;
+++
++ 	/**
++      * Pending outbound EAP message
++ 	 */
++@@ -132,8 +144,11 @@ static status_t start_phase2_auth(private_eap_peap_server_t *this)
++ /**
++  * If configured, start EAP-TNC protocol
++  */
++-static status_t start_phase2_tnc(private_eap_peap_server_t *this)
+++static status_t start_phase2_tnc(private_eap_peap_server_t *this,
+++								 eap_type_t auth_type)
++ {
+++	eap_inner_method_t *inner_method;
+++
++ 	if (this->start_phase2_tnc && lib->settings->get_bool(lib->settings,
++ 						"%s.plugins.eap-peap.phase2_tnc", FALSE, lib->ns))
++ 	{
++@@ -145,6 +160,8 @@ static status_t start_phase2_tnc(private_eap_peap_server_t *this)
++ 			DBG1(DBG_IKE, "%N method not available", eap_type_names, EAP_TNC);
++ 			return FAILED;
++ 		}
+++		inner_method = (eap_inner_method_t *)this->ph2_method;
+++		inner_method->set_auth_type(inner_method, auth_type);
++ 		this->start_phase2_tnc = FALSE;
++ 
++ 		/* synchronize EAP message identifiers of inner protocol with outer */
++@@ -218,9 +235,13 @@ METHOD(tls_application_t, process, status_t,
++ 		DBG1(DBG_IKE, "received tunneled EAP-PEAP AVP [EAP/%N]",
++ 								eap_code_short_names, code);
++ 		in->destroy(in);
++-		/* if EAP_SUCCESS check if to continue phase2 with EAP-TNC */
++-		return (this->phase2_result == EAP_SUCCESS && code == EAP_SUCCESS) ?
++-			   start_phase2_tnc(this) : FAILED;
+++		if (this->phase2_result == EAP_SUCCESS && code == EAP_SUCCESS)
+++		{
+++			/* only accept SUCCESS once after a successful inner method */
+++			this->phase2_result = EAP_FAILURE;
+++			return start_phase2_tnc(this, this->phase2_type);
+++		}
+++		return FAILED;
++ 	}
++ 
++ 	if (this->ph2_method)
++@@ -245,6 +266,10 @@ METHOD(tls_application_t, process, status_t,
++ 	if (!received_vendor && received_type == EAP_IDENTITY)
++ 	{
++ 		chunk_t eap_id;
+++		bool peer_auth;
+++
+++		peer_auth = lib->settings->get_bool(lib->settings,
+++					"%s.plugins.eap-peap.request_peer_auth", FALSE, lib->ns);
++ 
++ 		if (this->ph2_method == NULL)
++ 		{
++@@ -271,9 +296,22 @@ METHOD(tls_application_t, process, status_t,
++ 
++ 		if (this->ph2_method->get_msk(this->ph2_method, &eap_id) == SUCCESS)
++ 		{
++-			this->peer->destroy(this->peer);
++-			this->peer = identification_create_from_data(eap_id);
++-			DBG1(DBG_IKE, "received EAP identity '%Y'", this->peer);
+++			identification_t *id;
+++
+++			id = identification_create_from_data(eap_id);
+++			if (peer_auth && !id->equals(id, this->peer))
+++			{
+++				DBG1(DBG_IKE, "received tunneled EAP identity '%Y', keeping "
+++					 "certificate-authenticated identity '%Y'", id, this->peer);
+++				id->destroy(id);
+++			}
+++			else
+++			{
+++				DBG1(DBG_IKE, "received EAP identity '%Y'", id);
+++				this->auth->add(this->auth, AUTH_RULE_EAP_IDENTITY, id);
+++				this->peer->destroy(this->peer);
+++				this->peer = id->clone(id);
+++			}
++ 		}
++ 
++ 		in->destroy(in);
++@@ -281,10 +319,9 @@ METHOD(tls_application_t, process, status_t,
++ 		this->ph2_method = NULL;
++ 
++ 		/* Start Phase 2 of EAP-PEAP authentication */
++-		if (lib->settings->get_bool(lib->settings,
++-					"%s.plugins.eap-peap.request_peer_auth", FALSE, lib->ns))
+++		if (peer_auth)
++ 		{
++-			return start_phase2_tnc(this);
+++			return start_phase2_tnc(this, EAP_TLS);
++ 		}
++ 		else
++ 		{
++@@ -305,11 +342,26 @@ METHOD(tls_application_t, process, status_t,
++ 	switch (status)
++ 	{
++ 		case SUCCESS:
+++			if (this->ph2_method->get_auth)
+++			{
+++				identification_t *id;
+++				auth_cfg_t *auth;
+++
+++				auth = this->ph2_method->get_auth(this->ph2_method);
+++				id = auth->get(auth, AUTH_RULE_EAP_IDENTITY);
+++				if (id)
+++				{
+++					this->peer->destroy(this->peer);
+++					this->peer = id->clone(id);
+++				}
+++				this->auth->merge(this->auth, auth, FALSE);
+++			}
++ 			DBG1(DBG_IKE, "%N phase2 authentication of '%Y' with %N successful",
++ 							eap_type_names, EAP_PEAP, this->peer,
++ 							eap_type_names, type);
++ 			this->ph2_method->destroy(this->ph2_method);
++ 			this->ph2_method = NULL;
+++			this->phase2_type = type;
++ 
++ 			/* EAP-PEAP requires the sending of an inner EAP_SUCCESS message */
++ 			this->phase2_result = EAP_SUCCESS;
++@@ -407,11 +459,18 @@ METHOD(eap_peap_server_t, set_tls, void,
++ 	this->tls = tls;
++ }
++ 
+++METHOD(eap_peap_server_t, get_auth, auth_cfg_t*,
+++	private_eap_peap_server_t *this)
+++{
+++	return this->auth;
 ++}
 ++
-++// Builds the input a standalone LSTM layer would receive: one row of
-++// the given width with ni features.
-++NetworkIO MakeInput(int ni, int width) {
-++  StrideMap stride_map;
-++  stride_map.SetStride({{1, width}});
-++  NetworkIO input;
-++  input.ResizeToMap(false, stride_map, ni);
-++  return input;
++ METHOD(tls_application_t, destroy, void,
++ 	private_eap_peap_server_t *this)
++ {
++ 	this->server->destroy(this->server);
++ 	this->peer->destroy(this->peer);
+++	this->auth->destroy(this->auth);
++ 	DESTROY_IF(this->ph2_method);
++ 	DESTROY_IF(this->out);
++ 	this->avp->destroy(this->avp);
++@@ -435,10 +494,12 @@ eap_peap_server_t *eap_peap_server_create(identification_t *server,
++ 				.destroy = _destroy,
++ 			},
++ 			.set_tls = _set_tls,
+++			.get_auth = _get_auth,
++ 		},
++ 		.server = server->clone(server),
++ 		.peer = peer->clone(peer),
++ 		.ph1_method = eap_method,
+++		.auth = auth_cfg_create(),
++ 		.start_phase2 = TRUE,
++ 		.start_phase2_tnc = TRUE,
++ 		.start_phase2_id = lib->settings->get_bool(lib->settings,
++diff --git a/src/libcharon/plugins/eap_peap/eap_peap_server.h b/src/libcharon/plugins/eap_peap/eap_peap_server.h
++index 3abe88b..8080e9f 100644
++--- a/src/libcharon/plugins/eap_peap/eap_peap_server.h
+++++ b/src/libcharon/plugins/eap_peap/eap_peap_server.h
++@@ -47,6 +47,13 @@ struct eap_peap_server_t {
++ 	 * @param tls		TLS connection
++ 	 */
++ 	void (*set_tls)(eap_peap_server_t *this, tls_t *tls);
+++
+++	/**
+++	 * Get authentication details of this EAP method and its inner method(s).
+++	 *
+++	 * @return				auth method, internal data
+++	 */
+++	auth_cfg_t *(*get_auth)(eap_peap_server_t *this);
++ };
++ 
++ /**
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls.c b/src/libcharon/plugins/eap_ttls/eap_ttls.c
++index d8ad781..3df78bb 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls.c
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls.c
++@@ -40,6 +40,25 @@ struct private_eap_ttls_t {
++ 	 * TLS stack, wrapped by EAP helper
++ 	 */
++ 	tls_eap_t *tls_eap;
+++
+++	/**
+++	 * Role
+++	 */
+++	bool is_server;
+++
+++	/**
+++	 * Actual server/client implementation
+++	 */
+++	union {
+++		tls_application_t *application;
+++		eap_ttls_server_t *server;
+++		eap_ttls_peer_t *client;
+++	} impl;
+++
+++	/**
+++	 * Cached auth data for TLS and inner EAP methods
+++	 */
+++	auth_cfg_t *auth;
++ };
++ 
++ /** Maximum number of EAP-TTLS messages/fragments allowed */
++@@ -116,13 +135,31 @@ METHOD(eap_method_t, is_mutual, bool,
++ METHOD(eap_method_t, get_auth, auth_cfg_t*,
++ 	private_eap_ttls_t *this)
++ {
++-	return this->tls_eap->get_auth(this->tls_eap);
+++	if (!this->auth)
+++	{
+++		auth_cfg_t *inner;
+++
+++		this->auth = auth_cfg_create();
+++		this->auth->merge(this->auth,
+++						  this->tls_eap->get_auth(this->tls_eap), FALSE);
+++		if (this->is_server)
+++		{
+++			inner = this->impl.server->get_auth(this->impl.server);
+++		}
+++		else
+++		{
+++			inner = this->impl.client->get_auth(this->impl.client);
+++		}
+++		this->auth->merge(this->auth, inner, FALSE);
+++	}
+++	return this->auth;
++ }
++ 
++ METHOD(eap_method_t, destroy, void,
++ 	private_eap_ttls_t *this)
++ {
++ 	this->tls_eap->destroy(this->tls_eap);
+++	DESTROY_IF(this->auth);
++ 	free(this);
++ }
++ 
++@@ -153,6 +190,10 @@ static eap_ttls_t *eap_ttls_create(identification_t *server,
++ 				.destroy = _destroy,
++ 			},
++ 		},
+++		.is_server = is_server,
+++		.impl = {
+++			.application = application,
+++		},
++ 	);
++ 	if (is_server && !lib->settings->get_bool(lib->settings,
++ 								"%s.plugins.eap-ttls.request_peer_auth", FALSE,
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_peer.c b/src/libcharon/plugins/eap_ttls/eap_ttls_peer.c
++index 63126a5..f8229f5 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_peer.c
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_peer.c
++@@ -54,6 +54,11 @@ struct private_eap_ttls_peer_t {
++ 	 */
++ 	eap_method_t *method;
++ 
+++	/**
+++	 * Auth data for phase 2 method
+++	 */
+++	auth_cfg_t *auth;
+++
++ 	/**
++      * Pending outbound EAP message
++ 	 */
++@@ -215,6 +220,11 @@ METHOD(tls_application_t, process, status_t,
++ 	switch (status)
++ 	{
++ 		case SUCCESS:
+++			if (this->method->get_auth)
+++			{
+++				this->auth->merge(this->auth,
+++								  this->method->get_auth(this->method), FALSE);
+++			}
++ 			this->method->destroy(this->method);
++ 			this->method = NULL;
++ 			/* fall through to NEED_MORE */
++@@ -275,11 +285,18 @@ METHOD(tls_application_t, build, status_t,
++ 	return INVALID_STATE;
++ }
++ 
+++METHOD(eap_ttls_peer_t, get_auth, auth_cfg_t*,
+++	private_eap_ttls_peer_t *this)
+++{
+++	return this->auth;
 ++}
 ++
-++// Runs Forward on the loaded network; on unpatched code the out-of-
-++// bounds access this regression test guards against fires here.
-++void RunForward(Network *net, int ni, int width) {
-++  NetworkIO input = MakeInput(ni, width);
-++  NetworkScratch scratch;
-++  NetworkIO output;
-++  net->Forward(false, input, nullptr, &scratch, &output);
-++  delete net;
++ METHOD(tls_application_t, destroy, void,
++ 	private_eap_ttls_peer_t *this)
++ {
++ 	this->server->destroy(this->server);
++ 	this->peer->destroy(this->peer);
+++	this->auth->destroy(this->auth);
++ 	DESTROY_IF(this->method);
++ 	DESTROY_IF(this->out);
++ 	this->avp->destroy(this->avp);
++@@ -301,10 +318,12 @@ eap_ttls_peer_t *eap_ttls_peer_create(identification_t *server,
++ 				.build = _build,
++ 				.destroy = _destroy,
++ 			},
+++			.get_auth = _get_auth,
++ 		},
++ 		.server = server->clone(server),
++ 		.peer = peer->clone(peer),
++ 		.start_phase2 = TRUE,
+++		.auth = auth_cfg_create(),
++ 		.avp = eap_ttls_avp_create(),
++ 	);
++ 
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_peer.h b/src/libcharon/plugins/eap_ttls/eap_ttls_peer.h
++index 0c3d90a..69a8435 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_peer.h
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_peer.h
++@@ -37,6 +37,13 @@ struct eap_ttls_peer_t {
++ 	 * Implements the TLS application data handler.
++ 	 */
++ 	tls_application_t application;
+++
+++	/**
+++	 * Get authentication details of this EAP method and its inner method(s).
+++	 *
+++	 * @return				auth method, internal data
+++	 */
+++	auth_cfg_t *(*get_auth)(eap_ttls_peer_t *this);
++ };
++ 
++ /**
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_server.c b/src/libcharon/plugins/eap_ttls/eap_ttls_server.c
++index fc97f81..e1de1bf 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_server.c
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_server.c
++@@ -60,6 +60,11 @@ struct private_eap_ttls_server_t {
++ 	 */
++ 	eap_method_t *method;
++ 
+++	/**
+++	 * Auth data for phase 2 method
+++	 */
+++	auth_cfg_t *auth;
+++
++ 	/**
++      * Pending outbound EAP message
++ 	 */
++@@ -220,6 +225,10 @@ METHOD(tls_application_t, process, status_t,
++ 	if (!received_vendor && received_type == EAP_IDENTITY)
++ 	{
++ 		chunk_t eap_id;
+++		bool peer_auth;
+++
+++		peer_auth = lib->settings->get_bool(lib->settings,
+++					"%s.plugins.eap-ttls.request_peer_auth", FALSE, lib->ns);
++ 
++ 		if (this->method == NULL)
++ 		{
++@@ -244,9 +253,22 @@ METHOD(tls_application_t, process, status_t,
++ 
++ 		if (this->method->get_msk(this->method, &eap_id) == SUCCESS)
++ 		{
++-			this->peer->destroy(this->peer);
++-			this->peer = identification_create_from_data(eap_id);
++-			DBG1(DBG_IKE, "received EAP identity '%Y'", this->peer);
+++			identification_t *id;
+++
+++			id = identification_create_from_data(eap_id);
+++			if (peer_auth && !id->equals(id, this->peer))
+++			{
+++				DBG1(DBG_IKE, "received tunneled EAP identity '%Y', keeping "
+++					 "certificate-authenticated identity '%Y'", id, this->peer);
+++				id->destroy(id);
+++			}
+++			else
+++			{
+++				DBG1(DBG_IKE, "received EAP identity '%Y'", id);
+++				this->auth->add(this->auth, AUTH_RULE_EAP_IDENTITY, id);
+++				this->peer->destroy(this->peer);
+++				this->peer = id->clone(id);
+++			}
++ 		}
++ 
++ 		in->destroy(in);
++@@ -254,8 +276,7 @@ METHOD(tls_application_t, process, status_t,
++ 		this->method = NULL;
++ 
++ 		/* Start Phase 2 of EAP-TTLS authentication */
++-		if (lib->settings->get_bool(lib->settings,
++-					"%s.plugins.eap-ttls.request_peer_auth", FALSE, lib->ns))
+++		if (peer_auth)
++ 		{
++ 			return start_phase2_tnc(this, EAP_TLS);
++ 		}
++@@ -278,6 +299,20 @@ METHOD(tls_application_t, process, status_t,
++ 	switch (status)
++ 	{
++ 		case SUCCESS:
+++			if (this->method->get_auth)
+++			{
+++				identification_t *id;
+++				auth_cfg_t *auth;
+++
+++				auth = this->method->get_auth(this->method);
+++				id = auth->get(auth, AUTH_RULE_EAP_IDENTITY);
+++				if (id)
+++				{
+++					this->peer->destroy(this->peer);
+++					this->peer = id->clone(id);
+++				}
+++				this->auth->merge(this->auth, auth, FALSE);
+++			}
++ 			DBG1(DBG_IKE, "%N phase2 authentication of '%Y' with %N successful",
++ 							eap_type_names, EAP_TTLS, this->peer,
++ 							eap_type_names, type);
++@@ -348,11 +383,18 @@ METHOD(tls_application_t, build, status_t,
++ 	return INVALID_STATE;
++ }
++ 
+++METHOD(eap_ttls_server_t, get_auth, auth_cfg_t*,
+++	private_eap_ttls_server_t *this)
+++{
+++	return this->auth;
 ++}
 ++
-++// na_ must equal ni_ + nf_ + ns_ for a 1-D LSTM; here na_=2 but the
-++// CI matrix makes ns_=64, so the layer must be rejected. On unpatched
-++// code Forward writes 64 floats at offset ni_=1 into a source_ buffer
-++// sized for na_=2 (heap out-of-bounds write).
-++TEST(LstmLayerTest, RejectsInconsistentNa) {
-++  const int32_t dim1[4] = {64, 64, 64, 64};
-++  const int32_t dim2[4] = {3, 3, 3, 3};
-++  std::vector<char> bytes = MakeLstmNetwork(1, 1, 2, dim1, dim2);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  if (net == nullptr) {
-++    return; // Fixed: the inconsistent layer is rejected at load.
-++  }
-++  RunForward(net, 1, 2);
-++  FAIL() << "crafted LSTM layer with inconsistent na_ was accepted";
-++}
++ METHOD(tls_application_t, destroy, void,
++ 	private_eap_ttls_server_t *this)
++ {
++ 	this->server->destroy(this->server);
++ 	this->peer->destroy(this->peer);
+++	this->auth->destroy(this->auth);
++ 	DESTROY_IF(this->method);
++ 	DESTROY_IF(this->out);
++ 	this->avp->destroy(this->avp);
++@@ -374,11 +416,13 @@ eap_ttls_server_t *eap_ttls_server_create(identification_t *server,
++ 				.build = _build,
++ 				.destroy = _destroy,
++ 			},
+++			.get_auth = _get_auth,
++ 		},
++ 		.server = server->clone(server),
++-		.peer = peer->clone(peer),
+++		.auth = auth_cfg_create(),
++ 		.start_phase2 = TRUE,
++ 		.start_phase2_tnc = TRUE,
+++		.peer = peer->clone(peer),
++ 		.avp = eap_ttls_avp_create(),
++ 	);
++ 
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_server.h b/src/libcharon/plugins/eap_ttls/eap_ttls_server.h
++index 1e13f55..3348706 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_server.h
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_server.h
++@@ -37,6 +37,13 @@ struct eap_ttls_server_t {
++ 	 * Implements the TLS application data handler.
++ 	 */
++ 	tls_application_t application;
 ++
-++// All gate matrices must have dim1 == ns_; here the GI matrix has
-++// dim1=9 while ns_=5. On unpatched code the GI gate dot product writes
-++// 9 results into a temp line sized for 5 (heap out-of-bounds write).
-++TEST(LstmLayerTest, RejectsGateDim1Mismatch) {
-++  const int32_t dim1[4] = {5, 9, 5, 5};
-++  const int32_t dim2[4] = {7, 7, 7, 7};
-++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  if (net == nullptr) {
-++    return; // Fixed: the inconsistent layer is rejected at load.
-++  }
-++  RunForward(net, 1, 2);
-++  FAIL() << "crafted LSTM layer with inconsistent gate dim1 was accepted";
-++}
-++
-++// All gate matrices must have dim2 == na_ + 1; here the GI matrix has
-++// dim2=9 while na_=6. On unpatched code the GI gate dot product reads
-++// 8 inputs from a buffer sized for 6 (heap out-of-bounds read).
-++TEST(LstmLayerTest, RejectsGateDim2Mismatch) {
-++  const int32_t dim1[4] = {5, 5, 5, 5};
-++  const int32_t dim2[4] = {7, 9, 7, 7};
-++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  if (net == nullptr) {
-++    return; // Fixed: the inconsistent layer is rejected at load.
-++  }
-++  RunForward(net, 1, 2);
-++  FAIL() << "crafted LSTM layer with inconsistent gate dim2 was accepted";
-++}
-++
-++// A fully consistent 1-D LSTM layer must still be accepted and usable.
-++TEST(LstmLayerTest, AcceptsConsistentLayer) {
-++  const int32_t dim1[4] = {5, 5, 5, 5};
-++  const int32_t dim2[4] = {7, 7, 7, 7};
-++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  ASSERT_NE(net, nullptr);
-++  RunForward(net, 1, 2);
-++}
-++
-++} // namespace
-++} // namespace tesseract
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
-index a8b3e55c7d..df6ff11d78 100644
---- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.2.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
-            file://CVE-2026-73067-2.patch \
-            file://CVE-2026-88052.patch \
-            file://CVE-2026-88048.patch \
-+           file://CVE-2026-88049.patch \
+++	/**
+++	 * Get authentication details of this EAP method and its inner method(s).
+++	 *
+++	 * @return				auth method, internal data
+++	 */
+++	auth_cfg_t *(*get_auth)(eap_ttls_server_t *this);
++ };
++ 
++ /**
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_6.0.6.bb b/meta-networking/recipes-support/strongswan/strongswan_6.0.6.bb
+index 5ddc3c32b9..5421ecf8f9 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_6.0.6.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_6.0.6.bb
+@@ -20,6 +20,7 @@ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://CVE-2026-78130.patch \
+            file://CVE-2026-78132.patch \
+            file://CVE-2026-78135.patch \
++           file://CVE-2026-78134.patch \
  "
  
- 
+ SRC_URI[sha256sum] = "07df7cedae56a7f3bb07e66d21a1f9f87e961db70e99184e11d3819413e4f87c"
 
