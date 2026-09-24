@@ -1,127 +1,107 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66AF5C9830E
-	for <webhook@archiver.kernel.org>; Thu, 24 Sep 2026 08:22:32 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3048.1790238148431956502
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A5CBC98314
+	for <webhook@archiver.kernel.org>; Thu, 24 Sep 2026 12:58:55 +0000 (UTC)
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7282.1790254734676039355
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2026 01:22:28 -0700
+ Thu, 24 Sep 2026 05:58:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=vuBPpWHH;
- spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd82.aul.t-online.de (fwd82.aul.t-online.de [10.223.144.108])
-	by mailout03.t-online.de (Postfix) with SMTP id 2194FDEBC
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 10:22:26 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.161.151]) by fwd82.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1x9eim-3pe6YS0; Thu, 24 Sep 2026 10:22:24 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kerV3ru0;
+ spf=pass (domain: konsulko.com, ip: 74.125.225.141, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b912d37b6so11554445e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 05:58:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1790254733; x=1790859533; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fjNRub04fx2y6EnRxvOFGr1RN6HlpyoRdblf8Ye1rcY=;
+        b=kerV3ru03v6L9CZBWxB1hWOKskh9nEBIHYzw7V5LMtnxeplvnnbdkRW59i+xiQX1R0
+         qxKiNo9ru5mZU6ytefjFL0qmyC3hS21/tG961VPYTDxc/6KZJpYxcb7+5in1m+RYB4Bj
+         jskZZAwm1aw1ISuszGjph6Ld3A6NcB796S68s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790254733; x=1790859533;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fjNRub04fx2y6EnRxvOFGr1RN6HlpyoRdblf8Ye1rcY=;
+        b=zLr2RbDJgF1gA+7kjTFywtxTmeI5kH41on1mggKHTGP6RekZ2FQqiMM61zHA/kvhCZ
+         J74ZGI6srVTOUN5y/NoXGU1JS7aE7uoO5h0ewxUQnm0RbZmgimByEQUPQ7wmYaTcFrWy
+         /nIqDdA7QOz38l2QcJrGMzr29uapzzqzKhLZ+COEKZpaMoJpCkLrRphdotZXcdyOJrIC
+         /p6YIICDmZlSpvJVGtcAaQuiUvgVcJXhw0LlhC4yyOVSbhGxp1JFWHOwybA6mFq0q0Em
+         57nBACNZiWdCxx9nDi5n5PaO/Nq0Fi90fZVD/8AVFg9Ijzf0TBY4aMqYHZtbD88Xkbs/
+         IRXA==
+X-Gm-Message-State: AFuF++mQISvelylwdM6upOxuTGc6MlamT+SK/Qx7+8hjDbO8hxqf9Uli
+	atNoF9fQQX9o9BsWC207ZVsnkzR4jSmAhPxUSJuvIjVGLlkQxbtWhTHgglxbrB6id3P8VnvHdz8
+	7/ghD
+X-Gm-Gg: AYBFou3UW4U2dWyLygZ2ea8Dqr4edOJ9KNA9Y8fbsVM6vilAchA2CrSLMwZXcAzXLbU
+	W/Kr/0vtSJ8WloGNKl/32Xf7jD6Soe/5yYMtjkLmY8wvGzR4EoDzKAu3F5he6+AyFmD9mn1ErGt
+	5/X1ZlqlwQ0i8ZADemBnsw20stMyzjkbuqIuPibIPLfK0iRh/NfVyBgw3G8yLYD/fOeg0+HEFb0
+	Eqmx3ifWjaSzAHu4upnbksQF0N4xny9HMnHqUF09BPyQ6ke6ChLjGZ7uBFnFLUyr04lno7iRZ8U
+	UBzrrq4DfPXY/xcL98ZsviJoWZxfl0nCrBAB70BXFPfSO0D7qkOYuPAXiAktqel+OcP1U0Arkg6
+	edawE7AKmAh1r0rG3QzCG2RHWifVhNSZ63Lu38rI+1foh17uX48Oxi/ryt0tfXphaNHmqyeJpgt
+	wCDLBZp/18xycOrQFwTQArUFcVUnttNXGpvQzksFflw8QZHBqPJEi90medKPSzMrgqrsC8895Mm
+	+3iAlyJdYCY4ZS8nogu117y+gwKZJfI911BL86l2XrbpRnnQWL0Qw2hmyWMFo3zxE/UUpMNM+C3
+	eK0cKYQp54PAH/BZaZFicx0=
+X-Received: by 2002:a05:600c:8719:b0:49e:6c11:c4fc with SMTP id 5b1f17b1804b1-49fe66c8a5amr42467045e9.7.1790254732660;
+        Thu, 24 Sep 2026 05:58:52 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5ded2b7sm63956605e9.10.2026.09.24.05.58.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 05:58:52 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv2] sushi: add recipe
-Date: Thu, 24 Sep 2026 10:22:17 +0200
-Message-ID: <20260924082217.460250-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-pydantic: Upgrade 2.13.4 -> 2.13.5
+Date: Thu, 24 Sep 2026 15:58:47 +0300
+Message-ID: <20260924125848.526537-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260924125848.526537-1-leon.anavi@konsulko.com>
+References: <20260924125848.526537-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790238144-17FFC98F-071B406A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7cea9976-7a74-4f18-82eb-c650595a7d6e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1790238146; i=f_l_k@t-online.de;
-	bh=YIM/Up2875G/YzeDVcpUGe6onqZVc4rz358p9wOETE8=;
-	h=From:To:Subject:Date;
-	b=vuBPpWHHU8ct0n6aWhO5BqK9+XNadTQF9Gms/d3ZArbjBq8aAstrlAlD7DIyjilpU
-	 y0vysuCogyqd5qUe5IPEcD+TJFXHpG2Cy2Hr0iDY2LLKGLsXSiplGiudu7L7kyYpHi
-	 R5udT2s2WwLNGzwbJCGgESpvQ+VK1YV3cWB1Pdi/frBzEfIGXvRTM+OEEg9DnQOV17
-	 ftJq6K8T/WwdMLDAXDuGBPiNpKlsYocrCxgeAG/bmcz8govGxZbtHrxemlLkcskcnv
-	 Pz5pxy0ybUkacroqkxsxOPGHb+gaZX2SNNYNWFozS16nShjdmpUprdKK5qWLsludAh
-	 PMJ0cvdfpUkSw==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 08:22:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130283
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 12:58:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130285
 
-Quick previewer for Nautilus, started over D-Bus when a file is
-selected and space is pressed. It is a gjs application, so meson is
-told where gjs and env live on the target through a cross file, which
-also keeps the build host paths out of the two wrapper scripts.
+Upgrade to release 2.13.5:
 
-AI-Generated: Uses Claude Code (Claude Fable 5.1)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+- Allow reuse of validators when plugins are set
+- Fix missing GC traversal on some pydantic-core struct fields
+- Fix missing GC traversal in pydantic-core for
+  GeneralFieldsSerializer
+- Count validated model fields once in smart unions
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-gnome/recipes-gnome/sushi/sushi_51.1.bb | 55 ++++++++++++++++++++
- 1 file changed, 55 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
+ .../{python3-pydantic_2.13.4.bb => python3-pydantic_2.13.5.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pydantic_2.13.4.bb => python3-pydantic_2.13.5.bb} (98%)
 
-diff --git a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb b/meta-gnome/re=
-cipes-gnome/sushi/sushi_51.1.bb
-new file mode 100644
-index 0000000000..8af34b2f26
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-@@ -0,0 +1,55 @@
-+SUMMARY =3D "Quick previewer for Nautilus"
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/sushi"
-+SECTION =3D "x11/gnome"
-+
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8a935b4d9a4fa8aa5978b50a432f8=
-33e"
-+
-+DEPENDS =3D " \
-+    blueprint-compiler-native \
-+    freetype \
-+    fribidi \
-+    gjs \
-+    glib-2.0 \
-+    glycin \
-+    gstreamer1.0 \
-+    gstreamer1.0-plugins-base \
-+    gtk4 \
-+    gtksourceview5 \
-+    harfbuzz \
-+    libadwaita \
-+    papers \
-+    webkitgtk \
-+"
-+
-+inherit gnomebase gobject-introspection gettext features_check
-+
-+GIR_MESON_OPTION =3D ""
-+
-+REQUIRED_DISTRO_FEATURES =3D "opengl gobject-introspection-data"
-+
-+SRC_URI[archive.sha256sum] =3D "d326ec69fc004be3a5fc048f7ecf2c8eb828b7d8=
-b682f1e7a2ba01a5e72993e1"
-+
-+export GI_TYPELIB_PATH =3D "${STAGING_LIBDIR}/girepository-1.0/"
-+
-+PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11'=
-, d)}"
-+PACKAGECONFIG[wayland] =3D "-Dwayland=3Denabled,-Dwayland=3Ddisabled"
-+PACKAGECONFIG[x11] =3D "-DX11=3Denabled,-DX11=3Ddisabled,virtual/libx11"
-+
-+EXTRA_OEMESON +=3D "--cross-file=3D${WORKDIR}/meson-${PN}.cross"
-+
-+do_write_config:append() {
-+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-+[binaries]
-+env =3D '${base_bindir}/env'
-+gjs =3D '${bindir}/gjs'
-+EOF
-+}
-+
-+FILES:${PN} +=3D " \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/metainfo \
-+    ${libdir}/sushi \
-+"
-+
-+RDEPENDS:${PN} +=3D "gjs glycin-gtk4 gtksourceview5 libadwaita webkitgtk=
-"
---=20
-2.55.0
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.13.5.bb
+similarity index 98%
+rename from meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb
+rename to meta-python/recipes-devtools/python/python3-pydantic_2.13.5.bb
+index 17a6941d14..7c5dcdcb26 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.13.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic_2.13.5.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
+ 
+ inherit python_hatchling ptest-python-pytest
+ 
+-SRCREV = "cf67d4b3193c3fe43ede18612ed62785eee11382"
++SRCREV = "001dea020e0809844e5b17666432c9135a976f46"
+ PV .= "+git"
+ SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=v2.13-fixes"
+ DEPENDS += "python3-hatch-fancy-pypi-readme-native"
+-- 
+2.47.3
 
 
