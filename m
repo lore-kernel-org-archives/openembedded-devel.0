@@ -1,144 +1,154 @@
-Return-Path: <jaipaul.cheernam@est.tech>
+Return-Path: <mark.jonas@de.bosch.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80D05C98328
-	for <webhook@archiver.kernel.org>; Fri, 25 Sep 2026 11:44:54 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.23])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6135.1790336683674481949
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CBFDC9830D
+	for <webhook@archiver.kernel.org>; Fri, 25 Sep 2026 13:40:28 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.0])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8332.1790343626192372712
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Sep 2026 04:44:44 -0700
+ Fri, 25 Sep 2026 06:40:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=yiCxyy+s;
- spf=pass (domain: est.tech, ip: 52.101.65.23, mailfrom: jaipaul.cheernam@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=S7zwYcvY;
+ spf=pass (domain: de.bosch.com, ip: 52.101.66.0, mailfrom: mark.jonas@de.bosch.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VY6Er5SQSsTM0gIY2G4IDPI7xJVGd89Odt6gimgv75qxJedLFQREcsT67fdBF+fjqlg+IruIdrBxWYp+mkNzCY9RGohuTCabtp5s2oBhSo2rRbxgdjAtAmsuEoq0W9LOhh9r2R31LiTs0JEAnNxCYqj1TDDrrxHECgoyZGoJ068G/ceD++GE1R8xiwER5IssDCDJB+B1CE4TDyuR6Shw97xvx3qASPaopWQ0yYGULK/WEx8h3T7GaYCi0R2vxsqybc59LwCqzMKKJSVjuUZrMzc8qgg93ZW30bPu1/nLmiSsaGZuiQ2YqzsO6vBz7D/kBTsrQlbStXaNZF+Fjo9oXQ==
+ b=SajaZbXZ5qpZWr7Xrz85EA0VmFN0b3s9wYRKIoofmEy6DQNCDl362YrnRVx7ld2Bnqs/4nR7YGGpPIvy9TVbDd/lWtdWes9qqcwBFQyi2oXgQWrWNMk0a4Vj4JCucd4V/2Pm+wuU3WxQRICGqlfHO4tu0bs/URcCYpquC/c6XZCtNncqAHJo8yjLkQI7mCB2hlzPLGjHF/5Xl4zpnFH8pxZMu/ljdh9c6tLMh+W1anhisL9tHB5dx914CPQbYjiqnrmx1hH7IKarJy+vrC9UT3c07jcGBWJlOaz+BrehLNhIC4tgBg/oarZTk9Ez5OVEfaXUCUP2IKoR7LE/VPVyPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CXY7qTAuTxEDHdtEeakBswby0sVj4jjm/5fqjxMWE2k=;
- b=RAf0kxuPQucrp3N2vYL5tEKkFZYEuAF+qW1lvucwZ8/7I/ruAimUahQb0lFsZ4YOYVthcQzHLDJWy/+qyUdBQ45qsz64cNYlP84O7ADcZdv6zWTTrsGJMBJdBoxp3adfCl1gjxM4HCI4zPTXqL69dCgfgwGOSooLA3d7cDWMd9rPWmmDfeIv7EKd6RJX3t6t2VWLVIJB1xA5Z3rlGhQ+3wl+K/PmQ1TSqHAu2V023lxxVRmznrX4E/slX4Z/TzAZoHZM1Nn85GSgPWIki5gcpocKlZgl1MY05VI5ZxbiKFya2V8Yz4SWxIxebpahFzGJCev/4aMhVGHk36EZpSAx4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
- dkim=pass header.d=est.tech; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
+ bh=rsDxQ7Eo2I0ly/E5qkvNyV5aaA6L3mkIAuyuFqndthc=;
+ b=lGotMNNmzv/ULxhRzAr/e2IRUHP68REtVIm4nlfq1JXfTmbZpfepnvPHxi+XK6rLlen9t5xrX1JpGHNjzWYEHSIrAgykKjheREvL7vcGN2n4hNbz/nSvRrrJo7fsExmyRWs3mpN1dIpSikLtqU2iCs3wa/RebUWjfmGNqWLIgKj3pnMEkLQY2E6WD8BJrSS0W2zbGi3lt9WLZPjMrXefhaVeWsjaJdV7ZQFrE0YN/qb4voq37vs6eUP8PVH6Jou2CNaqmM2Sey2+pem4GS7t9+BzJl2yPZOP6n/w/yQ5k/fw5a4BvOLNEg3fiznhYq9KjGlXWME1ALA62X4hQ5lGeQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 139.15.153.206) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
+ header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CXY7qTAuTxEDHdtEeakBswby0sVj4jjm/5fqjxMWE2k=;
- b=yiCxyy+stISVF7/sx3Kry+AN0AFR4EWONv48kQ4q0G54C6gOC4o6Cr3oD810xY9prsPfXKvMm9NqMJFzF4AW4liF4a5sgckS1tXdwbfCHQ6jIccvyDkh980zb9V1eb0lOa81R33Kn5nHlbnQUlyI9au9g7BzNve0oHxMGH6MzKJpCh0gaoaHy6atYN2Yq3PYTGZDbdKhOMG20ZLZEueOGb8VxPUeJyZV9azEOgCrHCPkPPBcIYfTd6CFa0PTNXCWLcJb8WXTgn9pzQDfviQv9/zBsCxGTZokbN6JCKAupV5NMrTtq1C0gQjKg9PmgHdCRYCzydFG5YQ3roPn8BgjTA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=est.tech;
-Received: from AM6P189MB3107.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:6c0::19)
- by GV2P189MB2984.EURP189.PROD.OUTLOOK.COM (2603:10a6:150:269::11) with
+ bh=rsDxQ7Eo2I0ly/E5qkvNyV5aaA6L3mkIAuyuFqndthc=;
+ b=S7zwYcvYrhillx68+bI5fF7S8oQy7ZZ2VM1ny5Du4hjJMn7zsvm1Uqa/d+t6fpkkeKIqRNoLv03Tg8i4qgzhMbckQkc96i7zpeP+91NavkOsF0nCHdydCvuLce6vs0dGIRLFpGUkYpKlfx0T57VZtOGJPiX7N2uV+3ArWK46fG4qqOOYabxzccmspsvQhS4CQhPcoUvHpIiZvGg++zi5Bx5SJAp+6o3XbnN1htM4YsC0M3uq/A48tK/fOtv3ra6vkda/C5l9STYFm3T+7n1AS9vDU4Qc2KRMnCrM0duK8v/3RUCeBtyhSB2Vgb1uTrURpy4hUDws2GmH1EL60j9BsQ==
+Received: from DUZP191CA0002.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4f9::12)
+ by VI1PR10MB3200.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:130::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Fri, 25 Sep
- 2026 11:44:40 +0000
-Received: from AM6P189MB3107.EURP189.PROD.OUTLOOK.COM
- ([fe80::bc97:3847:8f02:acb]) by AM6P189MB3107.EURP189.PROD.OUTLOOK.COM
- ([fe80::bc97:3847:8f02:acb%6]) with mapi id 15.21.0451.014; Fri, 25 Sep 2026
- 11:44:39 +0000
-From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-To: openembedded-devel@lists.openembedded.org
-CC: Jaipaul Cheernam <jaipaul.cheernam@est.tech>,
-	Daniel Turull <daniel.turull@ericsson.com>
-Subject: [PATCH 2/4] libnetfilter-queue: add repo.or.cz as premirror
-Date: Fri, 25 Sep 2026 13:44:25 +0200
-Message-ID: <20260925114427.2889-3-jaipaul.cheernam@est.tech>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-In-Reply-To: <20260925114427.2889-1-jaipaul.cheernam@est.tech>
-References: <20260925114427.2889-1-jaipaul.cheernam@est.tech>
+ 2026 13:40:21 +0000
+Received: from DB1PEPF000509FF.eurprd03.prod.outlook.com
+ (2603:10a6:10:4f9:cafe::af) by DUZP191CA0002.outlook.office365.com
+ (2603:10a6:10:4f9::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.18 via Frontend Transport; Fri,
+ 25 Sep 2026 13:40:21 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 139.15.153.206) smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=de.bosch.com;
+Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
+ 139.15.153.206 as permitted sender) receiver=protection.outlook.com;
+ client-ip=139.15.153.206; helo=eop.bosch-org.com; pr=C
+Received: from eop.bosch-org.com (139.15.153.206) by
+ DB1PEPF000509FF.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Fri, 25 Sep 2026 13:40:21 +0000
+Received: from RNGMBX3003.de.bosch.com (10.124.11.208) by eop.bosch-org.com
+ (139.15.153.206) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 25 Sep
+ 2026 15:40:17 +0200
+Received: from GRB-C-0009M.ot.de.bosch.com (10.22.65.242) by
+ smtp.app.bosch.com (10.124.11.208) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Fri, 25 Sep 2026 15:40:17 +0200
+From: <mark.jonas@de.bosch.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <bartosz.golaszewski@oss.qualcomm.com>, <khem.raj@oss.qualcomm.com>,
+	Ricardo Simoes <ricardo.simoes@pt.bosch.com>, Mark Jonas
+	<mark.jonas@de.bosch.com>
+Subject: [meta-oe][PATCH 2/2] libgpiod: add missing CC0-1.0
+Date: Fri, 25 Sep 2026 15:39:29 +0200
+Message-ID: <20260925133929.1991-3-mark.jonas@de.bosch.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260925133929.1991-1-mark.jonas@de.bosch.com>
+References: <20260925133929.1991-1-mark.jonas@de.bosch.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: DU6P191CA0030.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:10:53f::9) To AM6P189MB3107.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:20b:6c0::19)
-MIME-Version: 1.0
+X-Originating-IP: [10.22.65.242]
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM6P189MB3107:EE_|GV2P189MB2984:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21765815-5d3e-4acb-dc27-08df1afa6107
-X-LD-Processed: d2585e63-66b9-44b6-a76e-4f4b217d97fd,ExtAddr
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509FF:EE_|VI1PR10MB3200:EE_
+X-MS-Office365-Filtering-Correlation-Id: db9d1dcb-df10-441f-71de-08df1b0a8b9f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|10067099003|3023799007|6133799003|56012099006|18002099003|22082099003|11063799006|13003099007;
-X-Microsoft-Antispam-Message-Info: 5SOS3cr0XLeo+0NLF+7JQyfEQ8Jav1Msr5tLncN4lOv8cog7GmdVVjk1+KDzm5WVcSYtsq80Qvns3nyi1Wat68eZeqkLWDLXx641+czt3GGdAQxw8cl0f3DniTfilCwLDSgEy1BlFyZ0NRF3bzIixVBQ3VFGwucAc7/cguOqRhaHIZMy17k1odb0MaArvC/3jbB6snXDIm9nBTRJyK1CRjX27OyZn1HxcttH8wq2qKhxClgmf8fTzPyrMBblImJaSLra2eavhDxK/0w8ON3rHS7x53grdlUFz90EDSOV+YKeVzIvpV/VfJngD6Tr401jixdhxH8nU+gcUC6J7DEpc48alZPZkK+2GcE1IP6vUbFGEHgr4QM5dvz2tCJH/AcYOD3spS8uemJMrsDd/a7HS9cs/ICZU+PPApFjX6TujaRCP6N13KRz420QCMV3PzhzMeDiwovtv67yKsgqy2PYPYqQ8c5Yb1T6oBGErb3uLjcuGEVzFeZ5+FWY5szDEOaWPVBY/BfipQH7zfPXPILXQBHNZHWjIGWgkmEVaYfqvc1YnFYU73cu+hiqD4eN2uOO9v0Dinba73DmB49dnisMq1+kmdpkILwndnCQagTtBr1tsjVfvEKmS6WQcM/Ic6Sr
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6P189MB3107.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(10067099003)(3023799007)(6133799003)(56012099006)(18002099003)(22082099003)(11063799006)(13003099007);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|36860700016|1800799024|376014|82310400026|11063799006|56012099006|22082099003|18002099003|10067099003|6133799003;
+X-Microsoft-Antispam-Message-Info: 
+	VxWUlt86qjnvq3ipYtBE6pzj6YHjxx8KYlL0bXuiZFrwh1fdqPH91SEGKVjsf2b35eCOMAI+mKvmI2aKL5Tm2CI+A4o8FHFOEYFhCOP5/oTwP5pti/oDBV1AcXXhiGmJVQAsg+JJ/GjkJ9bwbRn+nYLjb6Rkr8WMuCEz3CLIHewtnQsOttjg7tTVYTr1efm1qdfE58E4n4vGMS/gVC/9uCOnFYJQr/N3VHC5DXPewOtJ4idm8isovjz8X8Y5U3f0TwqJWKM0BnJew9xyt6EQfvQYXAea7AMI3nOCwM3JIgH7H3hAG2UdhPA74mJBR1aJ4gHorji18aEv0Ag5zno+y95lIIWoevdISSIDzJ/mh/DOeOPgrQWOSQ81RAjTMWy4DaZQC1GpXpEj2l0QW216gPC5/AbwzM0NvMlgB+HqRiajpXNrhV2GYyJR1P+xOqTztJtcRNYzxaZfLRQI8mgEBI4Sxcd0gQzApvLjeauqTtvfHPHQeCx54UEbEUkRfFyvxxZJ+kY+wVlEK14Frq4eMPQ4DfNS1BUldpusPo+D+Q5htBudP/WcdevGr0Zk1Te6lsxLviA+UbcfH4f8unD/g9g0OWcgy4j6kirKAY1L4TTyo/jZe395+wk+pHBfkYTeuK037JmgKAkvrPUnTGwgwcGgh1C26d3BDfrL0DxJzLjk0aSywGQpcsNO2C+QoPr+mSyp0Wu0FtZvO68C9lay+A==
+X-Forefront-Antispam-Report: 
+	CIP:139.15.153.206;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(1800799024)(376014)(82310400026)(11063799006)(56012099006)(22082099003)(18002099003)(10067099003)(6133799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XAwqT+lcqjdf5aoZuMQgVoypEL/oqvOBqVUg8dOou/f77BTYg77Q0wgBSZao?=
- =?us-ascii?Q?Z+CUB7g6L7x8v0dC/jW7b2Dq0IslOy1nm2k9OGUeoRekvEvgihNZcCiebOb8?=
- =?us-ascii?Q?6D/0sAo3kJ5473WaamRfqLNo8QsE21d6zZMCS2kG8Oj6KQ781zJktIfpODiD?=
- =?us-ascii?Q?k5yjk66dSZkAhfoYTUgyARUKfc60YcSdwdFDrpD//XFo3UDbE2Ox5QdO5vlv?=
- =?us-ascii?Q?8y5ZsRrIfDlgbaJimMQUja1V1ZuiqmqjVXMjY+XoyaDQwf8c3VSEY03ENMK8?=
- =?us-ascii?Q?KwXkWb1yHb1tpdOUB9rycXJb9pB43VvZw7WO5RRJ55vo7hJ369EwoMAqm97B?=
- =?us-ascii?Q?OWElK67bScuatQPayGer7yfcT1zcdGjllzEXw5l+taQwAn/sisLVGEyReidq?=
- =?us-ascii?Q?Lm1SAUH8cVBO9g/FgdKzMtRZpNYK3LXCxJiaMDrcDwytbQ0j2akLAFRoT24P?=
- =?us-ascii?Q?BPn3/7EPUICHI3i/ufg4JqMpYa7aYAdUMmPfo6BmVhZhyX5lKs1AWelwzvK8?=
- =?us-ascii?Q?5DagQEYstgGF31v5bwFEmGx4E3TUCJO1hfXkXPRQAXfbdtvb9TPYYoK13Ydh?=
- =?us-ascii?Q?vnbdAUk/pErymmktvq07MkppQ/wKgFHroKeLtdiJ7ZalSKbN4a4Tt+U15NPV?=
- =?us-ascii?Q?3CH6QTefN4XkgWp5X+fj2LxLLtnwFOYb5+U4lCsz+0y5qEynAhJy2JYzbS5T?=
- =?us-ascii?Q?ZCwcU8742ZJb9xnuBwfT6ytagXwnZolqY6hsa2P9SIhx6ACNUOj4Y0lA6LVB?=
- =?us-ascii?Q?RqyYl5ED1f0S074A+hbSRhabytOYR0eU+RTKOjWHMMEEp7hQScVVYHFAeHZd?=
- =?us-ascii?Q?u5i2sQ6qfAMAOkNTi0eYqxGWCe07vsGQ4o88hhDruPPVcWic7MMJuVYZF8Ld?=
- =?us-ascii?Q?uJcnoK7C/dLLMulkRFqG/XyjgBvKhuOd5flqJa1hKlTFlsYLCRcMVRUT+DAz?=
- =?us-ascii?Q?dkwXFWOFAjIvA6ewDhPetIuCHxz6J5SAuqWkaBI8JHmt5Y7fCwY3Gp5v9HoO?=
- =?us-ascii?Q?BySDc3rzKlwheb9m2Masod+paBltzXtRjkY1RcZ+NllcpfIgDiZLI2ZIg2Ft?=
- =?us-ascii?Q?v1320xidX/TgqLCAiO8C3pXw+D3/dzCjybJ44u+9amGJcApRXFjvbnj+ne57?=
- =?us-ascii?Q?mldcRecQA+x9WInbrIx1SCW66PaUKRkrhQTMUtZ7Ms48lejwnjy9uI9+fkOS?=
- =?us-ascii?Q?hmtzLBlQcQy3r+55IQO34HVuMdnhRhyZ1p7z97Rv4EdhlRY762PMLVSpL6hm?=
- =?us-ascii?Q?5yVAyaSkqR7ua/+nlfyN2AL+q1t3sIT5Y9T3YCmNOGtnL+M7SAY5AO/4J2wS?=
- =?us-ascii?Q?63wlP+7xOvEkNk3UcH8C957bpMn9bGhg2baINCvYScdbu6xPJxWCMvB4Ns12?=
- =?us-ascii?Q?0/8/I6r++ywGcBsaIp0q2H6+bfTlB6HZfqeFG0ia3+fN5o2csK5N/I0lIma+?=
- =?us-ascii?Q?spnQOsL8mXm7HEUT0SQSWfu3ORoiCCEYDCJmk5mv+QFiUaeStnet+7wYQoHs?=
- =?us-ascii?Q?OBzi3gdHNnlhNYrPXITHRSlS2jjzxd9v2t2qcIIrBhXmJ4chBVaGsP8R+fBF?=
- =?us-ascii?Q?cmd3Yvf+JEsv5oaTTC5cWOs80Kc83iqVmbyFpabQk04UxecdjLLVCeshYyBT?=
- =?us-ascii?Q?3+zWy9BuQbvbFrPe5ZWvZrIuxCPOctB2hmMsJTflXfTUK5aTYinTchYtUMt7?=
- =?us-ascii?Q?QnM36KoBiaI3N3hwbG7XJwD6yigMIHrYk78xWGvrGDe6K7REzs+/LXgbzcpV?=
- =?us-ascii?Q?opLqxzn9FA=3D=3D?=
-X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21765815-5d3e-4acb-dc27-08df1afa6107
-X-MS-Exchange-CrossTenant-AuthSource: AM6P189MB3107.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 11:44:38.3465
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	CL/38vBRWpyo81Srq4Yz43XRHhiFXTUYGZXftyt5GG3XZu8qrCA4VdVMtsGsnoqzgSJmbW+i5dRvKj/QoMO3FqpEft5ccWIeUyJDlUeBO53vNfC7Fl90dKQhcMbItk37PSdgJ4p7upPOho58qCV5jyISGyolDJHGUELVhWTNLKiRMZLq+c459TwJvh9zqyvnRKopAWm7vR3khOCexs5qYuT9dnNgdKFA/PFSbGhROl4QoLtHpChlJofPegG3kExM+HN2C/b+8X2rbhNWRK6vTQdt/ZvWrmyZcQk/7jrnfkR8RUAzaKInPc8IwfTmWu1pwzNUeFYUalQUCxpa6S3aKDRmN+/lKMGbQsBR6ZqRyWZB6eA1PCa/+DbvcGw6nUO9DvH68kvPrCEW2SJVFYvUxMvOGFhyB/k4rqiIEvaX68bySUftg4vgjSFf7QVgZoPV
+X-OriginatorOrg: de.bosch.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 13:40:21.4959
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2ns2XivuuyYx1VCCn+CwHAp8B9wZ0C0hdzyFEwwIDh0W8l9AxD/r9JQinnMl1F5xKju+HJ4wH/8vN021hQ/CI3I4F34o8twdG9TPW4LEglU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P189MB2984
+X-MS-Exchange-CrossTenant-Network-Message-Id: db9d1dcb-df10-441f-71de-08df1b0a8b9f
+X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.206];Helo=[eop.bosch-org.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB1PEPF000509FF.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3200
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2026 11:44:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130297
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2026 13:40:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130300
 
-netfilter now offers an official mirror at repo.or.cz. Add it as a premirro=
-r.
+From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
 
-See https://www.netfilter.org/mirrors.html#git
+The package PN-manager-cfg is shipped with the file 90-gpio.rules, which
+is licensed under CC0-1.0.
 
-Link: https://lore.kernel.org/netfilter-devel/arVpqySeeTQ7ZA06@orbyte.nwl.c=
-c/
-Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Reviewed-by: Daniel Turull <daniel.turull@ericsson.com>
+Thus, include the CC0-1.0 license to the recipe.
+
+Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
 ---
- .../recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.bb    | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue=
-_1.0.5.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_=
-1.0.5.bb
-index ccaa80f5ff..6c8731b4cd 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.=
-bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.=
-bb
-@@ -11,6 +11,9 @@ SRCREV =3D "2ff321690b8dafeca99ee8e9cafac71e36f292b9"
- SRC_URI =3D "git://git.netfilter.org/libnetfilter_queue;branch=3Dmaster \
-            "
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb b/meta-oe/r=
+ecipes-support/libgpiod/libgpiod_2.3.1.bb
+index 977405c2fc..f804934682 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb
+@@ -2,13 +2,13 @@ require libgpiod.inc
 =20
-+# See https://www.netfilter.org/mirrors.html#git
-+PREMIRRORS:append =3D " git://git.netfilter.org/libnetfilter_queue git://r=
-epo.or.cz/libnetfilter_queue.git;protocol=3Dhttps"
-+
+ inherit meson systemd update-rc.d useradd gobject-introspection
 =20
- inherit autotools pkgconfig
+-LICENSE =3D "CC-BY-SA-4.0 AND GPL-2.0-or-later AND LGPL-2.1-or-later"
++LICENSE =3D "CC-BY-SA-4.0 AND CC0-1.0 AND GPL-2.0-or-later AND LGPL-2.1-or=
+-later"
+ LICENSE:${PN} =3D "LGPL-2.1-or-later"
+ LICENSE:${PN}-cli =3D "GPL-2.0-or-later"
+ LICENSE:${PN}-gpiosim =3D "LGPL-2.1-or-later"
+ LICENSE:${PN}-glib =3D "LGPL-2.1-or-later"
+ LICENSE:${PN}-manager =3D "GPL-2.0-or-later"
+-LICENSE:${PN}-manager-cfg =3D "CC-BY-SA-4.0"
++LICENSE:${PN}-manager-cfg =3D "CC-BY-SA-4.0 AND CC0-1.0"
+ LICENSE:${PN}-tools =3D "GPL-2.0-or-later"
+ LICENSE:libgpiodbus =3D "GPL-2.0-or-later"
+ LICENSE:libgpiodcxx =3D "LGPL-2.1-or-later"
+@@ -18,6 +18,7 @@ LIC_FILES_CHKSUM =3D " \
+     file://LICENSES/GPL-2.0-or-later.txt;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a4263 \
+     file://LICENSES/LGPL-2.1-or-later.txt;md5=3D4b54a1fd55a448865a0b32d415=
+98759d \
+     file://LICENSES/CC-BY-SA-4.0.txt;md5=3Dfba3b94d88bfb9b81369b869a1e9a20=
+f \
++    file://LICENSES/CC0-1.0.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57 \
+ "
 =20
+ FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${BPN}-2.x:"
+--=20
+2.34.1
+
 
