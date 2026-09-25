@@ -1,496 +1,561 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE8ECC98306
-	for <webhook@archiver.kernel.org>; Fri, 25 Sep 2026 04:55:17 +0000 (UTC)
-Received: from mail-yx2-f12.google.com (mail-yx2-f12.google.com [74.125.224.140])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1648.1790312115574129850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4510C98321
+	for <webhook@archiver.kernel.org>; Fri, 25 Sep 2026 06:45:07 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2671.1790318701791339709
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2026 21:55:15 -0700
+ Thu, 24 Sep 2026 23:45:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ISIA/mhu;
- spf=pass (domain: gmail.com, ip: 74.125.224.140, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx2-f12.google.com with SMTP id 956f58d0204a3-66e4ab20f4bso738756d50.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2026 21:55:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790312114; cv=none;
-        d=google.com; s=arc-20260327;
-        b=it/3elHAVWXe0MZ33E8zJsVCOgGWI0SLrdS2VbTM8aKT/q2WEK9xCuGQXtnGEJYTbs
-         8rpV6+kgmuzkvmvNCB4plH8lubbhYBMR1Dd7rcihC8eT1dB4A/ofRXXwSgsUo/g+qRJF
-         aGLYxAbvP3GyFxeAbEBWSfm8egyqYEdI6svNzK6n3S++yHjTcMo2OnZLjPSZcwcxblhA
-         0esXvRznPN86tPoio0G9ze/5MY4ojq+SkyUdEPghU0U6RZ09ssAXqUHLJHE+SacGMLU0
-         grkyvgfrhX5ef/0s0DYcS4nqgLvtF33ajDq63pseKAYxcoOEenknbslKHaPVORRyzlds
-         J41Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=3A3KHokul/TypOUdJPDRCOx/2n3VlZ5kiu4PtmysMcI=;
-        fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
-        b=sD0T4b98KizX/B7oB8l3oUXMTQ0Ta8s5kkYMA/fmsT0HQ9gFBqPtMuoklTX5pXO7Ti
-         w0UljfIK8gFHeHMDnZayZZF3V36FxVdurHvFOX5ti5IAB+krPKJn+lmA8btKO5L2ZvH2
-         9VOdB7W+bUNCVvBeKdoVWiFMak7MLe//WRpL2nYXZ9Kk3YkaQGm7NoPazHyMHg9p5opw
-         0vZyHdXLMMieE3aH/7I9CFUChaVjsrp15HmFFTiVlZJfMuL/JAHTMSYZ+mUxWFaSC6Co
-         S0k5GuD5uI0nnxndmBZ8/tTAKjAtxnr5iRwXeFU5xEQUVVwAewIZ4A8SP1bEzu0CRNwk
-         OpGg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790312114; x=1790916914; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3A3KHokul/TypOUdJPDRCOx/2n3VlZ5kiu4PtmysMcI=;
-        b=ISIA/mhusvVY9/2vNhlecJfkkHOH6nyXjseap1dffmXd2BQ88KMnVQTTRrBd0tKnED
-         nKHzXB+tUCgSaE4UcAhg7nuOCvK10/bXr+lSJg+bsStSbPDSkX34shHVtopEsR5nF/0N
-         KPvVEk3ldNEdLl5W9GD1DyKcsSYW3BlPNxWT6tGBUBFw24DCpVEyz0eYmOVjuc4Fqj2P
-         CR3L9KEa8sNbBH9zeFNTXH+XAD0TO2lMB7w9bHGew4IoUz2v3RuhJ7FGWw7DUQ67/Dxm
-         ZRYVhG21h8eFuEegELNClyDtPZi7d/Pe9gg+UryXl45FYO05av3/KIQWbHoswWHNAoAj
-         8ZzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790312114; x=1790916914;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=3A3KHokul/TypOUdJPDRCOx/2n3VlZ5kiu4PtmysMcI=;
-        b=tBXakMXdwSWPwpP9MhSvSJlhOtf3jERugr1poTtK79mFqEZ5A6CNgE69YkE0espzSV
-         Qd7HyKum0drs2jbM4nEreVLPkRyNfol0BQ2hB2/5CH0aagU0enI7ali96Nt9M1TMJNt1
-         +veNK95tM/pSWFKeZcd5CZNmQYJZl9a9l2UhVWy/4AD91zGVfGGgxyjZa3dSnmpoA2Hg
-         3DecwXoE3ZaYLxfXpCsDOmpvSVxSS4VL8EbGPgsFBWWBo/rxl2xhhlbHhbJ+KotJ2qhN
-         ZjsXNgvoK2iVEFdovqC7VMVNTZPVIEiH4/3DfCMpDP+yDm1byFjm3nsw7ZokeFB0rH9S
-         Q4ew==
-X-Gm-Message-State: AFuF++klfMZ4zIsviwRvNMoNYZSs7M8jkmKiGo9j2LvFx9VtDhTbcm+H
-	TFdF4CrL1MtDlHoUyOkJbfKjCcQkk1+Mo0hlKK7khcciTk6ZOXL5Ell51V9emv7+xCL7xKpiYnC
-	8wI7Xzk4UjN2iLlprBx35Bi1pyvEo8a4=
-X-Gm-Gg: AYBFou1otVbCbrMxTF3AU0yjyW3dZIxr4gUBwXGy6JFc4QHTLCY5zxw0Bp7pTiVC9DY
-	tvDiy4fRqr6yHOaMRbRybLBedn9kl6Zcn8z2EOBOp7JGY3t1Zqz/qSgWsbMKZN5LwuIzkWvo54/
-	mFMR3fcU53GLoW41Sm4oRicPsEk8EW2wJhVL5wbFDWuznhR9x9kPI6ONVMIfqz2etQL534JGs67
-	a9K/eoUTexC5+FeoAQj7pJ4GV9MSmzCmttG9qz2XMzT33S7mZXcCdEBVJYBbzNsMIrUC8AeDLo/
-	+M7Eg21glg8UJm0FEgYM+BUQWBk33lubUCicJVlggEnq/OPSmBCGtvOBuCa0YR9Z/yheN/vU6b+
-	i8f+VwQMhhHO6lM3R3jB51gifg7TcCkItnQNdGKcKQ8XhVsz1U7q576JPCAy0W19nClFJ+iLXwE
-	cAq8Edms2czdrzn7GIMc9gva94btpAE6eVEDh6Ee8xKaK+e4TuZ7qkFOqodNNRmvGBVmttkDzp7
-	YnUklBL+hxSuDTLRJmfwMnsF3Hxh/QQNzbSGw9DxuPWfZyzbT4EiWKRl/h2v+86+0b1P57JP8ql
-	/XtQ+dDux/2jiOczsQ==
-X-Received: by 2002:a05:690e:4084:b0:66f:c8e4:f013 with SMTP id
- 956f58d0204a3-6741124baa3mr211164d50.50.1790312114434; Thu, 24 Sep 2026
- 21:55:14 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=q+lVrUVJ;
+ spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
+	by mailout03.t-online.de (Postfix) with SMTP id EB731E5A6
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2026 08:44:48 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.226.236]) by fwd77.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1x9zfq-3120QK0; Fri, 25 Sep 2026 08:44:46 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] ibus: upgrade 1.5.26 -> 1.5.34
+Date: Fri, 25 Sep 2026 08:44:35 +0200
+Message-ID: <20260925064440.1870690-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-References: <20260923151750.3398973-1-leon.anavi@konsulko.com>
-In-Reply-To: <20260923151750.3398973-1-leon.anavi@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Sep 2026 21:54:47 -0700
-X-Gm-Features: AclHuK-wndyVb3ASxKdlexg7iL74d93D3ti7_pFt1MJGVDCMvKxD6TMum-D501I
-Message-ID: <CAMKF1sqbe2_RLwxnQ6_bKacqGzMYOJA=QzbtjbECQt_V-Rq8AQ@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH] x265: Upgrade 4.1 -> 4.2
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000009e36fb065c478576"
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1790318686-BEFFA954-2EE587B1/0/0 CLEAN NORMAL
+X-TOI-MSGID: 44e48b28-b453-497d-a224-389f4a037060
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1790318688; i=f_l_k@t-online.de;
+	bh=x6jCP+sKA7wkeqIvIP2QEtlyBRTyDG8bXusFz3NcnKQ=;
+	h=From:To:Subject:Date;
+	b=q+lVrUVJyvqc2YT8K/NX5u0zfKcpYWy7Ob+bYv2EEzC28M5WCET6pXx0H307LuI0I
+	 kakn76CA98bW+EEw+XMsgldKmZRhmdKFSVBb0L6naYwBIBvbeTbhaYxHTGdLoDbBOX
+	 3xgoYwfSwNbPT+Y1P1RkDdpopoQ/5tsHqtMAeiXxhZboMtRci+Jw0+88cGeRxMu8Eu
+	 UoYf1VLUDvYUa0d5rZT2ewQz0Su+KlCjj4DGUSR70wZmHPbRdKFks4co2mxVPSub1F
+	 BJYANc/IGOLqA/ZMRcZgCxbDkOKN1JeIIuzZyKSrub437QTDcmPY10xChBE661OKC6
+	 D7vuZX2zfmlYA==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2026 04:55:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130288
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2026 06:45:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130289
 
---0000000000009e36fb065c478576
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Drop the three backports, which are part of the release, and rebase the
+dbus-launch patch onto the reworked make-dconf-override-db.sh.
 
-wget on my ubu 24.04 does not fetch the URI from bitbucket but curl does, I
-am not sure what is going on. I think using alternate URI from videolan
-might be better
+libnotify is now checked unconditionally unless disabled, so add a
+libnotify PACKAGECONFIG, enabled with x11 since only the X11 panel
+uses it. ibus-native needs the generated ibusresources.h. The internal
+compose table is generated at build time and reads ./Compose before
+the X11 locale dir, so copy it from libx11-native instead of touching
+the host's. The wayland GIR needs libibus from the build tree on the
+qemu library path.
 
- https://download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz
+Tested by building ibus and ibus-native for x86-64.
 
-On Wed, Sep 23, 2026 at 8:17=E2=80=AFAM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../recipes-support/ibus/ibus-native.bb       |   1 +
+ meta-gnome/recipes-support/ibus/ibus.bb       |   5 +
+ meta-gnome/recipes-support/ibus/ibus.inc      |  14 +-
+ ...start-dbus-we-do-not-have-dbus-lauch.patch |  17 +-
+ ...01-makefile-don-t-gzip-the-man-pages.patch | 164 ------------------
+ ...c-Fix-declaration-errors-with-GCC-15.patch |  36 ----
+ ...incompatible-pointer-types-in-Transp.patch | 109 ------------
+ 7 files changed, 26 insertions(+), 320 deletions(-)
+ delete mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-makefile-do=
+n-t-gzip-the-man-pages.patch
+ delete mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-src-Fix-dec=
+laration-errors-with-GCC-15.patch
+ delete mode 100644 meta-gnome/recipes-support/ibus/ibus/0002-util-IMdkit=
+-Fix-incompatible-pointer-types-in-Transp.patch
 
-> Upgrade to release 4.2:
->
-> - Threaded Motion Estimation (Experimental feature)-It uses a
->   dedicated threadpool to precompute Motion Estimation in parallel.
->   Improves encoding speed upto 1.5x for 1080p & lower resolution on
->   multi core machines with low frequency setting. On high frequency
->   systems or on machines with low number of cores, the overhead of
->   additional Motion estimation work may outweigh parallelism
-> - Add new Levels 6.3 to 7.2 specified in ITU-T H.265 (V9) (09/2023)
->   and above
-> - Improve Slices feature with check zeroMv
-> - Enable frame parallelism with MCSTF feature
-> - Updated support to signal AOM FGM params
-> - Improve quality with SBRC feature 6.Updated DolbyVision P5 VUI
->   defaults
-> - API Support to enable Threaded Motion Estimation(-threaded-me)
-> - RISC V optimizations including SAD, SATD, DCT, IDCT, block copy,
->   pixel utilities, SAO, loopfilter, transpose kernels resulting in
->   2x encoding speed.
-> - ARM SIMD optimizations including the use of NEON and SVE
->   instruction set extensions. The following algorithms now have
->   optimized SIMD implementations: DST, IDCT, SSE, SSD,
->   intra_pred_planar, pelFilterLumaStrong, interpolation, planecopy,
->   dequant_normal, blockcopy, pixel variance resulting in 8% faster
->   encoding speed compared to v4.1
-> - Fix memory leaks (no command line option, SEI buffer, analysis
->   save/load)
-> - Fix chroma qp offset for non yuv444 inputs
-> - Fix max supported input resolution
-> - Fix bugs with ARM SIMD optimizations
-> - Fix Alpha and Multiview feature flag support in x265_config
-> - Fix test harness issues, CMake errors
-> - Fix inconsistent output with aq-motion
-> - Fix crash with hist-scenecut on high bit-depth builds
-> - Fix lookahead concurrency bug
-> - Fix shared link issue (R_X86_64_PC32), yuv recon output issue,
->   rd-refine and dynamic-refine issue, inputs for Windows named
->   pipe, weighted prediction delta_chroma_offset, crf and vbv issue
->   in abr-ladder, psnr and ssim reported with MCSTF feature,
->   internally overflowed VBV variables
->
-> This work was sponsored by GOVCERT.LU.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../0001-x265-fix-build-with-cmake-4.patch    | 39 +++++++------------
->  .../x265/{x265_4.1.bb =3D> x265_4.2.bb}         |  2 +-
->  2 files changed, 15 insertions(+), 26 deletions(-)
->  rename meta-multimedia/recipes-multimedia/x265/{x265_4.1.bb =3D>
-> x265_4.2.bb} (93%)
->
-> diff --git
-> a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
-make-4.patch
-> b/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
-make-4.patch
-> index f218fec5f7..7d301777f0 100644
-> ---
-> a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
-make-4.patch
-> +++
-> b/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
-make-4.patch
-> @@ -1,4 +1,4 @@
-> -From de68f4d02946d588af6a0c21cf966288c40b039f Mon Sep 17 00:00:00 2001
-> +From f376b858b38f8a3b922bb9a5165a5f6f806bd245 Mon Sep 17 00:00:00 2001
->  From: Markus Volk <f_l_k@t-online.de>
->  Date: Thu, 10 Jul 2025 09:04:27 +0200
->  Subject: [PATCH] x265: fix build with cmake 4
-> @@ -10,43 +10,32 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
->
->  Upstream-Status: Submitted [https://github.com/videolan/x265/pull/17]
->  ---
-> - source/CMakeLists.txt              | 8 +-------
-> + source/CMakeLists.txt              | 2 +-
->   source/dynamicHDR10/CMakeLists.txt | 4 ++--
-> - 2 files changed, 3 insertions(+), 9 deletions(-)
-> + 2 files changed, 3 insertions(+), 3 deletions(-)
->
-> -diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index 5c6dda9e8..bd9e0f8d9 100755
-> +diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
-> +index 2e3beaaf3..45df2e9fd 100755
->  --- a/CMakeLists.txt
->  +++ b/CMakeLists.txt
-> -@@ -6,18 +6,12 @@ if(NOT CMAKE_BUILD_TYPE)
-> -         FORCE)
-> - endif()
-> - message(STATUS "cmake version ${CMAKE_VERSION}")
-> --if(POLICY CMP0025)
-> --    cmake_policy(SET CMP0025 OLD) # report Apple's Clang as just Clang
-> --endif()
-> - if(POLICY CMP0042)
-> +@@ -11,7 +11,7 @@ if(POLICY CMP0042)
->       cmake_policy(SET CMP0042 NEW) # MACOSX_RPATH
->   endif()
-> --if(POLICY CMP0054)
-> --    cmake_policy(SET CMP0054 OLD) # Only interpret if() arguments as
-> variables or keywords when unquoted
-> --endif()
->
-> - project (x265)
-> --cmake_minimum_required (VERSION 2.8.8) # OBJECT libraries require 2.8.8
-> +-cmake_minimum_required (VERSION 2.8.8...3.10) # OBJECT libraries requir=
-e
-> 2.8.8
->  +cmake_minimum_required (VERSION 2.8.8...4.0) # OBJECT libraries require
-> 2.8.8
-> - include(CheckIncludeFiles)
-> - include(CheckFunctionExists)
-> - include(CheckSymbolExists)
-> -diff --git a/dynamicHDR10/CMakeLists.txt b/dynamicHDR10/CMakeLists.txt
-> -index 22fb79d44..03c866b1f 100644
-> +
-> + if (POLICY CMP0075)
-> +     cmake_policy(SET CMP0075 NEW) # CMAKE_REQUIRED_LIBRARIES warning
-> +diff --git a/source/dynamicHDR10/CMakeLists.txt
-> b/source/dynamicHDR10/CMakeLists.txt
-> +index 4243338c6..03c866b1f 100644
->  --- a/dynamicHDR10/CMakeLists.txt
->  +++ b/dynamicHDR10/CMakeLists.txt
->  @@ -10,7 +10,7 @@ add_library(dynamicHDR10 OBJECT
->       hdr10plus.h
->       api.cpp )
->
-> --cmake_minimum_required (VERSION 2.8.11)
-> +-cmake_minimum_required (VERSION 2.8.11...3.26)
->  +cmake_minimum_required (VERSION 2.8.11...4.0)
->   project(dynamicHDR10)
->   include(CheckIncludeFiles)
-> @@ -59,5 +48,5 @@ index 22fb79d44..03c866b1f 100644
->  \ No newline at end of file
->  +endif()
->  --
-> -2.49.0
-> +2.43.0
->
-> diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-> b/meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
-> similarity index 93%
-> rename from meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-> rename to meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
-> index 79dd99220e..4841f34016 100644
-> --- a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-> +++ b/meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
-> @@ -13,7 +13,7 @@ SRC_URI =3D " \
->      file://0001-json11.cpp-Include-cstdint.patch \
->      file://0001-x265-fix-build-with-cmake-4.patch \
->  "
-> -SRC_URI[sha256sum] =3D
-> "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
-> +SRC_URI[sha256sum] =3D
-> "40b1ea0453e0309f0eba934e0ddf533f8f6295966679e8894e8f1c1c8d5e1210"
->  S =3D "${UNPACKDIR}/x265_${PV}/source"
->
->  inherit lib_package cmake pkgconfig
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#130240):
-> https://lists.openembedded.org/g/openembedded-devel/message/130240
-> Mute This Topic: https://lists.openembedded.org/mt/121394339/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-gnome/recipes-support/ibus/ibus-native.bb b/meta-gnome/=
+recipes-support/ibus/ibus-native.bb
+index ca65114c4d..7ba9b57617 100644
+--- a/meta-gnome/recipes-support/ibus/ibus-native.bb
++++ b/meta-gnome/recipes-support/ibus/ibus-native.bb
+@@ -21,6 +21,7 @@ do_compile() {
+     # necessary step by step
+     oe_runmake ibusenumtypes.h
+     oe_runmake ibusmarshalers.h
++    oe_runmake ibusresources.h
+     oe_runmake ibusenumtypes.c
+     oe_runmake unicode-parser
+ }
+diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes=
+-support/ibus/ibus.bb
+index 479498d82f..08a7804ea9 100644
+--- a/meta-gnome/recipes-support/ibus/ibus.bb
++++ b/meta-gnome/recipes-support/ibus/ibus.bb
+@@ -17,10 +17,15 @@ PACKAGECONFIG ??=3D " \
+     dconf vala \
+     ${@bb.utils.contains_any('DISTRO_FEATURES', [ 'wayland', 'x11' ], 'g=
+tk3 gtk4', '', d)} \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libnotify', '', d)} =
+\
+ "
+=20
+ REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('PACKAGECONFIG', 'gtk=
+4', 'opengl', '', d)}"
+=20
++do_compile:prepend() {
++    export GIR_EXTRA_LIBS_PATH=3D"${B}/src/.libs"
++}
++
+ do_configure:prepend() {
+     # run native unicode-parser
+     sed -i 's:$(builddir)/unicode-parser:unicode-parser:g' ${S}/src/Make=
+file.am
+diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipe=
+s-support/ibus/ibus.inc
+index 1344cb1981..0e1397e6bb 100644
+--- a/meta-gnome/recipes-support/ibus/ibus.inc
++++ b/meta-gnome/recipes-support/ibus/ibus.inc
+@@ -5,24 +5,22 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857=
+fcd118f065f900982c24"
+=20
+ inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-=
+doc vala
+=20
+-PV =3D "1.5.26"
++PV =3D "1.5.34"
+=20
+-DEPENDS =3D "unicode-ucd"
++DEPENDS =3D "unicode-ucd libx11-native"
+=20
+ SRC_URI =3D " \
+     git://github.com/ibus/ibus.git;branch=3Dmain;protocol=3Dhttps \
+     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch=
+ \
+-    file://0001-makefile-don-t-gzip-the-man-pages.patch \
+-    file://0002-util-IMdkit-Fix-incompatible-pointer-types-in-Transp.pat=
+ch \
+-    file://0001-src-Fix-declaration-errors-with-GCC-15.patch \
+ "
+-SRCREV =3D "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
++SRCREV =3D "1f7af28437afd62a6d145bfc81035e698a37411d"
+=20
+ PACKAGECONFIG[appindicator] =3D "--enable-appindicator,--disable-appindi=
+cator,qtbase"
+ PACKAGECONFIG[dconf] =3D "--enable-dconf,--disable-dconf,dconf"
+ PACKAGECONFIG[gtk2] =3D "--enable-gtk2,--disable-gtk2,gtk+"
+ PACKAGECONFIG[gtk3] =3D "--enable-gtk3,--disable-gtk3,gtk+3"
+ PACKAGECONFIG[gtk4] =3D "--enable-gtk4,--disable-gtk4,gtk4"
++PACKAGECONFIG[libnotify] =3D "--enable-libnotify,--disable-libnotify,lib=
+notify"
+ PACKAGECONFIG[systemd] =3D "--enable-systemd-services,--disable-systemd-=
+services,systemd"
+ PACKAGECONFIG[wayland]  =3D "--enable-wayland,--disable-wayland,wayland"
+ PACKAGECONFIG[vala]  =3D "--enable-vala,--disable-vala"
+@@ -43,3 +41,7 @@ do_configure:prepend() {
+     # Remove vapigen.m4 bundled with sources so that the one shipped by =
+vala is used instead.
+     rm -f ${S}/m4/vapigen.m4
+ }
++
++do_compile:prepend() {
++    cp ${STAGING_DATADIR_NATIVE}/X11/locale/en_US.UTF-8/Compose ${B}/src=
+/Compose
++}
+diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-star=
+t-dbus-we-do-not-have-dbus-lauch.patch b/meta-gnome/recipes-support/ibus/=
+ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+index aec9e7abec..64ad6b0857 100644
+--- a/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-=
+we-do-not-have-dbus-lauch.patch
++++ b/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-=
+we-do-not-have-dbus-lauch.patch
+@@ -10,23 +10,30 @@ Upstream-Status: Inappropriate [OE specific]
+=20
+ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+ ---
+- data/dconf/make-dconf-override-db.sh | 6 ------
+- 1 file changed, 6 deletions(-)
++ data/dconf/make-dconf-override-db.sh | 11 -----------
++ 1 file changed, 11 deletions(-)
+=20
++diff --git a/data/dconf/make-dconf-override-db.sh b/data/dconf/make-dcon=
+f-override-db.sh
++index 32cb153..375baa4 100755
+ --- a/data/dconf/make-dconf-override-db.sh
+ +++ b/data/dconf/make-dconf-override-db.sh
+-@@ -12,10 +12,6 @@ export XDG_CACHE_HOME=3D"$TMPDIR/cache"
++@@ -12,15 +12,6 @@ export XDG_CACHE_HOME=3D"$TMPDIR/cache"
+  export GSETTINGS_SCHEMA_DIR=3D"$TMPDIR/schemas"
+  mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $GSETTINGS_SCHEMA_DIR
+ =20
+ -eval `dbus-launch --sh-syntax`
+ -
+--trap 'rm -rf $TMPDIR; kill $DBUS_SESSION_BUS_PID' ERR
++-trap cleanup EXIT
++-
++-cleanup() {
++-  test $? -eq 0 && exit
++-  rm -rf $TMPDIR; kill $DBUS_SESSION_BUS_PID
++-}
+ -
+  # in case that schema is not installed on the system
+  glib-compile-schemas --targetdir "$GSETTINGS_SCHEMA_DIR" "$PWD"
+ =20
+-@@ -52,5 +48,3 @@ if [ -d $TMPDIR/cache/gvfs ] ; then
++@@ -57,5 +48,3 @@ if [ -d $TMPDIR/cache/gvfs ] ; then
+      umount $TMPDIR/cache/gvfs
+  fi
+  rm -rf $TMPDIR
+diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzi=
+p-the-man-pages.patch b/meta-gnome/recipes-support/ibus/ibus/0001-makefil=
+e-don-t-gzip-the-man-pages.patch
+deleted file mode 100644
+index 105e34873a..0000000000
+--- a/meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzip-the-m=
+an-pages.patch
++++ /dev/null
+@@ -1,164 +0,0 @@
+-From 5307c3b310fabeaa52fafe743c5efaca73ccce46 Mon Sep 17 00:00:00 2001
+-From: Emil Velikov <emil.l.velikov@gmail.com>
+-Date: Sun, 11 Jun 2023 16:16:35 +0900
+-Subject: [PATCH] makefile: don't gzip the man pages
+-
+-Drop the gzip step from the manpages - distributions already do that as
+-needed. In addition this resolves the final reproducibility issue with
+-ibus.
+-
+-BUG=3Dhttps://github.com/ibus/ibus/pull/2514
+-
+-Upstream-Status: Backport [https://github.com/ibus/ibus/commit/1a25975d9=
+f55f18eab609e4d147dd32689e367f3]
+-Note: This commit is included in version >=3D 1.5.29 and can be dropped
+-after upgrading.
+-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+----
+- bus/Makefile.am        | 6 +-----
+- data/dconf/Makefile.am | 6 +-----
+- setup/Makefile.am      | 6 +-----
+- tools/Makefile.am      | 6 +-----
+- ui/gtk3/Makefile.am    | 6 +-----
+- 5 files changed, 5 insertions(+), 25 deletions(-)
+-
+-diff --git a/bus/Makefile.am b/bus/Makefile.am
+-index e173ee25..d0445d02 100644
+---- a/bus/Makefile.am
+-+++ b/bus/Makefile.am
+-@@ -169,7 +169,6 @@ EXTRA_DIST =3D                \
+-=20
+- CLEANFILES =3D \
+- 	$(man_one_DATA)            \
+--	$(man_one_files)        \
+- 	$(NULL)
+-=20
+- $(libibus):
+-@@ -181,14 +180,11 @@ test: ibus-daemon
+- 		$(builddir)/ibus-daemon -v
+-=20
+- man_one_in_files =3D ibus-daemon.1.in
+--man_one_files =3D $(man_one_in_files:.1.in=3D.1)
+--man_one_DATA =3D$(man_one_files:.1=3D.1.gz)=20
+-+man_one_DATA =3D $(man_one_in_files:.1.in=3D.1)
+- man_onedir =3D $(mandir)/man1
+- %.1: %.1.in
+- 	$(AM_V_GEN) sed \
+- 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
+- 		mv $@.tmp $@
+--%.1.gz: %.1
+--	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+-=20
+- -include $(top_srcdir)/git.mk
+-diff --git a/data/dconf/Makefile.am b/data/dconf/Makefile.am
+-index 5360f033..2352f770 100644
+---- a/data/dconf/Makefile.am
+-+++ b/data/dconf/Makefile.am
+-@@ -38,15 +38,12 @@ dconfdb_DATA =3D 00-upstream-settings
+- 		{ rc=3D$$?; $(RM) -rf $@; exit $$rc; }
+-=20
+- man_5_in_files =3D 00-upstream-settings.5.in ibus.5.in
+--man_5_files =3D $(man_5_in_files:.5.in=3D.5)
+--man_5_DATA =3D$(man_5_files:.5=3D.5.gz)
+-+man_5_DATA =3D $(man_5_in_files:.5.in=3D.5)
+- man_5dir =3D $(mandir)/man5
+- %.5: %.5.in
+- 	$(AM_V_GEN) sed \
+- 	    -e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
+- 	    mv $@.tmp $@
+--%.5.gz: %.5
+--	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+-=20
+- install-data-hook:
+- 	if test -z "$(DESTDIR)"; then \
+-@@ -63,7 +60,6 @@ EXTRA_DIST =3D \
+-=20
+- CLEANFILES =3D \
+-     $(man_5_DATA) \
+--    $(man_5_files) \
+-     $(NULL)
+-=20
+- MAINTAINERCLEANFILES =3D \
+-diff --git a/setup/Makefile.am b/setup/Makefile.am
+-index 34c8f136..b34aa8fc 100644
+---- a/setup/Makefile.am
+-+++ b/setup/Makefile.am
+-@@ -56,20 +56,16 @@ org.freedesktop.IBus.Setup.desktop: ibus-setup.deskt=
+op
+- 	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $=
+@
+-=20
+- man_one_in_files =3D ibus-setup.1.in
+--man_one_files =3D $(man_one_in_files:.1.in=3D.1)
+--man_one_DATA =3D$(man_one_files:.1=3D.1.gz)=20
+-+man_one_DATA =3D $(man_one_in_files:.1.in=3D.1)
+- man_onedir =3D $(mandir)/man1
+- %.1: %.1.in
+- 	$(AM_V_GEN) sed \
+- 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
+- 		mv $@.tmp $@
+--%.1.gz: %.1
+--	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+-=20
+- CLEANFILES =3D \
+-     $(desktop_DATA) \
+-     $(man_one_DATA) \
+--    $(man_one_files) \
+-     *.pyc \
+-     ibus-setup \
+-     $(NULL)
+-diff --git a/tools/Makefile.am b/tools/Makefile.am
+-index 5c18d3d6..1c716136 100644
+---- a/tools/Makefile.am
+-+++ b/tools/Makefile.am
+-@@ -79,15 +79,12 @@ bash_completion_DATA=3D \
+- bash_completiondir=3D@datadir@/bash-completion/completions
+-=20
+- man_one_in_files =3D ibus.1.in
+--man_one_files =3D $(man_one_in_files:.1.in=3D.1)
+--man_one_DATA =3D$(man_one_files:.1=3D.1.gz)=20
+-+man_one_DATA =3D $(man_one_in_files:.1.in=3D.1)
+- man_onedir =3D $(mandir)/man1
+- %.1: %.1.in
+- 	$(AM_V_GEN) sed \
+- 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
+- 		mv $@.tmp $@
+--%.1.gz: %.1
+--	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+-=20
+- EXTRA_DIST =3D \
+- 	$(man_one_in_files) \
+-@@ -96,7 +93,6 @@ EXTRA_DIST =3D \
+-=20
+- CLEANFILES =3D \
+- 	$(man_one_DATA) \
+--	$(man_one_files) \
+- 	$(NULL)
+-=20
+- if ENABLE_EMOJI_DICT
+-diff --git a/ui/gtk3/Makefile.am b/ui/gtk3/Makefile.am
+-index ab379328..aff035da 100644
+---- a/ui/gtk3/Makefile.am
+-+++ b/ui/gtk3/Makefile.am
+-@@ -242,15 +242,12 @@ panelbinding.o: $(srcdir)/panelbinding.c
+-=20
+- MAINTAINERCLEANFILES +=3D extension.c panelbinding.c
+-=20
+--man_seven_files =3D $(man_seven_in_files:.7.in=3D.7)
+--man_seven_DATA =3D$(man_seven_files:.7=3D.7.gz)
+-+man_seven_DATA =3D $(man_seven_in_files:.7.in=3D.7)
+- man_sevendir =3D $(mandir)/man7
+- %.7: %.7.in
+- 	$(AM_V_GEN) sed \
+- 	    -e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
+- 	    mv $@.tmp $@
+--%.7.gz: %.7
+--	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+-=20
+- desktop_in_files =3D \
+-     ibus-ui-emojier.desktop.in \
+-@@ -278,7 +275,6 @@ CLEANFILES +=3D \
+-     $(desktop_DATA) \
+-     $(desktop_notrans_files) \
+-     $(man_seven_DATA) \
+--    $(man_seven_files) \
+-     $(NULL)
+-=20
+- endif
+diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-src-Fix-declaratio=
+n-errors-with-GCC-15.patch b/meta-gnome/recipes-support/ibus/ibus/0001-sr=
+c-Fix-declaration-errors-with-GCC-15.patch
+deleted file mode 100644
+index 150ff631ba..0000000000
+--- a/meta-gnome/recipes-support/ibus/ibus/0001-src-Fix-declaration-error=
+s-with-GCC-15.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 0f5407f8a3846477fcaa73505437e805467901e1 Mon Sep 17 00:00:00 2001
+-From: fujiwarat <takao.fujiwara1@gmail.com>
+-Date: Fri, 24 Jan 2025 09:40:31 +0900
+-Subject: [PATCH] src: Fix declaration errors with GCC 15
+-
+-
+-BUG=3Drhbz#2340629
+-
+-Upstream-Status: Backport [https://github.com/ibus/ibus/commit/aac5446e8=
+c98db934912b9b15a1ef92c3b7e4c8c]
+-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+----
+- src/ibusenginesimple.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/ibusenginesimple.c b/src/ibusenginesimple.c
+-index c57a3ea5..60e7fb34 100644
+---- a/src/ibusenginesimple.c
+-+++ b/src/ibusenginesimple.c
+-@@ -477,7 +477,7 @@ check_hex (IBusEngineSimple *simple,
+- }
+-=20
+- static IBusEngineDict *
+--load_emoji_dict ()
+-+load_emoji_dict (void)
+- {
+-     IBusEngineDict *emoji_dict;
+-     GList *keys;
+-@@ -520,7 +520,7 @@ check_emoji_table (IBusEngineSimple       *simple,
+-         g_object_ref_sink (priv->lookup_table);
+-     }
+-     if (emoji_dict =3D=3D NULL)
+--        emoji_dict =3D priv->emoji_dict =3D load_emoji_dict (simple);
+-+        emoji_dict =3D priv->emoji_dict =3D load_emoji_dict ();
+-=20
+-     if (emoji_dict =3D=3D NULL || emoji_dict->dict =3D=3D NULL)
+-         return FALSE;
+diff --git a/meta-gnome/recipes-support/ibus/ibus/0002-util-IMdkit-Fix-in=
+compatible-pointer-types-in-Transp.patch b/meta-gnome/recipes-support/ibu=
+s/ibus/0002-util-IMdkit-Fix-incompatible-pointer-types-in-Transp.patch
+deleted file mode 100644
+index 229a9d34aa..0000000000
+--- a/meta-gnome/recipes-support/ibus/ibus/0002-util-IMdkit-Fix-incompati=
+ble-pointer-types-in-Transp.patch
++++ /dev/null
+@@ -1,109 +0,0 @@
+-From b0a554d7c9d4d52bd34a85fe66a85adf9542a2ec Mon Sep 17 00:00:00 2001
+-From: fujiwarat <takao.fujiwara1@gmail.com>
+-Date: Fri, 24 Jan 2025 10:01:11 +0900
+-Subject: [PATCH] util/IMdkit: Fix incompatible-pointer-types in
+- TransportSW.checkAddr
+-
+-
+-BUG=3Drhbz#2340629
+-
+-Upstream-Status: Backport [https://github.com/ibus/ibus/commit/d039b95b1=
+af14fd34167a4ca038938cef2ea41ca]
+-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+----
+- util/IMdkit/Xi18n.h           | 18 ++++++++++--------
+- util/IMdkit/i18nMethod.c      |  3 ++-
+- util/IMdkit/i18nOffsetCache.c | 10 ++++++----
+- 3 files changed, 18 insertions(+), 13 deletions(-)
+-
+-diff --git a/util/IMdkit/Xi18n.h b/util/IMdkit/Xi18n.h
+-index 79dd9619..09097bb6 100644
+---- a/util/IMdkit/Xi18n.h
+-+++ b/util/IMdkit/Xi18n.h
+-@@ -3,7 +3,7 @@
+-          Copyright (C) 1994-1995 Sun Microsystems, Inc.
+-          Copyright (C) 1993-1994 Hewlett-Packard Company
+-          Copyright (C) 2014 Peng Huang <shawn.p.huang@gmail.com>
+--         Copyright (C) 2014 Red Hat, Inc.
+-+         Copyright (C) 2014-2025 Red Hat, Inc.
+- =20
+- Permission to use, copy, modify, distribute, and sell this software
+- and its documentation for any purpose is hereby granted without fee,
+-@@ -71,13 +71,6 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOF=
+TWARE.
+- #define I18N_SET	1
+- #define I18N_GET	2
+-=20
+--typedef struct
+--{
+--    char        *transportname;
+--    int         namelen;
+--    Bool        (*checkAddr) ();
+--} TransportSW;
+--
+- typedef struct _XIMPending
+- {
+-     unsigned    char *p;
+-@@ -172,6 +165,15 @@ typedef struct _Xi18nClient
+-=20
+- typedef struct _Xi18nCore *Xi18n;
+-=20
+-+typedef struct _TransportSW TransportSW;
+-+
+-+struct _TransportSW
+-+{
+-+    char        *transportname;
+-+    int         namelen;
+-+    Bool        (*checkAddr) (Xi18n, TransportSW *, char *);
+-+};
+-+
+- /*
+-  * Callback Struct for XIM Protocol
+-  */
+-diff --git a/util/IMdkit/i18nMethod.c b/util/IMdkit/i18nMethod.c
+-index 9c44e7fe..7f343d87 100644
+---- a/util/IMdkit/i18nMethod.c
+-+++ b/util/IMdkit/i18nMethod.c
+-@@ -2,6 +2,7 @@
+- =20
+-          Copyright 1994, 1995 by Sun Microsystems, Inc.
+-          Copyright 1993, 1994 by Hewlett-Packard Company
+-+         Copyright (C) 2014-2025 Red Hat, Inc.
+- =20
+- Permission to use, copy, modify, distribute, and sell this software
+- and its documentation for any purpose is hereby granted without fee,
+-@@ -89,7 +90,7 @@ TransportSW _TransR[] =3D
+- #ifdef DNETCONN
+-     {"decnet",          6, _Xi18nCheckTransAddress},
+- #endif
+--    {(char *) NULL,     0, (Bool (*) ()) NULL}
+-+    {(char *) NULL,     0, (Bool (*) (Xi18n, TransportSW *, char *))NUL=
+L}
+- };
+-=20
+- static Bool GetInputStyles (Xi18n i18n_core, XIMStyles **p_style)
+-diff --git a/util/IMdkit/i18nOffsetCache.c b/util/IMdkit/i18nOffsetCache=
+.c
+-index e2fe8c6b..cab974c7 100644
+---- a/util/IMdkit/i18nOffsetCache.c
+-+++ b/util/IMdkit/i18nOffsetCache.c
+-@@ -1,6 +1,6 @@
+- /*
+-  * Copyright (C) 2014 Peng Huang <shawn.p.huang@gmail.com>
+-- * Copyright (C) 2014 Red Hat, Inc.
+-+ * Copyright (C) 2014-2025 Red Hat, Inc.
+-  *
+-  * Permission to use, copy, modify, distribute, and sell this
+-  * software and its documentation for any purpose is hereby granted
+-@@ -83,10 +83,12 @@ void _Xi18nSetPropertyOffset (Xi18nOffsetCache *offs=
+et_cache, Atom key,
+-     }
+-=20
+-     if (++offset_cache->size > offset_cache->capacity) {
+--        offset_cache->capacity *=3D OFFSET_CACHE_GROWTH_FACTOR;
+--        offset_cache->data =3D (Xi18nAtomOffsetPair *) realloc (data,
+-+        Xi18nAtomOffsetPair *pair =3D (Xi18nAtomOffsetPair *) realloc (=
+data,
+-                 offset_cache->capacity * sizeof (Xi18nAtomOffsetPair));
+--        if (offset_cache->data =3D=3D NULL) {
+-+        offset_cache->capacity *=3D OFFSET_CACHE_GROWTH_FACTOR;
+-+        if (pair) {
+-+            offset_cache->data =3D pair;
+-+        } else {
+-             offset_cache->data =3D data;
+-             --offset_cache->size;
+-         }
+--=20
+2.55.0
 
---0000000000009e36fb065c478576
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">wget on my ubu 24.04 does not fetch the URI from bitbucket=
- but curl does, I am not sure what is going on. I think using alternate URI=
- from videolan might be better<div><br></div><div>=C2=A0<a href=3D"https://=
-download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz">https://=
-download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz</a>=C2=A0=
-</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Wed, Sep 23, 2026 at 8:17=E2=80=AFAM Leon =
-Anavi via <a href=3D"http://lists.openembedded.org">lists.openembedded.org<=
-/a> &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org"=
->konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">Upgrade to release 4.2:<br>
-<br>
-- Threaded Motion Estimation (Experimental feature)-It uses a<br>
-=C2=A0 dedicated threadpool to precompute Motion Estimation in parallel.<br=
->
-=C2=A0 Improves encoding speed upto 1.5x for 1080p &amp; lower resolution o=
-n<br>
-=C2=A0 multi core machines with low frequency setting. On high frequency<br=
->
-=C2=A0 systems or on machines with low number of cores, the overhead of<br>
-=C2=A0 additional Motion estimation work may outweigh parallelism<br>
-- Add new Levels 6.3 to 7.2 specified in ITU-T H.265 (V9) (09/2023)<br>
-=C2=A0 and above<br>
-- Improve Slices feature with check zeroMv<br>
-- Enable frame parallelism with MCSTF feature<br>
-- Updated support to signal AOM FGM params<br>
-- Improve quality with SBRC feature 6.Updated DolbyVision P5 VUI<br>
-=C2=A0 defaults<br>
-- API Support to enable Threaded Motion Estimation(-threaded-me)<br>
-- RISC V optimizations including SAD, SATD, DCT, IDCT, block copy,<br>
-=C2=A0 pixel utilities, SAO, loopfilter, transpose kernels resulting in<br>
-=C2=A0 2x encoding speed.<br>
-- ARM SIMD optimizations including the use of NEON and SVE<br>
-=C2=A0 instruction set extensions. The following algorithms now have<br>
-=C2=A0 optimized SIMD implementations: DST, IDCT, SSE, SSD,<br>
-=C2=A0 intra_pred_planar, pelFilterLumaStrong, interpolation, planecopy,<br=
->
-=C2=A0 dequant_normal, blockcopy, pixel variance resulting in 8% faster<br>
-=C2=A0 encoding speed compared to v4.1<br>
-- Fix memory leaks (no command line option, SEI buffer, analysis<br>
-=C2=A0 save/load)<br>
-- Fix chroma qp offset for non yuv444 inputs<br>
-- Fix max supported input resolution<br>
-- Fix bugs with ARM SIMD optimizations<br>
-- Fix Alpha and Multiview feature flag support in x265_config<br>
-- Fix test harness issues, CMake errors<br>
-- Fix inconsistent output with aq-motion<br>
-- Fix crash with hist-scenecut on high bit-depth builds<br>
-- Fix lookahead concurrency bug<br>
-- Fix shared link issue (R_X86_64_PC32), yuv recon output issue,<br>
-=C2=A0 rd-refine and dynamic-refine issue, inputs for Windows named<br>
-=C2=A0 pipe, weighted prediction delta_chroma_offset, crf and vbv issue<br>
-=C2=A0 in abr-ladder, psnr and ssim reported with MCSTF feature,<br>
-=C2=A0 internally overflowed VBV variables<br>
-<br>
-This work was sponsored by <a href=3D"http://GOVCERT.LU" rel=3D"noreferrer"=
- target=3D"_blank">GOVCERT.LU</a>.<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../0001-x265-fix-build-with-cmake-4.patch=C2=A0 =C2=A0 | 39 +++++++-=
------------<br>
-=C2=A0.../x265/{<a href=3D"http://x265_4.1.bb" rel=3D"noreferrer" target=3D=
-"_blank">x265_4.1.bb</a> =3D&gt; <a href=3D"http://x265_4.2.bb" rel=3D"nore=
-ferrer" target=3D"_blank">x265_4.2.bb</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 2 +-<br>
-=C2=A02 files changed, 15 insertions(+), 26 deletions(-)<br>
-=C2=A0rename meta-multimedia/recipes-multimedia/x265/{<a href=3D"http://x26=
-5_4.1.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.1.bb</a> =3D&gt; <a h=
-ref=3D"http://x265_4.2.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb=
-</a>} (93%)<br>
-<br>
-diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-bui=
-ld-with-cmake-4.patch b/meta-multimedia/recipes-multimedia/x265/x265/0001-x=
-265-fix-build-with-cmake-4.patch<br>
-index f218fec5f7..7d301777f0 100644<br>
---- a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with=
--cmake-4.patch<br>
-+++ b/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with=
--cmake-4.patch<br>
-@@ -1,4 +1,4 @@<br>
--From de68f4d02946d588af6a0c21cf966288c40b039f Mon Sep 17 00:00:00 2001<br>
-+From f376b858b38f8a3b922bb9a5165a5f6f806bd245 Mon Sep 17 00:00:00 2001<br>
-=C2=A0From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"=
-_blank">f_l_k@t-online.de</a>&gt;<br>
-=C2=A0Date: Thu, 10 Jul 2025 09:04:27 +0200<br>
-=C2=A0Subject: [PATCH] x265: fix build with cmake 4<br>
-@@ -10,43 +10,32 @@ Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@=
-t-online.de" target=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
-<br>
-=C2=A0Upstream-Status: Submitted [<a href=3D"https://github.com/videolan/x2=
-65/pull/17" rel=3D"noreferrer" target=3D"_blank">https://github.com/videola=
-n/x265/pull/17</a>]<br>
-=C2=A0---<br>
-- source/CMakeLists.txt=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 8=
- +-------<br>
-+ source/CMakeLists.txt=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2=
- +-<br>
-=C2=A0 source/dynamicHDR10/CMakeLists.txt | 4 ++--<br>
-- 2 files changed, 3 insertions(+), 9 deletions(-)<br>
-+ 2 files changed, 3 insertions(+), 3 deletions(-)<br>
-<br>
--diff --git a/CMakeLists.txt b/CMakeLists.txt<br>
--index 5c6dda9e8..bd9e0f8d9 100755<br>
-+diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt<br>
-+index 2e3beaaf3..45df2e9fd 100755<br>
-=C2=A0--- a/CMakeLists.txt<br>
-=C2=A0+++ b/CMakeLists.txt<br>
--@@ -6,18 +6,12 @@ if(NOT CMAKE_BUILD_TYPE)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0FORCE)<br>
-- endif()<br>
-- message(STATUS &quot;cmake version ${CMAKE_VERSION}&quot;)<br>
---if(POLICY CMP0025)<br>
---=C2=A0 =C2=A0 cmake_policy(SET CMP0025 OLD) # report Apple&#39;s Clang as=
- just Clang<br>
---endif()<br>
-- if(POLICY CMP0042)<br>
-+@@ -11,7 +11,7 @@ if(POLICY CMP0042)<br>
-=C2=A0 =C2=A0 =C2=A0 cmake_policy(SET CMP0042 NEW) # MACOSX_RPATH<br>
-=C2=A0 endif()<br>
---if(POLICY CMP0054)<br>
---=C2=A0 =C2=A0 cmake_policy(SET CMP0054 OLD) # Only interpret if() argumen=
-ts as variables or keywords when unquoted<br>
---endif()<br>
-<br>
-- project (x265)<br>
---cmake_minimum_required (VERSION 2.8.8) # OBJECT libraries require 2.8.8<b=
-r>
-+-cmake_minimum_required (VERSION 2.8.8...3.10) # OBJECT libraries require =
-2.8.8<br>
-=C2=A0+cmake_minimum_required (VERSION 2.8.8...4.0) # OBJECT libraries requ=
-ire 2.8.8<br>
-- include(CheckIncludeFiles)<br>
-- include(CheckFunctionExists)<br>
-- include(CheckSymbolExists)<br>
--diff --git a/dynamicHDR10/CMakeLists.txt b/dynamicHDR10/CMakeLists.txt<br>
--index 22fb79d44..03c866b1f 100644<br>
-+ <br>
-+ if (POLICY CMP0075)<br>
-+=C2=A0 =C2=A0 =C2=A0cmake_policy(SET CMP0075 NEW) # CMAKE_REQUIRED_LIBRARI=
-ES warning<br>
-+diff --git a/source/dynamicHDR10/CMakeLists.txt b/source/dynamicHDR10/CMak=
-eLists.txt<br>
-+index 4243338c6..03c866b1f 100644<br>
-=C2=A0--- a/dynamicHDR10/CMakeLists.txt<br>
-=C2=A0+++ b/dynamicHDR10/CMakeLists.txt<br>
-=C2=A0@@ -10,7 +10,7 @@ add_library(dynamicHDR10 OBJECT<br>
-=C2=A0 =C2=A0 =C2=A0 hdr10plus.h<br>
-=C2=A0 =C2=A0 =C2=A0 api.cpp )<br>
-<br>
---cmake_minimum_required (VERSION 2.8.11)<br>
-+-cmake_minimum_required (VERSION 2.8.11...3.26)<br>
-=C2=A0+cmake_minimum_required (VERSION 2.8.11...4.0)<br>
-=C2=A0 project(dynamicHDR10)<br>
-=C2=A0 include(CheckIncludeFiles)<br>
-@@ -59,5 +48,5 @@ index 22fb79d44..03c866b1f 100644<br>
-=C2=A0\ No newline at end of file<br>
-=C2=A0+endif()<br>
-=C2=A0-- <br>
--2.49.0<br>
-+2.43.0<br>
-<br>
-diff --git a/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265=
-_4.1.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.1.bb</a> b/meta-multim=
-edia/recipes-multimedia/x265/<a href=3D"http://x265_4.2.bb" rel=3D"noreferr=
-er" target=3D"_blank">x265_4.2.bb</a><br>
-similarity index 93%<br>
-rename from meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_=
-4.1.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.1.bb</a><br>
-rename to meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.=
-2.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a><br>
-index 79dd99220e..4841f34016 100644<br>
---- a/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.1.bb=
-" rel=3D"noreferrer" target=3D"_blank">x265_4.1.bb</a><br>
-+++ b/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.2.bb=
-" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a><br>
-@@ -13,7 +13,7 @@ SRC_URI =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0file://0001-json11.cpp-Include-cstdint.patch \<br>
-=C2=A0 =C2=A0 =C2=A0file://0001-x265-fix-build-with-cmake-4.patch \<br>
-=C2=A0&quot;<br>
--SRC_URI[sha256sum] =3D &quot;a31699c6a89806b74b0151e5e6a7df65de4b49050482f=
-e5ebf8a4379d7af8f29&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;40b1ea0453e0309f0eba934e0ddf533f8f6295966679e=
-8894e8f1c1c8d5e1210&quot;<br>
-=C2=A0S =3D &quot;${UNPACKDIR}/x265_${PV}/source&quot;<br>
-<br>
-=C2=A0inherit lib_package cmake pkgconfig<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#130240): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/130240" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/130240</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121394339/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121394339/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000009e36fb065c478576--
 
