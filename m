@@ -1,101 +1,154 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC848C9831E
-	for <webhook@archiver.kernel.org>; Sat, 26 Sep 2026 06:34:12 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15042.1790404442592697341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 515A6C9832F
+	for <webhook@archiver.kernel.org>; Sat, 26 Sep 2026 16:17:50 +0000 (UTC)
+Received: from mail-dy2-f42.google.com (mail-dy2-f42.google.com [74.125.229.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22290.1790439469370699474
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Sep 2026 23:34:02 -0700
+ Sat, 26 Sep 2026 09:17:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=f_l_k@t-online.de header.s=20260216 header.b=Vt59D990;
- spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd93.aul.t-online.de (fwd93.aul.t-online.de [10.223.144.119])
-	by mailout06.t-online.de (Postfix) with SMTP id 8209FB35;
-	Sat, 26 Sep 2026 08:34:00 +0200 (CEST)
-Received: from [192.168.178.36] ([84.154.169.105]) by fwd93.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xALyx-2bP9pw0; Sat, 26 Sep 2026 08:33:59 +0200
-Date: Sat, 26 Sep 2026 08:33:52 +0200
-From: "Markus Volk" <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] ibus: upgrade 1.5.26 -> 1.5.34
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <GWKYLT.WM6P22M9DSDF@t-online>
-In-Reply-To: <CAMKF1sosmYaYwcaxnhPVECKKXTJfirtO3SBSqD2DBnMJX0MKEw@mail.gmail.com>
-References: <20260925092311.764729-1-f_l_k@t-online.de>
-	<CAMKF1sosmYaYwcaxnhPVECKKXTJfirtO3SBSqD2DBnMJX0MKEw@mail.gmail.com>
-X-Mailer: net.donnybeelo.Convey/50.2-1
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NWZgGwdh;
+ spf=pass (domain: gmail.com, ip: 74.125.229.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f42.google.com with SMTP id 5a478bee46e88-3413069aa25so1018750eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 09:17:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790439469; x=1791044269; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tPLzzs4nu4xmsCak75NRnO7m+tILXPjxrpuVkDvVOb0=;
+        b=NWZgGwdh5me1+v5pIEumhLWJb6T6wrGc545nc7bZFKnMaeni4nTh1Prsa26+5DnCnq
+         8dPVKmBnB0K8APAuBr2ZmAul7v606V04JJ7iXWNFq+GP36BY0eMAXiv4MowjqpdPy8qE
+         O0gVymL+sZWuvzqAyNcepzXlLC1M3zjjBLUOEfgV8EutwR99i2PqO/qjo5a/ckeBU4Ly
+         zQQadWnGWmuz6dAALTr9c5wZTFhNGVoSpinrc78WRd/LxIss2hzFa2YjiPcmAh7QIeev
+         h7UPkFP81CJfcpCyNEHQ1NkDtxeVSxGtzX0VfEOvIHa27I7m2hNGtdSHX7eB2Js9Txq1
+         2jYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790439469; x=1791044269;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tPLzzs4nu4xmsCak75NRnO7m+tILXPjxrpuVkDvVOb0=;
+        b=OnGIGozG84A1h3ICfrx7a3koOVr5rN61PPOEZkYv6AktAiUaEDXXXCV1mr9ZJxLyI1
+         ZzPzUcupOOKn0Ng7z6oRY/d9VNFlYUTpSnv+0eC5B2Bw7O1qBm7KMN08ZlLChwmkER42
+         QPdT3JSEUBUmDNDks8Hy/s0AZJJy1gKqJG3YNzmOvB080vzkQvG7DKKG+3N7cmA5t/I3
+         E/5Gq9RxKV0QuKpQ/WwmA6rbmhb120YTyn3RqQgb4EuUV2RzuAS929IaRggXZPiGi+a/
+         5TDhAiMDwdlmkn6l7jhHxQYQQJLSXKU4bY9mVjdPCvnhEde5/Dx30UiinJAgsnKuspjd
+         OO9w==
+X-Gm-Message-State: AFq9FYIYhqSrqi5tbgOxSmjLMquqbex6wYGTs8vpxen7L/y6ZUFLrBgE
+	0MRzhFm4FThCuALN98k9yjXsT5yDhUA/kq9dLcMTvwnAe2MFzML9siJbZOqJ5bo3Ua4=
+X-Gm-Gg: AYBFou13cxarQB6dMq5rxTjjS5W7iYJ5nOj3iqEGdPPsIFKF8Ayg4L0f1Ri8KYAny7T
+	1bJNrlrKd2uBTrwZD37o0iQOzhBwZ62omil4avYsSRdMPYjWFYFFkSRQk+dd5HoU2MNm+AmW4xV
+	QFaVXvWoj96TutWZUVJUKm1NA2U2ymRUw4ousxxkWLEWH6fTpKc5N0MZbOU7FpWxNdu3x2gtouU
+	jnT83casZHyA/eCTR+EjA7ft0BItfi+TbEgDh1q6yVDaw0VWeaviZ0+tAF8bfUYpdVuIe9s3jUv
+	73l7g9qFCp+CkPIjEy0X9YjJi4XIvbmpu/eZNSz3eXrZ6vsz3NKKhnIEZ1w6Otjg0fZoylMjHM8
+	Z9xMDo+DFDBOEqwq3J5EzLrGNfnNjxQAYYUuLZfPprHB4HAgKt/P4nVVd+1nsHl3Ljzjs5H3XQP
+	eBz84Pg6bPLvk7VNThx46C03wZHcKV78sp627RBIfw5OYpWNITvs/nipWrlBQFe3Jp+IInirBUE
+	ZUzM5jJ5pOWqFRLTQdfJvhTwwaTamQEiIUZ/0FpBH0yDh9iFlsAjgGOyxHB+SQ0x4r+4oZGuQEm
+	IjWIEiKYdltCWpb/8uAHuS9YGYQ4tGF/hKaxCDhJ1a8ofttT2r8EytOFqnsJ41t0XaS8kdYrf7i
+	FO+5xolf5x5usTKXdSmd1sd9tBGyXgHIoKlS5Okd9Lb6wfYRdhr1fVRW6NQdWkRH4CXO5a13RJy
+	jLqzvy8jFk3JWRUCv0GJPCc6mS7uDU0eRcGkwKOA==
+X-Received: by 2002:a05:7301:1505:b0:341:80ea:c987 with SMTP id 5a478bee46e88-34271c88658mr3170147eec.17.1790439468545;
+        Sat, 26 Sep 2026 09:17:48 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34141a4a00dsm16609664eec.1.2026.09.26.09.17.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Sep 2026 09:17:47 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] sushi: guard libsushi's X11 Window field for Wayland-only GTK4
+Date: Sat, 26 Sep 2026 09:17:45 -0700
+Message-ID: <20260926161745.3891393-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-EHWKEW++dhBrekLkCYfi"
-X-TOI-EXPURGATEID: 150726::1790404439-ED9FB9BC-E055C464/0/0 CLEAN NORMAL
-X-TOI-MSGID: 768a233c-db49-40ff-8ead-f50d9f071ed9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1790404440; i=f_l_k@t-online.de;
-	bh=pel9VMTw7XH4ljeyrdQEV9OKSa9MmoX0BB18d5BS99U=;
-	h=Date:From:Subject:To:Cc:In-Reply-To:References;
-	b=Vt59D990JhXRrF5Pp4h6gLY5Af6ZAcbcPnTsMCNaifYNw2OkX9eTlw88cH3l61c/M
-	 gtnJahzx3LCa9xrjne+Y0zYhHVW78NNDSgqgt+KYPRukaeSGEngolEPenJNb0hzqFI
-	 Oflz7bHBathCeKf36u2nwmHRiPivQCaQZQUg7yjwOvZUBZeo/Kz+lJj8EJcFdEdAhT
-	 +YB+yPF7qN9apryLVQVXg/hTSBswK3oshopSW0HLwjzzwJjkEd50WcIyYacsz1HA0v
-	 TcNGI9XoTy8gyAZ8Bq8g+1jqKJUqytbkX5ACuRwBRw6WJlLerzH31MHbg3mZI96dIW
-	 buuEJkGmKsy3A==
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 06:34:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130318
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 16:17:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130319
 
---=-EHWKEW++dhBrekLkCYfi
-Content-Type: text/plain; charset=us-ascii; format=flowed
+ExternalWindow unconditionally declares an Xlib "Window xid" struct
+member, but GTK4 only exposes the Window typedef (via gdk/x11/gdkx.h)
+when it was itself built with the X11 backend. On a Wayland-only GTK4
+build (GDK_WINDOWING_X11 undefined), this fails to compile even though
+sushi's own X11 handle parsing still needs an integer member to track
+x11: handles received over the window handle protocol.
 
-On Fri, Sep 25 2026 at 13:33:11 -07:00:00, Khem Raj 
-<raj.khem@gmail.com> wrote:
-> t stat 
-> '/home/ubuntu/yoe/build/tmp/work/x86_64-linux/ibus-native/1.5.34/recipe-sysroot-
+Fall back to gulong, the same underlying type as Xlib's Window, when
+GDK_WINDOWING_X11 is not defined.
 
-Yes. I sent out a message with this update. A change to oe-core would 
-be needed.
-I already sent it to the oe-core mailinglist:
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...the-X11-Window-field-when-GDK_WINDOW.patch | 42 +++++++++++++++++++
+ meta-gnome/recipes-gnome/sushi/sushi_51.1.bb  |  2 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/sushi/sushi/0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch
 
-diff --git a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb 
-b/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
-index c06832e35e..db176efede 100644
---- a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
-+++ b/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
-@@ -39,4 +39,6 @@ FILES:${PN} += "${datadir}/X11/XKeysymDB 
-${datadir}/X11/XErrorDB ${datadir}/X11/
- FILES:${PN}-xcb += "${libdir}/libX11-xcb.so.*"
- FILES:${PN}-locale += "${datadir}/X11/locale ${libdir}/X11/locale"
-
-+SYSROOT_DIRS_IGNORE:remove:class-native = "${datadir}/X11/locale"
+diff --git a/meta-gnome/recipes-gnome/sushi/sushi/0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch b/meta-gnome/recipes-gnome/sushi/sushi/0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch
+new file mode 100644
+index 0000000000..f93734800d
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/sushi/sushi/0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch
+@@ -0,0 +1,42 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 25 Sep 2026 00:00:00 +0000
++Subject: [PATCH] libsushi: guard the X11 Window field when
++ GDK_WINDOWING_X11 is unset
 +
- BBCLASSEXTEND = "native nativesdk"
++ExternalWindow unconditionally declares an Xlib "Window xid" struct
++member, but GTK4 only exposes the Window typedef (via gdk/x11/gdkx.h)
++when it was itself built with the X11 backend. On a Wayland-only GTK4
++build (GDK_WINDOWING_X11 undefined in gdkconfig.h), this field fails
++to compile even though sushi's own X11 handle parsing in
++create_external_window_from_handle() still needs an integer member to
++track x11: handles received over the window handle protocol.
++
++Fall back to gulong, the same underlying type as Xlib's Window, when
++GDK_WINDOWING_X11 is not defined.
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/libsushi/externalwindow.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/libsushi/externalwindow.c b/src/libsushi/externalwindow.c
++index 1111111..2222222 100644
++--- a/src/libsushi/externalwindow.c
+++++ b/src/libsushi/externalwindow.c
++@@ -38,7 +38,11 @@ struct _ExternalWindow
++
++   GdkDisplay *display;
++   char *wayland_str;
+++#ifdef GDK_WINDOWING_X11
++   Window xid;
+++#else
+++  gulong xid;
+++#endif
++ };
++
++ G_DEFINE_FINAL_TYPE (ExternalWindow, external_window, G_TYPE_OBJECT)
++--
++2.43.0
+diff --git a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb b/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
+index 8af34b2f26..c1584554b5 100644
+--- a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
++++ b/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
+@@ -28,6 +28,8 @@ GIR_MESON_OPTION = ""
 
+ REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
 
++SRC_URI += "file://0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch"
++
+ SRC_URI[archive.sha256sum] = "d326ec69fc004be3a5fc048f7ecf2c8eb828b7d8b682f1e7a2ba01a5e72993e1"
 
-
---=-EHWKEW++dhBrekLkCYfi
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"convey-body" dir=3D"auto">On Fri, Sep 25 2026 at 13:33:11 -07:00=
-:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type=3D"cite=
-">t stat '/home/ubuntu/yoe/build/tmp/work/x86_64-linux/ibus-native/1.5.34/r=
-ecipe-sysroot-</blockquote><div><br></div><div>Yes. I sent out a message wi=
-th this update. A change to oe-core would be needed.</div><div>I already se=
-nt it to the oe-core mailinglist:</div><div><br></div><div><div>diff --git =
-a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb b/meta/recipes-graphics/x=
-org-lib/libx11_1.8.13.bb</div><div>index c06832e35e..db176efede 100644</div=
-><div>--- a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb</div><div>+++ b=
-/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb</div><div>@@ -39,4 +39,6 @=
-@ FILES:${PN} +=3D "${datadir}/X11/XKeysymDB ${datadir}/X11/XErrorDB ${data=
-dir}/X11/</div><div>&nbsp;FILES:${PN}-xcb +=3D "${libdir}/libX11-xcb.so.*"<=
-/div><div>&nbsp;FILES:${PN}-locale +=3D "${datadir}/X11/locale ${libdir}/X1=
-1/locale"</div><div>&nbsp;</div><div>+SYSROOT_DIRS_IGNORE:remove:class-nati=
-ve =3D "${datadir}/X11/locale"</div><div>+</div><div>&nbsp;BBCLASSEXTEND =
-=3D "native nativesdk"</div><div><br></div></div><div><br></div></div>
---=-EHWKEW++dhBrekLkCYfi--
-
+ export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
