@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29E02C98324
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 10:51:24 +0000 (UTC)
-Received: from mail-pz2-f16.google.com (mail-pz2-f16.google.com [74.125.228.16])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.34525.1790506275280257606
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 715B5C9832F
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 10:51:34 +0000 (UTC)
+Received: from mail-pz2-f43.google.com (mail-pz2-f43.google.com [74.125.228.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35366.1790506285720183321
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 03:51:15 -0700
+ Sun, 27 Sep 2026 03:51:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=f12bxS7G;
- spf=pass (domain: gmail.com, ip: 74.125.228.16, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f16.google.com with SMTP id 41be03b00d2f7-cc4d2fe2056so707530a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:51:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=pQT5HiUo;
+ spf=pass (domain: gmail.com, ip: 74.125.228.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f43.google.com with SMTP id d2e1a72fcca58-85469b355ffso909811b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:51:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790506275; x=1791111075; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790506285; x=1791111085; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TpUVc7kkwVnTZofXcKoZSt0Y9VhWezbjqCkdnZNbZ4g=;
-        b=f12bxS7Gc7oKMy2lP/j7YYobCcVG5/zEhzNSTx7QtfJDmVAM94SlCu07nJrJEfHjj+
-         vrMAUqFSrXdyjjtS81MFTVGtKUgJCVYa38kErwt4hufwe+IH9DnvPrBI4TRvpudWpAM9
-         /6ZTm35fPNAGs7kqUZk6qeE42Z+V7M2CxBBHSw7lXXN6GOwAz3yiVXKQ/aTjOSI7eGxc
-         miCSuTS3bpD6x0AjoeShHNP4gtjGrCOkmPYRnmLRF/Fk5rBi/WV3WKna2wFoQrE/EB4C
-         +yWkTyT94P6m5RLPJcYtiv5BfpzvHaHuIY0LI4QLeotbUY8cpMcEFvIpSW6wAkjquh9N
-         bTrA==
+        bh=3SuNBMtYkuXuU6Y3LF85Dp8ojHQQLghI9pESWYoVrK0=;
+        b=pQT5HiUoAcA7I2KYp/Xj3mKPexhn2GeIR6e6NM8xFLui8uThEpotXOJlMwU3S5epIX
+         7M5aIOLgXPULkMY1wUldQiHfYEHCRNq1jTQ3UEflLh9jU6lJzh1HGeTIVNQRPF3VB+Jj
+         K4nXMCvPeIj0o4WqVBFj1qxtLkvafdICZoMZ0frlIpLvdiH11ITotqV00yEiHIcTwGZU
+         lNL3qlSjZvU2F9i9wjtWnGlIJIQ8zDDW79+43YJaq8BMvslnjmefaC5pMwYbYDbrwedK
+         SanDWEr2rCly367Fgg1mk7MHauJ1zyt+U2mO/mvMbNY9tUH/rKJ5mnYV4tkcyKdRMbvW
+         /n0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790506275; x=1791111075;
+        d=1e100.net; s=20260707; t=1790506285; x=1791111085;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TpUVc7kkwVnTZofXcKoZSt0Y9VhWezbjqCkdnZNbZ4g=;
-        b=r52g2LtYUqupIP1YflynnSum0cYz2ObEFGPU7Kx/aEH0jLmYPZ/9pFvJ5fl05VKuH+
-         j7gAuX7EGF3npwxNbQlSfCouQfpe/8LYPcKpTBSHg+Xf3aYfQOlxSJruuSP64lKn0U5x
-         Kd8dP44UMQQdLz+i0KYMhAaOX7yTq50iaXQ8tDLQmAvnGC/prJC0FfLdv12uqhweWM/g
-         G3PR4AP6W8SP53tLXN+XFiLV6JaBABdVlhHsPIdMKWJZx4JbvcbTj485SLxZu9gU/qQu
-         hqnWYjb6TL3LzT0liIjXETz3Lc8P82Yc40/cT7jlT8iMg1A2Iwaonxev3wk4ljDD8aNf
-         MGjA==
-X-Gm-Message-State: AFuF++nBe0n6QiD/vjWfIr4BHiuND6lAZv4jvvPiqfF+mP9oU+dvwhJO
-	7Txkjjzprj2q8PxbKOfw0mdtQXOr4HRN9V7F0XxWTQox9Ab5Rw38qAIjg5AXOQ==
-X-Gm-Gg: AYBFou1AInj8eWqIlhr8sUj39pBy9gssFB6Z/YJa8cuxZrzBxn9r2bpI0FP+bjdVKTu
-	qzmllOA0luNxtKBvanx5xo0UbzQEU0XvBYVXAjrvVDGvVaZEXFtTTpnFYzkDHmhNcNddF05Wf8Z
-	SbuaXbcrMagLjmdJwOJQoA4L7DqDAFVMsdRqJyLLYtuH5TqIvwbSMCRTtQA2A82tWu/G7Yn4JL6
-	ZKvzIAkCgzGx4qcHZ1Ycx7mYeATjaunQP/+xCBTxpv9HyJyn4yUCuK4kR0u2JUxSrcIWkpUwyoE
-	V9shmMvaHqDTLEyjpHOhUReGOO+7iB/WlbmXTwBugICEO8Epvbc3VBvA0acrD371KloFktyvGKv
-	ECQmOQeOTfZ3k2tdVpy3+C1uunxLlAc5cMKS2+4DjTjyVZ6LAbYNE1Dr9eXzjyCyZrCNokmX/WR
-	SHduF4Y43Wf46qeXmJavb85XZ0/R52rhBmAPkGHWhif8PlH/+G8v2hO7zYpgzFaRrfSTkhvZ0cK
-	95UYJSfzuTsgm7HMfEmtGI=
-X-Received: by 2002:a05:6a00:1585:b0:880:4b56:dc28 with SMTP id d2e1a72fcca58-8804b56e3cdmr4338204b3a.15.1790506274634;
-        Sun, 27 Sep 2026 03:51:14 -0700 (PDT)
+        bh=3SuNBMtYkuXuU6Y3LF85Dp8ojHQQLghI9pESWYoVrK0=;
+        b=NC5JVmL02bY8Uvew3M1B1BgNxk8DY2fPSd3z0VcVs2fhI+SMH5g6I3l62vUDk/oLjc
+         KXgXMpU1ddwKDtwo8pIOcMdufhlXiqTYzIqEKL3o43o851rVzMTkQkwMQ1G+/G826y4m
+         QXnJayk8NQ7IkRLdXpxmuoX7WUfuAAqVPS97HpmtkBbESeBTn6oDc+XrAlaBejUnC2Yk
+         z/M9e3My9/9pJfycsAWWg/disWp6Upb395AuvXLLjRjzHlHAXKV7k+m00FshEHUjJFDi
+         sLrM3wH/KTKOZa0aBc/5XhaTL3rCJOnyQZsZBZQHtll2IDJwdRAW+wJ8/MUstr/C8fgJ
+         PV8A==
+X-Gm-Message-State: AFuF++lF73SMbmIhEbE7KwXJkt4oGUAY7eZzeoRX0CjEMVKD+5qoC1w2
+	PsKDbOltW/wdKFU+7kIC4OHby2VA68knE3MKMHxBjdYW2kXJLExofUWVdkQCBg==
+X-Gm-Gg: AYBFou2KZHf8Yte9QfbeytyTQeZTqU0x463uLxF0GEtsMcS/tgGJllOiTLYWlr8Mu7H
+	B6eiilyA36ShQE4VyZ5G1/Yeh0Bjx3gPPXEsjH4tiSP5g0A9abPdnPrciJ7W8OpKvVCTHb2kqmB
+	8NN3137qxUzKWFzvV0v5GyFXuhDpQVPbC0OQpoBZCObKhpxl8a0TzH/OJQRIvyz1EWmkn+pCUsk
+	hlu/wef/xC4Ecyq1puTcFge+QzTuKXprnmvKfSHN2NXlbvYUQ0e3cQ2f9kHJg5MxX+8lc0UiotZ
+	RONhUnKikT8SRFKYLdNAAAEtm1BDjUwX//gGM7gq2aVAIvvFuf+3Sp6OVDy8ZFbwrgl6wy3X9r4
+	aOGReoTXZC/UnG8Eiw4OrC8t2AWmFfPxrpcLsIhVSXpNwUQQ4Uj7reIoY2D/NGlKMB5NgZXFNhw
+	/ut1KyptRzc32tU1NV2MpJVLr+8x2j4y6z1PIXac0RuQD7NOm+0SclouVCZp4EneLVgV6tP1cV6
+	mfYuz98he7M9kl6yhjjtTA=
+X-Received: by 2002:a05:6a00:e8e:b0:882:7f85:291d with SMTP id d2e1a72fcca58-8827f855658mr1184204b3a.19.1790506285073;
+        Sun, 27 Sep 2026 03:51:25 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.51.12
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.51.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 03:51:13 -0700 (PDT)
+        Sun, 27 Sep 2026 03:51:24 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 24/35] cryptsetup: upgrade 2.8.7 -> 2.8.8
-Date: Sun, 27 Sep 2026 23:49:51 +1300
-Message-ID: <20260927105002.1832451-24-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 27/35] pocketpy: upgrade 2.1.8 -> 2.2.0
+Date: Sun, 27 Sep 2026 23:49:54 +1300
+Message-ID: <20260927105002.1832451-27-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
 References: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
@@ -67,34 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 10:51:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130358
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 10:51:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130361
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://cdn.kernel.org/pub/linux/utils/cryptsetup/v2.8/v2.8.8-ReleaseNotes
+https://github.com/pocketpy/pocketpy/releases/tag/v2.2.0
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cryptsetup/{cryptsetup_2.8.7.bb => cryptsetup_2.8.8.bb}     | 2 +-
+ .../pocketpy/{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.8.7.bb => cryptsetup_2.8.8.bb} (98%)
+ rename meta-oe/recipes-devtools/pocketpy/{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.7.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.8.bb
-similarity index 98%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.7.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.8.bb
-index c481c5cc7b..5400e63c87 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.7.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.8.bb
-@@ -24,7 +24,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
+diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
+rename to meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+index 910deba386..e4aca45ae8 100644
+--- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
++++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+@@ -14,7 +14,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=224889df377610675315e194ac59276c"
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[sha256sum] = "e776f0d381e86ca61042c457069491fe8e0ac286780c7c3b1e4f9921abc961da"
-+SRC_URI[sha256sum] = "3acfa685f2dd7fcc832e0b77bc7093aa7da554a51ce8dafbb4138eaa854eee35"
+ SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV}"
+-SRCREV = "a2f16e5f1f5fcc3b3d2cc1bdacfc3a027dfe2d76"
++SRCREV = "6cbece9ebc98c19fa2c189dc6963b421c22c40ae"
  
- inherit autotools gettext pkgconfig
  
+ inherit cmake
 
