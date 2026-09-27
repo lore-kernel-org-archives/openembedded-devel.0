@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9F44C9833F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A247C98328
 	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 00:39:50 +0000 (UTC)
-Received: from mail-pj2-f41.google.com (mail-pj2-f41.google.com [74.125.227.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29274.1790469586244353262
+Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29271.1790469583794201019
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2026 17:39:46 -0700
+ Sat, 26 Sep 2026 17:39:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=X4h2H3np;
- spf=pass (domain: gmail.com, ip: 74.125.227.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f41.google.com with SMTP id 98e67ed59e1d1-3a0bcdf41a3so922870a91.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 17:39:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=rhKpK8zf;
+ spf=pass (domain: gmail.com, ip: 74.125.227.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f43.google.com with SMTP id 98e67ed59e1d1-3a0b0fa2055so1147780a91.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 17:39:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790469586; x=1791074386; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790469583; x=1791074383; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=D+RNC3o09m2sHgU5jd32fJsbyWzu+VeOOAHJVhuHz+E=;
-        b=X4h2H3npVvgg6DSUfO93hnTm1K1lLT8SuDSFLSXrxf3BkyD0ZOLByw1k6SEys/CNEx
-         KZiXNtsguL+p2wyOozufm3LMeGzSRC2P7wtsrCIqEnivVQ7LE5utd0rTtec07BVuPkUU
-         2gz6ZzveZrkFCWAhi2AkJyT83UeW1NOMq4DhCIPiolgVmHm8iDE3uxICHtsZFRjFFg6u
-         TUjlrFyL22GF9DsrK4K+HDfoE4rAyrDAKxd3cBqXfNAHICPwkn2kV/WIboaquorv9Bk5
-         1c/3kIQD69UXg9+Cqd4cpUuaIgdwNW3E2YseYdwEWAtLdYJhN40UusgwdMu8ILpzz25U
-         FFHQ==
+        bh=KItwui4v3L6Mik1fdMuLAfKsq6yVBG4V7BCkPKoB/Eo=;
+        b=rhKpK8zfqCNyagAkDWg5/Pc61WEbgAeU/E0My9MnfBFgz12SPAkdV1yWKwdf506mHu
+         D7rrPgAP4H5G0BJLS0+vyOWa2DWgjr6vQ2Z0SGcVNNIkz2SoBQANbL5mO072G6GcksmY
+         618CI3HAXLkp6thJQ2WqhG4olKC4ZHsdQ5JRgYCR1tcAphMuXyePoOzWNjVziaYLe6vT
+         94py2U8EAN0UsQyM9mrUrX3I6KhlpjM+L19egHrjyLJrWURCyCyqUPU2aqdbpNy1m77V
+         4b/7zttc/ZW++R1Fu9OzwX4ClFvNylUMkGVJyv1uQN7Vm9ljVdN+8AswvAvb7XyVijS9
+         nEUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790469586; x=1791074386;
+        d=1e100.net; s=20260707; t=1790469583; x=1791074383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=D+RNC3o09m2sHgU5jd32fJsbyWzu+VeOOAHJVhuHz+E=;
-        b=0RoZnk7l4mB2rzAVbJoNSvmBUrOARWuudCOcFfz38DPuCTHy5TxcRs9PD8ixux25ZZ
-         YdC8Iq2+7F5pUg9uZ/AOSPZDtJIyTakBu0NyG42dI3P8mlzuzsCfkK15g2h3Nv+xYqpQ
-         UH4HPUztHa9KbzaL+cd+oGZ0dlxc/YkJsRoRtboFYvxCuODzD9N7vhnl8vP6DXFJyRat
-         T94t7O2lz8ZXLcs9tzZ7oJ1BBPFM9N6V5+1I5WZDBMHJyy5H0P2/gGfpWhhmxqBJEhXK
-         Pe5SvasW1+4/MoNXOQmkf0kESJjz28gEUBpGeM+8/RC0NLildm3nwSFo4lCKjrVW9Nfc
-         kDXA==
-X-Gm-Message-State: AFq9FYKeJOk4i8sLRwJUTlEnv5Y0W09mfxktPoYbO8eBPgAyPElrCA0R
-	E+TMKcB6mcqhF76i4BYiHbsfm0TOEpTX9r+zgZ7rmUWBW+riehn/1QGTj5VDCQ==
-X-Gm-Gg: AYBFou3nxxtSX7hugWj62i/BKc9+hP6QPmMTMQLiS7g8qfMZateS/SLAQ5FxPnw3QvS
-	mI76IIsOeX4LgLj/lUfELwmkbc3oyMbGkNtlp+dERQdx1VFibHK85he+LvjPqp2v6FsJLhVusIh
-	55NKi75qCL/zbP58G5Q2YPFi/fbf7J3cnB8fgaCjIDSryZA2sT1Hgq0YdQ8/KZfs8vKktI3fi3e
-	/gLORzlEEU0igCfD+U4eIM/WkT1vOGyqGPyCrOR8HbF7dFJorWyoRGUsriUu+vbkzedu5D0HvQE
-	0RRtXFq1ruOvx1jByfSbbY/Yf/MNrTWodZ2afxDpjELQ5W2ND+zJWN20s+jCOENiCW1aHbkpvOw
-	We0zrznYsRaZyfDq6ocsoRjJngYFLQvuJjE9Gc0DfylJIexR9nklebZyJGQ0ggutBLdV0o+bKTY
-	zK2LZU0z0HP3BaYB7H4fUGfM40igvWvTVnRPTDpjTOnhJ8f3bK7eleaSGPhwKaJduoPNV2EuC3n
-	X80n7ryd1z+Ntu3LGXSHEU=
-X-Received: by 2002:a17:90b:4b0a:b0:3a0:7cbf:b8d2 with SMTP id 98e67ed59e1d1-3a0986ed05amr8490582a91.10.1790469585489;
-        Sat, 26 Sep 2026 17:39:45 -0700 (PDT)
+        bh=KItwui4v3L6Mik1fdMuLAfKsq6yVBG4V7BCkPKoB/Eo=;
+        b=f8I1UAFCza05G/bVHFlsYUBGD5N2NJaFoA3ujM5Msi72tzdSmDf/dfohSpKdYBiyqO
+         aBvjeU3sYk+U/Ofv/chU7CnXGKhRvT5E5cmmjwh8e7TdPRcGK1wkgu7wLeawDEiBjVRm
+         BKjPH6uYo9k/U6ZvQXarxDS/fRcWaQHiBa9+BoCnyWY/bAEcMP2LZ4qSIM//HZjSsySr
+         KVBjdUoIBpaXCPCAadH6pe4Nm4QzawbSurAk4LixAL2rW22iMypxM1SZvrNuRSeJ2pMd
+         WzHkMHWUhdHemOpD+rYQlkvYwnqfwkSux4Kk+HgX3Z6RaiTwByodscTXgcMwqrRQBpgu
+         EnTQ==
+X-Gm-Message-State: AFq9FYJtlhp7TapC5ek+9DWhVAcEpi8wR0wR4usDPcxYH9Zpj/CIjS+7
+	/6fP+dg5twsJDnAQsgk6wgu43vJjGIWhcluJeSDGQRYJQHlzH4FMSd858af9xA==
+X-Gm-Gg: AYBFou1yTVGEzY1My7HlWbWa0IdfjPYv1JeJO1kYI5NMwxrusO+LkU3aoRGBRcUoz0J
+	zO96hGnSXq7pU5YAXNBbzT1jdGBux1G2Mf3u6Ko1UOhx0UFSVd0+Y7HjEqOQNnRI75yBB47pyZn
+	vJpVwLI5DdOV4Q9zwfqggE0IVSWh7b+mfzaEekBAMvCUfb7GPKLXTNFyWgbigRU5Cz0antYGMHo
+	zRa+Aii9sZ/M1EiG3sm6bGdytaNWZMTsfYQo8PltmItnAjox59VCZXGscWiGhW4ci1iK/s5IX8p
+	R3x8ddGlEtMQDs4FFzdtcbbh2iAJ6q2wNfyBMJFawzyTE5G6cO1HZ/3zR2UQ2Z6LhfPibL+FT+e
+	FCDH9d88ZirzHYGDqdSA2ERFBBs76sOtK0AXZJaBbNkfG7tFZ3CcWRezbfqCiiZs3sRIRqC3kno
+	EuxzlB+wciWmseZBA06kQ4aIjNaLwikrQckZon5W3D4kS6mdcMmoPorIqV6pzT5oJKDtgQT/N8G
+	zL7GYV5mY9jhveOsAmvYsA=
+X-Received: by 2002:a17:90a:d2cb:b0:3a0:dfb6:aec7 with SMTP id 98e67ed59e1d1-3a0dfb6d466mr2689565a91.67.1790469583048;
+        Sat, 26 Sep 2026 17:39:43 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0d22281f0sm2876420a91.1.2026.09.26.17.39.43
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0d22281f0sm2876420a91.1.2026.09.26.17.39.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 17:39:45 -0700 (PDT)
+        Sat, 26 Sep 2026 17:39:42 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 8/11] freerdp3: patch CVE-2026-85089
-Date: Sun, 27 Sep 2026 13:39:18 +1300
-Message-ID: <20260927003921.746786-8-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 7/11] python3-tornado: patch CVE-2026-91991
+Date: Sun, 27 Sep 2026 13:39:17 +1300
+Message-ID: <20260927003921.746786-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
 References: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
@@ -68,101 +68,95 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 00:39:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130327
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130326
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Backport patch from v6.5.8 matching CVE description.
+
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-85089
+https://nvd.nist.gov/vuln/detail/cve-2026-91991
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2026-85089-1.patch   | 28 +++++++++++++++++++
- .../freerdp/freerdp3/CVE-2026-85089-2.patch   | 28 +++++++++++++++++++
- .../freerdp/freerdp3_3.24.2.bb                |  2 ++
- 3 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
+ .../python3-tornado/CVE-2026-91991.patch      | 57 +++++++++++++++++++
+ .../python/python3-tornado_6.5.7.bb           |  1 +
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-91991.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-91991.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-91991.patch
 new file mode 100644
-index 0000000000..78a985642d
+index 0000000000..6bd755af57
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
-@@ -0,0 +1,28 @@
-+From 2ccd047f64930ae10518ea14f476b2f311218814 Mon Sep 17 00:00:00 2001
-+From: Armin Novak <armin.novak@thincast.com>
-+Date: Thu, 13 Aug 2026 11:23:46 +0200
-+Subject: [PATCH] [core,info] write zero to info data padding
++++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-91991.patch
+@@ -0,0 +1,57 @@
++From 566a5ff64a530dfbc6bb6afbb1615c3e7addfd8d Mon Sep 17 00:00:00 2001
++From: Ben Darnell <ben@bendarnell.com>
++Date: Wed, 5 Aug 2026 21:33:26 -0400
++Subject: [PATCH] web: Also check for semicolons in deprecated mixed-case
++ cookie args
 +
-+(cherry picked from commit 056cede398d71c1f2540baebc26ec3327a249301)
++(cherry picked from commit da284767eae8e1f0484f123b8c3225f6465b09c7)
 +
-+CVE: CVE-2026-85089
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/056cede398d71c1f2540baebc26ec3327a249301]
++CVE: CVE-2026-91991
++Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/da284767eae8e1f0484f123b8c3225f6465b09c7]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ libfreerdp/core/info.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ tornado/test/web_test.py | 12 ++++++++++++
++ tornado/web.py           |  6 ++++++
++ 2 files changed, 18 insertions(+)
 +
-+diff --git a/libfreerdp/core/info.c b/libfreerdp/core/info.c
-+index a11cc12ff..003bec52a 100644
-+--- a/libfreerdp/core/info.c
-++++ b/libfreerdp/core/info.c
-+@@ -1495,7 +1495,7 @@ static BOOL rdp_write_logon_info_plain(wStream* s)
-+ 	if (!Stream_EnsureRemainingCapacity(s, 576))
-+ 		return FALSE;
++diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
++index 9bd1d49c..27e7fcfe 100644
++--- a/tornado/test/web_test.py
+++++ b/tornado/test/web_test.py
++@@ -329,6 +329,18 @@ class CookieTest(WebTestCase):
++                                 "unexpected exception for char %r in domain: %s\n"
++                                 % (char, e)
++                             )
+++                    try:
+++                        self.set_cookie("foo", "bar", DoMaIn="example" + char + ".com")
+++                        self.write(
+++                            "Didn't get expected exception for char %r in DoMaIn\n"
+++                            % char
+++                        )
+++                    except http.cookies.CookieError as e:
+++                        if "Invalid cookie attribute DoMaIn" not in str(e):
+++                            self.write(
+++                                "unexpected exception for char %r in DoMaIn: %s\n"
+++                                % (char, e)
+++                            )
 + 
-+-	Stream_Seek(s, 576);
-++	Stream_Zero(s, 576);
-+ 	return TRUE;
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
-new file mode 100644
-index 0000000000..90e921dc39
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
-@@ -0,0 +1,28 @@
-+From 1228a148cb3754a78b8c40737e14d0be5030a382 Mon Sep 17 00:00:00 2001
-+From: Armin Novak <armin.novak@thincast.com>
-+Date: Thu, 13 Aug 2026 11:24:02 +0200
-+Subject: [PATCH] [winpr,utils] initialize wStream buffer with zero
-+
-+(cherry picked from commit 483c9388119f06bac420d92053cff9ef94e83bea)
-+
-+CVE: CVE-2026-85089
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/483c9388119f06bac420d92053cff9ef94e83bea]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ winpr/libwinpr/utils/stream.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/winpr/libwinpr/utils/stream.c b/winpr/libwinpr/utils/stream.c
-+index c0beba7fc..224459584 100644
-+--- a/winpr/libwinpr/utils/stream.c
-++++ b/winpr/libwinpr/utils/stream.c
-+@@ -98,7 +98,7 @@ wStream* Stream_New(BYTE* buffer, size_t size)
-+ 	if (buffer)
-+ 		s->buffer = buffer;
-+ 	else
-+-		s->buffer = (BYTE*)malloc(size);
-++		s->buffer = (BYTE*)calloc(size, sizeof(BYTE));
-+ 
-+ 	if (!s->buffer)
-+ 	{
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
-index edd2fddf94..1c46a8b9ca 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
-@@ -25,6 +25,8 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${
-            file://CVE-2026-64621.patch \
-            file://CVE-2026-66401.patch \
-            file://CVE-2026-67288.patch \
-+           file://CVE-2026-85089-1.patch \
-+           file://CVE-2026-85089-2.patch \
++                     try:
++                         self.set_cookie("foo", "bar", path="/" + char)
++diff --git a/tornado/web.py b/tornado/web.py
++index ec7ec3f5..6f1ae304 100644
++--- a/tornado/web.py
+++++ b/tornado/web.py
++@@ -717,6 +717,12 @@ class RequestHandler:
++                 raise http.cookies.CookieError(
++                     f"Invalid cookie attribute {attr_name}={attr_value!r} for cookie {name!r}"
++                 )
+++        for k, v in kwargs.items():
+++            # Also check for disallowed characters in deprecated kwargs.
+++            if re.search(r"[\x00-\x20\x3b\x7f]", str(v)):
+++                raise http.cookies.CookieError(
+++                    f"Invalid cookie attribute {k}={v!r} for cookie {name!r}"
+++                )
++         if not hasattr(self, "_new_cookie"):
++             self._new_cookie = (
++                 http.cookies.SimpleCookie()
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
+index ce7b903ef7..ca5b0a0470 100644
+--- a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
+@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "66c513a76cda70d53907bc27cf1447557699c2e95aa48ba27a442ff61c
+ 
+ SRC_URI += "file://CVE-2026-91990.patch \
+             file://CVE-2026-82397.patch \
++            file://CVE-2026-91991.patch \
  "
  
- 
+ inherit pypi python_setuptools_build_meta
 
