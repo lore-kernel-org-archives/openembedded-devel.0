@@ -1,148 +1,149 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <johannes.schneider@leica-geosystems.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB9D6C98328
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 00:40:00 +0000 (UTC)
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30003.1790469593852813950
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39386C98324
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 04:16:02 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31324.1790482558547292449
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2026 17:39:53 -0700
+ Sat, 26 Sep 2026 21:15:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=MI/rbBCn;
- spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-398a147688bso1437422a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 17:39:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790469593; x=1791074393; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=u5KTHW9KWjVoScyLNmtZfx6K+1gWWzp678SI7V9AU+I=;
-        b=MI/rbBCnDo1NNeWF2HuT5g2i2vUf+nSww5yRPLFvzdBglGn10NBo6uFslIUo0opxFG
-         BDq4msDaGH6qakbdzYsZ1Kq30TohqWL1s/gYbySeKCnNedAo6cBBWbMeDzo1v7YeAwJs
-         pH6peRTDpy9kjDPVeeP7BnNnuiuyhMQ844TzsytdYPcuXWQSTyanUWEcHbPVoY2Cq1Nl
-         OJFc1T7apG/mZFuGbyTLwuLuRo5obmrIwnLSUF5149qmCNMyvB8SD2C80nDTkANlUQJO
-         auw02CwKyQIEPJxw2G0MF9h5khhedhw2WEQQluIr9WOCfW78fj1WvJjBeb7eIZ4Ul/dg
-         hMFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790469593; x=1791074393;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=u5KTHW9KWjVoScyLNmtZfx6K+1gWWzp678SI7V9AU+I=;
-        b=zBRJ0NwHBYWFurU66ovk1YGC3gmZ7i2rzGHMj5BsJulyaBqP2OIHrxbdWmZpOkbcf2
-         NR0MzBxIOK57GylsimBR0sLNqq9KgBTMB0vqK2gJAcLb++lPSrjDuIzG/eHu+nnmh8sR
-         4HCnlEJnDi/XVaGE78Y8RlD/ezAuZQ7JLAZ/DSaxltGmeR6xUUHH8qhczcV8861kgEWr
-         jTGshJ5xP4GaGKGJDpgXqqrsix2ovoMqh+qjXOKAS6sRDflNUbdwv3qHBq4ejI0CQrCu
-         QU0auO7Ef+wJOUdmLv+hOtxXZcYhh4SA5pwsdwbSIo7wy/K7P2bgMPy5g6UI94blttB+
-         3psg==
-X-Gm-Message-State: AFq9FYITX+MIYfNPQb/b5RAirmbY15wMBVi23LTXOavWulkBIeF1UuCM
-	AozkY/1gOXeO9vTSmLz3MMNaoykN7XqsagaGHt4qwAzUZ082z0FPgSjA0cJYkg==
-X-Gm-Gg: AYBFou3x3wU5lSJwGAeC8ndipEjY+IsWqJSxCEItMuYEiH0vPuxSS7LCiUsE4ZAUgNk
-	1aN6T63xxGnWB0SFQq3HrWHPx1hpV49Fqxp+XeJ+fpF44bGIKihJp4j8cqazXMGAbBvD/h0Vfk/
-	XsCICfZY5yGJmsGRbPOx7FghvGe5pct6api8Vv/6NFLOn+TpE1AE8mweaD1miN+Txtjug2qnrzD
-	ZMlQR+j2DxZcdt+MLah1tEiRF7SUdnG78xAVyADUIWgxKW348pH9yzqBK0K26C6ajPS908bqIkz
-	dNFDPFWfgdm6xKvmixHUV/YtvuBuLPsuqxnDdNBGrl5Qrszdu1kV95k5K3RL7H4TCfaP8hkOi/i
-	quavmUuvjZE2/0UP4CzSAla9VWYuf/ERpivlZLQ+TXf6qDhNTMOAaxwM38duyFmnu5B7gfpZIl2
-	LTwAaVBa0/JJYtQJ3rJqCXEDtJpN6k2KmcNA2w+33gUnoh93wi8ai2saYx8cJpZi176smUL1nqn
-	0cbnEJDnEcLnV9jB7EiQW0=
-X-Received: by 2002:a17:90b:52cd:b0:39e:6c69:9b8b with SMTP id 98e67ed59e1d1-3a099231f90mr7452845a91.48.1790469593137;
-        Sat, 26 Sep 2026 17:39:53 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0d22281f0sm2876420a91.1.2026.09.26.17.39.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 17:39:52 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 11/11] gpsd: patch CVE-2026-60122
-Date: Sun, 27 Sep 2026 13:39:21 +1300
-Message-ID: <20260927003921.746786-11-ankur.tyagi85@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=pd+wzUGB;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.66.54, mailfrom: johannes.schneider@leica-geosystems.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vsv2gSkCmx/OzXNti1BaW7Qrj+Ht5Bph7I2A+1/aI6+08pdQpWXjxLgBPaRvkPZDKUq2ViiwXMuShzRICfD0ZgccM71EN5Nl7vXvmS6m92P5UyyB8kJC8YLTEupqjXKeP2Ahhk9x9W/XLLri5QjERFg55qfZq8vyZVYoxKRAxxSVT1l0m2vm0QQ+QqQzz4faWTKHbtSGW1Hvv/KOEsoKJLRKQfBBD+sPOPdi9Uw6HAWmZrfegDSFj6D6Gp8FjSlyRYDSOTgh5+2Tp90jDLNMdx7C855/h4ci0VwS4pwzpqkzCCy8/nznyfp9ijrf/EmUeMHgXMY2FbR9gURzj08pUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YJmZs1oeLC+GMwgSWPHfWTjaQfypKSY4Tsl7ROyhwvg=;
+ b=iikghvTmQ1xaEpe7+Q0DOd9q4uhHNc5rg9wQZkPHlSBux/IlS4vKeIxWhRGf9Xh5DrjKbiTXzQttiVzH5MxnwypWeq+K66mKQre0j6v9Ms7Ln3Lmk8cy4WwEOS2rGfPLaeWLT0bTP/0f5FnqF5uTikxbg7ICZiDVGfJvdTFtMikSmj3q7NY+yl5Z89cXaxdSV5s/4e7TKBsclVS5U7TZkPUwkctQcjPqNbUBmQP1sh40lgKFoucPd18iYtQu+z1iaSytsqfX5/1R+KMwfZkl5McVXvbniDlQXjuY3DP8mweK4MUrHFX5Tf92ch4WtFLXIqisM463zX92R5Ivvp345A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=leica-geosystems.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YJmZs1oeLC+GMwgSWPHfWTjaQfypKSY4Tsl7ROyhwvg=;
+ b=pd+wzUGBiEPLb65fiGTaHpTE84IiXxFWJ2ckoMA0O4e0o3PwVbp2sQzwNz0EiUT3m1GohiDcFCNToRMBMA1CcMsJS2m9iD5dmzUUChnaLFaRacbZMRGt2Gj/GXXJ6bTE+BDJ9nU7LBr7xQ/geaSfsEFdB5/dxEZsoGBpIcP0ixI=
+Received: from DU2PR04CA0053.eurprd04.prod.outlook.com (2603:10a6:10:234::28)
+ by DU4PR06MB10382.eurprd06.prod.outlook.com (2603:10a6:10:61d::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Sun, 27 Sep
+ 2026 04:15:53 +0000
+Received: from MA3PEPF00000406.eurprd04.prod.outlook.com
+ (2603:10a6:10:234:cafe::ad) by DU2PR04CA0053.outlook.office365.com
+ (2603:10a6:10:234::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.23 via Frontend Transport; Sun,
+ 27 Sep 2026 04:15:53 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
+ signed) header.d=none;dmarc=pass action=none
+ header.from=leica-geosystems.com;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
+ designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.99; helo=hexagon.com; pr=C
+Received: from hexagon.com (193.8.40.99) by
+ MA3PEPF00000406.mail.protection.outlook.com (10.167.241.151) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.451.8 via Frontend Transport; Sun, 27 Sep 2026 04:15:52 +0000
+Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
+	 Sun, 27 Sep 2026 06:15:52 +0200
+From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+To: openembedded-devel@lists.openembedded.org,
+	f.pflug@pengutronix.de,
+	jlu@pengutronix.de
+CC: raj.khem@gmail.com,
+	Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH] signing.bbclass: drop dead OpenSSL engine handling
+Date: Sun, 27 Sep 2026 04:15:50 +0000
+Message-ID: <20260927041550.759003-1-johannes.schneider@leica-geosystems.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
-References: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-OriginalArrivalTime: 27 Sep 2026 04:15:52.0192 (UTC) FILETIME=[E23E5800:01DD4E36]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MA3PEPF00000406:EE_|DU4PR06MB10382:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 961ac4ca-60c5-4017-7a4d-08df1c4e04ea
+X-SET-LOWER-SCL-SCANNER: YES
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|36860700016|376014|5023799004|11063799006|56012099006|6133799003|10067099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	O94k5wKrexxME4pFmzUV73puIATNqsvAL18n4Z2TzNCgGK3qeOkJd+vyDE4Ob4F/kduh713t9ca+T4FB7uXBwMaj5YJE1nj/x2Ko72IJh+onK5nq+Zfe8X9lP+RPK9Hj7jjB8ZYynxbarIvpLirxC+5+c15IUUnjzyAxGuwZhrdYwqq6M+woeDPumsfS4LfgIuOzHKj6UzlmlpOr0J5l/xwXD0XoTXqiSUVUKhbLQhVCxKYbUk9Ri/kCN8htl/hy8Ya72fZR8pxF1ilOt22ZEbG9u2p6ao3eOiw6JZFR5f9dF+l3OX+TuWNC+Jbg5rMYjtSXw3/jPMAZCGrrSM6I4A3BoTchu79smZeHMBp1krNVGU+ssTuDP1Wuxk5RS8MoYiE6sbz4brJDiWoXfYbLrqMCNdNtXP5pwUr35yu3BwyOeyTHionS5ImVS9nVn5hTMWC8oc7L12sveTX8DbTWaP5E7jVowDh6dDNpMJHMFCYF/Vc6vi46IS+eTk8J9iFBVKed6QYDNl/STj3FD/0VZLHLp8a6iu1MYywH1MMOZvXkYlfSwzGGeNTRtgG8P9iV/kI4F+9aygw1hlwltqFHwse2sNBRoBhbIcmoevR5PsAAeQald1XEldOGwVb2BtsOeIpb8zGBSlECUs5CrceOI+tBOQI0JnEvORfyg2kSBIZV1B6vtmTtXZIuHCMWiuqfUZNL2dnJXahLAHpyTwWQ5w==
+X-Forefront-Antispam-Report: 
+	CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(36860700016)(376014)(5023799004)(11063799006)(56012099006)(6133799003)(10067099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	BlGdrp6TaNmgiQZBkTVR9jtnaru3SJAOOJS75eyV+gyfd9fz8Zs5Z5+X0KIGwRDb32y8ov7KnysJBucBMMQyEmlN/60JHkCC73xGFYJEDH/eHk/NxJ396cp9Ssn6BsFY4Xhx9bCYKUz7jWDH6VKxKsPePi3rifUjkGVXGxyEPhqjcUGLHkuN2j5ZNYi4Osn/aLcpYzx33/+qm3X4hXJXCInRKZGS8FW2/3HLHKLv+kl/fRugYovq656VV4CLdbOy2yZmoJzKTHN8/DWh8ujzVWE1Xdp8S1IZBZAuUbkDG+41jSrzEhEBAgxBulqOJg4Wt8vrqP+Ca3g7MY+jdBcU761f1Av9rY34VFDAnzAiOn2IgbEBon4OL3JdlN9qWcw6dGfnYZJ/FdsliLIGZrODvje0sbbwBRJPtl5lZsf2xeKvH/KaTZIIYnZkbY6xc1d0
+X-OriginatorOrg: leica-geosystems.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2026 04:15:52.4804
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 961ac4ca-60c5-4017-7a4d-08df1c4e04ea
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	MA3PEPF00000406.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR06MB10382
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 00:40:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130330
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 04:16:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130331
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+signing_prepare() signs via the pkcs11 provider only: it writes a provider
+openssl.cnf and uses OSSL_STORE for native provider access. Nothing invokes
+the OpenSSL ENGINE API (no -engine), so the OPENSSL_ENGINES export and the
+engines-3 directory check are dead code. The check even hard-fails
+(return 1) when engines-3 is absent, which OpenSSL 4.0 no longer ships
+(ENGINE API removed) - breaking signing outright although the provider path
+is fine. Remove the engine export and the check.
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-60122
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Assisted-by: Claude:claude-opus-4-8
+Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- .../gpsd/gpsd/CVE-2026-60122.patch            | 45 +++++++++++++++++++
- .../recipes-navigation/gpsd/gpsd_3.27.5.bb    |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2026-60122.patch
+ meta-oe/classes/signing.bbclass | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2026-60122.patch b/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2026-60122.patch
-new file mode 100644
-index 0000000000..da8fa5f4d2
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2026-60122.patch
-@@ -0,0 +1,45 @@
-+From 50bf98d0240b94bbec6ce06be33cdaf99e2f6214 Mon Sep 17 00:00:00 2001
-+From: "Gary E. Miller" <gem@rellim.com>
-+Date: Mon, 20 Jul 2026 20:12:16 -0700
-+Subject: [PATCH] clients/gpsprof.py.in: ensure sats.used is boolean.  Issue
-+ 406
-+
-+Prevfent command injection by sates.used.  Force to boolean.
-+
-+(cherry picked from commit 5a9c44a42136b9bb98d460a8a716e9fd344a8d93)
-+
-+CVE: CVE-2026-60122
-+Upstream-Status: Backport [https://gitlab.com/gpsd/gpsd/-/commit/5a9c44a42136b9bb98d460a8a716e9fd344a8d93]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ clients/gpsprof.py.in | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/clients/gpsprof.py.in b/clients/gpsprof.py.in
-+index e91367ee3..07123d417 100644
-+--- a/clients/gpsprof.py.in
-++++ b/clients/gpsprof.py.in
-+@@ -334,8 +334,11 @@ class spaceplot(plotter):
-+             # get sat used count
-+             sats_used = 0
-+             for sat in self.session.satellites:
-+-                if sat.used:
-++                if sat.used is True:
-+                     sats_used += 1
-++                else:
-++                    # ensure it is boolean.
-++                    sat.used = False
-+ 
-+             if 'altHAE' not in self.session.data:
-+                 self.session.data['altHAE'] = gps.NaN
-+@@ -783,6 +786,10 @@ class polarplot(plotter):
-+                     used += 1
-+                     if 'polarunused' == self.name:
-+                         continue
-++                else:
-++                    # ensure it is boolean.
-++                    sat['used'] = False;
-++
-+                 if (('polarused' == self.name and
-+                      sat['used'] is False)):
-+                     continue
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.27.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.27.5.bb
-index 7819dc532d..ed16ee4fc1 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.27.5.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.27.5.bb
-@@ -11,6 +11,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://CVE-2026-58459-1.patch \
-            file://CVE-2026-58459-2.patch \
-            file://CVE-2026-58459-3.patch \
-+           file://CVE-2026-60122.patch \
-            file://gpsd.init \
-            "
- SRC_URI[sha256sum] = "409873f5048462ef1ac413a51ab35caa8b50b31be62b3347bee1cc2994e7c649"
+diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
+ass
+index a9f657feb6..3dc8b63b8a 100644
+--- a/meta-oe/classes/signing.bbclass
++++ b/meta-oe/classes/signing.bbclass
+@@ -337,7 +337,6 @@ signing_import_install() {
+=20
+ signing_prepare() {
+     export OPENSSL_MODULES=3D"${STAGING_LIBDIR_NATIVE}/ossl-modules"
+-    export OPENSSL_ENGINES=3D"${STAGING_LIBDIR_NATIVE}/engines-3"
+     export OPENSSL_CONF=3D"${STAGING_LIBDIR_NATIVE}/openssl-provider-signi=
+ng.cnf"
+     export SSL_CERT_DIR=3D"${STAGING_LIBDIR_NATIVE}/ssl-3/certs"
+     export SSL_CERT_FILE=3D"${STAGING_LIBDIR_NATIVE}/ssl-3/cert.pem"
+@@ -348,12 +347,6 @@ signing_prepare() {
+         echo "Missing OpenSSL module directory at '${OPENSSL_MODULES}'"
+         return 1
+     fi
+-    if [ -d ${OPENSSL_ENGINES} ]; then
+-        echo "Using '${OPENSSL_ENGINES}' for OpenSSL run-time PKCS#11 modu=
+les"
+-    else
+-        echo "Missing OpenSSL PKCS11 engine directory at '${OPENSSL_ENGINE=
+S}'"
+-        return 1
+-    fi
+=20
+     export SOFTHSM2_CONF=3D"${WORKDIR}/softhsm2.conf"
+     export SOFTHSM2_DIR=3D"${STAGING_DIR_NATIVE}/var/lib/softhsm/tokens"
+
+base-commit: a6b11ea9145515aa7a70596f29059519f2a4e23e
+--=20
+2.43.0
+
 
