@@ -1,169 +1,107 @@
-Return-Path: <johannes.schneider@leica-geosystems.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7A3AC9830E
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 04:16:21 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.32028.1790482580395628022
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDE04C98338
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 05:23:12 +0000 (UTC)
+Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31855.1790486590389914912
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2026 21:16:20 -0700
+ Sat, 26 Sep 2026 22:23:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=iPtgzPca;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.66.48, mailfrom: johannes.schneider@leica-geosystems.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ln9WK/+b1X4IwdCnL7OxT6fEAR6dOs/U4SJf7S5rVaNj8ttT9Xc+RRnd0YCSmfsUGoCTWpDNc2YPH2xJnOPMnuwJ1do43GSoffIvbQqQJJQjyj3TafooU7DEAmI/TLWbpfaR1luTzT7LWxF309jVK0bHZXserS11ucPG4G4X7R2ooBoGSMCZyncNuNBKiTD1E1XK7dsALUB4VJwTDfmkR0x35T1HkdXkVSLAEhQwVN7jPqezZ0fXnY5m/y9gW+mRqG89+w5pRfv8KuQoFWF7BoiC3S22Nysfk1x1EQ72kB/ap74pTXKQ826ugalV739/M37RB0BI+ej8BGlDiHAPZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JPrjGnDEhEuqhS2IBpkh+aGUEKlJw3TWGaBdClOc1JM=;
- b=V6Eg0E7Cjplez0L6nmKxMnVit3JX8Fj/m/edWwrfmtsGtnMombTrtvJxHqNSeDIfoz70eqZR9Ws0UDJIW4l9iD5cPueHu6wh0IOwmSHO9rvRsbXDf7byFiejnQKzmKBaYa31EwRf58P7iaKMgAnhOdB1aF4Xl7LjiIBmFvV3zi90Gfc690VVdHRr7DmydSiN8vikfP0cbUcxy+PtrcXBJAAvfr7J3zsK/678RDXCmuuCJN/1IFamTzWv8y5ZTABNYBVA9teBwlzz9TX0P4uSHyGw/59j7fOCs040E0GcNQ3cm83H+syQbDw/qhQLHodyxqeIy4YugYWWE6STrljjDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=leica-geosystems.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JPrjGnDEhEuqhS2IBpkh+aGUEKlJw3TWGaBdClOc1JM=;
- b=iPtgzPcacNU4ZWdwvEL5oa+w+/gET5n7l50RZuaQWQU9EieLWMy25AHBA+c3aHwa77RanxAfzKpbkJHwZJHGELIgHM1Cr+SL7NWhzGIcPF685HZGAshrkjJYpyusejSl9Mbi/pvS7pJOhstq1xLNRT609jn8YAvzo2gKNchA/U4=
-Received: from OL1P279CA0062.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:15::13)
- by VI0PR06MB10261.eurprd06.prod.outlook.com (2603:10a6:800:2ef::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Sun, 27 Sep
- 2026 04:16:13 +0000
-Received: from CPH1EPF0000052D.eurprd05.prod.outlook.com
- (2603:10a6:e10:15:cafe::18) by OL1P279CA0062.outlook.office365.com
- (2603:10a6:e10:15::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.23 via Frontend Transport; Sun,
- 27 Sep 2026 04:16:13 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
- signed) header.d=none;dmarc=pass action=none
- header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.99; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.99) by
- CPH1EPF0000052D.mail.protection.outlook.com (10.167.241.168) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Sun, 27 Sep 2026 04:16:12 +0000
-Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Sun, 27 Sep 2026 06:16:12 +0200
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-To: openembedded-devel@lists.openembedded.org,
-	f.pflug@pengutronix.de,
-	jlu@pengutronix.de
-CC: raj.khem@gmail.com,
-	Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Subject: [meta-oe][PATCH] signing.bbclass: extract certs via the PKCS#11 provider
-Date: Sun, 27 Sep 2026 04:16:11 +0000
-Message-ID: <20260927041611.766986-1-johannes.schneider@leica-geosystems.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=BUi7Vbiz;
+ spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33c0d931083so715132eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 22:23:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790486590; x=1791091390; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LdtVBZb95+RovFvrJA196wdeWE0eNSjJzFzGKIyBq+o=;
+        b=BUi7VbizFG54ZALr/7r7awcRquoPiBkaG73Y5mDVBiDPeKyTLACjDhtedBmBPqR/ak
+         tKfgxkmGf6gw6h6HRH5IBUw252obPw9+azLxpJ5XRk5mGQaOFWgPlxbYdS1a01WyaPVV
+         cwgS8G7lGkqeuWeXbA02ot5LubTwZ09Auk7V2sHV+nKduJkZ8Zde6ctACZZSL92t+aob
+         K3DlxmP3IxAIRRj3ZdNa291MtwIVdR+0UBRex/8Wm/nJBIPy3r5K37/dzABSyQKdT4Zg
+         AiI9PQEGuxeRktwd2jlYliKU5h0xY4UkqI0MidRhA04JVDmY8Ct9j7YCmuS7MXnRrXIO
+         +zbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790486590; x=1791091390;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LdtVBZb95+RovFvrJA196wdeWE0eNSjJzFzGKIyBq+o=;
+        b=eI/Hj4tmt1G4Vai3DdEUU9oJYGoR4yj+CltYLhukRRoYjveqGe7bp1nugo4T/5q/2J
+         7rlTfc5WYAduM6vtXJvljaAW4YI9lS+cTa9mKbHDcYvMUNkKlWHdFQMRnCfQDunkwnAG
+         OFsXrEWlZm3lGJHBttPbL5kzB2U/COoiRAGszdj5Z1/Wig81BeOpreYOhkCuW61q/oOC
+         AcR3XQoeXa+EfLqvGItx8zqb2YHNCbgw9aKODyvca+D2M9hA7heYXd2Sw8cW5FbVY9Vt
+         alNLffZ0F8IhUzCLlA6MI/vS2pqIDoZSQGMHl6GkXDUaD7IUAlemk3NTG0HtnfSVECaa
+         rayw==
+X-Gm-Message-State: AFuF++kCMzsED1tX29SG7y36IUZm5lVIGI09CjGXEkELMlXlBIDa9ZT5
+	Mdz/yR7Fjo2rD9TFeGwlMyu/lXeehExIqM5DqqJmqO8TI44LwkPc2JJPs2D5Nwym
+X-Gm-Gg: AYBFou1j8A7n6clJL3axPfzNkqbTlefEU9CQmlOigKrxuk5gbu/sPGbQ/PsKkSt5i5E
+	a8ZqpSHp7Xu4lTemxNN/M5mjC+ijVdV37Vor2hrZ0EwD+BDrmoDv6WLG7+celBm70KK22syWlhZ
+	FsESk96+2k4HPRSdH0unh4O+2oj9gGhD7Av72G4vfgvC26bGSiHFlmXCMvoVBXEq/Yq/GKueGu0
+	so91qo/V3dqfqzajC/MYt9vE5Gkw6nLHbJzwm4lCgk3y6dCGW5KWWfB39WNE17CWqLdbpu4ZPsk
+	Wj6wTeFJ0n8pP7JTFF+vWmhJ8K78kyg5k1f+TwlfW+cGUfR1Dvwm91CwCj/EjtWLv8Akgpx5sEx
+	ihaJ4FnrmvFyKhxdCwgPDFbFyj06sLvYks1mbBsdKJeaosSJduQX/DFispnB6sPb8trb5zEsqrz
+	Puu2l4+hXE1sA5KE1zPui/mx55ABlMwO/AGWErtgWm2m7aFwS3+rmw5g5QSdgMEPfW7Cp0gfT+G
+	4STgmTwLVhbL7X21MqO7TwZgWceFyCrppNgr7rKX5sWlXmphLqTidkswBhj7Kv5v8xIQOym9AoX
+	lh5f4beI731S4BCJKmS7ft6wgKYlThlBGkZxVqxXJCBrkbO5bUWD2wsiPQtQ7HJMNciDRxzvPWf
+	uebZryAbT5zhyhJBgZzFHB1Le1/kCg1/idbBtJ2p8QzfcSEUoteyxC+HdmZbIG7flSihZbr1iGj
+	Zr9VZCM4K35Aru0lCszTPURWIjslZ7K6fPw/WJh+b1/u5zQVVaqw==
+X-Received: by 2002:a05:701b:454e:20b0:146:7648:619 with SMTP id a92af1059eb24-146ce67ee01mr4639728c88.6.1790486589500;
+        Sat, 26 Sep 2026 22:23:09 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145a7318afcsm15681596c88.0.2026.09.26.22.23.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Sep 2026 22:23:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] pocketpy: disable CMake Unity build to fix buildpaths QA warnings
+Date: Sat, 26 Sep 2026 22:23:05 -0700
+Message-ID: <20260927052306.2867689-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-OriginalArrivalTime: 27 Sep 2026 04:16:12.0410 (UTC) FILETIME=[EE4B5DA0:01DD4E36]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CPH1EPF0000052D:EE_|VI0PR06MB10261:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: ecdd0878-de9b-4edb-b914-08df1c4e10e9
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700016|23010399003|376014|1800799024|10067099003|5023799004|11063799006|3023799007|6133799003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	xbSLIcIsvVcIz9rOlKC4qGTUwSE69z1YonUyWkQ+UmgFXrQd7mUpiXpjjWwPvQf0n2F5ZMb23UQyUWe8pPkLcbIIzV1qcirNMPrYLNMsBkwtG3QZjkogrBrFPQgmbhhUCMzrOgO08z1UKW1ZKhqJw4M44S0U+YxyU7h8auJE3zPxjHNZuQ4QnWed8rqJ3x/LQE/6mFKg+04vde5eNQRIxatgGu0jdCV01mle0b0Mx45MbtfT/wdl6q7yjhzDS6M1Uh+2sxjfdZZqDIu1F323eMYdnv1dhoAsM0PK5+ko+7wCsjnUniMib6OdOpWzFF6Sknl9LPuiKTZA5364kGOnh/0E+qjZJnj6nmGeXBeCxfkWoCP+GVaf97AWxON7fYHBwQH/9Ypt8EAUsjnDj2n43jGRuyrgKkjgwqe4bJFbMGnuhloZUSF2a3gMP6J3PYncMv3Cl0F+1v1a3wLObY43zjboCLvqmpq17R2zaW9DbcsvWua2ALH7d7n+pyEBmMb3joHlhAeDOdVY/8ddl1vrkoqd6Niva+De//nWkorGjyKT1pFSbRAEm8ioZ+3/ubq6W+SHsc/VyIkLIvdtdVF5KaOCgZItpBi0uVYagO4o53yl+y3wlEgHv7mKjgmVDho/Cf83YUFB8TFwrIhzkbjlgCAZCTU2MaI6mk9a2F3Txf+tiqsrVfCnZ/3EEcEs84TnLdrd344xQpgVNzNCqQgcGw==
-X-Forefront-Antispam-Report: 
-	CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(376014)(1800799024)(10067099003)(5023799004)(11063799006)(3023799007)(6133799003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	2SGDv6B2ijPKQP56sXfzyWFruLJ4zz/xOpnT2Kxce/l65likEZFLNM4g5BjxLO1bFM1/47mnJW2XmZFOikYZmPKrKRet2vDpq88SY8KF1aVmSOiwQ2+WBDF8o+S24rqJstiOxMy0F4dIAjO675Ln3Axp2ArIChsLHybIliVjN8HUgC7ytoVHCZ2ZsfqhIFgMuLwb/pX4d7UlbFE0FbTRQcqjfRfWo+XH0L+A3A/B9ZifT7PRMjvmG5wsNekifW+NleGo+unJ09AOoipNG9KV5bfSC5oXqIV3zpTaK7SDOu3ZYTvpbV+NCoB+KKp+bWy83GyuURdglk/vNSOqX8EfMfDSWMb2ZaAGznSObvJAYJMPGBduzqG//Y+jWa4hPDZEWhKeloLyPw4Evz+0kLrmJD7p0AGhssS6U8ik9zODBGqfUEI0OU79K0sEzYDQJ8yQ
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2026 04:16:12.6272
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ecdd0878-de9b-4edb-b914-08df1c4e10e9
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CPH1EPF0000052D.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR06MB10261
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 04:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130332
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 05:23:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130333
 
-signing_extract_cert_der() and signing_extract_cert_pem() read the
-certificate off the token with 'extract-cert <pkcs11-uri>'. extract-cert
-reaches a pkcs11 token through the OpenSSL ENGINE API, which OpenSSL 4.0
-removed; meta-oe's own extract-cert now errors "PKCS#11 URIs require
-OpenSSL < 4.0" on such input. Both exporters are therefore broken on
-OpenSSL 4.
+pocketpy's upstream CMakeLists.txt defaults PK_BUILD_WITH_UNITY to ON
+for CMake >= 3.16, which makes CMake generate a synthetic translation
+unit (Unity/unity_pocketpy_c.c) that #includes every source file by
+its absolute build-tree path. That generated file gets copied
+verbatim into the pocketpy-src package's /usr/src/debug tree, so its
+embedded paths trip the buildpaths QA check for both TMPDIR and the
+build host's HOME directory.
 
-signing_prepare() already configures the pkcs11 provider (OPENSSL_MODULES
-plus a provider openssl.cnf), so read the certificate through it with
-'openssl storeutl -certs' instead. The class is provider-based on both
-OpenSSL 3 and 4, so this needs no version branching. Make _pem the
-primitive (storeutl emits PEM) and derive _der from it.
+Setting OEQA_BUILDPATHS_SKIP as suggested in the warning text would
+only silence the HOME-directory half of the check; TMPDIR has no skip
+mechanism in insane.bbclass and would keep firing. Instead, disable
+the Unity build via -DPK_BUILD_WITH_UNITY=OFF so CMake emits normal
+per-file translation units with no absolute paths in their contents.
 
-storeutl -certs writes every certificate the URI matches; a signing role
-URI is expected to pin a single object, and _der keeps the first cert
-should more than one come back.
-
-The class no longer invokes extract-cert; drop it from DEPENDS.
-
-Assisted-by: Claude:claude-opus-4-8
-Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/classes/signing.bbclass | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
-ass
-index a9f657feb6..8ed18569d8 100644
---- a/meta-oe/classes/signing.bbclass
-+++ b/meta-oe/classes/signing.bbclass
-@@ -54,7 +54,7 @@
- SIGNING_PKCS11_URI ?=3D ""
- SIGNING_PKCS11_MODULE ?=3D ""
-=20
--DEPENDS +=3D "softhsm-native pkcs11-provider-native libp11-native opensc-n=
-ative openssl-native extract-cert-native"
-+DEPENDS +=3D "softhsm-native pkcs11-provider-native libp11-native opensc-n=
-ative openssl-native"
-=20
- def signing_class_prepare(d):
-     import os.path
-@@ -447,7 +447,9 @@ signing_extract_cert_der() {
-     local role=3D"${1}"
-     local output=3D"${2}"
-=20
--    extract-cert "$(signing_get_uri $role)" "${output}"
-+    signing_extract_cert_pem "${role}" "${output}.tmp-pem"
-+    openssl x509 -in "${output}.tmp-pem" -outform der -out "${output}"
-+    rm "${output}.tmp-pem"
- }
-=20
- # signing_extract_cert_pem <role> <pem>
-@@ -458,9 +460,7 @@ signing_extract_cert_pem() {
-     local role=3D"${1}"
-     local output=3D"${2}"
-=20
--    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
--    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
--    rm "${output}.tmp-der"
-+    openssl storeutl -certs -out "${output}" "$(signing_get_uri $role)"
- }
-=20
- # signing_create_uri_pem <role> <pem>
+diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
+index 910deba386..7f3775941a 100644
+--- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
++++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
+@@ -21,6 +21,7 @@ inherit cmake
 
-base-commit: a6b11ea9145515aa7a70596f29059519f2a4e23e
---=20
-2.43.0
+ EXTRA_OECMAKE = "\
+     -DPK_ENABLE_OS=ON \
++    -DPK_BUILD_WITH_UNITY=OFF \
+ "
 
+ CFLAGS += "-fPIC"
 
