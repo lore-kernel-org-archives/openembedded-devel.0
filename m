@@ -1,116 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEFD9C9830E
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 05:23:12 +0000 (UTC)
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31856.1790486591310055352
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAB8AC9830E
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 10:50:12 +0000 (UTC)
+Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35325.1790506211531745597
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2026 22:23:11 -0700
+ Sun, 27 Sep 2026 03:50:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=OQ0tFkXb;
- spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-13fc403e373so2982908c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 22:23:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Xn7pWcFq;
+ spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f12.google.com with SMTP id 41be03b00d2f7-cc4d2fe2056so707365a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790486591; x=1791091391; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GNbOIW0fqKCqqiidtQIxGvMFqiCOyVs1ZCXYbmQ9ZRY=;
-        b=OQ0tFkXbgMLD/JxUtomY0j8iMMBneOQvhEg/kTuPRJQa2Bo4FPBtyE1Njk/Zl5Aw7S
-         0huxK2vXJgGwPCxlODtM65djJSMiDhazNKqagAcYL4EosZP+cvp2ufT/AM0ercoWune6
-         0ETg7v8f/YznTyl1z/gm02SEZN3zHy9DP6vDnnUHrQZ7JovfJ8acnBv54PlAnNUY6FDy
-         HcFGjdFtPR1YQIKPQJAEEx55OVVbcr15Kz8OPJ4XVvoMG6EiGA4C8AA/QgILZ75g95bZ
-         8MTX25MJX2r/9WQqe2n4XU72nGx1gutpKbQgWsJ9DpYg395x20YE71VjLnx8DW0PBaPn
-         ARYA==
+        d=gmail.com; s=20251104; t=1790506211; x=1791111011; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=oOWVBtL1KqAisSOrcy/K4ZhLxsWLi0pn2CH3SThw+6U=;
+        b=Xn7pWcFqzqUBCCiaW+PoekNn0wOkf0TdM7lcmZIV0bn21LdcdEA0CCe5AUlfvD/LUr
+         wHh6id3nQYerIgufVLIIaGYL10wOhx1F8+mg4HDXWauOqXOcdLX13+UPVd+WW9PVECJM
+         9vZ5YhnwuYGET3H+4E/ifTEKc5ywySVbXaBBeiep6dRoJZM3pBd3keiya22FXNov33OE
+         bPjWc2IDXS9QdSQe4JV7F8zNB/7OkmkHJyCEz6Z3so7acw49V8Iff3hauAarovt+CPfx
+         fW/4UbcHwQvg6nwbvzX+RBWKhAIDFRs1yps+mhbGT2unJpUrqpB/Tx07P0Z7OBXbPtSy
+         R8iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790486591; x=1791091391;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GNbOIW0fqKCqqiidtQIxGvMFqiCOyVs1ZCXYbmQ9ZRY=;
-        b=ZmRpZlssT3POiBZZL6cGB4UX/khWg1/TMPhLL49M4RN57OzfxnoyTz5jafKK7Rb+AC
-         CBpWPhBnS00SHGDvyZ5B/jHZrE/h2tHU/P1FuuXal4+SxOH5R8jKKmjOhWBRyZjWOi2z
-         5/8VrtL27XAc8/me1FgyMPJIw2VVRTUO8lZJhKSpIaKB+psShlgg6fTep/6Qlsx4PpRq
-         Dsed87BUR1hlLv9HILMRMZDzJl7Jkzz7XkRmHiyJ611ma87U0hk897rrq4wF6CTobhCC
-         fjfHVuFH3Gi52icXeSA2PmrjeUVXMPRzr1uFwh95rIwP247mb24WL3hKAu4FyLgmjV71
-         tOpQ==
-X-Gm-Message-State: AFuF++nPk3de8s8CNmIkzIPlhcSBMJY5R8tUR1PK5sLa52mne62MBrY/
-	+vokiyOdc9T8R8gG0e1W8F0K6C9+J77IwR6fZoWicfBXfMtmqonvOx9HUWaeIPAC
-X-Gm-Gg: AYBFou3fS/FAOue6/5bWNDDyhaspMN3My38cp1uQjDmfjFzgzzTS9sn0uzBTCT2wLy4
-	5MmhCkpSkffjqZOVqmDIPGoInJV3VapYR1Bhe5u9cUrA3yTnu5CzTO0rp8A4nx+UL7t0NKUM3tF
-	C0r2naZVlr7myFRburGxRlOLMmMQhGtEgBFoJEKCCxWtShQHwzqgvkaJwJyejydLf4o8poHX/4X
-	RZPN4A/RbjlMZ/Lt0wrp129ezf48vKfO3RI8ITkhuazVNh4oWxbdGrz4pPacRoS2TN8wX9PK95R
-	31rR0JRtQlqZ5N/rkENdNuOdLaRiXvE/wxaVmu2eUtjyQEvHtHM/I36f444JXL91pvOgHGGYRQG
-	/LN5rnlaabeixWIt3mNHLn0mBsXEXYottbCGwhAtHSVY8TshWQ2DvpEUxnYu3+iCUitWT9aO4P6
-	WhEHaPmo0ovpJouKhFtGIUXwOAevJrIoz27MAQ+Nz6buoPYa3+Bec2hzn9DF66m6AhwcpjTI/zO
-	uiy5uDthtkR75U0KlcL2YrTj1geH+JRc4HidVilBP9Karr3RcFoEYsKh39XnotOpHos8plIMnDf
-	gF1ouDgIqMTZPGC6wsS9MkpVtmbfEJFmX1BE13/6N5QjSkA9GRS6AtWQkT+FE5IioJ+FZql53Hs
-	Eorh822Hcu//Adw2pZhmK222Wo3kEWxI7KxSVZK5muX+3gPM4xla7CSH5Nv6bLWY/3/vSVZWjGC
-	utS3eQcDxm2EElxiS64YTtwwgohor5nh+5nw+fbw==
-X-Received: by 2002:a05:7022:6889:b0:137:24c9:fb7a with SMTP id a92af1059eb24-146ce491ea2mr6977995c88.2.1790486590542;
-        Sat, 26 Sep 2026 22:23:10 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145a7318afcsm15681596c88.0.2026.09.26.22.23.09
+        d=1e100.net; s=20260707; t=1790506211; x=1791111011;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oOWVBtL1KqAisSOrcy/K4ZhLxsWLi0pn2CH3SThw+6U=;
+        b=wrhYuOQvBJipvjFNGQ4p8zmBcU/PXTLi3F/y6F2YdmJNI1jmaJQB/eOw5O3bvwyqVO
+         P7PgFmtO2kvBtzXbM7h8Kvzw+0XBjzdSyVqemvuxNmN5JrFoxukz+LqauFD3zCp35EAI
+         kvMI3OCZe3PXM888GMtwlq/hM+00bzmbuMT1KdJBmRw7e6UY7xQlbAzCvx5PQw+k0duh
+         PL79w/hqAj1bo2/e6MFslMQJyc6soNUIjmQIMhTlGVJEWzb3mC3Mebf4KJl+gz+Sd9KU
+         xPVYL8aX9ox4i8AvYzyKt1AEjgJv6T8DYE8mWEypK9/CGjNkU3TXQfzb5BN4wePLPyHz
+         S2hg==
+X-Gm-Message-State: AFuF++nZcARQtJSHdeA4JM/uaxa+ykTfmWPIFZQnAmjPkbmwPxVO5gOw
+	ZC4YF9sSiAiq61zk0KbFwd4ovBq5ebQF9w1SK3eP2QgfAgjnhi1t9x4ZB9CtsA==
+X-Gm-Gg: AYBFou0ht6Lt0H+oQ+oOH4NSDRe/cQbXz/JJTBakJgSejNf1g7gfacn8CO9UCW3/+Cx
+	2BXAjnZl2rGAFvlO9/H8R5tQm2ZiaHYZ7fKd6KdEeCESi5ufc97/F9gCorLShiCVbujrysdo2sT
+	XzSzFiiGEs86WnSfU3dW9+nowyHpeTs6vgIymse0cereV8vnuvFcNIhjFn6XWAHILW/P+Llb5f5
+	Krv8MNY6u8uU8AjeOSIGcwQAFOiIVW3N4Bb9l5HTlYZcfmFmwYMQGiOmk/h0NziBikyGVSrUURG
+	LxcfnBGAZRKSvpyknpxvgxnaXaeOzARntD6nZJEAsUWEGvW0fkyPtcQnR1bTKmFUdLFxQun/89u
+	N0+fH9d7vk7YraLRp6JnmqW0znI8b3fA3dTzMYMvoSJyOb7p0rcQjjzgno6ednUI0liMTaSyhuD
+	rmNmDZzPtTpjfw9vgYDLuPekseUy/CEi3wtxWk5/ZGDQhrEOSd6GQV305C9TNV7dRLU0jhy/7p+
+	hriLXtSGBdgdorgJaX7LZI=
+X-Received: by 2002:a05:6a00:2346:b0:87c:b126:8e4d with SMTP id d2e1a72fcca58-87e9a70b411mr8134359b3a.3.1790506210705;
+        Sun, 27 Sep 2026 03:50:10 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.50.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 22:23:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Sun, 27 Sep 2026 03:50:10 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] opencv: rewrite build-tree paths in all CPU-dispatch stub files
-Date: Sat, 26 Sep 2026 22:23:06 -0700
-Message-ID: <20260927052306.2867689-2-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260927052306.2867689-1-khem.raj@oss.qualcomm.com>
-References: <20260927052306.2867689-1-khem.raj@oss.qualcomm.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-gnome][PATCH 1/35] gimp: upgrade 3.2.4 -> 3.2.6
+Date: Sun, 27 Sep 2026 23:49:28 +1300
+Message-ID: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 05:23:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130334
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 10:50:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130335
 
-The recipe already rewrote the absolute ${S} path embedded in two
-PowerPC VSX3 dispatch stubs (arithm.vsx3.cpp, convert.vsx3.cpp) before
-packaging, but OpenCV's cmake ocv_add_dispatched_file() macro generates
-one such stub per enabled ISA in every module (avx, avx2, avx512_skx,
-sse4_1, sse4_2, ...). On x86-64-v3 that produced 69 more stub files
-under ${B}/modules/* whose #include lines still embedded the raw
-build-tree path, tripping the buildpaths QA check (TMPDIR and HOME)
-once copied verbatim into the opencv-src package.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-OEQA_BUILDPATHS_SKIP would only silence the HOME-directory half of the
-check; TMPDIR has no skip mechanism in insane.bbclass. Generalize the
-existing sed-based rewrite to find and fix every generated dispatch
-stub under ${B}/modules, instead of a hardcoded two-file list, so any
-ISA/module combination is covered.
+Changelog:
+https://gitlab.gnome.org/GNOME/gimp/-/blob/GIMP_3_2_6/NEWS?ref_type=tags
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.14.0.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ meta-gnome/recipes-gimp/gimp/{gimp_3.2.4.bb => gimp_3.2.6.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gimp/gimp/{gimp_3.2.4.bb => gimp_3.2.6.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.14.0.bb b/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
-index 286b490870..7cc487c0ce 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.14.0.bb
-@@ -214,10 +214,8 @@ do_install:append() {
-         rm -rf ${D}${bindir}/setup_vars_opencv4.sh
-     fi
-
--    for fn in arithm.vsx3.cpp convert.vsx3.cpp; do
--        if [ -f ${B}/modules/core/$fn ]; then
--            sed -i -e 's,${S},/usr/src/debug/${PN}/${PV},g' ${B}/modules/core/$fn
--        fi
-+    find ${B}/modules -name "*.cpp" | xargs -r grep -l "${S}" | while read -r fn; do
-+        sed -i -e 's,${S},/usr/src/debug/${PN}/${PV},g' "$fn"
-     done
-
-     if [ -d ${D}/${bindir}/shape ]; then
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.2.4.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.2.6.bb
+similarity index 98%
+rename from meta-gnome/recipes-gimp/gimp/gimp_3.2.4.bb
+rename to meta-gnome/recipes-gimp/gimp/gimp_3.2.6.bb
+index bcd69985fb..835a501a92 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_3.2.4.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.2.6.bb
+@@ -66,7 +66,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.2/${BP}.tar.xz \
+            file://0004-meson.build-dont-check-for-python3-pygobject-gexiv2-.patch \
+            file://0005-docs-meson.build-disable-gimprc-man-build.patch \
+ "
+-SRC_URI[sha256sum] = "7312bc53e9c6d2d0056ca7b93f1c6b98707946dd934f714c21b8746ecb601588"
++SRC_URI[sha256sum] = "40b15e90ad0c0c631b76da3c467ea9847fa5c24f37413ac5b492804860a28cd8"
+ 
+ PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
+ PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
 
