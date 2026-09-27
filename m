@@ -1,109 +1,90 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <tafil@tafhub.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 686A8C98338
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 15:51:46 +0000 (UTC)
-Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.39665.1790524296913018732
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 945EAC98338
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 18:24:30 +0000 (UTC)
+Received: from mail.tafhub.de (mail.tafhub.de [5.9.40.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.41302.1790533463715040740
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 08:51:36 -0700
+ Sun, 27 Sep 2026 11:24:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=XXCvF2/k;
- spf=pass (domain: gmail.com, ip: 74.125.229.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-3468ec3097dso436022eec.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 08:51:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790524296; x=1791129096; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+rZf8WdghqgNhKFMV9VkEmNQcnNL7lxdZL3goe9xH9s=;
-        b=XXCvF2/kpeA1ArdfH4ehEsjyXt9/L5uQLS+5cFnygdK02pBNuP7qya9YkbuRDcyc4v
-         Gy+YPs6BFVBFXoYWciwF48ws1U8F4vSDMpuKZNt5RFcJEtie5Ft4ytOqOJUe2QUmC/kP
-         L5v1IVMSkOepu4EXsMB9eZWlPB165xPgzXZsFQaLcKJ89x8s5VC6RmHAQ9jsSdviIhH9
-         hCEykkyIIHRHYifFq3VehCcXzHXHlZ9V/z+tqqxj0weR5tx3Ot5mRmEk1sJzQ2Qcp19E
-         G0tT2f3Thr+RSaealueUMoxRzs/gOqsGHvshl9rU8no/eWTgE2w6poHTY4q6MvCvAYBw
-         Pxcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790524296; x=1791129096;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+rZf8WdghqgNhKFMV9VkEmNQcnNL7lxdZL3goe9xH9s=;
-        b=H9EhHriICVEUnqmPpMxACHrde+d7Q0LpJQ2r2kEYnt15A5M0KN50uAhNOeN/xHKBNy
-         I2rORmIHZAsHqfzQKD/1iD6NoVHLx7GZ8QetOKCfZdEbFpBKsK6Vug+CCm71OSDTL5ZT
-         5OVQbX0QjB+83mYxaAlECZEqKkqyuQTOK1a0CDsJCbxnDWZF9HzoPQoee/2GF8QubrLN
-         TCRDEtudcZG56ZKNsX8wd3c7QXld/QuKWKbrFBUjQ8BwIvUpWxNsKSKmViLAK2RHKEp3
-         VF44yJMC1xusCsupu/09hhjTsigykR77+0JwOrbTdZwHHGzdv65Ys3Hz2rO2QaPYQJSq
-         JJcA==
-X-Gm-Message-State: AFuF++niMjuOBjAR1r7GCMYNY7VSKCHQSB7lQxquYxN50x3v7LzhLSzv
-	XF9mfpcKqh4WAyLt6Iy2WdxnDMQ18pIJsHe2FBpmiNlx1z29smmS4VjcHoYUELZ6
-X-Gm-Gg: AYBFou3DBkieH0JqK+KnChPkZfcF82kurDYobyPIKE4wpt5aRq1MlxW28L0W+lmcoWO
-	Q3WtKRMo3GxjR/k9SQjSq8JJX2MNg0yYjmjBQ6kvcKpDq9DaPdc5PnmH0gdd8xkqp+80PBIccUS
-	IwyeOEIDpjBFlXfxDMxGOqYhQZgMO0ABv8zef8X3S+rf1w+RaMc/CIpgM/5zy2r7Fr+h74LDC2T
-	xhZJxpe6pGBv+OJFbrwH3GnMjM5TJX+ab9MQfV03w5JkGa1BzYUu4r6uyNwpt34RYMG+gbEYZPu
-	vswUt8yqWnhfYGODrCgk+cIUKJ+XtOtMmZ88BuG6fAw2PA5ZGibIHpa0kcOktFTsH727Tp3Tgxo
-	q4OUIoQLfmwBCIolI/owiMjkejZNU6YbltHjiD5Z8LuikOwNZGlDECKBU0CvkZulan7Y5Sd5H4G
-	m7/rEJRuLppqPVjCP/JxFLHGLlkvqgn7+5IfxQPWN0DAKCVsUoscUoSFNK83r5SlCCd3rhWZAJr
-	/eTBVI+fqaAyLPiPZv6OZKPWAkJUjwzJuDljLnHhbKHrV6E3I0hG6RfHrGogKvIc/eaXhNhBG8Y
-	MBDOPWMHu/+iOl6iGLjPDiKK+YHVMyXj82qOOnZzPrKoVOiF50bYOMNK1F5hJDNPM50NEqkm5Up
-	5Kn7SeweZfAxXvRLj2ydFc9O5EFgaHDrkajqWf5/XXuxOSYzW9COY7pRRQx4G3bNA7lsyX1aJ/P
-	QYJd2qtx1C7aszgoG+Aq0NWOtQLCPxAHBTbF8YXA==
-X-Received: by 2002:a05:7022:1406:b0:143:298f:33ba with SMTP id a92af1059eb24-146d0f34187mr6941165c88.46.1790524296235;
-        Sun, 27 Sep 2026 08:51:36 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ac67c3f8sm18790849c88.3.2026.09.27.08.51.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 08:51:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=dgjAupXi;
+ spf=pass (domain: tafhub.de, ip: 5.9.40.180, mailfrom: tafil@tafhub.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7CD902E41100;
+	Sun, 27 Sep 2026 20:24:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
+	t=1790533460; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=WiGj+6TnKD5sqq00j1uHnZBOMcSBgrjl6DlTxlKFF8Y=;
+	b=dgjAupXi2TEHR8+Std3Ejs8e5+0Yu9qznLWilaSMykLBm5zr5AsVOU+Q+YB3Xas/13sq4y
+	fgw56bAwveXosbMMEEUQvj0R6K5pFGDn7ZUN829VfhCh4SbiDKD/kj5MkZih89ycKT3VRp
+	OSkgppnUgocd9C+enBg7M/Sie7uTO7hrgWv/tECDfaOpkz3t/Nl0kG7GjMCWyc/GLOrvEh
+	PjTNgUcONKC/DODwpxRHM8Oro/AfN9rag7p/qPkSEn57nfK6vNtkFrvce2gilyZRVCCEPf
+	GRU8ESPOfy7KFRLoVOgTzPcXuTSjgnfWCc0rCdN1d9wEa8h6/iF2fI81wHXdzg==
+From: Tafil Avdyli <tafil@tafhub.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Areny <patrick.areny@notiloplus.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/3] v4l2rtspserver: new recipe
-Date: Sun, 27 Sep 2026 08:51:31 -0700
-Message-ID: <20260927155132.1277867-2-khem.raj@oss.qualcomm.com>
+Cc: Tafil Avdyli <tafil@tafhub.de>
+Subject: [meta-oe][PATCH 1/2] fastfetch: upgrade 2.66.0 -> 2.69.0
+Date: Sun, 27 Sep 2026 20:24:17 +0200
+Message-ID: <20260927182418.1339166-1-tafil@tafhub.de>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260927155132.1277867-1-khem.raj@oss.qualcomm.com>
-References: <20260927155132.1277867-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 15:51:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130373
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 18:24:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130375
 
-From: Patrick Areny <patrick.areny@notiloplus.com>
+Version 2.69.0 added sixel as build option for logo support. The image
+support should be off when no option of 'chafa imagemagick sixel' is
+enabled.
 
-    v4l2rtspserver is an streamer feed from :
-      - Video4Linux devices that support H264, HEVC, JPEG, VP8 or VP9 capture.
-      - ALSA devices that support PCM S16_BE, S16_LE, S32_BE or S32_LE
-
-Signed-off-by: Patrick Areny <patrick.areny@notiloplus.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
 ---
- .../v4l2apps/v4l2rtspserver_0.3.8.bb                 | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l2rtspserver_0.3.8.bb
+ .../fastfetch/{fastfetch_2.66.0.bb =3D> fastfetch_2.69.0.bb}    | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/fastfetch/{fastfetch_2.66.0.bb =3D> fastf=
+etch_2.69.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l2rtspserver_0.3.8.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l2rtspserver_0.3.8.bb
-new file mode 100644
-index 0000000000..1a15a0cd0b
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l2rtspserver_0.3.8.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "V4L2rtsp streaming server"
-+LICENSE = "Unlicense"
-+LIC_FILES_CHKSUM = "file://UNLICENSE;md5=911690f51af322440237a253d695d19f"
-+
-+SRC_URI = "gitsm://github.com/mpromonet/v4l2rtspserver.git;branch=master;protocol=https"
-+SRCREV = "b12cf350dc573ab0ff9d1b51a21daf3c218b614e"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig cmake
-+
-+DEPENDS += "live555 log4cpp"
+diff --git a/meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb b/meta=
+-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb
+rename to meta-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb
+index 8835e3d85d..83f7480011 100644
+--- a/meta-oe/recipes-support/fastfetch/fastfetch_2.66.0.bb
++++ b/meta-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb
+@@ -11,11 +11,12 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2090e7d93d=
+f7ad5a3d41f6fb4226ac76"
+ DEPENDS =3D "yyjson"
+=20
+ SRC_URI =3D "git://github.com/fastfetch-cli/fastfetch.git;protocol=3Dhtt=
+ps;branch=3Dmaster;tag=3D${PV}"
+-SRCREV =3D "08698098579bb8b043b0a343159b8018f5cea4fc"
++SRCREV =3D "0c3b852bf7bad2837a814c7a31bf332092048a2b"
+=20
+ inherit cmake pkgconfig
+=20
+ EXTRA_OECMAKE +=3D "\
++    ${@bb.utils.contains_any('PACKAGECONFIG', 'chafa imagemagick sixel',=
+ '-DENABLE_IMAGE_LOGO=3DON', '-DENABLE_IMAGE_LOGO=3DOFF', d)} \
+     -DENABLE_SYSTEM_YYJSON=3DON \
+     -DENABLE_EET=3DOFF \
+     -DENABLE_QUICKJS=3DOFF \
+@@ -47,6 +48,7 @@ PACKAGECONFIG[lua] =3D "-DENABLE_LUA=3DON,-DENABLE_LUA=3D=
+OFF,lua"
+ PACKAGECONFIG[opencl] =3D "-DENABLE_OPENCL=3DON,-DENABLE_OPENCL=3DOFF,op=
+encl-headers virtual/libopencl1"
+ PACKAGECONFIG[pulseaudio] =3D "-DENABLE_PULSE=3DON,-DENABLE_PULSE=3DOFF,=
+pulseaudio"
+ PACKAGECONFIG[rpm] =3D "-DENABLE_RPM=3DON,-DENABLE_RPM=3DOFF,rpm"
++PACKAGECONFIG[sixel] =3D "-DENABLE_SIXEL=3DON,-DENABLE_SIXEL=3DOFF,"
+ PACKAGECONFIG[sqlite3] =3D "-DENABLE_SQLITE3=3DON,-DENABLE_SQLITE3=3DOFF=
+,sqlite3"
+ PACKAGECONFIG[va-drm] =3D "-DENABLE_VADRM=3DON,-DENABLE_VADRM=3DOFF,libv=
+a"
+ PACKAGECONFIG[va-x11] =3D "-DENABLE_VAX11=3DON,-DENABLE_VAX11=3DOFF,libv=
+a"
 
