@@ -2,385 +2,167 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86705C9833E
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 00:39:40 +0000 (UTC)
-Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29994.1790469569801429810
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9F44C9833F
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 00:39:50 +0000 (UTC)
+Received: from mail-pj2-f41.google.com (mail-pj2-f41.google.com [74.125.227.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29274.1790469586244353262
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2026 17:39:29 -0700
+ Sat, 26 Sep 2026 17:39:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=GPlYnsxh;
- spf=pass (domain: gmail.com, ip: 74.125.227.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f43.google.com with SMTP id 98e67ed59e1d1-396ccafb752so1018791a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 17:39:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=X4h2H3np;
+ spf=pass (domain: gmail.com, ip: 74.125.227.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f41.google.com with SMTP id 98e67ed59e1d1-3a0bcdf41a3so922870a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2026 17:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790469569; x=1791074369; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=N8zhEvPPU1tlcLI5eM+mzVbfuOveqqujSkFW4Xtd3Qk=;
-        b=GPlYnsxh/vbTJmBGR/BV43s6XTPuxuY7jVHnJPZJbrS3JrVxVV5wmPtSRVT3b505cY
-         NL9tQ7V3zx567hdYYkLOYALWFnCTEmgKKhBwjLVIWmgZxfkYj4HxcZUwzVg1dmKMFvQk
-         lD5QhkmNnvwxZQmv6C6EfAW0SSn9ymY0I+3ZtDho1wF5+8waFKZ+Lg1SKYbU5hhmiUrC
-         xc7xuv7p48YDoY93qZSaz9mvbSDLN6PhMqyozlo03r/rYLf5CbxPXqzYvny+xUBSMyhs
-         pWicXlwYm5AtjWgDy+ltZv3G6VzcHpNSAW/i+S5Szdl1SM+5OuYu51MC8iWYCvN+Dn3s
-         cVaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790469569; x=1791074369;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1790469586; x=1791074386; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=N8zhEvPPU1tlcLI5eM+mzVbfuOveqqujSkFW4Xtd3Qk=;
-        b=2dOXoFpDYGL5oWILAcB4azcEr/OXnNlmmfI6Yfw4hCCU4GvUqIrOR9mC7fhoUlXxD5
-         o4tUINbPFIwvhGDxiM+UrfKFKuAvkvrvblTOhc3mD0JPj8C09RlTbqmDXGVUBfISkDx9
-         xrLnrUcjF1V+QWrC5D3jrioKNAKCHGOuu7MmHhdULZ3bcoVZO5CFaDoHQbmMpWgSfjuk
-         emctzLCEqJU0uYML8YvndxmDXP9GtHk1TWt0NyxndrZ5TKXwyaM7iRYtcL3Z9UOCTG08
-         unb1QIiTPYar6RMnQLD7ThfLtr9BaOyS93qY9Ev8hjGs5QSCnER/xgzh0ugQo/trmN/T
-         EXCQ==
-X-Gm-Message-State: AFq9FYIdZFmiIY+oRSL2XpgIv1V9V3wsPF4AQy0AoK7fO7hh8WfmkPic
-	L1RXs+zmsLdebZq8UBK99ybXYED6lXa2J6K/actsszXEhzcQxx56dIuXg9a6Bw==
-X-Gm-Gg: AYBFou1ms1GFbRyvLPcL2abSX5Bmx/JQ16E8Sy4/AVsiksGhkUkP1Ns0/aKK4CNiFBO
-	7TZGLHcA+JhHs2cT4O48hoY7vpojOk8N921wywJLszPcsvEv+5N4sgY+EHTdKjW9z58OErU4NRE
-	54tX/zPSsBbxPwpq82j82vsn8rw0DtqwVAT/MVqCBBEDMq5QrGA1gGVGTPqWrt0HuVW6M4BX7uX
-	ayQ6juWl3q7twUQbIqtysiphai1a3RMu/3D5VXSi4CJLbuw0PoUn7nwpq80JWHRw8O9s7AzO8nV
-	K8WBI9XgmD1YjVVa343cgrqOwxDPg43rdGjgHKye9htC6jC5+PbBeoeJ47Rv1qylAkKXk3/fFVT
-	eO9D5nqE0OU/FsOxcchbrB0PXg9NxSNGeRti6IfJGghtuyTOlywtcuVg2TGPDbmmduWojQQct/u
-	Ewl0mASs9LArNVEYqZUAHR+iYusjcePWU6gxdEcDypsO4iTVH1bEANoozwiSWGLfzUyV3jt0RL2
-	ESwX22yiGeoY1jQnzFRsiY=
-X-Received: by 2002:a17:90b:44:b0:3a0:cc33:2285 with SMTP id 98e67ed59e1d1-3a0cc3324bcmr3598687a91.22.1790469568957;
-        Sat, 26 Sep 2026 17:39:28 -0700 (PDT)
+        bh=D+RNC3o09m2sHgU5jd32fJsbyWzu+VeOOAHJVhuHz+E=;
+        b=X4h2H3npVvgg6DSUfO93hnTm1K1lLT8SuDSFLSXrxf3BkyD0ZOLByw1k6SEys/CNEx
+         KZiXNtsguL+p2wyOozufm3LMeGzSRC2P7wtsrCIqEnivVQ7LE5utd0rTtec07BVuPkUU
+         2gz6ZzveZrkFCWAhi2AkJyT83UeW1NOMq4DhCIPiolgVmHm8iDE3uxICHtsZFRjFFg6u
+         TUjlrFyL22GF9DsrK4K+HDfoE4rAyrDAKxd3cBqXfNAHICPwkn2kV/WIboaquorv9Bk5
+         1c/3kIQD69UXg9+Cqd4cpUuaIgdwNW3E2YseYdwEWAtLdYJhN40UusgwdMu8ILpzz25U
+         FFHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790469586; x=1791074386;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=D+RNC3o09m2sHgU5jd32fJsbyWzu+VeOOAHJVhuHz+E=;
+        b=0RoZnk7l4mB2rzAVbJoNSvmBUrOARWuudCOcFfz38DPuCTHy5TxcRs9PD8ixux25ZZ
+         YdC8Iq2+7F5pUg9uZ/AOSPZDtJIyTakBu0NyG42dI3P8mlzuzsCfkK15g2h3Nv+xYqpQ
+         UH4HPUztHa9KbzaL+cd+oGZ0dlxc/YkJsRoRtboFYvxCuODzD9N7vhnl8vP6DXFJyRat
+         T94t7O2lz8ZXLcs9tzZ7oJ1BBPFM9N6V5+1I5WZDBMHJyy5H0P2/gGfpWhhmxqBJEhXK
+         Pe5SvasW1+4/MoNXOQmkf0kESJjz28gEUBpGeM+8/RC0NLildm3nwSFo4lCKjrVW9Nfc
+         kDXA==
+X-Gm-Message-State: AFq9FYKeJOk4i8sLRwJUTlEnv5Y0W09mfxktPoYbO8eBPgAyPElrCA0R
+	E+TMKcB6mcqhF76i4BYiHbsfm0TOEpTX9r+zgZ7rmUWBW+riehn/1QGTj5VDCQ==
+X-Gm-Gg: AYBFou3nxxtSX7hugWj62i/BKc9+hP6QPmMTMQLiS7g8qfMZateS/SLAQ5FxPnw3QvS
+	mI76IIsOeX4LgLj/lUfELwmkbc3oyMbGkNtlp+dERQdx1VFibHK85he+LvjPqp2v6FsJLhVusIh
+	55NKi75qCL/zbP58G5Q2YPFi/fbf7J3cnB8fgaCjIDSryZA2sT1Hgq0YdQ8/KZfs8vKktI3fi3e
+	/gLORzlEEU0igCfD+U4eIM/WkT1vOGyqGPyCrOR8HbF7dFJorWyoRGUsriUu+vbkzedu5D0HvQE
+	0RRtXFq1ruOvx1jByfSbbY/Yf/MNrTWodZ2afxDpjELQ5W2ND+zJWN20s+jCOENiCW1aHbkpvOw
+	We0zrznYsRaZyfDq6ocsoRjJngYFLQvuJjE9Gc0DfylJIexR9nklebZyJGQ0ggutBLdV0o+bKTY
+	zK2LZU0z0HP3BaYB7H4fUGfM40igvWvTVnRPTDpjTOnhJ8f3bK7eleaSGPhwKaJduoPNV2EuC3n
+	X80n7ryd1z+Ntu3LGXSHEU=
+X-Received: by 2002:a17:90b:4b0a:b0:3a0:7cbf:b8d2 with SMTP id 98e67ed59e1d1-3a0986ed05amr8490582a91.10.1790469585489;
+        Sat, 26 Sep 2026 17:39:45 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0d22281f0sm2876420a91.1.2026.09.26.17.39.27
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0d22281f0sm2876420a91.1.2026.09.26.17.39.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 17:39:28 -0700 (PDT)
+        Sat, 26 Sep 2026 17:39:45 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 1/11] unbound: patch CVE-2026-80225
-Date: Sun, 27 Sep 2026 13:39:11 +1300
-Message-ID: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 8/11] freerdp3: patch CVE-2026-85089
+Date: Sun, 27 Sep 2026 13:39:18 +1300
+Message-ID: <20260927003921.746786-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
+References: <20260927003921.746786-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 00:39:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130320
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 00:39:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130327
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-80225
+https://nvd.nist.gov/vuln/detail/cve-2026-85089
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../unbound/unbound/CVE-2026-80225.patch      | 286 ++++++++++++++++++
- .../recipes-support/unbound/unbound_1.24.2.bb |   1 +
- 2 files changed, 287 insertions(+)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2026-80225.patch
+ .../freerdp/freerdp3/CVE-2026-85089-1.patch   | 28 +++++++++++++++++++
+ .../freerdp/freerdp3/CVE-2026-85089-2.patch   | 28 +++++++++++++++++++
+ .../freerdp/freerdp3_3.24.2.bb                |  2 ++
+ 3 files changed, 58 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2026-80225.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2026-80225.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
 new file mode 100644
-index 0000000000..fb7dda7a15
+index 0000000000..78a985642d
 --- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/CVE-2026-80225.patch
-@@ -0,0 +1,286 @@
-+From 5d92dbc699c7a347be74b3752b1c3ee690e4dec1 Mon Sep 17 00:00:00 2001
-+From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
-+Date: Wed, 16 Sep 2026 09:16:29 +0200
-+Subject: [PATCH] - Fix CVE-2026-80225, Possible degradation of service from
-+ continuous   queries on the same TCP/DoT connection. Thanks to Qifan Zhang
-+ from   Palo Alto Networks for the report.
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-1.patch
+@@ -0,0 +1,28 @@
++From 2ccd047f64930ae10518ea14f476b2f311218814 Mon Sep 17 00:00:00 2001
++From: Armin Novak <armin.novak@thincast.com>
++Date: Thu, 13 Aug 2026 11:23:46 +0200
++Subject: [PATCH] [core,info] write zero to info data padding
 +
-+(cherry picked from commit e619ead2dbcde8fc47f03b2ac68987b3377da4c7)
++(cherry picked from commit 056cede398d71c1f2540baebc26ec3327a249301)
 +
-+CVE: CVE-2026-80225
-+Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/e619ead2dbcde8fc47f03b2ac68987b3377da4c7]
++CVE: CVE-2026-85089
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/056cede398d71c1f2540baebc26ec3327a249301]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ services/listen_dnsport.c | 12 ++++++-
-+ services/listen_dnsport.h |  8 ++++-
-+ testcode/testbound.c      | 10 ++++++
-+ util/fptr_wlist.c         |  2 ++
-+ util/netevent.c           | 66 ++++++++++++++++++++++++++++++++++++++-
-+ util/netevent.h           |  9 ++++++
-+ 6 files changed, 104 insertions(+), 3 deletions(-)
++ libfreerdp/core/info.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/services/listen_dnsport.c b/services/listen_dnsport.c
-+index d49d4ad4c..9b6fb557c 100644
-+--- a/services/listen_dnsport.c
-++++ b/services/listen_dnsport.c
-+@@ -2134,7 +2134,7 @@ void listen_start_accept(struct listen_dnsport* listen)
++diff --git a/libfreerdp/core/info.c b/libfreerdp/core/info.c
++index a11cc12ff..003bec52a 100644
++--- a/libfreerdp/core/info.c
+++++ b/libfreerdp/core/info.c
++@@ -1495,7 +1495,7 @@ static BOOL rdp_write_logon_info_plain(wStream* s)
++ 	if (!Stream_EnsureRemainingCapacity(s, 576))
++ 		return FALSE;
++ 
++-	Stream_Seek(s, 576);
+++	Stream_Zero(s, 576);
++ 	return TRUE;
 + }
 + 
-+ struct tcp_req_info*
-+-tcp_req_info_create(struct sldns_buffer* spoolbuf)
-++tcp_req_info_create(struct comm_base* base, struct sldns_buffer* spoolbuf)
-+ {
-+ 	struct tcp_req_info* req = (struct tcp_req_info*)malloc(sizeof(*req));
-+ 	if(!req) {
-+@@ -2142,6 +2142,12 @@ tcp_req_info_create(struct sldns_buffer* spoolbuf)
-+ 		return NULL;
-+ 	}
-+ 	memset(req, 0, sizeof(*req));
-++	req->read_again_timer = comm_timer_create(base, tcp_read_again_cb, req);
-++	if(!req->read_again_timer) {
-++		log_err("malloc failure");
-++		free(req);
-++		return NULL;
-++	}
-+ 	req->spool_buffer = spoolbuf;
-+ 	return req;
-+ }
-+@@ -2151,6 +2157,7 @@ tcp_req_info_delete(struct tcp_req_info* req)
-+ {
-+ 	if(!req) return;
-+ 	tcp_req_info_clear(req);
-++	comm_timer_delete(req->read_again_timer);
-+ 	/* cp is pointer back to commpoint that owns this struct and
-+ 	 * called delete on us */
-+ 	/* spool_buffer is shared udp buffer, not deleted here */
-+@@ -2189,6 +2196,9 @@ void tcp_req_info_clear(struct tcp_req_info* req)
-+ 	req->done_req_list = NULL;
-+ 	req->num_done_req = 0;
-+ 	req->read_is_closed = 0;
-++
-++	if(comm_timer_is_set(req->read_again_timer))
-++		comm_timer_disable(req->read_again_timer);
-+ }
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
+new file mode 100644
+index 0000000000..90e921dc39
+--- /dev/null
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-85089-2.patch
+@@ -0,0 +1,28 @@
++From 1228a148cb3754a78b8c40737e14d0be5030a382 Mon Sep 17 00:00:00 2001
++From: Armin Novak <armin.novak@thincast.com>
++Date: Thu, 13 Aug 2026 11:24:02 +0200
++Subject: [PATCH] [winpr,utils] initialize wStream buffer with zero
++
++(cherry picked from commit 483c9388119f06bac420d92053cff9ef94e83bea)
++
++CVE: CVE-2026-85089
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/483c9388119f06bac420d92053cff9ef94e83bea]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ winpr/libwinpr/utils/stream.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/winpr/libwinpr/utils/stream.c b/winpr/libwinpr/utils/stream.c
++index c0beba7fc..224459584 100644
++--- a/winpr/libwinpr/utils/stream.c
+++++ b/winpr/libwinpr/utils/stream.c
++@@ -98,7 +98,7 @@ wStream* Stream_New(BYTE* buffer, size_t size)
++ 	if (buffer)
++ 		s->buffer = buffer;
++ 	else
++-		s->buffer = (BYTE*)malloc(size);
+++		s->buffer = (BYTE*)calloc(size, sizeof(BYTE));
 + 
-+ void
-+diff --git a/services/listen_dnsport.h b/services/listen_dnsport.h
-+index 963595a1c..79f46705f 100644
-+--- a/services/listen_dnsport.h
-++++ b/services/listen_dnsport.h
-+@@ -345,6 +345,10 @@ struct tcp_req_info {
-+ 	int num_done_req;
-+ 	/** list of pending writable result packets, malloced one at a time */
-+ 	struct tcp_req_done_item* done_req_list;
-++	/** the read again timer, when the number of pipelined TCP queries
-++	 * is large, it waits, zero time, for a new event loop to service
-++	 * the remainder of the TCP traffic on the fd. */
-++	struct comm_timer* read_again_timer;
-+ };
-+ 
-+ /**
-+@@ -375,10 +379,12 @@ struct tcp_req_done_item {
-+  * Create tcp request info structure that keeps track of open
-+  * requests on the TCP channel that are resolved at the same time,
-+  * and the pending results that have to get written back to that client.
-++ * @param base: comm base for read again timer.
-+  * @param spoolbuf: shared buffer
-+  * @return new structure or NULL on alloc failure.
-+  */
-+-struct tcp_req_info* tcp_req_info_create(struct sldns_buffer* spoolbuf);
-++struct tcp_req_info* tcp_req_info_create(struct comm_base* base,
-++	struct sldns_buffer* spoolbuf);
-+ 
-+ /**
-+  * Delete tcp request structure.  Called by owning commpoint.
-+diff --git a/testcode/testbound.c b/testcode/testbound.c
-+index 063037df4..3a3bcaef6 100644
-+--- a/testcode/testbound.c
-++++ b/testcode/testbound.c
-+@@ -786,3 +786,13 @@ size_t doq_table_quic_size_get(struct doq_table* ATTR_UNUSED(table))
-+ 	return 0;
-+ }
-+ #endif
-++
-++void tcp_read_again_cb(void* ATTR_UNUSED(arg))
-++{
-++	/* nothing */
-++}
-++
-++void tcp_more_read_again_cb(void* ATTR_UNUSED(arg))
-++{
-++	/* nothing */
-++}
-+diff --git a/util/fptr_wlist.c b/util/fptr_wlist.c
-+index 3c863d5e1..2cf3d320e 100644
-+--- a/util/fptr_wlist.c
-++++ b/util/fptr_wlist.c
-+@@ -141,6 +141,8 @@ fptr_whitelist_comm_timer(void (*fptr)(void*))
-+ #ifdef UB_ON_WINDOWS
-+ 	else if(fptr == &wsvc_cron_cb) return 1;
-+ #endif
-++	else if(fptr == &tcp_read_again_cb) return 1;
-++	else if(fptr == &tcp_more_read_again_cb) return 1;
-+ 	else if(fptr == &auth_xfer_timer) return 1;
-+ 	else if(fptr == &auth_xfer_probe_timer_callback) return 1;
-+ 	else if(fptr == &auth_xfer_transfer_timer_callback) return 1;
-+diff --git a/util/netevent.c b/util/netevent.c
-+index aedcb5e07..0dde9059c 100644
-+--- a/util/netevent.c
-++++ b/util/netevent.c
-+@@ -122,6 +122,10 @@
-+ #define NUM_UDP_PER_SELECT 1
-+ #endif
-+ 
-++/** The number of TCP queries over a TCP connection, per read indication
-++ * from select. */
-++#define NUM_TCP_PER_SELECT 100
-++
-+ /** timeout in millisec to wait for write to unblock, packets dropped after.*/
-+ #define SEND_BLOCKED_WAIT_TIMEOUT 200
-+ /** max number of times to wait for write to unblock, packets dropped after.*/
-+@@ -4546,6 +4550,10 @@ comm_point_tcp_handle_write(int fd, struct comm_point* c)
-+ static int
-+ tcp_req_info_read_again(int fd, struct comm_point* c)
-+ {
-++	/* One event-loop visit drains at most this many pipelined queries;
-++	 * the rest is re-queued, so that other file descriptors get
-++	 * serviced in between. */
-++	int budget = NUM_TCP_PER_SELECT;
-+ 	while(c->tcp_req_info->read_again) {
-+ 		int r;
-+ 		c->tcp_req_info->read_again = 0;
-+@@ -4562,6 +4570,16 @@ tcp_req_info_read_again(int fd, struct comm_point* c)
-+ 			}
-+ 			return 0;
-+ 		}
-++		if(--budget <= 0 && c->tcp_req_info->read_again) {
-++			/* Defer the rest of the drain to the next loop turn.
-++			 * This uses a zero delay timer. For TLS the undrained
-++			 * remainder sits in OpenSSL's user-space buffer. */
-++			struct timeval tv;
-++			memset(&tv, 0, sizeof(tv));
-++			verbose(VERB_ALGO, "Defer tcp_req_info read again");
-++			comm_timer_set(c->tcp_req_info->read_again_timer, &tv);
-++			return 1;
-++		}
-+ 	}
-+ 	return 1;
-+ }
-+@@ -4575,6 +4593,7 @@ tcp_more_read_again(int fd, struct comm_point* c)
-+ 	/* this continues until the read routines get EAGAIN or so,
-+ 	 * and thus does not call the callback, and the bool is 0 */
-+ 	int* moreread = c->tcp_more_read_again;
-++	int budget = NUM_TCP_PER_SELECT;
-+ 	while(moreread && *moreread) {
-+ 		*moreread = 0;
-+ 		if(!comm_point_tcp_handle_read(fd, c, 0)) {
-+@@ -4587,6 +4606,30 @@ tcp_more_read_again(int fd, struct comm_point* c)
-+ 			}
-+ 			return;
-+ 		}
-++		if(--budget <= 0 && *moreread) {
-++			/* Defer the rest of the drain to the next loop turn.
-++			 * This uses a zero delay timer. For TLS the undrained
-++			 * remainder sits in OpenSSL's user-space buffer. */
-++			struct timeval tv;
-++			memset(&tv, 0, sizeof(tv));
-++			if(!c->tcp_more_read_again_timer) {
-++				c->tcp_more_read_again_timer = comm_timer_create(c->ev->base, tcp_more_read_again_cb, c);
-++				if(!c->tcp_more_read_again_timer) {
-++					log_err("out of memory for tcp more read again timer");
-++					reclaim_tcp_handler(c);
-++					if(!c->tcp_do_close) {
-++						fptr_ok(fptr_whitelist_comm_point(
-++							c->callback));
-++						(void)(*c->callback)(c, c->cb_arg,
-++							NETEVENT_CLOSED, NULL);
-++					}
-++					return;
-++				}
-++			}
-++			verbose(VERB_ALGO, "Defer more read again");
-++			comm_timer_set(c->tcp_more_read_again_timer, &tv);
-++			return;
-++		}
-+ 	}
-+ }
-+ 
-+@@ -4614,6 +4657,23 @@ tcp_more_write_again(int fd, struct comm_point* c)
-+ 	}
-+ }
-+ 
-++void
-++tcp_read_again_cb(void* arg)
-++{
-++	struct tcp_req_info* req = (struct tcp_req_info*)arg;
-++	verbose(VERB_ALGO, "tcp_read_again_cb");
-++	if(!tcp_req_info_read_again(req->cp->fd, req->cp))
-++		return;
-++}
-++
-++void
-++tcp_more_read_again_cb(void* arg)
-++{
-++	struct comm_point* c = (struct comm_point*)arg;
-++	verbose(VERB_ALGO, "tcp_more_read_again_cb");
-++	tcp_more_read_again(c->fd, c);
-++}
-++
-+ void
-+ comm_point_tcp_handle_callback(int fd, short event, void* arg)
-+ {
-+@@ -6025,7 +6085,7 @@ comm_point_create_tcp_handler(struct comm_base *base,
-+ 	c->pp2_enabled = parent->pp2_enabled;
-+ 	c->pp2_header_state = pp2_header_none;
-+ 	if(spoolbuf) {
-+-		c->tcp_req_info = tcp_req_info_create(spoolbuf);
-++		c->tcp_req_info = tcp_req_info_create(base, spoolbuf);
-+ 		if(!c->tcp_req_info) {
-+ 			log_err("could not create tcp commpoint");
-+ 			sldns_buffer_free(c->buffer);
-+@@ -6584,6 +6644,9 @@ comm_point_close(struct comm_point* c)
-+ 		*c->tcp_more_read_again = 0;
-+ 	if(c->tcp_more_write_again && *c->tcp_more_write_again)
-+ 		*c->tcp_more_write_again = 0;
-++	if(c->tcp_more_read_again_timer &&
-++		comm_timer_is_set(c->tcp_more_read_again_timer))
-++		comm_timer_disable(c->tcp_more_read_again_timer);
-+ 
-+ 	/* close fd after removing from event lists, or epoll.. is messed up */
-+ 	if(c->fd != -1 && !c->do_not_close) {
-+@@ -6623,6 +6686,7 @@ comm_point_delete(struct comm_point* c)
-+ 		free(c->tcp_handlers);
-+ 	}
-+ 	free(c->timeout);
-++	comm_timer_delete(c->tcp_more_read_again_timer);
-+ 	if(c->type == comm_tcp || c->type == comm_local || c->type == comm_http) {
-+ 		sldns_buffer_free(c->buffer);
-+ #ifdef USE_DNSCRYPT
-+diff --git a/util/netevent.h b/util/netevent.h
-+index c5114bbbe..dae2c375a 100644
-+--- a/util/netevent.h
-++++ b/util/netevent.h
-+@@ -380,6 +380,9 @@ struct comm_point {
-+ 	 * Or leave NULL if it is not used at all. */
-+ 	int* tcp_more_write_again;
-+ 
-++	/** resume timer for tcp_more_read_again */
-++	struct comm_timer* tcp_more_read_again_timer;
-++
-+ 	/** if set, read/write completes:
-+ 		read/write state of tcp is toggled.
-+ 		buffer reset/bytecount reset.
-+@@ -1127,6 +1130,12 @@ void doq_send_pkt(struct comm_point* c, struct doq_pkt_addr* paddr,
-+ /** doq timer callback function. */
-+ void doq_timer_cb(void* arg);
-+ 
-++/** tcp read again callback function. For tcp req info listen. */
-++void tcp_read_again_cb(void* arg);
-++
-++/** tcp more read again callback function. For outside network. */
-++void tcp_more_read_again_cb(void* arg);
-++
-+ /**
-+  * This routine is published for checks and tests, and is only used internally.
-+  * handle libevent callback for timer comm.
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-index faf315876c..0b59d7c9f9 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
-@@ -43,6 +43,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
-            file://CVE-2026-55991.patch \
-            file://CVE-2026-56416.patch \
-            file://CVE-2026-56444.patch \
-+           file://CVE-2026-80225.patch \
-            "
++ 	if (!s->buffer)
++ 	{
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
+index edd2fddf94..1c46a8b9ca 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.24.2.bb
+@@ -25,6 +25,8 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${
+            file://CVE-2026-64621.patch \
+            file://CVE-2026-66401.patch \
+            file://CVE-2026-67288.patch \
++           file://CVE-2026-85089-1.patch \
++           file://CVE-2026-85089-2.patch \
+ "
  
- SRCREV = "f6269baa605d31859f28770e01a24e3677e5f82c"
+ 
 
