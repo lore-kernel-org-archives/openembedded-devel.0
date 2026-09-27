@@ -2,135 +2,158 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FBBBC98338
-	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 20:51:44 +0000 (UTC)
-Received: from mail-dy2-f42.google.com (mail-dy2-f42.google.com [74.125.229.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.43685.1790542295504901467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B2A4C9830E
+	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 21:53:44 +0000 (UTC)
+Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.45672.1790546020324419263
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 13:51:35 -0700
+ Sun, 27 Sep 2026 14:53:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Q7hUmnBV;
- spf=pass (domain: gmail.com, ip: 74.125.229.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f42.google.com with SMTP id 5a478bee46e88-34215285aa1so599371eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 13:51:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QUC19H37;
+ spf=pass (domain: gmail.com, ip: 74.125.229.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-343c8177767so681978eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 14:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790542295; x=1791147095; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790546020; x=1791150820; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KH2F0b1sTtrU6VoE4Fdnkb6nB4AekGiwnZYQwIeTyo0=;
-        b=Q7hUmnBVSCkh6X6aZmcNtMnol2ocTq/+vh/xikoy0mpBXKAngkjfAsaRD32fcjkjiz
-         e6ulbg2+ooov8eafPnqBf9U+pBeEAjCAEfLm29zMMgT0Ye60hHDrIgybSltRkyrC/4HF
-         GJ/L+RJwfL14NxpiqV/2PxqIHeJ2l4LFGvcJXJuRo+MrQPTkY3S9sbNM9SN4dudWri/p
-         uHUJHnjmrmaa2oudSAdVeInFoCrOBa1r6HKTECPaNlSmXQhka1kCg8qVECB8cgYpZ7pX
-         brvQ99MlXx2oC5VmiiZF90/BGGpuYnDqUyP9BJCqL2U3k8SmoJFCnnXES4KETepkjuib
-         3MYw==
+        bh=4LJ8mIoptjNAaobNuTMdPVrhu4eW2WGxc9It2OncO8s=;
+        b=QUC19H37j/NvGKxP/kg2E6chntpBzYis1vby6IRlG0StEKqLnHlGuuvnJbbqK0Nzeh
+         KkhJLTiqS9chX4cf5hkLLDdjtfDSKLdR2/ALKMMnaWyXbunIlqh3PI4xYMqi+Gh16QRg
+         OS3u+42uAtSBVpJ0u1UadVGZiWR8XyDnf/UtEhxf8nH4XsfRKYH9wW0wV2vklqNicnxZ
+         bCg6BbFXYelCHN5pJDvN6gKjOR72RW8N7DmzM5tjzTDS1o6II4TTCghVjPK1+Pxeo3em
+         pD+AC57YhyiTKkKmkyf00jFb6+CVHbMaLkISBPN2uzL+1KGuYPQZgNVcj9T0++XzdzbC
+         VnVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790542295; x=1791147095;
+        d=1e100.net; s=20260707; t=1790546020; x=1791150820;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=KH2F0b1sTtrU6VoE4Fdnkb6nB4AekGiwnZYQwIeTyo0=;
-        b=VT3hYwLXLNdz7JJuMIZlhmUOkPsB9mGQ+lHWmufHs35vMZLSmiBKpTBHFTdZSEujEE
-         HhQpMDbQLav1MDs02VvcbmjwH0IfpBm71WQB0Gd9IQ8nrT3DhTxeMSJhiKbdKhQmdaS7
-         zm+Yuuzfgukuw8YM6Ksf6n9bPoc+ck66lHu7JTD9aOJq0+FjsjJZAAY9/0SQeaJ6i9O2
-         dxEwZ85+2uURu7iKpYzJukBqVa1Qycqp3hy7E1nDar/1o6Bxx7rbzSKjsh0ZRJ0+n4IN
-         iNcf+vGUb+qJMe6cHs0GOQhhFA8uBTpB4niQO0DC2I5ydF8SfxIvj7iFXIXhtHHfYloV
-         xOPg==
-X-Gm-Message-State: AFuF++kTXc7LEAP0SFWbFHLeJw11NTv/8yam9y5FB40QqRlWYhsW7/di
-	8k4sS+4+5Rv1eLrfGQ/zCGWQDJdDY9kV8QkwymSI/ccTNUqNPfeqfLQzXXenGqD/
-X-Gm-Gg: AYBFou1gS3w9vJfxwXwLHNW5J1vRu+6/JfYRs/vHeC+IWFQm+4rxmztUmAyi8wSgMpO
-	GiP1L64n9AHZ235j86JeNVE6WbdqdzSJwBhYHsWP8ABFicz8Iq8lB0YpBMc9n3alzNSfS9BSlmd
-	ZhyVwPbSlz0+7UMsTmHsRuTYKU9PSaOyukx/BD1Ow8cYjBpSV995O+kwIHRppgzcVS5yN7lCLc7
-	XvK65FA+ZRJrIfx+LJyvA9PFBuiFVkN5OWNMOzNxgD+in9K9+2ngyBIShxn4zc83SjAQ7YZVPA2
-	JVxBxCcjkQBIXRh7VfBsLCT5i04ndlDQJIxxoZ/IqAm7oSvWPFW+J/GbKWE/tPKVWXshquXClLT
-	7iBsITJ573zgU9kTmhaN3jClYquckUc/vnzOKTUt1wN+7GkshuAwS+/Sm/vzLBSxzuGg3PX5BCI
-	AjaBPgowfCG4OTEWfzbFqzjNaUEjSwU89NADJbHH6T4tBwpNixDbf8GvdREFezua+W5hBX2iGGI
-	L12ZwA0LlyCqIYvJJ6NM4fzqCsgTwMezDbk2BQCUVN9AvC/vKeI3Mr061TsASgSMmt05tfdOj77
-	lBI+L0AMxeG5qGTxPQyKLNZuhYpMOUY48zFp+s1UnlV/ss9eXoDolNz3RE1Wku44iBnYTXULGtz
-	s4umOEc+hy3Z5cyQlIzYafQmkW+dcp8OgW48JJmfimdCyIOo5REou2DXKLrEpFpo6/QBOgfIqFV
-	v0b2+5iv0SrD1cXM/MNJ+tXZPS+3A3nuhYVUSnytg=
-X-Received: by 2002:a05:7301:2727:b0:332:94e9:a72e with SMTP id 5a478bee46e88-34272754c58mr7860924eec.9.1790542294834;
-        Sun, 27 Sep 2026 13:51:34 -0700 (PDT)
+        bh=4LJ8mIoptjNAaobNuTMdPVrhu4eW2WGxc9It2OncO8s=;
+        b=XgCkI3fQmBXM/HWoSldP2wgNP4WhSFIr0/K9WIsrCwb49SbYmKLnzqh1Xes2LztTe7
+         0dzLWJOmPPqzBwP4mpDqez3i7EYC+2D1DZY7C7kO5z54thsGNI8CwtK59FMo8BIwEm1S
+         eiYy0A0lYwrjc0dRi3Z1Eo1EHwtRB4l4FmrBwcqAuUafkGy9WWIEFB2XAy59qz5Oe9UJ
+         TEYYrkBFhEFZemldbJ6H+zbg+LrrmIvpNAENocBSDLEIM+977eG3xWAwxklRKbdXmDH7
+         nTsi5Ox8dlaZ06O5Bqj1Xy/Vs7frmEref0Q2WGgLMm6FeYkhAWmXweRU8+LZYVzlcGKn
+         eLBw==
+X-Gm-Message-State: AFq9FYJDsOqmhNhqSVAUxIskki6Hg6aCht/FKhtelbe4xF4hX025pTld
+	D/OtLqMZOR2xuOg1UKUHzjPci/6/9BtMNiizeT8+PSX/jajuh1UT4rgCSBhfisf3
+X-Gm-Gg: AYBFou0r7HPd4nltSugepocnlv1jqD5xoEvAJAd73gL8wzHPRb4wFa3lU38PizjLqec
+	l8Nrl8W9j0eQTvtmbFH2v96sQB70HyJqyu/ROyKP7ejRRXleSOlq1d2F+q0ldMrlbmi04xRotkA
+	KP6yf/IxmTXO8NFAmlFMgiDNZZ1Na2Jh0YeAilf9lX5O7Dlz5tP4naPXQMSiJoRfmx4tZ81Q/vG
+	JXHDwEglyurXBGO7H+QFdg+bSFexwrqWzYuSrf3VHC04rTMqxedI7r0ABT10UQ6RxfcXqnlSzSu
+	4hikzjkfJ8Rizl46vS1XY2bmJ83AMz3d2jnDbRiKNF/6Abqx6qnVAS26i9ixFgqb8R9idjwYL5V
+	bnB6LUvohIe3mDSd5K3cTPOhqaeXwip2sllRNR4APh6+yV7iPEoYLOM43kDQLwFUa0wsZ2MM47T
+	PlA3NsJHgVNC8EDGKLvhLLzIqOGgoCKuBTD8pfu8rhr/hbqIMiIK5Wg8hF7Hf76WkTUq3Yx2oti
+	pChRW0ROHbjkUOILowZzk+2JPCkLVAr08GdCJ4c7Tp8EZQQT1mNBHPCjrtB2PtkrFBg+9B5Fn9Y
+	YNGHQNBeUriKnASMqGRPdMe4bZcdZt/UnMFdVrcNsF4UbJOPy68Ecs4Om2y9zGreyjz+1maKIPT
+	K7/r0/CLy0L3TrzByOWZhKgP4nEKVRREcnvF09LXAaL4i8byrmdMxzpWr3BWrejBjkjYqydDxjQ
+	xbdHHCSaw0emYh00noeo9siqy+Rsa0FXRVMfigow==
+X-Received: by 2002:a05:693c:8953:10b0:346:7bfd:8504 with SMTP id 5a478bee46e88-3467bfd8655mr2808045eec.41.1790546019469;
+        Sun, 27 Sep 2026 14:53:39 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3444fd04d93sm5674189eec.12.2026.09.27.13.51.34
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34144f4eb9esm23047736eec.19.2026.09.27.14.53.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 13:51:34 -0700 (PDT)
+        Sun, 27 Sep 2026 14:53:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 1/2] hunspell: upgrade 1.7.3 -> 1.7.4
-Date: Sun, 27 Sep 2026 13:51:30 -0700
-Message-ID: <20260927205131.233612-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] conserver: fix racy console-down ptest
+Date: Sun, 27 Sep 2026 14:53:35 -0700
+Message-ID: <20260927215335.255230-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 20:51:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130383
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 21:53:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130385
 
-- C++14 is now required (was optional C++11).
-- test.sh gained a trace check driven by new tests/*.trace files; install
-  them with the ptest data so it runs.
-- Only pull in glibc-gconv-iso8859-* for glibc. They do not exist on
-  musl, whose iconv has the ISO-8859 conversions built in, so the ptest
-  package could not be installed there.
+test/test1.cf sets "reinitcheck 1s", added upstream only to exercise
+the seconds unit. A reinit check brings back every console that is down,
+including one taken down on purpose, so test #5, which expects the
+console that test #4 downed ("cd") to still be down, has about a second
+to attach and query it. On a loaded host, e.g. while testimage runs
+several VMs, it loses:
 
-Changelog: https://github.com/hunspell/hunspell/compare/v1.7.3...v1.7.4
+  FAIL: conserver #5  (diffs in test5.diff)
+  -[`shell' -- console is down]
 
-Tested with meta-oe-image-ptest-hunspell on qemux86-64 with
-yoe-musl-systemd-wayland: 170 PASS, 0 FAIL. hunspell-native builds.
+conserver.log shows "[shell] automatic reinitialization" between the
+two tests. Reproduced with 2 failures in 20 runs in qemux86-64 with the
+host CPUs saturated; instrumenting group.c confirmed the reinit comes
+from ReUp(pGE, 2), the reinitcheck timer.
 
+Use "reinitcheck 60s" in the test config, so the seconds unit is still
+parsed but the check cannot fire during the ~10 s test run. 40 of 40
+runs passed under the same load.
+
+Tested with meta-oe-image-ptest-conserver on qemux86-64 with
+yoe-musl-systemd-wayland.
+
+AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../{hunspell_1.7.3.bb => hunspell_1.7.4.bb}        | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-support/hunspell/{hunspell_1.7.3.bb => hunspell_1.7.4.bb} (88%)
+ ...einitcheck-race-the-console-down-tes.patch | 37 +++++++++++++++++++
+ .../conserver/conserver_8.3.0.bb              |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
-similarity index 88%
-rename from meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb
-rename to meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
-index 7d0921c25f..bdfe1bd4b1 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver/0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch b/meta-oe/recipes-connectivity/conserver/conserver/0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch
+new file mode 100644
+index 0000000000..0bb7f99bd1
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver/0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch
+@@ -0,0 +1,37 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Sun, 27 Sep 2026 14:15:00 -0700
++Subject: [PATCH] test: don't let reinitcheck race the console-down test
++
++test1.cf sets "reinitcheck 1s", added to exercise the seconds unit.
++A reinit check brings back every console that is down, including one
++taken down on purpose, so test #4 ("cd") and test #5, which expects the
++console to still be down, race it: if the second console client does
++not attach and query the state within a second, conserver has already
++reinitialized the console and test #5 fails with
++
++  -[`shell' -- console is down]
++   [Enter `^Ec?' for help]
++
++This shows up readily on loaded or emulated targets. Use 60s instead:
++the seconds unit is still parsed and the check can no longer fire
++during the test run.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ test/test1.cf | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/test/test1.cf b/test/test1.cf
++index 781267e..b02a9ba 100644
++--- a/test/test1.cf
+++++ b/test/test1.cf
++@@ -8,7 +8,7 @@ default * {
++ 	include full;
++ }
++ config * {
++-	reinitcheck 1s;
+++	reinitcheck 60s;
++ }
++ break 5 {
++ 	string "\rtest\r";
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+index 8ca5d9c95d..8a841bf97e 100644
+--- a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
++++ b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+@@ -23,6 +23,7 @@ SRC_URI = "\
+     git://github.com/bstansell/conserver;protocol=https;branch=master;tag=v${PV} \
+     file://conserver.service \
+     file://run-ptest \
++    file://0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch \
  "
+ SRCREV = "fe9aac337554f95721dc9f3da721092a81092089"
  
--SRCREV = "c5f98152a274e25b5107101104bef632b83a0cc9"
-+SRCREV = "92aa34b3f378ec115562fb06bd1728d566a339ec"
- SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
-            file://run-ptest \
- "
-@@ -21,12 +21,12 @@ RDEPENDS:${PN}-ispell = "perl"
- do_install_ptest() {
-     install -d ${D}${PTEST_PATH}/tests
-     install -m 0755 ${S}/tests/test.sh ${D}${PTEST_PATH}/tests/
--    
-+
-     # Install test data files
--    for ext in dic aff good wrong sug morph root; do
-+    for ext in dic aff good wrong sug morph root trace; do
-         find ${S}/tests -maxdepth 1 -name "*.$ext" -exec cp {} ${D}${PTEST_PATH}/tests/ \;
-     done
--    
-+
-     # Patch test.sh to use installed binaries
-     sed -i 's|HUNSPELL="$(dirname $0)"/../src/tools/hunspell|HUNSPELL="${bindir}/hunspell"|' ${D}${PTEST_PATH}/tests/test.sh
-     sed -i 's|ANALYZE="$(dirname $0)"/../src/tools/analyze|ANALYZE="${bindir}/analyze"|' ${D}${PTEST_PATH}/tests/test.sh
-@@ -34,8 +34,9 @@ do_install_ptest() {
-     sed -i 's|alias analyze=.*ANALYZE.*|alias analyze="$ANALYZE"|' ${D}${PTEST_PATH}/tests/test.sh
- }
- 
--RDEPENDS:${PN}-ptest += " \
--    bash \
-+RDEPENDS:${PN}-ptest += "bash"
-+
-+RDEPENDS:${PN}-ptest:append:libc-glibc = " \
-     glibc-gconv-iso8859-1 \
-     glibc-gconv-iso8859-2 \
-     glibc-gconv-iso8859-15 \
 
