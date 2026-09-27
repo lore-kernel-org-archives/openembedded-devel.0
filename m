@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 715B5C9832F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7151FC98324
 	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 10:51:34 +0000 (UTC)
-Received: from mail-pz2-f43.google.com (mail-pz2-f43.google.com [74.125.228.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.35366.1790506285720183321
+Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35368.1790506291255283348
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 03:51:25 -0700
+ Sun, 27 Sep 2026 03:51:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pQT5HiUo;
- spf=pass (domain: gmail.com, ip: 74.125.228.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f43.google.com with SMTP id d2e1a72fcca58-85469b355ffso909811b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:51:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bMzsdPd8;
+ spf=pass (domain: gmail.com, ip: 74.125.228.12, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f12.google.com with SMTP id d2e1a72fcca58-86b90133ae8so968950b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790506285; x=1791111085; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790506291; x=1791111091; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3SuNBMtYkuXuU6Y3LF85Dp8ojHQQLghI9pESWYoVrK0=;
-        b=pQT5HiUoAcA7I2KYp/Xj3mKPexhn2GeIR6e6NM8xFLui8uThEpotXOJlMwU3S5epIX
-         7M5aIOLgXPULkMY1wUldQiHfYEHCRNq1jTQ3UEflLh9jU6lJzh1HGeTIVNQRPF3VB+Jj
-         K4nXMCvPeIj0o4WqVBFj1qxtLkvafdICZoMZ0frlIpLvdiH11ITotqV00yEiHIcTwGZU
-         lNL3qlSjZvU2F9i9wjtWnGlIJIQ8zDDW79+43YJaq8BMvslnjmefaC5pMwYbYDbrwedK
-         SanDWEr2rCly367Fgg1mk7MHauJ1zyt+U2mO/mvMbNY9tUH/rKJ5mnYV4tkcyKdRMbvW
-         /n0A==
+        bh=VeGnLxzTehC+Kt07acKxQW3QGdv789LaSAJXWGfJjwI=;
+        b=bMzsdPd8yyNiMOJfxCkYtZ7H+uMPWuMmhenTOlfsBysAbTXJSGS/r0cqYiq5RmoF8N
+         8atmnFTQX5cYGO3PMT2nLZ5PmbzGzTJ2+vwpVYGpjqPunA/ilOw+lbeU/RRQ2O0bRv7X
+         qk4wQ619O2/FbDpFtqTMxCOhRbxxYx8mptJ7ELk6ByEdZBmdLN/6nsM2xaaSGryfbWXA
+         LFITFKeUCvMaAdOa7nXZHDgK/sBR4RSCyq5S0og1ZI2JO8SQ5cLtGCiYZtUe/86Y7cLT
+         dDWzKXqiNe9e2fKo/vU2u+WzE8uxDW+AR8oLUBev2RV6vMeDfx4UlayCw0YTKx8RonzW
+         t1KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790506285; x=1791111085;
+        d=1e100.net; s=20260707; t=1790506291; x=1791111091;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3SuNBMtYkuXuU6Y3LF85Dp8ojHQQLghI9pESWYoVrK0=;
-        b=NC5JVmL02bY8Uvew3M1B1BgNxk8DY2fPSd3z0VcVs2fhI+SMH5g6I3l62vUDk/oLjc
-         KXgXMpU1ddwKDtwo8pIOcMdufhlXiqTYzIqEKL3o43o851rVzMTkQkwMQ1G+/G826y4m
-         QXnJayk8NQ7IkRLdXpxmuoX7WUfuAAqVPS97HpmtkBbESeBTn6oDc+XrAlaBejUnC2Yk
-         z/M9e3My9/9pJfycsAWWg/disWp6Upb395AuvXLLjRjzHlHAXKV7k+m00FshEHUjJFDi
-         sLrM3wH/KTKOZa0aBc/5XhaTL3rCJOnyQZsZBZQHtll2IDJwdRAW+wJ8/MUstr/C8fgJ
-         PV8A==
-X-Gm-Message-State: AFuF++lF73SMbmIhEbE7KwXJkt4oGUAY7eZzeoRX0CjEMVKD+5qoC1w2
-	PsKDbOltW/wdKFU+7kIC4OHby2VA68knE3MKMHxBjdYW2kXJLExofUWVdkQCBg==
-X-Gm-Gg: AYBFou2KZHf8Yte9QfbeytyTQeZTqU0x463uLxF0GEtsMcS/tgGJllOiTLYWlr8Mu7H
-	B6eiilyA36ShQE4VyZ5G1/Yeh0Bjx3gPPXEsjH4tiSP5g0A9abPdnPrciJ7W8OpKvVCTHb2kqmB
-	8NN3137qxUzKWFzvV0v5GyFXuhDpQVPbC0OQpoBZCObKhpxl8a0TzH/OJQRIvyz1EWmkn+pCUsk
-	hlu/wef/xC4Ecyq1puTcFge+QzTuKXprnmvKfSHN2NXlbvYUQ0e3cQ2f9kHJg5MxX+8lc0UiotZ
-	RONhUnKikT8SRFKYLdNAAAEtm1BDjUwX//gGM7gq2aVAIvvFuf+3Sp6OVDy8ZFbwrgl6wy3X9r4
-	aOGReoTXZC/UnG8Eiw4OrC8t2AWmFfPxrpcLsIhVSXpNwUQQ4Uj7reIoY2D/NGlKMB5NgZXFNhw
-	/ut1KyptRzc32tU1NV2MpJVLr+8x2j4y6z1PIXac0RuQD7NOm+0SclouVCZp4EneLVgV6tP1cV6
-	mfYuz98he7M9kl6yhjjtTA=
-X-Received: by 2002:a05:6a00:e8e:b0:882:7f85:291d with SMTP id d2e1a72fcca58-8827f855658mr1184204b3a.19.1790506285073;
-        Sun, 27 Sep 2026 03:51:25 -0700 (PDT)
+        bh=VeGnLxzTehC+Kt07acKxQW3QGdv789LaSAJXWGfJjwI=;
+        b=gEcMHZZqN6HXSIPFju+UVAQk5b8ymQTNtBa39SERnll5CySry1ZLa9DZXibhqgBizz
+         afrtzc4Qyka/QPIgjHmlLrUflKhGWEjEPUHimdUEzfY+5zJBdTcRzufnYHtOV4XGot76
+         NXW9L8X4t9b4lLj5AFh2uX/SgEEm8x8MngzziLU03hECqGeTRynkNEdp/Pb9Lnk2/XDa
+         3KGbyB1tWXG2W/duwel0oJMUouN6jS6DULOj2PPYsXqQUIFHGx+YikfrIvdMzmApWHTO
+         Qgd//tfqlagAkurKWpVSmGnuk2KGCgTdODSAuG7nFe/m0mreX/zcgaSdaTB1xG9CEe5V
+         VpUQ==
+X-Gm-Message-State: AFuF++miF2TpVB6Yy9Mipdn3LeZ1wsi6bG9ImM++KJuWqnmdiLHgoMMe
+	HWfLD0vkscauCED0wDKW9rjG7s/SbwjKtPEswKUpsyL+Ub05J2QZgzAmAyJCww==
+X-Gm-Gg: AYBFou1a+dZzm6n1YmtDVK1IMWep0cMUrGi0why4wTMcfocWj8B52zR2v3nFh4eeK9O
+	0LR9WnyGD0AAxEYS8yTXj4uwDeKycW8i5u8wrWhj1envf+OHHbISfxUVUAAoDo77fnY7BS/oOyz
+	CsA1xlJb++1NUJBnO4zp2p3uhXi73npac41k+VJUYiAd5x6v2GLQeryo1HFkEDxeVZnX0+pZVOh
+	yB7R9CW5PxcV/QiN8OiBQtDMLXQwbr4Ml+Iy3Hw/xDYzRcF7GLS3tAqwY7NecPeO/5bV4zNZfgN
+	kmdob7uyqc25z94BP2nNU73FrjuymPVoLMTB9U/V0Fpa4TSwCy/CBqaJvnbBjGJuJN61kOEgRxz
+	BVThBvJUn3MjK2WQcMdIHKIYrlgThY/anTBfbNZleW0LHo6gwa4OfiSaYa70nSs6DrEjJ2qjD5+
+	hcb87f9op/CaonoF4IAyUd5j+ymEkE0JW0WjCCEke4EKa7NU1l+PLdlFZCtiaOH/R1EXn6DbyBJ
+	Hn3PBKMGWH6VHAhEIq7N9s=
+X-Received: by 2002:a05:6a00:f96:b0:87a:23b3:1064 with SMTP id d2e1a72fcca58-87e98d891d4mr9017680b3a.11.1790506290602;
+        Sun, 27 Sep 2026 03:51:30 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.51.22
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.51.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 03:51:24 -0700 (PDT)
+        Sun, 27 Sep 2026 03:51:30 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 27/35] pocketpy: upgrade 2.1.8 -> 2.2.0
-Date: Sun, 27 Sep 2026 23:49:54 +1300
-Message-ID: <20260927105002.1832451-27-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 29/35] redis: upgrade 8.10.1 -> 8.10.2
+Date: Sun, 27 Sep 2026 23:49:56 +1300
+Message-ID: <20260927105002.1832451-29-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
 References: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
@@ -68,33 +68,87 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 10:51:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130361
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130363
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/pocketpy/pocketpy/releases/tag/v2.2.0
+https://github.com/redis/redis/releases/tag/8.10.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../pocketpy/{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/pocketpy/{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb} (95%)
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch              | 0
+ ...2-lua-update-Makefile-to-use-environment-build-setting.patch | 0
+ .../0003-hack-to-force-use-of-libc-malloc.patch                 | 0
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch                      | 0
+ ...05-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 0
+ ...06-src-Makefile-do-not-build-the-test-modules-from-all.patch | 0
+ .../redis/{redis-8.10.1 => redis-8.10.2}/init-redis-server      | 0
+ .../redis/{redis-8.10.1 => redis-8.10.2}/redis.conf             | 0
+ .../redis/{redis-8.10.1 => redis-8.10.2}/redis.service          | 0
+ .../recipes-extended/redis/{redis_8.10.1.bb => redis_8.10.2.bb} | 2 +-
+ 10 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/0006-src-Makefile-do-not-build-the-test-modules-from-all.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-8.10.1 => redis-8.10.2}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_8.10.1.bb => redis_8.10.2.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
-rename to meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
-index 910deba386..e4aca45ae8 100644
---- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
-+++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
-@@ -14,7 +14,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=224889df377610675315e194ac59276c"
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0001-hiredis-use-default-CC-if-it-is-set.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0003-hack-to-force-use-of-libc-malloc.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0004-src-Do-not-reset-FINAL_LIBS.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/0006-src-Makefile-do-not-build-the-test-modules-from-all.patch b/meta-oe/recipes-extended/redis/redis-8.10.2/0006-src-Makefile-do-not-build-the-test-modules-from-all.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/0006-src-Makefile-do-not-build-the-test-modules-from-all.patch
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/0006-src-Makefile-do-not-build-the-test-modules-from-all.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/init-redis-server b/meta-oe/recipes-extended/redis/redis-8.10.2/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/redis.conf b/meta-oe/recipes-extended/redis/redis-8.10.2/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-8.10.1/redis.service b/meta-oe/recipes-extended/redis/redis-8.10.2/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-8.10.1/redis.service
+rename to meta-oe/recipes-extended/redis/redis-8.10.2/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_8.10.1.bb b/meta-oe/recipes-extended/redis/redis_8.10.2.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/redis/redis_8.10.1.bb
+rename to meta-oe/recipes-extended/redis/redis_8.10.2.bb
+index 40e92dc318..d24f6825d1 100644
+--- a/meta-oe/recipes-extended/redis/redis_8.10.1.bb
++++ b/meta-oe/recipes-extended/redis/redis_8.10.2.bb
+@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-src-Makefile-do-not-build-the-test-modules-from-all.patch \
+           "
+-SRC_URI[sha256sum] = "60166c95ab7aedaa9dfe516de685be0a4dd87be95ded59ba429df14c13f1b663"
++SRC_URI[sha256sum] = "b9ffee226b5eecdba98a679260dad764b2a4ebd90dce4ad5ac9e9f3eef9c02b3"
  
- SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV}"
--SRCREV = "a2f16e5f1f5fcc3b3d2cc1bdacfc3a027dfe2d76"
-+SRCREV = "6cbece9ebc98c19fa2c189dc6963b421c22c40ae"
+ RPROVIDES:${PN} = "virtual-redis"
  
- 
- inherit cmake
 
