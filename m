@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B76EC9830E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39297C9832F
 	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 10:50:43 +0000 (UTC)
-Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.35334.1790506241944491769
+Received: from mail-pz2-f38.google.com (mail-pz2-f38.google.com [74.125.228.38])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.34498.1790506233760849273
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 03:50:42 -0700
+ Sun, 27 Sep 2026 03:50:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=C1tj6N3q;
- spf=pass (domain: gmail.com, ip: 74.125.228.40, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f40.google.com with SMTP id d2e1a72fcca58-87fd84c0bfeso733261b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:50:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ChDJe2v+;
+ spf=pass (domain: gmail.com, ip: 74.125.228.38, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f38.google.com with SMTP id d2e1a72fcca58-88272e1d069so317627b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 03:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790506241; x=1791111041; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790506233; x=1791111033; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LtjIOFLNNOoDQn28v/ks2E5E1tLnhscuKDMFZKBaFN0=;
-        b=C1tj6N3qiucBGfQd1qi5G7W03cr74zpQNtASXkpvhP86Rwn7JnY8fEfmGj4wrJJLAi
-         gVibybnBKiBGoxWkw0+w4CVonypFiMehCjrS7gFNWDxKn6rQQsDyGMYnw7CbALnB4mzf
-         SW50HV+BvQpAvvrpoxiT7FTjMoUL6wFIo6JlfCo9uB3rIiOGhpO+cOMk9kcrTmFphHc4
-         e6Ktijk2U4BYURx/sgfazE39ozG3BM2I9TZsY3b/n5Wujzk4IbpQy7tRdNJ6y0R2wmFl
-         1InjQ32NDIOZSfudQn4N7Eci9o7BZM8L3wW3YxPwghXqgaKG8IGRdplPjRKlDmlvr8wE
-         FEiA==
+        bh=bm7eOq/y7UsuckeVmDy9R32DngVUR4M32RI58ITpIDY=;
+        b=ChDJe2v+1bWFKRDscd1fvfYBw/+9qsyGjucMnu/jylkO9SX4jJeqt1XwQ4i8IDBK1G
+         UVZtr7PSHobA+5i5jbsQQJV8zosW7SwI9KCuLlFvFFA5d4zUHoxDC6kc9I08pUY+roVk
+         3VEW5AlmbyGoz8co/AorRMhs77H5s2O8bp2I6gE14CXTh0kUTCWBsBdAD9519oY8C/7U
+         5AxhIO7G0B7gjiAWHupnV+yfw480Uerd3ktPTQN1hjsJPXyJbElRCWxyjF5N9zh8b9CO
+         2jK/E9SdpEpv/1fkygWmPDCSreI1+vxcN6+1s1T3IqQrAJavhIUS7G8d3yPnvjXq2h0q
+         GbKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790506241; x=1791111041;
+        d=1e100.net; s=20260707; t=1790506233; x=1791111033;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LtjIOFLNNOoDQn28v/ks2E5E1tLnhscuKDMFZKBaFN0=;
-        b=OwRwZBEzRgSSOiqkHTPd1YrilIWtPJHFTxD4R9VBBzGc6rAUAPNL6YA4gJzlO9KEm2
-         roPp13BSwdvWkgRBaM6zIWyHd7mmItsm9tmp2BF/V6rW6mbhjHOeuHZcUADMBFMVB2ST
-         kiaya/kO8w4eZElk0lML+gxw3J8rgp1/Nke93tPpbqR2DgiBKFZOhVGz5StnB4hHbE8R
-         h94gxqZ9lrVA2LC2rA/WfkvGCQVt2OesJjvanFvD1MrEEA+C7wklP9auURL9UjvRPBp7
-         i0g/Isu/QR6WMbajLO5xsZ/hCfE53/ekuQjohNhKc7uBh3ufVDenNkYQUzgu3bWFcr8l
-         XD8Q==
-X-Gm-Message-State: AFuF++n4VW1jA8Dj20Nim8xP7jqKKkBJcCTliqJ5teWF/94IJIBOiA0/
-	ehUcC7XKlschjO+aFYf0o8sbp1BxfL9mg8T9mNbJcS+/SpWqbjJKTOM0Oxg0AQ==
-X-Gm-Gg: AYBFou0ypA9lm59WO2QVH2xkgx35Lmq2FqgG9tioLNX3RdOyMGAJnsM1K/vK4r+4ybM
-	gFA5ajO1kPL14AKkqFc+odWZTYljHkrT2PfGnrrR56QFK52qLGaWqvZcOziAzsRWY58glt3jyoo
-	lUdl2WmxjHMn1VKmkqmY5tmcXD6iFfRLCdWQLz2lAkg9tE43/opTTuDJmyBfx4gz+S8z5ggpICX
-	Ssub4ms70tFWp4siSQA9K8ogFPLpS1XT5HYfiJUVihUo4Qi2YNjuJXCy8wuFI9tS03ziue2lwl4
-	qPTfqkhnzcpC0IEZABfOeBPHEOtHyWb8Oo62IoX/ezTm+4LoJxrmaWm/KokHS1kbe/dbAZetmqG
-	LuZpUXQPUTmtMIIYPfJPitSDIVOcCqiiBK9mZ+t0tPxwYKtYiyCCSflwOwKFJHJkjPh0PH/6hJk
-	TwyNNPfIX0yXi3OTyYyL169DWvT141JRAEfm3Q8I+QYE/dEC3yOC8O5jMYq1oMIY3alNQ+zmtKB
-	CuBCrSACIRoKwS06kFBHT0=
-X-Received: by 2002:a05:6a00:ad8a:b0:82f:38df:681c with SMTP id d2e1a72fcca58-87e98788fa9mr7699525b3a.6.1790506241290;
-        Sun, 27 Sep 2026 03:50:41 -0700 (PDT)
+        bh=bm7eOq/y7UsuckeVmDy9R32DngVUR4M32RI58ITpIDY=;
+        b=eQi0Qg5kJakyaT41MdvdbBOVcPJ51VOVhKUGlwgDj4XHVo118n0/irY2ylj0QY2MbH
+         MnwlbXLRQ5Wd8y9G5FfUpxBUOzlHbmB7Pw+Ug3YF5Eh/gSXEkSGNmHVIb4AmEXftWPXm
+         mrpHrMTEzmHlPUm3cydaZbs9ZpAJyjClRG6BWW2xnT/3majCqGrVNZCxvKF2yNo3Ic5t
+         od2kN+gdgUYNSqMLuRkY6wdc+fURK5g2m9jE4PxX14j51OZa43A9SD06TJfA4795hCX5
+         B/eCT1enYtli4NCMwUX6MJIHeMV5wK84OCIMm2qWQcljFgSHVaNXnW8Qe7t5Y96k5PCA
+         LXlg==
+X-Gm-Message-State: AFuF++nKUADMbBEVS141GWbOhkgmCD1a6GzZbe8uU6e5ZXviH98n1iAh
+	S1SegRZSMX3VztSv1xBAjnTumvcf0VjPbm0zsT32U/nMy+m5iGHJvhKYBbkJxw==
+X-Gm-Gg: AYBFou14EPtHsNCJN7TuEHbMZH8T8gve+sYWO+7wESUE/cCwli8ejk/2PBxjB7dNJ3e
+	JHacHZLJlnKaUecwGacUmFgLZldIGvmzCqSsm1wdrmjxUpRLsnqdh8mgASs6N18jQVHD2o78gur
+	8GucDmAaH7p3dmjsjeseDy8tw0NDbdRrMYXwd2HtcFLHPGjPeItWvfsFrcUD1R4kwVPGmIFtWDB
+	nmIiXT3fA4gDdU+Bhaknmt1aQQY0GA9rC6gZUNxo36q+3hhxCqR6GqBjQV3xJeK0s2jqmvh8jnZ
+	MzXDlIFVt7AtESHa8TjBOPirXuENgLLLGiEuk/z+SUmBw0Eit96yXKxhgAZWgEO/P3j2N/Q0sDA
+	Tb4VXCT6Oo0ZfldLUHzbICyTGcxRaTJp78ubz8/vjghIzYs+5+7+LB55IFNUDzj3TUCoKYpjuUt
+	/eiTQYQp6rfdoVPR1i086hOe1y0jsLGivlqlzgNOV1cow3LE6AGEeA8nJeqTkdubxfxd5T9Tpo0
+	Ei4cU6QUOiaj0gbyDdodD8=
+X-Received: by 2002:a05:6a00:8d5:b0:881:f152:3861 with SMTP id d2e1a72fcca58-881f1523d53mr2114437b3a.25.1790506233011;
+        Sun, 27 Sep 2026 03:50:33 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.50.39
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88268c5ed75sm640542b3a.48.2026.09.27.03.50.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 03:50:40 -0700 (PDT)
+        Sun, 27 Sep 2026 03:50:32 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 12/35] znc: upgrade 1.10.2 -> 1.10.3
-Date: Sun, 27 Sep 2026 23:49:39 +1300
-Message-ID: <20260927105002.1832451-12-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 9/35] postfix: upgrade 3.11.6 -> 3.11.7
+Date: Sun, 27 Sep 2026 23:49:36 +1300
+Message-ID: <20260927105002.1832451-9-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
 References: <20260927105002.1832451-1-ankur.tyagi85@gmail.com>
@@ -68,33 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 10:50:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130346
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130343
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/znc/znc/blob/znc-1.10.3/ChangeLog.md
+http://www.postfix.org/announcements/postfix-3.11.7.html
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-irc/znc/{znc_1.10.2.bb => znc_1.10.3.bb}            | 2 +-
+ .../postfix/{postfix_3.11.6.bb => postfix_3.11.7.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-irc/znc/{znc_1.10.2.bb => znc_1.10.3.bb} (94%)
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.11.6.bb => postfix_3.11.7.bb} (99%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_1.10.2.bb b/meta-networking/recipes-irc/znc/znc_1.10.3.bb
-similarity index 94%
-rename from meta-networking/recipes-irc/znc/znc_1.10.2.bb
-rename to meta-networking/recipes-irc/znc/znc_1.10.3.bb
-index 31984742d8..019c3103f7 100644
---- a/meta-networking/recipes-irc/znc/znc_1.10.2.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.10.3.bb
-@@ -8,7 +8,7 @@ SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https;tag=${BP}
-            file://0001-Fix-build-error-with-OpenSSL-4.patch \
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb b/meta-networking/recipes-daemons/postfix/postfix_3.11.7.bb
+similarity index 99%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.11.7.bb
+index 14854ca11d..99a77dd6c3 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.11.6.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.11.7.bb
+@@ -29,7 +29,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://0001-Fix-build-with-musl.patch \
             "
  
--SRCREV = "59af2206c62724eec0d8c43d3c1c0b70610ca1d9"
-+SRCREV = "6bd91573cebd1e4ee954ebd4eb6db5b654e0e412"
+-SRC_URI[sha256sum] = "b9a748705b1cab0a4afcbe42f934c82a33b342ba3229017fb508c71700078d07"
++SRC_URI[sha256sum] = "a2f3242345753448072177fae83c322a403c9263696996406201145dab8e8625"
  
- inherit cmake pkgconfig
- 
+ UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
+ UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
 
