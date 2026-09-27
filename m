@@ -2,99 +2,135 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00FACC9832F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FBBBC98338
 	for <webhook@archiver.kernel.org>; Sun, 27 Sep 2026 20:51:44 +0000 (UTC)
-Received: from mail-dy2-f14.google.com (mail-dy2-f14.google.com [74.125.229.14])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.44732.1790542298090950145
+Received: from mail-dy2-f42.google.com (mail-dy2-f42.google.com [74.125.229.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.43685.1790542295504901467
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 13:51:38 -0700
+ Sun, 27 Sep 2026 13:51:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=oO8HPSHg;
- spf=pass (domain: gmail.com, ip: 74.125.229.14, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f14.google.com with SMTP id 5a478bee46e88-328664b7528so2292269eec.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 13:51:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Q7hUmnBV;
+ spf=pass (domain: gmail.com, ip: 74.125.229.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f42.google.com with SMTP id 5a478bee46e88-34215285aa1so599371eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 13:51:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790542297; x=1791147097; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hn3YGuPuyVlscWmLOhT1X8eTjpTC1qtcYLoJtefXtH0=;
-        b=oO8HPSHgaAvwChXbGavZKmvZ35QuMsVFPEalzqnWdBwvtm9YxhQKOglbshGUtYswQa
-         P3xHFM2E2RL0KrZTOHQ7n/mtkLt+z1GwiTxCtYZMgrcXn2miH6k388Ibq/vQfGiJRUvq
-         +GrepgO8swC2p23i0oksL4bhXM7ANtNQpeMVWWT4NdnrUc0B94J7zuof97if77ipKGDo
-         B+v96HKD9D0ekkzuvSacJzCUQp1aeHwD0GnnM1A2mKHbGYKV09HaJjNf67fPSyTRBATv
-         MCGES/fnWzq4fpCrfocbfkd63oVdqh4gJVDD1LTYE1dkfkh9nMHjdMlCQfoKBNDpRf3w
-         4FSg==
+        d=gmail.com; s=20251104; t=1790542295; x=1791147095; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=KH2F0b1sTtrU6VoE4Fdnkb6nB4AekGiwnZYQwIeTyo0=;
+        b=Q7hUmnBVSCkh6X6aZmcNtMnol2ocTq/+vh/xikoy0mpBXKAngkjfAsaRD32fcjkjiz
+         e6ulbg2+ooov8eafPnqBf9U+pBeEAjCAEfLm29zMMgT0Ye60hHDrIgybSltRkyrC/4HF
+         GJ/L+RJwfL14NxpiqV/2PxqIHeJ2l4LFGvcJXJuRo+MrQPTkY3S9sbNM9SN4dudWri/p
+         uHUJHnjmrmaa2oudSAdVeInFoCrOBa1r6HKTECPaNlSmXQhka1kCg8qVECB8cgYpZ7pX
+         brvQ99MlXx2oC5VmiiZF90/BGGpuYnDqUyP9BJCqL2U3k8SmoJFCnnXES4KETepkjuib
+         3MYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790542297; x=1791147097;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hn3YGuPuyVlscWmLOhT1X8eTjpTC1qtcYLoJtefXtH0=;
-        b=vdcyLJmn9dFnjHRvgKO7OFyrsOtPwTXvaiZN1YQ8JPrJyOw45NiVbOBdeYtMZJz+EL
-         RfCn+I0AbIDnfMq6ALyrlkHFIjtLa4nNNw6RNzg6ZC2StDpA/8UMeLkYr48AbsJLvYsg
-         ewud3PnD7bf5uZx/7I1sjSJCLQeAEc1sb3W9G/DK/RTmIWHemXn/aVlSj2nPkpmeJV2u
-         9vKxrKjvcQ0Yq2mreuWCCd9c/Y2yIZbAfhYEoZHK5BK7mBj7gRjmZZnqVmAX1BF7qtvx
-         +xFFx5FDt/43NmKdtQwxDJ3+3V7QqFu8MVu1I+bitRHP0Hih3PGLnEY3/Ca38JxBkKsq
-         jnIA==
-X-Gm-Message-State: AFq9FYIgBrr5q6QlJjk4n/o2QlmOnf0XQl9YZOO/OF85gQw4Mg67DeHn
-	tKzE4ehTt54YFoe4Bokaj2v3WRag0wagzMuudaRQHjfwSdDNIjkEvIs26jnZuUDa
-X-Gm-Gg: AYBFou3rc7V2C4SMupwSWqaFTI63Z1QQqyKcyw4x+gbtiuChmWVKB6DcsuxqpeZ1x9B
-	b6ywCywruv+nP/SNwm/Hkq4CRq0R+2XX2rFW1yr0ZFYq8ZH+vFxWM6T83+DDv0/Am2mK/5KUyRm
-	VE57pVeV7r23wnjVR69Be7CbfkOMaVTVVZLNtNGkAPfg9VA+0EobQFd92oroElmt3qKl41ltCx7
-	0pni6ncUB8WNdmlliF6QpCbNJi6wagE1zZ4djWWXykppEPaC25hteX984Ec0tDXPBI57dDPnZkG
-	hnNkGSgUrIxvjmiiNF8hPIScjA9HaLUXrRSW+2zgoSMAWmdnDND7qUFc8YY3BNDblTBpRsfr1dZ
-	UqyVR0fYGdLy55aRzGaecB4EIuCKhznTEh2udhaIfAuKnlR2hk5KvJSrLC9zKjwmGt8SqHQ/h8f
-	T44YtmciK0iP+zsOtx2kV16iQIygdYGg+CeB/xw6UylMc+EhtPCriYHEuwM9XYj7Oq26WfZ8irB
-	p3NT/JnWklozKK39ydlOQbC+rLFuktTDRx7eTbPv/ayyQwLgkwHkIx4JAytR+Wa/DYjXc/MnJ1X
-	JDuqU2/6zzJx2f8IZd43NzjfTLVyljX2MQ7OZCa2KQ/s+y8DvgMrAnxPQRaLk9PZiYMjKGD/aNs
-	5Q78AHYVQllhEHF9qDiEGNbDwYAcznYBGbIVP45G8qqak9RPwONs6I37/m+tNCDATYq8ijbhTJI
-	WmZiBlGA+L+Zf0XbOvQus6D9okCiw7fDqx0VG3Tw==
-X-Received: by 2002:a05:693c:2a02:b0:339:794b:c068 with SMTP id 5a478bee46e88-3427354e265mr6917837eec.40.1790542297033;
-        Sun, 27 Sep 2026 13:51:37 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790542295; x=1791147095;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KH2F0b1sTtrU6VoE4Fdnkb6nB4AekGiwnZYQwIeTyo0=;
+        b=VT3hYwLXLNdz7JJuMIZlhmUOkPsB9mGQ+lHWmufHs35vMZLSmiBKpTBHFTdZSEujEE
+         HhQpMDbQLav1MDs02VvcbmjwH0IfpBm71WQB0Gd9IQ8nrT3DhTxeMSJhiKbdKhQmdaS7
+         zm+Yuuzfgukuw8YM6Ksf6n9bPoc+ck66lHu7JTD9aOJq0+FjsjJZAAY9/0SQeaJ6i9O2
+         dxEwZ85+2uURu7iKpYzJukBqVa1Qycqp3hy7E1nDar/1o6Bxx7rbzSKjsh0ZRJ0+n4IN
+         iNcf+vGUb+qJMe6cHs0GOQhhFA8uBTpB4niQO0DC2I5ydF8SfxIvj7iFXIXhtHHfYloV
+         xOPg==
+X-Gm-Message-State: AFuF++kTXc7LEAP0SFWbFHLeJw11NTv/8yam9y5FB40QqRlWYhsW7/di
+	8k4sS+4+5Rv1eLrfGQ/zCGWQDJdDY9kV8QkwymSI/ccTNUqNPfeqfLQzXXenGqD/
+X-Gm-Gg: AYBFou1gS3w9vJfxwXwLHNW5J1vRu+6/JfYRs/vHeC+IWFQm+4rxmztUmAyi8wSgMpO
+	GiP1L64n9AHZ235j86JeNVE6WbdqdzSJwBhYHsWP8ABFicz8Iq8lB0YpBMc9n3alzNSfS9BSlmd
+	ZhyVwPbSlz0+7UMsTmHsRuTYKU9PSaOyukx/BD1Ow8cYjBpSV995O+kwIHRppgzcVS5yN7lCLc7
+	XvK65FA+ZRJrIfx+LJyvA9PFBuiFVkN5OWNMOzNxgD+in9K9+2ngyBIShxn4zc83SjAQ7YZVPA2
+	JVxBxCcjkQBIXRh7VfBsLCT5i04ndlDQJIxxoZ/IqAm7oSvWPFW+J/GbKWE/tPKVWXshquXClLT
+	7iBsITJ573zgU9kTmhaN3jClYquckUc/vnzOKTUt1wN+7GkshuAwS+/Sm/vzLBSxzuGg3PX5BCI
+	AjaBPgowfCG4OTEWfzbFqzjNaUEjSwU89NADJbHH6T4tBwpNixDbf8GvdREFezua+W5hBX2iGGI
+	L12ZwA0LlyCqIYvJJ6NM4fzqCsgTwMezDbk2BQCUVN9AvC/vKeI3Mr061TsASgSMmt05tfdOj77
+	lBI+L0AMxeG5qGTxPQyKLNZuhYpMOUY48zFp+s1UnlV/ss9eXoDolNz3RE1Wku44iBnYTXULGtz
+	s4umOEc+hy3Z5cyQlIzYafQmkW+dcp8OgW48JJmfimdCyIOo5REou2DXKLrEpFpo6/QBOgfIqFV
+	v0b2+5iv0SrD1cXM/MNJ+tXZPS+3A3nuhYVUSnytg=
+X-Received: by 2002:a05:7301:2727:b0:332:94e9:a72e with SMTP id 5a478bee46e88-34272754c58mr7860924eec.9.1790542294834;
+        Sun, 27 Sep 2026 13:51:34 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3444fd04d93sm5674189eec.12.2026.09.27.13.51.35
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3444fd04d93sm5674189eec.12.2026.09.27.13.51.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 13:51:35 -0700 (PDT)
+        Sun, 27 Sep 2026 13:51:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/2] conserver: depend on virtual/crypt instead of libxcrypt
-Date: Sun, 27 Sep 2026 13:51:31 -0700
-Message-ID: <20260927205131.233612-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] hunspell: upgrade 1.7.3 -> 1.7.4
+Date: Sun, 27 Sep 2026 13:51:30 -0700
+Message-ID: <20260927205131.233612-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260927205131.233612-1-khem.raj@oss.qualcomm.com>
-References: <20260927205131.233612-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 20:51:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130384
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 20:51:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130383
 
-conserver only needs crypt(). Depending on libxcrypt directly pulls it
-in even on musl, whose libc already provides crypt(). Use virtual/crypt
-so the libc's preferred provider is used: libxcrypt on glibc, musl
-itself on musl.
+- C++14 is now required (was optional C++11).
+- test.sh gained a trace check driven by new tests/*.trace files; install
+  them with the ptest data so it runs.
+- Only pull in glibc-gconv-iso8859-* for glibc. They do not exist on
+  musl, whose iconv has the ISO-8859 conversions built in, so the ptest
+  package could not be installed there.
+
+Changelog: https://github.com/hunspell/hunspell/compare/v1.7.3...v1.7.4
+
+Tested with meta-oe-image-ptest-hunspell on qemux86-64 with
+yoe-musl-systemd-wayland: 170 PASS, 0 FAIL. hunspell-native builds.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{hunspell_1.7.3.bb => hunspell_1.7.4.bb}        | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/hunspell/{hunspell_1.7.3.bb => hunspell_1.7.4.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
-index c32d6f9646..8ca5d9c95d 100644
---- a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
-+++ b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
-@@ -15,7 +15,7 @@ SECTION = "console/network"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b28513e7b696027d3d2b8dbf117f9fe5"
+diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
+similarity index 88%
+rename from meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb
+rename to meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
+index 7d0921c25f..bdfe1bd4b1 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell_1.7.3.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
+ "
  
--DEPENDS = "libxcrypt"
-+DEPENDS = "virtual/crypt"
+-SRCREV = "c5f98152a274e25b5107101104bef632b83a0cc9"
++SRCREV = "92aa34b3f378ec115562fb06bd1728d566a339ec"
+ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
+            file://run-ptest \
+ "
+@@ -21,12 +21,12 @@ RDEPENDS:${PN}-ispell = "perl"
+ do_install_ptest() {
+     install -d ${D}${PTEST_PATH}/tests
+     install -m 0755 ${S}/tests/test.sh ${D}${PTEST_PATH}/tests/
+-    
++
+     # Install test data files
+-    for ext in dic aff good wrong sug morph root; do
++    for ext in dic aff good wrong sug morph root trace; do
+         find ${S}/tests -maxdepth 1 -name "*.$ext" -exec cp {} ${D}${PTEST_PATH}/tests/ \;
+     done
+-    
++
+     # Patch test.sh to use installed binaries
+     sed -i 's|HUNSPELL="$(dirname $0)"/../src/tools/hunspell|HUNSPELL="${bindir}/hunspell"|' ${D}${PTEST_PATH}/tests/test.sh
+     sed -i 's|ANALYZE="$(dirname $0)"/../src/tools/analyze|ANALYZE="${bindir}/analyze"|' ${D}${PTEST_PATH}/tests/test.sh
+@@ -34,8 +34,9 @@ do_install_ptest() {
+     sed -i 's|alias analyze=.*ANALYZE.*|alias analyze="$ANALYZE"|' ${D}${PTEST_PATH}/tests/test.sh
+ }
  
- inherit autotools ptest systemd useradd
- 
+-RDEPENDS:${PN}-ptest += " \
+-    bash \
++RDEPENDS:${PN}-ptest += "bash"
++
++RDEPENDS:${PN}-ptest:append:libc-glibc = " \
+     glibc-gconv-iso8859-1 \
+     glibc-gconv-iso8859-2 \
+     glibc-gconv-iso8859-15 \
 
