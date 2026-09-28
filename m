@@ -1,130 +1,188 @@
-Return-Path: <mark.jonas@de.bosch.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9E79CA5FA5
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 11:48:30 +0000 (UTC)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.56521.1790596101307522185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 073E5C9833F
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 12:00:41 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.56739.1790596840239026086
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 04:48:22 -0700
+ Mon, 28 Sep 2026 05:00:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=mCy/8+s+;
- spf=pass (domain: de.bosch.com, ip: 52.101.84.50, mailfrom: mark.jonas@de.bosch.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wGptAodZS9Ev+qyLthmD1fp8jLaPMA52BbhIp3/nMATAr+qamOKNiHa2TeaD/N5PmOPxrXvdm7pSNMoKrmTjk+2nwEGbmcEG/BaJL3yZT7GGRnIVqFrYOGjrsZxIdH/86gswffbGsXdL2WzKbT5UgkIeeqf35omi60e+AoRp8i6RvPwS8M6UuAGuAGstMwGzPGPGXT3WttIBPjl02k+7D48USFSzq/YIF4UjP8z8XBvIJO0IVWivRUW44GCMury1lGMJ6gRbCEeirxMKQ2wBSNw1PfVjWKG4Anb6gCEYzST/W/dtXrxlBO2pgRYyc/CZMZECeyAr2fMaz0u1fB2JPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KZfXB5+ExX0fheyzVaIo5jVEuXunxPTtkCEbvd/AN70=;
- b=X4ODiW7zS9Ubtb8w3V6deMA2WVjJBRQf+o5Qk7F7e6HwfISEz/CFMQgq8Fg/4F61JeQl7ysSjX/pnunyZgjDGxcq0a/eSQ2fvDIMDOS6KCR4XWu3+3+CU1nDSD66+uNQv0xF8+IiDC36jgND4Qs8nPnrvNsHjAVMZ83NqE0mRgjxD8Vcs3YwtL+L4j20j28Y6XpnPFw7fVoGBG2ON5oOSkC7tvIYKgZWcwmCH2Udeuw4zOcs0IHv95oKth1Exupg4mkb0JNpobu20KcOmT+hkudScrhAoNm54KdOKZJzUJiMt6tLX1YzQqi5StqtUnfVxpUDAM9c3bO/Qg3IAdPnUg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.205) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
- header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KZfXB5+ExX0fheyzVaIo5jVEuXunxPTtkCEbvd/AN70=;
- b=mCy/8+s+Y+ajNnrdKr/0GDjJ8PEeR17FpyVrEcYuRAP4O8ZUIfvO23OmtFzOIjwKZWK9ZIUEZaApBA3NXzOimjuKOlthcwfUfZ+AZ5thC1feQsT8RlYXIQEe+1NqIOibc5gwricy7E30UV0HZBSIaxMLj8Kb+vu61OB/JJ0EQhkdSzhuTkxtQlesl66NmoW4uqnA+2woAtWZwpf76kjvvMQd2kECfJA/pc59a6991uLUp+XKHxpFBxFSEf+6nH7dHFXJNxieIEEItnX59goz/fveEvfDAcgQjy8Z/yiCmEVQxj/1++TCjr20ilG9T7oP5vG4DQf6nKTjscbRYbkfGg==
-Received: from WA2PEPF000008B2.POLP291.PROD.OUTLOOK.COM (2603:10a6:1d8::697)
- by DB9PR10MB7193.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:459::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Mon, 28 Sep
- 2026 11:48:16 +0000
-Received: from WA1PEPF00009B3D.eurprd05.prod.outlook.com (2603:10a6:1d8::11b)
- by WA2PEPF000008B2.outlook.office365.com (2603:10a6:1d8::697) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.13
- via Frontend Transport; Mon, 28 Sep 2026 11:48:15 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 139.15.153.205) smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.205 as permitted sender) receiver=protection.outlook.com;
- client-ip=139.15.153.205; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.205) by
- WA1PEPF00009B3D.mail.protection.outlook.com (10.167.242.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.14 via Frontend Transport; Mon, 28 Sep 2026 11:48:15 +0000
-Received: from RNGMBX3003.de.bosch.com (10.124.11.208) by eop.bosch-org.com
- (139.15.153.205) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 28 Sep
- 2026 13:47:50 +0200
-Received: from GRB-C-0009M.ot.de.bosch.com (10.22.65.242) by
- smtp.app.bosch.com (10.124.11.208) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Mon, 28 Sep 2026 13:47:50 +0200
-From: <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <bartosz.golaszewski@oss.qualcomm.com>, <khem.raj@oss.qualcomm.com>, "Mark
- Jonas" <mark.jonas@de.bosch.com>
-Subject: [meta-oe][PATCH v2 0/2] libgpiod: detail package licensing
-Date: Mon, 28 Sep 2026 13:47:02 +0200
-Message-ID: <20260928114704.2719-1-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=K/v+BPvr;
+ spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout04.t-online.de (Postfix) with SMTP id 9AE40A0B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 14:00:37 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.40.132]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xBA26-41AEZE0; Mon, 28 Sep 2026 14:00:34 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHv2] kmscon: treat platform display controllers as primary GPUs
+Date: Mon, 28 Sep 2026 14:00:16 +0200
+Message-ID: <20260928120016.43158-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1790596834-DEFFA9F5-8B05C86E/0/0 CLEAN NORMAL
+X-TOI-MSGID: 0b66e5fe-5626-417a-8743-3da0b4bc669e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1790596837; i=f_l_k@t-online.de;
+	bh=Lj4efS7qHOSOPrZ6cJWnBYlM3t9+1eF6HWPOOwMZhiU=;
+	h=From:To:Subject:Date;
+	b=K/v+BPvrzlGrwHEqqorjACsw39aIxeNJlB0pLPnQW89L/BNXlnhRKGfhtGbbMX3GQ
+	 8fwDmLhY5ZsWDURyh/sx0IkEF4yJU9CzuEAJyH94Hm8TlxeRISK3XPX2dgIKiAsSJn
+	 PtCLgXfGBJ2pIyExW7lBaAiU5V9drAfaVBokl+cg3mlFHKWQM6+mOHWOglZfcSDAb6
+	 MshoQsBRD+mawcEIbpaDc49VRv2qvrzimVqc7MHvGrNHJaKIVrfz2+d8g2VZSeqhfK
+	 Cn9KlbGjxP2tnsTErpdJCicOexYv66Xtgj/O38sa3GVraUCtoAw1OvgUBs1pZWmv9N
+	 gT7INr2wK19qQ==
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.22.65.242]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: WA1PEPF00009B3D:EE_|DB9PR10MB7193:EE_
-X-MS-Office365-Filtering-Correlation-Id: f35406d7-7cf4-4fe9-40f5-08df1d5661f9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|11063799006|6133799003|10067099003|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	RNFtwsUnhFbsIDIN7HdB3Z+HDR9rp5lLD8G9wEGfi11ZvotfySSZtWRu1auAm8stCJiN1vJTygY7zAiF71ujzoSEh7xVqcZnPqVwGdquc6MnJ/W/sO/rrxfbbZuPs8vqEp+AMdbYbUFLvw5oE8BpEHH7rrB9FELaS/8TzkudMuGviRHxxDmSQNly6avWYW/5HafGVtl80Q0fJozbTUynorztQIj+U+HgOlsP1aNs62FNIsqeRK/Ejb6WWA8WjHbsd9tOcnQcMbAm16U+DfpHHmLc4A/ZmP9i4xVW7kcvjataKjemXQXq0XhbvE8yBXrQo9/ph1q58NZfhMCtbtYRzNMvyfxxE5FIjfkCARBpm5khDgOmCF12OytG/omTnu2hTay8jspVwjFCYAR9ptWM7mj8/3KWUgU+wi8+pntkdEcWZz5dOVmeAlMPTEuYwvG4PErwnYv42jn7Lrmzt4SdaU2ASiUZTQrptWGL5/KnsWHBilLd0VWPdZNVLoAhtAXMWkfMCjlk3jx1aZSjyXKtwDSVY6hAEpbhEw7zAqKU7ERV/FH93Vuma2tmju9vPSqgCzuC+LofZveyCAXxQjuDhvpFBU4Ij2rJVJjptVXoyvhXprCLLiUolN478zsy6JioUIXSo8J/xxBJi0Nt2cVWHt8nbgFiCs6Dn3c6cBYNgPiwRpM/sEoOZjfMA6I/nW5v+fXup02W2BeM4hEc1bVDFg==
-X-Forefront-Antispam-Report: 
-	CIP:139.15.153.205;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(11063799006)(6133799003)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	h7CVDbZwxuXJcvhn4RqTlxbJVGRa64/NXX/t/AB4ORsS1B18QFIS+3bHTDXiE2YZ8N+kV9JSMxLEDyYYW0LcxkdjHkx/fFZIu81Md7xFosRi63sVZaWvBOVO00sfAEdnjcxYeAiT/hHImo0ZeZi1yuTi5fCFlWD0D6Rwzi9I0lA5x5FQKstXU055LwdQijU0bni098zfNlBnxIGGkW42svTN+Sa7iEjJAW1mDi2XWyZL8U9ZwKZDx5uGtTYS/1vG2ot5vRXtLcGTQImJ0CM1Bel38PVwjVEPpkNi3ktP43cblSk6V0/gJP2ck2Gjdcp1bsmJF2tQAwqbfXMBHrEzpdI5NleLQ2W7Znnnxkja2V0AQKoxitorM6xu4Ocs3dkwIshH/kk3IiXEWzHvJXvrlKIva9R6AnPmd+Mao/rx6i9LbOO4b8/F224JZNHEUsQb
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 11:48:15.6990
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f35406d7-7cf4-4fe9-40f5-08df1d5661f9
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.205];Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	WA1PEPF00009B3D.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB7193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 11:48:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130431
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 12:00:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130433
 
-From: Mark Jonas <mark.jonas@de.bosch.com>
+kmscon only counted a GPU as primary when its PCI parent had boot_vga
+set, so with gpus=3Dprimary it ignored vc4 on the Raspberry Pi 4 and neve=
+r
+showed a terminal. Treat DRM devices on the platform bus as primary,
+except for the firmware framebuffer drivers. Tested on a Raspberry Pi 4
+booting through EDK2.
 
-This series corrects the licensing metadata:
+AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...-display-controllers-as-primary-GPUs.patch | 84 +++++++++++++++++++
+ .../recipes-graphics/kmscon/kmscon_10.0.1.bb  |  5 +-
+ 2 files changed, 88 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_mon=
+itor-treat-platform-display-controllers-as-primary-GPUs.patch
 
-  - Patch 1 splits the recipe-wide LICENSE into per-package assignments,
-    so each package reports its own license (e.g. the library as
-    LGPL-2.1-or-later, the CLI tools as GPL-2.0-or-later).
-
-  - Patch 2 backports a patch which fixes the libgpiodbus license
-
-Changes since v1:
-- Squashed addition of missing CC0-1.0 license into setting of
-  per-package license assignements.
-- Backported the license change of libgpiodbus from GPL-2.0-or-later to
-  LGPL-2.1-or-later.=20
-
-Ricardo Simoes (2):
-  libgpiod: set per-package license assignments
-  libgpiod: update libgpiodbus license
-
- .../libgpiod-2.x/fix_gpiodbus_license.patch   | 26 +++++++++++++++++++
- .../libgpiod/libgpiod_2.3.1.bb                | 15 ++++++++++-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/fix_gpiod=
-bus_license.patch
-
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-tr=
+eat-platform-display-controllers-as-primary-GPUs.patch b/meta-oe/recipes-=
+graphics/kmscon/kmscon/0002-uterm_monitor-treat-platform-display-controll=
+ers-as-primary-GPUs.patch
+new file mode 100644
+index 0000000000..c85607783c
+--- /dev/null
++++ b/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-treat-pla=
+tform-display-controllers-as-primary-GPUs.patch
+@@ -0,0 +1,84 @@
++From d321a1572a12d760ddade294f4e7eabe57d555d1 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Sat, 26 Sep 2026 10:00:57 +0200
++Subject: [PATCH] uterm_monitor: treat platform display controllers as pr=
+imary
++ GPUs
++
++A GPU only counted as primary when its PCI parent had boot_vga set.
++SoC display controllers such as vc4 on the Raspberry Pi are platform
++devices without a PCI parent, so with gpus=3Dprimary kmscon ignored the
++only display in the system and never showed a terminal.
++
++Treat DRM devices on the platform bus as primary, except for the
++simpledrm, efidrm, vesadrm and ofdrm firmware framebuffers that only
++stand in until the native driver has loaded.
++
++Upstream-Status: Pending
++
++AI-Generated: Uses Claude Code (Claude Opus 5.5)
++---
++ src/uterm_monitor.c | 29 ++++++++++++++++++++++++++---
++ 1 file changed, 26 insertions(+), 3 deletions(-)
++
++diff --git a/src/uterm_monitor.c b/src/uterm_monitor.c
++index d89bfa1..25ec91f 100644
++--- a/src/uterm_monitor.c
+++++ b/src/uterm_monitor.c
++@@ -234,10 +234,15 @@ out_close:
++ 	return flags;
++ }
++=20
++-static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
+e *dev, const char *node)
+++static char *get_drm_name(int fd);
+++
+++static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
+e *dev, const char *node,
+++			   int fd)
++ {
++ 	struct udev_device *pci;
++ 	const char *id;
+++	char *name;
+++	bool res;
++=20
++ 	pci =3D udev_device_get_parent_with_subsystem_devtype(dev, "pci", NULL=
+);
++ 	if (pci) {
++@@ -246,9 +251,27 @@ static bool is_drm_primary(struct uterm_monitor *mo=
+n, struct udev_device *dev, c
++ 			log_debug("DRM device %s is primary PCI GPU", node);
++ 			return true;
++ 		}
+++		return false;
++ 	}
++=20
++-	return false;
+++	/*
+++	 * SoC display controllers are platform devices without a boot_vga
+++	 * attribute. Treat them as primary, except for the generic firmware
+++	 * framebuffer drivers that only stand in until the real driver loads.
+++	 */
+++	if (!udev_device_get_parent_with_subsystem_devtype(dev, "platform", NU=
+LL))
+++		return false;
+++
+++	name =3D get_drm_name(fd);
+++	if (!name)
+++		return false;
+++
+++	res =3D strcmp(name, "simpledrm") && strcmp(name, "efidrm") && strcmp(=
+name, "vesadrm") &&
+++	      strcmp(name, "ofdrm");
+++	if (res)
+++		log_debug("DRM device %s is primary platform GPU (%s)", node, name);
+++	free(name);
+++	return res;
++ }
++=20
++ /*
++@@ -334,7 +357,7 @@ static unsigned int get_drm_flags(struct uterm_monit=
+or *mon, struct udev_device
++ 		return flags;
++ 	}
++=20
++-	if (is_drm_primary(mon, dev, node))
+++	if (is_drm_primary(mon, dev, node, fd))
++ 		flags |=3D UTERM_MONITOR_PRIMARY;
++ 	if (is_drm_usb(mon, node, fd))
++ 		flags |=3D UTERM_MONITOR_AUX;
++--=20
++2.55.0
++
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb b/meta-oe/r=
+ecipes-graphics/kmscon/kmscon_10.0.1.bb
+index c5cfd527d5..0336649551 100644
+--- a/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb
++++ b/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb
+@@ -23,7 +23,10 @@ DEPENDS =3D "\
+ SRC_URI =3D "git://github.com/kmscon/kmscon;protocol=3Dhttps;branch=3Dma=
+in;tag=3Dv${PV}"
+ SRCREV =3D "c9d0e23336c6bb7645a1f5f48a4a82f1d5a589d9"
+=20
+-SRC_URI +=3D "file://0001-terminal-open-the-pty-only-once-a-display-is-a=
+ttached.patch"
++SRC_URI +=3D " \
++    file://0001-terminal-open-the-pty-only-once-a-display-is-attached.pa=
+tch \
++    file://0002-uterm_monitor-treat-platform-display-controllers-as-prim=
+ary-GPUs.patch \
++"
+=20
+ inherit meson pkgconfig systemd
+=20
 --=20
-2.34.1
+2.55.0
 
 
