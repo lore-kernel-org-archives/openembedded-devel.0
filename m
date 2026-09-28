@@ -1,184 +1,140 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D99C9C9832F
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 01:06:17 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48763.1790557574329128512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13A1AC9830E
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 01:37:18 +0000 (UTC)
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.49247.1790559437455013496
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 18:06:15 -0700
+ Sun, 27 Sep 2026 18:37:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=BYML4eV0;
- spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout11.t-online.de (Postfix) with SMTP id 8B5D91C38F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 03:06:11 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.40.132]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xAzop-3mGqKu0; Mon, 28 Sep 2026 03:06:11 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=SF0Tw/dX;
+ spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-39d654f02baso1012355a91.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 18:37:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790559437; x=1791164237; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qE0ESAyBwp4wLZH96CRXriyvmPBp8w/QAAWxEk89+K4=;
+        b=SF0Tw/dXSDCCbzGBOAp/yuj88xNCUT4GyZlXp26ySLr094oIxG4Jauf4U+7y3UV3zX
+         NWOyA/krnYZiXuVgtllmdETzaKhPpqHsuSPrnOJJCmprkkm9KwTj7ain1z71S/iZy7cl
+         8/UqU0VXStC1zq2BB2SAu4LNXQqjSz9Ub1S8fJFyzx+AxSAU83wQHznYhMAR92rYYp8+
+         c0g4eoRRxVOZWcpB9WgmdHSNY1LfcM/xkbHA7dF3Q/REw7pK5ghtzqH/BHpC4jsCOycS
+         7ud3buy7Ojr0zOJw8ZEvVo0iZ7kvxyEMN8Me/wVwLkrraPt2I5XlUGBHxJUMluzBxuju
+         8jyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790559437; x=1791164237;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qE0ESAyBwp4wLZH96CRXriyvmPBp8w/QAAWxEk89+K4=;
+        b=R5b9IYqiZjYdKsvv9g+OSm4nXxbgph37EBAR6Jkl+qOiLOY1rJPn/n9PQ0ydrdXG3v
+         7gMpJh/Tjdhny4QNQVuUti2z/HSCCMhSRJAVs5Tf60QLXKssXDgW86cY52AtANNCnjpV
+         m+lMBjefIWFyAnZWLavuf0oJFN/JxJqMIBZqMDw/mDw54IHJslOuQIDFP/0utO9Ficae
+         B9jSR7OVfYmmv/1+KDzO5IkLf+3WRWeaDsW8szZoBKCsd5jRaieX/qHs5WNpMag5b7mq
+         QsW5MTtZArGGCJWd9GpSt3PgFAdsjRUqaktKLtGMVbUTy/B4ExbOdWefb7RFyJZvE2rS
+         aH4Q==
+X-Gm-Message-State: AFq9FYImJ6kDc19etYDwILLdwmYRlf5CEhfIc//9jRdJdoDkmt4DyH7p
+	GYSgpCOLgZhNOxWJVbMxuEcxhgZ2nP0oQn+2ou93GaK2cGYyh41s30LacirJMw==
+X-Gm-Gg: AYBFou1QJuGRY6XjHJS0hk3zgKt8L1pp5rlFNyoCtAdzHc3LEBPbvSFlkRf0DMrdsCK
+	ugBQkOp/OYbmfvfFcNzU3qusp3MRE6hizG1Ipa6bEUJEB4Y/yAhAw4geAz6h8KQdSaFjjaNhbD2
+	Vugn1GqrUXfm3SJvNGfyFxzHdRftmvtgXdBfJckhILNLaHbeL4LtdHNExMopH6nUohnYksuabJn
+	UA60bpL//KL/BR5c8/+vaEcH/OIEKnkisEspSbFro7OWnSiLyA1cOk8KQMswChU6znspA5s6I9+
+	Eu7OgS91AMpG+ZS6yxjiWsaxhRg9izxWSLz4i46K9sUcP7F3a3dAFObEwr/UUC7s/VTI8MhQjTE
+	/JA+qzwPw34ogzgWH9L/+xGEdj5nLHBD4RdSx7dFZrV9HNrgUYZYcL5cOLDw2FmmRFxKKzbRk+X
+	GkLoB7N3W9+c/p/1KCNXUANCNk8ddgMiBjx9JCAVWMdE2tl/7GUVlRzfLj0cLQX/wJkWjtLq5/U
+	DKUuTlw4KgwXnmjwMVTafs9FmXK9T79Nw==
+X-Received: by 2002:a17:90a:dfcd:b0:39e:6c69:34db with SMTP id 98e67ed59e1d1-3a098fc5339mr8816576a91.63.1790559436688;
+        Sun, 27 Sep 2026 18:37:16 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a09773e7c3sm23770827a91.17.2026.09.27.18.37.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Sep 2026 18:37:15 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] kmscon: treat platform display controllers as primary GPUs
-Date: Mon, 28 Sep 2026 03:06:00 +0200
-Message-ID: <20260928010600.87898-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH v2 1/1] pocketpy: upgrade 2.1.8 -> 2.2.0
+Date: Mon, 28 Sep 2026 14:37:08 +1300
+Message-ID: <20260928013709.2591219-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790557571-D57F9936-700E75D4/0/0 CLEAN NORMAL
-X-TOI-MSGID: b653a2f9-167c-42e1-be27-6a64afaef3f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1790557571; i=f_l_k@t-online.de;
-	bh=dYzLH6fA1ENjyEbsA+ivIXvp/C5cK3BWggsad+KXu94=;
-	h=From:To:Subject:Date;
-	b=BYML4eV0JFFiCpe39CJ+eNaJC+Un+J8vf4DMb8fUq6bUJ3Zc6OxNckewE3pLIuNTJ
-	 iWusyhIo/OuS5Cn6q7x6vZie3f1K6a3+uMHLJZfNFazfufFAFIHuAyrTVlRu4e5+Xl
-	 morV57dxEPAAF8oMHagANrNydTpVixrGt+XWQDDmLPWQFz6wg1Lkc6kh+msMgjwCoU
-	 K2OXu972GKvlkih5O1l0894qBHGuNdLnhtaoEkSnIw8Td88bCtVO5ehbIxu5PNJe3M
-	 095BHYKHfGNksToDNdBPdCv0bX7gEzJ8o0sY3ImB8KdxXAQNzCAzX2r/sLxBD77Qbf
-	 GwMZfG04kDhjw==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 01:06:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130419
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 01:37:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130420
 
-kmscon only counted a GPU as primary when its PCI parent had boot_vga
-set, so with gpus=3Dprimary it ignored vc4 on the Raspberry Pi 4 and neve=
-r
-showed a terminal. Treat DRM devices without a PCI parent as primary,
-except for the firmware framebuffer drivers. Tested on a Raspberry Pi 4
-booting through EDK2.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-AI-Generated: Uses Claude Code (Claude Opus 5.5)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Changelog:
+https://github.com/pocketpy/pocketpy/releases/tag/v2.2.0
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...-display-controllers-as-primary-GPUs.patch | 81 +++++++++++++++++++
- .../recipes-graphics/kmscon/kmscon_10.0.1.bb  |  5 +-
- 2 files changed, 85 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_mon=
-itor-treat-platform-display-controllers-as-primary-GPUs.patch
+ ...nclude-threads.h-for-c11_thrd__yield.patch | 31 +++++++++++++++++++
+ .../{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb}  |  6 ++--
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/pocketpy/pocketpy/0001-time-include-threads.h-for-c11_thrd__yield.patch
+ rename meta-oe/recipes-devtools/pocketpy/{pocketpy_2.1.8.bb => pocketpy_2.2.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-tr=
-eat-platform-display-controllers-as-primary-GPUs.patch b/meta-oe/recipes-=
-graphics/kmscon/kmscon/0002-uterm_monitor-treat-platform-display-controll=
-ers-as-primary-GPUs.patch
+diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy/0001-time-include-threads.h-for-c11_thrd__yield.patch b/meta-oe/recipes-devtools/pocketpy/pocketpy/0001-time-include-threads.h-for-c11_thrd__yield.patch
 new file mode 100644
-index 0000000000..caebc23dbc
+index 0000000000..b4300128fa
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-treat-pla=
-tform-display-controllers-as-primary-GPUs.patch
-@@ -0,0 +1,81 @@
-+From d321a1572a12d760ddade294f4e7eabe57d555d1 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sat, 26 Sep 2026 10:00:57 +0200
-+Subject: [PATCH] uterm_monitor: treat platform display controllers as pr=
-imary
-+ GPUs
++++ b/meta-oe/recipes-devtools/pocketpy/pocketpy/0001-time-include-threads.h-for-c11_thrd__yield.patch
+@@ -0,0 +1,31 @@
++From e3c1a60242c551fd7db266b9d0db6b3710d057fd Mon Sep 17 00:00:00 2001
++From: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Date: Mon, 28 Sep 2026 14:20:30 +1300
++Subject: [PATCH] time: include threads.h for c11_thrd__yield
 +
-+A GPU only counted as primary when its PCI parent had boot_vga set.
-+SoC display controllers such as vc4 on the Raspberry Pi are platform
-+devices without a PCI parent, so with gpus=3Dprimary kmscon ignored the
-+only display in the system and never showed a terminal.
++time_sleep() calls c11_thrd__yield() when PK_ENABLE_THREADS is set,
++but time.c does not include pocketpy/common/threads.h. This only
++builds with the CMake Unity build, where an earlier translation unit
++pulls in the header. With PK_BUILD_WITH_UNITY=OFF it fails with:
 +
-+Treat DRM devices without a PCI parent as primary, except for the
-+simpledrm, efidrm, vesadrm and ofdrm firmware framebuffers that only
-+stand in until the native driver has loaded.
++  error: implicit declaration of function 'c11_thrd__yield'
 +
-+Upstream-Status: Pending
-+
-+AI-Generated: Uses Claude Code (Claude Opus 5.5)
++Upstream-Status: Submitted [https://github.com/pocketpy/pocketpy/pull/546]
++Assisted-by: GitHub Copilot:claude-opus-5.5
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/uterm_monitor.c | 26 +++++++++++++++++++++++---
-+ 1 file changed, 23 insertions(+), 3 deletions(-)
++ src/modules/time.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/uterm_monitor.c b/src/uterm_monitor.c
-+index d89bfa1..3ecf40b 100644
-+--- a/src/uterm_monitor.c
-++++ b/src/uterm_monitor.c
-+@@ -234,10 +234,15 @@ out_close:
-+ 	return flags;
-+ }
-+=20
-+-static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
-e *dev, const char *node)
-++static char *get_drm_name(int fd);
-++
-++static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
-e *dev, const char *node,
-++			   int fd)
-+ {
-+ 	struct udev_device *pci;
-+ 	const char *id;
-++	char *name;
-++	bool res;
-+=20
-+ 	pci =3D udev_device_get_parent_with_subsystem_devtype(dev, "pci", NULL=
-);
-+ 	if (pci) {
-+@@ -246,9 +251,24 @@ static bool is_drm_primary(struct uterm_monitor *mo=
-n, struct udev_device *dev, c
-+ 			log_debug("DRM device %s is primary PCI GPU", node);
-+ 			return true;
-+ 		}
-++		return false;
-+ 	}
-+=20
-+-	return false;
-++	/*
-++	 * SoC display controllers are platform devices without a boot_vga
-++	 * attribute. Treat them as primary, except for the generic firmware
-++	 * framebuffer drivers that only stand in until the real driver loads.
-++	 */
-++	name =3D get_drm_name(fd);
-++	if (!name)
-++		return false;
-++
-++	res =3D strcmp(name, "simpledrm") && strcmp(name, "efidrm") && strcmp(=
-name, "vesadrm") &&
-++	      strcmp(name, "ofdrm");
-++	if (res)
-++		log_debug("DRM device %s is primary platform GPU (%s)", node, name);
-++	free(name);
-++	return res;
-+ }
-+=20
-+ /*
-+@@ -334,7 +354,7 @@ static unsigned int get_drm_flags(struct uterm_monit=
-or *mon, struct udev_device
-+ 		return flags;
-+ 	}
-+=20
-+-	if (is_drm_primary(mon, dev, node))
-++	if (is_drm_primary(mon, dev, node, fd))
-+ 		flags |=3D UTERM_MONITOR_PRIMARY;
-+ 	if (is_drm_usb(mon, node, fd))
-+ 		flags |=3D UTERM_MONITOR_AUX;
-+--=20
-+2.55.0
-+
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb b/meta-oe/r=
-ecipes-graphics/kmscon/kmscon_10.0.1.bb
-index c5cfd527d5..0336649551 100644
---- a/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon_10.0.1.bb
-@@ -23,7 +23,10 @@ DEPENDS =3D "\
- SRC_URI =3D "git://github.com/kmscon/kmscon;protocol=3Dhttps;branch=3Dma=
-in;tag=3Dv${PV}"
- SRCREV =3D "c9d0e23336c6bb7645a1f5f48a4a82f1d5a589d9"
-=20
--SRC_URI +=3D "file://0001-terminal-open-the-pty-only-once-a-display-is-a=
-ttached.patch"
-+SRC_URI +=3D " \
-+    file://0001-terminal-open-the-pty-only-once-a-display-is-attached.pa=
-tch \
-+    file://0002-uterm_monitor-treat-platform-display-controllers-as-prim=
-ary-GPUs.patch \
-+"
-=20
- inherit meson pkgconfig systemd
-=20
---=20
-2.55.0
-
++diff --git a/src/modules/time.c b/src/modules/time.c
++index fd16a57..ac18037 100644
++--- a/src/modules/time.c
+++++ b/src/modules/time.c
++@@ -10,6 +10,7 @@
++ #endif
++ 
++ #include "pocketpy/pocketpy.h"
+++#include "pocketpy/common/threads.h"
++ #include <assert.h>
++ 
++ #define NANOS_PER_SEC 1000000000
+diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
+rename to meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+index 7f3775941a..5df9301880 100644
+--- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.1.8.bb
++++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.2.0.bb
+@@ -13,8 +13,10 @@ BUGTRACKER = "https://github.com/pocketpy/pocketpy/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=224889df377610675315e194ac59276c"
+ 
+-SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV}"
+-SRCREV = "a2f16e5f1f5fcc3b3d2cc1bdacfc3a027dfe2d76"
++SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV} \
++           file://0001-time-include-threads.h-for-c11_thrd__yield.patch \
++           "
++SRCREV = "6cbece9ebc98c19fa2c189dc6963b421c22c40ae"
+ 
+ 
+ inherit cmake
 
