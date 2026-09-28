@@ -1,189 +1,314 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE3C4CA5FA3
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 17:57:27 +0000 (UTC)
-Received: from mail-pj2-f39.google.com (mail-pj2-f39.google.com [74.125.227.167])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.63908.1790618240699294852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47EAACA5FA2
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 18:42:00 +0000 (UTC)
+Received: from mail-yx2-f38.google.com (mail-yx2-f38.google.com [74.125.224.166])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.65013.1790620914327012688
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 10:57:20 -0700
+ Mon, 28 Sep 2026 11:41:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=q7AYItz2;
- spf=pass (domain: gmail.com, ip: 74.125.227.167, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f39.google.com with SMTP id 98e67ed59e1d1-3a4805e15cfso532636a91.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 10:57:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZGl05apH;
+ spf=pass (domain: gmail.com, ip: 74.125.224.166, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-yx2-f38.google.com with SMTP id 956f58d0204a3-675617094f5so29729d50.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 11:41:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790620913; cv=none;
+        d=google.com; s=arc-20260327;
+        b=HbDwv+YV2R382yKOtTBnuEoXlWCvjicSY9h0d7s0OQsrX9pzl73fLMaDr1ZbNDy6h9
+         PWodmm3ST+O3xOsEPEqcHNFmL9hjC5Jon8W07U3IhizC3jLuni+c32PHPALmdo3r3+3O
+         yHL/1snMOkjzqwrjbICcB0Fw2z5qx9ah49LDdJPnG8gd1OmZ3RF4/gocdWvtP7b3eTdu
+         4u2iOubev7s8IfWUIvKFdwfZ8MWS4R0sIc3EbsLvE+0QBkxElKiuY5GnTMwPlStQFw/t
+         uyg6ADWk0+NYTaiwn3keB5szD4elh/4I90kq6YtbUDX7PnR1MXcR+3IGSgEy5tryT2OT
+         sg3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=89MTmuCbIPlPqgfulIOMSU+l1BV94SW68ndu16nYuBs=;
+        fh=ZLqV144/sAu1AAGeV0lBhRJFi1qAthtro2+/7AGT5z8=;
+        b=AeEy5ogSccAqfYL0ic9X1B+yaZUr/W4Z9JUgq9cPZmR017pLKzFVtLB24lkHPNRDLt
+         UPWlqe1CxFKA/GzkVSDyiVRgRXn6hb9mwznkd4AEm2BzDyTwWs/OIdcEILfHTJf5wlrX
+         NuaUiLI5GoezUxd9RJMw5m/zWuSuvjRWFRwqpH2QziiN5An7oGn51a7Uh6NvLFl4kntm
+         s0Et1KZ4nQQGb4my+4JNa+rlw2m1UE5r+i7bivkvKOaFCOHGuofn6llAQLSZKv3sS46R
+         3sPKTcXPA5Vflmo+xyoAJKWpNoK8ENZMgYbGemLUI5ZpO2I1xqhcROAoNdJJB4GlYAYm
+         lk/A==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790618240; x=1791223040; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WRJnbd05mi3JLTxJc+NcA5XGo6CNlyU0aG9jKweQzuU=;
-        b=q7AYItz2fxxyQfj+9jXmwyiZrSK2ESzN2hhShc0NzNE6XUCOKURYTKL8F9p4Hr/bbO
-         HQ8wmdJMNOQ6JM/Kv9mWd/8DujuEp/V1smJ8kQF0lOL1kRA+O/4ta3LQRnGAtQiOLoJZ
-         DeR1QenuzWmefrCXCUrCKXTfaI6t+X3TQk+tRmKzngGPImYwP5WhgY5pFrOt+VqNFCQI
-         jJOKfbm+6hruU9z9x5PqlKa6OLvKY2qq51nB1KaErGbWvDZbXGdB11wSKdS7WbIYi3SM
-         MY78cxZHITEIKngsvVoI4iyZgwe0uhIcRlyP8xTAPqfxNLgtIj42GU6dcX/93uTlIshj
-         dQOQ==
+        d=gmail.com; s=20251104; t=1790620913; x=1791225713; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=89MTmuCbIPlPqgfulIOMSU+l1BV94SW68ndu16nYuBs=;
+        b=ZGl05apHIdLHtrS3Q9jLf+I+SHkP3DXBOgp7YjqGJdcsI2LdFXblX4IHAaaABWKlma
+         raxoH/Glb0yb/xNyfTsthTwBmnZzlcrXDKkkqflhatDHe7vIl29iDmjQJyKFkJ2r4cuE
+         rqj1RfNQGgjRz75OtInK/7a6fRZbWPeFqeTazkQTS4YvnBhuSgyFe7XTOW7s77Iwvd7P
+         JyIWzfeXb5BuPkYn4bisqktOo2edrnybwlHJSz7kq9UYSTs/HUT7P8uQEUPxrYdKYf/z
+         ZTiXXcam43xdA/HTpFrnbyPb8NL7FZT1FiEARxr0DImk9bcDd+G/eLujfnfTvL//z3Xj
+         R/6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790618240; x=1791223040;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WRJnbd05mi3JLTxJc+NcA5XGo6CNlyU0aG9jKweQzuU=;
-        b=R7iYMPK/r6svZMQC9munmxNkaP0P87tetHiNrXyOqGiY3FyJjgLe1kxeB5M8++vHJ8
-         KKlugZ+ct5YZb9WnQx7Q/j+Xgw4bmdB+jz3FxOo6OZehDallC0TCXW50O1FEk6jcKZ+e
-         CJk+VJl+dnb2TAINs9BKHodhAmEyo6cPOE9SIqkpVETVF8fGG5Bm2xD/h+XpKYY78/om
-         ZRl/m4J8HpR2e2OjDT+ZjwonEQogc2G1X8lhZ4FqjnWY3ME3BEkoks6CvyEIYh2JTQzu
-         XWmcU6Y+U45F1gwTjtfFGYLYsyurQ3R4603+q97wPY9Nuy5Km/gl0/cgLMblhHO1j7nw
-         nvbA==
-X-Gm-Message-State: AFq9FYIRFph+gYN61I6vzKVi58aTCGxUdYrP+r8aPlKsAsTH2qYD6hmp
-	iURw2Alog8jWyrlE5hq0hjhjKrceyNE2TGh2BceJTdNwesmje0FN9ZvevRz6MQ==
-X-Gm-Gg: AYBFou1CHG8XxAiR6QB0R+V8EschOVeRPvEcmSp+WO+FQHiECgZjp7uLw2zaCu9CUuE
-	olVOyOUrRwidVLaI2NlfQMocLtAz5wr7coJvJ4wWGkl+bZv76j6D2kboQZyEk+qbxAW8fHP056h
-	oPxihvEKsoj7/TYSOKsDM1MbUizVYGekVKZwctTouymtAVer2vmDvhRvxRr7P/epb0mD5olp74d
-	g5q6lakcYRnKsAbRJKxaXTyatI8kliXHZ4muFr7PFvqSULEyoC/SzF0az0rJ11/7tnk5g/P37MW
-	8BGQzKU+IDUcQxxd7L0bU1nzs27ZUf3o531TIcW7zv8LFNVJDG0NSy9BvZlXU+w3liVQGrTlULO
-	6MQGvgWqt8rfncwEN7/+p5PPO4O8sq2nyZhkuvAsZVexZ1kmHCA8VrXpH4rCjmx79RV/adHHqsh
-	tfMuFodn70vremM3Zt9vgbRo2QNzolWbQH/15/JwkUxLqoyZuIhufqE0KAkwZ+TTPrda1Rkyq+7
-	z7hRe1u+/0jyfNJ40HbFiA=
-X-Received: by 2002:a17:90b:498c:b0:3a0:903b:f253 with SMTP id 98e67ed59e1d1-3a09875d77cmr11054099a91.18.1790618240010;
-        Mon, 28 Sep 2026 10:57:20 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a4986a1905sm577182a91.13.2026.09.28.10.57.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 10:57:19 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 8/8] freerdp3: upgrade 3.30.0 -> 3.32.1
-Date: Tue, 29 Sep 2026 06:56:56 +1300
-Message-ID: <20260928175656.3501512-8-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928175656.3501512-1-ankur.tyagi85@gmail.com>
-References: <20260928175656.3501512-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20260707; t=1790620913; x=1791225713;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=89MTmuCbIPlPqgfulIOMSU+l1BV94SW68ndu16nYuBs=;
+        b=0mf54wIfNtrBr3jVtpbdYa1Czu3tRBmeUH+eVQL5G9IJpPMPDta4bALafGOoimuGlR
+         XmhOk9kZOjc2xrfNwcM/ktow15kdfRWrkm4xXhOh5VElDNXvd/RrV1GoZQvWbt7nrLZX
+         yrJw1qJQNYr8cAiT6IJFsR7E7DIyAQQQ228cEO4pe5XRekIH8HWQHg20VzKpllx4C50i
+         qUrmB/O4G3dBkxGywTjqL11xtkiS5O+njJcH2su9aqAYqKLz3Gnsb7mUqgDt2HArtwYg
+         EdgwEr9jEzmzKaU+A1KV1dNnmdt7iqNYm9E0ha/v8jFjF826VyEck+xg4k+SMH/47F8r
+         a1Gw==
+X-Gm-Message-State: AFq9FYICCNlZ9sNnEqJAOsZMmwqYJPWZMw7+w1io87alNB540DRx3W4f
+	9NthJy98WOwjE6O2zf2e4PoShgIZVLltfpI8W/OL1Dw/GbLNFXTRT3vOhdgVHUm/Dq9Wto6Zifz
+	sje3Nh0LqgdBDz//msTmDo4JwS0O2Vqm3zQ==
+X-Gm-Gg: AYBFou0PzNBEjJ8DyargLYKKz3fy+guAU0WattTamOEktTtaO+i0tQkyMtGwdUkCMB2
+	XJgqeBANNb4zJT3mzYkxEy128wWtBll5gUXFCAkUFSLtGhrZewOAUDtlJIYgRkIx+Bk4L3bTTFu
+	poviEfTkLJBQNR0GPTc4qHv1bmxOak/tFsMo5wunyveD1iwealWiFK2L+qJdl4hUO+TM2K+M7ht
+	FsBKWsV+6QVACXUrhpuG4UzuAFm87UXg0LjFCokTdhtWddBWm7Pt8Qfjba6Ygt5/32OtakwF7k2
+	bFG+YS5JiiCE9JfB00iTZoOxgP01HguFiR+sa3LKMc6yoL+JiuNUNA==
+X-Received: by 2002:a05:690e:1448:b0:675:3063:481a with SMTP id
+ 956f58d0204a3-67530634e30mr3321700d50.12.1790620913016; Mon, 28 Sep 2026
+ 11:41:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260928092140.2252231-2-alex.kiernan@gmail.com>
+ <20260928092140.2252231-4-alex.kiernan@gmail.com> <CAMKF1soRHUQH11fLC9+Dk4aktcT7+wBGASRNX_7Jzhoq9DQ+cA@mail.gmail.com>
+In-Reply-To: <CAMKF1soRHUQH11fLC9+Dk4aktcT7+wBGASRNX_7Jzhoq9DQ+cA@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Mon, 28 Sep 2026 19:41:44 +0100
+X-Gm-Features: AclHuK92vPVgf06D3YASDnZRfoJnqWhV7BGruv3IGZQpuSxC__lxC5wAFf53ZQk
+Message-ID: <CAO5Uq5TZ=OxMhKmZ5_i0-eygx2wTqQJziARBw2m6APhuUwJ9Yw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-varlink: add recipe
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000072a665065c8f6bfa"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 17:57:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130468
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 18:42:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130469
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+--00000000000072a665065c8f6bfa
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changelog:
-https://github.com/FreeRDP/FreeRDP/releases/tag/3.31.0
-https://github.com/FreeRDP/FreeRDP/releases/tag/3.31.1
-https://github.com/FreeRDP/FreeRDP/releases/tag/3.32.0
-https://github.com/FreeRDP/FreeRDP/releases/tag/3.32.1
+Will do. I have a terrible feeling that what I thought I was building
+wasn't actually what I submitted as the layer I picked these out of was
+still in my bilayers :(
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- ...1-winpr-tools-link-only-winpr-public.patch | 76 +++++++++++++++++++
- ...{freerdp3_3.30.0.bb => freerdp3_3.32.1.bb} |  3 +-
- 2 files changed, 78 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.30.0.bb => freerdp3_3.32.1.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch b/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
-new file mode 100644
-index 0000000000..2dea69c3c4
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
-@@ -0,0 +1,76 @@
-+From 6682e9ca667271b8ba148a301b4a2f9ac78be2b9 Mon Sep 17 00:00:00 2001
-+From: Armin Novak <armin.novak@thincast.com>
-+Date: Mon, 28 Sep 2026 11:57:22 +0200
-+Subject: [PATCH] [winpr,tools] link only winpr public
-+
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/6682e9ca667271b8ba148a301b4a2f9ac78be2b9]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ winpr/tools/CMakeLists.txt          | 18 +++++++++++++-----
-+ winpr/tools/makecert/CMakeLists.txt |  6 +++---
-+ 2 files changed, 16 insertions(+), 8 deletions(-)
-+
-+diff --git a/winpr/tools/CMakeLists.txt b/winpr/tools/CMakeLists.txt
-+index 5719c1c65..225b70744 100644
-+--- a/winpr/tools/CMakeLists.txt
-++++ b/winpr/tools/CMakeLists.txt
-+@@ -28,7 +28,8 @@ set(WINPR_TOOLS_API_VERSION "${WINPR_TOOLS_VERSION_MAJOR}")
-+ 
-+ set(WINPR_TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-+ set(WINPR_TOOLS_SRCS "")
-+-set(WINPR_TOOLS_LIBS "")
-++set(WINPR_TOOLS_PUBLIC_LIBS "")
-++set(WINPR_TOOLS_PRIVATE_LIBS "")
-+ set(WINPR_TOOLS_INCLUDES "")
-+ set(WINPR_TOOLS_DEFINITIONS "")
-+ 
-+@@ -64,11 +65,18 @@ macro(winpr_tools_include_directory_add)
-+   endif()
-+ endmacro()
-+ 
-+-macro(winpr_tools_library_add)
-++macro(winpr_tools_library_public_add)
-+   foreach(_lib ${ARGN})
-+-    list(APPEND WINPR_TOOLS_LIBS "${_lib}")
-++    list(APPEND WINPR_TOOLS_PUBLIC_LIBS "${_lib}")
-+   endforeach()
-+-  set(WINPR_TOOLS_LIBS ${WINPR_TOOLS_LIBS} PARENT_SCOPE)
-++  set(WINPR_TOOLS_PUBLIC_LIBS ${WINPR_TOOLS_PUBLIC_LIBS} PARENT_SCOPE)
-++endmacro()
-++
-++macro(winpr_tools_library_private_add)
-++  foreach(_lib ${ARGN})
-++    list(APPEND WINPR_TOOLS_PRIVATE_LIBS "${_lib}")
-++  endforeach()
-++  set(WINPR_TOOLS_PRIVATE_LIBS ${WINPR_TOOLS_PRIVATE_LIBS} PARENT_SCOPE)
-+ endmacro()
-+ 
-+ macro(winpr_tools_definition_add)
-+@@ -89,7 +97,7 @@ addtargetwithresourcefile(${MODULE_NAME} FALSE "${WINPR_VERSION}" WINPR_TOOLS_SR
-+ 
-+ add_compile_definitions(${WINPR_DEFINITIONS})
-+ target_include_directories(${MODULE_NAME} INTERFACE $<INSTALL_INTERFACE:include/winpr${WINPR_VERSION_MAJOR}>)
-+-target_link_libraries(${MODULE_NAME} PUBLIC ${WINPR_TOOLS_LIBS})
-++target_link_libraries(${MODULE_NAME} PRIVATE ${WINPR_TOOLS_PRIVATE_LIBS} PUBLIC ${WINPR_TOOLS_PUBLIC_LIBS})
-+ 
-+ installwithrpath(
-+   TARGETS
-+diff --git a/winpr/tools/makecert/CMakeLists.txt b/winpr/tools/makecert/CMakeLists.txt
-+index 37b831125..0af1fcc08 100644
-+--- a/winpr/tools/makecert/CMakeLists.txt
-++++ b/winpr/tools/makecert/CMakeLists.txt
-+@@ -31,11 +31,11 @@ endif()
-+ winpr_tools_module_add(${${MODULE_PREFIX}_SRCS})
-+ 
-+ if(OPENSSL_FOUND)
-+-  list(APPEND ${MODULE_PREFIX}_LIBS ${OPENSSL_LIBRARIES})
-++  winpr_tools_library_private_add(${OPENSSL_LIBRARIES})
-+ endif()
-+ 
-+ if(MBEDTLS_FOUND)
-+-  list(APPEND ${MODULE_PREFIX}_LIBS ${MBEDTLS_LIBRARIES})
-++  winpr_tools_library_private_add(${MBEDTLS_LIBRARIES})
-+ endif()
-+ 
-+-winpr_tools_library_add(${${MODULE_PREFIX}_LIBS} winpr)
-++winpr_tools_library_public_add(winpr)
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.30.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb
-similarity index 98%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.30.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb
-index c839f7b7a1..f43c8cc7d2 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.30.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb
-@@ -8,8 +8,9 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
- 
- inherit pkgconfig cmake ptest
- 
--SRCREV = "6b107f0aadbabc47941c5a5b893b88c01792af6d"
-+SRCREV = "bf217a504e54cc719880c228e82353382cd7d4fa"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
-+           file://0001-winpr-tools-link-only-winpr-public.patch \
-            file://run-ptest"
- 
- 
+On Mon, 28 Sept 2026, 18:30 Khem Raj, <raj.khem@gmail.com> wrote:
+
+> Can these tests be make to run as part of ptest image framework in this
+> layer e.g. Can I execute it as part of meta-python-image-ptest-all
+>
+> On Mon, Sep 28, 2026 at 2:22=E2=80=AFAM Alex Kiernan via lists.openembedd=
+ed.org
+> <alex.kiernan=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>> Reference Python Varlink binding. Fetched from git as 32.1.0 was never
+>> published to PyPI (latest there is 31.0.0 from 2021).
+>>
+>> AI-Generated: Claude Opus 5 (Claude Code)
+>> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+>> ---
+>>  .../packagegroups/packagegroup-meta-python.bb |  1 +
+>>  .../python/python3-varlink_32.1.0.bb          | 27 +++++++++++++++++++
+>>  2 files changed, 28 insertions(+)
+>>  create mode 100644 meta-python/recipes-devtools/python/
+>> python3-varlink_32.1.0.bb
+>>
+>> diff --git a/meta-python/recipes-core/packagegroups/
+>> packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/
+>> packagegroup-meta-python.bb
+>> index 9d07fc44e27a..f84941daf08b 100644
+>> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>> @@ -440,6 +440,7 @@ RDEPENDS:packagegroup-meta-python3 =3D "\
+>>      python3-ujson \
+>>      python3-unidiff \
+>>      python3-uritemplate \
+>> +    python3-varlink \
+>>      python3-vcversioner \
+>>      python3-versioneer \
+>>      python3-versiontools \
+>> diff --git a/meta-python/recipes-devtools/python/
+>> python3-varlink_32.1.0.bb b/meta-python/recipes-devtools/python/
+>> python3-varlink_32.1.0.bb
+>> new file mode 100644
+>> index 000000000000..8c532371d0a2
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
+>> @@ -0,0 +1,27 @@
+>> +SUMMARY =3D "Python implementation of the Varlink protocol"
+>> +HOMEPAGE =3D "https://github.com/varlink/python"
+>> +SECTION =3D "devel/python"
+>> +
+>> +LICENSE =3D "Apache-2.0"
+>> +LIC_FILES_CHKSUM =3D
+>> "file://LICENSE.txt;md5=3De3fc50a88d0a364313df4b21ef20c29e"
+>> +
+>> +# 32.1.0 is not published on PyPI
+>> +SRC_URI =3D "git://
+>> github.com/varlink/python.git;protocol=3Dhttps;branch=3Dmaster"
+>> +SRCREV =3D "8b3ba4e8206b098c524f538036a941b47797840d"
+>> +
+>> +inherit python_setuptools_build_meta
+>> +
+>> +# Keep the bundled test suite, and its python3-unittest dependency,
+>> separate
+>> +PACKAGES =3D+ "${PN}-tests"
+>> +FILES:${PN}-tests =3D "${PYTHON_SITEPACKAGES_DIR}/varlink/tests"
+>> +RDEPENDS:${PN}-tests =3D "${PN} python3-unittest"
+>> +
+>> +RDEPENDS:${PN} =3D "\
+>> +    python3-core \
+>> +    python3-datetime \
+>> +    python3-io \
+>> +    python3-json \
+>> +    python3-netclient \
+>> +    python3-netserver \
+>> +    python3-shell \
+>> +"
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#130428):
+>> https://lists.openembedded.org/g/openembedded-devel/message/130428
+>> Mute This Topic: https://lists.openembedded.org/mt/121468544/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>>
+
+--00000000000072a665065c8f6bfa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div>Will do. I have a terrible feeling that what I thoug=
+ht I was building wasn&#39;t actually what I submitted as the layer I picke=
+d these out of was still in my bilayers :(</div><div><br></div></div><br><d=
+iv class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gm=
+ail_attr">On Mon, 28 Sept 2026, 18:30 Khem Raj, &lt;<a href=3D"mailto:raj.k=
+hem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex"><div dir=3D"ltr">Can these tests be make to run as part of pt=
+est image framework in this layer e.g. Can I execute it as part of=C2=A0met=
+a-python-image-ptest-all</div><br><div class=3D"gmail_quote"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Mon, Sep 28, 2026 at 2:22=E2=80=AFAM Alex Kierna=
+n via <a href=3D"http://lists.openembedded.org" target=3D"_blank" rel=3D"no=
+referrer">lists.openembedded.org</a> &lt;alex.kiernan=3D<a href=3D"mailto:g=
+mail.com@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">gmail=
+.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">Reference Python Varlink binding. Fetched from g=
+it as 32.1.0 was never<br>
+published to PyPI (latest there is 31.0.0 from 2021).<br>
+<br>
+AI-Generated: Claude Opus 5 (Claude Code)<br>
+Signed-off-by: Alex Kiernan &lt;<a href=3D"mailto:alex.kiernan@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">alex.kiernan@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-python.bb" rel=
+=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta-python.bb</a=
+> |=C2=A0 1 +<br>
+=C2=A0.../python/<a href=3D"http://python3-varlink_32.1.0.bb" rel=3D"norefe=
+rrer noreferrer" target=3D"_blank">python3-varlink_32.1.0.bb</a>=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | 27 +++++++++++++++++++<br>
+=C2=A02 files changed, 28 insertions(+)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-varlink_32.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_bla=
+nk">python3-varlink_32.1.0.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-core/packagegroups/<a href=3D"http://packa=
+gegroup-meta-python.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">pac=
+kagegroup-meta-python.bb</a> b/meta-python/recipes-core/packagegroups/<a hr=
+ef=3D"http://packagegroup-meta-python.bb" rel=3D"noreferrer noreferrer" tar=
+get=3D"_blank">packagegroup-meta-python.bb</a><br>
+index 9d07fc44e27a..f84941daf08b 100644<br>
+--- a/meta-python/recipes-core/packagegroups/<a href=3D"http://packagegroup=
+-meta-python.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegro=
+up-meta-python.bb</a><br>
++++ b/meta-python/recipes-core/packagegroups/<a href=3D"http://packagegroup=
+-meta-python.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegro=
+up-meta-python.bb</a><br>
+@@ -440,6 +440,7 @@ RDEPENDS:packagegroup-meta-python3 =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0python3-ujson \<br>
+=C2=A0 =C2=A0 =C2=A0python3-unidiff \<br>
+=C2=A0 =C2=A0 =C2=A0python3-uritemplate \<br>
++=C2=A0 =C2=A0 python3-varlink \<br>
+=C2=A0 =C2=A0 =C2=A0python3-vcversioner \<br>
+=C2=A0 =C2=A0 =C2=A0python3-versioneer \<br>
+=C2=A0 =C2=A0 =C2=A0python3-versiontools \<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+varlink_32.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-=
+varlink_32.1.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http=
+://python3-varlink_32.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blan=
+k">python3-varlink_32.1.0.bb</a><br>
+new file mode 100644<br>
+index 000000000000..8c532371d0a2<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-varlink=
+_32.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-varlink=
+_32.1.0.bb</a><br>
+@@ -0,0 +1,27 @@<br>
++SUMMARY =3D &quot;Python implementation of the Varlink protocol&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/varlink/python" rel=3D"no=
+referrer noreferrer" target=3D"_blank">https://github.com/varlink/python</a=
+>&quot;<br>
++SECTION =3D &quot;devel/python&quot;<br>
++<br>
++LICENSE =3D &quot;Apache-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3De3fc50a88d0a364313df4b=
+21ef20c29e&quot;<br>
++<br>
++# 32.1.0 is not published on PyPI<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/varlink/python.git;pr=
+otocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer noreferrer" target=3D"_bl=
+ank">github.com/varlink/python.git;protocol=3Dhttps;branch=3Dmaster</a>&quo=
+t;<br>
++SRCREV =3D &quot;8b3ba4e8206b098c524f538036a941b47797840d&quot;<br>
++<br>
++inherit python_setuptools_build_meta<br>
++<br>
++# Keep the bundled test suite, and its python3-unittest dependency, separa=
+te<br>
++PACKAGES =3D+ &quot;${PN}-tests&quot;<br>
++FILES:${PN}-tests =3D &quot;${PYTHON_SITEPACKAGES_DIR}/varlink/tests&quot;=
+<br>
++RDEPENDS:${PN}-tests =3D &quot;${PN} python3-unittest&quot;<br>
++<br>
++RDEPENDS:${PN} =3D &quot;\<br>
++=C2=A0 =C2=A0 python3-core \<br>
++=C2=A0 =C2=A0 python3-datetime \<br>
++=C2=A0 =C2=A0 python3-io \<br>
++=C2=A0 =C2=A0 python3-json \<br>
++=C2=A0 =C2=A0 python3-netclient \<br>
++=C2=A0 =C2=A0 python3-netserver \<br>
++=C2=A0 =C2=A0 python3-shell \<br>
++&quot;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#130428): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/130428" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">https://lists.openembedded.org/g/openembedded-devel/message/130428</a=
+><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121468544/199=
+7914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
+edded.org/mt/121468544/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
+openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmai=
+l.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+</blockquote></div>
+
+--00000000000072a665065c8f6bfa--
 
