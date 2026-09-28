@@ -1,298 +1,250 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6C4BCA5FA2
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 17:30:40 +0000 (UTC)
-Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.64254.1790616633183578908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B1F2CA5FA1
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 17:43:41 +0000 (UTC)
+Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.63553.1790617415702148386
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 10:30:33 -0700
+ Mon, 28 Sep 2026 10:43:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=L8EN/spF;
- spf=pass (domain: gmail.com, ip: 74.125.224.141, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66fded6b087so3068164d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 10:30:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790616632; cv=none;
-        d=google.com; s=arc-20260327;
-        b=rkvnw2rLr4SPWShUSxFOqjAVanAxwKAfO9C1+9SzHXeS1Z499tVoi8rPmrxhtTiyte
-         YvxYLiL2OdPAjIV/cMakwJpan+EEzAirjkSYPePJ6GDzB41SBI2ZIwOtbS1Zr6smdif3
-         H0WaNvashlwiSVwQDFNlheZWZmvKtwxf4nekChN0wJVthl8H/MXJ/bihTOvlMU0nh9wI
-         IPpmjKyLJ1dAv8AjP8KkKGRiBRx/gRok1tNMO7TjXUjvNcYIUzh+Iu9TAl1zi3lpamxu
-         OZHamJPF6Nni2XE0jTdD/kZ3XEX9YWhHr9PvuCgGYtf7KlrhGbvuBvCqDkU1R69MakeI
-         PX/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=ZjqAwYkyVBtKwnsvvvt6oxJ5WZdsbJ3RRH1d/6MZK/k=;
-        fh=OFle2CS3VNisdCAgSRXUV24N3cCDSB7jOnOizepy1to=;
-        b=Q0V8839QFLT8tw1btniAhTY9sDvhKpAfcfFzWO77DHj0oN2C4onGon6WNc4uSeTnma
-         5+G1HMRu9yy96z2d+/Kax1FoKQw2GsHgh3qiMrA3U1Tr1y2dw+25Mt+yS+fT3bDwcQsy
-         0dGcb04VVP+BHF5YNbDLhfscpqLm5HOAFzD+RXTsLWYGpY8BdlZEvvUGfLOsc/HL7ITi
-         PLU6QmKV6sqdXvQuLerWUVPwWOyb2Klc1bBiAEKr19FqukLB4abSSyUYov6bj8Mu66hi
-         1elRsZoZuAqcBrB94rPpgXlt6nk0XL8L8UpzAVrbKzJBXD2RfJqM5Lbzwt9EUf5h12s4
-         Ac2g==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ZlRjhAGG;
+ spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790616632; x=1791221432; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZjqAwYkyVBtKwnsvvvt6oxJ5WZdsbJ3RRH1d/6MZK/k=;
-        b=L8EN/spFYcmi7f2447w/3GWS7tguGSa7UiIgGX3ucgwwysZbn2126WeMyr87FlKLKp
-         oVOim1fA4a4CegbXpxh7+YaiO7lK3kHlNkF3OzbFCTBjp9dD8oK0wMKb82LdwRdbr7i6
-         yRaOiBYyhrD7DMUjOth0U4zpB4shPFu6HzvSXHz5J8suN8faoDmEUHUiaqioonmKQUiv
-         BmVj3oT2Qq0bfqTPTLz7ra88HGlYDAx7v0a4zDTqqvPcbBP8Y18SsjeoVYTLTZoSidlQ
-         TVSADt8UZB4WWkfK+by0UuxpaKOoBK6xDWV0B1f81OZsg2bU+jWQuTaQeM1b9uNCDCHz
-         Y8/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790616632; x=1791221432;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ZjqAwYkyVBtKwnsvvvt6oxJ5WZdsbJ3RRH1d/6MZK/k=;
-        b=FXsH/mNaKUNw03PYWfrxNCOzzd/GVK0aszU5A4+FNRIGFe9BR2yEAJHyA6FOkpzvu5
-         RZUrMnbmPEKjM16fNNGH1ySHtwqtH4hqSusjY2bREbnzydfxByp0Jmg2me+qAuncGwrn
-         v2q7Qhi/mLipnK7fSl0Px40NzF/fwcIthjP5Da9G63htYAaAhgRmL3XUGSejCsFaX9kP
-         YpGr0qJ73KVKyc/PIIgFEgnE7TMwm9emC0yhjG8EEX2ZAyhkmBRS41XkMBmlrc1BL46b
-         eMcd+1tHhfCu/arRcjTjmCEY9Uhy2hkxhz0uoFaQD2CbK+3Hc/Xo68omEv/oicR62bIw
-         FGHw==
-X-Gm-Message-State: AFq9FYKKRS7rBZzAzL6tw2IBzVUe0p7V2UfIdUNZXiJckdDBK3XUzKrR
-	9HDvpAp2nqggj3f5+Ix+BJ/hV3r97fFZRYtSq2Em1MG5gr6Qlg9dQf690mfLGREKsxW3N+utwKi
-	CUyV7+vaCrANEhUmmpHcgoZhQGgF7bfPU40+78k4=
-X-Gm-Gg: AYBFou1LVdmrNs9CZmu5J3VK57lAWAOCEPJS2ih3lKCHmRyfkaJLcuaHZEid0UJcrzw
-	nH5gqwAiGSRslt+7ZnXikInVLXaFbUc2U8OFdlNzdxID9trE0VmQ4T+8lK6fXqKWQLfyvqgDFjM
-	UZHyOTS7cPrxgkRxLWq0WMoB54xpgIFzMBuUGMoypOD329ugm1PugDyzRSC1Egg8JlW044ZpinV
-	t0YRXiDlUdWpPWQwn9hVoyml3U39Y7AAsoHS101burfoGNCxiRTyxqY0BAcOd1fOFXrT09lRaTz
-	3RmI5Ber/RLMe3l4cIFSHQhW+P3li6NVzlQSKBybYKX1wH342+Zyom+XDnmbQLS6mj1zfbLymO7
-	L7sid7+11jcQ7JIBmlgC2MFPwcBczMJPfu99wlM8RNnvKUZydpD34z8r4R2cUVwhQn/zHKTQKbr
-	25s7HLTjYVh7lwPhcalAvjjW36IZRFf4UTOtVmAAwuCkTFTmLkOJE28oJ4etB7EghSK6xz7X5uK
-	q0mmcyfwykRwVzaCALkcsdIdc1JS9COIwevmtMWXhwDLb3eVE+xPiPiTDh++g1c6O5qoLq6ZwAN
-	xD5upoHj
-X-Received: by 2002:a05:690e:1408:b0:675:3f33:b183 with SMTP id
- 956f58d0204a3-6753f33c2aemr2373450d50.24.1790616631813; Mon, 28 Sep 2026
- 10:30:31 -0700 (PDT)
+  d=cisco.com; i=@cisco.com; l=6972; q=dns/txt;
+  s=iport01; t=1790617416; x=1791827016;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=IvgBmqVbDjGS+4nZ47XCiI5773wfZMJQolizsBkXylY=;
+  b=ZlRjhAGG+5fk6Al+XIUsEuKU9U5X+xrQekNFkXPs5RHj5D8FUQGO8LD0
+   LzjBa/zfSH5KsN7gJBaYYpW+bJigmjTJjZxK/EPFvalsjAJnx48CnJeKB
+   P0Q72U5/N2f2fMtIpqg7qBJDda0Nw+z5skzeKYi+KRHNcNUpWSclnqEeN
+   jUl1oeI3y73YX+1BRhuAy2nTcDHkZ7Eb8wR5DeqWqd6kpjBqQiVgjTcPP
+   xyPb5Dr1oLOW93N195e9ZuSYFVKiaemrq3ZJFMBAjRZfyXDF38Ft97u1P
+   MqWICfgPvDxoKRg+BJEii8veyhbML4hVNdjMhSJjWmKdpUIJ6EUdb2Ae3
+   w==;
+X-CSE-ConnectionGUID: oflYzhynTWq1x/rNBYBDGA==
+X-CSE-MsgGUID: 1qbt077jQQmR/FmzKbOYFg==
+X-IPAS-Result: =?us-ascii?q?A0AaAAC9prpq/47/Ja1aHAEBAQEBAQcBARIBAQQEAQGBf?=
+ =?us-ascii?q?AcBAQsBglZ1YENJhFeIG4lYA4tkkjaBfg8BAQEPRA0EAQGEP0YCjgkCJjQJD?=
+ =?us-ascii?q?gECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDIwQLA?=
+ =?us-ascii?q?RgBLRAcAwECAwImAgIgCyMIGYMCAYI6AzcDEcJFen8zgQGDKQE/AkNQ2EsNg?=
+ =?us-ascii?q?loBCxQBgQouAYU/gn8gAYUDXRgBhHwnGxuBcoQIdoEFgRpCAQECgSWEFIJqB?=
+ =?us-ascii?q?IIigQyBWh6TJUiBAhwDWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XL1gbBgWBH?=
+ =?us-ascii?q?YEgghkjGTZ6gQlegSspYAEQF4EHggcCglSCAQIBSUMOB0VTCSVBChJHJiIIE?=
+ =?us-ascii?q?gkBExowC4EhOEEJKBEYDUgRLDcVGQQ9AW4HkC4egmUBgQ0BKQEBgWwoNJNUj?=
+ =?us-ascii?q?2WCIYE1nmlxCiiDdowijz6FfBozqm8LmH2OCoQJkXdQhGmBaDyBRwsHcBWDI?=
+ =?us-ascii?q?glKGQ+OKw4Lg2CBf4MUxyYnMgIBCDIBAQcCBw4DC4FokAACJgeBTwEB?=
+IronPort-Data: A9a23:6iFWL61Bl/do0cxnlfbD5YBwkn2cJEfYwER7XKvMYLTBsI5bpzNRn
+ DROWGmPPvuKZGOnft52aoSxpk1QusLQxoNqSgo53Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7g28uYjpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGC08yDJ8Y6+BLPngX5
+ bsCDho8RDysrrfjqF67YrEEasULNsLnOsYb/3pn1zycVatgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUiaC/FMEg9/5JYWkOSlgnD+YjRwo1OOrq1x6G/WpOB0+OW3aIaPIILQFK25mG7Bv
+ 2japzumACgjMebY5z+X0XiLt8HAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPBWy4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEqt94cRva1fApEFI/
+IronPort-HdrOrdr: A9a23:06yLZayiICN3wVywS8tRKrPw9L1zdoMgy1knxilNoNJuHfBw8P
+ re+sjztCWE7wr5N0tApTntAsS9qDbnhPxICOoqTNOftXfd2FdARbsKheCJ/9SjIVyaygc378
+ ldmsZFZOEYdWIK7vrS0U2fD8sqxsWB/eSDgOfTyGoocCRRApsQljuQzm2gYzZLrM4sP+tAKK
+ ah
+X-Talos-CUID: 9a23:L1W8Qmwl2AzAdaFIs1Y4BgUTFMQUYH3MykvvOhaoTnxPYoy/ZXC5rfY=
+X-Talos-MUID: 9a23:PHF8LQnn/DA8Sz0qnipydno7Lc10u/vxCnk0lK9BlcyWFiZXChmS2WE=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,128,1787011200"; 
+   d="scan'208";a="520422629"
+Received: from rcdn-l-core-05.cisco.com ([173.37.255.142])
+  by rcdn-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 28 Sep 2026 17:43:31 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-05.cisco.com (Postfix) with ESMTPS id 8815518000377;
+	Mon, 28 Sep 2026 17:43:31 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id 340F5CBF204; Mon, 28 Sep 2026 10:43:31 -0700 (PDT)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 04/13] python3-aiohttp: fix CVE-2026-34520
+Date: Mon, 28 Sep 2026 10:43:14 -0700
+Message-Id: <20260928174323.1810308-5-dkelaiya@cisco.com>
+X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20260928174323.1810308-1-dkelaiya@cisco.com>
+References: <20260928174323.1810308-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
-References: <20260928092140.2252231-2-alex.kiernan@gmail.com> <20260928092140.2252231-4-alex.kiernan@gmail.com>
-In-Reply-To: <20260928092140.2252231-4-alex.kiernan@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Sep 2026 10:30:05 -0700
-X-Gm-Features: AclHuK819YTGknCTbo4oHTKkjosWYSglHTMsvEbmoHmTcaKxud4AvRgsbZCuB4U
-Message-ID: <CAMKF1soRHUQH11fLC9+Dk4aktcT7+wBGASRNX_7Jzhoq9DQ+cA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-varlink: add recipe
-To: alex.kiernan@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000044ac50065c8e6c24"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: rcdn-l-core-05.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 17:30:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130445
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 17:43:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130459
 
---00000000000044ac50065c8e6c24
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Can these tests be make to run as part of ptest image framework in this
-layer e.g. Can I execute it as part of meta-python-image-ptest-all
+This patch applies the reviewed upstream fix shown in [1].
+The CVE record is referenced in [2]. It also backports
+the C-parser null-byte validation and adapts its
+regression test from [3].
 
-On Mon, Sep 28, 2026 at 2:22=E2=80=AFAM Alex Kiernan via lists.openembedded=
-.org
-<alex.kiernan=3Dgmail.com@lists.openembedded.org> wrote:
+[1] https://github.com/aio-libs/aiohttp/commit/9370b9714a7a56003cacd31a9b4ae16eab109ba4
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-34520
+[3] https://github.com/aio-libs/aiohttp/commit/db560cfeab32aa35f3d06f7a24238bedc01ffe2b
 
-> Reference Python Varlink binding. Fetched from git as 32.1.0 was never
-> published to PyPI (latest there is 31.0.0 from 2021).
->
-> AI-Generated: Claude Opus 5 (Claude Code)
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> ---
->  .../packagegroups/packagegroup-meta-python.bb |  1 +
->  .../python/python3-varlink_32.1.0.bb          | 27 +++++++++++++++++++
->  2 files changed, 28 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-varlink_32.1.0.bb
->
-> diff --git a/meta-python/recipes-core/packagegroups/
-> packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/
-> packagegroup-meta-python.bb
-> index 9d07fc44e27a..f84941daf08b 100644
-> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -440,6 +440,7 @@ RDEPENDS:packagegroup-meta-python3 =3D "\
->      python3-ujson \
->      python3-unidiff \
->      python3-uritemplate \
-> +    python3-varlink \
->      python3-vcversioner \
->      python3-versioneer \
->      python3-versiontools \
-> diff --git a/meta-python/recipes-devtools/python/python3-varlink_32.1.0.b=
-b
-> b/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
-> new file mode 100644
-> index 000000000000..8c532371d0a2
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "Python implementation of the Varlink protocol"
-> +HOMEPAGE =3D "https://github.com/varlink/python"
-> +SECTION =3D "devel/python"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3De3fc50a88d0a364313df4b21ef20c29e"
-> +
-> +# 32.1.0 is not published on PyPI
-> +SRC_URI =3D "git://
-> github.com/varlink/python.git;protocol=3Dhttps;branch=3Dmaster"
-> +SRCREV =3D "8b3ba4e8206b098c524f538036a941b47797840d"
-> +
-> +inherit python_setuptools_build_meta
-> +
-> +# Keep the bundled test suite, and its python3-unittest dependency,
-> separate
-> +PACKAGES =3D+ "${PN}-tests"
-> +FILES:${PN}-tests =3D "${PYTHON_SITEPACKAGES_DIR}/varlink/tests"
-> +RDEPENDS:${PN}-tests =3D "${PN} python3-unittest"
-> +
-> +RDEPENDS:${PN} =3D "\
-> +    python3-core \
-> +    python3-datetime \
-> +    python3-io \
-> +    python3-json \
-> +    python3-netclient \
-> +    python3-netserver \
-> +    python3-shell \
-> +"
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#130428):
-> https://lists.openembedded.org/g/openembedded-devel/message/130428
-> Mute This Topic: https://lists.openembedded.org/mt/121468544/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+---
+ .../python3-aiohttp/CVE-2026-34520.patch      | 121 ++++++++++++++++++
+ .../python/python3-aiohttp_3.9.5.bb           |   1 +
+ 2 files changed, 122 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch
 
---00000000000044ac50065c8e6c24
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch
+new file mode 100644
+index 0000000000..2492a23a3d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch
+@@ -0,0 +1,121 @@
++From 661f91935d061a3d7d554f2c808c8a14f3122991 Mon Sep 17 00:00:00 2001
++From: Rodrigo Nogueira <rodrigo.b.nogueira@gmail.com>
++Date: Wed, 11 Mar 2026 20:38:17 -0300
++Subject: [PATCH] [PR #12231/7043bc56 backport][3.13] Adjust header value
++ character checks to RFC 9110 (#12235)
++
++CVE: CVE-2026-34520
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9370b9714a7a56003cacd31a9b4ae16eab109ba4]
++
++Backport Changes:
++- Included the C-parser null-byte validation from upstream prerequisite
++  commit db560cfeab32aa35f3d06f7a24238bedc01ffe2b because the Scarthgap
++  3.9.5 recipe patch stack does not contain that prerequisite.
++- Used the target's local `raw_value` bytes object when raising
++  `InvalidHeader`, since aiohttp 3.9.5 converts
++  `_raw_value` before checking.
++- Added a response-parser regression test for the C-parser validation.
++- Omitted the generated aiohttp/_http_parser.c changes because the
++  Scarthgap recipe regenerates this file from _http_parser.pyx with
++  Cython.
++
++Co-authored-by: rodrigo.nogueira <rodrigo.nogueira@prf.gov.br>
++(cherry picked from commit 9370b9714a7a56003cacd31a9b4ae16eab109ba4)
++Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++---
++ CHANGES/12231.bugfix.rst  |  2 ++
++ aiohttp/_http_parser.pyx  |  7 +++++++
++ aiohttp/http_parser.py    |  9 ++++++++-
++ tests/test_http_parser.py | 17 +++++++++++++++++
++ 4 files changed, 34 insertions(+), 1 deletion(-)
++ create mode 100644 CHANGES/12231.bugfix.rst
++
++diff --git a/CHANGES/12231.bugfix.rst b/CHANGES/12231.bugfix.rst
++new file mode 100644
++index 000000000..cd74bd1e7
++--- /dev/null
+++++ b/CHANGES/12231.bugfix.rst
++@@ -0,0 +1,2 @@
+++Adjusted pure-Python request header value validation to align with RFC 9110 control-character handling, while preserving lax response parser behavior, and added regression tests for Host/header control-character cases.
+++-- by :user:`rodrigobnogueira`.
++diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
++index cc8b13cfb..496498d6f 100644
++--- a/aiohttp/_http_parser.pyx
+++++ b/aiohttp/_http_parser.pyx
++@@ -387,5 +387,12 @@ cdef class HttpParser:
++             value = raw_value.decode('utf-8', 'surrogateescape')
++ 
+++            # reject null bytes in header values - matches the Python parser
+++            # check at http_parser.py. llhttp in lenient mode doesn't reject
+++            # these itself, so we need to catch them here.
+++            # ref: RFC 9110 section 5.5 (CTL chars forbidden in field values)
+++            if "\x00" in value:
+++                raise InvalidHeader(raw_value)
+++
++             self._headers.add(name, value)
++             if len(self._headers) > self._max_headers:
++                 raise BadHttpMessage("Too many headers received")
++diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
++index 95ac28252..a7fec7f01 100644
++--- a/aiohttp/http_parser.py
+++++ b/aiohttp/http_parser.py
++@@ -73,6 +73,10 @@ ASCIISET: Final[Set[str]] = set(string.printable)
++ #     token = 1*tchar
++ _TCHAR_SPECIALS: Final[str] = re.escape("!#$%&'*+-.^_`|~")
++ TOKENRE: Final[Pattern[str]] = re.compile(f"[0-9A-Za-z{_TCHAR_SPECIALS}]+")
+++# https://www.rfc-editor.org/rfc/rfc9110#section-5.5-5
+++_FIELD_VALUE_FORBIDDEN_CTL_RE: Final[Pattern[str]] = re.compile(
+++    r"[\x00-\x08\x0a-\x1f\x7f]"
+++)
++ VERSRE: Final[Pattern[str]] = re.compile(r"HTTP/(\d)\.(\d)", re.ASCII)
++ DIGITS: Final[Pattern[str]] = re.compile(r"\d+", re.ASCII)
++ HEXDIGITS: Final[Pattern[bytes]] = re.compile(rb"[0-9a-fA-F]+")
++@@ -200,7 +204,10 @@ class HeadersParser:
++             value = bvalue.decode("utf-8", "surrogateescape")
++ 
++             # https://www.rfc-editor.org/rfc/rfc9110.html#section-5.5-5
++-            if "\n" in value or "\r" in value or "\x00" in value:
+++            if self._lax:
+++                if "\n" in value or "\r" in value or "\x00" in value:
+++                    raise InvalidHeader(bvalue)
+++            elif _FIELD_VALUE_FORBIDDEN_CTL_RE.search(value):
++                 raise InvalidHeader(bvalue)
++ 
++             headers.add(name, value)
++diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
++index cb562f598..be7446e0a 100644
++--- a/tests/test_http_parser.py
+++++ b/tests/test_http_parser.py
++@@ -210,6 +210,9 @@ def test_bad_header_name(parser: Any, rfc9110_5_6_2_token_delim: str) -> None:
++         "Foo : bar",  # https://www.rfc-editor.org/rfc/rfc9112.html#section-5.1-2
++         "Foo\t: bar",
++         "\xffoo: bar",
+++        "Foo: abc\x01def",  # CTL bytes forbidden per RFC 9110 §5.5
+++        "Foo: abc\x7fdef",  # DEL is also a CTL byte
+++        "Foo: abc\x1fdef",
++     ),
++ )
++ def test_bad_headers(parser: Any, hdr: str) -> None:
++@@ -218,6 +221,20 @@ def test_bad_headers(parser: Any, hdr: str) -> None:
++         parser.feed_data(text)
++ 
++ 
+++def test_ctl_host_header_bad_characters(parser: HttpRequestParser) -> None:
+++    """CTL byte in Host header must be rejected."""
+++    text = b"GET /test HTTP/1.1\r\nHost: trusted.example\x01@bad.test\r\n\r\n"
+++    with pytest.raises(http_exceptions.BadHttpMessage):
+++        parser.feed_data(text)
+++
+++
+++def test_null_byte_in_response_header_value(
+++    response: HttpResponseParser,
+++) -> None:
+++    with pytest.raises(http_exceptions.InvalidHeader):
+++        response.feed_data(b"HTTP/1.1 200 OK\r\nFoo: abc\x00def\r\n\r\n")
+++
+++
++ def test_unpaired_surrogate_in_header_py(loop: Any, protocol: Any) -> None:
++     parser = HttpRequestParserPy(
++         protocol,
++-- 
++2.35.6
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
+index fecf871d9f..b7741d5ed4 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
+@@ -24,6 +24,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
+            file://CVE-2026-34519.patch \
+            file://CVE-2026-34516.patch \
+            file://CVE-2026-34517.patch \
++           file://CVE-2026-34520.patch \
+            "
+ 
+ CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
+-- 
+2.35.6
 
-<div dir=3D"ltr">Can these tests be make to run as part of ptest image fram=
-ework in this layer e.g. Can I execute it as part of=C2=A0meta-python-image=
--ptest-all</div><br><div class=3D"gmail_quote gmail_quote_container"><div d=
-ir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 28, 2026 at 2:22=E2=80=AFAM Ale=
-x Kiernan via <a href=3D"http://lists.openembedded.org">lists.openembedded.=
-org</a> &lt;alex.kiernan=3D<a href=3D"mailto:gmail.com@lists.openembedded.o=
-rg">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">Reference Python Varlink binding. Fetch=
-ed from git as 32.1.0 was never<br>
-published to PyPI (latest there is 31.0.0 from 2021).<br>
-<br>
-AI-Generated: Claude Opus 5 (Claude Code)<br>
-Signed-off-by: Alex Kiernan &lt;<a href=3D"mailto:alex.kiernan@gmail.com" t=
-arget=3D"_blank">alex.kiernan@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-python.bb" rel=
-=3D"noreferrer" target=3D"_blank">packagegroup-meta-python.bb</a> |=C2=A0 1=
- +<br>
-=C2=A0.../python/<a href=3D"http://python3-varlink_32.1.0.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-varlink_32.1.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | 27 +++++++++++++++++++<br>
-=C2=A02 files changed, 28 insertions(+)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-varlink_32.1.0.bb" rel=3D"noreferrer" target=3D"_blank">python3=
--varlink_32.1.0.bb</a><br>
-<br>
-diff --git a/meta-python/recipes-core/packagegroups/<a href=3D"http://packa=
-gegroup-meta-python.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-m=
-eta-python.bb</a> b/meta-python/recipes-core/packagegroups/<a href=3D"http:=
-//packagegroup-meta-python.bb" rel=3D"noreferrer" target=3D"_blank">package=
-group-meta-python.bb</a><br>
-index 9d07fc44e27a..f84941daf08b 100644<br>
---- a/meta-python/recipes-core/packagegroups/<a href=3D"http://packagegroup=
--meta-python.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-pyt=
-hon.bb</a><br>
-+++ b/meta-python/recipes-core/packagegroups/<a href=3D"http://packagegroup=
--meta-python.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-pyt=
-hon.bb</a><br>
-@@ -440,6 +440,7 @@ RDEPENDS:packagegroup-meta-python3 =3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0python3-ujson \<br>
-=C2=A0 =C2=A0 =C2=A0python3-unidiff \<br>
-=C2=A0 =C2=A0 =C2=A0python3-uritemplate \<br>
-+=C2=A0 =C2=A0 python3-varlink \<br>
-=C2=A0 =C2=A0 =C2=A0python3-vcversioner \<br>
-=C2=A0 =C2=A0 =C2=A0python3-versioneer \<br>
-=C2=A0 =C2=A0 =C2=A0python3-versiontools \<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-varlink_32.1.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-varlink_32.=
-1.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-varlink_32.1.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-varlink_32.=
-1.0.bb</a><br>
-new file mode 100644<br>
-index 000000000000..8c532371d0a2<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-varlink=
-_32.1.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-varlink_32.1.0.bb<=
-/a><br>
-@@ -0,0 +1,27 @@<br>
-+SUMMARY =3D &quot;Python implementation of the Varlink protocol&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/varlink/python" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/varlink/python</a>&quot;<br>
-+SECTION =3D &quot;devel/python&quot;<br>
-+<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3De3fc50a88d0a364313df4b=
-21ef20c29e&quot;<br>
-+<br>
-+# 32.1.0 is not published on PyPI<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/varlink/python.git;pr=
-otocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github=
-.com/varlink/python.git;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
-+SRCREV =3D &quot;8b3ba4e8206b098c524f538036a941b47797840d&quot;<br>
-+<br>
-+inherit python_setuptools_build_meta<br>
-+<br>
-+# Keep the bundled test suite, and its python3-unittest dependency, separa=
-te<br>
-+PACKAGES =3D+ &quot;${PN}-tests&quot;<br>
-+FILES:${PN}-tests =3D &quot;${PYTHON_SITEPACKAGES_DIR}/varlink/tests&quot;=
-<br>
-+RDEPENDS:${PN}-tests =3D &quot;${PN} python3-unittest&quot;<br>
-+<br>
-+RDEPENDS:${PN} =3D &quot;\<br>
-+=C2=A0 =C2=A0 python3-core \<br>
-+=C2=A0 =C2=A0 python3-datetime \<br>
-+=C2=A0 =C2=A0 python3-io \<br>
-+=C2=A0 =C2=A0 python3-json \<br>
-+=C2=A0 =C2=A0 python3-netclient \<br>
-+=C2=A0 =C2=A0 python3-netserver \<br>
-+=C2=A0 =C2=A0 python3-shell \<br>
-+&quot;<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#130428): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/130428" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/130428</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121468544/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121468544/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000044ac50065c8e6c24--
 
