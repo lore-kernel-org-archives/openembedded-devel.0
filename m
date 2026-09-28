@@ -1,129 +1,80 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63235C9832F
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 09:22:35 +0000 (UTC)
-Received: from mail-wr2-f33.google.com (mail-wr2-f33.google.com [74.125.225.97])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.54643.1790587350710973025
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B360CA5FA2
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 09:59:07 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.54057.1790589537457991246
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 02:22:31 -0700
+ Mon, 28 Sep 2026 02:58:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HH7lRDLw;
- spf=pass (domain: gmail.com, ip: 74.125.225.97, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr2-f33.google.com with SMTP id ffacd0b85a97d-482f6351831so1571614f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 02:22:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790587349; x=1791192149; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=I6zFdXYWNbIoAZVc0MRxuL0Y9GeIS2GDi0r2BXK7Unw=;
-        b=HH7lRDLwt3gl9+RSpL8fh6jNd4maOjWigXkHd3NUlaEf9fPglccdpy8Hvbw0aNBYD6
-         guWpBrrX1E/O8jACXwHrYkjxERtmXN9XRrTb8mruII1Kw8bFpbH9wFLHK5kGFd2FQ+Jb
-         ej+ipYdKG9fe8738opNKmrmv7h81gXNpSIVv8aNXeTYp9r0I33A9MCPaF78nxzOxhhwA
-         +lofqJPoRoR1ROF44NEtLtUeVzwU7XUrSGMF6KwbosDQNzOVHQtVToQO8P8opE/lbuy1
-         0XOgUk/tCOixItZr4hLKaollwzgfTjd7kxb1JKHENXnSJCQNRipbfKdx9lm+eWjsbVFk
-         nxzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790587349; x=1791192149;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=I6zFdXYWNbIoAZVc0MRxuL0Y9GeIS2GDi0r2BXK7Unw=;
-        b=F17MduEwFI28x+FnOwsF1oHjzde5RInK/lWDBz4BOpl4TwVqQFaFD/fO0+qicgA40/
-         H2jhueHkfJEhYpEQcXKJA9kDpTTJL8NNKxwv610Esb1yMbrh4iPa91KH+4N2BWtBkIEN
-         Cy82GrwKCt+aOcq8RrHCIW00y9vgk9bRTiNy9o6M1Q720p2DW6/b56K2L237Df8q9PUU
-         GLjDpttu9RSp/aWFNltnxZYpIwzDMCz+3Ifr46yujsdxQSO/AcHTnJMi33Wt7O+7ZKcQ
-         3j7ET2yqNVC7TG2HGXkU7HUPWmI65cQy8VSf+BheeQBDlaW54IxZTuodSzDPSWjNG+Me
-         KORA==
-X-Gm-Message-State: AFq9FYJsaCEoW4McMcIY5b3K2C3X6aLmwZYg8taAbEVG2MI3F10YZ2I6
-	Aha/jb630vfliOPCdcVmwwZTZjxJynpQYjOCm4Wz+PKMhlFk8eWMWfwpWcJapA==
-X-Gm-Gg: AYBFou3ADSn64CRx5hoJVdnhoahp4S9amTDA//Q/3iet1hVyrLbD3Rqdm6Hdk/722+e
-	liaw4wYtYZnHRtEGeewLC5p4l8kE5kDKrLGg09jx6oD4EKKQ2Op0xoAdO3kKs4L/sE9ZpotfxyX
-	aHOVuJUxh5TUCbbsoagtZIM6ee2O+Jb40nC/Gr1fA+AmlpZIuWNHdbqKB8BJXwjWXvn9a8Z5wsP
-	oLLeY22z3OeMx7308bTowzk1zNoJpBdYVoxito1rNlmeUyke9izvEWx8R9N2gX9lbldbiO7BbJ5
-	6Bo47nRjGoAZBvGHb4zw3G0LjYkvA4o9DT0AK9a6TK3lnZ7SRYt04KjIY1ij0/Xx/s7W5aSvKaf
-	BMhFSxV06Y3DdvjfI6fwMj2Qq9JEump6RKaOrsdmdBkY3r4/PqY0N336aBFRGRmO25PYFfOmw4J
-	HCx05dVZmUnRbXCDsq5Np4bwXGwpNk9Q7o5Hgcp83LhRTVsl1+W2UcE0oJ2zuMr3l7X/SGhA+Ed
-	cecL+qG0AKSvwk0VOMjuASekF2IowFLu5YAjglZdws6+drBeqdegQGUCQ==
-X-Received: by 2002:a5d:59c5:0:b0:488:583a:715a with SMTP id ffacd0b85a97d-4887174b71dmr24409425f8f.35.1790587348811;
-        Mon, 28 Sep 2026 02:22:28 -0700 (PDT)
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a746c57sm24893344f8f.35.2026.09.28.02.22.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 02:22:27 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-varlink: add recipe
-Date: Mon, 28 Sep 2026 10:21:42 +0100
-Message-ID: <20260928092140.2252231-4-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928092140.2252231-2-alex.kiernan@gmail.com>
-References: <20260928092140.2252231-2-alex.kiernan@gmail.com>
+ dkim=pass header.i=f_l_k@t-online.de header.s=20260216 header.b=hqMLDEuK;
+ spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout08.t-online.de (Postfix) with SMTP id CA8B0E84A;
+	Mon, 28 Sep 2026 11:58:54 +0200 (CEST)
+Received: from [192.168.178.36] ([84.163.40.132]) by fwd79.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xB88K-3EvWeO0; Mon, 28 Sep 2026 11:58:52 +0200
+Date: Mon, 28 Sep 2026 11:58:46 +0200
+From: "Markus Volk" <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCH] kmscon: treat platform display controllers
+ as primary GPUs
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <ZPJ2MT.5L785RXUBQ6R2@t-online>
+In-Reply-To: <CAMKF1soeW19NdDrgErnRf6EL8-dqUVkVXpAysW8VDVCswrDUbg@mail.gmail.com>
+References: <20260928010600.87898-1-f_l_k@t-online.de>
+	<CAMKF1soeW19NdDrgErnRf6EL8-dqUVkVXpAysW8VDVCswrDUbg@mail.gmail.com>
+X-Mailer: net.donnybeelo.Convey/50.2-1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="=-SvlS1Tbpcw/CJSKepa9z"
+X-TOI-EXPURGATEID: 150726::1790589532-C8FF6971-0114AA13/0/0 CLEAN NORMAL
+X-TOI-MSGID: 40f4336d-df20-4a02-8750-6c3b8d79575d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1790589534; i=f_l_k@t-online.de;
+	bh=C1pGoJ3Aj+gKaPlOCz4pVgcGhbuJDMDf0ppZvh0le3o=;
+	h=Date:From:Subject:To:Cc:In-Reply-To:References;
+	b=hqMLDEuKZ+ldGxM/7vh45n5dl9zMkRFguyRMvpif+wmjKTNm0oeC1RU1x5JWpNmyr
+	 QPpDywRAHUzMCNUMUge12oXET9Xk0ci9bEPJRP2dKxW0jRkiewTNt2SpvKZ9FHf0VG
+	 eBIWJp4Q1t8FcbAq9a26jYoutIpmeW2jylbJKJLqYd+VSh7UTNA4wxZ+scPYR3IjhB
+	 9KmbOsfg3vVwM1u+I4WQvK82pjD3c1rC4rFMFbQYdURO8vKuW+c0APbwTW9fp6xBd2
+	 gp2pXwv2/fUh7ZZUbCcfHmIhPUrZcrWTwzCgIXIq+GKzpnQTTPpRcqgG+Prgwq2lwA
+	 X3YZQz2TNkQUQ==
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 09:22:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130428
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 09:59:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130429
 
-Reference Python Varlink binding. Fetched from git as 32.1.0 was never
-published to PyPI (latest there is 31.0.0 from 2021).
+--=-SvlS1Tbpcw/CJSKepa9z
+Content-Type: text/plain; charset=windows-1251; format=flowed
 
-AI-Generated: Claude Opus 5 (Claude Code)
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
- .../packagegroups/packagegroup-meta-python.bb |  1 +
- .../python/python3-varlink_32.1.0.bb          | 27 +++++++++++++++++++
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
+On Sun, Sep 27 2026 at 19:39:13 -07:00:00, Khem Raj 
+<raj.khem@gmail.com> wrote:
+> Whats the future plan for this patch ? it seems worthy of upstreaming.
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 9d07fc44e27a..f84941daf08b 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -440,6 +440,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-ujson \
-     python3-unidiff \
-     python3-uritemplate \
-+    python3-varlink \
-     python3-vcversioner \
-     python3-versioneer \
-     python3-versiontools \
-diff --git a/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb b/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
-new file mode 100644
-index 000000000000..8c532371d0a2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-varlink_32.1.0.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "Python implementation of the Varlink protocol"
-+HOMEPAGE = "https://github.com/varlink/python"
-+SECTION = "devel/python"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
-+
-+# 32.1.0 is not published on PyPI
-+SRC_URI = "git://github.com/varlink/python.git;protocol=https;branch=master"
-+SRCREV = "8b3ba4e8206b098c524f538036a941b47797840d"
-+
-+inherit python_setuptools_build_meta
-+
-+# Keep the bundled test suite, and its python3-unittest dependency, separate
-+PACKAGES =+ "${PN}-tests"
-+FILES:${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/varlink/tests"
-+RDEPENDS:${PN}-tests = "${PN} python3-unittest"
-+
-+RDEPENDS:${PN} = "\
-+    python3-core \
-+    python3-datetime \
-+    python3-io \
-+    python3-json \
-+    python3-netclient \
-+    python3-netserver \
-+    python3-shell \
-+"
+The patch would first need to be tested a bit more thoroughly. The 
+problem with AI-generated patches is that they are created much
+
+faster than they can be tested. In this case, I noticed an issue on my 
+Intel Arc card: The patch treats every DRM device without a
+
+PCI parent as primary, so kmscon also detects the vgem device 
+(card0)—which has no KMS outputs—and tries to open a display on it
+
+every 20 ms, which floods the journal.
+
+
+v2: only devices on the platform bus are treated as primary
+
+
+
+--=-SvlS1Tbpcw/CJSKepa9z
+Content-Type: text/html; charset=windows-1251
+
+<div id="convey-body" dir="auto">On Sun, Sep 27 2026 at 19:39:13 -07:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite">Whats the future plan for this patch ? it seems worthy of upstreaming.</blockquote><div><br></div><div><p>The patch would first need to be tested a bit more thoroughly. The problem with AI-generated patches is that they are created much</p><p>faster than they can be tested. In this case, I noticed an issue on my Intel Arc card: The patch treats every DRM device without a</p><p>PCI parent as primary, so kmscon also detects the vgem device (card0)—which has no KMS outputs—and tries to open a display on it</p><p>every 20 ms, which floods the journal.</p><p><br></p><p>v2: only devices on the platform bus are treated as primary</p></div></div>
+--=-SvlS1Tbpcw/CJSKepa9z--
+
 
