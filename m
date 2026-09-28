@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBB5FC9832F
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 00:03:56 +0000 (UTC)
-Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.46632.1790553836152333914
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 026F2CA5FA3
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 00:03:57 +0000 (UTC)
+Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.46626.1790553827474860751
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 17:03:56 -0700
+ Sun, 27 Sep 2026 17:03:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=B4AgnXOM;
- spf=pass (domain: gmail.com, ip: 74.125.227.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f42.google.com with SMTP id d9443c01a7336-2ddaa08c890so9838445ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=aKuUJe+/;
+ spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f13.google.com with SMTP id d9443c01a7336-2dd4b43b20bso9727635ad.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790553835; x=1791158635; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790553827; x=1791158627; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=oFdgz/+BbeFBeu20CERHwr4Q1yp2nqwah26/SiB6h4U=;
-        b=B4AgnXOMppY34jmrecxMrAzjr1ncWzOYw9evBkkIQVH4t1tonSdA3VTI+PijjuqXjT
-         8ViEy9wuooWr+8uyCxCmbAtxU/2AJJs4ZP0Ng4ulYBtrA3Puw9KJcDP/G7lKleL0OfHF
-         y0tGjFU4gQRLY0Y5rSMvv0myz4LYAqHBjPEZ3eyfPcLB7GEuCde7V67Wbt4smCU6Eqoo
-         oo93xJI9t9H7hguMvf3vCZVQA5vJgqnEbBJO6OcVKx7d1sdh0tsYE8vpZnETDxvvAbgA
-         qI/4dk30zaMGtGLxUfkr9HXrHGgrJhxS02oyo6pZjw1ZEHVivjokssEOMT0FN5yf109U
-         mjBA==
+        bh=gUdwZEekv0MFPTQxwNKtwROnn6cY8Gkyii0l0suKDsM=;
+        b=aKuUJe+/P7eyFPNDdcEPmVNdBuizk8WKbMfNblcCB51kEeJwdnBPBNl8Fqz1KnJYTB
+         z1pPmzz7foQk4rtf8SpvGEb1xHIfptq2FPL5LotUekQ2bhXS9cPRqwiIhG4k7eGAyy96
+         F1BFBVBRoWxl6b/4iumW8Q3M5PSvQPtJJU4WLPbistKyQey5KvFg5BLuKxosMoL+90om
+         ZrsTh0MUNCAbccSabYom2Mc0Q4qWMXN3Zou+B16bMYQack4sOuc0T1doWOsGzvQthdC7
+         wg7O01MAZ3NzLJqJvwKvbYQ3eWhbWnqAJN9FPt41sav6Qs1TmxNnTwb8aMRwPopoejYU
+         SsgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790553835; x=1791158635;
+        d=1e100.net; s=20260707; t=1790553827; x=1791158627;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=oFdgz/+BbeFBeu20CERHwr4Q1yp2nqwah26/SiB6h4U=;
-        b=tQsoK50Z0+0i9iakXwmtbMOW6CjCBQNlv9V+xWm9u7PZz2EHYR58ulKbycBgnRnW31
-         MMvCqh4VOJeX+DCVAs4J6pDLllfysd1clkMEJ1TMGox9ooyBYO5ZmJQQLfZFAyOUJol6
-         /HHdPYTlwKt1t/O85KdPWm9AxwaISQw5WnLvYbOBL2lnNxe26B6NkZz2AgYYsuWVQfha
-         ojL3NVkX5XtMAk6hI2n+ozQak0pUJv+pcssry85XB1Q1WFd3ssqvZsYurCMAOLs8xe0U
-         FthpGZBc/WIjc/sMPhUOg6mfZQIl6rr5q9NRQPyt3XIS6aeUj/GvFACtma/NJCASHdGD
-         t4DQ==
-X-Gm-Message-State: AFq9FYKZ6mdQ1oPsB8Ly+TurkT0UuDGARueSBHT87joL0LKPpHYv65xw
-	oq7s7jY96iXw5nkRUX2bfcLAj1TLeq+7LLwSWnE6Etesw1RtsbsK7t7rwNIigw==
-X-Gm-Gg: AYBFou0xIGHr4S/PkuhTYU3eGD/eCt/4qodgURz/OwFbsp3/IFy2beDYkVBc7dAHi5a
-	KuU1wUuDLV0XXm/mfesK2SedY1xfUbXqf31yEITOMyHDP6ucEY6wDnONYErPyo3ISnjLzNw681L
-	QyeDfCVXRwZEKSz29cHjHQoEZezsBemDa3dY5xtdWghoA0zkJ3iZlqJsxaC3lPW0xc1xCF7xFiA
-	fojIS3xAIC/sjTUvgYYnRfg25kNxntpBJ17FFnH/4hcMmhjgDHBEJymdTtXGCqJB4J1uDqQOk0o
-	mN0XPDbg5zLOLNPKf73QltG8njlWtqLVaVS6RYJbRq0kISpfnzvkx4TALIOO5JqgyY527bGvvrf
-	WoqD5BIKxG2wMrhN4Tmv2NiIQUacvq7pzUE0C/L4dPi8WzP4rO+sEe9T3F/NxpNBn0sdzPiCQaG
-	ici0LuvJaCSQoqATOAMRbnIFNl71DrWOseJPzy/EduSbbKqVUMAurF56VMp0gw8iVDueki+5mZ+
-	Nue2j9oknkZtvPUVV6SCIicjw==
-X-Received: by 2002:a17:902:fc8d:b0:2e1:2e86:e60e with SMTP id d9443c01a7336-2e12e86e641mr17241975ad.0.1790553835476;
-        Sun, 27 Sep 2026 17:03:55 -0700 (PDT)
+        bh=gUdwZEekv0MFPTQxwNKtwROnn6cY8Gkyii0l0suKDsM=;
+        b=vlf5TFMSpjQfh7L184fO/ZZQyNCKDEFIyqjEwyZYTnW1BFIDlNm1SvuOjOzl/TzNb6
+         zZ2BqXhNuf7aZ1wnedg0HZi8M0Dj89o75SubkyX9ZaAluP/kuZWpZ76cYO+S81b0oVyf
+         /KPmV0C+G13iTFw/qSj2IWfevoLHSPwyRL7FQxwQe0vrKEC5hLxXNkVGETHmaJH8aGvn
+         KemMwK4pNgfVqoJyil0t4SuO1yn1VuXSfu1ezidmst9vSA4Gtgddns1eH2soVpRpvpXK
+         T+zhq4ccvp6vh3TgGTCx711JuoFOypAVmZTgtW/9FnIriQNaFZmrCW5AE2jDoqqGOa03
+         U14g==
+X-Gm-Message-State: AFq9FYIGP1f/afx1FE3MCUeiG0E0HmdFUpLvpjZ4BovUn5aOFkPJ48j/
+	WBQUiKeAyjdtoPp3YRgtCP1RG9DV1QZy1PvEQezFPLClRhjOXFSyX9ljwhSkjg==
+X-Gm-Gg: AYBFou2377IAAQlq/Oe4TOSb2rBKNCxgsGjIXL0Gai2iHomDwie0DgwQrrq4Ib8TADl
+	ubiyJQjZZgkBzncACb/e1OHQ/TgANj09JjUKq3VH+uytLtq1djeyjHswWVgt9nvyNtjUI+875Bu
+	w0c02XqRLiAknaON1vvuXjjAikf5GdHDtuGLLI/yqVQi0b5WbUVGcy0Vwxz0SkJohs4kGv5uDrv
+	ek5lTps4mZbqbJGaB9sBtieah3xIlc8HcvfjwBsyqu2FRP2HuyZTqzaSg2cr7I48BOqlmCH9FzY
+	mF3rZQtEC9b8A1sMLmUy10uzzsgvNahXFfCyMCZK0miEk6WyswHpWyeWye11s0iiigsNO1GmvJy
+	9VkSNeOt4SQqoP8nui2Tzq9wCFodgwGNZkjXwO6hYjobJYVStlomwMhUoXjA+dSPZeq/wR1BpLk
+	TRa/taUN9mjHz1PXJKKMwHCK14wvnAuKsq5noxHt87eQwhKdu58RsFnEVQOTFKRgLDxo/P/9Xfj
+	H+mHdexG9Lg2y0m41NvzYA=
+X-Received: by 2002:a17:902:d4c5:b0:2df:9d04:404e with SMTP id d9443c01a7336-2df9d044313mr47324395ad.41.1790553826702;
+        Sun, 27 Sep 2026 17:03:46 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.53
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 17:03:54 -0700 (PDT)
+        Sun, 27 Sep 2026 17:03:46 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 22/30] python3-nocaselist: upgrade 2.2.0-> 2.2.1
-Date: Mon, 28 Sep 2026 13:02:54 +1300
-Message-ID: <20260928000302.2528437-22-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 18/30] python3-gnupg: upgrade 0.5.5 -> 0.5.6
+Date: Mon, 28 Sep 2026 13:02:50 +1300
+Message-ID: <20260928000302.2528437-18-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
 References: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
@@ -67,34 +67,52 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 00:03:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130409
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 00:03:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130405
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+The 0.5.6 source tarball on PyPI now uses the PEP 625 name
+python_gnupg-0.5.6.tar.gz.
+
+- Set PYPI_PACKAGE to "python_gnupg"
+- Set S explicitly, since the archive still unpacks to
+  python-gnupg-${PV}
+- Set CVE_PRODUCT to "python:python-gnupg" so CVE matching still
+  works after the PYPI_PACKAGE change
+
 Changelog:
-https://nocaselist.readthedocs.io/en/2.2.1/changes.html
+https://github.com/vsajip/python-gnupg/releases/tag/0.5.6
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...{python3-nocaselist_2.2.0.bb => python3-nocaselist_2.2.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-nocaselist_2.2.0.bb => python3-nocaselist_2.2.1.bb} (80%)
+ .../{python3-gnupg_0.5.5.bb => python3-gnupg_0.5.6.bb}    | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gnupg_0.5.5.bb => python3-gnupg_0.5.6.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb b/meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
-index 38d941d9be..c21b6a55e1 100644
---- a/meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-gnupg_0.5.5.bb b/meta-python/recipes-devtools/python/python3-gnupg_0.5.6.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-gnupg_0.5.5.bb
+rename to meta-python/recipes-devtools/python/python3-gnupg_0.5.6.bb
+index 2f2738ce9a..e9fe3c78b1 100644
+--- a/meta-python/recipes-devtools/python/python3-gnupg_0.5.5.bb
++++ b/meta-python/recipes-devtools/python/python3-gnupg_0.5.6.bb
+@@ -3,11 +3,15 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dabe659eadd6d97325b1582e41cfc11"
  
--SRC_URI[sha256sum] = "b06b3d6fec1abc05c607aa8e813599388727a08e18c223431d7469cf6eb0c06a"
-+SRC_URI[sha256sum] = "bade0e96a104ac8ddae49c261aa7c27b5ae8d9434661c6cd8ec16f3cd5c677a1"
+-PYPI_PACKAGE = "python-gnupg"
+-SRC_URI[sha256sum] = "3fdcaf76f60a1b948ff8e37dc398d03cf9ce7427065d583082b92da7a4ff5a63"
++PYPI_PACKAGE = "python_gnupg"
++SRC_URI[sha256sum] = "5743e96212d38923fc19083812dc127907e44dbd3bcf0db4d657e291d3c21eac"
++
++CVE_PRODUCT = "python:python-gnupg"
  
  inherit pypi python_setuptools_build_meta
  
++S = "${UNPACKDIR}/python-gnupg-${PV}"
++
+ DEPENDS += "python3-wheel-native"
+ 
+ RDEPENDS:${PN} +=  " \
 
