@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E7A4CA5FA5
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 00:03:57 +0000 (UTC)
-Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.46630.1790553831979926673
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBB5FC9832F
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 00:03:56 +0000 (UTC)
+Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.46632.1790553836152333914
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 17:03:52 -0700
+ Sun, 27 Sep 2026 17:03:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SOlnRUoL;
- spf=pass (domain: gmail.com, ip: 74.125.228.40, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f40.google.com with SMTP id 41be03b00d2f7-cc78d45f78fso1399884a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=B4AgnXOM;
+ spf=pass (domain: gmail.com, ip: 74.125.227.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f42.google.com with SMTP id d9443c01a7336-2ddaa08c890so9838445ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790553831; x=1791158631; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790553835; x=1791158635; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tDowRa63ZiJqn1u6fx/rKnKsA48Th36jN/CfVL+Ee14=;
-        b=SOlnRUoLlq8c2JLGauovSt9DJ70Le+RZVdc8I49ALy479bUYzRhVbrOgvg1GWqJ9qc
-         HRnYov6vK87F0Vwfmo7HpD9oJxT6CuYC4AKyJP68CQFk15CjzABY86ExCDee1C/zSXDc
-         Jkv9ynFhmIaMI9cPOzzeGeXCneLg231wpFLD7RWSoUwq2T2XPG7AtlmJGx6G0Kd96Asf
-         gJbej4gUL1XGYQCxdPMt601V3326tTaJhZAhPh1lV9/byFTOOUai5Le25dKTHVY1dTQJ
-         OCPAv8x5sS/fP8jQToGsPqzTNMx0Yes/nKJAy6Cll7LUKCjJ8ii1HA3q4zwSIo+3AlIf
-         pTGg==
+        bh=oFdgz/+BbeFBeu20CERHwr4Q1yp2nqwah26/SiB6h4U=;
+        b=B4AgnXOMppY34jmrecxMrAzjr1ncWzOYw9evBkkIQVH4t1tonSdA3VTI+PijjuqXjT
+         8ViEy9wuooWr+8uyCxCmbAtxU/2AJJs4ZP0Ng4ulYBtrA3Puw9KJcDP/G7lKleL0OfHF
+         y0tGjFU4gQRLY0Y5rSMvv0myz4LYAqHBjPEZ3eyfPcLB7GEuCde7V67Wbt4smCU6Eqoo
+         oo93xJI9t9H7hguMvf3vCZVQA5vJgqnEbBJO6OcVKx7d1sdh0tsYE8vpZnETDxvvAbgA
+         qI/4dk30zaMGtGLxUfkr9HXrHGgrJhxS02oyo6pZjw1ZEHVivjokssEOMT0FN5yf109U
+         mjBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790553831; x=1791158631;
+        d=1e100.net; s=20260707; t=1790553835; x=1791158635;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tDowRa63ZiJqn1u6fx/rKnKsA48Th36jN/CfVL+Ee14=;
-        b=TkGVlDgsKq/BJWO+WzM/31KAMNC693OSTJPNGpq03q2IFrquRutVTc1e2fzS5poGNr
-         ttWu1tZNNkUKW+k0pGrbAqNmRlGlUB155KXGJ67+Pg2ExcrMMxgtlhYJsh0GcL/YOdWG
-         scFIGfQCY7ma5amlEqqn+5pfxXvbg/q8U6bJz8tClzUrRFccZlAaiDaGgOmLc09+WCRK
-         +m8YnoP8H68JjSaoVhpfgV36ksCBij2MtGYy+Af/TBjVN8kX3zvcT87XHHKi6XfzeXTh
-         zOujvLIkPvxVZBYoFCQuFLOysZscoJhr8zsrq/V98OYoMvgKyAfADPxuZdCPBJn1Hly5
-         4S8g==
-X-Gm-Message-State: AFq9FYKydyG4jyLxwmdyku7J64AIvHsc/pGSHMojmMqXpNSBBkzYN/Y0
-	KkUYiatZI95hI45Y2xM2BcNYU9neHS9Ht8ml9LfIwnFRJ6DQWLIrMLVqMmU1fw==
-X-Gm-Gg: AYBFou1xzHH5bY4R5W/gq25SdTTz4o8q2xf210gOCEDOQsSvRYd0x/bjczJyZ78CDY3
-	apZaJRoNRvOYpY97LxAOuAZaAAcYFb9jlTwip3l48mNR1yg4xcmaDzZOTaUPRMC0G5JeCpp7DQa
-	peHnGrUNX+20uanJ7deZmnr/uYQfFGeJQ7UrVIHik+RO5ZbiWVXNRtXheZs8gVvZ6UOzGRkia9c
-	kWMwNRVQfZEKp4ohAGHQOgIGiF8h3aBjbFsxlhVeZGZPxrXc3Meuah3ZWbF38NW/dXbXwnG13QX
-	tvGzz7eKwBBk0Wgs15IJA1vyx+tsFo/aGcqHsK+7IxbCb9qJo9F3vlURMAEsThqMTb8y0XRM2ih
-	9pYpx/uFAO6KdG/YtWr39L56p1iWLoP67KnggfnpLDjoQTL9ShkGzUzYNn0Bj1/dpM9qWos0Klt
-	U13tZdQNyXCFxhfL//v+M31Cw3HEeWWfKA4m6gOIMK9u2exB8X9I/9nE/4LBsZfMQxGPNcvSV12
-	L9uOVB68GjFlsKb9lgTcBI=
-X-Received: by 2002:a17:902:ef4c:b0:2dd:ad74:ac20 with SMTP id d9443c01a7336-2df7dea7d02mr87289465ad.27.1790553831026;
-        Sun, 27 Sep 2026 17:03:51 -0700 (PDT)
+        bh=oFdgz/+BbeFBeu20CERHwr4Q1yp2nqwah26/SiB6h4U=;
+        b=tQsoK50Z0+0i9iakXwmtbMOW6CjCBQNlv9V+xWm9u7PZz2EHYR58ulKbycBgnRnW31
+         MMvCqh4VOJeX+DCVAs4J6pDLllfysd1clkMEJ1TMGox9ooyBYO5ZmJQQLfZFAyOUJol6
+         /HHdPYTlwKt1t/O85KdPWm9AxwaISQw5WnLvYbOBL2lnNxe26B6NkZz2AgYYsuWVQfha
+         ojL3NVkX5XtMAk6hI2n+ozQak0pUJv+pcssry85XB1Q1WFd3ssqvZsYurCMAOLs8xe0U
+         FthpGZBc/WIjc/sMPhUOg6mfZQIl6rr5q9NRQPyt3XIS6aeUj/GvFACtma/NJCASHdGD
+         t4DQ==
+X-Gm-Message-State: AFq9FYKZ6mdQ1oPsB8Ly+TurkT0UuDGARueSBHT87joL0LKPpHYv65xw
+	oq7s7jY96iXw5nkRUX2bfcLAj1TLeq+7LLwSWnE6Etesw1RtsbsK7t7rwNIigw==
+X-Gm-Gg: AYBFou0xIGHr4S/PkuhTYU3eGD/eCt/4qodgURz/OwFbsp3/IFy2beDYkVBc7dAHi5a
+	KuU1wUuDLV0XXm/mfesK2SedY1xfUbXqf31yEITOMyHDP6ucEY6wDnONYErPyo3ISnjLzNw681L
+	QyeDfCVXRwZEKSz29cHjHQoEZezsBemDa3dY5xtdWghoA0zkJ3iZlqJsxaC3lPW0xc1xCF7xFiA
+	fojIS3xAIC/sjTUvgYYnRfg25kNxntpBJ17FFnH/4hcMmhjgDHBEJymdTtXGCqJB4J1uDqQOk0o
+	mN0XPDbg5zLOLNPKf73QltG8njlWtqLVaVS6RYJbRq0kISpfnzvkx4TALIOO5JqgyY527bGvvrf
+	WoqD5BIKxG2wMrhN4Tmv2NiIQUacvq7pzUE0C/L4dPi8WzP4rO+sEe9T3F/NxpNBn0sdzPiCQaG
+	ici0LuvJaCSQoqATOAMRbnIFNl71DrWOseJPzy/EduSbbKqVUMAurF56VMp0gw8iVDueki+5mZ+
+	Nue2j9oknkZtvPUVV6SCIicjw==
+X-Received: by 2002:a17:902:fc8d:b0:2e1:2e86:e60e with SMTP id d9443c01a7336-2e12e86e641mr17241975ad.0.1790553835476;
+        Sun, 27 Sep 2026 17:03:55 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.49
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 17:03:50 -0700 (PDT)
+        Sun, 27 Sep 2026 17:03:54 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 20/30] python3-gunicorn: upgrade 26.1.0 -> 26.2.0
-Date: Mon, 28 Sep 2026 13:02:52 +1300
-Message-ID: <20260928000302.2528437-20-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 22/30] python3-nocaselist: upgrade 2.2.0-> 2.2.1
+Date: Mon, 28 Sep 2026 13:02:54 +1300
+Message-ID: <20260928000302.2528437-22-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
 References: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
@@ -67,34 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 00:03:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130407
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 00:03:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130409
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/benoitc/gunicorn/releases/tag/26.2.2
+https://nocaselist.readthedocs.io/en/2.2.1/changes.html
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{python3-gunicorn_26.1.0.bb => python3-gunicorn_26.2.0.bb}  | 2 +-
+ ...{python3-nocaselist_2.2.0.bb => python3-nocaselist_2.2.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-gunicorn_26.1.0.bb => python3-gunicorn_26.2.0.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-nocaselist_2.2.0.bb => python3-nocaselist_2.2.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_26.1.0.bb b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-gunicorn_26.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-index 2f27264192..545947446c 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_26.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "WSGI HTTP Server for UNIX"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5dc9171ccd8fcbd7827c850148b3ca98"
+diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb b/meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
+index 38d941d9be..c21b6a55e1 100644
+--- a/meta-python/recipes-devtools/python/python3-nocaselist_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-nocaselist_2.2.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
--SRC_URI[sha256sum] = "1413d777bf99d31ebeb08acd354b01f1ecc44db0aa7b811ae7b86c669232e4f7"
-+SRC_URI[sha256sum] = "62b864895d9ebff0b2f9867ba04fe811c93121596540830c9c916d0769668447"
+-SRC_URI[sha256sum] = "b06b3d6fec1abc05c607aa8e813599388727a08e18c223431d7469cf6eb0c06a"
++SRC_URI[sha256sum] = "bade0e96a104ac8ddae49c261aa7c27b5ae8d9434661c6cd8ec16f3cd5c677a1"
  
- inherit pypi python_setuptools_build_meta ptest
+ inherit pypi python_setuptools_build_meta
  
 
