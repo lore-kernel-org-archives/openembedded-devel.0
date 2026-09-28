@@ -2,97 +2,99 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD26DCA5FA2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1634C9830E
 	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 00:03:14 +0000 (UTC)
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.47653.1790553789360666759
+Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.47659.1790553791699752037
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2026 17:03:09 -0700
+ Sun, 27 Sep 2026 17:03:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NCQWP/ov;
- spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f13.google.com with SMTP id d9443c01a7336-2d8fb334e72so9221385ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=D7151dZG;
+ spf=pass (domain: gmail.com, ip: 74.125.227.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f42.google.com with SMTP id d9443c01a7336-2ddaa08c890so9837285ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2026 17:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790553789; x=1791158589; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6UmUMcYg4U+El9BF+cyz72fFaIR2U5rLQeTuqMFl680=;
-        b=NCQWP/ovyqT03GkF+GoYtBN9E1s5DXbGGBCIhP8NcXe7MmOQkYL/3rnBxv60q6iRNA
-         4wh/y61E42rrkFN378CqjfKIetwLbT5APsIOQC9t/vLtn8AQVqrcCNn+bEX6l7HFD8IU
-         10Pb+UkIoc98LHxuu39czWGZueSraxALriZur7/iaDHRS2RSr3cWViyj0AYPbD25pKtq
-         iyPGkUbKT3Vc1qbfv2H5EOTwq1S9VaY6hwCtd90+rLjdJJMy3kL5O58FGlBWcjRrHbVZ
-         lmZVEjyf9KqGsQ6CxnjT9pBn+hXzWjKudiCqL5vt3oMZWRUE4usb11JzhjpuMnPrCdzo
-         EGmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790553789; x=1791158589;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1790553791; x=1791158591; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6UmUMcYg4U+El9BF+cyz72fFaIR2U5rLQeTuqMFl680=;
-        b=1hliY1dC8Gt/z9Xj/X5Z7R4N9f6CUi0gUjPRvxEDi5P9zPj8TK4gqar28JEKLwWrJ6
-         nO//pf/vvjdsJUThuU5hk/Nbvoj1n0nSJ/bLIdI9EqgVowq2+qz0n7mvcz0KiOQJB8w6
-         qUix/FR5hXSYrjwf/oWyCKRVcTfRVsvki0b9ZD3PnPFlvubdza5xu70mXn/1oYAYTVHH
-         Rl5Mv2M1mF/qM3LOzfuP3hO0MQ62VadAPR2octaCLBJaMy/zfC0hdVExO93gXiQCESgC
-         5FI0zuoRaGsXXqoYdFCen4GC7sVvaA8bSSR7eZa9ofsdEfjLQlEisaRmIz7feuTRx/0p
-         4RLA==
-X-Gm-Message-State: AFq9FYLUM3R2l1sKnvWKS+nEKjHJ9ITYmVLmEbC8sFcDXfkV6RoCtRYb
-	NCsHT3U/Wjg+wdjWTVf7RcDcsdvo2UdJWKIPoz2c4zL625t4aFX5+ZIyi8vBrg==
-X-Gm-Gg: AYBFou1Wd0O/YcmrZLWQYpwmqC16eWG/crM4bDl1ypJsHEQy2mNLn5fOX7HDSchcUud
-	VNgW8gURIqDOSiiv7kj4SNTZqhoDrA72NF41VWhHTHezsI39HCWsyptzXSU5leC9bEWa0iFR4x/
-	eqGv9gsq+yF1WMa6xL0EwGqBf5UVgIcyVUE87bLbRcODsulUSGtAwzGcvalyO9NN1/I9C/TZB+H
-	6CzG/k3oh6Lv+kVFupO0sujr3oKefQnOhBCWc3XE8erOXrkBWQngXZvd9y31PuN9TCq2yobczxo
-	mldKH0zVCV8yYfB2esaPhJ264nJDn4/tCUfxjP1BRP27Rz2yZVDvnVzAjaEGYaz4VzvixaqBwR1
-	nwv01mqI2Z13YNqU1+EpoiX8ybeCpmCwISzLelm/iw3j81HPFXNKg798F5npxV21cjn8sJv8mo8
-	Sb1Vzbct4hJ+R7umXtcO15bSOSdXVmruzUpb9M2/QH/y8KKaD3tx1v7FxSn0XXcKrwZ4jFtpGB2
-	uAXMDjRZDIQ//46nAhWEr0=
-X-Received: by 2002:a17:902:d582:b0:2dd:c100:7cbe with SMTP id d9443c01a7336-2df7dc5b18fmr85436165ad.58.1790553788631;
-        Sun, 27 Sep 2026 17:03:08 -0700 (PDT)
+        bh=VaCyQZKmuH0uvEINiOwxhUQZTE6HdX6ph4qUKkBhj5g=;
+        b=D7151dZGsfz3xsef1wV6pM3upnPpoQfOyRZKdG9ac9xEAjzuy5dqqgpM+hBt36PhG8
+         TXImRIZLYZU5Q07MyjhmbqwEYd57vH8v1j7znOglGKumybxSmdZA93ncQLRIsjFzboLV
+         pcWw5QMNyWhPVsq7jdlgOGiKQNyfWaFZXbAllnqSslDDHWat89K3Xy20pl+9Znn9ol9/
+         r3gDQk57fDw/lTPZe6tnmAyj71aKvsbiW+vUnKqMAcDMh0OspFWxd2dOKhfd02NHzRLi
+         fmWR9ZvJOiGsOyc1CDiab9STSPVRYGdIwpjR6l6i41gkMV2WETRN1xIPT0oeTzaxCKbv
+         440g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790553791; x=1791158591;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=VaCyQZKmuH0uvEINiOwxhUQZTE6HdX6ph4qUKkBhj5g=;
+        b=iiRcbBUsL7AS260EBpRxSlQ4k3ef2y5/5YrIuU4dwIGo5tTpmMn2ti1Q1fI6hDsZZj
+         BgG2oCtzoMoiP2Onl7B5ccUj4u4AG5RkzRCwXJUVeEneq3VDdMX56IRa1FASZMzHgCez
+         2KS9nLHgQOffQzVXXxB2GLQT9teB5+Qm/sK3phXG/UZu3hD7cDYQ0zMxD+IpmKn1SCCN
+         0fpM5kdvsOeF9Xyb89cPr04/7WkVOomE80pJlMUdAVh//8lq1lzscAQrp2Wqm9n7ytXW
+         XPeSJpmHFYpT8YYjPFwIKeo4Pp+EMtA29at2YGxj49R5oXC6yrhvlXNjBHtgeHRUtFqs
+         hDyw==
+X-Gm-Message-State: AFq9FYLMUX/LWPIV4bU9y7NI73cMC8x/MZAEAt7y4gHKHHAoWHZ+ZNtk
+	ksjKcClHmodroZsr942aVOYOb1Ba+fbTwCNfWowcOits53mxbmqd02HY14MiEg==
+X-Gm-Gg: AYBFou2YyLyg5QWpf4PsYj8/PUyOsEXjJ7BP5L7OQ5A+NXHYDi34SNddZDEBdn+3qsj
+	NYxvIHHGD2rb08oeCye1GJlOWeul5rcTz1eiU5JIz08+DvC7J7hfrQc/snWLvC+h4aaCqygmFYA
+	cLDL228I7cG58ROck28Baxzomvn97ygRZaW6V1ktr7EZrr3mj4DmwK6JmcAmszuG8M2XXUz6JuK
+	+4dqCqJxfm5tCqgHIBxudxog1mWeWFc0UlPkNeOpBPhoKJ9Jig/8/Tp+zkz+PSNHil9ySFyJwEA
+	932akIFtF2hbAz3HCRluSOm7DTKJC4Tlhv2yIQ9//zSbzZCBHEaIiUreC1nlt4+DmGCAZQ0ijxI
+	xG+sxsjNn6SejtgYwLL8nLRQCb71I4rrXR3g0joiFE0N7Cd/iQSaSoVc+U9jaKtYb74+5UPq1H3
+	tjhYPtJd2bHjMud/f1N39P5iRJQQ424i6fcKhDfjfnnuXXSqFTWCmrTH6JIRnDI4WxbJou8kVp2
+	nrBIDEuUBeGJlgd9jA0Gbyt/VstzKpZagg3
+X-Received: by 2002:a17:903:1968:b0:2dd:ad73:5b6f with SMTP id d9443c01a7336-2df7dab1f3amr88209645ad.31.1790553790983;
+        Sun, 27 Sep 2026 17:03:10 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.06
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df913fcbbfsm32347775ad.30.2026.09.27.17.03.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 17:03:08 -0700 (PDT)
+        Sun, 27 Sep 2026 17:03:10 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][PATCH 1/30] swagger-ui: upgrade 5.32.14 -> 5.33.0
-Date: Mon, 28 Sep 2026 13:02:33 +1300
-Message-ID: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][PATCH 2/30] hiawatha: upgrade 12.3 -> 12.4
+Date: Mon, 28 Sep 2026 13:02:34 +1300
+Message-ID: <20260928000302.2528437-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
+References: <20260928000302.2528437-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 00:03:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130388
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130389
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/swagger-api/swagger-ui/releases/tag/v5.32.15
-https://github.com/swagger-api/swagger-ui/releases/tag/v5.33.0
+https://gitlab.com/hsleisink/hiawatha/-/blob/v12.4/ChangeLog?ref_type=tags
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../swagger-ui/{swagger-ui_5.32.14.bb => swagger-ui_5.33.0.bb}  | 2 +-
+ .../hiawatha/{hiawatha_12.3.bb => hiawatha_12.4.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.32.14.bb => swagger-ui_5.33.0.bb} (94%)
+ rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_12.3.bb => hiawatha_12.4.bb} (97%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.0.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.0.bb
-index 5bb5a66021..45a3bb6d17 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.32.14.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.0.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.3.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.4.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_12.3.bb
+rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_12.4.bb
+index fa3d0b7271..8164b3076f 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.3.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.4.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-${PV}.tar.gz \
+            file://hiawatha.service \
+           "
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+-SRC_URI[sha256sum] = "741c0de4a8055477ae0eca2a32832e8c694d8869e4b53a43a44a2a4e598663c8"
++SRC_URI[sha256sum] = "c80f87b5f9f04520b57af96ac52905198f96de38c3b7d988abc0f758cdd46d2e"
  
--SRCREV = "6e8ce248db64190e4113676aba996943c56f2491"
-+SRCREV = "cfd4a6c3cbaeeb7c13a8bada7c754de42d78cd5b"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
- 
+ INITSCRIPT_NAME = "hiawatha"
+ INITSCRIPT_PARAMS = "defaults 70"
 
