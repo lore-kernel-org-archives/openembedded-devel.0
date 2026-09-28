@@ -2,125 +2,119 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B9C1CA5FA1
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 17:43:44 +0000 (UTC)
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.63547.1790617412808715790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6782DCA5FA1
+	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 17:48:25 +0000 (UTC)
+Received: from rcdn-iport-9.cisco.com (rcdn-iport-9.cisco.com [173.37.86.80])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.63697.1790617699509903270
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 10:43:33 -0700
+ Mon, 28 Sep 2026 10:48:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=VUawnaeF;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=GB/r4sHt;
+ spf=pass (domain: cisco.com, ip: 173.37.86.80, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=37452; q=dns/txt;
-  s=iport01; t=1790617413; x=1791827013;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=xnKXtIfCadqQPvj2ZLsr2kILT8JKxs6XpuMJAGU13Vk=;
-  b=VUawnaeFA7YJfeazJmyXS+iYB16RTXqByo0SvPuiAxDfbohfsS/4AFDH
-   5QPiOK7nYpQzeSSfOwq8p3keSP6RdhO+Ph2vrb4fLmz8Tq2qcFl2SfXmm
-   OifHi10AK8OLjDCmqtsNDZ3v/Tp+XNCJiYLnHYnPRZDSvBLVyd6KCpYsl
-   WFpUK1QQOVJt83Syrm8f08+PEsuvDfc2cycQ45BnIOHfyKuxp7eAWVDud
-   EUnEr6XW2bngNovCn/fSHmfdq3UuFrx4GkNnvcKUtAjw7FfU7bs+trZ/a
-   3kGDrj1XnQG9hr779LjOG5UC6vA2X8PNwv3apoJIsTJH2htbEBz7J7Pem
-   w==;
-X-CSE-ConnectionGUID: ocO5xfVIR52+NA8FBQKIlg==
-X-CSE-MsgGUID: GEKqcl3/Rx24sVeutF44bg==
-X-IPAS-Result: =?us-ascii?q?A0D1AwBOprpq/4r/Ja1aglmCGD91XAQaKUmWSgOLZIVlj?=
- =?us-ascii?q?FGBfg8BAQEPRA0EAQGEP0YCjgkCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4Thk8NkBIBAgEDGgEMCwEYAS0QHAMBAi8gCyMIGYIqWAGCO?=
- =?us-ascii?q?gM3AxHCV4F5M4EBgykBPwJDUNhLDYJaAQsUAYE4hUCCf4UkXRgBg2uBEScbG?=
- =?us-ascii?q?4FygRWBO4IugQWBGkIBAYE4EAmGVASCIoEMgVqBA5JASIEeA1ksAVUTDQoLB?=
- =?us-ascii?q?wWBZgM1EioVbjIdgSM+F4EHGwYFgR2BIIIZIxk2eoEJXoErKWABEBeBB4IHA?=
- =?us-ascii?q?oJUggECAUlDDgdFUwklQQoSRyYiCBIJARMaMAuBIThBCSgRGA1IESw3FRkEP?=
- =?us-ascii?q?m4HkC4eglMLBgEBFRswLQEHDBcBBHsGFQYTMggWARApBQYCMJJoAQFCApF6o?=
- =?us-ascii?q?B5xCiiDdowijz6FfBozhASBV5JAklQLmH2OCoQJkV8LDQNNhGmBaDyBRwsHc?=
- =?us-ascii?q?BU7gmcJShkPjisDCwuDYIF/yjonMgIJMgEBBwIHDgMLgWiEY4seASaBVgEB?=
-IronPort-Data: A9a23:h9wXY6u1eB9bjBUpBQyGWFCPnufnVAZfMUV32f8akzHdYApBsoF/q
- tZmKTrXO6yIZTCmf4tyadvgoBtUvpHWmIM2TwNurn8wFCpEgMeUXt7xwmUckM+xwmwvaGo9s
- q3yv/GZdJhcokf0/0nrb/656yYsjclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
- eja/YuFZzdJ5xYuajhKs/PZ+Es21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw/e1QXHFAy
- 90idWpOSDnTqciP45O/Rbw57igjBJGD0II3oHpsy3TdSP0hW52GG/yM7t5D1zB2jcdLdRrcT
- 5NGMnw0M1KaPkAJYwxHYH49tL/Aan3Xfz5VrFuUtKMf6GnIxws327/oWDbQUoHTGZ4MzxnH/
- woq+UzWLzIDP9jEjgCVqC63uOLSgQ2nBIgdQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
- lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZMZottdQ9Qnoh0
- Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
-IronPort-HdrOrdr: A9a23:JNHy46DT5WYeMb/lHemO55DYdb4zR+YMi2TDGXofdfUzSL3+qy
- nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygck79
- YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a585+oJjsaE52JKGxCe3+mLnE=
-X-Talos-CUID: =?us-ascii?q?9a23=3AXz2pc2vQoKvjg1h/IiZ1UWn96IsieVqA3HnuAnX?=
- =?us-ascii?q?lUyVPYe27Y2az2adrxp8=3D?=
-X-Talos-MUID: 9a23:kXdUYAXb9Pzvg2Lq/BDBpyhpMJwv2bT0VFsznIgalZXYPyMlbg==
+  d=cisco.com; i=@cisco.com; l=37093; q=dns/txt;
+  s=iport01; t=1790617699; x=1791827299;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Tr5Jp/Br11oWrlsrjcHHfA57BLuaOz3BY3dG4uydbEg=;
+  b=GB/r4sHtQywNrV9AfjWnA9K/8pdWnKmqLjCFGu69EEiHNmn3udoOtLAT
+   oGFhPMKil+1bhZvbHYcz8nnm4wkxHyguVp09Q9/OPuzRKUw0QXCSM1bR8
+   XWAeAra1OxC64jUek6zKlT0z+JmG/Y56Ix4YrGSVqRV56WeNZ6CEWeFOP
+   1UEMl6lRMbSLHCmguHxE0nf2BNJaJlW3Xamv5ta19MYoU5zL7wzlDBF6k
+   8yzDNPcFk8j2TQph/FIRv2X3veLDgfKgqKujgnIjgUcbVxbwqr9EnX1f9
+   Shlb6l8o2qPqdDqw7p2YDJghtU4MyY1tU1jX3Su/WF18/ZroxALHnzkLL
+   Q==;
+X-CSE-ConnectionGUID: GXKe2OIVQzKzG1RJnZPgSw==
+X-CSE-MsgGUID: h7JxbuyTQmW+wZbCNLbcDg==
+X-IPAS-Result: =?us-ascii?q?A0B9AgD4p7pq/43/Ja1aglmCGD91YBopSZZKi2eFZYxRg?=
+ =?us-ascii?q?X4PAQEBD0QNBAEBhD9GAo4JAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFA?=
+ =?us-ascii?q?QEBAgEHBYEOE4ZPDZASAQIBHQEMCwEYAS0sAwECTwsjIYIqWAGCOgM3AxHCS?=
+ =?us-ascii?q?YF5M4EBgykBgVTYSw2CWgELFAGBOIVAgn+FJF0YAYNrgREnGxuBcoEVgTuCL?=
+ =?us-ascii?q?oEFgRpCAoEnERAJhlQEgiKBDIFaHmWSQkiBHgNZLAFVEw0KCwcFgWYDNRIqF?=
+ =?us-ascii?q?W4yHYEjPheBBxsGBYEdgSCCGSMZNnqBCV6BKylgARAXgQeCBwKCVIIBAgFJQ?=
+ =?us-ascii?q?w4HRVMJJUEKEkcmIggSCQETGjALgSE4QQkoFBgNSBEsNxUZBD5uB5AvHoJTC?=
+ =?us-ascii?q?wcWGzAtAQcMFwEEUikGGxMyCBc5BQYCMJJDJQEBQpF8oB5xCiiDdowijz6Ff?=
+ =?us-ascii?q?BozhASBV5JAklQLmH2CWYsxhAmRXwsNUIRpgWg8gVlwFTuCZwlKGQ+OKwMLC?=
+ =?us-ascii?q?4NgzDknMgIJMgEBBwIHDgMLgWiEY4sdAQEmgVYBAQ?=
+IronPort-Data: A9a23:2whQzKKa64mNd5dgFE+RgZQlxSXFcZb7ZxGr2PjKsXjdYENS0zYAy
+ DEfUTjUOP/cMWHzKox3YNuyphsF78OHmtAxHgMd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZpCCea+Uf1WlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
+ T/Oi5eHYgH9imQkajt8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1BPGI7Z6o5xN9lInNhr
+ MY6LgI1YSuc0rfeLLKTEoGAh+w5J8XteYdasXZ6wHSBUbAtQIvIROPB4towMDUY358VW62BI
+ ZBENHw2ME2ojx5nYj/7DLoyn+qsj3juehVTqUmeouw85G27IAlZjeKyboaKIozTLSlTtkbHh
+ HLM4nXFOxQld8OtwxGj1ninquCayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7FQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSj1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:TUzE76iggC+ONt0L6eX3nMR153BQXuwji2hC6mlwRA09TyVXra
+ +TdZMgpHrJYVkqOU3I9ersBEDiewK/yXcK2+ks1N6ZNWGM0ldAR7sN0WKN+VHd8lXFh41g/J
+ YlVbRiA9vtClU/p8P77A6kV+sE+rC8gcSVbSO09QYKcemsAJsQiDtENg==
+X-Talos-CUID: 9a23:PCcIG2GSJHFB1jKDqmJIxG0ZQOcETETP72X/enWaD1RRR4aKHAo=
+X-Talos-MUID: 9a23:m2EYVAkeYTHRqAuuub/ddnpia+V46bm/NHkIrtYZicOvEwh6MBuS2WE=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,128,1787011200"; 
-   d="scan'208";a="514319771"
-Received: from rcdn-l-core-01.cisco.com ([173.37.255.138])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 28 Sep 2026 17:43:32 +0000
+   d="scan'208";a="527647081"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by rcdn-iport-9.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 28 Sep 2026 17:48:18 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-01.cisco.com (Postfix) with ESMTPS id F39541800029F;
-	Mon, 28 Sep 2026 17:43:31 +0000 (GMT)
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 01770180004AC;
+	Mon, 28 Sep 2026 17:48:18 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 65311CBEF6F; Mon, 28 Sep 2026 10:43:31 -0700 (PDT)
+	id 9D9BECC1611; Mon, 28 Sep 2026 10:48:17 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][scarthgap][PATCH 13/13] python3-aiohttp: fix CVE-2026-54273
-Date: Mon, 28 Sep 2026 10:43:23 -0700
-Message-Id: <20260928174323.1810308-14-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH] python3-aiohttp: fix CVE-2026-54273
+Date: Mon, 28 Sep 2026 10:48:06 -0700
+Message-Id: <20260928174806.1818191-1-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260928174323.1810308-1-dkelaiya@cisco.com>
-References: <20260928174323.1810308-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-01.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 17:43:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130452
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 17:48:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130460
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-This patch applies the reviewed upstream fix shown in [1]. The
-advisory identifying the fix is referenced in [4].
-
-The follow-up from [2] is kept as a separate recipe patch. It adapts
-the declined WebSocket-upgrade replay from [3], applies the queue
-pause after replay, and includes the corresponding regression tests.
+This patch applies the upstream 3.14.1 backport for
+CVE-2026-54273. The upstream fix commit is referenced in [1], its
+required follow-up commit is referenced in [2], and the public
+advisory is referenced in [3].
 
 The generated aiohttp/_http_parser.c changes are omitted. The
-recipe-time Cython regeneration introduced with CVE-2025-69224
+recipe-time Cython regeneration introduced in this patch
 regenerates that file from the patched _http_parser.pyx before the
 accelerated parser is compiled.
 
 [1] https://github.com/aio-libs/aiohttp/commit/dfdfa9d5aad5d21f91c79fb2ceeba0f8046cb6cf
 [2] https://github.com/aio-libs/aiohttp/commit/47babd8c23ca79e2bae6cc8dcb5752b61e369fc7
-[3] https://github.com/aio-libs/aiohttp/commit/8943d34337c133aa2a33f1fd10a30950d8dcb20e
-[4] https://nvd.nist.gov/vuln/detail/CVE-2026-54273
+[3] https://github.com/advisories/GHSA-4fvr-rgm6-gqmc
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-54273_p1.patch   | 798 ++++++++++++++++++
- .../python3-aiohttp/CVE-2026-54273_p2.patch   | 181 ++++
- .../python/python3-aiohttp_3.9.5.bb           |   2 +
- 3 files changed, 981 insertions(+)
+ .../python3-aiohttp/CVE-2026-54273_p1.patch   | 773 ++++++++++++++++++
+ .../python3-aiohttp/CVE-2026-54273_p2.patch   | 177 ++++
+ .../python/python3-aiohttp_3.13.5.bb          |  11 +-
+ 3 files changed, 960 insertions(+), 1 deletion(-)
  create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p1.patch
  create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.patch
 
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p1.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p1.patch
 new file mode 100644
-index 0000000000..2fc96d59a7
+index 0000000000..f5a8da015d
 --- /dev/null
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p1.patch
-@@ -0,0 +1,798 @@
-+From d41ceb6e193960ebd24867485cfcb396ab5f4fc7 Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,773 @@
++From 4f6228cdad5a097880dbf1314e1c56773dbeb1eb Mon Sep 17 00:00:00 2001
 +From: "J. Nick Koston" <nick@koston.org>
 +Date: Sun, 7 Jun 2026 01:16:13 -0500
 +Subject: [PATCH] [PR #12830/93a2b1c3 backport][3.14] Bound pipelined request
@@ -130,49 +124,46 @@ index 0000000000..2fc96d59a7
 +Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/dfdfa9d5aad5d21f91c79fb2ceeba0f8046cb6cf]
 +
 +Backport Changes:
-+- Adapted the C parser to retain paused input in an internal tail and
-+  declared `llhttp_resume()`. aiohttp 3.9.5 predates the upstream
-+  parser pause and resume plumbing.
-+- Adapted `RequestHandler` and `BaseProtocol` field names and parser
-+  ownership to the aiohttp 3.9.5 protocol layout. This preserves its
-+  no-transport read-pause semantics.
-+- Adapted regression tests to the 3.9.5 request-state and upgrade
-+  field names, existing `2**16` parser-limit fixture, and older
-+  typing imports. Omitted two unrelated tests from the upstream
-+  parent that require the newer `data_received_cb` API.
-+- Omitted generated `aiohttp/_http_parser.c` changes because the
-+  Scarthgap recipe regenerates that file from `_http_parser.pyx`
-+  during `do_configure`.
++- Added llhttp pause resumption and tail buffering because the 3.13.5
++  parser lacks the newer 3.14 pause state.
++- Adapted protocol fields to the 3.13.5 names _request_parser and
++  _upgrade, and used the existing 2**16 read buffer.
++- Coordinated the older BaseProtocol read-pause state with the
++  message-queue pause and adapted the related tests.
++- Added the missing 3.13.5 test imports and fixtures.
++- Omitted generated aiohttp/_http_parser.c because the Wrynose recipe
++  regenerates it from _http_parser.pyx during do_configure.
++- Added llhttp_resume to _cparser.pxd for the generated parser.
 +
 +(cherry picked from commit dfdfa9d5aad5d21f91c79fb2ceeba0f8046cb6cf)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
 + CHANGES/12830.bugfix.rst     |   1 +
 + aiohttp/_cparser.pxd         |   1 +
-+ aiohttp/_http_parser.pyx     |  52 ++++++++++++--
-+ aiohttp/base_protocol.py     |  22 +++++-
++ aiohttp/_http_parser.pyx     |  45 +++++++++++++-
++ aiohttp/base_protocol.py     |  25 ++++++--
 + aiohttp/http_parser.py       |  20 ++++++
-+ aiohttp/web_protocol.py      |  69 +++++++++++++++++-
++ aiohttp/web_protocol.py      |  66 +++++++++++++++++++++
 + docs/spelling_wordlist.txt   |   1 +
-+ tests/test_http_parser.py    |  72 +++++++++++++++++++
-+ tests/test_web_functional.py | 133 ++++++++++++++++++++++++++++++++++-
-+ tests/test_web_protocol.py   | 110 +++++++++++++++++++++++++++++
-+ 10 files changed, 470 insertions(+), 11 deletions(-)
++ tests/test_http_parser.py    |  72 +++++++++++++++++++++++
++ tests/test_web_functional.py | 132 ++++++++++++++++++++++++++++++++++++++++++-
++ tests/test_web_protocol.py   | 112 ++++++++++++++++++++++++++++++++++++
++ 10 files changed, 464 insertions(+), 11 deletions(-)
 + create mode 100644 CHANGES/12830.bugfix.rst
 + create mode 100644 tests/test_web_protocol.py
 +
 +diff --git a/CHANGES/12830.bugfix.rst b/CHANGES/12830.bugfix.rst
 +new file mode 100644
-+index 0000000..d44d76d
++index 000000000..d44d76da4
 +--- /dev/null
 ++++ b/CHANGES/12830.bugfix.rst
 +@@ -0,0 +1 @@
 ++Bounded the number of parsed-but-unhandled pipelined HTTP/1 requests buffered per connection on the server; once the queue reaches an internal limit the parser stops emitting and the transport is paused, resuming as the request handler drains the queue, so a client keeping one handler busy can no longer accumulate an unbounded backlog of pipelined requests -- by :user:`bdraco`.
 +diff --git a/aiohttp/_cparser.pxd b/aiohttp/_cparser.pxd
-+index c2cd5a9..b7de1d4 100644
++index 1b3be6d4e..cc7ef58d6 100644
 +--- a/aiohttp/_cparser.pxd
 ++++ b/aiohttp/_cparser.pxd
-+@@ -145,6 +145,7 @@ cdef extern from "../vendor/llhttp/build/llhttp.h":
++@@ -145,6 +145,7 @@ cdef extern from "llhttp.h":
 + 
 +     int llhttp_should_keep_alive(const llhttp_t* parser)
 + 
@@ -181,16 +172,16 @@ index 0000000000..2fc96d59a7
 + 
 +     llhttp_errno_t llhttp_get_errno(const llhttp_t* parser)
 +diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
-+index 89a0370..4eb5789 100644
++index e1edee310..0d0762748 100644
 +--- a/aiohttp/_http_parser.pyx
 ++++ b/aiohttp/_http_parser.pyx
 +@@ -319,6 +319,9 @@ cdef class HttpParser:
 +         list    _raw_headers
 +         bint    _upgraded
 +         list    _messages
-++        bytes   _tail
 ++        Py_ssize_t _msg_in_flight
 ++        Py_ssize_t _max_msg_queue_size
+++        bytes   _tail
 +         object  _payload
 +         bint    _payload_error
 +         object  _payload_exception
@@ -206,13 +197,13 @@ index 0000000000..2fc96d59a7
 +         self._timer = timer
 + 
 +         self._buf = bytearray()
-++        self._tail = b''
 ++        self._msg_in_flight = 0
 ++        self._max_msg_queue_size = max_msg_queue_size
+++        self._tail = b""
 +         self._payload = None
 +         self._payload_error = 0
 +         self._payload_exception = payload_exception
-+@@ -544,6 +551,11 @@ cdef class HttpParser:
++@@ -535,6 +542,11 @@ cdef class HttpParser:
 + 
 +     ### Public API ###
 + 
@@ -224,7 +215,7 @@ index 0000000000..2fc96d59a7
 +     def feed_eof(self):
 +         cdef bytes desc
 + 
-+@@ -564,35 +576,55 @@ cdef class HttpParser:
++@@ -555,12 +567,22 @@ cdef class HttpParser:
 +             if self._messages:
 +                 return self._messages[-1][0]
 + 
@@ -234,7 +225,7 @@ index 0000000000..2fc96d59a7
 +             size_t data_len
 +             size_t nb
 ++            size_t pos
-++            char* base
++             char* base
 +             cdef cparser.llhttp_errno_t errno
 ++            cdef bytes data
 ++
@@ -244,23 +235,16 @@ index 0000000000..2fc96d59a7
 ++            data = incoming_data
 ++
 ++        if self._tail:
-++            data, self._tail = self._tail + data, b''
+++            data, self._tail = self._tail + data, b""
 + 
 +         PyObject_GetBuffer(data, &self.py_buf, PyBUF_SIMPLE)
-++        base = <char*>self.py_buf.buf
-+         data_len = <size_t>self.py_buf.len
-+ 
-+         errno = cparser.llhttp_execute(
-+             self._cparser,
-+-            <char*>self.py_buf.buf,
-++            base,
-+             data_len)
++         # Cache buffer pointer before PyBuffer_Release to avoid use-after-release.
++@@ -574,12 +596,19 @@ cdef class HttpParser:
 + 
 +         if errno is cparser.HPE_PAUSED_UPGRADE:
 +             cparser.llhttp_resume_after_upgrade(self._cparser)
-+ 
-+-            nb = cparser.llhttp_get_error_pos(self._cparser) - <char*>self.py_buf.buf
-++            nb = cparser.llhttp_get_error_pos(self._cparser) - base
++-
++             nb = cparser.llhttp_get_error_pos(self._cparser) - base
 ++        elif errno is cparser.HPE_PAUSED:
 ++            cparser.llhttp_resume(self._cparser)
 ++            pos = cparser.llhttp_get_error_pos(self._cparser) - base
@@ -277,15 +261,7 @@ index 0000000000..2fc96d59a7
 +             if self._payload_error == 0:
 +                 if self._last_error is not None:
 +                     ex = self._last_error
-+                     self._last_error = None
-+                 else:
-+                     after = cparser.llhttp_get_error_pos(self._cparser)
-+-                    before = data[:after - <char*>self.py_buf.buf]
-++                    before = data[:after - base]
-+                     after_b = after.split(b"\r\n", 1)[0]
-+                     before = before.rsplit(b"\r\n", 1)[-1]
-+                     data = before + after_b
-+@@ -623,12 +655,12 @@ cdef class HttpRequestParser(HttpParser):
++@@ -617,12 +646,12 @@ cdef class HttpRequestParser(HttpParser):
 +         size_t max_line_size=8190, size_t max_headers=128,
 +         size_t max_field_size=8190, payload_exception=None,
 +         bint response_with_body=True, bint read_until_eof=False,
@@ -300,7 +276,7 @@ index 0000000000..2fc96d59a7
 + 
 +     cdef object _on_status_complete(self):
 +         cdef int idx1, idx2
-+@@ -832,6 +864,12 @@ cdef int cb_on_message_complete(cparser.llhttp_t* parser) except -1:
++@@ -823,6 +852,12 @@ cdef int cb_on_message_complete(cparser.llhttp_t* parser) except -1:
 +         pyparser._last_error = exc
 +         return -1
 +     else:
@@ -314,10 +290,10 @@ index 0000000000..2fc96d59a7
 + 
 + 
 +diff --git a/aiohttp/base_protocol.py b/aiohttp/base_protocol.py
-+index dc1f24f..bd4f931 100644
++index b0a67ed6f..505b398e8 100644
 +--- a/aiohttp/base_protocol.py
 ++++ b/aiohttp/base_protocol.py
-+@@ -4,6 +4,13 @@ from typing import Optional, cast
++@@ -5,6 +5,13 @@ from .client_exceptions import ClientConnectionResetError
 + from .helpers import set_exception
 + from .tcp_helpers import tcp_nodelay
 + 
@@ -331,7 +307,7 @@ index 0000000000..2fc96d59a7
 + 
 + class BaseProtocol(asyncio.Protocol):
 +     __slots__ = (
-+@@ -46,15 +53,26 @@ class BaseProtocol(asyncio.Protocol):
++@@ -51,17 +58,27 @@ class BaseProtocol(asyncio.Protocol):
 +         if not self._reading_paused and self.transport is not None:
 +             try:
 +                 self.transport.pause_reading()
@@ -347,10 +323,11 @@ index 0000000000..2fc96d59a7
 ++        return False
 ++
 +     def resume_reading(self) -> None:
-+         if self._reading_paused and self.transport is not None:
-++            self._reading_paused = False
-++            if self._reading_paused_for_msg_queue():
-++                return
++-        if self._reading_paused and self.transport is not None:
+++        if not self._reading_paused:
+++            return
+++        self._reading_paused = False
+++        if not self._reading_paused_for_msg_queue() and self.transport is not None:
 +             try:
 +                 self.transport.resume_reading()
 +-            except (AttributeError, NotImplementedError, RuntimeError):
@@ -358,13 +335,15 @@ index 0000000000..2fc96d59a7
 ++                # Transport lacks flow control; nothing to resume. Intentionally
 ++                # ignored (see PAUSE_RESUME_READING_ERRORS; do not use suppress).
 +                 pass
-+             self._reading_paused = False
++-            self._reading_paused = False
 + 
++     def connection_made(self, transport: asyncio.BaseTransport) -> None:
++         tr = cast(asyncio.Transport, transport)
 +diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 08950aa..6cf49c7 100644
++index 6a471cd79..e60fcc690 100644
 +--- a/aiohttp/http_parser.py
 ++++ b/aiohttp/http_parser.py
-+@@ -270,6 +270,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -271,6 +271,7 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 +         response_with_body: bool = True,
 +         read_until_eof: bool = False,
 +         auto_decompress: bool = True,
@@ -372,7 +351,7 @@ index 0000000000..2fc96d59a7
 +     ) -> None:
 +         self.protocol = protocol
 +         self.loop = loop
-+@@ -294,11 +295,19 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -295,6 +296,9 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 +         self._headers_parser = HeadersParser(
 +             max_line_size, max_headers, max_field_size, self.lax
 +         )
@@ -381,8 +360,10 @@ index 0000000000..2fc96d59a7
 ++        self._msg_in_flight = 0
 + 
 +     @abc.abstractmethod
-+     def parse_message(self, lines: List[bytes]) -> _MsgT:
-+         pass
++     def parse_message(self, lines: List[bytes]) -> _MsgT: ...
++@@ -302,6 +306,11 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++     @abc.abstractmethod
++     def _is_chunked_te(self, te: str) -> bool: ...
 + 
 ++    def message_consumed(self) -> None:
 ++        """Protocol drained a queued message; free a slot for parsing."""
@@ -392,7 +373,7 @@ index 0000000000..2fc96d59a7
 +     def feed_eof(self) -> Optional[_MsgT]:
 +         if self._payload_parser is not None:
 +             self._payload_parser.feed_eof()
-+@@ -340,6 +349,15 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -344,6 +353,15 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 +             # read HTTP message (request/response line + headers), \r\n\r\n
 +             # and split by lines
 +             if self._payload_parser is None and not self._upgraded:
@@ -408,29 +389,29 @@ index 0000000000..2fc96d59a7
 +                 pos = data.find(SEP, start_pos)
 +                 # consume \r\n
 +                 if pos == start_pos and not self._lines:
-+@@ -481,6 +499,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -485,6 +503,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 +                             payload = EMPTY_PAYLOAD
 + 
 +                         messages.append((msg, payload))
 ++                        if self._max_msg_queue_size:
 ++                            self._msg_in_flight += 1
++                         should_close = msg.should_close
 +                 else:
 +                     self._tail = data[start_pos:]
-+                     if len(self._tail) > self.max_line_size:
 +diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
-+index a73bb43..baa0290 100644
++index 84e70e590..7ef8f12ed 100644
 +--- a/aiohttp/web_protocol.py
 ++++ b/aiohttp/web_protocol.py
-+@@ -25,7 +25,7 @@ import attr
-+ import yarl
++@@ -27,7 +27,7 @@ import yarl
++ from propcache import under_cached_property
 + 
 + from .abc import AbstractAccessLogger, AbstractStreamWriter
 +-from .base_protocol import BaseProtocol
 ++from .base_protocol import PAUSE_RESUME_READING_ERRORS, BaseProtocol
-+ from .helpers import ceil_timeout, set_exception
++ from .helpers import ceil_timeout
 + from .http import (
 +     HttpProcessingError,
-+@@ -44,6 +44,11 @@ from .web_response import Response, StreamResponse
++@@ -47,6 +47,11 @@ from .web_response import Response, StreamResponse
 + 
 + __all__ = ("RequestHandler", "RequestPayloadError", "PayloadAccessError")
 + 
@@ -440,9 +421,9 @@ index 0000000000..2fc96d59a7
 ++MAX_MSG_QUEUE_SIZE = 32
 ++
 + if TYPE_CHECKING:
-+     from .web_server import Server
++     import ssl
 + 
-+@@ -150,6 +155,9 @@ class RequestHandler(BaseProtocol):
++@@ -156,6 +161,9 @@ class RequestHandler(BaseProtocol):
 +         "_keepalive_timeout",
 +         "_lingering_time",
 +         "_messages",
@@ -450,9 +431,9 @@ index 0000000000..2fc96d59a7
 ++        "_msg_queue_resume_size",
 ++        "_msg_queue_paused",
 +         "_message_tail",
++         "_handler_waiter",
 +         "_waiter",
-+         "_task_handler",
-+@@ -187,6 +195,14 @@ class RequestHandler(BaseProtocol):
++@@ -198,6 +206,11 @@ class RequestHandler(BaseProtocol):
 +         auto_decompress: bool = True,
 +         timeout_ceil_threshold: float = 5,
 +     ):
@@ -460,14 +441,11 @@ index 0000000000..2fc96d59a7
 ++        # Low-water mark: resume reading once the queue drains to half the limit
 ++        # so we refill in batches instead of churning pause/resume per request.
 ++        self._msg_queue_resume_size = MAX_MSG_QUEUE_SIZE // 2
-++        # Set before super().__init__ so _reading_paused_for_msg_queue() is safe
-++        # if BaseProtocol ever triggers a resume during init.
 ++        self._msg_queue_paused = False
-++
 +         super().__init__(loop)
 + 
-+         self._request_count = 0
-+@@ -224,6 +240,7 @@ class RequestHandler(BaseProtocol):
++         # _request_count is the number of requests processed with the same connection.
++@@ -237,6 +250,7 @@ class RequestHandler(BaseProtocol):
 +             max_headers=max_headers,
 +             payload_exception=RequestPayloadError,
 +             auto_decompress=auto_decompress,
@@ -475,7 +453,7 @@ index 0000000000..2fc96d59a7
 +         )
 + 
 +         self._timeout_ceil_threshold: float = 5
-+@@ -371,6 +388,14 @@ class RequestHandler(BaseProtocol):
++@@ -429,6 +443,14 @@ class RequestHandler(BaseProtocol):
 +                 # don't set result twice
 +                 waiter.set_result(None)
 + 
@@ -490,7 +468,7 @@ index 0000000000..2fc96d59a7
 +             self._upgrade = upgraded
 +             if upgraded and tail:
 +                 self._message_tail = tail
-+@@ -385,6 +410,36 @@ class RequestHandler(BaseProtocol):
++@@ -443,6 +465,36 @@ class RequestHandler(BaseProtocol):
 +             if eof:
 +                 self.close()
 + 
@@ -527,14 +505,14 @@ index 0000000000..2fc96d59a7
 +     def keep_alive(self, val: bool) -> None:
 +         """Set keep-alive connection mode.
 + 
-+@@ -517,6 +572,18 @@ class RequestHandler(BaseProtocol):
++@@ -575,6 +627,18 @@ class RequestHandler(BaseProtocol):
 + 
 +             message, payload = self._messages.popleft()
 + 
 ++            # Free a parser slot; resume reading once drained to low water so
 ++            # pipelining keeps flowing while this request is handled.
-++            # no branch: _request_parser is only None after connection_lost,
-++            # whose path exits this loop, so the None case is not reachable.
+++            # no branch: _request_parser is only None after connection_lost, whose path
+++            # exits this loop, so the None case is not reachably exercisable.
 ++            if self._request_parser is not None:  # pragma: no branch
 ++                self._request_parser.message_consumed()
 ++            if (
@@ -543,14 +521,14 @@ index 0000000000..2fc96d59a7
 ++            ):
 ++                self._resume_msg_queue_reading()
 ++
-+             start = loop.time()
-+ 
-+             manager.requests_count += 1
++             # time is only fetched if logging is enabled as otherwise
++             # its thrown away and never used.
++             start = loop.time() if self._logging_enabled else None
 +diff --git a/docs/spelling_wordlist.txt b/docs/spelling_wordlist.txt
-+index 34399e6..3fb6d35 100644
++index 382ad414e..e429f8c62 100644
 +--- a/docs/spelling_wordlist.txt
 ++++ b/docs/spelling_wordlist.txt
-+@@ -228,6 +228,7 @@ peername
++@@ -239,6 +239,7 @@ peername
 + performant
 + pickleable
 + ping
@@ -559,10 +537,10 @@ index 0000000000..2fc96d59a7
 + pluggable
 + plugin
 +diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 24b4e50..213761c 100644
++index 8cb591f20..f054e6b3c 100644
 +--- a/tests/test_http_parser.py
 ++++ b/tests/test_http_parser.py
-+@@ -111,6 +111,78 @@ def test_c_parser_loaded():
++@@ -120,6 +120,78 @@ def test_c_parser_loaded():
 +     assert "RawResponseMessageC" in dir(aiohttp.http_parser)
 + 
 + 
@@ -642,27 +620,19 @@ index 0000000000..2fc96d59a7
 +     text = b"""GET /test HTTP/1.1\r
 + test: a line\r
 +diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
-+index e6d01bf..533b132 100644
++index e2fd40432..e26c5ae57 100644
 +--- a/tests/test_web_functional.py
 ++++ b/tests/test_web_functional.py
-+@@ -5,7 +5,7 @@ import pathlib
-+ import socket
-+ import zlib
-+ from contextlib import suppress
-+-from typing import Any, Optional
-++from typing import Any, NoReturn, Optional
-+ from unittest import mock
-+ 
-+ import pytest
-+@@ -27,6 +27,7 @@ from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer
++@@ -29,7 +29,7 @@ from aiohttp.helpers import DEFAULT_CHUNK_SIZE
++ from aiohttp.pytest_plugin import AiohttpClient, AiohttpServer
 + from aiohttp.streams import StreamReader
-+ from aiohttp.test_utils import make_mocked_coro
 + from aiohttp.typedefs import Handler
++-from aiohttp.web_protocol import RequestHandler
 ++from aiohttp.web_protocol import MAX_MSG_QUEUE_SIZE, RequestHandler
 + 
 + try:
 +     import brotlicffi as brotli
-+@@ -1620,6 +1621,136 @@ async def test_response_prepared_with_clone(aiohttp_client) -> None:
++@@ -1687,6 +1687,136 @@ async def test_response_prepared_with_clone(aiohttp_client) -> None:
 +     await resp.release()
 + 
 + 
@@ -684,7 +654,7 @@ index 0000000000..2fc96d59a7
 ++    def observe_data_received(self: RequestHandler, data: bytes) -> None:
 ++        nonlocal max_queued
 ++        data_received(self, data)
-++        if self._current_request is not None and self._messages:
+++        if self._request_in_progress and self._messages:
 ++            max_queued = max(max_queued, len(self._messages))
 ++            queue_observed.set()
 ++
@@ -801,10 +771,10 @@ index 0000000000..2fc96d59a7
 +     aiohttp_server: AiohttpServer,
 +diff --git a/tests/test_web_protocol.py b/tests/test_web_protocol.py
 +new file mode 100644
-+index 0000000..dcda539
++index 000000000..879be2080
 +--- /dev/null
 ++++ b/tests/test_web_protocol.py
-+@@ -0,0 +1,110 @@
++@@ -0,0 +1,112 @@
 ++import asyncio
 ++from unittest import mock
 ++
@@ -821,7 +791,7 @@ index 0000000000..2fc96d59a7
 ++        request_handler=mock.Mock(),
 ++        request_factory=mock.Mock(),
 ++        instance=True,
-++    )  # type: ignore[no-any-return]
+++    )
 ++
 ++
 ++def test_pause_msg_queue_reading_without_transport(
@@ -880,11 +850,13 @@ index 0000000000..2fc96d59a7
 ++    handler = RequestHandler(dummy_manager, loop=loop)
 ++    transport = mock.Mock()
 ++    handler.transport = transport
+++    handler._reading_paused = True
 ++    handler._msg_queue_paused = True
 ++
 ++    handler.resume_reading()
 ++
 ++    transport.resume_reading.assert_not_called()
+++    assert handler._reading_paused is False
 ++
 ++
 ++def test_pause_msg_queue_reading_ignores_unsupported_transport(
@@ -915,16 +887,13 @@ index 0000000000..2fc96d59a7
 ++    handler._resume_msg_queue_reading()
 ++
 ++    assert handler._msg_queue_paused is False
-+-- 
-+2.35.6
-+
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.patch
 new file mode 100644
-index 0000000000..d4f33b6c44
+index 0000000000..c6a318798d
 --- /dev/null
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.patch
-@@ -0,0 +1,181 @@
-+From d460210c19b97fde184843d17487e336698d59da Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,177 @@
++From 47babd8c23ca79e2bae6cc8dcb5752b61e369fc7 Mon Sep 17 00:00:00 2001
 +From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
 +Date: Sun, 9 Aug 2026 17:17:34 +0100
 +Subject: [PATCH] [PR #13356/72eaa429 backport][3.14] Stop handing back
@@ -935,33 +904,30 @@ index 0000000000..d4f33b6c44
 +
 +---------
 +
-+Co-authored-by: Rodrigo Nogueira <rodrigo.b.nogueira@gmail.com>
-+
 +CVE: CVE-2026-54273
 +Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/47babd8c23ca79e2bae6cc8dcb5752b61e369fc7]
 +
 +Backport Changes:
-+- Adapted the required 8943d343 replay behavior to aiohttp 3.9.5
-+  `_request_parser` and `_upgrade` fields. Replayed messages are
-+  retained and queued, and the returned parser tail is preserved.
-+- Applied the 47babd8c queue-pause check after replay and retained
-+  its pure-Python parser tail fix, change note, parser test, and
-+  declined-upgrade functional regression test.
++- Adapted the parser regression test to the 3.13.5 synchronous loop
++  fixture.
++- Adapted finish_response() to the older 3.13.5 replay path by
++  retaining and queueing parser results before enforcing the limit.
 +
++Co-authored-by: Rodrigo Nogueira <rodrigo.b.nogueira@gmail.com>
 +(cherry picked from commit 47babd8c23ca79e2bae6cc8dcb5752b61e369fc7)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/13356.bugfix.rst     |  4 +++
++ CHANGES/13356.bugfix.rst     |  4 ++++
 + aiohttp/http_parser.py       |  2 ++
-+ aiohttp/web_protocol.py      | 18 +++++++++++--
-+ tests/test_http_parser.py    | 18 +++++++++++++
-+ tests/test_web_functional.py | 51 ++++++++++++++++++++++++++++++++++++
++ aiohttp/web_protocol.py      | 16 ++++++++++++++--
++ tests/test_http_parser.py    | 18 ++++++++++++++++++
++ tests/test_web_functional.py | 51 ++++++++++++++++++++++++++++++++++++++++++++
 + 5 files changed, 91 insertions(+), 2 deletions(-)
 + create mode 100644 CHANGES/13356.bugfix.rst
 +
 +diff --git a/CHANGES/13356.bugfix.rst b/CHANGES/13356.bugfix.rst
 +new file mode 100644
-+index 0000000..a961723
++index 000000000..a9617231a
 +--- /dev/null
 ++++ b/CHANGES/13356.bugfix.rst
 +@@ -0,0 +1,4 @@
@@ -970,10 +936,10 @@ index 0000000000..d4f33b6c44
 ++holds. With the pure-Python parser the same requests were also served more
 ++than once -- by :user:`rodrigobnogueira`.
 +diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
-+index 6cf49c7..37a0dff 100644
++index e60fcc690..32375f83a 100644
 +--- a/aiohttp/http_parser.py
 ++++ b/aiohttp/http_parser.py
-+@@ -357,6 +357,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -361,6 +361,8 @@ class HttpParser(abc.ABC, Generic[_MsgT]):
 +                     # any preceding body is consumed before the next request
 +                     # line. Resumes via feed_data(b"") when the queue drains.
 +                     self._tail = data[start_pos:]
@@ -983,10 +949,10 @@ index 0000000000..d4f33b6c44
 +                 pos = data.find(SEP, start_pos)
 +                 # consume \r\n
 +diff --git a/aiohttp/web_protocol.py b/aiohttp/web_protocol.py
-+index baa0290..39a1b68 100644
++index 7ef8f12ed..d9843f969 100644
 +--- a/aiohttp/web_protocol.py
 ++++ b/aiohttp/web_protocol.py
-+@@ -687,8 +687,22 @@ class RequestHandler(BaseProtocol):
++@@ -763,8 +763,22 @@ class RequestHandler(BaseProtocol):
 +             self._request_parser.set_upgraded(False)
 +             self._upgrade = False
 +             if self._message_tail:
@@ -1005,30 +971,30 @@ index 0000000000..d4f33b6c44
 ++                    and len(self._messages) >= self._max_msg_queue_size
 ++                ):
 ++                    self._pause_msg_queue_reading()
-++                # This shouldn't be possible. If a future refactor results in this
-++                # failing, then the code may need to be updated to set the waiter.
+++                # This should not be possible. If a future refactor results in
+++                # this failing, update the code to set the waiter.
 ++                assert self._waiter is None
 +         try:
 +             prepare_meth = resp.prepare
 +         except AttributeError:
 +diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index 213761c..b29518a 100644
++index f054e6b3c..a4e6bc056 100644
 +--- a/tests/test_http_parser.py
 ++++ b/tests/test_http_parser.py
-+@@ -142,6 +142,24 @@ def test_max_msg_queue_size_caps_emitted_messages(
++@@ -151,6 +151,24 @@ def test_max_msg_queue_size_caps_emitted_messages(
 +     assert not upgraded
 + 
 + 
-++async def test_max_msg_queue_size_keeps_tail_to_itself(
+++def test_max_msg_queue_size_keeps_tail_to_itself(
 ++    request_cls: type[HttpRequestParser],
 ++    protocol: BaseProtocol,
+++    loop: asyncio.AbstractEventLoop,
 ++) -> None:
 ++    """The remainder is buffered for the next feed, so it must not be returned.
 ++
 ++    Handing it back as well gives the caller a second copy of bytes the parser
 ++    is already holding, and both copies get parsed.
 ++    """
-++    loop = asyncio.get_running_loop()
 ++    parser = _build_request_parser(request_cls, protocol, loop, 4)
 ++
 ++    messages, _upgraded, tail = parser.feed_data(_PIPELINED_GET * 10)
@@ -1041,10 +1007,10 @@ index 0000000000..d4f33b6c44
 +     request_cls: type[HttpRequestParser],
 +     protocol: BaseProtocol,
 +diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
-+index 533b132..a0e3a8e 100644
++index e26c5ae57..b958bef9d 100644
 +--- a/tests/test_web_functional.py
 ++++ b/tests/test_web_functional.py
-+@@ -1751,6 +1751,57 @@ async def test_http1_pipelined_queue_resumes_after_drain(
++@@ -1817,6 +1817,57 @@ async def test_http1_pipelined_queue_resumes_after_drain(
 +     assert len(handled) == pipelined_requests + 1
 + 
 + 
@@ -1104,20 +1070,35 @@ index 0000000000..d4f33b6c44
 +     aiohttp_server: AiohttpServer,
 +-- 
 +2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-index 88ae49dec4..893d5124f7 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.5.bb
-@@ -34,6 +34,8 @@ SRC_URI += "file://CVE-2024-52304.patch \
-            file://CVE-2026-54277.patch \
-            file://CVE-2026-54278.patch \
-            file://CVE-2026-54279.patch \
-+           file://CVE-2026-54273_p1.patch \
-+           file://CVE-2026-54273_p2.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
+index b9d08ac97b..01162a589a 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
+@@ -17,6 +17,8 @@ SRC_URI += " \
+     file://CVE-2026-54278.patch \
+     file://CVE-2026-54279.patch \
+     file://CVE-2026-54280.patch \
++    file://CVE-2026-54273_p1.patch \
++    file://CVE-2026-54273_p2.patch \
+ "
  
- CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
+ CVE_PRODUCT = "aiohttp"
+@@ -28,7 +30,14 @@ CVE-2026-34520 CVE-2026-34525"
+ 
+ inherit python_setuptools_build_meta pypi 
+ 
+-DEPENDS = "python3-pkgconfig-native"
++DEPENDS = "python3-pkgconfig-native python3-cython-native"
++
++do_configure:prepend() {
++    cython3 -3 -Werror \
++        -I ${S}/aiohttp \
++        -o ${S}/aiohttp/_http_parser.c \
++        ${S}/aiohttp/_http_parser.pyx
++}
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[extras] = ",,,python3-aiodns python3-brotli"
 -- 
 2.35.6
 
