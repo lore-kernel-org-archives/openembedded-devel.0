@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B194CA5FAD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87DD7CA5FB5
 	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 22:57:43 +0000 (UTC)
-Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1464.1790722659394065652
+Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1481.1790722661982152438
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Sep 2026 15:57:39 -0700
+ Tue, 29 Sep 2026 15:57:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=eBTWBrU/;
- spf=pass (domain: gmail.com, ip: 74.125.229.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-34c2a97ec17so387015eec.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=i4kh0WNR;
+ spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33bfb26865fso4691892eec.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790722659; x=1791327459; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790722661; x=1791327461; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=G7OPlAdo4ErmxCXfmbB4bzx87kBLxRnIIQv8IWPuNWE=;
-        b=eBTWBrU/gln6rggd3yDf6KLYcVKvyQFL8wlpJ7eb/cJMif1TXupgaC/CfZOObVyfsa
-         2TfbV6ngeuh8jQFR/4lSzI2i6Kx3ttJwidODAg7K+agTmEeyO7qEN/p+H0TTMPP9lN1O
-         2dsWqeGwwma/2XIKXKk53RvVgdqBdkEBzrd6YQ3Dwmci/wWujwfnmZECzRUlgMrFKu03
-         433h5FAWYs4oCctRTCn2yQI9p/QcKsoLse7ukRMaQdp3QSJeEZ7m7zjhkvhdWgIVuv2A
-         STZkDVsWBHvL5VRQgI4R57ZUYK0I1pKTykIgn3RPFqdwI/qHM0Q1R3awNuks5Yisf/wZ
-         HO3Q==
+        bh=1pUlH6MigxuRrho1dJBcKtchFJUMsTHIf5H3cG9UiGU=;
+        b=i4kh0WNRzyX6YJBTzVnrZfByNGZQKc73OL9sHRCXqW0Yv1uwEaL3O9feqHv1ZGKu5r
+         9lrrfW3IYO9YQPwV2uVtELXz7Sh/GtHRogmVRAMEX9AaFqfu12WkroLgDN750Bsy4zQO
+         z7/jr+EBdEFNqZDZ5iePEDgXPrVl1/mQCL587c2tjd33ZB3iwQRrVWMGiMDijZuAmcsE
+         oXWz9AU9dJ3hSG9xVSprqXHHW+27hUiz/XgVq0n9JuSU5C3ArD8d+h5BnigR0ku2SLR5
+         eELsUsVLGkS9KIHhSbFKsPea2BB4rMjvWCJALmLyIFkHC9u33Rhb/BqI5bUJWWh1NkuZ
+         bqOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790722659; x=1791327459;
+        d=1e100.net; s=20260707; t=1790722661; x=1791327461;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=G7OPlAdo4ErmxCXfmbB4bzx87kBLxRnIIQv8IWPuNWE=;
-        b=KCvVwYe/whOKwmJJP/lU0OuIjVyxosEDEvz711mRuI4W5z4Qv4FKuTsjXVIYSjyyQ7
-         4086G+xpJcPGChqYh1bPwfixBjgX337Q0eKp2is8TzFZI+CjyT3IyorhQNqGI1XThQJB
-         2Bw0thTRvJs2pNF9Sf0biRxQE4XeWmAXl2weps70NCIbvWKfgOwbAC0Q3ZE7dk5G3roZ
-         c3gs2MG7nFX1rQ1zNoqG0I07jRw+CxxCPNI21ABNxuiTIE8+L9rnKdodnHqYNmtfeKO7
-         1Rh7oa/8xJykK3Av/q9w7z7MwmL9V9drOZ0oHwMc5UdmWQg4t1uZ/NbitdIUiI76/HP3
-         oO0A==
-X-Gm-Message-State: AFq9FYKv8RGaNlKHdVACj4i9xt8DIlyu03acNQid0lgqafZLJ63SaLY/
-	tWHuWF2E/r9eUBQEN2OlVrUaV548VOfabMpfLeNwTez4302QuyXH2DsZ2S3LbtBq+14=
-X-Gm-Gg: AYBFou0TFyeFPMbdUXcKK8gTfrEWZWn6JE2M+I/MhiU1CgGZhR7xe9zfhBe4s0OMzru
-	Vmze5RWFaeEKxNgNdebbpoWmKB4ebpd1oBIxs7fB98+siU0r+EiNqQ3h8BRh54wXObLxZLLwcCC
-	9wjmpJxW46qLXKWhTtGjoo2mpdr2CO61c2gsGw5YR9DaZURJOoVjBdc6WuntCDXHsjnz7x5rkcb
-	bTF+58bFWJ4EWTRDH6DDKBt3Guj5xY+oeWq1haovc1/VlsBE8kvpk+bRJkYHpiB/ivrpuAds8q3
-	BUjn+8Uaxtr4IKjqf2APftPUKeUaRU89mVXgG/NNwzq59vMQ1oduFt5bIzUoP0ftUmOk2+YYgR6
-	RL26Hadousa+jBrPx5xnkN/gTPwxBzHLnK+9kaNvqRc8Q3PI5suNPmQMmzsR4miO2L5W0kVri0u
-	W7wexOxUoVoScQzbP6i/jeyRngA0pjXJ8DutEw+6dpZKK4i3XgiYHJkLjqgL8iT6kziqcpmwIxC
-	baSk7DyS21ZpyE8vAlTf3PizqNdNIlC5LPfTqlvkuNLZ20LruUATLU4bKVZxxG/ufn5Sb+rs5Zq
-	qseIn5EKa4FRKDHn0NKigYChnUEMQ8oidgQSSqumX9fnqrgic2WiZL5Autl5eQVgTBnJvondJJ1
-	aPvmwHwA1lK5P/+/5I9SNGHzLJiwgqJT2tM/oQTWwvMkUfzYYtplp+LXkzD6WqTL+A+xfNwF8kI
-	+X8FWRbTyselAuL25FCochK/4HpyQlhcH/B/t+NA==
-X-Received: by 2002:a05:7300:8a30:b0:347:93a3:4d6b with SMTP id 5a478bee46e88-34c6672f1d1mr723152eec.23.1790722653744;
-        Tue, 29 Sep 2026 15:57:33 -0700 (PDT)
+        bh=1pUlH6MigxuRrho1dJBcKtchFJUMsTHIf5H3cG9UiGU=;
+        b=HWiHYc+QqGUmt5t1gtiJxbi4MRFcHEMGFwQo+G1w2XZ0ncBjaMPjQ75YAUWbxCeRX2
+         AMACkG730r+6Vsr0lYKrpPMPxQr89URUObz5wzfxbmoinV7MU1koFbP4zkm0DT4+T+cK
+         N9et8I0bhH0c8OJNffd4Y810KpvlkN/ptgXR+BFUZEqL5PvQifT1DOdMGcvnmo+/3vS9
+         90u2MUAzrdT96qfGysA+UiuW3vN7o+o3YwEU3NbQSde5RuxAVb1MZkgUqJpNFeaU02B6
+         TJYd2FVq2BKapRImJYOwDx/AkFJHHehTW5U5x3bfX2YwwOHfWLit6BjrhmRhqip585H2
+         +qtQ==
+X-Gm-Message-State: AFq9FYKw+8zRp+qDO4kAukGGWVgwfHT5TT8+cWvh3RAg2CTD1lmAPAi8
+	x+04vsj8sO1K0PlJnKk82KeioClSKuNp7ODUvTA5fzor2WFDUuTKvv4tL13j37w0wTQ=
+X-Gm-Gg: AYBFou21jV52FwJjC4D/sK+SxNJcWyCtY0hqTA8S4M5nfLdX+eRWd/XrPQ32TOa+/7m
+	68TXkaH9PAvO7siLO/rC8ZQVDdYxCT8Pi6sOGdKSQTjftyC7yRNHxtHxGMpxU+s93nBLPXjxKNq
+	4brZzm+X103BWzQgXgZk+v96c2jGTxyWDqJWL86k0zZIXmlHVDQekh1RbOctmwL1iNuEljxvD4/
+	G341bPtRPVfuf5J5mxTSZMw2XoON2eaVlzp/8KtVSgESPL1d4CZvgCxA5Ym8QRPa88DZEsyJSGM
+	SlsXIBSsS0vVRzr2Enanv97PIlHmg7GFUG7lxsk893HXUcwQvwIoyignMv3oI0CE7ReU7ri2Kiy
+	EywQJkGO/vzXpz1tE5VHZhHaoYGDvl/YQSa6kk63rB/2rnl84pJfz3d9b+YXs1/HXQRu0+GTa9P
+	FB69bMaH/IxKb7Y4/dmThQPJMX2VSCmMSBFe8eMGphs7nkelhuDIGQ8u8Km2A1vEhcyxBzI1xYn
+	bNLIc2g6m/12U1lhAsQ8jwdu1duz726I+n8CdgFcc8jZ2G/DK/xxZewo6edBFW+CkUhNMCeeT9o
+	8OYp4SepZXAESYZqGXmZk8kqX1p6ktMHKcqjg0mIu5/piz2oJIxI9rYw2w/NIAxY5yHBUf/0pb+
+	IcWlJmm370abOQAmnb/OzLdjxhb4sG+mb9vrrTARuo+KhZ/JUpdIF5Ju6tSrZSpFF0zx78g1tBN
+	F+j5yrzErxwV0pr8gu+Uym1DK/3wRA7GfL8Jicyg==
+X-Received: by 2002:a05:7300:c01b:20b0:348:201a:6c8b with SMTP id 5a478bee46e88-34c642e07d6mr1030875eec.38.1790722661086;
+        Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.32
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 15:57:32 -0700 (PDT)
+        Tue, 29 Sep 2026 15:57:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 06/26] bit7z: replace glibc LFS64 names with portable POSIX ones for musl
-Date: Tue, 29 Sep 2026 15:57:03 -0700
-Message-ID: <20260929225723.1046705-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 08/26] ettercap: don't strip a pre-existing _GNU_SOURCE define in ec.h
+Date: Tue, 29 Sep 2026 15:57:05 -0700
+Message-ID: <20260929225723.1046705-8-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
 References: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
@@ -72,95 +72,95 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 22:57:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130493
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130495
 
-bit7z's internal code uses off64_t/stat64/lstat64, which musl doesn't
-provide since its off_t is already 64-bit. Use the plain POSIX names.
+ec.h unconditionally #defines _GNU_SOURCE without checking if it is
+already defined, which trips -Werror on musl toolchains that predefine
+it via the driver. Guard the define.
 
 AI-Generated: Uses Claude Code
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...e-glibc-LFS64-names-with-portable-PO.patch | 59 +++++++++++++++++++
- meta-oe/recipes-extended/7zip/bit7z_4.1.0.bb  |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-extended/7zip/bit7z/0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch
+ .../ettercap/ettercap_0.8.4.1.bb              |  1 +
+ ...ip-a-pre-existing-_GNU_SOURCE-define.patch | 58 +++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
 
-diff --git a/meta-oe/recipes-extended/7zip/bit7z/0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch b/meta-oe/recipes-extended/7zip/bit7z/0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
+index e8679bf463..9a2090719b 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
+@@ -22,6 +22,7 @@ DEPENDS += "ethtool \
+ RDEPENDS:${PN} += "bash ethtool libgcc"
+
+ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV} \
++           file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
+            "
+
+ SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
+diff --git a/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
 new file mode 100644
-index 0000000000..eb2e9ae29b
+index 0000000000..126d37ff50
 --- /dev/null
-+++ b/meta-oe/recipes-extended/7zip/bit7z/0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch
-@@ -0,0 +1,59 @@
++++ b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
+@@ -0,0 +1,58 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 29 Sep 2026 01:57:13 +0000
-+Subject: [PATCH] internal: replace glibc LFS64 names with portable POSIX
-+ equivalents
++Date: Tue, 29 Sep 2026 02:00:10 +0000
++Subject: [PATCH] ec.h: do not strip a pre-existing _GNU_SOURCE define
 +
-+musl does not provide the glibc LFS64 off64_t/stat64/lstat64/lseek64/
-+ftruncate64 names at all; off_t/struct stat are already 64-bit on
-+musl, so there is no separate 64-suffixed API. This broke the build
-+on musl targets:
++ec.h temporarily defines __USE_GNU/_GNU_SOURCE around the <string.h>
++include (to pick up memmem()/strsignal() on musl) and then
++unconditionally #undefs them again afterwards. This recipe already
++passes -D_GNU_SOURCE on the command line (CFLAGS += "-D_GNU_SOURCE"),
++so the unconditional #undef strips it right back out for the rest of
++every translation unit that includes ec.h -- which is effectively all
++of them, since ec.h is the first header pulled in everywhere.
 +
-+| src/internal/fsutil.hpp:33:24: error: use of undeclared identifier 'lstat64'; did you mean 'lstat'?
-+| src/internal/fsutil.hpp:34:23: error: 'stat64' does not refer to a value
-+| src/internal/fsutil.hpp:185:6: error: incomplete result type 'FileMetadata' (aka 'struct stat64') in function definition
-+
-+Extend the existing BSD/Apple compatibility branches in fsutil.hpp
-+(FileMetadata/os_stat/os_lstat) and filehandle.cpp (NO_LSEEK64) to
-+also apply when building against a non-glibc libc (detected via
-+!defined(__GLIBC__)), so musl uses the same plain POSIX stat/lstat/
-+lseek/ftruncate/off_t names that the BSDs already use.
++On musl, many POSIX/BSD-ish declarations (struct ifreq and IFNAMSIZ in
++<net/if.h>, struct sigaction/sigfillset()/sigaction()/sigwait() in
++<signal.h>, pthread_kill()/pthread_sigmask() in <pthread.h>, isascii()
++in <ctype.h>, nanosleep() in <time.h>) are only exposed when
++_GNU_SOURCE (or an equivalent feature test macro) is defined at the
++point those headers are processed. Once ec.h undefines it, headers
++included later in the same file lose that exposure and fail to
++compile. glibc does not gate these declarations as strictly, so this
++was never observed there. Only undo the temporary define if ec.h
++itself introduced it, leaving an externally supplied -D_GNU_SOURCE
++intact for the remainder of the translation unit.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ src/internal/filehandle.cpp | 5 ++++-
-+ src/internal/fsutil.hpp     | 5 ++++-
-+ 2 files changed, 8 insertions(+), 2 deletions(-)
++ include/ec.h | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/internal/filehandle.cpp b/src/internal/filehandle.cpp
-+index 4cff411..22aeeef 100644
-+--- a/src/internal/filehandle.cpp
-++++ b/src/internal/filehandle.cpp
-+@@ -24,7 +24,10 @@
++--- a/include/ec.h
+++++ b/include/ec.h
++@@ -20,19 +20,23 @@
++
++ #if !defined (__USE_GNU)   /* for memmem(), strsignal(), etc etc... */
++    #define __USE_GNU
+++   #define EC_UNDEF_USE_GNU
++ #endif
++ #if !defined (_GNU_SOURCE) /* for memmem(), strsignal(), etc etc... on musl */
++    #define _GNU_SOURCE
+++   #define EC_UNDEF_GNU_SOURCE
++ #endif
++ #ifdef OS_SOLARIS
++    #define _REENTRANT      /* for strtok_r() */
++ #endif
++ #include <string.h>
++-#if defined (__USE_GNU)
+++#if defined (EC_UNDEF_USE_GNU)
++    #undef __USE_GNU
+++   #undef EC_UNDEF_USE_GNU
++ #endif
++-#if defined (_GNU_SOURCE)
+++#if defined (EC_UNDEF_GNU_SOURCE)
++    #undef _GNU_SOURCE
+++   #undef EC_UNDEF_GNU_SOURCE
++ #endif
++ #include <strings.h>
 + #include <unistd.h>
-+
-+ #if defined( __APPLE__ ) || defined( BSD ) || \
-+-    defined( __FreeBSD__ ) || defined( __NetBSD__ ) || defined( __OpenBSD__ ) || defined( __DragonFly__ )
-++    defined( __FreeBSD__ ) || defined( __NetBSD__ ) || defined( __OpenBSD__ ) || defined( __DragonFly__ ) || \
-++    !defined( __GLIBC__ )
-++/* musl (and the BSDs) do not provide the glibc LFS64 lseek64/ftruncate64/off64_t names;
-++ * off_t is already 64-bit there, so lseek/ftruncate with off_t suffice. */
-+ #define NO_LSEEK64
-+ #endif
-+ #endif
-+diff --git a/src/internal/fsutil.hpp b/src/internal/fsutil.hpp
-+index eaf9ae9..2b173c1 100644
-+--- a/src/internal/fsutil.hpp
-++++ b/src/internal/fsutil.hpp
-+@@ -24,7 +24,10 @@
-+ #include <sys/stat.h>
-+
-+ #   if defined( __APPLE__ ) || defined( BSD ) || \
-+-        defined( __FreeBSD__ ) || defined( __NetBSD__ ) || defined( __OpenBSD__ ) || defined( __DragonFly__ )
-++        defined( __FreeBSD__ ) || defined( __NetBSD__ ) || defined( __OpenBSD__ ) || defined( __DragonFly__ ) || \
-++        !defined( __GLIBC__ )
-++/* musl (and the BSDs) do not provide the glibc LFS64 stat64/lstat64 names;
-++ * their off_t/struct stat are already 64-bit, so the plain POSIX names suffice. */
-+ using FileMetadata = struct stat;
-+ const auto os_lstat = &lstat;
-+ const auto os_stat = &stat;
-diff --git a/meta-oe/recipes-extended/7zip/bit7z_4.1.0.bb b/meta-oe/recipes-extended/7zip/bit7z_4.1.0.bb
-index 5f0b65b3cc..d0693cc5f1 100644
---- a/meta-oe/recipes-extended/7zip/bit7z_4.1.0.bb
-+++ b/meta-oe/recipes-extended/7zip/bit7z_4.1.0.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=48a3fe23ed1353e0995dadfda05ffdb6"
- 
- SRC_URI = " \
-     git://github.com/rikyoz/bit7z.git;protocol=https;branch=master;tag=v${PV} \
-+    file://0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch \
-     ${@bb.utils.contains('PTEST_ENABLED', '1', d.getVar('SRC_URI_PTEST'), 'file://0001-cmake-disable-dependency-inclusion.patch', d)} \
- "
- 
 
