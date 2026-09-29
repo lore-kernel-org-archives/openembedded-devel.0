@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9EABCA5FB3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D0B6CA5FB8
 	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 22:57:43 +0000 (UTC)
 Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1482.1790722662985576206
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1480.1790722660807983393
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Sep 2026 15:57:43 -0700
+ Tue, 29 Sep 2026 15:57:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=hXrC81rE;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kAFBkaBj;
  spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33e46a15703so4541133eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:42 -0700 (PDT)
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33c11ef641aso4996457eec.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790722662; x=1791327462; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790722660; x=1791327460; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=VpMJhyeaey6DBL6emw/+/Bj0T/6rMQuI9X52auIBuKs=;
-        b=hXrC81rEIBQWkVSAjXCsWnscGdzaHvGD0ETs1hGDIb0eCTJPnn2cVb23WO1T+tBsei
-         /TFxsLy6/ZW2Jlx0C7rGysc+dUd9X0oDsVVaOYVj9cLBQp23bj/Lj2MarhTE62t/63j/
-         qHdIu7cxqlZWxO3meEafJe7sQSOQlEJ2c2b04Mi395+gRT8xpzPrheNeL1XHo1Sw+4Co
-         nl8VtwjepmlAT2cGaY/O/14b4K4qLHo7htkaiR3crmgCwYPvM8l1YcflZwBpqY+uptbl
-         eRQKIP0VAvPQ7kNxK+L2uLTeV1gDx6zV2otAR7cZ5nlImtrhsVkeXc3NM1vE5jJi8dTv
-         qNSw==
+        bh=m2IRv/FdD5IfCHVTbQjBNYBf0VfO9Nti23eMGacRHRg=;
+        b=kAFBkaBjy4d/5EFJUcazvdXA8pVRB7x4BaM/aaLjC+s3eWMvS74KezozwMLeXr9G2M
+         5RBoPJa1sUmWH7xap8JjPuHA8g6v/4OZApMOOJiAmZq7SNMjzGMAc7/AmMIckRy6zMHB
+         EH/BLgueYVPny1qCiZx+vzAf+eGGw8JpCAVjPzmVe1g2f/6s5rp2JCB/Bf7lCYh++BEw
+         w4aBCYk6I7bNQD4DJEf6xv3zKofvK5TUiCFlwEtzdkRg9Vly9rLE/k2b6RRyynnBrISe
+         kTgVIRO4I+uEBkx4uKWkt7+R4jGSbbA6iDa0wx428FxS19Zf4WWLiYn+Y9mEyc6oF6RY
+         Z5fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790722662; x=1791327462;
+        d=1e100.net; s=20260707; t=1790722660; x=1791327460;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=VpMJhyeaey6DBL6emw/+/Bj0T/6rMQuI9X52auIBuKs=;
-        b=kYgp80KJb6d5Ahp4fOkOOPt7qKJ5CZKBU9zdAN2o2/9bChrOFUjqimy+oFosrYLRpw
-         8SqcY7Ck4AaIQxn/Mv3X8qpi2WqrOJxzUHcVdBqTqprbqOPKnt29trrbss/jGODfSBqh
-         HsyJCKuR9FRcobPU9xkNIT5PBb8B12stTNZXFu13c9P3n99rdam1UFt3W+Xsxcn5m907
-         LnTMS8GCHKEOcS8hpxbPFscaxrIQDhgTMkzmE48erjFxCNlK9XhW6QRI6cKJ93549Bqk
-         T0Bx+4GdbrXhzklmPdr5z6I6Sc0oewEWrjyULNUGDyQzcKVnfZrpkjH4Ngg3/MMdDgFC
-         /Pgg==
-X-Gm-Message-State: AFq9FYI2pA86uSzhl3EGnUgrq7MH11kFx5TNFrKagyBLayzd2/+VLJ7C
-	63JDZVTdZYl3Gu7E+XozHg47dfQzK4DBzjZYNDWBwQ7k9t76iZeAekomfViXlgY3270=
-X-Gm-Gg: AYBFou07tcVcVgf/gpXV44HGHUYcBETosyAWdm4gIEEDisj1XpDtrYO6SM/5H5ObCRp
-	C8fmo5DSxPT3Y4WdeUcCfN9AFM7/U7gy7wlaFe7K/z8yRDtKXy7TMG05JFmFZAFnOGIdvKb64Ae
-	dfiIilOgnyC+TGNaMd8JowthUruJo2t/ZYW1nCRpnLk/jWDYW/LLHgp7DTIpOxcuhNHfg1ckn/n
-	KmAXvibgmlgpy8lO7DlHWj2sgZun4jCpiGyd+flLcZkS7oGIHGWAwddW4Z/HVI/ms+iEKT1d/bz
-	LVU4iaP/WswxctBIO0kF3MtaXqh1EwOD445ofJPCWrKmzIMRbMAmJMRtqKHlzp/NLOTHT05309j
-	IrMrSfb4JuZCyUhRxdBWUQBJz/BkXyJpIDbJ55qIuItjp+PTwlnMsDpSjo57no7S/oDCNoR4c5b
-	MEFQTZVw3yQcSCCvQ3UQQHONUny0jpprPYPS9JJZy7aMpgqmYUklHuAORD+5iRGnxfyQ3ZtAI6G
-	LQCkp3yRZj6gGkPz4BTA/L04Fbnfqrxj8lpWPlsGdD1ENZBKfn9poc+FcPF3M08jYCCFlCPUdcl
-	Lq6G6A1Uq+z5qd4196qb8mgWiR+ObaVbgwT37m4lJqWkmxSyu0Uo2WNOpVC5WVF0YksDKHrciX0
-	9v4tPMXHeb6vZW3jvDsQQiTRia7Kc6ss1R7rvAsu4wEbqSmlS/AUXmt5WrV5DufJHiaI+jyTJ18
-	Dh5RCgJeTdj5reWIwpG7aIo8K+QJrIbxmii5xFYea15zgbW1sg
-X-Received: by 2002:a05:7300:c389:b0:327:e68e:3230 with SMTP id 5a478bee46e88-34c65c625bdmr767565eec.10.1790722662239;
-        Tue, 29 Sep 2026 15:57:42 -0700 (PDT)
+        bh=m2IRv/FdD5IfCHVTbQjBNYBf0VfO9Nti23eMGacRHRg=;
+        b=ecVJbUCmDC+1H3Kjl6rIJ6XjqITC9nWD59bQf9AORUYB+pOIXHJI1t5gJztvfIMKub
+         97VInv6tnS8amxeV79sSupqDOZGMjMel8QHYFA4DiDUJbDnYAsVMg8KpVwZKfIfzF0/b
+         WgZyotA/rRA7MdoRaxrw15QZuKoGcm9a0Hjex7pmUrRVmB8xTTh5+ZdtnTqeyR7pHwab
+         /VNhmAjFZdUDhtqhEge7tso/CkgEG5rP8d2S1tqtJUDcJgCKbnr3OY1mU99Gpf+KahRB
+         psI0q0Bw3fh76SVRKwD8KeB2tEo+3R7KNnsubvXqSzOyPgSa7jiB5ZHhGC8VwrpFmWCp
+         qmTQ==
+X-Gm-Message-State: AFq9FYJMCGEveRQy+CShkjGMbYvmG5D5b9RBGfFZ7SAdPpsAcE9cylU7
+	f+JyOglBRu8+zOYa8xET0SID6QnLEVzcUqd4BNO25EMicARiNYH5bVgLv8gJhUdb4eE=
+X-Gm-Gg: AYBFou2teEpItkO9osXLVR8qkK49p9dK7QdgZyo2++wiMwfG996ZsYnh9fg38B7kkUg
+	i6t9CcfLgjNuxbrRUwSl/AjHJRZJ5CARhnZpRTVdrelDM4fFJGX5LzhDk6yH8sjd1Mu7NHqpQn1
+	lDsRUnkXwYRRnT1Xa/YZNE8FPIDP6kzBNotxqmU/MrovGztWQQSxaB94aIUrmuMI0JcBDzNaa/T
+	tTiL2JP2STVCtvLliN2jo5Aeo1yP8U/YwmHKnciUrJDvsUAVUEUrnoGxjo4V3Xz4gXFylv/9BTd
+	RkGs8ZFT58gpSxCxuiIqbWzHnNowi+6y6Kzsm6NGTYM2PDJl0NTPBPYwVx53iCxhHGmmWOjU6a2
+	HlZr1kaN5W7UUIhLHBGcq1IbirvIHlKK5QhhurHAKKukm2W1+YMECTxuJq5HjYJtJmoX/5EvmGi
+	UhB9dMVLU5FrBAw3tATtam/u4SRTnxGwQfidk05jF6pG8LMHwfDO+2mY5JUaUTKbDkFNl77lF7r
+	eZr1nZfMMcEJJWOFOsRJGGAeEsGNPeiRmpHv3KOUqG5hiYk57pcS8/2qMtKixJ8dpGG49CUfvdU
+	yVvytBY5V0MQpz4tIzicdRruYVndSHVty+WIqtCiILTjmM/goO5+ujaE200lu8yU6D5hMj1i5Uh
+	DnrAynazfLpKL4BZvf0wMWghQzSCe3eOgzGoCk7/0zPZmyx50uYcg0jAaEsbm/qVcrMs3/PXxL5
+	KO350qJL8gT6JpNdyws3Qq61f8tuAJdCSCbSxSoQ==
+X-Received: by 2002:a05:7301:b0e:b0:34b:efa3:ea63 with SMTP id 5a478bee46e88-34c678b98a9mr870217eec.28.1790722659753;
+        Tue, 29 Sep 2026 15:57:39 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.41
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
+        Tue, 29 Sep 2026 15:57:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 09/26] switchtec-user: include switchtec-endian.h for musl htole32/le32toh
-Date: Tue, 29 Sep 2026 15:57:06 -0700
-Message-ID: <20260929225723.1046705-9-khem.raj@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH 07/26] libdvdread: fix off64_t definition in dvd_filesystem.h for musl
+Date: Tue, 29 Sep 2026 15:57:04 -0700
+Message-ID: <20260929225723.1046705-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
 References: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
@@ -72,81 +72,80 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 22:57:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130496
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130494
 
-lib/cap-cli-main.c uses htole32()/le32toh() from <endian.h> without
-including it directly; pull it in via the project's own endian
-compat header.
+dvd_filesystem.h unconditionally uses the glibc LFS64 off64_t name.
+musl's off_t is already 64-bit, so typedef it the same way the other
+non-glibc branches already do. This also fixes libdvdnav, which
+consumes this staged header.
 
 AI-Generated: Uses Claude Code
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...n-include-switchtec-endian.h-for-mus.patch | 44 +++++++++++++++++++
- .../switchtec-user/switchtec-user_4.4.bb      |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
+ ...em.h-fix-off64_t-definition-for-musl.patch | 39 +++++++++++++++++++
+ .../libdvdread/libdvdread_7.1.1.bb            |  4 +-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/libdvdread/files/0001-dvd_filesystem.h-fix-off64_t-definition-for-musl.patch
 
-diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch b/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
+diff --git a/meta-multimedia/recipes-multimedia/libdvdread/files/0001-dvd_filesystem.h-fix-off64_t-definition-for-musl.patch b/meta-multimedia/recipes-multimedia/libdvdread/files/0001-dvd_filesystem.h-fix-off64_t-definition-for-musl.patch
 new file mode 100644
-index 0000000000..c59e76e496
+index 0000000000..e73e93ed38
 --- /dev/null
-+++ b/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
-@@ -0,0 +1,44 @@
++++ b/meta-multimedia/recipes-multimedia/libdvdread/files/0001-dvd_filesystem.h-fix-off64_t-definition-for-musl.patch
+@@ -0,0 +1,39 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 29 Sep 2026 01:56:40 +0000
-+Subject: [PATCH] lib/cap, cli/main: include switchtec/endian.h for musl
++Date: Tue, 29 Sep 2026 02:05:57 +0000
++Subject: [PATCH] dvd_filesystem.h: fix off64_t definition for musl
 +
-+lib/cap.c and cli/main.c call htole32()/le32toh()/le64toh() etc.
-+without including inc/switchtec/endian.h, the project's own portable
-+endian-conversion shim (already used by lib/diag.c, lib/switchtec.c,
-+lib/pmon.c, lib/fw.c, lib/fabric.c, cli/mfg.c and cli/diag.c). On
-+glibc this went unnoticed because some other transitively-included
-+header happens to pull in <endian.h> as a side effect, but musl's
-+headers don't have that side effect, so building with musl libc fails
-+with "call to undeclared function 'htole32'" and friends. Add the
-+missing include to both files so they pick up the same <endian.h>
-+declarations (switchtec/endian.h just wraps <endian.h> on Linux,
-+which musl provides unconditionally, unlike glibc which historically
-+gated it behind feature-test macros).
++dvd_filesystem.h defines off64_t itself for _MSC_VER, __GLIBC__, and a
++fixed list of BSD-like libcs (Apple, FreeBSD, OpenBSD, NetBSD,
++DragonFly) whose off_t is already 64-bit. musl falls into none of
++these branches, so off64_t stays undeclared, which breaks any
++consumer of this public installed header (e.g. libdvdnav):
++
++| dvd_filesystem.h:87:5: error: type name requires a specifier or qualifier
++| dvd_filesystem.h:87:39: error: unknown type name 'off64_t'; did you mean 'off_t'?
++
++musl's off_t is also already 64-bit (there is no separate LFS64 API),
++same as the BSDs/Apple, so replace the closed list of libcs with a
++catch-all "else", covering musl (and any other libc in the same
++situation) alongside the ones already listed.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+diff --git a/cli/main.c b/cli/main.c
-+index 6dc4524..b0bdcc3 100644
-+--- a/cli/main.c
-++++ b/cli/main.c
-+@@ -33,6 +33,7 @@
-+ #include <switchtec/errors.h>
-+ #include <switchtec/utils.h>
-+ #include <switchtec/pci.h>
-++#include <switchtec/endian.h>
-+ 
-+ #include <locale.h>
-+ #include <time.h>
-+diff --git a/lib/cap.c b/lib/cap.c
-+index b10685f..52ee3f5 100644
-+--- a/lib/cap.c
-++++ b/lib/cap.c
-+@@ -32,6 +32,7 @@
-+ #include "switchtec/cap.h"
-+ #include "switchtec/switchtec.h"
-+ #include "switchtec/mrpc.h"
-++#include "switchtec/endian.h"
-+ #include "switchtec_priv.h"
-+ 
-+ #include <stddef.h>
-diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
-index 61d431178a..32c75c1bfe 100644
---- a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
-+++ b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
-@@ -8,6 +8,7 @@ DEPENDS = "ncurses openssl"
- 
- SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master;tag=v${PV} \
-            file://0001-lib-diag-do-not-use-a-variable-length-array-in-a-str.patch \
-+           file://0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch \
-            "
- SRCREV = "d995512f3bf1ceb98eefada813642d5ba5d62cd1"
- 
++ src/dvdread/dvd_filesystem.h | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/src/dvdread/dvd_filesystem.h b/src/dvdread/dvd_filesystem.h
++index 1111111..2222222 100644
++--- a/src/dvdread/dvd_filesystem.h
+++++ b/src/dvdread/dvd_filesystem.h
++@@ -37,8 +37,9 @@
++ #elif defined(__GLIBC__)
++ /* sys/types.h may have been included before _LARGEFILE64_SOURCE was defined. */
++ typedef __off64_t off64_t;
++-#elif defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__)
++-/* off_t is already 64 bit here so off64_t is not provided. */
+++#else
+++/* musl (and the BSDs, and Apple's libc) do not provide the glibc LFS64
+++ * off64_t name; their off_t is already 64 bit, so it can be used as-is. */
++ typedef off_t off64_t;
++ #endif
+diff --git a/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.1.1.bb b/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.1.1.bb
+index f57515f732..7b644a1265 100644
+--- a/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.1.1.bb
++++ b/meta-multimedia/recipes-multimedia/libdvdread/libdvdread_7.1.1.bb
+@@ -3,7 +3,9 @@ SECTION = "libs/multimedia"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
+
+-SRC_URI = "https://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.xz"
++SRC_URI = "https://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.xz \
++           file://0001-dvd_filesystem.h-fix-off64_t-definition-for-musl.patch \
++"
+ SRC_URI[sha256sum] = "a0d47876548bec806774bbf8dbf20bb19ba139464383156b32eb8e59915b90a9"
+
+ inherit meson lib_package binconfig pkgconfig manpages
 
