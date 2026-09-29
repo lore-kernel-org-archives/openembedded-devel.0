@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87DD7CA5FB5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9EABCA5FB3
 	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 22:57:43 +0000 (UTC)
 Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1481.1790722661982152438
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1482.1790722662985576206
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Sep 2026 15:57:42 -0700
+ Tue, 29 Sep 2026 15:57:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=i4kh0WNR;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hXrC81rE;
  spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33bfb26865fso4691892eec.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33e46a15703so4541133eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790722661; x=1791327461; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790722662; x=1791327462; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1pUlH6MigxuRrho1dJBcKtchFJUMsTHIf5H3cG9UiGU=;
-        b=i4kh0WNRzyX6YJBTzVnrZfByNGZQKc73OL9sHRCXqW0Yv1uwEaL3O9feqHv1ZGKu5r
-         9lrrfW3IYO9YQPwV2uVtELXz7Sh/GtHRogmVRAMEX9AaFqfu12WkroLgDN750Bsy4zQO
-         z7/jr+EBdEFNqZDZ5iePEDgXPrVl1/mQCL587c2tjd33ZB3iwQRrVWMGiMDijZuAmcsE
-         oXWz9AU9dJ3hSG9xVSprqXHHW+27hUiz/XgVq0n9JuSU5C3ArD8d+h5BnigR0ku2SLR5
-         eELsUsVLGkS9KIHhSbFKsPea2BB4rMjvWCJALmLyIFkHC9u33Rhb/BqI5bUJWWh1NkuZ
-         bqOw==
+        bh=VpMJhyeaey6DBL6emw/+/Bj0T/6rMQuI9X52auIBuKs=;
+        b=hXrC81rEIBQWkVSAjXCsWnscGdzaHvGD0ETs1hGDIb0eCTJPnn2cVb23WO1T+tBsei
+         /TFxsLy6/ZW2Jlx0C7rGysc+dUd9X0oDsVVaOYVj9cLBQp23bj/Lj2MarhTE62t/63j/
+         qHdIu7cxqlZWxO3meEafJe7sQSOQlEJ2c2b04Mi395+gRT8xpzPrheNeL1XHo1Sw+4Co
+         nl8VtwjepmlAT2cGaY/O/14b4K4qLHo7htkaiR3crmgCwYPvM8l1YcflZwBpqY+uptbl
+         eRQKIP0VAvPQ7kNxK+L2uLTeV1gDx6zV2otAR7cZ5nlImtrhsVkeXc3NM1vE5jJi8dTv
+         qNSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790722661; x=1791327461;
+        d=1e100.net; s=20260707; t=1790722662; x=1791327462;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1pUlH6MigxuRrho1dJBcKtchFJUMsTHIf5H3cG9UiGU=;
-        b=HWiHYc+QqGUmt5t1gtiJxbi4MRFcHEMGFwQo+G1w2XZ0ncBjaMPjQ75YAUWbxCeRX2
-         AMACkG730r+6Vsr0lYKrpPMPxQr89URUObz5wzfxbmoinV7MU1koFbP4zkm0DT4+T+cK
-         N9et8I0bhH0c8OJNffd4Y810KpvlkN/ptgXR+BFUZEqL5PvQifT1DOdMGcvnmo+/3vS9
-         90u2MUAzrdT96qfGysA+UiuW3vN7o+o3YwEU3NbQSde5RuxAVb1MZkgUqJpNFeaU02B6
-         TJYd2FVq2BKapRImJYOwDx/AkFJHHehTW5U5x3bfX2YwwOHfWLit6BjrhmRhqip585H2
-         +qtQ==
-X-Gm-Message-State: AFq9FYKw+8zRp+qDO4kAukGGWVgwfHT5TT8+cWvh3RAg2CTD1lmAPAi8
-	x+04vsj8sO1K0PlJnKk82KeioClSKuNp7ODUvTA5fzor2WFDUuTKvv4tL13j37w0wTQ=
-X-Gm-Gg: AYBFou21jV52FwJjC4D/sK+SxNJcWyCtY0hqTA8S4M5nfLdX+eRWd/XrPQ32TOa+/7m
-	68TXkaH9PAvO7siLO/rC8ZQVDdYxCT8Pi6sOGdKSQTjftyC7yRNHxtHxGMpxU+s93nBLPXjxKNq
-	4brZzm+X103BWzQgXgZk+v96c2jGTxyWDqJWL86k0zZIXmlHVDQekh1RbOctmwL1iNuEljxvD4/
-	G341bPtRPVfuf5J5mxTSZMw2XoON2eaVlzp/8KtVSgESPL1d4CZvgCxA5Ym8QRPa88DZEsyJSGM
-	SlsXIBSsS0vVRzr2Enanv97PIlHmg7GFUG7lxsk893HXUcwQvwIoyignMv3oI0CE7ReU7ri2Kiy
-	EywQJkGO/vzXpz1tE5VHZhHaoYGDvl/YQSa6kk63rB/2rnl84pJfz3d9b+YXs1/HXQRu0+GTa9P
-	FB69bMaH/IxKb7Y4/dmThQPJMX2VSCmMSBFe8eMGphs7nkelhuDIGQ8u8Km2A1vEhcyxBzI1xYn
-	bNLIc2g6m/12U1lhAsQ8jwdu1duz726I+n8CdgFcc8jZ2G/DK/xxZewo6edBFW+CkUhNMCeeT9o
-	8OYp4SepZXAESYZqGXmZk8kqX1p6ktMHKcqjg0mIu5/piz2oJIxI9rYw2w/NIAxY5yHBUf/0pb+
-	IcWlJmm370abOQAmnb/OzLdjxhb4sG+mb9vrrTARuo+KhZ/JUpdIF5Ju6tSrZSpFF0zx78g1tBN
-	F+j5yrzErxwV0pr8gu+Uym1DK/3wRA7GfL8Jicyg==
-X-Received: by 2002:a05:7300:c01b:20b0:348:201a:6c8b with SMTP id 5a478bee46e88-34c642e07d6mr1030875eec.38.1790722661086;
-        Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
+        bh=VpMJhyeaey6DBL6emw/+/Bj0T/6rMQuI9X52auIBuKs=;
+        b=kYgp80KJb6d5Ahp4fOkOOPt7qKJ5CZKBU9zdAN2o2/9bChrOFUjqimy+oFosrYLRpw
+         8SqcY7Ck4AaIQxn/Mv3X8qpi2WqrOJxzUHcVdBqTqprbqOPKnt29trrbss/jGODfSBqh
+         HsyJCKuR9FRcobPU9xkNIT5PBb8B12stTNZXFu13c9P3n99rdam1UFt3W+Xsxcn5m907
+         LnTMS8GCHKEOcS8hpxbPFscaxrIQDhgTMkzmE48erjFxCNlK9XhW6QRI6cKJ93549Bqk
+         T0Bx+4GdbrXhzklmPdr5z6I6Sc0oewEWrjyULNUGDyQzcKVnfZrpkjH4Ngg3/MMdDgFC
+         /Pgg==
+X-Gm-Message-State: AFq9FYI2pA86uSzhl3EGnUgrq7MH11kFx5TNFrKagyBLayzd2/+VLJ7C
+	63JDZVTdZYl3Gu7E+XozHg47dfQzK4DBzjZYNDWBwQ7k9t76iZeAekomfViXlgY3270=
+X-Gm-Gg: AYBFou07tcVcVgf/gpXV44HGHUYcBETosyAWdm4gIEEDisj1XpDtrYO6SM/5H5ObCRp
+	C8fmo5DSxPT3Y4WdeUcCfN9AFM7/U7gy7wlaFe7K/z8yRDtKXy7TMG05JFmFZAFnOGIdvKb64Ae
+	dfiIilOgnyC+TGNaMd8JowthUruJo2t/ZYW1nCRpnLk/jWDYW/LLHgp7DTIpOxcuhNHfg1ckn/n
+	KmAXvibgmlgpy8lO7DlHWj2sgZun4jCpiGyd+flLcZkS7oGIHGWAwddW4Z/HVI/ms+iEKT1d/bz
+	LVU4iaP/WswxctBIO0kF3MtaXqh1EwOD445ofJPCWrKmzIMRbMAmJMRtqKHlzp/NLOTHT05309j
+	IrMrSfb4JuZCyUhRxdBWUQBJz/BkXyJpIDbJ55qIuItjp+PTwlnMsDpSjo57no7S/oDCNoR4c5b
+	MEFQTZVw3yQcSCCvQ3UQQHONUny0jpprPYPS9JJZy7aMpgqmYUklHuAORD+5iRGnxfyQ3ZtAI6G
+	LQCkp3yRZj6gGkPz4BTA/L04Fbnfqrxj8lpWPlsGdD1ENZBKfn9poc+FcPF3M08jYCCFlCPUdcl
+	Lq6G6A1Uq+z5qd4196qb8mgWiR+ObaVbgwT37m4lJqWkmxSyu0Uo2WNOpVC5WVF0YksDKHrciX0
+	9v4tPMXHeb6vZW3jvDsQQiTRia7Kc6ss1R7rvAsu4wEbqSmlS/AUXmt5WrV5DufJHiaI+jyTJ18
+	Dh5RCgJeTdj5reWIwpG7aIo8K+QJrIbxmii5xFYea15zgbW1sg
+X-Received: by 2002:a05:7300:c389:b0:327:e68e:3230 with SMTP id 5a478bee46e88-34c65c625bdmr767565eec.10.1790722662239;
+        Tue, 29 Sep 2026 15:57:42 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.40
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 15:57:40 -0700 (PDT)
+        Tue, 29 Sep 2026 15:57:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 08/26] ettercap: don't strip a pre-existing _GNU_SOURCE define in ec.h
-Date: Tue, 29 Sep 2026 15:57:05 -0700
-Message-ID: <20260929225723.1046705-8-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 09/26] switchtec-user: include switchtec-endian.h for musl htole32/le32toh
+Date: Tue, 29 Sep 2026 15:57:06 -0700
+Message-ID: <20260929225723.1046705-9-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
 References: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
@@ -72,95 +72,81 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 22:57:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130495
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130496
 
-ec.h unconditionally #defines _GNU_SOURCE without checking if it is
-already defined, which trips -Werror on musl toolchains that predefine
-it via the driver. Guard the define.
+lib/cap-cli-main.c uses htole32()/le32toh() from <endian.h> without
+including it directly; pull it in via the project's own endian
+compat header.
 
 AI-Generated: Uses Claude Code
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../ettercap/ettercap_0.8.4.1.bb              |  1 +
- ...ip-a-pre-existing-_GNU_SOURCE-define.patch | 58 +++++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
+ ...n-include-switchtec-endian.h-for-mus.patch | 44 +++++++++++++++++++
+ .../switchtec-user/switchtec-user_4.4.bb      |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
 
-diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-index e8679bf463..9a2090719b 100644
---- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-+++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.1.bb
-@@ -22,6 +22,7 @@ DEPENDS += "ethtool \
- RDEPENDS:${PN} += "bash ethtool libgcc"
-
- SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV} \
-+           file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
-            "
-
- SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
-diff --git a/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
+diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch b/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
 new file mode 100644
-index 0000000000..126d37ff50
+index 0000000000..c59e76e496
 --- /dev/null
-+++ b/meta-networking/recipes-support/ettercap/files/0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch
-@@ -0,0 +1,58 @@
++++ b/meta-oe/recipes-support/switchtec-user/switchtec-user/0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch
+@@ -0,0 +1,44 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 29 Sep 2026 02:00:10 +0000
-+Subject: [PATCH] ec.h: do not strip a pre-existing _GNU_SOURCE define
++Date: Tue, 29 Sep 2026 01:56:40 +0000
++Subject: [PATCH] lib/cap, cli/main: include switchtec/endian.h for musl
 +
-+ec.h temporarily defines __USE_GNU/_GNU_SOURCE around the <string.h>
-+include (to pick up memmem()/strsignal() on musl) and then
-+unconditionally #undefs them again afterwards. This recipe already
-+passes -D_GNU_SOURCE on the command line (CFLAGS += "-D_GNU_SOURCE"),
-+so the unconditional #undef strips it right back out for the rest of
-+every translation unit that includes ec.h -- which is effectively all
-+of them, since ec.h is the first header pulled in everywhere.
-+
-+On musl, many POSIX/BSD-ish declarations (struct ifreq and IFNAMSIZ in
-+<net/if.h>, struct sigaction/sigfillset()/sigaction()/sigwait() in
-+<signal.h>, pthread_kill()/pthread_sigmask() in <pthread.h>, isascii()
-+in <ctype.h>, nanosleep() in <time.h>) are only exposed when
-+_GNU_SOURCE (or an equivalent feature test macro) is defined at the
-+point those headers are processed. Once ec.h undefines it, headers
-+included later in the same file lose that exposure and fail to
-+compile. glibc does not gate these declarations as strictly, so this
-+was never observed there. Only undo the temporary define if ec.h
-+itself introduced it, leaving an externally supplied -D_GNU_SOURCE
-+intact for the remainder of the translation unit.
++lib/cap.c and cli/main.c call htole32()/le32toh()/le64toh() etc.
++without including inc/switchtec/endian.h, the project's own portable
++endian-conversion shim (already used by lib/diag.c, lib/switchtec.c,
++lib/pmon.c, lib/fw.c, lib/fabric.c, cli/mfg.c and cli/diag.c). On
++glibc this went unnoticed because some other transitively-included
++header happens to pull in <endian.h> as a side effect, but musl's
++headers don't have that side effect, so building with musl libc fails
++with "call to undeclared function 'htole32'" and friends. Add the
++missing include to both files so they pick up the same <endian.h>
++declarations (switchtec/endian.h just wraps <endian.h> on Linux,
++which musl provides unconditionally, unlike glibc which historically
++gated it behind feature-test macros).
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ include/ec.h | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+--- a/include/ec.h
-++++ b/include/ec.h
-+@@ -20,19 +20,23 @@
-+
-+ #if !defined (__USE_GNU)   /* for memmem(), strsignal(), etc etc... */
-+    #define __USE_GNU
-++   #define EC_UNDEF_USE_GNU
-+ #endif
-+ #if !defined (_GNU_SOURCE) /* for memmem(), strsignal(), etc etc... on musl */
-+    #define _GNU_SOURCE
-++   #define EC_UNDEF_GNU_SOURCE
-+ #endif
-+ #ifdef OS_SOLARIS
-+    #define _REENTRANT      /* for strtok_r() */
-+ #endif
-+ #include <string.h>
-+-#if defined (__USE_GNU)
-++#if defined (EC_UNDEF_USE_GNU)
-+    #undef __USE_GNU
-++   #undef EC_UNDEF_USE_GNU
-+ #endif
-+-#if defined (_GNU_SOURCE)
-++#if defined (EC_UNDEF_GNU_SOURCE)
-+    #undef _GNU_SOURCE
-++   #undef EC_UNDEF_GNU_SOURCE
-+ #endif
-+ #include <strings.h>
-+ #include <unistd.h>
++diff --git a/cli/main.c b/cli/main.c
++index 6dc4524..b0bdcc3 100644
++--- a/cli/main.c
+++++ b/cli/main.c
++@@ -33,6 +33,7 @@
++ #include <switchtec/errors.h>
++ #include <switchtec/utils.h>
++ #include <switchtec/pci.h>
+++#include <switchtec/endian.h>
++ 
++ #include <locale.h>
++ #include <time.h>
++diff --git a/lib/cap.c b/lib/cap.c
++index b10685f..52ee3f5 100644
++--- a/lib/cap.c
+++++ b/lib/cap.c
++@@ -32,6 +32,7 @@
++ #include "switchtec/cap.h"
++ #include "switchtec/switchtec.h"
++ #include "switchtec/mrpc.h"
+++#include "switchtec/endian.h"
++ #include "switchtec_priv.h"
++ 
++ #include <stddef.h>
+diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
+index 61d431178a..32c75c1bfe 100644
+--- a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
++++ b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.4.bb
+@@ -8,6 +8,7 @@ DEPENDS = "ncurses openssl"
+ 
+ SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master;tag=v${PV} \
+            file://0001-lib-diag-do-not-use-a-variable-length-array-in-a-str.patch \
++           file://0002-lib-cap-cli-main-include-switchtec-endian.h-for-mus.patch \
+            "
+ SRCREV = "d995512f3bf1ceb98eefada813642d5ba5d62cd1"
+ 
 
