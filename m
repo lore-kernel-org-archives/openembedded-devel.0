@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDDA4CA5FBA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9C79CA5FB8
 	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 22:57:53 +0000 (UTC)
-Received: from mail-dl2-f12.google.com (mail-dl2-f12.google.com [74.125.229.140])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1486.1790722667286829361
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1469.1790722670692499358
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Sep 2026 15:57:47 -0700
+ Tue, 29 Sep 2026 15:57:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ArExJv5h;
- spf=pass (domain: gmail.com, ip: 74.125.229.140, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl2-f12.google.com with SMTP id a92af1059eb24-142dd025d07so4273951c88.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=s3Kg7CJq;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-3115c4451c8so1125256eec.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790722667; x=1791327467; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790722670; x=1791327470; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=KVDOx7rzTRvyrhi9Q6GrcsuJd8gHUCAmi3SL6dpx+cQ=;
-        b=ArExJv5htpfm/b2G0Pa/aS19U0++w8BHHGqFoNpUWAn63gJhj8mMubiT8rOrN2taRY
-         AbSR9SsSCA5RftGONYjL+HeSopUu0jyXoQgIKpHu75XUKyVOFKGyVQjA+NdOjX2kYwKc
-         qhcjmV9kqULlcCBUi4yuE9+rtqjloEXfHqciiRkFhuNtwhI7LkzFmSTh+Q5e5LYhNVuf
-         9RysG/mC3hGARZNO7epA2N9BKF0CphQ8fp+lnddq8mUIuPoAi/B+j9BUZlvhqK4Cr89S
-         G/ea8E4mYbLAfBIZ3QlW4nUTmWYs+MGWBwvWVyro7vcnBX25u+LXTJXtmTxw9WvY83cR
-         ZMkA==
+        bh=EhK16U5EusfOvd5qFw6sh2DrQPK1hOuEr6Z32clDANU=;
+        b=s3Kg7CJqHasorY05G1ZFtAhQLwVaBw2HT/K+nfFEWe74NLeDAA7IeqUaFiH5WOEsvb
+         ILX2sdIyjnGjSRMrOw+hofweMNOLQ3erwSjvdYxIHVhXx4qiAlUvJy+dvfc5gIuClMhb
+         JJu2H40dbl6O9+Hwb72FhsFXi+bmKltGSOF7MRi9gF+dtZk47JwuRj4jRioGPdSoOice
+         yNTdzpnNZK6J1nWKfBjzMRUpJ4aPjW+Ms2BfFLhXcAleZvfYqJM5qhgnks6jHELGx6dT
+         LU0UlItqoWhf4IgeGAnkqfGbEGSLG292eN6IvvF6jkjDglgsbbr40AQuNohSv49UYS2k
+         BI5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790722667; x=1791327467;
+        d=1e100.net; s=20260707; t=1790722670; x=1791327470;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KVDOx7rzTRvyrhi9Q6GrcsuJd8gHUCAmi3SL6dpx+cQ=;
-        b=NQ8dDKmOX7GSY2XnsNFfVabJv93UMHLmwmiL9DLgqvtAiMF5y6yLuNbGO1DBZ43fbz
-         nCwb0a6he8QXb9IDHyX8V1qhcWoCxf/QTaOmQXNA5GiknU4uPpczzC6W82FdJxDaDnEw
-         J5RAVfzt0sbI+ylAolNlD9tUoGyYpiA7Zav9RUCI8zqTDaSQP2y5x/PGDPMifESViYkc
-         TBzE2iPDGWAtE3RwnsfWMyx1348euFqoFEptSKPfINa2Ab4jUIgIaCwYZZJLR+Oh9gEE
-         ZSQq2CW4ZADTE0sOFFlmj7ToGV+4uGI/YdIW4lTNADiu0UIbYyGVJQDwp+NLyaR7B1gY
-         SLCw==
-X-Gm-Message-State: AFuF++kkemQ2BTHG6qEcB+uQW+JB3SSL6N8SLPHnOxfhhal/byWGygjr
-	8E4xzW903TUc6SgRNejwBD+dwDZO1NwQsswqvUbGNPpnIyy+84341NvWxb1EugiRR0E=
-X-Gm-Gg: AYBFou2lksR3dZz3RBSE2p0Wx175fJCe8b34N8Q2Plbw0JFUIlIwj7xUUl2m2zXi8If
-	uUDDEmTclJa74+jM0JSGNmYUzXEuRTd96bTtNfz5QBOTiHLXGxZUGPmRme63rFWtIHOKtjkcmGC
-	FkIMFzEmJhJgzMScTFLa3vyfYFoZvrxKeUSbTZvcNm90xVD4+kVTohECvjVo/4cavXKqGENbvFI
-	8r0HThifJ/OWnwRNRSiA7zbaWvKiG356NC3jZzW2NdPSjFG6NMLSWwSabvTtuZzaKr9M4QXlWPD
-	NkAUvuyfZ0ahW/MSAqaXGanVm2MDBNzqJsQ/63mee2424eOokM55sDXHZaSYDm+VhXhtKUwOSnx
-	NdXazosMGdHfCRaPomiL4R/KNiFuTrNx9m4t9+d4hhl1gmaly+WrTu3CL/aFC0qK+NV9fDRR8DN
-	yDWAq2dTdcbHRMVlfxnySJESr/8JwLh9lbRX6OH9cNhSwLOnpzttcSb31KNTFmMHfhg4i62DcKa
-	8pIXXaIhz/BAF8Dwym0Qa/aCkjiZWVJ00JS2TRcSkvbBCgd6HGtAvXE02V2FsEt95Iv+edXaAs7
-	wbEjCKLcN1UmaVmsMx+XzypcMR/B8Pc80tHm+ZVoseETuot3mEAYkYiwQuTowcNQkXlimdOR8Db
-	mJIj+sUEq7dHelqCAqbQ6MpQ+dsziiku+fBpGLsfGi1cMUDx7ucR+3Gj7vx7SqRcNPaM4ZXdpV5
-	l0NCAdN0tYNsX0eJzhlpHihTyQPfWwnUSyF75Wp6vRn++EhCIcvA==
-X-Received: by 2002:a05:7301:4697:b0:327:c036:1c7a with SMTP id 5a478bee46e88-34c6370d9a1mr915254eec.10.1790722666366;
-        Tue, 29 Sep 2026 15:57:46 -0700 (PDT)
+        bh=EhK16U5EusfOvd5qFw6sh2DrQPK1hOuEr6Z32clDANU=;
+        b=SsJy41CiDug0bD3lv37yPZGtsK2BxuZosKcafkbWmLLdR0m/IyB6vkZ6f0UOsFQgN8
+         Uglvrs66FEXUGaHCpsX2G6cPtDtractlaBEHpLhkyjXHo6oyZz7TBaO9X0qaddpsule7
+         bpqDC4lAOjhXMUaYmjhIgnNrqgOVsZmHDfaLzLwTAJh6TkXWyizw+AAnkGqSeLHeL6+B
+         p/njxu1KuEjPDkil3sNb8cZWFC5YHcFgACJ/rWnEnBPz5FirYHU3QSpw23mOVNH5cDZX
+         n8O0sikVHrAxX9DX83dC5eP59Ua8mapiHD0JaRik4kLPzRLskzkN2ywwwciV2CpQ/Teu
+         k3RA==
+X-Gm-Message-State: AFq9FYL7AADb5xHnIDOa4HX+y6GjTgk2IM/Dk1GaLnSn6j8TxsbdmsFP
+	iDu7bbotaE1AMtcK1IMGE7685Qyeg+tE9IB/CdYSHs1gn33u51EKYLGuPCJ55B+JOII=
+X-Gm-Gg: AYBFou0QdNQ/tdNqbMpEgjl5gg+GQywzeKcc+tRkzyR1/+2v7D1sVSAfhO6Of6Cw/6s
+	inxwYd7pFjO+0kJ3x2dU3/qmRQULXjcK0U3k5BNOoC3CK9TmvZVSv65Szem25ulX1VMQamTvRDO
+	8utEWjFtcU5ekTr5gH5Pr7XupU3Wm24NL5MAraUQOclCJNfJg85CRyNPW6JRN9MY+A3zT0QL5sl
+	qoD3OW54/Kr+J4nL5WaZbHpf7GY3uxjM6NrvEW1pbY+sFHm4r/1YSbFkdTY6T8NIk44g8gbyMUd
+	r+iNTQXMFC345qbirHF9nENep2qt8rg3wJRpaQisG13W1r+PAVzhp5QVIGBoHivceYZAM0u+MNx
+	IQpvA1OAiv8uIoKh1wH+C0UEx/Ou39rbYqMCw/CnKa7xvXfrvp4iWFpOBGfqh8WrcMgVR7kzaak
+	O2z/VVrmpDjjDY4AGFsUCF0aPZudL3paqS4oUudN5W3mQOLfuwmbjaHc1NuRDc3tj4gMMjuRwYI
+	u6hHH4vgVZRyq5ajc3oHW96/7G/vuGBZpMk2AH5eH39d6XZpbXJytWQyqr73vgzVB6b+C2IqyUM
+	vmXXt1xODlYsoKAH8Xe8WIPhshTwYPX2QMIlga14uT4387jf3ERJp4B8uhRW3RMoHA7+VZZrFeG
+	IPt3N9t4NrDjmoFxuKCIoRafAfBIwPVZGApxAAJjz0MkS6MExqEAxAB8V2kX33XrxDRqPCbzy/O
+	PSRJxQ8WNVP6CyySvCKAVOK9Z059477FUe5cfKUn4=
+X-Received: by 2002:a05:7300:cd08:b0:34c:9b33:f384 with SMTP id 5a478bee46e88-34c9b33f40fmr293948eec.11.1790722669874;
+        Tue, 29 Sep 2026 15:57:49 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 15:57:45 -0700 (PDT)
+        Tue, 29 Sep 2026 15:57:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 12/26] bpftrace: define _GNU_SOURCE for pthread_setname_np in testprogs
-Date: Tue, 29 Sep 2026 15:57:09 -0700
-Message-ID: <20260929225723.1046705-12-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 15/26] tcpreplay: fix struct ethhdr redefinition on musl
+Date: Tue, 29 Sep 2026 15:57:12 -0700
+Message-ID: <20260929225723.1046705-15-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
 References: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
@@ -72,64 +72,80 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 22:57:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130499
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130502
 
-A test program uses pthread_setname_np(), a GNU extension that needs
-_GNU_SOURCE defined before <pthread.h> is included to be declared.
+Same struct ethhdr / __UAPI_DEF_ETHHDR ordering issue as xdp-tools:
+common.h/txring.c pull in musl's <netinet/if_ether.h> after the raw
+<linux/if_ether.h> uapi header has already defined struct ethhdr.
 
 AI-Generated: Uses Claude Code
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-define-_GNU_SOURCE-for-pthread_setn.patch | 28 +++++++++++++++++++
- .../bpftrace/bpftrace_0.26.1.bb               |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch
+ ...ix-struct-ethhdr-redefinition-on-mus.patch | 43 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.6.1.bb              |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/0002-common-txring-fix-struct-ethhdr-redefinition-on-mus.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/0002-common-txring-fix-struct-ethhdr-redefinition-on-mus.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/0002-common-txring-fix-struct-ethhdr-redefinition-on-mus.patch
 new file mode 100644
-index 0000000000..d9d297055e
+index 0000000000..827b083712
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace/0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch
-@@ -0,0 +1,28 @@
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/0002-common-txring-fix-struct-ethhdr-redefinition-on-mus.patch
+@@ -0,0 +1,43 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 29 Sep 2026 01:56:02 +0000
-+Subject: [PATCH] tests/testprogs: define _GNU_SOURCE for pthread_setname_np
++Date: Tue, 29 Sep 2026 02:14:39 +0000
++Subject: [PATCH] common/txring: fix struct ethhdr redefinition on musl
 +
-+glibc exposes GNU/BSD extensions such as pthread_setname_np() by default
-+in its headers unless the build is put into a strict ISO mode, whereas
-+musl only exposes these extensions when _GNU_SOURCE is explicitly defined
-+before <pthread.h> is included. Without it, musl's <pthread.h> does not
-+declare pthread_setname_np(), causing an implicit-declaration error under
-+clang's -Werror=implicit-function-declaration (mandatory in C99 and
-+later). Define _GNU_SOURCE before the first include so the declaration is
-+visible on musl too.
++This #if was gated on "__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 1", which is
++false (and always has been) for any non-glibc libc, so musl always took
++the #else branch and included the raw kernel <linux/if_ether.h> uapi
++header. sendpacket.h already brings in musl's own <netinet/if_ether.h>
++earlier in the translation unit; musl's header defines struct ethhdr
++itself and only then defines __UAPI_DEF_ETHHDR as 0, so the *following*
++<linux/if_ether.h> checks that guard and skips its own definition. With
++the #else branch taken, <linux/if_ether.h> is included via this file
++without musl's guard ever being set, so struct ethhdr is defined twice
++and the build fails with a hard redefinition error.
++
++Widen the condition so any libc other than a pre-2.1 glibc uses the
++portable <net/ethernet.h> path (which both glibc and musl have always
++provided) instead of falling through to the raw uapi header.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ tests/testprogs/multi_threads.c | 1 +
-+ 1 file changed, 1 insertion(+)
++--- a/src/common/txring.h
+++++ b/src/common/txring.h
++@@ -38,7 +38,17 @@
 +
-+diff --git a/tests/testprogs/multi_threads.c b/tests/testprogs/multi_threads.c
-+index 1111111..2222222 100644
-+--- a/tests/testprogs/multi_threads.c
-++++ b/tests/testprogs/multi_threads.c
-+@@ -1,3 +1,4 @@
-++#define _GNU_SOURCE
-+ #include <pthread.h>
-+ #include <stdlib.h>
-+ #include <stdio.h>
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-index a2f6a93f66..e217ac150d 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.26.1.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.26.x;protocol=http
-            file://0005-CMakeLists-Add-support-for-LLVM-23.patch \
-            file://0001-tests-pass-C-linker-flags-and-sysroot-to-raw-compile.patch \
-            file://0006-tests-do-not-embed-build-paths-in-split-DWARF-test-pr.patch \
-+           file://0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch \
++ #ifdef HAVE_TX_RING
++
++-#if __GLIBC__ >= 2 && __GLIBC_MINOR__ >= 1
+++/* This block used to be conditioned on plain "__GLIBC__ >= 2 &&
+++ * __GLIBC_MINOR__ >= 1" i.e. it always took the #else branch on non-glibc
+++ * libcs such as musl. That branch's <linux/if_ether.h> then races with
+++ * sendpacket.h's earlier <netinet/if_ether.h>: whichever of the two struct
+++ * ethhdr definitions is seen first "wins" and the second is a hard error
+++ * (musl's <netinet/if_ether.h> defines struct ethhdr unconditionally and
+++ * only afterwards sets __UAPI_DEF_ETHHDR=0, so <linux/if_ether.h> must be
+++ * included after it, not before). <net/ethernet.h> is the safe, universal
+++ * choice here (glibc has always had it too) and avoids the raw uapi header
+++ * entirely. */
+++#if !defined(__GLIBC__) || (__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 1)
++ #include <net/ethernet.h> /* the L2 protocols */
++ #include <linux/if_packet.h>
++ #else
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
+index 8259c4ef1f..5234da282a 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.6.1.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
+
+ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
+     file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
++    file://0002-common-txring-fix-struct-ethhdr-redefinition-on-mus.patch \
  "
- SRCREV = "1bac8a8daad6e0aa579980e877d0c9d5fc296593"
- 
+
+ SRC_URI[sha256sum] = "cc3642816073fb1d96b3af36df4fb66c11f523da427f95b7b0c4c99deaa53afb"
 
