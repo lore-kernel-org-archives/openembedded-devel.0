@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66942CA5FBA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91690CA5FB8
 	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 22:57:33 +0000 (UTC)
-Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1457.1790722649404725205
+Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1459.1790722651799822208
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Sep 2026 15:57:29 -0700
+ Tue, 29 Sep 2026 15:57:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Wb0hcgwV;
- spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33e630052ebso5312277eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=SOORwkG+;
+ spf=pass (domain: gmail.com, ip: 74.125.229.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-34bcb929cceso652793eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 15:57:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790722649; x=1791327449; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790722651; x=1791327451; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ABoeO9i/mOtdU2+b1YIlaU4PofXUKLNyG+q+DfAN23k=;
-        b=Wb0hcgwVDAYZcn3MKUZ5RUp259lq8Q3RvD7Q6S0PjiNC8jSk0SnFu+ZkE2iHjVbwCv
-         OySLLkhd044EYLCgSq9gRxp9dPsAOS7tQulG8Qzvgt5wymj46xdV7eLZLETEBlya0TC+
-         Dw0ru2NfU85Gd+VJ2m8+DzuBrxdd852pQaZUoDtDJb8lPMene3zX2IKorEOfck9lv0Y6
-         DVd49om5sIouRiwri6vFpelXob6ZLWMiyVPaN6tMQ39ahnSThrwOKfWP5QDCOgQibquL
-         QG+BJ0Y5/HlJ3W1sYmdrh12cXvlcswu4CjWscw1taL4P2Nrab4zTScPdKDKf1cn83M7X
-         x/Mw==
+        bh=Cc+4bewFZFYJxbJpp9pjmrEz4JWSivI3kT5ZIrMQ8Sk=;
+        b=SOORwkG+l4e9Bvq0Zi/Q/iShsGv6xSkCP8A1dEl6KvXXAqRye+QjAVU0xf2F4naJBo
+         YcuF6R2AJ+p3JcPoDi/p0OlmfeDC3QYx1NF+O6SqmrfFhejHFbC2QO6N0mLBPbN15XDY
+         F4yEo6RCC341iTGUksbeVdiJKCrkjljjbgolQW7UdzCqoxxzD1Al/Flsn31BnN5eJb0U
+         Poh6Hc/Y9HMdzbk3PWrGUEGyCGkMcShxIoIMtltq+F8agSe1KhfHhC8i4FqDIRscCI3q
+         exxUo924m/Lk8/yeyRBtOq3nf5fWr4TyzHG7iDpb+pUD9cGVPWD6W//82LEEaVLvPo7x
+         eLDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790722649; x=1791327449;
+        d=1e100.net; s=20260707; t=1790722651; x=1791327451;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ABoeO9i/mOtdU2+b1YIlaU4PofXUKLNyG+q+DfAN23k=;
-        b=ulyoLH6sKmlxBjgNv4Tf2trT2zkmTlvXA19UFK+vK2D24E4LzeNE2/sCKgxqMYNbmO
-         40aEW0c8Q2IPlqBRJxwNNXls7h6wB9Vz9NN6zqkW+rrDZvD+mt0Zc0EsdB7uKceTfHEY
-         2pXFcjE0hiBN5sO49fxQAuokFG8UmHn1RXnTmjqaWSVABdW7DMhpwVQCwQLRy3Hd/XbX
-         irD02vkaZaWMAxZDXkUmEaQvxIbhv8saZZj7auhNM1Dyeoe5jzq6H9EZQW1SDRK5Ofbb
-         IXHIEuCtKq+lpJQa5Jyp3jKkR9oK1c1hANXELKVmG4PaiXwb5pgPvCBkYNg1PrOdbKuF
-         /u0w==
-X-Gm-Message-State: AFq9FYLgKioV/ifwYuQZlIVaZ74dHC3haa4NnCA6p/k6eZB7354Zy29p
-	8UkrhXRt6u3pUh3nhtzmiM/mzoS3klw8CYnJdu2HZPpiu9a+6n+hM12MCMwi0I44w1c=
-X-Gm-Gg: AYBFou25E95gbGrePkbsLWrwistCBEe47SD1IMuD7YddZnfQ2F/fM+2Y0h5Ln/xfdSD
-	IMs0vgFHQgIzvffrOtyJ8leYx9rhZmQVLvGU3vilz92rvT9aqC9ozL4v4rVeTTygdDggSX5j74r
-	cU9O13zhVBkhY70tYuIYdtxd8UGiFM/RzRAinjuwI5KktFw5QCmVUgqjHbBbNGUzfsgrqhpUVXM
-	eZKMDa1NKscGabVKd3L7pA4iaCPyX2ElDRVy92ybmQ5ykeMrhLhR47Z1gTLPpOTnXV7NFhaWjzd
-	72s6EFhgUdvsp+PR/8Vbaq3cMnH9j4YQuYinbiRM8QYj387/GJmkV60A45c3jnF38MBQiZkz/i3
-	npL00c7VPElusQisMisx4fBfaEKEcaxRMnntWtiuJbFiRXvZFAIkOUGKJDZo2hrALTlhfeTPNDj
-	tEPSub571ZsxbaelPyKmtDGOhcg+ag9BGQircqaWoV7L4kN8lAhrcOJEp4vx4oZ3+tWYD0fAK3I
-	izI3CPTIley88PzlL0I9gIHepAbH6vuW0L0MZHFBfzWRLt2pgLg3lX+WIokomaXCgAoeWAYT0gp
-	vziAo41EKHjFSBDAjUkzjHSoHbqhwhel9JyTf1UVIUOgSSOhZYc9APjjtUF2qkfiNURhF9kgk/R
-	fCVtlw2JfHdewH6H6bYK0Pcb7RE/mkZj+Oxr90QA5DysC/Re51YwUje3h/cYc3KvXbcrq24LfIU
-	4eZCNtGp/4booziBFPtYu1tm1ucKsrFlvdTBJIXQ==
-X-Received: by 2002:a05:7301:4d05:b0:33c:14c9:c79d with SMTP id 5a478bee46e88-34c664374f5mr816880eec.9.1790722648577;
-        Tue, 29 Sep 2026 15:57:28 -0700 (PDT)
+        bh=Cc+4bewFZFYJxbJpp9pjmrEz4JWSivI3kT5ZIrMQ8Sk=;
+        b=IHHH4atCdnKlxBA6pu3qT/9FqR8iTGozH8sOOYk17rN5CToSoiybw3/drtbbT6Cp9D
+         v7qrdPYFxbU81ZxudK+wqwEvb2UKylIT9CXDiEAPuJYbov2j+5XHBvF1awe+D7RYlWjM
+         5gVo97rS9xt1Usat8Ct/W5faKQHk6eJCp9uqR345kLq5b+Sqoe3H7ssAT9xVIbfoQLkB
+         76ZETEV8jFp4eZfeGI/+YVKZQkrMAozPWSvarqUE7yrenw517HXZeppI8hJFoedPF0NU
+         UoMKA4IPd98/tsApNC3Bjdx0m+qwry0ehnUgA95F3DXBIuQex6u0PaioYqYxOubnjrCQ
+         6PGQ==
+X-Gm-Message-State: AFq9FYJp3DNKCh7qY0f74DMeRwgi9EejxkADZumUEU1eqWI3z3c5R0g4
+	ZIqGEdZD9hwobeJizRFJh7UmwDVGhVPhAKtDUs/QSVc0ouZu4VTBGvQE8kWHSBW10KM=
+X-Gm-Gg: AYBFou3BtvBBz7UWc0FHZ85Nf2SP+a3n4oliO12LPQ84xMDNOhO+WLJkiAK5p39QAwn
+	RmAdSLuhrDExA8Jn7b1IwTvwD43xvGddaQwf2d/R9SlzRB0L0tn8kk3f4uXbZIX/pXw2YAT3wcV
+	vD7jHlR7r3e9AEdDFG9ybyv6BarMfCMBlAhRbwF/OQemyPKiAg/ejZ2fpbm19li8b31w+FJvb1S
+	P5tjTpsa5+7njnHWhPRbVpSM+V6PLhmvfi1JO7ooG7lA4WozyqMbd4cN2DstyCded4JzoD0qXmK
+	luto18/APIBhZDDtb1d4FQz1P/afFBdHEaaqOvhQ5OvHZghwXJyUsDD+1lJSQ8SV4WDGEgUwITU
+	AlzDP0n35f/lONTzu9EmD0VymL6kQMkfTcnFwgr8UFM2tRloosGz57VLdmGOQgqo36RlFBJ729d
+	SHAUchWBCo7MLONuSYUsfljdvONOevo4oRgKsAF86zG+jmbGSwQtwproimV5eAK9ECY0orVH6ar
+	qbBAqLp+8gyLVSqduQqgerwo1sG0yltcttDizVoHFQmOibzU/cm2MKfByuc5cE01mBp2+Vtbrur
+	oOa+fKYGHf1iJm9ezDbHv8CX6o60mwuDsiWHpJb+2ZsqHymhGjt55u7NsQJ/MiuzkKPgM9q6gA8
+	C5JcfqUFmfRYPT2kbLKlwi1I/2SoheE8qN0iaFV1wqpGE3Q2fxLyrvtn/zQofB1/HLdBjrJntqm
+	oEDEz0G2xtUr0rDgOQlhJY/wQGwXY0N3YeowTjdA==
+X-Received: by 2002:a05:7300:ff41:b0:34b:8ebd:e3b with SMTP id 5a478bee46e88-34c63036c71mr832090eec.14.1790722650932;
+        Tue, 29 Sep 2026 15:57:30 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.27
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c38bf0948sm1595527eec.25.2026.09.29.15.57.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 15:57:27 -0700 (PDT)
+        Tue, 29 Sep 2026 15:57:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 02/26] floret: add missing <cstdint> include for int64_t on musl
-Date: Tue, 29 Sep 2026 15:56:59 -0700
-Message-ID: <20260929225723.1046705-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 04/26] smolkit: include <sys/types.h> for uid_t/pid_t on musl
+Date: Tue, 29 Sep 2026 15:57:01 -0700
+Message-ID: <20260929225723.1046705-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
 References: <20260929225723.1046705-1-khem.raj@oss.qualcomm.com>
@@ -72,71 +72,65 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 22:57:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130489
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130491
 
-args.h uses int64_t without including <cstdint>; glibc headers pull it
-in transitively via other includes, musl's don't.
+SystemUserLookup.h uses uid_t/pid_t without including <sys/types.h>;
+glibc's <string> transitively declares them, musl's doesn't.
 
 AI-Generated: Uses Claude Code
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-missing-cstdint-include-for-int64_t.patch | 32 +++++++++++++++++++
- .../recipes-support/floret/floret_0.10.5.bb   |  4 ++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/floret/files/0002-args.h-add-missing-cstdint-include-for-int64_t.patch
+ ...p.h-include-sys-types.h-for-uid_t-pi.patch | 30 +++++++++++++++++++
+ meta-oe/recipes-extended/smolkit/smolkit.bb   |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/smolkit/files/0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch
 
-diff --git a/meta-oe/recipes-support/floret/files/0002-args.h-add-missing-cstdint-include-for-int64_t.patch b/meta-oe/recipes-support/floret/files/0002-args.h-add-missing-cstdint-include-for-int64_t.patch
+diff --git a/meta-oe/recipes-extended/smolkit/files/0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch b/meta-oe/recipes-extended/smolkit/files/0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch
 new file mode 100644
-index 0000000000..cfececbad7
+index 0000000000..d2adf9177b
 --- /dev/null
-+++ b/meta-oe/recipes-support/floret/files/0002-args.h-add-missing-cstdint-include-for-int64_t.patch
-@@ -0,0 +1,32 @@
++++ b/meta-oe/recipes-extended/smolkit/files/0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch
+@@ -0,0 +1,30 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
 +Date: Tue, 29 Sep 2026 01:54:51 +0000
-+Subject: [PATCH] args.h: add missing <cstdint> include for int64_t
++Subject: [PATCH] SystemUserLookup.h: include sys/types.h for uid_t/pid_t
 +
-+args.h declares getAutotuneModelSize() returning int64_t but never
-+includes <cstdint> itself. On glibc/libstdc++ this compiles because
-+some other transitively-included standard header happens to declare
-+int64_t first, but that is not guaranteed. musl's libc++/libstdc++
-+headers do not provide this transitive declaration, so args.h fails
-+to parse with "unknown type name 'int64_t'". The existing
-+0001-PATCH-floret patch adds <cstdint> to args.cc, but only after
-+it includes "args.h", so it does not help args.h parse itself.
-+Include <cstdint> directly in args.h so the header is self-contained.
++SystemUserLookup.h uses uid_t and pid_t but never includes
++<sys/types.h> itself. On glibc, <string> (or other headers pulled in
++transitively by the C++ runtime) end up exposing these POSIX types,
++but that is not guaranteed. musl's libc++ headers do not provide
++this transitive declaration, so the header fails to parse with
++"unknown type name 'uid_t'"/"'pid_t'". Include <sys/types.h>
++directly so the header is self-contained regardless of libc.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ src/args.h | 1 +
-+ 1 file changed, 1 insertion(+)
++ src/SystemUserLookup.h | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/src/args.h b/src/args.h
++diff --git a/src/SystemUserLookup.h b/src/SystemUserLookup.h
 +index 1111111..2222222 100644
-+--- a/src/args.h
-++++ b/src/args.h
-+@@ -8,6 +8,7 @@
-+
++--- a/src/SystemUserLookup.h
+++++ b/src/SystemUserLookup.h
++@@ -1,5 +1,7 @@
 + #pragma once
 +
-++#include <cstdint>
-+ #include <istream>
-+ #include <ostream>
+++#include <sys/types.h>
+++
 + #include <string>
-diff --git a/meta-oe/recipes-support/floret/floret_0.10.5.bb b/meta-oe/recipes-support/floret/floret_0.10.5.bb
-index 52c46b2a4b..fd96ed701c 100644
---- a/meta-oe/recipes-support/floret/floret_0.10.5.bb
-+++ b/meta-oe/recipes-support/floret/floret_0.10.5.bb
-@@ -16,7 +16,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ce16d1d2b4c556959d654417007b713"
- DEPENDS = "zlib"
++
++ struct group;
+diff --git a/meta-oe/recipes-extended/smolkit/smolkit.bb b/meta-oe/recipes-extended/smolkit/smolkit.bb
+index 4ac9ee69f7..6ba338ef05 100644
+--- a/meta-oe/recipes-extended/smolkit/smolkit.bb
++++ b/meta-oe/recipes-extended/smolkit/smolkit.bb
+@@ -22,5 +22,6 @@ PV = "${VERSION}+git"
  
- SRC_URI = "git://github.com/explosion/floret.git;protocol=https;branch=main;tag=v${PV} \
--           file://0001-PATCH-floret-Adjust-CMake-flags-for-cross-compilation.patch"
-+           file://0001-PATCH-floret-Adjust-CMake-flags-for-cross-compilation.patch \
-+           file://0002-args.h-add-missing-cstdint-include-for-int64_t.patch \
-+           "
- 
- SRCREV = "775638223bee4fabc420cc8234632557452558e0"
- 
+ SRC_URI = "\
+     git://github.com/bmwcarit/${BPN}.git;protocol=https;branch=main;tag=v${VERSION} \
++    file://0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch \
+ "
+ SRCREV = "46bbfd5c922a8d03a534398ee129ded822dfcafe"
 
