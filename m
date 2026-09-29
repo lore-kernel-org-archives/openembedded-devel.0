@@ -2,211 +2,203 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FBF0CA5FA2
-	for <webhook@archiver.kernel.org>; Mon, 28 Sep 2026 20:24:22 +0000 (UTC)
-Received: from mail-yx2-f38.google.com (mail-yx2-f38.google.com [74.125.224.166])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.67427.1790627054846543128
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA99FCA5FAB
+	for <webhook@archiver.kernel.org>; Tue, 29 Sep 2026 01:52:01 +0000 (UTC)
+Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.73807.1790646718751852842
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2026 13:24:15 -0700
+ Mon, 28 Sep 2026 18:51:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=dr1+ULTP;
- spf=pass (domain: gmail.com, ip: 74.125.224.166, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx2-f38.google.com with SMTP id 00721157ae682-8ab3e848918so612397b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 13:24:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790627054; cv=none;
-        d=google.com; s=arc-20260327;
-        b=SVdvIsqTQ3UAjzEb/5jbrGkwW/mUYmLWRBHjBZ6HAB3U0ctECA0m9nkTISllXkordm
-         HKGgNcqavsP0hGyib9hQMMFVl9bgSxgzpS2jOcrZP6EXb7/ncGCXhm3kq8bZOkOq+xVw
-         S9AGXKU0WpHOu4teBCVHkOm0tw0uuKzXeRhx/jbctwl1tIfZ0o+M29f+uLJbx4zoMQrz
-         A1ly/Hps5D+DCvo5LEUc0n3yWlYyeWkT32848fq8OlsrZT7vKKkiXxO5YlDxTXWx4qrV
-         P110HISlCvRmTmyaJYtsZ0QTWLYikSAR25L8cAa6lzxNe4vOG9avcYLy9WmT4PISyM/a
-         Sj4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=2IVjQelKj7wY1Dr0adp7FGvR2LuWpma+Mv6CWE1Grlg=;
-        fh=z3PwvM7VNberB9FAXxX7DrRfyp1Sr/N9pzdNsDquXHg=;
-        b=fOXtS8vWKGBWI25DDPpJbSK/ZsjrYpClukPkhLSXacm3NEL4XjueS1zw4N1/0jZuv+
-         SxvGpMBVIaVKtSFVQmtYGbPZVmn6iYAMInl9aYGROtnatediodquqcJEggZqVa7f9p6Z
-         crMLFYo2TaruKbag57tLhzURVBKaZzSy6NcwShbxY4uLPhmtbAfs1sVORqEjXu0lzJSx
-         /lR1Ra2XXrGYPh6I/eND9AdcjkJzIFw1SoMB1w4S7AU9n3Oxb8U51yb+12OLyH01Ohi+
-         G9H8sOEh8remFFhhN6hbG8bwaC1jwoax9tglDTrGPQJdBaXImR45nVYI9VZufobC+1KZ
-         xqlQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=rYt3JDjN;
+ spf=pass (domain: gmail.com, ip: 74.125.229.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-34b223602d7so177572eec.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 18:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790627054; x=1791231854; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2IVjQelKj7wY1Dr0adp7FGvR2LuWpma+Mv6CWE1Grlg=;
-        b=dr1+ULTPrzQjuwIcsmKsqyEWbSVFOskCY4djJshzPBYlZcXWrilAYB2pYOrCsqZEy8
-         Lo0d9MMeUDhWvvMrnACQpN7IR29NqGLgeVLylyeVQ9mYTDxMY02rHgltLUnidqSvm2U6
-         /fv1PvAxCHBvTHHG+87XTepZzcAbUR07vwq3Hq4hCBWHgofTAKrlt2xTdTQydUEf3Z+I
-         xa5VB+G7JshDnOZkKHasBe+vuwn7YGpZ5UF6voAXVjI2R017LlLdXv/QFjxj9P44JTYN
-         DhYL0ctuv1KsjtySQqfQy9+w88daBI5yhGKKkrdmrANEUvk76bma1CkmZhkZwcGDUM8A
-         J43w==
+        d=gmail.com; s=20251104; t=1790646718; x=1791251518; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xjO0/OnRSR0K9rZDRoGvg7Cqzf3XGrGqObt1v0xr+b4=;
+        b=rYt3JDjNQdyI4FZ3JmAEV9WT4Xt1PKIJAW7fVUtlRWHYv2+FbqtYlBsVc7rC/YRGeW
+         F/6Jstjz9bFmdCtv9eWImud4QWnbpTaLuOuQtQPmPKKCcD/57DJPglXrxtx6MhE4Whnt
+         9unqX3MpTxAeflktatrr+i8SOmj0zMWMn36lNXISYTldJkkRRGHVHsL0+IDP9/x2oheS
+         ECjHVN/0aRxAz4ve+1E21iFQm/tVyTr35Md6UhF38cem7lKA6babmnLAAs7byP25zy3A
+         UNvG4B1KRNdt+AgyLvDRH3Azz7hubdihlJ7D1qNm0rqMWoKeu3v0uXLrf+K0qaOIEUED
+         TCmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790627054; x=1791231854;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=2IVjQelKj7wY1Dr0adp7FGvR2LuWpma+Mv6CWE1Grlg=;
-        b=QsoY1LMuCwTSLgt9a273aRn+esQXrGRy61MiXJVm1NVgb1WfM9MY7FEavCrUYwjIU9
-         1yg86mlsF0jlSzqIbiLQWv4u8dPFx9oY6Q3MtXVChqADLg+6CGapFyUtf1Dc1ULWJ6HW
-         a5uzy1qPCI0Igr7u3yy3j/I57IuvG3Lm/YTCMPOsKAUQ9y1dyhCCnBQWMUavopUSEpFF
-         A/zPpfrgflYSRX6tD6OR3PDzA7dyJEwTr6gPkoTk8jqq385iAGdld4YSwKx+RdW1sGNv
-         yHtPSFrUkjophl32XLCP/tvcXBGdxcqi8JVFV7rPL/SuM6xDJbwwU82Ufdfid9F+Tv5s
-         +gZA==
-X-Forwarded-Encrypted: i=1; AKwUvBzxZwn2eUKCmn0B5pIyG+HvO/KEkgJhbhAS/8CSw1N25LnCvXGSwDOdn1lRDkHGw6n8t6RNTdEjZE8FacsF31Xv6bU=@lists.openembedded.org
-X-Gm-Message-State: AFq9FYKXc1c5KoedO+bjpjxbuUqaxwUNwr8YXgBfIS5aCJErNzVLLYXJ
-	vnZUO3N+de+YO0gwr3h+Hcr31zGQRVxg5WqHeIQtP2V2MS9gjEd6LGWUfjHNXZ80LS9g1D+u56N
-	fQdFeeezrX2k6KHcWafLyVmcbQCVvCZY=
-X-Gm-Gg: AYBFou17KvCBUFebRjrFpT88YTeb5wsgjnf8iuX+DC4DECul3eW1XaAnDgPUBfDp7hT
-	RryRPZTuk8o7h364Ex0d0hWW+j+r/oF+4ljGInhvxdJKkcMumjSsxq7XaKjHrNT1K3WcD07ADUe
-	Q5UrjNt12RI1kHQG4TtSthu5LMplowPsxaMp7pJjEbu3fYYtAb6H0y57U86sjQEQnXnNyUulOEZ
-	74PfGkNIqXAeCE/QjBMTvvZcsmB8vJRuzjBjz4pGsjWqlPCmvntWswHj+won17029Vp5sUPB3NW
-	8NkLN3L4s4fNAsOq6nEHQrHss3e2M2rhlmhCKLq+5BBLbfrZD/IZjPiaYGCaQ1BNqRNpG6u2X9j
-	JXCDfh7nC2QwuCK5SZMOIcB46QDRCEmuSda0DJvXrG14H+3E4+BxlJvhhfYsiA0PWK5eCgbKUHu
-	l95OQDr3ryeGMQ/w1p+T0JEu7voHMKJm5U8KI70pluff24M0aRdqTy64KjXq1MrMX6ZX/UrHjjI
-	I35uca66CQA3L2pohXwwgbg1ALADuCgzhtEzxuGRGT/PDmNt9pyWbsNpWhii4jEFkwe6VMC3Gav
-	0FjQlheM6mqkWUilw7Q=
-X-Received: by 2002:a05:690e:14c1:b0:672:99e1:1204 with SMTP id
- 956f58d0204a3-672ed56b46cmr5217428d50.161.1790627053723; Mon, 28 Sep 2026
- 13:24:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260928130631.4254-1-mark.jonas@de.bosch.com>
- <20260928130631.4254-2-mark.jonas@de.bosch.com> <CAMRc=Mdv7cj-Sq7QdhyeVaQxQ3Q3vSzSYe+32tu_WEA3RkJhXg@mail.gmail.com>
-In-Reply-To: <CAMRc=Mdv7cj-Sq7QdhyeVaQxQ3Q3vSzSYe+32tu_WEA3RkJhXg@mail.gmail.com>
+        d=1e100.net; s=20260707; t=1790646718; x=1791251518;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xjO0/OnRSR0K9rZDRoGvg7Cqzf3XGrGqObt1v0xr+b4=;
+        b=rKjFfTMqLpQEGuk1u98wiGLHCImw2gkEpYewHig2YQC82lAnskSoQwRKOqu9YXTItl
+         E4p5tbxIkICpkaJkUCPpjuyxFKyXuV52yBn7AnTDqU36nqQp2vFjR4rQNAu4csqQfis7
+         63AHjHKNVUtjhOTtvLJrQcIwFyGbuX4GzNokM1j+ke9M9XcMmCc/7Z+EltZ36aQxj7di
+         eJRFaNUZA2f9rCd7MKS5JHcYTI2Ko8JNEJbq2F0sJ3TLRD7WlB57I+1JyRYhrPzEF9tC
+         Hl49q2GUVQLVzLCtLBU54vRqnnAb7S7lkHMiM7hpleuI4mCpv9a8dtdIbqRUq7GP5fm4
+         9stw==
+X-Gm-Message-State: AFq9FYJ09PJqdEHiBZypbg6Web6euHzeIvOJMxrBZ0G+amVDia6RZcvQ
+	hdNSDNnslE1RD/YAGez8i9VC5OKkldAnuSoQUL3mDO/uQEjjSmAGaiFMMkWgVjB/mK4=
+X-Gm-Gg: AYBFou3r0KRIw1+K4KgJP190TtTUZvbM/MBHu+0t9wiRDSs37ubj/PhpKlWWV06GUyb
+	Ltaig5l6HcoOt/Fon6hN6qWwAi95OKg/JgDO90He/Oys0gUT+G9NRXZTITgJoSNg591o9KGQboS
+	wJKHDySLTzXxWlx5CZfLah5+Ix4Knf8pu7ys7tk2+3K6vx1GF3HWLViRW350kQV32rwz1f3Rulg
+	LxcDGPuKa5bEYfZ3QTBoArYzV3d59LwnKQFoWv74b9akWn5I3Ln89+5veYLhhTLoYi/510ciOoP
+	+Hkl1Go8NJN6d8F/Rfx/LQUTQTZDBUB/zGDEHvVlixPJpR9pskRVdfWIj63Ls0uGTRRm8L2ymTb
+	lhdP/obFqnpjLLyhdkjom9GWw/P1IigpfjI2c49LG4Z6iNo5gPqpk4tnJeoWgCuBq/mo1RP2utk
+	EwFROEgJGVfmELGlFjTIrOcHk+jZu/B4ftK4JziRZeO3ZEW1IBr4aTfLRQRvdXzqZMEtQTTrcVn
+	sKNmszO8Inzgbo9hkWm4kaA4CBftsnwERyOng3tTUW+kVHGU08w3eKBm4iXPNUfz3KtZAsiIiYD
+	gOmWx7fsfamaquZgR1/4HcOwbBnksaYp0N+NNPMOv6kihyy+6sVMRULIDGM4Whm6TOTKKBY/fzt
+	4fM/1i3Vq2jGRbF6hItYi+fQK1+ABflrU5Ygfx6mzJBdcEkMDIIXXe6n908QxHn4cgBGUusa13u
+	xCpBG8HOR75Q2RbXLD9Jn+OHkLhXRTola0C3ju8Q==
+X-Received: by 2002:a05:7301:4281:b0:33c:1521:89aa with SMTP id 5a478bee46e88-34271a8deb8mr11094224eec.24.1790646717829;
+        Mon, 28 Sep 2026 18:51:57 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34571658054sm12857924eec.8.2026.09.28.18.51.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Sep 2026 18:51:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Sep 2026 13:23:46 -0700
-X-Gm-Features: AclHuK_vPpkPxUZMnJARa2yGmH_vNzmVXbDDLM2_TkPp0mjJNXsgDJP9hKLkip4
-Message-ID: <CAMKF1soenLaOSVd-Jm-YLPCOO8r5+=ssN3eNhaePKKe0gPgNRg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3 1/2] libgpiod: update libgpiodbus license
-To: brgl@kernel.org
-Cc: mark.jonas@de.bosch.com, bartosz.golaszewski@oss.qualcomm.com, 
-	khem.raj@oss.qualcomm.com, Ricardo Simoes <ricardo.simoes@pt.bosch.com>, 
-	openembedded-devel@lists.openembedded.org, 
-	"Mark Jonas via lists.openembedded.org" <mark.jonas=de.bosch.com@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000007668e7065c90d960"
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] tbb: Fix ptest build on musl
+Date: Mon, 28 Sep 2026 18:51:54 -0700
+Message-ID: <20260929015154.4032632-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Sep 2026 20:24:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130470
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2026 01:52:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130471
 
---0000000000007668e7065c90d960
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Two tests fail to compile on musl:
 
-I am seeing
+- conformance_resumable_tasks uses its own platform list instead of
+  __TBB_RESUMABLE_TASKS, which the library leaves disabled on Linux
+  without glibc, so tbb::task::suspend() is not declared.
+- test_malloc_overload calls mallopt(), mallinfo() and pvalloc(), which
+  are glibc extensions musl does not provide.
 
-NOTE: libgpiod: md5 checksum matched for
-file://LICENSES/GPL-2.0-or-later.txt;md5=3Db234ee4d69f5fce4486a80fdaf4a4263
-NOTE: libgpiod: md5 checksum matched for
-file://LICENSES/LGPL-2.1-or-later.txt;md5=3D4b54a1fd55a448865a0b32d41598759=
-d
-NOTE: libgpiod: md5 checksum matched for
-file://LICENSES/CC-BY-SA-4.0.txt;md5=3Dfba3b94d88bfb9b81369b869a1e9a20f
-ERROR: QA Issue: libgpiod: The LIC_FILES_CHKSUM does not match for
-file://LICENSES/CC0-1.0.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57
-libgpiod: The new md5 checksum is 65d3616852dbf7b1a6d4b53b00626032
-libgpiod: Here is the selected license text:
+Guard both on what is actually available. All 142 tbb ptests pass in
+meta-oe-image-ptest-tbb on qemux86-64 musl.
 
-On Mon, Sep 28, 2026 at 8:03=E2=80=AFAM Bartosz Golaszewski via
-lists.openembedded.org <brgl=3Dkernel.org@lists.openembedded.org> wrote:
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ ...mance_resumable_tasks-when-resumable.patch | 27 +++++++++
+ ...load-Only-use-glibc-malloc-extension.patch | 57 +++++++++++++++++++
+ meta-oe/recipes-support/tbb/tbb_2023.1.0.bb   |  2 +
+ 3 files changed, 86 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tbb/files/0001-test-Skip-conformance_resumable_tasks-when-resumable.patch
+ create mode 100644 meta-oe/recipes-support/tbb/files/0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch
 
-> On Mon, 28 Sep 2026 15:06:30 +0200, "Mark Jonas via
-> lists.openembedded.org"
-> <mark.jonas=3Dde.bosch.com@lists.openembedded.org> said:
-> > From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-> >
-> > The license for libgpiodbus in upstream has been updated to
-> > LGPL-2.1-or-later.
-> >
-> > Thus, update the package license and backport the upstream change
-> > until it lands in a release.
-> >
->
-> Not: this patch now no longer updates the package license.
->
-> Anyway:
->
-> Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#130441):
-> https://lists.openembedded.org/g/openembedded-devel/message/130441
-> Mute This Topic: https://lists.openembedded.org/mt/121470950/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-oe/recipes-support/tbb/files/0001-test-Skip-conformance_resumable_tasks-when-resumable.patch b/meta-oe/recipes-support/tbb/files/0001-test-Skip-conformance_resumable_tasks-when-resumable.patch
+new file mode 100644
+index 0000000000..ea36dc5b24
+--- /dev/null
++++ b/meta-oe/recipes-support/tbb/files/0001-test-Skip-conformance_resumable_tasks-when-resumable.patch
+@@ -0,0 +1,27 @@
++From: Khem Raj <raj.khem@gmail.com>
++Subject: [PATCH] test: Skip conformance_resumable_tasks when resumable tasks are disabled
++
++The library only enables resumable tasks when __TBB_RESUMABLE_TASKS is
++set, which excludes Linux with a C library other than glibc (e.g. musl).
++test_resumable_tasks.cpp checks that macro, but the conformance test
++repeats an older list of platforms and fails to build on musl:
++
++  conformance_resumable_tasks.cpp:39:5: error: no member named 'suspend' in namespace 'tbb::task'
++
++Use __TBB_RESUMABLE_TASKS instead, keeping the WINAPI_FAMILY exclusion.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++--- a/test/conformance/conformance_resumable_tasks.cpp
+++++ b/test/conformance/conformance_resumable_tasks.cpp
++@@ -17,8 +17,7 @@
++
++ #include "common/test.h"
++
++-#if (!__TBB_WIN8UI_SUPPORT && !defined(WINAPI_FAMILY) && !__ANDROID__ \
++-    && !__QNX__)
+++#if __TBB_RESUMABLE_TASKS && !defined(WINAPI_FAMILY)
++
++ #include "oneapi/tbb/task.h"
++ #include "oneapi/tbb/task_group.h"
+diff --git a/meta-oe/recipes-support/tbb/files/0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch b/meta-oe/recipes-support/tbb/files/0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch
+new file mode 100644
+index 0000000000..3675a68f2b
+--- /dev/null
++++ b/meta-oe/recipes-support/tbb/files/0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch
+@@ -0,0 +1,57 @@
++From: Khem Raj <raj.khem@gmail.com>
++Subject: [PATCH] test: malloc_overload: Only use glibc malloc extensions where available
++
++mallopt(), mallinfo() and pvalloc() are GNU extensions that musl does not
++provide, so test_malloc_overload fails to build there:
++
++  test_malloc_overload.cpp:401:13: error: use of undeclared identifier 'mallopt'
++  test_malloc_overload.cpp:451:18: error: use of undeclared identifier 'pvalloc'; did you mean 'valloc'?
++  test_malloc_overload.cpp:466:21: error: variable has incomplete type 'struct mallinfo'
++
++Only test them on glibc (and Android for mallopt()/mallinfo()), matching
++the guard tbbmalloc_proxy already uses for its mallinfo() override.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++--- a/test/tbbmalloc/test_malloc_overload.cpp
+++++ b/test/tbbmalloc/test_malloc_overload.cpp
++@@ -53,7 +53,9 @@
++ #endif
++
++ #define __TBB_POSIX_MEMALIGN_PRESENT (__unix__ && !__ANDROID__) || __APPLE__
++-#define __TBB_PVALLOC_PRESENT __unix__ && !__ANDROID__
+++#define __TBB_PVALLOC_PRESENT __unix__ && !__ANDROID__ && __GLIBC__
+++// mallopt() and mallinfo() are not provided by every C library, e.g. musl
+++#define __TBB_MALLOPT_MALLINFO_PRESENT __unix__ && (__GLIBC__ || __ANDROID__)
++ #if __GLIBC__
++   // aligned_alloc available since GLIBC 2.16
++   #define __TBB_ALIGNED_ALLOC_PRESENT __GLIBC_PREREQ(2, 16)
++@@ -397,9 +399,9 @@
++ //! Testing tbbmalloc_proxy overload capabilities
++ //! \brief \ref error_guessing
++ TEST_CASE("Main set of tests") {
++-#if __unix__
+++#if __TBB_MALLOPT_MALLINFO_PRESENT
++     REQUIRE(mallopt(0, 0)); // add dummy mallopt call for coverage
++-#endif // __unix__
+++#endif // __TBB_MALLOPT_MALLINFO_PRESENT
++
++     void *ptr = nullptr;
++     utils::suppress_unused_warning(ptr); // for android
++@@ -456,6 +458,7 @@
++     CheckMemalignFuncOverload(aligned_alloc, free);
++ #endif
++
+++#if __TBB_MALLOPT_MALLINFO_PRESENT
++ #if __INTEL_COMPILER
++    #pragma warning(push)
++    #pragma warning(disable: 1478)
++@@ -473,6 +476,7 @@
++     REQUIRE((!info.arena && !info.ordblks && !info.smblks && !info.hblks
++            && !info.hblkhd && !info.usmblks && !info.fsmblks
++            && !info.uordblks && !info.fordblks && !info.keepcost));
+++#endif // __TBB_MALLOPT_MALLINFO_PRESENT
++
++  #if !__ANDROID__
++     // These non-standard functions are exported by GLIBC, and might be used
+diff --git a/meta-oe/recipes-support/tbb/tbb_2023.1.0.bb b/meta-oe/recipes-support/tbb/tbb_2023.1.0.bb
+index 8f48412fb6..08f6ddcfd2 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2023.1.0.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2023.1.0.bb
+@@ -16,6 +16,8 @@ BRANCH = "onetbb_2023"
+ SRCREV = "3046c8b0c29df995980003ea24f4d78c80ec0c8d"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+            file://run-ptest \
++           file://0001-test-Skip-conformance_resumable_tasks-when-resumable.patch \
++           file://0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch \
+           "
 
---0000000000007668e7065c90d960
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I am seeing<div><br></div><div>NOTE: libgpiod: md5 checksu=
-m matched for file://LICENSES/GPL-2.0-or-later.txt;md5=3Db234ee4d69f5fce448=
-6a80fdaf4a4263<br>NOTE: libgpiod: md5 checksum matched for file://LICENSES/=
-LGPL-2.1-or-later.txt;md5=3D4b54a1fd55a448865a0b32d41598759d<br>NOTE: libgp=
-iod: md5 checksum matched for file://LICENSES/CC-BY-SA-4.0.txt;md5=3Dfba3b9=
-4d88bfb9b81369b869a1e9a20f<br>ERROR: QA Issue: libgpiod: The LIC_FILES_CHKS=
-UM does not match for file://LICENSES/CC0-1.0.txt;md5=3D3b83ef96387f14655fc=
-854ddc3c6bd57<br>libgpiod: The new md5 checksum is 65d3616852dbf7b1a6d4b53b=
-00626032<br>libgpiod: Here is the selected license text:<br></div></div><br=
-><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D=
-"gmail_attr">On Mon, Sep 28, 2026 at 8:03=E2=80=AFAM Bartosz Golaszewski vi=
-a <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;=
-brgl=3D<a href=3D"mailto:kernel.org@lists.openembedded.org">kernel.org@list=
-s.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex">On Mon, 28 Sep 2026 15:06:30 +0200, &quot;Mark Jonas via<=
-br>
-<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
-nk">lists.openembedded.org</a>&quot;<br>
-&lt;mark.jonas=3D<a href=3D"mailto:de.bosch.com@lists.openembedded.org" tar=
-get=3D"_blank">de.bosch.com@lists.openembedded.org</a>&gt; said:<br>
-&gt; From: Ricardo Simoes &lt;<a href=3D"mailto:ricardo.simoes@pt.bosch.com=
-" target=3D"_blank">ricardo.simoes@pt.bosch.com</a>&gt;<br>
-&gt;<br>
-&gt; The license for libgpiodbus in upstream has been updated to<br>
-&gt; LGPL-2.1-or-later.<br>
-&gt;<br>
-&gt; Thus, update the package license and backport the upstream change<br>
-&gt; until it lands in a release.<br>
-&gt;<br>
-<br>
-Not: this patch now no longer updates the package license.<br>
-<br>
-Anyway:<br>
-<br>
-Acked-by: Bartosz Golaszewski &lt;<a href=3D"mailto:bartosz.golaszewski@oss=
-.qualcomm.com" target=3D"_blank">bartosz.golaszewski@oss.qualcomm.com</a>&g=
-t;<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#130441): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/130441" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/130441</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121470950/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121470950/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000007668e7065c90d960--
+ LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--undefined-version', '', d)}"
 
