@@ -1,97 +1,79 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91D2DCA5FB1
-	for <webhook@archiver.kernel.org>; Wed, 30 Sep 2026 07:26:51 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7887.1790753209125582784
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3C72CA5FBE
+	for <webhook@archiver.kernel.org>; Wed, 30 Sep 2026 10:14:46 +0000 (UTC)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9635.1790760570470732771
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2026 00:26:49 -0700
+ Wed, 30 Sep 2026 02:29:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=bl2SO8EZ;
- spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout06.t-online.de (Postfix) with SMTP id 8E73B2DD
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 09:26:13 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.170.219]) by fwd89.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xBohd-2nLPUn0; Wed, 30 Sep 2026 09:26:09 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=EuboKAlY;
+ spf=pass (domain: bootlin.com, ip: 185.246.85.4, mailfrom: joaomarcos.costa@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 522424E410D5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 09:29:28 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 20DD660749
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 09:29:28 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 076CF103293F9;
+	Wed, 30 Sep 2026 11:29:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790760567; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=KXKevaglmT58bLQxhdZp/BJQ80BdYVTNC6XTWdzyG30=;
+	b=EuboKAlYzU59v/hE1RF1xBN7AzWv36xdJCkUnDHu7vLCOp4Z6ZCUALkUdA0kUgxsuaoqkO
+	uMXeV4aTWGT/cyX/3caLBci7ivh3EWg5ZGghE9Fjfi+nFPW+azw9RpoT1CepGSw10WAl9l
+	/wgSO/POytgW8sBRKhLqR2B4MBPNUauNHbVjWQuYXtXW9a9dqd3KpTK4ZV+RtpqrZzr6C/
+	DwL+c2yozt9z2mM8Giv4KFaPXliLTk/eb7QBY6nCsPvXHTuS7+IFgGi86ZRd/d1bpOvahB
+	lNFmXeEq3oW8MFE3G+sT7FztZrp1zaq7LZeqxTv4C2dDJwX1KyVaLIHI/OWfoA==
+From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] ptyxis: add recipe
-Date: Wed, 30 Sep 2026 09:26:03 +0200
-Message-ID: <20260930072603.16075-1-f_l_k@t-online.de>
+Cc: thomas.petazzoni@bootlin.com,
+	=?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa=20=28Schneider=20Electric=29?= <joaomarcos.costa@bootlin.com>
+Subject: [meta-networking][scarthgap][PATCH] ntp: add CVE-2026-1548 to CVE_STATUS_NTP
+Date: Wed, 30 Sep 2026 11:29:15 +0200
+Message-ID: <20260930092915.1909757-1-joaomarcos.costa@bootlin.com>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790753169-68FF6837-E0C0613E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 34667300-e710-4f56-bbc5-d759412db0a1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1790753173; i=f_l_k@t-online.de;
-	bh=5Ihv4uyP+GtFxw4eCr7iuAPuXDPiRsMoUrdkP3kTR1o=;
-	h=From:To:Subject:Date;
-	b=bl2SO8EZcHON4F6pjoB9ey0On1TLQtQ5djp1vmvE8VL6mjStZeh5WytVdjfCWWLCa
-	 zObfz+tcH69x4ixxxPk66tiXHkPKYgQ5+IsdNE0kRA9OPfiEiimteSo9aZDCbxGVd3
-	 ApSQeWSZIBZTOYy9gt5RumrCY78WXoqXdI8OHKB5ZKaCVw0kbPAu26XeCNOjvIThPq
-	 cbQ+BXOP404Agca7Tw0vXNVF5aJnY8puXQaWLDvSqLlsKDs5kYQGx4+66dLuo1aR06
-	 XfMAyyz4pZncyEoo+ZM54eaCK2z8Y1hy/xujD9uOJUs1+h1AdiwX5cmkYFozIPGLPU
-	 xKmEBieBo5WHQ==
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 07:26:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130517
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 10:14:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130518
 
-Ptyxis is a GTK 4 terminal for GNOME with first-class support for
-containers. It is the default terminal in Fedora Workstation and
-Ubuntu.
+From: Jo=C3=A3o Marcos Costa (Schneider Electric) <joaomarcos.costa@bootl=
+in.com>
 
-Build it from the release tarball.
+This vulnerability actually affects 4.2.8p4 and earlier [1], and
+meta-networking provides as of now 4.2.8p17.
 
-AI-Generated: Uses Claude Code (Claude Opus 5.5)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Add it to CVE_STATUS_NTP so this CVE is no longer reported.
+
+[1] https://security-tracker.debian.org/tracker/CVE-2016-1548
+
+Signed-off-by: Jo=C3=A3o Marcos Costa (Schneider Electric) <joaomarcos.co=
+sta@bootlin.com>
 ---
- .../recipes-gnome/ptyxis/ptyxis_50.1.bb       | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/ptyxis/ptyxis_50.1.bb
+ meta-networking/recipes-support/ntp/ntp_4.2.8p17.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-gnome/ptyxis/ptyxis_50.1.bb b/meta-gnome/=
-recipes-gnome/ptyxis/ptyxis_50.1.bb
-new file mode 100644
-index 0000000000..5b80c7dd15
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/ptyxis/ptyxis_50.1.bb
-@@ -0,0 +1,26 @@
-+SUMMARY =3D "Ptyxis is a terminal for GNOME with first-class support for=
- containers"
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/ptyxis"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8f0e2cd40e05189ec81232da84bd6=
-e1a"
-+
-+GTKIC_VERSION =3D "4"
-+inherit gnomebase gsettings pkgconfig gtk-icon-cache gettext
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
-+
-+DEPENDS =3D " \
-+    desktop-file-utils-native \
-+    gtk4-native \
-+    glib-2.0 \
-+    gsettings-desktop-schemas \
-+    gtk4 \
-+    json-glib \
-+    libadwaita \
-+    libportal \
-+    vte \
-+"
-+
-+SRC_URI[archive.sha256sum] =3D "73f4b76480644b2840415859a51d20cd7487b061=
-9714f8defcd38212c3ddcffe"
-+
-+FILES:${PN} +=3D "${datadir}"
-+
-+RDEPENDS:${PN} +=3D "hicolor-icon-theme"
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p17.bb b/meta-n=
+etworking/recipes-support/ntp/ntp_4.2.8p17.bb
+index 4ed58cd6a4..ba6e770618 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p17.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p17.bb
+@@ -43,6 +43,7 @@ CVE_STATUS_NTP =3D " \
+     CVE-2015-8140 \
+     CVE-2015-8158 \
+     CVE-2016-1547 \
++    CVE-2016-1548 \
+     CVE-2016-2516 \
+     CVE-2016-2517 \
+     CVE-2016-2519 \
 --=20
 2.55.0
 
