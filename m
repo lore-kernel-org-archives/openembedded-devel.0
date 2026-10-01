@@ -2,468 +2,99 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3442CCA5FCB
-	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 03:04:08 +0000 (UTC)
-Received: from mail-pz2-f37.google.com (mail-pz2-f37.google.com [74.125.228.37])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3389.1790823843290025655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55E48CA5FCB
+	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 03:04:18 +0000 (UTC)
+Received: from mail-pz2-f39.google.com (mail-pz2-f39.google.com [74.125.228.39])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3441.1790823851264473632
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2026 20:04:03 -0700
+ Wed, 30 Sep 2026 20:04:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=LaZpLyBw;
- spf=pass (domain: gmail.com, ip: 74.125.228.37, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f37.google.com with SMTP id d2e1a72fcca58-88826f3ff80so130817b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:04:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=E0CKxwQV;
+ spf=pass (domain: gmail.com, ip: 74.125.228.39, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f39.google.com with SMTP id d2e1a72fcca58-88098db8dcdso2721368b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790823843; x=1791428643; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=g/Afq7b4X6b9ZAoC16b8zXPCbEGwocga4X7oVYame3o=;
-        b=LaZpLyBw9+QqxQWcg3OZ4fpEgfQDOCCQNrCZlF3sQ62HZKbOLbsLtlK5N9T7HWxDGM
-         vK73NBHdVLIdIKJfYont3nPvTja+OPe1R47TP37ha+Wxf9J6XM9GBXUR9T76ziGRjnmg
-         7AmbnMCqF18PWqcFNtMJfzZcQLfsZ6280UA+dJRVhKqB0S7Two3e7FnULye/xFcIM8Fn
-         wXscrm3bq9MncPLEkjqMly/dooaP9lsePZD034V2/hXjKeulWU9l1PW10kEt2sc0+yy2
-         X4LeGi7VD2gKQO7cVX9VvMkyHxmsdXTDi/9ZgYW736MV30qEX1u2efAlYXdXRpgILnYy
-         D0/A==
+        d=gmail.com; s=20251104; t=1790823850; x=1791428650; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zlBu3HXM6ZC+7gopG+wkCHywHNQf6dWgZcDMtFvgFD0=;
+        b=E0CKxwQVqNkz11t4bwFUXIQCUUwrCMLmYHC0z4ouhXEwJSTKpEtAWFanIrywAY5Mvy
+         9Vfz/x2dzAk6gwwKR4ylokkD6UO5Dyui+5C7JdZO/Btyr1+IrQAJv0Eg6wNbyIgy6Tnj
+         yVx6LTryHq+GkCkAZaIP4CuijrhZxU/L4zy3gs0jKq7Eske2o0oPfguuB/KIN8gg/1Se
+         5bxRFIjs2dkNMGn0QvotCQAD5R9NN3oMmocPX+EIzv8KjagsL2HHu66a71dXvUOD8+87
+         AHnqlUqPBfNwEwsCZdH/cGxHnMKWbKqDcuhxmR6E0rGzVwkIjEzaAnjaMCXkMdMDhSW7
+         Igkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790823843; x=1791428643;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=g/Afq7b4X6b9ZAoC16b8zXPCbEGwocga4X7oVYame3o=;
-        b=kzNcbcqOBTTbMJ23bK8TxbnLaCFcpCHgHHIG3CgT5lLUTGUtI2eRGaC4aikCEYKKcd
-         d2mVNUhy79NNM3t71s41kKDzgFNrxZU9i+Fugk6cBOkSSMOlQwuScHSqCjqrnxmgrM/I
-         FU+pUZpgX0ruX6ynpr8yAaFG/6KGvjFvHSxejuVb/cbWSomM/NtFTwGhn+r52C5WLqGC
-         OHzgD7NCwHAIOtxLd17CyOJOwm4pbS+lqcMLFzi3dpFIABKfxh4eNnAQM3GJJyG2LU1W
-         mY6xhLCj4ahOJVNnWbCgHVPtu+BbVfVhJhyYwcOB6bcarET+K3bfIUGcK90sF+xavWVm
-         lEDA==
-X-Gm-Message-State: AFuF++m2EjMUSLLiVGfVLXB88RgSTBc0SrOsMadSiUU7O0vEBonBUfpx
-	xErIY09l/ew0gBXzrC5ePApD4m4VATouc85dVj2BlscKyjpy+4VuJVePj24SPg==
-X-Gm-Gg: AYBFou2I4WyH3ym3s0Ph5nzCIaWzQNuatfY4kMR50Jh5Jifrc+V39wwvLHuNAzrqXlh
-	Bn3wblVJKeNCNWmDliMFTSOAdLXXLx8RrzUqdji6vBXbB54q3GlUGFbyrz2is1oVgQozcG9UPHG
-	NO1k3X+o0ER7/SZciEPn1x4yMafyIQrYgp+7RBlJIX55zrmaCSAWngzEiy2+ZehpF5LqU+ovPn1
-	2+onDnUM9/4kOchZitLWXy2/h/Q34Bi07v3HASBrTcrahrhII0PFhOl66cOPHZyLctx1IWUzY7H
-	c7G9ZdsSK0y1u+EySbdixuwVagoZr5pLY4BLhs56fekOAgu0v9d1KqjSZAy88KWSD4gBaEILDfV
-	b1bqDW7lmqnsSr4UwrWwOuv8M1uEitwLg6+HGOzo1/hRXFEicnTrugIhwPOoD2lgLD/4wykOBT+
-	tav4XNe+gqZv44eheT+jxEA8UPy49ArNv1VhaufaXI0FVvvEjSdadxlZks1yVuCKtNLC9yZ5keu
-	/d0BlxLckp7/JKCX6PdzbJEFHslGBztuw==
-X-Received: by 2002:a05:6a00:2d14:b0:878:34d7:699e with SMTP id d2e1a72fcca58-8874c8d4a62mr2711636b3a.46.1790823842415;
-        Wed, 30 Sep 2026 20:04:02 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790823850; x=1791428650;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zlBu3HXM6ZC+7gopG+wkCHywHNQf6dWgZcDMtFvgFD0=;
+        b=AP4Kn4pmdZUc8IjBCup+ZFSFJRc4B54FHHYP+Uq4FEcjXQlRQHhSi33T4hSgpGavbL
+         0VqaJEd3yh2+F69yLWTB08cuQyqnGk4Qxu/4GNePlH1DPxWDKSq779ul0A/UHd/ZV1Tq
+         qPIrTVE3vDmt2IlhUYNyzdtCNJwSbDjh/0sBP6+RgvXdWWR2ms8Beukfnlp0dT/ZMJU2
+         +rW3+ZI0hVCn4Bgb1cXdAq3lL8IYi7Qr9dl3haL6J8xed3c31zHHraA8bWqB48IDSqkm
+         PpCPYvofURqtV/mfh1tqAe18ZsE9s/VCjFe5JAGXdBooZ63eoTxhKMX++0pNRDfzqtbz
+         6ciA==
+X-Gm-Message-State: AFuF++m13FR2GLmihtCz1p1z7rcuIQ1yG+LpPo5+xNlPU+D8tvuIgW1n
+	8pq6ZoAS+nnQjoa6BWPxKBEtAx6ebwbbWUErOgFxl8Sq/e61zuhSHV42dIFVTA==
+X-Gm-Gg: AYBFou3JivlyQIdAJmJMUMQ+lUlz+LUsQ8eMrfdaYLNI9meBf7Op+xm+h8Vu3KkhiKI
+	8wgBb4bqdiSGtE0rMwUlBWcFFUJJg9nwnO+Re1fua/2PMwqOd2VHJktrqjZbXSbgKMuKZTiim/6
+	c0QT2CC230iKxukhPyv8IkrsTDLTh3ipsx8rACNOSlMAY59XXe9M4t4M+qiE0ewT0sPqi2owbbX
+	0yS5a9uZTJoiEROFHYAXhfnYjBjZlDCH6LUsXwoqFm11zfmpabnlx2w+VS+5eyBzhoDfNg31vF3
+	PO57JjfGQDuD2RR54h0idPEAupEWKO5Gb4DxKeRkajFmWtAJKoiJytwTcoRHwckEgfiDvq9Sa8o
+	P8vYFpIbk70Nql8iCRU/iBeNo5x08y0qkJ3yf/Aw62oEzIs5t5mrjwrKM0Kl12n10+ZaYzC5vHD
+	0Kt1WYrOh+1YL7aIconw6JPAtAnlV8woIUu6rbXQGV5lR9QFM9escOMTd1mVK8wMoEynQmUflXL
+	qFhY/koVKFJf0JUuB8tCqYJuV/Ukgf4WA==
+X-Received: by 2002:a05:6a00:1152:b0:886:ead5:6d22 with SMTP id d2e1a72fcca58-8874d68a6ccmr2546960b3a.12.1790823850571;
+        Wed, 30 Sep 2026 20:04:10 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.04.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.04.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 20:04:02 -0700 (PDT)
+        Wed, 30 Sep 2026 20:04:10 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 13/17] frr: upgrade 10.6.1 -> 10.6.2
-Date: Thu,  1 Oct 2026 16:03:25 +1300
-Message-ID: <20261001030331.1581021-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 17/17] mpich: upgrade 5.0.1 -> 5.0.2
+Date: Thu,  1 Oct 2026 16:03:29 +1300
+Message-ID: <20261001030331.1581021-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
 References: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:04:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130562
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:04:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130566
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Dropped patch that is part of the upstream version.
-
 Changelog:
-https://github.com/FRRouting/frr/releases/tag/frr-10.6.2
+https://github.com/pmodels/mpich/releases/tag/v5.0.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ..._msg-recv-to-deal-with-mis-alignment.patch | 352 ------------------
- .../frr/{frr_10.6.1.bb => frr_10.6.2.bb}      |   5 +-
- 2 files changed, 2 insertions(+), 355 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
- rename meta-networking/recipes-protocols/frr/{frr_10.6.1.bb => frr_10.6.2.bb} (97%)
+ .../recipes-devtools/mpich/{mpich_5.0.1.bb => mpich_5.0.2.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/mpich/{mpich_5.0.1.bb => mpich_5.0.2.bb} (96%)
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch b/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
-deleted file mode 100644
-index 22cc10cf31..0000000000
---- a/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
-+++ /dev/null
-@@ -1,352 +0,0 @@
--From 5959a3d0cbc73b0c41134bf0d9944a6bd40ba510 Mon Sep 17 00:00:00 2001
--From: Christian Hopps <chopps@labn.net>
--Date: Sat, 18 Apr 2026 03:01:46 +0000
--Subject: [PATCH] lib: fix mgmt_msg recv to deal with mis-alignment
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--We need our messages to start on 64 bit boundaries as the message buffer
--is accessed directly as structured data. In particular on ARM32 arch
--using the data this way lead to unaligned access and SIGBUS.
--
--The minor optimization of reading multiple messages into a single stream
--buffer complicated this. Instead we KISS and switch to one message per
--stream buffer.
--
--Fixes #20087.
--
--Signed-off-by: Christian Hopps <chopps@labn.net>
--Co-developed-by: Samir MOUHOUNE <samir.mouhoune@nav-timing.safrangroup.com>
--Co-developed-by: Alexis Lothoré <alexis.lothore@bootlin.com>
--
--See also PR #20985
--
--This issue was identified and another solution was provided by Samir
--MOUHOUNE with the following commit message comments:
--
--On ARM32 systems, mgmtd crashes at startup on an alignment fault:
--
--```
--  frrinit.sh[158]: Starting watchfrr with command: '  /usr/sbin/watchfrr  -d   mgmtd zebra staticd'
--  watchfrr[168]: [T83RR-8SM5G] watchfrr 10.5.2 starting: vty@0
--  watchfrr[168]: [ZCJ3S-SPH5S] mgmtd state -> down : initial connection attempt failed
--  watchfrr[168]: [ZCJ3S-SPH5S] zebra state -> down : initial connection attempt failed
--  watchfrr[168]: [ZCJ3S-SPH5S] staticd state -> down : initial connection attempt failed
--  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 169]: /usr/sbin/watchfrr.sh restart all
--  frrinit.sh[180]: 2026/02/27 09:14:13 ZEBRA: [KGY44-D47GD][EC 4043309111] Disabling MPLS support (no kernel support)
--  watchfrr[168]: [QDG3Y-BY5TN] zebra state -> up : connect succeeded
--  kernel: Alignment trap: not handling instruction edc30b02 at [<004c3c1c>]
--  kernel: 8<--- cut here ---
--  kernel: Unhandled fault: alignment exception (0x801) at 0x008879f6
--  kernel: [008879f6] *pgd=9baf6831
--  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 189]: /usr/sbin/watchfrr.sh restart mgmtd
--  frrinit.sh[189]: Cannot stop mgmtd: pid 179 not running
--  watchfrr.sh[196]: Cannot stop mgmtd: pid 179 not running
--  frrinit.sh[202]: [202|zebra] sending configuration
--  frrinit.sh[202]: [202|zebra] done
--  frrinit.sh[216]: [216|watchfrr] sending configuration
--  frrinit.sh[218]: [218|staticd] sending configuration
--  watchfrr[168]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
--  frrinit.sh[199]: Waiting for children to finish applying config...
--  frrinit.sh[216]: [216|watchfrr] done
--```
--
--When checking crashlogs in /var/tmp/frr, mgmt gives the following:
--
--```
--  MGMTD: Received signal 7 at 1772183653 (si_addr 0x8879f6); aborting...
--  MGMTD: /lib/libfrr.so.0(zlog_backtrace_sigsafe+0x5c) [0xb6e89c90]
--  MGMTD: /lib/libfrr.so.0(zlog_signal+0xe0) [0xb6e89e80]
--  MGMTD: /lib/libfrr.so.0(+0xd4374) [0xb6ed3374]
--  MGMTD: /lib/libc.so.6(__default_rt_sa_restorer+0) [0xb6ab4d90]
--  MGMTD: /usr/sbin/mgmtd(mgmt_fe_adapter_send_notify+0x6b8) [0x4c3c20]
--  MGMTD: /lib/libfrr.so.0(mgmt_msg_procbufs+0x124) [0xb6e976b8]
--  MGMTD: /lib/libfrr.so.0(+0x98798) [0xb6e97798]
--  MGMTD: /lib/libfrr.so.0(event_call+0xa8) [0xb6ee739c]
--  MGMTD: /lib/libfrr.so.0(frr_run+0xd4) [0xb6e80fc8]
--  MGMTD: /usr/sbin/mgmtd(main+0x188) [0x4bd7ec]
--  MGMTD: /lib/libc.so.6(+0x236b0) [0xb6a9f6b0]
--  MGMTD: /lib/libc.so.6(__libc_start_main+0x98) [0xb6a9f790]
--  MGMTD: in thread msg_conn_proc_msgs scheduled from lib/mgmt_msg.c:543 msg_conn_sched_proc_msgs()
--```
--
--The issue is that messages are queued for sending/receive back-to-back
--with no padding. This means that when mgmt creates a pointer back to the
--data waiting in queue and tries to access fields inside the dereferenced
--message, those accesses are not performed with the alignment constraints
--required by some architectures. For example, ARM ABI AAPCS32 ([1])
--states that structures alignment should be the same as the "most
--aligned" member; so a struct mgmt_msg_header, which contains some
--uint64_t fields (which are 8-bytes alignes), should be 8-bytes aligned
--as well.
--
--On x86, this goes unnoticed because the CPU handles unaligned access
--transparently. On ARM 32-bit with NEON/VFP, the compiler generates
--64-bit store instructions that trap on unaligned addresses. The kernel
--cannot emulate these instructions and kills the process with SIGBUS.
--
--[1] https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst#data-types-and-alignment
--
--Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/5959a3d0cbc73b0c41134bf0d9944a6bd40ba510]
--
--Signed-off-by: Christian Hopps <chopps@labn.net>
--(cherry picked from commit ae7d79f8ff25d5750e5796567ff6317030900d40)
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-----
-- lib/mgmt_be_client.h |   3 +-
-- lib/mgmt_fe_client.h |   3 +-
-- lib/mgmt_msg.c       | 157 ++++++++++++++++++-------------------------
-- 3 files changed, 68 insertions(+), 95 deletions(-)
--
--diff --git a/lib/mgmt_be_client.h b/lib/mgmt_be_client.h
--index f5627e3c4e..2f412a6fbd 100644
----- a/lib/mgmt_be_client.h
--+++ b/lib/mgmt_be_client.h
--@@ -21,7 +21,8 @@ extern "C" {
-- 
-- #define MGMTD_BE_MAX_NUM_MSG_PROC  500
-- #define MGMTD_BE_MAX_NUM_MSG_WRITE 1000
---#define MGMTD_BE_MAX_MSG_LEN	   (64 * 1024)
--+/* Messages can be any size, this is just the preallocated buffer size */
--+#define MGMTD_BE_MAX_MSG_LEN (4 * 1024)
-- 
-- #define MGMTD_BE_CONTAINER_NODE_VAL "<<container>>"
-- 
--diff --git a/lib/mgmt_fe_client.h b/lib/mgmt_fe_client.h
--index 8ff08b566a..3005c5dd01 100644
----- a/lib/mgmt_fe_client.h
--+++ b/lib/mgmt_fe_client.h
--@@ -29,7 +29,8 @@ extern "C" {
-- 
-- #define MGMTD_FE_MAX_NUM_MSG_PROC  500
-- #define MGMTD_FE_MAX_NUM_MSG_WRITE 100
---#define MGMTD_FE_MAX_MSG_LEN	   (64 * 1024)
--+/* Messages can be any size, this is just the preallocated buffer size */
--+#define MGMTD_FE_MAX_MSG_LEN (4 * 1024)
-- 
-- /***************************************************************
--  * Data-structures
--diff --git a/lib/mgmt_msg.c b/lib/mgmt_msg.c
--index f299b52873..fb56f58ab5 100644
----- a/lib/mgmt_msg.c
--+++ b/lib/mgmt_msg.c
--@@ -13,6 +13,7 @@
-- #include "network.h"
-- #include "sockopt.h"
-- #include "stream.h"
--+#include "zlog.h"
-- #include "frrevent.h"
-- #include "mgmt_msg.h"
-- #include "mgmt_msg_native.h"
--@@ -39,8 +40,8 @@ static bool trace;
-- DEFINE_MTYPE(LIB, MSG_CONN, "msg connection state");
-- 
-- /**
--- * Read data from a socket into streams containing 1 or more full msgs headed by
--- * mgmt_msg_hdr which contain API messages (currently protobuf).
--+ * Read data from a socket into a stream containing 1 full msg headed by
--+ * mgmt_msg_hdr.
--  *
--  * Args:
--  *	ms: mgmt_msg_state for this process.
--@@ -57,96 +58,80 @@ enum mgmt_msg_rsched mgmt_msg_read(struct mgmt_msg_state *ms, int fd,
-- 				   bool debug)
-- {
-- 	const char *dbgtag = debug ? ms->idtag : NULL;
---	size_t avail = STREAM_WRITEABLE(ms->ins);
-- 	struct mgmt_msg_hdr *mhdr = NULL;
---	size_t total = 0;
---	size_t mcount = 0;
---	ssize_t n, left;
--+	struct stream *news;
--+	size_t nread;
--+	ssize_t n;
-- 
-- 	assert(ms && fd != -1);
---	MGMT_MSG_TRACE(dbgtag, "enter with %zu bytes available to read on fd %d", avail, fd);
--+	MGMT_MSG_TRACE(dbgtag, "enter to read from fd %d", fd);
--+
--+	assert(stream_get_getp(ms->ins) == 0);
--+	nread = stream_get_endp(ms->ins);
-- 
-- 	/*
---	 * Read as much as we can into the stream.
--+	 * Get header, validate, and resize the stream, if needed, to fit incoming message.
-- 	 */
---	while (avail > sizeof(struct mgmt_msg_hdr)) {
---		n = stream_read_try(ms->ins, fd, avail);
---
---		/* -2 is normal nothing read, and to retry */
---		if (n == -2) {
---			MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
---			break;
---		}
---		if (n <= 0) {
---			if (n == 0)
---				MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
---			else
---				MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
---					     safe_strerror(errno));
---			return MSR_DISCONNECT;
--+	if (nread < sizeof(struct mgmt_msg_hdr)) {
--+		while (nread < sizeof(struct mgmt_msg_hdr)) {
--+			n = stream_read_try(ms->ins, fd, sizeof(struct mgmt_msg_hdr) - nread);
--+			if (n <= 0)
--+				goto not_done;
--+			nread += n;
--+			ms->nrxb += n;
-- 		}
---		MGMT_MSG_TRACE(dbgtag, "read %zd bytes on fd %d", n, fd);
---		ms->nrxb += n;
---		avail -= n;
---	}
-- 
---	/*
---	 * Check if we have read a complete messages or not.
---	 */
---	assert(stream_get_getp(ms->ins) == 0);
---	left = stream_get_endp(ms->ins);
---	while (left > (ssize_t)sizeof(struct mgmt_msg_hdr)) {
---		mhdr = (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
--+		/* Validate the header is sane */
--+		mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
-- 		if (!MGMT_MSG_IS_MARKER(mhdr->marker)) {
-- 			MGMT_MSG_DBG(dbgtag, "recv corrupt buffer on fd %d, disconnect", fd);
-- 			return MSR_DISCONNECT;
--+		} else if (mhdr->len <= sizeof(struct mgmt_msg_hdr)) {
--+			MGMT_MSG_DBG(dbgtag, "recv invalid message length %u on fd %d, disconnect",
--+				     mhdr->len, fd);
--+			return MSR_DISCONNECT;
-- 		}
---		if ((ssize_t)mhdr->len > left)
---			break;
---
---		MGMT_MSG_TRACE(dbgtag, "read full message on fd %d len %u", fd, mhdr->len);
---		total += mhdr->len;
---		left -= mhdr->len;
---		mcount++;
---	}
-- 
---	if (!mcount) {
---		/* Didn't manage to read a full message */
---		if (mhdr && avail == 0) {
---			struct stream *news;
---			/*
---			 * Message was longer than what was left and we have no
---			 * available space to read more in. B/c mcount == 0 the
---			 * message starts at the beginning of the stream so
---			 * therefor the stream is too small to fit the message..
---			 * Resize the stream to fit.
---			 */
--+		/* See if message will fit in the stream, realloc if not */
--+		if (mhdr->len > ms->ins->size) {
--+			MGMT_MSG_DBG(dbgtag,
--+				     "message length %u is greater than available %zu on fd %d",
--+				     mhdr->len, ms->ins->size, fd);
-- 			news = stream_new(mhdr->len);
---			stream_put(news, mhdr, left);
---			stream_set_endp(news, left);
--+			stream_put(news, mhdr, sizeof(struct mgmt_msg_hdr));
-- 			stream_free(ms->ins);
-- 			ms->ins = news;
-- 		}
---		return MSR_SCHED_STREAM;
-- 	}
-- 
---	/*
---	 * We have read at least one message into the stream, queue it up.
---	 */
---	mhdr = (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
---	stream_set_endp(ms->ins, total);
---	stream_fifo_push(&ms->inq, ms->ins);
---	if (left < (ssize_t)sizeof(struct mgmt_msg_hdr))
---		ms->ins = stream_new(ms->max_msg_sz);
---	else
---		/* handle case where message is greater than max */
---		ms->ins = stream_new(MAX(ms->max_msg_sz, mhdr->len));
---	if (left) {
---		stream_put(ms->ins, mhdr, left);
---		stream_set_endp(ms->ins, left);
--+	/* Read the rest of the message. */
--+	mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
--+	while (nread < mhdr->len) {
--+		n = stream_read_try(ms->ins, fd, mhdr->len - nread);
--+		if (n <= 0)
--+			goto not_done;
--+		nread += n;
--+		ms->nrxb += n;
--+		MGMT_MSG_TRACE(dbgtag, "read %zd from fd %d (%zu of %u)", n, fd, nread, mhdr->len);
-- 	}
-- 
--+	/* We've got a full message, push it onto the FIFO and setup for the next message. */
--+	MGMT_MSG_TRACE(dbgtag, "read full msg %zu/%u from fd %d", nread, mhdr->len, fd);
--+	stream_fifo_push(&ms->inq, ms->ins);
--+	ms->ins = stream_new(ms->max_msg_sz);
-- 	return MSR_SCHED_BOTH;
--+
--+not_done:
--+	if (n == -2) {
--+		MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
--+		return MSR_SCHED_STREAM;
--+	}
--+	if (n == 0)
--+		MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
--+	else
--+		MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
--+			     safe_strerror(errno));
--+	return MSR_DISCONNECT;
-- }
-- 
-- /**
--@@ -171,7 +156,6 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
-- 	const char *dbgtag = debug ? ms->idtag : NULL;
-- 	struct mgmt_msg_hdr *mhdr;
-- 	struct stream *work;
---	uint8_t *data;
-- 	size_t left, nproc;
-- 
-- 	MGMT_MSG_TRACE(dbgtag, "Have %zu streams to process", ms->inq.count);
--@@ -182,30 +166,17 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
-- 		if (!work)
-- 			break;
-- 
---		data = STREAM_DATA(work);
-- 		left = stream_get_endp(work);
-- 		MGMT_MSG_TRACE(dbgtag, "Processing stream of len %zu", left);
---
---		for (; left > sizeof(struct mgmt_msg_hdr);
---		     left -= mhdr->len, data += mhdr->len) {
---			mhdr = (struct mgmt_msg_hdr *)data;
---
---			assert(MGMT_MSG_IS_MARKER(mhdr->marker));
---			assert(left >= mhdr->len);
---
---			/*
---			 * Q: if the handler disconnects should stop/flush?
---			 */
---			handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr + 1),
---				   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
---			ms->nrxm++;
---			nproc++;
---		}
---
---		if (work != ms->ins)
---			stream_free(work); /* Free it up */
---		else
---			stream_reset(work); /* Reset stream for next read */
--+		/*
--+		 * Q: if the handler disconnects should we stop/flush?
--+		 */
--+		mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(work);
--+		handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr + 1),
--+			   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
--+		ms->nrxm++;
--+		nproc++;
--+		stream_free(work); /* Free it up */
-- 	}
-- 
-- 	/* return true if should reschedule b/c more to process. */
---- 
--2.43.0
--
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
-similarity index 97%
-rename from meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-rename to meta-networking/recipes-protocols/frr/frr_10.6.2.bb
-index c8ac622016..b72af9f244 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
-@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
-                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-devtools/mpich/mpich_5.0.1.bb b/meta-oe/recipes-devtools/mpich/mpich_5.0.2.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/mpich/mpich_5.0.1.bb
+rename to meta-oe/recipes-devtools/mpich/mpich_5.0.2.bb
+index 55f6cde82f..ade5938dd5 100644
+--- a/meta-oe/recipes-devtools/mpich/mpich_5.0.1.bb
++++ b/meta-oe/recipes-devtools/mpich/mpich_5.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3a296dfb961b957b0e8adf67d8478d3d"
  
+ SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "8c1832a13ddacf071685069f5fadfd1f2877a29e1a628652892c65211b1f3327"
++SRC_URI[sha256sum] = "928c2f18d350a91443fe8024ad01ce2c6009e9c551e0a73e797fc567f119137d"
  
--SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.6;tag=frr-${PV} \
-+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
-            file://frr.pam \
--           file://0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch \
-            "
--SRCREV = "71da51baee6fb2a02b24262defc46591c86e8a81"
-+SRCREV = "c8efb33af96f9f1220d0fdda6ac049f9126edd6f"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+ RDEPENDS:${PN} += "bash perl libxml2"
  
 
