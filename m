@@ -2,249 +2,468 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39BF7CA5FCF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3442CCA5FCB
 	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 03:04:08 +0000 (UTC)
-Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3388.1790823841072361745
+Received: from mail-pz2-f37.google.com (mail-pz2-f37.google.com [74.125.228.37])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3389.1790823843290025655
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2026 20:04:01 -0700
+ Wed, 30 Sep 2026 20:04:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=phrZiS9L;
- spf=pass (domain: gmail.com, ip: 74.125.228.40, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f40.google.com with SMTP id d2e1a72fcca58-8804b59404aso2900662b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:04:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=LaZpLyBw;
+ spf=pass (domain: gmail.com, ip: 74.125.228.37, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f37.google.com with SMTP id d2e1a72fcca58-88826f3ff80so130817b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:04:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790823840; x=1791428640; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hVeFfvCxQ284my7rwlrp6zIBYq0kCXW0TjAXo4DoN9g=;
-        b=phrZiS9Lo7S5GtKdgY5kqCwOUZElPteYkEKQ8HD6WNYW6C4D5Je3YMT2fwr4O5FOa5
-         qf3ghMQse5TAHnJVPF0NfZ5pJOCk6CV66nZA88OajZWap2ZRjSQeMx/0EGeioPFmvT6w
-         HfrLDnMS9g8ODnMriXP/fXPhdUaMvQNwtTLMOFFom2y4xjK2dqNFS56K7zWXcWChcMHz
-         GCP39ad5G0NK7BvIoqKtolL+1n0HBr42DjG30b6PGGhvU0QtM13ow95SkHB5vsYrg3pX
-         slXd28G3JKkp4QlIZQBxff6zqoT48iym+dhZ295zsLkdwCqXTQvhlJ7KwiBecD0KSkxR
-         Dweg==
+        d=gmail.com; s=20251104; t=1790823843; x=1791428643; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=g/Afq7b4X6b9ZAoC16b8zXPCbEGwocga4X7oVYame3o=;
+        b=LaZpLyBw9+QqxQWcg3OZ4fpEgfQDOCCQNrCZlF3sQ62HZKbOLbsLtlK5N9T7HWxDGM
+         vK73NBHdVLIdIKJfYont3nPvTja+OPe1R47TP37ha+Wxf9J6XM9GBXUR9T76ziGRjnmg
+         7AmbnMCqF18PWqcFNtMJfzZcQLfsZ6280UA+dJRVhKqB0S7Two3e7FnULye/xFcIM8Fn
+         wXscrm3bq9MncPLEkjqMly/dooaP9lsePZD034V2/hXjKeulWU9l1PW10kEt2sc0+yy2
+         X4LeGi7VD2gKQO7cVX9VvMkyHxmsdXTDi/9ZgYW736MV30qEX1u2efAlYXdXRpgILnYy
+         D0/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790823840; x=1791428640;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hVeFfvCxQ284my7rwlrp6zIBYq0kCXW0TjAXo4DoN9g=;
-        b=K3gJhGjK4KrxQdJot76Xv304vCZDLpU17TNwXxYSZ2w9s7Tp+ZxA1kOD+3KqXNINEo
-         DMSDGawQ6AXvonezkrH8MzKHxJAXrCyLM/ADMTgK+4HRcft0ow2Mi7pGkzQXZSeEwM65
-         rX/yYMUA4lD0FKbwi5QBpOSYFrIryWN7rD7w50CLl80Z6fidvWASQmQHduSgpjIuy4dt
-         X3Cb3/iDRyLzfbS9gAzCjdpvTt9KLDVGjtoRYeXnb4X2FGcYdzAYf55qID1fFvp2COVh
-         Yr6+grpVQah90p5XQm+kiBG464m+KewCVsEGSF3/6ACWNdiYNYcR2Z7g6w5biE92vmNU
-         5Gmw==
-X-Gm-Message-State: AFuF++nf3deMTsE0SzfJmrHa0B0diEGWk3YEl/4b1TJrNxs9aEgB1Yes
-	mreuLy17ZjafuLWJGM7iitiQeStcjI8eTAcXMxgo4LCjd4i/fZI9JnV6pztLRQ==
-X-Gm-Gg: AYBFou2xA+7pQ/mq2Zj8FvlESx+VeWo9iZZUnG0ild/BIx9ZySdz5LLaVR2NFH57aoZ
-	BZDv9tyZi/kDj2hBjp771o2+BoUbM0G4OTpWDm8yH5x/M/ZktS1F5pNZmMsFFeAp6xfqCwNFcoy
-	h4ylnRz/j3V0Zf5o2YfylgZ83ywCOrBZg65Jl0ljMysZU10Soe8Q1pl7n2UjfhlM+gq5XtBr2HV
-	dW3I6wjY4xXp/KkC7bVSf1YYAiXPTZYEDPtA315Lur8putjosg2zFViUMfWGblMUWhwACrtdm5X
-	DF1jdCbWq4l1zkk+fVeVTwHVdbgso+w15973Mck2sDlvmb2r7eVkEaPAegogce0VpsSiUTqcKR2
-	J0PeiK35D4l64F6fuXg7WXIAk22zgyLx8udfTeA9YhNfdr4aUJ2ZvUmbP6mZzYhHCIeA18Y72u2
-	kjyDsMpkbjIwGgWNNMyPYF1IiwhIZFLuxiCra0plEycHXl39nQKHEpiejKybgJV6Dfrx2GVVikm
-	6NxX8CP3SrJ3db6AUCKu5k=
-X-Received: by 2002:a05:6a00:8e09:b0:882:94ab:20f6 with SMTP id d2e1a72fcca58-887498026f1mr2297928b3a.1.1790823840341;
-        Wed, 30 Sep 2026 20:04:00 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790823843; x=1791428643;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=g/Afq7b4X6b9ZAoC16b8zXPCbEGwocga4X7oVYame3o=;
+        b=kzNcbcqOBTTbMJ23bK8TxbnLaCFcpCHgHHIG3CgT5lLUTGUtI2eRGaC4aikCEYKKcd
+         d2mVNUhy79NNM3t71s41kKDzgFNrxZU9i+Fugk6cBOkSSMOlQwuScHSqCjqrnxmgrM/I
+         FU+pUZpgX0ruX6ynpr8yAaFG/6KGvjFvHSxejuVb/cbWSomM/NtFTwGhn+r52C5WLqGC
+         OHzgD7NCwHAIOtxLd17CyOJOwm4pbS+lqcMLFzi3dpFIABKfxh4eNnAQM3GJJyG2LU1W
+         mY6xhLCj4ahOJVNnWbCgHVPtu+BbVfVhJhyYwcOB6bcarET+K3bfIUGcK90sF+xavWVm
+         lEDA==
+X-Gm-Message-State: AFuF++m2EjMUSLLiVGfVLXB88RgSTBc0SrOsMadSiUU7O0vEBonBUfpx
+	xErIY09l/ew0gBXzrC5ePApD4m4VATouc85dVj2BlscKyjpy+4VuJVePj24SPg==
+X-Gm-Gg: AYBFou2I4WyH3ym3s0Ph5nzCIaWzQNuatfY4kMR50Jh5Jifrc+V39wwvLHuNAzrqXlh
+	Bn3wblVJKeNCNWmDliMFTSOAdLXXLx8RrzUqdji6vBXbB54q3GlUGFbyrz2is1oVgQozcG9UPHG
+	NO1k3X+o0ER7/SZciEPn1x4yMafyIQrYgp+7RBlJIX55zrmaCSAWngzEiy2+ZehpF5LqU+ovPn1
+	2+onDnUM9/4kOchZitLWXy2/h/Q34Bi07v3HASBrTcrahrhII0PFhOl66cOPHZyLctx1IWUzY7H
+	c7G9ZdsSK0y1u+EySbdixuwVagoZr5pLY4BLhs56fekOAgu0v9d1KqjSZAy88KWSD4gBaEILDfV
+	b1bqDW7lmqnsSr4UwrWwOuv8M1uEitwLg6+HGOzo1/hRXFEicnTrugIhwPOoD2lgLD/4wykOBT+
+	tav4XNe+gqZv44eheT+jxEA8UPy49ArNv1VhaufaXI0FVvvEjSdadxlZks1yVuCKtNLC9yZ5keu
+	/d0BlxLckp7/JKCX6PdzbJEFHslGBztuw==
+X-Received: by 2002:a05:6a00:2d14:b0:878:34d7:699e with SMTP id d2e1a72fcca58-8874c8d4a62mr2711636b3a.46.1790823842415;
+        Wed, 30 Sep 2026 20:04:02 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.03.58
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.04.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 20:03:59 -0700 (PDT)
+        Wed, 30 Sep 2026 20:04:02 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 12/17] squid: upgrade 7.6 -> 7.7
-Date: Thu,  1 Oct 2026 16:03:24 +1300
-Message-ID: <20261001030331.1581021-12-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 13/17] frr: upgrade 10.6.1 -> 10.6.2
+Date: Thu,  1 Oct 2026 16:03:25 +1300
+Message-ID: <20261001030331.1581021-13-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
 References: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:04:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130561
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130562
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Also refresh patches for the new version.
+Dropped patch that is part of the upstream version.
 
 Changelog:
-https://github.com/squid-cache/squid/blob/SQUID_7_7/ChangeLog
+https://github.com/FRRouting/frr/releases/tag/frr-10.6.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...l-remove-reference-to-nonexisting-directory.patch |  5 +----
- ...-make-squid-conf-tests-run-on-target-device.patch | 12 ++++++------
- .../squid/files/Set-up-for-cross-compilation.patch   |  8 +++-----
- .../squid/files/Skip-AC_RUN_IFELSE-tests.patch       |  9 ++++-----
- ...uid-use-serial-tests-config-needed-by-ptest.patch |  5 ++---
- .../squid/{squid_7.6.bb => squid_7.7.bb}             |  2 +-
- 6 files changed, 17 insertions(+), 24 deletions(-)
- rename meta-networking/recipes-daemons/squid/{squid_7.6.bb => squid_7.7.bb} (98%)
+ ..._msg-recv-to-deal-with-mis-alignment.patch | 352 ------------------
+ .../frr/{frr_10.6.1.bb => frr_10.6.2.bb}      |   5 +-
+ 2 files changed, 2 insertions(+), 355 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
+ rename meta-networking/recipes-protocols/frr/{frr_10.6.1.bb => frr_10.6.2.bb} (97%)
 
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-libltdl-remove-reference-to-nonexisting-directory.patch b/meta-networking/recipes-daemons/squid/files/0001-libltdl-remove-reference-to-nonexisting-directory.patch
-index 9babcfb24d..d5c83a8834 100644
---- a/meta-networking/recipes-daemons/squid/files/0001-libltdl-remove-reference-to-nonexisting-directory.patch
-+++ b/meta-networking/recipes-daemons/squid/files/0001-libltdl-remove-reference-to-nonexisting-directory.patch
-@@ -1,4 +1,4 @@
--From a6638a007a42917fea4b03e5c30d9b7208c634c4 Mon Sep 17 00:00:00 2001
-+From 9c3718bce43146f219dec3c3cd47e57a6b418a19 Mon Sep 17 00:00:00 2001
- From: Peter Marko <peter.marko@siemens.com>
- Date: Thu, 7 Nov 2024 22:04:40 +0100
- Subject: [PATCH] libltdl: remove reference to nonexisting directory
-@@ -50,6 +50,3 @@ index 9929557..c77df2e 100644
-  AUTOMAKE_OPTIONS = foreign
-  
-  # -I$(srcdir) is needed for user that built libltdl with a sub-Automake
+diff --git a/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch b/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
+deleted file mode 100644
+index 22cc10cf31..0000000000
+--- a/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
++++ /dev/null
+@@ -1,352 +0,0 @@
+-From 5959a3d0cbc73b0c41134bf0d9944a6bd40ba510 Mon Sep 17 00:00:00 2001
+-From: Christian Hopps <chopps@labn.net>
+-Date: Sat, 18 Apr 2026 03:01:46 +0000
+-Subject: [PATCH] lib: fix mgmt_msg recv to deal with mis-alignment
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-We need our messages to start on 64 bit boundaries as the message buffer
+-is accessed directly as structured data. In particular on ARM32 arch
+-using the data this way lead to unaligned access and SIGBUS.
+-
+-The minor optimization of reading multiple messages into a single stream
+-buffer complicated this. Instead we KISS and switch to one message per
+-stream buffer.
+-
+-Fixes #20087.
+-
+-Signed-off-by: Christian Hopps <chopps@labn.net>
+-Co-developed-by: Samir MOUHOUNE <samir.mouhoune@nav-timing.safrangroup.com>
+-Co-developed-by: Alexis Lothoré <alexis.lothore@bootlin.com>
+-
+-See also PR #20985
+-
+-This issue was identified and another solution was provided by Samir
+-MOUHOUNE with the following commit message comments:
+-
+-On ARM32 systems, mgmtd crashes at startup on an alignment fault:
+-
+-```
+-  frrinit.sh[158]: Starting watchfrr with command: '  /usr/sbin/watchfrr  -d   mgmtd zebra staticd'
+-  watchfrr[168]: [T83RR-8SM5G] watchfrr 10.5.2 starting: vty@0
+-  watchfrr[168]: [ZCJ3S-SPH5S] mgmtd state -> down : initial connection attempt failed
+-  watchfrr[168]: [ZCJ3S-SPH5S] zebra state -> down : initial connection attempt failed
+-  watchfrr[168]: [ZCJ3S-SPH5S] staticd state -> down : initial connection attempt failed
+-  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 169]: /usr/sbin/watchfrr.sh restart all
+-  frrinit.sh[180]: 2026/02/27 09:14:13 ZEBRA: [KGY44-D47GD][EC 4043309111] Disabling MPLS support (no kernel support)
+-  watchfrr[168]: [QDG3Y-BY5TN] zebra state -> up : connect succeeded
+-  kernel: Alignment trap: not handling instruction edc30b02 at [<004c3c1c>]
+-  kernel: 8<--- cut here ---
+-  kernel: Unhandled fault: alignment exception (0x801) at 0x008879f6
+-  kernel: [008879f6] *pgd=9baf6831
+-  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 189]: /usr/sbin/watchfrr.sh restart mgmtd
+-  frrinit.sh[189]: Cannot stop mgmtd: pid 179 not running
+-  watchfrr.sh[196]: Cannot stop mgmtd: pid 179 not running
+-  frrinit.sh[202]: [202|zebra] sending configuration
+-  frrinit.sh[202]: [202|zebra] done
+-  frrinit.sh[216]: [216|watchfrr] sending configuration
+-  frrinit.sh[218]: [218|staticd] sending configuration
+-  watchfrr[168]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
+-  frrinit.sh[199]: Waiting for children to finish applying config...
+-  frrinit.sh[216]: [216|watchfrr] done
+-```
+-
+-When checking crashlogs in /var/tmp/frr, mgmt gives the following:
+-
+-```
+-  MGMTD: Received signal 7 at 1772183653 (si_addr 0x8879f6); aborting...
+-  MGMTD: /lib/libfrr.so.0(zlog_backtrace_sigsafe+0x5c) [0xb6e89c90]
+-  MGMTD: /lib/libfrr.so.0(zlog_signal+0xe0) [0xb6e89e80]
+-  MGMTD: /lib/libfrr.so.0(+0xd4374) [0xb6ed3374]
+-  MGMTD: /lib/libc.so.6(__default_rt_sa_restorer+0) [0xb6ab4d90]
+-  MGMTD: /usr/sbin/mgmtd(mgmt_fe_adapter_send_notify+0x6b8) [0x4c3c20]
+-  MGMTD: /lib/libfrr.so.0(mgmt_msg_procbufs+0x124) [0xb6e976b8]
+-  MGMTD: /lib/libfrr.so.0(+0x98798) [0xb6e97798]
+-  MGMTD: /lib/libfrr.so.0(event_call+0xa8) [0xb6ee739c]
+-  MGMTD: /lib/libfrr.so.0(frr_run+0xd4) [0xb6e80fc8]
+-  MGMTD: /usr/sbin/mgmtd(main+0x188) [0x4bd7ec]
+-  MGMTD: /lib/libc.so.6(+0x236b0) [0xb6a9f6b0]
+-  MGMTD: /lib/libc.so.6(__libc_start_main+0x98) [0xb6a9f790]
+-  MGMTD: in thread msg_conn_proc_msgs scheduled from lib/mgmt_msg.c:543 msg_conn_sched_proc_msgs()
+-```
+-
+-The issue is that messages are queued for sending/receive back-to-back
+-with no padding. This means that when mgmt creates a pointer back to the
+-data waiting in queue and tries to access fields inside the dereferenced
+-message, those accesses are not performed with the alignment constraints
+-required by some architectures. For example, ARM ABI AAPCS32 ([1])
+-states that structures alignment should be the same as the "most
+-aligned" member; so a struct mgmt_msg_header, which contains some
+-uint64_t fields (which are 8-bytes alignes), should be 8-bytes aligned
+-as well.
+-
+-On x86, this goes unnoticed because the CPU handles unaligned access
+-transparently. On ARM 32-bit with NEON/VFP, the compiler generates
+-64-bit store instructions that trap on unaligned addresses. The kernel
+-cannot emulate these instructions and kills the process with SIGBUS.
+-
+-[1] https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst#data-types-and-alignment
+-
+-Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/5959a3d0cbc73b0c41134bf0d9944a6bd40ba510]
+-
+-Signed-off-by: Christian Hopps <chopps@labn.net>
+-(cherry picked from commit ae7d79f8ff25d5750e5796567ff6317030900d40)
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- lib/mgmt_be_client.h |   3 +-
+- lib/mgmt_fe_client.h |   3 +-
+- lib/mgmt_msg.c       | 157 ++++++++++++++++++-------------------------
+- 3 files changed, 68 insertions(+), 95 deletions(-)
+-
+-diff --git a/lib/mgmt_be_client.h b/lib/mgmt_be_client.h
+-index f5627e3c4e..2f412a6fbd 100644
+---- a/lib/mgmt_be_client.h
+-+++ b/lib/mgmt_be_client.h
+-@@ -21,7 +21,8 @@ extern "C" {
+- 
+- #define MGMTD_BE_MAX_NUM_MSG_PROC  500
+- #define MGMTD_BE_MAX_NUM_MSG_WRITE 1000
+--#define MGMTD_BE_MAX_MSG_LEN	   (64 * 1024)
+-+/* Messages can be any size, this is just the preallocated buffer size */
+-+#define MGMTD_BE_MAX_MSG_LEN (4 * 1024)
+- 
+- #define MGMTD_BE_CONTAINER_NODE_VAL "<<container>>"
+- 
+-diff --git a/lib/mgmt_fe_client.h b/lib/mgmt_fe_client.h
+-index 8ff08b566a..3005c5dd01 100644
+---- a/lib/mgmt_fe_client.h
+-+++ b/lib/mgmt_fe_client.h
+-@@ -29,7 +29,8 @@ extern "C" {
+- 
+- #define MGMTD_FE_MAX_NUM_MSG_PROC  500
+- #define MGMTD_FE_MAX_NUM_MSG_WRITE 100
+--#define MGMTD_FE_MAX_MSG_LEN	   (64 * 1024)
+-+/* Messages can be any size, this is just the preallocated buffer size */
+-+#define MGMTD_FE_MAX_MSG_LEN (4 * 1024)
+- 
+- /***************************************************************
+-  * Data-structures
+-diff --git a/lib/mgmt_msg.c b/lib/mgmt_msg.c
+-index f299b52873..fb56f58ab5 100644
+---- a/lib/mgmt_msg.c
+-+++ b/lib/mgmt_msg.c
+-@@ -13,6 +13,7 @@
+- #include "network.h"
+- #include "sockopt.h"
+- #include "stream.h"
+-+#include "zlog.h"
+- #include "frrevent.h"
+- #include "mgmt_msg.h"
+- #include "mgmt_msg_native.h"
+-@@ -39,8 +40,8 @@ static bool trace;
+- DEFINE_MTYPE(LIB, MSG_CONN, "msg connection state");
+- 
+- /**
+-- * Read data from a socket into streams containing 1 or more full msgs headed by
+-- * mgmt_msg_hdr which contain API messages (currently protobuf).
+-+ * Read data from a socket into a stream containing 1 full msg headed by
+-+ * mgmt_msg_hdr.
+-  *
+-  * Args:
+-  *	ms: mgmt_msg_state for this process.
+-@@ -57,96 +58,80 @@ enum mgmt_msg_rsched mgmt_msg_read(struct mgmt_msg_state *ms, int fd,
+- 				   bool debug)
+- {
+- 	const char *dbgtag = debug ? ms->idtag : NULL;
+--	size_t avail = STREAM_WRITEABLE(ms->ins);
+- 	struct mgmt_msg_hdr *mhdr = NULL;
+--	size_t total = 0;
+--	size_t mcount = 0;
+--	ssize_t n, left;
+-+	struct stream *news;
+-+	size_t nread;
+-+	ssize_t n;
+- 
+- 	assert(ms && fd != -1);
+--	MGMT_MSG_TRACE(dbgtag, "enter with %zu bytes available to read on fd %d", avail, fd);
+-+	MGMT_MSG_TRACE(dbgtag, "enter to read from fd %d", fd);
+-+
+-+	assert(stream_get_getp(ms->ins) == 0);
+-+	nread = stream_get_endp(ms->ins);
+- 
+- 	/*
+--	 * Read as much as we can into the stream.
+-+	 * Get header, validate, and resize the stream, if needed, to fit incoming message.
+- 	 */
+--	while (avail > sizeof(struct mgmt_msg_hdr)) {
+--		n = stream_read_try(ms->ins, fd, avail);
+--
+--		/* -2 is normal nothing read, and to retry */
+--		if (n == -2) {
+--			MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
+--			break;
+--		}
+--		if (n <= 0) {
+--			if (n == 0)
+--				MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
+--			else
+--				MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
+--					     safe_strerror(errno));
+--			return MSR_DISCONNECT;
+-+	if (nread < sizeof(struct mgmt_msg_hdr)) {
+-+		while (nread < sizeof(struct mgmt_msg_hdr)) {
+-+			n = stream_read_try(ms->ins, fd, sizeof(struct mgmt_msg_hdr) - nread);
+-+			if (n <= 0)
+-+				goto not_done;
+-+			nread += n;
+-+			ms->nrxb += n;
+- 		}
+--		MGMT_MSG_TRACE(dbgtag, "read %zd bytes on fd %d", n, fd);
+--		ms->nrxb += n;
+--		avail -= n;
+--	}
+- 
+--	/*
+--	 * Check if we have read a complete messages or not.
+--	 */
+--	assert(stream_get_getp(ms->ins) == 0);
+--	left = stream_get_endp(ms->ins);
+--	while (left > (ssize_t)sizeof(struct mgmt_msg_hdr)) {
+--		mhdr = (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
+-+		/* Validate the header is sane */
+-+		mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
+- 		if (!MGMT_MSG_IS_MARKER(mhdr->marker)) {
+- 			MGMT_MSG_DBG(dbgtag, "recv corrupt buffer on fd %d, disconnect", fd);
+- 			return MSR_DISCONNECT;
+-+		} else if (mhdr->len <= sizeof(struct mgmt_msg_hdr)) {
+-+			MGMT_MSG_DBG(dbgtag, "recv invalid message length %u on fd %d, disconnect",
+-+				     mhdr->len, fd);
+-+			return MSR_DISCONNECT;
+- 		}
+--		if ((ssize_t)mhdr->len > left)
+--			break;
+--
+--		MGMT_MSG_TRACE(dbgtag, "read full message on fd %d len %u", fd, mhdr->len);
+--		total += mhdr->len;
+--		left -= mhdr->len;
+--		mcount++;
+--	}
+- 
+--	if (!mcount) {
+--		/* Didn't manage to read a full message */
+--		if (mhdr && avail == 0) {
+--			struct stream *news;
+--			/*
+--			 * Message was longer than what was left and we have no
+--			 * available space to read more in. B/c mcount == 0 the
+--			 * message starts at the beginning of the stream so
+--			 * therefor the stream is too small to fit the message..
+--			 * Resize the stream to fit.
+--			 */
+-+		/* See if message will fit in the stream, realloc if not */
+-+		if (mhdr->len > ms->ins->size) {
+-+			MGMT_MSG_DBG(dbgtag,
+-+				     "message length %u is greater than available %zu on fd %d",
+-+				     mhdr->len, ms->ins->size, fd);
+- 			news = stream_new(mhdr->len);
+--			stream_put(news, mhdr, left);
+--			stream_set_endp(news, left);
+-+			stream_put(news, mhdr, sizeof(struct mgmt_msg_hdr));
+- 			stream_free(ms->ins);
+- 			ms->ins = news;
+- 		}
+--		return MSR_SCHED_STREAM;
+- 	}
+- 
+--	/*
+--	 * We have read at least one message into the stream, queue it up.
+--	 */
+--	mhdr = (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
+--	stream_set_endp(ms->ins, total);
+--	stream_fifo_push(&ms->inq, ms->ins);
+--	if (left < (ssize_t)sizeof(struct mgmt_msg_hdr))
+--		ms->ins = stream_new(ms->max_msg_sz);
+--	else
+--		/* handle case where message is greater than max */
+--		ms->ins = stream_new(MAX(ms->max_msg_sz, mhdr->len));
+--	if (left) {
+--		stream_put(ms->ins, mhdr, left);
+--		stream_set_endp(ms->ins, left);
+-+	/* Read the rest of the message. */
+-+	mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
+-+	while (nread < mhdr->len) {
+-+		n = stream_read_try(ms->ins, fd, mhdr->len - nread);
+-+		if (n <= 0)
+-+			goto not_done;
+-+		nread += n;
+-+		ms->nrxb += n;
+-+		MGMT_MSG_TRACE(dbgtag, "read %zd from fd %d (%zu of %u)", n, fd, nread, mhdr->len);
+- 	}
+- 
+-+	/* We've got a full message, push it onto the FIFO and setup for the next message. */
+-+	MGMT_MSG_TRACE(dbgtag, "read full msg %zu/%u from fd %d", nread, mhdr->len, fd);
+-+	stream_fifo_push(&ms->inq, ms->ins);
+-+	ms->ins = stream_new(ms->max_msg_sz);
+- 	return MSR_SCHED_BOTH;
+-+
+-+not_done:
+-+	if (n == -2) {
+-+		MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
+-+		return MSR_SCHED_STREAM;
+-+	}
+-+	if (n == 0)
+-+		MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
+-+	else
+-+		MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
+-+			     safe_strerror(errno));
+-+	return MSR_DISCONNECT;
+- }
+- 
+- /**
+-@@ -171,7 +156,6 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
+- 	const char *dbgtag = debug ? ms->idtag : NULL;
+- 	struct mgmt_msg_hdr *mhdr;
+- 	struct stream *work;
+--	uint8_t *data;
+- 	size_t left, nproc;
+- 
+- 	MGMT_MSG_TRACE(dbgtag, "Have %zu streams to process", ms->inq.count);
+-@@ -182,30 +166,17 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
+- 		if (!work)
+- 			break;
+- 
+--		data = STREAM_DATA(work);
+- 		left = stream_get_endp(work);
+- 		MGMT_MSG_TRACE(dbgtag, "Processing stream of len %zu", left);
+--
+--		for (; left > sizeof(struct mgmt_msg_hdr);
+--		     left -= mhdr->len, data += mhdr->len) {
+--			mhdr = (struct mgmt_msg_hdr *)data;
+--
+--			assert(MGMT_MSG_IS_MARKER(mhdr->marker));
+--			assert(left >= mhdr->len);
+--
+--			/*
+--			 * Q: if the handler disconnects should stop/flush?
+--			 */
+--			handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr + 1),
+--				   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
+--			ms->nrxm++;
+--			nproc++;
+--		}
+--
+--		if (work != ms->ins)
+--			stream_free(work); /* Free it up */
+--		else
+--			stream_reset(work); /* Reset stream for next read */
+-+		/*
+-+		 * Q: if the handler disconnects should we stop/flush?
+-+		 */
+-+		mhdr = (struct mgmt_msg_hdr *)STREAM_DATA(work);
+-+		handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr + 1),
+-+			   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
+-+		ms->nrxm++;
+-+		nproc++;
+-+		stream_free(work); /* Free it up */
+- 	}
+- 
+- 	/* return true if should reschedule b/c more to process. */
 --- 
--2.30.2
+-2.43.0
 -
-diff --git a/meta-networking/recipes-daemons/squid/files/0002-squid-make-squid-conf-tests-run-on-target-device.patch b/meta-networking/recipes-daemons/squid/files/0002-squid-make-squid-conf-tests-run-on-target-device.patch
-index 86b454d710..b42f77bc74 100644
---- a/meta-networking/recipes-daemons/squid/files/0002-squid-make-squid-conf-tests-run-on-target-device.patch
-+++ b/meta-networking/recipes-daemons/squid/files/0002-squid-make-squid-conf-tests-run-on-target-device.patch
-@@ -1,4 +1,4 @@
--From cd8bf8a4bf881f84c23a5fc1f48bb716efa51512 Mon Sep 17 00:00:00 2001
-+From 9f6eb086ee1d525cf404189893fccfb8a03235bb Mon Sep 17 00:00:00 2001
- From: Patrick Wicki <patrick.wicki@siemens.com>
- Date: Wed, 22 Nov 2023 15:35:44 +0100
- Subject: [PATCH] squid: make squid-conf-tests run on target device
-@@ -20,7 +20,7 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
-  3 files changed, 18 insertions(+), 18 deletions(-)
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
+similarity index 97%
+rename from meta-networking/recipes-protocols/frr/frr_10.6.1.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.6.2.bb
+index c8ac622016..b72af9f244 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
+@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
  
- diff --git a/src/TestHeaders.am b/src/TestHeaders.am
--index 0ed5f56..d668876 100644
-+index 4562d28..bc57e4c 100644
- --- a/src/TestHeaders.am
- +++ b/src/TestHeaders.am
- @@ -14,8 +14,8 @@ EXCLUDE_FROM_HDR_TESTING =
-@@ -42,7 +42,7 @@ index 0ed5f56..d668876 100644
- +#TESTS += testHeaders
-  CLEANFILES += testHeaders
- diff --git a/test-suite/Makefile.am b/test-suite/Makefile.am
--index 0da5844..0bc381a 100644
-+index 1a7d91d..f51bf92 100644
- --- a/test-suite/Makefile.am
- +++ b/test-suite/Makefile.am
- @@ -11,7 +11,7 @@ include $(top_srcdir)/src/Common.am
-@@ -105,7 +105,7 @@ index 0da5844..0bc381a 100644
- +	/var/log/squid-stderr.log.next \
- +	/var/log/squid-stderr.log.unmatched
- diff --git a/test-suite/test-squid-conf.sh b/test-suite/test-squid-conf.sh
--index 413a927..f678c5a 100755
-+index 7d88ea5..bb5d76f 100755
- --- a/test-suite/test-squid-conf.sh
- +++ b/test-suite/test-squid-conf.sh
- @@ -76,7 +76,7 @@ expectMessages()
-@@ -124,5 +124,5 @@ index 413a927..f678c5a 100755
- -errorLog="squid-stderr.log"
- +errorLog="/var/log/squid-stderr.log"
-  
-- $sbindir/squid -k parse -f $configFile 2> $errorLog
-- result=$?
-+ # Start `$sbindir/squid` from $configFile's directory, so that Squid can find files included by $configFile.
-+ # If we decide to support relative `$sbindir` paths, we will add a portable realpath replacement.
-diff --git a/meta-networking/recipes-daemons/squid/files/Set-up-for-cross-compilation.patch b/meta-networking/recipes-daemons/squid/files/Set-up-for-cross-compilation.patch
-index f80d37de20..a4cb5f40ef 100644
---- a/meta-networking/recipes-daemons/squid/files/Set-up-for-cross-compilation.patch
-+++ b/meta-networking/recipes-daemons/squid/files/Set-up-for-cross-compilation.patch
-@@ -1,4 +1,4 @@
--From c0be3192f608037682464bcb728e97f9d9b543aa Mon Sep 17 00:00:00 2001
-+From 19c82bff799611303f2985a2d317662b0529b24d Mon Sep 17 00:00:00 2001
- From: Jim Somerville <Jim.Somerville@windriver.com>
- Date: Wed, 16 Oct 2013 16:41:03 -0400
- Subject: [PATCH] Set up for cross compilation
-@@ -8,16 +8,14 @@ Message-Id: <17e5a28667f667859c48bee25e575a072d39ee1b.1381956170.git.Jim.Somervi
- Set the host compiler to BUILD_CXX so
- proper cross compilation can occur.
  
-+Upstream-Status: Pending
- Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
--
- ---
--Upstream-Status: Pending
--
-  configure.ac | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/configure.ac b/configure.ac
--index c7312d8..3b0e9e2 100644
-+index cd7fbfd..850fdaf 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -29,6 +29,7 @@ m4_include([acinclude/lib-checks.m4])
-diff --git a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
-index 39392e1cc7..66987e02e6 100644
---- a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
-+++ b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
-@@ -1,4 +1,4 @@
--From 050f8ab275a7a5f3d94045da6b15a2b63dfbeb3f Mon Sep 17 00:00:00 2001
-+From 822fd6630617040a713df5eb876d68051a716a0f Mon Sep 17 00:00:00 2001
- From: Jim Somerville <Jim.Somerville@windriver.com>
- Date: Tue, 14 Oct 2014 02:56:08 -0400
- Subject: [PATCH] Skip AC_RUN_IFELSE tests
-@@ -10,13 +10,12 @@ environment.  Choose sane defaults.
- 
- Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
--
- ---
-- acinclude/lib-checks.m4 |  8 ++++++--
-- 2 files changed, 15 insertions(+), 3 deletions(-)
-+ acinclude/lib-checks.m4 | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
- 
- diff --git a/acinclude/lib-checks.m4 b/acinclude/lib-checks.m4
--index 9793b9a..4f2dc83 100644
-+index 573ca17..f9c4666 100644
- --- a/acinclude/lib-checks.m4
- +++ b/acinclude/lib-checks.m4
- @@ -207,7 +207,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_CONST_SSL_METHOD],[
-diff --git a/meta-networking/recipes-daemons/squid/files/squid-use-serial-tests-config-needed-by-ptest.patch b/meta-networking/recipes-daemons/squid/files/squid-use-serial-tests-config-needed-by-ptest.patch
-index d57ebe7869..21439a1334 100644
---- a/meta-networking/recipes-daemons/squid/files/squid-use-serial-tests-config-needed-by-ptest.patch
-+++ b/meta-networking/recipes-daemons/squid/files/squid-use-serial-tests-config-needed-by-ptest.patch
-@@ -1,4 +1,4 @@
--From 3d881c112bba765731d581194aae95651819b715 Mon Sep 17 00:00:00 2001
-+From 5ce613e9f0c4725aaa82d9a62f76c809e375fe49 Mon Sep 17 00:00:00 2001
- From: Jackie Huang <jackie.huang@windriver.com>
- Date: Tue, 19 Jul 2016 01:56:23 -0400
- Subject: [PATCH] squid: use serial-tests config needed by ptest
-@@ -9,13 +9,12 @@ serial-tests is required to generate those targets.
- Upstream-Status: Inappropriate [default automake behavior incompatible with ptest]
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
--
- ---
-  configure.ac | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 3b0e9e2..c730212 100644
-+index 850fdaf..10968b3 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -10,7 +10,7 @@ AC_PREREQ(2.61)
-diff --git a/meta-networking/recipes-daemons/squid/squid_7.6.bb b/meta-networking/recipes-daemons/squid/squid_7.7.bb
-similarity index 98%
-rename from meta-networking/recipes-daemons/squid/squid_7.6.bb
-rename to meta-networking/recipes-daemons/squid/squid_7.7.bb
-index 637d1f6942..b657197fd7 100644
---- a/meta-networking/recipes-daemons/squid/squid_7.6.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_7.7.bb
-@@ -22,7 +22,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
-            file://squid.nm \
+-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.6;tag=frr-${PV} \
++SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
+            file://frr.pam \
+-           file://0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch \
             "
+-SRCREV = "71da51baee6fb2a02b24262defc46591c86e8a81"
++SRCREV = "c8efb33af96f9f1220d0fdda6ac049f9126edd6f"
  
--SRC_URI[sha256sum] = "852178fdc37c5b0786a934fc990c7d2fffc82acf19b2284be209b96431d25992"
-+SRC_URI[sha256sum] = "e3bd613b91b1c498ec2992276063342a85cd6edddd5521294e04f44bc055da9b"
+ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce \
-                     file://errors/COPYRIGHT;md5=41d117978dbffedc893e8eeca12537d0 \
 
