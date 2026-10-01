@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA593CA5FD2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64F27CA5FCF
 	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 03:03:47 +0000 (UTC)
-Received: from mail-pz2-f38.google.com (mail-pz2-f38.google.com [74.125.228.38])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3432.1790823826493680218
+Received: from mail-pz2-f27.google.com (mail-pz2-f27.google.com [74.125.228.27])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3431.1790823824313209753
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2026 20:03:46 -0700
+ Wed, 30 Sep 2026 20:03:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BglchpRi;
- spf=pass (domain: gmail.com, ip: 74.125.228.38, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pz2-f38.google.com with SMTP id d2e1a72fcca58-88272e1d069so2981254b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:03:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=M67z5+h3;
+ spf=pass (domain: gmail.com, ip: 74.125.228.27, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pz2-f27.google.com with SMTP id d2e1a72fcca58-880fcd3790bso2166656b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 20:03:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790823826; x=1791428626; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790823824; x=1791428624; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IyfMsYR8SgyTAhR7rsx9DZ3IE/jvcvv0sEke5ufCSsc=;
-        b=BglchpRie2WhJBshYfQ9/Lwiq1BKEiUFL+8KFFRkzhjSwEOhYcAK/b513n4OX935D7
-         Z9/m2Z/nKtRLsLBIruJuj49D280pZTSpidH18PjdbpOVb38bGcQ3Oc32CurNDC7Jise4
-         HGhZ+sbFaumhoB49W5Xb8Gp+5CU7uqXYDYbVX/ajYm2yysbn4p94HgDqXWY/h0U7W3wo
-         2Ys5KHLOcsquGPxziKGdtf2PnEkfR0HUtr0Z+kbBZSU9jo9plc1DkPV0C+DmHvytCoas
-         j/Yet2gP/mC/AU9ox6y0Do+bakppFWAYcv213ld4Nujd1MKY11Rj0jmBjQiXBWYwQpWi
-         X2WA==
+        bh=aQzZxmvHVnrELgJ7YDvOQQnNk6Lg7BWU8QMXuNivwbc=;
+        b=M67z5+h3p0TC2YJpuCkR25YxPJWhWOkPfN0gU3X+bS7WsSy7Vkw/bN4ieuMFMoAuNM
+         Hn9HrukObBQwnrP/56i2noCtaCcGhVo++sbbgjl+g5St8cbdCasQUc205OV/hs0aJn6E
+         hhE6wbKgLj5Tl3+ce3k4DvVr6qSWSpLWAI9EAQOWIGB0yWuUitw3tJSBHegtZMtFYVhd
+         S2JecCvc9O8FGFdfgkzKn97FLBNAtdXQB9B3Gsz83pX17gobM/EW/nX/NLMpD7IvqQeH
+         /rlVGoahTg6oFATwlG2dx6MjKhs5B4KDZWXxHypWq0nQrF/Yjx5ue9PatVLkQQ/HRwB6
+         2hMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790823826; x=1791428626;
+        d=1e100.net; s=20260707; t=1790823824; x=1791428624;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IyfMsYR8SgyTAhR7rsx9DZ3IE/jvcvv0sEke5ufCSsc=;
-        b=g8kzrpdiolpEhB77ESzcnw5JhpZ+XW/LiYdpCLnGUbMLQ679aLAWAUDHMbOG8UyXG5
-         X2KDbI/7qY3yiO0tHi6ElOtz/9qiGFle3zHsY0mhuxB1QiiGmeSP+rBBWS7CfVIkBHeL
-         kHYCn1H5pYZ4TOjtEo91Dpsj+pBZLmXEqRRT0Os/ySyUT1H2P7N3b5nkVSw/SAiAozAp
-         OM3zVw/nZ5PSzEAn/GJezbj30/1lAU1akbXa4o4omzSkweIBBt+RuB9DWNrsuUJQeURe
-         UINDy8vYg039AsE5t7wk5GxOp6WgtSfasGVzNNSTttVpmvc2vpD6G9kr6oD70IUiDOrK
-         wIpQ==
-X-Gm-Message-State: AFuF++n/24ObbOFwM8Rd7Skivfsdw2zbxO2zQq6eJYH1O5Yt2Ng8VgzC
-	x0vOdaGZ2GqvDAn+yumssGhwYo2ZHIe5lxKLBKikPIeM1EPmyHp0ZoSzoZVg3Q==
-X-Gm-Gg: AYBFou3RyVvzumeDfyxlqbXp+l7sI3GSzNhVNnHR1yZpRqsHr7fjyu3FC6P29p3lg0r
-	G5fH43fMErXPt/5TZZ4ZUZVsvNaIez0zsOKBiQqpEAaTiBMATV6o6NL8ISy9TGtN38yQ7/4ROjp
-	SG3sfA3BTBCxj2NrK8TiYpOk8mUT34OC9QwnZeWKOmWzkhAZknaoYogpCag1HQUK1jZ6ygKaAWQ
-	o5w7jo44pbMc+J298QeM9/vfYGmfOaqGKFRX/ro3EYw+qMXqr32WT1BaEW4Ha0Upj/2RlYoZW27
-	iykYPg/Ogxz/Es9fcePdA7tnd8ZeLoDdTzN0hN5Xv1MdUtJ6Nt3F2Ao7jarxOwgZhgc87GHGiO3
-	NVylR5PeyMvR2CmtZnzGV59AGaHmwEaNY7/8duzWN0vpXnAaZHnEnndDp23WtRiJSkMq9jwW892
-	11h3LNU+SEnZCKOhyWb6uQIYpA7AYr5s1pNiU/qXc1EN3FwVVyWBoZ0YXPNXrncHAp5eYUhV+oS
-	Q+C6lvelqumiwE4bkYydcM=
-X-Received: by 2002:a05:6a00:9084:b0:878:34d7:697b with SMTP id d2e1a72fcca58-8874cebda9fmr2326823b3a.41.1790823825784;
-        Wed, 30 Sep 2026 20:03:45 -0700 (PDT)
+        bh=aQzZxmvHVnrELgJ7YDvOQQnNk6Lg7BWU8QMXuNivwbc=;
+        b=LWIzjUEy9VcLYTuoKPfB0W05mYAe+WTwi8FORjQ4Vt6tsEYIbe3K265Xcp4xN1fyV7
+         fjG98r6wbC3lnFqGkcqRB+lHpTNqvVb7q9BAepmutTu6SQC5Ifu4A9m+alUAai62s5zP
+         eTaU4ACMI2O5bq9BsuvPZuYjQ2p+cB0Q/SS7MG2pSSijdKwn69UJYjE4SS0d6Zij8A+S
+         Xf9VayWTSHyiOmOuLiN11bRJ45YwrJhxsrtuz+3C03nwJ0Z/E+CMqg0Aj5wkrU5E609X
+         8dY5SIY2djTc/tHwRhGHgAmYxB15SHTeLyjOBBhCNmFmlSp4QV3Zyu8c9xWPLo53M8SQ
+         3Apw==
+X-Gm-Message-State: AFuF++m4Hj7N3jymRlT4MOHc7pIxGfCdU2tKECrPwVY+lugAc/GHu2XB
+	rhqnHAEyhqxrv/UhdMDtz2zkbGX9mBbccq3q+lPzg/BoD5r2dJv9yEvrSpeMDw==
+X-Gm-Gg: AYBFou3QbrpO0Xzw7wtDxlhbdYzPedMudndzv4ga2a3lsaXB+JY2T+Zsc2xRsY/NiLM
+	k1fMn1BVq6bmSKVgkiDdzB8pOxUUSCyjuBGpyE7RfwoRS8NuLHWP+Cxl6/Uiice/AVjdxfyM2Qn
+	LgRpXL5OygLDeGYq1rWqWk+1E+rHjnU7oNZEbPt8yXCimY6QpM3I87yfAm5c+h7COJ+9blgRVxE
+	yVcSeww7ohjsCn0Ajm+ZrlW8GVbqIehpzKYnZoaD5Ia4tnTcyBcjHYb/jgNw+CVXPcTNrX9yQsW
+	9VAM9y8z+aw7ig6Ahoqn5BkCtDK4EmINb1qjtWJXD66lgOX8tF+mE2KQfwAbEtwZ/8mTVYIvbIJ
+	z2IZfqiXZR6LFWF9E1mu5WnyOJD7VrPcpACPqzJnRUTkWATwmA1K8zx4+3XxquqdmSceYgqPfBu
+	9BTn+uVLmzpqNXagu2x5m/ri+NAg+3T7Qns9KNgudDiRzD84vkrtltJx9YBVa7ZSKF2ZoxuhxmQ
+	Z0uUnDmnX9u3I4plk5uSaw=
+X-Received: by 2002:a05:6a00:b81:b0:881:e626:74a0 with SMTP id d2e1a72fcca58-8874c4dcd27mr2298803b3a.47.1790823823668;
+        Wed, 30 Sep 2026 20:03:43 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.03.44
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88819db440csm357042b3a.60.2026.09.30.20.03.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 20:03:45 -0700 (PDT)
+        Wed, 30 Sep 2026 20:03:43 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 5/17] wireplumber: upgrade 0.5.17 -> 0.5.18
-Date: Thu,  1 Oct 2026 16:03:17 +1300
-Message-ID: <20261001030331.1581021-5-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 4/17] pipewire: upgrade 1.6.8 -> 1.6.9
+Date: Thu,  1 Oct 2026 16:03:16 +1300
+Message-ID: <20261001030331.1581021-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
 References: <20261001030331.1581021-1-ankur.tyagi85@gmail.com>
@@ -68,33 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:03:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130554
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130553
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://gitlab.freedesktop.org/pipewire/wireplumber/-/blob/0.5.18/NEWS.rst?ref_type=tags
+https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/1.6.9/NEWS?ref_type=tags
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{wireplumber_0.5.17.bb => wireplumber_0.5.18.bb}            | 2 +-
+ .../pipewire/{pipewire_1.6.8.bb => pipewire_1.6.9.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.17.bb => wireplumber_0.5.18.bb} (99%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.8.bb => pipewire_1.6.9.bb} (99%)
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.17.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.18.bb
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.8.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
 similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.17.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.18.bb
-index bfe8137b0a..0442c0861d 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.17.bb
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.18.bb
-@@ -10,7 +10,7 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
- "
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.8.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+index d462b315af..88762a4760 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.8.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
  
--SRCREV = "11e501181fb87dc8e72e55156d672109fbad2434"
-+SRCREV = "81606cbb32d29df20147d1b68b662c1082654d81"
- SRC_URI = " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https;tag=${PV} \
-     file://run-ptest \
+ DEPENDS = "dbus"
+ 
+-SRCREV = "b741e0c74f5436f0c925f7741140db0efd32cf4e"
++SRCREV = "8fa27cabdc6c0c1350c69c026af5850ef0af1e26"
+ BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
+ SRC_URI += "file://0001-pipewire-compress-offload.patch"
 
