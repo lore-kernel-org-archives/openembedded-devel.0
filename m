@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 500B4CA5FD2
-	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 10:06:50 +0000 (UTC)
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7528.1790849207283622539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5656DCA5FB3
+	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 10:07:00 +0000 (UTC)
+Received: from mail-pj2-f38.google.com (mail-pj2-f38.google.com [74.125.227.166])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7534.1790849211835555454
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Oct 2026 03:06:47 -0700
+ Thu, 01 Oct 2026 03:06:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=AjJT42kW;
- spf=pass (domain: gmail.com, ip: 74.125.227.141, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f13.google.com with SMTP id d9443c01a7336-2d747ec6185so29358265ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:06:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=DQtfkBk+;
+ spf=pass (domain: gmail.com, ip: 74.125.227.166, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f38.google.com with SMTP id d9443c01a7336-2e2e688de2eso13283465ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:06:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790849207; x=1791454007; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1790849211; x=1791454011; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OxKWdJm2rqmGKH6GNOk5z6l4eC4ia8Z7XEXwqe2HFnQ=;
-        b=AjJT42kWckxyg9+r7cC5/nxfvQcl92KMxzDMHHFWckFNgLL/4/tSbOD1V4klp0Ah6f
-         uop8utsbhS3+psiYSCY1JW5+PY1nwwBZlHnxbXuNO6b6Aa8CLSoL9QEOxzuwHvfiXP9M
-         pDX9XvWXb9QHUor/zhxusqX/75Xzjy2r///LMAcu5ArF2EuLxHZ2vpUL2YR69UBptJJ1
-         Q23THFAJ9h8bG69yiaGB6qb8LEATSWAphSLeukLgyJXsr7iUWWWr8pMrKMwhFt4mwvJ6
-         n7UDxg88r70zadtfhK1sP4SFvvL5GKYN7I8AHkpkz4rPjemny6jfAji5rivt1g+9yH0+
-         UgRA==
+        bh=d+nyGRjKhogOv9qozOVwvPGh7WGslGmrZ/dfDpMG9qE=;
+        b=DQtfkBk+7UHqOjtbfQ48gbjJ15g5EzVlTE+XQZjwYN2hdFChzEGCykRcWJHhggaB7n
+         xgtS076du6+1ACR32X5zOmc6tiI80jnAmO+GVUeHvEW0p0WyX986bC0Hz4xpApY3L9WW
+         qw8yb9vVoK75LIPOLVQAbS/qeRMED2c5jFD2g9+ros1z4eBu2IDQi1M4pxLpVYtBHJRi
+         i/JCASFrIdy3qpdTDW18ZJnK2qX8jh6N44/yIm502DdO4ih+f+q0z5IrNzFhck+tj8RJ
+         N5kevfm1V1INEFSnSFdeG9MQMnzCHuy5ezZgQ+ARwquR1kMxor8Xve3DkfaL5Qyp3jmT
+         r3nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790849207; x=1791454007;
+        d=1e100.net; s=20260707; t=1790849211; x=1791454011;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OxKWdJm2rqmGKH6GNOk5z6l4eC4ia8Z7XEXwqe2HFnQ=;
-        b=Amh4MJMGdTvZY6q/CooNY+D2LPthwQQ9ljbbm8IP+LZRijqQy60Iop1QlYnJPu6iP1
-         ojNvUkKe4rH3c9lsBruD+k5jSpMLsSkfsf2DXL2AfGoMNtCh9h6xxxv4WivlQFIsmPeb
-         wdwEWcMu7wSqrOEcbR02SbeZDSshPVp8MsS3L4xG5H4LJR9M00p53BxBZAVeD8cPRXUT
-         MKusDdJMz0E3CTLswPU8mYbhXQYXKN0obvmPAkoajNw5j4GuUeY+W5a0XU6OH4NBJYzh
-         VEjyB4IIeVN2K2M07it+FJGS0Nhizeig/nc/YacJq0qls0elLrY20Y2zHcpDHzGlfViT
-         tcKg==
-X-Gm-Message-State: AFq9FYKl2XZSGx/lBIM5/9Gn70fGyayf7MulqBNVMtA4lGzzaTNuQfpc
-	0/Q4JdNxXKqHM3jqga3XlHQPJGdnpfYSIZjuFcYg79as1isBRsYKNoSpRk3K8A==
-X-Gm-Gg: AYBFou1/8khnz/sHKhZOnMyBwhbJedAcYsFzwkkJzzLbULENBsxDazLtrPGWIQAX9II
-	oDjO+O+Vuzmq7/hOFTofSCJGLPenuQaiPdy34w65d7qPcrIoIzdmw3zUXE20dTw3MuyTolpXzj5
-	Yrkx0eunSOme7QJz+M2O972p0usJfo2GAoRNgiOm8NkSHTGyoKfueN7c3/CpLHVQTD63E3+p50x
-	f6v/d3tkPZV/qagec3gPsBfE9pfHWAe5idZj7HHOnrVo2HWsfDLyPve31OsY7epGU0BaVFsHUr/
-	5BJtbFa8diSLCV1ZwdGKu6R9ftQ9Z5WCBm+CAllt38hpHF+PAhUSeymD+tUb9n8vWeqmS+A5jFV
-	Sr3bS6cYEBYAQhqJeAnRuu4RcTOPVl9CHCsRQnDSG6expiDQFdjUCpyAbTdGaD1DA6g+HJ4wAA0
-	ReGR9VFp9/7++zRSEzWBRlRRmpg4ah+NCINXjILCplhZhwnlf9RpxPzs7qNuudY1BLvKb57ybwo
-	JA+boN2T2WzoFdiozsvMVg=
-X-Received: by 2002:a17:903:2308:b0:2dd:c053:ec73 with SMTP id d9443c01a7336-2e2e4b6b73fmr34737925ad.38.1790849206570;
-        Thu, 01 Oct 2026 03:06:46 -0700 (PDT)
+        bh=d+nyGRjKhogOv9qozOVwvPGh7WGslGmrZ/dfDpMG9qE=;
+        b=e2tT7R0oxiDXuElHWWOI5BMcXzYvwoqBUpux3+HaTB28sl3qqAfimp1c1O9vMEpq1X
+         gc9/g1pPMWReWUlx2Tofxmt0MPv+nyng2B+JQlX8sMlliMsm7i77bpB8/T4+DuvVZ/d0
+         cplq321TovKdcizOx9BYqvoPFmnLUmJug2d4CNYZMCc1jDaBh6qhxyvd6p7t3xX3ViKx
+         j3tSq21Lf7nCgsDNjsOGusj3E07Sq1Zi+Jd0CQ+/AOzzJpth5GYoLMb1YxK7mvPJavqa
+         Ju0dyJu44Lar+VLZBexwULCMu0U9Qy4yap5EoDwbfdlNl3vAl0rt61t2ZzaWbgPyyj5r
+         trLg==
+X-Gm-Message-State: AFq9FYJo8v/gaPgv+DEfoX/7LepHvR2vYOF8Z2HP8KTmBtkZjBXHZBIX
+	ZT4PMd3PM73cWtgCqqSpD31o0j+iCMjYTculkcejjicojyJvzf0DF/BHLDVZug==
+X-Gm-Gg: AYBFou1ObzlBcD/FLoRGb43/2q9QRITWC2smN/03vGFR/Qb1AqnF6DYnMFTxZ9xGLB7
+	2zZ7s+j/UwsWQHhxjNkvlbfrytgw0qdso+JsUrIWjoDCpG46AnlNFNLkElnksS57PifjefGMwqe
+	w7BV7866Ij8dNbK2+XzrqMPpyIcghNYLCePtg062HCHNrrfsJaOcCChF0tKd4ca4R24gCVBY++J
+	M1VR6lAtbhJTQb+FC1RBIMWsFgy1oFy5EV9GsienBRUA901+zukIDy/lol35rLjpOeBrMusCA2a
+	BtmzAt5X7J97IhzIZ9Azh0tWQUKZIJDC8cO3M05JqwhB620HjQEQr3Mxta/5BdmYB2uPLd9WAUv
+	sxft0Icfx8jb3dg6HMwSfC5In5lHG7CaTeaTzsrLYieYbFB3bajGDM78mJF3kBaoqx6MnZa9vh/
+	ijW/ylg4Zni7OgKo5KXv7bdZos1pUL3VmXjTLMkLBBYJT4Yt3FIeb1BQCWusx+1oLXNB9xjCr9i
+	lxnB8rofq3KjeVXInBeAkc=
+X-Received: by 2002:a17:903:b8e:b0:2dd:c054:197b with SMTP id d9443c01a7336-2e2e4b3b695mr33734765ad.32.1790849211232;
+        Thu, 01 Oct 2026 03:06:51 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e30058a6d7sm8697765ad.4.2026.10.01.03.06.44
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e30058a6d7sm8697765ad.4.2026.10.01.03.06.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 03:06:46 -0700 (PDT)
+        Thu, 01 Oct 2026 03:06:50 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 3/11] libwmf: upgrade 0.2.15 -> 0.2.16
-Date: Thu,  1 Oct 2026 23:06:26 +1300
-Message-ID: <20261001100634.1992725-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 5/11] pegtl: upgrade 4.0.1 -> 4.0.2
+Date: Thu,  1 Oct 2026 23:06:28 +1300
+Message-ID: <20261001100634.1992725-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261001100634.1992725-1-ankur.tyagi85@gmail.com>
 References: <20261001100634.1992725-1-ankur.tyagi85@gmail.com>
@@ -67,49 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 10:06:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130569
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 10:07:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130571
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-License-Update: changed to LGPL 2.1[1]
-
 Changelog:
-https://github.com/caolanm/libwmf/releases/tag/v0.2.16
-
-[1]https://github.com/caolanm/libwmf/commit/8a2627632b83f5eaadbc6da2db6866678da1ce1e
+https://github.com/taocpp/PEGTL/releases/tag/4.0.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libwmf/{libwmf_0.2.15.bb => libwmf_0.2.16.bb}           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/libwmf/{libwmf_0.2.15.bb => libwmf_0.2.16.bb} (85%)
+ .../recipes-extended/pegtl/{pegtl_4.0.1.bb => pegtl_4.0.2.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/pegtl/{pegtl_4.0.1.bb => pegtl_4.0.2.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/libwmf/libwmf_0.2.15.bb b/meta-oe/recipes-extended/libwmf/libwmf_0.2.16.bb
-similarity index 85%
-rename from meta-oe/recipes-extended/libwmf/libwmf_0.2.15.bb
-rename to meta-oe/recipes-extended/libwmf/libwmf_0.2.16.bb
-index a093c6410b..bba3a97f3d 100644
---- a/meta-oe/recipes-extended/libwmf/libwmf_0.2.15.bb
-+++ b/meta-oe/recipes-extended/libwmf/libwmf_0.2.16.bb
-@@ -3,8 +3,8 @@ SUMMARY = "Library for converting WMF files"
- HOMEPAGE = "https://github.com/caolanm/libwmf"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-extended/pegtl/pegtl_4.0.1.bb b/meta-oe/recipes-extended/pegtl/pegtl_4.0.2.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/pegtl/pegtl_4.0.1.bb
+rename to meta-oe/recipes-extended/pegtl/pegtl_4.0.2.bb
+index 2ffa570c9f..dd8e146993 100644
+--- a/meta-oe/recipes-extended/pegtl/pegtl_4.0.1.bb
++++ b/meta-oe/recipes-extended/pegtl/pegtl_4.0.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=4.x \
+            file://run-ptest \
+            "
  
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LICENSE = "LGPL-2.1-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=41890f71f740302b785c27661123bff5"
+-SRCREV = "9ec6da187f840d8e804d42b9b7867f79d5d6adc2"
++SRCREV = "b60f6110abd37e502d202d13a6c565410c552c33"
  
+ inherit cmake ptest
  
- DEPENDS:class-native = "freetype-native libpng-native jpeg-native"
-@@ -17,7 +17,7 @@ inherit features_check autotools pkgconfig
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master;tag=v${PV}"
--SRCREV = "d00b314cc5fbed48fe79fd3acdcf42324d2f4b8e"
-+SRCREV = "a916f30f6232cf3e28df285fcba5753ee5b1aa0f"
- 
- 
- do_install:append() {
 
