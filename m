@@ -2,99 +2,96 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25520CA5FB3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04118CA5FA5
 	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 10:06:50 +0000 (UTC)
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7527.1790849205062422788
+Received: from mail-pj2-f38.google.com (mail-pj2-f38.google.com [74.125.227.166])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7526.1790849202902011041
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Oct 2026 03:06:45 -0700
+ Thu, 01 Oct 2026 03:06:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=T/2oUKB4;
- spf=pass (domain: gmail.com, ip: 74.125.227.140, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d747f05ffcso29998725ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:06:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KXUXCMck;
+ spf=pass (domain: gmail.com, ip: 74.125.227.166, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj2-f38.google.com with SMTP id d9443c01a7336-2e2d719d99dso10994795ad.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 03:06:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790849204; x=1791454004; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xwcWhHh5fXl6LtorPuhSaod6vgLR+egrlNVpYnT+ldQ=;
-        b=T/2oUKB4kmVoVAOuKPmqyaIaEDwuLN2QhzVASxGrPFMJy7KFEj+Lq7J3+FIB0KrboY
-         uqMC1CNCuJggVLaZHfH5cxQJDBtR2g07NlEVpP0IxdqOJXyuZgL16IevMEzcww9g3cZK
-         NyEikAL3oDAPYqTQ6viOqpwjfONOc11DgVhcrpPqcknV2+wXXvr/yWVCKzUoF8rFBiVp
-         gQUmf0p2hXTsgNAeqmWBs44VbRxem0bJ/r8ASrLK54Ke+TDNLyFtnh84cLWdzug/HXFs
-         Gv733MUnypJSF5afJswF4/RFGW4YXhWeSOsbRDECXz04U325fQsoWHACu9dgtpvpYeyC
-         hJiQ==
+        d=gmail.com; s=20251104; t=1790849202; x=1791454002; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=1+SGVcX3SPcHgZcOrpgV357Rno3SXcpXOC3+tbOYryY=;
+        b=KXUXCMckxUkimp+ltrfnYodtFvVu+1RGPwt8Axbflwe7ZxLASErUi5xW9WMJV93pzx
+         OvSTiYryY1P9ZlW8rXd3v4Cbuc9vXXKx4ITdrigpPJLs0Zc9RvwvYOM1N3dCd95W+ovL
+         /HMIp966gVwlHemBHENMIAcXr3iOVgVi5VtUcklFOqhG/50muVFCHfFX2aMGr9DOL7sv
+         FLPUDFigyva2518e96aYAzxn9QzGWdnsHTuBrCAbP3xKRzkX6Hfu3XuIoaGa9AX1jZaj
+         dq6aWGsHrMOcJnpKpuG+hpv93cbgQcLXQOjypG2ELhk1BWdR5TXXybpR3kECtIJvTafN
+         C+/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790849204; x=1791454004;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xwcWhHh5fXl6LtorPuhSaod6vgLR+egrlNVpYnT+ldQ=;
-        b=bZX9yPqscoOcKSEiX/0lJVpdmX8SZe1b0xIVcQL1JK/2C9CnQgTVKJFrnbxmffxHLe
-         ailTWinmZxZe8BrdqSzW2TLapWp8VbFbDaoWedoNzTozBI00iMWD1WA4fzbQDR6IUn2m
-         WF2+zn5V0lz+OzD1nOzQXTDtgTJlsmf+FIAyvDdSlP3Ul3fVySFZoVVebpNLdQ2QzN7D
-         wKIy1EjJ4fA+DZXtochzFe6daN6z6Hu32ruNrjlCLxw510EamaVE3lTDGDj7mfotpCHR
-         lcD22fd3WsIvzVod+IJ2gH/tmOUZbJYWydbAcF6a4A65hEtmj6EXn+JZ6oOkOWya8tYP
-         Qodg==
-X-Gm-Message-State: AFq9FYIBDBequSvlFrNTmDzYuxHXxO4Bs/pQPrUb4yR0jmtXfncJWiRR
-	P3Ccs6H7lrgVTns03hWnMb6vXaVbLQJglLMO05p/L48caQn+0QfncFzOwv5fcw==
-X-Gm-Gg: AYBFou3eOOAuMZbMAKypdiLqytFrStb6Zp1SDz6b9FRplmcW8VDFU6I3GhjGfjr9yEl
-	UeFgUa9d0u0kny7RAr1jqeyUVhGGpT7xJp+R5BiioW/HMlYZVGa0EKTzf/BLJfcFFq3+r4FYpJH
-	BsZEbwpKEBs7dOpWtqXmIWKzHEVBQL0+NbXdZ/V0Px9cTUH5+EoQXan5JwyKP8sXaK3UnetQzAX
-	5hMChnNFuh35aCXTjCIPfZ61XhwOz2Kev5TRyQftSWZETDkdQOqsUR4OfPUSfv+d3jmqzM5uW22
-	zt+4hM0hj1ZAUDjzccegESiAKUTdS4soc5U8XWm4E72hKGCZf3nAWcnWOltWHQMBnr22xDcMi8n
-	wSS7tYnwjoy7XdhweGozJzLnTVWdpuvueOAaLpRJQGvFuSkq96AfiDLn89tr9cMwRIKIc28nb+r
-	X/9k4ZBijvMTd7rYjSGsQxXxT4JIJGb686wjL9LVNUYycdGoUDY68I9VyAXmXu4Rl8Wz1lR4KsH
-	v4GbZpYQONdvQuLK3nG9DE=
-X-Received: by 2002:a17:903:1ab0:b0:2df:9d04:403b with SMTP id d9443c01a7336-2e2e4b2b85fmr35194355ad.32.1790849204370;
-        Thu, 01 Oct 2026 03:06:44 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790849202; x=1791454002;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=1+SGVcX3SPcHgZcOrpgV357Rno3SXcpXOC3+tbOYryY=;
+        b=gFpdKtizHGv0M2EI5hS3ep1YEC+9LGyxeI5oheS8XQb5AqVMFS2R8Yy8zQzSls4qIt
+         E0aIO/Sa+vNkmhdaA/JgNN69MTrgNIgeRMhpSJipn7RGV/xfQaJlJllSMC3BBmmCuFAp
+         80nWRtHvDdVh7jZkblc4yF3HsNORVUSkt7qcQ6fyB5upwQTeAGkosq/rpSACya43DMVE
+         IinP6Odcy/Ow0sHG6MfjMhgnGFejepkUBo4Vx0pjowQewTl1VBcZUcdC0lPAL+1EjnpQ
+         K37XtKPwz6Nwlu+6YWzQGKIWLT1Y7QUC3Lnw0Jiz+26dw1LAI28UGM7a1CVghvQipz8k
+         xAeA==
+X-Gm-Message-State: AFq9FYL4234MB2/ZnoRZjycEK1pgTQhejrpQEbGDv5bRKW7S37KUscdD
+	o27WFNZbW0I6mzR+W+dMT6ZIjATuM3bZN/X0ddS+NWvJUZhx7g8yeo/y42hEHw==
+X-Gm-Gg: AYBFou2UzYRIFFe3VBBnIjBX1KK3OCks6trwJC4QNUt/Jn1qaCDclDD+hy/ZT2mXpQk
+	DLib+gIfFMUxTcuEj41lOGbT6FA+nlgDvvGFt877UgtgYyT/bUGa5eMILlOCpZOIX3Qq8JbGzaV
+	jW4F+of4jd7rSO2PE1GqEaRoo0DAGBbStKKX8FmGy8+3bCZRsKDTPLn+6v+3ZesDPOqFsoiMKBM
+	zEsCotNvHbRyAB7X0G2AS5/Ii5SvpZa3LPF50SDvsi7S9VodhG0rIiDACA1hUw72N23aIBaQEFJ
+	eklBfdyU71MuOqYzvPMdIkOg7vxG/iosL0OgbpiDAcEorzbVdM9MVGsENj9uiG0SH99hRCB8h5O
+	G0ZH7xcA1CNvo49sMZebtrd2uU5vIzudGHUjh9YdOMFNLMTimtYixEbJ4WpdHup5GDMx+U3BAHt
+	8CBGPYeD+eLC04ghro9KeLd1Og0wHz5zXWQ79w0uyRRskjn77prFbvjk9M/act1zAmBTqVyfQQN
+	oZF2n3saU0ruvM+2eYK2ls=
+X-Received: by 2002:a17:902:db08:b0:2e2:db9f:3e88 with SMTP id d9443c01a7336-2e2e4b85249mr32540985ad.52.1790849202166;
+        Thu, 01 Oct 2026 03:06:42 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.104.195])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e30058a6d7sm8697765ad.4.2026.10.01.03.06.42
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e30058a6d7sm8697765ad.4.2026.10.01.03.06.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 03:06:43 -0700 (PDT)
+        Thu, 01 Oct 2026 03:06:41 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 2/11] liblognorm: upgrade 2.1.0 -> 2.1.1
-Date: Thu,  1 Oct 2026 23:06:25 +1300
-Message-ID: <20261001100634.1992725-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 1/11] pahole: upgrade 1.31 -> 1.32
+Date: Thu,  1 Oct 2026 23:06:24 +1300
+Message-ID: <20261001100634.1992725-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261001100634.1992725-1-ankur.tyagi85@gmail.com>
-References: <20261001100634.1992725-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 10:06:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130568
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130567
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/rsyslog/liblognorm/releases/tag/v2.1.1
+https://git.kernel.org/pub/scm/devel/pahole/pahole.git/tree/NEWS?h=v1.32
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../liblognorm/{liblognorm_2.1.0.bb => liblognorm_2.1.1.bb}     | 2 +-
+ .../recipes-devtools/pahole/{pahole_1.31.bb => pahole_1.32.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/liblognorm/{liblognorm_2.1.0.bb => liblognorm_2.1.1.bb} (94%)
+ rename meta-oe/recipes-devtools/pahole/{pahole_1.31.bb => pahole_1.32.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/liblognorm/liblognorm_2.1.0.bb b/meta-oe/recipes-extended/liblognorm/liblognorm_2.1.1.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/liblognorm/liblognorm_2.1.0.bb
-rename to meta-oe/recipes-extended/liblognorm/liblognorm_2.1.1.bb
-index 050916330b..f074832b0f 100644
---- a/meta-oe/recipes-extended/liblognorm/liblognorm_2.1.0.bb
-+++ b/meta-oe/recipes-extended/liblognorm/liblognorm_2.1.1.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ca016db57e008528dace002188c73dad"
- DEPENDS = "libfastjson libestr"
+diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.31.bb b/meta-oe/recipes-devtools/pahole/pahole_1.32.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/pahole/pahole_1.31.bb
+rename to meta-oe/recipes-devtools/pahole/pahole_1.32.bb
+index 62f053b6aa..331b93abf6 100644
+--- a/meta-oe/recipes-devtools/pahole/pahole_1.31.bb
++++ b/meta-oe/recipes-devtools/pahole/pahole_1.32.bb
+@@ -9,7 +9,7 @@ DEPENDS = "elfutils zlib libbpf"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
  
- SRC_URI = "git://github.com/rsyslog/liblognorm;branch=stable;protocol=https;tag=v${PV}"
--SRCREV = "71dcbaf806a0e464aded2efb98651ff89aec8a36"
-+SRCREV = "88bd8d1817def038c540df310403b44ab8121ef7"
- 
- inherit autotools pkgconfig
- 
+-SRCREV = "1f2805b6eef104df3125143c949b391f6122e5b9"
++SRCREV = "fa725d687ce3a712ef296b46bc63ea57ef466014"
+ SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master;tag=v${PV} \
+            file://0001-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch \
+            "
 
