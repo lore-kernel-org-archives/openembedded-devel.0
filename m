@@ -1,469 +1,212 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ricardo.salveti@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B941CA5FCB
-	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 02:13:38 +0000 (UTC)
-Received: from mail-yx2-f38.google.com (mail-yx2-f38.google.com [74.125.224.166])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2699.1790820809637893139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80085CA5FC4
+	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 02:53:16 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3264.1790823187917863971
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2026 19:13:29 -0700
+ Wed, 30 Sep 2026 19:53:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NAF0PvKE;
- spf=pass (domain: gmail.com, ip: 74.125.224.166, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx2-f38.google.com with SMTP id 00721157ae682-8ab408a38bdso11720237b3.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 19:13:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790820809; cv=none;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=RHbgEps5;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=SfNzhurp;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6910jhDs2098510
+	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Oct 2026 02:53:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	AvAJqKS/e3WTlqlBm9FaneYXJJucQSDZFgIxExmMXsk=; b=RHbgEps5HELNZMiR
+	EMB+YgL5CW3z4HEgCXorGJg7/M8Hn7bFbkL0/RIea0eFd6++Mxv3QZdlY1O1f3Uf
+	DSwfrDs32viEAzk8JvaWO7EkW9AZ5Eu23W6hBzqF79A9fn/DmBBmItz4WeU6Y1oj
+	HM7wdUQL98dCftwQDHiCO0iQ+yST73AETlKjmiHMK7Dno8VH2l+tTviD+IDzUUgM
+	yKDZKMRZiQxLRoUbW4TKA92LZppf+nYgmaUXoeb4FPp610yc1Gvtz5FXMXUFN8xS
+	DsdAFdrV6ATBIH69o1/KCj0TAAMz+wGPl+Ml4S3w26MKmcSkngjjWj4Jwg9ieqX9
+	kDJ0AA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h136tk2pa-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 02:53:06 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39deda201bcso9748617a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2026 19:53:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790823186; cv=none;
         d=google.com; s=arc-20260327;
-        b=m31qEY9FwVrfUoJpxL1vXUeTmFzsDHM/ZumeykTO6KYULLaYzY7htTUHXLqEDQ5Ovn
-         MBSkKuzkkyUr7uOdTthJfkjA7M/OUCKmIJcpSppODVeSW/AWr4i4d2ULjunwxEHmVkxa
-         LgE5gSIE4+HwfSLz+1dEN117RF8q2W4/6jhperorXlg9iveV4W8cxQlXXJ/OywqtVqKb
-         aGKUF6Ldx/LHDe9q1mR2ho8+Zj/mjrZjKYOzqO7rS643Ix2/2v5gaLZpup+6Qg4lTKsP
-         vXsKVpmCXdPm8z9USYRWpL6FJdWdnUIGGvfYhC3doSXMZ4+/rsyhhPzluyPPSZGiqJfu
-         i07g==
+        b=TOS6jFY52X4zCEfTJgKHBejlebsOwuHRHF8qK3GRcme10zBb181uxXrArZYDM75jYn
+         Q7CR1OMcOEiVD+4G/42DIHj/ZgxWA0M/Tbrzd1lVeWI03Ies+IoZrB9QDDEcxl3TzF8U
+         GebRDnb3BKdvyZ1/78/uQ/T42Gf6jllxR/aNAfCUMo8WudQ+LBma08li7vX5J4tA7VTd
+         pinT9nIVCEqaZhu3o1KfEZFiwvVEJRhGAYZybjj6dhrTUaGcoV8jYAxTPhdUbM0gzI04
+         UzV7lvaPIc1ksdazO+rINKBo7cG8yNcUdkANhqFINebVgb3w9lnLNwb77tVgyj19U2uE
+         qdEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=GdL9kIHeQFacQlLqI9t0VzShQ03OmxfX9BJzoKtCb3s=;
-        fh=sQq4UwMItvi2zQkbQsQ7gG/lHqOQ30Mc0djsN0hkevw=;
-        b=smSNJnm1gr+6yqJ0axqmRp41SfnghSI4eEpwf/GkXPOjlQOynTeTHnzXTEsbwRdJJ4
-         tWEZ5RzRO6BN9nHOoECJRNn0v5uYfnzOTQ1jBkDcQsS6HO6rgaQHlwvMCRYoP7j90Yg9
-         1gEXo21Yz5Gefx9T0g9RreH8O5VJdmaNPNbzonk7OUOcV+faNKmJx+JY8bE98r4mt8kQ
-         XhvYXXhj7Jx/yTt6l0MZFeSSqSttrMlSV1u+Lxrez1+2TxyE+ajHhtho2LuZwDehx5uI
-         Gb6WBRgfOe2sLn2RMS+9Et1hxj0kLc69RzVJOl9KRznxPTPN2ncW/bUacgBkgvCvxLCS
-         GvuA==;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=AvAJqKS/e3WTlqlBm9FaneYXJJucQSDZFgIxExmMXsk=;
+        fh=bvpLjMa1nBVn6lzXtkg2H1TPVOsz6hFOp8eoNBzubsc=;
+        b=InvA4vO3JUubA6gGTfnQQfjS2We4HLbGYV9oupugOPoZxA36ImW+LulEFcNO6qRD5b
+         tWpjrz5vR+9x9LJjV3dgFGgLpmyPkIgWTX1Da0nEkRHC8CRfTJwpGW1yo/CzunaahlFK
+         XCv3pgqATKnzQFLzhpvLBGd/UbJypaSmlgpWXcvaSMU6NidWDnfA5ADTCQNLvFliYXua
+         lP13E09eKRL1RCpwlVAfGZvAJ7mtvy88LtB+tDaaroHdqnJToDGFFNuG7LBdmji6Hc5d
+         nglcp+KebUfifjt91Qbg1iju4BSmjRaS4E528JWhvGThSu6mmgN4471xyXfkhupQtYxe
+         L3+Q==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790820809; x=1791425609; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GdL9kIHeQFacQlLqI9t0VzShQ03OmxfX9BJzoKtCb3s=;
-        b=NAF0PvKEFO0a7i0HbJPevWYgdTcsc0Wfu5o+1qn3eqShCQuhWfqxhup18aS0qLDSww
-         FFBwinP37YTAqNts/FCaBWurK36Wc19jeSvY4W/wuiyGECDQsdrZTQdshh5VtntULf2O
-         XiO+Xjf3/j2QxNKSS/HdCxsBlDY0I3+pw/m/y0rl1SkJn7urG9ZDe033J5tmd9YHXIbu
-         /p4Bs4hzzc5KO7/LFZFecp+TgrhkM5M5ywTFhd4vAlSIgfKwIB1TsVqbH6ST2/ArTOIy
-         xYbCgZZyl/+V53XBwFAacv5dmSJdP6/YybyHUygib+qDXEKLqUcnnQA8Uw+9twD+SdwT
-         eW0w==
+        d=oss.qualcomm.com; s=google; t=1790823186; x=1791427986; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=AvAJqKS/e3WTlqlBm9FaneYXJJucQSDZFgIxExmMXsk=;
+        b=SfNzhurp4v8uZARGJqYXvvYM2oa4qRZiQZA/2uuPU2d1KC7e+PRtCq+4nzlbynLDkg
+         ylkPE02nyjdw+M060bq8rOW27Ueq7xiWuwra4qOp04l8sboQgKAP49dhXb6TCrLcXpI8
+         W5h5r68lyAEcom3a2O5VZqDwgqP/59nNf+Lyj2+SaX+3vceO7cMoBN0fDwjp1zKIX3jM
+         R6UEcr9yq2ZM6jE8/pk4VoyCGj1uFVxeyg1iJHit0s8A9sXXpsHqqBz6UWVbar4po6uD
+         EbB/d97Og7JYk9PdWuyVdZDjgODPAomJNFWw4CIyXZfyN3aZWmz/6frSibWWYZaj3AsI
+         E8MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790820809; x=1791425609;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=GdL9kIHeQFacQlLqI9t0VzShQ03OmxfX9BJzoKtCb3s=;
-        b=HlM4aFHKFiuw/DjlnQ7akzRXW71R2HS+LWM5jL1n/4+okr/Z9+H0aQVnmPjdmrh2E2
-         cSbyYJpVRy8TfwOO5+5e34YUy9DwaKu9L+fnXILQz0Dsa9GuAZFdgbbX7HThQ3UhTNhg
-         XqC7T5UE786t+Qk3jC10XmQMFBkDumCVQgRacFZPxmp1F498TNH8A5zyYvPH0pvhJXOU
-         GQCME5+52yQxfbWGzht5HIGa9yfS0iyn+20pOPtmnRIwO1lVkfgsXl/3uIL4wQTAdrmh
-         rQR4BEsYhAYei0mF8PKa6b+/VS7R9PdUQzEgHxaJHPJuVuWvf7iH5OsuBDV92pIt+gkC
-         /5lA==
-X-Gm-Message-State: AFq9FYLlRM83R/FZjiM/NQfMXHIHoiJxM81k0H++Dr7aymMJ8yvHJwmh
-	5ramHRa6oa169COL+6Yl1v4jFMoNJFkd4w54SlaGLcRM/Ih/lsTYT1u/1UbldkrUuJaKYlXxQAj
-	lJSt/RUUflX7n7qQXiHz2r6cPWRpX4qQ=
-X-Gm-Gg: AYBFou0BuVFwTIWfxc/5BnGxJ3bQNnhOWo0AeqIIRUoZMZBpuATcBHeOYL2tDp1XegB
-	agobYnrqd/0DTP7J/2AdcWz9Z5ZcWhCRlyGtw/pmf0y/9hIfrXX5Vk2i4WRSAb8naQimUXZsnsB
-	a5+PlEXKEe8Kp4uQO29NtohggNhA6Z31h80T9giHh0q9IMFBGKq0QENAadeM0aqv1MTk7u/5mgM
-	EHp19guMfEGKB8LEuSxwbWjE9Ixq8oj1mkPPh2K6eXnJiX4dTcD6cS5qek1tY+eubXSnP6YmJsB
-	J9KXQJLcTHiT8k64qb0AL6Mg1y1pigyUyJz4dHdJv9lb2sh/RPpCfJaqmYT1naCHBk+ezZ+uoA1
-	mHqO3bPg1T/t7fpqvOrUx3mcpJmnk5BIz67a4mLFsiSphqsWIFtvLPG80keIV7LdHIBFlNndBuv
-	x5Y6nad+Lwx6YALfWl2pS28IwasTN36uIGeUzutBMYNmylthd9fmXvz/74wii23M3ScLHpNmDX0
-	R7QSj/4Fk1Rcwcfm4CFqMkEyvtl1tGOclgsnNw2rcOodMg79yexYfJPzOzmX+lohZBfBeYfYlKH
-	H+d/JR9FJfZysMFRwbjlJx8it9bZBLiq+sXyhl6b
-X-Received: by 2002:a05:690c:9988:b0:895:8474:3c6f with SMTP id
- 00721157ae682-8acdacf3b79mr6692507b3.0.1790820808462; Wed, 30 Sep 2026
- 19:13:28 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790823186; x=1791427986;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AvAJqKS/e3WTlqlBm9FaneYXJJucQSDZFgIxExmMXsk=;
+        b=qevcA5zkLJWYeFUuiMBo/k2nI7Wmmds5ABp2aGgsPViVAUZXfwgYZ5sOMkn9lYcwAX
+         uqNhZoTU9aPQpk3Ox+VWtfbkaKds3saA3F23KoLOckg1xkbX5mTPNyuKuytfAj4f8oGG
+         /L1GFaGWHQl0jy71Qqf5ijQ95iOoUC3EcvjKRtmPDnolAWIFQ1zz5Lx6ZnIjNC0K6ILb
+         UNJ3GoImsahXnsXnQSUny7vbDIWVQj9VWQLFDNWWiYV4VlxF5HMShXyF7ADdFdl0ar55
+         7EJU6G1G80eG1eZAaOqhhbpFeXtZ9rCczR4tfgTCYAvdfYW4OFA4jijbQUUwOOBzdlOW
+         /I6g==
+X-Gm-Message-State: AFuF++nJIVHMiv2ezdjrC/9vVqHKRmbHjlcA6H4TNnKisSqfyOz+GSZF
+	47Ukq7cPkpNIpgL+vbKNZRIl5ikIf2Gh4ywBd+CDhn9D2V7pYs4vcstRWes/Op7xLi1zEiUzUui
+	5KksMJAXovX+hwYFcui5goOwS4mnoZsw4PD2loA5oMA1L1B7iU5vFmJaUiRhjN9Xtys38BBgRDI
+	9SRH9Q3u8xdDcp+QGedDQ07ow8wg9yRxcbR0mOmxoudxEeyOLF+I5F7C2etNw=
+X-Gm-Gg: AYBFou2/8iMeXOHXUkeaPd6Eijwrqz3HnXJJVQrwq8B3v399RGbet03s+GldUVhmYw2
+	aDNcYdUI/Di7fBMqv8MZTZSUDq+D5iU+6AQZJCQavFemxKQFgg3sjmWOHrtCiY7R2Lkn2qMaDP2
+	sXRLm1rbKtVAw60fwvu1DHouUOifYe1UAFePOysZqdrnKHxs8+USXp/ZM/Wn8=
+X-Received: by 2002:a05:6a20:9c17:b0:3dd:8d74:3a63 with SMTP id adf61e73a8af0-3de9e6dd320mr3653269637.13.1790823186246;
+        Wed, 30 Sep 2026 19:53:06 -0700 (PDT)
+X-Received: by 2002:a05:6a20:9c17:b0:3dd:8d74:3a63 with SMTP id
+ adf61e73a8af0-3de9e6dd320mr3653250637.13.1790823185675; Wed, 30 Sep 2026
+ 19:53:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1790775073.git.anuj.mittal@oss.qualcomm.com>
-In-Reply-To: <cover.1790775073.git.anuj.mittal@oss.qualcomm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Sep 2026 19:13:00 -0700
-X-Gm-Features: AclHuK_IxTt_kUs97bJk3tz-8Uv48f63I3t8DoGTpMB0rI6EshSgeTWklhOoHq4
-Message-ID: <CAMKF1sp3ZbFveEATopAmqaSKjoRCvbU9YynGT_DQzm265s5GKw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 00/14] Scarthgap pull request
-To: anuj.mittal@oss.qualcomm.com
+References: <20260910150143.2155047-1-tillmann.severin@bmw.de>
+In-Reply-To: <20260910150143.2155047-1-tillmann.severin@bmw.de>
+From: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 23:52:28 -0300
+X-Gm-Features: AclHuK969Z3pBLfoidEbzBmiGC5UbnbxlRtoeFgpbsGefA_LqdZqjHAILB9Nt2Y
+Message-ID: <CAA_5youuTfTTH7CR3D0BUJw6CRAPr1XUz2501MOCuXTt_FEvKA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] polkit: Add a separate package for polkit
+ systemd service/dbus config
+To: Tillmann.Severin@bmw.de
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000025199b065cbdf61d"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAxMSBTYWx0ZWRfXwgRUzkyphFzc
+ tkPEVSS/viM/4tm0/ToVrK+HK5K+iy5XsU+ySrKPQeje+x8e9pdjksctFbvMykZMKLMv3jqRryQ
+ 7uN/rFiRSzNEN+1ocCeVlr6TY+5cUJA=
+X-Authority-Analysis: v=2.4 cv=aPFlOr9m c=1 sm=1 tr=0 ts=6abdcb13 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=Q4-j1AaZAAAA:8 a=0BtFQ-NZwUKJCWV0x1sA:9
+ a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-ORIG-GUID: sAuG--SLf0LLujrCoIWDu6-aVFRsfZIs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAxMSBTYWx0ZWRfX7yzeLKVsxyFq
+ 3VAIp8t74yIg+aPzj1R51dXbcdtx7nmkP7VsXV2LbWjc1T13uUgJHbFfJTSrJLKkuX+m5her8Th
+ OWv+FKI+551exX4zssCyVBKKDlprmU/kt58NXkQIWw/5Vla+8EgFjBdahX4I1PhQjin+wkmvOZs
+ xTJqlgU4Oron9AD6tic9vd0pKThXE/BLCH9g/UOh03NobUmfhfmDMvhNI5DK0Sfaqh0jFMhyK/p
+ FDLHWkbVsUV0efg4qq+hNCxiLW924Y691eMI1NovNrsKLEzOA/vmp9HIDqBbvr2e0gWZDG7+NZa
+ ZHCZcvBvCXvPlqbe+iZDV3oBTSWvfkBd+ohYNupTq6v32chdAiVh7rB9/ofFhvkGV9eOlXnryAn
+ SalDnSRQhCxvDeL+v9Qbwdj56VXXkNwRumqjs+GulTUrWaT9N/dW2JPjE/hRhqDcqnXhq4C4yvf
+ cjZ3xq4vTBhd8asxIWw==
+X-Proofpoint-GUID: sAuG--SLf0LLujrCoIWDu6-aVFRsfZIs
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_01,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
+ malwarescore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010011
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 02:13:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130548
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 02:53:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130549
 
---00000000000025199b065cbdf61d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thu, Sep 10, 2026 at 12:01=E2=80=AFPM Severin Tillmann, DE-862 via
+lists.openembedded.org
+<Tillmann.Severin=3Dbmw.de@lists.openembedded.org> wrote:
+>
+> Creates a separate package for the polkit systemd
+> service, such that other implementations for polkit
+> could be used instead of polkit on systemd enabled
+> systems, while still keeping polkit available. This
+> is especially helpful for software that depends on
+> polkit or its libraries etc, e.g. udisks2.
+>
+> Also package dbus configuration into an own package
+>
+> Signed-off-by: Tillmann Severin <tillmann.severin@bmw.de>
+> ---
+>  meta-oe/recipes-extended/polkit/polkit_127.bb | 19 ++++++++++++++++++-
+>  1 file changed, 18 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/reci=
+pes-extended/polkit/polkit_127.bb
+> index f97c6efbf7..c0a301c8b0 100644
+> --- a/meta-oe/recipes-extended/polkit/polkit_127.bb
+> +++ b/meta-oe/recipes-extended/polkit/polkit_127.bb
+> @@ -35,9 +35,26 @@ PACKAGECONFIG[libs-only] =3D "-Dlibs-only=3Dtrue,-Dlib=
+s-only=3Dfalse"
+>  USERADD_PACKAGES =3D "${PN}"
+>  USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/${BPN}-1 --shell /bin/nologin polkitd"
+>
+> -SYSTEMD_SERVICE:${PN} =3D "${BPN}.service"
+> +# Package the systemd service into a separate package to be able
+> +# to exclude the polkit service in favor of alternative implementations
+> +SYSTEMD_PACKAGES +=3D "${PN}-service"
+> +SYSTEMD_SERVICE:${PN}-service =3D "${BPN}.service"
+>  SYSTEMD_AUTO_ENABLE =3D "disable"
+>
+> +PACKAGES =3D+ "${PN}-service"
+> +RDEPENDS:${PN}-service +=3D "polkit"
+> +FILES:${PN}-service +=3D " \
+> +    ${systemd_system_unitdir} \
+> +    ${sysconfdir}/systemd/system/polkit-virtual-provider.service \
+> +"
+> +
+> +# Package also the dbus configuration into a separate package
+> +PACKAGES =3D+ "${PN}-dbus"
+> +RDEPENDS:${PN}-dbus +=3D "polkit"
+> +FILES:${PN}-dbus +=3D "\
+> +    ${datadir}/dbus-1 \
+> +"
+> +
+>  do_install:append() {
+>         #Fix up permissions on polkit rules.d to work with rpm4 constrain=
+ts
+>         if ${@bb.utils.contains('PACKAGECONFIG', 'libs-only', 'false', 't=
+rue', d)}; then
 
-Merged now, thanks Anuj
+One regression I noticed after this change is that the contents of
+polkit-service and polkit-dbus packages are not installed by default
+anymore (as they were part of the polkit package before, and here
+polkit itself is not rdepending on ${PN}-service ${PN}-dbus).
 
-On Wed, Sep 30, 2026 at 7:06=E2=80=AFAM Anuj Mittal via lists.openembedded.=
-org
-<anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
+There is now "PREFERRED_PROVIDER_polkit ?=3D "polkit"", but that also
+doesn't help, since it will basically just install the new polkit
+package without the service and dbus.
 
-> Please review and merge these changes in scarthgap. Tested on autobuilder
-> and locally:
->
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1836
->
-> The following changes since commit
-> b5874ea07d69919d9b40d59f2c2f0bbd24bc3259:
->
->   libssh: Fix CVE-2026-59850 (2026-09-02 10:39:59 +0530)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
->
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
-rthgap
->
-> for you to fetch changes up to 0f00f8b9a21950640da8c5707343e5540133f86e:
->
->   vboxguestdrivers: fix vboxvideo build on kernels lacking
-> drm_fb_helper_alloc_info (2026-09-29 16:10:23 +0530)
->
-> ----------------------------------------------------------------
->
-> Anuj Mittal (1):
->   vboxguestdrivers: fix vboxvideo build on kernels lacking
->     drm_fb_helper_alloc_info
->
-> Benjamin Robin (Schneider Electric) (2):
->   libwebsockets: update to version 4.3.10
->   libwebsockets: fix CVE-2026-19773
->
-> Deepak Rathore (1):
->   rsyslog: Fix CVE-2026-19654
->
-> Himani Ramesh Barde (1):
->   postfix: fix build on hosts with Linux 7.x kernel
->
-> Hitendra Prajapati (1):
->   python3-pillow: fix CVE-2026-42311
->
-> Jason Schonberg (1):
->   php: upgrade 8.2.33 -> 8.2.34
->
-> Peter Marko (3):
->   msgpack-c: patch CVE-2026-72854
->   recipes: correct homepage
->   polkit: patch CVE-2026-4897 and CVE-2026-85498
->
-> Rohini Sangam (2):
->   python3-pillow: Security fix for CVE-2026-59198
->   python3-pillow: Security fix for CVE-2026-59204
->
-> Viswanath Kraleti (1):
->   libfastjson: switch git branch from master to main
->
-> Yogita Urade (1):
->   hdf5: Fix CVE-2026-17572
->
->  ...kedefs-Account-for-linux-7.x-version.patch |  47 +++
->  .../recipes-daemons/postfix/postfix_3.8.19.bb |   1 +
->  .../libwebsockets/CVE-2025-11677.patch        | 161 --------
->  .../libwebsockets/CVE-2025-11678.patch        | 128 -------
->  .../libwebsockets/CVE-2026-19773.patch        |  32 ++
->  ...ckets_4.3.3.bb =3D> libwebsockets_4.3.10.bb} |   7 +-
->  .../msgpack/msgpack-c/CVE-2026-72854.patch    | 127 +++++++
->  .../msgpack/msgpack-c_6.0.0.bb                |   1 +
->  .../php/{php_8.2.33.bb =3D> php_8.2.34.bb}      |   2 +-
->  .../polkit/files/CVE-2026-4897-01.patch       |  64 ++++
->  .../polkit/files/CVE-2026-4897-02.patch       |  32 ++
->  .../polkit/files/CVE-2026-85498.patch         |  38 ++
->  meta-oe/recipes-extended/polkit/polkit_124.bb |   3 +
->  .../rsyslog/libfastjson_1.2304.0.bb           |   2 +-
->  .../rsyslog/CVE-2026-19654-regression.patch   |  56 +++
->  .../rsyslog/rsyslog/CVE-2026-19654.patch      |  52 +++
->  .../rsyslog/rsyslog_8.2402.0.bb               |   2 +
->  .../hdf5/files/CVE-2026-17572.patch           | 272 +++++++++++++
->  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
->  ...-build-decide-if-drm_fb_helper_alloc.patch |  54 +++
->  .../vboxguestdrivers_7.0.14.bb                |   9 +-
->  .../python/python3-beautifulsoup4_4.12.3.bb   |   2 +-
->  .../python/python3-colorzero_2.0.bb           |   2 +-
->  .../python/python3-flask-login_0.6.3.bb       |   2 +-
->  .../python/python3-flask-mail_0.9.1.bb        |   2 +-
->  .../python/python3-flask-user_0.6.19.bb       |   2 +-
->  .../python3-pillow/CVE-2026-42311.patch       | 356 ++++++++++++++++++
->  .../python3-pillow/CVE-2026-59198.patch       |  60 +++
->  .../python3-pillow/CVE-2026-59204.patch       |  37 ++
->  .../python/python3-pillow_10.3.0.bb           |   3 +
->  .../python/python3-pyexpect_1.0.22.bb         |   2 +-
->  31 files changed, 1257 insertions(+), 302 deletions(-)
->  create mode 100644
-> meta-networking/recipes-daemons/postfix/files/0001-makedefs-Account-for-l=
-inux-7.x-version.patch
->  delete mode 100644
-> meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11677.p=
-atch
->  delete mode 100644
-> meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11678.p=
-atch
->  create mode 100644
-> meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.p=
-atch
->  rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.3.3.b=
-b
-> =3D> libwebsockets_4.3.10.bb} (94%)
->  create mode 100644
-> meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-2026-72854.patch
->  rename meta-oe/recipes-devtools/php/{php_8.2.33.bb =3D> php_8.2.34.bb}
-> (99%)
->  create mode 100644
-> meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
->  create mode 100644
-> meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
->  create mode 100644
-> meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
->  create mode 100644
-> meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654-regression.patch
->  create mode 100644
-> meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-19654.patch
->  create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17572.pat=
-ch
->  create mode 100644
-> meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vboxvideo-=
-let-the-build-decide-if-drm_fb_helper_alloc.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2026-42311.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59204.patch
->
-> --
-> 2.55.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#130524):
-> https://lists.openembedded.org/g/openembedded-devel/message/130524
-> Mute This Topic: https://lists.openembedded.org/mt/121508685/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+I understand it can be replaced by smolkit as a different provider,
+but should we really drop ${PN}-service and ${PN}-dbus by default?
 
---00000000000025199b065cbdf61d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Noticed as everything that uses polkit stopped working after I updated
+to the latest meta-oe (since before NM / etc would just depend on
+polkit and everything would be provided by the package).
 
-<div dir=3D"ltr">Merged now, thanks=C2=A0Anuj</div><br><div class=3D"gmail_=
-quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, =
-Sep 30, 2026 at 7:06=E2=80=AFAM Anuj Mittal via <a href=3D"http://lists.ope=
-nembedded.org">lists.openembedded.org</a> &lt;anuj.mittal=3D<a href=3D"mail=
-to:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.openembe=
-dded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">Please review and merge these changes in scarthgap. Tested on autob=
-uilder<br>
-and locally:<br>
-<br>
-<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
-ds/1836" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
-ect.org/valkyrie/#/builders/81/builds/1836</a><br>
-<br>
-The following changes since commit b5874ea07d69919d9b40d59f2c2f0bbd24bc3259=
-:<br>
-<br>
-=C2=A0 libssh: Fix CVE-2026-59850 (2026-09-02 10:39:59 +0530)<br>
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
-el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
-mbedded-contrib</a> anujm/scarthgap<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
-g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
-enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
-<br>
-for you to fetch changes up to 0f00f8b9a21950640da8c5707343e5540133f86e:<br=
->
-<br>
-=C2=A0 vboxguestdrivers: fix vboxvideo build on kernels lacking drm_fb_help=
-er_alloc_info (2026-09-29 16:10:23 +0530)<br>
-<br>
-----------------------------------------------------------------<br>
-<br>
-Anuj Mittal (1):<br>
-=C2=A0 vboxguestdrivers: fix vboxvideo build on kernels lacking<br>
-=C2=A0 =C2=A0 drm_fb_helper_alloc_info<br>
-<br>
-Benjamin Robin (Schneider Electric) (2):<br>
-=C2=A0 libwebsockets: update to version 4.3.10<br>
-=C2=A0 libwebsockets: fix CVE-2026-19773<br>
-<br>
-Deepak Rathore (1):<br>
-=C2=A0 rsyslog: Fix CVE-2026-19654<br>
-<br>
-Himani Ramesh Barde (1):<br>
-=C2=A0 postfix: fix build on hosts with Linux 7.x kernel<br>
-<br>
-Hitendra Prajapati (1):<br>
-=C2=A0 python3-pillow: fix CVE-2026-42311<br>
-<br>
-Jason Schonberg (1):<br>
-=C2=A0 php: upgrade 8.2.33 -&gt; 8.2.34<br>
-<br>
-Peter Marko (3):<br>
-=C2=A0 msgpack-c: patch CVE-2026-72854<br>
-=C2=A0 recipes: correct homepage<br>
-=C2=A0 polkit: patch CVE-2026-4897 and CVE-2026-85498<br>
-<br>
-Rohini Sangam (2):<br>
-=C2=A0 python3-pillow: Security fix for CVE-2026-59198<br>
-=C2=A0 python3-pillow: Security fix for CVE-2026-59204<br>
-<br>
-Viswanath Kraleti (1):<br>
-=C2=A0 libfastjson: switch git branch from master to main<br>
-<br>
-Yogita Urade (1):<br>
-=C2=A0 hdf5: Fix CVE-2026-17572<br>
-<br>
-=C2=A0...kedefs-Account-for-linux-7.x-version.patch |=C2=A0 47 +++<br>
-=C2=A0.../recipes-daemons/postfix/<a href=3D"http://postfix_3.8.19.bb" rel=
-=3D"noreferrer" target=3D"_blank">postfix_3.8.19.bb</a> |=C2=A0 =C2=A01 +<b=
-r>
-=C2=A0.../libwebsockets/CVE-2025-11677.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1=
-61 --------<br>
-=C2=A0.../libwebsockets/CVE-2025-11678.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1=
-28 -------<br>
-=C2=A0.../libwebsockets/CVE-2026-19773.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 32 ++<br>
-=C2=A0...<a href=3D"http://ckets_4.3.3.bb" rel=3D"noreferrer" target=3D"_bl=
-ank">ckets_4.3.3.bb</a> =3D&gt; <a href=3D"http://libwebsockets_4.3.10.bb" =
-rel=3D"noreferrer" target=3D"_blank">libwebsockets_4.3.10.bb</a>} |=C2=A0 =
-=C2=A07 +-<br>
-=C2=A0.../msgpack/msgpack-c/CVE-2026-72854.patch=C2=A0 =C2=A0 | 127 +++++++=
-<br>
-=C2=A0.../msgpack/<a href=3D"http://msgpack-c_6.0.0.bb" rel=3D"noreferrer" =
-target=3D"_blank">msgpack-c_6.0.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
-=C2=A0.../php/{<a href=3D"http://php_8.2.33.bb" rel=3D"noreferrer" target=
-=3D"_blank">php_8.2.33.bb</a> =3D&gt; <a href=3D"http://php_8.2.34.bb" rel=
-=3D"noreferrer" target=3D"_blank">php_8.2.34.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A02 +-<br>
-=C2=A0.../polkit/files/CVE-2026-4897-01.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 64 ++++<br>
-=C2=A0.../polkit/files/CVE-2026-4897-02.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 32 ++<br>
-=C2=A0.../polkit/files/CVE-2026-85498.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 38 ++<br>
-=C2=A0meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_124.bb" rel=
-=3D"noreferrer" target=3D"_blank">polkit_124.bb</a> |=C2=A0 =C2=A03 +<br>
-=C2=A0.../rsyslog/<a href=3D"http://libfastjson_1.2304.0.bb" rel=3D"norefer=
-rer" target=3D"_blank">libfastjson_1.2304.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../rsyslog/CVE-2026-19654-regression.patch=C2=A0 =C2=A0|=C2=A0 56 ++=
-+<br>
-=C2=A0.../rsyslog/rsyslog/CVE-2026-19654.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
-52 +++<br>
-=C2=A0.../rsyslog/<a href=3D"http://rsyslog_8.2402.0.bb" rel=3D"noreferrer"=
- target=3D"_blank">rsyslog_8.2402.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
-=C2=A0.../hdf5/files/CVE-2026-17572.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0| 272 +++++++++++++<br>
-=C2=A0meta-oe/recipes-support/hdf5/<a href=3D"http://hdf5_1.14.4-3.bb" rel=
-=3D"noreferrer" target=3D"_blank">hdf5_1.14.4-3.bb</a> |=C2=A0 =C2=A01 +<br=
->
-=C2=A0...-build-decide-if-drm_fb_helper_alloc.patch |=C2=A0 54 +++<br>
-=C2=A0.../<a href=3D"http://vboxguestdrivers_7.0.14.bb" rel=3D"noreferrer" =
-target=3D"_blank">vboxguestdrivers_7.0.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A09 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-beautifulsoup4_4.12.3.bb" rel=3D=
-"noreferrer" target=3D"_blank">python3-beautifulsoup4_4.12.3.bb</a>=C2=A0 =
-=C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-colorzero_2.0.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-colorzero_2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-flask-login_0.6.3.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-flask-login_0.6.3.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-flask-mail_0.9.1.bb" rel=3D"nore=
-ferrer" target=3D"_blank">python3-flask-mail_0.9.1.bb</a>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-flask-user_0.6.19.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-flask-user_0.6.19.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python3-pillow/CVE-2026-42311.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0| 3=
-56 ++++++++++++++++++<br>
-=C2=A0.../python3-pillow/CVE-2026-59198.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 60 +++<br>
-=C2=A0.../python3-pillow/CVE-2026-59204.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 37 ++<br>
-=C2=A0.../python/<a href=3D"http://python3-pillow_10.3.0.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-pillow_10.3.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A03 +<br>
-=C2=A0.../python/<a href=3D"http://python3-pyexpect_1.0.22.bb" rel=3D"noref=
-errer" target=3D"_blank">python3-pyexpect_1.0.22.bb</a>=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A031 files changed, 1257 insertions(+), 302 deletions(-)<br>
-=C2=A0create mode 100644 meta-networking/recipes-daemons/postfix/files/0001=
--makedefs-Account-for-linux-7.x-version.patch<br>
-=C2=A0delete mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebs=
-ockets/CVE-2025-11677.patch<br>
-=C2=A0delete mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebs=
-ockets/CVE-2025-11678.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebs=
-ockets/CVE-2026-19773.patch<br>
-=C2=A0rename meta-oe/recipes-connectivity/libwebsockets/{<a href=3D"http://=
-libwebsockets_4.3.3.bb" rel=3D"noreferrer" target=3D"_blank">libwebsockets_=
-4.3.3.bb</a> =3D&gt; <a href=3D"http://libwebsockets_4.3.10.bb" rel=3D"nore=
-ferrer" target=3D"_blank">libwebsockets_4.3.10.bb</a>} (94%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/CVE-202=
-6-72854.patch<br>
-=C2=A0rename meta-oe/recipes-devtools/php/{<a href=3D"http://php_8.2.33.bb"=
- rel=3D"noreferrer" target=3D"_blank">php_8.2.33.bb</a> =3D&gt; <a href=3D"=
-http://php_8.2.34.bb" rel=3D"noreferrer" target=3D"_blank">php_8.2.34.bb</a=
->} (99%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-489=
-7-01.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-489=
-7-02.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-854=
-98.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-=
-19654-regression.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2026-=
-19654.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17572.=
-patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguest=
-drivers/0001-vboxvideo-let-the-build-decide-if-drm_fb_helper_alloc.patch<br=
->
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pillow=
-/CVE-2026-42311.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pillow=
-/CVE-2026-59198.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pillow=
-/CVE-2026-59204.patch<br>
-<br>
--- <br>
-2.55.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#130524): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/130524" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/130524</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121508685/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121508685/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+Thanks,
 
---00000000000025199b065cbdf61d--
+Ricardo
 
