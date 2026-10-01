@@ -2,216 +2,140 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7341CA5FD4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6198CA5FD2
 	for <webhook@archiver.kernel.org>; Thu,  1 Oct 2026 20:14:17 +0000 (UTC)
 Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20516.1790885649562713609
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20678.1790885648328020913
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Oct 2026 13:14:09 -0700
+ Thu, 01 Oct 2026 13:14:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=KTxVClqO;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Sv9Z5Jqt;
  spf=pass (domain: gmail.com, ip: 74.125.229.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-346c612c7a8so3532743eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 13:14:09 -0700 (PDT)
+Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-34bb8b31660so2089643eec.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 13:14:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790885649; x=1791490449; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MfeJ2YrRVyCqabIxwss1DPSoMplPSsvPjeCXt2NWIAo=;
-        b=KTxVClqOug96aiVP/tOk1zWcCAkT2FJe+681+D+1i2928mEciQyEKKy90U0H2cZoL+
-         0GviK1YyDkL4iL1jrbKeYiCA+R2Chivu/yUrgaThxlKOMZvAOafB0Dl9RcQdKzS1cxJx
-         dfnvhVeg3sdsLGq/we7sDtBDtfQ4UssLjJSTAgCFn2YN54GsiWxdhBhpXuutwYDjf/cq
-         NTwqjzqlpClalMDwG6etztoXv6BXzZ6mNv7l+As950E1CPSCNB9rikznSVrMizqPVYss
-         n/33bnvWe9I5Q92KlhxRQr4PKzyIbwsTubtiMON9CuO6wXD6/R97fty/h02EnNrNrK3Y
-         L6QQ==
+        d=gmail.com; s=20251104; t=1790885648; x=1791490448; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=O6bxDzr7vwdJym53rdpoS6oQHL0pRG380Rr4WbqTSps=;
+        b=Sv9Z5JqtNLg1FsaW7a8QzKyIWARKQSpoaOrBKWtMwVXtfBvp9hEylbGxvDb4ZehJZ/
+         NOvOKesrPCL0YI+juCRq+PlXThvFwnpA2a8s7s8awNzaQ3s2dHGvyHikrv7dv8JsLX0v
+         zdbrDMV/rSxILHbY4hZDwY9gBl5Ym/OBxBsBDwx+J8KBmJtmVrcApAHAUImyHtl0henw
+         z7dot28PJqiL9zmnW/bNwRCa975LWGN6jzxLA/cpLZ+PSxmalblX9OKtvE4mM9UEmyL2
+         WUg3TZZMCC6YBOcvafJg6Kl3FGumUVpUak1nXPyXsc0ABGUh6evYtELgwtuFNqg8aOF/
+         o18Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790885649; x=1791490449;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MfeJ2YrRVyCqabIxwss1DPSoMplPSsvPjeCXt2NWIAo=;
-        b=PiWoOM3ugsLYq+o22W4YcFfyKPs7w4JloXFi+lKAgcSpZ4Dw6kWN0WjqLUKr3O58Ms
-         vWq2H0LHAzsF7kJV7pFWsoQ5EjLPpDCxBu9e5a/+YBIpqsH9szFjEI6PWUUtICUF8WHq
-         7x4X9AVMEJWzLFakCwhO3pHAsw4vki2oumfjlwRylxA+HmwiZ/rZr0O3KDvxm/m2A7x7
-         RF/MaTEmCE9GQOhGwqe+wvKNMVVJJobtPNkFDqGgn7VqR//qBJBXlFlOi95xhgBi5AYs
-         tmv3fa9Oj8CyFrGF5kp7/pmwkGAnCox1WY5HPQu2pgrV8S6CZM40si1z+alWp1DEQY2w
-         HIsQ==
-X-Gm-Message-State: AFq9FYKar9uq2LbamwjtG+eiZ62BIzIaOj28F/QhDBPBZTS3mNeyPDPX
-	qbH4DOi4b6Kv80DfiNbNnERQjHSPOdmWOhoeb35ELSrd9YDh56eUxpa7JMbkk+6g
-X-Gm-Gg: AYBFou3zeu0Lo9IJfAZyMmziyw9San9a41+lXcycuRrAcQjrjaZowadeCd1+pNmpIGx
-	TE2B2qw+Qcf6BWa+FkuhTKjO0HON2NueYWcecmJe4vQyBtYdi4T5huoJB6ElRmajG9tjS3qFJ9Y
-	tXGKJXHHTJwp707d+SXQDvz6GSXjO9lfqxub00NCkdaQ0ryYcD0AM3xG5xEK9ODGHeVZ762cZwO
-	u5D8NlwkDqmM4TMY5U3G4x4+faK7luR61VArI7fWRt+gEwdaeL1bBInvVFzDOnFMmgA0UKFP4X1
-	JE2hTwcJNksJcUxVgQLKtLDHgIZMn93KULI4NUvSrX5qgYrT1urL0NZJkkn5eWRwpPqt63KGzlh
-	N23421tiZVYr1AuIvNVV3sbxD5o6c1PtMvh3vTNg0VFhL7eHRaYhES7F+T0k6o4ZxmzwiEj40mO
-	+dHx37HUXvkXlMPKy0gkIQVw7RJ6FTU7A5xXgWh8NTSqx6QmrvgRG/eCtApRS1CKMa2PaA4x9WH
-	wPLYnM/mG8HTcfOzKy7xGPcRD9dWv9W7HSV8fYmpvTBwSqSH/3XbCtFeC3CgIZrkWjYII01a4TS
-	ofVjFxRlSERb28UK9+rEEUsU4HK9XzHsbap0EtRgn4SwwbaV9N2R16bkIeqymiVdxCy9N34s6gA
-	YJ5L1Ms1JOCLicp6UfK1k2AFcUBWc10Gd/J2wvVOJCUB3F2Tbp5VNpmlWHZzXrFT4BW+pUcTPKN
-	SYKW0Ob5uJioky7BXUYv2pO6dFCj0XFq1jKWK8pdsEE3QVSXDHxQ==
-X-Received: by 2002:a05:7300:a211:b0:341:6552:8c39 with SMTP id 5a478bee46e88-34f219beff2mr417888eec.40.1790885648748;
-        Thu, 01 Oct 2026 13:14:08 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790885648; x=1791490448;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=O6bxDzr7vwdJym53rdpoS6oQHL0pRG380Rr4WbqTSps=;
+        b=tdt/fn7M0vu3zqg3eQ+YREsmyWH+pd7fR9s9n/XdaryIJFtrmmD6IKYYuQf1tTQKAH
+         PuEeFbL7B/lKpb+TLXR7sfyzbtFl/5LT6QGgTheFJrFOOb3E2YTYz0ehJou+m0vD2NQU
+         GoYUH4rYM48NCs7fijjcsIQlrgXH08MSNigBEF1opPiDo8vwvO32EYLq5s34jWAIdf10
+         MbmJWQQ7Aec/S3/krAvMsPz7Ofaa81Erp5btIdeI6esgTacLv6tHu6PUqdW97E3D0wS8
+         GN3qOh4k0emzC0HGKedPd6Vn7GOg6JRotbshuXfPW8VjoG5a49pfLUxbj+CFf33FpFTD
+         3onQ==
+X-Gm-Message-State: AFq9FYI/L+c3KauFtORGldG4B2DleBKy3VXWPu4oR6M7GAXVFxTcJ71n
+	1CSjaeS9TPWS89o/pGnwDr+po/67gBR7Q6O02b5F9itRRKOifprj0rCWnjXqgw==
+X-Gm-Gg: AYBFou0WJ51u1S93rNt7zHndbGqhwhqIc82KuzVsBcm0JtCVl2LnbI0wf4ws3TqHT1B
+	9nLnY8YxlBhEJZB+W8eMFhLYaXpi58DTRw0fjYW8o9ZvFPh8B83qjKKL8kYrbrW/TqQ8nFjKpJA
+	YVrIJrQrbFdKEc/I9Su9Uq8MyxCgJfdc+4mBhm6BsmdLVGa0u09Bx7+ppEuOct0hhpWT4GH3dgD
+	0/Zm6qLVSjTy/4JLD9zg6PPY0WRGACvdp0XXvzgEmI+Szw0NEHStbod1gSDS4c8AFa+9ZFx64FH
+	c/hQzqzZ5olvWG2BZxAqLlPJCM57Q+jHRZ9AqkSjZLTlJOZpw2ge0LAtSlJypOzEiJO/CvkaiEo
+	AY04aT8+ZPq7EQMTG72drL2qvN+HKzljFEDxNnIn4RQY7AACNyGULX6BT0JjmyqLoBxlWq/Z3c0
+	dKPYNvJ70M4T1I1Jri0aEZPIFN6p7vsUC3E7rut37P3Dsa2WEhUNEjeWKEWkmxWIojS0W1KmNf4
+	1OeeeP4shN6iU97b8aDjdKvHm6PzeePG9Hus//yu/lPxIOu50ursmJW6DBhXPw1MfwrMsJ4oDp2
+	76PB8xirT6oaigabehHBovGLRRAoKzZ9W5g+48Y6YlYcnIdOni34/7hU7wWwzl5BTLisXinrfpN
+	F5Y0ZMQBNKgjNlOEyS1nghYkRnep6j4FgtE4rGx8a9ylFqeIHiojM27o/vCSm3gJ0xsKUP3QnOG
+	3qZtRBj0uEZfn8GdF6GQ+V6TzKpE0aWLyVBNyKlQ==
+X-Received: by 2002:a05:693c:66ce:10b0:33b:a766:ea6a with SMTP id 5a478bee46e88-34f2198158fmr395002eec.32.1790885647545;
+        Thu, 01 Oct 2026 13:14:07 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34f14fdfc58sm528055eec.24.2026.10.01.13.14.07
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34f14fdfc58sm528055eec.24.2026.10.01.13.14.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 13:14:08 -0700 (PDT)
+        Thu, 01 Oct 2026 13:14:06 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/2] fuse3: Fix ptest for the new test runner
-Date: Thu,  1 Oct 2026 13:14:04 -0700
-Message-ID: <20261001201404.3518829-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] librelp: Skip tls-ossl-connect-failure-vg.sh when libtool is missing
+Date: Thu,  1 Oct 2026 13:14:03 -0700
+Message-ID: <20261001201404.3518829-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261001201404.3518829-1-khem.raj@oss.qualcomm.com>
-References: <20261001201404.3518829-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2026 20:14:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130601
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130600
 
-libfuse 3.18.3 replaced its pytest based tests with shell test cases
-driven by test/run-tests.py, so the pytest based run-ptest collected no
-tests at all.
-
-- Run test/run-tests.py from run-ptest and turn its result lines into
-  ptest PASS/FAIL/SKIP lines. Use a run directory under the canonical
-  /tmp, since some test filesystems mirror the real tree and cannot
-  follow the /var/tmp symlink.
-- Install fuse_config.h, which the runner reads from the build tree.
-- Replace the pytest dependencies with the python3 modules the runner
-  uses, and add coreutils and util-linux-losetup for dd status=none and
-  losetup --show, which busybox does not support.
-- Do not print strerror(0) in test_syscalls, musl's "No error
-  information" is flagged as suspicious output by the runner.
-
-All 87 tests now run on qemux86-64 musl: 80 pass, 7 skip.
+The test added in 1.13 runs the sender through ${srcdir}/../libtool,
+which only exists in the build tree. In ptest the sender cannot start
+and the test fails with exit status 127. Skip it like the other valgrind
+tests already do when libtool is not available.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...est_syscalls-Do-not-print-strerror-0.patch | 36 +++++++++++++++++++
- meta-oe/recipes-support/fuse/fuse3/run-ptest  | 22 +++++++++++-
- meta-oe/recipes-support/fuse/fuse3_3.18.3.bb  | 20 +++++++++--
- 3 files changed, 74 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/fuse/fuse3/0001-test_syscalls-Do-not-print-strerror-0.patch
+ ...ssl-connect-failure-vg.sh-without-li.patch | 36 +++++++++++++++++++
+ .../recipes-extended/rsyslog/librelp_1.13.bb  |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch
 
-diff --git a/meta-oe/recipes-support/fuse/fuse3/0001-test_syscalls-Do-not-print-strerror-0.patch b/meta-oe/recipes-support/fuse/fuse3/0001-test_syscalls-Do-not-print-strerror-0.patch
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch
 new file mode 100644
-index 0000000000..eab67c623a
+index 0000000000..903c6a5bcc
 --- /dev/null
-+++ b/meta-oe/recipes-support/fuse/fuse3/0001-test_syscalls-Do-not-print-strerror-0.patch
++++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch
 @@ -0,0 +1,36 @@
-+From 75186b0a019645a2822c9d567464bb142cc8882a Mon Sep 17 00:00:00 2001
++From 1bd587299f7578f4e08242eb45282933b8c10b36 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Thu, 1 Oct 2026 10:42:51 -0700
-+Subject: [PATCH] test_syscalls: Do not print strerror(0)
++Date: Thu, 1 Oct 2026 10:31:31 -0700
++Subject: [PATCH] tests: skip tls-ossl-connect-failure-vg.sh without libtool
 +
-+test_open_acc() prints strerror() of the expected error, which is 0 for
-+the cases that should succeed. glibc returns "Success" for it, but musl
-+returns "No error information", and run-tests.py treats the word "error"
-+in the output as a failure:
++The test runs the sender through ${srcdir}/../libtool, which only exists
++in a build tree. When the test suite is installed and run elsewhere, as
++with ptest, the sender cannot be started and the test fails with:
 +
-+  FAIL  examples/passthrough-base  suspicious output: script.out: ... 49 [open_acc(O_RDONLY) mode: 0600 message: 'No error information'] START
++  tls-ossl-connect-failure-vg.sh: line 22: .../tests/../libtool: No such file or directory
++  unexpected sender exit status 127 (expected authentication failure)
 +
-+Print "Success" when no error is expected.
++The other valgrind tests already skip in this case through
++startup_receiver_valgrind(). Skip this one as well.
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ test/test_syscalls.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
++ tests/tls-ossl-connect-failure-vg.sh | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/test/test_syscalls.c b/test/test_syscalls.c
-+index 115eab8..f849e7b 100644
-+--- a/test/test_syscalls.c
-++++ b/test/test_syscalls.c
-+@@ -1335,8 +1335,10 @@ static int do_test_open_acc(int flags, const char *flags_str, int mode, int err)
-+ 	int res;
-+ 	int fd;
++diff --git a/tests/tls-ossl-connect-failure-vg.sh b/tests/tls-ossl-connect-failure-vg.sh
++index d67378d..08bf018 100755
++--- a/tests/tls-ossl-connect-failure-vg.sh
+++++ b/tests/tls-ossl-connect-failure-vg.sh
++@@ -9,6 +9,10 @@ if ! ./have_tlslib "openssl"; then
++ 	echo "OpenSSL support is not available"
++ 	exit 77
++ fi
+++if [ ! -x "${srcdir}/../libtool" ]; then
+++	echo "libtool not available, cannot run under valgrind"
+++	exit 77
+++fi
 +
-++	/* strerror(0) is "Success" on glibc but "No error information" on
-++	 * musl, which the test runner flags as a suspicious word. */
-+ 	start_test("open_acc(%s) mode: 0%03o message: '%s'", flags_str, mode,
-+-		   strerror(err));
-++		   err ? strerror(err) : "Success");
-+ 	unlink(testfile);
-+ 	res = create_testfile(testfile, data, datalen);
-+ 	if (res == -1)
-diff --git a/meta-oe/recipes-support/fuse/fuse3/run-ptest b/meta-oe/recipes-support/fuse/fuse3/run-ptest
-index b63c4de0d9..b8295bbce9 100644
---- a/meta-oe/recipes-support/fuse/fuse3/run-ptest
-+++ b/meta-oe/recipes-support/fuse/fuse3/run-ptest
-@@ -1,3 +1,23 @@
- #!/bin/sh
++ export errorlog="error.$LIBRELP_DYN.log"
++ export TLSLIB="-l openssl"
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.13.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.13.bb
+index 479905f728..b7d64fcb9d 100644
+--- a/meta-oe/recipes-extended/rsyslog/librelp_1.13.bb
++++ b/meta-oe/recipes-extended/rsyslog/librelp_1.13.bb
+@@ -8,6 +8,7 @@ DEPENDS = "gmp libidn zlib"
 
--pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-+# Run the libfuse test suite. The ptest directory mirrors the meson build
-+# tree (example/, test/, util/, fuse_config.h) that test/run-tests.py expects.
-+# Each finished test is reported as
-+#   +   1.234s PASS  notify/prune                       0.12s
-+# so print it as is and add the ptest result line after it.
-+cd "$(dirname "$0")"
-+
-+# Some test filesystems mirror the real tree but cannot follow symlinks, so
-+# keep the run directory off paths like /var/tmp, which is a symlink to
-+# volatile/tmp. run-tests.py creates the directory and removes it when done.
-+run_dir="$(readlink -f /tmp)/fuse-tests-$$"
-+
-+python3 test/run-tests.py --build-dir "$(pwd)" --run-dir "$run_dir" 2>&1 | awk '
-+{ print }
-+/^\+ *[0-9.]+s +(PASS|FAIL|SKIP) / {
-+	line = $0
-+	sub(/^\+ *[0-9.]+s +/, "", line)
-+	split(line, f, " ")
-+	printf "%s: %s\n", f[1], f[2]
-+	fflush()
-+}'
-diff --git a/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb b/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-index 75dde98a7c..1e4b86a47a 100644
---- a/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-+++ b/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-@@ -31,14 +31,25 @@ LDFLAGS:append:toolchain-clang:riscv32 = " -latomic"
- SRC_URI += " \
-     file://run-ptest \
-     file://fuse3.conf \
-+    file://0001-test_syscalls-Do-not-print-strerror-0.patch \
+ SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=main;tag=v${PV} \
+            file://run-ptest \
++           file://0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch \
  "
--#python3-compile for filecmp module
-+# test/run-tests.py needs python3-asyncio for concurrent.futures,
-+# python3-compile for filecmp, python3-io for socket/tempfile and
-+# python3-shell for shlex. The test cases use dd status=none and
-+# losetup --show, which busybox does not support.
- RDEPENDS:${PN}-ptest += " \
-+    python3-asyncio \
-     python3-compile \
--    python3-pytest \
--    python3-looseversion \
-+    python3-core \
-+    python3-ctypes \
-+    python3-io \
-+    python3-json \
-+    python3-resource \
-+    python3-shell \
-     bash \
-+    coreutils \
-     file \
-+    util-linux-losetup \
- "
- RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
-@@ -66,6 +77,9 @@ do_install_ptest() {
-     do
-         cp -rf $e  ${D}${PTEST_PATH}/test
-     done
-+
-+    # test/run-tests.py reads the build configuration from the build tree
-+    install -m 0644 ${B}/fuse_config.h ${D}${PTEST_PATH}/
- }
-
- DEPENDS = "udev"
+ SRCREV = "bedc657e519568b25f611c8efc83eab6ac1068e9"
 
