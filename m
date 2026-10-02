@@ -1,124 +1,74 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D504CA5FDD
-	for <webhook@archiver.kernel.org>; Fri,  2 Oct 2026 15:57:12 +0000 (UTC)
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15665.1790956272316758162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2C66CA5FDD
+	for <webhook@archiver.kernel.org>; Fri,  2 Oct 2026 15:59:42 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15880.1790956772187028240
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Oct 2026 08:51:12 -0700
+ Fri, 02 Oct 2026 08:59:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@pengutronix.de header.s=20260414 header.b=SODWUOjp;
- spf=pass (domain: pengutronix.de, ip: 185.203.200.13, mailfrom: bst@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
-	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id BFF40201991;
-	Fri, 02 Oct 2026 17:51:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1790956270;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ejXtoey8Nt1DVCpkVFQHFYIAKquP0KReoRENSXQjCQk=;
-	b=SODWUOjpaKEXKC8+xt3iIsD4O0TifX5vjEfjyNfQeaeEdQuI1Tq/r8j1SuM/yhqfI2gh8q
-	Lb2Um9u0RNWGcsTGPg7DFtUstbOtYF2BraTMiMX7zfGSLKN1KjHsmNdDw/RGNNo2ftxvxm
-	GRe7iI1dg7kgCZ7oS2+CfkyCgnan3ie5VDZar345RKaUDhUIr/bsJJ4Ab4avL12oo3SPnh
-	wg1y14Nx1ekgVWf0AsNAWaVLbA6vOZsRFCaNGleOYTtQcza8Uu2rFshuX9VBXtmn8NZ892
-	iNkRx9fJzVFofjgA7/RcMOfRZ1qFumZP8SjVVdqJLA4ogP+gfXNGHP5b1mwXjw==
-ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1790956270; a=rsa-sha256;
-	cv=none;
-	b=YsajxUnBFOk0coMgZ/nUePe2tCYJ26HsJ2H/djyNwqAmeCyIJYLCnI+05rpOZJj+5AS+nL
-	/UDEwJp9maHGegb6RcJXCW+9XixM3oyBNHDtu+RQ2baxSCD673erZ2ZkNnMCOafu39x/UT
-	n+SQsxR2Ro6RObz2joouCXxfa1lE/sFDYumaCM3xZ0Qn6M6a4CXqOujg08/fm3TVj6nZfE
-	tni1QRlfCIxXJVANufxPukouYvCisTzUCPlKARnVGlSBc/gL3g1dkYI39JqeiGZUX4eZAD
-	lJSbKx1n+9GtqoacoulEczVo4Y3M1Ze25S6Sus0UlhowCJxZhZ/jdZLczmIdZg==
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=relay-from-drehscheibe.grey.stw.pengutronix.de smtp.mailfrom=bst@pengutronix.de
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1790956270;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ejXtoey8Nt1DVCpkVFQHFYIAKquP0KReoRENSXQjCQk=;
-	b=AzfGQKh2ZxYfbJuRiOFWFrtkoeOr5fJenJsTSI8u9RyEFXz+1CXxJf1mLd51GZu+kczmtO
-	Hu4TRxt/cEJMn54XfRvu/i2IFNBGJZoX+q8yxeQ8b6u/8OLnxCiyl7RqURXDPoaU5ltoax
-	cY/uBiGvdbxAjt8fmSrIp5LXxfuNOebnniFx+KOrnzv/ZCOQLcXMF1M+3x2gdngwrtpSKn
-	x6lBIbU4yb5NMp3fqKaSmFkEcSo5OsqXv0bBmDgP2QkKEtfl68LXUia/vCwLv2kFpEaMk9
-	GOXZf6Uq2UJj21VgFqz6PJdM+1YJe5Wav6pnxe2iDuf4kCxn1EkwuFLARmbGJg==
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <bst@pengutronix.de>)
-	id 1xCfXS-003uoM-2H;
-	Fri, 02 Oct 2026 17:51:10 +0200
-From: "Bastian Krause" <bst@pengutronix.de>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=BCXH37LY;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20261002155928bcd48dfb3d0002071a-1vey_s@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20261002155928bcd48dfb3d0002071a
+        for <openembedded-devel@lists.openembedded.org>;
+        Fri, 02 Oct 2026 17:59:29 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=7Sq+Yt+Z6wtu/oONsUNg4JVC7urozSTCoqqy3jUt/as=;
+ b=BCXH37LYIoKXe6u0bvBAtBPNzzRL6dkm4ZYyLlJULcWdb+byD/CWJJGdlqhj88tIFebLQo
+ ctmZCpLo7brxo2znaV1WoodIJ8SaTXBofL/OjVOwsOEmFqwlOSbaiG2vvNlik7ZwG3mQinpb
+ U8X39qEOGzPKtJrtt76G8DIFERWTciceXqBzStdS3nQ0bRnY8eIuBoZuw4Fo9kQiWZckKczg
+ t6UaOIOXb1HQ0fFbIPd/TV6g1CyQPir9/2ZDD+e50KH0Fr01DPKhYAA2kx5iMQiEPb4PjTfB
+ Z9ER4YIOcWSFaY91aV6D3niWtBo6fzOcKBqbGEKoRYmb55SIl1Gij9Qw==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: yocto@pengutronix.de,
-	Bastian Krause <bst@pengutronix.de>
-Subject: [meta-oe][PATCH v2 2/2] fitimage.bbclass: make engine parameters in FITIMAGE_MKIMAGE_EXTRA_ARGS fail early
-Date: Fri,  2 Oct 2026 17:49:03 +0200
-Message-ID: <20261002155105.1184924-2-bst@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261002155105.1184924-1-bst@pengutronix.de>
-References: <20261002155105.1184924-1-bst@pengutronix.de>
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-webserver][PATCH] nginx: set status for CVE-2026-90439
+Date: Fri,  2 Oct 2026 17:58:28 +0200
+Message-ID: <20261002155828.11703-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2026 15:57:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130606
+ <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2026 15:59:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130607
 
-Now that oe-core moved to OpenSSL 4.0, the engine API is gone.
-As a result uboot-mkimage's -N/--engine no longer work:
+From: Peter Marko <peter.marko@siemens.com>
 
-  Failed to sign 'signature-1' signature node in 'conf-imx6dl-riotboard.d=
-tb' conf node
-  uboot-mkimage Can't add hashes to FIT blob: -1
-  Error: Bad parameters for FIT image type
-  Usage: uboot-mkimage [-T type] -l image
-            -l =3D=3D> list image header information
-            -T =3D=3D> parse image file as 'type'
-            -q =3D=3D> quiet
+CVE information now contains separate version range for mainline and
+stable nginx version.
+Problem is that mainline version range includes stable verion fix and
+since cve-check marks CVE as applicable if one of ranges contains
+current recipe version, it's reported as vulnerable.
 
-A previous patch documented how provider-based PKCS#11 signing works.
-Now make an engine option in FITIMAGE_MKIMAGE_EXTRA_ARGS a fatal error. I=
-t
-has no effect anymore, so a recipe still setting it has not been
-migrated; failing with a clear message beats mkimage's generic error
-messages above.
+* Affected 1.29.2 < 1.31.6 (semver) < matches 1.30.5, so false positive
+* Affected 1.30.4 < 1.30.5 (semver) < correct fix version, but overridden
 
-Signed-off-by: Bastian Krause <bst@pengutronix.de>
+Add also a note to remove these explicit entries when new minor stable
+version is available which does not fall into the mainline version range
+(for all 3 currently explicitly handled CVEs).
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
-Changes since (implicit) v1:
-- mention FITIMAGE_MKIMAGE_EXTRA_ARGS in bbfatal message, so the user
-  knows where to look for the engine argument
----
- meta-oe/classes/fitimage.bbclass | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/classes/fitimage.bbclass b/meta-oe/classes/fitimage.=
-bbclass
-index 8a59388008..99b74939aa 100644
---- a/meta-oe/classes/fitimage.bbclass
-+++ b/meta-oe/classes/fitimage.bbclass
-@@ -519,6 +519,11 @@ do_configure[postfuncs] +=3D "write_manifest"
-=20
- do_fitimage () {
-     if [ "${FITIMAGE_SIGN}" =3D "1" ]; then
-+        case " ${FITIMAGE_MKIMAGE_EXTRA_ARGS} " in
-+        *" --engine "*|*" --engine=3D"*|*" -N "*)
-+            bbfatal "FITIMAGE_MKIMAGE_EXTRA_ARGS: OpenSSL engines are no=
- longer supported, see updated usage in fitimage.bbclass."
-+            ;;
-+        esac
-         uboot-mkimage ${FITIMAGE_MKIMAGE_EXTRA_ARGS} \
-             -k "${FITIMAGE_SIGN_KEYDIR}" -r \
-             -f "${B}/manifest.its" \
---=20
-2.47.3
-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb
+index 4dda52c62d..6b638cdd96 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb
+@@ -6,5 +6,7 @@ SRC_URI[sha256sum] = "6c20565aa2325cb82216ae804f4a4ff1875179014759a381c42ddc8e11
+ 
+ inherit upstream-version-is-even
+ 
++# Remove following entries when upgrading recipe to 1.32
+ CVE_STATUS[CVE-2026-42055] = "fixed-version: Fixed since 1.30.3"
+ CVE_STATUS[CVE-2026-48142] = "fixed-version: Fixed since 1.30.3"
++CVE_STATUS[CVE-2026-90439] = "fixed-version: Fixed since 1.30.5"
 
