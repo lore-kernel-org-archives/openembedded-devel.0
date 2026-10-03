@@ -1,166 +1,236 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFF45CA5FE6
-	for <webhook@archiver.kernel.org>; Fri,  2 Oct 2026 20:40:50 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3915.1790973645194838269
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C83DCA5FE3
+	for <webhook@archiver.kernel.org>; Sat,  3 Oct 2026 09:51:25 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2856.1791021078846465125
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Oct 2026 13:40:45 -0700
+ Sat, 03 Oct 2026 02:51:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=M/bguQpN;
- spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout05.t-online.de (Postfix) with SMTP id 61BDEC2F
-	for <openembedded-devel@lists.openembedded.org>; Fri,  2 Oct 2026 22:40:42 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.227.105]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xCk3b-2JxvX60; Fri, 2 Oct 2026 22:40:39 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Yo5FF1tC;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202610030951144af2a381620002076c-nycsfd@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202610030951144af2a381620002076c
+        for <openembedded-devel@lists.openembedded.org>;
+        Sat, 03 Oct 2026 11:51:15 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=tw/GwcPgsVaEtQPAx7JIvqOMWM3tyUVj9Mhe/RU99eM=;
+ b=Yo5FF1tCFTRT4QAa+3BiiSzw3jbU61K5CHN1jfgFJ/H6zZqG9MU3XY1h7XPyEX6J1V2p8k
+ GsAA7si2QGzYTrOq83GfMpNJyzw/Rt5+5lIXfFl5wVwhns0XDB+mgYEZFG7T8aDGpi106Bm9
+ w2j0paKF3WjssxHYMwn/jLpRRgpJ/ILIZ5eruabmQMMKTqjZUG4xuMcoEAnhDNdOUT0xFo0b
+ oJwrYzofwvfKOQFJ0attZiQkEY92gFXRRXHLXC4M4XKUq9k2qdyWANANbBjQCZTt50z3mK7K
+ wM/w+pwUmZfwUJ1WunPEXCDtLtumSeovDjhPoVoJY+jGjP57kQYSWAnw==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 1/5] gnome-keyring: upgrade 51.0 -> 51.1
-Date: Fri,  2 Oct 2026 22:40:17 +0200
-Message-ID: <20261002204022.70439-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [scarthgap][PATCH 1/2] c-ares: patch CVE-2026-69186
+Date: Sat,  3 Oct 2026 11:50:48 +0200
+Message-ID: <20261003095050.3977773-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1790973639-FFFFC9F1-43A83E43/0/0 CLEAN NORMAL
-X-TOI-MSGID: 069f7683-5436-45ec-a831-3aecb20d2635
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1790973642; i=f_l_k@t-online.de;
-	bh=24x1zQZgD6s+wKjRILke8S/zi7KB3M3OWzEtxwFzFZM=;
-	h=From:To:Subject:Date;
-	b=M/bguQpNWo8TTj1hu8JmcDERx1sHKBoQGRNANKEnQ+CdyM8VrQjgZs2cL9eAQGVkX
-	 8EoYX1WHH7FVuf/m7FVg8tWDfbPyvFGksVtvPLqcTIt42g5PFooT78E9XhHS3mibXB
-	 ovhqlgoh/AEu+pBlmmWkqsNo/xXRBTVvJKoDiz8j8ZkrkYxZso9QQVt2H6JkdgdZNn
-	 xBDYjhpC+HOuLrJCaKOAel2T7K5v2VAMYD/2qo9qgilDkYf70u+6qcfsVSns3hqvY+
-	 f9I0HWCAN5xCPLOVskj1/f/TWb2kJipkNadG7m1rDTbmdDvft3awG46qxxZ4+BgejI
-	 8O4BpimcB87DA==
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2026 20:40:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130611
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 09:51:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130613
 
-0004-gkd-secret-session-drop-the-duplicate-session-unref.patch is
-removed, the fix is included upstream (!114).
+From: Peter Marko <peter.marko@siemens.com>
 
-AI-Generated: Uses Claude Code (Claude Opus 5.5)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Pick patch per [1].
+
+[1] https://security-tracker.debian.org/tracker/CVE-2026-69184
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- ...ion-drop-the-duplicate-session-unref.patch | 58 -------------------
- ...-keyring_51.0.bb =3D> gnome-keyring_51.1.bb} |  3 +-
- 2 files changed, 1 insertion(+), 60 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/=
-0004-gkd-secret-session-drop-the-duplicate-session-unref.patch
- rename meta-gnome/recipes-gnome/gnome-keyring/{gnome-keyring_51.0.bb =3D=
-> gnome-keyring_51.1.bb} (91%)
+ .../c-ares/c-ares/CVE-2026-69186.patch        | 159 ++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.27.0.bb   |   4 +-
+ 2 files changed, 162 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2026-69186.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/0004-gk=
-d-secret-session-drop-the-duplicate-session-unref.patch b/meta-gnome/reci=
-pes-gnome/gnome-keyring/gnome-keyring/0004-gkd-secret-session-drop-the-du=
-plicate-session-unref.patch
-deleted file mode 100644
-index 707a8b1a1c..0000000000
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/0004-gkd-secre=
-t-session-drop-the-duplicate-session-unref.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--From 011d89df54d0f441d17c449513ae0ef8aa21c4cd Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Tue, 15 Sep 2026 19:22:41 +0200
--Subject: [PATCH] gkd-secret-session: drop the duplicate session unref
--
--gkd_secret_session_get_item_secret() unrefs the session returned by
--gck_object_get_session() twice: once right after
--gck_session_wrap_key_full(), and once more below with a comment claiming
--the reference would otherwise leak. gck_object_get_session() hands out a
--single new reference, so the second unref drops one reference too many
--on every GetSecret call.
--
--The GckSession is freed while client->pkcs11_session and the GckObject
--of the session key still point at it. The daemon dies when the client
--leaves the bus and its dispatch table is torn down:
--
--    service_name_owner_changed         daemon/dbus/gkd-secret-service.c:=
-944
--    free_client                        daemon/dbus/gkd-secret-service.c:=
-264
--    dispose_and_unref                  daemon/dbus/gkd-secret-service.c:=
-245
--    gkd_secret_session_dispose         daemon/dbus/gkd-secret-session.c:=
-357
--    gck_object_finalize                gck/gck-object.c:135
--    g_object_unref                     -> SIGSEGV, rax =3D 0xaaaaaaaaaaa=
-aaaaa
--
--Reproduced on a running system with a single "secret-tool lookup",
--symbolized against /usr/src/debug. The older crashes reported as
--"segfault at f00dface in libgck-1.so" are the same use after free caught
--at an earlier point.
--
--gkd-secret-lock.c:49 and gkd-secret-unlock.c:726 do it correctly, with
--exactly one unref per gck_object_get_session().
--
--Upstream-Status: Pending
--
--Still present in gnome-keyring main as of 2026-09-15.
--
--AI-Generated: Uses Claude Code (Claude Opus 5)
-----
-- daemon/dbus/gkd-secret-session.c | 7 -------
-- 1 file changed, 7 deletions(-)
--
--diff --git a/daemon/dbus/gkd-secret-session.c b/daemon/dbus/gkd-secret-s=
-ession.c
--index 16bb368..6799b4c 100644
----- a/daemon/dbus/gkd-secret-session.c
--+++ b/daemon/dbus/gkd-secret-session.c
--@@ -609,13 +609,6 @@ gkd_secret_session_get_item_secret (GkdSecretSessio=
-n *self, GckObject *item,
-- 					   NULL, &error);
-- 	g_object_unref (session);
--=20
---	/*
---	 * gck_object_get_session() returns a new reference, so drop it again.
---	 * Not doing so leaks a GckSession on every GetSecret call, which in t=
-urn
---	 * keeps the client's PKCS#11 session alive after the client is gone.
---	 */
---	g_object_unref (session);
---
-- 	if (error !=3D NULL) {
-- 		if (g_error_matches (error, GCK_ERROR, CKR_USER_NOT_LOGGED_IN)) {
-- 			g_set_error_literal (error_out, GKD_SECRET_ERROR,
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.0.bb=
- b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.1.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.0.bb
-rename to meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.1.bb
-index 12576f2eb4..c1349a2986 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_51.1.bb
-@@ -20,11 +20,10 @@ DEPENDS =3D " \
-=20
- inherit gnomebase gsettings gettext
-=20
--SRC_URI[archive.sha256sum] =3D "2aebaa2d474cc31507c87a7bbbdb3e16dbe26b1c=
-fef9f206457f3f9df43558b0"
-+SRC_URI[archive.sha256sum] =3D "dfe7adc5876ef0670e7eba2907799bdbb8875ce5=
-8bb4208e1a52169bd16a47ca"
- SRC_URI +=3D "file://0001-meson-allow-setting-the-paths-to-ssh-agent-and=
--ssh-add-by-option.patch \
-             file://0002-gkd-secret-service-destroy-the-dispatch-table-be=
-fore.patch \
-             file://0003-gkd-secret-unlock-do-not-use-the-service-after-d=
-ispo.patch \
--            file://0004-gkd-secret-session-drop-the-duplicate-session-un=
-ref.patch \
-             "
-=20
- PACKAGECONFIG ??=3D " \
---=20
-2.55.0
-
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2026-69186.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2026-69186.patch
+new file mode 100644
+index 0000000000..b3c003acaa
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2026-69186.patch
+@@ -0,0 +1,159 @@
++From e47c203f91cd8b749c8736bc18d75a31ffdec8f4 Mon Sep 17 00:00:00 2001
++From: jmestwa-coder <jmestwa@gmail.com>
++Date: Sun, 12 Apr 2026 23:50:54 +0530
++Subject: [PATCH] validate RR counts before preallocation to reject malformed
++ packets early (#1134)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++## Summary
++
++Validate DNS RR counts before preallocation to reject malformed packets
++early.
++
++## What’s the issue?
++
++The parser currently trusts RR counts from the DNS header (`ANCOUNT`,
++`NSCOUNT`, `ARCOUNT`) without verifying that the packet contains enough
++data.
++
++A malformed packet can claim a large number of records without providing
++sufficient payload, causing the parser to proceed with unnecessary work
++and incorrect handling.
++
++## What changed?
++
++- Added validation to ensure RR counts are feasible based on the
++remaining buffer size
++- Moved RR preallocation from `ares_dns_parse_header` to
++`ares_dns_parse_buf`
++- Perform validation after question parsing and before preallocation
++- Return `ARES_EBADRESP` early for malformed packets
++
++## Why this approach?
++
++This keeps the parser aligned with its natural flow:
++
++parse header → parse question → validate → preallocate → parse records
++
++It avoids trusting unverified input and ensures malformed packets are
++rejected early and consistently.
++
++## Test
++
++Added a regression test (`ParseMalformedRRCount`) that reproduces the
++issue using a malformed packet with inconsistent RR count.
++
++Signed-off-by: @jmestwa-coder
++
++CVE: CVE-2026-69186
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/e47c203f91cd8b749c8736bc18d75a31ffdec8f4]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/lib/ares_dns_parse.c | 55 ++++++++++++++++++++++------------------
++ test/ares-test-parse.cc  | 11 ++++++++
++ 2 files changed, 42 insertions(+), 24 deletions(-)
++
++diff --git a/src/lib/ares_dns_parse.c b/src/lib/ares_dns_parse.c
++index 2d2a7bb2..01f3f43c 100644
++--- a/src/lib/ares_dns_parse.c
+++++ b/src/lib/ares_dns_parse.c
++@@ -848,30 +848,6 @@ static ares_status_t ares_dns_parse_header(ares__buf_t *buf, unsigned int flags,
++ 
++   (*dnsrec)->raw_rcode = rcode;
++ 
++-  if (*ancount > 0) {
++-    status =
++-      ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_ANSWER, *ancount);
++-    if (status != ARES_SUCCESS) {
++-      goto fail;
++-    }
++-  }
++-
++-  if (*nscount > 0) {
++-    status =
++-      ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_AUTHORITY, *nscount);
++-    if (status != ARES_SUCCESS) {
++-      goto fail;
++-    }
++-  }
++-
++-  if (*arcount > 0) {
++-    status =
++-      ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_ADDITIONAL, *arcount);
++-    if (status != ARES_SUCCESS) {
++-      goto fail;
++-    }
++-  }
++-
++   return ARES_SUCCESS;
++ 
++ fail:
++@@ -1134,6 +1110,8 @@ static ares_status_t ares_dns_parse_buf(ares__buf_t *buf, unsigned int flags,
++                                         ares_dns_record_t **dnsrec)
++ {
++   ares_status_t  status;
+++  size_t         total_rr_count;
+++  const size_t   min_rr_wire_len = 11;
++   unsigned short qdcount;
++   unsigned short ancount;
++   unsigned short nscount;
++@@ -1194,6 +1172,35 @@ static ares_status_t ares_dns_parse_buf(ares__buf_t *buf, unsigned int flags,
++     }
++   }
++ 
+++  total_rr_count = (size_t)ancount + (size_t)nscount + (size_t)arcount;
+++  if (total_rr_count > ares__buf_len(buf) / min_rr_wire_len) {
+++    status = ARES_EBADRESP;
+++    goto fail;
+++  }
+++
+++  if (ancount > 0) {
+++    status = ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_ANSWER, ancount);
+++    if (status != ARES_SUCCESS) {
+++      goto fail; /* LCOV_EXCL_LINE: OutOfMemory */
+++    }
+++  }
+++
+++  if (nscount > 0) {
+++    status =
+++      ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_AUTHORITY, nscount);
+++    if (status != ARES_SUCCESS) {
+++      goto fail; /* LCOV_EXCL_LINE: OutOfMemory */
+++    }
+++  }
+++
+++  if (arcount > 0) {
+++    status =
+++      ares_dns_record_rr_prealloc(*dnsrec, ARES_SECTION_ADDITIONAL, arcount);
+++    if (status != ARES_SUCCESS) {
+++      goto fail; /* LCOV_EXCL_LINE: OutOfMemory */
+++    }
+++  }
+++
++   /* Parse Answers */
++   for (i = 0; i < ancount; i++) {
++     status = ares_dns_parse_rr(buf, flags, ARES_SECTION_ANSWER, *dnsrec);
++diff --git a/test/ares-test-parse.cc b/test/ares-test-parse.cc
++index ff1fe14d..81fd7deb 100644
++--- a/test/ares-test-parse.cc
+++++ b/test/ares-test-parse.cc
++@@ -207,6 +207,17 @@ TEST_F(LibraryTest, ParseFullyCompressedName) {
++   ares_free_hostent(host);
++ }
++ 
+++TEST_F(LibraryTest, ParseMalformedRRCount) {
+++  ares_dns_record_t *dnsrec = NULL;
+++  const unsigned char data[] = {
+++    0x12, 0x34, 0x81, 0x80, 0x00, 0x01, 0x00, 0x01,
+++    0x00, 0x00, 0x00, 0x00, 0x01, 'a',  0x00, 0x00,
+++    0x01, 0x00, 0x01,
+++  };
+++
+++  EXPECT_EQ(ARES_EBADRESP, ares_dns_parse(data, sizeof(data), 0, &dnsrec));
+++  EXPECT_EQ(nullptr, dnsrec);
+++}
++ 
++ }  // namespace test
++ }  // namespace ares
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.27.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.27.0.bb
+index f6de281058..f409899026 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.27.0.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.27.0.bb
+@@ -6,7 +6,9 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
+ 
+ SRC_URI = "https://github.com/c-ares/c-ares/releases/download/cares-1_27_0/${BPN}-${PV}.tar.gz \
+-           file://run-ptest"
++           file://run-ptest \
++           file://CVE-2026-69186.patch \
++"
+ SRC_URI[sha256sum] = "0a72be66959955c43e2af2fbd03418e82a2bd5464604ec9a62147e37aceb420b"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
 
