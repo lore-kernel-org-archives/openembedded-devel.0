@@ -2,178 +2,1671 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B8A8CA5FDD
-	for <webhook@archiver.kernel.org>; Sat,  3 Oct 2026 11:20:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77E4CCA5FEC
+	for <webhook@archiver.kernel.org>; Sat,  3 Oct 2026 17:48:27 +0000 (UTC)
 Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4084.1791026405711402216
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10006.1791049703125582934
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Oct 2026 04:20:06 -0700
+ Sat, 03 Oct 2026 10:48:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=avbbMSet;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20261003112001e27abfd3fe000207f3-halhwz@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20261003112001e27abfd3fe000207f3
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=aJitqekC;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-2026100317481999383c292e000207be-wrkzlg@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026100317481999383c292e000207be
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 03 Oct 2026 13:20:02 +0200
+        Sat, 03 Oct 2026 19:48:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=Ta/D094w15GWpKPOuTIsks+OAbrsjutGUbAwRcmciUQ=;
- b=avbbMSetHFqXwTgFM5b7BImYZ0ye7iPAushkYAUWh6wCDRDzu90ownrNNIYgQ52I5iOMup
- u1wgueoeD42ZE5rIn5NqCHubucJuZZSp77LpkIsF2keBi/r54XgGqkU/BZWxbUefKNVpGEHI
- OruDoYYYwiN8vlayO2RziPP25mduxca3M9eWTfyoIGqcoBr9yvhpSX7Fq15Ko1hvlvcXkfmp
- j7slP2pyaF6+8+PsofANwTao06TQcgzqOYwZ+Z6RgpB4v+Bt6koHakJjeebaPR5FL+Ybhtpo
- eAI5i8kuhUQ79HNlBld45z6l0o1qz4gwhW/9pm1hTAo8PKXR2a3Uoqkg==;
+ bh=L9LASFyaho8/PKa5E+3p+ocAj+iwlLERv+oUATQtL8M=;
+ b=aJitqekCAvA1ac4M0ztUTXbfqD046WML/q6xD2jBJljcVfk+ksXHTRBxftV6LgiH/UbxuS
+ MHAPdriZLCnlx9cStYQeCKu2N05vpY6/BkOjwgvxrJWcDM2eki4qgTtS5cTU7rVU8IeIUi45
+ l3Wocm0ClGm1GvMuoghcxIqUk+EjiOcdh4Ll6JYvOdYPmQ4hITdx3QrQYuuYKf0JPlBxEyK2
+ 0FdZhCAJCdEdterjywQ1YKJPIjt4ZJED0l9Il2yKue6v8PB0ZJgnqmc3NV8ceBUZ3DE3m5Rb
+ 2Xu8u7KgLDxe6A6gcPVuJ5lPqLINNOo2L1ai6TdolZRCVniD2gRMKmXg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH] cjson: patch CVE-2026-87933
-Date: Sat,  3 Oct 2026 13:19:39 +0200
-Message-ID: <20261003111939.4004529-1-peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] syslog-ng: patch CVE-2026-39879
+Date: Sat,  3 Oct 2026 19:47:48 +0200
+Message-ID: <20261003174750.2118591-1-peter.marko@siemens.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
 Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 11:20:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130615
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 17:48:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130616
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Pick patch from Github PR mentioned in NVD report.
+Pick patches per [1].
+
+[1] https://security-tracker.debian.org/tracker/CVE-2026-39879
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../cjson/cjson/CVE-2026-87933.patch          | 108 ++++++++++++++++++
- .../recipes-devtools/cjson/cjson_1.7.19.bb    |   1 +
- 2 files changed, 109 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
+ .../syslog-ng/files/CVE-2026-39879-01.patch   |  65 ++
+ .../syslog-ng/files/CVE-2026-39879-02.patch   | 572 +++++++++++++
+ .../syslog-ng/files/CVE-2026-39879-03.patch   | 758 ++++++++++++++++++
+ .../syslog-ng/files/CVE-2026-39879-04.patch   | 176 ++++
+ .../syslog-ng/syslog-ng_4.11.0.bb             |   4 +
+ 5 files changed, 1575 insertions(+)
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch
 
-diff --git a/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch b/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
+diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
 new file mode 100644
-index 0000000000..eb4aacd1a9
+index 0000000000..3ef6ddcca1
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
-@@ -0,0 +1,108 @@
-+From 6d9f2443ab071f86e5d9b43025a40929ec41c46c Mon Sep 17 00:00:00 2001
-+From: lilu5458 <lilu@kylinos.cn>
-+Date: Wed, 16 Sep 2026 09:55:35 +0800
-+Subject: [PATCH] Fix: heap-use-after-free in merge_patch when patch is subtree
-+ of target (#1065)
++++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
+@@ -0,0 +1,65 @@
++From 1e872e301436efa5d3fcd54e7628ac82c57698d2 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?B=C3=A1lint=20Horv=C3=A1th?= <bal.horv.98@gmail.com>
++Date: Tue, 7 Apr 2026 14:40:17 +0200
++Subject: [PATCH] afsql: Fixed SQL injection bug
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+When cJSONUtils_MergePatch(target, patch) is called with a non-object
-+patch (scalar, array, or NULL) that happens to be a subtree of target,
-+merge_patch() called cJSON_Delete(target) first, which freed the patch
-+memory, and then cJSON_Duplicate(patch, 1) read the already-freed memory,
-+triggering a heap-use-after-free (detected by AddressSanitizer at
-+cJSON_Duplicate_rec, cJSON.c:2808).
++Signed-off-by: Bálint Horváth <bal.horv.98@gmail.com>
++Signed-off-by: Hofi <hofione@gmail.com>
 +
-+Fix: duplicate the patch first into a local variable, then delete the
-+target, then return the duplicate. This matches the Option B approach
-+proposed in issue #1060.
-+
-+Verified locally:
-+- Reproduced the UAF with a minimal PoC under ASan before the fix.
-+- After the fix the PoC runs cleanly (exit 0, correct result [1,2,3]).
-+- Added a regression unit test
-+  (merge_patch_should_not_read_freed_memory_when_patch_is_subtree).
-+- Full ctest suite passes (22/22 tests).
-+
-+Fixes #1060
-+
-+Signed-off-by: lilu <lilu@kylinos.cn>
-+
-+CVE: CVE-2026-87933
-+Upstream-Status: Backport [https://github.com/DaveGamble/cJSON/commit/6d9f2443ab071f86e5d9b43025a40929ec41c46c]
++CVE: CVE-2026-39879
++Upstream-Status: Backport [https://github.com/syslog-ng/syslog-ng/commit/1e872e301436efa5d3fcd54e7628ac82c57698d2]
 +Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ cJSON_Utils.c           |  8 ++++++--
-+ tests/old_utils_tests.c | 34 ++++++++++++++++++++++++++++++++++
-+ 2 files changed, 40 insertions(+), 2 deletions(-)
++ modules/afsql/afsql.c | 12 +++++++++---
++ 1 file changed, 9 insertions(+), 3 deletions(-)
 +
-+diff --git a/cJSON_Utils.c b/cJSON_Utils.c
-+index 8b38eb2..4f3a9ed 100644
-+--- a/cJSON_Utils.c
-++++ b/cJSON_Utils.c
-+@@ -1324,9 +1324,13 @@ static cJSON *merge_patch(cJSON *target, const cJSON * const patch, const cJSON_
++diff --git a/modules/afsql/afsql.c b/modules/afsql/afsql.c
++index be59a2352..fb7ef3b32 100644
++--- a/modules/afsql/afsql.c
+++++ b/modules/afsql/afsql.c
++@@ -36,6 +36,8 @@
 + 
-+     if (!cJSON_IsObject(patch))
++ #include <string.h>
++ #include <errno.h>
+++#include <utf8utils.h>
+++
++ #include "compat/openssl_support.h"
++ #include <openssl/evp.h>
++ 
++@@ -219,11 +221,12 @@ static gboolean
++ afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, dbi_result *result)
++ {
++   dbi_result db_res;
+++  gchar* escaped_query = convert_unsafe_utf8_to_escaped_text(query, -1, 0);
++ 
++   msg_debug("Running SQL query",
++-            evt_tag_str("query", query));
+++            evt_tag_str("query", escaped_query));
++ 
++-  db_res = dbi_conn_query(self->dbi_ctx, query);
+++  db_res = dbi_conn_query(self->dbi_ctx, escaped_query);
++   if (!db_res)
 +     {
-+-        /* scalar value, array or NULL, just duplicate */
-++        /* scalar value, array or NULL, just duplicate.
-++         * Duplicate the patch first in case it is a subtree of target,
-++         * otherwise cJSON_Delete(target) would free the patch memory
-++         * and the subsequent cJSON_Duplicate would read freed memory. */
-++        cJSON *duplicate = cJSON_Duplicate(patch, 1);
-+         cJSON_Delete(target);
-+-        return cJSON_Duplicate(patch, 1);
-++        return duplicate;
++       const gchar *dbi_error;
++@@ -238,14 +241,17 @@ afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, d
++                     evt_tag_str("user", self->user),
++                     evt_tag_str("database", self->database),
++                     evt_tag_str("error", dbi_error),
++-                    evt_tag_str("query", query));
+++                    evt_tag_str("query", query),
+++                    evt_tag_str("escaped_query", escaped_query));
++         }
+++      g_free(escaped_query);
++       return FALSE;
 +     }
-+ 
-+     if (!cJSON_IsObject(target))
-+diff --git a/tests/old_utils_tests.c b/tests/old_utils_tests.c
-+index 690dbb5..bdc7393 100644
-+--- a/tests/old_utils_tests.c
-++++ b/tests/old_utils_tests.c
-+@@ -189,6 +189,39 @@ static void merge_tests(void)
-+     }
++   if (result)
++     *result = db_res;
++   else
++     dbi_result_free(db_res);
+++  g_free(escaped_query);
++   return TRUE;
 + }
 + 
-++static void merge_patch_should_not_read_freed_memory_when_patch_is_subtree(void)
+diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
+new file mode 100644
+index 0000000000..577db56bb8
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
+@@ -0,0 +1,572 @@
++From 1aba7537f0c406090f98a649475acbf517440220 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?B=C3=A1lint=20Horv=C3=A1th?= <bal.horv.98@gmail.com>
++Date: Tue, 7 Apr 2026 16:58:51 +0200
++Subject: [PATCH] afsql: Added tests for SQL query
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: Hofi <hofione@gmail.com>
++Signed-off-by: Bálint Horváth <bal.horv.98@gmail.com>
++Signed-off-by: Hofi <hofione@gmail.com>
++
++CVE: CVE-2026-39879
++Upstream-Status: Backport [https://github.com/syslog-ng/syslog-ng/commit/1aba7537f0c406090f98a649475acbf517440220]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ modules/afsql/CMakeLists.txt               |   2 +
++ modules/afsql/Makefile.am                  |   5 +-
++ modules/afsql/afsql.c                      |   2 +-
++ modules/afsql/tests/CMakeLists.txt         |   9 +
++ modules/afsql/tests/Makefile.am            |  30 +++
++ modules/afsql/tests/mock-dbi.c             | 129 ++++++++++++
++ modules/afsql/tests/mock-dbi.h             |  41 ++++
++ modules/afsql/tests/test_afsql.h           |  31 +++
++ modules/afsql/tests/test_afsql_run_query.c | 225 +++++++++++++++++++++
++ 9 files changed, 472 insertions(+), 2 deletions(-)
++ create mode 100644 modules/afsql/tests/CMakeLists.txt
++ create mode 100644 modules/afsql/tests/Makefile.am
++ create mode 100644 modules/afsql/tests/mock-dbi.c
++ create mode 100644 modules/afsql/tests/mock-dbi.h
++ create mode 100644 modules/afsql/tests/test_afsql.h
++ create mode 100644 modules/afsql/tests/test_afsql_run_query.c
++
++diff --git a/modules/afsql/CMakeLists.txt b/modules/afsql/CMakeLists.txt
++index 0d336f3a7..8921bbf33 100644
++--- a/modules/afsql/CMakeLists.txt
+++++ b/modules/afsql/CMakeLists.txt
++@@ -28,3 +28,5 @@ add_module(
++   DEPENDS ${LIBDBI_LIBRARIES} OpenSSL::SSL
++   SOURCES ${AFSQL_SOURCES}
++ )
+++
+++add_test_subdirectory(tests)
++diff --git a/modules/afsql/Makefile.am b/modules/afsql/Makefile.am
++index afc81655d..dd3dd9b5a 100644
++--- a/modules/afsql/Makefile.am
+++++ b/modules/afsql/Makefile.am
++@@ -33,6 +33,9 @@ BUILT_SOURCES				+=	\
++ 	modules/afsql/afsql-grammar.h
++ EXTRA_DIST				+= 	\
++ 	modules/afsql/afsql-grammar.ym	\
++-	modules/afsql/CMakeLists.txt
+++	modules/afsql/CMakeLists.txt	\
+++	modules/afsql/tests/CMakeLists.txt
++ 
++ .PHONY: modules/afsql/ mod-afsql mod-sql
+++
+++include modules/afsql/tests/Makefile.am
++diff --git a/modules/afsql/afsql.c b/modules/afsql/afsql.c
++index fb7ef3b32..2234acfe6 100644
++--- a/modules/afsql/afsql.c
+++++ b/modules/afsql/afsql.c
++@@ -217,7 +217,7 @@ afsql_dd_set_create_statement_append(LogDriver *s, const gchar *create_statement
++  *
++  * NOTE: This function can only be called from the database thread.
++  **/
++-static gboolean
+++gboolean
++ afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, dbi_result *result)
++ {
++   dbi_result db_res;
++diff --git a/modules/afsql/tests/CMakeLists.txt b/modules/afsql/tests/CMakeLists.txt
++new file mode 100644
++index 000000000..12396f58f
++--- /dev/null
+++++ b/modules/afsql/tests/CMakeLists.txt
++@@ -0,0 +1,9 @@
+++if(ENABLE_SQL)
+++  add_unit_test(
+++    CRITERION LIBTEST
+++    TARGET test_afsql_run_query
+++    SOURCES test_afsql_run_query.c ../afsql.c mock-dbi.c
+++    INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/.. ${LIBDBI_INCLUDE_DIRS}
+++    DEPENDS OpenSSL::SSL
+++  )
+++endif()
++diff --git a/modules/afsql/tests/Makefile.am b/modules/afsql/tests/Makefile.am
++new file mode 100644
++index 000000000..96e0c1476
++--- /dev/null
+++++ b/modules/afsql/tests/Makefile.am
++@@ -0,0 +1,30 @@
+++if ENABLE_SQL
+++
+++modules_afsql_tests_TESTS = \
+++	modules/afsql/tests/test_afsql_run_query
+++
+++check_PROGRAMS += ${modules_afsql_tests_TESTS}
+++
+++modules_afsql_tests_test_afsql_run_query_SOURCES = \
+++	modules/afsql/tests/mock-dbi.h \
+++	modules/afsql/tests/test_afsql.h \
+++	modules/afsql/tests/test_afsql_run_query.c \
+++	modules/afsql/afsql.c \
+++	modules/afsql/tests/mock-dbi.c
+++
+++modules_afsql_tests_test_afsql_run_query_CFLAGS = \
+++	$(TEST_CFLAGS) \
+++	-I$(top_srcdir)/modules/afsql \
+++	-I$(top_srcdir)/modules/afsql/tests \
+++	$(LIBDBI_CFLAGS)
+++
+++modules_afsql_tests_test_afsql_run_query_LDADD = \
+++	$(TEST_LDADD) \
+++	$(OPENSSL_LIBS)
+++
+++modules_afsql_tests_test_afsql_run_query_LDFLAGS = \
+++	$(LDFLAGS)
+++
+++endif
+++
+++EXTRA_DIST += modules/afsql/tests/CMakeLists.txt
++diff --git a/modules/afsql/tests/mock-dbi.c b/modules/afsql/tests/mock-dbi.c
++new file mode 100644
++index 000000000..af00dec07
++--- /dev/null
+++++ b/modules/afsql/tests/mock-dbi.c
++@@ -0,0 +1,129 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#include "mock-dbi.h"
+++#include <stdlib.h>
+++
+++dbi_result mock_dbi_query_result = (dbi_result) 0x1;
+++gchar *mock_dbi_last_query = NULL;
+++gboolean mock_dbi_result_freed = FALSE;
+++const gchar *mock_dbi_error_message = "mock dbi error";
+++
+++void
+++mock_dbi_reset(void)
 ++{
-++    /* When patch is a subtree of target, merge_patch must duplicate the patch
-++     * before deleting target. Otherwise cJSON_Delete(target) frees the patch
-++     * memory and the subsequent cJSON_Duplicate reads freed memory (UAF).
-++     * See CVE candidate: heap-use-after-free in merge_patch (cJSON_Utils.c). */
-++    cJSON *target = cJSON_Parse("{\"a\":[1,2,3]}");
-++    cJSON *patch = cJSON_GetObjectItem(target, "a");
-++    cJSON *result = NULL;
-++    cJSON *first = NULL;
-++    cJSON *second = NULL;
-++    cJSON *third = NULL;
-++
-++    TEST_ASSERT_NOT_NULL(target);
-++    TEST_ASSERT_NOT_NULL(patch);
-++
-++    /* patch (array [1,2,3]) is a subtree of target. This used to trigger
-++     * heap-use-after-free under AddressSanitizer before the fix. */
-++    result = cJSONUtils_MergePatch(target, patch);
-++    TEST_ASSERT_NOT_NULL(result);
-++    TEST_ASSERT_TRUE(cJSON_IsArray(result));
-++    TEST_ASSERT_EQUAL_INT(3, cJSON_GetArraySize(result));
-++
-++    first = cJSON_GetArrayItem(result, 0);
-++    second = cJSON_GetArrayItem(result, 1);
-++    third = cJSON_GetArrayItem(result, 2);
-++    TEST_ASSERT_EQUAL_INT(1, first->valueint);
-++    TEST_ASSERT_EQUAL_INT(2, second->valueint);
-++    TEST_ASSERT_EQUAL_INT(3, third->valueint);
-++
-++    cJSON_Delete(result);
+++  mock_dbi_query_result = (dbi_result) 0x1;
+++  g_free(mock_dbi_last_query);
+++  mock_dbi_last_query = NULL;
+++  mock_dbi_result_freed = FALSE;
+++  mock_dbi_error_message = "mock dbi error";
 ++}
 ++
-+ static void generate_merge_tests(void)
-+ {
-+     size_t i = 0;
-+@@ -219,6 +252,7 @@ int main(void)
-+     RUN_TEST(misc_tests);
-+     RUN_TEST(sort_tests);
-+     RUN_TEST(merge_tests);
-++    RUN_TEST(merge_patch_should_not_read_freed_memory_when_patch_is_subtree);
-+     RUN_TEST(generate_merge_tests);
+++/* --- mocked functions (state-bearing) --- */
+++
+++dbi_result
+++dbi_conn_query(dbi_conn conn, const char *statement)
+++{
+++  g_free(mock_dbi_last_query);
+++  mock_dbi_last_query = g_strdup(statement);
+++  return mock_dbi_query_result;
+++}
+++
+++int
+++dbi_conn_error(dbi_conn conn, const char **errmsg)
+++{
+++  if (errmsg)
+++    *errmsg = mock_dbi_error_message;
+++  return 0;
+++}
+++
+++int
+++dbi_result_free(dbi_result result)
+++{
+++  mock_dbi_result_freed = TRUE;
+++  return 0;
+++}
+++
+++/* --- no-op stubs for the rest of afsql.c --- */
+++
+++dbi_conn
+++dbi_conn_new_r(const char *name, dbi_inst inst)
+++{
+++  return NULL;
+++}
+++
+++int
+++dbi_conn_connect(dbi_conn conn)
+++{
+++  return -1;
+++}
+++
+++void
+++dbi_conn_close(dbi_conn conn)
+++{
+++}
+++
+++int
+++dbi_conn_ping(dbi_conn conn)
+++{
+++  return 0;
+++}
+++
+++int
+++dbi_conn_set_option(dbi_conn conn, const char *key, const char *value)
+++{
+++  return 0;
+++}
+++
+++int
+++dbi_conn_set_option_numeric(dbi_conn conn, const char *key, int value)
+++{
+++  return 0;
+++}
+++
+++size_t
+++dbi_conn_quote_string_copy(dbi_conn conn, const char *orig, char **dest)
+++{
+++  if (dest)
+++    *dest = NULL;
+++  return 0;
+++}
+++
+++size_t
+++dbi_conn_quote_binary_copy(dbi_conn conn, const unsigned char *orig, size_t length, unsigned char **dest)
+++{
+++  if (dest)
+++    *dest = NULL;
+++  return 0;
+++}
+++
+++int
+++dbi_initialize_r(const char *driverdir, dbi_inst *pInst)
+++{
+++  return 0;
+++}
+++
+++unsigned int
+++dbi_result_get_field_idx(dbi_result result, const char *fieldname)
+++{
+++  return 0;
+++}
++diff --git a/modules/afsql/tests/mock-dbi.h b/modules/afsql/tests/mock-dbi.h
++new file mode 100644
++index 000000000..0f9ca800a
++--- /dev/null
+++++ b/modules/afsql/tests/mock-dbi.h
++@@ -0,0 +1,41 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#ifndef MOCK_DBI_H_INCLUDED
+++#define MOCK_DBI_H_INCLUDED
+++
+++#pragma GCC diagnostic ignored "-Wstrict-prototypes"
+++
+++#include <dbi.h>
+++#include <glib.h>
+++
+++/*
+++ * Mock state controlling dbi_conn_query behaviour.
+++ */
+++extern dbi_result mock_dbi_query_result;
+++extern gchar *mock_dbi_last_query;
+++extern gboolean mock_dbi_result_freed;
+++extern const gchar *mock_dbi_error_message;
+++
+++void mock_dbi_reset(void);
+++
+++#endif /* MOCK_DBI_H_INCLUDED */
++diff --git a/modules/afsql/tests/test_afsql.h b/modules/afsql/tests/test_afsql.h
++new file mode 100644
++index 000000000..804e815e3
++--- /dev/null
+++++ b/modules/afsql/tests/test_afsql.h
++@@ -0,0 +1,31 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#ifndef TEST_AFSQL_H_INCLUDED
+++#define TEST_AFSQL_H_INCLUDED
+++
+++#include "afsql.h"
+++
+++gboolean afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent,
+++                             dbi_result *result);
+++
+++#endif /* TEST_AFSQL_H_INCLUDED */
++diff --git a/modules/afsql/tests/test_afsql_run_query.c b/modules/afsql/tests/test_afsql_run_query.c
++new file mode 100644
++index 000000000..b26f631a7
++--- /dev/null
+++++ b/modules/afsql/tests/test_afsql_run_query.c
++@@ -0,0 +1,225 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#include <criterion/criterion.h>
+++#include <criterion/parameterized.h>
+++
+++#include "test_afsql.h"
+++#include "mock-dbi.h"
+++#include "apphook.h"
+++
+++/* ----------------------------- helpers ----------------------------- */
+++
+++static AFSqlDestDriver *
+++_create_driver(void)
+++{
+++  AFSqlDestDriver *self = g_new0(AFSqlDestDriver, 1);
+++  self->type     = g_strdup("mysql");
+++  self->host     = g_strdup("localhost");
+++  self->port     = g_strdup("3306");
+++  self->user     = g_strdup("testuser");
+++  self->database = g_strdup("testdb");
+++  /* dbi_ctx is intentionally left NULL; mock-dbi ignores the conn handle */
+++  return self;
+++}
+++
+++static void
+++_free_driver(AFSqlDestDriver *self)
+++{
+++  g_free(self->type);
+++  g_free(self->host);
+++  g_free(self->port);
+++  g_free(self->user);
+++  g_free(self->database);
+++  g_free(self);
+++}
+++
+++/* ----------------------------- fixtures ----------------------------- */
+++
+++static AFSqlDestDriver *driver;
+++
+++static void
+++setup(void)
+++{
+++  app_startup();
+++  mock_dbi_reset();
+++  driver = _create_driver();
+++}
+++
+++static void
+++teardown(void)
+++{
+++  mock_dbi_reset();
+++  _free_driver(driver);
+++  app_shutdown();
+++}
+++
+++TestSuite(afsql_dd_run_query, .init = setup, .fini = teardown);
+++
+++/* ----------------------------- tests -------------------------------- */
+++
+++Test(afsql_dd_run_query, successful_query_returns_true)
+++{
+++  mock_dbi_query_result = (dbi_result) 0x1;
+++
+++  gboolean ret = afsql_dd_run_query(driver, "SELECT 1", FALSE, NULL);
+++
+++  cr_assert(ret, "Expected TRUE on successful query");
+++}
+++
+++Test(afsql_dd_run_query, failed_query_returns_false)
+++{
+++  mock_dbi_query_result = NULL;
+++
+++  gboolean ret = afsql_dd_run_query(driver, "SELECT 1", FALSE, NULL);
+++
+++  cr_assert_not(ret, "Expected FALSE when dbi_conn_query returns NULL");
+++}
+++
+++Test(afsql_dd_run_query, result_pointer_is_populated_on_success)
+++{
+++  dbi_result sentinel = (dbi_result) 0xdeadbeef;
+++  mock_dbi_query_result = sentinel;
+++
+++  dbi_result out = NULL;
+++  afsql_dd_run_query(driver, "SELECT 1", FALSE, &out);
+++
+++  cr_assert_eq(out, sentinel,
+++               "Expected *result to hold the dbi_result returned by dbi_conn_query");
+++}
+++
+++Test(afsql_dd_run_query, result_is_freed_when_no_pointer_given)
+++{
+++  mock_dbi_query_result = (dbi_result) 0x1;
+++  mock_dbi_result_freed = FALSE;
+++
+++  afsql_dd_run_query(driver, "SELECT 1", FALSE, NULL);
+++
+++  cr_assert(mock_dbi_result_freed,
+++            "Expected dbi_result_free() to be called when result pointer is NULL");
+++}
+++
+++Test(afsql_dd_run_query, result_is_not_freed_when_pointer_given)
+++{
+++  mock_dbi_query_result = (dbi_result) 0x1;
+++  mock_dbi_result_freed = FALSE;
+++
+++  dbi_result out = NULL;
+++  afsql_dd_run_query(driver, "SELECT 1", FALSE, &out);
+++
+++  cr_assert_not(mock_dbi_result_freed,
+++                "Expected dbi_result_free() NOT to be called when result pointer is provided");
+++}
+++
+++Test(afsql_dd_run_query, silent_mode_suppresses_error_on_failure)
+++{
+++  mock_dbi_query_result = NULL;
+++
+++  /* Should not crash or assert even though the query fails */
+++  gboolean ret = afsql_dd_run_query(driver, "BAD QUERY", TRUE, NULL);
+++
+++  cr_assert_not(ret, "Expected FALSE on failure regardless of silent flag");
+++}
+++
+++/*
+++ * Parameterized regression tests for the SQL injection fix (commit e9dbd15bf).
+++ *
+++ * Each entry describes a raw query string and the exact string that must
+++ * arrive at dbi_conn_query after convert_unsafe_utf8_to_escaped_text has
+++ * processed it.  A NULL expected_query means the input is safe ASCII and
+++ * must pass through byte-for-byte unchanged.
+++ */
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar raw_query[128];
+++  gchar expected_query[128];
+++  gboolean expected_query_is_null; /* TRUE → identical to raw_query */
+++} QuerySanitizationParam;
+++
+++ParameterizedTestParameters(afsql_dd_run_query, query_sanitization)
+++{
+++  static QuerySanitizationParam params[] =
+++  {
+++    /* safe inputs — must be forwarded unchanged */
+++    { "plain ascii select",                       "SELECT 1",                                       "", TRUE },
+++    { "insert with safe string value",            "INSERT INTO logs (msg) VALUES ('hello world')",  "", TRUE },
+++    { "query with numbers and underscores",       "SELECT id, log_level FROM events WHERE id = 42", "", TRUE },
+++
+++    /* control characters that must be escaped */
+++    { "bell character \\x07",                     "SELECT '\x07'",                                  "SELECT '\\x07'",                              FALSE },
+++    { "newline",                                  "INSERT INTO t (v) VALUES ('line1\nline2')",      "INSERT INTO t (v) VALUES ('line1\\nline2')",  FALSE },
+++    { "carriage return",                          "INSERT INTO t (v) VALUES ('a\rb')",              "INSERT INTO t (v) VALUES ('a\\rb')",          FALSE },
+++    { "tab",                                      "INSERT INTO t (v) VALUES ('col1\tcol2')",        "INSERT INTO t (v) VALUES ('col1\\tcol2')",    FALSE },
+++    { "backspace",                                "INSERT INTO t (v) VALUES ('\b')",                "INSERT INTO t (v) VALUES ('\\b')",            FALSE },
+++    { "form feed",                                "INSERT INTO t (v) VALUES ('\f')",                "INSERT INTO t (v) VALUES ('\\f')",            FALSE },
+++    { "soh \\x01 unnamed control char",           "SELECT '\x01'",                                  "SELECT '\\x01'",                              FALSE },
+++    { "unit separator \\x1f",                     "SELECT '\x1f'",                                  "SELECT '\\x1f'",                              FALSE },
+++    { "multiple consecutive control chars",       "\x01\x02\x03",                                   "\\x01\\x02\\x03",                             FALSE },
+++    { "backslash is doubled",                     "SELECT '\\'",                                    "SELECT '\\\\'",                               FALSE },
+++
+++    /* a literal backslash-n in the input (two chars: \ + n) must become \\n,
+++     * not be re-interpreted as a newline escape */
+++    { "pre-escaped \\n is not re-interpreted",    "SELECT '\\n'",                                   "SELECT '\\\\n'",                              FALSE },
+++
+++    /* invalid / overlong UTF-8 sequences */
+++    { "invalid utf-8 byte \\xad is hex-escaped",  "SELECT '\xad'",                                  "SELECT '\\\\xad'",                            FALSE },
+++    { "invalid utf-8 byte surrounded by valid",   "SELECT 'Á\xadÉ'",                                "SELECT 'Á\\\\xadÉ'",                          FALSE },
+++    { "truncated 2-byte utf-8 start byte",        "SELECT '\xc3'",                                  "SELECT '\\\\xc3'",                            FALSE },
+++    { "multiple consecutive invalid utf-8 bytes", "SELECT '\xad\xae'",                              "SELECT '\\\\xad\\\\xae'",                     FALSE },
+++
+++    /* SQL metacharacters: quotes and semicolons are NOT escaped
+++     * (unsafe_flags=0 — the escaping targets binary/control safety, not SQL) */
+++    { "single quote passes through",              "SELECT ''''",                                    "", TRUE },
+++    { "double quote passes through",              "SELECT \"val\"",                                 "", TRUE },
+++    { "semicolon passes through",                 "SELECT 1; DROP TABLE users",                     "", TRUE },
+++
+++    /* DEL (0x7f) is >= 32 and not a backslash, so it passes through */
+++    { "del character 0x7f passes through",        "SELECT '\x7f'",                                  "", TRUE },
+++
+++    /* valid multibyte UTF-8 must not be mangled */
+++    { "valid utf-8 multibyte passes through",     "SELECT 'árvíztűrőtükörfúrógép'",                 "", TRUE },
+++    { "valid utf-8 followed by newline",          "SELECT 'árvíztűrőtükörfúrógép\n'",               "SELECT 'árvíztűrőtükörfúrógép\\n'",           FALSE },
+++
+++    /* empty query edge case */
+++    { "empty query string",                       "",                                               "", TRUE },
+++  };
+++
+++  return cr_make_param_array(QuerySanitizationParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(QuerySanitizationParam *p, afsql_dd_run_query, query_sanitization)
+++{
+++  mock_dbi_reset();
+++  mock_dbi_query_result = (dbi_result) 0x1;
+++
+++  afsql_dd_run_query(driver, p->raw_query, FALSE, NULL);
+++
+++  cr_assert_not_null(mock_dbi_last_query,
+++                     "[%s] Expected dbi_conn_query to have been called", p->description);
+++
+++  const gchar *expected = p->expected_query_is_null ? p->raw_query : p->expected_query;
+++  cr_assert_str_eq(mock_dbi_last_query, expected,
+++                   "[%s] Sanitised query mismatch.\n  got:      %s\n  expected: %s",
+++                   p->description, mock_dbi_last_query, expected);
+++}
+diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
+new file mode 100644
+index 0000000000..c88ab04e73
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
+@@ -0,0 +1,758 @@
++From 4b61a0b1dad69368bc3b93b607141708d0036830 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?B=C3=A1lint=20Horv=C3=A1th?= <bal.horv.98@gmail.com>
++Date: Tue, 7 Apr 2026 18:03:13 +0200
++Subject: [PATCH] afsql: Added tests against SQL injection
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: Hofi <hofione@gmail.com>
++Signed-off-by: Bálint Horváth <bal.horv.98@gmail.com>
++Signed-off-by: Hofi <hofione@gmail.com>
++
++CVE: CVE-2026-39879
++Upstream-Status: Backport [https://github.com/syslog-ng/syslog-ng/commit/4b61a0b1dad69368bc3b93b607141708d0036830]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ modules/afsql/afsql.c                         |   2 +-
++ modules/afsql/tests/CMakeLists.txt            |   7 +
++ modules/afsql/tests/Makefile.am               |  25 +-
++ modules/afsql/tests/afsql_test_helpers.h      |  87 ++++
++ modules/afsql/tests/mock-dbi.c                |  29 +-
++ modules/afsql/tests/test_afsql.h              |   1 +
++ .../tests/test_afsql_build_insert_command.c   | 455 ++++++++++++++++++
++ modules/afsql/tests/test_afsql_run_query.c    |  29 +-
++ 8 files changed, 597 insertions(+), 38 deletions(-)
++ create mode 100644 modules/afsql/tests/afsql_test_helpers.h
++ create mode 100644 modules/afsql/tests/test_afsql_build_insert_command.c
++
++diff --git a/modules/afsql/afsql.c b/modules/afsql/afsql.c
++index 2234acfe6..04b35e607 100644
++--- a/modules/afsql/afsql.c
+++++ b/modules/afsql/afsql.c
++@@ -890,7 +890,7 @@ afsql_dd_append_value_to_be_inserted(AFSqlDestDriver *self,
++   return TRUE;
++ }
 + 
-+     return UNITY_END();
-diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
-index 799eb119d6..acaffc54fb 100644
---- a/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
-+++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
- 
- SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
-            file://run-ptest \
-+           file://CVE-2026-87933.patch \
-          "
- SRCREV = "c859b25da02955fef659d658b8f324b5cde87be3"
++-static GString *
+++GString *
++ afsql_dd_build_insert_command(AFSqlDestDriver *self, LogMessage *msg, GString *table)
++ {
++   GString *insert_command = g_string_sized_new(256);
++diff --git a/modules/afsql/tests/CMakeLists.txt b/modules/afsql/tests/CMakeLists.txt
++index 12396f58f..c4ee592c1 100644
++--- a/modules/afsql/tests/CMakeLists.txt
+++++ b/modules/afsql/tests/CMakeLists.txt
++@@ -6,4 +6,11 @@ if(ENABLE_SQL)
++     INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/.. ${LIBDBI_INCLUDE_DIRS}
++     DEPENDS OpenSSL::SSL
++   )
+++  add_unit_test(
+++    CRITERION LIBTEST
+++    TARGET test_afsql_build_insert_command
+++    SOURCES test_afsql_build_insert_command.c ../afsql.c mock-dbi.c
+++    INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/.. ${LIBDBI_INCLUDE_DIRS}
+++    DEPENDS OpenSSL::SSL
+++  )
++ endif()
++diff --git a/modules/afsql/tests/Makefile.am b/modules/afsql/tests/Makefile.am
++index 96e0c1476..c7fc64fc1 100644
++--- a/modules/afsql/tests/Makefile.am
+++++ b/modules/afsql/tests/Makefile.am
++@@ -1,11 +1,13 @@
++ if ENABLE_SQL
++ 
++ modules_afsql_tests_TESTS = \
++-	modules/afsql/tests/test_afsql_run_query
+++	modules/afsql/tests/test_afsql_run_query \
+++	modules/afsql/tests/test_afsql_build_insert_command
++ 
++ check_PROGRAMS += ${modules_afsql_tests_TESTS}
++ 
++ modules_afsql_tests_test_afsql_run_query_SOURCES = \
+++	modules/afsql/tests/afsql_test_helpers.h \
++ 	modules/afsql/tests/mock-dbi.h \
++ 	modules/afsql/tests/test_afsql.h \
++ 	modules/afsql/tests/test_afsql_run_query.c \
++@@ -25,6 +27,27 @@ modules_afsql_tests_test_afsql_run_query_LDADD = \
++ modules_afsql_tests_test_afsql_run_query_LDFLAGS = \
++ 	$(LDFLAGS)
++ 
+++modules_afsql_tests_test_afsql_build_insert_command_SOURCES = \
+++	modules/afsql/tests/afsql_test_helpers.h \
+++	modules/afsql/tests/mock-dbi.h \
+++	modules/afsql/tests/test_afsql.h \
+++	modules/afsql/tests/test_afsql_build_insert_command.c \
+++	modules/afsql/afsql.c \
+++	modules/afsql/tests/mock-dbi.c
+++
+++modules_afsql_tests_test_afsql_build_insert_command_CFLAGS = \
+++	$(TEST_CFLAGS) \
+++	-I$(top_srcdir)/modules/afsql \
+++	-I$(top_srcdir)/modules/afsql/tests \
+++	$(LIBDBI_CFLAGS)
+++
+++modules_afsql_tests_test_afsql_build_insert_command_LDADD = \
+++	$(TEST_LDADD) \
+++	$(OPENSSL_LIBS)
+++
+++modules_afsql_tests_test_afsql_build_insert_command_LDFLAGS = \
+++	$(LDFLAGS)
+++
++ endif
++ 
++ EXTRA_DIST += modules/afsql/tests/CMakeLists.txt
++diff --git a/modules/afsql/tests/afsql_test_helpers.h b/modules/afsql/tests/afsql_test_helpers.h
++new file mode 100644
++index 000000000..9dabc763f
++--- /dev/null
+++++ b/modules/afsql/tests/afsql_test_helpers.h
++@@ -0,0 +1,87 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#ifndef AFSQL_TEST_HELPERS_H_INCLUDED
+++#define AFSQL_TEST_HELPERS_H_INCLUDED
+++
+++#include "test_afsql.h"
+++#include "mock-dbi.h"
+++#include "cfg.h"
+++#include "logmsg/logmsg.h"
+++#include "template/templates.h"
+++
+++static inline AFSqlDestDriver *
+++_create_driver(void)
+++{
+++  AFSqlDestDriver *self = g_new0(AFSqlDestDriver, 1);
+++  self->type            = g_strdup("mysql");
+++  self->host            = g_strdup("localhost");
+++  self->port            = g_strdup("3306");
+++  self->user            = g_strdup("testuser");
+++  self->database        = g_strdup("testdb");
+++  self->quote_as_string = g_strdup("");
+++  log_template_options_defaults(&self->template_options);
+++  return self;
+++}
+++
+++static inline void
+++_free_driver(AFSqlDestDriver *self)
+++{
+++  for (gint i = 0; i < self->fields_len; i++)
+++    {
+++      g_free(self->fields[i].name);
+++      g_free(self->fields[i].type);
+++      log_template_unref(self->fields[i].value);
+++    }
+++  g_free(self->fields);
+++  g_free(self->type);
+++  g_free(self->host);
+++  g_free(self->port);
+++  g_free(self->user);
+++  g_free(self->database);
+++  g_free(self->quote_as_string);
+++  g_free(self->null_value);
+++  g_free(self);
+++}
+++
+++static inline void
+++_set_fields(AFSqlDestDriver *self, const gchar **col_names,
+++            const gchar **templates, gint count)
+++{
+++  self->fields_len = count;
+++  self->fields = g_new0(AFSqlField, count);
+++  for (gint i = 0; i < count; i++)
+++    {
+++      self->fields[i].name  = g_strdup(col_names[i]);
+++      self->fields[i].type  = g_strdup("text");
+++      self->fields[i].value = log_template_new(configuration, NULL);
+++      log_template_compile(self->fields[i].value, templates[i], NULL);
+++    }
+++}
+++
+++static inline GString *
+++_make_table(const gchar *name)
+++{
+++  return g_string_new(name);
+++}
+++
+++#endif /* AFSQL_TEST_HELPERS_H_INCLUDED */
++diff --git a/modules/afsql/tests/mock-dbi.c b/modules/afsql/tests/mock-dbi.c
++index af00dec07..7c1fca441 100644
++--- a/modules/afsql/tests/mock-dbi.c
+++++ b/modules/afsql/tests/mock-dbi.c
++@@ -63,6 +63,27 @@ dbi_result_free(dbi_result result)
++   return 0;
++ }
++ 
+++size_t
+++dbi_conn_quote_string_copy(dbi_conn conn, const char *orig, char **dest)
+++{
+++  if (!orig || !dest)
+++    return 0;
+++
+++  /* Minimal SQL quoting: wrap in single quotes, escape internal single quotes */
+++  GString *quoted = g_string_new("'");
+++  for (const char *s = orig; *s; s++)
+++    {
+++      if (*s == '\'')
+++        g_string_append(quoted, "\\'");
+++      else
+++        g_string_append_c(quoted, *s);
+++    }
+++  g_string_append_c(quoted, '\'');
+++  size_t quoted_len = quoted->len;
+++  *dest = g_string_free(quoted, FALSE);
+++  return quoted_len;
+++}
+++
++ /* --- no-op stubs for the rest of afsql.c --- */
++ 
++ dbi_conn
++@@ -100,14 +121,6 @@ dbi_conn_set_option_numeric(dbi_conn conn, const char *key, int value)
++   return 0;
++ }
++ 
++-size_t
++-dbi_conn_quote_string_copy(dbi_conn conn, const char *orig, char **dest)
++-{
++-  if (dest)
++-    *dest = NULL;
++-  return 0;
++-}
++-
++ size_t
++ dbi_conn_quote_binary_copy(dbi_conn conn, const unsigned char *orig, size_t length, unsigned char **dest)
++ {
++diff --git a/modules/afsql/tests/test_afsql.h b/modules/afsql/tests/test_afsql.h
++index 804e815e3..7fdbb838d 100644
++--- a/modules/afsql/tests/test_afsql.h
+++++ b/modules/afsql/tests/test_afsql.h
++@@ -27,5 +27,6 @@
++ 
++ gboolean afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent,
++                              dbi_result *result);
+++GString *afsql_dd_build_insert_command(AFSqlDestDriver *self, LogMessage *msg, GString *table);
++ 
++ #endif /* TEST_AFSQL_H_INCLUDED */
++diff --git a/modules/afsql/tests/test_afsql_build_insert_command.c b/modules/afsql/tests/test_afsql_build_insert_command.c
++new file mode 100644
++index 000000000..3fd1d3c00
++--- /dev/null
+++++ b/modules/afsql/tests/test_afsql_build_insert_command.c
++@@ -0,0 +1,455 @@
+++/*
+++ * Copyright (c) 2026 One Identity LLC.
+++ *
+++ * This program is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 as published
+++ * by the Free Software Foundation, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+++ *
+++ * As an additional exemption you are allowed to compile & link against the
+++ * OpenSSL libraries as published by the OpenSSL project. See the file
+++ * COPYING for details.
+++ *
+++ */
+++
+++#include <criterion/criterion.h>
+++#include <criterion/parameterized.h>
+++
+++#include "afsql_test_helpers.h"
+++#include "apphook.h"
+++
+++/* ----------------------------- fixtures ----------------------------- */
+++
+++static AFSqlDestDriver *driver;
+++
+++static void
+++setup(void)
+++{
+++  app_startup();
+++  configuration = cfg_new_snippet();
+++  driver = NULL;
+++}
+++
+++static void
+++teardown(void)
+++{
+++  if (driver)
+++    _free_driver(driver);
+++  cfg_free(configuration);
+++  app_shutdown();
+++}
+++
+++/* ===================================================================
+++ * Suite 1: structural correctness
+++ * =================================================================== */
+++
+++TestSuite(afsql_dd_build_insert_command, .init = setup, .fini = teardown);
+++
+++Test(afsql_dd_build_insert_command, basic_insert_structure)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "host", "message" };
+++  const gchar *tmpls[] = { "myhost", "mymessage" };
+++  _set_fields(driver, cols, tmpls, 2);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table("logs");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert_not_null(cmd);
+++  cr_assert(g_str_has_prefix(cmd->str, "INSERT INTO logs ("),
+++            "got: %s", cmd->str);
+++  cr_assert(g_strstr_len(cmd->str, -1, ") VALUES (") != NULL,
+++            "got: %s", cmd->str);
+++  cr_assert(g_str_has_suffix(cmd->str, ")"),
+++            "got: %s", cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++Test(afsql_dd_build_insert_command, column_names_appear_in_order)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col_a", "col_b", "col_c" };
+++  const gchar *tmpls[] = { "va", "vb", "vc" };
+++  _set_fields(driver, cols, tmpls, 3);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table("t");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  const gchar *a = g_strstr_len(cmd->str, -1, "col_a");
+++  const gchar *b = g_strstr_len(cmd->str, -1, "col_b");
+++  const gchar *c = g_strstr_len(cmd->str, -1, "col_c");
+++  cr_assert(a && b && c && a < b && b < c,
+++            "Expected columns in order col_a, col_b, col_c, got: %s", cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++Test(afsql_dd_build_insert_command, default_flagged_field_is_skipped)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col_a", "col_b" };
+++  const gchar *tmpls[] = { "va", "vb" };
+++  _set_fields(driver, cols, tmpls, 2);
+++  driver->fields[1].flags |= AFSQL_FF_DEFAULT;
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table("t");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, "col_a") != NULL, "got: %s", cmd->str);
+++  cr_assert(g_strstr_len(cmd->str, -1, "col_b") == NULL,
+++            "Expected col_b absent (DEFAULT flag), got: %s", cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++Test(afsql_dd_build_insert_command, null_value_produces_NULL_keyword)
+++{
+++  driver = _create_driver();
+++  driver->null_value   = g_strdup("-");
+++  const gchar *cols[]  = { "msg" };
+++  const gchar *tmpls[] = { "-" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table("t");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, "NULL") != NULL,
+++            "Expected NULL keyword for null_value match, got: %s", cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/*
+++ * Typed values: LM_VT_NULL, LM_VT_INTEGER and LM_VT_BOOLEAN must emit
+++ * unquoted SQL keywords/literals — never a quoted string.
+++ */
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar raw_value[32];
+++  LogMessageValueType type;
+++  gchar must_contain[16];      /* expected unquoted form   */
+++  gchar must_not_contain[16];  /* must not be quoted       */
+++} TypedValueParam;
+++
+++ParameterizedTestParameters(afsql_dd_build_insert_command, typed_value_is_not_quoted)
+++{
+++  static TypedValueParam params[] =
+++  {
+++    { "LM_VT_NULL emits bare NULL",          "",      LM_VT_NULL,    "NULL",  "'NULL'" },
+++    { "LM_VT_INTEGER emits bare integer",    "42",    LM_VT_INTEGER, "42",    "'42'"   },
+++    { "LM_VT_BOOLEAN true emits TRUE",       "true",  LM_VT_BOOLEAN, "TRUE",  "'TRUE'" },
+++    { "LM_VT_BOOLEAN false emits FALSE",     "false", LM_VT_BOOLEAN, "FALSE", "'FALSE'"},
+++  };
+++  return cr_make_param_array(TypedValueParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(TypedValueParam *p, afsql_dd_build_insert_command, typed_value_is_not_quoted)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col" };
+++  const gchar *tmpls[] = { "${VAL}" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  NVHandle handle = log_msg_get_value_handle("VAL");
+++  log_msg_set_value_with_type(msg, handle, p->raw_value, -1, p->type);
+++  GString *table  = _make_table("t");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, p->must_contain) != NULL,
+++            "[%s] Expected '%s' in command, got: %s",
+++            p->description, p->must_contain, cmd->str);
+++  cr_assert(g_strstr_len(cmd->str, -1, p->must_not_contain) == NULL,
+++            "[%s] Expected '%s' absent (value must not be quoted), got: %s",
+++            p->description, p->must_not_contain, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/*
+++ * Comma placement: the function looks ahead to skip DEFAULT fields when
+++ * deciding whether to append ", ".  These tests verify no spurious leading,
+++ * trailing, or doubled commas appear.
+++ */
+++typedef struct
+++{
+++  gchar       description[64];
+++  gint         default_field_idx;  /* which of 3 fields gets AFSQL_FF_DEFAULT */
+++  gchar       must_contain[32];
+++  gchar       must_not_contain[32];
+++} CommaPlacementParam;
+++
+++ParameterizedTestParameters(afsql_dd_build_insert_command, comma_placement)
+++{
+++  static CommaPlacementParam params[] =
+++  {
+++    { "no trailing comma when last field is DEFAULT",   2, "col_a, col_b", "col_b," },
+++    { "no leading comma when first field is DEFAULT",   0, "col_b, col_c", ""       },
+++    { "comma bridges over DEFAULT middle field",        1, "col_a, col_c", "col_b"  },
+++  };
+++  return cr_make_param_array(CommaPlacementParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(CommaPlacementParam *p, afsql_dd_build_insert_command, comma_placement)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col_a", "col_b", "col_c" };
+++  const gchar *tmpls[] = { "va",    "vb",    "vc"    };
+++  _set_fields(driver, cols, tmpls, 3);
+++  driver->fields[p->default_field_idx].flags |= AFSQL_FF_DEFAULT;
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table("t");
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, p->must_contain) != NULL,
+++            "[%s] Expected '%s' in command, got: %s",
+++            p->description, p->must_contain, cmd->str);
+++  if (p->must_not_contain[0])
+++    cr_assert(g_strstr_len(cmd->str, -1, p->must_not_contain) == NULL,
+++              "[%s] Expected '%s' absent from command, got: %s",
+++              p->description, p->must_not_contain, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/* ===================================================================
+++ * Suite 2: parameterized — table name and quote_as_string
+++ * =================================================================== */
+++
+++TestSuite(table_name_in_command, .init = setup, .fini = teardown);
+++
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar table_name[64];
+++  gchar quote_char[4];  /* quote_as_string value */
+++  gchar expected_prefix[64];
+++} TableNameParam;
+++
+++ParameterizedTestParameters(table_name_in_command, variants)
+++{
+++  static TableNameParam params[] =
+++  {
+++    { "no quoting",          "logs",   "",  "INSERT INTO logs ("   },
+++    { "backtick quoting",    "logs",   "`", "INSERT INTO `logs` (" },
+++    { "double-quote quoting", "logs",   "\"", "INSERT INTO \"logs\" ("},
+++    { "table with underscore", "log_data", "", "INSERT INTO log_data ("},
+++    { "table with dot (schema)", "db.logs", "", "INSERT INTO db.logs ("},
+++  };
+++  return cr_make_param_array(TableNameParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(TableNameParam *p, table_name_in_command, variants)
+++{
+++  driver = _create_driver();
+++  g_free(driver->quote_as_string);
+++  driver->quote_as_string  = g_strdup(p->quote_char);
+++  const gchar *cols[]  = { "col" };
+++  const gchar *tmpls[] = { "v" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table(p->table_name);
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_str_has_prefix(cmd->str, p->expected_prefix),
+++            "[%s] Expected prefix '%s', got: %s",
+++            p->description, p->expected_prefix, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/* ===================================================================
+++ * Suite 3: parameterized — value rendering in VALUES clause
+++ * =================================================================== */
+++
+++TestSuite(value_rendering, .init = setup, .fini = teardown);
+++
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar tmpl[32];        /* template string for the single field     */
+++  gchar msg_key[32];     /* empty string means don't set a message key */
+++  gchar msg_value[64];   /* message value                            */
+++  gchar expected[64];    /* substring expected in the full command   */
+++} ValueRenderingParam;
+++
+++ParameterizedTestParameters(value_rendering, variants)
+++{
+++  static ValueRenderingParam params[] =
+++  {
+++    { "literal value is quoted",        "hello",      "",     "",         "'hello'"      },
+++    { "empty string is quoted",         "",           "",     "",         "''"           },
+++    { "template expands from message",  "${HOST}",    "HOST", "myserver", "'myserver'"   },
+++    { "spaces in value",                "hello world", "",     "",         "'hello world'"},
+++  };
+++  return cr_make_param_array(ValueRenderingParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(ValueRenderingParam *p, value_rendering, variants)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col" };
+++  const gchar *tmpls[] = { p->tmpl };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  if (p->msg_key[0])
+++    log_msg_set_value_by_name(msg, p->msg_key, p->msg_value, -1);
+++
+++  GString *table = _make_table("t");
+++  GString *cmd   = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, p->expected) != NULL,
+++            "[%s] Expected '%s' in command, got: %s",
+++            p->description, p->expected, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/* ===================================================================
+++ * Suite 4: SQL injection — values are safe, table name is not
+++ *
+++ * Values are rendered via dbi_conn_quote_string_copy, so injection
+++ * payloads in message fields cannot break out of the quoted string.
+++ *
+++ * Table names are currently inserted bare (wrapped only with
+++ * quote_as_string). A table name derived from a log message template
+++ * can therefore inject arbitrary SQL — this suite documents that gap.
+++ * =================================================================== */
+++
+++TestSuite(sql_injection, .init = setup, .fini = teardown);
+++
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar msg_value[64];           /* attacker-controlled field value  */
+++  gchar must_not_contain[64];    /* raw payload must not appear bare */
+++  gchar must_contain[64];        /* safely-quoted form must appear   */
+++} ValueInjectionParam;
+++
+++ParameterizedTestParameters(sql_injection, value_is_safe)
+++{
+++  static ValueInjectionParam params[] =
+++  {
+++    { "single quote cannot break out",           "'; DROP TABLE users; --", "'; DROP TABLE users; --", "\\'; DROP TABLE users; --" },
+++    { "multiple single quotes are all escaped",  "it's a ''test''",         "",                        "it\\'s a \\'\\'"           },
+++    { "closing paren + VALUES pattern in value", "') VALUES ('evil",        "",                        "\\') VALUES (\\'evil"      },
+++  };
+++  return cr_make_param_array(ValueInjectionParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(ValueInjectionParam *p, sql_injection, value_is_safe)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "msg" };
+++  const gchar *tmpls[] = { "${MSG}" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  log_msg_set_value_by_name(msg, "MSG", p->msg_value, -1);
+++
+++  GString *table = _make_table("t");
+++  GString *cmd   = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  if (p->must_not_contain[0])
+++    {
+++      gchar *raw = g_strdup_printf("'%s'", p->msg_value);
+++      cr_assert(g_strstr_len(cmd->str, -1, raw) == NULL,
+++                "[%s] Raw unescaped payload found in command: %s",
+++                p->description, cmd->str);
+++      g_free(raw);
+++    }
+++
+++  cr_assert(g_strstr_len(cmd->str, -1, p->must_contain) != NULL,
+++            "[%s] Expected escaped form '%s' in command, got: %s",
+++            p->description, p->must_contain, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/*
+++ * Table name injection: documents that a table name derived from a log
+++ * message template is inserted bare into the SQL command.  This is the
+++ * injection surface identified in the code review.
+++ */
+++typedef struct
+++{
+++  gchar description[64];
+++  gchar table_payload[80];
+++} TableInjectionParam;
+++
+++ParameterizedTestParameters(sql_injection, table_name_is_not_escaped)
+++{
+++  static TableInjectionParam params[] =
+++  {
+++    { "semicolon + DROP TABLE",         "logs; DROP TABLE users; --"       },
+++    { "single quote breaks out",        "logs' WHERE 1=1 --"               },
+++    { "UNION SELECT via table name",    "t UNION SELECT * FROM secrets --" },
+++  };
+++  return cr_make_param_array(TableInjectionParam, params,
+++                             sizeof(params) / sizeof(params[0]));
+++}
+++
+++ParameterizedTest(TableInjectionParam *p, sql_injection, table_name_is_not_escaped)
+++{
+++  driver = _create_driver();
+++  const gchar *cols[]  = { "col" };
+++  const gchar *tmpls[] = { "v" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++  GString *table  = _make_table(p->table_payload);
+++  GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
+++
+++  /*
+++   * Documents the current (unsafe) behaviour: the payload appears verbatim.
+++   * Once table-name escaping is implemented these assertions should be
+++   * inverted.
+++   */
+++  cr_assert(g_strstr_len(cmd->str, -1, p->table_payload) != NULL,
+++            "[%s] Expected bare payload in command (documents unescaped table name), got: %s",
+++            p->description, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
++diff --git a/modules/afsql/tests/test_afsql_run_query.c b/modules/afsql/tests/test_afsql_run_query.c
++index b26f631a7..a94e48538 100644
++--- a/modules/afsql/tests/test_afsql_run_query.c
+++++ b/modules/afsql/tests/test_afsql_run_query.c
++@@ -23,36 +23,9 @@
++ #include <criterion/criterion.h>
++ #include <criterion/parameterized.h>
++ 
++-#include "test_afsql.h"
++-#include "mock-dbi.h"
+++#include "afsql_test_helpers.h"
++ #include "apphook.h"
++ 
++-/* ----------------------------- helpers ----------------------------- */
++-
++-static AFSqlDestDriver *
++-_create_driver(void)
++-{
++-  AFSqlDestDriver *self = g_new0(AFSqlDestDriver, 1);
++-  self->type     = g_strdup("mysql");
++-  self->host     = g_strdup("localhost");
++-  self->port     = g_strdup("3306");
++-  self->user     = g_strdup("testuser");
++-  self->database = g_strdup("testdb");
++-  /* dbi_ctx is intentionally left NULL; mock-dbi ignores the conn handle */
++-  return self;
++-}
++-
++-static void
++-_free_driver(AFSqlDestDriver *self)
++-{
++-  g_free(self->type);
++-  g_free(self->host);
++-  g_free(self->port);
++-  g_free(self->user);
++-  g_free(self->database);
++-  g_free(self);
++-}
++-
++ /* ----------------------------- fixtures ----------------------------- */
++ 
++ static AFSqlDestDriver *driver;
+diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch
+new file mode 100644
+index 0000000000..709bb1a564
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch
+@@ -0,0 +1,176 @@
++From 4c0aebf7a1c0a8177bdf4fb67803e19dddc3dbf2 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?B=C3=A1lint=20Horv=C3=A1th?= <bal.horv.98@gmail.com>
++Date: Mon, 20 Apr 2026 16:37:04 +0200
++Subject: [PATCH] afsql: Sanitized table name to fix possible injection
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++The DONT_CREATE_TABLES early return in
++afsql_dd_ensure_table_is_syslogng_conform() bypasses
++_sanitize_sql_identifier(), leaving the table name unsanitized when
++the schema helper is skipped.
++
++Signed-off-by: Bálint Horváth <bal.horv.98@gmail.com>
++Signed-off-by: Hofi <hofione@gmail.com>
++
++CVE: CVE-2026-39879
++Upstream-Status: Backport [https://github.com/syslog-ng/syslog-ng/commit/4c0aebf7a1c0a8177bdf4fb67803e19dddc3dbf2]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ modules/afsql/afsql.c                         |  3 +-
++ modules/afsql/tests/afsql_test_helpers.h      |  1 +
++ modules/afsql/tests/test_afsql.h              |  3 +-
++ .../tests/test_afsql_build_insert_command.c   | 71 +++++++++++++++----
++ 4 files changed, 62 insertions(+), 16 deletions(-)
++
++diff --git a/modules/afsql/afsql.c b/modules/afsql/afsql.c
++index 04b35e607..3f5032ab8 100644
++--- a/modules/afsql/afsql.c
+++++ b/modules/afsql/afsql.c
++@@ -764,13 +764,14 @@ afsql_dd_disconnect(LogThreadedDestDriver *s)
++   self->dbi_ctx = NULL;
++ }
++ 
++-static GString *
+++GString *
++ afsql_dd_ensure_accessible_database_table(AFSqlDestDriver *self, LogMessage *msg)
++ {
++   GString *table = g_string_sized_new(32);
++ 
++   LogTemplateEvalOptions options = {&self->template_options, LTZ_LOCAL, 0, NULL, LM_VT_STRING};
++   log_template_format(self->table, msg, &options, table);
+++  _sanitize_sql_identifier(table->str);
++ 
++   if (!afsql_dd_ensure_table_is_syslogng_conform(self, table))
++     {
++diff --git a/modules/afsql/tests/afsql_test_helpers.h b/modules/afsql/tests/afsql_test_helpers.h
++index 9dabc763f..ba5f07763 100644
++--- a/modules/afsql/tests/afsql_test_helpers.h
+++++ b/modules/afsql/tests/afsql_test_helpers.h
++@@ -60,6 +60,7 @@ _free_driver(AFSqlDestDriver *self)
++   g_free(self->database);
++   g_free(self->quote_as_string);
++   g_free(self->null_value);
+++  log_template_unref(self->table);
++   g_free(self);
++ }
++ 
++diff --git a/modules/afsql/tests/test_afsql.h b/modules/afsql/tests/test_afsql.h
++index 7fdbb838d..3195c2156 100644
++--- a/modules/afsql/tests/test_afsql.h
+++++ b/modules/afsql/tests/test_afsql.h
++@@ -26,7 +26,8 @@
++ #include "afsql.h"
++ 
++ gboolean afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent,
++-                             dbi_result *result);
+++                            dbi_result *result);
++ GString *afsql_dd_build_insert_command(AFSqlDestDriver *self, LogMessage *msg, GString *table);
+++GString *afsql_dd_ensure_accessible_database_table(AFSqlDestDriver *self, LogMessage *msg);
++ 
++ #endif /* TEST_AFSQL_H_INCLUDED */
++diff --git a/modules/afsql/tests/test_afsql_build_insert_command.c b/modules/afsql/tests/test_afsql_build_insert_command.c
++index 3fd1d3c00..130c6d54e 100644
++--- a/modules/afsql/tests/test_afsql_build_insert_command.c
+++++ b/modules/afsql/tests/test_afsql_build_insert_command.c
++@@ -407,23 +407,24 @@ ParameterizedTest(ValueInjectionParam *p, sql_injection, value_is_safe)
++ }
++ 
++ /*
++- * Table name injection: documents that a table name derived from a log
++- * message template is inserted bare into the SQL command.  This is the
++- * injection surface identified in the code review.
+++ * Table name injection: verifies that hostile characters in a table name
+++ * derived from a log-message template are replaced with underscores before
+++ * the name is used in any SQL statement.
++  */
++ typedef struct
++ {
++   gchar description[64];
++   gchar table_payload[80];
+++  gchar sanitized_form[80];
++ } TableInjectionParam;
++ 
++ ParameterizedTestParameters(sql_injection, table_name_is_not_escaped)
++ {
++   static TableInjectionParam params[] =
++   {
++-    { "semicolon + DROP TABLE",         "logs; DROP TABLE users; --"       },
++-    { "single quote breaks out",        "logs' WHERE 1=1 --"               },
++-    { "UNION SELECT via table name",    "t UNION SELECT * FROM secrets --" },
+++    { "semicolon + DROP TABLE",      "logs; DROP TABLE users; --",       "logs__DROP_TABLE_users____"        },
+++    { "single quote breaks out",     "logs' WHERE 1=1 --",               "logs__WHERE_1_1___"                },
+++    { "UNION SELECT via table name", "t UNION SELECT * FROM secrets --", "t_UNION_SELECT___FROM_secrets___"  },
++   };
++   return cr_make_param_array(TableInjectionParam, params,
++                              sizeof(params) / sizeof(params[0]));
++@@ -437,18 +438,60 @@ ParameterizedTest(TableInjectionParam *p, sql_injection, table_name_is_not_escap
++   _set_fields(driver, cols, tmpls, 1);
++ 
++   LogMessage *msg = log_msg_new_empty();
++-  GString *table  = _make_table(p->table_payload);
+++  GString *table  = _make_table(p->sanitized_form);
++   GString *cmd    = afsql_dd_build_insert_command(driver, msg, table);
++ 
++-  /*
++-   * Documents the current (unsafe) behaviour: the payload appears verbatim.
++-   * Once table-name escaping is implemented these assertions should be
++-   * inverted.
++-   */
++-  cr_assert(g_strstr_len(cmd->str, -1, p->table_payload) != NULL,
++-            "[%s] Expected bare payload in command (documents unescaped table name), got: %s",
+++  /* Raw hostile payload must NOT appear verbatim in the SQL command. */
+++  cr_assert(g_strstr_len(cmd->str, -1, p->table_payload) == NULL,
+++            "[%s] Hostile payload found verbatim in command: %s",
++             p->description, cmd->str);
++ 
+++  /* Sanitized (underscore-replaced) form MUST appear. */
+++  cr_assert(g_strstr_len(cmd->str, -1, p->sanitized_form) != NULL,
+++            "[%s] Expected sanitized form '%s' in command, got: %s",
+++            p->description, p->sanitized_form, cmd->str);
+++
+++  g_string_free(cmd, TRUE);
+++  g_string_free(table, TRUE);
+++  log_msg_unref(msg);
+++}
+++
+++/*
+++ * When AFSQL_DDF_DONT_CREATE_TABLES is set, afsql_dd_ensure_table_is_syslogng_conform
+++ * returns TRUE immediately, skipping its own _sanitize_sql_identifier call.  The only
+++ * sanitization is then the line added by the GHSA-qwf9-6222-m24m fix inside
+++ * afsql_dd_ensure_accessible_database_table, immediately after log_template_format.
+++ */
+++Test(sql_injection, dont_create_tables_flag_sanitizes_table_name)
+++{
+++  driver = _create_driver();
+++  driver->super.flags |= AFSQL_DDF_DONT_CREATE_TABLES;
+++
+++  driver->table = log_template_new(configuration, NULL);
+++  log_template_compile_literal_string(driver->table, "logs;evil'table (name)");
+++
+++  const gchar *cols[]  = { "col" };
+++  const gchar *tmpls[] = { "v" };
+++  _set_fields(driver, cols, tmpls, 1);
+++
+++  LogMessage *msg = log_msg_new_empty();
+++
+++  GString *table = afsql_dd_ensure_accessible_database_table(driver, msg);
+++  cr_assert_not_null(table, "ensure_accessible_database_table returned NULL unexpectedly");
+++
+++  cr_assert(g_strstr_len(table->str, -1, ";") == NULL,
+++            "Semicolon survived sanitization: %s", table->str);
+++  cr_assert(g_strstr_len(table->str, -1, "'") == NULL,
+++            "Single quote survived sanitization: %s", table->str);
+++  cr_assert(g_strstr_len(table->str, -1, "(") == NULL,
+++            "Opening paren survived sanitization: %s", table->str);
+++  cr_assert(g_strstr_len(table->str, -1, " ") == NULL,
+++            "Space survived sanitization: %s", table->str);
+++
+++  GString *cmd = afsql_dd_build_insert_command(driver, msg, table);
+++  cr_assert(g_strstr_len(cmd->str, -1, "logs_evil_table__name_") != NULL,
+++            "Sanitized table name not found in INSERT command: %s", cmd->str);
+++
++   g_string_free(cmd, TRUE);
++   g_string_free(table, TRUE);
++   log_msg_unref(msg);
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
+index 1846758681..f48ac50ecd 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
+@@ -23,6 +23,10 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
+            file://syslog-ng-tmp.conf \
+            file://syslog-ng.service-the-syslog-ng-service.patch \
+            file://0001-Fix-buildpaths-warning.patch \
++           file://CVE-2026-39879-01.patch \
++           file://CVE-2026-39879-02.patch \
++           file://CVE-2026-39879-03.patch \
++           file://CVE-2026-39879-04.patch \
+ "
+ SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
  
 
