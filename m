@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77E4CCA5FEC
-	for <webhook@archiver.kernel.org>; Sat,  3 Oct 2026 17:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 585B0CA5FE6
+	for <webhook@archiver.kernel.org>; Sat,  3 Oct 2026 17:48:37 +0000 (UTC)
 Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.10006.1791049703125582934
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Oct 2026 10:48:24 -0700
+ Sat, 03 Oct 2026 10:48:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=aJitqekC;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-2026100317481999383c292e000207be-wrkzlg@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026100317481999383c292e000207be
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=bC3fehUg;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202610031748250d4b08ae3f0002076e-wifxf3@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202610031748250d4b08ae3f0002076e
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 03 Oct 2026 19:48:19 +0200
+        Sat, 03 Oct 2026 19:48:26 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=L9LASFyaho8/PKa5E+3p+ocAj+iwlLERv+oUATQtL8M=;
- b=aJitqekCAvA1ac4M0ztUTXbfqD046WML/q6xD2jBJljcVfk+ksXHTRBxftV6LgiH/UbxuS
- MHAPdriZLCnlx9cStYQeCKu2N05vpY6/BkOjwgvxrJWcDM2eki4qgTtS5cTU7rVU8IeIUi45
- l3Wocm0ClGm1GvMuoghcxIqUk+EjiOcdh4Ll6JYvOdYPmQ4hITdx3QrQYuuYKf0JPlBxEyK2
- 0FdZhCAJCdEdterjywQ1YKJPIjt4ZJED0l9Il2yKue6v8PB0ZJgnqmc3NV8ceBUZ3DE3m5Rb
- 2Xu8u7KgLDxe6A6gcPVuJ5lPqLINNOo2L1ai6TdolZRCVniD2gRMKmXg==;
+ bh=UX3j8lGaRr7U+Vyj8eP59H96JWq9L355hEAH8AGQGsc=;
+ b=bC3fehUgAyJF2q/aUwYqqjS0/w6UMqQcynurrsKHFuY3HCSpfJHwBiZT0g2rSW20npJ2CG
+ IHx7bHnGNZ7u6ttnXhkPhMOfuU7plcz6KCIDdzToF9igOcPrVAD9d8q96oKnYOPilPfm8GMU
+ 0eA5GYkJOpt4jFx8aCylS8LmWAeJM3wQ/gP3Z3fy5Rx4EUOMUbouGkCjjUPBG0Y012uYWrSw
+ n7q7HzrT0s5YITgQbKrTAxDA9XUF20tOtI76kQHAk9vG7X6cEpidd40ZJy4wk4rpvJrJE1VD
+ Q5xgj3DRKhEeRkNmBwKCZHO/kZ2Xs/SDk9jp7C485tCffDvkg307osPg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][wrynose][PATCH] syslog-ng: patch CVE-2026-39879
-Date: Sat,  3 Oct 2026 19:47:48 +0200
-Message-ID: <20261003174750.2118591-1-peter.marko@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] syslog-ng: patch CVE-2026-39879
+Date: Sat,  3 Oct 2026 19:47:59 +0200
+Message-ID: <20261003174800.2118642-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -37,8 +37,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 17:48:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130616
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 17:48:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130617
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -49,11 +49,11 @@ Pick patches per [1].
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  .../syslog-ng/files/CVE-2026-39879-01.patch   |  65 ++
- .../syslog-ng/files/CVE-2026-39879-02.patch   | 572 +++++++++++++
+ .../syslog-ng/files/CVE-2026-39879-02.patch   | 571 +++++++++++++
  .../syslog-ng/files/CVE-2026-39879-03.patch   | 758 ++++++++++++++++++
  .../syslog-ng/files/CVE-2026-39879-04.patch   | 176 ++++
- .../syslog-ng/syslog-ng_4.11.0.bb             |   4 +
- 5 files changed, 1575 insertions(+)
+ .../syslog-ng/syslog-ng_4.6.0.bb              |   4 +
+ 5 files changed, 1574 insertions(+)
  create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
  create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
  create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
@@ -61,7 +61,7 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
 
 diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
 new file mode 100644
-index 0000000000..3ef6ddcca1
+index 0000000000..a19195048a
 --- /dev/null
 +++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-01.patch
 @@ -0,0 +1,65 @@
@@ -96,7 +96,7 @@ index 0000000000..3ef6ddcca1
 + #include "compat/openssl_support.h"
 + #include <openssl/evp.h>
 + 
-+@@ -219,11 +221,12 @@ static gboolean
++@@ -230,11 +232,12 @@ static gboolean
 + afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, dbi_result *result)
 + {
 +   dbi_result db_res;
@@ -111,7 +111,7 @@ index 0000000000..3ef6ddcca1
 +   if (!db_res)
 +     {
 +       const gchar *dbi_error;
-+@@ -238,14 +241,17 @@ afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, d
++@@ -249,14 +252,17 @@ afsql_dd_run_query(AFSqlDestDriver *self, const gchar *query, gboolean silent, d
 +                     evt_tag_str("user", self->user),
 +                     evt_tag_str("database", self->database),
 +                     evt_tag_str("error", dbi_error),
@@ -132,10 +132,10 @@ index 0000000000..3ef6ddcca1
 + 
 diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
 new file mode 100644
-index 0000000000..577db56bb8
+index 0000000000..3c9b7c438a
 --- /dev/null
 +++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-02.patch
-@@ -0,0 +1,572 @@
+@@ -0,0 +1,571 @@
 +From 1aba7537f0c406090f98a649475acbf517440220 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?B=C3=A1lint=20Horv=C3=A1th?= <bal.horv.98@gmail.com>
 +Date: Tue, 7 Apr 2026 16:58:51 +0200
@@ -152,7 +152,7 @@ index 0000000000..577db56bb8
 +Upstream-Status: Backport [https://github.com/syslog-ng/syslog-ng/commit/1aba7537f0c406090f98a649475acbf517440220]
 +Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ modules/afsql/CMakeLists.txt               |   2 +
++ modules/afsql/CMakeLists.txt               |   1 +
 + modules/afsql/Makefile.am                  |   5 +-
 + modules/afsql/afsql.c                      |   2 +-
 + modules/afsql/tests/CMakeLists.txt         |   9 +
@@ -161,7 +161,7 @@ index 0000000000..577db56bb8
 + modules/afsql/tests/mock-dbi.h             |  41 ++++
 + modules/afsql/tests/test_afsql.h           |  31 +++
 + modules/afsql/tests/test_afsql_run_query.c | 225 +++++++++++++++++++++
-+ 9 files changed, 472 insertions(+), 2 deletions(-)
++ 9 files changed, 471 insertions(+), 2 deletions(-)
 + create mode 100644 modules/afsql/tests/CMakeLists.txt
 + create mode 100644 modules/afsql/tests/Makefile.am
 + create mode 100644 modules/afsql/tests/mock-dbi.c
@@ -173,11 +173,10 @@ index 0000000000..577db56bb8
 +index 0d336f3a7..8921bbf33 100644
 +--- a/modules/afsql/CMakeLists.txt
 ++++ b/modules/afsql/CMakeLists.txt
-+@@ -28,3 +28,5 @@ add_module(
-+   DEPENDS ${LIBDBI_LIBRARIES} OpenSSL::SSL
++@@ -24,3 +24,4 @@ add_module(
 +   SOURCES ${AFSQL_SOURCES}
 + )
-++
++ 
 ++add_test_subdirectory(tests)
 +diff --git a/modules/afsql/Makefile.am b/modules/afsql/Makefile.am
 +index afc81655d..dd3dd9b5a 100644
@@ -198,7 +197,7 @@ index 0000000000..577db56bb8
 +index fb7ef3b32..2234acfe6 100644
 +--- a/modules/afsql/afsql.c
 ++++ b/modules/afsql/afsql.c
-+@@ -217,7 +217,7 @@ afsql_dd_set_create_statement_append(LogDriver *s, const gchar *create_statement
++@@ -228,7 +228,7 @@ afsql_dd_set_create_statement_append(LogDriver *s, const gchar *create_statement
 +  *
 +  * NOTE: This function can only be called from the database thread.
 +  **/
@@ -710,7 +709,7 @@ index 0000000000..577db56bb8
 ++}
 diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
 new file mode 100644
-index 0000000000..c88ab04e73
+index 0000000000..51df57336e
 --- /dev/null
 +++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-03.patch
 @@ -0,0 +1,758 @@
@@ -746,7 +745,7 @@ index 0000000000..c88ab04e73
 +index 2234acfe6..04b35e607 100644
 +--- a/modules/afsql/afsql.c
 ++++ b/modules/afsql/afsql.c
-+@@ -890,7 +890,7 @@ afsql_dd_append_value_to_be_inserted(AFSqlDestDriver *self,
++@@ -901,7 +901,7 @@ afsql_dd_append_value_to_be_inserted(AFSqlDestDriver *self,
 +   return TRUE;
 + }
 + 
@@ -1474,7 +1473,7 @@ index 0000000000..c88ab04e73
 + static AFSqlDestDriver *driver;
 diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch
 new file mode 100644
-index 0000000000..709bb1a564
+index 0000000000..a2eb98bcac
 --- /dev/null
 +++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2026-39879-04.patch
 @@ -0,0 +1,176 @@
@@ -1508,7 +1507,7 @@ index 0000000000..709bb1a564
 +index 04b35e607..3f5032ab8 100644
 +--- a/modules/afsql/afsql.c
 ++++ b/modules/afsql/afsql.c
-+@@ -764,13 +764,14 @@ afsql_dd_disconnect(LogThreadedDestDriver *s)
++@@ -775,13 +775,14 @@ afsql_dd_disconnect(LogThreadedDestDriver *s)
 +   self->dbi_ctx = NULL;
 + }
 + 
@@ -1654,14 +1653,14 @@ index 0000000000..709bb1a564
 +   g_string_free(cmd, TRUE);
 +   g_string_free(table, TRUE);
 +   log_msg_unref(msg);
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
-index 1846758681..f48ac50ecd 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
-@@ -23,6 +23,10 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            file://syslog-ng-tmp.conf \
-            file://syslog-ng.service-the-syslog-ng-service.patch \
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
+index e2ae40fd61..01fd766c1b 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
+@@ -25,6 +25,10 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
             file://0001-Fix-buildpaths-warning.patch \
+            file://0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch \
+            file://CVE-2024-47619.patch \
 +           file://CVE-2026-39879-01.patch \
 +           file://CVE-2026-39879-02.patch \
 +           file://CVE-2026-39879-03.patch \
