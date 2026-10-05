@@ -1,106 +1,136 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FD3DCA5FCE
-	for <webhook@archiver.kernel.org>; Sun,  4 Oct 2026 06:44:43 +0000 (UTC)
-Received: from mail-wr2-f35.google.com (mail-wr2-f35.google.com [74.125.225.99])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19058.1791095455735314824
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2D40CA5FF5
+	for <webhook@archiver.kernel.org>; Mon,  5 Oct 2026 01:20:18 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10933.1791163213883983859
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Oct 2026 23:30:56 -0700
+ Sun, 04 Oct 2026 18:20:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=EAD3O2LL;
- spf=pass (domain: gmail.com, ip: 74.125.225.99, mailfrom: mehmet.fide@gmail.com)
-Received: by mail-wr2-f35.google.com with SMTP id ffacd0b85a97d-48b059eae96so639061f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Oct 2026 23:30:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791095454; x=1791700254; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p+zXnLRsGfmHYtWHMDlJD5UXn8i13sztD8aJCTjv9Ug=;
-        b=EAD3O2LLP+JpoNEdAm47H2+Mv+gvn7Cfr/dQ9dcMC1P+dEJ0dg3jU9jE38pMPuK3FI
-         drfQGYZFVjDboTFsunEQTZcsYvemccFQnuQK0P7Mlfz++vUDwWRTVYV14YdIJRKPI0zL
-         0hAIlhIpX+iSBdC1MZWivrbbICBOSW+ZHjxvDTgAjCAHAo2maE2ggUHA8/EwqczezugX
-         ZqOvOtTKAEknthN54g7QggHIRwHDO8fZ651ytMGu4j00x2KJ7mgc0xXEij5lVsuz9fL5
-         8qxzG2RgUimksDS+ce9LTPAQxsGHV03dpx6XPQ24bZkzX7M5AkeVYkOONMeLVqcXozCe
-         t8Rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791095454; x=1791700254;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=p+zXnLRsGfmHYtWHMDlJD5UXn8i13sztD8aJCTjv9Ug=;
-        b=PhDSbwpki5kIxTNBbMD3UitEYrFq0M7IwoKEOWJ7JRHvpBSJkKHXihW9bOAT4Cl+wC
-         Yiz5zOryAH36mwq2s753NB8duOr/8YY5ejILpp+12O6f9HTQlWink1aoCqr6p460KQit
-         GK51nBUl/tSIn6WLs+/UCYnACZXKCZ5avstQtBq+AK56a9+EHlfHHEKB2eM4eo2BKWhF
-         avWQJJTeDnbPIM3lV5xiPhUNfKYsCrJ18Gk/Pmq+GDdIrwcwEj0JdJ+tAnohV5Ma74nc
-         p+10+2JOntSEkPSNtiuML941Bwpr54+NTTBW7tksp6ajiHYvxnjjpeixA0kfURPNqgxY
-         ogLA==
-X-Gm-Message-State: AFq9FYJ6PZAPXVbf0KGejXkRq/fEENubu6WVu59zqaG6Ybgsfhj6pFn7
-	3P3u751RHOxQ7qTLkpzTCh6N156XKgRFAEvtucDKXrAVpDv3kJHddq2ABvt+ZA==
-X-Gm-Gg: AYBFou0TugBqlHJcP86oXyk/6HniCEUBTzuA1mjwhc+41ohi3omYSjIir7W0iUbulWr
-	7HD6uSx4nxmmNjQpgx+r//e6VaT29D4SB6F9KftJg+4rlEAyFuG9/QDwaVf0UoLTHpogMPLZz7w
-	YcG8s5+R2EgGcyuaeKJWXRK/bwDw4Sc47XxAzsJ5wARFu5Je5ZkP7WwEIDb/495T03ddM2A5Cll
-	7Rl4QW6Zo+a9bzKmwNNyxaE2i4zaxLNfHf2EGKbb+5B4fv0MmNilFtgLf4+IARbLMWfl7e781L/
-	LILc1CHYcVqSFEEgF5PWE0D+YjmemDzbu0cnEjFfdC6rUY8dqKxZS/hlotm/HwK5TtdCPjRidL0
-	fCOUCul2ixecGVtkLRq0WfbcQ8noKnJmL3tag/rZIhLbjFtyCV8zl/Dj7HKBmiIJ7Yl0WOHskkM
-	rEnEsNdsEg1BpJcx2rLldC1w8jTMw2iauaZRK+qXkeZ2eVH9F+SdroiaLnlqQi82J4yQdBolaPx
-	N5F
-X-Received: by 2002:a05:600c:3501:b0:49d:2562:d670 with SMTP id 5b1f17b1804b1-4a02757ab71mr128250865e9.14.1791095002467;
-        Sat, 03 Oct 2026 23:23:22 -0700 (PDT)
-Received: from deb05.proceq.com ([213.160.61.66])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b380fad53sm19054649f8f.19.2026.10.03.23.23.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 23:23:21 -0700 (PDT)
-From: Mehmet Fide <mehmet.fide@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=ApjyrXPr;
+ spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd90.aul.t-online.de (fwd90.aul.t-online.de [10.223.144.116])
+	by mailout10.t-online.de (Postfix) with SMTP id 859CE37A1B
+	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Oct 2026 03:20:11 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.171.181]) by fwd90.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xDXND-2qQFRA0; Mon, 5 Oct 2026 03:20:11 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Anuj Mittal <anuj.mittal@oss.qualcomm.com>,
-	mehmet.fide@screeningeagle.com
-Subject: [meta-oe][scarthgap][PATCH] spidev-test: clean the build dir before configure
-Date: Sun,  4 Oct 2026 08:23:20 +0200
-Message-ID: <20261004062320.3487191-1-mehmet.fide@gmail.com>
+Subject: [meta-oe][PATCH 1/3] mpv: fix a file descriptor leak in the render API
+Date: Mon,  5 Oct 2026 03:19:54 +0200
+Message-ID: <20261005011956.1224267-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1791163211-DB7FD9BF-542F428B/0/0 CLEAN NORMAL
+X-TOI-MSGID: b8b2bd17-c4e9-4690-9762-b401fcd159f1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1791163211; i=f_l_k@t-online.de;
+	bh=pwDkmcpyQDU782N8vbg/sLmsVtdbHmp6kXOBKvTAzTk=;
+	h=From:To:Subject:Date;
+	b=ApjyrXPr51YLj904nHnQAk6lEasxFXVJGmNQZONKZk9hYHeGgY3m8Hp2dH8OBHgqx
+	 YHJPtV6k0cTAbiSdj9XjGasNNH8m3707u/MCOu8hTNvrX6J/bhuhAx+X/2ohNpFk24
+	 IrIH8pWKTZ02HeGnzF+Xmw/dZif0Ibenu+HD7aU3SojUCj3V9AUz4jc0H4eWCXIngX
+	 LIOXLjxefcGtEsLx591TZoLbNCw8sZnCzRXks5ZhPUDAEPfyF69lxaUL9POfc4y4OE
+	 qGaGusFoiUh+dUFsyr6dkmLOgJT9oEP4mzbji4m/tcNBPwB58H2i0d2vdKdVXXiZPf
+	 t60WWQsxGJV5g==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 04 Oct 2026 06:44:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130618
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2026 01:20:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130620
 
-From: Mehmet Fide <mehmet.fide@screeningeagle.com>
+With the OpenGL render API (vo_libmpv) every frame left a fence behind
+that nothing cleaned up. On v3d each one holds a sync file, so after abou=
+t
+a minute of video the process ran into the open file limit and the
+picture stopped ("MESA: error: Export failed"). Backport the upstream
+fix.
 
-The recipe builds out of tree with O=${B}, and the kernel's tools/build
-writes fixdep .cmd files into ${B} that list the compiler's own headers
-by absolute path, version included. When the toolchain changes (gcc
-13.4 -> 13.5 here) do_compile reruns in the same ${B}, make cannot find
-the old prerequisite and stops:
-
-  make[1]: *** No rule to make target '.../recipe-sysroot-native/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/13.4.0/include/stddef.h', needed by '.../spidev_test.o'.  Stop.
-
-Empty ${B} before configure, as bpftool does.
-
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit bd52d9b47960059767da18c01adac11b9693889f)
-Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+AI-Generated: Uses Claude Code (Claude Fable 5.1)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-kernel/spidev-test/spidev-test.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...equire-swap_buffers-param-for-FenceS.patch | 35 +++++++++++++++++++
+ .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |  5 ++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-co=
+ntext-require-swap_buffers-param-for-FenceS.patch
 
-diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-index 7b87dd28df..4c59d861b9 100644
---- a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-+++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-@@ -11,6 +11,7 @@ do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
- EXTRA_OEMAKE = "-C ${S}/tools/spi O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
- 
- do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+do_configure[cleandirs] = "${B}"
- 
- do_compile() {
-     oe_runmake
--- 
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-r=
+equire-swap_buffers-param-for-FenceS.patch b/meta-oe/recipes-multimedia/m=
+player/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patc=
+h
+new file mode 100644
+index 0000000000..70ba81b34c
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-=
+swap_buffers-param-for-FenceS.patch
+@@ -0,0 +1,35 @@
++From f74adc4243bd9e1a8ee96d187c939e6232510650 Mon Sep 17 00:00:00 2001
++From: Dudemanguy <random342@airmail.cc>
++Date: Thu, 22 Jan 2026 11:12:22 -0600
++Subject: [PATCH] opengl/context: require swap_buffers param for FenceSyn=
+c
++
++Commits 8854c742711705be1fcfcc6a5875960a3e2593dc and
++5ae0e0ff9a6974453c1aba41ddc8442d12ac9264 eliminated the external
++swapchain API that the render backend (vo_libmpv) was previously using.
++However, it was missed that this was being used to skip the
++gl->FenceSync calls and that logic change was not properly accounted
++for. This meant that vo_libmpv would leak fences since
++ra_gl_ctx_swap_buffers is never called to clean them up.
++
++Fix this by making sure the ra_ctx_params have swap_buffers defined
++before calling gl->FenceSync. All platforms are required to implement
++this anyway with the exception of vo_libmpv since it's a funny special
++case. Fixes #17217.
++Upstream-Status: Backport [https://github.com/mpv-player/mpv/commit/f74a=
+dc4243bd9e1a8ee96d187c939e6232510650]
++---
++ video/out/opengl/context.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/video/out/opengl/context.c b/video/out/opengl/context.c
++index 86e8d5daac8b4..86e5c797d670a 100644
++--- a/video/out/opengl/context.c
+++++ b/video/out/opengl/context.c
++@@ -232,7 +232,7 @@ bool ra_gl_ctx_submit_frame(struct ra_swapchain *sw,=
+ const struct vo_frame *fram
++     if (p->opts->use_glfinish)
++         gl->Finish();
++=20
++-    if (gl->FenceSync) {
+++    if (gl->FenceSync && p->params.swap_buffers) {
++         GLsync fence =3D gl->FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0=
+);
++         if (fence)
++             MP_TARRAY_APPEND(p, p->vsync_fences, p->num_vsync_fences, f=
+ence);
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/r=
+ecipes-multimedia/mplayer/mpv_0.41.0.bb
+index c8a0222ebf..7178182c29 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+@@ -23,7 +23,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3D570a9b3=
+749dd0463a1778803b12a6dce"
+ LICENSE_FLAGS =3D "commercial"
+=20
+ SRCREV =3D "41f6a645068483470267271e1d09966ca3b9f413"
+-SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
+/${@oe.utils.trim_version('${PV}', 2)};protocol=3Dhttps;tag=3Dv${PV}"
++SRC_URI =3D " \
++    git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease/${@oe.ut=
+ils.trim_version('${PV}', 2)};protocol=3Dhttps;tag=3Dv${PV} \
++    file://0001-opengl-context-require-swap_buffers-param-for-FenceS.pat=
+ch \
++"
+=20
+ inherit meson pkgconfig mime-xdg
+=20
+--=20
 2.55.0
 
 
