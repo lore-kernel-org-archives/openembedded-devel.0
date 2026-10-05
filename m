@@ -1,105 +1,150 @@
-Return-Path: <aleksandar.nikolic010@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 414C7CA5FCE
-	for <webhook@archiver.kernel.org>; Mon,  5 Oct 2026 05:05:21 +0000 (UTC)
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13409.1791176711970728124
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DCFFCA5FCE
+	for <webhook@archiver.kernel.org>; Mon,  5 Oct 2026 07:14:02 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14570.1791184437088160307
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Oct 2026 22:05:12 -0700
+ Mon, 05 Oct 2026 00:13:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=OnJ6I8uv;
- spf=pass (domain: gmail.com, ip: 74.125.225.140, mailfrom: aleksandar.nikolic010@gmail.com)
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-4a1722c37c9so3280965e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Oct 2026 22:05:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FzCS/IMg;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-486e70f2457so549378f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2026 00:13:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791176710; x=1791781510; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791184435; x=1791789235; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wgNFzWabtDdGlvNSpnDa6JidUA9aNK7qtw/QGMU497k=;
-        b=OnJ6I8uvEAyTYeAQ5ksqC9ykgSkvmDqUMCoredUU/WViBR8XLjPHd6bH8uYP3lsa+7
-         jzIu0e4yUyOvQzYGK4WMaixFFRGapFRpUATsX7x2gu+5KQwUKKuDa23ZoxsOsVqTmrfF
-         d2ob2mD92sm+c2PbK1zklLuvSf83yTGduCXk0xPHiaYGw16X2LFw1SDUrrrKCtkMbhET
-         3WV8DmlmsCpfpbS082+1tMXtvmFYXs/+zulTeW59b93rsMSik7UiK21u4bLSXoocxUKN
-         cm07BTP2gBZR3mrIALtS43tYL/kFsPV3tByiFHbBRbFACCaXIZ62rljED8q29SYvg9Zy
-         3tLg==
+        bh=r3/40Sz+V+MdIb5EqLX+BlZxzTJaJA0gmq7rWGzJO/A=;
+        b=FzCS/IMggSfdgj3RJZwJNUX29IyALkF/mYwhRW4wcdvJ3wl2uOGI50KPlkj/R72Ldz
+         hd1uRrE+0ODsMBFMZoi5RGuHTQaFxIpuEh/YLib+lQ3aJl6enBIoPGjXWbdLq6DHKaur
+         S7j+oiHigkuu1PY51k5SOSdmtUcREOda1uCm2HAaw0jjw7YxEBiO4XhwDEbu8KnSzeUW
+         xWGBLr4CA440CMj7HA/cBxX1136mC5JNtIzk4QTyqYTXMYAKeDPzKUhptcWaH12EPqnR
+         mVDZMvMyCAC/7me6ZmzS4IBUWqLcM2nRl62SKk8npWphRRKBdhCmfRfL0OLqDCf0Oqq+
+         OCog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791176710; x=1791781510;
+        d=1e100.net; s=20260707; t=1791184435; x=1791789235;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wgNFzWabtDdGlvNSpnDa6JidUA9aNK7qtw/QGMU497k=;
-        b=ehdfruCwIuXh7ZjDdafPLdVS1bGEwsrd1tfbEdhqzF5b7ZqU35gQXZTaEEcSMpFu9F
-         w0iBjHUoKv5g/WgkKXibJmFXG24lXIY1/3RnWBmEPHXZXrVvlt90Vy2Eow4CZyFQRRUD
-         bapE2DdPuteX2jM+RsuGlaginKXayAPiYC6CmaZ92eAg2Oc5cScCoOJKqUIq4c54aPnC
-         ddmyYDh74ymI8CdQy/yz+OFyqAXMAQQEPuPF4PnQ/D2ZzfMHNgsLBXMV3+FoX9VF/ENG
-         fsNuaBfOWtadMu8rGAFPryRN2lRoaQQ8mocVhDUp2x4FDAvA5CLYntkNCKizfI+niHKi
-         4kcg==
-X-Gm-Message-State: AFuF++k1bmClaawk4IASdHMVivSRWu7RL/JU25+BwvFVZXx/8XFPon7O
-	jdMZ8/DENQwwlGL8cdLjN3n9s3jX7ktdgu7nau4yZIBnnmJ9ah9qVtXimMiXZKnM
-X-Gm-Gg: AYBFou0ijidGt577Xw5LMZwEWhBg1WWLQxaUPAy4pLRFoQ4IJ98ZLB65dB4N6a11yqK
-	zVCvlmAOSN378BDWCIol+/Wiu9/DTJmsRQ6JUcWqT40R7vuH/9Eki7SDZ+aNHpy4XMDDItRRt3o
-	RQJNotugsRS80F0e0sNgwRr4sGdqaKQDhKm0U/E/I6oc1liFuo+corqvXmgSTLR3Y4H69BeLXAa
-	gBgaCd+07lhy2KmWqwAZ2VoihlS/g0oevr4r0qp2sUZ8HdM7i87iRBC6vRJP0vT1fvltbo9leB4
-	rqZ03Egi4hpCbla2+FE34uGVPU/tXqgHQ30TE4ux7LAJKJB/AH3e0uwX+H+GytmiRDIHhhfMhlF
-	CNTVIwkKxcU4uXRjoSe+QVZ9grihDzNC0KgsyWTJ1ZGK2he2wWzWTdoMfYbZn0n0rCQEAS365Tg
-	D37XJJTKZ9idfn7KOfnxPlFv15yRlxgOFaF+EcqkimVrJpDUV+077hhG7iYT9ND4IgsH1qhQ/aW
-	jE6brppiUH8G0cBXDn7EA==
-X-Received: by 2002:a05:600c:1f8c:b0:4a1:6e89:f275 with SMTP id 5b1f17b1804b1-4a16e89f4d7mr56199805e9.18.1791176709822;
-        Sun, 04 Oct 2026 22:05:09 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:810d:61f:4100:438c:b3f0:35ae:d67f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0a6e894a4sm277685035e9.5.2026.10.04.22.05.08
+        bh=r3/40Sz+V+MdIb5EqLX+BlZxzTJaJA0gmq7rWGzJO/A=;
+        b=beClgRVsihiEvt+vDyrt2UJ0pclpLbem43k0NLzx0srlVCHfydX9+EIFUyEnojj7Re
+         /jtLVEmKgZ5G4VddRVTxyyV3O55kMN6gRBdW/qojCenjYwsu2Y7jZi3WqlklRo/YHt+V
+         BRtZQVb8Qs7Ct+qSvTo4TjtE09LafQgI69o0cpersnrQgqRf79GMFejtJuOMXddw0OC3
+         lhWQs1cZU4BZSmUFDPsYzckL5hxAhOdMhKKy9ntXUWRH5Mpe5t7N0zgnfbh1bVPKl/gb
+         4Y9aVWaRlRf4ewq20rlev+Ll+UWKLqUACq/DOVCYvVzhOIL7awBkBfarbihT5lZgZ6kk
+         gDew==
+X-Gm-Message-State: AFuF++n7aM73bAYmhMe2525DD4+dyf+UlPgc/dMjO6KILihqr4R4VVYZ
+	I4/1klLYr9ZjR76Y+V6p6VDS/2DifQvdn2NlW1rOnB8KcYUuGG+Tn+W83mkhnQ==
+X-Gm-Gg: AYBFou3KAWGVi+a+OiRcUjMG7cFT2oC/fYuNPStshY8UcuKOfaahhZfm1za6U+NFvel
+	JnAbAl+vqQsq4xfFd6e7JTQJJl0OKQy2FE/hqT0D8luk1ScTu0eRWr7MP7pIeDB9VBmMhzuQpuZ
+	U42JYaaRgssByAESje8I/hM6SB5QrQcAAetYF6KW05g6CDCfexEtGIEvSY4Z7khtH7mE5s0rd7N
+	d+GktfbcgmKjgnp45DftuWRRNWgOJCHAVWLPMEtFZ4zsLNZ4hGdVLnUF8bxfaJB7cHYa0UizjV+
+	MtFyTThjpEr81WsefFjdiRtB8Z9w7gKCmwQ1ar9oczbzEbz4zGFMaSKd59WsoLp6boGft+4LJaY
+	gaK6rNO4s+vqI/EcpoZI5Euy2FMTL6XBh1ZFqT4jlqKmLEXQcJ/AGbtFMQB+kwTZewLhiIdcIx0
+	+iHPss0qfq6V/4pXquqH+TMQhsbimbD7vQ21uk702z0q84ctJ+DvHvVB0joAf00Fq5bRX8pQGbR
+	YiuZjzPqyUs11KgW/g/o56/3JH5pV+fNZN5JUoVKAgT4qsFBAdQyP/AEyk=
+X-Received: by 2002:a05:600c:5883:b0:4a0:12d7:4c88 with SMTP id 5b1f17b1804b1-4a168101d97mr72293475e9.30.1791184434939;
+        Mon, 05 Oct 2026 00:13:54 -0700 (PDT)
+Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0e1afbc44sm316004485e9.4.2026.10.05.00.13.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 22:05:09 -0700 (PDT)
-From: Aleksandar Nikolic <aleksandar.nikolic010@gmail.com>
-X-Google-Original-From: Aleksandar Nikolic <aleksandar.nikolic22@pm.me>
+        Mon, 05 Oct 2026 00:13:54 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Aleksandar Nikolic <aleksandar.nikolic22@pm.me>
-Subject: [meta-networking] mosquitto: Add missing 'mosquitto' static group id
-Date: Mon,  5 Oct 2026 07:05:06 +0200
-Message-ID: <20261005050507.1616567-1-aleksandar.nikolic22@pm.me>
-X-Mailer: git-send-email 2.47.3
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH] luajit: run the host helpers under qemu-user on non-x86 build hosts
+Date: Mon,  5 Oct 2026 08:13:17 +0100
+Message-ID: <20261005071316.44070-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2026 05:05:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130623
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2026 07:14:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130624
 
-The mosquitto user gets added to the mosquitto group in the
-recipe [1], so make sure the mosquitto static group id exists
-and that the mosquitto user is a part of it.
+LuaJIT's build compiles minilua and buildvm and runs them, and buildvm
+must have the target's pointer size. For a 32 bit target the recipe adds
+-m32 to the build compiler, which only exists on x86, so on any other
+build host (e.g. AArch64) the build fails.
 
-[1] https://git.openembedded.org/meta-openembedded/tree/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.1.2.bb#n94
+On those hosts, build the helpers with the target compiler and run them
+under qemu-user. x86 build hosts keep -m32 unchanged.
 
-Signed-off-by: Aleksandar Nikolic <aleksandar.nikolic22@pm.me>
+AI-Generated: Claude Code (Claude Opus 5.5)
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- meta-networking/files/static-group-meta-networking  | 1 +
- meta-networking/files/static-passwd-meta-networking | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 37 ++++++++++++++-----
+ 1 file changed, 28 insertions(+), 9 deletions(-)
 
-diff --git a/meta-networking/files/static-group-meta-networking b/meta-networking/files/static-group-meta-networking
-index dbdc7a5b9b..6c28c8c4b7 100644
---- a/meta-networking/files/static-group-meta-networking
-+++ b/meta-networking/files/static-group-meta-networking
-@@ -13,3 +13,4 @@ lldpd:x:642:
- opensaf:x:643:
- radiusd:x:651:
- ntp:x:653:
-+mosquitto:x:657:
-diff --git a/meta-networking/files/static-passwd-meta-networking b/meta-networking/files/static-passwd-meta-networking
-index bca257bb27..20ad644b3a 100644
---- a/meta-networking/files/static-passwd-meta-networking
-+++ b/meta-networking/files/static-passwd-meta-networking
-@@ -16,4 +16,4 @@ ntp:x:653:ntp::/:/bin/nologin
- nm-fortisslvpn:x:654:nogroup::/:/bin/nologin
- nm-openvpn:x:655:nogroup::/:/bin/nologin
- squid:x:656:nogroup::/:/bin/nologin
--mosquitto:x:657:nogroup::/:/bin/nologin
-+mosquitto:x:657:mosquitto::/:/bin/nologin
--- 
-2.47.3
-
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index a3b671ce7fe3..707cea5766af 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -13,17 +13,30 @@ SRCREV = "659a61693aa3b87661864ad0f12eee14c865cd7f"
+ # The v2.1 branch is rolling with no tags; track commits.
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-inherit pkgconfig binconfig siteinfo
++inherit pkgconfig binconfig siteinfo qemu
+ 
+ BBCLASSEXTEND = "native"
+ 
+ # http://luajit.org/install.html#cross
+-# Host luajit needs to be compiled with the same pointer size
+-# If you want to cross-compile to any 32 bit target on an x64 OS,
+-# you need to install the multilib development package (e.g.
+-# libc6-dev:i386 on Debian/Ubuntu) and build a 32 bit host part
+-# (HOST_CC="gcc -m32").
+-BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
++# The build compiles helpers (minilua, buildvm) and runs them, and buildvm
++# must have the target's pointer size. For a 32 bit target on an x86 build
++# host they are built with "gcc -m32", which needs the multilib development
++# package (e.g. libc6-dev:i386 on Debian/Ubuntu). Other build hosts have no
++# -m32, so there the helpers are built with the target compiler and run under
++# qemu-user instead, which needs a machine qemu-user can emulate
++# (qemu-usermode in MACHINE_FEATURES).
++LUAJIT_HOST_QEMU = "${@'1' if d.getVar('SITEINFO_BITS') == '32' and d.getVar('BUILD_ARCH') not in ('x86_64', 'i686') else ''}"
++LUAJIT_HOST_QEMU:class-native = ""
++
++BUILD_CC_ARCH:append = "${@' -m32' if d.getVar('SITEINFO_BITS') == '32' and not d.getVar('LUAJIT_HOST_QEMU') else ''}"
++DEPENDS:append = "${@' qemu-native' if d.getVar('LUAJIT_HOST_QEMU') else ''}"
++
++LUAJIT_HOST_OEMAKE = "'HOST_CC=${BUILD_CC}' 'HOST_CFLAGS=${BUILD_CFLAGS}'"
++LUAJIT_HOST_OEMAKE_QEMU = "\
++    'HOST_CC=${CC}' 'HOST_CFLAGS=${CFLAGS}' 'HOST_LDFLAGS=${LDFLAGS}' \
++    'MINILUA_X=${WORKDIR}/luajit-qemuwrapper host/minilua' \
++    'BUILDVM_X=${WORKDIR}/luajit-qemuwrapper host/buildvm' \
++"
+ 
+ # The lua makefiles expect the TARGET_SYS to be from uname -s
+ # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
+@@ -48,8 +61,7 @@ EXTRA_OEMAKE = "\
+     'TARGET_CFLAGS=${CFLAGS}' \
+     'TARGET_LDFLAGS=${LDFLAGS}' \
+     'TARGET_SHLDFLAGS=${LDFLAGS}' \
+-    'HOST_CC=${BUILD_CC}' \
+-    'HOST_CFLAGS=${BUILD_CFLAGS}' \
++    ${@d.getVar('LUAJIT_HOST_OEMAKE_QEMU') if d.getVar('LUAJIT_HOST_QEMU') else d.getVar('LUAJIT_HOST_OEMAKE')} \
+     \
+     'PREFIX=${prefix}' \
+     'MULTILIB=${baselib}' \
+@@ -57,6 +69,13 @@ EXTRA_OEMAKE = "\
+ "
+ 
+ do_compile () {
++    if [ -n "${LUAJIT_HOST_QEMU}" ]; then
++        cat > ${WORKDIR}/luajit-qemuwrapper <<EOF
++#!/bin/sh
++${@qemu_wrapper_cmdline(d, '${STAGING_DIR_HOST}', ['${STAGING_DIR_HOST}${libdir}', '${STAGING_DIR_HOST}${base_libdir}'])} "\$@"
++EOF
++        chmod +x ${WORKDIR}/luajit-qemuwrapper
++    fi
+     oe_runmake
+ }
+ 
 
