@@ -1,113 +1,170 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6643BCA5FFF
-	for <webhook@archiver.kernel.org>; Tue,  6 Oct 2026 08:36:08 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.40822.1791275763199583551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFED9CA5FED
+	for <webhook@archiver.kernel.org>; Tue,  6 Oct 2026 09:08:28 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.41270.1791277707337384352
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Oct 2026 01:36:03 -0700
+ Tue, 06 Oct 2026 02:08:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=DKFteyMu;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48afcfc4bf5so2103242f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 01:36:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lxpGx+Ub;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-8ad549a2119so3598277b3.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 02:08:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791277706; cv=none;
+        d=google.com; s=arc-20260327;
+        b=SihNJ1hcnD9Rx1eh6c8/ea9MWEiz6GVUnr+BSRlIapJBV/CqIqpP+x9jbFjF1qBcYj
+         o96GYXbbQwqdF8Cc4p0fcNvMTP5wx4Y4lGmwHSri1GyUCCol86u38NSv0jpXxEGS2nmy
+         k0tiu0fg78Exl7nFXQdpmTi6H22QRKjV0g4cIAJBGubnXxTkf/cE8/naj01jLPQ4x9A5
+         Jgx/wZkiDrRoQ7qss21kmKJwx0lklC/lOm0XRH0koYsTn6wP4b+YFu32aQGmNZNJl66F
+         xjR5GPIxv7iLZLdUuxKcNl4V//wCqHLOAZTZDv+EqDJpecTsx/ETCUSUWAZz0MzseR7G
+         qmZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=/59Me9bIAWUdvjEDRBlDaUnCM2hSieZOu1/CpFiFMxE=;
+        fh=6hcUKr3duktBY3UgoTWb3oMgRC8h/CdRJUPQi4zxMzQ=;
+        b=BOtd4C7HePKvJOXM89/JL3RSLnQMr21+S/qOH0v3FRmO/MVVvVHaysrz+GOodw6SIT
+         qMK2SjW1IydDT/4zgqNWgJxtm5M+yEdB1+rPOX6Y+3AqLBcoxv52SA/aL+ThmG5pO+oT
+         cF38hFFsImPN4C9sxC6frVup2s3iYo4A3LvR+hoHtoAHcBmRykcVCzi0Id26gjoHVZ9W
+         iMie1d5sYVlb8jvMgsvw5ZqNeZ3rLXLFyH9vCXPurkJ12H6HvR8T6qLZDWEcbV7/Qxc5
+         QX3wo32Ut/yBsy44A+t8SXqbMumdT0oVUCd6YuLkLDbfuiIyUqBZ9cXeUY0d6PjWcBZd
+         XPWA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791275761; x=1791880561; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uPBBva8d2rM7G4EEepVlE4uZ4JQqY8qypSuvAfikikM=;
-        b=DKFteyMuY1SUNAF1ZDNDMm7EAeg8l2YSq8rn+JYbTCScK1ogvOPOKlBDGQlYAI5nr6
-         uoaczLJgKTqy7gcgMKMqf4YGoRhGBwFvvrhmUDGDPaFkdFEDmJXTEIGZSveLqCnjXqL0
-         6LoBbjN5R1DFEHRs7eQnstSudOn1+1RCdHVWOvNUtq+uYRJH3YyAG86L/y6aDtBt4E10
-         3ysCXVO0tw4EEvTXatHnxV62rmn+oJF8qFTR38z7ojKy5Zxukqr2s/GEaTG+SB+eOtEz
-         TjgNqBf8ezeLhbkf5zMYe7SCN6MObLqR5Xs1q2DerO3ABemW0jkvlnGC6No90GF9h1Lp
-         0gjw==
+        d=gmail.com; s=20251104; t=1791277706; x=1791882506; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/59Me9bIAWUdvjEDRBlDaUnCM2hSieZOu1/CpFiFMxE=;
+        b=lxpGx+UbqIeiWo8fohelBIOrCbalNN3DMIfI2ntl+FcwsTOmbTIhhfexZ6HqHm/ZUh
+         wxs1dfRdPhuSDGeaKrVAWSfxETGEe7pyUbOPzjEfYgNPp5VpZLsbrkOnsRbLQKnrbqMP
+         Mh1/eHs/y/qq6cBuESv8k38Jmh4R5yCgrq3gB5XHq06kGK6HiW3Pg2sSKa9EUf+0TOwl
+         6Lvyf0U70KiN4pRGOGQM24S8AAv30DINQopMF7R9e83GMagEJaottj6dQEYaseZjMSap
+         pFU05aUQgmub/gmdCJCeVGx9Sgo821mqGdwxNjNXfi++xBYCDyD3aeODs/6GSDop28cu
+         ozig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791275761; x=1791880561;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=uPBBva8d2rM7G4EEepVlE4uZ4JQqY8qypSuvAfikikM=;
-        b=nkpO18cwxM0J9hyVS/TMDEPl2nnpkYQNxb8CZbbORXIFgat/tb6fsNQmooipZ13PEo
-         aD4hhXo36XzjzhYkNwu0ayFa+6kOIzoQMso3Y0xbj3WELpkIIzJkxFyJHL+Z4C9b5gs6
-         5Zk5zo2zuf89bFpvJntGVXM6uvZmcYboa8Yo6lKXZfbZRvUJ+2EZobfWqu10U8XQ5gnG
-         hjvyaORgKsvhCQ1GBfDxFRYF0R0F45MO01WDsqs88xIdAACV03aySKTM6b30TVczvp4U
-         q2XYkChOXsBQVyBpi/1L8DZWijZoeCJi7bPK3ngRqZqlOJLMnQAAMEga+PYKO8snbQdK
-         PUiA==
-X-Gm-Message-State: AFq9FYKUS2GC0g7QxWThMLTnOyzmV9b8iS+y8dM1FpRJQiKAq0n3iMcg
-	OZBXfYWlkJmx0SxuDtfwf3EfhZFJxYFCeUHL8lw3dm4obVL7vFcdO7YpETMLuDGr
-X-Gm-Gg: AYBFou0csLDtimZhHidnox+j/TjCPdH0nYbkvdNUCl9k+om3/Qg/Jt4t1kd2Ha7LOK5
-	fsxZnNCQqVmMwq1k2iXhVypA0pwJtSG+anFwrMsv4VyzHmgJOsp46H1RHYG3y0iv01o95GjLNDh
-	9GiUUQkmNPeLb1LmlULERmO5aDQ0s3sfEEvJSBeCgi+qXI8jT7okp2ji7poVYgEi8q3TGkwJMqy
-	Vrp8mDnL/dnep2aU64tfe0hs1kbVbl1GA3g4qLO13pDButiZ3cKJLzQSFNFhWIVJZxcYljus7E0
-	eKleyygafRoXPmum0A56VqfDnApZZwWh+mjSGgyBh8MOKLE0KqvWWiJ3y+E+Fg4GWzmbXH25nOK
-	hRhXEZ9VPRsRQfBdHYLv44FJoOA0rkesBAEEUiyPcu8QOL+xOLRWitq+1mn9LmGWklcUmN7W4OD
-	9S4d49VdxVpRLx+Jlg6o/cwjUb5Sxj12FDrylOy5mBRYK/s8/mOzZ9xeXJ6oJCCEd3LTOSWdboE
-	aU3u9oMh0wUzSNLbXnVSkSaSekJRMaFwdZWd8lqnBR1w7EGGYAhjGMk
-X-Received: by 2002:a5d:5f95:0:b0:48b:a4b:5a27 with SMTP id ffacd0b85a97d-48c6d1b3184mr1228553f8f.49.1791275761119;
-        Tue, 06 Oct 2026 01:36:01 -0700 (PDT)
-Received: from localhost ([109.238.212.54])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c69be6b12sm3514552f8f.45.2026.10.06.01.36.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 01:36:00 -0700 (PDT)
-From: martin.jansa@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-python][PATCH] python3-google-api-core, python3-googleapis-common-protos: set PYPI_PACKAGE_SDIST
-Date: Tue,  6 Oct 2026 10:35:54 +0200
-Message-ID: <20261006083554.2712998-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.56.0
+        d=1e100.net; s=20260707; t=1791277706; x=1791882506;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=/59Me9bIAWUdvjEDRBlDaUnCM2hSieZOu1/CpFiFMxE=;
+        b=xeThV/T6jJHvDbA1eb6AqShFDQbDLbq7c5dJtQXbYamslFAfL1zf/MqJxbkkw3bKD2
+         bpkRtLKpacnhFSv+MW+CPr040U20zhvo2RcE4s6h1e2h4YZXHZJJzqlF6H1nwgMMVyPD
+         XLAv5X4pQ17DG8u2mmi/ODdaF8K/xXVKWG9LdUS9MKWR2GzCywAxhlKGc8iW+ywTz5hE
+         lnW7N+srtfEETRiazp+/0urWzZ/9WMoCVaWJbLHF/xHxOYjzsyNebkRIXJwwfipaIk+V
+         k6IsYwVt5QK8dmF/kQ/3C3r+xAEBnWaPBB5F7xaRebRnIN+3TjHp+S9+zHMKiTOWmPd3
+         Dt3w==
+X-Gm-Message-State: AFq9FYLFNK4ppfo/hIESRKzbXMaQR6PPfLTVRuBfWORMpyfCCM7Z9fzk
+	bz2yGZmHbdxcPuN56qySolBhLX1BmU1FmtVfBqNShEDx3RFoD5QAN53c5HdT9Gpu2NFoYCF6yMl
+	Sr16ET6Q//oMDBVcTsyraMqxBDo7geQE=
+X-Gm-Gg: AYBFou0+h2depK1OUNq94iVygRuHJGOfFfZ8uyfweTpkkX5ERU+ApaLd/HWNf5PIpP3
+	7siZdxmffouSiMAi+xrBXaUM7YdcqhmrLjrvjYgez63X3QJjZYABjlFoNlLO0vsZM98SbVoE++o
+	atjomIbmz7M9LDg673vLSSmFA2OcXisVtXZvRQIfNy/PVegSa3YKdIgSlGDdmyn3PgDIAC0h2cA
+	WxcDHchCUwOxuxM3I8pKk9P7NyvumphGjmix75LbDvsxKKZGX60OFtOCsc2XhcnDjZO6NUCGytu
+	5preuUgSHxzDOb4VW9tvAypzt74jZ4NJWxg9sgR/lthtW4axxfk8uij44n1dQ43Pybb6aA39+QV
+	OAYItR4Rk3GYT6gdsvKf9ZjrE/bAWs4v+34rWdkxOAde+VKlvfN8XvVepps44q0caOklCS3GZpA
+	AFKg4tHxBQU62YwRoIDZBuSheH10WwDgFnUwGPZHZcASsZcTC6BH5SA6K7Hl+LesoMh4jl2yD9Q
+	kf+8tYC5J5PuiTCmYoLAepocILdSTtkvLXQNGJnKD9xP1UCyqU22xXfVFVhKE+iwGzFfZ+2aXud
+	4jqi36o=
+X-Received: by 2002:a05:690c:389:b0:882:309e:fcaa with SMTP id
+ 00721157ae682-8b04f397870mr2217217b3.15.1791277706133; Tue, 06 Oct 2026
+ 02:08:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260925092311.764729-1-f_l_k@t-online.de> <CAMKF1sosmYaYwcaxnhPVECKKXTJfirtO3SBSqD2DBnMJX0MKEw@mail.gmail.com>
+ <GWKYLT.WM6P22M9DSDF@t-online>
+In-Reply-To: <GWKYLT.WM6P22M9DSDF@t-online>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 6 Oct 2026 11:07:59 +0200
+X-Gm-Features: AclHuK_OG7T79vbodW95Ck337GmmPDk6qdP3s6jG7G1eyXTGtwWiQc7437gkiNQ
+Message-ID: <CAMKF1srjVaQpwZY14rLM7RT05xKsPzBGyZJe18tMHq5mTARYuw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCHv2] ibus: upgrade 1.5.26 -> 1.5.34
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005e46c5065d285766"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 08:36:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130630
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 09:08:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130631
 
-From: Martin Jansa <martin.jansa@gmail.com>
+--0000000000005e46c5065d285766
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Avoid replace("-", "_") from:
-https://git.openembedded.org/openembedded-core/commit/?id=98049bf86b615b10c43b3ceb9dbc73580cb76952
+This breaks further on machines which have gcc 13 or older e.g. ubuntu
+24.04 where compiler does not support -std=3Dgnu23, can you investigate a b=
+it
+more into it?
 
-Otherwise do_fetch will fail due to different source archive and expected WORKDIR won't match.
+On Sat, Sep 26, 2026 at 8:34=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../recipes-devtools/python/python3-google-api-core_2.19.1.bb | 4 ++++
- .../python/python3-googleapis-common-protos_1.63.2.bb         | 4 ++++
- 2 files changed, 8 insertions(+)
+> On Fri, Sep 25 2026 at 13:33:11 -07:00:00, Khem Raj <raj.khem@gmail.com>
+> wrote:
+>
+> t stat
+> '/home/ubuntu/yoe/build/tmp/work/x86_64-linux/ibus-native/1.5.34/recipe-s=
+ysroot-
+>
+>
+> Yes. I sent out a message with this update. A change to oe-core would be
+> needed.
+> I already sent it to the oe-core mailinglist:
+>
+> diff --git a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
+> b/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
+> index c06832e35e..db176efede 100644
+> --- a/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
+> +++ b/meta/recipes-graphics/xorg-lib/libx11_1.8.13.bb
+> @@ -39,4 +39,6 @@ FILES:${PN} +=3D "${datadir}/X11/XKeysymDB
+> ${datadir}/X11/XErrorDB ${datadir}/X11/
+>  FILES:${PN}-xcb +=3D "${libdir}/libX11-xcb.so.*"
+>  FILES:${PN}-locale +=3D "${datadir}/X11/locale ${libdir}/X11/locale"
+>
+> +SYSROOT_DIRS_IGNORE:remove:class-native =3D "${datadir}/X11/locale"
+> +
+>  BBCLASSEXTEND =3D "native nativesdk"
+>
+>
+>
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.19.1.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.19.1.bb
-index 84b384e8ca..d4e0a8e5ad 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-core_2.19.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.19.1.bb
-@@ -7,6 +7,10 @@ inherit pypi setuptools3
- 
- SRC_URI[sha256sum] = "f4695f1e3650b316a795108a76a1c416e6afb036199d1c1f1f110916df479ffd"
- 
-+# Avoid replace("-", "_") from:
-+# https://git.openembedded.org/openembedded-core/commit/?id=98049bf86b615b10c43b3ceb9dbc73580cb76952
-+PYPI_PACKAGE_SDIST = "${PYPI_PACKAGE}"
-+
- RDEPENDS:${PN} += "\
-     python3-asyncio \
-     python3-datetime \
-diff --git a/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.63.2.bb b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.63.2.bb
-index 5539d19f68..5ab24440f9 100644
---- a/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.63.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.63.2.bb
-@@ -7,6 +7,10 @@ inherit pypi setuptools3
- 
- SRC_URI[sha256sum] = "27c5abdffc4911f28101e635de1533fb4cfd2c37fbaa9174587c799fac90aa87"
- 
-+# Avoid replace("-", "_") from:
-+# https://git.openembedded.org/openembedded-core/commit/?id=98049bf86b615b10c43b3ceb9dbc73580cb76952
-+PYPI_PACKAGE_SDIST = "${PYPI_PACKAGE}"
-+
- RDEPENDS:${PN} += "\
-     python3-grpcio \
-     python3-protobuf \
+--0000000000005e46c5065d285766
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This breaks further on machines which have gcc 13 or older=
+ e.g. ubuntu 24.04 where compiler does not support -std=3Dgnu23, can you in=
+vestigate a bit more into it?</div><br><div class=3D"gmail_quote gmail_quot=
+e_container"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Sep 26, 2026 at =
+8:34=E2=80=AFAM Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
+t-online.de</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div id=3D"m_-5996555540791687141convey-body" dir=3D"auto">On Fr=
+i, Sep 25 2026 at 13:33:11 -07:00:00, Khem Raj &lt;<a href=3D"mailto:raj.kh=
+em@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br><block=
+quote type=3D"cite">t stat &#39;/home/ubuntu/yoe/build/tmp/work/x86_64-linu=
+x/ibus-native/1.5.34/recipe-sysroot-</blockquote><div><br></div><div>Yes. I=
+ sent out a message with this update. A change to oe-core would be needed.<=
+/div><div>I already sent it to the oe-core mailinglist:</div><div><br></div=
+><div><div>diff --git a/meta/recipes-graphics/xorg-lib/<a href=3D"http://li=
+bx11_1.8.13.bb" target=3D"_blank">libx11_1.8.13.bb</a> b/meta/recipes-graph=
+ics/xorg-lib/<a href=3D"http://libx11_1.8.13.bb" target=3D"_blank">libx11_1=
+.8.13.bb</a></div><div>index c06832e35e..db176efede 100644</div><div>--- a/=
+meta/recipes-graphics/xorg-lib/<a href=3D"http://libx11_1.8.13.bb" target=
+=3D"_blank">libx11_1.8.13.bb</a></div><div>+++ b/meta/recipes-graphics/xorg=
+-lib/<a href=3D"http://libx11_1.8.13.bb" target=3D"_blank">libx11_1.8.13.bb=
+</a></div><div>@@ -39,4 +39,6 @@ FILES:${PN} +=3D &quot;${datadir}/X11/XKey=
+symDB ${datadir}/X11/XErrorDB ${datadir}/X11/</div><div>=C2=A0FILES:${PN}-x=
+cb +=3D &quot;${libdir}/libX11-xcb.so.*&quot;</div><div>=C2=A0FILES:${PN}-l=
+ocale +=3D &quot;${datadir}/X11/locale ${libdir}/X11/locale&quot;</div><div=
+>=C2=A0</div><div>+SYSROOT_DIRS_IGNORE:remove:class-native =3D &quot;${data=
+dir}/X11/locale&quot;</div><div>+</div><div>=C2=A0BBCLASSEXTEND =3D &quot;n=
+ative nativesdk&quot;</div><div><br></div></div><div><br></div></div></bloc=
+kquote></div>
+
+--0000000000005e46c5065d285766--
 
