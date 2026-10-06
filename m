@@ -2,47 +2,47 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3E7ECA5FFC
-	for <webhook@archiver.kernel.org>; Tue,  6 Oct 2026 10:45:45 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.42521.1791283541536420370
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3C55CA5FFC
+	for <webhook@archiver.kernel.org>; Tue,  6 Oct 2026 10:48:05 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.42557.1791283676346739904
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Oct 2026 03:45:42 -0700
+ Tue, 06 Oct 2026 03:47:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=N3p1qyEU;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout07.t-online.de (Postfix) with SMTP id 30FCAE66A
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Oct 2026 12:45:39 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.33.153]) by fwd77.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=bBd2H7Uc;
+ spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout03.t-online.de (Postfix) with SMTP id 62061E80D
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Oct 2026 12:47:54 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.33.153]) by fwd72.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xE2fv-40JA800; Tue, 6 Oct 2026 12:45:35 +0200
+	esmtp id 1xE2i9-48VKVc0; Tue, 6 Oct 2026 12:47:53 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC][meta-gnome][PATCH] ibus: upgrade 1.5.34 -> 1.5.35
-Date: Tue,  6 Oct 2026 12:45:25 +0200
-Message-ID: <20261006104530.3298655-1-f_l_k@t-online.de>
+Subject: [RFC][meta-gnome][PATCHv2] ibus: upgrade 1.5.34 -> 1.5.35
+Date: Tue,  6 Oct 2026 12:47:46 +0200
+Message-ID: <20261006104749.3300141-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1791283535-BEFFA954-67FE4E6A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 293ee71b-2576-4d77-ab8e-7f416f22522d
+X-TOI-EXPURGATEID: 150726::1791283673-E9FF8986-432849CC/0/0 CLEAN NORMAL
+X-TOI-MSGID: afe61389-2b90-4961-8b07-89da920530b1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1791283539; i=f_l_k@t-online.de;
-	bh=BdiCUfRxQr2jgF8g4W7dV8XmEGb5CwMZ+Vzzj0QfZOI=;
+	s=20260216; t=1791283674; i=f_l_k@t-online.de;
+	bh=Ou3QmIuaeky28axr6DzgM24HFp8QDwImN0t4jApDMzc=;
 	h=From:To:Subject:Date;
-	b=N3p1qyEUzeoXOtuIRByCUSQkx3YuIbt2ybUi4uPSXkPw34PNsrQrGz1to3Hph0VU8
-	 YOJE0HINHBnN2vM3+HNZ/anvN2XbmYhQsKnTu7P7wDjlNZqfOO8ZBFAiuaeGMDq/L+
-	 qMwzRlzAnG3B4+2rFElmJN0GQ4Jvv7SBomrvQ4I9pmSJRBiTuwoVEGRDkEfsSFXED4
-	 Q66RrZjL3Z35O8ygytut7YpVA7HspDqav89lGcG/qANUljqavOosN45xWvjKd4R5XP
-	 aVIYVTyJTCcRGaPeYD2lTksJ7BGKrcOVK+mm9lyl267CXBy+b2NtFYgoE8IDWE+7rx
-	 p2vfoclNy8wdg==
+	b=bBd2H7UcpmU3Se05+n4yh+XT4plO1KXoq631FZ9JozbeANLVSAp4QZLyQFrySxn+N
+	 ooSmOyHDYNIe0n1FuVy6WGXgLdHoulkiUKSLWJ8XOYM48H3A/7SjTUfZfcdgH7/pmk
+	 NqKVc8w/PH/Gd7LEhGTJEmMgX/Qv4tQpbC08Pm2+dM/6BlUf7ygP5UlTbs+b4Kuf8P
+	 01MLx4gijlry/upjRMKcGRfn4UNuOo05dCadLD56lJY5gCAk41EKBQkL4oFSI1yBgJ
+	 Iq2BWQz7syoaHFSF6Giv/7s5b1UGKG6wA9pZ6el7ilRK4i79IaSBsH7FBgMUvyTffX
+	 vJ30inE6l9RKA==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 10:45:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130635
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 10:48:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130636
 
 1.5.35 is not released yet; this is built from the 1.5.35-rc1 tag and
 will be resent against the release tag.
@@ -68,6 +68,7 @@ at ${bindir}/python3.
 Tested by building ibus for x86-64.
 
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  ...start-dbus-we-do-not-have-dbus-lauch.patch |  10 +-
  ...ax_prog_cc_for_build.m4-to-serial-26.patch | 178 ------------------
