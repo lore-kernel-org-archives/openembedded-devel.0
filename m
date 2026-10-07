@@ -2,246 +2,183 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C14B4CA5FED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0346CA5FFF
 	for <webhook@archiver.kernel.org>; Wed,  7 Oct 2026 02:16:52 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4595.1791339409448900545
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4594.1791339407147751275
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Oct 2026 19:16:49 -0700
+ Tue, 06 Oct 2026 19:16:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=M7L0OT8W;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-398a4dcf289so1017426a91.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 19:16:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jpXwkj1A;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-3a4c47bb6e3so738430a91.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2026 19:16:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791339409; x=1791944209; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HrhURTwkf/vjU3XSS+4oUzqkCQTwiM8RCxMDDQHaY7Q=;
-        b=M7L0OT8Wetp+tcaBSnq0nNqaOWPcOR9vVxKKN3JnAkuT5PUzyGJdtGSHi23wLSkGi5
-         fQydfyq6gZB8dJSMALjkWgIVaR6VBf4RvQvRm2tnlG1x7A6xpSaVYCtve1pLFXXyjkCS
-         SfopprRzvLizELDnqCD5KTDgaBl7QyMtV6G/YSo6XUhUyjGajv3cWCYepvb52/ILEx1B
-         2XJWGId3YuYTOKDft0ZpeKIUY2HUaN1Tr3/6OQay7FUm5vSmvo2BYwsmq8hme6NCdayF
-         bUYZtq7QEDfha6mL3KNmd37Pf63Kx1NUKiLgfKF9d8n86smjRv1DKHLEDLPuna7Aqc5W
-         Oi3g==
+        d=gmail.com; s=20251104; t=1791339406; x=1791944206; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=a9augatm8jBtZ/0w9y8PS16FY9Lrhy+5oKbSTOlefM8=;
+        b=jpXwkj1A+MqqorXS0LieeTwcYc/OUiDV/LuyBgGeQ4EipBKXuyJYkc3xwFjjeHx8np
+         XUY0JeGtVMYvV7lvxB+gZHU9yUp6dvv38O8JrAcH9H1fs6LoxPthr7uhGVgzWYxPLEeh
+         qnOeNmwEWS3J5ohHOb/lfdNYL8/ebbp6Rbm/HxBluXY2xFjLk3XllgH79OVIGSw3ESw8
+         Rr3wTWR1ckIomrSyR81AvJwdOeJqdEB/g4phrugKv46z47VF5y0PKI+IZ4DvjHzKvACy
+         LWr1IbvdZssAWQJRc9vauoId7Be/75MErt7EvEgHuSl5RpwNigFiTNGCfIq5HA+TxlgO
+         4fKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791339409; x=1791944209;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HrhURTwkf/vjU3XSS+4oUzqkCQTwiM8RCxMDDQHaY7Q=;
-        b=PwkOHY15GY3D1aW1Ky68fK17GEM+mq2e9VmrmtYzbXxv337DUKOqvkBXLzxIySnTLR
-         p0hI5ar6iEJcKgRu2joCqlgb8Lx7LuqIq/x47Br4rMUQdDdOxCH+m7/JKmik8o70wUjb
-         adRsUXU6LX4rZiYzjbgErM34vrV/wFCryO8WryLWvHwEVf2HTsw4a9nmDdK8o+YDsJil
-         6NUlaxAtNI8VM1A7Ya3Sj5ySSyoEHPzBMkoy2EjgAbe9xgOO8TKx0XxqcvoL+Zu4Rl32
-         DnSiTooG7eddjiFVZ51yQXolLW9Nyo4sPUc5g02Vc5N7DCNZ9fVybtxk2e5uGWBWxYmL
-         +uVQ==
-X-Gm-Message-State: AFq9FYJezzrwiiG8rk9/ZTgDR+Fvmscusb8dxwVOPaqdAHXFjjpaWwtW
-	HMhukhZJm8y3Js7NSWsNqTSU9SYSeJbQki1tFDfV5m8otj1O39G2WyAmJUp+MlQg
-X-Gm-Gg: AYBFou2P9PRO5mw/h78QUtXy/nIsB3dV3ixkKdSpaKSkEWXzBZuZQ/FS0BNkRUt9jSf
-	cahHz/cwRGnuaEZDPMndh6wIXSAHJspwr+EFwwcnsLU4ibXnx4rGADTunoFF8B2TAZjFkDhDstP
-	+9y/C9kqqS1vWntc8ycj5khF/CAnLKxOjCSSGDWhS2SJBKc9ZG6c7ABwzIHbznvllihpYYth9Tp
-	lUYMnadSWPq2xQFJ8PzhndPxW/FAiNoF4zAtac/wLZq4d+140wNtZk3xWg2LK1LEpk3QRzaxwu/
-	AgQWsZifjph8bQL7FmxOKAhy5NrYEKrSfeP0TdaG3ObXhfEiZ6EacByLHO92/UNV6QXUd3rssGm
-	vS+RfXTAniPadBwJOY16lhEhaht9xrwZQ1lv+LhZ1dFhJnZGFtBY9gzX4wJX8Yv9obj64xPBUQX
-	QZWQltcYSStQNWR+8LX5aCWUvlZ9GMzE//qepjsIxNkzLWSf7SUeN3ZcF2TZN7gKOSSQgOxsqQ7
-	IBKDbz19BRDSZbQxX8BHtI=
-X-Received: by 2002:a17:90b:134d:b0:3a0:ace4:d2b4 with SMTP id 98e67ed59e1d1-3a8a0845143mr594150a91.23.1791339408691;
-        Tue, 06 Oct 2026 19:16:48 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791339406; x=1791944206;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=a9augatm8jBtZ/0w9y8PS16FY9Lrhy+5oKbSTOlefM8=;
+        b=mpTGebMavtYIGDHjKnYwKaap0LnoxqcHZ3DPPgA+AF8/CH19+FohXNtI4Vw0tWPSm0
+         0/kpXU4ckZ7m/nNLr4guucqu7IevmaPhDykxgXGS3/kavLuVmoirMdDLms4ouPu2X7Sq
+         TxFuloCzvDP/OTsbszLFgJWjqgVo4X7+sd6I9e8chJQWO0h25a9fZRxPjPZpByRYnDBH
+         tO9/ho/9YL8Olhqp1nQANak6kdZ0+i++Obj4KzM5WZ65qX7EKeYKf3Z6O3unwvKq9QXF
+         W/OeefYSxtavX5iJGTOl9Q/jRp1+nb4mZjLO4QK2DRiNTkMMTGrqVrYCyYGeTXSyFm33
+         Jrfw==
+X-Gm-Message-State: AFq9FYKXol3yOfjJtpD68GNVPmq4sK1tTns/dEVUsRtL1aYH2Cd70i/g
+	81LVh7nClPqJCqIli4SecjLHBnlq0dcjmuC0iEyNmlYVp8OIIdtVO1LzoEDp5Qfl
+X-Gm-Gg: AYBFou2DA/p1FvG2PpoLT4KNhO16Y/aEII4lj4XrF2C3NlbP66BF5YSTUn4LLputrAG
+	XeENihhIOIOfGrHq0aFNp+DTkJyheYFe5TMTAYwGArcvb1J8ahodR2TbNkYHijmLgufw+7oZkOw
+	I5k0r1MBHmuuM+hdl2CKVeTjwiK0ZIEy4HXqu2PuUicvMOFOCc1RxMGyQgPmSCDj6WITd9g847U
+	Sfox27JWhwerQ/+OWHHaHMoFbsR0cmuKRBc5HqtYeqpkJu37l5SNeXI8yl5VRTMG5f6Q7gJwP6Q
+	TZFRnsKkLOYFT3Ap/5XUsHCo17I5lzb3gV/G/NcIm1mKyJ8JQpRhsjym5KJffSu9xqI+JzGnwK/
+	ErgOuvUPUjyaq+HB8PMS30B+rdvrM1wHSW7iCW9X29Cm3f6ZTPnq0I/7e184pvSANpbIQuu93W+
+	LF83TOx26dY7HUebWzKL5DwMhsiT38gc1bTSCWvgOS5nsaT+KUEawrWH+fJSck8+sfgnzYqBY4x
+	LqurTxfldFBcihbVvdNuvhk4UZf32Z9dg==
+X-Received: by 2002:a17:90b:2ccc:b0:3a6:f1d2:57f3 with SMTP id 98e67ed59e1d1-3a8a1ca4901mr703703a91.58.1791339406272;
+        Tue, 06 Oct 2026 19:16:46 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8543ab76bsm7541636a91.13.2026.10.06.19.16.46
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8543ab76bsm7541636a91.13.2026.10.06.19.16.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 19:16:48 -0700 (PDT)
+        Tue, 06 Oct 2026 19:16:45 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH v2 2/2] rabbitmq-c: patch CVE-2026-44236
-Date: Wed,  7 Oct 2026 15:16:30 +1300
-Message-ID: <20261007021630.3024955-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH v2 1/2] rabbitmq-c: patch CVE-2026-44235
+Date: Wed,  7 Oct 2026 15:16:29 +1300
+Message-ID: <20261007021630.3024955-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261007021630.3024955-1-ankur.tyagi85@gmail.com>
-References: <20261007021630.3024955-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 02:16:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130641
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130640
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-44236
+https://nvd.nist.gov/vuln/detail/cve-2026-44235
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../rabbitmq-c/CVE-2026-44236.patch           | 145 ++++++++++++++++++
- .../rabbitmq-c/rabbitmq-c_0.15.0.bb           |   1 +
- 2 files changed, 146 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44236.patch
+ .../rabbitmq-c/CVE-2026-44235.patch           | 85 +++++++++++++++++++
+ .../rabbitmq-c/rabbitmq-c_0.15.0.bb           |  1 +
+ 2 files changed, 86 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44235.patch
 
-diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44236.patch b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44236.patch
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44235.patch b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44235.patch
 new file mode 100644
-index 0000000000..3c8a5a71a3
+index 0000000000..c663d24eec
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44236.patch
-@@ -0,0 +1,145 @@
-+From 17f19124ba26f9c924f9ab53bca975cb8673f862 Mon Sep 17 00:00:00 2001
-+From: Kevin Valerio <kvalerio@protonmail.com>
-+Date: Tue, 28 Apr 2026 13:45:22 +0200
-+Subject: [PATCH] fix(connection): enforce minimum frame_max
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c/CVE-2026-44235.patch
+@@ -0,0 +1,85 @@
++From 52f00ef57e55c783c2c436590296d9ff986b65d0 Mon Sep 17 00:00:00 2001
++From: Claude <noreply@anthropic.com>
++Date: Tue, 28 Apr 2026 00:30:47 +0000
++Subject: [PATCH] amqp_connection: reject undersized frames in
++ amqp_handle_input
 +
-+(cherry picked from commit 4777d0b5c58cb02966a04a85832436bd66ed5d1f)
++A malicious AMQP server (or active network attacker on an unencrypted
++connection) can send an AMQP frame whose stated frame body is shorter
++than the per-frame-type header it claims to carry. amqp_handle_input()
++then computed encoded.len as
 +
-+CVE: CVE-2026-44236
-+Upstream-Status: Backport [https://github.com/alanxz/rabbitmq-c/commit/4777d0b5c58cb02966a04a85832436bd66ed5d1f]
++  state->target_size - HEADER_SIZE - <fixed_header_bytes> - FOOTER_SIZE
++
++with no lower-bound check on target_size. Because encoded.len is a
++size_t, the subtraction wrapped to a value near SIZE_MAX. The bogus
++length was passed to amqp_decode_method() / amqp_decode_properties()
++and through to the table decoder, whose internal bounds checks could
++no longer constrain the parser. The result was an out-of-bounds read
++and process crash on the client side, reachable during amqp_login.
++
++Validate target_size against the minimum required for each frame type
++(METHOD: HEADER_SIZE+4+FOOTER_SIZE, HEADER: HEADER_SIZE+12+FOOTER_SIZE,
++BODY: HEADER_SIZE+FOOTER_SIZE) and return AMQP_STATUS_BAD_AMQP_DATA
++when the frame is too small, before computing encoded.len.
++
++Add the verified PoC bytes as a regression seed for the existing
++fuzz_server harness.
++
++Refs: GHSA-9mmv-r8g3-qp46
++(cherry picked from commit 1d3afbb056fee5cc9ea05680bf32288715d0d802)
++
++CVE: CVE-2026-44235
++Upstream-Status: Backport [https://github.com/alanxz/rabbitmq-c/commit/1d3afbb056fee5cc9ea05680bf32288715d0d802]
++
++Dropped fuzz input for the regression test during backport.
++
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ README.md                     |  6 ++++-
-+ librabbitmq/amqp_connection.c |  4 +++
-+ librabbitmq/amqp_socket.c     |  1 +
-+ tests/CMakeLists.txt          |  5 +++-
-+ tests/test_tune_connection.c  | 51 +++++++++++++++++++++++++++++++++++
-+ 5 files changed, 65 insertions(+), 2 deletions(-)
-+ create mode 100644 tests/test_tune_connection.c
++ librabbitmq/amqp_connection.c                 |  19 ++++++++++++++++++
++ 1 file changed, 19 insertions(+)
 +
-+diff --git a/README.md b/README.md
-+index 7c02d52..2682993 100644
-+--- a/README.md
-++++ b/README.md
-+@@ -133,6 +133,10 @@ terminal window:
-+ Please see the `examples` directory for short examples of the use of
-+ the `librabbitmq` library.
-+ 
-++During login, `frame_max` negotiation follows the AMQP minimum frame size.
-++Values below `AMQP_FRAME_MIN_SIZE` are raised before the client sizes its
-++outbound frame buffer or sends `connection.tune-ok`.
-++
-+ ### Threading
-+ 
-+ You cannot share a socket, an `amqp_connection_state_t`, or a channel
-+@@ -177,4 +181,4 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-+-SOFTWARE.
-+\ No newline at end of file
-++SOFTWARE.
 +diff --git a/librabbitmq/amqp_connection.c b/librabbitmq/amqp_connection.c
-+index 4326ef7..f016fc1 100644
++index 56ab8a8..4326ef7 100644
 +--- a/librabbitmq/amqp_connection.c
 ++++ b/librabbitmq/amqp_connection.c
-+@@ -113,6 +113,10 @@ int amqp_tune_connection(amqp_connection_state_t state, int channel_max,
++@@ -320,6 +320,13 @@ int amqp_handle_input(amqp_connection_state_t state, amqp_bytes_t received_data,
 + 
-+   ENFORCE_STATE(state, CONNECTION_STATE_IDLE);
++       switch (decoded_frame->frame_type) {
++         case AMQP_FRAME_METHOD:
+++          /* A METHOD frame body must contain at least the 4-byte method id.
+++           * Reject undersized frames before subtracting from target_size to
+++           * avoid an unsigned underflow that would yield a huge encoded.len
+++           * and cause out-of-bounds reads in amqp_decode_method(). */
+++          if (state->target_size < HEADER_SIZE + 4 + FOOTER_SIZE) {
+++            return AMQP_STATUS_BAD_AMQP_DATA;
+++          }
++           decoded_frame->payload.method.id =
++               amqp_d32(amqp_offset(raw_frame, HEADER_SIZE));
++           encoded.bytes = amqp_offset(raw_frame, HEADER_SIZE + 4);
++@@ -335,6 +342,15 @@ int amqp_handle_input(amqp_connection_state_t state, amqp_bytes_t received_data,
++           break;
 + 
-++  if (frame_max < AMQP_FRAME_MIN_SIZE) {
-++    frame_max = AMQP_FRAME_MIN_SIZE;
-++  }
-++
-+   state->channel_max = channel_max;
-+   state->frame_max = frame_max;
++         case AMQP_FRAME_HEADER:
+++          /* A HEADER frame body must contain at least 12 bytes (class_id,
+++           * weight, body_size). Reject undersized frames before subtracting
+++           * from target_size to avoid an unsigned underflow that would yield
+++           * a huge encoded.len and cause out-of-bounds reads in
+++           * amqp_decode_properties() / the table decoder
+++           * (CVE: GHSA-9mmv-r8g3-qp46). */
+++          if (state->target_size < HEADER_SIZE + 12 + FOOTER_SIZE) {
+++            return AMQP_STATUS_BAD_AMQP_DATA;
+++          }
++           decoded_frame->payload.properties.class_id =
++               amqp_d16(amqp_offset(raw_frame, HEADER_SIZE));
++           /* unused 2-byte weight field goes here */
++@@ -354,6 +370,9 @@ int amqp_handle_input(amqp_connection_state_t state, amqp_bytes_t received_data,
++           break;
 + 
-+diff --git a/librabbitmq/amqp_socket.c b/librabbitmq/amqp_socket.c
-+index 094ceb7..a7206c7 100644
-+--- a/librabbitmq/amqp_socket.c
-++++ b/librabbitmq/amqp_socket.c
-+@@ -1387,6 +1387,7 @@ static amqp_rpc_reply_t amqp_login_inner(amqp_connection_state_t state,
-+   if (res < 0) {
-+     goto error_res;
-+   }
-++  client_frame_max = (uint32_t)amqp_get_frame_max(state);
-+ 
-+   {
-+     amqp_connection_tune_ok_t s;
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index 8c0aee0..624e7f5 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -23,6 +23,10 @@ add_executable(test_status_enum
-+ target_link_libraries(test_status_enum rabbitmq-static)
-+ add_test(status_enum test_status_enum)
-+ 
-++add_executable(test_tune_connection test_tune_connection.c)
-++target_link_libraries(test_tune_connection rabbitmq-static)
-++add_test(tune_connection test_tune_connection)
-++
-+ add_executable(test_basic
-+                test_basic.c)
-+ target_link_libraries(test_basic rabbitmq-static)
-+@@ -40,4 +44,3 @@ add_test(sasl_mechanism test_sasl_mechanism)
-+ add_executable(test_merge_capabilities test_merge_capabilities.c)
-+ target_link_libraries(test_merge_capabilities rabbitmq-static)
-+ add_test(merge_capabilities test_merge_capabilities)
-+-
-+diff --git a/tests/test_tune_connection.c b/tests/test_tune_connection.c
-+new file mode 100644
-+index 0000000..276e18d
-+--- /dev/null
-++++ b/tests/test_tune_connection.c
-+@@ -0,0 +1,51 @@
-++// Copyright 2007 - 2021, Alan Antonuk and the rabbitmq-c contributors.
-++// SPDX-License-Identifier: mit
-++
-++#include "amqp_private.h"
-++#include <rabbitmq-c/amqp.h>
-++#include <rabbitmq-c/framing.h>
-++
-++#include <stdio.h>
-++#include <stdlib.h>
-++
-++static void expect_frame_max(int requested, int expected) {
-++  int res;
-++  amqp_connection_state_t state = amqp_new_connection();
-++
-++  if (state == NULL) {
-++    fprintf(stderr, "amqp_new_connection failed\n");
-++    abort();
-++  }
-++
-++  state->state = CONNECTION_STATE_IDLE;
-++
-++  res = amqp_tune_connection(state, 0, requested, 0);
-++  if (res != AMQP_STATUS_OK) {
-++    fprintf(stderr, "amqp_tune_connection returned %d\n", res);
-++    abort();
-++  }
-++
-++  if (amqp_get_frame_max(state) != expected) {
-++    fprintf(stderr, "expected frame_max %d, got %d\n", expected,
-++            amqp_get_frame_max(state));
-++    abort();
-++  }
-++
-++  if (state->outbound_buffer.len != (size_t)expected) {
-++    fprintf(stderr, "expected outbound buffer length %d, got %zu\n", expected,
-++            state->outbound_buffer.len);
-++    abort();
-++  }
-++
-++  amqp_destroy_connection(state);
-++}
-++
-++int main(void) {
-++  expect_frame_max(0, AMQP_FRAME_MIN_SIZE);
-++  expect_frame_max(1, AMQP_FRAME_MIN_SIZE);
-++  expect_frame_max(AMQP_FRAME_MIN_SIZE - 1, AMQP_FRAME_MIN_SIZE);
-++  expect_frame_max(AMQP_FRAME_MIN_SIZE, AMQP_FRAME_MIN_SIZE);
-++  expect_frame_max(AMQP_DEFAULT_FRAME_SIZE, AMQP_DEFAULT_FRAME_SIZE);
-++
-++  return 0;
-++}
++         case AMQP_FRAME_BODY:
+++          if (state->target_size < HEADER_SIZE + FOOTER_SIZE) {
+++            return AMQP_STATUS_BAD_AMQP_DATA;
+++          }
++           decoded_frame->payload.body_fragment.len =
++               state->target_size - HEADER_SIZE - FOOTER_SIZE;
++           decoded_frame->payload.body_fragment.bytes =
 diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
-index 642e1e443b..f3c2a52fa2 100644
+index 4fd6302f2c..642e1e443b 100644
 --- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
 +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
-@@ -5,6 +5,7 @@ LICENSE = "MIT"
+@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7e12f6e40e662e039e2f02b4893011ec"
+ LICENSE = "MIT"
  
  SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
-            file://CVE-2026-44235.patch \
-+           file://CVE-2026-44236.patch \
++           file://CVE-2026-44235.patch \
  "
  SRCREV = "84b81cd97a1b5515d3d4b304796680da24c666d8"
  
