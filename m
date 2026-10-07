@@ -2,51 +2,49 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3ABDDCA5FFC
-	for <webhook@archiver.kernel.org>; Wed,  7 Oct 2026 14:13:16 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10616.1791382386927085572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A083CA6004
+	for <webhook@archiver.kernel.org>; Wed,  7 Oct 2026 21:03:43 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1900.1791407018838105275
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Oct 2026 07:13:07 -0700
+ Wed, 07 Oct 2026 14:03:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=IiIC8huk;
- spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout04.t-online.de (Postfix) with SMTP id BBD6D99D
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Oct 2026 16:12:40 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.167.22]) by fwd80.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=Prs444BV;
+ spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd94.aul.t-online.de (fwd94.aul.t-online.de [10.223.144.120])
+	by mailout11.t-online.de (Postfix) with SMTP id 8276F1C84C
+	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Oct 2026 23:03:36 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.167.22]) by fwd94.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xESNs-4FG7zl0; Wed, 7 Oct 2026 16:12:40 +0200
+	esmtp id 1xEYnV-2R4Apk0; Wed, 7 Oct 2026 23:03:33 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] kmscon: upgrade 10.0.1 -> 10.0.4
-Date: Wed,  7 Oct 2026 16:12:33 +0200
-Message-ID: <20261007141233.4288-2-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] kmscon: upgrade 10.0.1 -> 10.0.4
+Date: Wed,  7 Oct 2026 23:03:19 +0200
+Message-ID: <20261007210319.518042-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261007141233.4288-1-f_l_k@t-online.de>
-References: <20261007141233.4288-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1791382360-CDFF89F5-75A758E3/0/0 CLEAN NORMAL
-X-TOI-MSGID: dd7ec9fd-2b36-439e-9f25-3dee960c3b64
+X-TOI-EXPURGATEID: 150726::1791407013-DFFFC99C-3FE1DDE2/0/0 CLEAN NORMAL
+X-TOI-MSGID: 28e2738f-dea4-4021-849b-cfa37761206e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1791382360; i=f_l_k@t-online.de;
-	bh=7nd5DerMeF1YV9r0XoAxT619yxcs/DpX/60fa/rKC1U=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=IiIC8hukz7dpbpVR6Lv06dX6SEVTDtt43AdF0a4rsOlcIBTOxvRFDtcl9euzr6/E/
-	 vHT4gM5AAXmLhELnz6qDhMDOfZ/a6Fg/HeaFfDoT08/YTa4ubVY0gSmIK6sandV9zd
-	 L9wwIZ80HPB4GmXDpi3NSTXpfn6Iha/x1TQ/R4THJkyUlKJ2J71CiRHhaqjLe+w/jO
-	 lwclEMWZQf+5I3WFJZ4jvhi7xaN4VYz8GF/lTRHBzyU9RPrxz/HLrxLPcQcV7ynacj
-	 cos7EBP8lehBRok5LQuDjb2gE8GKiDkIlmuw7oWr0imCRbvYNOmIaCdmb0/ubUMGGq
-	 eBw5tmyZa7p3w==
+	s=20260216; t=1791407016; i=f_l_k@t-online.de;
+	bh=lAjNgQ3vDd1TErfhePhV6IVxp+tHt7fmV6/NSRjvDME=;
+	h=From:To:Subject:Date;
+	b=Prs444BVIiwHYmsLBIiM5r5Sd2NhRNzoOwGeBUfzMME51Twbd1v4h3sOUpPNZhyYC
+	 d26F3CuhHWjG6kGCnT2Lc6fnIqNGN9LRMI593qgMniy7ET4uutx3Go6rE0UHWJGhhQ
+	 vYTL9lXME1udMamvNY61Npgm2uwS5NxZmOK2SCVXvY1P0u6iQkNX/McQEwy+4tNdB1
+	 mYOSX+L4oQnTmkHyLy9hnG/js3edP5v5LT6QPyxHzfBFhEwkXQmeimbbUqH7EbGigD
+	 NY03w7uQ5YrKn5lyXt4EVfTwqJXkWxLUsYYSq/dixcXjXr06A1huSxnRhBLNKe8d05
+	 3G/67rd5ZeORw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 14:13:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130659
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 21:03:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130661
 
 Drop the pty patch, the problem is fixed upstream since 10.0.2.
-Refresh the platform GPU patch to the version submitted upstream,
+Refresh the platform GPU patch to the version merged upstream,
 which also excludes USB displays from the primary GPUs. Backport the
 libseat build fix, 10.0.4 does not build with libseat otherwise.
 Tested on a Raspberry Pi 4 with gpus=3Dprimary.
@@ -59,16 +57,18 @@ code to src/shl/htable.
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...-pty-only-once-a-display-is-attached.patch | 64 -------------------
- ...display-controllers-as-primary-GPUs.patch} | 44 ++++++++-----
- ...x-build-error-due-to-logging-changes.patch | 32 ++++++++++
- .../{kmscon_10.0.1.bb =3D> kmscon_10.0.4.bb}    |  8 +--
- 4 files changed, 63 insertions(+), 85 deletions(-)
+ ...-pty-only-once-a-display-is-attached.patch | 64 --------------
+ ...-display-controllers-as-primary-GPUs.patch | 53 ++++++++++++
+ ...-display-controllers-as-primary-GPUs.patch | 84 -------------------
+ ...x-build-error-due-to-logging-changes.patch | 32 +++++++
+ .../{kmscon_10.0.1.bb =3D> kmscon_10.0.4.bb}    |  8 +-
+ 5 files changed, 89 insertions(+), 152 deletions(-)
  delete mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0001-terminal-=
 open-the-pty-only-once-a-display-is-attached.patch
- rename meta-oe/recipes-graphics/kmscon/kmscon/{0002-uterm_monitor-treat-=
-platform-display-controllers-as-primary-GPUs.patch =3D> 0001-uterm-treat-=
-platform-display-controllers-as-primary-GPUs.patch} (58%)
+ create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0001-uterm-tre=
+at-platform-display-controllers-as-primary-GPUs.patch
+ delete mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_mon=
+itor-treat-platform-display-controllers-as-primary-GPUs.patch
  create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon/0002-vt_libsea=
 t-Fix-build-error-due-to-logging-changes.patch
  rename meta-oe/recipes-graphics/kmscon/{kmscon_10.0.1.bb =3D> kmscon_10.=
@@ -151,117 +151,176 @@ m)
 ---=20
 -2.55.0
 -
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-tr=
-eat-platform-display-controllers-as-primary-GPUs.patch b/meta-oe/recipes-=
-graphics/kmscon/kmscon/0001-uterm-treat-platform-display-controllers-as-p=
-rimary-GPUs.patch
-similarity index 58%
-rename from meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-tre=
-at-platform-display-controllers-as-primary-GPUs.patch
-rename to meta-oe/recipes-graphics/kmscon/kmscon/0001-uterm-treat-platfor=
-m-display-controllers-as-primary-GPUs.patch
-index c85607783c..0cc3dd2f2f 100644
---- a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-treat-pla=
-tform-display-controllers-as-primary-GPUs.patch
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0001-uterm-treat-plat=
+form-display-controllers-as-primary-GPUs.patch b/meta-oe/recipes-graphics=
+/kmscon/kmscon/0001-uterm-treat-platform-display-controllers-as-primary-G=
+PUs.patch
+new file mode 100644
+index 0000000000..af0f829ebb
+--- /dev/null
 +++ b/meta-oe/recipes-graphics/kmscon/kmscon/0001-uterm-treat-platform-di=
 splay-controllers-as-primary-GPUs.patch
-@@ -1,8 +1,7 @@
+@@ -0,0 +1,53 @@
++From 92b87c18f67ba9c01b23b50d014c5c5cfa72717e Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Wed, 7 Oct 2026 13:09:58 +0200
++Subject: [PATCH] uterm: treat platform display controllers as primary GP=
+Us
++
++A GPU only counted as primary when its PCI parent had boot_vga set.
++SoC display controllers such as vc4 on the Raspberry Pi are platform
++devices without a PCI parent, so with gpus=3Dprimary kmscon ignored the
++only display in the system and never showed a terminal.
++
++Treat DRM devices on the platform bus as primary. USB displays are
++excluded: on these systems the USB controller is a platform device too,
++so they would otherwise be taken as primary.
++
++Tested on a Raspberry Pi 4 with --gpus=3Dprimary: before, card0 (vc4)
++was ignored as "no primary GPU"; now the terminal comes up on HDMI-A
++with the drm2d backend. The USB exclusion is not tested on hardware.
++
++Assisted-By: Claude Opus 5.5
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Backport [https://github.com/kmscon/kmscon/pull/551/cha=
+nges/e8d5af950b1046f060604932440306dd16c9039e]
++---
++ src/uterm/monitor.c | 14 +++++++++++++-
++ 1 file changed, 13 insertions(+), 1 deletion(-)
++
++diff --git a/src/uterm/monitor.c b/src/uterm/monitor.c
++index f2141969..ccb5e422 100644
++--- a/src/uterm/monitor.c
+++++ b/src/uterm/monitor.c
++@@ -244,9 +244,21 @@ static bool is_drm_primary(struct uterm_monitor *mo=
+n, struct udev_device *dev, c
++ 			log_debug("DRM device %s is primary PCI GPU", node);
++ 			return true;
++ 		}
+++		return false;
++ 	}
++=20
++-	return false;
+++	/*
+++	 * SoC display controllers are platform devices without a boot_vga
+++	 * attribute. Treat them as primary. USB displays sit below a platform
+++	 * USB controller on such systems, but are never primary.
+++	 */
+++	if (udev_device_get_parent_with_subsystem_devtype(dev, "usb", NULL))
+++		return false;
+++	if (!udev_device_get_parent_with_subsystem_devtype(dev, "platform", NU=
+LL))
+++		return false;
+++
+++	log_debug("DRM device %s is primary platform GPU", node);
+++	return true;
++ }
++=20
++ /*
+\ No newline at end of file
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-tr=
+eat-platform-display-controllers-as-primary-GPUs.patch b/meta-oe/recipes-=
+graphics/kmscon/kmscon/0002-uterm_monitor-treat-platform-display-controll=
+ers-as-primary-GPUs.patch
+deleted file mode 100644
+index c85607783c..0000000000
+--- a/meta-oe/recipes-graphics/kmscon/kmscon/0002-uterm_monitor-treat-pla=
+tform-display-controllers-as-primary-GPUs.patch
++++ /dev/null
+@@ -1,84 +0,0 @@
 -From d321a1572a12d760ddade294f4e7eabe57d555d1 Mon Sep 17 00:00:00 2001
-+From 669d2d110a864331ed3a8bb8fd867efc9dd50306 Mon Sep 17 00:00:00 2001
- From: Markus Volk <f_l_k@t-online.de>
+-From: Markus Volk <f_l_k@t-online.de>
 -Date: Sat, 26 Sep 2026 10:00:57 +0200
 -Subject: [PATCH] uterm_monitor: treat platform display controllers as pr=
 imary
 - GPUs
-+Date: Wed, 7 Oct 2026 13:09:58 +0200
-+Subject: [PATCH] uterm: treat platform display controllers as primary GP=
-Us
-=20
- A GPU only counted as primary when its PCI parent had boot_vga set.
- SoC display controllers such as vc4 on the Raspberry Pi are platform
-@@ -11,25 +10,32 @@ only display in the system and never showed a termina=
-l.
-=20
- Treat DRM devices on the platform bus as primary, except for the
- simpledrm, efidrm, vesadrm and ofdrm firmware framebuffers that only
+-
+-A GPU only counted as primary when its PCI parent had boot_vga set.
+-SoC display controllers such as vc4 on the Raspberry Pi are platform
+-devices without a PCI parent, so with gpus=3Dprimary kmscon ignored the
+-only display in the system and never showed a terminal.
+-
+-Treat DRM devices on the platform bus as primary, except for the
+-simpledrm, efidrm, vesadrm and ofdrm firmware framebuffers that only
 -stand in until the native driver has loaded.
-+stand in until the native driver has loaded. USB displays are excluded
-+as well: on these systems the USB controller is a platform device too,
-+so they would otherwise be taken as primary.
-=20
+-
 -Upstream-Status: Pending
-+Tested on a Raspberry Pi 4 with --gpus=3Dprimary: before, card0 (vc4)
-+was ignored as "no primary GPU"; now the terminal comes up on HDMI-A
-+with the drm2d backend. The USB exclusion is not tested on hardware.
-=20
+-
 -AI-Generated: Uses Claude Code (Claude Opus 5.5)
-+Upstream-Status: Submitted [https://github.com/kmscon/kmscon/pull/551]
-+
-+Assisted-By: Claude Opus 5.5
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
- ---
+----
 - src/uterm_monitor.c | 29 ++++++++++++++++++++++++++---
 - 1 file changed, 26 insertions(+), 3 deletions(-)
-+ src/uterm/monitor.c | 33 ++++++++++++++++++++++++++++++---
-+ 1 file changed, 30 insertions(+), 3 deletions(-)
-=20
+-
 -diff --git a/src/uterm_monitor.c b/src/uterm_monitor.c
 -index d89bfa1..25ec91f 100644
 ---- a/src/uterm_monitor.c
 -+++ b/src/uterm_monitor.c
 -@@ -234,10 +234,15 @@ out_close:
-+diff --git a/src/uterm/monitor.c b/src/uterm/monitor.c
-+index 3d7d53e..44d5bf8 100644
-+--- a/src/uterm/monitor.c
-++++ b/src/uterm/monitor.c
-+@@ -232,10 +232,15 @@ out_close:
-  	return flags;
-  }
- =20
- -static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
+- 	return flags;
+- }
+-=20
+--static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
 e *dev, const char *node)
 -+static char *get_drm_name(int fd);
-++static inline char *get_drm_name(int fd);
- +
- +static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
+-+
+-+static bool is_drm_primary(struct uterm_monitor *mon, struct udev_devic=
 e *dev, const char *node,
- +			   int fd)
-@@ -41,7 +47,7 @@ index d89bfa1..25ec91f 100644
- =20
-  	pci =3D udev_device_get_parent_with_subsystem_devtype(dev, "pci", NULL=
+-+			   int fd)
+- {
+- 	struct udev_device *pci;
+- 	const char *id;
+-+	char *name;
+-+	bool res;
+-=20
+- 	pci =3D udev_device_get_parent_with_subsystem_devtype(dev, "pci", NULL=
 );
-  	if (pci) {
+- 	if (pci) {
 -@@ -246,9 +251,27 @@ static bool is_drm_primary(struct uterm_monitor *mo=
 n, struct udev_device *dev, c
-+@@ -244,9 +249,31 @@ static bool is_drm_primary(struct uterm_monitor *mo=
-n, struct udev_device *dev, c
-  			log_debug("DRM device %s is primary PCI GPU", node);
-  			return true;
-  		}
-@@ -53,7 +59,11 @@ index d89bfa1..25ec91f 100644
- +	 * SoC display controllers are platform devices without a boot_vga
- +	 * attribute. Treat them as primary, except for the generic firmware
- +	 * framebuffer drivers that only stand in until the real driver loads.
-++	 * USB displays sit below a platform USB controller on such systems,
-++	 * but are never primary.
- +	 */
-++	if (udev_device_get_parent_with_subsystem_devtype(dev, "usb", NULL))
-++		return false;
- +	if (!udev_device_get_parent_with_subsystem_devtype(dev, "platform", NU=
+- 			log_debug("DRM device %s is primary PCI GPU", node);
+- 			return true;
+- 		}
+-+		return false;
+- 	}
+-=20
+--	return false;
+-+	/*
+-+	 * SoC display controllers are platform devices without a boot_vga
+-+	 * attribute. Treat them as primary, except for the generic firmware
+-+	 * framebuffer drivers that only stand in until the real driver loads.
+-+	 */
+-+	if (!udev_device_get_parent_with_subsystem_devtype(dev, "platform", NU=
 LL))
- +		return false;
- +
-@@ -70,7 +80,7 @@ index d89bfa1..25ec91f 100644
-  }
- =20
-  /*
+-+		return false;
+-+
+-+	name =3D get_drm_name(fd);
+-+	if (!name)
+-+		return false;
+-+
+-+	res =3D strcmp(name, "simpledrm") && strcmp(name, "efidrm") && strcmp(=
+name, "vesadrm") &&
+-+	      strcmp(name, "ofdrm");
+-+	if (res)
+-+		log_debug("DRM device %s is primary platform GPU (%s)", node, name);
+-+	free(name);
+-+	return res;
+- }
+-=20
+- /*
 -@@ -334,7 +357,7 @@ static unsigned int get_drm_flags(struct uterm_monit=
 or *mon, struct udev_device
-+@@ -332,7 +359,7 @@ static unsigned int get_drm_flags(struct uterm_monit=
-or *mon, struct udev_device
-  		return flags;
-  	}
- =20
+- 		return flags;
+- 	}
+-=20
+--	if (is_drm_primary(mon, dev, node))
+-+	if (is_drm_primary(mon, dev, node, fd))
+- 		flags |=3D UTERM_MONITOR_PRIMARY;
+- 	if (is_drm_usb(mon, node, fd))
+- 		flags |=3D UTERM_MONITOR_AUX;
+---=20
+-2.55.0
+-
 diff --git a/meta-oe/recipes-graphics/kmscon/kmscon/0002-vt_libseat-Fix-b=
 uild-error-due-to-logging-changes.patch b/meta-oe/recipes-graphics/kmscon=
 /kmscon/0002-vt_libseat-Fix-build-error-due-to-logging-changes.patch
