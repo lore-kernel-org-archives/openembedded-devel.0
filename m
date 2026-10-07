@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46C13CA5FFC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A190CA6007
 	for <webhook@archiver.kernel.org>; Wed,  7 Oct 2026 11:08:33 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7183.1791371311474534686
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6899.1791371308731083171
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Oct 2026 04:08:31 -0700
+ Wed, 07 Oct 2026 04:08:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Axou4R5A;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-cc4b62d118aso1056087a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 04:08:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NQmf3sW7;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-cc4dbda1e5dso894506a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 04:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791371311; x=1791976111; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791371308; x=1791976108; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Nvar6mIHmE+yJT1H1gVvUfo5sTLNAACf8zEw1dWE77Q=;
-        b=Axou4R5AUKDh5WQPDmPta76TbXnDN9/6Yi83nIpnRv3wT3kfan15BvgzzuwY5c+Wip
-         69OFzujboMl+dZ638N5QTJQ0ZP4YjZVDsyp2+Q+KcN0UalcXa994Q+R1ZIiOr93NLJ+M
-         YTuGJT5gOomOBgTATKXWMtpXEB2gkfqh5B1Q6qIjVg7BrTSrt96MtKXF2jBzXU7kfnYj
-         4O3Og+/oJdwmyFBzgUasm5ztlmm7ti1gs8ry0waItrscYhUa/wlSH1c66bo5S7XBRU6U
-         gIAYxMNEKi+zSXxuMevoCanX7GSJSs2WTOgv0P9py/mearf3PxOjrWrdQWZqJBmZUSxG
-         ZfWQ==
+        bh=xf6eIFsAi9/Ym3FZwnVi/ICvThzMqWeazQKm1rp1/HM=;
+        b=NQmf3sW7UhBOf5yU/8nGazzPjJA+H+yDgTwlboPNfkmemAhj1VvZopY16xs6lD4Bsn
+         k9t1MUwS/y7kmbtOBbtKgGNBl5T47LC8B+fqxLtWrV9+UHhg3DnT8IVCVjd7ZQSuyNuQ
+         HfBR+N6IZw2RFsxJAVe+HALJ98ezxP8plxsM2aLcKbEDcYIGmjigOjuyq6MoCnWSWPAy
+         FiDJreF6oaHKoetB0/IjSFJ7D4iSh/SRsymfEdx4TbaGWRy5/ZDBipn/u2reAlptrCtP
+         aZ0mzM99yF/K2QKEeZ3NvKGyfYQAsExey5kbFXbpLxARMNjeQl6aIQSuPtjoxQPKLWS0
+         NdxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791371311; x=1791976111;
+        d=1e100.net; s=20260707; t=1791371308; x=1791976108;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Nvar6mIHmE+yJT1H1gVvUfo5sTLNAACf8zEw1dWE77Q=;
-        b=j9c6/hEwwRGOetyhQ7Ueth4kQdUw2PqAwc0eEW2CwImCnI3TwWKQ/qSSsF8EG99jJZ
-         4ChcpEggbjZNiZb9ptmZ9jZ8P2JgbTrVhVuQFviUOeHKlOsCv2et2VXecDwjiF9tRBwg
-         nEY8rcXjavVKpCWG0YrM+kSCc3sJymYEsCklK3mQ3gnbrYzflGTndVD7euJhO2lvWJ3w
-         3w7XTw7ews66uzytcYr+ItcCqiqHAR9MSUmGj/KDsbYYu9cwUnujXYmQoxu5sQKC/qoG
-         nbpe8m3Dwo5ew0ZiVHiHlMAqUZucPCQ2Iw/g72g/3qEYidKlwOSUosUdtOwUkyep9vR/
-         L4Rw==
-X-Gm-Message-State: AFq9FYLOVEW1M1JoTIPqcwNAg44trwE7/hHy7iIRRFYAsvSStHkB6y0T
-	ZwIZ2wphYz7/vTXZbfDHGUMuLTh8Kt8lP4frQB1Pv2Orc3MONO2TX+JEWW3iV3Mr
-X-Gm-Gg: AYBFou0Ogj9FncA4a5GQjrlYmdu67RdiOqrv8I3mBW1epprieutmJcKaRS9PlI3/Hqw
-	6ElsZWZUvHUmNXmXM4KleTDfWXsYJBIhfNw9+LPHutn1i/HNH1G++yGvAY4c79tfVPqGxton4Ll
-	FrHpvzpEp7AyjZuTPprDy534nT9C98JE58KM8GLE192eAYqmCOLc+XWTQqlwG/sUVW5p++RPUHM
-	e3C7C7EhR1FKOh8Vv4Ns6OsEhvoFQqSRaPtlCV+h0f8MLJ9YmlHSXQiNOQEdJ4D/FKVXKm17OfT
-	0D5l60qgMR1f5piZ6jkubWFHwrhl2foPkqBOqdiH9mL+pQVuMNwKnT06y+lcJXCzLLNNA83rJym
-	h3omNL4PwtaJ5mcTrNkXpzOYBE39r6GNq/yBu+EBOShM+ndxWGPWd2aLqR2mrQI3iI/0p/0kP9k
-	oG7TESN6vU7HNspSejKfF5gFvk7whW7HENffKToi0eeWKcVfw1fCj/hbIfx2UFzSNo7mer3VwsD
-	YEqUYE3i5YFjLBnZoAZKlk=
-X-Received: by 2002:a17:90b:264e:b0:39e:6c6a:6580 with SMTP id 98e67ed59e1d1-3a8a15314e3mr1583729a91.67.1791371310770;
-        Wed, 07 Oct 2026 04:08:30 -0700 (PDT)
+        bh=xf6eIFsAi9/Ym3FZwnVi/ICvThzMqWeazQKm1rp1/HM=;
+        b=qFZE3mkgrBoTzVHOpplFKPqYNOcHA86geBAv0XuR5AyabDPfHL8dnHR5NyVrrOAXoG
+         tWaNU0y0ZOvh8NsFs+/VyPq+Eht9peu6uxRqlAwh8E2MQ+Uxpp1x+SHnIGdLqGNeJNe/
+         vPQ2YJx92sJlgIbTXzz97p2j2eZpGrbrJlXQobQobK40CZhSFXgx45vp/SRfPSIBioBZ
+         5beMU5gRI38J1iNAvCyjnAbysogPEe0QngOCH+m0GbsPOLA6MB418XcgA3esLLQ4rgb/
+         6o+PmAtnGDf6nfjQgVD8P8xcfGZaisIz6rws0DpFGdbkkqKDfpeqN/6Q6HYwOK4ZJXbk
+         e5FA==
+X-Gm-Message-State: AFq9FYJxqr8wSo7VcvD+cgGiDeGYa4uOcJ7OGfuLeqGfkWWTOq/Ym8vH
+	fdOElBRgWrS8iCGlCNCe5i56lZWpPK9zMx5vhonR+9dApYSQHaJR7A0/CPnVCbne
+X-Gm-Gg: AYBFou2YuB2Au4GIq/MOm9JxplAh6WEzDEpgqREF9sLkgNVSIJ4ZUQE1xZwpQFAc08T
+	OYe3qQM4c/CNG6pd2wrAHF0kG/B3QhUeFJ4AldIkvBJr2K97WpsppAJCMuULjsoOH84FpbZNdhS
+	o4O+7L8wq1jKme0tasv8NKan5Ai06dBW9VCrMx6rJmf+sYXrHHnAn1VWJyztjtbFtUyZnp1G2I2
+	rRKjMazbGcemfQhypvUynXkWFYDG76bCBHtUePMJNi+Nl1rgnKaZaqc0J9dwA6RvoBog3VUiFyr
+	xD+07ILWor+mnM+q7G4HfNPJzN5a/vOB9UA/HUwQrslmShU6k+8rz1ukh5+XrxJ0IiYsKTwzprM
+	sXrApU55CoNzKN0kgXorsDjS79c1TsMAIsuVRtMe5ghy8GFgE7Dq8bJtiPWJt1dztwDmvhFM47u
+	rRnqedspjFfMNJUmokwekElbtAqiTkiUZ3glfCWwKOtwswooD4B7GjOkKAW9FgLJneF6yNN3dTc
+	3jnkxDSW0aia/i27pp199w=
+X-Received: by 2002:a17:90b:2584:b0:39e:3713:c2e4 with SMTP id 98e67ed59e1d1-3a8a192b868mr1481206a91.14.1791371308068;
+        Wed, 07 Oct 2026 04:08:28 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8533aba95sm10862177a91.2.2026.10.07.04.08.28
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8533aba95sm10862177a91.2.2026.10.07.04.08.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 04:08:30 -0700 (PDT)
+        Wed, 07 Oct 2026 04:08:27 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 15/15] fluentbit: upgrade 5.1.2 -> 5.1.3
-Date: Thu,  8 Oct 2026 00:07:40 +1300
-Message-ID: <20261007110740.3179543-15-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 14/15] pgpool2: upgrade 4.7.2 -> 4.7.3
+Date: Thu,  8 Oct 2026 00:07:39 +1300
+Message-ID: <20261007110740.3179543-14-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261007110740.3179543-1-ankur.tyagi85@gmail.com>
 References: <20261007110740.3179543-1-ankur.tyagi85@gmail.com>
@@ -68,73 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Oct 2026 11:08:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130657
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130656
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Refresh 0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-
 Changelog:
-https://github.com/fluent/fluent-bit/releases/tag/v5.1.3
+https://www.pgpool.net/docs/latest/en/html/release-4-7-3.html
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...rivate-makefile-targets-in-CMakelist.patch | 23 ++-----------------
- ...{fluentbit_5.1.2.bb => fluentbit_5.1.3.bb} |  2 +-
- 2 files changed, 3 insertions(+), 22 deletions(-)
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_5.1.2.bb => fluentbit_5.1.3.bb} (99%)
+ .../pgpool2/{pgpool2_4.7.2.bb => pgpool2_4.7.3.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/pgpool2/{pgpool2_4.7.2.bb => pgpool2_4.7.3.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-index a842a322ad..7110596757 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-@@ -26,30 +26,11 @@ Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.7.2.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
+similarity index 95%
+rename from meta-networking/recipes-support/pgpool2/pgpool2_4.7.2.bb
+rename to meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
+index c6b6a22c64..2648cc1f9f 100644
+--- a/meta-networking/recipes-support/pgpool2/pgpool2_4.7.2.bb
++++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://www.pgpool.net/source/pgpool-II-${PV}.tar.gz \
+ 	   file://pgpool.sysconfig \
+ 	   file://pgpool.service \
+            "
+-SRC_URI[sha256sum] = "e72b9d0ff3620f7da7e33a58dda44b77919d056752dc9bd86b2985c4988d1938"
++SRC_URI[sha256sum] = "4bf9df3e13feb8e64bee486b4ea54c9076296c2d9406165b0b68d32086fce250"
  
- Upstream-Status: Submitted [https://github.com/fluent/fluent-bit/pull/9450]
- Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
- ---
-- lib/ctraces/CMakeLists.txt | 8 ++------
-  lib/monkey/CMakeLists.txt  | 4 +---
-- 2 files changed, 3 insertions(+), 9 deletions(-)
-+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ S = "${UNPACKDIR}/pgpool-II-${PV}"
  
--diff --git a/lib/ctraces/CMakeLists.txt b/lib/ctraces/CMakeLists.txt
--index bb2c54fa6..7d59dd834 100644
----- a/lib/ctraces/CMakeLists.txt
--+++ b/lib/ctraces/CMakeLists.txt
--@@ -30,12 +30,8 @@ set(CTR_VERSION_MINOR  7)
-- set(CTR_VERSION_PATCH  1)
-- set(CTR_VERSION_STR "${CTR_VERSION_MAJOR}.${CTR_VERSION_MINOR}.${CTR_VERSION_PATCH}")
-- 
---# Define __FILENAME__ consistently across Operating Systems
---if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
---  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$$(subst ${CMAKE_SOURCE_DIR}/,,$$(abspath $$<))\"'")
---else()
---  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
---endif()
--+# Define __FILENAME__
--+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-- 
-- # Configuration options
-- option(CTR_DEV             "Enable development mode"                   No)
- diff --git a/lib/monkey/CMakeLists.txt b/lib/monkey/CMakeLists.txt
- index 45f96d797..cc227fdb0 100644
- --- a/lib/monkey/CMakeLists.txt
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb
-similarity index 99%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_5.1.2.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb
-index 5862afba00..158378c8a2 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.2.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb
-@@ -17,7 +17,7 @@ DEPENDS = "\
- "
- DEPENDS:append:libc-musl = " fts"
- 
--SRCREV = "66910c10a4d7eafa810b84229cf2dcf7b0f26f97"
-+SRCREV = "d1be1ba389a481ea727462e9a4afeb4538f0365a"
- SRC_URI = "\
-     git://github.com/fluent/fluent-bit.git;nobranch=1;protocol=https;tag=v${PV} \
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
 
