@@ -2,22 +2,22 @@ Return-Path: <t.schmelzer@phytec.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41550CA600E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CCA2CA6007
 	for <webhook@archiver.kernel.org>; Thu,  8 Oct 2026 10:06:56 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.84])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12209.1791454014498178801
+Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.119])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11943.1791454010557389975
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Oct 2026 03:06:54 -0700
+ Thu, 08 Oct 2026 03:06:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@phytec.de header.s=selector2 header.b=aQo0vBbJ;
- spf=pass (domain: phytec.de, ip: 52.101.83.84, mailfrom: t.schmelzer@phytec.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@phytec.de header.s=selector2 header.b=JD465E0A;
+ spf=pass (domain: phytec.de, ip: 40.107.159.119, mailfrom: t.schmelzer@phytec.de)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=K4UPDMKdP8ll43nXrZyMdneJzKaLEgHwj5ORhs3cWA+C1q8uiNfOZICe2hGgtaxR0ihXE5Zur9b9Vtiw3+eAT/ddzulVyKliw+E9ETRobJoZaREok4f8D0OmcY2bv0cRi8mhWPBnn2gaOe6hQUbjHvDfq8YZHJ1QO11Zho2LwuuegeFhcrcqQs3NOdP/CXfa4XTb0aRGcPvxaeNlOjR8HSPXhfOc6nV7SryM9WTi33JxqJeOJwQ7JZfPujZfaWTQIrQgm+Aqw2N0oyTlXbmnp3vmt4nnCsCzhaxWeKh5yiPBeV3lqPQRQ4/IepFY68plKaN9pBvppq3vrZMrqvXTJw==
+ b=cutpVZDRLvtuz8J7qOKRXnmzCIqATXGEROiPOV4wOsRWQIIOKSD6pe/m8SlT96nIgqEO6pu77O4xjLo2POwmRJp2qWNfDQpFZ0hevLVymmq6+qFSNvDXG8hSL6Av/tVZYQmS21QroqqDDu8vMLklm2elRdPStqFBMDWw3VgumUfGSnbUA2/rjkwlJiTQwoQkSvNZn+U96NEYMwxNXc+k3GHQb6wyZyeXp8eNixjZjibW8kFD8BeidQo4OATuItMr8xnq38jAIULpeov2l7bq9mHMDZxKgwdU6ZhraMPLcdNTcIx1xXsfJv3WRw0cXTN8eyrhjlMknXXNsM7VvXm5+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bYADv8rdOnc4yDPcQT4Gwf6NfFI0JcfoTnEOkuC6nA0=;
- b=naCPKQ0b2QKjQM6iAaKyljz5hFghoHWEgwmhX2NvDVmzho5KKqTXxV07/PSft/3SCbraBTw8512avZgT2EgPGAK1uBEpu3ykFPp6h1nBE5+sQGEQVOuT1GmaKebLok3iHGXZA4BTvMuvAQo5FOrvCOGjdUVpDVnCyuGcVWLIOmU4DOVu9H62niWGqQNx7OkPFDq1yvyzK+upsVs6IMIVWHDJ+vOE5KCBgZcfJRamMg80OJwnvgKeGclUdincnzU4cAHDeC2RCXcP8WmJMs4PMYqo98y8tz5fhZnmzo/A0fMg8O4ub1Sxp74hTmbsjXML06slvLA9IluqBsJMMyXqWA==
+ bh=OZw6B9q881bIgr0tt0sFebER8IgraM/n5RhTzjOxoZg=;
+ b=KU9KCoGBPs3RvND75ZK77RrjwKilyHpsBjpPdyNiTZCVjDWYs5qqXzDt2yuzxn19RGjfFV1Ck1BE9sRtyr2xdFYs7iUdCSKbXY+gdkHb7sJIA5f3FpKZzQaith7edFQOY+uoCZ0jzg+74kmTroLBVgOj/R5J1X003Tjly0vZwfLg9NlPHuSE9Xlal+SqyFLiAMqN3Z7QtpXLduEayz+nIDvqxDKm5Kjoir4CV0oTsVbxKcCrRgcu+D9Hm++Hh0JaP3PDTICiiC44PdblNGh4CThkOQSh5yuYwgeEjQji5gnHnInnghsTn6Cz9O4VaGejsZELdnr2SMrdi2a9MnGi4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=phytec.de; dmarc=fail (p=quarantine sp=quarantine pct=100)
@@ -26,18 +26,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bYADv8rdOnc4yDPcQT4Gwf6NfFI0JcfoTnEOkuC6nA0=;
- b=aQo0vBbJ6G9QCVLPJeMd6XbPsUx6aoQSMHVOrfQNoaAH7OBTT3rhkJo1Q34I0PqFMpkE3WLkQhZ+5P5OYRowG/7mRJVleRqz4CQ3Y2S0u9rfN5ilhby0fnqn70muDAutOIOIH7RnFpPjwPG4bjsRSYBZJZXK/3p8t3PZVybyZl+idbF+hncOTiXmWF6SSZIl6htjEO6G+syz4tiUiiQANCbABy3pwdlQki9Ka7451SB6p60OXGu2GFPoNyhRjJtNOC9AjCov11brdzf6AFV30U6AHlzX9jo1YX7rj83Aqxz6UfMkcmRT+KzlEVrPQpGyLFGZWSoE3PsltFumtNsKXw==
-Received: from DUZPR01CA0341.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b8::11) by GV2P195MB2114.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:150:b0::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.24; Thu, 8 Oct
- 2026 10:06:48 +0000
+ bh=OZw6B9q881bIgr0tt0sFebER8IgraM/n5RhTzjOxoZg=;
+ b=JD465E0ADdRYknqD6IgApJbIk/PSZfN6cjNLEMGxIdnTDo3z5QEBcnDDguI+mc6MKumb3g8adSQ3fj3mS8HmUNnQSAUInRZ/dTaV8lLXWPYT+FE8BtiyVK4k5tvV4Ry+x4g8brbSpmNzkuvzV6v8R/KzyH7f/k7+fByuMPF0Bl3x8etdZGFwdssU+2zxl3+FuZKVe0wG/n4Xy7Q8gIkOiFP5VNhqcCcxItbcWiEignzLBaxDabjtoX28Wf4As7LNqplsRLudOVfez1n+yKDessdI5nGC9Xg+wpamziGO+pENHgIrx8bheL34CM0ip+zQn+L3k9hp0ShZvDNlD+vOvw==
+Received: from DUZPR01CA0351.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b8::12) by PR3P195MB0927.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:102:a4::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.16; Thu, 8 Oct
+ 2026 10:06:42 +0000
 Received: from MAD0EPF000008BA.eurprd04.prod.outlook.com
- (2603:10a6:10:4b8:cafe::6a) by DUZPR01CA0341.outlook.office365.com
- (2603:10a6:10:4b8::11) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:10:4b8:cafe::2c) by DUZPR01CA0351.outlook.office365.com
+ (2603:10a6:10:4b8::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.21 via Frontend Transport; Thu, 8
- Oct 2026 10:06:48 +0000
+ Oct 2026 10:06:42 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
  IP is 91.26.50.189) smtp.mailfrom=phytec.de; dkim=none (message not signed)
  header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
@@ -46,20 +46,18 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Postix.phytec.de (91.26.50.189) by
  MAD0EPF000008BA.mail.protection.outlook.com (10.167.241.169) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.14 via Frontend Transport; Thu, 8 Oct 2026 10:06:47 +0000
+ 15.21.496.14 via Frontend Transport; Thu, 8 Oct 2026 10:06:41 +0000
 Received: from augenblix2.phytec.de (172.25.0.51) by Postix.phytec.de
  (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Thu, 8 Oct
- 2026 12:06:41 +0200
+ 2026 12:06:40 +0200
 From: Thorsten Schmelzer <t.schmelzer@phytec.de>
 To: <openembedded-devel@lists.openembedded.org>
 CC: <upstream@lists.phytec.de>
-Subject: [meta-oe][PATCH 5/5] lvgl-demo-fb: update defconfig
-Date: Thu, 8 Oct 2026 12:06:26 +0200
-Message-ID: <20261008100626.2259941-6-t.schmelzer@phytec.de>
+Subject: [meta-oe][PATCH 0/5] lvgl: update 9.5.0 -> 9.6.0
+Date: Thu, 8 Oct 2026 12:06:21 +0200
+Message-ID: <20261008100626.2259941-1-t.schmelzer@phytec.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261008100626.2259941-1-t.schmelzer@phytec.de>
-References: <20261008100626.2259941-1-t.schmelzer@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
@@ -68,94 +66,61 @@ X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
  (172.25.0.11)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MAD0EPF000008BA:EE_|GV2P195MB2114:EE_
-X-MS-Office365-Filtering-Correlation-Id: a539f0dd-a162-41df-ce35-08df2523dd7e
+X-MS-TrafficTypeDiagnostic: MAD0EPF000008BA:EE_|PR3P195MB0927:EE_
+X-MS-Office365-Filtering-Correlation-Id: b692bb0e-7876-4260-f0ba-08df2523d9af
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|36860700016|42112799006|23010399003|1800799024|10067099003|11063799006|56012099006|18002099003|22082099003;
+	BCL:0;ARA:13230040|42112799006|82310400026|376014|1800799024|36860700016|23010399003|18002099003|10067099003|11063799006|56012099006;
 X-Microsoft-Antispam-Message-Info: 
-	ixmR49c1HRwJDmxkV9L0UszOeBq2ixlZwe07KIKYbF6xDKSmctVLR2NN23mqgl1EGUMtfz1rDZbqHCqS1ZkiWf3euOvF3aWZ1otwgzsA3pkmjylRONoh17ECwQnRDBPyO73nfF3jvq8OmRSJM2haRU0a3lBSMRuhCNAekquVmRTYlb9SKdyH/WGr5MfIx6mwzCyB91L0WzXV96epQAzdYSeKmZI5ED3dKYxdgjpji8aucO9D6O6FNniJN95Um+qTRMpvJDTfX9xWISDh3v846J5q4UQE2K1f4t+6xss3W79v2b7+LzXexBO+GFYwV0QQOssblsUk9aUxoGJzIrcB5jdM+OwGfeFn8kgM3S3t5oV7UUpi+YXejanfdhO3Fa3ziQNEr1GAgbHGj7JYApegme95bfbIPoV8JNPkDejnJURxApQOyGiKT6PEZt7wTpgDMJwGJRVOeXkOoxgy6QgA5XQ5diSh/my59RRdg6C2f/0AQcpQRQ9EB7FXLE/MIOfULTPJGvTMbHVn5bNvKuRXbFt0Eao37MM06VnejfLk6D/6UjLT314pMbezNe4pEWjA9gToXSJ97e+wCeK9eokwOyH73k+DLoEgvyBgl7Ssr0hWI1cRfVXory2ZJEYGfWDms+W7ZN/w1xUucz56PAUFZGZ7eo+eA8Crwbqli84KbD74vovVha9n0Jd1ugXC60U/UScww5Aeq4AFL8gI1KcOBQ==
+	OcrIOdO0MSAuQHoWaNEhjB7pj99B65g80lm/0j5kq48Or29YclzB193cv2j7avyxBAJETLysMbaK1FP7S/uFp76snRmt3LIY9lDgGFj8wLCtUt8S8rhxfXJSpuJ24ueOedM1o/QQJByu5X0s1yVfk/L1IGzvT8CP0wbWhrIVJn7PnJFvoXe4W0swsT6b7a1xN9JsVQNE0Znd8ffL86MCD964ncWItK8zTHCRUhtOm1dQRRUl9ruGpTFvr6GROQnj44dBoD3JDfpEUB+7lHu4WKdvNjZ76YK9yt4FrgVE/o8Imdhq2qFoAkT6rOnTXH78YZl/ouPz3JtkyQ+zQk6oLbYCpf9o8HWt94bP0A16hNkWAmMCWFC4tlCrYKYs54lHl1pqgyylPabZeSwhuyMJ701WzR6k8O+tgMt0Xlkmx2Jx2QXG1IOhmHlVW8Aw2FUdY403MzlBFRUU1EanKHixYkE3OfBo7yomsclmLfhI+SpLDUdaZnZ+V1zTG0Dw+wp07Qj+EwV4ED8va0qSjanAgiwpj9u5LEKdUF9Gf5e2jY5OYrNXmyajUGhobOfliFrigt57O0seAC3O8XgS/ugSrfDfwButaJ7X2MFJhfaYsZGC+yDLEUeLZqvPNoY4D0mbJQFTfyvh2Qs2VDE+2jmrxUCc0jKxj8wsPiqCtrEfrMklYkL2krgRK8mDvwI7ZD5Ta17crRSUYsMPVThEuSunxQ==
 X-Forefront-Antispam-Report: 
-	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(42112799006)(23010399003)(1800799024)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(42112799006)(82310400026)(376014)(1800799024)(36860700016)(23010399003)(18002099003)(10067099003)(11063799006)(56012099006);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	rkI8cMWsl3E+yr98Y2iZEInlBFTSu2B/1o4jO1jrAUfcVTUYE5UWTxB/KM/aMuhoYKNo0ulIz7Az0aPnDWWH1MntQittgDItXcsZxx14uJfMWuw5LlYa/sD8XVw60e5R5fEOSJG1KFoOPkkfrhITlyd9YTf4vBJBVdxT0JS19pUGdf9QieEc+tDHxJm6Attnd9FfmVhxfdJyTHI4GxNVJG76UpY5jpsnPE5ApvFvX44EiZn5l1KidinVmoS/EpiNCXEqveAIq+z9Y9oawkrmg+No7znLnFx44X8311PW8B/c/Qnh6T7kUNzvaGGVk0Jdy3TPhkOoUlVFm23iBAGmP2kLZM65zMstGCETAyeBE9l440wdm0moRB/+EOaHyoc4qCu7+LyCK5wCLI1hRJbg3WO1GOjqxCj0JEVp+zsEwklk39G1sYapPC0AddX9Yw5Z
+	tyNnZPjZp59k7bM/pUVleE53n/n2JIj08JQLQ8x442sNhkUu6aglCxQeOXY75o1BFQNJPfrwkjq2dK/rhoNN9FJPO1mL0UDKIYZ6xy2DaZP31gKT9+ynGHPFj41Rw+5CxX/Caqd6vVdzGJ2E4XycnPZWYR6y59rMjK2IWUinWhcXjh2DX+oGCcNryTPgaT9cIw9UPrcmXpGv7lwmfZunIlZ3/FAvTACjTdMCAM73I6uj6eU3xznsuzhKYzNI2jUyvPHkSNH/ioSkqqMY1WFI2ecS2HwDJDYmevTCOTLs3KygmG+lWthJ9FbziOkeXMOqlxOZiVFWBrNuoL9Va4RDi5EJjFTpVC4g5LdUQFPHF4R0FypJhyd8g7mHrqxrbMxHokDGT4CNnBaOf4kCr2Hgk88iZ56tYQcWzzQ3dnu9KBaQSMoa6nZp5qK/efGE/WX2
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2026 10:06:47.9302
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2026 10:06:41.5415
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a539f0dd-a162-41df-ce35-08df2523dd7e
+X-MS-Exchange-CrossTenant-Network-Message-Id: b692bb0e-7876-4260-f0ba-08df2523d9af
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29;Ip=[91.26.50.189];Helo=[Postix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	MAD0EPF000008BA.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P195MB2114
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB0927
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2026 10:06:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130669
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130665
 
-Update the defconfig to use more linux default settings. Most
-settings are imported from the get_started.defconfig from the source
-repository. This includes the following changes:
-- use libc based malloc, string, sprintf
-- use OS based pthread implementation
-- include fonts
-- include performance monitor
-- remove CONFIG_LV_MEM_SIZE_KILOBYTES, not necessary when using libc
-  memory management
-- set refresh period to 16 ms (60 FPS max)
-- increase LV_DRAW_LAYER_SIMPLE_BUF_SIZE and LV_DRAW_THREAD_STACK_SIZE
+This series updates lvgl and lvgl-demo-fb series to the latest 9.6.0
+version. The defconfigs for both recipes are also updated and a
+wayland packageconfig is added.
 
-Signed-off-by: Thorsten Schmelzer <t.schmelzer@phytec.de>
----
- .../lvgl/lvgl-demo-fb/defconfig               | 33 +++++++++++++++++--
- 1 file changed, 31 insertions(+), 2 deletions(-)
+Thorsten Schmelzer (5):
+  lvgl: Update to 9.6.0
+  lvgl: Update defconfig
+  lvgl: lv-conf.inc: add wayland packageconfig
+  lvgl-demo-fb: Update to 9.6.0
+  lvgl-demo-fb: update defconfig
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb/defconfig b/meta-oe=
-/recipes-graphics/lvgl/lvgl-demo-fb/defconfig
-index 9d4ffa9b40c9..f85f5895a438 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb/defconfig
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb/defconfig
-@@ -1,6 +1,35 @@
-+CONFIG_LV_USE_CLIB_MALLOC=3Dy
-+CONFIG_LV_USE_CLIB_STRING=3Dy
-+CONFIG_LV_USE_CLIB_SPRINTF=3Dy
-+CONFIG_LV_OS_PTHREAD=3Dy
- CONFIG_LV_COLOR_DEPTH_32=3Dy
--CONFIG_LV_MEM_SIZE_KILOBYTES=3D256
- CONFIG_LV_USE_LOG=3Dy
- CONFIG_LV_LOG_PRINTF=3Dy
--CONFIG_LV_USE_FONT_COMPRESSED=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_8=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_10=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_12=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_16=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_18=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_20=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_22=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_24=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_26=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_28=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_30=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_32=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_34=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_36=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_38=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_40=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_42=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_44=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_46=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_48=3Dy
-+CONFIG_LV_FONT_MONTSERRAT_28_COMPRESSED=3Dy
-+CONFIG_LV_USE_SYSMON=3Dy
-+CONFIG_LV_SYSMON_PROC_IDLE_AVAILABLE=3Dy
-+CONFIG_LV_USE_PERF_MONITOR=3Dy
- CONFIG_LV_USE_DEMO_WIDGETS=3Dy
-+CONFIG_LV_DEF_REFR_PERIOD=3D16
-+CONFIG_LV_DRAW_LAYER_SIMPLE_BUF_SIZE=3D262144
-+CONFIG_LV_DRAW_THREAD_STACK_SIZE=3D65536
+ ...rate-proper-.so-links-when-installin.patch | 71 +++++++++++++++++++
+ meta-oe/recipes-graphics/lvgl/files/defconfig |  7 ++
+ .../recipes-graphics/lvgl/files/wayland.cfg   |  1 +
+ meta-oe/recipes-graphics/lvgl/lv-conf.inc     | 11 ++-
+ .../lvgl/lvgl-demo-fb/defconfig               | 33 ++++++++-
+ ...demo-fb_9.5.0.bb =3D> lvgl-demo-fb_9.6.0.bb} | 10 ++-
+ .../lvgl/{lvgl_9.5.0.bb =3D> lvgl_9.6.0.bb}     |  8 ++-
+ 7 files changed, 124 insertions(+), 17 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/lvgl/files/0001-build-cmake-ge=
+nerate-proper-.so-links-when-installin.patch
+ create mode 100644 meta-oe/recipes-graphics/lvgl/files/wayland.cfg
+ rename meta-oe/recipes-graphics/lvgl/{lvgl-demo-fb_9.5.0.bb =3D> lvgl-demo=
+-fb_9.6.0.bb} (79%)
+ rename meta-oe/recipes-graphics/lvgl/{lvgl_9.5.0.bb =3D> lvgl_9.6.0.bb} (7=
+1%)
+
 
