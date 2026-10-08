@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34075CA6012
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 204D0CA600D
 	for <webhook@archiver.kernel.org>; Thu,  8 Oct 2026 18:55:06 +0000 (UTC)
 Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.2094.1791485701616164286
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Oct 2026 11:55:05 -0700
+ Thu, 08 Oct 2026 11:55:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=BMUq06nj;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20261008185504c5c846e5c50002073c-haq6js@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20261008185504c5c846e5c50002073c
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ElxLVrJJ;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202610081854585f52e2ae740002073c-ekvtvn@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202610081854585f52e2ae740002073c
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 08 Oct 2026 20:55:04 +0200
+        Thu, 08 Oct 2026 20:54:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=twEKyi/dSijfh1NnNZmq12KUa+lcl/IKqBVo+l3eRHo=;
- b=BMUq06njxUksYj/HKQl6vA60CO7V3G0POk2oXj2tDGPbzJosdd2ysiFkkOp2WBPxRQfOTE
- ExGtcOVrBV/gX/Kuj+VnDElIm3RLg7TBVlI4wpLX3OeFISeDMPyjO8KZILA12ndInZ1PubEZ
- Bkr/Tsl73J9LuRDAWvBrMJE6X4wgvwuNjlklAYOt0+zr0/+8p05hDqI4kisKiGPBiqK9BErc
- hfxZVW+z1EYa7MXoZ0UV3mF+fe8YnOmvX16lSbZq6qdS+N6S/EIo4vZ639ZVx5c9Mws3dTYb
- Jg8TnP37tpDWJgsrTJEnDWXlAM/uhM2nZp4lmW6Tfh+koJYUT2pwjoHw==;
+ bh=0tUD1F6LObaVapb9Ula7tFp+PPXmbT00HCtjAo1SG1I=;
+ b=ElxLVrJJhz1fffrStFZTEviamuDaLinC5zwV5AChwvhdDMNi4PL2luWiAmynT/ty/DBwI4
+ 8zGsSCUAQF9OvbwWRZGc1JOGcm+kWsdKs2xmAZVMdFP0HZBlKkmkC74l2/gq4QQ5BEwgVN/O
+ cifFOtncBppwv1tGH/YRgwg6GF3Xam8WirLA6/CPDm0vJn9Y/yChxbmOe+wJG7f52mLj9W8e
+ aflybPeOR6sNHf/RgpMlkByN8t6Iku13+ixlcaJtS/uh+WV+dEkJgie+BQaHrJtuXDke2RCi
+ Bh/z56deFwY7qVACov5SW1Al4pd+3ElGJ1YmeVL4i0WNbZNu+nC6cADA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH] libwebsockets: patch CVE-2026-78161
-Date: Thu,  8 Oct 2026 20:54:24 +0200
-Message-ID: <20261008185424.999795-1-peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] libwebsockets: patch CVE-2026-78161
+Date: Thu,  8 Oct 2026 20:54:41 +0200
+Message-ID: <20261008185441.999869-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -37,7 +37,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2026 18:55:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130675
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130674
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -48,7 +48,7 @@ Pick patch per [1].
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  .../libwebsockets/CVE-2026-78161.patch        | 45 +++++++++++++++++++
- .../libwebsockets/libwebsockets_4.3.10.bb     |  1 +
+ .../libwebsockets/libwebsockets_4.5.8.bb      |  1 +
  2 files changed, 46 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-78161.patch
 
@@ -103,16 +103,16 @@ index 0000000000..ab978811d8
 + 		}
 + 
 + 		switch (st->s) {
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-index 57db93bc1d..1aa1d1a369 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-@@ -11,6 +11,7 @@ SRCREV = "2288cf200bc1c28680765bd4f07e437356106c2d"
- SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
-           file://CVE-2026-10650.patch \
-           file://CVE-2026-19773.patch \
-+          file://CVE-2026-78161.patch \
-           "
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
+index 6a3d0b4033..f0cc181ab7 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
+@@ -11,6 +11,7 @@ SRC_URI = " \
+     git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.5-stable;tag=v${PV} \
+     file://CVE-2026-10650.patch \
+     file://CVE-2026-19773.patch \
++    file://CVE-2026-78161.patch \
+ "
  
  UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 
