@@ -1,93 +1,104 @@
-Return-Path: <scott.murray@konsulko.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99A68CA6019
-	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 10:05:24 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4452.1791540314999050797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFBE8CA601E
+	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 10:06:14 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4467.1791540371568360941
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Oct 2026 03:05:15 -0700
+ Fri, 09 Oct 2026 03:06:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=l2voTRZV;
- spf=pass (domain: konsulko.com, ip: 209.85.218.43, mailfrom: scott.murray@konsulko.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-c2e43f3d1fdso849839066b.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 03:05:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=TcgmjeFx;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cc4be0e5351so2137151a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 03:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1791540313; x=1792145113; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791540371; x=1792145171; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=VkLE+5Y5fdo4oE4aHAWx5DcpfuQjf4dQbWSRyi0DLG0=;
-        b=l2voTRZVkU8EGpGyoY+pnGTmUsp+OF/qyn664YQGVgnkBFa3uosZ0fXWZm3N7n8jLo
-         yZB68CnPDVZUhY+6HXE2NA2xXiv6+vk4PknYg7jpCs36CgBLEk4xIWvPKLDabb93irE8
-         W9ulyfFPX/WbPt9rnO4Ivv7l0Z395lZotkyeU=
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zW7fa9ELvSZj7Lk4aXp/EZ/IzrkEu4IIzWUTXNUwalo=;
+        b=TcgmjeFxtYtvvEc4DYAkYxDJMB+ev+JhxgeuE1G6HsGxBfudFW0o5Mn3UcIbM6DWM7
+         SBXWiOF6JW/z8mgtB/CIiEPoCip+eHbmk6+N1/LemXaEGscvzCMtL02nQcQQ+MVPoFBF
+         iLoLE4qdXV4Wppez9rlDeLfwcflFi3qa926cG60tgg3AJGh+XCeblg75x6kB87+XzI3e
+         YDyBNl5I/SPn7yvqO9/Hj7E4qSiIRV75vrusfjPiDwKmHG/QG1IHIGOYcdzmAw2NcYN2
+         0irQ7RLWnpuvg1soAC37FeSa8fvcNKjFS5C1VJS9Sr6mVElozcZOq1nfXGOeM2YplBnK
+         Vnkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791540313; x=1792145113;
+        d=1e100.net; s=20260707; t=1791540371; x=1792145171;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=VkLE+5Y5fdo4oE4aHAWx5DcpfuQjf4dQbWSRyi0DLG0=;
-        b=HHGXVp9D5G6s2IbeS9krHr9KtC4J9noXQSzLJ4x0Ko0hIol97IAPPGAO8GVZF7eDYl
-         57CtqesBuu1Ht4ZkDrDGTS9JtybLeUd8xyBVKYuhIqGpncX7m1Bu1dTxv4CUULZQAdDf
-         7R7oL49oGqxwV8CJkkv9Q9cW/rqlHGtnUnQI/j3J+wy7BD9oiFC3GJEJJqusA8OXVLeI
-         lZhigL3f/kBcEklbu9xYARoQpocr1ukMEZSlpdN92e+ni3kHXd4BqzUDTySXr1BnSjBm
-         U4Zxxul5NIF/EtDpDm7xgK+Tj2ARtfo7cuHNAnfUadZBYZhtBH9cLtC7eKxPHjYMEopI
-         JfSg==
-X-Gm-Message-State: AFq9FYJq2kivcHoU/5715puxYRIytXq1HcCpxsQl/ZVuN7nv2/utJAiu
-	LpCBEBAOuQzNF4cdrMKeBe1ro5PDG8WTVF0fFhcekk5X028cRIM67F0JkZE3q7BnEPmSc/Qs95/
-	sbfkHU6vFtw==
-X-Gm-Gg: AYBFou0DLxl2WBP++I74QHPdJvCoM1sD7R6pYcfsG+XH99hOagkliojjtfJbzV8FZnh
-	yYUzJsQ2m4hqAbf2KWn6NMdUR80WACijouXsB+kZrvoxAiwFTiFoDT47kWpzMirWF8Tdbnc4Wa0
-	h6TeB1jVAQk6eZVeVOvEKS4wVpP6SOFVRR+wChpqB2i3WLTvEiC+PAB3q0+sNqDX3pNtfRSgSlN
-	4myI7RsSUv4TerIENAbKcQARBQmf6ZRlzFo1z0i0m1HayPp0urf+2iS7QSsqGkYCx7GuCE7Ns4J
-	ZWA3Ly8WrOGuM+02B4zhde7TajWR0RX597+w1u+dvE91+PZ/w57iZwLXdjIV+DyQOlkaxOgY+aX
-	/O0fXSWpUEjCYZVIMvrCHC2XS8qGDg8XEPNDfE2vKoafi0zxbvmOrinmoYtUNw/ddda+OWrEGFm
-	RT9wc6s2rjzLjGbggxX0LWxjEVEjR01KxZHaqxFNvUexht6LEu446DEw9tXpXg9bYLcYFutiJYP
-	IF96aTV1xDWF6vOIGKel5cPYNsTQYBMq6/mgJGQ518M5xPB1S5GRA1ySXIrOEzT19tma2uC5Ag=
-X-Received: by 2002:a17:907:7f94:b0:c2e:34b7:8899 with SMTP id a640c23a62f3a-c31aa0790f5mr139816666b.30.1791540311293;
-        Fri, 09 Oct 2026 03:05:11 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9acf232sm3079996f8f.47.2026.10.09.03.05.10
-        for <openembedded-devel@lists.openembedded.org>
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zW7fa9ELvSZj7Lk4aXp/EZ/IzrkEu4IIzWUTXNUwalo=;
+        b=2xedgCPaEAi5/0KlsUnrkR6wl4ugnH+NWOkhgVLFg1x0VA5h2AKh1dZXINTEIpY64g
+         ZN+aFuCWp9oy3jnXztEuBKbMeVlFSQwxLXbjMSaMb5aAUgobaXjK9zD5yLc6CAEqrqMJ
+         4WjHCbNmj62kKnBuTd4UOr/UDR8REKCCObDQMrgfLj3pNkkR9NdtgHn4R6ZLgy7qu0Hm
+         beS9JVU3jg26Nw9Y08P9NVC9sZB6XgOADU6avTIxg+F6anTi+/ehflEq8bakpSCvewW2
+         8Y8/KOZo2IBmRscqzHvb+O27seTI7MesiXn8kb58YmT2yZpSa4o5k6b/lNvTxel8z69a
+         +zQg==
+X-Gm-Message-State: AFq9FYIlgTrajebxUKpI0XYRJsdNVTnLu0TNP69n5NYhpfXufT6KSyQZ
+	U2uG7F5hs8ZHAq0HeyJbgU3h37ecZBt52W+4CeuUlfAnwXv5CoF0/gMA4q1MLBDz
+X-Gm-Gg: AYBFou2xmv0EpkZta1+nfU9kH6IzW0GpTYM0cAcp/xUXbtq1k7uiV2Z5gpBrj/2dICn
+	1ARFdrL3OsyubVPMTWNdhcy7q3piHAmVKAQDlpYnV88EnRqbszLdRbhDwHyuzv1E6fJEcrAdSpG
+	V8U4cn49JmlbQkO/tzEQ0k51mZb6Gh+0VqFPRMaZgpZOFX469c9L7O2GvamIOgoVw08LCKhyN2y
+	F4Q535sByGd6f7LokXSkguWKN6pfogqzwomb0oBiSYIe5M/f2h7WARY+iICcpVgRuCewRRxAYOq
+	eC+4ft5Z1uoQNMU+ehOeLjIBaVJdixLkoElmot1fDn0pnsOukwP1ED7QI9tWY0o7nAbiKB2VtQ9
+	7D163wf8eGRydzhWd6PSCRZQp4VmO1SU3y2kvZ9ltgUZt73Mx0ji1jqu/nMLh4GCPH+g77Z41+G
+	7jHDsE+injXgoDF+Uyswu4aYGaw/l9Fx7zaEKoq3Ln55JFNxcMnIiv81e38it9PpHgPoC0Mi24L
+	LT48KnJRM0TSdimsDzFWnYMIz8gyJTjfXKNpxsVk59Jun71EQ==
+X-Received: by 2002:a17:90a:d44d:b0:3a0:8050:2ec9 with SMTP id 98e67ed59e1d1-3ab3a747306mr1297050a91.16.1791540370899;
+        Fri, 09 Oct 2026 03:06:10 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38fc9e52sm2723866a91.13.2026.10.09.03.06.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 03:05:10 -0700 (PDT)
-From: Scott Murray <scott.murray@konsulko.com>
+        Fri, 09 Oct 2026 03:06:10 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/2] python3-dateutil: Add PYPI_PACKAGE_SDIST
-Date: Fri,  9 Oct 2026 13:04:56 +0300
-Message-ID: <2232b4251396c3bced4d71981a119b0482273deb.1791537542.git.scott.murray@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1791537542.git.scott.murray@konsulko.com>
-References: <cover.1791537542.git.scott.murray@konsulko.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [oe][meta-multimedia][wrynose][PATCH 3/8] srt: upgrade 1.5.6 -> 1.5.7
+Date: Fri,  9 Oct 2026 23:05:38 +1300
+Message-ID: <20261009100544.1428938-3-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261009100544.1428938-1-ankur.tyagi85@gmail.com>
+References: <20261009100544.1428938-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 10:05:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130684
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 10:06:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130687
 
-Add PYPI_PACKAGE_SDIST definition to work with pypi.bbclass update.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+Changelog:
+https://github.com/Haivision/srt/releases/tag/v1.5.7
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 426b417769da1b08cc17f80fe4385978bf2fc38c)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-support/srt/{srt_1.5.6.bb => srt_1.5.7.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-support/srt/{srt_1.5.6.bb => srt_1.5.7.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb b/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
-index dd3f55edf9..291fef5880 100644
---- a/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
-@@ -8,6 +8,7 @@ SRC_URI += "file://0001-drop-the-six-dependency.patch"
- SRC_URI[sha256sum] = "78e73e19c63f5b20ffa567001531680d939dc042bf7850431877645523c66709"
+diff --git a/meta-multimedia/recipes-support/srt/srt_1.5.6.bb b/meta-multimedia/recipes-support/srt/srt_1.5.7.bb
+similarity index 95%
+rename from meta-multimedia/recipes-support/srt/srt_1.5.6.bb
+rename to meta-multimedia/recipes-support/srt/srt_1.5.7.bb
+index b4ae8bed09..2796ee443e 100644
+--- a/meta-multimedia/recipes-support/srt/srt_1.5.6.bb
++++ b/meta-multimedia/recipes-support/srt/srt_1.5.7.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/Haivision/srt"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
  
- PYPI_PACKAGE = "python-dateutil"
-+PYPI_PACKAGE_SDIST = "python-dateutil"
- inherit pypi python_setuptools_build_meta
- 
- DEPENDS += "python3-wheel-native"
--- 
-2.47.3
-
+-SRCREV = "c63c311e88aa55e430e3b7d94b89d790994f88c4"
++SRCREV = "d99d2e1a3b1a213b03c7dfbea5133898935fdeea"
+ SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master;tag=v${PV} \
+            file://0001-don-t-install-srt-ffplay.patch \
+            "
 
