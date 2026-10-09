@@ -1,109 +1,108 @@
-Return-Path: <philip@balister.org>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6C57CA6019
-	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 13:48:26 +0000 (UTC)
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7640.1791551797892535508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97851CA601E
+	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 16:42:37 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.93.1791564147824598224
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Oct 2026 06:16:38 -0700
+ Fri, 09 Oct 2026 09:42:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@pengutronix.de header.s=20260414 header.b=Klf0hwaN;
- spf=pass (domain: pengutronix.de, ip: 185.203.200.13, mailfrom: bst@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
-	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 02599201CD6;
-	Fri, 09 Oct 2026 15:16:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1791551795;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Tl7mzraDaP/UBLwBEjJ8RkWUPYSe1kT5W4ZJene9Wmk=;
-	b=Klf0hwaN9pfV7DfB0U/vYUg48y8mPHBRtLScneAMbbEK3XkakPsLI1YB0bi7wtVEdolzVN
-	Ygd7bmcpP/zk9fSUYUiIOA+K1yNGDkmRXnIOXNP+4I/yWxo2d79FpIVnUe8MCMFgsxLWgN
-	ATMYzkN7Ex1zY8jQlu4MDxWONOfwsOExYwy647GeG7BEJwCAE/eVv5FO6asFTPiW1SHQma
-	cEp156ecelXrwos2Jf8IwgyLwCJRkIRQdteF2aDJwpSl2Urq5YjJiH7FVXohEDmpbAbfKm
-	Cxnt9zqFd+s7+1R4VkwpCawvnLtoHkOhGB+K3chGUL1luRKVBBEpfphlec4j8A==
-ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1791551795; a=rsa-sha256;
-	cv=none;
-	b=MBHtmqqMdLpZxlEgBPw+A15bkKpUVRftaoqWqfMFIpBTubenNXX46C5x1eSKEil/YFYTXa
-	IWC5bzL1iTV8IJHHUr35jlZMvVJAsF0NuhEYirNAKjN7T7miMbaxm+2EcikrMjbzsb27iX
-	KdKeAYodwdnR7ssWpQt2yat0pbvuRwskoT2koiK4O83cxA2foF0IIzLUB5QHN+RWnX82S2
-	3lA4pW+KwB49Isxomkx8eLAGiDJsZ2bNZV1l2q5Q+qcRH3xkQSGzNt8EWmNhjQTESV2b7r
-	uMaF492B451GDYSIfGV+Hl8aKK+1JYZ6B7IE6z+2tBQb66oZaeCugehbv5+/YQ==
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=relay-from-drehscheibe.grey.stw.pengutronix.de smtp.mailfrom=bst@pengutronix.de
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1791551795;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Tl7mzraDaP/UBLwBEjJ8RkWUPYSe1kT5W4ZJene9Wmk=;
-	b=A3SpBo90G0blfBmFnUnYCygwrKTmEsGN/NO6x9UvRw/onGp8N488EA6/HGQo/n+abbF43W
-	ZS0EOjBfNKNfRtssfzvhvQ+hGRQTTCWsT4FmtrU+bIAJ0jG36MA60EZVyz3e5u6nVufUGI
-	bslIn2aLGSFfoLmRUbXEkHHLNbkOKl2NQBAAP3gjGw7YD9pcxhfKdRbyuF5KA332jRsQeF
-	bx7ZIs9h+2sktA58zJ2wAGvcAJ/3nO8nstyy4nb88AJP7uGA8FF0aPFXclotwJbKMZqGXk
-	3H4USBTyddeNgW0tYGfyyvGH26zEgOvvv/sPoqgx/G033tVAnC6/cQHYrM0i7w==
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <bst@pengutronix.de>)
-	id 1xFASg-0053Ki-2l;
-	Fri, 09 Oct 2026 15:16:34 +0200
-From: "Bastian Krause" <bst@pengutronix.de>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=u/qM+60Z;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-2026100916422467e6fdd90a00020788-qkzzfu@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 2026100916422467e6fdd90a00020788
+        for <openembedded-devel@lists.openembedded.org>;
+        Fri, 09 Oct 2026 18:42:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=+pnJfylU2GSAk06Z0vYYADie1beFliYwmGM17mcfc7w=;
+ b=u/qM+60ZE/FXXx06HaGF2P/bZiMnnL7JTU4wfYcreHdvtti1u2qdyuC6GvrMxq9CQ5o3ei
+ cTA7N1WBFH7IhKlAuiRmtas+GvjErb/nVHZ/lJhUvWOAa/h84DNhEhjBY+DT+JQjQLRFF6uR
+ ul+E+dBybzkQqIKRavQ+RJ1mMUdea1byRf1BvHwdroij8vU0KtRR1SlkdLNoxQbvoN6+N4T/
+ BffY5goshGU+Q/Y1uu169QTS8Nm9PDWfoFHA/LREbF19rA6AueAslvUQGGEyXJhyv6egwUhH
+ q6sGNtWJufOZTdZESNe/r0P6talZGYp7AomVJB35oCluupyVa9I8b9cQ==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: yocto@pengutronix.de,
-	Bastian Krause <bst@pengutronix.de>
-Subject: [meta-oe][blacksail][PATCH] pcsc-lite: create pcscd user and group also via useradd
-Date: Fri,  9 Oct 2026 15:16:27 +0200
-Message-ID: <20261009131633.4147806-1-bst@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][scarthgap][PATCH 1/7] squid: patch CVE-2026-33526
+Date: Fri,  9 Oct 2026 18:41:57 +0200
+Message-ID: <20261009164203.1744134-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 13:48:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130696
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 16:42:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130697
 
-The recipe currently only does this via systemd-sysusers. This does not
-work for read-only root filesystems, though. So use useradd to create
-the pcscd user and group.
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Bastian Krause <bst@pengutronix.de>
+Pick SQUID-2026:1 patch per [1].
+
+[1] https://github.com/squid-cache/squid/security/advisories/GHSA-hpfx-h48q-gvwg
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../squid/files/CVE-2026-33526.patch          | 35 +++++++++++++++++++
+ .../recipes-daemons/squid/squid_6.14.bb       |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2026-33526.patch
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb b/meta-=
-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-index a8735a449f..daa1b78304 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.5.1.bb
-@@ -14,7 +14,7 @@ DEPENDS =3D "autoconf-archive-native flex-native"
- SRC_URI =3D "https://pcsclite.apdu.fr/files/${BP}.tar.xz"
- SRC_URI[sha256sum] =3D "bfcfe38a20afc49849c6bf55325e38f449fc4b26d3923fdc=
-32b969ae41a8741b"
-=20
--inherit meson systemd pkgconfig perlnative
-+inherit meson systemd pkgconfig perlnative useradd
-=20
- EXTRA_OEMESON =3D " \
-     -Dlibusb=3Dfalse \
-@@ -37,6 +37,9 @@ RRECOMMENDS:${PN} =3D "ccid"
- RRECOMMENDS:${PN}:class-native =3D ""
- RPROVIDES:${PN}:append:class-native =3D " pcsc-lite-lib-native"
-=20
-+USERADD_PACKAGES =3D "${PN}"
-+USERADD_PARAM:${PN} =3D "--system --no-create-home --shell /sbin/nologin=
- --user-group pcscd"
+diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2026-33526.patch b/meta-networking/recipes-daemons/squid/files/CVE-2026-33526.patch
+new file mode 100644
+index 0000000000..beeb07c339
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/CVE-2026-33526.patch
+@@ -0,0 +1,35 @@
++From 8a7d42f9d44befb8fcbbb619505587c8de6a1e91 Mon Sep 17 00:00:00 2001
++From: Joshua Rogers <megamansec@gmail.com>
++Date: Tue, 10 Feb 2026 19:58:49 +0000
++Subject: [PATCH] Do not escape malformed URI twice when sending ICP errors
++ (#2374)
 +
- FILES:${PN} =3D "${sbindir}/pcscd \
-                ${datadir}/polkit-1 \
-                ${systemd_system_unitdir}/pcscd.service \
---=20
-2.47.3
-
++In this context, escaping escaped URI always produces incorrect URI
++because `%` character in the escaped URI gets escaped again. Feeding the
++result of the first rfc1738_escape() call to the second call is also
++dangerously wrong because the result of the first call gets invalidated
++during the second call.
++
++No other cases of such "chained" rfc1738_escape() calls were found.
++
++Broken since 2002 commit e6ccf245.
++
++CVE: CVE-2026-33526
++Upstream-Status: Backport [https://github.com/squid-cache/squid/commit/8a7d42f9d44befb8fcbbb619505587c8de6a1e91]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/icp_v2.cc | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/src/icp_v2.cc b/src/icp_v2.cc
++index 2a4ced3bf..25f7b71d2 100644
++--- a/src/icp_v2.cc
+++++ b/src/icp_v2.cc
++@@ -457,7 +457,6 @@ HttpRequest *
++ icpGetRequest(char *url, int reqnum, int fd, Ip::Address &from)
++ {
++     if (strpbrk(url, w_space)) {
++-        url = rfc1738_escape(url);
++         icpCreateAndSend(ICP_ERR, 0, rfc1738_escape(url), reqnum, 0, fd, from, nullptr);
++         return nullptr;
++     }
+diff --git a/meta-networking/recipes-daemons/squid/squid_6.14.bb b/meta-networking/recipes-daemons/squid/squid_6.14.bb
+index fc5b827da2..965704920b 100644
+--- a/meta-networking/recipes-daemons/squid/squid_6.14.bb
++++ b/meta-networking/recipes-daemons/squid/squid_6.14.bb
+@@ -22,6 +22,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
+            file://squid.nm \
+            file://CVE-2025-59362.patch \
+            file://CVE-2025-62168.patch \
++           file://CVE-2026-33526.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "9eafe06f58a199b918e79d33d8aa03afb9ae0c11d18974dca0b44c2669cab6dd"
 
