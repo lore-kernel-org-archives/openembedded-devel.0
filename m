@@ -2,63 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 933B4CA601F
-	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 10:06:15 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4394.1791540368986579836
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83051CA601C
+	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 10:06:25 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4469.1791540382505644442
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Oct 2026 03:06:09 -0700
+ Fri, 09 Oct 2026 03:06:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nsmRiJdH;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3a0aaa0fd13so4024705a91.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 03:06:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=i/t3Ytjt;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cc4ca696de6so2385636a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 03:06:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791540368; x=1792145168; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791540382; x=1792145182; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BG4hq7zp4UgGkrAfpsxUunqQ2Ty7Mn915KPnoV/sPe8=;
-        b=nsmRiJdHkOKgR86+JRvn7hKLlUhAAGMSZ2IGlOfQmkH8khXvX9PD4bmMOJzz2A3bPg
-         c6MnoE9idW8tQJszcAplBuFOUVvJqOe4/X120Np/bNcFSU+b4XglW0LH3eS97HxR/0yu
-         oee9zLyeitJXg4Qa4ZPjdUpKpWaSRzEelTC0ehojD+XaWxQDMOt8JPgDDLIM/8oavz2q
-         ty+dTfex1XF5NhqrC+nvzbHf0u6FrS4RMsFMpGigG36lRu8PV4X0OBShB0afIFBpsSIH
-         pgMEinkJJ7YqoPLJxZRhcXKF/zx8SlZlgWjWsxOgpv7YxBH5NUOOVvVxrEm4iQLfxq/X
-         KCZw==
+        bh=aG15hR5mcbGlWAufTqxFlnyLU6O90y/1iwEQVsPLkZA=;
+        b=i/t3YtjtB2QywclyvMNeHRrpaHNdnFp9iE6yhZWRlM1sSMuecqVsWnrqw0rY8DjdK3
+         SjRTNKFLmt/FZ/yQIXvC67bj5IBMYBqOf+hESAPyCnmsZr2zIgzisrp6b0ecoMlC7NVk
+         hrBzDWf03JkcJJFXzxLQ3y5Qe54uhSAF4NacBzAtcOhg+vs/b7hTvDWhFZUp7/Hchuqm
+         ozKxZlBH1nvAfPCO0x3d1VDqBF/E//g9Kg5uBQrUNc1ivRc9OQhz8MG9AEw56EDjFN1j
+         lzhPFUfeBOB4eIemJ8diyYF2CtKBH7aurI1iwbwA9w6dsSN7JIl31mDBIGaM7JUIrT9j
+         TPBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791540368; x=1792145168;
+        d=1e100.net; s=20260707; t=1791540382; x=1792145182;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BG4hq7zp4UgGkrAfpsxUunqQ2Ty7Mn915KPnoV/sPe8=;
-        b=vHu4QAucRMRtcBo4usS8UZoN2TgxgwAwpzpdp442+nsp2xZ3/Jfr8829Pr5uK0qpX1
-         juqRLhLStJjjjVcWoElVXSpRAtoraQpLn0JsbbDKZFNwseKep4wRmNdXA4Tp2DzyhJb9
-         AV+9IWB6mHj7EwpbbREGUKdZnJTuVGl9hNcVUDZxrW2FFkdi4JWxTP3qVEhvCVtG85mM
-         uww/F+EC3UT9GvHNPuwCSJ9sUiniVhzS4Bi/l9H0mTTxuf2RGcoqIv5HwVYIT9P7UItW
-         EAMrvL4OmG48kxVqu/qd+pAGZEmBJG6NPCRRRKnSzSP6MpZsSvXZI5pwqWywIWXXCXf1
-         g2Ow==
-X-Gm-Message-State: AFq9FYJMtA9sbrYPvDaHYrDe0rMBd2tsX+Q+3hNNMj9bSKLOEwUjbcQl
-	3OZ0RQSpn8fwYXIqSFQ02Z0YbvqBFX6JWh3TEtvuF98xZiIWMe4awAlch04yl2w0
-X-Gm-Gg: AYBFou0pT6bODslI3oy7VX/+rhD5i162et5RtTSLPA2H3XypDhtUdrbPFVANGBwOp1O
-	GQw/wabNSJ1VxaUC1PlDLmJR4PSbC772sMhOgYpfIucMhDHZfZmdBE+sCgLRhBaDw6qFEmxeqNR
-	K/INpkT7uYZKUuzFHIB8CbOJa5jSkPIC5LyHrQlNyVh+EFj2u/HyUeRm/n7a2svi/2K6XCLaLaU
-	yvTxqm1emz4OMGxgIST2EbipuicBGn9cnR8Ug73nNC+HAfbO/iWJdImc8UUunPN70oBDQnx+xmw
-	YjO35octoh8RSP6j8XUsd/TGf3qAYtyeYx8woqpQ3DZDRspuDmXsStza4NPgxIaoSLgeNbT3qFz
-	tbnwMH9OfTc2AV3zBe+U7iHasB3nd9IODKSmwO92KLulX2u1dXJf3FFrlInagHB1YSwVwLkHPOE
-	XRx7U37gvzNEE8vhygffYRb/iBCNEZMyX72rWefD5T+S3hkVWbiVyJMDy6Rg+tS9NFqZFffBS3A
-	QFjUXhut0ojTnH5AgnwMWBtNZVQRjn5L4Doqse5yA==
-X-Received: by 2002:a17:90b:224c:b0:3a8:6045:5a19 with SMTP id 98e67ed59e1d1-3ab3a8ce938mr1351260a91.37.1791540368220;
-        Fri, 09 Oct 2026 03:06:08 -0700 (PDT)
+        bh=aG15hR5mcbGlWAufTqxFlnyLU6O90y/1iwEQVsPLkZA=;
+        b=ZhJE8+6DdKf/pEki00HR7uRSybdlkyDyMwfHLzEiSVJ9Gw1GzGHZ3Cxw8F6YJRlhHT
+         /2ArreEpDRGxi41gbygdIrYD6bNccxfUgNE9jvCC7FUMsB5IO0j7V2x7zIntpkFMjeog
+         pRyySHHpUm1ZC0lyU3g347gVcAtW7m0mZxXMfI2jqGGlKquAubHFlgbxS2wD2skOHaOQ
+         ktIjx2munFL2XU5c8tNcClivZXpmxV0DAiZsQcqS5yeJF+JqQxZFo7fGz0UzFoOTnFxG
+         pQ9skS0re91eSCHhRqUUDJdHAUQYkfBHWk8y6tcI6wzaDRv5oeEoMMDAFO5PQRCMtUJb
+         Jl3Q==
+X-Gm-Message-State: AFq9FYKLsRcbhQIHLKQJ5ARBOQ/04AT4tTPMf21GpQOGGOgKY+ztIiOy
+	C/5hG9vPxkeaJ8ziahzk33DRUGuQbp02M+MATwSCxjzoxRRYUg7RnnwRaOm8og==
+X-Gm-Gg: AYBFou2eiXQiBUlY2YQijY2b5ODl8i5kkSqIrHk93cUGep2/gdpGSlwhhyTrwdFLsfu
+	wZu0vEGlHoHWLvyXB86gHEa63waJaATE+NK/rScrRc8h4pSVRqIviXRze6yWzfJUaz5+mZTbmK8
+	3oxfhaNl+MmXSFv+lroLMpDAf/4nXzxi/gt6yRUwQ7xin+msJNKu1Te4/+jYK2oijsfalVDC+wC
+	nAsCd16kadHk0gQi8VO72jsG5/4Ntf10fHKrMzn+o63Im23OaibNcUihd5Jtw4y9sTby0XKgGmW
+	aDeJtDMl7gm8UV2WDp2t0uuS9VREqTLR/hJWJE3nGaTOscs+OxT4TxdfpVg75E8fPMBdu8i9Tq4
+	R53732Qpe8QBqQN1ZpyN4ANqVAYI6QIEzfcbGJ1k7SUC8TBCdoFmk6TZR7L9MVzm2ydiak7yITl
+	JK4ZQVNpluXn0BOKZmhggiKnCvZNwzg41gvR0nwMihnF+wq3MCy7mUjqT2I1n4eg4Q+1jjEPBNI
+	awWiMyOlPoYSgca/iBJDMzy27RMKaDkWY36Sf6qXM29bSftTZDA
+X-Received: by 2002:a17:90b:3145:b0:392:ca3b:370a with SMTP id 98e67ed59e1d1-3ab3a33db2bmr1317245a91.2.1791540381855;
+        Fri, 09 Oct 2026 03:06:21 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38fc9e52sm2723866a91.13.2026.10.09.03.06.06
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38fc9e52sm2723866a91.13.2026.10.09.03.06.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 03:06:07 -0700 (PDT)
+        Fri, 09 Oct 2026 03:06:21 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 2/8] znc: upgrade 1.10.2 -> 1.10.3
-Date: Fri,  9 Oct 2026 23:05:37 +1300
-Message-ID: <20261009100544.1428938-2-ankur.tyagi85@gmail.com>
+Cc: Devansh Patel <devanshp@cisco.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][wrynose][PATCH 7/8] python3-werkzeug: correct CVE_PRODUCT mapping
+Date: Fri,  9 Oct 2026 23:05:42 +1300
+Message-ID: <20261009100544.1428938-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261009100544.1428938-1-ankur.tyagi85@gmail.com>
 References: <20261009100544.1428938-1-ankur.tyagi85@gmail.com>
@@ -67,34 +69,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 10:06:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130686
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 10:06:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130691
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Devansh Patel <devanshp@cisco.com>
 
-Changelog:
-https://github.com/znc/znc/blob/znc-1.10.3/ChangeLog.md
+The current product-only "werkzeug" mapping emits a wildcard-vendor identity instead of the exact identities assigned to the packaged Pallets source.
 
+Use "pallets:werkzeug" for the CNA affected-data identity and "palletsprojects:werkzeug" for the NVD dictionary CPE and configuration identity. This changes the generated product identity, but sbom-cve-check 1.3.3 with the pinned databases leaves the current CVE report unchanged.
+
+Signed-off-by: Devansh Patel <devanshp@cisco.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit fd0b8a36e6bbce468654cb917254cd9c32ef923c)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-irc/znc/{znc_1.10.2.bb => znc_1.10.3.bb}            | 2 +-
+ meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-irc/znc/{znc_1.10.2.bb => znc_1.10.3.bb} (94%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_1.10.2.bb b/meta-networking/recipes-irc/znc/znc_1.10.3.bb
-similarity index 94%
-rename from meta-networking/recipes-irc/znc/znc_1.10.2.bb
-rename to meta-networking/recipes-irc/znc/znc_1.10.3.bb
-index 7793813234..adb6546471 100644
---- a/meta-networking/recipes-irc/znc/znc_1.10.2.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.10.3.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- DEPENDS = "zlib"
- SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https;tag=${BP}"
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
+index 4e1be5cb2f..fae4de2a3f 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
  
--SRCREV = "59af2206c62724eec0d8c43d3c1c0b70610ca1d9"
-+SRCREV = "6bd91573cebd1e4ee954ebd4eb6db5b654e0e412"
+ SRC_URI[sha256sum] = "9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44"
  
- inherit cmake pkgconfig
+-CVE_PRODUCT = "werkzeug"
++CVE_PRODUCT = "pallets:werkzeug palletsprojects:werkzeug"
+ 
+ inherit pypi python_flit_core
  
 
