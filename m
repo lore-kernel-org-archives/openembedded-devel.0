@@ -1,173 +1,115 @@
-Return-Path: <yurade@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58904CA5FED
-	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 04:47:11 +0000 (UTC)
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1369.1791521224736461873
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Oct 2026 21:47:04 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0803CA6015
+	for <webhook@archiver.kernel.org>; Fri,  9 Oct 2026 05:35:51 +0000 (UTC)
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1724.1791524146824062252
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 08 Oct 2026 22:35:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=gcN/ZJKd;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: yurade@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=LOaOml9y;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-8ac525c1f05so58000567b3.1
+        for <Openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2026 22:35:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791524146; cv=none;
+        d=google.com; s=arc-20260327;
+        b=MZ+4Gmx7TSxb5aw0mYm3NzKMUSVZr/FQgejx0AWTGmyM9nnvSgHdLNL/6q4YLMvMGs
+         nyd33/OQPJ3uKmFnNcWC/8rJ5uWdfoTz/0rqUA2+ZiZEHzPrKTdpw2XTGVVMvdDsXglK
+         SJiEB24yV3kP/2wqFjZeSqA9YxsDJZ4QEptJaoB1o+OqESH65iBfMGnIZ9gFRPwKuxya
+         PVGiZ6WmJbFJwT4s470OQLnP8oQ5cwwZcpWavcyojSvwg+XN05de84NQL7YpIP0AQVXv
+         Lhlg1lSGEBxHNCCrSHxFLp9/7NTeB59Z9KUOjtfw+RMj9LqilzJ5RAp7r8k5U7Fi+/vk
+         yaxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=oG0B432xlQf1tUig+J8fja3/s+HQOhtR47iehK9PZiQ=;
+        fh=MnWQIt+qfwr8t22dRaNnBDw2a+cdT5G5r5+L6LPLbJw=;
+        b=HUKZEt6jbG0/3DstXnK0Yay4ueWEHjlOnTrGBmDokxbIkJkEbyIcYBN4beOV3OAK2g
+         M9q7ucN+QsJtpaUDnPObPyKOxjiP4LvvNek/INgGOXublnS66IR10Tk/h/V8PfhlrjSs
+         Vw8ucurQSucmANqT2p0lm6PuRsGc9JkBVcq4B7gS9FCfrlWtfbMYM389HnlxmSN2Puue
+         iVrqtlWZ6dHhm2X1h0osnsDswagRsFSytXGPWTB+/wFN82YWI3Wrqmgi+DKrNWW6ZFMl
+         qC5bl0w3kwy4g+YJRlEJqEiC39Ee7nFTR/LlvESPR0AyQv1WNyAQ6DEH8/99sUWvUtGn
+         M9MA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3745; q=dns/txt;
-  s=iport01; t=1791521224; x=1792730824;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=vt2Cwkipj/Q3cHCMRmlk0HftKWbbscGl0KgtZCwl9/Q=;
-  b=gcN/ZJKdXWNwtNS0DbeMIuOlv03KoYvYbj5hYhL6iCUjg+QPpwys8QPF
-   RFvW7Xfb+eYrdbD6RXG+0o5DQxp7zYZoSsQ2kzPiU30Llv+7WJGH7s7+w
-   893nybrgHcqNpuQqJYskYj+vA++D3DMwWdWRaF/MwDI9x7iYexXN79T1A
-   +d65E4wjTL6bq6g+NSCl+SfYARyR92JjcmuwXty6LEm5Cu46d4AQ4VHLG
-   jeoibE5pyiFC57eQrIR93mWxYwBDQFacMOkGbU3diApo0X1s7evdwmHyI
-   ExiIETmaRVeAUvPlkUrrmCZHqU6D6XlP2jpmMVpSn0qC+hhv4fqfXpEja
-   A==;
-X-CSE-ConnectionGUID: Oo/2BwYJTLG7WqjrFQQf3Q==
-X-CSE-MsgGUID: mlW8MBDIQ1muM3NVZIdrHg==
-X-IPAS-Result: =?us-ascii?q?A0BDAgDGcMhq/4//Ja1aglmCV3VgQ0mUKYIhnh2Bfg8BA?=
- =?us-ascii?q?QEPRA0EAQGTGAImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBD?=
- =?us-ascii?q?hOGTw2QEgE4ARgBWQMBAlojIYMCAYJ0AxG6T4IsgQGDCh8BPwJDUNlKgWgBC?=
- =?us-ascii?q?xQBgTiFQIgjXRgBhHwnG4FJRIR+gQWBXAEBgUqGWwSDHBKBWpQoSIEeA1ksA?=
- =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+F4EHGwYFgR2BIIIWIxk2eoEJXoErKWEQF?=
- =?us-ascii?q?4EJggcCglSCAAIBSUEOB0VTCSVDEkcmIggSCQETGjALgRs4PAkoQRcMdAgYD?=
- =?us-ascii?q?UgRLDcVGQQ+bgeRAx6CYYEOARMYIDccgRU1C6VaoQ+EKIwilToaM4VbpRQLm?=
- =?us-ascii?q?H2OCpZQhGmBaDyBRwsHMxoIGxWDIglKGQ+OOYNrgX+CCMgyJzICCTIBAQcCB?=
- =?us-ascii?q?w4DC4FokAABJwSBUgEB?=
-IronPort-Data: A9a23:SDti0a6PjUPDqhaDFVkw/wxRtG7GchMFZxGqfqrLsTDasY5as4F+v
- jFMWm2EPKzYMWPzf4sjbd/gp0kPv8XVzdMySAY5qX9jZn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/KUzBHf/g2QqazpMu/rZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eGopfoMxoMENy0
- dNHFykPdD66vuzt+efuIgVsrpxLwMjDJogTvDRkiDreF/tjGc6FSKTR7tge1zA17ixMNa+BP
- IxCNnw1MUmGOkEUUrsUIMpWcOOAl2TlejFVgFmUvqEwpWPUyWSd1ZCwa4GMIITSHZ89ckCwo
- 2b5r0HTLjAjbdmC7GGjzECNivXvknauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjZCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1rd94cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:/Nq5J6lSie7mG8yoPAm9RMtMkMbpDfIc3DAbv31ZSRFFG/Fw8P
- re/sjzuiWbtN98YhwdcLO7Scq9qA3nlKKdiLN5VdzJYOCMggSVxe9ZgbcKuweBJwTOsshAyK
- xnb69yTPf0DVR8kILGxTPQKadE/DFCm5rY4ts3CBxWPGVXV50=
-X-Talos-CUID: 9a23:iXCf8G/inhsjT5X4tyuVv2kTXZoPbUz/8FP/fHChC3xHcYSbEmbFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3AvYHvrg6lAixzl/uJb1R3jK/Mxoxt55v+LWohsKx?=
- =?us-ascii?q?fvtShbgpOCRaRlhS4F9o=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,147,1787011200"; 
-   d="scan'208";a="533120002"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Oct 2026 04:47:03 +0000
-Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id B322218000276
-	for <openembedded-devel@lists.openembedded.org>; Fri,  9 Oct 2026 04:47:03 +0000 (GMT)
-Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
-	id 5733DCC1611; Thu,  8 Oct 2026 21:47:03 -0700 (PDT)
-From: Yogita Urade <yurade@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][scarthgap][PATCH v2 1/2] hdf5: Fix CVE-2026-17573
-Date: Thu,  8 Oct 2026 21:47:01 -0700
-Message-Id: <20261009044702.1620975-1-yurade@cisco.com>
-X-Mailer: git-send-email 2.35.6
+        d=gmail.com; s=20251104; t=1791524146; x=1792128946; darn=lists.openembedded.org;
+        h=content-type:to:subject:message-id:date:from:mime-version:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=oG0B432xlQf1tUig+J8fja3/s+HQOhtR47iehK9PZiQ=;
+        b=LOaOml9y7dATR1DKHD3csoSZC35Tubnpfiu+fdh/T0sdiwRLiZzxHHAaKxMNjBkHUF
+         ammc3Lhdt3gwXybufNtUvDbGeeMdfvM7Cyfmi2PRdfbSYp1yGTqhnLfRPnSper+ysY9p
+         0wR6NK/UOf2sueymZb9gfvXm2yRkBh/xVhnbWVinKioebf/5oprToRs8MXc/sInYAKlh
+         wgmvMBtf6DlcSkdn3gvEZwg5mqZfydvCOGmZThjGoHw7o7a/vu1X1srV8d3Q/FsVfAEb
+         73RrDOLuO1SqbPK86hJ9uz7MSpnftwUSqbxuY+45nvZC9OE+QJxmdZNgO7b9mFXT7cny
+         13mA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791524146; x=1792128946;
+        h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=oG0B432xlQf1tUig+J8fja3/s+HQOhtR47iehK9PZiQ=;
+        b=PwSzRyz5yGRmxCPMl4PtQIHQCUc1OabKHoIXByTJQV08foOJnsfsCzLLFYQTUfBpCU
+         fgblSiftE/K6RSUC7Quguxo1pQDc3bgBAgYBfts3vKrJrPiDHevfebQCV1s/LamWdY7y
+         1n1A/8RZ6WM+XkNNfWS6ViA6eCkVgC2lEKZVImcMMZYE9OtDYGJLjXayxSt8a1REsmBh
+         DYcDtj9YmZTjNuV7/6XODGp2IDl+Tee3vov5M5MrysuOUAnbGLkBCV/918Q32hNemij1
+         vMdNJY6olUysJJmymOFFuDvjLLIaYvqLveWE/5YqmOgSnt/EbFRA6CLLvXIAmqPlS3NE
+         tSBw==
+X-Gm-Message-State: AFq9FYKxjYLyxKkiOg6WDR9JEOUszuRzngue1VMDeTiT9RYhS9MYrGJq
+	pcVcvhSkEnE2EE8dTXq3NJvc/awun+P57t2qRXu8IDEw83ovvNaSjbdioCIUqyUm1rswPg1QgCu
+	igLQsvB4BgDzysVf7MDqcNIQ+lEhbsMx6F4IDUqCkkw==
+X-Gm-Gg: AYBFou1tZVL9/6JUBZUcSiRDK/MdzaYN/h6OUQ98zJRLZqwRNhvZGBj+dnGuh6+XzZy
+	PJo5PKPn3bDDdUgHJxJkuTT2xqUez8WJf0OJ58OkJv+w4gv2mMVUnWzCr2fj7yZm0drb8HYy2TO
+	jbKrBYu6erpYXT9F5gtLgE/BOpy7U5QdSAMHG9/G10lHqL2Kma1Tmjk+72fTTMsSJV7AD/7Wzet
+	+3nSp8OuBT90uD3AgTRTTC4AjBleZFXnaIfbfmevCSQzOLykGjvoTQBnOJtSlIrKi4oT5v7nHFJ
+	lLigEvPTkjjexWLoBSFoEDN5ZLUgy2iYtKn+CHhvWM87cWa1Siq7xur4DGnvQ1cv88snK177bm4
+	O3pv73RR1WoHWxMjSbrKvlxj4SIBqzAibFKczZEAEsW2vA2qiKeL99VrwtYmq/466ibKpvorvQf
+	2oaKB0iVxjX9aTpfcq8tHySlRvF3PgbdwsRgvyM7zZ/UbljReW3cFMpZ0adk2MRBDG6D1UmAmjG
+	CNXoYbts81Z5CVgmsED71Rxwsxtr01/1GfOQ+3XmLzvY8ebI/FrsTK0/1sJuBC78lDkIBocq6kB
+	vOaoFU52
+X-Received: by 2002:a05:690c:10:b0:8ab:6374:5637 with SMTP id
+ 00721157ae682-8b07ee265f1mr3466447b3.28.1791524145726; Thu, 08 Oct 2026
+ 22:35:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 8 Oct 2026 22:35:18 -0700
+X-Gm-Features: AclHuK8cAH3ZIdkSCxhKlechudXh5WErB6RXRR8IrrwGsobxJkv2ZZfZM5YXT4Q
+Message-ID: <CAMKF1srDJiRWygw9=R8NrcFoU9shecb7XAmu3KY1Q9LgagGRvA@mail.gmail.com>
+Subject: Blacksail release branch maintenance
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000500ca4065d61b8f6"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 04:47:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130678
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2026 05:35:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130680
 
-This patch applies the upstream fix as referenced in [2],
-using the commit shown in [1].
+--000000000000500ca4065d61b8f6
+Content-Type: text/plain; charset="UTF-8"
 
-[1] https://github.com/HDFGroup/hdf5/commit/dd3080a58cc6bb86f3b34284399915da9e513262
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-17573
+Hi All,
 
-Signed-off-by: Yogita Urade <yurade@cisco.com>
----
-Changes in v2:
-- Prepared v2 to include the previously missed CVE-2026-26197.patch
-  and CVE-2026-26199.patch patches. Updated the source code to
-  resolve hunk errors.
----
- .../hdf5/files/CVE-2026-17573.patch           | 49 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
+blacksail has been branched out for meta-openembedded. It will be
+maintained by
+Ankur Tyagi with full guidance from Anuj who is currently maintaining the
+LTS branches
+Please send backport requests as needed prefixed with [blacksail] in the
+subject line.
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
-new file mode 100644
-index 0000000000..0acbbbf0c8
---- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
-@@ -0,0 +1,49 @@
-+From dd3080a58cc6bb86f3b34284399915da9e513262 Mon Sep 17 00:00:00 2001
-+From: jhendersonHDF <jhenderson@hdfgroup.org>
-+Date: Tue, 27 Jan 2026 05:55:38 -0600
-+Subject: [PATCH] Fix double-free issue in H5D__chunk_copy (#6160)
-+
-+Fix double-free caused by loss of buffer pointer after re-allocation
-+
-+CVE: CVE-2026-17573
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/dd3080a58cc6bb86f3b34284399915da9e513262]
-+
-+Backport Changes:
-+- Omitted CHANGELOG.md file changes
-+
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
-+(cherry picked from commit dd3080a58cc6bb86f3b34284399915da9e513262)
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ src/H5Dchunk.c | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/H5Dchunk.c b/src/H5Dchunk.c
-+index 4727cc5d12..86340be16e 100644
-+--- a/src/H5Dchunk.c
-++++ b/src/H5Dchunk.c
-+@@ -6809,7 +6809,7 @@ H5D__chunk_copy(H5F_t *f_src, H5O_storage_chunk_t *storage_src, H5O_layout_chunk
-+                 H5O_storage_chunk_t *storage_dst, const H5S_extent_t *ds_extent_src, H5T_t *dt_src,
-+                 const H5O_pline_t *pline_src, H5O_copy_t *cpy_info)
-+ {
-+-    H5D_chunk_it_ud3_t udata;                       /* User data for iteration callback */
-++    H5D_chunk_it_ud3_t udata = {0};                 /* User data for iteration callback */
-+     H5D_chk_idx_info_t idx_info_dst;                /* Dest. chunked index info */
-+     H5D_chk_idx_info_t idx_info_src;                /* Source chunked index info */
-+     int                sndims;                      /* Rank of dataspace */
-+@@ -6974,5 +6974,4 @@ H5D__chunk_copy(H5F_t *f_src, H5O_storage_chunk_t *storage_src, H5O_layout_chunk
-+     /* Initialize the callback structure for the source */
-+-    memset(&udata, 0, sizeof udata);
-+     udata.common.layout    = layout_src;
-+     udata.common.storage   = storage_src;
-+     udata.file_src         = f_src;
-+@@ -7024,3 +7023,4 @@ H5D__chunk_copy(H5F_t *f_src, H5O_storage_chunk_t *storage_src, H5O_layout_chunk
-++done:
-+     /* I/O buffers may have been re-allocated */
-+     buf = udata.buf;
-+     bkg = udata.bkg;
-+@@ -7029,2 +7029,1 @@ H5D__chunk_copy(H5F_t *f_src, H5O_storage_chunk_t *storage_src, H5O_layout_chunk
-+-done:
-+     if (dt_dst && (H5T_close(dt_dst) < 0))
-+         HDONE_ERROR(H5E_DATASET, H5E_CANTCLOSEOBJ, FAIL, "can't close temporary datatype");
-+     if (dt_mem && (H5T_close(dt_mem) < 0))
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-index a69e86ee5f..d0da4dc086 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-@@ -33,6 +33,7 @@ SRC_URI = " \
-     file://CVE-2026-26199.patch \
-     file://CVE-2026-26197.patch \
-     file://CVE-2026-17572.patch \
-+    file://CVE-2026-17573.patch \
- "
- SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
- 
--- 
-2.35.6
+Thank you
+-Khem
 
+--000000000000500ca4065d61b8f6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi All,=C2=A0<div><br></div><div>blacksail has been branch=
+ed out for meta-openembedded. It will be maintained by</div><div>Ankur Tyag=
+i with full guidance from Anuj who is currently=C2=A0maintaining the LTS br=
+anches</div><div>Please send backport requests as needed prefixed with [bla=
+cksail] in the subject line.</div><div><br></div><div>Thank you</div><div>-=
+Khem</div><div><br></div></div>
+
+--000000000000500ca4065d61b8f6--
 
