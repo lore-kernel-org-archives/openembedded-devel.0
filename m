@@ -2,176 +2,286 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A61CCA9EC5
-	for <webhook@archiver.kernel.org>; Sat, 10 Oct 2026 07:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A2B5CA9EBE
+	for <webhook@archiver.kernel.org>; Sat, 10 Oct 2026 07:52:54 +0000 (UTC)
 Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5367.1791618634115937379
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5368.1791618772525572502
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Oct 2026 00:50:34 -0700
+ Sat, 10 Oct 2026 00:52:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=s5N8hbI6;
+ dkim=pass header.i=f_l_k@t-online.de header.s=20260216 header.b=YpeetPKs;
  spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd91.aul.t-online.de (fwd91.aul.t-online.de [10.223.144.117])
-	by mailout03.t-online.de (Postfix) with SMTP id EA044E295
-	for <openembedded-devel@lists.openembedded.org>; Sat, 10 Oct 2026 09:50:31 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.229.158]) by fwd91.t-online.de
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout03.t-online.de (Postfix) with SMTP id 9E1BDE341
+	for <openembedded-devel@lists.openembedded.org>; Sat, 10 Oct 2026 09:52:50 +0200 (CEST)
+Received: from [192.168.178.36] ([79.219.229.158]) by fwd76.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xFRqg-4UT2hO0; Sat, 10 Oct 2026 09:50:30 +0200
-From: Markus Volk <f_l_k@t-online.de>
+	esmtp id 1xFRsv-0Z4Yl60; Sat, 10 Oct 2026 09:52:49 +0200
+Date: Sat, 10 Oct 2026 09:52:43 +0200
+From: "Markus Volk" <f_l_k@t-online.de>
+Subject: Re: [oe] [blacksail][meta-gnome][PATCH 4/4] Revert "mutter: upgrade
+ 50.4 -> 51.0"
 To: openembedded-devel@lists.openembedded.org
-Subject: [blacksail][meta-gnome][PATCH 3/4] Revert "gnome-shell: upgrade 50.4 -> 51.0"
-Date: Sat, 10 Oct 2026 09:50:21 +0200
-Message-ID: <20261010075022.1738748-3-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261010075022.1738748-1-f_l_k@t-online.de>
+Message-Id: <VVLOMT.L25LERTE464W2@t-online>
+In-Reply-To: <18DD1BA7D38FF4E7.3352370@lists.openembedded.org>
 References: <20261010075022.1738748-1-f_l_k@t-online.de>
+	<18DD1BA7D38FF4E7.3352370@lists.openembedded.org>
+X-Mailer: net.donnybeelo.Convey/50.2-1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1791618630-D77FC47D-5F0E3BB5/0/0 CLEAN NORMAL
-X-TOI-MSGID: acd2a3ee-790f-466d-a8f2-699a6029d0c1
+Content-Type: multipart/alternative; boundary="=-3+8nTPVk2/npwd20D+dz"
+X-TOI-EXPURGATEID: 150726::1791618769-CF7FDBB0-9255FF11/0/0 CLEAN NORMAL
+X-TOI-MSGID: d4720442-fca0-4ee3-ba6d-391f1acd2fba
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1791618631; i=f_l_k@t-online.de;
-	bh=dQASgwRV3Qaf7VGbxd+qcWKJ21TRO1tjL/ILHmbb+bo=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=s5N8hbI6QGLbDPx0XTDmKnhsDhuEvYc8eryf84SyB07NX98w03uvXTTrHbd6LvNua
-	 kLUaZgE/6qrbbNOKcVf+HP2RvAc0qO5QTz9YBublpTtf3J1vfkc2jvzmAh8v3x8Lzw
-	 ME7VXPXffVbTltqKZ29V4T4kDXpgot6A6qT0th4t97vFAYsjd7UMIvfvw+smhYCJR5
-	 dOBqjb3OisNsFh4vpFVkb56Scxvs3m98phInqY29Z0Jz0hh5TDVACMOkUZ1Hq6VioK
-	 wY2jzv9ZquCza7Omb+I5vo7AHeSYhsyxqlGYIoVsHzmdWZBT213u7tDRmM3gITTrt3
-	 6TumfRS06MsvA==
-Content-Transfer-Encoding: quoted-printable
+	s=20260216; t=1791618770; i=f_l_k@t-online.de;
+	bh=iiWNIg7NTqyMCTyGy/pTxgCDlFA+68t3bk6bIn63JIk=;
+	h=Date:From:Subject:To:In-Reply-To:References;
+	b=YpeetPKsdkDoy9+O2HY+nCrxsNfFQ0gE349+jr/2+QO/yGbXr1dTgwJah7eDdPFIO
+	 +Y5GVsDAvVxLPy3iGgbQ40IkSxIQfjzEHF3HovqaU7LnkjlNNsSwt5QkaooJE18qmt
+	 P1zkk990FOaGAPxq1TYlHzRQ5KBauLq9xiYufksUP8ueLczOhMk96DpfX7pFh/p1VZ
+	 eDvuIEFRL9Rub3kbsvhrZIWEWBIdBRGC3QJuPJYZJ3rIF58lb6DcxfYSp0IF/sB3op
+	 UZjPsK6ydxKe9iWp53UlTp9nEap2uElWiHU9GHyzyQBixkto4srGzpWF1IgYLOaJSO
+	 9QUsp2HK9kRUw==
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Oct 2026 07:50:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130718
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Oct 2026 07:52:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130719
 
-This reverts commit d22efe5c4c2252226b8644ee805863d3c3b5e446.
+--=-3+8nTPVk2/npwd20D+dz
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-gnome-shell 51.0 needs mutter >=3D 51.0, which goes back to 50.4 on
+These three GNOME updates need to be reverted in meta-gnome so that 
+GNOME can be compiled with oe-core 'blacksail'
+
+On Sat, Oct 10 2026 at 09:50:22 +02:00:00, Markus Volk via 
+lists.openembedded.org <f_l_k=t-online.de@lists.openembedded.org> wrote:
+> This reverts commit 6f735ce8ac29f1e57dc463bac8c34f3c439a7fb7.
+> 
+> mutter 51.0 needs gsettings-desktop-schemas >= 51.rc, but oe-core
+> blacksail has 50.1. Tested by building gnome-image against oe-core
+> blacksail.
+> 
+> AI-Generated: Uses Claude Code (Claude Opus 5.5)
+> ---
+>  .../mutter/{mutter_51.0.bb => mutter_50.4.bb}   | 17 
+> +++++++++--------
+>  1 file changed, 9 insertions(+), 8 deletions(-)
+>  rename meta-gnome/recipes-gnome/mutter/{mutter_51.0.bb => 
+> mutter_50.4.bb} (85%)
+> 
+> diff --git a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb 
+> b/meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+> similarity index 85%
+> rename from meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
+> rename to meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+> index 6604865f67..f9b3e9d5e5 100644
+> --- a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
+> +++ b/meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+> @@ -17,17 +17,12 @@ DEPENDS = " \
+>      libdisplay-info \
+>      libdrm \
+>      libei \
+> -    libgudev \
+> -    libinput \
+> -    libxcvt-native \
+>      libxkbcommon \
+>      pango \
+>      pixman \
+>      python3-argcomplete-native \
+>      python3-docutils-native \
+> -    udev \
+>      virtual/egl \
+> -    virtual/libgbm \
+>      virtual/libgles2 \
+>      wayland \
+>      wayland-native \
+> @@ -37,7 +32,7 @@ DEPENDS = " \
+>  inherit gnomebase gsettings gobject-introspection gettext 
+> features_check
+> 
+>  SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch" 
+> <file://0001-dont-use-system-sysprof-dbus-folder.patch/>
+> -SRC_URI[archive.sha256sum] = 
+> "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
+> +SRC_URI[archive.sha256sum] = 
+> "273d33c875abcb4b6cbea3f4ec045d18155fbc510c3521fc7e47926371310988"
+> 
+>  REQUIRED_DISTRO_FEATURES = "wayland polkit"
+>  ANY_OF_DISTRO_FEATURES = "opengl vulkan"
+> @@ -45,10 +40,10 @@ ANY_OF_DISTRO_FEATURES = "opengl vulkan"
+>  # systemd can be replaced by libelogind (not available atow - make 
+> systemd
+>  # mandatory distro feature)
+>  LOGIND ?= "systemd"
+> -DEPENDS += "${LOGIND}"
+>  REQUIRED_DISTRO_FEATURES += "systemd"
+> 
+>  PACKAGECONFIG ??= " \
+> +    native-backend \
+>      egl \
+>      gles2 \
+>      ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'opengl', '', 
+> d)} \
+> @@ -56,11 +51,17 @@ PACKAGECONFIG ??= " \
+>      bash-completion \
+>      gnome-desktop \
+>      ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'xwayland', 
+> '', d)} \
+> +    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'systemd', 'logind 
+> udev', '', d)} \
+>  "
+> 
+> +PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, 
+> -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput 
+> ${LOGIND} virtual/egl virtual/libgles2 udev libxcvt-native"
+>  PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, 
+> virtual/libgl"
+>  PACKAGECONFIG[gles2] = "-Dgles2=true, -Dgles2=false, 
+> virtual/libgles2"
+>  PACKAGECONFIG[egl] = "-Degl=true, -Degl=false, virtual/egl"
+> +PACKAGECONFIG[egl-device] = "-Degl_device=true, -Degl_device=false"
+> +PACKAGECONFIG[wayland-eglstream] = "-Dwayland_eglstream=true, 
+> -Dwayland_eglstream=false, wayland-eglstream-protocols"
+> +PACKAGECONFIG[udev] = "-Dudev=true, -Dudev=false, udev"
+> +PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
+>  PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, 
+> libwacom"
+>  PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, 
+> -Dremote_desktop=false, pipewire"
+>  PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, 
+> -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
+> @@ -87,7 +88,7 @@ EXTRA_OEMESON += " \
+>      -Dverbose=true \
+>  "
+> 
+> -MUTTER_API_NAME = "mutter-${@oe.utils.trim 
+> <mailto:mutter-${@oe.utils.trim>_version('${PV}', 1)}"
+> +MUTTER_API_NAME = "mutter-18"
+> 
+>  do_install:prepend() {
+>      sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
+> --
+> 2.55.0
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#130717): 
+> <https://lists.openembedded.org/g/openembedded-devel/message/130717>
+> Mute This Topic: <https://lists.openembedded.org/mt/121684077/3618223>
+> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+> <mailto:openembedded-devel+owner@lists.openembedded.org>
+> Unsubscribe: 
+> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+
+--=-3+8nTPVk2/npwd20D+dz
+Content-Type: text/html; charset=us-ascii
+
+<div id="convey-body" dir="auto"><div>These three GNOME updates need to be reverted in meta-gnome so that GNOME can be compiled with oe-core 'blacksail'</div></div><div id="convey-quote" dir="auto"><br>On Sat, Oct 10 2026 at 09:50:22 +02:00:00, Markus Volk via lists.openembedded.org &lt;f_l_k=t-online.de@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">This reverts commit 6f735ce8ac29f1e57dc463bac8c34f3c439a7fb7.
+
+mutter 51.0 needs gsettings-desktop-schemas &gt;= 51.rc, but oe-core
+blacksail has 50.1. Tested by building gnome-image against oe-core
 blacksail.
 
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
 ---
- ...ver-Fix-build-failure-with-libical-4.patch | 44 +++++++++++++++++++
- ...nome-shell_51.0.bb =3D> gnome-shell_50.4.bb} |  7 ++-
- 2 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002=
--calendar-server-Fix-build-failure-with-libical-4.patch
- rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_51.0.bb =3D> gn=
-ome-shell_50.4.bb} (86%)
+ .../mutter/{mutter_51.0.bb =&gt; mutter_50.4.bb}   | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+ rename meta-gnome/recipes-gnome/mutter/{mutter_51.0.bb =&gt; mutter_50.4.bb} (85%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calend=
-ar-server-Fix-build-failure-with-libical-4.patch b/meta-gnome/recipes-gno=
-me/gnome-shell/gnome-shell/0002-calendar-server-Fix-build-failure-with-li=
-bical-4.patch
-new file mode 100644
-index 0000000000..d64cf38ccc
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-calendar-serv=
-er-Fix-build-failure-with-libical-4.patch
-@@ -0,0 +1,44 @@
-+From 91eaa9221b45b506d7a5d84a9ec8c204b5c8c34f Mon Sep 17 00:00:00 2001
-+From: Xi Ruoyao <xry111@xry111.site>
-+Date: Fri, 8 May 2026 13:13:37 +0800
-+Subject: [PATCH] calendar-server: Fix build failure with libical 4
-+
-+Fix the following build error with libical 4 due to function signature c=
-hanges:
-+
-+    error: passing argument 4 of 'get_time_from_property' from incompati=
-ble pointer type [-Wincompatible-pointer-types]
-+    note: expected 'ICalTime * (*)(ICalProperty *)' but argument is of t=
-ype 'ICalTime * (*)(const ICalProperty *)'
-+
-+Link: https://github.com/libical/libical/blob/4.0/docs/MigrationGuide_to=
-_4.md
-+Part-of: <https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/42=
-15>
-+
-+Only the gnome-shell-calendar-server.c hunk of the upstream commit is ta=
-ken;
-+src/calendar-server/reminder-watcher.c does not exist in the 50.x series=
-.
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-shell/-/=
-commit/b34766f3992c7616b7816a47249fb463c053e5fa]
-+---
-+ src/calendar-server/gnome-shell-calendar-server.c | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/calendar-server/gnome-shell-calendar-server.c b/src/cal=
-endar-server/gnome-shell-calendar-server.c
-+index 0b2f88eb7..622c16181 100644
-+--- a/src/calendar-server/gnome-shell-calendar-server.c
-++++ b/src/calendar-server/gnome-shell-calendar-server.c
-+@@ -112,11 +112,17 @@ typedef struct
-+   time_t  end_time;
-+ } CalendarAppointment;
-+=20
-++#if ICAL_CHECK_VERSION(4, 0, 0)
-++typedef ICalTime * (* GetICalPropFunc) (const ICalProperty *prop);
-++#else
-++typedef ICalTime * (* GetICalPropFunc) (ICalProperty *prop);
-++#endif
-++
-+ static gboolean
-+ get_time_from_property (ECalClient            *cal,
-+                         ICalComponent         *icomp,
-+                         ICalPropertyKind       prop_kind,
-+-                        ICalTime * (* get_prop_func) (ICalProperty *pro=
-p),
-++                        GetICalPropFunc        get_prop_func,
-+                         ICalTimezone          *default_zone,
-+                         ICalTime              **out_itt,
-+                         ICalTimezone          **out_timezone)
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb b/m=
-eta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
-similarity index 86%
-rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb
-rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
-index 549a3d5971..f39d72532e 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_51.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_50.4.bb
-@@ -31,7 +31,8 @@ GIR_MESON_OPTION =3D ""
- REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
-=20
- SRC_URI +=3D "file://0001-shell-app-usage.c-only-include-x11-headers-if-=
-HAVE_X.patch"
--SRC_URI[archive.sha256sum] =3D "2179bab13af353427065096af8bf3d30da7b86e0=
-c516e5ba86a14998af9575f6"
-+SRC_URI +=3D "file://0002-calendar-server-Fix-build-failure-with-libical=
--4.patch"
-+SRC_URI[archive.sha256sum] =3D "c531939539db316a41aef23670370abd1330d325=
-4f84bcb0f9f4dae5d6e362cf"
-=20
- PACKAGECONFIG ??=3D " \
-     camera-monitor \
-@@ -43,6 +44,7 @@ PACKAGECONFIG ??=3D " \
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb b/meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+similarity index 85%
+rename from meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
+rename to meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+index 6604865f67..f9b3e9d5e5 100644
+--- a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
++++ b/meta-gnome/recipes-gnome/mutter/mutter_50.4.bb
+@@ -17,17 +17,12 @@ DEPENDS = " \
+     libdisplay-info \
+     libdrm \
+     libei \
+-    libgudev \
+-    libinput \
+-    libxcvt-native \
+     libxkbcommon \
+     pango \
+     pixman \
+     python3-argcomplete-native \
+     python3-docutils-native \
+-    udev \
+     virtual/egl \
+-    virtual/libgbm \
+     virtual/libgles2 \
+     wayland \
+     wayland-native \
+@@ -37,7 +32,7 @@ DEPENDS = " \
+ inherit gnomebase gsettings gobject-introspection gettext features_check
+ 
+ SRC_URI += "<a href="file://0001-Dont-use-system-sysprof-dbus-folder.patch" "="">file://0001-Dont-use-system-sysprof-dbus-folder.patch"</a>
+-SRC_URI[archive.sha256sum] = "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
++SRC_URI[archive.sha256sum] = "273d33c875abcb4b6cbea3f4ec045d18155fbc510c3521fc7e47926371310988"
+ 
+ REQUIRED_DISTRO_FEATURES = "wayland polkit"
+ ANY_OF_DISTRO_FEATURES = "opengl vulkan"
+@@ -45,10 +40,10 @@ ANY_OF_DISTRO_FEATURES = "opengl vulkan"
+ # systemd can be replaced by libelogind (not available atow - make systemd
+ # mandatory distro feature)
+ LOGIND ?= "systemd"
+-DEPENDS += "${LOGIND}"
+ REQUIRED_DISTRO_FEATURES += "systemd"
+ 
+ PACKAGECONFIG ??= " \
++    native-backend \
+     egl \
+     gles2 \
+     <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'x11', 'opengl', '', d)} \
+@@ -56,11 +51,17 @@ PACKAGECONFIG ??= " \
+     bash-completion \
+     gnome-desktop \
+     <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
++    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'systemd', 'logind udev', '', d)} \
  "
- PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
- PACKAGECONFIG[camera-monitor] =3D "-Dcamera_monitor=3Dtrue, -Dcamera_mon=
-itor=3Dfalse, pipewire"
-+PACKAGECONFIG[extensions-app] =3D "-Dextensions_app=3Dtrue, -Dextensions=
-_app=3Dfalse"
- PACKAGECONFIG[extensions-tool] =3D "-Dextensions_tool=3Dtrue, -Dextensio=
-ns_tool=3Dfalse, gnome-autoar json-glib libsoup-3.0"
- PACKAGECONFIG[nm] =3D "-Dnetworkmanager=3Dtrue, -Dnetworkmanager=3Dfalse=
-, networkmanager libsecret, networkmanager"
- PACKAGECONFIG[portal-helper] =3D "-Dportal_helper=3Dtrue, -Dportal_helpe=
-r=3Dfalse"
-@@ -96,6 +98,9 @@ RDEPENDS:${PN} +=3D " \
- 	librsvg-gtk \
+ 
++PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev libxcvt-native"
+ PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, virtual/libgl"
+ PACKAGECONFIG[gles2] = "-Dgles2=true, -Dgles2=false, virtual/libgles2"
+ PACKAGECONFIG[egl] = "-Degl=true, -Degl=false, virtual/egl"
++PACKAGECONFIG[egl-device] = "-Degl_device=true, -Degl_device=false"
++PACKAGECONFIG[wayland-eglstream] = "-Dwayland_eglstream=true, -Dwayland_eglstream=false, wayland-eglstream-protocols"
++PACKAGECONFIG[udev] = "-Dudev=true, -Dudev=false, udev"
++PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
+ PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
+ PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
+ PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
+@@ -87,7 +88,7 @@ EXTRA_OEMESON += " \
+     -Dverbose=true \
  "
-=20
-+# The extensions app is a GJS application and pulls libadwaita at runtim=
-e only.
-+RDEPENDS:${PN} +=3D "${@bb.utils.contains('PACKAGECONFIG', 'extensions-a=
-pp', 'libadwaita', '', d)}"
-+
- PACKAGES =3D+ "${PN}-tools ${PN}-gsettings"
- FILES:${PN}-tools =3D "${bindir}/*-tool"
- RDEPENDS:${PN}-tools =3D "python3-core"
---=20
-2.55.0
+ 
+-MUTTER_API_NAME = "<a href="mailto:mutter-${@oe.utils.trim">mutter-${@oe.utils.trim</a>_version('${PV}', 1)}"
++MUTTER_API_NAME = "mutter-18"
+ 
+ do_install:prepend() {
+     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
+<div>-- 
+</div>2.55.0
+
+</div><div class="plaintext" style="white-space: break-spaces;">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#130717): <a href="https://lists.openembedded.org/g/openembedded-devel/message/130717">https://lists.openembedded.org/g/openembedded-devel/message/130717</a>
+Mute This Topic: <a href="https://lists.openembedded.org/mt/121684077/3618223">https://lists.openembedded.org/mt/121684077/3618223</a>
+Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</div></blockquote></div>
+--=-3+8nTPVk2/npwd20D+dz--
 
 
