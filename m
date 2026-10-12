@@ -1,218 +1,238 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29720CA9ED5
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:11:34 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3508.1791763890616700873
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4122ACA9ED1
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 05:01:57 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7016.1791781312379394163
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:11:30 -0700
+ Sun, 11 Oct 2026 22:01:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=AjN1UyfZ;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-398a5aad413so613502a91.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:11:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dpbdSK43;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8acda240937so9048567b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 22:01:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791781311; cv=none;
+        d=google.com; s=arc-20260327;
+        b=dyHqBak3CKj38/AIpxS036lRJfDhYGmW9HKUuujcXsnbg2Lmk1DeEn4lmCHvjD9CuO
+         6hkJaUL7LkEKTTFkpWImhFdlWIByB3nPDXsZYKnf3mohT/C3DEJivowl9rTMHqJPWDo4
+         mo2i1eNNYWihWR/5qMl1PpHFxCzddpf8B3GBx9R5Wht1eB7aoFRh10xlecMQLQZtD1cu
+         iRpnBck8Y0MpxNxOZmFpjb+WgJ9SYguDHZypEXX+/0tvd70dTigokWgJb7WkwvhtUoz6
+         HTlM39c/JwtQXXdXK9xThyXr7rd8+L7ujmF33XfEMess4K89Eo/1y/VS3mbds/moOvx5
+         RkaQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=qz9TUoxVcYEsif3ERro4BMuwOi4QwwgGAjfmBSLtRYU=;
+        fh=n0ZnAkKOhGDmrf8RLpwnC7FQ6xmEY5rofL6wXnjsXjs=;
+        b=RZqLUnGRGlD0wSTtTDZLMK74SgEEsGx7zDNaK5dR7LBUS2GlKdn+a8KGYdw1217YaV
+         chWhj4u+kiDnztnOUvRl6AFgLcreRBB/LNqI0Fqg0UEPJQgz4LEXf5W/XQ9+ugZ0b3ae
+         0V2c+mcXuQKwP3Dl+ZdCNAjPtoYfVAamAQ3/ocGJqYiPbnrqSOhKAlzqbivd25WcBX8T
+         PiKpZgcH3tb6Ont/BavoO0qYu9/DLtU9WwFsov/93Ix1FaZpdOhUCOe6Iha0urWRrZWY
+         yCDxbpWG6vF+COzYWvACHCFBh6akzQHTMhpbWc9wzXJuQK+89nQbcn3FkdFIsOmS/pIk
+         M6ZQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763890; x=1792368690; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=z8GN4om8v5rdFSVZdGpD+ZsZwPq5HhaGQ2mhYesOgWg=;
-        b=AjN1UyfZAP1lU7teptCxBuTaoZbj94+Nkv8ODPoNbfZJBG4ECGLITvChPgE2eY2vnp
-         Z1qFZNYxdSU1Sx5O/k2Ttx88Pjwqd/tQyxZBRmLv+emLTIXvtnKxoV7btTd4m8Djd2kP
-         ORK9y95vYTWZS0cMyMQgMQqQKswBGu7rSazEq7X5PLrXdd2lA9TBF/dnhnWsM+eYsj67
-         Yz8DCUoGITVmK6WIsMTIpRvYEd/DYsBxu9Fwd9SKgEkIi/VRJ0QBzu8O5EKMsG45+L/P
-         UlCuEwsXlOR1apA7/+K+PdmPjFUV4ViG6uED3D8QL9NFTR9FWqM9izSHLFY74Sl3fdvw
-         htag==
+        d=gmail.com; s=20251104; t=1791781311; x=1792386111; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qz9TUoxVcYEsif3ERro4BMuwOi4QwwgGAjfmBSLtRYU=;
+        b=dpbdSK43M5We+YM3smSsXXRCen+KVsE/lmgzsPB4M8585h9YdKdnabbxw7hh1sZ3Y8
+         dG+g42CCL5p1ertJf6YHw5OXtHrceI6CTv6uMbSeRsoaJl1hrrY6iUU39w43/A/eMg5T
+         de7Me821JY/oXTBix7gm6wBP7S7H8FXAP9UwzxO/Qi/F0TrHO/9S6uOI+JZwEsGYznnd
+         7v883wZ9WA82VI3eoIK+HRoKlWgApg9fWLnNqf0F+see8Vm9gTkN5QSPN102BZ+1qYcv
+         zGkQ16E3ThHv7So6b8ufvd1rOTjctrYOt2EE10HzTpkcv3WG+sulQdO2NvwdcyAHIHY5
+         T2rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763890; x=1792368690;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=z8GN4om8v5rdFSVZdGpD+ZsZwPq5HhaGQ2mhYesOgWg=;
-        b=GQJEpqv2TPw41pX16W6TfGXKaWAC/z6PnshNthRrTPO8SZU1fdMsL1HD3E9Yh37t0k
-         6Fx4k3kJMpBWnzN+Kj9IbqHQVwnFYzhV9Di6NelfhmqYWpCDGTupPXPe2wixP7oFiybP
-         iOek9I6E/8DG+eHxIXrwGaEmozg+ai+AqHMcE/XJo3+bk9SbiOdgHdqw7wZwYzBVUH5q
-         pNwbIOzdHPuRRANBQrFuqZgItC9aXzn6zeO72J2mXDPyBhdhOggnHONdxpH2lYt8m3QV
-         Gyd4Uxts3lgfDVSYDCEXvrbXvFqBrHOovcBKNzp22fZcUdD19G7nd0lr60904ETfT36u
-         YMtw==
-X-Gm-Message-State: AFq9FYIByaQ1An4RGpO88ObDuQvONBy6jUWHaJrHwwISJDxrzF3k0E6e
-	akLNWT8cZGckgUgQ0HTss2wLWC4g9Hdk89ASpFtGMIRWoS7G7CGwsW1Q03LzG+k11pk=
-X-Gm-Gg: AYBFou24rzS5L5Z1/hPv00qg0Lkerq9kCukBB8zhf/p3Av3XMmFMZSR4ZdyH4In6lMn
-	ALBkJ/kn2syKFlxa/veX/ikxDRJvXO7tC0BSOLrkvhi5UOyXd58lo9chp1iSmgOV8dDqrkxyTLH
-	GtVTDtAXeooNXHXiku9lJZQzpONDkhB1e+PU1ZFZ1VI23l3cUrRTiVyzPUs/krrdafaP97S3x/g
-	qTon53ovFuvvjM4a/hg3xikTt6v67s9fTUqXGh4qhGjsc8EZOr82WAM19lhUdPznlwWIxBIbGW7
-	k/p7/q8ZHCgqvFZlO5+xIgkAPkwvpanwyagDlTwrrUU2fXGjOUVz14xtjt9Li9tM094Qwo/iloo
-	F5SsJUJUaO00quFFikcc0X64GLDBvboIXJyXUpGuQslOICJQneN2rDNyjW+tig6ZXHP6VE6Oh9e
-	lZ5PlG04Ai0jVVLXTQNP85voQoaya4RnglXbr409lWb+XTlr+ekx2Zp8HdbcZ2H28VKxbYJ6/Lh
-	UR/9GXJaVTgCfh1gdTCi/OwfOkO/zqQo20evSw=
-X-Received: by 2002:a17:90a:d2c7:b0:3ab:1b19:78f0 with SMTP id 98e67ed59e1d1-3ab3a8e1d1bmr6449619a91.41.1791763889949;
-        Sun, 11 Oct 2026 17:11:29 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.11.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:11:29 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-networking][PATCH 28/28] tinyproxy: patch CVE-2026-55202
-Date: Mon, 12 Oct 2026 13:10:06 +1300
-Message-ID: <20261012001007.2541673-28-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
-References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20260707; t=1791781311; x=1792386111;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=qz9TUoxVcYEsif3ERro4BMuwOi4QwwgGAjfmBSLtRYU=;
+        b=TWOer7iiynVJY9Tyq1Z0yYhJ38wrd+rNH6lQxHG7e55ek61MNNQBGB9aJ07Da1kAiU
+         U613a7pDGbLLSffXMwuwdrjf7GlzY2rbxgkN1s6diHJhwnvRt/6QDXnqH+HcpOK5qj3k
+         ksRGR9lxmhnGKFNDoY49+b9MA2cfgKBBm9F8okILwqGeV4krdAsOz/UtwBzsEDjRE/jH
+         NQFIcCKUaMBBu5EyDV97ErNcXX0lamiPyvW0dKqKwU0CtcglpFw/HEV4R1DqtRl8BGvD
+         aY/SsbRBPdRbE1tLUDhdgPuDYKs8zqDxJnHLeMTgmnUT7XT3FhjIRL7/nEpkoHn3IAB3
+         WSvQ==
+X-Gm-Message-State: AFq9FYJzEr6iuQzMZ+zqJgz1ImbOJCu5542yVeIb3tUAtMLw3k6JQtYo
+	vOlHeAxLpHe7jpkEuNBJK7ukJ1omWGklKrEp6+j4in2IUml1kK4otTgx7mvbZvRHGNVQq4QosPM
+	G9Ye5cqF++k2sZ38lenOjy6Kfd64u5vE=
+X-Gm-Gg: AYBFou1/umI0YtkL3E8knI7FPMki/Nt+aGyAeclm3dPppUJGrtck8VcdEFERZ/yISDu
+	Am5azM+V2TcagrFK2heh6f6g98kdZmAYYCZiJp6ADmywI1fCclNsJHBCgzLYf9SCdbjc69AH6Ty
+	2kSu+b+KYXeWCIfASm5EHd9EU6Vns3vZGwDc7hm773hs2vvXW74EE7Ogn3iSPWYjEiDEz8keVBZ
+	ObAMiqO9CwbZcuaTFHDDM8MMbj1HuQ7RsZhJHiblb9MGnBDC7REuzANPThP5M2GBHTik64pDxyS
+	AAoAGLxSA3lscawUjL2dIPl6kRnm5Jc19KA2v8bsWajm4F/mtLsT8eZmprX+XnZenxppwscVpPK
+	KzQR8xbmSWdGJUV+OTMyw5N8r0D/U7oHhnercM1tHpvFICxKH40kAVvnHAgvPvWMt+9fdHACfej
+	mZOWrgTUpUUof0fD9iA6A3/1lNGbJ0S55EUuCmC6wfsQbflgzcNwq7hhcUnbnwB3I9aKk7QnbGb
+	WX9XF/JzfI8147iQL48ptPDJzI1R/QKtpkmI1tfM1kZHCUD3sEhBtHDA7w617dkUfzQP0KT1+qc
+	5hV8FpEJtAdqoSY3bf6/KUJY/Pf1yDIU5xUwR7BUUnBhU3rDQzw=
+X-Received: by 2002:a05:690c:e643:b0:8af:de3f:dbef with SMTP id
+ 00721157ae682-8b07edcd11fmr14364207b3.49.1791781311375; Sun, 11 Oct 2026
+ 22:01:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com> <20261012001007.2541673-18-ankur.tyagi85@gmail.com>
+In-Reply-To: <20261012001007.2541673-18-ankur.tyagi85@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Oct 2026 22:01:24 -0700
+X-Gm-Features: AclHuK_6qdkFTem7D581rI-vv6eEV8eeuGw0kio7AfuRrxgyXRJXFyYdf7hoHI0
+Message-ID: <CAMKF1sppXBtPARRGX48+TFpxbE1Fvm72fJQipnH5t8Tu5MN1mA@mail.gmail.com>
+Subject: Re: [oe][meta-multimedia][PATCH 18/28] libde265: patch CVE-2026-54240
+ and CVE-2026-54241
+To: ankur.tyagi85@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000946fc8065d9d9837"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:11:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130753
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 05:01:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130754
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+--000000000000946fc8065d9d9837
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Backport commit identified by Debian[1]
+On Sun, Oct 11, 2026 at 5:11=E2=80=AFPM Ankur Tyagi via lists.openembedded.=
+org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-55202
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>
+> Debian identified same commit as fix for both CVEs[1][2].
+>
+> Details:
+> https://nvd.nist.gov/vuln/detail/cve-2026-54240
+> https://nvd.nist.gov/vuln/detail/cve-2026-54241
+>
+> [1]https://security-tracker.debian.org/tracker/CVE-2026-54240
+> [2]https://security-tracker.debian.org/tracker/CVE-2026-54241
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/libde265/
+> libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/
+> libde265_1.0.19.bb
+> index a02d6dd5d8..8e145cf8dd 100644
+> --- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+> +++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+> @@ -12,6 +12,7 @@ SRC_URI =3D "git://
+> github.com/strukturag/libde265.git;branch=3Dmaster;protocol=3Dhttps
+>             file://CVE-2026-49295.patch \
+>             file://CVE-2026-49337.patch \
+>             file://CVE-2026-49346.patch \
+> +           file://CVE-2026-54240-CVE-2026-54241.patch \
+>
 
-[1]https://security-tracker.debian.org/tracker/CVE-2026-55202
+did you miss adding the patchfile ?
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 233e6a56e5311eff91c8a46c36a790db1fb38933)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../tinyproxy/tinyproxy/CVE-2026-55202.patch  | 107 ++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.3.bb             |   1 +
- 2 files changed, 108 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
-new file mode 100644
-index 00000000000..4e446542e27
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
-@@ -0,0 +1,107 @@
-+From 04b34f814076d790db26925d7df7c30798910c99 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Sat, 18 Apr 2026 00:03:15 +0200
-+Subject: [PATCH] reqs: improve stathost detection (#606)
-+
-+until now, only the basicauth code checked the host header, regular connections didn't.
-+
-+- add a new helper function to compare a hostname with optional
-+  trailingcolon/port against the stathost.
-+- add stathost check via host header before transparent proxy check,
-+  else stathost might be misdetected as a trans host request.
-+- refactor existing stathost checks to use the new helper
-+
-+this should make it easier to access the stathost, for example by
-+injecting a host header into a curl command line with -H:
-+
-+    $ curl -H "Host: tinyproxy.stats" 127.0.0.1:8080
-+
-+the stathost can also be specified as an ip address, e.g.
-+Stathost "127.0.0.10" + a separate Listen statement for that ip.
-+in such a case e.g.
-+
-+    $ curl http://127.0.0.10:8080
-+
-+would work too, even if curl didn't add a Host header (but it does anyway).
-+
-+(cherry picked from commit 09312a185ae25cc486b4ff5987638a7917a48bce)
-+
-+CVE: CVE-2026-55202
-+Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/09312a185ae25cc486b4ff5987638a7917a48bce]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/reqs.c | 37 +++++++++++++++++++++++++------------
-+ 1 file changed, 25 insertions(+), 12 deletions(-)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index e3cfe76..d5037cf 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -316,6 +316,17 @@ static int send_connect_method_response (struct conn_s *connptr)
-+                                       connptr->protocol.minor);
-+ }
-+ 
-++/* determine whether a hostname with optional trailing colon/port is the
-++   stathost */
-++static int is_stathost (const char* host)
-++{
-++        const char *p = config->stathost;
-++        const char *q = host;
-++        if (!p || !q) return 0;
-++        while (*p && *(p++) == *(q++));
-++        return *p == 0 && (*q == 0 || *q == ':');
-++}
-++
-+ /*
-+  * Break the request line apart and figure out where to connect and
-+  * build a new request line. Finally connect to the remote server.
-+@@ -384,6 +395,16 @@ BAD_REQUEST_ERROR:
-+                 goto fail;
-+         }
-+ 
-++        /*
-++         * Check to see if they're requesting the stat host
-++         */
-++        if (is_stathost (pseudomap_find (hashofheaders, "host"))) {
-++got_stathost:
-++                log_message (LOG_NOTICE, "Request for the stathost.");
-++                connptr->show_stats = TRUE;
-++                goto fail;
-++        }
-++
-+ #ifdef REVERSE_SUPPORT
-+         if (config->reversepath_list != NULL) {
-+                 /*
-+@@ -497,19 +518,11 @@ BAD_REQUEST_ERROR:
-+                 }
-+         }
-+ #endif
-+-
-+-
-+-        /*
-+-         * Check to see if they're requesting the stat host
-+-         */
-+-        if (config->stathost && strcmp (config->stathost, request->host) == 0) {
-+-                log_message (LOG_NOTICE, "Request for the stathost.");
-+-                connptr->show_stats = TRUE;
-+-                goto fail;
-+-        }
-++        /* check whether hostname from url is the stathost */
-++        if (is_stathost (request->host))
-++                goto got_stathost;
-+ 
-+         safefree (url);
-+-
-+         return request;
-+ 
-+ fail:
-+@@ -1688,7 +1701,7 @@ void handle_connection (struct conn_s *connptr, union sockaddr_union* addr)
-+ 
-+                 if (!authstring && config->stathost) {
-+                         authstring = pseudomap_find (hashofheaders, "host");
-+-                        if (authstring && !strncmp(authstring, config->stathost, strlen(config->stathost))) {
-++                        if (authstring && is_stathost(authstring)) {
-+                                 authstring = pseudomap_find (hashofheaders, "authorization");
-+                                 stathost_connect = 1;
-+                         } else authstring = 0;
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-index e84aeae53cc..25df44301b6 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://CVE-2026-3945-2.patch \
-            file://CVE-2026-31842.patch \
-            file://CVE-2026-54387.patch \
-+           file://CVE-2026-55202.patch \
-            "
- 
- SRC_URI[sha256sum] = "9bcf46db1a2375ff3e3d27a41982f1efec4706cce8899ff9f33323a8218f7592"
+>  "
+>  SRCREV =3D "824b4138ecd51611d7073f1b50d5d6f982609b06"
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#130743):
+> https://lists.openembedded.org/g/openembedded-devel/message/130743
+> Mute This Topic: https://lists.openembedded.org/mt/121708410/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000946fc8065d9d9837
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Oct 11,=
+ 2026 at 5:11=E2=80=AFPM Ankur Tyagi via <a href=3D"http://lists.openembedd=
+ed.org">lists.openembedded.org</a> &lt;ankur.tyagi85=3D<a href=3D"mailto:gm=
+ail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wr=
+ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Ankur=
+ Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" target=3D"_blank">ank=
+ur.tyagi85@gmail.com</a>&gt;<br>
+<br>
+Debian identified same commit as fix for both CVEs[1][2].<br>
+<br>
+Details:<br>
+<a href=3D"https://nvd.nist.gov/vuln/detail/cve-2026-54240" rel=3D"noreferr=
+er" target=3D"_blank">https://nvd.nist.gov/vuln/detail/cve-2026-54240</a><b=
+r>
+<a href=3D"https://nvd.nist.gov/vuln/detail/cve-2026-54241" rel=3D"noreferr=
+er" target=3D"_blank">https://nvd.nist.gov/vuln/detail/cve-2026-54241</a><b=
+r>
+<br>
+[1]<a href=3D"https://security-tracker.debian.org/tracker/CVE-2026-54240" r=
+el=3D"noreferrer" target=3D"_blank">https://security-tracker.debian.org/tra=
+cker/CVE-2026-54240</a><br>
+[2]<a href=3D"https://security-tracker.debian.org/tracker/CVE-2026-54241" r=
+el=3D"noreferrer" target=3D"_blank">https://security-tracker.debian.org/tra=
+cker/CVE-2026-54241</a><br>
+<br>
+Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" t=
+arget=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0meta-multimedia/recipes-multimedia/libde265/<a href=3D"http://libde26=
+5_1.0.19.bb" rel=3D"noreferrer" target=3D"_blank">libde265_1.0.19.bb</a> | =
+1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br>
+<br>
+diff --git a/meta-multimedia/recipes-multimedia/libde265/<a href=3D"http://=
+libde265_1.0.19.bb" rel=3D"noreferrer" target=3D"_blank">libde265_1.0.19.bb=
+</a> b/meta-multimedia/recipes-multimedia/libde265/<a href=3D"http://libde2=
+65_1.0.19.bb" rel=3D"noreferrer" target=3D"_blank">libde265_1.0.19.bb</a><b=
+r>
+index a02d6dd5d8..8e145cf8dd 100644<br>
+--- a/meta-multimedia/recipes-multimedia/libde265/<a href=3D"http://libde26=
+5_1.0.19.bb" rel=3D"noreferrer" target=3D"_blank">libde265_1.0.19.bb</a><br=
+>
++++ b/meta-multimedia/recipes-multimedia/libde265/<a href=3D"http://libde26=
+5_1.0.19.bb" rel=3D"noreferrer" target=3D"_blank">libde265_1.0.19.bb</a><br=
+>
+@@ -12,6 +12,7 @@ SRC_URI =3D &quot;git://<a href=3D"http://github.com/stru=
+kturag/libde265.git;branch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" ta=
+rget=3D"_blank">github.com/strukturag/libde265.git;branch=3Dmaster;protocol=
+=3Dhttps</a><br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2026-49295.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2026-49337.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2026-49346.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2026-54240-CVE-2026-54=
+241.patch \<br></blockquote><div><br></div><div>did you miss adding the pat=
+chfile=C2=A0?</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+=C2=A0&quot;<br>
+=C2=A0SRCREV =3D &quot;824b4138ecd51611d7073f1b50d5d6f982609b06&quot;<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#130743): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/130743" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/130743</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121708410/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/121708410/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000946fc8065d9d9837--
 
