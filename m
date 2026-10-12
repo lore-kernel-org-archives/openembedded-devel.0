@@ -2,96 +2,99 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7B46CA9ED1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7DD8CA9ED2
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 10:31:17 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10368.1791801069580744117
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10369.1791801071598258658
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 03:31:09 -0700
+ Mon, 12 Oct 2026 03:31:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=U0iDmlA/;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cc1cf287ef8so881936a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 03:31:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=SAOwzc9D;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-cc7e79c1eaaso590671a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 03:31:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791801069; x=1792405869; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+AUXmhCptc9fC4R6lXv525oRK0hy6sms/UarETlSFno=;
-        b=U0iDmlA/TSCqCie0ojVuDv5/n6GuRu1B4cd0adGMdawbDD0S2F+ovx3IGWZZbaJIuu
-         TvSfWsS3m+bq7pNHV403hDQo7/w/nTLA/N7a0XHY6l/zMLibS4L7sn41L3tE/CCKlth4
-         W3JV5DisXryjzcsqGz4Lhgh1RA62qM6Mi2ej0YuX54iFbGtq93zbJBHdKNzvML+v1Eyp
-         9sDDLTZF6fzwsmjHkppN3dG0u2s825Swy/8IkDs4GMCTU893cV+UypclDYKerOtdaYU0
-         X6ZXPNh9Rlgw1ZSRBBQxi1BG9gteUBDbcPYjwf2c+cOQeTjj6JzZS4E8vQKqSaj0G7Ia
-         vbGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791801069; x=1792405869;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791801071; x=1792405871; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+AUXmhCptc9fC4R6lXv525oRK0hy6sms/UarETlSFno=;
-        b=B5NQ1/jN7gNAXi7+B1fJDXmolfQ6AMHDpkRWwYu+YEtTCPsU0xRhas5G9RAE3VcWyc
-         76TNFhJ0vHa9UsOHIJT+dAJSTlNbNN/8QwsqZURLGcRytGabeRNGLxJQvQIUuBqX+d30
-         7DYi7PSa+ZyxCtQM1tugDmXfeCHcn0e3zwWkwg62BPXfZSJfJ68FvTQ/YJB5ruvhgM+i
-         9p9rMNUSc7uo3fb9XJHTxRhWN9+A2CmLBXcPxGdfGMDFkAvScHBG2Y4bZ34uNNWIzmDa
-         FLSUT4SfFvMzsfgUUhIVYzqauGqiGQFc31dZSeH+bW+ot09LnZmzQG2AZhBn6zU8k7zs
-         gPBw==
-X-Gm-Message-State: AFq9FYLYMGWUPrz1SNH80id6TEMQOjIpwnHK1BOITPcH20Xd0MsDZy26
-	8syDd2RZetYdHXQC4btYCsaBbYM1K2B4JiX9an78BxWc1hM9Du+9bs2iVGISVPsFkXc=
-X-Gm-Gg: AYBFou0+3Hc174Zq2Oz6bq4/9JIE3qqz/Wc7pVNhnEb2E7eU1L9/vkvpJ39e6F/TsIQ
-	3NTr1LIurnBUfiUuApyZYwXWlEC0JrXVYYogXHWwJFPrgPKWgRmAZIysicC2YJHkpiNi0MYfYTA
-	CAvjyL8KMmqukGcIv+bAPBoe6WHRcIvQA+eDzRITgaBftoxGV9FTXRLlCP/ksU5hjkgMyjun6cq
-	2W9aRofMmBhx6Xsy5jc3BdIDkNuKuWFOgkqN9a+0rQaax3roqlQ2jqi7RKQbEhfY/t480L9dqbj
-	Xluj/dhRDQxwSkV7fRY6MiXMxtzhQjOX8a2H9JJHRKkuIj89mN9Znq8OcW8WPLZHwnbVAbIic4F
-	fGSZ9UqjzEa25RnwLkMVHMC2dYo1HtSWwCiqAM+lOyNtOdfY/508e6FLplnhwunqgoP+pWBghC6
-	7Q1VSrKDgXqzALwn0hSo8pcI+ul0Oz6SyKz51GQ4KX29CbOhmLVdEEC/KEnesdO0t88h3A+i8KI
-	r5+lNOI+uY5l0K9tPciYTOS6LO/0H/4mmhJ3Mc=
-X-Received: by 2002:a17:90b:384a:b0:3a8:c0cd:57f7 with SMTP id 98e67ed59e1d1-3ab3a735f76mr7171935a91.23.1791801068609;
-        Mon, 12 Oct 2026 03:31:08 -0700 (PDT)
+        bh=fo+a5ma5JbI5yOIloXrompCxLZmovGRwzSQNJ+PM8Yg=;
+        b=SAOwzc9DKYzntAErI+4mRO7Jkv4lE2oTpkyRUYh49y4E/58YSijV2hAEmf+JEZmT1p
+         pRTEVzhNhFJFtydvG/ieBBW8wdQGDXJON43OnX1x7546HqDDA7NBSLrFnXMHzvgSUN2O
+         0AB2fPA65ROmV6qA7iRenISde3X3lFvjXqKXUJN7DeiLfDUp336oFq9jZea7VDksrmqK
+         YGTo9p69yS9wZ6VPDJb7H2VHw1VNiZIkQe0hbHPgdA4Nk+1S+kpT+TbTd6JNETwJ4tk1
+         5Ul8ge+ZKApGrsmW+aQz/dt0tALKzx+injDEbe0Iukgy4nDKndZ0Lhw3kRgH85UO1Los
+         sUAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791801071; x=1792405871;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fo+a5ma5JbI5yOIloXrompCxLZmovGRwzSQNJ+PM8Yg=;
+        b=SLc1LB+N1mSqbphVUWrzYIHB5kcoTDZ+pNWpBTZZaDbjB4af5itIGa5S3KzkI/Z+lp
+         GDS//9Mx9CYcrY6uEWyQfiqud7PR+1qqYDqPkzYQLAsdrSr7GmwvyFXtv+7HQvgxZeLt
+         C4XhFmAY+QlPoiCckwSQSe3ew5lgwD0snmH36IRhE5lX7oZfrW7WD5Nh+QPWpd/duo4p
+         4c8pY7mRdK026HBsET/yEbzjJMMmpFDwmXjbHFnBVcMOtCAD7NtXyHfs6Wd011KNX1Xt
+         ojv0xk4oAc4W/td9+WR1qtSYd9utHuL7S+kI3EEFqSigBavH0Whog67YMaJlYWq+RaH+
+         DVzQ==
+X-Gm-Message-State: AFq9FYJwy+lxAvZnEOLtsGsNd9jraqqSe5EVtjGVqOyT7BeDD1Ds+8/1
+	BGpuD0Ux2FaLdCvGNyhLAXTw82o3C0ByA1DCPAw9xaApBnmAtAKABugpiuD2G1cmYZo=
+X-Gm-Gg: AYBFou08zttiOvUVsKGOLJcbh6EoqCM5QcIexeNH02j57rFURdT/h9gzDoIWRH583OF
+	ohJhes8k0dLCcnz85lqt8jeELA/qButp+TJsEKIipYKFVLedJogayJotSNiNJLzUqLlQbigJd2D
+	8pHimyobb6BKT8Ynn+PPpIw5vupe+COJRs3sjvhstNDeyjlg804/gqerfGHJMUJuW/54FsmdAqh
+	Ytt39H7RtrCwfjHmlKDqOMbNk5Hup2lAFpuP14wCPotiLRY0fNPVmKa0+iuLkyzJAkwDJTdQvcb
+	QRCHxtP2wWEbWsTn5vX+i54QqdPZnohlWIU5vZEy7tA0HDGS/6D0pBNIx/gBTXTuinTnbnlSOA3
+	IKLuXIRc4vpCcr/eqkJU7q9lI25mpXY6J6xg6pWRiauZNimniwQeJan509pUf+Sy//bvpKjehRl
+	kubVjII6fFxz3pnDA89rDgZnfh8hbopgQXoKa8pkM6O3GVxgPPYVc7HUUt7cU86tXZAOY0xvKpP
+	wAZRawF9UGMZZw8F5mUZ/fkBun+z6FCunzEGYVNpA==
+X-Received: by 2002:a17:90b:3145:b0:3a0:22bd:6ef6 with SMTP id 98e67ed59e1d1-3ab3a3665f0mr7040124a91.2.1791801070851;
+        Mon, 12 Oct 2026 03:31:10 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38fc9e52sm15929891a91.13.2026.10.12.03.31.06
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38fc9e52sm15929891a91.13.2026.10.12.03.31.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 03:31:08 -0700 (PDT)
+        Mon, 12 Oct 2026 03:31:10 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 1/2] open62541: upgrade 1.5.8 -> 1.5.9
-Date: Mon, 12 Oct 2026 23:31:00 +1300
-Message-ID: <20261012103101.2969383-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/2] 7zip: upgrade 26.03 -> 26.04
+Date: Mon, 12 Oct 2026 23:31:01 +1300
+Message-ID: <20261012103101.2969383-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261012103101.2969383-1-ankur.tyagi85@gmail.com>
+References: <20261012103101.2969383-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 10:31:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130760
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130761
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/open62541/open62541/releases/tag/v1.5.9
+https://github.com/ip7z/7zip/releases/tag/26.04
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../opcua/{open62541_1.5.8.bb => open62541_1.5.9.bb}            | 2 +-
+ meta-oe/recipes-extended/7zip/{7zip_26.03.bb => 7zip_26.04.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-protocols/opcua/{open62541_1.5.8.bb => open62541_1.5.9.bb} (98%)
+ rename meta-oe/recipes-extended/7zip/{7zip_26.03.bb => 7zip_26.04.bb} (98%)
 
-diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.5.8.bb b/meta-networking/recipes-protocols/opcua/open62541_1.5.9.bb
+diff --git a/meta-oe/recipes-extended/7zip/7zip_26.03.bb b/meta-oe/recipes-extended/7zip/7zip_26.04.bb
 similarity index 98%
-rename from meta-networking/recipes-protocols/opcua/open62541_1.5.8.bb
-rename to meta-networking/recipes-protocols/opcua/open62541_1.5.9.bb
-index 686f884dcef..7c3eb85aae4 100644
---- a/meta-networking/recipes-protocols/opcua/open62541_1.5.8.bb
-+++ b/meta-networking/recipes-protocols/opcua/open62541_1.5.9.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "\
- "
+rename from meta-oe/recipes-extended/7zip/7zip_26.03.bb
+rename to meta-oe/recipes-extended/7zip/7zip_26.04.bb
+index ca50aed8eaf..49437b807d2 100644
+--- a/meta-oe/recipes-extended/7zip/7zip_26.03.bb
++++ b/meta-oe/recipes-extended/7zip/7zip_26.04.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
+            file://0001-Remove-treating-warning-as-errors.patch \
+            file://7z_wrapper.sh \
+            "
+-SRCREV = "0766b733fe3e06dd2a7f9a3cfbf2108ac73abd17"
++SRCREV = "9128b80e3a471108678e2b3ec3c985861c8d7b0f"
  
- SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
--SRCREV_opcua = "e6a35ddc4c80d6f948af3f046ad942b4c9822549"
-+SRCREV_opcua = "05c2b389b65cc35884eb40d800301af1f3d130cf"
- SRCREV_mdnsd = "c1be962b37e4b952625d9b0a873e5ca619b1a35a"
- SRCREV_ua-nodeset = "257db9ad98ee7ba4b67d3500b54bfc9d744a36af"
- SRCREV_mqtt-c = "0f4c34c8cc00b16cfee094745d68b8cdbaecd8e0"
+ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
+ 
 
