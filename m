@@ -2,534 +2,149 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6756FCA9ED0
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 08:54:03 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9160.1791795233229427944
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF6CCA9ED0
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 08:55:13 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9314.1791795303127830436
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 01:53:53 -0700
+ Mon, 12 Oct 2026 01:55:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Udv3haGF;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e8246b13cbso13354105ad.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 01:53:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=bqhbyBTP;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-4932b13c4ccso1038594fac.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 01:55:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791795302; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ci2aGNUwJSOnN5ENTdy7snapii/iKEyV2Mc1xs9hnS8WW/64wrNb276O9Da1TLQb/X
+         3t0rYkIUuOe7wAJvp+juEgvSCPkR8kNgHM2mYV76XlGuNtDk2oWchi+0VC2pBQKvlkxd
+         TOtuAX3Uyxqfo9E20X1XRipqMGRUidT2dqWt6728HqeDUGKcHDIh3QqSgDmiIsfxVLsZ
+         jvBA1J31seeR+8JQhKqhasM0p36jIt35MMSEW7vPK/Urqx07CGLi478k5+ertF4D50CN
+         o8HJ6l87DOAg1/8yf28pnGLDS0hsnpLqEL01tfVT+2Y2Zroyl61h3l8BlBPcKJD6zTfp
+         7JoA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1iBAznkwTdkMDyKWqcQDjaM+hTLJpTr+LQDy+ec6QHg=;
+        fh=kqtH9RvdTS8z4R7bH+N1q4tJTvX5kZFkdgAseXKYH84=;
+        b=guUyaXEQro/uiCsU5n4q4lIE+bAIYEj59abtVrV60e+1siP5ot891QnIy9ZQwW/lGx
+         xPAYH/bmOUQdwMEf3d53UBfkhxSvLWipOQNtsY/Ag632heEFjY1ivfjE5FoErhmBRMIV
+         NQc8xVszq0SjnDO5T94Ez59yhttPHzrdCkhDOejPBSwe1629eXgb35dpKtGzsLR2H4n2
+         BZlO5g5c46bDdKUFqfX/FJGNwgB8XYj61XwNGaM2TPg3tr6tMP3lFFZDFFARtCjOm5qw
+         +5m55mCrw9ArAXUpswqvYO6b4V7vG5vmzKHY4wzcR9bexVJLalEnA3TU0C+7L2r7CzmC
+         IQkg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791795232; x=1792400032; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nrbgLpbwEEBb0tsaMG+LmqQUyf+iPCi2n7OE3hcRmLo=;
-        b=Udv3haGFWDILEYJ9/EdSNAI58sgdYl7vPP5jHvLITzixoQBKjeWm6zGh0imwWE9bCC
-         mccpy6GdKzI4A4tMoc2/vbIrB/puhzLAdTe4bM9BY7TX7Sbw8YxHGdaHwfLR2/kv5ZKf
-         G8fuByPUFQhwb5uYF0korkmOxRnELO3Ih3uWZYAg7wzvub8WM/9j+DGx8D/YnQpkjeuA
-         iAty95t/i/2CpUz1NF5amAFyKWzONXjUSGRyeD03JQNRLOan0pLuNWQWm5cFYIS9+oOD
-         6lNpeAm6hNMehGv06rOfKCMLHUdjSOi7MfCIGDrwI6X5eqzHu+iWEnrgFHCP1/0G0zM2
-         wXBw==
+        d=gmail.com; s=20251104; t=1791795302; x=1792400102; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1iBAznkwTdkMDyKWqcQDjaM+hTLJpTr+LQDy+ec6QHg=;
+        b=bqhbyBTP7VgNohjcVpc0qw4juXEXV8gCNA+HjQKRaAsL2z/WXDW4FevC3RlaKcqqoO
+         GzVcd8HJosmXqV6YVplpJu5J0D1MC7EgEEqWR4reUrTsbkXvzMBZcGnZg7A4z+8pEvkA
+         /wV6G9RukTfv+4YsGBOS/mcIhpNf6K5kTWK4cBGc8ZWEvk1Xpi0aP88xWi6lHG14ZaNj
+         Qn2LADKgHL6H1tKK3n3Ymut0G2B28VBNYVTdIPsFv4orYj6ghujlWWD9+/7Srt/DLv8+
+         poDaMleX4eH+KB9a4KF/DbxPRdJ66R9RU4TUt/pkKuXWOxpjoCB4ksykPz4vxj2jNJ3v
+         o40A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791795232; x=1792400032;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nrbgLpbwEEBb0tsaMG+LmqQUyf+iPCi2n7OE3hcRmLo=;
-        b=zUPSj/8dqlytoX6AhcVg9eDsXRApaHS9APOldrFl+1Sav9VLnHoonFTD5JT8JvUfCc
-         xudC7yiFW7zKprHGseEdDJQKfgVbZsSp041KdbecXabUJrXHecafh7Il9AMlBSiS8r0B
-         law51BQQi9KxX9kYLh7OIR1FGbfKwzj5ENP0H29/54wNKWePPlonC0rpN36O7ksC6DDc
-         ctDiOq7U6WBsOFQ0AaH+LMpRSX/7AWtXrrE0lxIxCwAKtX47BMU3oiB2v4AI2rGSkld3
-         PVlzzdFKs7nx/HPKMsQqCXJt090m/c7qXoN4KfJL8/mw3X+SImTXsZ/h/NdGjzPEnl/9
-         sJ/g==
-X-Gm-Message-State: AFq9FYIFKeJNt/go26hCrJEGg5HMEuuhEhBi6GVTBupq8UA1xqUmKwOf
-	RwyuTqqcV6ZBV62Ik/zT72nB3mtZR3Lp5GwV0/D/Pw4TABMu9fWo3QM3D/2ZbVYK/FY=
-X-Gm-Gg: AYBFou15aCszQndFVXoTv9KaTp88oaqEzOet/hLuH170xrNwVcx96YgyoOky6Dq7sbP
-	yLkHTGOuuGDL4fV/htNb6l1N+mZClgN+tNLUSyu2K71nNtjqkP3v4V8JIxLAtIuHHDxfWomx7W/
-	FmJ+cwnadhDds8uJntk+e823uj66v+PVSY4MU10AkDcnLLi7A2HGO0s62TmQDMbRDg2FXyuNMsj
-	NyhRGQ9nBebbCs934VGCm+2IJbe2XoE4H536gXzaYAxt/Tp0kUf+Lla6Mz17tqCrNvGCeoHSMaP
-	bU46yl+W7Ysts6eb8JjaA4E45vm1+cQPa4Gxto7mQ87nGEkY5QPZ8vWNK5AyKwBgI4M5VJWCPL3
-	hW55co8jKCZ4ywGBhyUi7Poz6foRZ44hjHAm+C3+px2VbeUPJfE90DFnYTPfwfA63z4/PR/V2KY
-	NJaYOQ4Ih45AX6x9vc85dj+jQIe+VgcXyEiO+lZW7+gqMO5lAx+eK4TZHNqjE9nng0AHZxYHDjh
-	uzkk7MLorojRct3by8yjkfdc/M7AmylNiFmj94=
-X-Received: by 2002:a17:903:2f87:b0:2e2:ca04:fdae with SMTP id d9443c01a7336-2e842ab206cmr71097745ad.30.1791795232427;
-        Mon, 12 Oct 2026 01:53:52 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8acfa3b6csm14943335ad.41.2026.10.12.01.53.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 01:53:52 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH v2 4/4] libde265: patch CVE-2026-54240 and CVE-2026-54241
-Date: Mon, 12 Oct 2026 21:53:37 +1300
-Message-ID: <20261012085337.2879365-4-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261012085337.2879365-1-ankur.tyagi85@gmail.com>
-References: <20261012085337.2879365-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20260707; t=1791795302; x=1792400102;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1iBAznkwTdkMDyKWqcQDjaM+hTLJpTr+LQDy+ec6QHg=;
+        b=hOlLVv/ENkSYn7vWv/iO8O0vGMNsCofp6FkECp+vlhGAYDG/TtJHz1f5FzkMXzL22a
+         sTBdn63J5aVjDxFi/Kg1v3T1wBxGZhNpvnK4xGan5M/cpXQjzpk0GDaeBWzHQUKxej3X
+         tU/91XwzHsjC7eCsLXu6tawtASv0N+sxCOqUdW2QIlZiooeo7/xtKSXSYFLDcAksKTsb
+         AiIfKdlrfMDmgX8ZEo9zgfBH0RImB92GVr2tYH0PEWIzcyw4wnlT+7KCiqcaF+TIHccf
+         88apO0g8IMIe7rW+gSBQRhpTEuU9Sfg9boRwo3QjeugNW8zev9cL6tKrgMuHSnOkMggz
+         Citw==
+X-Gm-Message-State: AFq9FYKcuJpP+X8iZ7+/MI1+pEfxAIl9CRdrAktQgx0hrth7HRdmEvvE
+	Pc7dNLxjhxpIFWxflCNjtvnoaHk2sVai5/jipW0IxkhL61kfR7eYUlFbin1nhwETNcgv3jnCKvF
+	/9uyncHvwDq28TMcEsrebGaFDORwnUP0=
+X-Gm-Gg: AYBFou00skXw/gnV++jr0z8txsYblMUSJjgRFy41dCrPeAKbfYSmZAf2mTjzlI8XKor
+	qOVuBMcdGo5ppZ5vARaCPZMrGynb1fD9vgrfcJeJNV9Y9TvzXdvjkThEFLLmqZtj4YPM04svAGc
+	IXv/P58wz4l8qCBS0VpOeryGAkqhMppmnPxcuFBOE3l+ZU2Vo+TSgRYgn4z6q4SwOZ+wvcgMboc
+	VDYUeHnJJp0gnQUjLFSiZatKR2/DlTlNQ8MjDfIjPd1eJWkZp2RmGoirhZUSpSFGb1jiMG2VX3/
+	Tk8c3UtYMI8EwrAUblPccFb2f6t2/4u4/ug6vLRRM/7LgjBdmzB9dBFD4SV19ahMyN3aig==
+X-Received: by 2002:a05:6870:4ccc:b0:491:8695:3323 with SMTP id
+ 586e51a60fabf-4a2a8a5dc6amr7047521fac.24.1791795302255; Mon, 12 Oct 2026
+ 01:55:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
+ <20261012001007.2541673-18-ankur.tyagi85@gmail.com> <CAMKF1sppXBtPARRGX48+TFpxbE1Fvm72fJQipnH5t8Tu5MN1mA@mail.gmail.com>
+In-Reply-To: <CAMKF1sppXBtPARRGX48+TFpxbE1Fvm72fJQipnH5t8Tu5MN1mA@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Mon, 12 Oct 2026 21:54:51 +1300
+X-Gm-Features: AclHuK9nLT2JjNwU6_in9I9XkVYHztT842AlMw1cVxz21QWhpQ1mioY0p-yeHmQ
+Message-ID: <CADySD0E0+6V41ZX0NZDJyF6GOUuzsRUCVsLhUBLTRt0JazzPgA@mail.gmail.com>
+Subject: Re: [oe][meta-multimedia][PATCH 18/28] libde265: patch CVE-2026-54240
+ and CVE-2026-54241
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 08:54:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130758
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 08:55:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130759
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+On Mon, Oct 12, 2026 at 6:01=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+>
+>
+> On Sun, Oct 11, 2026 at 5:11=E2=80=AFPM Ankur Tyagi via lists.openembedde=
+d.org <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
+>>
+>> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>>
+>> Debian identified same commit as fix for both CVEs[1][2].
+>>
+>> Details:
+>> https://nvd.nist.gov/vuln/detail/cve-2026-54240
+>> https://nvd.nist.gov/vuln/detail/cve-2026-54241
+>>
+>> [1]https://security-tracker.debian.org/tracker/CVE-2026-54240
+>> [2]https://security-tracker.debian.org/tracker/CVE-2026-54241
+>>
+>> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>> ---
+>>  meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19=
+.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+>> index a02d6dd5d8..8e145cf8dd 100644
+>> --- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+>> +++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+>> @@ -12,6 +12,7 @@ SRC_URI =3D "git://github.com/strukturag/libde265.git;=
+branch=3Dmaster;protocol=3Dhttps
+>>             file://CVE-2026-49295.patch \
+>>             file://CVE-2026-49337.patch \
+>>             file://CVE-2026-49346.patch \
+>> +           file://CVE-2026-54240-CVE-2026-54241.patch \
+>
+>
+> did you miss adding the patchfile ?
 
-Debian identified same commit as fix for both CVEs[1][2].
+indeed, sent v2.
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-54240
-https://nvd.nist.gov/vuln/detail/cve-2026-54241
-
-[1]https://security-tracker.debian.org/tracker/CVE-2026-54240
-[2]https://security-tracker.debian.org/tracker/CVE-2026-54241
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../CVE-2026-54240-CVE-2026-54241.patch       | 426 ++++++++++++++++++
- .../libde265/libde265_1.0.19.bb               |   1 +
- 2 files changed, 427 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
-
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
-new file mode 100644
-index 00000000000..6f5c526f17f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
-@@ -0,0 +1,426 @@
-+From 3986aba8dec43bc539e5f7c349826cea902f9ee3 Mon Sep 17 00:00:00 2001
-+From: Dirk Farin <dirk.farin@gmail.com>
-+Date: Wed, 3 Jun 2026 16:44:32 +0200
-+Subject: [PATCH] fix pixel-accessor integer overflow on large frames
-+ (GHSA-ccfw-29x7-rrx3)
-+
-+The de265_image::get_image_plane_at_pos*() accessors computed the pixel
-+offset `xpos + ypos*stride` in signed 32-bit int. For frames where
-+width*height exceeds INT32_MAX (e.g. 46344x46344, both within the existing
-+<=65535 limit), ypos*stride wraps negative and the returned pointer lands
-+~2 GB before the buffer -> heap out-of-bounds read/write. This is independent
-+of the earlier allocation fix (GHSA-vv8h-932h-7r86), which only widened the
-+buffer size, not the offset arithmetic.
-+
-+Widen the image stride to ptrdiff_t (members, get_image_stride/get_luma_stride/
-+get_chroma_stride, set_image_plane) so all pixel-offset math is evaluated in
-+64 bits. The public C API (de265_get/set_image_plane) keeps int for ABI; the
-+narrowing at that boundary is safe (stride <= ~65552).
-+
-+The same 32-bit-stride / absolute-coordinate pattern existed in several scalar
-+paths that the accessors don't cover; widen those too:
-+  - sao.cc: SAO offset indexing, and the inputCopy allocation+memcpy size
-+    (an int size_t under-allocation -> heap write)
-+  - motion.cc: mc_luma/mc_chroma reference-plane access (ref_stride, src_stride)
-+  - intrapred.h: intra reference-border fill
-+  - sei.cc: decoded-picture-hash MD5/CRC/checksum
-+  - image-io.cc: YUV plane read and write
-+The deblock kernels, SIMD layer (acceleration.h) and per-block code already
-+use ptrdiff_t or only small block-local offsets and need no change.
-+
-+Also store pic_width/height_in_luma_samples as uint16_t (the value is
-+provably <= MAX_PICTURE_WIDTH = 65535 after validation) so PicSizeInSamplesY
-+needs only a single uint32_t cast instead of int*int (which was signed-overflow
-+UB on the same trigger); add static_asserts tying the limits to the storage.
-+
-+Verified: girlshy bit-exact single- and multi-threaded; ASan+UBSan PoC against
-+the get_image_plane_at_pos sink crashes pre-fix (UBSan signed-overflow at the
-+accessor + ASan wild write) and is clean post-fix.
-+
-+(cherry picked from commit bdca87569b9c63c2a7054d90ae4462dbb78d159a)
-+
-+CVE: CVE-2026-54240 CVE-2026-54241
-+Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/bdca87569b9c63c2a7054d90ae4462dbb78d159a]
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ libde265/de265.cc    |  2 +-
-+ libde265/image-io.cc |  4 ++--
-+ libde265/image.cc    |  2 +-
-+ libde265/image.h     | 21 +++++++++++----------
-+ libde265/intrapred.h |  2 +-
-+ libde265/motion.cc   |  8 ++++----
-+ libde265/sao.cc      | 18 +++++++++---------
-+ libde265/sei.cc      | 18 ++++++++++--------
-+ libde265/sps.cc      |  4 ++--
-+ libde265/sps.h       | 11 +++++++++--
-+ 10 files changed, 50 insertions(+), 40 deletions(-)
-+
-+diff --git a/libde265/de265.cc b/libde265/de265.cc
-+index 48e38a01..02b2d5fd 100644
-+--- a/libde265/de265.cc
-++++ b/libde265/de265.cc
-+@@ -678,7 +678,7 @@ LIBDE265_API const uint8_t* de265_get_image_plane(const de265_image* img, int ch
-+ 
-+   uint8_t* data = img->pixels_confwin[channel];
-+ 
-+-  if (stride) *stride = img->get_image_stride(channel) * ((de265_get_bits_per_pixel(img, channel)+7) / 8);
-++  if (stride) *stride = static_cast<int>(img->get_image_stride(channel) * ((de265_get_bits_per_pixel(img, channel)+7) / 8));
-+ 
-+   return data;
-+ }
-+diff --git a/libde265/image-io.cc b/libde265/image-io.cc
-+index f15234b6..14ca95f0 100644
-+--- a/libde265/image-io.cc
-++++ b/libde265/image-io.cc
-+@@ -76,7 +76,7 @@ de265_image* ImageSource_YUV::read_next_image()
-+   // --- load image ---
-+ 
-+   uint8_t* p;
-+-  int stride;
-++  ptrdiff_t stride;
-+ 
-+   p = img->get_image_plane(0);  stride = img->get_image_stride(0);
-+   for (uint32_t y=0;y<height;y++) {
-+@@ -174,7 +174,7 @@ void ImageSink_YUV::send_image(const de265_image* img)
-+   // --- write image ---
-+ 
-+   const uint8_t* p;
-+-  int stride;
-++  ptrdiff_t stride;
-+ 
-+   int width = img->get_width();
-+   int height= img->get_height();
-+diff --git a/libde265/image.cc b/libde265/image.cc
-+index 94f3c974..59a19184 100644
-+--- a/libde265/image.cc
-++++ b/libde265/image.cc
-+@@ -184,7 +184,7 @@ de265_image_allocation de265_image::default_image_allocation = {
-+ };
-+ 
-+ 
-+-void de265_image::set_image_plane(int cIdx, uint8_t* mem, int stride, void *userdata)
-++void de265_image::set_image_plane(int cIdx, uint8_t* mem, ptrdiff_t stride, void *userdata)
-+ {
-+   pixels[cIdx] = mem;
-+   plane_user_data[cIdx] = userdata;
-+diff --git a/libde265/image.h b/libde265/image.h
-+index e0f1db24..114f41e4 100644
-+--- a/libde265/image.h
-++++ b/libde265/image.h
-+@@ -26,6 +26,7 @@
-+ #endif
-+ 
-+ #include <assert.h>
-++#include <stddef.h>
-+ #include <stdint.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+@@ -235,11 +236,11 @@ struct de265_image {
-+   /* */ uint8_t* get_image_plane(int cIdx)       { return pixels[cIdx]; }
-+   const uint8_t* get_image_plane(int cIdx) const { return pixels[cIdx]; }
-+ 
-+-  void set_image_plane(int cIdx, uint8_t* mem, int stride, void *userdata);
-++  void set_image_plane(int cIdx, uint8_t* mem, ptrdiff_t stride, void *userdata);
-+ 
-+   uint8_t* get_image_plane_at_pos(int cIdx, int xpos,int ypos)
-+   {
-+-    int stride = get_image_stride(cIdx);
-++    ptrdiff_t stride = get_image_stride(cIdx);
-+     return pixels[cIdx] + xpos + ypos*stride;
-+   }
-+ 
-+@@ -248,38 +249,38 @@ struct de265_image {
-+   template <class pixel_t>
-+   pixel_t* get_image_plane_at_pos_NEW(int cIdx, int xpos,int ypos)
-+   {
-+-    int stride = get_image_stride(cIdx);
-++    ptrdiff_t stride = get_image_stride(cIdx);
-+     return (pixel_t*)(pixels[cIdx] + (xpos + ypos*stride)*sizeof(pixel_t));
-+   }
-+ 
-+   const uint8_t* get_image_plane_at_pos(int cIdx, int xpos,int ypos) const
-+   {
-+-    int stride = get_image_stride(cIdx);
-++    ptrdiff_t stride = get_image_stride(cIdx);
-+     return pixels[cIdx] + xpos + ypos*stride;
-+   }
-+ 
-+   void* get_image_plane_at_pos_any_depth(int cIdx, int xpos,int ypos)
-+   {
-+-    int stride = get_image_stride(cIdx);
-++    ptrdiff_t stride = get_image_stride(cIdx);
-+     return pixels[cIdx] + ((xpos + ypos*stride) << bpp_shift[cIdx]);
-+   }
-+ 
-+   const void* get_image_plane_at_pos_any_depth(int cIdx, int xpos,int ypos) const
-+   {
-+-    int stride = get_image_stride(cIdx);
-++    ptrdiff_t stride = get_image_stride(cIdx);
-+     return pixels[cIdx] + ((xpos + ypos*stride) << bpp_shift[cIdx]);
-+   }
-+ 
-+   /* Number of pixels in one row (not number of bytes).
-+    */
-+-  int get_image_stride(int cIdx) const
-++  ptrdiff_t get_image_stride(int cIdx) const
-+   {
-+     if (cIdx==0) return stride;
-+     else         return chroma_stride;
-+   }
-+ 
-+-  int get_luma_stride() const { return stride; }
-+-  int get_chroma_stride() const { return chroma_stride; }
-++  ptrdiff_t get_luma_stride() const { return stride; }
-++  ptrdiff_t get_chroma_stride() const { return chroma_stride; }
-+ 
-+   int get_width (int cIdx=0) const { return cIdx==0 ? width  : chroma_width;  }
-+   int get_height(int cIdx=0) const { return cIdx==0 ? height : chroma_height; }
-+@@ -333,7 +334,7 @@ private:
-+   int width = 0, height = 0;  // size in luma pixels
-+ 
-+   int chroma_width = 0, chroma_height = 0;
-+-  int stride = 0, chroma_stride = 0;
-++  ptrdiff_t stride = 0, chroma_stride = 0;
-+ 
-+ public:
-+   uint8_t BitDepth_Y = 0, BitDepth_C = 0;
-+diff --git a/libde265/intrapred.h b/libde265/intrapred.h
-+index 9b17f75b..a256cb3a 100644
-+--- a/libde265/intrapred.h
-++++ b/libde265/intrapred.h
-+@@ -533,7 +533,7 @@ void intra_border_computer<pixel_t>::fill_from_image()
-+   assert(nT<=32);
-+ 
-+   pixel_t* image;
-+-  int stride;
-++  ptrdiff_t stride;
-+   image  = (pixel_t*)img->get_image_plane(cIdx);
-+   stride = img->get_image_stride(cIdx);
-+ 
-+diff --git a/libde265/motion.cc b/libde265/motion.cc
-+index c62c24c3..14e920e1 100644
-+--- a/libde265/motion.cc
-++++ b/libde265/motion.cc
-+@@ -50,7 +50,7 @@ void mc_luma(const base_context* ctx,
-+              const seq_parameter_set* sps, int mv_x, int mv_y,
-+              int xP,int yP,
-+              int16_t* out, int out_stride,
-+-             const pixel_t* ref, int ref_stride,
-++             const pixel_t* ref, ptrdiff_t ref_stride,
-+              int nPbW, int nPbH, int bitDepth_L)
-+ {
-+   int xFracL = mv_x & 3;
-+@@ -129,7 +129,7 @@ void mc_luma(const base_context* ctx,
-+     pixel_t padbuf[(MAX_CU_SIZE+16)*(MAX_CU_SIZE+7)];
-+ 
-+     const pixel_t* src_ptr;
-+-    int src_stride;
-++    ptrdiff_t src_stride;
-+ 
-+     if (-extra_left + xIntOffsL >= 0 &&
-+         -extra_top  + yIntOffsL >= 0 &&
-+@@ -181,7 +181,7 @@ void mc_chroma(const base_context* ctx,
-+                int mv_x, int mv_y,
-+                int xP,int yP,
-+                int16_t* out, int out_stride,
-+-               const pixel_t* ref, int ref_stride,
-++               const pixel_t* ref, ptrdiff_t ref_stride,
-+                int nPbWC, int nPbHC, int bit_depth_C)
-+ {
-+   // chroma sample interpolation process (8.5.3.2.2.2)
-+@@ -227,7 +227,7 @@ void mc_chroma(const base_context* ctx,
-+     pixel_t padbuf[(MAX_CU_SIZE+16)*(MAX_CU_SIZE+3)];
-+ 
-+     const pixel_t* src_ptr;
-+-    int src_stride;
-++    ptrdiff_t src_stride;
-+ 
-+     int extra_top  = 1;
-+     int extra_left = 1;
-+diff --git a/libde265/sao.cc b/libde265/sao.cc
-+index a0db84b2..579dcef2 100644
-+--- a/libde265/sao.cc
-++++ b/libde265/sao.cc
-+@@ -28,8 +28,8 @@
-+ template <class pixel_t>
-+ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
-+                         const slice_segment_header* shdr, int cIdx, int nSW,int nSH,
-+-                        const pixel_t* in_img,  int in_stride,
-+-                        /* */ pixel_t* out_img, int out_stride)
-++                        const pixel_t* in_img,  ptrdiff_t in_stride,
-++                        /* */ pixel_t* out_img, ptrdiff_t out_stride)
-+ {
-+   const sao_info* saoinfo = img->get_sao_info(xCtb,yCtb);
-+ 
-+@@ -77,7 +77,7 @@ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
-+ 
-+   if (SaoTypeIdx==2) {
-+     int hPos[2], vPos[2];
-+-    int vPosStride[2]; // vPos[] multiplied by image stride
-++    ptrdiff_t vPosStride[2]; // vPos[] multiplied by image stride
-+     int SaoEoClass = (saoinfo->SaoEoClass >> (2*cIdx)) & 0x3;
-+ 
-+     switch (SaoEoClass) {
-+@@ -266,8 +266,8 @@ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
-+ template <class pixel_t>
-+ void apply_sao(de265_image* img, int xCtb,int yCtb,
-+                const slice_segment_header* shdr, int cIdx, int nSW,int nSH,
-+-               const pixel_t* in_img,  int in_stride,
-+-               /* */ pixel_t* out_img, int out_stride)
-++               const pixel_t* in_img,  ptrdiff_t in_stride,
-++               /* */ pixel_t* out_img, ptrdiff_t out_stride)
-+ {
-+   if (img->high_bit_depth(cIdx)) {
-+     apply_sao_internal<uint16_t>(img,xCtb,yCtb, shdr,cIdx,nSW,nSH,
-+@@ -332,8 +332,8 @@ void apply_sample_adaptive_offset_sequential(de265_image* img)
-+     return;
-+   }
-+ 
-+-  int lumaImageSize   = img->get_image_stride(0) * img->get_height(0) * img->get_bytes_per_pixel(0);
-+-  int chromaImageSize = img->get_image_stride(1) * img->get_height(1) * img->get_bytes_per_pixel(1);
-++  size_t lumaImageSize   = static_cast<size_t>(img->get_image_stride(0)) * img->get_height(0) * img->get_bytes_per_pixel(0);
-++  size_t chromaImageSize = static_cast<size_t>(img->get_image_stride(1)) * img->get_height(1) * img->get_bytes_per_pixel(1);
-+ 
-+   uint8_t* inputCopy = new uint8_t[ libde265_max(lumaImageSize, chromaImageSize) ];
-+   if (inputCopy == nullptr) {
-+@@ -347,10 +347,10 @@ void apply_sample_adaptive_offset_sequential(de265_image* img)
-+ 
-+   for (int cIdx=0;cIdx<nChannels;cIdx++) {
-+ 
-+-    int stride = img->get_image_stride(cIdx);
-++    ptrdiff_t stride = img->get_image_stride(cIdx);
-+     int height = img->get_height(cIdx);
-+ 
-+-    memcpy(inputCopy, img->get_image_plane(cIdx), stride * height * img->get_bytes_per_pixel(cIdx));
-++    memcpy(inputCopy, img->get_image_plane(cIdx), static_cast<size_t>(stride) * height * img->get_bytes_per_pixel(cIdx));
-+ 
-+     for (int yCtb=0; yCtb<sps.PicHeightInCtbsY; yCtb++)
-+       for (int xCtb=0; xCtb<sps.PicWidthInCtbsY; xCtb++)
-+diff --git a/libde265/sei.cc b/libde265/sei.cc
-+index 17b7f8b5..8a3d80a7 100644
-+--- a/libde265/sei.cc
-++++ b/libde265/sei.cc
-+@@ -99,7 +99,7 @@ static void dump_sei_decoded_picture_hash(const sei_message* sei,
-+ class raw_hash_data
-+ {
-+ public:
-+-  raw_hash_data(int w, int stride);
-++  raw_hash_data(int w, ptrdiff_t stride);
-+   ~raw_hash_data();
-+ 
-+   struct data_chunk {
-+@@ -111,13 +111,14 @@ public:
-+   data_chunk prepare_16bit(const uint8_t* data,int y);
-+ 
-+ private:
-+-  int mWidth, mStride;
-++  int mWidth;
-++  ptrdiff_t mStride;
-+ 
-+   uint8_t* mMem;
-+ };
-+ 
-+ 
-+-raw_hash_data::raw_hash_data(int w, int stride)
-++raw_hash_data::raw_hash_data(int w, ptrdiff_t stride)
-+ {
-+   mWidth=w;
-+   mStride=stride;
-+@@ -157,7 +158,7 @@ raw_hash_data::data_chunk raw_hash_data::prepare_16bit(const uint8_t* data,int y
-+ }
-+ 
-+ 
-+-static uint32_t compute_checksum(uint8_t* data,int w,int h,int stride, int bit_depth)
-++static uint32_t compute_checksum(uint8_t* data,int w,int h,ptrdiff_t stride, int bit_depth)
-+ {
-+   uint32_t sum = 0;
-+ 
-+@@ -170,7 +171,7 @@ static uint32_t compute_checksum(uint8_t* data,int w,int h,int stride, int bit_d
-+   }
-+   else {
-+     auto* data16 = reinterpret_cast<uint16_t*>(data);
-+-    int stride16 = stride / 2;
-++    ptrdiff_t stride16 = stride / 2;
-+     for (int y=0; y<h; y++)
-+       for(int x=0; x<w; x++) {
-+         uint8_t xorMask = ( x & 0xFF ) ^ ( y & 0xFF ) ^ ( x  >>  8 ) ^ ( y  >>  8 );
-+@@ -224,7 +225,7 @@ static inline uint16_t crc_process_byte_parallel(uint16_t crc, uint8_t byte)
-+ 	   (t << 12)) & 0xFFFF;
-+ }
-+ 
-+-static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,int stride, int bit_depth)
-++static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,ptrdiff_t stride, int bit_depth)
-+ {
-+   raw_hash_data raw_data(w,stride);
-+ 
-+@@ -250,7 +251,7 @@ static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,int stride
-+ }
-+ 
-+ 
-+-static void compute_MD5(uint8_t* data,int w,int h,int stride, uint8_t* result, int bit_depth)
-++static void compute_MD5(uint8_t* data,int w,int h,ptrdiff_t stride, uint8_t* result, int bit_depth)
-+ {
-+   MD5_CTX md5;
-+   MD5_Init(&md5);
-+@@ -289,7 +290,8 @@ static de265_error process_sei_decoded_picture_hash(const sei_message* sei, de26
-+   int nHashes = img->get_sps().chroma_format_idc==0 ? 1 : 3;
-+   for (int i=0;i<nHashes;i++) {
-+     uint8_t* data;
-+-    int w,h,stride;
-++    int w,h;
-++    ptrdiff_t stride;
-+ 
-+     w = img->get_width(i);
-+     h = img->get_height(i);
-+diff --git a/libde265/sps.cc b/libde265/sps.cc
-+index aa871a09..a29a3c0a 100644
-+--- a/libde265/sps.cc
-++++ b/libde265/sps.cc
-+@@ -570,7 +570,7 @@ de265_error seq_parameter_set::compute_derived_values(bool sanitize_values)
-+   PicHeightInCtbsY   = ceil_div(pic_height_in_luma_samples,CtbSizeY);
-+   PicSizeInMinCbsY   = PicWidthInMinCbsY * PicHeightInMinCbsY;
-+   PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
-+-  PicSizeInSamplesY = pic_width_in_luma_samples * pic_height_in_luma_samples;
-++  PicSizeInSamplesY = static_cast<uint32_t>(pic_width_in_luma_samples) * pic_height_in_luma_samples;
-+ 
-+   if (chroma_format_idc==0 || separate_colour_plane_flag) {
-+     CtbWidthC  = 0;
-+@@ -1325,7 +1325,7 @@ de265_error seq_parameter_set::write(error_queue* errqueue, CABAC_encoder& out)
-+   PicHeightInCtbsY   = ceil_div(pic_height_in_luma_samples,CtbSizeY);
-+   PicSizeInMinCbsY   = PicWidthInMinCbsY * PicHeightInMinCbsY;
-+   PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
-+-  PicSizeInSamplesY = pic_width_in_luma_samples * pic_height_in_luma_samples;
-++  PicSizeInSamplesY = static_cast<uint32_t>(pic_width_in_luma_samples) * pic_height_in_luma_samples;
-+   if (chroma_format_idc==0 || separate_colour_plane_flag) {
-+     CtbWidthC  = 0;
-+     CtbHeightC = 0;
-+diff --git a/libde265/sps.h b/libde265/sps.h
-+index c8be9788..5cb0b46c 100644
-+--- a/libde265/sps.h
-++++ b/libde265/sps.h
-+@@ -39,6 +39,13 @@ constexpr int MAX_NUM_LT_REF_PICS_SPS = 32;
-+ constexpr int MAX_PICTURE_WIDTH  = 65535;
-+ constexpr int MAX_PICTURE_HEIGHT = 65535;
-+ 
-++// pic_width/height_in_luma_samples are stored as uint16_t and PicSizeInSamplesY as uint32_t,
-++// so these limits must keep width/height in 16 bits and their product in 32 bits.
-++static_assert(MAX_PICTURE_WIDTH  <= 0xFFFF, "picture width must fit in uint16_t");
-++static_assert(MAX_PICTURE_HEIGHT <= 0xFFFF, "picture height must fit in uint16_t");
-++static_assert((uint64_t)MAX_PICTURE_WIDTH * MAX_PICTURE_HEIGHT <= 0xFFFFFFFFu,
-++              "total luma sample count must fit in uint32_t");
-++
-+ enum {
-+   CHROMA_MONO = 0,
-+   CHROMA_420 = 1,
-+@@ -111,8 +118,8 @@ public:
-+   uint8_t chroma_format_idc;          // [0;3]
-+ 
-+   bool separate_colour_plane_flag;
-+-  int  pic_width_in_luma_samples;
-+-  int  pic_height_in_luma_samples;
-++  uint16_t pic_width_in_luma_samples;   // <= MAX_PICTURE_WIDTH  (validated on parse)
-++  uint16_t pic_height_in_luma_samples;  // <= MAX_PICTURE_HEIGHT (validated on parse)
-+   bool conformance_window_flag;
-+ 
-+   int conf_win_left_offset;
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
-index a02d6dd5d8c..8e145cf8dde 100644
---- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https
-            file://CVE-2026-49295.patch \
-            file://CVE-2026-49337.patch \
-            file://CVE-2026-49346.patch \
-+           file://CVE-2026-54240-CVE-2026-54241.patch \
- "
- SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
- 
+>
+>>
+>>  "
+>>  SRCREV =3D "824b4138ecd51611d7073f1b50d5d6f982609b06"
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#130743): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/130743
+>> Mute This Topic: https://lists.openembedded.org/mt/121708410/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
