@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26ACECC6B03
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18952CA9EDC
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 21:11:06 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5101.1791839462623585780
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5097.1791839455314876059
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 14:11:02 -0700
+ Mon, 12 Oct 2026 14:10:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=UYYV8RX7;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-ccc6b11a19aso751168a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:11:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=MkNPqUV2;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ab2bf5e75bso1142935a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791839462; x=1792444262; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791839455; x=1792444255; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DdiunAitm9p3IpUO3AfUpuarKIA8DrhqU3e+HYdK9bg=;
-        b=UYYV8RX7a3dGjPET883evFFlJ+wpZBU7hqw2ww4dL8NouRLkUOXwWl2LOIK+qWKpVf
-         6o/lTSi/4R92NDdUMBjwufEMUPvZchNc78tDOUk92ZuuqX5fdgIwGQZNEhxzorgiHgcZ
-         T5SQnw87WlqIB0oUPxUvhGOg12uLRGaEZj143PZjV1RSMIeQUc+XBGlZQH9vS3VRFGuA
-         mkpFo9ygjwwDKOV0OfkTO+8V0qTzBFzysoJBTFlZBnn/NDRPUf6foBxoesGIH4+cAtuk
-         b54R/mRw3ZgTJ4biYSvmJ1P0h3Ho1105yDZfegu8NrEFOZZB/mKS1WXI2fEcRobymyEp
-         2DHQ==
+        bh=6QiV0nfZtc98gxzDTeDh7ZHrHNNpjxQXVoYPbjSwhmo=;
+        b=MkNPqUV2BojOBfDGoskLDKDi54gVgLJZhi3bbqG86QulJHEZ0eX6wnwOwwKVQE4fw7
+         DVCFLOr8fISfr/AeAZRXrNc7OTd+w3SgNoL1BvHpNw/npr6FFmbb9GHmvtUgXHJKe71M
+         Zx7ZLVIqEysRqP2AjF63BuHLuhKNgIHmITBWovIrQ/2yDf8gBi8fqKEHB7h7lSqcdxAH
+         tiixXWVaZKOBHogZOmjXJosJSoi+tTHetkk3IoXlIFFRp/R3jrS3BjF8hc8f6IYbfYP8
+         nOXceP8uNDN940e5z1S+HKTJAaILMCIKh4QaykPkOiWNtAbXB+Dc1DrkI056EAaB2x3U
+         AtWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791839462; x=1792444262;
+        d=1e100.net; s=20260707; t=1791839455; x=1792444255;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DdiunAitm9p3IpUO3AfUpuarKIA8DrhqU3e+HYdK9bg=;
-        b=S7k3UyrqFI/JbVll4NtQQM1OXfDJrvxJytp58w5TLblbPyBazLyUE8oYwziVK7qjt1
-         nXtLOHBR2mcGF651RxisIrtJRmJDXOasVh+cxLFUN1pftZuZdYg9iQ7YZn5GYK2tX8Na
-         Ig5eiWqzgbUhFvwczYC9Yb1eCHlsc7JZfFvS3lOw6LfXrCf1ktYDR7L0hnnaE3XvZ34w
-         Exi6wfyYxKFQZXEw0AVPLB5ULDA27gm/m6pxcQ81NeLkbUaWXZoXSXSy2sapiqUiysDz
-         awPfwuidcLMiuBIvTeUDk32Yezg38tCepTIDlc1Nw2FnAS0hpj7G9yVIWZn/AA697R1F
-         uLEQ==
-X-Gm-Message-State: AFq9FYJcKk7ti02C3cuxbCdMqr6DzAPrXOi3r7Q07q5ZTq5uqY+BJT2T
-	GaNWIe/c6y6ofhWBEEe3+fR/HH9oUk8+6zTTzii2NZ84nfSf/dxC3ZWZXOmvhw==
-X-Gm-Gg: AYBFou1LXzibpArTLJq1gBoJBek9VPxn5sEWZ1b8e+kyYLMJ0ZrFJ3bLmJqyncRTHjL
-	scCRKAmlwjiARoNE1Z8fn47PgmBtP8sQ0o1PxrVLHF/AQnCSDNLJjKGE2S08eVKoM6bThQ4LVT/
-	WDd1G85sxUONpIGUZ4LAmpo4ACs1qe698ab6cxHE+IfruNc5yoFZIkb23D8RePR3mpbZMtAMvUe
-	ehj7jjoA/qfkSYSXkhmFT0uNCus5g7C+ivU8R/HQRrIsQgyobSuaJvUZ3j3kKSx8ih7C30IEXXv
-	ue5E5oSVUL8/O7xy16Guit+qGIlmi1gXIDtzfk2nLfNer8ciT8U9ioVz3w4khQFMC5FN6xxsY4r
-	cquamQPymmwXQTIktF3a6wOkIpZN0r8jgWlLg7p1Rj0HMFPacIdEckeAybEjfOmsVygJ+NV+Hxj
-	asWMd36uOUfqRsLaCNMLvwJG8gOA5SKJUpuCYjtrx3mdREOaTwQ8/jzFtYJA7tWpbHfMsWerEgB
-	Dm0sFW9Ko2iuO02ngWaFrm6ID8EKTkkdrUpH9VFfA==
-X-Received: by 2002:a17:90b:51cf:b0:3ab:c370:3684 with SMTP id 98e67ed59e1d1-3abc370392emr3985577a91.30.1791839461874;
-        Mon, 12 Oct 2026 14:11:01 -0700 (PDT)
+        bh=6QiV0nfZtc98gxzDTeDh7ZHrHNNpjxQXVoYPbjSwhmo=;
+        b=dkTLaVf2JXdCjOVEgebcUjmSNFBLduAO1sBN7FsLzPzgnTA4szxlXd9lddrNljXZTK
+         TYJWUbO30lllh6n761xoe9N9hAy+kv7Bgoo9bGbBNFEeiLml1Q+iPe6uMkqACtRutU62
+         DKbwWNUEr8MoCYtCcWA9Eqjv5IxsdzHfSs01T9a3Yw9t+L3pvYBaQidVp5Uhk1IxFwju
+         cjSZoNi0KxvUOLSxwswNk5OUky6zOxEzzI8cvYpOF1cEjjPqfjJXjad8K8cF0WtQQomz
+         RjT0QUaVZD57s1ERa+KbrVoVNZ7ibEqVRXA9QqvVdHvkLj1jGDpGEPuSKEEKVVHTsbT8
+         QeAw==
+X-Gm-Message-State: AFq9FYJfKW8A5YgUP9mKNYqhMUzj59o3gLQz/PZcnAyMWlr24M4f3rb+
+	bWXuDKzGOBh65KcHZir01q1u3bn1AKsUCMF3FMMOXb8/oBugEe0NEaley8+2OJTI
+X-Gm-Gg: AYBFou35t4qb6Eqf4OXpo0A2EqQi/1L2TGB6rAMUohdIzskxvS7eH2mMsThDLZja+Xm
+	jMxM8MtKSbcEZDEp/6EQar/d2B+rSkMXrqhitfrnJkbw8i/bknhui9WY4JPIX3ovuov3/L9RWJr
+	ySzBhm1CGfxNcSbfcj9FIH0nO6yOJTn2uu48aK4SVY1GIYlEBJC+NnyWErKSX1X6aWW85Tfv3iK
+	EZ3mTpF9l7Ih1N60j2vRTVCtPQmRZK4R0qZWBOLB7AFIk6rD2pIq2YvvgOr7rPQ/G7QmNUmElfM
+	23aJY/avGbjEDqs/Ft4FILY1ZZyv43JO/n3QX9KFNDZIM76AkOErXXMrPR42/vINJCmRnNO7i4U
+	5uA1/oDBffceBDEsarydcjzfasQywYADZ9gPbNdvedN8Qj54F9ko588/+oy9CoUmdWoINcfzZYn
+	arXNIk1xkfvitUkm/nFve1JUh6aVlzx9axTCSosQS9nF/CI720bpdXz6f7S726a3LJ4zDFEbD0o
+	d3vbKU9Jaitbne0INVLxXfzCEABz51zS800rZdCcw==
+X-Received: by 2002:a17:90b:4fcb:b0:3ab:31b9:fe51 with SMTP id 98e67ed59e1d1-3ab3acf311bmr8986882a91.67.1791839454570;
+        Mon, 12 Oct 2026 14:10:54 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.10.59
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.10.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 14:11:01 -0700 (PDT)
+        Mon, 12 Oct 2026 14:10:54 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-oe][blacksail][PATCH 17/43] hdf5: patch CVE-2026-17573
-Date: Tue, 13 Oct 2026 10:09:41 +1300
-Message-ID: <20261012211009.3352822-17-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][blacksail][PATCH 14/43] libde265: patch CVE-2026-49346
+Date: Tue, 13 Oct 2026 10:09:38 +1300
+Message-ID: <20261012211009.3352822-14-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
 References: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
@@ -69,97 +69,141 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:11:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130787
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130784
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport patch from the PR[1] fixing the issue[2] mentioned in the NVD[3].
-Debian[4] has also identified the commit.
-
-[1] https://github.com/HDFGroup/hdf5/pull/6160
-[2] https://github.com/HDFGroup/hdf5/issues/6124
-[3] https://nvd.nist.gov/vuln/detail/cve-2026-17573
-[4] https://security-tracker.debian.org/tracker/CVE-2026-17573
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-49346
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit f46990293cf684add8cc2ee7e71738e97889bcc3)
+(cherry picked from commit 4a63a2afa1c984b82a663ed8951b62f0ae5da093)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-17573.patch           | 53 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
- 2 files changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
+ .../libde265/libde265/CVE-2026-49346.patch    | 102 ++++++++++++++++++
+ .../libde265/libde265_1.0.19.bb               |   1 +
+ 2 files changed, 103 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49346.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49346.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49346.patch
 new file mode 100644
-index 00000000000..3cfb52de42d
+index 00000000000..288295b08a8
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
-@@ -0,0 +1,53 @@
-+From 856e7f1dd23e466ebeab5e454a5891b12e188f6a Mon Sep 17 00:00:00 2001
-+From: jhendersonHDF <jhenderson@hdfgroup.org>
-+Date: Tue, 27 Jan 2026 05:55:38 -0600
-+Subject: [PATCH] Fix double-free issue in H5D__chunk_copy (#6160)
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49346.patch
+@@ -0,0 +1,102 @@
++From 1667c33f2778a04f08ba4f7d6c1c16508350a779 Mon Sep 17 00:00:00 2001
++From: Dirk Farin <dirk.farin@gmail.com>
++Date: Tue, 26 May 2026 00:59:08 +0200
++Subject: [PATCH] fix integer overflow in image plane allocation size
++ (GHSA-vv8h-932h-7r86)
 +
-+Fix double-free caused by loss of buffer pointer after re-allocation
++(cherry picked from commit 8a1b5cf212f78e1c77cb46eb5d56e492a9336eb8)
 +
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
-+
-+CVE: CVE-2026-17573
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/dd3080a58cc6bb86f3b34284399915da9e513262]
-+
-+Dropped changes to the CHANGELOG file.
++CVE: CVE-2026-49346
++Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/8a1b5cf212f78e1c77cb46eb5d56e492a9336eb8]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5Dchunk.c | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
++ libde265/image.cc | 46 +++++++++++++++++++++++++++-------------------
++ 1 file changed, 27 insertions(+), 19 deletions(-)
 +
-+diff --git a/src/H5Dchunk.c b/src/H5Dchunk.c
-+index f2a0e85c03..5ff537ebde 100644
-+--- a/src/H5Dchunk.c
-++++ b/src/H5Dchunk.c
-+@@ -7034,7 +7034,7 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+                 const H5S_extent_t *ds_extent_src, H5T_t *dt_src, const H5O_pline_t *pline_src,
-+                 H5O_copy_t *cpy_info)
++diff --git a/libde265/image.cc b/libde265/image.cc
++index 0b6071ba..94f3c974 100644
++--- a/libde265/image.cc
+++++ b/libde265/image.cc
++@@ -70,10 +70,11 @@ LIBDE265_API void* de265_alloc_image_plane(struct de265_image* img, int cIdx,
++                                            void* inputdata, int inputstride, void *userdata)
 + {
-+-    H5D_chunk_it_ud3_t udata;                       /* User data for iteration callback */
-++    H5D_chunk_it_ud3_t udata = {0};                 /* User data for iteration callback */
-+     H5D_chk_idx_info_t idx_info_dst;                /* Dest. chunked index info */
-+     H5D_chk_idx_info_t idx_info_src;                /* Source chunked index info */
-+     int                sndims;                      /* Rank of dataspace */
-+@@ -7202,7 +7202,6 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+         HGOTO_ERROR(H5E_RESOURCE, H5E_NOSPACE, FAIL, "memory allocation failed for raw data chunk");
++   int alignment = STANDARD_ALIGNMENT;
++-  int stride = (img->get_width(cIdx) + alignment-1) / alignment * alignment;
++-  int height = img->get_height(cIdx);
+++  uint32_t stride = (img->get_width(cIdx) + alignment-1) / alignment * alignment;
+++  uint32_t height = img->get_height(cIdx);
 + 
-+     /* Initialize the callback structure for the source */
-+-    memset(&udata, 0, sizeof udata);
-+     udata.common.layout    = &layout_src->u.chunk;
-+     udata.common.storage   = &layout_src->storage.u.chunk;
-+     udata.file_src         = f_src;
-+@@ -7253,11 +7252,11 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+         } /* end for */
++-  uint8_t* p = static_cast<uint8_t*>(ALLOC_ALIGNED_16(stride * height + MEMORY_PADDING));
+++  // size computed in size_t: stride*height can exceed UINT32_MAX for large planes
+++  uint8_t* p = static_cast<uint8_t*>(ALLOC_ALIGNED_16(static_cast<size_t>(stride) * height + MEMORY_PADDING));
++ 
++   if (p==nullptr) { return nullptr; }
++ 
++@@ -82,12 +83,14 @@ LIBDE265_API void* de265_alloc_image_plane(struct de265_image* img, int cIdx,
++   // copy input data if provided
++ 
++   if (inputdata != nullptr) {
++-    if (inputstride == stride) {
++-      memcpy(p, inputdata, stride*height);
+++    if (inputstride == static_cast<int>(stride)) {
+++      memcpy(p, inputdata, static_cast<size_t>(stride) * height);
 +     }
++     else {
++-      for (int y=0;y<height;y++) {
++-        memcpy(p+y*stride, static_cast<char*>(inputdata) + inputstride*y, inputstride);
+++      for (uint32_t y=0;y<height;y++) {
+++        memcpy(p + static_cast<size_t>(y) * stride,
+++               static_cast<char*>(inputdata) + static_cast<size_t>(inputstride) * y,
+++               inputstride);
++       }
++     }
++   }
++@@ -107,30 +110,35 @@ LIBDE265_API void de265_free_image_plane(struct de265_image* img, int cIdx)
++ static int  de265_image_get_buffer(de265_decoder_context* ctx,
++                                    de265_image_spec* spec, de265_image* img, void* userdata)
++ {
++-  const int rawChromaWidth  = spec->width  / img->SubWidthC;
++-  const int rawChromaHeight = spec->height / img->SubHeightC;
+++  const uint32_t rawChromaWidth  = spec->width  / img->SubWidthC;
+++  const uint32_t rawChromaHeight = spec->height / img->SubHeightC;
 + 
-++done:
-+     /* I/O buffers may have been re-allocated */
-+     buf = udata.buf;
-+     bkg = udata.bkg;
++-  int luma_stride   = (spec->width    + spec->alignment-1) / spec->alignment * spec->alignment;
++-  int chroma_stride = (rawChromaWidth + spec->alignment-1) / spec->alignment * spec->alignment;
+++  uint32_t luma_stride   = (spec->width    + spec->alignment-1) / spec->alignment * spec->alignment;
+++  uint32_t chroma_stride = (rawChromaWidth + spec->alignment-1) / spec->alignment * spec->alignment;
 + 
-+-done:
-+     if (dt_dst && (H5T_close(dt_dst) < 0))
-+         HDONE_ERROR(H5E_DATASET, H5E_CANTCLOSEOBJ, FAIL, "can't close temporary datatype");
-+     if (dt_mem && (H5T_close(dt_mem) < 0))
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index c83bb832deb..df0192a0911 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -19,6 +19,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-26199.patch \
-            file://CVE-2026-26197.patch \
-            file://CVE-2026-17572.patch \
-+           file://CVE-2026-17573.patch \
-            "
- SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
++   assert(img->BitDepth_Y >= 8 && img->BitDepth_Y <= 16);
++   assert(img->BitDepth_C >= 8 && img->BitDepth_C <= 16);
++ 
++-  int luma_bpl   = luma_stride   * ((img->BitDepth_Y+7)/8);
++-  int chroma_bpl = chroma_stride * ((img->BitDepth_C+7)/8);
+++  uint32_t luma_bpl   = luma_stride   * ((img->BitDepth_Y+7)/8);
+++  uint32_t chroma_bpl = chroma_stride * ((img->BitDepth_C+7)/8);
++ 
++-  int luma_height   = spec->height;
++-  int chroma_height = rawChromaHeight;
+++  uint32_t luma_height   = spec->height;
+++  uint32_t chroma_height = rawChromaHeight;
++ 
++   bool alloc_failed = false;
++ 
++-  uint8_t* p[3] = { 0,0,0 };
++-  p[0] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(luma_height   * luma_bpl   + MEMORY_PADDING));
+++  // Compute the plane sizes in size_t. Each operand fits in uint32_t, but the
+++  // height * bytes-per-line product can exceed UINT32_MAX for large frames, so
+++  // the multiplication must be done in 64 bits. Computing it in 32 bits wraps
+++  // the allocation size to a small value while fill_image() later writes the
+++  // real (size_t) size -> heap buffer overflow (GHSA-vv8h-932h-7r86).
+++  uint8_t* p[3] = { nullptr,nullptr,nullptr };
+++  p[0] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(static_cast<size_t>(luma_height) * luma_bpl + MEMORY_PADDING));
++   if (p[0]==nullptr) { alloc_failed=true; }
++ 
++   if (img->get_chroma_format() != de265_chroma_mono) {
++-    p[1] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(chroma_height * chroma_bpl + MEMORY_PADDING));
++-    p[2] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(chroma_height * chroma_bpl + MEMORY_PADDING));
+++    p[1] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(static_cast<size_t>(chroma_height) * chroma_bpl + MEMORY_PADDING));
+++    p[2] = static_cast<uint8_t*>(ALLOC_ALIGNED_16(static_cast<size_t>(chroma_height) * chroma_bpl + MEMORY_PADDING));
++ 
++     if (p[1]==nullptr || p[2]==nullptr) { alloc_failed=true; }
++   }
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+index 5fcf6411131..a02d6dd5d8c 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV} \
+            file://CVE-2026-49295.patch \
+            file://CVE-2026-49337.patch \
++           file://CVE-2026-49346.patch \
+ "
+ SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
  
 
