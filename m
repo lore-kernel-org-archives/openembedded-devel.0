@@ -2,63 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA621CA9ED2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA0ADCA9EDC
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 21:11:53 +0000 (UTC)
 Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5092.1791839503788184266
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5119.1791839498873227921
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 14:11:43 -0700
+ Mon, 12 Oct 2026 14:11:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Kk6YG4W/;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=GkufgNaF;
  spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ab62a8250aso1197883a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:11:43 -0700 (PDT)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ab3260b2cdso933461a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:11:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791839503; x=1792444303; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791839498; x=1792444298; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Tq4Jyy0Md+hDU71NW0upmsmT1bjck2A5lshkdE8RtuQ=;
-        b=Kk6YG4W/xTjqHn9EHSLJl7HBwj+N/XsabLbXnq1b1oR6K5uTVp+HC33chKCknNwbY2
-         BRJAjKthXNULCUMJabHC+vyG5GnpJ9bapXPwl0YecS97CurOt1UoylPesTjywlq1N5P/
-         XSgLrq54WVBvWEL9702yGtFVS5sAXw4PMknngz6xPleSV6/6Az+ZjjM41uHu18r6jgWz
-         BWmUG3u1hWDNO5DdlogGszQwCbNXp3sTldMBgxH00a+pZHsfurj5QNhL2s7wKuqUps33
-         VTStc0EIt6gRSesUKe/t1QsngUwACNZgfW3vcyraDLoN3KvHoO4uGQy4dP2tb2ZB1eg6
-         fTqw==
+        bh=z8GN4om8v5rdFSVZdGpD+ZsZwPq5HhaGQ2mhYesOgWg=;
+        b=GkufgNaFobHjaOXYFWWwDChDh+E0FsBfthuIQuSAX/tnRakICzMPGdpUSNFz7KkMgc
+         r8/Dpwy5ljkUMIOKT5nYv8ReceOyJ0JMN7/2c7caOy+vkV+Qyz3vZVUO5D7wYxm+lSzR
+         0kd2SODSpoSYOTrrklyJnF/gqoe7IQdchGMnVMbWSwbZElDOxXSw20RwO+gAeEGYmh7p
+         Yd3a5iCl26HgEYEfwyL3a2bIMUCdBiwvLGz4i0Hs0y7Qhk1Dk+2N4JY/VMYJSPI49gMu
+         VQbI7sf/zOuX9pMswWUrwp7n48x4xQ9G0CG6Vj3czQX/o3GaL9xV0ee+v+RSWi9FD8nC
+         x+gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791839503; x=1792444303;
+        d=1e100.net; s=20260707; t=1791839498; x=1792444298;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Tq4Jyy0Md+hDU71NW0upmsmT1bjck2A5lshkdE8RtuQ=;
-        b=G1tmtcurmokh1zcgceJcvrBcxxwYFS9NHJSxDFut8LFE9dCy+eOl+7ZVwYwaQulp7T
-         QGmzKoGH7AQqxi9fpbCj1JW4IGKTgAlOLV4vkRhX+R2ce8pgWkrvgkoAXrkxuV7GZ0sM
-         XbfBky6kZDfLJI81+C3+5UKwAbTP5X+/l1MH7EXZU49uB/y1NwoaQgG9ySCSgp48lKdI
-         Ax6C8ABVxTbmHMmKzJMHkIo5ggbHq1qJ24HpaXoWQVc5N1lmntZaZAOSaeJ5VpziI1YZ
-         n19EpCivLEIpXYRDVjTn/XrNO8x6Mto+58bwB3+uBoK4WUH9tWXU7/0tTXBUHbX+uKkK
-         1OdA==
-X-Gm-Message-State: AFq9FYJ1q8deH5NLpVi3dH3+BJvt71oarcLhyWTxMBfSt5TnhD+lN0pW
-	6qQdJs9qnY5gMjpF2QdvF8iFXfCgx3WaU0VJgVBYM1omoFDxshwRT1XNpERn2w==
-X-Gm-Gg: AYBFou1OX949ajliGQBhWlOH8VFDrgLIidHgCJ8XXUV/Oa/dU8whKG5lm0DIHrvqPD1
-	Zgvqtk295OIoGe4Lo+0zvrNqE3wi+2VdA7BYGw5LMNjwn6Maxn01O0T9nGopbxnisjC3BYRCDZb
-	3Ll7tDx9nKFOdxbeKwBiVtuhKVNk40b9Qcpg0pV76Gt8NWyg2CJQUqcKHmN0yMIB5SFt1Gd7KOi
-	MM1+1ZEubbjIUHVT0cV3xINjQn3Wk+/+G5Agfke4cfr+TW26WWR4CITvwN1KdvRGew2cHfA2wpD
-	IX14F/w63oVXckONB8ZgfA0+meFe8rwzGm5/lrYbn6TE61So8XwVzYUfZMPEKnTRsAnf0qULcn5
-	NgTXY5FssBSF0KTjJ+zxr8qFyywpW3uVT8VxK6QP/s71eCFp/Zi9IE5wy43CA/i3V0tl/gzEd5/
-	Cpg4+ZZnuv7LNZaTLuovD9d1vclNzRqcdfNUbndOnwuyuM5EDm3RoK5xME2S8o+NevcjqvNVyW/
-	aot0g2+IcFvt8AY4ngqtzEVbhtzyByT9ZI7uQU=
-X-Received: by 2002:a17:90b:3c85:b0:3a7:8ef9:3bb5 with SMTP id 98e67ed59e1d1-3ab3a90b5e6mr8441621a91.10.1791839502978;
-        Mon, 12 Oct 2026 14:11:42 -0700 (PDT)
+        bh=z8GN4om8v5rdFSVZdGpD+ZsZwPq5HhaGQ2mhYesOgWg=;
+        b=Rmc2+rMLri54SrxP3ikqtpyb7J58UbOBWr0dpdzFIiEKU/Vf+jPgUIG1ioLGvO9NKH
+         JOQ/pLl4qkzeYlAORLebJjRPcEI+75tP6pNAEU8seydADND1bfQ70HFpY+9T49/X0nOH
+         6QtilEbJkoWYJrPJkjF0UYG3IhgP7H4tDCvtq/sy5ne9hgTh6RlmU/lkWdU2fuWhS32c
+         LKwTcQ79L44F99z7AJgrG8kGpHjlMbxswfJR0p9ZAZ3f3zvLea8+uXncvWLFPQhO1Y2+
+         gap5YtzDWJ2aDoXHtEYu/Cg4D42rWVm5wDyg7tQCWsYuyiI1eZaT652f5xeqI3xVV8zu
+         Iy6A==
+X-Gm-Message-State: AFq9FYIvlnUN3yZ4KgPO6dbfkJve0P12vcAnI0O4J0rXzRX8LaxTRy2O
+	SY6sYXTMDqRwUqWh9ZcefAvPgbt+XgxCr1sJ5bA/La4iIQLG7ZHM/N7Essn1x85q
+X-Gm-Gg: AYBFou01xpQmsCXVAGNPuUmjDyL+9ZELUrq8YTvDDJaMPT8rr2oZ9BS0YnrPFz89peE
+	K22DVX1zmuZZneg1sw078rONeJCkIZzUVpkLTvTnmR4ZzADKlq4v+XPru4+v/OefmaHrcj0ctqq
+	0EcIsS8ssDHn3rVvVKOfyw9hCK4DeAviEMC4eaom12MpdRxS6P9HxVXAdEI0CV0xa6kabySJzER
+	GtVIB6sjDdpAw+qNuEQaOu2Tdf4HBL6jFgL/YcSUJaeKIAHPB+aRRemoAK3KpLWOwjxPdkjuA6+
+	30NiVt8mFkV5YWKEJQjDcPbkQvXkwxJYdqiMwnvlTZxx6zqQ+C+kFhcyTzB/Ghr5IXWUzQq7ute
+	aCcHFeqpTUhTDT+P7A/sewWKz1GCms9hjjYuUO8JAfce17ewUdwebK2hnfshfXuKtZ+w/9Vg8bN
+	yfSFJLRIl9Ik9taOZTpYCGkc8xFv4o4fxZ9nUp8/XKmKwO/ixrtzgqicIg5J7OjBAbD3+OhUghL
+	wljPAzVKd6nNLG1FKISxcD/EK5qyqZytfFqpRQ=
+X-Received: by 2002:a17:90b:380a:b0:3a8:cb54:e132 with SMTP id 98e67ed59e1d1-3ab3ae2c453mr9520106a91.49.1791839498174;
+        Mon, 12 Oct 2026 14:11:38 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.11.41
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.11.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 14:11:42 -0700 (PDT)
+        Mon, 12 Oct 2026 14:11:37 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][blacksail][PATCH 34/43] python3-gunicorn: mark CVE-2024-1135 patched
-Date: Tue, 13 Oct 2026 10:09:58 +1300
-Message-ID: <20261012211009.3352822-34-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Subject: [oe][meta-networking][blacksail][PATCH 32/43] tinyproxy: patch CVE-2026-55202
+Date: Tue, 13 Oct 2026 10:09:56 +1300
+Message-ID: <20261012211009.3352822-32-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
 References: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
@@ -68,30 +69,150 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:11:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130804
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130802
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Debian[1] also identified the commit.
+Backport commit identified by Debian[1]
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2024-1135
+https://nvd.nist.gov/vuln/detail/cve-2026-55202
 
-[1]https://security-tracker.debian.org/tracker/CVE-2024-1135
+[1]https://security-tracker.debian.org/tracker/CVE-2026-55202
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(cherry picked from commit 233e6a56e5311eff91c8a46c36a790db1fb38933)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../tinyproxy/tinyproxy/CVE-2026-55202.patch  | 107 ++++++++++++++++++
+ .../tinyproxy/tinyproxy_1.11.3.bb             |   1 +
+ 2 files changed, 108 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-index 545947446cf..e19be893602 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-@@ -41,3 +41,5 @@ EOF
- }
- 
- RDEPENDS:${PN} += "python3-setuptools python3-fcntl"
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
+new file mode 100644
+index 00000000000..4e446542e27
+--- /dev/null
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-55202.patch
+@@ -0,0 +1,107 @@
++From 04b34f814076d790db26925d7df7c30798910c99 Mon Sep 17 00:00:00 2001
++From: rofl0r <rofl0r@users.noreply.github.com>
++Date: Sat, 18 Apr 2026 00:03:15 +0200
++Subject: [PATCH] reqs: improve stathost detection (#606)
 +
-+CVE_STATUS[CVE-2024-1135] = "fixed-version: fixed since v22.0.0"
++until now, only the basicauth code checked the host header, regular connections didn't.
++
++- add a new helper function to compare a hostname with optional
++  trailingcolon/port against the stathost.
++- add stathost check via host header before transparent proxy check,
++  else stathost might be misdetected as a trans host request.
++- refactor existing stathost checks to use the new helper
++
++this should make it easier to access the stathost, for example by
++injecting a host header into a curl command line with -H:
++
++    $ curl -H "Host: tinyproxy.stats" 127.0.0.1:8080
++
++the stathost can also be specified as an ip address, e.g.
++Stathost "127.0.0.10" + a separate Listen statement for that ip.
++in such a case e.g.
++
++    $ curl http://127.0.0.10:8080
++
++would work too, even if curl didn't add a Host header (but it does anyway).
++
++(cherry picked from commit 09312a185ae25cc486b4ff5987638a7917a48bce)
++
++CVE: CVE-2026-55202
++Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/09312a185ae25cc486b4ff5987638a7917a48bce]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/reqs.c | 37 +++++++++++++++++++++++++------------
++ 1 file changed, 25 insertions(+), 12 deletions(-)
++
++diff --git a/src/reqs.c b/src/reqs.c
++index e3cfe76..d5037cf 100644
++--- a/src/reqs.c
+++++ b/src/reqs.c
++@@ -316,6 +316,17 @@ static int send_connect_method_response (struct conn_s *connptr)
++                                       connptr->protocol.minor);
++ }
++ 
+++/* determine whether a hostname with optional trailing colon/port is the
+++   stathost */
+++static int is_stathost (const char* host)
+++{
+++        const char *p = config->stathost;
+++        const char *q = host;
+++        if (!p || !q) return 0;
+++        while (*p && *(p++) == *(q++));
+++        return *p == 0 && (*q == 0 || *q == ':');
+++}
+++
++ /*
++  * Break the request line apart and figure out where to connect and
++  * build a new request line. Finally connect to the remote server.
++@@ -384,6 +395,16 @@ BAD_REQUEST_ERROR:
++                 goto fail;
++         }
++ 
+++        /*
+++         * Check to see if they're requesting the stat host
+++         */
+++        if (is_stathost (pseudomap_find (hashofheaders, "host"))) {
+++got_stathost:
+++                log_message (LOG_NOTICE, "Request for the stathost.");
+++                connptr->show_stats = TRUE;
+++                goto fail;
+++        }
+++
++ #ifdef REVERSE_SUPPORT
++         if (config->reversepath_list != NULL) {
++                 /*
++@@ -497,19 +518,11 @@ BAD_REQUEST_ERROR:
++                 }
++         }
++ #endif
++-
++-
++-        /*
++-         * Check to see if they're requesting the stat host
++-         */
++-        if (config->stathost && strcmp (config->stathost, request->host) == 0) {
++-                log_message (LOG_NOTICE, "Request for the stathost.");
++-                connptr->show_stats = TRUE;
++-                goto fail;
++-        }
+++        /* check whether hostname from url is the stathost */
+++        if (is_stathost (request->host))
+++                goto got_stathost;
++ 
++         safefree (url);
++-
++         return request;
++ 
++ fail:
++@@ -1688,7 +1701,7 @@ void handle_connection (struct conn_s *connptr, union sockaddr_union* addr)
++ 
++                 if (!authstring && config->stathost) {
++                         authstring = pseudomap_find (hashofheaders, "host");
++-                        if (authstring && !strncmp(authstring, config->stathost, strlen(config->stathost))) {
+++                        if (authstring && is_stathost(authstring)) {
++                                 authstring = pseudomap_find (hashofheaders, "authorization");
++                                 stathost_connect = 1;
++                         } else authstring = 0;
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+index e84aeae53cc..25df44301b6 100644
+--- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
+            file://CVE-2026-3945-2.patch \
+            file://CVE-2026-31842.patch \
+            file://CVE-2026-54387.patch \
++           file://CVE-2026-55202.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "9bcf46db1a2375ff3e3d27a41982f1efec4706cce8899ff9f33323a8218f7592"
 
