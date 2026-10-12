@@ -2,64 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88C00CA9ED5
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:10:53 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3493.1791763849657181188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1CA2CA9EBD
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:11:03 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3519.1791763862191802623
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:10:49 -0700
+ Sun, 11 Oct 2026 17:11:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=VL5Emejx;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3ab2bf5e75bso621830a91.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=A29gIq8X;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso506703a91.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763849; x=1792368649; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791763861; x=1792368661; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AZOpdh2ofxltEUluA4G5vv652iJgziEy/5DNpaJ57go=;
-        b=VL5EmejxXu4E2aO+/pYrl6uOv6XrCC34QOBDnxroi567Q1vbvCsdeL+902ldv3qmoS
-         Sc2bBl+9NUmw8sRk2bxkbyaiUPdM5C76D/gmvyB6Y/MTQHQXrtRAUMZduGnJs47p/YF5
-         S2GJ6XzPu56uBe1K4ObcExW6zqVYw3lXAyDUKSLmhn8e/xhtqXL9Y8qi8Y22llvZJluF
-         lCmiwRruREA08Ug0yzJa70XYb1qgrj/BVl7d7gB3wHUnm/LhEdhtKMeou+lOoR7l1BGS
-         oyOUiWsfJNMFc3urf+qwcnVlRQbqMeLKWIaSPnInOAPSyvZg0O4F8dlvgrqan43Uylef
-         O8Jg==
+        bh=HWE9KhoFhL239uXRN8REY/sU5aEGM5GPnqCa3pDUgE0=;
+        b=A29gIq8XLWOc1VyFXG/SE146YEG/LzskEIioefPDQQTCBr3cUCw4Q0sinGCSWL4Pnh
+         lid4sH8vY9H3xKOs2Al+54RSGkYB9RtRxDlt5rGphj0fdk+gZUmXGE5smQ8HzPenb6gS
+         dUGh7A4ujH354HqR0yzrITvSao1IErqJ7ZkleERp4moEUh2qMlyPV7aijymVjLTv1K90
+         Tx7gT6wdmfIktS8wkjXJwoL7IkUnTx5/BhnnIoM48SuCrluR1hppRRjQwtizt8AheU8f
+         1KoMvmCGPZq+SGdsYqNsgRRFxhptjhvwvzmYk94vJurHHuvEBykxf+kZFhFAwHyYDIHC
+         gh4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763849; x=1792368649;
+        d=1e100.net; s=20260707; t=1791763861; x=1792368661;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AZOpdh2ofxltEUluA4G5vv652iJgziEy/5DNpaJ57go=;
-        b=2e0vPnnOxbER0p819jwnfGZ5OVg13AckibeTiMHOIgJLhFBnnUbGa1PLj/kCwKZu9X
-         ijGl/X65NS/+Hh3jY9rzcUsmtaucTntjj9N5V6VoMv2lk4tRatYVlzX1gUZEEqI+7Dmw
-         CHvsvaNl7l9eUtxdGz2C5bm/1Rm+x2St5LNg/dOqvPrzkFXZIX5W8HbnOQk/gYLgpUZr
-         yTlSnIU7udWT0x31sYe3/TBmqgn5P4QJ2jkcY0byrG+L9Vp39cxekL57Z9qAovCEaMcZ
-         S3bduYhIPdcKO0XhP0bD+B/oZbrhDM8czb2B4BLU5Hb4dgSI1SsB7+AKt5+PZFr70bEw
-         S1tQ==
-X-Gm-Message-State: AFq9FYIKiWupBWIqKxqyBgtNqd97Q7LP9PPHE2Oma84dH3bBNaT6Hai7
-	DXDzgJxDmGz7g7LFunmS6BZimpmXo212oLU9H0ex3Nn8wH0rSAlHeftgZJlof+cBHbk=
-X-Gm-Gg: AYBFou2e22RMZIC2FAmbSdpuczJImQclzqok6At3l1VefWFPq7/5BungOSbOZ2LZDDw
-	HuyYYuoRgqR5JAveT8xA1T2XeLb8WmJ+krTr5WUy8U1+ZJF58bfQJ4c4N0eqaqYylXMq9d2N9Np
-	9z/5lWYiHb+yYUW26HGEkJxCR6boU1WRPt0daOeToi3if8cS6FmZh7OWauWXpbuIFJ2fiBwCt9q
-	PerJagGIErIFSkCjwLY5ozYPjuPhAev10VfUX/g3S8jJUhHlqoGNAhzZuoGkGyHHjyfGwFe6s7b
-	F9E5QzqOCYBDYOYLWJ9+twGDo2kcQuKzXek5rzeHjVD1zM/1pgJVCDVlEo39brCztKluWCo1O2s
-	UerKE896Cd6hWoe9cyn28lP/vamBzAlvW4n2VqVtAxsza/2YgjwX7epCB7u0NklV8hN2deVCnFW
-	W5s84mzVss80EN5kFC0E8+mmqw/R4Cpt1fuZSpfJeRcxFZweG3qhR7oyhrvWd9OTshT+VzKIAWs
-	0JD9wuuZsvtKz8kCBDUUQvaX8UaWNqTgfuNQ9M=
-X-Received: by 2002:a17:90b:224c:b0:3aa:faf6:a951 with SMTP id 98e67ed59e1d1-3ab3a9a93b8mr6851755a91.37.1791763848924;
-        Sun, 11 Oct 2026 17:10:48 -0700 (PDT)
+        bh=HWE9KhoFhL239uXRN8REY/sU5aEGM5GPnqCa3pDUgE0=;
+        b=dCq3/m8a3CTc/rBg24uXgapfc0OxpRuF+syqLLRlYxzOKv95b4956jujcFY6kXTdDq
+         tLNKaRFZPI6z8/F7C9GJJscvuYRE5kmjTP8iKQJao8o3EhE9TiJUguzYbCxrP86K7LfM
+         0HNrLOWmCSLisROZH8f96M3JAt4cQBAOwkCBHeFFL3Irdd9laeVQrSbaIqHBXlrG7Tqx
+         2W/tNysFpECthGSj125R4lXdL75gaRM6YfKYmPtCntB4ifrsdzH7uXG9qvRSGw4FjLoG
+         K7brHmelhIdkrfJSPyjLf5WOJv/F4tQBgY5BAFRtLzGbv5ebbpxagNclNJQn8OeT/P/p
+         lJgQ==
+X-Gm-Message-State: AFq9FYLOAigqnVBnz01nty8LHmtb1oMI7MOTYUm6nd1fLSVvrR8MuTwJ
+	E+e6aOnbExtcEV5eiApivt864Ve+traOm/AIdkrGc+FuBxNA04ZpKWnv4g4KY2S1K2g=
+X-Gm-Gg: AYBFou0qcQfrvPofp9J16zWxuOLgXS8qtUKJRN7SLzCasxo11tHvp5bM+Qcln6Lfp3V
+	Zdp5k5OGnzc7/npJuMNCeHnmY9VHZl7mdwdasi67jXY03pCtk4PU2kWAdIkRgsl2wJ9jQAG0VkH
+	/yXsXR6PAjSFzLyPiQ7X9gW1jiuOAJxdhruhSQQzt2xUmhi5rAWF0Kd3xS0JW0dqJ6M5Dutfy9S
+	+db3OP11ofI3j+eVXVylpSS85GmpQHmxt6yK7tzsmcWDXh1yP47rq1N8LJ+ZnqOHMZRzm5WGxvt
+	CqQB+5RLNz53wUoTiBkyU+jw3AsUysoxfxtn47tc7c2ztKZwgD1EdiLsOBcff6vGgdmKgkni1IH
+	FANM5nvHyCpJtRGSM35EjlO6WMr70bUkqXyIEH0PkpPJxQUvVh691u2XBgzAU86cHRXqkhFounw
+	yaXY+mfWhPxdag/PB17MPRZsImpjRmwZuBrcTrGP6bVmJD+BZnx6u7XpKovjVbpxR/D5Bea3urv
+	4iXMMhUPSNymL3WjTL2WAX1qpyK0T81LsbvCgg=
+X-Received: by 2002:a17:90b:384a:b0:3a8:bb56:f1ef with SMTP id 98e67ed59e1d1-3ab3a2902a2mr6819402a91.2.1791763861472;
+        Sun, 11 Oct 2026 17:11:01 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.46
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:10:48 -0700 (PDT)
+        Sun, 11 Oct 2026 17:11:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-networking][PATCH 13/28] wolfssl: mark CVEs patched
-Date: Mon, 12 Oct 2026 13:09:51 +1300
-Message-ID: <20261012001007.2541673-13-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 18/28] libde265: patch CVE-2026-54240 and CVE-2026-54241
+Date: Mon, 12 Oct 2026 13:09:56 +1300
+Message-ID: <20261012001007.2541673-18-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
 References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
@@ -68,36 +67,35 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:10:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130738
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:11:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130743
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-CVE-2023-6937[1] and CVE-2024-5814[2] are patched in current version.
+Debian identified same commit as fix for both CVEs[1][2].
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2023-6937
-https://nvd.nist.gov/vuln/detail/cve-2024-5814
+https://nvd.nist.gov/vuln/detail/cve-2026-54240
+https://nvd.nist.gov/vuln/detail/cve-2026-54241
 
-[1]https://github.com/wolfSSL/wolfssl/blob/v5.6.6-stable/ChangeLog.md#vulnerabilities
-[2]https://github.com/wolfSSL/wolfssl/blob/v5.7.2-stable/ChangeLog.md#vulnerabilities
+[1]https://security-tracker.debian.org/tracker/CVE-2026-54240
+[2]https://security-tracker.debian.org/tracker/CVE-2026-54241
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit c12fcc9b481d5fcd94db96cd062042301a4f24b1)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
-index 8fc6068560b..a2b41b2d3c7 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
-@@ -72,3 +72,5 @@ CVE_STATUS[CVE-2026-5504] = "fixed-version: fixed in 5.9.1"
- CVE_STATUS[CVE-2026-5507] = "fixed-version: fixed in 5.9.1"
- CVE_STATUS[CVE-2026-5772] = "fixed-version: fixed in 5.9.1"
- CVE_STATUS[CVE-2026-5778] = "fixed-version: fixed in 5.9.1"
-+CVE_STATUS[CVE-2023-6937] = "fixed-version: fixed since v5.6.6"
-+CVE_STATUS[CVE-2024-5814] = "fixed-version: fixed since v5.7.2"
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+index a02d6dd5d8..8e145cf8dd 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https
+            file://CVE-2026-49295.patch \
+            file://CVE-2026-49337.patch \
+            file://CVE-2026-49346.patch \
++           file://CVE-2026-54240-CVE-2026-54241.patch \
+ "
+ SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
+ 
 
