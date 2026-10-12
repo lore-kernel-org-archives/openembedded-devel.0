@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACD1ACA9ECF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B91A1CA9ED3
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:11:03 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3516.1791763854711617576
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3494.1791763857284450879
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:10:54 -0700
+ Sun, 11 Oct 2026 17:10:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=MXEX7Izv;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2e623eda81cso7569395ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=nsB+vXtU;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so612287a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763854; x=1792368654; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791763857; x=1792368657; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4x/C/dWGcatHe42E5jutBB/abcUKIjeNHiMFKqhs2V8=;
-        b=MXEX7IzvrRje4tpYcf8pR9NH+OuLuEib0oLzV0rBxiBvPF5lqxPu80tkEpvh3gyPmm
-         Q/Xs+MPkpa1/s2Sc2UD6h850UQao4UbiGt7pC+6iCR2fcCsIqPsNG4kzUSB1zwSjXhUc
-         YH0s0dexnHncU/7WQCIODdl0+0KVo6RgOgfepbnNC0/uFJ0MD4YbCXr1UQU9oCgnvBmE
-         zAuma6iXn0Jx72pNNfJcmnZzE9XazrDQYFBlju38LjDcub3lby9hvZErpv7BKVNTPxwL
-         1zwxbCgySpgUCyjkmMYEKL/CgmcOT5qFdkfj0kmxs8ojAfbbmaRpDILQsVdb6SHo2njg
-         yrNQ==
+        bh=CPtpAxsWgHCGclwUU4Kex2f7e/VVpeiiVhkw7dMAbMg=;
+        b=nsB+vXtUvN1wNqd/L8dPkx/TXJ0h5zfrJ0R2SGl69M8qFMgOeBNTeB6V+SXDrdCtn3
+         3YWf6Cju9lGDZsSLy+eOA5dCDOpLCmoQwWP+BWaHhq7KQYOtc7nU/3FfAGpnMuoJx3pz
+         2DhBNcEnZ+aCLemyPOJ68T4GfVfxg99jvCR2OoKchgFoIdiqkCsxQYJ7qOb8mLhPTcw0
+         LxuNtfHEn/UtJXXfhSsUQZrmEKdLw0/r4VWtyF0x0LonbEHQ3gQfoZIUak1pkN2vkLZo
+         y2AEd6ikQkn4ZtAJHyPPyaxinJ+UJeOVUMsWAjn8l5NYwuu1nTE+DJPLlvjQCf4ppVw6
+         qXVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763854; x=1792368654;
+        d=1e100.net; s=20260707; t=1791763857; x=1792368657;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4x/C/dWGcatHe42E5jutBB/abcUKIjeNHiMFKqhs2V8=;
-        b=vEK7Kglt9LfO+2gWfi8Kd9klR56iH1PPU+ZJWCt9NwMuxCOFwpZtVN2DNmC2SmHD3E
-         D8HGIjjtden/H1HFnjh+4CGutagE0XA+SJ7Fja8Cm+Gm2pRNwZmv1nsUS/6SM3xpGPdg
-         R6llcGMmVFkUUMMQz+AMAT+Xd4K19/g74jdOH8YyvpO/8PN3keviVLKQChCP4QsxyCZj
-         dEsqxBQLxTq0oiGSEx9vYAUkRlmTR4zdc2Eh0m0vbv03zO3MlT/xZViSdOhT6fiJLtSv
-         +tOnht+7hTqko384gnm3c5tfGRRjzgOWuAa7NxzOK4APnOuIE1qSI7p+s6MQcBsvmxGs
-         ZZAQ==
-X-Gm-Message-State: AFq9FYJGO7GWgzlukHd7XAkaNX4K4pjtaFBqJKYSbV41087g+OnCszm0
-	GMEdvzZlHow8PbH4OtlBxpYrr3IY5bwRY64pkJJ3sFUGuLZ0A6gcmI+5hGb9Gg==
-X-Gm-Gg: AYBFou065qhtHrSLt6mc+6eGyABOAkapL8C/84SKkd/4n+yrL4Huq2OduZSwpAAisUA
-	kElbmYw96WgACfG+fZuYTl0VV9pU8h0p1b2dUh2QqHFzHKO057qpAgQZ3KgHd4v0t+M2DqmW2N5
-	NSVihKM/c73RhN4bJSalMuSZjU8fKg1OxDC54XccrMwoxWnsVwV8mugUwAzP4H1XBzt90PKcNBA
-	k7wY32jb/vl4lpvmlXTYK7T5QiyOqreUIsq/pQbzrWzLMcS/NvElx6R9bixxv9VetP79GCUWf9E
-	9n66GsrhTw7B2zMcMZNOSxa4n90M+jDmRcEBahPwk1Po0cisVb+PRXwz8gUk1OpfdZzlPQDyYA9
-	FEIMjCvivMErJN+HmpqsdVb+G5fNdu+5l9ylD1I39PpGf+Jb1GjRVVd2eOPQlXDl4JnzQ3jrTVX
-	7VFinGXOfJk6HZXd68fFLAl7bv+093eL46TAEchhq+cUBHp1PxtV7BtjgIURVS+1NBotbbkKBDq
-	8TjK9v5dqmYcYt1kQecUlbyjiwY53plsGOniF0=
-X-Received: by 2002:a17:90b:2790:b0:3ab:be66:ddbf with SMTP id 98e67ed59e1d1-3abbe66e03fmr2120609a91.54.1791763854047;
-        Sun, 11 Oct 2026 17:10:54 -0700 (PDT)
+        bh=CPtpAxsWgHCGclwUU4Kex2f7e/VVpeiiVhkw7dMAbMg=;
+        b=zqpN8VopcwOAt1WHvXM/mtfU8wUdq1xmeqzy56NlzCe2PKIn5+tdyei7JSGa84RxaG
+         HUxuLYB6GLErHSS2SGINSRidDNk1Q2Bi8hB2gG1cI83HUx19O6x4zSDyqXkvgAtq05kw
+         OvEKiaz0G2tXzWhRYvX92HFkKPtkWQ8BuD+ZL1awkWDPjSr+is4cuj4vG0L+dfaULcPY
+         B4+VqPLLC1nZvHdtdrCtlxN/jGmW4IbFrhgCge5UwmCV+lCVvfncuPnmMhcomUcZVSDw
+         vemHdO1Q8c84d2kGUtAeCqbqZK6EUEdw+gK1/0iPyPDIg/nnnEAOkkOpBqxHqgagYdRs
+         BX6g==
+X-Gm-Message-State: AFq9FYJ5nPpWbtzu4VuT09nj+Ob3VkT4qjxrXGFzam1RXTUJ4cf3+WiB
+	X8KL/OonSFBTYDlblQ/7TWmX46NFLpTa/QARGbr4EIFG7tI+G3gJ87xXVadTUlun7f0=
+X-Gm-Gg: AYBFou0FOTU51S2eLPjFJtsJGKAeJwmIUHhUFJhD7vrs/d71uSkAnjTG1hviSTxsPzC
+	LTAS944ewOmddiEAMEp19f+7Pt4I/d9qtabaOnq0QYX8dXQh3+/gh3Xg6ChC5zlR1ihQ48PXYzr
+	m4vIybka/r8OHTlOCrYcFE9DMSG7ZR78MqDyuOZN7f07SdjfT6wUQ+BtcEP0ZivLF8fQmJp4jnu
+	t5HI5du8fnlUSXENnj+/tySojAjOrULVXhPpF7DN4qpZhAC+vu2c5EdkW3FxnyCxTbhptWyKvha
+	NACF4whE5/5eWwXD3j/FxMkk+WcpmyyVGNFZf3zRXDttCzW+/NYJT3h9FSFslmCg/wlgft7u3PF
+	vjbwbLdXVUcxHAVvB4RiqTYKPAUBc+9L4ObiHiM6NDFwB6hyZIv0PSngwcm645tuKHHCuEHntXj
+	kGvOZ7v9Zrw/Z8r7J44BU+sWy2j1tHGDmcVZ/H4zUGEbu5TCz3vifzO3VswRMfELRHqAX5iRMHS
+	8T2tQwQi8oJsGrjHBbZ0FpBBuGH4UcVLDl5UTY=
+X-Received: by 2002:a17:90b:224c:b0:3a7:9adb:2a0d with SMTP id 98e67ed59e1d1-3ab3a0218bfmr7037060a91.0.1791763856572;
+        Sun, 11 Oct 2026 17:10:56 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.51
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:10:53 -0700 (PDT)
+        Sun, 11 Oct 2026 17:10:56 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-multimedia][PATCH 15/28] libde265: patch CVE-2026-49295
-Date: Mon, 12 Oct 2026 13:09:53 +1300
-Message-ID: <20261012001007.2541673-15-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 16/28] libde265: patch CVE-2026-49337
+Date: Mon, 12 Oct 2026 13:09:54 +1300
+Message-ID: <20261012001007.2541673-16-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
 References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
@@ -69,83 +69,92 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:11:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130740
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130741
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-49295
+https://nvd.nist.gov/vuln/detail/cve-2026-49337
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit bd09bb41b41ee12aeb181bf04e5f5961b00123ef)
+(cherry picked from commit c83399f83fbbbb855c5a272c9702e8aff4328ce4)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libde265/libde265/CVE-2026-49295.patch    | 41 +++++++++++++++++++
- .../libde265/libde265_1.0.19.bb               |  4 +-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49295.patch
+ .../libde265/libde265/CVE-2026-49337.patch    | 53 +++++++++++++++++++
+ .../libde265/libde265_1.0.19.bb               |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49337.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49295.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49295.patch
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49337.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49337.patch
 new file mode 100644
-index 00000000000..189d330b9a5
+index 00000000000..88e0e329491
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49295.patch
-@@ -0,0 +1,41 @@
-+From 7d5e48dbf9324691ba3ce4cd8ffa089d735b0b70 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-49337.patch
+@@ -0,0 +1,53 @@
++From 2f0c53241cb9bf2f5acded53c25f1b74db536de7 Mon Sep 17 00:00:00 2001
 +From: Dirk Farin <dirk.farin@gmail.com>
-+Date: Mon, 25 May 2026 20:14:07 +0200
-+Subject: [PATCH] bound aggregate short-term RPS size (GHSA-g2rg-wj66-w594)
++Date: Mon, 25 May 2026 20:29:40 +0200
++Subject: [PATCH] free orphaned slice header when no active image unit
++ (GHSA-g5hj-rf9f-7vxm)
 +
-+(cherry picked from commit 691f3a3c55b3d32478c4a49895dee061a282652b)
++(cherry picked from commit 683cb9fa603e35840642f98765ab95cdb71cadf9)
 +
-+CVE: CVE-2026-49295
-+Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/691f3a3c55b3d32478c4a49895dee061a282652]
++CVE: CVE-2026-49337
++Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/683cb9fa603e35840642f98765ab95cdb71cadf9]
++
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ libde265/refpic.cc | 16 ++++++++++++++++
-+ 1 file changed, 16 insertions(+)
++ libde265/decctx.cc | 12 ++++++++----
++ 1 file changed, 8 insertions(+), 4 deletions(-)
 +
-+diff --git a/libde265/refpic.cc b/libde265/refpic.cc
-+index ea4db4b0..dcd2b214 100644
-+--- a/libde265/refpic.cc
-++++ b/libde265/refpic.cc
-+@@ -322,6 +322,22 @@ bool read_short_term_ref_pic_set(error_queue* errqueue,
++diff --git a/libde265/decctx.cc b/libde265/decctx.cc
++index fbb3baa1..5deddc37 100644
++--- a/libde265/decctx.cc
+++++ b/libde265/decctx.cc
++@@ -478,10 +478,6 @@ de265_error decoder_context::read_slice_NAL(bitreader& reader, NAL_unit* nal, na
++     shdr->entry_point_offset[i] -= skipped;
++   }
 + 
-+   out_set->compute_derived_values();
++-  this->img->add_slice_segment_header(shdr);
++-
++-
++-
++   // --- start a new image if this is the first slice ---
 + 
-++  // The unused short-term references are all collected into a single PocStFoll array
-++  // of MAX_NUM_REF_PICS entries (see decoder_context::process_reference_picture_set).
-++  // While each individual list is bounded above, the predicted-RPS construction can
-++  // append the current-picture delta to an already-full source set, pushing the
-++  // combined count past MAX_NUM_REF_PICS. Reject such sets to avoid an out-of-bounds
-++  // write when filling PocStFoll.
-++  if (out_set->NumDeltaPocs > MAX_NUM_REF_PICS) {
-++    out_set->NumNegativePics = 0;
-++    out_set->NumPositivePics = 0;
-++    out_set->NumDeltaPocs = 0;
-++    out_set->NumPocTotalCurr_shortterm_only = 0;
++   if (shdr->first_slice_segment_in_pic_flag) {
++@@ -495,6 +491,13 @@ de265_error decoder_context::read_slice_NAL(bitreader& reader, NAL_unit* nal, na
++ 
++   if ( ! image_units.empty() ) {
++ 
+++    // Hand the slice header to the picture (which takes ownership and frees it
+++    // on release). Only do this when there is an active image unit to decode
+++    // the slice; otherwise the header would be retained on img->slices forever,
+++    // which a crafted stream of non-first slice NALs can exploit to grow memory
+++    // without bound.
+++    this->img->add_slice_segment_header(shdr);
 ++
-++    errqueue->add_warning(DE265_WARNING_MAX_NUM_REF_PICS_EXCEEDED, false);
-++    return false;
-++  }
-++
-+   return true;
-+ }
++     slice_unit* sliceunit = new slice_unit(this);
++     sliceunit->nal = nal;
++     sliceunit->shdr = shdr;
++@@ -507,6 +510,7 @@ de265_error decoder_context::read_slice_NAL(bitreader& reader, NAL_unit* nal, na
++   }
++   else {
++     nal_parser.free_NAL_unit(nal);
+++    delete shdr;
++   }
 + 
++   bool did_work;
 diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
-index ca05e9099e5..6bed3250fa5 100644
+index 6bed3250fa5..5fcf6411131 100644
 --- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
 +++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
-@@ -8,7 +8,9 @@ LICENSE = "LGPL-3.0-only AND MIT"
- LICENSE_FLAGS = "commercial"
- LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
  
--SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV}"
-+SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV} \
-+           file://CVE-2026-49295.patch \
-+"
+ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV} \
+            file://CVE-2026-49295.patch \
++           file://CVE-2026-49337.patch \
+ "
  SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
- 
  
 
