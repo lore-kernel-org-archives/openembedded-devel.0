@@ -1,818 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D919CA9ED0
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 18:51:00 +0000 (UTC)
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1832.1791831056178109443
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 163D1CA9ED2
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 20:21:42 +0000 (UTC)
+Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3850.1791836499264707289
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 11:50:56 -0700
+ Mon, 12 Oct 2026 13:21:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=o0I7MxSf;
- spf=pass (domain: gmail.com, ip: 74.125.82.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-15168a20b47so1324663c88.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 11:50:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791831055; x=1792435855; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MCeEHzXXVy/KdzFLUFvX7fdXxMANDRGhMgrSGLYZxmM=;
-        b=o0I7MxSfLMK+UQpPb/0NXyggPhQK5OgR9Ke26JJlaUVUECYk7Kcaq32uJiTGuPtGAv
-         JNFy0GLrSf2eOzn4FCy+t6SCRKanBN+iblCwch2aGs0FMMD+EqBGkwiMzYRsKLx3ucyg
-         xbcOzXHDmq0KrY7nq7+qzEkg9bwTp+X0AQcI9f+bZPYxdu4tTmGbakmVM7Z9yg5HPsOQ
-         A4ZqjZZ9eW74MDpqBIoZc5FoCRfM7cl8msTrzrHcwzczSq6ZcxbezgJXwUqpKn33mbzK
-         O8g7vBUgE/PhDiHBwtqd34oJ+sqiaL6h7jVU0S+lHmGkgjtiCssGPn3xC8e3v6e1SNOL
-         M44w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791831055; x=1792435855;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=MCeEHzXXVy/KdzFLUFvX7fdXxMANDRGhMgrSGLYZxmM=;
-        b=uV3gFmzDHA7rTVfOl56sjCrgj5a2j71SKQdbj/Om5uDGrGyzO7fT5oTnzdJ7fNIOSz
-         F2xZa9uKWVoqE40WNl8hb7GbYp4yvwE9G4A2C0upmOR1WbvWBQ6egLT6MpKAIpHsixUz
-         spoIIVb7jY1nFLCdIxDxP8yUgb8OkK6xrB+A+P1pqd8/eRyTnqloZ8uptAIEIo1xEmvv
-         UIw0eY16KwlN39prtlI8Osz31r7O9GRfz7eSbVJtdx22qdujHVugc/C31VFXSuwvNpHD
-         YeObYNctVwIVPw62ggdkD/Ufu5E6eS86KVqG9kB+ycU9iq1soOxF2ZGx9VPZPn9JEGpj
-         6XwQ==
-X-Gm-Message-State: AFq9FYKuM3qS+8zQM6wll4U4rTrTLJgy+Mv5wntX1T5Sx/fGMzb8OQcx
-	ZvMbsKEbndjwNYpNJsqFCHTpCsF9yjyJeN/O1uuM7kbV8gki9dVlyMBBB+aVOHfl
-X-Gm-Gg: AYBFou2oH7MrftaUWAcOgoYoRDQQefB8myTBd8YgOAZvjD1VEXGnt88xej2J2Jqvdew
-	kS0cYzqWkPQvmjYYf9QbTz6HkqQy7NLji7LeN0EPWsO135bTUaBNs5TQcrHxqvP1oxxHZHmfsHa
-	9Wuulqo2Bp40F67Z6iAONpK9nBQJurpWflozbJC3doCo1djosvJ7WUC9+gwGHRNSawReX45agaZ
-	esX0sTVjXFadumXO68OKsgtlzE6tnvwmqGVSU+auxHx1rnacHpkYC880ooviNnyiLyyC+VxkNp9
-	3hSLtvV2/tHoTTq1Aj4P9en16m/oRXElHBfia/wwAQMSKTipIR4WFYz6+0spL7LLvIywS7FPt8d
-	2ADTeA2Hx2YON61pRkklJp+o3QeCRQKUUnHtFqmyjlL+FYL+CljCJih74c1Z06PAWVo5glbOF6C
-	BbEBygEWZQy+Z47oshD3i4TJ4RX9hbORoEPTza7HQ/g5PuOu+uMsOlf9zdy33pa1yZSfGo7HtB2
-	XE4X9El4AQoWA9g1V9myYVUzEkN4qwmq1E9PDThFkqMVhh+bKHKSI07WF9iWTCgGuCqvoaGdVaG
-	VvnCxNAuN5azSfuWAl9yAzXKAWrlHhuF+cGvE/SBoczsHeT1F6YR7piEQkqsn7qEJnSx9va3No6
-	nTLk44zE/0Y2WhYy7CVpuVA0BJqoflP0Hy2DDB8YkPzn7UFcsig5ge9YesiOpaqKYGcOD6K+mw+
-	owCGMQZRs17NU2cdmREUPbmg72kaPCwvNHRKyKS5SUApPL5Q==
-X-Received: by 2002:a05:701b:4211:10b0:14a:a6dc:9cd7 with SMTP id a92af1059eb24-16a57a16ef2mr14361614c88.2.1791831055230;
-        Mon, 12 Oct 2026 11:50:55 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a442ac67sm47757129c88.18.2026.10.12.11.50.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 11:50:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=Rd5DoRkH;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-20261012202135d81c8b451200020799-qv01wb@rts-flowmailer.siemens.com)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20261012202135d81c8b451200020799
+        for <openembedded-devel@lists.openembedded.org>;
+        Mon, 12 Oct 2026 22:21:36 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=PJgPNLzruRnKvxZ8L0JKzJYz8KLst/ngPMx3+rrIrEE=;
+ b=Rd5DoRkHmrqbo5GcvQPHGfP+zi1dlX9e8w901vYah52zbaYGATQPewci77AXDbxPzj6lzd
+ +66LMMitGSl1kPj3HzNFcN7SiTiOCWMNf6zGY9WJmmFkFKQNVyJ+662wCkXFRPHjxO1/3+uY
+ +w6WKicM6pAEeQY7aRgViGnTca3JwIW0aDFdHer/Hxv9y1r65C5Kk449PBj/VnjhO6ew+2l2
+ Lkqsd78hgD+XG9ItJLoj57+cduU9dw34N7UmMxNxExdGv+KAgSicBgTLZXlevCeAo+aeF7tG
+ 1xznVbjntNaOe2O8kTj3xGRwfqrv1wrabU4fzGao2bcEJuDGbS3IhGKw==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Nicolas Dechesne <nicolas.dechesne@oss.qualcomm.com>,
-	Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>,
-	Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH] Revert "pipewire: add pw-voiceui SVA voice-UI control/listen client"
-Date: Mon, 12 Oct 2026 11:50:49 -0700
-Message-ID: <20261012185051.2534792-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][blacksail][PATCH 1/2] libwebsockets: patch CVE-2026-19773
+Date: Mon, 12 Oct 2026 22:21:25 +0200
+Message-ID: <20261012202126.1721004-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 18:51:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130766
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 20:21:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130767
 
-This reverts commit a09474fb9af83014ea91e5163f40f9328291b473.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Upstream has rejected this patch [1], it was
-added here in hope it will be accepted in pipewire.
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-19773
 
-[1] https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2969#note_3631852
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Nicolas Dechesne <nicolas.dechesne@oss.qualcomm.com>
-Cc: Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>
-Cc: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(From meta-oe rev: b8399ae07ae1958eced847a3d5e8a4227c2e3aa2)
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- ...iceui-SVA-voice-UI-control-listen-cl.patch | 694 ------------------
- .../pipewire/pipewire_1.6.9.bb                |   2 -
- 2 files changed, 696 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
+ .../libwebsockets/CVE-2026-19773.patch        | 31 +++++++++++++++++++
+ .../libwebsockets/libwebsockets_4.5.8.bb      |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
-deleted file mode 100644
-index 846af137d8..0000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
-+++ /dev/null
-@@ -1,694 +0,0 @@
--From 2ad473fced6d52b14abd4fe3b9f83ed9c0c668ef Mon Sep 17 00:00:00 2001
--From: Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>
--Date: Tue, 25 Aug 2026 21:00:18 +0530
--Subject: [PATCH] tools: add pw-voiceui SVA voice-UI control/listen client
--
--Add a pw-voiceui command-line tool for interacting with the SVA
--(Sound Trigger / Voice Activation) voice-UI node exposed on the
--PipeWire graph by the pw-pal-plugin.
--
--The tool locates the target node by media.role=VoiceUI (or an
--explicit name/id), and supports:
--  - list / info: enumerate/describe the VoiceUI node
--  - set <sva-key> <value>: set a validated SVA property (confidence
--    level, sound model path, capture-requested, mode, lab settings,
--    sample rate/channels/bit width, reset, restart)
--  - set-param / send-command: send an arbitrary POD param or node
--    command, built from a JSON payload, for lower-level control
--  - listen: subscribe to the "sva.events" metadata object and print
--    sva.state updates (detection events) as they arrive
--
--src/tools/meson.build: register pw-voiceui as a built tool alongside
--the other pw-* utilities.
--
--Upstream-Status: Pending
-----
-- src/tools/meson.build  |   1 +
-- src/tools/pw-voiceui.c | 643 +++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 644 insertions(+)
-- create mode 100644 src/tools/pw-voiceui.c
--
--diff --git a/src/tools/meson.build b/src/tools/meson.build
--index 8147906fb..ffb3a2276 100644
----- a/src/tools/meson.build
--+++ b/src/tools/meson.build
--@@ -9,6 +9,7 @@ tools_sources = [
--   [ 'pw-metadata', [ 'pw-metadata.c' ] ],
--   [ 'pw-loopback', [ 'pw-loopback.c' ] ],
--   [ 'pw-link', [ 'pw-link.c' ] ],
--+  [ 'pw-voiceui', [ 'pw-voiceui.c' ] ],
-- ]
--
-- foreach t : tools_sources
--diff --git a/src/tools/pw-voiceui.c b/src/tools/pw-voiceui.c
--new file mode 100644
--index 000000000..6321b7913
----- /dev/null
--+++ b/src/tools/pw-voiceui.c
--@@ -0,0 +1,643 @@
--+#include "config.h"
--+
--+#include <errno.h>
--+#include <getopt.h>
--+#include <stdbool.h>
--+#include <stdio.h>
--+#include <stdlib.h>
--+#include <string.h>
--+
--+#include <spa/debug/file.h>
--+#include <spa/debug/pod.h>
--+#include <spa/debug/types.h>
--+#include <spa/param/props.h>
--+#include <spa/pod/dynamic.h>
--+#include <spa/utils/json-pod.h>
--+#include <spa/utils/keys.h>
--+#include <spa/utils/result.h>
--+#include <spa/utils/string.h>
--+
--+#include <pipewire/pipewire.h>
--+#include <pipewire/extensions/metadata.h>
--+
--+#define DEFAULT_TARGET_ROLE "VoiceUI"
--+#define DEFAULT_TARGET_NAME "pal_source_voice_ui"
--+
--+struct global {
--+	struct spa_list link;
--+	uint32_t id;
--+	uint32_t permissions;
--+	uint32_t version;
--+	char *type;
--+	struct pw_properties *props;
--+};
--+
--+struct data {
--+	struct pw_main_loop *loop;
--+	struct pw_context *context;
--+	struct pw_core *core;
--+	struct pw_registry *registry;
--+	struct pw_node *node;
--+
--+	struct spa_hook core_listener;
--+	struct spa_hook registry_listener;
--+	struct spa_hook node_listener;
--+
--+	struct spa_list globals;
--+
--+	const char *target_name;
--+	const char *target_role;
--+	uint32_t target_id;
--+	bool have_target_id;
--+	bool list;
--+	bool info;
--+	bool verbose;
--+
--+	const char *command;
--+	const char *param_id;
--+	const char *json;
--+	const char *sva_key;
--+	const char *sva_value;
--+
--+	struct global *target;
--+	int pending;
--+	int exit_code;
--+    bool listen;
--+	bool listening;
--+    struct pw_metadata *metadata;
--+    struct spa_hook metadata_listener;
--+    uint32_t sva_node_id;
--+};
--+
--+static void usage(const char *name)
--+{
--+	fprintf(stderr,
--+		"Usage:\n"
--+		"  %s [options] list\n"
--+		"  %s [options] info\n"
--+    		"  %s [options] listen\n"
--+		"  %s [options] set <sva-key> <value>\n"
--+		"  %s [options] set-param <param-id> <param-json>\n"
--+		"  %s [options] send-command <command-id> <command-json>\n"
--+		"\n"
--+		"Options:\n"
--+		"  -n, --name <node-name>     Target node.name (default: %s)\n"
--+		"  -r, --role <media-role>    Target media.role (default: %s)\n"
--+		"  -i, --id <node-id>         Target explicit PipeWire node id\n"
--+		"  -v, --verbose              Print the POD being sent\n"
--+		"  -h, --help                 Show this help\n",
--+		name, name, name, name, name, name, DEFAULT_TARGET_NAME, DEFAULT_TARGET_ROLE);
--+}
--+
--+static void global_free(struct global *global)
--+{
--+	if (global == NULL)
--+		return;
--+	spa_list_remove(&global->link);
--+	pw_properties_free(global->props);
--+	free(global->type);
--+	free(global);
--+}
--+
--+static const char *global_prop(struct global *global, const char *key)
--+{
--+	return global->props ? pw_properties_get(global->props, key) : NULL;
--+}
--+
--+static bool global_is_voiceui_node(struct data *data, struct global *global)
--+{
--+	const char *name, *role, *media_class;
--+
--+	if (!spa_streq(global->type, PW_TYPE_INTERFACE_Node))
--+		return false;
--+
--+	if (data->have_target_id)
--+		return global->id == data->target_id;
--+
--+	name = global_prop(global, PW_KEY_NODE_NAME);
--+	role = global_prop(global, PW_KEY_MEDIA_ROLE);
--+	media_class = global_prop(global, PW_KEY_MEDIA_CLASS);
--+
--+	if (data->target_name && name && spa_streq(name, data->target_name))
--+		return true;
--+
--+	return role && spa_streq(role, data->target_role) &&
--+		media_class && strstr(media_class, "Audio/Source") != NULL;
--+}
--+
--+
--+static bool parse_bool_value(const char *value, bool *result)
--+{
--+	if (spa_streq(value, "true") || spa_streq(value, "1") || spa_streq(value, "yes")) {
--+		*result = true;
--+		return true;
--+	}
--+	if (spa_streq(value, "false") || spa_streq(value, "0") || spa_streq(value, "no")) {
--+		*result = false;
--+		return true;
--+	}
--+	return false;
--+}
--+
--+static const char *phase2_sva_key(const char *key)
--+{
--+	if (spa_streq(key, "sva.model.path"))
--+		return "sva.sound.model.path";
--+	return key;
--+}
--+
--+static bool validate_sva_property(const char *key, const char *value)
--+{
--+	char *end;
--+	long level;
--+	bool bool_value;
--+	const char *wire_key = phase2_sva_key(key);
--+
--+	if (spa_streq(wire_key, "sva.confidence.level")) {
--+		errno = 0;
--+		level = strtol(value, &end, 10);
--+		if (errno != 0 || *end != '\0' || level < 0 || level > 100) {
--+			fprintf(stderr, "sva.confidence.level must be an integer in range 0..100\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.sound.model.path")) {
--+		if (value[0] == '\0') {
--+			fprintf(stderr, "sva.model.path must not be empty\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.capture.requested")) {
--+		if (!parse_bool_value(value, &bool_value)) {
--+			fprintf(stderr, "sva.capture.requested must be true/false, yes/no, or 1/0\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.mode")) {
--+		if (!spa_streq(value, "LPI") && !spa_streq(value, "NLPI")) {
--+			fprintf(stderr, "sva.mode must be LPI or NLPI for phase2 plugin compatibility\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.lab.enabled")) {
--+		if (!parse_bool_value(value, &bool_value)) {
--+			fprintf(stderr, "sva.lab.enabled must be true/false, yes/no, or 1/0\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.lab.duration") ||
--+			spa_streq(wire_key, "sva.sample.rate") ||
--+			spa_streq(wire_key, "sva.channels") ||
--+			spa_streq(wire_key, "sva.bit.width")) {
--+		errno = 0;
--+		level = strtol(value, &end, 10);
--+		if (errno != 0 || *end != '\0' || level < 0) {
--+			fprintf(stderr, "%s must be a non-negative integer\n", key);
--+			return false;
--+		}
--+		return true;
--+	}
--+	if (spa_streq(wire_key, "sva.reset")) {
--+		if (!parse_bool_value(value, &bool_value)) {
--+			fprintf(stderr, "sva.reset must be true/false\n");
--+			return false;
--+		}
--+		return true;    /* ← move return true INSIDE the if block */
--+	}
--+	if (spa_streq(wire_key, "sva.restart")) {
--+		if (!parse_bool_value(value, &bool_value)) {
--+			fprintf(stderr, "sva.restart must be true/false\n");
--+			return false;
--+		}
--+		return true;
--+	}
--+	/* Now this is reachable for unknown keys */
--+	fprintf(stderr, "unsupported SVA key '%s'\n", key);
--+	fprintf(stderr, "supported keys: sva.confidence.level, sva.model.path, "
--+			"sva.sound.model.path, sva.capture.requested, sva.mode, "
--+			"sva.lab.enabled, sva.lab.duration, sva.sample.rate, "
--+			"sva.channels, sva.bit.width, sva.reset, sva.restart\n");
--+	return false;
--+}
--+
--+static bool build_sva_props_pod(struct spa_pod_builder *builder, const char *key,
--+		const char *value, struct spa_pod **pod)
--+{
--+	struct spa_pod_frame frame[2];
--+
--+	spa_pod_builder_push_object(builder, &frame[0], SPA_TYPE_OBJECT_Props, SPA_PARAM_Props);
--+	spa_pod_builder_prop(builder, SPA_PROP_params, 0);
--+	spa_pod_builder_push_struct(builder, &frame[1]);
--+	key = phase2_sva_key(key);
--+	spa_pod_builder_string(builder, key);
--+
--+	if (spa_streq(key, "sva.confidence.level") ||
--+			spa_streq(key, "sva.lab.duration") ||
--+			spa_streq(key, "sva.sample.rate") ||
--+			spa_streq(key, "sva.channels") ||
--+			spa_streq(key, "sva.bit.width"))
--+		spa_pod_builder_int(builder, atoi(value));
--+	else if (spa_streq(key, "sva.capture.requested") ||
--+			spa_streq(key, "sva.lab.enabled")) {
--+		bool bool_value;
--+		parse_bool_value(value, &bool_value);
--+		spa_pod_builder_bool(builder, bool_value);
--+	} else if (spa_streq(key, "sva.reset") || spa_streq(key, "sva.restart")) {
--+		bool bool_value;
--+		parse_bool_value(value, &bool_value);
--+		spa_pod_builder_bool(builder, bool_value);
--+	}else {
--+		spa_pod_builder_string(builder, value);
--+	}
--+
--+	spa_pod_builder_pop(builder, &frame[1]);
--+	*pod = spa_pod_builder_pop(builder, &frame[0]);
--+	return *pod != NULL;
--+}
--+
--+static void print_global(struct global *global)
--+{
--+	const char *name = global_prop(global, PW_KEY_NODE_NAME);
--+	const char *role = global_prop(global, PW_KEY_MEDIA_ROLE);
--+	const char *media_class = global_prop(global, PW_KEY_MEDIA_CLASS);
--+
--+	printf("id %u", global->id);
--+	if (name)
--+		printf(", node.name=%s", name);
--+	if (media_class)
--+		printf(", media.class=%s", media_class);
--+	if (role)
--+		printf(", media.role=%s", role);
--+	printf("\n");
--+}
--+
--+
--+
--+static void done(void *user_data, uint32_t id, int seq)
--+{
--+    struct data *data = user_data;
--+
--+    if (data->listening)
--+        return;
--+
--+    if (data->pending == seq)
--+        pw_main_loop_quit(data->loop);
--+}
--+
--+static void core_error(void *user_data, uint32_t id, int seq, int res, const char *message)
--+{
--+	struct data *data = user_data;
--+
--+	fprintf(stderr, "PipeWire error id:%u seq:%d res:%d (%s): %s\n",
--+		id, seq, res, spa_strerror(res), message);
--+
--+	if (data->listening)
--+		return;
--+
--+	data->exit_code = EXIT_FAILURE;
--+	if (seq == data->pending || data->pending == 0)
--+		pw_main_loop_quit(data->loop);
--+}
--+
--+static const struct pw_core_events core_events = {
--+	PW_VERSION_CORE_EVENTS,
--+	.done = done,
--+	.error = core_error,
--+};
--+
--+static int metadata_property(void *user_data, uint32_t subject,
--+                             const char *key, const char *type, const char *value)
--+{
--+    struct data *data = user_data;
--+    if (key == NULL || !spa_streq(key, "sva.state") || value == NULL)
--+        return 0;
--+    /* Filter by our node ID */
--+    if (data->sva_node_id != 0 && subject != data->sva_node_id)
--+        return 0;
--+    printf("\n-- SVA State Update (Event) --\n");
--+    printf("  Payload: %s\n", value);
--+    printf("------------------------------\n");
--+    return 0;
--+}
--+
--+static const struct pw_metadata_events metadata_events = {
--+    PW_VERSION_METADATA_EVENTS,
--+    .property = metadata_property,
--+};
--+
--+
--+static void registry_global(void *user_data, uint32_t id, uint32_t permissions,
--+		const char *type, uint32_t version, const struct spa_dict *props)
--+{
--+	struct data *data = user_data;
--+	struct global *global;
--+
--+	global = calloc(1, sizeof(*global));
--+	if (global == NULL) {
--+		data->exit_code = EXIT_FAILURE;
--+		pw_main_loop_quit(data->loop);
--+		return;
--+	}
--+
--+	global->id = id;
--+	global->permissions = permissions;
--+	global->version = version;
--+	global->type = strdup(type);
--+	global->props = props ? pw_properties_new_dict(props) : NULL;
--+	spa_list_append(&data->globals, &global->link);
--+
--+	if (global_is_voiceui_node(data, global)) {
--+		if (data->list)
--+			print_global(global);
--+		if (data->target == NULL)
--+			data->target = global;
--+	}
--+
--+	if (data->listen && spa_streq(type, PW_TYPE_INTERFACE_Metadata)) {
--+		const char *name = props ? spa_dict_lookup(props, PW_KEY_METADATA_NAME) : NULL;
--+		if (name && spa_streq(name, "sva.events") && data->metadata == NULL) {
--+			data->metadata = pw_registry_bind(data->registry, id,
--+				PW_TYPE_INTERFACE_Metadata, PW_VERSION_METADATA, 0);
--+			if (data->metadata) {
--+				pw_metadata_add_listener(data->metadata, &data->metadata_listener, &metadata_events, data);
--+				printf("Connected to SVA Event Bus (id %u)\n", id);
--+			}
--+		}
--+	}
--+}
--+
--+static void registry_global_remove(void *user_data, uint32_t id)
--+{
--+	struct data *data = user_data;
--+	struct global *global, *tmp;
--+
--+	spa_list_for_each_safe(global, tmp, &data->globals, link) {
--+		if (global->id == id) {
--+			if (data->target == global)
--+				data->target = NULL;
--+			global_free(global);
--+			return;
--+		}
--+	}
--+}
--+
--+static const struct pw_registry_events registry_events = {
--+	PW_VERSION_REGISTRY_EVENTS,
--+	.global = registry_global,
--+	.global_remove = registry_global_remove,
--+};
--+
--+static bool parse_pod(const char *type_name, const char *json, const struct spa_type_info *types,
--+		struct spa_pod_dynamic_builder *builder, struct spa_pod **pod)
--+{
--+	const struct spa_type_info *type_info;
--+	struct spa_error_location loc;
--+	int res;
--+
--+	type_info = spa_debug_type_find_short(types, type_name);
--+	if (type_info == NULL) {
--+		fprintf(stderr, "unknown type '%s'\n", type_name);
--+		return false;
--+	}
--+
--+	res = spa_json_to_pod_checked(&builder->b, 0, type_info, json, strlen(json), &loc);
--+	if (res < 0) {
--+		if (loc.line != 0)
--+			spa_debug_file_error_location(stderr, &loc,
--+					"syntax error in json '%s': %s", json, loc.reason);
--+		fprintf(stderr, "can't make POD for '%s': %s\n", type_name,
--+				loc.reason ? loc.reason : spa_strerror(res));
--+		return false;
--+	}
--+
--+	*pod = spa_pod_builder_deref(&builder->b, 0);
--+	if (*pod == NULL) {
--+		fprintf(stderr, "can't dereference built POD\n");
--+		return false;
--+	}
--+	return true;
--+}
--+
--+static bool bind_target(struct data *data)
--+{
--+	if (data->target == NULL) {
--+		fprintf(stderr, "VoiceUI node not found\n");
--+		return false;
--+	}
--+
--+	data->node = pw_registry_bind(data->registry, data->target->id,
--+			PW_TYPE_INTERFACE_Node, PW_VERSION_NODE, 0);
--+	if (data->node == NULL) {
--+		fprintf(stderr, "can't bind VoiceUI node id:%u: %m\n", data->target->id);
--+		return false;
--+	}
--+	return true;
--+}
--+
--+static bool run_action(struct data *data)
--+{
--+	uint8_t buffer[1024];
--+	spa_auto(spa_pod_dynamic_builder) builder = { 0 };
--+	struct spa_pod *pod;
--+
--+	if (data->list)
--+		return true;
--+
--+	if (data->target == NULL) {
--+		fprintf(stderr, "VoiceUI node not found\n");
--+		return false;
--+	}
--+
--+	if (data->info) {
--+		print_global(data->target);
--+		return true;
--+	}
--+
--+	if (!bind_target(data))
--+		return false;
--+
--+    if (data->listen) {
--+        data->sva_node_id = data->target->id;
--+        printf("Listening for SVA events on node %u (Ctrl+C to quit)...\n", data->sva_node_id);
--+        data->listening = true;
--+        pw_main_loop_run(data->loop);
--+        return data->exit_code == EXIT_SUCCESS;
--+    }
--+
--+	spa_pod_dynamic_builder_init(&builder, buffer, sizeof(buffer), 4096);
--+
--+	if (spa_streq(data->command, "set")) {
--+		if (!build_sva_props_pod(&builder.b, data->sva_key, data->sva_value, &pod)) {
--+			fprintf(stderr, "can't build SVA Props POD\n");
--+			return false;
--+		}
--+		if (data->verbose)
--+			spa_debug_pod(0, NULL, pod);
--+		pw_node_set_param(data->node, SPA_PARAM_Props, 0, pod);
--+	} else if (spa_streq(data->command, "set-param")) {
--+		const struct spa_type_info *type_info;
--+
--+		if (!parse_pod(data->param_id, data->json, spa_type_param, &builder, &pod))
--+			return false;
--+		type_info = spa_debug_type_find_short(spa_type_param, data->param_id);
--+		if (data->verbose)
--+			spa_debug_pod(0, NULL, pod);
--+		pw_node_set_param(data->node, type_info->type, 0, pod);
--+	} else if (spa_streq(data->command, "send-command")) {
--+		if (!parse_pod(data->param_id, data->json, spa_type_node_command_id, &builder, &pod))
--+			return false;
--+		if (data->verbose)
--+			spa_debug_pod(0, NULL, pod);
--+		pw_node_send_command(data->node, (struct spa_command *)pod);
--+	} else {
--+		fprintf(stderr, "unknown command '%s'\n", data->command);
--+		return false;
--+	}
--+
--+	data->pending = pw_core_sync(data->core, PW_ID_CORE, 0);
--+	pw_main_loop_run(data->loop);
--+	return data->exit_code == EXIT_SUCCESS;
--+}
--+
--+int main(int argc, char *argv[])
--+{
--+	struct data data = { 0 };
--+	struct global *global, *tmp;
--+	int opt;
--+	static const struct option long_options[] = {
--+		{ "name", required_argument, NULL, 'n' },
--+		{ "role", required_argument, NULL, 'r' },
--+		{ "id", required_argument, NULL, 'i' },
--+		{ "verbose", no_argument, NULL, 'v' },
--+		{ "help", no_argument, NULL, 'h' },
--+		{ NULL, 0, NULL, 0 }
--+	};
--+
--+	data.target_name = DEFAULT_TARGET_NAME;
--+	data.target_role = DEFAULT_TARGET_ROLE;
--+	data.exit_code = EXIT_SUCCESS;
--+	spa_list_init(&data.globals);
--+
--+	while ((opt = getopt_long(argc, argv, "n:r:i:vh", long_options, NULL)) != -1) {
--+		char *end;
--+		switch (opt) {
--+		case 'n':
--+			data.target_name = optarg;
--+			break;
--+		case 'r':
--+			data.target_role = optarg;
--+			break;
--+		case 'i':
--+			data.target_id = strtoul(optarg, &end, 10);
--+			if (*end != '\0') {
--+				fprintf(stderr, "invalid node id '%s'\n", optarg);
--+				return EXIT_FAILURE;
--+			}
--+			data.have_target_id = true;
--+			break;
--+		case 'v':
--+			data.verbose = true;
--+			break;
--+		case 'h':
--+			usage(argv[0]);
--+			return EXIT_SUCCESS;
--+		default:
--+			usage(argv[0]);
--+			return EXIT_FAILURE;
--+		}
--+	}
--+
--+	if (optind >= argc) {
--+		usage(argv[0]);
--+		return EXIT_FAILURE;
--+	}
--+
--+	data.command = argv[optind++];
--+	if (spa_streq(data.command, "list")) {
--+		data.list = true;
--+	} else if (spa_streq(data.command, "info")) {
--+		data.info = true;
--+	} else if (spa_streq(data.command, "set")) {
--+		if (optind + 2 != argc) {
--+			usage(argv[0]);
--+			return EXIT_FAILURE;
--+		}
--+		data.sva_key = argv[optind++];
--+		data.sva_value = argv[optind++];
--+		if (!validate_sva_property(data.sva_key, data.sva_value))
--+			return EXIT_FAILURE;
--+	} else if (spa_streq(data.command, "set-param") ||
--+			spa_streq(data.command, "send-command")) {
--+		if (optind + 2 != argc) {
--+			usage(argv[0]);
--+			return EXIT_FAILURE;
--+		}
--+		data.param_id = argv[optind++];
--+		data.json = argv[optind++];
--+	} else if (spa_streq(data.command, "listen")) {
--+        data.listen = true;
--+  } else {
--+		usage(argv[0]);
--+		return EXIT_FAILURE;
--+	}
--+
--+	pw_init(&argc, &argv);
--+
--+	data.loop = pw_main_loop_new(NULL);
--+	if (data.loop == NULL) {
--+		fprintf(stderr, "can't create main loop: %m\n");
--+		return EXIT_FAILURE;
--+	}
--+
--+	data.context = pw_context_new(pw_main_loop_get_loop(data.loop), NULL, 0);
--+	if (data.context == NULL) {
--+		fprintf(stderr, "can't create context: %m\n");
--+		data.exit_code = EXIT_FAILURE;
--+		goto out;
--+	}
--+
--+	data.core = pw_context_connect(data.context, NULL, 0);
--+	if (data.core == NULL) {
--+		fprintf(stderr, "can't connect: %m\n");
--+		data.exit_code = EXIT_FAILURE;
--+		goto out;
--+	}
--+	pw_core_add_listener(data.core, &data.core_listener, &core_events, &data);
--+
--+	data.registry = pw_core_get_registry(data.core, PW_VERSION_REGISTRY, 0);
--+	if (data.registry == NULL) {
--+		fprintf(stderr, "can't get registry: %m\n");
--+		data.exit_code = EXIT_FAILURE;
--+		goto out;
--+	}
--+	pw_registry_add_listener(data.registry, &data.registry_listener, &registry_events, &data);
--+
--+	data.pending = pw_core_sync(data.core, PW_ID_CORE, 0);
--+	pw_main_loop_run(data.loop);
--+
--+	if (!run_action(&data))
--+		data.exit_code = EXIT_FAILURE;
--+
--+out:
--+	if (data.metadata)
--+		pw_proxy_destroy((struct pw_proxy *)data.metadata);
--+	if (data.node)
--+		pw_proxy_destroy((struct pw_proxy *)data.node);
--+	if (data.registry)
--+		pw_proxy_destroy((struct pw_proxy *)data.registry);
--+	if (data.core)
--+		pw_core_disconnect(data.core);
--+	if (data.context)
--+		pw_context_destroy(data.context);
--+	if (data.loop)
--+		pw_main_loop_destroy(data.loop);
--+	spa_list_for_each_safe(global, tmp, &data.globals, link)
--+		global_free(global);
--+	pw_deinit();
--+	return data.exit_code;
--+}
----
--2.34.1
--
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
-index 88762a4760..33b46de6cf 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
-@@ -17,7 +17,6 @@ BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
- SRC_URI += "file://0001-pipewire-compress-offload.patch"
- SRC_URI += "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-const-do-.patch"
--SRC_URI += "file://0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch"
-
- inherit meson pkgconfig systemd gettext useradd
-
-@@ -332,7 +331,6 @@ FILES:${PN}-tools = " \
-     ${bindir}/pw-reserve \
-     ${bindir}/pw-sysex \
-     ${bindir}/pw-top \
--    ${bindir}/pw-voiceui \
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch
+new file mode 100644
+index 0000000000..74908c5437
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-19773.patch
+@@ -0,0 +1,31 @@
++From 998a9af40aa6c2ddcb91c662d6585ea80ab52f85 Mon Sep 17 00:00:00 2001
++From: Andy Green <andy@warmcat.com>
++Date: Fri, 3 Jul 2026 18:43:25 +0100
++Subject: [PATCH] zdi-can-31036: h2 bounds check on server
++
++This vulnerability was discovered by:
++Maher Azzouzi working with TrendAI Zero Day Initiative
++
++(cherry picked from commit 824151862f37bc72f46d9a3e01d5b9408d313a0b)
++
++CVE: CVE-2026-19773
++Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/824151862f37bc72f46d9a3e01d5b9408d313a0b]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ lib/roles/h2/hpack.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/lib/roles/h2/hpack.c b/lib/roles/h2/hpack.c
++index 1025faa6f..863eb88c9 100644
++--- a/lib/roles/h2/hpack.c
+++++ b/lib/roles/h2/hpack.c
++@@ -274,6 +274,9 @@ static int lws_frag_append(struct lws *wsi, unsigned char c)
++ {
++ 	struct allocated_headers *ah = wsi->http.ah;
++ 
+++	if ((unsigned int)ah->pos >= wsi->a.context->max_http_header_data)
+++		return 1;
+++
++ 	ah->data[ah->pos++] = (char)c;
++ 	ah->frags[ah->nfrag].len++;
++ 
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
+index 005729dcac..11da4b299c 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
+@@ -10,6 +10,7 @@ SRCREV = "fbb0baf6af9c4324f0f1591734c78b0089b599d4"
+ SRC_URI = " \
+     git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.5-stable;tag=v${PV} \
+     file://CVE-2026-10650.patch \
++    file://CVE-2026-19773.patch \
  "
-
- # This is a shim daemon that is intended to be used as a
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 
