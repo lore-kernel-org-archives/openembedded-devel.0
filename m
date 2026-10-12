@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4D41CA9EBD
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:11:13 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3524.1791763868132008651
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC83CCA9ECF
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:11:23 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3535.1791763882367552326
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:11:08 -0700
+ Sun, 11 Oct 2026 17:11:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SUjQNiYt;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-ca766c1c9ccso347122a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:11:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hFvza4H+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-cc4c02ddd62so536957a12.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763867; x=1792368667; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791763882; x=1792368682; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DdiunAitm9p3IpUO3AfUpuarKIA8DrhqU3e+HYdK9bg=;
-        b=SUjQNiYts/Z9X1JMq3ISy9MHJs15rMVgg4sUEb1JZB370x7M6karC+mewQ70lqiLuV
-         wHjwgoNe8gN065i0iVFTvBhzMGRE98n2W/rjLSozsCChPYixEmsi0LdoZUnNcpRLWYmU
-         j3JRMTMku64VyPboNahBZlU36VvN3V7qL51Lc6Vp2ML9ESSDEGcbgL9EnbEj3uvNIob6
-         r2B4THHK0Ar/19rPxo5kpuNqVMgE060FJNjn7Uiiecur6asJSD8Ois0UIfMKAZuuKENX
-         c0yBi3oY7rY9tbsskX+B9qvKYcrEwmGVNtCDLRaR+t0Eh4Db2Tthj94hhP12r5Y/9Di/
-         PYNQ==
+        bh=Nd5iME4DHBJ20zDw+3DocSsaOXDxJpLV+Hucf4RLi2o=;
+        b=hFvza4H+OkKqHrbDhROy1SNW1NnrI1G77IkxtvsKHXY32k6Xud+Gh/JfLYCq7zbUbi
+         T3RDiZse2TMpsdbXxw5u9lfvMxqpwdL9ulCS3gIqT0BKrhkPJuAFihcImXNHqCBWCsLd
+         iQhyVxGZS6xjJ8H8bw+lbq9DF6u3SM4/lk5Y54jbB/Pqnjx3EVd+LelhZEo2Pa6VEsJP
+         Kju81xc42ziRndyDVQudKK4fyJBhhANf1ND/JnJ2of+ejcme9OEEkKu4Qm38EaYOShRM
+         LdLV9MUxOg/6Ea8UHugPJk424kC1rKAi58NRj75NEkTFVMS2ea00gAD7FK8vj31GO91U
+         wrDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763867; x=1792368667;
+        d=1e100.net; s=20260707; t=1791763882; x=1792368682;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DdiunAitm9p3IpUO3AfUpuarKIA8DrhqU3e+HYdK9bg=;
-        b=aCW6FcfW+OXFOkrUx+esHUhEMeFb5QztX6O7BEQbl22dp8YYilIfUOR5VeoVjZH3rw
-         jJU68+Ga6ULTkCruxydVHyabYAzCvfVbH4X8Kdb8j37TFJTLLbubfxLuw5QAWCL0lhCe
-         mvH+pr2pJ0cfQtH/v+78ps+2zNPtBUgiQ/7Gc3Pen5SCSV0Z+K9Hlw4mlySrAJMVz0oR
-         HA+QyBlhg8rt+JC8ZFOMxY0LDsFiZ1vEMhUOg87u/oozjxXj/SzrdmTqBmCVPfxKF2ze
-         lNe4S8RXYpTM2jaXL/ZxALEy8r7M39N/36Cb1ZKq3HavfGWJo6K6gxSCEFBpEYq0HnU+
-         H2FQ==
-X-Gm-Message-State: AFq9FYILHAjqTEfDKiNNW72ulsxFOcv6TZTvnXeXXrkD85mLtfStMtN+
-	u5N4G+RcbssLAkwCah9Py6dyKISdDNjnIk3vP7rb8D3uzmdsp+cB+J5dk93PHGbuh8I=
-X-Gm-Gg: AYBFou2xvlOPXwt/GghITPwM5SmHMRqHqSCq01adAq+Kh3GFlsZU/PN6OoOfUoDfj13
-	w/4/m5vp6+q1ByEfpwrIq4olsXzebBsMjvthZj/cLr0J63ZfDR9cnNaaw7Hs8RbxIbgcZEbhoks
-	dX/+bSadcF6rUQluC79g6VBVV7TyBQKBHCRLDV8rCmh7cAu3rgPFmKpTuEjMznOespUqVpd5gFZ
-	QPtEMB+YgPvG/y2/RH9v5E6NRV+m5RE9r4CNogiJb7UEvLwuUZkFDFvEoxEVzhkDTJTGgXN8bOf
-	piFBYWeFjI7dGX3jI5X62IdN8ZNslW5szldBfwYmtso6NzymF0dlLI8to58rBrSAQqiq/DkT06M
-	romNG1KMx2v0oQUd4piu2JaNV7CdoYqWkDzrDnqtMyl0whWkpYtB6S4Fg42yoZUVKRqoVDkK6KD
-	syi2cKO1WS9zzdZdH7KwKn/w4Sa+8Xi/AkpGbhCEjIqTIPJccXyysM5vKV/RsD0DJ3lIj6yHhtw
-	zk1MKoksU49ths1MbeBXbeiSRjzRjnTZMku6UI=
-X-Received: by 2002:a17:90b:3c07:b0:3ab:1a24:56e4 with SMTP id 98e67ed59e1d1-3ab3aca1257mr5723829a91.30.1791763867482;
-        Sun, 11 Oct 2026 17:11:07 -0700 (PDT)
+        bh=Nd5iME4DHBJ20zDw+3DocSsaOXDxJpLV+Hucf4RLi2o=;
+        b=mD/qQpqkNsNEcL6LQaNfJdhBxOMwppJSkvpPiA+MYuvXHbN4TAmF4EDdY7JAMrR1c1
+         qmtN7WSWcxjFCkEotQHFpGuWYhdWRrsWk5WQcglkABNG/s47vd1F5D49TvOat7DfNcoL
+         Fzms3TRy+Unk42fUZFSKV1ZcaI06O9gZpYauiMAT8QT5keD4S1fsFPMa7sWd3FGzVoYD
+         IsqVGlMQA1/McXs4HGAgzkmpsA7QYEBTCauhBROYLX1gn9Usy3rAgcV8hJUuI5SaO+BF
+         LWs175m2GyDkaZgJx0XjHE0XK25X6w4oIVA2l5OTrpU/UG4jCyWzqZeC1O4FIEKl+tIf
+         rpEA==
+X-Gm-Message-State: AFq9FYJqBFhGCmaG5j9sFNV4svNYtEF5V7HB/IqP1tz1ZOJvH50eCZvr
+	5pw8B3ne7YwCiQfld1lJFMC57EVc/zBb1AONCMRXfPCCVIFeI2KwzOyFkM935s/gEwU=
+X-Gm-Gg: AYBFou2B8343at57gRDM+lGRfsIpanRXEBqIhqtlYTVFS77YE5yChBYVnFhp7ed9jfl
+	2PoOq/6Py2JMECilqTW9kVAYTyI5KjFeCZVUqLBtfMAuTfIFQ5V4tP6YUmbK0+FHxKLCaw0VxqB
+	vTnb+AZ8euMn3QN5DWPxVvGSsXWBLaXdOo8fZ47drr15I+A95VWL7CiDsUzLnvlLsSR3a3wOBt2
+	oJmyV8k2eeLybEXD5OewcGRGHs6jJjBU9mXJhU2nz+T2hbh7+g7Z6NwyN+uva6nmeBr3sgWQECR
+	Ax6GONFEWUFxgYRd8+IO82BG0QGQdBXG6WlYnmcjH/Z7KPTo84Vc3fLzEhD7slpA32MS0iX6Iuu
+	TqBVVhTyRNzi5SZ4idxHnoewp/vPcETEsmh5ob6lmGEjtrEqXca2v7QWbfEaRzcL+pNdGiO94pY
+	bsdWUPHAdrcvNkZdkKza+GtQeglcgUN4sy8K6leTtzSRWHiWjBxG4tet0DISMxOXA49n8PmyMpd
+	OksV8tLtm2R2McnvkS2qbB0vMjBR/wGz2cKpx0ZQVw0ibnVOA==
+X-Received: by 2002:a17:90a:d446:b0:3a4:7938:844d with SMTP id 98e67ed59e1d1-3ab3ace27e4mr5399361a91.64.1791763881721;
+        Sun, 11 Oct 2026 17:11:21 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.11.05
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.11.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:11:07 -0700 (PDT)
+        Sun, 11 Oct 2026 17:11:21 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-oe][PATCH 20/28] hdf5: patch CVE-2026-17573
-Date: Mon, 12 Oct 2026 13:09:58 +1300
-Message-ID: <20261012001007.2541673-20-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 25/28] libyang: patch CVE-2026-41401
+Date: Mon, 12 Oct 2026 13:10:03 +1300
+Message-ID: <20261012001007.2541673-25-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
 References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
@@ -68,98 +68,87 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:11:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130745
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:11:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130750
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport patch from the PR[1] fixing the issue[2] mentioned in the NVD[3].
-Debian[4] has also identified the commit.
+Backport patch identified by Debian[1]
 
-[1] https://github.com/HDFGroup/hdf5/pull/6160
-[2] https://github.com/HDFGroup/hdf5/issues/6124
-[3] https://nvd.nist.gov/vuln/detail/cve-2026-17573
-[4] https://security-tracker.debian.org/tracker/CVE-2026-17573
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-41401
+
+[1]https://security-tracker.debian.org/tracker/CVE-2026-41401
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit f46990293cf684add8cc2ee7e71738e97889bcc3)
+(cherry picked from commit 6b06704ac1bae4ef4831384f0c28d14e98c804b8)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-17573.patch           | 53 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
- 2 files changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
+ .../libyang/libyang/CVE-2026-41401.patch      | 43 +++++++++++++++++++
+ .../libyang/libyang_3.13.6.bb                 |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libyang/libyang/CVE-2026-41401.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
+diff --git a/meta-oe/recipes-extended/libyang/libyang/CVE-2026-41401.patch b/meta-oe/recipes-extended/libyang/libyang/CVE-2026-41401.patch
 new file mode 100644
-index 00000000000..3cfb52de42d
+index 00000000000..06537acbb82
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-17573.patch
-@@ -0,0 +1,53 @@
-+From 856e7f1dd23e466ebeab5e454a5891b12e188f6a Mon Sep 17 00:00:00 2001
-+From: jhendersonHDF <jhenderson@hdfgroup.org>
-+Date: Tue, 27 Jan 2026 05:55:38 -0600
-+Subject: [PATCH] Fix double-free issue in H5D__chunk_copy (#6160)
++++ b/meta-oe/recipes-extended/libyang/libyang/CVE-2026-41401.patch
+@@ -0,0 +1,43 @@
++From 34b2a26ee86716e2b593c44e51e38ee15d4e8434 Mon Sep 17 00:00:00 2001
++From: Michal Vasko <mvasko@cesnet.cz>
++Date: Thu, 26 Mar 2026 08:33:44 +0100
++Subject: [PATCH] parser common BUGFIX invalid metadata removal
 +
-+Fix double-free caused by loss of buffer pointer after re-allocation
++(cherry picked from commit 54c3276d871023da266d4ed3ceaee7e8d71d0b04)
 +
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
-+
-+CVE: CVE-2026-17573
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/dd3080a58cc6bb86f3b34284399915da9e513262]
-+
-+Dropped changes to the CHANGELOG file.
++CVE: CVE-2026-41401
++Upstream-Status: Backport [https://github.com/CESNET/libyang/commit/54c3276d871023da266d4ed3ceaee7e8d71d0b04]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5Dchunk.c | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
++ src/parser_common.c                                    | 4 ++--
++ tests/fuzz/corpus/lyd_parse_mem_xml/advisory2026_03_26 | 5 +++++
++ 2 files changed, 7 insertions(+), 2 deletions(-)
++ create mode 100644 tests/fuzz/corpus/lyd_parse_mem_xml/advisory2026_03_26
 +
-+diff --git a/src/H5Dchunk.c b/src/H5Dchunk.c
-+index f2a0e85c03..5ff537ebde 100644
-+--- a/src/H5Dchunk.c
-++++ b/src/H5Dchunk.c
-+@@ -7034,7 +7034,7 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+                 const H5S_extent_t *ds_extent_src, H5T_t *dt_src, const H5O_pline_t *pline_src,
-+                 H5O_copy_t *cpy_info)
-+ {
-+-    H5D_chunk_it_ud3_t udata;                       /* User data for iteration callback */
-++    H5D_chunk_it_ud3_t udata = {0};                 /* User data for iteration callback */
-+     H5D_chk_idx_info_t idx_info_dst;                /* Dest. chunked index info */
-+     H5D_chk_idx_info_t idx_info_src;                /* Source chunked index info */
-+     int                sndims;                      /* Rank of dataspace */
-+@@ -7202,7 +7202,6 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+         HGOTO_ERROR(H5E_RESOURCE, H5E_NOSPACE, FAIL, "memory allocation failed for raw data chunk");
++diff --git a/src/parser_common.c b/src/parser_common.c
++index 0b221af72..fefe723eb 100644
++--- a/src/parser_common.c
+++++ b/src/parser_common.c
++@@ -413,8 +413,8 @@ lyd_parser_set_data_flags(struct lyd_node *node, struct lyd_meta **meta, struct
++             next_meta = meta2->next;
 + 
-+     /* Initialize the callback structure for the source */
-+-    memset(&udata, 0, sizeof udata);
-+     udata.common.layout    = &layout_src->u.chunk;
-+     udata.common.storage   = &layout_src->storage.u.chunk;
-+     udata.file_src         = f_src;
-+@@ -7253,11 +7252,11 @@ H5D__chunk_copy(H5F_t *f_src, H5O_layout_t *layout_src, H5F_t *f_dst, H5O_layout
-+         } /* end for */
-+     }
-+ 
-++done:
-+     /* I/O buffers may have been re-allocated */
-+     buf = udata.buf;
-+     bkg = udata.bkg;
-+ 
-+-done:
-+     if (dt_dst && (H5T_close(dt_dst) < 0))
-+         HDONE_ERROR(H5E_DATASET, H5E_CANTCLOSEOBJ, FAIL, "can't close temporary datatype");
-+     if (dt_mem && (H5T_close(dt_mem) < 0))
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index c83bb832deb..df0192a0911 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -19,6 +19,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-26199.patch \
-            file://CVE-2026-26197.patch \
-            file://CVE-2026-17572.patch \
-+           file://CVE-2026-17573.patch \
++             /* delete the metadata */
++-            if (meta != &node->meta) {
++-                *meta = (*meta)->next;
+++            if ((meta != &node->meta) && (meta2 == *meta)) {
+++                *meta = next_meta;
++             }
++             lyd_free_meta_single(meta2);
++             if (prev_meta) {
++diff --git a/tests/fuzz/corpus/lyd_parse_mem_xml/advisory2026_03_26 b/tests/fuzz/corpus/lyd_parse_mem_xml/advisory2026_03_26
++new file mode 100644
++index 000000000..7e3b6c39e
++--- /dev/null
+++++ b/tests/fuzz/corpus/lyd_parse_mem_xml/advisory2026_03_26
++@@ -0,0 +1,5 @@
+++<int32 xmlns="urn:tests:types"
+++       xmlns:yang="urn:ietf:params:xml:ns:yang:1"
+++       xmlns:dflt="urn:ietf:params:xml:ns:netconf:default:1.0"
+++       yang:operation="create"
+++       dflt:default="true">5</int32>
+diff --git a/meta-oe/recipes-extended/libyang/libyang_3.13.6.bb b/meta-oe/recipes-extended/libyang/libyang_3.13.6.bb
+index 822c30ba24b..7724b4c2189 100644
+--- a/meta-oe/recipes-extended/libyang/libyang_3.13.6.bb
++++ b/meta-oe/recipes-extended/libyang/libyang_3.13.6.bb
+@@ -11,6 +11,7 @@ SRCREV = "c2ddd01b9b810a30d6a7d6749a3bc9adeb7b01fb"
+ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=v${PV} \
+            file://0001-test_context-skip-test-case-test_searchdirs.patch \
+            file://run-ptest \
++           file://CVE-2026-41401.patch \
             "
- SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
+ 
  
 
