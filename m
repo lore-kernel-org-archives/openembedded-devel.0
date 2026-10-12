@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F6DCA9ED0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6022CA9EDC
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 21:12:04 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5100.1791839514720072754
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5125.1791839522285464295
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 14:11:54 -0700
+ Mon, 12 Oct 2026 14:12:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=USRyQiRE;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cc4c02ddd62so992321a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:11:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=aTrFZWsu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3ab8309dcbaso1534857a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 14:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791839514; x=1792444314; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791839522; x=1792444322; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8BnSSjKFO0PMtJD0fnqhAXCYbYW7l7yAaTyeqqUClDc=;
-        b=USRyQiREYWtqU53WjACMAGdIkI/sSI+lf24Jc5Ja68bf/fAE/BCdHUXALA/Z6sR3zj
-         72BbDsMsokLWpNNibHYb1Y/SwX6RArzukOSNGOifIjdpK9AiPGu+c8+/De/ukBDcbwHB
-         OEQfSwfXVhPiVc3KFAGu9PFNuSU21+i96q1xEV2wPHkITi9MK/Rxsk6yxXxsXIGq/R0F
-         iY29oZVaaKfiFeYk9ZPLuhpamoZtlWoBHUX5CQw2pO4EWWEBbgX0DZWh7nLz2/QiUF1c
-         cLlBJtZNzhz2Fb2wROj69vAt7P+x0vB1D5MM0zOyVO2jpnzxIO7YNyOPg9rZZVekuRI6
-         GWEg==
+        bh=FiPHs+ZgER4/6fC2+egNayEVI4YVUuf/Nr8sa3Fl1O4=;
+        b=aTrFZWsuEK2qhiM1HBuIS3X/QbsIm1LuCkbB1GRN0UcDQI+UFOFyOZU36YY1fV7F06
+         NzrsrptWkCFJ5Qn5ZAJNNOyLjTtaD3jg7+tHez8GxXBVMmK+iR4jleYgiJq1/EDp0Q1z
+         2LHabfN4MDuF5rrFwv7VbYPuZaCzRsRmmIm+9Lkzs+c3QKH8ottn5ifS9WJNPCGWPZcw
+         S3dyskQksfuNalcBIpBetzwUq0yYXZgXecQIIpdClJX4kxWT9Qm4T/eM0gGgTFylKTRJ
+         O4dmOOuEYnit/KQ9pG/V9an5tQnF0RWziPWmLPiqcOinMDszF9hR0gfnENa0CBKGzCi6
+         yYFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791839514; x=1792444314;
+        d=1e100.net; s=20260707; t=1791839522; x=1792444322;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8BnSSjKFO0PMtJD0fnqhAXCYbYW7l7yAaTyeqqUClDc=;
-        b=RDGUxgR7MP0WjkevCPZnwawylHW3+4EfMSyNMshkfsCccRI/K/hn/2yGB0CeYxmBIk
-         JB1ZeXmqwWy93+p6xV5xwGOEaK2RgA4AhsJHk8mLcdSiWvcYzpjO8QtnFmYNzKtmxnmL
-         YdWPUfkaB1mQoVYY9cPHoQ9DRQ1OxjEzmM2EX5pt5n00rOZ/5JXdfPp4QHdctwBrWX9K
-         5lQmqT3GSjQ0+kFOljf1QbEXHLuWT64dtVUPA2MJVDDejUbDzZjJp7bG376irjSKrOzM
-         4XeFRnjUGeB8r/BdmZzq6KqmaGZUijM+yAjYwmtB/5EahYVMQLhw90U5HPydywvMgP8G
-         xfBg==
-X-Gm-Message-State: AFq9FYKtBt8reMRpUbgtFxlftb4E+FosevQA66JHBdKH3pqEgS39H366
-	LVRQW0eRYEZifYxAho3H1XtdKfWJkCMA0UPYf6ZfEL107PnbMhyvmVEJ2ZAF0OIb
-X-Gm-Gg: AYBFou2cIDSrymCv1Y5QNZtz7RYOl2teCew0Lpr8rUJtevNlESULVLaATUO+/bscBgF
-	GTJIe5yJlhSgGTZ8OnKL5Z3BeulpLMovn1wAxARZo4WChKKSskmlxhR1AcEsR19wukUVtw2r2G2
-	DcEj2EGiA2PyukpKU1lIupp/sM6wV5zvjG8a7mwQrhbzNHm/cvMJgge4efeSG8URjKg4WKM2P51
-	leNV3V3mDhDd5tPxzuvVDcterF13YVBoxljpZBSPjog2rhpETcmoUg2WIOCC6cWzwRYdJFc1mxI
-	0S78RFa+hc3ha5ssKRFinUTT361FFYKARTNEor0fVinmyGu3izHyk67EfSnnZOKAu/ZG5rAUFR4
-	KXnyNv31/2bsoPFLppyRHY0JQf+OfJTMxs8LqOZok8hL5OQDHj833J2NAhCoNwM9N87AQoH75jT
-	8VsF7DREPKJ3HyRxl+ft6qRrTWE8RjRGGuQgigoG8HjJuLKA+4vShuzQ2bUboRTaMnFOEU9j2qg
-	92vFYV5mbOdDwBeAEj8H7LfT3OiNIkHxDrz420=
-X-Received: by 2002:a17:90b:2d06:b0:3a4:b30b:b501 with SMTP id 98e67ed59e1d1-3ab3a32d491mr8092885a91.9.1791839514093;
-        Mon, 12 Oct 2026 14:11:54 -0700 (PDT)
+        bh=FiPHs+ZgER4/6fC2+egNayEVI4YVUuf/Nr8sa3Fl1O4=;
+        b=2JU/emnls9KwUEeOc4rkZItuGR1wImAHFb1ZhtGW9Bc//UAS9ULGo0/X88fVctpBW7
+         Ccju3o9pxV4bl/TJFmIxrNX+GVTUFCxfiddx+P3/Rtl4XOjnUwzTHrmywQp3x+fgZ7iw
+         4RQhltyA75NSa7pK+XUEUtLe5arAiGAfI4TbPKMmMjCJtH9/Gfx4FxcsUq32JQKElk2L
+         7fxbpncgdbigdmvPIYeIPT2fFoo782GPdm41+njk+vg8bEjXWlcO3g1CMsF5M/H9SvTi
+         +n2GcwCKtoHWsTp6AFmjaW5PcD1znGMFcc+iZQdwFU2dJR0nM76zMwrFQeXP/I5JVNSh
+         Jc/A==
+X-Gm-Message-State: AFq9FYI/cYjld3x/293kpc7s3IINpdMXPYMUb7dzmOyzIcbBaIV1uFtY
+	hUcSDpGC4MKlHf7GLZxIyBAf1LQEv0TEeg4oruwpHnxdvTOw4TQlLjfhtOOeAA==
+X-Gm-Gg: AYBFou2RMOIJH3j72AX012DPdJG2F8odmiOMTzoDl8m6I7fKF9SOndqcOVAyrE4SPyF
+	Pfen3tZUkg9DMt1EilYI8njh4X2RjuNnLHWSfAvmRlxhY2eJc1cRUQq1XWJs5MMKntKa7ehpQTZ
+	9pmymKFPif9V0CBp7zaKBIYRNIO0ymApNJo+XGwW6pEvdMX/Rk5w8lReKakYsPo2A0OvB1CstYV
+	Hbv7aGB/OD68ziHMXiLhJbDxatYfdxNcZedfp6k5gopNXKz+dnB7utA1b2kzk+dcGuc7kc+IcIp
+	8TwMSTIpynKmjF/c1dAyDg7M0TpZw8KiA07mnsSDxQ+456aF2fM/CmRX31VkpFUH8svA1OcjD9m
+	oqMW2wIZD8HAzTL/YkkSdVzQBouoydG/kbe4k3ZelQzZ/RkHHbf78CFrFJd8dqVJ4XV30w+mO5J
+	TJWR7/k4BGLc2WTBfPW02MvSIpMVFhAioSkcs/XaXMSNcy1abjNW7o82srLxiurK4BQRK+l7HOK
+	lJ363p14yA3n5bvqmRPsRQey4KYVQBslWMbiW8RTbg/JJkqRQ==
+X-Received: by 2002:a17:90b:1dd1:b0:3a0:c85a:ee12 with SMTP id 98e67ed59e1d1-3ab3aceba09mr6098775a91.41.1791839521640;
+        Mon, 12 Oct 2026 14:12:01 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.11.51
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab32c0f59bsm10962728a91.0.2026.10.12.14.11.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 14:11:53 -0700 (PDT)
+        Mon, 12 Oct 2026 14:12:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [oe][meta-python][blacksail][PATCH 38/43] python3-django: upgrade 6.0.8 -> 6.0.9
-Date: Tue, 13 Oct 2026 10:10:02 +1300
-Message-ID: <20261012211009.3352822-38-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][blacksail][PATCH 41/43] python3-werkzeug: upgrade 3.1.8 -> 3.1.9
+Date: Tue, 13 Oct 2026 10:10:05 +1300
+Message-ID: <20261012211009.3352822-41-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
 References: <20261012211009.3352822-1-ankur.tyagi85@gmail.com>
@@ -69,36 +69,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:12:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130808
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130811
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://docs.djangoproject.com/en/dev/releases/6.0.9/
+https://github.com/pallets/werkzeug/releases/tag/3.1.9
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit c39562d398bdde11ba32c9144a8189f87ef922d7)
+(cherry picked from commit 0d101e1633262c35907fde6fd2708c0317eedbb5)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-django_6.0.8.bb => python3-django_6.0.9.bb} | 2 +-
+ .../{python3-werkzeug_3.1.8.bb => python3-werkzeug_3.1.9.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_6.0.8.bb => python3-django_6.0.9.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_3.1.8.bb => python3-werkzeug_3.1.9.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_6.0.8.bb b/meta-python/recipes-devtools/python/python3-django_6.0.9.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-django_6.0.8.bb
-rename to meta-python/recipes-devtools/python/python3-django_6.0.9.bb
-index 0c7fb2197d5..acdd2c21d06 100644
---- a/meta-python/recipes-devtools/python/python3-django_6.0.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_6.0.9.bb
-@@ -1,7 +1,7 @@
- require python3-django.inc
- inherit python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.9.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
+rename to meta-python/recipes-devtools/python/python3-werkzeug_3.1.9.bb
+index fae4de2a3f3..d3b1598f782 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.9.bb
+@@ -10,7 +10,7 @@ HOMEPAGE = "https://werkzeug.palletsprojects.com"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
  
--SRC_URI[sha256sum] = "cb0bd962d27fc866f3c514b20aae6a7df56ec80b488f9899da46d675cd051526"
-+SRC_URI[sha256sum] = "8ce037c971f421cfb47d38c097ca233a8f6dd42d9e9501a37e02dd7d08c5cb3f"
+-SRC_URI[sha256sum] = "9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44"
++SRC_URI[sha256sum] = "55ca7c70a75689be937aa27f8ff4b018f06ff4838fc73045560bf0f5a1291060"
  
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 6.x branch,
+ CVE_PRODUCT = "pallets:werkzeug palletsprojects:werkzeug"
+ 
 
