@@ -2,63 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76752CA9ECF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82A05CA9EBD
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:10:53 +0000 (UTC)
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3514.1791763851996338735
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3510.1791763844076174991
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:10:52 -0700
+ Sun, 11 Oct 2026 17:10:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TZLCV8NK;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-cc50ad2d650so899881a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=f3pKIMPW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-cd5e6f0a22bso227624a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763851; x=1792368651; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791763843; x=1792368643; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Tq4Jyy0Md+hDU71NW0upmsmT1bjck2A5lshkdE8RtuQ=;
-        b=TZLCV8NKhKMQXR1nCX5XE3tyxEUQW53cxZZxWnUB1uLBoTE18G+wCdiiHvZajlX5Q0
-         9MgB+WZoH/3hzA4LYo2rUokxWmeJZUAi3wTNXSHRFCFB4+xoD0/DsX8/z6Pkz1Cj1TtG
-         cJ5smzfmuHehit9Z5yAVIGtqOu5ArRbhX51mu/XaRvUdhEUs8FxMgo/e+yMiVPB+c1jD
-         sFX3ZeQyjNlmdmrussvkolAv85sOfHuCBmlt5QtXCOCrJfr7AfeW6zyffO5HMNyHG0iP
-         AIccF1c8pbnFzf6ISop5FFueHhyaoCa3CaFt9hW4lRYKSPH2B24eBQqqFCYFoD3p4NxD
-         fdFg==
+        bh=ZjhCXHBxUjyK6lESQo2PAi2aWndh8PCz+Tl0U6po3z4=;
+        b=f3pKIMPWV5Pj+0rTQ+YH0aWmTT20JIoVzE67apF0hMkRLrvcexOXqrZgCJ8C5NYnAI
+         IwxN4d6u0iVzpoACIaieWLm00WMgHAYIgGbLnR67LeOnEzpirgOt1qtnl8aXMcpc3TW+
+         o5Zvii0a1HgMZe7yLUhvBWnPuluWutH443a6VMo2/1f/3XpdgKFtD7VR3nMMYLtd60Kx
+         HvPlV4DkOXcJ2d4uO3rmiYfzazrmnL7J5s8DGCVNajUCqD7v40nb0DXLJE3ML1ciq0Vi
+         QS7kzm2CfQLwSMFC14+c83ZIly1TOF7OBDpqxcB20IjGRNoYCBB/l99XO3sV6Ca/sJDt
+         twmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763851; x=1792368651;
+        d=1e100.net; s=20260707; t=1791763843; x=1792368643;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Tq4Jyy0Md+hDU71NW0upmsmT1bjck2A5lshkdE8RtuQ=;
-        b=Q/cA6URF3JyBITcOVmwq3arRDtF+6VDowJ8lljd0LYLzPVKFfylZLOhlWq0d5L60PB
-         ya9szWUd0Zm5mNpCFsWPuZQQfmX+uE2Z8Qdklg4m0j6mc6ujcf2dayqAR57Yh2vQAQiS
-         A0iwvq/mqXGRGSwldPVrMW325FKX1FjE1iZVdarXR2ve0Q1HskiK87x+Vwvb0Cbn57IB
-         E5+lFnYZzm2Rhp73akhuMCfuzXFrHFI7emVSBgpZT6lNKD9ka+zkSewqSGYuD0VDHC23
-         3/fL0JU2A5R7CEwOl5UhFPmU8iTyO/0P2SAm+U1JmnCoMgTxnpMP2OOeKg5j/KwixGck
-         QH7Q==
-X-Gm-Message-State: AFq9FYJYeDuBZNBMaQFXwbzH5ffb5za1XYhvWhdTrmm2U2xk33oVGS/E
-	ttMtaSXcxuQjtVnt3uwO82HrZdGU8ANHD3r+4If0SuWF7WSp7mqcf3ML19nIBw==
-X-Gm-Gg: AYBFou0QnFYE1EFtuJ5ztQg7vRJxqsc3+GWPxxMBVQQNl4fX+gJRn6UHGq2yyqLauaW
-	mki9t15Xeohz4d9iFmG/bxI/aIvxdr7H/J5t3h5YC0Ow7UTLuWsTqnce78UqnhHMOSEfRWUeVHh
-	mOEWkdZUcP9j/um7a5Pua6x/DSyDdpoUIm13qwVfLaUZ2HI/XFvXI2boPOpT/bgSaQgtZetra0b
-	0BbGZvF441DDwXGj98r/8MHAeAifA/C1kK9rxpxOsmVRKlB/LfW3HsPqcZmQu8tTdC9wQryulTw
-	m1hE9IV27YrYskdhzZ6JSJa85atcPaUz5Ww1TeSItDMMRfGaACbWlw/E6cHlcaV5WU4P00gMDmX
-	D+kNmaYPfFffvQLMigVlPVaynfRPkweMbQPJsI4xWAa5qU0Bd0vLL3Au0g9wHAJHCRDZ2vInS5X
-	+dczTFOdXznimrK6fYom0lA/CMwyynDI3Lxi8xDAIsfo4MfXdINVyr8DHJU+x7nnW7CjEzOZA7l
-	NJp3T/P73tc1967vwBNpJm3Ul6mkyaDJ1IyYFs=
-X-Received: by 2002:a17:90b:224c:b0:3a8:6045:5a19 with SMTP id 98e67ed59e1d1-3ab3a8ce938mr6606619a91.37.1791763851316;
-        Sun, 11 Oct 2026 17:10:51 -0700 (PDT)
+        bh=ZjhCXHBxUjyK6lESQo2PAi2aWndh8PCz+Tl0U6po3z4=;
+        b=1mRFKf2q0y7ZtgUN8Xb0GNRZUL7hZOeX8ZDp85/GJ6e4ruTQdj6mS7iyt8Qhl5U7/p
+         sCIe+n2ixDCTKpoVCu1fYU4nALZcV/aClNMxtOLDY8RyYbHq1NLgCablWLD5mqCcApRB
+         vAdfPdg/tYA0OMS93BTkwcGuYZxplBsS3qIVLsBk8WM0CDu88mWB2jXyQZN8DQmaiZ3k
+         7eQiZp6IezV+MZtoHXlHZ4YdE/KHoe09ghzT0ab6WRyXFJMCsB0euc+clsd5q5pVH9Gq
+         S65hhreY4t49OUOPlJ5PWEJT7yhk2LsWqDbv8RaAHjZsQRNfl2Co0Jgp5T9MYrF0y1Nt
+         RAFA==
+X-Gm-Message-State: AFq9FYIRnfTiaWxz3ga2C7TZ83re6hGSDuncTV2dIcnaa3SygAyxpROX
+	kOqa2RxXmRp+YBSvgeVVBph2wMZ/oMI8fmN3jGRgwEyGw/rQAPlWJQi3U0Z6jg==
+X-Gm-Gg: AYBFou3yqAHvu84OdPmgVzgjWX//RogErH63+gHJ0ZKqkSE9fIA4Te+ng/m70MDjWxl
+	HnEhEoMEWG1NwG1G/aGzjIxSQaIwggxiAmRfU1lIo6KHZijFUQCClV+Xo61jRGkiNWIDC+G55D4
+	/cnQy12Te4jmrCej/ItuwPvuGPVXN3ohfZFfwkKkPY4s6xLUbnlOs9k8ZE1c1dqSsuy6xYdOrTl
+	lbfBALixGLHzi/4yYQP+n37+1wlv3AMjeu4KVx3TcD/O4Z0Iz56Wuz2DJ4w/eFfj/ph3UT/qr2M
+	aKsKi2dSq3C6Ei3bS22lzwr195KQ+pp7fysTziSDmERsvBhI1D3tWmqnq98gMd1StF2HtvqX0RA
+	lPZ5VsdaVaBoDHSjVpMeaUF+6QStsHaE19HOhN6lknZT/dLqcr744sHA23AsSpqEQhXft/d82+V
+	+IcGh0AFSwpL6pk8vQFIO9MpC043mhZrxqwHt5p0UwwutExnyllYVuqVfR0sNKMuIAI95MCdPM3
+	e9LX4jPpnIz2yr661M2Dx/AVm01yvippN4MqfM=
+X-Received: by 2002:a17:90a:d006:b0:3a8:6a04:80ef with SMTP id 98e67ed59e1d1-3ab3a2901c2mr5330967a91.6.1791763843373;
+        Sun, 11 Oct 2026 17:10:43 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.49
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:10:50 -0700 (PDT)
+        Sun, 11 Oct 2026 17:10:43 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 14/28] python3-gunicorn: mark CVE-2024-1135 patched
-Date: Mon, 12 Oct 2026 13:09:52 +1300
-Message-ID: <20261012001007.2541673-14-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Subject: [oe][meta-multimedia][PATCH 11/28] gerbera: ignore CVE-2025-23386
+Date: Mon, 12 Oct 2026 13:09:49 +1300
+Message-ID: <20261012001007.2541673-11-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
 References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
@@ -68,30 +69,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:10:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130739
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130736
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Debian[1] also identified the commit.
-
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2024-1135
+https://nvd.nist.gov/vuln/detail/cve-2025-23386
 
-[1]https://security-tracker.debian.org/tracker/CVE-2024-1135
+This vulnerability is due to openSUSE specific packaging issue.
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(cherry picked from commit 369d9629673fd4282cc88fc9b7435de5d1a0ceeb)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb | 2 ++
+ meta-multimedia/recipes-multimedia/gerbera/gerbera_3.3.0.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-index 545947446cf..e19be893602 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gunicorn_26.2.0.bb
-@@ -41,3 +41,5 @@ EOF
- }
+diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.3.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.3.0.bb
+index 3d28273f30a..ca54cf2315e 100644
+--- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.3.0.bb
++++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_3.3.0.bb
+@@ -29,3 +29,5 @@ PACKAGECONFIG[js] = "-DWITH_JS=TRUE,-DWITH_JS=FALSE,duktape"
+ PACKAGECONFIG[zip] = "-DWITH_ZIP=TRUE,-DWITH_ZIP=FALSE,libzippp libzip"
  
- RDEPENDS:${PN} += "python3-setuptools python3-fcntl"
+ SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
 +
-+CVE_STATUS[CVE-2024-1135] = "fixed-version: fixed since v22.0.0"
++CVE_STATUS[CVE-2025-23386] = "not-applicable-platform: The vulnerability is openSUSE specific"
 
