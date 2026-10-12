@@ -1,155 +1,818 @@
-Return-Path: <ricardo.salveti@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB97ACA9EDE
-	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 18:26:09 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1275.1791829567306258094
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D919CA9ED0
+	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 18:51:00 +0000 (UTC)
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1832.1791831056178109443
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 11:26:07 -0700
+ Mon, 12 Oct 2026 11:50:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=e5pOC23E;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=fE6gRPcy;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CHv3Id1591674
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 18:26:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=zds0OcA9LfQHjjur9GAq3yHmlbHH5con50K
-	GBfhXvxU=; b=e5pOC23EIt0D6TheGsi/OfcwZwrCLrmWwOycuCQDYxjoteYD2sa
-	yZ14FAgTvPiT7yKYzgQd2ENeOM0LsYvWH0B2POIdCs7A3aN8R5H1BFbkVvjfi7/u
-	cRZmtTDtBbcPVS46/ReotlVQtzCrFr9c1Oi2vyH/HmKg5aDYRPH3x2cu477TgCh+
-	Y7D5iYz4KQ1AOjWEOgrh17sR2BxU1A+f9gwz3/FeGzhEv7vmg0m1Brwfwhif2FNg
-	TX+n1laZtBQvDnl4lglWaRoUoodK/z1ee18bLF3xDI0HT8RGdD7Vjr1208zShhGf
-	S7Tw8wOAH5tJ9DLdLxiALALUvzyw6RTzEog==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8wfct75u-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 18:26:06 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ac16335199so607815a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 11:26:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=o0I7MxSf;
+ spf=pass (domain: gmail.com, ip: 74.125.82.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-15168a20b47so1324663c88.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 11:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791829566; x=1792434366; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zds0OcA9LfQHjjur9GAq3yHmlbHH5con50KGBfhXvxU=;
-        b=fE6gRPcyAiiMLIlkZYqyytatbQRaZtEli8aEFJQgct9o/efHD5OfWNl45mHBC7JwRW
-         HNKDpmVO9hswOvB+MKTLgZZ81a7B77s/nbSxhuysVS7H9xGFRE26vO1Z7DUvrlvnzVaj
-         Cf7wW3zn4+/hU3KEPVCfd51mzvIDoFOJuuajwyzgW3qdRMvoB2MvCdWoEo3q2qWzMmt6
-         MVY2ynnzA5eOhHb+JWGSCKGvXUVDErsteGrjBsuQFtnTufBojm/GIzp9oQchI9qJuR2e
-         5KDuPuXcyH3bBh3SRlDr2hShFvZl7K95xFJ81fwNqLLQJ7qu9UmZukigrK0KJ3Sb4Xn/
-         qZ3Q==
+        d=gmail.com; s=20251104; t=1791831055; x=1792435855; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MCeEHzXXVy/KdzFLUFvX7fdXxMANDRGhMgrSGLYZxmM=;
+        b=o0I7MxSfLMK+UQpPb/0NXyggPhQK5OgR9Ke26JJlaUVUECYk7Kcaq32uJiTGuPtGAv
+         JNFy0GLrSf2eOzn4FCy+t6SCRKanBN+iblCwch2aGs0FMMD+EqBGkwiMzYRsKLx3ucyg
+         xbcOzXHDmq0KrY7nq7+qzEkg9bwTp+X0AQcI9f+bZPYxdu4tTmGbakmVM7Z9yg5HPsOQ
+         A4ZqjZZ9eW74MDpqBIoZc5FoCRfM7cl8msTrzrHcwzczSq6ZcxbezgJXwUqpKn33mbzK
+         O8g7vBUgE/PhDiHBwtqd34oJ+sqiaL6h7jVU0S+lHmGkgjtiCssGPn3xC8e3v6e1SNOL
+         M44w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791829566; x=1792434366;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zds0OcA9LfQHjjur9GAq3yHmlbHH5con50KGBfhXvxU=;
-        b=MU+pwVVFctvvNIGIXkcYZbM5Pjf/ZlgSWZOaQbPyw2c15Jac18ZmdF+jgeoLUv5Y6+
-         KCFy5xFsIrol+U90yLCgxoqxkI481s7xCvBUw8SxYYg01VK6x/O1J0QVy3roCHDm0SrL
-         3cKlExf5NDzB5C/yD/ZWQ1b44kqNzWMm3s3FsEd7FACIjhEj8CkkeZ3qzIZyzySo32Ob
-         DWsAy6QjUVdDQdBVoQLiZrkcaV1QRkTSUzG36s56XFkO4EFrxbYWSof1EiHjZnFgOir1
-         cbOKGeQQhDaxqVloW6KttMj5ZP53FObhpVC/g7zuJYffyuPViHWNnbN7WR/uuKGv9pEq
-         4GjA==
-X-Gm-Message-State: AFq9FYLpikYxMxaTvt5erOhundbSS/uJ8GefvokpwWJPEkPVFrKnhvwE
-	MXBKrFJDngWdNuhDpTASbe1hrGPBq01pSjv4BpZ8PzOr6/QbFTQ1f8HVIXBqdsy76ZIjmHaasGd
-	bFZQ39FTnnlNKabSQzvAiZPOGBr9Zi3uxHryhM4lKiLTrrqvCSv+rQ+ZoGDWMUIWAKkJkvctvUP
-	5OFQJkPo69kMuGKRhxJyP7/A==
-X-Gm-Gg: AYBFou3stRboAAvs0Kt7qECygxmVARI2Lw/EFeKaCKwlmi9RtE7aj1tQhLZ0pCVPRCJ
-	e56yUa06Q2u2levIqMTCV0zp98n27eOlfaJ7sSZxIANNKOoGHhyIVArss1KnFdp+yhIy4CvoA7Q
-	oMGvAa0mbGtyNlZVtfXNa4o6VpvYUQcDBlprOpWiiO1jRJ+twqzJCSpCShK+al6w1WjseS5VNJK
-	M45HkbXWXG7HNEdfSayDp5CKUddz66bzEqZ9Zo0A6pIpdECKM838nQZgYW2d229I+088cnJvoqv
-	f5PG/E+xq7Yf1x3tcw18qsI0tDDThw2fATSYtz3D6/mTKEuCKQQBXvsbol3nXQmm5VSxwqwGq7w
-	BlmynoeUMaql7xzr2jWzH7efp1nr2MtXeaZ/HrI0esfUoBgW2MN+ldBV1uxKeX90HC2wLLunJMk
-	bepBLYsbo2EyGuGVLP7PMoPyM6L24yRTFZlT7icw==
-X-Received: by 2002:a17:90a:e704:b0:3aa:fc22:8aaa with SMTP id 98e67ed59e1d1-3ab3b0951e9mr8599977a91.67.1791829565263;
-        Mon, 12 Oct 2026 11:26:05 -0700 (PDT)
-X-Received: by 2002:a17:90a:e704:b0:3aa:fc22:8aaa with SMTP id 98e67ed59e1d1-3ab3b0951e9mr8599961a91.67.1791829564705;
-        Mon, 12 Oct 2026 11:26:04 -0700 (PDT)
-Received: from ip-172-31-25-255.us-west-2.compute.internal (ec2-35-83-207-173.us-west-2.compute.amazonaws.com. [35.83.207.173])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm9685207a91.2.2026.10.12.11.26.04
+        d=1e100.net; s=20260707; t=1791831055; x=1792435855;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=MCeEHzXXVy/KdzFLUFvX7fdXxMANDRGhMgrSGLYZxmM=;
+        b=uV3gFmzDHA7rTVfOl56sjCrgj5a2j71SKQdbj/Om5uDGrGyzO7fT5oTnzdJ7fNIOSz
+         F2xZa9uKWVoqE40WNl8hb7GbYp4yvwE9G4A2C0upmOR1WbvWBQ6egLT6MpKAIpHsixUz
+         spoIIVb7jY1nFLCdIxDxP8yUgb8OkK6xrB+A+P1pqd8/eRyTnqloZ8uptAIEIo1xEmvv
+         UIw0eY16KwlN39prtlI8Osz31r7O9GRfz7eSbVJtdx22qdujHVugc/C31VFXSuwvNpHD
+         YeObYNctVwIVPw62ggdkD/Ufu5E6eS86KVqG9kB+ycU9iq1soOxF2ZGx9VPZPn9JEGpj
+         6XwQ==
+X-Gm-Message-State: AFq9FYKuM3qS+8zQM6wll4U4rTrTLJgy+Mv5wntX1T5Sx/fGMzb8OQcx
+	ZvMbsKEbndjwNYpNJsqFCHTpCsF9yjyJeN/O1uuM7kbV8gki9dVlyMBBB+aVOHfl
+X-Gm-Gg: AYBFou2oH7MrftaUWAcOgoYoRDQQefB8myTBd8YgOAZvjD1VEXGnt88xej2J2Jqvdew
+	kS0cYzqWkPQvmjYYf9QbTz6HkqQy7NLji7LeN0EPWsO135bTUaBNs5TQcrHxqvP1oxxHZHmfsHa
+	9Wuulqo2Bp40F67Z6iAONpK9nBQJurpWflozbJC3doCo1djosvJ7WUC9+gwGHRNSawReX45agaZ
+	esX0sTVjXFadumXO68OKsgtlzE6tnvwmqGVSU+auxHx1rnacHpkYC880ooviNnyiLyyC+VxkNp9
+	3hSLtvV2/tHoTTq1Aj4P9en16m/oRXElHBfia/wwAQMSKTipIR4WFYz6+0spL7LLvIywS7FPt8d
+	2ADTeA2Hx2YON61pRkklJp+o3QeCRQKUUnHtFqmyjlL+FYL+CljCJih74c1Z06PAWVo5glbOF6C
+	BbEBygEWZQy+Z47oshD3i4TJ4RX9hbORoEPTza7HQ/g5PuOu+uMsOlf9zdy33pa1yZSfGo7HtB2
+	XE4X9El4AQoWA9g1V9myYVUzEkN4qwmq1E9PDThFkqMVhh+bKHKSI07WF9iWTCgGuCqvoaGdVaG
+	VvnCxNAuN5azSfuWAl9yAzXKAWrlHhuF+cGvE/SBoczsHeT1F6YR7piEQkqsn7qEJnSx9va3No6
+	nTLk44zE/0Y2WhYy7CVpuVA0BJqoflP0Hy2DDB8YkPzn7UFcsig5ge9YesiOpaqKYGcOD6K+mw+
+	owCGMQZRs17NU2cdmREUPbmg72kaPCwvNHRKyKS5SUApPL5Q==
+X-Received: by 2002:a05:701b:4211:10b0:14a:a6dc:9cd7 with SMTP id a92af1059eb24-16a57a16ef2mr14361614c88.2.1791831055230;
+        Mon, 12 Oct 2026 11:50:55 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a442ac67sm47757129c88.18.2026.10.12.11.50.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 11:26:04 -0700 (PDT)
-From: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+        Mon, 12 Oct 2026 11:50:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: martin@geanix.com, khem.raj@oss.qualcomm.com,
-        Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] polkit: keep the agent helper units in the main package
-Date: Mon, 12 Oct 2026 18:25:51 +0000
-Message-ID: <20261012182551.974348-1-ricardo.salveti@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Nicolas Dechesne <nicolas.dechesne@oss.qualcomm.com>,
+	Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>,
+	Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH] Revert "pipewire: add pw-voiceui SVA voice-UI control/listen client"
+Date: Mon, 12 Oct 2026 11:50:49 -0700
+Message-ID: <20261012185051.2534792-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: U5nqRu_r0vybd8IeEtnGyQqwPWbAJ86_
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA3MyBTYWx0ZWRfX3CTtdX4tLcgw
- Q/3ak/pQtHLQfTauFeMlyi9rXjdpnt5JKuMd1JEW5JZ3XxC1m8n6j5Q6rYiDm6yQ9H3CU0BVSc6
- UlpUjrlcSF5iXJQEtPkHervtLREEe9k=
-X-Proofpoint-ORIG-GUID: U5nqRu_r0vybd8IeEtnGyQqwPWbAJ86_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA3MyBTYWx0ZWRfX9cktsF0sw2pJ
- 4dUv5S8/sw8kadDVcSm9NpggM8xPAjtPacHv18yzmEOm6nVt1WggZIbJEhmVA+yyCWWILrTgiWE
- jKUx0DrMS6H/617UiKpU6RL277OaqGE+DpYAw14V8quxhcxwTIUv72YI6Xc7uy++1OYoWfnRdhD
- u2JE1Qjxmx7cEjjTcL3ZCrIAPjkW/sVZB0Oimf0EfSpqft0KNUOJynL8dopfAtZZBtfTE6TrQjq
- 1ztsoeJFYOEPMqZyDnFEflKTFxCZeBwo7QHUonoQgsBs/VklcZ7La182mQQ4AmDt2vlLtAiiPuc
- fT+l00KS3SELZmDeiH2NjmjceznyPu0jPChTiivtp6ABiov4S8x6CrF23ZZFu6LSjgbzSkFpy1o
- 6xWfKtGR0nHbArbGnsFIh4whgBd0RSCi0JFRiZzHO7qlNq9ggPMnCAcHkSvgrcVo8k9T+GVBSyX
- 4HkWVo9bIfkWqw8XdLA==
-X-Authority-Analysis: v=2.4 cv=PbhqFShd c=1 sm=1 tr=0 ts=6acd263e cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=P2/bgbqRawb6I1+7fxbs5g==:17
- a=tBvkqsR5qO8VAAGR:21 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=UFeFBDWMVFPhIVI_28YA:9 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 clxscore=1015 impostorscore=0 spamscore=0
- phishscore=0 suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 18:26:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130765
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 18:51:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130766
 
-Commit 3e423e21e5 ("polkit: enable the agent helper socket") enables
-polkit-agent-helper.socket from polkit, but since 03420389ca ("polkit:
-Add a separate package for polkit systemd service/dbus config")
-polkit-service comes first in PACKAGES and takes the whole systemd unit
-directory, so the socket is packaged there. Images that install polkit
-without polkit-service then fail in do_rootfs:
+This reverts commit a09474fb9af83014ea91e5163f40f9328291b473.
 
-  Failed to enable unit: Unit polkit-agent-helper.socket does not exist
+Upstream has rejected this patch [1], it was
+added here in hope it will be accepted in pipewire.
 
-Installing polkit-service as well does not help with rpm, as it depends
-on polkit, whose postinst then runs before the socket unit is installed.
+[1] https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2969#note_3631852
 
-Only package polkit.service in polkit-service, so the agent helper units
-stay in polkit with polkit-agent-helper-1, as FILES:${PN} already
-intends.
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Nicolas Dechesne <nicolas.dechesne@oss.qualcomm.com>
+Cc: Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>
+Cc: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 ---
- meta-oe/recipes-extended/polkit/polkit_127.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...iceui-SVA-voice-UI-control-listen-cl.patch | 694 ------------------
+ .../pipewire/pipewire_1.6.9.bb                |   2 -
+ 2 files changed, 696 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/recipes-extended/polkit/polkit_127.bb
-index 2089152826..acd4386354 100644
---- a/meta-oe/recipes-extended/polkit/polkit_127.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_127.bb
-@@ -48,7 +48,7 @@ SYSTEMD_SERVICE:${PN}-service = "${BPN}.service"
- PACKAGES =+ "${PN}-service"
- RDEPENDS:${PN}-service += "polkit"
- FILES:${PN}-service += " \
--    ${systemd_system_unitdir} \
-+    ${systemd_system_unitdir}/polkit.service \
-     ${sysconfdir}/systemd/system/polkit-virtual-provider.service \
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
+deleted file mode 100644
+index 846af137d8..0000000000
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch
++++ /dev/null
+@@ -1,694 +0,0 @@
+-From 2ad473fced6d52b14abd4fe3b9f83ed9c0c668ef Mon Sep 17 00:00:00 2001
+-From: Kiruthika Vijayasekar <kvijayas@qti.qualcomm.com>
+-Date: Tue, 25 Aug 2026 21:00:18 +0530
+-Subject: [PATCH] tools: add pw-voiceui SVA voice-UI control/listen client
+-
+-Add a pw-voiceui command-line tool for interacting with the SVA
+-(Sound Trigger / Voice Activation) voice-UI node exposed on the
+-PipeWire graph by the pw-pal-plugin.
+-
+-The tool locates the target node by media.role=VoiceUI (or an
+-explicit name/id), and supports:
+-  - list / info: enumerate/describe the VoiceUI node
+-  - set <sva-key> <value>: set a validated SVA property (confidence
+-    level, sound model path, capture-requested, mode, lab settings,
+-    sample rate/channels/bit width, reset, restart)
+-  - set-param / send-command: send an arbitrary POD param or node
+-    command, built from a JSON payload, for lower-level control
+-  - listen: subscribe to the "sva.events" metadata object and print
+-    sva.state updates (detection events) as they arrive
+-
+-src/tools/meson.build: register pw-voiceui as a built tool alongside
+-the other pw-* utilities.
+-
+-Upstream-Status: Pending
+----
+- src/tools/meson.build  |   1 +
+- src/tools/pw-voiceui.c | 643 +++++++++++++++++++++++++++++++++++++++++
+- 2 files changed, 644 insertions(+)
+- create mode 100644 src/tools/pw-voiceui.c
+-
+-diff --git a/src/tools/meson.build b/src/tools/meson.build
+-index 8147906fb..ffb3a2276 100644
+---- a/src/tools/meson.build
+-+++ b/src/tools/meson.build
+-@@ -9,6 +9,7 @@ tools_sources = [
+-   [ 'pw-metadata', [ 'pw-metadata.c' ] ],
+-   [ 'pw-loopback', [ 'pw-loopback.c' ] ],
+-   [ 'pw-link', [ 'pw-link.c' ] ],
+-+  [ 'pw-voiceui', [ 'pw-voiceui.c' ] ],
+- ]
+-
+- foreach t : tools_sources
+-diff --git a/src/tools/pw-voiceui.c b/src/tools/pw-voiceui.c
+-new file mode 100644
+-index 000000000..6321b7913
+---- /dev/null
+-+++ b/src/tools/pw-voiceui.c
+-@@ -0,0 +1,643 @@
+-+#include "config.h"
+-+
+-+#include <errno.h>
+-+#include <getopt.h>
+-+#include <stdbool.h>
+-+#include <stdio.h>
+-+#include <stdlib.h>
+-+#include <string.h>
+-+
+-+#include <spa/debug/file.h>
+-+#include <spa/debug/pod.h>
+-+#include <spa/debug/types.h>
+-+#include <spa/param/props.h>
+-+#include <spa/pod/dynamic.h>
+-+#include <spa/utils/json-pod.h>
+-+#include <spa/utils/keys.h>
+-+#include <spa/utils/result.h>
+-+#include <spa/utils/string.h>
+-+
+-+#include <pipewire/pipewire.h>
+-+#include <pipewire/extensions/metadata.h>
+-+
+-+#define DEFAULT_TARGET_ROLE "VoiceUI"
+-+#define DEFAULT_TARGET_NAME "pal_source_voice_ui"
+-+
+-+struct global {
+-+	struct spa_list link;
+-+	uint32_t id;
+-+	uint32_t permissions;
+-+	uint32_t version;
+-+	char *type;
+-+	struct pw_properties *props;
+-+};
+-+
+-+struct data {
+-+	struct pw_main_loop *loop;
+-+	struct pw_context *context;
+-+	struct pw_core *core;
+-+	struct pw_registry *registry;
+-+	struct pw_node *node;
+-+
+-+	struct spa_hook core_listener;
+-+	struct spa_hook registry_listener;
+-+	struct spa_hook node_listener;
+-+
+-+	struct spa_list globals;
+-+
+-+	const char *target_name;
+-+	const char *target_role;
+-+	uint32_t target_id;
+-+	bool have_target_id;
+-+	bool list;
+-+	bool info;
+-+	bool verbose;
+-+
+-+	const char *command;
+-+	const char *param_id;
+-+	const char *json;
+-+	const char *sva_key;
+-+	const char *sva_value;
+-+
+-+	struct global *target;
+-+	int pending;
+-+	int exit_code;
+-+    bool listen;
+-+	bool listening;
+-+    struct pw_metadata *metadata;
+-+    struct spa_hook metadata_listener;
+-+    uint32_t sva_node_id;
+-+};
+-+
+-+static void usage(const char *name)
+-+{
+-+	fprintf(stderr,
+-+		"Usage:\n"
+-+		"  %s [options] list\n"
+-+		"  %s [options] info\n"
+-+    		"  %s [options] listen\n"
+-+		"  %s [options] set <sva-key> <value>\n"
+-+		"  %s [options] set-param <param-id> <param-json>\n"
+-+		"  %s [options] send-command <command-id> <command-json>\n"
+-+		"\n"
+-+		"Options:\n"
+-+		"  -n, --name <node-name>     Target node.name (default: %s)\n"
+-+		"  -r, --role <media-role>    Target media.role (default: %s)\n"
+-+		"  -i, --id <node-id>         Target explicit PipeWire node id\n"
+-+		"  -v, --verbose              Print the POD being sent\n"
+-+		"  -h, --help                 Show this help\n",
+-+		name, name, name, name, name, name, DEFAULT_TARGET_NAME, DEFAULT_TARGET_ROLE);
+-+}
+-+
+-+static void global_free(struct global *global)
+-+{
+-+	if (global == NULL)
+-+		return;
+-+	spa_list_remove(&global->link);
+-+	pw_properties_free(global->props);
+-+	free(global->type);
+-+	free(global);
+-+}
+-+
+-+static const char *global_prop(struct global *global, const char *key)
+-+{
+-+	return global->props ? pw_properties_get(global->props, key) : NULL;
+-+}
+-+
+-+static bool global_is_voiceui_node(struct data *data, struct global *global)
+-+{
+-+	const char *name, *role, *media_class;
+-+
+-+	if (!spa_streq(global->type, PW_TYPE_INTERFACE_Node))
+-+		return false;
+-+
+-+	if (data->have_target_id)
+-+		return global->id == data->target_id;
+-+
+-+	name = global_prop(global, PW_KEY_NODE_NAME);
+-+	role = global_prop(global, PW_KEY_MEDIA_ROLE);
+-+	media_class = global_prop(global, PW_KEY_MEDIA_CLASS);
+-+
+-+	if (data->target_name && name && spa_streq(name, data->target_name))
+-+		return true;
+-+
+-+	return role && spa_streq(role, data->target_role) &&
+-+		media_class && strstr(media_class, "Audio/Source") != NULL;
+-+}
+-+
+-+
+-+static bool parse_bool_value(const char *value, bool *result)
+-+{
+-+	if (spa_streq(value, "true") || spa_streq(value, "1") || spa_streq(value, "yes")) {
+-+		*result = true;
+-+		return true;
+-+	}
+-+	if (spa_streq(value, "false") || spa_streq(value, "0") || spa_streq(value, "no")) {
+-+		*result = false;
+-+		return true;
+-+	}
+-+	return false;
+-+}
+-+
+-+static const char *phase2_sva_key(const char *key)
+-+{
+-+	if (spa_streq(key, "sva.model.path"))
+-+		return "sva.sound.model.path";
+-+	return key;
+-+}
+-+
+-+static bool validate_sva_property(const char *key, const char *value)
+-+{
+-+	char *end;
+-+	long level;
+-+	bool bool_value;
+-+	const char *wire_key = phase2_sva_key(key);
+-+
+-+	if (spa_streq(wire_key, "sva.confidence.level")) {
+-+		errno = 0;
+-+		level = strtol(value, &end, 10);
+-+		if (errno != 0 || *end != '\0' || level < 0 || level > 100) {
+-+			fprintf(stderr, "sva.confidence.level must be an integer in range 0..100\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.sound.model.path")) {
+-+		if (value[0] == '\0') {
+-+			fprintf(stderr, "sva.model.path must not be empty\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.capture.requested")) {
+-+		if (!parse_bool_value(value, &bool_value)) {
+-+			fprintf(stderr, "sva.capture.requested must be true/false, yes/no, or 1/0\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.mode")) {
+-+		if (!spa_streq(value, "LPI") && !spa_streq(value, "NLPI")) {
+-+			fprintf(stderr, "sva.mode must be LPI or NLPI for phase2 plugin compatibility\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.lab.enabled")) {
+-+		if (!parse_bool_value(value, &bool_value)) {
+-+			fprintf(stderr, "sva.lab.enabled must be true/false, yes/no, or 1/0\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.lab.duration") ||
+-+			spa_streq(wire_key, "sva.sample.rate") ||
+-+			spa_streq(wire_key, "sva.channels") ||
+-+			spa_streq(wire_key, "sva.bit.width")) {
+-+		errno = 0;
+-+		level = strtol(value, &end, 10);
+-+		if (errno != 0 || *end != '\0' || level < 0) {
+-+			fprintf(stderr, "%s must be a non-negative integer\n", key);
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	if (spa_streq(wire_key, "sva.reset")) {
+-+		if (!parse_bool_value(value, &bool_value)) {
+-+			fprintf(stderr, "sva.reset must be true/false\n");
+-+			return false;
+-+		}
+-+		return true;    /* ← move return true INSIDE the if block */
+-+	}
+-+	if (spa_streq(wire_key, "sva.restart")) {
+-+		if (!parse_bool_value(value, &bool_value)) {
+-+			fprintf(stderr, "sva.restart must be true/false\n");
+-+			return false;
+-+		}
+-+		return true;
+-+	}
+-+	/* Now this is reachable for unknown keys */
+-+	fprintf(stderr, "unsupported SVA key '%s'\n", key);
+-+	fprintf(stderr, "supported keys: sva.confidence.level, sva.model.path, "
+-+			"sva.sound.model.path, sva.capture.requested, sva.mode, "
+-+			"sva.lab.enabled, sva.lab.duration, sva.sample.rate, "
+-+			"sva.channels, sva.bit.width, sva.reset, sva.restart\n");
+-+	return false;
+-+}
+-+
+-+static bool build_sva_props_pod(struct spa_pod_builder *builder, const char *key,
+-+		const char *value, struct spa_pod **pod)
+-+{
+-+	struct spa_pod_frame frame[2];
+-+
+-+	spa_pod_builder_push_object(builder, &frame[0], SPA_TYPE_OBJECT_Props, SPA_PARAM_Props);
+-+	spa_pod_builder_prop(builder, SPA_PROP_params, 0);
+-+	spa_pod_builder_push_struct(builder, &frame[1]);
+-+	key = phase2_sva_key(key);
+-+	spa_pod_builder_string(builder, key);
+-+
+-+	if (spa_streq(key, "sva.confidence.level") ||
+-+			spa_streq(key, "sva.lab.duration") ||
+-+			spa_streq(key, "sva.sample.rate") ||
+-+			spa_streq(key, "sva.channels") ||
+-+			spa_streq(key, "sva.bit.width"))
+-+		spa_pod_builder_int(builder, atoi(value));
+-+	else if (spa_streq(key, "sva.capture.requested") ||
+-+			spa_streq(key, "sva.lab.enabled")) {
+-+		bool bool_value;
+-+		parse_bool_value(value, &bool_value);
+-+		spa_pod_builder_bool(builder, bool_value);
+-+	} else if (spa_streq(key, "sva.reset") || spa_streq(key, "sva.restart")) {
+-+		bool bool_value;
+-+		parse_bool_value(value, &bool_value);
+-+		spa_pod_builder_bool(builder, bool_value);
+-+	}else {
+-+		spa_pod_builder_string(builder, value);
+-+	}
+-+
+-+	spa_pod_builder_pop(builder, &frame[1]);
+-+	*pod = spa_pod_builder_pop(builder, &frame[0]);
+-+	return *pod != NULL;
+-+}
+-+
+-+static void print_global(struct global *global)
+-+{
+-+	const char *name = global_prop(global, PW_KEY_NODE_NAME);
+-+	const char *role = global_prop(global, PW_KEY_MEDIA_ROLE);
+-+	const char *media_class = global_prop(global, PW_KEY_MEDIA_CLASS);
+-+
+-+	printf("id %u", global->id);
+-+	if (name)
+-+		printf(", node.name=%s", name);
+-+	if (media_class)
+-+		printf(", media.class=%s", media_class);
+-+	if (role)
+-+		printf(", media.role=%s", role);
+-+	printf("\n");
+-+}
+-+
+-+
+-+
+-+static void done(void *user_data, uint32_t id, int seq)
+-+{
+-+    struct data *data = user_data;
+-+
+-+    if (data->listening)
+-+        return;
+-+
+-+    if (data->pending == seq)
+-+        pw_main_loop_quit(data->loop);
+-+}
+-+
+-+static void core_error(void *user_data, uint32_t id, int seq, int res, const char *message)
+-+{
+-+	struct data *data = user_data;
+-+
+-+	fprintf(stderr, "PipeWire error id:%u seq:%d res:%d (%s): %s\n",
+-+		id, seq, res, spa_strerror(res), message);
+-+
+-+	if (data->listening)
+-+		return;
+-+
+-+	data->exit_code = EXIT_FAILURE;
+-+	if (seq == data->pending || data->pending == 0)
+-+		pw_main_loop_quit(data->loop);
+-+}
+-+
+-+static const struct pw_core_events core_events = {
+-+	PW_VERSION_CORE_EVENTS,
+-+	.done = done,
+-+	.error = core_error,
+-+};
+-+
+-+static int metadata_property(void *user_data, uint32_t subject,
+-+                             const char *key, const char *type, const char *value)
+-+{
+-+    struct data *data = user_data;
+-+    if (key == NULL || !spa_streq(key, "sva.state") || value == NULL)
+-+        return 0;
+-+    /* Filter by our node ID */
+-+    if (data->sva_node_id != 0 && subject != data->sva_node_id)
+-+        return 0;
+-+    printf("\n-- SVA State Update (Event) --\n");
+-+    printf("  Payload: %s\n", value);
+-+    printf("------------------------------\n");
+-+    return 0;
+-+}
+-+
+-+static const struct pw_metadata_events metadata_events = {
+-+    PW_VERSION_METADATA_EVENTS,
+-+    .property = metadata_property,
+-+};
+-+
+-+
+-+static void registry_global(void *user_data, uint32_t id, uint32_t permissions,
+-+		const char *type, uint32_t version, const struct spa_dict *props)
+-+{
+-+	struct data *data = user_data;
+-+	struct global *global;
+-+
+-+	global = calloc(1, sizeof(*global));
+-+	if (global == NULL) {
+-+		data->exit_code = EXIT_FAILURE;
+-+		pw_main_loop_quit(data->loop);
+-+		return;
+-+	}
+-+
+-+	global->id = id;
+-+	global->permissions = permissions;
+-+	global->version = version;
+-+	global->type = strdup(type);
+-+	global->props = props ? pw_properties_new_dict(props) : NULL;
+-+	spa_list_append(&data->globals, &global->link);
+-+
+-+	if (global_is_voiceui_node(data, global)) {
+-+		if (data->list)
+-+			print_global(global);
+-+		if (data->target == NULL)
+-+			data->target = global;
+-+	}
+-+
+-+	if (data->listen && spa_streq(type, PW_TYPE_INTERFACE_Metadata)) {
+-+		const char *name = props ? spa_dict_lookup(props, PW_KEY_METADATA_NAME) : NULL;
+-+		if (name && spa_streq(name, "sva.events") && data->metadata == NULL) {
+-+			data->metadata = pw_registry_bind(data->registry, id,
+-+				PW_TYPE_INTERFACE_Metadata, PW_VERSION_METADATA, 0);
+-+			if (data->metadata) {
+-+				pw_metadata_add_listener(data->metadata, &data->metadata_listener, &metadata_events, data);
+-+				printf("Connected to SVA Event Bus (id %u)\n", id);
+-+			}
+-+		}
+-+	}
+-+}
+-+
+-+static void registry_global_remove(void *user_data, uint32_t id)
+-+{
+-+	struct data *data = user_data;
+-+	struct global *global, *tmp;
+-+
+-+	spa_list_for_each_safe(global, tmp, &data->globals, link) {
+-+		if (global->id == id) {
+-+			if (data->target == global)
+-+				data->target = NULL;
+-+			global_free(global);
+-+			return;
+-+		}
+-+	}
+-+}
+-+
+-+static const struct pw_registry_events registry_events = {
+-+	PW_VERSION_REGISTRY_EVENTS,
+-+	.global = registry_global,
+-+	.global_remove = registry_global_remove,
+-+};
+-+
+-+static bool parse_pod(const char *type_name, const char *json, const struct spa_type_info *types,
+-+		struct spa_pod_dynamic_builder *builder, struct spa_pod **pod)
+-+{
+-+	const struct spa_type_info *type_info;
+-+	struct spa_error_location loc;
+-+	int res;
+-+
+-+	type_info = spa_debug_type_find_short(types, type_name);
+-+	if (type_info == NULL) {
+-+		fprintf(stderr, "unknown type '%s'\n", type_name);
+-+		return false;
+-+	}
+-+
+-+	res = spa_json_to_pod_checked(&builder->b, 0, type_info, json, strlen(json), &loc);
+-+	if (res < 0) {
+-+		if (loc.line != 0)
+-+			spa_debug_file_error_location(stderr, &loc,
+-+					"syntax error in json '%s': %s", json, loc.reason);
+-+		fprintf(stderr, "can't make POD for '%s': %s\n", type_name,
+-+				loc.reason ? loc.reason : spa_strerror(res));
+-+		return false;
+-+	}
+-+
+-+	*pod = spa_pod_builder_deref(&builder->b, 0);
+-+	if (*pod == NULL) {
+-+		fprintf(stderr, "can't dereference built POD\n");
+-+		return false;
+-+	}
+-+	return true;
+-+}
+-+
+-+static bool bind_target(struct data *data)
+-+{
+-+	if (data->target == NULL) {
+-+		fprintf(stderr, "VoiceUI node not found\n");
+-+		return false;
+-+	}
+-+
+-+	data->node = pw_registry_bind(data->registry, data->target->id,
+-+			PW_TYPE_INTERFACE_Node, PW_VERSION_NODE, 0);
+-+	if (data->node == NULL) {
+-+		fprintf(stderr, "can't bind VoiceUI node id:%u: %m\n", data->target->id);
+-+		return false;
+-+	}
+-+	return true;
+-+}
+-+
+-+static bool run_action(struct data *data)
+-+{
+-+	uint8_t buffer[1024];
+-+	spa_auto(spa_pod_dynamic_builder) builder = { 0 };
+-+	struct spa_pod *pod;
+-+
+-+	if (data->list)
+-+		return true;
+-+
+-+	if (data->target == NULL) {
+-+		fprintf(stderr, "VoiceUI node not found\n");
+-+		return false;
+-+	}
+-+
+-+	if (data->info) {
+-+		print_global(data->target);
+-+		return true;
+-+	}
+-+
+-+	if (!bind_target(data))
+-+		return false;
+-+
+-+    if (data->listen) {
+-+        data->sva_node_id = data->target->id;
+-+        printf("Listening for SVA events on node %u (Ctrl+C to quit)...\n", data->sva_node_id);
+-+        data->listening = true;
+-+        pw_main_loop_run(data->loop);
+-+        return data->exit_code == EXIT_SUCCESS;
+-+    }
+-+
+-+	spa_pod_dynamic_builder_init(&builder, buffer, sizeof(buffer), 4096);
+-+
+-+	if (spa_streq(data->command, "set")) {
+-+		if (!build_sva_props_pod(&builder.b, data->sva_key, data->sva_value, &pod)) {
+-+			fprintf(stderr, "can't build SVA Props POD\n");
+-+			return false;
+-+		}
+-+		if (data->verbose)
+-+			spa_debug_pod(0, NULL, pod);
+-+		pw_node_set_param(data->node, SPA_PARAM_Props, 0, pod);
+-+	} else if (spa_streq(data->command, "set-param")) {
+-+		const struct spa_type_info *type_info;
+-+
+-+		if (!parse_pod(data->param_id, data->json, spa_type_param, &builder, &pod))
+-+			return false;
+-+		type_info = spa_debug_type_find_short(spa_type_param, data->param_id);
+-+		if (data->verbose)
+-+			spa_debug_pod(0, NULL, pod);
+-+		pw_node_set_param(data->node, type_info->type, 0, pod);
+-+	} else if (spa_streq(data->command, "send-command")) {
+-+		if (!parse_pod(data->param_id, data->json, spa_type_node_command_id, &builder, &pod))
+-+			return false;
+-+		if (data->verbose)
+-+			spa_debug_pod(0, NULL, pod);
+-+		pw_node_send_command(data->node, (struct spa_command *)pod);
+-+	} else {
+-+		fprintf(stderr, "unknown command '%s'\n", data->command);
+-+		return false;
+-+	}
+-+
+-+	data->pending = pw_core_sync(data->core, PW_ID_CORE, 0);
+-+	pw_main_loop_run(data->loop);
+-+	return data->exit_code == EXIT_SUCCESS;
+-+}
+-+
+-+int main(int argc, char *argv[])
+-+{
+-+	struct data data = { 0 };
+-+	struct global *global, *tmp;
+-+	int opt;
+-+	static const struct option long_options[] = {
+-+		{ "name", required_argument, NULL, 'n' },
+-+		{ "role", required_argument, NULL, 'r' },
+-+		{ "id", required_argument, NULL, 'i' },
+-+		{ "verbose", no_argument, NULL, 'v' },
+-+		{ "help", no_argument, NULL, 'h' },
+-+		{ NULL, 0, NULL, 0 }
+-+	};
+-+
+-+	data.target_name = DEFAULT_TARGET_NAME;
+-+	data.target_role = DEFAULT_TARGET_ROLE;
+-+	data.exit_code = EXIT_SUCCESS;
+-+	spa_list_init(&data.globals);
+-+
+-+	while ((opt = getopt_long(argc, argv, "n:r:i:vh", long_options, NULL)) != -1) {
+-+		char *end;
+-+		switch (opt) {
+-+		case 'n':
+-+			data.target_name = optarg;
+-+			break;
+-+		case 'r':
+-+			data.target_role = optarg;
+-+			break;
+-+		case 'i':
+-+			data.target_id = strtoul(optarg, &end, 10);
+-+			if (*end != '\0') {
+-+				fprintf(stderr, "invalid node id '%s'\n", optarg);
+-+				return EXIT_FAILURE;
+-+			}
+-+			data.have_target_id = true;
+-+			break;
+-+		case 'v':
+-+			data.verbose = true;
+-+			break;
+-+		case 'h':
+-+			usage(argv[0]);
+-+			return EXIT_SUCCESS;
+-+		default:
+-+			usage(argv[0]);
+-+			return EXIT_FAILURE;
+-+		}
+-+	}
+-+
+-+	if (optind >= argc) {
+-+		usage(argv[0]);
+-+		return EXIT_FAILURE;
+-+	}
+-+
+-+	data.command = argv[optind++];
+-+	if (spa_streq(data.command, "list")) {
+-+		data.list = true;
+-+	} else if (spa_streq(data.command, "info")) {
+-+		data.info = true;
+-+	} else if (spa_streq(data.command, "set")) {
+-+		if (optind + 2 != argc) {
+-+			usage(argv[0]);
+-+			return EXIT_FAILURE;
+-+		}
+-+		data.sva_key = argv[optind++];
+-+		data.sva_value = argv[optind++];
+-+		if (!validate_sva_property(data.sva_key, data.sva_value))
+-+			return EXIT_FAILURE;
+-+	} else if (spa_streq(data.command, "set-param") ||
+-+			spa_streq(data.command, "send-command")) {
+-+		if (optind + 2 != argc) {
+-+			usage(argv[0]);
+-+			return EXIT_FAILURE;
+-+		}
+-+		data.param_id = argv[optind++];
+-+		data.json = argv[optind++];
+-+	} else if (spa_streq(data.command, "listen")) {
+-+        data.listen = true;
+-+  } else {
+-+		usage(argv[0]);
+-+		return EXIT_FAILURE;
+-+	}
+-+
+-+	pw_init(&argc, &argv);
+-+
+-+	data.loop = pw_main_loop_new(NULL);
+-+	if (data.loop == NULL) {
+-+		fprintf(stderr, "can't create main loop: %m\n");
+-+		return EXIT_FAILURE;
+-+	}
+-+
+-+	data.context = pw_context_new(pw_main_loop_get_loop(data.loop), NULL, 0);
+-+	if (data.context == NULL) {
+-+		fprintf(stderr, "can't create context: %m\n");
+-+		data.exit_code = EXIT_FAILURE;
+-+		goto out;
+-+	}
+-+
+-+	data.core = pw_context_connect(data.context, NULL, 0);
+-+	if (data.core == NULL) {
+-+		fprintf(stderr, "can't connect: %m\n");
+-+		data.exit_code = EXIT_FAILURE;
+-+		goto out;
+-+	}
+-+	pw_core_add_listener(data.core, &data.core_listener, &core_events, &data);
+-+
+-+	data.registry = pw_core_get_registry(data.core, PW_VERSION_REGISTRY, 0);
+-+	if (data.registry == NULL) {
+-+		fprintf(stderr, "can't get registry: %m\n");
+-+		data.exit_code = EXIT_FAILURE;
+-+		goto out;
+-+	}
+-+	pw_registry_add_listener(data.registry, &data.registry_listener, &registry_events, &data);
+-+
+-+	data.pending = pw_core_sync(data.core, PW_ID_CORE, 0);
+-+	pw_main_loop_run(data.loop);
+-+
+-+	if (!run_action(&data))
+-+		data.exit_code = EXIT_FAILURE;
+-+
+-+out:
+-+	if (data.metadata)
+-+		pw_proxy_destroy((struct pw_proxy *)data.metadata);
+-+	if (data.node)
+-+		pw_proxy_destroy((struct pw_proxy *)data.node);
+-+	if (data.registry)
+-+		pw_proxy_destroy((struct pw_proxy *)data.registry);
+-+	if (data.core)
+-+		pw_core_disconnect(data.core);
+-+	if (data.context)
+-+		pw_context_destroy(data.context);
+-+	if (data.loop)
+-+		pw_main_loop_destroy(data.loop);
+-+	spa_list_for_each_safe(global, tmp, &data.globals, link)
+-+		global_free(global);
+-+	pw_deinit();
+-+	return data.exit_code;
+-+}
+---
+-2.34.1
+-
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+index 88762a4760..33b46de6cf 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+@@ -17,7 +17,6 @@ BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
+ SRC_URI += "file://0001-pipewire-compress-offload.patch"
+ SRC_URI += "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-const-do-.patch"
+-SRC_URI += "file://0003-tools-add-pw-voiceui-SVA-voice-UI-control-listen-cl.patch"
+
+ inherit meson pkgconfig systemd gettext useradd
+
+@@ -332,7 +331,6 @@ FILES:${PN}-tools = " \
+     ${bindir}/pw-reserve \
+     ${bindir}/pw-sysex \
+     ${bindir}/pw-top \
+-    ${bindir}/pw-voiceui \
  "
- 
--- 
-2.43.0
 
+ # This is a shim daemon that is intended to be used as a
 
