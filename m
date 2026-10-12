@@ -2,88 +2,111 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BC23CA9ED3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AC24CA9ECF
 	for <webhook@archiver.kernel.org>; Mon, 12 Oct 2026 00:10:23 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3502.1791763815984555937
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3503.1791763822096179702
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Oct 2026 17:10:16 -0700
+ Sun, 11 Oct 2026 17:10:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PNatTSE/;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-3ab2bf5e75bso621671a91.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jTx00P+h;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-383b4a3755fso970130a91.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Oct 2026 17:10:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791763815; x=1792368615; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JXETLo7OCgtEZvnkhNWh1tg9VjrtfeNUp4d38wajRg4=;
-        b=PNatTSE/TTpK6xxcJm5VcaW7EyBZqeJr1iCS//28/gziL8JxvQRNzE5cW/iIqYz+TJ
-         nS1bStDtsPv+m6jCm0cpOe+K/9XU/4Vlz/nUnT1kMZ48fz2QJs3n2Q1MTMDPEVNVsMtq
-         EsCQO4ZXPxBnQ90gw+qVRMYgQUm1rfayUeIERa2xKN9UdB/8KlKoj9zQE6Dr0y3hsQDm
-         hLAIv/VNhF9c9we5AjbKz6lTjhU4hmgb6FjsTR+2mCNSi4FX4xa0fnUDFN8VplKJLklc
-         UcmvaGaG9oplZeGGzkce88PwmbkteDRuj58QPblD1HNiZEqwYQisOuhBlrlkMG1TbxwW
-         CQvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791763815; x=1792368615;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791763821; x=1792368621; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JXETLo7OCgtEZvnkhNWh1tg9VjrtfeNUp4d38wajRg4=;
-        b=ajWxqQ11UVIlJCm+GcjOE8HVJmHovwOED9Vgd7K3PgTYaQQfF4h5GD7JLWWrMzUqQ8
-         WpLEyd1M1WlARkJT9xHnOcmrsxxyEWA4J0SUknW4DFnpci6n6CA8UN7+5vy1iiQuezh9
-         yQtQBvNE2hC2gbewHGWHA5ia+OueeU/fqCwQfJqR0VL2rvcbe8vVfePNbcOm/Zm5B77Q
-         uvEwQnZfS7yNpxPFOcW5nkl2zc4wWjOlrnmJemlT1JXQI8msw3E+T+nWRdk3fDt84xWa
-         jP61lOsz5ONAPGxjy3tPqOT4wKvAXsyVqbd54i8bDvPngJLNwLbdtHtnbGZ98rwgOydN
-         2u1w==
-X-Gm-Message-State: AFq9FYIfdwLVq/t30+q2VMMTwNXIXT/9p3NpZf5AoJcwDcgqkCKB0Wkn
-	Z64xcU/sx5ZB+bu0fIrUAeue1a+zTCJBKA+TjwyKCJyPHO8pp42/PTqTcSXCsA==
-X-Gm-Gg: AYBFou1uWPtwEfrAgT3rdLly4pmFh+W5/xvhzQYvgcfyVb4wQ3wWw3q7J4CZG9x4eOx
-	OPvGhIHyqiSeMJ8HnI3JqQXiSW04KLkS6fx4s7NUX2bKYMCt9UzZZLFlmLJIza6QKtJ0eQWbweU
-	cbpXDKXCNWKYE9gk3etk5nhnLlKUkiRdXrjVdkuqsp2fXwu7SIfN5m2qdRiu5FM7BzK9KQYFVN4
-	aPf7wBbx7GKNbZq1ZNJdUgC2WohoGmx8i7gRhtEpJWCjQWhgFR+GGk9J/1PLy8hEuwA6i3qNyn+
-	Opn0iDMm4eUbeNsRHxHfaHNBVwVKedfdri/bKrwL+OsKg3C1q8RHt2AkhTXY7yh8teCcjusfOaZ
-	wuXoV+mXMGPVl1MrICX0PDz0+zh3L0a6BNXkWb4fcfoj9pbOa+m37LIDpL8rwFg7sBIXxUV8OeW
-	y7TrfTDPjm4ykLRXqlQrW72mU9OcP9e1TepDKXYGPHmsK9kvnjhuHh8inK5LJLl15zLpfVUM/S9
-	aCddQ2jKdSpF0kA9vlgAgriseRMkLglEZrbt43bZDakq/Kp7g==
-X-Received: by 2002:a17:90b:2ec4:b0:3a0:cb48:df6b with SMTP id 98e67ed59e1d1-3ab3a955ad2mr6673403a91.34.1791763815222;
-        Sun, 11 Oct 2026 17:10:15 -0700 (PDT)
+        bh=g4h5NSqmncAof+0pUgPXZEK5PPc25rRE+KsDPDf+OJ4=;
+        b=jTx00P+hUfNUiqvUG/igK1Vblw7FOKHYrzjfLd+eYwQVBt/PSfJ8HoFHy9feX5AWA0
+         DqZ0/IRv/aQ4SVbn2MtaEESagE2KYIv0YvjOZgFl2ovWy6sb4qn0KzSeOANpSDQz+hr8
+         wxUhO4KVaE2QFV/ssqZUcKMOn0JPPpvhqRSMLJvOlqoyiTmHqMsMLiaK1gzqUGLHYOIO
+         EtJGWp+QqlV3jlqFg47EONMuiMyIqJVSIphrMxGuWmcHzlVmbo0ew9F+5KkWoSUWCpXz
+         4xBaYJ1t+9kxoMKra4qnTBt4O/WLm4TIEMvVxGwunvHEQcpxHdvj/1ON+Vqf5+QD7q0Y
+         s2LQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791763821; x=1792368621;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=g4h5NSqmncAof+0pUgPXZEK5PPc25rRE+KsDPDf+OJ4=;
+        b=c7eei+iUp0Ozxj3PxSV9Zq4eKnbg1ZdcERStGP+xg4sFCVjQdG5P6LYnKB93tVYejR
+         gYVZ9MtBIbt2sZsaVsYgI7B3pKCRA1+PyKAyI+DrSsmGHVUvNtYxTeATX3dfhkVcNYNh
+         GnNeRFdeLDuQU/XGI4kdzWBOgZJ0wxLbaXont5j8You2a1yvqNXWJcD422gHVTsIQb1o
+         l+GAa+Ry2g5Qdc2tsl/Gj5xsW1otrRRIeJNLSm3c9I3J9gGqWYEe4YmLp9rjLQf2/Qj2
+         CEyWoBb2+FBk4dH/2fnVo9Eg0TeUSdLWAY/KuQCBj9O2VuIHobSRRqOvRrY5k6j8Tic0
+         dczg==
+X-Gm-Message-State: AFq9FYLJgQQzVAUE2FJEa9z9D46xCIuLlrxHbZUHEIYQ2j+u5Hbi6Gyd
+	UDBkwn/T7d5IaB+/XgS6aldR3AvlMKRe7xHtzhGmomzXavK/9AdMDUpPAtep8baaMrM=
+X-Gm-Gg: AYBFou2g7/gAWs5R/2PCkopqRbQMvyuPrWex7OgE7PphLEX+KifeNslgIqeDSamC/Ur
+	1npdCHm3cMJlySsro4WycfaCU7l1O4I+lGYcP3ruiec4pHfSb06/5gmwoRgzyZN+DUQZZSs5hnF
+	VJ3T9Xn3CnqjYGk/r07Juh1tI7n726EWynqpcFVOFgglp5bzj7SFkClaRaA6V0fyiHvY/uCpYmn
+	WhNnuVo0LnTbc4PGpwEQJldaGYgk1npb337WYhmEn8kolh6xySNcgBiSE46OBhUenI5NtrMmRUq
+	zL4YIb6rwOyggM4m/sl6sB74R5DNCWWVf+cJr0neDliuDpIhECoHNhtsX+x1a9b/4OEncjYbjZ5
+	EkckqC3FLxwlfaGAAR+xnqjQRSLbFOrkRqinnIEPbOMk1OBmHgJspVhQ3Cf51JpbdiS0fiT1ZIe
+	UBScR07oyNfONCWiEKpvRJ5qkbRqaktm8WftlKwNPiBrSwKDVYkyCOAh+mMFwx6sYDooseUV9Tx
+	SmCqzqGwaloldeUSE6v4RfbeEYg/izYf5a1nQs=
+X-Received: by 2002:a17:90b:5883:b0:3a7:db88:348d with SMTP id 98e67ed59e1d1-3abcaf0acf4mr2041884a91.54.1791763821481;
+        Sun, 11 Oct 2026 17:10:21 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.13
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3966dc7dsm7850379a91.2.2026.10.11.17.10.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 17:10:14 -0700 (PDT)
+        Sun, 11 Oct 2026 17:10:20 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/28] capnproto: ignore CVE-2026-59704
-Date: Mon, 12 Oct 2026 13:09:39 +1300
-Message-ID: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Subject: [oe][meta-networking][PATCH 3/28] dovecot: ignore already fixed CVEs
+Date: Mon, 12 Oct 2026 13:09:41 +1300
+Message-ID: <20261012001007.2541673-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
+References: <20261012001007.2541673-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 00:10:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130726
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130728
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-59704
+Upstream has confirmed that these vulnerabilities are fixed,
+and Debian has also identified the relevant commits:
+
+CVE-2025-59028: https://security-tracker.debian.org/tracker/CVE-2025-59028
+CVE-2025-59032: https://security-tracker.debian.org/tracker/CVE-2025-59032
+CVE-2026-27859: https://security-tracker.debian.org/tracker/CVE-2026-27859
+CVE-2026-27851: https://security-tracker.debian.org/tracker/CVE-2026-27851
+CVE-2026-33603: https://security-tracker.debian.org/tracker/CVE-2026-33603
+CVE-2026-40016: https://security-tracker.debian.org/tracker/CVE-2026-40016
+CVE-2026-40020: https://security-tracker.debian.org/tracker/CVE-2026-40020
+CVE-2026-42006: https://security-tracker.debian.org/tracker/CVE-2026-42006
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(cherry picked from commit 86a9ad852a7180edf8b03fca7d0a69e9f1d9e550)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-index 9909afb0e90..1149913c2b7 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.5.0.bb
-@@ -41,3 +41,4 @@ BBCLASSEXTEND = "native nativesdk"
- 
- CVE_STATUS[CVE-2026-32239] = "fixed-version: fixed in 1.4.0"
- CVE_STATUS[CVE-2026-32240] = "fixed-version: fixed in 1.4.0"
-+CVE_STATUS[CVE-2026-59704] = "cpe-incorrect: this vulnerability is for CapSoftware Cap"
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb b/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
+index 993453eaa30..06e6ee39fa3 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.5.bb
+@@ -89,3 +89,11 @@ CVE_STATUS[CVE-2026-0394] = "fixed-version: fixed since v2.4.1"
+ CVE_STATUS[CVE-2026-24031] = "fixed-version: fixed since v2.4.3"
+ CVE_STATUS[CVE-2026-27855] = "fixed-version: fixed since v2.4.3"
+ CVE_STATUS[CVE-2026-27860] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2025-59028] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2025-59032] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2026-27859] = "fixed-version: fixed since v2.4.3"
++CVE_STATUS[CVE-2026-27851] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-33603] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-40016] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-40020] = "fixed-version: fixed in v2.4.4"
++CVE_STATUS[CVE-2026-42006] = "fixed-version: fixed in v2.4.4"
 
