@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E076CC6B09
-	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 04:40:51 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.356.1791866445976280243
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79E21CC6B09
+	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 04:41:01 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.359.1791866451493299334
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 21:40:46 -0700
+ Mon, 12 Oct 2026 21:40:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pN0u1j61;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ab33730821so1375627a91.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lfJRWFtY;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cd5d2dafeccso893619a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791866445; x=1792471245; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791866451; x=1792471251; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9Xu+zkfTcubefsRDXfR68Hr9MeQvRbPWzNonwptWFoY=;
-        b=pN0u1j61sfRuHJt4RDebh8aoIvodOe91H3uKBemDhNX9wHkv2in6c+iKvqGuOWSbOB
-         5MkXAy8A8fKkk/Gi5neDcSZeCsWZrI1Hy71yGpnEnSG4SU34JNYfHgF7/SMM6Hr2k8o6
-         c1PUjOL41IVXFNOo35gbO7mGFVd0qV3Hdl0G2jFdtoZQsm9Qoc2iUIpaMtQvgU9fP+ai
-         Dy5px+HxRnUoerRg/B9na9NY3MUfnO+iko+GVwf9qJOxtQ09c1o4/Pvr5JonoptoIyj5
-         wMuwuAOhKsfmgAbYcHRJXWRTEb4GBUzLtomfeJHAhmLf3VUP+huWSXrnV7U3TGuxi+kN
-         t/Eg==
+        bh=3R3PIVwduR84cNu++N7KgpS36Y6qS/pdF5Wj1ZB5rm8=;
+        b=lfJRWFtYbxmWBIkiq9JI6zgKTDqmIrD8wgdMhmHHVL4lY9z+8PYypDNfdPaw57hvNr
+         hfpK1GjNfK9z8fgViCks4EqRVTuKPOZRsU3kCwlNEKMwZPVXJ+JfBa6ka45H4mjRgofx
+         8LqPwhg2HJk7nRXiszSie7ZhweBcw6vkSYoTBINcIVk1uyaB/enKJE0bqxWsscwpbR51
+         f5XyJe/+HFFX0F7++QyJTPQFq0lEG8xE7ivthnLvqoScKNk2dfnfDZE/Jx7pwQR0ugbf
+         waYYrwqDmuugOp5bgBfP9qP8NcsDLoFwsesIdaQVfZFhvm6HZ2kJpfijEdq766K2k4P3
+         pIoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791866445; x=1792471245;
+        d=1e100.net; s=20260707; t=1791866451; x=1792471251;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9Xu+zkfTcubefsRDXfR68Hr9MeQvRbPWzNonwptWFoY=;
-        b=lmjELp19kCsJxe3i5Fu+Qvr6I0EfF5aaIRBUaOG3hRz+jlEyd5gu2tAwYgpCwzQsvX
-         Fexvslo0Z4a+E5clSChCICoo84cG2Yp50rewHTx9L2Rg2e7lgVT+bm4xmCMQdyII0e7T
-         yFZx9gKo7hLjMgci47vI+JuLWiOM8p+oPFwkZVv/VI6xIoiwcX5Ngjjx9IVainIfB5mr
-         03TG/gZRLqUu/RCic4gpLLWYP46rosQ2aHSnHFUUdWalzTl5jI/B9QdtrTxe3I2b+d7p
-         fvEzv649EGG+J0d6/6PYK8UQAEH9MogVzn7rVe1xuMCEID31NPDZHpeouh9n0v3JO3FQ
-         Bh0g==
-X-Gm-Message-State: AFq9FYKersA//ZR3dzTEgbvXGQMYRXnSvgJiSBRaKTCgyX+mjF66/hVE
-	5k4wL53+nbHS8kIzIPd2ogDucnJIBi/TK/RmHhrMcVaO3soVF99Ea7EygV86Hg==
-X-Gm-Gg: AYBFou1JlTvuvffuygHitAYRgdB7tuE2KYSZa7mUXBvHbX+gaL4RGr7t7KxEqHOkbiC
-	pmT+kBkY4fyvJ4AdeIT4E0wMeCWMbWAWkm5AOHnP0MvMMycoEjuyEPN5IIdE3gCYOwIVrM2vh4T
-	rAOnhmkKvBK/bUUet3lL7sGXkct4kcGaklyLnSGNi1IaOkM/lizOBQMSi4O74X09EZpwN/Ftc5y
-	aeiBl66bC9cTYtiU13TOFP6M7BLhzDikMlDwureJ/zTZpk5QTPeB8b3g9u6AReYVt2pAQYhZvzs
-	MK9U6NUdoKZ7vuRcCRgG8p4Z8X6oh+soz9FkuWCfJ0EthC/La/TNWM/1wivDFeFNDOjfAT5IBMM
-	7qfl00+0f8LChBnBExKWPo/0Co81JKr8Kj+z5+NSxn4yR8doy/8pk0lHu16tBOZDD3usjM+H/aH
-	FbTHc9L40q+vxTC1z4KgmAKuhsAbsWGp0YeioNZ49ld7uiukwNisDrds4PGFymlX0avTehMke8K
-	FVv/ruU06DfScOuPrFEjpoEH1svpe/TyYze0TY=
-X-Received: by 2002:a17:90b:28ce:b0:3a0:809b:1972 with SMTP id 98e67ed59e1d1-3ab3a745e5bmr9021459a91.26.1791866445161;
-        Mon, 12 Oct 2026 21:40:45 -0700 (PDT)
+        bh=3R3PIVwduR84cNu++N7KgpS36Y6qS/pdF5Wj1ZB5rm8=;
+        b=FmOUmSGph0btzat9i9UWqG9GZJeRjhg8QI5B+ildYna/HrIL5o1gyYgKW+rVY5moeB
+         eWY97mziT4uTZAj92PR3IBlmZaz7gH2D9M02uuISCpx1Q066QURXmRoWCo8995n854JF
+         4YGb1LhKk84JIz+Fy0UeLXWh758OI4f3imB1awmLfG6AN8QYJZDZvZp+veqdpbw6w1Cc
+         nWQ/JhDNiAW8m57hbGbmXxoMVseOhmypvzL92V60HRbcMQU9pd2IQl6wuqc9EF7DIKrG
+         npjlmlGoT+gQp8TbnvvKiRi5iazspEAJFOdHMlmkKKVSIWSRS00+ZLT/EO503w4FSOk8
+         zRZA==
+X-Gm-Message-State: AFq9FYIAj3n5nxDZsL5lnrPXamWlwyAViu8o/sz7qmVXwB1kZooGvhad
+	hBIxjuNb2gWcdqaVTKMoseTg4mUdfzAo/vaTf4t/lgHscyxdkOKrIg/E9DwFBg==
+X-Gm-Gg: AYBFou1SYEyMMXvCvbteFF1e2vsylWj4ZPUgrGrqxHjW3zpY3qwjurstrGkjznDux1E
+	iKKQxct6IYX/ysnfOcM5RVvR3Rq1rGIyMMNge4hrd7wYmrWPi+Fkg9NOTr6gkN+Kqcnf9uFbpTk
+	xk18I8fuu/AXXA2jz+MUBtq+utBWKBVwOgQl3EQAQcC/kNKLUacmMZc2+jFe4ZHFvYmEPjwAeo4
+	Cl+eMa1nyJRVxjS5LOa0MnwKQ3fAB38EVJPe2YKTVFY/YKEF2AAnHqahNoEl8iGMpvVYx+Ndue7
+	R4/7rJ6MclDmPTxdnco+QhuFp14+qY+51AsZ+h5K2Hv4MQnnIe5OXY/QxP3tL+jWq6yfCtoWhPx
+	5yVcN94m2HKw2smgHJr/I+KBsAmH/nST5GdvzIKffS2NofDQ0qumaq9T0bKRBc68lkSZM3yHV46
+	h0NDcbYyJXdzlxB2JCW9MA05GZmdaoHaiXFLHkhB31ynr7SG6p82uwbXDOAYdlK/XsB3WEm5rnr
+	Dtvw51QxDQLJODI+iuqyFnDbymBGH9x/vRdIYgz3g==
+X-Received: by 2002:a17:90b:4d02:b0:3ab:8a06:1b0c with SMTP id 98e67ed59e1d1-3ab8a061d3fmr6037724a91.36.1791866450565;
+        Mon, 12 Oct 2026 21:40:50 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.42
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 21:40:44 -0700 (PDT)
+        Mon, 12 Oct 2026 21:40:50 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-oe][PATCH 10/16] tesseract: patch CVE-2026-88048
-Date: Tue, 13 Oct 2026 17:40:00 +1300
-Message-ID: <20261013044006.834868-10-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 12/16] tesseract: patch CVE-2026-88050
+Date: Tue, 13 Oct 2026 17:40:02 +1300
+Message-ID: <20261013044006.834868-12-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
 References: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
@@ -68,151 +68,156 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 04:40:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130824
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 04:41:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130826
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-88048
+https://nvd.nist.gov/vuln/detail/cve-2026-88050
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 9e544d6e5087f701a0d6a9d66ae3f87b6dcc8c5e)
+(cherry picked from commit 4aab0847c2e6b786437d140dd3c589e6773b9224)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tesseract/tesseract/CVE-2026-88048.patch  | 227 ++++++++++++++++++
+ .../tesseract/tesseract/CVE-2026-88050.patch  | 209 ++++++++++++++++++
  .../tesseract/tesseract_5.5.3.bb              |   1 +
- 2 files changed, 228 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
+ 2 files changed, 210 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
 new file mode 100644
-index 0000000000..abfd502667
+index 0000000000..21fa5e9a67
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
-@@ -0,0 +1,227 @@
-+From b2fbc8282c34f0a5a426622a9eb6a79ad0df0fe4 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
+@@ -0,0 +1,209 @@
++From 5426c23fe7fe32b62bd5694f68f71772f273c821 Mon Sep 17 00:00:00 2001
 +From: Stefan Weil <sw@weilnetz.de>
-+Date: Fri, 21 Aug 2026 15:23:59 +0200
-+Subject: [PATCH] Validate FullyConnected weight matrix dimensions at load
++Date: Fri, 21 Aug 2026 16:56:51 +0200
++Subject: [PATCH] Reject recoder code values outside the sane range at load
 +
-+FullyConnected::DeSerialize read the WeightMatrix without checking
-+that its dimensions match the layer's declared ni/no. MatrixDotVector
-+drives the dot product from the matrix dimensions (writes w.dim1()
-+results, reads w.dim2()-1 inputs) while the scratch buffers are sized
-+from no_ and ni_, so a crafted .traineddata with a mismatched matrix
-+performed a heap out-of-bounds write (up to 65535 rows) and out-of-
-+bounds read on the first recognition step (crash, or heap corruption
-+with attacker-influenced size and content).
++RecodedCharID::DeSerialize (hardened by 82727cc to check length_
++only) still read the individual code values as raw signed int32.
++UnicharCompress::ComputeCodeRange computes code_range_ as 1 plus the
++maximum code using a signed > comparison, so a code value of -1
++never raises the maximum and yields code_range_ = 0. SetupDecoder
++then resizes is_valid_start_ to 0 and writes is_valid_start_[code(0)]
++on the size-0 vector<bool>, an out-of-bounds write at a wild wrapped
++index (deterministic crash) on LSTMRecognizer load. A code value of
++INT32_MAX instead wraps code_range_ negative and makes resize()
++throw.
 +
 +Key changes:
-+- weightmatrix.h: add Dim1()/Dim2() accessors for the active weight
-+  matrix (int or float), alongside the existing NumOutputs().
-+- fullyconnected.cpp: reject the layer in DeSerialize unless
-+  Dim1() == no_ and Dim2() == ni_ + 1 (the second dimension
-+  includes the bias column), the layout that InitWeightsFloat
-+  always produces.
-+- unittest: new fullyconnected_test that builds a Softmax network
-+  with mismatched matrix dimensions and expects CreateFromFile to
-+  return nullptr; on unpatched code the test reaches Forward and
-+  ASan catches the out-of-bounds write in MatrixDotVector. A
-+  second test verifies that matching dimensions are still accepted.
++- unicharcompress.h: validate each deserialized code value to be
++  within [0, UINT16_MAX), the same arbitrary cap used elsewhere for
++  .traineddata counts; reject the recoder otherwise.
++- unicharcompress.h/.cpp: add defense-in-depth bounds assertions to
++  IsValidFirstCode and SetupDecoder, matching the style of the
++  NetworkIO assertions from 2f4d2f4.
++- unittest: add recoder_test, which feeds a crafted UnicharCompress
++  with a -1 code and an INT32_MAX code and expects DeSerialize to
++  fail (on unpatched code the -1 case dies on the SEGV in
++  SetupDecoder, the huge case on the uncaught length_error), plus a
++  positive control that valid codes load and answer
++  code_range()/IsValidFirstCode() correctly.
 +
 +Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
 +Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
 +Signed-off-by: Stefan Weil <sw@weilnetz.de>
-+(cherry picked from commit 103dc134eb36411ddc6833ec20aa2c76795bd0ff)
++(cherry picked from commit c94a5532ee04db5a4919542832fd94caee5ea58f)
 +
-+CVE: CVE-2026-88048
-+Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/103dc134eb36411ddc6833ec20aa2c76795bd0ff]
++CVE: CVE-2026-88050
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/c94a5532ee04db5a4919542832fd94caee5ea58f]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ Makefile.am                     |   5 ++
-+ src/lstm/fullyconnected.cpp     |  11 ++-
-+ src/lstm/weightmatrix.h         |   7 ++
-+ unittest/fullyconnected_test.cc | 115 ++++++++++++++++++++++++++++++++
-+ 4 files changed, 137 insertions(+), 1 deletion(-)
-+ create mode 100644 unittest/fullyconnected_test.cc
++ Makefile.am                    |  5 ++
++ src/ccutil/unicharcompress.cpp |  1 +
++ src/ccutil/unicharcompress.h   | 13 ++++-
++ unittest/recoder_test.cc       | 91 ++++++++++++++++++++++++++++++++++
++ 4 files changed, 109 insertions(+), 1 deletion(-)
++ create mode 100644 unittest/recoder_test.cc
 +
 +diff --git a/Makefile.am b/Makefile.am
-+index 22c2c7a0..284f8b53 100644
++index 4bcc858b..63ca6686 100644
 +--- a/Makefile.am
 ++++ b/Makefile.am
-+@@ -1158,6 +1158,7 @@ if !DISABLED_LEGACY_ENGINE
-+ check_PROGRAMS += equationdetect_test
-+ endif # !DISABLED_LEGACY_ENGINE
-+ check_PROGRAMS += fileio_test
-++check_PROGRAMS += fullyconnected_test
-+ check_PROGRAMS += heap_test
-+ check_PROGRAMS += imagedata_test
-+ if !DISABLED_LEGACY_ENGINE
-+@@ -1290,6 +1291,10 @@ fileio_test_SOURCES = unittest/fileio_test.cc
-+ fileio_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ fileio_test_LDADD = $(TRAINING_LIBS)
++@@ -1202,6 +1202,7 @@ endif # !DISABLED_LEGACY_ENGINE
++ check_PROGRAMS += progress_test
++ check_PROGRAMS += qrsequence_test
++ check_PROGRAMS += recodebeam_test
+++check_PROGRAMS += recoder_test
++ check_PROGRAMS += rect_test
++ check_PROGRAMS += resultiterator_test
++ check_PROGRAMS += scanutils_test
++@@ -1435,6 +1436,10 @@ recodebeam_test_SOURCES = unittest/recodebeam_test.cc
++ recodebeam_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ recodebeam_test_LDADD = $(TRAINING_LIBS) $(ICU_I18N_LIBS) $(ICU_UC_LIBS)
 + 
-++fullyconnected_test_SOURCES = unittest/fullyconnected_test.cc
-++fullyconnected_test_CPPFLAGS = $(unittest_CPPFLAGS)
-++fullyconnected_test_LDADD = $(TESS_LIBS)
+++recoder_test_SOURCES = unittest/recoder_test.cc
+++recoder_test_CPPFLAGS = $(unittest_CPPFLAGS)
+++recoder_test_LDADD = $(TESS_LIBS)
 ++
-+ heap_test_SOURCES = unittest/heap_test.cc
-+ heap_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ heap_test_LDADD = $(TESS_LIBS)
-+diff --git a/src/lstm/fullyconnected.cpp b/src/lstm/fullyconnected.cpp
-+index a0ee1b02..d999f575 100644
-+--- a/src/lstm/fullyconnected.cpp
-++++ b/src/lstm/fullyconnected.cpp
-+@@ -121,7 +121,16 @@ bool FullyConnected::Serialize(TFile *fp) const {
-+ 
-+ // Reads from the given file. Returns false in case of error.
-+ bool FullyConnected::DeSerialize(TFile *fp) {
-+-  return weights_.DeSerialize(IsTraining(), fp);
-++  if (!weights_.DeSerialize(IsTraining(), fp)) {
-++    return false;
-++  }
-++  // The weight matrix must match the declared sizes (the second dimension
-++  // includes the bias column); otherwise Forward would read or write
-++  // outside the scratch buffers sized from ni_ and no_.
-++  if (weights_.Dim1() != no_ || weights_.Dim2() != ni_ + 1) {
-++    return false;
-++  }
-++  return true;
-+ }
-+ 
-+ // Runs forward propagation of activations on the input line.
-+diff --git a/src/lstm/weightmatrix.h b/src/lstm/weightmatrix.h
-+index eaca3ffb..6c5ab236 100644
-+--- a/src/lstm/weightmatrix.h
-++++ b/src/lstm/weightmatrix.h
-+@@ -107,6 +107,13 @@ public:
-+   int NumOutputs() const {
-+     return int_mode_ ? wi_.dim1() : wf_.dim1();
++ rect_test_SOURCES = unittest/rect_test.cc
++ rect_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ rect_test_LDADD = $(TESS_LIBS)
++diff --git a/src/ccutil/unicharcompress.cpp b/src/ccutil/unicharcompress.cpp
++index f909f76e..b3dd440f 100644
++--- a/src/ccutil/unicharcompress.cpp
+++++ b/src/ccutil/unicharcompress.cpp
++@@ -400,6 +400,7 @@ void UnicharCompress::SetupDecoder() {
++   for (unsigned c = 0; c < encoder_.size(); ++c) {
++     const RecodedCharID &code = encoder_[c];
++     decoder_[code] = c;
+++    ASSERT_HOST(code(0) >= 0 && code(0) < code_range_);
++     is_valid_start_[code(0)] = true;
++     RecodedCharID prefix = code;
++     uint32_t len = code.length();
++diff --git a/src/ccutil/unicharcompress.h b/src/ccutil/unicharcompress.h
++index 9b696d03..6919b7d2 100644
++--- a/src/ccutil/unicharcompress.h
+++++ b/src/ccutil/unicharcompress.h
++@@ -84,7 +84,17 @@ public:
++     if (length_ > kMaxCodeLen) {
++       return false;
++     }
++-    return fp->DeSerialize(&code_[0], length_);
+++    if (!fp->DeSerialize(&code_[0], length_)) {
+++      return false;
+++    }
+++    // Code values index arrays sized from the maximum code; reject values
+++    // that are out of the sane range for a recoded alphabet.
+++    for (uint32_t i = 0; i < length_; ++i) {
+++      if (code_[i] < 0 || code_[i] >= static_cast<int32_t>(UINT16_MAX)) {
+++        return false;
+++      }
+++    }
+++    return true;
 +   }
-++  // The dimensions of the active weight matrix (wi_ in int mode, else wf_).
-++  int Dim1() const {
-++    return int_mode_ ? wi_.dim1() : wf_.dim1();
-++  }
-++  int Dim2() const {
-++    return int_mode_ ? wi_.dim2() : wf_.dim2();
-++  }
-+   // Provides one set of weights. Only used by peep weight maxpool.
-+   const TFloat *GetWeights(int index) const {
-+     return wf_[index];
-+diff --git a/unittest/fullyconnected_test.cc b/unittest/fullyconnected_test.cc
++   bool operator==(const RecodedCharID &other) const {
++     if (length_ != other.length_) {
++@@ -190,6 +200,7 @@ public:
++   int DecodeUnichar(const RecodedCharID &code) const;
++   // Returns true if the given code is a valid start or single code.
++   bool IsValidFirstCode(int code) const {
+++    ASSERT_HOST(code >= 0 && code < code_range_);
++     return is_valid_start_[code];
++   }
++   // Returns a list of valid non-final next codes for a given prefix code,
++diff --git a/unittest/recoder_test.cc b/unittest/recoder_test.cc
 +new file mode 100644
-+index 00000000..f9697de4
++index 00000000..48dfa7ea
 +--- /dev/null
-++++ b/unittest/fullyconnected_test.cc
-+@@ -0,0 +1,115 @@
+++++ b/unittest/recoder_test.cc
++@@ -0,0 +1,91 @@
 ++///////////////////////////////////////////////////////////////////////
-++// File:        fullyconnected_test.cc
-++// Description: Tests that a FullyConnected (softmax) network layer with
-++//              weight-matrix dimensions that do not match the declared
-++//              ni/no is rejected at load. Without the check,
-++//              MatrixDotVector writes w.dim1() results into a scratch
-++//              buffer sized from no_ and reads w.dim2()-1 inputs from
-++//              a buffer sized from ni_ (heap out-of-bounds write/read)
-++//              on the first recognition step.
+++// File:        recoder_test.cc
+++// Description: Tests that a UnicharCompress (LSTM recoder) with code
+++//              values outside the sane range is rejected at load.
+++//              Negative code values leave code_range_ at zero, so
+++//              SetupDecoder writes is_valid_start_[code(0)] out of
+++//              bounds on a size-0 vector<bool>; huge code values wrap
+++//              code_range_ and make resize() throw.
 ++//
 ++// Licensed under the Apache License, Version 2.0 (the "License");
 ++// you may not use this file except in compliance with the License.
@@ -223,10 +228,8 @@ index 0000000000..abfd502667
 ++
 ++#include "include_gunit.h"
 ++
-++#include "network.h" // for Network, NetworkType
-++#include "networkio.h"
-++#include "networkscratch.h"
 ++#include "serialis.h" // for TFile
+++#include "unicharcompress.h"
 ++
 ++#include <cstdint>
 ++#include <vector>
@@ -250,84 +253,63 @@ index 0000000000..abfd502667
 ++  std::vector<char> data_;
 ++};
 ++
-++void PutDoubleLE(ByteWriter *w, double d) {
-++  union {
-++    double d;
-++    uint64_t u;
-++  } conv;
-++  conv.d = d;
-++  w->PutU32(static_cast<uint32_t>(conv.u & 0xFFFFFFFF));
-++  w->PutU32(static_cast<uint32_t>(conv.u >> 32));
-++}
-++
-++// Builds a serialized NT_SOFTMAX network: header with the given ni/no,
-++// then a float-mode WeightMatrix with the given (corrupt) dimensions.
-++// The matrix is stored as doubles on disk (see WeightMatrix::DeSerialize).
-++std::vector<char> MakeSoftmaxNetwork(int ni, int no, int32_t dim1, int32_t dim2) {
+++// A serialized UnicharCompress with one length-1 RecodedCharID per
+++// given code value (self-normalizing).
+++std::vector<char> MakeRecoder(const std::vector<int32_t> &codes) {
 ++  ByteWriter w;
-++  w.PutU8(static_cast<uint32_t>(NT_SOFTMAX));
-++  w.PutU8(0); // training: TS_DISABLED
-++  w.PutU8(0); // needs_to_backprop
-++  w.PutU32(0); // network_flags
-++  w.PutU32(static_cast<uint32_t>(ni));
-++  w.PutU32(static_cast<uint32_t>(no));
-++  w.PutU32(0); // num_weights (not cross-checked, kept consistent anyway)
-++  w.PutU32(0); // name (empty string)
-++  // WeightMatrix::DeSerialize:
-++  w.PutU8(128); // mode: kDoubleFlag, float mode
-++  w.PutS32(dim1);
-++  w.PutS32(dim2);
-++  PutDoubleLE(&w, 0.0); // empty_ cell
-++  for (int32_t i = 0; i < dim1 * dim2; ++i) {
-++    PutDoubleLE(&w, 0.0); // weight data
+++  w.PutU32(codes.size());
+++  for (int32_t code : codes) {
+++    w.PutU8(1); // self_normalized_
+++    w.PutU32(1); // length_
+++    w.PutS32(code); // code_[0]
 ++  }
 ++  return w.data();
 ++}
 ++
-++// A FullyConnected layer whose weight matrix does not match the declared
-++// sizes must be rejected by CreateFromFile; on unpatched code the test
-++// reaches Forward, where MatrixDotVector performs the out-of-bounds
-++// write this regression test guards against.
-++TEST(FullyconnectedTest, RejectsWeightMatrixDimensionMismatch) {
-++  // ni_=no_=1 but dim1=3 (OOB write of 3 results into a 1-result buffer)
-++  // and dim2=5 (OOB read of 4 inputs from a 1-input buffer).
-++  std::vector<char> bytes = MakeSoftmaxNetwork(1, 1, 3, 5);
+++// A recoder code of -1 keeps code_range_ at 0, so on unpatched code
+++// SetupDecoder performs an out-of-bounds write into the size-0
+++// is_valid_start_ vector<bool>.
+++TEST(RecoderTest, RejectsNegativeCode) {
+++  std::vector<char> bytes = MakeRecoder({-1});
 ++  TFile fp;
 ++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  if (net == nullptr) {
-++    return; // Fixed: the mismatched layer is rejected at load.
-++  }
-++  NetworkIO input;
-++  input.Resize2d(false, /*width=*/1, /*num_features=*/1);
-++  NetworkScratch scratch;
-++  NetworkIO output;
-++  net->Forward(false, input, nullptr, &scratch, &output);
-++  delete net;
-++  FAIL() << "crafted FullyConnected layer with mismatched weight matrix was accepted";
+++  UnicharCompress recoder;
+++  EXPECT_FALSE(recoder.DeSerialize(&fp));
 ++}
 ++
-++// Consistent dimensions must still be accepted.
-++TEST(FullyconnectedTest, AcceptsMatchingDimensions) {
-++  std::vector<char> bytes = MakeSoftmaxNetwork(1, 2, 2, 2);
+++// A recoder code of INT32_MAX wraps code_range_ to a negative value,
+++// so on unpatched code SetupDecoder's resize() throws.
+++TEST(RecoderTest, RejectsHugeCode) {
+++  std::vector<char> bytes = MakeRecoder({INT32_MAX});
 ++  TFile fp;
 ++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  Network *net = Network::CreateFromFile(&fp);
-++  ASSERT_NE(net, nullptr);
-++  delete net;
+++  UnicharCompress recoder;
+++  EXPECT_FALSE(recoder.DeSerialize(&fp));
+++}
+++
+++// A valid recoder must still be accepted and usable.
+++TEST(RecoderTest, AcceptsValidCodes) {
+++  std::vector<char> bytes = MakeRecoder({0, 1});
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  UnicharCompress recoder;
+++  ASSERT_TRUE(recoder.DeSerialize(&fp));
+++  EXPECT_EQ(recoder.code_range(), 2);
+++  EXPECT_TRUE(recoder.IsValidFirstCode(0));
+++  EXPECT_TRUE(recoder.IsValidFirstCode(1));
 ++}
 ++
 ++} // namespace
 ++} // namespace tesseract
 diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-index 81359b761b..bed16f9806 100644
+index 24c8312552..6acedcee98 100644
 --- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
 +++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
- SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
+@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
             file://CVE-2026-88052.patch \
-+           file://CVE-2026-88048.patch \
+            file://CVE-2026-88048.patch \
+            file://CVE-2026-88049.patch \
++           file://CVE-2026-88050.patch \
  "
  
  DEPENDS = "leptonica"
