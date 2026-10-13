@@ -2,63 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27881CC6B0F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3088CC6B03
 	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 09:59:25 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3508.1791885555607037877
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3509.1791885561293233331
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2026 02:59:15 -0700
+ Tue, 13 Oct 2026 02:59:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=kMNDBTG1;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3ab33730821so1524291a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:59:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=S8DhFkzv;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cc1d57602e8so989074a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791885555; x=1792490355; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791885560; x=1792490360; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Y2GZ05SsQvVqj9UW6c9UqSdHRBrdcYCibIAz3PnqTEY=;
-        b=kMNDBTG1eQMEleh1f9ZDSU9qssr/Vomqt/ISirW3RwwYNpgpp7LAOO4uKGbJA4Uf1g
-         wrQdlsgm+poc4TBKdOHhDqwGshMDpC+kUj8/SMol9jLPkKr/mcVCXguEzYT/XLJXo3jR
-         9wt5ona5FDpRdx1Slb21ywDdzcLdvmUdXCt5SIGWQuF1s99zLcndokC3gwbv/ePJOgKT
-         H0iS3qoGYLXLaB/s+6z4ZOm3ESEQhu16EL9SRFHG8gn/oQZqruI+u7siXYfSWDC2ntYN
-         tGltnZSCHBYF98CWp3r88Gbt72qDsMQeVfaYWQiHrDPPnTqPugaTZHIIqrmx3xV0DY0a
-         vN5A==
+        bh=bEDQS+kx9VMgq5JbOjminOwY+7UtO3rsA4XnZSG/ZsI=;
+        b=S8DhFkzvCcnfa3EOAkTOTpNamzJA2GvP2A0a/qf4U9+Dub4hqihv50RoCdl8r05X6T
+         4wQcSCp0i295TOR35FbXeMA+XCsDghUzwK+ckXqvYoaBH2NF2cgO5i/LJZH20J6Tn/KC
+         9eDKsyHnkR6k1BNFHUyYaOZN2QcO22Pjhp/ehmSk8i+0Vs7vTyzswfI86CSCDcKi7LxI
+         EurNifZDklBB6q7qVockpQbUmVsowZknKId9L9dugeqz7NC/zH38UopXSk1mGxkn1v4v
+         M1vyfsqebeuO/AK5dae+rAg4uFo8qsqhktS6sJGMMvdsM2Q8tZJCYwaRae5hCo0bmKBW
+         rTLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885555; x=1792490355;
+        d=1e100.net; s=20260707; t=1791885560; x=1792490360;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y2GZ05SsQvVqj9UW6c9UqSdHRBrdcYCibIAz3PnqTEY=;
-        b=rBiwMkQCPGhAb4PgBZMXkn406uoYFkxFmoaGz+HLOu+Rx9DVGeqhy2eBcRY2voOv3O
-         brahrOlUNznzrVJL4rAuSKgMqlCtE2bS/8yjM11Ky2D34qkK4FCWQEUrPUmlPpj3XNj4
-         7TRLPijXVHppiYa0P2PBUWbE6pqGARwk17gttk2RR/hQM7MDzQYAgtnBcL5UwPXaPPNB
-         t3IAJQCmpGm67iES6sbCaE9ZQrdufNB10oGkJY5OOwNN7Ym8EMfTwPGyW4jwyoHT6Cmz
-         UyGC9anh9Cpj0DGXTzn5R/PnTc4LXv57UQb4PXYdSwtF+wnR98ftWp9pmm3hnzH8eNxm
-         a8EA==
-X-Gm-Message-State: AFq9FYJQaMReT2Xan6qisoDB6AlikeruflIOAXb7xRY1DK5xPUZpGQUm
-	xCoa/nB92CmEwjlPWveAGLpHBAFxYdfi/PWe6S1OUvXSl6uNTnNbpydRCW4jpA==
-X-Gm-Gg: AYBFou25harBxf1OlrbxkHQq8At6snOYentLCJfRaEsGcwEZU3ggWSMweYPG3D65/en
-	4PlRQMLEKylMznG3ISPax27hhrbjQR6xYWvtrwoJKONmXaygTWHBRQdUrnFUz1EUDlpvQbTISjx
-	IFyhst+edI+2baipcCOzrASj8oyV7oxwPE4jQq5fJUVN2jv6cY41JydJAAhs5lv83gd61DkGBbh
-	Rqex915FJb4jFU8bPgwUNW8Z1T+4TuYlyRFgb/6jQAdQxG/UewCtK35Dnfgy010rWn68wrXsCLt
-	MWjY5UAb/iJPAIFPz+SNZ4A+asRffsIMxUCbdPGoGQ8vHkS9Za1GNAvc+aQzx+ngYxi5bNebf8f
-	RW5rcm+h5KS2NR3TjFBemm0WRhbU1hzanp0bPzvcvyXt5NSnJxX81OdRFYh1MudU7k1K1vvDUF2
-	XQQQROGkrRXfrfP5WEhkVZOhePO76CHZAWeWaw6J/Xl5Pd/ZY/ojFIryq1sqrAzLbIXZ6Bu37R8
-	MSv4nUnNB+SjmNoA+IINQ/ZyoVGcU1LSwEfaKa4zw==
-X-Received: by 2002:a17:90b:5444:b0:3a4:b74a:795c with SMTP id 98e67ed59e1d1-3ab3a60cec9mr9735830a91.16.1791885554919;
-        Tue, 13 Oct 2026 02:59:14 -0700 (PDT)
+        bh=bEDQS+kx9VMgq5JbOjminOwY+7UtO3rsA4XnZSG/ZsI=;
+        b=ZyXEnUjuas61bdJtPxUbPN0qdo3FLLRmYMLQUoczw7zp/y+81CU3u9RIDQ/aEbUSBo
+         XFhQjal9/jBbhWbwY/LZDS8H98a2zgjmrMphx/vXl9FbLkkYz8JofftGfXWeW8gzkNUH
+         R5c296t31SHQA4CNVBjAxPnQJJ4pY2iBzWLkgtIAysMjPHJyEjhaJq5QtVJqj2+3jwgq
+         X+xOYmhpoqXhvLUm0B0x9sI838BgexjbnrHjGsOKYydJO0WpOZggNjysCNSrhlTee5Hm
+         3LYa29x7Ldn83Ng+jSLGT174Ml9LjUihj/AVTRQo254y9jOdhlk/lsAKw0vblQHaTq10
+         +9LA==
+X-Gm-Message-State: AFq9FYLebqyaVMuW3owl3/TLs7tNUhsDiqbs7D0xk9EJHILIoBKN5zIt
+	5t69xGon5bkAfNiNqHdstionNpJEjlDskQJgLIcg6YrSLXW63TKi37heZNibvQ==
+X-Gm-Gg: AYBFou32bGGkPEs7Xf4Sd+sF+pnAp9DyVLEZ9P8FhCf21ztmM8pv7vDw1w27DLG3bGH
+	oZmL0i2GTRLPMS6Y90HqjpnMkYVMvpklj1YPK5ZIw3MjUm9UD28lTM0myc3QVIvpwYB71lFj0dh
+	nhC8fnDSx2XLt6nQzoSrv+tflFfYVEjG92D2rfZkQEt1wX+vNDdcM93x4hzk0wqOZiyOlCIWuxp
+	YgeyngrCq9i46cEmoXY13Vlj/VN4K9u0Zqc0slpMlYwFBbxkW7n0PNz3qb1DgumHpAK2MXbMtU3
+	PrKepbdkyF4uuQWT8QzV5GEd5M5691HQu/JybyOB0mlQRLp2svC8eC6MRsHEE1YPd5Te9zk9+mz
+	S7V3hqXyhBiAYZ5Gpt0pqIWllP2cA9QKdLEu7RMVXX2p99IrN/Dyy+1mFXEC3quC7A2UMUoB9Ci
+	56IhvPsaHyrGrwJms/0Q/9Z1wjEhrMxTLDuzTNrMouuulUpd617eRk2n5Yhl6HlCnviJhOIBLxN
+	iJScCDvc3Ln+0xjWuDhP+4+WeWpxL1ifdRoaWk=
+X-Received: by 2002:a17:90a:d44d:b0:3ab:1b19:78ed with SMTP id 98e67ed59e1d1-3ab3a60d92emr9861246a91.21.1791885560316;
+        Tue, 13 Oct 2026 02:59:20 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.02.59.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.02.59.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 02:59:13 -0700 (PDT)
+        Tue, 13 Oct 2026 02:59:19 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][blacksail][PATCH 2/28] openvpn: patch CVE-2026-88964
-Date: Tue, 13 Oct 2026 22:58:37 +1300
-Message-ID: <20261013095903.3544906-2-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Subject: [oe][meta-python][blacksail][PATCH 4/28] python3-eventlet: mark CVE-2023-29483 fixed
+Date: Tue, 13 Oct 2026 22:58:39 +1300
+Message-ID: <20261013095903.3544906-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
 References: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
@@ -68,116 +69,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 09:59:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130835
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130837
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commit identified by Debian[1], also mentioned in the release note
-https://github.com/OpenVPN/openvpn/releases/tag/v2.7.8
+Fix[1] for the CVE is part of the upstream version.
 
-[1]https://security-tracker.debian.org/tracker/CVE-2026-88964
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2023-29483
+
+[1]https://github.com/eventlet/eventlet/commit/51e3c4928d4938beb576eff34f3bf97e6e64e6b4
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(cherry picked from commit 47b2ce9cc77297c740ecf50d00d6956f5a867144)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../openvpn/openvpn/CVE-2026-88964.patch      | 78 +++++++++++++++++++
- .../recipes-support/openvpn/openvpn_2.7.7.bb  |  1 +
- 2 files changed, 79 insertions(+)
- create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2026-88964.patch
+ meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-88964.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-88964.patch
-new file mode 100644
-index 0000000000..a2b9b0ec8a
---- /dev/null
-+++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2026-88964.patch
-@@ -0,0 +1,78 @@
-+From 22526848c6606698d6374c496f36009b9c6787ce Mon Sep 17 00:00:00 2001
-+From: Cole Munz <Munzzyy1@proton.me>
-+Date: Sun, 13 Sep 2026 15:23:17 +0200
-+Subject: [PATCH] options: fix unsigned underflow when clearing
-+ domain_search_list
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
+index 3292950e2c..67a69b1478 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
+@@ -17,3 +17,5 @@ RDEPENDS:${PN} += " \
+ 	python3-dnspython \
+ 	python3-greenlet \
+ "
 +
-+remove_option() and update_option() clear the domain search list with
-+
-+    while (o->domain_search_list_len-- > 0)
-+
-+domain_search_list_len is unsigned, and the post-decrement runs on the
-+final test too. When the length reaches 0 the condition is false but
-+the decrement has already wrapped it to UINT_MAX, so the field is left
-+corrupted. The next reset then does
-+
-+    o->domain_search_list[UINT_MAX] = NULL
-+
-+and walks far out of bounds, writing NULL through each slot. A server
-+can drive this reset path against a client with PUSH_UPDATE, so on
-+Windows and Android this is a remotely reachable out-of-bounds write.
-+
-+v2:
-+  Change to the semantics used for all the other lists there - set
-+  length to 0 and clear the list with CLEAR().
-+
-+Change-Id: I3724236d4acc3d05d786274d6baf34a21c570594
-+Signed-off-by: Cole Munz <Munzzyy1@proton.me>
-+Acked-by: Razvan Cojocaru <razvanc@mailbox.org>
-+Gerrit URL: https://gerrit.openvpn.net/c/openvpn/+/1914
-+Github: OpenVPN/openvpn-private-issues#178
-+CVE: 2026-88964
-+Message-Id: <20260913132322.2283-1-gert@greenie.muc.de>
-+URL: https://www.mail-archive.com/openvpn-devel@lists.sourceforge.net/msg39157.html
-+Signed-off-by: Gert Doering <gert@greenie.muc.de>
-+(cherry picked from commit aa12dd64b74142bbbff9f37cec05959ba115c06d)
-+(cherry picked from commit d586f8ad9bfc582cc7984fcd482dc7cfacc940e2)
-+
-+CVE: CVE-2026-88964
-+Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/d586f8ad9bfc582cc7984fcd482dc7cfacc940e2]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/openvpn/options.c | 14 ++++++--------
-+ 1 file changed, 6 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/openvpn/options.c b/src/openvpn/options.c
-+index b7d035b6..847572c2 100644
-+--- a/src/openvpn/options.c
-++++ b/src/openvpn/options.c
-+@@ -5220,12 +5220,12 @@ remove_option(struct context *c, struct options *options, char *p[], bool is_inl
-+         memset(o->ntp, 0, sizeof(o->ntp));
-+         o->nbdd_len = 0;
-+         memset(o->nbdd, 0, sizeof(o->nbdd));
-+-        while (o->domain_search_list_len-- > 0)
-+-        {
-+-            o->domain_search_list[o->domain_search_list_len] = NULL;
-+-        }
-++        o->domain_search_list_len = 0;
-++        CLEAR(o->domain_search_list);
-+         o->disable_nbt = 0;
-+         o->dhcp_options = 0;
-++        CLEAR(options->dns_options.from_dhcp);
-++
-+ #if defined(TARGET_ANDROID)
-+         o->http_proxy_port = 0;
-+         o->http_proxy = NULL;
-+@@ -5524,10 +5524,8 @@ update_option(struct context *c, struct options *options, char *p[], bool is_inl
-+             CLEAR(o->ntp);
-+             o->nbdd_len = 0;
-+             CLEAR(o->nbdd);
-+-            while (o->domain_search_list_len-- > 0)
-+-            {
-+-                o->domain_search_list[o->domain_search_list_len] = NULL;
-+-            }
-++            o->domain_search_list_len = 0;
-++            CLEAR(o->domain_search_list);
-+             o->disable_nbt = 0;
-+             o->dhcp_options = 0;
-+ 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
-index 9bf699124c..6338a0c816 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/OpenVPN/openvpn/releases/download/v${PV}/${BP}.tar
-            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
-            file://openvpn \
-            file://run-ptest \
-+           file://CVE-2026-88964.patch \
-           "
- 
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
++CVE_STATUS[CVE-2023-29483] = "fixed-version: fixed since v0.35.2"
 
