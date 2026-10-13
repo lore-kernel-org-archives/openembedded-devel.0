@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D285CC6B03
-	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 04:40:41 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.352.1791866436501019582
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 634C0CA9ED0
+	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 04:40:51 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.355.1791866443282669526
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 21:40:36 -0700
+ Mon, 12 Oct 2026 21:40:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HZIiFRky;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-3a8adb68d8bso1681271a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=m+qpzq2M;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cc4dbcf2b85so998749a12.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791866436; x=1792471236; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791866443; x=1792471243; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2NjEwcz1evegYdskFb76XdF6DQwohpaVPIJPmv8IdZU=;
-        b=HZIiFRkynIpiJ4VRxZPIzRm2J87G1W2mBgn9lu0DVvMAughDksleCpy8V9k438f6GG
-         zEPfRc6RSD86p+gZc9Pm7QCuvR6eRyuM6A/7kHOg8nF5N+xXQFzXkWY+qXKocHGKuwDd
-         dqXZOXDwYxZI+NLWYis8cOiN8qhbBptWjNwh8Wd4pa6vUOaigGyZmy5W/0GzcM3ZGFM4
-         /azZjxKP2XQgB8qC6QtQayu3ExtzKkiam+yESWqzMG/9dfMgu7eCMWosTjj5R/Xohp2n
-         pFG6UGMr67m+EqsKzOAzWJAd+Aq4KGNQcap2yvn+VOwl7gPYTKcZbNkHiWEIKaHhAow5
-         QZtw==
+        bh=RqoBVTvuWIA3oRwlp4pXxdSlrh9dq7DOjEbbCIaPUvY=;
+        b=m+qpzq2MHFMLd5sRPBsvK/0juNrAOOp6XUrd3dF5nN87q/NixTVX3TYv2m61omfjf6
+         YeiS7bxu5x8ziVnv//A59Dt04OqjznhmekhO9OchBFrtbhRyR8sSkRZqNei2kKg5PgRR
+         Qjh1Rb5Zh0bGZfXIHyrtr+F4yYTl4A5l3uxXZzuchDe/FSprSHsg0PAbarVgjtuN5fpr
+         f9bxNiUTS3ai4ofShjSend40/UXR7mRKHdkb6w0WLiZacP5tMWakSaHTWL1hKrc2kWbh
+         Ogq6nHRqgwD5ONaTUaBmtic+lj8gwS43kgqF154wq5zmJ+6zFXQXXj/0pRDAk7AIVWA1
+         thtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791866436; x=1792471236;
+        d=1e100.net; s=20260707; t=1791866443; x=1792471243;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2NjEwcz1evegYdskFb76XdF6DQwohpaVPIJPmv8IdZU=;
-        b=SWq52Ak4fnEAeE/XHb7hnAfKB6DIl+CZ7Rf88duFKZV2gEE5/OlQa23fHHPzOBHou9
-         E69dgcyWDfutTvFL3+sV9i1O1jt0mIm47yXHOrzyJsoqtBZ4Q96CXukdU5P0gn9vU4Zr
-         wTrmhvs2ty0ZtqQ6SU/Qe+KBgavymVXVvTJy+KLnVvsZpgGMldsMwugNbBK/Epl7RGC7
-         FUA8f08sev7hg88b59G2m9Vbvp1PfYGmRYz6JKHk2AhyvvCcJgGywHAAn9FGelA61nNg
-         V/OL23qWds8ssldCbg1tdkDvB9UFK5B46RLaI5vpcB1ZwnIZTJTWWNbs3ZJkkHBuiAJz
-         PVlA==
-X-Gm-Message-State: AFq9FYLGsQox+C6kCiomv1QEJIktAKBQK+BAeQOSP/zOyacP92hSseL9
-	uR6sMhJbO2RwFsVfHSvW3emEa4/ejUPHQWRgqh1TvSC7ZkQtBH1gxIb8ZJWpRg==
-X-Gm-Gg: AYBFou1CjWeqTQ6LrJ51IxAGPtJ3+R4q3vXGDMgercsZJUQ8wkUr5B78lW9gvW5b7hx
-	xCf8l/R8nSqH5BZDJ5viD2EHmbSxXit9lDj8/Gtf+BJJ2iDmALZ5mJCU2zF2hNJIRi6Q+MCpYlw
-	yY+sU5cAHTEwiZ6hryLy9hrSvRs/Z0tBRJo8V/u4J3wnBNP3TTr5wK7fhvyPKS8ME/CxA65G5vs
-	KR6hYiTwTl5aZO7kzHPdI7mQROd5Ve+qsJmJwJjHuxV923+nvoOwic4cosznx7Fbujk3H4L4ALR
-	vV8w3PIrNB9I8yT9B6TwA+oglDNU7BoV5wj2Aco3VUrRKcKMGFAuQx98KGlbgvRd5oQazo8QwJt
-	gnZNyD9Md4EfywTRBU420QEcq/jAl9e+nATI7CwrNC/WuHjGtmiobaIEorn47L+ofZJGrg06/Ma
-	Ro7v/4g8dfVORJ3f2lDpyCND9xK4e/Cvw9H/kfrJvMDgb+zX5vlwwxhId/JCQnqE+3P4yNgh+rb
-	tVe2y+eMRJhpKqYmFr/VSe+hJB423k5IcwD6fQ=
-X-Received: by 2002:a17:90b:5486:b0:39e:6a7f:1dcd with SMTP id 98e67ed59e1d1-3ab3ab1d56cmr10251925a91.41.1791866435816;
-        Mon, 12 Oct 2026 21:40:35 -0700 (PDT)
+        bh=RqoBVTvuWIA3oRwlp4pXxdSlrh9dq7DOjEbbCIaPUvY=;
+        b=IZHRfsjYxiNuJZI4C2MtqDOovUfKje25NjlUj53RIi9gs73ehlWWuxIIiNoV7lWrMr
+         MK6QPp9DgZ56zrtqf8qbmcg3gxiU/O8QZg2x0U1kk0Qix+ZpeaUGTXlSkbjLopfXpQQU
+         lqz9nmMAm1u08IKEdRw9CHTQqcKcHEgJmq9U2PFIRALybYORADDW0E7Yafs6a/+HalFY
+         VgQHnPvzHZpRfZPVPjKwUWTznnMhZFSXc28y7PX1DRJMpmE56uEfh1vAKBQaQFcjbFoh
+         TcDfdifC6lvu1mlcQeBSsKdQo0wM/8XnDBhM1jIhLn8Gk1iStNgHmRA0ft5v4+ZIHqBl
+         Leew==
+X-Gm-Message-State: AFq9FYJEA0yApzuUcZ/yVSIEcMUekJ977XzCbUOpdJjoZrFGsREUHt+6
+	bJX51Lg8Lwy3Nsr86GNSj8OVIxblGBPqlKjZfdFuXZB/PpyZRNQAjpkCm97nBA==
+X-Gm-Gg: AYBFou38QvpHz7HhcE/P2Cl4eWh8KqtGO1mYM9vXWLUvjzBuVHxYD/6JjvcLo0568mh
+	/2JfwAxZgM1EQqYtN1LIll686myuQ4KhwwmOgClg75T5X8hj3/U6L7nOI9EQSAbLnOSElUkTPsY
+	1jMWgndF8VrAl31wmg12m3724AxavayFVctSZOyTbqn0bUUKF+hYqGkMWQ7LR0VRw8jvXouGBXx
+	7P2920QyzYbpES5zWGIb9djX9o7b/eAM9ZCKGuMqmtGmcQ9T7jvrIyGEOPRZAETRLSMcMrcbNnh
+	dU+NDheRX7wTqFKuo9/EQ/1AD8pvTolXZOZGoMBkANOFvflswVdSV2X6BNLBlTG6x6SbZ4KDBtV
+	TsnoQE1homUgoSUtI0SOjZrHz0vYFLzSYMG3z5YYIHl9c9yDa5swnPjz79+9wHwAiNUKCwJ7q4K
+	YPPvgEJvHFYgALMPWMdy6bRt+/Tepqzsy1SiQWd5RrOccKf87wkp5w7naCvqkVu71etNM/EO4Be
+	ZrQ6hU7brA4gFjNV27FgzPd4JM/SZRvRj5j+DdNXw==
+X-Received: by 2002:a17:90b:5444:b0:3a7:82ef:bcdd with SMTP id 98e67ed59e1d1-3ab3ab22794mr9089262a91.41.1791866442486;
+        Mon, 12 Oct 2026 21:40:42 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.33
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 21:40:35 -0700 (PDT)
+        Mon, 12 Oct 2026 21:40:41 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-networking][PATCH 7/16] sngrep: patch CVE-2026-90558
-Date: Tue, 13 Oct 2026 17:39:57 +1300
-Message-ID: <20261013044006.834868-7-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 9/16] tesseract: patch CVE-2026-88052
+Date: Tue, 13 Oct 2026 17:39:59 +1300
+Message-ID: <20261013044006.834868-9-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
 References: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
@@ -68,127 +68,209 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 04:40:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130821
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 04:40:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130823
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-90558
+https://nvd.nist.gov/vuln/detail/cve-2026-88052
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 36ddee53b179b5108186cc3e8d76c0f6a5e5d069)
+(cherry picked from commit 251dd7f80d1fc19515e162f5afd1eb889839bbaf)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../sngrep/sngrep/CVE-2026-90558.patch        | 84 +++++++++++++++++++
- .../recipes-support/sngrep/sngrep_1.8.4.bb    |  4 +-
- 2 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/sngrep/sngrep/CVE-2026-90558.patch
+ .../tesseract/tesseract/CVE-2026-88052.patch  | 165 ++++++++++++++++++
+ .../tesseract/tesseract_5.5.3.bb              |   5 +-
+ 2 files changed, 168 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
 
-diff --git a/meta-networking/recipes-support/sngrep/sngrep/CVE-2026-90558.patch b/meta-networking/recipes-support/sngrep/sngrep/CVE-2026-90558.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
 new file mode 100644
-index 0000000000..64fd8044a9
+index 0000000000..e55968135a
 --- /dev/null
-+++ b/meta-networking/recipes-support/sngrep/sngrep/CVE-2026-90558.patch
-@@ -0,0 +1,84 @@
-+From 399346a12ca3bcf7703734fa33b5b3427775b014 Mon Sep 17 00:00:00 2001
-+From: Kaian <kaian@irontec.com>
-+Date: Fri, 7 Aug 2026 08:45:42 +0200
-+Subject: [PATCH] fix: prevent stack buffer overflow in SIP attribute
-+ formatting
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
+@@ -0,0 +1,165 @@
++From c60ad589ff3a645a3fdf13cb24fe719313145a06 Mon Sep 17 00:00:00 2001
++From: Stefan Weil <sw@weilnetz.de>
++Date: Fri, 21 Aug 2026 18:34:33 +0200
++Subject: [PATCH] Reject unicharset files whose inserts desync id from unichars
 +
-+call_get_attribute() formatted the Call-ID, X-Call-ID and Reason header
-+text with an unbounded sprintf("%s"). Call-ID/X-Call-ID can hold up to
-+MAX_CALLID_SIZE/MAX_XCALLID_SIZE (1023 bytes) and Reason text is copied
-+from the raw payload (up to MAX_SIP_PAYLOAD), while all callers pass a
-+255-byte SIP_ATTR_MAXLEN stack buffer (call list rendering, sort compare).
-+A SIP message with a long Call-ID, X-Call-ID or Reason header overflowed
-+the stack, triggerable via pcap, live capture or HEP/EEP remote capture.
++UNICHARSET::load_via_fgets reads the unichar count via sscanf and
++trusts it as the loop bound, indexing the unichars vector with the
++loop index id via the unchecked set_* accessors. unichar_insert is a
++no-op for duplicate (or empty) representations, so once any insert
++no-ops, unichars.size() falls behind id and the subsequent
++set_*(id, ...) and unichars[id].properties writes land past the end
++of the vector - a deterministic heap out-of-bounds write (including a
++std::string assignment via set_normed) for every remaining line, on
++both the LSTM and legacy init paths. A malformed unicharset with a
++duplicate line (e.g. two identical entries) triggers it; a
++non-positive header count likewise loads an empty unicharset
++"successfully".
 +
-+Bound these writes with "%.*s" and SIP_ATTR_MAXLEN - 1. Also fix a
-+matching off-by-one in msg_get_attribute(), where the existing "%.*s"
-+used SIP_ATTR_MAXLEN as the precision and could write 256 bytes
-+(255 chars + NUL) into the 255-byte buffer.
++Key changes:
++- unicharset.cpp: reject unicharset_size <= 0, and after each insert
++  verify the vector actually grew to id + 1; on mismatch report the
++  offending line and reject the file instead of writing out of bounds.
++- unittest: add unicharset_load_test with a duplicate-representation
++  unicharset (on unpatched code the test dies on the
++  container-overflow in load_via_fgets), a zero and a negative count,
++  and a positive control that a valid unicharset still loads.
 +
-+Thanks to TristanInSec for reporting the issue.
++Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
++Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
++Signed-off-by: Stefan Weil <sw@weilnetz.de>
++(cherry picked from commit 2d04d640db2e8c7e3bab2369d599343b5a8b8443)
 +
-+(cherry picked from commit 1ff74ee3ab5ff280e8ba976aa8c744dca57eb35b)
-+
-+CVE: CVE-2026-90558
-+Upstream-Status: Backport [https://github.com/irontec/sngrep/commit/1ff74ee3ab5ff280e8ba976aa8c744dca57eb35b]
-+
-+SIP contract change was dropped during backport as it was introduced in
-+v1.8.4[1]
-+
-+[1]https://github.com/irontec/sngrep/commit/c61a26d90c166f996e31aceefc9c2f8f831ccd86
-+
++CVE: CVE-2026-88052
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/2d04d640db2e8c7e3bab2369d599343b5a8b8443]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/sip_call.c | 6 +++---
-+ src/sip_msg.c  | 6 +++---
-+ 2 files changed, 6 insertions(+), 6 deletions(-)
++ Makefile.am                      |  5 +++
++ src/ccutil/unicharset.cpp        | 12 ++++++
++ unittest/unicharset_load_test.cc | 64 ++++++++++++++++++++++++++++++++
++ 3 files changed, 81 insertions(+)
++ create mode 100644 unittest/unicharset_load_test.cc
 +
-+diff --git a/src/sip_call.c b/src/sip_call.c
-+index bea879a..68ecb50 100644
-+--- a/src/sip_call.c
-++++ b/src/sip_call.c
-+@@ -257,10 +257,10 @@ call_get_attribute(sip_call_t *call, enum sip_attr_id id, char *value)
-+             sprintf(value, "%d", call->index);
-+             break;
-+         case SIP_ATTR_CALLID:
-+-            sprintf(value, "%s", call->callid);
-++            sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, call->callid);
-+             break;
-+         case SIP_ATTR_XCALLID:
-+-            sprintf(value, "%s", call->xcallid);
-++            sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, call->xcallid);
-+             break;
-+         case SIP_ATTR_MSGCNT:
-+             sprintf(value, "%d", vector_count(call->msgs));
-+@@ -282,7 +282,7 @@ call_get_attribute(sip_call_t *call, enum sip_attr_id id, char *value)
-+             break;
-+         case SIP_ATTR_REASON_TXT:
-+             if (call->reasontxt)
-+-                sprintf(value, "%s", call->reasontxt);
-++                sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, call->reasontxt);
-+             break;
-+         case SIP_ATTR_WARNING:
-+             if (call->warning)
-+diff --git a/src/sip_msg.c b/src/sip_msg.c
-+index 379a40a..6762862 100644
-+--- a/src/sip_msg.c
-++++ b/src/sip_msg.c
-+@@ -136,13 +136,13 @@ msg_get_attribute(sip_msg_t *msg, int id, char *value)
-+             }
-+             break;
-+         case SIP_ATTR_METHOD:
-+-            sprintf(value, "%.*s", SIP_ATTR_MAXLEN, sip_get_msg_reqresp_str(msg));
-++            sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, sip_get_msg_reqresp_str(msg));
-+             break;
-+         case SIP_ATTR_SIPFROM:
-+-            sprintf(value, "%.*s", SIP_ATTR_MAXLEN, msg->sip_from);
-++            sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, msg->sip_from);
-+             break;
-+         case SIP_ATTR_SIPTO:
-+-            sprintf(value, "%.*s", SIP_ATTR_MAXLEN, msg->sip_to);
-++            sprintf(value, "%.*s", SIP_ATTR_MAXLEN - 1, msg->sip_to);
-+             break;
-+         case SIP_ATTR_SIPFROMUSER:
-+             if (msg->sip_from && (ar = strchr(msg->sip_from, '@'))) {
-diff --git a/meta-networking/recipes-support/sngrep/sngrep_1.8.4.bb b/meta-networking/recipes-support/sngrep/sngrep_1.8.4.bb
-index 5bb30da6db..c7457fd0c0 100644
---- a/meta-networking/recipes-support/sngrep/sngrep_1.8.4.bb
-+++ b/meta-networking/recipes-support/sngrep/sngrep_1.8.4.bb
-@@ -15,7 +15,9 @@ DEPENDS = "\
-     ncurses \
- "
++diff --git a/Makefile.am b/Makefile.am
++index bec9ab0e..22c2c7a0 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -1220,6 +1220,7 @@ check_PROGRAMS += tfile_test
++ if ENABLE_TRAINING
++ check_PROGRAMS += unichar_test
++ check_PROGRAMS += unicharcompress_test
+++check_PROGRAMS += unicharset_load_test
++ check_PROGRAMS += unicharset_test
++ check_PROGRAMS += validate_grapheme_test
++ check_PROGRAMS += validate_indic_test
++@@ -1493,6 +1494,10 @@ unicharcompress_test_SOURCES = unittest/unicharcompress_test.cc
++ unicharcompress_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ unicharcompress_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
++ 
+++unicharset_load_test_SOURCES = unittest/unicharset_load_test.cc
+++unicharset_load_test_CPPFLAGS = $(unittest_CPPFLAGS)
+++unicharset_load_test_LDADD = $(TESS_LIBS)
+++
++ unicharset_test_SOURCES = unittest/unicharset_test.cc
++ unicharset_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ unicharset_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
++diff --git a/src/ccutil/unicharset.cpp b/src/ccutil/unicharset.cpp
++index b29ec3b7..0e72ae48 100644
++--- a/src/ccutil/unicharset.cpp
+++++ b/src/ccutil/unicharset.cpp
++@@ -791,6 +791,9 @@ bool UNICHARSET::load_via_fgets(
++       sscanf(buffer, "%d", &unicharset_size) != 1) {
++     return false;
++   }
+++  if (unicharset_size <= 0) {
+++    return false;
+++  }
++   for (UNICHAR_ID id = 0; id < unicharset_size; ++id) {
++     char unichar[256];
++     unsigned int properties;
++@@ -884,6 +887,15 @@ bool UNICHARSET::load_via_fgets(
++     } else {
++       this->unichar_insert_backwards_compatible(unichar);
++     }
+++    // A duplicate or empty representation makes the insert a no-op,
+++    // desynchronizing id from the unichars vector; the set_* calls and
+++    // unichars[id] below would then write out of bounds. The file is
+++    // malformed, so reject it.
+++    if (size() != static_cast<size_t>(id) + 1) {
+++      fprintf(stderr, "%s:%d unichar %d has a duplicate or empty representation\n",
+++              __FILE__, __LINE__, id);
+++      return false;
+++    }
++ 
++     this->set_isalpha(id, properties & ISALPHA_MASK);
++     this->set_islower(id, properties & ISLOWER_MASK);
++diff --git a/unittest/unicharset_load_test.cc b/unittest/unicharset_load_test.cc
++new file mode 100644
++index 00000000..d775e233
++--- /dev/null
+++++ b/unittest/unicharset_load_test.cc
++@@ -0,0 +1,64 @@
+++///////////////////////////////////////////////////////////////////////
+++// File:        unicharset_load_test.cc
+++// Description: Tests that UNICHARSET::load_via_fgets rejects unicharset
+++//              files whose insertions desynchronize the id loop index
+++//              from the unichars vector (duplicate or empty
+++//              representations), which would make the subsequent set_*
+++//              calls write out of bounds, and non-positive size counts.
+++//
+++// Licensed under the Apache License, Version 2.0 (the "License");
+++// you may not use this file except in compliance with the License.
+++// You may obtain a copy of the License at
+++// http://www.apache.org/licenses/LICENSE-2.0
+++//
+++///////////////////////////////////////////////////////////////////////
+++
+++#include "include_gunit.h"
+++
+++#include "serialis.h" // for TFile
+++#include "unicharset.h"
+++
+++#include <cstring>
+++
+++namespace tesseract {
+++namespace {
+++
+++// Loads the given unicharset text via the TFile-based loader.
+++bool LoadUnicharset(const char *text, UNICHARSET *unicharset) {
+++  TFile fp;
+++  if (!fp.Open(text, std::strlen(text))) {
+++    return false;
+++  }
+++  return unicharset->load_from_file(&fp, false);
+++}
+++
+++// A duplicate representation makes the second insert a no-op, so on
+++// unpatched code the set_* calls for the remaining lines write past
+++// the end of the unichars vector (ASan container-overflow).
+++TEST(UnicharsetLoadTest, RejectsDuplicateRepresentation) {
+++  const char *text = "3\nA 0 Latin\nA 0 Latin\nB 0 Latin\n";
+++  UNICHARSET unicharset;
+++  EXPECT_FALSE(LoadUnicharset(text, &unicharset));
+++}
+++
+++// A non-positive size count must be rejected; on unpatched code a
+++// zero or negative count loads an empty unicharset successfully.
+++TEST(UnicharsetLoadTest, RejectsNonPositiveCount) {
+++  const char *texts[] = {"0\n", "-1\n"};
+++  for (const char *text : texts) {
+++    UNICHARSET unicharset;
+++    EXPECT_FALSE(LoadUnicharset(text, &unicharset));
+++  }
+++}
+++
+++// A valid unicharset must still be accepted.
+++TEST(UnicharsetLoadTest, AcceptsValidUnicharset) {
+++  const char *text = "3\nA 0 Latin\nB 0 Latin\nC 0 Latin\n";
+++  UNICHARSET unicharset;
+++  ASSERT_TRUE(LoadUnicharset(text, &unicharset));
+++  EXPECT_EQ(unicharset.size(), 3u);
+++  EXPECT_STREQ(unicharset.id_to_unichar(1), "B");
+++}
+++
+++} // namespace
+++} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
+index 0d9b178dc9..81359b761b 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
+@@ -6,8 +6,9 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master;tag=v${PV}"
-+SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master;tag=v${PV} \
-+           file://CVE-2026-90558.patch \
+ SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
+-SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV}"
+-
++SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
++           file://CVE-2026-88052.patch \
 +"
- SRCREV = "9c370866afaf5ccb258bf03848b2d22f30cf61bd"
  
- inherit cmake pkgconfig
+ DEPENDS = "leptonica"
+ 
 
