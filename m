@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDAA0CC6B10
-	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 10:00:19 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3439.1791885612287283224
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDD43CC6B08
+	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 10:00:28 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3442.1791885626963285157
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2026 03:00:12 -0700
+ Tue, 13 Oct 2026 03:00:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YACoJImQ;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-3ab33730821so1524778a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 03:00:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gwMbKof2;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3ab2bf5e75bso1418905a91.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 03:00:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791885612; x=1792490412; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791885626; x=1792490426; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RqoBVTvuWIA3oRwlp4pXxdSlrh9dq7DOjEbbCIaPUvY=;
-        b=YACoJImQMHK+yMjPtgHKSESef7NTU6ooeS30eCmVdgJ+Dd39PocovWLlguBk8fdIE3
-         dzA9QizsyZZWfBce17J5XqYkV72SvlufWcrHOHIssZZhQKxwnCPdUv1xGuhdeFfHPbkQ
-         cCAqYyGJeiXS/hptwbH+GAaDYNinfzMLrqBwNpVTfUN0tcxfdUThysvU9Fzcbtbs9Tgn
-         Gn+213HGOO440QyWyFJ4qdstmlUStj6eX/aysfMRLJK+97V0yQ73HfG6oP/vpm8uXlWC
-         n8a6Dw3jWrs6Rb9OptnOq1bts9nYgWh815uN1lN97QRKZWOPYgJDtWEoAVeqj2z60RXp
-         YJSQ==
+        bh=W2azljDXcg9TEmoasMdOM7wxqWIT/xnZVzzgM+sCy6w=;
+        b=gwMbKof2y/J9QUyAXBaBdeyQbUCZFP7n9Kc3myglCkw/QMjBy80mYbZTK7UKcKDHIf
+         PgUCvqc1lB6109jDcqRbFWeOusikw5sSuLYKiDrKEUEeSrIRil2h8PfdnbeJH49MblF7
+         2f7M25MQbIBk+nvPffs5eQFIFWe8Msnnndn+fN+3SaayWyP4HES1Jmn+Zngn14cxmRcN
+         oah0MF3ywpzMN0zgiA7KHfju9fFJW3HUFQAd5L2DxABFi8x24MOifU7e5rG4jsApfwSp
+         py3/ZsZ0dAsx03rvQBEHPdYD8BSVoUR0TwSGPjxZvGeAUu9lXhUKLb5Vg5MQ+g3pKTha
+         +FJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885612; x=1792490412;
+        d=1e100.net; s=20260707; t=1791885626; x=1792490426;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RqoBVTvuWIA3oRwlp4pXxdSlrh9dq7DOjEbbCIaPUvY=;
-        b=Y/v5DTbLHlx3EHw+ce8skQM9FBn1+zGYlEe8HRhxb/e1IsCxs6yqkXOWNMANKapEYO
-         MsdnMDRiu3izpgrXY638O20cZL836aKAwu8jLDE/9+1CPjl3h28vsVRi/kd9MYf2042u
-         KyykxZldRPfROBITEu31TIeTLUbdA1fXWevySLSOJkmBmGqofFuH4I/LD5K88O1iQFYk
-         1QCgPF28Gjc8bWYgCxvzw+DQFrV0SNvA3bYnfl2q9gXAo7Afaj1qi2Z+EGEKvFRqYsz2
-         Y9hRwroQVGxrxyZXR1taXwy+HO50uji2JDZy/9KlLbX7v/skZ5nOwzPFW1wE/t0C4PFJ
-         lnGA==
-X-Gm-Message-State: AFq9FYIWtt5ZWLhau3UafLckiffM6bfQTD9bEGVJoki7q/9ZDwCJ1rXh
-	Q4fHCGZV9VS3j49SIPjDmpiam9uOsdwiJd+ip9TvKksuKlbRDqQ0f3sHJDtcvg==
-X-Gm-Gg: AYBFou0RC/qOxfx6SmnxbPQxUSEYXpaUUbFh1WY1fJFHy/YifZXvOAUIZkLjc5dBQHh
-	f9L8u+WL+oH5w0j8C6QmobnqmtBks5pQFM8LDLsFCwR0xeO6vQO/Trdr/9khZbWry7ktM8AvC4+
-	tlZseP1FCUc5JnQW7Eii2kIfdG3dfInTb9oAvT+ILMbaSxOVgQfdpo7TuPTteOz238rLynBTJW1
-	jgnhSA8GEaMHxUEk/f4I0jkmtkJXyHuu0/sfKocqux7FNe9p7/XMmkR2O/u4pmIaMyO3TagcZoI
-	t3tm1ofFY/DlnJTlofciRsJH+Cpljafzt1cwlivTIpXGpuYdiiuSlhslMi+7VRfZia8ozfqNoTx
-	BSEKaYTMoVqLaAE06Ad4wXr+vb6jo9pAFSc9/EtRR9rCxxmJh+OHUdo4xP58PF632qSZi+ZbS6n
-	UCvvPW5rkQmdqeG5GAZS/s+bZJU125zXuvdFbXx3GOOsdmi5Sk4vcXRkiBk1bSLRn0QouyUhqHz
-	EYcgqRwrhWR2JkA1beqcWX9JTxh/d3pmS+XTpc=
-X-Received: by 2002:a17:90b:4fcb:b0:3a6:dc2f:f07f with SMTP id 98e67ed59e1d1-3ab3a609f14mr10005233a91.10.1791885611288;
-        Tue, 13 Oct 2026 03:00:11 -0700 (PDT)
+        bh=W2azljDXcg9TEmoasMdOM7wxqWIT/xnZVzzgM+sCy6w=;
+        b=dPXd7GVSIP3403ELLrTbhhNMRp1Q5BtPPMxSfwBzpjaJ++oX3tTLDWfrV6IUWQjqE0
+         kJlUZaW/jdZHs7gj/FVvMUiXiurfLiL3KPC/5h4u47m9BxiICjJJrQYzJIrbdW9uJZYV
+         mhAm4O39D5FQfGzaz/lZ+TzFDWFP4cAY0qxtZoIFJUXnFojH1Q9OVGbC5ctSIYgbe5NI
+         bpAx/nR2MuZ9+B7tYuJvEvaKgxB7Oo3BPeCw4R1cUH/2SQSOY/zW0Y438LUdY6+M+jNj
+         q6ul66ZdLigosV3GG/NvLIYWfVU59KbLsda70TqFzHxF5WVTf/m+elrieNlfy/9vL0g3
+         MbVA==
+X-Gm-Message-State: AFq9FYITXu1NX2F9Vkmo7XQFempNOQq041417BgEmE/7rGDcbO6EzlIF
+	+6KvIxwafrSsIOeHYNtOWrm81faMxkK32TBwCKw18txJi8iGubmVmtQMbzsAeQ==
+X-Gm-Gg: AYBFou0Hgje3ab25KARHjQpt5HNDq72f4/fRy0dVHhi710UdCZXct8YvSFwX/xGDhZk
+	Mxjf+az9YsMstXMXTa3OjTydzSw1BLacZWr4wkjbTS2CmtJLqqhsQAahbgGwDjBx3mGiQyDUI3c
+	hzhBKPx6f9usCD79LnV8FXQrinbR0Nlz5CsIIwB8qWxziRE2EIEz7j64hSYB2K65o/G1NfuOyXx
+	Wa32+d9V4zfFny9ziWdiI4peWwXMYDI5bsktJtLwPOGUPZgh8hTMThJUoegBgVKznesyngrhjIf
+	1KGzZgEtGfV1bD+/FqA7cANeOLWgj+txZgFeIcpIjTTHRePIXR1sMARG0D6ZL8XGITzfRoZAOXr
+	HU2lCE5k4MB8u5IUnxTV3pSvtC95a+v8oWdb6PZhB7v0B8WVecOsKg0OmgrOMdpJlFIaDtZdz1r
+	1Dud8ckOJQsX/Yh9iMRrA83WldU4NMfDIehOGEeVln/AHyi4f01zJFiB0GKka/P80/7rAlN3w2n
+	V72NhPyIN/ESH0aVlTZjZkUl/SuQAbY0r9tz6X5BefUdh/6Vg==
+X-Received: by 2002:a17:90b:134c:b0:3a8:92a3:8baa with SMTP id 98e67ed59e1d1-3ab3a953bd3mr9926494a91.27.1791885625797;
+        Tue, 13 Oct 2026 03:00:25 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.03.00.08
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.03.00.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 03:00:10 -0700 (PDT)
+        Tue, 13 Oct 2026 03:00:25 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-oe][blacksail][PATCH 21/28] tesseract: patch CVE-2026-88052
-Date: Tue, 13 Oct 2026 22:58:56 +1300
-Message-ID: <20261013095903.3544906-21-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][blacksail][PATCH 25/28] tesseract: patch CVE-2026-88047
+Date: Tue, 13 Oct 2026 22:59:00 +1300
+Message-ID: <20261013095903.3544906-25-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
 References: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
@@ -68,138 +68,153 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 10:00:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130854
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 10:00:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130858
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-88052
+https://nvd.nist.gov/vuln/detail/cve-2026-88047
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 251dd7f80d1fc19515e162f5afd1eb889839bbaf)
+(cherry picked from commit b8fa7aac9168b6ebfdcc2ea3493c332f0db69491)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tesseract/tesseract/CVE-2026-88052.patch  | 165 ++++++++++++++++++
- .../tesseract/tesseract_5.5.3.bb              |   5 +-
- 2 files changed, 168 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
+ .../tesseract/tesseract/CVE-2026-88047.patch  | 225 ++++++++++++++++++
+ .../tesseract/tesseract_5.5.3.bb              |   1 +
+ 2 files changed, 226 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
 new file mode 100644
-index 0000000000..e55968135a
+index 0000000000..780f686e61
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
-@@ -0,0 +1,165 @@
-+From c60ad589ff3a645a3fdf13cb24fe719313145a06 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
+@@ -0,0 +1,225 @@
++From e974684acbe3aeb6bc6192b06a048537c345b713 Mon Sep 17 00:00:00 2001
 +From: Stefan Weil <sw@weilnetz.de>
-+Date: Fri, 21 Aug 2026 18:34:33 +0200
-+Subject: [PATCH] Reject unicharset files whose inserts desync id from unichars
++Date: Mon, 24 Aug 2026 13:39:22 +0200
++Subject: [PATCH] Limit unichar extraction in ReadNormProtos to the buffer size
 +
-+UNICHARSET::load_via_fgets reads the unichar count via sscanf and
-+trusts it as the loop bound, indexing the unichars vector with the
-+loop index id via the unchecked set_* accessors. unichar_insert is a
-+no-op for duplicate (or empty) representations, so once any insert
-+no-ops, unichars.size() falls behind id and the subsequent
-+set_*(id, ...) and unichars[id].properties writes land past the end
-+of the vector - a deterministic heap out-of-bounds write (including a
-+std::string assignment via set_normed) for every remaining line, on
-+both the LSTM and legacy init paths. A malformed unicharset with a
-+duplicate line (e.g. two identical entries) triggers it; a
-+non-positive header count likewise loads an empty unicharset
-+"successfully".
++Classify::ReadNormProtos parsed each normproto line with
++`stream >> unichar >> NumProtos` into a char unichar[2 * UNICHAR_LEN + 1]
++stack buffer, but char* extraction from an istream has no length limit
++(the stream width was never set). A crafted TESSDATA_NORMPROTO component
++in a .traineddata file whose first proto-line token exceeds 60
++characters (the 100-byte line buffer allows up to 99) overflows the
++stack buffer during legacy engine initialization (CWE-121).
++
++Toolchain note: Apple's libc++ provides a C++20 array overload of
++operator>>(basic_istream&, char(&)[N]) that implicitly bounds the
++extraction to the array size, so builds against that standard library
++are incidentally protected. Standard libraries without that overload
++(e.g. libstdc++) still take the unbounded char* overload, so the
++explicit width limit below makes the behavior defined on all
++toolchains.
 +
 +Key changes:
-+- unicharset.cpp: reject unicharset_size <= 0, and after each insert
-+  verify the vector actually grew to id + 1; on mismatch report the
-+  offending line and reject the file instead of writing out of bounds.
-+- unittest: add unicharset_load_test with a duplicate-representation
-+  unicharset (on unpatched code the test dies on the
-+  container-overflow in load_via_fgets), a zero and a negative count,
-+  and a positive control that a valid unicharset still loads.
++- normmatch.cpp: read the unichar token with
++  std::setw(2 * UNICHAR_LEN + 1); char* extraction takes at most
++  width - 1 characters, which fits the buffer exactly. Overlong
++  tokens are truncated and the line is rejected like any other
++  unparseable line.
++- unittest: add normproto_test covering a 99-character token (the
++  maximum a 100-byte line can hold), a token of exactly 2 *
++  UNICHAR_LEN characters, and a well-formed component. A minimal
++  reproduction of the unbounded extraction crashes an ASan build
++  with a stack-buffer-overflow.
 +
-+Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
++Reported-by: Tristan Madani <tristan@talencesecurity.com>
 +Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
 +Signed-off-by: Stefan Weil <sw@weilnetz.de>
-+(cherry picked from commit 2d04d640db2e8c7e3bab2369d599343b5a8b8443)
++(cherry picked from commit 1bda5079b1c8a7e25f523486837426903d29ce84)
 +
-+CVE: CVE-2026-88052
-+Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/2d04d640db2e8c7e3bab2369d599343b5a8b8443]
++CVE: CVE-2026-88047
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/1bda5079b1c8a7e25f523486837426903d29ce84]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ Makefile.am                      |  5 +++
-+ src/ccutil/unicharset.cpp        | 12 ++++++
-+ unittest/unicharset_load_test.cc | 64 ++++++++++++++++++++++++++++++++
-+ 3 files changed, 81 insertions(+)
-+ create mode 100644 unittest/unicharset_load_test.cc
++ Makefile.am                |   5 ++
++ src/classify/normmatch.cpp |   6 +-
++ unittest/CMakeLists.txt    |   1 +
++ unittest/normproto_test.cc | 111 +++++++++++++++++++++++++++++++++++++
++ 4 files changed, 122 insertions(+), 1 deletion(-)
++ create mode 100644 unittest/normproto_test.cc
 +
 +diff --git a/Makefile.am b/Makefile.am
-+index bec9ab0e..22c2c7a0 100644
++index 63ca6686..cc748455 100644
 +--- a/Makefile.am
 ++++ b/Makefile.am
-+@@ -1220,6 +1220,7 @@ check_PROGRAMS += tfile_test
++@@ -1184,6 +1184,7 @@ check_PROGRAMS += mastertrainer_test
++ endif # !DISABLED_LEGACY_ENGINE
++ check_PROGRAMS += matrix_test
++ check_PROGRAMS += networkio_test
+++check_PROGRAMS += normproto_test
 + if ENABLE_TRAINING
-+ check_PROGRAMS += unichar_test
-+ check_PROGRAMS += unicharcompress_test
-++check_PROGRAMS += unicharset_load_test
-+ check_PROGRAMS += unicharset_test
-+ check_PROGRAMS += validate_grapheme_test
-+ check_PROGRAMS += validate_indic_test
-+@@ -1493,6 +1494,10 @@ unicharcompress_test_SOURCES = unittest/unicharcompress_test.cc
-+ unicharcompress_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ unicharcompress_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
++ check_PROGRAMS += normstrngs_test
++ endif # ENABLE_TRAINING
++@@ -1388,6 +1389,10 @@ networkio_test_SOURCES = unittest/networkio_test.cc
++ networkio_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ networkio_test_LDADD = $(TESS_LIBS)
 + 
-++unicharset_load_test_SOURCES = unittest/unicharset_load_test.cc
-++unicharset_load_test_CPPFLAGS = $(unittest_CPPFLAGS)
-++unicharset_load_test_LDADD = $(TESS_LIBS)
+++normproto_test_SOURCES = unittest/normproto_test.cc
+++normproto_test_CPPFLAGS = $(unittest_CPPFLAGS)
+++normproto_test_LDADD = $(TESS_LIBS)
 ++
-+ unicharset_test_SOURCES = unittest/unicharset_test.cc
-+ unicharset_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ unicharset_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
-+diff --git a/src/ccutil/unicharset.cpp b/src/ccutil/unicharset.cpp
-+index b29ec3b7..0e72ae48 100644
-+--- a/src/ccutil/unicharset.cpp
-++++ b/src/ccutil/unicharset.cpp
-+@@ -791,6 +791,9 @@ bool UNICHARSET::load_via_fgets(
-+       sscanf(buffer, "%d", &unicharset_size) != 1) {
-+     return false;
-+   }
-++  if (unicharset_size <= 0) {
-++    return false;
-++  }
-+   for (UNICHAR_ID id = 0; id < unicharset_size; ++id) {
-+     char unichar[256];
-+     unsigned int properties;
-+@@ -884,6 +887,15 @@ bool UNICHARSET::load_via_fgets(
-+     } else {
-+       this->unichar_insert_backwards_compatible(unichar);
-+     }
-++    // A duplicate or empty representation makes the insert a no-op,
-++    // desynchronizing id from the unichars vector; the set_* calls and
-++    // unichars[id] below would then write out of bounds. The file is
-++    // malformed, so reject it.
-++    if (size() != static_cast<size_t>(id) + 1) {
-++      fprintf(stderr, "%s:%d unichar %d has a duplicate or empty representation\n",
-++              __FILE__, __LINE__, id);
-++      return false;
-++    }
++ normstrngs_test_SOURCES = unittest/normstrngs_test.cc
++ normstrngs_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ normstrngs_test_LDADD = $(TRAINING_LIBS) $(ICU_I18N_LIBS) $(ICU_UC_LIBS)
++diff --git a/src/classify/normmatch.cpp b/src/classify/normmatch.cpp
++index d5bd7e6a..1ce7c928 100644
++--- a/src/classify/normmatch.cpp
+++++ b/src/classify/normmatch.cpp
++@@ -28,6 +28,7 @@
 + 
-+     this->set_isalpha(id, properties & ISALPHA_MASK);
-+     this->set_islower(id, properties & ISLOWER_MASK);
-+diff --git a/unittest/unicharset_load_test.cc b/unittest/unicharset_load_test.cc
++ #include <cmath>
++ #include <cstdio>
+++#include <iomanip> // for std::setw
++ #include <sstream> // for std::istringstream
++ 
++ namespace tesseract {
++@@ -190,7 +191,10 @@ NORM_PROTOS *Classify::ReadNormProtos(TFile *fp) {
++   while (fp->FGets(line, kMaxLineSize) != nullptr) {
++     std::istringstream stream(line);
++     stream.imbue(std::locale::classic());
++-    stream >> unichar >> NumProtos;
+++    // unichar holds at most 2 * UNICHAR_LEN characters; the width limit
+++    // (width - 1 characters for char* extraction) keeps the extraction
+++    // from overflowing the buffer on overlong lines.
+++    stream >> std::setw(2 * UNICHAR_LEN + 1) >> unichar >> NumProtos;
++     if (stream.fail()) {
++       continue;
++     }
++diff --git a/unittest/CMakeLists.txt b/unittest/CMakeLists.txt
++index a660c9b1..4c677a60 100644
++--- a/unittest/CMakeLists.txt
+++++ b/unittest/CMakeLists.txt
++@@ -59,6 +59,7 @@ set(LEGACY_TESTS
++     indexmapbidi_test.cc
++     intfeaturemap_test.cc
++     mastertrainer_test.cc
+++    normproto_test.cc
++     osd_test.cc
++     params_model_test.cc
++     shapetable_test.cc
++diff --git a/unittest/normproto_test.cc b/unittest/normproto_test.cc
 +new file mode 100644
-+index 00000000..d775e233
++index 00000000..574b2f3d
 +--- /dev/null
-++++ b/unittest/unicharset_load_test.cc
-+@@ -0,0 +1,64 @@
+++++ b/unittest/normproto_test.cc
++@@ -0,0 +1,111 @@
 ++///////////////////////////////////////////////////////////////////////
-++// File:        unicharset_load_test.cc
-++// Description: Tests that UNICHARSET::load_via_fgets rejects unicharset
-++//              files whose insertions desynchronize the id loop index
-++//              from the unichars vector (duplicate or empty
-++//              representations), which would make the subsequent set_*
-++//              calls write out of bounds, and non-positive size counts.
+++// File:        normproto_test.cc
+++// Description: Tests that Classify::ReadNormProtos handles a normproto
+++//              line whose first (unichar) token exceeds the
+++//              unichar[2 * UNICHAR_LEN + 1] stack buffer. The
+++//              istream extraction has no intrinsic length limit, so a
+++//              crafted NORMPROTO component in a .traineddata file
+++//              could overflow the stack buffer during legacy engine
+++//              initialization.
 ++//
 ++// Licensed under the Apache License, Version 2.0 (the "License");
 ++// you may not use this file except in compliance with the License.
@@ -210,67 +225,108 @@ index 0000000000..e55968135a
 ++
 ++#include "include_gunit.h"
 ++
+++#include "classify.h"
 ++#include "serialis.h" // for TFile
-++#include "unicharset.h"
 ++
-++#include <cstring>
+++#include <cstdio>
+++#include <cstdlib>
+++#include <string>
+++#include <vector>
 ++
 ++namespace tesseract {
 ++namespace {
 ++
-++// Loads the given unicharset text via the TFile-based loader.
-++bool LoadUnicharset(const char *text, UNICHARSET *unicharset) {
+++// Minimal unicharset (space and 'a').
+++const char kMinUnicharset[] =
+++    "2\n"
+++    "NULL 1 0,255,0,255,0,0,0,0,0,0 Latin 2 0 2\n"
+++    "a 1 0,255,0,255,0,0,0,0,0,0 Latin 2 0 2\n";
+++
+++// Builds a normproto component: a sample-size line (5), five parameter
+++// description lines, then the given raw proto lines.
+++std::vector<char> MakeNormproto(const std::string &lines) {
+++  std::string data = "5\n";
+++  for (int i = 0; i < 5; ++i) {
+++    data += "e e 0 1\n";
+++  }
+++  data += lines;
+++  return std::vector<char>(data.begin(), data.end());
+++}
+++
+++class NormprotoTest : public testing::Test {
+++protected:
+++  void SetUp() override {
+++    tmpl_ = "/tmp/tess_normproto_test_XXXXXX";
+++    char *dir = mkdtemp(tmpl_.data());
+++    ASSERT_NE(dir, nullptr);
+++    dir_ = dir;
+++    std::string uc_path = dir_ + "/eng.unicharset";
+++    FILE *f = fopen(uc_path.c_str(), "w");
+++    ASSERT_NE(f, nullptr);
+++    ASSERT_EQ(fwrite(kMinUnicharset, 1, sizeof(kMinUnicharset) - 1, f),
+++              sizeof(kMinUnicharset) - 1);
+++    fclose(f);
+++    // Load the minimal unicharset into the classifier's inherited
+++    // unicharset member.
+++    ASSERT_TRUE(classifier_.unicharset.load_from_file(uc_path.c_str()));
+++  }
+++  void TearDown() override {
+++    std::remove((dir_ + "/eng.unicharset").c_str());
+++    rmdir(dir_.c_str());
+++  }
+++  std::string dir_;
+++  std::string tmpl_;
+++  Classify classifier_;
+++};
+++
+++// A 99-character first token (the maximum FGets can return) overflows
+++// unichar[2 * UNICHAR_LEN + 1] on unpatched code; the width-limited
+++// extraction must reject the line instead.
+++TEST_F(NormprotoTest, ToleratesOverlongUnicharToken) {
+++  std::vector<char> bytes = MakeNormproto(std::string(99, 'A') + "\n");
 ++  TFile fp;
-++  if (!fp.Open(text, std::strlen(text))) {
-++    return false;
-++  }
-++  return unicharset->load_from_file(&fp, false);
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+++  ASSERT_NE(classifier_.NormProtos, nullptr);
+++  classifier_.FreeNormProtos();
+++  EXPECT_EQ(classifier_.NormProtos, nullptr);
 ++}
 ++
-++// A duplicate representation makes the second insert a no-op, so on
-++// unpatched code the set_* calls for the remaining lines write past
-++// the end of the unichars vector (ASan container-overflow).
-++TEST(UnicharsetLoadTest, RejectsDuplicateRepresentation) {
-++  const char *text = "3\nA 0 Latin\nA 0 Latin\nB 0 Latin\n";
-++  UNICHARSET unicharset;
-++  EXPECT_FALSE(LoadUnicharset(text, &unicharset));
+++// A token of exactly 2 * UNICHAR_LEN characters is the maximum legitimate
+++// size; it must not be truncated or rejected by the width limit.
+++TEST_F(NormprotoTest, ToleratesMaxLenUnicharToken) {
+++  std::vector<char> bytes = MakeNormproto(std::string(2 * UNICHAR_LEN, 'A') + " 0\n");
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+++  ASSERT_NE(classifier_.NormProtos, nullptr);
+++  classifier_.FreeNormProtos();
+++  EXPECT_EQ(classifier_.NormProtos, nullptr);
 ++}
 ++
-++// A non-positive size count must be rejected; on unpatched code a
-++// zero or negative count loads an empty unicharset successfully.
-++TEST(UnicharsetLoadTest, RejectsNonPositiveCount) {
-++  const char *texts[] = {"0\n", "-1\n"};
-++  for (const char *text : texts) {
-++    UNICHARSET unicharset;
-++    EXPECT_FALSE(LoadUnicharset(text, &unicharset));
-++  }
-++}
-++
-++// A valid unicharset must still be accepted.
-++TEST(UnicharsetLoadTest, AcceptsValidUnicharset) {
-++  const char *text = "3\nA 0 Latin\nB 0 Latin\nC 0 Latin\n";
-++  UNICHARSET unicharset;
-++  ASSERT_TRUE(LoadUnicharset(text, &unicharset));
-++  EXPECT_EQ(unicharset.size(), 3u);
-++  EXPECT_STREQ(unicharset.id_to_unichar(1), "B");
+++// A well-formed normproto component must still parse.
+++TEST_F(NormprotoTest, ReadsValidNormprotos) {
+++  std::vector<char> bytes = MakeNormproto("a 0\n");
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+++  ASSERT_NE(classifier_.NormProtos, nullptr);
+++  classifier_.FreeNormProtos();
+++  EXPECT_EQ(classifier_.NormProtos, nullptr);
 ++}
 ++
 ++} // namespace
 ++} // namespace tesseract
 diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-index 0d9b178dc9..81359b761b 100644
+index 6acedcee98..25d357d903 100644
 --- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
 +++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-@@ -6,8 +6,9 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
--SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV}"
--
-+SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
-+           file://CVE-2026-88052.patch \
-+"
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
+            file://CVE-2026-88048.patch \
+            file://CVE-2026-88049.patch \
+            file://CVE-2026-88050.patch \
++           file://CVE-2026-88047.patch \
+ "
  
  DEPENDS = "leptonica"
- 
 
