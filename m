@@ -1,94 +1,92 @@
-Return-Path: <ecordonnier@snap.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DC99CC6B03
-	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 09:48:35 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3389.1791884908575162406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 254F4CC6B08
+	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 09:59:15 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3415.1791885552296354248
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2026 02:48:28 -0700
+ Tue, 13 Oct 2026 02:59:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=XkrB27jR;
- spf=pass (domain: snapchat.com, ip: 209.85.128.54, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a172eb31f0so21150905e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:48:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=De8GdKg5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38ec1402b05so1263022a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1791884907; x=1792489707; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791885551; x=1792490351; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=iw9JngZwEz7qXodLwYzoRsoQYa8mvGKZSb1alYOBUNw=;
-        b=XkrB27jR6N0OW51M6T6wPSUTGM68V8aW+hlf4vXok2fGavlRQFyQQAvcm3p+/pTPC5
-         vbtvijWygis1jwZe7gGzIQj7is7ZHdieuyJTRv65I89XvS7rIsr5TnTIcE+Gsrxux2Mp
-         qcmmDD87Rui+QtDjdiO89/cSfFaWcZW2f8Td4=
+        bh=5NIk/Kgw5xvOD+JQHcmNKy9sbOP7mjMFnU6Y9lu4Afw=;
+        b=De8GdKg59eVjTOxNYJTMqpTFpW9lhRbq79f/odTvnXzY16YwJUl/6ujrQDZyQ2PWL0
+         depXgzQpuRBvuYDYxIyT3D9jYZFGIdIj6SFbKdlf14cW2ucehe2ha9Abx9W71z+AelTb
+         +2oMIOiqtaDMpkGJRH1jGlNGZTsP8U8zkVnaUig/VOwUqulNknxQtoNFsm31mqE4WqMJ
+         /xE6c69PAlmTZCYCnCHE0jgzdoRVZZ2ruwGxgh4nd8Nh3NVJcwoD3kE7PoD46YO5tCE0
+         yWUiG8HEpohu2pNexXpaFDIgGyqaBnhLl70/PR1jdZmSyidWIWXHjyFBUHerHwwlI0Ii
+         BY0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791884907; x=1792489707;
+        d=1e100.net; s=20260707; t=1791885551; x=1792490351;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=iw9JngZwEz7qXodLwYzoRsoQYa8mvGKZSb1alYOBUNw=;
-        b=L6U6yQQBqhOBQacvtIg7JhuFmoBH8bchu+22MOP/X0sJj4HhRgsi584N5H4nre6bnE
-         zxEb8bgqGa/sVwx55Ww5CZiYjMET7WjhZBe4iKtjwow5sUk256s9/70rsIy83BPD5Yht
-         6u6s2cpF8NubZg08RNMiwdf1WFzg87yf7vSjvy1BOPkznYn7U/11onBtKWRTAHIR/31g
-         wI9ZAI1IvSb58geSUFHWIIh3Lncie5WE4cobzocooqO9vg0NUv0vNL4qM289Wvul8aw3
-         PI0NaRyxrOkY9GW8Zfs4t1vTFGPLDkEit7W7x3ifDFDCAKYTaBs1xmkbFie4anGoyH9e
-         Kvbg==
-X-Gm-Message-State: AFq9FYJ/taaoT9uQZBnub7g+gdISNshpSBtAEJXtbDM2vtSB6umvez94
-	yCVOvLJjmHqldl2jSC8eSp1Ismw65Fx0e0K2GrJoNmC2bOnGFkfGMqWHNEAfPh17hygvjxaSIwc
-	kjqRdFzQ=
-X-Gm-Gg: AYBFou1ZmBBwiZX+Ykj5r0WMFzloKd7VELnhP41LenPjs1Z7PrY5twFT0gEIKX4tBLU
-	DQruzScMEEUPAQ0DXNLu5h3MvqQ3n5jJ0+GMyxqTs33Tpe/JbyMRoMoMpIjLliTcwRM++UxRYzO
-	WyQY9J7++uWCYgKdVa5BxgL4Y35OrQJB6TgvmTCf9fax4PmKgZ35AyWgc6QAbUll8MmLP6kuHmD
-	9nInS/OVGdHVZm6pDgvIdoayycX2Ad/nmyVyZWIRp+3HxJ9wR3VnlVg96qSIgZnPVYpkQoiNZcT
-	UT9VIEZCwLvGspvuwwmHsIB/O1kAqDmjHfNskNcvWTefyuqq80+C+z878b3CXcELQ/95dXR7OTU
-	bxJ7yj1kVuRGvPw4OZzigS4C/tg2aNqAmniU9wZQDyJr08ncwoYsOBEG/MHok4UxLygcM8U6yw1
-	vqsB7LDpcgbr6j1nEwcWywM2AcIvd5+dcqu5DEfcKYH6OPnyosV6IaB+H0IfCCxGewibIdDsvkh
-	rrQj16/0BTo/QYkSBf9f6aDZPB5/DFflJCDzoAD6Z8=
-X-Received: by 2002:a05:600c:5247:b0:4a1:6991:36d7 with SMTP id 5b1f17b1804b1-4a18e49d570mr229096475e9.10.1791884906617;
-        Tue, 13 Oct 2026 02:48:26 -0700 (PDT)
-Received: from lj8k2dq3.sc-core.net ([213.249.125.50])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18bf3e044sm340581755e9.14.2026.10.13.02.48.24
+        bh=5NIk/Kgw5xvOD+JQHcmNKy9sbOP7mjMFnU6Y9lu4Afw=;
+        b=xZDjrbQN85Tsx0S0n1MHWbOjWt5c+zPAUHAN4ZCexVEg7pbPJejsrtNHsgXIRPGcqQ
+         68gzxIVxOHS4a8OsjWVr7ma1kKRxipSdby8O3Kki+R7RZkojUGBR8REwMos+uYr9PXe9
+         KN4J6mGScZl8XTyG6SDgApLXpyBjprDdI8u3Q8CG/Typ/tjC8PkXOzatYvHjMO7qWUVY
+         INRxJZbJr115lNhJmmAsn1jBk9dIDF3ZlYv2Vfq88NOrbALQeOTLZYHAGH4L2FKYkAVs
+         kIVf5y8rcLgF8B+uZhcW1mlxEXaVK0RmNuI7+v5MiTK9ssbmvH0wpPvMfl/Bzq5wbqLz
+         dHKg==
+X-Gm-Message-State: AFq9FYI7uQmVyFI9705a6SJLE39UTgmwWNBJ1ogvTbJdWvT6UPOyIQ6m
+	o6rU0VtsNr7pTDGrUhot9mJU1jB7gYxK2MTAMxC+qRz5SAN1GsrNH90VW1W3IA==
+X-Gm-Gg: AYBFou1BOdw81PFj57i7gsrLQOCktNKCEJt4aiVIZiH1UOxR7WLUV6KQ3atLQQEjUpA
+	siUP6sNnxKYwpDJM3ETLX4Du2cP/yDbicq5ilgjxZqJyEuTdVNZpX5XE4k4m9RmSh/0SCbu5QXM
+	fFhuRSPezvTCUXE8hfvbqYirHbbJIB4MWeDew+qJEyek/9a1QPdSgtZoGmoiN2vxWB6XO6OaKNX
+	h+/joU+NDFSP5xaypwrGu5Awx3e8jZPmkaHnZxVBinx3DbywQlgreJ79ACoog7rjcsV8NtHIB2V
+	imFWkaGUeQ1aLtelYORgYhxIevdkhiAXeI45AL/1/kW+nvHo4CWawnET9tG4wANTQjXCFNrXqNF
+	wsO5QPcHzMBX+Y9qrtmYA/7BTD+/HRFWAKWPJPTFv9yC4T7crF31s+7ept5h9gsiX9VMBMdAyMl
+	WsfZCCsTPbUVBbQOYGLpoJgTapqfn8t4MjW4dEbH3uwrcHcuzLPkR1UZbmyLtPB7qV0wNtzYH20
+	K+Xlnxuqf8AR/wofEZV1fBeZUV6MiboCgWSXqY=
+X-Received: by 2002:a17:90b:2d06:b0:3a4:b30b:b501 with SMTP id 98e67ed59e1d1-3ab3a32d491mr9173086a91.9.1791885551521;
+        Tue, 13 Oct 2026 02:59:11 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.02.59.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 02:48:25 -0700 (PDT)
-From: ecordonnier@snap.com
+        Tue, 13 Oct 2026 02:59:11 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Etienne Cordonnier <ecordonnier@snap.com>
-Subject: [meta-oe][PATCH] uutils-coreutils: improve SUMMARY
-Date: Tue, 13 Oct 2026 11:47:07 +0200
-Message-ID: <20261013094707.423286-1-ecordonnier@snap.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][blacksail][PATCH 1/28] openvpn: ignore CVE-2026-84256
+Date: Tue, 13 Oct 2026 22:58:36 +1300
+Message-ID: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 09:48:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130833
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 09:59:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130834
 
-From: Etienne Cordonnier <ecordonnier@snap.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-The previous SUMMARY could be read as suggesting that this recipe is the
-official GNU coreutils project. Reword it to state that uutils is a
-separate, Rust reimplementation.
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-84256
 
-Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
-index 26e494209a..76fcbc55e7 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
-@@ -1,6 +1,6 @@
- # Copyright (c) 2022, Snap Inc.
- # Released under the MIT license (see COPYING.MIT for the terms)
--SUMMARY = "coreutils ~ GNU coreutils (updated); implemented as universal (cross-platform) utils, written in Rust"
-+SUMMARY = "Cross-platform Rust reimplementation of the GNU coreutils"
- HOMEPAGE = "https://github.com/uutils/coreutils"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
--- 
-2.43.0
-
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
+index 604162a7f2..9bf699124c 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.7.bb
+@@ -18,6 +18,7 @@ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ SRC_URI[sha256sum] = "3ab8f48fd6c26d49ba2333a092433949afdb5c85c0e6a1ff265784fbc04a2463"
+ 
+ CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
++CVE_STATUS[CVE-2026-84256] = "not-applicable-platform: Issue only applies on Windows"
+ 
+ INITSCRIPT_PACKAGES = "${PN}"
+ INITSCRIPT_NAME:${PN} = "openvpn"
 
