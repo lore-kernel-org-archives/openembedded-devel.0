@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75DB5CA9ED0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83B6FCC6B03
 	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 04:41:01 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.369.1791866459460059610
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.362.1791866456593304576
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2026 21:40:59 -0700
+ Mon, 12 Oct 2026 21:40:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=RMKRWwIM;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cd60c5da24cso705205a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=e1QV/MQS;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ab752f6244so2035543a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Oct 2026 21:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791866459; x=1792471259; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791866456; x=1792471256; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Ug9eKCO58Y4VLl98m5Gdv4zQb9sK2CAyt5HE5vVxfgI=;
-        b=RMKRWwIMrCxSyg64I2V5X6R+XsvAvAohovxCszm/C4ffRXzNzobwnOwOM5GrgHoh7K
-         QWUQ+v2FUtAf2z53TbVEEYhkEgiRk58bYfdONCJ58J5BLz/Z6c7FvTu2gpyPtsbmu3h+
-         efrFq+QmwuPZKjuS0UAUAEVwvxs8M0B7H+H9Wp4boW4fL8vuBCJxe/pASfAXKy3tj0oE
-         FxUdzgGtwQS98+rKJDccL9hXcZKE/v3NNAJI0Cu8dXAfVgIoFgq3r72B9jc2BeDYDe8a
-         DqpBXIkaW5UyQQf6s672h8GTHF+3BJ4WTzxHunRU8CsrYviYORsVX66FaQlhSXWUmg1u
-         Q/PQ==
+        bh=4LFV5BDa5k3G5pVC9Yn1kpg0hPNqgW+fbIO2Z4XRXf0=;
+        b=e1QV/MQSA5nPLUhkKDO+6epPdtiJNqqzaTHOUwaRMjj27k96aQpz2a/5/cWfAVzQ7q
+         29yeTz3QnLpHPLdGftg13QDW3TAI/v/gYfZfZRslFQrmYVfUE3SuBize1jS/C76yUXtW
+         x76fX19r0KHyvj8u+MPxGyXl0svw7imtPYFmUWZcinAdY0lAZQ3mnNwK3+uxNaMvlGiY
+         GPrmjex/Zy3H0ev8oCg/OuOt944Pf7Lk/ryv8NWi/QuXa1H49Og5cN6L158Gm3d/8bVe
+         9krJh3FaJwM7LnLNQm/xK1ZQP7hdX0oPuJgntb0RUoYfSmz62oCGiObiIqpqBqOgLQBl
+         UFOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791866459; x=1792471259;
+        d=1e100.net; s=20260707; t=1791866456; x=1792471256;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Ug9eKCO58Y4VLl98m5Gdv4zQb9sK2CAyt5HE5vVxfgI=;
-        b=WZ7ZFzWpEE/2M/qV90Y906Pt5xnN/JVARB54NLZ2OByBL6HC/e6csTch3hWVRZQtXu
-         3jKLwszwabaAhGHcVHMS7oi89+5WQvZM7iVOyaM/AaIG5ggAheTQU2RWgdNU/dpVFPoP
-         y5ZWpA6tIIrAPl+LVON/mru+4CGPDtbEQtsZcnzZNDYdT3A2M2MABtH9NrZU7TlMT6Yt
-         ROXPUnpDiFjeBbo/8enkF0x5XCI1VldlfRkY9fuAJVEa/7+/tPjY76GPgKYCo0N9qDKA
-         FskTIxnoOjs2xCwpcoSev3i5E7alGifV54yKuqL6aqZwZ409J10e9n93Ppe+I7AO7m+r
-         aXSQ==
-X-Gm-Message-State: AFq9FYIuGmctRNCwtQw24EpzqrdxdGw3TxPbl1VwID1255cGdCDcpiT2
-	O6iTMOHCMhtASWYmrh6IpLBf9lKdbggBPls9pisjAJoUpngMR1ITa+BbuhbHPg==
-X-Gm-Gg: AYBFou2jJ3yr03B72eXw49GiNxoMXj3fs1Z+cHDgFFqPE18HZNp/KyY+LbLDGk2XR/N
-	XaYDm8OfOKMNZW89ZLF/rWScMdsKLDajuJdD0Ezovd5HwFFDL5OFtONf8gBShAaXWEtU7weKKjC
-	+RxIMZZ7VvAGQnYdOT7QHYZ+3m4GqOai+n7xcJpd/BlzASnLHYANm/fydcZQp/N4JilfHFKVu6T
-	yIplziU26NIE6FW8hS5DnnZ0HOzJV72ifA6zrewBENXf8WhvT3PXoj36rvaSbta5kVf4TXSRxLb
-	+OXJ1heAesLyNyVefDnzPXBiEqdXfG6SR0enRc54zbbdDxIfOrhyHtz0ACX/1Uyu2wQ3DXHYF1S
-	6K2H23Y8yM/yxYC8PYLxLL//nl1MWzNk+X71oCQt1chy4Ao9Vy6Vztdc4nWWF3ZtGzuWZbndNVN
-	yWqFCZIGF+6y1EQwfUaeliKVuAzAEwnLquLwyvDxV4R1o6VbNmzS4ohYPBZhBASEiZJkSlvJ7Xu
-	zSzArSvaakD9dW7G575jg3e7LGTwZaTkR0aZ5o=
-X-Received: by 2002:a17:90b:1e41:b0:3a8:9b79:e6ea with SMTP id 98e67ed59e1d1-3ab3a96ffd7mr9951577a91.59.1791866458536;
-        Mon, 12 Oct 2026 21:40:58 -0700 (PDT)
+        bh=4LFV5BDa5k3G5pVC9Yn1kpg0hPNqgW+fbIO2Z4XRXf0=;
+        b=IU5X2gfJt8z+oZRd0wSe20gAg2xwpdYb9VhiY7itCzNtzz3Us1LgUbe+YiPmBGoeGa
+         YHb2+QXzDJKTQuoHqj3HdE/YzDw57S7FXnvA0X+ia2HEYlQ6SCO5ctg2nzpuN0u3OexN
+         TCqs4pH+bR5rMiC3WM00xiCYh1RWL+Sqdxhk/MylWPTlZim1TYx7QIEDp3Hdhs0sfyZO
+         gJGfHn5wXAeZnbs7vUxlho/LxwZGteb07qvh3p1ZnPu++/IJrh6HfmqAQ3kDJSJoQlD8
+         klIE0Z/9Op+bk6Vd9a06Jk337RrPFwK+RxgT0h/OUURKDLiTJcF97dWWDDW6iJkd502v
+         DkhA==
+X-Gm-Message-State: AFq9FYIn2Fp3qDGHgZkDIziBxzGNEKWGoFY+M4KUrEiyEOYvX1xzOw3X
+	ObDaVUJJRevjU/Lpzwwl88dFp1XouFsy0qRgu4AbYCuqFKaHR1nnOjb0Eso55g==
+X-Gm-Gg: AYBFou3TkJUdi2XGRdtmx514169tzkhmoNzR0xA/RZ/oQMZXVrV36BDthAECwhTVKfz
+	JGzzkxFudk8KY3R/XwGafBJxCJj4l+sBBsFPtWa1LxCYkv9GdvRg/cNs8coBuRgnTqwjeEBl+si
+	NHh3F3GzWmPN5c4gQrwTtsGHoX+fMEmdUpjh0TASKUM68mntMp3GdVE84/tW0cQCrAZIKZvcn4V
+	5P9UvTD9WDHUI661Ja457SQfLjUDZqkbYm/ee12sCwijYx49yUyizUa68ukA4NikMys3khJmA+U
+	Iv6dMqGauBcvCzT0RMFa8FPLCovMZ4YEtBXm1/9tgdjPskLOIUyffQVJ4t7I7zum612Kre9nLvV
+	dm6wlDW3nMBSxe9Wnj0MtckGbioYJoNVNfjZmJ2BL9Hc+NA4rF6rfyQJWDuhUNfBSNjC9JGGujp
+	yvT1/Svf4r41LXVtJFv6D9prW0WcJtQAwm3mTyyjF/UzhZuHP2YfOsEgFPbhABnVLU/aqWLyIfD
+	qCXcAxiWYU/C1MnbvSEFJlhpVkH731nsqfF9Ay4ON+hbd9qIazd
+X-Received: by 2002:a17:90b:2885:b0:3a7:b260:9ccc with SMTP id 98e67ed59e1d1-3ab3af73996mr9315163a91.65.1791866455606;
+        Mon, 12 Oct 2026 21:40:55 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.55
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3386ba90sm11672757a91.1.2026.10.12.21.40.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 21:40:58 -0700 (PDT)
+        Mon, 12 Oct 2026 21:40:55 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-oe][PATCH 15/16] tesseract: patch CVE-2026-88054
-Date: Tue, 13 Oct 2026 17:40:05 +1300
-Message-ID: <20261013044006.834868-15-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 14/16] tesseract: patch CVE-2026-88051
+Date: Tue, 13 Oct 2026 17:40:04 +1300
+Message-ID: <20261013044006.834868-14-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
 References: <20261013044006.834868-1-ankur.tyagi85@gmail.com>
@@ -69,146 +69,132 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 04:41:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130829
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130828
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-88054
+https://nvd.nist.gov/vuln/detail/cve-2026-88051
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 4c00053135fb03b6043c960dc96a839b675f7eec)
+(cherry picked from commit 727354dae2ee3075ad388bcfe22156ab1ea6fcf5)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tesseract/tesseract/CVE-2026-88054.patch  | 274 ++++++++++++++++++
+ .../tesseract/tesseract/CVE-2026-88051.patch  | 184 ++++++++++++++++++
  .../tesseract/tesseract_5.5.3.bb              |   1 +
- 2 files changed, 275 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
+ 2 files changed, 185 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
 new file mode 100644
-index 0000000000..32e70c0f6f
+index 0000000000..1956d49672
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
-@@ -0,0 +1,274 @@
-+From 83bbac0975f52a5171776fddcc800a2aaa5206a3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
+@@ -0,0 +1,184 @@
++From 79bf602b0cd5216c125f86eaf3c768daae256930 Mon Sep 17 00:00:00 2001
 +From: Stefan Weil <sw@weilnetz.de>
-+Date: Fri, 21 Aug 2026 14:38:55 +0200
-+Subject: [PATCH] Reject empty network stacks in LSTM .traineddata
-+ deserialization
++Date: Fri, 21 Aug 2026 20:29:37 +0200
++Subject: [PATCH] Validate vector counts in GenericVector::read
 +
-+Plumbing::DeSerialize read the network stack size from the untrusted
-+TESSDATA_LSTM component and only rejected size > 10000. A crafted
-+.traineddata with a top-level Series/Parallel/Reversed layer with an
-+empty stack survived load; LSTMRecognizer initialization then called
-+network_->CacheXScaleFactor(network_->XScaleFactor()), which
-+dereferences stack_[0] on the empty vector:
-+- Series: Series::CacheXScaleFactor (series.cpp)
-+- Parallel/Reversed: inherited Plumbing::XScaleFactor
-+The virtual call through the wild pointer crashed the process at
-+initialization (deterministic denial of service).
++The callback form of GenericVector::read read two independent int32
++fields from the file: reserved sized the allocation via reserve(),
++while size_used_ drove the element loop. Neither was capped and no
++size_used_ <= reserved invariant was checked, so a crafted
++.traineddata (e.g. the fontinfo table of a version >= 4 inttemp
++component) performed a heap out-of-bounds write during legacy
++engine initialization.
 +
 +Key changes:
-+- plumbing.cpp: reject size == 0 for all plumbing types, and
-+  size < 2 for NT_SERIES (Series::Forward requires two or more
-+  networks and always aborts on one).
-+- tessedit.cpp: fail the language load gracefully when the LSTM model
-+  cannot be loaded, instead of aborting via ASSERT_HOST, so
-+  TessBaseAPI::Init returns -1 on corrupt traineddata.
-+- unittest: add plumbing_test, which builds a minimal traineddata
-+  with empty/undersized LSTM plumbing stacks and expects a graceful
-+  init failure. On unpatched code the tests die on the original
-+  SEGV in Series::CacheXScaleFactor / Plumbing::XScaleFactor.
++- genericvector.h: reject negative or over-limit reserved
++  (matching the 50000000 cap of the DeSerialize overloads) and
++  reject size_used_ < 0 or size_used_ > reserved before entering
++  the read loop. Legit files always satisfy size_used_ <= reserved,
++  as write() persists size_reserved_ first.
++- unittest: add genericvector_test covering size_used_ beyond
++  reserved (on unpatched code the ASan build dies on a
++  heap-buffer-overflow in the read loop), negative counts, and a
++  consistent vector that must still load.
 +
 +Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
 +Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
 +Signed-off-by: Stefan Weil <sw@weilnetz.de>
-+(cherry picked from commit 552771236b0d80cbdb0c7dd856120fa21a4672e5)
++(cherry picked from commit 56e09ca12e751623fe796ce1554ce704bffd2ef0)
 +
-+CVE: CVE-2026-88054
-+Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/552771236b0d80cbdb0c7dd856120fa21a4672e5]
++CVE: CVE-2026-88051
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/56e09ca12e751623fe796ce1554ce704bffd2ef0]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ Makefile.am               |   5 ++
-+ src/ccmain/tessedit.cpp   |   7 +-
-+ src/lstm/plumbing.cpp     |   6 ++
-+ unittest/plumbing_test.cc | 165 ++++++++++++++++++++++++++++++++++++++
-+ 4 files changed, 182 insertions(+), 1 deletion(-)
-+ create mode 100644 unittest/plumbing_test.cc
++ Makefile.am                    |  5 ++
++ src/ccutil/genericvector.h     | 10 ++++
++ unittest/genericvector_test.cc | 91 ++++++++++++++++++++++++++++++++++
++ 3 files changed, 106 insertions(+)
++ create mode 100644 unittest/genericvector_test.cc
 +
 +diff --git a/Makefile.am b/Makefile.am
-+index c67f0f63..a6ee0931 100644
++index cc748455..c67f0f63 100644
 +--- a/Makefile.am
 ++++ b/Makefile.am
-+@@ -1198,6 +1198,7 @@ if ENABLE_TRAINING
-+ check_PROGRAMS += pango_font_info_test
-+ endif # ENABLE_TRAINING
-+ check_PROGRAMS += paragraphs_test
-++check_PROGRAMS += plumbing_test
-+ if !DISABLED_LEGACY_ENGINE
-+ check_PROGRAMS += params_model_test
++@@ -1159,6 +1159,7 @@ check_PROGRAMS += equationdetect_test
 + endif # !DISABLED_LEGACY_ENGINE
-+@@ -1427,6 +1428,10 @@ paragraphs_test_SOURCES = unittest/paragraphs_test.cc
-+ paragraphs_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ paragraphs_test_LDADD = $(TESS_LIBS)
-+ 
-++plumbing_test_SOURCES = unittest/plumbing_test.cc
-++plumbing_test_CPPFLAGS = $(unittest_CPPFLAGS)
-++plumbing_test_LDADD = $(TESS_LIBS)
-++
++ check_PROGRAMS += fileio_test
++ check_PROGRAMS += fullyconnected_test
+++check_PROGRAMS += genericvector_test
++ check_PROGRAMS += heap_test
++ check_PROGRAMS += imagedata_test
 + if !DISABLED_LEGACY_ENGINE
-+ params_model_test_SOURCES = unittest/params_model_test.cc
-+ params_model_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+diff --git a/src/ccmain/tessedit.cpp b/src/ccmain/tessedit.cpp
-+index 7ec89bd9..722ed09b 100644
-+--- a/src/ccmain/tessedit.cpp
-++++ b/src/ccmain/tessedit.cpp
-+@@ -169,7 +169,12 @@ bool Tesseract::init_tesseract_lang_data(const std::string &language, OcrEngineM
-+ #endif // ndef DISABLED_LEGACY_ENGINE
-+     if (mgr->IsComponentAvailable(TESSDATA_LSTM)) {
-+       lstm_recognizer_ = new LSTMRecognizer(language_data_path_prefix.c_str());
-+-      ASSERT_HOST(lstm_recognizer_->Load(this->params(), lstm_use_matrix ? language : "", mgr));
-++      if (!lstm_recognizer_->Load(this->params(), lstm_use_matrix ? language : "", mgr)) {
-++        delete lstm_recognizer_;
-++        lstm_recognizer_ = nullptr;
-++        tprintf("Error: Failed to load the LSTM model from %s\n", tessdata_path.c_str());
-++        return false;
-++      }
-+     } else {
-+ #ifdef DISABLED_LEGACY_ENGINE
-+       // The legacy engine is compiled out, so we cannot fall back to it.
-+diff --git a/src/lstm/plumbing.cpp b/src/lstm/plumbing.cpp
-+index f0133148..15cf3d62 100644
-+--- a/src/lstm/plumbing.cpp
-++++ b/src/lstm/plumbing.cpp
-+@@ -226,6 +226,12 @@ bool Plumbing::DeSerialize(TFile *fp) {
-+   if (size > 10000) {
++@@ -1298,6 +1299,10 @@ fullyconnected_test_SOURCES = unittest/fullyconnected_test.cc
++ fullyconnected_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ fullyconnected_test_LDADD = $(TESS_LIBS)
++ 
+++genericvector_test_SOURCES = unittest/genericvector_test.cc
+++genericvector_test_CPPFLAGS = $(unittest_CPPFLAGS)
+++genericvector_test_LDADD = $(TESS_LIBS)
+++
++ heap_test_SOURCES = unittest/heap_test.cc
++ heap_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ heap_test_LDADD = $(TESS_LIBS)
++diff --git a/src/ccutil/genericvector.h b/src/ccutil/genericvector.h
++index 4a5bbe12..cbe1e203 100644
++--- a/src/ccutil/genericvector.h
+++++ b/src/ccutil/genericvector.h
++@@ -654,10 +654,20 @@ bool GenericVector<T>::read(TFile *f, const std::function<bool(TFile *, T *)> &c
++   if (f->FReadEndian(&reserved, sizeof(reserved), 1) != 1) {
 +     return false;
 +   }
-++  // Reject empty stacks: XScaleFactor, CacheXScaleFactor and other methods
-++  // unconditionally dereference stack_[0] during network initialization.
-++  // A Series needs at least two networks (see Series::Forward).
-++  if (size == 0 || (type() == NT_SERIES && size == 1)) {
+++  // Arbitrarily limit the number of elements to protect against bad data.
+++  const uint32_t limit = 50000000;
+++  if (reserved < 0 || static_cast<uint32_t>(reserved) > limit) {
 ++    return false;
 ++  }
-+   for (uint32_t i = 0; i < size; ++i) {
-+     Network *network = CreateFromFile(fp);
-+     if (network == nullptr) {
-+diff --git a/unittest/plumbing_test.cc b/unittest/plumbing_test.cc
++   reserve(reserved);
++   if (f->FReadEndian(&size_used_, sizeof(size_used_), 1) != 1) {
++     return false;
++   }
+++  // size_used_ is an independent file field; without this check the reads
+++  // below land past the end of the buffer sized from reserved.
+++  if (size_used_ < 0 || size_used_ > reserved) {
+++    return false;
+++  }
++   if (cb != nullptr) {
++     for (int i = 0; i < size_used_; ++i) {
++       if (!cb(f, data_ + i)) {
++diff --git a/unittest/genericvector_test.cc b/unittest/genericvector_test.cc
 +new file mode 100644
-+index 00000000..27486f86
++index 00000000..269b00f0
 +--- /dev/null
-++++ b/unittest/plumbing_test.cc
-+@@ -0,0 +1,165 @@
+++++ b/unittest/genericvector_test.cc
++@@ -0,0 +1,91 @@
 ++///////////////////////////////////////////////////////////////////////
-++// File:        plumbing_test.cc
-++// Description: Tests that a corrupt TESSDATA_LSTM component in a
-++//              .traineddata file is rejected without crashing. A
-++//              plumbing layer (Series/Parallel/Reversed) with an
-++//              empty or undersized network stack would make
-++//              XScaleFactor/CacheXScaleFactor dereference stack_[0]
-++//              during engine initialization.
+++// File:        genericvector_test.cc
+++// Description: Tests that the callback form of GenericVector::read
+++//              rejects vectors whose size_used_ exceeds reserved (or
+++//              whose counts are negative). reserved sizes the buffer
+++//              while size_used_ is an independent file field driving
+++//              the element loop, so a crafted .traineddata (e.g. the
+++//              fontinfo table of a version >= 4 inttemp component)
+++//              performs a heap out-of-bounds write during legacy
+++//              engine initialization.
 ++//
 ++// Licensed under the Apache License, Version 2.0 (the "License");
 ++// you may not use this file except in compliance with the License.
@@ -219,162 +205,86 @@ index 0000000000..32e70c0f6f
 ++
 ++#include "include_gunit.h"
 ++
-++#include <tesseract/baseapi.h>
-++
-++#include "network.h"        // for NetworkType
-++#include "tessdatamanager.h" // for TessdataManager, TESSDATA_LSTM
+++#include "genericvector.h"
+++#include "serialis.h" // for TFile
 ++
 ++#include <cstdint>
-++#include <cstdio>
-++#include <cstdlib>
-++#include <cstring>
-++#include <string>
 ++#include <vector>
 ++
 ++namespace tesseract {
 ++namespace {
 ++
-++// Minimal unicharset with the special codes (space, Joined, Broken) that
-++// UNICHARSET::load_from_file expects, as embedded in the TESSDATA_LSTM
-++// component by LSTMRecognizer::Serialize.
-++const char kMinUnicharset[] =
-++    "3\n"
-++    "NULL 0 NULL 0\n"
-++    "Joined 7 0,69,188,255,486,1218,0,30,486,1188 Latin 26 0 98 Joined\n"
-++    "|Broken|0|1 f 0,69,186,255,892,2138,0,80,892,2058 Common 84 10 84 |Broken|0|1\n";
-++
 ++// Appends raw little-endian values to a byte buffer.
 ++class ByteWriter {
 ++public:
-++  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
-++  void PutU32(uint32_t v) {
+++  void PutS32(int32_t v) {
+++    uint32_t u = static_cast<uint32_t>(v);
 ++    for (int i = 0; i < 4; ++i) {
-++      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
+++      data_.push_back(static_cast<char>((u >> (8 * i)) & 0xFF));
 ++    }
 ++  }
-++  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
-++  void PutString(const char *s) {
-++    PutU32(static_cast<uint32_t>(std::strlen(s)));
-++    data_.insert(data_.end(), s, s + std::strlen(s));
-++  }
-++  void PutRaw(const char *s) { data_.insert(data_.end(), s, s + std::strlen(s)); }
 ++  const std::vector<char> &data() const { return data_; }
 ++
 ++private:
 ++  std::vector<char> data_;
 ++};
 ++
-++// Serialized network header as written by Network::Serialize:
-++//   int8 type, int8 training, int8 needs_to_backprop, int32 network_flags,
-++//   int32 ni, int32 no, int32 num_weights, string name.
-++void AppendNetworkHeader(ByteWriter *w, NetworkType type) {
-++  w->PutU8(static_cast<uint32_t>(type));
-++  w->PutU8(0); // training: TS_DISABLED
-++  w->PutU8(0); // needs_to_backprop
-++  w->PutU32(0); // network_flags
-++  w->PutU32(0); // ni
-++  w->PutU32(0); // no
-++  w->PutU32(0); // num_weights
-++  w->PutString(""); // name
-++}
-++
-++// A minimal valid child network (NT_INPUT with a 1x1x1x1 shape).
-++void AppendInputChild(ByteWriter *w) {
-++  AppendNetworkHeader(w, NT_INPUT);
-++  w->PutS32(1); // batch
-++  w->PutS32(1); // height
-++  w->PutS32(1); // width
-++  w->PutS32(1); // depth
-++  w->PutS32(0); // loss type
-++}
-++
-++// Builds a TESSDATA_LSTM component whose top-level network is a plumbing
-++// layer of the given type with the given (corrupt) stack size, followed by
-++// the remaining fields of LSTMRecognizer::DeSerialize.
-++std::vector<char> MakeLstmComponent(NetworkType type, uint32_t stack_size) {
+++// A serialized vector header (reserved, size_used_) followed by the
+++// given number of int32 elements.
+++std::vector<char> MakeVector(int32_t reserved, int32_t size_used, int32_t num_elements) {
 ++  ByteWriter w;
-++  AppendNetworkHeader(&w, type);
-++  w.PutU32(stack_size); // Plumbing::DeSerialize reads this as uint32
-++  for (uint32_t i = 0; i < stack_size; ++i) {
-++    AppendInputChild(&w);
+++  w.PutS32(reserved);
+++  w.PutS32(size_used);
+++  for (int32_t i = 0; i < num_elements; ++i) {
+++    w.PutS32(i);
 ++  }
-++  w.PutRaw(kMinUnicharset); // unicharset (raw text, no recoder/unicharset components)
-++  w.PutString("");             // network_str_
-++  w.PutS32(0);                 // training_flags_
-++  w.PutS32(0);                 // training_iteration_
-++  w.PutS32(0);                 // sample_iteration_
-++  w.PutS32(0);                 // null_char_
-++  w.PutU32(0);                 // adam_beta_ (float 0.0)
-++  w.PutU32(0);                 // learning_rate_ (float 0.0)
-++  w.PutU32(0);                 // momentum_ (float 0.0)
 ++  return w.data();
 ++}
 ++
-++// Writes a traineddata file with the given (corrupt) LSTM component to
-++// dir/eng.traineddata.
-++bool WriteCorruptTraineddata(const std::string &dir, const std::vector<char> &lstm) {
-++  TessdataManager mgr;
-++  mgr.OverwriteEntry(TESSDATA_LSTM, lstm.data(), static_cast<int>(lstm.size()));
-++  return mgr.SaveFile((dir + "/eng.traineddata").c_str(), nullptr);
+++// reserved=4 but size_used_=0x10000: on unpatched code the callback
+++// loop writes 65536 ints past the 4-int buffer (heap out-of-bounds
+++// write).
+++TEST(GenericVectorTest, RejectsSizeUsedBeyondReserved) {
+++  std::vector<char> bytes = MakeVector(4, 0x10000, 0x10000);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  GenericVector<int> v;
+++  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
 ++}
 ++
-++class PlumbingTest : public testing::Test {
-++protected:
-++  void SetUp() override {
-++    tmpl_ = "/tmp/tess_plumbing_test_XXXXXX";
-++    char *dir = mkdtemp(tmpl_.data());
-++    ASSERT_NE(dir, nullptr);
-++    dir_ = dir;
-++  }
-++  void TearDown() override {
-++    std::remove((dir_ + "/eng.traineddata").c_str());
-++    rmdir(dir_.c_str());
-++  }
-++  // Expects the LSTM engine to reject the corrupted traineddata
-++  // gracefully (init failure) instead of crashing.
-++  void ExpectInitFails(const std::vector<char> &lstm) {
-++    ASSERT_TRUE(WriteCorruptTraineddata(dir_, lstm));
-++    tesseract::TessBaseAPI api;
-++    EXPECT_EQ(api.Init(dir_.c_str(), "eng", tesseract::OEM_LSTM_ONLY), -1);
-++  }
-++  std::string dir_;
-++  std::string tmpl_;
-++};
-++
-++// Empty NT_SERIES stack: Series::CacheXScaleFactor would dereference
-++// stack_[0] on the empty vector during initialization.
-++TEST_F(PlumbingTest, RejectsEmptySeriesStack) {
-++  ExpectInitFails(MakeLstmComponent(NT_SERIES, 0));
+++// Negative counts must be rejected; on unpatched code the read
+++// "succeeds" and leaves size_used_ negative.
+++TEST(GenericVectorTest, RejectsNegativeCounts) {
+++  std::vector<char> bytes = MakeVector(-1, -1, 0);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  GenericVector<int> v;
+++  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
 ++}
 ++
-++// Empty NT_PARALLEL stack: Plumbing::XScaleFactor would dereference
-++// stack_[0] on the empty vector during initialization.
-++TEST_F(PlumbingTest, RejectsEmptyParallelStack) {
-++  ExpectInitFails(MakeLstmComponent(NT_PARALLEL, 0));
-++}
-++
-++// Empty NT_XREVERSED stack: same crash as the parallel case.
-++TEST_F(PlumbingTest, RejectsEmptyReversedStack) {
-++  ExpectInitFails(MakeLstmComponent(NT_XREVERSED, 0));
-++}
-++
-++// A Series with a single network: Series::Forward requires at least two
-++// networks, so such a model can never work.
-++TEST_F(PlumbingTest, RejectsSingleNetworkSeries) {
-++  ExpectInitFails(MakeLstmComponent(NT_SERIES, 1));
+++// A consistent vector must still be accepted.
+++TEST(GenericVectorTest, AcceptsConsistentVector) {
+++  std::vector<char> bytes = MakeVector(4, 2, 2);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  GenericVector<int> v;
+++  ASSERT_TRUE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+++  EXPECT_EQ(v.size(), 2);
+++  EXPECT_EQ(v[0], 0);
+++  EXPECT_EQ(v[1], 1);
 ++}
 ++
 ++} // namespace
 ++} // namespace tesseract
 diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-index be6ec1e463..c96aca1dde 100644
+index 25d357d903..be6ec1e463 100644
 --- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
 +++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
+            file://CVE-2026-88049.patch \
             file://CVE-2026-88050.patch \
             file://CVE-2026-88047.patch \
-            file://CVE-2026-88051.patch \
-+           file://CVE-2026-88054.patch \
++           file://CVE-2026-88051.patch \
  "
  
  DEPENDS = "leptonica"
