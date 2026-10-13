@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55E4DCC6B0F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55DF5CC6B03
 	for <webhook@archiver.kernel.org>; Tue, 13 Oct 2026 09:59:58 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3523.1791885595570286027
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3522.1791885589262985903
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2026 02:59:55 -0700
+ Tue, 13 Oct 2026 02:59:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HCo3WWbr;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3a4b3ac8fb7so1152088a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:59:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=PKu2smUZ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-381b831d535so3247358a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 02:59:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791885595; x=1792490395; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791885589; x=1792490389; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QWEYDV99Zj+PR0BNtmTW2g3aHPvohqUOT6ScDs+PuZE=;
-        b=HCo3WWbrSwhl9atC4C3/LVpGF1/eytJvJnnuacoT7I1VyISvqNGyIr+01llwHnRkp/
-         wO16+Szy6PwzDvlL7YbGY772NnXCaEnCXfRTLfMvUF7OsQ9AhN678mV/z+q2/5xaUOkV
-         tPaD2ZphT/BCaFlAGkqmhkpBCmBySjzLyYbUTG2IfoCsSYiao9uZLgFZ6dizqbkKhOL4
-         Hsz7WhVTHR+WFPRQBm8ilxSVz0ektkYCyNDGhOXfXmLTOAbcWfERY3mKDuVtqcjBWzGK
-         Px2/j8K4ttaUoiLE3SMyhyROw3dq68cBAqj2ptYnKn2pwzwWHMgTX32T2TkLrkbTGLBv
-         D4DA==
+        bh=kQX8ZX3OmqB3os19hZtjRRMHYNsxUulUgZR6g/FqSpY=;
+        b=PKu2smUZzi9ijHNBfhQLR3CpQNu06ujNw/1KDU4epSTyymPkmPSN/tH1l3GPyTJABB
+         +DoPRt0SsXNhZSDQgz/h0fgZDypu6q2r/rl7YgejWLXr6CagxX7k+jkUq357dbwJmzSr
+         keT9QSqHCN767Jrd8ILBeLoOf6dCXGA+EqyDzZpsWHpzne3zCPaKieCmD/5DFgEv9bID
+         izjT/785qS/ChebazVOAlroTNu3Sqo1KXSOkJvVxKad44do/mj50ijVBPJ2i5+tGqrn4
+         kzZEBSycmr/eC9N9R5OaBzhl+LS32syL2DNrlhDYOaTMiGVbbAIgF/txsFETw6QGXHmG
+         8pfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885595; x=1792490395;
+        d=1e100.net; s=20260707; t=1791885589; x=1792490389;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QWEYDV99Zj+PR0BNtmTW2g3aHPvohqUOT6ScDs+PuZE=;
-        b=ooMq919uB6x4FKgbLwd3YUgg2LPImIj0/+K+C6M5NTygf3lc/Pz0X4xqcdIy4AlRuJ
-         pDGI+XDAklyjEYt0wuBGPO/qxpCH7zMOqI4K8Djh5lMplctJkG8wDWrjUvzTkYJax3is
-         D9yY+c83+AL9sTiimuj9mykisFvRRBdbhvfXdT+iZH+PnR80+DsE8UfXxjG1VFYg05N3
-         JbgHK2iJuqs5+QXvNYpN4caN0l8H5/ods/LQJPktla3Gm/yPfNER8XwVrh3hyQmP56aD
-         lq1reeH8TECo8oW0IUI/W2q9t2z80VZFc8C6fGkxuWxE7ZFg3iQHbdht37p+MwqwsyxN
-         XT/w==
-X-Gm-Message-State: AFq9FYL5ldKOpG/3lpKfyhwtpXoYPTPtkLacvEYuqH95UDgfPtMrI1fK
-	pHF1ihWO7KSyJT3Y6qUYcpg1ViizQwAkA389k688Dz6VBobaJq2CPUpPpDiXHQ==
-X-Gm-Gg: AYBFou1E5FkxRV0Cu7XM3whxLOEd5rxZMwOXsBjY+qLNhCdJ/VBlG/yXL18qxzDLW+D
-	ioIE2NSo9DWBjQbhci9p5fIJw3r2DixyGYA6SjeofvKg2zvMDzE1D6bFgaZCPO3GFt/mhSW/fUp
-	jB24I7l4WTV6O4TuT7BEdFBDXS/GP+lIjPtDPJj2hhsXB3HOwYamkuMMPoRAnCPMbD1/5pvuxb9
-	zWCCBa7bnzUT2+ct0Bihs+eQAlBODVzgMkKxaqZnsNFeOAscI1m3ChNbr5e0vOvvkK0d6uP3nQ1
-	MgSdADNHF03U/SrmbTyz/NvYG6ON6ecjs8Yj0gqLyfXzvgJCEPOfd4gHrQnue6IeJaOuAihUv7L
-	1CCpm8WYSql4bXgVUeICJjqhoAqw5Mrb1eYaTy8GwbDVVtOP6pH/P73cGslrowxFlOkiX/1C9Hn
-	FkS1ojbfkT3XmgzpWBHgnc8Go1ChQJF1PZEZiavdR2182WrdvE7SFSSTyTrlljxB5yimxodnn/C
-	sSbdlg94Fj2mJNTL1p2sYo9tWgFRKMT3BLePsUf3CERXdDO0g==
-X-Received: by 2002:a17:90b:164b:b0:39e:6c69:34da with SMTP id 98e67ed59e1d1-3ab3a91169cmr9968860a91.62.1791885594944;
-        Tue, 13 Oct 2026 02:59:54 -0700 (PDT)
+        bh=kQX8ZX3OmqB3os19hZtjRRMHYNsxUulUgZR6g/FqSpY=;
+        b=n0s1Jot6ulLn8J68PwNcTlRC8enPGB6mXuk6Z3Ea+rveJy+rU8jROLGzL81tuAbtQZ
+         JEQWeR78kcidRmdfozJqUUv7Uld8YnAOdW5lNB0Lne7NegCzfr+ekVRFHDbJwIb2diLD
+         F9dRTqkuoNY3xIZLEKUrENYQoYe9HtwbinlAt/YsvbpLZo4xRiUxHwwiLmgVEdsEvl4s
+         LN5uX7epgPsi4lLYeLZ2MDcXV5vFtolOgpfecApHUnazR7+tS/zM48+BsPiARlLthNLI
+         aVeY9QJWcefXCHAF4wXdZIRNNHnX+usw0BsLd3jSUNvXXgoOuWmQgbAGCmCGtLbC2FFy
+         wTaw==
+X-Gm-Message-State: AFq9FYKIGAaDiTXa4V91fPJ9sK1CuinVLAsbFItvg22pbem43/MVx4b5
+	H9XOUzkTGXWbZqqxZLszSRuNJRvyzAe091SUpyWgPcilmTMP61slwF3U1lA38Q==
+X-Gm-Gg: AYBFou0g+3Yf7ZhzYZEqG8vO1OHGjaV+ie+PFx8zbjN6BQ0W8uwKQ6V0mBC/Zx/jJZj
+	hG2CHh/MjjpNu96ZnQQFnlYveEJBQSUB9xtwnuzwNZSEcuCaYYZarztbQC4q3Vr/zuhwWTLueOp
+	eC4ioKk/iUx9o2EnXi6y8JFcVdFoN2UR+6r5jmJZWhcbVADCqLNcTTpqgEhY6G/T1rp4INpdyqY
+	k80JO3RxngddtLRkS0gWJtcKfrP9RaSRaY/EFV132L/Rz6nNBb1y6VXTgFN9BiUwu6R8vc7LW2x
+	eQGTlNSfYJQI5dmJf42ttyJUDcO0Z69vEUGrxAbB6HEtzkM3AA0kxoqeZ7O/grRHegBlWsPE8lw
+	wQLULSKpmmaWVbD4xVBdG+1/ePEy6IpUb1ZVwQvAQajGDxsJQ5NJeTZh2PdpJ5PONDn59AQm5cB
+	jKbYSsLJyT1RKaWCyTun5/vaO3yVqGpbfaa1wxOOqIt8+1+4+2GRdNpwBa48Me2c3CYEv00VPlj
+	VEIdsjkGeHyycygrv03OlLx6x2adiJUgCPqdKw=
+X-Received: by 2002:a17:90b:3d81:b0:3a7:9adb:2a18 with SMTP id 98e67ed59e1d1-3ab3ae6964cmr9881724a91.62.1791885588538;
+        Tue, 13 Oct 2026 02:59:48 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.02.59.52
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab37817414sm21282398a91.2.2026.10.13.02.59.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 02:59:54 -0700 (PDT)
+        Tue, 13 Oct 2026 02:59:48 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Subject: [oe][meta-networking][blacksail][PATCH 16/28] strongswan: patch CVE-2026-78131
-Date: Tue, 13 Oct 2026 22:58:51 +1300
-Message-ID: <20261013095903.3544906-16-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][blacksail][PATCH 14/28] strongswan: patch CVE-2026-78129
+Date: Tue, 13 Oct 2026 22:58:49 +1300
+Message-ID: <20261013095903.3544906-14-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
 References: <20261013095903.3544906-1-ankur.tyagi85@gmail.com>
@@ -69,129 +69,198 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2026 09:59:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130849
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130847
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Use patch[1] provided by strongSwan[2]
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-78131
+https://nvd.nist.gov/vuln/detail/cve-2026-78129
 
-[1]https://download.strongswan.org/security/CVE-2026-78131/strongswan-5.5.3-6.0.7_x509_ac_leaks.patch
-[2]https://www.strongswan.org/blog/2026/09/07/strongswan-vulnerability-(cve-2026-78131).html
+[1]https://download.strongswan.org/security/CVE-2026-78129/strongswan-5.6.3-6.0.7_pkcs5_params_dos.patch
+[2]https://www.strongswan.org/blog/2026/09/07/strongswan-vulnerability-(cve-2026-78129).html
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 41cb8cca46d3f97981245f2213942d2006df121f)
+(cherry picked from commit 9ea8363e3055e4b608c0e19d5db87e1fbfcad7e2)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../strongswan/CVE-2026-78131.patch           | 86 +++++++++++++++++++
- .../strongswan/strongswan_6.0.7.bb            |  1 +
- 2 files changed, 87 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78131.patch
+ .../strongswan/CVE-2026-78129.patch           | 155 ++++++++++++++++++
+ .../strongswan/strongswan_6.0.7.bb            |   1 +
+ 2 files changed, 156 insertions(+)
+ create mode 100644 meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78129.patch
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78131.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78131.patch
+diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78129.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78129.patch
 new file mode 100644
-index 0000000000..da53f8e5a0
+index 0000000000..5f327989a0
 --- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78131.patch
-@@ -0,0 +1,86 @@
-+From d1d29ac675b42a8c4a6454db84803bfecf5a0d99 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78129.patch
+@@ -0,0 +1,155 @@
++From ec14a504137915cc45080323238c64d348d020eb Mon Sep 17 00:00:00 2001
 +From: Tobias Brunner <tobias@strongswan.org>
-+Date: Fri, 12 Jun 2026 15:55:43 +0200
-+Subject: [PATCH] x509: Fix memory leaks when parsing attribute certificates
++Date: Tue, 23 Jun 2026 11:55:31 +0200
++Subject: [PATCH] pkcs5: Validate parsed parameters to avoid DoS attacks
 +
-+This can be triggered by an attribute certificate with lots of GeneralName
-+entries or AuthorityKeyIdentifier extensions.  There is no verification
-+before the certificate is parsed.
++With the unbounded iterations, an attacker can craft a PKCS#7 file and
++send it during IKEv1 to block the processing thread practically for an
++unlimited amount of time.
 +
-+Fixes: 3134379ac7f1 ("x509: Fix some whitespaces and do some minor style cleanups in acert")
-+Fixes: 26930a8c3e42 ("certificate factory can load certs from file")
-+Fixes: CVE-2026-78131
++As the key length is used for an allocation on the stack, not limiting
++it could cause a crash.  We validate it after parsing the params, but
++since `encryption_algorithm_from_oid()` only returns trusted key lengths
++that are lower than the limit, that's fine.
 +
-+CVE: CVE-2026-78131
-+Upstream-Status: Backport [1][2]
++The unlimited salt length had no direct impact (the maximum is bound by
++the accepted message size), but we now limit it as well before cloning.
 +
-+[1]https://github.com/strongswan/strongswan/commit/23c9b9a2708e4958292d828424523fa63c0be829
-+[2]https://github.com/strongswan/strongswan/commit/9762cc3b091b423543510113a5d05215daf16951
++Fixes: 4076e3ee9121 ("Extract PKCS#5 handling from pkcs8 plugin to separate helper class")
++Fixes: fd1ff46f6143 ("Added support for PKCS#5 v2 schemes when decrypting PKCS#8 files.")
++Fixes: cab127cba66c ("Added support for encrypted PKCS#8 files (for some PKCS#5 v1.5 schemes).")
++Fixes: CVE-2026-78129
++
++CVE: CVE-2026-78129
++Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit/f60a55e36f95e210ab067de295c9f6bacefcdd1a]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/libstrongswan/plugins/x509/x509_ac.c | 33 +++++++-----------------
-+ 1 file changed, 9 insertions(+), 24 deletions(-)
++ src/libstrongswan/crypto/pkcs5.c | 65 +++++++++++++++++++++++++++++++-
++ 1 file changed, 64 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/libstrongswan/plugins/x509/x509_ac.c b/src/libstrongswan/plugins/x509/x509_ac.c
-+index 3fc5de2..68b7cf9 100644
-+--- a/src/libstrongswan/plugins/x509/x509_ac.c
-++++ b/src/libstrongswan/plugins/x509/x509_ac.c
-+@@ -186,41 +186,25 @@ extern bool x509_parse_generalNames(chunk_t blob, int level0, bool implicit,
-+ static bool parse_directoryName(chunk_t blob, int level, bool implicit,
-+ 								identification_t **name)
-+ {
-+-	identification_t *directoryName;
-+-	enumerator_t *enumerator;
-+-	bool first = TRUE;
-+ 	linked_list_t *list;
++diff --git a/src/libstrongswan/crypto/pkcs5.c b/src/libstrongswan/crypto/pkcs5.c
++index 822656f..e01010b 100644
++--- a/src/libstrongswan/crypto/pkcs5.c
+++++ b/src/libstrongswan/crypto/pkcs5.c
++@@ -14,6 +14,8 @@
++  * for more details.
++  */
 + 
-+ 	list = linked_list_create();
-+ 	if (!x509_parse_generalNames(blob, level, implicit, list))
-+ 	{
-+-		list->destroy(list);
-++		list->destroy_offset(list, offsetof(identification_t, destroy));
-+ 		return FALSE;
-+ 	}
-+-
-+-	enumerator = list->create_enumerator(list);
-+-	while (enumerator->enumerate(enumerator, &directoryName))
-+-	{
-+-		if (first)
-+-		{
-+-			*name = directoryName;
-+-			first = FALSE;
-+-		}
-+-		else
-+-		{
-+-			DBG1(DBG_ASN, "more than one directory name - first selected");
-+-			directoryName->destroy(directoryName);
-+-			break;
-+-		}
-+-	}
-+-	enumerator->destroy(enumerator);
-+-	list->destroy(list);
-+-
-+-	if (first)
-++	if (list->remove_first(list, (void**)name) != SUCCESS)
-+ 	{
-+ 		DBG1(DBG_ASN, "no directoryName found");
-++		list->destroy(list);
-+ 		return FALSE;
-+ 	}
-++	if (list->get_count(list))
-++	{
-++		DBG1(DBG_ASN, "more than one directory name - first selected");
-++	}
-++	list->destroy_offset(list, offsetof(identification_t, destroy));
-+ 	return TRUE;
+++#include <inttypes.h>
+++
++ #include "pkcs5.h"
++ 
++ #include <utils/debug.h>
++@@ -22,6 +24,15 @@
++ #include <asn1/asn1_parser.h>
++ #include <credentials/containers/pkcs12.h>
++ 
+++/** maximum accepted length for salts in parsed parameters */
+++#define PKCS5_SALT_LEN_MAX			128
+++
+++/** maximum accepted iteration count in parsed parameters */
+++#define PKCS5_ITERATIONS_MAX		1000000
+++
+++/** maximum key length accepted in parsed parameters */
+++#define PKCS5_KEY_LEN_MAX			64
+++
++ typedef struct private_pkcs5_t private_pkcs5_t;
++ 
++ /**
++@@ -379,6 +390,41 @@ METHOD(pkcs5_t, decrypt, bool,
++ 						   keymat, key, iv);
 + }
 + 
-+@@ -539,6 +523,7 @@ static bool parse_certificate(private_x509_ac_t *this)
-+ 						DBG2(DBG_ASN, "  need to parse crlDistributionPoints");
-+ 						break;
-+ 					case OID_AUTHORITY_KEY_ID:
-++						chunk_free(&this->authKeyIdentifier);
-+ 						this->authKeyIdentifier =
-+ 								x509_parse_authorityKeyIdentifier(object,
-+ 											level, &this->authKeySerialNumber);
+++/**
+++ * Make sure the salt has an appropriate length
+++ */
+++static bool validate_salt_length(chunk_t salt)
+++{
+++	if (salt.len > PKCS5_SALT_LEN_MAX)
+++	{
+++		DBG1(DBG_ASN, "  salt length %zu exceeds maximum of %zu bytes",
+++			 salt.len, (size_t)PKCS5_SALT_LEN_MAX);
+++		return FALSE;
+++	}
+++	return TRUE;
+++}
+++
+++/**
+++ * Validate that parsed parameters are in an allowed range
+++ */
+++static bool validate_params(private_pkcs5_t *this)
+++{
+++	if (!this->iterations || this->iterations > PKCS5_ITERATIONS_MAX)
+++	{
+++		DBG1(DBG_ASN, "  iteration count %" PRIu64 " is out of range "
+++			 "(1-%" PRIu64 ")", this->iterations,
+++			 (uint64_t)PKCS5_ITERATIONS_MAX);
+++		return FALSE;
+++	}
+++	if (this->keylen > PKCS5_KEY_LEN_MAX)
+++	{
+++		DBG1(DBG_ASN, "  key length %zu exceeds maximum of %zu bytes",
+++			 this->keylen, (size_t)PKCS5_KEY_LEN_MAX);
+++		return FALSE;
+++	}
+++	return TRUE;
+++}
+++
++ /**
++  * ASN.1 definition of a PBEParameter structure
++  */
++@@ -399,7 +445,7 @@ static bool parse_pbes1_params(private_pkcs5_t *this, chunk_t blob, int level0)
++ 	asn1_parser_t *parser;
++ 	chunk_t object;
++ 	int objectID;
++-	bool success;
+++	bool success = FALSE;
++ 
++ 	parser = asn1_parser_create(pbeParameterObjects, blob);
++ 	parser->set_top_level(parser, level0);
++@@ -410,6 +456,10 @@ static bool parse_pbes1_params(private_pkcs5_t *this, chunk_t blob, int level0)
++ 		{
++ 			case PBEPARAM_SALT:
++ 			{
+++				if (!validate_salt_length(object))
+++				{
+++					goto end;
+++				}
++ 				this->salt = chunk_clone(object);
++ 				break;
++ 			}
++@@ -421,6 +471,11 @@ static bool parse_pbes1_params(private_pkcs5_t *this, chunk_t blob, int level0)
++ 		}
++ 	}
++ 	success = parser->success(parser);
+++	if (success)
+++	{
+++		success = validate_params(this);
+++	}
+++end:
++ 	parser->destroy(parser);
++ 	return success;
++ }
++@@ -471,6 +526,10 @@ static bool parse_pbkdf2_params(private_pkcs5_t *this, chunk_t blob, int level0)
++ 		{
++ 			case PBKDF2_SALT:
++ 			{
+++				if (!validate_salt_length(object))
+++				{
+++					goto end;
+++				}
++ 				this->salt = chunk_clone(object);
++ 				break;
++ 			}
++@@ -500,6 +559,10 @@ static bool parse_pbkdf2_params(private_pkcs5_t *this, chunk_t blob, int level0)
++ 		}
++ 	}
++ 	success = parser->success(parser);
+++	if (success)
+++	{
+++		success = validate_params(this);
+++	}
++ end:
++ 	parser->destroy(parser);
++ 	return success;
 diff --git a/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb b/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
-index bd3191d35d..af687f5e4d 100644
+index d8ed26d841..5a7a12d903 100644
 --- a/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
 +++ b/meta-networking/recipes-support/strongswan/strongswan_6.0.7.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+@@ -13,6 +13,7 @@ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://CVE-2026-78124.patch \
+            file://CVE-2026-78126.patch \
             file://CVE-2026-78127.patch \
-            file://CVE-2026-78129.patch \
-            file://CVE-2026-78133.patch \
-+           file://CVE-2026-78131.patch \
++           file://CVE-2026-78129.patch \
  "
  
  SRC_URI[sha256sum] = "e518e34e159514f4c6ba80d1f926cb151e0dd4e3a1d94213171234b8b9ae6f55"
