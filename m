@@ -1,138 +1,101 @@
-Return-Path: <james@codeconstruct.com.au>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1981CC6B27
-	for <webhook@archiver.kernel.org>; Wed, 14 Oct 2026 07:53:39 +0000 (UTC)
-Received: from codeconstruct.com.au (codeconstruct.com.au [203.29.241.158])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8314.1791964412517696387
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C86DCC6B27
+	for <webhook@archiver.kernel.org>; Wed, 14 Oct 2026 08:36:50 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8750.1791967002513799892
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 00:53:33 -0700
+ Wed, 14 Oct 2026 01:36:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@codeconstruct.com.au header.s=2022a header.b=GQyyd8oh;
- spf=pass (domain: codeconstruct.com.au, ip: 203.29.241.158, mailfrom: james@codeconstruct.com.au)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=fmLA+voZ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48c4d870d54so2364041f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 01:36:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=codeconstruct.com.au; s=2022a; t=1791964408;
-	bh=6hBC/khF04eMPYgGnAOL/bKF49gItK4vzVcXMIuoCGU=;
-	h=From:To:Cc:Subject:Date;
-	b=GQyyd8oh5/Is4qdDmIoy/nD9/0/kQsV6WkhLve84zFUEyUVFJIrF+EVZZGQtnuPMe
-	 bisqa1uDZL6FOOH1sBw0uwN5ao/VSUcTByU+/IzTa41Lbk2akix2FC2KW69o9cQ5uu
-	 BSVH4td709KaHYB9GxmEZpeacKKalc8gDq3jmxRK/ENRHUXJvV++WDmRySPGuRHeEv
-	 P+2+VrwNMyccH1FpieUziZPApX95l8IWrsrpFlU/76aj4eGwo4TXWUlO3HjS9dsuRe
-	 1vjq46Eq5peF++Jck9/UPEDiXaF2zJGqfBuouiOfsgMFwXw6vvwYU/h6rfm8lF2yFZ
-	 VhV2PjYL+9a7w==
-Received: by codeconstruct.com.au (Postfix, from userid 10004)
-	id E36986FD80; Wed, 14 Oct 2026 15:53:28 +0800 (AWST)
-From: James Lee <james@codeconstruct.com.au>
+        d=gmail.com; s=20251104; t=1791967001; x=1792571801; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mAiWHwhihcuJzwNPc/AVqFkAhhalZvwwYgRGqoA51T0=;
+        b=fmLA+voZVzOixLrZwb4jBTbMFE14Jcq+yOQaS8T6+clNVopHfk0RIn7W+FJ/YOyieX
+         zHGO0VS1z8bBPgOSi/CsMyDDboZlFtDxTCi+VIuYWsbQVz2/YOd+zgMDrQUge4bs0Yvy
+         klT57Jy8hc6KBrkNOrqDoDfr7mEwmAMxcfuqytZYtOZgqNUnO3j4Ry5abU7hCQYA3kLz
+         PJtRBY3GbsVB4QE+j4hTm3l1Speqt8U9jTKU0I74iwhJb3HJADHoy+rRNyeD0qkfC7bU
+         eJT9kZ4eRuOAmCqTm7DWZXjtqSqti3hlza0R7syioGMghkBYm/gendH7nATFe3N78Vl9
+         GbTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791967001; x=1792571801;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mAiWHwhihcuJzwNPc/AVqFkAhhalZvwwYgRGqoA51T0=;
+        b=DP0L2hgVTivMf3hBzsOfuTrfMWgPV/E/kZLLb1hzN4ZAyvSCG9a8vc3Ocfl5FFp0H1
+         It3Ysmj/JzSHvfT67jOwhMSPlXH70SKD4EnIjFNTngqFGwabSIV6eKsfqM2h1/acIAjf
+         6tb8ruFVIPNv139yfVHj3GQEc4CkEpLsixgBg4w6DJuRp7wLJ51HpnSF9r44aj85wFZF
+         fz5rprx9NXz8haM9GFGA1MCQWMZCPyWmfh7n7qy1CEFxUUq0JynBBYnoo4X01/JGSt5K
+         Wb12hqPZN68PBvNj7IOO0A4WjHNSSS944pjNOYQKtrXsnNvsk7f1aNH/nbJ9YU07T2dh
+         HebA==
+X-Gm-Message-State: AFq9FYKalevb3wPzf2T9IT/wLdWxe6d2fYiyjRd5UGEm1eMBzP+/lZE5
+	Sa5rvnq2x7OMNYkkcuzKwU3kv35y2ZyoOuOUw6P4ST395Txpol9yEc0oiDQAkw==
+X-Gm-Gg: AYBFou3rI4qYT3R4Hrao07MmZsowaUy7VqdlDinTO+Dmmx0dlEGPNs4lvtdQQehj3Uh
+	uiCpZJXgLX/3hj+Ha+qjQmBcZy0o44kCmD7T+xAjn66q1y8KV5mBy0t6m+4bprca8VoYyALOd5D
+	tYx39NQBfouSSvHR734Ejy5lmjs0UDiz8LPa4EVwrV48RQYp0v84JGSrWZtexY3LXSqrgdDqvr0
+	57muqwmv1QpZlUW179jJ58Sl4hjF0KJyt1d5+fjTqq/33CK6iM3To5DlVdmZOW1hmTVjz5tGwoK
+	Aaf+JBOgrOH8/TpEtXUVMaN0wGiVJRIiAOLq121obAqotDUp68vDKCmAGcykerXRY+jhrP5WfDV
+	/XtnXQ8q9EgwGoBMNMqzgX56dfYDYhS7JQWG8w+ge27wGe9lKQCzaUrmWfuFxta5zV9C/8GYQ72
+	gmUppTfGzmxs0W3pQh9P/0OMYBw5+14Uwk35/1AVYR1DjSiWwndyaAT6kDcWef0IUcRNF7Y+Tlr
+	s/qo6nm36WkJRMOe/acTu+SLnTP/USHL9LGUscahrwOBnfK9s0RmzAjGkE=
+X-Received: by 2002:a05:6000:4541:b0:48c:7161:43e3 with SMTP id ffacd0b85a97d-48dbacfa612mr17905257f8f.54.1791967000404;
+        Wed, 14 Oct 2026 01:36:40 -0700 (PDT)
+Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0ac35dfsm10576925f8f.33.2026.10.14.01.36.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 01:36:37 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: andrew@codeconstruct.com.au,
-	matt@codeconstruct.com.au,
-	jk@codeconstruct.com.au
-Subject: [oe][meta-networking][PATCH] mctp: upgrade 2.6 -> 2.7
-Date: Wed, 14 Oct 2026 15:53:25 +0800
-Message-ID: <20261014075325.1205663-1-james@codeconstruct.com.au>
-X-Mailer: git-send-email 2.47.3
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH] wireshark: Break dumpcap into its own package
+Date: Wed, 14 Oct 2026 09:36:24 +0100
+Message-ID: <20261014083623.2773200-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 07:53:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130867
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 08:36:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130868
 
-mctp version 2.7 adds Meson's installation tags to the project, now allow=
-ing
-binaries to be selectively installed.
+dumpcap is a lightweight capture tool which carries no dependencies on
+wireshark. Break it into its own package, with an RDEPENDS back to
+wireshark.
 
-Use MESON_INSTALL_TAGS to selectively install files specific to each reci=
-pe.
-No longer rm in mctpd's do_install step, which was a now-unneeded hack.
-Meson tags prevent installation of the extra binaries.
-
-Add mctpd.conf to FILES in the mctpd recipe following its installation to
-improve recipe readability.
-
-Signed-off-by: James Lee <james@codeconstruct.com.au>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- meta-networking/recipes-support/mctp/mctp.inc         |  2 +-
- .../recipes-support/mctp/{mctp_2.6.bb =3D> mctp_2.7.bb} |  1 +
- .../mctp/{mctpd_2.6.bb =3D> mctpd_2.7.bb}               | 11 +++--------
- 3 files changed, 5 insertions(+), 9 deletions(-)
- rename meta-networking/recipes-support/mctp/{mctp_2.6.bb =3D> mctp_2.7.b=
-b} (80%)
- rename meta-networking/recipes-support/mctp/{mctpd_2.6.bb =3D> mctpd_2.7=
-.bb} (73%)
+ .../recipes-support/wireshark/wireshark_4.6.9.bb          | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-support/mctp/mctp.inc b/meta-network=
-ing/recipes-support/mctp/mctp.inc
-index c8fc98f63a..05a09f6c70 100644
---- a/meta-networking/recipes-support/mctp/mctp.inc
-+++ b/meta-networking/recipes-support/mctp/mctp.inc
-@@ -4,7 +4,7 @@ LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
-b21"
-=20
- SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
-https;tag=3Dv${PV}"
--SRCREV =3D "31ac0e86b0e23d32abf34d191653a87a47f3c9a7"
-+SRCREV =3D "eca0e9a7f87ed478be206e4f52bcd51561da18aa"
-=20
- inherit meson pkgconfig
-=20
-diff --git a/meta-networking/recipes-support/mctp/mctp_2.6.bb b/meta-netw=
-orking/recipes-support/mctp/mctp_2.7.bb
-similarity index 80%
-rename from meta-networking/recipes-support/mctp/mctp_2.6.bb
-rename to meta-networking/recipes-support/mctp/mctp_2.7.bb
-index 5811495c66..6d2a401716 100644
---- a/meta-networking/recipes-support/mctp/mctp_2.6.bb
-+++ b/meta-networking/recipes-support/mctp/mctp_2.7.bb
-@@ -3,3 +3,4 @@ require mctp.inc
- SUMMARY =3D "Management Component Transport Protocol (MCTP) utilities"
-=20
- MESON_TARGET =3D "mctp mctp-client"
-+MESON_INSTALL_TAGS +=3D "utils"
-diff --git a/meta-networking/recipes-support/mctp/mctpd_2.6.bb b/meta-net=
-working/recipes-support/mctp/mctpd_2.7.bb
-similarity index 73%
-rename from meta-networking/recipes-support/mctp/mctpd_2.6.bb
-rename to meta-networking/recipes-support/mctp/mctpd_2.7.bb
-index 139865d7c4..b8b3719c9e 100644
---- a/meta-networking/recipes-support/mctp/mctpd_2.6.bb
-+++ b/meta-networking/recipes-support/mctp/mctpd_2.7.bb
-@@ -4,6 +4,8 @@ SUMMARY =3D "Management Component Transport Protocol (MCT=
-P) control protocol daemo
-=20
- inherit systemd features_check useradd
-=20
-+MESON_INSTALL_TAGS +=3D "mctpd"
-+
- do_install:append () {
-     install -d ${D}${systemd_system_unitdir}
-     install -m 0644 ${S}/conf/mctpd.service \
-@@ -14,6 +16,7 @@ do_install:append () {
-     install -m 0644 ${S}/conf/mctpd-dbus.conf \
-             ${D}${datadir}/dbus-1/system.d/mctpd.conf
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+index 1a10eb08e850..fec2345b0638 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+@@ -106,12 +106,14 @@ do_install:append:class-target() {
+     rm -fr ${D}${usrlib}/${BPN}/cmake
  }
-+FILES:${PN} +=3D "${datadir}/dbus-1/system.d/mctpd.conf"
-=20
- SYSTEMD_SERVICE:${PN} =3D "mctpd.service mctp.target mctp-local.target"
-=20
-@@ -22,11 +25,3 @@ USERADD_PARAM:${PN} =3D "-r -U -s /bin/false mctpd"
-=20
- DEPENDS +=3D "systemd"
- REQUIRED_DISTRO_FEATURES =3D "systemd"
+ 
+-PACKAGE_BEFORE_PN += "tshark"
++PACKAGE_BEFORE_PN += "dumpcap tshark"
++
++FILES:dumpcap = "${bindir}/dumpcap ${mandir}/man1/dumpcap.*"
+ 
+ FILES:tshark = "${bindir}/tshark ${mandir}/man1/tshark.*"
++RDEPENDS:tshark = "wireshark"
+ 
+ FILES:${PN} += "${datadir}*"
 -
--# Meson adds mctp utility binaries to FILES and do_install(), which cann=
-ot be
--# overriden by MESON_TARGET. Override FILES and remove binaries to corre=
-ct.
--FILES:${PN} =3D "${datadir}/dbus-1/system.d/mctpd.conf ${sbindir}/mctpd"
--
--do_install:append () {
--    rm -r ${D}${bindir}
--}
---=20
-2.47.3
-
+-RDEPENDS:tshark = "wireshark"
++RDEPENDS:${PN} += "dumpcap"
+ 
+ BBCLASSEXTEND = "native"
 
