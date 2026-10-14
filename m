@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00313CC6B1A
-	for <webhook@archiver.kernel.org>; Wed, 14 Oct 2026 09:26:08 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9337.1791969963475841034
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11657CC6B27
+	for <webhook@archiver.kernel.org>; Wed, 14 Oct 2026 09:26:09 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9334.1791969959052091428
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 02:26:03 -0700
+ Wed, 14 Oct 2026 02:25:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=EO79Cwxl;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-89d6bd67045so614158b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 02:26:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Z1FrQ0zH;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-890d52c7c7bso3173617b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 02:25:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791969963; x=1792574763; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791969958; x=1792574758; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=82mi7uN1CTwHA36gJe3vwQAQe2oXMuprdTRsO4HgWkU=;
-        b=EO79CwxlPPihktOTpT5WnZgkcda48T4Z6rHxDaPpWGBVPAHILR9qYRS5Bkbi4Y9lka
-         Sop1Wx5A5tWf3iFgsscR9sWXGHos0Bmz5MDwFqVs4yjfVSk/gUl5aOY0X8SyJMMnS1J5
-         +kuLNb2QGAqvgH/8/gKdmI3DVX5wcp2LLvmO2H/t6ge3wrFw8pDutxPJP50isYDoxBaf
-         eIFETIZzfDDDJMO9a23oXBBaPGw1qiIll7Y0l7UOQ/E7LTGEoQEkhoOvlGQIQ0ODteMb
-         Ihv/MA0FvBK7ju7/yspQblTbcJnYLf+/KjEkjfoR/QA+uQQHNr41IX5uS/9zAgHIMCj0
-         07Tg==
+        bh=3BFzdwDFW7wTV3svdpv55mLXc0xFJAqXCwGrZefnb60=;
+        b=Z1FrQ0zHJm5mkSDm+EfoiuWWw4XqW73lMEJMS9d0czxByfwrh+yZsl9meGzndnTZ7k
+         2MD2byqdrtw310ekw4pZUawDKkZNnXI/kciAj0WpgYHxS6xVAoIKePoS3uJB3h5u6XkG
+         /1logKXwQmX2EP3OdcWqxqjondaB1iUhqEBYG0EDVJ7Iq/l422zuSLoTnIJzR/HrxOIb
+         EsCmVJJo8a/IjOOD9CmgPe/WhxpffWLRPAa0oSixH0rIrsNC1YSyIStEYjyRBHMouNMr
+         8A4HXliN/5jyvC5SvUxYZb/ezDQ0AB7AOAlmKFhvxg7v2X+9WRRw1wp93bTuNv6cjumh
+         NH+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791969963; x=1792574763;
+        d=1e100.net; s=20260707; t=1791969958; x=1792574758;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=82mi7uN1CTwHA36gJe3vwQAQe2oXMuprdTRsO4HgWkU=;
-        b=WJkdqLihWSAT3+HxKEAvNU5tOAWbnrynpGim7wJ1YI+w1NmgLzkPD68Mi6n55Q/+tH
-         0gUkQbfXo/Dp4i90s0Igi82ICLuGEq3oc+RWRniXyOPAo8mkxTpkKGCuL74BYnW+qH6B
-         IHkGf7KNtwwxQQDBtmbbkqMH57U65HbQ8fSRMV2imMVJbVVbB+inKFxxyno75MktPj32
-         8y/OSxsYhzhkdZcjYLwBIo544T/rQEFyPJ23u6fnjbfS0t01m5GlC3xtssxDi7wCFpZS
-         qxnMsDS+J7V8q/Fx9k3rgQAXPoWVyfTl3NuYyeKDwnp7UTPDs9jRDHe4ImybjF1DtByF
-         8SGg==
-X-Gm-Message-State: AFq9FYJcLIn1oEnuNjCrrBzYiucF9YJY319h7UCW+4hXavll6F3i98AW
-	CVHGi+sstoox6FxJduERj9uDZjZjquvssu1rxmMxzokuG4/rvHHF7/d1Ia56GA==
-X-Gm-Gg: AYBFou2u8zrTvcT9SXQs/VPjipugNliZZ6Lz0rvlDBEr2OPr8kJEKTKBKKzmU3iMqr9
-	7imHMY5k0dxRvcoJGT5w53aHuADXhb7hkz0j6YlQUeXPPR0kTKdzDTQu1zQakxuaDZt0JtDb27o
-	6szeiLdC0B99nkvDwiDQQm5ZzG3sOAHeWyelz8gawCoKHn27RCrUuQdVkxsJZmwkxKF33CL9TIn
-	XQuJMBS42mMsm28jS9a9Eit/ts5AEv2D0/Kfr4Iefmiu8DWUoDUG1tjh6w9pDKE8hTfpvTCqqlI
-	FCwBot0RTFEgM9YnoBj6s6GVZ+tPT42qSUpa4iZjabOlq4fdy10n6eEP+7/Z57zae8fBCDYMS3b
-	zJNKgVmcSQ1akQSOErpSObsoe6Mi7ACVPnej1XcFBNXzvoH5Zs+39XPjDL3S8mIQQnVVahUbDlm
-	VhFDScKPKH/EX+QkfK2oDEo/t+5UXbb/1h0RD9YUAXPmRQSNX0nvsFMqUs8hi3tfHDGLUW7HvX4
-	hUdnPDuTr/awUkb9tuqoz4tRg1SkLD/2z7f3Hg=
-X-Received: by 2002:a05:6a00:4307:b0:891:41ae:ad68 with SMTP id d2e1a72fcca58-89695ebf3d9mr10129793b3a.23.1791969962802;
-        Wed, 14 Oct 2026 02:26:02 -0700 (PDT)
+        bh=3BFzdwDFW7wTV3svdpv55mLXc0xFJAqXCwGrZefnb60=;
+        b=dFaHb8d2lq0nyq2Cuu9fozjOtkPNSvwEipiwpZnkm38nOvkwdZFCnyBv/YOa2HKM+x
+         hTQmhnUaOaBK2bHc/haejCvMfRHTLqmck/1dyAsGQ4PgDO1Fc+xgndMGyfTC7BuWlcda
+         4d2SIsFzn50ulIyfmy1Q0PIOuy4sUo27ZTX98xOXifcApllYV3ylnisxQt9NECC2EY47
+         aNovqqiw5u+UbJS+SuBpEA6mBQw+3nagpbU/pXHpVirlqFyms+Kg29pGqsAs2wgqbKoE
+         cSECh0Bs5ekAL9OCoRveT5xNafXmSZC/eDBTYPNO/z9w916sWnk2ww+MZ8h5Kqa01LNU
+         CfSw==
+X-Gm-Message-State: AFq9FYKYxqNn7TLC/D2LkUXnw74U2dxE1WegtrigyOHyBcBNsawEw/Ri
+	J+U6OB6E+XEjgmBOrnZRFvVVa3F40IGO7AfQdlMjXIA4CSXgAAOgMUhYwuDqiQ==
+X-Gm-Gg: AYBFou0KzK71y9AzhDGEwo/fgrXwBNnb+aEom3hQpZC07G0sR0Fy+ZYz1fsAUxoImv7
+	gkCFmxiBlVacsoSm5K/c/MNgPDupcM+ivpJthWArNYiLoDjk5RCrzKDw/rSdzY1wd62uhknm0sC
+	7N8Nz6ySUPjVweu39IIR8v7uIONc9VHH5VhicFX26l7j//1IPOHuwRYBOXV01qOxzbGLsUj6dTK
+	gyhcsEackwfhekm1nF8r/dAOLkphFKzFuGMgujoPM97c/1GTLOFkW9csDT2AJtk+iJeqHApz8hk
+	L+j+h9Af3Wc/ME43smjwjlFiR9fLV5ODzgqvN0If0+t9R/9M8YIwDjQyxl5bEJn+TldcYbdyeWc
+	EcLW0Jlzecy+hyvaVo5pPiH2Asqni11GDqSbsJ4Lmlg0ySECZJD2tnvoYuO4xJLYAQ38lmaHIUi
+	914gcLbHviZOwJWCwQqXlF/r+xBWA19zxYL+JPqXOj2j+/Qj1ZxZKPW3bT+FiiNDx1HqjKyauee
+	L1GyNJiZFYqmLb+mVEM3twl9/2t7Z4J4q2n/l1fvl7oeEzGJQ==
+X-Received: by 2002:a05:6a20:e282:b0:3e0:d508:59b3 with SMTP id adf61e73a8af0-3e16bf071cemr13125407637.71.1791969958340;
+        Wed, 14 Oct 2026 02:25:58 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d804ec645sm865426b3a.43.2026.10.14.02.26.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d804ec645sm865426b3a.43.2026.10.14.02.25.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 02:26:02 -0700 (PDT)
+        Wed, 14 Oct 2026 02:25:58 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 17/17] libbpf: upgrade 1.7.0 -> 1.8.0
-Date: Wed, 14 Oct 2026 22:25:13 +1300
-Message-ID: <20261014092514.454505-17-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 15/17] libmikmod: upgrade 3.3.14 -> 3.3.15
+Date: Wed, 14 Oct 2026 22:25:11 +1300
+Message-ID: <20261014092514.454505-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261014092514.454505-1-ankur.tyagi85@gmail.com>
 References: <20261014092514.454505-1-ankur.tyagi85@gmail.com>
@@ -67,44 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 09:26:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130885
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 09:26:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130883
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-License-Update: Update LGPL 2.1 license text[1]
-
 Changelog:
-https://github.com/libbpf/libbpf/releases/tag/v1.8.0
-
-[1]https://github.com/libbpf/libbpf/commit/f7081a6baf3f54949aacb8c2fc11bb30783b83e9
+https://sourceforge.net/p/mikmod/mikmod/ci/libmikmod-3.3.15/tree/libmikmod/NEWS
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libbpf/{libbpf_1.7.0.bb => libbpf_1.8.0.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-kernel/libbpf/{libbpf_1.7.0.bb => libbpf_1.8.0.bb} (84%)
+ .../mikmod/{libmikmod_3.3.14.bb => libmikmod_3.3.15.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.14.bb => libmikmod_3.3.15.bb} (90%)
 
-diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.7.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.8.0.bb
-similarity index 84%
-rename from meta-oe/recipes-kernel/libbpf/libbpf_1.7.0.bb
-rename to meta-oe/recipes-kernel/libbpf/libbpf_1.8.0.bb
-index f6cb024706..6341fa3ab1 100644
---- a/meta-oe/recipes-kernel/libbpf/libbpf_1.7.0.bb
-+++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.8.0.bb
-@@ -4,12 +4,12 @@ HOMEPAGE = "https://github.com/libbpf/libbpf"
- SECTION = "libs"
- LICENSE = "LGPL-2.1-or-later"
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+similarity index 90%
+rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb
+rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+index 2468943349..bfd15cabe1 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+@@ -8,7 +8,7 @@ DEPENDS = "alsa-lib texinfo"
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+ "
+-SRC_URI[sha256sum] = "dffd82b8f254c3489c32098da831f33eac7136843d1e7ccb802f1254ad5b4219"
++SRC_URI[sha256sum] = "dc27b338154b8f88dc9e6317196d42c6abc13bf63c4e055257a18d4e38e1afa2"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mikmod/files/libmikmod/"
+ UPSTREAM_CHECK_REGEX = "/(?P<pver>\d+(\.\d+)+)/"
  
--LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
-+LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1-only;md5=21de888f1891efa635f1706a7ad3886b"
- 
- DEPENDS = "zlib elfutils"
- 
- SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master;tag=v${PV}"
--SRCREV = "f5dcbae736e5d7f83a35718e01be1a8e3010fa39"
-+SRCREV = "85c0d575a447651bbeb8e2376eacd64c30dce9a6"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
 
