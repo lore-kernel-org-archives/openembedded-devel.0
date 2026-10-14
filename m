@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A01B1CC6B2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A35BCC6B2A
 	for <webhook@archiver.kernel.org>; Wed, 14 Oct 2026 09:25:58 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9329.1791969948088461959
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9263.1791969950013211766
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 02:25:48 -0700
+ Wed, 14 Oct 2026 02:25:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nYqG1s9Y;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-ccce6d9abfeso2197257a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 02:25:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WYEFOLFE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8917c712f32so1768433b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 02:25:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791969947; x=1792574747; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1791969949; x=1792574749; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=v/VdodEsNNnjnstWKGhDoEepkaSl4cgdsipZu8OI7W4=;
-        b=nYqG1s9Ysggzfu5hwiFX0awbf6vASM99c4qrPCTm6Uow592f05LMF1O4Cx01CVUl09
-         O8rnoTcmw7ziBtmC4u4N2i8PeX95NgFc3K7WbfGkKfvAur92AbOr8MPCL5gS0orKNbUp
-         3NOY4RviwwOi8cRjSmWejxFHdZNvKAVDSngbIH3wyFsfC+XmGa1WUeapeIKT6WRYBWqg
-         BSO2D4LzSJy7ITD1oUpCbuoJadq99zg3Nn9pc3F10U1ewQAK90Q7Oy2h28zqTgkFiN/M
-         FF0EbNx+4TUU9NnSMj0Lt/LA+wmHUEzPGLAd7PntKHhRpm6m9QXE4HQX99B4FAC2G/j3
-         vhbw==
+        bh=Ir1fnGM26BmNmRGXAj6WMIJF1W5fPKzWlS66udaBFuE=;
+        b=WYEFOLFE1h+2/rAnc9rYcWwtyDOX5TRzmLAa9t/ypufniv9uNRz1FJ7wnux+IPYTpY
+         b4a5mJH7utehe/GBxkuc+/ArzzTu7O8oTmubA3hxog+ltvYZ62BDhlkWOxgLRrsXWpiy
+         DcpbnS8+PaA8MHsFOMon+9QH4/eOjtNfqwUoTdNQc13clicc5r7W4+FQYj04Ei2kt5+A
+         ZclNukObXDuetpYUcmVhG9wP4lSHkjh/kEsUtj1vGWdf/2SK0YDmv6l/6+NExxuxuxCN
+         Mcr/k7/GEJ99lWU6pY1C1eFpxW3S/FggBwsGNr+/cERNLT13nNumjBfGphhcBkCRBqRb
+         stuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791969947; x=1792574747;
+        d=1e100.net; s=20260707; t=1791969949; x=1792574749;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=v/VdodEsNNnjnstWKGhDoEepkaSl4cgdsipZu8OI7W4=;
-        b=GspeZK++J1TVjJOefaLZMJku3l35M0wshJbawHk2K3Srhp1HKe+ss9jhkQ6qZD6rcZ
-         rsDpRZrdnsPANopdRxk/E6XXQOs2r6M/FRYhPkC4R/rNm/XgobhBT5+nt1us/KnPc+Yh
-         oxnCLfQ1ej2iQe5MwSa6MIQbR4o+d2w8j1eju9P9TOvuTVpSsMEcNHWfP9J6TfQw73VA
-         MfalebNtNNddPCNWd15Bo3q1+zjNIceL2ZTwGRu65ACvl9aaA1s7ZNWZXv3fQYi4o2sF
-         +PmLlYkW1jgqektYQPmiwP4ZsahhMIsd+h/kj9bRAGNaiucG2wMT/H/1vXhDkXbpchAW
-         84PA==
-X-Gm-Message-State: AFq9FYKKmQPo736BWMFf3XVkeHiSpidt2b48ISVw1kME2Aef079ZYoFj
-	B628Ze5MKssDIlmD4doiG6VIC69FRfFqXIHSvNgkhBw2kJtLYdE1U/cEatInMg==
-X-Gm-Gg: AYBFou0gRjrzBE5BFIf2+8oZUTcCw7BzZFeY+VJp3tlu7ceB5qhJir1lR1SMDvPEWx0
-	7fwZnvIA4NeS07Mi9TKqVG7Mn/LK1r95LbeCmtSacVKxvEPXsoboypGf7cW0DYRlVqsD0OhQgDq
-	XFlAWMi76YRvIv+DpXxw2GKdWI9yQ0ki9/Dwamcb5r9uwYatJwXIfRDvLpwLOlBy7ZC8DL3aK7x
-	QTdZUArla5JsouxTvbtN9Qp4OGLqbw3fmthgMj9ndAwly9nT6xqmXmIh2tfI0KUrn0dZV5cs+73
-	QD7s17p1y364pXuwtWdpTZTgmw30jG/iKo8kOgvVY2SIyg0mHbBc4RcRxT2cRW3hUe2ncZoilon
-	OFaU6qV2qsNOQOuk98B63XZSfAobaEpOs+MvFdF26frX/65T+1vQbL46gUiPrqgQURZaZu7t0Ai
-	co+Kxv8+B9zJbutno9So3UU0A0furEVtotyUaS09gWF7ALHgK3wDvyW7uT3dx3xTLsUQmgvasbb
-	M9jHSpaZtTvx8wAqkF7zC9bEUuplWsumEzTB0c=
-X-Received: by 2002:a05:6300:83:b0:3de:80a3:cc30 with SMTP id adf61e73a8af0-3e16bd7e8f6mr13032142637.19.1791969947197;
-        Wed, 14 Oct 2026 02:25:47 -0700 (PDT)
+        bh=Ir1fnGM26BmNmRGXAj6WMIJF1W5fPKzWlS66udaBFuE=;
+        b=VEl4KGHcBQOsok2QO7dGi2oWxJyCBKrreWsOHGnXd6myIvvDDheHGmtJV/0qhex6pX
+         9jya9yHpJn4CWce+TdwCTjysF6Zrcp+QFRZTZ74JYQsiIsrx/5CBq9ggKTcHtAdSQ9Ue
+         StgqCbzwdMcGBCaYVP/6t7989MM0K2X/c2Z4Pza3iIEz0y4bH20unnkE3n5JJaiuaSQf
+         IRpJOKEUfYVtxzDYTYn89yxP78Mc6TOeyCOjEkdhnN4OOZtHjYVc0mrgDt3DMJVhHm5U
+         vwUexHiDlEvw9KBlKNNCAPvcTG0QBd9pqb5fp/h6wcz1HZ1SEwF300N7GdihHGr2RDOT
+         ObUw==
+X-Gm-Message-State: AFq9FYLkxbPqzZdHVAUDzXQubl5PeVsniJbxat65ugEiPueHJ2C3UcRF
+	+VMTx9qFgUaMkn39UsZlSbdyTfBKrFLFRWSi3SBu4lp6YsBO8lqLEHbOwHKMEQ==
+X-Gm-Gg: AYBFou3+9RpL3FlMlcoJjqt41ywyDDiD7QjgAsVUWfcuhXYVyq0YWvezM+QotxSnTqu
+	7dcVBTrNCm0hth2rx8tu1d/R4JHeEgwvBYfCTwopQxrIVQfkC2cgROUVmzLzzHzr5HLuZI2LmZA
+	PEbAq7ZXvUdUS1zwOTusixzQRH0qpFzXFjqhkYqwglH90x+JGqDf+MXJJMKz1R6+yuHA1L0Z6tl
+	62+7EPhrGFE2M9pPI/O3pLIxqY9zOdkRUUcITT0Ayn7iBEeIu1Hp8ZOKVSKPYEzk25SDXv6kktB
+	iIsHPRN0Uro8/sDgWaHAs5cEJnehJrndCVqm6CuyGK8jHwiCrUfC45mlYdbu5LQPsrz/T2DA1JQ
+	5h4WiW8/jvrGPxLauftKSNu3N+uvgK3R6P7rNugkpCk1f/3RigVVrK6TX3sIw0DzeTgN5sR/iaX
+	mUka555qyJvnFpK8DNNLPL5gtFU0RJt+tSepUBd66Fql29tuO+fyCdRG7J6aFF9w36d6EiizNDL
+	+K7BN8PusCxm5naTwNA1ujF9f2zNqSY1aOpw3E=
+X-Received: by 2002:a05:6a21:348a:b0:3dd:a195:dd57 with SMTP id adf61e73a8af0-3e16bfc3315mr12090670637.57.1791969949341;
+        Wed, 14 Oct 2026 02:25:49 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d804ec645sm865426b3a.43.2026.10.14.02.25.45
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d804ec645sm865426b3a.43.2026.10.14.02.25.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 02:25:46 -0700 (PDT)
+        Wed, 14 Oct 2026 02:25:48 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 10/17] imagemagick: upgrade 7.1.2-32 -> 7.1.2-33
-Date: Wed, 14 Oct 2026 22:25:06 +1300
-Message-ID: <20261014092514.454505-10-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 11/17] hunspell: upgrade 1.7.4 -> 1.7.5
+Date: Wed, 14 Oct 2026 22:25:07 +1300
+Message-ID: <20261014092514.454505-11-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261014092514.454505-1-ankur.tyagi85@gmail.com>
 References: <20261014092514.454505-1-ankur.tyagi85@gmail.com>
@@ -68,30 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 09:25:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130878
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130879
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Changelog:
+https://github.com/hunspell/hunspell/releases/tag/v1.7.5
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{imagemagick_7.1.2-32.bb => imagemagick_7.1.2-33.bb}        | 2 +-
+ .../hunspell/{hunspell_1.7.4.bb => hunspell_1.7.5.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-32.bb => imagemagick_7.1.2-33.bb} (99%)
+ rename meta-oe/recipes-support/hunspell/{hunspell_1.7.4.bb => hunspell_1.7.5.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-32.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-33.bb
-similarity index 99%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-32.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-33.bb
-index 818a4e8520..694741704a 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-32.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-33.bb
-@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://imagemagick-ptest.sh \
+diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb
+similarity index 96%
+rename from meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
+rename to meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb
+index bdfe1bd4b1..ec25dc91e2 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell_1.7.4.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
  "
  
--SRCREV = "ad98b244c995d2e3051757fa3b7855f45b550d24"
-+SRCREV = "211e5b975a0019a88dcef5f84c1193f46738d815"
- 
- inherit autotools pkgconfig update-alternatives ptest
- export ac_cv_sys_file_offset_bits = "64"
+-SRCREV = "92aa34b3f378ec115562fb06bd1728d566a339ec"
++SRCREV = "e8342700b4dde06130cdbba75f7e6500ffa58864"
+ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
+            file://run-ptest \
+ "
 
