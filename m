@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB4ACC6B33
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:28:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D897CC6B2D
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:28:18 +0000 (UTC)
 Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29959.1792027686888211457
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29960.1792027689301234172
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 18:28:06 -0700
+ Wed, 14 Oct 2026 18:28:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NtfsvE3v;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZUlMFEjO;
  spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2e8fe8e343fso18254495ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:28:06 -0700 (PDT)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2db80fcdf8bso27511365ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:28:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792027686; x=1792632486; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792027689; x=1792632489; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tQHctWdtSHtNoicnbSUbRG3xGgW7mfr8L4h6I/eG6aA=;
-        b=NtfsvE3vL5ym/UPC1pejCJ0QybnxPQgU+T0Av4mjahBfv6ohMuCaEZMdWNgG4uavHw
-         ii0AqBtCV7Po76E2o8308tGZodbUwJ1UUpxLCifkg/F4WeNI86qntk6JrbTP3Xi3o36C
-         CFSoQDe2u2j2HE/kVHuGXs/b0crLywQkGKPzrXcuLCRltSKRhr6p/+TXvRRphUOK+uU+
-         IobQnYDAmR063RnJMAI58H9kE2A7YadWGghqv+TqOoBV56qKAKaugss3hhaRdsqukQR9
-         Yd8QSF7BNs4b8nkpOYR8QtZ0PoWMA6oYSxS8zKl0yEztt+cqjBIgyHHEGcX18pTFa9VA
-         t1qg==
+        bh=k8Iia1BOLpNqYSiEkka5Ve7BhIf9XUifgxvn1JG1yHM=;
+        b=ZUlMFEjOP4R7xaA9NDzEXeo6LLrWW2F+uWfod58KkmSoaC8/mXEQZD3fVe2xF5Koxv
+         fLHf4sJaiZpJdrTxwrihCjJsu4126/2JKd/ungif/25uS/u+8C0wIDbqjC+7E66G8vt4
+         ri0ivNDt53KnwbG3x/mq03eWq3+O4vLgd29r6m3GHNHx+Xv9fbj7Lxfyjt+is3NVY/Ah
+         MszR6Ua+eAbEGmBrHUoBR29Dwp0C3Bmwxz1wrSwjdP82xeB1J05arAyTT+6ao9kh/5hY
+         glEl/eZwpupgvrkvpvthy2FRI1J9NeYeQxeo20tM7FWNbO9SER2hLg9LgDHsQsIgW70F
+         BdZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792027686; x=1792632486;
+        d=1e100.net; s=20260707; t=1792027689; x=1792632489;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tQHctWdtSHtNoicnbSUbRG3xGgW7mfr8L4h6I/eG6aA=;
-        b=qYMEWXKDPf1HWbXvgNMv6SOBFExIMTBUUZA1Wfm+swZqMAMewpN9UMAUeB2Qlybwkq
-         FJmcJMklaQghhAJC86vkmk/fwwZQyxPIoCxetOljX/VPX5/vzuK2pihI7XC/ljsJKx9v
-         iPIe2g7LAH3UyW0HdibO4w3zTKRaJJGhKxc9QYgVI9lyv/rXvpOxN0Sph8q9kW1/PBiP
-         j3dFCiaxjnXcNCF4nGhYtkws3QWBJzZ2wQjDS3e9Upz8hH8TMepEvJqDmJQtfBdaw6tp
-         CDyczNQFAea3bO64Q6JarFFvGypb9dJ5U56sFq7yrJZnRuiYEVnrT5nGrGp26OaQTDKB
-         Gh9Q==
-X-Gm-Message-State: AFq9FYIGpfwhD5QibiPH8bmTl1jHdN+q1UKcNZvJJfb+/3DigFBtm5bd
-	ag4BRq4lDDpu6MrMmfSRIqq2vKAhgKmvtwfpa+QagMMIGohvJ2liSjH/y/m4+w==
-X-Gm-Gg: AYBFou08b3mAyAbFuORDlUDYnFi92IhfND3bL5ohNUPWzd8BA+ZUsTvG+i6PG3Aynk/
-	lL3u7crRZe3ioYfYeCChhYgORWSm6wZ58Pcg5jaTnbjNvX5PCT/1xapWD+Zh7XzyuTq2jwo5SMf
-	OL/SXhK58fQx4GlnNvB3h12Jd4CPW1lU/GYk8OFljotA+6ejsd9Kfa++KsShbZqHwUXNsmIcF1I
-	LlbfhO6KbwdKUJ4b6eGahqcObJtOuhRCxbEXgyTruIm4YP2vpi87n4LYYcA73JXUC4GXOQwYB6I
-	QBU6/RxnABgCS6Ew6Y2tUoJBCIdbN2QSGCfQqnJ8epNvOCqv/o198r2uvtY43K4eirL0D9UZn4V
-	x/DiR8y1DiyZezmGVwDgrQhKMxQFQli8F+7Zk9Ea6hRW4I9F13Gt979xiUafb1A4btsrrIm+Mjo
-	zx5IEYDd0fOD4cN0Zx+wtxV9fwLg1CemOMyK2DoA9NyISMWx25v43gMehIolfbmft4W9kDjlbFQ
-	PtErvECax32BPrr+xEr/EJ7LNRaA6BvqrA/Z48=
-X-Received: by 2002:a17:903:1c7:b0:2e6:c39:b250 with SMTP id d9443c01a7336-2e842ab6808mr146713835ad.25.1792027686095;
-        Wed, 14 Oct 2026 18:28:06 -0700 (PDT)
+        bh=k8Iia1BOLpNqYSiEkka5Ve7BhIf9XUifgxvn1JG1yHM=;
+        b=kGaKzrik2kgZUhHzAx5d4rsqzIcZNJJxk0X2E4vY/IcK9l+hpjbi6YLTp8QnkVRe8C
+         uqUZPESPvfnOu5evBZiFXOqGpImxdEQFCtN3GFZTRtQGCTxHjEKcn08sa/w8zzTPu0k7
+         OVEm9L6Tw5zcsJSwm6VJjd1P3MJa+lgNZmGvV/HHfhiFaX7G8ieo9bkhMSWLmNAVP9Hb
+         pFmTw67Cqi9MRF6YqamZKaHlydHV9inW7f8Lq3eFmyROxlht765u1DkSC79uA48O7Ka6
+         31Mhs87p3PO96FmFUkL/dn0/jDYj4UZvb4siplzAiq5UMDb/tyVOvhcDHz9nguAAsJu3
+         Fzag==
+X-Gm-Message-State: AFq9FYI1ksyqWH+1WCx79fLBfBZ94CcvEURcDdeFCqW/NmGuIG5YOlhH
+	cOnCumqk+Gnp+LwcPzYFGuBGFVrcB5qZE/t3OG9YM3NXpNj+YmHbXwmq2FSDCw==
+X-Gm-Gg: AYBFou1YY9p9m2PUsyhWjCtbVGgpR7usSCMYto4De4ROjdXmPhFrNvZQZQ/k1C9Two9
+	RY3swUrean0hqdpQ2i8PEpIAJfVV23Gd3NO7ULLQDGWEGm46pqyKvNjnyQ0AYOTJThyS70tQEeh
+	yCBqQdzQ8KmjSU6kVUMlLP2Hkfl/fYAwErLe6PTBvJYU8G4Mn+Ljldz86QP3O8aWEp8MdIJ4sHV
+	1/RTpJuOyJB3N2dWNW1qGf04KKfmlce+5yfwM2F8lAKtvtWMMpSljcSGx0b2wUtvomMT3W9Plpu
+	E+P9Blt+i/RS0pGw6hcRCGMtTmOQKfmmMO/96KnYtN3eYKKfz1b2rstUa0VPngk69fnzhdTN8RM
+	gjAH+DYa1yYVT6drtM+kSMODqJoLksc3wIlB0lKTgv344hZipHJPMQ6YeYg3LVTT/scWsR/fA/e
+	NIHQ5sLZGp4nzHZiQ/J6bga1OfMaYTy8RzHWR/EUUIVW5rHMMzAQgPxCoOGAe7jevdnRG6oLmZW
+	ZqCoubVOoZUZyNmD7TaobmLH/4OcReIiIxG6DGQkn3KtGBrPA==
+X-Received: by 2002:a17:902:f710:b0:2e9:3d65:22f2 with SMTP id d9443c01a7336-2e93d652861mr31791885ad.25.1792027688572;
+        Wed, 14 Oct 2026 18:28:08 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841432a03sm74429495ad.0.2026.10.14.18.28.03
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841432a03sm74429495ad.0.2026.10.14.18.28.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 18:28:05 -0700 (PDT)
+        Wed, 14 Oct 2026 18:28:08 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 3/6] boot-time-analysis-tools: upgrade 0.7.1 -> 0.7.2
-Date: Thu, 15 Oct 2026 14:27:49 +1300
-Message-ID: <20261015012752.1650544-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 4/6] libheif: upgrade 1.23.5 -> 1.23.6
+Date: Thu, 15 Oct 2026 14:27:50 +1300
+Message-ID: <20261015012752.1650544-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
 References: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
@@ -67,31 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:28:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130903
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:28:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130904
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Changelog:
+https://github.com/strukturag/libheif/releases/tag/v1.23.6
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...nalysis-tools_0.7.1.bb => boot-time-analysis-tools_0.7.2.bb} | 2 +-
+ .../libheif/{libheif_1.23.5.bb => libheif_1.23.6.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/{boot-time-analysis-tools_0.7.1.bb => boot-time-analysis-tools_0.7.2.bb} (93%)
+ rename meta-multimedia/recipes-multimedia/libheif/{libheif_1.23.5.bb => libheif_1.23.6.bb} (96%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
-similarity index 93%
-rename from meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
-rename to meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
-index 2a65e7e463..31530eb609 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
-@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb
+rename to meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb
+index 49802780c3..1bffe00fbc 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.5.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb
+@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
  
- SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
--SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
-+SRCREV = "f55dc0c2fa826e80fed6fd32254697a91cabe61c"
+ SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master;tag=v${PV}"
  
- inherit setuptools3 features_check
+-SRCREV = "413e2a87e6a70b3eccc3a3adc5801179dd2d9e00"
++SRCREV = "f81f28ac014b1c28dee483ac45b72c6b05bc421a"
+ 
+ inherit cmake pkgconfig
  
 
