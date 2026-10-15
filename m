@@ -1,99 +1,99 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <Pascal.Weisser.ext@karlstorz.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A87CC6B38
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:45:51 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.32875.1792043145530408329
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B333BCC6B34
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 07:52:31 +0000 (UTC)
+Received: from mx07-0040c702.pphosted.com (mx07-0040c702.pphosted.com [205.220.184.135])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.34541.1792050747904641367
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:45:45 -0700
+ Thu, 15 Oct 2026 00:52:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=seWkyide;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e95bd1c14cso3278925ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:45:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043145; x=1792647945; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=oepr5rvGsFOP/ucaUJ6BleehzODGj89mYx1dg03XcFE=;
-        b=seWkyide3/SI43UPHzxiR+OPAwuIIq9DW1JsiEiPEJKChPXNr6T/paQo95nKgJl6Jt
-         inY6x+mhLh912TdipsIzNJx+Y49o4+QiTR3cURlrK2rpIK2CvmX2/ybBYQMzkgIEOHOo
-         eDyBD0CaFb9kajf9FBXTFk5GdmWYfv7J1TeTYx9cjsywwCzHGlRCBSvRTMEituoezurZ
-         HOJawxTFC1OLKSt+QpK3cl3I6/olBk13AwEKKxCkHG4OsN3qFf3L5M+uuvBsZFKzFjmV
-         HzJbxvrlj6VhEvQYiSN87KDZ84xSkDDpwIk2xM6e7RMB+gGPqGpbngeVXoD+0g/wEqe7
-         e4bA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043145; x=1792647945;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=oepr5rvGsFOP/ucaUJ6BleehzODGj89mYx1dg03XcFE=;
-        b=qtVFmHrjjRDJ3kZSB2pIsWJCnDIQ9ti27dcy1EayhBoyKjzR2NoQGXa7Nco4mGBsRz
-         kWbooiXRtCnFQQVElZejVoGwPSsU22ogjFeWKpocHs9XNwk8ZVeamYqb4J9ss/KeMB/e
-         rUoKynpdj/olgUD/FIEW3Yq7F9N87hHQsKKEssadWfsPqno/mz9Mc1DQYnvDHNKZU+4V
-         qGeI08EiEIHfqesbo4TlW/SSzRZ99LHR/ILQr7p5loAZlpWnkTD+Dxp3AFwghbgAIuqe
-         B9A0Fvi6GpL4OQiWUED73z/0ffSysgBHg3BOILvKL20yjFLGw1/+1FleWd5wEvtDaVcb
-         FJQg==
-X-Gm-Message-State: AFq9FYLWMIuwZ/zN64FMqAexezn6PGInC4PmAtwOcMFjMmznz6jnpXIX
-	YtXY9CcBfUGPEKytEMon3UyB31iBzHmKc5isjtsdrgdkdu3ejMiYwctZbluKMQ==
-X-Gm-Gg: AYBFou26Wa3y0ys0GncbzZ1VtIeYVJJLWO0E4hJFl0OXwjI+TbXxdO6Vri3EvArTQcV
-	qfH3b0V1F3BmuzMnYz2qHs+oPisasjjMud1k+Q2XIO9ftuFxOWLYW7iPQ5xj36b1pzATT2NcJLY
-	au6vNyOHL6AIvzZHOreDPvdCMi0WqdMycnxy7nKxSBtVTDs95KOT0Z4hdQUSUHb2qZPQjT/Rnrj
-	5TF01MzDnOW4Om3dvjFRKZRqatKrgsJB7DJgnJcTypXGFjI7x5RbJz0dYXWanzck/IezGVWreY2
-	F86bDfA9++Eei0qr/pZFACv3XNevvPET3CANUFq4sp9dQZ2Cu0dxd3C1LqIjJnK7I7Wa/VBaeOJ
-	bEJ+EMsg8rh5vbxh7uO/ncsFD3el6fGNw9FMKdYYiY150xzgdZkVoVOX4SDCajxZlUbj/NvbK7R
-	6oFnH2OHoRqLEJPkWJZfJPFuGfUicuRixtl/66gjn3ZriIQnapLomsoElFTkx4oe9ZcxbjAFR2U
-	KwqvRBfGljZDUdXQVE+wZk=
-X-Received: by 2002:a17:903:46c8:b0:2df:9a7e:d41f with SMTP id d9443c01a7336-2e842e14a25mr159383355ad.41.1792043144823;
-        Wed, 14 Oct 2026 22:45:44 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.45.43
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:45:44 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 82/82] lvgl-demo-fb: fix SRCREV
-Date: Thu, 15 Oct 2026 18:42:10 +1300
-Message-ID: <a9d69bc066bf9498397db27902c287dd666fdfd4.1791945956.git.ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
-References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
+ dkim=pass header.i=@karlstorz.com header.s=S-DKIM-20210427 header.b=lgSCjR6i;
+ spf=none, err=permanent DNS error (domain: karlstorz.com, ip: 205.220.184.135, mailfrom: prvs=274840dd0b=pascal.weisser.ext@karlstorz.com)
+Received: from pps.filterd (m0267679.ppops.net [127.0.0.1])
+	by mx07-0040c702.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F3CPLI2008653
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 07:52:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karlstorz.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=S-DKIM-20210427; bh=5ChOf
+	lWaiLkAyzi7DaHGl5y180bw3SnQrvabyBp49AI=; b=lgSCjR6iW+5nlPoxDKnRm
+	kIfBP0iTKDU4tQaPqADs78f9APIEDw/pc2Me8lLcXPf/5xJx6o9IRLfKVcpZO4gr
+	IyzxoCt816rm1qmiNFbdLuKd7aPCSWyoKG0Tj7/OuC+9rNrHxeNMwmBXOCOFyS+c
+	QMMEJ1HRE4s10FR9AaK4Y5wgnVvzbs6lec/arHe9xoLjqV/Rf/FZ5cL5GDAn1hYU
+	t09pG+Ow0aTjRCU6PXPg2gP8r3TY0mV04rQdBZhu6U/dWQqYzWL+rJ8LLhjs+Ehp
+	yvSavw/ACcLTZR1xZqg9bHaqtos+waG4jyRR7DcwcVxG/s0QIB9mWIySurqIP5Th
+	g==
+Received: from tut-ex02-pv.kstg.corp ([62.134.76.232])
+	by mx07-0040c702.pphosted.com (PPS) with ESMTPS id 4haexqsugs-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 07:52:25 +0000 (GMT)
+Received: from TUT-EX01-PV.KSTG.corp (10.0.10.190) by TUT-EX02-PV.KSTG.corp
+ (10.0.10.191) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 15 Oct
+ 2026 09:52:24 +0200
+Received: from TUTN-GJJX4N4.fritz.box (10.0.10.41) by
+ InternalSMTPRelay.KSTG.corp (10.0.10.190) with Microsoft SMTP Server id
+ 15.2.2562.53 via Frontend Transport; Thu, 15 Oct 2026 09:52:24 +0200
+From: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
+Subject: [meta-networking][PATCH] networkmanager: recommend polkit-group-rule-network if polkit is enabled
+Date: Thu, 15 Oct 2026 09:52:23 +0200
+Message-ID: <20261015075223.401712-1-pascal.weisser.ext@karlstorz.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: wBrShsd6BVqcaLKLbenQeYmAF92k8tdp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAzMSBTYWx0ZWRfX2DhU/BPwVX9D
+ mIurhszzb+c6VWMtQ6EgBw0sJhX0zq+m0sHFQKvHcilKFB1pQMkb/XKkK5c2TYzXKeC3AzqDe4y
+ 1RXx7d0DLJWiNbnSodvWu3GVWSBQW/7fzCtHwcG4iXO4HZ803/tjv/g/WP358LPJ+SwBpwccc/M
+ +LYlQ5Apuq0I8xaRW+PZ5xeWuWTANfFtDYP/YPEqks6/su7mkQz6tnFecxk8itTre2ZIde9RKcs
+ 6W5AJqlellT2dKzYDHTlQQgPEhfwO6HFAirY/iiS6Jnuy4jcBMxYa/7cIYPWx5CKriTgN/FrnfT
+ 2TqTaUE8axWRhJvM0cPY3WVp+SKH3dStB1ma82/6FyJRMhgOjI77DXncLPMo4iUw6hHiuwiSmoI
+ smUn7r0Ctkd1z+veIsZUyPPA1UI7OXhZQKIMPCNx5od0hkCWviKhvWcyEvsRmlKOQS0q5SglQnz
+ RvltOA+m0JBFuGAkI4g==
+X-Authority-Analysis: v=2.4 cv=GqHXaU1C c=1 sm=1 tr=0 ts=6ad08639 cx=c_pps
+ a=OToaj9FDvIz41JSycRbD4A==:117 a=OToaj9FDvIz41JSycRbD4A==:17
+ a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=DBWTBMGyQNCzyBkTEoZL:22
+ a=Mf5tFF2oQ1p1YQ6vkpes:22 a=n9SCklZpAAAA:8 a=CfOEu03Yzevu95b1ARoA:9
+ a=MDYma9B3dblYkEs0OMj2:22
+X-Proofpoint-ORIG-GUID: wBrShsd6BVqcaLKLbenQeYmAF92k8tdp
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAzMSBTYWx0ZWRfX985fxsAxAHKN
+ SYAmUyPBKujFdjxqcF6x0NjeyuvRn3Y5Yie8ZoNxQ94gSGvKglzZ0kUO2ovJcKoNIf5xAnqXIPq
+ DmnSfbUL2IUifooDTG6xPuj3YVaJQLBtuCuPK2XdDPrxdm7XbnAh
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:45:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131002
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 07:52:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131003
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+If polkit is enabled as distro feature, it makes sense to recommend the
+polkit-group-rule-network package for the networkmanager-daemon package to
+allow members of the network group to modify NetworkManager settings.
 
-Previous SRCREV does not belong to any branch on this repository and build
-fails with error:
-
-ERROR: lvgl-demo-fb-9.5.0+git-r0 do_fetch: Fetcher failure: Unable to find revision 045137cf0fa1781483cb796261a11b5eb21e99d9 in branch release/v9.5 even from upstream
-ERROR: lvgl-demo-fb-9.5.0+git-r0 do_fetch: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.5;name=demo')
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Weisser, Pascal <pascal.weisser.ext@karlstorz.com>
 ---
- meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-connectivity/networkmanager/networkmanager_1.58.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-index cd6441ded7..dc96b999f3 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
-@@ -14,7 +14,7 @@ SRC_URI = "\
-     git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.5.0;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb
+index 976f936b0d..2dc7605f76 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.58.0.bb
+@@ -263,6 +263,7 @@ RDEPENDS:${PN}-daemon += "\
+ RRECOMMENDS:${PN}-daemon += "\
+     ${NETWORKMANAGER_FIREWALL_DEFAULT} \
+     ${@bb.utils.filter('PACKAGECONFIG', 'dnsmasq', d)} \
++    ${@bb.utils.contains('PACKAGECONFIG', 'polkit', 'polkit-group-rule-network', '', d)} \
  "
- 
--SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"
-+SRCREV_demo = "b0aeee00922fdd8f2c5e3409ce464a8f714cf919"
- SRCREV_lvgl = "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
- SRCREV_FORMAT = "demo_lvgl"
- # The version check runs against the first SRC_URI (the demo repo), whose tags
+ INITSCRIPT_NAME:${PN}-daemon = "network-manager"
+ SYSTEMD_SERVICE:${PN}-daemon = "\
+-- 
+2.55.0
+
 
