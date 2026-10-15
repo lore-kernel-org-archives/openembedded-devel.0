@@ -1,75 +1,122 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDA53CCA464
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 19:31:55 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5854.1792092706772472973
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0D4CCC6B38
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 21:07:39 +0000 (UTC)
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8049.1792098458591386364
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 12:31:47 -0700
+ Thu, 15 Oct 2026 14:07:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=LCN1FRxU;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202610151931434cb5a2653d000207b8-ys2l8h@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202610151931434cb5a2653d000207b8
-        for <openembedded-devel@lists.openembedded.org>;
-        Thu, 15 Oct 2026 21:31:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=LP36jtnMA7bArpJZ/d3mcY+ZByaZ3iMG7yQ4KlfoW/E=;
- b=LCN1FRxU0hi59oIxWJrMetOWoI1qpWFRHVVajRb5IedmFbGszOskHufQXHS7kBkNwWUdai
- /D3vOeadphhyNAILdHRhMNrnHK4HPGwTaXrIiuR1GW2fsmtI4WJJvvoYxC8rHiunEtpSe5eM
- BrUXrugkI1SApuDF9QDCdYsDb4x8qOY+Q/9EhcnC5DbUIJ2UY3MKvyj7bNpT4oNbLYEqlhcf
- H+L4DgOsPH0I7vL2etmaSrB7rorgfUwtkbMf1ArEWP5GOURYeiY5vJ4hF6CH9pdUT8RtMzmu
- 0dWL/N1yRfuj7kIe9eV8RBq68Ncy5QGaRbpUQjmnGBn9X7Phy6nDc4hg==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JUoY87gb;
+ spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-15354aa70e8so1200219c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 14:07:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792098458; x=1792703258; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=DDIrBuFWdZxyMbhniRENftWBjkwIUwydzkE7ypbsh/Q=;
+        b=JUoY87gbOLoollxC76+26gAzIfyxyACTVrANpOew/wBx+vsK4L1vmxzhfaplpeV9Mn
+         q7TZSiSAvCd+vQkcZvBhnYJAOsaBNJnhpjv78ZkD5v2/At/J5drnvPzKLyzOPt6tEz21
+         3Q7MNfU48+d8QrdHDMxeyN+TCqY5LlmIfzrzrGduWskReXhbTRtnxBtQI9xJOvCFbpmQ
+         kLUu8+jJqpW25pKD5oFEy4PcP7/vInvmVHbhCU1oAh7JwORt12WQtm+mHFn4c+Z3eae8
+         pMBCxEz3dmsJsrfvWLSGl995RY3zA1cbjOfE+R5ke0DyRaCU2SsWTEyLNMAQ9Nf28E9b
+         /teA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792098458; x=1792703258;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DDIrBuFWdZxyMbhniRENftWBjkwIUwydzkE7ypbsh/Q=;
+        b=jVFfPWFB/j3izOJQq5nEQOQdAPMboxTQew4RgYadU+sKcLobI5Aj9a8XR5UxgGyqUw
+         ITNBkcJMuQjszhW0wP0r/p0phLra+NaGt9heeqLXmQgQoYONn6NJA8uaPdVSdKCeFKsE
+         ZKDCpORA5ibVnQca49/eUx7NNBj2PDMfJj+YXB2S+ueM1nBC7UoQQyq6Tv2woElmomsx
+         u9fXm/iRvJtNIBpKqFJeKWvbI3hAxNpJtiSatAmRcbJwslxoqFnaEFJG8zn+6qMsl8CU
+         uk3RA9KtLHsNqSxVQKI8lvYx0l5UU7OxiCIPQSUA4MU2Q8gO0KIN/QgZ8F1oNZs4aXIj
+         bQlA==
+X-Gm-Message-State: AFq9FYL6rmxMw39C2c7D5V7K29KsA8mwOIxpYoIAXl0KyWPqBqYbtOww
+	F1Cr97RQT92t9AS9zZRwWOba8gKPjAJ57tZxl2ziE3Xc3Ks/WBIDrSmjKdO+E9wacDc=
+X-Gm-Gg: AYBFou1iSnVwugbtVv5bJO44pzF3TsJ3naA5W5Ik3Y6PDnbt0EnDuXxtGlIj9vxrgl5
+	pqA2dOK7gZDr518cg+7AQYqrJIhZxzdSt9DmHQ7TVBt+JTfb3YQ7a8Qyll0F0BobErugH9cbB0A
+	a26TjWlR9HvrG1LI3Prj3/GN1/vGWr+3tmvSJkseh7ld8CnCr6urqGOx+aGYY0P19rAarpYy5HW
+	aUd9G6GM0Ew+Tg7JnGF6PSUDJ2YWktYqunKTISc+tTnfKcG+SKzbk6FeBPS2geaceI1D5gtac8e
+	DXlzMK2Wyp0cbUew9Ixj2abUaqvapl4nJM+ubEfoAZws3PTdFe3R+7a9qkX4L4MuQ5hhn9IcYk+
+	4og4j7qZn7QK6SrJBJqnOj5lheYJQ3bL1oyXoI420paQDx6jxhF96Gt/C4bQQVjvhRjGPELs5GF
+	mprT05YSFcavf4nfPx2KQiRsYaIlVKdzw+KrFaODp1dIJe5q0/ju9QL3qhxJcviGTGFxm9pbf8Y
+	voiG5t6RSR49ceXy2GovG2DarHQF0OXEu15g2sssqX1k2LG3pwshdH2I9Du3av/4UUkvDUA0eOx
+	vRhV2FMGRVzFh5B1LGVVfTjdG9x5Xh445L86ztfHJe3vqHowdB2To//Y+A0e7GQYMQlpBN/u6DZ
+	Z6yR42aV/fUbLw70ZVRx3sAtjzd437KN7BEbN0/KAarALmHGsYMKAqrf5bUncd9qzDBapvS1r52
+	pM1C9YzrbPGrbXl5Tg0lF5EIjc98GaDW5UbNOmzNRzZ3hVQQ==
+X-Received: by 2002:a05:701b:230c:b0:14c:be8e:69fe with SMTP id a92af1059eb24-16a57922026mr27651451c88.5.1792098457743;
+        Thu, 15 Oct 2026 14:07:37 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831bd28789sm175479c88.19.2026.10.15.14.07.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Oct 2026 14:07:37 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-webserver][PATCH] nginx: upgrade 1.30.5 -> 1.30.6
-Date: Thu, 15 Oct 2026 21:31:29 +0200
-Message-ID: <20261015193129.3731630-1-peter.marko@siemens.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-cucumber-expressions: Fix build with uv >= 0.13
+Date: Thu, 15 Oct 2026 14:07:33 -0700
+Message-ID: <20261015210733.3005411-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 19:31:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131009
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 21:07:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131010
 
-From: Peter Marko <peter.marko@siemens.com>
-
-2026-10-14 nginx-1.30.6 stable and nginx-1.31.7 mainline versions have
-been released, with fixes for buffer overflow vulnerability when using
-alias with rewrite (CVE-2026-15176), buffer overflow vulnerability when
-evaluating string expressions with variables (CVE-2026-93479), request
-body injection vulnerability in HTTP/3 (CVE-2026-95101), session forgery
-vulnerability when using TLS session ticket key rotation
-(CVE-2026-97629), and use-after-free vulnerability when using
-ngx_http_ssi_module with AIO (CVE-2026-97205).
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../recipes-httpd/nginx/{nginx_1.30.5.bb => nginx_1.30.6.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.30.5.bb => nginx_1.30.6.bb} (81%)
+ ...e-dependency-uv_build-to-0.13.0-0.14.patch | 23 +++++++++++++++++++
+ .../python3-cucumber-expressions_20.1.0.bb    |  1 +
+ 2 files changed, 24 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.6.bb
-similarity index 81%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.30.6.bb
-index 6b638cdd96..5d699e63ce 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.30.5.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.6.bb
-@@ -2,7 +2,7 @@ require nginx.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
- 
--SRC_URI[sha256sum] = "6c20565aa2325cb82216ae804f4a4ff1875179014759a381c42ddc8e11c4906d"
-+SRC_URI[sha256sum] = "3cf46f5ed7504d460125866b7bea99fb357f31d887e2e63b35503310e9b8b6c8"
- 
- inherit upstream-version-is-even
- 
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch b/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
+new file mode 100644
+index 0000000000..5a9796a8b3
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cucumber-expressions/0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch
+@@ -0,0 +1,23 @@
++From f643f89f9150dcea8c97c8eda989baeef8a2b24d Mon Sep 17 00:00:00 2001
++From: "renovate[bot]" <29139614+renovate[bot]@users.noreply.github.com>
++Date: Sat, 10 Oct 2026 12:26:36 +0000
++Subject: [PATCH] chore(deps): update dependency uv_build to >=0.13.0,<0.14.0
++
++Upstream-Status: Backport [https://github.com/cucumber/cucumber-expressions/commit/b6e45a7ee46490996bf4a150832b0a4f0b75bad1]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ pyproject.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pyproject.toml b/pyproject.toml
++index 2fb5f57..e8fc3a5 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -1,6 +1,6 @@
++ [build-system]
++ build-backend = "uv_build"
++-requires = ["uv_build>=0.12.0,<0.13.0"]
+++requires = ["uv_build>=0.13.0,<0.14.0"]
++
++ [project]
++ name = "cucumber-expressions"
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb b/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb
+index c685d7d0ad..8f397e6c69 100644
+--- a/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cucumber-expressions_20.1.0.bb
+@@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/cucumber/cucumber-expressions"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2bb1048cefa23c375b8ce5f13313ea"
+
++SRC_URI += "file://0001-chore-deps-update-dependency-uv_build-to-0.13.0-0.14.patch"
+ SRC_URI[sha256sum] = "0d216ec26e36c71b3e5643f2e72c41f9b266ef04eaa0c7e47a6e3b2caf523b1a"
+
+ inherit pypi python_uv_build
 
