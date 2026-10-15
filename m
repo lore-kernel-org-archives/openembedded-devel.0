@@ -1,219 +1,137 @@
-Return-Path: <rsangam@mvista.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78586CC6B33
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 10:19:58 +0000 (UTC)
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36135.1792059593640680715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89CC2CC6B33
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 10:35:28 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36427.1792060527202113735
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 03:19:53 -0700
+ Thu, 15 Oct 2026 03:35:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=YzHZS6qj;
- spf=pass (domain: mvista.com, ip: 74.125.82.178, mailfrom: rsangam@mvista.com)
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-35aa0cf7c40so5189364eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 03:19:53 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=b+jgPhSL;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48afe75f055so278531f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 03:35:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1792059593; x=1792664393; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792060525; x=1792665325; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zA91h3PF2vhkvha+iTnutBa5ae+Wyg3BL+gCEOx/YOQ=;
-        b=YzHZS6qjVBZcPLJSgzZZRC5dPmop4PZqmc5q0dk7+rJB4RN9iRn55YdwudRnbMFs3W
-         Jh5sJxGwLB2Ebp8EOpwIExIDNeMQCnI0T8aTnmWfAB9EIYBQyrVwXpjTTR5uSX0OhI09
-         eJFFrb5R0oAyCFYiEVQqI9k65zs16P8oeY2VY=
+        bh=A5JbIxBQcAIUEav+EdnvH/E3pRswWWe/oAFTfqpQdjU=;
+        b=b+jgPhSLqBlMw8LpPv2pe/hr8GLUglanWoH7MDETGN/aqDmoSuwDIB7p433IQ8axfl
+         sa0Yk3v2Q2s9Ljx9FtXYkrWRgYc/Ivfnel7SfDpts+LYwhK/Wi3KjyVPukpjmGfQZ4DV
+         D6R+XuD5+Oz+i36K5LR6Vnei61RexFrmcPhks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792059593; x=1792664393;
+        d=1e100.net; s=20260707; t=1792060525; x=1792665325;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zA91h3PF2vhkvha+iTnutBa5ae+Wyg3BL+gCEOx/YOQ=;
-        b=CR/oAPF3pan/EQhJE6xMIihS69BeWUp+S7Nr1wc3Q9KeyRviBQGR5BRUi8uMe+t36U
-         UWJi3KDY1V+gxtUmP4flsIdyvpc65d+NmVoALoMdg6rrEZB1dLObzfYN14jxYoZr4+BN
-         Wki9CS9OJWGddZcjZBhpD+jV4UddMgq4cqmuxnVZTGRivLuwqy86LajALK/NF0JCF5Be
-         p7f1XGC+umRi+X463u0wQwhBmzNaXunazl2zKMKI4hzwYVkEalycBwk8/r+OpToaYax8
-         IdFfpg8Al4lcdLje6r7btRoED5kYUJIWuWsKnZvq/RYO6DGHYb+oMjr1aycu+veZuF5F
-         KBBA==
-X-Gm-Message-State: AFq9FYJU81JAhFOhk1gkwd2aYd0AloQ//iHjhzbsCD9VD4ITvbhD4QCQ
-	h+vXWh15Vfs8gFNA90PSV7KS2sBXtKrnzdN1kDBzfAhmR2/5GAip40o6O6B2hnmqIVWeoaGZPuw
-	b14fJYmk=
-X-Gm-Gg: AYBFou18zEWzHiLcr9e8pDUKDxX4KvKilnE7pAR14zpKvMnzlTITsXExncMnbM41RKY
-	oTqVCyemI+sT3tUQ7hnTPckNdyuKkSI0TIKXreIRmYTIbkc45iz2G1BTHN+GKrz8vqnakt4WMV8
-	F3UKQLyzRdTdrXU2PoIk7SDSqHZFSvyVmGhJ/S7zwqu5PHZmMKw86A0QS/d3Q33K9gI2roIMJIA
-	Nil1Ju1rYYE4NbNnaq/4g+UKHF4rzwHzjrscfTAvj21/s0RbotbPmdG//e9axcKS7hE0jJeC5Lz
-	iwY9iidhFueO4WupFW4gVhQ/gGJr+a1e/OvFn5YaR+bTtfJC1kEjUPbTjc1ibGiQ4Y3vJsDqSeJ
-	FTxiA77oFhWHyHbs+gQHQoa7GNQ0hL7BjkNR3inSIz2vUdOK8PVtaYURiI6qj3cPyLEJpbwCUrO
-	gtSBCxwFYyi/BI9mrT6mSojvjNDhbrIEhEB8PBajIwqaQNRB9GthoqBUGTNWrjPl7r46lxF4Fwg
-	T2Djg==
-X-Received: by 2002:a05:693c:8095:b0:341:4f3:8f84 with SMTP id 5a478bee46e88-3537dfc602emr26121224eec.13.1792059592868;
-        Thu, 15 Oct 2026 03:19:52 -0700 (PDT)
-Received: from MVIN00040.mvista.com ([49.207.223.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-358de54fe47sm47225901eec.31.2026.10.15.03.19.50
+        bh=A5JbIxBQcAIUEav+EdnvH/E3pRswWWe/oAFTfqpQdjU=;
+        b=N69rrRqKHVPv4ClS5OUjV6OdMfV97n3LRPSvch+RGk36Ry0mVNv7uWgDJ1tZX1c5Wl
+         8HOXZRTxG5NnXsPb5u11ULIN0Ktbw7P4Mts9l9s7EXqwCcVJJQgsHpz8buDxhx66RyAl
+         IcMcuh5eZXRH22nc6IPuLocQg5lt5c87CczSMF3THfqeb0UKwa64goBbw+z5pS7MH0SZ
+         F6w+bYAz/BJZwq9euTLj0295vS6P3FhtF9Fx+hmyDKSdVUHKDuwWeM4xQtvv6+lIT7MT
+         JKl4V+rZ+e2bJE6Fr/LW4V2f4szYdNTlpvFY7gdcu96pMCnfIU+gAsFhSnGcMdm9bzaZ
+         oTgQ==
+X-Gm-Message-State: AFq9FYKM8PDq7J7xPl9fTBbC4MmgAT816jYAhjT5XUvLoS4OHrMYOZHe
+	uZlNkS7MYCQz4rp/MS7qS3SCFbCE0fE1w8kTiAc7NYzGtFjp1L2yO+zXXBQBuB8+Bl7aWby1eIy
+	aN/zf
+X-Gm-Gg: AYBFou2mADo/BLm8afpzS62MvithDqZPDnBDAvOncLCHonHNBd3qFe2VhkWZ99xNRy6
+	r+B7ub7q4gfTZxiAxhzfckh519KXdWXGU9NspbU9y8wZA5M8P8mWCZS+pINdI9rmNia2OptW7B2
+	vbEPBa+nbxdn5u5SC5kb08/JkBF9xA0dWzi9o5DR3Yh48hkpa0D1Y2z8q8pbrqK1w7vCdKJfce+
+	aQnClEQfpAh+HlAoIO/upPHRvSg9VVGseNy7laJuQtqCvkYQ810Q4+A2sdumATn75IJmI85E6Tt
+	QSCECLu3Xo4FNbwMuD2LS9SW/dpEeK1rH9IcOb42GzgaOB/4RBfAWo6hoyhBw+iUe6Q/apW/N44
+	pPzr5ITpW/SM86oTqiIcJF7EUkUdLk5ckWY2yMnu17VnFZDJKw24X68caPPmPMSlM99ctXNDMPN
+	zLAsLK9dhgKGnHKstgUzO+bcaWDpBf2SvG8ovUBbV177TLg5xyz/UKopi8gB5FJReWbkTTxnQGW
+	hLqt/S+F3abJLhD6xuotoSh0T5sX5WWX8+dvn3MZERNmrnEv1sHVEhk/VCMeBm8usNZ7L9QCi1n
+	EJkK9Z5zj8I2NG0RwDkjhaU=
+X-Received: by 2002:a05:600c:83c7:b0:4a1:7733:5102 with SMTP id 5b1f17b1804b1-4a18e4a3fc8mr357638375e9.15.1792060525203;
+        Thu, 15 Oct 2026 03:35:25 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd97ed6asm60904655e9.6.2026.10.15.03.35.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 03:19:52 -0700 (PDT)
-From: Rohini Sangam <rsangam@mvista.com>
+        Thu, 15 Oct 2026 03:35:24 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Rohini Sangam <rsangam@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH] nodejs: Security fix for CVE-2026-48617
-Date: Thu, 15 Oct 2026 15:49:34 +0530
-Message-Id: <20261015101934.30126-1-rsangam@mvista.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] zbar: Upgrade 0.23.93 -> 0.23.95
+Date: Thu, 15 Oct 2026 13:35:22 +0300
+Message-ID: <20261015103522.3606004-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 10:19:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131005
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 10:35:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131006
 
-Pick patch from [1] also mentioned at Debian tracker in [2]
+Upgrade to release 0.23.95:
 
-[1] https://github.com/nodejs/node/commit/2f62693801a12bc8a485b3b7da3239ac522f607d
-[2] https://security-tracker.debian.org/tracker/CVE-2026-48617
+- fix: undefined behavior (UBSan) warnings in QR decoder and
+  scanner
+- ci: address some issues for artifact generation
 
-Signed-off-by: Rohini Sangam <rsangam@mvista.com>
+From 0.23.94:
+
+- zbar now uses meson;
+- ci was improved to allow unit tests on MacOS and Windows;
+- Windows artifact now generate statically linked files;
+- documentation updates.
+- other minor changes to cleanup it a little bit after meson
+  migration.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../nodejs/nodejs/CVE-2026-48617.patch        | 118 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_20.20.2.bb |   1 +
- 2 files changed, 119 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48617.patch
+ .../zbar/{zbar_0.23.93.bb => zbar_0.23.95.bb} | 20 +++++++++----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
+ rename meta-oe/recipes-support/zbar/{zbar_0.23.93.bb => zbar_0.23.95.bb} (65%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48617.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48617.patch
-new file mode 100644
-index 0000000000..ec3bf7e615
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48617.patch
-@@ -0,0 +1,118 @@
-+From 2f62693801a12bc8a485b3b7da3239ac522f607d Mon Sep 17 00:00:00 2001
-+From: RafaelGSS <rafael.nunu@hotmail.com>
-+Date: Mon, 11 May 2026 18:25:16 -0300
-+Subject: [PATCH] permission: handle process.chdir on writereport
-+
-+Signed-off-by: RafaelGSS <rafael.nunu@hotmail.com>
-+PR-URL: https://github.com/nodejs-private/node-private/pull/870
-+Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
-+Refs: https://hackerone.com/reports/3625987
-+
-+CVE: CVE-2026-48617
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/2f62693801a12bc8a485b3b7da3239ac522f607d]
-+
-+Signed-off-by: Rohini Sangam <rsangam@mvista.com>
-+---
-+ lib/internal/process/report.js                | 13 ++++++
-+ .../test-permission-fs-write-report.js        | 42 +++++++++++++++++++
-+ 2 files changed, 55 insertions(+)
-+
-+diff --git a/lib/internal/process/report.js b/lib/internal/process/report.js
-+index 1639142d..7adaeacc 100644
-+--- a/lib/internal/process/report.js
-++++ b/lib/internal/process/report.js
-+@@ -1,8 +1,10 @@
-+ 'use strict';
-+ const {
-++  ERR_ACCESS_DENIED,
-+   ERR_SYNTHETIC,
-+ } = require('internal/errors').codes;
-+ const { getValidatedPath } = require('internal/fs/utils');
-++const permission = require('internal/process/permission');
-+ const {
-+   validateBoolean,
-+   validateObject,
-+@@ -23,6 +25,17 @@ const report = {
-+       file = getValidatedPath(file);
-+     }
-+ 
-++    if (permission.isEnabled()) {
-++      const resource = file ?? process.cwd();
-++      if (!permission.has('fs.write', resource)) {
-++        throw new ERR_ACCESS_DENIED(
-++          'Access to this API has been restricted',
-++          'FileSystemWrite',
-++          resource,
-++        );
-++      }
-++    }
-++
-+     if (err === undefined) {
-+       err = new ERR_SYNTHETIC();
-+     } else {
-+diff --git a/test/parallel/test-permission-fs-write-report.js b/test/parallel/test-permission-fs-write-report.js
-+index c8f6673d..f51b86b3 100644
-+--- a/test/parallel/test-permission-fs-write-report.js
-++++ b/test/parallel/test-permission-fs-write-report.js
-+@@ -1,12 +1,28 @@
-+ // Flags: --experimental-permission --allow-fs-read=*
-+ 'use strict';
-+ 
-++const { spawnSyncAndExitWithoutError } = require('../common/child_process');
-++
-+ const common = require('../common');
-+ common.skipIfWorker();
-+ if (!common.hasCrypto)
-+   common.skip('no crypto');
-+ 
-++// We need to define the flags dynamically to account for the `NODE_TEST_DIR` env var.
-++if (!process.permission) {
-++  spawnSyncAndExitWithoutError(process.execPath, [
-++    '--permission',
-++    '--allow-fs-read=*', `--allow-fs-write=${process.env.NODE_TEST_DIR || './test'}/.tmp.*`, '--allow-child-process',
-++    __filename,
-++  ]);
-++  return;
-++}
-++
-+ const assert = require('assert');
-++const path = require('path');
-++const tmpdir = require('../common/tmpdir');
-++
-++tmpdir.refresh();
-+ 
-+ {
-+   assert.throws(() => {
-+@@ -27,3 +43,29 @@ const assert = require('assert');
-+     resource: process.cwd(),
-+   }));
-+ }
-++
-++{
-++  const reportPath = path.join(tmpdir.path, 'report.json');
-++  spawnSyncAndExitWithoutError(
-++    process.execPath,
-++    [
-++      '--permission',
-++      '--allow-fs-read=*',
-++      `--allow-fs-write=${tmpdir.path}/*`,
-++      '-e',
-++      `process.report.writeReport(${JSON.stringify(reportPath)})`,
-++    ]
-++  );
-++}
-++
-++spawnSyncAndExitWithoutError(
-++  process.execPath,
-++ [
-++    '--permission',
-++    '--allow-fs-read=*',
-++    `--allow-fs-write=${tmpdir.path}`,
-++    '-e',
-++    'process.report.writeReport()',
-++  ],
-++  { cwd: tmpdir.path }
-++);
-+-- 
-+2.44.4
-+
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-index aa6189da60..4badec2135 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-@@ -26,6 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://libatomic.patch \
-            file://0001-Revert-stop-using-deprecated-ares_query.patch \
-            file://run-ptest \
-+           file://CVE-2026-48617.patch \
-            "
- SRC_URI:append:class-target = " \
-            file://0001-Using-native-binaries.patch \
+diff --git a/meta-oe/recipes-support/zbar/zbar_0.23.93.bb b/meta-oe/recipes-support/zbar/zbar_0.23.95.bb
+similarity index 65%
+rename from meta-oe/recipes-support/zbar/zbar_0.23.93.bb
+rename to meta-oe/recipes-support/zbar/zbar_0.23.95.bb
+index 36a9a5c827..489615721a 100644
+--- a/meta-oe/recipes-support/zbar/zbar_0.23.93.bb
++++ b/meta-oe/recipes-support/zbar/zbar_0.23.95.bb
+@@ -10,7 +10,7 @@ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
+ 
+ SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV}"
+-SRCREV = "bb05ec54eec57f8397cb13fb9161372a281a1219"
++SRCREV = "dc19fcc7da58e8cf84ba1ec417e24b04609feb23"
+ 
+ DEPENDS += "xmlto-native"
+ 
+@@ -19,19 +19,17 @@ PACKAGECONFIG ??= "\
+     video \
+ "
+ 
+-inherit autotools pkgconfig gettext \
++inherit meson pkgconfig gettext \
+     ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gtk', 'gobject-introspection', '', d)}
+ 
+-PACKAGECONFIG[x11] = ",, libxext libxv"
+-PACKAGECONFIG[video] = "--enable-video, --disable-video, v4l-utils libv4l"
+-PACKAGECONFIG[jpeg] = "--with-jpeg, --without-jpeg, jpeg"
+-PACKAGECONFIG[python] = "--with-python=auto, --without-python, python3"
+-PACKAGECONFIG[gtk] = "--with-gtk=auto, --without-gtk, gtk+3"
+-PACKAGECONFIG[qt] = "--with-qt, --without-qt, qtbase qtbase-native qtx11extras qtsvg, qtbase"
+-PACKAGECONFIG[imagemagick] = "--with-imagemagick, --without-imagemagick, imagemagick"
+-
+-EXTRA_OECONF += "--enable-pthread"
++PACKAGECONFIG[x11] = "-Dx11=enabled -Dxv=enabled -Dxshm=enabled,-Dx11=disabled -Dxv=disabled -Dxshm=disabled,libx11 libxext libxv"
++PACKAGECONFIG[video] = "-Dvideo=true,-Dvideo=false,v4l-utils libv4l"
++PACKAGECONFIG[jpeg] = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
++PACKAGECONFIG[python] = "-Dpython=python3,-Dpython=no,python3"
++PACKAGECONFIG[gtk] = "-Dgtk=gtk3,-Dgtk=no,gtk+3"
++PACKAGECONFIG[qt] = "-Dqt=true,-Dqt=false,qtbase qtbase-native qtx11extras qtsvg,qtbase"
++PACKAGECONFIG[imagemagick] = "-Dimagemagick=enabled -Dgraphicsmagick=disabled,-Dimagemagick=disabled -Dgraphicsmagick=disabled,imagemagick"
+ 
+ FILES:${PN} += "${bindir} \
+     ${@bb.utils.contains('DEPENDS', 'python3-native', '${libdir}', '', d)} \
 -- 
-2.34.1
+2.47.3
 
 
