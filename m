@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68FB7CC6B3A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5376ACC6B38
 	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:43:47 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.32809.1792043022291669558
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32808.1792043020243681626
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:43:42 -0700
+ Wed, 14 Oct 2026 22:43:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ez7agA7a;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2e7006bbf77so10873595ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:43:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=BqJ/z5Wn;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2e901e114fdso19287125ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:43:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043022; x=1792647822; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792043019; x=1792647819; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=JTXbjubNHFktRe58t76+fu7S2CjGt8orQ3meQi8dtqY=;
-        b=Ez7agA7ag6RTRexc2mDxhW3WDFM1E5a460byc/Jus9aen9h/ZDcEtO/L8lYaZ7N+fX
-         38yXdtZWLJ2xHmBus3oItRnQRbohXsQ3Igm9pDVl5tgO3tLdbLqTDkA+wRvJmkGCWzqY
-         dwqs71sn/A//lubXZwzBfxDpt8twBmrNBg19N0QV1Aq4adG463k4rSMGr+ZXE3IUIo3c
-         5yreN483zAhMRFUZ2dj/GEQElfzc+mJcSLwFv8vydboH1Jr1ZuSthnE3iv3+OcKHtzPl
-         h1YelwadEXWtjHB7qp9cJbhPL/p1ZOdAyUqyu5lNuFyd0IYgJiSE4rtyaaFBtTCjbBR+
-         bMlg==
+        bh=Z/rCmMoiVvCTpQP9wY3l7MQYYmtery4OejJMbkFOVMo=;
+        b=BqJ/z5WncjxzifmrjnuCTdcOlKkMpkhwnGd4r4ZbEtzliPkowfMjJ/z5TkLTVhkMEw
+         faTl7feN70qXhzbrsI3PLJaDgPGowMwUnXPkhmz9zLSz34AfXErItkG6EA4IHUwPB5Pb
+         bhxoWYQmu/AAkn7pwTPn7LNwW5KpRPW3X1ir/3Msx7UC4po8PVwn1g+NYnYrz200qyqy
+         RKFz7C4cXjKqmw9RwlaulMQyyM2c4ahqY9PkMDGpBq7tgi/m8lC4cRvscQaflyDVGKkx
+         r4BR2y/bY7NJURFFAVj6XlAtsTvEkxRcep5ofVl3w+R+LKNDlBWLw9Bgb0opIOUi1x7o
+         Ncwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043022; x=1792647822;
+        d=1e100.net; s=20260707; t=1792043019; x=1792647819;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=JTXbjubNHFktRe58t76+fu7S2CjGt8orQ3meQi8dtqY=;
-        b=s81NxAf1TUKq0NHAZ9vn8HE+7ZVIx59ZRZq2kQHWvO/LP5W0qP7x8tWvlRVH5KVK3w
-         ik0Jv7GAhOPEvqgGqXInWtl/A3Jxr1H9tQEV7GfJ7/krhBLSXKT8yw3t7KA8dzT6anLV
-         Sq6784IntKyZGEtXyLgjQwAwgdnTzbujXyz1v2wv6zJ9PKzbqd0JsVnTCjKzEFDgmwSt
-         iSjX1GnaNTTkXWxEFcVt4knQThu2t7prrkeQSOL4eHtyAw2ms/0ZFtYqJTM+aKrx2wqi
-         pG+RF93z5g5PSjRCOCr55vTWjOqVu6lv88mQnom1NmRGzBOw3EmZlLIYp+HNq5e6AbSQ
-         N5AQ==
-X-Gm-Message-State: AFq9FYK5iqB6S6vVtxUSK4zzrdmjdkPUiCP+FFrCLGUWPTHpWZnVuU6E
-	v7YMsbyCPZvufr61a1u0/jq58SRCwuep5mUS5XdNzrqtPS/rYx71JCHmTtsdLw==
-X-Gm-Gg: AYBFou0H+YOAe0RIjKyK1e80VJI9uZ/irjyURwdk6dlzd6/S52SnCMog8UqZMMw6b/e
-	pHG8IGCZGjEabpp9Te7p3tORKb65/sCETMLkfrlX/yMselD0pshlVmUYHo2+uuTrqpFMeBOOf5i
-	SNxHpYC1DxVU/sMW3cpniJ5RyGF/CG4hHxp7JMWyiHX6rOrqJ8qnonb7629xHU8WRzZKE8I4xcH
-	zGQmivf5clC5t2YZ5naFPXwx4oCm7UTDiolyVz9cchDZ+M4CqM4eCVpfx6tKSVxOlk07R+8R0XR
-	M1nReQH7DGgCRUgU3bRqHQksHKVBcUZYr1o/2n7OiaPaNFi3stEFAG6K9H2NKUSCTIfS7iEgxy2
-	nIcqU30oH8Dy4fudUEImQsejQahCB7aIEOrdK5L0tMh++dSucXum20DcCAr4y3rDJtYGQGrU2v+
-	2FMpJ/btVYBq27osU7p797cPHRTxye86YvnXZgPza7sbZ4H5NTeMF5a9gTeFEmfPfbR0RaRd0x+
-	t8erv568O2vloJslqj5Y6I=
-X-Received: by 2002:a17:902:f691:b0:2e6:679:9e4 with SMTP id d9443c01a7336-2e842f119e3mr151694655ad.60.1792043021400;
-        Wed, 14 Oct 2026 22:43:41 -0700 (PDT)
+        bh=Z/rCmMoiVvCTpQP9wY3l7MQYYmtery4OejJMbkFOVMo=;
+        b=QRe+z4y9cGXCrRXwcfXWK2KVWLqlcsxeeUL39XFbN6aoF8P0gimzciBKyjfgF4SeAL
+         ZCNRH6W9l6ap9d1OsjbAlzxB6tiM95DlFrYm0C/qyQhCHaivxX22rIg6P0biPPYmiCaA
+         HqgNgBN+WylA+v05CZsb8whxdX4PsTaJZ8GfhDBTMJMTj9yXOIMI7B2fLLReJMP+bvrN
+         I8diPWDhGb6FXd9my5uOajfLzggX8V4c7Qvnj9U4wP7AvnlR+6Svbopp9ivtBjQz+FYo
+         N/QJ0S7r0jnW+bJs5pI/2sYJJk1v8guZAERk4Eah2BBHBiqlHFEt7bLTd9WVkJSJXk1d
+         npww==
+X-Gm-Message-State: AFq9FYIbCayc1Rdf3g+DybDg+hukuzo/HNC7RNcPrXWyp+jB9MIie/ur
+	e90SnEyiNrvwIkO9PtWOZBrRoPrTUtBpZ28f4cdaMBSyjv+tVnBuEslTuJsG1g==
+X-Gm-Gg: AYBFou1dvqz8nrIsAM+kcBQ5aQldhx+7GnNWiFVUAdUhXQFwNlzWV9DcNlqGtCjaesB
+	f8JFQNln8BWRlLnPozTdMGvyNOXFXBN6oHrYpc5N3cCwZavGNPklcgaGD2/96D59jfBu3bXIrBT
+	wM1MNT28AyI0HsoCnAtjf5znxCWDSI81I5NuhILr1eVPebX/UC5OZmvabgNgwZnKrpFy7WlpAB6
+	hVoEJmMArrn9EA7N0JGSRlhHqDK7nu8ai2bLw2YGRbp3BoSDfaie+1dlOb7MmgSbPfnKww28Uw5
+	CrqhcfGJNpMfoQVqGsxqD1iJEUsLeXEN2Wzq53dobq+nwMCYPGk+gYn6FzJdY4bDvaSef278xgn
+	ZasuOKBAc2+z1BgRUy96kmcm+2JOPZ8rTsNxnutP9D/OvWx6S+QDRpCe5allde5CyT6ybMsAH+Z
+	xphMRIJ7RBp+uxWLPnii5MHrPW4jPGOzc/qkdFbZlx3JG/6kHgj+Jj1CN9CqlhhSmSRaVZ+Gzz3
+	Sl0/qAU+ecnPWbrPZNv9HQ=
+X-Received: by 2002:a17:903:2a8b:b0:2e8:3d48:4d82 with SMTP id d9443c01a7336-2e842dfd143mr151350805ad.60.1792043019281;
+        Wed, 14 Oct 2026 22:43:39 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.43.39
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.43.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:43:41 -0700 (PDT)
+        Wed, 14 Oct 2026 22:43:38 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 25/82] hdf5: patch CVE-2026-17572
-Date: Thu, 15 Oct 2026 18:41:13 +1300
-Message-ID: <f449fa597ab88f1754e31a7ee3bc10b745ac6e08.1791945956.git.ankur.tyagi85@gmail.com>
+Subject: [PATCH 24/82] libde265: patch CVE-2026-54240 and CVE-2026-54241
+Date: Thu, 15 Oct 2026 18:41:12 +1300
+Message-ID: <041660ffc598e732cf766175070048fe1fef5620.1791945956.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
 References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
@@ -68,297 +68,468 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:43:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130945
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130944
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport patch from the PR[1] fixing the issue[2] mentioned in the NVD[3].
-Debian[4] has also identified the commit.
+Debian identified same commit as fix for both CVEs[1][2].
 
-[1] https://github.com/HDFGroup/hdf5/pull/6499
-[2] https://github.com/HDFGroup/hdf5/issues/6501
-[3] https://nvd.nist.gov/vuln/detail/cve-2026-17572
-[4] https://security-tracker.debian.org/tracker/CVE-2026-17572
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-54240
+https://nvd.nist.gov/vuln/detail/cve-2026-54241
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit c279e9e68822db77648667093bcbf3013269c791)
+[1]https://security-tracker.debian.org/tracker/CVE-2026-54240
+[2]https://security-tracker.debian.org/tracker/CVE-2026-54241
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/CVE-2026-17572.patch           | 253 ++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
- 2 files changed, 254 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
+ .../CVE-2026-54240-CVE-2026-54241.patch       | 426 ++++++++++++++++++
+ .../libde265/libde265_1.0.19.bb               |   1 +
+ 2 files changed, 427 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
 new file mode 100644
-index 0000000000..373a6c374e
+index 0000000000..6f5c526f17
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-17572.patch
-@@ -0,0 +1,253 @@
-+From 606bb0a0282d0b056a3bdda1d489a608deee78d2 Mon Sep 17 00:00:00 2001
-+From: Nayyar <nayyar@bugqore.com>
-+Date: Tue, 14 Jul 2026 23:39:56 +0530
-+Subject: [PATCH] reject SOHM list message count exceeding list_max (#6499)
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-54240-CVE-2026-54241.patch
+@@ -0,0 +1,426 @@
++From 3986aba8dec43bc539e5f7c349826cea902f9ee3 Mon Sep 17 00:00:00 2001
++From: Dirk Farin <dirk.farin@gmail.com>
++Date: Wed, 3 Jun 2026 16:44:32 +0200
++Subject: [PATCH] fix pixel-accessor integer overflow on large frames
++ (GHSA-ccfw-29x7-rrx3)
 +
-+* bound SOHM list decode to list_max messages
++The de265_image::get_image_plane_at_pos*() accessors computed the pixel
++offset `xpos + ypos*stride` in signed 32-bit int. For frames where
++width*height exceeds INT32_MAX (e.g. 46344x46344, both within the existing
++<=65535 limit), ypos*stride wraps negative and the returned pointer lands
++~2 GB before the buffer -> heap out-of-bounds read/write. This is independent
++of the earlier allocation fix (GHSA-vv8h-932h-7r86), which only widened the
++buffer size, not the offset arithmetic.
 +
-+* Add tsohm test for out-of-range SOHM list message count
++Widen the image stride to ptrdiff_t (members, get_image_stride/get_luma_stride/
++get_chroma_stride, set_image_plane) so all pixel-offset math is evaluated in
++64 bits. The public C API (de265_get/set_image_plane) keeps int for ABI; the
++narrowing at that boundary is safe (stride <= ~65552).
 +
-+Create a file with a shared-message list index, corrupt the on-disk
-+message count so it exceeds list_max (repairing the table checksum),
-+and confirm reopening rejects the file instead of overrunning the
-+list image buffer and message array.
++The same 32-bit-stride / absolute-coordinate pattern existed in several scalar
++paths that the accessors don't cover; widen those too:
++  - sao.cc: SAO offset indexing, and the inputCopy allocation+memcpy size
++    (an int size_t under-allocation -> heap write)
++  - motion.cc: mc_luma/mc_chroma reference-plane access (ref_stride, src_stride)
++  - intrapred.h: intra reference-border fill
++  - sei.cc: decoded-picture-hash MD5/CRC/checksum
++  - image-io.cc: YUV plane read and write
++The deblock kernels, SIMD layer (acceleration.h) and per-block code already
++use ptrdiff_t or only small block-local offsets and need no change.
 +
-+---------
++Also store pic_width/height_in_luma_samples as uint16_t (the value is
++provably <= MAX_PICTURE_WIDTH = 65535 after validation) so PicSizeInSamplesY
++needs only a single uint32_t cast instead of int*int (which was signed-overflow
++UB on the same trigger); add static_asserts tying the limits to the storage.
 +
-+Co-authored-by: H. Joe Lee <hyoklee@hdfgroup.org>
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
++Verified: girlshy bit-exact single- and multi-threaded; ASan+UBSan PoC against
++the get_image_plane_at_pos sink crashes pre-fix (UBSan signed-overflow at the
++accessor + ASan wild write) and is clean post-fix.
 +
-+CVE: CVE-2026-17572
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/20f0b9564bc46154e60f8d35578720a599d41552]
++(cherry picked from commit bdca87569b9c63c2a7054d90ae4462dbb78d159a)
 +
-+Dropped changes to the CHANGELOG file.
++CVE: CVE-2026-54240 CVE-2026-54241
++Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/bdca87569b9c63c2a7054d90ae4462dbb78d159a]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5SMcache.c |  14 ++++
-+ test/tsohm.c    | 173 ++++++++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 187 insertions(+)
++ libde265/de265.cc    |  2 +-
++ libde265/image-io.cc |  4 ++--
++ libde265/image.cc    |  2 +-
++ libde265/image.h     | 21 +++++++++++----------
++ libde265/intrapred.h |  2 +-
++ libde265/motion.cc   |  8 ++++----
++ libde265/sao.cc      | 18 +++++++++---------
++ libde265/sei.cc      | 18 ++++++++++--------
++ libde265/sps.cc      |  4 ++--
++ libde265/sps.h       | 11 +++++++++--
++ 10 files changed, 50 insertions(+), 40 deletions(-)
 +
-+diff --git a/src/H5SMcache.c b/src/H5SMcache.c
-+index eb6d612a78..96687ffed9 100644
-+--- a/src/H5SMcache.c
-++++ b/src/H5SMcache.c
-+@@ -489,6 +489,12 @@ H5SM__cache_list_verify_chksum(const void *_image, size_t H5_ATTR_UNUSED len, vo
-+     assert(image);
-+     assert(udata);
++diff --git a/libde265/de265.cc b/libde265/de265.cc
++index 48e38a01..02b2d5fd 100644
++--- a/libde265/de265.cc
+++++ b/libde265/de265.cc
++@@ -678,7 +678,7 @@ LIBDE265_API const uint8_t* de265_get_image_plane(const de265_image* img, int ch
 + 
-++    /* The buffer only holds list_max messages; a corrupted header whose message
-++     * count exceeds that would size the checksum region past the end of it.
-++     */
-++    if (udata->header->num_messages > udata->header->list_max)
-++        HGOTO_ERROR(H5E_SOHM, H5E_BADVALUE, FAIL, "number of SOHM messages exceeds list size");
-++
-+     /* Exact size with checksum at the end */
-+     chk_size = H5SM_LIST_SIZE(udata->f, udata->header->num_messages);
++   uint8_t* data = img->pixels_confwin[channel];
 + 
-+@@ -552,6 +558,14 @@ H5SM__cache_list_deserialize(const void *_image, size_t H5_ATTR_NDEBUG_UNUSED le
-+         HGOTO_ERROR(H5E_SOHM, H5E_CANTLOAD, NULL, "bad SOHM list signature");
-+     image += H5_SIZEOF_MAGIC;
++-  if (stride) *stride = img->get_image_stride(channel) * ((de265_get_bits_per_pixel(img, channel)+7) / 8);
+++  if (stride) *stride = static_cast<int>(img->get_image_stride(channel) * ((de265_get_bits_per_pixel(img, channel)+7) / 8));
 + 
-++    /* The message array is sized for list_max entries; a list index always
-++     * holds at most that many before it is promoted to a B-tree. Reject a
-++     * corrupted header whose message count would drive the decode loop past
-++     * the allocation and the input buffer.
-++     */
-++    if (udata->header->num_messages > udata->header->list_max)
-++        HGOTO_ERROR(H5E_SOHM, H5E_CANTLOAD, NULL, "number of SOHM messages exceeds list size");
-++
-+     /* Read messages into the list array */
-+     ctx.sizeof_addr = H5F_SIZEOF_ADDR(udata->f);
-+     for (u = 0; u < udata->header->num_messages; u++) {
-+diff --git a/test/tsohm.c b/test/tsohm.c
-+index 1652c9b044..61036e7dc3 100644
-+--- a/test/tsohm.c
-++++ b/test/tsohm.c
-+@@ -3702,6 +3702,175 @@ test_sohm_external_dtype(void)
-+     free(orig);
-+ } /* test_sohm_external_dtype */
++   return data;
++ }
++diff --git a/libde265/image-io.cc b/libde265/image-io.cc
++index f15234b6..14ca95f0 100644
++--- a/libde265/image-io.cc
+++++ b/libde265/image-io.cc
++@@ -76,7 +76,7 @@ de265_image* ImageSource_YUV::read_next_image()
++   // --- load image ---
 + 
-++/*-------------------------------------------------------------------------
-++ * Function:    test_sohm_reject_bad_count
-++ *
-++ * Purpose:     A shared-message list index holds at most list_max messages
-++ *              on disk before it is promoted to a B-tree, and both the list
-++ *              image buffer and the in-memory message array are sized for
-++ *              list_max entries. Corrupt the on-disk message count so it
-++ *              exceeds list_max and verify the list load rejects the file
-++ *              instead of sizing a read or indexing the array past its end.
-++ *
-++ *-------------------------------------------------------------------------
-++ */
-++static void
-++test_sohm_reject_bad_count(void)
-++{
-++    hid_t    fcpl_id   = H5I_INVALID_HID;
-++    hid_t    fid       = H5I_INVALID_HID;
-++    hid_t    sid       = H5I_INVALID_HID;
-++    hid_t    did       = H5I_INVALID_HID;
-++    hsize_t  dims[1]   = {4};
-++    FILE    *fp        = NULL;
-++    uint8_t *buf       = NULL;
-++    long     fsize     = 0;
-++    long     table_off = -1;
-++    unsigned list_max  = 100;
-++    uint32_t chksum;
-++    size_t   pos;
-++    int      i;
-++    herr_t   ret;
-++
-++    /* On-disk shared-message table layout for a file with a single index and
-++     * 8-byte addresses: a 4-byte "SMTB" signature, one index record, then a
-++     * 4-byte checksum. Within the record the 16-bit message count follows the
-++     * (version, index type, message types, minimum size) prefix and the 16-bit
-++     * list and B-tree cutoffs.
-++     */
-++    const size_t rec_size     = 1 + 1 + 2 + 4 + 3 * 2 + 8 + 8;                     /* 30 */
-++    const size_t table_body   = (size_t)H5_SIZEOF_MAGIC + rec_size;                /* 34 */
-++    const size_t num_msgs_off = (size_t)H5_SIZEOF_MAGIC + (1 + 1 + 2 + 4 + 2 + 2); /* 16 */
-++
-++    MESSAGE(5, ("Testing rejection of an out-of-range SOHM list message count\n"));
-++
-++    /* Create a file whose single shared-message index is a list that can hold
-++     * up to list_max messages before converting to a B-tree.
-++     */
-++    fcpl_id = H5Pcreate(H5P_FILE_CREATE);
-++    CHECK_I(fcpl_id, "H5Pcreate");
-++    ret = H5Pset_shared_mesg_nindexes(fcpl_id, 1);
-++    CHECK_I(ret, "H5Pset_shared_mesg_nindexes");
-++    ret = H5Pset_shared_mesg_index(fcpl_id, 0, H5O_SHMESG_SDSPACE_FLAG | H5O_SHMESG_DTYPE_FLAG, 1);
-++    CHECK_I(ret, "H5Pset_shared_mesg_index");
-++    ret = H5Pset_shared_mesg_phase_change(fcpl_id, list_max, 0);
-++    CHECK_I(ret, "H5Pset_shared_mesg_phase_change");
-++
-++    fid = H5Fcreate(FILENAME, H5F_ACC_TRUNC, fcpl_id, H5P_DEFAULT);
-++    CHECK_I(fid, "H5Fcreate");
-++
-++    /* Several datasets sharing one dataspace and datatype leave the index a
-++     * list holding a couple of messages, well under list_max.
-++     */
-++    sid = H5Screate_simple(1, dims, NULL);
-++    CHECK_I(sid, "H5Screate_simple");
-++    for (i = 0; i < 5; i++) {
-++        char name[16];
-++
-++        snprintf(name, sizeof(name), "dset%d", i);
-++        did = H5Dcreate2(fid, name, H5T_NATIVE_INT, sid, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-++        CHECK_I(did, "H5Dcreate2");
-++        ret = H5Dclose(did);
-++        CHECK_I(ret, "H5Dclose");
-++    }
-++    ret = H5Sclose(sid);
-++    CHECK_I(ret, "H5Sclose");
-++    ret = H5Fclose(fid);
-++    CHECK_I(ret, "H5Fclose");
-++
-++    /* Read the whole file so the shared-message table can be located and edited. */
-++    fp = fopen(FILENAME, "rb");
-++    CHECK_PTR(fp, "fopen");
-++    if (fp) {
-++        if (fseek(fp, 0, SEEK_END) != 0)
-++            TestErrPrintf("fseek failed at line %d\n", __LINE__);
-++        fsize = ftell(fp);
-++        if (fsize <= (long)(table_body + 4))
-++            TestErrPrintf("unexpected file size %ld at line %d\n", fsize, __LINE__);
-++        rewind(fp);
-++
-++        buf = (uint8_t *)malloc((size_t)fsize);
-++        CHECK_PTR(buf, "malloc");
-++        if (buf && fread(buf, 1, (size_t)fsize, fp) != (size_t)fsize)
-++            TestErrPrintf("fread failed at line %d\n", __LINE__);
-++        if (fclose(fp) != 0)
-++            TestErrPrintf("fclose failed at line %d\n", __LINE__);
-++        fp = NULL;
-++    }
-++
-++    /* Find the shared-message table by signature, confirming the match with the
-++     * stored checksum so the correct bytes are edited.
-++     */
-++    for (pos = 0; buf && (pos + table_body + 4) <= (size_t)fsize; pos++) {
-++        if (memcmp(buf + pos, H5SM_TABLE_MAGIC, (size_t)H5_SIZEOF_MAGIC) != 0)
-++            continue;
-++
-++        chksum = (uint32_t)buf[pos + table_body] | ((uint32_t)buf[pos + table_body + 1] << 8) |
-++                 ((uint32_t)buf[pos + table_body + 2] << 16) | ((uint32_t)buf[pos + table_body + 3] << 24);
-++        if (chksum == H5_checksum_metadata(buf + pos, table_body, 0)) {
-++            table_off = (long)pos;
-++            break;
-++        }
-++    }
-++    if (table_off < 0)
-++        TestErrPrintf("could not locate the shared-message table in %s\n", FILENAME);
-++
-++    if (buf && table_off >= 0) {
-++        unsigned bad_count = list_max + 200; /* well past the list_max cutoff */
-++        size_t   base      = (size_t)table_off;
-++
-++        /* Overwrite the 16-bit message count and repair the table checksum so
-++         * the table loads and the corruption is only caught at the list.
-++         */
-++        buf[base + num_msgs_off]     = (uint8_t)(bad_count & 0xff);
-++        buf[base + num_msgs_off + 1] = (uint8_t)((bad_count >> 8) & 0xff);
-++
-++        chksum                     = H5_checksum_metadata(buf + base, table_body, 0);
-++        buf[base + table_body]     = (uint8_t)(chksum & 0xff);
-++        buf[base + table_body + 1] = (uint8_t)((chksum >> 8) & 0xff);
-++        buf[base + table_body + 2] = (uint8_t)((chksum >> 16) & 0xff);
-++        buf[base + table_body + 3] = (uint8_t)((chksum >> 24) & 0xff);
-++
-++        fp = fopen(FILENAME, "r+b");
-++        CHECK_PTR(fp, "fopen");
-++        if (fp) {
-++            if (fwrite(buf, 1, (size_t)fsize, fp) != (size_t)fsize)
-++                TestErrPrintf("fwrite failed at line %d\n", __LINE__);
-++            if (fclose(fp) != 0)
-++                TestErrPrintf("fclose failed at line %d\n", __LINE__);
-++            fp = NULL;
-++        }
-++
-++        /* Reopen and share a new message, which protects the list and drives
-++         * the vulnerable decode. The load should reject the file cleanly.
-++         */
-++        fid = H5Fopen(FILENAME, H5F_ACC_RDWR, H5P_DEFAULT);
-++        CHECK_I(fid, "H5Fopen");
-++        sid = H5Screate_simple(1, dims, NULL);
-++        CHECK_I(sid, "H5Screate_simple");
-++
-++        H5E_BEGIN_TRY
-++        {
-++            did = H5Dcreate2(fid, "trigger", H5T_NATIVE_INT, sid, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-++        }
-++        H5E_END_TRY
-++
-++        if (did >= 0) {
-++            TestErrPrintf("dataset creation succeeded on a corrupted SOHM list at line %d\n", __LINE__);
-++            H5Dclose(did);
-++        }
-++
-++        ret = H5Sclose(sid);
-++        CHECK_I(ret, "H5Sclose");
-++        ret = H5Fclose(fid);
-++        CHECK_I(ret, "H5Fclose");
-++    }
-++
-++    free(buf);
-++    ret = H5Pclose(fcpl_id);
-++    CHECK_I(ret, "H5Pclose");
-++} /* test_sohm_reject_bad_count */
-++
-+ /****************************************************************
-+ **
-+ **  test_sohm(): Main Shared Object Header Message testing routine.
-+@@ -3755,6 +3924,10 @@ test_sohm(void H5_ATTR_UNUSED *params)
++   uint8_t* p;
++-  int stride;
+++  ptrdiff_t stride;
 + 
-+     test_sohm_extend_dset();    /* Test extending shared datasets */
-+     test_sohm_external_dtype(); /* Test using datatype in another file */
-++
-++    /* Editing the on-disk table in place needs the single-file sec2 layout */
-++    if (default_driver)
-++        test_sohm_reject_bad_count(); /* Test rejecting a bad SOHM list message count */
-+ } /* test_sohm */
++   p = img->get_image_plane(0);  stride = img->get_image_stride(0);
++   for (uint32_t y=0;y<height;y++) {
++@@ -174,7 +174,7 @@ void ImageSink_YUV::send_image(const de265_image* img)
++   // --- write image ---
 + 
-+ /*-------------------------------------------------------------------------
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 7860931e7e..c83bb832de 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -18,6 +18,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://0001-cmake-remove-build-flags.patch \
-            file://CVE-2026-26199.patch \
-            file://CVE-2026-26197.patch \
-+           file://CVE-2026-17572.patch \
-            "
- SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
++   const uint8_t* p;
++-  int stride;
+++  ptrdiff_t stride;
++ 
++   int width = img->get_width();
++   int height= img->get_height();
++diff --git a/libde265/image.cc b/libde265/image.cc
++index 94f3c974..59a19184 100644
++--- a/libde265/image.cc
+++++ b/libde265/image.cc
++@@ -184,7 +184,7 @@ de265_image_allocation de265_image::default_image_allocation = {
++ };
++ 
++ 
++-void de265_image::set_image_plane(int cIdx, uint8_t* mem, int stride, void *userdata)
+++void de265_image::set_image_plane(int cIdx, uint8_t* mem, ptrdiff_t stride, void *userdata)
++ {
++   pixels[cIdx] = mem;
++   plane_user_data[cIdx] = userdata;
++diff --git a/libde265/image.h b/libde265/image.h
++index e0f1db24..114f41e4 100644
++--- a/libde265/image.h
+++++ b/libde265/image.h
++@@ -26,6 +26,7 @@
++ #endif
++ 
++ #include <assert.h>
+++#include <stddef.h>
++ #include <stdint.h>
++ #include <stdlib.h>
++ #include <string.h>
++@@ -235,11 +236,11 @@ struct de265_image {
++   /* */ uint8_t* get_image_plane(int cIdx)       { return pixels[cIdx]; }
++   const uint8_t* get_image_plane(int cIdx) const { return pixels[cIdx]; }
++ 
++-  void set_image_plane(int cIdx, uint8_t* mem, int stride, void *userdata);
+++  void set_image_plane(int cIdx, uint8_t* mem, ptrdiff_t stride, void *userdata);
++ 
++   uint8_t* get_image_plane_at_pos(int cIdx, int xpos,int ypos)
++   {
++-    int stride = get_image_stride(cIdx);
+++    ptrdiff_t stride = get_image_stride(cIdx);
++     return pixels[cIdx] + xpos + ypos*stride;
++   }
++ 
++@@ -248,38 +249,38 @@ struct de265_image {
++   template <class pixel_t>
++   pixel_t* get_image_plane_at_pos_NEW(int cIdx, int xpos,int ypos)
++   {
++-    int stride = get_image_stride(cIdx);
+++    ptrdiff_t stride = get_image_stride(cIdx);
++     return (pixel_t*)(pixels[cIdx] + (xpos + ypos*stride)*sizeof(pixel_t));
++   }
++ 
++   const uint8_t* get_image_plane_at_pos(int cIdx, int xpos,int ypos) const
++   {
++-    int stride = get_image_stride(cIdx);
+++    ptrdiff_t stride = get_image_stride(cIdx);
++     return pixels[cIdx] + xpos + ypos*stride;
++   }
++ 
++   void* get_image_plane_at_pos_any_depth(int cIdx, int xpos,int ypos)
++   {
++-    int stride = get_image_stride(cIdx);
+++    ptrdiff_t stride = get_image_stride(cIdx);
++     return pixels[cIdx] + ((xpos + ypos*stride) << bpp_shift[cIdx]);
++   }
++ 
++   const void* get_image_plane_at_pos_any_depth(int cIdx, int xpos,int ypos) const
++   {
++-    int stride = get_image_stride(cIdx);
+++    ptrdiff_t stride = get_image_stride(cIdx);
++     return pixels[cIdx] + ((xpos + ypos*stride) << bpp_shift[cIdx]);
++   }
++ 
++   /* Number of pixels in one row (not number of bytes).
++    */
++-  int get_image_stride(int cIdx) const
+++  ptrdiff_t get_image_stride(int cIdx) const
++   {
++     if (cIdx==0) return stride;
++     else         return chroma_stride;
++   }
++ 
++-  int get_luma_stride() const { return stride; }
++-  int get_chroma_stride() const { return chroma_stride; }
+++  ptrdiff_t get_luma_stride() const { return stride; }
+++  ptrdiff_t get_chroma_stride() const { return chroma_stride; }
++ 
++   int get_width (int cIdx=0) const { return cIdx==0 ? width  : chroma_width;  }
++   int get_height(int cIdx=0) const { return cIdx==0 ? height : chroma_height; }
++@@ -333,7 +334,7 @@ private:
++   int width = 0, height = 0;  // size in luma pixels
++ 
++   int chroma_width = 0, chroma_height = 0;
++-  int stride = 0, chroma_stride = 0;
+++  ptrdiff_t stride = 0, chroma_stride = 0;
++ 
++ public:
++   uint8_t BitDepth_Y = 0, BitDepth_C = 0;
++diff --git a/libde265/intrapred.h b/libde265/intrapred.h
++index 9b17f75b..a256cb3a 100644
++--- a/libde265/intrapred.h
+++++ b/libde265/intrapred.h
++@@ -533,7 +533,7 @@ void intra_border_computer<pixel_t>::fill_from_image()
++   assert(nT<=32);
++ 
++   pixel_t* image;
++-  int stride;
+++  ptrdiff_t stride;
++   image  = (pixel_t*)img->get_image_plane(cIdx);
++   stride = img->get_image_stride(cIdx);
++ 
++diff --git a/libde265/motion.cc b/libde265/motion.cc
++index c62c24c3..14e920e1 100644
++--- a/libde265/motion.cc
+++++ b/libde265/motion.cc
++@@ -50,7 +50,7 @@ void mc_luma(const base_context* ctx,
++              const seq_parameter_set* sps, int mv_x, int mv_y,
++              int xP,int yP,
++              int16_t* out, int out_stride,
++-             const pixel_t* ref, int ref_stride,
+++             const pixel_t* ref, ptrdiff_t ref_stride,
++              int nPbW, int nPbH, int bitDepth_L)
++ {
++   int xFracL = mv_x & 3;
++@@ -129,7 +129,7 @@ void mc_luma(const base_context* ctx,
++     pixel_t padbuf[(MAX_CU_SIZE+16)*(MAX_CU_SIZE+7)];
++ 
++     const pixel_t* src_ptr;
++-    int src_stride;
+++    ptrdiff_t src_stride;
++ 
++     if (-extra_left + xIntOffsL >= 0 &&
++         -extra_top  + yIntOffsL >= 0 &&
++@@ -181,7 +181,7 @@ void mc_chroma(const base_context* ctx,
++                int mv_x, int mv_y,
++                int xP,int yP,
++                int16_t* out, int out_stride,
++-               const pixel_t* ref, int ref_stride,
+++               const pixel_t* ref, ptrdiff_t ref_stride,
++                int nPbWC, int nPbHC, int bit_depth_C)
++ {
++   // chroma sample interpolation process (8.5.3.2.2.2)
++@@ -227,7 +227,7 @@ void mc_chroma(const base_context* ctx,
++     pixel_t padbuf[(MAX_CU_SIZE+16)*(MAX_CU_SIZE+3)];
++ 
++     const pixel_t* src_ptr;
++-    int src_stride;
+++    ptrdiff_t src_stride;
++ 
++     int extra_top  = 1;
++     int extra_left = 1;
++diff --git a/libde265/sao.cc b/libde265/sao.cc
++index a0db84b2..579dcef2 100644
++--- a/libde265/sao.cc
+++++ b/libde265/sao.cc
++@@ -28,8 +28,8 @@
++ template <class pixel_t>
++ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
++                         const slice_segment_header* shdr, int cIdx, int nSW,int nSH,
++-                        const pixel_t* in_img,  int in_stride,
++-                        /* */ pixel_t* out_img, int out_stride)
+++                        const pixel_t* in_img,  ptrdiff_t in_stride,
+++                        /* */ pixel_t* out_img, ptrdiff_t out_stride)
++ {
++   const sao_info* saoinfo = img->get_sao_info(xCtb,yCtb);
++ 
++@@ -77,7 +77,7 @@ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
++ 
++   if (SaoTypeIdx==2) {
++     int hPos[2], vPos[2];
++-    int vPosStride[2]; // vPos[] multiplied by image stride
+++    ptrdiff_t vPosStride[2]; // vPos[] multiplied by image stride
++     int SaoEoClass = (saoinfo->SaoEoClass >> (2*cIdx)) & 0x3;
++ 
++     switch (SaoEoClass) {
++@@ -266,8 +266,8 @@ void apply_sao_internal(de265_image* img, int xCtb,int yCtb,
++ template <class pixel_t>
++ void apply_sao(de265_image* img, int xCtb,int yCtb,
++                const slice_segment_header* shdr, int cIdx, int nSW,int nSH,
++-               const pixel_t* in_img,  int in_stride,
++-               /* */ pixel_t* out_img, int out_stride)
+++               const pixel_t* in_img,  ptrdiff_t in_stride,
+++               /* */ pixel_t* out_img, ptrdiff_t out_stride)
++ {
++   if (img->high_bit_depth(cIdx)) {
++     apply_sao_internal<uint16_t>(img,xCtb,yCtb, shdr,cIdx,nSW,nSH,
++@@ -332,8 +332,8 @@ void apply_sample_adaptive_offset_sequential(de265_image* img)
++     return;
++   }
++ 
++-  int lumaImageSize   = img->get_image_stride(0) * img->get_height(0) * img->get_bytes_per_pixel(0);
++-  int chromaImageSize = img->get_image_stride(1) * img->get_height(1) * img->get_bytes_per_pixel(1);
+++  size_t lumaImageSize   = static_cast<size_t>(img->get_image_stride(0)) * img->get_height(0) * img->get_bytes_per_pixel(0);
+++  size_t chromaImageSize = static_cast<size_t>(img->get_image_stride(1)) * img->get_height(1) * img->get_bytes_per_pixel(1);
++ 
++   uint8_t* inputCopy = new uint8_t[ libde265_max(lumaImageSize, chromaImageSize) ];
++   if (inputCopy == nullptr) {
++@@ -347,10 +347,10 @@ void apply_sample_adaptive_offset_sequential(de265_image* img)
++ 
++   for (int cIdx=0;cIdx<nChannels;cIdx++) {
++ 
++-    int stride = img->get_image_stride(cIdx);
+++    ptrdiff_t stride = img->get_image_stride(cIdx);
++     int height = img->get_height(cIdx);
++ 
++-    memcpy(inputCopy, img->get_image_plane(cIdx), stride * height * img->get_bytes_per_pixel(cIdx));
+++    memcpy(inputCopy, img->get_image_plane(cIdx), static_cast<size_t>(stride) * height * img->get_bytes_per_pixel(cIdx));
++ 
++     for (int yCtb=0; yCtb<sps.PicHeightInCtbsY; yCtb++)
++       for (int xCtb=0; xCtb<sps.PicWidthInCtbsY; xCtb++)
++diff --git a/libde265/sei.cc b/libde265/sei.cc
++index 17b7f8b5..8a3d80a7 100644
++--- a/libde265/sei.cc
+++++ b/libde265/sei.cc
++@@ -99,7 +99,7 @@ static void dump_sei_decoded_picture_hash(const sei_message* sei,
++ class raw_hash_data
++ {
++ public:
++-  raw_hash_data(int w, int stride);
+++  raw_hash_data(int w, ptrdiff_t stride);
++   ~raw_hash_data();
++ 
++   struct data_chunk {
++@@ -111,13 +111,14 @@ public:
++   data_chunk prepare_16bit(const uint8_t* data,int y);
++ 
++ private:
++-  int mWidth, mStride;
+++  int mWidth;
+++  ptrdiff_t mStride;
++ 
++   uint8_t* mMem;
++ };
++ 
++ 
++-raw_hash_data::raw_hash_data(int w, int stride)
+++raw_hash_data::raw_hash_data(int w, ptrdiff_t stride)
++ {
++   mWidth=w;
++   mStride=stride;
++@@ -157,7 +158,7 @@ raw_hash_data::data_chunk raw_hash_data::prepare_16bit(const uint8_t* data,int y
++ }
++ 
++ 
++-static uint32_t compute_checksum(uint8_t* data,int w,int h,int stride, int bit_depth)
+++static uint32_t compute_checksum(uint8_t* data,int w,int h,ptrdiff_t stride, int bit_depth)
++ {
++   uint32_t sum = 0;
++ 
++@@ -170,7 +171,7 @@ static uint32_t compute_checksum(uint8_t* data,int w,int h,int stride, int bit_d
++   }
++   else {
++     auto* data16 = reinterpret_cast<uint16_t*>(data);
++-    int stride16 = stride / 2;
+++    ptrdiff_t stride16 = stride / 2;
++     for (int y=0; y<h; y++)
++       for(int x=0; x<w; x++) {
++         uint8_t xorMask = ( x & 0xFF ) ^ ( y & 0xFF ) ^ ( x  >>  8 ) ^ ( y  >>  8 );
++@@ -224,7 +225,7 @@ static inline uint16_t crc_process_byte_parallel(uint16_t crc, uint8_t byte)
++ 	   (t << 12)) & 0xFFFF;
++ }
++ 
++-static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,int stride, int bit_depth)
+++static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,ptrdiff_t stride, int bit_depth)
++ {
++   raw_hash_data raw_data(w,stride);
++ 
++@@ -250,7 +251,7 @@ static uint32_t compute_CRC_8bit_fast(const uint8_t* data,int w,int h,int stride
++ }
++ 
++ 
++-static void compute_MD5(uint8_t* data,int w,int h,int stride, uint8_t* result, int bit_depth)
+++static void compute_MD5(uint8_t* data,int w,int h,ptrdiff_t stride, uint8_t* result, int bit_depth)
++ {
++   MD5_CTX md5;
++   MD5_Init(&md5);
++@@ -289,7 +290,8 @@ static de265_error process_sei_decoded_picture_hash(const sei_message* sei, de26
++   int nHashes = img->get_sps().chroma_format_idc==0 ? 1 : 3;
++   for (int i=0;i<nHashes;i++) {
++     uint8_t* data;
++-    int w,h,stride;
+++    int w,h;
+++    ptrdiff_t stride;
++ 
++     w = img->get_width(i);
++     h = img->get_height(i);
++diff --git a/libde265/sps.cc b/libde265/sps.cc
++index aa871a09..a29a3c0a 100644
++--- a/libde265/sps.cc
+++++ b/libde265/sps.cc
++@@ -570,7 +570,7 @@ de265_error seq_parameter_set::compute_derived_values(bool sanitize_values)
++   PicHeightInCtbsY   = ceil_div(pic_height_in_luma_samples,CtbSizeY);
++   PicSizeInMinCbsY   = PicWidthInMinCbsY * PicHeightInMinCbsY;
++   PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
++-  PicSizeInSamplesY = pic_width_in_luma_samples * pic_height_in_luma_samples;
+++  PicSizeInSamplesY = static_cast<uint32_t>(pic_width_in_luma_samples) * pic_height_in_luma_samples;
++ 
++   if (chroma_format_idc==0 || separate_colour_plane_flag) {
++     CtbWidthC  = 0;
++@@ -1325,7 +1325,7 @@ de265_error seq_parameter_set::write(error_queue* errqueue, CABAC_encoder& out)
++   PicHeightInCtbsY   = ceil_div(pic_height_in_luma_samples,CtbSizeY);
++   PicSizeInMinCbsY   = PicWidthInMinCbsY * PicHeightInMinCbsY;
++   PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
++-  PicSizeInSamplesY = pic_width_in_luma_samples * pic_height_in_luma_samples;
+++  PicSizeInSamplesY = static_cast<uint32_t>(pic_width_in_luma_samples) * pic_height_in_luma_samples;
++   if (chroma_format_idc==0 || separate_colour_plane_flag) {
++     CtbWidthC  = 0;
++     CtbHeightC = 0;
++diff --git a/libde265/sps.h b/libde265/sps.h
++index c8be9788..5cb0b46c 100644
++--- a/libde265/sps.h
+++++ b/libde265/sps.h
++@@ -39,6 +39,13 @@ constexpr int MAX_NUM_LT_REF_PICS_SPS = 32;
++ constexpr int MAX_PICTURE_WIDTH  = 65535;
++ constexpr int MAX_PICTURE_HEIGHT = 65535;
++ 
+++// pic_width/height_in_luma_samples are stored as uint16_t and PicSizeInSamplesY as uint32_t,
+++// so these limits must keep width/height in 16 bits and their product in 32 bits.
+++static_assert(MAX_PICTURE_WIDTH  <= 0xFFFF, "picture width must fit in uint16_t");
+++static_assert(MAX_PICTURE_HEIGHT <= 0xFFFF, "picture height must fit in uint16_t");
+++static_assert((uint64_t)MAX_PICTURE_WIDTH * MAX_PICTURE_HEIGHT <= 0xFFFFFFFFu,
+++              "total luma sample count must fit in uint32_t");
+++
++ enum {
++   CHROMA_MONO = 0,
++   CHROMA_420 = 1,
++@@ -111,8 +118,8 @@ public:
++   uint8_t chroma_format_idc;          // [0;3]
++ 
++   bool separate_colour_plane_flag;
++-  int  pic_width_in_luma_samples;
++-  int  pic_height_in_luma_samples;
+++  uint16_t pic_width_in_luma_samples;   // <= MAX_PICTURE_WIDTH  (validated on parse)
+++  uint16_t pic_height_in_luma_samples;  // <= MAX_PICTURE_HEIGHT (validated on parse)
++   bool conformance_window_flag;
++ 
++   int conf_win_left_offset;
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+index a02d6dd5d8..8e145cf8dd 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.19.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https
+            file://CVE-2026-49295.patch \
+            file://CVE-2026-49337.patch \
+            file://CVE-2026-49346.patch \
++           file://CVE-2026-54240-CVE-2026-54241.patch \
+ "
+ SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
  
 
