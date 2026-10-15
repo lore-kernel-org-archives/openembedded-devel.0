@@ -1,110 +1,104 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B48CC6B2D
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:52:08 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30342.1792029122122151808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7841FCC6B34
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 04:39:09 +0000 (UTC)
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.32484.1792039143203019951
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 18:52:02 -0700
+ Wed, 14 Oct 2026 21:39:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=kkFwzLaA;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-67992884b02so761136d50.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:52:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=RoOdDhNt;
+ spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-35cd4e8bdbdso5249931eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 21:39:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792029121; x=1792633921; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792039142; x=1792643942; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=s8gzq/byFczIIL6LYydtoy26fGhPX/Lm6jWXJkAdDPE=;
-        b=kkFwzLaARZ5MWi7gWC6Ee5xuh+rNnj/6YNmYrvb9l2LM5eSnQ6+p8+eiS3/rkFZeQ2
-         e3eZYscD4tmenYBLJHQnVQGaCB1OfkJfnGNSrzzvs4wKJ76fDCpiRObOMYuwzGDaIECj
-         2urYBaNiab0S7nknW9xzIXpxaTeI5ZlzMDf3OfJUseWLBHah4HRjYnBAGUQFHuWhfG2W
-         rGJfDyQDlLILczweL188iXGLHDVAOtrP9Xk4GPna9fSHByMdSUwwsznOQ3jnnqnnh7fc
-         WST3psPGtiaEIZmvue8JRpjM+ZKzJiHOmOiBY++9DbiAQKTnqkW1sLNAsly/C5Wn3G8h
-         /8+Q==
+        bh=hQ4MXGRkkOJY7AQnTaEEH7HwO93KrpKqla+26QpNpbc=;
+        b=RoOdDhNtLUal4pLNIOi3GwQEtxTfQUBYs7/7v7jNqRGzRkjm9A4pik5Z+Ar6PCmeki
+         3GADip+zupophp/S8PlXm8qCwhKnBZbAWeiXk2NERJ5X8k2ILShYvXGg7cM3slja6yDW
+         nWH9Y6SOQwiOpz+4EWzo0MkUsQTQy1otmYHoDrfgIz2OMUj+HvLpt/QYHuMiX9aPoYlx
+         xvAH3r32IWODgdWa5JulqKkOlpoOqJmtWHDzh5Sx5HDVVq8dhpOcKcKSYtbfl7aAWp8d
+         rxdttNV15pZBR/BYnSkeEoELCYfbsk0kRgOhulZatmu7n3vmoR8GU+Ae9yyw+7tKdwK5
+         itaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792029121; x=1792633921;
+        d=1e100.net; s=20260707; t=1792039142; x=1792643942;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=s8gzq/byFczIIL6LYydtoy26fGhPX/Lm6jWXJkAdDPE=;
-        b=24LQUmiEQCGST4PCQ6ff31Hgo8riKrr+2J480kDxyD//bzU6r+aF26YgrB45kBi12t
-         CaZMZGJJ1KRjQTRh8ERbSIUUHqHBQtaS8TGtyne40J0jwaEqeDTexaQl8lZqu8XmtJBv
-         jjNPxfPVhnD6Chbkxz1rjw7w+xxJq6x1n7LuKwFlKMlicbUJmo+vJ2xbOChElLjAe37b
-         HcaJvsK81AgNS7LWk/Y6aWnmwKvHweRnges/MXixW7fAtnywh00L75gqg5NoDEQ+PX+r
-         tSR9WVXVPgEwtwky59CcPJLc5G+tJc44pdNXimWrRIw0y4xaxmtKgCcaVgTEZ0ZO7lRg
-         XCXg==
-X-Gm-Message-State: AFq9FYJL2izttZq+kMqDRqsaiW0voZUMoFvzUwdmqiiMB66gWG0dPPqH
-	fLb6sroRtqQzCsiw1oTlByNaVtNUG4T6gbixfowtPsCNHFJmYCTbkftKvwhafBIU
-X-Gm-Gg: AYBFou1ifBv63+JW3nlfa9evumhSsEzxvsQ9mpm07zqRLyjCY0FZxu78yGyJS6EnKVP
-	YXcgbi1vYkORWu/VNyBAKxRDNF3yzy8jTRx9W+y3Ri+6icLQSsADt9uiIA6YX2WFrZaEy0q+8Q5
-	3lpb3vOe0A8LJ+QJ55l2hTKkStMl51oSHRboqSA8SpqcaCqUgkcpusSgth3S0ynAbQ0bKu8Wshj
-	umHJhP3mVh6W8hkigtCy/u1hZc7S8eeKxZ7pQy9MlN30BcrHYHN6jq0eje/s1HNn6sp129aLfYY
-	GTbcef8SrGzCEY0LfD1VY4TBmGFHk6NmfGG5n648QgixE8x3pEJw9QMsC6TFYa2jX5ZwtHsGYo7
-	FOXVEtdRZF4WxxQhzzbycrXNFXRKy7UP4Ic7WM82UPY+dfWpgQ2SoXBatoCQJv/xbgPCl9he1Ou
-	YaMOF/T3tro+WflkUaOiTcblpsw6hqLKTVVG6uZ1uwnQokUrwsrKd6UEUlk8Ub4BFgsSh7Nl6sS
-	1ktgDFyjNQRVvIY0BBjK4X0jpc8EcHHgi/4UlbKK8rctfmGSgYquEak7wJyK/YPlioM+e28CYWg
-	T4d1sLpa8AU3V+R3v9UWig==
-X-Received: by 2002:a05:690c:5886:b0:8ae:c3f4:3da8 with SMTP id 00721157ae682-8b07ee76abfmr41370927b3.85.1792029120955;
-        Wed, 14 Oct 2026 18:52:00 -0700 (PDT)
-Received: from localhost.localdomain ([71.54.204.63])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b07f1b745csm62290377b3.14.2026.10.14.18.51.58
+        bh=hQ4MXGRkkOJY7AQnTaEEH7HwO93KrpKqla+26QpNpbc=;
+        b=XX/3Qfh2vyCydGmWIPmuYNG54pp3dOQiHqRFbAaf9/6vUWKGvreztocEUYE+jfgYwk
+         wHQyt8WFd2dwnx47SO8iwKwWhi3AZqEsOClAgCjNP+nF1ZX8XYtMGbkPZwI63FjLcLvI
+         OPyWKh726qAK4RtZhFT7pMPXr8ohW6F3XrYd91NbFTh6gg/612Ze530jtuSPjefXlrkl
+         HzAYSwTzXdi/vd8L+anZ9XullupPVgilnhVvRwXGSJwHPBF5zaheIv4xHOAHP6Vp7ZiO
+         w5w00RZer2c5yTp4askL+zHgQJK6wWJZeO/3llSMzi8lpzlTPBTm5jpUiXtrsGnNiXuJ
+         vynA==
+X-Gm-Message-State: AFq9FYLSGrPVQBCE9gHHrGYTtk4K90Po7JAyL4dLnsZYoAae5MOxdrto
+	XB4i45KzpBh1wJvIbRmWpk8LhvWxYxIwWNFHAAFlFEL/wklxSXxZXI2RqDedUVyLQLU=
+X-Gm-Gg: AYBFou1K1I/T65X2Apopw0S+upCZOa/T4Hnqw1LKIFZWRjgGMuEzo74y3yU/Opyw5P0
+	TWGRq5uNC/zDIvJpHq+N5bglRHUhQS2ylcx9KSIbdUflynFJTyQOVfsi66QVB+y+OqTl6orYAjd
+	RHUTx8/cb1jy3cumj2eEZagw/CbRSgeE8vfBHaUIHRCKTUnRvBqEmpWIt6ZeMkC0EiIIMKTTKvK
+	z+UhFTHdBq5oltDuWJ6KZEwauFbLf7vZcGuzKWt9E+7ZU+VarwneJQMpuFSXMwdErCRV7OkdNkO
+	fh7R4Ukvy/BWUyTW5Rc10CRh7cJN1yIB/KVr7JzWFzPxRTc1EG9YveTH/iKFl7F3qaqVOf5lnLC
+	ivFpT0O11F1e+eI61931V8vtDWRfy+U9krRUn5MHln7NTqJSbjHZD8CnugAkFinUM5NotQLur1Y
+	GvQt0NLlGLgNIzJxUw/nywFGaa2qIR/RQ/0+2t42ZAjHwgdiM2LVaJ9tTtIdFNdLy9l0M+UTp3e
+	BtJBH2gVGUGUDAGh0W3N46w9QSNu6QwbpKomPlSTaMAsSnZV3NJW1YhIeeQwyEpHWnIKiZPgNnA
+	GfNSSIZmTQc7FnYLy4f2vo1GOscJTHiQVBVw5pmnFMeu/h6psFak+nfjk8bYVEyAAwk0chMikVI
+	l1AjsByP+UlwkUN5VYrpmNHTYp0JbtqEqD7A+9iqLT8VPtPf75TvAN5jflkL/kKofMS0UMWShTp
+	HnOQ19onZHOAYzZZ3OKP4tuourvK20fZOoTtA5C/BqDh3i4w==
+X-Received: by 2002:a05:7300:22de:b0:351:595f:a941 with SMTP id 5a478bee46e88-3537df5139dmr26358112eec.8.1792039142263;
+        Wed, 14 Oct 2026 21:39:02 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-358ee8a3387sm49199424eec.15.2026.10.14.21.39.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 18:51:59 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Wed, 14 Oct 2026 21:39:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 24.21.0 -> 24.22.0
-Date: Wed, 14 Oct 2026 21:51:43 -0400
-Message-ID: <20261015015144.504386-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 1/5] openl2tp: fix rpcbind status check in run-ptest
+Date: Wed, 14 Oct 2026 21:38:55 -0700
+Message-ID: <20261015043859.3073445-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:52:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130907
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 04:39:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130908
 
-Changelog: https://github.com/nodejs/node/releases/tag/v24.22.0
+The final rpcbind check chained 'which systemctl && systemctl status ||
+service rpcbind status', so on sysvinit images without systemctl it fell
+back to 'service', which may not exist, and the tests were skipped even
+though rpcbind was running. Check the status with the same init system
+that was used to start it.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../oe-npm-cache                                                | 0
- ...oe-cache-native_24.21.bb => nodejs-oe-cache-native_24.22.bb} | 0
- .../nodejs/{nodejs_24.21.0.bb => nodejs_24.22.0.bb}             | 2 +-
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-24.21 => nodejs-oe-cache-24.22}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_24.21.bb => nodejs-oe-cache-native_24.22.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_24.21.0.bb => nodejs_24.22.0.bb} (98%)
+ meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.21/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.22/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.21/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.22/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.22.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.21.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.22.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
-index 441a920f36..39a8563672 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
-@@ -35,7 +35,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI:append:class-target = " \
-            file://0009-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "a6f54defb6fd7c84f41dba13d61e78e9b4e0961712cf61f29715c05f5ced94fc"
-+SRC_URI[sha256sum] = "41f97cff2c666f1f8293dc5f85c65e8dd605c16b43fd9febd49ede32ee1e0329"
- 
- S = "${UNPACKDIR}/node-v${PV}"
- 
--- 
-2.43.0
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest b/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
+index a40b6c4228..61158d4519 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
+@@ -43,11 +43,11 @@ zcat /proc/config.gz | grep CONFIG_PPPOL2TP=m > /dev/null || exit_cus "Failed to
+ SYSV_INIT="/etc/init.d/rpcbind"
+ if [ -e ${SYSV_INIT} ]; then
+ 	${SYSV_INIT} status > /dev/null || ${SYSV_INIT} start > /dev/null
++	${SYSV_INIT} status > /dev/null
+ else
+ 	systemctl status rpcbind > /dev/null || systemctl start rpcbind > /dev/null
++	systemctl status rpcbind > /dev/null
+ fi
+-
+-which systemctl > /dev/null && systemctl status rpcbind > /dev/null || service rpcbind status > /dev/null
+ [ $? -ne 0 ] && exit_cus "Failed to start rpcbind service, skip the tests." 1
 
+ # backup the below files
 
