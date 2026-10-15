@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2324CC6B39
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:45:50 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.33284.1792043143682757557
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A87CC6B38
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:45:51 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32875.1792043145530408329
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:45:43 -0700
+ Wed, 14 Oct 2026 22:45:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HUceQUSu;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2e82462a3f1so9771395ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:45:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=seWkyide;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e95bd1c14cso3278925ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043143; x=1792647943; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792043145; x=1792647945; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=FF3VdqW/SLEoZqSMcWv0EcoTA/jQYH8gb2/wzSxnO2U=;
-        b=HUceQUSuBlrloR/ULYXHWJ4zcuRckZ4eKxl2Qrmjxzc87TiLN4ZZbpNt1aEwsaM6/C
-         h3eOrsD7k1jk3WsoNtNdWXnYMZUvHIRKnajzCrHF0uvAlzUpT4nZKIVqUVza30WekO3v
-         hguJ5QZANWaldJZTg95DdSnt/LmD/QkW1cx9KbTlgDyG0X4lWwYAaaF4fdUupbOGwuar
-         KHBRd3ECBIwWcc0oNcNVlkWCaTUaRORPvSs+Nv2gxWFfnQ5w71tQqU50HFYCQVXnKw3a
-         iCR4rRZ3Cclc2TVhdWPa0ni3QxxhRbJERhN0EQEAcjK+FQmp7rhqZnc37ePkRwegFUO/
-         9rlg==
+        bh=oepr5rvGsFOP/ucaUJ6BleehzODGj89mYx1dg03XcFE=;
+        b=seWkyide3/SI43UPHzxiR+OPAwuIIq9DW1JsiEiPEJKChPXNr6T/paQo95nKgJl6Jt
+         inY6x+mhLh912TdipsIzNJx+Y49o4+QiTR3cURlrK2rpIK2CvmX2/ybBYQMzkgIEOHOo
+         eDyBD0CaFb9kajf9FBXTFk5GdmWYfv7J1TeTYx9cjsywwCzHGlRCBSvRTMEituoezurZ
+         HOJawxTFC1OLKSt+QpK3cl3I6/olBk13AwEKKxCkHG4OsN3qFf3L5M+uuvBsZFKzFjmV
+         HzJbxvrlj6VhEvQYiSN87KDZ84xSkDDpwIk2xM6e7RMB+gGPqGpbngeVXoD+0g/wEqe7
+         e4bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043143; x=1792647943;
+        d=1e100.net; s=20260707; t=1792043145; x=1792647945;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=FF3VdqW/SLEoZqSMcWv0EcoTA/jQYH8gb2/wzSxnO2U=;
-        b=HM8qlYxDuPsErq+TKkX4Oq//fcEJpJVF+J+WASZCjHflNr2pIkaWbO8EkP2ksoaKgK
-         YWlIoc/fpBSZ+L/PNQSHN8FBVTLZtD4RzqB4xCR+RHaNo+RlMW6Zo/GK9SBXQ4H9RkEf
-         Zpn7vDNPmo3HQfKeEpXUND68EUiq58Ca1EdH2RbsEFDiJ2oz/WYYFsjq7OaNZpI4WicK
-         +hEM0lzgvt1vuUwTo4CDP7uQTv+lvR8+X4zh0Sztb4afJV8bZ6PPjb2zRMvUvyz+ctP1
-         boqJQ6ZXWGNZCoDRu1WilEMRAjPtIDkZYoDY3EtCveWAgUCToEyyT+UZfe54YrfXat35
-         ANMQ==
-X-Gm-Message-State: AFq9FYLIuXr+dq3K2rWrhQQ38ldbmL7tbPdsL6yYeA65xlhN3t4ILTpq
-	vqgYCZPAizExgIRlXAoGSu5EyDTW2np7ZdDChEO680WTBbSrakjAKEqHyHKs5Q==
-X-Gm-Gg: AYBFou3cLQ0STnMONd9jdbdARpq9Whkv+Lxnhi1qV2YFiJ9aolGFlHOjka2ub36QDoR
-	1zkOWoG2XYPKRX69gdBWedulRhILVr8xhr9wQVWGfeniKbo5o3nHSVDm3pscPYyNK1FlglNKDLF
-	NrxlOQrNbnElSm4P+/gmGxT51QB4K7vnTr2ZzNOcNPhWaNWuZfi9MXGHtMtE6L1LYuEewRbaRB2
-	gdRVUIKiRp6Gpq4+boxJ2iV6B/IITDXvSJjjC5JeujfXlzqDsIFrIHr8p04g1we71sqFaM0kBui
-	p8cVnmPq2JKchq1YjRO5pjc69/1S3ZExXzh++TJ3msep0amPEogOhqirRJsSYurifvpDSU5MW6B
-	B+CntjTQAoTXfctPlR5ongD5xAA60CrCcYoMtoIVqoo3u4HkO777JNSSgfKhtwISyxXvWOhPb11
-	m1SQ93odko/SWiSr4muqs+9O8ILB5IX5ZBPY0dscBCwgumqiilnNpkVKnGBLwXo/qvy8clK+4a3
-	zyobqqedvGarpvyvGE4X/M=
-X-Received: by 2002:a17:902:e88f:b0:2dd:ad74:ac29 with SMTP id d9443c01a7336-2e842ac8b20mr168493205ad.27.1792043143002;
-        Wed, 14 Oct 2026 22:45:43 -0700 (PDT)
+        bh=oepr5rvGsFOP/ucaUJ6BleehzODGj89mYx1dg03XcFE=;
+        b=qtVFmHrjjRDJ3kZSB2pIsWJCnDIQ9ti27dcy1EayhBoyKjzR2NoQGXa7Nco4mGBsRz
+         kWbooiXRtCnFQQVElZejVoGwPSsU22ogjFeWKpocHs9XNwk8ZVeamYqb4J9ss/KeMB/e
+         rUoKynpdj/olgUD/FIEW3Yq7F9N87hHQsKKEssadWfsPqno/mz9Mc1DQYnvDHNKZU+4V
+         qGeI08EiEIHfqesbo4TlW/SSzRZ99LHR/ILQr7p5loAZlpWnkTD+Dxp3AFwghbgAIuqe
+         B9A0Fvi6GpL4OQiWUED73z/0ffSysgBHg3BOILvKL20yjFLGw1/+1FleWd5wEvtDaVcb
+         FJQg==
+X-Gm-Message-State: AFq9FYLWMIuwZ/zN64FMqAexezn6PGInC4PmAtwOcMFjMmznz6jnpXIX
+	YtXY9CcBfUGPEKytEMon3UyB31iBzHmKc5isjtsdrgdkdu3ejMiYwctZbluKMQ==
+X-Gm-Gg: AYBFou26Wa3y0ys0GncbzZ1VtIeYVJJLWO0E4hJFl0OXwjI+TbXxdO6Vri3EvArTQcV
+	qfH3b0V1F3BmuzMnYz2qHs+oPisasjjMud1k+Q2XIO9ftuFxOWLYW7iPQ5xj36b1pzATT2NcJLY
+	au6vNyOHL6AIvzZHOreDPvdCMi0WqdMycnxy7nKxSBtVTDs95KOT0Z4hdQUSUHb2qZPQjT/Rnrj
+	5TF01MzDnOW4Om3dvjFRKZRqatKrgsJB7DJgnJcTypXGFjI7x5RbJz0dYXWanzck/IezGVWreY2
+	F86bDfA9++Eei0qr/pZFACv3XNevvPET3CANUFq4sp9dQZ2Cu0dxd3C1LqIjJnK7I7Wa/VBaeOJ
+	bEJ+EMsg8rh5vbxh7uO/ncsFD3el6fGNw9FMKdYYiY150xzgdZkVoVOX4SDCajxZlUbj/NvbK7R
+	6oFnH2OHoRqLEJPkWJZfJPFuGfUicuRixtl/66gjn3ZriIQnapLomsoElFTkx4oe9ZcxbjAFR2U
+	KwqvRBfGljZDUdXQVE+wZk=
+X-Received: by 2002:a17:903:46c8:b0:2df:9a7e:d41f with SMTP id d9443c01a7336-2e842e14a25mr159383355ad.41.1792043144823;
+        Wed, 14 Oct 2026 22:45:44 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.45.41
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.45.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:45:42 -0700 (PDT)
+        Wed, 14 Oct 2026 22:45:44 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 81/82] apache2: fix build with OpenSSL 4
-Date: Thu, 15 Oct 2026 18:42:09 +1300
-Message-ID: <db22543b542fa8742751450dc9291869bd93d896.1791945956.git.ankur.tyagi85@gmail.com>
+Subject: [PATCH 82/82] lvgl-demo-fb: fix SRCREV
+Date: Thu, 15 Oct 2026 18:42:10 +1300
+Message-ID: <a9d69bc066bf9498397db27902c287dd666fdfd4.1791945956.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
 References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
@@ -67,89 +67,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:45:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131001
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:45:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131002
 
-From: Markus Volk <f_l_k@t-online.de>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-ASN1_STRING is opaque in OpenSSL 4, so mod_md fails to compile in
-md_ocsp.c. Backport the httpd 2.4.x commit that switches to the getter
-functions. The fix is part of httpd 2.4.69, which master gets through the
-upgrade.
+Previous SRCREV does not belong to any branch on this repository and build
+fails with error:
 
-Upstream-Status: Backport [https://github.com/apache/httpd/commit/6cd9ea8dcb5bf68a195e90578c7f05e12eba5468]
+ERROR: lvgl-demo-fb-9.5.0+git-r0 do_fetch: Fetcher failure: Unable to find revision 045137cf0fa1781483cb796261a11b5eb21e99d9 in branch release/v9.5 even from upstream
+ERROR: lvgl-demo-fb-9.5.0+git-r0 do_fetch: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.5;name=demo')
 
-AI-Generated: Uses Claude Code (Claude Opus 5.5)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...mod_md-Add-OpenSSL-4.0-compatibility.patch | 47 +++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.68.bb   |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
+ meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch b/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
-new file mode 100644
-index 0000000000..ee127681ec
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
-@@ -0,0 +1,47 @@
-+From 6cd9ea8dcb5bf68a195e90578c7f05e12eba5468 Mon Sep 17 00:00:00 2001
-+From: Rainer Jung <rjung@apache.org>
-+Date: Wed, 17 Jun 2026 09:48:52 +0000
-+Subject: [PATCH] mod_md: Add OpenSSL 4.0 compatibility
-+
-+* Use getters instead of direct member access.
-+
-+* Struct was made opaque in OpenSSL 4. Getters exist since OpenSSL 1.1.0.
-+
-+* Keep OpenSSL 1.0.2 compatibility.
-+
-+Merge from icing/md:
-+https://github.com/icing/mod_md/commit/9fd90380db0722f0ccc14ff1c4da0ca21d4da75c
-+
-+Backport of r1935161 from trunk, [mod_md CTR]
-+
-+
-+Upstream-Status: Backport [https://github.com/apache/httpd/commit/6cd9ea8dcb5bf68a195e90578c7f05e12eba5468]
-+---
-+diff --git a/modules/md/md_ocsp.c b/modules/md/md_ocsp.c
-+index aee799a7b39..2e7f14dff31 100644
-+--- a/modules/md/md_ocsp.c
-++++ b/modules/md/md_ocsp.c
-+@@ -533,13 +533,23 @@ static const char *certid_summary(const OCSP_CERTID *certid, apr_pool_t *p)
-+     serial = issuer = key = "???";
-+     OCSP_id_get0_info(&aname_hash, &amd_nid, &akey_hash, &aserial, (OCSP_CERTID*)certid);
-+     if (aname_hash) {
-++#if OPENSSL_VERSION_NUMBER < 0x10100000L
-+         data.len = (apr_size_t)aname_hash->length;
-+         data.data = (const char*)aname_hash->data;
-++#else
-++        data.len = (apr_size_t)ASN1_STRING_length(aname_hash);
-++        data.data = (const char*)ASN1_STRING_get0_data(aname_hash);
-++#endif
-+         md_data_to_hex(&issuer, 0, p, &data);
-+     }
-+     if (akey_hash) {
-++#if OPENSSL_VERSION_NUMBER < 0x10100000L
-+         data.len = (apr_size_t)akey_hash->length;
-+         data.data = (const char*)akey_hash->data;
-++#else
-++        data.len = (apr_size_t)ASN1_STRING_length(akey_hash);
-++        data.data = (const char*)ASN1_STRING_get0_data(akey_hash);
-++#endif
-+         md_data_to_hex(&key, 0, p, &data);
-+     }
-+     if (aserial) {
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb
-index dc8c0df12d..f178007ab7 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb
-@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
-            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-            file://0001-make_exports.awk-not-expose-the-path.patch \
-+           file://0011-mod_md-Add-OpenSSL-4.0-compatibility.patch \
-           "
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
+index cd6441ded7..dc96b999f3 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.5.0.bb
+@@ -14,7 +14,7 @@ SRC_URI = "\
+     git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.5.0;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+ "
  
- SRC_URI:append:class-target = " \
+-SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"
++SRCREV_demo = "b0aeee00922fdd8f2c5e3409ce464a8f714cf919"
+ SRCREV_lvgl = "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
+ SRCREV_FORMAT = "demo_lvgl"
+ # The version check runs against the first SRC_URI (the demo repo), whose tags
 
