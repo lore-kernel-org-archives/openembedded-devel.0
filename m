@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2409CC6B38
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5009CC6B2F
 	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:45:40 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.33280.1792043137372080942
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32869.1792043131358042647
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:45:37 -0700
+ Wed, 14 Oct 2026 22:45:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rUqcemYN;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2e940d5d2beso5646215ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:45:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hq9fOmt6;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cd62c570b5dso801726a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:45:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043137; x=1792647937; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792043131; x=1792647931; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=4LFV5BDa5k3G5pVC9Yn1kpg0hPNqgW+fbIO2Z4XRXf0=;
-        b=rUqcemYNUDCc1yaCeDQRvusu8uuAaGB9dhzTimMa9ILkhLkGRi1+hnxaOqDeaKUy0q
-         Wighzh2JuWK8Onuc76aQ5XnVyNaLLHu1yjUxFizSLWlZeThxuZoEXsb295h62loFH3tb
-         HdutbNo/+ZdRIWi9XlvUG+xSFq3FsEYUu4ERB5jG81dVZFEjReHVOg99DNaYyWaS4mbR
-         ikWgQexwIPGQpnjgvv8GDlgd5IT/fCEZsuy+T+CArdg1191w4CdTozZ6kHKwnEdrUG/L
-         2i3JwuwWP6sgYz/j4tgm+KH05hyS/Isb0MOXMcz641lHQazCm7qD4F8klldCX0gI2AA7
-         zjnw==
+        bh=0jtEXI6DzBOUNNFoHZSKvXiTIYRqf/dnrlUdsu1s60M=;
+        b=hq9fOmt6r6YdwnL2U2nYmDtFux6p2DJa4aHBJFaD25VfWMFtMXVvbPnh6ZmsxW0Bjh
+         JueLIiFln+5NBtGYnNZhMIuqMMUqvSsYcaFOVweEEIuPKRCJ+au+eSPHOz6Zi1twLpyh
+         AWZM561eH7Ypcd/CHCOY0QjeckjQ5MRXOqfdgWpC2CleIgyX4R5hI601u/lwdVHbquNU
+         PmgALIUNcPzq5rVtyGKKRwcyaAxG/HATjqImbPJQzqNHKq8N89aYSL9lL4N+QbPZQg8d
+         UGdPIEfeyJpgLGopmOb9jX5HRpR/y2xDKRKb3GL47bmqV/W5leqmeyvYz07a6X9aW6Gm
+         LLvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043137; x=1792647937;
+        d=1e100.net; s=20260707; t=1792043131; x=1792647931;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=4LFV5BDa5k3G5pVC9Yn1kpg0hPNqgW+fbIO2Z4XRXf0=;
-        b=CGKphK1PherF1zt8qG41ADM+HODVXHr/dvPXFQfpMLgc72nnf08jUa74fB1Wi9nw6t
-         eE9iLVeUkCmIcvvNSk2cYutryuVa+qrOh0n7f2c49571cgbAD1SgXBd6DCdopCvSj8BJ
-         vx4BlTQqBCtDZ7QzTwQaPH96Z4KacQfgg1NHU/1Lu/O+ZrIY35G8fhU/V7+yJ5F+kFhR
-         W324k93l5h1IXhAmlFN1asLq5ROAHCklKQXSZeZy8umqftSl3z2RjBnc9nxcNW+xT+/P
-         0UyQmEgdn4uJf7QpizS4TLqvnCC93YxSPP8w8QfblYd5+tkFKylsF/c26Jra8l8GGjgI
-         7JBQ==
-X-Gm-Message-State: AFq9FYIiuwKPOP3NVt1TXFW21P5Uv3Kwnnae8PfnYBMV4plN63SsIs8p
-	zX0rt3KJODynkk8M01H59GaW2Cxp+BaQ4ztBvVQWgoaNG8smQ2bF0LPTZArbiA==
-X-Gm-Gg: AYBFou1T8/Hcn7cE3jrPbL4jhgTZGfcKZc5z01osgPkypcX4ApDNJZae6XHrET2mD9W
-	JNri7YdDcCh6Sl9ZjpgFx4AkBh6hUgFf98UkyhEbjVCCAAfmOqwDv32W1WHq3XoSHALx42RbrsG
-	GGpe8MTwXtcfqU9iWaxCsnzwqJxQE6CvBe/AhfkX+OP3K9KduA2Ra1hL+r2PMg+ods8WwD1Nmxv
-	/j/43fULzPC7PS8BUWawTNcpodd7fxY2wCAKzI95xQXuzTKLkQyBrV8cb398xpjJNixw/Ap2jwi
-	uP84rA78C4gIS0ZI6ftosvr/VK4XNLR+9FIUnDp1HE0Xmwl0zck6nK5xIrzBAO1e+59mmDodkqI
-	4sccKOpSpaIFWXD0J6ZGTgumXGc2QGRUv5LEl3PpICXadt4+dowfAAczytEF/+4+Lgk+j8oMi6C
-	hTfjnThp2/rBD3KYLjySxabNcREDUMTtRQEz0bna/WH0l+ro7jX2sw3+EprzQE1pSNXlAYKoCsX
-	y4OpRfpzsd5EqxbkPIquSQ=
-X-Received: by 2002:a17:902:cf0a:b0:2e8:b5af:22e0 with SMTP id d9443c01a7336-2e8b5af2c29mr97672655ad.41.1792043136562;
-        Wed, 14 Oct 2026 22:45:36 -0700 (PDT)
+        bh=0jtEXI6DzBOUNNFoHZSKvXiTIYRqf/dnrlUdsu1s60M=;
+        b=Bnpu2IAobzQWq2mORwy8VPc2TDkfJEazt8F5f/Sog0uQrWrKWmsw43c0mntRm93hoj
+         lROel1Db+EWShJNgIMAxhv5Rn615DX9ojvtB7KGhKfBFkClO8rRiu86aJyYNgIApdO2O
+         hwfn704qKRdnu1F6cOpIhT6hoo/pG+2ztcD5UOubXogxcLVJ82D+H+X3RZQ8q87t+IBo
+         oUhUlMxPPKG2zVpTSELk4QfBKZvI0/a/IT/wn68PK5u1g6lpL6/HhzKVSo6c2FcY39Uq
+         D/h0yDhBOvBSmZnc+h7kDoNf2lV8MRkiq5waAOw0Wjnu2x89p0Ugl6vZJ+iDsTUnkE43
+         Ptzw==
+X-Gm-Message-State: AFq9FYJqqZQu3S0YJUFamf577iz/F5vu3VDpb+jnmZtdxbaIuc4a1ro3
+	iAlIlSmN3hu/w+7uAQPzn+msCPyl85wa++Y68e/VySzfgtQLqSB4SRf6gMF2Jw==
+X-Gm-Gg: AYBFou2wqnOmG+QONWkMJjmSupB+zf8lCBUa5K1tr2lAYTRMPHg8LL4oSFBpbYP7mwz
+	x35GOaK2JQyCldrBu20ZoqFleNHRq49Bz/tWNFMo+P/Jbw1/yQebjpyQmS1h5ViFsSrGSK1beOV
+	xZLHOIog4kw0yC41n05VFy4Dy9pyKBNcbSiKDXIh0Ts4qDy8dZkPoo0CpHi2hBYirMFzLS8JMx1
+	8z8+TkS5Y8FQtsf01Bk9S/nT17DyrmSEWrhq7kUnuvUVlBIWgHP9RToYX7MW9YAO41UVBiHQ+yb
+	kb/cAabh5CJu3S283jPyHQFGVDmxKnAHjPoNWlUf4V/oJgxh+RTPs+/3a1/OVseeYPCiDS8cc+D
+	G8hlpjT/knZ8t+BpcTNGRcR/dDY6qzmYPkxzGP6zvXpJhrb/AJ4rgXCGvgxGzKfbx/CXFw8a++m
+	0DI75EIp+51SQSqHCDzs8wh7+OknbdSt/T7TqFpZo7RPAQKpEwERt/PzJqj7pKMb2ks+1vIFA5L
+	uw8xGHX9dSzkxrfE429ES0=
+X-Received: by 2002:a17:90b:3b84:b0:3ab:c80:9370 with SMTP id 98e67ed59e1d1-3ab3a736596mr13512866a91.20.1792043130362;
+        Wed, 14 Oct 2026 22:45:30 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.45.34
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.45.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:45:36 -0700 (PDT)
+        Wed, 14 Oct 2026 22:45:30 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 78/82] tesseract: patch CVE-2026-88051
-Date: Thu, 15 Oct 2026 18:42:06 +1300
-Message-ID: <9ca7f33f69826ac0ebec288801cd0a3ffc1f2144.1791945956.git.ankur.tyagi85@gmail.com>
+Subject: [PATCH 75/82] tesseract: patch CVE-2026-88049
+Date: Thu, 15 Oct 2026 18:42:03 +1300
+Message-ID: <8f56f67a2f5391ee89988dae7769209512da7161.1791945956.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
 References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
@@ -68,132 +68,177 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:45:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130998
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130995
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-88051
+https://nvd.nist.gov/vuln/detail/cve-2026-88049
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 727354dae2ee3075ad388bcfe22156ab1ea6fcf5)
+(cherry picked from commit 218b6a19b168587a67d1eab85160c302013164db)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tesseract/tesseract/CVE-2026-88051.patch  | 184 ++++++++++++++++++
+ .../tesseract/tesseract/CVE-2026-88049.patch  | 315 ++++++++++++++++++
  .../tesseract/tesseract_5.5.3.bb              |   1 +
- 2 files changed, 185 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
+ 2 files changed, 316 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
 new file mode 100644
-index 0000000000..1956d49672
+index 0000000000..b6a5e5275d
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
-@@ -0,0 +1,184 @@
-+From 79bf602b0cd5216c125f86eaf3c768daae256930 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
+@@ -0,0 +1,315 @@
++From 62fabbca097d127e7d5a8fe3869102d2e4918b80 Mon Sep 17 00:00:00 2001
 +From: Stefan Weil <sw@weilnetz.de>
-+Date: Fri, 21 Aug 2026 20:29:37 +0200
-+Subject: [PATCH] Validate vector counts in GenericVector::read
++Date: Fri, 21 Aug 2026 16:41:51 +0200
++Subject: [PATCH] Validate LSTM gate matrix dimensions against na_/no_ at load
 +
-+The callback form of GenericVector::read read two independent int32
-+fields from the file: reserved sized the allocation via reserve(),
-+while size_used_ drove the element loop. Neither was capped and no
-+size_used_ <= reserved invariant was checked, so a crafted
-+.traineddata (e.g. the fontinfo table of a version >= 4 inttemp
-+component) performed a heap out-of-bounds write during legacy
-+engine initialization.
++LSTM::DeSerialize read na_ from the untrusted TESSDATA_LSTM component
++and derived ns_ from the CI gate matrix's dim1, but never checked that
++the deserialized dimensions were mutually consistent. The forward pass
++sizes its buffers from na_, no_ and ns_ while the gate matrices drive
++their own dimensions, so a crafted .traineddata performed heap
++out-of-bounds writes and reads during the first recognition step, e.g.
++WriteTimeStepPart writing ns_ floats at offset ni_+nf_ into a source_
++buffer sized from na_ (up to ~256 KB with an attacker-chosen gate
++matrix dim1).
++
++The bounds assertions added by 2f4d2f4 (CVE-2026-73066) covered only
++NetworkIO::CopyTimeStepGeneral and Randomize, leaving
++WriteTimeStepPart and AddTimeStepPart unguarded.
 +
 +Key changes:
-+- genericvector.h: reject negative or over-limit reserved
-+  (matching the 50000000 cap of the DeSerialize overloads) and
-+  reject size_used_ < 0 or size_used_ > reserved before entering
-+  the read loop. Legit files always satisfy size_used_ <= reserved,
-+  as write() persists size_reserved_ first.
-+- unittest: add genericvector_test covering size_used_ beyond
-+  reserved (on unpatched code the ASan build dies on a
-+  heap-buffer-overflow in the read loop), negative counts, and a
-+  consistent vector that must still load.
++- weightmatrix.h: add Dim1()/Dim2() accessors for the active weight
++  matrix (int or float), alongside the existing NumOutputs().
++- lstm.cpp: reject the layer in DeSerialize unless na_ ==
++  ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_, every deserialized gate has
++  Dim1() == ns_ and Dim2() == na_ + 1 (the layout InitWeightsFloat
++  always produces), ns_ == no_ for plain NT_LSTM/NT_LSTM_SUMMARY, and
++  the softmax layer's sizes match ns_/no_ for the softmax variants.
++- networkio.cpp: add the same defense-in-depth bounds assertions to
++  WriteTimeStepPart and AddTimeStepPart as 2f4d2f4 added to
++  CopyTimeStepGeneral and Randomize.
++- unittest: add lstm_layer_test with crafted NT_LSTM layers for the
++  na_ mismatch, gate dim1 mismatch, and gate dim2 mismatch cases
++  (each rejected at load; on unpatched code the tests reach Forward
++  and ASan catches the out-of-bounds write in WriteTimeStepPart),
++  plus a positive control that a consistent layer loads and runs.
 +
 +Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
 +Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
 +Signed-off-by: Stefan Weil <sw@weilnetz.de>
-+(cherry picked from commit 56e09ca12e751623fe796ce1554ce704bffd2ef0)
++(cherry picked from commit b494ac18925f9d9aff9ef5815475de9943ab19bf)
 +
-+CVE: CVE-2026-88051
-+Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/56e09ca12e751623fe796ce1554ce704bffd2ef0]
++CVE: CVE-2026-88049
++Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/b494ac18925f9d9aff9ef5815475de9943ab19bf]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ Makefile.am                    |  5 ++
-+ src/ccutil/genericvector.h     | 10 ++++
-+ unittest/genericvector_test.cc | 91 ++++++++++++++++++++++++++++++++++
-+ 3 files changed, 106 insertions(+)
-+ create mode 100644 unittest/genericvector_test.cc
++ Makefile.am                 |   5 +
++ src/lstm/lstm.cpp           |  20 ++++
++ src/lstm/networkio.cpp      |   2 +
++ unittest/lstm_layer_test.cc | 177 ++++++++++++++++++++++++++++++++++++
++ 4 files changed, 204 insertions(+)
++ create mode 100644 unittest/lstm_layer_test.cc
 +
 +diff --git a/Makefile.am b/Makefile.am
-+index cc748455..c67f0f63 100644
++index 284f8b53..4bcc858b 100644
 +--- a/Makefile.am
 ++++ b/Makefile.am
-+@@ -1159,6 +1159,7 @@ check_PROGRAMS += equationdetect_test
-+ endif # !DISABLED_LEGACY_ENGINE
-+ check_PROGRAMS += fileio_test
-+ check_PROGRAMS += fullyconnected_test
-++check_PROGRAMS += genericvector_test
-+ check_PROGRAMS += heap_test
-+ check_PROGRAMS += imagedata_test
-+ if !DISABLED_LEGACY_ENGINE
-+@@ -1298,6 +1299,10 @@ fullyconnected_test_SOURCES = unittest/fullyconnected_test.cc
-+ fullyconnected_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ fullyconnected_test_LDADD = $(TESS_LIBS)
++@@ -1171,6 +1171,7 @@ check_PROGRAMS += layout_test
++ check_PROGRAMS += ligature_table_test
++ check_PROGRAMS += linlsq_test
++ check_PROGRAMS += list_test
+++check_PROGRAMS += lstm_layer_test
++ if ENABLE_TRAINING
++ check_PROGRAMS += lstm_recode_test
++ check_PROGRAMS += lstm_squashed_test
++@@ -1352,6 +1353,10 @@ loadlang_test_SOURCES = unittest/loadlang_test.cc
++ loadlang_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ loadlang_test_LDADD = $(TESS_LIBS) $(LEPTONICA_LIBS)
 + 
-++genericvector_test_SOURCES = unittest/genericvector_test.cc
-++genericvector_test_CPPFLAGS = $(unittest_CPPFLAGS)
-++genericvector_test_LDADD = $(TESS_LIBS)
+++lstm_layer_test_SOURCES = unittest/lstm_layer_test.cc
+++lstm_layer_test_CPPFLAGS = $(unittest_CPPFLAGS)
+++lstm_layer_test_LDADD = $(TESS_LIBS)
 ++
-+ heap_test_SOURCES = unittest/heap_test.cc
-+ heap_test_CPPFLAGS = $(unittest_CPPFLAGS)
-+ heap_test_LDADD = $(TESS_LIBS)
-+diff --git a/src/ccutil/genericvector.h b/src/ccutil/genericvector.h
-+index 4a5bbe12..cbe1e203 100644
-+--- a/src/ccutil/genericvector.h
-++++ b/src/ccutil/genericvector.h
-+@@ -654,10 +654,20 @@ bool GenericVector<T>::read(TFile *f, const std::function<bool(TFile *, T *)> &c
-+   if (f->FReadEndian(&reserved, sizeof(reserved), 1) != 1) {
-+     return false;
++ lstm_recode_test_SOURCES = unittest/lstm_recode_test.cc
++ lstm_recode_test_CPPFLAGS = $(unittest_CPPFLAGS)
++ lstm_recode_test_LDADD = $(TRAINING_LIBS)
++diff --git a/src/lstm/lstm.cpp b/src/lstm/lstm.cpp
++index 7bfd19b5..bfffa5de 100644
++--- a/src/lstm/lstm.cpp
+++++ b/src/lstm/lstm.cpp
++@@ -274,12 +274,32 @@ bool LSTM::DeSerialize(TFile *fp) {
++       is_2d_ = na_ - nf_ == ni_ + 2 * ns_;
++     }
 +   }
-++  // Arbitrarily limit the number of elements to protect against bad data.
-++  const uint32_t limit = 50000000;
-++  if (reserved < 0 || static_cast<uint32_t>(reserved) > limit) {
+++  // The deserialized dimensions must be mutually consistent: the forward
+++  // pass sizes its buffers from na_, no_ and ns_ while the gate matrices
+++  // drive their own dimensions.
+++  if (na_ != ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_) {
 ++    return false;
 ++  }
-+   reserve(reserved);
-+   if (f->FReadEndian(&size_used_, sizeof(size_used_), 1) != 1) {
-+     return false;
-+   }
-++  // size_used_ is an independent file field; without this check the reads
-++  // below land past the end of the buffer sized from reserved.
-++  if (size_used_ < 0 || size_used_ > reserved) {
+++  for (int w = 0; w < WT_COUNT; ++w) {
+++    if (w == GFS && !Is2D()) {
+++      continue;
+++    }
+++    if (gate_weights_[w].Dim1() != ns_ || gate_weights_[w].Dim2() != na_ + 1) {
+++      return false;
+++    }
+++  }
+++  if ((type_ == NT_LSTM || type_ == NT_LSTM_SUMMARY) && ns_ != no_) {
 ++    return false;
 ++  }
-+   if (cb != nullptr) {
-+     for (int i = 0; i < size_used_; ++i) {
-+       if (!cb(f, data_ + i)) {
-+diff --git a/unittest/genericvector_test.cc b/unittest/genericvector_test.cc
++   delete softmax_;
++   if (type_ == NT_LSTM_SOFTMAX || type_ == NT_LSTM_SOFTMAX_ENCODED) {
++     softmax_ = static_cast<FullyConnected *>(Network::CreateFromFile(fp));
++     if (softmax_ == nullptr) {
++       return false;
++     }
+++    if (softmax_->NumInputs() != ns_ || softmax_->NumOutputs() != no_) {
+++      return false;
+++    }
++   } else {
++     softmax_ = nullptr;
++   }
++diff --git a/src/lstm/networkio.cpp b/src/lstm/networkio.cpp
++index 8e1c6679..7a31034b 100644
++--- a/src/lstm/networkio.cpp
+++++ b/src/lstm/networkio.cpp
++@@ -641,6 +641,7 @@ void NetworkIO::AddTimeStep(int t, TFloat *inout) const {
++ 
++ // Adds part of a single timestep to floats.
++ void NetworkIO::AddTimeStepPart(int t, int offset, int num_features, float *inout) const {
+++  ASSERT_HOST(offset + num_features <= NumFeatures());
++   if (int_mode_) {
++     const int8_t *line = i_[t] + offset;
++     for (int i = 0; i < num_features; ++i) {
++@@ -662,6 +663,7 @@ void NetworkIO::WriteTimeStep(int t, const TFloat *input) {
++ // Writes a single timestep from floats in the range [-1, 1] writing only
++ // num_features elements of input to (*this)[t], starting at offset.
++ void NetworkIO::WriteTimeStepPart(int t, int offset, int num_features, const TFloat *input) {
+++  ASSERT_HOST(offset + num_features <= NumFeatures());
++   if (int_mode_) {
++     int8_t *line = i_[t] + offset;
++     for (int i = 0; i < num_features; ++i) {
++diff --git a/unittest/lstm_layer_test.cc b/unittest/lstm_layer_test.cc
 +new file mode 100644
-+index 00000000..269b00f0
++index 00000000..2c874995
 +--- /dev/null
-++++ b/unittest/genericvector_test.cc
-+@@ -0,0 +1,91 @@
+++++ b/unittest/lstm_layer_test.cc
++@@ -0,0 +1,177 @@
 ++///////////////////////////////////////////////////////////////////////
-++// File:        genericvector_test.cc
-++// Description: Tests that the callback form of GenericVector::read
-++//              rejects vectors whose size_used_ exceeds reserved (or
-++//              whose counts are negative). reserved sizes the buffer
-++//              while size_used_ is an independent file field driving
-++//              the element loop, so a crafted .traineddata (e.g. the
-++//              fontinfo table of a version >= 4 inttemp component)
-++//              performs a heap out-of-bounds write during legacy
-++//              engine initialization.
+++// File:        lstm_layer_test.cc
+++// Description: Tests that an NT_LSTM network layer with mutually
+++//              inconsistent deserialized dimensions is rejected at
+++//              load. The forward pass sizes its buffers from na_, no_
+++//              and ns_ while the gate weight matrices drive their own
+++//              dimensions, so a crafted .traineddata performs heap
+++//              out-of-bounds writes/reads during the first
+++//              recognition step (e.g. WriteTimeStepPart writing ns_
+++//              floats into a source_ buffer sized from na_).
 ++//
 ++// Licensed under the Apache License, Version 2.0 (the "License");
 ++// you may not use this file except in compliance with the License.
@@ -204,10 +249,14 @@ index 0000000000..1956d49672
 ++
 ++#include "include_gunit.h"
 ++
-++#include "genericvector.h"
+++#include "network.h" // for Network, NetworkType
+++#include "networkio.h"
+++#include "networkscratch.h"
 ++#include "serialis.h" // for TFile
+++#include "stridemap.h"
 ++
 ++#include <cstdint>
+++#include <utility>
 ++#include <vector>
 ++
 ++namespace tesseract {
@@ -216,74 +265,156 @@ index 0000000000..1956d49672
 ++// Appends raw little-endian values to a byte buffer.
 ++class ByteWriter {
 ++public:
-++  void PutS32(int32_t v) {
-++    uint32_t u = static_cast<uint32_t>(v);
+++  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
+++  void PutU32(uint32_t v) {
 ++    for (int i = 0; i < 4; ++i) {
-++      data_.push_back(static_cast<char>((u >> (8 * i)) & 0xFF));
+++      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
 ++    }
 ++  }
+++  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
 ++  const std::vector<char> &data() const { return data_; }
 ++
 ++private:
 ++  std::vector<char> data_;
 ++};
 ++
-++// A serialized vector header (reserved, size_used_) followed by the
-++// given number of int32 elements.
-++std::vector<char> MakeVector(int32_t reserved, int32_t size_used, int32_t num_elements) {
+++void PutDoubleLE(ByteWriter *w, double d) {
+++  union {
+++    double d;
+++    uint64_t u;
+++  } conv;
+++  conv.d = d;
+++  w->PutU32(static_cast<uint32_t>(conv.u & 0xFFFFFFFF));
+++  w->PutU32(static_cast<uint32_t>(conv.u >> 32));
+++}
+++
+++// A serialized float-mode WeightMatrix with the given dimensions,
+++// all weight data zeroed.
+++void PutGateMatrix(ByteWriter *w, int32_t dim1, int32_t dim2) {
+++  w->PutU8(128); // mode: kDoubleFlag, float mode
+++  w->PutS32(dim1);
+++  w->PutS32(dim2);
+++  PutDoubleLE(w, 0.0); // empty_ cell
+++  for (int32_t i = 0; i < dim1 * dim2; ++i) {
+++    PutDoubleLE(w, 0.0);
+++  }
+++}
+++
+++// A serialized 1-D NT_LSTM network: header with the given ni/no, na_,
+++// then the four gates CI, GI, GF1, GO (GFS is not serialized for 1-D).
+++std::vector<char> MakeLstmNetwork(int ni, int no, int32_t na,
+++                                  const int32_t gate_dim1[4], const int32_t gate_dim2[4]) {
 ++  ByteWriter w;
-++  w.PutS32(reserved);
-++  w.PutS32(size_used);
-++  for (int32_t i = 0; i < num_elements; ++i) {
-++    w.PutS32(i);
+++  w.PutU8(static_cast<uint32_t>(NT_LSTM));
+++  w.PutU8(0); // training: TS_DISABLED
+++  w.PutU8(0); // needs_to_backprop
+++  w.PutU32(0); // network_flags
+++  w.PutU32(static_cast<uint32_t>(ni));
+++  w.PutU32(static_cast<uint32_t>(no));
+++  w.PutU32(0); // num_weights
+++  w.PutU32(0); // name (empty string)
+++  w.PutS32(na);
+++  for (int g = 0; g < 4; ++g) {
+++    PutGateMatrix(&w, gate_dim1[g], gate_dim2[g]);
 ++  }
 ++  return w.data();
 ++}
 ++
-++// reserved=4 but size_used_=0x10000: on unpatched code the callback
-++// loop writes 65536 ints past the 4-int buffer (heap out-of-bounds
-++// write).
-++TEST(GenericVectorTest, RejectsSizeUsedBeyondReserved) {
-++  std::vector<char> bytes = MakeVector(4, 0x10000, 0x10000);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  GenericVector<int> v;
-++  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+++// Builds the input a standalone LSTM layer would receive: one row of
+++// the given width with ni features.
+++NetworkIO MakeInput(int ni, int width) {
+++  StrideMap stride_map;
+++  stride_map.SetStride({{1, width}});
+++  NetworkIO input;
+++  input.ResizeToMap(false, stride_map, ni);
+++  return input;
 ++}
 ++
-++// Negative counts must be rejected; on unpatched code the read
-++// "succeeds" and leaves size_used_ negative.
-++TEST(GenericVectorTest, RejectsNegativeCounts) {
-++  std::vector<char> bytes = MakeVector(-1, -1, 0);
-++  TFile fp;
-++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  GenericVector<int> v;
-++  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+++// Runs Forward on the loaded network; on unpatched code the out-of-
+++// bounds access this regression test guards against fires here.
+++void RunForward(Network *net, int ni, int width) {
+++  NetworkIO input = MakeInput(ni, width);
+++  NetworkScratch scratch;
+++  NetworkIO output;
+++  net->Forward(false, input, nullptr, &scratch, &output);
+++  delete net;
 ++}
 ++
-++// A consistent vector must still be accepted.
-++TEST(GenericVectorTest, AcceptsConsistentVector) {
-++  std::vector<char> bytes = MakeVector(4, 2, 2);
+++// na_ must equal ni_ + nf_ + ns_ for a 1-D LSTM; here na_=2 but the
+++// CI matrix makes ns_=64, so the layer must be rejected. On unpatched
+++// code Forward writes 64 floats at offset ni_=1 into a source_ buffer
+++// sized for na_=2 (heap out-of-bounds write).
+++TEST(LstmLayerTest, RejectsInconsistentNa) {
+++  const int32_t dim1[4] = {64, 64, 64, 64};
+++  const int32_t dim2[4] = {3, 3, 3, 3};
+++  std::vector<char> bytes = MakeLstmNetwork(1, 1, 2, dim1, dim2);
 ++  TFile fp;
 ++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
-++  GenericVector<int> v;
-++  ASSERT_TRUE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
-++  EXPECT_EQ(v.size(), 2);
-++  EXPECT_EQ(v[0], 0);
-++  EXPECT_EQ(v[1], 1);
+++  Network *net = Network::CreateFromFile(&fp);
+++  if (net == nullptr) {
+++    return; // Fixed: the inconsistent layer is rejected at load.
+++  }
+++  RunForward(net, 1, 2);
+++  FAIL() << "crafted LSTM layer with inconsistent na_ was accepted";
+++}
+++
+++// All gate matrices must have dim1 == ns_; here the GI matrix has
+++// dim1=9 while ns_=5. On unpatched code the GI gate dot product writes
+++// 9 results into a temp line sized for 5 (heap out-of-bounds write).
+++TEST(LstmLayerTest, RejectsGateDim1Mismatch) {
+++  const int32_t dim1[4] = {5, 9, 5, 5};
+++  const int32_t dim2[4] = {7, 7, 7, 7};
+++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  Network *net = Network::CreateFromFile(&fp);
+++  if (net == nullptr) {
+++    return; // Fixed: the inconsistent layer is rejected at load.
+++  }
+++  RunForward(net, 1, 2);
+++  FAIL() << "crafted LSTM layer with inconsistent gate dim1 was accepted";
+++}
+++
+++// All gate matrices must have dim2 == na_ + 1; here the GI matrix has
+++// dim2=9 while na_=6. On unpatched code the GI gate dot product reads
+++// 8 inputs from a buffer sized for 6 (heap out-of-bounds read).
+++TEST(LstmLayerTest, RejectsGateDim2Mismatch) {
+++  const int32_t dim1[4] = {5, 5, 5, 5};
+++  const int32_t dim2[4] = {7, 9, 7, 7};
+++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  Network *net = Network::CreateFromFile(&fp);
+++  if (net == nullptr) {
+++    return; // Fixed: the inconsistent layer is rejected at load.
+++  }
+++  RunForward(net, 1, 2);
+++  FAIL() << "crafted LSTM layer with inconsistent gate dim2 was accepted";
+++}
+++
+++// A fully consistent 1-D LSTM layer must still be accepted and usable.
+++TEST(LstmLayerTest, AcceptsConsistentLayer) {
+++  const int32_t dim1[4] = {5, 5, 5, 5};
+++  const int32_t dim2[4] = {7, 7, 7, 7};
+++  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+++  TFile fp;
+++  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+++  Network *net = Network::CreateFromFile(&fp);
+++  ASSERT_NE(net, nullptr);
+++  RunForward(net, 1, 2);
 ++}
 ++
 ++} // namespace
 ++} // namespace tesseract
 diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-index 25d357d903..be6ec1e463 100644
+index bed16f9806..24c8312552 100644
 --- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
 +++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag
-            file://CVE-2026-88049.patch \
-            file://CVE-2026-88050.patch \
-            file://CVE-2026-88047.patch \
-+           file://CVE-2026-88051.patch \
+@@ -9,6 +9,7 @@ SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
+ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
+            file://CVE-2026-88052.patch \
+            file://CVE-2026-88048.patch \
++           file://CVE-2026-88049.patch \
  "
  
  DEPENDS = "leptonica"
