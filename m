@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4646ECC6B3C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1810CCC6B38
 	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:44:29 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.33258.1792043067768056750
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32829.1792043061164867530
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:44:27 -0700
+ Wed, 14 Oct 2026 22:44:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ovtuaEPZ;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2e915887d9dso17337705ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:44:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=I95wwa+K;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2e608cd460eso26541815ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:44:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043067; x=1792647867; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792043060; x=1792647860; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=qeQ9QHwlxiDJ3Gh9W72GUq9UkqWYiO2+mQlb9VZTTfY=;
-        b=ovtuaEPZk8t2GBLfCNVfH36uuI0eXHg6t4+NnA+lGada1hPbp2Q5fhGVLJRiQg5zm7
-         5W5WqO9VKv96wpf9JlJdCIp08hX/LhK3CgEwrlr7aDz2SSfASdjlqmuIon4BmyGaJC6S
-         n76EZeHN0Snu4pgo34m3IlzeikdAlkh9pIKintynL/TIRjOsIKffQIVfLEhi04XB2N/r
-         WV0LFZuUP30HOQXpapemK3RMA7O/XlPsvGEHzXjWgkYQarIkXnGHLsW2kvZt5Z+0tlMT
-         6pr+ZJr91G/YsFGW2vWBAwgN1t33ztMfF3nO1OhpcmRuPy6X8By2u9O21Iu+RnvX2hOz
-         L1cQ==
+        bh=5nMTyb0vKOi3P//qeXlTLkqofKMU3vrnbV4IpQhFZxM=;
+        b=I95wwa+KY50yL7B5B0Rny4v7TkXO5ppOFNwn/ldP/ggGPfYpYmG+cgP+kBp/b+9SG2
+         7/E7AighPVImP1U4VgHLzf+97NTMcTgnNBg3rPGe9RYauOxMTgoWnBH3iL/KMBSiSDEL
+         4blkucfM+QFpupgkUS2IFgjlLUVnSXRmBN3lKUCswxR+BuhLCRhhEHK7fH4qsP2iDda0
+         gzCal6J6DL9Z3FiFaruo7vP6qGlncrbhjZtGczzFq5+stJzSKi7Rxc+2AKUqHseXdXw2
+         bWXZudr7+YpcjKXA0GTuvDTGBUmBV0p7BLaLnpumC7XaAHIrr07EkT55/MCyXBpE23nI
+         iJmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043067; x=1792647867;
+        d=1e100.net; s=20260707; t=1792043060; x=1792647860;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=qeQ9QHwlxiDJ3Gh9W72GUq9UkqWYiO2+mQlb9VZTTfY=;
-        b=tlxWaTCR9+LxEd82wEYDhThgTwErxvWU2dee0T7Ac92NnfoqWD8j4tjHQmBw/tXSRh
-         ywufm6nx6m2dLLMfVHHs4cskS8Kdbj2+Zup9/aEpNa88pl3/gWmgoCunl5RbvsN90eoN
-         /FKyrM0w7QJb1IQ0rnoyjyO579LE8FGPcedKvRnWPkJAolpadFlG7huTLb8bCLEszhAq
-         7QjqhwR/frArCN3+u1vNMRp7e+3X6TbXNQysJaL57oRalqdS4hHV4/+h/KruU5i7Bwfd
-         etjMZe6IE1wPr4K0n7KvtsJmOmpUAgfg3qbzCkFDogt7DcWHg0Km1GKOSLN3KsXMzQ93
-         uQ2A==
-X-Gm-Message-State: AFq9FYIGto/CCz5ZwIH/Rd2gQrgzbFjJRdPwARD1Aqv347cSi/P2Mtwz
-	XT7ZqWlTDtDbzZqUK8/jI3uuZLsZ8NUC6YLQyRGvTAM5lT9COzhpUIY8oPFi3w==
-X-Gm-Gg: AYBFou0ITnymNIWPPQppFoOzrqX+I51JBs1yIuGhI7gy+9++DYGdV5A5Usq/DG7pI0C
-	SsQRoUIZze/hslB9kSENZ/+83cYCxW8sKrC00ouu0cDaRIiKy3ZbT+mPNmCCto/cq28gx4Yy1/V
-	5excHsMpwYX6AXzGV4c66HTLjqz+z1g04He3oH+SifZjFiIYnzImfzHUsRqbAiZkrKybGDPqkeV
-	FOsZEFWCYpVofChVydAUP1qjct1INeKK2aNRdVuB+Nu+2FfGWTwnNj8pgQiBy+wCBzIhvAHExpO
-	vxpylp5PsrAiqbR1oVT+vFKDKD0oD6vdP7tYOirpU21kdo3iGrLMrZJHA14uHJUmupO9eSAccNk
-	ol95m5yN6VeMvDljn9xh8tfVdOyYRX8/CRdYoyBKlf7Gezh1i2j+zlIbe9KvrkGCuvWv/g2b4q6
-	ZoAtfeoUAOVaiUkz7FFgTKEV5//YzEhst3spyyQ91QpbB2RHBcho0m/M/4+mIqxVt+5o1qaFmMF
-	3Dhv8+3Ifc6dCWou4cyjIs=
-X-Received: by 2002:a17:902:e744:b0:2e2:ffcb:87a9 with SMTP id d9443c01a7336-2e842ab6aaamr151172295ad.24.1792043067149;
-        Wed, 14 Oct 2026 22:44:27 -0700 (PDT)
+        bh=5nMTyb0vKOi3P//qeXlTLkqofKMU3vrnbV4IpQhFZxM=;
+        b=ZLmZEWI19ItZUNk1LDAzvfDzrzpd7Mbu79JK+23wUDZb1RTVS8YaK+pCWhecnoWw6y
+         hFAOxSCUwjF8YoJts6MZKAkSKXs3ejqkpABFCC8TrON3RTxa4ORjWfywMpRR5EO2Kbdy
+         4XuoQhtC7NER4rXQ7SyaGqxzRIwmKlTHA0mUIgmvIQfChSU1wkmgFyI+JIGuhTNsgkla
+         SyRSHIx5B3mxc66LrjfQ/nbVaKi4pqYBBlxAdH2pn0rsfAu3QZCYws6wymYkBGmfMKw8
+         0QESZXZ3lUKblraycmn3ugqW+6EbGZBclTRVicOBN0dZ/4xNDwYebT6DHUGUpRDcwhQY
+         fNPQ==
+X-Gm-Message-State: AFq9FYKVpPY1fLE7lnNjg8Q8yScKdMrHBCRhUrl8K3OE/m722OsDlkGF
+	EtbNyfBxLZiIUYZR7mT1bJxQXMe1g7gsnHIQuzmnmTnoTIXzXDakjdLdffyvdg==
+X-Gm-Gg: AYBFou2q5ls2qfrA3BOw7ZIOj8xDRIwYpVU4mEVHFNgja1WRp5Cm21mXbxKy4smLu+x
+	U5nJQEPA4kVRtH/PCBTer5u7lExRdU3MTYrKDxTMq20L8qKdAma8T06aOZ9lF2xJfmDFWs6V69T
+	izyizPeCc2NB6N1AW7l8JbVjHYDqHGDFPF7uJO4yCzehqRFcMacgVXD1Q68pi9GAq2M9HAlJgrv
+	TLcb3db0gb+/6RnGlUhIJJco0ICAf6pQ7QZebCpehbf0ba+2++OS67oRsY2pDE1TxOf/HET5kRP
+	5KxkYouk/AhRgm/GosiSupVD9KICxPjg4h5skqVV+HTJi2ThL00MQ+JseX6AH68e4/vpo15riAa
+	LzeawrSyt9HWcQmQcsPP1UjWjgAfy6sz1DcYdcL0UFTnkrDu7VCrn9Rt7pEEVDjjTIm39E2NYGH
+	48RUKyYtA3/0dTDCR+6dB65hUJfoIBZtxsqMCgIqetHJdxJAbBmUKPwPHtBwzIKLjQYFxWuyx3t
+	YpOQrSiRLe0xvslMc5nte8=
+X-Received: by 2002:a17:903:38cc:b0:2e8:773a:e902 with SMTP id d9443c01a7336-2e8773aeaafmr128851695ad.58.1792043060386;
+        Wed, 14 Oct 2026 22:44:20 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.44.25
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.44.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:44:26 -0700 (PDT)
+        Wed, 14 Oct 2026 22:44:20 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 45/82] smarty: upgrade 5.8.4 -> 5.8.5
-Date: Thu, 15 Oct 2026 18:41:33 +1300
-Message-ID: <9c7e3a2ba9d9107a3132218512497a33b292b4ab.1791945956.git.ankur.tyagi85@gmail.com>
+Subject: [PATCH 42/82] wolfssl: mark CVEs patched
+Date: Thu, 15 Oct 2026 18:41:30 +1300
+Message-ID: <d7ca8eef26b2fa8edba0e395c79a35dc1456f55e.1791945956.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
 References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
@@ -68,36 +68,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:44:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130965
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130962
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelog:
-https://github.com/smarty-php/smarty/releases/tag/v5.8.5
+CVE-2023-6937[1] and CVE-2024-5814[2] are patched in current version.
+
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2023-6937
+https://nvd.nist.gov/vuln/detail/cve-2024-5814
+
+[1]https://github.com/wolfSSL/wolfssl/blob/v5.6.6-stable/ChangeLog.md#vulnerabilities
+[2]https://github.com/wolfSSL/wolfssl/blob/v5.7.2-stable/ChangeLog.md#vulnerabilities
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 3fe4c2247419cbe376ad010e2e56536bec3faab0)
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+(cherry picked from commit c12fcc9b481d5fcd94db96cd062042301a4f24b1)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-support/smarty/{smarty_5.8.4.bb => smarty_5.8.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/smarty/{smarty_5.8.4.bb => smarty_5.8.5.bb} (95%)
+ meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb b/meta-oe/recipes-support/smarty/smarty_5.8.5.bb
-similarity index 95%
-rename from meta-oe/recipes-support/smarty/smarty_5.8.4.bb
-rename to meta-oe/recipes-support/smarty/smarty_5.8.5.bb
-index dcb7c85a80..83f428d388 100644
---- a/meta-oe/recipes-support/smarty/smarty_5.8.4.bb
-+++ b/meta-oe/recipes-support/smarty/smarty_5.8.5.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
- 
- SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;tag=v${PV}"
- 
--SRCREV = "94a27cbbc7820198d7adc17a2be8d457fb267753"
-+SRCREV = "0ae663525dcbc9e996feb2a867e43bc85f960938"
- 
- 
- INHIBIT_DEFAULT_DEPS = "1"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
+index 8fc6068560..a2b41b2d3c 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.4.bb
+@@ -72,3 +72,5 @@ CVE_STATUS[CVE-2026-5504] = "fixed-version: fixed in 5.9.1"
+ CVE_STATUS[CVE-2026-5507] = "fixed-version: fixed in 5.9.1"
+ CVE_STATUS[CVE-2026-5772] = "fixed-version: fixed in 5.9.1"
+ CVE_STATUS[CVE-2026-5778] = "fixed-version: fixed in 5.9.1"
++CVE_STATUS[CVE-2023-6937] = "fixed-version: fixed since v5.6.6"
++CVE_STATUS[CVE-2024-5814] = "fixed-version: fixed since v5.7.2"
 
