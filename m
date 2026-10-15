@@ -1,100 +1,110 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 793BFCC6B33
-	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:28:18 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29961.1792027693875695300
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B48CC6B2D
+	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:52:08 +0000 (UTC)
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.30342.1792029122122151808
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 18:28:13 -0700
+ Wed, 14 Oct 2026 18:52:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=l1ki1am9;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2e8d2574fd9so31282705ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:28:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kkFwzLaA;
+ spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-67992884b02so761136d50.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:52:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792027693; x=1792632493; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5ixUFCsoFjhbqNbMkkUcxqPQKqG+5rUQpnoYBOamqNc=;
-        b=l1ki1am9bw4ORi/XcRFaW5ESEd7hSzNuRQMgnBYUoFrMV7n+FSGsCWmA2HfIUvC7aE
-         RJt8xAG1DjQOxjdz5bj3Tfn8NWcC4SWlutLC2S2S5bUDiNTFwPj3BqJv0jB7Bh/7GgKd
-         pwGSv0FntyOQC/8xFPK4rV4m2aW6zFjntTbG0rdP55jE4f0q9Ixkr5SLJ6Y70L2GDtuG
-         d0rpkUJ1R7883Z67oIg3g7u4BLyqOg10Kfb/zCZ0hAaJShZn1K1oX+1ei1cAnTkv07OT
-         OiI9pArL4JhZvv3XQHqij/HR7NpKerU1KOx5+u9+yhKvDSL5g2O4iYMv0MGW5FsLqIlt
-         /Faw==
+        d=gmail.com; s=20251104; t=1792029121; x=1792633921; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=s8gzq/byFczIIL6LYydtoy26fGhPX/Lm6jWXJkAdDPE=;
+        b=kkFwzLaARZ5MWi7gWC6Ee5xuh+rNnj/6YNmYrvb9l2LM5eSnQ6+p8+eiS3/rkFZeQ2
+         e3eZYscD4tmenYBLJHQnVQGaCB1OfkJfnGNSrzzvs4wKJ76fDCpiRObOMYuwzGDaIECj
+         2urYBaNiab0S7nknW9xzIXpxaTeI5ZlzMDf3OfJUseWLBHah4HRjYnBAGUQFHuWhfG2W
+         rGJfDyQDlLILczweL188iXGLHDVAOtrP9Xk4GPna9fSHByMdSUwwsznOQ3jnnqnnh7fc
+         WST3psPGtiaEIZmvue8JRpjM+ZKzJiHOmOiBY++9DbiAQKTnqkW1sLNAsly/C5Wn3G8h
+         /8+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792027693; x=1792632493;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5ixUFCsoFjhbqNbMkkUcxqPQKqG+5rUQpnoYBOamqNc=;
-        b=mfNzFKAID6OZptSXVlIYXmxcDifA95V4RzGA2yiPjoZtKv1cuVidPPK2JB43n5N9ws
-         fo16Sc2NkXc6PRYrVaqJddTHnZGeYtPywXGVnmjPqIEUUgnZZbPwZFJ3nG6ATQ8bYeWH
-         W2Qde+Cm7PwfnInZV6qdJa9xBoQWP6kPKWvTlZdqOirsnkDjeH3RDeczS5s6gDKAS/7Y
-         8gKAjFXvwYOOBR0K6E2CZ8q7XPCe2amyQnXYQHjBwDKGXAK2bu3JUYqbxabSQWifNj3Y
-         j05JQFvUH0qdGvISpy78m+NhPBgU72bnhJKiDdAt0rshW121v4zX+GOClXTZCySNabRO
-         DKNA==
-X-Gm-Message-State: AFq9FYLiH6Nsd+SFlYKBagyo+QGP3q2k6ym46m9cUdAdsphzi5a00Jr0
-	gZjB0TbuiVG63zBH9rGhKHVasXpcVpZZKjMNsgom0nIP7Z+wMX/GtLbQk0wsiw==
-X-Gm-Gg: AYBFou1fJDE9C9+8u1NiDPnbwQ7HBg1oNdw5uRZdjy94xwtplDOnoqOXAf/6akOmzIt
-	ULwfZs+TBgtO1Ra+NSQy35EzAYO+pZ7Z8b/jXIcS8v0REixeY5Y4B7t92dUd8xWWCfM9vURCTxY
-	ssRS7PBSoSbYRfB59s+iNkbM0WmCoSDhlzS5wGyjsldIGkUUZcBvXXe/seKz0ZtlTuHRNyHKn++
-	OHxMtRsW9wTpLaau867qQQ4bAoSYB0LmEMJW2Se+HKBGrjFxIGunMRPSs87VwrNDOY4k6aUCZV+
-	/scxofA5uH+ttS4zbHD8wvAtdA5rCILc4TIw2C+wneXMI5cuKd7HERlD80/3DC3+OkpBWAkVxak
-	biHCIu6uhN5d/mA/SphOkkjTh/6WgFYzIzvjUYIKyc2gLazsLCI6wr1dkCn7Zl7jnUx4+yjLHIK
-	UCT5G5ueeWYtbvW8Ux3UKtbCwn/c1EUV2HEwAorTfwRj1qTTPt3SyHXu8zSRj8tiCPKVGPyeWA3
-	YsuPbg8qh1MjWt0mMLIohynpB0W3gW/m3uqAbENqg==
-X-Received: by 2002:a17:902:f312:b0:2e9:5ed2:c39d with SMTP id d9443c01a7336-2e95ed2d8d8mr2287275ad.36.1792027693250;
-        Wed, 14 Oct 2026 18:28:13 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841432a03sm74429495ad.0.2026.10.14.18.28.11
+        d=1e100.net; s=20260707; t=1792029121; x=1792633921;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=s8gzq/byFczIIL6LYydtoy26fGhPX/Lm6jWXJkAdDPE=;
+        b=24LQUmiEQCGST4PCQ6ff31Hgo8riKrr+2J480kDxyD//bzU6r+aF26YgrB45kBi12t
+         CaZMZGJJ1KRjQTRh8ERbSIUUHqHBQtaS8TGtyne40J0jwaEqeDTexaQl8lZqu8XmtJBv
+         jjNPxfPVhnD6Chbkxz1rjw7w+xxJq6x1n7LuKwFlKMlicbUJmo+vJ2xbOChElLjAe37b
+         HcaJvsK81AgNS7LWk/Y6aWnmwKvHweRnges/MXixW7fAtnywh00L75gqg5NoDEQ+PX+r
+         tSR9WVXVPgEwtwky59CcPJLc5G+tJc44pdNXimWrRIw0y4xaxmtKgCcaVgTEZ0ZO7lRg
+         XCXg==
+X-Gm-Message-State: AFq9FYJL2izttZq+kMqDRqsaiW0voZUMoFvzUwdmqiiMB66gWG0dPPqH
+	fLb6sroRtqQzCsiw1oTlByNaVtNUG4T6gbixfowtPsCNHFJmYCTbkftKvwhafBIU
+X-Gm-Gg: AYBFou1ifBv63+JW3nlfa9evumhSsEzxvsQ9mpm07zqRLyjCY0FZxu78yGyJS6EnKVP
+	YXcgbi1vYkORWu/VNyBAKxRDNF3yzy8jTRx9W+y3Ri+6icLQSsADt9uiIA6YX2WFrZaEy0q+8Q5
+	3lpb3vOe0A8LJ+QJ55l2hTKkStMl51oSHRboqSA8SpqcaCqUgkcpusSgth3S0ynAbQ0bKu8Wshj
+	umHJhP3mVh6W8hkigtCy/u1hZc7S8eeKxZ7pQy9MlN30BcrHYHN6jq0eje/s1HNn6sp129aLfYY
+	GTbcef8SrGzCEY0LfD1VY4TBmGFHk6NmfGG5n648QgixE8x3pEJw9QMsC6TFYa2jX5ZwtHsGYo7
+	FOXVEtdRZF4WxxQhzzbycrXNFXRKy7UP4Ic7WM82UPY+dfWpgQ2SoXBatoCQJv/xbgPCl9he1Ou
+	YaMOF/T3tro+WflkUaOiTcblpsw6hqLKTVVG6uZ1uwnQokUrwsrKd6UEUlk8Ub4BFgsSh7Nl6sS
+	1ktgDFyjNQRVvIY0BBjK4X0jpc8EcHHgi/4UlbKK8rctfmGSgYquEak7wJyK/YPlioM+e28CYWg
+	T4d1sLpa8AU3V+R3v9UWig==
+X-Received: by 2002:a05:690c:5886:b0:8ae:c3f4:3da8 with SMTP id 00721157ae682-8b07ee76abfmr41370927b3.85.1792029120955;
+        Wed, 14 Oct 2026 18:52:00 -0700 (PDT)
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b07f1b745csm62290377b3.14.2026.10.14.18.51.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 18:28:12 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+        Wed, 14 Oct 2026 18:51:59 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 6/6] python3-pillow-heif: upgrade 1.8.0 -> 1.8.1
-Date: Thu, 15 Oct 2026 14:27:52 +1300
-Message-ID: <20261015012752.1650544-6-ankur.tyagi85@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: upgrade 24.21.0 -> 24.22.0
+Date: Wed, 14 Oct 2026 21:51:43 -0400
+Message-ID: <20261015015144.504386-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
-References: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:28:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130906
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:52:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130907
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Changelog: https://github.com/nodejs/node/releases/tag/v24.22.0
 
-Changelog:
-https://github.com/bigcat88/pillow_heif/releases/tag/v1.8.1
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...ython3-pillow-heif_1.8.0.bb => python3-pillow-heif_1.8.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-devtools/python/{python3-pillow-heif_1.8.0.bb => python3-pillow-heif_1.8.1.bb} (84%)
+ .../oe-npm-cache                                                | 0
+ ...oe-cache-native_24.21.bb => nodejs-oe-cache-native_24.22.bb} | 0
+ .../nodejs/{nodejs_24.21.0.bb => nodejs_24.22.0.bb}             | 2 +-
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-24.21 => nodejs-oe-cache-24.22}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_24.21.bb => nodejs-oe-cache-native_24.22.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_24.21.0.bb => nodejs_24.22.0.bb} (98%)
 
-diff --git a/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.0.bb b/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.1.bb
-similarity index 84%
-rename from meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.0.bb
-rename to meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.1.bb
-index 8dba299cb6..e111a3968c 100644
---- a/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.0.bb
-+++ b/meta-multimedia/recipes-devtools/python/python3-pillow-heif_1.8.1.bb
-@@ -9,7 +9,7 @@ LICENSE_FLAGS = "commercial"
- inherit pypi python_setuptools_build_meta
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.21/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.22/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.21/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-24.22/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.22.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.21.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_24.22.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
+index 441a920f36..39a8563672 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_24.21.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.0.bb
+@@ -35,7 +35,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+ SRC_URI:append:class-target = " \
+            file://0009-Using-native-binaries.patch \
+            "
+-SRC_URI[sha256sum] = "a6f54defb6fd7c84f41dba13d61e78e9b4e0961712cf61f29715c05f5ced94fc"
++SRC_URI[sha256sum] = "41f97cff2c666f1f8293dc5f85c65e8dd605c16b43fd9febd49ede32ee1e0329"
  
- SRC_URI += "file://0001-setup.py-support-cross-compiling.patch"
--SRC_URI[sha256sum] = "e47c27432c6fd3d66c22f0de9f27fd379383b646c947520bc485854ce72060d0"
-+SRC_URI[sha256sum] = "521ebffb8a181d56c3904e5a61f20903edee0d9d3275967b8fb345f866215c06"
+ S = "${UNPACKDIR}/node-v${PV}"
  
- DEPENDS += "libheif python3-wheel-native"
- 
+-- 
+2.43.0
+
 
