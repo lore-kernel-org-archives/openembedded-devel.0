@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1C73CC6B38
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD8B3CC6B39
 	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 05:44:59 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.32850.1792043090512042850
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32851.1792043092509503764
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 22:44:50 -0700
+ Wed, 14 Oct 2026 22:44:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=l5sJzzoS;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2e6038cebefso36462285ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:44:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YcUC7edj;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e8455755f3so25501925ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 22:44:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792043090; x=1792647890; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792043092; x=1792647892; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=bEDQS+kx9VMgq5JbOjminOwY+7UtO3rsA4XnZSG/ZsI=;
-        b=l5sJzzoSYUbN/VDfivt4vIU/zfzNfDTSbo1HcNRyckCZ/4r82V6XkqGPiba+8j9yU7
-         eB5Kr/dN1JF/VDfxk4op0tz3So4umHnXFXyeXXZetcRzPutnU3309tHX/POZov1+JCzv
-         9LKssJlcVWVkiPiZBGuIalnP/7XvHKlXbNgtPWM7B817Pft66dO52N4s6osgNR0YbTVU
-         Y1F+4e4JkFPokZ3XOw9OlsWINoaYq2T5vM+MMfStc/TFJbPuUI4w3M4jXnlh/cuoqhYh
-         vXHPxhCqMxYXwx5Ec9nIKijqeEpAfj86J11AWsqO6Fj5RYVLBU8OPDqE+fwhp4vKRMBv
-         FNyQ==
+        bh=nHw5JRLgOlcFY5DYdmACJelptg6LctIJStO918gX8nQ=;
+        b=YcUC7edjAEjWz85Fvi7G3NvafkBarmpBRPC5qcBwgbL7iCf4LKo5hrxvh8dB3rmumW
+         KVsKbPViA/ket7QZkiAEiwCfWx45sU24B7igzbWISOzpxK82LOYFgQkQwsdv5sgNIIee
+         usjIl4oWSp4pU028771CH/BXrpIHKBPO5VVx7ZlmAYfH0/wColV5XBtlFkofEsGQnEN1
+         jaUAXwfMxnB4oWBckWQxs2/DkyO1zm+97S6YTtXfcADacVUHbXGJLce4p40ygzelM5h3
+         T0TWSYg1x8fk1ppq5sVvuDlvo4usePtZzYW7LEQ11/bXvAsj6Oym8n54DsojKzPxp65I
+         OeLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792043090; x=1792647890;
+        d=1e100.net; s=20260707; t=1792043092; x=1792647892;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=bEDQS+kx9VMgq5JbOjminOwY+7UtO3rsA4XnZSG/ZsI=;
-        b=mGXhAub/N24dLkqIM3RgpazU9NCcmx3IXDFMBD5qgvT+HJi31+5R0vmo2Hwa8qOPAm
-         0QJSrXEeMuOp1TijuM54L3922c1WZu4aUKkWXkFznX40Os1C6S8YbuG840ysGrnGor8Z
-         gnNRfArxEH0yhR7k44JhJYlaZ2awQhVO91499OC9uYg0Qjer0vvI4GzauZzSRb07/6ap
-         +Fn9vgHZmdD80gtZQuwtgUuVgN6ne6GNzuFedi9yTPmqpehs0Kw3DX+mezCrfTqftW3p
-         B/OK3zupG/fwdbHAkM/CbhcNFDxKNGlPT7YR+2Bb09E8eUnpBQEiOBbe8tYFWFhp+VhK
-         nSbw==
-X-Gm-Message-State: AFq9FYLd/WRNFlU9giVoGS840127riGr3bqvCJ4kxpzLxJncPAM51LBJ
-	JlAB97WDABONFu2Fg8Vo7JquC6LM9SLLUC0o2WAMzUuLwRMl7F0eNX4T43h0kw==
-X-Gm-Gg: AYBFou2zJTt5kxyHrvlxJWMTo8luEtdOcXKCwn7fwq3w+SuOvcUT2rNFyLihDRfhybY
-	80B7otOnEbvzU4pvPNFBOmRuciFOQtbPeD9BwBmsU1uNzfYa5IkAeci6UNOFHckkPp3NlkOE8/q
-	wlD533IVehdwt4dBt7l5GMbiY8MQnjOImv7quh7e6fgL6hWslDiFbFqB+d9m2Be6CRUgcJJxdrY
-	2mDDlfIOCRt93tUuL8+MW9PPH0Mf2CkqY5jGOb62I/lGt2ybLThd4b8zzzQk2Z6fZi4Cwkjqs69
-	Ebaq5mqb+PSbX4diqhcrzQnxpDDERDC12MbtDgu8wVss3obyLxeU1vCnFbsMByjEC6/V3l+czS9
-	tq+o5gtEXdBkeUSjFSUBUCH+sWLllpCpRLX4z07mWOkkai7RNHemVLzG1P19MGhWyVjxMTt0i9Z
-	I+Xqr1381c+NTgOOSy3hl3UzD/p6eALOMK/Y6SMfaXphR1XCZl4/hK50zWQvK/UJB30ucAEe6m5
-	7+lwxzHy3vMV76vbtoIDt4=
-X-Received: by 2002:a17:902:cec2:b0:2e6:1715:e48d with SMTP id d9443c01a7336-2e842ac8863mr172177035ad.35.1792043089753;
-        Wed, 14 Oct 2026 22:44:49 -0700 (PDT)
+        bh=nHw5JRLgOlcFY5DYdmACJelptg6LctIJStO918gX8nQ=;
+        b=q3mOCM0itx7iNXUA6+KsGOJ0Qg1L6MY1mvY2GswWBJKdFxKOng3BfEL7HZTY+hRlJD
+         UwKGecBoHk3H3ac86PZ7/Nw98C1jxcsvb5b3Nupvtr+xFocJQ7jZfrfBc6lCN/x8/lNy
+         FI1ouHCVAS5MeXi37RvByooq+53SngWU/NczsuS7Z4UHqiMaTG4P/AiCP+QL35RCTMXW
+         qMizo9hn81D3b1RqmFYIrIeu/gmIXUZLeThNT3gyXWkyJtK1jJPLQjNPtYeH3xacTb+p
+         6kl8iqxwmiXbKgRIpdZ8F0CdhxBYyRNlETXl7kf3uL6WLlwntsXIbyNHp5q79EaxJ0Pm
+         waFw==
+X-Gm-Message-State: AFq9FYJwBSoNS2OKojiSFUW2vBWFPs5jS36Yn4QyxgUaV1Daod9v182B
+	LEMiRqGS7OfSce8XzOwyeOoiweBv1bR6g/OrKPJ/twAXXH8/pW3N7raVgLqF2Q==
+X-Gm-Gg: AYBFou3mSrwuOYOra4p90PlJPCjrvYqvgepNHHbjNvhbuE4Hw5HXSLoaMcoptzB2ThA
+	QTpzB1pCx762IW++4F+tWitve9AuRSqF6NyqnDITk2WAzQBiietOXy3WSN3GP3fFJbJK69Vkkcn
+	kQMWeeK7ArXJv0aJTddrKSWUsx6hqD9iY8EO/iOkpP4EYs6aDHNMt/pvjtg+OyNODidj66F6Pee
+	axje9o2vFrvUIAXpcKPz5+b7rBRf0k3Sv1y03rnIqr+syFsHbIOjtCNYQSw7Qaw+G1xwnlboTjm
+	TddBwSnKdWH7tMvWfw3vcpT0EpXeBu6eqFcwbAEZxLbd2f8Ko0JqL9BRGDauAF5Vj1YC6LWxzp+
+	71lRLsFso9c4lXVndeGttHmlSyanAPY9QuXMu/68w8CX/wrgyzmPTjH/b3OieFTxnb1oGDABVOk
+	f4Zz8MGs6wIGLDGX6cCv3y0vn2Ap7D+/tsLhp5kFbe6GjmHHyLUn7uwaGwNPe4+QL3ITLee4qXL
+	b/x36vs+ZhTt0p3TZUd7Hw=
+X-Received: by 2002:a17:902:d505:b0:2e5:e53d:f458 with SMTP id d9443c01a7336-2e842bcb8afmr169792515ad.41.1792043091741;
+        Wed, 14 Oct 2026 22:44:51 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.44.47
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e967875e58sm549125ad.36.2026.10.14.22.44.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 22:44:49 -0700 (PDT)
+        Wed, 14 Oct 2026 22:44:51 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 56/82] python3-eventlet: mark CVE-2023-29483 fixed
-Date: Thu, 15 Oct 2026 18:41:44 +1300
-Message-ID: <183033afe8737f3bea8f7f864bb3452fc30142c0.1791945956.git.ankur.tyagi85@gmail.com>
+Subject: [PATCH 57/82] cjson: patch CVE-2026-87933
+Date: Thu, 15 Oct 2026 18:41:45 +1300
+Message-ID: <1964bbc4750d6889f7cb8a2a00c0776c2247f5dd.1791945956.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1791945956.git.ankur.tyagi85@gmail.com>
 References: <cover.1791945956.git.ankur.tyagi85@gmail.com>
@@ -68,33 +68,149 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 05:44:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130976
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130977
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Fix[1] for the CVE is part of the upstream version.
-
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2023-29483
-
-[1]https://github.com/eventlet/eventlet/commit/51e3c4928d4938beb576eff34f3bf97e6e64e6b4
+https://nvd.nist.gov/vuln/detail/cve-2026-87933
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 47b2ce9cc77297c740ecf50d00d6956f5a867144)
+(cherry picked from commit 2b3f5cbbd85177f06cea6f89f0b6d83bba48da40)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../cjson/cjson/CVE-2026-87933.patch          | 110 ++++++++++++++++++
+ .../recipes-devtools/cjson/cjson_1.7.19.bb    |   1 +
+ 2 files changed, 111 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
-index 3292950e2c..67a69b1478 100644
---- a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
-@@ -17,3 +17,5 @@ RDEPENDS:${PN} += " \
- 	python3-dnspython \
- 	python3-greenlet \
- "
+diff --git a/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch b/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
+new file mode 100644
+index 0000000000..3972e5eafc
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cjson/cjson/CVE-2026-87933.patch
+@@ -0,0 +1,110 @@
++From a1b370963c98e1374e5538e97841f9d476a8932e Mon Sep 17 00:00:00 2001
++From: lilu5458 <lilu@kylinos.cn>
++Date: Wed, 16 Sep 2026 09:55:35 +0800
++Subject: [PATCH] Fix: heap-use-after-free in merge_patch when patch is subtree
++ of target (#1065)
 +
-+CVE_STATUS[CVE-2023-29483] = "fixed-version: fixed since v0.35.2"
++When cJSONUtils_MergePatch(target, patch) is called with a non-object
++patch (scalar, array, or NULL) that happens to be a subtree of target,
++merge_patch() called cJSON_Delete(target) first, which freed the patch
++memory, and then cJSON_Duplicate(patch, 1) read the already-freed memory,
++triggering a heap-use-after-free (detected by AddressSanitizer at
++cJSON_Duplicate_rec, cJSON.c:2808).
++
++Fix: duplicate the patch first into a local variable, then delete the
++target, then return the duplicate. This matches the Option B approach
++proposed in issue #1060.
++
++Verified locally:
++- Reproduced the UAF with a minimal PoC under ASan before the fix.
++- After the fix the PoC runs cleanly (exit 0, correct result [1,2,3]).
++- Added a regression unit test
++  (merge_patch_should_not_read_freed_memory_when_patch_is_subtree).
++- Full ctest suite passes (22/22 tests).
++
++Fixes #1060
++
++Signed-off-by: lilu <lilu@kylinos.cn>
++(cherry picked from commit 6d9f2443ab071f86e5d9b43025a40929ec41c46c)
++
++CVE: CVE-2026-87933
++Upstream-Status: Backport [https://github.com/DaveGamble/cJSON/commit/6d9f2443ab071f86e5d9b43025a40929ec41c46c]
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ cJSON_Utils.c           |  8 ++++++--
++ tests/old_utils_tests.c | 34 ++++++++++++++++++++++++++++++++++
++ 2 files changed, 40 insertions(+), 2 deletions(-)
++
++diff --git a/cJSON_Utils.c b/cJSON_Utils.c
++index 8fa24f8..6f41875 100644
++--- a/cJSON_Utils.c
+++++ b/cJSON_Utils.c
++@@ -1324,9 +1324,13 @@ static cJSON *merge_patch(cJSON *target, const cJSON * const patch, const cJSON_
++ 
++     if (!cJSON_IsObject(patch))
++     {
++-        /* scalar value, array or NULL, just duplicate */
+++        /* scalar value, array or NULL, just duplicate.
+++         * Duplicate the patch first in case it is a subtree of target,
+++         * otherwise cJSON_Delete(target) would free the patch memory
+++         * and the subsequent cJSON_Duplicate would read freed memory. */
+++        cJSON *duplicate = cJSON_Duplicate(patch, 1);
++         cJSON_Delete(target);
++-        return cJSON_Duplicate(patch, 1);
+++        return duplicate;
++     }
++ 
++     if (!cJSON_IsObject(target))
++diff --git a/tests/old_utils_tests.c b/tests/old_utils_tests.c
++index 690dbb5..bdc7393 100644
++--- a/tests/old_utils_tests.c
+++++ b/tests/old_utils_tests.c
++@@ -189,6 +189,39 @@ static void merge_tests(void)
++     }
++ }
++ 
+++static void merge_patch_should_not_read_freed_memory_when_patch_is_subtree(void)
+++{
+++    /* When patch is a subtree of target, merge_patch must duplicate the patch
+++     * before deleting target. Otherwise cJSON_Delete(target) frees the patch
+++     * memory and the subsequent cJSON_Duplicate reads freed memory (UAF).
+++     * See CVE candidate: heap-use-after-free in merge_patch (cJSON_Utils.c). */
+++    cJSON *target = cJSON_Parse("{\"a\":[1,2,3]}");
+++    cJSON *patch = cJSON_GetObjectItem(target, "a");
+++    cJSON *result = NULL;
+++    cJSON *first = NULL;
+++    cJSON *second = NULL;
+++    cJSON *third = NULL;
+++
+++    TEST_ASSERT_NOT_NULL(target);
+++    TEST_ASSERT_NOT_NULL(patch);
+++
+++    /* patch (array [1,2,3]) is a subtree of target. This used to trigger
+++     * heap-use-after-free under AddressSanitizer before the fix. */
+++    result = cJSONUtils_MergePatch(target, patch);
+++    TEST_ASSERT_NOT_NULL(result);
+++    TEST_ASSERT_TRUE(cJSON_IsArray(result));
+++    TEST_ASSERT_EQUAL_INT(3, cJSON_GetArraySize(result));
+++
+++    first = cJSON_GetArrayItem(result, 0);
+++    second = cJSON_GetArrayItem(result, 1);
+++    third = cJSON_GetArrayItem(result, 2);
+++    TEST_ASSERT_EQUAL_INT(1, first->valueint);
+++    TEST_ASSERT_EQUAL_INT(2, second->valueint);
+++    TEST_ASSERT_EQUAL_INT(3, third->valueint);
+++
+++    cJSON_Delete(result);
+++}
+++
++ static void generate_merge_tests(void)
++ {
++     size_t i = 0;
++@@ -219,6 +252,7 @@ int main(void)
++     RUN_TEST(misc_tests);
++     RUN_TEST(sort_tests);
++     RUN_TEST(merge_tests);
+++    RUN_TEST(merge_patch_should_not_read_freed_memory_when_patch_is_subtree);
++     RUN_TEST(generate_merge_tests);
++ 
++     return UNITY_END();
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
+index d914018331..b4e57d7297 100644
+--- a/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
++++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.19.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
+ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+            file://run-ptest \
+            file://0001-allow-build-with-cmake-4.patch \
++           file://CVE-2026-87933.patch \
+          "
+ SRCREV = "c859b25da02955fef659d658b8f324b5cde87be3"
+ 
 
