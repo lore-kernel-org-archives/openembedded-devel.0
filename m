@@ -2,93 +2,96 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 478F6CC6B30
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB4ACC6B33
 	for <webhook@archiver.kernel.org>; Thu, 15 Oct 2026 01:28:08 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29955.1792027681209197986
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29959.1792027686888211457
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2026 18:28:01 -0700
+ Wed, 14 Oct 2026 18:28:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YtvGGJTz;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3a0aaa0fd13so3503537a91.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:28:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NtfsvE3v;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2e8fe8e343fso18254495ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2026 18:28:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792027680; x=1792632480; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DErithL6yljm8j0lkviHubEUkSbJOTvx/louhUA6gYk=;
-        b=YtvGGJTzcuui5t9XqLMYfmwXaykE3QqqpJjSm/1bPj+kMujDNh1wmu32u5nHmeXoTL
-         3JKre16X2AX2BNPIgP8vqnp9tFMfDHAjllqJKQeQ5Ifj6CMAOQBTTT61VeWBsF/FjnLg
-         lAA0tPRmQOdzCNvOUCVk5o9r6mhTXegxAsiUnHOw+NAVk/rCId8KIfqMeN9IYWokYxcx
-         NJvU2phSebT6uIM9g4GM9qpKDGUWqjvnxpbSMU+gjG4eaMAcFvt7g1ee3JN+KZD70sUD
-         xkMJHseS7+e8RoH1MarExrpFHY5UcOptmC5+dVgvF5m6+H9ZTHxjaL+YB0Zu4CXq0w5D
-         PSxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792027680; x=1792632480;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792027686; x=1792632486; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DErithL6yljm8j0lkviHubEUkSbJOTvx/louhUA6gYk=;
-        b=gYGSWsO0X19NPslOmkRjevz5AQPVWrhzt6ZPNkVBI+xsHfKRuUSdoYqpLuSDfuEEBF
-         xYH7XOetrFTCQrWmdGzW/OlMGVrLAvXLB5TNCYA068oefYykjdby24QhhVfZ7JG6CtHw
-         wuBCfgC16z1a29cmFzD4ZtZmP75ZJwVf5TeunuyuH6PIb2v7dn34R+CKkMeduUiwXbj/
-         JfmqFXcTREWmCYnnUbLzkIEdqSeRZI/JdYA99G5t288nxKiG07Vh0/dkw8RYkEEWDERD
-         qdNQbBTfjXNOoYWu+ISsBfVQqpLaITDbUqwU6qjle5VU6+sev054s+q7Jyzq0VxFItrX
-         H5RA==
-X-Gm-Message-State: AFq9FYJ408itaeU8Rih1AjOEA4FqD4kOk3OTBERirx3+JAj5pVG0Dmmi
-	e7TJ362Mww3LwFmeEzY1FqPbecy9G0jsq1SqU6+A8SrgEBAte1k3PrILoTla0g==
-X-Gm-Gg: AYBFou3jEpOuw32/RcdXZK1yvd2GuJOckC3jBuZN4ISJLdVaDyserJqbVdhBLgihmhO
-	gctc5dVLrawHcFhgf3FCpV0NvSO3UWSGHpM2b8cis7i0u7rcX0ex4xZHjSuCZ9KpM2nBgNzyF+J
-	UGqMab19Gj0ih9KxcocSsbzCdQbndHmOyA8RY7D0QHNJxcd/yRm8Vd/HCqgQvmmd1NXaOy1XUME
-	RWnkdWT+VQsY9zO9lhezFHHkFWcaiHHks6/A5DE7FZj3Ub2dvK47PyvRaABfHY6StWtIGEsr27r
-	fV5ZMZmSJLe/ZlAPX05xADxvS4+Bc2LLSCZsrhOFhEkMT40g7A1tlaG1ENQzC8exBIujUh4rrHL
-	7EU9bI7tQiUgRU4NCbcMe4MJUL1tWnX3QmO0dZBvXfS87cXPGo61lUP01v3AdxkbXx51lKZo6u6
-	z1KBETQ9fgWnBBODY+Ixi/86INgxC9Na+cT/IurIJRJMbnFucCNB67cimfFa4Hco3B2emreOG5K
-	//1VQKkEXQzvcrgr55fTG0ef2iw+We8MYmvnJY=
-X-Received: by 2002:a17:90b:5343:b0:39e:6c6a:6580 with SMTP id 98e67ed59e1d1-3ab3a9d3dfdmr13619567a91.67.1792027680620;
-        Wed, 14 Oct 2026 18:28:00 -0700 (PDT)
+        bh=tQHctWdtSHtNoicnbSUbRG3xGgW7mfr8L4h6I/eG6aA=;
+        b=NtfsvE3vL5ym/UPC1pejCJ0QybnxPQgU+T0Av4mjahBfv6ohMuCaEZMdWNgG4uavHw
+         ii0AqBtCV7Po76E2o8308tGZodbUwJ1UUpxLCifkg/F4WeNI86qntk6JrbTP3Xi3o36C
+         CFSoQDe2u2j2HE/kVHuGXs/b0crLywQkGKPzrXcuLCRltSKRhr6p/+TXvRRphUOK+uU+
+         IobQnYDAmR063RnJMAI58H9kE2A7YadWGghqv+TqOoBV56qKAKaugss3hhaRdsqukQR9
+         Yd8QSF7BNs4b8nkpOYR8QtZ0PoWMA6oYSxS8zKl0yEztt+cqjBIgyHHEGcX18pTFa9VA
+         t1qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792027686; x=1792632486;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tQHctWdtSHtNoicnbSUbRG3xGgW7mfr8L4h6I/eG6aA=;
+        b=qYMEWXKDPf1HWbXvgNMv6SOBFExIMTBUUZA1Wfm+swZqMAMewpN9UMAUeB2Qlybwkq
+         FJmcJMklaQghhAJC86vkmk/fwwZQyxPIoCxetOljX/VPX5/vzuK2pihI7XC/ljsJKx9v
+         iPIe2g7LAH3UyW0HdibO4w3zTKRaJJGhKxc9QYgVI9lyv/rXvpOxN0Sph8q9kW1/PBiP
+         j3dFCiaxjnXcNCF4nGhYtkws3QWBJzZ2wQjDS3e9Upz8hH8TMepEvJqDmJQtfBdaw6tp
+         CDyczNQFAea3bO64Q6JarFFvGypb9dJ5U56sFq7yrJZnRuiYEVnrT5nGrGp26OaQTDKB
+         Gh9Q==
+X-Gm-Message-State: AFq9FYIGpfwhD5QibiPH8bmTl1jHdN+q1UKcNZvJJfb+/3DigFBtm5bd
+	ag4BRq4lDDpu6MrMmfSRIqq2vKAhgKmvtwfpa+QagMMIGohvJ2liSjH/y/m4+w==
+X-Gm-Gg: AYBFou08b3mAyAbFuORDlUDYnFi92IhfND3bL5ohNUPWzd8BA+ZUsTvG+i6PG3Aynk/
+	lL3u7crRZe3ioYfYeCChhYgORWSm6wZ58Pcg5jaTnbjNvX5PCT/1xapWD+Zh7XzyuTq2jwo5SMf
+	OL/SXhK58fQx4GlnNvB3h12Jd4CPW1lU/GYk8OFljotA+6ejsd9Kfa++KsShbZqHwUXNsmIcF1I
+	LlbfhO6KbwdKUJ4b6eGahqcObJtOuhRCxbEXgyTruIm4YP2vpi87n4LYYcA73JXUC4GXOQwYB6I
+	QBU6/RxnABgCS6Ew6Y2tUoJBCIdbN2QSGCfQqnJ8epNvOCqv/o198r2uvtY43K4eirL0D9UZn4V
+	x/DiR8y1DiyZezmGVwDgrQhKMxQFQli8F+7Zk9Ea6hRW4I9F13Gt979xiUafb1A4btsrrIm+Mjo
+	zx5IEYDd0fOD4cN0Zx+wtxV9fwLg1CemOMyK2DoA9NyISMWx25v43gMehIolfbmft4W9kDjlbFQ
+	PtErvECax32BPrr+xEr/EJ7LNRaA6BvqrA/Z48=
+X-Received: by 2002:a17:903:1c7:b0:2e6:c39:b250 with SMTP id d9443c01a7336-2e842ab6808mr146713835ad.25.1792027686095;
+        Wed, 14 Oct 2026 18:28:06 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841432a03sm74429495ad.0.2026.10.14.18.27.57
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841432a03sm74429495ad.0.2026.10.14.18.28.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 18:27:59 -0700 (PDT)
+        Wed, 14 Oct 2026 18:28:05 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/6] libtorrent: upgrade 0.16.21 -> 0.16.25
-Date: Thu, 15 Oct 2026 14:27:47 +1300
-Message-ID: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 3/6] boot-time-analysis-tools: upgrade 0.7.1 -> 0.7.2
+Date: Thu, 15 Oct 2026 14:27:49 +1300
+Message-ID: <20261015012752.1650544-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
+References: <20261015012752.1650544-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 01:28:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130901
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/130903
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libtorrent/{libtorrent_0.16.21.bb => libtorrent_0.16.25.bb} | 2 +-
+ ...nalysis-tools_0.7.1.bb => boot-time-analysis-tools_0.7.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_0.16.21.bb => libtorrent_0.16.25.bb} (93%)
+ rename meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/{boot-time-analysis-tools_0.7.1.bb => boot-time-analysis-tools_0.7.2.bb} (93%)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.21.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.25.bb
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
 similarity index 93%
-rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.21.bb
-rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.25.bb
-index 06998ba989..5b7133e645 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.21.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.25.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
+rename from meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
+rename to meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
+index 2a65e7e463..31530eb609 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.1.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/boot-time-analysis-tools/boot-time-analysis-tools_0.7.2.bb
+@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1c2e0cc0dec0b709fe547806b55737b0"
  
- SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV}"
--SRCREV = "306fbbf008183dcfd55fae0a83fff95302c64987"
-+SRCREV = "6ad3fecf3e7e7aa86855445587b532a91256f344"
+ SRC_URI = "git://gitlab.com/CentOS/automotive/src/boot-time-analysis-tools.git;protocol=https;branch=main;tag=${PV}"
+-SRCREV = "2409ce37e7389d8079bdb8740cb6a44b505fb8d4"
++SRCREV = "f55dc0c2fa826e80fed6fd32254697a91cabe61c"
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ inherit setuptools3 features_check
  
 
