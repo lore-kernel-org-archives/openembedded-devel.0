@@ -1,474 +1,666 @@
-Return-Path: <yurade@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86CEBCCA464
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 05:21:26 +0000 (UTC)
-Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15076.1792128079811246893
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9166DCC6B38
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 05:26:56 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15433.1792128412275645101
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 22:21:19 -0700
+ Thu, 15 Oct 2026 22:26:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Y/HJG9YP;
- spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: yurade@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ObFMqYpQ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-8ac4806e210so44617527b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 22:26:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792128411; cv=none;
+        d=google.com; s=arc-20260327;
+        b=WZnAKm4XIpXYsbpnpgg5aiwTbbNipGNrS7zk//wkOktMa+3e4qVuPW/qySO62zjHXW
+         +gu/gtjeFV/PSGyl6/uoNC8gW4KKWSnQeQcitp38+Agv7rhufkb82hCMC40cAnZRUjN2
+         3QnBpxufca5xYBVJRKF6EGFIY0LpuJHSb8BWDag/pg4decRhcZNRE64ya9RpJXHPcKKu
+         ASelM7keJKrdCckwr6EvcBgBt/KTteKxwaMHg4herwEMXE70pI7/niB59G+n8u7Vne1m
+         WUhWjFvPFG6SOom3VXcDYHs/68bMFd5gHwk1/ddjvxnjPTMaNYbZ6+JBiwCQZY4g9nNv
+         kgag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=VVEW+d0UqAhXjYTxXdS0vOm2ywOLQEZn4fc3zFqX9G0=;
+        fh=n0ZnAkKOhGDmrf8RLpwnC7FQ6xmEY5rofL6wXnjsXjs=;
+        b=bSOz1ndH9Zhd77MV/qqtHZjoSCp81KjkPt3Do7oiO+JSLNtFULzxxzZH0BiiZ6Gw5N
+         JZ/nBaOyG2EwcCAQ3IsldG4rVU1sEkuwTtd1jT+5lS2J40MvVFiYWaUuAnugLHzSehmW
+         fHsyLQIcUxFfu4F59GkZvTG0VPzi5kWcDOe5adNSEWS5Oq0oeNac0bBz5usCCU6xKCeD
+         uQvvTVmNMoA1IZ6FgxzuwcgRNj3lXMHE8K/D6qa5TqBuZ5YR7+sK8z3aShjAFFk9knV8
+         MJO+koE+uYpHm49hS1OMRUmYno7BgX/DUu6+bs3CPM2TwRy/rLpRrcvMTfhFNyFAh2Yo
+         VqqA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=14200; q=dns/txt;
-  s=iport01; t=1792128079; x=1793337679;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=hZjdWomV2zTtmFg9BG3HqpMb/Zu9Y7prTW3cFWhNTKE=;
-  b=Y/HJG9YP457MeOnlKv6hCDSeWYqSpERHNhuARDKzdLOfRWhVsecTPpDy
-   B70gE6pD+aCVy7G1+XTdfJAMbi/owMSrwO3LJD/QFY8n7ntQlTafDt02W
-   UXeaVKbZg1/u8uC4m2vEXh7kP4dNjF6kWXisiViwoSPJwuROL6nCeBq06
-   INdjNJaXYkawlrjSWqMPZ/64PRKi7JiCV4KkL2S36FBCfyNKIlD7NL79l
-   gecrme6JgUguCnlZhECyROJl55JDd8FXRO07DngaD9EcxYGgH//QQzm8h
-   SxMY2RokTR7oSyVog7pQgRclAhF4+o/KQbCBjTjk+hPSlzJ8Rgiaebmlf
-   g==;
-X-CSE-ConnectionGUID: RAfs5nbATfyAAKL57gzD+Q==
-X-CSE-MsgGUID: o8EzmEoiSLWnIIK0D9O4rw==
-X-IPAS-Result: =?us-ascii?q?A0BcAgAKs9Fq/5H/Ja1aglmCV3VgQ0mUKYIhA4ETgWuIZ?=
- =?us-ascii?q?5I3gX4PAQEBD0QNBAEBhQUCjhUCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4Thk8NkBIBAgEDJyQBPRwDAQIvKxkKCBmDAgGCOgM3AxG8L?=
- =?us-ascii?q?hs3gXkzgQGDKQE/AkNQ2UqBaAELFAGBOIVAiCNdGAGCAoJ6JxuBSUSBFYE7g?=
- =?us-ascii?q?Th2gQWBGkIBAQOBNYZtBIMcEoFaGAZllERIgR4DWSwBVRMNCgsHBYFoAzUSK?=
- =?us-ascii?q?hVuMh2BIz4XgQcbBgWBHYEgghYjGTZ6gQlegSspYRAXgQmCBwKCVIIAAgFJQ?=
- =?us-ascii?q?Q4HRVMJJUMSRyYiCBIJARMaMAuBGzg8CShBFwxzDB0FcggCDQkHKRgNSBEsN?=
- =?us-ascii?q?xUZBD5uB5IUHoJlAXoKCQETFwEXgT0ZHpAFCYMkHQqQHIIhgTWeaXGEKIwij?=
- =?us-ascii?q?0SFdhozhASBV5JAklQLmH2OCoQJkSplN4RpgWg8gUcLBzMaCBsVO4JnCUoZD?=
- =?us-ascii?q?44rAgELC4NggX9ly3YnMgIJMgEBBwIHDgMLgWiQAQEmB4FPAQE?=
-IronPort-Data: A9a23:AruhCK5ELXWkAQmCXMbT3gxRtG7GchMFZxGqfqrLsTDasY5as4F+v
- mYbCmmDOffcMTH3eYoiaY+z9U9X6JOGn9FmGgVq/ik3Zn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/KUzBHf/g2QqazpNtfrawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eB6QW4btxC0hy+
- +0xARMpM0+Mlc71+efuIgVsrpxLwMjDJogTvDRkiDreF/tjGcCFSKTR7tge1zA17ixMNa+BP
- IxCNnw1MUmGOkESUrsUIMpWcOOAl2TlejFVgFmUvqEwpWPUyWSd1ZCwaoqNJ4bWFJ89ckCwo
- TLr7WHUBRAhEOOZ6Bumql79obPVgnauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjhCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1q994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:wNVo56BH8MGDSJLlHemA55DYdb4zR+YMi2TDsHoBLSC9Hfb3qy
- nDppkmPFrP+VUssRIb6LW90de7IE80nKQdieJ6AV7hZniFhILCFu5fBOXZrwEIYxefysdtkY
- F9bqN5FNr8SXJ+jcr8/U2ENuxI+qjhzEht7t2utkuEimpRGsdd0zs=
-X-Talos-CUID: 9a23:Hr0dcGzh/DCVesVyrESFBgUuM84+L3vX5UveMmaRKkI0F7KHZRyprfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3A7H+G2w/ym/FH4d0UtnuLNOWQf8A4zrarJUcMqrE?=
- =?us-ascii?q?5veilFnRcahDBliviFw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="528052492"
-Received: from rcdn-l-core-08.cisco.com ([173.37.255.145])
-  by rcdn-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 05:21:11 +0000
-Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-08.cisco.com (Postfix) with ESMTPS id 16A3018000596
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 05:21:11 +0000 (GMT)
-Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
-	id AE218CBF202; Thu, 15 Oct 2026 22:21:10 -0700 (PDT)
-From: Yogita Urade <yurade@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH 3/4] redis: fix CVE-2026-25243
-Date: Thu, 15 Oct 2026 22:21:09 -0700
-Message-Id: <20261016052110.184934-3-yurade@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261016052110.184934-1-yurade@cisco.com>
-References: <20261016052110.184934-1-yurade@cisco.com>
+        d=gmail.com; s=20251104; t=1792128411; x=1792733211; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VVEW+d0UqAhXjYTxXdS0vOm2ywOLQEZn4fc3zFqX9G0=;
+        b=ObFMqYpQUVF8JQRm6BvZSWkDNIGoeinp3F7z9goQoKd+GR3l8G3/tz/f4YSa7yqDmw
+         TJce0Y8Uefel0gidCV4DgVMOb2SWC6iSwN0gHl7UAuRgHL+gNuBhfgNBYCsuqCxXodxb
+         bFpVhpHcusigrBdQUN2FFMLYaH/myJSnc7dshKs8RR+C2cEyBl4aEKAkWDZbLw5EZlmw
+         5a0CRGrbZ3a5OrgAoulOH0e9bzIrT1TSh86k8fMJh9rR0+P4D32XnT7NG3ZeZ1dki3r/
+         xB9PuI2s9CTZFvte0YwK5tePDeDCz3t9K5kON4QQAIf6voZcAxlbFV0dz2lIeOPohDGO
+         lzgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792128411; x=1792733211;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=VVEW+d0UqAhXjYTxXdS0vOm2ywOLQEZn4fc3zFqX9G0=;
+        b=kOR+deM+5Sa9L8NjQm2t6bSis5ONbxTqYMq6cOedfJ9tPwCOkZdVc6t992aVzdp8Nr
+         C7Fo6Ob7Q8hIvRDC8DTd4m5xoQJwgQcjhvtqz4Kc6ohiaK0olKP/Eo2pcG/vrZ+NnPuF
+         vIxXgoVYAv7LAEYZJGUWcJHvWYbzUrPV8FGPDMoaXzi1JWQluMTRaowm8KuB18bzNQeY
+         6zIENw5JEOH+3DM7xLyrc6cmM/uezdpRXQfNmInrN8ZW1bhvI7N301UtNi1ATbm8MZYN
+         ozoB4Bn8WfI3F1k8V1cVlSAapFxpeav4BjVXqTnnVy8xCHo+qbPbrWkpYFvnbRYsmIJZ
+         7TOw==
+X-Gm-Message-State: AFq9FYI2FiQ9ZGRoRxGR8GaMp1WyKCZ5buELYqox6edfflUbA8/kXv1t
+	zUS5cfrj4x4TNPsDcQuLli2U55pF59wFi0n9yTRumSNQEKG96Grqd2en4Di1zI6VKYV8wm6y/5W
+	5TqRJEs8gWchGZzPh9x1t1txuj1+Lhzk=
+X-Gm-Gg: AYBFou3hAaCb3EVhz38e1dLy1EVZJyzJas5YN0NvX9ujGSTYkW5RyQWX7T3eepnwP8c
+	i8VetgrTXWv+/UVr5LGXZm+ad/RES8zORskSell/fGkmV2Tw8m8KpDzG8mjjg2QPLWYyXhW1scm
+	fv3cc6jXLOIY5NZL4MBDUa99lsS3IP1CwOvTSRGB9vkykTJHWAbdRu2k2hh9XxhFVdmtv4g4quJ
+	WneMANoKfln32JmwYw3D19kNWHaNMQ6YA0sBDrS2ktSaJMU4mk3Nx+F49Pg69ibeMRnHtNVH7iM
+	50vxL1kkfJHlVH3Yvvkpx7i7av4bgUCLoNu/tWAWlBNRR0O/hQSPIZU8lrnoG/t4ct3hJNsBp2w
+	lKmYZewwBR3m6geG4RA1fpovRJ0dqYofYIMd7t8u8uhNgA+7ias4Cu3Ob0DbBqVJypup7pGyd4K
+	7b+4NHt35box/LgEjFfeurz4CAaZ1q0+934bLnSFM+zPhzvAclONehd068na4uqXHqz4wODEoxB
+	9D5282zyVFp5pmZLxXMF18mo/vLhAfQpQC49SfKXF4Cm+qmraJFwkgVwW+WI6UmH4hE5xUt07nS
+	iUGHY1xM
+X-Received: by 2002:a05:690c:11:b0:8b0:8a9c:fac9 with SMTP id
+ 00721157ae682-8b08a9d038dmr70796477b3.28.1792128411036; Thu, 15 Oct 2026
+ 22:26:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
-X-Outbound-Node: rcdn-l-core-08.cisco.com
+References: <20261015053702.2069346-1-ankur.tyagi85@gmail.com>
+In-Reply-To: <20261015053702.2069346-1-ankur.tyagi85@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 15 Oct 2026 22:26:24 -0700
+X-Gm-Features: AclHuK9i172LKSvMnBg6asLgsg2vUCgoIbUA5WN_zoJpzIq8k9knevU9YC0YhZ4
+Message-ID: <CAMKF1so9_9RirME-WZ9JOotDwYV-3OOB2rDtm52uew+YPSn7Uw@mail.gmail.com>
+Subject: Re: [oe][meta-multimedia][PATCH v2 1/1] x265: upgrade 4.2 -> 4.3
+To: ankur.tyagi85@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000054f1e8065dee6935"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 05:21:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131050
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 05:26:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131051
 
-This patch applies the upstream fix as referenced in [2],
-using the commit shown in [1].
+--00000000000054f1e8065dee6935
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-[1] https://github.com/redis/redis/commit/b9dde6fc25dec6191b18374335a076a7b=
-31e3d02
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-25243
+On Wed, Oct 14, 2026 at 10:37=E2=80=AFPM Ankur Tyagi via lists.openembedded=
+.org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Yogita Urade <yurade@cisco.com>
----
- .../redis/redis-8.0.6/CVE-2026-25243.patch    | 275 ++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_8.0.6.bb |   1 +
- 2 files changed, 276 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-252=
-43.patch
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>
+> - Update SRC_URI as official repository moved to GitHub[1]
+> - Replace 0001-json11.cpp-Include-cstdint.patch with upstream backport
+> - Refresh 0002-x265-fix-build-with-cmake-4.patch
+>
+> Changelog:
+> https://github.com/Multicorewareinc/x265/blob/4.3/doc/reST/releasenotes.r=
+st
+>
+> [1] https://www.x265.org/#contribute
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> ---
+>  ...1-fix-dynamicHDR10-undefined-uint8_t.patch | 23 +++++++++++++
+>  .../0001-json11.cpp-Include-cstdint.patch     | 33 -------------------
+>  ...=3D> 0002-x265-fix-build-with-cmake-4.patch} | 31 +++++++----------
+>  .../x265/{x265_4.2.bb =3D> x265_4.3.bb}         | 13 ++++----
+>  4 files changed, 40 insertions(+), 60 deletions(-)
+>  create mode 100644
+> meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicHDR10-undefi=
+ned-uint8_t.patch
+>  delete mode 100644
+> meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstd=
+int.patch
+>  rename
+> meta-multimedia/recipes-multimedia/x265/x265/{0001-x265-fix-build-with-cm=
+ake-4.patch
+> =3D> 0002-x265-fix-build-with-cmake-4.patch} (61%)
+>  rename meta-multimedia/recipes-multimedia/x265/{x265_4.2.bb =3D>
+> x265_4.3.bb} (72%)
+>
+> diff --git
+> a/meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicHDR10-unde=
+fined-uint8_t.patch
+> b/meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicHDR10-unde=
+fined-uint8_t.patch
+> new file mode 100644
+> index 0000000000..cce6c8f6f2
+> --- /dev/null
+> +++
+> b/meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicHDR10-unde=
+fined-uint8_t.patch
+> @@ -0,0 +1,23 @@
+> +From 3b7d8d1e6134db80db46a927c06c33074dcb4bda Mon Sep 17 00:00:00 2001
+> +From: ReenigneArcher <reenignearcher@gmail.com>
+> +Date: Wed, 9 Jul 2025 14:41:33 +0000
+> +Subject: [PATCH] fix(dynamicHDR10): undefined-uint8_t
+> +
+> +(cherry picked from commit 98eec4057fc20850b59ed292b3f13ddeefc2f93f)
+>
 
-diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-25243.patc=
-h b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-25243.patch
-new file mode 100644
-index 0000000000..64349b14b3
---- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-25243.patch
-@@ -0,0 +1,275 @@
-+From b9dde6fc25dec6191b18374335a076a7b31e3d02 Mon Sep 17 00:00:00 2001
-+From: Sergei Georgiev <s_ggeorgiev@yahoo.com>
-+Date: Thu, 27 Nov 2025 11:41:11 +0200
-+Subject: [PATCH] Invalid Memory Access in Redis RESTORE Command
-+ (CVE-2026-25243)
-+
-+CVE: CVE-2026-25243
-+Upstream-Status: Backport [https://github.com/redis/redis/commit/b9dde6fc2=
-5dec6191b18374335a076a7b31e3d02]
-+
-+Backport Changes:
-+- In src/rdb.c, the duplicate consumer PEL error path removes
-+  streamFreeNACK(nack), using the 8.0.6 function signature; upstream remov=
-es
-+  streamFreeNACK(s, nack).
-+
-+(cherry picked from commit b9dde6fc25dec6191b18374335a076a7b31e3d02)
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ modules/vector-sets/vset.c         | 46 +++++++++++++++--
-+ src/rdb.c                          |  6 +--
-+ src/sds.c                          |  9 +++-
-+ src/zipmap.c                       |  7 +++
-+ tests/integration/corrupt-dump.tcl | 83 ++++++++++++++++++++++++++++++
-+ tests/unit/dump.tcl                | 13 +++++
-+ 6 files changed, 155 insertions(+), 9 deletions(-)
-+
-+diff --git a/modules/vector-sets/vset.c b/modules/vector-sets/vset.c
-+index 75de69256..ec8e4f0a4 100644
-+--- a/modules/vector-sets/vset.c
-++++ b/modules/vector-sets/vset.c
-+@@ -1797,14 +1797,50 @@ void *VectorSetRdbLoad(RedisModuleIO *rdb, int enc=
-ver) {
-+         uint32_t input_dim =3D RedisModule_LoadUnsigned(rdb);
-+         if (RedisModule_IsIOError(rdb)) goto ioerr;
-+         uint32_t output_dim =3D dim;
-+-        size_t matrix_size =3D sizeof(float) * input_dim * output_dim;
-+=20
-+-        vset->proj_matrix =3D RedisModule_Alloc(matrix_size);
-+-        vset->proj_input_size =3D input_dim;
-++        /* Sanity check dimensions to avoid absurd / degenerate matrices.=
- */
-++        if (input_dim =3D=3D 0 || output_dim =3D=3D 0) {
-++            RedisModule_LogIOError(rdb, "warning",
-++                "Invalid projection matrix dimensions: input_dim=3D%u, ou=
-tput_dim=3D%u",
-++                (unsigned)input_dim, (unsigned)output_dim);
-++            goto ioerr;
-++        }
-+=20
-+-        // Load projection matrix as a binary blob
-+-        char *matrix_blob =3D RedisModule_LoadStringBuffer(rdb, NULL);
-++        /* Check for overflow in matrix_size =3D sizeof(float) * input_di=
-m * output_dim. */
-++        #if SIZE_MAX =3D=3D UINT32_MAX
-++                if ((size_t)output_dim > SIZE_MAX / sizeof(float)) {
-++                    RedisModule_LogIOError(rdb, "warning",
-++                        "Projection matrix size overflow (output_dim too =
-large): input_dim=3D%u, output_dim=3D%u",
-++                        (unsigned)input_dim, (unsigned)output_dim);
-++                    goto ioerr;
-++                }
-++        #endif
-++
-++        size_t max_input =3D SIZE_MAX / (sizeof(float) * (size_t)output_d=
-im);
-++        if ((size_t)input_dim > max_input) {
-++            RedisModule_LogIOError(rdb, "warning",
-++                "Projection matrix size overflow: input_dim=3D%u, output_=
-dim=3D%u",
-++                (unsigned)input_dim, (unsigned)output_dim);
-++            goto ioerr;
-++        }
-++
-++        size_t matrix_size =3D sizeof(float) * (size_t)input_dim * (size_=
-t)output_dim;
-++
-++        /* Load projection matrix as a binary blob and validate length. */
-++        size_t blob_len =3D 0;
-++        char *matrix_blob =3D RedisModule_LoadStringBuffer(rdb, &blob_len=
-);
-+         if (matrix_blob =3D=3D NULL) goto ioerr;
-++
-++        if (blob_len !=3D matrix_size) {
-++            RedisModule_LogIOError(rdb, "warning",
-++                "Mismatching projection matrix length: expected=3D%zu, go=
-t=3D%zu",
-++                matrix_size, blob_len);
-++            RedisModule_Free(matrix_blob);
-++            goto ioerr;
-++        }
-++
-++        vset->proj_matrix =3D RedisModule_Alloc(matrix_size);
-++        vset->proj_input_size =3D input_dim;
-+         memcpy(vset->proj_matrix, matrix_blob, matrix_size);
-+         RedisModule_Free(matrix_blob);
-+     }
-+diff --git a/src/rdb.c b/src/rdb.c
-+index c09cd14bc..371353c2c 100644
-+--- a/src/rdb.c
-++++ b/src/rdb.c
-+@@ -2573,11 +2573,12 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds key=
-, int dbid, int *error)
-+=20
-+                         /* search for duplicate records */
-+                         sds field =3D sdstrynewlen(fstr, flen);
-+-                        if (!field || dictAdd(dupSearchDict, field, NULL)=
- !=3D DICT_OK ||
-+-                            !lpSafeToAdd(lp, (size_t)flen + vlen)) {
-++                        if (!field || !lpSafeToAdd(lp, (size_t)flen + vle=
-n) ||
-++                            dictAdd(dupSearchDict, field, NULL) !=3D DICT=
-_OK) {
-+                             rdbReportCorruptRDB("Hash zipmap with dup ele=
-ments, or big length (%u)", flen);
-+                             dictRelease(dupSearchDict);
-+                             sdsfree(field);
-++                            lpFree(lp);
-+                             zfree(encoded);
-+                             o->ptr =3D NULL;
-+                             decrRefCount(o);
-+@@ -3068,7 +3069,6 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds key, =
-int dbid, int *error)
-+                                                 " loading a stream consum=
-er "
-+                                                 "group");
-+                         decrRefCount(o);
-+-                        streamFreeNACK(nack);
-+                         return NULL;
-+                     }
-+                 }
-+diff --git a/src/sds.c b/src/sds.c
-+index 7f1429c46..edd0495aa 100644
-+--- a/src/sds.c
-++++ b/src/sds.c
-+@@ -90,7 +90,14 @@ sds _sdsnewlen(const void *init, size_t initlen, int tr=
-ymalloc) {
-+     unsigned char *fp; /* flags pointer. */
-+     size_t usable;
-+=20
-+-    assert(initlen + hdrlen + 1 > initlen); /* Catch size_t overflow */
-++    if (trymalloc) {
-++        /* protect against size_t overflow */
-++        if (initlen + hdrlen + 1 <=3D initlen)=20
-++            return NULL;
-++    } else {
-++        assert(initlen + hdrlen + 1 > initlen); /* Catch size_t overflow =
-*/
-++    }
-++=20=20=20=20
-+     sh =3D trymalloc?
-+         s_trymalloc_usable(hdrlen+initlen+1, &usable) :
-+         s_malloc_usable(hdrlen+initlen+1, &usable);
-+diff --git a/src/zipmap.c b/src/zipmap.c
-+index 51c64ca81..e3981d810 100644
-+--- a/src/zipmap.c
-++++ b/src/zipmap.c
-+@@ -387,6 +387,10 @@ int zipmapValidateIntegrity(unsigned char *zm, size_t=
- size, int deep) {
-+=20
-+         /* read the field name length */
-+         l =3D zipmapDecodeLength(p);
-++        /* Sanity check: length < 254 must be encoded in 1 byte, not 5 by=
-tes */
-++        if (l < ZIPMAP_BIGLEN && s !=3D 1)
-++            return 0;
-++
-+         p +=3D s; /* skip the encoded field size */
-+         p +=3D l; /* skip the field */
-+=20
-+@@ -402,6 +406,9 @@ int zipmapValidateIntegrity(unsigned char *zm, size_t =
-size, int deep) {
-+=20
-+         /* read the value length */
-+         l =3D zipmapDecodeLength(p);
-++        /* Sanity check: length < 254 must be encoded in 1 byte, not 5 by=
-tes */
-++        if (l < ZIPMAP_BIGLEN && s !=3D 1)
-++            return 0;
-+         p +=3D s; /* skip the encoded value size*/
-+         e =3D *p++; /* skip the encoded free space (always encoded in one=
- byte) */
-+         p +=3D l+e; /* skip the value and free space */
-+diff --git a/tests/integration/corrupt-dump.tcl b/tests/integration/corrup=
-t-dump.tcl
-+index ee044c71a..6017723e0 100644
-+--- a/tests/integration/corrupt-dump.tcl
-++++ b/tests/integration/corrupt-dump.tcl
-+@@ -941,6 +941,89 @@ test {corrupt payload: fuzzer findings - vector sets =
-with wrong encoding} {
-+     }
-+ }
-+=20
-++test {corrupt payload: zipmap - element wouldn't fit in listpack} {
-++    # Redis converts legacy zipmap encoded hashes to listpacks.
-++    # This test creates a zipmap entry with a 1GB value which cannot
-++    # fit into a listpack and verifies that RESTORE fails.
-++
-++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
- yes crash-memcheck-enabled no proto-max-bulk-len 2147483648 client-query-b=
-uffer-limit 2147483648]] {
-++        proc zipmap_encode_len {len} {
-++            if {$len < 254} {
-++                return [binary format c $len]
-++            } else {
-++                return [binary format ci 254 $len]
-++            }
-++        }
-++        r config set sanitize-dump-payload no
-++
-++        # Generates Zipmap with 1GB value - should fail lpSafeToAdd check
-++        set val_len [expr {1024 * 1024 * 1024 + 1}]
-++
-++        # Zipmap has 1 element
-++        set zm [binary format c 1]
-++        # Field is 1 byte long
-++        append zm [zipmap_encode_len 1]
-++        append zm "k"
-++        # Value is 1GB long
-++        append zm [zipmap_encode_len $val_len]
-++        append zm [binary format c 0]
-++        append zm [string repeat "A" $val_len]
-++        # ZIPMAP_END marker
-++        append zm [binary format c 255]
-++        # Prepend RDB header
-++        set zm_len [string length $zm]
-++        set rdb_len [binary format cI 0x80 $zm_len]
-++        set dump [binary format c 9]
-++        append dump $rdb_len
-++        append dump $zm
-++        append dump [binary format s 9]
-++        append dump [binary format w 0]
-++
-++        catch {r RESTORE _hash 0 $dump} err
-++        assert_match "*Bad data format*" $err
-++    }
-++} {} {large-memory}
-++
-++test {corrupt payload: zipmap - 5 bytes length encoding for a small field=
-} {
-++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
- yes crash-memcheck-enabled no]] {
-++        catch {
-++            r restore key 0 "\x09\x11\x01\xfe\x04\x00\x00\x00\x01\x00\xff=
-\x00\x04\x00\x76\x61\x6c\x31\xff\x09\x00\xf9\xd5\xa4\xf7\x7d\x00\x3f\x1b"
-++        } err
-++        assert_match "*Bad data format*" $err
-++        verify_log_message 0 "*integrity check failed*" 0
-++    }
-++}
-++
-++test {corrupt payload: zipmap - 5 bytes length encoding for a small value=
-} {
-++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
- yes crash-memcheck-enabled no]] {
-++        catch {
-++            r restore key 0 "\x09\x0e\x01\x01\x6b\xfe\x04\x00\x00\x00\x00=
-\x76\x61\x6c\x31\xff\x09\x00\xd0\xf9\xe4\x1d\xe4\xfb\x11\x4c"
-++        } err
-++        assert_match "*Bad data format*" $err
-++        verify_log_message 0 "*integrity check failed*" 0
-++    }
-++}
-++
-++test {corrupt payload: zipmap - 5 bytes length encoding and a huge field}=
- {
-++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
- yes crash-memcheck-enabled no] ] {
-++        catch {
-++            r restore key 0 "\x09\x41\x15\x02\x04\x6b\x65\x79\x31\x04\x00=
-\x76\x61\x6c\x31\xfe\x04\x00\x00\x00\xfe\xff\xff\xff\xfd\x00\x42\x42\x42\x4=
-2\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x=
-42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\=
-x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42=
-\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x4=
-2\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x=
-42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\=
-x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42=
-\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x4=
-2\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x=
-42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\=
-x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42=
-\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x4=
-2\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x=
-42\x42\x42\x42\x42\x42\xff\x09\x00\x54\x2f\x0a\xca\x4e\x5c\x49\x9f"
-++        } err
-++        assert_match "*Bad data format*" $err
-++        verify_log_message 0 "*integrity check failed*" 0
-++    }
-++}
-++
-++test {corrupt payload: stream - duplicated consumer PEL entry} {
-++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
- yes crash-memcheck-enabled no] ] {
-++        catch {
-++            r restore key 0 "\x15\x01\x10\x00\x00\x01\x9b\x0d\x56\xa9\xb7=
-\x00\x00\x00\x00\x00\x00\x00\x00\xc3\x39\x40\x42\x15\x42\x00\x00\x00\x11\x0=
-0\x02\x01\x00\x01\x01\x01\x86\x66\x69\x65\x6c\x64\x31\x07\x00\x01\x40\x0f\x=
-0a\x00\x01\x86\x76\x61\x6c\x75\x65\x31\x07\x04\x20\x0b\x02\xcd\xd9\x02\xe0\=
-x01\x22\x01\x32\x07\x80\x1a\x04\x32\x07\x06\x01\xff\x02\x81\x00\x00\x01\x9b=
-\x0d\x56\xb7\x90\x00\x81\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x02\x0=
-1\x07\x6d\x79\x67\x72\x6f\x75\x70\x81\x00\x00\x01\x9b\x0d\x56\xb7\x90\x00\x=
-02\x02\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\x00\x00\x80\=
-xd9\x56\x0d\x9b\x01\x00\x00\x01\x00\x00\x01\x9b\x0d\x56\xb7\x90\x00\x00\x00=
-\x00\x00\x00\x00\x00\x80\xd9\x56\x0d\x9b\x01\x00\x00\x01\x01\x09\x63\x6f\x6=
-e\x73\x75\x6d\x65\x72\x31\x80\xd9\x56\x0d\x9b\x01\x00\x00\x80\xd9\x56\x0d\x=
-9b\x01\x00\x00\x02\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\=
-x00\x00\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\x00\x00\x0c=
-\x00\x00\x00\x00\x00\x00\x00\x00\x00\x09\x00\x4b\xe0\x99\x30\x67\x4d\xe5\x8=
-7"
-++        } err
-++        assert_match "*Bad data format*" $err
-++        verify_log_message 0 "*Duplicated consumer PEL entry*" 0
-++    }
-++}
-++
-+=20
-+ } ;# tags
-+=20
-+diff --git a/tests/unit/dump.tcl b/tests/unit/dump.tcl
-+index 0cd62804a..1ce9bc846 100644
-+--- a/tests/unit/dump.tcl
-++++ b/tests/unit/dump.tcl
-+@@ -140,6 +140,19 @@ start_server {tags {"dump"}} {
-+         close_replication_stream $repl
-+     } {} {needs:repl}
-+=20
-++    test {RESTORE fail with invalid payload size} {
-++        # Payload with mismatched size: claims 0xFFFFFFFFFFFFFFF7 bytes (=
-max uint64 - 8) but provides no data
-++        # \x00 =3D String type
-++        # \x81 =3D 64-bit length marker
-++        # \xFF\xFF\xFF\xFF\xFF\xFF\xFF\xF7 =3D 18446744073709551607 in bi=
-g-endian
-++        # \x0c\x00 =3D RDB version
-++        # \x00... =3D fake CRC64
-++        set encoded "\x00\x81\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xF7\x0c\x00\x00=
-\x00\x00\x00\x00\x00\x00\x00"
-++        r del test
-++        catch {r restore test 0 $encoded} e
-++        set e
-++    } {*Bad data format*}
-++
-+     test {DUMP of non existing key returns nil} {
-+         r dump nonexisting_key
-+     } {}
-diff --git a/meta-oe/recipes-extended/redis/redis_8.0.6.bb b/meta-oe/recipe=
-s-extended/redis/redis_8.0.6.bb
-index a83ffbae48..5d4ca143d1 100644
---- a/meta-oe/recipes-extended/redis/redis_8.0.6.bb
-+++ b/meta-oe/recipes-extended/redis/redis_8.0.6.bb
-@@ -18,6 +18,7 @@ SRC_URI =3D "http://download.redis.io/releases/${BP}.tar.=
-gz \
-            file://CVE-2026-81934.patch \
-            file://CVE-2026-23479.patch \
-            file://CVE-2026-23631.patch \
-+           file://CVE-2026-25243.patch \
-           "
- SRC_URI[sha256sum] =3D "6d0a9913887a4972536f9da226f1575859c34d863541291632=
-60a5f9c6bd4229"
-=20
---=20
-2.35.6
+This needs the Upstream-Status tag added.
 
+
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +---
+> + source/dynamicHDR10/json11/json11.cpp | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/source/dynamicHDR10/json11/json11.cpp
+> b/source/dynamicHDR10/json11/json11.cpp
+> +index 762577735..c111ebb82 100644
+> +--- a/source/dynamicHDR10/json11/json11.cpp
+> ++++ b/source/dynamicHDR10/json11/json11.cpp
+> +@@ -22,6 +22,7 @@
+> + #include "json11.h"
+> + #include <cassert>
+> + #include <cmath>
+> ++#include <cstdint>
+> + #include <cstdlib>
+> + #include <cstdio>
+> + #include <limits>
+> diff --git
+> a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cs=
+tdint.patch
+> b/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cs=
+tdint.patch
+> deleted file mode 100644
+> index f32316009f..0000000000
+> ---
+> a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cs=
+tdint.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From 6cbd417be3f6bcbda77464db6a4d83cef3df8904 Mon Sep 17 00:00:00 2001
+> -From: Leon Anavi <leon.anavi@konsulko.com>
+> -Date: Mon, 5 May 2025 14:08:36 +0000
+> -Subject: [PATCH] json11.cpp: Include cstdint
+> -
+> -Fixes:
+> -
+> -json11.cpp:101:32: error: 'uint8_t' does not name a type
+> -
+> -This work was sponsored by GOVCERT.LU.
+> -
+> -Upstream-Status: Pending [
+> https://bitbucket.org/multicoreware/x265_git/pull-requests/33]
+> -
+> -Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ----
+> - dynamicHDR10/json11/json11.cpp | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/dynamicHDR10/json11/json11.cpp
+> b/dynamicHDR10/json11/json11.cpp
+> -index 7625777..74f990a 100644
+> ---- a/dynamicHDR10/json11/json11.cpp
+> -+++ b/dynamicHDR10/json11/json11.cpp
+> -@@ -25,6 +25,7 @@
+> - #include <cstdlib>
+> - #include <cstdio>
+> - #include <limits>
+> -+#include <cstdint>
+> -
+> - #if _MSC_VER
+> - #pragma warning(disable: 4510) //const member cannot be default
+> initialized
+> ---
+> -2.39.5
+> -
+> diff --git
+> a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
+make-4.patch
+> b/meta-multimedia/recipes-multimedia/x265/x265/0002-x265-fix-build-with-c=
+make-4.patch
+> similarity index 61%
+> rename from
+> meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-cma=
+ke-4.patch
+> rename to
+> meta-multimedia/recipes-multimedia/x265/x265/0002-x265-fix-build-with-cma=
+ke-4.patch
+> index 7d301777f0..64da2c31e0 100644
+> ---
+> a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with-c=
+make-4.patch
+> +++
+> b/meta-multimedia/recipes-multimedia/x265/x265/0002-x265-fix-build-with-c=
+make-4.patch
+> @@ -1,4 +1,4 @@
+> -From f376b858b38f8a3b922bb9a5165a5f6f806bd245 Mon Sep 17 00:00:00 2001
+> +From 5e759128b016cb03866ada875166560155b9d21e Mon Sep 17 00:00:00 2001
+>  From: Markus Volk <f_l_k@t-online.de>
+>  Date: Thu, 10 Jul 2025 09:04:27 +0200
+>  Subject: [PATCH] x265: fix build with cmake 4
+> @@ -8,16 +8,17 @@ with 4.0
+>
+>  Signed-off-by: Markus Volk <f_l_k@t-online.de>
+>
+> -Upstream-Status: Submitted [https://github.com/videolan/x265/pull/17]
+> +Upstream-Status: Submitted [
+> https://github.com/Multicorewareinc/x265/pull/996]
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>  ---
+>   source/CMakeLists.txt              | 2 +-
+> - source/dynamicHDR10/CMakeLists.txt | 4 ++--
+> - 2 files changed, 3 insertions(+), 3 deletions(-)
+> + source/dynamicHDR10/CMakeLists.txt | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+>
+>  diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
+> -index 2e3beaaf3..45df2e9fd 100755
+> ---- a/CMakeLists.txt
+> -+++ b/CMakeLists.txt
+> +index 3177af99a..f1364b886 100755
+> +--- a/source/CMakeLists.txt
+> ++++ b/source/CMakeLists.txt
+>  @@ -11,7 +11,7 @@ if(POLICY CMP0042)
+>       cmake_policy(SET CMP0042 NEW) # MACOSX_RPATH
+>   endif()
+> @@ -28,9 +29,9 @@ index 2e3beaaf3..45df2e9fd 100755
+>   if (POLICY CMP0075)
+>       cmake_policy(SET CMP0075 NEW) # CMAKE_REQUIRED_LIBRARIES warning
+>  diff --git a/source/dynamicHDR10/CMakeLists.txt
+> b/source/dynamicHDR10/CMakeLists.txt
+> -index 4243338c6..03c866b1f 100644
+> ---- a/dynamicHDR10/CMakeLists.txt
+> -+++ b/dynamicHDR10/CMakeLists.txt
+> +index 4243338c6..2c3af4f00 100644
+> +--- a/source/dynamicHDR10/CMakeLists.txt
+> ++++ b/source/dynamicHDR10/CMakeLists.txt
+>  @@ -10,7 +10,7 @@ add_library(dynamicHDR10 OBJECT
+>       hdr10plus.h
+>       api.cpp )
+> @@ -40,13 +41,3 @@ index 4243338c6..03c866b1f 100644
+>   project(dynamicHDR10)
+>   include(CheckIncludeFiles)
+>   include(CheckFunctionExists)
+> -@@ -150,4 +150,4 @@ set(BIN_INSTALL_DIR bin CACHE STRING "Install
+> location of executables")
+> - option(ENABLE_SHARED "Build shared library" OFF)
+> -
+> - install(FILES hdr10plus.h DESTINATION include)
+> --endif()
+> -\ No newline at end of file
+> -+endif()
+> ---
+> -2.43.0
+> -
+> diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
+> b/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
+> similarity index 72%
+> rename from meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
+> rename to meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
+> index 9bef2b8bd2..6459fbc8cf 100644
+> --- a/meta-multimedia/recipes-multimedia/x265/x265_4.2.bb
+> +++ b/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
+> @@ -1,6 +1,6 @@
+>  SUMMARY =3D "H.265/HEVC video encoder"
+>  DESCRIPTION =3D "A free software library and application for encoding vi=
+deo
+> streams into the H.265/HEVC format."
+> -HOMEPAGE =3D "https://bitbucket.org/multicoreware/x265_git"
+> +HOMEPAGE =3D "https://github.com/Multicorewareinc/x265"
+>
+>  LICENSE =3D "GPL-2.0-only"
+>  LICENSE_FLAGS =3D "commercial"
+> @@ -9,12 +9,12 @@ LIC_FILES_CHKSUM =3D
+> "file://../COPYING;md5=3Dc9e0427bc58f129f99728c62d4ad4091"
+>  DEPENDS =3D "nasm-native gnutls zlib libpcre numactl"
+>
+>  SRC_URI =3D " \
+> -
+> https://download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz
+> \
+> -    file://0001-json11.cpp-Include-cstdint.patch \
+> -    file://0001-x265-fix-build-with-cmake-4.patch \
+> +    git://
+> github.com/Multicorewareinc/x265.git;protocol=3Dhttps;branch=3Dmaster;tag=
+=3D${PV}
+> <http://github.com/Multicorewareinc/x265.git;protocol=3Dhttps;branch=3Dma=
+ster;tag=3D$%7BPV%7D>
+> \
+> +    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch \
+> +    file://0002-x265-fix-build-with-cmake-4.patch \
+>  "
+> -SRC_URI[sha256sum] =3D
+> "40b1ea0453e0309f0eba934e0ddf533f8f6295966679e8894e8f1c1c8d5e1210"
+> -S =3D "${UNPACKDIR}/x265_${PV}/source"
+> +SRCREV =3D "e9b88125dc21393b3fd8d68e98083bdfb89778a8"
+> +S =3D "${UNPACKDIR}/x265-${PV}/source"
+>
+>  inherit lib_package cmake pkgconfig
+>
+> @@ -30,4 +30,3 @@ PACKAGECONFIG[10bit] =3D
+> "-DHIGH_BIT_DEPTH=3DON,-DHIGH_BIT_DEPTH=3DOFF"
+>
+>  FILES:${PN} +=3D "${libdir}/libhdr10plus.so"
+>  FILES:${PN}-dev =3D "${includedir} ${libdir}/pkgconfig ${libdir}/libx265=
+.so"
+> -
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#130918):
+> https://lists.openembedded.org/g/openembedded-devel/message/130918
+> Mute This Topic: https://lists.openembedded.org/mt/121764990/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000054f1e8065dee6935
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 14,=
+ 2026 at 10:37=E2=80=AFPM Ankur Tyagi via <a href=3D"http://lists.openembed=
+ded.org">lists.openembedded.org</a> &lt;ankur.tyagi85=3D<a href=3D"mailto:g=
+mail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Anku=
+r Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" target=3D"_blank">an=
+kur.tyagi85@gmail.com</a>&gt;<br>
+<br>
+- Update SRC_URI as official repository moved to GitHub[1]<br>
+- Replace 0001-json11.cpp-Include-cstdint.patch with upstream backport<br>
+- Refresh 0002-x265-fix-build-with-cmake-4.patch<br>
+<br>
+Changelog:<br>
+<a href=3D"https://github.com/Multicorewareinc/x265/blob/4.3/doc/reST/relea=
+senotes.rst" rel=3D"noreferrer" target=3D"_blank">https://github.com/Multic=
+orewareinc/x265/blob/4.3/doc/reST/releasenotes.rst</a><br>
+<br>
+[1] <a href=3D"https://www.x265.org/#contribute" rel=3D"noreferrer" target=
+=3D"_blank">https://www.x265.org/#contribute</a><br>
+<br>
+Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" t=
+arget=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0...1-fix-dynamicHDR10-undefined-uint8_t.patch | 23 +++++++++++++<br>
+=C2=A0.../0001-json11.cpp-Include-cstdint.patch=C2=A0 =C2=A0 =C2=A0| 33 ---=
+----------------<br>
+=C2=A0...=3D&gt; 0002-x265-fix-build-with-cmake-4.patch} | 31 +++++++------=
+----<br>
+=C2=A0.../x265/{<a href=3D"http://x265_4.2.bb" rel=3D"noreferrer" target=3D=
+"_blank">x265_4.2.bb</a> =3D&gt; <a href=3D"http://x265_4.3.bb" rel=3D"nore=
+ferrer" target=3D"_blank">x265_4.3.bb</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0| 13 ++++----<br>
+=C2=A04 files changed, 40 insertions(+), 60 deletions(-)<br>
+=C2=A0create mode 100644 meta-multimedia/recipes-multimedia/x265/x265/0001-=
+fix-dynamicHDR10-undefined-uint8_t.patch<br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/x265/x265/0001-=
+json11.cpp-Include-cstdint.patch<br>
+=C2=A0rename meta-multimedia/recipes-multimedia/x265/x265/{0001-x265-fix-bu=
+ild-with-cmake-4.patch =3D&gt; 0002-x265-fix-build-with-cmake-4.patch} (61%=
+)<br>
+=C2=A0rename meta-multimedia/recipes-multimedia/x265/{<a href=3D"http://x26=
+5_4.2.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a> =3D&gt; <a h=
+ref=3D"http://x265_4.3.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.3.bb=
+</a>} (72%)<br>
+<br>
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicH=
+DR10-undefined-uint8_t.patch b/meta-multimedia/recipes-multimedia/x265/x265=
+/0001-fix-dynamicHDR10-undefined-uint8_t.patch<br>
+new file mode 100644<br>
+index 0000000000..cce6c8f6f2<br>
+--- /dev/null<br>
++++ b/meta-multimedia/recipes-multimedia/x265/x265/0001-fix-dynamicHDR10-un=
+defined-uint8_t.patch<br>
+@@ -0,0 +1,23 @@<br>
++From 3b7d8d1e6134db80db46a927c06c33074dcb4bda Mon Sep 17 00:00:00 2001<br>
++From: ReenigneArcher &lt;<a href=3D"mailto:reenignearcher@gmail.com" targe=
+t=3D"_blank">reenignearcher@gmail.com</a>&gt;<br>
++Date: Wed, 9 Jul 2025 14:41:33 +0000<br>
++Subject: [PATCH] fix(dynamicHDR10): undefined-uint8_t<br>
++<br>
++(cherry picked from commit 98eec4057fc20850b59ed292b3f13ddeefc2f93f)<br></=
+blockquote><div><br></div><div>This needs the Upstream-Status tag added.</d=
+iv><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" =
+target=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
++---<br>
++ source/dynamicHDR10/json11/json11.cpp | 1 +<br>
++ 1 file changed, 1 insertion(+)<br>
++<br>
++diff --git a/source/dynamicHDR10/json11/json11.cpp b/source/dynamicHDR10/j=
+son11/json11.cpp<br>
++index 762577735..c111ebb82 100644<br>
++--- a/source/dynamicHDR10/json11/json11.cpp<br>
+++++ b/source/dynamicHDR10/json11/json11.cpp<br>
++@@ -22,6 +22,7 @@<br>
++ #include &quot;json11.h&quot;<br>
++ #include &lt;cassert&gt;<br>
++ #include &lt;cmath&gt;<br>
+++#include &lt;cstdint&gt;<br>
++ #include &lt;cstdlib&gt;<br>
++ #include &lt;cstdio&gt;<br>
++ #include &lt;limits&gt;<br>
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-I=
+nclude-cstdint.patch b/meta-multimedia/recipes-multimedia/x265/x265/0001-js=
+on11.cpp-Include-cstdint.patch<br>
+deleted file mode 100644<br>
+index f32316009f..0000000000<br>
+--- a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-=
+cstdint.patch<br>
++++ /dev/null<br>
+@@ -1,33 +0,0 @@<br>
+-From 6cbd417be3f6bcbda77464db6a4d83cef3df8904 Mon Sep 17 00:00:00 2001<br>
+-From: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" target=3D"=
+_blank">leon.anavi@konsulko.com</a>&gt;<br>
+-Date: Mon, 5 May 2025 14:08:36 +0000<br>
+-Subject: [PATCH] json11.cpp: Include cstdint<br>
+-<br>
+-Fixes:<br>
+-<br>
+-json11.cpp:101:32: error: &#39;uint8_t&#39; does not name a type<br>
+-<br>
+-This work was sponsored by <a href=3D"http://GOVCERT.LU" rel=3D"noreferrer=
+" target=3D"_blank">GOVCERT.LU</a>.<br>
+-<br>
+-Upstream-Status: Pending [<a href=3D"https://bitbucket.org/multicoreware/x=
+265_git/pull-requests/33" rel=3D"noreferrer" target=3D"_blank">https://bitb=
+ucket.org/multicoreware/x265_git/pull-requests/33</a>]<br>
+-<br>
+-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
+arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+----<br>
+- dynamicHDR10/json11/json11.cpp | 1 +<br>
+- 1 file changed, 1 insertion(+)<br>
+-<br>
+-diff --git a/dynamicHDR10/json11/json11.cpp b/dynamicHDR10/json11/json11.c=
+pp<br>
+-index 7625777..74f990a 100644<br>
+---- a/dynamicHDR10/json11/json11.cpp<br>
+-+++ b/dynamicHDR10/json11/json11.cpp<br>
+-@@ -25,6 +25,7 @@<br>
+- #include &lt;cstdlib&gt;<br>
+- #include &lt;cstdio&gt;<br>
+- #include &lt;limits&gt;<br>
+-+#include &lt;cstdint&gt;<br>
+- <br>
+- #if _MSC_VER<br>
+- #pragma warning(disable: 4510) //const member cannot be default initializ=
+ed<br>
+--- <br>
+-2.39.5<br>
+-<br>
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-bui=
+ld-with-cmake-4.patch b/meta-multimedia/recipes-multimedia/x265/x265/0002-x=
+265-fix-build-with-cmake-4.patch<br>
+similarity index 61%<br>
+rename from meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-buil=
+d-with-cmake-4.patch<br>
+rename to meta-multimedia/recipes-multimedia/x265/x265/0002-x265-fix-build-=
+with-cmake-4.patch<br>
+index 7d301777f0..64da2c31e0 100644<br>
+--- a/meta-multimedia/recipes-multimedia/x265/x265/0001-x265-fix-build-with=
+-cmake-4.patch<br>
++++ b/meta-multimedia/recipes-multimedia/x265/x265/0002-x265-fix-build-with=
+-cmake-4.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From f376b858b38f8a3b922bb9a5165a5f6f806bd245 Mon Sep 17 00:00:00 2001<br>
++From 5e759128b016cb03866ada875166560155b9d21e Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"=
+_blank">f_l_k@t-online.de</a>&gt;<br>
+=C2=A0Date: Thu, 10 Jul 2025 09:04:27 +0200<br>
+=C2=A0Subject: [PATCH] x265: fix build with cmake 4<br>
+@@ -8,16 +8,17 @@ with 4.0<br>
+<br>
+=C2=A0Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" t=
+arget=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+<br>
+-Upstream-Status: Submitted [<a href=3D"https://github.com/videolan/x265/pu=
+ll/17" rel=3D"noreferrer" target=3D"_blank">https://github.com/videolan/x26=
+5/pull/17</a>]<br>
++Upstream-Status: Submitted [<a href=3D"https://github.com/Multicorewareinc=
+/x265/pull/996" rel=3D"noreferrer" target=3D"_blank">https://github.com/Mul=
+ticorewareinc/x265/pull/996</a>]<br>
++Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" =
+target=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
+=C2=A0---<br>
+=C2=A0 source/CMakeLists.txt=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 2 +-<br>
+- source/dynamicHDR10/CMakeLists.txt | 4 ++--<br>
+- 2 files changed, 3 insertions(+), 3 deletions(-)<br>
++ source/dynamicHDR10/CMakeLists.txt | 2 +-<br>
++ 2 files changed, 2 insertions(+), 2 deletions(-)<br>
+<br>
+=C2=A0diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt<br>
+-index 2e3beaaf3..45df2e9fd 100755<br>
+---- a/CMakeLists.txt<br>
+-+++ b/CMakeLists.txt<br>
++index 3177af99a..f1364b886 100755<br>
++--- a/source/CMakeLists.txt<br>
+++++ b/source/CMakeLists.txt<br>
+=C2=A0@@ -11,7 +11,7 @@ if(POLICY CMP0042)<br>
+=C2=A0 =C2=A0 =C2=A0 cmake_policy(SET CMP0042 NEW) # MACOSX_RPATH<br>
+=C2=A0 endif()<br>
+@@ -28,9 +29,9 @@ index 2e3beaaf3..45df2e9fd 100755<br>
+=C2=A0 if (POLICY CMP0075)<br>
+=C2=A0 =C2=A0 =C2=A0 cmake_policy(SET CMP0075 NEW) # CMAKE_REQUIRED_LIBRARI=
+ES warning<br>
+=C2=A0diff --git a/source/dynamicHDR10/CMakeLists.txt b/source/dynamicHDR10=
+/CMakeLists.txt<br>
+-index 4243338c6..03c866b1f 100644<br>
+---- a/dynamicHDR10/CMakeLists.txt<br>
+-+++ b/dynamicHDR10/CMakeLists.txt<br>
++index 4243338c6..2c3af4f00 100644<br>
++--- a/source/dynamicHDR10/CMakeLists.txt<br>
+++++ b/source/dynamicHDR10/CMakeLists.txt<br>
+=C2=A0@@ -10,7 +10,7 @@ add_library(dynamicHDR10 OBJECT<br>
+=C2=A0 =C2=A0 =C2=A0 hdr10plus.h<br>
+=C2=A0 =C2=A0 =C2=A0 api.cpp )<br>
+@@ -40,13 +41,3 @@ index 4243338c6..03c866b1f 100644<br>
+=C2=A0 project(dynamicHDR10)<br>
+=C2=A0 include(CheckIncludeFiles)<br>
+=C2=A0 include(CheckFunctionExists)<br>
+-@@ -150,4 +150,4 @@ set(BIN_INSTALL_DIR bin CACHE STRING &quot;Install loc=
+ation of executables&quot;)<br>
+- option(ENABLE_SHARED &quot;Build shared library&quot; OFF)<br>
+- <br>
+- install(FILES hdr10plus.h DESTINATION include)<br>
+--endif()<br>
+-\ No newline at end of file<br>
+-+endif()<br>
+--- <br>
+-2.43.0<br>
+-<br>
+diff --git a/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265=
+_4.2.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a> b/meta-multim=
+edia/recipes-multimedia/x265/<a href=3D"http://x265_4.3.bb" rel=3D"noreferr=
+er" target=3D"_blank">x265_4.3.bb</a><br>
+similarity index 72%<br>
+rename from meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_=
+4.2.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a><br>
+rename to meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.=
+3.bb" rel=3D"noreferrer" target=3D"_blank">x265_4.3.bb</a><br>
+index 9bef2b8bd2..6459fbc8cf 100644<br>
+--- a/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.2.bb=
+" rel=3D"noreferrer" target=3D"_blank">x265_4.2.bb</a><br>
++++ b/meta-multimedia/recipes-multimedia/x265/<a href=3D"http://x265_4.3.bb=
+" rel=3D"noreferrer" target=3D"_blank">x265_4.3.bb</a><br>
+@@ -1,6 +1,6 @@<br>
+=C2=A0SUMMARY =3D &quot;H.265/HEVC video encoder&quot;<br>
+=C2=A0DESCRIPTION =3D &quot;A free software library and application for enc=
+oding video streams into the H.265/HEVC format.&quot;<br>
+-HOMEPAGE =3D &quot;<a href=3D"https://bitbucket.org/multicoreware/x265_git=
+" rel=3D"noreferrer" target=3D"_blank">https://bitbucket.org/multicoreware/=
+x265_git</a>&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/Multicorewareinc/x265" re=
+l=3D"noreferrer" target=3D"_blank">https://github.com/Multicorewareinc/x265=
+</a>&quot;<br>
+<br>
+=C2=A0LICENSE =3D &quot;GPL-2.0-only&quot;<br>
+=C2=A0LICENSE_FLAGS =3D &quot;commercial&quot;<br>
+@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM =3D &quot;file://../COPYING;md5=3Dc9e042=
+7bc58f129f99728c62d4ad4091&quot;<br>
+=C2=A0DEPENDS =3D &quot;nasm-native gnutls zlib libpcre numactl&quot;<br>
+<br>
+=C2=A0SRC_URI =3D &quot; \<br>
+-=C2=A0 =C2=A0 <a href=3D"https://download.videolan.org/pub/pub/videolan/$%=
+7BBPN%7D/$%7BBPN%7D_$%7BPV%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">=
+https://download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz</=
+a> \<br>
+-=C2=A0 =C2=A0 file://0001-json11.cpp-Include-cstdint.patch \<br>
+-=C2=A0 =C2=A0 file://0001-x265-fix-build-with-cmake-4.patch \<br>
++=C2=A0 =C2=A0 git://<a href=3D"http://github.com/Multicorewareinc/x265.git=
+;protocol=3Dhttps;branch=3Dmaster;tag=3D$%7BPV%7D" rel=3D"noreferrer" targe=
+t=3D"_blank">github.com/Multicorewareinc/x265.git;protocol=3Dhttps;branch=
+=3Dmaster;tag=3D${PV}</a> \<br>
++=C2=A0 =C2=A0 file://0001-fix-dynamicHDR10-undefined-uint8_t.patch \<br>
++=C2=A0 =C2=A0 file://0002-x265-fix-build-with-cmake-4.patch \<br>
+=C2=A0&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;40b1ea0453e0309f0eba934e0ddf533f8f6295966679e=
+8894e8f1c1c8d5e1210&quot;<br>
+-S =3D &quot;${UNPACKDIR}/x265_${PV}/source&quot;<br>
++SRCREV =3D &quot;e9b88125dc21393b3fd8d68e98083bdfb89778a8&quot;<br>
++S =3D &quot;${UNPACKDIR}/x265-${PV}/source&quot;<br>
+<br>
+=C2=A0inherit lib_package cmake pkgconfig<br>
+<br>
+@@ -30,4 +30,3 @@ PACKAGECONFIG[10bit] =3D &quot;-DHIGH_BIT_DEPTH=3DON,-DHI=
+GH_BIT_DEPTH=3DOFF&quot;<br>
+<br>
+=C2=A0FILES:${PN} +=3D &quot;${libdir}/libhdr10plus.so&quot;<br>
+=C2=A0FILES:${PN}-dev =3D &quot;${includedir} ${libdir}/pkgconfig ${libdir}=
+/libx265.so&quot;<br>
+-<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#130918): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/130918" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/130918</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121764990/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/121764990/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000054f1e8065dee6935--
 
