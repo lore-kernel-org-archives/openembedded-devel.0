@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFFD3CCA46D
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 04:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4380CC6B38
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 04:08:05 +0000 (UTC)
 Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14393.1792123671328455131
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14628.1792123683282914314
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 21:07:51 -0700
+ Thu, 15 Oct 2026 21:08:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QDEf7vdS;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=EHjGiBMa;
  spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e8fe8e343fso25665965ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 21:07:51 -0700 (PDT)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e8da6ef7ddso18588025ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 21:08:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792123671; x=1792728471; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792123683; x=1792728483; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5HOihMnDMJkcXyygoOReELhms2F3rzLvYN/eIk1Nou4=;
-        b=QDEf7vdSV991Tb0C3g4DOxrklHwsqJJQwkTJf00/LFOoBUrUGlG/27VN0pLC9RlZBi
-         jTG2df2gkaEe3CToUAn/+cGntR3I2fOwUXPQZrxThijF3TTMKPrE8fCcvDGLpq/lmMyh
-         wwRcou0S6ZIfCjTTqPeEzn2Kxus1rbqq2o2f0RNHY5DL804fQMRl3mM2I+AAPQR0+EHy
-         EPKoQzcnM5WPCApOSXVHrdgVbXlFvixlAiAylf6OlHV2Up/22h4oqZIL/Ashiblp9nyK
-         iudKtM35g3Li39NzTeMuieek9LwFXS/3Ozs+QC8Yu3/OeluNkXmNEMjdtdS+ogHNaQpt
-         udqA==
+        bh=T8NQny8DtIExJsMhNMpHX1uiWFRt6+EEd4lXjVubjLQ=;
+        b=EHjGiBMav/S7Mz/H03//YMNzQqpyN8R9DuEw1Z9A+OxF6tdT/S+KFy+CpKrayl7w6j
+         RzNFKGL6aDPvr8Dg67m5QvgeCFG2N0kuz9NYhTqrrHwr3wmV/vuM48IXN3uQAlLOInLn
+         glKHPI/LqAe/e55R5IpL8ZVUZfKO1kEHuqJQFpeqEe5Yun/1lUscGBACcHVfRv5bV5Rw
+         ED/0BI7iZvx95yuQyNqKJqrrPkF0crgyzydBJWSv++pb2y0tjE9m+KGhQaWayiDK7+Zm
+         HqrZ4rKZFDPjVT/aRwzrkcMrfRJ4F07VM/3xWVd7Hvicdp3d+T2Ph7VAIdRv2SZogEAV
+         x7LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792123671; x=1792728471;
+        d=1e100.net; s=20260707; t=1792123683; x=1792728483;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5HOihMnDMJkcXyygoOReELhms2F3rzLvYN/eIk1Nou4=;
-        b=vw3jVntZbREfOAZBmuTd1nJLt1VbOoOoNy2SpZdsJpqLOXIicbMOmHRxm3sVzY6c3u
-         mGqP8yxoVC/pW9MGT8JzCrE/vqjj8gOO7vzvJhDSUgw6uLP5Xn+BHnduwwkTIHVbhQeM
-         WW8JfDLS6SA5j6NeweYl4r91jGc5wpjuvBYrepbNxHa5ObyuuWmj4fZORvBnT5baM79f
-         qf6wHrCwL8pae5HI6MGa9dSbDQecCja9qviI8yBXP1w/ivfmHgs0digWTMbc35RtOZ09
-         G7i7NSUVLTXrDkyEuAomffkcsqmwD+RDHqrFs4G7W0B42GEfUGUuUzl/RyXN5nW7JyrP
-         ifhQ==
-X-Gm-Message-State: AFq9FYKkynQ7LFkdjLfmN3JPay8xEjH1a4010GPvk3XsonIU8M8I+VL1
-	ETHJ61aPy5QlqKYmobwhz92rYVTn6Os4XH1gmdc1Ckj6kSVzzBKee0A6noK8OQ==
-X-Gm-Gg: AYBFou3IVk82A34QKap7JXFpzJ2Jedrgd+m8CpnKueWpLWXQnBcV7kDMoaYF6FRHMsm
-	9QIdDGHaoW4EGk0gdWen9omzU/dD++oAbEawJ/MTm1zYqVGiRCbl4XL5NLtY0xL+bFCgu+Ys9OK
-	OvqEETltNPFXtp1adxI4fsRYfJsuHhxnr/ote3BJ4/GZTuwbi5EFJo/Z6XYaB1zlEOV5Ep/UJW5
-	Abua/AWp9eMs9gybjdjIpHImckWyOHuABFGgf8+WvuuPsvdf44DSOLfAtUhAx3oyet8m8HQeEHd
-	45E6Ejr7v2gBiIgsPnyH8xKGPFRZXzagYJAck43Nb3oueOqP0Hc+5q/r5Sdq1jPXKXPbOttAPs3
-	Syg87SspoZs7hyiFZ0toynfOV9d5u4AP1LoNY5A+9t3AtgPOx3WDcDFbHUzUBjBrnz/k68sVM39
-	o9TJFMcSeO6YSd91oWPDdRhe17YLGU5R4yBgT8BMNCBBlsr/hclwzgkVPnnETDSbC6F77XHmqpP
-	g4/vGuSViyp6W5LWkjy9X4pUKd8nqDD/Lu7pW0=
-X-Received: by 2002:a17:903:26c3:b0:2e2:df9c:ff71 with SMTP id d9443c01a7336-2e842ce8010mr183024005ad.49.1792123670636;
-        Thu, 15 Oct 2026 21:07:50 -0700 (PDT)
+        bh=T8NQny8DtIExJsMhNMpHX1uiWFRt6+EEd4lXjVubjLQ=;
+        b=B4O4snVjvsArx6hhhpG2aKIoMKQVffllx36tagLjGw4ZJabxHamdT4c7Yx/eQqNo6j
+         hBbAHNeVrR9fmoW82nTmDVt2mZFBUTnjF+9UG5jjQNog6EmfucO6Ys1kOqt93a+mrkDf
+         N6rW3nGARmyw6mhyirSROu7e1TW38wM9j5Y3yMZEc+lIIXp11gGCOwJvM+fkFhyBNfFg
+         eg2YJXU1W6mBILHsv3fVNusO6OoVWsVul3812g/fTYyOr7JPrPNm5CNJyhYy4qapzVMT
+         8sKjL75jQWDNnD1NvByqUmgzIovak2zIIVvgwmDpYExudS0wlBSnLkPWjQ4emxHylO6B
+         PAqA==
+X-Gm-Message-State: AFq9FYInUi6Ru8UTMi9AbH497TDpwVed2lAWIUIQGpj//+LRorKkFPWJ
+	D+ED+5F/e38hDwP3c/OJg1gzNzSavSARZ0l4pdUncwRwa+dLWE6wb61SONg1Vw==
+X-Gm-Gg: AYBFou19D9gVu5UXr11QFLJEdsDhHpAFei0yAq6M42f8Z8dQngnrCkQMQNBkKKryClN
+	Hh8pCptFMKalAljLji0h9hjewplLGk0jtj/3/H52xo0Tf+yUecS8LH+qkX41SWykDUCQ2sviaL+
+	U0UB8BI7MhVhC35PgQUFt1JanOmgjFJ8HUB101usWtWIjb0R6YxKqVV0/AtxDhKl9wuoyQiK9BT
+	DyD+LpApp9KF8M66JH3rGgKQXONSv2Fktf2ZtlUFQ6/iVhWEJPas4nEl4Ihlk0ymdmxjF45zB1G
+	/aBUrZeTJZPKjzBA9By56HxFIcsPG75te4LCTLujetEKltt0roIXs0QB5sg4BGOtoyEIB1Bhhtw
+	wkGY6ISsHp7R7zQO4YxtRjJkZddbR6z++CMj8nb203gYysmdZlap84tuCJ10GdXohWFLK7Czc+s
+	/gAI5rJLRg+VAdMV+YvsrFH0gTdfSewFzUqtkQH7+eVVl5II9er40E18GT75WTUxGBFqQF/Kmh6
+	5mmwYqpcmtL3zApRy6MlrtVvHI6NI0RQpcZPYI=
+X-Received: by 2002:a17:903:38c4:b0:2dd:c100:4257 with SMTP id d9443c01a7336-2e842f11875mr181085725ad.59.1792123682506;
+        Thu, 15 Oct 2026 21:08:02 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e97e83498csm3796335ad.35.2026.10.15.21.07.48
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e97e83498csm3796335ad.35.2026.10.15.21.08.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 21:07:49 -0700 (PDT)
+        Thu, 15 Oct 2026 21:08:02 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 4/10] python3-cbor2: upgrade 6.1.4 -> 6.1.5
-Date: Fri, 16 Oct 2026 17:07:28 +1300
-Message-ID: <20261016040734.1499287-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 10/10] python3-simpleeval: upgrade 1.0.7 -> 1.0.8
+Date: Fri, 16 Oct 2026 17:07:34 +1300
+Message-ID: <20261016040734.1499287-10-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261016040734.1499287-1-ankur.tyagi85@gmail.com>
 References: <20261016040734.1499287-1-ankur.tyagi85@gmail.com>
@@ -67,34 +67,63 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 04:07:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131040
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 04:08:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131046
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/agronholm/cbor2/releases/tag/6.1.5
+https://github.com/danthedeckie/simpleeval/releases/tag/1.0.8
+
+PTEST pass:
+
+root@qemux86-64:~# ptest-runner python3-simpleeval
+START: ptest-runner
+2026-10-16T03:38
+BEGIN: /usr/lib/python3-simpleeval/ptest
+...
+Testsuite summary
+# TOTAL: 164
+# PASS: 164
+# SKIP: 0
+# XFAIL: 0
+# FAIL: 0
+# XPASS: 0
+# ERROR: 0
+DURATION: 12
+END: /usr/lib/python3-simpleeval/ptest
+2026-10-16T03:38
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-cbor2_6.1.4.bb => python3-cbor2_6.1.5.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_6.1.4.bb => python3-cbor2_6.1.5.bb} (87%)
+ ...thon3-simpleeval_1.0.7.bb => python3-simpleeval_1.0.8.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-simpleeval_1.0.7.bb => python3-simpleeval_1.0.8.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-index 6a894848d6..94d3f30dbb 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-python/recipes-devtools/python/python3-simpleeval_1.0.7.bb b/meta-python/recipes-devtools/python/python3-simpleeval_1.0.8.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-simpleeval_1.0.7.bb
+rename to meta-python/recipes-devtools/python/python3-simpleeval_1.0.8.bb
+index a4fa42ba28..9af99be801 100644
+--- a/meta-python/recipes-devtools/python/python3-simpleeval_1.0.7.bb
++++ b/meta-python/recipes-devtools/python/python3-simpleeval_1.0.8.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/simpleeval/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=aed013161b2a0bfa75e69eeb4e8a89e7"
  
--SRC_URI[sha256sum] = "01ecc79a28f33d17331943ce508fc1e21f4b06553c73f874f4c77120d72b2ef9"
-+SRC_URI[sha256sum] = "6eb06160c42315ac0c4ded461c7d84d92fa18c69d13d17fc1dfc1fae96580c95"
+-SRC_URI[sha256sum] = "1e10e5f9fec597814444e20c0892ed15162fa214c8a88f434b5b077cf2fef85b"
++SRC_URI[sha256sum] = "b417f869c11f2de034eb919820a825f35d12ce99f63a43971947ce73679eb9ba"
  
- inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
+ CVE_PRODUCT = "danthedeckie:simpleeval"
  
+@@ -16,5 +16,6 @@ RDEPENDS:${PN} += " \
+ "
+ 
+ do_install_ptest:append() {
+-	cp -f ${S}/test_simpleeval.py ${D}${PTEST_PATH}/
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
 
