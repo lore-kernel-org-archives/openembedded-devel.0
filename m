@@ -2,75 +2,76 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4145CCA46C
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 03:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95B83CCA46D
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 03:21:03 +0000 (UTC)
 Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.13829.1792120857841685084
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 15 Oct 2026 20:20:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=PyZH5MbX;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=PauoYPJp;
  spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4644; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=4586; q=dns/txt;
   s=iport01; t=1792120858; x=1793330458;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=f3sHwzXof3eLH70O0mQVLJyuJm6l6M66GKmd6wOLqHs=;
-  b=PyZH5MbXHo/lD7MV+GMWxqxHpgAgPe16qbZG9uSaHHVOsUYvFKAXVWaB
-   1BNA7L7WGC3OfzVgWyeUYb/V8rauZbhM0NX6sQcdmcCBYOQyGIjCapsRP
-   K17LJypqXWOutikZwB0sQylrOPUNue3+gX44mJR67Tu/twOuItT8EdfQr
-   LOF8nrQkIyO3g3u+BzS9ftVZtFHv4VKeVR6edpp3Vg2FhiiVbfsibMhP0
-   kBcQTSFMjPxLxF1j90K9EY7LLqSRtd8/QGRDkCBrJZ4kbqHvgZNChCGfA
-   BEGNJ5sf696rQcmRo6Qm6cErWKHa8rh+Na8Gj5+LQeMDsOxqITzJxgZAS
-   A==;
-X-CSE-ConnectionGUID: KkiLV0/BSOyAxu9rqHGoVw==
-X-CSE-MsgGUID: HTVclbeVQaC35HIC+7wmxA==
-X-IPAS-Result: =?us-ascii?q?A0CmAgBtltFq/5T/Ja1aglmCV3VgQ0kDjVeIBGwDnhwUg?=
- =?us-ascii?q?WoPAQEBD0QNBAEBhQUCjhUCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4Thk8NkBIBAgEDJwsBGAEtEBwDAQIvKyMIGYMCAYJ0AxEGvHOBe?=
- =?us-ascii?q?TOBAYMpAYFU2zIBCxQBBYEzhUCII10YAYR8JxsbgXKBFYNpgQWBXAEBAYFGh?=
- =?us-ascii?q?l4EgiKBDIFaiDmNDkiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGB?=
- =?us-ascii?q?YEdgSCCFiMZNnqBCV6BKylgARAXgQmCBwKCVIIAAgFJQQ4HRVMJJUMSRyYiC?=
- =?us-ascii?q?BIJARMaMAuBGzg8CShBFwxzDB0FcggCDQkHKRgNSBEsNxUZBD5uB5ITHoJeB?=
- =?us-ascii?q?z1RARMWAQGBNBEmk1KSZKEPCiiDdowilToaM6pvC5h9jgqVf1CEaYFoPIFZc?=
- =?us-ascii?q?BWDIglKGQ+OLgEKC4NghRPJRycyAgkDLwEBBwIHDgMLgWiRfgEB?=
-IronPort-Data: A9a23:qbJEAKA2yb63eBVW/3jiw5YqxClBgxIJ4kV8jS/XYbTApDtw0TRTm
- zBLXT2FbPncNzSkLot0btzl9koAu5LWn98xOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGcYZsCCCM/n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
- fuo+5eBYQf8hWYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE4PZvKH9ueqcj3fdeEXwf7
- +U4BzczcUXW7w626OrTpuhEnM8vKozveYgYoHwllGifBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGY/BPjDS0Un1lM/CI4+leShnFH0ciZTrxSeoq9fD237kVYogeaybYWEEjCMbeVpoE2cr
- G/4xm3SWUw6FffcliWA4lv504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
- UsM9ywjqKI/+ECmQp/6RRLQnZKflgQXV9wVF6gx7xuAj/ONpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOf9pa61nltMkQ6PBA==
-IronPort-HdrOrdr: A9a23:F7pdEahTwT2Xd3mDrwjtcrDV8HBQXgIji2hC6mlwRA09TyVXra
- +TdZMgpHjJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7dZmnbUQKTRekIh7cKgQeQfhEWndQy6U
- 4PScRD4fTLfD5HZL7BkWqFOudl5sWb+6a1guqb5XJsQQZ2L5xE1W5Ce3+m+okcfng8OXL/f6
- DsnvZ6mw==
-X-Talos-CUID: 9a23:o1jFNmONI9206e5Deypm0HBMXeoeVWz03GqBOVaYJmFXV+jA
-X-Talos-MUID: 9a23:VVIFyQbJBCyaXeBTlwPSjzVoOflR6o/1VWAsutZZpMyUHHkl
+  bh=slGCACfh5mbyp01uZccU+kDlq3gFL8bRLsQ4J/QbOjc=;
+  b=PauoYPJpH9wgkyJouFXXiDrImtwemItcDfNbxuEb8X7TK9kGCOhR4/ay
+   vkhIwJ4ekBPh+EWxS2tEdu65eB06Buoz5C3j6mk0U3hFpWadu+in4E/v5
+   /KC8xROg+nfrfz1m/ujEKCf4Ng1qv9Jf2lYSkI9/xAQvgUy/2X9kwQrsN
+   32C7fRPDJxsgvRmEdDszn1gaNT/hy9RazKZvrjfikA9eOr4dw+HwiVGMU
+   UUciedzB7FQJQrP/JRK2mOTDI+ePxfW9m7dK8L4dLqK/qQardZTqkskeS
+   LAwmReHF+uhbKtLQXiyNp101hzE9E2kK4KL9j8x+tg61GbQnuFElRI5d9
+   g==;
+X-CSE-ConnectionGUID: +kyccNshTBqdSjuF65Yn/w==
+X-CSE-MsgGUID: x/kZ34XRRm2c9aMT+NfLgA==
+X-IPAS-Result: =?us-ascii?q?A0C+AgBtltFq/4v/Ja1aHgEBCxIMggULgld1YENJA41Xi?=
+ =?us-ascii?q?ARsA4ETilKSN4F+DwEBAQ9EDQQBAYUFAo4VAiY0CQ4BAgQDAgMBAQEBAQEBA?=
+ =?us-ascii?q?QEBAQEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBAycLARgBLRAcAwECLyALIwgZg?=
+ =?us-ascii?q?wIBgjoDNwMRBrxzgXkzgQGDKQGBVNhLDYJaAQsUAQWBM4VAgn+FJF0YAYR8J?=
+ =?us-ascii?q?xsbgXKBFYJzdoEFgRpCAQEBiCQEgiKBDIFalUdIgR4DWSwBVRMNCgsHBYFoA?=
+ =?us-ascii?q?zUSKhVuMh2BIz4XgQcbBgWBHYEgghYjGTZ6gQlegSspYAEQF4EJggcCglSCA?=
+ =?us-ascii?q?AIBSUEOB0VTCSVDEkcmIggSCQETGjALgRs4PAkoQRcMcwwdBXIIAg0JBykYD?=
+ =?us-ascii?q?UgRLDcVGQQ+bgeSEx6CZRYbDFEBKQEBgWsYk2AIkjagHnEKKIN2jCKPPoV8G?=
+ =?us-ascii?q?jOEBJQXklQLmH2OCoQJkkaEaYFoPIFZcBWDIglKGQ+OKwQKC4NghRPJRycyA?=
+ =?us-ascii?q?gkDLwEBBwIHDgMLgWiRfgEB?=
+IronPort-Data: A9a23:wq8iNaNKfqzs4brvrR30lsFynXyQoLVcMsEvi/4bfWQNrUp20TJTy
+ mJKCmyOb/yLYzehc9t0aYjn9xgD7ZXWxtUyGXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
+ ykmQoCeap1yFjmD9k/F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
+ e/a+ZWFZgb9gmAsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
+ 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj67ZtHUo9G5YYxsxuDVpM6
+ NJGdQELKQ/W0opawJrjIgVtrt4oIM+uOMYUvWttiGmDS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
+ ZdEL2M0PXwsYDUXUrsTIJIinO6rj2PXeDxDo1XTrq0yi4TW5FEriemzb4eKKrRmQ+1F2UWq/
+ T72xV78WBpLPfmjihyL1n2F07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
+ AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++MuUCSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:HMtJyaxWkUHBI9RzV+oyKrPw9L1zdoMgy1knxilNoNJuHfBw8P
+ re+8jzuiWUtN98YhwdcJW7Scu9qBDnhPpICPcqXYtKNTOO0ADDEGgh1/qG/9SKIUPDH4BmuZ
+ uIWpIObuEYdWIK7vrS0U2fD8sqxsWB/eSDgOfTyGoocCRRApsQljuQzm2gYzZLrM4sP+tAKK
+ ah
+X-Talos-CUID: 9a23:0pLXyG1io7a72Vtmafp0brxfWcM0eXb713fsCVa0MmR0ZuPIeFnX5/Yx
+X-Talos-MUID: 9a23:kywYEAvGYiETfTlPGs2nlHZhBpw0056UDRoGwJwjh4qiOwh/EmLI
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="521967579"
-Received: from rcdn-l-core-11.cisco.com ([173.37.255.148])
+   d="scan'208";a="521967578"
+Received: from rcdn-l-core-02.cisco.com ([173.37.255.139])
   by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 03:20:57 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-11.cisco.com (Postfix) with ESMTPS id 412181800024A;
-	Fri, 16 Oct 2026 03:20:57 +0000 (GMT)
+	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id D19BD180000F5;
+	Fri, 16 Oct 2026 03:20:56 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 9411DCBEFBF; Thu, 15 Oct 2026 20:20:56 -0700 (PDT)
+	id 794E9CBF202; Thu, 15 Oct 2026 20:20:56 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-webserver][wrynose][PATCH 09/11] nginx: fix CVE-2026-56434
-Date: Thu, 15 Oct 2026 20:20:54 -0700
-Message-Id: <20261016032056.409095-10-hthakar@cisco.com>
+Subject: [meta-webserver][wrynose][PATCH 02/11] nginx: fix CVE-2026-42934
+Date: Thu, 15 Oct 2026 20:20:47 -0700
+Message-Id: <20261016032056.409095-3-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261016032056.409095-1-hthakar@cisco.com>
 References: <20261016032056.409095-1-hthakar@cisco.com>
@@ -79,127 +80,136 @@ Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: rcdn-l-core-11.cisco.com
+X-Outbound-Node: rcdn-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 03:21:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131032
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 03:21:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131030
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
 This patch applies the upstream fix as referenced in [2],
 using the commit shown in [1].
 
-[1] https://github.com/nginx/nginx/commit/ddde692db11ab8238e9ca661007f64c9f6d764d2
+[1] https://github.com/nginx/nginx/commit/54b7945961b2eaafc480d6b85d9635d0db1c126a
 [2] https://nginx.org/en/security_advisories.html
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../nginx/files/CVE-2026-56434.patch          | 71 +++++++++++++++++++
+ .../nginx/files/CVE-2026-42934.patch          | 80 +++++++++++++++++++
  .../recipes-httpd/nginx/nginx_1.28.3.bb       |  1 +
  .../recipes-httpd/nginx/nginx_1.29.7.bb       |  1 +
- 3 files changed, 73 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-56434.patch
+ 3 files changed, 82 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-42934.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-56434.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-56434.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-42934.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-42934.patch
 new file mode 100644
-index 0000000000..ccf19a7745
+index 0000000000..5ae96e8372
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-56434.patch
-@@ -0,0 +1,71 @@
-+From ddde692db11ab8238e9ca661007f64c9f6d764d2 Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Mon, 29 Jun 2026 21:49:27 +0400
-+Subject: [PATCH] Avoid duplicate subrequest finalization
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-42934.patch
+@@ -0,0 +1,80 @@
++From 54b7945961b2eaafc480d6b85d9635d0db1c126a Mon Sep 17 00:00:00 2001
++From: David Carlier <devnexen@gmail.com>
++Date: Sun, 12 Apr 2026 07:13:23 +0100
++Subject: [PATCH] Charset: fix buffer over-read in recode_from_utf8().
 +
-+Previously, if a subrequest was posted twice, it could be finalized in
-+both calls, excessively reducing r->main->count and potentially leading
-+to a use-after-free.
++When a multi-byte UTF-8 character was split across 3+ single-byte
++buffers, the saved bytes continuation path had two related bugs:
 +
-+The fix is to avoid posting a request if it's already posted.  Also,
-+as a hardening measure, r->write_event_handler is now reset to a no-op
-+handler during active subrequest finalization.
++ngx_utf8_decode() was called with the last saved-array index instead
++of the byte count, causing it to report "incomplete" even when the
++sequence was already complete.
 +
-+The problem manifests itself in ngx_http_ssi_filter_module during
-+unbuffered proxying.  If a subrequest is created for an SSI include
-+statement while the main request has some data postponed by another
-+include, this subrequest becomes double-posted when the main request
-+data is flushed.  The first post comes from ngx_http_subrequest() and
-+the second one comes from ngx_http_postpone_filter().  In case of a
-+quick subrequest finalization, the above mentioned problem happens.
++The subsequent ngx_memcpy() used that same index as the copy length,
++reading past the input buffer boundary.
 +
-+Reported by P4P3R-HAK.
++CVE: CVE-2026-42934
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/54b7945961b2eaafc480d6b85d9635d0db1c126a]
 +
-+CVE: CVE-2026-56434
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/ddde692db11ab8238e9ca661007f64c9f6d764d2]
-+
-+(cherry picked from commit ddde692db11ab8238e9ca661007f64c9f6d764d2)
++(cherry picked from commit 54b7945961b2eaafc480d6b85d9635d0db1c126a)
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/http/ngx_http_request.c | 12 ++++++++++--
-+ 1 file changed, 10 insertions(+), 2 deletions(-)
++ .../modules/ngx_http_charset_filter_module.c  | 20 ++++++-------------
++ 1 file changed, 6 insertions(+), 14 deletions(-)
 +
-+diff --git a/src/http/ngx_http_request.c b/src/http/ngx_http_request.c
-+index ceac8d307..6dc275757 100644
-+--- a/src/http/ngx_http_request.c
-++++ b/src/http/ngx_http_request.c
-+@@ -2501,6 +2501,14 @@ ngx_http_post_request(ngx_http_request_t *r, ngx_http_posted_request_t *pr)
-+ {
-+     ngx_http_posted_request_t  **p;
++diff --git a/src/http/modules/ngx_http_charset_filter_module.c b/src/http/modules/ngx_http_charset_filter_module.c
++index 482960040..edb2db568 100644
++--- a/src/http/modules/ngx_http_charset_filter_module.c
+++++ b/src/http/modules/ngx_http_charset_filter_module.c
++@@ -689,7 +689,6 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
++     u_char        c, *p, *src, *dst, *saved, **table;
++     uint32_t      n;
++     ngx_buf_t    *b;
++-    ngx_uint_t    i;
++     ngx_chain_t  *out, *cl, **ll;
 + 
-++    for (p = &r->main->posted_requests; *p; p = &(*p)->next) {
-++        if ((*p)->request == r) {
-++            ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-++                           "http request already posted");
-++            return NGX_OK;
-++        }
-++    }
-++
-+     if (pr == NULL) {
-+         pr = ngx_palloc(r->pool, sizeof(ngx_http_posted_request_t));
-+         if (pr == NULL) {
-+@@ -2511,8 +2519,6 @@ ngx_http_post_request(ngx_http_request_t *r, ngx_http_posted_request_t *pr)
-+     pr->request = r;
-+     pr->next = NULL;
++     src = buf->pos;
++@@ -783,18 +782,12 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
++     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, pool->log, 0,
++                    "http charset utf saved: %z", ctx->saved_len);
 + 
-+-    for (p = &r->main->posted_requests; *p; p = &(*p)->next) { /* void */ }
++-    p = src;
 +-
-+     *p = pr;
++-    for (i = ctx->saved_len; i < NGX_UTF_LEN; i++) {
++-        ctx->saved[i] = *p++;
++-
++-        if (p == buf->last) {
++-            break;
++-        }
++-    }
+++    len = ngx_min(NGX_UTF_LEN - ctx->saved_len, (size_t) (buf->last - src));
+++    ngx_memcpy(&ctx->saved[ctx->saved_len], src, len);
+++    len += ctx->saved_len;
 + 
-+     return NGX_OK;
-+@@ -2632,6 +2638,8 @@ ngx_http_finalize_request(ngx_http_request_t *r, ngx_int_t rc)
++     saved = ctx->saved;
++-    n = ngx_utf8_decode(&saved, i);
+++    n = ngx_utf8_decode(&saved, len);
 + 
-+             r->main->count--;
++     c = '\0';
 + 
-++            r->write_event_handler = ngx_http_request_empty_handler;
-++
-+             if (pr->postponed && pr->postponed->request == r) {
-+                 pr->postponed = pr->postponed->next;
-+             }
++@@ -810,7 +803,7 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
++ 
++         /* incomplete UTF-8 symbol */
++ 
++-        if (i < NGX_UTF_LEN) {
+++        if (len < NGX_UTF_LEN) {
++             out = ngx_http_charset_get_buf(pool, ctx);
++             if (out == NULL) {
++                 return NULL;
++@@ -823,8 +816,7 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
++             b->sync = 1;
++             b->shadow = buf;
++ 
++-            ngx_memcpy(&ctx->saved[ctx->saved_len], src, i);
++-            ctx->saved_len += i;
+++            ctx->saved_len = len;
++ 
++             return out;
++         }
 +-- 
 +2.35.6
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-index bcceedf820..56050b84eb 100644
+index 25493be747..25d8784c48 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-@@ -14,6 +14,7 @@ SRC_URI:append = " \
-     file://CVE-2026-42533_p3.patch \
-     file://CVE-2026-42533_p4.patch \
-     file://CVE-2026-42533_p5.patch \
-+    file://CVE-2026-56434.patch \
+@@ -2,6 +2,7 @@ require nginx.inc
+ 
+ SRC_URI:append = " \
+     file://CVE-2026-40701.patch \
++    file://CVE-2026-42934.patch \
  "
  
  LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-index 1e0b889dcd..68015a12fa 100644
+index c8881a320e..ae7bfaee9f 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-@@ -14,6 +14,7 @@ SRC_URI:append = " \
-     file://CVE-2026-42533_p3.patch \
-     file://CVE-2026-42533_p4.patch \
-     file://CVE-2026-42533_p5.patch \
-+    file://CVE-2026-56434.patch \
+@@ -2,6 +2,7 @@ require nginx.inc
+ 
+ SRC_URI:append = " \
+     file://CVE-2026-40701.patch \
++    file://CVE-2026-42934.patch \
  "
  
  # 1.28.x branch is the current stable branch, the recommended default
