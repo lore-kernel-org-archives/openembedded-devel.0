@@ -2,257 +2,148 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC964CCA48B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D09E2CCA491
 	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 02:33:31 +0000 (UTC)
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13504.1792118004184969055
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13503.1792118004136979182
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 15 Oct 2026 19:33:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=HJMciRDi;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=cWUvbIWF;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=6449; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=2653; q=dns/txt;
   s=iport01; t=1792118004; x=1793327604;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=XCoAi8D7PsKTxQeVmE8o+s3x/OLyvZ0IqTTbOwydLCA=;
-  b=HJMciRDiQmwd+vNrp5N6OjCGoqgxB6Kl+0+y9zhw42f2UnPpnyvkHevt
-   GXpXQfhApRuwOMI+fWX+sgZZSkPgcbEp2adWhOPOlcCQrEmHaTv0e0sqg
-   adogTOHO9dkc5qnPLjn9qTKWq23mNLpwxJ2tegAXbxnM8eeUkf34a66DO
-   8STFfwDnJUf9jY2nuIQvsDVN3wdYl7o+2lBNkN9rIdiOvHAmgevIGUPYH
-   ydGJyXNPDGKuEqFI5helRMeW/40lgkIDXuXEZcUgvnPaesolzUNZyfgyK
-   qyzpzxX5cEju5DYyoF9pWDdvWUlSaPhbOwIUEVZYnCjVg4fp+GGv9nvxH
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=0n/6+9+5uSWUsqv2ccszKoideczniJ1KkOUoo0q9hQM=;
+  b=cWUvbIWFMCRG1Fyk6rNWrtuipJ2CzuNHVYZWfW2jSQWRu/DwqyYctHEl
+   qlD7l8HbrdU07gYy5s/RCBle9I3h1+LjQ++kz2tomt88QL8Y21j1AbOPi
+   gqUpYxBoJfKIXI0wggQlqEtGOfilVzf02EvZ09sgNrdyakMmXHLbJyWbc
+   0VHAMxWNA0q0Xylh7rAKVvJ0/aS49TkAf9CUz+5wR3NrFhGvJ4ry7uXU+
+   sGYi1C1nfcS7TeqyOMwU5o10H4YMpA0wJym3UpW/35zlX4nLsxzkNf/pa
+   aEeDxu6gE+wEqMYnwx2Y58/BPSVU9rH3rV/ItQvMAl7o5ENEVOgxYIobk
    A==;
-X-CSE-ConnectionGUID: MiP1JT3FTFCtscxrq5m6wQ==
-X-CSE-MsgGUID: lC240llRRLWBGBMvT+/57A==
-X-IPAS-Result: =?us-ascii?q?A0BLAgDZi9Fq/5L/Ja1aglmCV3VgQ0kDhFSRcwOeHIF+D?=
- =?us-ascii?q?wEBAQ9EDQQBAYUFAo4VAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
- =?us-ascii?q?gEHBYEOE4ZPDZASAQIBAyMECwEYAS0QHAMBAgMCJgICKyMIEAmDAgGCdAMRv?=
- =?us-ascii?q?Gd6fzOBAYMpAYFU2zIBCxQBBYEFLoVAgx8BhQNdGAGEfCcbG4FygRWDaYEFg?=
- =?us-ascii?q?VwCgSeEFIJqBIIigQyBWh6VKUiBAhwDWSwBVRMNCgsHBYFoAzUSKhVuMh2BI?=
- =?us-ascii?q?z4XL1gbBgWBHYEgghYjGTZ6gQlegSspYAEQF4EJggcCglSCAAIBSUEOB0VTC?=
- =?us-ascii?q?SVDEkcmIggSCQETGjALgRs4PAkoQRcMcwwdBXIIAg0JBykYDUgRLDcVGQQ9A?=
- =?us-ascii?q?W4HkhMegmUHKl0BKwR7gS0epVehDwoog3aMIpU6GjOqbwuYfY4Klk+EaYFoP?=
- =?us-ascii?q?IFZcBWDIglKGQ+OOYNrzlonMgIJAy8BAQcCBwEMAQMLgWiQAIF+AQE?=
-IronPort-Data: A9a23:RLGMtKrB2gbHw0oezLgylGdH33JeBmJJZBIvgKrLsJaIsI4StFCzt
- garIBmCOvjcMzD0L4t3a4vio0MBv8PXx9YwG1M/+yowECsWoOPIVI+TRqvS04x+DSFioGZPt
- Zh2hgzodZhsJpPkjk7zdOWn9T8jhfngqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
- T/Ji5OZYgDNNwJcaDpOtfvb8U035ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
- 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
- I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0sN2OThsy
- ac2FB4mcguIl/ivnbflVdA506zPLOGzVG8ekmtrwTecCbMtRorOBv2bo9RZxzw3wMtJGJ4yZ
- eJANmEpN0uGOUASfA5LVvrSn8/w7pX7Wz1EqFuWrLAf6GnIxws327/oWDbQUoHQHJQIwB/I/
- Qoq+Uz9KUtGbNib8wChzViDrMrRoWC8Bd07QejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
- lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sZOZottdQ9Qnoh0
- Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
-IronPort-HdrOrdr: A9a23:RhqSIqkWsRyKsHmq45sGBK65ZPDpDfLy3DAbv31ZSRFFG/FwWf
- rAoB19726TtN9xYgBGpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdAUrsD0WKK+VSJcEfDH6xmpM
- JdmsNFZuEYY2IXsS/S2njALz9Z+qjlzImYwcHD0nxqUQZmL4tk7wt/F0KnN3cefng/OXL8f6
- DsnPauYFGbCA8qUvg=
-X-Talos-CUID: 9a23:WZhhwW8/aNBq5+4JZTOVv2sVIpkHTibz8Fn7P1SzGXxwFbjLVmbFrQ==
-X-Talos-MUID: 9a23:0nIfRARGUOmeRor0RXTor2s+bMNs2Z6KN2oiu7AYh4rDaHNZbmI=
+X-CSE-ConnectionGUID: QrZ22wAnRpKuM0aAowKtDg==
+X-CSE-MsgGUID: XtMeh2JmTh+iFWFaegSl0A==
+X-IPAS-Result: =?us-ascii?q?A0BbAwDZi9Fq/5D/Ja1aglmDTGBDSZNZAYJwnh+Bfg8BA?=
+ =?us-ascii?q?QEPNxoEAQGFBY4XAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZckBU2ARgBLTBcRIMCAYJ0A7x4giyBAYMpAYFU2z4VBYEzhUCII3aEf?=
+ =?us-ascii?q?CcbG4FyhH6ECoEGhXgEgiJ6EoJdlERIgR4DWSwBVRMNCgsHBYFoAzUSKhVuM?=
+ =?us-ascii?q?h2BIz4XgQcbBgWBHYEgghYjGTZ6gQlegSspYAEQF4EJggcCglSCAAIBSUEOB?=
+ =?us-ascii?q?0VTCSVDEkcmIggSCQETGjALgRs4PAkoQRcMcwwdBXIIAg0JBykYDUgRLDcVG?=
+ =?us-ascii?q?QQ+bgeSEx6CMTQWeTCCJwWlcKEPCiiDdowilToaM6pvmQikWYRpgWg8gVlwF?=
+ =?us-ascii?q?TuCZwlKGQ/gficyAjsCBwIHDgMLkWgCJgeBTwEB?=
+IronPort-Data: A9a23:PEuLz6vfMWNg8fXdxrDatLSmQOfnVAdfMUV32f8akzHdYApBsoF/q
+ tZmKTyCPP7bYjH0fdp+OY+x9EgO7Z7czYNkHlFt+Hs3RC9AgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrb/656yYsjclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFZzdJ5xYuajhKsvra9ks21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIww/xFWztR3
+ PoiMBMQS0iKruWp466XRbw57igjBJGD0II3oHpsy3TdSP0hW52GG/qM7t5D1zB2jcdLdRrcT
+ 5NGMnw0M1KaPkAJYwtLYH49tL/Aan3XcyFYoVGcv4I84nPYy0p6172F3N/9J4fXFJoPzh3Cz
+ o7A11TlJxwabv6a9TrG81yTqObCkhj/AKtHQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
+ UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YeLtcnr8QxAzct0
+ zdlgu/UONCmi5XNIVr1y1tehWna1fQ9RYPaWRI5cA==
+IronPort-HdrOrdr: A9a23:dgJ+B67my3DTSn9XzwPXwOTXdLJyesId70hD6qm+c3Nom6uj5q
+ WTdZsgtCMc5Ax9ZJhCo6HjBED/exPhHPdOiOF7V4tKNzOJhILHFu1fBKLZslnd8lXFh41g/J
+ YlVbRiA9vtClU/p8P77A6kV+sE+rC8gceVbSO09QYVcemsAJsQiTtENg==
+X-Talos-CUID: 9a23:Prs4s27/uOEnaOm/WtsszVQmQJo6W3vn1FTNBhexIGF2a6G5RgrF
+X-Talos-MUID: 9a23:ZPus8QoEkqnILkr0mdcezwF+EcpouYarNEBOkLs5lcCJOhd0Yx7I2Q==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="521956183"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 02:33:23 +0000
+   d="scan'208";a="535972832"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 02:33:23 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id 1ADB818000497;
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 1702D1800049D;
 	Fri, 16 Oct 2026 02:33:23 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id B70CACBF201; Thu, 15 Oct 2026 19:33:22 -0700 (PDT)
+	id B30C0CC1611; Thu, 15 Oct 2026 19:33:22 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-python][wrynose][PATCH 1/9] python3-pyjwt: fix CVE-2026-103001
-Date: Thu, 15 Oct 2026 19:33:14 -0700
-Message-Id: <20261016023322.344365-2-hthakar@cisco.com>
+Subject: [meta-python][wrynose][PATCH 0/9] python3-pyjwt: Security fixes
+Date: Thu, 15 Oct 2026 19:33:13 -0700
+Message-Id: <20261016023322.344365-1-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261016023322.344365-1-hthakar@cisco.com>
-References: <20261016023322.344365-1-hthakar@cisco.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 02:33:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131014
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131015
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-This patch applies the upstream fix as referenced in [2], using the
-commit shown in [1].
+  Use this body before the automatically generated patch list and diffstat:
 
-[1] https://github.com/jpadilla/pyjwt/commit/0c87c8c8b1a74cac99ad8115f3050efcb7fbed35
-[2] https://github.com/jpadilla/pyjwt/security/advisories/GHSA-gvp8-978c-rx2q
+  This series backports the upstream PyJWT security fixes for the
+  following CVEs to python3-pyjwt 2.12.1:
 
-Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
----
- .../python/files/CVE-2026-103001.patch        | 128 ++++++++++++++++++
- .../python/python3-pyjwt_2.12.1.bb            |   2 +-
- 2 files changed, 129 insertions(+), 1 deletion(-)
+  - CVE-2026-101917
+  - CVE-2026-101918
+  - CVE-2026-102267
+  - CVE-2026-102268
+  - CVE-2026-102269
+  - CVE-2026-102270
+  - CVE-2026-102271
+  - CVE-2026-102274
+  - CVE-2026-102275
+  - CVE-2026-103001
+
+  CVE-2026-102268 and CVE-2026-102270 are addressed by the same
+  upstream commit and are therefore included in one patch.
+
+  Each fix was selected from the upstream commit referenced by its
+  corresponding PyJWT security advisory.
+
+  Validation performed:
+
+  - The complete series applies cleanly to the Wrynose branch.
+  - bitbake python3-pyjwt -c patch -f completed successfully.
+  - bitbake core-image-minimal completed successfully.
+
+Hetvi Thakar (9):
+  python3-pyjwt: fix CVE-2026-103001
+  python3-pyjwt: fix CVE-2026-102274
+  python3-pyjwt: fix CVE-2026-102269
+  python3-pyjwt: fix CVE-2026-102267
+  python3-pyjwt: fix CVE-2026-102268 and CVE-2026-102270
+  python3-pyjwt: fix CVE-2026-102271
+  python3-pyjwt: fix CVE-2026-101917
+  python3-pyjwt: fix CVE-2026-102275
+  python3-pyjwt: fix CVE-2026-101918
+
+ .../python/files/CVE-2026-101917.patch        | 311 ++++++++++++++++++
+ .../python/files/CVE-2026-101918.patch        | 122 +++++++
+ .../python/files/CVE-2026-102267.patch        | 223 +++++++++++++
+ .../CVE-2026-102268_CVE-2026-102270.patch     | 113 +++++++
+ .../python/files/CVE-2026-102269.patch        | 133 ++++++++
+ .../python/files/CVE-2026-102271.patch        | 136 ++++++++
+ .../python/files/CVE-2026-102274.patch        |  63 ++++
+ .../python/files/CVE-2026-102275.patch        |  82 +++++
+ .../python/files/CVE-2026-103001.patch        | 128 +++++++
+ .../python/python3-pyjwt_2.12.1.bb            |  10 +-
+ 10 files changed, 1320 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-101917.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-101918.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102267.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102268_CVE-2026-102270.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102269.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102271.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102274.patch
+ create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-102275.patch
  create mode 100644 meta-python/recipes-devtools/python/files/CVE-2026-103001.patch
 
-diff --git a/meta-python/recipes-devtools/python/files/CVE-2026-103001.patch b/meta-python/recipes-devtools/python/files/CVE-2026-103001.patch
-new file mode 100644
-index 0000000000..66e4aafcb7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/files/CVE-2026-103001.patch
-@@ -0,0 +1,128 @@
-+From 0c87c8c8b1a74cac99ad8115f3050efcb7fbed35 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Jos=C3=A9=20Padilla?= <jpadilla@webapplicate.com>
-+Date: Tue, 8 Sep 2026 15:10:07 -0400
-+Subject: [PATCH] Merge commit from fork
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Co-authored-by: José Padilla <jpadilla@users.noreply.github.com>
-+
-+CVE: CVE-2026-103001
-+Upstream-Status: Backport [https://github.com/jpadilla/pyjwt/commit/0c87c8c8b1a74cac99ad8115f3050efcb7fbed35]
-+
-+(cherry picked from commit 0c87c8c8b1a74cac99ad8115f3050efcb7fbed35)
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
-+---
-+ jwt/api_jwt.py        | 20 +++++++++-------
-+ tests/test_api_jwt.py | 56 +++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 67 insertions(+), 9 deletions(-)
-+
-+diff --git a/jwt/api_jwt.py b/jwt/api_jwt.py
-+index 429c2d7..f298ea9 100644
-+--- a/jwt/api_jwt.py
-++++ b/jwt/api_jwt.py
-+@@ -76,16 +76,18 @@ class PyJWT:
-+         if options is None:
-+             return self.options
-+ 
-++        merged_options = cast("Options", dict(options))
-++
-+         # (defensive) set defaults for verify_x to False if verify_signature is False
-+-        if not options.get("verify_signature", True):
-+-            options["verify_exp"] = options.get("verify_exp", False)
-+-            options["verify_nbf"] = options.get("verify_nbf", False)
-+-            options["verify_iat"] = options.get("verify_iat", False)
-+-            options["verify_aud"] = options.get("verify_aud", False)
-+-            options["verify_iss"] = options.get("verify_iss", False)
-+-            options["verify_sub"] = options.get("verify_sub", False)
-+-            options["verify_jti"] = options.get("verify_jti", False)
-+-        return {**self.options, **options}
-++        if not merged_options.get("verify_signature", True):
-++            merged_options["verify_exp"] = merged_options.get("verify_exp", False)
-++            merged_options["verify_nbf"] = merged_options.get("verify_nbf", False)
-++            merged_options["verify_iat"] = merged_options.get("verify_iat", False)
-++            merged_options["verify_aud"] = merged_options.get("verify_aud", False)
-++            merged_options["verify_iss"] = merged_options.get("verify_iss", False)
-++            merged_options["verify_sub"] = merged_options.get("verify_sub", False)
-++            merged_options["verify_jti"] = merged_options.get("verify_jti", False)
-++        return {**self.options, **merged_options}
-+ 
-+     def encode(
-+         self,
-+diff --git a/tests/test_api_jwt.py b/tests/test_api_jwt.py
-+index 8b54204..dd28816 100644
-+--- a/tests/test_api_jwt.py
-++++ b/tests/test_api_jwt.py
-+@@ -1,6 +1,7 @@
-+ import json
-+ import time
-+ from calendar import timegm
-++from collections.abc import MutableMapping
-+ from datetime import datetime, timedelta, timezone
-+ from decimal import Decimal
-+ 
-+@@ -38,6 +39,61 @@ def payload() -> dict[str, object]:
-+ 
-+ 
-+ class TestJWT:
-++    def test_decode_does_not_mutate_options_when_signature_verification_is_disabled(
-++        self, jwt: PyJWT
-++    ) -> None:
-++        options: Options = {"verify_signature": False}
-++        token = jwt.encode({"claim": "value"}, "a" * 32, algorithm="HS256")
-++        original_options = options.copy()
-++
-++        jwt.decode(token, options=options)
-++
-++        assert options == original_options
-++
-++    def test_reused_options_do_not_disable_claim_verification(self, jwt: PyJWT) -> None:
-++        options: Options = {"verify_signature": False}
-++        token = jwt.encode({"exp": utc_timestamp() - 1}, "a" * 32, algorithm="HS256")
-++
-++        jwt.decode(token, options=options)
-++        options["verify_signature"] = True
-++
-++        with pytest.raises(ExpiredSignatureError):
-++            jwt.decode(token, "a" * 32, algorithms=["HS256"], options=options)
-++
-++    def test_decode_complete_preserves_mutable_mapping_input(self, jwt: PyJWT) -> None:
-++        class MappingWithoutCopy(MutableMapping[str, object]):
-++            def __init__(self, values: dict[str, object]) -> None:
-++                self.values = values
-++
-++            def __getitem__(self, key: str) -> object:
-++                return self.values[key]
-++
-++            def __setitem__(self, key: str, value: object) -> None:
-++                self.values[key] = value
-++
-++            def __delitem__(self, key: str) -> None:
-++                del self.values[key]
-++
-++            def __iter__(self):
-++                return iter(self.values)
-++
-++            def __len__(self) -> int:
-++                return len(self.values)
-++
-++        options = MappingWithoutCopy({"verify_signature": False})
-++        token = jwt.encode({"claim": "value"}, "a" * 32, algorithm="HS256")
-++
-++        jwt.decode_complete(token, options=options)  # type: ignore[arg-type]
-++
-++        assert dict(options) == {"verify_signature": False}
-++
-++    def test_constructor_does_not_mutate_options_input(self, jwt: PyJWT) -> None:
-++        options: Options = {"verify_signature": False}
-++
-++        PyJWT(options=options)
-++
-++        assert options == {"verify_signature": False}
-++
-+     def test_jwt_with_options(self) -> None:
-+         jwt = PyJWT(options={"verify_signature": False})
-+         assert jwt.options["verify_signature"] is False
-+-- 
-+2.35.6
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
-index bae7418565..56c48c79fe 100644
---- a/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
-@@ -10,6 +10,7 @@ SRC_URI += "file://CVE-2026-48522.patch \
-            file://CVE-2026-48524.patch \
-            file://CVE-2026-48525.patch \
-            file://CVE-2026-48526.patch \
-+           file://CVE-2026-103001.patch \
-            "
- 
- SRC_URI[sha256sum] = "c74a7a2adf861c04d002db713dd85f84beb242228e671280bf709d765b03672b"
-@@ -25,4 +26,3 @@ RDEPENDS:${PN} = "\
- "
- 
- BBCLASSEXTEND = "native nativesdk"
--
 -- 
 2.35.6
 
