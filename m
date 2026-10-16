@@ -2,75 +2,75 @@ Return-Path: <yurade@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B763CCA491
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 06:23:36 +0000 (UTC)
-Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15656.1792131806146579952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5050CCA462
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 06:23:35 +0000 (UTC)
+Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15655.1792131805770128006
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 23:23:26 -0700
+ Thu, 15 Oct 2026 23:23:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=GascOJ6P;
- spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=fQk6rzT8;
+ spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1132; q=dns/txt;
-  s=iport01; t=1792131806; x=1793341406;
+  d=cisco.com; i=@cisco.com; l=3652; q=dns/txt;
+  s=iport01; t=1792131805; x=1793341405;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=G0bV0whJkYdiafSMOt+3FwZ513Y95JQilErk7oqP3cg=;
-  b=GascOJ6PC+PgGaBBr6CiJXod4KRVXN2GUtS6gwSBc1fJOfiqejLWAjCr
-   nGqrNOz2wfcyp1LfJyjLK3k3vTm4Bkukp2swnxlrJZxJLfFEcGVfSC+PB
-   9avCbMOkNzZiF1kR8R3CjuKMBbo80I+lz2cjdlU8DadElxirdBCtu56s9
-   ofCbjGDUEDMbO5YEj3KEJnmZm1CFHdIq/JokITy8gL793wLe46jAOOPt4
-   VLwBd/dSGyF499VnqYr7/qLw+3W9gtIaT2EK+dkFBC0VlJRGksQMZmc/n
-   n+Mom49IRxCK37k5yFcBLhajhiLZSRb2JjVlZx9Tbsa9giTwNRKnPwf/q
+  bh=NjqsIk5NILcMVM3doxQZqyUzXIMYjgglfmxE00vK5AQ=;
+  b=fQk6rzT8oz65u43lkaUPNgbLFiZpaQY6mwLcEsJAVsLtMedO6hB7XzLE
+   G5SZv5quFS7XUOFoM3nF20sGW6StntgWBZabh/M21JAOMmctrOu6RHVNN
+   GxQ3OPGGsna/rd48knXhu33Hmy5PWgUhfRjbq5e6HqY+MhRQE/RXJPUAA
+   cOBr7i6UQyW+CLhgZzwYOcptAh3C98MLG1d3WwhYDjWhUQEkrixGBRl7q
+   zHHPd9v29tmfymahhLc8sjiERxXOisobFjtamjQIDnHg11ksoI0zikIcy
+   dN/18292a73HtyRu0JO7Oh0IgRb6T32VpUNqikztdSYDCOULqIrEZwc2l
    Q==;
-X-CSE-ConnectionGUID: AiepZ07IRlCWqcweBMTrQg==
-X-CSE-MsgGUID: 05i2Zc6fSp6yzx+kTulf9g==
-X-IPAS-Result: =?us-ascii?q?A0DIAgBfwdFq/5X/Ja1aglmCV3VgQ0kDlCaDN50JgX4PA?=
- =?us-ascii?q?QEBD0QNBAEBhD9GAo4VAiY1CA4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
- =?us-ascii?q?gEHBYEOE4ZPDZATAgEDMgEYAT1RKx0BDRmDAgGCdAMRvHOCLIEBgykBgVTZS?=
- =?us-ascii?q?oFoAQsUAYE4jWN1AYR8JxuBSUSBFYJzdoEFgVwCgi2FeASDLoF4lSlIgR4DW?=
- =?us-ascii?q?SwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEgghYjGTZ6gQlegSspY?=
- =?us-ascii?q?RAXgQmCBwKCVIIAAgFJQQ4HRVMJJUMSRyYiCBIJARMaMAuBGzg8CShBFwxzD?=
- =?us-ascii?q?B0FcggCDQkHKRgNSBEsNxUZBD5uB5IUHoJlgQ4sgiyldaEPhCiMIpU6GjOqb?=
- =?us-ascii?q?wsjmFqOCpZPhGmBaQE6gVkzGggbFYMiCUoZD445g2vOWicyAgwvAQEHAgcOA?=
- =?us-ascii?q?wuBaJF+AQE?=
-IronPort-Data: A9a23:ILig/6/LDFSEFmjLUw/iDrUD1n+TJUtcMsCJ2f8bNWPcYEJGY0x3z
- WQWWTyGPanbZ2H0eosjbIyw/R8AsZ/XyYdrSAU6+H1EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEDmB4E/rbei5xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
- 4mtyyHjEAX9gWAtajtKs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
- /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
- HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2kfPIAAyL4oIFtK3
- sMBIy8ARDW/ndu5lefTpulE3qzPLeHxN48Z/3UlxjbDALN/G9bIQr7B4plT2zJYasJmRKmFI
- ZFGL2AyMVKZP0wn1lQ/UPrSmM+5m2P2fzBwo1OOrq1x6G/WpOB0+OW2bYSMIYbVHa25mG7A+
- 2OczW+nDCoCas2N2XmGzm+oiL7AyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPAXC4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:e7ILIaqtBz3khMMNpZRIAbQaV5oHeYIsimQD101hICG9Ffbo8/
- xG88506faZslsssTQb6LO90cq7MBbhHOBOgLX5VI3KNGKNhILrFvAB0WKI+VLd8kPFmtK1rZ
- 0BT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
-X-Talos-CUID: =?us-ascii?q?9a23=3AAc2D12hvOIOK5jzlUeB5aYYYJjJuW3zQ1EWIfG6?=
- =?us-ascii?q?CDU1WUbaKRHW1xLldnJ87?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AxWPVvwzorigKnGrDvUOERTScTf6aqPzzCRo/mss?=
- =?us-ascii?q?IgNHaJD5geDShkTC5E4Byfw=3D=3D?=
+X-CSE-ConnectionGUID: air1NNO6RS63L2OmU8ZYtw==
+X-CSE-MsgGUID: WibipU/7T2KEeMXbPmX//Q==
+X-IPAS-Result: =?us-ascii?q?A0BJAgBRwtFq/4z/Ja1aglmCV3VgQ0kDlCaCIQOeHIF+D?=
+ =?us-ascii?q?wEBAQ9EDQQBAYQ/RgKOFQImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBA?=
+ =?us-ascii?q?QIBBwWBDhOGTw2QEgECAQMnCwEYAT0cAwECLysjCBmDAgGCdAMRvHSBeTOBA?=
+ =?us-ascii?q?YMpAYFU2UqBaAELFAGBOIVAiCNdGAGEfCcbgUlEgRWBO4IugQWBXAKBJ4Z+B?=
+ =?us-ascii?q?IMcEoFalUdIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEgg?=
+ =?us-ascii?q?hYjGTZ6gQlegSspYRAXgQmCBwKCVIIAAgFJQQ4HRVMJJUMSRyYiCBIJARMaM?=
+ =?us-ascii?q?AuBGzg8CShBFwxzDB0FcggCDQkHKRgNSBEsNxUZBD5uB5IUHoJlgQ4BKwV6R?=
+ =?us-ascii?q?GkeMKUnoQ+EKIwilToaM4VbpRQLmH2LN4JTlk+EaYFoPIFZMxoIGxWDIglKG?=
+ =?us-ascii?q?Q+OKw4Lg2CFZMh2JzICCQMvAQEHAgcOAwuBaJAAgX4BAQ?=
+IronPort-Data: A9a23:RcpVOqwc5VB53ul9kN16t+dhxyrEfRIJ4+MujC+fZmUNrF6WrkUDz
+ GscXG+GOayCazH9KdwlYNyxoUwP68fVx4M1T1RpqFhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCKa/lHyYuCJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ 4yaT/H3Ygf/hWcsazxMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJEg3J9Q+3MEpO1oQr
+ thCDzUwPiKym/3jldpXSsE07igiBNPgMIVavjRryivUSK59B5vCWK7No9Rf2V/chOgXQq2YP
+ JVfM2cyKk2cO3WjOX9PYH46tPa1nHDzfhVTqUmeouw85G27IAlZjeOzaoaPJ4LTLSlTtnmZr
+ GPewiOmPks5GdG6+TC990LrwdaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7CQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:onLFHaOrTXjxR8BcTu2jsMiBIKoaSvp037BN7TEUdfU7SKKlfq
+ yV8cjzkCWE6wr5O0tQ/OxoRpPgfZq0z/cciuMs1PWZLWvbUQCTQ72Kg7GP/9SZIU3D398Y87
+ t8eK5jD9C1J117gcHmpDScKb8bsb66GGTCv5am85+rJjsaDZ1d0w==
+X-Talos-CUID: =?us-ascii?q?9a23=3AkeeGB2lgJnyEiYGhlNvSJq28gIbXOXTc1i72BWj?=
+ =?us-ascii?q?mM103E5nPblqtqJFVj9U7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AzjxuNw8J7DDuGgbat4SDqhWQf/hp6aW2NQdSrc8?=
+ =?us-ascii?q?llsShBSZIPgfayw3iFw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="535613270"
-Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
-  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 06:23:25 +0000
+   d="scan'208";a="536242561"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 06:23:25 +0000
 Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id 324F118000338
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 06:23:25 +0000 (GMT)
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id CD98A180001CD
+	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 06:23:24 +0000 (GMT)
 Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
-	id 8FA0ACBEFBF; Thu, 15 Oct 2026 23:23:24 -0700 (PDT)
+	id 76691CBF204; Thu, 15 Oct 2026 23:23:24 -0700 (PDT)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][wrynose][PATCH 9/9] python3-pillow: CVE_STATUS for CVE-2026-55798
-Date: Thu, 15 Oct 2026 23:23:23 -0700
-Message-Id: <20261016062323.251925-10-yurade@cisco.com>
+Subject: [meta-python][wrynose][PATCH 4/9] python3-pillow: Fix CVE-2026-59198
+Date: Thu, 15 Oct 2026 23:23:18 -0700
+Message-Id: <20261016062323.251925-5-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261016062323.251925-1-yurade@cisco.com>
 References: <20261016062323.251925-1-yurade@cisco.com>
@@ -78,39 +78,101 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
-X-Outbound-Node: rcdn-l-core-12.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 06:23:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131063
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 06:23:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131059
 
-Analysis:
-- The vulnerable code is WindowsViewer.get_command() constructing an
-  unescaped cmd.exe command from a file path. [1]
-- Linux uses UnixViewer, which quotes the path, so this Windows command
-  path is not used by the target recipe. [1]
-- Hence marking this CVE not applicable for the Linux target.
+This patch applies the upstream fix as referenced in [2],
+using the commit shown in [1].
 
-[1] https://github.com/python-pillow/Pillow/security/advisories/GHSA-4x4j-2g7c-83w6
+[1] https://github.com/python-pillow/Pillow/commit/eada3cbd7fb9963ee90673fb7b5270124a0d5f4b
+[2] https://github.com/python-pillow/Pillow/security/advisories/GHSA-fj7v-r99m-22gq
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../python3-pillow/CVE-2026-59198.patch       | 57 +++++++++++++++++++
+ .../python/python3-pillow_12.2.0.bb           |  1 +
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
 
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
+new file mode 100644
+index 0000000000..e794d26832
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-59198.patch
+@@ -0,0 +1,57 @@
++From 49ea10f3c83475ad30c1b0581e2aaa3e75f4af4f Mon Sep 17 00:00:00 2001
++From: Andrew Murray <3112309+radarhere@users.noreply.github.com>
++Date: Tue, 23 Jun 2026 09:46:33 +1000
++Subject: [PATCH] Prevent saving 1 mode images as TGA with run-length encoding
++ (#9709)
++
++CVE: CVE-2026-59198
++Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/eada3cbd7fb9963ee90673fb7b5270124a0d5f4b]
++
++(cherry picked from commit eada3cbd7fb9963ee90673fb7b5270124a0d5f4b)
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ Tests/test_file_tga.py    | 12 +++++++++++-
++ src/PIL/TgaImagePlugin.py |  4 ++++
++ 2 files changed, 15 insertions(+), 1 deletion(-)
++
++diff --git a/Tests/test_file_tga.py b/Tests/test_file_tga.py
++index 7ec562342..82bcf48ca 100644
++--- a/Tests/test_file_tga.py
+++++ b/Tests/test_file_tga.py
++@@ -179,10 +179,20 @@ def test_save_wrong_mode(tmp_path: Path) -> None:
++     im = hopper("PA")
++     out = tmp_path / "temp.tga"
++ 
++-    with pytest.raises(OSError):
+++    with pytest.raises(OSError, match="cannot write mode PA as TGA"):
++         im.save(out)
++ 
++ 
+++def test_save_1_mode_rle(tmp_path: Path) -> None:
+++    im = Image.new("1", (1, 1))
+++    out = tmp_path / "temp.tga"
+++
+++    with pytest.raises(
+++        OSError, match="cannot write mode 1 as TGA with run-length encoding"
+++    ):
+++        im.save(out, compression="tga_rle")
+++
+++
++ def test_save_mapdepth() -> None:
++     # This image has been manually hexedited from 200x32_p_bl_raw.tga
++     # to include an origin
++diff --git a/src/PIL/TgaImagePlugin.py b/src/PIL/TgaImagePlugin.py
++index b2989a4b7..8fd63b1df 100644
++--- a/src/PIL/TgaImagePlugin.py
+++++ b/src/PIL/TgaImagePlugin.py
++@@ -205,6 +205,10 @@ def _save(im: Image.Image, fp: IO[bytes], filename: str | bytes) -> None:
++         compression = im.encoderinfo.get("compression", im.info.get("compression"))
++         rle = compression == "tga_rle"
++     if rle:
+++        if im.mode == "1":
+++            msg = f"cannot write mode {im.mode} as TGA with run-length encoding"
+++            raise OSError(msg)
+++
++         imagetype += 8
++ 
++     id_section = im.encoderinfo.get("id_section", im.info.get("id_section", ""))
 diff --git a/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
-index e5ef7b34bf..33fd1d8872 100644
+index f9d91e0889..331b99622b 100644
 --- a/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pillow_12.2.0.bb
-@@ -70,6 +70,7 @@ RDEPENDS:${PN}-ptest += " \
- "
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;
+            file://CVE-2026-54059_CVE-2026-54060_CVE-2026-55379.patch \
+            file://CVE-2026-55380.patch \
+            file://CVE-2026-59197.patch \
++           file://CVE-2026-59198.patch \
+            "
+ SRCREV = "3c41c095064200a02672d89cc5ff629eaf4b0d4f"
  
- CVE_PRODUCT = "pillow"
-+CVE_STATUS[CVE-2026-55798] = "not-applicable-platform: The CVE affects WindowsViewer/cmd.exe; the Linux target uses UnixViewer"
- 
- 
- RPROVIDES:${PN} += "python3-imaging"
 -- 
 2.35.6
 
