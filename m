@@ -2,349 +2,447 @@ Return-Path: <rsangam@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9BC1CCA490
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 17:02:07 +0000 (UTC)
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1890.1792170125165888054
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACE6FCC6B38
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 17:03:27 +0000 (UTC)
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1910.1792170204461569679
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2026 10:02:05 -0700
+ Fri, 16 Oct 2026 10:03:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=RlJvIiKg;
- spf=pass (domain: mvista.com, ip: 74.125.82.170, mailfrom: rsangam@mvista.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso284955eec.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 10:02:04 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=ZXhKrCYk;
+ spf=pass (domain: mvista.com, ip: 74.125.82.41, mailfrom: rsangam@mvista.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-16079d54c17so219573c88.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 10:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1792170124; x=1792774924; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nVllKAggxPlIAPhK75vGTKA3LG/twl9L0Z4bMQ/OsPU=;
-        b=RlJvIiKgiUCnmbDXI/ht6KbwHu3Ncz+ByAbr4d/jDXqSPN49JuG0beieyV62l9WXrv
-         +++6w7PTJNGbXVuCPjtOVDAdO1F2FCAbKedfE3AkDWAQknJ09bc7mcgM9Rlt2/bKfisQ
-         tyrqvFyYXqv1JYEFoo3uqDXEkqVtlN4BB5lIY=
+        d=mvista.com; s=google; t=1792170203; x=1792775003; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PFhpU0PQZGVbvqrD8/R/vvp44J9oS2mQBoZhpCR01A4=;
+        b=ZXhKrCYkFvFtzzZZ8UlI9Oqxf1ruzTtB/kKwoS+4KsrtCftWDdyUPZau/1K/N5x0IT
+         ot2MiH+6/dJi+TBLVT+bqIzMf5spPyXE9ikM+9ycshxE9UbR6dmMXEdJtBWW6lyIV0Ep
+         /P/HQVLuqqF64roRLK306PTPYwMHzwqVyq47Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792170124; x=1792774924;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nVllKAggxPlIAPhK75vGTKA3LG/twl9L0Z4bMQ/OsPU=;
-        b=MuicSRrDmR+V83NfRPbOfce6ZwZLnEKMFJ8hAQU5s0az9Epb0Dicmn98ggnjpOSwOr
-         t/ptpaQYV2pk/wGY3ds8WAgvxa5fg0f0s2mbqotXu7C1kEKVN54lI1lPpTxaY9k207gc
-         g+dnQHObob/5nVIahuNjfYL+NU6OJVdU8Y5OWLHWXVoxBKBCpdNlIosrBvmwQpdD8UfJ
-         vRXB/xTVkKhvngNxB5hw4VGl53gVADNR4W9IFXpJo/rcOkJWNaTx+kTfBs5VqBf5nhEo
-         Nt2BrRQPchcxo6yVhiAj3qlV7jMfV/PxS4Nc7uE4549OJBrYAqmytpxk+W7uuP/PCahV
-         hS9A==
-X-Gm-Message-State: AFq9FYKnGKz6/hJFmh5nQ2+ojGRaF3RXxMTTViWBSacqo3CMn3VlItxz
-	Mryd/2GujSCo6sfKkc6GztNAXf3JvybA9bBQBsdPX/vhfjcVH5t/5mNFjooZ+AZRvvAy+vNulM6
-	A8mWUrTc=
-X-Gm-Gg: AYBFou190ftm+hHiStPvAD7RoQf1IhOkMRVYIPhICvvibbHoHZqemlRnEPQ8e3nngpI
-	hupXsYmhav12UbTTupEmx49pxz4zSXCldG05NDGa3D+McQaI91VpH1VSLqQlePGui2/t4KiGpH0
-	D0UXCpYhR7NyBW5qQpW7gtrfEy7f3ergZ3g7QgnM9qqZ+x911BxHRFBysetFBvJU8dHZZxdvmNz
-	oASNSV7280QvyJjVytlgNna6qe88FrErLGfHR07McNCgOpzxDKW3f2C5NDhdqMagkm/QQPZmYI+
-	NfXSCFAumoJE61av18i23xrpZqaMZI4Ulzc96Uz5Qg62dBuqq/mk7hEBBsIZScIJWr431oRkv+0
-	RwWbGE2pr6dr7Y8XoYclW0DJ55PWabdN/3HhILAg5J2aqhYWTFhJFuWZuWItEwQwd6Ob2ht6NFN
-	DUwEapdk53t3+wY7QB9mjCbxKTtaXsrFWAan042p6/WyF0M2AQ0E3xEg8ZtD7I1vWh6LLNYXu/w
-	BcX/I4=
-X-Received: by 2002:a05:693c:66d2:20b0:359:43c5:ebe5 with SMTP id 5a478bee46e88-361a2b3a111mr448966eec.38.1792170123986;
-        Fri, 16 Oct 2026 10:02:03 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792170203; x=1792775003;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=PFhpU0PQZGVbvqrD8/R/vvp44J9oS2mQBoZhpCR01A4=;
+        b=JsHwAWW5PUf3EMHLobCLG6mx+/nrTRIAMl6NY6gEOxwJyeprJxgX1GRFga2lFuHshl
+         iYME+qXt86oZCUEASfNpy55MyD3a4zz5bCs4h9t69EIioGtbD+/VJ5EVnFVNitD6HMbM
+         xBYmVNvwsis2dg+roikR+/8eA6/oivEgOi+QeipGVKIHIszA6Quma1cIAZ6ZFlFOlomW
+         BG2obFXrjWqNoEA5KJTFXN6fIoMcbbmHBLN1BzrLMhXDuCy5PWv0CtKr4gMtTlNgtpBT
+         lqqSRJSn5JveNAqcI8kASLJVDJOaz54Jx/XwOfKiLrqqNDNtxqPOzLlPfJK+KvXLGvZX
+         ROag==
+X-Gm-Message-State: AFq9FYIJjDod2suiybinpa6Cc12aVHhNvTN2CuODmEnGkJABwdbpgWFe
+	KyGsVpvnkfUO7gjx8t9Zpf42j/7/6assnWSNL43UwIOaYvx+nKxHP//oShhhQ3gDf+esG49SOoY
+	2R0XCC7w=
+X-Gm-Gg: AYBFou1o7V8drgzSynKKopaAK/0PuL7pYg1fHghCwMXP736dNzaFt8cIE8ag2FoUOPX
+	WT+7MSXV2lge303bC8bflT2DoR7jrNM1UArui+da/oHP5o0w/V0Q8c75QcrS6h7DMrw/Arr2kvD
+	bKb2kj6U8DTt3Ws+A6iKeS2c0kL7XvKYO6HrG3M30YB61qjPwQOX/NfF1nl0KEFDPuW/eK93NYy
+	G+20DW/4ZXZR0WL9q40cZFUt7XcNBcnbzJZbdMn/F0TdmV83IpNIGp7Xs+HTgEUi4ztm7cgHLuD
+	ZHqzNMua3FXkQYVNUqsVDcjYZeM+FIPqPBMUr8KMO4BifRKIvdxNDmkL3Wle0qdEFWWNBrLWlgA
+	RlzWKeDeg0j3kEbLIR0gMzG6BBSIo0WgeDpmfhstui/GfOFcfLq73msAsHHAzWK756FQklumfMr
+	Z0hQ1eMXOOHFrd6fAp7lSOHirDX0ixtVMUQLqHdIiPkWkWurwx3zgv7U2RSyfCwN5Q5XjeNiHuc
+	Rs3BfA=
+X-Received: by 2002:a05:701b:4518:20b0:163:d97f:96f3 with SMTP id a92af1059eb24-1850ce9e858mr631622c88.4.1792170203160;
+        Fri, 16 Oct 2026 10:03:23 -0700 (PDT)
 Received: from MVIN00040.mvista.com ([49.207.221.247])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3607ee0d391sm8381333eec.4.2026.10.16.10.01.59
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c2e7bf4sm6425213c88.20.2026.10.16.10.03.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 10:02:01 -0700 (PDT)
+        Fri, 16 Oct 2026 10:03:22 -0700 (PDT)
 From: Rohini Sangam <rsangam@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Rohini Sangam <rsangam@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH] nodejs: Security fix for CVE-2026-48619
-Date: Fri, 16 Oct 2026 22:31:53 +0530
-Message-Id: <20261016170153.30354-1-rsangam@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH] nodejs: Security fix for CVE-2026-48937
+Date: Fri, 16 Oct 2026 22:32:56 +0530
+Message-Id: <20261016170256.30485-1-rsangam@mvista.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 17:02:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131080
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 17:03:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131081
 
 Pick patch from [1] also mentioned at Debian tracker in [2]
 
-[1] https://github.com/nodejs/node/commit/c79968e108002c2394bdb9e9cefb2c8c8cc202f8
-[2] https://security-tracker.debian.org/tracker/CVE-2026-48619
+[1] https://github.com/nodejs/node/commit/a1a5bb968303229d4a3a7c9e389dc3ece6237b4c
+[2] https://security-tracker.debian.org/tracker/CVE-2026-48937
 
 Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 ---
- .../nodejs/nodejs/CVE-2026-48619.patch        | 253 ++++++++++++++++++
+ .../nodejs/nodejs/CVE-2026-48937.patch        | 349 ++++++++++++++++++
  .../recipes-devtools/nodejs/nodejs_20.20.2.bb |   1 +
- 2 files changed, 254 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
+ 2 files changed, 350 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
 new file mode 100644
-index 0000000000..41377642bb
+index 0000000000..5f9f9bffce
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
-@@ -0,0 +1,253 @@
-+From c79968e108002c2394bdb9e9cefb2c8c8cc202f8 Mon Sep 17 00:00:00 2001
-+From: Matteo Collina <hello@matteocollina.com>
-+Date: Sun, 19 Apr 2026 16:48:43 +0200
-+Subject: [PATCH] http2: cap originSet size to prevent unbounded memory
-+growth
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
+@@ -0,0 +1,349 @@
++From a1a5bb968303229d4a3a7c9e389dc3ece6237b4c Mon Sep 17 00:00:00 2001
++From: Tim Perry <pimterry@gmail.com>
++Date: Wed, 22 Apr 2026 13:36:27 +0200
++Subject: [PATCH] deps: fix integration issues with the latest nghttp2
 +
-+A malicious HTTP/2 server can send repeated ORIGIN frames with unique
-+origins, causing unbounded growth of the client-side originSet for the
-+lifetime of the session. Cap the set at 128 entries; once full, new
-+origins from ORIGIN frames are silently dropped.
++This is a set of src & tests fixes for nghttp2 due to changes in
++v1.67.0+ which require a selection of changes to how we handle
++low-level protocol errors when using the latest versions of nghttp2,
++changing both some src error handling and updating some tests to match.
 +
-+Ref: https://hackerone.com/reports/3676863
-+PR-URL: https://github.com/nodejs-private/node-private/pull/855
++Signed-off-by: Tim Perry <pimterry@gmail.com>
++PR-URL: https://github.com/nodejs/node/pull/62891
++Backport-PR-URL: https://github.com/nodejs/node/pull/63195
++Reviewed-By: Marco Ippolito <marcoippolito54@gmail.com>
++Reviewed-By: Tim Perry <pimterry@gmail.com>
++Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
 +Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
-+Refs: https://hackerone.com/reports/3676863
++Refs: https://hackerone.com/reports/3658225
 +
-+CVE: CVE-2026-48619
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/c79968e108002c2394bdb9e9cefb2c8c8cc202f8]
++CVE: CVE-2026-48937
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/a1a5bb968303229d4a3a7c9e389dc3ece6237b4c]
 +
 +Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 +---
-+ doc/api/errors.md                             |  11 ++
-+ doc/api/http2.md                              |   2 +
-+ lib/internal/errors.js                        |   2 +
-+ lib/internal/http2/core.js                    |  17 ++-
-+ .../test-http2-origin-set-max-size.mjs        | 110 ++++++++++++++++++
-+ 5 files changed, 141 insertions(+), 1 deletion(-)
-+ create mode 100644 test/parallel/test-http2-origin-set-max-size.mjs
++ src/node_http2.cc                             | 31 +++++++
++ src/node_http2.h                              |  2 +
++ ...t-http2-misbehaving-flow-control-paused.js | 33 ++++---
++ .../test-http2-misbehaving-flow-control.js    | 33 ++++---
++ ...tp2-options-max-headers-exceeds-nghttp2.js | 12 ++-
++ ...http2-session-cleanup-on-nghttp2-goaway.js | 91 +++++++++++++++++++
++ 6 files changed, 176 insertions(+), 26 deletions(-)
++ create mode 100644 test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
 +
-+diff --git a/doc/api/errors.md b/doc/api/errors.md
-+index d6ead7e2..95fa835e 100644
-+--- a/doc/api/errors.md
-++++ b/doc/api/errors.md
-+@@ -1729,6 +1729,17 @@ added: v15.14.0
-+ The limit of acceptable invalid HTTP/2 protocol frames sent by the peer,
-+ as specified through the `maxSessionInvalidFrames` option, has been exceeded.
-+ 
-++<a id="ERR_HTTP2_TOO_MANY_ORIGINS"></a>
++diff --git a/src/node_http2.cc b/src/node_http2.cc
++index 4f44789b..5047e5c4 100644
++--- a/src/node_http2.cc
+++++ b/src/node_http2.cc
++@@ -1246,6 +1246,24 @@ int Http2Session::OnFrameSent(nghttp2_session* handle,
++                               void* user_data) {
++   Http2Session* session = static_cast<Http2Session*>(user_data);
++   session->statistics_.frame_sent += 1;
 ++
-++### `ERR_HTTP2_TOO_MANY_ORIGINS`
-++
-++<!-- YAML
-++added: REPLACEME
-++-->
-++
-++The number of uniq origin sent by the server has exceeded the value defined in
-++`options.maxOriginSetSize`.
-++
-+ <a id="ERR_HTTP2_TRAILERS_ALREADY_SENT"></a>
-+ 
-+ ### `ERR_HTTP2_TRAILERS_ALREADY_SENT`
-+diff --git a/doc/api/http2.md b/doc/api/http2.md
-+index 4598b15a..6cf75b80 100644
-+--- a/doc/api/http2.md
-++++ b/doc/api/http2.md
-+@@ -3186,6 +3186,8 @@ changes:
-+     This is similar to [`server.maxHeadersCount`][] or
-+     [`request.maxHeadersCount`][] in the `node:http` module. The minimum value
-+     is `1`. **Default:** `128`.
-++  * `maxOriginSetSize` {number} Sets the maximum number of uniq origin the sever
-++    can send via ORIGIN frames. **Default:** `128`.
-+   * `maxOutstandingPings` {number} Sets the maximum number of outstanding,
-+     unacknowledged pings. **Default:** `10`.
-+   * `maxReservedRemoteStreams` {number} Sets the maximum number of reserved push
-+diff --git a/lib/internal/errors.js b/lib/internal/errors.js
-+index 9d6c5ca9..d68a2f7c 100644
-+--- a/lib/internal/errors.js
-++++ b/lib/internal/errors.js
-+@@ -1315,6 +1315,8 @@ E('ERR_HTTP2_STREAM_SELF_DEPENDENCY',
-+ E('ERR_HTTP2_TOO_MANY_CUSTOM_SETTINGS',
-+   'Number of custom settings exceeds MAX_ADDITIONAL_SETTINGS', Error);
-+ E('ERR_HTTP2_TOO_MANY_INVALID_FRAMES', 'Too many invalid HTTP/2 frames', Error);
-++E('ERR_HTTP2_TOO_MANY_ORIGINS',
-++  'The server sent more ORIGIN frames than the allowed number of %s', Error);
-+ E('ERR_HTTP2_TRAILERS_ALREADY_SENT',
-+   'Trailing headers have already been sent', Error);
-+ E('ERR_HTTP2_TRAILERS_NOT_READY',
-+diff --git a/lib/internal/http2/core.js b/lib/internal/http2/core.js
-+index ebd7abb1..38a33dd0 100644
-+--- a/lib/internal/http2/core.js
-++++ b/lib/internal/http2/core.js
-+@@ -101,6 +101,7 @@ const {
-+     ERR_HTTP2_STREAM_ERROR,
-+     ERR_HTTP2_STREAM_SELF_DEPENDENCY,
-+     ERR_HTTP2_TOO_MANY_CUSTOM_SETTINGS,
-++    ERR_HTTP2_TOO_MANY_ORIGINS,
-+     ERR_HTTP2_TRAILERS_ALREADY_SENT,
-+     ERR_HTTP2_TRAILERS_NOT_READY,
-+     ERR_HTTP2_UNSUPPORTED_PROTOCOL,
-+@@ -237,6 +238,7 @@ const kInit = Symbol('init');
-+ const kInfoHeaders = Symbol('sent-info-headers');
-+ const kLocalSettings = Symbol('local-settings');
-+ const kNativeFields = Symbol('kNativeFields');
-++const kMaxOriginSetSize = Symbol('max-ORIGIN-set-size');
-+ const kOptions = Symbol('options');
-+ const kOwner = owner_symbol;
-+ const kOrigin = Symbol('origin');
-+@@ -674,8 +676,13 @@ function onOrigin(origins) {
-+   if (!session.encrypted || session.destroyed)
-+     return undefined;
-+   const originSet = initOriginSet(session);
-+-  for (let n = 0; n < origins.length; n++)
-++  for (let n = 0; n < origins.length; n++) {
-++    if (originSet.size >= session[kMaxOriginSetSize]) {
-++      session.destroy(new ERR_HTTP2_TOO_MANY_ORIGINS(session[kMaxOriginSetSize]));
-++      return;
-++    }
-+     originSet.add(origins[n]);
+++  // If nghttp2 has internally terminated the session (e.g. due to a protocol
+++  // error like oversized frames, padding errors, or HPACK compression
+++  // failures), it calls nghttp2_session_terminate_session() directly which
+++  // queues a GOAWAY but does not invoke any application-level callback.
+++  // Detect that case here: a GOAWAY was sent but we never initiated it
+++  // (no Close(), no session.close(), no session.goaway()).
+++  //
+++  // We set a flag here, and then throw the error at the end of
+++  // SendPendingData, to wait until the GOAWAY is written before the session
+++  // is torn down.
+++  if (frame->hd.type == NGHTTP2_GOAWAY && !session->is_closing() &&
+++      !session->is_destroyed() && !session->IsGracefulCloseInitiated() &&
+++      !session->goaway_initiated_) {
+++    Debug(session, "nghttp2 session terminated internally");
+++    session->internal_goaway_sent_ = true;
 ++  }
-+   session.emit('origin', origins);
+++
++   return 0;
 + }
 + 
-+@@ -3331,6 +3338,13 @@ function connect(authority, options, listener) {
-+   assertIsObject(options, 'options');
-+   options = { ...options };
++@@ -1976,6 +1994,18 @@ uint8_t Http2Session::SendPendingData() {
 + 
-++  let { maxOriginSetSize } = options;
-++  if (maxOriginSetSize != null) {
-++    validateNumber(maxOriginSetSize, 'options.maxOriginSetSize', 0);
-++  } else {
-++    maxOriginSetSize = 128;
++   MaybeStopReading();
++ 
+++  // If nghttp2 has internally torn down the session (detected in OnFrameSent)
+++  // during the nghttp2_session_mem_send loop above, at this point we error:
+++  if (internal_goaway_sent_) {
+++    internal_goaway_sent_ = false;
+++    if (!is_closing() && !is_destroyed()) {
+++      Isolate* isolate = env()->isolate();
+++      HandleScope scope(isolate);
+++      Local<Value> arg = Integer::New(isolate, NGHTTP2_ERR_PROTO);
+++      MakeCallback(env()->http2session_on_error_function(), 1, &arg);
+++    }
 ++  }
 ++
-+   assertIsArray(options.remoteCustomSettings, 'options.remoteCustomSettings');
-+   if (options.remoteCustomSettings) {
-+     options.remoteCustomSettings = [ ...options.remoteCustomSettings ];
-+@@ -3377,6 +3391,7 @@ function connect(authority, options, listener) {
++   return 0;
++ }
 + 
-+   session[kAuthority] = `${options.servername || host}:${port}`;
-+   session[kProtocol] = protocol;
-++  session[kMaxOriginSetSize] = maxOriginSetSize;
++@@ -2901,6 +2931,7 @@ void Http2Session::Goaway(uint32_t code,
++   if (is_destroyed())
++     return;
 + 
-+   if (typeof listener === 'function')
-+     session.once('connect', listener);
-+diff --git a/test/parallel/test-http2-origin-set-max-size.mjs b/test/parallel/test-http2-origin-set-max-size.mjs
+++  goaway_initiated_ = true;
++   Http2Scope h2scope(this);
++   // the last proc stream id is the most recently created Http2Stream.
++   if (lastStreamID <= 0)
++diff --git a/src/node_http2.h b/src/node_http2.h
++index a60a7ba0..91046052 100644
++--- a/src/node_http2.h
+++++ b/src/node_http2.h
++@@ -968,6 +968,8 @@ class Http2Session : public AsyncWrap,
++ 
++   // Flag to indicate that JavaScript has initiated a graceful closure
++   bool graceful_close_initiated_ = false;
+++  bool goaway_initiated_ = false;
+++  bool internal_goaway_sent_ = false;
++ };
++ 
++ struct Http2SessionPerformanceEntryTraits {
++diff --git a/test/parallel/test-http2-misbehaving-flow-control-paused.js b/test/parallel/test-http2-misbehaving-flow-control-paused.js
++index e54bb832..b9a0d5cb 100644
++--- a/test/parallel/test-http2-misbehaving-flow-control-paused.js
+++++ b/test/parallel/test-http2-misbehaving-flow-control-paused.js
++@@ -47,36 +47,45 @@ const data = Buffer.from([
++ // Bad client! Bad!
++ //
++ // Fortunately, nghttp2 handles this situation for us by keeping track
++-// of the flow control window and responding with a FLOW_CONTROL_ERROR
++-// causing the stream to get shut down...
++-//
++-// At least, that's what is supposed to happen.
+++// of the flow control window and sending GOAWAY to end the session.
++ 
++ let client;
++ 
++ const server = h2.createServer({ settings: { initialWindowSize: 36 } });
++-server.on('stream', (stream) => {
+++
+++server.on('session', common.mustCall((session) => {
+++  session.on('error', common.expectsError({
+++    code: 'ERR_HTTP2_ERROR',
+++    name: 'Error',
+++    message: 'Protocol error'
+++  }));
+++}));
+++
+++server.on('stream', common.mustCall((stream) => {
++   // Set the high water mark to zero, since otherwise we still accept
++   // reads from the source stream (if we can consume them).
++   stream._readableState.highWaterMark = 0;
++   stream.pause();
++   stream.on('error', common.expectsError({
++-    code: 'ERR_HTTP2_STREAM_ERROR',
+++    code: 'ERR_HTTP2_ERROR',
++     name: 'Error',
++-    message: 'Stream closed with error code NGHTTP2_FLOW_CONTROL_ERROR'
+++    message: 'Protocol error'
++   }));
++   stream.on('close', common.mustCall(() => {
++     server.close();
++     client.destroy();
++   }));
++   stream.on('end', common.mustNotCall());
++-});
+++}));
++ 
++-server.listen(0, () => {
++-  client = net.connect(server.address().port, () => {
+++server.listen(0, common.mustCall(() => {
+++  client = net.connect(server.address().port, common.mustCall(() => {
++     client.write(preamble);
++     client.write(data);
++     client.write(data);
++     client.write(data);
++-  });
++-});
+++
+++    // TCP connection is closed by the server
+++    client.on('close', common.mustCall());
+++  }));
+++}));
++diff --git a/test/parallel/test-http2-misbehaving-flow-control.js b/test/parallel/test-http2-misbehaving-flow-control.js
++index 6774be22..fb0f7a1e 100644
++--- a/test/parallel/test-http2-misbehaving-flow-control.js
+++++ b/test/parallel/test-http2-misbehaving-flow-control.js
++@@ -58,18 +58,24 @@ const data = Buffer.from([
++ // Bad client! Bad!
++ //
++ // Fortunately, nghttp2 handles this situation for us by keeping track
++-// of the flow control window and responding with a FLOW_CONTROL_ERROR
++-// causing the stream to get shut down...
++-//
++-// At least, that's what is supposed to happen.
+++// of the flow control window and sending GOAWAY to end the session.
++ 
++ let client;
++ const server = h2.createServer({ settings: { initialWindowSize: 18 } });
++-server.on('stream', (stream) => {
+++
+++server.on('session', common.mustCall((session) => {
+++  session.on('error', common.expectsError({
+++    code: 'ERR_HTTP2_ERROR',
+++    name: 'Error',
+++    message: 'Protocol error'
+++  }));
+++}));
+++
+++server.on('stream', common.mustCall((stream) => {
++   stream.on('error', common.expectsError({
++-    code: 'ERR_HTTP2_STREAM_ERROR',
+++    code: 'ERR_HTTP2_ERROR',
++     name: 'Error',
++-    message: 'Stream closed with error code NGHTTP2_FLOW_CONTROL_ERROR'
+++    message: 'Protocol error'
++   }));
++   stream.on('close', common.mustCall(() => {
++     server.close(common.mustCall());
++@@ -78,14 +84,17 @@ server.on('stream', (stream) => {
++   stream.resume();
++   stream.respond();
++   stream.end('ok');
++-});
+++}));
++ 
++ server.on('close', common.mustCall());
++ 
++-server.listen(0, () => {
++-  client = net.connect(server.address().port, () => {
+++server.listen(0, common.mustCall(() => {
+++  client = net.connect(server.address().port, common.mustCall(() => {
++     client.write(preamble);
++     client.write(data);
++     client.write(data);
++-  });
++-});
+++
+++    // TCP connection is closed by the server
+++    client.on('close', common.mustCall());
+++  }));
+++}));
++diff --git a/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js b/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
++index 7767dbbc..46f560f9 100644
++--- a/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
+++++ b/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
++@@ -90,11 +90,19 @@ server.listen(0, common.mustCall(() => {
++     0,
++     common.mustCall(() => {
++       const client = h2.connect(`http://localhost:${server.address().port}`);
++-      client.on('error', common.mustNotCall());
+++      // The server sends oversized headers that cause a compression error on
+++      // the client side, so nghttp2 internally terminates the client session.
+++      client.on('error', common.expectsError({
+++        code: 'ERR_HTTP2_ERROR',
+++        name: 'Error',
+++      }));
++ 
++       const req = client.request();
++       req.on('response', common.mustNotCall());
++-      req.on('error', common.mustNotCall());
+++      req.on('error', common.expectsError({
+++        code: 'ERR_HTTP2_ERROR',
+++        name: 'Error',
+++      }));
++       req.end();
++     }),
++   );
++diff --git a/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js b/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
 +new file mode 100644
-+index 00000000..08bdf1ed
++index 00000000..f3576f9f
 +--- /dev/null
-++++ b/test/parallel/test-http2-origin-set-max-size.mjs
-+@@ -0,0 +1,110 @@
-++import {
-++  expectsError,
-++  hasCrypto,
-++  mustCall,
-++  mustNotCall,
-++  mustSucceed,
-++  skip,
-++} from '../common/index.mjs';
-++import * as fixtures from '../common/fixtures.mjs';
-++import assert from 'node:assert';
+++++ b/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
++@@ -0,0 +1,91 @@
+++'use strict';
 ++
-++if (!hasCrypto)
-++  skip('missing crypto');
+++const common = require('../common');
 ++
-++const {
-++  createSecureServer,
-++  connect,
-++} = await import('node:http2');
+++if (!common.hasCrypto)
+++  common.skip('missing crypto');
 ++
-++const key = fixtures.readKey('agent8-key.pem', 'binary');
-++const cert = fixtures.readKey('agent8-cert.pem', 'binary');
-++const ca = fixtures.readKey('fake-startcom-root-cert.pem', 'binary');
+++const http2 = require('http2');
+++const net = require('net');
 ++
-++const server = createSecureServer({ key, cert });
-++server.on('stream', (stream) => {
-++  stream.respond();
-++  stream.end('ok');
-++});
-++server.on('session', (session) => {
-++  let i = 0;
-++  const timer = setInterval(() => {
-++    try {
-++      session.origin(...Array.from({ length: 10 }, () => `https://o${i++}.example.com`));
-++    } catch {
-++      clearInterval(timer);
-++    }
-++  }, 10);
+++// When nghttp2 internally sends a GOAWAY frame due to a protocol error, it
+++// may call nghttp2_session_terminate_session() directly, bypassing the
+++// on_invalid_frame_recv_callback entirely. This test ensures that even
+++// in that scenario, we still correctly clean up the session & connection.
+++//
+++// This test reproduces this with a client who sends a frame header with
+++// a length exceeding the default max_frame_size (16384). nghttp2 responds
+++// with GOAWAY(FRAME_SIZE_ERROR) without notifying Node through any callback.
 ++
-++  session.on('close', () => {
-++    clearInterval(timer);
+++const server = http2.createServer();
+++
+++server.on('session', common.mustCall((session) => {
+++  session.on('error', common.expectsError({
+++    code: 'ERR_HTTP2_ERROR',
+++    name: 'Error',
+++    message: 'Protocol error'
+++  }));
+++
+++  session.on('close', common.mustCall(() => server.close()));
+++}));
+++
+++server.listen(0, common.mustCall(() => {
+++  const conn = net.connect({
+++    port: server.address().port,
+++    allowHalfOpen: true,
 ++  });
-++});
 ++
-++await new Promise((resolve) => server.listen(0, resolve));
+++  // HTTP/2 client connection preface.
+++  conn.write('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n');
 ++
-++// Test fantasist values
-++[Symbol(), '0', 1n, {}, [], true, false, /s/, () => {}].forEach((maxOriginSetSize) => {
-++  assert.throws(
-++    () => connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize }),
-++    { code: 'ERR_INVALID_ARG_TYPE' },
-++  );
-++});
-++[NaN, -1].forEach((maxOriginSetSize) => {
-++  assert.throws(
-++    () => connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize }),
-++    { code: 'ERR_OUT_OF_RANGE' },
-++  );
-++});
+++  // Empty SETTINGS frame.
+++  const settingsFrame = Buffer.alloc(9);
+++  settingsFrame[3] = 0x04; // type: SETTINGS
+++  conn.write(settingsFrame);
 ++
-++await new Promise((resolve) => server.getConnections(mustSucceed((count) => {
-++  assert.strictEqual(count, 0);
-++  resolve();
-++})));
+++  let inbuf = Buffer.alloc(0);
+++  let state = 'settingsHeader';
+++  let settingsFrameLength;
 ++
-++// Test default value
-++await new Promise((resolve) => {
-++  const client = connect(`https://localhost:${server.address().port}`, { ca });
+++  conn.on('data', (chunk) => {
+++    inbuf = Buffer.concat([inbuf, chunk]);
 ++
-++  client.on('origin', mustCall(12)); // Default value is 128, the first 12 frames should pass, the 13th one should error
-++  client.on('error', expectsError({
-++    code: 'ERR_HTTP2_TOO_MANY_ORIGINS',
-++  }));
-++  client.on('goaway', mustNotCall());
-++  client.on('close', resolve);
+++    switch (state) {
+++      case 'settingsHeader':
+++        if (inbuf.length < 9) return;
+++        settingsFrameLength = inbuf.readUIntBE(0, 3);
+++        inbuf = inbuf.slice(9);
+++        state = 'readingSettings';
+++        // Fallthrough
+++      case 'readingSettings': {
+++        if (inbuf.length < settingsFrameLength) return;
+++        inbuf = inbuf.slice(settingsFrameLength);
+++        state = 'done';
 ++
-++  client.request().resume();
-++});
+++        // ACK the server SETTINGS.
+++        const ack = Buffer.alloc(9);
+++        ack[3] = 0x04; // type: SETTINGS
+++        ack[4] = 0x01; // flag: ACK
+++        conn.write(ack);
 ++
-++// Test non-default values
-++await Promise.all([-0, 9, 1.5].map((maxOriginSetSize) => new Promise((resolve) => {
-++  const client = connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize });
+++        // Send a HEADERS frame header claiming length 16385, which exceeds
+++        // the default max_frame_size of 16384. nghttp2 checks the length
+++        // before reading any payload, so no body is needed. This triggers
+++        // nghttp2_session_terminate_session(FRAME_SIZE_ERROR) directly in
+++        // nghttp2_session_mem_recv2 — bypassing on_invalid_frame_recv_callback.
+++        const oversized = Buffer.alloc(9);
+++        oversized.writeUIntBE(16385, 0, 3); // length: 16385 (one over max)
+++        oversized[3] = 0x01;                // type: HEADERS
+++        oversized[4] = 0x04;                // flags: END_HEADERS
+++        oversized.writeUInt32BE(1, 5);       // stream id: 1
+++        conn.write(oversized);
 ++
-++  client.on('origin', mustNotCall()); // The server send 10 origins on the first frame, that's already too many.
-++  client.on('error', expectsError({
-++    code: 'ERR_HTTP2_TOO_MANY_ORIGINS',
-++  }));
-++  client.on('goaway', mustNotCall());
-++  client.on('close', resolve);
-++
-++  client.request().resume();
-++})));
-++
-++
-++// Test values higher than the default value
-++await Promise.all([512, Infinity].map((maxOriginSetSize) => new Promise((resolve) => {
-++  const client = connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize });
-++
-++  client.on('origin', mustCall(() => {
-++    if (client.originSet.length > 128) {
-++      client.destroy();
+++        // No need to write the data - the header alone triggers the check.
+++      }
 ++    }
-++  }, 13));
-++  client.on('error', mustNotCall());
-++  client.on('goaway', mustNotCall());
-++  client.on('close', resolve);
+++  });
 ++
-++  client.request().resume();
-++})));
-++
-++server.close();
+++  // The server must close the connection after sending GOAWAY:
+++  conn.on('end', common.mustCall(() => conn.end()));
+++  conn.on('close', common.mustCall());
+++}));
 +-- 
 +2.44.4
 +
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-index 4badec2135..710ed988d3 100644
+index 710ed988d3..f701b0db75 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-Revert-stop-using-deprecated-ares_query.patch \
+@@ -28,6 +28,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
             file://run-ptest \
             file://CVE-2026-48617.patch \
-+           file://CVE-2026-48619.patch \
+            file://CVE-2026-48619.patch \
++           file://CVE-2026-48937.patch \
             "
  SRC_URI:append:class-target = " \
             file://0001-Using-native-binaries.patch \
