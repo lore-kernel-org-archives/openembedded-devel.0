@@ -1,186 +1,180 @@
-Return-Path: <dkelaiya@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B2B5CCF2C1
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 07:46:48 +0000 (UTC)
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16844.1792136805451082436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94F57CCA46C
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 16:50:27 +0000 (UTC)
+Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1559.1792169425137072307
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2026 00:46:45 -0700
+ Fri, 16 Oct 2026 09:50:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=SxWcSxgF;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: dkelaiya@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jUZ/pU+i;
+ spf=pass (domain: gmail.com, ip: 74.125.82.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-141395927feso191333c88.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 09:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4205; q=dns/txt;
-  s=iport01; t=1792136805; x=1793346405;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Fk0EqlEdj1BG00hr2XipyPuE1LMIQX12VRYxGecDcZQ=;
-  b=SxWcSxgFMrga/wqrOBGNTUcLrGHx1a90zICoQy4J7GfvxM4VaH3NcMQQ
-   3wIVE8FEB8Vvx/Dcf4fwELYCBaIQnelcaVrbXI7RlEcDA8cGauqC+odH4
-   TS4SUak1z1rOqUD+dWvtwaqj1jIufc6oseplA4bv+ZLfzJwQxmbU7VWYk
-   i0MUH18pUE4OQQchIRZ4HdTOiV9MEp19gtbKOXV+wY0U6OUk2Od9KTf5y
-   EidhRNq96VlTZZT/eVjNKSZsEWG4u3584/DOWXe4irrRaffSNyJazvuv+
-   KSUzh65yrtLYQKHR0ATRmsL9NUIxLrOLSw5WYUF70UPje8uljF+az9v/K
-   A==;
-X-CSE-ConnectionGUID: B1iXqJvTTJ2QGw3OSj0TSg==
-X-CSE-MsgGUID: I/474wz2RLaLP0gcHnZTNQ==
-X-IPAS-Result: =?us-ascii?q?A0BHAgAY1NFq/5L/Ja1aglmCV3VgQ0mWSgOeHIF+DwEBA?=
- =?us-ascii?q?Q9EDQQBAYUFAo4VAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDZASAQIBAycLAUYQHAMBAi8rIwgZgwIBgnQDEb0hgXkzgQGDaQJDU?=
- =?us-ascii?q?NsyAQsUAYE4hUCII10YAYR8JxsbgXKBFYNpgQWBXAEBgSeGXCIEgiKBDIFaH?=
- =?us-ascii?q?pUpSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+F4EHGwYFgR2BIIIWIxk2e?=
- =?us-ascii?q?oEJXoErKWABEBeBCYIHAoJUggACAUlBDgdFUwklQxJHJiIIEgkBExowC4EbO?=
- =?us-ascii?q?DwJKEEXDHMMHQVyCAINCQcpGA1IESw3FRkEPm4HkhQegkUgAYENARMXARcJg?=
- =?us-ascii?q?UwYph2hDwoog3aMIpU6GjOFW6UUC5h9jgqWT4RpgWg8gUcLB3AVgyIJShkPj?=
- =?us-ascii?q?jkng0SBf8xbJzICCTIBAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:R6qew6x9nAyaN/RygYt6t+dnxyrEfRIJ4+MujC+fZmUNrF6WrkUBm
- 2IdUW3UM/rYMDChfIxzbt7n80tSsZLUyd8wHQA4+1hgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCKa/lHyYuCJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 4yaT/H3Ygf/hWcsazxMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJGtvPL0B2PhLPUMUz
- NMHcxc2bEi/vO3jldpXSsE07igiBNPgMIVavjRryivUSK53B5vCWK7No9Rf2V/chOgXQq2YP
- JVfM2cyKk2cPXWjOX9PYH46tOuri332cixRgFmUvqEwpWPUyWSd1ZCwa4SNJYLWFZU9ckCwh
- yWaoDjmEEsgENW78WKK+VKqtNPppHauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjlCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:rPzbuqpMQq0MxZDXyyVZgFcaV5oJeYIsimQD101hICG9vPb2qy
- nIpoV96faaslcssR0b9OxofZPwI080lqQFhbX5Q43DYOCOggLBR+tfBMnZsljd8kbFmNK1u5
- 0NT0EHMqySMXFKyeDn/QK/D9EshPOD8KyumKPi6k0Fd3ANV0mlhD0Jcjpy1SZNNXB7OaY=
-X-Talos-CUID: 9a23:pljosG5/wODTlMz19dss3hcVKtkHbEHh7i3pDFDjLl1rEIGuRgrF
-X-Talos-MUID: =?us-ascii?q?9a23=3A132/3g5ueYvKpz+xe7cqt86YxoxJpPjxVF8fy68?=
- =?us-ascii?q?isu28bSN7GzGvsBKOF9o=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="536076488"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 07:46:44 +0000
-Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id 6580218000238;
-	Fri, 16 Oct 2026 07:46:44 +0000 (GMT)
-Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 0F56CCBF204; Fri, 16 Oct 2026 00:46:44 -0700 (PDT)
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+        d=gmail.com; s=20251104; t=1792169424; x=1792774224; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+OAnocA3MLPaUGh/1RNcDO3uRpjS0VB/ztpV1Soj3X8=;
+        b=jUZ/pU+iKKLpjYS76XXC6kC8on/T9uq3As8cADV54nnrEE6vxFc7Smo1tMmazNFoLT
+         QfGUZukveASoDwgrjeikdz/f5yYgu2PFo7fXvmF/qoGgKTGhFbl6cUYTZTTS0Shqt+qR
+         CwDAOpwJ//H7l1XXKAJ+JqN7uL4hfY7Xg6iHfXUUVDCVG49ZEWgIXRTk359FhCyGeCvB
+         bmBgHv0HtGbu9hn7r0pnJWj48i/vqKaGGiwQmkSoaQf7n53/pNP6JnJHaif8aeT3u1dr
+         cumIFrReZsA8gDZj4IYc+ZKhKIty/ZQoiyZE+jW3NSkD3ENTJusOz77LqSzNTvxu/BJJ
+         Zz1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792169424; x=1792774224;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+OAnocA3MLPaUGh/1RNcDO3uRpjS0VB/ztpV1Soj3X8=;
+        b=kR5E0avzSrVCIdg9bAFQNGyVUSXm4UmYWbXNwUGUyU285qDOwx1tOQipLTGi4aPvFm
+         gmWIGK1ThicUT5LnlXvcpkx945way5nXCcoLUWW0nJRYfZwSDN2kANGdxTkxbGyT2yPf
+         Ax23UC+QzbcPxeFSPHC7RWIq6TcScjnYyNv32hoBEAWpvjA2rN2CVbJOCnvtLBjKI9B6
+         zGKB4BG6Ws1xjlqeI26fqCWXS31bCRIoIyqVgW1Gu8wou6bBv1duRJj9siGpoqa5AvSU
+         Tpt835nJ2InhVQ/IHZYUOxVY+ILfkNWOKsSrRVkyffSp4GEA8YbP9JI1sNLydILw0fOp
+         7a3Q==
+X-Gm-Message-State: AFq9FYK8PKP1ErJ567qjF9kJHiVwJ2arSsI5yTxREjlyUg4LR8XpzSG4
+	9gFu60nwRDn6oQfyqwUG52UyRnSJxTzpbkKB4jP2i/PcM4nOe5oJvDKnDsbdz9mJ/JT/eg==
+X-Gm-Gg: AYBFou0LM/Sgg8MxBTayZE5AAVla85Ppgw+vidpbQZLN35EUW0HF8rpNsUlds7PoGCc
+	PxUPRs752XZpGpqpLAzrSIKIoQLDKT6b5qTjMKdaoo4wOrwkPbWEqCpKpJ2uhX0aKCdSJA6YOBu
+	BCXZ4mkmyEPUA91UH9ycp5x8Z6dNnKXeFuc5QELi6v7jvRvoJ6htjp6IaIVS9BoABcRDBtYYa9L
+	xw9iJmKxPOsnCu7gKMhmOKmuMBWj1v9ilpqEhXupJHc0mSvO1lo0g/lFErqVcsSdEyBrk5eONzf
+	DsTJoyWo1DJq18WNnryLmoFG+CSMfBYaAQs1srhdBmt7ZQt05RMd9hOsAjnIXazlWRlWmhrVWf2
+	9eFnyjHNhYEEaW2cO6Ir5dH7Y3XteCrLWxdsVG2NHINuIqaEwXOoSNLfNnKkCiHElBKWAD+eXra
+	Txl/y2rKIgpJVRuPkSi1p7k6F0Iai17apVjhacz7iuRRQv6hkVkjCEdPA/x5DCr6WAbczWKf6EQ
+	jsh7Absq9h1beiKJ5sMxCVAbemnRiTBNwhZFk62f5hijTUEqavipIlWgen1LC8W5gekUGs1hJZn
+	VAyaT78QbP07IcpEdhQAoJl+VFLhtz71AW2dUYnaeTcPgEpcWl8trFiC1ytCbX4Va6pcFzoWEg3
+	+Fq5djPhRy6yV910hqQ7WW37oNK/j9hS6VmoDhmo3aLGp2Cm+bYoRiGugSAOyat2ZVOwQg2zM7m
+	VJH1StUKG8UG4jlLLKvqTRAcIBCGFCrdnopJ4O5bW9yaiWbA==
+X-Received: by 2002:a05:7022:f51b:b0:159:aa67:28c1 with SMTP id a92af1059eb24-18512b3e25dmr511384c88.20.1792169424014;
+        Fri, 16 Oct 2026 09:50:24 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c5cb39esm7396545c88.22.2026.10.16.09.50.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 09:50:23 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-filesystems][scarthgap][PATCH 4/7] ntfs-3g-ntfsprogs: fix CVE-2026-46569
-Date: Fri, 16 Oct 2026 00:46:37 -0700
-Message-Id: <20261016074640.3986037-5-dkelaiya@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261016074640.3986037-1-dkelaiya@cisco.com>
-References: <20261016074640.3986037-1-dkelaiya@cisco.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-posix-ipc: fix feature probing instead of forcing -lrt
+Date: Fri, 16 Oct 2026 09:50:21 -0700
+Message-ID: <20261016165021.2704044-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 07:46:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131074
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 16:50:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131079
 
-From: Darsh Kelaiya <dkelaiya@cisco.com>
+posix_ipc decides at build time whether it needs librt and whether
+message queues are available by compiling small probe programs in
+build_support/discover_system_info.py. Its does_build_succeed() splices
+the linker option into the compiler argv verbatim, so when no extra
+library is wanted the compiler is called with a literal empty argument:
 
-This patch applies the upstream fix shown in [1]. The NVD record
-describing the vulnerability is referenced in [2].
+  $CC -Wall -o foo foo.c '' -lpthread
 
-[1] https://github.com/tuxera/ntfs-3g/commit/961ed5c2fa2f36ef6a347f04e1fa586113c97e7c
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-46569
+GNU ld treats '' as an input file and fails ("cannot find : No such
+file or directory"); lld ignores it. With the gcc toolchain every probe
+without -lrt therefore fails, the prober wrongly decides librt is
+required, and on a C library without a usable librt message queue
+support is dropped - which is how posix_ipc.MessageQueue went missing
+(issue #916). The result depends on the linker rather than on what the
+C library provides.
 
-Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+The previous LDFLAGS += "-lrt" workaround only papered over this, and
+is itself libc specific: it forces linking librt even where mq_* live
+in libc (glibc >= 2.34, musl).
+
+Fix the prober to split linker_options with shlex, like it already does
+for CC, so an empty value adds no argument, and drop the forced -lrt so
+the probes decide per C library.
+
+Verified on qemux86-64 for glibc and musl, each with the clang and gcc
+toolchains: src/system_info.h defines MESSAGE_QUEUE_SUPPORT_EXISTS,
+SEM_GETVALUE_EXISTS and SEM_TIMEDWAIT_EXISTS, and the extension module
+imports all mq_* from libc with no librt NEEDED entry.
+
+Fixes: https://github.com/openembedded/meta-openembedded/issues/916
+
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../files/CVE-2026-46569.patch                | 62 +++++++++++++++++++
- .../ntfs-3g-ntfsprogs_2022.10.3.bb            |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
+ ...-not-pass-empty-linker-option-to-the.patch | 46 +++++++++++++++++++
+ .../python/python3-posix-ipc_1.3.2.bb         |  4 +-
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
 new file mode 100644
-index 0000000000..5c496159ec
+index 0000000000..37d801e42c
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
-@@ -0,0 +1,62 @@
-+From 677d21be1ac7ec0a59cfbed8e26d1ffbf0922ac1 Mon Sep 17 00:00:00 2001
-+From: Rakesh Pandit <rakesh@tuxera.com>
-+Date: Mon, 8 Jun 2026 10:34:38 +0300
-+Subject: [PATCH] Bound tail_size in ntfs_ib_copy_tail against destination
-+ capacity.
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
+@@ -0,0 +1,46 @@
++From a2d268590cd2e8460b40438b4eff894ae472a0f2 Mon Sep 17 00:00:00 2001
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Fri, 16 Oct 2026 16:26:28 +0000
++Subject: [PATCH] build_support: do not pass empty linker option to the
++ compiler
 +
-+A crafted source INDX block can drive tail_size past the freshly
-+allocated destination's usable space and overflow the memcpy.  Add
-+a capacity check (and a < 0 guard against sign-extension at
-+memcpy).
++does_build_succeed() builds an argv list and inserts linker_options
++verbatim. When no extra linker option is wanted it is "", so the
++compiler is invoked with a literal empty argument:
 +
-+Thanks to Alexandro Calo' from Nozomi Networks Labs for reporting
-+this issue.
++  cc -Wall -o foo foo.c '' -lpthread
 +
-+CVE: CVE-2026-46569
-+Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/961ed5c2fa2f36ef6a347f04e1fa586113c97e7c]
++GNU ld treats the empty argument as an input file and fails with
++"cannot find : No such file or directory", while lld silently ignores
++it. With GNU ld every probe that runs without -lrt therefore fails,
++which makes sniff_realtime_lib() wrongly conclude that librt is needed
++(or raise DiscoveryError on C libraries that have no usable librt),
++independent of what the C library actually provides. With lld the
++probes happen to give the right answer, so the outcome depends on the
++linker rather than on the target system.
 +
-+(cherry picked from commit 961ed5c2fa2f36ef6a347f04e1fa586113c97e7c)
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++This regressed when the command was converted from a shell string
++(where an empty %s vanished) to an argv list.
++
++Split linker_options with shlex like CC already is, so an empty value
++contributes no argument and multi-word values still work.
++
++Upstream-Status: Submitted [https://github.com/osvenskan/posix_ipc/pull/114]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ libntfs-3g/index.c | 21 ++++++++++++++++++++-
-+ 1 file changed, 20 insertions(+), 1 deletion(-)
++ build_support/discover_system_info.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/libntfs-3g/index.c b/libntfs-3g/index.c
-+index 9c11a45c..347bd408 100644
-+--- a/libntfs-3g/index.c
-++++ b/libntfs-3g/index.c
-+@@ -1193,7 +1193,7 @@ static int ntfs_ib_copy_tail(ntfs_index_context *icx, INDEX_BLOCK *src,
-+ {
-+ 	u8 *ies_end;
-+ 	INDEX_ENTRY *ie_head;		/* first entry after the median */
-+-	int tail_size, ret;
-++	int tail_size, dst_capacity, ret;
-+ 	INDEX_BLOCK *dst;
-+ 	
-+ 	ntfs_log_trace("Entering\n");
-+@@ -1207,6 +1207,25 @@ static int ntfs_ib_copy_tail(ntfs_index_context *icx, INDEX_BLOCK *src,
-+ 	
-+ 	ies_end = (u8 *)ntfs_ie_get_end(&src->index);
-+ 	tail_size = ies_end - (u8 *)ie_head;
-++	dst_capacity = (int)(le32_to_cpu(dst->index.allocated_size)
-++			     - le32_to_cpu(dst->index.entries_offset));
-++
-++	/*
-++	 * src->index.entries_offset (on-disk, only required to be >=
-++	 * sizeof(INDEX_HEADER) by ntfs_index_block_inconsistent) may be smaller
-++	 * than dst's, which ntfs_ib_alloc fixes (40 on a 4 KiB block).  When
-++	 * the median lands near the start of the source stream the gap lets
-++	 * tail_size exceed dst's usable space.  The < 0 guard catches a
-++	 * negative tail_size before memcpy sign-extends it into a huge size_t.
-++	 */
-++	if (tail_size < 0 || tail_size > dst_capacity) {
-++		ntfs_log_error("Invalid tail_size %d (dst capacity %d) in "
-++				"ntfs_ib_copy_tail\n", tail_size, dst_capacity);
-++		free(dst);
-++		errno = EIO;
-++		return STATUS_ERROR;
-++	}
-++
-+ 	memcpy(ntfs_ie_get_first(&dst->index), ie_head, tail_size);
-+ 	
-+ 	dst->index.index_length = cpu_to_le32(tail_size + 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-index 97663fd109..4d5f88f611 100644
---- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-@@ -13,6 +13,7 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
-            file://CVE-2026-46572_CVE-2026-42617_p3.patch \
-            file://CVE-2026-46571.patch \
-            file://CVE-2026-46570.patch \
-+           file://CVE-2026-46569.patch \
- "
- S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
- SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
--- 
-2.35.6
++diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
++index 1c3741f..669c234 100644
++--- a/build_support/discover_system_info.py
+++++ b/build_support/discover_system_info.py
++@@ -57,7 +57,7 @@ def does_build_succeed(filename, linker_options=""):
++            '-o',
++            f'./build_support/src/{filename[:-2]}',
++            f'./build_support/src/{filename}',
++-           linker_options,
+++           *shlex.split(linker_options),
++            '-lpthread'
++            ]
++     p = subprocess.Popen(cmd, stdout=STDOUT, stderr=STDERR)
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
+index 111444580a..957580bf5d 100644
+--- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
+@@ -4,9 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3d8df223c2614dbf1aabdc1ca23cc10"
 
++SRC_URI += "file://0001-build_support-do-not-pass-empty-linker-option-to-the.patch"
+ SRC_URI[sha256sum] = "6923232111329954a8349f7d99f212b6e96b5206e77fbd39aaf1b3cb4a5e9260"
+
+-# Message queue support requires librt for proper linking
+-LDFLAGS += "-lrt"
+-
+ inherit pypi python_setuptools_build_meta
 
