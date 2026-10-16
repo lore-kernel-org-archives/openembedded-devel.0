@@ -2,74 +2,74 @@ Return-Path: <dkelaiya@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49818CCA46D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66A59CCA48B
 	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 07:46:47 +0000 (UTC)
-Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16845.1792136805786198513
+Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16492.1792136805832795344
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 16 Oct 2026 00:46:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=EKgmzP+f;
- spf=pass (domain: cisco.com, ip: 173.37.86.74, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=kY9KikXR;
+ spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3879; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=6495; q=dns/txt;
   s=iport01; t=1792136805; x=1793346405;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=LMjd39s0QZKmAdU7gsOXcgN9bW0doA2aRStGVgb82ig=;
-  b=EKgmzP+f/uJz2Ufytq6m836++Bm174IN2lIvl6N2L8oi/7GVg8ucrXxx
-   QhTY32LUX+u02e0EB6SnLdyx4SQnsuNmu8bvlAhHKJW3bbd+6LK5dzate
-   JQmlBSB759nFHirjs9k1MyCj3uGVBDUL1mEdgRHkkqdr6atKEzAnd9/m9
-   QhoJASAouFVKqgIi9vkkJ4ZbNLzMSRdd0XLJGUexV0cWyYPtKN1O8JJW2
-   AbmaSUKxeE4Z5BdY/PEHKhLn76ux6tl3ilAI4LGir87U92K/ic9eLoB2h
-   mbI16FSjOPV/dbRlz5UJ3MS2BxEqkIJhoXe1q8OXIW9pYMMia87OZaQMO
+  bh=NzoyyByUokDBuvCMAy/dr1Fx7CWUE0NVP2m8ly9vzg0=;
+  b=kY9KikXRaBOg8fLquT3sU7s38Jld/74Bs6HV9eCz200XU7ZnWHykwG1O
+   x63yoMKzAiZvGYWZEQD6xvx8rvjgxDAgMbCK7q3ZVpPeFCQchxgpJNQe7
+   UcWXeUTjF/Sqs6ODPF95N9958Y+z6DIq7mM95XsCLb/rw9rLRIzAGL8j5
+   TXdEo62UMcpiQm/zmO2rVE6qK80YtOV+tbhzvX9xq7lzW+t0CbGyb7DXO
+   nstWdHybL41EO7YcoX/9BPpWM6M+oh8mMb8O7LoSI8EW6Hr/sGKA7wJiz
+   LgIvmB5ruHrdLtdvMzVOhEggx88Eg0183jCLIr3LeB2Uv2wwynM6uhJhT
    Q==;
-X-CSE-ConnectionGUID: JKVZZfAyQiWz/o5QQFGL3Q==
-X-CSE-MsgGUID: emwHT3XuRQy7IcTTAtpnjQ==
-X-IPAS-Result: =?us-ascii?q?A0BGAgAh1tFq/5L/Ja1aglmCV3VgQ0mWSgOeHIF+DwEBA?=
- =?us-ascii?q?Q9EDQQBAYUFAo4VAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDZASAQIBAzIBRhAcAwECLysjCBmDAgGCdAMRvSCCLIEBg2kCQ1DbM?=
- =?us-ascii?q?gELFAGBOIVAiCNdGAGEfCcbG4FyhH6BBYFcAQGIAyIEgiKBDIFaHpUpSIEeA?=
- =?us-ascii?q?1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+F4EHGwYFgR2BIIIWIxk2eoEJXoErK?=
- =?us-ascii?q?WABEBeBCYIHAoJUggACAUlBDgdFUwklQxJHJiIIEgkBExowC4EbODwJKEEXD?=
- =?us-ascii?q?HMMHQVyCAINCQcpGA1IESw3FRkEPm4HkhQegkUZB4EOARMXASCBNRcBpBOCI?=
- =?us-ascii?q?aEPCiiDdowilToaM4QEgVeSQJJUC5h9jgqWT4RpgWg8gUcLB3AVgyIJShkPj?=
- =?us-ascii?q?jkng0SBf8xbJzICCTIBAQcCBw4DC4FokX4BAQ?=
-IronPort-Data: A9a23:mdTuH6J8f9Hm+H3pFE+RgZQlxSXFcZb7ZxGr2PjKsXjdYENSgTEGx
- mcZXW2HO/uOZ2bxfYpwbdyw/EMG78PWx9dqSQQd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
- 63yUvGZcoZpCCea+Uf1WlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnS0
- T/Oi5eHYgH8g2cqajt8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
- vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
- /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1ML38ED4Mx6992PnMJ8
- qEhER4iSku60rfeLLKTEoGAh+w5J8XteYdasXZ6wHSBXLAtQIvIROPB4towMDUY358VW62BI
- ZBENHw2MEqojx5nYj/7DLoyn+qsj3juehVTqUmeouw85G27IAlZjeOzb4SNJYTULSlTtkudu
- UL6pFTkOCgLa/2U9Qas7mqqhNaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7IQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:yi0D5K0gykgw8pxSmXhuVgqjBJAkLtp133Aq2lEZdPWaSKOlfq
- eV7ZMmPHDP6Qr5NEtMpTnEAtjjfZq+z+8Q3WBuB9eftWDd0QPCRr2Kr7GSpgEIcBeRygcy78
- tdmtBFeb7NJGk/q9rm6w+lFNtl6tyG/Ke0wdr69R5WPGdXg2UK1XYANu5deXcGPTV7OQ==
-X-Talos-CUID: 9a23:rs7W1GPRE249Bu5DegpZxnwaM9Ecc0LPi3CNGnaWJkIycejA
-X-Talos-MUID: 9a23:3W3yKAtfNPqFOqTJ/82niTR9FPsz07mUMVFSsJ46h+CYLSpyAmLI
+X-CSE-ConnectionGUID: 2pOMlwJ6TlePXOxyakcGZw==
+X-CSE-MsgGUID: iwZ/yuavSzS3Dm+2jsWKPQ==
+X-IPAS-Result: =?us-ascii?q?A0BGAgAY1NFq/5L/Ja1aHgEBCxIMggULgld1YENJlkoDn?=
+ =?us-ascii?q?hyBfg8BAQEPRA0EAQGFBQKOFQImNAkOAQIEAwIDAQEBAQEBAQEBAQEBCgEBB?=
+ =?us-ascii?q?QEBAQIBBwWBDhOGTw2QEgECAQMyAUYQHAMBAi8rIwgZgwIBgnQDEb0hgiyBA?=
+ =?us-ascii?q?YNpAkNQ2zIBCxQBgTiFQIgjXRgBhHwnGxuBcoEVg2mBBYFcAQGIAyIEgiKBD?=
+ =?us-ascii?q?IFaHmWUREiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgSCCF?=
+ =?us-ascii?q?iMZNnqBCV6BKylgARAXgQmCBwKCVIIAAgFJQQ4HRVMJJUMSRyYiCBIJARMaM?=
+ =?us-ascii?q?AuBGzg8CShBFwxzDB0FcggCDQkHKRgNSBEsNxUZBD5uB5IUHoJeBwGBAwoBB?=
+ =?us-ascii?q?yMBgQUUU0AekxeSQKEPCiiDdowilToaM4VbnU6HRguYfY4KlTOBHIRpgWg8g?=
+ =?us-ascii?q?UcLB3AVgyIJShkPjisOCxyDRIF/zFsnMgIJMgEBBwIHDgMLgWiRHmABAQ?=
+IronPort-Data: A9a23:exSNVaqRpcmLKRshQZRLzRpx5Q9eBmJIZBIvgKrLsJaIsI4StFCzt
+ garIBmHPKuNYGCnf9xyaIux/UtXvpHUyoBnS1E+r303Q3kXpOPIVI+TRqvS04x+DSFioGZPt
+ Zh2hgzodZhsJpPkjk7zdOWn9T8jhfngqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
+ T/Ji5OZYgDNNwJcaDpOtfvb8U035ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
+ 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
+ I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0rxvJkRK6
+ t5GFDQAViCkl/O/w7mUePY506zPLOGzVG8ekmtrwTecCbMtRorOBv2bo9RZxzw3wMtJGJ4yZ
+ eJANmEpN0uGOUASfA5LVvrSn8/w7pX7WzFbpVacpLs+y2PS1wd2lrPqNbI5f/TXH58NwxvC9
+ zOuE2LRAw4oc82CwCS+4En3quqMxyHgZ6EqLejtnhJtqBjJroAJMzURTVa9rPyzh0KyVt4aJ
+ 0EK9y4Gqakp6FftScHwWRC9qnOIshMQHd1KHIUHBBql0KHY5UOdQ2MDVDMEMI1gv84tTjts3
+ ViM9z/0OQFSXHSuYSr13t+pQfmaY0D58Udqifc4cDY4
+IronPort-HdrOrdr: A9a23:x9pniaCWXuKEgEDlHemO55DYdb4zR+YMi2TDGXofdfUzSL3+qy
+ nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygck79
+ YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a585+oJjsaE52JKGxCe3+mLnE=
+X-Talos-CUID: 9a23:HL194W/M6HiEuJwcktmVvxQMPeUhbV+D8HPdG3+fGXdgS7a6e0DFrQ==
+X-Talos-MUID: 9a23:WgeOhAY+OsC2GOBTtiDewyB/PdlT8Z/1JEVOy5cdhOq8DHkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="536760706"
+   d="scan'208";a="522055299"
 Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 07:46:44 +0000
+  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 07:46:44 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id B6E9018000238;
+	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id BE17718000587;
 	Fri, 16 Oct 2026 07:46:44 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 16A6FCBEF8A; Fri, 16 Oct 2026 00:46:44 -0700 (PDT)
+	id 1B61DCBEF98; Fri, 16 Oct 2026 00:46:44 -0700 (PDT)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-filesystems][scarthgap][PATCH 6/7] ntfs-3g-ntfsprogs: fix CVE-2026-42616
-Date: Fri, 16 Oct 2026 00:46:39 -0700
-Message-Id: <20261016074640.3986037-7-dkelaiya@cisco.com>
+Subject: [oe][meta-filesystems][scarthgap][PATCH 7/7] ntfs-3g-ntfsprogs: fix CVE-2026-40706
+Date: Fri, 16 Oct 2026 00:46:40 -0700
+Message-Id: <20261016074640.3986037-8-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261016074640.3986037-1-dkelaiya@cisco.com>
 References: <20261016074640.3986037-1-dkelaiya@cisco.com>
@@ -82,108 +82,147 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 07:46:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131077
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131078
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-This patch applies the upstream fix shown in [1]. The NVD record
-describing the vulnerability is referenced in [2].
+This patch applies the upstream allocation fix shown in [1]. The NVD
+record describing the vulnerability is referenced in [3].
 
-[1] https://github.com/tuxera/ntfs-3g/commit/dc1b682e99b6c055b0281ca543a8420b698420d1
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-42616
+The fix in [1] allocates space for the worst-case number of POSIX ACL
+entries in ntfs_build_permissions_posix(). The follow-up in [2] is
+included to handle allocation failure: check the malloc result, set
+errno to ENOMEM, and return NULL before using the descriptor.
+
+[1] https://github.com/tuxera/ntfs-3g/commit/e48e1ef2a1fcff13a590c2224ec21c5bd5d3e92e
+[2] https://github.com/tuxera/ntfs-3g/commit/c5413e242309f88ce5a83c0c2538184b19eea1bc
+[3] https://nvd.nist.gov/vuln/detail/CVE-2026-40706
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../files/CVE-2026-42616.patch                | 70 +++++++++++++++++++
- .../ntfs-3g-ntfsprogs_2022.10.3.bb            |  1 +
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-42616.patch
+ .../files/CVE-2026-40706_p1.patch             | 60 +++++++++++++++++++
+ .../files/CVE-2026-40706_p2.patch             | 34 +++++++++++
+ .../ntfs-3g-ntfsprogs_2022.10.3.bb            |  2 +
+ 3 files changed, 96 insertions(+)
+ create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p1.patch
+ create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p2.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-42616.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-42616.patch
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p1.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p1.patch
 new file mode 100644
-index 0000000000..26858a3537
+index 0000000000..22ece5aca3
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-42616.patch
-@@ -0,0 +1,70 @@
-+From 96f3c15677c6aa0251798eef74a5a4c376523ee3 Mon Sep 17 00:00:00 2001
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p1.patch
+@@ -0,0 +1,60 @@
++From 696eb743bd94ddbb86e84e544e152845b92a8a7f Mon Sep 17 00:00:00 2001
 +From: Erik Larsson <erik@tuxera.com>
-+Date: Fri, 24 Apr 2026 12:18:24 +0300
-+Subject: [PATCH] ntfscat.c: Fix reading outside the buffer when block size >
-+ buffer size.
++Date: Tue, 24 Feb 2026 10:04:31 +0200
++Subject: [PATCH] acls.c: Fix heap buffer overflow in
++ 'ntfs_build_permissions_posix'.
 +
-+The block size may be read from the index root's 'index_block_size'
-+member, and isn't guaranteed to be >= 4096 (as far as I can tell it
-+could be larger). This would for MST protected records lead to storing
-+data past the end of the allocated buffer.
++The root cause was that the memory allocated for the ACE entries was
++insufficient for the worst case scenario when group entries were added
++for mask entries that didn't have a corresponding group entry already.
++Fixed by allocating space for the worst case number of ACE entries.
 +
-+Fixed by allocating the necessary amount of buffer space for the case
-+when the block size exceeds 4096.
++This was reported by Andrea Bocchetti with a thorough report which made
++it very easy to fix.
 +
-+Thanks to Alexandro Calo' from Nozomi Networks Labs for reporting this
-+issue.
++CVE: CVE-2026-40706
++Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/e48e1ef2a1fcff13a590c2224ec21c5bd5d3e92e]
 +
-+CVE: CVE-2026-42616
-+Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/dc1b682e99b6c055b0281ca543a8420b698420d1]
-+
-+(cherry picked from commit dc1b682e99b6c055b0281ca543a8420b698420d1)
++(cherry picked from commit e48e1ef2a1fcff13a590c2224ec21c5bd5d3e92e)
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ ntfsprogs/ntfscat.c | 16 ++++++++++------
-+ 1 file changed, 10 insertions(+), 6 deletions(-)
++ libntfs-3g/acls.c | 25 ++++++++++++++++++++-----
++ 1 file changed, 20 insertions(+), 5 deletions(-)
 +
-+diff --git a/ntfsprogs/ntfscat.c b/ntfsprogs/ntfscat.c
-+index b8af2503..0f711815 100644
-+--- a/ntfsprogs/ntfscat.c
-++++ b/ntfsprogs/ntfscat.c
-+@@ -334,22 +334,17 @@ static int index_get_size(ntfs_inode *inode)
-+ static int cat(ntfs_volume *vol, ntfs_inode *inode, ATTR_TYPES type,
-+ 		ntfschar *name, int namelen)
-+ {
-+-	const int bufsize = 4096;
-+ 	char *buffer;
-+ 	ntfs_attr *attr;
-+ 	s64 bytes_read, written;
-+ 	s64 offset;
-+ 	u32 block_size;
-+-
-+-	buffer = malloc(bufsize);
-+-	if (!buffer)
-+-		return 1;
-++	u32 bufsize = 4096;
-+ 
-+ 	attr = ntfs_attr_open(inode, type, name, namelen);
-+ 	if (!attr) {
-+ 		ntfs_log_error("Cannot find attribute type 0x%x.\n",
-+ 				le32_to_cpu(type));
-+-		free(buffer);
-+ 		return 1;
-+ 	}
-+ 
-+@@ -360,6 +355,15 @@ static int cat(ntfs_volume *vol, ntfs_inode *inode, ATTR_TYPES type,
-+ 	else
-+ 		block_size = 0;
-+ 
-++	if (bufsize < block_size) {
-++		bufsize = block_size;
++diff --git a/libntfs-3g/acls.c b/libntfs-3g/acls.c
++index 9f16fecd..4cf534bf 100644
++--- a/libntfs-3g/acls.c
+++++ b/libntfs-3g/acls.c
++@@ -3716,12 +3716,27 @@ struct POSIX_SECURITY *ntfs_build_permissions_posix(
++ 		/*
++ 		 * Build a raw posix security descriptor
++ 		 * by just translating permissions and ids
++-		 * Add 2 to the count of ACE to be able to insert
++-		 * a group ACE later in access and default ACLs
++-		 * and add 2 more to be able to insert ACEs for owner
++-		 * and 2 more for other
+++		 *
+++		 * The worst case number of ACE entries consists of:
+++		 * - 'acecount' ACE entries from the main loop (see below)
+++		 *   iterating over the 'securattr' array.
+++		 * - 1 ACE entry which may be added when creating world
+++		 *   permissions if none exist.
+++		 * - 1 ACE entry which may be added when setting basic owner
+++		 *   permissions if none exist (both lists).
+++		 * - 1 ACE entry which may be added when duplicating world
+++		 *   permissions as group_obj permissions if none exist.
+++		 * - 'acecount + 2' ACE entries which may be added when
+++		 *   duplicating world permissions as group permissions if they
+++		 *   were converted to masks and the masks are not followed by a
+++		 *   group entry.
+++		 * - 1 ACE entry which may be added when inserting a default
+++		 *   mask if none is present and there are designated users or
+++		 *   groups.
+++		 *
+++		 * This amounts to 2*acecnt + 6 ACE entries in the worst case.
++ 		 */
++-	alloccnt = acecnt + 6;
+++	alloccnt = 2*acecnt + 6;
++ 	pxdesc = (struct POSIX_SECURITY*)malloc(
++ 				sizeof(struct POSIX_SECURITY)
++ 				+ alloccnt*sizeof(struct POSIX_ACE));
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p2.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p2.patch
+new file mode 100644
+index 0000000000..f19f9370bf
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-40706_p2.patch
+@@ -0,0 +1,34 @@
++From a0842353864ad42abc30119af2fa5b9f5751d66b Mon Sep 17 00:00:00 2001
++From: Erik Larsson <erik@tuxera.com>
++Date: Tue, 24 Feb 2026 16:35:21 +0200
++Subject: [PATCH] acls.c: Add 'malloc' return value check when allocating POSIX
++ ACL.
++
++CVE: CVE-2026-40706
++Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/c5413e242309f88ce5a83c0c2538184b19eea1bc]
++
++(cherry picked from commit c5413e242309f88ce5a83c0c2538184b19eea1bc)
++Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
++---
++ libntfs-3g/acls.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/libntfs-3g/acls.c b/libntfs-3g/acls.c
++index 4cf534bf..2d24d65e 100644
++--- a/libntfs-3g/acls.c
+++++ b/libntfs-3g/acls.c
++@@ -3740,6 +3740,14 @@ struct POSIX_SECURITY *ntfs_build_permissions_posix(
++ 	pxdesc = (struct POSIX_SECURITY*)malloc(
++ 				sizeof(struct POSIX_SECURITY)
++ 				+ alloccnt*sizeof(struct POSIX_ACE));
+++	if (!pxdesc) {
+++		ntfs_log_perror("Unable to allocate %zu bytes for "
+++				"POSIX_SECURITY structure",
+++				(size_t)(sizeof(struct POSIX_SECURITY) +
+++					alloccnt*sizeof(struct POSIX_ACE)));
+++		errno = ENOMEM;
+++		return NULL;
 ++	}
-++
-++	buffer = malloc(bufsize);
-++	if (!buffer) {
-++		return 1;
-++	}
-++
-+ 	offset = 0;
-+ 	for (;;) {
-+ 		if (!opts.raw && block_size > 0) {
++ 	k = 0;
++ 	l = alloccnt;
++ 	for (i=0; i<2; i++) {
 diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-index 6489ac3d27..5ecda1f66f 100644
+index 5ecda1f66f..d5bc18d2b4 100644
 --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
 +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
-            file://CVE-2026-46569.patch \
+@@ -17,6 +17,8 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
             file://CVE-2026-42618_p1.patch \
             file://CVE-2026-42618_p2.patch \
-+           file://CVE-2026-42616.patch \
+            file://CVE-2026-42616.patch \
++           file://CVE-2026-40706_p1.patch \
++           file://CVE-2026-40706_p2.patch \
  "
  S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
  SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
