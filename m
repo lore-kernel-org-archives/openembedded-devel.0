@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9977CCC6B38
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD7FECCA46C
 	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 04:07:55 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14624.1792123668600623881
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14394.1792123673249282942
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 21:07:48 -0700
+ Thu, 15 Oct 2026 21:07:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=EYtkQ3AJ;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e5fb79ce82so34564805ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 21:07:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=eXVsJOqs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2e8246b13cbso44338735ad.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2026 21:07:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792123668; x=1792728468; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792123672; x=1792728472; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WlLnhhOamGPffzI4bukAwaZ83fZr2iQWdwLK0EHHf04=;
-        b=EYtkQ3AJ8EpcbylAGNFDn/IicTTh5yEqq8fN0dST0szXg/aSp3vbFwP+0ORI5mjCtw
-         6ulpdIESLtySBOZQSBMuq926GkoUsGpr8SJKSWa2iD8Xqd6e803TRgLsGLMmEEVMf5tH
-         uGNqbyQMr5pL1NRBDnPkQCcqSsmnyx8OPAQW1c3OiZlR7hBLfPT6j74Ki3sbgEX2tgTQ
-         wCB/1fez3EinhO623pEKDNXe3CUwFAzLUGtXx7xY9dwWIUGgnCUnKx6rY5QbxaameRxF
-         RqQy8DJcQFspow4ZuH824lp7SNEAEyJcrHOJcRcwL71hTdxoawitiiuuvn/1sVamj0vA
-         XSUQ==
+        bh=Ev1Z07yrt5SrPEdbQ8xsJv8z32jQAnvxspHgYKT5Ieo=;
+        b=eXVsJOqslvJIlgEcgnMyeZnhcIbYXkJ2S+HSxZtVvbDNvv23S98wkQMa/PDswMK65K
+         OPh/Uexv7U4ykzaM2l5HXXPNHnq4u2wSykL0KwRbMk8WGZshcnA19JC6ovXl1wr81pkq
+         ED+GeEvLVTXmsnr2N7xg3L+vmSNS9dZh3o9Ju1HS4Ib9mx5ebFHi+9fcs9shaoDPmQiS
+         knoMll2soN8GbZ7VWmvbsZ1UU/WnEVo2IoTLO1Mvr27AmdnoYrGPjDbWMpNOD+Xtg0lN
+         BsN+n4P+p6dtBw6516q5lyDHbk8w2U7CXqhSs/b6kQCgbCsatB2FPgsbpDjupXoAvnuj
+         soAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792123668; x=1792728468;
+        d=1e100.net; s=20260707; t=1792123672; x=1792728472;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WlLnhhOamGPffzI4bukAwaZ83fZr2iQWdwLK0EHHf04=;
-        b=A3jeMhokMYtqPLkDYUo2SmbB55u8vg+KP07MU1FIqaptVWKl+ConThzhXxMGiU3ZtE
-         ClQbc+YHigaB7twOlrSJEanddwfRHxuin14Gk+ajXy0a5mTGKTtyVacHYsBEqEeyV60F
-         wsqPqtseBsJ4nhRIokO6vHglF+RWGnjcdgIzS/Ficlok3sDeW/lh3S7mpML+fnnHHQMz
-         kZHvKgGbFAEi+9NmVOCUvu4SHlSH46Skx4A3iKN7iQ6ZTxUOOWaDHakXf+XJZaHatQzw
-         PnGvITs6AtmllqcAEgspiqC1qHIp2p8u7Ezeh144LW4z1O9F/+2vi0J3DyUAj05CVJFJ
-         OYdQ==
-X-Gm-Message-State: AFq9FYIapR/g8GvJZuD0DUB7J4M7oA2RydbRqf9muXyyaEIDstZydCc+
-	cXTKiGccC0JvhIDNwjwj1FsPON+mdihMa6c9wwUXBGoxP3cSHyXRGsmVi66odg==
-X-Gm-Gg: AYBFou3lJSpOcC6CltI79McqhxTnSjTxh3wzLw5nx0iplR9zkpEw2oq8IYjsIrJ2EtH
-	4DbohElrdSB1wprmND8jYdEG6joqpiZzvAGiVyzRpvchQ/hnLYY4DPbnLe6KhjFqbTjN9lHLr8O
-	MWu6b1fTfshhg24II2Z/ScJyZf8MgVI2swjpkHPC1BlyHcpUUxiSAo4rGd3wBytfxNOUhGedsB0
-	gZM+AV6CcPhoJT9lReSgPWv4NU82vAvGQyKGfCyuZUDWnSlcTPk87MMBoM2FOp+EhvUq38XtU0a
-	XK1I9xoBtLNsCl2IHVpTVs7MDnd0/8PxW9PUVB9OjCl90EY/LPdECLjb1LvpZsQ3lVo9RPg/TVq
-	Qtj0wgerQ+o/AMWh2URqXkegB1wprr3Hj6S//S+waio/jhmA29TkgaKuutcB0WqyMZqTbkNaeWS
-	sKh6xcJSaLXNXpESQS9KKYTlJVGrW+q7PehC3kjiK8JqXZsLigdwweCuC5g5Wd1rKxE3w7sCD5u
-	KoNMytRjzwMD6TN/6Sic/flMLS/85p47nM+uLg=
-X-Received: by 2002:a17:902:f688:b0:2e9:8bd4:577d with SMTP id d9443c01a7336-2e98bd4588amr5795555ad.37.1792123667771;
-        Thu, 15 Oct 2026 21:07:47 -0700 (PDT)
+        bh=Ev1Z07yrt5SrPEdbQ8xsJv8z32jQAnvxspHgYKT5Ieo=;
+        b=AC0+2ShAXT/QvVPzGZIGXhikE3Dd0egu+5DXoRt+FMx8qLGgalIs9u69hfjKLuFDmv
+         ftVFRCTLmGZcD87lwkaDpG2KvoAo/Soym5RNYI2w7q7ZeN8GYQRbpTjdD1GNDiDtfIuq
+         4qEYeCgthuGST3YB75a4xPqLyMvBwni1XQZJcSoRp+8iPR/NL7t8h/AQA4yhj0S/OisB
+         c6LCfuVC8ZeQ+4wnZF+A3ExFDu0ToCOpZ2a7KLxf4cm5/YrhDDFxLUqgyg9dnAaLUc0t
+         8R07VC6bYuKh4gAuQeKVovhgM9VlGgOs/CEbbu1J841a3+g6LC5HzF0F0doWTzrHT0tt
+         6N7A==
+X-Gm-Message-State: AFq9FYKZU3NKhg/2ErmZPP+SfCs3yUpsKpC+gICvrg7gATKIzwLYgLbU
+	A7j8KZ3LBC4iiMl+BWdjh1yHMn1PbkBID73Koc7zmImceldxzdae50gyhlQT2Q==
+X-Gm-Gg: AYBFou0MYxmLEzVQDlmoMkJEVr+Kx8kLkjf5Rct0pflyG+lRsIp0iKW5+S307ycdW9i
+	hsPXLSSTInCYbLhpP7Oajt9416wECIxGC5VXbtgBTFlzp28TCVatSovJyBDnboKEip3wuA2+xD/
+	D0v9Jphmq7Fq0mRp4ZOMudFETnYiIdpoajgRpQRJ4kJPpfVU57s+iAlgXWdUnXvnXrLwB0cD21v
+	leGYAcd71AlcDbqN6IUTMBCmWx4N1IDOuSwsHNLljxU4lGvooxNe1HkIpeKNXwhppNXqhNek6GM
+	ENK1zzy+k/6pdyptgd87AL66Z0qtKDgqestU5h1ebWIytQceH38cpIgORUIev+H1001vVUThOcr
+	eoyZSNrJd0SO9LCtCUwXRYUJboTeI8aTn9qRUGJqpMxeqgiaeilCI9oGd09WDsyJHHNlr1GgxWv
+	Nu8kybrrGxIWBbbmOkS5ZD7pFzB7qdHcQvDkv3VJA2Ew6IP7gXQhDQ3fbSaj1mfZRVrd/yWTvcm
+	OwrWXz6NhbHD1oXQphM00zck1EBlHEafqUiiBs=
+X-Received: by 2002:a17:903:1251:b0:2e9:7ff5:545a with SMTP id d9443c01a7336-2e97ff55a08mr12729205ad.32.1792123672410;
+        Thu, 15 Oct 2026 21:07:52 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e97e83498csm3796335ad.35.2026.10.15.21.07.46
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e97e83498csm3796335ad.35.2026.10.15.21.07.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 21:07:47 -0700 (PDT)
+        Thu, 15 Oct 2026 21:07:52 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 3/10] python3-bitarray: upgrade 3.11.0 -> 3.12.2
-Date: Fri, 16 Oct 2026 17:07:27 +1300
-Message-ID: <20261016040734.1499287-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][PATCH 5/10] python3-charset-normalizer: upgrade 3.5.1 -> 3.5.2
+Date: Fri, 16 Oct 2026 17:07:29 +1300
+Message-ID: <20261016040734.1499287-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261016040734.1499287-1-ankur.tyagi85@gmail.com>
 References: <20261016040734.1499287-1-ankur.tyagi85@gmail.com>
@@ -68,33 +68,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 04:07:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131039
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131041
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/ilanschnell/bitarray/blob/3.12.2/CHANGE_LOG
+https://github.com/jawah/charset_normalizer/releases/tag/3.5.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{python3-bitarray_3.11.0.bb => python3-bitarray_3.12.2.bb}  | 2 +-
+ ...-normalizer_3.5.1.bb => python3-charset-normalizer_3.5.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_3.11.0.bb => python3-bitarray_3.12.2.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.5.1.bb => python3-charset-normalizer_3.5.2.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_3.11.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_3.12.2.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-bitarray_3.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_3.12.2.bb
-index c3c1bb6d68..93be8393f1 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_3.11.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_3.12.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee53045a33ae807c64fd"
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.2.bb
+index 3b56ad3860..1d02fd7fca 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.5.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
  
--SRC_URI[sha256sum] = "bf19437ec00ec3d40aef82eaeedc14cf4000be9b635c4f5049796506e6630dd8"
-+SRC_URI[sha256sum] = "940b64a0701cea18c0698ef23ec2d9a038e47103b0402b19cfb298d71817d27b"
+ SRC_URI += "file://0001-pyproject.toml-relax-setuptools-upper-bound.patch"
+-SRC_URI[sha256sum] = "6117b84ea48435e5356dc737f5121485c30920ba43375fa7b434fd753df0eac3"
++SRC_URI[sha256sum] = "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
  
- inherit python_setuptools_build_meta pypi
+ DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
  
 
