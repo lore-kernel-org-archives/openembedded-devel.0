@@ -2,118 +2,128 @@ Return-Path: <hthakar@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B992CCA462
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 02:57:12 +0000 (UTC)
-Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13789.1792119422947480683
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53A6BCCA462
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 03:21:02 +0000 (UTC)
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13830.1792120858226826201
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2026 19:57:03 -0700
+ Thu, 15 Oct 2026 20:20:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=P91Gy0CK;
- spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=WgIfzpXN;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1402; q=dns/txt;
-  s=iport01; t=1792119422; x=1793329022;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=QeatrndssroU5kKuq+WrM7A/OEA+ZwqYg8IfthgzD+E=;
-  b=P91Gy0CKUkccuyDcredyccHfjG+Gv2FKrtLx8WHlRpZSay5Z9rsmNUCh
-   XRVjeDivXiPUqVa/H3uhGwlGEtAR82m/MdDn801asmdg0xITm3uXaSWPO
-   nbCQWdHNYznbwaw8/wBel2zOka3ONYr4NJJTXzE2c+5gIJ4eaFHPm8lA2
-   8Mta585e2vHobdbdNYEZfIJSmRU6LXTj3y0mybV78EqXC2RDXos/mYZWH
-   bnMY9c6WHZTZCrMHNwBi2WNhES7j9BFeYIK7sgmfTvlRNY1ATA1vBLYBl
-   uG4gMxf6Cm95ZwLlmtB/q/nh1f345rT2YC5Qi5C1e6XB3LT+F7XjSukRO
-   A==;
-X-CSE-ConnectionGUID: 4nuglb+pRMSXAgZX9zk3YA==
-X-CSE-MsgGUID: vGwKp6P0S7+YnseA6hGvKg==
-X-IPAS-Result: =?us-ascii?q?A0BJBQA+kdFq/43/Ja1ahiVgQ0mTWQGCcKAdDwEBAQ89F?=
- =?us-ascii?q?AQBAYUFjhcCJjgTAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBDhOGT?=
- =?us-ascii?q?w2QFSsLARgBLTBcHQEmgwIBgnQDEQa8VYF5M4EBgykBQ0FQ2z4VBYEzhUCII?=
- =?us-ascii?q?3UBhHwnGxuBcoR+gmEDgSYqXIV4BIIiehKXIUiBHgNZLAFVEw0KCwcFgWgDN?=
- =?us-ascii?q?RIqFW4yHYEjPheBBxsGBYEdgSCCFiMZNnqBCV6BKylgARAXgQmCBwKCVIIAA?=
- =?us-ascii?q?gFJQQ4HRVMJJUMSRyYiCBIJARMaMAuBGzg8CShBFwxzDB0FcggCDQkHKRgNS?=
- =?us-ascii?q?BEsNxUZBD5uB5ITHoJlYS0qAoI9BpNjkXuhDwoog3aMIpU6GjOEBKZrmQiCW?=
- =?us-ascii?q?aIAhGmBfyWBWXAVgyIJShkPlzfJRycyAgEBOQEBBwIHDgMLgWiQAAImgVYBA?=
- =?us-ascii?q?Q?=
-IronPort-Data: A9a23:JNkIDqP7yYsXxj7vrR30lsFynXyQoLVcMsEvi/4bfWQNrUom0zUHz
- 2EeD2uFa6yNNDPxctF1bIm/oUhX75/Rz9JjSXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmD9k/F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
- e/a+ZWFZgb9gmAsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj66loEU4yN84AwMNMMUhBx
- 8xJOjNWXznW0opawJrjIgVtrt4oIM+uOMYUvWttiGmFS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzNXwsYDUXUrsTIJIinO6rj2PXeDxDo1XTrq0yi4TW5FEqjuG9bYCJI7RmQ+1LsVm7v
- jz+p1+mQSAcL9G2lzqq7FGj07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++Mv0CSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:FbgXI6H956GI+W60pLqExMeALOsnbusQ8zAXPo5KJiC9Ffbo8v
- xG88576faZslsssRIb6LK90de7IU80nKQdieJ6AV7IZmfbUQWTQL2KxLGSpwEIYxeOldJ15O
- NHb7V0DsH2ABxRiMb35xT9LvMbqeP3l5xBQYzlvg5QpcYAUdAH0ztE
-X-Talos-CUID: 9a23:LYSxeW0nEiWXkvt3sT7PxrxfRsY4fXnXj2/qBnSIIGlbeOyHSgSh0fYx
-X-Talos-MUID: 9a23:GY6TKgskYMsKNbCmgs2nmh59F9822/yVVwM8l44LkpeEGjJTNGLI
+  d=cisco.com; i=@cisco.com; l=2189; q=dns/txt;
+  s=iport01; t=1792120858; x=1793330458;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=z9ldcdWry9ahD51h1bDHzgZumiyf8SbsHDoo33U9Zkg=;
+  b=WgIfzpXNQobRKl/Wj53LUSdQbrLiFunJuPXSGQFe+gETV6G8rps9GN6e
+   osWH6xvbXPgbbgylLQPREhkLHKnldAx79a3RavWhAVQ/A+Wh12cI634A7
+   V3yf1EpMMarP9dE6UNmuCnlNmRo48FAfDcGnczs8hzrCN/v2ZaiNtxzS/
+   0GUdAOYiTLwOukzE9pBnso6cPe+LrOiTbAJHCYb7P/coY4ObV056GlV07
+   JyvpCcWYXvgnWe4MmqKDqlP8gpump6+4I/ZvYYDCgIConQcN4Z4xFPIXQ
+   OXdU5laPo85xeRstv9RxnwrqGHsUas4bZPaCREyayWB9Qi/m60zApWO2q
+   g==;
+X-CSE-ConnectionGUID: 0DZgIDSuS1eCHBnXN0UW7g==
+X-CSE-MsgGUID: S+ANA0+0SNmGgATAHTvSng==
+X-IPAS-Result: =?us-ascii?q?A0B2AwCRl9Fq/5X/Ja1aglmCV3VgQ0kDjVeIBGwDnhyBf?=
+ =?us-ascii?q?g8BAQEPPRQEAQGFBQKOFQImNgcOAQIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBA?=
+ =?us-ascii?q?QIBBwWBDhOGTw2QEwIBAzIBGAEtECAxKysZgwIBgnQDEQa8dIIsgQGDKQFDQ?=
+ =?us-ascii?q?VDbMgELFAEFgTOFQIgjdQGEfCcbG4FygRWDaYEFgVwBAoIshXgEgiKBDIF4l?=
+ =?us-ascii?q?SlIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEgghYjGTZ6g?=
+ =?us-ascii?q?QlegSspYAEQF4EJggcCglSCAAIBSUEOB0VTCSVDEkcmIggSCQETGjALgRs4P?=
+ =?us-ascii?q?AkoQRcMcwwdBXIIAg0JBykYDUgRLDcVGQQ+bgeSEx6CZWEtASkBAQSCAaYco?=
+ =?us-ascii?q?Q8KKIN2jCKVOhozqm8LmH2OCpZPhGmBbwgtgVlwFYMiCUoZD44vCguIc8lHJ?=
+ =?us-ascii?q?zICDC8BAQcCBw4DC4FokX4BAQ?=
+IronPort-Data: A9a23:PLEbXK49Bikg1FPJYneYcwxRtGnGchMFZxGqfqrLsTDasY5as4F+v
+ mYXDGmEOP+JZTT8fdh3aY+z9RwE6sSDz9FqGgNoqylmZn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo/KUzBHf/g2QqazpNtfrawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eZaEq9cdbOnx1r
+ PEzCBoLXjbbut3pz+fuIgVsrpxLwMjDJogTvDRkiDreF/tjGMqFSKTR7tge1zA17ixMNa+BP
+ IxCNnw1MUmGOkEeUrsUIMpWcOOAhmX/ej5RsnqepLE85C7YywkZPL3FbYGIK4zWFJ8F9qqej
+ lmF1kLQWlJCD/qa5jWszluMuvH0myyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzFeCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:yt/kEav3K6WMvqqHnRusGM0F7skDrtV00zEX/kB9WHVpmwKj+P
+ xG+85rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1MmZPDUO0VHAROoJ0WKh+UyEJ8SUzIBgPM
+ lbH5SWIeeAa2SS9fyKgzWQIpIH3MSN9ryuiKP1yndgShwvVoRbhj0Jczpy1iZNNXJ77V1TLu
+ vl2vZ6
+X-Talos-CUID: 9a23:tapUyW8yJp5k8lFKe9KVvxY4KM8EXkbA9y7dCG+SD1ZPEICqFlDFrQ==
+X-Talos-MUID: 9a23:7QVWVwYffDCp++BTjHzFohg6d59TxaGBB2kxuLU6pfKCOnkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="536185241"
-Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
-  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 02:57:02 +0000
+   d="scan'208";a="535984928"
+Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 03:20:57 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 0F1B5180005FD;
-	Fri, 16 Oct 2026 02:57:02 +0000 (GMT)
+	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id 4023518000301;
+	Fri, 16 Oct 2026 03:20:57 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id AAD4ACC1611; Thu, 15 Oct 2026 19:57:01 -0700 (PDT)
+	id 97D1ACBEF6B; Thu, 15 Oct 2026 20:20:56 -0700 (PDT)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-oe][wrynose][PATCH 0/1] wireshark: upgrade 4.6.4 -> 4.6.8
-Date: Thu, 15 Oct 2026 19:57:00 -0700
-Message-Id: <20261016025701.372513-1-hthakar@cisco.com>
+Subject: [meta-webserver][wrynose][PATCH 10/11] nginx: Ignore CVE-2026-40460
+Date: Thu, 15 Oct 2026 20:20:55 -0700
+Message-Id: <20261016032056.409095-11-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20261016032056.409095-1-hthakar@cisco.com>
+References: <20261016032056.409095-1-hthakar@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: rcdn-l-core-04.cisco.com
+X-Outbound-Node: rcdn-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 02:57:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131023
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 03:21:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131029
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-This patch upgrades Wireshark directly from 4.6.4 to 4.6.8. It
-updates the recipe filename and source checksum in one patch, rather
-than carrying the four intermediate upgrade commits from master.
+Analysis:
+- CVE-2026-40460 affects nginx only when the HTTP/3
+  QUIC module is enabled [1].
+- The module requires the explicit --with-http_v3_module configure
+  option, which neither Wrynose nginx recipe enables by default [2].
+- Mark the CVE not applicable only when that option is absent; report it
+  as unpatched when a bbappend enables the module.
 
-The upgrade addresses 84 CVEs in the reported set: 43 were first
-fixed in 4.6.5, one in 4.6.6, 12 in 4.6.7, and 28 in 4.6.8.
-CVE-2026-19696 concerns a Windows-only crash and does not affect
-Wrynose Linux builds.
+Reference:
+[1] https://nginx.org/en/security_advisories.html
+[2] https://nginx.org/en/docs/configure.html
 
-The features listed for 4.6.5 through 4.6.7 primarily update Windows
-installers and their bundled components; those installer changes do not
-apply to the Yocto source build. Version 4.6.6 also adds a welcome-page
-preference in the GUI. The Wrynose recipe does not enable Qt by default.
-Updates to existing protocol dissectors and capture-file handling are
-included in the upgrade.
+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
+---
+ meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb | 1 +
+ meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 1 +
+ 2 files changed, 2 insertions(+)
 
-Release notes:
-https://www.wireshark.org/docs/relnotes/wireshark-4.6.5.html
-https://www.wireshark.org/docs/relnotes/wireshark-4.6.6.html
-https://www.wireshark.org/docs/relnotes/wireshark-4.6.7.html
-https://www.wireshark.org/docs/relnotes/wireshark-4.6.8.html
-
-Hetvi Thakar (1):
-  wireshark: upgrade 4.6.4 -> 4.6.8
-
- .../wireshark/{wireshark_4.6.4.bb => wireshark_4.6.8.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_4.6.4.bb => wireshark_4.6.8.bb} (97%)
-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+index 56050b84eb..ca8e7129fb 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+@@ -23,3 +23,4 @@ SRC_URI[sha256sum] = "2c96a946bfb0882a21744ed429770a2123ae1828c7c48665092993ddee
+ 
+ CVE_STATUS[CVE-2025-53859] = "cpe-stable-backport: Fix is included in 1.28.1"
+ CVE_STATUS[CVE-2026-1642] = "fixed-version: fixed since v1.28.2"
++CVE_STATUS[CVE-2026-40460] = "${@ 'unpatched' if '--with-http_v3_module' in ((d.getVar('EXTRA_OECONF') or '').split() + (d.getVar('PACKAGECONFIG_CONFARGS') or '').split()) else 'not-applicable-config: ngx_http_v3_module is not enabled'}"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+index 68015a12fa..2aae2091a0 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+@@ -25,3 +25,4 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
+ 
+ SRC_URI[sha256sum] = "673f8fb8c0961c44fbd9410d6161831453609b44063d3f2948253fc2b5692139"
+ 
++CVE_STATUS[CVE-2026-40460] = "${@ 'unpatched' if '--with-http_v3_module' in ((d.getVar('EXTRA_OECONF') or '').split() + (d.getVar('PACKAGECONFIG_CONFARGS') or '').split()) else 'not-applicable-config: ngx_http_v3_module is not enabled'}"
 -- 
 2.35.6
 
