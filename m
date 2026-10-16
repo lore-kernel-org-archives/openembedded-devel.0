@@ -1,180 +1,354 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <rsangam@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94F57CCA46C
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 16:50:27 +0000 (UTC)
-Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1559.1792169425137072307
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9BC1CCA490
+	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 17:02:07 +0000 (UTC)
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1890.1792170125165888054
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2026 09:50:25 -0700
+ Fri, 16 Oct 2026 10:02:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=jUZ/pU+i;
- spf=pass (domain: gmail.com, ip: 74.125.82.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-141395927feso191333c88.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 09:50:25 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=RlJvIiKg;
+ spf=pass (domain: mvista.com, ip: 74.125.82.170, mailfrom: rsangam@mvista.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso284955eec.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 10:02:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792169424; x=1792774224; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1792170124; x=1792774924; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+OAnocA3MLPaUGh/1RNcDO3uRpjS0VB/ztpV1Soj3X8=;
-        b=jUZ/pU+iKKLpjYS76XXC6kC8on/T9uq3As8cADV54nnrEE6vxFc7Smo1tMmazNFoLT
-         QfGUZukveASoDwgrjeikdz/f5yYgu2PFo7fXvmF/qoGgKTGhFbl6cUYTZTTS0Shqt+qR
-         CwDAOpwJ//H7l1XXKAJ+JqN7uL4hfY7Xg6iHfXUUVDCVG49ZEWgIXRTk359FhCyGeCvB
-         bmBgHv0HtGbu9hn7r0pnJWj48i/vqKaGGiwQmkSoaQf7n53/pNP6JnJHaif8aeT3u1dr
-         cumIFrReZsA8gDZj4IYc+ZKhKIty/ZQoiyZE+jW3NSkD3ENTJusOz77LqSzNTvxu/BJJ
-         Zz1w==
+        bh=nVllKAggxPlIAPhK75vGTKA3LG/twl9L0Z4bMQ/OsPU=;
+        b=RlJvIiKgiUCnmbDXI/ht6KbwHu3Ncz+ByAbr4d/jDXqSPN49JuG0beieyV62l9WXrv
+         +++6w7PTJNGbXVuCPjtOVDAdO1F2FCAbKedfE3AkDWAQknJ09bc7mcgM9Rlt2/bKfisQ
+         tyrqvFyYXqv1JYEFoo3uqDXEkqVtlN4BB5lIY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792169424; x=1792774224;
+        d=1e100.net; s=20260707; t=1792170124; x=1792774924;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+OAnocA3MLPaUGh/1RNcDO3uRpjS0VB/ztpV1Soj3X8=;
-        b=kR5E0avzSrVCIdg9bAFQNGyVUSXm4UmYWbXNwUGUyU285qDOwx1tOQipLTGi4aPvFm
-         gmWIGK1ThicUT5LnlXvcpkx945way5nXCcoLUWW0nJRYfZwSDN2kANGdxTkxbGyT2yPf
-         Ax23UC+QzbcPxeFSPHC7RWIq6TcScjnYyNv32hoBEAWpvjA2rN2CVbJOCnvtLBjKI9B6
-         zGKB4BG6Ws1xjlqeI26fqCWXS31bCRIoIyqVgW1Gu8wou6bBv1duRJj9siGpoqa5AvSU
-         Tpt835nJ2InhVQ/IHZYUOxVY+ILfkNWOKsSrRVkyffSp4GEA8YbP9JI1sNLydILw0fOp
-         7a3Q==
-X-Gm-Message-State: AFq9FYK8PKP1ErJ567qjF9kJHiVwJ2arSsI5yTxREjlyUg4LR8XpzSG4
-	9gFu60nwRDn6oQfyqwUG52UyRnSJxTzpbkKB4jP2i/PcM4nOe5oJvDKnDsbdz9mJ/JT/eg==
-X-Gm-Gg: AYBFou0LM/Sgg8MxBTayZE5AAVla85Ppgw+vidpbQZLN35EUW0HF8rpNsUlds7PoGCc
-	PxUPRs752XZpGpqpLAzrSIKIoQLDKT6b5qTjMKdaoo4wOrwkPbWEqCpKpJ2uhX0aKCdSJA6YOBu
-	BCXZ4mkmyEPUA91UH9ycp5x8Z6dNnKXeFuc5QELi6v7jvRvoJ6htjp6IaIVS9BoABcRDBtYYa9L
-	xw9iJmKxPOsnCu7gKMhmOKmuMBWj1v9ilpqEhXupJHc0mSvO1lo0g/lFErqVcsSdEyBrk5eONzf
-	DsTJoyWo1DJq18WNnryLmoFG+CSMfBYaAQs1srhdBmt7ZQt05RMd9hOsAjnIXazlWRlWmhrVWf2
-	9eFnyjHNhYEEaW2cO6Ir5dH7Y3XteCrLWxdsVG2NHINuIqaEwXOoSNLfNnKkCiHElBKWAD+eXra
-	Txl/y2rKIgpJVRuPkSi1p7k6F0Iai17apVjhacz7iuRRQv6hkVkjCEdPA/x5DCr6WAbczWKf6EQ
-	jsh7Absq9h1beiKJ5sMxCVAbemnRiTBNwhZFk62f5hijTUEqavipIlWgen1LC8W5gekUGs1hJZn
-	VAyaT78QbP07IcpEdhQAoJl+VFLhtz71AW2dUYnaeTcPgEpcWl8trFiC1ytCbX4Va6pcFzoWEg3
-	+Fq5djPhRy6yV910hqQ7WW37oNK/j9hS6VmoDhmo3aLGp2Cm+bYoRiGugSAOyat2ZVOwQg2zM7m
-	VJH1StUKG8UG4jlLLKvqTRAcIBCGFCrdnopJ4O5bW9yaiWbA==
-X-Received: by 2002:a05:7022:f51b:b0:159:aa67:28c1 with SMTP id a92af1059eb24-18512b3e25dmr511384c88.20.1792169424014;
-        Fri, 16 Oct 2026 09:50:24 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c5cb39esm7396545c88.22.2026.10.16.09.50.23
+        bh=nVllKAggxPlIAPhK75vGTKA3LG/twl9L0Z4bMQ/OsPU=;
+        b=MuicSRrDmR+V83NfRPbOfce6ZwZLnEKMFJ8hAQU5s0az9Epb0Dicmn98ggnjpOSwOr
+         t/ptpaQYV2pk/wGY3ds8WAgvxa5fg0f0s2mbqotXu7C1kEKVN54lI1lPpTxaY9k207gc
+         g+dnQHObob/5nVIahuNjfYL+NU6OJVdU8Y5OWLHWXVoxBKBCpdNlIosrBvmwQpdD8UfJ
+         vRXB/xTVkKhvngNxB5hw4VGl53gVADNR4W9IFXpJo/rcOkJWNaTx+kTfBs5VqBf5nhEo
+         Nt2BrRQPchcxo6yVhiAj3qlV7jMfV/PxS4Nc7uE4549OJBrYAqmytpxk+W7uuP/PCahV
+         hS9A==
+X-Gm-Message-State: AFq9FYKnGKz6/hJFmh5nQ2+ojGRaF3RXxMTTViWBSacqo3CMn3VlItxz
+	Mryd/2GujSCo6sfKkc6GztNAXf3JvybA9bBQBsdPX/vhfjcVH5t/5mNFjooZ+AZRvvAy+vNulM6
+	A8mWUrTc=
+X-Gm-Gg: AYBFou190ftm+hHiStPvAD7RoQf1IhOkMRVYIPhICvvibbHoHZqemlRnEPQ8e3nngpI
+	hupXsYmhav12UbTTupEmx49pxz4zSXCldG05NDGa3D+McQaI91VpH1VSLqQlePGui2/t4KiGpH0
+	D0UXCpYhR7NyBW5qQpW7gtrfEy7f3ergZ3g7QgnM9qqZ+x911BxHRFBysetFBvJU8dHZZxdvmNz
+	oASNSV7280QvyJjVytlgNna6qe88FrErLGfHR07McNCgOpzxDKW3f2C5NDhdqMagkm/QQPZmYI+
+	NfXSCFAumoJE61av18i23xrpZqaMZI4Ulzc96Uz5Qg62dBuqq/mk7hEBBsIZScIJWr431oRkv+0
+	RwWbGE2pr6dr7Y8XoYclW0DJ55PWabdN/3HhILAg5J2aqhYWTFhJFuWZuWItEwQwd6Ob2ht6NFN
+	DUwEapdk53t3+wY7QB9mjCbxKTtaXsrFWAan042p6/WyF0M2AQ0E3xEg8ZtD7I1vWh6LLNYXu/w
+	BcX/I4=
+X-Received: by 2002:a05:693c:66d2:20b0:359:43c5:ebe5 with SMTP id 5a478bee46e88-361a2b3a111mr448966eec.38.1792170123986;
+        Fri, 16 Oct 2026 10:02:03 -0700 (PDT)
+Received: from MVIN00040.mvista.com ([49.207.221.247])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3607ee0d391sm8381333eec.4.2026.10.16.10.01.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 09:50:23 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Fri, 16 Oct 2026 10:02:01 -0700 (PDT)
+From: Rohini Sangam <rsangam@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH] python3-posix-ipc: fix feature probing instead of forcing -lrt
-Date: Fri, 16 Oct 2026 09:50:21 -0700
-Message-ID: <20261016165021.2704044-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+Cc: Rohini Sangam <rsangam@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH] nodejs: Security fix for CVE-2026-48619
+Date: Fri, 16 Oct 2026 22:31:53 +0530
+Message-Id: <20261016170153.30354-1-rsangam@mvista.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 16:50:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131079
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 17:02:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131080
 
-posix_ipc decides at build time whether it needs librt and whether
-message queues are available by compiling small probe programs in
-build_support/discover_system_info.py. Its does_build_succeed() splices
-the linker option into the compiler argv verbatim, so when no extra
-library is wanted the compiler is called with a literal empty argument:
+Pick patch from [1] also mentioned at Debian tracker in [2]
 
-  $CC -Wall -o foo foo.c '' -lpthread
+[1] https://github.com/nodejs/node/commit/c79968e108002c2394bdb9e9cefb2c8c8cc202f8
+[2] https://security-tracker.debian.org/tracker/CVE-2026-48619
 
-GNU ld treats '' as an input file and fails ("cannot find : No such
-file or directory"); lld ignores it. With the gcc toolchain every probe
-without -lrt therefore fails, the prober wrongly decides librt is
-required, and on a C library without a usable librt message queue
-support is dropped - which is how posix_ipc.MessageQueue went missing
-(issue #916). The result depends on the linker rather than on what the
-C library provides.
-
-The previous LDFLAGS += "-lrt" workaround only papered over this, and
-is itself libc specific: it forces linking librt even where mq_* live
-in libc (glibc >= 2.34, musl).
-
-Fix the prober to split linker_options with shlex, like it already does
-for CC, so an empty value adds no argument, and drop the forced -lrt so
-the probes decide per C library.
-
-Verified on qemux86-64 for glibc and musl, each with the clang and gcc
-toolchains: src/system_info.h defines MESSAGE_QUEUE_SUPPORT_EXISTS,
-SEM_GETVALUE_EXISTS and SEM_TIMEDWAIT_EXISTS, and the extension module
-imports all mq_* from libc with no librt NEEDED entry.
-
-Fixes: https://github.com/openembedded/meta-openembedded/issues/916
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 ---
- ...-not-pass-empty-linker-option-to-the.patch | 46 +++++++++++++++++++
- .../python/python3-posix-ipc_1.3.2.bb         |  4 +-
- 2 files changed, 47 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
+ .../nodejs/nodejs/CVE-2026-48619.patch        | 253 ++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_20.20.2.bb |   1 +
+ 2 files changed, 254 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
 new file mode 100644
-index 0000000000..37d801e42c
+index 0000000000..41377642bb
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-do-not-pass-empty-linker-option-to-the.patch
-@@ -0,0 +1,46 @@
-+From a2d268590cd2e8460b40438b4eff894ae472a0f2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Fri, 16 Oct 2026 16:26:28 +0000
-+Subject: [PATCH] build_support: do not pass empty linker option to the
-+ compiler
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48619.patch
+@@ -0,0 +1,253 @@
++From c79968e108002c2394bdb9e9cefb2c8c8cc202f8 Mon Sep 17 00:00:00 2001
++From: Matteo Collina <hello@matteocollina.com>
++Date: Sun, 19 Apr 2026 16:48:43 +0200
++Subject: [PATCH] http2: cap originSet size to prevent unbounded memory
++growth
 +
-+does_build_succeed() builds an argv list and inserts linker_options
-+verbatim. When no extra linker option is wanted it is "", so the
-+compiler is invoked with a literal empty argument:
++A malicious HTTP/2 server can send repeated ORIGIN frames with unique
++origins, causing unbounded growth of the client-side originSet for the
++lifetime of the session. Cap the set at 128 entries; once full, new
++origins from ORIGIN frames are silently dropped.
 +
-+  cc -Wall -o foo foo.c '' -lpthread
++Ref: https://hackerone.com/reports/3676863
++PR-URL: https://github.com/nodejs-private/node-private/pull/855
++Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
++Refs: https://hackerone.com/reports/3676863
 +
-+GNU ld treats the empty argument as an input file and fails with
-+"cannot find : No such file or directory", while lld silently ignores
-+it. With GNU ld every probe that runs without -lrt therefore fails,
-+which makes sniff_realtime_lib() wrongly conclude that librt is needed
-+(or raise DiscoveryError on C libraries that have no usable librt),
-+independent of what the C library actually provides. With lld the
-+probes happen to give the right answer, so the outcome depends on the
-+linker rather than on the target system.
++CVE: CVE-2026-48619
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/c79968e108002c2394bdb9e9cefb2c8c8cc202f8]
 +
-+This regressed when the command was converted from a shell string
-+(where an empty %s vanished) to an argv list.
-+
-+Split linker_options with shlex like CC already is, so an empty value
-+contributes no argument and multi-word values still work.
-+
-+Upstream-Status: Submitted [https://github.com/osvenskan/posix_ipc/pull/114]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++Signed-off-by: Rohini Sangam <rsangam@mvista.com>
 +---
-+ build_support/discover_system_info.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ doc/api/errors.md                             |  11 ++
++ doc/api/http2.md                              |   2 +
++ lib/internal/errors.js                        |   2 +
++ lib/internal/http2/core.js                    |  17 ++-
++ .../test-http2-origin-set-max-size.mjs        | 110 ++++++++++++++++++
++ 5 files changed, 141 insertions(+), 1 deletion(-)
++ create mode 100644 test/parallel/test-http2-origin-set-max-size.mjs
 +
-+diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
-+index 1c3741f..669c234 100644
-+--- a/build_support/discover_system_info.py
-++++ b/build_support/discover_system_info.py
-+@@ -57,7 +57,7 @@ def does_build_succeed(filename, linker_options=""):
-+            '-o',
-+            f'./build_support/src/{filename[:-2]}',
-+            f'./build_support/src/{filename}',
-+-           linker_options,
-++           *shlex.split(linker_options),
-+            '-lpthread'
-+            ]
-+     p = subprocess.Popen(cmd, stdout=STDOUT, stderr=STDERR)
-diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
-index 111444580a..957580bf5d 100644
---- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.3.2.bb
-@@ -4,9 +4,7 @@ SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e3d8df223c2614dbf1aabdc1ca23cc10"
++diff --git a/doc/api/errors.md b/doc/api/errors.md
++index d6ead7e2..95fa835e 100644
++--- a/doc/api/errors.md
+++++ b/doc/api/errors.md
++@@ -1729,6 +1729,17 @@ added: v15.14.0
++ The limit of acceptable invalid HTTP/2 protocol frames sent by the peer,
++ as specified through the `maxSessionInvalidFrames` option, has been exceeded.
++ 
+++<a id="ERR_HTTP2_TOO_MANY_ORIGINS"></a>
+++
+++### `ERR_HTTP2_TOO_MANY_ORIGINS`
+++
+++<!-- YAML
+++added: REPLACEME
+++-->
+++
+++The number of uniq origin sent by the server has exceeded the value defined in
+++`options.maxOriginSetSize`.
+++
++ <a id="ERR_HTTP2_TRAILERS_ALREADY_SENT"></a>
++ 
++ ### `ERR_HTTP2_TRAILERS_ALREADY_SENT`
++diff --git a/doc/api/http2.md b/doc/api/http2.md
++index 4598b15a..6cf75b80 100644
++--- a/doc/api/http2.md
+++++ b/doc/api/http2.md
++@@ -3186,6 +3186,8 @@ changes:
++     This is similar to [`server.maxHeadersCount`][] or
++     [`request.maxHeadersCount`][] in the `node:http` module. The minimum value
++     is `1`. **Default:** `128`.
+++  * `maxOriginSetSize` {number} Sets the maximum number of uniq origin the sever
+++    can send via ORIGIN frames. **Default:** `128`.
++   * `maxOutstandingPings` {number} Sets the maximum number of outstanding,
++     unacknowledged pings. **Default:** `10`.
++   * `maxReservedRemoteStreams` {number} Sets the maximum number of reserved push
++diff --git a/lib/internal/errors.js b/lib/internal/errors.js
++index 9d6c5ca9..d68a2f7c 100644
++--- a/lib/internal/errors.js
+++++ b/lib/internal/errors.js
++@@ -1315,6 +1315,8 @@ E('ERR_HTTP2_STREAM_SELF_DEPENDENCY',
++ E('ERR_HTTP2_TOO_MANY_CUSTOM_SETTINGS',
++   'Number of custom settings exceeds MAX_ADDITIONAL_SETTINGS', Error);
++ E('ERR_HTTP2_TOO_MANY_INVALID_FRAMES', 'Too many invalid HTTP/2 frames', Error);
+++E('ERR_HTTP2_TOO_MANY_ORIGINS',
+++  'The server sent more ORIGIN frames than the allowed number of %s', Error);
++ E('ERR_HTTP2_TRAILERS_ALREADY_SENT',
++   'Trailing headers have already been sent', Error);
++ E('ERR_HTTP2_TRAILERS_NOT_READY',
++diff --git a/lib/internal/http2/core.js b/lib/internal/http2/core.js
++index ebd7abb1..38a33dd0 100644
++--- a/lib/internal/http2/core.js
+++++ b/lib/internal/http2/core.js
++@@ -101,6 +101,7 @@ const {
++     ERR_HTTP2_STREAM_ERROR,
++     ERR_HTTP2_STREAM_SELF_DEPENDENCY,
++     ERR_HTTP2_TOO_MANY_CUSTOM_SETTINGS,
+++    ERR_HTTP2_TOO_MANY_ORIGINS,
++     ERR_HTTP2_TRAILERS_ALREADY_SENT,
++     ERR_HTTP2_TRAILERS_NOT_READY,
++     ERR_HTTP2_UNSUPPORTED_PROTOCOL,
++@@ -237,6 +238,7 @@ const kInit = Symbol('init');
++ const kInfoHeaders = Symbol('sent-info-headers');
++ const kLocalSettings = Symbol('local-settings');
++ const kNativeFields = Symbol('kNativeFields');
+++const kMaxOriginSetSize = Symbol('max-ORIGIN-set-size');
++ const kOptions = Symbol('options');
++ const kOwner = owner_symbol;
++ const kOrigin = Symbol('origin');
++@@ -674,8 +676,13 @@ function onOrigin(origins) {
++   if (!session.encrypted || session.destroyed)
++     return undefined;
++   const originSet = initOriginSet(session);
++-  for (let n = 0; n < origins.length; n++)
+++  for (let n = 0; n < origins.length; n++) {
+++    if (originSet.size >= session[kMaxOriginSetSize]) {
+++      session.destroy(new ERR_HTTP2_TOO_MANY_ORIGINS(session[kMaxOriginSetSize]));
+++      return;
+++    }
++     originSet.add(origins[n]);
+++  }
++   session.emit('origin', origins);
++ }
++ 
++@@ -3331,6 +3338,13 @@ function connect(authority, options, listener) {
++   assertIsObject(options, 'options');
++   options = { ...options };
++ 
+++  let { maxOriginSetSize } = options;
+++  if (maxOriginSetSize != null) {
+++    validateNumber(maxOriginSetSize, 'options.maxOriginSetSize', 0);
+++  } else {
+++    maxOriginSetSize = 128;
+++  }
+++
++   assertIsArray(options.remoteCustomSettings, 'options.remoteCustomSettings');
++   if (options.remoteCustomSettings) {
++     options.remoteCustomSettings = [ ...options.remoteCustomSettings ];
++@@ -3377,6 +3391,7 @@ function connect(authority, options, listener) {
++ 
++   session[kAuthority] = `${options.servername || host}:${port}`;
++   session[kProtocol] = protocol;
+++  session[kMaxOriginSetSize] = maxOriginSetSize;
++ 
++   if (typeof listener === 'function')
++     session.once('connect', listener);
++diff --git a/test/parallel/test-http2-origin-set-max-size.mjs b/test/parallel/test-http2-origin-set-max-size.mjs
++new file mode 100644
++index 00000000..08bdf1ed
++--- /dev/null
+++++ b/test/parallel/test-http2-origin-set-max-size.mjs
++@@ -0,0 +1,110 @@
+++import {
+++  expectsError,
+++  hasCrypto,
+++  mustCall,
+++  mustNotCall,
+++  mustSucceed,
+++  skip,
+++} from '../common/index.mjs';
+++import * as fixtures from '../common/fixtures.mjs';
+++import assert from 'node:assert';
+++
+++if (!hasCrypto)
+++  skip('missing crypto');
+++
+++const {
+++  createSecureServer,
+++  connect,
+++} = await import('node:http2');
+++
+++const key = fixtures.readKey('agent8-key.pem', 'binary');
+++const cert = fixtures.readKey('agent8-cert.pem', 'binary');
+++const ca = fixtures.readKey('fake-startcom-root-cert.pem', 'binary');
+++
+++const server = createSecureServer({ key, cert });
+++server.on('stream', (stream) => {
+++  stream.respond();
+++  stream.end('ok');
+++});
+++server.on('session', (session) => {
+++  let i = 0;
+++  const timer = setInterval(() => {
+++    try {
+++      session.origin(...Array.from({ length: 10 }, () => `https://o${i++}.example.com`));
+++    } catch {
+++      clearInterval(timer);
+++    }
+++  }, 10);
+++
+++  session.on('close', () => {
+++    clearInterval(timer);
+++  });
+++});
+++
+++await new Promise((resolve) => server.listen(0, resolve));
+++
+++// Test fantasist values
+++[Symbol(), '0', 1n, {}, [], true, false, /s/, () => {}].forEach((maxOriginSetSize) => {
+++  assert.throws(
+++    () => connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize }),
+++    { code: 'ERR_INVALID_ARG_TYPE' },
+++  );
+++});
+++[NaN, -1].forEach((maxOriginSetSize) => {
+++  assert.throws(
+++    () => connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize }),
+++    { code: 'ERR_OUT_OF_RANGE' },
+++  );
+++});
+++
+++await new Promise((resolve) => server.getConnections(mustSucceed((count) => {
+++  assert.strictEqual(count, 0);
+++  resolve();
+++})));
+++
+++// Test default value
+++await new Promise((resolve) => {
+++  const client = connect(`https://localhost:${server.address().port}`, { ca });
+++
+++  client.on('origin', mustCall(12)); // Default value is 128, the first 12 frames should pass, the 13th one should error
+++  client.on('error', expectsError({
+++    code: 'ERR_HTTP2_TOO_MANY_ORIGINS',
+++  }));
+++  client.on('goaway', mustNotCall());
+++  client.on('close', resolve);
+++
+++  client.request().resume();
+++});
+++
+++// Test non-default values
+++await Promise.all([-0, 9, 1.5].map((maxOriginSetSize) => new Promise((resolve) => {
+++  const client = connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize });
+++
+++  client.on('origin', mustNotCall()); // The server send 10 origins on the first frame, that's already too many.
+++  client.on('error', expectsError({
+++    code: 'ERR_HTTP2_TOO_MANY_ORIGINS',
+++  }));
+++  client.on('goaway', mustNotCall());
+++  client.on('close', resolve);
+++
+++  client.request().resume();
+++})));
+++
+++
+++// Test values higher than the default value
+++await Promise.all([512, Infinity].map((maxOriginSetSize) => new Promise((resolve) => {
+++  const client = connect(`https://localhost:${server.address().port}`, { ca, maxOriginSetSize });
+++
+++  client.on('origin', mustCall(() => {
+++    if (client.originSet.length > 128) {
+++      client.destroy();
+++    }
+++  }, 13));
+++  client.on('error', mustNotCall());
+++  client.on('goaway', mustNotCall());
+++  client.on('close', resolve);
+++
+++  client.request().resume();
+++})));
+++
+++server.close();
++-- 
++2.44.4
++
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
+index 4badec2135..710ed988d3 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
+@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Revert-stop-using-deprecated-ares_query.patch \
+            file://run-ptest \
+            file://CVE-2026-48617.patch \
++           file://CVE-2026-48619.patch \
+            "
+ SRC_URI:append:class-target = " \
+            file://0001-Using-native-binaries.patch \
+-- 
+2.34.1
 
-+SRC_URI += "file://0001-build_support-do-not-pass-empty-linker-option-to-the.patch"
- SRC_URI[sha256sum] = "6923232111329954a8349f7d99f212b6e96b5206e77fbd39aaf1b3cb4a5e9260"
-
--# Message queue support requires librt for proper linking
--LDFLAGS += "-lrt"
--
- inherit pypi python_setuptools_build_meta
 
