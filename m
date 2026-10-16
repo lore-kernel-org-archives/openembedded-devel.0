@@ -2,240 +2,260 @@ Return-Path: <yurade@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 700C5CC6B2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F13BCCA464
 	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 05:21:16 +0000 (UTC)
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15355.1792128072118186622
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15356.1792128072186642700
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 15 Oct 2026 22:21:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hraADFrD;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=KoPrwzfh;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=5656; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=7394; q=dns/txt;
   s=iport01; t=1792128072; x=1793337672;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=jCh4TJRDPXBLk78krjdi2HeJ/JhmCWqlLI/PK2sg4ro=;
-  b=hraADFrDZx9o01NTpws2oG6UJ/N3BCFDua+e6NoH7MlJmuhmqfPG5pJD
-   IWRJQO8sjdUx3AA/mgNbqOOjAYciYqxydNWHIP7xY/ur4fwvLGnshacGH
-   RLeBtISLynTxHHGpZd6yxFZpSki8ECiZBh0kKoNgLbHxY6zOC4HB2BgdI
-   00OTO+ReYliTHjKjaUhj/S/TL9SQO6BBjYW72jze8NvOFsnfbToViz12Y
-   eHZV5TSxB91Iup88hObqd03gbqicMY0gYol7BTrWBExNl1oGMNKdy/x/j
-   9X35vD/mFjlwrygBiqqmlhJdBJLBN0o5KqIflNc4Vh5KZG4heXeJqa1nh
-   g==;
-X-CSE-ConnectionGUID: phVUkw4CRCi0eqrz4Ci3Wg==
-X-CSE-MsgGUID: GQcXNXVZQaqVHkIKCn7hxQ==
-X-IPAS-Result: =?us-ascii?q?A0BcAgAKs9Fq/5H/Ja1aglmCGD91YENJlCmCIQOLZZI3g?=
- =?us-ascii?q?X4PAQEBD0QNBAEBhQUCjhUCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4Thk8NkBIBAgEDMgEYAT0cAwECLyALIwgZgwIBgjoDNwMRvC4bN?=
- =?us-ascii?q?4IsgQGDKQE/AkNQ2EsNcoFoAQsUAYE4hUCCf4UkXRgBhHwnG4FJRIEVg2mBB?=
- =?us-ascii?q?YEaQgEBA4E1hm0EgxwSgVoYBpUpSIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdg?=
- =?us-ascii?q?SM+F4EHGwYFgR2BIIIWIxk2eoEJXoErKWEQF4EJggcCglSCAAIBSUEOB0VTC?=
- =?us-ascii?q?SVDEkcmIggSCQETGjALgRs4PAkoQRcMcwwdBXIIAg0JBykYDUgRLDcVGQQ+b?=
- =?us-ascii?q?geSFB6CZYEOARMXAYFoGmSSV5BDgiGgHnGEKIwijz6FfBozhASBV5JAklQLm?=
- =?us-ascii?q?H2OCoQJkkaEaYFoPIFHCwczGggbFYMiCUoZD44uCwuBFAEJgkKBf2XLdicyA?=
- =?us-ascii?q?gkyAQEHAgcOAwuBaJABgX0BAQ?=
-IronPort-Data: A9a23:hS+UiartKI9MGrz/4b/hPBL7nU1eBmJOZBIvgKrLsJaIsI4StFCzt
- garIBnTM66JazH9ftB+bt6+9ksH7JOGnNJjQAFurns3QX8QpePIVI+TRqvS04x+DSFioGZPt
- Zh2hgzodZhsJpPkjk7zdOWn9T8jhfngqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvV0
- T/Ji5OZYgDNNwJcaDpOtfvb8U035ZwehRtB1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
- 86r5K255G7Q4yA2AdqjlLvhGmVSKlIFFVHT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
- I4lWapc5useFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpfh660GMa04AWEX0v53P1xN6
- qAzEhsMNh2anfDq67PgdeY506zPLOGzVG8ekmtrwTecCbMtRorOBv2ao9RZxzw3wMtJGJ4yZ
- eJANmEpN0uGOUASfA5LVfrSn8/w7pX7WyxFsluZqII84nPYy0p6172F3N/9J4bTFJQFxBfCz
- o7A10vACSE8BOKt8DOczFKvp8zkm3z7SLtHQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YRLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:RCmFm66pN2l2UtLsHgPXwOTXdLJyesId70hD6qkXc20wTiX2ra
- 6TdZgguCMczQxhO03I+urwXZVoP0m8yXcd2+B4Vt2ftUvdyQmVxepZgrcKrQeNJ8SHzI5g/J
- YlVbRiA9vtClU/p8P77A6kV+sE+rC8gceVbSO09QYVcemsAJsQiTtENg==
-X-Talos-CUID: 9a23:glmUI27yOqLv36bhn9ss7E4qJ8M6Llbn53aILlaiGzpCSeaqRgrF
-X-Talos-MUID: =?us-ascii?q?9a23=3AbiPBTw3kM4yyAr9Pkl/WTU2nHjUjzJ2lOGY9r6c?=
- =?us-ascii?q?/stC6FS9RGByb0zSne9py?=
+  bh=WczO7E4AckD7Ub0lMaGc8zMNDaDw54OIZMO2aejoYVs=;
+  b=KoPrwzfhK9lYGucAICLKa2e5ieFZY0m56SoprIM6d5rTtqi7meSByQux
+   0iU+T8J+GTcl4N3pXqgO+SnUIcjQhoYsY+oFCW/N4zceH8DyUlVB2l2tL
+   o4hibENvCwbmYxjzJfGaUXBxsvHDGa32QoLeyc5udpWCGV1Ff+MsNIBSR
+   eWijrVRZknLOYoMCO/1vgi1xbkvxKt+MB90BF0Li8bU5AIm/NSdwoyuG9
+   7pmLFDWgJZMOjPbjdfjTMWh+z/QulR9eZMgDMmXJg7vwtYOJ45z6XPol9
+   SonfFJPJLExw8Gy7H3mbD6qBE+QW92kjwIHQLky51f3D7Ph4WdFLKTovl
+   w==;
+X-CSE-ConnectionGUID: KyRW4Cc/RuS4JBP0FOZnRQ==
+X-CSE-MsgGUID: KHaaD91pQ4GQK1vpx2BILg==
+X-IPAS-Result: =?us-ascii?q?A0BeAgAKs9Fq/5D/Ja1aglmCV3VgQ0mEV49SgiEDgn6IZ?=
+ =?us-ascii?q?5I3gX4PAQEBD0QNBAEBhQUCjhUCJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBA?=
+ =?us-ascii?q?QUBAQECAQcFgQ4Thk8NkBIBAgEDIwQkAT0cAwECAwImAgIrGQoIGYMCAYI6A?=
+ =?us-ascii?q?zcDEbwuGzd6fzOBAYMpAT8CQ1DZSoFoAQsUAYEKLoVAgx8BhQNdGAGCAoJ6J?=
+ =?us-ascii?q?xuBSUSBFYNpgQWBGkIBAQOBJCGDc4JqBIINgQ8SgVoYBmWEC5A5SIECHANZL?=
+ =?us-ascii?q?AFVEw0KCwcFgWgDNRIqFW4yHYEjPhcvWBsGBYEdgSCCFiMZNnqBCV6BKylhE?=
+ =?us-ascii?q?BeBCYIHAoJUggACAUlBDgdFUwklQxJHJiIIEgkBExowC4EbODwJKEEXDHMMH?=
+ =?us-ascii?q?QVyCAINCQcpGA1IESw3FRkEPQFuB5IUHoJlAXoTARMXAYEuXTCPVQmWCKAec?=
+ =?us-ascii?q?YQojCKPRIV2GjOFW6UUC5h9jgqECZJGhGmBaDyBRwsHMxoIGxU7gmcJShkPj?=
+ =?us-ascii?q?i4LC4NggX9ly3YnMgIJMgEBBwIHDgMLgWiQAAImB4FPAQE?=
+IronPort-Data: A9a23:HSomvq0jrhBRb26x7fbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2AEy
+ WNNXzqBO/beMGT8Ldx/btm/ox4G78KAmNZmTQRo3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7gmYtbDpNg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGL1AMAtEz8aFNHFoS1
+ 9YgcB4qXBa5vrfjqF67YrEEasULNsLnOsYb/3pn1zycValgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUicC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQsi+a1aYuKJIXiqcN9vWaRr
+ 06XpnzAXj4jF4WB0Srf2FOIibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1nfDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:kOqMwaF8MJ28Q0ibpLqEyseALOsnbusQ8zAXPidKOHtom62j5q
+ STdZsguyMc5Ax9ZJhko6HiBEDiewK4yXcK2+gs1N6ZNWGM0ldAbrsSj7cKqAeOJ8SRzIJgPN
+ 9bE5RWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqUuEiWpRGtldB8ATMHfjLnFL
+X-Talos-CUID: 9a23:WOAdBWyKFRJo9Q2aXv7IBgU3C/oaLlbWi03NGBOaI14xZpqnT2WprfY=
+X-Talos-MUID: =?us-ascii?q?9a23=3AYBMRhg24n8n/YhKWDSQxhkjkaTUjwISnAWxcyI0?=
+ =?us-ascii?q?/5+a9FnVuIyfHphWTTdpy?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,161,1787011200"; 
-   d="scan'208";a="521998292"
-Received: from rcdn-l-core-08.cisco.com ([173.37.255.145])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 05:21:11 +0000
+   d="scan'208";a="536019761"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 16 Oct 2026 05:21:11 +0000
 Received: from sjc-ads-7871.cisco.com (sjc-ads-7871.cisco.com [10.30.222.158])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-08.cisco.com (Postfix) with ESMTPS id 1238818000443
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 19AFE18000231
 	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 05:21:11 +0000 (GMT)
 Received: by sjc-ads-7871.cisco.com (Postfix, from userid 1889728)
-	id AB3DCCBF201; Thu, 15 Oct 2026 22:21:10 -0700 (PDT)
+	id B3467CBF203; Thu, 15 Oct 2026 22:21:10 -0700 (PDT)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH 2/4] redis: fix CVE-2026-23631
-Date: Thu, 15 Oct 2026 22:21:08 -0700
-Message-Id: <20261016052110.184934-2-yurade@cisco.com>
+Subject: [oe][meta-oe][wrynose][PATCH 4/4] redis: fix CVE-2026-66373
+Date: Thu, 15 Oct 2026 22:21:10 -0700
+Message-Id: <20261016052110.184934-4-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261016052110.184934-1-yurade@cisco.com>
 References: <20261016052110.184934-1-yurade@cisco.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-7871.cisco.com [10.30.222.158];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.30.222.158, sjc-ads-7871.cisco.com
-X-Outbound-Node: rcdn-l-core-08.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 05:21:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131047
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131048
 
 This patch applies the upstream fix as referenced in [2],
 using the commit shown in [1].
 
-[1] https://github.com/redis/redis/commit/0cca172a174642bdae03b871615227896274d9bb
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-23631
+[1] https://github.com/redis/redis/commit/4f62a8bf15c634187d8a87d874f898803=
+2f90b6c
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-66373
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../redis/redis-8.0.6/CVE-2026-23631.patch    | 119 ++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_8.0.6.bb |   1 +
- 2 files changed, 120 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-23631.patch
+ .../redis/redis-8.0.6/CVE-2026-66373.patch    | 96 +++++++++++++++++++
+ meta-oe/recipes-extended/redis/redis_8.0.6.bb |  1 +
+ 2 files changed, 97 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-663=
+73.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-23631.patch b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-23631.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-66373.patc=
+h b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-66373.patch
 new file mode 100644
-index 0000000000..abb3098820
+index 0000000000..3350ad2a70
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-23631.patch
-@@ -0,0 +1,119 @@
-+From 0cca172a174642bdae03b871615227896274d9bb Mon Sep 17 00:00:00 2001
-+From: Ozan Tezcan <ozantezcan@gmail.com>
-+Date: Tue, 14 Apr 2026 08:47:04 +0300
-+Subject: [PATCH] Fix use-after-free when fullsync happens while replica is
-+ running a timed out script (CVE-2026-23631)
++++ b/meta-oe/recipes-extended/redis/redis-8.0.6/CVE-2026-66373.patch
+@@ -0,0 +1,96 @@
++From 4f62a8bf15c634187d8a87d874f8988032f90b6c Mon Sep 17 00:00:00 2001
++From: sggeorgiev <s_ggeorgiev@yahoo.com>
++Date: Thu, 23 Apr 2026 15:46:48 +0300
++Subject: [PATCH] Reject corrupt stream RDB with shared NACK across consume=
+rs
++ (#15081)
 +
-+Fullsync triggers emptyData and scriptingReset which free the scripting/function engine. If a timed out script is still running on the replica, this causes a use-after-free. Delay fullsync processing in readSyncBulkPayload until the script finishes.
++**Summary**
 +
-+CVE: CVE-2026-23631
-+Upstream-Status: Backport [https://github.com/redis/redis/commit/0cca172a174642bdae03b871615227896274d9bb]
++Detects and rejects corrupt stream RDB payloads where the same NACK
++(pending entry) is referenced by more than one consumer, which violates
++a stream data-structure.
 +
-+(cherry picked from commit 0cca172a174642bdae03b871615227896274d9bb)
++**Changes**
++
++- **`rdbLoadObject` (stream consumer PEL loading)**: Added a guard that
++checks `nack->consumer !=3D NULL` before assigning the consumer pointer.
++When a second consumer's PEL references a NACK that was already claimed
++by a prior consumer, the loader now reports a corrupt RDB error and
++aborts instead of silently overwriting the pointer. Without this check,
++two consumers share the same `streamNACK`, and freeing the first
++consumer's PEL leaves the second with a dangling pointer.
++- **`corrupt-dump.tcl`**: Added a regression test that crafts a stream
++with two consumers (`consumerA`, `consumerB`) whose PELs both reference
++the same entry (`1-0`). The `RESTORE` command is expected to fail with
++`"Bad data format"`, and the server must remain responsive (`PING`
++succeeds).
++
++**Benefits**
++
++- **Fail-fast on corrupt data**: The invariant violation is caught at
++load time with a clear diagnostic message rather than manifesting as a
++crash later during normal operation.
++- **Regression coverage**: The crafted payload in the test ensures this
++class of corruption is permanently guarded against.
++
++CVE: CVE-2026-66373
++Upstream-Status: Backport [https://github.com/redis/redis/commit/4f62a8bf1=
+5c634187d8a87d874f8988032f90b6c]
++
++(cherry picked from commit 4f62a8bf15c634187d8a87d874f8988032f90b6c)
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ src/replication.c                 |  5 ++
-+ tests/integration/replication.tcl | 77 +++++++++++++++++++++++++++++++
-+ 2 files changed, 82 insertions(+)
++ src/rdb.c                          |  8 ++++++++
++ tests/integration/corrupt-dump.tcl | 18 +++++++++++++++++-
++ 2 files changed, 25 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/replication.c b/src/replication.c
-+index 5fab23b1c..489032aed 100644
-+--- a/src/replication.c
-++++ b/src/replication.c
-+@@ -2022,6 +2022,11 @@ void replicationAttachToNewMaster(void) {
-+ /* Asynchronously read the SYNC payload we receive from a master */
-+ #define REPL_MAX_WRITTEN_BEFORE_FSYNC (1024*1024*8) /* 8 MB */
-+ void readSyncBulkPayload(connection *conn) {
-++    /* During full sync, the functions engine is freed right before loading
-++     * the RDB. To avoid this happening while a function is still running,
-++     * delay full sync processing until it finishes. */
-++    if (isInsideYieldingLongCommand()) return;
-++
-+     char buf[PROTO_IOBUF_LEN];
-+     ssize_t nread, readlen, nwritten;
-+     int use_diskless_load = useDisklessLoad();
-+diff --git a/tests/integration/replication.tcl b/tests/integration/replication.tcl
-+index 65494f427..412a00740 100644
-+--- a/tests/integration/replication.tcl
-++++ b/tests/integration/replication.tcl
-+@@ -1661,3 +1661,80 @@ start_server {tags {"repl external:skip"}} {
-+         }
++diff --git a/src/rdb.c b/src/rdb.c
++index 371353c2c..277ca543c 100644
++--- a/src/rdb.c
+++++ b/src/rdb.c
++@@ -3060,6 +3060,14 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds key,=
+ int dbid, int *error)
++                     }
++                     streamNACK *nack =3D result;
++=20
+++                    /* If the NACK already has a consumer assigned, the
+++                     * payload is corrupt =E2=80=94 each global PEL entry=
+ must be
+++                     * claimed by exactly one consumer. */
+++                    if (nack->consumer !=3D NULL) {
+++                        rdbReportCorruptRDB("Stream consumer PEL entry al=
+ready has a consumer assigned");
+++                        decrRefCount(o);
+++                        return NULL;
+++                    }
++                     /* Set the NACK consumer, that was left to NULL when
++                      * loading the global PEL. Then set the same shared
++                      * NACK structure also in the consumer-specific PEL. =
+*/
++diff --git a/tests/integration/corrupt-dump.tcl b/tests/integration/corrup=
+t-dump.tcl
++index 6017723e0..b04812e0f 100644
++--- a/tests/integration/corrupt-dump.tcl
+++++ b/tests/integration/corrupt-dump.tcl
++@@ -1020,10 +1020,26 @@ test {corrupt payload: stream - duplicated consume=
+r PEL entry} {
++             r restore key 0 "\x15\x01\x10\x00\x00\x01\x9b\x0d\x56\xa9\xb7=
+\x00\x00\x00\x00\x00\x00\x00\x00\xc3\x39\x40\x42\x15\x42\x00\x00\x00\x11\x0=
+0\x02\x01\x00\x01\x01\x01\x86\x66\x69\x65\x6c\x64\x31\x07\x00\x01\x40\x0f\x=
+0a\x00\x01\x86\x76\x61\x6c\x75\x65\x31\x07\x04\x20\x0b\x02\xcd\xd9\x02\xe0\=
+x01\x22\x01\x32\x07\x80\x1a\x04\x32\x07\x06\x01\xff\x02\x81\x00\x00\x01\x9b=
+\x0d\x56\xb7\x90\x00\x81\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x02\x0=
+1\x07\x6d\x79\x67\x72\x6f\x75\x70\x81\x00\x00\x01\x9b\x0d\x56\xb7\x90\x00\x=
+02\x02\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\x00\x00\x80\=
+xd9\x56\x0d\x9b\x01\x00\x00\x01\x00\x00\x01\x9b\x0d\x56\xb7\x90\x00\x00\x00=
+\x00\x00\x00\x00\x00\x80\xd9\x56\x0d\x9b\x01\x00\x00\x01\x01\x09\x63\x6f\x6=
+e\x73\x75\x6d\x65\x72\x31\x80\xd9\x56\x0d\x9b\x01\x00\x00\x80\xd9\x56\x0d\x=
+9b\x01\x00\x00\x02\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\=
+x00\x00\x00\x00\x01\x9b\x0d\x56\xa9\xb7\x00\x00\x00\x00\x00\x00\x00\x00\x0c=
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x09\x00\x4b\xe0\x99\x30\x67\x4d\xe5\x8=
+7"
++         } err
++         assert_match "*Bad data format*" $err
++-        verify_log_message 0 "*Duplicated consumer PEL entry*" 0
+++        verify_log_message 0 "*Stream consumer PEL entry already has a co=
+nsumer assigned*" 0
 +     }
 + }
-++
-++# Fullsync should not free the functions lib ctx while the replica has 
-++# a timed out function that is still running.
-++foreach type {script function} {
-++    start_server {tags {"repl external:skip"}} {
-++        start_server {} {
-++            set master [srv -1 client]
-++            set master_host [srv -1 host]
-++            set master_port [srv -1 port]
-++            set replica [srv 0 client]
-++
-++            test "Fullsync should not free scripting engine on a replica while a $type is running" {
-++                $master config set repl-diskless-sync yes
-++                $master config set repl-diskless-sync-delay 0
-++                # Set small client output buffer limit to trigger fullsync quickly
-++                $master config set client-output-buffer-limit "replica 1k 1k 0"
-++                $replica config set repl-diskless-load yes
-++                $replica config set busy-reply-threshold 1 ;# script timeout in 1 ms
-++
-++                # Load function
-++                if {$type eq "function"} {
-++                    $master function load replace {#!lua name=blocklib
-++                        redis.register_function{
-++                            function_name='blockfunc',
-++                            callback=function() while true do end end,
-++                            flags={'no-writes'}
-++                        }
-++                    }
-++                }
-++
-++                # Start replication
-++                $replica replicaof $master_host $master_port
-++                wait_for_sync $replica
-++
-++                # Run the blocking script on replica
-++                set rd [redis_deferring_client]
-++                if {$type eq "script"} {
-++                    $rd eval {while true do end} 0
-++                } else {
-++                    $rd fcall_ro blockfunc 0
-++                }
-++
-++                # Verify replica replies with BUSY
-++                wait_for_condition 50 100 {
-++                    [catch {$replica ping} e] == 1 && [string match {*BUSY*} $e]
-++                } else {
-++                    fail "$type didn't become busy"
-++                }
-++
-++                # Fills client output buffer and triggers fullsync
-++                populate 5 bigkey 1000000 -1
-++                wait_for_condition 50 100 {
-++                    [s -1 sync_full] >= 2
-++                } else {
-++                    fail "Fullsync was not triggered"
-++                }
-++                
-++                # Verify replica is still running the function
-++                after 1000
-++                catch {$replica ping} e
-++                assert_match {*BUSY*} $e "replica should still reply with BUSY"
-++
-++                if {$type eq "script"} {
-++                    $replica script kill
-++                } else {
-++                    $replica function kill
-++                }
-++
-++                # Verify replica is responsive again
-++                catch {$rd read} result
-++                $rd close
-++                wait_for_sync $replica
-++                assert_equal [$replica ping] "PONG"
-++            }
-++        }
++=20
++=20
+++test {corrupt payload: stream with NACK shared between two consumers} {
+++    start_server [list overrides [list loglevel verbose use-exit-on-panic=
+ yes crash-memcheck-enabled no]] {
+++        r debug set-skip-checksum-validation 1
+++        # Payload: stream with entry 1-0, one consumer group (mygroup),
+++        # two consumers whose PELs both reference 1-0 (shared NACK).
+++        # XACK on one consumer frees the NACK, leaving a dangling
+++        # pointer in the other consumer's PEL (use-after-free).
+++        catch {r RESTORE mystream 0 "\x1a\x01\x10\x00\x00\x00\x00\x00\x00=
+\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x1d\x1d\x00\x00\x00\x0a\x00\x01\x0=
+1\x00\x01\x01\x01\x81\x6b\x02\x00\x01\x02\x01\x00\x01\x00\x01\x81\x76\x02\x=
+04\x01\xff\x01\x01\x00\x01\x00\x00\x00\x01\x01\x07\x6d\x79\x67\x72\x6f\x75\=
+x70\x01\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00=
+\x00\x00\x01\x64\x42\xb9\x9d\x01\x00\x00\x01\x02\x09\x63\x6f\x6e\x73\x75\x6=
+d\x65\x72\x41\x01\x64\x42\xb9\x9d\x01\x00\x00\x01\x64\x42\xb9\x9d\x01\x00\x=
+00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x09\=
+x63\x6f\x6e\x73\x75\x6d\x65\x72\x42\x01\x64\x42\xb9\x9d\x01\x00\x00\xff\xff=
+\xff\xff\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x0=
+0\x00\x00\x00\x00\x40\x64\x40\x64\x00\x00\x00\x0d\x00\xe7\x12\xf7\xcc\x25\x=
+d5\x0e\x44"} err
+++        catch {r XACK mystream mygroup 1-0} _
+++        catch {r XREADGROUP GROUP mygroup consumerA COUNT 10 STREAMS myst=
+ream 0} _
+++        catch {r DEL mystream} _
+++        assert_match "*Bad data format*" $err
+++        r ping
 ++    }
 ++}
-diff --git a/meta-oe/recipes-extended/redis/redis_8.0.6.bb b/meta-oe/recipes-extended/redis/redis_8.0.6.bb
-index f09bb8aba2..a83ffbae48 100644
+++
++ } ;# tags
++=20
+diff --git a/meta-oe/recipes-extended/redis/redis_8.0.6.bb b/meta-oe/recipe=
+s-extended/redis/redis_8.0.6.bb
+index 5d4ca143d1..04641a9dab 100644
 --- a/meta-oe/recipes-extended/redis/redis_8.0.6.bb
 +++ b/meta-oe/recipes-extended/redis/redis_8.0.6.bb
-@@ -17,6 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
-            file://CVE-2026-81934.patch \
+@@ -19,6 +19,7 @@ SRC_URI =3D "http://download.redis.io/releases/${BP}.tar.=
+gz \
             file://CVE-2026-23479.patch \
-+           file://CVE-2026-23631.patch \
+            file://CVE-2026-23631.patch \
+            file://CVE-2026-25243.patch \
++           file://CVE-2026-66373.patch \
            "
- SRC_URI[sha256sum] = "6d0a9913887a4972536f9da226f1575859c34d86354129163260a5f9c6bd4229"
- 
--- 
+ SRC_URI[sha256sum] =3D "6d0a9913887a4972536f9da226f1575859c34d863541291632=
+60a5f9c6bd4229"
+=20
+--=20
 2.35.6
 
 
