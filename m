@@ -1,452 +1,119 @@
-Return-Path: <rsangam@mvista.com>
+Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACE6FCC6B38
-	for <webhook@archiver.kernel.org>; Fri, 16 Oct 2026 17:03:27 +0000 (UTC)
-Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1910.1792170204461569679
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E7EACCF2C9
+	for <webhook@archiver.kernel.org>; Sat, 17 Oct 2026 21:43:05 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4741.1792273376062818762
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2026 10:03:24 -0700
+ Sat, 17 Oct 2026 14:42:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=ZXhKrCYk;
- spf=pass (domain: mvista.com, ip: 74.125.82.41, mailfrom: rsangam@mvista.com)
-Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-16079d54c17so219573c88.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 10:03:24 -0700 (PDT)
+ dkim=pass header.i=@snap.com header.s=google header.b=DCIkiJwT;
+ spf=pass (domain: snapchat.com, ip: 209.85.221.45, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48441a2ba1bso461585f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Oct 2026 14:42:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1792170203; x=1792775003; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PFhpU0PQZGVbvqrD8/R/vvp44J9oS2mQBoZhpCR01A4=;
-        b=ZXhKrCYkFvFtzzZZ8UlI9Oqxf1ruzTtB/kKwoS+4KsrtCftWDdyUPZau/1K/N5x0IT
-         ot2MiH+6/dJi+TBLVT+bqIzMf5spPyXE9ikM+9ycshxE9UbR6dmMXEdJtBWW6lyIV0Ep
-         /P/HQVLuqqF64roRLK306PTPYwMHzwqVyq47Q=
+        d=snap.com; s=google; t=1792273374; x=1792878174; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=DDHex5mVGDA+X6wbJHmvfnavAFEXBNFnqdFb8EArw8A=;
+        b=DCIkiJwT9WVaVk9bz9zIoPL+laUIF8fpORKUA2AAcr74r9lqsChkpwpCaEC9fJdWDv
+         ChaQEJPTGpXQ6+IG6q3qi5BMWH5q7yCoDxD9GJwrQkgO3OlXw13Y5b1ShknN6EBQVmYW
+         3LJmRaiTXe1yPTXVQXtImrNTr69Mc9wgCPlKk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792170203; x=1792775003;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=PFhpU0PQZGVbvqrD8/R/vvp44J9oS2mQBoZhpCR01A4=;
-        b=JsHwAWW5PUf3EMHLobCLG6mx+/nrTRIAMl6NY6gEOxwJyeprJxgX1GRFga2lFuHshl
-         iYME+qXt86oZCUEASfNpy55MyD3a4zz5bCs4h9t69EIioGtbD+/VJ5EVnFVNitD6HMbM
-         xBYmVNvwsis2dg+roikR+/8eA6/oivEgOi+QeipGVKIHIszA6Quma1cIAZ6ZFlFOlomW
-         BG2obFXrjWqNoEA5KJTFXN6fIoMcbbmHBLN1BzrLMhXDuCy5PWv0CtKr4gMtTlNgtpBT
-         lqqSRJSn5JveNAqcI8kASLJVDJOaz54Jx/XwOfKiLrqqNDNtxqPOzLlPfJK+KvXLGvZX
-         ROag==
-X-Gm-Message-State: AFq9FYIJjDod2suiybinpa6Cc12aVHhNvTN2CuODmEnGkJABwdbpgWFe
-	KyGsVpvnkfUO7gjx8t9Zpf42j/7/6assnWSNL43UwIOaYvx+nKxHP//oShhhQ3gDf+esG49SOoY
-	2R0XCC7w=
-X-Gm-Gg: AYBFou1o7V8drgzSynKKopaAK/0PuL7pYg1fHghCwMXP736dNzaFt8cIE8ag2FoUOPX
-	WT+7MSXV2lge303bC8bflT2DoR7jrNM1UArui+da/oHP5o0w/V0Q8c75QcrS6h7DMrw/Arr2kvD
-	bKb2kj6U8DTt3Ws+A6iKeS2c0kL7XvKYO6HrG3M30YB61qjPwQOX/NfF1nl0KEFDPuW/eK93NYy
-	G+20DW/4ZXZR0WL9q40cZFUt7XcNBcnbzJZbdMn/F0TdmV83IpNIGp7Xs+HTgEUi4ztm7cgHLuD
-	ZHqzNMua3FXkQYVNUqsVDcjYZeM+FIPqPBMUr8KMO4BifRKIvdxNDmkL3Wle0qdEFWWNBrLWlgA
-	RlzWKeDeg0j3kEbLIR0gMzG6BBSIo0WgeDpmfhstui/GfOFcfLq73msAsHHAzWK756FQklumfMr
-	Z0hQ1eMXOOHFrd6fAp7lSOHirDX0ixtVMUQLqHdIiPkWkWurwx3zgv7U2RSyfCwN5Q5XjeNiHuc
-	Rs3BfA=
-X-Received: by 2002:a05:701b:4518:20b0:163:d97f:96f3 with SMTP id a92af1059eb24-1850ce9e858mr631622c88.4.1792170203160;
-        Fri, 16 Oct 2026 10:03:23 -0700 (PDT)
-Received: from MVIN00040.mvista.com ([49.207.221.247])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c2e7bf4sm6425213c88.20.2026.10.16.10.03.20
+        d=1e100.net; s=20260707; t=1792273374; x=1792878174;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DDHex5mVGDA+X6wbJHmvfnavAFEXBNFnqdFb8EArw8A=;
+        b=HmBqpkQgV6EW+S+CuBk252XasaBC1zzIQ2e6bFiUy3nVJBpeypenikUEzUqwyAxiDH
+         u0S2syO3AQG47DQEvIvnV665CQzz5MMjWpY5HDBzMbq0Q/cq/mKZmokXTq02K1/FMVN4
+         jarTuaS5NzY6Yj/0yp+eYVZMds9EwYJNHMIpU1TDztsUJxsOb8XIR365SOQJEJ4ZUHdu
+         fTzN5Lp+npaf0NCe3sdvfN8SaDtaC9Z/xj9Ncy8q2oHiaR4r4zzGDJL4WBHE5ZfHkBh+
+         yo+s+YmReVhEmLp3mcwgj4v4W3LrcLjXwn/xzxnHyweLyynxWWY8K/T9yUj6Ki9bKhlT
+         IF0Q==
+X-Gm-Message-State: AFq9FYIMxA967jRqS6cvBmMHYoK1Eoc7etedtVT2PSewzb3mQZzk+Dzd
+	mUYov7YfVL8RemEcyNbewbnrBn0zdLoarS8zFqBg3GF56OyhjT/tgfZXIC/cizf5+rAvlgH1NDd
+	UQXRm78o=
+X-Gm-Gg: AYBFou3ydJ03OOYlvP8Tz53boxQXxl5yYIc5fqo86bjIpjhVdINDT/eyQUJQi6hC9s1
+	hE8OWiH999NEs8yZL1lBqKH2EVdS+QTLGZdl3U8F4IptgtMgBPvDGqYZLwUf1lJqTLhbYDXPkWQ
+	PdL9TH/Vv0Hspv1OtbuSRI43p5dj58NXVmaO37jiFD87r4nTBJcUoK4MLbHK6AUpVlP0n7bL6YC
+	3a1FuWG+gK1wXxHjzRD5zUxCdsI2DJnJpNksG6ui1LnQ7VOUF3taHLgcKMOPPpYDLpw3GMbzGg+
+	33OatB2IVIsCxyD44d/rxcQZaYdfthr0/PyoSoyNzM+gWAHJsQqssEdeyM+4n+/GMcRpchaKgqI
+	K3DUsPqiXgitzuzE9UWJC5OsyJJ0oJBulxkwObYeb0DsdD9c626XaswdZtRJmEyGofWvDOTkb3q
+	oqpxX7CID51YukPBTxAGn6hgpgJ3ahwz4SDvR3ydtdnpfOYQeh9KNR9vS6HAlVlQh6mF/WnoYMM
+	f6jU+qo6/1iQG28eRQQVp3mteE3v+eRrmMfqqPx3Q==
+X-Received: by 2002:a05:600c:4e14:b0:4a1:d307:b526 with SMTP id 5b1f17b1804b1-4a1d7464034mr71181755e9.0.1792273373702;
+        Sat, 17 Oct 2026 14:42:53 -0700 (PDT)
+Received: from lj8k2dq3.sc-core.net ([85.237.126.22])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1d3e2e602sm142972575e9.5.2026.10.17.14.42.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 10:03:22 -0700 (PDT)
-From: Rohini Sangam <rsangam@mvista.com>
+        Sat, 17 Oct 2026 14:42:53 -0700 (PDT)
+From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Rohini Sangam <rsangam@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH] nodejs: Security fix for CVE-2026-48937
-Date: Fri, 16 Oct 2026 22:32:56 +0530
-Message-Id: <20261016170256.30485-1-rsangam@mvista.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
+Subject: [meta-oe][PATCH] uutils-coreutils: link base32 base64 df mktemp nice printenv in base_bindir
+Date: Sat, 17 Oct 2026 23:42:48 +0200
+Message-ID: <20261017214248.337810-1-ecordonnier@snap.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2026 17:03:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131081
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Oct 2026 21:43:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131082
 
-Pick patch from [1] also mentioned at Debian tracker in [2]
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
-[1] https://github.com/nodejs/node/commit/a1a5bb968303229d4a3a7c9e389dc3ece6237b4c
-[2] https://security-tracker.debian.org/tracker/CVE-2026-48937
+GNU coreutils installs these in ${base_bindir}, so match it. This only
+matters when usrmerge is not enabled, as otherwise ${base_bindir} and
+${bindir} are the same directory and the generated links are unchanged.
+Only the path of the update-alternatives symlinks changes (from ${bindir}
+to ${base_bindir}); they still point to ${bindir}/coreutils.
 
-Signed-off-by: Rohini Sangam <rsangam@mvista.com>
+Checked that the generated postinstall now links all six in /bin.
+
+AI-Generated: Uses Claude Sonnet 5.5
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ---
- .../nodejs/nodejs/CVE-2026-48937.patch        | 349 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_20.20.2.bb |   1 +
- 2 files changed, 350 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
+ .../uutils-coreutils/uutils-coreutils_0.12.0.bb          | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
-new file mode 100644
-index 0000000000..5f9f9bffce
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2026-48937.patch
-@@ -0,0 +1,349 @@
-+From a1a5bb968303229d4a3a7c9e389dc3ece6237b4c Mon Sep 17 00:00:00 2001
-+From: Tim Perry <pimterry@gmail.com>
-+Date: Wed, 22 Apr 2026 13:36:27 +0200
-+Subject: [PATCH] deps: fix integration issues with the latest nghttp2
+diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
+index 76fcbc55e7..53866d6f80 100644
+--- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
++++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.12.0.bb
+@@ -33,7 +33,7 @@ CARGO_BUILD_FLAGS += "--features unix --features feat_external_libstdbuf"
+ 
+ # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
+ 
+-# df mktemp nice printenv base32 base64 get a special treatment and are not included in this
++# df mktemp nice printenv base32 base64 are not included in this, see base_bindir_progs_extra
+ bindir_progs = "[ arch basename cksum comm csplit cut dir dircolors dirname du \
+                 env expand expr factor fmt fold groups head hostid id install \
+                 join link logname md5sum mkfifo nl nohup nproc od paste pathchk \
+@@ -57,13 +57,16 @@ ALTERNATIVE_PRIORITY = "100"
+ # Higher than net-tools (which uses 100)
+ ALTERNATIVE_PRIORITY[hostname] = "110"
+ 
+-ALTERNATIVE:${PN} = "${bindir_progs} ${base_bindir_progs} ${sbindir_progs} base32 base64 nice printenv mktemp df"
++# Like GNU coreutils, these are linked in ${base_bindir} rather than ${bindir}.
++base_bindir_progs_extra = "base32 base64 df mktemp nice printenv"
 +
-+This is a set of src & tests fixes for nghttp2 due to changes in
-+v1.67.0+ which require a selection of changes to how we handle
-+low-level protocol errors when using the latest versions of nghttp2,
-+changing both some src error handling and updating some tests to match.
-+
-+Signed-off-by: Tim Perry <pimterry@gmail.com>
-+PR-URL: https://github.com/nodejs/node/pull/62891
-+Backport-PR-URL: https://github.com/nodejs/node/pull/63195
-+Reviewed-By: Marco Ippolito <marcoippolito54@gmail.com>
-+Reviewed-By: Tim Perry <pimterry@gmail.com>
-+Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
-+Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
-+Refs: https://hackerone.com/reports/3658225
-+
-+CVE: CVE-2026-48937
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/a1a5bb968303229d4a3a7c9e389dc3ece6237b4c]
-+
-+Signed-off-by: Rohini Sangam <rsangam@mvista.com>
-+---
-+ src/node_http2.cc                             | 31 +++++++
-+ src/node_http2.h                              |  2 +
-+ ...t-http2-misbehaving-flow-control-paused.js | 33 ++++---
-+ .../test-http2-misbehaving-flow-control.js    | 33 ++++---
-+ ...tp2-options-max-headers-exceeds-nghttp2.js | 12 ++-
-+ ...http2-session-cleanup-on-nghttp2-goaway.js | 91 +++++++++++++++++++
-+ 6 files changed, 176 insertions(+), 26 deletions(-)
-+ create mode 100644 test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
-+
-+diff --git a/src/node_http2.cc b/src/node_http2.cc
-+index 4f44789b..5047e5c4 100644
-+--- a/src/node_http2.cc
-++++ b/src/node_http2.cc
-+@@ -1246,6 +1246,24 @@ int Http2Session::OnFrameSent(nghttp2_session* handle,
-+                               void* user_data) {
-+   Http2Session* session = static_cast<Http2Session*>(user_data);
-+   session->statistics_.frame_sent += 1;
-++
-++  // If nghttp2 has internally terminated the session (e.g. due to a protocol
-++  // error like oversized frames, padding errors, or HPACK compression
-++  // failures), it calls nghttp2_session_terminate_session() directly which
-++  // queues a GOAWAY but does not invoke any application-level callback.
-++  // Detect that case here: a GOAWAY was sent but we never initiated it
-++  // (no Close(), no session.close(), no session.goaway()).
-++  //
-++  // We set a flag here, and then throw the error at the end of
-++  // SendPendingData, to wait until the GOAWAY is written before the session
-++  // is torn down.
-++  if (frame->hd.type == NGHTTP2_GOAWAY && !session->is_closing() &&
-++      !session->is_destroyed() && !session->IsGracefulCloseInitiated() &&
-++      !session->goaway_initiated_) {
-++    Debug(session, "nghttp2 session terminated internally");
-++    session->internal_goaway_sent_ = true;
-++  }
-++
-+   return 0;
-+ }
-+ 
-+@@ -1976,6 +1994,18 @@ uint8_t Http2Session::SendPendingData() {
-+ 
-+   MaybeStopReading();
-+ 
-++  // If nghttp2 has internally torn down the session (detected in OnFrameSent)
-++  // during the nghttp2_session_mem_send loop above, at this point we error:
-++  if (internal_goaway_sent_) {
-++    internal_goaway_sent_ = false;
-++    if (!is_closing() && !is_destroyed()) {
-++      Isolate* isolate = env()->isolate();
-++      HandleScope scope(isolate);
-++      Local<Value> arg = Integer::New(isolate, NGHTTP2_ERR_PROTO);
-++      MakeCallback(env()->http2session_on_error_function(), 1, &arg);
-++    }
-++  }
-++
-+   return 0;
-+ }
-+ 
-+@@ -2901,6 +2931,7 @@ void Http2Session::Goaway(uint32_t code,
-+   if (is_destroyed())
-+     return;
-+ 
-++  goaway_initiated_ = true;
-+   Http2Scope h2scope(this);
-+   // the last proc stream id is the most recently created Http2Stream.
-+   if (lastStreamID <= 0)
-+diff --git a/src/node_http2.h b/src/node_http2.h
-+index a60a7ba0..91046052 100644
-+--- a/src/node_http2.h
-++++ b/src/node_http2.h
-+@@ -968,6 +968,8 @@ class Http2Session : public AsyncWrap,
-+ 
-+   // Flag to indicate that JavaScript has initiated a graceful closure
-+   bool graceful_close_initiated_ = false;
-++  bool goaway_initiated_ = false;
-++  bool internal_goaway_sent_ = false;
-+ };
-+ 
-+ struct Http2SessionPerformanceEntryTraits {
-+diff --git a/test/parallel/test-http2-misbehaving-flow-control-paused.js b/test/parallel/test-http2-misbehaving-flow-control-paused.js
-+index e54bb832..b9a0d5cb 100644
-+--- a/test/parallel/test-http2-misbehaving-flow-control-paused.js
-++++ b/test/parallel/test-http2-misbehaving-flow-control-paused.js
-+@@ -47,36 +47,45 @@ const data = Buffer.from([
-+ // Bad client! Bad!
-+ //
-+ // Fortunately, nghttp2 handles this situation for us by keeping track
-+-// of the flow control window and responding with a FLOW_CONTROL_ERROR
-+-// causing the stream to get shut down...
-+-//
-+-// At least, that's what is supposed to happen.
-++// of the flow control window and sending GOAWAY to end the session.
-+ 
-+ let client;
-+ 
-+ const server = h2.createServer({ settings: { initialWindowSize: 36 } });
-+-server.on('stream', (stream) => {
-++
-++server.on('session', common.mustCall((session) => {
-++  session.on('error', common.expectsError({
-++    code: 'ERR_HTTP2_ERROR',
-++    name: 'Error',
-++    message: 'Protocol error'
-++  }));
-++}));
-++
-++server.on('stream', common.mustCall((stream) => {
-+   // Set the high water mark to zero, since otherwise we still accept
-+   // reads from the source stream (if we can consume them).
-+   stream._readableState.highWaterMark = 0;
-+   stream.pause();
-+   stream.on('error', common.expectsError({
-+-    code: 'ERR_HTTP2_STREAM_ERROR',
-++    code: 'ERR_HTTP2_ERROR',
-+     name: 'Error',
-+-    message: 'Stream closed with error code NGHTTP2_FLOW_CONTROL_ERROR'
-++    message: 'Protocol error'
-+   }));
-+   stream.on('close', common.mustCall(() => {
-+     server.close();
-+     client.destroy();
-+   }));
-+   stream.on('end', common.mustNotCall());
-+-});
-++}));
-+ 
-+-server.listen(0, () => {
-+-  client = net.connect(server.address().port, () => {
-++server.listen(0, common.mustCall(() => {
-++  client = net.connect(server.address().port, common.mustCall(() => {
-+     client.write(preamble);
-+     client.write(data);
-+     client.write(data);
-+     client.write(data);
-+-  });
-+-});
-++
-++    // TCP connection is closed by the server
-++    client.on('close', common.mustCall());
-++  }));
-++}));
-+diff --git a/test/parallel/test-http2-misbehaving-flow-control.js b/test/parallel/test-http2-misbehaving-flow-control.js
-+index 6774be22..fb0f7a1e 100644
-+--- a/test/parallel/test-http2-misbehaving-flow-control.js
-++++ b/test/parallel/test-http2-misbehaving-flow-control.js
-+@@ -58,18 +58,24 @@ const data = Buffer.from([
-+ // Bad client! Bad!
-+ //
-+ // Fortunately, nghttp2 handles this situation for us by keeping track
-+-// of the flow control window and responding with a FLOW_CONTROL_ERROR
-+-// causing the stream to get shut down...
-+-//
-+-// At least, that's what is supposed to happen.
-++// of the flow control window and sending GOAWAY to end the session.
-+ 
-+ let client;
-+ const server = h2.createServer({ settings: { initialWindowSize: 18 } });
-+-server.on('stream', (stream) => {
-++
-++server.on('session', common.mustCall((session) => {
-++  session.on('error', common.expectsError({
-++    code: 'ERR_HTTP2_ERROR',
-++    name: 'Error',
-++    message: 'Protocol error'
-++  }));
-++}));
-++
-++server.on('stream', common.mustCall((stream) => {
-+   stream.on('error', common.expectsError({
-+-    code: 'ERR_HTTP2_STREAM_ERROR',
-++    code: 'ERR_HTTP2_ERROR',
-+     name: 'Error',
-+-    message: 'Stream closed with error code NGHTTP2_FLOW_CONTROL_ERROR'
-++    message: 'Protocol error'
-+   }));
-+   stream.on('close', common.mustCall(() => {
-+     server.close(common.mustCall());
-+@@ -78,14 +84,17 @@ server.on('stream', (stream) => {
-+   stream.resume();
-+   stream.respond();
-+   stream.end('ok');
-+-});
-++}));
-+ 
-+ server.on('close', common.mustCall());
-+ 
-+-server.listen(0, () => {
-+-  client = net.connect(server.address().port, () => {
-++server.listen(0, common.mustCall(() => {
-++  client = net.connect(server.address().port, common.mustCall(() => {
-+     client.write(preamble);
-+     client.write(data);
-+     client.write(data);
-+-  });
-+-});
-++
-++    // TCP connection is closed by the server
-++    client.on('close', common.mustCall());
-++  }));
-++}));
-+diff --git a/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js b/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
-+index 7767dbbc..46f560f9 100644
-+--- a/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
-++++ b/test/parallel/test-http2-options-max-headers-exceeds-nghttp2.js
-+@@ -90,11 +90,19 @@ server.listen(0, common.mustCall(() => {
-+     0,
-+     common.mustCall(() => {
-+       const client = h2.connect(`http://localhost:${server.address().port}`);
-+-      client.on('error', common.mustNotCall());
-++      // The server sends oversized headers that cause a compression error on
-++      // the client side, so nghttp2 internally terminates the client session.
-++      client.on('error', common.expectsError({
-++        code: 'ERR_HTTP2_ERROR',
-++        name: 'Error',
-++      }));
-+ 
-+       const req = client.request();
-+       req.on('response', common.mustNotCall());
-+-      req.on('error', common.mustNotCall());
-++      req.on('error', common.expectsError({
-++        code: 'ERR_HTTP2_ERROR',
-++        name: 'Error',
-++      }));
-+       req.end();
-+     }),
-+   );
-+diff --git a/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js b/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
-+new file mode 100644
-+index 00000000..f3576f9f
-+--- /dev/null
-++++ b/test/parallel/test-http2-session-cleanup-on-nghttp2-goaway.js
-+@@ -0,0 +1,91 @@
-++'use strict';
-++
-++const common = require('../common');
-++
-++if (!common.hasCrypto)
-++  common.skip('missing crypto');
-++
-++const http2 = require('http2');
-++const net = require('net');
-++
-++// When nghttp2 internally sends a GOAWAY frame due to a protocol error, it
-++// may call nghttp2_session_terminate_session() directly, bypassing the
-++// on_invalid_frame_recv_callback entirely. This test ensures that even
-++// in that scenario, we still correctly clean up the session & connection.
-++//
-++// This test reproduces this with a client who sends a frame header with
-++// a length exceeding the default max_frame_size (16384). nghttp2 responds
-++// with GOAWAY(FRAME_SIZE_ERROR) without notifying Node through any callback.
-++
-++const server = http2.createServer();
-++
-++server.on('session', common.mustCall((session) => {
-++  session.on('error', common.expectsError({
-++    code: 'ERR_HTTP2_ERROR',
-++    name: 'Error',
-++    message: 'Protocol error'
-++  }));
-++
-++  session.on('close', common.mustCall(() => server.close()));
-++}));
-++
-++server.listen(0, common.mustCall(() => {
-++  const conn = net.connect({
-++    port: server.address().port,
-++    allowHalfOpen: true,
-++  });
-++
-++  // HTTP/2 client connection preface.
-++  conn.write('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n');
-++
-++  // Empty SETTINGS frame.
-++  const settingsFrame = Buffer.alloc(9);
-++  settingsFrame[3] = 0x04; // type: SETTINGS
-++  conn.write(settingsFrame);
-++
-++  let inbuf = Buffer.alloc(0);
-++  let state = 'settingsHeader';
-++  let settingsFrameLength;
-++
-++  conn.on('data', (chunk) => {
-++    inbuf = Buffer.concat([inbuf, chunk]);
-++
-++    switch (state) {
-++      case 'settingsHeader':
-++        if (inbuf.length < 9) return;
-++        settingsFrameLength = inbuf.readUIntBE(0, 3);
-++        inbuf = inbuf.slice(9);
-++        state = 'readingSettings';
-++        // Fallthrough
-++      case 'readingSettings': {
-++        if (inbuf.length < settingsFrameLength) return;
-++        inbuf = inbuf.slice(settingsFrameLength);
-++        state = 'done';
-++
-++        // ACK the server SETTINGS.
-++        const ack = Buffer.alloc(9);
-++        ack[3] = 0x04; // type: SETTINGS
-++        ack[4] = 0x01; // flag: ACK
-++        conn.write(ack);
-++
-++        // Send a HEADERS frame header claiming length 16385, which exceeds
-++        // the default max_frame_size of 16384. nghttp2 checks the length
-++        // before reading any payload, so no body is needed. This triggers
-++        // nghttp2_session_terminate_session(FRAME_SIZE_ERROR) directly in
-++        // nghttp2_session_mem_recv2 — bypassing on_invalid_frame_recv_callback.
-++        const oversized = Buffer.alloc(9);
-++        oversized.writeUIntBE(16385, 0, 3); // length: 16385 (one over max)
-++        oversized[3] = 0x01;                // type: HEADERS
-++        oversized[4] = 0x04;                // flags: END_HEADERS
-++        oversized.writeUInt32BE(1, 5);       // stream id: 1
-++        conn.write(oversized);
-++
-++        // No need to write the data - the header alone triggers the check.
-++      }
-++    }
-++  });
-++
-++  // The server must close the connection after sending GOAWAY:
-++  conn.on('end', common.mustCall(() => conn.end()));
-++  conn.on('close', common.mustCall());
-++}));
-+-- 
-+2.44.4
-+
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-index 710ed988d3..f701b0db75 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.2.bb
-@@ -28,6 +28,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://run-ptest \
-            file://CVE-2026-48617.patch \
-            file://CVE-2026-48619.patch \
-+           file://CVE-2026-48937.patch \
-            "
- SRC_URI:append:class-target = " \
-            file://0001-Using-native-binaries.patch \
++ALTERNATIVE:${PN} = "${bindir_progs} ${base_bindir_progs} ${sbindir_progs} ${base_bindir_progs_extra}"
+ 
+ # Use the multicall binary named "coreutils" for symlinks
+ ALTERNATIVE_TARGET = "${bindir}/coreutils"
+ 
+ python __anonymous() {
+-    for prog in d.getVar('base_bindir_progs').split():
++    for prog in (d.getVar('base_bindir_progs') + ' ' + d.getVar('base_bindir_progs_extra')).split():
+         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('base_bindir'), prog))
+ 
+     for prog in d.getVar('sbindir_progs').split():
 -- 
-2.34.1
+2.43.0
 
 
