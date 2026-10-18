@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2059ACCF2D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22050CCF2D1
 	for <webhook@archiver.kernel.org>; Sun, 18 Oct 2026 05:56:30 +0000 (UTC)
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9885.1792302984161560084
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9807.1792302981711328651
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Oct 2026 22:56:24 -0700
+ Sat, 17 Oct 2026 22:56:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=mkT+km4F;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-35cd4e8bdbdso2778063eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Oct 2026 22:56:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yr9j/ts3;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-35d7fa491deso1287835eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Oct 2026 22:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792302983; x=1792907783; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792302981; x=1792907781; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Pxlf1g1uq1vJoMCuEHksTcSBClw4cy1ntqAbJzUb7Rs=;
-        b=mkT+km4F2vvIa/lfMbs57zNlGGntoEov8JCkRI5p8EOVQQMwI9S7NDxbqSTnDZbiEq
-         JaAH1UCedPiSwbGKVpasIN+jizEObdO/IGp8K0oDDVbMqNgnQDzgB96mx1Q6BYyppE6o
-         vdotY9Bt+RW1CHYHs+ppy4VIeo/FmzmhaPH/aYz+s4W6qSq9GfJQBBALZZ8PHt6T/r1i
-         2ueS7/dH85FmeycTpa7z8kJDwp4p7fNbrs+ydTEXKoTFjz/EONuZhuBOBVIRTLj/WtHO
-         kOB9LrUOnFFXWziKWgrp/9u346Gw0ZWePcjZ/q3J/sO9sa5bzAIRmvYinqKhDP9ZDTLW
-         YnkQ==
+        bh=4NQaPIiAsAC9vdlwZHWlKIUNaf+LgAYgDAOZEodUGTw=;
+        b=Yr9j/ts33dV2OscJwS0aizfCaFQcgPyqlWawotxJaYnHN08c7woYrWvJrYJgsLYPi5
+         gZJIwAdAlPBhvIdk7KOiiEStpVaF/3Pb+wkCI84NCG0foLxUjTAd+excWX7gxlgvU/bp
+         q7QetKZJ3fEj4YJVKWiKqIU0U7BDJo2A0GhO+qzbBK2I8ELJ7AHLGu9Pe/sjqewXqE66
+         hSsUChaP4XKXgN4VEk0cmdSiOqVI57agrdXxnf3+T380bIQTw2yj2tuf+XkwncwHvY6s
+         2rrehZy0KZuF1uq4Bj1ERmYGzM56d9mRlb+gD4AIwXo5Fmts/eZHXMMqIUIWVgYIg8C0
+         1NWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792302983; x=1792907783;
+        d=1e100.net; s=20260707; t=1792302981; x=1792907781;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Pxlf1g1uq1vJoMCuEHksTcSBClw4cy1ntqAbJzUb7Rs=;
-        b=CFdBcoB6n0EAJG/VH1Sb+xS2O6VSd+lAaRknG4StituAFPAkWQwOEyqRbujhzSuiMw
-         dhj/isktKkfNDS1zhT/RcTNABbp1RYd5FyzVcYfwbYjXWK+aWF/yk59MQZY6nfa3f6T4
-         bdbp9FVUM9c23b1zMekfSjKUoGjSo/E8mSKoyDsbU8xbKNBfAWzgzEm3Ev7iNhnABIe/
-         0xDwctASwHxYQScAmNE/KawEaYdHRTexuGDMT2DSyX4u4vqA4Pt1Tphps5SBP++9e2t+
-         trd5+CWvsRdsiImQ+H3pS7Yjbr1GUjGXZOhJb7XZTh6BU1VOZ/NrQo/bB97W2JPc9mtP
-         k2lQ==
-X-Gm-Message-State: AFq9FYL0UDSLJLRFNIA8q5LxOgYws8l7zhdbBo+YOOSsZckjCRuRdNrA
-	VLbKsPU9MtwS+8f4eejlU9dPMPNE4tK1UWLrPnNq3ivUHbQM1TDcddAEOkkwhjlGh/M=
-X-Gm-Gg: AYBFou31tBplYM5byS22fqQtmoDicnSqAttJOvCDZRMQkKhGRraTawXftHLBRYZcgLS
-	+sa3z/agACzNLhIVqvIXJAGxjzFcXIz8GCg8AlrCQzOfCI5Nu/g+zg7zo+MNQn/XukVMKQ/eXJP
-	Esjsj+VEtwWdsx7P/VAv18zw7BaJjJvR4p84kllry9X0NvfsMbHOUoFE7qSAxj8n0t8nb0nxgrb
-	DmqOGoZuVQB/Jbz27Y7S5DwQSNnNEOiZpn7pEWPEYRM0ABrS4ZpTQ7e1hL20HsLKjrakk1DEs2g
-	df6lRhBdhHGsYPo39ea1unC4QfY41qijJR2bkHd9rXlT4kOlYhVXuTypTMQYxflrtCmA/zA8jnz
-	As897JztZiXmfWnK+9uDI0D7kUpCDqkpOv3ArnkF1w4vOKyUpRaJGbnoekAxz+fAZPPksb/Wpw0
-	GgVtd6Piz13TRGWg9TuH89YvULswJL7zUHqVjC0tzS2r24lI/2QTGb63lCoroE9/yspDJSaIGSv
-	rRLrBEbeDn0awgfRktSZc3VWkIZBDjPsrlyhexGQY5UGIjaXYgx3ppM/4J2HLqS9aJP9p2Y6/6A
-	PtwfzsPGMa7NJ2/9BoZKQdbjL6YYhRvEbfyrz6wHIvB9BXEJp3FcSSXz8pRb+RT3LALW2pqI0Yz
-	2Nrq/9986ryXmb39K29z2TYensMVuRzK1iwGdHYHmi9ERmmvjH3bd9AFclAZqDOgyNSUzbc7P97
-	z69Px3u53JBBMGAqcqcPrkJkTaJ3+hrKhTEENKa2jP+ItKXiZ9uDG0fJk0
-X-Received: by 2002:a05:7301:2f2e:b0:35b:b3fa:40f7 with SMTP id 5a478bee46e88-361a33234d1mr5906119eec.38.1792302983471;
-        Sat, 17 Oct 2026 22:56:23 -0700 (PDT)
+        bh=4NQaPIiAsAC9vdlwZHWlKIUNaf+LgAYgDAOZEodUGTw=;
+        b=pNIpuA2F6+iU0AIyOgoTPM9YVK6lwZc9BID6xu5jlVkBVtPD5HDM/Ohi1MB6ensVP7
+         Uiy/3V32g02gfJc6tGBCgilSeJL0EJWvqiP6J6JkVF3LdsJmSg2336UxiWJTboqCcgbB
+         6mLAMe7RXlywJPEGEyOqGGx9WnMF24GczlpeafpASgrrfTUgflfWaPHYCHBiq/7P0B66
+         7VXRIgwOucAnZwT4b4FnxCY76h4PzbIqimpyqeQTkk/2RzJH4idMjl1Kz6HmhTfj2v/4
+         KWnAV69hpk0Umu+sAm1akv5HVDakmxYY89I+y1IBZxux9G8RsSPIqTeDQNImBrp9bDEt
+         BV2w==
+X-Gm-Message-State: AFq9FYIgVwPbRgOX4ECplxEFEcsuECVyo4XC/sndQU8joOgfgDcqFomo
+	uSCIiesD/TtLNcFbdGHKytStvttWig9jbl+1uZ3uAZxOZKPyF9r4aWBUXMF2yOw43WY=
+X-Gm-Gg: AYBFou24AQlR+DH3nWnM8mXaRrL6+U1ctxCvLcHfjNqECTKmcc1YclTr15XsytCFOHx
+	3My2Wzs5LeniG63jq70Vhr7c7FbKlTWQ9tRw5gqtc4x6Ps8aNN/5B7ph5g2MBpDTTTBD2ech4J9
+	G2k+A4IObUhNus9cj2XME/QDXDhzP3f9K15AM/0De2hbFSLZILHBLSrmH3up953P8O3HoELcp2e
+	vCEuyc8Bw8Pc08kgEQkHirsT8oVbqZ9F2qu8mjzfo1Yo60eg2eY/JNdB4+sWqm0jO60V3t1J1wZ
+	hBf1TjS+Gskj2EzcKQDp0h2wEqEOJdNEet3GJlletrU98YiLoT7F6K1AvuLyypine49rBuHqBXq
+	8CGf5y40ZUJq2lbOam5XlVHTg+mPZzrfGX9UHye/e6iXBBzaksQhkbpcPK/48uapnMDspJ1bGpC
+	tCjqNqSEJ33S2vsTzFhqf9AoxhLdsg2bU7uDS6sJF+tN1BShhHOWtHTDZ82bANQNO9Vx7noe1fZ
+	0dQP2w/THlmuREmxmQYIeO5e4sybaprWnoRgvn/Iqj5atJbeqS2Sso+EqZsiZXJkHrj+wx04LrZ
+	VqW2a+MKfItilQcOyPHkfSLjj8TJNzM+ZqXbIzr+dPsGNjpjBSgMW77KWzJTpPiW6j9igs8Miko
+	kf/om3BwoEGEDM1IgpyIZBNndVKSna7A0Do0b62AQROmv1lxa2phz7aTvFQBkLfwiy4QXHYogFz
+	koYAKYQW1jUXJvcf7g4n8cozqMnDEgUJ9F98CXG+cQ8rNNbpBeGlTKFtgi
+X-Received: by 2002:a05:7301:6f0b:b0:353:7f47:8168 with SMTP id 5a478bee46e88-3602e69d2a3mr9112772eec.17.1792302980903;
+        Sat, 17 Oct 2026 22:56:20 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360813b684dsm20883415eec.10.2026.10.17.22.56.22
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360813b684dsm20883415eec.10.2026.10.17.22.56.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 22:56:22 -0700 (PDT)
+        Sat, 17 Oct 2026 22:56:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 11/11] sushi: Mark incompatible with riscv32
-Date: Sat, 17 Oct 2026 22:55:38 -0700
-Message-ID: <20261018055605.179605-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 09/11] loupe: Mark incompatible with riscv32
+Date: Sat, 17 Oct 2026 22:55:36 -0700
+Message-ID: <20261018055605.179605-9-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261018055605.179605-1-khem.raj@oss.qualcomm.com>
 References: <20261018055605.179605-1-khem.raj@oss.qualcomm.com>
@@ -72,23 +72,24 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 18 Oct 2026 05:56:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131093
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131091
 
-It depends on glycin, which is not available on riscv32.
+It requires libseccomp and glycin, neither of which is available on
+riscv32.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-gnome/recipes-gnome/sushi/sushi_51.1.bb | 2 ++
+ meta-gnome/recipes-gnome/loupe/loupe_51.0.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb b/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-index a6c93da10d..f083618bd8 100644
---- a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-+++ b/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-@@ -55,3 +55,5 @@ FILES:${PN} += " \
+diff --git a/meta-gnome/recipes-gnome/loupe/loupe_51.0.bb b/meta-gnome/recipes-gnome/loupe/loupe_51.0.bb
+index cc3d855b56..7a7b913573 100644
+--- a/meta-gnome/recipes-gnome/loupe/loupe_51.0.bb
++++ b/meta-gnome/recipes-gnome/loupe/loupe_51.0.bb
+@@ -73,3 +73,5 @@ FILES:${PN} += " \
  "
  
- RDEPENDS:${PN} += "gjs glycin-gtk4 gstreamer1.0-plugins-base gtksourceview5 libadwaita webkitgtk"
+ RDEPENDS:${PN} += "glycin-loaders"
 +
 +COMPATIBLE_HOST:riscv32 = "null"
 
