@@ -2,67 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0B58CCF2E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4CFACCF2DB
 	for <webhook@archiver.kernel.org>; Mon, 19 Oct 2026 00:41:36 +0000 (UTC)
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24761.1792370488481089566
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24903.1792370492920114596
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Oct 2026 17:41:28 -0700
+ Sun, 18 Oct 2026 17:41:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Kj3KNZtM;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-35ef6b49813so3030958eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Oct 2026 17:41:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ddZ6bm7J;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-35ef6b49813so3031021eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Oct 2026 17:41:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792370488; x=1792975288; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792370492; x=1792975292; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ANBItL0/xrP8CQAr9q72z95rQACPMjzdP7kiPkHrSx0=;
-        b=Kj3KNZtMvjW0+yrjahZxLtT9dZIu55iT0uqE3couiGyrm2Uo1kdmGoIOfKGsxRoHfJ
-         aBbx7BgeYeovsvyy5Uhmw3vUgiEZGMkFx7upXclzW0QgjMaZtd2cvaeVzcMAH1X6eFYP
-         CRis+dvD8eXjBAFzEKq8GqU16Oj2PzJzgB3yJdiyj9y+O9zpYOlSTd2/Ijc9srZGhhgU
-         rIqNALkS2C3wZhWpKDasDPAgtl/4AKqoW/guzn+qtyou0gf0xYN3jr9EXiWP45Tc1lf4
-         DF2qCUuRzr8oKzwV+tCtHFSBOkuv+DdUquR+oRM3KXCCA06EeL3S96PGpVPExHSaBPEt
-         9Rmw==
+        bh=P9bgd2r9v3SgM0ysaLKDJ4+/iQsPs5a+dloR5xnjVew=;
+        b=ddZ6bm7JgGnU4h3dfFHPe3xqEGBxiH2qrzzeibtN5AZhRdb5i6MGbdFJNDvm0SDgxe
+         XpPlgvmDQeMWVsjeSBESq6tMakUg4yxmLLoc6OpBkL8xMjTEPjtVyhzWFan02VXMmhK/
+         asNWgd2E/V6w2FeyQ1CFOff/Hr0MZ4I0T74A+X/UcroyZDQOs74FC2zJQ22IRhmqtDMc
+         z/uWB3RV+gy/ZuIz3jLa4g3oqXjsKy0uN4dJCcHimDZw2ie4JaTpLqV+V5AzGxPVfn4a
+         cfah6rxk5lz3oZnJ7wqUOIpO6PK4uFHz1E3AIm0hSbess7QOyxh3OrjW1xQa7rVghzlc
+         ueNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792370488; x=1792975288;
+        d=1e100.net; s=20260707; t=1792370492; x=1792975292;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ANBItL0/xrP8CQAr9q72z95rQACPMjzdP7kiPkHrSx0=;
-        b=Rp9dx3tcSofp56GcaURhmzYqjmQd8JEOrXxb3EixYRWz42/iOKGV06nlSCC3hjsZZ/
-         T82dhaimXg6r3DVn16qskQvomD0CnBx1s56hm6uoCmFBkN/DbDU9BMMxrXVtKXm+sADe
-         5Mtvdo3dfrbKP9YPbj/POTI26uhTjlsF/tjwTFiV+yHyNbiZVsnFepQnH8ZTSUbn6G8T
-         DLFfiF3bDV8XG4LbBBc1g2H8kJPJLhOYzyqyDGD3nlI/kLSQnhVA98IEel+IFh7x0LCM
-         Spfe1/8kI7NaOvdQsl3U8FtGtdj1FQq2smfAdinUHjek1+kbx9fD5OYkkFQy77QtJbLW
-         awsQ==
-X-Gm-Message-State: AFq9FYL1+H4+1y6kILO2hxEgN1L9QMtdQqD0E4/h2vHALgOeLxLmkiqO
-	phSZ5eG7AvI5/PdCU1Jzj7fSbKWzy4f63hAKuJlDgnMKuD+/s1Cw7h04YVB0J//+Pxs=
-X-Gm-Gg: AYBFou3V1pfCIf4HfgXsLTWmLPyqwtOaiOVYz9hO/y8kdqf3nDgD7TOVBi6OBauFqXC
-	Y3aYV6q6JvHOmx7HTqjx4pGY0RVHjfkZc67gLLl081lpXyVXw9QIk2/7ixnWeFAjjx0PjQiha01
-	QTZCwW7FmW5uwB0c+rydKuaFwkH9tfTGvwBWshs8YnPJ5ghc8kEBqF6EcyfZ1AmODpRpGuEeesR
-	KFgOBeiw5wAmOoAoVZ6NRQhAwf07s2eJxjpKw2srR/zAkTv5Arh923lH1Np2bB3r+7iWBL+E2tZ
-	VIXzpeTQB+PQcoWI+3Rex1Trys7nOh6Lhgmu+jsbGOxNm4uiGVEzS7Fa0GfbzYjukp9j4VdGNYM
-	zmPKRddXSb+2DzGJ2ZZE20/0Ft91TsDUwjTjhczRf2BEefwmmYRg0l05s0jlvXfx0SM3rHJm2Gq
-	U8bxdMVsHbmvW3xkfqErqJedZAIWRbyUeEwX+k5QZHl6joI8xKo6wOSfD6gFzvnCmamjDWwdxJ4
-	slt+SiqXg5V2XPg07HT0wasIgsSE0ASaOds97eeQRntnFVGTkKLJRd1bub5n0uEaXSY1mcI6xLr
-	NmBvzGbixqQb57Jvb7I16cxrPe/4wJJjgR7SYdjj6G9vztAq5cnE3ZVZd4qahhs2JTT0wWpLYGo
-	d1Y6jM9eVu85zLSxZdBoYzLLvt+vCCIbzbkPkpX6CrsGHEja9qeAUe/K/WZwM3xTJfyAwSrcB7w
-	5od5IleCfONQNmRpIxZnhJMcYu0plBVi7BvXuY0MIUINYDTA==
-X-Received: by 2002:a05:7300:f287:b0:361:8d52:e148 with SMTP id 5a478bee46e88-3619f20106bmr9311064eec.4.1792370487653;
-        Sun, 18 Oct 2026 17:41:27 -0700 (PDT)
+        bh=P9bgd2r9v3SgM0ysaLKDJ4+/iQsPs5a+dloR5xnjVew=;
+        b=ZSvAgsAP8IjdApxitvsg9qdLWtPZYnKoKzScNb0IlwKWfl2qrdsupVtDXasvjApayI
+         XRU9i6mG1EsmdJgp7CGNLAJ+ftGx4IEmlO3OxPrwIQqE417X8CwPEYJN9vqP9heWIP9G
+         uqqxK394MIfDA5oriDk5elUVBhXIFpcVQG3judGPTVNvU9/l0MLzTiKIpI0vHKrBL8tG
+         zFM8YTNoAkb5SqHiXNX1SLhxn2VkEexOmTYF+temFAHG3rvhz4NMjC+nva7yoGiqY/Sj
+         urTbT8XmBWZ341eq2xO6SrOeC6yIy9iyLYHgEl8lA5DqI30CgnBBV+ZlNFHSJ2BvO2hO
+         pCig==
+X-Gm-Message-State: AFq9FYI/rMggf33yNLw2MJ7lNA13ttIgdkg5nx4y7O+NuN392wltM2I2
+	Sb7TsaAx3BwcmElj/Dql71fTPNqqziMLa/Z/dUHPQcO1Z4SdZ7oqIBiKvTVMNwTqB0o=
+X-Gm-Gg: AYBFou2srgNKkQErgk+xCs+3KnP9OyzXCzLEpIKfG1HoWiUzlJbmiGL99m3XBIGvkDo
+	9iMtiXIJ8Uh4f/a1nACxWO45bx2TnML3hYLKIukREirt8KKu0lHAUKq+zUXrMWjcZFGwQmdN6d4
+	yj4jLoOVKRAQUnwgfVnAbaipGJjeL+st33naotl0dsyvRSnJRSVPJBB4Om1QylpALCeLPu2pi2P
+	+N+6hRgZwLDniZ49XJZS4ZP7qhHhP9wgMbjMye0ClQjmT18cPX+S3prBqB0OAFt95KYdguydXpw
+	mmqbXZhJLmJxukywJJGXwMMVZ6PN0JCuHktkYBjclnjmIW8N9XvsNxQFMnEpH3l46RyAhJa3lVo
+	4AFbVAG7LJK4Ytfarlz31xy/bpGbrWCU5lHck0Qdk/T9t5simP+prAymWpN5aZC1JNB+0bvUHxv
+	WBfuzV42i2lPP8m5B31OqMnxxuboldfUZF17U8kZ5Q6F08avlUjV40jY5ydKzO1sadShO6usx6l
+	x9cyAnPLJYmPf5UaBLWwc4/hAyscMhkRAEnb2mAphG0u3Q3N4bWtIFPB1+iIrnp3h1t7Cs9GRbO
+	nD0KH3mEiYi5YiT8eRkkm+UgKPEK+VPl1Ke4/mFUp+3l7SYOI5lxJKHtQ5XR7rH5rUJ/3W4gwWL
+	mN01a+WFQWhLM13OfVGxUUjP/G2ucppvI63vVFqhXav179IBQ39mileQqx2m1sqFEmCvVHmBNTn
+	zTvLJW6amQA/0VLN+dbPivsTWPkmOd5USIWVs/3nT2Va2lIB+/a5f2T3YN
+X-Received: by 2002:a05:693c:6395:10b0:35d:b44:a52 with SMTP id 5a478bee46e88-361a23528d5mr9401387eec.24.1792370492203;
+        Sun, 18 Oct 2026 17:41:32 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3608308a87csm45211774eec.28.2026.10.18.17.41.26
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3608308a87csm45211774eec.28.2026.10.18.17.41.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 17:41:27 -0700 (PDT)
+        Sun, 18 Oct 2026 17:41:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-multimedia][PATCH 3/8] x265: Apply the patches with right patch level.
-Date: Sun, 18 Oct 2026 17:41:17 -0700
-Message-ID: <20261019004122.2475327-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 7/8] zbar: Fix test build with musl
+Date: Sun, 18 Oct 2026 17:41:21 -0700
+Message-ID: <20261019004122.2475327-7-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261019004122.2475327-1-khem.raj@oss.qualcomm.com>
 References: <20261019004122.2475327-1-khem.raj@oss.qualcomm.com>
@@ -72,26 +72,72 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 00:41:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131102
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131106
 
+test/meson.build assumed libc provides argp whenever argp.h exists, but
+on musl the header comes from argp-standalone, pulled into the sysroot
+via v4l-utils, and test_decode/test_video failed to link argp_parse.
+Backport the upstream fix that also checks for argp_parse and falls
+back to the bundled non_argp.c.
+
+AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-multimedia/recipes-multimedia/x265/x265_4.3.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...build-better-detect-if-libc-has-argp.patch | 31 +++++++++++++++++++
+ meta-oe/recipes-support/zbar/zbar_0.23.95.bb  |  4 ++-
+ 2 files changed, 34 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/zbar/zbar/0001-test-meson.build-better-detect-if-libc-has-argp.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb b/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
-index 6459fbc8cf..01edc1dc42 100644
---- a/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
-+++ b/meta-multimedia/recipes-multimedia/x265/x265_4.3.bb
-@@ -10,8 +10,8 @@ DEPENDS = "nasm-native gnutls zlib libpcre numactl"
+diff --git a/meta-oe/recipes-support/zbar/zbar/0001-test-meson.build-better-detect-if-libc-has-argp.patch b/meta-oe/recipes-support/zbar/zbar/0001-test-meson.build-better-detect-if-libc-has-argp.patch
+new file mode 100644
+index 0000000000..6bab32b05b
+--- /dev/null
++++ b/meta-oe/recipes-support/zbar/zbar/0001-test-meson.build-better-detect-if-libc-has-argp.patch
+@@ -0,0 +1,31 @@
++From 77ad19ae9bc3d0fa0f2208be99e562fb96a6e392 Mon Sep 17 00:00:00 2001
++From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
++Date: Wed, 14 Oct 2026 09:21:42 +0200
++Subject: [PATCH] test/meson.build: better detect if libc has argp
++
++On some cases, the build system is not properly detecting if
++argp is there or not, because on non-Linux systems, they may
++require the location of the libraries containing it.
++
++As we have our own simplified version of argp here, and currently
++we use it only on tests, if the library is not there, simply fall
++back to non_argp.c.
++
++Upstream-Status: Backport [https://github.com/mchehab/zbar/commit/77ad19ae9bc3d0fa0f2208be99e562fb96a6e392]
++Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ test/meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/test/meson.build b/test/meson.build
++index 656c8aa2..42905b80 100644
++--- a/test/meson.build
+++++ b/test/meson.build
++@@ -1,5 +1,5 @@
++ argp_compat = []
++-if not cc.has_header('argp.h')
+++if not cc.has_header('argp.h') or not cc.has_function('argp_parse')
++   argp_compat = files('non_argp.c')
++ endif
++
+diff --git a/meta-oe/recipes-support/zbar/zbar_0.23.95.bb b/meta-oe/recipes-support/zbar/zbar_0.23.95.bb
+index 489615721a..e3e337d50e 100644
+--- a/meta-oe/recipes-support/zbar/zbar_0.23.95.bb
++++ b/meta-oe/recipes-support/zbar/zbar_0.23.95.bb
+@@ -9,7 +9,9 @@ SECTION = "graphics"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
 
- SRC_URI = " \
-     git://github.com/Multicorewareinc/x265.git;protocol=https;branch=master;tag=${PV} \
--    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch \
--    file://0002-x265-fix-build-with-cmake-4.patch \
-+    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch;patchdir=.. \
-+    file://0002-x265-fix-build-with-cmake-4.patch;patchdir=.. \
- "
- SRCREV = "e9b88125dc21393b3fd8d68e98083bdfb89778a8"
- S = "${UNPACKDIR}/x265-${PV}/source"
+-SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV}"
++SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV} \
++           file://0001-test-meson.build-better-detect-if-libc-has-argp.patch \
++           "
+ SRCREV = "dc19fcc7da58e8cf84ba1ec417e24b04609feb23"
+
+ DEPENDS += "xmlto-native"
 
