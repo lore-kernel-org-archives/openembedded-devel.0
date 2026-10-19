@@ -2,62 +2,62 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2680FCCF2E8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20747CCF2E6
 	for <webhook@archiver.kernel.org>; Mon, 19 Oct 2026 12:56:34 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33886.1792414590121565014
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33882.1792414585163109671
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2026 05:56:30 -0700
+ Mon, 19 Oct 2026 05:56:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=WPk8QJuT;
- spf=pass (domain: konsulko.com, ip: 209.85.221.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48e0d1c095dso1074968f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 05:56:29 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=iGOKavgE;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a1e477fe16so7992975e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 05:56:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792414588; x=1793019388; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792414583; x=1793019383; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=g8KLKBmyovF4CTG5WqCzWEH8+ZklDcu6Z7MdZgsTajI=;
-        b=WPk8QJuTnSn4fAH7bbgLj6mufrsQky1cnyfbkNrlPXt4qr+0Cxa7vCQGRQuQ8X2c66
-         9f4Sr1GuyWqDGjlQKJFkirOsLhA1y90RA7SwtYJ3o7/WaHvyvulMufCzk0CC3Qm/ziTk
-         GcPv1L7VZEPVRYK4oI+HxOkvzVUjtANp5WHUw=
+        bh=MCZMV1LQKk+S0PcUoW7s/PO6WTWp5c5vaiWLvfGjqwQ=;
+        b=iGOKavgEr29SORl43/+1cqsXkZMrI4j9zMwWuLQw4gx7vDv5xVdYCejgFgv/M6oAes
+         V77DVr3404vBj+32NGE29TtZuFojNTOYopS1rO1FR2tOaDer689wuzUa1LQv1rZHt9s7
+         RYLeevraZzUVFSPPt4jiNeF8vNbtrlDH4jwbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792414588; x=1793019388;
+        d=1e100.net; s=20260707; t=1792414583; x=1793019383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=g8KLKBmyovF4CTG5WqCzWEH8+ZklDcu6Z7MdZgsTajI=;
-        b=zcvJFym2TqbHK2pQK9La2WyaLYa7kKv8H4wOTIW998XFARICXx6DpfVhRuoZC5h3Lu
-         UDUJlHlcqKzRkkgIRMRMn0gL476i3Mg5UdJiz1nWUT2j63EwJJqoYHae7avEai6qg9lf
-         reN6jI8XPpCX8xzCeBR9D2BKERBnmYfpdF5wNaCkSzzXH6Lr5t2tfSOVvyaHlWT1OD9U
-         m78NnGOF2bRlP6exVsFoWqiInKuItXRr1n2FVD6yr9O9B7sg325ZQvXjS/1nc1SSspZp
-         8utkt20QZ1zCFE0XhsoBc/nCwq7YDYe+kJPEbKbeLSxor5NAV/rmHSkL9WwjQ7lmRJBI
-         lyhw==
-X-Gm-Message-State: AFq9FYImOJVGU2zdxLv66NHjvfmv4PpCpQ7l1StMw97qtiC3d/RisseU
-	oA1dwWQZTbcZwOJWmE0WA34wwG8/qjqu0Tgx0+d4yg+YRIaZG9BGyWl8wDdK34kYaSrDlqjnlDm
-	PDVy0
-X-Gm-Gg: AYBFou1aOydseZac+HiiPYcaPGlY1ZkIFO9+eIk3aXXsRDbPJV8HV1CGCUgHC60PcJF
-	2Q3wlvpIwTgmWR5KUMERno0vNIKBioWt2/GQ+pipBdMU1tRHloRheiP+ychJEWXYFyE5bUp6fgk
-	xklZrRAVRNK4cF7MFg236EAmVlT1BHH86Iro10bRr48alFtosUreP27ipjwEhaJ34SCZicd/dEy
-	1lhe0ZwQZoJB3RyDTdFQ5bLEMtzLT5znZJZ0qjsyFtkFdedC43ZCQTg/G5GI3LzYwxS62hQz2yB
-	jFJIQXrb/S0LhI1Kdaf/BUxc4Y2aPFouv0lsOJTRMdmccpFNYcSmn1tTPSosTCLXjl6p08K9fl9
-	55GsvzPXJv0/a/7I9400eGaWkbKFNgubCIgKvH8wOt2hpILdVRW0Ez7hcwfJNvMTBv1aRm0QslJ
-	obTh0r+EoK/+obIhklDd5kwTUjo6rscghmv7wa8Z84mhKp+9jHEod7gtJ2mfGG++guqc5qJhE1j
-	VE/ceAv+fdao9fZTMw4NWw+j8+dwkKcqw5uphtknY/TEO8I7kKb9oMayYKKx4raj4/LYthjbnCI
-	u69WIScWu0OUhDPe5XtVGBg=
-X-Received: by 2002:a05:6000:2005:b0:48e:d27:bef2 with SMTP id ffacd0b85a97d-48e0d27c26bmr12134014f8f.21.1792414588309;
-        Mon, 19 Oct 2026 05:56:28 -0700 (PDT)
+        bh=MCZMV1LQKk+S0PcUoW7s/PO6WTWp5c5vaiWLvfGjqwQ=;
+        b=NQY75l4kL/anZGO7+rqB7NKTRuUcyTO4/1PH/oT3fwynNMBXADAAW5/L9xbZy/kct+
+         vn075IGnEyc0fcuOvHCgCsEf4CI+FMmjIlQX/6grL3XBxtnPY0/vxgUyDEHzGz6XqB2U
+         Jvqb5Iy+PdAdaANSnO0gSMLsNWz5v7m/egM99mC3D9Ww2+vdeD7WxOp+XgjxYAViBrP7
+         DrOXFTVjBATKSH8pn3O30pySdc73htrk435qjATusbZfkcvaoFf6FjIr86E4SD+YQrtD
+         hulCXPoPsiSggevH3voM3fQiFPtWV5INP8HD+YBCqLhxSjfcS1/8vulQJ+xqsyIwQ31p
+         Ddjw==
+X-Gm-Message-State: AFq9FYJuKQ8OVxpJoMvgOGLs8tURPhUbBnnftwY7k2uieXr+9yDKXHaI
+	EtgeK2mXp5hMEQHcksnEnDoWJjPk/fRde9PZpxOLHIjY6fRLWvgB8NKqcIEKofhMWVEYrDcX2x0
+	mM4OB
+X-Gm-Gg: AYBFou0FvCBfnW/ZkYI7h4JORZ/2hjdwA5T+0TkW/n7RedSz5x5CbS/0U4Kx2t2DnQA
+	mXQGhGNJXl+Enc9lZT/qCXPc5tDNyVbaqP4K94cauNwtK1Xa/+EQGeZmNSFmZzAUq5wOmsXgFVT
+	51cAxYUIindSpz4s2+0r/WmKl3MSPUZkbGe5Y2KIztPIjx91GJBrqYtlKXP+1tE9Li0q9cGDqJ2
+	SRnBAG4kDQfADzwvAGolgfAqhPtidaA4+9tIF9+ZyGHlLavHBmLeoswwqKclbF6bMi4RxoY4lzr
+	IOJElEnJ1wI0GXCePUJUXNhUDzCtRRviHEjNKuJ7KsgipBIA0C0cVa9tFbt9vqEWdZq1yRM5HB0
+	kEJcUZ0Q8CEAlqG0RoszxKKJmlqpBZwr5n0x87lpJJ5b4vh6kHX/ThHkp6gSq+kW0arGEirBgLp
+	VI/XWsM5qQY17BhLHAzsDHxoDaAFrcT9CAGrC/NOBNIuRJOT3ukCpWsYH6STyLGfpOIF3fPDq43
+	rwDRZEhZ30zPV6WRFvT3JAW2kN0xziBcHkGM7Q7Vq4wiC9Ziwru1XALILrzRgTmvNNBQH0osatN
+	I5p7zBy/CiM6UP8Y8uVIano=
+X-Received: by 2002:a05:600c:1d05:b0:4a1:bd69:526f with SMTP id 5b1f17b1804b1-4a1d75ab235mr151509195e9.4.1792414582719;
+        Mon, 19 Oct 2026 05:56:22 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e1afbf534sm1527565f8f.35.2026.10.19.05.56.27
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e1afbf534sm1527565f8f.35.2026.10.19.05.56.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 05:56:27 -0700 (PDT)
+        Mon, 19 Oct 2026 05:56:22 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 09/10] python3-cmd2: Upgrade 4.2.4 -> 4.3.0
-Date: Mon, 19 Oct 2026 15:56:15 +0300
-Message-ID: <20261019125616.3888504-9-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/10] python3-breathe: Upgrade 4.36.0 -> 5.1.0
+Date: Mon, 19 Oct 2026 15:56:10 +0300
+Message-ID: <20261019125616.3888504-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261019125616.3888504-1-leon.anavi@konsulko.com>
 References: <20261019125616.3888504-1-leon.anavi@konsulko.com>
@@ -67,81 +67,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 12:56:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131124
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131119
 
-Upgrade to release 4.3.0:
+Upgrade to release 5.1.0:
 
-Overview:
-
-This release primarily fixes a number of subtle bugs related to piping
-cmd2 command output to shell commands. It also removes the experimental
-tag from the @with_annotated decorator feature.
-
-Details:
-
-- Stabilized features
-    - @with_annotated is no longer experimental. It was introduced
-      as an experimental feature in 4.0.0 and is now a fully
-      supported way to define a command's arguments, alongside
-      @with_argparser. This covers the decorator and its supporting
-      API in cmd2.annotated, including Argument, Option, Group, and
-      ArgumentBlock. Annotated Argument Processing.
-- Bug Fixes
-    - On POSIX, piping a command's output to an interactive program
-      such as less (help -v | less) now runs that program as the
-      terminal's foreground job, as a shell pipeline does. It had
-      run in a separate session that never received the terminal,
-      so Ctrl-Z and fg did not suspend and resume it together with
-      cmd2. The program now owns the terminal as it starts, so a
-      pager can set its terminal modes, and Ctrl-C and Ctrl-Z reach
-      the whole pipeline. Pipes started from a worker thread, or
-      whose output does not go to the terminal, such as one nested
-      in a command whose own output is piped, still run in their
-      own session
-    - A shell command piped to an interactive program, such as
-      shell git log | less, now joins the pipeline's job, so both
-      processes receive Ctrl-C and Ctrl-Z
-    - On Windows, fixed piped output appearing garbled in console
-      programs such as more (help -v | more), a regression in
-      4.2.4. Pipes are written as UTF-8, but console programs
-      decode their input with the console's code page. While a pipe
-      or the pager runs, cmd2 now sets the console to UTF-8 (code
-      page 65001, as chcp 65001 does) and restores its code pages
-      afterward, so console programs and UTF-8 tools such as rg
-      both read the output correctly
-    - When copying a command's output to the clipboard (help >)
-      fails, later commands' output is no longer written to the
-      temporary file that held it
-    - When a pipe's process cannot be started, for instance because
-      no more processes can be created or $SHELL names a program
-      that cannot run, both ends of the pipe are now closed rather
-      than left open
-    - When a pipe's process exits before the command runs, what it
-      wrote, such as the shell's "command not found", is no longer
-      lost when cmd2 captures the output, as in a pyscript
+- Dropped support for Sphinx 6.2, 7.0 & 7.1 and added python 3.14
+- Strip leading spaces when making initializer
+- Fix duplicate constexpr qualifiers on constructors
+- Handle C++11 extended friend declarations
+- Keep template arguments in class template specialization names
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cmd2_4.2.4.bb => python3-cmd2_4.3.0.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_4.2.4.bb => python3-cmd2_4.3.0.bb} (87%)
+ .../{python3-breathe_4.36.0.bb => python3-breathe_5.1.0.bb}    | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python3-breathe/{python3-breathe_4.36.0.bb => python3-breathe_5.1.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_4.2.4.bb b/meta-python/recipes-devtools/python/python3-cmd2_4.3.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-cmd2_4.2.4.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_4.3.0.bb
-index beb5dd02b3..3605ab9003 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_4.2.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_4.3.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2a861642858e0858af9dd4e4716bae0"
+diff --git a/meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb b/meta-python/recipes-devtools/python3-breathe/python3-breathe_5.1.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb
+rename to meta-python/recipes-devtools/python3-breathe/python3-breathe_5.1.0.bb
+index d8dffcf948..9745605394 100644
+--- a/meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb
++++ b/meta-python/recipes-devtools/python3-breathe/python3-breathe_5.1.0.bb
+@@ -4,11 +4,12 @@ HOMEPAGE = "https://www.breathe-doc.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e49eecf36fc015de7c61a0247df75d6"
  
- DEPENDS += "python3-setuptools-scm-native"
+-SRC_URI[sha256sum] = "14860b73118ac140b7a3f55446890c777d1b67149cb024279fe3710dad7f535c"
++SRC_URI[sha256sum] = "ff56af8bfd0b50ebf10c81a07b8a5739787eb015d26b4ba162b6983d6e17c7c3"
  
--SRC_URI[sha256sum] = "9aac11583994f6b22fab6464180490cc3a336d46eb682f1438acebe3c0bbe53d"
-+SRC_URI[sha256sum] = "3f6c4b9619dbd0d1ba75789a099be82b65daf8ac1d97b8e4ecb112e76c72b100"
+ inherit pypi python_flit_core ptest ptest-python-pytest
  
- inherit pypi python_setuptools_build_meta python3native
+ RDEPENDS:${PN} = "python3-sphinx"
  
++RDEPENDS:${PN}-ptest += " doxygen"
+ 
+ BBCLASSEXTEND =+ "native nativesdk"
 -- 
 2.47.3
 
