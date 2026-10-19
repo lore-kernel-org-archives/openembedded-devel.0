@@ -1,186 +1,179 @@
-Return-Path: <dkelaiya@cisco.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DDBACCF2E9
-	for <webhook@archiver.kernel.org>; Mon, 19 Oct 2026 05:08:00 +0000 (UTC)
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28001.1792386476653493246
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30942CCF2E3
+	for <webhook@archiver.kernel.org>; Mon, 19 Oct 2026 12:56:24 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.33751.1792414582990633653
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Oct 2026 22:07:58 -0700
+ Mon, 19 Oct 2026 05:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=S/Wdb/C5;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: dkelaiya@cisco.com)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=PBCYxa9q;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48b060ec084so1383713f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 05:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4138; q=dns/txt;
-  s=iport01; t=1792386477; x=1793596077;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=n72nMOKVGVYKeC+AY2WgDkEDk4eZJINskLtl4MTyUvM=;
-  b=S/Wdb/C5bvlXKjnVkJdJ5JfdV0ZIWd1gh+6ppw7jy56VfocyhBY6Y/SW
-   y/+nUiPI+MD0tFCv/TEWuhuOZJpKwK7vaJMMjDMKn7MIHGRl9xwMMH5D1
-   SiXqYHPP8ef/G7CZpOr1e5oJ9ofFPinC3EQmfmREtDHL9YTcQGDYFH4OP
-   Nqnfuu8SYy0zxOBWKZzfAi8QH+LLtPl3wbuGZe8lSUsAOLlmzItAX0cPE
-   Rc+SehaPVoE4l/wrbVZ+8idEKD9AabeUZSDkoZp+E7i1YqB858G5AqACJ
-   QYy2TU5VWigI4G2CrW3ThPuJXNAqxV0byLmjklqDdXYOaPo0quPStL5P0
-   w==;
-X-CSE-ConnectionGUID: CZ630HgZR2285x94WSyWGQ==
-X-CSE-MsgGUID: lSklqiZ0S5y0b4Z2ZjRLxQ==
-X-IPAS-Result: =?us-ascii?q?A0BHAgAppdVq/5D/Ja1aglmCV3VgQ0mWSgOeHIF+DwEBA?=
- =?us-ascii?q?Q9EDQQBAYUFAo4VAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDZASAQIBAycLAUYQHAMBAi8rIwgZgwIBgnQDEb1ggXkzgQGDaQJDU?=
- =?us-ascii?q?NsyAQsUAYE4hUCII10YAYR8JxsbgXKBFYNpgQWBXAEBgSeGXCIEgiJ6EoFaH?=
- =?us-ascii?q?pU/SIEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+F4EHGwYFgR2BIIIWIxk2e?=
- =?us-ascii?q?oEJXoErKWABEBeBCYIHAoJUggACAUlBDgdFUwklQxJHJiIIEgkBExowC4EbO?=
- =?us-ascii?q?DwJKEEXDHMMHQVyCAINCQdNGA1IESw3FRkEPm4HkioegkUgAYENARMYFwmBT?=
- =?us-ascii?q?BimHqEPCiiDdowilToaM4VbpRQLmH2LN4JTllCEaYFoPIFHCwdwFYMiCUoZD?=
- =?us-ascii?q?445g2uBf8xJJzICCTIBAQcCBw4DC4FokACBfgEB?=
-IronPort-Data: A9a23:NXqZYqM17na/95/vrR31lsFynXyQoLVcMsEvi/4bfWQNrUon1DFWz
- WobDTyEM63eMWqgKo9yPdi/ox4B75Lcm9EyT3M5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmD9k/F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
- e/a+ZWFZgb9gm8sawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj695cUhpuHYIqwLwtUTxep
- KAnEyEyQSnW0opawJrjIgVtrt4oIM+uOMYUvWttiGmGS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzMHwsYDUXUrsTIJ49keOhh2j2WzZZs1mS46Ew5gA/ySQsi+a8b4SOJoDiqcN9mn2bo
- nvHzTzCXwBCPoCtkwiHyFa8v7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1nfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:qS6XZaC8bPVstfHlHemO55DYdb4zR+YMi2TDGXofdfUzSL3+qy
- nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygck79
- YCT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a585+oJjsaE52JKGxCe3+mLnE=
-X-Talos-CUID: 9a23:poN/R2/YvSvkQfD1OsaVv2UmRJt9UnLv9i2KcxKoWDpWc6yqZmbFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3AUpKGEg7VOonRO49K3zUvhFU0xoxs2KeqEUE/ya5?=
- =?us-ascii?q?bqpGOaR4qCTWnqCSOF9o=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,167,1787011200"; 
-   d="scan'208";a="536976344"
-Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 19 Oct 2026 05:07:55 +0000
-Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 9E76D1800049C;
-	Mon, 19 Oct 2026 05:07:55 +0000 (GMT)
-Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 4A042CBF204; Sun, 18 Oct 2026 22:07:55 -0700 (PDT)
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+        d=konsulko.com; s=google; t=1792414581; x=1793019381; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PO8+BEqIABcCucM4H8WDWJukuYTtvHyZBsMI21rgLRw=;
+        b=PBCYxa9q0ZXJ9TsQH0YhGIZccQH1Fo7iRQBcRwoRaQcFDW/bhALmq2t83wpRH/JHSE
+         btVmY6cRlm+jw71Xh8OG+4x38sB5BCJ1j+8JSQ0uunW/4HQAx+grAIGidPy+yTxyXjK0
+         IaTt+FGlsxiJvVq0o576Y8DGXntYhtPu7CCEU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792414581; x=1793019381;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PO8+BEqIABcCucM4H8WDWJukuYTtvHyZBsMI21rgLRw=;
+        b=ntmKwCIUMYF3NoWWCFvf3A1KORuIYhQR7OJRkpqofbPv9HPcGZps9EWRQOr4SToHPn
+         6ygzVSFwxpZH4X0rvkB8akm0MVIpz6gWpNNCFnMgF6nD4OvoWYhJoiceI40AaupVHPQg
+         ivdS3kTT/bxpnVfsU6f7D/l690mOD1A2BG8Gk3Qqz1UvDvmcIv+RFOpYr/2vakXkBxj/
+         wgP0oIYpk4tp3voD3u6J2SCk3tcgsTjuLBwMwf729vp7UA6XyB7Sr7i6DWLAzycEQFbl
+         4YTxNeQgmd8+b2bJv16lh+HfFN3uitbs1boCnCyrZPbhWfkzOEFVf0prJ3tNJdADkWAA
+         Cosw==
+X-Gm-Message-State: AFq9FYLfhS/UTx+GCRhMn5TrG3lSfKx3oCyA+r+CfLRgR8qD5pOof5Kj
+	WO5WmmZ6rr9TkztiwJaupjQpv3cbVhcOGsrQ4DLOajPez1WKWsod04AGRfOsG9qJRpbVoKNCEK9
+	sq87C
+X-Gm-Gg: AYBFou0plB9Xh6BVSQrZSwZ4mdK58pPQsRamQUhKx4feXtGQvpR44nO3pm+jHmzEyMK
+	8GVYB7E3h2sCPpsO9yavYfgC/LdiWYi+CTAmsDxv4wWiEO8WiocXGs1eCBgIoDmkQlh8QuLEmMM
+	G3/bB/1WpuSwmkEfYIiPKcCNtyRkuedE3oj9O8i6RaL8swOgk5FekiN7gj5D8LTuaqg43pJk9w+
+	WeKLm+lqqIeS3Hs3bSsbAeM8eYnrD6zNutwVESxXLx1Ucb/PeOjdK4EQ8i4i8KYdFrLDDE23LCk
+	15zE/QGm9e+Cq51Uv80MajGwQN0gWQrRXejWYmJAgGg8qwhQksV+XQkJcXJ+PbhfHvbjCwRxP2g
+	YuEjsoeP+sx/WsSBV0jlg+IqL/0HsGjFEKr/+ohHK883J6uZB0cvO2b9eg5ntKMte1sQpaRk+Fw
+	wu+aeoUL5+fXywwxsdAZNArJ4V7AE27Y/heF2nu99B0tjkZ4LlNyhuEr6SJFSDIVm2f6vlXxdVT
+	I3V5GPQpy4NIZ3n3fvIBpYFD3U4WPKObAdTgrBqknPzTTsfGW22VCV/rL3OdZ+IFWyjS3upG3Jj
+	aOjrxkmEWYDUcSzMpv5jD+s=
+X-Received: by 2002:a05:6000:987:b0:48d:fd5b:504d with SMTP id ffacd0b85a97d-48e07f9d7e2mr15363877f8f.31.1792414580868;
+        Mon, 19 Oct 2026 05:56:20 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e1afbf534sm1527565f8f.35.2026.10.19.05.56.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 05:56:20 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-filesystems][wrynose][PATCH 4/7] ntfs-3g-ntfsprogs: fix CVE-2026-46569
-Date: Sun, 18 Oct 2026 22:07:38 -0700
-Message-Id: <20261019050741.1688261-5-dkelaiya@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261019050741.1688261-1-dkelaiya@cisco.com>
-References: <20261019050741.1688261-1-dkelaiya@cisco.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-black: Upgrade 26.5.1 -> 26.10.1
+Date: Mon, 19 Oct 2026 15:56:08 +0300
+Message-ID: <20261019125616.3888504-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261019125616.3888504-1-leon.anavi@konsulko.com>
+References: <20261019125616.3888504-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
-X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 05:08:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131115
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 12:56:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131117
 
-From: Darsh Kelaiya <dkelaiya@cisco.com>
+Upgrade to release 26.10.1:
 
-This patch applies the upstream fix shown in [1]. The NVD record
-describing the vulnerability is referenced in [2].
+Highlights:
 
-[1] https://github.com/tuxera/ntfs-3g/commit/961ed5c2fa2f36ef6a347f04e1fa586113c97e7c
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-46569
+This release fixes a security issue in Black's bundled GitHub
+Action. Repositories that use the action are encouraged to update
+to the latest version of Black immediately. This update is received
+automatically when using psf/black@stable, and is independent of
+the version of Black installed by the action.
 
-Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
+When the GitHub Action reads version specifiers from
+tool.black.required-version, it now only accepts released versions
+of Black, as it already did for black requirements in dependency
+lists. Other values, such as URL references, are now rejected. This
+issue has been registered as GHSA-cg8m-r9f2-5wm2; a CVE identifier
+is pending.
+
+Stable style:
+
+- Fix a long Jupyter notebook assignment magic (for example x = !ls
+  -la) being wrapped in parentheses, which IPython can no longer
+  run; such cells are now left unchanged
+- Keep repeated lines outside the selected --line-ranges unchanged
+- Fix --line-ranges formatting lines that follow a statement when
+  formatting joins or re-indents that statement
+- Fix --line-ranges crashing with an internal error when an
+  unselected statement has a # fmt: skip comment on the last line
+  before a closing bracket
+- Prevent moving an encoding declaration (for example # -*- coding:
+  latin-1 -*-) onto the first two lines of a file
+- Fix adding an extra trailing blank line inside a multi-line
+  module docstring when its last line is near the line length limit
+
+Preview style:
+
+- Do not split short expressions on delimiters (such as binary
+  operators, comparisons, or comprehensions) inside brackets when
+  preceded by a standalone comment
+- Fix the unstable string_processing feature removing
+  backslash-newline sequences from raw strings, which changed their
+  value
+- Avoid adding unnecessary parentheses around unbreakable
+  right-hand side expressions in assignments (such as annotated
+  assignments or subscript targets)
+- Parenthesize expressions with parameter comments when they exceed
+  the line length under --preview
+- Fix wrap_long_dict_values_in_parens dropping the parentheses
+  around a right-hand side that contains a dictionary, leaving a
+  line over the length limit
+- Fix the unstable string_processing feature adding a space after *
+  or in a PEP 695 type parameter (* Ts = ...) when it splits a
+  string in the parameter's default
+- Avoid unnecessary line splits of trailers (such as
+  indexing/subscripts) when an earlier bracket split exceeds the
+  line length only due to a trailing comment
+
+Configuration:
+
+- Add --cache-dir to configure the cache directory from the command
+  line
+- Don't cache a file as formatted after formatting or checking it
+  with --line-ranges, which made a later full black --check pass
+  and black skip the unformatted lines
+- Respect a .gitignore that starts with a UTF-8 byte order mark.
+  The mark became part of the first pattern, so that pattern never
+  matched and Black formatted files that git ignores
+
+Performance:
+
+- Avoid quadratic runtime when splitting very long lines with many
+  trailing bracket pairs (such as consecutive subscripts)
+
+Integrations:
+
+- Fix the GitHub Action crashing on dependency-group includes when
+  use_pyproject is enabled
+- When the GitHub Action reads version specifiers from
+  tool.black.required-version, it now only accepts released
+  versions of Black, as it already did for black requirements in
+  dependency lists. Other values, such as URL references, are now
+  rejected.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../files/CVE-2026-46569.patch                | 62 +++++++++++++++++++
- .../ntfs-3g-ntfsprogs_2022.10.3.bb            |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
+ .../{python3-black_26.5.1.bb => python3-black_26.10.1.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-black_26.5.1.bb => python3-black_26.10.1.bb} (89%)
 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
-new file mode 100644
-index 0000000000..5c496159ec
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46569.patch
-@@ -0,0 +1,62 @@
-+From 677d21be1ac7ec0a59cfbed8e26d1ffbf0922ac1 Mon Sep 17 00:00:00 2001
-+From: Rakesh Pandit <rakesh@tuxera.com>
-+Date: Mon, 8 Jun 2026 10:34:38 +0300
-+Subject: [PATCH] Bound tail_size in ntfs_ib_copy_tail against destination
-+ capacity.
-+
-+A crafted source INDX block can drive tail_size past the freshly
-+allocated destination's usable space and overflow the memcpy.  Add
-+a capacity check (and a < 0 guard against sign-extension at
-+memcpy).
-+
-+Thanks to Alexandro Calo' from Nozomi Networks Labs for reporting
-+this issue.
-+
-+CVE: CVE-2026-46569
-+Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/961ed5c2fa2f36ef6a347f04e1fa586113c97e7c]
-+
-+(cherry picked from commit 961ed5c2fa2f36ef6a347f04e1fa586113c97e7c)
-+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
-+---
-+ libntfs-3g/index.c | 21 ++++++++++++++++++++-
-+ 1 file changed, 20 insertions(+), 1 deletion(-)
-+
-+diff --git a/libntfs-3g/index.c b/libntfs-3g/index.c
-+index 9c11a45c..347bd408 100644
-+--- a/libntfs-3g/index.c
-++++ b/libntfs-3g/index.c
-+@@ -1193,7 +1193,7 @@ static int ntfs_ib_copy_tail(ntfs_index_context *icx, INDEX_BLOCK *src,
-+ {
-+ 	u8 *ies_end;
-+ 	INDEX_ENTRY *ie_head;		/* first entry after the median */
-+-	int tail_size, ret;
-++	int tail_size, dst_capacity, ret;
-+ 	INDEX_BLOCK *dst;
-+ 	
-+ 	ntfs_log_trace("Entering\n");
-+@@ -1207,6 +1207,25 @@ static int ntfs_ib_copy_tail(ntfs_index_context *icx, INDEX_BLOCK *src,
-+ 	
-+ 	ies_end = (u8 *)ntfs_ie_get_end(&src->index);
-+ 	tail_size = ies_end - (u8 *)ie_head;
-++	dst_capacity = (int)(le32_to_cpu(dst->index.allocated_size)
-++			     - le32_to_cpu(dst->index.entries_offset));
-++
-++	/*
-++	 * src->index.entries_offset (on-disk, only required to be >=
-++	 * sizeof(INDEX_HEADER) by ntfs_index_block_inconsistent) may be smaller
-++	 * than dst's, which ntfs_ib_alloc fixes (40 on a 4 KiB block).  When
-++	 * the median lands near the start of the source stream the gap lets
-++	 * tail_size exceed dst's usable space.  The < 0 guard catches a
-++	 * negative tail_size before memcpy sign-extends it into a huge size_t.
-++	 */
-++	if (tail_size < 0 || tail_size > dst_capacity) {
-++		ntfs_log_error("Invalid tail_size %d (dst capacity %d) in "
-++				"ntfs_ib_copy_tail\n", tail_size, dst_capacity);
-++		free(dst);
-++		errno = EIO;
-++		return STATUS_ERROR;
-++	}
-++
-+ 	memcpy(ntfs_ie_get_first(&dst->index), ie_head, tail_size);
-+ 	
-+ 	dst->index.index_length = cpu_to_le32(tail_size + 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-index e17c3d2481..f4f4ccfdf1 100644
---- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
-@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/tuxera/ntfs-3g;protocol=https;branch=edge;tag=${PV}
-            file://CVE-2026-46572_CVE-2026-42617_p3.patch \
-            file://CVE-2026-46571.patch \
-            file://CVE-2026-46570.patch \
-+           file://CVE-2026-46569.patch \
- "
- SRCREV = "78414d93613532fd82f3a82aba5d4a1c32898781"
+diff --git a/meta-python/recipes-devtools/python/python3-black_26.5.1.bb b/meta-python/recipes-devtools/python/python3-black_26.10.1.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-black_26.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-black_26.10.1.bb
+index 22f6deaac9..631429d67d 100644
+--- a/meta-python/recipes-devtools/python/python3-black_26.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-black_26.10.1.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d3465a2a183908c9cb95bf490bd1e7ab \
+                     file://docs/license.md;md5=d826b3c5269f21a8a0272af3f00d15c0 \
+                     file://src/blib2to3/LICENSE;md5=bbbad7490e921f9a73c0e891305cb4b3"
+ 
+-SRC_URI[sha256sum] = "dd321f668053961824bcc1be1cc1df748b2d7e4fa28086b08331e577b0100a73"
++SRC_URI[sha256sum] = "5f9f83beae62437e060dafd53d7f1fc327e3d3494f74d72ee5c2b73eb90fc4e7"
+ 
+ inherit pypi python_hatchling
  
 -- 
-2.35.6
+2.47.3
 
 
