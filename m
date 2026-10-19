@@ -1,59 +1,59 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1761.1792434889243942486
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1764.1792434895934375945
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2026 11:34:49 -0700
+ Mon, 19 Oct 2026 11:34:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=MFVpiFeR;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cd632f7a4a1so880949a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 11:34:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WMsGi5mt;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-3acd21ba21aso1841127a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 11:34:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792434889; x=1793039689; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792434895; x=1793039695; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NoWREHNX5ryj5GpX97OJqG3EmZ2w+/qmTSJLU0/mzr0=;
-        b=MFVpiFeRA+72pB+U1xVbz3Bu954r1RJN8r2UFYb9bxZQbZ4NEOPfvBm8osmRBHmn8X
-         u41AvUkUr/qA3ptXB3/wEah+oo4rFPVSeGgo//08dFJiQEdDeu6yXLvcx3A/SHh8NpEG
-         dH61uQd975Utskzcu7RR1/EtFCPKJsqzhuG5EJ5V+Hm6gE8EEFQ4Iu0b2HnJG7GDum+V
-         kseRXnAzNQ7I0V3V3gHNV9fIzE8GsFkI7+/quJtHDhyxrtP2wPyihr30v0z0rtxiXN3U
-         Hxtc+Tuh11O8ZGGXRW4RVAxXGAOPnckbMiIftv4kgw+dI9YJ/cTBvFRbn36wbgkFQ4hg
-         scpA==
+        bh=X1s9LTbTfkbKl+lu8EK3dOTGMpI7ceVE04w4Xy9ahJY=;
+        b=WMsGi5mtk5g2Vvi1a67u4m/qIqZLBcbUdd6np73xo/noL/M3U3m6WrWkelp+4QCnwn
+         02YJUZhLXC8RNUuS9Ty73SzXBPHCQj6u5w+xwhLh7KDtOi2IPZ+tjFFkQyE9vczz/tDr
+         7VGw4mD8eFThxFT8iBjqN0F9kGveK2WNMdz7YV2wv2XY1gKTdcnQ2V7ZRFD4S7Tmus2q
+         WKfpxenNGk74dTFUrkaS2huGyJ9jOK6Lh3VuYl3HdtGoakyRZ7de4qaOJAYRHjFqaCEZ
+         NNkyOOeFob4TzQ91mVl+wfTrLMHpX0XpeCWDS6jfaFHQh+pJpdEwgXXeMMQx1Np2lzlr
+         bYJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792434889; x=1793039689;
+        d=1e100.net; s=20260707; t=1792434895; x=1793039695;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NoWREHNX5ryj5GpX97OJqG3EmZ2w+/qmTSJLU0/mzr0=;
-        b=RbLFb/p39S2bniiFX86tJvKbWfBT91bccUkGWHpcR7A8WpIUeKyYLV4Xz0A1+X8ruX
-         Nl4VxkhVL1XkVLiF5diQ6ocefuDdmn9Xen5ajx6wZctA2fl7ERUsDUpQtIe2Absi22Sd
-         +eBv+ls781kGA1MxYY/sI/VrhL2EiYGZMpiKKwmhTbU27gvdlAIuOgEN6AGK4feFA5Ns
-         F6D9SIPHMphDcP25eeNKqu/8VXqKJXCS9rIro4p05UmHxTqi1DTm7KDcnQhbsjRGmTi/
-         5Itrqjfj9yx4NPaIgTd6JzYl0Dfj5RcmM2678z9Z6udoSTXHpguYfK6WGu7IUioIxBt3
-         Kriw==
-X-Gm-Message-State: AFq9FYLv/7V8/Q5pQVr2V2024moIEefdstt+NtVH48dTtm+nopl44qvr
-	P0wuSnDptGlidhurMs87ZW7z+k4clp9yJE8clwE9E3t0s2KW0s4DwNvotFU1zA==
-X-Gm-Gg: AYBFou1ugxyHqqwi0g9d7NJw4IweG7hvaO8iaTBe13rc4/ReCWkp68bclqFpaX+oROQ
-	H9xkdoJ3yVeM4A/Si5JsQBFOOmoZPWUaFZGtSbT6pqm9GGp/oXbSkNm1MbD8mpQmx44y6+O2XVf
-	s77fXRasfK2C/1l0yjOj6oCgX9sL6xI8c6w/tXqQ63Jb2xmNCVUtN3N5rRKu2ab1pFkvWc32+vf
-	wUfRuTNqAUDBFgdpJGuiAk4Ue4pG7LxZFjAlCFg1lwqDDu6B7ZLKozEREzWAODe588zXVqMh3Ys
-	yyhO3wgvTC9R0ZDRJxL/Eu0Sf6g4EDsJY7w74SZc6zRUtdp5kzyYssPENx7kZI2BtJWC+HFSrjB
-	IoKEhUKSbGf1h1sAcumdG1vjC7XBaDntCuzPJtUz99rMDwoap07r1FQ4/RXG1C5ZdPuFxUcTpzd
-	IwAioIYZAHrkYbpBb1IPbAHKP69ta30i0hSb1JaifWF3PSaYS8YfDx5KKFLfbQr/ImoHWWNUHuq
-	OKeMKZOYmrjE7Pbvt0NGHTkKCR9R6ReDlHF200=
-X-Received: by 2002:a17:90b:580c:b0:3ac:c03a:38ad with SMTP id 98e67ed59e1d1-3acee276f1fmr7947309a91.5.1792434888530;
-        Mon, 19 Oct 2026 11:34:48 -0700 (PDT)
+        bh=X1s9LTbTfkbKl+lu8EK3dOTGMpI7ceVE04w4Xy9ahJY=;
+        b=AMJPGcLb2b3WCYC9l/8cX8kj+ECMdTAnWaaYkh2ngOgwcOm8vnsC0EyQ7/ulYC33/Q
+         g0HRAjvhlhAKusXXCzDVJnWZvmSMpyycG9hj2mHRq7nIkJNbHcpMlx82XZpEh/czzXmO
+         J6hSNIES8nmPRceLC8qTJKpErTqP2GmWKP8cNr/i0LhNroTCknjICQj45nixZ97Q/rIz
+         +FMHrKBr4R7l4vIZB4gGL3EpiH3nGrSVdbsKqAviViMwUduHQsiv/zXmBM4MkflG+x51
+         RugnxqTmS4qmjuPJ+O4Q5nzoxJaDQAsbelFAZiz9xIrkhaQXhSX/MinB/O1sBQMPzTch
+         8jUw==
+X-Gm-Message-State: AFq9FYIxyC1aqzp5zS2hRfo7Dc8h+gHTDB3kBvuN1DcT1ZVdSSAfpoba
+	wAesLnu2xg9anOmrVYC6d7gqeN4YDXMBXzv1l3hqsyvLXcX00Sp7RFSx2nUSTw==
+X-Gm-Gg: AYBFou3xySGLBX8YuDhw9CKoNd6HphwacHhbio/Z5F0hMA7TAXk85d95C58p3IvbKYu
+	8CPs4Rbbho8SXKj8JydZ6ImPFZpeSe3j8r05Yfyys6drYfj/gqsRYkLWVddBsBIUT6nfG2zXg9k
+	rK/i65Y6fuNauHpeMOePwkTN7LDz/tpngoVmy2xALsY7aeFxABhyI1SN3MsjGToDuZPbPU1tjhz
+	UHEum8VsXH1I7sekEpU+guxWqeX9pzTFnDgWNG2AwL7N4IwefpIUBaSFV8hL0TTvhfgu28wIsRH
+	dVVDVPZ5gParIKCreJ+DolnOd05cNP373heQI5ui5PA/skSXP6oca6ud6NWw/0U74t371mhAcqy
+	El0XMg0Kd2QTyyUngpvWHzqlDVSya23bud9tellgaBoYbOp3xtPaNyd9l0gRE3C11y3YI9E6rcW
+	fF7JrL4nMOdWFMEYmwHti79wWQ9MPY9tLBUEknr26dk8p6MNYnmLf0Fae/hBWhxdsSM7Cyua7qs
+	MczFK4U6NvwG09ep9MDtgYThnJ5IDYXYLAn44Q=
+X-Received: by 2002:a17:90b:164b:b0:3ab:afca:1d79 with SMTP id 98e67ed59e1d1-3acef104234mr7254564a91.21.1792434895276;
+        Mon, 19 Oct 2026 11:34:55 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549fb556sm4632865a12.22.2026.10.19.11.34.46
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549fb556sm4632865a12.22.2026.10.19.11.34.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 11:34:47 -0700 (PDT)
+        Mon, 19 Oct 2026 11:34:54 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 14/20] opensc: patch CVE-2026-103531
-Date: Tue, 20 Oct 2026 07:34:00 +1300
-Message-ID: <20261019183407.1037972-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-filesystems][PATCH 17/20] unionfs-fuse: upgrade 3.7 -> 3.8
+Date: Tue, 20 Oct 2026 07:34:03 +1300
+Message-ID: <20261019183407.1037972-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261019183407.1037972-1-ankur.tyagi85@gmail.com>
 References: <20261019183407.1037972-1-ankur.tyagi85@gmail.com>
@@ -61,91 +61,131 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 18:34:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131140
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131143
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-103531
+License-Update: copyright year updated[1]
+
+Dropped patch that are merged in the upstream version.
+
+Changelog:
+- fix data corruption when copying files larger than 8 MiB concurrently in
+  cow mode
+- fix "bad address" error when setting a debug file with unionfsctl -p
+- fix creating unix sockets on macos
+- mount.unionfs helper no longer requires bash and accepts multiple -o
+  options
+
+PTEST pass:
+root@qemux86-64:~# ptest-runner unionfs-fuse
+START: ptest-runner
+2026-10-18T23:02
+BEGIN: /usr/lib/unionfs-fuse/ptest
+...
+END: /usr/lib/unionfs-fuse/ptest
+2026-10-18T23:02
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+[1]https://github.com/rpodgorny/unionfs-fuse/commit/e3e8b289f19047d7c6309eff3dc7a2c505229b73
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-(cherry picked from commit 27b41701a04a46e498f7f3f6212ac2a5e2bc8d1a)
 ---
- .../opensc/opensc/CVE-2026-103531.patch       | 54 +++++++++++++++++++
- .../recipes-support/opensc/opensc_0.27.1.bb   |  1 +
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2026-103531.patch
+ .../files/0001-fix-debug-ioctl-call.patch     | 58 -------------------
+ ...nionfs-fuse_3.7.bb => unionfs-fuse_3.8.bb} |  5 +-
+ 2 files changed, 2 insertions(+), 61 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-fix-debug-ioctl-call.patch
+ rename meta-filesystems/recipes-filesystems/unionfs-fuse/{unionfs-fuse_3.7.bb => unionfs-fuse_3.8.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/opensc/opensc/CVE-2026-103531.patch b/meta-oe/recipes-support/opensc/opensc/CVE-2026-103531.patch
-new file mode 100644
-index 0000000000..22776e525b
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/opensc/CVE-2026-103531.patch
-@@ -0,0 +1,54 @@
-+From 4b0f46d922866d9453e3631ff5e0a24900fae8dd Mon Sep 17 00:00:00 2001
-+From: wanglanlan <wanglanlan@users.noreply.github.com>
-+Date: Wed, 2 Sep 2026 08:36:47 +0000
-+Subject: [PATCH] setcos: Fix buffer overflow in setcos_construct_fci_44
-+
-+The FCI construction copied type_attr, sec_attr and prop_attr of the
-+file into a fixed 64-byte stack buffer without checking the length.
-+Malicious or corrupted attribute lengths (e.g. prop_attr_len > 64,
-+reachable through fuzz_pkcs15init and attacker-controlled card
-+responses) caused a stack buffer overflow (write).
-+
-+Return SC_ERROR_INVALID_DATA if any attribute exceeds the buffer size.
-+
-+Found with the fuzz_pkcs15init fuzzer.
-+
-+Co-Authored-By: Claude <noreply@anthropic.com>
-+(cherry picked from commit ad730304052937c32b4eb489a06835ac6123632c)
-+
-+CVE: CVE-2026-103531
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/ad730304052937c32b4eb489a06835ac6123632c]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/libopensc/card-setcos.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/src/libopensc/card-setcos.c b/src/libopensc/card-setcos.c
-+index 0ebe7c34f..8c7baa3e4 100644
-+--- a/src/libopensc/card-setcos.c
-++++ b/src/libopensc/card-setcos.c
-+@@ -218,6 +218,8 @@ static int setcos_construct_fci_44(sc_card_t *card, const sc_file_t *file, u8 *o
-+ 
-+ 	/* Type */
-+ 	if (file->type_attr_len) {
-++		if (file->type_attr_len > sizeof(buf))
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-+ 		memcpy(buf, file->type_attr, file->type_attr_len);
-+ 		sc_asn1_put_tag(0x82, buf, file->type_attr_len, p, *outlen - (p - out), &p);
-+ 	} else {
-+@@ -271,11 +273,15 @@ static int setcos_construct_fci_44(sc_card_t *card, const sc_file_t *file, u8 *o
-+ 	}
-+ 
-+ 	/* Security Attributes */
-++	if (file->sec_attr_len > sizeof(buf))
-++		LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-+ 	memcpy(buf, file->sec_attr, file->sec_attr_len);
-+ 	sc_asn1_put_tag(0x86, buf, file->sec_attr_len, p, *outlen - (p - out), &p);
-+ 
-+ 	/* Life cycle status */
-+ 	if (file->prop_attr_len) {
-++		if (file->prop_attr_len > sizeof(buf))
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-+ 		memcpy(buf, file->prop_attr, file->prop_attr_len);
-+ 		sc_asn1_put_tag(0x8A, buf, file->prop_attr_len, p, *outlen - (p - out), &p);
-+ 	}
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-index a1930744ea..bcd94dfb90 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-@@ -14,6 +14,7 @@ DEPENDS = "openssl"
- SRCREV = "19868984dc4dc697af6a86d65ab32a1f19a43ea4"
- SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
-            file://0001-Changes-for-OpenSSL-4.0.0.patch \
-+           file://CVE-2026-103531.patch \
-            "
+diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-fix-debug-ioctl-call.patch b/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-fix-debug-ioctl-call.patch
+deleted file mode 100644
+index a29128d22a..0000000000
+--- a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-fix-debug-ioctl-call.patch
++++ /dev/null
+@@ -1,58 +0,0 @@
+-From bf552c479a0c0b0ef2d52d8456030c56b8cc6dbb Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Fri, 26 Dec 2025 19:33:54 +0100
+-Subject: [PATCH] fix debug ioctl call
+-
+-When calling the ioctl to set a debug file, the ioctl expects to receive a datatype
+-that is specified in the ioctl definition: char[PATHLEN_MAX]
+-
+-However when passing the pointer from getopts, this is only true if the passed path
+-has the maximal allowed length. Since usually this path is shorter than the max,
+-the kernel is trying to read over the end of the argument, and returns "EFAULT/Bad address".
+-
+-To solve this, copy the argument to a buffer that has the exact size of what the ioctl
+-expects, and pass this buffer to the ioctl.
+-
+-Upstream-Status: Submitted [https://github.com/rpodgorny/unionfs-fuse/pull/164]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- src/unionfsctl.c | 11 +++++++----
+- 1 file changed, 7 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/unionfsctl.c b/src/unionfsctl.c
+-index 74c4d33..efed505 100644
+---- a/src/unionfsctl.c
+-+++ b/src/unionfsctl.c
+-@@ -44,25 +44,28 @@ int main(int argc, char **argv) {
+- 
+- 	int opt;
+- 	const char* argument_param;
+-+	char debug_file[PATHLEN_MAX];
+- 	int debug_on_off;
+- 	int ioctl_res;
+- 	while ((opt = getopt(argc, argv, "d:p:")) != -1) {
+- 		switch (opt) {
+- 		case 'p':
+--			argument_param = optarg;
+--			if (strlen(argument_param) < 1) {
+-+			if (strlen(optarg) < 1) {
+- 				fprintf(stderr,
+- 					"Not a valid debug path given!\n");
+- 				print_help(progname);
+- 				exit(1);
+- 			}
+- 
+--			if (strlen(argument_param) > PATHLEN_MAX) {
+-+			if (strlen(optarg) > PATHLEN_MAX) {
+- 				fprintf(stderr, "Debug path too long!\n");
+- 				exit(1);
+- 			}
+- 
+--			ioctl_res = ioctl(fd, UNIONFS_SET_DEBUG_FILE, argument_param);
+-+			memset(debug_file, 0, PATHLEN_MAX);
+-+			strncpy(debug_file, optarg, PATHLEN_MAX - 1);
+-+
+-+			ioctl_res = ioctl(fd, UNIONFS_SET_DEBUG_FILE, debug_file);
+- 			if (ioctl_res == -1) {
+- 				fprintf(stderr, "debug-file ioctl failed: %s\n",
+- 					strerror(errno) );
+diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.7.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.8.bb
+similarity index 79%
+rename from meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.7.bb
+rename to meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.8.bb
+index b5c5bb847c..e7bcd1ecc2 100644
+--- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.7.bb
++++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.8.bb
+@@ -3,16 +3,15 @@ HOMEPAGE = "https://github.com/rpodgorny/unionfs-fuse"
+ SECTION = "console/network"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8abab00b483a1b7943a32 \
+-                    file://LICENSE;md5=0e75c95b3e0e1c01489b39e7fadd3e2d \
++                    file://LICENSE;md5=22a665a5eef3c10268acdee50e62d876 \
+ "
  
- CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
+ SRC_URI = "git://github.com/rpodgorny/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
+            file://run-ptest \
+-           file://0001-fix-debug-ioctl-call.patch \
+            file://0001-adapt-tests-to-ptest.patch \
+ "
+ 
+-SRCREV = "3fcbd11f78b9a9e02ea0e861d741840fe45dc9c8"
++SRCREV = "e3e8b289f19047d7c6309eff3dc7a2c505229b73"
+ 
+ DEPENDS = "fuse3"
+ RDEPENDS:${PN} = "bash"
