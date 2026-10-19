@@ -1,59 +1,59 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1755.1792434862093085553
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1742.1792434864308305829
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2026 11:34:22 -0700
+ Mon, 19 Oct 2026 11:34:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NMta0at1;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8a06454116eso713219b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 11:34:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=obw9qLQ8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-8a06c60065fso865072b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 11:34:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792434861; x=1793039661; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792434864; x=1793039664; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bkpBBti9CSlaujiTJameXahnDPUFd6YJELouBzb8HW4=;
-        b=NMta0at1vDisLrcrLPYvHQjXw/Ef3lRMFWr+FqxTqg6YfECQiU1XHRsyuEaPfEiPeD
-         O6jQVlKlqANfO1ew6XTywHDVgde6ir2O20y+f3+Tk/hAAzKltGGhT4Rx/lYfZ+B95IGA
-         zi1cKKb0KQR62lrPXTneCmAgHRMOfDMj9fO64HVD2vecYi8RqWWyfnKnVHpd6+O2J4GQ
-         NXPR0hQNKHGUA9HLojrasSnB9JYvV4BRPYf/crDeLWXog256BUd9dNtbLWmLhke/DcAQ
-         cvjK/xlEWZWYWfsL/JFOjxCgzUm1dTXlXP/Am8NsLaGmWjN1Bq4gswBk6FriZsbaXBwr
-         chJg==
+        bh=YrkwsQRtvq9U0d12+no9kNatND8nP9mgbSSfNuxFQ0I=;
+        b=obw9qLQ8PFnVOGLcX6RTx2yvVnOQJCHO1hZ9UWGU6/0bTWT2KNbE8zwpcp3bx0Q73j
+         LmnWOL+lxabvzhtLcvz3oFE9UGWo6wZylZKythbBW7qDfsygAMmu2yYSahQfYKoQb+F8
+         N8xYW22NC5/4WthG8hPrFZCoyYuzhcUdyV2G3lTY3BZxejBq3rmUyypbP9JFGQCBSxg0
+         OdMfj2lc8FoRfpP6siVsS4PYY0fcmZv4pwhHK6aEZLHCbTA7ek2+YUlbObMHhLY1DOS6
+         qj2CRq92Ndu1G9S2Asi2L3lLSlfjKQrNXDepSqazZ/KcSbmElnQKH2CLmONicCnRx4y5
+         Nk8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792434861; x=1793039661;
+        d=1e100.net; s=20260707; t=1792434864; x=1793039664;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bkpBBti9CSlaujiTJameXahnDPUFd6YJELouBzb8HW4=;
-        b=RZaGGxqIL/f5CKsDx3I/l2h4e7fRYDHHDqojsgkv8jGaaypqu9h02oRNHRYjIGV+nr
-         xL3qNbVc7ITYr6aRzHLH2EXGr4fLCdxu6oR686moU4m9AYTkp99eywzG0hpqrWTVI7aT
-         BRAggjAWlnUEPYktiBOGO0CuR4yXG/Hps5/cvSkRKgjEA8cX88GiE/66tanjWAHDMBwJ
-         W+NgKZsQHOItJz4RMuiBjkyoLMyRS3ycgCHwhHGl50/55MMSUeWS1FNZB32XvjAKrwo8
-         oHKXzZw8HBVuc5mtwUJztipSX6Uk23v4/nDtY1hrqs7GeZj5IOWn2m6fyW/AnN+6ml9Q
-         cvtw==
-X-Gm-Message-State: AFq9FYKL+HtgsCQQfpY7z/GLup7WCocgD3l6xR4xfu0gY3Jbk0fZ1Es+
-	jRAxauAhZ3z1lH49+M1eAOv38lAznCUtrSh9X9VhwZxgKpxQWQk6zp+MRQtxAg==
-X-Gm-Gg: AYBFou1DLbe5WGwslCkSkPK+7C2zwOMApzEHtdOsyMwbgAIQxyzqburwrlrrgMTb6Os
-	YPQst8/6E5uEsHDelt7DsKKUddF2FKXTlATuTihtjJPMRJmeESC/DUgmGuN3WPhH6eyNsaQJRkE
-	tpX+eetscZgNc72cUVjT6QoCW8bgza7qKpvswp4E0H99rtybO+GMTHc6JZZeEbI2ZzdU8hPKBFq
-	DHy+6Mp9x2qHfD2L2qss1iukaR82k607DVSgLSpsfQfF9/jJMegfaKYw9lN/wZon1artsgYI6S0
-	SDqQSePA4yqAzRsx5hSCx6YMgutmFrO8xTLLGuxmaTbsvJnf0XnwqhlkYSuzYUNE/mVfeEDgvGs
-	N5y7aNghsPwYefvyOENgP6gFi9VyK5Ry2PWh/dJ8iZ9uJtxJ0DQk9mqxdhWhz4dyxZYORTHKFLc
-	eD/XP3VNkBSXpiDenbQClhQUs8viCqY4XMQqU1ahsgg2SFfcXE65mZtOXa203uSg6MB9EIOGvYG
-	G7ygCHvSebD7WuPm7YViVit9IemMvQ2Nir/bkY=
-X-Received: by 2002:a05:6a20:d48d:b0:3de:20c:e57 with SMTP id adf61e73a8af0-3e225fe8fa2mr7058345637.11.1792434861222;
-        Mon, 19 Oct 2026 11:34:21 -0700 (PDT)
+        bh=YrkwsQRtvq9U0d12+no9kNatND8nP9mgbSSfNuxFQ0I=;
+        b=MmTWT2e+bACgP6YrIQ0Y7dBq16l5kwy5aVw5CE1bI1dpoPzf4ESwmS7IDCk2NcFJAB
+         vlhTvUhFI/TK0HUiI0729v8uLHwLSKU48IGAw4jW2/o8eUTYo8El8MegQnEqAkFxuur1
+         U5dJfFe99yMQcJ85k5rfP6AVLR6t67et4TCCMp5g0eTemWh889ae8kXuLYQ83s/Yd7w7
+         7Tt2jPu3kHgPvJJKVPe79X/IJpiPocJqCsItiK5yj2c9ge8U7NNs7et76o5FXXAWmUP2
+         BcpzkocF9RI2YyeLKhPrGsTmzmU0YLmg/wNJWZ2zS61mHAUWsETSIfpeeFEDTlO4SswD
+         2pRQ==
+X-Gm-Message-State: AFq9FYJ17rjHe9NOU46rRhVXJtnm88HDtSRIg0DE2cCXyNxvWuwisBe7
+	6Dh5Hse6VNaFRMKc3kuhvFSAytXwuWSJtni+iszxJw1BKm92LGvcF48UTB8iuw==
+X-Gm-Gg: AYBFou21bv4Cyz5NhItk9hjokujq+fBsQSvWOYrLKDkWG9f+yszXgReO0U2Zj+zz6rJ
+	ExpkJeBZbVrd3qLOkplwMGEuEhNNOdBl0vneGM4o/BHNX+7UIaGF0l/wWV2gVpixoSU2S5dfxkz
+	AebvpUDrKRzAKMzRprWu+XlqFs8gxYHiIBIk5kZdMvOosz/Nv/u4uuenaLop2sosgdXqSqsldg6
+	EmWK5+UnOCvshDQfTq2MwklS2bxJvwkOPyEP2tbCHaCVhtE2k2zxezx4ROKALP8V/rGAzspS0R4
+	6Z/wrDBsH2Hmtfif7SPpXiSvHfF3AlacOV21AUVO+qQ+7Y8LyeX69gyzFCwxg2h/ycVcKC1K0MW
+	KkGitf+z4SmRA/WedTEpQyp5WPkNl4UdqdX4p/WG4HBjOf+b2s3mxC/iIc3zDj8ECqeWvd5m9A8
+	p4wbJvJ69XW7pEE0KdwkF2jyUprZIHDVafjea5yJCo5wq8VymQctCQ7xb5nHRkI1oPDRqJ5TxLn
+	81dXr1icpyP640L71F+SUpEUscP/T9JT2zoUFoO2Owyf61D4A==
+X-Received: by 2002:a05:6a21:498a:b0:3e2:2b76:bf20 with SMTP id adf61e73a8af0-3e22b76ccd7mr6224346637.51.1792434863543;
+        Mon, 19 Oct 2026 11:34:23 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549fb556sm4632865a12.22.2026.10.19.11.34.19
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549fb556sm4632865a12.22.2026.10.19.11.34.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 11:34:20 -0700 (PDT)
+        Mon, 19 Oct 2026 11:34:23 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][PATCH 4/20] pjproject: patch CVE-2026-57161
-Date: Tue, 20 Oct 2026 07:33:50 +1300
-Message-ID: <20261019183407.1037972-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 5/20] pjproject: patch CVE-2026-57162
+Date: Tue, 20 Oct 2026 07:33:51 +1300
+Message-ID: <20261019183407.1037972-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261019183407.1037972-1-ankur.tyagi85@gmail.com>
 References: <20261019183407.1037972-1-ankur.tyagi85@gmail.com>
@@ -61,86 +61,80 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 18:34:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131130
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131131
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-57161
+https://nvd.nist.gov/vuln/detail/cve-2026-57162
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-(cherry picked from commit 371f20419d88f75dd45508451ec014d1a0c94b70)
+(cherry picked from commit f7758a033eec4754fdb957a0fb2c6d2d5cb31ea6)
 ---
- .../pjproject/pjproject/CVE-2026-57161.patch  | 49 +++++++++++++++++++
+ .../pjproject/pjproject/CVE-2026-57162.patch  | 43 +++++++++++++++++++
  .../pjproject/pjproject_2.17.bb               |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57161.patch
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57162.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57161.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57161.patch
+diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57162.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57162.patch
 new file mode 100644
-index 0000000000..3296013efd
+index 0000000000..85a9394e25
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57161.patch
-@@ -0,0 +1,49 @@
-+From 656cd5ec76f0178448053a9ca44ce075cd7a27f9 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57162.patch
+@@ -0,0 +1,43 @@
++From 1b64bfb240731bbf0fc194dec68bb9d9b08a20b2 Mon Sep 17 00:00:00 2001
 +From: Nanang Izzuddin <nanang@teluu.com>
-+Date: Wed, 17 Jun 2026 15:44:40 +0700
++Date: Wed, 17 Jun 2026 15:45:33 +0700
 +Subject: [PATCH] Merge commit from fork
 +
-+Bound the number of Service-Route URIs stored in the fixed-size uri[]
-+array by checking uri_cnt against PJ_ARRAY_SIZE(uri) before each write.
-+Previously the count was only checked as the do/while continuation
-+condition, which does not catch accumulation across multiple
-+single-URI Service-Route headers, allowing a registrar response with
-+more than PJSUA_ACC_MAX_PROXIES headers to write past the array.
++sdes_encode_sdp() in transport_srtp_sdes.c wrote each parsed crypto tag
++into the fixed int tags[64] array without bounding the count, while the
++SDP parser allows up to PJMEDIA_MAX_SDP_ATTR (68) attributes. Reject
++the SDP with PJMEDIA_SRTP_ESDPINCRYPTO once the array capacity is
++reached, before the out-of-bounds write.
 +
 +Co-Authored-By Claude Code
 +
-+(cherry picked from commit acc03b57cef7a7d31b8e1f5b9117437d7e87c591)
++(cherry picked from commit a1b707c0c9b0506faf2a8a438b60f11ffd6a6fd9)
 +
-+CVE: CVE-2026-57161
-+Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/acc03b57cef7a7d31b8e1f5b9117437d7e87c591]
++CVE: CVE-2026-57162
++Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/a1b707c0c9b0506faf2a8a438b60f11ffd6a6fd9]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ pjsip/src/pjsua-lib/pjsua_acc.c | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
++ pjmedia/src/pjmedia/transport_srtp_sdes.c | 9 +++++++++
++ 1 file changed, 9 insertions(+)
 +
-+diff --git a/pjsip/src/pjsua-lib/pjsua_acc.c b/pjsip/src/pjsua-lib/pjsua_acc.c
-+index f52518a2a..08c5efced 100644
-+--- a/pjsip/src/pjsua-lib/pjsua_acc.c
-++++ b/pjsip/src/pjsua-lib/pjsua_acc.c
-+@@ -2278,14 +2278,14 @@ static void update_service_route(pjsua_acc *acc, pjsip_rx_data *rdata)
-+                 return;
-+             }
++diff --git a/pjmedia/src/pjmedia/transport_srtp_sdes.c b/pjmedia/src/pjmedia/transport_srtp_sdes.c
++index 8f98292ba..45038e585 100644
++--- a/pjmedia/src/pjmedia/transport_srtp_sdes.c
+++++ b/pjmedia/src/pjmedia/transport_srtp_sdes.c
++@@ -478,6 +478,15 @@ static pj_status_t sdes_encode_sdp( pjmedia_transport *tp,
 + 
-++            if (uri_cnt >= PJ_ARRAY_SIZE(uri)) {
-++                PJ_LOG(1,(THIS_FILE, "Error: too many Service-Route headers"));
-++                return;
-++            }
++                 has_crypto_attr = PJ_TRUE;
++ 
+++                /* Bound writes to tags[] by its capacity. m_rem->attr_count
+++                 * is capped by the SDP parser at PJMEDIA_MAX_SDP_ATTR, which
+++                 * can exceed PJ_ARRAY_SIZE(tags); without this guard a remote
+++                 * peer can overflow the stack array by sending more than
+++                 * PJ_ARRAY_SIZE(tags) a=crypto attributes.
+++                 */
+++                if (cr_attr_count >= PJ_ARRAY_SIZE(tags))
+++                    return PJMEDIA_SRTP_ESDPINCRYPTO;
 ++
-+             uri[uri_cnt++] = h->name_addr.uri;
-+             h = h->next;
-+-        } while (h != hr && uri_cnt != PJ_ARRAY_SIZE(uri));
-+-
-+-        if (h != hr) {
-+-            PJ_LOG(1,(THIS_FILE, "Error: too many Service-Route headers"));
-+-            return;
-+-        }
-++        } while (h != hr);
-+ 
-+         /* Prepare to find next Service-Route header */
-+         hsr = hsr->next;
++                 status = parse_attr_crypto(srtp->pool, m_rem->attr[i],
++                                            &tmp_rx_crypto,
++                                            &tags[cr_attr_count]);
 diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-index 254a2952a2..4c00c4215c 100644
+index 4c00c4215c..f47d661400 100644
 --- a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
 +++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag=${PV} \
+@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
             file://0001-ssl_sock_ossl-fix-OpenSSL-4.0-compatibility.patch \
             file://CVE-2026-57160.patch \
-+           file://CVE-2026-57161.patch \
+            file://CVE-2026-57161.patch \
++           file://CVE-2026-57162.patch \
             "
  SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
  
