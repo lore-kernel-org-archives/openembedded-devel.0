@@ -1,105 +1,220 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6336.1792499559138462991
+Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.74])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6769.1792500854213824262
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2026 05:32:39 -0700
+ Tue, 20 Oct 2026 05:54:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=j7GONyLn;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a1cef0439aso35050565e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 05:32:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792499557; x=1793104357; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zYszvGqNAfTF8gpYkWM6UV3UHOTnJio1ErOfkmSHyrI=;
-        b=j7GONyLnK0YKALaIWtfLSPp/dnbFA1yjucSsx0ub354c5sHiYUUqY82CtDK1O3AeKz
-         u9vxyWKOLEzE5JZcZBuOGAIAGrqOM/jsLQwk0fzgR4BPPv4dgSm77Ta1noa870vQyo1Q
-         kFJ3Qcc9T4MdMxiqSoigJDwwtSHqRduuLAWlE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792499557; x=1793104357;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zYszvGqNAfTF8gpYkWM6UV3UHOTnJio1ErOfkmSHyrI=;
-        b=xQeEnBYHrOFcvBg7RRoUIiQwcxfNLAYfNpAIB7AAWbaA6Dawo21Wy9VRk/TxuvNrID
-         6S6dZCKgXMDm41umHjnW75JHmPBGPhJw/t44PaMQyRhRi/NbEJKv7AXtqlVOOOCw8W9M
-         0F6cr4MaXeNGNN+fGaYEt7hLFQcngVkoNUUtst8w8IF2MXaPOCaOiF2Kx/sYHnGgUqYh
-         9NsPGdOHV378yk1cN0KOEWFhvwz5uE32ojioREVqhlHPHOK/iHTMa40tav5tV3AB0LUj
-         ssvgawXXgQhGN2j9VT/8VvLm3bcjMtNi/72iFkrajrTmvoxIaiSKOAu9l2mQlFRFLpLa
-         r0ug==
-X-Gm-Message-State: AFq9FYI0xpAloQaKTdOuI6ZXiUPQpTSldwkoCTzJsPR6Lw7hO6r4t1Mz
-	kHiy5cY5dhsymsek036VEx0k1T0JAhi2dQseWNTSVXdIbMfMBiIkIO3wObqASe8nHs2CfmDDoW3
-	zp7A+
-X-Gm-Gg: AYBFou0kDH3Zi0mIfjM1MwXtV8afKbSAoMAMji0kVMYsdVP9Ih6oWoJSJNkMF3MQHMp
-	whvGsFVrmR83br8NG7Wdc2fG2GVKQHZhau0dx383t5rgz+L70c24A+hE92Sri7UrYfs02FN+cYJ
-	N5LR1Fe5bvRT0EPT3GoNhzFGl+zHLG7I5/YxZLQxxzRuGpTaRKMiZx+gb2y8xytnDPWDukNmIvU
-	QF55AWotLf6Yw06HQhVGZhVFUqEr9OmLsb4tooVjqrrIaaR191qCizOXWpZZS2m8S0m7kKHCCDU
-	DNM8chud4GTAiSn7dcUMqfO2S3SCshFgRAQMEPU1V9RE5fPTOjnrp6RehcmA008n0nvjEm6XU64
-	PsNDlt/S+xkDeA9haTFEpLGlhdz8y49dliU70AnRQrPxnqmg0moYjjbRvvgBzvMnFUI+QlMeGwx
-	OEiInyrs1/6lBHpTVZhzp+90gQVM+HBuhdb/7D2hHtR3SCZHsLIttxHDMIBdZZwonWvwWcqvaEN
-	pbGSb2F6qQF+HauiLa2xbSzFzC9KGONWgg9D0OZyf+b/H6gN1bgSNh5CEI7sGYNYimROwFWN2nE
-	26UiaarRKwpECNd/mEvUc08=
-X-Received: by 2002:a05:600c:3508:b0:49f:e772:6ddf with SMTP id 5b1f17b1804b1-4a1d762251bmr236113495e9.32.1792499557342;
-        Tue, 20 Oct 2026 05:32:37 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2cdc342sm75422675e9.13.2026.10.20.05.32.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 05:32:36 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=dWk0rySA;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: vaisala.com, ip: 52.101.83.74, mailfrom: niko.mauno@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WKyvqR/4cmo9MDOmSxDfmWqDwxNdc7jPQI8CoQlwo5Wub2IHUSjj1jSDufEJ04x0Ex6FbWGXZAZGnd7BWCcev4WpyHoggkwDgFF9CLfYLlT2IwsVYwx63Xspt9p+Paj4vAWy5OsBAG3skYKeNL6RDBtWdjszhXOu4fEcdcIfvKsONZaMkpg7P5q1D52HgK58Ct+tRgI9Cbv0c181OYkaQ45mPYFLgnLVuTUAPi/EmhkLgnApYNGTorQS4cynPrNXbqfpkhqttnRNtg0NjA+0OPcwvipez00KLAiiqhBm4iA44kKS6dVJ1be9IGMaoQYErqMiKatrVh8EsSIR/1pouQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dPQp+GD6yvFB7C7QSdtm0jSoj0zDHStWj3qH3/tWV+o=;
+ b=MpyCPDHqBvTNbliI0uuhm7dBMcI6buLTy0waMOEUlSM7JEtu+vDHa21PO2JI7DfqQo4F12+qbsFzvIYWHLiYngLXZsQH39mv6xMbzThAYTZeg+bhbzT+b29FeBPrYrqxdgVYJeFae4qXjbt0r/70oyVeF2mYtVXsCym5tH/s9DOgwEqs/7sA6Cas1JfCSfBMaPMita2WpdgTM7LHX1s8cZN3jIKL5Vy8AAPshzXQTaHei3Ady3sXQtylPqfzUL69CsFldfV+EJsZdttDdjDtImEiAB3LDZ01qtdAJAvooDLm9ihW4FEhWqhbi8p3qL85gVmgoCo7WGML3oeN/6y4pA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dPQp+GD6yvFB7C7QSdtm0jSoj0zDHStWj3qH3/tWV+o=;
+ b=dWk0rySAQ9bgNWLsWtyQIOFZVtuEct25r7jHtFoNmtW8bIhErT/x2bbw7CQXiqMbqJPnTLux5hDPKHIORt6X10S5bUjHA4enkT4AHh0hNRuaTepDJQrOjoyZ0cJafoCIhHDehSK92fcqM8cr1SgwSP2E5RK9WZn+x96LZy1df5oGsmE1cfnofkksvC5usR6U6JzumT8/jUfKFVwXBMDUedtwXwehrXNiAhNY3X/cq/Pwq03vm1I2HtwbuI3Bi6qo87aNXub7hy0RJd8rRD4rFioN80rfMTXIxr9JJqwcC5JumCSKWtzhtBEdasKU1VNBof8qHz9a76MzO1kN8Lg3fQ==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS8PR06MB7557.eurprd06.prod.outlook.com (2603:10a6:20b:337::17)
+ by AM9PR06MB7267.eurprd06.prod.outlook.com (2603:10a6:20b:2cb::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.14; Tue, 20 Oct
+ 2026 12:54:09 +0000
+Received: from AS8PR06MB7557.eurprd06.prod.outlook.com
+ ([fe80::44ca:1bbb:6b57:4c16]) by AS8PR06MB7557.eurprd06.prod.outlook.com
+ ([fe80::44ca:1bbb:6b57:4c16%4]) with mapi id 15.21.0522.017; Tue, 20 Oct 2026
+ 12:54:09 +0000
+From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 09/14] python3-faker: Upgrade 40.37.0 -> 40.43.0
-Date: Tue, 20 Oct 2026 15:32:21 +0300
-Message-ID: <20261020123226.4033600-9-leon.anavi@konsulko.com>
+CC: Niko Mauno <niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCH] pkcs11-provider: upgrade 1.2 -> 1.3
+Date: Tue, 20 Oct 2026 12:53:53 +0000
+Message-ID: <20261020125353.1648547-1-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261020123226.4033600-1-leon.anavi@konsulko.com>
-References: <20261020123226.4033600-1-leon.anavi@konsulko.com>
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: GVZP280CA0015.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:272::12) To AS8PR06MB7557.eurprd06.prod.outlook.com
+ (2603:10a6:20b:337::17)
+Return-Path: niko.mauno@vaisala.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR06MB7557:EE_|AM9PR06MB7267:EE_
+X-MS-Office365-Filtering-Correlation-Id: 47e3ed52-f398-4499-f07e-08df2ea93b85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|52116014|23010399003|1800799024|38350700014|56012099006|260925021911599003|260925022911599003|260925021311599003|11063799006|261009223027099003|10067099003|18002099003|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: tBqQHIeTQutAhbWTn4n17Dp+NO+9D9OrNXyB0NK89C/37yFcfx7PtDQWnQJMevT2+Sh2N+tNVrLU3PDsF1siaU3phCgrTEqtpJl5Duhk6EH+drt/FgKGEZhyn1dwQTl1FHn2fADID6CCOgXGShr+104saLV0+sBlIVDMfg7iHO4Zm4Fjw9BwzXcSupCrZbmSvB+bAAyF5dBIoLFR2SGmG1k10GPN1PuUM/6Z9sHvYgqgBfh7IkBL8dqjQPKHOQn7ZYox+g/LgjY3pLNWALEkGeehgRJbyo9GJGbJGpSwl85PDmFLlLXE8v44FH2O85KySMt/6nlAxH2LkyB8MBaEdCgbSO46amWuwXr6aCm0zkgik0vqUfkpjAUR/rn84A7ZLhbDow3KX/gkhJE1UeebKXjltT6XcTScK16nkUL0Bik+7uf30ANzVYZNzFCeEA/iJJUVJW68HOU8AcbF1T6g+zMGolwJPjzNGhPtx5YUU4LnncWxoFacZzTaB3jI42JTSn1lYbfc2WmxrPfHrYB5aZl2Fug4N+7q+fl18it8Ijtbal8/kZz7+vLnf7WsqdfBzEjWUp2cbM5fQCqkY63ZN/dRsCnrzXi71MFGgFKGtGYTemZBGrDyuXLt8HPuNdOr4Aofy1wapgqp5micHqatVxyDtYbeAZGKCmi8rDuyRq2RUX8qP1/0lB0zzTN08ecn72KPbGEnX/9Qlz1rzEfA/r5YLnKtg5JWDb6f6U+ubfw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR06MB7557.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(23010399003)(1800799024)(38350700014)(56012099006)(260925021911599003)(260925022911599003)(260925021311599003)(11063799006)(261009223027099003)(10067099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TCSFDrjiV4sGM/yc9e8MpMtXQtys3qal3ycYAOhTUuwCG895keEKlyrqLDsX?=
+ =?us-ascii?Q?BrYY2EdL2JPNSvQLZN7Sd55bQnXOp6ZGKWUpNQ8dox+lY36T/LcbNyHMpWqq?=
+ =?us-ascii?Q?4rSN1i5H4J/kaZ1QPc+QTzBMOuD11rDUwG/swOVStsgyj0uPOC5YUru4/Nib?=
+ =?us-ascii?Q?XZ6g6PndQoDz/Fk3JqDt+IsaFTotnhwgwIl864JCq78xjIoFFFCAFwASeYov?=
+ =?us-ascii?Q?izXmh32/c0BY+Sh+80yoWM8ZdZn0WqswKuTQ37pZjr+TV2CYJkNVvy49oO6r?=
+ =?us-ascii?Q?t5yWKLmFXULgTBX6CZ3LQ7h8Xy46jGm3FTmlsRLxFvYwTXLkcTZBkj9IWTzx?=
+ =?us-ascii?Q?RfQ/oidI+ufBavez8jbMQbawpziwcWP3DYpb0FXder+HOa1Y4z8Hc/1clihm?=
+ =?us-ascii?Q?TFJuIkosyQ3594WCH+hpMOaRY5kfx9BhXg/v78GmuVxzL6ivgYqQNu1S49RK?=
+ =?us-ascii?Q?Pkgym9hCPoX40dVUjf5RK3yUpipVA99prALX/kcSAgli8R12l5QkIlD04DXA?=
+ =?us-ascii?Q?0GcUt0Ry5g1C5xOU36B5Wkx0kv4kKxOZowwDqO2Z+aUCuLSbm8dk9N8Asb3b?=
+ =?us-ascii?Q?WP76zy7D1/VcxMv91w0lRxesZk+ta9XAFdxQUjgTFbD/wRalVEod8ABUyGB+?=
+ =?us-ascii?Q?3f95U4dgXtCKYyTCQ6Xjj1SXB906yhCJkkqsIHp8zOQtHPRqOnRdf0Qk2ola?=
+ =?us-ascii?Q?w1zbjkMQW/MtHVQmuOScuZU2HCEuaEVHt8N2LO9jwa1lCGy84PLsPhi6bHOc?=
+ =?us-ascii?Q?1mUmsf1pnqyoLs8oRL/j4/nzZJAZZBBM6l7Pj5Sa36qLI22fTFuG58WlifGr?=
+ =?us-ascii?Q?V6SJej4gghLnCW0AC84IhdFMJHzNqfsUiw1mI8hIiNLqG6qePbmdVQD0jvb9?=
+ =?us-ascii?Q?ODVmZIEMaFK0ErFAvybwwCjbsl1J9lAxjAsDQKJA5HjE+YeIRuP46PJ8Nlt8?=
+ =?us-ascii?Q?K4wA+Jva77aR8iJcXwmXNkj+02G64Cx4uIHItO2vplH3HD8loqnLNI38N5Ow?=
+ =?us-ascii?Q?rVCF4JaDxstOlYhCAWAvLHPCDsc81YHOFThxilfIiGN7d6fB4KaCKyviEiji?=
+ =?us-ascii?Q?ShJlKdVb7QNOjL/SRJeh3/+gp++geo5HJ5dSaqJvL72a4LPam5wjcUQ700Cm?=
+ =?us-ascii?Q?ysWRC6ijesWNpkF8fWIPtUNnj0bEtCUza1QZ5Q3VFniLr7cxKSArRIWYhifE?=
+ =?us-ascii?Q?gs+w+/128I1f1IYh14+7d9K9CH2fId5Dh8/5JOcMfigQOn4SsqtkFJO3f7i0?=
+ =?us-ascii?Q?LyyItTBOHV717p4HvoB6ImjEXHuhrbm2w2xALhrmK+sxtchMNpfKKN3VjqEW?=
+ =?us-ascii?Q?OG/JPJB1nNu9x3iP2jTaOnZZkpiL2tydfyKj8Q11uHlfLshyJpouhLsR/oEU?=
+ =?us-ascii?Q?gwFrpJ/jdIpJaHSMn+cJ/ShfqtJBAdLnFu+FKOZARUL7BbwALBhe1na9ZiLC?=
+ =?us-ascii?Q?4H+BV50FShsYQ1FknMvEvkFviSHBeMPM9yaDXr8KupJIzrS0NIoL3Ab0S7z4?=
+ =?us-ascii?Q?X1YPZmivGRI1m0HO6Z9W6cTkC+PwB5+r9pUvg4feaGgYMCB85mbFMCtkPjnz?=
+ =?us-ascii?Q?5eqwOnvHVipDBosV0yXjy7AEAd7V9PtTRVzsLT4ATqUyk3ujPx1Oi4LXAsdq?=
+ =?us-ascii?Q?y5Q3UXvX4h+yZxWJc/462wPRjwsDNcGptqhs2iD4R4XTpwkzONFfXXl9CJaO?=
+ =?us-ascii?Q?fV1E4DbehKMYlmViecCAHVNEQ/ExTE7fuWa2bco1LlODzxKnPiiP7zZ4YvpD?=
+ =?us-ascii?Q?ZCN7G31FxA=3D=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47e3ed52-f398-4499-f07e-08df2ea93b85
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR06MB7557.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2026 12:54:09.4020
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8htdRDE2dECRw4c+sN7Dgk2+IBuDWDYetjS5CGsCuyXsk+Ws6/7dxJMa+G1W2Jtl1cqGcodMOs37pcjk2LzwSg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR06MB7267
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 12:32:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131167
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 12:54:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131173
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 40.43.0:
+Changelog: https://github.com/openssl-projects/pkcs11-provider/releases/tag=
+/v1.3.0
 
-- Add es_CO bank provider
-- Add es_CO internet provider
+Also drop patch which is now incorporated in the new version.
 
-Extend RDEPENDS with the missing runtime dependency python3-stdnum.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../{python3-faker_40.37.0.bb => python3-faker_40.43.0.bb}     | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-faker_40.37.0.bb => python3-faker_40.43.0.bb} (92%)
+ ...-Fix-i686-build-failures-in-cipher.c.patch | 62 -------------------
+ ...provider_1.2.bb =3D> pkcs11-provider_1.3.bb} |  4 +-
+ 2 files changed, 1 insertion(+), 65 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-=
+i686-build-failures-in-cipher.c.patch
+ rename meta-oe/recipes-support/pkcs11-provider/{pkcs11-provider_1.2.bb =3D=
+> pkcs11-provider_1.3.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-faker_40.37.0.bb b/meta-python/recipes-devtools/python/python3-faker_40.43.0.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-faker_40.37.0.bb
-rename to meta-python/recipes-devtools/python/python3-faker_40.43.0.bb
-index 60c999900b..505ac3fcdd 100644
---- a/meta-python/recipes-devtools/python/python3-faker_40.37.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-faker_40.43.0.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
- 
--SRC_URI[sha256sum] = "a92dff7f310e61fb544c61720e15edb2e7448bc33d15a321a99e9ab7b94abf54"
-+SRC_URI[sha256sum] = "02fae4327c03a4a6315e1b428a3878f435bfc276c93435ea349b95c0c9372361"
- 
- inherit pypi setuptools3 ptest-python-pytest
- 
-@@ -33,6 +33,7 @@ RDEPENDS:${PN} += "\
-     python3-unittest \
-     python3-xml \
-     python3-zoneinfo \
-+    python3-stdnum \
-     "
- 
- RDEPENDS:${PN}-ptest += "\
--- 
+diff --git a/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-bu=
+ild-failures-in-cipher.c.patch b/meta-oe/recipes-support/pkcs11-provider/fi=
+les/0001-Fix-i686-build-failures-in-cipher.c.patch
+deleted file mode 100644
+index 479608b8f3..0000000000
+--- a/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-fai=
+lures-in-cipher.c.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From aec4fe7e3c4d18cd5d0f98168df5884a141c6b69 Mon Sep 17 00:00:00 2001
+-From: Simo Sorce <simo@redhat.com>
+-Date: Thu, 19 Feb 2026 16:08:56 -0500
+-Subject: [PATCH] Fix i686 build failures in cipher.c
+-
+-Update AEAD functions to use CK_ULONG pointers for lengths and
+-introduce a temporary size_t variable for OSSL_PARAM calls. This
+-corrects pointer type mismatches that caused build failures in
+-Fedora Rawhide i686 scratch builds.
+-
+-Upstream-Status: Backport [aec4fe7e3c4d18cd5d0f98168df5884a141c6b69]
+-
+-Signed-off-by: Simo Sorce <simo@redhat.com>
+----
+- src/cipher.c | 11 ++++++-----
+- 1 file changed, 6 insertions(+), 5 deletions(-)
+-
+-diff --git a/src/cipher.c b/src/cipher.c
+-index faaa51b..4ccd3ad 100644
+---- a/src/cipher.c
+-+++ b/src/cipher.c
+-@@ -867,7 +867,7 @@ static CK_RV tls_aead_get_data(CK_MECHANISM_PTR mech, =
+data_buffer *explicitiv,
+-=20
+- static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *cctx,
+-                           const unsigned char **in, size_t *inl,
+--                          unsigned char **out, size_t *outl)
+-+                          unsigned char **out, CK_ULONG *outl)
+- {
+-     data_buffer iv =3D { 0 };
+-     data_buffer tag =3D { 0 };
+-@@ -906,7 +906,7 @@ static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *c=
+ctx,
+- }
+-=20
+- static CK_RV tls_post_aead(struct p11prov_cipher_ctx *cctx, unsigned char=
+ *out,
+--                           size_t *outl)
+-+                           CK_ULONG *outl)
+- {
+-     data_buffer explicitiv =3D { 0 };
+-     data_buffer tag =3D { 0 };
+-@@ -1475,15 +1475,16 @@ static int p11prov_common_set_ctx_params(void *vct=
+x, const OSSL_PARAM params[])
+-                 return RET_OSSL_ERR;
+-             }
+-=20
+--            int ret =3D OSSL_PARAM_get_octet_string(
+--                p, (void **)&gcm->pIv, gcm->ulIvLen, &gcm->ulIvFixedBits)=
+;
+-+            size_t iv_size;
+-+            int ret =3D OSSL_PARAM_get_octet_string(p, (void **)&gcm->pIv=
+,
+-+                                                  gcm->ulIvLen, &iv_size)=
+;
+-             if (ret !=3D RET_OSSL_OK || gcm->pIv =3D=3D NULL) {
+-                 P11PROV_raise(ctx->provctx, CKR_HOST_MEMORY,
+-                               "Memory allocation failed");
+-                 return RET_OSSL_ERR;
+-             }
+-=20
+--            gcm->ulIvFixedBits =3D BYTES_TO_BITS(gcm->ulIvFixedBits);
+-+            gcm->ulIvFixedBits =3D BYTES_TO_BITS(iv_size);
+-             gcm->ivGenerator =3D CKG_GENERATE_COUNTER;
+-         } else {
+-             P11PROV_raise(ctx->provctx, CKR_MECHANISM_PARAM_INVALID,
+---=20
+-2.47.3
+-
+diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb=
+ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+similarity index 87%
+rename from meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
+rename to meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+index d95706d9e3..8571be374a 100644
+--- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
++++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+@@ -15,12 +15,10 @@ DEPENDS =3D "\
+     p11-kit \
+ "
+=20
+-SRCREV =3D "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
++SRCREV =3D "b55b94344af87a058fd84d6e15390760a5585b1d"
+=20
+ SRC_URI =3D "git://github.com/latchset/${BPN}.git;branch=3Dmain;protocol=
+=3Dhttps"
+=20
+-SRC_URI +=3D "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
+-
+ inherit meson pkgconfig
+=20
+ # Overwrite default pkcs11 module path
+--=20
 2.47.3
 
