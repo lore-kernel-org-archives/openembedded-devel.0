@@ -1,58 +1,58 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6264.1792499560802698019
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6337.1792499561699499408
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2026 05:32:41 -0700
+ Tue, 20 Oct 2026 05:32:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kAwQTrse;
- spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a1cef0439aso35050845e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 05:32:40 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=TrolyJMD;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-49d05d51553so21924045e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 05:32:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792499559; x=1793104359; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792499560; x=1793104360; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NqWL2BRsNlkFgQs/Qp9YaYJBWK3LkIXxezxiH9DESOs=;
-        b=kAwQTrsePsoQuGwSvdQkHOXWbI01W2Fn8h6jvR5aKHGUitpLVPoT4CiVVAPjSxQ+Yn
-         tMevxeh/c4A3kc+7pBbQAXofFvhRJB4n1embKzS4M7Kc0THIFOoiaFGN/xfaj9OVrez3
-         eRY+NEmSfaiZppRAG/HNISC97x8fELAgMBplk=
+        bh=UgS0/SD5kV5xcEqKA9y6eWH/gr3CAnKLuxHJ6+0O0Yo=;
+        b=TrolyJMDRGU3inkbOkOzHH91ehUAFBcOZ80xOs7+/UD6UE4/EOh+Y1oK2M7693jv3L
+         tyzZtzBvD1mUt+oD4F4u70E23ivIdgemCOVm++LcyzdfVS0Ud/+3fONvHfZTjrUKap5s
+         miBnP8/93nxBNelIxvT01TkeBe04p+0bS91Ks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792499559; x=1793104359;
+        d=1e100.net; s=20260707; t=1792499560; x=1793104360;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NqWL2BRsNlkFgQs/Qp9YaYJBWK3LkIXxezxiH9DESOs=;
-        b=r7JiWkJV8bBmJzuMjmHbrBzPuGZ6JaoZkHKTYEWt3R06yhQUiHwWbZXnlYTR39fXSj
-         XQU/Vp0T35lE4+YVsJKE+/zGmEvjlBo219c4chB+Q7c+Y3fK6lFw0Qbw555Xu5u46vV+
-         Dh7Npe5HR2haDVCatxUiQyCcpO6y2iMIms7gj6jVj8YzItVIawS0V+bg3kC/m/dtoSeN
-         Mx9kEVasnl3cYbcLesJI+lqfn6rAAiLknzsmsnSZ+uz5mUp9CYv7J0hgbm1tPi4q2zEF
-         TsxoxIuyCfvpUs+f70wJIEt8Cg6XzRSiEkO4Dswv9wru4imMuhZetozDPz7ku5YWEQKq
-         HW6w==
-X-Gm-Message-State: AFq9FYJtOJgAitZ0eAqoYSJbprAMHIdVRKzJ8V4ed9HWxNVPYZt1mCmn
-	wLgIWfQ4wwcqsufvSvy3VTHm/PRrB5aqFL4VO/pHwlsqG3MZmvk2SbihHn71Tax72n/2tPnkBWW
-	XRuDt
-X-Gm-Gg: AYBFou2vPL2eCVQDOt51X/Z7NRwWXc7iZbwQd7T8kRyHqUEuPBx/HTydD8JZlj9nep/
-	Wh1QJaAxE8JO/7ShAe+BLQW0ddDifPkuzqU62BQckcPc4SbdKDrYezuYKsxjW0cgIwBCFUNhRy4
-	/hVs57iiu3OsuKZnbV0WjAgJRAzpx+PH+5shwLrwqcBo2V4LYfCEXszEmRD0CFiWEcoMQYmDJxN
-	F55kdRlmTY2Z8NcTJX/imssUV+ZnFrDsaJI3JXJ6h4idSnHfjnTCUGHMqxa/gCppYXFSuSnpXoh
-	x5eEMpIMiRcSiFR1VpWnviprJBbkbLa0UkGVHJFyw7yckT/1lZE04eT4z4MI7I6YS+x3+rYseZL
-	I7zXrrQB0StgFC5w9yojY8NZqiWIxD3FNmXR3tnBynB8IHgznCDBMEIrfGGKU4pAtF7Hc2wDl4y
-	aWERAJggcSpHhtr4WVN31WzsigMDj1R+Y9/HZCmpyWKhPLNzS1InFZ+QjJ4EtIxlWE1qGVWVzg+
-	EjcKQYk5z7Ctu5rRhuE1a2ix5kNZd2bDd74Sa37UpxON/qCLMDCGAjZllYG/0PzUbKZsL5+NL0K
-	2Xth27qaCh6jbkBK/MmX1l0=
-X-Received: by 2002:a05:600c:3b82:b0:4a1:f625:2108 with SMTP id 5b1f17b1804b1-4a1f625225amr42777405e9.33.1792499559046;
+        bh=UgS0/SD5kV5xcEqKA9y6eWH/gr3CAnKLuxHJ6+0O0Yo=;
+        b=dq7dolUSvVunaHD0lm0+9xTRpNmrVwz+atcIlQIAq6IJ1oJWyqw4/cX+FvZ6tX9sX5
+         bFlaTCaKNaQl8r7SZO1k+uhXlGCa10MouPhTboEuQ0lcSqTIlQVRZK1q+bDuLYxXkLRp
+         LG09g0miXg+ApRo/nAqkkQnBMZC2RuqrmgoOgC+ableSUdxuMOhET9KCVtJ5KQlImUIG
+         cWMZaeONwn1e6FA+TgzpZtgG8x3K0By6FeO157Lz0e3a+3mo9Vf/GgvQ+Qm4h36L82F1
+         UqaQyO8jPOsAr1BaPtyW/cBfIFYZdLPgk7ZMsMgzSFksdtXZwlp7LHN3csjwMeHa9q7x
+         o5wg==
+X-Gm-Message-State: AFq9FYKjXpd9C+zcsWSCm4kdBrfH2MYQ+mqHhx0/O4J03DNv4ISB4CNU
+	M52UONq4oKsv/5BA9UDo5PxDCqjjD98WpEBhqMCOiJ3tZBHRq45HP8jw+q4PqTfV4mw/cYrxAer
+	qKmVd
+X-Gm-Gg: AYBFou0eAOnDPi1wevwCzOOvCab2cugPkmburol5+Vcano0MNiXhDX7rIKecDlBGOK4
+	yfEEJmCtT9T/Fw0Fs7GtZKDoJ9bGbIjiu1WVT+Qcyh//M6+d9BFYhye2Tq38YZzCNqmsu05G3O8
+	ak21QGy/l9eCHRjcypPbUYAkXidrTzV8RWkD2OeEBDqYRUEoEuEsdK5HaudQUb28YkWCfg9I7u+
+	CDweHwqz3z8c9uY5H88obeXJiiDdEco9x/JFN+ptuUfExptmA/OyMYuJnPp0b3CMxkHiLKgKeM/
+	iH/8H8nLwJcQ2oJOleauBhIiUBTjMD4IQT0FafPK/TU/ITrZ8YWSJLz+Hsx8bG992OGvHn8tKpc
+	a92Sn052N9hPla/5zUrbrZRj0SyjeSkLeFB1H+nbfQogTDb3YIT01+HkWWOa4A/zsT5njO2wpSL
+	IIFSY+tduVKVC6Ode5iA6HHAY3jmVhzUiFjvAxAzuktsEMsCl0QY1pNhCp9cu5F4rezBtJRM0HD
+	HQccmmYEdlmRyURFtbx10tK3VTqEQHpNLUF8b5DXvjwBU4gxWk+SLMZyGgY2Z7OenpTJUb9KX8b
+	maCFF93c8qRwDtwpaYqlom0=
+X-Received: by 2002:a05:600c:83c4:b0:4a1:dfd4:9426 with SMTP id 5b1f17b1804b1-4a1dfd4958bmr173680325e9.19.1792499559893;
         Tue, 20 Oct 2026 05:32:39 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2cdc342sm75422675e9.13.2026.10.20.05.32.38
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2cdc342sm75422675e9.13.2026.10.20.05.32.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 05:32:38 -0700 (PDT)
+        Tue, 20 Oct 2026 05:32:39 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 10/14] python3-fastapi-cli: Upgrade 0.0.27 -> 0.0.32
-Date: Tue, 20 Oct 2026 15:32:22 +0300
-Message-ID: <20261020123226.4033600-10-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 11/14] python3-filelock: Upgrade 4.0.4 -> 4.2.4
+Date: Tue, 20 Oct 2026 15:32:23 +0300
+Message-ID: <20261020123226.4033600-11-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261020123226.4033600-1-leon.anavi@konsulko.com>
 References: <20261020123226.4033600-1-leon.anavi@konsulko.com>
@@ -60,34 +60,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 12:32:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131168
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131169
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 0.0.32:
+Upgrade to release 4.2.4:
 
-- Set FASTAPI_ENV when running fastapi dev.
+- Keep GitHub Release notes free of extra blank lines while
+  retaining the PyPI and version comparison links.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-fastapi-cli_0.0.27.bb => python3-fastapi-cli_0.0.32.bb} | 2 +-
+ .../{python3-filelock_4.0.4.bb => python3-filelock_4.2.4.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-fastapi-cli_0.0.27.bb => python3-fastapi-cli_0.0.32.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-filelock_4.0.4.bb => python3-filelock_4.2.4.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.27.bb b/meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.32.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.27.bb
-rename to meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.32.bb
-index 94609b2b0f..33a441e1e9 100644
---- a/meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.27.bb
-+++ b/meta-python/recipes-devtools/python/python3-fastapi-cli_0.0.32.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://fastapi.tiangolo.com/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e0cf8d811ea2046529403707b266fb5a"
+diff --git a/meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb b/meta-python/recipes-devtools/python/python3-filelock_4.2.4.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-filelock_4.2.4.bb
+index 23cc4484c8..ad4efd998b 100644
+--- a/meta-python/recipes-devtools/python/python3-filelock_4.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-filelock_4.2.4.bb
+@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
  
--SRC_URI[sha256sum] = "1dffb1e40c0c88f2e0171a8a252a2b615c1e63ff8c05626649e4badd6a84336a"
-+SRC_URI[sha256sum] = "38024d2345275e1b37ce8848727a580d84901b570e96b3256d9d36a9a5039424"
+ SRC_URI += "file://run-ptest"
  
- inherit pypi python_pdm
+-SRC_URI[sha256sum] = "90999ed63a26ccf86b93b959ab10cf1017f422d816be454ed54cbed263e71ab5"
++SRC_URI[sha256sum] = "c6d8663535e1650ee430507b4ffbac7b464dd64b7647ea0112a9f406499d163d"
+ 
+ BBCLASSEXTEND = "native nativesdk"
  
 -- 
 2.47.3
