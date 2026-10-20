@@ -1,145 +1,164 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4902.1792494254817517730
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4898.1792494248458060135
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2026 04:04:14 -0700
+ Tue, 20 Oct 2026 04:04:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yn+48HEw;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3ace1f3897cso1779826a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 04:04:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=OrYzhkYa;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3a4b9732d5aso2828363a91.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 04:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792494254; x=1793099054; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=Yn+48HEwi3zQ9M8o2BtcYvo3gCTsq8b45JglDNHkDhyzknMYwR7tPvnz6iRSuEGyA0
-         rDMIOAKO+SAa9FVanFuGcV8Kn9sv8/iJgXyoXkKufs4SHzR24P1OL01aLZDofWenMsL1
-         GIvvk57tFHcxepj02e9xkk338NUobhBXMZxdDoZ+/QG6RU5l6t/BMEMSAJyEl2bYWzfa
-         DFZAAfErjRSBSMZkdxkhquDLJRQAtSNQvw757Bz5C6KmT22ilnuiKY3mb0gijyqv1iKd
-         UN9dHPTud/zB/OMXF0n6SMNy21Z3KTTopuPqzTrHAE8AeACI5RWlhROwrHu7v+x5qEKG
-         /uag==
+        d=gmail.com; s=20251104; t=1792494248; x=1793099048; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=T5dlxhYWULY7TJ5uvh5yd2JOP2ZczBQ8SgMUQQkEb/M=;
+        b=OrYzhkYaHts6jCEQ5jtQzdtLuJxhi2oGmjH61CCdvuK5IASO2Jk8L7aBhmCUxiZ1Q0
+         qU2zM8OyKFSyOKhX7ncWTLB805lD2llYtWXcDxvAQBXbYC+9nc8THoD486bFgBV2/jzU
+         CVZXqjbUYNQspdwiolb50//AEc59BIDE3kegde2R3iXiyQ4BrYm8WfRXqU8DCuwhkRAj
+         m/4fMRHY4okgebgKxyYZPbnOBHHlsYDJw2ULd751Nfm0gow3E3cqpf1N1reCN2YG5rue
+         bmzZYsK9hO6SU3bzS9azrmgwLliUbp/h8e2AtbIeHRhlexrH0/4OeJYLI0/s4I+28Kv0
+         NwJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792494254; x=1793099054;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=iHNoemQFZS3tnf1EBYOdam9WH8GjENgIvo3X+0o5NteVr/ykdqCfsdXqPtz2IwBd9K
-         A2qjHRRdPZ26OiqFOiSOqW8zqPHlsJpT8BScTfmTDJVN9LtH9o25GROoTMyZsHTJumkM
-         JLs/L3dqSZmUI8c4KhHfC4T4inAsS5EI4zUKYf+mgnRDhXb9ZdZ0zJWBlG7rpdS41VcP
-         S6qWp+WqI/ZDfaJb8C4CgIT7SqLMCM1QpQYliY9mfGs4PCCfCJaUBnxrHtXwRjQn+AWT
-         TOKWxJk3ro8Mk8938S+F5/BgliJSqolakSfVtHGZs3NONok58KQHNvE0BRfL2GlJJIEm
-         sEyg==
-X-Gm-Message-State: AFq9FYIP0Lt9p/o8Z2nTvwan7ITgTHr5Z4M5lXxALmUGCL4XsN5agOoD
-	gFu2aI51Yg132Q8y5rdMdzTROf6CIX4pancBXCAsOpD3SqBpSWSPx+1KCbZhyg==
-X-Gm-Gg: AYBFou13k28xm4gBxUU9nTFXFRMrG51nmX3YCEApEf7WAGMlzOgSaWR/DiESTLwY4lX
-	fUaauexw8tCVuO/YiSqUO9iP2xanIixn4tp8GdjrsEu/x4KGJX1fukWmqSXiFtIW1U3NxrW9ySj
-	eW0wh4V7qCHJt4dGxqZJ85UTdbTKjC4WEmo7aoVGcur9uO8y+2QpiVVteE3HumbGGiaZhVuFkpP
-	CcHgBNN7r/6mG1Pg1MM0ZZWUELMLYBdWzBIGKuxXeiFQGyYp10x0RJq/5eiol/J5lwCctlAlO5g
-	Za0RR0vNrvEt535mVg55COW5FFE+YG2txGMAOZ0q6TGk2UyN2ejS0JrqqvpCF6fg5K1yIeoBqzw
-	ChwCs4kMYNuqJS6WxpSSm0o4rM3uTY/1szt6+pvmSgUBIbkBUyB6zcs1xNINDR79DCvPfw46fSQ
-	RIV+pCgOcE+xqB9Lyq4ekS+xNC4QyzvN1Ov+5ZfSrMDPTcNpEhQiRCa31JKxC9Csr9AM904DICi
-	nKNtkCpHpl+wA8SyTOc3pVeKct4SrmNkz+kgds=
-X-Received: by 2002:a17:90b:4c4c:b0:3ac:a491:3cf8 with SMTP id 98e67ed59e1d1-3acef52ae1emr9165540a91.43.1792494254095;
-        Tue, 20 Oct 2026 04:04:14 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792494248; x=1793099048;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=T5dlxhYWULY7TJ5uvh5yd2JOP2ZczBQ8SgMUQQkEb/M=;
+        b=mofoIwUUDVuPYGio5DC+jsaUL9+sFgoEaxqATnzr10W+Df8Gsa3efq+K+BzCB2ziHF
+         u6CJtArth2yVGQUzZFxnUo8vMLlsmp6xb50/NBp23ZT1vq4r6/CkK9ABcYlJ+Ezt4LYX
+         NrgH6IpOm3fBiiCg79TvNn5TmAtXolw1HVkAhpx+66ZlWZj5HQjW+2j127cOa8s++Yk1
+         q4wj2iwSJX3im0f1jML5O7Kuu8Z4b0dVo0jIIErCJNAtDUm6CkerioQrxx7CkyaPzGkK
+         HX6sdm1IoWRDYc4jDe/9bShhjz+3LaWd4UFGkOqxOTePeLUmS2NfSUn5E4gzoVB+yyKr
+         8B+A==
+X-Gm-Message-State: AFq9FYJ11GEzCjYS5jM5fyw8DI24Whw6KZe23bb7cGtSYVdVjqWI0XSB
+	BFykGiQjL80slYWFyWsXu5TSntyUyKVDikWbPpiNOCc4jdIIOQAxd1vdVKM59w==
+X-Gm-Gg: AYBFou1NGIfQS5Es0SGTk0ksVCaxKPO2rWiV5k/0DVKTMe2qs6pFngnPPZ5dZS+ybQB
+	BbYjmscvzp5uRw1CL+FOI6tt2MjTvhx8RUKx6iiavi4YMbpn5hEowFP+sUKiibv5OXQSKJGPH/9
+	IWx9Rmob49t18aiaht8iYX+8bY4GzOztpBYgUrCmlvvLsZ9xYzvWcUvTF6ZMWYPNDU/pXQCCqrr
+	2V3OaAN2c+PHgRqaHqr0lotm6XBLQmh4KdeO9/m6kPinN4LFeAvO1ZwlSp9635WWbnUj6BQACiU
+	91J+hw8soO/EuNxfR4eMjVD242UV9vgoD4iZI6x/SyBcNjNTOm7YgwLsFHs3jArZmUhN8XsVzro
+	UHan6836OgvUcEJrAfpwR+Uptk96xV1uY5kSIOPZhSnommlqp5O4uPsppq4I0UqRLsHQAzqvIaj
+	JdgOmN+nmQnWITPkQpQt++SC62kOtjoosuicUMptDDBVjgf6gl7Ertoi/IxHJsZtODFTm6rDl4n
+	/D/foydMgA/qfFHlLNrDfoQOWvzawi8EuaarLRxnr92PkBA7w==
+X-Received: by 2002:a17:90b:390e:b0:3ac:ba49:2fed with SMTP id 98e67ed59e1d1-3acef5f1d7bmr10327906a91.58.1792494247550;
+        Tue, 20 Oct 2026 04:04:07 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ad60f2c785sm3046683a91.7.2026.10.20.04.04.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ad60f2c785sm3046683a91.7.2026.10.20.04.04.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 04:04:13 -0700 (PDT)
+        Tue, 20 Oct 2026 04:04:07 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 4/4] libvncserver: patch CVE-2026-50538
-Date: Wed, 21 Oct 2026 00:03:57 +1300
-Message-ID: <20261020110357.1995120-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 1/4] libvncserver: patch CVE-2026-44988
+Date: Wed, 21 Oct 2026 00:03:54 +1300
+Message-ID: <20261020110357.1995120-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261020110357.1995120-1-ankur.tyagi85@gmail.com>
-References: <20261020110357.1995120-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 11:04:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131158
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131155
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-50538
+https://nvd.nist.gov/vuln/detail/cve-2026-44988
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libvncserver/CVE-2026-50538.patch         | 49 +++++++++++++++++++
+ .../libvncserver/CVE-2026-44988.patch         | 71 +++++++++++++++++++
  .../libvncserver/libvncserver_0.9.15.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+ 2 files changed, 72 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-44988.patch
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-44988.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-44988.patch
 new file mode 100644
-index 0000000000..da01736323
+index 0000000000..e26abc9db7
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
-@@ -0,0 +1,49 @@
-+From e824e7d8ea71feccb81aeb34771eb83e052c3fe2 Mon Sep 17 00:00:00 2001
-+From: "Bas.Levering" <45083161+Bazskillz@users.noreply.github.com>
-+Date: Fri, 29 May 2026 09:08:28 +0200
-+Subject: [PATCH] Merge commit from fork
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-44988.patch
+@@ -0,0 +1,71 @@
++From db5779f2bec717f577fb66321b3b079ff156da95 Mon Sep 17 00:00:00 2001
++From: Kang Hee chan <24s101h0659@sonline20.sen.go.kr>
++Date: Wed, 6 May 2026 21:48:54 +0900
++Subject: [PATCH] libvncclient: fix Tight gradient decoding overflow
 +
-+HandleTightBPP's basic-compression loop wrote each batch of decompressed
-+rows straight into client->frameBuffer (via FilterCopy/Palette/Gradient)
-+and only compared the running total against the rectangle height rh after
-+the loop. A malicious or man-in-the-middle server can send a zlib stream
-+that decompresses to more rows than rh, so the writes run past the end of
-+the framebuffer allocation: an attacker-controlled heap out-of-bounds
-+write reachable in a default build (Tight is advertised when built with
-+libz+libjpeg), pre-authentication, from one FramebufferUpdate.
++(cherry picked from commit 5b270544b85233668b98161323297d418a8f5fd1)
 +
-+Clamp numRows to the remaining height before calling filterFn, matching
-+the existing house style (trle.c and the Tight JPEG path already clamp to
-+the rectangle height).
-+
-+Co-authored-by: Bas Levering <basdaniel3@gmail.com>
-+(cherry picked from commit 540332be3e0acc566fa64da6f1b4680c72c724dd)
-+
-+CVE: CVE-2026-50538
-+Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/540332be3e0acc566fa64da6f1b4680c72c724dd]
++CVE: CVE-2026-44988
++Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/5b270544b85233668b98161323297d418a8f5fd1]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/libvncclient/tight.c | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
++ include/rfb/rfbclient.h  |  3 ++-
++ src/libvncclient/tight.c | 10 +++++++---
++ 2 files changed, 9 insertions(+), 4 deletions(-)
 +
++diff --git a/include/rfb/rfbclient.h b/include/rfb/rfbclient.h
++index a974ff5f..666dcb90 100644
++--- a/include/rfb/rfbclient.h
+++++ b/include/rfb/rfbclient.h
++@@ -314,10 +314,11 @@ typedef struct _rfbClient {
++ 	rfbBool zlibStreamActive[4];
++ 
++ 	/* Filter stuff. Should be initialized by filter initialization code. */
+++#define TIGHT_GRADIENT_MAX_WIDTH 2048
++ 	rfbBool cutZeros;
++ 	int rectWidth, rectColors;
++ 	char tightPalette[256*4];
++-	uint8_t tightPrevRow[2048*3*sizeof(uint16_t)];
+++	uint8_t tightPrevRow[TIGHT_GRADIENT_MAX_WIDTH*3*sizeof(uint16_t)];
++ 
++ #ifdef LIBVNCSERVER_HAVE_LIBJPEG
++ 	/** JPEG decoder state (obsolete-- do not use). */
 +diff --git a/src/libvncclient/tight.c b/src/libvncclient/tight.c
-+index dad5514f..3ee0d5e0 100644
++index 57a3715b..dad5514f 100644
 +--- a/src/libvncclient/tight.c
 ++++ b/src/libvncclient/tight.c
-+@@ -341,6 +341,16 @@ HandleTightBPP (rfbClient* client, int rx, int ry, int rw, int rh)
-+ 
-+       numRows = (bufferSize - zs->avail_out) / rowSize;
-+ 
-++      /* The decompressed stream is server-controlled and may yield more rows
-++         than the rectangle's declared height.  filterFn() writes directly into
-++         client->frameBuffer, so clamp here before writing to avoid running past
-++         the framebuffer (heap out-of-bounds write).  The post-loop
-++         "rowsProcessed != rh" check happens too late. */
-++      if (numRows > rh - rowsProcessed) {
-++	rfbClientLog("Tight: too many scan lines after decompression.\n");
++@@ -229,6 +229,11 @@ HandleTightBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++       bitsPixel = InitFilterPaletteBPP(client, rw, rh);
++       break;
++     case rfbTightFilterGradient:
+++      if (rw > TIGHT_GRADIENT_MAX_WIDTH) {
+++	rfbClientLog("Tight Gradient rectangle width %d exceeds maximum %d.\n",
+++		     rw, TIGHT_GRADIENT_MAX_WIDTH);
 ++	return FALSE;
 ++      }
-++
-+       filterFn(client, rx, ry+rowsProcessed, numRows);
++       filterFn = FilterGradientBPP;
++       bitsPixel = InitFilterGradientBPP(client, rw, rh);
++       break;
++@@ -430,7 +435,7 @@ FilterGradient24 (rfbClient* client, int srcx, int srcy, int numRows)
++   CARDBPP *dst =
++     (CARDBPP *)&client->frameBuffer[(srcy * client->width + srcx) * BPP / 8];
++   int x, y, c;
++-  uint8_t thisRow[2048*3];
+++  uint8_t thisRow[TIGHT_GRADIENT_MAX_WIDTH*3];
++   uint8_t pix[3];
++   int est[3];
 + 
-+       extraBytes = bufferSize - zs->avail_out - numRows * rowSize;
++@@ -473,7 +478,7 @@ FilterGradientBPP (rfbClient* client, int srcx, int srcy, int numRows)
++   int x, y, c;
++   CARDBPP *src = (CARDBPP *)client->buffer;
++   uint16_t *thatRow = (uint16_t *)client->tightPrevRow;
++-  uint16_t thisRow[2048*3];
+++  uint16_t thisRow[TIGHT_GRADIENT_MAX_WIDTH*3];
++   uint16_t pix[3];
++   uint16_t max[3];
++   int shift[3];
++@@ -705,4 +710,3 @@ ReadCompactLen (rfbClient* client)
++ /* LIBVNCSERVER_HAVE_LIBZ and LIBVNCSERVER_HAVE_LIBJPEG */
++ #endif
++ #endif
++-
 diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-index e2f995947f..ff7327c6cf 100644
+index 77612e1626..47e42cd094 100644
 --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
 +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag
-            file://CVE-2026-44988.patch \
-            file://CVE-2026-32854.patch \
-            file://CVE-2026-32853.patch \
-+           file://CVE-2026-50538.patch \
+@@ -46,6 +46,7 @@ inherit cmake pkgconfig
+ 
+ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag=LibVNCServer-${PV} \
+            file://0001-CMake-require-at-least-CMake-3.5.patch \
++           file://CVE-2026-44988.patch \
  "
  SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
  
