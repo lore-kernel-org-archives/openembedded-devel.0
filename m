@@ -1,206 +1,160 @@
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9506.1792507814517479843
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9430.1792507816040980605
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2026 07:50:14 -0700
+ Tue, 20 Oct 2026 07:50:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=VGU87lX5;
- spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1517bda04a0so2811079c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 07:50:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=aL2KHv2B;
+ spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-15354aa70e8so319837c88.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 07:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792507814; x=1793112614; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792507815; x=1793112615; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jF3lMdLK3IMXNBW1zsaMRURriloezRqYE5QDtaZX3Mw=;
-        b=VGU87lX5psFeyn1m4P6pZXBHwURxu7QbZekACVNPLtZryljWTr2+dx65jfqzo1Ed6i
-         zo47lGDoFsc9ojClkmQVWeoemQ27wZGN+BCFEH5mo4IPng3aqe9HkyNAA9KRR1CaseKZ
-         zdZ9QgtF9P9qq0To3YjRD/ZxbqjHeYIdiP24OZhd51QueiRqgggIqXD52y9ptgnuRsPq
-         Y8ZIEf6+7WIiL4KxDHBb0o44QNJHyjCBWF8Zwr+qNI8I0ytdpZFRfokRF3GFIOy8Z38V
-         Shy4Kx+gGsCjUsD3RftTI6rba/Hf1zpvYhJxkwYunZq/LK4tU4hJdUvNQGtkRwm6pUAe
-         Kl8A==
+        bh=JXq8ZWteUKqprCG9BksuKATfpewKcotK7uHwPe94ZkU=;
+        b=aL2KHv2BpMX4qIOFHv3G4HjKkBDoj80Ue1Ps3YUVGUvgN21UPBZZTdI+8md4WH87nW
+         wPuOMrBGgD7gtyCoNmwY4hICZTBM3ODIrY9BIUoWwmb3TIYHhTXzs6xeFTRbqIn/v+/J
+         BZqDkF9KNU9vKP8QXCn6I0yHI25+2QAlgO+Fb6Ke1Z+IVJxnb2TYLuSyLFuefWRQuIXH
+         0Ci+pykVBBT4w0+y7nVk6QiCNshgyURsH/D3umIxpBtIih+6kXNrHGf+hIa3OnE7GBJK
+         NVmtbqaER762OKYERwZ5MzmM40q2naejXzraru/amilOQjZwrYL34jK85+CfLPFUSutj
+         wR6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792507814; x=1793112614;
+        d=1e100.net; s=20260707; t=1792507815; x=1793112615;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jF3lMdLK3IMXNBW1zsaMRURriloezRqYE5QDtaZX3Mw=;
-        b=FPaD5IoKedlC/c3gQym1/RZZgITMw0nO2xePvMVE8zCGKKex9CM/zRsKpm8f8I23tc
-         76+hY25Ph4G83guHFR9jITgnkH9xX27K39ayOvuhW2K/YIgou2vHANcJgaIodsiwRDqC
-         yjT7RhW4nKNgnv91lY9JC1E2B2Z+cMbDErA2smBM2ydGUygAnON9mzFlNnOkKjFtdd1z
-         qLjCx57RHlhOubEZuKctROpB7XrD6yxUO9scybErvy2JXCkQ0R/E51nKKLKVZ2YowExx
-         xraKD/jOcX4nOrfyW4sxQ2vw1bV1vBLYFQE5p0UGSn0tgrKa9u2lUt8NqJRfhueu9ZPu
-         Q9Ew==
-X-Gm-Message-State: AFq9FYK5VgSJjKDHOXoyrCRhFJgcpQX3CXiL/yhzfklySdoe6ZU5kWAX
-	QQ3PnIbCjwoBMePUyL6E3J0ghbqMAr0+o68f6GqSNdaGlOghhdie6JX87FdU6DQb4Jw=
-X-Gm-Gg: AYBFou2V2EpVxP14EMZi3FuGyJlVmivAl6F56awy+xi3cKxF96n9RvGAr2uqw+Yff5D
-	tiA09THP1vpqKN/YrPC/EgEsig+k3gdymDBc+kHa0LcKkseEaKqRZss/bI4JQ1vP/0LhRvk7hIF
-	ABRUm9LbPDMb9I3Qs8buMWZ0n61l692cJo5/2mZQKDjFrcYrlRs38xeDImOn5P6NjJmxmX89rnM
-	3qDm4CVz93eQblPCYF5zUqFzroQYsz+dic0aKYC2qBgFSkNKl630Q0ZOlQjyLPOHm1tmUUnXvCG
-	YzQNLqfb4vL9b0iDqVrXPM5HD7HbMCGFBm7Kw6wWP1oI70T3dfpeLKsYlSLayZ8j3T1Mnx/qucw
-	5SERAL96XcHQfjV22a65US2JNb8I+iUEq5idtrk8QlWmOnpqaDM93q9YplsWmfC2PqXULmIx12K
-	vUSYKyocus9HlsSdjQqAkgUB/88wdE+Ebw30bXWcU5WDh4UywBpMhVObqqXYn4AepuqSF21zMcT
-	Kt4CQVKmGXkEj3IAItwuSV24m3/YxodIxA3opV5mO075aGmLVw0mddLQHqT2dWrS3r+dEpKeWZW
-	SW8lM+PUHZFBigDdCA4yerY1zUEFZ3VK64vDyrO5Q7ahF4kizd1AkyxcP63KCSaA7pXid+v85ny
-	H+PvO3rnZ+3rwNQ4jwFyQoiFfn8NglJ8VVoHopenkooNCAtYM+sfwun0ausbimlCstvBFYFcIuS
-	95fczh8EgFPkHYz2Ws36LY9rWZ5a06li5or/KWmrRuqXezLlp5ln1l3/Jb
-X-Received: by 2002:a05:701b:42d1:20b0:15e:9126:c60f with SMTP id a92af1059eb24-18512e25085mr16365079c88.29.1792507813438;
-        Tue, 20 Oct 2026 07:50:13 -0700 (PDT)
+        bh=JXq8ZWteUKqprCG9BksuKATfpewKcotK7uHwPe94ZkU=;
+        b=IrDy5e3sxnPsAn1IwST6k/XqohNsRMc4fX4dZd01o0TRo+aTNz0lsZCVHP51XvPUFn
+         JOVJGjjnAX4yFMyYo0q938ZCpl4Wh1XfilLvhAUhWhga+bWNAeRibJzur7jMgCi/7JVo
+         pW+FrfOAT37usIxsp+znUGgHcMNJLAHKlcVOWb3bqGEjvix48P9VKSteRJvXJAGZk71E
+         KlzC+9EYIDywZuXcvKmpvuBp8QIj2OANanBimVYpoWMV8LxpKj2NzPh5zy/b5tKev+UY
+         amsQcuZ4K8vMOtjgQKv341+Q4YWL/Ld9mmqGnExoSb/Ut7e4cxGQL3sNreuI+8EW+FdU
+         qGDA==
+X-Gm-Message-State: AFq9FYKVO6mTlhdPnTV6YoUDrbgYLbP8dVEbmtRHjc6OcfZZRayQ5z1B
+	SYu4mziNS7dpKGzLZjXuP3vtV+dmIG96kJd6Nqh0FKmQ5sYxNj8Q2lfD7HsdmXsFG2I=
+X-Gm-Gg: AYBFou32A3I1+rQwEOfmk5T/5FPxV33TkyqPwnbvy3+9l7Bj3XKp+j8YSB/xMCJ1MkM
+	unC+ewx6qbO+SeGZFkZ8CcQyUlnTxfbVNkV8/rDRktUj04s617aVI2pmHvX5oFptCiqtUnodo6U
+	vgdYYO80Bu3QpN9C6dji1IGFjuoi+RhNWUdUPcLOxQTpnO+gVEPtW/QYL2Zza0Saj+g5S5uh/V1
+	nie+ohri6LRdNdtExSrR1Kn+rOuJTnZ/SbXLRwEdZQRsKN9vtQuM7fKKcGt89ng39LQYWeJx8B1
+	cV5Ea4h3gQcKlRfr8S3KHtAuIs1DaXVdqwZM43zX1YOkLH/Hf+8FzrwePq80bXyFl7R/lZdgSjo
+	DCk9Jp8vfCZb/WVdqYRvsTt4nTeLorKE2Vhr8d1+CQvSSbLGcHVX8oH6MMV+UzvGEoRckkAmEpz
+	ykUVb9Ek2Sm4q9BO4TWsOYnvMQ6sKKqz4ojLhQsxoJbgKIDCUoFR83HrLxG+bT7c0CLd1ucmfyA
+	DtjPoYEBKR9PQRiRN4dI/F1Hm2Pr6iqvIsWHEb1rzN1Yt13iKUwKOuE5KnOmsyH2q6tVcl8LZ0V
+	qiSMtDD6YB40RV/Ks55P2SIm5nIANwzUgnjTgxSzFgNawcZq3K/E3Lhs5RIm/eU6anMJQAHaQTF
+	zSnyY44GBMFGTJJm6IctT3I1rsn5CXECWpbUeKl/H/zlqDOyVGPnnKYM8J76PTpyo/AgRiZ6ZWZ
+	zmEuw197BVdUce9r2DDo+yT0ejb4XoFUUNMvm06jG8VfYPvg==
+X-Received: by 2002:a05:7022:ea8d:b0:18d:ac5a:89ef with SMTP id a92af1059eb24-18dac5a8b8dmr3406263c88.31.1792507814913;
+        Tue, 20 Oct 2026 07:50:14 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831a6f5a13sm43888996c88.12.2026.10.20.07.50.12
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831a6f5a13sm43888996c88.12.2026.10.20.07.50.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 07:50:12 -0700 (PDT)
+        Tue, 20 Oct 2026 07:50:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/3] leancrypto: Fix FIPS integrity digest generation when cross compiling
-Date: Tue, 20 Oct 2026 07:50:06 -0700
-Message-ID: <20261020145007.2409602-2-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 3/3] frr: Fix build with bison rejecting paths in output directives
+Date: Tue, 20 Oct 2026 07:50:07 -0700
+Message-ID: <20261020145007.2409602-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261020145007.2409602-1-khem.raj@oss.qualcomm.com>
 References: <20261020145007.2409602-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 14:50:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131176
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 14:50:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131177
 Content-Type: text/plain; charset="utf-8"
 
-The script that inserts the FIPS integrity digest into
-libleancrypto-fips runs the build host's objcopy, which cannot read the
-target ELF file, and it hides the failure because "exit $?" after echo
-returns 0. The library is then installed with the placeholder digest,
-its integrity self-test fails at load time and all algorithms are put
-into the error state.
+bison now carries the fix for CVE-2026-56390, which rejects '/' in
+%header/%defines and %output file names, so generating the command
+parser fails:
 
-Make the script use $OBJCOPY, which points to the target objcopy, keep
-the exit status of failing commands, and tolerate a missing .init
-section which llvm-objcopy otherwise errors out on.
+  lib/command_parse.y:20.10-30: error: invalid %header file name ignored
+  lib/command_parse.y:21.10-30: error: invalid %output file name ignored
 
-Tested by loading the riscv64 musl library under qemu-riscv64: the
-integrity test now passes and FIPS140Mode is reported as true.
+Backport the upstream fix which drops these directives and passes the
+output file name with -o instead.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...lder-Use-OBJCOPY-and-report-failures.patch | 96 +++++++++++++++++++
- .../leancrypto/leancrypto_1.9.1.bb            |  1 +
- 2 files changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-crypto/leancrypto/files/0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch
+ ...ths-in-bison-output-defines-directiv.patch | 54 +++++++++++++++++++
+ .../recipes-protocols/frr/frr_10.6.2.bb       |  1 +
+ 2 files changed, 55 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
 
-diff --git a/meta-oe/recipes-crypto/leancrypto/files/0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch b/meta-oe/recipes-crypto/leancrypto/files/0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch
+diff --git a/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch b/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
 new file mode 100644
-index 0000000000..4aa2432db6
+index 0000000000..ac732d9ebc
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/leancrypto/files/0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch
-@@ -0,0 +1,96 @@
++++ b/meta-networking/recipes-protocols/frr/frr/0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch
+@@ -0,0 +1,54 @@
 +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Mon, 19 Oct 2026 23:09:52 -0700
-+Subject: [PATCH] FIPS checker builder: Use $OBJCOPY and report failures
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Tue, 13 Oct 2026 15:33:02 +0300
++Subject: [PATCH] lib: Don't use paths in bison %output/%defines directives
 +
-+The script that inserts the FIPS integrity digest into leancrypto-fips
-+runs the build machine's objcopy. When cross compiling, that objcopy
-+usually cannot read the target ELF file. The failure is not noticed
-+either: "exit $?" after echo returns the status of echo, so the
-+script exits 0, and the library is installed with the placeholder
-+digest. At runtime the integrity test then fails and all algorithms
-+are put into the error state:
++The fix for CVE-2026-56390 rejects any '/' in %output and %header (%defines)
++file names. The directive is then ignored, and bison reports an error
++and exits non-zero, which breaks the build:
 +
-+  ERROR: objcopy command failed: 0
++    invalid %output file name ignored
++    invalid %header file name ignored
 +
-+Use $OBJCOPY when set, as cross build environments export the objcopy
-+for the target there, and keep the exit status so errors fail the
-+build.
++We only used these directives to place the generated files in lib/,
++because the .y.c rule ran bison without -o. Drop them and pass
++`-o $@` instead. With -d, bison derives lib/command_parse.h from the
++-o name, so the generated files stay the same.
 +
-+llvm-objcopy fails when a section to dump does not exist, and some C
-+libraries (e.g. musl on RISC-V) provide no .init section. Extract the
-+init section separately and use an empty file when it is not present,
-+which matches the empty range the linker script provides for it.
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
 +
-+Upstream-Status: Pending
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b7ad39d799d98c982713b29c1d0ba6d49691308b]
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ addon/fips_integrity_checker_elf_generator.sh | 34 +++++++++++++------
-+ 1 file changed, 23 insertions(+), 11 deletions(-)
++ lib/command_parse.y | 4 ----
++ lib/subdir.am       | 2 +-
++ 2 files changed, 1 insertion(+), 5 deletions(-)
 +
-+diff --git a/addon/fips_integrity_checker_elf_generator.sh b/addon/fips_integrity_checker_elf_generator.sh
-+index 10628f5..1675f23 100755
-+--- a/addon/fips_integrity_checker_elf_generator.sh
-++++ b/addon/fips_integrity_checker_elf_generator.sh
-+@@ -9,7 +9,7 @@ RODATASEGMENT=".lc_fips_rodata"
-+ FIPSDATASEGMENT=".lc_fips_integrity_data"
-+ SECOUTFILE="extracted_sections.digest"
++diff --git a/lib/command_parse.y b/lib/command_parse.y
++index bc04bc93bb4c..4d9377e5df87 100644
++--- a/lib/command_parse.y
+++++ b/lib/command_parse.y
++@@ -16,10 +16,6 @@
++ %define api.pure full
++ /* define api.prefix {cmd_yy} */
 +
-+-OBJCOPY="objcopy"
-++OBJCOPY="${OBJCOPY:-objcopy}"
-+ CAT="cat"
-+ CUT="cut"
++-/* names for generated header and parser files */
++-%defines "lib/command_parse.h"
++-%output  "lib/command_parse.c"
++-
++ /* note: code blocks are output in order, to both .c and .h:
++  *  1. %code requires
++  *  2. %union + bison forward decls
++diff --git a/lib/subdir.am b/lib/subdir.am
++index 20947c306d60..dafebacf8e7a 100644
++--- a/lib/subdir.am
+++++ b/lib/subdir.am
++@@ -537,7 +537,7 @@ CLEANFILES += vtysh/vtysh_cmd.c $(vtysh_cmd_split)
++ .l.c:
++ 	$(AM_V_LEX)$(am__skiplex) $(LEXCOMPILE) $<
++ .y.c:
++-	$(AM_V_YACC)$(am__skipyacc) $(YACCCOMPILE) $<
+++	$(AM_V_YACC)$(am__skipyacc) $(YACCCOMPILE) -o $@ $<
 +
-+@@ -43,30 +43,42 @@ touch $RODATASEGMENT
-+ # Extract sections
-+ $OBJCOPY							\
-+  --dump-section $TEXTSEGMENT=$TEXTSEGMENT			\
-+- --dump-section $INITSEGMENT=$INITSEGMENT			\
-+  --dump-section $RODATASEGMENT=$RODATASEGMENT			\
-+- $SOFILE 2>/dev/null
-++ $SOFILE
-++ret=$?
-++if [ $ret -ne 0 ]
-++then
-++	echo "ERROR: $OBJCOPY command failed: $ret"
-++	exit $ret
-++fi
-++
-++# Not every C library provides an init section (e.g. musl on RISC-V). The
-++# linker script then defines an empty init range, which matches the empty
-++# file created above. llvm-objcopy fails on a missing section, so extract it
-++# separately and only when it is present.
-++$OBJCOPY --dump-section $INITSEGMENT=$INITSEGMENT $SOFILE 2>/dev/null
-+ if [ $? -ne 0 ]
-+ then
-+-	echo "ERROR: $OBJCOPY command failed: $?"
-+-	exit $?
-++	: > $INITSEGMENT
-+ fi
-+
-+ # Merge sections into file and create digest
-+ $CAT $TEXTSEGMENT $INITSEGMENT $RODATASEGMENT | $HASHER -b - > $SECOUTFILE 2>/dev/null
-+-if [ $? -ne 0 ]
-++ret=$?
-++if [ $ret -ne 0 ]
-+ then
-+-	echo "ERROR: $CAT command failed: $?"
-+-	exit $?
-++	echo "ERROR: $CAT command failed: $ret"
-++	exit $ret
-+ fi
-+
-+ # Insert data into library file using an atomic operation
-+ trap "rm -f $SOFILE.$$" 0 1 2 3 15
-+ cp $SOFILE $SOFILE.$$
-+ $OBJCOPY --update-section $FIPSDATASEGMENT="$SECOUTFILE" $SOFILE.$$
-+-if [ $? -ne 0 ]
-++ret=$?
-++if [ $ret -ne 0 ]
-+ then
-+-	echo "ERROR: $OBJCOPY command failed: $?"
-+-	exit $?
-++	echo "ERROR: $OBJCOPY command failed: $ret"
-++	exit $ret
-+ fi
-+ mv -f $SOFILE.$$ $SOFILE
-diff --git a/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb b/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-index c5c7bc104a..17f7f0a7f7 100644
---- a/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-+++ b/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=htt
-            file://leancrypto-tests.sh \
-            file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
-            file://0002-Linker-script-Handle-a-missing-.init-section.patch \
-+           file://0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch \
++ #
++ # generated sources & extra foo
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.6.2.bb b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
+index b72af9f244..f4a98e2471 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.6.2.bb
+@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+
+ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
+            file://frr.pam \
++           file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
             "
- SRCREV = "65eb4e7e84e3a5499460a66b1623ccf6c59628b1"
+ SRCREV = "c8efb33af96f9f1220d0fdda6ac049f9126edd6f"
 
