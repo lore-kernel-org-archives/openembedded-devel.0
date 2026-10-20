@@ -1,189 +1,145 @@
-Subject: Re: [meta-python][scarthgap][PATCH 00/13] python3-aiohttp: fix multiple CVEs
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4902.1792494254817517730
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Oct 2026 04:04:14 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yn+48HEw;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3ace1f3897cso1779826a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 04:04:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792494254; x=1793099054; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
+        b=Yn+48HEwi3zQ9M8o2BtcYvo3gCTsq8b45JglDNHkDhyzknMYwR7tPvnz6iRSuEGyA0
+         rDMIOAKO+SAa9FVanFuGcV8Kn9sv8/iJgXyoXkKufs4SHzR24P1OL01aLZDofWenMsL1
+         GIvvk57tFHcxepj02e9xkk338NUobhBXMZxdDoZ+/QG6RU5l6t/BMEMSAJyEl2bYWzfa
+         DFZAAfErjRSBSMZkdxkhquDLJRQAtSNQvw757Bz5C6KmT22ilnuiKY3mb0gijyqv1iKd
+         UN9dHPTud/zB/OMXF0n6SMNy21Z3KTTopuPqzTrHAE8AeACI5RWlhROwrHu7v+x5qEKG
+         /uag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792494254; x=1793099054;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
+        b=iHNoemQFZS3tnf1EBYOdam9WH8GjENgIvo3X+0o5NteVr/ykdqCfsdXqPtz2IwBd9K
+         A2qjHRRdPZ26OiqFOiSOqW8zqPHlsJpT8BScTfmTDJVN9LtH9o25GROoTMyZsHTJumkM
+         JLs/L3dqSZmUI8c4KhHfC4T4inAsS5EI4zUKYf+mgnRDhXb9ZdZ0zJWBlG7rpdS41VcP
+         S6qWp+WqI/ZDfaJb8C4CgIT7SqLMCM1QpQYliY9mfGs4PCCfCJaUBnxrHtXwRjQn+AWT
+         TOKWxJk3ro8Mk8938S+F5/BgliJSqolakSfVtHGZs3NONok58KQHNvE0BRfL2GlJJIEm
+         sEyg==
+X-Gm-Message-State: AFq9FYIP0Lt9p/o8Z2nTvwan7ITgTHr5Z4M5lXxALmUGCL4XsN5agOoD
+	gFu2aI51Yg132Q8y5rdMdzTROf6CIX4pancBXCAsOpD3SqBpSWSPx+1KCbZhyg==
+X-Gm-Gg: AYBFou13k28xm4gBxUU9nTFXFRMrG51nmX3YCEApEf7WAGMlzOgSaWR/DiESTLwY4lX
+	fUaauexw8tCVuO/YiSqUO9iP2xanIixn4tp8GdjrsEu/x4KGJX1fukWmqSXiFtIW1U3NxrW9ySj
+	eW0wh4V7qCHJt4dGxqZJ85UTdbTKjC4WEmo7aoVGcur9uO8y+2QpiVVteE3HumbGGiaZhVuFkpP
+	CcHgBNN7r/6mG1Pg1MM0ZZWUELMLYBdWzBIGKuxXeiFQGyYp10x0RJq/5eiol/J5lwCctlAlO5g
+	Za0RR0vNrvEt535mVg55COW5FFE+YG2txGMAOZ0q6TGk2UyN2ejS0JrqqvpCF6fg5K1yIeoBqzw
+	ChwCs4kMYNuqJS6WxpSSm0o4rM3uTY/1szt6+pvmSgUBIbkBUyB6zcs1xNINDR79DCvPfw46fSQ
+	RIV+pCgOcE+xqB9Lyq4ekS+xNC4QyzvN1Ov+5ZfSrMDPTcNpEhQiRCa31JKxC9Csr9AM904DICi
+	nKNtkCpHpl+wA8SyTOc3pVeKct4SrmNkz+kgds=
+X-Received: by 2002:a17:90b:4c4c:b0:3ac:a491:3cf8 with SMTP id 98e67ed59e1d1-3acef52ae1emr9165540a91.43.1792494254095;
+        Tue, 20 Oct 2026 04:04:14 -0700 (PDT)
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ad60f2c785sm3046683a91.7.2026.10.20.04.04.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Oct 2026 04:04:13 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
-X-Originating-Location: Mumbai, Maharashtra, IN (151.186.177.83)
-X-Originating-Platform: Windows Edge 155
-User-Agent: GROUPS.IO Web Poster
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 4/4] libvncserver: patch CVE-2026-50538
+Date: Wed, 21 Oct 2026 00:03:57 +1300
+Message-ID: <20261020110357.1995120-4-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261020110357.1995120-1-ankur.tyagi85@gmail.com>
+References: <20261020110357.1995120-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Date: Mon, 19 Oct 2026 22:56:20 -0700
-References: <20260928174323.1810308-1-dkelaiya@cisco.com>
-In-Reply-To: <20260928174323.1810308-1-dkelaiya@cisco.com>
-Message-ID: <2495981.1792475780320719427@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="MnzTMouZ0eloWLWuQQLS"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 05:56:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131154
-
---MnzTMouZ0eloWLWuQQLS
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 11:04:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131158
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hello Anuj, Khem,
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Is there an update on the review, or anything you=E2=80=99d like me to chan=
-ge in this series?
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2026-50538
 
-Thanks,
-Darsh
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ .../libvncserver/CVE-2026-50538.patch         | 49 +++++++++++++++++++
+ .../libvncserver/libvncserver_0.9.15.bb       |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
 
-On Mon, Sep 28, 2026 at 11:13 PM, Darsh Kelaiya -X (dkelaiya - E INFOCHIPS =
-PRIVATE LIMITED at Cisco) wrote:
-
->=20
-> From: Darsh Kelaiya <dkelaiya@cisco.com>
->=20
-> Backport thirteen upstream aiohttp security fixes to the 3.9.5 recipe on
-> scarthgap.
->=20
-> The corresponding fixes are available in aiohttp 3.14.0 and 3.14.1.
-> Carry them as focused backports instead of upgrading the recipe because
-> the 3.14 release also introduces new APIs, deprecations, and
-> backward-incompatible behavior outside the security scope.
->=20
-> The individual commits retain the upstream fix provenance and public
-> advisory references for each CVE.
->=20
-> Testing:
-> - Applied the thirteen layer commits to the upstream scarthgap baseline.
-> - Applied all fifteen embedded patches to aiohttp 3.9.5 in series order
-> with no conflicts or fuzz.
-> - Package build and image build validation completed successfully.
->=20
-> Darsh Kelaiya (13):
-> python3-aiohttp: fix CVE-2026-34519
-> python3-aiohttp: fix CVE-2026-34516
-> python3-aiohttp: fix CVE-2026-34517
-> python3-aiohttp: fix CVE-2026-34520
-> python3-aiohttp: fix CVE-2026-34525
-> python3-aiohttp: fix CVE-2026-47265
-> python3-aiohttp: fix CVE-2026-50269
-> python3-aiohttp: fix CVE-2026-54274
-> python3-aiohttp: fix CVE-2026-54275
-> python3-aiohttp: fix CVE-2026-54277
-> python3-aiohttp: fix CVE-2026-54278
-> python3-aiohttp: fix CVE-2026-54279
-> python3-aiohttp: fix CVE-2026-54273
->=20
-> .../python3-aiohttp/CVE-2026-34516.patch | 356 +++++++
-> .../python3-aiohttp/CVE-2026-34517.patch | 65 ++
-> .../python3-aiohttp/CVE-2026-34519.patch | 638 ++++++++++++
-> .../python3-aiohttp/CVE-2026-34520.patch | 121 +++
-> .../python3-aiohttp/CVE-2026-34525_p1.patch | 128 +++
-> .../python3-aiohttp/CVE-2026-34525_p2.patch | 331 +++++++
-> .../python3-aiohttp/CVE-2026-47265.patch | 61 ++
-> .../python3-aiohttp/CVE-2026-50269.patch | 166 ++++
-> .../python3-aiohttp/CVE-2026-54273_p1.patch | 798 ++++++++++++++++
-> .../python3-aiohttp/CVE-2026-54273_p2.patch | 181 ++++
-> .../python3-aiohttp/CVE-2026-54274.patch | 195 ++++
-> .../python3-aiohttp/CVE-2026-54275.patch | 124 +++
-> .../python3-aiohttp/CVE-2026-54277.patch | 96 ++
-> .../python3-aiohttp/CVE-2026-54278.patch | 209 ++++
-> .../python3-aiohttp/CVE-2026-54279.patch | 317 ++++++
-> .../python/python3-aiohttp_3.9.5.bb | 15 +
-> 16 files changed, 3801 insertions(+)
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34516.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34517.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34519.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34525_p1.pat=
-ch
->=20
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34525_p2.pat=
-ch
->=20
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-47265.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-50269.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p1.pat=
-ch
->=20
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.pat=
-ch
->=20
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54274.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54275.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54279.patch
->=20
-> --
-> 2.35.6
-
---MnzTMouZ0eloWLWuQQLS
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div>Hello Anuj, Khem,<br /><br />Is there an update on the review, or anyt=
-hing you&rsquo;d like me to change in this series?<br /><br />Thanks,<br />=
-Darsh<br /><br />On Mon, Sep 28, 2026 at 11:13 PM, Darsh Kelaiya -X (dkelai=
-ya - E INFOCHIPS PRIVATE LIMITED at Cisco) wrote:</div>
-<div>
-<blockquote>From: Darsh Kelaiya &lt;dkelaiya@cisco.com&gt;<br /><br />Backp=
-ort thirteen upstream aiohttp security fixes to the 3.9.5 recipe on<br />sc=
-arthgap.<br /><br />The corresponding fixes are available in aiohttp 3.14.0=
- and 3.14.1.<br />Carry them as focused backports instead of upgrading the =
-recipe because<br />the 3.14 release also introduces new APIs, deprecations=
-, and<br />backward-incompatible behavior outside the security scope.<br />=
-<br />The individual commits retain the upstream fix provenance and public<=
-br />advisory references for each CVE.<br /><br />Testing:<br />- Applied t=
-he thirteen layer commits to the upstream scarthgap baseline.<br />- Applie=
-d all fifteen embedded patches to aiohttp 3.9.5 in series order<br />with n=
-o conflicts or fuzz.<br />- Package build and image build validation comple=
-ted successfully.<br /><br />Darsh Kelaiya (13):<br />python3-aiohttp: fix =
-CVE-2026-34519<br />python3-aiohttp: fix CVE-2026-34516<br />python3-aiohtt=
-p: fix CVE-2026-34517<br />python3-aiohttp: fix CVE-2026-34520<br />python3=
--aiohttp: fix CVE-2026-34525<br />python3-aiohttp: fix CVE-2026-47265<br />=
-python3-aiohttp: fix CVE-2026-50269<br />python3-aiohttp: fix CVE-2026-5427=
-4<br />python3-aiohttp: fix CVE-2026-54275<br />python3-aiohttp: fix CVE-20=
-26-54277<br />python3-aiohttp: fix CVE-2026-54278<br />python3-aiohttp: fix=
- CVE-2026-54279<br />python3-aiohttp: fix CVE-2026-54273<br /><br />.../pyt=
-hon3-aiohttp/CVE-2026-34516.patch | 356 +++++++<br />.../python3-aiohttp/CV=
-E-2026-34517.patch | 65 ++<br />.../python3-aiohttp/CVE-2026-34519.patch | =
-638 ++++++++++++<br />.../python3-aiohttp/CVE-2026-34520.patch | 121 +++<br=
- />.../python3-aiohttp/CVE-2026-34525_p1.patch | 128 +++<br />.../python3-a=
-iohttp/CVE-2026-34525_p2.patch | 331 +++++++<br />.../python3-aiohttp/CVE-2=
-026-47265.patch | 61 ++<br />.../python3-aiohttp/CVE-2026-50269.patch | 166=
- ++++<br />.../python3-aiohttp/CVE-2026-54273_p1.patch | 798 ++++++++++++++=
-++<br />.../python3-aiohttp/CVE-2026-54273_p2.patch | 181 ++++<br />.../pyt=
-hon3-aiohttp/CVE-2026-54274.patch | 195 ++++<br />.../python3-aiohttp/CVE-2=
-026-54275.patch | 124 +++<br />.../python3-aiohttp/CVE-2026-54277.patch | 9=
-6 ++<br />.../python3-aiohttp/CVE-2026-54278.patch | 209 ++++<br />.../pyth=
-on3-aiohttp/CVE-2026-54279.patch | 317 ++++++<br />.../python/python3-aioht=
-tp_3.9.5.bb | 15 +<br />16 files changed, 3801 insertions(+)<br />create mo=
-de 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-3451=
-6.patch<br />create mode 100644 meta-python/recipes-devtools/python/python3=
--aiohttp/CVE-2026-34517.patch<br />create mode 100644 meta-python/recipes-d=
-evtools/python/python3-aiohttp/CVE-2026-34519.patch<br />create mode 100644=
- meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-34520.patch<b=
-r />create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/=
-CVE-2026-34525_p1.patch<br />create mode 100644 meta-python/recipes-devtool=
-s/python/python3-aiohttp/CVE-2026-34525_p2.patch<br />create mode 100644 me=
-ta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-47265.patch<br /=
->create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE=
--2026-50269.patch<br />create mode 100644 meta-python/recipes-devtools/pyth=
-on/python3-aiohttp/CVE-2026-54273_p1.patch<br />create mode 100644 meta-pyt=
-hon/recipes-devtools/python/python3-aiohttp/CVE-2026-54273_p2.patch<br />cr=
-eate mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-20=
-26-54274.patch<br />create mode 100644 meta-python/recipes-devtools/python/=
-python3-aiohttp/CVE-2026-54275.patch<br />create mode 100644 meta-python/re=
-cipes-devtools/python/python3-aiohttp/CVE-2026-54277.patch<br />create mode=
- 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-54278.=
-patch<br />create mode 100644 meta-python/recipes-devtools/python/python3-a=
-iohttp/CVE-2026-54279.patch<br /><br />-- <br />2.35.6</blockquote>
-</div>
-
---MnzTMouZ0eloWLWuQQLS--
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+new file mode 100644
+index 0000000000..da01736323
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+@@ -0,0 +1,49 @@
++From e824e7d8ea71feccb81aeb34771eb83e052c3fe2 Mon Sep 17 00:00:00 2001
++From: "Bas.Levering" <45083161+Bazskillz@users.noreply.github.com>
++Date: Fri, 29 May 2026 09:08:28 +0200
++Subject: [PATCH] Merge commit from fork
++
++HandleTightBPP's basic-compression loop wrote each batch of decompressed
++rows straight into client->frameBuffer (via FilterCopy/Palette/Gradient)
++and only compared the running total against the rectangle height rh after
++the loop. A malicious or man-in-the-middle server can send a zlib stream
++that decompresses to more rows than rh, so the writes run past the end of
++the framebuffer allocation: an attacker-controlled heap out-of-bounds
++write reachable in a default build (Tight is advertised when built with
++libz+libjpeg), pre-authentication, from one FramebufferUpdate.
++
++Clamp numRows to the remaining height before calling filterFn, matching
++the existing house style (trle.c and the Tight JPEG path already clamp to
++the rectangle height).
++
++Co-authored-by: Bas Levering <basdaniel3@gmail.com>
++(cherry picked from commit 540332be3e0acc566fa64da6f1b4680c72c724dd)
++
++CVE: CVE-2026-50538
++Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/540332be3e0acc566fa64da6f1b4680c72c724dd]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/libvncclient/tight.c | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
++
++diff --git a/src/libvncclient/tight.c b/src/libvncclient/tight.c
++index dad5514f..3ee0d5e0 100644
++--- a/src/libvncclient/tight.c
+++++ b/src/libvncclient/tight.c
++@@ -341,6 +341,16 @@ HandleTightBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++ 
++       numRows = (bufferSize - zs->avail_out) / rowSize;
++ 
+++      /* The decompressed stream is server-controlled and may yield more rows
+++         than the rectangle's declared height.  filterFn() writes directly into
+++         client->frameBuffer, so clamp here before writing to avoid running past
+++         the framebuffer (heap out-of-bounds write).  The post-loop
+++         "rowsProcessed != rh" check happens too late. */
+++      if (numRows > rh - rowsProcessed) {
+++	rfbClientLog("Tight: too many scan lines after decompression.\n");
+++	return FALSE;
+++      }
+++
++       filterFn(client, rx, ry+rowsProcessed, numRows);
++ 
++       extraBytes = bufferSize - zs->avail_out - numRows * rowSize;
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
+index e2f995947f..ff7327c6cf 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
+@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag
+            file://CVE-2026-44988.patch \
+            file://CVE-2026-32854.patch \
+            file://CVE-2026-32853.patch \
++           file://CVE-2026-50538.patch \
+ "
+ SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
+ 
