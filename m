@@ -1,147 +1,101 @@
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8985.1792456226415169535
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8837.1792456228107606364
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2026 17:30:26 -0700
+ Mon, 19 Oct 2026 17:30:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Kh1qBWW4;
- spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-3282db206d3so4573339eec.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 17:30:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QMliHPiK;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-366421dc8ebso44004eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2026 17:30:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792456226; x=1793061026; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4KE72+aAwlXuXw+iE9EZfyt6L/a7/zE+qAkJnNkpGgk=;
-        b=Kh1qBWW4kIPmU5sAyWwbpBntfOChEspC4E3SSbI1+VunwjKB5PalovtvzyqKZ7iKAE
-         8rVRdGFwIopBlDSgXcJ+aRxfgXQ6iPvR2NDjMYWwPItV+5fvRo9uaicStIcOYkpSbARV
-         Dbv+Opbobpa0lz//P0nOIJQVwCokYXSAcOGHhCQttJM3rcANwJnNZ4gBz9XPffrkXaQM
-         4lkPIYidZ7JlviAdUldxCO4pSWie7BtU1sgR5ZatuwtL9NY4Hw05518VNDYSrlMWiAZw
-         czCqfpwPxI4mEp7fFXYZB6ovZiTpLYRdaY+Fy+BjNVxEetr5ojUo5C/+Yo3rdT/lE9WA
-         yR3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792456226; x=1793061026;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792456227; x=1793061027; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4KE72+aAwlXuXw+iE9EZfyt6L/a7/zE+qAkJnNkpGgk=;
-        b=e4DnnNQZSetTv9cg3CBvibRnrBqBpDj2QxOyfPX0/A48vuTCLzxUmojbH5lZTvfB8M
-         LivxorVMljaB7zLdMo8bG8TGnMq8uZit1QuDc5wkDBC6xQ6wImcjiIkF75d5QklCs5+V
-         uJVVjGlYnfX8VO+ZxylIjq0XNo6uamFlDs6Vx3QG9pEVJpz/9fFj7bF7x5RKy5VPKcEp
-         cKAk91gx30wU55r/YTJzUPgREgxUcL/6yUPMavtTrsIIgrZrHplaJZJez4ohxGwEgxFd
-         +7Co0zX5acCVnQyJ7pk6ACbx6k9H5kXo3o1tnpCAKsLJJJH+plt/nc0wIejhtqxqqrNb
-         iAcA==
-X-Gm-Message-State: AFq9FYKmb+kVmAjbUOAAvKc3PiFRqjdmC2hUcWTiuMRPuv0cigWnITIo
-	RVUaNRNr3jYVk2CJ/lp+n4ScMlo7NB0pvnN/QabPhDC44HKewH4vrG2r3xBKr1FSTDI=
-X-Gm-Gg: AYBFou17bdte9bgkAJBbxJOw81I4V2YsZ6nqxtcfBpaghvHuhgCIZPHjNxoclrvqJCA
-	5PufK30ZWAQy3qPTuNg5vP0ugi+rJfiurdSOtv565NgZYB2GXoS70KsY+LM1YqrndG/a4R7Xql5
-	oXyKd3uyDX7sfGvjmzld8lbyieI5e3ssa3uvp/SIX6ovCLzfStcv0bgnbhDva3xY5ZtNO6xbPcr
-	wuCbTc6xoToZ1hdshJCjXufAObd4mEZUnlL4s9jVgKqpST9Z7aMMXcuc8cJu/eWssgbbZoIfLPi
-	lnK1WXeAItfmsV1uaH5sC74KFtIUTtjcFt7mf3k/tp7rFaWm9g/15phMSz+I91DbG2LyzsKvEVE
-	Zra8dMG3RG/+Eu/arKIwStbmzC7HvVyasZ/zntu1h+POQ026SvOPptf4L8GjNZj9NTgd50BaW2X
-	MYBix+cXUb2Wt+Xpu80JzUPbyNDfklzTfcBsvHHbU1IRwqq008e0lnqbkby9eLPFAQL0HZvJ4qu
-	R/QdAGBmTi2lntzMhp5U2MEyhv3Ds3gnD7d6yqCrqWSVb1f63UYra3ReYyFlW1j21b/umpdKh2h
-	a4oG6FL4QRtk/gzoWnQZ/kyQ3puuyEOb6434YNPuyxvivxmRgl6L6VsVxJsjnDrCx8sfTSx0Tlk
-	+8IBrqUfBo8qTx01/GTOQjWZ1estuRHThZjWkcWceoh+peyy/WJ4dAFkdcqGo02tzuIvCORDjMz
-	DxklfwQXgQ0RU6FvgHsmsgAvnNZ3/5pexypeaq5uL/fApIsoNs7dK6eFeV
-X-Received: by 2002:a05:7300:e5c2:b0:352:4f11:8118 with SMTP id 5a478bee46e88-361a3813baamr13365903eec.40.1792456225538;
-        Mon, 19 Oct 2026 17:30:25 -0700 (PDT)
+        bh=EThvYXEKuRLbkWE8nf6hhe7J8ap8ghYw/FsA6cM52Lw=;
+        b=QMliHPiKXHLviLmn7Y5PLQMZM7PtaviBtgvbMxKigfa4+CroCWJig802Wf1tj0MveW
+         8l9o+Uy4jZ1HXVH1Zr6lpSMhpYDU+a/TxYkKsEFBByK40FzoO74pWOQPC1rwGk85DLUA
+         /hO0bQfhTkkAmS2NUJYOaAsnMIlD/WA/mcIf13vDsIsYH30OCscvKwTAvtnOv0aGJ+Pl
+         wqpva1nStVk5UPnpQuxJKP+TYi5ud4jDzjYbksuSaB6W0acER2dYjpQIuNRzRRFqW9KB
+         LoZdO5YzvDLhUnPFbtWsmDJTuwA7e9/nWn1pcaOewdPUIQArfYXIqHVFN6cCNRr8+eNb
+         42aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792456227; x=1793061027;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=EThvYXEKuRLbkWE8nf6hhe7J8ap8ghYw/FsA6cM52Lw=;
+        b=hMLnKkxeVpoEwcdOivjSB7vwLrLt2WkZy8WdNHeU/rHp7ZB3uEEDKaFdLvsbZpIp+k
+         ybZqCMU4Cn9YucQ+/noiTS7V7dhEIx3mX4qxemP3GKX226vx7z9d35CqRsGGdXxUGNQv
+         CIHZdG5TRgsuDKmwxlegp8zD1Il0tNxqhe6vI3s0Hg4Oi+KnCfYswzCT19uVAbCyAH13
+         ysGhAPCyWykz8XJrJvCfb9Z/2WdVXwS8huM0g/QsTN26MZ59Kt2fFsqUPhf4eIV0XlM2
+         WRjvZzg/cQbJY6WGjSQNo1TxS12QOJxri7/Gnpeww35RxeF67agB30fdRAwEmkybv/9J
+         vYUA==
+X-Gm-Message-State: AFq9FYLOtfdQFk4nCYI3DJoJs5icq/gcN3zX7+XTiEqFmQXW6Zq7+s6l
+	GnFmCNuZwycPQQRwQa18ZAkauCw9Ey9KDHxqSj8wzJxDU6x5D5gNoje37vw5RTJvjCI=
+X-Gm-Gg: AYBFou0GFPF5ZuEfEyGMpaWv+FuDeLRKr5x2/HkP9B+vr1uuN2zSWX5ATtukERLeTxW
+	cir1muLKw6ixm8IW6431c0w6pbwz7iKwFf2m1+n2tRTKCtzES0CX7AI4cyAJIQw+YGPo65yi1lT
+	A2FQqrA0MJdjMWJ+gJfmhXGRDmgfymZN9J7NhKUFzeL7uvMRDMm8kls/34b+JdbO+HtgakOGzgC
+	6G5GzNl6bYcTZXjrCLsJNTWY16BDCuZHHhwIOAXlSkFPBaLknH3yLwJHfmdI4CGrcOsURT1UrZP
+	aa0/VDhp268332oYPrGX0zI0epbX+d6nGyFLaT/eVx3UNt84+RtSz1lFdZ0HCB2GrMV7nV25w2T
+	DHi2BUWEgZ2BctQLX8h8KnGOdJnS5crBXkhXqyaj/6fUHywe60CRhRRDqtk7komW+YwblOjFBjO
+	KvFpbDA8ZRlktBKR8sGd+JRsGRvkekobztknPaauKGkEwz/Q2ASoefY96jsBt1icpILwLNCCzIn
+	HOhvDRPNhnfBXC7oYrzvlwBjP8qnbQQNKnYBitob+Lan/HaQDYzd8cMqffLq8MJZviFD3dTH31A
+	yjNJ5NRyEH4+XtDN8wivtPDLexl0X1LW3amkiRtv1dh6Iu7ptczOg0yfDS42ZsoOCDtbpgwyORU
+	VOxMSwK42BXEa6fXNnCdlOBhEkSWXfcgfUqiNPSCKQc67q/vtGZWCmFyusmpmOE4V71Am6PwJyz
+	QekjlGKgMz/JY9ulPycUrzEJD2f0TMdZzFNV0ucpCl52/e1aM=
+X-Received: by 2002:a05:7301:6197:10b0:360:aeee:9b8a with SMTP id 5a478bee46e88-365fa4906e4mr829667eec.8.1792456227285;
+        Mon, 19 Oct 2026 17:30:27 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm35596579eec.13.2026.10.19.17.30.24
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm35596579eec.13.2026.10.19.17.30.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 17:30:24 -0700 (PDT)
+        Mon, 19 Oct 2026 17:30:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 1/5] mutter: Fix build without remote desktop support
-Date: Mon, 19 Oct 2026 17:30:18 -0700
-Message-ID: <20261020003022.1913623-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 2/5] librice: Point bindgen at the target sysroot
+Date: Mon, 19 Oct 2026 17:30:19 -0700
+Message-ID: <20261020003022.1913623-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261020003022.1913623-1-khem.raj@oss.qualcomm.com>
+References: <20261020003022.1913623-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 00:30:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131147
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 00:30:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131148
 Content-Type: text/plain; charset="utf-8"
 
-The clipboard session is always built, as input capture uses it, but
-the remote selection source it calls into was only built with
--Dremote_desktop=true, so libmutter failed to link with the default
-PACKAGECONFIG:
+rice-c/build.rs runs bindgen without any target flags, so libclang
+parsed the build host headers in /usr/include, which fails when cross
+compiling, e.g. for riscv64/musl:
 
-  ld.lld: error: undefined symbol: meta_selection_source_remote_new
+  /usr/include/bits/floatn.h:97:9: error: __float128 is not supported on this target
 
-Build the remote selection source unconditionally.
+Pass the target arch flags, sysroot and triple via
+BINDGEN_EXTRA_CLANG_ARGS, as thin-provisioning-tools does.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ection-source-without-remote-desktop.patch | 42 +++++++++++++++++++
- .../recipes-gnome/mutter/mutter_51.0.bb       |  4 +-
- 2 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/mutter/files/0002-build-Build-remote-selection-source-without-remote-desktop.patch
+ meta-oe/recipes-support/librice/librice_0.4.3.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/files/0002-build-Build-remote-selection-source-without-remote-desktop.patch b/meta-gnome/recipes-gnome/mutter/files/0002-build-Build-remote-selection-source-without-remote-desktop.patch
-new file mode 100644
-index 0000000000..094270536e
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/mutter/files/0002-build-Build-remote-selection-source-without-remote-desktop.patch
-@@ -0,0 +1,42 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Sun, 18 Oct 2026 17:50:00 -0700
-+Subject: [PATCH] build: Build remote selection source without remote desktop
-+
-+meta-clipboard-session.c is built unconditionally, as input capture
-+uses it, but it calls into meta-selection-source-remote.c, which is only
-+built with remote desktop support. Linking libmutter with
-+-Dremote_desktop=false fails:
-+
-+  ld.lld: error: undefined symbol: meta_selection_source_remote_new
-+
-+The remote selection source has no remote desktop dependencies, so
-+build it unconditionally as well.
-+
-+Upstream-Status: Pending
-+AI-Generated: Uses Claude Code
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ src/meson.build | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -345,6 +345,8 @@
-+   'core/meta-selection.c',
-+   'core/meta-selection-source.c',
-+   'core/meta-selection-source-memory.c',
-++  'core/meta-selection-source-remote.c',
-++  'core/meta-selection-source-remote.h',
-+   'core/meta-session-manager.c',
-+   'core/meta-session-state.c',
-+   'core/meta-sound-player.c',
-+@@ -470,8 +472,6 @@
-+     'backends/meta-stream-window.h',
-+     'backends/meta-stream.c',
-+     'backends/meta-stream.h',
-+-    'core/meta-selection-source-remote.c',
-+-    'core/meta-selection-source-remote.h',
-+   ]
-+ endif
-+
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb b/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
-index 66a4666c55..4213e2cc06 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_51.0.bb
-@@ -35,7 +35,9 @@ DEPENDS = " \
+diff --git a/meta-oe/recipes-support/librice/librice_0.4.3.bb b/meta-oe/recipes-support/librice/librice_0.4.3.bb
+index 4017b58271..61934acd88 100644
+--- a/meta-oe/recipes-support/librice/librice_0.4.3.bb
++++ b/meta-oe/recipes-support/librice/librice_0.4.3.bb
+@@ -16,6 +16,11 @@ CARGO_BUILD_FLAGS += " --workspace"
 
- inherit gnomebase gsettings gobject-introspection gettext features_check
+ export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}/libclang.so"
 
--SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
-+SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch \
-+            file://0002-build-Build-remote-selection-source-without-remote-desktop.patch \
-+            "
- SRC_URI[archive.sha256sum] = "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
-
- REQUIRED_DISTRO_FEATURES = "wayland polkit"
++# rice-c/build.rs runs bindgen, point libclang at the target sysroot instead
++# of the build host headers in /usr/include
++BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
++export BINDGEN_EXTRA_CLANG_ARGS
++
+ # rice-c/build.rs builds the internal rice-proto C library in-tree (via
+ # "cargo cinstall") and then locates it through system-deps + pkg-config.
+ # The generated rice-proto.pc carries an absolute prefix pointing at the
