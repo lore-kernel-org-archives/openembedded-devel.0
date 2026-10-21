@@ -1,59 +1,60 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8899.1792580524759797707
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8901.1792580526343596347
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:02:05 -0700
+ Wed, 21 Oct 2026 04:02:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=EhjTfvfu;
- spf=pass (domain: konsulko.com, ip: 209.85.221.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48c45111bebso386788f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:02:04 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=TMgy74f+;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48e00eee27dso421710f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:02:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580523; x=1793185323; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HIJEdrvORFVacUDzFIb2EqbRomgSoJNVzzL6yttO7Ww=;
-        b=EhjTfvfuDBXFfXlX/AS2QiGmFtqISakrabtGhKRN/JFa/nQ7NqfyRsehCQjLDkITNG
-         chfiY/cn1kw+qSfFBViMkAGSyZUN2Y5GmIeih9FwLu77Fcj2lbXYGOYDWu7lHcYy16S/
-         NpdtBHr7Dy8AYuV1WzfvGOV9Mz7LQc1ZUzKqI=
+        d=konsulko.com; s=google; t=1792580524; x=1793185324; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=qNNEB8+wVSpsoZsE7xPplPbuPtJacIjy0MTvQ0UIE0Q=;
+        b=TMgy74f+im/Hr7gcDxvFYji3Wx8RHSorL2faFFwMBAEZeoBMhmePsu6QCy9Dv/Qv34
+         0CQifeVZv6LZYtZk+Dz2RR0Pq7Xo1GwqsatD1tkrviLpq0Cale09ArjHagoNJTgwhtW+
+         d6ieLJEGndOWI+55qQHG78AUiwE0Evo19LIuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580523; x=1793185323;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HIJEdrvORFVacUDzFIb2EqbRomgSoJNVzzL6yttO7Ww=;
-        b=PvkIMeqJTc3bAnTwQbLCw0Tf1kpOwl9bRLrnrMhVmCBrFDaa6l9F/Bux7Gn5OoSELy
-         sRji79yXGsi8XF1Xi6e/xctBPQT29TquIIzJCezraL+xs68GbpIsbzAEAbb6RYAQLbKR
-         HW6Mh5h1dUCNBKTd1j4/FuZh73RlIDGWMWGtoneCYenQF9OUGkZgzL5iizhutHYfgLc3
-         1WGJslzobu7v5aV7MoJHFHKMpicoUEUsgtgEpAZyaKfzAOLg30kRu0wvFHzbtu12fN1k
-         fGTwF1JGHMaY/xwcGi1ncLTPYAeo+8HgbCVX2B/YeEfSHkL7bJAPOYTacvB4kXlh9P44
-         YfcQ==
-X-Gm-Message-State: AFq9FYII5INBa9ggmlIAXeas+6SQkzin8sH/60HZM7XBxocIDkJMJBcZ
-	W/4XXa1Pf1WAqHs+oSbAUJDTa+ehKHWP75OQig5QMPtU8nICbni9Yj8twL2zvjIoorLmWZ0/jy7
-	/X02G
-X-Gm-Gg: AYBFou3u6KbFDKceyNUdCRj5mixote5jqAnh2rKvAGy0mpQKbtpwBzBWpYvKDHawneP
-	u1MEUTWnm4BYoyjJGWt3Moj+Vh2hlHr0x9q+Be04IAo1DTY55FgpMNMWZFCH4e4stFiKBpgHqQe
-	g+PVSi2gONtNAHYz2kJnmGY21SVdJHkoxMeKNQZCqcCTJgoEktMMPpfpNsSECBVqt2RFdiQyMM7
-	YfA3gDKBha2r06CHdwAbMpOCiwwg2D7GbPkT4hXQBt1TIvrgKhrZZLCC6D0GBr//9lH0JEujhlZ
-	QesNvfZWw2osZjXaEIrIQICAd7RX1OLfuC4JGF2dVGF0Xs1RyxuD1Oaqz7f55wRi8NpnlWFdjR5
-	MxL/mNpxm3Y3AVVcW6DQrFAr4gyClTUSujns0XyU0eLiASiwiQx4zNBD2ONjVOVtfzjNyornEM9
-	J1Ox1NfL5ZpiAUN+EWMnyMcX4XoBREP/XJMJx1xap0LhUDna0v+Dkm+XyGDnnyyTTUVRMBedfqE
-	WCjseDzaj71odSLPYKB9O2+G0NXSPKi7sgbn0rCj2bHYQiplsrsrSxp8QBap5UlrYC+3y1781Ni
-	c9QVBv8I5BHCk+Xl1XtUcIlpnP6eGS9gAWAyCz5yCGHi/sUiuG9KAzc1asiZPrdyzOtkXPGzG4z
-	CEgHq
-X-Received: by 2002:a05:6000:604:b0:48e:412:3829 with SMTP id ffacd0b85a97d-48e264a2de6mr3490297f8f.15.1792580521429;
-        Wed, 21 Oct 2026 04:02:01 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792580524; x=1793185324;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qNNEB8+wVSpsoZsE7xPplPbuPtJacIjy0MTvQ0UIE0Q=;
+        b=Rld82042O43clCRWXkiyOJd842s0hSMvplW3FtHynegDw+hqrv47YOzl5jMNuDzq+7
+         Qs/98cx3fd7jVnXyJYmqaqDCXs5u0M3EpPLQ/aQH9X/5G58v6QyFQyNXUh7FBjgwIEIZ
+         H52Oi5oA3Zt6t+z5ar+/96uW3ymaGXTZKli+1gQvUJue/qxP905JYNNPh1zPU4QfR1Rf
+         IJnVp/gLdFOsPvyR6rewmhA9I+8V2JxDnfHXY77UjH0jdzcmCDx6650tVnvzubfIqYB8
+         CC8ClV+K0H6jgU0GX4u0s9tcSWSdXOuEotXSx6CXGjEUXCcjA8zPta4TCVzrxXs///uW
+         5OJA==
+X-Gm-Message-State: AFq9FYIQDpw9tUWjE3SpuWE5kY74abxJsy4URcQdhf7GXRPBdIVH75lH
+	BInqLL3RdATv9b1Hek3eBXp9D4TfyMgJxzEi1Ljpcx8jmS2/R8yN/N+lknyU/ziMPILmyinw6vP
+	B1mRQ
+X-Gm-Gg: AYBFou0CL99fjvAh3aY3fZlGMcNvsh+K7z2mXKAy9kBAIt7peAF3EB9sWhMEFhlfA1D
+	75CroNSNx1exNws6gMcKugu83eaNi8Y3bbJxet1i9gexyxAsuofUxzq6fgYVhqFp2Db5mGp9qQk
+	hQYMjmSWYnwgtJZxqIVVzB8Le4PADMHNVUI//94rsxN6GEsTggEkKHXb8gZqCPG7qL1cccN6qZk
+	0jCELrDq+gR6fiMo3X1xFjQUMJwY2YUEu3MYfTJSZuEvkcBuj8Hqkq2/vaLj84allSwodVhJVk6
+	BcOJ/4aBViVHAtLR7Vqn8NVy2fJFqs7E2p7zPb8uH8T8OLUlotAlvhI0EVuzDOzk7mSvDK3Rgq1
+	YP6a72Loj8pRXaF8pfVij6LhmKDQIS6izOdnn6CZ0UvkkZrQ492J35IEfWw5pwYqHu+VPFdu0v0
+	nw7wffsbwXcbYMe/bs6rz9Dhnhq1n8z50aTshooE/irripob0O+vIOwh44hP8X5GL/scI59/O5J
+	ub8pFA9TL3Aj2FZXASfhi1G5QTEMCHGzDoRDdwLcRBlmMIF/J4kDJY7CVv7vKFCN93DjXKa9dkF
+	HmyizEDvQBVyu+j9UwIirmRUbik/hKliiKlwkcoEwNPHK6lsKuxoR8PUk/y95WWJs1LOSOEIC/P
+	19jgy
+X-Received: by 2002:a05:6000:2d06:b0:48d:ff0d:cfa5 with SMTP id ffacd0b85a97d-48e264e1407mr2319331f8f.47.1792580523441;
+        Wed, 21 Oct 2026 04:02:03 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.02.00
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.02.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:02:00 -0700 (PDT)
+        Wed, 21 Oct 2026 04:02:02 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 33/36] python3-paramiko: Upgrade 5.0.0 -> 5.1.0
-Date: Wed, 21 Oct 2026 14:00:57 +0300
-Message-ID: <20261021110103.1943456-33-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 35/36] python3-pint: Upgrade 0.25.3 -> 0.26.2
+Date: Wed, 21 Oct 2026 14:00:59 +0300
+Message-ID: <20261021110103.1943456-35-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
@@ -61,42 +62,164 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:02:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131293
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131294
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 5.1.0:
+Upgrade to release 0.26.2:
 
-- [Feature]: Added support for the mlkem768x25519-sha256 post-quantum
-  hybrid key exchange method described in draft-ietf-sshm-mlkem-hybrid-kex.
-  It pairs ML-KEM-768 (FIPS 203) with X25519 and is interoperable with
-  OpenSSH 10.0+. The new method is enabled automatically when the
-  installed cryptography library exposes ML-KEM (which requires
-  OpenSSL 3.5+, AWS-LC, or BoringSSL); it is preferred over the
-  existing classical methods when available.
-  See paramiko.kex_mlkem.KexMLKEM768X25519.
+Major changes
+
+- check(), +/-, comparisons and to_reduced_units() now use the
+  active context, e.g. adding kN and kg in a context relating force
+  and mass (#1951, #1748, #1002, #1067)
+- <number> / <offset or logarithmic unit> (e.g. 1 / ureg.degC) now
+  raises OffsetUnitCalculusError; Unit * bool and Quantity * str
+  now raise TypeError
+- Add a deprecation warning to ApplicationRegistry.__getitem__()
+  matching direct registry item access
+- Improve and test / and * between Quantity and Unit, supporting
+  more edge cases; improve their type annotations as well
+- Preserve the registry's Quantity type in wraps annotations for a
+  single return unit, allowing array results to be indexed
+- Improve type annotations for Unit: / and ** keep the unit type,
+  and __copy__/__deepcopy__ keep the registry subclass
+
+Units and parsing
+
+- Update definition of US survey units to reflect the 2022 revision
+  by NIST/NGS
+- Fix fathom to equal two international yards; the old value is now
+  survey_fathom
+- Fix the angular mil so one turn is 6400 mil
+- Parse $ as a unit symbol like £, and raise DefinitionSyntaxError
+  for unknown operators such as & instead of ignoring them
+- Raise DefinitionSyntaxError instead of an internal TypeError for
+  addition or subtraction in unit expressions, e.g. kilo-watt
+- Reject invalid unit aliases at definition time while preserving
+  Unicode and degree aliases
+
+Formatting changes
+
+- Add TypstFormatter and ZeroFormatter to allow formatting to plain
+  Typst and zero package
+- Format temperature units as valid LaTeX (~L) and siunitx (Lx),
+  e.g. \degreeCelsius
+- str() and format() of a Unit now use the registry's fmt_locale,
+  like Quantities
+- Keep the row layout of multi-dimensional arrays in
+  Quantity._repr_html_, as repr does
+- Fix babel not localizing unit names containing underscores, e.g.
+  kilowatt_hour
+- Fix formatting a unit with only negative exponents, e.g. 1 /
+  second, raising IndexError when a locale is set
+- Restore the previous numeric locale when localized formatting
+  raises an exception
+
+NumPy
+
+- Support the numpy.vecdot, numpy.matvec and numpy.vecmat ufuncs
+  and numpy.linalg.vecdot on Quantities
+- Support numpy.repeat on Quantities
+- numpy.sum/numpy.nansum now raise DimensionalityError for a bare
+  non-zero initial on a dimensioned Quantity, like numpy.max
+- Fix numpy.sum/numpy.nansum not converting a Quantity initial
+  value, unlike numpy.max/numpy.min
+- Fix numpy.nanmax/numpy.nanmin raising ValueError on a Quantity
+  initial value, unlike numpy.max/numpy.min
+- Fix numpy.clip not converting the units of the numpy 2.1 min/max
+  keywords
+- Fix recursion in numpy.average with dimensionless Quantity
+  weights and returned=False
+- Fix assigning offset-unit quantities (e.g. degC into a kelvin
+  array) via __setitem__
+- Fix numpy.linspace(..., retstep=True) on Quantities failing to
+  return separate samples and step; offset temperature steps use
+  delta units
+- Fix numpy.block raising TypeError for nested lists of Quantities,
+  e.g. numpy.block([[a, b], [c, d]])
+- Fix numpy.percentile, numpy.nanpercentile, numpy.quantile, and
+  numpy.nanquantile raising RecursionError when q is a Quantity
+- Fix numpy.tensordot, numpy.cross and the other multiplicative
+  functions rejecting positional arguments after the two arrays,
+  e.g. numpy.tensordot(a, b, 1)
+- Fix numpy.mod, numpy.remainder, numpy.fmod and numpy.floor_divide
+  ignoring the units of the divisor when both operands have the
+  same dimensionality, e.g. np.mod(7 m, 200 cm) returned 7 m
+- Fix numpy.unwrap raising TypeError on the period keyword; a
+  Quantity period or discont is converted to the units of the input
+- Fix numpy.diff and numpy.ediff1d not converting the units of
+  Quantity prepend/append and to_end/to_begin values
+- Fix numpy.ptp returning an absolute temperature instead of a
+  delta for offset units
+
+Bugfixes
+
+- Fix converting logarithmic units defined with a compound
+  reference, e.g. volt / ampere, which dropped all but one
+  reference unit
+- Fix compound logarithmic units, e.g. Quantity(-161, "dBm/Hz"),
+  becoming an undefined delta_ unit that could not be converted
+- Fix logarithmic unit conversion and hashing with Decimal
+  magnitudes and non_int_type=Decimal, with or without NumPy
+- Fix UnitRegistry.wraps() converting only the first variadic
+  positional argument and failing on empty *args; preserve
+  keyword-only arguments and defaults
+- Fix UnitRegistry.check() validating the wrong arguments of
+  functions with *args, **kwargs or keyword-only parameters, and
+  failing to call functions with positional-only defaults
+- Fix 1 * unit skipping auto_reduce_dimensions and
+  autoconvert_to_preferred, so it disagreed with every other
+  magnitude
+- Fix to_preferred raising a spurious DimensionalityError for some
+  preferred units
+- Fix RecursionError in find_connected_nodes for long chains of
+  contexts
+- Fix in-place **= changing a Quantity's units when the magnitude
+  update fails, e.g. a fractional power of an integer array
+- Fix Quantity.dimensionality being stale after an in-place
+  operation changes the units
+- Fix Quantity.to_compact() raising OffsetUnitCalculusError for
+  offset units like degree_Celsius with magnitude below 1
+
+Documentation
+
+- Document is_compatible_with in the tutorial
+- Document defining units with a custom Converter
+- Document that Unit equality compares definitions, not values,
+  e.g. kph != km/hour (#1433, #1876)
+- Document how to compare angles that differ by a full turn, e.g.
+  -140 degree and 220 degree, using the modulo operator
+
+Development and packaging
+
+- Remove the babel <= 2.8 upper bound from the babel extra
+- Fix CI never comparing the matplotlib test figures with the
+  baseline images: --mpl was lost with the Travis config in 2021
+- Fix CI installing the numpy matrix pin outside the pixi env on
+  Windows/macOS, so those legs ran the no-numpy test suite
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-paramiko_5.0.0.bb => python3-paramiko_5.1.0.bb}    | 2 +-
+ .../python/{python3-pint_0.25.3.bb => python3-pint_0.26.2.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-paramiko_5.0.0.bb => python3-paramiko_5.1.0.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-pint_0.25.3.bb => python3-pint_0.26.2.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-paramiko_5.0.0.bb b/meta-python/recipes-devtools/python/python3-paramiko_5.1.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-paramiko_5.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-paramiko_5.1.0.bb
-index 7936d8e9a6..96cbb70210 100644
---- a/meta-python/recipes-devtools/python/python3-paramiko_5.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-paramiko_5.1.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
+diff --git a/meta-python/recipes-devtools/python/python3-pint_0.25.3.bb b/meta-python/recipes-devtools/python/python3-pint_0.26.2.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-pint_0.25.3.bb
+rename to meta-python/recipes-devtools/python/python3-pint_0.26.2.bb
+index c04fc48f87..f370da6a57 100644
+--- a/meta-python/recipes-devtools/python/python3-pint_0.25.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pint_0.26.2.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
  
--SRC_URI[sha256sum] = "36763b5b95c2a0dcfdf1abc48e48156ee425b21efe2f0e787c2dd5a95c0e5e79"
-+SRC_URI[sha256sum] = "239b5f9b2a53006cd54f83cf8495ee742083708ead947882c8dd2786de79f39b"
+ inherit pypi python_hatchling ptest-python-pytest
  
+-SRC_URI[sha256sum] = "f8f5df6cf65314d74da1ade1bf96f8e3e4d0c41b51577ac53c49e7d44ca5acee"
++SRC_URI[sha256sum] = "391e5d2fc01fdb121c113b8eb47386688575542c1f5144c465ff318bf5133573"
  
- inherit pypi python_setuptools_build_meta
+ DEPENDS += "python3-hatch-vcs-native"
+ 
 -- 
 2.47.3
 
