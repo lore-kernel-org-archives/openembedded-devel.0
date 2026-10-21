@@ -1,98 +1,61 @@
-Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2930.1792600038645625555
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2931.1792600038913332018
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 09:27:18 -0700
+ Wed, 21 Oct 2026 09:27:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=J8WXyR3t;
- spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-675676afc3cso967263d50.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:27:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792600038; x=1793204838; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nqAL9RaW/OS0m7HuMP06qaul/hRiwEw2nZwV7TIXI0w=;
-        b=J8WXyR3tPYRPiB54AW6I6cgJSpzu2kci7S0qlwrH6ziclr2FDfj1dZZszzrWAdC352
-         wRxUvw/I7Yhh+bk1O7vHraWV3qGzRpK7U33+1CCPVlK4uunyVgTrbI2W7r0cUxtHp6Xk
-         Pw0/L0z1C7+JDg+ZdouGhc4ypRys08TwvmkOvfaMk/9OTR+ujA0s+YPn7X1NJFibG7vV
-         rmrPN3PXFvzsQOhmLLhKGGpwdKWez9YNnulzExK7ThGdALlnz9X/Smti2dS0EHVbEKe7
-         3GvuNdpGDTfCWjWZTZ5LS6B+x6ECW/nj5m7ExWR1Aif6GzwXMEP7xuGyO8naIFJakKZ4
-         Xd3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792600038; x=1793204838;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nqAL9RaW/OS0m7HuMP06qaul/hRiwEw2nZwV7TIXI0w=;
-        b=zIJgpJJG+61aNc+lSGQTfbt/pDUYsWgsfwZvIY4tmYHEknMcBB5ILzgot3pqdpzkP5
-         2zy4NvsH5gMSvobTdKulcA+gkXt7E1M0txLMfTpmcBVTtQegMiiebCy8aPdovkBDg7kq
-         qvv5Gr2htVW11OmUtp+ORpd+CFnx+NEFBM/fA5/tkxGaAo/cpulTqve8eEJkRulWIYEy
-         OFnTw1IcfUTxx71yiIjCYdu8Yy4ri+g2Ft3h0jYBb40T19Gd8YedjnuAKad54d0wvETL
-         nwFosCTjhTNiRb13uAeivs5U+CV8vTM9ASD7YNoNVB/YWJE3j9Lr6aW5COBPmByHHf4t
-         ikaA==
-X-Gm-Message-State: AFq9FYLCj9O5octEtIoNe8r7Cgh3kHfSyhv2KeuzCMci/fHYr8uqdDsq
-	nv+L+hhxYJrqFuBeKIUUbKa0PjmFVRohbIsi/MG50pCJwdNTbzdyiiWlRFRN9Tw6
-X-Gm-Gg: AYBFou3hnrgLSF5QEjW4u59n/tWPYOxBWrZLC3Stn8vwNNcOrU9uWnwFgUPe82t7juv
-	UPymFDqVrkzSnLfXhQrgBZQuS+0YdwiTRuGCd/TaVgTVX4Gdxi0NaiFSdf4sk3LI0cB+ympafDY
-	wljnBFzfqxTh/3NJbgx8WQxO9/tWFug5G4H1JN034eJay8mqCTl4YQWXwGLwjGsuYj0l8U7qf1M
-	aGXX5OezYH8Redxj/roRHjyk/z+Ok/G/3FbfTdK18HCPZ5L5IQUfMc/FsNpfQTEqPsvPMDEabID
-	WsbVq3eZKCIaBWGerFo+3BpOL0yL+1hX/TVxPwVMihO+T2K/QY3NCGCEbfIDLs6l3BCYZCB5MWz
-	rSCnQ9quFWKcQdmkICRh9bq/gviK9LWqCIsI03vrG38TMEURuIFRrr7AJupYuEhpUKTEFCiyG4x
-	4R9T1J3xLEuuscsAhYyGykVxhjSQLg5jzV1ngoiy2nKTPMfSQE5Z6I+H2UMxFgExgkb4IXptp1Q
-	i7Zi+qrZEJ1HocjZt0+bYxoHe7FlvjtA7v0Ub7YSUjFq/ZpvJzKbS/pWyeZ+/jy0ljblPEc7AyR
-	z0sU78dhCSFGRVDuaKZpsaj2TH6kqFN70/sFuJXF3Fj1yTVfpsK8o0e8cCvap1/xaQN1RwrNdSf
-	G3dk=
-X-Received: by 2002:a05:690e:1094:10b0:677:b8bb:3443 with SMTP id 956f58d0204a3-67a0e46b3e6mr990678d50.29.1792600037604;
-        Wed, 21 Oct 2026 09:27:17 -0700 (PDT)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.54.204.63])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a0e539f46sm1294418d50.17.2026.10.21.09.27.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 09:27:17 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] php: upgrade 8.2.34 -> 8.2.35
-Date: Wed, 21 Oct 2026 12:27:04 -0400
-Message-ID: <20261021162704.3928361-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@mailbox.org header.s=mail20150812 header.b=TPidWCep;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.152, mailfrom: marek.vasut@mailbox.org)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [IPv6:2001:67c:2050:b231:465::202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4j8vnb2Xq9zKnCs;
+	Wed, 21 Oct 2026 18:27:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1792600035;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HXHqikTTsPFY2L6ZIow1YPOmhWU8EUjk1rxH3c7u5n8=;
+	b=TPidWCepU2FcW6+GHRIcLMU/j1qn+ZPI1lKVvGx/md3CysGnqpO8OOagmAfTTy0RX/DTDk
+	TtVKaZbpbn5l2iUa1tChfYp8FvtPwQQXaPOb5M0gcET+/Mq2FkqjUu5FTVsJWIrige2YcY
+	WPocydSskWMzFpl1K/mXYRe82U1hQ17vaYGu267GoQxl8FDP39V/MLnsR+AxhP+iWu7SrE
+	obubvpgvjNfVWiw64ZYF4kxdi0u1/BV0hXYRt0qmZvQ/OaGM60AD20cNjKAQeJYKiyj3Hb
+	iI1g+4R1qoIXlIZMt0JH5c1xLje4WTCIOvL3yseaU1y4ZtCHPx0HskqgbJaI1g==
+Message-ID: <d1168121-cced-4238-8dee-9c1b1169e484@mailbox.org>
+Date: Wed, 21 Oct 2026 18:27:13 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-filesystems][PATCH] overlayfs-tools: Inhibit tests on
+ configure
+To: Vyacheslav Yurkov <uvv.mail@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Alexander Kanavin <alex@linutronix.de>,
+ Ankur Tyagi <ankur.tyagi85@gmail.com>, Khem Raj <khem.raj@oss.qualcomm.com>
+References: <20261021135357.14928-1-marek.vasut@mailbox.org>
+ <6f762fe7-ddf1-49bf-96bb-8e1d75f575c8@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <6f762fe7-ddf1-49bf-96bb-8e1d75f575c8@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: b903352f905a32c386b
+X-MBO-RS-META: ptesn1wsnmpgf3n5anaz8ou7sho5k1ci
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 16:27:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131303
-Content-Type: text/plain; charset="utf-8"
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131304
 
-This is a security update.  Fixes unauthenticated remote code execution.
+On 10/21/26 5:09 PM, Vyacheslav Yurkov wrote:
+> Thanks for the patch Marek.
+> 
+> Could you please explain how you hit the issue? I can't reproduce it.
+> The sudo is required only for tests, which is a custom meson target. 
+> It's not supposed to be called during configure.
+$ bitbake -c configure overlayfs-tools
 
-CVE-2026-109618 CVE-2026-109619
+on aarch64 (STM32MP25) target (not using the ST layers).
 
-Advisory: https://www.php.net/archive/2026.php#2026-10-21-5
+I would also expect the tests to NOT run during configure.
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.2.35
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-oe/recipes-devtools/php/{php_8.2.34.bb => php_8.2.35.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.34.bb => php_8.2.35.bb} (99%)
-
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.34.bb b/meta-oe/recipes-devtools/php/php_8.2.35.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.34.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.35.bb
-index 41a4a4a4e6..282427d8b3 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.34.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.35.bb
-@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "0467d63a819016811d35fd14f734764813ab149750379790634294c723cd7562"
-+SRC_URI[sha256sum] = "0f43efd1ac24d4f90002c8d4d570bf4c4d59fa14313bf270aae8cf04d9dfdef3"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
--- 
-2.43.0
-
+It also happens in OE wrynose builds, but not in OE scarthgap builds.
