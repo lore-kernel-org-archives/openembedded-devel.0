@@ -1,59 +1,59 @@
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8727.1792580497831140583
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8867.1792580498584656066
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 21 Oct 2026 04:01:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=splq3WG+;
- spf=pass (domain: konsulko.com, ip: 209.85.208.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6b1f4d8e09aso825442a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:37 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=NEFJk0pO;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c40e30c26a4so246421266b.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580496; x=1793185296; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792580497; x=1793185297; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7hBrANeFk7GY2f9YEl6njVCmiAx9zK1XsJoJec7I+Fw=;
-        b=splq3WG+8oRPBxndZW7KlscM4NzwfDNZe0RJotnHSNHSPQa45JaPdn5vXZzdufuPUC
-         WcSUnxQdbnDuvBkUJ2DSqZ1GphXc3/ZuaLeTnINkkOH2CtAL7LLDmh6SJGsYAnw1JVum
-         9Eo4Yi375Vy0F29Z2JvKNqfE2GWhT6bGzfOBc=
+        bh=7dpSX3E6VSUkHz108mGZbbSbPiJJZvx2SmPvawUa8k0=;
+        b=NEFJk0pO8dbMGRc2RNmU4t5FRgqCifCBE/ABOnP5iyYCobHDZtCBKQjanuJ1qRvi1G
+         uXeZTlmlbAe4QtRZPbwR9XN2Qw+Gwjc46ku8oAFCstyxWTQYJwWChd+ijJVlK7U9h65R
+         Mg2lRqpMBKp7ja8pdS9rsdSA3Y1wm3aOvVYgs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580496; x=1793185296;
+        d=1e100.net; s=20260707; t=1792580497; x=1793185297;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7hBrANeFk7GY2f9YEl6njVCmiAx9zK1XsJoJec7I+Fw=;
-        b=glH+Kd3wdXji4+PccRAz+0iyJpM7RrDSLm0/cV7KSY76ykyTbuHErtQWVs1U1kVoG7
-         ayvOETZdnCDHcgR1SK9k27vfd+06DRzs/geFzBOOx7N91pP7kCYoW0jkLOz3gCRv0FTh
-         UNUMIU2m4uOegBlg0isuwnEK8GOkrOxEmRUOGz5lcC5epsXu/STjIpp6sZTOu3joBSWe
-         Y7K79kTjfWEACEMK1MxezCzj2PSBxljLjbxrZjEL2wFDMxyGaRDNtGcJFxRuBSyh1AlK
-         9MCAEor6NRhJSkwjseGCKX2X2+vFq4DWqKfGhnAEee/S/pNwDqAZkWtxC4yu7egY/ubS
-         vyKA==
-X-Gm-Message-State: AFq9FYL0DL8KzO6SMysFSE7uRVF0GnI1jsrIo1yL8AYFFeYVCoS4TmhV
-	GkaTx5pb8TUUzOaR4iy+VuJgPIACrOIYW2k5T+dO+aIlsvucXlQ24r86L4k8Rw9unyf0Aiz+Ry/
-	N9Lgt
-X-Gm-Gg: AYBFou24jpPf0CovPRr+wcs3RERiL60hiwsWAQa7Mcp/NJxgnMgKmv8mGSDiGOiL5Pv
-	qvqbrkl+mJDDRfRp9EciWDIOmOTugF4yGkSqSUU32fxlytl1X1nQEe6/e308gv+7cwuh6+NptiR
-	GEF1JbrrWAdi1Lp2dyI0qM49p99qKRd19ewAc+g1aIPBkM4a0CLywN4pHe04vijl/8yWzJbYPst
-	2ygzAGE+EuAWGpIUhZiGlaEJhEEv2g2DSKvmQCbmG87pZhvVjTkEpxOXM+cMsqP5sVZ6fGf8GCc
-	DNjo/UMBFlG4PJTQRX6gtkKr5SWrLVj9LnIvP16hc2Uw1DFr8a0AWXNbJAZKgRnHrGCvTXRB+4N
-	XqFd3MAt2cpMykTOyJT0jAZ+rUxkkLYUE7HUNXEtOG36eAHcCOsRcpNzEOqnyrFcp1CdVEg5L9L
-	mTZ3/wvBEWQUgjU2aTYxX0wHfY//SEffMFfSNt/iZRPUOCg31Ojuyx6AhV3Ro3xdB4bLRNOJcHV
-	Q7UzoZig5c7B6Sw4uM/yfo9XZAizSlxpkGadpdk1xwfyMJJkhzA78iJArkruUoj9OBBn7lKq8/g
-	1csncsA2tKXeTdJkT7k7sF5qLICjpNs4y4EAIKhcAeATz0dSfHjTWiR4HsjZ2G+S6bDIODLOU1A
-	dbVRi
-X-Received: by 2002:a05:6402:4587:b0:6b3:84c7:efbc with SMTP id 4fb4d7f45d1cf-6b408f0c236mr1178193a12.43.1792580495696;
-        Wed, 21 Oct 2026 04:01:35 -0700 (PDT)
+        bh=7dpSX3E6VSUkHz108mGZbbSbPiJJZvx2SmPvawUa8k0=;
+        b=iCCEYa39iq1NOHYXiGT8OLMHYbRp04SJbZQfKhXCCVKLvpxyxnhtw7wHzKSGYovunI
+         B5O4iCVu6kkop0NeNuW2Tn/OqSBd5U7JwRxX2/XrU1cvQKDpqP37NxzQ5326taYEcClU
+         YzYxJJ7qXaUAYEiGCh6FH0LNoH2lS6GG6eJbAnxDOfvAefeTKhRcKXTByLmkdtmMgEfK
+         wV1C7j0zA42DmYIEgakZkb8L68yxw2yJUy/zElAZd2dTQMYLRzayvCc535NuJV30MLIX
+         Z+kRAiCmw1UL6jd2a7OvYi9vYNlr21O3Gy1aJgqtZgt5n+w99iDkj7JHB2ognjzqRDW9
+         pwHA==
+X-Gm-Message-State: AFq9FYKWZkYmVEeVRbavLH9X8S/qtc9Wg6xIxbM+wo5mgrpDnJ4L6TOa
+	msp3xZ4a3OhRJTEzDsenCXNVCjBVOYBB6Q9SdhnaNCh5fJDkmJl5nE/ZnJuvk3YA+0AGJvCpOyf
+	bvkK5
+X-Gm-Gg: AYBFou3tEpX5qwTdqgQSEk2UzqmsogOkYprLb+8fA8toU0GFkAOeH1NWKsicQi1wNaz
+	2QPiPVFrg6QtcMysGE7r/tKq6i5qFc6qZmP1oAcZypukf/qjXATPJEjvWilX8XYV42sFZg5+H1j
+	r1aKHdHv0Afr5fjS89gtBslziL4JyKvznY4L9p6ngpvcOcsHCLjkp/KgI1stV2X4+VDydscF594
+	SivnArw2QnnQIsD20ZpZPZaDIPPEjy7rWuJt2PTehImg5hfnE6OD/7JhmS2MHpfpGDqCOZsL+Fp
+	ywv8OKHhRyGjMa3gzFb4cnudjfFktRfbWSv0o8TUPy0SVppa1qzB/Fpu1wE0PheXQKnMyBOkqfg
+	/r/LQ0rJd6c2bHuhUx4vk2Vy3MIVZXRj7D4gWSXbRi3nhFMF8XmhDF4vcj1UK91dm0FyTa+gmFI
+	jF9Qsj5co4xB6mRPoOWEmQRZw7LVfL0Sjgd1dE8nnepisYJBzqLXbOqLh48RbtFdhq0aRE1E1kt
+	yPKBZFGvpz4Ewu76bNsPpSKK4ROCMAwA/FzO8KCwKLZ0tE2JroAzRzs2Qo/oEgJjKpWJW8EQ/TB
+	i7O1DqdYoXhoUbeDT24kRi5CHiTmBHxIh4m+FTXN42nRdMGWWCvQhcWcjiLwOJGihppsyxB+6Qq
+	16BOU05ipo4Bt5LzwJbgJbYSLRQ==
+X-Received: by 2002:a17:907:6e88:b0:c2e:204d:9490 with SMTP id a640c23a62f3a-c4604ed5c6cmr412862366b.17.1792580496605;
+        Wed, 21 Oct 2026 04:01:36 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.34
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:35 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:36 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 14/36] python3-grpcio-channelz: Upgrade 1.76.0 -> 1.84.0
-Date: Wed, 21 Oct 2026 14:00:38 +0300
-Message-ID: <20261021110103.1943456-14-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 15/36] python3-grpcio-reflection: Upgrade 1.76.0 -> 1.84.0
+Date: Wed, 21 Oct 2026 14:00:39 +0300
+Message-ID: <20261021110103.1943456-15-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
@@ -61,7 +61,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131273
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131274
 Content-Type: text/plain; charset="utf-8"
 
 Upgrade to release 1.84.0:
@@ -77,11 +77,11 @@ Upgrade to release 1.84.0:
 - Added registered methods support in AsyncIO stack.
 - AIO Part 4 - Typehints fixes and add Pyright for aio/_channel.py.
 - grpc-status: Relax protobuf dependency lower bound to allow 6.x.
-- Observability plugin fixes.
+- Observability plugin fixes
 
 Fixes:
 
-WARNING: python3-grpcio-channelz-1.84.0-r0 do_check_backend:
+WARNING: python3-grpcio-reflection-1.84.0-r0 do_check_backend:
 QA Issue: inherits setuptools3 but has pyproject.toml specifying
 backend setuptools.build_meta, use the correct class [pep517-backend]
 
@@ -89,19 +89,19 @@ License-Update: Use LICENSE file
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-grpcio-channelz_1.76.0.bb     | 16 ----------------
- .../python/python3-grpcio-channelz_1.84.0.bb     | 16 ++++++++++++++++
+ .../python/python3-grpcio-reflection_1.76.0.bb   | 16 ----------------
+ .../python/python3-grpcio-reflection_1.84.0.bb   | 16 ++++++++++++++++
  2 files changed, 16 insertions(+), 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-grpcio-reflection_1.76.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio-reflection_1.84.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.76.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.76.0.bb
 deleted file mode 100644
-index 97184c89a8..0000000000
---- a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
+index 6e0a4b0c49..0000000000
+--- a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.76.0.bb
 +++ /dev/null
 @@ -1,16 +0,0 @@
--DESCRIPTION = "Google gRPC channelz"
+-DESCRIPTION = "Google gRPC reflection"
 -HOMEPAGE = "https://www.grpc.io/"
 -SECTION = "devel/python"
 -
@@ -112,18 +112,18 @@ index 97184c89a8..0000000000
 -
 -DEPENDS += "python3-grpcio"
 -
--SRC_URI[sha256sum] = "2ab15ef7b2252a9ba31df500bbe295ce5310a8b01ea6f6d67a17172d914a41a8"
+-SRC_URI[sha256sum] = "e0e7e49921c2ee951e5ddff0bdbacbd1ac1a70888beb61d567f3d01b799decb1"
 -
 -RDEPENDS:${PN} = "python3-grpcio"
 -
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.84.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.84.0.bb
 new file mode 100644
-index 0000000000..18e94b0475
+index 0000000000..c1460596fb
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.84.0.bb
 @@ -0,0 +1,16 @@
-+DESCRIPTION = "Google gRPC channelz"
++DESCRIPTION = "Google gRPC reflection"
 +HOMEPAGE = "https://www.grpc.io/"
 +SECTION = "devel/python"
 +
@@ -132,7 +132,7 @@ index 0000000000..18e94b0475
 +
 +inherit pypi python_setuptools_build_meta
 +
-+SRC_URI[sha256sum] = "84220ef2e7ec0a3792a151b6ffbc70691bf0f09cd009fe734f2946b917565694"
++SRC_URI[sha256sum] = "06bf3d7d8cef9afbcc721ee52191652b4483831774255e174404b0e0551741bc"
 +
 +DEPENDS += "python3-grpcio python3-wheel-native"
 +
