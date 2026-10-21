@@ -1,60 +1,60 @@
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7523.1792575008729817734
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7553.1792575011345534721
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 02:30:08 -0700
+ Wed, 21 Oct 2026 02:30:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=SNIQJO58;
- spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-15354aa70e8so1571939c88.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=T1BW7rqO;
+ spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-3514b90bb89so1371676eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792575008; x=1793179808; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792575011; x=1793179811; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=my3aHPQ+XKAsKwrHoA/J6cftaiRbxxhRGb8taRcnlyk=;
-        b=SNIQJO58FmyD05WYqOMVVm8n3r3HDSKYjr/HY3lBvfR4Ds4wMVdngRiN+JoOLw/wHY
-         DiUFZW6o+nDyzisOHlgOgMmJoZ0qQJ6YhmwXFSqbQYNFfNoB3MzpGTHKigPLIg2+OmY3
-         Z1QZoMSJXJBzwCnxSX/ySwiwaGQpozcZGspVOId+X9II1r++UPEu5X60ZqBU9vPHnX2K
-         isJtfISrNlwao6OTllHyCdUHu2vO/nLGAlQD47KEcOcrak00appTQmNQW27LNMW2J9Mg
-         HUWW0L51gACSEI9/dSpX8jTAYGKz4FLypI3LQx8Pz4+u+HIThVpQa3VglZogiBaONfL5
-         DxJA==
+        bh=r3KJ3yyJKfspcu8H365dSee74tV0BXuG6FsNAfJkHi8=;
+        b=T1BW7rqOjiNuAaBiJnfLd0G/XPNgNZ6tiAH3F1ztyANcMKA9wpqO50D6aatW3Jee+X
+         i75Z/QOnzQXhQ2hUQnP381HlHQfaHtKsIESwvakkC30nJXjBp7LS0dHWC85PQEHISxAQ
+         i8/yyN84onSt8p0gf3MCJ8jmiZ1cgKy8fntjMKspZ6LP52ZMaymdA5QADmfkNWwjmnRO
+         G/IbUfD52ebYiU6wYW0DEU/vlN+xqNizqxq7Er/50M5rM7KubcO9wG6paXu76acfBxAd
+         xYO0N1WET0sqv4Ne0BcEdrOAGLvDic7QmimxMqVMC2OL1Yt9uRyL1KKCHBEGR8fJ5JQq
+         kVPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792575008; x=1793179808;
+        d=1e100.net; s=20260707; t=1792575011; x=1793179811;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=my3aHPQ+XKAsKwrHoA/J6cftaiRbxxhRGb8taRcnlyk=;
-        b=YQ4QLThSj8I8/ueIASgRoh0u9vF6nh0TvrJ5YtqyXTRg502iHpJ4cqjCrGa4qsgQsl
-         VY00sCmjrQHd7le55ItC0jH40eN32I6L91HWYDGdxvqLkGWSxmvuoh0NbbuEzRqWZRzU
-         T8bfFdutO/eWtPzXGPkbHJFX+DhHFEbB1PKUNGJp55nmUQQJeT5T5IoGeLM7VxDk88Yh
-         Xly7ll2N+cCZCg/6FGq9TquuaW7JkJ5h+uF70bynQbtysbloeOGdcWGaddXWVEqqEctn
-         HpJcM3Sl6j9+SjBli7zUQBTzV3bk4DmKItxXHsCtxSMH7pb0eFSfdkqTGFZFAfKPRTl+
-         IFNw==
-X-Gm-Message-State: AFq9FYKcCaqUBcN1T+Yc2BA1TqGoNu5FrxErPgGlCc/N6XjabkE9eDMj
-	mT/7iADnQhQQdjDbf2gzruvZs6GTZLKDN3F9JHdtRoLTVws9+Y/lRjShkpJ5TQ==
-X-Gm-Gg: AYBFou3h9xgWWU4i2aGf7Og46N5yjgrjACYfDrgXaiDvBrhvf6ZHvz8kE+WXzo5+vbp
-	x9U/yIWRxFR0JorTJQM+YZwvuOk5iVJYVN/VGw2wB2dFWq/VIHPebmVHgJGeMu0kYPr+KPVwBUg
-	Yiq+CvVIbDuv5eq3ePPX4eqyDzOCz/sxnoDOJgecuIvNaHTJ8pfqM6cyTI4L6f/GKp1Lcx2ba2b
-	HZAjjkq/CvgtqIsfowN8XKVcsrRj5zzS2Z1mlQCLqwIR4KFcmn0ZNJawwwS5uLlGtc/ssT8mKZS
-	BP34xRSuKC0kItoJRospZRCsrnbpxbgrgoAWcGTcwqZfd15MUPen96FVLCu71g58X9ux2N1Ljv7
-	qJrbjQFxEDYlpKdQdzdjwxwKE2FfLRP/pWZhmdSkMVELobiQMvbcD0dg3DFfGmhLcGCI1gTBG3g
-	hQBA8zDfR/ImSIrd40wsfezOZgmpJzJPMYNUDZf42IJGSkVqwuTC37ukMXTROJslo4cnPtR5RP0
-	pmEQMx4ElFY5XlTH13eKjo/IeDXVyn0M/OaEvguLGhSvmhlVy44y+MuXjaw2v+/7chqNLzERtZf
-	8G1pZBSc3xyXI4ZG0mU7wAFe4EXKvIIaNjzni8gH3/T8umQOIx4K
-X-Received: by 2002:a05:7022:43:b0:189:f7f6:38f3 with SMTP id a92af1059eb24-190a465c132mr2416186c88.13.1792575007636;
-        Wed, 21 Oct 2026 02:30:07 -0700 (PDT)
+        bh=r3KJ3yyJKfspcu8H365dSee74tV0BXuG6FsNAfJkHi8=;
+        b=Irr8i5TQ8Lxkb4lFNDBrD/3jj7crp3yJPSn5RpaTxiQG2CEoVzGxN1SVVTfAMupVcJ
+         wuH71J/wLOJ+n+6YwQPJn9Frt3WWKzrJ/DBb1sKxMiqufc00RTD5oqFpc3SdRoaoe2Rn
+         4PUBcx5G0jm+wWJXh2T2WfRxe3BLmtkg027U4okss0wOqHzPm2BidMZTgi6kAWUXul1q
+         tltmWZRjbKrjeO6eEmNsOZ61ce+v2qmEcAoEi2OcMepOz1UrfCfPgR9aKmbI4pp4FQ69
+         jJ2Y9upolmlZRMRXNiXkJsRy9LtfsHQxbmoGEoU4c2PsKhC5zjHyE3gXOnaQAk08/X+1
+         /KnQ==
+X-Gm-Message-State: AFq9FYJs7gGyQ2uPL0A8JP7i/Fzh1gu4CtdTuZdP5FClgowHRyh0TKlg
+	pN0fNKQZ2DyBinZE+A1gwccAI/NT7wx8EPsmhkcYKDqzJJJJIjyPmZ2U+0UBww==
+X-Gm-Gg: AYBFou1dWfwRC4fEgEx3r41C2msrAOqbIDTh+cZC2KIh/o/uvxjd+AJ/eGMvTQ1Qg6p
+	G7PP89zwypQ+O+luRaydWGUlKA1eDv3DPMsjIG/jjK9QMpsnQZ2bx/kvkEL1nUtHdwUXXcefySD
+	wx7C9HpDcWTduGWvd13z30o1rgeURsDy2hXuET8fLPoSBrCOpbU5OLx5ytEZ9u2IYP6BiiTR+8t
+	wrm/s6gfM9Tvt9p7/UMJHNNQKOHsKNPzis0FPLR49lcl/mXQfWjJhhdaBxmV4HWADjVb7oUMBOd
+	IlT7owNL9QnzRy1gTK2UWSsGIZvtXE7wh41gaUCiH6/Vp69w+Hn0pUNzjl3c2huapHrJawaPjEJ
+	Wre9IWyrcwgNGmJm2T+G8KX4dfS9nBbzw8euElQuQzHg3duuJYL/gaDnjT/dn6wLClTfWRxIqSl
+	FvQ/ShUe9sq8RoI7gtpFMI3G2THIoQ4GMfEfemy5hZfi04SV+4Z0ZVM+18eVQ8KM+qzNi3jfKrV
+	AHDThDDAgbLPItMZqTOC8VtJ0ZEBahdVgd/5Id2LW1Rk7g5ewJSuGVQ46OQsBbhAeRfAd2vtrzu
+	dGGDMt2VE4OEVMe9JAa0c1Qr86oCHhU=
+X-Received: by 2002:a05:701b:4550:10b0:150:1cea:31a8 with SMTP id a92af1059eb24-190a4ffa89dmr2077009c88.19.1792575010531;
+        Wed, 21 Oct 2026 02:30:10 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.05
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 02:30:07 -0700 (PDT)
+        Wed, 21 Oct 2026 02:30:09 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][blacksail][PATCH 28/44] pjproject: patch CVE-2026-57164
-Date: Wed, 21 Oct 2026 22:28:41 +1300
-Message-ID: <20261021092857.3585453-28-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][blacksail][PATCH 29/44] pjproject: patch CVE-2026-57165
+Date: Wed, 21 Oct 2026 22:28:42 +1300
+Message-ID: <20261021092857.3585453-29-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
 References: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
@@ -62,102 +62,121 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:30:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131215
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131216
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-57164
+https://nvd.nist.gov/vuln/detail/cve-2026-57165
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../pjproject/pjproject/CVE-2026-57164.patch  | 66 +++++++++++++++++++
+ .../pjproject/pjproject/CVE-2026-57165.patch  | 85 +++++++++++++++++++
  .../pjproject/pjproject_2.17.bb               |  1 +
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57164.patch
+ 2 files changed, 86 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57164.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57164.patch
+diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
 new file mode 100644
-index 0000000000..0686d681c3
+index 0000000000..e2d62b0eef
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57164.patch
-@@ -0,0 +1,66 @@
-+From 1160ff3c15cfa79f50d4bc6ce8066854f656066c Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
+@@ -0,0 +1,85 @@
++From 5776ee452296d5277d71e2bb011709adec80a533 Mon Sep 17 00:00:00 2001
 +From: Nanang Izzuddin <nanang@teluu.com>
-+Date: Wed, 17 Jun 2026 15:46:48 +0700
++Date: Wed, 17 Jun 2026 15:47:29 +0700
 +Subject: [PATCH] Merge commit from fork
 +
-+http_on_data_read() in http_client.c grew the response buffer by a
-+single doubling, which is insufficient when the server sends a body
-+larger than twice the (attacker-supplied) Content-Length used for the
-+initial allocation. Loop the doubling until the buffer fits, with a
-+floor for the size==0 case to avoid an infinite loop.
++handle_up_down() in cli_telnet.c accumulated cur_pos + 2*rcmd->len +
++history->slen bytes into a fixed PJ_CLI_MAX_CMDBUF stack buffer with no
++bound check. Size the buffer for the worst case, clamp each term to
++PJ_CLI_MAX_CMDBUF, and replace the trailing unchecked pj_strcat with a
++bounded pj_memcpy.
 +
 +Co-Authored-By Claude Code
 +
-+(cherry picked from commit 8d5956afab2ede95ddb199078dc19a8ac0114f3d)
++(cherry picked from commit 628b71638465bacf66e767959e6acbab822eccd6)
 +
-+CVE: CVE-2026-57164
-+Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/8d5956afab2ede95ddb199078dc19a8ac0114f3d]
++CVE: CVE-2026-57165
++Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/628b71638465bacf66e767959e6acbab822eccd6]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ pjlib-util/src/pjlib-util/http_client.c | 27 ++++++++++++++++++-------
-+ 1 file changed, 20 insertions(+), 7 deletions(-)
++ pjlib-util/src/pjlib-util/cli_telnet.c | 33 ++++++++++++++++++++------
++ 1 file changed, 26 insertions(+), 7 deletions(-)
 +
-+diff --git a/pjlib-util/src/pjlib-util/http_client.c b/pjlib-util/src/pjlib-util/http_client.c
-+index bd441acb9..d2771d240 100644
-+--- a/pjlib-util/src/pjlib-util/http_client.c
-++++ b/pjlib-util/src/pjlib-util/http_client.c
-+@@ -432,18 +432,31 @@ static pj_bool_t http_on_data_read(pj_activesock_t *asock,
-+                                                 hreq->response.size);
-+         }
++diff --git a/pjlib-util/src/pjlib-util/cli_telnet.c b/pjlib-util/src/pjlib-util/cli_telnet.c
++index 150727bb5..0a2954bd4 100644
++--- a/pjlib-util/src/pjlib-util/cli_telnet.c
+++++ b/pjlib-util/src/pjlib-util/cli_telnet.c
++@@ -1141,7 +1141,14 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
++     history = get_prev_history(sess, is_up);
++     if (history) {
++         pj_str_t send_data;
++-        char str[PJ_CLI_MAX_CMDBUF];
+++        /* The redraw sequence can accumulate up to
+++         *   cur_pos + 2 * rcmd->len + history->slen
+++         * bytes, each term bounded by PJ_CLI_MAX_CMDBUF, so size the
+++         * local buffer for the worst case and clamp each term below.
+++         */
+++        char str[PJ_CLI_MAX_CMDBUF * 4];
+++        unsigned cur_pos, buf_len;
+++        pj_size_t hist_len;
++         enum {
++             MOVE_CURSOR_LEFT = 0x08,
++             CLEAR_CHAR = 0x20
++@@ -1149,15 +1156,24 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
++         send_data.ptr = str;
++         send_data.slen = 0;
 + 
-+-        /* If the size of data received exceeds its current size,
-+-         * grow the buffer by a factor of 2.
-++        /* If the size of data received exceeds its current size, grow the
-++         * buffer by a factor of 2 repeatedly, until it can actually hold
-++         * everything received so far. A single doubling is not sufficient
-++         * when the server delivers a body chunk larger than twice the
-++         * (possibly undersized) Content-Length used for the initial
-++         * allocation, which would otherwise overflow the buffer in the
-++         * pj_memcpy() below.
-+          */
-+-        if (hreq->tcp_state.current_read_size + size > 
-+-            hreq->response.size) 
-++        if (hreq->tcp_state.current_read_size + size >
-++            hreq->response.size)
-+         {
-+             void *olddata = hreq->response.data;
-++            pj_size_t new_size = hreq->response.size;
-+ 
-+-            hreq->response.data = pj_pool_alloc(hreq->pool, 
-+-                                                hreq->response.size << 1);
-++            /* Guard against size==0 (Content-Length: 0 with a body), which
-++             * would make the doubling loop below spin forever.
-++             */
-++            if (new_size == 0)
-++                new_size = INITIAL_DATA_BUF_SIZE;
-++            while (hreq->tcp_state.current_read_size + size > new_size)
-++                new_size <<= 1;
+++        cur_pos = sess->rcmd->cur_pos;
+++        buf_len = sess->rcmd->len;
+++        hist_len = history->slen;
+++        if (cur_pos > PJ_CLI_MAX_CMDBUF)
+++            cur_pos = PJ_CLI_MAX_CMDBUF;
+++        if (buf_len > PJ_CLI_MAX_CMDBUF)
+++            buf_len = PJ_CLI_MAX_CMDBUF;
+++        if (hist_len > PJ_CLI_MAX_CMDBUF)
+++            hist_len = PJ_CLI_MAX_CMDBUF;
 ++
-++            hreq->response.data = pj_pool_alloc(hreq->pool, new_size);
-+             pj_memcpy(hreq->response.data, olddata, hreq->response.size);
-+-            hreq->response.size <<= 1;
-++            hreq->response.size = new_size;
++         /* Move cursor position to the beginning of line */
++-        if (sess->rcmd->cur_pos > 0) {
++-            pj_memset(send_data.ptr, MOVE_CURSOR_LEFT, sess->rcmd->cur_pos);
++-            send_data.slen = sess->rcmd->cur_pos;
+++        if (cur_pos > 0) {
+++            pj_memset(send_data.ptr, MOVE_CURSOR_LEFT, cur_pos);
+++            send_data.slen = cur_pos;
 +         }
 + 
-+         /* Append the response data. */
++-        if (sess->rcmd->len > (unsigned)history->slen) {
+++        if (buf_len > (unsigned)hist_len) {
++             /* Clear the command currently shown*/
++-            unsigned buf_len = sess->rcmd->len;
++             pj_memset(&send_data.ptr[send_data.slen], CLEAR_CHAR, buf_len);
++             send_data.slen += buf_len;
++ 
++@@ -1167,7 +1183,10 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
++             send_data.slen += buf_len;
++         }
++         /* Send data */
++-        pj_strcat(&send_data, history);
+++        if (hist_len > 0) {
+++            pj_memcpy(&send_data.ptr[send_data.slen], history->ptr, hist_len);
+++            send_data.slen += hist_len;
+++        }
++         telnet_sess_send(sess, &send_data);
++         pj_ansi_strxcpy2((char*)sess->rcmd->rbuf, history, 
++                          sizeof(sess->rcmd->rbuf));
 diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-index de8c847271..8e0b358ffe 100644
+index 8e0b358ffe..e7cae469ed 100644
 --- a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
 +++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
-            file://CVE-2026-57161.patch \
+@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
             file://CVE-2026-57162.patch \
             file://CVE-2026-57163.patch \
-+           file://CVE-2026-57164.patch \
+            file://CVE-2026-57164.patch \
++           file://CVE-2026-57165.patch \
             "
  SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
  
