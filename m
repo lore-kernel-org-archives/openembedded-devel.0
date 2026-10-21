@@ -1,237 +1,178 @@
-Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.107])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6236.1792568710469694684
+Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.74])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6284.1792568770666945038
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 00:45:12 -0700
+ Wed, 21 Oct 2026 00:46:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=CLZdc+VF;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: vaisala.com, ip: 40.107.162.107, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=Y8e0pcoJ;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: vaisala.com, ip: 52.101.84.74, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ah5uuonGtaM20EpGbV4aO3NYBgqcNxnrxWobR7QPv5qy3IoYvpvc7GosOi6uctiyOtXmRDoiwknXGA03+N8+rRcjWahoZzSpTVN6v1ViXC3V7AoG5RN1CaGK/ZU9HLXi29c1dIW0A8GEXcqT7QoUR8wHxis22JL67aXHJxXeACu71i9mU4QZN+aPJ+BIxpJK/eEh/6m5iUZlTSlNgvG1vRbO6gj6bGexNSpA2onNzP9J/sbXpV9Xid+zqWUCEspvg5lrjELoFirrajkESWrv0d6rzYurnTmSDAOBHCc4daII52POlet1qgrOSkODLR9zap4nHvoN1mWj5fBnlGcH/g==
+ b=AXyNmDcWB63b442eV++7B+n4r7tmlZEB5LMe94hxl4LX+F2RiQ5snmmebdFnZ0Q86UzKL1qUUZCDVQKdXSf3i+LGCKUT6D+pQRPi/eMAHd/D7ChASS0xBvsrGTNymXxHV16+DrbTMiueAFg8fWrhJwXLP7RJf1Tmy9RQ17sicrCA6kV834QaE17viDJqR7ChdEJmUUzwbh0JcI3ynGDIFr62g8/1/Fu0jRgmJItuAShqYAJc4t+2DecA7Xr7ItWRT84H/7HtzKj/CcMLArhEk6TFqggwma47gQHFj2nTIWHV0A86k8erO06AcK9Kr5U1qOBSM7Ib1EcLOGTfywYHZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kvtE1uqzxrqr/qUM60zSMZZhksZVGl+rkY4I0MXU9Gs=;
- b=Ss0StlOtCJsjVF5A+Z4h8o92C8yRrvaVmX9ruh4/vHRQjqNKJV264b8LfRXF9gIo2X2SSCucuXZkDWx8773BrhFuDmdC5AwwiKuUJ5YNSMO0E9H8cu3OB/xNoH4J2ruPRdyvAPLjGpR3IIvSLR6DOwEXHmx69sMX10GyxJYTppKOC5X/cFU1oh5E4qV8iT7sBZq+cDXDzCQn+CNndfwG+JCGqzQan6UgjGG40G4oLqAe+VtFN/4GnpuwbapR4zTQg4IG275wHNuQpewujuKyxTD0kJIyjxqDWW4hz5ct9GhfWRJSRnFy3uYa8lzeqgyPXWoN9f3EYkENAJfD+dAFpA==
+ bh=LFm3ccDSEApHZytxB9tu2kydWoPaIj5oo8NSG4DzPv0=;
+ b=xAf55b7fbkyZvwS0CSrvXHdN3HWx7Kgdvbin/2ZuQFz5jEX92lEGq41C3S32/7LTyLHoQdW/s8ByXz692nnqoz3qHzzEEC91Jb8n+Use+5eEfBYsRby74xJHQTGSiLWD/aeBcApGMgw9Q5t7KnrX1GTZ8eMcGVcRUD+RK2SP1ARhCacc3oH4K8g//JQPaVxKRRq241moC2S7W1fA5MKsqn1/N/SIbl+jdHpDJ1s3M+R/1wxjMyP1SmVnSZFGW9v0zcQK2RoThfA2pBPgw2XAASuKfGQl/DyS4XM1jgvEwKedKZrl4yrdpNCuOlLvAQi6irS4KvtODjMBoLfrHnD+/g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kvtE1uqzxrqr/qUM60zSMZZhksZVGl+rkY4I0MXU9Gs=;
- b=CLZdc+VF924Am7eUPEik4EYgHLY7/VkGIGR4nGhCKhMHIaTF7vIqQB2zVNQk9gz8v0xbCy3WRnSNFkhtWos01OwDjFyP8650SwIFc6lUOeZwdEccPcq4mYW0huL+mlh6d3sxHix8yx/APzEw1KZL+NhBGyyq/TiO+hiMbjZiCkONdbmiIRimK8n3nrLGqujo40JywUUzt+X5204/nIrRcdib3IyZBmgz+xYVW2Lomb5nDKl2AufpQsfMLZSVoZAds+oH3MjHOYYNlwmS0x3c5wZQKwAiygiFZkhKDUoW3vm8JMgI8Wz78B8RhzFjyR5YJEpLzXU/V7fKMxos9lwZYQ==
+ bh=LFm3ccDSEApHZytxB9tu2kydWoPaIj5oo8NSG4DzPv0=;
+ b=Y8e0pcoJPIaLMjns/yNlXLqqOP3lfjTNcY/LdxbKJhgmCygx97HwQ8Joi3I1vem2boyqmq0fuaxTMsyL35I2vQ/oyCYcBiG16djR5BpaEVFvUWbP898/peBIcwJm9lRmehEDBuY5+Avkdt4CvX8LxlCTDTPEk6uSCW9+knQc96l6m6b12TGJIS4NBN4Nq4vtEQogGx+GJLz9ytGC292Ifd8PYuVT7LqCq84QOJZxC1mazCMZIRN0qMC1W8vLun9bijT3fzfBHO1UPvKeGM9oaSnR2BQ5Iwyb3Aa3RZHV6vqsKBP5hzOory1MqIsvPtFPvE5OZHIsD1DdJeJr5kfaew==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS8PR06MB7557.eurprd06.prod.outlook.com (2603:10a6:20b:337::17)
  by AS8PR06MB8197.eurprd06.prod.outlook.com (2603:10a6:20b:3c7::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Wed, 21 Oct
- 2026 07:45:05 +0000
+ 2026 07:46:06 +0000
 Received: from AS8PR06MB7557.eurprd06.prod.outlook.com
  ([fe80::44ca:1bbb:6b57:4c16]) by AS8PR06MB7557.eurprd06.prod.outlook.com
  ([fe80::44ca:1bbb:6b57:4c16%4]) with mapi id 15.21.0522.017; Wed, 21 Oct 2026
- 07:45:04 +0000
+ 07:46:06 +0000
+Message-ID: <4bbc9069-46fa-4f27-ae76-f49c7c9ae7b6@vaisala.com>
+Date: Wed, 21 Oct 2026 10:46:05 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCHv2] pkcs11-provider: upgrade 1.2 -> 1.3
+To: ankur.tyagi85@gmail.com
+CC: openembedded-devel@lists.openembedded.org
+References: <20261020134852.1679078-1-niko.mauno@vaisala.com>
+ <CADySD0H_MkUebPR1yWPH3tdUTWZZFzfKGOabKEwJtx_o4TnJ_Q@mail.gmail.com>
+Content-Language: en-US
 From: Niko Mauno <niko.mauno@vaisala.com>
-To: openembedded-devel@lists.openembedded.org
-CC: ankur.tyagi85@gmail.com,
-	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCHv3] pkcs11-provider: upgrade 1.2 -> 1.3.0
-Date: Wed, 21 Oct 2026 07:44:35 +0000
-Message-ID: <20261021074435.2309360-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.47.3
+In-Reply-To: <CADySD0H_MkUebPR1yWPH3tdUTWZZFzfKGOabKEwJtx_o4TnJ_Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: OS6P279CA0054.NORP279.PROD.OUTLOOK.COM
- (2603:10a6:e10:31::12) To AS8PR06MB7557.eurprd06.prod.outlook.com
- (2603:10a6:20b:337::17)
+X-ClientProxiedBy: MM0P280CA0042.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:b::7)
+ To AS8PR06MB7557.eurprd06.prod.outlook.com (2603:10a6:20b:337::17)
 Return-Path: niko.mauno@vaisala.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR06MB7557:EE_|AS8PR06MB8197:EE_
-X-MS-Office365-Filtering-Correlation-Id: cad9d229-02c3-4a7e-4aa2-08df2f473884
+X-MS-Office365-Filtering-Correlation-Id: 11eda8c8-a7e1-4fc2-b6a2-08df2f475d75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|52116014|23010399003|1800799024|3023799007|260925021311599003|260925022911599003|260925021911599003|261009223027099003|10067099003|56012099006|6133799003|18002099003|11063799006|38350700014;
-X-Microsoft-Antispam-Message-Info: tvC9MFMmnYGJZbiQfcIXqHjViTWW8U+eminweyyQKfQjOI3Ba5mOq3/J5nMWo1GmNmsX2PLk9TkbUs6vivTWaJZITkGpF93prqwqe84F7Pt4sQhlSvwS7eSD3RlGOtxXTDaiuR2ITIUA7A3eLnocqFFgqYDw0SHLQYcldFl4MXbVW6IZn0qwFjrCeCxgzd1iO2kDn1pJHbq1WZk/I1YJJ8r5BTB4VaR0IfctGVDAV123Ypm2hE7EsVvqYRM5KSTuguWNB0SyTh55aEkuHlJRoUKR9RDmsZDG0Xg4l9IjcVhtBDQyqOpao5o8oh/pFw2t7JKRpCQnrOutZj4tOjMLTNv1sPVUag/aWO1jHspQ06Xs0dWf4990jmDvQBAWtC+wdS6Yv5kItIn6Midb+xaGZFOgqx/vGHmxUiNUOpZo5Xd7LBuUFqGhgT0CNUFrn3m9W0RHRGeCwmy4LNlLGJb/LT7vpD3KkXSIU8nflHNcRe/n9q+6LKf2Mp+iMWQ6taIN/Tk5eP27T0r4TJ3uP4ItW13InxsPdBDa4pbeNOgbhiCkjAUuQF5j/s/qreoVIrgneJgsK5dnTqMzR74O/Q9l0x/ne71nCUc/jV+h5SBjoNqLgGq/lwOEsicLOt9bJlT8Xek0EiKWdgcx1XkzmWhRN1HgYzVdOPVxpVJxKZAF/5nawc752XPfTJx6faeqj3j0maG/1mR3/xsGNkDfwmkQejEuzaommlJkt0b5lVsQXSQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR06MB7557.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(52116014)(23010399003)(1800799024)(3023799007)(260925021311599003)(260925022911599003)(260925021911599003)(261009223027099003)(10067099003)(56012099006)(6133799003)(18002099003)(11063799006)(38350700014);DIR:OUT;SFP:1102;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|4022899009|3023799007|261009223027099003|10067099003|56012099006|22082099003|18002099003|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info: 8GD2txBPUXWpw+E8tQJzj72dVSIVcnq+9XCX4HKvht5Xf5NSe9MdkzRMnQ+q5BIhfogUMkU0pAmlsBcO4geUQR3ZuKMXjso4p9ltvNOHTEeufMrQXmnAF2zm+MXRUnzLFRQQ63ucJS2ATxTHsD+I6RqVr5tF2D/R8haLfYKX5K6wcEkUXadvqUVjms/OlgS+aI3wg1znOaKwCKSI6StHlcYLfGPFe+jjBJxQGnbi47CvIAeTWNj7K/Pt7kqMVIbnecz3WS/a4giUFLHVaYMCIrjWM0ki1HM4DfBuGsiRaq41Omlu982oXaWdnv9yQdfDURmhtL5BerV75B4U1Jf4HZcCNFMi6yOAJEumnJzZe8hfGBAyf3nP29h94zQrqTyih2Ix6qj7JaKzM4U6cB2Snivn7RTf5ZWfUnZRQB7NaT5HQ3cDg6cnwDMhEMTPZ3utUwl8zr6KeG5Kow8AhkGSkOSnO+8y+ZHbY3vf5GUUXE5oai6ubdZ4rFoa9XLetiC6ai/zjDlB6HNercb+OVUIP3kUHLKRKUCQYo/Xszq30wiMWfg8l100J8h8nKakrxFRN/gKNtwJuPUIZYDVxeimurfWJRrOm6tRqZTluQXMR1OE0qTAoMySWJTQrE7zWScX
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR06MB7557.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(4022899009)(3023799007)(261009223027099003)(10067099003)(56012099006)(22082099003)(18002099003)(11063799006)(4143699003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?494uHnMmIqm7FU3/KOOj31Nl0eqN2OMd01WQNU+LYmF1aAZpoccCY7n9015L?=
- =?us-ascii?Q?r/vgVtEfe7qMC9DkawtamzHOZEd8TMrdvkEqlWeZfW0MMXVvx03bMT+l/ENN?=
- =?us-ascii?Q?tMMzfoFqwWUw1uE/agih9vSrH7nNM8bcxioBHN6HlNc8EhdG8QQpTOTWIQNv?=
- =?us-ascii?Q?uuJPCFNcqZMcD6dXMghhom6J9Qs/feqvPkohDV1FtNF7Bw9C5Ktsdiuez6Tt?=
- =?us-ascii?Q?/aJuBxnTUBMlybrzs8t2Oe+k0csaXSdqklMzhLG1Ra3DhNZFn3YQGDb+RrRb?=
- =?us-ascii?Q?0++iqw/+2f9UNzQ65rBqzf0i44UaKL6Gp/PKpd1eDeXGcaWqHSTuvsJnhK8T?=
- =?us-ascii?Q?3m56BcgOT1AdW84nsGgwQzDm8vN5lcUZkRXNAZ4go/oS2zJeM/8nNi2ddIxh?=
- =?us-ascii?Q?9AaSb2iNtaeKaT6ST+fgZ3W+IKXsMB0F1qgEH0kFTK857fY1Agh+oR/Uvw/R?=
- =?us-ascii?Q?eCPKIvrFFaUfHDNMxC96VKCZtm1eMzQNZ2oDsssp0krZyRmOGHteiUDCx6Qs?=
- =?us-ascii?Q?hLJFHbCNCAKtEMKi4uPmGJPKJkZuJUCswGu+TZchPNakSLqDQMjacbxaBpYJ?=
- =?us-ascii?Q?NGNwG9d7sngfhDYXgYLRxs1CSNcniDLSXfXxlUg6brSEwLAc7xeZUZVM7m7L?=
- =?us-ascii?Q?lp6UTwB0Kf144gl1D3Fdm6c5gFqjDO9B2cBx3ghS2vfJpQJnROQv96/AMmA5?=
- =?us-ascii?Q?M+mPtTdJtiNtYc9NYYwf2e1FMVcUhlMX/5rwMK4aXPvePbvHrld0wt4ifkcu?=
- =?us-ascii?Q?pr5C2ZxjLTWIvoVQ4O7APCa7MgSRk79aqtuvuO/d46RbW1hLro5ogCBEtguY?=
- =?us-ascii?Q?fbOzEoVGhLNr4JuIKafvj3enCU/ZW1pnQxnJ9y6IGAKwwhWjo2NMKc72xYpx?=
- =?us-ascii?Q?QTl3TU5Br72uuQMqFkv0j8+u45qDWAIuzbQZKLu1qRfQ0XCRsPgY3lR2M+ks?=
- =?us-ascii?Q?3+Znc0Z8VmQjS98vm6pFGD5trw8fI7B8NRM9+D+Tmh+Il880/MCWp8jyn/uG?=
- =?us-ascii?Q?IgXSRnxKUY9U0CjY7Get/IO/NWRkh9jEUN1p0sDZVZDffbqdawi+C/f/ThLQ?=
- =?us-ascii?Q?V2bF0BfkznHHdVGG++1HkbY/N/HPhK+nLLnmSrmZBUkxIIKZSjOOZtYOPzNb?=
- =?us-ascii?Q?bd1Oq9RGrEjDCWzNsE+oqIp1lZR4/DwSPvena+ATXRZxevH+/yVzRBRSCbtG?=
- =?us-ascii?Q?rikJDrn3eQbEtv1NNKg1Wb0fdOAfx72p0VWhUPfkGUzsY7g4+Qa/a5ab0Jrw?=
- =?us-ascii?Q?xp+l/DxJ8+vM18OG0WHtukl8jQi8Defyq5s2z23zJtFmc/71yZdALFBCcteT?=
- =?us-ascii?Q?CbGrByRz4nFf0UO+/5tIb+5Ue6Z0c4OF+a6cMJn08JMny3eqtitHU1/E92Qo?=
- =?us-ascii?Q?grxxjLrgLXNwwNP06rixDX+/WorQQHv8XmNjaasE/aO5Z71jROYskyXx6nqV?=
- =?us-ascii?Q?bhxwT4IrK1GF47fCpV4N1lgbeZs3+t4aArim7Ec8drxtcI5klMTo9inKLRoj?=
- =?us-ascii?Q?I7ypXew3AwWH5prB3gMgzmAm8O3OWvABYgxiRMRUCCAxcNRtiTLpjQ/wxApp?=
- =?us-ascii?Q?8nT1Y4lwiUMvN69kvrm866rmVfEXpePyxiY3G13eSzHGm38BUf4jXYxceNE+?=
- =?us-ascii?Q?yuP9qY4xZ8MaqBahtHfF+ILfDx1fitrkUhWFXSZO7WjUfGTWPpPh0bsNcY2Y?=
- =?us-ascii?Q?3uU7sFksmKMS1sqIHlWy7GqOFyNpZaTedG2LTNYC7QfKcenUw7vqkrLvIZye?=
- =?us-ascii?Q?D4bGWl+r6Q=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gCcbtANkdevSFZiQiZPig0UT5SRh1g+KeC3+xJ6vAufh92b0Ri07GW7qxVhU?=
+ =?us-ascii?Q?kHVIsapqFIXfRWRePm/oPUfvPjf2w6qtbysSOd7MhtBb67LgUqRftkaUBCLr?=
+ =?us-ascii?Q?wdkqPFXgyql8kXVWYpX1/gzgy9oReEvZ2Po4kFZOeCdfSDC7elq6Sler2DR0?=
+ =?us-ascii?Q?ksHLqSUms9tAKwo3T+S/PKTUHeYZhSDcbdDtvOVsHpkEHONPxsf4ZvMcdwzR?=
+ =?us-ascii?Q?YIGC7yGKw6Lem4ZW0q/HZp8nHNEEFRV6S8UcOpr8X2CT0vrHdB4RoPsPKXPw?=
+ =?us-ascii?Q?AJ7vQKkmLj+zDsvCPO5ultZMKsdl9scVoaGhn3iJaaTpntZAA6mwQ91njTG+?=
+ =?us-ascii?Q?6HZvF2dyvzZFhOTggV3JShUQiHP9ofICtxNOJyf1JjSm86MV99yKx71S5LIf?=
+ =?us-ascii?Q?a5DY0tIciHtFl3jdC8VXFRKH5Dj2HQr0zF86/7OJL0ZbyBcGyhuVnZc88HEo?=
+ =?us-ascii?Q?6SwF2rA7Pic9xJzz4ja8h0njBKV31R2LhBDFQdcM/xF46k2VHUNQDsDCfmva?=
+ =?us-ascii?Q?ajgj8xlSA6KWAHlql9ztPLeAm/4U0aZNVnK7g3Znpv0vA0BL5etjgR3q3IPS?=
+ =?us-ascii?Q?V4W4/AmBK7UrWVcp8b2/Od+la1Bjc59PwFBgyhazqOV3qGx8KB7PuUch4DKj?=
+ =?us-ascii?Q?ePIiP12E4NjP+IxX/QKLTYQwYMIfDa0zEDrksTiYmbQjSd0za1aqprv8YSla?=
+ =?us-ascii?Q?tUgEPtlq3pl2H5YvcLE/rbtLVYjvyYDydEHZ+5I/49n/06ThSLR91tCcvFXI?=
+ =?us-ascii?Q?WWbl6RqwZAl19U8xoYUTUpUESwKROaM9vdek3xYU9OmKvNdXA8jrEf7ecz4G?=
+ =?us-ascii?Q?77oXICpb/quabMhOrSTdhpKwXrBmwWzTElGWXG2mPOS2GpHVhXV98S8GyTTJ?=
+ =?us-ascii?Q?5cMZG3l2ieVnIpRT3Fx5KpY3Kf5sAt3Zsz4ZtGs/sAXGnRureEAfMRB4On7Q?=
+ =?us-ascii?Q?nz2zRiBiHJVusx0Fs3YVBgh1xMTIr6AiI03GHsiNEJmT1gHf44Rwnn4IK05y?=
+ =?us-ascii?Q?Qcm5VPJDlRwNvppQwmh8iPTKi3qY/4NxoIXQckiSkM9obiLQQDfiVCxCMwH7?=
+ =?us-ascii?Q?/ZGGkUAlLrU/nH48jv6+AX8rh8wTRIJcXxI12N0Sm8L+vPdDXQpA0Tsq4zEf?=
+ =?us-ascii?Q?FwbilKIE+KIMigNdIH3EHvnV5PHcm5FtuLdc2zrJwWvkcrK2F9jE+27szCMP?=
+ =?us-ascii?Q?d2/UsOxeWGuDOKFGwqkASQh0LJYn2IGw/b+EOWS5mmoqPkS3AOY8b66vDncA?=
+ =?us-ascii?Q?KyA5u0eebVELB9whD/u0bp9g1Qhw9z13RE4ZWSfGOkT3brKvgG00D7hzxZGt?=
+ =?us-ascii?Q?eMujoCt9gf/uEDpzlE7UgQeSSDn3G6TWHO482VoEW60EmeyI3S2ldxKauGC1?=
+ =?us-ascii?Q?mrgZjuvlU8QKSn5Qk+hofO9XTsO78KIp3L5mfN2jM+8qTq71O0NoyttiDThT?=
+ =?us-ascii?Q?rro+bCrMXrkTwdv7XKsfgXnlpvZAZf7iabfRYEmXHYIkzK2tt0Zz6s9lmDCm?=
+ =?us-ascii?Q?W/2nTSn+ikAn3JudEvB0Wy4dS0eQFr3Vc6me+9RgbE2mRUE7Y7+qOcVTJL/U?=
+ =?us-ascii?Q?nTzxW+hTb2tjdsrc4UA6P7epyM9c6JC1yI9bm+cHd9NIJY3Sb5D1j8mZkFh8?=
+ =?us-ascii?Q?IuTFVB+vU20L3JVQCwjzd62qREJ7KGr/C5qFSzkbNHf+/Oi/mHx8Aj3uYgKW?=
+ =?us-ascii?Q?1FBsJPAwjvlKvO/pAM9ZTwOZz6ZAc81QXCT/bbulimC93FGPTVAQgmbH+71w?=
+ =?us-ascii?Q?Ex5+ORNEQA=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cad9d229-02c3-4a7e-4aa2-08df2f473884
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11eda8c8-a7e1-4fc2-b6a2-08df2f475d75
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR06MB7557.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 07:45:04.8675
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 07:46:06.7792
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8I3RqzEKcex/NQ2YfQ/Fw60C7nvxgK4eenA2uutGrgtHhKGztrMNI1nl54Bvo/oYoeRjNXVZLzGsJVcWhx6B/A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3rFsUC/azi5hwaLm0zVVqhMIauVD9bGijodOSQxZuYAIJfzmqi/U0s2V3vUpXVMEcyWqlIGlz2X7VRBx73hoZA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR06MB8197
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 07:45:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131184
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 07:46:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131185
 
-Changelog: https://github.com/openssl-projects/pkcs11-provider/releases/tag=
-/v1.3.0
+On 10/20/26 10:52 PM, Ankur Tyagi via lists.openembedded.org wrote:
+> On Wed, Oct 21, 2026 at 2:49=E2=80=AFAM Niko Mauno via lists.openembedded=
+.org
+> <niko.mauno=3Dvaisala.com@lists.openembedded.org> wrote:
+...
+>> diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2=
+.bb b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+>> similarity index 73%
+>> rename from meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.=
+bb
+>> rename to meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+>> index d95706d9e3..f7936d3756 100644
+>> --- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
+>> +++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
+>=20
+> Upstream is now using major.minor.patch scheme, I think we should
+> rename it as "pkcs11-provider_1.3.0.bb"
 
-Here we also drop patch which is now incorporated in the new version,
-and align the SRC_URI and HOMEPAGE to match the updated GitHub
-organization for the component.
+Indeed so, seems it changed since 1.1.
+Thanks for spotting! Will rename.
 
-The recipe version numbering is also matched to the upstream scheme
-which changed to Major.Minor.Patch since 1.1.
+>> @@ -6,7 +6,7 @@ the PKCS#11 Cryptographic Token Interface\
+>>   This code targets version 3.1 of the interface but should be backwards=
+ \
+>>   compatible to previous versions as well.\
+>>   "
+>> -HOMEPAGE =3D "https://github.com/latchset/pkcs11-provider"
+>> +HOMEPAGE =3D "https://github.com/openssl-projects/pkcs11-provider"
+>>   SECTION =3D "libs"
+>>   LICENSE =3D "Apache-2.0"
+>>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db53b787444a60266932bd270d1c=
+f2d45"
+>> @@ -15,11 +15,9 @@ DEPENDS =3D "\
+>>       p11-kit \
+>>   "
+>>
+>> -SRCREV =3D "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
+>> +SRCREV =3D "b55b94344af87a058fd84d6e15390760a5585b1d"
+>>
+>> -SRC_URI =3D "git://github.com/latchset/${BPN}.git;branch=3Dmain;protoco=
+l=3Dhttps"
+>> -
+>> -SRC_URI +=3D "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
+>> +SRC_URI =3D "git://github.com/openssl-projects/${BPN}.git;branch=3Dmain=
+;protocol=3Dhttps"
+>=20
+> And if agree to rename, then can please also include tag=3Dv${PV} in the =
+SRC_URI
 
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
----
- ...-Fix-i686-build-failures-in-cipher.c.patch | 62 -------------------
- ...ovider_1.2.bb =3D> pkcs11-provider_1.3.0.bb} |  8 +--
- 2 files changed, 3 insertions(+), 67 deletions(-)
- delete mode 100644 meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-=
-i686-build-failures-in-cipher.c.patch
- rename meta-oe/recipes-support/pkcs11-provider/{pkcs11-provider_1.2.bb =3D=
-> pkcs11-provider_1.3.0.bb} (73%)
+Thanks Ankur, duly added in v3 I just sent.
+-Niko
 
-diff --git a/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-bu=
-ild-failures-in-cipher.c.patch b/meta-oe/recipes-support/pkcs11-provider/fi=
-les/0001-Fix-i686-build-failures-in-cipher.c.patch
-deleted file mode 100644
-index 479608b8f3..0000000000
---- a/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-fai=
-lures-in-cipher.c.patch
-+++ /dev/null
-@@ -1,62 +0,0 @@
--From aec4fe7e3c4d18cd5d0f98168df5884a141c6b69 Mon Sep 17 00:00:00 2001
--From: Simo Sorce <simo@redhat.com>
--Date: Thu, 19 Feb 2026 16:08:56 -0500
--Subject: [PATCH] Fix i686 build failures in cipher.c
--
--Update AEAD functions to use CK_ULONG pointers for lengths and
--introduce a temporary size_t variable for OSSL_PARAM calls. This
--corrects pointer type mismatches that caused build failures in
--Fedora Rawhide i686 scratch builds.
--
--Upstream-Status: Backport [aec4fe7e3c4d18cd5d0f98168df5884a141c6b69]
--
--Signed-off-by: Simo Sorce <simo@redhat.com>
-----
-- src/cipher.c | 11 ++++++-----
-- 1 file changed, 6 insertions(+), 5 deletions(-)
--
--diff --git a/src/cipher.c b/src/cipher.c
--index faaa51b..4ccd3ad 100644
----- a/src/cipher.c
--+++ b/src/cipher.c
--@@ -867,7 +867,7 @@ static CK_RV tls_aead_get_data(CK_MECHANISM_PTR mech, =
-data_buffer *explicitiv,
--=20
-- static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *cctx,
--                           const unsigned char **in, size_t *inl,
---                          unsigned char **out, size_t *outl)
--+                          unsigned char **out, CK_ULONG *outl)
-- {
--     data_buffer iv =3D { 0 };
--     data_buffer tag =3D { 0 };
--@@ -906,7 +906,7 @@ static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *c=
-ctx,
-- }
--=20
-- static CK_RV tls_post_aead(struct p11prov_cipher_ctx *cctx, unsigned char=
- *out,
---                           size_t *outl)
--+                           CK_ULONG *outl)
-- {
--     data_buffer explicitiv =3D { 0 };
--     data_buffer tag =3D { 0 };
--@@ -1475,15 +1475,16 @@ static int p11prov_common_set_ctx_params(void *vct=
-x, const OSSL_PARAM params[])
--                 return RET_OSSL_ERR;
--             }
--=20
---            int ret =3D OSSL_PARAM_get_octet_string(
---                p, (void **)&gcm->pIv, gcm->ulIvLen, &gcm->ulIvFixedBits)=
-;
--+            size_t iv_size;
--+            int ret =3D OSSL_PARAM_get_octet_string(p, (void **)&gcm->pIv=
-,
--+                                                  gcm->ulIvLen, &iv_size)=
-;
--             if (ret !=3D RET_OSSL_OK || gcm->pIv =3D=3D NULL) {
--                 P11PROV_raise(ctx->provctx, CKR_HOST_MEMORY,
--                               "Memory allocation failed");
--                 return RET_OSSL_ERR;
--             }
--=20
---            gcm->ulIvFixedBits =3D BYTES_TO_BITS(gcm->ulIvFixedBits);
--+            gcm->ulIvFixedBits =3D BYTES_TO_BITS(iv_size);
--             gcm->ivGenerator =3D CKG_GENERATE_COUNTER;
--         } else {
--             P11PROV_raise(ctx->provctx, CKR_MECHANISM_PARAM_INVALID,
----=20
--2.47.3
--
-diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb=
- b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.0.bb
-similarity index 73%
-rename from meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
-rename to meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.0.bb
-index d95706d9e3..e2ad7e7bad 100644
---- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
-+++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.0.bb
-@@ -6,7 +6,7 @@ the PKCS#11 Cryptographic Token Interface\
- This code targets version 3.1 of the interface but should be backwards \
- compatible to previous versions as well.\
- "
--HOMEPAGE =3D "https://github.com/latchset/pkcs11-provider"
-+HOMEPAGE =3D "https://github.com/openssl-projects/pkcs11-provider"
- SECTION =3D "libs"
- LICENSE =3D "Apache-2.0"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db53b787444a60266932bd270d1cf2d4=
-5"
-@@ -15,11 +15,9 @@ DEPENDS =3D "\
-     p11-kit \
- "
-=20
--SRCREV =3D "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
-+SRCREV =3D "b55b94344af87a058fd84d6e15390760a5585b1d"
-=20
--SRC_URI =3D "git://github.com/latchset/${BPN}.git;branch=3Dmain;protocol=
-=3Dhttps"
--
--SRC_URI +=3D "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
-+SRC_URI =3D "git://github.com/openssl-projects/${BPN}.git;branch=3Dmain;pr=
-otocol=3Dhttps;tag=3Dv${PV}"
-=20
- inherit meson pkgconfig
-=20
---=20
-2.47.3
+>>
+>>   inherit meson pkgconfig
+>>
+>> --
+>> 2.47.3
+>>
+>>
+>>
+>>
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#131178): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/131178
+>> Mute This Topic: https://lists.openembedded.org/mt/121849116/3618471
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+niko.mauno@vaisala.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
