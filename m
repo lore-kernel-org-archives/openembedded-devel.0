@@ -1,143 +1,122 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8863.1792580489081909419
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8719.1792580491149529574
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:01:29 -0700
+ Wed, 21 Oct 2026 04:01:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=M9wu4td+;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-48df4f540ebso330364f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:28 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=rPFhnOtj;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48e10a70540so337553f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580487; x=1793185287; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792580489; x=1793185289; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EcBgFjZik10reC3AryzGyHO4tghdt+/sujJtacUvjuM=;
-        b=M9wu4td+TS+uCf7V2b1OrTpWoIwm9AIElbbfVaWz7ltEmRKg1x6YxJ1H7yKp2r4VqW
-         mcc7BAUOXEyE66/gAaasTz041eFocCn5b5oJPyfCrpurD0KQ1YeaUvdtXyl2GfUWpM25
-         roQrsZbVuzwsDD04HkM6v6NICg5cjQIKJXJr0=
+        bh=Y4Trt78tJnW8DU79wgCd2NVMsuZLKwYahdc0MYpQ5vc=;
+        b=rPFhnOtjdWJVxR4dvyOR4Cq9iGO8KJW4Bd/rB1XCJn/kFH6/hdILH1JAZWIlHFXtoH
+         Ti+bUnLr+ySpE0FNMl4xVtR9QUjR3ZxJPV6hpRb3xwc4Qbpoq4Mg3ERCbfZ4zkTwun8R
+         PJVolz2iP1xwoL2lvC0E+J4QnL4Puu2iL5rTA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580487; x=1793185287;
+        d=1e100.net; s=20260707; t=1792580489; x=1793185289;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EcBgFjZik10reC3AryzGyHO4tghdt+/sujJtacUvjuM=;
-        b=hUozNB0n7/IAg2SYccUEBQ/I2F1tJQueRhpKkxXDhrsHiaJKIpBc2omLcD4ERw4Uyk
-         1Ch3VouJ1F7jDG+rkRmvJZHJ2OPNQg9bYhEOs2/0coJYWrTqYcwpQmlakEkN+q5D0lay
-         /zsegJ5OOF6l7ctgPp1TQs4z8TwZkFM40+7Z6pCS0A8rtCJ/24UoUgyzt+hwC9WsGw2G
-         mmLnk2ElzxrlAf2TYG8I9eDCUUNBOt4hW1FV4dOOJCyF0W8f5F/OadGPgjlCPkDn0TMh
-         Ze18gZo2r1YEjbr7scGtIYjSabMo4xGEbVeXZaWHizQFnX4mAZfFQ7umrvmj3Yl49Mj0
-         AaAg==
-X-Gm-Message-State: AFq9FYKaNcoa+j2RzhG5qGZxXMVoEtUgWtcpcqbnUilT/wPJ5jGcXp9e
-	/cRP47wf/x2stRpSZgEu8CB4NnZaT9vAiP3ou1Ds/J7Zr7m/lPirUm+J5WA9axKNcVKZN0yFPk+
-	Znqz3
-X-Gm-Gg: AYBFou3ItOpVDF0rhfozCDAz+KeDxRwlLfyVYeOQbsRSYc8qk8VxZ/+iV0mAIISdJoM
-	zXD/O8QK0i6JlPFL/xmoMYJxTZhIN/3xIZ5N4lbjizqXOK1zeBH1nyEmLmYO21kSZpUEVNPsI3u
-	ZVaW/uysu9kVYDPk+dm4CPnwfCT4oUjZPrk7h9/4YQruYnGV+3TbGow1Y4NzFX7EMJXPY30IC8u
-	erw1RsKhKtbdoJ3w9HOBBwWiOlfWE2+NSJUQjz0uLpB5G5cfhinbDifTY0LSfFPhXX1R0g5qbAm
-	PBhnx9vQ43fSbLDCIhcU+XCU+ks8flHpsHSpnVyOofk3M+KLy9lx/yhXCgG6u/+XmtVlvVIDHIH
-	OrP0K9DwlMk3TlkXqFya+wZ5ZAohbvW/c5jNwGYRroHYGz7VWJmYb3ch/9XB6krPpWNktUbSDwy
-	Qeb5B6geF1eEUw4fGYSmePYKWuEFBTylioqTzuoxribm61/CSiUyfdl9BGvAuLtx0x8VxcJcLn1
-	n9anMBODCD32FBk6+TH2OvovaBUQlgbPChkG8snAt7/ToNZm4hA/3ooLRFaQ0HLop7cBqd6O4U2
-	oLMG+ZwbCIVYrcCpgs92/AOKaUkt0BSgyTSpHsuvFBrAA1dv+NPiPvKwKfOzFG9dT51ul9h4xIM
-	PE08y
-X-Received: by 2002:a05:6000:25f2:b0:48e:21f7:79ff with SMTP id ffacd0b85a97d-48e264c450dmr3750453f8f.33.1792580487066;
-        Wed, 21 Oct 2026 04:01:27 -0700 (PDT)
+        bh=Y4Trt78tJnW8DU79wgCd2NVMsuZLKwYahdc0MYpQ5vc=;
+        b=C+nzyFJQcCf6o424plEfS+VJhZCpgGy54UdpNUhXguH0g3bH+lgpx2lUx3+KxyyErL
+         JU71rv/wNfX/b8U5NZJI8pV46pcQoFYHgfAoD1FHnP+xETrwTeLoohzUOIXM4bPsWTA4
+         BkXhU8pe32+FHT0jtvHfZ43Gl7JHRGj+XsYb+RXUV0T2UddUp9MeVZUhxoXUI5tpDvpK
+         kr90RS5/lW4G7W2siyNUj37oBQy/155zAOAYB1QUaZhpmz0MKe6/SDg+Q290SxpyngXp
+         sq61Da+qRTkfv9pf8oNOJFi86Wm0mUItaqR9TIMMw4WAv6SKPvYNhJf6o2pwbPduarTX
+         NOvw==
+X-Gm-Message-State: AFq9FYKpp8s5chM5AQVKJH9phDOyC5NkVUk93723yc6zp+qx1kZdgi4a
+	o76YWLb4Px8jNBsQnbNrMGMbFHhTksBB6pRruuh7aqYPH5kNMAvExrzCDrUzpdBL7uKOZzQ3O2O
+	owjqT
+X-Gm-Gg: AYBFou2poraa/HVQh2gkFTMRhYHr8f40ysW4DYsrfHapxMuoQR31WelP1CvU6ceYyOV
+	8PV3pjtGiDVAwSPPN/DduH1gLpjKx95JfN3T1n8J/70WPMrQyR5k2M8q4MndBhiqb7cAOUtkh/G
+	/snYDVpkps4QlN2z7Qsw0no2o4Si5iLjQim6iNzXU264Kwgt4hcVJsr2TARd0hUAwH/mV29Urrl
+	zUcG8+hP9kNG8QyDJ3wSLud/tOoRkYPlDSKwIzJdBmke2tA4QL51Fa1rXBfPlMbRL3pDucOXLDA
+	/yycG5A5FpqRdfB2mzlfFxyiHpKh8lFRcId+tAfzXFlUiF2GCQFOP+eCsVqOX1WMViOyxbHJcae
+	Zw1t+T2cFKL9Kgm9vbl14urYa9P6ncKgqNuRZnO3Ja3ttOxhBmTv79RMAcnOhD8efc75u17y2LK
+	BFHAzQs07hIcKEf/iD59ikdOlIUj2dJbvOgf8uROTdYLZfOLGeVACpHjRukE1K9VBG+PfRwuEfU
+	YMpLfuR52hA8/hH8K71Lju74bpKju44ceRjUJ8z6tu+LG5w0G1WPj2TjDGEBTq9DmHJyPFMDSVA
+	x5sYO10mSrFV37wnBMWzZ3Or8auzZji3TMyJ7+8hNn1o8lsHeMsQjZz+I21iWTpinQ4eVcK23BG
+	91b6c
+X-Received: by 2002:a5d:5f55:0:b0:48d:ca32:e90f with SMTP id ffacd0b85a97d-48e264e905cmr3386400f8f.55.1792580488799;
+        Wed, 21 Oct 2026 04:01:28 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.24
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:26 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:27 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 10/36] python3-glances: Upgrade 4.5.6 -> 4.5.8
-Date: Wed, 21 Oct 2026 14:00:34 +0300
-Message-ID: <20261021110103.1943456-10-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 11/36] python3-gmpy2: Upgrade 2.3.1 -> 2.3.2
+Date: Wed, 21 Oct 2026 14:00:35 +0300
+Message-ID: <20261021110103.1943456-11-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131269
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131270
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 4.5.8:
+Upgrade to release 2.3.2:
 
-Bugs corrected:
-
-- Stdout: CSV data blocks use the first list item's fields instead
-  of each item's own #3746
-- Stdout: raw selector with a dotted item key
-  (network.eth0.100.bytes_recv) raises UnboundLocalError #3748
-- Folders: a second configured FolderList appends its entries to
-  the first instance #3750
-- JSON export: --stop-after leaves an empty file, the last sample
-  is lost on shutdown #3752
-- DuckDB export turns the string 'False' into TRUE #3754
-- InfluxDB export truncates dotted list item identifiers (VLAN
-  interfaces lose their tags) #3756
-- IP plugin: a non-object public IP response raises AttributeError
-  in the main thread #3758
-- CSV export: rows are shifted under another device's column when
-  the field order changes #3760
-- Export: exporters mutate the live plugin statistics when merging
-  limits #3766
-- Elasticsearch export: a mapping type per plugin is rejected by ES
-  6/7/8+, only the first plugin is stored #3780
-- Exports: an optional key missing from the config overwrote the
-  module default with None #3781
-- MQTT export: crash at startup when port or callback_api_version
-  is omitted #3777
-- Uptime: export the SNMP uptime instead of the local one #3779
-- Cloud: do not report a platform whose metadata API returns
-  nothing (OpenStack reported on Amazon EC2) #3778
-- IRQ: divide the interrupt count by the refresh time (Rate/s was
-  multiplied by the refresh time) #3771
-- Programs: KeyError when a process stat is listed in [processlist]
-  disable_stats #3776
-- Containers: WebUI throws on a restarting container whose cpu/mem
-  stats are empty #3768
-- WebUI: the browser caches glances.js heuristically, revalidate
-  the static files #3763
-- Processes: io_old keeps one entry per pid ever seen (slow memory
-  leak on hosts spawning short-lived processes)
-- Smart: a missing smartctl (pySMART >= 1.4) crashes the server at
-  startup
-
-Enhancements:
-
-- WebUI: make the container table sortable by status #3763
-- Processlist: only build curses rows for the processes that fit on
-  screen (performance) #3762
-
-Continuous integration and documentation:
-
-- Mark regression test assertions for Bandit
+- Fix processing defaults for e/E format types precision
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-glances_4.5.6.bb => python3-glances_4.5.8.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-glances_4.5.6.bb => python3-glances_4.5.8.bb} (94%)
+ .../0001-Avoid-do_configure-requires-check-error.patch    | 8 ++++----
+ .../{python3-gmpy2_2.3.1.bb => python3-gmpy2_2.3.2.bb}    | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gmpy2_2.3.1.bb => python3-gmpy2_2.3.2.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb b/meta-python/recipes-devtools/python/python3-glances_4.5.8.bb
-similarity index 94%
-rename from meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
-rename to meta-python/recipes-devtools/python/python3-glances_4.5.8.bb
-index 311d38cac3..b6e718e3d5 100644
---- a/meta-python/recipes-devtools/python/python3-glances_4.5.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-glances_4.5.8.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://nicolargo.github.io/glances/"
- LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=852ecadc0ac7e6f4d7144d5544a3815b"
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch b/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
+index 3c602cebe5..0fbbee8b43 100644
+--- a/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
++++ b/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
+@@ -1,3 +1,6 @@
++From b2ee22409705ee043d79550867e9002ab6e86672 Mon Sep 17 00:00:00 2001
++From: Liu Yiding <liuyd.fnst@fujitsu.com>
++Date: Sat, 28 Feb 2026 17:01:58 +0800
+ Subject: [PATCH] Avoid do_configure requires check error.
  
--SRC_URI[sha256sum] = "8a26329f0a25e878d53c2558f1eb0615b09acc1dce2ba523cab32dbe175fe8bf"
-+SRC_URI[sha256sum] = "a1e5ed5a6488964a576d550a420c91af6f2c7c2d8df8e9fbe67c98eb38bacf3b"
+ The gmpy2-2.3.0 need setuptools < 80, but version in oe-core is 80.9.0,
+@@ -14,7 +17,7 @@ Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+ diff --git a/pyproject.toml b/pyproject.toml
+-index 1f00809..3a4f3e2 100644
++index 214d656..30d3f33 100644
+ --- a/pyproject.toml
+ +++ b/pyproject.toml
+ @@ -1,5 +1,5 @@
+@@ -24,6 +27,3 @@ index 1f00809..3a4f3e2 100644
+  build-backend = 'setuptools.build_meta'
+  
+  [project]
+--- 
+-2.43.0
+-
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
+index 9bb3c96fbe..d1097801e8 100644
+--- a/meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ 
+ DEPENDS += "gmp mpfr libmpc python3-setuptools-scm-native"
+ 
+-SRC_URI[sha256sum] = "313f35e9fe6b9ddf72759b14dac25166fe5757c970403e4bbf87a70ab2be07df"
++SRC_URI[sha256sum] = "f20b7e2f8fd16f8d6846bb5b73359c3cc5aa41ec5cf266321d362f547c8fd097"
+ 
+ SRC_URI += "file://0001-Avoid-do_configure-requires-check-error.patch"
  
 -- 
 2.47.3
