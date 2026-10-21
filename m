@@ -1,178 +1,105 @@
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.74])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6284.1792568770666945038
+Received: from mail-ua1-f44.google.com (mail-ua1-f44.google.com [209.85.222.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6456.1792569939101243680
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 00:46:13 -0700
+ Wed, 21 Oct 2026 01:05:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=Y8e0pcoJ;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: vaisala.com, ip: 52.101.84.74, mailfrom: niko.mauno@vaisala.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AXyNmDcWB63b442eV++7B+n4r7tmlZEB5LMe94hxl4LX+F2RiQ5snmmebdFnZ0Q86UzKL1qUUZCDVQKdXSf3i+LGCKUT6D+pQRPi/eMAHd/D7ChASS0xBvsrGTNymXxHV16+DrbTMiueAFg8fWrhJwXLP7RJf1Tmy9RQ17sicrCA6kV834QaE17viDJqR7ChdEJmUUzwbh0JcI3ynGDIFr62g8/1/Fu0jRgmJItuAShqYAJc4t+2DecA7Xr7ItWRT84H/7HtzKj/CcMLArhEk6TFqggwma47gQHFj2nTIWHV0A86k8erO06AcK9Kr5U1qOBSM7Ib1EcLOGTfywYHZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LFm3ccDSEApHZytxB9tu2kydWoPaIj5oo8NSG4DzPv0=;
- b=xAf55b7fbkyZvwS0CSrvXHdN3HWx7Kgdvbin/2ZuQFz5jEX92lEGq41C3S32/7LTyLHoQdW/s8ByXz692nnqoz3qHzzEEC91Jb8n+Use+5eEfBYsRby74xJHQTGSiLWD/aeBcApGMgw9Q5t7KnrX1GTZ8eMcGVcRUD+RK2SP1ARhCacc3oH4K8g//JQPaVxKRRq241moC2S7W1fA5MKsqn1/N/SIbl+jdHpDJ1s3M+R/1wxjMyP1SmVnSZFGW9v0zcQK2RoThfA2pBPgw2XAASuKfGQl/DyS4XM1jgvEwKedKZrl4yrdpNCuOlLvAQi6irS4KvtODjMBoLfrHnD+/g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LFm3ccDSEApHZytxB9tu2kydWoPaIj5oo8NSG4DzPv0=;
- b=Y8e0pcoJPIaLMjns/yNlXLqqOP3lfjTNcY/LdxbKJhgmCygx97HwQ8Joi3I1vem2boyqmq0fuaxTMsyL35I2vQ/oyCYcBiG16djR5BpaEVFvUWbP898/peBIcwJm9lRmehEDBuY5+Avkdt4CvX8LxlCTDTPEk6uSCW9+knQc96l6m6b12TGJIS4NBN4Nq4vtEQogGx+GJLz9ytGC292Ifd8PYuVT7LqCq84QOJZxC1mazCMZIRN0qMC1W8vLun9bijT3fzfBHO1UPvKeGM9oaSnR2BQ5Iwyb3Aa3RZHV6vqsKBP5hzOory1MqIsvPtFPvE5OZHIsD1DdJeJr5kfaew==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AS8PR06MB7557.eurprd06.prod.outlook.com (2603:10a6:20b:337::17)
- by AS8PR06MB8197.eurprd06.prod.outlook.com (2603:10a6:20b:3c7::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Wed, 21 Oct
- 2026 07:46:06 +0000
-Received: from AS8PR06MB7557.eurprd06.prod.outlook.com
- ([fe80::44ca:1bbb:6b57:4c16]) by AS8PR06MB7557.eurprd06.prod.outlook.com
- ([fe80::44ca:1bbb:6b57:4c16%4]) with mapi id 15.21.0522.017; Wed, 21 Oct 2026
- 07:46:06 +0000
-Message-ID: <4bbc9069-46fa-4f27-ae76-f49c7c9ae7b6@vaisala.com>
-Date: Wed, 21 Oct 2026 10:46:05 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCHv2] pkcs11-provider: upgrade 1.2 -> 1.3
-To: ankur.tyagi85@gmail.com
-CC: openembedded-devel@lists.openembedded.org
-References: <20261020134852.1679078-1-niko.mauno@vaisala.com>
- <CADySD0H_MkUebPR1yWPH3tdUTWZZFzfKGOabKEwJtx_o4TnJ_Q@mail.gmail.com>
-Content-Language: en-US
-From: Niko Mauno <niko.mauno@vaisala.com>
-In-Reply-To: <CADySD0H_MkUebPR1yWPH3tdUTWZZFzfKGOabKEwJtx_o4TnJ_Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: MM0P280CA0042.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:b::7)
- To AS8PR06MB7557.eurprd06.prod.outlook.com (2603:10a6:20b:337::17)
-Return-Path: niko.mauno@vaisala.com
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Dk1iY3nm;
+ spf=pass (domain: gmail.com, ip: 209.85.222.44, mailfrom: tolvupostur@gmail.com)
+Received: by mail-ua1-f44.google.com with SMTP id a1e0cc1a2514c-99075306daaso242819241.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 01:05:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792569938; cv=none;
+        d=google.com; s=arc-20260327;
+        b=i4q0tod9JsLusQEniTCyMsW5yXznjY5LBXRQQY3RrUb2NOXltWUwbbaW6fJX4ub524
+         yLRAJu6seI0Klqwpq40q7lt30NoG6fSjrgi3pFFZNWUtrIxhjHgzl8l/2QHRVF0m3wlz
+         YajGUe4loekkMnVb/72Z/OpQfIElFuJ61/EUQY/m/5XLyIQ7Wr9/KXpPKCLi4JAnoRsx
+         S0BUKG0SpWeH9arq8EwCdNnuVSU66uMNqXFRDkdkX7+B+QqoLLFyTQFYWywEMEOYbuMw
+         1f3UMQ4PC57+/0ZOGVvIS+QVnMdfdonNWkeK8jbQuXn83BF4PJtbuxub5YSylK59GmTg
+         cz4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=7XOKi19FYboT6wKFx34qbJJnSHH1E+A7IBXZK9dc3m0=;
+        fh=pgSuNtBd9WV+mTof3gYKFZAQkk03g+8G5+Acac4ed14=;
+        b=Bu2UbJsHj4xgTabfYWXC3yeHIGyYZhd0X0eI3MGvvP/YO7QnTBOrjOabn9W21YeCPB
+         AEnrDeg8AbUGUeNCbELKc3iI5fblh8m7AMf8ks3Ii/WUnFcaUisdYAz6zwffl6ZeBUrz
+         s2rNSdHjZbhdRcXwUlVAWeEJ4e+6Dm5yYpD4c5XVVxqHLQ8QUp+3WxT5ItKndXovLjPm
+         p5nrckmNE6v21JLuhZ+ddyoBDLPfv2wnhxfqHfkJYJWKQIsAXYxPkzax5C/Wu+VWGBMG
+         fQSQqVxXEwQnjKCETdMhIeqhZQivJ5UnqFwitkCoAGnYIQ9AGPAu+9gD+HFIlKqShWho
+         ly/A==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792569938; x=1793174738; darn=lists.openembedded.org;
+        h=content-type:to:subject:message-id:date:from:mime-version:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=7XOKi19FYboT6wKFx34qbJJnSHH1E+A7IBXZK9dc3m0=;
+        b=Dk1iY3nm3blMj0jzCxXM79pyu09hdVcFCX68HHokxy7CorKLDEQeHGyj9CNasQjMUC
+         cddhVcsgJoSTBw0grt2M86r8Y4Q+9kW55MFR9xe/IfQ4xzJZ7n2zG1A2y0YmWVGZ03u/
+         sH0MeCTNQaNlcg4McbDNiXUiv91K5NhjfRzkKIblHhxT1uO8Po3VF93UpDHun/SDIMvt
+         bPqV0I/h99xvaZuvqfElxrDZ4gZ2KO043F4Vk3JnTqKRXhs/UMjzNYlwXAvlrwISeUBt
+         abG0rgi1uLWY05iQ/n0SPHhO57NnFm/M2jqyPmDTcCwlrcsssC+hpi1jktZ7aY1dWWzl
+         9h2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792569938; x=1793174738;
+        h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=7XOKi19FYboT6wKFx34qbJJnSHH1E+A7IBXZK9dc3m0=;
+        b=UBb9d/dE6nxhEaGDC2H7/brtZOpcJZcfoIX5F3cz+gbcPaaTx8ADUdUqfKxdJFD3lH
+         GBYPfw4u++OTpACSTm0h3rAOv2Z9N5SUHTX7AyxKNetvH1Kwvoa21WH+rS0odiuJOdSD
+         MySx+XwsYgQr6UXyzvPO9V2HjiKD9jUR/ErRSYAmW+QOm5nPXKL0M/grPWk+4pqcz0vE
+         bcN2zxwRxDAPdAk3uXPkyKhA19zCoRuc124aV6oj8EVt3qk2Pgwf/u9xS1rs1Qrw4G3F
+         LrAdlE6heqxQfMuJA72a4SvijbgtZJQR5hd5bGDzOAv8lXq+goeYnIFn1Qyv12LV2/dD
+         IahQ==
+X-Gm-Message-State: AFq9FYJ285CvjW0dZ1GwXPqE/DvGAvsDCJgQVrDAjdsqiUG25G/snaFe
+	9kx0nBQiHCxTpDetSo7TI/STmMisjXLQLJzNZVlgFp1UTphNXIV9wifboBUwHZao41i+9MTwqWk
+	9vjEaw/5MVs1EO+L4wG8xO+mY63/mRsUVVkTXWrE=
+X-Gm-Gg: AYBFou0x1OF3hJp98Njc1XvhW8Lv5wSmXAFLg1HEVrvleT1bmqVSjbhoOrxzYsxaXRR
+	4liyU9ne3ght/33ao+xTSKsVl+B6G0YaXp8LZv6t71B0hYyVMA/ETDTEw280iBwdusLwZxWmmPy
+	+N+OE3ylN+mjFx8BqYWkNVQoYspZcqgA6R6Uk3yCnxwWSE+7pIfdODUDdulh9gpCUbOR+alUIaR
+	iGcR3xD4vhuFJaVRhSWk1dXWtU1oPn8SJDlwu99qbs2VFET5Ke3o5bdYFED9WIH0QNM0JXeh5u+
+	sI43DtJy+SRsqwkrnolyz93fdZh+kV3rgONW1vjEXktonu/cti0foKSXB2IfwrcVZsBdt4Igd9i
+	aYUcIrPa7ajUd7jyUpqX8HRUbN5nPQwMIsw3jJtUN0IucjFu63LmTFIncs2vS
+X-Received: by 2002:a05:6102:5490:b0:7c2:ea3:418a with SMTP id
+ ada2fe7eead31-7cc927687damr544671137.36.1792569937963; Wed, 21 Oct 2026
+ 01:05:37 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR06MB7557:EE_|AS8PR06MB8197:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11eda8c8-a7e1-4fc2-b6a2-08df2f475d75
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|4022899009|3023799007|261009223027099003|10067099003|56012099006|22082099003|18002099003|11063799006|4143699003;
-X-Microsoft-Antispam-Message-Info: 8GD2txBPUXWpw+E8tQJzj72dVSIVcnq+9XCX4HKvht5Xf5NSe9MdkzRMnQ+q5BIhfogUMkU0pAmlsBcO4geUQR3ZuKMXjso4p9ltvNOHTEeufMrQXmnAF2zm+MXRUnzLFRQQ63ucJS2ATxTHsD+I6RqVr5tF2D/R8haLfYKX5K6wcEkUXadvqUVjms/OlgS+aI3wg1znOaKwCKSI6StHlcYLfGPFe+jjBJxQGnbi47CvIAeTWNj7K/Pt7kqMVIbnecz3WS/a4giUFLHVaYMCIrjWM0ki1HM4DfBuGsiRaq41Omlu982oXaWdnv9yQdfDURmhtL5BerV75B4U1Jf4HZcCNFMi6yOAJEumnJzZe8hfGBAyf3nP29h94zQrqTyih2Ix6qj7JaKzM4U6cB2Snivn7RTf5ZWfUnZRQB7NaT5HQ3cDg6cnwDMhEMTPZ3utUwl8zr6KeG5Kow8AhkGSkOSnO+8y+ZHbY3vf5GUUXE5oai6ubdZ4rFoa9XLetiC6ai/zjDlB6HNercb+OVUIP3kUHLKRKUCQYo/Xszq30wiMWfg8l100J8h8nKakrxFRN/gKNtwJuPUIZYDVxeimurfWJRrOm6tRqZTluQXMR1OE0qTAoMySWJTQrE7zWScX
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR06MB7557.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(4022899009)(3023799007)(261009223027099003)(10067099003)(56012099006)(22082099003)(18002099003)(11063799006)(4143699003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gCcbtANkdevSFZiQiZPig0UT5SRh1g+KeC3+xJ6vAufh92b0Ri07GW7qxVhU?=
- =?us-ascii?Q?kHVIsapqFIXfRWRePm/oPUfvPjf2w6qtbysSOd7MhtBb67LgUqRftkaUBCLr?=
- =?us-ascii?Q?wdkqPFXgyql8kXVWYpX1/gzgy9oReEvZ2Po4kFZOeCdfSDC7elq6Sler2DR0?=
- =?us-ascii?Q?ksHLqSUms9tAKwo3T+S/PKTUHeYZhSDcbdDtvOVsHpkEHONPxsf4ZvMcdwzR?=
- =?us-ascii?Q?YIGC7yGKw6Lem4ZW0q/HZp8nHNEEFRV6S8UcOpr8X2CT0vrHdB4RoPsPKXPw?=
- =?us-ascii?Q?AJ7vQKkmLj+zDsvCPO5ultZMKsdl9scVoaGhn3iJaaTpntZAA6mwQ91njTG+?=
- =?us-ascii?Q?6HZvF2dyvzZFhOTggV3JShUQiHP9ofICtxNOJyf1JjSm86MV99yKx71S5LIf?=
- =?us-ascii?Q?a5DY0tIciHtFl3jdC8VXFRKH5Dj2HQr0zF86/7OJL0ZbyBcGyhuVnZc88HEo?=
- =?us-ascii?Q?6SwF2rA7Pic9xJzz4ja8h0njBKV31R2LhBDFQdcM/xF46k2VHUNQDsDCfmva?=
- =?us-ascii?Q?ajgj8xlSA6KWAHlql9ztPLeAm/4U0aZNVnK7g3Znpv0vA0BL5etjgR3q3IPS?=
- =?us-ascii?Q?V4W4/AmBK7UrWVcp8b2/Od+la1Bjc59PwFBgyhazqOV3qGx8KB7PuUch4DKj?=
- =?us-ascii?Q?ePIiP12E4NjP+IxX/QKLTYQwYMIfDa0zEDrksTiYmbQjSd0za1aqprv8YSla?=
- =?us-ascii?Q?tUgEPtlq3pl2H5YvcLE/rbtLVYjvyYDydEHZ+5I/49n/06ThSLR91tCcvFXI?=
- =?us-ascii?Q?WWbl6RqwZAl19U8xoYUTUpUESwKROaM9vdek3xYU9OmKvNdXA8jrEf7ecz4G?=
- =?us-ascii?Q?77oXICpb/quabMhOrSTdhpKwXrBmwWzTElGWXG2mPOS2GpHVhXV98S8GyTTJ?=
- =?us-ascii?Q?5cMZG3l2ieVnIpRT3Fx5KpY3Kf5sAt3Zsz4ZtGs/sAXGnRureEAfMRB4On7Q?=
- =?us-ascii?Q?nz2zRiBiHJVusx0Fs3YVBgh1xMTIr6AiI03GHsiNEJmT1gHf44Rwnn4IK05y?=
- =?us-ascii?Q?Qcm5VPJDlRwNvppQwmh8iPTKi3qY/4NxoIXQckiSkM9obiLQQDfiVCxCMwH7?=
- =?us-ascii?Q?/ZGGkUAlLrU/nH48jv6+AX8rh8wTRIJcXxI12N0Sm8L+vPdDXQpA0Tsq4zEf?=
- =?us-ascii?Q?FwbilKIE+KIMigNdIH3EHvnV5PHcm5FtuLdc2zrJwWvkcrK2F9jE+27szCMP?=
- =?us-ascii?Q?d2/UsOxeWGuDOKFGwqkASQh0LJYn2IGw/b+EOWS5mmoqPkS3AOY8b66vDncA?=
- =?us-ascii?Q?KyA5u0eebVELB9whD/u0bp9g1Qhw9z13RE4ZWSfGOkT3brKvgG00D7hzxZGt?=
- =?us-ascii?Q?eMujoCt9gf/uEDpzlE7UgQeSSDn3G6TWHO482VoEW60EmeyI3S2ldxKauGC1?=
- =?us-ascii?Q?mrgZjuvlU8QKSn5Qk+hofO9XTsO78KIp3L5mfN2jM+8qTq71O0NoyttiDThT?=
- =?us-ascii?Q?rro+bCrMXrkTwdv7XKsfgXnlpvZAZf7iabfRYEmXHYIkzK2tt0Zz6s9lmDCm?=
- =?us-ascii?Q?W/2nTSn+ikAn3JudEvB0Wy4dS0eQFr3Vc6me+9RgbE2mRUE7Y7+qOcVTJL/U?=
- =?us-ascii?Q?nTzxW+hTb2tjdsrc4UA6P7epyM9c6JC1yI9bm+cHd9NIJY3Sb5D1j8mZkFh8?=
- =?us-ascii?Q?IuTFVB+vU20L3JVQCwjzd62qREJ7KGr/C5qFSzkbNHf+/Oi/mHx8Aj3uYgKW?=
- =?us-ascii?Q?1FBsJPAwjvlKvO/pAM9ZTwOZz6ZAc81QXCT/bbulimC93FGPTVAQgmbH+71w?=
- =?us-ascii?Q?Ex5+ORNEQA=3D=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11eda8c8-a7e1-4fc2-b6a2-08df2f475d75
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR06MB7557.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 07:46:06.7792
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3rFsUC/azi5hwaLm0zVVqhMIauVD9bGijodOSQxZuYAIJfzmqi/U0s2V3vUpXVMEcyWqlIGlz2X7VRBx73hoZA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR06MB8197
+From: "Einar Gunnarsson" <tolvupostur@gmail.com>
+Date: Wed, 21 Oct 2026 10:05:25 +0200
+X-Gm-Features: AclHuK8AwI3ceRHXmHfRmJFr0f4Gt0wn_vG__5GoFup-6el66VWN7SHelE-r4EQ
+Message-ID: <CABhNV23CdyW+_ZHPGWLhzPfwfNR28Q4KEm8eX4+6HRf1Q8i7hg@mail.gmail.com>
+Subject: [meta-multimedia][PATCH] pipewire: Remove duplicate avahi from PACKAGECONFIG
+To: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 07:46:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131185
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 08:06:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131186
 
-On 10/20/26 10:52 PM, Ankur Tyagi via lists.openembedded.org wrote:
-> On Wed, Oct 21, 2026 at 2:49=E2=80=AFAM Niko Mauno via lists.openembedded=
-.org
-> <niko.mauno=3Dvaisala.com@lists.openembedded.org> wrote:
-...
->> diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2=
-.bb b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
->> similarity index 73%
->> rename from meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.=
-bb
->> rename to meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
->> index d95706d9e3..f7936d3756 100644
->> --- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
->> +++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.3.bb
->=20
-> Upstream is now using major.minor.patch scheme, I think we should
-> rename it as "pkcs11-provider_1.3.0.bb"
+avahi is included in PACKAGECONFIG if zeroconf is in DISTRO_FEATURES.
+The update to 0.3.63 enabled it unconditionally a second time.
 
-Indeed so, seems it changed since 1.1.
-Thanks for spotting! Will rename.
+Fixes: c4d52888a0 ("pipewire: update 0.3.62 -> 0.3.63")
 
->> @@ -6,7 +6,7 @@ the PKCS#11 Cryptographic Token Interface\
->>   This code targets version 3.1 of the interface but should be backwards=
- \
->>   compatible to previous versions as well.\
->>   "
->> -HOMEPAGE =3D "https://github.com/latchset/pkcs11-provider"
->> +HOMEPAGE =3D "https://github.com/openssl-projects/pkcs11-provider"
->>   SECTION =3D "libs"
->>   LICENSE =3D "Apache-2.0"
->>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db53b787444a60266932bd270d1c=
-f2d45"
->> @@ -15,11 +15,9 @@ DEPENDS =3D "\
->>       p11-kit \
->>   "
->>
->> -SRCREV =3D "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
->> +SRCREV =3D "b55b94344af87a058fd84d6e15390760a5585b1d"
->>
->> -SRC_URI =3D "git://github.com/latchset/${BPN}.git;branch=3Dmain;protoco=
-l=3Dhttps"
->> -
->> -SRC_URI +=3D "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
->> +SRC_URI =3D "git://github.com/openssl-projects/${BPN}.git;branch=3Dmain=
-;protocol=3Dhttps"
->=20
-> And if agree to rename, then can please also include tag=3Dv${PV} in the =
-SRC_URI
+Signed-off-by: Einar Jon Gunnarsson <tolvupostur@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks Ankur, duly added in v3 I just sent.
--Niko
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+index 33b46de6cf..143f3d5e0a 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+@@ -92,7 +92,7 @@ PACKAGECONFIG:class-target ??= " \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd
+systemd-system-service systemd-user-service', '', d)} \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
+     ${PIPEWIRE_SESSION_MANAGER} \
+-    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb
+pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling \
++    ${FFMPEG_AVAILABLE} flatpak gstreamer gsettings jack libusb
+pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling \
+     libcamera readline ncurses \
+ "
 
->>
->>   inherit meson pkgconfig
->>
->> --
->> 2.47.3
->>
->>
->>
->>
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#131178): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/131178
->> Mute This Topic: https://lists.openembedded.org/mt/121849116/3618471
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-niko.mauno@vaisala.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
-
+-- 
+2.43.0
