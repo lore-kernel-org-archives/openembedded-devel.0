@@ -1,59 +1,59 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8725.1792580496964050025
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8727.1792580497831140583
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:01:37 -0700
+ Wed, 21 Oct 2026 04:01:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=BXueuise;
- spf=pass (domain: konsulko.com, ip: 209.85.221.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48dee593f18so465123f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:36 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=splq3WG+;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6b1f4d8e09aso825442a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580495; x=1793185295; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792580496; x=1793185296; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Rj9brpuq2Kt423dFpizpQxARqifgZK2uU3gGXqiCNHI=;
-        b=BXueuise9u5lCx4H/GdTJhlkaFHtUtqxeTz0FiQwpHhWgfWDyG8FOfEmuWx79mJVsZ
-         wMeTcb3mjLHEm0xTeo0esiUcAFwqOaCVuHiFrcPK+aD8o66J/7T1WN8LljlaqH+kOgTp
-         4Cc4dC0NZ5ohqe/olHXg3lG172SYL560vxFRQ=
+        bh=7hBrANeFk7GY2f9YEl6njVCmiAx9zK1XsJoJec7I+Fw=;
+        b=splq3WG+8oRPBxndZW7KlscM4NzwfDNZe0RJotnHSNHSPQa45JaPdn5vXZzdufuPUC
+         WcSUnxQdbnDuvBkUJ2DSqZ1GphXc3/ZuaLeTnINkkOH2CtAL7LLDmh6SJGsYAnw1JVum
+         9Eo4Yi375Vy0F29Z2JvKNqfE2GWhT6bGzfOBc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580495; x=1793185295;
+        d=1e100.net; s=20260707; t=1792580496; x=1793185296;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Rj9brpuq2Kt423dFpizpQxARqifgZK2uU3gGXqiCNHI=;
-        b=BOvO2uulr6qXaRCy6iU75unViAN2U4R3qm6z3T0MGKizF3RojxFkm2PMwxrBmpocES
-         zPfOq61ljKJnJpI4BKB2LhhWnVGxt4FNYAzT58X0p7mzR1j+6icaeBlNCAy/caN907uE
-         BuixJagTojIdtuJChQutzkyowwUOeh9sjtQ1W1fCfUa5ct4QBatAGKFns+xX44zCE4nQ
-         OdFrYQ3HpM4ugHHmUVwu1buzim4mTzqUXVwAJREjEQrsu5P8CKECyEKirgxSuiceyguK
-         AL68U7NOrKGAlHsG5GRV4//68QjIc1FjugXBq/CssSzMHbD/VQRzx4GPNAA/ChDxv3V3
-         acBQ==
-X-Gm-Message-State: AFq9FYJSmRtAQO2ZgRv2FJZZkH0U0jqu34gpPpuJAuDTpom8Ju/ULI3S
-	qRwniyePD/lZInP+IbcdzWlbcRjChqf6IL8GjSxIyVU1h1Xu1E/jM8XWevUAePB5L1ZIHLGb4Ji
-	3XLnP
-X-Gm-Gg: AYBFou32C6e57sdHw/08yN+/3Hl6/cDDQ1urvxAIG+VXKacHujV0KVpOSsYbM9UnMvT
-	qpPOs5x1sU4TSWTPsT3Tl7o6m32tNtxSIXLGRGENLwfEq/ndGPGQYRt7Z1EAmY+0saineAqPZc8
-	KDWFu05c8q4+O7C+2i7jP3DG0F3ERNmhGb234jVj2W/kVJcHm4Y2qngnC/117idFDptwGdHc3FW
-	eFf8CAe9zQrpjy06ohHpZdSV2R7GFofQkRqtJKyMcNk1SlUPwGA7QlwgZxIANp5TniIdkAlmQpS
-	NUd8NZZ/ToGjCWVPp0c17+9WlBUhm8lz5ryi3oM1OjO9xAO9EYxwDipLE3RpRRwqhNhBx5GT9BO
-	JrkPRYeINHJ1gzXF7b6UsXPtnqvafVUgPgiXT16JRV5m4w6KSmdJx9LEJRNazlnTfHYTK54IJob
-	Fr73Zu0nCOoPbFAJD9m91TCp4JDHyAzW+wDiK/cLEMM9L1wN15L9R0r64dIqqVm4e78A3g4GFHZ
-	/wdHEgbheFfh/Vr2sMe0KZtUvmRSFkQvN3AovDWRrWuzqwEGgTN8ERW96fb0+G/EAqYIWEa17zY
-	M7vl0Vs5dnPLlUQOsTEIjk1joZTcqxSzFGGnDMoq3OMPX8Bw2GTWwNfV8rVXv+58MTW/D7BZWwc
-	RoYvM
-X-Received: by 2002:a05:6000:490f:b0:48e:23e1:35ec with SMTP id ffacd0b85a97d-48e264db0b6mr3280269f8f.47.1792580493466;
-        Wed, 21 Oct 2026 04:01:33 -0700 (PDT)
+        bh=7hBrANeFk7GY2f9YEl6njVCmiAx9zK1XsJoJec7I+Fw=;
+        b=glH+Kd3wdXji4+PccRAz+0iyJpM7RrDSLm0/cV7KSY76ykyTbuHErtQWVs1U1kVoG7
+         ayvOETZdnCDHcgR1SK9k27vfd+06DRzs/geFzBOOx7N91pP7kCYoW0jkLOz3gCRv0FTh
+         UNUMIU2m4uOegBlg0isuwnEK8GOkrOxEmRUOGz5lcC5epsXu/STjIpp6sZTOu3joBSWe
+         Y7K79kTjfWEACEMK1MxezCzj2PSBxljLjbxrZjEL2wFDMxyGaRDNtGcJFxRuBSyh1AlK
+         9MCAEor6NRhJSkwjseGCKX2X2+vFq4DWqKfGhnAEee/S/pNwDqAZkWtxC4yu7egY/ubS
+         vyKA==
+X-Gm-Message-State: AFq9FYL0DL8KzO6SMysFSE7uRVF0GnI1jsrIo1yL8AYFFeYVCoS4TmhV
+	GkaTx5pb8TUUzOaR4iy+VuJgPIACrOIYW2k5T+dO+aIlsvucXlQ24r86L4k8Rw9unyf0Aiz+Ry/
+	N9Lgt
+X-Gm-Gg: AYBFou24jpPf0CovPRr+wcs3RERiL60hiwsWAQa7Mcp/NJxgnMgKmv8mGSDiGOiL5Pv
+	qvqbrkl+mJDDRfRp9EciWDIOmOTugF4yGkSqSUU32fxlytl1X1nQEe6/e308gv+7cwuh6+NptiR
+	GEF1JbrrWAdi1Lp2dyI0qM49p99qKRd19ewAc+g1aIPBkM4a0CLywN4pHe04vijl/8yWzJbYPst
+	2ygzAGE+EuAWGpIUhZiGlaEJhEEv2g2DSKvmQCbmG87pZhvVjTkEpxOXM+cMsqP5sVZ6fGf8GCc
+	DNjo/UMBFlG4PJTQRX6gtkKr5SWrLVj9LnIvP16hc2Uw1DFr8a0AWXNbJAZKgRnHrGCvTXRB+4N
+	XqFd3MAt2cpMykTOyJT0jAZ+rUxkkLYUE7HUNXEtOG36eAHcCOsRcpNzEOqnyrFcp1CdVEg5L9L
+	mTZ3/wvBEWQUgjU2aTYxX0wHfY//SEffMFfSNt/iZRPUOCg31Ojuyx6AhV3Ro3xdB4bLRNOJcHV
+	Q7UzoZig5c7B6Sw4uM/yfo9XZAizSlxpkGadpdk1xwfyMJJkhzA78iJArkruUoj9OBBn7lKq8/g
+	1csncsA2tKXeTdJkT7k7sF5qLICjpNs4y4EAIKhcAeATz0dSfHjTWiR4HsjZ2G+S6bDIODLOU1A
+	dbVRi
+X-Received: by 2002:a05:6402:4587:b0:6b3:84c7:efbc with SMTP id 4fb4d7f45d1cf-6b408f0c236mr1178193a12.43.1792580495696;
+        Wed, 21 Oct 2026 04:01:35 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.32
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:32 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:35 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 13/36] python3-google-auth-oauthlib: Upgrade 1.4.1 -> 1.5.0
-Date: Wed, 21 Oct 2026 14:00:37 +0300
-Message-ID: <20261021110103.1943456-13-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 14/36] python3-grpcio-channelz: Upgrade 1.76.0 -> 1.84.0
+Date: Wed, 21 Oct 2026 14:00:38 +0300
+Message-ID: <20261021110103.1943456-14-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
@@ -61,56 +61,84 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131272
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131273
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.5.0:
+Upgrade to release 1.84.0:
 
-- declare Python3.15 support
-- google-auth-oauthlib: prevent ipv6 address reuse
+- Fix -Werror=unused-result error triggered by Cythonized code.
+- Release Python 3.15 wheels publicly.
+- Fixed reference cycles.
+- fix: remove ghost key in grpc.aio.Metadata.delitem when last
+  value is deleted.
+- Fix the StatusCode Enums to be int.
+- Fixed the parenthesis placement.
+- Removed UsageError exception from registered method.
+- Added registered methods support in AsyncIO stack.
+- AIO Part 4 - Typehints fixes and add Pyright for aio/_channel.py.
+- grpc-status: Relax protobuf dependency lower bound to allow 6.x.
+- Observability plugin fixes.
+
+Fixes:
+
+WARNING: python3-grpcio-channelz-1.84.0-r0 do_check_backend:
+QA Issue: inherits setuptools3 but has pyproject.toml specifying
+backend setuptools.build_meta, use the correct class [pep517-backend]
+
+License-Update: Use LICENSE file
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch | 4 ++--
- ...authlib_1.4.1.bb => python3-google-auth-oauthlib_1.5.0.bb} | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-google-auth-oauthlib_1.4.1.bb => python3-google-auth-oauthlib_1.5.0.bb} (90%)
+ .../python/python3-grpcio-channelz_1.76.0.bb     | 16 ----------------
+ .../python/python3-grpcio-channelz_1.84.0.bb     | 16 ++++++++++++++++
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
-index 1309896b19..d956d6ba3b 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
-@@ -1,4 +1,4 @@
--From 7612367e4bd2a366365bf527c6672be55a133ee6 Mon Sep 17 00:00:00 2001
-+From c1f52a2283c93151fe6455bfa61a0c74ac9418fe Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Thu, 20 Nov 2025 12:55:48 -0800
- Subject: [PATCH] python3-google-auth-oauthlib: Skip failing 3PI credentials
-@@ -21,7 +21,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+)
- 
- diff --git a/tests/unit/test_helpers.py b/tests/unit/test_helpers.py
--index 9df49de..6ec19f5 100644
-+index fb49421..f1f5682 100644
- --- a/tests/unit/test_helpers.py
- +++ b/tests/unit/test_helpers.py
- @@ -123,6 +123,7 @@ def test_credentials_from_session_granted_scopes(session):
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.4.1.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
-index 2be37a7c77..b618c5f033 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.5.0.bb
-@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRC_URI += "file://0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch"
--SRC_URI[sha256sum] = "1a83f5f2a8421dedadaa3caf25b3a710dddf85a33a63144be41c2fc79174b106"
-+SRC_URI[sha256sum] = "b351107c7dd9017f426cbb0272ea1bc04f469020fd18f4443c7d40362e0b1510"
- 
- inherit pypi setuptools3 ptest
- 
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
+deleted file mode 100644
+index 97184c89a8..0000000000
+--- a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.76.0.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "Google gRPC channelz"
+-HOMEPAGE = "https://www.grpc.io/"
+-SECTION = "devel/python"
+-
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62d342a02f005515"
+-
+-inherit pypi setuptools3
+-
+-DEPENDS += "python3-grpcio"
+-
+-SRC_URI[sha256sum] = "2ab15ef7b2252a9ba31df500bbe295ce5310a8b01ea6f6d67a17172d914a41a8"
+-
+-RDEPENDS:${PN} = "python3-grpcio"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
+new file mode 100644
+index 0000000000..18e94b0475
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.84.0.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Google gRPC channelz"
++HOMEPAGE = "https://www.grpc.io/"
++SECTION = "devel/python"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9"
++
++inherit pypi python_setuptools_build_meta
++
++SRC_URI[sha256sum] = "84220ef2e7ec0a3792a151b6ffbc70691bf0f09cd009fe734f2946b917565694"
++
++DEPENDS += "python3-grpcio python3-wheel-native"
++
++RDEPENDS:${PN} = "python3-grpcio"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
