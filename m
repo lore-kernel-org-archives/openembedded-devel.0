@@ -1,99 +1,98 @@
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11829.1792590843887451987
+Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.295.1792593733631016676
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 06:54:04 -0700
+ Wed, 21 Oct 2026 07:42:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@mailbox.org header.s=mail20150812 header.b=LZob6hHJ;
- spf=pass (domain: mailbox.org, ip: 80.241.56.172, mailfrom: marek.vasut@mailbox.org)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [IPv6:2001:67c:2050:b231:465::202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4j8rNl4zgTzMlj5;
-	Wed, 21 Oct 2026 15:53:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1792590839;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=lQaeOQvsk57pkhRpC62OPuZeSpjlergd/5AvqC+8QCs=;
-	b=LZob6hHJmrKYpa1sTJ4e7fgjQOWlyV/CGYaOP0aXOHMdbyX4RySP3u546YmuIEMi6PMM4j
-	cnp750RniOHzg7ZMsnIkBOJw3hzwmwq/kh+O0BIEnMtIo6Xv2jBt2Y9t62mGby1WOkqc6K
-	FWnzRaYfkFmRuEMZzjA0Nqyky1poieNeaXlGrW0EPcHWnT9+h16gMKHsAW990gaLAY/TN2
-	IWUa6GCCr0wcLQsjWtf9AkBA0PHSHnkqVI3sUvZ15jikAu0QMs4Yv7V+U2IaJfe9ps2NYU
-	Vm85/fRbrf0XdIkGjeUqjhWSbR+OdpDjPzVk3Xk1AR9CIE1i/05EiN+FR+qLrw==
-From: Marek Vasut <marek.vasut@mailbox.org>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Xlg3LgWV;
+ spf=pass (domain: gmail.com, ip: 74.125.224.54, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-67989a98f8bso536262d50.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 07:42:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792593733; x=1793198533; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=kmPVwxbupRU2wpgFde5/IoquKy9lV8ryNld7oJXhQvE=;
+        b=Xlg3LgWVcHeneffClu2zdjpCgeBb7g44t5Hw7kbfvhtpTDvr8Zespgfltj2aXwmE3L
+         7FoFaX2ARhzEUJt4ypom7Bt2gJ3cKa8n0jlJxmp23QJUml/D+LA2N4MRu0UrFae4ZAGr
+         6fqWAvLmerFiNZc9pz0hYQjU1RkfX+zlnpjyXmGTPXNtzYY9rbnZYCQkFHFE0jDSWZz1
+         NRLfPtk0tQLxUHhHoDK7YiEJlW9vs+M0Wbk0JTgUtxh3lMKdCgqe2+6U9n2KqMtzO2gD
+         g3UC9S5uopWxsQRfu/HjdLCUe8hod8sSZfmtx5x9BGEFWV8X/W9HKqR5vRvbbd6UeZBm
+         rQYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792593733; x=1793198533;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kmPVwxbupRU2wpgFde5/IoquKy9lV8ryNld7oJXhQvE=;
+        b=c3fdkVR61TDae9Uj+0WNLUemmOBb82g3FiCNz3MkP5f5vZGxL+bbuhhrdoZcy9YcX+
+         32Q7R7z/Bdc2DesL43q2CSc4+uCS6tLoFlC3pcwfKEutdTuL0hJhYyVX1newlIJ9tZVX
+         xozbjumS6JtYCIuBVqTDSwsWo0IhGIxc4xFlTlwwMryTooMg4L4nu26Rm7q+cwzzIE+4
+         yklgFdASp+36yBrHKmEnW7jZRKsi6H/FpYkw9FoB88RFGSseSwHYHdb93Wv87GK0grqR
+         jZDQsTfODoJ6/7LDBOlEX9Q4UGS1M0w7xlKdlwVmMuA3KCgMW/5WEZGCzoQYNGj9tnID
+         r+cQ==
+X-Gm-Message-State: AFq9FYLKkLwdgG51NmtWQCsR13KjeEZU5RF5SzoBuBmlRtGCkEysXOle
+	u0fPOzas0ODp0cxqDbWMTyjVRpi/GM5W8yFJShhw4y0Stq/TPjs+DVBdrSNiYffx
+X-Gm-Gg: AYBFou0qaP6RhzGSIen663+kLY/elQX1Ahg3lib/CdO3BcH8aDUIFGNirfjg4DxKu4a
+	2SsKl+w73mlBlvlfP2WkT45QCGGFKxD5McQ6vMKT8ZjqY/J/BfSl3z1QRbPcwN2HqWH9/myQevF
+	a72+FM1KOsNP+gVE+hrwhHI/mKAH8A5QSeqH8Ctl7PhsuwgGeXR19Af5imSLQX0y5O9uLiFxeB/
+	/fkn2cmyBIJiFT1mL2bF/GS2HZiEPAPDF1mmawiOi1skdBi9OjNiyjeS+V1p95DMKGNcGwTAl8V
+	inse8SBaR3yP/lGa3MfoJmO0Yv3qk5fDm7Sde0fvoKJ+5P1SuHBUwE1VPyoTseWbdg2vpHsUnX2
+	EhEPC3eWjn79HAngqGZ4N6W92avx02zOA4ROF8g7QvkHqGxIeOPrawFL6MM2NyUF1R/qZ3Y/nhu
+	t4DNYBD7WEpPOH+1uRdzdI3P5inPo2KLL+1ou8oRJ8j4W50DuKGFRItybDP+rpvr8zeElUstiKL
+	TsV3zrxpf/tjvV73yvQN3BaPBNmDL58f21/8vtiFZaMOnz5hkmZXOYeM8z0QkzX+TMlLkHD2S+3
+	ygE1K0ngNCYErRy8N/ALiLnpbCPKvzaer5iRSuojWxaxJcG0fTiQNgev7qrRD7SPyduo9P6wbk1
+	PQSw=
+X-Received: by 2002:a05:690e:4293:20b0:676:97e6:d7ac with SMTP id 956f58d0204a3-67a0e4e778bmr812972d50.43.1792593732278;
+        Wed, 21 Oct 2026 07:42:12 -0700 (PDT)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a0e4c939bsm1114382d50.11.2026.10.21.07.42.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2026 07:42:11 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
-	Alexander Kanavin <alex@linutronix.de>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Vyacheslav Yurkov <uvv.mail@gmail.com>
-Subject: [meta-filesystems][PATCH] overlayfs-tools: Inhibit tests on configure
-Date: Wed, 21 Oct 2026 15:53:27 +0200
-Message-ID: <20261021135357.14928-1-marek.vasut@mailbox.org>
-X-Mailer: git-send-email 2.53.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] php: upgrade 8.5.11 -> 8.5.12
+Date: Wed, 21 Oct 2026 10:41:58 -0400
+Message-ID: <20261021144158.3061920-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MBO-RS-ID: 1383de7c1726fb51a91
-X-MBO-RS-META: pp7e8os4kdqijb61q8k8s7otqxtd13oo
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 13:54:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131300
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 14:42:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131301
 Content-Type: text/plain; charset="utf-8"
 
-In case the overlayfs-tools are built using meson, a test triggers
-during meson setup phase during do_configure task. The test invokes
-"sudo", which may not be present on the build machine. Skip the test
-at meson setup phase. Tests should be executed separately on demand
-using "meson test" command instead, and invoking "sudo" and expecting
-it to work during do_configure is unusual.
+This is a security update.  Fixes unauthenticated remote code execution.
 
-"
-ERROR: overlayfs-tools-v2025.01-r0 do_configure: meson setup failed
-...
-| Run-time dependency musl-fts found: NO (tried pkgconfig)
-| Library m found: YES
-| Program test_cases/run_tests.py found: YES (/home/oe/build-some-target/=
-tmp/work/arm64-distro-linux/overlayfs-tools/v2025.01/sources/overlayfs-to=
-ols-v2025.01/test_cases/run_tests.py)
-|
-| ../sources/overlayfs-tools-v2025.01/meson.build:94:0: ERROR: Program 's=
-udo' not found or not executable
-|
-| A full log can be found at /home/oe/build-some-target/tmp/work/arm64-di=
-stro-linux/overlayfs-tools/v2025.01/build/meson-logs/meson-log.txt
-|
-| Last 10 lines of meson-log.txt:
-| Code:
-| int main(void) { return 0; }
-"
+CVE-2026-109618 CVE-2026-109619
 
-Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+Advisory: https://www.php.net/archive/2026.php#2026-10-21-5
+
+Changelog: https://www.php.net/ChangeLog-8.php#8.5.12
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
-Cc: Alexander Kanavin <alex@linutronix.de>
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
----
- .../recipes-utils/overlayfs/overlayfs-tools_2025.01.bb        | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-devtools/php/{php_8.5.11.bb => php_8.5.12.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.5.11.bb => php_8.5.12.bb} (99%)
 
-diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_202=
-5.01.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.0=
-1.bb
-index 8583a0e2cb..3b5963bb26 100644
---- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb
-+++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb
-@@ -14,3 +14,7 @@ UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
- inherit meson pkgconfig
-=20
- DEPENDS:append:libc-musl =3D " fts"
-+
-+do_configure:prepend() {
-+	sed -i '/Custom targets for testing overlay function/,/command : .*perm=
-anent...changes/ d' ${S}/meson.build
-+}
---=20
-2.53.0
+diff --git a/meta-oe/recipes-devtools/php/php_8.5.11.bb b/meta-oe/recipes-devtools/php/php_8.5.12.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.5.11.bb
+rename to meta-oe/recipes-devtools/php/php_8.5.12.bb
+index 831e926880..f9759cf7a5 100644
+--- a/meta-oe/recipes-devtools/php/php_8.5.11.bb
++++ b/meta-oe/recipes-devtools/php/php_8.5.12.bb
+@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+ 
+ S = "${UNPACKDIR}/php-${PV}"
+ 
+-SRC_URI[sha256sum] = "dc940716a8c73e531c0078eecb955d595d321ec2cc9d47149cf0089ea6e18f64"
++SRC_URI[sha256sum] = "ffb60edc437ced63b5137e4984db379a8111c50049c711510d8b958277efc1a8"
+ 
+ CVE_PRODUCT = "php:php php_group:php"
+ 
+-- 
+2.43.0
 
