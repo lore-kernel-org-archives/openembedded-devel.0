@@ -1,91 +1,97 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1136.1792543042998698957
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1140.1792543045263461024
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2026 17:37:23 -0700
+ Tue, 20 Oct 2026 17:37:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=TnAu5vAh;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-35c76e9614aso286818eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 17:37:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=nnW+Yuvy;
+ spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-15354aa70e8so527524c88.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Oct 2026 17:37:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792543042; x=1793147842; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2RZofVJNAfGBcbbdf7koszn4mqyWx63dVMMHtv9Txxc=;
-        b=TnAu5vAhA1YHPA71RwUwbHAsnMb/lhFwlf1Pn3FWtgbNWHlAYahT25XCsAwwxJM0D+
-         viXYGHmxl+hWrE76UwLBWZjy/YYTeCPUa87O9LSf8rplsZhxKccjvC6wHTifDcTUzbaX
-         7/O2osJfnNOMccWSVShZvd2vC/CUsmyRHTXInhuXgKBF3lZH3igfQUw9CvtH+kPnTbzJ
-         jSpCVJJnENvMbzvSSLA3twp01UAp9fgYIxMHFL2XRJG1yyF/O334onA8DPkbH3x/A7Un
-         vhePypmOb9JeFvYbmuqxem9ATeutvt37S2OWRWg74xnB2QEbNWsSvWxqBm9ZgW5LESj+
-         2vCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792543042; x=1793147842;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792543045; x=1793147845; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2RZofVJNAfGBcbbdf7koszn4mqyWx63dVMMHtv9Txxc=;
-        b=b3xEk6XIgWOcIF2e8MiQg0umVJ64+wp5SVxkC2JWdJ8yB7xuX+Ew0acORBtjaA3Eim
-         2JBGO+Zh8guvagMqdREzvLNJZ/ydWd47BscLPZPTGBGaZbHDgSnAsxpeWR+v9S+VpORS
-         oG5WeWg0ihvdQAo9sIqH+X6za4kc7S/LFfD/iKmEDyd7/NJSdGG57TMvg4unstlQweJA
-         g+Ep006y5ou+xwIUOKyXsj7NdwO2Bizw5zKVN8cy7JN3HQcv2Jh2ghFeYFUC9WJ7PM8J
-         baldGAcayLinNzDYR6FHA1nIdS8NfvSynhPtA2R8mWcFLfZWuEbXmyJLiAdObBUQKFYw
-         aAfA==
-X-Gm-Message-State: AFq9FYL2sHrT8G9yif4/LPKv6hd1UiCcbRne5y18npQ5YTnj5kU7WmjC
-	3muoQtzjzAkftdaLWYtsQ7UxOt2R6rJWG+yzcy8/Ss7FnY7XQZTp8TCdhVrRdw==
-X-Gm-Gg: AYBFou115oSKmqtGQRNZ9m63LwlgaXd8+ypsVcPUzZx0+lzef4aXEh8hHEX6dKZgj0/
-	cleq31yVpG6JFjsl9z2sNLqZVhzkNN2oeaROqXBzH7wYK4sSEYCpCd1ijom+c7hwsXzbs6SvEl3
-	j7OwE0QUFIbbWKKhmRa6BRWpGD8XldF+mKRndG9kA9Q0WWS+nkK8h0Rbyj3vlgVyizbjFvGATU1
-	2HZyNxOKwQp+NVbvIE3Unqi0xskgmJSH6YMQDy9Pv2NX3gjrwe9daEHQAE/GZJgrTPwpEhBKUJl
-	3R/sD8F5kHTl/5NPsccO/okWfXkh4e6MgWpwOI0hyfQ2VyHRnSjIXFZuFUWJ67pHZUBY+c1QJrI
-	NBsBiTbeecTiTvIbNG2B34tK0/zQ/J1WPtVTkhf21huBHX0rnP3jf/i+byocQErI9kIWl2JXsvm
-	JD57HAsrTcOjxiZedu60FxnehVrHsNE5VkhBiBIM9uNuRPpvPtoTUpx3mkb7CV/YGOfrpUcQJM/
-	twAB1uUiqUWT/Brw+1IhgsxiYKMAj9AXBIcZ2PaqGlEn7K+PtcxjS+w6itRBr3b87NPjwlZoqrp
-	OszJJcfxe9e5Qx55oDBtlE9gFsC5oQM=
-X-Received: by 2002:a05:7022:7e86:b0:144:e38d:8e52 with SMTP id a92af1059eb24-190a784c70emr661238c88.37.1792543041773;
-        Tue, 20 Oct 2026 17:37:21 -0700 (PDT)
+        bh=XFat1d3ZpFjE0MuujccegnQOtmbPkR8Yq23Q8mMmhJM=;
+        b=nnW+Yuvyee9rw1q+YzBBHz7XVBFLv+s6QdpYAfEmyognY1TEldiwhov02tbJGMHqPf
+         uYLJixmqtaGcWZ9Eh2Mjze9cs+xW7VKdFugJmEzLWnwbmnj2DV/ICZcMbVKMo3IVWvM0
+         gdeltb8e83ENDvmbG35NPrC3rAVOw2nWRxqQNnx6nSgGSrkFjMcG96P8JlRRkyiu00aC
+         LgxdF8GtUkk+uxz9ecT9T6koKEwlGP0HbyPlr4Pli0oAiOZ2wD0KNTJm5WZ7sTg5L0uO
+         o29Qj4xA5353CYnjpvdpwIGjENIczRAqhRv0jXcMPYtwIB6ZGjlqxoakq7PZ3M1WSYd2
+         Qw2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792543045; x=1793147845;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=XFat1d3ZpFjE0MuujccegnQOtmbPkR8Yq23Q8mMmhJM=;
+        b=s5ofxGJafGUgzEcbTP8Ne5RESvI3rjT1+lVHCJc3YP3CZZkRGziublmdfY/fiirtmT
+         HsdxgEosc5X5uhso0HVaMeLpSSM0a1NUwpuztG732BK3Opb+/qOw5vC2DTwjQ9EnB/Rl
+         7HHcdkoMkrU2p6svvxsXQ1e9JBPUU2lsRaJcb3b5rKmn4CEZDfuVBWmlUQBWImvDz3Lr
+         Ech/XMPxoZi5AU8+0e09p6D86jY6i6khE9rJrrYdSfaWLsTvXxYHGZKB3LT04r8+s0bl
+         KeVl16Rtktvy+jycRkPJ4gakpoMmJDJ4222dJlFfqGpQirjCxRUOv+FR3oUY/YaJZJmm
+         Jvmg==
+X-Gm-Message-State: AFq9FYLncAytKYvMrlXO6kuBA8nU+Y28MHjh9hH+F5iOBjirMkJVTowy
+	ZIPTZ273GH3U3XOtCJL7rRm1zNp+ML8P/ndFg87NXEMkkV89bzoQ45ix0RztHw==
+X-Gm-Gg: AYBFou3aJqx3e3Ie1nuewfRDqtY41br8iuVdiRjnvbxwT2bvPQjFgBq8RYOIDFT6Af5
+	LzI4cPcbhtar69EXs4NJCTF6ZiSFhzNajZILwttu8YR3vAmF25V5q9YFjjdJ3h0WOAeKatpNZja
+	RShTDTbvPKSk8A2I2AyJD8xwD/9/J6jJa1Vym9sVIvaBo3Bev6tGTW5FWIxuS6A5u7dWAezciNi
+	HRuGxG1GFskYIdGpqeb3EQpC+a8OrDHvxWHTZNuEOXUhO0clYl0MaGMso4znKnXpl6qm+fotBrJ
+	hNV3UE2lYt8M0156S+D3ZDAF6cXoU6OKIDxRl+9uzD2rM6qt6miVSkVOBu3f4BkhrYkJJTFcZe5
+	poKnRWv+n+YWfVTcADxIw0AfinBJXzdT0iL571xuCNaqmN+CGCGTUO5Y9EOu7xc2rESd/CExnAw
+	aU97uRxPR1Nt41dJQwCAWLyXMq2tlnoI3eir756F56NkzUr2Ft5/Gw4BnFgrHN3q0hEwOhnLX3h
+	xXdV3uw83URYLoRzyJ4wPgfMN5Vc2vX+nZVRxF9wzE/XMpywflzVukkG3RfRit+s2BCNk4jQVeQ
+	yCKzYb+eJJiGgqxeErdyaSFk0WTgwHLJgkfJZi8mPWOReoIqmEcF
+X-Received: by 2002:a05:7022:1709:b0:13b:4ab5:41d7 with SMTP id a92af1059eb24-190a051ddf3mr514359c88.3.1792543044495;
+        Tue, 20 Oct 2026 17:37:24 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035926fe9sm1648124c88.2.2026.10.20.17.37.20
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035926fe9sm1648124c88.2.2026.10.20.17.37.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 17:37:21 -0700 (PDT)
+        Tue, 20 Oct 2026 17:37:23 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 1/5] cifs-utils: upgrade 7.8 -> 7.9
-Date: Wed, 21 Oct 2026 13:37:11 +1300
-Message-ID: <20261021003715.2982979-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/5] fluentbit: upgrade 5.1.3 -> 5.1.4
+Date: Wed, 21 Oct 2026 13:37:12 +1300
+Message-ID: <20261021003715.2982979-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261021003715.2982979-1-ankur.tyagi85@gmail.com>
+References: <20261021003715.2982979-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 00:37:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131179
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 00:37:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131180
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-* mount.cifs: validate username derived from the passwd database
-* mount.cifs: reject option delimiters in username and domain
+Changelog:
+https://github.com/fluent/fluent-bit/releases/tag/v5.1.4
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cifs/{cifs-utils_7.8.bb => cifs-utils_7.9.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/cifs/{cifs-utils_7.8.bb => cifs-utils_7.9.bb} (97%)
+ .../fluentbit/{fluentbit_5.1.3.bb => fluentbit_5.1.4.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/fluentbit/{fluentbit_5.1.3.bb => fluentbit_5.1.4.bb} (98%)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.8.bb b/meta-networking/recipes-support/cifs/cifs-utils_7.9.bb
-similarity index 97%
-rename from meta-networking/recipes-support/cifs/cifs-utils_7.8.bb
-rename to meta-networking/recipes-support/cifs/cifs-utils_7.9.bb
-index 7fe76377e1..6c6edf9f68 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_7.8.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_7.9.bb
-@@ -4,7 +4,7 @@ SECTION = "otherosfs"
- LICENSE = "GPL-3.0-only AND LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.4.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb
+rename to meta-oe/recipes-extended/fluentbit/fluentbit_5.1.4.bb
+index 158378c8a2..5938656858 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.3.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_5.1.4.bb
+@@ -17,9 +17,9 @@ DEPENDS = "\
+ "
+ DEPENDS:append:libc-musl = " fts"
  
--SRCREV = "be9d47cc3c8f3842e8c6418885525130eeae87ed"
-+SRCREV = "0f211c3b9a7ebe326abea12d306f621067b62f29"
- SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master;tag=${BP}"
- 
- DEPENDS += "libtalloc"
+-SRCREV = "d1be1ba389a481ea727462e9a4afeb4538f0365a"
++SRCREV = "eef172226af2879b24ce61d8d73a874567e465c3"
+ SRC_URI = "\
+-    git://github.com/fluent/fluent-bit.git;nobranch=1;protocol=https;tag=v${PV} \
++    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https;tag=v${PV} \
+     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
+     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
+     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
