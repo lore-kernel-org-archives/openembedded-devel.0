@@ -1,182 +1,325 @@
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7553.1792575011345534721
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7525.1792575014091249112
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 02:30:11 -0700
+ Wed, 21 Oct 2026 02:30:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=T1BW7rqO;
- spf=pass (domain: gmail.com, ip: 74.125.82.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-3514b90bb89so1371676eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WVu4jPiw;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-15dd124bbe7so947051c88.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792575011; x=1793179811; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792575013; x=1793179813; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=r3KJ3yyJKfspcu8H365dSee74tV0BXuG6FsNAfJkHi8=;
-        b=T1BW7rqOjiNuAaBiJnfLd0G/XPNgNZ6tiAH3F1ztyANcMKA9wpqO50D6aatW3Jee+X
-         i75Z/QOnzQXhQ2hUQnP381HlHQfaHtKsIESwvakkC30nJXjBp7LS0dHWC85PQEHISxAQ
-         i8/yyN84onSt8p0gf3MCJ8jmiZ1cgKy8fntjMKspZ6LP52ZMaymdA5QADmfkNWwjmnRO
-         G/IbUfD52ebYiU6wYW0DEU/vlN+xqNizqxq7Er/50M5rM7KubcO9wG6paXu76acfBxAd
-         xYO0N1WET0sqv4Ne0BcEdrOAGLvDic7QmimxMqVMC2OL1Yt9uRyL1KKCHBEGR8fJ5JQq
-         kVPQ==
+        bh=ksQHST4eSfDUcwni8T/B9cuekd3lKyWtQo9c0ZUXCCA=;
+        b=WVu4jPiwI+8o8f3ImIf/f3LL7Vq1sDOeKjHmnLAFI98SRRSJiFLfdIXckAcUMWkb6j
+         SDjhUUgadM33rjtlRqktFC+nbr4HlsTz+/IGPb/EfB6GyhiYD6/Zsbdz/SB1LSW4lKMf
+         z6SlkvjnbFkBHa3UgDmQeuURokxoHXc+NdTbEzuxRzPqJc1XyXVGyzRmUr3BVOFzkqTm
+         eCZ8NKW6GG1OOczcirRoSLQC6TWFctusGaTMhNMti/s7CTLNYxheG+CZaqWfma70jMH1
+         z32gWnjUKUSxOd4bFzMXpoSMpQXg1YJdSmmd/n38tl1ZkFqw/KrLP5cxH3Kax/pe8MDn
+         SlaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792575011; x=1793179811;
+        d=1e100.net; s=20260707; t=1792575013; x=1793179813;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=r3KJ3yyJKfspcu8H365dSee74tV0BXuG6FsNAfJkHi8=;
-        b=Irr8i5TQ8Lxkb4lFNDBrD/3jj7crp3yJPSn5RpaTxiQG2CEoVzGxN1SVVTfAMupVcJ
-         wuH71J/wLOJ+n+6YwQPJn9Frt3WWKzrJ/DBb1sKxMiqufc00RTD5oqFpc3SdRoaoe2Rn
-         4PUBcx5G0jm+wWJXh2T2WfRxe3BLmtkg027U4okss0wOqHzPm2BidMZTgi6kAWUXul1q
-         tltmWZRjbKrjeO6eEmNsOZ61ce+v2qmEcAoEi2OcMepOz1UrfCfPgR9aKmbI4pp4FQ69
-         jJ2Y9upolmlZRMRXNiXkJsRy9LtfsHQxbmoGEoU4c2PsKhC5zjHyE3gXOnaQAk08/X+1
-         /KnQ==
-X-Gm-Message-State: AFq9FYJs7gGyQ2uPL0A8JP7i/Fzh1gu4CtdTuZdP5FClgowHRyh0TKlg
-	pN0fNKQZ2DyBinZE+A1gwccAI/NT7wx8EPsmhkcYKDqzJJJJIjyPmZ2U+0UBww==
-X-Gm-Gg: AYBFou1dWfwRC4fEgEx3r41C2msrAOqbIDTh+cZC2KIh/o/uvxjd+AJ/eGMvTQ1Qg6p
-	G7PP89zwypQ+O+luRaydWGUlKA1eDv3DPMsjIG/jjK9QMpsnQZ2bx/kvkEL1nUtHdwUXXcefySD
-	wx7C9HpDcWTduGWvd13z30o1rgeURsDy2hXuET8fLPoSBrCOpbU5OLx5ytEZ9u2IYP6BiiTR+8t
-	wrm/s6gfM9Tvt9p7/UMJHNNQKOHsKNPzis0FPLR49lcl/mXQfWjJhhdaBxmV4HWADjVb7oUMBOd
-	IlT7owNL9QnzRy1gTK2UWSsGIZvtXE7wh41gaUCiH6/Vp69w+Hn0pUNzjl3c2huapHrJawaPjEJ
-	Wre9IWyrcwgNGmJm2T+G8KX4dfS9nBbzw8euElQuQzHg3duuJYL/gaDnjT/dn6wLClTfWRxIqSl
-	FvQ/ShUe9sq8RoI7gtpFMI3G2THIoQ4GMfEfemy5hZfi04SV+4Z0ZVM+18eVQ8KM+qzNi3jfKrV
-	AHDThDDAgbLPItMZqTOC8VtJ0ZEBahdVgd/5Id2LW1Rk7g5ewJSuGVQ46OQsBbhAeRfAd2vtrzu
-	dGGDMt2VE4OEVMe9JAa0c1Qr86oCHhU=
-X-Received: by 2002:a05:701b:4550:10b0:150:1cea:31a8 with SMTP id a92af1059eb24-190a4ffa89dmr2077009c88.19.1792575010531;
-        Wed, 21 Oct 2026 02:30:10 -0700 (PDT)
+        bh=ksQHST4eSfDUcwni8T/B9cuekd3lKyWtQo9c0ZUXCCA=;
+        b=HQmmoE9KDk7LGUZaf35FFj/uRZ5YsFfV6yVDd/HWoI/YrlsgoiN/PpF+gXJyoVR9wC
+         pxpBZxbuojgil+293NUXp253CojqkeNV7XmqBgq2OZAfVD7qv/82XPg7kc7d3gi2TY9p
+         N8jTigFGDLYF4QEfJCwuBJeff0wguyoRHVgmwinq5m/qG9ivtF7gzN9aaW4cJveq60ib
+         d/WLjc9+T4wy/N6fuVewQMLnp4cw4QKJTKff+ZNDLG+O36HQF04d5mkywi8q7D69Xw3t
+         REF7UkicPyMcjegk8yLE3LIeEzK5gnT+0w6ccFjahBAXzZR1FdqMu0FjVH1Vga4ztbrN
+         xAOw==
+X-Gm-Message-State: AFq9FYJPS94129j2YawgCFhmvy9g8T6yorJrxVio4gx+37hD3xjx5IN9
+	WYaw5C3BifmngBNGhhtVYdSDjh+ixOH94F2/JauVRxBpqaJXYSXLmkFgnXimpA==
+X-Gm-Gg: AYBFou0yFh8kbZZ3DL6mCXTp1/JFR5wBdUSTJsLF/HxMr7+ofn3iWKrLtSLl2Bsf6Wv
+	0NJwXvw99B43SuuFRbty8EKUPkT2zcokkPKiQfBkUzj+/Do0jWAy6QSyzeGcfUYSPLh7OrX1H7X
+	JIUCktPkGF/e7GZC6UwE8Sy1k62Cg66gVvQNBOBZG7RMH8DAW86NFkz/5btQtd9MUa9dJSjSTBM
+	5UnF3YlbVBusRzmUFcG8jGC9B9h5L1V++5TNaTkRKKGlx+Ojy1RPyiPQ2sx1sIduYYj/gwLn3DD
+	Fj1mTeDVlJRy2uVz8Y87pTBs/86NRSjEOV+qsbu+c9dbDWk08gTsWWHK/wwYyzH5MJd9yBJC9Kw
+	aZa9K+0d5XOMm5lCbKfUgzeY9m8fVSIukNShTJkRKHlxNytcepUJx2Oy1gLxxmL8FrvXpMnWqlt
+	dI4HOdVCsnvpXJiqOBbDk5DzRO1b2oKS2Oq8JGr6iCcBvOEb+lzGl4ewZdE/53RtAX6H+QBOUMW
+	ptXAcu6kP02jQRvsmaLjAkmw+xeHpcAm4q+BrsTCep88sILs8eAhn//s93rrpR2OvUlkXWrzUgu
+	ITnutOCL6Og3d9agqdEH+M6pG7bJUbg=
+X-Received: by 2002:a05:7022:6b92:b0:190:d7de:883b with SMTP id a92af1059eb24-190d7de8999mr2676536c88.35.1792575013206;
+        Wed, 21 Oct 2026 02:30:13 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.08
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 02:30:09 -0700 (PDT)
+        Wed, 21 Oct 2026 02:30:12 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][blacksail][PATCH 29/44] pjproject: patch CVE-2026-57165
-Date: Wed, 21 Oct 2026 22:28:42 +1300
-Message-ID: <20261021092857.3585453-29-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][blacksail][PATCH 30/44] pjproject: patch CVE-2026-57166
+Date: Wed, 21 Oct 2026 22:28:43 +1300
+Message-ID: <20261021092857.3585453-30-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
 References: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:30:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131216
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:30:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131217
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-57165
+https://nvd.nist.gov/vuln/detail/cve-2026-57166
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../pjproject/pjproject/CVE-2026-57165.patch  | 85 +++++++++++++++++++
- .../pjproject/pjproject_2.17.bb               |  1 +
- 2 files changed, 86 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
+ .../pjproject/pjproject/CVE-2026-57166.patch  | 228 ++++++++++++++++++
+ .../pjproject/pjproject_2.17.bb               |   1 +
+ 2 files changed, 229 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57166.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
+diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57166.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57166.patch
 new file mode 100644
-index 0000000000..e2d62b0eef
+index 0000000000..8311d4c36d
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57165.patch
-@@ -0,0 +1,85 @@
-+From 5776ee452296d5277d71e2bb011709adec80a533 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-57166.patch
+@@ -0,0 +1,228 @@
++From d0b42b902bb6ca8a0a1393799db487642d3bf8ae Mon Sep 17 00:00:00 2001
 +From: Nanang Izzuddin <nanang@teluu.com>
-+Date: Wed, 17 Jun 2026 15:47:29 +0700
++Date: Wed, 17 Jun 2026 15:55:53 +0700
 +Subject: [PATCH] Merge commit from fork
 +
-+handle_up_down() in cli_telnet.c accumulated cur_pos + 2*rcmd->len +
-+history->slen bytes into a fixed PJ_CLI_MAX_CMDBUF stack buffer with no
-+bound check. Size the buffer for the worst case, clamp each term to
-+PJ_CLI_MAX_CMDBUF, and replace the trailing unchecked pj_strcat with a
-+bounded pj_memcpy.
++* Fix pre-auth stack overflow formatting telnet CLI error indicator
++
++send_err_arg() in cli_telnet.c rendered the error caret into a fixed
++256-byte stack buffer using unchecked pj_strcat2; info->err_pos is
++bounded only by PJ_CLI_MAX_CMDBUF, so a long command line overflowed
++the buffer. Stream the spaces in bounded chunks via telnet_sess_send2,
++clamp the caret offset to PJ_CLI_MAX_CMDBUF, and send the message,
++prompt and echoed command separately, removing the stack buffer.
 +
 +Co-Authored-By Claude Code
 +
-+(cherry picked from commit 628b71638465bacf66e767959e6acbab822eccd6)
++* Apply the same overflow fix to send_ambi_arg()
 +
-+CVE: CVE-2026-57165
-+Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/628b71638465bacf66e767959e6acbab822eccd6]
++Per review, send_ambi_arg() has the same issue as send_err_arg(): it
++renders an attacker-influenced number of caret spaces and appends the
++last command into a fixed 1028-byte stack buffer with unchecked
++pj_strcat2. info->err_pos and sess->rcmd->rbuf are bounded only by
++PJ_CLI_MAX_CMDBUF, so a long ambiguous command line could overflow it.
++
++Stream the caret offset in bounded chunks (clamped to PJ_CLI_MAX_CMDBUF)
++and stream the clamped last command separately, mirroring the
++send_err_arg() fix, instead of writing them into the fixed buffer. The
++shared SPACES constant is hoisted to file scope.
++
++Co-Authored-By Claude Code
++
++* Bound completion append in handle_tab()
++
++handle_tab() appended the matched command name into the fixed-size
++sess->rcmd->rbuf at offset len (the current command length) without
++checking that len + name length fits the buffer. len is bounded by the
++receive path, but the completion suffix is added on top, so a long
++completable command line could write past rbuf and its NUL terminator.
++
++Clamp the appended length to the space remaining in rbuf, leaving room
++for the terminator. Found while auditing the telnet CLI for the same
++fixed-buffer overflow pattern as send_err_arg()/send_ambi_arg().
++
++Co-Authored-By Claude Code
++
++(cherry picked from commit 4472a31d77a7506ff175dad5abef490f4e31bed1)
++
++CVE: CVE-2026-57166
++Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/4472a31d77a7506ff175dad5abef490f4e31bed1]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ pjlib-util/src/pjlib-util/cli_telnet.c | 33 ++++++++++++++++++++------
-+ 1 file changed, 26 insertions(+), 7 deletions(-)
++ pjlib-util/src/pjlib-util/cli_telnet.c | 116 ++++++++++++++++++-------
++ 1 file changed, 84 insertions(+), 32 deletions(-)
 +
 +diff --git a/pjlib-util/src/pjlib-util/cli_telnet.c b/pjlib-util/src/pjlib-util/cli_telnet.c
-+index 150727bb5..0a2954bd4 100644
++index 0a2954bd4..67898fdd8 100644
 +--- a/pjlib-util/src/pjlib-util/cli_telnet.c
 ++++ b/pjlib-util/src/pjlib-util/cli_telnet.c
-+@@ -1141,7 +1141,14 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
-+     history = get_prev_history(sess, is_up);
-+     if (history) {
-+         pj_str_t send_data;
-+-        char str[PJ_CLI_MAX_CMDBUF];
-++        /* The redraw sequence can accumulate up to
-++         *   cur_pos + 2 * rcmd->len + history->slen
-++         * bytes, each term bounded by PJ_CLI_MAX_CMDBUF, so size the
-++         * local buffer for the worst case and clamp each term below.
-++         */
-++        char str[PJ_CLI_MAX_CMDBUF * 4];
-++        unsigned cur_pos, buf_len;
-++        pj_size_t hist_len;
-+         enum {
-+             MOVE_CURSOR_LEFT = 0x08,
-+             CLEAR_CHAR = 0x20
-+@@ -1149,15 +1156,24 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
-+         send_data.ptr = str;
-+         send_data.slen = 0;
++@@ -680,6 +680,13 @@ static void send_prompt_str(cli_telnet_sess *sess)
++     telnet_sess_send(sess, &send_data);
++ }
 + 
-++        cur_pos = sess->rcmd->cur_pos;
-++        buf_len = sess->rcmd->len;
-++        hist_len = history->slen;
-++        if (cur_pos > PJ_CLI_MAX_CMDBUF)
-++            cur_pos = PJ_CLI_MAX_CMDBUF;
-++        if (buf_len > PJ_CLI_MAX_CMDBUF)
-++            buf_len = PJ_CLI_MAX_CMDBUF;
-++        if (hist_len > PJ_CLI_MAX_CMDBUF)
-++            hist_len = PJ_CLI_MAX_CMDBUF;
+++/* Buffer of spaces, used to stream the caret offset in bounded chunks
+++ * instead of writing an attacker-influenced number of spaces into a
+++ * fixed-size stack buffer. Shared by send_err_arg() and send_ambi_arg().
+++ */
+++static const unsigned char SPACES[64] =
+++    "                                                                ";
 ++
-+         /* Move cursor position to the beginning of line */
-+-        if (sess->rcmd->cur_pos > 0) {
-+-            pj_memset(send_data.ptr, MOVE_CURSOR_LEFT, sess->rcmd->cur_pos);
-+-            send_data.slen = sess->rcmd->cur_pos;
-++        if (cur_pos > 0) {
-++            pj_memset(send_data.ptr, MOVE_CURSOR_LEFT, cur_pos);
-++            send_data.slen = cur_pos;
-+         }
++ /*
++  * This method is used to send error message to client, including
++  * the error position of the source command.
++@@ -690,32 +697,45 @@ static void send_err_arg(cli_telnet_sess *sess,
++                          pj_bool_t with_return,
++                          pj_bool_t with_last_cmd)
++ {
++-    pj_str_t send_data;
++-    char data_str[256];
++-    pj_size_t len;
++-    unsigned i;
+++    pj_size_t len, remaining;
++     cli_telnet_fe *fe = (cli_telnet_fe *)sess->base.fe;
 + 
-+-        if (sess->rcmd->len > (unsigned)history->slen) {
-++        if (buf_len > (unsigned)hist_len) {
-+             /* Clear the command currently shown*/
-+-            unsigned buf_len = sess->rcmd->len;
-+             pj_memset(&send_data.ptr[send_data.slen], CLEAR_CHAR, buf_len);
-+             send_data.slen += buf_len;
++-    send_data.ptr = data_str;
++-    send_data.slen = 0;
++-
++     if (with_return)
++-        pj_strcat2(&send_data, "\r\n");
+++        telnet_sess_send2(sess, (const unsigned char*)"\r\n", 2);
 + 
-+@@ -1167,7 +1183,10 @@ static pj_bool_t handle_up_down(cli_telnet_sess *sess, pj_bool_t is_up)
-+             send_data.slen += buf_len;
-+         }
-+         /* Send data */
-+-        pj_strcat(&send_data, history);
-++        if (hist_len > 0) {
-++            pj_memcpy(&send_data.ptr[send_data.slen], history->ptr, hist_len);
-++            send_data.slen += hist_len;
-++        }
-+         telnet_sess_send(sess, &send_data);
-+         pj_ansi_strxcpy2((char*)sess->rcmd->rbuf, history, 
-+                          sizeof(sess->rcmd->rbuf));
+++    /* Compute the caret offset. info->err_pos is derived from
+++     * attacker-supplied input (pj_cli_sess_parse) and is bounded only by
+++     * PJ_CLI_MAX_CMDBUF, so clamp it before emitting spaces. Otherwise a
+++     * ~500-byte command line would overflow the fixed-size stack buffer
+++     * this function previously used.
+++     */
++     len = fe->cfg.prompt_str.slen + info->err_pos;
++-
++-    /* Set the error pointer mark */
++-    for (i=0;i<len;++i) {
++-        pj_strcat2(&send_data, " ");
+++    if (len > PJ_CLI_MAX_CMDBUF)
+++        len = PJ_CLI_MAX_CMDBUF;
+++
+++    remaining = len;
+++    while (remaining > 0) {
+++        pj_size_t chunk = (remaining > sizeof(SPACES)) ? sizeof(SPACES)
+++                                                       : remaining;
+++        telnet_sess_send2(sess, SPACES, (int)chunk);
+++        remaining -= chunk;
++     }
++-    pj_strcat2(&send_data, "^");
++-    pj_strcat2(&send_data, "\r\n");
++-    pj_strcat(&send_data, msg);
++-    pj_strcat(&send_data, &fe->cfg.prompt_str);
++-    if (with_last_cmd)
++-        pj_strcat2(&send_data, (char *)sess->rcmd->rbuf);
++ 
++-    telnet_sess_send(sess, &send_data);
+++    telnet_sess_send2(sess, (const unsigned char*)"^\r\n", 3);
+++
+++    if (msg && msg->slen > 0)
+++        telnet_sess_send(sess, msg);
+++    if (fe->cfg.prompt_str.slen > 0)
+++        telnet_sess_send(sess, &fe->cfg.prompt_str);
+++    if (with_last_cmd) {
+++        pj_str_t last;
+++        last.ptr = (char *)sess->rcmd->rbuf;
+++        last.slen = (pj_ssize_t)pj_ansi_strlen((const char *)sess->rcmd->rbuf);
+++        if (last.slen > PJ_CLI_MAX_CMDBUF)
+++            last.slen = PJ_CLI_MAX_CMDBUF;
+++        if (last.slen > 0)
+++            telnet_sess_send(sess, &last);
+++    }
++ }
++ 
++ static void send_inv_arg(cli_telnet_sess *sess,
++@@ -765,7 +785,7 @@ static void send_ambi_arg(cli_telnet_sess *sess,
++                           pj_bool_t with_last_cmd)
++ {
++     unsigned i;
++-    pj_size_t len;
+++    pj_size_t len, remaining;
++     pj_str_t send_data;
++     char data[1028];
++     cli_telnet_fe *fe = (cli_telnet_fe *)sess->base.fe;
++@@ -779,14 +799,25 @@ static void send_ambi_arg(cli_telnet_sess *sess,
++     send_data.slen = 0;
++ 
++     if (with_return)
++-        pj_strcat2(&send_data, "\r\n");
+++        telnet_sess_send2(sess, (const unsigned char*)"\r\n", 2);
++ 
+++    /* Compute and clamp the caret offset, then stream the spaces, like
+++     * send_err_arg(). info->err_pos is attacker-bounded only by
+++     * PJ_CLI_MAX_CMDBUF, so it must not drive writes into data[].
+++     */
++     len = fe->cfg.prompt_str.slen + info->err_pos;
++-
++-    for (i=0;i<len;++i) {
++-        pj_strcat2(&send_data, " ");
+++    if (len > PJ_CLI_MAX_CMDBUF)
+++        len = PJ_CLI_MAX_CMDBUF;
+++
+++    remaining = len;
+++    while (remaining > 0) {
+++        pj_size_t chunk = (remaining > sizeof(SPACES)) ? sizeof(SPACES)
+++                                                       : remaining;
+++        telnet_sess_send2(sess, SPACES, (int)chunk);
+++        remaining -= chunk;
++     }
++-    pj_strcat2(&send_data, "^");
+++    telnet_sess_send2(sess, (const unsigned char*)"^", 1);
+++
++     /* Get the max length of the command name */
++     for (i=0;i<info->hint_cnt;++i) {
++         if (hint[i].type.slen > 0) {
++@@ -874,10 +905,21 @@ static void send_ambi_arg(cli_telnet_sess *sess,
++     }
++     pj_strcat2(&send_data, "\r\n");
++     pj_strcat(&send_data, &fe->cfg.prompt_str);
++-    if (with_last_cmd)
++-        pj_strcat2(&send_data, (char *)sess->rcmd->rbuf);
++-
++     telnet_sess_send(sess, &send_data);
+++
+++    /* Stream the last command separately with a clamp; sess->rcmd->rbuf
+++     * is attacker-bounded only by PJ_CLI_MAX_CMDBUF, so appending it into
+++     * data[] could overflow the fixed-size buffer.
+++     */
+++    if (with_last_cmd) {
+++        pj_str_t last;
+++        last.ptr = (char *)sess->rcmd->rbuf;
+++        last.slen = (pj_ssize_t)pj_ansi_strlen((const char *)sess->rcmd->rbuf);
+++        if (last.slen > PJ_CLI_MAX_CMDBUF)
+++            last.slen = PJ_CLI_MAX_CMDBUF;
+++        if (last.slen > 0)
+++            telnet_sess_send(sess, &last);
+++    }
++ }
++ 
++ /*
++@@ -1035,10 +1077,20 @@ static pj_bool_t handle_tab(cli_telnet_sess *sess)
++                 }
++                 send_comp_arg(sess, &info);
++ 
++-                pj_memcpy(&sess->rcmd->rbuf[len], info.hint[0].name.ptr,
++-                          info.hint[0].name.slen);
++-
++-                len += (unsigned)info.hint[0].name.slen;
+++                /* Append the matched name into the fixed-size rbuf. len is
+++                 * attacker-influenced (the typed command length), so clamp
+++                 * the copy to leave room for the NUL terminator and avoid
+++                 * overflowing rbuf.
+++                 */
+++                if (len < sizeof(sess->rcmd->rbuf) - 1) {
+++                    pj_size_t avail = sizeof(sess->rcmd->rbuf) - 1 - len;
+++                    pj_size_t cplen = (pj_size_t)info.hint[0].name.slen;
+++                    if (cplen > avail)
+++                        cplen = avail;
+++                    pj_memcpy(&sess->rcmd->rbuf[len],
+++                              info.hint[0].name.ptr, cplen);
+++                    len += (unsigned)cplen;
+++                }
++                 sess->rcmd->rbuf[len] = 0;
++             }
++         } else {
 diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-index 8e0b358ffe..e7cae469ed 100644
+index e7cae469ed..9d1e6af253 100644
 --- a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
 +++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
-            file://CVE-2026-57162.patch \
+@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
             file://CVE-2026-57163.patch \
             file://CVE-2026-57164.patch \
-+           file://CVE-2026-57165.patch \
+            file://CVE-2026-57165.patch \
++           file://CVE-2026-57166.patch \
             "
  SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
  
