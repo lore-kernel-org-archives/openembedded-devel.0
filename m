@@ -1,97 +1,99 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8884.1792580516085341373
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8885.1792580517260908859
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:01:56 -0700
+ Wed, 21 Oct 2026 04:01:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=oKbSwYr5;
- spf=pass (domain: konsulko.com, ip: 209.85.218.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c450ab1483cso87857366b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:55 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=U1Kl1u8+;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48df54150dfso366147f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580514; x=1793185314; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792580515; x=1793185315; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=duI09lSyFIyXgjuCxxiBxHIxRt1WCYfPFIOns0BVopY=;
-        b=oKbSwYr5XeL2o1tSg9PJt5zF+UXXfnKWzWXF1ezIfobosfZP4NM7r22TLR9F/qeqo4
-         VXMgIlvG52W3B63zSYhNoKgHjRaxSctZtCFNLf3UcYhsjHusHfp9wk5gaoVSMxXGvC2w
-         KXTg+V9qoaNS0vkn70XrQtkPazagcMNegAnVE=
+        bh=QNRXEi5KY7QcH7Hzq17w3Qa+Padz72ZAbQTdhKlcZNo=;
+        b=U1Kl1u8+mrbC8Gbocdx0/hbAD/pVDrAwnDPvHHqbuXpL70SYj5Vz2KdELCHRVn7eFu
+         eijjRN6woaFIvIt0gmTcmWwfKwQFowXqb61v8W4mAZXwfBVnZrgmHX+kniaOpyXxhh4G
+         UYG4PZDPBQ6PguA7tVF0qLhwQ5u8ysac9x6aA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580514; x=1793185314;
+        d=1e100.net; s=20260707; t=1792580515; x=1793185315;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=duI09lSyFIyXgjuCxxiBxHIxRt1WCYfPFIOns0BVopY=;
-        b=1tH9VO+8O92lnpE1nBPr482gYhJfxWzD6ez2/3ihWB95sw5hf7sb993mPuZxP1xlJK
-         nnf0ijZMkEf3XdgK1o4Rr2evQQRN+F0JvOsA/4qcVqd8iuJuliruIdMykkUIMhdMYQji
-         C5s9Ug2HO8mzlourMBEDnuHpfU9HyQzwBZqqrGXwVX3D8LNYz8GVbVeMaBAvQK/Iz4xW
-         oXYeuL4ltszN2th0cwYiQWRnqjDvbX3HL6/wOam2WOblF07YlBQKMCloRS3diI6ozCub
-         SlXi0NR4D5/LnV1dhoWdNn0AoVMcxLVEkJ/XpJTQ525MG37RJm1hrcXFCASuErA2Ux0Y
-         28jA==
-X-Gm-Message-State: AFq9FYIZFnXPUemOZHw9puO86KU7PvKoZYGpugVZyA3EZ8GthUD2/RF3
-	rC0hPU/kxOJ7bpFQUzoxTwsDIA0vb4CAeVMfXNp/mwsZlafwI3fbqVXrcbMysaG8i/1hz9HMCiY
-	mdqLq
-X-Gm-Gg: AYBFou0TuaSa4WplT/h4xv+GGFhK1IcHj/s6GFvVzsUCmxI288jZv/y6dWkpGfwDPQJ
-	OAThVLNEsek5M0l5A5WlGaqtoj+2B2drAxHesAxCetHLDYLeVnM4yjS1QmCYWOQEaJND9M1UGNU
-	F1XxnOPTDpOtyESIkOaXavPKrS4VPEl2x2Ik7X6P4kjqkxIWvNF2v4poGWF3yVOoMO6zL5aEQKr
-	uUNJjawtTJUpt8fb4nhSWVfEAHGgCpYisf1eUaNWJ4YAsxOzx5CEsJDyQ+/9kSFm4UNuc9R8xVj
-	fcgadWK0EhyHlizaat8Unn4RnrjkKxFy0Cq1VDjYttdwdtHlX4ZUxLWwrkz04bCR0EWkPBnHza4
-	sNin7BmedgybAC0pfz3XsXuTj4TROYzvIfcIuCEHH1mX0IUJ5r/sMi8JYWeiciOSvOJCHyIxZWR
-	hdr3q1NbEIcAFjL4C3n/HmYLOUC3fSy6T1Wd7jfgDzLL9ncDT7mRQSfIvtp2BtGHeSdTNrHa7oR
-	ZvEbI9lD0Yu10Vir/snupD1YdXEOvQ5iE/jxXAvvxg1PnTCg8HN4jOBSUIwd5Eg9OhXbHHLTdN+
-	7AUYJYCHZdyhvNnxqM9uI5hIR4ng6aTHxK7+3lbYsVw8xXTqfWcSrafmvNb5BABKRwIr7+vmTN+
-	UvEv2
-X-Received: by 2002:a17:907:60cf:b0:c3f:d8f2:f08e with SMTP id a640c23a62f3a-c46799f0243mr154803066b.44.1792580512853;
-        Wed, 21 Oct 2026 04:01:52 -0700 (PDT)
+        bh=QNRXEi5KY7QcH7Hzq17w3Qa+Padz72ZAbQTdhKlcZNo=;
+        b=z1SgQZozwSPNccGxMfU/gwT5fRepOT8nsnzy6aTsw79Lg6bybNmHBYZkAvEIv5MaTC
+         zx/1rkYFNMWwlitG/EmIZVOBlAH6lZLO2JP1AwUm02SCIdZPXiTukHtVI5u/abSvkIqw
+         GRivBFE8lwPT1gyDEiUOmrJfenSOpUMogQlJDSVaCqeogwvXsD1deY5nKFg/PgpFOJZc
+         fSixn16zOevoRKsvu05Co3aMjvuEuDyGEryGPJGFCCEFmoAUbpGnZEj+U8bN5TdMnDV5
+         R2a7wOBGBHUtyVgD7Xea16TPqkUGuzk6dlG+KoiGz/HuCOnjZWaFoxaYNN41eAignA1p
+         p9DA==
+X-Gm-Message-State: AFq9FYLTDT22A8ITpLM5xs5LAFfLnMhI+zvxSaPsdRSA1tNXWLI6Giln
+	Jk15/77ZPImglARPR3SzuZpizoAISZ23ycjxm+THz/kzYoWf3tuj5lna4IBIp0JXkT4Qo03I1uB
+	ALgXG
+X-Gm-Gg: AYBFou0Hjrj9c8pWoikBJGMu9uBEfBUZXZVIs+tAyr/P+8c6bNiq+tADOZXqvNiO+UM
+	kZ6TSG++VWag1nAgmhN22Zjh3ZpMSlooC9FWUy40aXTeumjKY6knUd0DRXZXQsnPW7Cg7dKUbYf
+	Al+OS4KbO13WezjvHUWAmhVyguALDO/U5WxVuured5mf6iN+OVTIhBS7JTfkBPRw2U6EgZuxA8+
+	7gUaAgO0nDMfUwRombZhHsmM7hB9YwS57BGpYNdwTrdbZyluTGwg4vMhA3UjuKdr8Zf7NMCeXqu
+	/pU+auFQMWmNnD8ZidyGGnv8B4I1hgQsd0O8cONwXmwT5xsA8CAgEPT2j7WcHoqJJIyXnEvT6HB
+	9sgdytHXRZ5dVoKF/yY9EZnKhbWoSDBELVsolD8si4168oZ+EYzU7h6a4mngokyijGFaxz/Wpev
+	MFbZEz25a8F3gG7J9CiShCGYoR7VLhCIxauEJQ8e3vRr597aH3XoZ6+zqjl6X+nML7+zwoV4Gmj
+	rxw4xgICapW4Y0trzL6cbnfKguHzFoemu1mCM6ICWGALVFyBvsqq3Y1amlnor0N/1YiaPfizFez
+	WitxcK2GqgwWDfVErYn/ccQxQyNEDkoLazHSEW99sHdhRwtcdJkSxnzI+PD1due0zqMK7p1vGQp
+	da6IfMMS8nOJHK9GQmqKAma+eVQ==
+X-Received: by 2002:a05:6000:46cc:b0:488:6561:b324 with SMTP id ffacd0b85a97d-48e264c989amr2201472f8f.9.1792580515314;
+        Wed, 21 Oct 2026 04:01:55 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.50
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:51 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:54 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 26/36] python3-luma-oled: Upgrade 3.15.0 -> 3.16.0
-Date: Wed, 21 Oct 2026 14:00:50 +0300
-Message-ID: <20261021110103.1943456-26-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 28/36] python3-msgpack: Upgrade 1.2.2 -> 1.2.3
+Date: Wed, 21 Oct 2026 14:00:52 +0300
+Message-ID: <20261021110103.1943456-28-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:02:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131286
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:02:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131287
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 3.16.0:
+Upgrade to release 1.2.3:
 
-- Add support for SSD1363
-- Remove deprecation notice in framebuffer mixin
-- Make page_address_offset configurable for SH1106 displays
+- Fix memory leaks in the C extension when map key validation or
+  container hooks fail. See GHSA-j586-36cw-2gc2.
+- wheels: also build for pyodide using emscripten.
+- Support packing Python 3.15 frozentdict (PEP 814)
+- Reject negative array and map header sizes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-luma-oled_3.15.0.bb => python3-luma-oled_3.16.0.bb} | 2 +-
+ .../{python3-msgpack_1.2.2.bb => python3-msgpack_1.2.3.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-luma-oled_3.15.0.bb => python3-luma-oled_3.16.0.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-msgpack_1.2.2.bb => python3-msgpack_1.2.3.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-luma-oled_3.15.0.bb b/meta-python/recipes-devtools/python/python3-luma-oled_3.16.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-luma-oled_3.15.0.bb
-rename to meta-python/recipes-devtools/python/python3-luma-oled_3.16.0.bb
-index c4d347419e..2606cdd4eb 100644
---- a/meta-python/recipes-devtools/python/python3-luma-oled_3.15.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-luma-oled_3.16.0.bb
-@@ -10,7 +10,7 @@ inherit pypi python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_1.2.2.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.2.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-msgpack_1.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-msgpack_1.2.3.bb
+index d71a99fa74..09e1180635 100644
+--- a/meta-python/recipes-devtools/python/python3-msgpack_1.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_1.2.3.bb
+@@ -6,7 +6,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
- DEPENDS += "python3-wheel-native"
+ PTEST_PYTEST_DIR = "test"
  
--SRC_URI[sha256sum] = "16925fe668f484803df0683add800b19e5dd7316a1d64eb06ec2ae817473901e"
-+SRC_URI[sha256sum] = "9e5df928b11c4622872d0da25dd90186ca5e4c1cf1c01b562e7cda86f877f437"
+-SRC_URI[sha256sum] = "9eb0b0e602064527a045ea28c4f174ed69383587e29cebe28947e3b84106eb2a"
++SRC_URI[sha256sum] = "32edb81a2b5eb7cd7c9d941b2bfbbb082fd2cd09e0e725930316af6b708db186"
  
- RDEPENDS:${PN} += " \
- 	python3-luma-core \
+ RDEPENDS:${PN}:append:class-target = " \
+     python3-io \
 -- 
 2.47.3
 
