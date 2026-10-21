@@ -1,146 +1,71 @@
-Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7571.1792575046885626284
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8041.1792577262353902309
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 02:30:46 -0700
+ Wed, 21 Oct 2026 03:07:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=p6HvgOHC;
- spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-15dd124bbe7so947867c88.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792575046; x=1793179846; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=p6HvgOHCcGCC2b5Bvkwzi3gOOg8yBSYpE4HzCugmrtzAl7Eo6i1aIpWmr6BUJZPjyB
-         egY9TPkqqT5kywl0Cp7EeUUR1F+7w1epC63qpzNwwLNSh1JyUpIpYVLHl+7ysg2Gg4o0
-         39N4Ap4DPivOdC3DP8jw5QnUlViymiy8P2cGY2oY2FrrZEtrraIZtcyvsjHt+Itwi9ov
-         exLI+qm6qJyQ4X12KubXxEDYtnPajr4aN7OeXSnMSyIBfzJwJoIHv1Y1Gr8BkhsQFrHk
-         CRPUiCiZydvKowayUoMQF0sxZubMvB+JnR3JPchJ16askGjhMEIzUe3cy9x4rtfWu//P
-         77iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792575046; x=1793179846;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=RVKgS21M6eJr+onVTpyQGoIqUyC12DuH1NTBYVKv5Ex3mm2tDb9mBsgbLlaVpqvuej
-         ufzFlMe6rGTO5hrYHhhlnkgEy3eA251rmhtxF7t6o22C9vinpH3DXiZHW0dYXIne+5MS
-         ed+yd2GruXTYcZoVulz/YTgftFvOG+dibLpBELX78SVScGF1PAD1ITFLfNBPakD8cSAC
-         J6bU6S9EYWv1o6gc5R+rBl10jWCtPN0qEA4+dcMhzrlL43OQ0Rju9m23/TMQCackcaT+
-         AUTQdkEpiX30HQ9jJTa3ledTHZNkf1y7Zt2owoya60G9sa9+X2hyr7vlp2kf809XNhGa
-         GkwQ==
-X-Gm-Message-State: AFq9FYLxSGACStG32b4Kk8ffmW21z3Xd/vlOk20xflrBz8oRFMf8KTRe
-	h8qvNWKd6viMdZh8cATdeiOMSxmRQmgXsrQ8owRn9d0wJHh7Rr0aeoH8VuYkzA==
-X-Gm-Gg: AYBFou3OXMZHEyxkQeXz9kOR9wTWDyIM1tewxNTdo6fsl69W7O+HarbWWDmDVdTgbXQ
-	3WX2xy/h8sAXveKiNKFoxQzWs+S6wcP75zImcgoreo/UsOIzmZYrgca8ZUw4/PXw9c18boVJn7j
-	dsDTuqNX5zokS88IeEmQoO9cR6PEji/0rIqw/ppzXrrajnObnFVckyB7UTeKiVDKDnNvIXLCxCf
-	icYH1CAmNJekC4ZK9VWbYhuWrrh04+renvcl0oapbm1EAD8ByxoNjamGfwGDrs2daxvKyeqJBow
-	308ooa69Xfuu8o/d6ogM4GOg72aKnr/lzpObdLfCvL1LkZf1H1yh7aw/LU1/NzfcI0370456SoI
-	xpEgzJk305XR/CDeCfrxqosKtyaTMeFMHId4tlpHxM/5jdggc2NPbNInSX7ILhZaPLW8WqvuYUZ
-	awfjP0pLYCv8FGoz0Y+y1zoIGKs4zUxeMkEU4iZhPQcV03nypmGFaBz0qx6CpsA0bF+qa8Fv+eT
-	XUQgrU8/blo8yHJuzv0mUPd8dIJd2a2C3XX+TGfxT04GtV5D+fD0m9pReqpEIRxWxhEREH4GiAw
-	7QpVTNa5E5LZ9zHEtXbcdMSFUNOy5n7FqucoLhpk7P+XcVHuJvwg
-X-Received: by 2002:a05:701b:4284:10b0:14a:9dc3:dd11 with SMTP id a92af1059eb24-190a5999e7fmr2248861c88.18.1792575045991;
-        Wed, 21 Oct 2026 02:30:45 -0700 (PDT)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 02:30:45 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=WHTHmTG9;
+ spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout11.t-online.de (Postfix) with SMTP id E1B751C461
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 12:07:39 +0200 (CEST)
+Received: from localhost.localdomain ([84.163.40.237]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xJTEJ-0cELa50; Wed, 21 Oct 2026 12:07:31 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][blacksail][PATCH 43/44] libvncserver: patch CVE-2026-50538
-Date: Wed, 21 Oct 2026 22:28:56 +1300
-Message-ID: <20261021092857.3585453-43-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
-References: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
+Subject: [meta-gnome][PATCH 02/26] gdm: upgrade 51.0 -> 51.1
+Date: Wed, 21 Oct 2026 12:06:50 +0200
+Message-ID: <20261021100717.11068-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261021100717.11068-1-f_l_k@t-online.de>
+References: <20261021100717.11068-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1792577251-45FF8903-EC096AD9/0/0 CLEAN NORMAL
+X-TOI-MSGID: bd3aef61-e139-4f1f-a3fb-24ccb230c392
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1792577259; i=f_l_k@t-online.de;
+	bh=XfzDavlFOwdL1nu/IxyiKYrXJqjxX2xQMRLnKPjFyQ0=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=WHTHmTG93Rpv+4VNTWJVfy6ObGBbCvvrX4oEzPZpNvwa2m/ubKRcoZ79FI5xJL3LG
+	 yspJuMJpEgQ4cPLWqKmopU6sOkdbJYf14vQFMGoIQULHF4+5SR0pfqqdtjw6U2tuLS
+	 HNrclP3ZCA0dqsHvOgIR60TLmayqjsOqW/sdQTdDDc+rVENpzYwIkej1gx53QKIIqR
+	 Ds8kIzfGwxt4J35oxUJ1ohm/vM9qhjNtWBrNO6ZE6SHbagCxTC4XO9BR+wJodVwV5h
+	 NsKvxVgkknpCHRnwAGdDNl0tnK9he+Q8utvzhfjouP/gLxfluXfBdpYSgAreViVc/K
+	 8h1q1HEe3zHlA==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:30:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131230
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 10:07:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131232
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-50538
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../libvncserver/CVE-2026-50538.patch         | 49 +++++++++++++++++++
- .../libvncserver/libvncserver_0.9.15.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+ meta-gnome/recipes-gnome/gdm/{gdm_51.0.bb =3D> gdm_51.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_51.0.bb =3D> gdm_51.1.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
-new file mode 100644
-index 0000000000..da01736323
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
-@@ -0,0 +1,49 @@
-+From e824e7d8ea71feccb81aeb34771eb83e052c3fe2 Mon Sep 17 00:00:00 2001
-+From: "Bas.Levering" <45083161+Bazskillz@users.noreply.github.com>
-+Date: Fri, 29 May 2026 09:08:28 +0200
-+Subject: [PATCH] Merge commit from fork
-+
-+HandleTightBPP's basic-compression loop wrote each batch of decompressed
-+rows straight into client->frameBuffer (via FilterCopy/Palette/Gradient)
-+and only compared the running total against the rectangle height rh after
-+the loop. A malicious or man-in-the-middle server can send a zlib stream
-+that decompresses to more rows than rh, so the writes run past the end of
-+the framebuffer allocation: an attacker-controlled heap out-of-bounds
-+write reachable in a default build (Tight is advertised when built with
-+libz+libjpeg), pre-authentication, from one FramebufferUpdate.
-+
-+Clamp numRows to the remaining height before calling filterFn, matching
-+the existing house style (trle.c and the Tight JPEG path already clamp to
-+the rectangle height).
-+
-+Co-authored-by: Bas Levering <basdaniel3@gmail.com>
-+(cherry picked from commit 540332be3e0acc566fa64da6f1b4680c72c724dd)
-+
-+CVE: CVE-2026-50538
-+Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/540332be3e0acc566fa64da6f1b4680c72c724dd]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/libvncclient/tight.c | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
-+
-+diff --git a/src/libvncclient/tight.c b/src/libvncclient/tight.c
-+index dad5514f..3ee0d5e0 100644
-+--- a/src/libvncclient/tight.c
-++++ b/src/libvncclient/tight.c
-+@@ -341,6 +341,16 @@ HandleTightBPP (rfbClient* client, int rx, int ry, int rw, int rh)
-+ 
-+       numRows = (bufferSize - zs->avail_out) / rowSize;
-+ 
-++      /* The decompressed stream is server-controlled and may yield more rows
-++         than the rectangle's declared height.  filterFn() writes directly into
-++         client->frameBuffer, so clamp here before writing to avoid running past
-++         the framebuffer (heap out-of-bounds write).  The post-loop
-++         "rowsProcessed != rh" check happens too late. */
-++      if (numRows > rh - rowsProcessed) {
-++	rfbClientLog("Tight: too many scan lines after decompression.\n");
-++	return FALSE;
-++      }
-++
-+       filterFn(client, rx, ry+rowsProcessed, numRows);
-+ 
-+       extraBytes = bufferSize - zs->avail_out - numRows * rowSize;
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-index e2f995947f..ff7327c6cf 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag
-            file://CVE-2026-44988.patch \
-            file://CVE-2026-32854.patch \
-            file://CVE-2026-32853.patch \
-+           file://CVE-2026-50538.patch \
- "
- SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
- 
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_51.0.bb b/meta-gnome/recipe=
+s-gnome/gdm/gdm_51.1.bb
+similarity index 96%
+rename from meta-gnome/recipes-gnome/gdm/gdm_51.0.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
+index 00e1fd930d..7ee327bff2 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_51.0.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
+@@ -21,7 +21,7 @@ GIR_MESON_OPTION =3D ""
+=20
+ inherit gnomebase gsettings pkgconfig gobject-introspection gettext syst=
+emd useradd itstool gnome-help features_check
+=20
+-SRC_URI[archive.sha256sum] =3D "2ce5acf5a438b8f6dc1d14fd777a911be5eeb2f7=
+ab9a7c4600166205b15d6536"
++SRC_URI[archive.sha256sum] =3D "27970ad4f58eb0a48fb01bffb89a8f472503641c=
+3573eb6d788ad4042de01120"
+=20
+ PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[plymouth] =3D "-Dplymouth=3Denabled,-Dplymouth=3Ddisabled,=
+plymouth"
+--=20
+2.56.0
+
