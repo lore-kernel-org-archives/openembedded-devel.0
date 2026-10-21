@@ -1,60 +1,60 @@
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7527.1792575019279345677
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7529.1792575021511402958
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 02:30:19 -0700
+ Wed, 21 Oct 2026 02:30:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=W4mBrsoQ;
- spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-17bc533fda3so634115c88.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JMVYDFr0;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-157fe9d771bso660811c88.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 02:30:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792575019; x=1793179819; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792575021; x=1793179821; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=63591MtrLhccxHSSW3kPTqnL4L0Z1tQ/v8jipDncExs=;
-        b=W4mBrsoQrq7hpaqC55TEAGhqR9ToGdhqp1MZGV53QQrAV/qct0A32iw2QSRMdpQHNp
-         WCvCQYopIxCq8HoZUhBC81F7s55k2de1b34yt1zmwePdtBIB+PkBeI0GJA6On4DqctoE
-         vwVxPVcvJbjJ/Dv+sC0v9FWhPn6uZgOwodsPRvY7IIVsZrjcBcNB14oWLPQC2KDONFP2
-         Ud11wrwOr7AJTavMbzHXy8XqdGWjkBoo64KZln4K/vViYhbJPRnW1WgxYM6hAeUVlG0D
-         clxH5xt7cEbiaydtHxNo/GFN+HytGhpSJZ6b8YUNiGXsdaS58mmxBbGfmPhumopEukFf
-         VWvw==
+        bh=3wDoYXBWDgdtTs8yzVacPsTRlcJX+k9H2JnfxSGfVbM=;
+        b=JMVYDFr0MzjEWHpg1MNTumyrn2kA0sJb87eeHztgi7XKUG9+6hVsuDfzzAdrS1b0Tq
+         K1/sC6sknYM5RaboqOJLKEK2TV4dzmGc0mfgygpHgyztxh1EmYt9sPhiWR9UXCXCtIb5
+         64LMWu3Y5WIPIlcs7V8HdarDjV1UnYSqfYVEexDv4VmQgpwYWCPPh4LRC3hA92T1CTNC
+         qhfOttl3DN5453Ro1AQf/5FUIDRHAzDSDbRNsuZE2Ou4xA7aWzHPvDA4/rz8Y04d13ZK
+         xmB4mcAuEEfa+XOPPiLvYFFN1ZSrzj560TDlw+5h9NuhZ35Asvpc2p6HA+dNKfylvBeX
+         JYxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792575019; x=1793179819;
+        d=1e100.net; s=20260707; t=1792575021; x=1793179821;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=63591MtrLhccxHSSW3kPTqnL4L0Z1tQ/v8jipDncExs=;
-        b=qYxFFfmA/kJK20JUdbZokElBCDeq/2FzEljI8ejAe8m6uxplqDNzHBaTetl1lVhSy8
-         sjWJJoT1ilVrVtIZmQFN8GJxkStyLOJQJyqppqzYZFCVWWCOp0z7U0YrdK5KJNQoyPKU
-         Q8HxWBZhUHQ5kaH3JL87JnoqYMaw0Cm0QGzPS7u1IFAiEaDB8FGPnkgJBTX3Zsb2sIfu
-         HwMiASJt7JtzA0XQ85q424xWRV2NMWoKd0xGOOSwUJu3SAAYZwh31EZMkuzCm75MUNb+
-         gmY+4xpD0NAc5v0upx78HUucC9uiiWt9nldQb/rzlkP/gS8y4PIqzTnWiveC3uFLKlJy
-         Npeg==
-X-Gm-Message-State: AFq9FYJJ+AQWsahGEFHSjxOCRucr9Xq7jNGFaGL82EylXKIJRYh94/Hk
-	WgnqAerrGrwyKP1atiU+XWkqLZ7+84Mz9goWiewvWpuT9ycheIfTuNKJyICQzw==
-X-Gm-Gg: AYBFou2bSyFndEhDXeOs5e3uzt1TqTLgMQ9OazZhh9f+KzWe0vZuYFaOzIrEvn9fPci
-	twz2hOjFFJy0WU80mNjEjhlNdSTAZub8pt7GwRn2/Cz947KrpYutmneaxh+iDR3dKGGp4sGrw6z
-	PQJYVq7UrFi9E1NTCngk7Txo7/XpfUY1XG2Rd1ca7bcs6z1XrNnaRupJ37LGD8GktS0UCDtk/ix
-	QECLg77+riwSz27OUpfOVJZD21brFYRTkUuiMRJyqvRFN4hjUTtl9KzbpIUMJ/7P3YcDR/5kieF
-	uuyGp/dN89fMR6SHA9vb44pUK0tJNim427pF8t9SpTjs04VRNAgRkkOm32DZqT/PfI0ypzanHct
-	BXcZE5/AAPH5WQnZJUrvr0Cmt3zqYILlyFcAQbcYCZMV09UUiKOVqmZOJqxwDkDHyO8uqbI2p+I
-	tCtHmwbWU4yuWDIWuMoP7yku3yGBC5adrBDflYH/NdU5qUeuaiEqozQHjE+iVzFIqztRpoNQ5Lb
-	f+gEogH0GOlH1PloFpRIIm3VU+/EgDRjsDORDrSkk9MwKbufHLTaDUD1N868jtIn018ZsNTMhq1
-	PPmMhe0N3Zgd5lF+MEe3n9vRi0FWPHc=
-X-Received: by 2002:a05:701b:4283:10b0:15f:28e1:7c7d with SMTP id a92af1059eb24-190a86ade90mr1920155c88.42.1792575018237;
-        Wed, 21 Oct 2026 02:30:18 -0700 (PDT)
+        bh=3wDoYXBWDgdtTs8yzVacPsTRlcJX+k9H2JnfxSGfVbM=;
+        b=fqOBrA8tGFU0C2QzMV8gPPNdSeyUqOz1lHp79udlHJPFUH1qXf/HVUpsf4HdyGt8DI
+         us9NfsJrxpZyXXlvAbtGlSyNJqI4vlZuux2auLxHdQKMsBErS/3KLH7gYavK0GwDpd3/
+         QoQ+CayaBexKVQR+R6mGsgZV6Wi0YBSIU/N39ff2WsgbtTC29kzhpE3KkEzqmJH4h5AB
+         hlZ1CjrNAhq3cHe2WWDN6TibhVfxMrf2Y48A1BHAV6m4HnvoaR99ab0xOpepb+bTbfgN
+         bU6p9cQbV+H0e6bTWQxMkatWZZMfIa6lJJYa8HbONB5A9k70NcSM/9CbBADd05BTNT+F
+         Cqxw==
+X-Gm-Message-State: AFq9FYIAQlb7ridl+C7Ec7O07qAQ4oJjDn6AIhqjMSNJftiCjegZOSbs
+	ZbSouTPkCWUSiG3jQVmB60x+iDps4uOD1ThuNqL5fokhVXpXKzo3zfEb9GGSSQ==
+X-Gm-Gg: AYBFou1ZjJJxX42KGNjATqRsMX9+f9UWLO/LsO0/9W+HVC42vIp6H3ibNrEnyh6+KZ6
+	dwSkmpfdSSP8eIRg4wgn25xHP1jK7X6/I13BFD9g31DxUpiYc0aCSvg3KJBGBr6wiFWMIzKfs8u
+	49hYQUayVXW62Ciw2VeptPOAaDg/yGYCoC87wGR7qdP/C6F4P0+fq9QIKtpxkamJMcyvboDJc7E
+	BUYoLeEI7em24mKCWi8BkZAzuX/7J8hhTelLnYqurCXOq7K6wqw3/9IVWUPHBs0+06Fgj3Jr2By
+	1pDI1/uma1X2DciMJLlZNpcCO0/EhVp0rlLQmoxo46plcIO7jFR5pzKqd2/EzroLwZGhgrOWu/X
+	S+WQNfpQprUfhGp4WeaR/E1iWRyxyor6YplKc6UzFq73rZ7IqQo78czLRT/zuy5909pLY6334Un
+	co2UKH1xX7KGPQZgIJw3XnjJtgJCh3aOuRXbP6TiOwRUs3ToSYDZSdGM9taQiRCRJ7HUe9YNPs6
+	bPMtUTjEzOsviN8DNJPDBkDkwtHuOHlCaucaL39dJr9ObDyv5N4LLwdZ022q3YP/s2CijCNbSLz
+	YEDCynBNS/UnSQnHjbamvcj1+4FtmfI=
+X-Received: by 2002:a05:701b:2806:b0:168:6ad8:e89f with SMTP id a92af1059eb24-190a0428c2cmr1866742c88.3.1792575020644;
+        Wed, 21 Oct 2026 02:30:20 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.16
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19035c0c9a6sm4716458c88.3.2026.10.21.02.30.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 02:30:17 -0700 (PDT)
+        Wed, 21 Oct 2026 02:30:20 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][blacksail][PATCH 32/44] pjproject: patch CVE-2026-84975
-Date: Wed, 21 Oct 2026 22:28:45 +1300
-Message-ID: <20261021092857.3585453-32-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][blacksail][PATCH 33/44] nmap: patch CVE-2026-58058
+Date: Wed, 21 Oct 2026 22:28:46 +1300
+Message-ID: <20261021092857.3585453-33-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
 References: <20261021092857.3585453-1-ankur.tyagi85@gmail.com>
@@ -62,123 +62,70 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 09:30:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131219
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131220
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-84975
+https://nvd.nist.gov/vuln/detail/cve-2026-58058
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../pjproject/pjproject/CVE-2026-84975.patch  | 87 +++++++++++++++++++
- .../pjproject/pjproject_2.17.bb               |  1 +
- 2 files changed, 88 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-84975.patch
+ .../nmap/files/CVE-2026-58058.patch           | 34 +++++++++++++++++++
+ meta-oe/recipes-security/nmap/nmap_7.99.bb    |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-84975.patch b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-84975.patch
+diff --git a/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch b/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
 new file mode 100644
-index 0000000000..007096a6ff
+index 0000000000..3717d37b5d
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject/CVE-2026-84975.patch
-@@ -0,0 +1,87 @@
-+From f00f023079d0f9a74477da47056bfce76374b2a7 Mon Sep 17 00:00:00 2001
-+From: sauwming <ming@teluu.com>
-+Date: Fri, 17 Jul 2026 16:46:33 +0800
-+Subject: [PATCH] Merge commit from fork
++++ b/meta-oe/recipes-security/nmap/files/CVE-2026-58058.patch
+@@ -0,0 +1,34 @@
++From 63815f6a8865d8c99a1f3abb9d7383a2be0ea67e Mon Sep 17 00:00:00 2001
++From: dmiller <dmiller@e0a8ed71-7df4-0310-8962-fdc924857419>
++Date: Thu, 25 Jun 2026 21:58:49 +0000
++Subject: [PATCH] Fix extension header parsing. Credit: Himanshu Anand
 +
-+SubjectAltName entries from the OpenSSL and GnuTLS backends were copied
-+with pj_strdup2(), which re-derives the length with strlen() and thus
-+discards the length already returned by ASN1_STRING_to_UTF8() /
-+gnutls_x509_crt_get_subject_alt_name(). A DNS SAN such as
-+"victim.example\0.attacker" was therefore truncated to "victim.example".
++(cherry picked from commit bb6754e76bb1686315008e1aa1c40202a513fb83)
 +
-+sip_transport_tls.c disables socket-layer verification and performs its
-+own length-aware identity match against subj_alt_name, so the truncated
-+prefix compared equal to the target host and a crafted certificate was
-+accepted for the prefix hostname (server identity / hostname verification
-+bypass; OpenSSL's own X509_check_host() rejects the same certificate).
-+
-+Copy the SAN using its explicit length via pj_strset()/pj_strdup_with_null()
-+so embedded NULs are preserved and no longer truncated. The mbedTLS backend
-+already copied with a length-bearing pj_str_t and was not affected.
-+
-+Co-authored-by: Claude Opus 4.8 <noreply@anthropic.com>
-+(cherry picked from commit 43d3bd77bb6833eab4c493503b8d564a754ddfdd)
-+
-+CVE: CVE-2026-84975
-+Upstream-Status: Backport [https://github.com/pjsip/pjproject/commit/43d3bd77bb6833eab4c493503b8d564a754ddfdd]
++CVE: CVE-2026-58058
++Upstream-Status: Backport [https://github.com/nmap/nmap/commit/bb6754e76bb1686315008e1aa1c40202a513fb83]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ pjlib/src/pj/ssl_sock_gtls.c | 17 +++++++++++++++--
-+ pjlib/src/pj/ssl_sock_ossl.c | 14 +++++++++++---
-+ 2 files changed, 26 insertions(+), 5 deletions(-)
++ libnetutil/netutil.cc | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
-+diff --git a/pjlib/src/pj/ssl_sock_gtls.c b/pjlib/src/pj/ssl_sock_gtls.c
-+index 68ceea3f3..ee977116b 100644
-+--- a/pjlib/src/pj/ssl_sock_gtls.c
-++++ b/pjlib/src/pj/ssl_sock_gtls.c
-+@@ -1072,9 +1072,22 @@ static void tls_cert_get_info(pj_pool_t *pool, pj_ssl_cert_info *ci,
++diff --git a/libnetutil/netutil.cc b/libnetutil/netutil.cc
++index 6e81f558c..0adf18b8e 100644
++--- a/libnetutil/netutil.cc
+++++ b/libnetutil/netutil.cc
++@@ -615,11 +615,13 @@ static const void *ipv6_get_data_primitive(const struct ip6_hdr *ip6,
++   *nxt = ip6->ip6_nxt;
++   p += sizeof(*ip6);
++   while (p < end && ipv6_is_extension_header(*nxt)) {
++-    if (p + 2 > end)
+++    if (p + 8 > end)
++       return NULL;
++     *nxt = *p;
++     p += (*(p + 1) + 1) * 8;
++   }
+++  if (p >= end)
+++    return NULL;
 + 
-+             if (len && type != PJ_SSL_CERT_NAME_UNKNOWN) {
-+                 ci->subj_alt_name.entry[ci->subj_alt_name.cnt].type = type;
-+-                pj_strdup2(pool,
-++                if (type == PJ_SSL_CERT_NAME_IP) {
-++                    pj_strdup2(pool,
-+                         &ci->subj_alt_name.entry[ci->subj_alt_name.cnt].name,
-+-                        type == PJ_SSL_CERT_NAME_IP ? buf : out);
-++                        buf);
-++                } else {
-++                    /* Preserve the reported length instead of using strlen(),
-++                     * so a DNS SAN containing an embedded NUL is not truncated
-++                     * at the NUL (which would allow a crafted cert to be
-++                     * accepted for the prefix hostname; identity bypass).
-++                     */
-++                    pj_str_t tmp;
-++                    pj_strset(&tmp, out, len);
-++                    pj_strdup_with_null(pool,
-++                        &ci->subj_alt_name.entry[ci->subj_alt_name.cnt].name,
-++                        &tmp);
-++                }
-+                 ci->subj_alt_name.cnt++;
-+             }
-+         }
-+diff --git a/pjlib/src/pj/ssl_sock_ossl.c b/pjlib/src/pj/ssl_sock_ossl.c
-+index 30b4eeaee..ceb6bca5b 100644
-+--- a/pjlib/src/pj/ssl_sock_ossl.c
-++++ b/pjlib/src/pj/ssl_sock_ossl.c
-+@@ -2270,9 +2270,17 @@ static void get_cert_info(pj_pool_t *pool, pj_ssl_cert_info *ci, X509 *x,
-+                           &ci->subj_alt_name.entry[ci->subj_alt_name.cnt].name,
-+                           buf);
-+                 } else {
-+-                    pj_strdup2(pool, 
-+-                          &ci->subj_alt_name.entry[ci->subj_alt_name.cnt].name, 
-+-                          (char*)p);
-++                    /* Preserve the explicit ASN.1 string length instead of
-++                     * treating the data as a NUL-terminated C string. A DNS
-++                     * SAN such as "host.example\0.attacker" would otherwise be
-++                     * truncated at the embedded NUL, letting a crafted cert be
-++                     * accepted for the prefix hostname (identity bypass).
-++                     */
-++                    pj_str_t tmp;
-++                    pj_strset(&tmp, (char*)p, len);
-++                    pj_strdup_with_null(pool,
-++                          &ci->subj_alt_name.entry[ci->subj_alt_name.cnt].name,
-++                          &tmp);
-+                     OPENSSL_free(p);
-+                 }
-+                 ci->subj_alt_name.cnt++;
-diff --git a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-index 89763b3011..893559090f 100644
---- a/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-+++ b/meta-multimedia/recipes-multimedia/pjproject/pjproject_2.17.bb
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
-            file://CVE-2026-57165.patch \
-            file://CVE-2026-57166.patch \
-            file://CVE-2026-77396.patch \
-+           file://CVE-2026-84975.patch \
++   *len = end - p;
++   if (upperlayer_only && !ipv6_is_upperlayer(*nxt))
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.99.bb b/meta-oe/recipes-security/nmap/nmap_7.99.bb
+index ea792d30f6..515623d63d 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.99.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.99.bb
+@@ -11,6 +11,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
+            file://0002-Fix-building-with-libc.patch \
+            file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
+            file://0004-libdnet-fix-PF_PACKET-conftest-nested-function.patch \
++           file://CVE-2026-58058.patch \
             "
- SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
+ SRC_URI[sha256sum] = "df512492ffd108e53a27a06f26d8635bbe89e0e569455dc8ffef058c035d51b2"
  
