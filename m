@@ -1,95 +1,125 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8857.1792580479278404188
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8715.1792580481425300485
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:01:19 -0700
+ Wed, 21 Oct 2026 04:01:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ifPXSf5c;
- spf=pass (domain: konsulko.com, ip: 209.85.221.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48e10a70540so337415f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:19 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=HMZQPN3z;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c20ce3c118aso102254066b.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580477; x=1793185277; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792580479; x=1793185279; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NHLS4yHE3TYbkGEWwmVse8RfSv855VQcACfVOgr2sFA=;
-        b=ifPXSf5c3nhuv1FRN3xXqiVKfv38/bq+uQsm96EsxY6deJg+oavmJ1rOyHTYCB+7QC
-         liY8WKPlIXpo1kkPlBSz6R8VOyzOs8d9fp3f7lEso4s/bFu3PaRlWsLZwUcZWGyxBBYR
-         iXVRLo7f/1vrN3ijQAWfmHUZy4p4lTvGRxDs0=
+        bh=aqvsiy9xSph23lx/oMulx9qc5APsD8qFIQ5tbsfSvls=;
+        b=HMZQPN3zNmHys5Z5eUusnVqabUXezMuMfJXcEX5ZZETQdd5ki15NqFmT/v21xbYyiN
+         Ng2azy+l7/4GeJvwqWiExk91SIZWsYawhwc4ZVh6oziBmL/8FaocKReP2FmK9FW9a5cj
+         yrddNZG65TAsiw5xs1twK0mMa/yXu7lpgczu8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580477; x=1793185277;
+        d=1e100.net; s=20260707; t=1792580479; x=1793185279;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NHLS4yHE3TYbkGEWwmVse8RfSv855VQcACfVOgr2sFA=;
-        b=2gGcugzHSzO82NafUooBwIU8Ck0VpxzclB7By1ZaCo4oOI0Bh+k8ExTmjtEPn6aUzu
-         D4BQ18OinVIuM6Gu9N4wngt4PB7fo/TA3ZqaD3JG6aXALf/ZtXjrkOBfy0vaFwOj0CAb
-         RP56FY1RDHpR+xEntBb7DGKwPSWGbQAwfXnbWgKV/PiXsLd53cwMSxHa6Q4QWOvkKz1c
-         14uICRlc24zgiBHU0Rf5lvWeEJw91zYNQnaXJJVvwhhod2B6bvHo5JIENXH4Ce/iszAI
-         TdIg+LYtXcHh5/B04G/+PvzcVnfQeoafyWj+Zln7QdbHXaG/6+eAPVUuxy4v/dk6K+wM
-         pgig==
-X-Gm-Message-State: AFq9FYL0UiJcseqZ3EomTlOH5iNd8ukyV+08qdmqKa66nxqu3Gx54xvL
-	N1v2c0eIE6d+Hh9ILNMuhj6YeXuTMAf8noVafCB+/l0R5eayMeKUzx7Lg2WfkHq1Xqmgx5Zp4zW
-	kTYby
-X-Gm-Gg: AYBFou1hTv8uVI9O9No31EYMd6SDdz2PSoSxiKVhXeUv954E11KrwoHbACy1AR0xnwm
-	IN9QdxKKLXquWojK2oDOkaujAXGtByxbQ9gLWUnJ3j64s1ssyEYwqdoTHa2t41t4CpvK4s+0wp3
-	/08CveDhiEw6xt5WK1NOefeWMd/xT2lQtMBRl5gfcklTYALhgJmgv4YuCbrfXk3s681N46UQ6Cv
-	LnUEAg67xlKo0FBXXidX9uf6TpgMmE1ZKMGU2kUmLF2Qd3PHaTyutUJuF68SuyYQ5rCtF6qv9TB
-	F6qbg2IlxLZmwpqxKXot0AFLYvAfel5h9KjC3FJHj2C8nXlKxz3z1B19H6bRN6ww0+oq8pIy5ct
-	HtxTbjgx4Z1VVzx+BmeTjPc3J1qb+0zGNW5+AMhIv37hS48wN1bgn06T4f0EkFCgvQievgRzkB6
-	DFIGOLvY4RuRWV7wI9DqI1wLEkuHLwRmbNca3mCSyofPYRAgz6B0DKgAahXZyXS/Yf47pd1KC7J
-	s7VgJ7GxkQbLPAmEImcflI0x9DRXifL4eJE2+g47faM+uxYDvHOyK8X3aSnoTaqcrakuy2HZPHQ
-	YOqWBKoiojFWjCOL77qxroeEspFXrIj0U1SOsXnlCV/pk1CgVJFpUeueNE1vbA8aaedPiOAkvLf
-	cTeok
-X-Received: by 2002:a05:6000:41c4:b0:48d:f14a:9173 with SMTP id ffacd0b85a97d-48e26424471mr3324573f8f.8.1792580477230;
-        Wed, 21 Oct 2026 04:01:17 -0700 (PDT)
+        bh=aqvsiy9xSph23lx/oMulx9qc5APsD8qFIQ5tbsfSvls=;
+        b=C8IH0aK5Kf7v2P71YtZAX6eY42U2xHk3gXTPd+W3VUjW6PJZ0NJzMvBVAnjqPWVb+/
+         CoiKZUz5AnTFz7WpEDmpAPRrKrpGiuHMPhX8jVE5+WpGr2RUOFa49bRP2aAJZ+Q5DLZa
+         Hnjy04maUyOiKiWzZp9R1jZs6y+kRujbnqg3nUprhvH/He/5WfNHRAAnuxWU9U7uJ7RD
+         K29aarvGmyKWMKfK34drS+PE8h4PLTrHtPKeWFoZPIWa9TDzpRdLeOQF5A2PX+G7RuSM
+         isHYMU/FR5cG9HyO5XsuBohTRr2kI8PFlIxZQ9A1ii1jK6bKDROGL0A9Z3R/skb7fRCB
+         0pmw==
+X-Gm-Message-State: AFq9FYKPOHPHTuE9PWpGhhDSSwL4zM6Okd7PEl1sKdHN5+wrIsZ7Ctl5
+	kpcOaGMxdDE5HiTvYvfgnEpoJL3d2Ugx5zsvF2gsvF9gSZe200DN/AI8l8HKL/8TrgXv/lCh02x
+	XmJv3
+X-Gm-Gg: AYBFou2sZuvQnt+2o95TV5Y8mH0qpxEjPOJL8T0ag2hb2rvgk0/G5wV/7NswtT/Zq3K
+	QMRC0v8u/GO9sZIaWFdJ5//M78uBbIq3q0koFI0vxWZkOgy9yPnb6tPaBCB4oH8a8FmQWw60gXL
+	y/nkjAQHwf9D4ZAo5ablAE8u74ShV83pEmPLNsDZ1Guu6kZGk4QiQ2N44/nTXzKjJ04HRh89sM5
+	NelJVIR1CiraFqRM9C4+rW+YonX5PpnCeAd3uKxwZA/RlpWHX5WnOM71qRjs+cq9ljJbAIdbXlO
+	yqwhZtIK5UnAHRa6z6+70driYiN+43X2wQn5xqDTeAx+EQJiqgmAJmb8eAJAiTBHqPMDkjNouXT
+	pEdGksyQ1uslrcs22Xcc5dJu5qmVzB5eeCRiqhRBom3lKPUTXKEyf1+8W+VSMTsPPBMJNgPPJji
+	+UiSJv+Z3GbrUhup4O9ysD/IOQnZmfexwHAQrN4r689JLyAyCfFem6fOdQoTBhaRtPNBO5SxNOX
+	nXhH6ExvrUB7D6a9DGtnuzWuO2o2EsPd0ZjKCAf9sc2cDQdB83Yy7sYeojnrpfA13s6a3Iiqkbv
+	GOhOWGJCVvzfyqq+8Ai+jsHRH4Y2UATSQfICtM5FRpBAQuiRwBrcu7A5XUJjbDPHS0vLtz2L1Bq
+	Cirgf
+X-Received: by 2002:a17:907:724a:b0:c2e:1b6b:8b19 with SMTP id a640c23a62f3a-c46058d8f1fmr396381166b.23.1792580479303;
+        Wed, 21 Oct 2026 04:01:19 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.13
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:15 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:17 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/36] python3-dunamai: Upgrade 1.26.2 -> 1.26.3
-Date: Wed, 21 Oct 2026 14:00:29 +0300
-Message-ID: <20261021110103.1943456-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/36] python3-eventlet: Upgrade 0.41.2 -> 0.41.3
+Date: Wed, 21 Oct 2026 14:00:30 +0300
+Message-ID: <20261021110103.1943456-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131264
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131265
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.26.3:
+Upgrade to release 0.41.3:
 
-- Fixed: Version.bump() ignored the increment when a stage had no
-  revision.
+- wsgi: Raise a clear error for non-latin-1 WSGI response headers
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-dunamai_1.26.2.bb => python3-dunamai_1.26.3.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-dunamai_1.26.2.bb => python3-dunamai_1.26.3.bb} (69%)
+ .../d19ad6cc086684ee74db250f5fd35227c98e678a.patch       | 9 +++------
+ ...on3-eventlet_0.41.2.bb => python3-eventlet_0.41.3.bb} | 2 +-
+ 2 files changed, 4 insertions(+), 7 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eventlet_0.41.2.bb => python3-eventlet_0.41.3.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dunamai_1.26.2.bb b/meta-python/recipes-devtools/python/python3-dunamai_1.26.3.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-dunamai_1.26.2.bb
-rename to meta-python/recipes-devtools/python/python3-dunamai_1.26.3.bb
-index 3059f65b8c..00d3198a9b 100644
---- a/meta-python/recipes-devtools/python/python3-dunamai_1.26.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-dunamai_1.26.3.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Dynamic version generation"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=059eed55dbfd3fea022510ea62c95dc1"
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch b/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
+index fd0fc91d25..5b4b2b9aee 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
++++ b/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
+@@ -1,4 +1,4 @@
+-From d19ad6cc086684ee74db250f5fd35227c98e678a Mon Sep 17 00:00:00 2001
++From 5a25c6991b51c58e8cbf54f1b7c1e2fd80e7c39a Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
+ Date: Thu, 6 Jun 2024 10:29:29 +0200
+ Subject: [PATCH] Add new thread attributes from Python 3.13
+@@ -11,10 +11,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 7 insertions(+)
  
--SRC_URI[sha256sum] = "84ea45eddf9bb4b40df7610b1b22a03137365e6257dbf9d7b72128fdccca564c"
-+SRC_URI[sha256sum] = "fe2f732186710ee5048044fdbef6c76c6afbb9ee7de4f6d00cf34256e9ec2e7f"
+ diff --git a/eventlet/green/thread.py b/eventlet/green/thread.py
+-index 224cd1c..c70c9e8 100644
++index 98baf22..2651710 100644
+ --- a/eventlet/green/thread.py
+ +++ b/eventlet/green/thread.py
+-@@ -174,5 +174,12 @@ from eventlet.corolocal import local as _local
++@@ -179,5 +179,12 @@ from eventlet.corolocal import local as _local
+  if hasattr(__thread, 'daemon_threads_allowed'):
+      daemon_threads_allowed = __thread.daemon_threads_allowed
+  
+@@ -27,6 +27,3 @@ index 224cd1c..c70c9e8 100644
+ +
+  if hasattr(__thread, '_shutdown'):
+      _shutdown = __thread._shutdown
+--- 
+-2.43.0
+-
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.41.3.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
+rename to meta-python/recipes-devtools/python/python3-eventlet_0.41.3.bb
+index 67a69b1478..cc003096d0 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.41.2.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.41.3.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
  
- inherit pypi python_poetry_core
+ SRC_URI += "file://d19ad6cc086684ee74db250f5fd35227c98e678a.patch"
+-SRC_URI[sha256sum] = "721b86b77fca33a735598292022ac6feef99747bf48f52defdada6b572acd5af"
++SRC_URI[sha256sum] = "66d1883f276e94d040d007e99d7085e6aa5f2738c5b8783d165a137050dc8fb6"
+ 
+ CVE_PRODUCT = "eventlet"
  
 -- 
 2.47.3
