@@ -1,59 +1,60 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8719.1792580491149529574
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8864.1792580494134540001
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 04:01:31 -0700
+ Wed, 21 Oct 2026 04:01:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=rPFhnOtj;
- spf=pass (domain: konsulko.com, ip: 209.85.221.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48e10a70540so337553f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:30 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=So38Ov7a;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-48c45111bebso386544f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 04:01:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792580489; x=1793185289; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Y4Trt78tJnW8DU79wgCd2NVMsuZLKwYahdc0MYpQ5vc=;
-        b=rPFhnOtjdWJVxR4dvyOR4Cq9iGO8KJW4Bd/rB1XCJn/kFH6/hdILH1JAZWIlHFXtoH
-         Ti+bUnLr+ySpE0FNMl4xVtR9QUjR3ZxJPV6hpRb3xwc4Qbpoq4Mg3ERCbfZ4zkTwun8R
-         PJVolz2iP1xwoL2lvC0E+J4QnL4Puu2iL5rTA=
+        d=konsulko.com; s=google; t=1792580492; x=1793185292; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OLsifrLo/OclfgtPvqnwxRdX0hAC1dmYupI2Lmu5vHc=;
+        b=So38Ov7asl1A9Mn5oBJDTqHYuIHuhAdGn7bR1itdP1Tt/hDBUdEgazTdSWLRuCrDHp
+         dS5d+8xLqn2V7BZtd5Lf3bYBlq+9V6e6zqk1U6E/6PkO0KX1iBX2CN/UVgAIl6HrDs5I
+         zyCvRydnhsCoBWd9SDuL49pZMNiWkREBgIK9s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580489; x=1793185289;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y4Trt78tJnW8DU79wgCd2NVMsuZLKwYahdc0MYpQ5vc=;
-        b=C+nzyFJQcCf6o424plEfS+VJhZCpgGy54UdpNUhXguH0g3bH+lgpx2lUx3+KxyyErL
-         JU71rv/wNfX/b8U5NZJI8pV46pcQoFYHgfAoD1FHnP+xETrwTeLoohzUOIXM4bPsWTA4
-         BkXhU8pe32+FHT0jtvHfZ43Gl7JHRGj+XsYb+RXUV0T2UddUp9MeVZUhxoXUI5tpDvpK
-         kr90RS5/lW4G7W2siyNUj37oBQy/155zAOAYB1QUaZhpmz0MKe6/SDg+Q290SxpyngXp
-         sq61Da+qRTkfv9pf8oNOJFi86Wm0mUItaqR9TIMMw4WAv6SKPvYNhJf6o2pwbPduarTX
-         NOvw==
-X-Gm-Message-State: AFq9FYKpp8s5chM5AQVKJH9phDOyC5NkVUk93723yc6zp+qx1kZdgi4a
-	o76YWLb4Px8jNBsQnbNrMGMbFHhTksBB6pRruuh7aqYPH5kNMAvExrzCDrUzpdBL7uKOZzQ3O2O
-	owjqT
-X-Gm-Gg: AYBFou2poraa/HVQh2gkFTMRhYHr8f40ysW4DYsrfHapxMuoQR31WelP1CvU6ceYyOV
-	8PV3pjtGiDVAwSPPN/DduH1gLpjKx95JfN3T1n8J/70WPMrQyR5k2M8q4MndBhiqb7cAOUtkh/G
-	/snYDVpkps4QlN2z7Qsw0no2o4Si5iLjQim6iNzXU264Kwgt4hcVJsr2TARd0hUAwH/mV29Urrl
-	zUcG8+hP9kNG8QyDJ3wSLud/tOoRkYPlDSKwIzJdBmke2tA4QL51Fa1rXBfPlMbRL3pDucOXLDA
-	/yycG5A5FpqRdfB2mzlfFxyiHpKh8lFRcId+tAfzXFlUiF2GCQFOP+eCsVqOX1WMViOyxbHJcae
-	Zw1t+T2cFKL9Kgm9vbl14urYa9P6ncKgqNuRZnO3Ja3ttOxhBmTv79RMAcnOhD8efc75u17y2LK
-	BFHAzQs07hIcKEf/iD59ikdOlIUj2dJbvOgf8uROTdYLZfOLGeVACpHjRukE1K9VBG+PfRwuEfU
-	YMpLfuR52hA8/hH8K71Lju74bpKju44ceRjUJ8z6tu+LG5w0G1WPj2TjDGEBTq9DmHJyPFMDSVA
-	x5sYO10mSrFV37wnBMWzZ3Or8auzZji3TMyJ7+8hNn1o8lsHeMsQjZz+I21iWTpinQ4eVcK23BG
-	91b6c
-X-Received: by 2002:a5d:5f55:0:b0:48d:ca32:e90f with SMTP id ffacd0b85a97d-48e264e905cmr3386400f8f.55.1792580488799;
-        Wed, 21 Oct 2026 04:01:28 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792580492; x=1793185292;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OLsifrLo/OclfgtPvqnwxRdX0hAC1dmYupI2Lmu5vHc=;
+        b=K0PTIUSrpWYjQHIGokKq3tvcsmK/D/iNl8aw1eqdJGfmpgk2lXKT7hAjaREzUOjMTv
+         sodzl4osIN1TsRJ1v9W44G8xaibO4eH1uE2a9BL0DiKXGVMtOBpNRffn5kqve0XrUHh2
+         UVl19Kmz3NCnRDEJy/s63PuSL5d/3VhVxM6t/nNX9s2SLcmVrAOwC25AN0lxSE+knj9M
+         KVItlz2MoKWjuqI43IvADh55Fw5xF8uvhD2luYw85JrmfkXEEnKmu8xzrn84TSJ+cNEl
+         a3VAYqV4HDkopSo4B2HFz0YBYasxiIULJRSosCc5OGmLc1skFQLOi7gurZRJYKMg6apK
+         HnNw==
+X-Gm-Message-State: AFq9FYKaRGEzS5L4rCSO7i6FNLh13EvLdlAOETFeKjP5NR1fRmQYi4kp
+	By9KYoFqi93BA7FNX+LJZD4GT53c5vVKa/ygUMjCg8wsRu8M/eajMfw3IjyPgOqR8U8L9oo0Sgo
+	t20Mu
+X-Gm-Gg: AYBFou0KtpzsxssnJQ5Ejo+Wunc/QbIPwaa79wbUzZtDCoZv6p2mklI9VKqW9iNxHue
+	itiOCE3VnS5c5vjfwlWQb4+6ro6c4SlXlCrlFVIniObxEGcaTWUmI28mmJqExvvYwzFLO9DnkfB
+	1m/XE3M9SQpFwe/tfBIdQa+7Fu5BZoYWmN71SDESWdsfgSVKIPO+kmL0LzL6bEgBElRwgeOg6Ke
+	GsS/RXxqbcH/OSDVTV5OHOeBfIdw9d7hFzrNIjZA6CxiABWxAAFRO+OgJPuLUCm6VoI32NIt4JM
+	oFx+YIvJscpugsqTVShytnUb0gtDc7xMmwRbHdoNdbs5NRQKNFZKqvoOKow5Fq5e1zsB0mxHjsh
+	T8x6Rb2xZ73DC7jmqgpFV8e4GLWQWbdNqXlmUDW3NpStvB3JKbN7JuJUpNePz1NkLa0h3FrTR6X
+	6BGcGHIj1E3Bntu56L6K7u+6GTbo6pkrqTmnLtem7pNDkFANw5eHx3xPLq5halhr5N+x1QjoMTy
+	fPEOUN+rwZOEgyWjpP6HyCDRJQ2ZaFxwtUhHU3oWOSFn9bpCGiDOakug7nUU6KdONd1Ek8hcxOK
+	+mgsA+b+AFqDsCYxZjeiM+KP5XtnCeNPo0UqdYe3+nSih/9x65Ao9GgEk8RZq1hd+lnTGnTkPQf
+	VEF6heCISoKx/52A8L1wW7Q3ykw==
+X-Received: by 2002:a05:6000:4b0f:b0:48d:f7f0:327d with SMTP id ffacd0b85a97d-48e264bdb23mr3403290f8f.29.1792580491986;
+        Wed, 21 Oct 2026 04:01:31 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.27
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2583e25asm4972423f8f.46.2026.10.21.04.01.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 04:01:27 -0700 (PDT)
+        Wed, 21 Oct 2026 04:01:29 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 11/36] python3-gmpy2: Upgrade 2.3.1 -> 2.3.2
-Date: Wed, 21 Oct 2026 14:00:35 +0300
-Message-ID: <20261021110103.1943456-11-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 12/36] python3-gmqtt: Upgrade 0.7.0 -> 0.8.0
+Date: Wed, 21 Oct 2026 14:00:36 +0300
+Message-ID: <20261021110103.1943456-12-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021110103.1943456-1-leon.anavi@konsulko.com>
 References: <20261021110103.1943456-1-leon.anavi@konsulko.com>
@@ -61,62 +62,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 11:01:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131270
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131271
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 2.3.2:
+Upgrade to release 0.8.0:
 
-- Fix processing defaults for e/E format types precision
+- Remove unnecessary async, fix type definitions
+- Multiple logic fixes
+- Fix hangs, crashes and mid leaks from the handler split￼
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../0001-Avoid-do_configure-requires-check-error.patch    | 8 ++++----
- .../{python3-gmpy2_2.3.1.bb => python3-gmpy2_2.3.2.bb}    | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-gmpy2_2.3.1.bb => python3-gmpy2_2.3.2.bb} (86%)
+ .../python/{python3-gmqtt_0.7.0.bb => python3-gmqtt_0.8.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-gmqtt_0.7.0.bb => python3-gmqtt_0.8.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch b/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
-index 3c602cebe5..0fbbee8b43 100644
---- a/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
-+++ b/meta-python/recipes-devtools/python/python3-gmpy2/0001-Avoid-do_configure-requires-check-error.patch
-@@ -1,3 +1,6 @@
-+From b2ee22409705ee043d79550867e9002ab6e86672 Mon Sep 17 00:00:00 2001
-+From: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Date: Sat, 28 Feb 2026 17:01:58 +0800
- Subject: [PATCH] Avoid do_configure requires check error.
+diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.7.0.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.8.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-gmqtt_0.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-gmqtt_0.8.0.bb
+index f4dfaa345b..cdba352322 100644
+--- a/meta-python/recipes-devtools/python/python3-gmqtt_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.8.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
  
- The gmpy2-2.3.0 need setuptools < 80, but version in oe-core is 80.9.0,
-@@ -14,7 +17,7 @@ Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
+-SRC_URI[sha256sum] = "bedfec7bac26b6b4ce1f0c4c32cff3d663526a54c882d323d41560fc3b9b44a2"
++SRC_URI[sha256sum] = "61fb7641109f57ca29f73d2d8f2cb487de49d76338ef8c68228db961b6e9696a"
  
- diff --git a/pyproject.toml b/pyproject.toml
--index 1f00809..3a4f3e2 100644
-+index 214d656..30d3f33 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
- @@ -1,5 +1,5 @@
-@@ -24,6 +27,3 @@ index 1f00809..3a4f3e2 100644
-  build-backend = 'setuptools.build_meta'
-  
-  [project]
---- 
--2.43.0
--
-diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
-index 9bb3c96fbe..d1097801e8 100644
---- a/meta-python/recipes-devtools/python/python3-gmpy2_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.3.2.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- 
- DEPENDS += "gmp mpfr libmpc python3-setuptools-scm-native"
- 
--SRC_URI[sha256sum] = "313f35e9fe6b9ddf72759b14dac25166fe5757c970403e4bbf87a70ab2be07df"
-+SRC_URI[sha256sum] = "f20b7e2f8fd16f8d6846bb5b73359c3cc5aa41ec5cf266321d362f547c8fd097"
- 
- SRC_URI += "file://0001-Avoid-do_configure-requires-check-error.patch"
+ inherit pypi setuptools3
  
 -- 
 2.47.3
