@@ -1,72 +1,609 @@
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8056.1792577264948895583
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8054.1792577264822365072
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 21 Oct 2026 03:07:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=WNrfq6rC;
- spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=mrTCs7cI;
+ spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
 Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout02.t-online.de (Postfix) with SMTP id A2257E978
+	by mailout07.t-online.de (Postfix) with SMTP id 5ACDAE3FB
 	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 12:07:40 +0200 (CEST)
 Received: from localhost.localdomain ([84.163.40.237]) by fwd71.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xJTEN-0cELaT0; Wed, 21 Oct 2026 12:07:35 +0200
+	esmtp id 1xJTEM-0cELaP0; Wed, 21 Oct 2026 12:07:34 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 26/26] sushi: upgrade 51.1 -> 51.2
-Date: Wed, 21 Oct 2026 12:07:14 +0200
-Message-ID: <20261021100717.11068-26-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 22/26] gnome-user-share: upgrade 47.0 -> 48.3
+Date: Wed, 21 Oct 2026 12:07:10 +0200
+Message-ID: <20261021100717.11068-22-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261021100717.11068-1-f_l_k@t-online.de>
 References: <20261021100717.11068-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1792577255-67FFC903-FCE477EB/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5752bbfd-5965-4153-ab88-fa3b79744a81
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1792577254-66FFA903-DCF94216/0/0 CLEAN NORMAL
+X-TOI-MSGID: b0a7ff81-8d8e-45b2-b7cf-6f43f1dbe456
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
 	s=20260216; t=1792577260; i=f_l_k@t-online.de;
-	bh=t00palL/jfGcai5+idjE+TJ9X5nGUaB6Au4eaLJ/Ntg=;
+	bh=wfM37icoZMrVqL21tQ+8AxapYqKL6DRn7NCo7QiKgbw=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=WNrfq6rCsugyFOu4b1+vdiPsM5ws63cZNq7cAHYFiJSbAY4wnoXKUDKwMRDSJthzy
-	 Rf0/ZtTKoKKJSN4zkMUE6I5oXMuNccaUcZVxGQos7DNehpasXceqgrkWUHE3TGjMYq
-	 ZklQaY75U6qA2In2N2/0iSmt6B+rg73EtfAXrb4OWikI2+GLkMXTml3hISJJtoQnn4
-	 KS4RIwuzHjLG68DsbXR+u4m4dA7KZQkXyjzA20dsxrpKljmbP7UFbfJTGJV1zqYxzl
-	 eAZ7tuhj4Wwg0zFh5GcgVYYL586s51Q4DKEBLItU+Qcu1qRwGhNQ71F5AVH12P2iFN
-	 R/2Pwj3OBJVfg==
+	b=mrTCs7cIvO7HYyolWoYwhC3uD47HKduCmzbL7fIQwXaRz6cMUMQvKTYg1mwIQw0jn
+	 TBzroZ1zCQob8q11xxURrnxPXTYywg0SfM0vcXKyKfg/vd43NHWjwkNVzz5Blgx9Lf
+	 E0JXIbtWBu3DHUe2oqrOQzQDyg4IZ2efqXfbAUboO9R3HGArGtcdMfq0ZYvXAOnrAR
+	 WAXEmOv6AkzbqltkZr7vi++VgrX+EGA5rYOhbEUE2TKDmMGKjB1gpRjQioTkAnmJ7s
+	 ZDEKRqmsZKHT3k4gcTr8xL2YFMuMkFPWluj3jC1OML+Q21/lGa5GjP67AyvKTWigP6
+	 Vzv+sGLVfK7UQ==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 10:07:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131254
-Content-Type: text/plain; charset="utf-8"
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131256
+
+gnome-user-share is written in Rust now, built by cargo from meson. Fetch
+from git (the 48.x releases are on the gnome-48 branch) with the crates
+from gnome-user-share-crates.inc, and set up cargo the way papers and
+loupe do. Add a patch that passes the target triple from a cross file
+property to cargo and picks the binary from the per-target directory
+(Upstream-Status: Pending). Drop the libc feature test macro patch, the
+C code is gone.
 
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-gnome/sushi/{sushi_51.1.bb =3D> sushi_51.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/sushi/{sushi_51.1.bb =3D> sushi_51.2.bb}=
- (93%)
+ .../gnome-user-share-crates.inc               | 210 ++++++++++++++++++
+ ...ine-list-of-libc-feature-test-macros.patch |  41 ----
+ ...oss-compilation-via-a-rust_target-cr.patch |  49 ++++
+ .../gnome-user-share/gnome-user-share_47.0.bb |  24 --
+ .../gnome-user-share/gnome-user-share_48.3.bb |  43 ++++
+ 5 files changed, 302 insertions(+), 65 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share-crates.inc
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share/0001-build-Define-list-of-libc-feature-test-macros.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share/0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share_47.0.bb
+ create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share_48.3.bb
 
-diff --git a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb b/meta-gnome/re=
-cipes-gnome/sushi/sushi_51.2.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-rename to meta-gnome/recipes-gnome/sushi/sushi_51.2.bb
-index f083618bd8..034a967d6c 100644
---- a/meta-gnome/recipes-gnome/sushi/sushi_51.1.bb
-+++ b/meta-gnome/recipes-gnome/sushi/sushi_51.2.bb
-@@ -30,7 +30,7 @@ REQUIRED_DISTRO_FEATURES =3D "opengl gobject-introspect=
-ion-data"
-=20
- SRC_URI +=3D "file://0001-libsushi-guard-the-X11-Window-field-when-GDK_W=
-INDOW.patch"
-=20
--SRC_URI[archive.sha256sum] =3D "d326ec69fc004be3a5fc048f7ecf2c8eb828b7d8=
-b682f1e7a2ba01a5e72993e1"
-+SRC_URI[archive.sha256sum] =3D "928c0155bd5664098bdb4d591806e70e8219a4b6=
-6bf46c95382f72589e4e9a6e"
-=20
- export GI_TYPELIB_PATH =3D "${STAGING_LIBDIR}/girepository-1.0/"
-=20
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share-c=
+rates.inc b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share-cr=
+ates.inc
+new file mode 100644
+index 0000000000..b77538af3b
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share-crates.i=
+nc
+@@ -0,0 +1,210 @@
++# Autogenerated with 'bitbake -c update_crates gnome-user-share'
++
++# from Cargo.lock
++SRC_URI +=3D " \
++    crate://crates.io/aho-corasick/1.1.3 \
++    crate://crates.io/autocfg/1.3.0 \
++    crate://crates.io/bindgen/0.69.4 \
++    crate://crates.io/bitflags/2.6.0 \
++    crate://crates.io/block/0.1.6 \
++    crate://crates.io/cc/1.0.97 \
++    crate://crates.io/cexpr/0.6.0 \
++    crate://crates.io/cfg-expr/0.17.0 \
++    crate://crates.io/cfg-if/1.0.0 \
++    crate://crates.io/clang-sys/1.8.1 \
++    crate://crates.io/dunce/1.0.4 \
++    crate://crates.io/either/1.13.0 \
++    crate://crates.io/equivalent/1.0.1 \
++    crate://crates.io/errno/0.3.9 \
++    crate://crates.io/futures-channel/0.3.30 \
++    crate://crates.io/futures-core/0.3.30 \
++    crate://crates.io/futures-executor/0.3.30 \
++    crate://crates.io/futures-io/0.3.31 \
++    crate://crates.io/futures-macro/0.3.30 \
++    crate://crates.io/futures-task/0.3.30 \
++    crate://crates.io/futures-util/0.3.30 \
++    crate://crates.io/gettext-rs/0.7.0 \
++    crate://crates.io/gettext-sys/0.21.3 \
++    crate://crates.io/gio/0.20.4 \
++    crate://crates.io/gio-sys/0.20.4 \
++    crate://crates.io/glib/0.20.4 \
++    crate://crates.io/glib-macros/0.20.4 \
++    crate://crates.io/glib-sys/0.20.4 \
++    crate://crates.io/glob/0.3.1 \
++    crate://crates.io/gobject-sys/0.20.4 \
++    crate://crates.io/hashbrown/0.14.5 \
++    crate://crates.io/heck/0.5.0 \
++    crate://crates.io/home/0.5.9 \
++    crate://crates.io/indexmap/2.2.6 \
++    crate://crates.io/itertools/0.12.1 \
++    crate://crates.io/lazy_static/1.4.0 \
++    crate://crates.io/lazycell/1.3.0 \
++    crate://crates.io/libc/0.2.154 \
++    crate://crates.io/libloading/0.8.4 \
++    crate://crates.io/linux-raw-sys/0.4.14 \
++    crate://crates.io/locale_config/0.3.0 \
++    crate://crates.io/log/0.4.21 \
++    crate://crates.io/malloc_buf/0.0.6 \
++    crate://crates.io/memchr/2.7.4 \
++    crate://crates.io/minimal-lexical/0.2.1 \
++    crate://crates.io/nom/7.1.3 \
++    crate://crates.io/objc/0.2.7 \
++    crate://crates.io/objc-foundation/0.1.1 \
++    crate://crates.io/objc_id/0.1.1 \
++    crate://crates.io/once_cell/1.19.0 \
++    crate://crates.io/pin-project-lite/0.2.14 \
++    crate://crates.io/pin-utils/0.1.0 \
++    crate://crates.io/pkg-config/0.3.30 \
++    crate://crates.io/prettyplease/0.2.20 \
++    crate://crates.io/proc-macro-crate/3.1.0 \
++    crate://crates.io/proc-macro2/1.0.88 \
++    crate://crates.io/quote/1.0.36 \
++    crate://crates.io/reference-counted-singleton/0.1.4 \
++    crate://crates.io/regex/1.10.4 \
++    crate://crates.io/regex-automata/0.4.6 \
++    crate://crates.io/regex-syntax/0.8.3 \
++    crate://crates.io/rustc-hash/1.1.0 \
++    crate://crates.io/rustix/0.38.34 \
++    crate://crates.io/same-file/1.0.6 \
++    crate://crates.io/selinux/0.4.4 \
++    crate://crates.io/selinux-sys/0.6.9 \
++    crate://crates.io/serde/1.0.202 \
++    crate://crates.io/serde_derive/1.0.202 \
++    crate://crates.io/serde_spanned/0.6.6 \
++    crate://crates.io/shlex/1.3.0 \
++    crate://crates.io/slab/0.4.9 \
++    crate://crates.io/smallvec/1.13.2 \
++    crate://crates.io/syn/2.0.79 \
++    crate://crates.io/system-deps/7.0.3 \
++    crate://crates.io/target-lexicon/0.12.16 \
++    crate://crates.io/temp-dir/0.1.13 \
++    crate://crates.io/thiserror/1.0.60 \
++    crate://crates.io/thiserror-impl/1.0.60 \
++    crate://crates.io/toml/0.8.13 \
++    crate://crates.io/toml_datetime/0.6.6 \
++    crate://crates.io/toml_edit/0.21.1 \
++    crate://crates.io/toml_edit/0.22.13 \
++    crate://crates.io/unicode-ident/1.0.12 \
++    crate://crates.io/version-compare/0.2.0 \
++    crate://crates.io/walkdir/2.5.0 \
++    crate://crates.io/which/4.4.2 \
++    crate://crates.io/winapi/0.3.9 \
++    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
++    crate://crates.io/winapi-util/0.1.8 \
++    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
++    crate://crates.io/windows-sys/0.52.0 \
++    crate://crates.io/windows-targets/0.52.5 \
++    crate://crates.io/windows_aarch64_gnullvm/0.52.5 \
++    crate://crates.io/windows_aarch64_msvc/0.52.5 \
++    crate://crates.io/windows_i686_gnu/0.52.5 \
++    crate://crates.io/windows_i686_gnullvm/0.52.5 \
++    crate://crates.io/windows_i686_msvc/0.52.5 \
++    crate://crates.io/windows_x86_64_gnu/0.52.5 \
++    crate://crates.io/windows_x86_64_gnullvm/0.52.5 \
++    crate://crates.io/windows_x86_64_msvc/0.52.5 \
++    crate://crates.io/winnow/0.5.40 \
++    crate://crates.io/winnow/0.6.8 \
++"
++
++SRC_URI[aho-corasick-1.1.3.sha256sum] =3D "8e60d3430d3a69478ad0993f19238=
+d2df97c507009a52b3c10addcd7f6bcb916"
++SRC_URI[autocfg-1.3.0.sha256sum] =3D "0c4b4d0bd25bd0b74681c0ad21497610ce=
+1b7c91b1022cd21c80c6fbdd9476b0"
++SRC_URI[bindgen-0.69.4.sha256sum] =3D "a00dc851838a2120612785d195287475a=
+3ac45514741da670b735818822129a0"
++SRC_URI[bitflags-2.6.0.sha256sum] =3D "b048fb63fd8b5923fc5aa7b340d8e156a=
+ec7ec02f0c78fa8a6ddc2613f6f71de"
++SRC_URI[block-0.1.6.sha256sum] =3D "0d8c1fef690941d3e7788d328517591fecc6=
+84c084084702d6ff1641e993699a"
++SRC_URI[cc-1.0.97.sha256sum] =3D "099a5357d84c4c61eb35fc8eafa9a79a902c2f=
+76911e5747ced4e032edd8d9b4"
++SRC_URI[cexpr-0.6.0.sha256sum] =3D "6fac387a98bb7c37292057cffc56d62ecb62=
+9900026402633ae9160df93a8766"
++SRC_URI[cfg-expr-0.17.0.sha256sum] =3D "d0890061c4d3223e7267f3bad2ec40b9=
+97d64faac1c2815a4a9d95018e2b9e9c"
++SRC_URI[cfg-if-1.0.0.sha256sum] =3D "baf1de4339761588bc0619e3cbc0120ee58=
+2ebb74b53b4efbf79117bd2da40fd"
++SRC_URI[clang-sys-1.8.1.sha256sum] =3D "0b023947811758c97c59bf9d1c188fd6=
+19ad4718dcaa767947df1cadb14f39f4"
++SRC_URI[dunce-1.0.4.sha256sum] =3D "56ce8c6da7551ec6c462cbaf3bfbc75131eb=
+bfa1c944aeaa9dab51ca1c5f0c3b"
++SRC_URI[either-1.13.0.sha256sum] =3D "60b1af1c220855b6ceac025d3f6ecdd2b7=
+c4894bfe9cd9bda4fbb4bc7c0d4cf0"
++SRC_URI[equivalent-1.0.1.sha256sum] =3D "5443807d6dff69373d433ab9ef5378a=
+d8df50ca6298caf15de6e52e24aaf54d5"
++SRC_URI[errno-0.3.9.sha256sum] =3D "534c5cf6194dfab3db3242765c03bbe257cf=
+92f22b38f6bc0c58d59108a820ba"
++SRC_URI[futures-channel-0.3.30.sha256sum] =3D "eac8f7d7865dcb88bd4373ab6=
+71c8cf4508703796caa2b1985a9ca867b3fcb78"
++SRC_URI[futures-core-0.3.30.sha256sum] =3D "dfc6580bb841c5a68e9ef15c77cc=
+c837b40a7504914d52e47b8b0e9bbda25a1d"
++SRC_URI[futures-executor-0.3.30.sha256sum] =3D "a576fc72ae164fca6b9db127=
+eaa9a9dda0d61316034f33a0a0d4eda41f02b01d"
++SRC_URI[futures-io-0.3.31.sha256sum] =3D "9e5c1b78ca4aae1ac06c48a526a655=
+760685149f0d465d21f37abfe57ce075c6"
++SRC_URI[futures-macro-0.3.30.sha256sum] =3D "87750cf4b7a4c0625b1529e4c54=
+3c2182106e4dedc60a2a6455e00d212c489ac"
++SRC_URI[futures-task-0.3.30.sha256sum] =3D "38d84fa142264698cdce1a9f9172=
+cf383a0c82de1bddcf3092901442c4097004"
++SRC_URI[futures-util-0.3.30.sha256sum] =3D "3d6401deb83407ab3da39eba7e33=
+987a73c3df0c82b4bb5813ee871c19c41d48"
++SRC_URI[gettext-rs-0.7.0.sha256sum] =3D "e49ea8a8fad198aaa1f9655a2524b64=
+b70eb06b2f3ff37da407566c93054f364"
++SRC_URI[gettext-sys-0.21.3.sha256sum] =3D "c63ce2e00f56a206778276704bbe3=
+8564c8695249fdc8f354b4ef71c57c3839d"
++SRC_URI[gio-0.20.4.sha256sum] =3D "b8d999e8fb09583e96080867e364bc1e70128=
+4ad206c76a5af480d63833ad43c"
++SRC_URI[gio-sys-0.20.4.sha256sum] =3D "4f7efc368de04755344f0084104835b6b=
+b71df2c1d41e37d863947392a894779"
++SRC_URI[glib-0.20.4.sha256sum] =3D "adcf1ec6d3650bf9fdbc6cee242d4fcebc6f=
+6bfd9bea5b929b6a8b7344eb85ff"
++SRC_URI[glib-macros-0.20.4.sha256sum] =3D "a6bf88f70cd5720a6197639dcabcb=
+378dd528d0cb68cb1f45e3b358bcb841cd7"
++SRC_URI[glib-sys-0.20.4.sha256sum] =3D "5f9eca5d88cfa6a453b00d203287c34a=
+2b7cac3a7831779aa2bb0b3c7233752b"
++SRC_URI[glob-0.3.1.sha256sum] =3D "d2fabcfbdc87f4758337ca535fb41a6d701b6=
+5693ce38287d856d1674551ec9b"
++SRC_URI[gobject-sys-0.20.4.sha256sum] =3D "a4c674d2ff8478cf0ec29d2be730e=
+d779fef54415a2fb4b565c52def62696462"
++SRC_URI[hashbrown-0.14.5.sha256sum] =3D "e5274423e17b7c9fc20b6e7e208532f=
+9b19825d82dfd615708b70edd83df41f1"
++SRC_URI[heck-0.5.0.sha256sum] =3D "2304e00983f87ffb38b55b444b5e3b60a884b=
+5d30c0fca7d82fe33449bbe55ea"
++SRC_URI[home-0.5.9.sha256sum] =3D "e3d1354bf6b7235cb4a0576c2619fd4ed1818=
+3f689b12b006a0ee7329eeff9a5"
++SRC_URI[indexmap-2.2.6.sha256sum] =3D "168fb715dda47215e360912c096649d23=
+d58bf392ac62f73919e831745e40f26"
++SRC_URI[itertools-0.12.1.sha256sum] =3D "ba291022dbbd398a455acf126c1e341=
+954079855bc60dfdda641363bd6922569"
++SRC_URI[lazy_static-1.4.0.sha256sum] =3D "e2abad23fbc42b3700f2f279844dc8=
+32adb2b2eb069b2df918f455c4e18cc646"
++SRC_URI[lazycell-1.3.0.sha256sum] =3D "830d08ce1d1d941e6b30645f1a0eb5643=
+013d835ce3779a5fc208261dbe10f55"
++SRC_URI[libc-0.2.154.sha256sum] =3D "ae743338b92ff9146ce83992f766a31066a=
+91a8c84a45e0e9f21e7cf6de6d346"
++SRC_URI[libloading-0.8.4.sha256sum] =3D "e310b3a6b5907f99202fcdb4960ff45=
+b93735d7c7d96b760fcff8db2dc0e103d"
++SRC_URI[linux-raw-sys-0.4.14.sha256sum] =3D "78b3ae25bc7c8c38cec158d1f27=
+57ee79e9b3740fbc7ccf0e59e4b08d793fa89"
++SRC_URI[locale_config-0.3.0.sha256sum] =3D "08d2c35b16f4483f6c26f0e4e955=
+0717a2f6575bcd6f12a53ff0c490a94a6934"
++SRC_URI[log-0.4.21.sha256sum] =3D "90ed8c1e510134f979dbc4f070f87d4313098=
+b704861a105fe34231c70a3901c"
++SRC_URI[malloc_buf-0.0.6.sha256sum] =3D "62bb907fe88d54d8d9ce32a3cceab42=
+18ed2f6b7d35617cafe9adf84e43919cb"
++SRC_URI[memchr-2.7.4.sha256sum] =3D "78ca9ab1a0babb1e7d5695e3530886289c1=
+8cf2f87ec19a575a0abdce112e3a3"
++SRC_URI[minimal-lexical-0.2.1.sha256sum] =3D "68354c5c6bd36d73ff3feceb05=
+efa59b6acb7626617f4962be322a825e61f79a"
++SRC_URI[nom-7.1.3.sha256sum] =3D "d273983c5a657a70a3e8f2a01329822f3b8c81=
+72b73826411a55751e404a0a4a"
++SRC_URI[objc-0.2.7.sha256sum] =3D "915b1b472bc21c53464d6c8461c9d3af805ba=
+1ef837e1cac254428f4a77177b1"
++SRC_URI[objc-foundation-0.1.1.sha256sum] =3D "1add1b659e36c9607c7aab864a=
+76c7a4c2760cd0cd2e120f3fb8b952c7e22bf9"
++SRC_URI[objc_id-0.1.1.sha256sum] =3D "c92d4ddb4bd7b50d730c215ff871754d0d=
+a6b2178849f8a2a2ab69712d0c073b"
++SRC_URI[once_cell-1.19.0.sha256sum] =3D "3fdb12b2476b595f9358c5161aa467c=
+2438859caa136dec86c26fdd2efe17b92"
++SRC_URI[pin-project-lite-0.2.14.sha256sum] =3D "bda66fc9667c18cb2758a2ac=
+84d1167245054bcf85d5d1aaa6923f45801bdd02"
++SRC_URI[pin-utils-0.1.0.sha256sum] =3D "8b870d8c151b6f2fb93e84a13146138f=
+05d02ed11c7e7c54f8826aaaf7c9f184"
++SRC_URI[pkg-config-0.3.30.sha256sum] =3D "d231b230927b5e4ad203db57bbcbee=
+2802f6bce620b1e4a9024a07d94e2907ec"
++SRC_URI[prettyplease-0.2.20.sha256sum] =3D "5f12335488a2f3b0a83b14edad48=
+dca9879ce89b2edd10e80237e4e852dd645e"
++SRC_URI[proc-macro-crate-3.1.0.sha256sum] =3D "6d37c51ca738a55da99dc0c4a=
+34860fd675453b8b36209178c2249bb13651284"
++SRC_URI[proc-macro2-1.0.88.sha256sum] =3D "7c3a7fc5db1e57d5a779a352c8cdb=
+57b29aa4c40cc69c3a68a7fedc815fbf2f9"
++SRC_URI[quote-1.0.36.sha256sum] =3D "0fa76aaf39101c457836aec0ce2316dbdc3=
+ab723cdda1c6bd4e6ad4208acaca7"
++SRC_URI[reference-counted-singleton-0.1.4.sha256sum] =3D "242f841f006fa4=
+f35979f74147f6d0be4402c19ca25b62b1c8e4c02e28288cb9"
++SRC_URI[regex-1.10.4.sha256sum] =3D "c117dbdfde9c8308975b6a18d71f3f385c8=
+9461f7b3fb054288ecf2a2058ba4c"
++SRC_URI[regex-automata-0.4.6.sha256sum] =3D "86b83b8b9847f9bf95ef68afb0b=
+8e6cdb80f498442f5179a29fad448fcc1eaea"
++SRC_URI[regex-syntax-0.8.3.sha256sum] =3D "adad44e29e4c806119491a7f06f03=
+de4d1af22c3a680dd47f1e6e179439d1f56"
++SRC_URI[rustc-hash-1.1.0.sha256sum] =3D "08d43f7aa6b08d49f382cde6a798204=
+7c3426db949b1424bc4b7ec9ae12c6ce2"
++SRC_URI[rustix-0.38.34.sha256sum] =3D "70dc5ec042f7a43c4a73241207cecc987=
+3a06d45debb38b329f8541d85c2730f"
++SRC_URI[same-file-1.0.6.sha256sum] =3D "93fc1dc3aaa9bfed95e02e6eadabb4ba=
+f7e3078b0bd1b4d7b6b0b68378900502"
++SRC_URI[selinux-0.4.4.sha256sum] =3D "53371b1e9bbbfffd65e5ac3c895c786ec3=
+5b7695bdc4a67a8b08c29c8d057e0b"
++SRC_URI[selinux-sys-0.6.9.sha256sum] =3D "89d45498373dc17ec8ebb72e1fd320=
+c015647b0157fc81dddf678e2e00205fec"
++SRC_URI[serde-1.0.202.sha256sum] =3D "226b61a0d411b2ba5ff6d7f73a476ac4f8=
+bb900373459cd00fab8512828ba395"
++SRC_URI[serde_derive-1.0.202.sha256sum] =3D "6048858004bcff69094cd972ed4=
+0a32500f153bd3be9f716b2eed2e8217c4838"
++SRC_URI[serde_spanned-0.6.6.sha256sum] =3D "79e674e01f999af37c49f70a6ede=
+167a8a60b2503e56c5599532a65baa5969a0"
++SRC_URI[shlex-1.3.0.sha256sum] =3D "0fda2ff0d084019ba4d7c6f371c95d8fd75c=
+e3524c3cb8fb653a3023f6323e64"
++SRC_URI[slab-0.4.9.sha256sum] =3D "8f92a496fb766b417c996b9c5e57daf2f7ad3=
+b0bebe1ccfca4856390e3d3bb67"
++SRC_URI[smallvec-1.13.2.sha256sum] =3D "3c5e1a9a646d36c3599cd173a41282da=
+f47c44583ad367b8e6837255952e5c67"
++SRC_URI[syn-2.0.79.sha256sum] =3D "89132cd0bf050864e1d38dc3bbc07a0eb8e75=
+30af26344d3d2bbbef83499f590"
++SRC_URI[system-deps-7.0.3.sha256sum] =3D "66d23aaf9f331227789a99e8de4c91=
+bf46703add012bdfd45fdecdfb2975a005"
++SRC_URI[target-lexicon-0.12.16.sha256sum] =3D "61c41af27dd6d1e27b1b16b48=
+9db798443478cef1f06a660c96db617ba5de3b1"
++SRC_URI[temp-dir-0.1.13.sha256sum] =3D "1f227968ec00f0e5322f9b8173c7a0cb=
+cff6181a0a5b28e9892491c286277231"
++SRC_URI[thiserror-1.0.60.sha256sum] =3D "579e9083ca58dd9dcf91a9923bb9054=
+071b9ebbd800b342194c9feb0ee89fc18"
++SRC_URI[thiserror-impl-1.0.60.sha256sum] =3D "e2470041c06ec3ac1ab38d0356=
+a6119054dedaea53e12fbefc0de730a1c08524"
++SRC_URI[toml-0.8.13.sha256sum] =3D "a4e43f8cc456c9704c851ae29c67e17ef65d=
+2c30017c17a9765b89c382dc8bba"
++SRC_URI[toml_datetime-0.6.6.sha256sum] =3D "4badfd56924ae69bcc9039335b2e=
+017639ce3f9b001c393c1b2d1ef846ce2cbf"
++SRC_URI[toml_edit-0.21.1.sha256sum] =3D "6a8534fd7f78b5405e860340ad65752=
+17ce99f38d4d5c8f2442cb5ecb50090e1"
++SRC_URI[toml_edit-0.22.13.sha256sum] =3D "c127785850e8c20836d49732ae6abf=
+a47616e60bf9d9f57c43c250361a9db96c"
++SRC_URI[unicode-ident-1.0.12.sha256sum] =3D "3354b9ac3fae1ff6755cb6db536=
+83adb661634f67557942dea4facebec0fee4b"
++SRC_URI[version-compare-0.2.0.sha256sum] =3D "852e951cb7832cb45cb1169900=
+d19760cfa39b82bc0ea9c0e5a14ae88411c98b"
++SRC_URI[walkdir-2.5.0.sha256sum] =3D "29790946404f91d9c5d06f9874efddea1d=
+c06c5efe94541a7d6863108e3a5e4b"
++SRC_URI[which-4.4.2.sha256sum] =3D "87ba24419a2078cd2b0f2ede2691b6c66d8e=
+47836da3b6db8265ebad47afbfc7"
++SRC_URI[winapi-0.3.9.sha256sum] =3D "5c839a674fcd7a98952e593242ea400abe9=
+3992746761e38641405d28b00f419"
++SRC_URI[winapi-i686-pc-windows-gnu-0.4.0.sha256sum] =3D "ac3b87c63620426=
+dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++SRC_URI[winapi-util-0.1.8.sha256sum] =3D "4d4cc384e1e73b93bafa6fb4f1df8c=
+41695c8a91cf9c4c64358067d15a7b6c6b"
++SRC_URI[winapi-x86_64-pc-windows-gnu-0.4.0.sha256sum] =3D "712e227841d05=
+7c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
++SRC_URI[windows-sys-0.52.0.sha256sum] =3D "282be5f36a8ce781fad8c8ae18fa3=
+f9beff57ec1b52cb3de0789201425d9a33d"
++SRC_URI[windows-targets-0.52.5.sha256sum] =3D "6f0713a46559409d202e70e28=
+227288446bf7841d3211583a4b53e3f6d96e7eb"
++SRC_URI[windows_aarch64_gnullvm-0.52.5.sha256sum] =3D "7088eed71e8b8dda2=
+58ecc8bac5fb1153c5cffaf2578fc8ff5d61e23578d3263"
++SRC_URI[windows_aarch64_msvc-0.52.5.sha256sum] =3D "9985fd1504e250c615ca=
+5f281c3f7a6da76213ebd5ccc9561496568a2752afb6"
++SRC_URI[windows_i686_gnu-0.52.5.sha256sum] =3D "88ba073cf16d5372720ec942=
+a8ccbf61626074c6d4dd2e745299726ce8b89670"
++SRC_URI[windows_i686_gnullvm-0.52.5.sha256sum] =3D "87f4261229030a858f36=
+b459e748ae97545d6f1ec60e5e0d6a3d32e0dc232ee9"
++SRC_URI[windows_i686_msvc-0.52.5.sha256sum] =3D "db3c2bf3d13d5b658be7346=
+3284eaf12830ac9a26a90c717b7f771dfe97487bf"
++SRC_URI[windows_x86_64_gnu-0.52.5.sha256sum] =3D "4e4246f76bdeff09eb4887=
+5a0fd3e2af6aada79d409d33011886d3e1581517d9"
++SRC_URI[windows_x86_64_gnullvm-0.52.5.sha256sum] =3D "852298e482cd67c356=
+ddd9570386e2862b5673c85bd5f88df9ab6802b334c596"
++SRC_URI[windows_x86_64_msvc-0.52.5.sha256sum] =3D "bec47e5bfd1bff0eeaf6d=
+8b485cc1074891a197ab4225d504cb7a1ab88b02bf0"
++SRC_URI[winnow-0.5.40.sha256sum] =3D "f593a95398737aeed53e489c785df13f36=
+18e41dbcd6718c6addbf1395aa6876"
++SRC_URI[winnow-0.6.8.sha256sum] =3D "c3c52e9c97a68071b23e836c9380edae937=
+f17b9c4667bd021973efc689f618d"
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share/0=
+001-build-Define-list-of-libc-feature-test-macros.patch b/meta-gnome/reci=
+pes-gnome/gnome-user-share/gnome-user-share/0001-build-Define-list-of-lib=
+c-feature-test-macros.patch
+deleted file mode 100644
+index fbbda824e3..0000000000
+--- a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share/0001-bui=
+ld-Define-list-of-libc-feature-test-macros.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 5f2e3fb82055ee1346eaa20fcca640fc802ae1c5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 24 Sep 2024 03:19:24 +0000
+-Subject: [PATCH] build: Define list of libc feature test macros
+-
+-_POSIX_C_SOURCE is needed since it uses kill() API
+-and as per [1] it need it, without this the build fails
+-particularly on musl systems with clang compiler
+-
+-./git/src/http.c:394:3: error: call to undeclared function 'kill'; ISO C=
+99 and later do not support implicit function declarations [-Wimplicit-fu=
+nction-declaration]
+-
+-[1] https://man7.org/linux/man-pages/man2/kill.2.html
+-
+-Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gnome-user-sh=
+are/-/merge_requests/27]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- meson.build | 11 +++++++++++
+- 1 file changed, 11 insertions(+)
+-
+-diff --git a/meson.build b/meson.build
+-index ea2892e..72f3851 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -39,6 +39,17 @@ config_h.set_quoted('GNOMELOCALEDIR', user_share_pref=
+ix / user_share_localedir)
+-=20
+- config_h.set_quoted('HTTPD_CONFIG_TEMPLATE', user_share_prefix / user_s=
+hare_pkgdatadir / 'dav_user_%s.conf')
+-=20
+-+#
+-+# OS/Compiler feature detection
+-+#
+-+feature_defines =3D [
+-+  ['_XOPEN_SOURCE', '700'], # POSIX.1=E2=80=932001 (IEEE Std 1003.1-200=
+1)
+-+]
+-+
+-+foreach f: feature_defines
+-+  config_h.set(f[0], f[1])
+-+endforeach
+-+
+- # compiler flags
+- common_flags =3D []
+- if get_option('buildtype').contains('debug')
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share/0=
+001-meson-Support-cross-compilation-via-a-rust_target-cr.patch b/meta-gno=
+me/recipes-gnome/gnome-user-share/gnome-user-share/0001-meson-Support-cro=
+ss-compilation-via-a-rust_target-cr.patch
+new file mode 100644
+index 0000000000..bbd1c351e9
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share/0001-mes=
+on-Support-cross-compilation-via-a-rust_target-cr.patch
+@@ -0,0 +1,49 @@
++From 76a5bb97ce8590836f4c4892400f65318f326b40 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 20 Oct 2026 21:40:51 +0200
++Subject: [PATCH] meson: Support cross-compilation via a rust_target cros=
+s
++ property
++
++cargo is always invoked without --target and the binary is copied from
++the native artifact layout (src/<profile>/), so gnome-user-share cannot
++be cross-compiled. Read the rust target triple from the cross file's
++[properties] (rust_target); when set, pass it as --target and read the
++binary from the per-target subdirectory cargo writes to. When it is
++unset the build is unchanged.
++
++AI-Generated: Uses Claude Code (Claude Opus 5.5)
++Upstream-Status: Pending
++---
++ src/meson.build | 10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/src/meson.build b/src/meson.build
++index 55e55c3..fe62135 100644
++--- a/src/meson.build
+++++ b/src/meson.build
++@@ -17,6 +17,14 @@ run_command(
++ cargo_options =3D [ '--manifest-path', meson.project_source_root() / 'C=
+argo.toml' ]
++ cargo_options +=3D [ '--target-dir', meson.project_build_root() / 'src'=
+ ]
++=20
+++cargo_build_target =3D meson.get_external_property('rust_target', '')
+++if cargo_build_target !=3D ''
+++  cargo_options +=3D [ '--target', cargo_build_target ]
+++  cargo_artifact_dir =3D 'src' / cargo_build_target
+++else
+++  cargo_artifact_dir =3D 'src'
+++endif
+++
++ if get_option('buildtype') =3D=3D 'release'
++   cargo_options +=3D [ '--release' ]
++   rust_target =3D 'release'
++@@ -47,6 +55,6 @@ custom_target(
++     cargo, 'build',
++     cargo_options,
++     '&&',
++-    'cp', 'src' / rust_target / meson.project_name(), '@OUTPUT@',
+++    'cp', cargo_artifact_dir / rust_target / meson.project_name(), '@OU=
+TPUT@',
++   ]
++ )
++--=20
++2.56.0
++
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_4=
+7.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.=
+bb
+deleted file mode 100644
+index 3b087c148d..0000000000
+--- a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-SUMMARY =3D "This is gnome-user-share 43.0, a system for easy sharing of=
+ user files."
+-LICENSE =3D "GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+-
+-
+-DEPENDS =3D " \
+-    glib-2.0-native \
+-    glib-2.0 \
+-    systemd \
+-"
+-
+-inherit gnomebase gsettings features_check
+-
+-REQUIRED_DISTRO_FEATURES =3D "systemd"
+-
+-SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=3D=
+https;branch=3Dmaster"
+-SRC_URI +=3D "file://0001-build-Define-list-of-libc-feature-test-macros.=
+patch"
+-SRCREV =3D "77ecbaddab0ed2121859926acbfccc9cecdee0db"
+-
+-PACKAGECONFIG ??=3D "modules"
+-PACKAGECONFIG[httpd] =3D "-Dhttpd=3D${sbindir}/httpd,,,apache2 mod-dnssd=
+"
+-PACKAGECONFIG[modules] =3D "-Dmodules_path=3D${libexecdir}/apache2/modul=
+es"
+-
+-FILES:${PN} +=3D "${systemd_user_unitdir}"
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_4=
+8.3.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_48.3.=
+bb
+new file mode 100644
+index 0000000000..b289f2ff75
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_48.3.bb
+@@ -0,0 +1,43 @@
++SUMMARY =3D "This is gnome-user-share 43.0, a system for easy sharing of=
+ user files."
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
++
++DEPENDS =3D " \
++    glib-2.0-native \
++    glib-2.0 \
++    systemd \
++"
++
++inherit cargo_common cargo-update-recipe-crates gnomebase gsettings feat=
+ures_check
++
++REQUIRED_DISTRO_FEATURES =3D "systemd"
++
++SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=3D=
+https;branch=3Dgnome-48;tag=3D${PV}"
++SRC_URI +=3D "file://0001-meson-Support-cross-compilation-via-a-rust_tar=
+get-cr.patch"
++SRCREV =3D "e58291de6018667a1ed75382625d21c759066935"
++
++require ${BPN}-crates.inc
++
++do_write_config:append:class-target() {
++	cat > ${WORKDIR}/meson-rust.cross <<-EOF
++	[properties]
++	rust_target =3D '${RUST_HOST_SYS}'
++	EOF
++}
++EXTRA_OEMESON:append:class-target =3D " --cross-file ${WORKDIR}/meson-ru=
+st.cross"
++
++do_configure:prepend() {
++	cargo_common_do_configure
++}
++
++MESON_BUILDTYPE =3D "release"
++
++export CARGO_NET_OFFLINE =3D "1"
++export CARGO_BUILD_JOBS =3D "${@oe.utils.cpu_count()}"
++export RUSTFLAGS
++
++PACKAGECONFIG ??=3D "modules"
++PACKAGECONFIG[httpd] =3D "-Dhttpd=3D${sbindir}/httpd,,,apache2 mod-dnssd=
+"
++PACKAGECONFIG[modules] =3D "-Dmodules_path=3D${libexecdir}/apache2/modul=
+es"
++
++FILES:${PN} +=3D "${systemd_user_unitdir}"
 --=20
 2.56.0
 
