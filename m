@@ -1,98 +1,106 @@
-Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22517.1792674906773724149
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.113.1792679095145968234
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 06:15:06 -0700
+ Thu, 22 Oct 2026 07:24:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PfTVFdAt;
- spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-6767d92cde6so1801225d50.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 06:15:06 -0700 (PDT)
+ dkim=pass header.i=@snap.com header.s=google header.b=Ejfim6Xg;
+ spf=pass (domain: snapchat.com, ip: 209.85.221.51, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48c45111bebso1272043f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 07:24:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792674906; x=1793279706; darn=lists.openembedded.org;
+        d=snap.com; s=google; t=1792679093; x=1793283893; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pYVXGRTJ5QHzxDTVQIeDi2uC4FEidZHXvlVQ1bgeFYM=;
-        b=PfTVFdAt7KIMdL2ifp2WtQcpdMehvooB+eNZIFLwL8+nLbFyk2p1BPJho2wfjc/dVP
-         RQ8JHpDqsw3YLuwSUsz8Ucm/oXWVK8Wzcm69EC27tWxIGR8OWaOsVs6QSZSDkvLoxR0t
-         7avxl9JFFf/MvJig8JbaqCFe6SCoJcNemAG38SAR3JBZADKzgOceiq57ft7kEOHTOb0L
-         I/Lsh3NktpidOVRWY5YtblzqbaqcRGsfVA47rycqkzGCmmeKq1Ode11l4GuvW5/buLDV
-         aWHKsJNFBd8A8pa1UpxubpJFQMtUhe6o1Az87S3VtEOiYfX33lFOf4vmn11P0JniN6CP
-         kxAg==
+        bh=Imt9TnqPhnVDfb2A1fC/z5Rbzx+AR/CSvKWOwOZLynw=;
+        b=Ejfim6XgH4BvliJ/hN9UOtWzafMy37iQSErf8qbEglDUGj4nI9j+9OhrLcdXa541Vw
+         571jTXScPriXDWf4sQ27FZ72m2xmiPimf9SBCCvhkSaENv8DlQXDfkqo+7r4j6uMwKPG
+         Pg+Ew6O1UASZENaTeFGsFSu/ARWtLGY+ReIc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792674906; x=1793279706;
+        d=1e100.net; s=20260707; t=1792679093; x=1793283893;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pYVXGRTJ5QHzxDTVQIeDi2uC4FEidZHXvlVQ1bgeFYM=;
-        b=IZslzcV2ORqRvqkg2BUZsZTNdpSi5AFIJLIwx14oCOwx/j5AoCxb07Lmjw71hLEsz3
-         57bjUY5pDXbEzqIybU2yPNUOCBhznl3eHYJ7NVxE8gu3ze5SLZitBa4wmFomLfByitA3
-         W3k32CkkF0pH0nefvvQprwLLZJ2vsd5Er9wJ7jojg17TdYFThVeHxWanCGKh7NhQEQaL
-         YNZRZquaGAU5s1mx2IrU6cD06LGSwEcAxh5Qehe+yZlsuGImgAVBDR5OHTmH6vfzatO8
-         IfiP/nNX1mOCywZDyGguPEwKAAQRsY47w8sw98axd9bkMJB16m9Qlmfr/ZYgwYIbq58F
-         juCw==
-X-Gm-Message-State: AFq9FYIRZ+tKxKsmDX3GFQNqzr2EYd8EyxWWq+t7oPYByQq8WDDGoupq
-	6n69xmnwzbwT6TGy+s3fZG2nkre4mCGKDwKTuYQkq2xHJ7bHB0/vazyAEcMXBov6
-X-Gm-Gg: AYBFou24LLyPPbKJq34ppWP1YXvkf5KK6uq3GdsnyUqYVAYxuqb687uCCRXeghuf9K6
-	aOjIJa8cIaZmyofGYyyNJX/GNYBwcQv0wleBl21ux/Y96Jsir+KlIWvL6zFRv/4SbirAl5BxO7J
-	htj2PqkqaYyxMCi9IiiiAn8MQQyafkGLQQQmabfizC2sG/hFzDEFvs80PBz8xXGH2iaUnOqlPoD
-	vvvRk6uyF7NqrTwvHJC1MPMDoi+q4J7yhX0yJjmUIjCvYGI435aDZhBjiH41Njt20YO3V8yWRSC
-	p47LFEPQxmdcUyM0bZfk8sgy7WgwM3TByB5HxQLEK8VuxjpfHySgm6VA1ADL7h8hlnhgecuHfzh
-	fBPvpRXem/3PdirXlw8dOTeSoLpz6wijVNs9oqK0588P9aLP68k+KLPQIXYKE6j7O6Xp8J4VB6y
-	LtYb6Gf+xn+xsxZ9V5OkKl/Opn19EgJ3QQSbebkRewgdRajOLaOEehnNvhvfI4+kaL2hI46i9pz
-	n8Eyav5X763HLIZH/NjVAx+F9qHKiPQ7q2cHZ993oXSfgIINLxSANUSxew7pT1k3mMCmuDqMad6
-	xCuHi24Pj+gKW7lsEex9AGMdCyTs8bzJolht/S3xLL592fR2L6zGck0eJUoUsCpsoYaSMK+DfHY
-	gSGA=
-X-Received: by 2002:a05:690e:804:10b0:679:c4a2:8bd3 with SMTP id 956f58d0204a3-67a0e50039fmr1723867d50.41.1792674905700;
-        Thu, 22 Oct 2026 06:15:05 -0700 (PDT)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.54.204.63])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a0e539f46sm2595850d50.17.2026.10.22.06.15.04
+        bh=Imt9TnqPhnVDfb2A1fC/z5Rbzx+AR/CSvKWOwOZLynw=;
+        b=htv8NyHSxdS+JoiBWzE7B2C5ZeKbRYaog1ZTsYpuDw4SqZAXQCxCPvaFHrzkShvCii
+         FghHSPoBPy/vtGeKoEh4n22U4xSenWkYZoaBlyWTgzFX9EZlu4loEj/zTVFymaoGxlZH
+         BgYdFXy/MHaNqoJgjZII8Kvau3r2ljNySp2Vky2fuzdJDAWwPbVv63f8y7asmSnyyPdh
+         FMhga2StZGIDWMKfsNbuNApY2Jl1wOTH8RdKI9x5HkFa4Dc5Qs6U63BABPlT/OnvlRqJ
+         5W8AHhTbQvNoxI8+OSsy0Sd0zcK8j4yoXy12nPfVKRoeZY3sDQDQ0djYybG0X1llc0nZ
+         8aBA==
+X-Gm-Message-State: AFq9FYLeMalqolTVHL3QM379tZHnCEnzv/ZjzrwlRG2vPGoXiciXKz0H
+	7eXeBDvCJWsSC83gVc7HmLcvq8yOi/1n9io25+v0SiL0iMGiEAiNSu6LNO3Oy34SfNd44aM3aLr
+	kpS3NIfc=
+X-Gm-Gg: AYBFou2SjY/ldGFnL6l24+hwfuvdsT5Jqnpdunt7u8fxhr2TyUHewp3Wqy1uZm/4dPV
+	HITrOkLIREFFIQm05YcNZuEaA1cwQhAHTFn22bupXqFbjq2tUIcQqV6QlqEwXsjK951aFsgqy1J
+	XyDmqaNVR1zYo+UlZLV0LsfY9ir1UyTq7LU0QbMrVLnsjm/M5ekdxHr51mmvOCZsb+QIoatEr1K
+	Lo4YvWKKiqKIHZgI+0ERrPYB4mOuyS99hyiERQSoR79KIFgOBlHz6tZL6y4Wq5akmt7DkFdvQgG
+	pBwRiHSpudzSgyas0avgea8Sv2U1V1AcZcuOnq9Si+Nju+CXnBsc/dOyswh08HaLb8dlo4Kz5ym
+	9BKEJ7hIIit7x4gWSMdgJPuMFqZibq0cpIMmr2mXN2hxn+MGwBHxUlJ8Ng5GX56FdpPIkiYZgbo
+	U/UQpH3+bJdCe5tGeaaoqd1gY203voQIeEhKlH4FoGaWCdnatN5j3J4Lf2tMxopqRnS+FJ3inN8
+	oyVcp2yM/exlRdBZIbjYPXC+z5CjXcI+7oX0ZCSJwAwbUS3JapKpyKH+3QNAIJEWDP2Byuuovzq
+	uD5iYDYFOYP7UFxnTos3BGY=
+X-Received: by 2002:a05:6000:98a:b0:48d:f957:bca4 with SMTP id ffacd0b85a97d-48e264dd014mr10557356f8f.44.1792679093093;
+        Thu, 22 Oct 2026 07:24:53 -0700 (PDT)
+Return-Path: <ecordonnier@snapchat.com>
+Received: from lj8k2dq3.sc-core.net ([85.237.126.22])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e25835247sm12593747f8f.41.2026.10.22.07.24.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 06:15:05 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 22 Oct 2026 07:24:52 -0700 (PDT)
+From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] brotli: upgrade 1.1.0 -> 1.1.1
-Date: Thu, 22 Oct 2026 09:14:46 -0400
-Message-ID: <20261022131446.189859-1-schonm@gmail.com>
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
+Subject: [meta-oe][PATCH] android-tools: drop GPL-2.0-only from LICENSE
+Date: Thu, 22 Oct 2026 16:24:48 +0200
+Message-ID: <20261022142449.2372030-1-ecordonnier@snap.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 13:15:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131314
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 14:25:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131315
 Content-Type: text/plain; charset="utf-8"
 
-This is a security release
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
-CVE-2026-111497: out-of-bounds write permits remote code execution
+The GPL-2.0 entry dates back to the first recipe (AOSP android-5.1.1_r37,
+2016) and was carried over unchanged to the Debian android-platform-tools
+based 35.0.2 recipe.
 
-Changelog: https://github.com/google/brotli/releases/tag/v1.1.1
+In the android-5.1.1_r37 repos the recipe fetched, the only GPLv2 mentions
+are headers which are dual licensed "Apache 2.0 OR GPLv2"
+(system/core include/cutils/ashmem.h, include/utils/ashmem.h,
+include/log/logger.h), kernel headers in libion which are not built, and
+documentation templates. Apache-2.0 can be chosen for all of them.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+The 35.0.2 sources come from Debian's android-platform-tools, whose
+debian/copyright lists no GPL license: the files are Apache-2.0, BSD,
+Expat, Khronos, PSF and public-domain, and a scan of the unpacked tarball
+finds no GPL licensed source files.
+
+Remove GPL-2.0-only from LICENSE and LIC_FILES_CHKSUM so that the recipe is
+not wrongly treated as GPL by license based tooling (e.g. copyleft source
+archiving).
+
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ---
- .../brotli/{brotli_1.1.0.bb => brotli_1.1.1.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/brotli/{brotli_1.1.0.bb => brotli_1.1.1.bb} (79%)
+ meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb b/meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
-similarity index 79%
-rename from meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
-rename to meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
-index 32524094c6..432d1a7d4a 100644
---- a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
-+++ b/meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
-@@ -6,8 +6,8 @@ BUGTRACKER = "https://github.com/google/brotli/issues"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
- 
--SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https"
--SRCREV= "ed738e842d2fbdf2d6459e39267a633c4a9b2f5d"
-+SRC_URI = "git://github.com/google/brotli.git;branch=v${@oe.utils.trim_version('${PV}')};protocol=https;tag=v${PV}"
-+SECREV = "db0631dfea829194206d269bc7b25d0908cdb97d"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+index 65529c1b53..b7cb062410 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+@@ -1,9 +1,8 @@
+ DESCRIPTION = "Various utilities from Android"
+ SECTION = "console/utils"
+-LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND GPL-2.0-only"
++LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause"
+ LIC_FILES_CHKSUM = " \
+     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10 \
+-    file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6 \
+     file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f \
+     file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+ "
 -- 
 2.43.0
 
