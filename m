@@ -1,239 +1,98 @@
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12663.1792627659526638397
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15774.1792642771713356152
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2026 17:07:39 -0700
+ Wed, 21 Oct 2026 21:19:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ri4P8GG3;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-8b0d126f631so12014207b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 17:07:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792627658; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ew59dOSB06V/2YzZpEDK0CHi+SrdH1mnBINn6nsYjabNXNOXN6Q4fD0Y8LUETM/yqc
-         cINIVzbzx8Pa46yf/Xr6UkH/2niNA73X4yL8W+2kU8tu3W/KyhYfUjtPCuIwLVobzT0o
-         gzc63n5faIe8XfSLXuX0dtCG30GBjcjykt7s9xTxjQmuLB9IonZaHMMOrcd+yr7dpk81
-         p1LPeM3OoCRG29C1nTQDoH30d1ETbqHTKQXnmEqICs80s04HdzKrx7XamCvFGAYhhSte
-         O264dHnwvrHf6zZKqRtoB6JjarJZRJl/P3Ej9gRKOy2lt7+u3QbGz+KPf07qxIBpfGiQ
-         BeKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=b3qrJAb1d2pVsC6+mYqQ1MnNHUyGlVrZ77xYciFazq0=;
-        fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
-        b=Xlh8MRxEQqVBqmO6ZLzyba3vj6WW6kGKruhD7TLg38WdTwW2M3hulbsoTUndJB+3lH
-         zquSzt7+wPBaZMFr5njDLIiT+cg5juynNhNbAIhnkfkywvhrSzSnjLoJTNp/SDXKXjjW
-         brkuPHFu8bRMQeOwwX1mxy1rmzDGfNrg6iLSVOLUdeS2OC4kPzt7bkOQJwj1ffwA1U49
-         cecQj5R49TBe4VRnNNdUAKkHGa4PpuNf12wS9Vrwab5DiNmBV7iEON0CoBDrQr5PNs08
-         F7oCIcQEAV02/tW1dZnv3Y8RHRHyDENcKtVX0h9szZgF7sN4XCW9ldYmGx3saNbdjm4E
-         jjJQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dtepd0ck;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-8b0dba37a7fso11886387b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2026 21:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792627658; x=1793232458; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=b3qrJAb1d2pVsC6+mYqQ1MnNHUyGlVrZ77xYciFazq0=;
-        b=Ri4P8GG3H61m/KCK3cfz9+EZTlmFoQXXyCKUodUVodfF1pgizTe5oX5ST8hqg54g1G
-         +TPPdMjCQO9TggvOPdSxvIU9kyY7R8K58xBILqR8Myd73MsDwtsmJrOWFgViFRV0XTe3
-         21K6IjYiChkmj7fjOp+ahBNZcGDX38qijwHYhewpvcpl6O5d1JMcd94uRTki3QUyJglJ
-         9zthHELgc5yE0wdRs4tOmJh762JMirDD0zPLYYZ+MRrFvfnMLk9795PAvsbKmHyxTMOF
-         gByzZhq+TxSzRwMDvJMFyepFepHfDQu7QKt4hQgWK8kEz46afYiJn+LkpATpx6l39C+2
-         GrHA==
+        d=gmail.com; s=20251104; t=1792642771; x=1793247571; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xwhxJPvzpr6C+EfT8qEshENlQ+lwA7NUUZ5VsgxDxZo=;
+        b=dtepd0ckdNsr/TJ2O++wtPGFkhWM4tmswHHDg8pMGNJEHY+TAcaCCRecYapFqGUsKK
+         vEup8EaUns7iR0RBAcw2Tdx6Ctfa3tk8sJI8aGiDYObsP02et+JvdbYYZnXpPtWZ8mPZ
+         M5kgVRc5Oju2mjhgGYnR1xykIqvyQR6rbyQsNbgPSjkkW+5TOQgJ+r5HWkQyoovF+Pjm
+         +YTjYO5MOwYnqpep5StRAY2BVFFeF5dZ+QNoUdPDTSD4sy1J1tWGBqnhWUpajYDDnXiB
+         9FvZh9elsgFy1rqdGVi7CpFLDpOZDwnXNhpSWpHIMK8prpYmTt9hg9aLVnQat3muPzt4
+         Gj8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792627658; x=1793232458;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=b3qrJAb1d2pVsC6+mYqQ1MnNHUyGlVrZ77xYciFazq0=;
-        b=c5YeVlD5lxh9BtMM2Hf7V1Qk3PI4SiCHf4giTDAQ4Um6P0Ou6b0Khfn0Yh8EhtMsIH
-         spjlHSCBDUpwXlpo39K0nx2SDtUYVInkd2/b3yfUl1NjE+ya1omWjfVm70KUiTIa6D4X
-         OzxTgZoPfYB7gt+AL3+rGuRHxINOPjvaKtkifLWf51+GMHw6yip24oAG2WLJfchg3MBq
-         LwIPL6UHfQuvyStgLT8qoeibkZ8AQr1nlAAyMrap9wXUT9xfOYWXMh0bLi1q99VltUEQ
-         is0Uzpf4exNNnItTqtn4uUw94oeZY/wTawjc1U8L8joGKh/18yNKDtDuVBW+dWh/SGuS
-         iVCw==
-X-Gm-Message-State: AFq9FYKrfAaUuOlSWIKUspRGpo9Rsxhrra74RpdDcTJKenw9NpY/uQkm
-	9jeTo2CViVASYnrsQGiQEtLsKvY4gczg6wTsnQvkByIyWfY+lHm8Zb4AEgya/AnJlupBak9AaLb
-	ubt94ebRKxqeyrDACllmXkrcFQHI62kU=
-X-Gm-Gg: AYBFou34BQebtSMg3ZZi9vHoNFYZaYheZ0avq085j5RhcnOcg/MXbztGPugkV9s0OdU
-	AFSW+T7uSFJBTrYuGmYwpMvxt6MdKeVj0MO6dJPRdgYp2YO4sGmqUyaL1BC//dIicYubvhOEogF
-	pVnNRDyFam0ag/VQwe9WoLG/92nYI0uG1xukZ4QZqPOBR/Jz1OTxPC7p2QyWJCmAoswPXm353Xa
-	ALNcCU+qHhcZR51z878xIqgs2hEzeiWkCEroCMCaJHiQoBD+dEFxgIjxJBWsS1ur3EFwYXt9q4Y
-	aeF+OJRqixY2F+HQ3Vw58VgyksAvFK+mKsIgasScOzN/yeyAkYIEWBKZLJgF2XWHOAeKS1oEcUc
-	Y09mj0BmnvZTcGNlYpG1UCiwV2AubrY/Z+LHz1oU3VFufJ/1IKPtNM1STQ5ecdGEZp/WEZywxRm
-	0MY8Qd+ih0qYyqQKv33PF/LSzTI9tJfuf9uQY0PNrUGNJlOieYug+kRhzKvwjv1E8eH46vI4M1A
-	AWiltY+yugWsxuto0IchdkqZacegn5DqktS4IiFgWBKtNerQTwAAiq7bxjKkHP0FgIK9JnXDHFl
-	nZ6kSw1ymoguJ/oTnyAiLl9UgGLRoZo4s4yZ6X7/7PBqnLEyFefaiGRvLez0/Ng2mBGEGIrA2ck
-	rEMYEyEBUJXrH
-X-Received: by 2002:a05:690c:6612:b0:8b1:233d:704d with SMTP id
- 00721157ae682-8b133cab05fmr22223657b3.15.1792627657959; Wed, 21 Oct 2026
- 17:07:37 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792642771; x=1793247571;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xwhxJPvzpr6C+EfT8qEshENlQ+lwA7NUUZ5VsgxDxZo=;
+        b=JakXLPQHMJ1+FmbScpJIXb+j9KPNqA6cZ+522PSzIF1c57BmHxUr6SAuNcAWg8cSWv
+         /r3D7laC5+DQdnaNnVjBcE+GXL3wLx495rAqmmK3Qr/1guDq7SsWaX3dm7meoVvFnrsz
+         KmB30czQHmaTUW0xTOr1B+hdH+qhnOiw6Kqbys2tWOVvFewVCsIlX7abdAllvNGydWJJ
+         QBylO7vaQffl4uryeOFTBTucOcrqo4AwjM7pSvNf/HCGQDmGqrV0XBkdeCCgVZdtt6ir
+         Avcb5bML2B9EXiTWpP6TMzO9i3wxfg67Vq2K75sfTw1iFFMuWF574l8zQrc7TTW24rHP
+         ukpw==
+X-Gm-Message-State: AFq9FYLAI/lDeUVUhatIalWcopPWxCy8x2xczru5KEllBtjIfgo2zpTa
+	Ue5pS1/rRAwzvEijQsHyeeYtjvA4Cm9cr7gwqx1tolgC9hG32Oh0HluZEgWw5+3/
+X-Gm-Gg: AYBFou19P2VuzBVYHs7b/ueblIX+zPSp3jZw+mm/QLbyKGVA3geW89BlUWri3LzXQ3h
+	7feQmrL9EUwDGu4/E2bfWD3R7VpbwdwZ8xOn0VVtQdEWdWHXrZV3ge5z11jf6mJxvXEqsa6GaTj
+	AfjduzN8H+FV5ljj4hNtElm1DCzIP1f3J10axKK3KWahe80FcofrKFIfXbE0rgZI8+wk+xD8F4W
+	GynpooU9JgLqeb3Wg0ctYMP09vOoh3YJD0kkCmQLJ1v0L+z++ugtsHRLEpYEUsOAANKiAsOLFDK
+	v5z0HiYM8dY/bAdYnOSThpf8mrgkEUNb8h+l9kj1f0ms9vdfw5FjujIS21TMx9Sc7c3WM6Ezdwy
+	NmU6I22W7HSKHL06KP3i8lRuDEHaAWWZW4i2iR6z+lVBmRnb+fLQY9asCGSo6PRmOtu62Zxz/+I
+	5x2stvrXDh+WXUtBJVPzYT/LSb7hkkmOHDlev0DcRklK/G4S+qQnD5gXCRTgAlgU5ylN50O3Z2v
+	rcUsmvvZ17Ofc4kasFjLC7wUanXQxt1TbHMtvBtkzO6T7EICNq8N5Hldcshi5Zgz1wWtNBehn3M
+	P9ckcRcGVqlm99bFhncoylyi6FkaaKmCurBSi0Rq91BoGcV6iOrbu2lKhDBfSNCsLslDXTr9+F3
+	6kFw=
+X-Received: by 2002:a05:690c:e1d1:20b0:8af:4ecb:b712 with SMTP id 00721157ae682-8b134013a97mr17974287b3.36.1792642770616;
+        Wed, 21 Oct 2026 21:19:30 -0700 (PDT)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b1300715cfsm21285077b3.14.2026.10.21.21.19.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2026 21:19:29 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] brotli: upgrade 1.2.0 -> 1.2.1
+Date: Thu, 22 Oct 2026 00:18:50 -0400
+Message-ID: <20261022041850.97712-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20261021110103.1943456-1-leon.anavi@konsulko.com> <20261021110103.1943456-24-leon.anavi@konsulko.com>
-In-Reply-To: <20261021110103.1943456-24-leon.anavi@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 Oct 2026 17:07:11 -0700
-X-Gm-Features: AclHuK8cCvYwfQ0TXxisD3JqzVvWTpfJ5hvf6MokMtTF15wq4URWbX3TvWe4DOU
-Message-ID: <CAMKF1spJxn4gC-bwC+Jdt38R9AUDZ31wK-QCqq5MP2LNApeeEw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 24/36] python3-jsonpatch: Upgrade 1.33
- -> 1.36
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c46fc9065e62a615"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 00:07:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131305
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 04:19:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131306
+Content-Type: text/plain; charset="utf-8"
 
---000000000000c46fc9065e62a615
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is a security release
 
-I am seeing this warning
+CVE-2026-111497: out-of-bounds write permits remote code execution
 
-stdio: WARNING: python3-jsonpatch-1.36-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml specifying backend
-setuptools.build_meta, use the correct class [pep517-backend]
+Changelog: https://github.com/google/brotli/releases/tag/v1.2.1
 
-Please take a look.
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../brotli/{brotli_1.2.0.bb => brotli_1.2.1.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/brotli/{brotli_1.2.0.bb => brotli_1.2.1.bb} (83%)
 
-On Wed, Oct 21, 2026 at 4:01=E2=80=AFAM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+diff --git a/meta-oe/recipes-extended/brotli/brotli_1.2.0.bb b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
+similarity index 83%
+rename from meta-oe/recipes-extended/brotli/brotli_1.2.0.bb
+rename to meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
+index 84495a3236..2db266c2fe 100644
+--- a/meta-oe/recipes-extended/brotli/brotli_1.2.0.bb
++++ b/meta-oe/recipes-extended/brotli/brotli_1.2.1.bb
+@@ -6,8 +6,8 @@ BUGTRACKER = "https://github.com/google/brotli/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
+ 
+-SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https"
+-SRCREV = "028fb5a23661f123017c060daa546b55cf4bde29"
++SRC_URI = "git://github.com/google/brotli.git;branch=v1.2;protocol=https"
++SRCREV = "db24a98aed38a16de78cc05ca15cdd8dc2a0d92d"
+ 
+ 
+ inherit cmake lib_package
+-- 
+2.43.0
 
-> Upgrade to release 1.36:
->
-> - Honor optimization=3DFalse when generating patches
-> - Preserve the original file when in-place CLI replacement fails
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../{python3-jsonpatch_1.33.bb =3D> python3-jsonpatch_1.36.bb}    | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.33.bb =
-=3D>
-> python3-jsonpatch_1.36.bb} (80%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.b=
-b
-> b/meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
-> similarity index 80%
-> rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
-> rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
-> index 6a1715c6df..3107eddb52 100644
-> --- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
-> +++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D4f81c84f9a053e31fe9402a2a4e78864"
->
->  inherit pypi setuptools3
->
-> -SRC_URI[sha256sum] =3D
-> "9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c"
-> +SRC_URI[sha256sum] =3D
-> "7e110cb3c5a1c8768f7170bf8fb9887c4aa575fba74c95239e868b494bd9a522"
->
->  RDEPENDS:${PN} +=3D " \
->      python3-json \
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#131283):
-> https://lists.openembedded.org/g/openembedded-devel/message/131283
-> Mute This Topic: https://lists.openembedded.org/mt/121864686/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000c46fc9065e62a615
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I am seeing this warning<div><br></div><div>stdio: WARNING=
-: python3-jsonpatch-1.36-r0 do_check_backend: QA Issue: inherits setuptools=
-3 but has pyproject.toml specifying backend setuptools.build_meta, use the =
-correct class [pep517-backend]<br></div><div><br></div><div>Please take a l=
-ook.</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div d=
-ir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 21, 2026 at 4:01=E2=80=AFAM Leo=
-n Anavi via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
-g</a> &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembedded.or=
-g">konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">Upgrade to release 1.36:<br>
-<br>
-- Honor optimization=3DFalse when generating patches<br>
-- Preserve the original file when in-place CLI replacement fails<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../{<a href=3D"http://python3-jsonpatch_1.33.bb" rel=3D"noreferrer" =
-target=3D"_blank">python3-jsonpatch_1.33.bb</a> =3D&gt; <a href=3D"http://p=
-ython3-jsonpatch_1.36.bb" rel=3D"noreferrer" target=3D"_blank">python3-json=
-patch_1.36.bb</a>}=C2=A0 =C2=A0 | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--jsonpatch_1.33.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_=
-1.33.bb</a> =3D&gt; <a href=3D"http://python3-jsonpatch_1.36.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-jsonpatch_1.36.bb</a>} (80%)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-jsonpatch_1.33.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1=
-.33.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-jsonpatch_1.36.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1=
-.36.bb</a><br>
-similarity index 80%<br>
-rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-j=
-sonpatch_1.33.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1.=
-33.bb</a><br>
-rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-jso=
-npatch_1.36.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1.36=
-.bb</a><br>
-index 6a1715c6df..3107eddb52 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-jsonpat=
-ch_1.33.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1.33.bb<=
-/a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-jsonpat=
-ch_1.36.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1.36.bb<=
-/a><br>
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D4f81c84f9a0=
-53e31fe9402a2a4e78864&quot;<br>
-<br>
-=C2=A0inherit pypi setuptools3<br>
-<br>
--SRC_URI[sha256sum] =3D &quot;9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee7=
-31d004e212e1ee5030c&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;7e110cb3c5a1c8768f7170bf8fb9887c4aa575fba74c9=
-5239e868b494bd9a522&quot;<br>
-<br>
-=C2=A0RDEPENDS:${PN} +=3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0python3-json \<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#131283): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/131283" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/131283</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121864686/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121864686/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000c46fc9065e62a615--
