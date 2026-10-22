@@ -1,94 +1,98 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21788.1792671874422569471
+Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22517.1792674906773724149
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 05:24:34 -0700
+ Thu, 22 Oct 2026 06:15:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=lAas4B6Y;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c40e30c26a4so126349266b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 05:24:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=PfTVFdAt;
+ spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-6767d92cde6so1801225d50.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 06:15:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792671872; x=1793276672; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=v14vLcaeLeJt0bN4zv6UeZi0kCI+VmMeanWzbDpqRnc=;
-        b=lAas4B6Ykb+bwuZJKo3qWUMdiym5IP8FwCnxB31CwfqyXzhBmWp9dh7RAK1DYq2slT
-         8JAs5yZ9lsW3qiqhRrnfbhOw4U1lfpJvT2WsGS6LhgkfLFPs4FqCcqZAM01o1FiNcvHU
-         1Yj8RDwGxtP+t9Zt1uATIQlO4iI3LCTrsX/7IPN+2F/+95L6KZVbdHgdHG3sbYs7VccV
-         jxReXlnW2zOEezGQUVPzHUPEPJ+gZkrhDOzzEloZBsPUeMNvX9ZcKgSaAiezRbM533lv
-         sYf13aCUkPUtMGKl7zuGF9XR+G4r3CQ5NIoIkvxAKzSWZ8v0ZdGcbwlos/TsY3HUz/gr
-         Wgug==
+        d=gmail.com; s=20251104; t=1792674906; x=1793279706; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=pYVXGRTJ5QHzxDTVQIeDi2uC4FEidZHXvlVQ1bgeFYM=;
+        b=PfTVFdAt7KIMdL2ifp2WtQcpdMehvooB+eNZIFLwL8+nLbFyk2p1BPJho2wfjc/dVP
+         RQ8JHpDqsw3YLuwSUsz8Ucm/oXWVK8Wzcm69EC27tWxIGR8OWaOsVs6QSZSDkvLoxR0t
+         7avxl9JFFf/MvJig8JbaqCFe6SCoJcNemAG38SAR3JBZADKzgOceiq57ft7kEOHTOb0L
+         I/Lsh3NktpidOVRWY5YtblzqbaqcRGsfVA47rycqkzGCmmeKq1Ode11l4GuvW5/buLDV
+         aWHKsJNFBd8A8pa1UpxubpJFQMtUhe6o1Az87S3VtEOiYfX33lFOf4vmn11P0JniN6CP
+         kxAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792671872; x=1793276672;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1792674906; x=1793279706;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=v14vLcaeLeJt0bN4zv6UeZi0kCI+VmMeanWzbDpqRnc=;
-        b=FeCx534OVwNxtsfsyJgpdcBaqnmBVyDmpxJVBJBgXElmVP7xiEbo8/49abeKi3GUcH
-         2hg1fAENVMkx9Ah7S6E2CfIHAbX/Oey9ZX/73FVNLiWBGLUIMV5RS8GE+9pMMMcJ/OsP
-         NEdfduAUMYLZlTapYklgDKuMsDO6rTBhB4+VJUhTAS+crMz94YHIJQKo3oL7HoD6lN2F
-         IzXuQqKVXA+FT2GqS9NT1ApdIsQ91kQQpEkNHHLCe1hqHP6YWx8PvTikLlKj/FG6S+kT
-         EPy6KH8KVpAt2uz6ZNCBRyEluesUuNBKRlke1I68YttzlLUrgSzCrs5ht1SkhRT51j51
-         5x9w==
-X-Forwarded-Encrypted: i=1; AKwUvBwNNV4RCdg3zdPZOJ6+rlX0N9gH/KeEmY0UHBTCIgZHjRTF2Hc44vYHrakldb6p53DQhJh7/sh02QJVe8+yGdFe4j8=@lists.openembedded.org
-X-Gm-Message-State: AFq9FYJCanY1/o5ZSwjcUuL4hmaWQh5RzqSrXL/kXj8FvjdhwYKESh04
-	n20dmWow4d0wKlG1AxpV83aPIUamTxiplZoJpsvahI6JdbNjy9Th8kwF
-X-Gm-Gg: AYBFou0LXzievl/RBUbprXT7s35zJ1vB5OuT/lJsuxTXeaB4yAySqWe03R7s9pcKP2R
-	BalTkZFZMp1jPvYaEU4pK6d0D798PlwqrVWYz9ixrxO6h3+bIkYbaeUd4cwYTp983dDgLiFtjb9
-	WtUDY3a8DsoyLJseT5cRa3Qz9YwRLf2TZgA2jAfX5cXqMpZ/bulN1nCOn82Zc6cKOmPuAm2ANce
-	SARzw8tX+3gJOlBG63sQ+xaR5YKPtrfuE3EADu3T8xrca/u7A5D1IbQ0JP0+gv+ASxqU7fJiA9Y
-	0BCjavOScwBS0AM9d9IDbXQ8+IVrhvGh3s3/hzXah9B6/icxKMeF2Nm+fQnHfEsyqp+N76Gvknm
-	AXtrj0wMt28akeOxNqW2rNgJY9XJtenqlH0rRD5nUqBr9uocc5vAXvq7QIj8tNRk5H9xnPpfExu
-	0cImoUYA8CaQ6CZ6tkBK4Su4vpS0sLu0JvtXgfaCSP2/XX6pOTeTPyV5FtAhIkb0smckvIRJ6oe
-	FESkaL5xJzkvDSkBd4hL5F15DKn+pPsnFdqaqynFxdxgOTI/nx2CM6JenePWp154dcgZAc=
-X-Received: by 2002:a17:906:9c8a:b0:c2d:d4dd:8b5 with SMTP id a640c23a62f3a-c468d807ac5mr266373166b.19.1792671872269;
-        Thu, 22 Oct 2026 05:24:32 -0700 (PDT)
-Return-Path: <uvv.mail@gmail.com>
-Received: from [10.54.10.247] ([154.47.27.146])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c468a55cc99sm96935366b.37.2026.10.22.05.24.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Oct 2026 05:24:27 -0700 (PDT)
-Message-ID: <5a50bdd9-6d29-4066-82f0-c13811810760@gmail.com>
-Date: Thu, 22 Oct 2026 14:24:26 +0200
+        bh=pYVXGRTJ5QHzxDTVQIeDi2uC4FEidZHXvlVQ1bgeFYM=;
+        b=IZslzcV2ORqRvqkg2BUZsZTNdpSi5AFIJLIwx14oCOwx/j5AoCxb07Lmjw71hLEsz3
+         57bjUY5pDXbEzqIybU2yPNUOCBhznl3eHYJ7NVxE8gu3ze5SLZitBa4wmFomLfByitA3
+         W3k32CkkF0pH0nefvvQprwLLZJ2vsd5Er9wJ7jojg17TdYFThVeHxWanCGKh7NhQEQaL
+         YNZRZquaGAU5s1mx2IrU6cD06LGSwEcAxh5Qehe+yZlsuGImgAVBDR5OHTmH6vfzatO8
+         IfiP/nNX1mOCywZDyGguPEwKAAQRsY47w8sw98axd9bkMJB16m9Qlmfr/ZYgwYIbq58F
+         juCw==
+X-Gm-Message-State: AFq9FYIRZ+tKxKsmDX3GFQNqzr2EYd8EyxWWq+t7oPYByQq8WDDGoupq
+	6n69xmnwzbwT6TGy+s3fZG2nkre4mCGKDwKTuYQkq2xHJ7bHB0/vazyAEcMXBov6
+X-Gm-Gg: AYBFou24LLyPPbKJq34ppWP1YXvkf5KK6uq3GdsnyUqYVAYxuqb687uCCRXeghuf9K6
+	aOjIJa8cIaZmyofGYyyNJX/GNYBwcQv0wleBl21ux/Y96Jsir+KlIWvL6zFRv/4SbirAl5BxO7J
+	htj2PqkqaYyxMCi9IiiiAn8MQQyafkGLQQQmabfizC2sG/hFzDEFvs80PBz8xXGH2iaUnOqlPoD
+	vvvRk6uyF7NqrTwvHJC1MPMDoi+q4J7yhX0yJjmUIjCvYGI435aDZhBjiH41Njt20YO3V8yWRSC
+	p47LFEPQxmdcUyM0bZfk8sgy7WgwM3TByB5HxQLEK8VuxjpfHySgm6VA1ADL7h8hlnhgecuHfzh
+	fBPvpRXem/3PdirXlw8dOTeSoLpz6wijVNs9oqK0588P9aLP68k+KLPQIXYKE6j7O6Xp8J4VB6y
+	LtYb6Gf+xn+xsxZ9V5OkKl/Opn19EgJ3QQSbebkRewgdRajOLaOEehnNvhvfI4+kaL2hI46i9pz
+	n8Eyav5X763HLIZH/NjVAx+F9qHKiPQ7q2cHZ993oXSfgIINLxSANUSxew7pT1k3mMCmuDqMad6
+	xCuHi24Pj+gKW7lsEex9AGMdCyTs8bzJolht/S3xLL592fR2L6zGck0eJUoUsCpsoYaSMK+DfHY
+	gSGA=
+X-Received: by 2002:a05:690e:804:10b0:679:c4a2:8bd3 with SMTP id 956f58d0204a3-67a0e50039fmr1723867d50.41.1792674905700;
+        Thu, 22 Oct 2026 06:15:05 -0700 (PDT)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a0e539f46sm2595850d50.17.2026.10.22.06.15.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Oct 2026 06:15:05 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] brotli: upgrade 1.1.0 -> 1.1.1
+Date: Thu, 22 Oct 2026 09:14:46 -0400
+Message-ID: <20261022131446.189859-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-filesystems][PATCH] overlayfs-tools: Inhibit tests on
- configure
-To: Marek Vasut <marek.vasut@mailbox.org>,
- openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex@linutronix.de>,
- Ankur Tyagi <ankur.tyagi85@gmail.com>, Khem Raj <khem.raj@oss.qualcomm.com>
-References: <20261021135357.14928-1-marek.vasut@mailbox.org>
- <6f762fe7-ddf1-49bf-96bb-8e1d75f575c8@gmail.com>
- <d1168121-cced-4238-8dee-9c1b1169e484@mailbox.org>
-Content-Language: en-US
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <d1168121-cced-4238-8dee-9c1b1169e484@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 12:24:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131313
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 13:15:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131314
+Content-Type: text/plain; charset="utf-8"
 
-On 21.10.2026 18:27, Marek Vasut wrote:
-> On 10/21/26 5:09 PM, Vyacheslav Yurkov wrote:
->> Thanks for the patch Marek.
->>
->> Could you please explain how you hit the issue? I can't reproduce it.
->> The sudo is required only for tests, which is a custom meson target. 
->> It's not supposed to be called during configure.
-> $ bitbake -c configure overlayfs-tools
->
-> on aarch64 (STM32MP25) target (not using the ST layers).
->
-> I would also expect the tests to NOT run during configure.
->
-> It also happens in OE wrynose builds, but not in OE scarthgap builds.
+This is a security release
 
-I was not able to reproduce it either on wrynose or on master. Although 
-I usually build x86_64 / arm32, but I don't think that makes a difference.
+CVE-2026-111497: out-of-bounds write permits remote code execution
 
-Any chance your BSP adds a "meson test" call at any point?
+Changelog: https://github.com/google/brotli/releases/tag/v1.1.1
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../brotli/{brotli_1.1.0.bb => brotli_1.1.1.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/brotli/{brotli_1.1.0.bb => brotli_1.1.1.bb} (79%)
+
+diff --git a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb b/meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
+similarity index 79%
+rename from meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
+rename to meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
+index 32524094c6..432d1a7d4a 100644
+--- a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
++++ b/meta-oe/recipes-extended/brotli/brotli_1.1.1.bb
+@@ -6,8 +6,8 @@ BUGTRACKER = "https://github.com/google/brotli/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
+ 
+-SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https"
+-SRCREV= "ed738e842d2fbdf2d6459e39267a633c4a9b2f5d"
++SRC_URI = "git://github.com/google/brotli.git;branch=v${@oe.utils.trim_version('${PV}')};protocol=https;tag=v${PV}"
++SECREV = "db0631dfea829194206d269bc7b25d0908cdb97d"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.43.0
+
