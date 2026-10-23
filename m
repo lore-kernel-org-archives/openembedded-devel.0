@@ -1,64 +1,64 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1664.1792738465070215854
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1665.1792738465979813229
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:54:25 -0700
+ Thu, 22 Oct 2026 23:54:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=qklGjWZ0;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cc147d86bebso236606a12.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FrO4/Stl;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8a06cc097c7so435391b3a.0
         for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792738464; x=1793343264; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792738465; x=1793343265; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sir140WenQ7DHoK4uPYYpYWCBuBxOpC/Tgl6hvLg9qc=;
-        b=qklGjWZ0VYodciULluRa7/mc7p/M7feLgoETiGn/35W3aqxZHU8xsmlssXTb0rAVjv
-         /3rF7tjCKwifzAYUKfDyyMYMTdFl00MQyyQOzwYkvxV4zQUXDbPhorvFpkrVZ2VEz5rd
-         jBm1VNzK2qW1d4LrCEH6KFBQrGI9HRFbLVYGiq2WKYkO8a4B1HmQtpNtmjLCd55p2KWp
-         UYj0/gJyWRpUaCO70g/8evaCsPFVhZrJPjh6mDEv6opIBIrsAaXiN/XBJFFrbfvQiYSU
-         UltnIVDXiWoZ0VND5hMb5hZIg8jZZZYy7CVgczvYMRaszl7jveY+mlPAaG1KYm5AdVzM
-         DHPw==
+        bh=9WcUYuQgJZXdhbmtSaO5+xr2vFVV0GBCliyT2OOJN60=;
+        b=FrO4/Stlmr02P/aKIKOExYgG5t7Yp1ZzZhqS26QMmGdpNWi3CP5hunXJexd+7gUVid
+         s9LJXSvH0gxwYfNof4qP3tujDJU66jKkH4VrLXwemy2PT87/pZfWspwl+ANcl6+mAmWD
+         jxg1PMhWGdNPFk/VXqhr3hGj+Y7CvYos/w6BWLd0UekeWgOr3a+ub/o88NrlxJeAeMrs
+         SDM3RRO2jvzvBeByOHD/TvKZG8wMW3S7TlUhzGDs3pWApQVcVapqK916t1C+crbZ5uhG
+         fWtqO77klgHwm2uMt/BxFW4yXGxNH8wJ2SJ4Aibk+f/cLvjuXSPbiri0gTk7upjCUqBX
+         MYUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792738464; x=1793343264;
+        d=1e100.net; s=20260707; t=1792738465; x=1793343265;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sir140WenQ7DHoK4uPYYpYWCBuBxOpC/Tgl6hvLg9qc=;
-        b=sWrq63mHTCUomJDk9OiYSxEbDWp+I+bKxRS9i5iaMWrUP2+y6r3y5EL3V1RzCZha9f
-         Nalc8cLqJUpD9xu2J63isG/gx3RnEwaKddxOljg38vZdpcxo/P8chibaQ5+bPCI+sx2L
-         yKV6teBmxSdC3kGVwN0aMIrVtD/oWK9uPplb1GkEFPSVvYc2IuAepQy3uTYY6naAppar
-         cdEGvE3PvI7FR2lcFx336yXgg0mx5Dns1y+1RcFERmX9xqsxQsGDiYyYZh/4sMcL8QmK
-         u26bsJYndBi+bg0gJw9HjMAln5JRwZp5rbk7Kjq+CN55pv/ztr69vapUbxXOMbT0xD4S
-         x8Zw==
-X-Gm-Message-State: AFq9FYI0bceu4XNs5rEROpb4VsG9Oqsh3fP1F3bxD1Yj5yn3X89+xWJ8
-	KxcU0qhqLaYshqLfE1X1Rw0o8XyIvhuAo9aK4wqXmo+54ubL4LFzg9+/XkkKCp7rJx0=
-X-Gm-Gg: AYBFou0A9QoBWWKSFfDHRiFdIbl7XWDz1X3ve/StslAeYkUPgoJn929v3B1zHPnzE7k
-	WNBK0jcuwm/bQ5DfSz/X/P+eNUa5rGno+0Pzb8JlUyVFJhj1zkCkaBpfRpaP5wEIGbzfk55ehxk
-	c+tfOWZbQERmrKCoPDytpVjfY2yChJBsYFnpskCt/S05VH6HV6yRlUz1QXJAv5vX2YlEoh3K+c0
-	KOIse2Llxg13yqIDxuxcjfr6T0GNZ+EsdKqI9oj+IlHqqaXvkbJzFNNDO/B6pZ1WBoR3FNLK+JY
-	PUf0W2IUbGJ3RYxumyxDeQokrpCMywWMGEpdSylMJZlanSwGoOX4li/exP5z0JzgTfcU8sTx5zs
-	DEmBWfVZYil+Ax4+MSCpt5mm/FlkfhNtNka9vF1aV1oEjblfL1w5js2FmQeQ0HjZ0F27DVnHImr
-	PQVMkO2tvlPgoZQM0S4GtjEfiVUJ9O2edG48xIPh9tThNaQ3yqYRfwyw3Zh4YBqrH67+htbwTM1
-	jIz6mctxv3WUQF2tMTDrli6Hbm5giPsq75SZ/C1wljwPHooM0rHZK8RrLeNK0sSl7w/Y/kzXOxe
-	92+XcYPgyNcbzISg0jWl45SaW7aEhlwvS6QkR4pSe3khx2+4Fm/6RjCyOvLNP2bmmOp04GESooH
-	8dclMyDLnY0xWBAVEyENa5QxOjNtylYstA1Pfr5XVCZNqX1qS9qp8++1sb8tIi5hMCF00EKu73a
-	oTfj6QFl0x2dlAKQJ9NkHHhpQqSCWdw8XWFkkZYJXi89ijeVRj6TViNOiBIg0TvdKCrX0/v4m02
-	av48yVe9wlEIg17h1Kr48Fma7CUE+I=
-X-Received: by 2002:a05:6300:189:b0:3e2:90da:9587 with SMTP id adf61e73a8af0-3e36a0d1bbemr794640637.21.1792738464370;
-        Thu, 22 Oct 2026 23:54:24 -0700 (PDT)
+        bh=9WcUYuQgJZXdhbmtSaO5+xr2vFVV0GBCliyT2OOJN60=;
+        b=g7paX6ws4VmL79qgwzmLfujNj+hotsCgTCU3MwhlLaiC8o2RFBj/DJa8toY3M2D0WA
+         1LglvTY63R/G/ccSEPCr8C9Cg2g5IGPay1pxWxnaGsmY7a9VqooJPMQjD4d6ZxReGJpz
+         N4ja625Es7L9rzC4TigmF82GmWtDubzMi/0iBuSGXY5OCmFAp8GaTqLcOGbgOEBiLw0F
+         L1OPTUMI0cYriroU9oTrUPONCoLWyBBl/xKx6pMUS4kcWUrUKiIUBlsUuepjkMGMEiqu
+         RGJ2h53AZiomBQ4pGVfdW0Y6qmWjnAvsIuTyFgwpN3qBLfnqEzZdPD2JnoZD2hmxKu7P
+         gbmw==
+X-Gm-Message-State: AFq9FYJiafBs7OwZHKCEpCJ8qv2ZMqiTxUj7EFrJQbXT21co3yADkpt4
+	n4Ql54eMdgsh8opMNaIrQHHQRqm0KGagw9q9virHMxAT7GlcnJ3v+zaXW99XeuP/AFQ=
+X-Gm-Gg: AYBFou2Pu71k20oToMAJZsHe5U6qJx4KGF7WBHAGevS1dPVc8Rvu+zc70FemXgLteRx
+	JVp5gNLy8RG/LPXC/PL3oLnllA2YWchKAP/3DkzZE2ItMpLdkYNfp236GvbDCX31Al/lSeBH1cf
+	mof4ZuPovXVuH6jXHZOwVFE/0lTyvt384NgPd0zxZ+FIEZAPOihzfvXJ4sRJ/08B6x/MHiANhRR
+	IaztMloCTM26K+s1WoqSGq81Ot9aD+bu6pwK8nS3Q3GJS5JXCrXSdjn5e3b6sdAAjtd/w4yo5UE
+	hke6WNXzq9RRlXV5ltwAdLg++2zh1izEBOZ+Wb9k+UKS6fyx/Ov5MfUnteEAkm4A0EQujIBi6G/
+	olKZbz1UvVhxIKqAExLtUo4jB2LfRlt7QxuqBwADB2Qus9640aAU9JR9W4FxhwjQukoHnnaBqWN
+	SNjQcYgW9LCLSOlwxEmR7MkOUnzF3/ITuC9lLaXPMi5yUKGRokzE1Fcffa8mlYdJ5XE9yZ9FX0o
+	H7gWbn9mJ+lb6Lu90y7rcpUml0LPHAVZAFJRvV5G05zYum/IR9BqAvaUFFUJaK8kH0EWmt3Ws8d
+	39s/Zd24hZv71vDM8nkfeL2rEDT+qCTWpOFQjMG/HxzJA9Bp5stiCyax+gxf6N6n9Ff0AAMr7I+
+	77j9OKN0c2vpigl93NMCv/rqYYB16PRRJNZgbzkHxbNGCvmVe2fpAswgNLbSSblS3/YR3znjp5T
+	pfFsppkzFam2tQoJEkABAh1ulqOfmHUyW4o7x7hczkfziUGuCFz6R7MhiEUqv7RsRDUHNSntiDV
+	Myz8Cnuq2ZHM/KdXbniOhcalEHjUwA=
+X-Received: by 2002:a05:6a00:13a6:b0:89e:fe2d:abe2 with SMTP id d2e1a72fcca58-8a2c664f586mr1233026b3a.44.1792738465372;
+        Thu, 22 Oct 2026 23:54:25 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.23
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 23:54:23 -0700 (PDT)
+        Thu, 22 Oct 2026 23:54:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH 26/29] gthumb: Include stdbool.h for bool
-Date: Thu, 22 Oct 2026 23:53:47 -0700
-Message-ID: <20261023065350.3228996-26-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 27/29] samba: Fix riscv32 waf cross answers
+Date: Thu, 22 Oct 2026 23:53:48 -0700
+Message-ID: <20261023065350.3228996-27-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
@@ -66,69 +66,43 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131350
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131351
 Content-Type: text/plain; charset="utf-8"
 
-src/lib/util.h uses bool without including stdbool.h, which fails to
-build where no other header pulls it in, e.g. with clang on riscv32
-musl:
+The riscv32 cross answers were derived from arm, but riscv32 has no
+legacy 32-bit credential syscalls such as setresuid32, so samba asks
+"Checking whether we can use Linux thread-specific credentials" instead
+of the "with 32-bit system calls" variant. With no answer, configure
+fails:
 
-  src/lib/util.h:68:1: error: unknown type name 'bool'
+  Checking whether we can use Linux thread-specific credentials : not found
+  ...
+  The configuration failed
 
-Add a patch that includes it.
+Answer it like riscv64 and aarch64 do.
 
-AI-Generated: Uses Claude Code
+riscv32 also has a 64-bit time_t, so the time_t maximum value check
+succeeds like on 64-bit targets. Answer it OK so that samba does not
+limit TIME_T_MAX to INT32_MAX.
+
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...01-util.h-Include-stdbool.h-for-bool.patch | 29 +++++++++++++++++++
- meta-gnome/recipes-gnome/gthumb/gthumb_4.0.bb |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb/0001-util.h-Include-stdbool.h-for-bool.patch
+ .../files/waf-cross-answers/cross-answers-riscv32.txt         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb/0001-util.h-Include-stdbool.h-for-bool.patch b/meta-gnome/recipes-gnome/gthumb/gthumb/0001-util.h-Include-stdbool.h-for-bool.patch
-new file mode 100644
-index 0000000000..8b5c9d8474
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gthumb/gthumb/0001-util.h-Include-stdbool.h-for-bool.patch
-@@ -0,0 +1,29 @@
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Thu, 22 Oct 2026 19:00:00 -0700
-+Subject: [PATCH] util.h: Include stdbool.h for bool
-+
-+util.h declares _g_parse_exif_date() returning bool, but relies on
-+another header to include stdbool.h. Before C23, bool is not a keyword,
-+so where none of them does, e.g. with clang and musl on riscv32, the
-+build fails:
-+
-+  src/lib/util.h:68:1: error: unknown type name 'bool'
-+
-+Include stdbool.h directly.
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gthumb/-/merge_requests/64]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ src/lib/util.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+--- a/src/lib/util.h
-++++ b/src/lib/util.h
-+@@ -2,6 +2,7 @@
-+ #define LIB_UTIL_H
-+
-+ #include <math.h>
-++#include <stdbool.h>
-+ #include <glib.h>
-+ #include <glib/gi18n-lib.h>
-+ #include <gio/gio.h>
-diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_4.0.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_4.0.bb
-index f534d5f1f4..c3340551aa 100644
---- a/meta-gnome/recipes-gnome/gthumb/gthumb_4.0.bb
-+++ b/meta-gnome/recipes-gnome/gthumb/gthumb_4.0.bb
-@@ -33,6 +33,7 @@ inherit gnomebase gsettings gtk-icon-cache mime-xdg vala features_check
-
- REQUIRED_DISTRO_FEATURES = "opengl"
-
-+SRC_URI += "file://0001-util.h-Include-stdbool.h-for-bool.patch"
- SRC_URI[archive.sha256sum] = "a24aaa72b5637f49097dedc9c141a33615da770d029315f3285ebf2156cf7b61"
-
- FILES:${PN} += "${datadir}/metainfo"
+diff --git a/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt b/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
+index 5655a65852..23cad95b9f 100644
+--- a/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
++++ b/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
+@@ -28,9 +28,9 @@ Checking whether POSIX capabilities are available: OK
+ Checking if can we convert from CP850 to UCS-2LE: OK
+ Checking if can we convert from UTF-8 to UCS-2LE: OK
+ vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
+-Checking whether we can use Linux thread-specific credentials with 32-bit system calls: OK
++Checking whether we can use Linux thread-specific credentials: OK
+ Checking whether fcntl locking is available: OK
+-Checking for the maximum value of the 'time_t' type: NO
++Checking for the maximum value of the 'time_t' type: OK
+ Checking whether the realpath function allows a NULL argument: OK
+ Checking for ftruncate extend: OK
+ getcwd takes a NULL argument: OK
