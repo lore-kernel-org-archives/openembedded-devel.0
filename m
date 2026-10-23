@@ -1,35 +1,37 @@
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8400.1792765972157210331
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8403.1792765978684092623
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 07:32:53 -0700
+ Fri, 23 Oct 2026 07:32:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=S5HlEmKh;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20261023143248e4e78cea4800020776-hollsk@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20261023143248e4e78cea4800020776
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=Ch8iYX/T;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20261023143255377a0c1aad00020754-cwyusk@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20261023143255377a0c1aad00020754
         for <openembedded-devel@lists.openembedded.org>;
-        Fri, 23 Oct 2026 16:32:49 +0200
+        Fri, 23 Oct 2026 16:32:55 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=TnsqvxCjCKR+hkH40/QDIKbUBR9ThvtJPyq5nwuy8Xk=;
- b=S5HlEmKhKvVsBovvK332bes9A9hr3K+vf6VjPJkh0tPXYe2ZgJeCjH8mgQM1Y5Y282LFZi
- pXKLdYC8gtTvMHc43/AXILaAiLZy/E13J1u7tTlx2U+4HbyzbpIuZoXmK/5dUXbp4P8NwGe+
- 0gbEtUhfPUPVYNTuu54+2PEAToe8yjVuUjX2j5QCzJiq/11yUoHSFUKm0a4nH/d4Fs+ndHaN
- DeI5FEj+9DCwKCIPbpWUJxBU0gjep+N1SigypBPJOSPCsUzthyMHtIoEGdYIyWAzSsn2S+kI
- 4XfMctcnGFOzsOIqgRKtwZ70OgOACvs3mkGcn8UlMzYYAMrx4Q0Y07yA==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=kdlEwZXDAIohiZAJYiV/HQJcSCdpG++7NGS1qePDqAo=;
+ b=Ch8iYX/TieojcXeYVIScQhzBzSGu4YbhS3N9gvTfPhH6LT56+nCjHvACrcYX2yHuJ4nud2
+ pUp9X6r9ebnINl1U/pX25ZM7k/guHkCW4smL28FZRa8FHovuo9Tcn0DwvYdcaFvYGJtQiC6e
+ 8cdMxqbCZEyXmeV84sIAI5BE9IC7tRp0htir+cSiv7I207bKU36gm/jQxEboGlMt3e8kjweJ
+ FheuDrxY1hhsETLRrhSgDdexv8MtpeJ2CVKrfa6w5DRlSXBtVOaCUAxeByhuX8w5ZPjttTAE
+ jQI4QJrbX9a7UABX8ysE9zcFeWa/Qpkp9SWLBY8YvEb4kNo4j+Rxt4Hg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 1/5] grpc: upgrade 1.84.0 -> 1.84.1
-Date: Fri, 23 Oct 2026 16:32:25 +0200
-Message-ID: <20261023143229.184415-1-peter.marko@siemens.com>
+Subject: [meta-python][PATCH 2/5] python3-grpcio: upgrade 1.78.0 -> 1.84.1
+Date: Fri, 23 Oct 2026 16:32:26 +0200
+Message-ID: <20261023143229.184415-2-peter.marko@siemens.com>
+In-Reply-To: <20261023143229.184415-1-peter.marko@siemens.com>
+References: <20261023143229.184415-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
 Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 14:32:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131366
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 14:33:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131367
 Content-Type: text/plain; charset="utf-8"
 
 From: Peter Marko <peter.marko@siemens.com>
@@ -37,100 +39,135 @@ From: Peter Marko <peter.marko@siemens.com>
 Upgrade to addresses eMudhra certificates issue.
 See https://emudhra.we-have-a-problem.com/
 
-$ git log --oneline v1.84.0..v1.84.1
-b0c0c4f882 (HEAD -> v1.84.x, tag: v1.84.1) [Release] Bump version to 1.84.1 (on v1.84.x branch) (#43709)
-405e6a1c30 [Backport][v1.84.x][security] Update gRPC repo roots. (#43700)
-826616aed4 [Backport][v1.84.x][CI] Various macOS CI reliability fixes (#43701)
-49d6985875 [PSM Interop][Backport v1.84.x] Update xDS legacy test scripts for health proto pa… (#43572)
+License-Update: clarified which license applies to which file
+* https://github.com/grpc/grpc/commit/fb53717dfa6b264e7f930bb5e9a7e5c86a31ed9e
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../grpc/0001-cmake-Link-with-libatomic-on-rv32-rv64.patch  | 2 +-
- ...tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch | 6 +++---
- ...tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch | 4 ++--
- .../grpc/{grpc_1.84.0.bb => grpc_1.84.1.bb}                 | 2 +-
- 4 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.84.0.bb => grpc_1.84.1.bb} (98%)
+ .../0001-Fix-OpenSSL-4.0-compatibility.patch   | 18 +++++++++---------
+ ...on-enable-unbundled-cross-compilation.patch |  2 +-
+ ...pcio_1.78.0.bb => python3-grpcio_1.84.1.bb} |  4 ++--
+ 3 files changed, 12 insertions(+), 12 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-grpcio_1.78.0.bb => python3-grpcio_1.84.1.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-Link-with-libatomic-on-rv32-rv64.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-Link-with-libatomic-on-rv32-rv64.patch
-index 594503ae2a..106a56cff3 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-Link-with-libatomic-on-rv32-rv64.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-Link-with-libatomic-on-rv32-rv64.patch
-@@ -18,7 +18,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
- index 06e6453b5c..476d7f1576 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -306,6 +306,9 @@ if(UNIX AND NOT HAIKU)
-+@@ -353,6 +353,9 @@ if(UNIX AND NOT HAIKU)
-        set(_gRPC_ALLTARGETS_LIBRARIES ${_gRPC_ALLTARGETS_LIBRARIES} rt)
-      endif()
-    endif()
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch b/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch
-index 91f9c7e815..bbacffc926 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0002-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch
-@@ -21,7 +21,7 @@ diff --git a/src/core/tsi/ssl_transport_security.cc b/src/core/tsi/ssl_transport
- index 922bb836e14..ee2092acece 100644
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-OpenSSL-4.0-compatibility.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-OpenSSL-4.0-compatibility.patch
+index 895ceab88c..9baa367d67 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-OpenSSL-4.0-compatibility.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-OpenSSL-4.0-compatibility.patch
+@@ -36,7 +36,7 @@ diff --git a/src/core/tsi/ssl_transport_security.cc b/src/core/tsi/ssl_transport
+ index 6526d3f..ff03697 100644
  --- a/src/core/tsi/ssl_transport_security.cc
  +++ b/src/core/tsi/ssl_transport_security.cc
--@@ -893,7 +893,7 @@ static tsi_result ssl_get_x509_common_name(X509* cert, unsigned char** utf8,
-+@@ -1023,7 +1023,7 @@ static tsi_result ssl_get_x509_common_name(X509* cert, unsigned char** utf8,
+-@@ -406,9 +406,9 @@ static int looks_like_ip_address(absl::string_view name) {
++@@ -1021,9 +1021,9 @@ static int looks_like_ip_address(absl::string_view name) {
+  static tsi_result ssl_get_x509_common_name(X509* cert, unsigned char** utf8,
+                                             size_t* utf8_size) {
     int common_name_index = -1;
-    X509_NAME_ENTRY* common_name_entry = nullptr;
-    ASN1_STRING* common_name_asn1 = nullptr;
-@@ -30,7 +30,7 @@ index 922bb836e14..ee2092acece 100644
+@@ -49,7 +49,7 @@ index 6526d3f..ff03697 100644
     int utf8_returned_size = 0;
     if (subject_name == nullptr) {
       VLOG(2) << "Could not get subject name from certificate.";
--@@ -951,7 +951,7 @@ static tsi_result peer_property_from_x509_common_name(
+-@@ -466,7 +466,7 @@ static tsi_result peer_property_from_x509_common_name(
 +@@ -1081,7 +1081,7 @@ static tsi_result peer_property_from_x509_common_name(
   static tsi_result peer_property_from_x509_subject(X509* cert,
                                                     tsi_peer_property* property,
                                                     bool is_verified_root_cert) {
-@@ -39,7 +39,7 @@ index 922bb836e14..ee2092acece 100644
+@@ -58,7 +58,7 @@ index 6526d3f..ff03697 100644
     if (subject_name == nullptr) {
       GRPC_TRACE_LOG(tsi, INFO) << "Could not get subject name from certificate.";
       return TSI_NOT_FOUND;
--@@ -1047,16 +1047,16 @@ static tsi_result add_subject_alt_names_properties_to_peer(
+-@@ -562,16 +562,16 @@ static tsi_result add_subject_alt_names_properties_to_peer(
 +@@ -1177,16 +1177,16 @@ static tsi_result add_subject_alt_names_properties_to_peer(
         char ntop_buf[INET6_ADDRSTRLEN];
         int af;
   
-diff --git a/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch b/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch
-index 956ea64f33..16c9f67417 100644
---- a/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch
-+++ b/meta-oe/recipes-devtools/grpc/grpc/0004-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch
-@@ -21,7 +21,7 @@ diff --git a/src/core/tsi/ssl_transport_security.cc b/src/core/tsi/ssl_transport
- index ee2092acece..23340beda98 100644
- --- a/src/core/tsi/ssl_transport_security.cc
- +++ b/src/core/tsi/ssl_transport_security.cc
--@@ -891,8 +891,8 @@ static int looks_like_ip_address(absl::string_view name) {
-+@@ -1021,8 +1021,8 @@ static int looks_like_ip_address(absl::string_view name) {
-  static tsi_result ssl_get_x509_common_name(X509* cert, unsigned char** utf8,
-                                             size_t* utf8_size) {
-    int common_name_index = -1;
-@@ -32,7 +32,7 @@ index ee2092acece..23340beda98 100644
-    auto* subject_name = X509_get_subject_name(cert);
-    int utf8_returned_size = 0;
-    if (subject_name == nullptr) {
--@@ -1342,13 +1342,12 @@ static tsi_result x509_store_load_certs(X509_STORE* cert_store,
+@@ -78,7 +78,7 @@ index 6526d3f..ff03697 100644
+                                     ntop_buf, INET6_ADDRSTRLEN);
+        if (name == nullptr) {
+          LOG(ERROR) << "Could not get IP string from asn1 octet.";
+-@@ -855,13 +855,12 @@ static tsi_result x509_store_load_certs(X509_STORE* cert_store,
 +@@ -1472,13 +1472,12 @@ static tsi_result x509_store_load_certs(X509_STORE* cert_store,
         break;  // We're at the end of stream.
       }
       if (root_names != nullptr) {
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.84.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.84.0.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb
-index e38fbb292b..274aeb4ba3 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.84.0.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb
-@@ -23,7 +23,7 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
- # Both dependencies are mutually exclusive
- # RDEPENDS:${PN}-dev += "${PN}-compiler"
+@@ -97,13 +97,13 @@ diff --git a/src/core/tsi/ssl_transport_security_utils.cc b/src/core/tsi/ssl_tra
+ index 8f6607c..93876bb 100644
+ --- a/src/core/tsi/ssl_transport_security_utils.cc
+ +++ b/src/core/tsi/ssl_transport_security_utils.cc
+-@@ -281,11 +281,11 @@ bool VerifyCrlCertIssuerNamesMatch(X509_CRL* crl, X509* cert) {
++@@ -282,11 +282,11 @@ bool VerifyCrlCertIssuerNamesMatch(X509_CRL* crl, X509* cert) {
+    if (cert == nullptr || crl == nullptr) {
+      return false;
+    }
+ -  X509_NAME* cert_issuer_name = X509_get_issuer_name(cert);
+ +  auto* cert_issuer_name = X509_get_issuer_name(cert);
+-   if (cert == nullptr) {
++   if (cert_issuer_name == nullptr) {
+      return false;
+    }
+ -  X509_NAME* crl_issuer_name = X509_CRL_get_issuer(crl);
+@@ -111,7 +111,7 @@ index 8f6607c..93876bb 100644
+    if (crl_issuer_name == nullptr) {
+      return false;
+    }
+-@@ -316,7 +316,7 @@ absl::StatusOr<std::string> IssuerFromCert(X509* cert) {
++@@ -317,7 +317,7 @@ absl::StatusOr<std::string> IssuerFromCert(X509* cert) {
+    if (cert == nullptr) {
+      return absl::InvalidArgumentError("cert cannot be null");
+    }
+@@ -120,7 +120,7 @@ index 8f6607c..93876bb 100644
+    unsigned char* buf = nullptr;
+    int len = i2d_X509_NAME(issuer, &buf);
+    if (len < 0 || buf == nullptr) {
+-@@ -331,7 +331,7 @@ absl::StatusOr<std::string> AkidFromCertificate(X509* cert) {
++@@ -332,7 +332,7 @@ absl::StatusOr<std::string> AkidFromCertificate(X509* cert) {
+    if (cert == nullptr) {
+      return absl::InvalidArgumentError("cert cannot be null.");
+    }
+@@ -129,7 +129,7 @@ index 8f6607c..93876bb 100644
+    int j = X509_get_ext_by_NID(cert, NID_authority_key_identifier, -1);
+    // Can't have multiple occurrences
+    if (j >= 0) {
+-@@ -356,7 +356,7 @@ absl::StatusOr<std::string> AkidFromCrl(X509_CRL* crl) {
++@@ -357,7 +357,7 @@ absl::StatusOr<std::string> AkidFromCrl(X509_CRL* crl) {
+    if (crl == nullptr) {
+      return absl::InvalidArgumentError("Could not get AKID from crl.");
+    }
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-python-enable-unbundled-cross-compilation.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-python-enable-unbundled-cross-compilation.patch
+index bfc471f3fe..91d3257eda 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/0001-python-enable-unbundled-cross-compilation.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-python-enable-unbundled-cross-compilation.patch
+@@ -16,7 +16,7 @@ diff --git a/setup.py b/setup.py
+ index 39ca17e..bffa9fb 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -318,25 +318,25 @@ if BUILD_WITH_SYSTEM_OPENSSL:
++@@ -341,25 +341,25 @@ if BUILD_WITH_SYSTEM_OPENSSL:
+          lambda x: "third_party/boringssl" not in x, CORE_C_FILES
+      )
+      CORE_C_FILES = filter(lambda x: "src/boringssl" not in x, CORE_C_FILES)
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.78.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.84.1.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-grpcio_1.78.0.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio_1.84.1.bb
+index 5cd530f1c4..fc22d4b481 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.78.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.84.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://www.grpc.io/"
+ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND MIT AND MPL-2.0"
+ LIC_FILES_CHKSUM = " \
+-    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
++    file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9 \
+     file://third_party/utf8_range/utf8_validity.h;beginline=1;endline=5;md5=db08ddb5817e660489678e7c3653805a \
+     file://third_party/xxhash/xxhash.h;beginline=1;endline=34;md5=d41d564db2353fc80a713956d85b1690 \
+ "
+@@ -14,7 +14,7 @@ SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
+            file://0001-Fix-OpenSSL-4.0-compatibility.patch \
+            file://abseil-ppc-fixes.patch \
+            "
+-SRC_URI[sha256sum] = "7382b95189546f375c174f53a5fa873cef91c4b8005faa05cc5b3beea9c4f1c5"
++SRC_URI[sha256sum] = "446e7876b9b991fa124c1d414899fa7cf95f89a3e71237ea0161863dc0b2c09f"
  
--SRCREV = "3252a89f10d8e92997862167ca7d095ecda85973"
-+SRCREV = "b0c0c4f8823ba69e7e43aaaf183c30a43e549924"
- BRANCH = "v1.84.x"
- SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=v${PV} \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
+ RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
+ 
