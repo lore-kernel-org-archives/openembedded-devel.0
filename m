@@ -1,60 +1,60 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12741.1792777448878985254
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12659.1792777449809114607
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 10:44:09 -0700
+ Fri, 23 Oct 2026 10:44:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=qjVJ2luD;
- spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-48b042c0759so792794f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:08 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=CUX5/0iG;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48e0d885929so722184f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792777447; x=1793382247; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792777448; x=1793382248; darn=lists.openembedded.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=/en32p0NvHzWNa+QakB1A8wDVfDrNy9ehOlzAkudUZw=;
-        b=qjVJ2luDLARHiDoZNNc213tvyOgXa5p8+++0m0AnYQL7fcoRpyefEarLrPIykowtMw
-         zAiMzBZh+4H1Au9jIrVHLSMWzMAsImxE9dZcK19/5dSsHXZ0UKovL8xtrdLuqnBBf8hz
-         dbaEE0ixBhxY6grYnH8+fdC5ixogcGrKJN+40=
+        bh=DbRO8+TxJIH9XtxHTH1F5spj+HDQcw9feAgldbAqgpk=;
+        b=CUX5/0iGUqZxkxSM9G8zXRudbmO2UnID4p1axxBTEGN0ExnbBRs3KB92YNQWYTghsi
+         LR0lOg5xAPgM9syftOuQ0Ld5WsGA6Pru0q7Vk/BbmteX8JPK0n3yU7ld0Q+GtsCgPw40
+         39fM+dzVhRMJcrtBcc+UIhJJG+fp5Dx/iveSo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792777447; x=1793382247;
+        d=1e100.net; s=20260707; t=1792777448; x=1793382248;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=/en32p0NvHzWNa+QakB1A8wDVfDrNy9ehOlzAkudUZw=;
-        b=m3+7DEkBi4NaOh0Vb+UEj2KCUFkiJGwXDPFn8TNQyF6fcSfKohj0pyrZxWdTsM+qH6
-         ieG1oZ9V9jxz8Z90GvHQ8Cl/64wex4KcwLfEuWt9b+nq9XuSj5isewsoKdOeKQy5Tgjq
-         qHUExe62wGIUObDtNEY6Io1vxLi7c7j5RAIL+JiMnZQytgLUFhEP02oUEkr9PaJYwmQm
-         zZqVhPIHlaNYDsynukXT5KUb/8vS/uH13QuhWhp07TEs9qbsJQrpsnPFwUFPwVe35nbG
-         Ok05SnSqaHUjsBcE/xSDTa5s0gtV8mu70vzA2wdR+n9zCgPvlOUHYl6SrF5IElrZcU7e
-         rRrA==
-X-Gm-Message-State: AFq9FYL0xDMR+H+nMBfmZsDitNimfj/HvsvNPeF4CMPVmY6BCbQWPQLQ
-	tyXkyBSjmolXG/4A9xcnlxgaVtXDZ2dyDcVPT5xrSIec+vR82MKEEHqNdYAyJoB07aAcCpIgX5o
-	std2U
-X-Gm-Gg: AYBFou0qj7LG/2DLfP0X8goOtLVzGiyuW/Jb/u6clGgnwYTRpobKM7jRnUORaRhYJZ/
-	qbSd/7FIiRPhH8H0VYN1JDW3VebcFKPaiHTevgqOJl7dDfT9rRi1cJS9NVtagNiRBVs2DYhiu5h
-	EzoDMPpkYzlKdZAfCGKYsuT5vY5bAH/AazLVaqGJxGGHwQF3wEIq5SPZhLZeL9TLt09SaumDIJK
-	Y7CbojG0kA7F3G96E6zmXSajAwZGOLIcSKTFD8vsEfc+uVQHeHLMO65yeu6r8NhhsK5fr24wPwv
-	s0ClbYISCEFC/e+POve2JMDBsFa1Nyi9JyUW15nVTqh6UF3TAXU2qIeJDUmp4h5K3naHsICkofT
-	X1daqbIoRwGnDggWSAYxL98fApcDnEZSSPXzC4D17n4/zKYZIwWQGWBM/PmdsgqDysOPMYJjUpv
-	rzSbYdqlYEvdsPjLoxTPBC+Oox1ws8xZ0u1qac8NJlsVRoU1RfoCrYuAQ9fyGfF6gYzHH04E/wW
-	TSilXnsGo9ENqGQs+/3/eUULmBR4j2OCe9UNSZxDrozaCqwjM0KYB9sA4NkS/dZeENnyfcc13zf
-	UqhXMP1hg5+HePz7S6quBHJMSOUMkRKtjpluV1CdlnLjhLTcrViIKjxsglEpApa3k+8bwosjOnl
-	JTyOu
-X-Received: by 2002:a5d:5d0e:0:b0:48e:2f55:8c4a with SMTP id ffacd0b85a97d-48e3854cfb8mr4687075f8f.4.1792777446345;
-        Fri, 23 Oct 2026 10:44:06 -0700 (PDT)
+        bh=DbRO8+TxJIH9XtxHTH1F5spj+HDQcw9feAgldbAqgpk=;
+        b=TW2YsTSopYdhpi4+usww+S50rjwNgHfhqq9aR8NtKfW/jTYu8yyxU6TOBjC9OaFD21
+         +OP2qKcB7L4PhUbHmOJMVwOQkrhsCrtLO5m2cRVle3LpDVvpgwn8BUUQuMzO/udflLLb
+         PiIKdHytzHzIlhdDzSjTbfmQaOtMnKsqQbuwSxJ7DIUO7s/bHTu0rIH6HDOJ2Ysm+wD/
+         kxnA3fgMENowke8gzT3vl4ZiThR9S54/CvAb/+7nJZT9N60y6SSeXbtqyM/8E+7NQRJ7
+         Mmpv78g3jMQ/6VFmU1L5fsTinbC1Pbv7XCjsMFmDlHOlHeAcCvYQ6p0D6yQmuV3NOemX
+         ITMQ==
+X-Gm-Message-State: AFq9FYLWimViYUwHXW+967MYudof78qncHSDIE6oPPa1JdjJ4zaCpucC
+	khPhRP1nADx+6eURBRRPYSMXKCmNz237ZkUVkCYZrw5L/sXPD4+p4s7IJXr6WjhGc00i28e9vCv
+	29Enr
+X-Gm-Gg: AYBFou037ejhN3U0Flzt7QAcnMDA22uTVBvyfh0BK8vWaKMWlJf+ysHXjcZFLU9O+wu
+	/QL/PjQE0S6ylAKUHQx4ZNRYG/GN2U/0HR2WMDgU8eZ32/hlEG4AhjjesRy2HY+BIXXMbmEUCGb
+	DF/F+sPvzU/2VBcjp8zuvn8rWB46igN3fq2czRDDFkmaDLyRh2n0LdR9emNRVFzAmLADV4bcx9+
+	C2qa1bLlAaJQaCxlcUZ7Zs8B77BRQ6iJhC0YbwGjDz4p2ykvT3xlqCMBv6Rg56lZ9Jkd3XUKBzm
+	qannKOjcrEyp480+CXyVsEr7uZffef5+E0EU8sGw5JTqbtHPYGqRBsqP2KDgPaPynVTiadp0T2X
+	EZtnfKDY3ioi2K+As8NuG7j6AaSVQcKsCYL9NZz1EKlen1FZM/Iaki5JzUB9OEdEPNYb2gPo2HT
+	1sNHUgf3ub+islsYXgmLcKe7RzxzU14nF0vV3hYebd5X/zct8W1TEbuMfSW8wOu061+G9ccRUJf
+	YU6VR5cWCFqqkpjU9zEbLMdw1Cdjf3tLwWcqJhcAH1oVM9CmNRAYuYtIx1eaOXsqYk1sHzh1eFa
+	w7w1aIaNRlsDzJX8oFTC9qxbAXR6LDaQRSVWY7MX3t+i4Q7PuRNQXcfI3fK//PzcmP3fdO/oflR
+	9fDgx
+X-Received: by 2002:a05:6000:25c2:b0:48a:f36d:fb57 with SMTP id ffacd0b85a97d-48e385949bfmr5299083f8f.18.1792777448028;
+        Fri, 23 Oct 2026 10:44:08 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.05
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:44:05 -0700 (PDT)
+        Fri, 23 Oct 2026 10:44:07 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/9] python3-autobahn: Upgrade 26.10.1 -> 26.10.2
-Date: Fri, 23 Oct 2026 20:43:54 +0300
-Message-ID: <20261023174401.3617912-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/9] python3-coverage: Upgrade 7.16.2 -> 7.17.0
+Date: Fri, 23 Oct 2026 20:43:56 +0300
+Message-ID: <20261023174401.3617912-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261023174401.3617912-1-leon.anavi@konsulko.com>
 References: <20261023174401.3617912-1-leon.anavi@konsulko.com>
@@ -62,97 +62,98 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 17:44:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131382
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131383
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 26.10.2:
+Upgrade to release 7.17.0:
 
-- Fix reading the TLS peer certificate
-  (TransportDetails.peer_cert) with pyOpenSSL 26.2.0 and later:
-  autobahn.twisted.util.extract_peer_certificate() raised
-  AttributeError: 'X509' object has no attribute 'get_extension'
-  for every certificate with extensions, as pyOpenSSL removed its
-  X.509 extension API (and deprecates the rest of its X509 API).
-  The certificate is now read with cryptography, in the new
-  backend-neutral autobahn.util.peer_certificate_details(), which
-  also never raises on certificate content it cannot parse (it is
-  peer data, read before authentication): extensions, or a subject
-  or issuer, that cannot be read are left empty. The peer_cert dict
-  keeps its keys and formats, except: ⚠ extensions[].value was
-  OpenSSL's text; a subject or issuer alternative name is still
-  given as OpenSSL prints it (DNS:localhost, IP Address:127.0.0.1),
-  other extensions now as cryptography prints them; and
-  signature_algorithm is ed25519 instead of ED25519 for Ed25519
-  certificates
-
-- Fix the TLS peer certificate never being available on Twisted
-  WebSocket and RawSocket connections: it was read when the TCP
-  connection was made, before the TLS handshake, and so was always
-  None. It is now read when the TLS handshake is complete, together
-  with the TLS channel ID. With this, TLS client certificate
-  authentication (Crossbar.io authmethod tls, and dynamic
-  authenticators reading transport.peer_cert) works again
-
-- Fix asyncio: fill TransportDetails.peer_cert (it was always
-  None), and treat a TLS server connection without a client
-  certificate as secure, with a TLS channel ID: is_secure was
-  derived from the peer certificate, so WAMP-cryptosign with
-  channel binding failed on asyncio servers
-
-- Behaviour change - the TLS channel ID tls-unique on Twisted now
-  follows RFC 5929 (the first TLS Finished message of the
-  handshake, in a full handshake the client's), as Python's ssl
-  module, and so autobahn on asyncio, already did. Twisted used the
-  server's Finished message, so WAMP-cryptosign with channel
-  binding failed between Twisted and asyncio peers over WebSocket,
-  and between Twisted RawSocket peers (whose protocols did not set
-  is_server, so the client side used the wrong message). Twisted
-  peers on autobahn 26.10.1 or older and on 26.10.2 no longer agree
-  on the channel ID over WebSocket: upgrade both sides of
-  connections that use channel binding (#2014) Work around a PyPy
-  bug: PyPy's ssl module (up to at least PyPy 7.3.23) returns the
-  server's TLS Finished message from
-  get_channel_binding("tls-unique") instead of the first (the
-  client's), so autobahn on asyncio on PyPy disagreed with all
-  other peers on the channel ID. The new autobahn.util.tls_unique()
-  uses PyPy's own tls_unique_cb() on PyPy, which returns the right
-  message
-
-- TransportDetails.is_server is now set on Twisted RawSocket and
-  asyncio WebSocket connections (it was None)
+- Dropped support for Python 3.10.
+- Binary wheels are now provided for iOS and Android. This allows
+  the use of the optimized C tracer on mobile platforms.
+- Fix: three or more levels of nested with statements could make a
+  with line look like a branch with an exit that can never happen.
+  Using the sys.monitoring core, these phantom branches were
+  reported as partial. Other cores hid the problem but still
+  counted the phantom branches in the total.
+- Fix: a comment or string that merely mentioned if True: or while
+  True: could mark its line as a branch that is known to be
+  partial, so a branch that never ran was reported as taken. These
+  built-in patterns now only match at the start of the statement.
+- Fix: region detection missed functions defined in unusual places,
+  such as else and except clauses. This is now fixed.
+- Fix: recent versions of the lcov tool complain if the same
+  function name appears more than once in a report. Python can have
+  multiple same-named functions in a few ways, for example,
+  getters/setters or conditionally defined functions. These are now
+  disambiguated by adding a @<line number> suffix to the function
+  name.
+- Fix: The "Can't combine statement coverage data with branch data"
+  error now names the two data files it couldn’t combine. The error
+  description in the docs now lists common causes and how to find
+  the process that wrote the file.
+- Fix: at coverage totals close to 0 or 100, the XML report could
+  get incorrect line-rate values like 8.333e-05 or 1. This is now
+  fixed.
+- Fix: a parallel data file saved more than once kept the hash of
+  its first save in its file name. Combining could then skip it as
+  a duplicate of another file that had the same data at that point,
+  and delete it, losing the data recorded after the first save.
+  Each save now updates the hash. This had been a problem since
+  7.13.1.
+- Fixes for obscure but legal file names:
+  - File names (and plugin names) can contain control characters,
+    which are legal in POSIX paths but unsafe in reports: in XML
+    1.0 they make the document non-well-formed, and in a terminal
+    they act as escape sequences (colors, title/clipboard
+    sequences, cursor moves that forge output). Now the XML report,
+    the text and Markdown summary reports, and coverage debug data
+    replace non-printable characters in names. Printable names are
+    unchanged.
+  - A file pattern (from include, omit, or a [paths] alias)
+    containing a newline sent the glob-to-regex translation into an
+    infinite loop, hanging the process. Newlines in patterns are
+    now handled like any other character.
+- Fixes in the implementation of the C tracer:
+  - If a plugin’s dynamic_source_filename method raised an
+    exception, lines in that function could be recorded as
+    belonging to a different file. Also fixed some minor memory
+    leaks in the C tracer.
+  - The refcount of None was mismanaged during function calls,
+    including comprehensions. This was unlikely to cause an actual
+    problem, but is now fixed. Thanks, Andrew Dalke.
+  - The C tracer held borrowed references to dictionary values,
+    which was unsafe on free-threaded Python. Now it takes its own
+    references.
+  - An internal error while recording a new file could be reported
+    as a confusing SystemError instead of the actual exception.
+- Performance: the text summary report (coverage report) held on to
+  every file’s parsed source until it finished, so its memory use
+  grew with the size of the project: ten times or more what 7.14
+  used on large projects. Now it keeps only what it needs to print.
+- Performance: HTML reports should be about 5% faster to produce.
+- Kept the political banner in the README.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...0001-Skip-march-guessing-for-external-cross-toolchains.patch | 2 +-
- ...{python3-autobahn_26.10.1.bb => python3-autobahn_26.10.2.bb} | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-autobahn_26.10.1.bb => python3-autobahn_26.10.2.bb} (87%)
+ .../{python3-coverage_7.16.2.bb => python3-coverage_7.17.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-coverage_7.16.2.bb => python3-coverage_7.17.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
-index 0161b09eb5..7573b1f5a6 100644
---- a/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
-+++ b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
-@@ -1,4 +1,4 @@
--From 2afdc29c60812d16708041c3c48ebf8674a5d16f Mon Sep 17 00:00:00 2001
-+From bfcf66157dab06a8f4f718cc0016e799f6b9e284 Mon Sep 17 00:00:00 2001
- From: Leon Anavi <leon.anavi@konsulko.com>
- Date: Mon, 20 Jul 2026 15:52:32 +0300
- Subject: [PATCH] Skip -march guessing for external cross toolchains
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn_26.10.1.bb b/meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-autobahn_26.10.1.bb
-rename to meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb
-index 9150e92981..03ea85111f 100644
---- a/meta-python/recipes-devtools/python/python3-autobahn_26.10.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=49165a577911c4178e915dc26e2802a3"
+diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.16.2.bb b/meta-python/recipes-devtools/python/python3-coverage_7.17.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-coverage_7.16.2.bb
+rename to meta-python/recipes-devtools/python/python3-coverage_7.17.0.bb
+index d5efa1b0c8..34c3d9487e 100644
+--- a/meta-python/recipes-devtools/python/python3-coverage_7.16.2.bb
++++ b/meta-python/recipes-devtools/python/python3-coverage_7.17.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
  
- SRC_URI += "file://0001-Skip-march-guessing-for-external-cross-toolchains.patch"
+-SRC_URI[sha256sum] = "ca64d9f1f384f151b9511bec01126072acd2f313439f8ed015a22d8790aab6fa"
++SRC_URI[sha256sum] = "cc010a0a7fbdd9bb8bdfd0d3f04a5151275860213cbd7e2b876b29778489c712"
  
--SRC_URI[sha256sum] = "0acc00895d4d3b06b55e4c945592d426033062c989ca2910749777a855faa27a"
-+SRC_URI[sha256sum] = "6c69fca89106567060941c5568e67a5369738813d883db4e3d62b76f0a2c497e"
- 
- CVE_PRODUCT = "autobahn"
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.47.3
