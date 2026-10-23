@@ -1,130 +1,93 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1378.1792736666451029388
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1647.1792738437307176221
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:24:26 -0700
+ Thu, 22 Oct 2026 23:53:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=r+02zpPa;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6b1aa4d71e7so546205a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:24:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KkkGRlKK;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-8a07025cce4so347547b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792736665; x=1793341465; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=U0jD2NrBm2uafqZDMBRlpbUHZ4FuyKWeSOP/ErTMSj0=;
-        b=r+02zpPaYl3A3/nbOtes0JaK1iMQubWK6g/P3z2bdO9Czuf9I+bXYkWsdV9TVtjQZo
-         kM5w08zWjOuOcsqiaV78qHfYRSNM65xENihTI3EZ8G2GiLUroQ1nZwN/r5XGyAoEJQNH
-         qv9NnG1a3q/nssWafBRf+e2Si2YBrvTR0VXhrpq6y4c8XfoIJeopSAqOWWBiX7XOSVvE
-         rXLpatBPeBj17iZABS1qHQ/aGBl3U+HbJ4B60p9cUJeehQ4usHHbkxBcR6/C1HI2Vt8G
-         pGMNoIiLgOKT1SLaPsijJUBMUJQRdpQnAFHu+iAMjhYvI3qj4/WDiKoaUwj/Mzy7wTsX
-         TXfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792736665; x=1793341465;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792738437; x=1793343237; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=U0jD2NrBm2uafqZDMBRlpbUHZ4FuyKWeSOP/ErTMSj0=;
-        b=r9xzDc3ffpEKNGTvq1BjvctIQXYU5ca0jC2CecziXTvGxRLbGxp+ylcVTdDhif8LHy
-         s4l4VyVXZwZFuhdLhh5oouN3mU4OIZBf0m55arIjoFHfO713qPQGApaMgdYYwS7RvErd
-         tBxJGqsShP9ZTqHjGAlzgTumdWfkzA5QYhLn7UqVbKOfhCQa7RuAH5QX1MAW/ebRCg3d
-         hKmrmHdFG9OoOwQFl6DeCrmWsJJRMwUHOH81JTbIO6jZtlBuDubW6ldUy7nkijqdzzHh
-         g9prd75iwFB+S38T/xzeD0nRAYuRUnPpf5FGGxqYLV2x0kicwVNiTm4RXzxReMjY7gvq
-         kWqA==
-X-Forwarded-Encrypted: i=1; AKwUvBwVHC8SwMRZrP0ndk9NUxTFe67Lx4YorZZS8C7m+7imiNr37cOOyZApTb+a5pUGc6MBa7tYixaaecLSGHEOuNNihGE=@lists.openembedded.org
-X-Gm-Message-State: AFq9FYLQcpLbLd5SHeg+icq31U7OLwypr3vo+xy9lAYEzeEJ7f2FHzM5
-	XsPtKqq2ogqGi3LP/8R8udpd2A2Mp9LfviCR1CRsBNcszVVdsXxbp7Jh
-X-Gm-Gg: AYBFou2GcWvlj+aIJuE8vTnIUf6lbjKARx6a4Dax0mjXgpLmtOnD9rm0E/zbl6hz7e9
-	KCkFo0Bkap1sjfzxPJZmEE/g+ZV6Wu3ZjuWfUIzVu2T9Vp3yxAUysg+y9NnMHQKSa0OqKcqSnSw
-	kISdsLZE7WwFcJSZwW/N9KamW4p38Dyk3cvyQz9HrjbpMlwpNnJfv/V0iKZzETY60UqQBBH375G
-	GrVR5WFTF4hR6m1azkqtelV/bZY7XLN4g61NAtRZwEaj1Rnn5reO/A5JGmpcOaVCh5UzG0ljRDQ
-	m9q2xcejadbG6GJJaN3cwhQrs0Hd3EwaxtdD/PEJ65LB4ZHVC7UcZZGGi7oAAHawmJKOEiqGl5g
-	LQMiz5Qrr7S/7ltVB5XeomEhi8rDZuWyHdTuYQxM45EVCs2qra9sqJMyY9n5NoyeM0A8OYwr+5g
-	ip7eRswmJVez4ozRwezlh6EWZVV2Kf7Zm2iNjsSUQbm7+QVw+RWKSTbuPjtfs+3sbrppshiRKrU
-	VMfS0bFhCkqy7AwCbaAOFde5gdmrjzlasOB4XkxrrXTdaVZWHfPvcHhsr5pm4nfX5d1sdIr
-X-Received: by 2002:aa7:de02:0:b0:6b4:20bc:fac with SMTP id 4fb4d7f45d1cf-6b432ba88f6mr1611801a12.10.1792736664349;
-        Thu, 22 Oct 2026 23:24:24 -0700 (PDT)
-Return-Path: <uvv.mail@gmail.com>
-Received: from [10.54.10.247] ([154.47.27.146])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b432cb3456sm689570a12.20.2026.10.22.23.24.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Oct 2026 23:24:23 -0700 (PDT)
-Message-ID: <282c4aa2-503e-4d5a-bf52-2434667ccfc6@gmail.com>
-Date: Fri, 23 Oct 2026 08:24:22 +0200
+        bh=Ap+ZdJZcC2sGJMV8a2OuxUs0UsdWERf0nPlP5EfxBHg=;
+        b=KkkGRlKKeBYrBwseOBr0q+743xyGG+y7QS2nCc4PlfIAS0YjJ291AZAhRx18DsEsuk
+         Hh47P5z2tNMci1E7K8EgYBB57j0+liT2qX1uTlhtwrG2ntvA17CmMI2mTgzPaG6m1j+j
+         AZ8jU9L+2MpbobVQvR/nQBUMebS1l8SPlNCvVczw4QNhVJitiYOOZfFJUaY2NeyhELLn
+         FFYwcOUfGJXh1LrgMB9LyyGgF+OzmODtx78MUiwFSZWkWJYib6+eTCjULfZULbp9tP3D
+         CT/TWIBT79VwFm5pVtdo/ncGTFPdUntj5qT5/eKDPP0xQ83ZOnr/LPy+ZP3Gu9NzxC/X
+         /SDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792738437; x=1793343237;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Ap+ZdJZcC2sGJMV8a2OuxUs0UsdWERf0nPlP5EfxBHg=;
+        b=r9SIGSi5CgkMN4REOaKCIkjL8VydLYmnnZwG6ODiG58mT2jCdWBjQBt0w4jtZtG2Cf
+         B8wbkkJ8cL/+oUxjByjdmapyoR5Lk8z8Ng7SOf8qo84tdLl+WBVqI9mvv4/hTH6iAaWS
+         xjbiwIJP0qgU+Qx9LLvmv90UQ6EMO1hvwXhzWXp4wt9183qZJmiPjT+3WgKKdkXn8nj0
+         FZ3/5wY1AsHN8ydd/TTPeJSBv9ZuJ+U2q4XGIV4VRpQTI3AYyjKeul9I9bp/igw03Vj8
+         qmb1IZgxA34iRoPiW7IdL4x11W07KAaP4yeLKsWMRME/a+RBL27GJuVhonVznIe9OU3q
+         22iQ==
+X-Gm-Message-State: AFq9FYJ2Q20lKcLGBmJYtp/Nm7vFy4mm9UGKjocLeBE/BmFrxOR1xd+U
+	jPmZnBHX8Xm5A5gTY1J1w0E2LptdX5ClkJTuaBOQ8tlt926pqdspNHeyinDG/NVJkpE=
+X-Gm-Gg: AYBFou2Tv7NmBWOt/Z3n7HnosGxPhbRv0QgA3EELNRfnNKC+KEzGOHlKKVcwaYWrgzx
+	Q58iSSfM53dCgmQhhwgzTnf6Lbi8kx1VGaPQB4US85hHvKWN9WL8CzR6MH0nTDDWYt+ZbHh69sq
+	as0sHUw97aSIQ2qKixKpXB5BwL238kT0CF0FF3Wo127GW7bJlXVxAs7Clvn0msTlKRsvsfILPjR
+	Tbq3GM4uvrIiquNwK4TNlcu47COiWLsMRZZ7di2i778Ass/feM7M8e1IYwnrw50ZDYOXwZxSkhI
+	D77r2KtDcq6wDI39QC8oWM3i9GbajaBKkdtZYNkveTQTos05C8ckB5doZWx1LnvXhqU2kCUwndw
+	UJASs0xgWEfHqF3P34OXvD1QOuoIIz8v9ZMjHX70BBSt7N4jm54Mwt914ZZ+HL+zmk7MMKiZv+M
+	cZz9UgTqao63Gcu+ivpSX7mi1aWtE7cmrQkYRZVVFp2r6RE2VwVqveX3GJz/caSWSXklI+shy8C
+	BwWwYy6AzH4Z/7ptx2iZZDrm0kxisLaaV9N7iR5P1XtMTmJG97ymAZzmxxLxSb/l20340Kyu/t2
+	yAwxpEGHsVS3VuPsfTdDKaGDuTWl/zxt6tOZ/I4HH2Au9JezM5BIvN94/X8z1A0DLsjzrfUJb0W
+	vXBngHpWHKSH/7hilw8htNYdlsG97QvFs8fAt9wzAPruEoHYOmm2Hz7vRHy6DkeOFlhKiYC5w6G
+	j/CV3RU5vjBxIMtqaThLSxZfBExyh0Nbs9k+Vi9Tp5hCkTc1QYFTaExEoQJm8AxhbyncJUfxL2s
+	AKYhCFpiD6XhnygSPpgktz1yiIP19U=
+X-Received: by 2002:a05:6a00:4b13:b0:886:9939:caa2 with SMTP id d2e1a72fcca58-8a2c66636c8mr1250815b3a.52.1792738436551;
+        Thu, 22 Oct 2026 23:53:56 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.53.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Oct 2026 23:53:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 03/29] rdma-core: upgrade 64.0 -> 65.0
+Date: Thu, 22 Oct 2026 23:53:24 -0700
+Message-ID: <20261023065350.3228996-3-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
+References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-filesystems][PATCH] overlayfs-tools: Inhibit tests on
- configure
-To: Marek Vasut <marek.vasut@mailbox.org>,
- openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex@linutronix.de>,
- Ankur Tyagi <ankur.tyagi85@gmail.com>, Khem Raj <khem.raj@oss.qualcomm.com>
-References: <20261021135357.14928-1-marek.vasut@mailbox.org>
- <6f762fe7-ddf1-49bf-96bb-8e1d75f575c8@gmail.com>
- <d1168121-cced-4238-8dee-9c1b1169e484@mailbox.org>
- <5a50bdd9-6d29-4066-82f0-c13811810760@gmail.com>
- <0eba48ad-5c1f-4041-8f8b-c261f18d29d6@mailbox.org>
-Content-Language: en-US
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <0eba48ad-5c1f-4041-8f8b-c261f18d29d6@mailbox.org>
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:24:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131324
-Content-Type: text/plain; charset="utf-8"; format="flowed"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131327
+Content-Type: text/plain; charset="utf-8"
 
-On 22.10.2026 17:13, Marek Vasut wrote:
-> Can you try this:
->
-> "
-> # conf/local.conf
-> MACHINE ??= "qemux86-64"
-> USER_CLASSES ?= "buildstats"
-> PATCHRESOLVE = "noop"
-> BB_DISKMON_DIRS ??= "\
->     STOPTASKS,${TMPDIR},1G,100K \
->     STOPTASKS,${DL_DIR},1G,100K \
->     STOPTASKS,${SSTATE_DIR},1G,100K \
->     STOPTASKS,/tmp,100M,100K \
->     HALT,${TMPDIR},100M,1K \
->     HALT,${DL_DIR},100M,1K \
->     HALT,${SSTATE_DIR},100M,1K \
->     HALT,/tmp,10M,1K"
->
-> CONF_VERSION = "2"
-> "
->
-> "
-> # conf/bblayers.conf
-> LCONF_VERSION = "7"
-> BBPATH = "${TOPDIR}"
-> BBFILES ?= ""
-> BBLAYERS ?= " \
->   /oe-core___wrynose-6.0/meta \
->   /meta-openembedded___wrynose-6.0/meta-oe/ \
->   /meta-openembedded___wrynose-6.0/meta-python/ \
->   /meta-openembedded___wrynose-6.0/meta-networking/ \
->   /meta-openembedded___wrynose-6.0/meta-filesystems/ \
->   "
-> "
->
-> $ . oe-init-build-env /path/to/builddir
-> $ MACHINE="qemux86-64" DISTRO="nodistro" bitbake -c configure 
-> overlayfs-tools
->
-> ?
->
-> Also, please run 'which sudo' and check whether sudo isn't actually 
-> installed on your build machine (it is NOT installed on mine, because 
-> it is a minimal container)
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ .../rdma-core/{rdma-core_64.0.bb => rdma-core_65.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/rdma-core/{rdma-core_64.0.bb => rdma-core_65.0.bb} (96%)
 
-Thanks, I guess the container without a `sudo` is the reason (somehow I 
-always had it in mines).
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_64.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
+similarity index 96%
+rename from meta-networking/recipes-support/rdma-core/rdma-core_64.0.bb
+rename to meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
+index d4faca1727..a465bda583 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_64.0.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
+@@ -8,7 +8,7 @@ RDEPENDS:${PN} = "bash perl"
+ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=https;tag=v${PV} \
+            file://0001-cmake-Allow-SYSTEMCTL_BIN-to-be-overridden-from-envi.patch \
+ "
+-SRCREV = "f272237493ef309984036f7b85655e11104c61c8"
++SRCREV = "58e40801bfed5a8befc0881594820fa0a0baa4a1"
 
-If you are OK with this fix 
-https://github.com/kmxz/overlayfs-tools/pull/34 , we can bump a revision 
-after that.
-
-Slava
+ #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
+ LICENSE = "BSD-2-Clause OR GPL-2.0-only"
