@@ -1,168 +1,114 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12737.1792777447617950391
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12743.1792777452662999492
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 10:44:07 -0700
+ Fri, 23 Oct 2026 10:44:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=hQLRtCWR;
- spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48e011d370dso941143f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:07 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=nfHOwIiz;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48c5358fc28so964668f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792777446; x=1793382246; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Y7s1g17vErbj5ivuk9BmWupy4Gs/ZiHlXlXgEKNmAM=;
-        b=hQLRtCWRZb3pRhtWWRnZl8lirDMoZirodC8eSejc1znhhMrTXMctCV5IFFVOtjKSYr
-         Y++acwDDor1RAdnqKCbsvlv3OlYbeFxVVI35fDqvAxj58m3ilbOGzmv9W6KlQctVWbGT
-         6VS2KUQLDkcEGvRTQ6rkMI/XIjvAmMwfQnRNI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792777446; x=1793382246;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1792777451; x=1793382251; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8Y7s1g17vErbj5ivuk9BmWupy4Gs/ZiHlXlXgEKNmAM=;
-        b=nQ7FZOnHKQ5OxLpE7Fq8p2OeuasOzJ9rqzujTbJvt2R/hox9NASqAjoVaWPnNIRZ0q
-         a7ELWMezcuI4TtPgGFuNFM1S1N8OZB9z2iNOuC6n0OSAQ0oQ0KK9jub+oHJVMltHLFc1
-         fhJ6rJ25MtPGqzu5IktvBnk2pxYqU/TH7R64BpNYFcJgskgNO5U3oqjEo1SlpOjESW2K
-         +EFLxuYKswZoJEcpAGJwJHYG9TTsVJof/7Y7w0noCqp72sH+nArLKsKLOEgpS8skWX3i
-         1RdZD1X6KCT/wBAmuoR7wWhx1I4QDZMc8BTY+fMr51ksIhzlAKNtN8ejSlFqpBNOA2hE
-         hkVA==
-X-Gm-Message-State: AFq9FYLiHX++8JRulkyRObS0Om9NQs/U6dWakxO92NzevnsRe6jHqkam
-	2t88zoUBA6hj3p5O6IePF9u/OdpGkWpU3DWP4e3UJh9o+UxX1YdgnYeY50KIjUnLKAAopyxYcvu
-	iFy76
-X-Gm-Gg: AYBFou0aBqT25dwCtkwS4Uz48f3aVnGOW2t+/HQXZZgggB/14SJIumfI45ybBI0TQEz
-	3qn2iNUZQHcPampew56+2n1B4+SgRz2/C/awobi4R2bAbXXlHLRXlpI4NT/w/9ZTeEkHqVYuXxQ
-	Bd8Z+Sxv5P+d3WrnSbgkc1nP62yvUDqutMFCutfbDgUdVyo37cH+g/gTH9PuqntAQYWth1pTlc0
-	cMmOy0wWWUqJ3GM4d154n4AIGy87GVfIko/7v+TRWKUitfFzGXRF3XW9uGMM+Zl9YN6vKYC+fUf
-	muBk3rD42J9BwJkZbaHMikyDvP4VX08rl+UShNAvr2hoTq6+39xSo6gFml2JPdq36aL5obGECov
-	vXnAPDJ76DIhnInAHGkHpisk+HTafuRPN2PbcYb91e7Uj0aAeyVmDCyueDhVgd1DOu13RVSieLL
-	63lHF9rQkmzXrMzGvr+Y9G+DyqHv3vGs9ohSQ76pqJFiVPUP9UFq00F1GoDtpbcoaRBVOy9lPBS
-	1T4W2FrWHMCEbJ2x3QxdFHvm7tJxsWxwO+r4z1euyITchd7/C5l3Oy1fWm5BI7gAxyRNFa4kLHy
-	gNE5FsdLr8u3GnHovhyDqoV8xkIGAl41CYAKh9fV2+oh65tQbPsXSupXVfg0MsmNY3BU42bEPmx
-	mrPvf
-X-Received: by 2002:a05:6000:230a:b0:48d:dfff:fe6b with SMTP id ffacd0b85a97d-48e385be006mr4567427f8f.34.1792777445512;
-        Fri, 23 Oct 2026 10:44:05 -0700 (PDT)
+        bh=szmE68oJ2JjZ2T7QXksKMiYQdXOqXxN/kF8J0eftq4g=;
+        b=nfHOwIiztMre+4ysYtzRusRbeaQMAYMOaDAux4eSETyjRn5fjG2o3ZRdfRlj2kCawZ
+         e0424aAfhPUGc7F6/4w45n5K99p9z4dS1nhIA1jjd4Xi/4C/z1YhAeSpbpT7uBxRaEJ6
+         jUB6w1XlR/fIHiZHFW8LXuiUTH+779VnbBZ8s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792777451; x=1793382251;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=szmE68oJ2JjZ2T7QXksKMiYQdXOqXxN/kF8J0eftq4g=;
+        b=CRGQbtQV+GY6j/xva/aM1gAp7BX5RKzAFchevU5zs5S+T/EaFmWvp7N58GrYwCwH9Z
+         mlTwIFKPSGI+TSgM4YMTF5PzCXEavA0C9M5lrU1xBEz3BGjgf6nVwFSuEq0rURJJhYbK
+         FIeVLAXmKByiijlETEK28MCImv8q8SYCxDBAzepwgC897zgj/XVy003dbcdCcAKlVvug
+         e4AQ8OJf8xUpK8h9ndejex7OAgfS4uEu5ozCOqGUhbUDB0hlCOOmmdatCx5oBMTa9Uri
+         Kz0I9P+lCZ6CayI9aQ7rWz9EmMV4olwAC14aFEouhZ03qYOettAN5huMDIO56NEmcG2E
+         sGMQ==
+X-Gm-Message-State: AFq9FYKglsmdn+H+DndKombE3GFv5r14MJuUA836JKivOOH7WQBP8iQ6
+	QXgL0u3c8AdvKhAWpeGSVdlGK2IZKNUKhutBxzJY/2FJ8v7G68xlK76sWXe+TpVBtu19snU41Dz
+	lWcqq
+X-Gm-Gg: AYBFou1GhE2ZQxz/RVB5thFL38wNmOlkD5e/Q0h5ynaab83U7mObx+/UTxwvMbh3sjl
+	Kr+IUWgEhTg0l3HNdHQdrDVngOxP20mjdgtDINfpeiCh+p2e4Uu8oLbrGTdVDMOOAlpp1WNOxN7
+	SdJs5X3gIBxnHnD3wubJm6pMdCOYWX50mI8pXU3vbCbuuu5MV7rRWMSdsOUwK3QRyTNriQpkOTm
+	zfU4NVVAQdnK5Th2dHbElVWA1eLA/iIimhIoUPJBPMk0FjL5L09Ug0baUxKXfGCnaLkucMSM1Rk
+	dv8Tvq2mXD1QcHEz5KiXGTvNIcf+UQIcS83lxlUYbf8xbEmA0/nyvH0NYi2eQFhwgM4P1Nxu4Jh
+	PbVZc+GeNd2U+A6xFbA3EmdMs4mxSMC8Yer16DeLY03TVqpJ/WozvZMyUb9Ul6d2Pg8YMrbf5lI
+	T3Q8LaFarotfBII/II9O+so9tas2qt+sh3YVRzpn2jKBAraexT1UGtSAUg1VkIxKcMEFSgILpBI
+	x2piNCbDbMdoOE4QdCr4GP+FF6lqB6tTyTmrtTytOjITM10xyhatYMO+XTBTlPNxK/mPgx990Bx
+	8I9dGZAfp+Zjn5NnYT5UwTNgzjKG1i3W7PtcLtk22Bd4ayR5fmUXQRyACwyoJpiNqYZz7eZE+C0
+	xb3HMRQ==
+X-Received: by 2002:a05:6000:220d:b0:48e:eb5:4976 with SMTP id ffacd0b85a97d-48e385a7855mr6202908f8f.53.1792777450957;
+        Fri, 23 Oct 2026 10:44:10 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.03
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:44:04 -0700 (PDT)
+        Fri, 23 Oct 2026 10:44:10 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/9] python3-alembic: Upgrade 1.20.0 -> 1.20.1
-Date: Fri, 23 Oct 2026 20:43:53 +0300
-Message-ID: <20261023174401.3617912-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/9] python3-importlib-metadata: Upgrade 9.0.1 -> 9.1.0
+Date: Fri, 23 Oct 2026 20:43:59 +0300
+Message-ID: <20261023174401.3617912-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261023174401.3617912-1-leon.anavi@konsulko.com>
+References: <20261023174401.3617912-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 17:44:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131380
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131386
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.20.1:
+Upgrade to release 9.1.0:
 
-bug:
+- Removed support for Python 3.10, now end-of-life.
 
-- [bug] [autogenerate] Fixed issue where a table or column comment
-  set to an empty string would cause autogenerate to detect a
-  comment change on every run.  As most backends, including
-  PostgreSQL, MySQL, MariaDB and Oracle, don't store an empty
-  string comment distinctly from no comment, autogenerate now
-  treats an empty string comment the same as None when comparing
-  comments. Additionally, an empty string comment is now rendered
-  in op.create_table() and op.add_column() directives, where it was
-  previously omitted.  Pull request courtesy vineoy.
+- Where a path supplies more than one metadata directory for a
+  distribution, as an interrupted or unclean upgrade may leave
+  behind, discovery now prefers the greater one by reverse
+  lexicographic ordering of the directory names, so the stale
+  metadata no longer shadows the version in use.
 
-- [bug] [autogenerate] [postgresql] Fixed rendering of the
-  PostgreSQL ~sqlalchemy.dialects.postgresql.DOMAIN type in
-  autogenerated migration scripts.  Previously the type was
-  rendered using repr(), which omitted the check, not_null,
-  default, collation, constraint_name, schema and create_type
-  arguments and did not apply a dialect prefix to the underlying
-  data type.  The full set of arguments is now rendered and the
-  underlying data type is rendered using the standard
-  type-rendering logic.  Pull request courtesy Sebastian Cao.
+- A missing required metadata field (Name or Version) now raises a
+  KeyError that names the field and identifies the distribution,
+  which PathDistribution renders as its metadata path.
 
-- [bug] [autogenerate] [postgresql] Fixed false-positive "Computed
-  default cannot be modified" warning emitted during autogenerate
-  when comparing PostgreSQL Computed columns whose reflected SQL
-  expression includes type cast specifiers such as ::regconfig or
-  ::text, which PostgreSQL adds to the expression as stored.  These
-  cast specifiers are now stripped before comparison so that
-  otherwise equivalent expressions no longer trigger the warning.
-  Pull request courtesy Sebastian Cao.
+- Restored lazy validation of EntryPoint.value, deferring the
+  ValueError for an invalid value until a component is accessed or
+  the entry point is loaded, so one malformed entry point no longer
+  prevents entry points in other groups from being selected.
 
-- [bug] [autogenerate] [postgresql] Fixed issue where autogenerate
-  would detect an unchanged PostgreSQL expression-based index as
-  modified when the expression included type casts, such as a cast
-  to a type with a length or precision, a nested cast, or a cast
-  followed by a DESC modifier.
-
-- [bug] [postgresql] Fixed bug where Operations.alter_column()
-  against a PostgreSQL identity column would render an incomplete,
-  invalid ALTER TABLE ... ALTER COLUMN statement with no clause at
-  all when existing_server_default was omitted, even if there were
-  no existing server default.  Pull request courtesy Riti Grover.
-
-- [bug] [environment] Fixed issue where a third party plugin
-  published using the alembic.plugins entrypoint, configured to
-  refer to a plugin module as documented at
-  alembic.plugins.toplevel, would cause import alembic to fail with
-  a TypeError, as the loaded module was erroneously iterated rather
-  than being set up directly. An entrypoint that refers to a
-  collection of modules, the form which inadvertently worked
-  previously, continues to be accepted but now emits a deprecation
-  warning.
-
-- [bug] [autogenerate] Fixed issue where dialect-specific keyword
-  arguments on a ForeignKeyConstraint, ForeignKey or
-  CheckConstraint, such as postgresql_not_valid, were not rendered
-  for the constraints that are part of an autogenerated
-  Operations.create_table() directive, nor for an autogenerated
-  Operations.create_check_constraint() directive.  The
-  Operations.create_table() case additionally requires SQLAlchemy
-  2.0.55 / 2.1.5 or greater.
-
-- [bug] [autogenerate] Fixed issue where, when using SQLAlchemy
-  2.1, the CHECK constraint generated by a type such as
-  ~sqlalchemy.types.Enum or ~sqlalchemy.types.Boolean with
-  create_constraint=True would be rendered by autogenerate as
-  explicit sa.CheckConstraint() entries within op.create_table(),
-  in addition to the type itself which already produces that
-  constraint, leading to a duplicate constraint error when the
-  migration is run.
-
-- [bug] [operations] Fixed issue where a CreateTableOp produced
-  from an existing ~sqlalchemy.schema.Table using
-  CreateTableOp.from_table() would emit the CHECK constraint
-  generated by a type such as ~sqlalchemy.types.Enum or
-  ~sqlalchemy.types.Boolean with create_constraint=True twice in
-  the resulting CREATE TABLE statement when invoked directly.
+- importlib_metadata.diagnose no longer crashes on a metadata
+  directory that has no metadata file or whose metadata declares no
+  name. Such distributions are now reported by their location.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-alembic_1.20.0.bb => python3-alembic_1.20.1.bb}    | 2 +-
+ ...ib-metadata_9.0.1.bb => python3-importlib-metadata_9.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-alembic_1.20.0.bb => python3-alembic_1.20.1.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-importlib-metadata_9.0.1.bb => python3-importlib-metadata_9.1.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
-index f3c165bb9f..2359734e5c 100644
---- a/meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff111c41e8748bbfa45e8ba92347b681"
+diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_9.0.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_9.1.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-importlib-metadata_9.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-importlib-metadata_9.1.0.bb
+index 89fc9af824..2df4b59609 100644
+--- a/meta-python/recipes-devtools/python/python3-importlib-metadata_9.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_9.1.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=affe5a7d8b988c3db245c01075b29e17"
  
  inherit pypi python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "db505480647bc60386c5369402f4a57a506b7539c9e9ef5e270d45cbbe4939bf"
-+SRC_URI[sha256sum] = "83490def1f723413db5096591f7609ac52544805be93849170088ed04f5a2e0b"
+-SRC_URI[sha256sum] = "ab830580bc0ef3db61ce8fae716389e5462b67e033018bab6d8f80ef17172f99"
++SRC_URI[sha256sum] = "9607fb24f95d4e0b1c17d57ec4604357d76d3f0d154f19fd4861f2e31c8e4065"
  
- RDEPENDS:${PN} += "\
-     python3-dateutil \
+ S = "${UNPACKDIR}/importlib_metadata-${PV}"
+ 
 -- 
 2.47.3
 
