@@ -1,64 +1,64 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1649.1792738442583459307
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1644.1792738441654316128
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:54:02 -0700
+ Thu, 22 Oct 2026 23:54:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=MI2TX0/Y;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8a05b210703so281034b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=rQ3dGtI6;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cd6acc50b8dso222822a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792738442; x=1793343242; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792738441; x=1793343241; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kjlj1qdfBWU9lG0JyGhTSSgmWwCZp5WfmMqAr/+tokc=;
-        b=MI2TX0/Yv0fZTiCwkDVtyjc0Nzq8ap8X2tH4ckuyHqFVby0rly00llt2QWy6kOXcUX
-         zr3Wf8p1EvjZnTjuqMS9G/RtQZ+DIONwscto7cVCDpycTJchJ9xULNFRohgQ/TSVsfvb
-         Je9pxVyJHfiD53j/iIMVpBns3cWYCImljYs9ZkkE02AijZ9YNgIDSxbeaQ+Vnt1KXT0b
-         V2pu4csXnI1DZQQfBL62iw8YJSRBpDPjZKavn18wOluAhDX/qt7rqI6GeZGpBfzP7fos
-         4WGpUJdKNn7OpJzz+J+M4CobIJ7Rb8CfXrWJ3Rs6ThLkCfq0gCZXhJH2Kadw5ZP8pW8D
-         1GvA==
+        bh=DrlRb7UOiEUtDi+kCrP4a/5P9StNy3eUIR60BrSM4ek=;
+        b=rQ3dGtI6hq77cFrSMvjx18Ijp1NdDIHgWNYdNUyZdYaeGmq9DXmDnmCt5uVX4Krhj9
+         pvz05iGcKVdUSwJ8EWerdV72k4OBg2+YaRVReeOMOllzWQiEj6rJhFHqZwvYtSw8RcPE
+         QvMHrgk3WYIytVkJoOWc6UD3hq8RcxdXBM4y3YihY0oFiQ5ZZDufMBw+WcbxbxGfaJWg
+         Xt+E82swtAp5AZT5fnUjNm9EhTT2Zoqa40D4LgDtR6852J9J4KVys61KJRw5O9u502zW
+         zqSRDIuKvRUno10cYkJPR6CTyuA7cvbLSfo5Px/IrtYKRuF+mz5k5DTzWbrh4OQh4cCq
+         tXjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792738442; x=1793343242;
+        d=1e100.net; s=20260707; t=1792738441; x=1793343241;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kjlj1qdfBWU9lG0JyGhTSSgmWwCZp5WfmMqAr/+tokc=;
-        b=rt49padMCUIkhRvIR0ouyRWbo4w5gpv3FJI6Gix2jEwN7cVFMIyvd2FLtJE+RLiEIA
-         s5/xSLlwGBTZ0AGLd3GU2pCFMl+OplBBr/qQNgTi2U5pv4xRhDYEmlwADeQUF59dP6F0
-         8ZmL2DBhFlXESBKYEpep6duVpvu6hYFfxUczIucTHcWziipI7raH1z1RFkHTiREPly2n
-         1PyIWAXQg1TZxqC1psS4+syU9h2hpDjulJIPlPqG0yZe2Mh4JNrvaD/M+nTt3YOApxRa
-         3zqX2Ue2ldpoRRPehrszGzCei90CMOREDRfF3ng/Inzqc/9XF3VEs5Iw+ihEsgV4htjv
-         fggQ==
-X-Gm-Message-State: AFq9FYK6GSVyvquiA3G3XBW9XV8W8M7pILGua0gIUFl638k75TmwHnax
-	K+e6UhmwWCmAmVo4HWq3asNx6gaVtZdT59evqwe+oBDhA2tJxLalpUIRb6qCvTjPTnI=
-X-Gm-Gg: AYBFou2zwenFjg+S3c/5gyFE6m/PnLu+LwQA6us+Ju2LayRd+X11P9vPWm3dtMC8PYw
-	tLvQkvljUf9Ev7zEose2RFtwn2UG6FLeTvEmSY3RzbORm8StEu+Ivoqx7ocaOqzrFvVaZHd0/A/
-	H4uKfvLS7/7hDSnRc+JyNVLU3dbM0NGJDBzQc2egk3d++bNFICKyYAMSPmkuHk1ZcoabD//CHtz
-	sAT9jCZgyN5G24ZJdt+jWCy8q/ekrjoa8ODafTATHISqt8qd2OexKRUbxbhi6x2tY4MGGK0xsUs
-	cJFBDQEZ3GsbEKZGpmyp8Irsajdv+ALaRrNZZizNsRciE9GzwVvtCU+mZJS1mekQk9DFNX55q1P
-	FGUT0H74RLZxjhJvR7ro5pn4y82e8ZRKne7cka8A49v7GX2BwATGiWqxLNAJC/Jw/h9VM2OCiYO
-	mxOAuiM6obtySmhi8GlTRfq/bHE2TqQcTM7h8Uz3I6fmOOjpqLxVOO6VkOP67zlifbdJJJbhHdf
-	jrsQvimTwWtMCrr3WuTjHrdXXOuzR91FvlfjUNOsoM6Jy2uFykVQkB4A6gLXp3iYq6IK5LoZbFL
-	veObQm16YZB/9K8TxkvRZkO/vO7k9JF3D+9Nq/mmwpAlUJtJ75mQITLJfCv1ZN/LvK63KRJcHaM
-	mP1KenIgGWYTA/GhiMzARSCoKk8NSLetLYh05zq+thjIm8qSwWBGJ9+ilTlJo/cnJW1WT+uvJhA
-	oBPAEzR7sGAqdX3dUlK0Yu8JNmQ1bIoMwqJgXco8eQj/+KHX9DDBXxp3NstoQzV5FZBMleLYQgt
-	jEDd8JdyhY9M1vnjfb7Yzx80WpGezQ=
-X-Received: by 2002:a05:6a00:f89:b0:89f:feb6:5d5d with SMTP id d2e1a72fcca58-8a2c62ac969mr1279263b3a.33.1792738441790;
-        Thu, 22 Oct 2026 23:54:01 -0700 (PDT)
+        bh=DrlRb7UOiEUtDi+kCrP4a/5P9StNy3eUIR60BrSM4ek=;
+        b=nMFgfJd34+dwRm7YMGlKuIe6RELc1kNVFOIgZBMJ50MwuFjUAI1QrLspXdLZx3xyVF
+         hy1iAx926BGEWsIc6aLOtFbXUDvTyBnzy6DFOtUMvMpJKMPcOj+aXKHPziHrmfGFRuHR
+         0GaBkkfxvcJF9Zl4+qK6rP5IytPQan1h0RaQUvqpURRelg1Xa8oCtl3xu0J6dEgXgVhg
+         SNklwgOxmgOpc9SZPtkjeC5Uor/pPkBwXwN+RFL1JiRI6STlj/T3vvOJH3IXZBVS8FeB
+         xIrY4hBa0iTxjCcTrypGhq4AHAriFH7bNY+PC2XdEJJFHEHe+FQGq6v0DgsVw1v8RBgn
+         A/GA==
+X-Gm-Message-State: AFq9FYJYF2Nj5n1NmK5k/s8XBai7oH0Fm/jNZb0se/WlN+/Vpl63eZ9k
+	K0xHE6UdR8btSOFxS87OB66gzdRxAyxO3Q5wcR7KFRN7l7RHBcXGuv8EMqGEO6amvv4=
+X-Gm-Gg: AYBFou1xvXQ73J1fWWoRdgiq6w0a6bnQr9G/IvfzjovswE4izjYVwmi3F9/C1eMFZHk
+	6/aX72l5y4RMYvVZrQ1Ua416BOOPED88/8AAPUGyFcF/ehv1bLoIISc1ExfFAQKVf6ncXWpI+dY
+	jge2Cey4exkSeuEnor2STmaVczKm5Oh5pvHHJsgJPvqIGUC9OArGJyHhsj5UqQngNK4Wfa94cta
+	l+uNuS8UVGguvkQ+gBrzewWdXz9SnXW2mTjmQfxw4N5vitzzMlUcbzKKVe0+TSoybzdjxVwi8Gh
+	gk1yMN8b0vpqb6Zk5YcwfzvMsISSDyZyXMn9RQDw2aD4TWpABRMoodQRjX2mMr2c7JN/b+3glQ5
+	abQA73glRdkvgFvT7LdzoiPO25uFVJOgKCg5mEdvchXqnP0Gk0Y2pFXcKfuFhYIsZJb2MHfHQZq
+	1fbQZEt6QDD4zFgTLmwIgRGtX23WS2jcCvN1kzJNx/aBS2PC+37pcw2M2pmH8zhBt4YzagRiaDN
+	1j0kvU0wDZDvC3a0/7jJaGw6SbSnr3d0zk5EQDbCv1mJrMpMbY49xIEl+QW2JCk0SBWOsAjuYxc
+	BVaDWx5yJFOcoBOGR7Y8+yWS+6RxG40MisYDeOqMU8wg2aqcVBegCTsKqd3tLOQExatB7rVoreh
+	fOpqJiyg90/wX4cEYcypZiAjDm865w/0f5BF5Y6SlbT67bf9ydAC8CpD3WzhKLKIvGUdPxPKR8i
+	tiZRmlQHPxToTEnnchVkB1OCS2e9HrLX4Afu+jerdCwO1J5EYYY28tDWb2ON7nb2Sz7Zefwt6Er
+	CNixrLAAoglqNfVBDQxOLaJ/fNgFkMaBu5WF4eoRnStuxZhnQENGQ==
+X-Received: by 2002:a05:6a21:7084:b0:3e1:af52:6d06 with SMTP id adf61e73a8af0-3e37672bf25mr979058637.52.1792738440675;
+        Thu, 22 Oct 2026 23:54:00 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.53.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 23:54:01 -0700 (PDT)
+        Thu, 22 Oct 2026 23:54:00 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 07/29] pgpool2: Define SIZEOF_LONG and SIZEOF_LONG_LONG
-Date: Thu, 22 Oct 2026 23:53:28 -0700
-Message-ID: <20261023065350.3228996-7-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 06/29] fio: Link with libatomic when 64-bit atomics need it
+Date: Thu, 22 Oct 2026 23:53:27 -0700
+Message-ID: <20261023065350.3228996-6-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
@@ -66,80 +66,97 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131331
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131330
 Content-Type: text/plain; charset="utf-8"
 
-When cross compiling for a 32-bit target such as riscv32, configure
-cannot test the long long snprintf format and builds the replacement
-snprintf(), which fails because SIZEOF_LONG and SIZEOF_LONG_LONG are
-never defined:
+fio uses 64-bit C11 atomics, which riscv32 lowers to
+__atomic_load_8/__atomic_store_8 libcalls, so linking fio fails:
 
-  snprintf.c:651:2: error: "cannot find integer type of the same size as size_t"
+  ld.lld: error: undefined symbol: __atomic_load_8
+  ld.lld: error: undefined symbol: __atomic_store_8
 
-Add a patch that checks the size of long and long long in configure.
+Add a patch that makes configure check whether 64-bit atomics need
+libatomic and add it to LIBS only in that case.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...Check-the-size-of-long-and-long-long.patch | 39 +++++++++++++++++++
- .../recipes-support/pgpool2/pgpool2_4.7.3.bb  |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0002-configure-Check-the-size-of-long-and-long-long.patch
+ ...ith-libatomic-when-64-bit-atomics-ne.patch | 56 +++++++++++++++++++
+ meta-oe/recipes-benchmark/fio/fio_3.43.bb     |  1 +
+ 2 files changed, 57 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
 
-diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/0002-configure-Check-the-size-of-long-and-long-long.patch b/meta-networking/recipes-support/pgpool2/pgpool2/0002-configure-Check-the-size-of-long-and-long-long.patch
+diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch b/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
 new file mode 100644
-index 0000000000..ef546383a6
+index 0000000000..7f6c115ae0
 --- /dev/null
-+++ b/meta-networking/recipes-support/pgpool2/pgpool2/0002-configure-Check-the-size-of-long-and-long-long.patch
-@@ -0,0 +1,39 @@
++++ b/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
+@@ -0,0 +1,56 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 21 Oct 2026 01:00:00 -0700
-+Subject: [PATCH] configure: Check the size of long and long long
++Date: Wed, 21 Oct 2026 00:10:00 -0700
++Subject: [PATCH] configure: Link with libatomic when 64-bit atomics need it
 +
-+The replacement snprintf() in src/parser/snprintf.c handles the %z
-+length modifier by comparing SIZEOF_SIZE_T with SIZEOF_LONG and
-+SIZEOF_LONG_LONG, but configure only defines SIZEOF_UNSIGNED_LONG,
-+SIZEOF_VOID_P and SIZEOF_SIZE_T. The undefined macros evaluate to 0 in
-+the #if, so whenever the replacement snprintf() is built it fails with
++fio uses 64-bit C11 atomics, e.g. atomic_load_acquire() and
++atomic_store_release() on the uint64_t inflight_issued and
++inflight_numberio fields. On 32-bit targets without native 64-bit
++atomic instructions, such as riscv32, the compiler lowers these to
++__atomic_load_8/__atomic_store_8 libcalls, and linking fio fails:
 +
-+  snprintf.c:651:2: error: "cannot find integer type of the same size as size_t"
++  ld.lld: error: undefined symbol: __atomic_load_8
++  ld.lld: error: undefined symbol: __atomic_store_8
 +
-+This happens e.g. when cross compiling for a 32-bit target such as
-+riscv32, where configure cannot run its long long snprintf format test
-+and falls back to the replacement implementation.
++Check whether a 64-bit atomic load/store links on its own, and if not,
++whether it links with -latomic, and add libatomic to LIBS only in that
++case. The test variable is global and the stored value depends on argc,
++so the compiler cannot optimize the atomic operations away.
 +
-+Check the size of long and long long so these are defined on every
-+target.
-+
-+Upstream-Status: Submitted [https://www.postgresql.org/message-id/20261021153104.43840-1-khem.raj%40oss.qualcomm.com]
++Upstream-Status: Submitted [https://github.com/axboe/fio/pull/2163]
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ configure.ac | 5 +++++
-+ 1 file changed, 5 insertions(+)
++ configure | 23 +++++++++++++++++++++++
++ 1 file changed, 23 insertions(+)
 +
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -211,6 +211,11 @@
-+ AC_CHECK_SIZEOF([void *])
-+ AC_CHECK_SIZEOF([size_t])
++--- a/configure
+++++ b/configure
++@@ -667,6 +667,29 @@
++   fatal "C11 atomics support not found"
++ fi
 +
-++# The replacement snprintf() compares SIZEOF_SIZE_T against these to handle
-++# the %z length modifier
-++AC_CHECK_SIZEOF([long])
-++AC_CHECK_SIZEOF([long long])
+++##########################################
+++# check if 64-bit atomics need libatomic
+++# The variable is global and the stored value depends on argc so that the
+++# compiler cannot optimize the atomic operations away.
+++cat > $TMPC <<EOF
+++#include <stdatomic.h>
+++#include <stdint.h>
+++_Atomic uint64_t v;
+++int main(int argc, char **argv)
+++{
+++  atomic_store_explicit(&v, (uint64_t)argc, memory_order_release);
+++  return (int)atomic_load_explicit(&v, memory_order_acquire);
+++}
+++EOF
+++libatomic="no"
+++if ! compile_prog "" "" "64-bit atomics"; then
+++  if compile_prog "" "-latomic" "64-bit atomics with libatomic"; then
+++    libatomic="yes"
+++    LIBS="-latomic $LIBS"
+++  fi
+++fi
+++print_config "libatomic for 64-bit atomics" "$libatomic"
 ++
-+ # Decide whether float4 is passed by value: user-selectable, enabled by default
-+ AC_MSG_CHECKING([whether to build with float4 passed by value])
-+ PGAC_ARG_BOOL(enable, float4-byval, yes, [disable float4 passed by value],
-diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
-index 2648cc1f9f..d5f1f75d4e 100644
---- a/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
-+++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.7.3.bb
-@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
- SRC_URI = "https://www.pgpool.net/source/pgpool-II-${PV}.tar.gz \
- 	   file://0001-Fix-build-error-when-build-this-file.patch \
- 	   file://define_SIGNAL_ARGS.patch \
-+	   file://0002-configure-Check-the-size-of-long-and-long-long.patch \
- 	   file://pgpool.sysconfig \
- 	   file://pgpool.service \
-            "
++
++ ##########################################
++ # check for wordsize
+diff --git a/meta-oe/recipes-benchmark/fio/fio_3.43.bb b/meta-oe/recipes-benchmark/fio/fio_3.43.bb
+index 928b31ff3d..e6445c2bfb 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_3.43.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_3.43.bb
+@@ -24,6 +24,7 @@ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+
+ SRC_URI = " \
+     git://git.kernel.dk/fio.git;branch=master;tag=${BP} \
++    file://0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch \
+ "
+ SRCREV = "d2dcd7e053d1902d2420f151c83990e6acdd9f8c"
+
