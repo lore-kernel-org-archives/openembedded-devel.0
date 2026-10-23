@@ -1,59 +1,59 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12742.1792777451721775932
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12663.1792777453535209039
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 10:44:12 -0700
+ Fri, 23 Oct 2026 10:44:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kXzYLpR3;
- spf=pass (domain: konsulko.com, ip: 209.85.221.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48e00eee27dso757155f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:11 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=s2smcpw/;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a2069b9710so10593275e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792777450; x=1793382250; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792777452; x=1793382252; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MXrjPVTFQ0pUJ6HrCMchtXNxpSNxhc/0x7mw1HY4OpY=;
-        b=kXzYLpR3zn/BJ92pSP/ij1gJDxJVwZNHYASPioSLOSOZEAn9jaRDIqlyKMX9bzjObK
-         5HUmkKYD9RN0hZePkqeLfDjzzuw1Y+vXwMys91ND8928xQ7PooQ5bGNuZjNX5Rq9PTo+
-         Vwz0R75QPbAD5Suxqz6QM6YetJfvfjd5Y/DxU=
+        bh=o7hZohA2JImra7p+jgS1B0FAhr7dwg9hG0WoF021y8o=;
+        b=s2smcpw/Pphudp3CGGDpAuqpPAnGkAO8Mnsrmhw6xerjmUO6IG0rDOSaYv9H5MB2bl
+         JOAe8Fok3ZDWyQXGOCzuSuNANcuVJSyNkcL+ChJBPvgbmvCTTbTdj7rSa7J3+Qb+Eg4p
+         5cvRp8FCi32oMrfYUgP8cmx4LBqR7PNu/r2e0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792777450; x=1793382250;
+        d=1e100.net; s=20260707; t=1792777452; x=1793382252;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MXrjPVTFQ0pUJ6HrCMchtXNxpSNxhc/0x7mw1HY4OpY=;
-        b=gZGMrRi//gwj8TVLeYFefIqWImly5BkjbO3jmlvNcebCkVO+4fINNPdKdFbe/ur99V
-         yDQGNUx4OxWuH3NNQi2e8vq+BhZKkzpdPJlDVvp9OqAM0zWWRh0yivlCcgzdJH5kcDn0
-         2Dad2TUsV8oszsl594oukoKDrTV9weobbfHclFVygacoT8wAMPOrXcYI08iV2ipwubaq
-         83xHyzEYkbaxkMvszxNAlc5+4qtGcKS0/tZlTiYikRMjrDZkKdRXwS05gX8ibB/wwhj/
-         Zo+d0DQnQzQ7B3lEkHPPNbFT88E3mJM+EXkphpKEicCiXhbA52BR7doxm0EAyM6bA0Bf
-         M+HQ==
-X-Gm-Message-State: AFq9FYKWXaokYuRHj8fXC/IbQOBk+AMGiuFkkolcMaAU+c4wG6c/FPMa
-	IYSC+lmsfjDS2lPkUVgoFF6BHh0yaR/yE5oCsCCIvfDd3abUHJqwvwpzCgSsLkM3SKFqo3wqlca
-	fAovG
-X-Gm-Gg: AYBFou0lqPQBkpNjuwQAzezch5ECkD1cAq+WFMthDECjHLUMfbhsbFk+wsberiftBRd
-	4d/TyA1RBTRtYHJTfuezJUtGeGxveQu7tL/xh5jAqwsrba5hjhT6Sdsvo6QWy7TAHo/2gNrjTNE
-	2hgI/Ahqz0QZKeIN9GtLLLKHS9t2p0hmdJLByTTTBru7vnrwGS82h4mJv/FlfJElGkDLd4cfieH
-	YU2o8bbMf+8nTlwejdL/Vi3dUIuj3emaNM9vLpkvH+7LwyBN3Frmmm9e5KmQOPoTPs5IfNHkkSB
-	wZCI618LDqDQhIrhuW5l/05Dio3C6rsttkzW5Cv/50JkZpK0IVE+ueoX9WfD+NCr8S+RzMDAPHV
-	PayfgMniOpjpr5KP7caA0y3RmzqyeQyLzp1aBQ2ZzIy9DzyxRlk+rfvbjR0sb6r0NfaM3XAHaWt
-	Qwp8pKgOFVNQBSTBWBwnNQwevm/yoUzs76zHV4GFK83r4zpBkwNv/tytwW3MT3LrRerW64iQeYx
-	2ygQ57AaXqB/MNxMsddAGE245SwVBn/vCfddLZrKWcIwokvZJY0K8+CoJoolGrI5Wp268cdEbP6
-	qVq6Qr0nxCAuAoG1gIrDKdokfns5LVPtYaDsKuJR+8Zj1SFOFylWGfk9dg36bm8c4UEDsYlUqZ+
-	HL+4QvDXvuEAtGSLQSITCVhozMQ==
-X-Received: by 2002:a05:6000:2403:b0:48c:4d32:ccfd with SMTP id ffacd0b85a97d-48e3854e4e8mr5008995f8f.6.1792777450008;
-        Fri, 23 Oct 2026 10:44:10 -0700 (PDT)
+        bh=o7hZohA2JImra7p+jgS1B0FAhr7dwg9hG0WoF021y8o=;
+        b=rkUFm6Wuc0Zrns1dvrhvb+8e0bCfEBhXF+RAXTvc2QjaTdklgy2eyx1NLtqtJl3QDV
+         IZi+KgiG1PTyN3CwovEsN2ej4u3kU+mLynmBSxU3blkZrqwvYsWhw8iixXRMaYdIxniZ
+         akU+AjsgZATTHZKXboF+xj8jpppLUVXKOuQnlEA4BCE4D7y/hj97jr++1ciaTTtoUl1F
+         YG1xvKr6c13cKMFUaxZExOIL/78UTcLA6Up7y3yFlwkR8hCIyGliXQpMMEcyNBpIlylb
+         O4opLJZ7FP/T0T3ls9i2nyQbcPAWGKxLLo2rcLb4D5s4OCkjoOR6uEW1AneWP8/0+OLa
+         ZS/g==
+X-Gm-Message-State: AFq9FYIsE4cBCErrmwMjihTdiaii58Eu2m13hjPrmkVp4z14nzjUX4hA
+	nVK+tpCtIuUgsjItgKzGUW/AiJ9MBB1mYem0APotvK84aZNfwo8zHT266DcudtFuG+zg0gpLtGz
+	KwatD
+X-Gm-Gg: AYBFou0QlDJdfhjektzQ8GVaLftqXldv4ahD3Z3H9YdnyGmLh34X4E7jRyvgkmD1n9s
+	7Fbke8bhoripYEcwFdHgzDaz+8+IJ993FIe3/3pGw8duOcT/60Dv1GB8ODJSV6oM1CeWjw9GH6v
+	uARWNycg7zj2SL+4+sBjgBpGUAG7t90kXlynIwX8vXMj0MhDaCGx5y5sL/87Dgn9rlzaBvrVUjz
+	Ku+mHDQFM0vAd8tFm/8TI3X0ieC0Kd3Aq7Ukf/cpOwp1K3VWnH7SS081B5F8e7z7n8YkUaFkzf1
+	1r+0rpK5BZyO4UuWuahtSqvVG8e+VR7GGi8LR/wwJH1FYjB5lFM/o7AFygHE4WDoypY36xjPkFf
+	in2/+2qhGcjhD7d7E3l6rnueoOMoGwWXQ590KmX/hyEcONjxsZYGDKPBWy7VHnUHah1/1GtbgvW
+	aXNegPggjW2iIG0g9JWviaESbRCItsKsanc4lQ+mD4yf4rqPxa3DBIMTQpnSYknxuipre/SnM+J
+	Y29pXmJ9SzEgEwbEJ/3o/8FG/gVssKDJGJpyCfFiy25xIefJhxrMg/z9yy8wcmGB8FFLGicunIR
+	CzXd8HSc/lg84vkLb9F83hf6b+Zmzwu09EvNn8duC4MhfjrU14JK8iBUN9nEypXtkky1u6RjXhC
+	mXk0z
+X-Received: by 2002:a05:600c:a00c:b0:4a2:397:73f2 with SMTP id 5b1f17b1804b1-4a211cd477cmr46918495e9.17.1792777451795;
+        Fri, 23 Oct 2026 10:44:11 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.09
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:44:09 -0700 (PDT)
+        Fri, 23 Oct 2026 10:44:11 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/9] python3-imgtool: Upgrade 2.4.0 -> 2.5.0
-Date: Fri, 23 Oct 2026 20:43:58 +0300
-Message-ID: <20261023174401.3617912-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 8/9] python3-jsonpatch: Upgrade 1.33 -> 1.36
+Date: Fri, 23 Oct 2026 20:44:00 +0300
+Message-ID: <20261023174401.3617912-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261023174401.3617912-1-leon.anavi@konsulko.com>
 References: <20261023174401.3617912-1-leon.anavi@konsulko.com>
@@ -61,48 +61,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 17:44:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131385
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131387
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 2.5.0:
+Upgrade to release 1.36:
 
-- imgtool now requires Python 3.8 or later. This also fixes key
-  export commands, which failed on Python 3.8 and 3.9.
-
-- Added imgtool keyinfo, which reports whether a PEM file holds a
-  key pair or only a public key. With --require, it fails if the
-  kind does not match, which build systems can use as a check.
-
-- Added --name-suffix to imgtool getpub and imgtool getpubhash,
-  which appends a suffix to the generated C or Rust symbol names so
-  that several keys can be embedded in one image.
-
-- Public-key-only PEM files are now supported by imgtool getpub,
-  imgtool getpubhash and imgtool verify. imgtool sign given a
-  public-only PEM now fails with a clear error.
+- Honor optimization=False when generating patches
+- Preserve the original file when in-place CLI replacement fails
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-imgtool_2.4.0.bb => python3-imgtool_2.5.0.bb}      | 2 +-
+ .../{python3-jsonpatch_1.33.bb => python3-jsonpatch_1.36.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imgtool_2.4.0.bb => python3-imgtool_2.5.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.33.bb => python3-jsonpatch_1.36.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-imgtool_2.4.0.bb b/meta-python/recipes-devtools/python/python3-imgtool_2.5.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-imgtool_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-imgtool_2.5.0.bb
-index 6b88fc0535..6ba236e89a 100644
---- a/meta-python/recipes-devtools/python/python3-imgtool_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-imgtool_2.5.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "MCUboot's image signing and key management tool"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://imgtool/main.py;beginline=3;endline=18;md5=0645fb61e2f961a110302fbfdb227446"
- 
--SRC_URI[sha256sum] = "ef2db1d9e3f62b9bc9425a8e86c4ea7212c164f0a16e923d55250f0d8743342e"
-+SRC_URI[sha256sum] = "226b5029beb0cdb490095edd59ccfa32edfa7b31450c2683b44b1abb772e80d9"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
+index 6a1715c6df..3107eddb52 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.36.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4f81c84f9a053e31fe9402a2a4e78864"
  
  inherit pypi setuptools3
  
+-SRC_URI[sha256sum] = "9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c"
++SRC_URI[sha256sum] = "7e110cb3c5a1c8768f7170bf8fb9887c4aa575fba74c95239e868b494bd9a522"
+ 
+ RDEPENDS:${PN} += " \
+     python3-json \
 -- 
 2.47.3
 
