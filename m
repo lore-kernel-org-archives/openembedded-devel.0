@@ -1,35 +1,35 @@
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3635.1792750210643484406
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3697.1792750228812271685
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 03:10:11 -0700
+ Fri, 23 Oct 2026 03:10:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=Tzf+/VMW;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202610231010083b2a2345b300020768-ttn25j@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202610231010083b2a2345b300020768
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=ajKNbqrz;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-2026102310102711ba8c5b020002079f-yqrxny@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026102310102711ba8c5b020002079f
         for <openembedded-devel@lists.openembedded.org>;
-        Fri, 23 Oct 2026 12:10:08 +0200
+        Fri, 23 Oct 2026 12:10:27 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=qTmUu5E+uduB4UXo/36k1YnPHrgzaw+hawEki891c+E=;
- b=Tzf+/VMW8o/QdzYjmHH6Dw8DNx11mh01NP0mxLQZcVxjzk9nM9jvqdXb2fIj264+ClemD2
- pbWRACoGMz27adrbJWDgOQbJzYEGzq5ZMyYsnyMY1vDGBgD4AfQjEx0UILpLotYo7/V08x7D
- UK4ywKXOCNxvbyr0llJ6s9TuAHuOvRTrNznrmScXq4bsvEIrLAepl/eP3xSzztYk/EpY0pb/
- Up6WhTil21+WFhT0ToeL7svDbRQ52D5cEsm+1CVpVk+5ZC7mvchWAoqiqkrrxJB2MXS54vJu
- pnHpPlgLItzJnAY3tGNBJPfeomoMBPuFzw6HY6uZGIZGXs8iJwlOPcHQ==;
+ bh=kR9JOtXxlfxUgZbJ3S3lDvUhOwvvWVg59TOIvj8tU3o=;
+ b=ajKNbqrzmPLiz4aNb1P5OgnNv8opBS7TExRDY9Pr45ZHJvnn2bNhqyb9DrIuIcytcytWEC
+ zY5O1nJe9H+0pMye3uCZVz7QfW7bDcALu7Og/HqMDn7wYUSwzaI/bLAhtne09iuaiHVmD0Ly
+ 2Squs6+Y0aMNjxI3UccJwrhQfczBj123YLLv7t4vtu4X55ZeFPKPkTqxr6RFL5fDCSadMHWI
+ yGTgOlDuFmkSCft+ZbC6/Md3mbOo5lF6RL9jQHmgqf0KngaF2InWDR6PFQQ1mLlow+MufBPx
+ fRMpVSRra4dXTyBciy9tA4R+rOLeRBVqwaULq3Nob2jSwj1Wehwy1aKg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][wrynose][PATCH] nss: remove compromised eMudhra certificates
-Date: Fri, 23 Oct 2026 12:09:48 +0200
-Message-ID: <20261023100948.2643661-1-peter.marko@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] nss: remove compromised eMudhra certificates
+Date: Fri, 23 Oct 2026 12:10:10 +0200
+Message-ID: <20261023101010.2643731-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
 Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:10:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131361
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:10:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131362
 Content-Type: text/plain; charset="utf-8"
 
 From: Peter Marko <peter.marko@siemens.com>
@@ -40,14 +40,14 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  ...ve-eMudhra-emSign-Root-CA-C1-and-emS.patch | 272 ++++++++++++++++++
  ...ve-eMudhra-emSign-Root-CA-G3-from-NS.patch | 143 +++++++++
- meta-oe/recipes-support/nss/nss_3.122.bb      |   2 +
+ meta-oe/recipes-support/nss/nss_3.98.bb       |   2 +
  3 files changed, 417 insertions(+)
  create mode 100644 meta-oe/recipes-support/nss/nss/0008-Bug-2083709-Remove-eMudhra-emSign-Root-CA-C1-and-emS.patch
  create mode 100644 meta-oe/recipes-support/nss/nss/0009-Bug-2084101-Remove-eMudhra-emSign-Root-CA-G3-from-NS.patch
 
 diff --git a/meta-oe/recipes-support/nss/nss/0008-Bug-2083709-Remove-eMudhra-emSign-Root-CA-C1-and-emS.patch b/meta-oe/recipes-support/nss/nss/0008-Bug-2083709-Remove-eMudhra-emSign-Root-CA-C1-and-emS.patch
 new file mode 100644
-index 0000000000..1353b491f2
+index 00000000000..faee0b509c9
 --- /dev/null
 +++ b/meta-oe/recipes-support/nss/nss/0008-Bug-2083709-Remove-eMudhra-emSign-Root-CA-C1-and-emS.patch
 @@ -0,0 +1,272 @@
@@ -69,7 +69,7 @@ index 0000000000..1353b491f2
 +index 0a451693c..05172ca23 100644
 +--- a/nss/lib/ckfw/builtins/certdata.txt
 ++++ b/nss/lib/ckfw/builtins/certdata.txt
-+@@ -13814,253 +13814,6 @@ CKA_TRUST_EMAIL_PROTECTION CK_TRUST CKT_NSS_TRUSTED_DELEGATOR
++@@ -14392,253 +14392,6 @@ CKA_TRUST_EMAIL_PROTECTION CK_TRUST CKT_NSS_TRUSTED_DELEGATOR
 + CKA_TRUST_CODE_SIGNING CK_TRUST CKT_NSS_MUST_VERIFY_TRUST
 + CKA_TRUST_STEP_UP_APPROVED CK_BBOOL CK_FALSE
 + 
@@ -325,7 +325,7 @@ index 0000000000..1353b491f2
 + #
 diff --git a/meta-oe/recipes-support/nss/nss/0009-Bug-2084101-Remove-eMudhra-emSign-Root-CA-G3-from-NS.patch b/meta-oe/recipes-support/nss/nss/0009-Bug-2084101-Remove-eMudhra-emSign-Root-CA-G3-from-NS.patch
 new file mode 100644
-index 0000000000..ecc55fa299
+index 00000000000..de6987c9d2f
 --- /dev/null
 +++ b/meta-oe/recipes-support/nss/nss/0009-Bug-2084101-Remove-eMudhra-emSign-Root-CA-G3-from-NS.patch
 @@ -0,0 +1,143 @@
@@ -346,7 +346,7 @@ index 0000000000..ecc55fa299
 +index 05172ca23..9ee50e8d5 100644
 +--- a/nss/lib/ckfw/builtins/certdata.txt
 ++++ b/nss/lib/ckfw/builtins/certdata.txt
-+@@ -13695,125 +13695,6 @@ CKA_TRUST_EMAIL_PROTECTION CK_TRUST CKT_NSS_TRUSTED_DELEGATOR
++@@ -14273,125 +14273,6 @@ CKA_TRUST_EMAIL_PROTECTION CK_TRUST CKT_NSS_TRUSTED_DELEGATOR
 + CKA_TRUST_CODE_SIGNING CK_TRUST CKT_NSS_MUST_VERIFY_TRUST
 + CKA_TRUST_STEP_UP_APPROVED CK_BBOOL CK_FALSE
 + 
@@ -472,16 +472,16 @@ index 0000000000..ecc55fa299
 + #
 + # Certificate "Hongkong Post Root CA 3"
 + #
-diff --git a/meta-oe/recipes-support/nss/nss_3.122.bb b/meta-oe/recipes-support/nss/nss_3.122.bb
-index 70aee3d9db..6c19d4aa6d 100644
---- a/meta-oe/recipes-support/nss/nss_3.122.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.122.bb
-@@ -32,6 +32,8 @@ SRC_URI = "https://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/
-            file://0005-nss-does-not-build-on-mips-with-clang-because-wrong-.patch  \
-            file://0006-Fix-nss-multilib-build-on-openSUSE-11.x-32bit.patch \
-            file://0007-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+diff --git a/meta-oe/recipes-support/nss/nss_3.98.bb b/meta-oe/recipes-support/nss/nss_3.98.bb
+index 0937b28bd52..8cff9372f1b 100644
+--- a/meta-oe/recipes-support/nss/nss_3.98.bb
++++ b/meta-oe/recipes-support/nss/nss_3.98.bb
+@@ -35,6 +35,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
+            file://CVE-2024-6602.patch \
+            file://CVE-2024-6609.patch \
+            file://CVE-2026-2781.patch \
 +           file://0008-Bug-2083709-Remove-eMudhra-emSign-Root-CA-C1-and-emS.patch \
 +           file://0009-Bug-2084101-Remove-eMudhra-emSign-Root-CA-G3-from-NS.patch \
             "
- SRC_URI[sha256sum] = "2699478b843b9f09c61f85341578df514463a0069447c816bef0d59bd800d777"
+ SRC_URI[sha256sum] = "f549cc33d35c0601674bfacf7c6ad683c187595eb4125b423238d3e9aa4209ce"
  
