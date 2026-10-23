@@ -1,130 +1,168 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11301.1792773644285940845
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12737.1792777447617950391
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2026 09:40:44 -0700
+ Fri, 23 Oct 2026 10:44:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=aEIFuq1T;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 58A3F1C00
-	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 09:40:40 -0700 (PDT)
-Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 38A8C3F673
-	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 09:40:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1792773643; bh=vEjZd++xc6HPeXqyC8BFnee7KzKZSxmsbb8PZxlZj1Q=;
-	h=From:To:Subject:Date:From;
-	b=aEIFuq1TapJlGQ967zZJQe1jMOnJetHGFR5kyQLF7GXyQNmqH8Pkd1bDUhjN1HN0q
-	 mrMoxtLgXSwQOab5wKNitG8F9mrzzGz1KOjkQW7EJ0/rRoImS5ly3PBNJ3cLIhB506
-	 itYcisBk4FtOaSYGQ6ppXTuCJkojcb20Gs0baQb0=
-From: Ross Burton <ross.burton@arm.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=hQLRtCWR;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48e011d370dso941143f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 10:44:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1792777446; x=1793382246; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8Y7s1g17vErbj5ivuk9BmWupy4Gs/ZiHlXlXgEKNmAM=;
+        b=hQLRtCWRZb3pRhtWWRnZl8lirDMoZirodC8eSejc1znhhMrTXMctCV5IFFVOtjKSYr
+         Y++acwDDor1RAdnqKCbsvlv3OlYbeFxVVI35fDqvAxj58m3ilbOGzmv9W6KlQctVWbGT
+         6VS2KUQLDkcEGvRTQ6rkMI/XIjvAmMwfQnRNI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792777446; x=1793382246;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8Y7s1g17vErbj5ivuk9BmWupy4Gs/ZiHlXlXgEKNmAM=;
+        b=nQ7FZOnHKQ5OxLpE7Fq8p2OeuasOzJ9rqzujTbJvt2R/hox9NASqAjoVaWPnNIRZ0q
+         a7ELWMezcuI4TtPgGFuNFM1S1N8OZB9z2iNOuC6n0OSAQ0oQ0KK9jub+oHJVMltHLFc1
+         fhJ6rJ25MtPGqzu5IktvBnk2pxYqU/TH7R64BpNYFcJgskgNO5U3oqjEo1SlpOjESW2K
+         +EFLxuYKswZoJEcpAGJwJHYG9TTsVJof/7Y7w0noCqp72sH+nArLKsKLOEgpS8skWX3i
+         1RdZD1X6KCT/wBAmuoR7wWhx1I4QDZMc8BTY+fMr51ksIhzlAKNtN8ejSlFqpBNOA2hE
+         hkVA==
+X-Gm-Message-State: AFq9FYLiHX++8JRulkyRObS0Om9NQs/U6dWakxO92NzevnsRe6jHqkam
+	2t88zoUBA6hj3p5O6IePF9u/OdpGkWpU3DWP4e3UJh9o+UxX1YdgnYeY50KIjUnLKAAopyxYcvu
+	iFy76
+X-Gm-Gg: AYBFou0aBqT25dwCtkwS4Uz48f3aVnGOW2t+/HQXZZgggB/14SJIumfI45ybBI0TQEz
+	3qn2iNUZQHcPampew56+2n1B4+SgRz2/C/awobi4R2bAbXXlHLRXlpI4NT/w/9ZTeEkHqVYuXxQ
+	Bd8Z+Sxv5P+d3WrnSbgkc1nP62yvUDqutMFCutfbDgUdVyo37cH+g/gTH9PuqntAQYWth1pTlc0
+	cMmOy0wWWUqJ3GM4d154n4AIGy87GVfIko/7v+TRWKUitfFzGXRF3XW9uGMM+Zl9YN6vKYC+fUf
+	muBk3rD42J9BwJkZbaHMikyDvP4VX08rl+UShNAvr2hoTq6+39xSo6gFml2JPdq36aL5obGECov
+	vXnAPDJ76DIhnInAHGkHpisk+HTafuRPN2PbcYb91e7Uj0aAeyVmDCyueDhVgd1DOu13RVSieLL
+	63lHF9rQkmzXrMzGvr+Y9G+DyqHv3vGs9ohSQ76pqJFiVPUP9UFq00F1GoDtpbcoaRBVOy9lPBS
+	1T4W2FrWHMCEbJ2x3QxdFHvm7tJxsWxwO+r4z1euyITchd7/C5l3Oy1fWm5BI7gAxyRNFa4kLHy
+	gNE5FsdLr8u3GnHovhyDqoV8xkIGAl41CYAKh9fV2+oh65tQbPsXSupXVfg0MsmNY3BU42bEPmx
+	mrPvf
+X-Received: by 2002:a05:6000:230a:b0:48d:dfff:fe6b with SMTP id ffacd0b85a97d-48e385be006mr4567427f8f.34.1792777445512;
+        Fri, 23 Oct 2026 10:44:05 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d3ee6d8sm1147864f8f.14.2026.10.23.10.44.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 10:44:04 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] python3-dbus-fast: upgrade 4.0.0 -> 5.2.0
-Date: Fri, 23 Oct 2026 17:40:41 +0100
-Message-ID: <20261023164041.3766710-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/9] python3-alembic: Upgrade 1.20.0 -> 1.20.1
+Date: Fri, 23 Oct 2026 20:43:53 +0300
+Message-ID: <20261023174401.3617912-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-ARM-No-Footer: NoDisclaimer
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 16:40:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131379
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 17:44:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131380
 Content-Type: text/plain; charset="utf-8"
 
-Drop the Cython version patch, as upstream has a wider range now.
+Upgrade to release 1.20.1:
 
-async-timeout was removed as an dependency upstream in v1.90.0.
+bug:
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+- [bug] [autogenerate] Fixed issue where a table or column comment
+  set to an empty string would cause autogenerate to detect a
+  comment change on every run.  As most backends, including
+  PostgreSQL, MySQL, MariaDB and Oracle, don't store an empty
+  string comment distinctly from no comment, autogenerate now
+  treats an empty string comment the same as None when comparing
+  comments. Additionally, an empty string comment is now rendered
+  in op.create_table() and op.add_column() directives, where it was
+  previously omitted.  Pull request courtesy vineoy.
+
+- [bug] [autogenerate] [postgresql] Fixed rendering of the
+  PostgreSQL ~sqlalchemy.dialects.postgresql.DOMAIN type in
+  autogenerated migration scripts.  Previously the type was
+  rendered using repr(), which omitted the check, not_null,
+  default, collation, constraint_name, schema and create_type
+  arguments and did not apply a dialect prefix to the underlying
+  data type.  The full set of arguments is now rendered and the
+  underlying data type is rendered using the standard
+  type-rendering logic.  Pull request courtesy Sebastian Cao.
+
+- [bug] [autogenerate] [postgresql] Fixed false-positive "Computed
+  default cannot be modified" warning emitted during autogenerate
+  when comparing PostgreSQL Computed columns whose reflected SQL
+  expression includes type cast specifiers such as ::regconfig or
+  ::text, which PostgreSQL adds to the expression as stored.  These
+  cast specifiers are now stripped before comparison so that
+  otherwise equivalent expressions no longer trigger the warning.
+  Pull request courtesy Sebastian Cao.
+
+- [bug] [autogenerate] [postgresql] Fixed issue where autogenerate
+  would detect an unchanged PostgreSQL expression-based index as
+  modified when the expression included type casts, such as a cast
+  to a type with a length or precision, a nested cast, or a cast
+  followed by a DESC modifier.
+
+- [bug] [postgresql] Fixed bug where Operations.alter_column()
+  against a PostgreSQL identity column would render an incomplete,
+  invalid ALTER TABLE ... ALTER COLUMN statement with no clause at
+  all when existing_server_default was omitted, even if there were
+  no existing server default.  Pull request courtesy Riti Grover.
+
+- [bug] [environment] Fixed issue where a third party plugin
+  published using the alembic.plugins entrypoint, configured to
+  refer to a plugin module as documented at
+  alembic.plugins.toplevel, would cause import alembic to fail with
+  a TypeError, as the loaded module was erroneously iterated rather
+  than being set up directly. An entrypoint that refers to a
+  collection of modules, the form which inadvertently worked
+  previously, continues to be accepted but now emits a deprecation
+  warning.
+
+- [bug] [autogenerate] Fixed issue where dialect-specific keyword
+  arguments on a ForeignKeyConstraint, ForeignKey or
+  CheckConstraint, such as postgresql_not_valid, were not rendered
+  for the constraints that are part of an autogenerated
+  Operations.create_table() directive, nor for an autogenerated
+  Operations.create_check_constraint() directive.  The
+  Operations.create_table() case additionally requires SQLAlchemy
+  2.0.55 / 2.1.5 or greater.
+
+- [bug] [autogenerate] Fixed issue where, when using SQLAlchemy
+  2.1, the CHECK constraint generated by a type such as
+  ~sqlalchemy.types.Enum or ~sqlalchemy.types.Boolean with
+  create_constraint=True would be rendered by autogenerate as
+  explicit sa.CheckConstraint() entries within op.create_table(),
+  in addition to the type itself which already produces that
+  constraint, leading to a duplicate constraint error when the
+  migration is run.
+
+- [bug] [operations] Fixed issue where a CreateTableOp produced
+  from an existing ~sqlalchemy.schema.Table using
+  CreateTableOp.from_table() would emit the CHECK constraint
+  generated by a type such as ~sqlalchemy.types.Enum or
+  ~sqlalchemy.types.Boolean with create_constraint=True twice in
+  the resulting CREATE TABLE statement when invoked directly.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...emove-upper-version-constraint-for-C.patch | 34 -------------------
- ...st_4.0.0.bb =3D> python3-dbus-fast_5.2.0.bb} |  9 ++---
- 2 files changed, 3 insertions(+), 40 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-dbus-fast=
-/0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch
- rename meta-python/recipes-devtools/python/{python3-dbus-fast_4.0.0.bb =3D=
-> python3-dbus-fast_5.2.0.bb} (55%)
+ .../{python3-alembic_1.20.0.bb => python3-alembic_1.20.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.20.0.bb => python3-alembic_1.20.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast/0001-p=
-yproject.toml-Remove-upper-version-constraint-for-C.patch b/meta-python/r=
-ecipes-devtools/python/python3-dbus-fast/0001-pyproject.toml-Remove-upper=
--version-constraint-for-C.patch
-deleted file mode 100644
-index e5b53340a85..00000000000
---- a/meta-python/recipes-devtools/python/python3-dbus-fast/0001-pyprojec=
-t.toml-Remove-upper-version-constraint-for-C.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From bca444d7069afab9e1ac84f765e744d308d39e57 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 18 May 2025 10:24:19 -0700
--Subject: [PATCH] pyproject.toml: Remove upper version constraint for Cyt=
-hon
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-----
-- pyproject.toml | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/pyproject.toml b/pyproject.toml
--index 6604cb8..40bd8c3 100644
----- a/pyproject.toml
--+++ b/pyproject.toml
--@@ -50,7 +50,7 @@ pytest-cov =3D ">=3D3,<8"
-- pytest-asyncio =3D ">=3D0.19,<1.4"
-- pycairo =3D "^1.21.0"
-- PyGObject =3D {version =3D ">=3D3.50,<3.51", python =3D "<4"}
---Cython =3D ">=3D3,<3.3.0"
--+Cython =3D ">=3D3"
-- setuptools =3D ">=3D65.4.1,<81.0.0"
-- pytest-timeout =3D "^2.1.0"
-- pytest-codspeed =3D ">=3D3.1.1,<5.0.0"
--@@ -108,7 +108,7 @@ module =3D "docs.*"
-- ignore_errors =3D true
--=20
-- [build-system]
---requires =3D ['setuptools>=3D65.4.1', 'wheel', 'Cython>=3D3,<3.3.0', "p=
-oetry-core>=3D1.0.0"]
--+requires =3D ['setuptools>=3D65.4.1', 'wheel', 'Cython>=3D3', "poetry-c=
-ore>=3D1.0.0"]
-- build-backend =3D "poetry.core.masonry.api"
--=20
-- [tool.ruff]
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast_4.0.0.=
-bb b/meta-python/recipes-devtools/python/python3-dbus-fast_5.2.0.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-dbus-fast_4.0.0.b=
-b
-rename to meta-python/recipes-devtools/python/python3-dbus-fast_5.2.0.bb
-index 2f4d43e1121..134f60942d3 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-fast_4.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbus-fast_5.2.0.bb
-@@ -3,14 +3,11 @@ HOMEPAGE =3D "https://github.com/bluetooth-devices/dbus=
--fast"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D729e372b5ea0168438e4fd4a00a04=
-947"
-=20
--SRC_URI +=3D "file://0001-pyproject.toml-Remove-upper-version-constraint=
--for-C.patch"
--SRC_URI[sha256sum] =3D "e1d3ee49a4a81524d7caaa2d5a31fc71075a1c977b661df9=
-58cee24bef86b8fe"
-+SRC_URI[sha256sum] =3D "a4a5dddc04b1ade5eb7650d791e2f6fb7c13345955934739=
-14e78a2526ecddda"
-=20
- inherit pypi python_poetry_core cython
-=20
-+# Remove when https://github.com/Bluetooth-Devices/dbus-fast/issues/825 =
-is closed
- DEPENDS +=3D "python3-wheel-native"
-=20
--RDEPENDS:${PN} +=3D " \
--    python3-core (>=3D3.7) \
--    python3-async-timeout \
--"
-+RDEPENDS:${PN} +=3D "python3-core"
---=20
-2.43.0
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
+index f3c165bb9f..2359734e5c 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.20.0.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.20.1.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff111c41e8748bbfa45e8ba92347b681"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "db505480647bc60386c5369402f4a57a506b7539c9e9ef5e270d45cbbe4939bf"
++SRC_URI[sha256sum] = "83490def1f723413db5096591f7609ac52544805be93849170088ed04f5a2e0b"
+ 
+ RDEPENDS:${PN} += "\
+     python3-dateutil \
+-- 
+2.47.3
 
