@@ -1,309 +1,633 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1650.1792738458484386023
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1651.1792738459669934556
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:54:18 -0700
+ Thu, 22 Oct 2026 23:54:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=fEhlgCEo;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cc147d86bebso236570a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=OFHLi9Pp;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cd623dfe420so410644a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792738458; x=1793343258; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792738459; x=1793343259; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=b9NX92WLCra/4TZJYPAwXnsXMiCLhazyqqREsJ6Ytlw=;
-        b=fEhlgCEoc1vJrWb3ZDs9Xfa3Qg/jNhI/ET2eEu2bN3fGEAtjnPYVu75ygX3MZT8B4e
-         0EQEDNExpZbQuV2ut1W9PwvSoHf4ge9lVfSm8oEmvgcn4k24Mh/WidQ69pAfsUf+T10k
-         +rAhCCRslvOsOjwBYPtGDwD3LW4abUUvWiXQaeHcy4IeZyfW/GiKwHxkqwriq8Hee/rU
-         G5O1v/iwKHhPApmRPjFDnXQ+UN6EDv/UhLhWMfVYuRipdeqg65GWMKRb7+GUD3PpAXz5
-         WffF5CeT6yz+2t587lJqDUnDQGDBj9UmcXDe73qUGwENM5V/Musab9PMxSUZQhmxsXh4
-         6BpA==
+        bh=LxBmsm1HhvlZUn2itb6JxjERlgl6Kmwy2pOixhTUDUc=;
+        b=OFHLi9PpCz0LEnJ/55APQXhXQ0JiLhX9D/kxN3KEmLH+XDycfGFJBCyqv7/AVOtQcf
+         0rXRGlhlWLd8HJDUyE6tYzfyol8tq1ydzS3Zsf5dda/E/omXuox1/xb7f5/Cj/iZyXoB
+         NFjI6dCxu3bPx4nzxV+l7OwDWUmNtn+XBLSAgkadBwKQ8KHeOecLHjnJe3+DhO4kHTiw
+         XvlygTV/+H2I6Z3kAz4/u18Zexag4b2D5I2EtCnjWC3jnkiftCH6Q/fu49nnaacWTB4Y
+         tHJ1kGlx+tfd/Muknw1ZsKij7x2IywvlZXAuloWWD3dzgxgCt8BtOahJLd5KVaNqhNX+
+         j8Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792738458; x=1793343258;
+        d=1e100.net; s=20260707; t=1792738459; x=1793343259;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=b9NX92WLCra/4TZJYPAwXnsXMiCLhazyqqREsJ6Ytlw=;
-        b=oU+2xByeWrKAL86IZSErEdBs6XS1Jp/BpgDKKa5t+IYKsvf5J+ZewlBFbrNUbWj/0F
-         Mk/4vSrU0IgsJOjRPMNZxFN9HfR7mJDQYgkAGV2qxKa9Avdicmo4ms14tSCPTjgiP8bd
-         /TEj1Dk2g54taYHCdwcguQA0qDJt/zyl/JmIf4d1ZoRz7emhSLoYk5X15G0edhmWGcdB
-         cEoNOCw2iVoA6lOGRGb1laeJEY7DoD/T3+fpIIXufFuFj5cO1oF8R2pBLyGLa53F5VsR
-         gDPmU05j+TcXgXPGSwZN6eH2saTtLT6ETzDh5HhamIF5JNLXuV28wPECbsJOViiJwSC7
-         WvyA==
-X-Gm-Message-State: AFq9FYLsVZqw2uzkHC1GhG+bPLe4ee1e5eMSqcoPE7lcSWaJh0lG1mNH
-	X9h0XHaWBuYogEErtSU931UhwtOg6K1k7T4F1ORlP3U2qw6ulbhPZ42pBZ4maRb34Ts=
-X-Gm-Gg: AYBFou1tKX66RQgRE+UkGTs1v3kBj2akTsE9fgYnLxofkdEJEFoVDgLzjpJa4NuQeNj
-	y/AvOJK0e0vwPh/T/rQoZAjp1RsgFxlVyMsU6KlEtONLKCjo49AMvvWurZZoa+OwCSTkobwP+68
-	5D0AUgfv+r6E5O3bWR2SrONzhJeGM2+8yZkMwPMpHN2wSzz0rzJP+3SJm1gD3Ca0yr0rQaUiusx
-	0/StGX+lqeI2y+zl1yr3fNobZNcjvwmrtwD7qbPdmA61XU4IkcZEtizxJoHC6iuNaCRZ3wXKx7J
-	owEw+46MNZvPInduvZUs14HbweuhYZR3feg0c10Wt+MsGxarcaeI0Iq+5bGxSo2FHJlhtFnqxzQ
-	YIm2mdMbz/ZnZpV0FnbWfs5plVfR2MLWRgaUo2zxd+aTPu3Mw3x+Uz7AAqCn0IaMgkiONgJ894j
-	srPu3VigOJAW748M4xkUMNtSTZx5q4iXmKdJVGjXrx4uavtNeEaJkroXTI/mLWlje5+QPx36mmb
-	kZgyd2mkegG1Cx0GsP2SOG1bhlTSozyYZ8d2K1zDeiVEK9PrCjJ3v7Oo84XN9v9oCxlcr638qeR
-	v2d76xjaqLMu0xgxKqApsSDF0u7/DjfEf5ziT3U6GXHBe5xWhpc2wCPePARwZMSq/UBkU3Qnjbh
-	x/lWQ3LvaygKQDPkuHpv3AvZ3rjMZl9hFbKfzv26Rbqgm3XS1CYOlEfqcApEdMYvbgsOxe++3AA
-	EYAdvUmK2WGz5EhMyM4Ieu4P/zR01o3rGgy2X0lZgrpH4rMGTvLUMArkLlthtY7hxnQNpaK8R7k
-	mzlKXeLnS4dSr+vjmrokTROpjZ4EKk=
-X-Received: by 2002:a05:6300:8045:b0:3e1:3734:63e0 with SMTP id adf61e73a8af0-3e37672f4e1mr709321637.41.1792738457697;
-        Thu, 22 Oct 2026 23:54:17 -0700 (PDT)
+        bh=LxBmsm1HhvlZUn2itb6JxjERlgl6Kmwy2pOixhTUDUc=;
+        b=i2Z6J1ouxeTggtvxu1x8n1efh0rwXhE8WMdxkqVcx+lcIQ3N7GFbjJAp8huOq4TSn/
+         F+aBH6AvCFEXZnrq34ix2EDYhiFumkb1Sh6SVRBWmevaU7uuim5/67/sGPe3WiEuyWf6
+         iNxEqAY3ExsAwj+eq3xnANCo3bOwEoF6VHJIgwNC2fgqUaYyCUggaM5iOysvQWKCm4UM
+         J/rLaXXiexOlBaYlowbNtpKNK+q0+miJ4p54kjFVOkN+s1bd8mLtfibEjHx7FSDgoChh
+         5MoeYXqh+YyJVupCXHaMHkOtrJjH0ZqRVWr8y3PYtJ6vAgVpJn3k0UbOxCt6Wb5OTASU
+         15/w==
+X-Gm-Message-State: AFq9FYJX4LJjLBg6IB0hpb9mTI5198AcB0uR5c4A0O2uPJfkHPI6yFo1
+	e8uFgES05RnjR6Rp8bk6+bI0GhI+CK87v4ZlyH8yDuoc1L729rPQRQIn8uR1WGmYu4o=
+X-Gm-Gg: AYBFou2IrF0IaTZnEir/sCKbPdcyskFj3/HJnQc2Ukpk7SSI6NtN4p/3tdUPVZ5rFQq
+	1KZqNyyjrZJuItUOX/2SBSUL4kf5h1b3uE2An2yiUP3nH6vlNKcHOTd8oVCwBb3j/gVPQneC65W
+	yG8MPHkky0BJC3vDHnl1BcgeYihtyOqesJlbzUBbKRwu8RIfmgGGmjwPhCBPs/sI7JVQ0SImV17
+	d+IRczo+0ZpAFyxpNJTLm384pridBHyYOs/TeGMBaYie/QkoADhRoeBSRsIzWvPjAJIaJecUzrN
+	HpMPCfCMj5iOB3Qe8q7zvGivYLpwvACnM0Fty3Lm1FfSnhtRxO5Nli5P/62PtdyzIQjVi3aKIbM
+	ExF7yIr0IKK4a7YtfdheOijR3EvLSYXF8LlKeu62900sqMDde6pGwhcMQ5gH2mDFsFJv/M+NSZ8
+	I5iKdgrOzqt+ZQdoAgZxhwZG954gHup3h68vShkUv73+kAGV6n4lwL0cU2xE5/s5F+gALqoZRIF
+	9++uZa+J5GFMU5qSUgl/jmq/wEpF7+WiuYqVLnGQp3RL6SNw/ubX7OyZH9WRfHS1xw5rwu69UiB
+	iP/xp/gTLM8YCZqZ2BEj8svHSjMGLp9SVbcPUltXnjwy2Ehj0lny5c2JjyMBEDifnMYZRAexV6v
+	C4wjHYxBt/HazFauiGqU+bCF3yK3L7EEkQghdSYnfg7WhNdU0v+Xn3pOwE4TCNDVcxRLbTnrk/T
+	LFxCZvAOHekFbw1Scllfmx9Q9xtag91NCKXET+SwjOI7SfBS5nOwl0V/pIvGw84jNgfC5yvhaAh
+	Vg4Y2DdVUYPUdaV9QHbQlN7YT2b/Ikc2UbZjPI8EjTe7YYVXj9P
+X-Received: by 2002:a05:6300:14d:b0:3de:4c08:174 with SMTP id adf61e73a8af0-3e3766520cemr1118537637.33.1792738458842;
+        Thu, 22 Oct 2026 23:54:18 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.16
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 23:54:17 -0700 (PDT)
+        Thu, 22 Oct 2026 23:54:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 20/29] nushell: Upgrade 0.116.0 -> 0.116.1
-Date: Thu, 22 Oct 2026 23:53:41 -0700
-Message-ID: <20261023065350.3228996-20-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 21/29] nushell: Fix build for riscv32 musl
+Date: Thu, 22 Oct 2026 23:53:42 -0700
+Message-ID: <20261023065350.3228996-21-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131344
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131345
 Content-Type: text/plain; charset="utf-8"
 
-Regenerate nushell-crates.inc with 'bitbake -c update_crates'.
+Add patches to the vendored crates:
+
+- libc: Add the syscall numbers 443 to 450, which riscv32 musl lacks
+  and rustix needs for SYS_futex_waitv.
+- fff-search, rmcp, nu-command and nu-dap: Use the 64-bit atomics from
+  portable-atomic on targets without 64-bit atomics, where std does not
+  provide them, and record the dependency in Cargo.lock since the build
+  uses --frozen.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../nushell/nushell-crates.inc                | 138 +++++++++---------
- ...{nushell_0.116.0.bb => nushell_0.116.1.bb} |   2 +-
- 2 files changed, 71 insertions(+), 69 deletions(-)
- rename meta-oe/recipes-extended/nushell/{nushell_0.116.0.bb => nushell_0.116.1.bb} (89%)
+ ...scv32-Add-syscall-numbers-443-to-450.patch |  39 +++++++
+ ...mic-for-AtomicU64-on-targets-without.patch | 108 ++++++++++++++++++
+ ...mic-for-AtomicU64-on-targets-without.patch |  97 ++++++++++++++++
+ ...ortable-atomic-for-AtomicU64-on-targ.patch |  66 +++++++++++
+ ...ble-atomic-for-64-bit-atomics-on-tar.patch |  77 +++++++++++++
+ ...dd-portable-atomic-to-patched-crates.patch |  49 ++++++++
+ .../nushell/nushell_0.116.1.bb                |   8 ++
+ 7 files changed, 444 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0001-musl-risc=
+v32-Add-syscall-numbers-443-to-450.patch
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0002-Use-porta=
+ble-atomic-for-AtomicU64-on-targets-without.patch
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0003-Use-porta=
+ble-atomic-for-AtomicU64-on-targets-without.patch
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0004-nu-comman=
+d-Use-portable-atomic-for-AtomicU64-on-targ.patch
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0005-nu-dap-Us=
+e-portable-atomic-for-64-bit-atomics-on-tar.patch
+ create mode 100644 meta-oe/recipes-extended/nushell/nushell/0006-Cargo.loc=
+k-Add-portable-atomic-to-patched-crates.patch
 
-diff --git a/meta-oe/recipes-extended/nushell/nushell-crates.inc b/meta-oe/recipes-extended/nushell/nushell-crates.inc
-index 983b4bc13c..614ffff8d5 100644
---- a/meta-oe/recipes-extended/nushell/nushell-crates.inc
-+++ b/meta-oe/recipes-extended/nushell/nushell-crates.inc
-@@ -168,6 +168,7 @@ SRC_URI += " \
-     crate://crates.io/fastrand/2.3.0 \
-     crate://crates.io/fax/0.2.6 \
-     crate://crates.io/fax_derive/0.2.0 \
-+    crate://crates.io/fd-lock/4.0.4 \
-     crate://crates.io/fdeflate/0.3.7 \
-     crate://crates.io/fff-grep/0.11.0 \
-     crate://crates.io/fff-notify-debouncer-full/0.9.4 \
-@@ -338,7 +339,7 @@ SRC_URI += " \
-     crate://crates.io/miniz_oxide/0.8.9 \
-     crate://crates.io/mio/1.2.0 \
-     crate://crates.io/moxcms/0.8.1 \
--    crate://crates.io/mq-markdown/0.8.4 \
-+    crate://crates.io/mq-markdown/0.9.2 \
-     crate://crates.io/multipart-rs/0.2.3 \
-     crate://crates.io/native-tls/0.2.18 \
-     crate://crates.io/ndarray/0.17.2 \
-@@ -354,37 +355,37 @@ SRC_URI += " \
-     crate://crates.io/notify-types/2.1.0 \
-     crate://crates.io/ntapi/0.4.3 \
-     crate://crates.io/nu-ansi-term/0.50.3 \
--    crate://crates.io/nu-cli/0.116.0 \
--    crate://crates.io/nu-cmd-base/0.116.0 \
--    crate://crates.io/nu-cmd-extra/0.116.0 \
--    crate://crates.io/nu-cmd-lang/0.116.0 \
--    crate://crates.io/nu-cmd-plugin/0.116.0 \
--    crate://crates.io/nu-color-config/0.116.0 \
--    crate://crates.io/nu-command/0.116.0 \
--    crate://crates.io/nu-config/0.116.0 \
--    crate://crates.io/nu-dap/0.116.0 \
--    crate://crates.io/nu-derive-value/0.116.0 \
--    crate://crates.io/nu-engine/0.116.0 \
--    crate://crates.io/nu-experimental/0.116.0 \
--    crate://crates.io/nu-explore/0.116.0 \
--    crate://crates.io/nu-glob/0.116.0 \
--    crate://crates.io/nu-heavy-utils/0.116.0 \
--    crate://crates.io/nu-json/0.116.0 \
--    crate://crates.io/nu-lsp/0.116.0 \
--    crate://crates.io/nu-mcp/0.116.0 \
--    crate://crates.io/nu-parser/0.116.0 \
--    crate://crates.io/nu-path/0.116.0 \
--    crate://crates.io/nu-plugin-core/0.116.0 \
--    crate://crates.io/nu-plugin-engine/0.116.0 \
--    crate://crates.io/nu-plugin-protocol/0.116.0 \
--    crate://crates.io/nu-pretty-hex/0.116.0 \
--    crate://crates.io/nu-protocol/0.116.0 \
--    crate://crates.io/nu-std/0.116.0 \
--    crate://crates.io/nu-system/0.116.0 \
--    crate://crates.io/nu-table/0.116.0 \
--    crate://crates.io/nu-term-grid/0.116.0 \
--    crate://crates.io/nu-tui/0.116.0 \
--    crate://crates.io/nu-utils/0.116.0 \
-+    crate://crates.io/nu-cli/0.116.1 \
-+    crate://crates.io/nu-cmd-base/0.116.1 \
-+    crate://crates.io/nu-cmd-extra/0.116.1 \
-+    crate://crates.io/nu-cmd-lang/0.116.1 \
-+    crate://crates.io/nu-cmd-plugin/0.116.1 \
-+    crate://crates.io/nu-color-config/0.116.1 \
-+    crate://crates.io/nu-command/0.116.1 \
-+    crate://crates.io/nu-config/0.116.1 \
-+    crate://crates.io/nu-dap/0.116.1 \
-+    crate://crates.io/nu-derive-value/0.116.1 \
-+    crate://crates.io/nu-engine/0.116.1 \
-+    crate://crates.io/nu-experimental/0.116.1 \
-+    crate://crates.io/nu-explore/0.116.1 \
-+    crate://crates.io/nu-glob/0.116.1 \
-+    crate://crates.io/nu-heavy-utils/0.116.1 \
-+    crate://crates.io/nu-json/0.116.1 \
-+    crate://crates.io/nu-lsp/0.116.1 \
-+    crate://crates.io/nu-mcp/0.116.1 \
-+    crate://crates.io/nu-parser/0.116.1 \
-+    crate://crates.io/nu-path/0.116.1 \
-+    crate://crates.io/nu-plugin-core/0.116.1 \
-+    crate://crates.io/nu-plugin-engine/0.116.1 \
-+    crate://crates.io/nu-plugin-protocol/0.116.1 \
-+    crate://crates.io/nu-pretty-hex/0.116.1 \
-+    crate://crates.io/nu-protocol/0.116.1 \
-+    crate://crates.io/nu-std/0.116.1 \
-+    crate://crates.io/nu-system/0.116.1 \
-+    crate://crates.io/nu-table/0.116.1 \
-+    crate://crates.io/nu-term-grid/0.116.1 \
-+    crate://crates.io/nu-tui/0.116.1 \
-+    crate://crates.io/nu-utils/0.116.1 \
-     crate://crates.io/nucleo-matcher/0.3.1 \
-     crate://crates.io/num-bigint/0.4.8 \
-     crate://crates.io/num-complex/0.4.6 \
-@@ -394,7 +395,7 @@ SRC_URI += " \
-     crate://crates.io/num-traits/0.2.19 \
-     crate://crates.io/num_cpus/1.17.0 \
-     crate://crates.io/num_threads/0.1.7 \
--    crate://crates.io/nuon/0.116.0 \
-+    crate://crates.io/nuon/0.116.1 \
-     crate://crates.io/objc2/0.6.4 \
-     crate://crates.io/objc2-app-kit/0.3.2 \
-     crate://crates.io/objc2-core-foundation/0.3.2 \
-@@ -500,7 +501,7 @@ SRC_URI += " \
-     crate://crates.io/redox_syscall/0.5.18 \
-     crate://crates.io/redox_users/0.4.6 \
-     crate://crates.io/redox_users/0.5.2 \
--    crate://crates.io/reedline/0.52.0 \
-+    crate://crates.io/reedline/0.52.1 \
-     crate://crates.io/ref-cast/1.0.25 \
-     crate://crates.io/ref-cast-impl/1.0.25 \
-     crate://crates.io/regex/1.13.1 \
-@@ -970,6 +971,7 @@ SRC_URI[fast-float2-0.2.3.sha256sum] = "f8eb564c5c7423d25c886fb561d1e4ee69f72354
- SRC_URI[fastrand-2.3.0.sha256sum] = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
- SRC_URI[fax-0.2.6.sha256sum] = "f05de7d48f37cd6730705cbca900770cab77a89f413d23e100ad7fad7795a0ab"
- SRC_URI[fax_derive-0.2.0.sha256sum] = "a0aca10fb742cb43f9e7bb8467c91aa9bcb8e3ffbc6a6f7389bb93ffc920577d"
-+SRC_URI[fd-lock-4.0.4.sha256sum] = "0ce92ff622d6dadf7349484f42c93271a0d49b7cc4d466a936405bacbe10aa78"
- SRC_URI[fdeflate-0.3.7.sha256sum] = "1e6853b52649d4ac5c0bd02320cddc5ba956bdb407c4b75a2c6b75bf51500f8c"
- SRC_URI[fff-grep-0.11.0.sha256sum] = "d75a741baa9142c1cbe7df7948d93a809296cd3a28f5c117964a0048b4711258"
- SRC_URI[fff-notify-debouncer-full-0.9.4.sha256sum] = "29a4ebea7b8a2840cd59358bbf396f6f04313ce8eae84ac79703ce80298b8731"
-@@ -1140,7 +1142,7 @@ SRC_URI[minimal-lexical-0.2.1.sha256sum] = "68354c5c6bd36d73ff3feceb05efa59b6acb
- SRC_URI[miniz_oxide-0.8.9.sha256sum] = "1fa76a2c86f704bdb222d66965fb3d63269ce38518b83cb0575fca855ebb6316"
- SRC_URI[mio-1.2.0.sha256sum] = "50b7e5b27aa02a74bac8c3f23f448f8d87ff11f92d3aac1a6ed369ee08cc56c1"
- SRC_URI[moxcms-0.8.1.sha256sum] = "bb85c154ba489f01b25c0d36ae69a87e4a1c73a72631fc6c0eb6dde34a73e44b"
--SRC_URI[mq-markdown-0.8.4.sha256sum] = "60b3228804efb8c2181f53306951ac77ea471fcb5812e8c44a1b6dfbdfdc8c77"
-+SRC_URI[mq-markdown-0.9.2.sha256sum] = "dec960d112bb48d7ae31c2ad17ce8028c0df32909550ab78b183f49f39533e04"
- SRC_URI[multipart-rs-0.2.3.sha256sum] = "7161f77c3118271d59b61f0f3b7e8cf0c97c6217b33b36f33b6b64a38c9e466a"
- SRC_URI[native-tls-0.2.18.sha256sum] = "465500e14ea162429d264d44189adc38b199b62b1c21eea9f69e4b73cb03bbf2"
- SRC_URI[ndarray-0.17.2.sha256sum] = "520080814a7a6b4a6e9070823bb24b4531daac8c4627e08ba5de8c5ef2f2752d"
-@@ -1156,37 +1158,37 @@ SRC_URI[notify-debouncer-full-0.7.0.sha256sum] = "c02b49179cfebc9932238d04d60799
- SRC_URI[notify-types-2.1.0.sha256sum] = "42b8cfee0e339a0337359f3c88165702ac6e600dc01c0cc9579a92d62b08477a"
- SRC_URI[ntapi-0.4.3.sha256sum] = "c3b335231dfd352ffb0f8017f3b6027a4917f7df785ea2143d8af2adc66980ae"
- SRC_URI[nu-ansi-term-0.50.3.sha256sum] = "7957b9740744892f114936ab4a57b3f487491bbeafaf8083688b16841a4240e5"
--SRC_URI[nu-cli-0.116.0.sha256sum] = "6570550e605525f1cfe9a7a697b7bddc32e6301e45bfeb9ecbdb20a923c750f7"
--SRC_URI[nu-cmd-base-0.116.0.sha256sum] = "8d403d355533cab3632bb096057170944a9f3dd98bd0e39af8732461c9450a21"
--SRC_URI[nu-cmd-extra-0.116.0.sha256sum] = "9b0529eb952199a547ac4c334fede0904be0d197a71d0a442c2f6650a1143018"
--SRC_URI[nu-cmd-lang-0.116.0.sha256sum] = "034750773b823d35dfbd400311462941dd2feb60ba044441ae202fb3cb1e711c"
--SRC_URI[nu-cmd-plugin-0.116.0.sha256sum] = "2a3455969656165b9b0dd2ad4c668d63c11b8498d6fbc594b99f5bb1a59878c7"
--SRC_URI[nu-color-config-0.116.0.sha256sum] = "cd97b9d3e6b03441731486f1df1c166e3b61ede16d5b9c7c6a24af055b6ffa39"
--SRC_URI[nu-command-0.116.0.sha256sum] = "6d13594e4df771c8b6e27c20995dfc40b79630bedf405a626e477c017c4d5b9b"
--SRC_URI[nu-config-0.116.0.sha256sum] = "6d3fe11ee1f9de20cee8ab2561cf14a430a5c6f3f6554aa73794e2c87c16b0f8"
--SRC_URI[nu-dap-0.116.0.sha256sum] = "a4d2497958cfefadb3bb1477fb3e8b1266f3f7eccdda29a78ee9a20bc36c1f0c"
--SRC_URI[nu-derive-value-0.116.0.sha256sum] = "32651d59f8579b64970010cac1c7bc13e9a2ccfe0c061f2b3b7796d2db04fe39"
--SRC_URI[nu-engine-0.116.0.sha256sum] = "d8d80da5ef844cd5f374d35d5d390acffbac5ac7035b828bebc72940c1d43c32"
--SRC_URI[nu-experimental-0.116.0.sha256sum] = "9c046460a3c0c96b32a9519562c4a2fa8c66c590c038f3686c5e0470ff4deb4e"
--SRC_URI[nu-explore-0.116.0.sha256sum] = "8dab2020c12e810dc7e4b8bab2d47b90ade4602bb9df7bff9f7d42dbcb4e9e10"
--SRC_URI[nu-glob-0.116.0.sha256sum] = "59992a8e53b42db38bc70b4097a14ccfce49ef499b24e6e154f2acf684d09567"
--SRC_URI[nu-heavy-utils-0.116.0.sha256sum] = "4926ad4ce6ed9f130fec8f58f7ebf2c83b737a04dde2dbd1a919871138a50fde"
--SRC_URI[nu-json-0.116.0.sha256sum] = "cc6fbb878e74468e120c384f0b4cb34eb73aeb09df1f4f6d37f4848a46201381"
--SRC_URI[nu-lsp-0.116.0.sha256sum] = "3ed2dd36f36be56c57d91222f3739016df48b588e1916f1eceec3e7bd9506cdd"
--SRC_URI[nu-mcp-0.116.0.sha256sum] = "4239ad82d8ab8abbb111c90aef01482eb6bc1f90f793a644b5cb158e6abf61ba"
--SRC_URI[nu-parser-0.116.0.sha256sum] = "b429d18313c2848494e7dbce8c84d5508103ca4ecbf6b20887b4f8c3c2805e80"
--SRC_URI[nu-path-0.116.0.sha256sum] = "d730f139821e0d141449e718a958580a29fe68eb20344d33cd9855b62886b053"
--SRC_URI[nu-plugin-core-0.116.0.sha256sum] = "a74fa87014d0a9d854e1b12953049ed59139dd41b762bd655036319118490372"
--SRC_URI[nu-plugin-engine-0.116.0.sha256sum] = "aeff109af2f7f2023e7ae91d2f13e6d20bb8439b73dc97675a201063d1842ea7"
--SRC_URI[nu-plugin-protocol-0.116.0.sha256sum] = "7bfc146873f7f6bb83fdbb8b176f2740a916e69e6eb8ebcc1aad51141f35359a"
--SRC_URI[nu-pretty-hex-0.116.0.sha256sum] = "512eeca582f1ed87801d9909d8fee0c70e39203a703a9d5417990733dc940deb"
--SRC_URI[nu-protocol-0.116.0.sha256sum] = "1b99f900ca528b33629b6dbe6c1b992fe9c14f36873fb3ac713cac56e05cb7fb"
--SRC_URI[nu-std-0.116.0.sha256sum] = "cfc25b4a9a83fb29dca630c52c45f267ca3b1f79290ac9b80320031994237ad2"
--SRC_URI[nu-system-0.116.0.sha256sum] = "2670185f7a4680a5fb000caf50bb34cecc5be0c79e9d55179809966e72b6a4eb"
--SRC_URI[nu-table-0.116.0.sha256sum] = "1405925669f67f5a3afb0c9643e98fdf0af94bfcfb0f03430a3e9aee7ca91716"
--SRC_URI[nu-term-grid-0.116.0.sha256sum] = "22e965a3b3c6654012bdf4992b3ad95d3189237b73b141d17294a46a1579f7b5"
--SRC_URI[nu-tui-0.116.0.sha256sum] = "677e4e0d26ecce0fa35326b21e2fc2fe02ab605e62c33fe9fedf67d9c1b3f0a2"
--SRC_URI[nu-utils-0.116.0.sha256sum] = "6103ba8cd3fdf2ed36d46a8908347b17fb6a3be1151de974ceb1b8cce54a0af4"
-+SRC_URI[nu-cli-0.116.1.sha256sum] = "e3210a5075ebd0259b166602224a8ff2f4dc92305bf02c9dc6e5e7346583d530"
-+SRC_URI[nu-cmd-base-0.116.1.sha256sum] = "6a344cc88e5548048b6758980876540f198f4954e6ac0b8ce23da06534067012"
-+SRC_URI[nu-cmd-extra-0.116.1.sha256sum] = "270d811b97a4e5402fd948dd84467e123093b6b425ef7c2fc7e8f84191465db3"
-+SRC_URI[nu-cmd-lang-0.116.1.sha256sum] = "20ede2fc8e7a07cad1b08866a6ec8eb0c74701b76200051150e3d3ad663b37ce"
-+SRC_URI[nu-cmd-plugin-0.116.1.sha256sum] = "06ca340ef0473ccddf792ded1b4bf45593c889e2e955c61974adcfb0b219f8c7"
-+SRC_URI[nu-color-config-0.116.1.sha256sum] = "3ab851824e4e070c32051fb308f12119f53b17c8dfe89295f5b8a322bb86ff4b"
-+SRC_URI[nu-command-0.116.1.sha256sum] = "2013739bfb07cd24b3b79e10e573d571f9f80fe67ba0d56d860cbc0e290d7a7a"
-+SRC_URI[nu-config-0.116.1.sha256sum] = "3cf2614395b32b611aab1144863d74a00cc88a58ce613f4c37fb00685be676da"
-+SRC_URI[nu-dap-0.116.1.sha256sum] = "18306abb507bd0b2e8b089e4d97a6a0cb1ea96063cdfd8f85a590fa12427b0f2"
-+SRC_URI[nu-derive-value-0.116.1.sha256sum] = "f8afb8851aef3f821c99450af47563ebf477da7d8e0191332c3253cbca038cf5"
-+SRC_URI[nu-engine-0.116.1.sha256sum] = "9624a038a70668003d9ef579c9d58c5c6b7c4b71e91518441ca51e004367d01e"
-+SRC_URI[nu-experimental-0.116.1.sha256sum] = "8900751ec5ddae2757ec9f8095b7c11ab470e84e689b2ff8ac4d945b4f2f4ef0"
-+SRC_URI[nu-explore-0.116.1.sha256sum] = "180d1183f62349a79b72f68f062646542ffaafba1d027231b25cf7d6e0ae5e80"
-+SRC_URI[nu-glob-0.116.1.sha256sum] = "562d41b0098df79d66e5a47537744ea901954260c23e7515f2117ebac6246fad"
-+SRC_URI[nu-heavy-utils-0.116.1.sha256sum] = "0dad35ba4060a6977c07dd98efff7bf57a35c8a11617abb313e48e9dc0580fbc"
-+SRC_URI[nu-json-0.116.1.sha256sum] = "b0705efa4067d8ff9f580377651012b15aa002250fb18189e70fc0711cfe8af0"
-+SRC_URI[nu-lsp-0.116.1.sha256sum] = "2c19194bfe2a57e44c2e564f7b43642a6178e19db0e09416c13c82f8818668d3"
-+SRC_URI[nu-mcp-0.116.1.sha256sum] = "c8b43b92b8846b65520a44e5e61f24e552f510da9cd928659585a83836482694"
-+SRC_URI[nu-parser-0.116.1.sha256sum] = "e2daa0ec931818191d23e8a6cdcc28821ad2aeb9b466f84195c93d28cf9929dd"
-+SRC_URI[nu-path-0.116.1.sha256sum] = "0909df2d047a887b37329b463d1a852246d40900bfd244f93ce32f4e3e3be7d3"
-+SRC_URI[nu-plugin-core-0.116.1.sha256sum] = "fd20c167e7cebb67073c43f6812d7d9c83ea195143eae53619323ae4a4ec60db"
-+SRC_URI[nu-plugin-engine-0.116.1.sha256sum] = "eba904d2e6d05bf9637bc6ca39cdc046c68f791984f8e5311629202bc56b56be"
-+SRC_URI[nu-plugin-protocol-0.116.1.sha256sum] = "7fd0f06dff8d83274e19ed25af59204fb3b6e924c931636bb1a2745d88ac8458"
-+SRC_URI[nu-pretty-hex-0.116.1.sha256sum] = "3cfc84ce8e31c2ff81ef96c031e8c5fb5306d71fa463d45ba063cc7dbcbfe62e"
-+SRC_URI[nu-protocol-0.116.1.sha256sum] = "5516ed558d0e31509c62b41fabe4f7f08c9161ff9a77131f9320f1187cc9015c"
-+SRC_URI[nu-std-0.116.1.sha256sum] = "3957dfe8a889daab2434883a000162a0fc8a516bae7c38b9ea325cea8eb5e650"
-+SRC_URI[nu-system-0.116.1.sha256sum] = "a5b98a8adf1e469b19c80d24253f6c6de2685a3c358b56ae5b55629c55185657"
-+SRC_URI[nu-table-0.116.1.sha256sum] = "9c7a89377ef569a6890d82dc981407c4da5dc2112c24343237c792949d33b618"
-+SRC_URI[nu-term-grid-0.116.1.sha256sum] = "4f2639db435b9140a3e5dd295bb2c63e51cea28edcadb63749ed71077439d5be"
-+SRC_URI[nu-tui-0.116.1.sha256sum] = "aa87f21a3095fd4b20a2e0d5070f97ee025072098e47cef5ccc2d723e7ad6c14"
-+SRC_URI[nu-utils-0.116.1.sha256sum] = "84f521367a3e9a70ce78759106801961f108f1bad9b80ec9195fcb5eec3a1d85"
- SRC_URI[nucleo-matcher-0.3.1.sha256sum] = "bf33f538733d1a5a3494b836ba913207f14d9d4a1d3cd67030c5061bdd2cac85"
- SRC_URI[num-bigint-0.4.8.sha256sum] = "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367"
- SRC_URI[num-complex-0.4.6.sha256sum] = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
-@@ -1196,7 +1198,7 @@ SRC_URI[num-integer-0.1.46.sha256sum] = "7969661fd2958a5cb096e56c8e1ad0444ac2bbc
- SRC_URI[num-traits-0.2.19.sha256sum] = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
- SRC_URI[num_cpus-1.17.0.sha256sum] = "91df4bbde75afed763b708b7eee1e8e7651e02d97f6d5dd763e89367e957b23b"
- SRC_URI[num_threads-0.1.7.sha256sum] = "5c7398b9c8b70908f6371f47ed36737907c87c52af34c268fed0bf0ceb92ead9"
--SRC_URI[nuon-0.116.0.sha256sum] = "0f4472dbed55ae72213a3941fd8b15ce5898eda9c0dc83af61750347812798e6"
-+SRC_URI[nuon-0.116.1.sha256sum] = "7fb566b628d1806c6b2b5fbe7358bade2c5c3732832c7fd86e480f4970be51d7"
- SRC_URI[objc2-0.6.4.sha256sum] = "3a12a8ed07aefc768292f076dc3ac8c48f3781c8f2d5851dd3d98950e8c5a89f"
- SRC_URI[objc2-app-kit-0.3.2.sha256sum] = "d49e936b501e5c5bf01fda3a9452ff86dc3ea98ad5f283e1455153142d97518c"
- SRC_URI[objc2-core-foundation-0.3.2.sha256sum] = "2a180dd8642fa45cdb7dd721cd4c11b1cadd4929ce112ebd8b9f5803cc79d536"
-@@ -1302,7 +1304,7 @@ SRC_URI[recvmsg-1.0.0.sha256sum] = "d3edd4d5d42c92f0a659926464d4cce56b562761267e
- SRC_URI[redox_syscall-0.5.18.sha256sum] = "ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d"
- SRC_URI[redox_users-0.4.6.sha256sum] = "ba009ff324d1fc1b900bd1fdb31564febe58a8ccc8a6fdbb93b543d33b13ca43"
- SRC_URI[redox_users-0.5.2.sha256sum] = "a4e608c6638b9c18977b00b475ac1f28d14e84b27d8d42f70e0bf1e3dec127ac"
--SRC_URI[reedline-0.52.0.sha256sum] = "3798f88894590a7acdc9a25936605efbde199641f31e8d99248fce72e535638a"
-+SRC_URI[reedline-0.52.1.sha256sum] = "cc0282eb061a7d039435f10075f22988e0dd7468901ee247a803021786afc662"
- SRC_URI[ref-cast-1.0.25.sha256sum] = "f354300ae66f76f1c85c5f84693f0ce81d747e2c3f21a45fef496d89c960bf7d"
- SRC_URI[ref-cast-impl-1.0.25.sha256sum] = "b7186006dcb21920990093f30e3dea63b7d6e977bf1256be20c3563a5db070da"
- SRC_URI[regex-1.13.1.sha256sum] = "f020237b6c8eed93db2e2cb53c00c60a8e1bc73da7d073199a1180401450218d"
-diff --git a/meta-oe/recipes-extended/nushell/nushell_0.116.0.bb b/meta-oe/recipes-extended/nushell/nushell_0.116.1.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/nushell/nushell_0.116.0.bb
-rename to meta-oe/recipes-extended/nushell/nushell_0.116.1.bb
-index 32c98f1086..9cb9ff917d 100644
---- a/meta-oe/recipes-extended/nushell/nushell_0.116.0.bb
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0001-musl-riscv32-Add=
+-syscall-numbers-443-to-450.patch b/meta-oe/recipes-extended/nushell/nushel=
+l/0001-musl-riscv32-Add-syscall-numbers-443-to-450.patch
+new file mode 100644
+index 0000000000..64e8ca3e4b
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0001-musl-riscv32-Add-syscal=
+l-numbers-443-to-450.patch
+@@ -0,0 +1,39 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 10:00:00 -0700
++Subject: [PATCH] musl/riscv32: Add syscall numbers 443 to 450
++
++The riscv32 musl syscall list stops at SYS_mount_setattr (442), while
++the other musl targets and riscv32 glibc also define the newer generic
++syscalls. rustix uses SYS_futex_waitv, so it fails to build for
++riscv32 musl:
++
++  error[E0425]: cannot find value `SYS_futex_waitv` in this scope
++     --> rustix-1.1.4/src/backend/libc/thread/syscalls.rs:678:15
++
++Add quotactl_fd, landlock_*, memfd_secret, process_mrelease,
++futex_waitv and set_mempolicy_home_node, which use the asm-generic
++numbers on riscv32 as well.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ src/unix/linux_like/linux/musl/b32/riscv32/mod.rs | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++--- a/src/unix/linux_like/linux/musl/b32/riscv32/mod.rs
+++++ b/src/unix/linux_like/linux/musl/b32/riscv32/mod.rs
++@@ -623,6 +623,14 @@
++ pub const SYS_process_madvise: c_long =3D 440;
++ pub const SYS_epoll_pwait2: c_long =3D 441;
++ pub const SYS_mount_setattr: c_long =3D 442;
+++pub const SYS_quotactl_fd: c_long =3D 443;
+++pub const SYS_landlock_create_ruleset: c_long =3D 444;
+++pub const SYS_landlock_add_rule: c_long =3D 445;
+++pub const SYS_landlock_restrict_self: c_long =3D 446;
+++pub const SYS_memfd_secret: c_long =3D 447;
+++pub const SYS_process_mrelease: c_long =3D 448;
+++pub const SYS_futex_waitv: c_long =3D 449;
+++pub const SYS_set_mempolicy_home_node: c_long =3D 450;
++=20
++ // Plain syscalls aliased to their time64 variants
++ pub const SYS_clock_gettime: c_long =3D SYS_clock_gettime64;
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0002-Use-portable-ato=
+mic-for-AtomicU64-on-targets-without.patch b/meta-oe/recipes-extended/nushe=
+ll/nushell/0002-Use-portable-atomic-for-AtomicU64-on-targets-without.patch
+new file mode 100644
+index 0000000000..3798955320
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0002-Use-portable-atomic-for=
+-AtomicU64-on-targets-without.patch
+@@ -0,0 +1,108 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 11:00:00 -0700
++Subject: [PATCH] Use portable-atomic for AtomicU64 on targets without 64-b=
+it
++ atomics
++
++std only provides AtomicU64 on targets with 64-bit atomics, so
++fff-search fails to build for e.g. riscv32:
++
++  error[E0432]: unresolved import `std::sync::atomic::AtomicU64`
++   --> src/rescan_throttle.rs:1:25
++    |
++  1 | use std::sync::atomic::{AtomicU64, Ordering};
++    |                         ^^^^^^^^^ no `AtomicU64` in `sync::atomic`
++
++The counters, timestamps and ids kept in AtomicU64 need 64 bits, so
++use the AtomicU64 from portable-atomic on such targets instead,
++through a crate-level import, and keep std's on all other targets.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ Cargo.toml             | 5 +++++
++ src/lib.rs             | 6 ++++++
++ src/log.rs             | 3 ++-
++ src/rescan_throttle.rs | 3 ++-
++ src/types.rs           | 4 +++-
++ src/watcher/watch.rs   | 3 ++-
++ 6 files changed, 20 insertions(+), 4 deletions(-)
++
++--- a/Cargo.toml
+++++ b/Cargo.toml
++@@ -320,6 +320,11 @@
++ version =3D "0.3"
++ features =3D ["env-filter"]
++=20
+++[target."cfg(not(target_has_atomic =3D \"64\"))".dependencies.portable-at=
+omic]
+++version =3D "1.13.1"
+++features =3D ["fallback"]
+++default-features =3D false
+++
++ [target."cfg(unix)".dependencies.signal-hook-registry]
++ version =3D "1.4"
++=20
++--- a/src/lib.rs
+++++ b/src/lib.rs
++@@ -103,6 +103,12 @@
++      Enable one, e.g. `--features ripgrep` or `--features zlob`."
++ );
++=20
+++// std only provides AtomicU64 on targets with 64-bit atomics.
+++#[cfg(target_has_atomic =3D "64")]
+++pub(crate) use std::sync::atomic::AtomicU64;
+++#[cfg(not(target_has_atomic =3D "64"))]
+++pub(crate) use portable_atomic::AtomicU64;
+++
++ /// Primary entry points with thread-safe [`SharedFilePicker`](shared::Fi=
+lePicker) instance
++ pub mod shared;
++ pub use shared::*;
++--- a/src/log.rs
+++++ b/src/log.rs
++@@ -135,7 +135,8 @@
++ const DEFAULT_RETAIN_RUNS: usize =3D 20;
++=20
++ pub fn generate_trace_id() -> String {
++-    use std::sync::atomic::{AtomicU64, Ordering};
+++    use crate::AtomicU64;
+++    use std::sync::atomic::Ordering;
++     static TRACE_COUNTER: AtomicU64 =3D AtomicU64::new(0);
++=20
++     let nanos =3D std::time::SystemTime::now()
++--- a/src/rescan_throttle.rs
+++++ b/src/rescan_throttle.rs
++@@ -1,6 +1,7 @@
++-use std::sync::atomic::{AtomicU64, Ordering};
+++use std::sync::atomic::Ordering;
++ use std::time::Instant;
++=20
+++use crate::AtomicU64;
++ use crate::constants::{
++     LARGE_INDEX_FILE_COUNT, RESCAN_MIN_INTERVAL, RESCAN_MIN_INTERVAL_LARG=
+E_INDEX,
++ };
++--- a/src/types.rs
+++++ b/src/types.rs
++@@ -2,7 +2,9 @@
++ use std::path::{Path, PathBuf};
++ #[cfg(not(target_os =3D "windows"))]
++ use std::sync::atomic::AtomicPtr;
++-use std::sync::atomic::{AtomicI32, AtomicU8, AtomicU64, AtomicUsize, Orde=
+ring};
+++use std::sync::atomic::{AtomicI32, AtomicU8, AtomicUsize, Ordering};
+++
+++use crate::AtomicU64;
++=20
++ #[cfg(not(target_os =3D "windows"))]
++ use crate::constants::{FRESH_MMAP_THRESHOLD, MMAP_THRESHOLD};
++--- a/src/watcher/watch.rs
+++++ b/src/watcher/watch.rs
++@@ -1,9 +1,10 @@
++ use crate::error::Error;
++ use crate::index::constraints::{GlobPattern, compile_one, glob_matches_in=
+to};
+++use crate::AtomicU64;
++ use parking_lot::Mutex;
++ use std::path::{Path, PathBuf};
++ use std::sync::Arc;
++-use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+++use std::sync::atomic::{AtomicBool, Ordering};
++ use std::sync::mpsc;
++ use tracing::{debug, error};
++=20
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0003-Use-portable-ato=
+mic-for-AtomicU64-on-targets-without.patch b/meta-oe/recipes-extended/nushe=
+ll/nushell/0003-Use-portable-atomic-for-AtomicU64-on-targets-without.patch
+new file mode 100644
+index 0000000000..2d17e32594
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0003-Use-portable-atomic-for=
+-AtomicU64-on-targets-without.patch
+@@ -0,0 +1,97 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 11:30:00 -0700
++Subject: [PATCH] Use portable-atomic for AtomicU64 on targets without 64-b=
+it
++ atomics
++
++std only provides AtomicU64 on targets with 64-bit atomics, so rmcp
++fails to build for e.g. riscv32:
++
++  error[E0432]: unresolved import `std::sync::atomic::AtomicU64`
++     --> src/service.rs:455:17
++      |
++  455 |     sync::{Arc, atomic::AtomicU64},
++      |                 ^^^^^^^^---------
++      |                         |
++      |                         no `AtomicU64` in `sync::atomic`
++
++The request id and control generation counters are 64-bit, so use the
++AtomicU64 from portable-atomic on such targets instead, through a
++crate-level import, and keep std's on all other targets.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ Cargo.toml              | 5 +++++
++ src/lib.rs              | 8 ++++++++
++ src/service.rs          | 4 +++-
++ src/transport/worker.rs | 3 ++-
++ 4 files changed, 18 insertions(+), 2 deletions(-)
++
++--- a/Cargo.toml
+++++ b/Cargo.toml
++@@ -930,6 +930,11 @@
++ [dev-dependencies.url]
++ version =3D "2.4"
++=20
+++[target.'cfg(not(target_has_atomic =3D "64"))'.dependencies.portable-atom=
+ic]
+++version =3D "1.13.1"
+++features =3D ["fallback"]
+++default-features =3D false
+++
++ [target.'cfg(all(target_family =3D "wasm", target_os =3D "unknown"))'.dep=
+endencies.chrono]
++ version =3D "0.4.38"
++ features =3D [
++--- a/src/lib.rs
+++++ b/src/lib.rs
++@@ -2,6 +2,14 @@
++ #![cfg_attr(docsrs, allow(unused_attributes))]
++ #![doc =3D include_str!("../README.md")]
++=20
+++// std only provides AtomicU64 on targets with 64-bit atomics.
+++#[cfg(target_has_atomic =3D "64")]
+++#[allow(unused_imports)]
+++pub(crate) use std::sync::atomic::AtomicU64;
+++#[cfg(not(target_has_atomic =3D "64"))]
+++#[allow(unused_imports)]
+++pub(crate) use portable_atomic::AtomicU64;
+++
++ mod error;
++ pub use error::{ErrorData, RmcpError};
++=20
++--- a/src/service.rs
+++++ b/src/service.rs
++@@ -452,12 +452,14 @@
++ use std::{
++     collections::{HashMap, VecDeque},
++     ops::Deref,
++-    sync::{Arc, atomic::AtomicU64},
+++    sync::Arc,
++     time::Duration,
++ };
++=20
++ use tokio::sync::mpsc;
++=20
+++use crate::AtomicU64;
+++
++ pub trait RequestIdProvider: Send + Sync + 'static {
++     fn next_request_id(&self) -> RequestId;
++ }
++--- a/src/transport/worker.rs
+++++ b/src/transport/worker.rs
++@@ -3,7 +3,7 @@
++     collections::HashMap,
++     sync::{
++         Arc, Mutex, PoisonError, Weak,
++-        atomic::{AtomicU64, Ordering},
+++        atomic::Ordering,
++     },
++     time::Duration,
++ };
++@@ -12,6 +12,7 @@
++ use tracing::{Instrument, Level};
++=20
++ use super::{IntoTransport, Transport};
+++use crate::AtomicU64;
++ use crate::{
++     model::{CancelledNotification, JsonRpcMessage, RequestId},
++     service::{RxJsonRpcMessage, ServiceRole, TxJsonRpcMessage},
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0004-nu-command-Use-p=
+ortable-atomic-for-AtomicU64-on-targ.patch b/meta-oe/recipes-extended/nushe=
+ll/nushell/0004-nu-command-Use-portable-atomic-for-AtomicU64-on-targ.patch
+new file mode 100644
+index 0000000000..3d6f80977f
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0004-nu-command-Use-portable=
+-atomic-for-AtomicU64-on-targ.patch
+@@ -0,0 +1,66 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 12:00:00 -0700
++Subject: [PATCH] nu-command: Use portable-atomic for AtomicU64 on targets
++ without 64-bit atomics
++
++std only provides AtomicU64 on targets with 64-bit atomics, so
++nu-command fails to build for e.g. riscv32:
++
++  error[E0432]: unresolved import `std::sync::atomic::AtomicU64`
++    --> src/filesystem/idx/state.rs:18:39
++
++The scan duration is kept in nanoseconds and needs 64 bits, so use the
++AtomicU64 from portable-atomic on such targets instead, through a
++crate-level import, and keep std's on all other targets.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ Cargo.toml                   | 5 +++++
++ src/filesystem/idx/state.rs  | 3 ++-
++ src/lib.rs                   | 7 +++++++
++ 3 files changed, 14 insertions(+), 1 deletion(-)
++
++--- a/Cargo.toml
+++++ b/Cargo.toml
++@@ -596,6 +596,11 @@
++     "mode",
++ ]
++=20
+++[target."cfg(not(target_has_atomic =3D \"64\"))".dependencies.portable-at=
+omic]
+++version =3D "1.13.1"
+++features =3D ["fallback"]
+++default-features =3D false
+++
++ [target."cfg(unix)".dependencies.nix]
++ version =3D "0.31.3"
++ features =3D [
++--- a/src/filesystem/idx/state.rs
+++++ b/src/filesystem/idx/state.rs
++@@ -13,9 +13,10 @@
++ use nu_protocol::shell_error::generic::GenericError;=0D
++ use nu_protocol::{ListStream, PipelineMetadata, Signals};=0D
++ use nu_utils::time::Instant;=0D
+++use crate::AtomicU64;=0D
++ use pathdiff::diff_paths;=0D
++ use std::path::{Path, PathBuf};=0D
++-use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};=0D
+++use std::sync::atomic::{AtomicBool, Ordering};=0D
++ use std::sync::mpsc::{Receiver, RecvTimeoutError, Sender, channel};=0D
++ use std::sync::{Arc, Mutex, OnceLock};=0D
++ use std::time::Duration;=0D
++--- a/src/lib.rs
+++++ b/src/lib.rs
++@@ -1,5 +1,12 @@
++ #![cfg_attr(not(feature =3D "os"), allow(unused))]=0D
++ #![doc =3D include_str!("../README.md")]=0D
+++=0D
+++// std only provides AtomicU64 on targets with 64-bit atomics.=0D
+++#[cfg(target_has_atomic =3D "64")]=0D
+++use std::sync::atomic::AtomicU64;=0D
+++#[cfg(not(target_has_atomic =3D "64"))]=0D
+++use portable_atomic::AtomicU64;=0D
+++=0D
++ mod bytes;=0D
++ mod charting;=0D
++ mod conversions;=0D
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0005-nu-dap-Use-porta=
+ble-atomic-for-64-bit-atomics-on-tar.patch b/meta-oe/recipes-extended/nushe=
+ll/nushell/0005-nu-dap-Use-portable-atomic-for-64-bit-atomics-on-tar.patch
+new file mode 100644
+index 0000000000..1c53dd0a38
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0005-nu-dap-Use-portable-ato=
+mic-for-64-bit-atomics-on-tar.patch
+@@ -0,0 +1,77 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 12:00:00 -0700
++Subject: [PATCH] nu-dap: Use portable-atomic for 64-bit atomics on targets
++ without them
++
++std only provides AtomicI64 and AtomicU64 on targets with 64-bit
++atomics, so nu-dap fails to build for e.g. riscv32:
++
++  error[E0425]: cannot find type `AtomicU64` in module `std::sync::atomic`
++     --> src/state.rs:428:37
++
++The protocol sequence number and the UI request ids are 64-bit, so use
++the atomics from portable-atomic on such targets instead, through
++crate-level imports, and keep std's on all other targets.
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ Cargo.toml          | 5 +++++
++ src/dap/protocol.rs | 4 +++-
++ src/lib.rs          | 6 ++++++
++ src/state.rs        | 2 +-
++ 4 files changed, 15 insertions(+), 2 deletions(-)
++
++--- a/Cargo.toml
+++++ b/Cargo.toml
++@@ -101,6 +101,11 @@
++ [dev-dependencies.typetag]
++ version =3D "0.2"
++=20
+++[target."cfg(not(target_has_atomic =3D \"64\"))".dependencies.portable-at=
+omic]
+++version =3D "1.13.1"
+++features =3D ["fallback"]
+++default-features =3D false
+++
++ [target."cfg(unix)".dependencies.libc]
++ version =3D "0.2.185"
++=20
++--- a/src/dap/protocol.rs
+++++ b/src/dap/protocol.rs
++@@ -9,7 +9,9 @@
++ use serde_json::Value as Json;=0D
++ use std::io::{BufRead, Write};=0D
++ use std::sync::Arc;=0D
++-use std::sync::atomic::{AtomicI64, Ordering};=0D
+++use std::sync::atomic::Ordering;=0D
+++=0D
+++use crate::AtomicI64;=0D
++ =0D
++ #[derive(Debug, Deserialize)]=0D
++ pub struct Request {=0D
++--- a/src/lib.rs
+++++ b/src/lib.rs
++@@ -35,6 +35,12 @@
++ // Tests may `unwrap` (matches nushell); production code stays `unwrap`-f=
+ree.=0D
++ #![cfg_attr(test, allow(clippy::unwrap_used))]=0D
++ =0D
+++// std only provides 64-bit atomics on targets that support them.=0D
+++#[cfg(target_has_atomic =3D "64")]=0D
+++use std::sync::atomic::{AtomicI64, AtomicU64};=0D
+++#[cfg(not(target_has_atomic =3D "64"))]=0D
+++use portable_atomic::{AtomicI64, AtomicU64};=0D
+++=0D
++ mod debugger;=0D
++ mod engine;=0D
++ mod eval_scratch;=0D
++--- a/src/state.rs
+++++ b/src/state.rs
++@@ -425,7 +425,7 @@
++ pub(crate) struct UiBridge {=0D
++     pub replies: Mutex<HashMap<u64, UiReply>>,=0D
++     pub cv: Condvar,=0D
++-    pub next_id: std::sync::atomic::AtomicU64,=0D
+++    pub next_id: crate::AtomicU64,=0D
++ }=0D
++ =0D
++ /// How the client numbers lines and columns, from the `initialize` reque=
+st.=0D
+diff --git a/meta-oe/recipes-extended/nushell/nushell/0006-Cargo.lock-Add-p=
+ortable-atomic-to-patched-crates.patch b/meta-oe/recipes-extended/nushell/n=
+ushell/0006-Cargo.lock-Add-portable-atomic-to-patched-crates.patch
+new file mode 100644
+index 0000000000..48d1706b54
+--- /dev/null
++++ b/meta-oe/recipes-extended/nushell/nushell/0006-Cargo.lock-Add-portable=
+-atomic-to-patched-crates.patch
+@@ -0,0 +1,49 @@
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Thu, 22 Oct 2026 12:00:00 -0700
++Subject: [PATCH] Cargo.lock: Add portable-atomic to patched crates
++
++fff-search, rmcp, nu-command and nu-dap are patched to depend on
++portable-atomic on targets without 64-bit atomics. The build uses
++--frozen, so record the dependencies in the lock file. portable-atomic
++1.13.1 is already locked.
++
++Upstream-Status: Inappropriate [OE-specific, follows the crate patches]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ Cargo.lock | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++--- a/Cargo.lock
+++++ b/Cargo.lock
++@@ -1629,6 +1629,7 @@
++  "notify 9.0.0-rc.4",
++  "parking_lot",
++  "pathdiff",
+++ "portable-atomic",
++  "rayon",
++  "regex",
++  "regex-syntax",
++@@ -3732,6 +3733,7 @@
++  "os_pipe",
++  "pathdiff",
++  "percent-encoding",
+++ "portable-atomic",
++  "print-positions",
++  "procfs",
++  "pure-rust-locales",
++@@ -3812,6 +3814,7 @@
++  "nu-protocol",
++  "nu-utils",
++  "parking_lot",
+++ "portable-atomic",
++  "serde",
++  "serde_json",
++  "windows-sys 0.61.2",
++@@ -5512,6 +5515,7 @@
++  "indexmap",
++  "pastey",
++  "pin-project-lite",
+++ "portable-atomic",
++  "rand 0.10.2",
++  "rmcp-macros",
++  "schemars",
+diff --git a/meta-oe/recipes-extended/nushell/nushell_0.116.1.bb b/meta-oe/=
+recipes-extended/nushell/nushell_0.116.1.bb
+index 9cb9ff917d..3d33daaee9 100644
+--- a/meta-oe/recipes-extended/nushell/nushell_0.116.1.bb
 +++ b/meta-oe/recipes-extended/nushell/nushell_0.116.1.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
- DEPENDS = "libgit2 sqlite3"
- 
- SRC_URI = "crate://crates.io/nu/${PV};name=nu"
--SRC_URI[nu.sha256sum] = "ce8b0012733f646693ff5a203face7b0337135ffa809f119dfadd8c9f1f9a176"
-+SRC_URI[nu.sha256sum] = "62e21f2d6a14430ae2701a4e6f11be42d40a11204c204bef32a8b9879f79e767"
- 
- S = "${CARGO_VENDORING_DIRECTORY}/nu-${PV}"
- 
+@@ -13,6 +13,14 @@ LIC_FILES_CHKSUM =3D " \
+ DEPENDS =3D "libgit2 sqlite3"
+=20
+ SRC_URI =3D "crate://crates.io/nu/${PV};name=3Dnu"
++SRC_URI +=3D " \
++    file://0001-musl-riscv32-Add-syscall-numbers-443-to-450.patch;patchdir=
+=3D${CARGO_VENDORING_DIRECTORY}/libc-0.2.186 \
++    file://0002-Use-portable-atomic-for-AtomicU64-on-targets-without.patch=
+;patchdir=3D${CARGO_VENDORING_DIRECTORY}/fff-search-0.11.0 \
++    file://0003-Use-portable-atomic-for-AtomicU64-on-targets-without.patch=
+;patchdir=3D${CARGO_VENDORING_DIRECTORY}/rmcp-3.4.0 \
++    file://0004-nu-command-Use-portable-atomic-for-AtomicU64-on-targ.patch=
+;patchdir=3D${CARGO_VENDORING_DIRECTORY}/nu-command-0.116.1 \
++    file://0005-nu-dap-Use-portable-atomic-for-64-bit-atomics-on-tar.patch=
+;patchdir=3D${CARGO_VENDORING_DIRECTORY}/nu-dap-0.116.1 \
++    file://0006-Cargo.lock-Add-portable-atomic-to-patched-crates.patch \
++"
+ SRC_URI[nu.sha256sum] =3D "62e21f2d6a14430ae2701a4e6f11be42d40a11204c204be=
+f32a8b9879f79e767"
+=20
+ S =3D "${CARGO_VENDORING_DIRECTORY}/nu-${PV}"
