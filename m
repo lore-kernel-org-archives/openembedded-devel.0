@@ -1,64 +1,64 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1648.1792738438669124617
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1642.1792738440091656266
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:53:58 -0700
+ Thu, 22 Oct 2026 23:54:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JRP2OUBS;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8a05da1cc1fso226751b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:53:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=h8A//gEp;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-8a058f74a54so217894b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792738438; x=1793343238; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792738439; x=1793343239; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=w8gpWczVAPe1SLttlBXId3aoYvuzhvXKj3+UlEyW3kw=;
-        b=JRP2OUBSGC401ny/p36eYxaTVp4nrcGxL47J4OO3igKNJWw34o31RBXzyQNU3yXhW0
-         j4BRcBGz9uA8qwaZFITF599TifC2ik/RPOTvctjqkjwjr0YRukaLJxY/+N249NRVHVNk
-         TyvXqH++k2CBykKfh9GC4TyZA3YwMvcQ4y9HQTfbK1jwXOrxZSttJVqQqDt5ZFNWHYj8
-         jt2z0TxMDaGN9KOkPu6ptLoP6UyHO4vRlHNbB1JTvS8kFTHioZjSR2eeVA0/q9MAMGyF
-         rFn9vKF1SgYjupTXJOb23FlalH/72G0CIxh6BBn9sGLafpguVZ3od0v+Bo2m7D2kuADT
-         /WWg==
+        bh=5K1mCmUg8UObwcuCBIi6BeQb2BVKbuIPAzwVXyr8TVY=;
+        b=h8A//gEpCBu0EcOVyWixd9V3t1pRnikVVWihtcDa3HIym7HGC7dMbzDA9uP/+is4de
+         1WAODny1qK63H3PRPf/x+iK/kYA7MsKcG6EnkfY+WWG8nPh6O8/ts4SO79MX0a7Spr5p
+         UIGre2knKj8kmedTecMSH/Ef7uMpzaNrGObpC8bzCV4yL4hxG/iR0j1mOjuEz3djTBxI
+         DBYETem+l4CH02dS4dQOUa9aPFY5aszVRUX1zWQ9Zol9NdzVsu5ycQCLqiB5azRdFeaR
+         NVkaBwG53QY+fE7EzNH0BgSKHG0zel1ShfpjoHT/YjLXCPBCk/zRLj0rMxs6ybJTWBJc
+         463A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792738438; x=1793343238;
+        d=1e100.net; s=20260707; t=1792738439; x=1793343239;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=w8gpWczVAPe1SLttlBXId3aoYvuzhvXKj3+UlEyW3kw=;
-        b=qgnPEUvK6RWlFjciMgPvkCuFZoOQRTG+eqTZm7Utmhq4emDJTCRCjZJUIxJSyz1Aha
-         awiEFkg4U+t6Tca0eoh4uL4wxhqOSKiC6bkoEpKjIFFnLZvG6SC93Za90iQISaXkaLp4
-         lcS9bKoSvADFjjun6Nx0WBdVwWgtwhX5qldRsaAO7foKeTUmSDY93nmvLL2d6gJ47/XJ
-         hwPh0g9tO91Oy6jfglBp6PGcO+Gd7EF29lBRP2evl0x1iNKDE+x9voafVIEO/se4lXkG
-         Lsmnn0Z+6EsM8rtWIT4WC4HHuPgUWrF6g27w6uKkXcEWF5pMCC9HA/5bNCUc7wntmSw2
-         cj1A==
-X-Gm-Message-State: AFq9FYJFuiUDdjFjWwvAstvSLBJwWm/zXU/k6+ptQHL876+GTGUNAZKn
-	W1MdUMRH9K54ZAG3pO7KKqRcYENsAc2YiFGXNfFbmrlTwoaw4XEL7trG73uifbk6Uv0=
-X-Gm-Gg: AYBFou1gLR9cuF2i63Sohzo0XckgxoI7QTecIXhgeufCY8r/qm85b5M3FZSg+ElhLps
-	BPhjQQeNF90KHnoO14h/IZro/vgbkAwWo4+rjckWVEVmJ/zdlvmkXY6yyFLfOoR0cTNGlUKm9Hl
-	t3hnD6E2xCR5+BX9vzGliraaVoCtnJGqAJgmiOTC2NdIqa6znOhFy58L9N0EU9lAOAOe7L/qKx0
-	qgvkcmc9Ec2ztwcISjZKZApwgnjwyjBri19XvUxo7tOWdH3HOOl3RqY7kW+OHKgc4ACkFOmXYoL
-	y48elYew8NSSpcQlPtbLZkdFPOF4HdlM7020jrjcavy1w0M2GNZY22niJv738jNtIO9ppf8hI7G
-	rAwCxY7J201ZswUm+r7puZSaGfCb+UbvBh1miYFUyN/V/Erw5OFaoNPRENg0RAQYr338sXu6nv5
-	8OOMWB8o8d/xoBaeml7p65Lg31OKnOpnQGZzOZXaao+TyGLHcta4C2SYQw7rDkvJtwyI5KiHVvd
-	TiDcKnEHKWUbI11V9/oEHC8tZ8UR0Ux3+/3ipSU47oBKNvmApQ88DvjaQl6UDosYpbLdeE8HzDt
-	TB/N6Mf6WEGeAjsmurbleTGh6CY2zB80FVAZVxR1k75oIjeGJbyZjWbb/N/NKRy5Umg/HOqGq+X
-	878iPl52Xc2elhp2Mi7zpWaTKqJCCsryi36MHfTQGQlqY9M+s5yDc/IApx4EY2JzzwTeGIGHdfL
-	i95FOMBeV1m5k0zs+B55DZ0JAjTthA6ReG4ztDBg1fIBpRuRfhCWzcJePYvnsXlwg6V13v9eDhc
-	8fbJKARO69bbRWEoBCbpOWY0Di6Hofw
-X-Received: by 2002:a05:6a00:1c8f:b0:893:12e5:c07c with SMTP id d2e1a72fcca58-8a2c69af806mr1189224b3a.27.1792738437897;
-        Thu, 22 Oct 2026 23:53:57 -0700 (PDT)
+        bh=5K1mCmUg8UObwcuCBIi6BeQb2BVKbuIPAzwVXyr8TVY=;
+        b=fQ4Z1ESwue4e80njJPFUAGl3CE4lvCnOarZFNYjFIFWz9uKhx+/uvZ003uMyMRzXu/
+         njsyF5D9D2uprCGNWI7MbkiALf1bp1q9IkJlPnDqgMTrdKGuvFXTHlRUDP6xLftzkD2h
+         QUmXtWmqCULuoCnriKe+39GVxUwZVgURto1nGS40vwitMlTkSiuEJ1boKeG+lSCTQBl6
+         NF8zB7dEeCB1t95c5aLC0CfyUXoMYM5di2uSrTv9wZsLpaQ1GwqTxSJO/m3T0n/7LQa0
+         7PdioMY9tjUB46u/X0rHCkPr34ouqy/bR4DJVhlPtM1g+15r26KulLv/570cuiux57LH
+         b8tQ==
+X-Gm-Message-State: AFq9FYI8Zbhm3qBXKB0CVfl9J+yR6LR0fv9Tms6DRzDGyI8kHJpnAAfW
+	zBHSQ0AKP2+lg1nMB04l8ccQwWCqEzcCdrkbAzgv1GHIyhlR7cxAGcR9cWPbD59eiFI=
+X-Gm-Gg: AYBFou23hSCMTfCdgQoEiJ3ZB8lMx6Q7zSNApx//vGLMXw/P+tLLyI1GYOHzwdfdW4m
+	JW2KzxIrXDX817FvmqSL3QQ2DboLjaTtbo0OZPBvsvnvrU/TSoU2T18NnLgBJkMMvE+boJfqM+M
+	yndZgwYNY6/X+wOtgZi4+ldf8QPfSLrFgun+bMo4PtzZ9y1sMqelSsHI1YfQS/wX0nTMo4/JmkH
+	VDES+CTwXWqYBdsyQAg9SVDRm9CE/7pZGQSR9VGceOeOFiXLIJvA7Gu4WG45TZzp8sVkqG03wfy
+	6lSSqg71tF+Ar+orNnKN/GvFefST/fv/qLc/EzU+mOPKDBrBuHkVltwcRiC9+cY0ca3uLMe6luz
+	ND721W78uOHYapOvlyi7ixeMae4ZI6mA+fY/fZwscFWe7RMc2qLShhw76H+k5dVyGJPxoLG5aLk
+	ba/04dw2tl1wsiv0DSIW7PLGBKlGluhmFTi/4pHlaCBNj96zB4wRi4/NvA8CvfuBQI/cieOByvZ
+	WhiwmRYX0v14HeYOIJa/06aMKdiwy7XUdvhCz9XTQEwFpoHqN0S0ulC6wN0+l2frpCKRZFMNKuf
+	BeWR5t60gLvUSt8lqxJE5sQQnj6Vc5CqvKM6EK7yl8fAuEuP405/VGWnUYLRxkQVr2i0Zzr+HMt
+	V1cqOxmJrPeCc4bZiiXSMmndJyKxmiUoEvgq7uaUzour8QTq5u+dhjOn7r+ln17bswXZMvHnuFx
+	LL06Jm9MvIBjtQHQVNW0mg7bkHeCIEB2idadC1SAzJeVryIcsHamZt4/Iloqmj8OflUY5d0z0OB
+	WtfW6nhQAfwXZLxool5wMbZgInN3ZU=
+X-Received: by 2002:a05:6a20:d529:b0:3e2:59b5:a68d with SMTP id adf61e73a8af0-3e37675088cmr1095072637.67.1792738439428;
+        Thu, 22 Oct 2026 23:53:59 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.53.56
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.53.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 23:53:57 -0700 (PDT)
+        Thu, 22 Oct 2026 23:53:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-networking][PATCH 04/29] rdma-core: Link libmana with libatomic when needed
-Date: Thu, 22 Oct 2026 23:53:25 -0700
-Message-ID: <20261023065350.3228996-4-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 05/29] poco: Fix libatomic detection with optimized builds
+Date: Thu, 22 Oct 2026 23:53:26 -0700
+Message-ID: <20261023065350.3228996-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
@@ -66,110 +66,105 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131328
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131329
 Content-Type: text/plain; charset="utf-8"
 
-libmana uses 64-bit C11 atomics, which riscv32 lowers to
-__atomic_load_8/__atomic_store_8 libcalls, so linking libmana fails:
+CheckAtomic.cmake tests whether libatomic is needed with a program that
+loads from a local std::atomic. With -O2 clang folds the load away, so
+the check passes on riscv32 even though 64-bit atomics need libatomic,
+and linking fails later:
 
+  ld.lld: error: undefined reference: __atomic_fetch_add_8
   ld.lld: error: undefined symbol: __atomic_load_8
-  ld.lld: error: undefined symbol: __atomic_store_8
 
-Add a patch that checks at configure time whether 64-bit atomics need
-libatomic and links libmana with it only in that case.
+Add a patch that makes the test programs use a global atomic with a
+read-modify-write operation so they cannot be optimized away.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ibatomic-when-64-bit-atomics-need-it.patch | 69 +++++++++++++++++++
- .../rdma-core/rdma-core_65.0.bb               |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core/0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch
+ ...-atomic-test-programs-from-being-opt.patch | 62 +++++++++++++++++++
+ meta-oe/recipes-support/poco/poco_1.15.4.bb   |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poco/poco/0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch
 
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core/0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch b/meta-networking/recipes-support/rdma-core/rdma-core/0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch
+diff --git a/meta-oe/recipes-support/poco/poco/0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch b/meta-oe/recipes-support/poco/poco/0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch
 new file mode 100644
-index 0000000000..6817904790
+index 0000000000..0cc17d7dbb
 --- /dev/null
-+++ b/meta-networking/recipes-support/rdma-core/rdma-core/0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch
-@@ -0,0 +1,69 @@
++++ b/meta-oe/recipes-support/poco/poco/0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch
+@@ -0,0 +1,62 @@
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 20 Oct 2026 22:00:00 -0700
-+Subject: [PATCH] mana: Link with libatomic when 64-bit atomics need it
++Date: Tue, 20 Oct 2026 23:30:00 -0700
++Subject: [PATCH] CheckAtomic: Keep atomic test programs from being optimized
++ away
 +
-+shadow_queue.h keeps the producer and consumer indexes in
-+_Atomic(uint64_t). On 32-bit targets without native 64-bit atomic
-+instructions, such as riscv32, the compiler lowers these to
-+__atomic_load_8/__atomic_store_8 libcalls, and libmana fails to link:
++The libatomic checks load from a local std::atomic that never escapes.
++When CMAKE_CXX_FLAGS contain -O2, as distro builds usually do, clang
++folds the load to a constant, so the test program links without
++libatomic even on targets that need it for 64-bit atomics, such as
++riscv32. Poco_ATOMIC_LIBRARIES then stays empty and the build fails
++later when linking against PocoFoundation:
 +
++  ld.lld: error: undefined reference: __atomic_fetch_add_8
 +  ld.lld: error: undefined symbol: __atomic_load_8
-+  ld.lld: error: undefined symbol: __atomic_store_8
 +
-+Check whether a 64-bit atomic load/store links on its own, and if not,
-+whether it links with -latomic. Link libmana with libatomic and add it
-+to the libmana.pc private libs only when it is needed, so targets with
-+native 64-bit atomics are unchanged.
++Make the atomic variables global and modify them with a
++read-modify-write operation that depends on argc, so the compiler has
++to emit the atomic operations at any optimization level.
 +
-+Upstream-Status: Submitted [https://github.com/linux-rdma/rdma-core/pull/1831]
++Upstream-Status: Submitted [https://github.com/pocoproject/poco/pull/5585]
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ CMakeLists.txt                | 21 +++++++++++++++++++++
-+ providers/mana/CMakeLists.txt |  5 ++++-
-+ 2 files changed, 25 insertions(+), 1 deletion(-)
++ cmake/CheckAtomic.cmake | 18 ++++++++++++------
++ 1 file changed, 12 insertions(+), 6 deletions(-)
 +
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -510,6 +510,27 @@
-+   RDMA_DoFixup("${HAVE_STDATOMIC}" "stdatomic.h")
-+ endif()
++--- a/cmake/CheckAtomic.cmake
+++++ b/cmake/CheckAtomic.cmake
++@@ -8,12 +8,17 @@
 +
-++# 64-bit C11 atomics are not lock free on some 32-bit targets (e.g. riscv32)
-++# and the compiler emits __atomic_* libcalls that libatomic provides.
-++set(ATOMIC64_CHECK_PROGRAM "
-++#include <stdatomic.h>
-++#include <stdint.h>
-++_Atomic(uint64_t) v;
-++int main(int argc, const char *argv[]) {
-++  atomic_store(&v, (uint64_t)argc);
-++  return (int)atomic_load(&v);
-++}")
-++CHECK_C_SOURCE_COMPILES("${ATOMIC64_CHECK_PROGRAM}" HAVE_ATOMIC64_WITHOUT_LIBATOMIC)
-++set(ATOMIC_LIBRARIES "")
-++if (NOT HAVE_ATOMIC64_WITHOUT_LIBATOMIC)
-++  set(CMAKE_REQUIRED_LIBRARIES "-latomic")
-++  CHECK_C_SOURCE_COMPILES("${ATOMIC64_CHECK_PROGRAM}" HAVE_ATOMIC64_WITH_LIBATOMIC)
-++  unset(CMAKE_REQUIRED_LIBRARIES)
-++  if (HAVE_ATOMIC64_WITH_LIBATOMIC)
-++    set(ATOMIC_LIBRARIES "-latomic")
-++  endif()
-++endif()
++ # MSVC and Apple don't ship/need a separate libatomic.
++ if(NOT MSVC AND NOT APPLE)
+++    # The atomic variables in the test programs are global and modified with
+++    # a read-modify-write operation, otherwise the compiler can fold them away
+++    # when optimizing and the check passes even though libatomic is needed.
 ++
-+ CHECK_INCLUDE_FILE("linux/dma-heap.h" HAVE_LINUX_DMA_HEAP_H)
++     # 1) 32-bit atomics
++     check_cxx_source_compiles("
++ 	#include <atomic>
++-	int main() {
++-	    std::atomic<int> x(0);
++-	    return x.load(std::memory_order_relaxed);
+++	std::atomic<int> x(0);
+++	int main(int argc, char **) {
+++	    x.fetch_add(argc);
+++	    return x.load();
++ 	}
++     " POCO_HAVE_CXX_ATOMICS32)
 +
-+ RDMA_Check_SSE(HAVE_TARGET_SSE)
-+--- a/providers/mana/CMakeLists.txt
-++++ b/providers/mana/CMakeLists.txt
-+@@ -8,8 +8,11 @@
-+   wr.c
-+ )
++@@ -28,9 +33,10 @@
++     check_cxx_source_compiles("
++ 	#include <atomic>
++ 	#include <cstdint>
++-	int main() {
++-	    std::atomic<uint64_t> x(0);
++-	    return (int)x.load(std::memory_order_relaxed);
+++	std::atomic<uint64_t> x(0);
+++	int main(int argc, char **) {
+++	    x.fetch_add(static_cast<uint64_t>(argc));
+++	    return static_cast<int>(x.load());
++ 	}
++     " POCO_HAVE_CXX_ATOMICS64)
 +
-++# shadow_queue.h uses 64-bit atomics
-++target_link_libraries(mana LINK_PRIVATE ${ATOMIC_LIBRARIES})
-++
-+ publish_headers(infiniband
-+   manadv.h
-+ )
-+
-+-rdma_pkg_config("mana" "libibverbs" "${CMAKE_THREAD_LIBS_INIT}")
-++rdma_pkg_config("mana" "libibverbs" "${CMAKE_THREAD_LIBS_INIT} ${ATOMIC_LIBRARIES}")
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
-index a465bda583..39b5690d39 100644
---- a/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
-+++ b/meta-networking/recipes-support/rdma-core/rdma-core_65.0.bb
-@@ -7,6 +7,7 @@ RDEPENDS:${PN} = "bash perl"
-
- SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=https;tag=v${PV} \
-            file://0001-cmake-Allow-SYSTEMCTL_BIN-to-be-overridden-from-envi.patch \
-+           file://0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch \
- "
- SRCREV = "58e40801bfed5a8befc0881594820fa0a0baa4a1"
-
+diff --git a/meta-oe/recipes-support/poco/poco_1.15.4.bb b/meta-oe/recipes-support/poco/poco_1.15.4.bb
+index f4c572d4ae..0751165267 100644
+--- a/meta-oe/recipes-support/poco/poco_1.15.4.bb
++++ b/meta-oe/recipes-support/poco/poco_1.15.4.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=http
+            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
+            file://0002-DataTest-disable-testSQLChannel-test.patch \
+            file://0003-quill-rdtsc-fallback-for-32-bit-powerpc.patch \
++           file://0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch \
+            file://run-ptest \
+            "
+ SRCREV = "6a5667f432e1c5fe5591025ab03a2f8df37116b4"
