@@ -1,162 +1,97 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1644.1792738441654316128
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1653.1792738445907047929
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2026 23:54:01 -0700
+ Thu, 22 Oct 2026 23:54:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rQ3dGtI6;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-cd6acc50b8dso222822a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hqunQHq5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-89f639ba307so233584b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Oct 2026 23:54:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792738441; x=1793343241; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792738445; x=1793343245; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DrlRb7UOiEUtDi+kCrP4a/5P9StNy3eUIR60BrSM4ek=;
-        b=rQ3dGtI6hq77cFrSMvjx18Ijp1NdDIHgWNYdNUyZdYaeGmq9DXmDnmCt5uVX4Krhj9
-         pvz05iGcKVdUSwJ8EWerdV72k4OBg2+YaRVReeOMOllzWQiEj6rJhFHqZwvYtSw8RcPE
-         QvMHrgk3WYIytVkJoOWc6UD3hq8RcxdXBM4y3YihY0oFiQ5ZZDufMBw+WcbxbxGfaJWg
-         Xt+E82swtAp5AZT5fnUjNm9EhTT2Zoqa40D4LgDtR6852J9J4KVys61KJRw5O9u502zW
-         zqSRDIuKvRUno10cYkJPR6CTyuA7cvbLSfo5Px/IrtYKRuF+mz5k5DTzWbrh4OQh4cCq
-         tXjg==
+        bh=1ETvMeuKEplFT0AcnMrDWFu/1GpAv92DVSv7ACKc8EM=;
+        b=hqunQHq50gi2zTws45OUVOx4ZrRKufyWDr1/MLF99Vm9Cq7M24+PLfLxRnhSoktZs6
+         tjXCY6I8SXpFWDjfVfnMlk5jjMKjY+VnwwmoyreKr7IdSroKBEt9zpa+gl15TN30Xw/i
+         9Pn+ag2Er+m6yePgk0aVG+FpMs6hIcdwcGcwkDDQBkBdY3H3QsFSJJ+NtAPtCufIdmfN
+         h2ajnY+nMa0kMBKCjEZgwAtTYS+nOFOubQQ/vGyVCvvXzKzN0i7ACzagwL6SchRv+JBe
+         0+JGKi6SfLw8UVxNnrKQtXxCOi5TomWJBr6SDtIWXV8MKJ67mzhP/aTlgCCi5p5tz6Qw
+         8qpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792738441; x=1793343241;
+        d=1e100.net; s=20260707; t=1792738445; x=1793343245;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DrlRb7UOiEUtDi+kCrP4a/5P9StNy3eUIR60BrSM4ek=;
-        b=nMFgfJd34+dwRm7YMGlKuIe6RELc1kNVFOIgZBMJ50MwuFjUAI1QrLspXdLZx3xyVF
-         hy1iAx926BGEWsIc6aLOtFbXUDvTyBnzy6DFOtUMvMpJKMPcOj+aXKHPziHrmfGFRuHR
-         0GaBkkfxvcJF9Zl4+qK6rP5IytPQan1h0RaQUvqpURRelg1Xa8oCtl3xu0J6dEgXgVhg
-         SNklwgOxmgOpc9SZPtkjeC5Uor/pPkBwXwN+RFL1JiRI6STlj/T3vvOJH3IXZBVS8FeB
-         xIrY4hBa0iTxjCcTrypGhq4AHAriFH7bNY+PC2XdEJJFHEHe+FQGq6v0DgsVw1v8RBgn
-         A/GA==
-X-Gm-Message-State: AFq9FYJYF2Nj5n1NmK5k/s8XBai7oH0Fm/jNZb0se/WlN+/Vpl63eZ9k
-	K0xHE6UdR8btSOFxS87OB66gzdRxAyxO3Q5wcR7KFRN7l7RHBcXGuv8EMqGEO6amvv4=
-X-Gm-Gg: AYBFou1xvXQ73J1fWWoRdgiq6w0a6bnQr9G/IvfzjovswE4izjYVwmi3F9/C1eMFZHk
-	6/aX72l5y4RMYvVZrQ1Ua416BOOPED88/8AAPUGyFcF/ehv1bLoIISc1ExfFAQKVf6ncXWpI+dY
-	jge2Cey4exkSeuEnor2STmaVczKm5Oh5pvHHJsgJPvqIGUC9OArGJyHhsj5UqQngNK4Wfa94cta
-	l+uNuS8UVGguvkQ+gBrzewWdXz9SnXW2mTjmQfxw4N5vitzzMlUcbzKKVe0+TSoybzdjxVwi8Gh
-	gk1yMN8b0vpqb6Zk5YcwfzvMsISSDyZyXMn9RQDw2aD4TWpABRMoodQRjX2mMr2c7JN/b+3glQ5
-	abQA73glRdkvgFvT7LdzoiPO25uFVJOgKCg5mEdvchXqnP0Gk0Y2pFXcKfuFhYIsZJb2MHfHQZq
-	1fbQZEt6QDD4zFgTLmwIgRGtX23WS2jcCvN1kzJNx/aBS2PC+37pcw2M2pmH8zhBt4YzagRiaDN
-	1j0kvU0wDZDvC3a0/7jJaGw6SbSnr3d0zk5EQDbCv1mJrMpMbY49xIEl+QW2JCk0SBWOsAjuYxc
-	BVaDWx5yJFOcoBOGR7Y8+yWS+6RxG40MisYDeOqMU8wg2aqcVBegCTsKqd3tLOQExatB7rVoreh
-	fOpqJiyg90/wX4cEYcypZiAjDm865w/0f5BF5Y6SlbT67bf9ydAC8CpD3WzhKLKIvGUdPxPKR8i
-	tiZRmlQHPxToTEnnchVkB1OCS2e9HrLX4Afu+jerdCwO1J5EYYY28tDWb2ON7nb2Sz7Zefwt6Er
-	CNixrLAAoglqNfVBDQxOLaJ/fNgFkMaBu5WF4eoRnStuxZhnQENGQ==
-X-Received: by 2002:a05:6a21:7084:b0:3e1:af52:6d06 with SMTP id adf61e73a8af0-3e37672bf25mr979058637.52.1792738440675;
-        Thu, 22 Oct 2026 23:54:00 -0700 (PDT)
+        bh=1ETvMeuKEplFT0AcnMrDWFu/1GpAv92DVSv7ACKc8EM=;
+        b=SAkClH0vX724NHcgILa9YQI5N3Cna4WukfM6lTvJCNfJJbYdFfMHO7VTPJUhLpX9qI
+         jFyb7UfP7O4Eui6u9NLtK6tPCRQAV7aQ5ubpK7PeRP2gxGl0fDrxkHGEM5Fshs2MfAF9
+         pv5u1BgfmQc+uvpYftSd+41tzOLOJmhZ+LhuVx9MBsJS5UOm56fppsejoz03zs+VyFxk
+         PxLoUCRLshqH4hYKJKzvBGuCNVdHotr+2UvPoi4VmgtQEYJv2kmVjX81rNsFaNKxp26G
+         iIOkrNyhmCa6L30VafzOiMEoNEQ9UuM6EPAzIIa9WVB6SEMWvVY3/nKYvws4R0RtHjKN
+         W/kA==
+X-Gm-Message-State: AFq9FYLcIQ8fABoGW3lcJQzWatk1p/Tq75e8mZcqzmPbwuVtefBJWqyU
+	ECDgQxKo1UJC3vltznmOmBIBPWIhQSy4ABmF9ICZl9CL0+XcfrCIsFmHY4V5tYRBCrI=
+X-Gm-Gg: AYBFou0oNS1cllQ6g3+ixPWYWZpbb5xBlDuZcpop1n20dbPJHrer2iVEd47ZMws5TjS
+	rskL6NG94b1FOZOMmqJov1wuhHR1oMbtvJx8fVI95WETuSUnY8Atwbfbronph7nYNtw+buyOsW4
+	af3pdf9wryWX6atgDcl1PEGzMAbEexjiWutar8x7w0fFxsgtZzCxoWhMY5km+tSIZofW0H1xtqo
+	vzG/SP2ZCg3VarLcWrfuQYrnlHaD9ztyHBPW3+YS44D629FWZDtgmyPNMrlCH6KGZ4RNtCwasCE
+	Ptqyhoe+UlaDiXAnHBPdAszKwfYvzhtMRDc8FxQoxdhp/v5z2iqKNS6Yrw3iRczpC71MkfU/gA8
+	OlO3KakNEGQ9VvLLMxllb34YbOcEn38uICYWJCeYnoT8t06IF3mtR+QmwNGcw0quce7eLsaFa7m
+	U0EjADJPUhrTk4I6/qGj1AEMYqpGV1i5Tv+fN6MutfipFXRMG9IPXtJoWeTJguQDociOO5xyKAd
+	a/8CcW4ukJZQ5Xnap47hw4F+fQ3WRsZ9OJNish4cWvfnulPc+1WkeDTYIrIXTZ0CwXHzH7FGbTM
+	xdAD1Mydn6Bw2MTwz9zHEQLDmTn+4xapJOr36S03Fwn9vCqRq41tC4BRg7TwWywBFFLnUSh8OS8
+	bk43Sy08kUnWBEJ/z2Py7WGA+r2LG4WXcq1O/sy+j1n1hYvDRp3I6IVdbz2XVglPWeZdEe6+jZo
+	bNYos8ddKOticwyB9L5X+E1ezAw/QWAEg84ByrEXBK6OEnHEhp0FFrsv9IW1O2apGBCWAEc4zfp
+	X1QCVaU7ZfXL88M0jlYFhkJy3GYpLV9
+X-Received: by 2002:a05:6a00:1d91:b0:89e:8242:f35f with SMTP id d2e1a72fcca58-8a2c66a9bdamr1137595b3a.13.1792738445236;
+        Thu, 22 Oct 2026 23:54:05 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.53.59
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a2c92f7bd8sm384769b3a.50.2026.10.22.23.54.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 23:54:00 -0700 (PDT)
+        Thu, 22 Oct 2026 23:54:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 06/29] fio: Link with libatomic when 64-bit atomics need it
-Date: Thu, 22 Oct 2026 23:53:27 -0700
-Message-ID: <20261023065350.3228996-6-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 10/29] android-tools: Mark incompatible with riscv32
+Date: Thu, 22 Oct 2026 23:53:31 -0700
+Message-ID: <20261023065350.3228996-10-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 References: <20261023065350.3228996-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131330
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2026 06:54:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131334
 Content-Type: text/plain; charset="utf-8"
 
-fio uses 64-bit C11 atomics, which riscv32 lowers to
-__atomic_load_8/__atomic_store_8 libcalls, so linking fio fails:
+do_compile maps HOST_ARCH to the Android architecture and fails for
+riscv32, which Android does not support:
 
-  ld.lld: error: undefined symbol: __atomic_load_8
-  ld.lld: error: undefined symbol: __atomic_store_8
+  ERROR: Unsupported HOST_ARCH=riscv32
 
-Add a patch that makes configure check whether 64-bit atomics need
-libatomic and add it to LIBS only in that case.
+Mark the recipe incompatible with riscv32, as for powerpc, so it is
+skipped instead of failing to build.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ith-libatomic-when-64-bit-atomics-ne.patch | 56 +++++++++++++++++++
- meta-oe/recipes-benchmark/fio/fio_3.43.bb     |  1 +
- 2 files changed, 57 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
+ meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch b/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
-new file mode 100644
-index 0000000000..7f6c115ae0
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/fio/fio/0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch
-@@ -0,0 +1,56 @@
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Wed, 21 Oct 2026 00:10:00 -0700
-+Subject: [PATCH] configure: Link with libatomic when 64-bit atomics need it
-+
-+fio uses 64-bit C11 atomics, e.g. atomic_load_acquire() and
-+atomic_store_release() on the uint64_t inflight_issued and
-+inflight_numberio fields. On 32-bit targets without native 64-bit
-+atomic instructions, such as riscv32, the compiler lowers these to
-+__atomic_load_8/__atomic_store_8 libcalls, and linking fio fails:
-+
-+  ld.lld: error: undefined symbol: __atomic_load_8
-+  ld.lld: error: undefined symbol: __atomic_store_8
-+
-+Check whether a 64-bit atomic load/store links on its own, and if not,
-+whether it links with -latomic, and add libatomic to LIBS only in that
-+case. The test variable is global and the stored value depends on argc,
-+so the compiler cannot optimize the atomic operations away.
-+
-+Upstream-Status: Submitted [https://github.com/axboe/fio/pull/2163]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ configure | 23 +++++++++++++++++++++++
-+ 1 file changed, 23 insertions(+)
-+
-+--- a/configure
-++++ b/configure
-+@@ -667,6 +667,29 @@
-+   fatal "C11 atomics support not found"
-+ fi
-+
-++##########################################
-++# check if 64-bit atomics need libatomic
-++# The variable is global and the stored value depends on argc so that the
-++# compiler cannot optimize the atomic operations away.
-++cat > $TMPC <<EOF
-++#include <stdatomic.h>
-++#include <stdint.h>
-++_Atomic uint64_t v;
-++int main(int argc, char **argv)
-++{
-++  atomic_store_explicit(&v, (uint64_t)argc, memory_order_release);
-++  return (int)atomic_load_explicit(&v, memory_order_acquire);
-++}
-++EOF
-++libatomic="no"
-++if ! compile_prog "" "" "64-bit atomics"; then
-++  if compile_prog "" "-latomic" "64-bit atomics with libatomic"; then
-++    libatomic="yes"
-++    LIBS="-latomic $LIBS"
-++  fi
-++fi
-++print_config "libatomic for 64-bit atomics" "$libatomic"
-++
-+
-+ ##########################################
-+ # check for wordsize
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.43.bb b/meta-oe/recipes-benchmark/fio/fio_3.43.bb
-index 928b31ff3d..e6445c2bfb 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.43.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.43.bb
-@@ -24,6 +24,7 @@ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
-
- SRC_URI = " \
-     git://git.kernel.dk/fio.git;branch=master;tag=${BP} \
-+    file://0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch \
- "
- SRCREV = "d2dcd7e053d1902d2420f151c83990e6acdd9f8c"
-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+index 65529c1b53..963e8a207c 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+@@ -78,6 +78,7 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
+ COMPATIBLE_HOST:powerpc = "(null)"
+ COMPATIBLE_HOST:powerpc64 = "(null)"
+ COMPATIBLE_HOST:powerpc64le = "(null)"
++COMPATIBLE_HOST:riscv32 = "(null)"
+ 
+ inherit systemd
+ 
