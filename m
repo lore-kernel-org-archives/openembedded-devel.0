@@ -1,94 +1,236 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3750.1792837532427750729
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7887.1792854833230322322
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Oct 2026 03:25:32 -0700
+ Sat, 24 Oct 2026 08:13:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ArSUonZR;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cd6028ff33fso620610a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 03:25:32 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=WZ0b1wT7;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a1ec92f655so18130175e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 08:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792837532; x=1793442332; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1792854831; x=1793459631; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5HoE+XWoP92PNkb31Rtxuxtpw08zAizvBzFVPuXf3NI=;
-        b=ArSUonZRKxF7tx2ZsoX5RwUspadySyT9WPpclxO2CVFXjBhvUaTVAH8VdCTXXSxov8
-         2F71Bqez6NmfWzBf5qFoXI13H/O/4EQ3E9uy9Gs2cE/FqdU5SDXeC7pRWe5GOzJ7dXO8
-         +Os2hwp/5OlH1ZvVvqwkWNMwrWlI0O4kfMBmYhyivpVu44gz+jB2kPoUYyqc0V5K+bP8
-         DjdqJCVYJOI3T0x/AAw8cMs4jJmpuC/V5GLB3Zo4CXecSGQirBfwJcH4MliybZTsB82d
-         OZivH9zHJ/YZ4zlhAewKU7biKsVbFjZKYy916ODDDV3J3kaQK2EFs1d90PpER5SwE2gz
-         1Bww==
+        bh=RFzlkP+fslPMzwqzGlwFyALlbKFp96YTPokA9W/FX2M=;
+        b=WZ0b1wT7g/IUJRYSYaWr+DE1EYXA3oJdMLJvwX8GEjJ2BpyZvyisCZChuznSk7kyg1
+         MYdaQRkyFREMZTKwIVY2MupyU/QrqIUGoU2r3UGNtkaifmzOxfrFxAejLvdJG+JV0hFl
+         4VBez0kXVaLhJ4g/x5UaQm3R5why8/0a6nks4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792837532; x=1793442332;
+        d=1e100.net; s=20260707; t=1792854831; x=1793459631;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5HoE+XWoP92PNkb31Rtxuxtpw08zAizvBzFVPuXf3NI=;
-        b=POc1FtJsc1afnagvfg7pCijqZnJagVdx6mgnEj6lSlwMJT1BFYJTTPJtEAInirb58W
-         GWqhr0VkF9jbZaSIRXcO02+Z2nTZm0cyehC56iLcEJ2n1/3A6MtZa9FSoDPTWVt8SxAW
-         CyyMXeAPrUaWu5jif87FSxfsQNufUs5hSz9GK/GVSTz2ePV4KdK5j4hY46kxNMbkCh0b
-         XflzeJM4RfxiYOqKJ7NoDw441X/kV0cqBzkW8JHt0PBB6gTiqyur6OaALga34aQeAkYm
-         EGFh8ioilIL8ofOmWGg+RWeNy6+BhGCfXQuDR7h4YIyne5K16wFyIWNpt4yAY2cErL8d
-         dcDA==
-X-Gm-Message-State: AFq9FYKp9FslKrJLm8MOUrI2O+IjgpXWPftzzZ41ZH4ylk4ds7fLcKsn
-	xIQgUSRWFKNrxluLl+USrN+dK50fJFUAgQztiqDlrNWvsynCMkvtw7KOnVzVmil7
-X-Gm-Gg: AYBFou25SCr7ENoqgHT/JIUgsKSltNZSCeuTyVeznmwwjXqSPnHdlc7p7zEFU32sUhm
-	kdOVjvL9cl/O8m+Kvuy+8bhKtouJjEgkT5IFn+zFjEAuPGITdQr6wpESbGCmeBkUCLs4cPvk1mM
-	sRq7PSpzfsrg9TKZXNjiuTGgTzgKAr9ppKVvczBGYX4HG/C+hjnWKwWBe5MEyPdvDpaGthhr/zA
-	l7HiACC7rshw1MOnYRDyiOZ3n24lqUbJYX8t1GFKISaeV1e5lYweMliz7w6nR/H0ZefNR589wqJ
-	q8mEvq9FYEvFPEyGpwfF+hRkhWJQaGLkJX6H4983JH8xm0BStURFEBDL9oPhRc+n7rT2Jdl3cDa
-	t0MMKIEYwbWL2u8V1xrvqHChuUrPDYJgvvXMVRFEDlMnJOBhgiiCLqTdvdKyKN8TFo2sWpqJUB/
-	eTwS6mj2z+ho+y7ogfdz88ctEVwlS6GhQAGtvsu6g9+mmrY7pN26Tfdz863E83SNDwwULSIqai6
-	xaN72QPUPCTGHxAYJRz8qOjjsWDd5R/dFIEgNU4fx2rjWsCTpqf+5Vs2LGs6lP3GxjSOoSkmGGR
-	c5yso+J3nmJGH3ri7h5WfvCquf47yyM=
-X-Received: by 2002:a17:903:240b:b0:2e6:1828:59fa with SMTP id d9443c01a7336-2ea9c69aa11mr13757265ad.18.1792837531787;
-        Sat, 24 Oct 2026 03:25:31 -0700 (PDT)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea9b1dfee1sm4293935ad.64.2026.10.24.03.25.29
+        bh=RFzlkP+fslPMzwqzGlwFyALlbKFp96YTPokA9W/FX2M=;
+        b=bLMecM27wRCFTU0nuARxG5wMGa52XwNmywPtn7M2GlGZpn0NV18i8RyPsZ+Goby6km
+         9qS8SVgCkJePNTRI6KgiI6wYt5xnxNm6f2Ff/+WGYV54gf1WD7WQ3sShgeFgENREsRUM
+         Qac+Yt7MUAy+B9/Ljsy7Soxb2t8g4zvY5GtExjGIFyKj1Tya/RFwwBiKxJiwwQxXee20
+         TqgebE7LGOVXv1oM5jh/YccUvDcXd35gUa+6zkXz1oqlJO0h+1ijQgYFSQ5gEbz1UU/y
+         qEqIz6VpfIntl3QedY0ntftI777qYb5xWhKtz/AbaZMGsP/EG8LIg1Lldb30Q8vXNE9A
+         XeiA==
+X-Gm-Message-State: AFq9FYKhs3A3xHKChMGMG6q2VAsZqV1QbciyxpM2bRJzsg42b2I/Bsgg
+	xuc9HQJekTyXBi4iUwjCq12zx0upIplA+g2iP7ktoqQpHpsOcYiTSqAfv9eTzgCj/VJXpDgOef9
+	y29Ps
+X-Gm-Gg: AYBFou2wWfH9ydzwT6JtJO4TSUkBtOdmUCRbbcGaUqJflCoc61foaCC/9laWLQi7SQ/
+	qKlwCyLDm2yS8rrTMLc/boFofReLT9uBHVqfEG+NE9FJ1cy/gO87W7LTsxDkEHvNSguKnd8RQk5
+	hYLdNekqhLegEnRalyW7IX5YZg4uueizRlSpWiFaTsxkjlvpKtM0MK/cT/ZMy0lzX2WAMQsP7Hu
+	3ILKWf01c/9uPaeo1kwfqLMkGJCEdFb91eQY9VEDOPKGtKdEJw24RhXfJnUw9qPt9ZPzWZktQmJ
+	BawrRkVZ7ZDBevy8TQKwdtJ9BFL8yxGHetxPjTI53gy19+mPD3CaKkqSj80sjEKq/vJYpQbdg1o
+	pPs9St1f3O77HjI9vh+YtIgly4dsbv7jJCytrPmufawGY6aOTcT5YpNOLMaljedDiaMv3l/Y8EC
+	pWhympFlazP2iPSqj3hG0K8jr03eOG2ptMcpiMe+6t2UtfSPFVfofnh24IDLKv4ffYyfMrmRszV
+	+hRLjP+ZkknhP8D12cD+vSKL8qMqdxRXViaa7OwgHzMGjOrhvkZmDfz2zjpSrh9h9WK97k1i6kH
+	D4nZ7auQrOI0hX2kW5ZL9rQWBn6tPWpBUoDBwk5PMXOWVxxbsHwlsdFlN17SlV9R9GpUxDFeOEz
+	uio6XqA==
+X-Received: by 2002:a05:600c:19c9:b0:49f:ffa2:1c72 with SMTP id 5b1f17b1804b1-4a35ae90d8emr37878215e9.11.1792854831474;
+        Sat, 24 Oct 2026 08:13:51 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a55e99fsm60762195e9.4.2026.10.24.08.13.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Oct 2026 03:25:31 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+        Sat, 24 Oct 2026 08:13:51 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 7/7] 7zip: upgrade 26.04 -> 26.05
-Date: Sat, 24 Oct 2026 23:25:07 +1300
-Message-ID: <20261024102507.2256303-7-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261024102507.2256303-1-ankur.tyagi85@gmail.com>
-References: <20261024102507.2256303-1-ankur.tyagi85@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-pikepdf: Upgrade 10.13.0.post1 -> 10.17.0
+Date: Sat, 24 Oct 2026 18:13:45 +0300
+Message-ID: <20261024151345.2917695-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261024151345.2917695-1-leon.anavi@konsulko.com>
+References: <20261024151345.2917695-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 10:25:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131399
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 15:13:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131401
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Upgrade to release 10.17.0:
 
-Changelog:
-https://github.com/ip7z/7zip/releases/tag/26.05
+- Added {class}pikepdf.ObjectSet, which records the objects that a
+  walk of a PDF's object graph has already visited. Objects in a
+  PDF are shared and may refer back to their ancestors, so a search
+  that only limits its depth can take exponential time on quite
+  ordinary files. ObjectSet.add() reports whether an object is new,
+  and tells apart direct objects and objects of different Pdf,
+  which a set of objgen cannot. See {ref}walking-object-graphs.
+- Added {meth}pikepdf.Object.is_same_object_as, which tests whether
+  two references lead to the same object. Neither is, == nor
+  comparing objgen answers this reliably.
+- Added {meth}pikepdf.Pdf.content_scopes and
+  {meth}pikepdf.Page.content_scopes, which iterate over every
+  content stream that pages can draw, each with the resource
+  dictionary it uses: the page itself, form XObjects, annotation
+  appearance streams, tiling patterns, Type 3 glyph procedures and
+  soft masks, however they are nested or shared. This is the way to
+  find every font, image or colour space a document uses. Each
+  {class}pikepdf.ContentScope is reported once for the document;
+  pages= selects pages and kinds= selects what is reported.
+- Added {meth}pikepdf.Page.get_resources, which returns the
+  resources of a page or form XObject for reading. Unlike
+  {attr}pikepdf.Page.resources, it finds resources inherited from
+  the page tree, does not create an empty dictionary when there are
+  none, and returns None instead of raising when /Resources is
+  malformed.
+- Fixed comparing two objects with == taking exponential time when
+  the objects being compared share children, such as the same file
+  opened twice. Each pair of objects is now compared once.
+- Fixed {meth}pikepdf.Pdf.add_pages_from hanging on a page with an
+  action whose /Next actions are shared or form a loop.
+- Fixed {meth}pikepdf.Pdf.open_outline reading only the first item
+  at each level of an outline whose items are direct objects. Such
+  items are now made indirect when the outline is saved, as the PDF
+  specification requires.
+- Reading a stream that will not decode now raises
+  {exc}~pikepdf.exceptions.DataDecodingError with the reason,
+  whether the stream's data was read from a file or set from
+  memory. Previously a stream read from a file raised a
+  {exc}~pikepdf.exceptions.PdfError that said only "read_bytes
+  called on unfilterable stream", and the reason was available only
+  from {meth}pikepdf.Pdf.get_warnings. DataDecodingError is a
+  PdfError, so existing handlers are unaffected.
+- An exception raised by a JBIG2 decoder now reaches the caller of
+  {meth}pikepdf.PdfImage.as_pil_image,
+  {meth}pikepdf.PdfImage.extract_to and
+  {meth}pikepdf.PdfImage.read_bytes unchanged, with its own type,
+  message and traceback. Previously, for an image read from a file,
+  it was replaced by a generic DataDecodingError or PdfError.
+- Added {exc}~pikepdf.exceptions.QpdfRuntimeError, raised for
+  errors from qpdf that pikepdf has no more specific exception for.
+  These were previously raised as a bare RuntimeError, which except
+  pikepdf.PikepdfError did not catch. The new exception derives
+  from both {exc}~pikepdf.exceptions.PikepdfError and RuntimeError,
+  so handlers written for RuntimeError still work.
+- The empty name / is now supported. The PDF 1.7 and 2.0
+  specifications define a lone slash as a valid name made of zero
+  characters, but pikepdf.Name('/') raised ValueError, and
+  dictionaries refused / as a key. This broke
+  {meth}pikepdf.Pdf.add_pages_from on files with an empty-named
+  destination such as /Dests << / 3 0 R >>. Such names can now be
+  created, used as dictionary keys, and migrated during page
+  copying. bool(Name('/')) is False, like an empty
+  {class}pikepdf.String. Name(''), which lacks the leading slash,
+  is still rejected. PDF/A does not forbid empty names, and the
+  PDF/A validator accepts them.
+- AcroFormField.get_inheritable_field_value_as_name() now returns a
+  {class}pikepdf.Name, as documented, instead of a str. When the
+  value is missing or not a name, it returns the empty name
+  Name('/'), which is falsy, instead of ''. Comparisons such as ==
+  '/Tx' are unaffected.
+- Fixed an out-of-bounds read when opening a PDF from a Python file
+  object whose readinto() reports more bytes than were requested.
+  This now raises ValueError, as writing to such a stream already
+  did. Non-blocking streams, whose readinto() returns None, now
+  raise ValueError instead of hanging.
+- Fixed building from source on PyPy, which failed to compile since
+  v10.0. PyPy now reads Python file objects through readinto(),
+  like CPython, instead of copying the result of read().
+- {func}pikepdf.open reads directly from the file descriptor when
+  given a filename, instead of calling the seek() and readinto()
+  methods of a Python file object for every read. Opening and
+  reading a large file with many objects is about four to five
+  times faster, matching the speed of memory mapping
+  (access_mode=AccessMode.mmap). Streams passed to
+  {func}pikepdf.open, including plain file objects, are read
+  through their methods as before.
+- Documented {class}pikepdf.TokenFilter with worked examples that
+  shorten numbers and convert RGB colors to grayscale, and
+  explained when to use a token filter instead of
+  {func}pikepdf.parse_content_stream. The API reference no longer
+  says that the parser should not be used to edit content streams.
+  The TokenFilter.handle_token documentation now says correctly
+  that exceptions it raises propagate to the caller.
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Extend RDEPENDS with the missing runtime dependencies
+python3-fonttools and python3-jsonschema which are required
+to import pikepdf.pdfa.
+
+Install pdfa_differential.py to pass the tests from
+test_pdfa_differential.py. Fixes:
+
+E   ModuleNotFoundError: No module named 'pdfa_differential'
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/7zip/{7zip_26.04.bb => 7zip_26.05.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/7zip/{7zip_26.04.bb => 7zip_26.05.bb} (98%)
+ .../python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch  | 4 ++--
+ ...-pikepdf_10.13.0.post1.bb => python3-pikepdf_10.17.0.bb} | 6 +++++-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pikepdf_10.13.0.post1.bb => python3-pikepdf_10.17.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-extended/7zip/7zip_26.04.bb b/meta-oe/recipes-extended/7zip/7zip_26.05.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/7zip/7zip_26.04.bb
-rename to meta-oe/recipes-extended/7zip/7zip_26.05.bb
-index 49437b807d..050673f678 100644
---- a/meta-oe/recipes-extended/7zip/7zip_26.04.bb
-+++ b/meta-oe/recipes-extended/7zip/7zip_26.05.bb
-@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
-            file://0001-Remove-treating-warning-as-errors.patch \
-            file://7z_wrapper.sh \
-            "
--SRCREV = "9128b80e3a471108678e2b3ec3c985861c8d7b0f"
-+SRCREV = "b88c6bc09339de32f7d18bbab900686b244f42ba"
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+index 575c3abb7a..3650675069 100644
+--- a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
++++ b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
+@@ -1,4 +1,4 @@
+-From 1b326de10bee40f497386921072dd80e2d7ecbde Mon Sep 17 00:00:00 2001
++From f54475de5f883ab6d021af78b1f33f34e6cd43eb Mon Sep 17 00:00:00 2001
+ From: Leon Anavi <leon.anavi@konsulko.com>
+ Date: Wed, 8 Jul 2026 11:45:11 +0000
+ Subject: [PATCH] pyproject.toml: Do not strip
+@@ -19,7 +19,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
  
- UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
+ diff --git a/pyproject.toml b/pyproject.toml
+-index 9e991c3..d7cee23 100644
++index a2843de..950a3c2 100644
+ --- a/pyproject.toml
+ +++ b/pyproject.toml
+ @@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
+diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb b/meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
+rename to meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
+index df98507aae..3801c4826c 100644
+--- a/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
++++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
  
+-SRC_URI[sha256sum] = "4b73f926ebae81f04bf14527af330bd00bb268be767e0f189f7c4c3e4ad7ae0a"
++SRC_URI[sha256sum] = "de4ccaae83628e86c1fd473b384c09c6ff1dd35a583a8dacbf61d2aa4bea843b"
+ 
+ SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
+ 
+@@ -30,6 +30,8 @@ RDEPENDS:${PN} += " \
+     qpdf \
+     python3-pillow \
+     python3-lxml \
++    python3-jsonschema \
++    python3-fonttools \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
+@@ -58,6 +60,8 @@ do_install_ptest:append() {
+     install -m 0644 ${S}/third-party-licenses/openssl.txt ${D}${PTEST_PATH}/third-party-licenses/
+     install -m 0644 ${S}/third-party-licenses/qpdf.txt ${D}${PTEST_PATH}/third-party-licenses/
+     install -m 0644 ${S}/third-party-licenses/zlib.txt ${D}${PTEST_PATH}/third-party-licenses/
++    install -d ${D}${PTEST_PATH}/misc
++    install -m 0644 ${S}/misc/pdfa_differential.py ${D}${PTEST_PATH}/misc/
+ }
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.47.3
+
