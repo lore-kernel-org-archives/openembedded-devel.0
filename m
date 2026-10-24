@@ -1,236 +1,209 @@
 Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7887.1792854833230322322
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7886.1792854832213615516
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Oct 2026 08:13:53 -0700
+ Sat, 24 Oct 2026 08:13:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=WZ0b1wT7;
+ dkim=pass header.i=@konsulko.com header.s=google header.b=lBjKpqY9;
  spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a1ec92f655so18130175e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 08:13:53 -0700 (PDT)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a214af2076so11067295e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 08:13:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1792854831; x=1793459631; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=RFzlkP+fslPMzwqzGlwFyALlbKFp96YTPokA9W/FX2M=;
-        b=WZ0b1wT7g/IUJRYSYaWr+DE1EYXA3oJdMLJvwX8GEjJ2BpyZvyisCZChuznSk7kyg1
-         MYdaQRkyFREMZTKwIVY2MupyU/QrqIUGoU2r3UGNtkaifmzOxfrFxAejLvdJG+JV0hFl
-         4VBez0kXVaLhJ4g/x5UaQm3R5why8/0a6nks4=
+        d=konsulko.com; s=google; t=1792854830; x=1793459630; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mSJNoNjXajTq3Kul/olGqXxkCeAVD8ZAEwBYhhSxerk=;
+        b=lBjKpqY9Jbz5PrEGm+WkYvSG3sqg/F+jDXW7dZ68SffHxrukEteqiM/mCDaN/axN/s
+         tWTErMjC3BZw2ijMttmkdFD6LnTJ8tA0+/PUoYpiq3Emy/adwUrpAXGdgQgliDNQxtSB
+         nXjA2GB4j9jFyt3jtuVWaIq2otuSd2Dlwu4zs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792854831; x=1793459631;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RFzlkP+fslPMzwqzGlwFyALlbKFp96YTPokA9W/FX2M=;
-        b=bLMecM27wRCFTU0nuARxG5wMGa52XwNmywPtn7M2GlGZpn0NV18i8RyPsZ+Goby6km
-         9qS8SVgCkJePNTRI6KgiI6wYt5xnxNm6f2Ff/+WGYV54gf1WD7WQ3sShgeFgENREsRUM
-         Qac+Yt7MUAy+B9/Ljsy7Soxb2t8g4zvY5GtExjGIFyKj1Tya/RFwwBiKxJiwwQxXee20
-         TqgebE7LGOVXv1oM5jh/YccUvDcXd35gUa+6zkXz1oqlJO0h+1ijQgYFSQ5gEbz1UU/y
-         qEqIz6VpfIntl3QedY0ntftI777qYb5xWhKtz/AbaZMGsP/EG8LIg1Lldb30Q8vXNE9A
-         XeiA==
-X-Gm-Message-State: AFq9FYKhs3A3xHKChMGMG6q2VAsZqV1QbciyxpM2bRJzsg42b2I/Bsgg
-	xuc9HQJekTyXBi4iUwjCq12zx0upIplA+g2iP7ktoqQpHpsOcYiTSqAfv9eTzgCj/VJXpDgOef9
-	y29Ps
-X-Gm-Gg: AYBFou2wWfH9ydzwT6JtJO4TSUkBtOdmUCRbbcGaUqJflCoc61foaCC/9laWLQi7SQ/
-	qKlwCyLDm2yS8rrTMLc/boFofReLT9uBHVqfEG+NE9FJ1cy/gO87W7LTsxDkEHvNSguKnd8RQk5
-	hYLdNekqhLegEnRalyW7IX5YZg4uueizRlSpWiFaTsxkjlvpKtM0MK/cT/ZMy0lzX2WAMQsP7Hu
-	3ILKWf01c/9uPaeo1kwfqLMkGJCEdFb91eQY9VEDOPKGtKdEJw24RhXfJnUw9qPt9ZPzWZktQmJ
-	BawrRkVZ7ZDBevy8TQKwdtJ9BFL8yxGHetxPjTI53gy19+mPD3CaKkqSj80sjEKq/vJYpQbdg1o
-	pPs9St1f3O77HjI9vh+YtIgly4dsbv7jJCytrPmufawGY6aOTcT5YpNOLMaljedDiaMv3l/Y8EC
-	pWhympFlazP2iPSqj3hG0K8jr03eOG2ptMcpiMe+6t2UtfSPFVfofnh24IDLKv4ffYyfMrmRszV
-	+hRLjP+ZkknhP8D12cD+vSKL8qMqdxRXViaa7OwgHzMGjOrhvkZmDfz2zjpSrh9h9WK97k1i6kH
-	D4nZ7auQrOI0hX2kW5ZL9rQWBn6tPWpBUoDBwk5PMXOWVxxbsHwlsdFlN17SlV9R9GpUxDFeOEz
-	uio6XqA==
-X-Received: by 2002:a05:600c:19c9:b0:49f:ffa2:1c72 with SMTP id 5b1f17b1804b1-4a35ae90d8emr37878215e9.11.1792854831474;
-        Sat, 24 Oct 2026 08:13:51 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792854830; x=1793459630;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mSJNoNjXajTq3Kul/olGqXxkCeAVD8ZAEwBYhhSxerk=;
+        b=VZaGCAlxSXnaDPjDtUtwxLIltzxFtG6Gd4EAbce7CvjEEpLpHbn+OTgm+u0A1HkKjf
+         7MltP2zVO8mT9D4GdLPrdMXRu2UQpVoeEZqzASlEMkvqNN6FZS8UOj/k39vIEqT4Ay9f
+         D1YRtATW2K0+ycf3Pr2kUGEYpaW2LCupc5KpW26E7nygPcT03R61BogVGAd71RbmsW58
+         itP8akRNFVr2uYF/JIg08ceFTcGkljydrwAzzrFmsw8H1d8YrBsLL4hN+Bbyla6h+0oY
+         UIE3DuZ1IY13bvnh7oEcoEDSD7kf6BsGHXaqDjwoUSoVvM/5uZVHyjnTodbCXqkMEqv7
+         u6Tg==
+X-Gm-Message-State: AFq9FYLKJkakWJM9Cm7FevbC8L5tyFynWurEorIeFTMEEkkIQ5fEE1GF
+	SLznOTG09gs+Fq8Je2pY8IdqJetz+ipVa4uIx8+KjFI8DnjElmkmk2+BdipgiNltaV0T0h3tdQN
+	KMAjy
+X-Gm-Gg: AYBFou0s0GXmR9UqDZQwuPD69mVPZ3ga9BLGMjKQkAGQyKZyQ4Gygsjbx5ehEQW+6fd
+	K5FiWOhB0FlzjK+s2Uxna5flWFjmxZ/wZDD72Eii1xvzXSHSOoJaoiIQIDcDKorLN39Ca9Cpwz3
+	gguLsKxMhDffUGNqxZqRZNi51VJGoE8HANgNcUWsaEdoUCHPJDAfSfKEwJvo5hbzNweQdfq9dhi
+	Fz2R97LkbKO2msbOth7BxHfr2jZxCzDXxtJ6mjtupUuf98WbxcAPAOvs+6UaEvnvMXzQD86j2uD
+	uzmk6vWZSzvKnA5wWYKkSldmGQIB7Zn6dlBrInFmUymCIMq5RcFHdoPPLXwQyXWvZH+keLgebt0
+	/hZvT7xTiO7Pi3uJgSd2DkgqECUta0Zui1jILXXkTwQzoYC1d8VbIWXfvvkfe0YjUGqYLc05XN3
+	wo/Kxdm9JTZI+xtw4FGlYKOrrCuZ2V/scMn64mxMRBGk1F3vdU16LYaRfES/ZlWU2qFwtRdNJ37
+	7Qfb6BOmG5lgnWuUB38HpqcW9G33Ngd6cV7M6vJ7vnai8jlMfjwrrS7R4vs7FBhGlpR/t+18kVT
+	TKxZJUBg4EDMFGihX3PaQS0QWZSWPMWrsgK/A5KWsaN27ssUa/cjMfi2ljQUMCIyHBmNWGIuAF1
+	gahbC
+X-Received: by 2002:a05:600c:3b25:b0:4a2:1a:a128 with SMTP id 5b1f17b1804b1-4a35ac9f1ecmr37114465e9.19.1792854829866;
+        Sat, 24 Oct 2026 08:13:49 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a55e99fsm60762195e9.4.2026.10.24.08.13.50
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a55e99fsm60762195e9.4.2026.10.24.08.13.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Oct 2026 08:13:51 -0700 (PDT)
+        Sat, 24 Oct 2026 08:13:49 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-pikepdf: Upgrade 10.13.0.post1 -> 10.17.0
-Date: Sat, 24 Oct 2026 18:13:45 +0300
-Message-ID: <20261024151345.2917695-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-fonttools: Add recipe
+Date: Sat, 24 Oct 2026 18:13:44 +0300
+Message-ID: <20261024151345.2917695-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261024151345.2917695-1-leon.anavi@konsulko.com>
-References: <20261024151345.2917695-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 24 Oct 2026 15:13:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131401
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131400
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 10.17.0:
+Add a recipe for fonttools which provides tools to manipulate font
+files. Release 4.67.0 brings:
 
-- Added {class}pikepdf.ObjectSet, which records the objects that a
-  walk of a PDF's object graph has already visited. Objects in a
-  PDF are shared and may refer back to their ancestors, so a search
-  that only limits its depth can take exponential time on quite
-  ordinary files. ObjectSet.add() reports whether an object is new,
-  and tells apart direct objects and objects of different Pdf,
-  which a set of objgen cannot. See {ref}walking-object-graphs.
-- Added {meth}pikepdf.Object.is_same_object_as, which tests whether
-  two references lead to the same object. Neither is, == nor
-  comparing objgen answers this reliably.
-- Added {meth}pikepdf.Pdf.content_scopes and
-  {meth}pikepdf.Page.content_scopes, which iterate over every
-  content stream that pages can draw, each with the resource
-  dictionary it uses: the page itself, form XObjects, annotation
-  appearance streams, tiling patterns, Type 3 glyph procedures and
-  soft masks, however they are nested or shared. This is the way to
-  find every font, image or colour space a document uses. Each
-  {class}pikepdf.ContentScope is reported once for the document;
-  pages= selects pages and kinds= selects what is reported.
-- Added {meth}pikepdf.Page.get_resources, which returns the
-  resources of a page or form XObject for reading. Unlike
-  {attr}pikepdf.Page.resources, it finds resources inherited from
-  the page tree, does not create an empty dictionary when there are
-  none, and returns None instead of raising when /Resources is
-  malformed.
-- Fixed comparing two objects with == taking exponential time when
-  the objects being compared share children, such as the same file
-  opened twice. Each pair of objects is now compared once.
-- Fixed {meth}pikepdf.Pdf.add_pages_from hanging on a page with an
-  action whose /Next actions are shared or form a loop.
-- Fixed {meth}pikepdf.Pdf.open_outline reading only the first item
-  at each level of an outline whose items are direct objects. Such
-  items are now made indirect when the outline is saved, as the PDF
-  specification requires.
-- Reading a stream that will not decode now raises
-  {exc}~pikepdf.exceptions.DataDecodingError with the reason,
-  whether the stream's data was read from a file or set from
-  memory. Previously a stream read from a file raised a
-  {exc}~pikepdf.exceptions.PdfError that said only "read_bytes
-  called on unfilterable stream", and the reason was available only
-  from {meth}pikepdf.Pdf.get_warnings. DataDecodingError is a
-  PdfError, so existing handlers are unaffected.
-- An exception raised by a JBIG2 decoder now reaches the caller of
-  {meth}pikepdf.PdfImage.as_pil_image,
-  {meth}pikepdf.PdfImage.extract_to and
-  {meth}pikepdf.PdfImage.read_bytes unchanged, with its own type,
-  message and traceback. Previously, for an image read from a file,
-  it was replaced by a generic DataDecodingError or PdfError.
-- Added {exc}~pikepdf.exceptions.QpdfRuntimeError, raised for
-  errors from qpdf that pikepdf has no more specific exception for.
-  These were previously raised as a bare RuntimeError, which except
-  pikepdf.PikepdfError did not catch. The new exception derives
-  from both {exc}~pikepdf.exceptions.PikepdfError and RuntimeError,
-  so handlers written for RuntimeError still work.
-- The empty name / is now supported. The PDF 1.7 and 2.0
-  specifications define a lone slash as a valid name made of zero
-  characters, but pikepdf.Name('/') raised ValueError, and
-  dictionaries refused / as a key. This broke
-  {meth}pikepdf.Pdf.add_pages_from on files with an empty-named
-  destination such as /Dests << / 3 0 R >>. Such names can now be
-  created, used as dictionary keys, and migrated during page
-  copying. bool(Name('/')) is False, like an empty
-  {class}pikepdf.String. Name(''), which lacks the leading slash,
-  is still rejected. PDF/A does not forbid empty names, and the
-  PDF/A validator accepts them.
-- AcroFormField.get_inheritable_field_value_as_name() now returns a
-  {class}pikepdf.Name, as documented, instead of a str. When the
-  value is missing or not a name, it returns the empty name
-  Name('/'), which is falsy, instead of ''. Comparisons such as ==
-  '/Tx' are unaffected.
-- Fixed an out-of-bounds read when opening a PDF from a Python file
-  object whose readinto() reports more bytes than were requested.
-  This now raises ValueError, as writing to such a stream already
-  did. Non-blocking streams, whose readinto() returns None, now
-  raise ValueError instead of hanging.
-- Fixed building from source on PyPy, which failed to compile since
-  v10.0. PyPy now reads Python file objects through readinto(),
-  like CPython, instead of copying the result of read().
-- {func}pikepdf.open reads directly from the file descriptor when
-  given a filename, instead of calling the seek() and readinto()
-  methods of a Python file object for every read. Opening and
-  reading a large file with many objects is about four to five
-  times faster, matching the speed of memory mapping
-  (access_mode=AccessMode.mmap). Streams passed to
-  {func}pikepdf.open, including plain file objects, are read
-  through their methods as before.
-- Documented {class}pikepdf.TokenFilter with worked examples that
-  shorten numbers and convert RGB colors to grayscale, and
-  explained when to use a token filter instead of
-  {func}pikepdf.parse_content_stream. The API reference no longer
-  says that the parser should not be used to edit content streams.
-  The TokenFilter.handle_token documentation now says correctly
-  that exceptions it raises propagate to the caller.
-
-Extend RDEPENDS with the missing runtime dependencies
-python3-fonttools and python3-jsonschema which are required
-to import pikepdf.pdfa.
-
-Install pdfa_differential.py to pass the tests from
-test_pdfa_differential.py. Fixes:
-
-E   ModuleNotFoundError: No module named 'pdfa_differential'
+- [varLib] Support decreasing design-space axis mappings, via a new
+  keyword-only allow_decreasing argument to models.normalizeValue.
+- [designspaceLib] Allow partial DesignSpace v5 axis subsets:
+  omitted range attributes on an <axis-subset> are taken from the
+  parent axis, as the spec says.
+- [designspaceLib] Fix DesignSpaceDocument.normalize() for mapped
+  axes: axis bounds and rule conditions are now normalized from
+  their original values.
+- [designspaceLib] splitInterpolable and splitVariableFonts now
+  warn when a source or instance is dropped because it lies outside
+  the document's own axes, instead of silently discarding it.
+- [varLib.instancer] Add support for instancing variable COLRv1
+  fonts.
+- [varLib.instancer] Apply VVAR vertical-origin deltas to VORG, and
+  use OpenType rounding for instanced advances and vertical
+  origins.
+- [varLib.instancer] Keep a universal FeatureVariations record when
+  pinning removes its last condition but other axes remain.
+- [varLib.instancer] Preserve ppem Device corrections in GDEF,
+  BASE, GPOS and JSTF instead of asserting on them.
+- [varLib.instancer] Allow requesting an axis's original range on
+  VARC fonts.
+- [varLib.instancer, subset] Fold, remove or remap MATH
+  VariationIndex devices when instancing, subsetting the GDEF store
+  or optimizing it.
+- [varLib] Raise ValueError: Missing required table fvar from
+  varLib.mutator and the instancer CLI on a static font, instead of
+  a bare KeyError.
+- [featureVars] When adding rvrn, also shift lookup indices inside
+  existing FeatureVariations. Handle null ConditionSet and
+  FeatureTableSubstitution offsets when building, subsetting and
+  instancing. Keep FeatureTableSubstitution records sorted after
+  merging new ones into an existing record.
+- [ttLib] Fix FeatureParams (size, ssXX, cvXX) in FeatureVariations
+  alternate feature tables, which failed to compile and round-trip.
+- [ttLib] Fully decode lazily loaded ligatures, SinglePos and
+  PairPos arrays during recursive decompilation, so reorderGlyphs()
+  on a lazy font no longer corrupts or asserts on them.
+- [VARC] Update the variation-store binary format to follow
+  harfbuzz/boring-expansion-spec#175:
+  SparseVarRegionList.RegionCount is uint32, sparse axes use
+  Offset32 and MultiVarData items are stored in an INDEX. VARC
+  fonts built with earlier fontTools versions must be rebuilt.
+- [VARC] Several fixes: derive component conditions from
+  conditionIndex, set the implicit scaleY when importing XML,
+  report the font's current coordinates for components that reset
+  unspecified axes, and keep inherited coordinates when drawing
+  CFF2 VARC components.
+- [varLib] buildMultiVarData accepts flattened per-region vector
+  tuples.
+- [otConverters] Bounds-check CFF2 INDEX count and offSize on read,
+  raising TTLibError instead of allocating huge lazy lists.
+- [ttLib] Handle empty packed deltas when OPTIMIZE_FONT_SPEED is
+  set.
+- [scaleUpem] Scale per-glyph VORG origins; fix VARC scaling for
+  static fonts and condition variations; don't mutate the shared
+  default CFF FontMatrix.
+- [cmap] Fix format 2 compilation when all codes are single-byte or
+  all single-byte codes map to .notdef. Formats 2 and 4 now reject
+  glyph IDs above 65535 instead of wrapping them. Split format 14
+  default UVS ranges longer than 256 codepoints. Empty format 12
+  and 13 subtables round-trip.
+- [glyf] Use unsigned instruction lengths, so programs of
+  32768-65535 bytes compile and decompile correctly. Keep
+  instructions in zero-contour glyphs.
+- [pens] Fix cubic off-curve detection in TTGlyphPointPen across
+  contour starts. Glyph.drawPoints() now raises NotImplementedError
+  for an all-off-curve cubic contour, which the point pen protocol
+  cannot express. RoundingPen passes the all-off-curve None
+  sentinel through.
+- [CFF2] Preserve operands when a blend has zero regions.
+- [cffLib] Read CFF font names as Latin-1, matching how they are
+  written. Deleting a CFF dict attribute now actually removes it.
+- [CFF2ToCFF] Fix conversion of fonts with local subroutines. A
+  CFF2 table with a single FontDict is now converted to a
+  name-keyed CFF font that keeps its glyph names.
+- [subset] Handle a null GDEF variation store.
+- [merge] Support merging fonts that both have a MATH table.
+- [feaLib] Reject the same mark class used twice in one anchor
+  list. Don't crash on value records whose devices are all NULL.
+  Pad a short OS/2 Vendor with spaces.
+- [feaLib] Raise FeatureLibError with a location, instead of a bare
+  Python error, for: a BASE script list without a matching tag
+  list, a UnicodeRange bit outside 0-127, a name string that cannot
+  be decoded, a STAT axis location with no or too many values, and
+  a non-ASCII OS/2 Vendor.
+- [name] Fix the BCP 47 tags of some Mac and Windows language IDs,
+  e.g. es was mapped to Mac Estonian. getDebugName prefers the
+  Windows English name over the Mac one.
+- [post] Don't crash on a format 2.0 table with numGlyphs set to 0.
+- [VDMX] Recompute numRecs and numRatios when compiling.
+- [Silf] Fix compiling a Silf table that was decompiled from
+  binary.
+- [woff2] Preserve minorVersion when copying flavor data.
+- [ttGlyphSet] Compute glyph width lazily for glyf variable fonts
+  without HVAR, so .width is correct before drawing.
+- [varLib.interpolatable] Respect designspace source layers; fix
+  --json output with SciPy.
+- [misc.psLib] Fix tokenizing of escaped parentheses in PostScript
+  strings.
+- [svgLib] Raise ValueError instead of IndexError on a truncated
+  path command.
+- [misc.transform] Preserve the direction of the remaining axis
+  when decomposing a transform whose first column is zero.
+- [misc.textTools] Tag.__ne__ returns NotImplemented for
+  unsupported types.
+- [misc.dictTools] hashdict rejects in-place union (|=).
+- [misc.xmlReader] Close owned input streams when parsing fails.
+- [misc.filesystem] WriteZipFS.close() can be called more than
+  once.
+- [EBDT] Keep EBDT/CBDT glyph metrics after probing a missing
+  attribute.
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch  | 4 ++--
- ...-pikepdf_10.13.0.post1.bb => python3-pikepdf_10.17.0.bb} | 6 +++++-
- 2 files changed, 7 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pikepdf_10.13.0.post1.bb => python3-pikepdf_10.17.0.bb} (90%)
+ .../python/python3-fonttools_4.67.0.bb              | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-fonttools_4.67.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
-index 575c3abb7a..3650675069 100644
---- a/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
-+++ b/meta-python/recipes-devtools/python/python3-pikepdf/0001-pyproject.toml-Do-not-strip.patch
-@@ -1,4 +1,4 @@
--From 1b326de10bee40f497386921072dd80e2d7ecbde Mon Sep 17 00:00:00 2001
-+From f54475de5f883ab6d021af78b1f33f34e6cd43eb Mon Sep 17 00:00:00 2001
- From: Leon Anavi <leon.anavi@konsulko.com>
- Date: Wed, 8 Jul 2026 11:45:11 +0000
- Subject: [PATCH] pyproject.toml: Do not strip
-@@ -19,7 +19,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-  1 file changed, 2 insertions(+), 1 deletion(-)
- 
- diff --git a/pyproject.toml b/pyproject.toml
--index 9e991c3..d7cee23 100644
-+index a2843de..950a3c2 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
- @@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
-diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb b/meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
-rename to meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
-index df98507aae..3801c4826c 100644
---- a/meta-python/recipes-devtools/python/python3-pikepdf_10.13.0.post1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.17.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
- 
--SRC_URI[sha256sum] = "4b73f926ebae81f04bf14527af330bd00bb268be767e0f189f7c4c3e4ad7ae0a"
-+SRC_URI[sha256sum] = "de4ccaae83628e86c1fd473b384c09c6ff1dd35a583a8dacbf61d2aa4bea843b"
- 
- SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
- 
-@@ -30,6 +30,8 @@ RDEPENDS:${PN} += " \
-     qpdf \
-     python3-pillow \
-     python3-lxml \
-+    python3-jsonschema \
-+    python3-fonttools \
- "
- 
- RDEPENDS:${PN}-ptest += " \
-@@ -58,6 +60,8 @@ do_install_ptest:append() {
-     install -m 0644 ${S}/third-party-licenses/openssl.txt ${D}${PTEST_PATH}/third-party-licenses/
-     install -m 0644 ${S}/third-party-licenses/qpdf.txt ${D}${PTEST_PATH}/third-party-licenses/
-     install -m 0644 ${S}/third-party-licenses/zlib.txt ${D}${PTEST_PATH}/third-party-licenses/
-+    install -d ${D}${PTEST_PATH}/misc
-+    install -m 0644 ${S}/misc/pdfa_differential.py ${D}${PTEST_PATH}/misc/
- }
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-fonttools_4.67.0.bb b/meta-python/recipes-devtools/python/python3-fonttools_4.67.0.bb
+new file mode 100644
+index 0000000000..9ce580e251
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-fonttools_4.67.0.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Tools to manipulate font files"
++DESCRIPTION = "A library to manipulate font files from Python."
++HOMEPAGE = "http://github.com/fonttools/fonttools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=211c9e4671bde3881351f22a2901f692"
++
++SRC_URI[sha256sum] = "3cb57e6600ca77c0b1729cf8adc23bc0652633a37f18cfa934d9c7bc3de25519"
++
++inherit pypi setuptools3
++
++RDEPENDS:${PN} += "python3-core"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.47.3
 
