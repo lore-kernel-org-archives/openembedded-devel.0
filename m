@@ -1,143 +1,108 @@
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.30703.1792964613905950088
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.30957.1792964618439307594
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Oct 2026 14:43:33 -0700
+ Sun, 25 Oct 2026 14:43:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BOaYGtuI;
- spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-369f33df08eso1666314eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 14:43:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=iMkVpjxm;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-353804b591eso4457781eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 14:43:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792964613; x=1793569413; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tZTg1vsQUlb234VingCkHdB456kEEdiGZyXsamCyZfM=;
-        b=BOaYGtuI2ULWHPY+fsmU1K2GA1f7aiHbDyT5h61xOJYcREL0JwjX05KfQRZx+A5OiV
-         QBIj8S8tahvECZr83cNtpLHyyZv9AgnNMXoVkpFIY3qs46r/iPMZ/X+eIOyWUndRmtHn
-         rX/+re3gLKTWRyryXenm8A4PFYUANwk8jItyJWgzxcoSg8umytu4FvzTxKcTMb8K/i+M
-         8UcDGWpIduPIn/YlCkBse2XRs43cGmeiwGj9UkKqtK4NIMUVw+4Hzkc9RBzL/Bpd2Ey3
-         OznoPqH7TQvu9hlPAd81SvmuwqeZ/Ubiwi/jC7lKxBqUK8OZUSD/w1Ow0Ri9CBtLmNWq
-         hUjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792964613; x=1793569413;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792964618; x=1793569418; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tZTg1vsQUlb234VingCkHdB456kEEdiGZyXsamCyZfM=;
-        b=Zc1ehO1+lwTLJUWuWxugTk/kpO6KgHvDSyybXZwIF4uhR0deuYI4b/VS26rftmhDpa
-         Z1hide/GrcOpOB3Ti3KFk/pKhuJYGWVqVFbU++33JhJ0BSHgI2Tczx90Xp3a30Sek3Yl
-         8blfr1TSacGwWBzs/P0OZSmtLBAJv9fppPbFGsZr/VoJ4XFf2zHBgp4brT5/ti35z7gb
-         Blq9jQlk8FBCYcsn+TgGegvBwWf6f6RKty3671aitwyW2PGkU0wwXd6botEe7UJmvUY9
-         ZAR9EVug7QKcg6DQjYELzB5RApCVG5wxSKqkWQYUSKTS8oPaAoujuokUDmHEmikfnTDE
-         eTlA==
-X-Gm-Message-State: AFq9FYIWZcXjQzGs5BP5jSF08ym1Tf7Sxtc1q/6nsjiIOqVJqBbaCmkA
-	msnxNi7CeugEnV+cW9L6XzqYq+sr/fCbkFqoP1ke9Brh8Glrh2FJeMvDvNgniQ75UMY=
-X-Gm-Gg: AYBFou0vWOp3ZWqNOCetTKycyfME2oOlz1AHRVplVu0R7IhBNO+brTNYKrxHSrQ8Si0
-	Tbuw335hiq8fVP6KqQwCCAV6saJC1ca84YXurZU5ATKXdjZxPN2m7F4+3tKZkwSJ5UwpbHJZNhA
-	BbaZy03HERZM+4hHXZrWBBkvCDah69VyBRaCmQHZqDuLnUnBUtLIHHzs33sEOvpBvogUQecyk4D
-	ZgeJKiKa4HTqe+mP2qW6dKwaNO/TT5wwdMR0dAN5nTUj61wPa4e8QPL9z0TixKAg14/vXbCv+4s
-	m0buUxtAjx6mNNSVQMoeUKiUJkqIBiUfdvqC2r58m7TVPsqJrk09oFA9lburyeyASOUdPZe77Ki
-	sa7oCGXfxMePSGhC8iH0k/a591yG0+uCvga/x3oRcJ6yYB/YBPZowDi2EJBLE268X62JxUbTL8Z
-	3yaLVf7XC+8nIgbwsYskxjq/AHRcGmjsyEubA4FfbIBc3PL3zI2AjXhEgKHMvFqb3owQJxMrg5k
-	8dJALb6VmuP/dIrilWDM4aoYsKUaEqR26TSwsjdYELvw2XwucgliyoInJlbEdkH+QE8zz0Lr3V/
-	TM8eR8xkxM0XTiPAJJhVui18V38rAnqmKE05u5obWS3/VKY7s9VT6/NuUjlZpOSrFmLNMnwhNvn
-	zYf2N7PoKsEmeCNBoC4vhefYuMc7J2VU+ZfauyeusruU0ECHtpsW+Z1ZoeLLIj38+S8QnyrD0Ky
-	i7sgpX0Xf1NdyzfGs80w+91o0i9ECZ7kyDS/DJQCmG0J07r9bqDnaC9VnnS7xf4tgMrp+jRnj/d
-	Cv7genprPbzLa1+CztI+4gU8d46CWc=
-X-Received: by 2002:a05:693c:240d:b0:369:ffa5:1fab with SMTP id 5a478bee46e88-369ffa524acmr1899309eec.22.1792964612988;
-        Sun, 25 Oct 2026 14:43:32 -0700 (PDT)
+        bh=Hh2uFHhq19+aIf/S5OzsF7AqdPRXz1HxN5SmPXEqPcA=;
+        b=iMkVpjxmqiFBW0l488to5FyMIG2chyn/kRx+PvenyC3k1k368OPce56TomcMYY8FT+
+         i3LmlMut9D69N2KU9DUnONCZ9dKQMX6UXegrl5r5lH85AMdZ6u9j+++tOFeTAxwsXOnz
+         IWFDxb7610o5hR9Qw8RdZb2Iya4q85b45V0X6lB/4YKBBsghHSSFcY8r8dvnsNlVT+vL
+         NgEAAWA3Xc9o0xk6B4AsWt6H95iqk3bgFuzd3DnyaEa11j2EAeKQ9wnpbW/MlkC/95QM
+         HAHCEF7odlqt1J4rweklTY2SE2482jF/evdEazUVMjVqFV5UsFYpLzk6IkJY1JwJrp7G
+         DfHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792964618; x=1793569418;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Hh2uFHhq19+aIf/S5OzsF7AqdPRXz1HxN5SmPXEqPcA=;
+        b=X4SZbJegH1u3b7GWOIpjxXtU6GtROufKIhEmPQpw0/JRd5cXcYgnHESYZ49leyRqDv
+         gJdV9eQx8NBaQs9tf50Yn0PDeVwbdwY1XTgk9D+VKdUQAIu5XZqH8X1j4ZROJKbZS60T
+         ybda7Ami60ssWW40Kj2Xy+1/u9QckW/0h5e4RxXCcOuvIedfImF+5m5xCLuA/VzVRDIz
+         EvpGU5RNY5Ww/qb7JQUZFag/vCLvgSfIvkcGH0k4z6GxAkG885Hj8EAP13iXlGsdt2qs
+         lMZdKW/tZzpCxYXmvCTjNtWCIstHVRfyqGM+VSthewpKCZ1e+rmmWKdLHbaekQOcu9Gk
+         traA==
+X-Gm-Message-State: AFq9FYK4+6R+QYdMbUyUuvGfb83O2sdY+ssFL2hLzrnREJQhPy6pqi01
+	wVwldQ3DxoRiuxTdjoahuXyUyfZ7zAB/RKzk90sj6xlqqYPbyTKcFifEEJgJPb9K0tA=
+X-Gm-Gg: AYBFou1vdG3BGLk/R+LZE4gipMg3Q8/i9ObXXbjogNl/7f0ixich+lZdkuqnLV3YUKv
+	igEqQkGwjoeFEQ38iPgyYnP5QwqGQDlIKgZsxQRULpdeqZvBG2jo7vjVBwmsxmjDobH4iC9aPGE
+	npXNWKiHZWvHbdoFqzOqKlyEA6ZqmjW+XaBXjV/yE7p776qIIIFNDF3akZO812npjgyNuaTtFAh
+	UT3aZcTilPbGgkEgMklIeipZVR2WaZQsPsea1tBS5egrMQrku2jIU0H5DOhKj2VZ5iyvB8+wN6r
+	cCHrpO0Ya4Yw2bI6qIea55G43wgoGkR4SvexA1WdU2q5t7X9wGyo5PG5oyHns4VpaynF4ryQbTi
+	TNHA1KA5ZN/SixDOs+9UmZIdqAzGXhMP4hyVCwTwWoRSFBEq+7ED00ZxDe1czm8zuaVJNgaXl1z
+	AW3Z4cvwpHLl9pAM0habYEAB91MusBkg3YOrRHz2mvYJnLiAUlvBsNLZ5/0uF+yUM3OqrvxVopp
+	It4mXm6Rpq/iNYaDj5gjfuqWqR6uYXNtzLX8G2whSSCqsKAhMnZYKIt3PtopBBfh8hmBAGpaIM/
+	q+01TAE9MoZ7x5V+NUUQz/2BY0vcW7C5L5AJE1eUWvldQBYzWgYPe/6Qwkxfb4wRpyn57b/2DaS
+	WXvG1S0vfaSIqElkYm1wXOVM27M2b5DBCGDUl8TVN7P2w+abFs1VUrHe1XMe/PlHb4nGCodKyU+
+	Y6RLH0gBOF+tlDOTHS7gI66SMNnAhr3+SlcnaTkBJw/SAXzIN4rfnir1hXB7HynpC3+RRcSuQy3
+	MwiQSHcJgpNv/507g7iFVcSkzF9RnJeOJJcMg/Lo4d/6bgL46j5
+X-Received: by 2002:a05:693c:66db:20b0:353:5b04:8d19 with SMTP id 5a478bee46e88-369e847a128mr6636333eec.9.1792964617606;
+        Sun, 25 Oct 2026 14:43:37 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369ff5a4d68sm4451403eec.14.2026.10.25.14.43.32
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369ff5a4d68sm4451403eec.14.2026.10.25.14.43.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Oct 2026 14:43:32 -0700 (PDT)
+        Sun, 25 Oct 2026 14:43:37 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 1/6] fftw: Fix planner hang on musl with CLOCK_SGI_CYCLE
-Date: Sun, 25 Oct 2026 14:43:25 -0700
-Message-ID: <20261025214330.653779-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 5/6] python3-fsspec: Skip network test in ptest
+Date: Sun, 25 Oct 2026 14:43:29 -0700
+Message-ID: <20261025214330.653779-5-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261025214330.653779-1-khem.raj@oss.qualcomm.com>
+References: <20261025214330.653779-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 21:43:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131406
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131410
 Content-Type: text/plain; charset="utf-8"
 
-musl defines CLOCK_SGI_CYCLE, so on aarch64 cycle.h uses
-clock_gettime(CLOCK_SGI_CYCLE) as its tick counter. Linux returns
-EINVAL for that clock, every measurement reads as zero, and
-FFTW_MEASURE planning loops forever, which times out the bench ptest.
-Skip the SGI clock on Linux.
+test_async_cat_file_ranges fetches a file from a public S3 bucket, which
+fails without DNS and internet access on the target, as in sysvinit
+qemu images where resolv.conf is empty.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch | 43 +++++++++++++++++++
- meta-oe/recipes-support/fftw/fftw_3.3.11.bb   |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-support/fftw/fftw/0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch
+ .../recipes-devtools/python/python3-fsspec/run-ptest        | 6 ++++++
+ .../recipes-devtools/python/python3-fsspec_2026.9.0.bb      | 2 ++
+ 2 files changed, 8 insertions(+)
+ create mode 100755 meta-python/recipes-devtools/python/python3-fsspec/run-ptest
 
-diff --git a/meta-oe/recipes-support/fftw/fftw/0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch b/meta-oe/recipes-support/fftw/fftw/0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch
-new file mode 100644
-index 0000000000..ce23ac4377
+diff --git a/meta-python/recipes-devtools/python/python3-fsspec/run-ptest b/meta-python/recipes-devtools/python/python3-fsspec/run-ptest
+new file mode 100755
+index 0000000000..544881a837
 --- /dev/null
-+++ b/meta-oe/recipes-support/fftw/fftw/0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch
-@@ -0,0 +1,43 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 25 Oct 2026 18:30:00 +0100
-+Subject: [PATCH] cycle.h: Do not use CLOCK_SGI_CYCLE on Linux
++++ b/meta-python/recipes-devtools/python/python3-fsspec/run-ptest
+@@ -0,0 +1,6 @@
++#!/bin/sh
 +
-+musl's <time.h> defines CLOCK_SGI_CYCLE, so on targets without an
-+inline-asm cycle counter ahead of it in cycle.h (e.g. aarch64), FFTW
-+picks clock_gettime(CLOCK_SGI_CYCLE) as its tick counter. Linux dropped
-+the driver behind that clock id and returns EINVAL, leaving the timespec
-+uninitialized. Every measurement then reads as (nearly) zero, so
-+X(measure_execution_time) keeps doubling the iteration count and any
-+FFTW_MEASURE plan never finishes; the bench --verify ptest hangs.
++# test_async_cat_file_ranges fetches a file from a public S3 bucket, so it
++# needs working DNS and internet access from the target.
++pytest --automake \
++    --deselect implementations/tests/test_reference.py::test_async_cat_file_ranges
+diff --git a/meta-python/recipes-devtools/python/python3-fsspec_2026.9.0.bb b/meta-python/recipes-devtools/python/python3-fsspec_2026.9.0.bb
+index cacafc88d6..6b2b4c33b1 100644
+--- a/meta-python/recipes-devtools/python/python3-fsspec_2026.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-fsspec_2026.9.0.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b38a11bf4dcdfc66307f8515ce1fbaa6"
+ SRC_URI = "git://github.com/fsspec/filesystem_spec;protocol=https;branch=master;tag=${PV}"
+ SRCREV = "0f76baaae4a227b085b18e8469e6cc1792a95ade"
+
++SRC_URI += "file://run-ptest"
 +
-+Skip the SGI clock on Linux, which makes musl fall back to the same
-+estimate-only planner glibc uses on these architectures. This also
-+avoids the duplicate ticks definition with --enable-armv8-cntvct-el0.
-+
-+Upstream-Status: Submitted [https://github.com/FFTW/fftw3/pull/430]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ kernel/cycle.h | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
-+
-+diff --git a/kernel/cycle.h b/kernel/cycle.h
-+index 83438bb..960eb90 100644
-+--- a/kernel/cycle.h
-++++ b/kernel/cycle.h
-+@@ -437,8 +437,13 @@ INLINE_ELAPSED(__inline)
-+ #define HAVE_TICK_COUNTER
-+ #endif
-+ /*----------------------------------------------------------------*/
-+-/* SGI/Irix */
-+-#if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_SGI_CYCLE) && !defined(HAVE_TICK_COUNTER) && !defined(__ANDROID__)
-++/* SGI/Irix
-++
-++   Linux removed the CLOCK_SGI_CYCLE driver and clock_gettime() fails with
-++   EINVAL for it, but musl still defines the constant.  Using it leaves the
-++   timespec unset, so every measurement reads as zero and the planner keeps
-++   doubling the iteration count forever. */
-++#if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_SGI_CYCLE) && !defined(HAVE_TICK_COUNTER) && !defined(__ANDROID__) && !defined(__linux__)
-+ typedef struct timespec ticks;
-+
-+ static inline ticks getticks(void)
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.11.bb b/meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-index e33d12af10..699ff56979 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-@@ -7,6 +7,7 @@ SRC_URI = " \
-     http://www.fftw.org/fftw-${PV}.tar.gz \
-     file://0001-NEON-autodetection-segfaults-assume-neon-present.patch \
-     file://install-bench.patch \
-+    file://0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch \
-     file://run-ptest \
- "
- SRC_URI[sha256sum] = "5630c24cdeb33b131612f7eb4b1a9934234754f9f388ff8617458d0be6f239a1"
+ inherit python_hatchling ptest-python-pytest
+
+ DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
