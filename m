@@ -1,111 +1,92 @@
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30954.1792964614890795582
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33112.1792974491304961731
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Oct 2026 14:43:34 -0700
+ Sun, 25 Oct 2026 17:28:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WB95n+Iw;
- spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-353804b591eso4457728eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 14:43:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jQhxmrNm;
+ spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-67a2efec15cso2346252d50.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 17:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792964614; x=1793569414; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UjAnc1usUKatZ04rVj7f6YyX1AXe9fokMnfpdbh0uTI=;
-        b=WB95n+Iw4DAk3yUWBuBFV8eY6rRWKgN7eAypu1ttfBOFls5i1LEKIJqiEBsMd4AzJk
-         /4IUwPEVjFVA209qKmGO3wi+wG2RPzp3yqEWXBbEQ/c6f+ynR9mjZQAKsG+xzcf8/SMq
-         q+42inWKF/OVC4HL5rBy4uRM6OjPctowHO04ZHoIFC9G92nj3p2qXft/ysXeZ9VnJWEJ
-         +vbEQNO37W5d08cnRaU7Ny5KOWYLNUTQ256ZK5lsNXaLmUlslLRk6KGBcowal/JCIUXn
-         7AOqABlo2+O/+op3Aq+9hNMAAfyQa5kHyZZFrA+BRZTr2u6Fy5hLzTLK5+rsGRUR02qN
-         5rxg==
+        d=gmail.com; s=20251104; t=1792974490; x=1793579290; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZmJuUreQPc8QwI23qMROnvTfYLDxvEl3/KQD8+LsfVI=;
+        b=jQhxmrNmq7VAaZVfFIQwRt4nmFK9X0l8B7o2eyMIttMeH+PYejRCcpxRZtdDJJOuZD
+         JXjVZ+SopjFZM+JT/OTYUI0uujxEfWDMKENJ/ZiB73s5caLdZRoeD9osK5NtRDOea/Ec
+         VZGueQlrBZ/Za17pXYkzkjuKvN6QUeOyTswmYl+AZbS4jajBQrpVusLkMciTbli0lAM3
+         1DRWFIX6MCcPj6s8bswylhZlu5f7TlOYnZXGJ4DrWOgEA0cgcXY0c/vJ9Q8Fuo/WD1io
+         ysf9fjOVf5eGiOW+W0lXjLI1wVHlTOtgY4bahDRpRTv2+FUTvVyOhgsnZB5D8+VUpnT7
+         Em7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792964614; x=1793569414;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UjAnc1usUKatZ04rVj7f6YyX1AXe9fokMnfpdbh0uTI=;
-        b=veYwahadzKk5RakdIpXDSI+ov/1u5Vd6xu3jIkwPgLpzdyBQBtyyDShubeQ7ZGPg4b
-         750pOlQiyQP+up7DQN2MTBD/+ecPQ8ut+Hnz8/sR14Bl2vj/BIoq9P0gmbv9zXVSevde
-         aHkbNRhLG5Qiy85RVFPnRDBY+DnjpRdVOmc1tnJgEtDbok2xjQZmAPgGVZZ0kakZgU2B
-         +hSQe0D8qwQaXVPishOatVqRzS11EB679fCkGsifdDhmm204sLgiolnXWPuUKuSsxAE7
-         2tq8TEH/lynAdDDT3BLtrhWWkf09qeV2PuK2h0nPYh/dPgtHS8e+NOPMdkyEQB/zgQYC
-         azkg==
-X-Gm-Message-State: AFq9FYINdxBLaNxxhm1MuHjGUqCdRxiX0Pc53itgb6GZgtCzZj+Ref76
-	dHzse/V1sqTkdo1B6hSxqJ1nDKuNjRbPCeDHrjOq6x6y1J9QlJGmQLS3GY8DOBBCWIU=
-X-Gm-Gg: AYBFou03dmNcnYiuKZGmJrbF5XWzNamuApBgbYF9JQdYr0QgUO0qMGYd4jNWmbYYRIF
-	nJuormxADHWbu1ZAOJhpfZv1/HYKieft9PBp1dERE3MtK+r4By8dSe76bXl94Q0E0PfBU22UGQP
-	IR44WU7tx3nk5wWLrSy14mgOUk5XEO0Dv67A2brxhkdhBIQQzjAZI6ZCEfjdi6eQHdMwez6xGyS
-	f5/bhlKCOJz81Xcs6C1aFX4mXwcofm/A0i6/XsPenI2qc3OmqIgX8BGwr/H1d1nPhEEde9Eu3pq
-	QtdNa8vUft4nNDLbJQSFQ+6eh7I5nmAtiP1S3Wy2JpZUVOVbHDSYJ85KGFLYjmQdPLHS0C6B7hD
-	qV3dzqca8Rxyu+PQDv1mxR6tb64V9eG7w0h22xAoqGFv1yoiLn3/xPLlVPjFuyJKedb5Ant7EvW
-	ohqmSiov0oj/rEy1FCpnKl89dKlNh1Z+uhYHt7k9QM5qF5XuO4PRO8QkGZSU+VAOirXb+LmWV+/
-	eYmNG+3BzuceX5d1TDNzYIiNTmNNzDJnPjIUUuj4GDwtnPKx/cSBYQBX20t9Sh7WaH+SNHzEW7a
-	0COwPBwK47IJ0nB8vbe2cdTuLenwZ4J+2fV3KYF8kY5uS2hAujP1Wxi18wiYteIVqyieus32MFv
-	TeUbyTwYc2RjxYq3AF4wWrIs/PdOMgtu2DUG3ZyiQZojDP0zhxynydoLVRjL0yM8RmnR9d8CjWj
-	HG15XEvocCbynZ51xp6BQ/s6xRQVm5EU0wHp9Q+EtuVzf52ndvzYIzUlLMYzARdKshuC5xWxWIt
-	awJBnVXOS96mlMMToIVA53WEFmU7Fw=
-X-Received: by 2002:a05:693c:87dc:20b0:361:306f:c32a with SMTP id 5a478bee46e88-369e847acf9mr7935289eec.11.1792964614126;
-        Sun, 25 Oct 2026 14:43:34 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369ff5a4d68sm4451403eec.14.2026.10.25.14.43.33
+        d=1e100.net; s=20260707; t=1792974490; x=1793579290;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZmJuUreQPc8QwI23qMROnvTfYLDxvEl3/KQD8+LsfVI=;
+        b=gvFCJ6IRk1YXvV6EBeQ0PSGDp96mVLVlG0V3Poaa32bYoTb1urlGw894k3PK5Aj4Ty
+         GrCJBrraOKHmlaBMSUqlqCJG1IliJfKNjo5Lsq1M0S52yLuf914L3+wU6rbuhPOiYfYj
+         X7qY/ttaZ1Nm3sivy2Vz5FWCNEmOoJ5pioVFnEUBevF4T51QqHIbOqqluTWNUlTIJ0hh
+         JNQqU2hSy3J18zPM1TxDBKdxIW2qS2+bS+3MijMrx7VopVnVBgKY7yF6ch0tmbWCVpOn
+         iJRrb45kfJiTlAZPH5sn3VAFs+bbMw/1zbF75XZHUcITQO5mwFRM2xkZnypZYiAFIY8v
+         8lhA==
+X-Gm-Message-State: AFq9FYJ3UiaLq33i2H4Qf9HO8MX0/UWu206NHi8ZImL++QdKaYmPg7ya
+	eghZ4W8YIVrwgvPpmOunj0dWu+VBfWU1x7VIovTxLtQz1dj59B5RLamILOZvQNu4
+X-Gm-Gg: AYBFou2bRtBg2dPIVCizk29j3u54tKRm0g0X69pDjy0FRVnCd8wBNnqcxYQGVLx2zmB
+	3DjBlsmzmx3E4AiuHEB9ZpMPs8+4jzjXHqLtK6V2/k8w9RL8pOuXfREcmzSLISHl9IC87EDQ4sN
+	IkJ/LkQ3ZdonUrYgKRfB78CXFaG9eG2rOWj2fUaHXnQD/1egqQ1TUYhPzkbTTm8ujTKdBg9c1Tn
+	1uqsurHWvduYn0TPZ7oyMauu68OXInpDM1fXY0s6Mw7mMOim0X7FIUI4em5ja009mA8rjul38XT
+	CN2TVG6QgCRh4Bnt4wxjPVI5VjDg9jXKkJNFSjp65JKLODNaSiCocFsFIrYcQSyuyw+oNZwmbUJ
+	egv/MiYQXLT5wBkRvI9jEpLIf6ObC3ambYEansKQpNiD+J9Xb6iMUIwuXULKGzjUartuzbdSU3B
+	/4ylaPK5H0gbQjRKBg04k5548PzTaQ14MhPVhUYTByf2iU1UOwoQwGYqop/GhglcpoEKttH8Av7
+	FJO3Tf+dIyGeo1X8Wi1Cw8l9CbgUd4WvJ0h2oXu5BhIfWAQ9VQKWxTFvjOfDQhXUAOVlCSdHL4L
+	yd/FOixtT0RERH2i6JdZgQWc1SELd6j82Ic1jQvmaRZ4vHi/kTN4+pcSEaEGiUlBNH0+4c7zVgS
+	sZXNDGL9fNMiKnX7sjIc7mt8w
+X-Received: by 2002:a05:690e:458a:10b0:677:ceec:5ea6 with SMTP id 956f58d0204a3-67a45787e94mr2519513d50.22.1792974490199;
+        Sun, 25 Oct 2026 17:28:10 -0700 (PDT)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a462c5bbasm2685073d50.20.2026.10.25.17.28.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Oct 2026 14:43:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Sun, 25 Oct 2026 17:28:09 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 2/6] fuse3: Load the loop driver for the blkdev ptests
-Date: Sun, 25 Oct 2026 14:43:26 -0700
-Message-ID: <20261025214330.653779-2-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261025214330.653779-1-khem.raj@oss.qualcomm.com>
-References: <20261025214330.653779-1-khem.raj@oss.qualcomm.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-webserver][PATCH] webmin: upgrade 2.653 -> 2.660
+Date: Sun, 25 Oct 2026 20:27:58 -0400
+Message-ID: <20261026002758.585754-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 21:43:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131407
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 00:28:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131412
 Content-Type: text/plain; charset="utf-8"
 
-mount/blkdev-fsname-hello{,-ll} attach a loop device, but loop is built
-as a module and was not in the ptest image, so losetup failed. Recommend
-kernel-module-loop and modprobe it in run-ptest, since it is not loaded
-on demand when /dev/loop-control has not been created.
+Changelog: https://github.com/webmin/webmin/releases/tag/2.660
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-support/fuse/fuse3/run-ptest | 4 ++++
- meta-oe/recipes-support/fuse/fuse3_3.18.3.bb | 2 +-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ .../webmin/{webmin_2.653.bb => webmin_2.660.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-webadmin/webmin/{webmin_2.653.bb => webmin_2.660.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/fuse/fuse3/run-ptest b/meta-oe/recipes-support/fuse/fuse3/run-ptest
-index b8295bbce9..0835402f0a 100644
---- a/meta-oe/recipes-support/fuse/fuse3/run-ptest
-+++ b/meta-oe/recipes-support/fuse/fuse3/run-ptest
-@@ -7,6 +7,10 @@
- # so print it as is and add the ptest result line after it.
- cd "$(dirname "$0")"
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb b/meta-webserver/recipes-webadmin/webmin/webmin_2.660.bb
+similarity index 98%
+rename from meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
+rename to meta-webserver/recipes-webadmin/webmin/webmin_2.660.bb
+index a46c3aad16..a98a0a3ab1 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_2.653.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_2.660.bb
+@@ -18,7 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+            file://mysql-config-fix.patch \
+            file://webmin.service \
+             "
+-SRC_URI[sha256sum] = "9acc680d3d45cee876f36fc8810ce68bb6e44a0365e245a4298a180e0d016696"
++SRC_URI[sha256sum] = "185cfa4ac3f2654b363b4b329df0033e4b997a5af92711a211fd038ec042696b"
+ UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
+ UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
+ 
+-- 
+2.43.0
 
-+# The mount/blkdev-fsname-* tests attach a loop device, and the loop driver
-+# is not loaded on demand when /dev/loop-control has not been created yet.
-+modprobe -q loop
-+
- # Some test filesystems mirror the real tree but cannot follow symlinks, so
- # keep the run directory off paths like /var/tmp, which is a symlink to
- # volatile/tmp. run-tests.py creates the directory and removes it when done.
-diff --git a/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb b/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-index 1e4b86a47a..172dd9e69d 100644
---- a/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-+++ b/meta-oe/recipes-support/fuse/fuse3_3.18.3.bb
-@@ -51,7 +51,7 @@ RDEPENDS:${PN}-ptest += " \
-     file \
-     util-linux-losetup \
- "
--RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
-+RRECOMMENDS:${PN}-ptest += " kernel-module-cuse kernel-module-loop"
-
- do_install_ptest() {
-     install -d ${D}${PTEST_PATH}/test
