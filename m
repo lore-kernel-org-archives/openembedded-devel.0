@@ -1,64 +1,64 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.35458.1792987101950492739
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.35459.1792987103696722655
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Oct 2026 20:58:21 -0700
+ Sun, 25 Oct 2026 20:58:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=RTuF5J9u;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso7648616eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 20:58:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FZ+4uCXv;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-35b2c599f43so469169eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Oct 2026 20:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792987101; x=1793591901; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1792987103; x=1793591903; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BmrdfL9n1UbdlB80WQxxv7Jb39N+O5uQv7GxV58Uzg8=;
-        b=RTuF5J9uJM0udzEEMySckn8G4kCYpn5ypWL3upoILwEKKqYcPSWPHNr0m5PFxdNgrt
-         rmIuH5NHj8l09fhe+AD6kAo+2ilqquJ7yAVznNKTOXc8v8vhp7JLCMAg/aRWtWVerFmZ
-         aiZyCGO+Wc0Qgi18nuu0rDLTPp/yZTVzhx6w21iI2KNbw4mw1SosGlfnN+dw9qUuHKXX
-         yMnuFBJ9XdPusJAEc09OfKAlBBaqe8YfMRoydB3FN+AEL5qT/mjSSSqCkL88cdEz22vx
-         cEnjfobDp5ccyjhXkbtxQmDnNH5KSR/6ITsuxrwWCDBubf3jfHjly7v4nxTYwp8otbOP
-         zchQ==
+        bh=Cptz8115WqS2STkCxCImCt3e9lvkf0rpf13ex9P5AvQ=;
+        b=FZ+4uCXvgTEeeF7T4rcqhYLEZ51bSE4hocTucnJFTTH9DRCtnn1KvAqv/+1C68TUOn
+         VgJfyc7cM6uFfqKj8C0rpGoJgAtUkgsZzoO8VeftZ3X7NfPrFMaZqa8AYoFBi+lWJVfx
+         xElPHo5rOWsu3dNrin3GxBgYrkLP/utNwn4ITdNQDEffOAeQi5KIys+Ynp5uuA2M1AoN
+         +m5D4+OqyTEEZx9eV+sdfZ+bPlYrBcZ0pAWhymgMR0U1IYm5Ca1nvu1jFQ/N4L75GKLO
+         TpD6bwu3RwD/hLhvoVYT+dL3VYPxOgTK2w2m4XFa7YFl+pIy7znnbx2/KtWO7hhryDkN
+         zs1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792987101; x=1793591901;
+        d=1e100.net; s=20260707; t=1792987103; x=1793591903;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BmrdfL9n1UbdlB80WQxxv7Jb39N+O5uQv7GxV58Uzg8=;
-        b=yMFMnvJrHe4gctBJ/FoehKhx6tvSLPFMxTVnAibhpACbRWN+Ye+0Z86cdB+tVrbUD9
-         6Vkj3wM/gg3Fkok+YRxCh4LSz8qlVXEkSQV08Q6xqsVIWppEXH99FXWcqWZFsGtOn/tf
-         ZgO3P+42knimmwF/MOpKFVqM4m2VVRgR0WVAUw7yaYu46B5ugyQ0nnsUYhDYazOLOCSS
-         gE9qlGU7GHfq4edO6pm3U5/zlmjLrGiuIrmoXL8EIizy27n9kC6e2JPG5EOnbI6IS3j2
-         32R1R5P97H3wo7XmxM/i5x0wFRUs7LGUOhftBB0nT3xC9ahpGPTa4A/0MhyDkLfDpP51
-         071Q==
-X-Gm-Message-State: AFq9FYLgQxgcPDIgytFZRHeQUWjjkkfODvrAMG9iJNowS2BXn8cOqaBK
-	D0smYs9gQROB5Sj8Mc1p6YJy0gmQLgRURJEi4D2xNQxYplKs8atU5wCdvPTBEmP1xj8=
-X-Gm-Gg: AYBFou0rE9s4PMlQfZe10UeBNCo9sTtnXs3eKAJxBXrAbmwCLEeGH/y6AMYNW5V5ebb
-	kmO1CBK+b/5xs5v4+SYE+ecTBXXVBKAMxpXDg3YkWIMyLoqHula85+0PECKPOh1hcPUjH+X/vJ8
-	EPux40EOJjPJBO3LGIjw/MPNkL6/8aJhQB7+zWIkrhuPNeChmshOu9FQ5h/nq3VGB0G2C9xaqVq
-	pc5OTQMoboyyPHcgYhmOXkwQC5+ulfYAVM4qiM0gWmPEIvxkY9Xeh/HRw1WtA5EZYuPFCxw9CPF
-	lOEqLVgV525id8SrnZ4zbIGTpBl8XYC2hNJ2G0NqxIycj2bxTu1w7GQYZzXDPCD6i9+1v1CMi9p
-	MQKqVOd8Cl+rv3P9Ts6hB+lMOMEjNMfFS+o+VHeyhJWuZQaYFjttEdh6W1FqoHkFCXRAYxbDEzk
-	PLOoQx1z8CzxZkmZZY8dbCG6EsPUlCbjElcjKHQBkV/w7n5PtoZ/LK/qNe6PMFY0Qcv9esb5F9C
-	uhSvtKovx+93LKeNBTe8caK1Sd3ZslJiO+DVKj98NVsEUMbT4GdPWBndKKD3D+iEfgHrZPC9mjN
-	RTbxpnGIHoQfOCMbhwWahebHXweky56xwPe379J+GAYdei+dBVvyzPk4eyIpSa9GEVGSjcfWU4k
-	yXodUkkuxtnBZpjladnB/UlSJKueCbI5E0QjWlBu4GJbzfFJtPq8eCeKhRD/n2VgcEUTyeQNKFI
-	2nOuV5EUTf4OJySQnR+JRSBhepL7ALlmJh/zl95bY5FE+X4B50SApY2A3etD1EpVnDrIOd2tipu
-	83Zx7AruIi8AdHge5Jrndcq99t0bk0W
-X-Received: by 2002:a05:7300:cc14:b0:358:1f59:48c9 with SMTP id 5a478bee46e88-369e84dcb4amr11001478eec.24.1792987101087;
-        Sun, 25 Oct 2026 20:58:21 -0700 (PDT)
+        bh=Cptz8115WqS2STkCxCImCt3e9lvkf0rpf13ex9P5AvQ=;
+        b=glw8qEKpu5OaZjuYB6lz5XVSJ+sjR90u3Ncl4ZaMEVAia37Lx9hlHnn4BbM4J7+9vl
+         3QxEy5o9D0z7QjIrisbqQBgDsUNTfmCVe8yse0Wh8p0iZ0u5pTKnPvKU43+SW0wO8hUx
+         TSFHNo3xdMdJ+AL8qkd2JWdreR691XwPIiEvabwV8kLfoyQneWlnC3zngD4hilIGj1VV
+         iL1wvFbz7LNdpbhca54YXRL6sWykTMOiPiVikyBPoB4NGqI9wOX/BOGxeqi3i8xNeaAI
+         b1IHDXPggxOOgvXLywEH0kWbGux5r6Uo1ENQoQfCUibhChXg5JtmEpvkFalnGlNLVb8r
+         Bu+w==
+X-Gm-Message-State: AFq9FYLqnwWgp3OW7s6woYBXsRC/JSkime3VBAWmlIP6B/tli2Wc/R/B
+	D3A8DrO1dFrSyKiFEN83j6PGe+Xq10vjlUUnQKrNJmBFgtW2ctLEUL6+1cF2SveCTQc=
+X-Gm-Gg: AYBFou10Cw6PctOVZOOnLa3NznQf7X9SrBUJA3lBfZXmjMxgaQiYjVof5qD2R4p7995
+	v9sEqSJLoeIcCuzLAyciCNZNCgDOTRr0HOdxJUxU0a7voX7Psd+zdBPK4Hh1mQofmRZtLb9BzlY
+	8MFNOFePfQZHMSZo8HEpDy9y3r30XceU+wgTJxR2gHK0b+bxvdycxLvX8b0p4pIzfYQ3Xk5/HFN
+	oLWpCP8zFnvdWRFD9f5SnNzvMXE1YlB7YUejmklck026m+26bUudaGon67JrPVS2XxwXMY6P1g6
+	lS4Cq5G7vZFPG+iQJYG5WUZNyBVdQUjCKa5h0Wwy/pLnQf9kF8N7aZg/q5TADHIFnYGVtfKehXI
+	TwIAV4IRoLnlbK6Y9v2v9/SFkCWdDKTPvuXhwsltEFpM7O3QDMPX84oLtLN8JKlASjpFnIKwMR4
+	5gc/Xt2fohnEDwNoMQh57S7bA8of6uYg77pgrwmiL7j9eHfn3QFPfaW5oexJ+qmA8JYDixka+gm
+	SoX6Pl7DFgA1I1op8jxhx5oa4Wdhz0ughlWNv3LUIqPco60Fa79GftQ0hgWSP7p6VLYVPZcN0ki
+	0bB6yOi1UlZ7DVEdxOdH0kasbd5jARn7U/bK/lArm0IlpWRCFn+byflnoJc62CiiajfkrPoQZdm
+	s2qnrVB2iHwSbD3CBFuYBpYBc29RJRlrI7CqW/nRtpBF8qxPKXCzQTYW1HOqIu1Tl4j5zt/sl2Y
+	05+KG6fojWYGTIK+/FHdekPVIope1UMGUavC/Qb58o3bgtoB4dbd3Mj+0ytBZS9K67q7fNCV0Rg
+	P9XVtSO1nN7EBY7xk1tN7KAezendZU=
+X-Received: by 2002:a05:7301:4205:b0:369:d793:328d with SMTP id 5a478bee46e88-369e84bd8b1mr8924356eec.31.1792987102792;
+        Sun, 25 Oct 2026 20:58:22 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369f44bd644sm13277417eec.15.2026.10.25.20.58.20
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369f44bd644sm13277417eec.15.2026.10.25.20.58.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Oct 2026 20:58:20 -0700 (PDT)
+        Sun, 25 Oct 2026 20:58:21 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 3/8] re2: Skip upstream's big tests in ptest under QEMU
-Date: Sun, 25 Oct 2026 20:58:09 -0700
-Message-ID: <20261026035814.55254-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 4/8] HDF5: Remove license file
+Date: Sun, 25 Oct 2026 20:58:10 -0700
+Message-ID: <20261026035814.55254-4-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261026035814.55254-1-khem.raj@oss.qualcomm.com>
 References: <20261026035814.55254-1-khem.raj@oss.qualcomm.com>
@@ -66,53 +66,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 03:58:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131415
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131416
 Content-Type: text/plain; charset="utf-8"
 
-The CMake build registers every test with ctest, including the ones
-upstream's Makefile keeps in BIGTESTS (and Bazel marks size = "large"),
-which "make test" does not run. Each of these runs silently until it
-finishes, and under qemu emulation several of them take longer than the
-ptest-runner timeout. On qemuriscv64, dfa_test stalled in
-Multithreaded.SearchDFA until ptest-runner killed the whole suite after
-450s. Under qemu-user, exhaustive3_test takes ~460s, random_test ~760s,
-and dfa_test more than 15 minutes.
+Its added to OE-core via below commit
 
-Exclude dfa_test, exhaustive*_test and random_test from run-ptest when
-running under QEMU, detected at runtime via DMI sys_vendor, a fw-cfg
-device tree node or a qemu device tree compatible. Doing this at build
-time with a qemuall override would make re2's task signatures differ
-between machines sharing a tune. Real hardware still runs all tests.
+commit f9903f74ee36de4dd592f3bc8b1ce7b08f32608c
+Author: Ross Burton <ross.burton@arm.com>
+Date:   Fri Oct 17 14:16:25 2025 +0100
 
-AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/re2/re2/run-ptest | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ meta-oe/licenses/HDF5 | 92 -------------------------------------------
+ 1 file changed, 92 deletions(-)
+ delete mode 100644 meta-oe/licenses/HDF5
 
-diff --git a/meta-oe/recipes-support/re2/re2/run-ptest b/meta-oe/recipes-support/re2/re2/run-ptest
-index 8bd5fd1efb..8026ebc2b5 100644
---- a/meta-oe/recipes-support/re2/re2/run-ptest
-+++ b/meta-oe/recipes-support/re2/re2/run-ptest
-@@ -1,3 +1,20 @@
- #!/bin/sh
-
--ctest --force-new-ctest-process | sed -u 's/\*\*\*/   /g' | awk '/Test +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
-+# Running under QEMU (x86 and UEFI arm64 report it via DMI, arm/arm64/riscv
-+# virt machines have a fw-cfg node, ppc64 pseries a qemu compatible)
-+is_qemu() {
-+    [ "$(cat /sys/class/dmi/id/sys_vendor 2>/dev/null)" = "QEMU" ] && return 0
-+    for f in /proc/device-tree/fw-cfg@*; do
-+        [ -e "$f" ] && return 0
-+    done
-+    grep -qs qemu /proc/device-tree/compatible
-+}
-+
-+# Under QEMU, skip the tests upstream's Makefile lists as BIGTESTS (not run by
-+# "make test", "size = large" in Bazel); emulated, each of them can run for
-+# longer than the ptest-runner timeout without printing anything.
-+if is_qemu; then
-+    set -- -E '^(dfa|exhaustive[0-9]*|random)_test$'
-+fi
-+
-+ctest --force-new-ctest-process "$@" | sed -u 's/\*\*\*/   /g' | awk '/Test +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
+diff --git a/meta-oe/licenses/HDF5 b/meta-oe/licenses/HDF5
+deleted file mode 100644
+index 10481dd107..0000000000
+--- a/meta-oe/licenses/HDF5
++++ /dev/null
+@@ -1,92 +0,0 @@
+-Copyright Notice and License Terms for 
+-HDF5 (Hierarchical Data Format 5) Software Library and Utilities
+------------------------------------------------------------------------------
+-
+-HDF5 (Hierarchical Data Format 5) Software Library and Utilities
+-Copyright (c) 2006-2018, The HDF Group. 
+-
+-NCSA HDF5 (Hierarchical Data Format 5) Software Library and Utilities
+-Copyright (c) 1998-2006, The Board of Trustees of the University of Illinois. 
+-
+-All rights reserved.
+-
+-Redistribution and use in source and binary forms, with or without 
+-modification, are permitted for any purpose (including commercial purposes) 
+-provided that the following conditions are met:
+-
+-1. Redistributions of source code must retain the above copyright notice, 
+-   this list of conditions, and the following disclaimer.
+-
+-2. Redistributions in binary form must reproduce the above copyright notice, 
+-   this list of conditions, and the following disclaimer in the documentation 
+-   and/or materials provided with the distribution.
+-
+-3. Neither the name of The HDF Group, the name of the University, nor the 
+-   name of any Contributor may be used to endorse or promote products derived 
+-   from this software without specific prior written permission from 
+-   The HDF Group, the University, or the Contributor, respectively.
+-
+-DISCLAIMER: 
+-THIS SOFTWARE IS PROVIDED BY THE HDF GROUP AND THE CONTRIBUTORS 
+-"AS IS" WITH NO WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED. IN NO EVENT SHALL THE HDF GROUP OR THE CONTRIBUTORS BE LIABLE FOR ANY DAMAGES SUFFERED BY THE USERS ARISING OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+- 
+-You are under no obligation whatsoever to provide any bug fixes, patches, or upgrades to the features, functionality or performance of the source code ("Enhancements") to anyone; however, if you choose to make your Enhancements available either publicly, or directly to The HDF Group, without imposing a separate written license agreement for such Enhancements, then you hereby grant the following license: a non-exclusive, royalty-free perpetual license to install, use, modify, prepare derivative works, incorporate into other computer software, distribute, and sublicense such enhancements or derivative works thereof, in binary and source code form.
+-
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+-
+-Limited portions of HDF5 were developed by Lawrence Berkeley National 
+-Laboratory (LBNL). LBNL's Copyright Notice and Licensing Terms can be
+-found here: COPYING_LBNL_HDF5 file in this directory or at 
+-http://support.hdfgroup.org/ftp/HDF5/releases/COPYING_LBNL_HDF5. 
+-
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+-
+-Contributors:   National Center for Supercomputing Applications (NCSA) at 
+-the University of Illinois, Fortner Software, Unidata Program Center (netCDF), The Independent JPEG Group (JPEG), Jean-loup Gailly and Mark Adler (gzip), and Digital Equipment Corporation (DEC).
+-
+------------------------------------------------------------------------------
+- 
+-Portions of HDF5 were developed with support from the Lawrence Berkeley 
+-National Laboratory (LBNL) and the United States Department of Energy 
+-under Prime Contract No. DE-AC02-05CH11231.
+-
+------------------------------------------------------------------------------
+-
+-Portions of HDF5 were developed with support from the University of 
+-California, Lawrence Livermore National Laboratory (UC LLNL).  
+-The following statement applies to those portions of the product and must 
+-be retained in any redistribution of source code, binaries, documentation, 
+-and/or accompanying materials:
+-
+-   This work was partially produced at the University of California, 
+-   Lawrence Livermore National Laboratory (UC LLNL) under contract 
+-   no. W-7405-ENG-48 (Contract 48) between the U.S. Department of Energy 
+-   (DOE) and The Regents of the University of California (University) 
+-   for the operation of UC LLNL.
+-
+-   DISCLAIMER: 
+-   This work was prepared as an account of work sponsored by an agency of 
+-   the United States Government. Neither the United States Government nor 
+-   the University of California nor any of their employees, makes any 
+-   warranty, express or implied, or assumes any liability or responsibility 
+-   for the accuracy, completeness, or usefulness of any information, 
+-   apparatus, product, or process disclosed, or represents that its use 
+-   would not infringe privately- owned rights. Reference herein to any 
+-   specific commercial products, process, or service by trade name, 
+-   trademark, manufacturer, or otherwise, does not necessarily constitute 
+-   or imply its endorsement, recommendation, or favoring by the United 
+-   States Government or the University of California. The views and 
+-   opinions of authors expressed herein do not necessarily state or reflect 
+-   those of the United States Government or the University of California, 
+-   and shall not be used for advertising or product endorsement purposes.
+-
+------------------------------------------------------------------------------
+-
+-HDF5 is available with the SZIP compression library but SZIP is not part 
+-of HDF5 and has separate copyright and license terms. See SZIP Compression 
+-in HDF Products (www.hdfgroup.org/doc_resource/SZIP/) for further details.
+-
+------------------------------------------------------------------------------
+-
