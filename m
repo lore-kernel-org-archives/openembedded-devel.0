@@ -1,60 +1,60 @@
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7760.1793057194818817879
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7761.1793057196972426875
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2026 16:26:34 -0700
+ Mon, 26 Oct 2026 16:26:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=npKuWc3S;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-157fe9d771bso4264110c88.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 16:26:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qqzS+bD4;
+ spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-36a0f27c9f4so791502eec.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 16:26:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793057194; x=1793661994; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1793057196; x=1793661996; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PiZP0fwEZRXNr6XaYFEHIa65aBkdznksx6GVO/mA6LA=;
-        b=npKuWc3SZCNDWp8PSednBCXIR8NENVerzTe4UcBsCqoyES0TpxN+txhtGOYwhITNC0
-         yEMaBX1ryGzROtS3SN0nMYDXGY9oIkQg33pLP/SZnCjGwA8A4PNcRtKz40fBiHCFwmwW
-         IvI3iVRcLpgOiOZFdkjXA+EcDXPLj6Bdy9f5buW16Mzxd6ItMEtgB7SJNwW72/pG5p1j
-         FXDVHyIyY306GtwalG3N+HKSSaZMd61VSO9/j306TINQDq1oB1rXMhW9Qc3suOXl+rIr
-         YA08P4RXrcyBu2tpK91VR2sK39glgxAzIu6I8DJEDFo1cbOULgJ1ObSrFw/fqxGx/clc
-         OCew==
+        bh=9uj1nrHyKAytE8LQe5Eo3nRqrTlDdSOlYuKjnB0gMtw=;
+        b=qqzS+bD40lMnwqnQnw3gvOTEx8qS2wE7F8ySL0BXbOZda9eM2xRJ4S8TduFFu6kVc1
+         hQjTLMDoF1vJGTA7uUkGdt83dSVuVXpHwvHKxA35cGKSKUNR3aw+My03ud+t0PWoP7oK
+         3UEoODGIf9M/fXm2DO9riqMjZaGiJJ/WUisGXAjpwzanBxt5WM8urqxOMC8oj4lN38S6
+         B0zboj+PfPm+a3LvcMdE8CZ3saYHOjfnmC5apy142WR0QepIX0g58FD7LXospllFTMJd
+         AcORo2bukIcx7O7PlFs0EBEhy+zA07BkrAuybscY40+N2RLAxSnZl5OT08wIarK1zZKm
+         L/cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793057194; x=1793661994;
+        d=1e100.net; s=20260707; t=1793057196; x=1793661996;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PiZP0fwEZRXNr6XaYFEHIa65aBkdznksx6GVO/mA6LA=;
-        b=oWeHotCSWV0H6RYxkP/7nmxZI6tZHHDkLBAjNtDs4BBFILfxiU5xA7BeLVPJSJBgOZ
-         1uuKEUyn0v7Lz1Pd0yyg6XaGrRgNdMPkWFEg6mFv3ceFAPEnlO6VGguVxTd9fHzv/NXU
-         7DlvtZjXOiXAuYloLq57OhNlCnjrNdtYleTNIgowQD34oafguZjxOZNXk4HS+c5uGY/9
-         8qO2gWm7smNBz8AAuNV4+jcGCVOaJwVnczwotuDChqKTray1p/HELGI6VnFOoVY8Qulj
-         stGQsKgm7+u9yQ9zGaRkgSqZ4/t5Zh14eAvdINd8LrDFJ0AfysPZlf/eLVopSyMWctM0
-         QSzg==
-X-Gm-Message-State: AFq9FYI1W7fpj8UdPXJA12A7Kom8v5juHdL4Qd9qP5QBu7Wsl/H27DmT
-	UxZkDl62cVUFuyJWPddar83nEEAN607fazb1MnypQDa9MTFcJRtnyXk0K6Ovyg==
-X-Gm-Gg: AYBFou1N/cIKNMKX5Vr0xK7JnD9PoVAhFDj2dTAB2EUNkB8vrwwEYbBuiroSL2/vzbg
-	7e1bHe5eEpjKoM1+wdSwWW/WGoE5zWYSwRnoIGSykX+HjKjacFc0KjFgtcps+Wft67QpiuQkCuR
-	W2JkbkA8QMXnTvzpNncQiOajyc3Dti48UExtZDticmspYGfyOXmH9CyLXudWzaPXxTx8yLCpKZG
-	zbK9cHvspA/VcxgzitIwVWStI5UgFbYzgyeg3CVi/r+hYQT2ubN8Lvxn/qfQubBhERErcLO+LBr
-	sdRWof7Oytw7mcDiOmYF9LOc9GDcOukN0Li2sQUfCXMp2evzx3PFpqxjygaH90jyZZBcfQO3Vma
-	1ELcaedxESRz+K194Lq8eEA+09Xao3OgXTycbmBgYDT6x9SvcLM9AIDRbke45bgN7yvi/YntGY8
-	xU/scM9X2WEy2FBAe3RPEmw58DOqDXfH0NVsi7MFmFzZaS6I195cuO/NhHEcCNwEtQ9ddMjk8l5
-	/DE89UIoKoHcsT6fDjvhjeWzjbccdjtuUlZHoJeGrbPyr+n8Wx2vw0lcnojlo4ydzciH3wQmIFE
-	5mSwSdy3UhSkyRpm/TSa7OK2oA1a7oRuYDn/
-X-Received: by 2002:a05:701b:271a:b0:1a3:dfb6:e593 with SMTP id a92af1059eb24-1a3dfb6e661mr1118380c88.27.1793057194020;
-        Mon, 26 Oct 2026 16:26:34 -0700 (PDT)
+        bh=9uj1nrHyKAytE8LQe5Eo3nRqrTlDdSOlYuKjnB0gMtw=;
+        b=2vkB8ZyU1jho/xjmAzt85jEpJIOtasoeNaGkyIaUrpylewze/mp8CKQT1lRMzUoHv7
+         oHRNyLIn06YE9vrxxQ6mwzDfZVxtviFQLv+oDtt9epTK53hOS4QXr6m7ka9ELrbXX6V8
+         VqSe6K/svI6forvhcwyWO47xyprN8rhj55oZU2lRfNMe8EakW+Nub+9UMdJh0+cUQMsW
+         otDcRZduUrhPtODIfjqHij5QFSCs7uIdaENlmsCkQRxdpwT3Ph/mqvQFA9Ndtv9a/Fm+
+         FGHmsWzr6HZpnu3Si4PQ1F2YhiJMzE5lRdQiTt1q+TZUZKZKg5tLnPae7NuV8yIQXac6
+         Z2NQ==
+X-Gm-Message-State: AFq9FYKXSOOLER5V3iCvi1YrGo3bbTSvNjdg4UZogx5Hqy2x+BUStLCo
+	k4gyLREwcHArU5wjYLnJ7kr/LHvN7oemIz/lvPadW9J61cUyrR3OedbpcpRXIA==
+X-Gm-Gg: AYBFou0CzGBmZIb4sv5qhZIGns3DBvlVxX8mXzVD8varBIjTJeohp+CCNtziU9bx0Qd
+	wd7CxlXU4oCx9ZnfNfp/xUsVNPHNhMpxKZfZlsvpl8eFfpG89wr5+xRFt2C0bj/8CwHj51smg0H
+	NekQFDgav/L/GpAAP6UKQgkPtyLMu4DfsYGkUGuOEl+KE/vfsaUKcP2pqZVThcg+x/0c4TTArWU
+	JX9RXZWf13G7Rp2SCj5pRc0XPOhL0gO+8vQox72D1E+/attkGCVrvccIw+H1y6DcqirzB7tFfOB
+	nM1M0o6nVRG/Z1/0H2P1IY9msv6sUEF+M7XBf6IzqAXw2gquG2dH5Q6qkQcS9Mq+eZUe8/tTw0r
+	0XTxueiH1tDP4SmDpCFf/R/8z7rYMJxmeHLQMaOKVwuCLdwlJUikJMpz8drXgA34osQnu/mJXYx
+	aBuKBFs+8WmUOoqrqB0Hh3uuxD5xdm45C5uE8Cjq7bSevkIjgeGkH95CZBQIlb9TuqYjT9WJCRk
+	3+cpy9zzaKERgszP1TzLXcptLTTON/MsjfrPt6rMv+PyuhH9JksoVoMZMOCUi28NqHVDUI08gyc
+	361DaIu5FuEh
+X-Received: by 2002:a05:701a:ca05:b0:14c:1f57:3e86 with SMTP id a92af1059eb24-1993f3f1d75mr13534785c88.47.1793057196157;
+        Mon, 26 Oct 2026 16:26:36 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0e8d700sm32234982c88.10.2026.10.26.16.26.32
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0e8d700sm32234982c88.10.2026.10.26.16.26.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 16:26:33 -0700 (PDT)
+        Mon, 26 Oct 2026 16:26:35 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][PATCH 2/13] python3-tzlocal: upgrade 5.4.4 -> 5.4.5
-Date: Tue, 27 Oct 2026 12:26:14 +1300
-Message-ID: <20261026232625.1275411-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][PATCH 3/13] libheif: upgrade 1.23.6 -> 1.23.7
+Date: Tue, 27 Oct 2026 12:26:15 +1300
+Message-ID: <20261026232625.1275411-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261026232625.1275411-1-ankur.tyagi85@gmail.com>
 References: <20261026232625.1275411-1-ankur.tyagi85@gmail.com>
@@ -62,34 +62,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 23:26:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131442
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131443
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-- Recognize timezone file names with multiple slashes in the TZ environment
-  variable.
-- Use HTTPS in place of FTP to retrieve tzdata archive.
+Refer to changelog for behaviour changes.
+
+Changelog:
+https://github.com/strukturag/libheif/releases/tag/v1.23.7
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{python3-tzlocal_5.4.4.bb => python3-tzlocal_5.4.5.bb}      | 2 +-
+ .../libheif/{libheif_1.23.6.bb => libheif_1.23.7.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-tzlocal_5.4.4.bb => python3-tzlocal_5.4.5.bb} (79%)
+ rename meta-multimedia/recipes-multimedia/libheif/{libheif_1.23.6.bb => libheif_1.23.7.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_5.4.4.bb b/meta-python/recipes-devtools/python/python3-tzlocal_5.4.5.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-tzlocal_5.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-tzlocal_5.4.5.bb
-index dd9b6ec93e..d55e5ce9e0 100644
---- a/meta-python/recipes-devtools/python/python3-tzlocal_5.4.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-tzlocal_5.4.5.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/tzlocal/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.7.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb
+rename to meta-multimedia/recipes-multimedia/libheif/libheif_1.23.7.bb
+index 1bffe00fbc..df1aaaff72 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.6.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.23.7.bb
+@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
  
--SRC_URI[sha256sum] = "8dbb8660838688a7b6ba4fed31d18dedf842afb4d47ca050d6d891c2c15f3be4"
-+SRC_URI[sha256sum] = "ba976898bad27945178c9ca25c222c19e322b30c10342b9f40b46714f70d2d5f"
+ SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master;tag=v${PV}"
  
- inherit pypi python_setuptools_build_meta
+-SRCREV = "f81f28ac014b1c28dee483ac45b72c6b05bc421a"
++SRCREV = "12a259a5882dd99d45ec5fc77e296a3b620d1e2e"
+ 
+ inherit cmake pkgconfig
  
