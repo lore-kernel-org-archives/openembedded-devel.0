@@ -1,61 +1,61 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.39905.1793009958382724568
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.39906.1793009960815713841
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2026 03:19:18 -0700
+ Mon, 26 Oct 2026 03:19:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=CYOo+7cM;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8a06ca6e8f4so1951276b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 03:19:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=okrMePpP;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-8a05da1cc1fso905538b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 03:19:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793009958; x=1793614758; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1793009960; x=1793614760; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qH93jwhvZJyHUAbhW12B/pfHM99JoC6WKuPR4kR2qi0=;
-        b=CYOo+7cMlrBfXpkAg7Y7Ebb5RtsXkbvBU1zyvtcuewwt+VN7nXCD6NHFspMSR01vLJ
-         dk3I/mcwhsyN9hhlpRV5DwAz7bljWE1u3eI1WDYREqG6Hs84AjYTqDkBpLJikpDxpjAF
-         /xZX+B/076GX50yzRjy3Cg06wjBmzAkD9yiqnEnrpeYBQn9UwoM41Q2T5jRi2iqoNq1k
-         C70Kb140xjy+RNTjxYt0A5npGq7DTOfWRr69YE6LA4tlSUIQoFlauS0LTi2sDaI2JUex
-         aszBh2s2CBTCG33zr2Z2HQdwnvDa2G3HjrgwRPi2ZHssps/KTZEwRVGzlejRGqj7uhdQ
-         ZgEQ==
+        bh=TgHhFatbRtW33acQKC7ipwW7T/BNqa2AranbMop6hCE=;
+        b=okrMePpPQcX/1GxnwMCyclnXPg/MuvdYGeb1DLclb2bjPJ4Wht6iG4CaskZnAi0Blj
+         GMTfXJQ+2X26lZ3qEgZMSZUNGMLCBYnBhJY6e3hoEElaEDE2UJ0XOPUfSMZh9MuLf+HY
+         MwzHV0rHXloFaUNdvNwnfBJYmOC1mrwKltlDWNYPZZVLpCvuezinNINrcE5abCraZYa7
+         bW3k3L19esuIu18hb4A51tdUPUUB9QDxDar1BJAl/4YVVcBxIO0fiV7aGfqBG5xcXHu7
+         6EdUwBVrP4rT31eU1szZzIxTIxuq8r6eJaWQ63GZiC7r+oxpnesOLVXwH1ICk5b16Mb0
+         RH+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793009958; x=1793614758;
+        d=1e100.net; s=20260707; t=1793009960; x=1793614760;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qH93jwhvZJyHUAbhW12B/pfHM99JoC6WKuPR4kR2qi0=;
-        b=ic2j9KuPm8FY8Qf4MMowCOSkDndB4DM3oZNALxYjspCFHh5cJBxv7DLRPGUcW7xfzq
-         3n5dlnxNDnevB9UTWJ7h2AV1MPM8WS0a/i0J61pBVs/fCRazyvi1/c7OQhAvVHpnyDYd
-         Dd3H2kyA5zKa1UOKUMOn+ZFtmLBdh/J8cO/g7JKk9QwMfduG57FR6PToFeUR2862gGmu
-         siT64vIzfXQOAYRexZo3b5JEfpmxGD4l3iYP1rE62ExLJA3J3ZIMdZ5trh+Yo7e8otsN
-         o8fXPpOot4Zd71+PJtDUWfaV8LBEc84H4j6Adw05UJHZ+oBt3UvO2eXUTkHT2QUb40Ug
-         hWWQ==
-X-Gm-Message-State: AFq9FYILJ7+J4FDOIpjhU1F0aYPZ0yYzPGh0SlQWx3GoTT92qqCybWVS
-	vOQCRbt81/s99dmGoSD47anN+Fb9nm2XJDP96dHRww9nWbgE7DUOfoa4tgjOdw==
-X-Gm-Gg: AYBFou3fF9R1G1iceMtDsPsALQr+XBR/hfN5ckgB5GzfJAURrXiDjZqkUbOiBhTc1lZ
-	7xUcjYYqYo4SQ42SnrDhIaQ1HugE/3AZaVv7vYP6/NnixhzfoGINM094NAxbpEN79MNFhEqfTqa
-	dtEfkpEKye+b3vzRz7z7hTsct8yquEx5Up6ZAhZkcrG7huUelK3VryFzo0bNTaijktOqsJuTPAR
-	XKNKcWDnV+ShaPqT+06qIzXBTAq814bVPlbTBeBuB3JK82Q33lenhod3/d5PcmzWITFVJbwbxS0
-	WFYOrSS+wvKViI/S62qaVG28HAw5LtkdM1aXvHpN6CpXBTKixFI6nlwhDxYJTRhIvxVr7SG9Fk8
-	yi6d7hy41sTwGraQhaGovkA4rbZ9u+P/Xc8ohGHFkcCLlMfvAdBU3KA8TgvFIsv7fC8weZQfwas
-	qhWzeGhSaLb19JDP6ZQUQpAmGOYVPnXY4/bRm0tCim79mmlivbSZFOUUwsmGfue+4AjsT+mHxtZ
-	E+D4YbWm3XrESNkkoLR/kIiiRaYv/3OPr0VzOHnDz7b0EzvOaoBhsdNmuBGeM+cpwBFFceHfCeq
-	jngYNXGeYDZejMvrogYdgvWnq3haCACZ3KTHuunBbRZmv8R86eFX
-X-Received: by 2002:a05:6a20:3c8e:b0:3e2:3ce:4ebd with SMTP id adf61e73a8af0-3e7cd58c8ffmr5800392637.49.1793009957660;
-        Mon, 26 Oct 2026 03:19:17 -0700 (PDT)
+        bh=TgHhFatbRtW33acQKC7ipwW7T/BNqa2AranbMop6hCE=;
+        b=I7Fbmt434TFQibs/eJ3pynuwxilpYSMonMRq+nMZazWO8nk/jGIoAKgUsk3A9yPU/J
+         rY/IWFexvNEd4SJirYToh5/DOnePi0TuFTFp+mGoQv08xdwtcuQv3FFTg4RIznO9LdJH
+         xyMQTEQC6wUOUsCQJS5r95PJSjtem+WcE+vEbsAvaRM7NxE+Z004KqmrJhgtUYcGkbal
+         AI0KLCOctmd4fEyjEV4ATNrZk2m7PRFyefD7ujk4cpvAh+DO463PgNHanef+nkT9boT/
+         6MK3W4mBuple4ZwM1GFGH5i/rKWEEjA5Mwho21h38P5XWmKZpxTltb5jzQopAezppzyM
+         cF7Q==
+X-Gm-Message-State: AFq9FYLndzocrR3ZLAIbS9djQKnIDhhqLOQ34z7GMupb+M5dzPuRPDgm
+	3iINdkw4aoUX2NfUCByNc9uKLEOhthGaDyhFWcQTFIpuXhYeUAG13DyVKhyJfQ==
+X-Gm-Gg: AYBFou16nUjn6k9GzcMvJqEF6zj4YroMi6AgjJXcRXeLI8JOYHZZLQPFE51ZfEf9qXv
+	GywzUTXgddsEpxAnlnm+kpg7nfb7A8umcE/Uj6X0YwVLHM0KoMSyjHH/pcPEkOH72ZohEvdhsTE
+	gN5QqwYWQutGcha07QW4yOPccTtN/0VASWvIMYIfPZ6mX5iAqerV6RAmAqv90xJO9xc+X2xRElo
+	qukn8bawDedo3zEPzo3CKCdyn0whaGP7PM/lAmNJgEYiko0WCfAQtAo5cVhA8DMIWt9dzxqCkXh
+	yCZhdav7TPHHw4A/rKXFMpR5x7mryGzPZ5pXjYMoJiQEd2+0NcvvSrVUOSldf/MkqYXBqpotXPM
+	I32hvYojwXBK/iFXnAL1KLE3DEXpnPQgTVabwAOVQKjkWG+i30+FTOtHMemGTpvCyxol/Y5ntuj
+	t7lGMl0d15GYNCyNjN8TpiSNO2N7HIsGuHsQUGEqHRjOyCz+/7KDK/CDDZ1KUoMBtoCQa5LIXZf
+	z5Biteygj1yyEDgJTgv7oZ7GAHZ8AXvFzSoh5+BG5tSTXlOrRDHZzqsPkG5FO+FPLxrl23CbqKi
+	Q5BvQ1oXlnMILOPbpFgH70WTGKkOImfDztMc11sYGn70pV0YJdBM
+X-Received: by 2002:a05:6a21:880d:b0:3e1:f7a7:2d2b with SMTP id adf61e73a8af0-3e7af80076emr4514948637.5.1793009960188;
+        Mon, 26 Oct 2026 03:19:20 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.brunswick.com ([203.211.105.219])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd8ccc4648dsm1383583a12.14.2026.10.26.03.19.15
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd8ccc4648dsm1383583a12.14.2026.10.26.03.19.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 03:19:17 -0700 (PDT)
+        Mon, 26 Oct 2026 03:19:19 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [oe][meta-webserver][blacksail][PATCH 6/10] apache2: upgrade 2.4.68 -> 2.4.69
-Date: Mon, 26 Oct 2026 23:18:46 +1300
-Message-ID: <20261026101850.1470035-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][blacksail][PATCH 7/10] 7zip: upgrade 26.03 -> 26.04
+Date: Mon, 26 Oct 2026 23:18:47 +1300
+Message-ID: <20261026101850.1470035-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261026101850.1470035-1-ankur.tyagi85@gmail.com>
 References: <20261026101850.1470035-1-ankur.tyagi85@gmail.com>
@@ -63,101 +63,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 10:19:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131428
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131429
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://downloads.apache.org/httpd/CHANGES_2.4.69
-
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit cf030e73b8e0fa463a81ace8f13c82a9f1281ebe)
-
-Also dropped patch that is part of the upstream version.
+https://github.com/ip7z/7zip/releases/tag/26.04
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 1c45c216f647175c121e7b7f5fb19c8a042ed99e)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...mod_md-Add-OpenSSL-4.0-compatibility.patch | 47 -------------------
- .../{apache2_2.4.68.bb => apache2_2.4.69.bb}  |  3 +-
- 2 files changed, 1 insertion(+), 49 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.68.bb => apache2_2.4.69.bb} (98%)
+ meta-oe/recipes-extended/7zip/{7zip_26.03.bb => 7zip_26.04.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/7zip/{7zip_26.03.bb => 7zip_26.04.bb} (98%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch b/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
-deleted file mode 100644
-index ee127681ec..0000000000
---- a/meta-webserver/recipes-httpd/apache2/apache2/0011-mod_md-Add-OpenSSL-4.0-compatibility.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From 6cd9ea8dcb5bf68a195e90578c7f05e12eba5468 Mon Sep 17 00:00:00 2001
--From: Rainer Jung <rjung@apache.org>
--Date: Wed, 17 Jun 2026 09:48:52 +0000
--Subject: [PATCH] mod_md: Add OpenSSL 4.0 compatibility
--
--* Use getters instead of direct member access.
--
--* Struct was made opaque in OpenSSL 4. Getters exist since OpenSSL 1.1.0.
--
--* Keep OpenSSL 1.0.2 compatibility.
--
--Merge from icing/md:
--https://github.com/icing/mod_md/commit/9fd90380db0722f0ccc14ff1c4da0ca21d4da75c
--
--Backport of r1935161 from trunk, [mod_md CTR]
--
--
--Upstream-Status: Backport [https://github.com/apache/httpd/commit/6cd9ea8dcb5bf68a195e90578c7f05e12eba5468]
-----
--diff --git a/modules/md/md_ocsp.c b/modules/md/md_ocsp.c
--index aee799a7b39..2e7f14dff31 100644
----- a/modules/md/md_ocsp.c
--+++ b/modules/md/md_ocsp.c
--@@ -533,13 +533,23 @@ static const char *certid_summary(const OCSP_CERTID *certid, apr_pool_t *p)
--     serial = issuer = key = "???";
--     OCSP_id_get0_info(&aname_hash, &amd_nid, &akey_hash, &aserial, (OCSP_CERTID*)certid);
--     if (aname_hash) {
--+#if OPENSSL_VERSION_NUMBER < 0x10100000L
--         data.len = (apr_size_t)aname_hash->length;
--         data.data = (const char*)aname_hash->data;
--+#else
--+        data.len = (apr_size_t)ASN1_STRING_length(aname_hash);
--+        data.data = (const char*)ASN1_STRING_get0_data(aname_hash);
--+#endif
--         md_data_to_hex(&issuer, 0, p, &data);
--     }
--     if (akey_hash) {
--+#if OPENSSL_VERSION_NUMBER < 0x10100000L
--         data.len = (apr_size_t)akey_hash->length;
--         data.data = (const char*)akey_hash->data;
--+#else
--+        data.len = (apr_size_t)ASN1_STRING_length(akey_hash);
--+        data.data = (const char*)ASN1_STRING_get0_data(akey_hash);
--+#endif
--         md_data_to_hex(&key, 0, p, &data);
--     }
--     if (aserial) {
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb
+diff --git a/meta-oe/recipes-extended/7zip/7zip_26.03.bb b/meta-oe/recipes-extended/7zip/7zip_26.04.bb
 similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb
-index f178007ab7..fba4667bd1 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.68.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb
-@@ -16,7 +16,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
-            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-            file://0001-make_exports.awk-not-expose-the-path.patch \
--           file://0011-mod_md-Add-OpenSSL-4.0-compatibility.patch \
-           "
- 
- SRC_URI:append:class-target = " \
-@@ -28,7 +27,7 @@ SRC_URI:append:class-target = " \
+rename from meta-oe/recipes-extended/7zip/7zip_26.03.bb
+rename to meta-oe/recipes-extended/7zip/7zip_26.04.bb
+index ca50aed8ea..49437b807d 100644
+--- a/meta-oe/recipes-extended/7zip/7zip_26.03.bb
++++ b/meta-oe/recipes-extended/7zip/7zip_26.04.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
+            file://0001-Remove-treating-warning-as-errors.patch \
+            file://7z_wrapper.sh \
             "
+-SRCREV = "0766b733fe3e06dd2a7f9a3cfbf2108ac73abd17"
++SRCREV = "9128b80e3a471108678e2b3ec3c985861c8d7b0f"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "68c74d4df38c26bed4dfbdb8f3baf1eb532f3872357becc1bba5d136f6b63c06"
-+SRC_URI[sha256sum] = "c5e6ebc66e349b87d7fc6916ae7cc2a808ed348003de134cf9e9d89d3e2cc73d"
- 
- S = "${UNPACKDIR}/httpd-${PV}"
+ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
  
