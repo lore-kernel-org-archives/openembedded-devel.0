@@ -1,60 +1,60 @@
-Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7937.1793057214791660077
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7767.1793057216757200821
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2026 16:26:54 -0700
+ Mon, 26 Oct 2026 16:26:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JGW2hdKv;
- spf=pass (domain: gmail.com, ip: 74.125.82.47, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-19305bcb72cso2665360c88.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 16:26:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KFcbScb4;
+ spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-3535bf8b3e0so5752685eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 16:26:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793057214; x=1793662014; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1793057216; x=1793662016; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MSe6XOtE7oslYwo2ryCCqLx8X5ghcVGtDE7/GMfE5uo=;
-        b=JGW2hdKv14WH7eGS+P0eZI+nDLlKY7hO0Px79SwYmkUKQHyNJN1th5D0UMxMJrhjWb
-         PE2TDovYcR+7pbLPxjk10Ik41ogjGweEEzfAvB/nt939xWQv0wr3WRX/8WTmfNs1LWSL
-         QgJIRUKmBOSxfb4wOH8cyJk4AmOfEkRJf4JUKWZbJPPwIkN78ijG2CAPGyBSbEJGHiWp
-         6Q6EMQLYU3Ag97EyT0DSgmE9qoGpQYJaoV8tLzJFNloQdKbX0B82HtCrD+8Bcwwm2JZs
-         XdhAELp8T4inLxz+KHLFn/kMiN4Ce7G4H9X+2a8HhgoQCw8lkykXQd03Sx91RBzPrwZC
-         iRKg==
+        bh=fo7VaepEhlTAcTymtGNXi8+4f4eCerkcvdK/z4Brc9Y=;
+        b=KFcbScb4Lf+PWEyX5Xp5izgRc/mVtGn5xydoEYxfJmK7IfLjsg7KGuzKMBaSsMyOQf
+         Y52r97n5Wfu6OWUYugZh/bTh4tsc58aIwjZpU/hNUsMWmgs5hCqEhdzToAutGsxcJSdd
+         6Yq7ZI7yYuANluULl7ZkRHGVrW2JMRYrrNV/v8xjkXM6gnYLGf+jxMEbu4gTkcZkadZc
+         tMnz2orGuXfiA0yZPpxZ/z1eFxImvowXBQoR6g4HN8S2aQsLjizcioatKVScSV8t3Eur
+         1XSuDlJOs0W+9whp9i/ym3LkwLWvtmLNuCFIhNi9Ji7rAlG6F+UvBdv6v5QHu6tVO4FF
+         D9fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793057214; x=1793662014;
+        d=1e100.net; s=20260707; t=1793057216; x=1793662016;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MSe6XOtE7oslYwo2ryCCqLx8X5ghcVGtDE7/GMfE5uo=;
-        b=iQ2iDGM+jm6zLlY4f+R7tns1l55QTnT9t9bsZeSZa3Rz9NbMIAaHMYI+KOB+U2PReq
-         QJbtfj19Qr1oOSavXUkgjh61/dq8Bmj2ySuu0W2iVHIAbJkKw6J+TFN60PUtEj7Q0ycx
-         2W5LvdLpz0nA+KPFf8Aji0FmzV8Il8EzBAgrG+uIwUMXl7to5PZG3LAV0yNJPiN+3+Fj
-         ZAfsNSqFmyGcFHFfKgalCopBjY63rzm82Ks2p9D4tuWUMG7I6giqLRRq9LjAXFTuOf97
-         nPIdcglMnXHTYQEm1S55FuQT9GYXBp5R2ddURAlOlXpYtbDiZWwOeVddVjAiQYo7yWCz
-         tL+w==
-X-Gm-Message-State: AFq9FYLKTyhHzoN87QVK7zQLu01RXR28hevOuhnx/nwhdX6UZ2rCumFi
-	2VAJMiDWJOnkSW7XX2FHsmGNTwqbg0JqtKdkyYznJeYPft+kJEqJ/FNzkPnZ3A==
-X-Gm-Gg: AYBFou0x/UCfSEkI8GmyXrJJwvFQSt1Elf0xVNWxY78EZiaDBB1rvypfjpnn+1UZsvt
-	M0o0/+x/tC42nmkiusKx8AuXRLMf12NAMogUyUb7VH1uz4B9Lh7DOO3nZYEN91DZbmxkfg2DpDO
-	0WxhkG/LWK+gY6W3Bwo+P4k4Jbg6TYO1PVb0teyOCLGvOBR4z6kFkl+srcS8Uum4eysYJfxoiCQ
-	JNjJzp0v1l/WXiuJebiLEfEUHHjFliiEdIhY6B3akdT7RAaiFGKj4TgUBblyY6YB81Ih75WaHQV
-	hxXXJpwCXyWl1MBQxb2X2n+U8wnb9GptGIcqgZW2ihJY3WquWgWeo2UtfWgbHaZ/5fCoK6FkZUE
-	f4Sq93BP33+51XJIwU8Z/yaV6ggeEpSJVZFFjcDkv+cCVG3uNzx4ZJWbHS0ruWgxZCGTugSaHv8
-	4EGKTL8Yp7Xp9ZHM/6c8z7PB/s5+QNAbQrHbJXhIN8ot4ysgCBgbqvFEOxge5adjZ1BkFCqKv5A
-	oI2jSKkhw6IEnZ/CV2bCQdjjjKAKOeLJlOgmAQSNnS5LUjdv8PxtZCkBSOlfRcI9pWrn+AuKfcJ
-	vbTCHaZm+Dfd0Zg=
-X-Received: by 2002:a05:701b:418a:10b0:183:3c2a:ae8 with SMTP id a92af1059eb24-1993658d4eamr11832865c88.41.1793057213936;
-        Mon, 26 Oct 2026 16:26:53 -0700 (PDT)
+        bh=fo7VaepEhlTAcTymtGNXi8+4f4eCerkcvdK/z4Brc9Y=;
+        b=yny6WMJ+L7SDfX0zf/uuw/4JOQwp14RxROaQibgJKfR1WVckKot0ku4X0NX1LCIiNS
+         5l2v4svuXUG1zc2zZbks5IG2uVKiF0z7n10/zfVWSXkSM/b3QMyWlNpae7Z/e7Yuj8jo
+         4JV6xObBzJpXW28dgfbHz14PDtiRXEAeY5GNxFibGOo87lOxg8g3MgmxCVtC3ifNprw7
+         +fee9DKmitakF1PDq1wW/fei5CsnN3Wgh3l5WVVCQjmqX4NW1dlqD92K6XdktV2nsoVS
+         4yxiHgVORnVugizdOyQ2a3xRRFTg1DkSRieax2X/4CTQcb4v8gHGyNdw6h8K4I7bK7ol
+         Ry/w==
+X-Gm-Message-State: AFq9FYKXytj/Iuy4BoQjiIhVd5l8uXuQskMSSK1RbYzxU/hm4EfW/Uy0
+	yJDE2VMjvXOwd8R3krVsdGft+17rMnaPGlbXQRagG1CXj/g/Pe5hllx7+Dkgsg==
+X-Gm-Gg: AYBFou24i2zDzk7Y6WF32/ZojBn7y+bPr6QqZphfzDLzmWWSwRQADeWLUTecmAWucwm
+	WTH82+9S3O0/jZIiXbcT+8YFsZ9TLk/EHH/xZqlEYwTc1mY4myzMh1z1gErefaZDAy8PVlBWaa6
+	48kCnZ9o3W4IuaijvKXAle6JnqDDHLpclsQwbNakhxNDpH1GT/v/ukYk8SBKi6pnHIvJwl1k5Il
+	3r7iPdPLU4BOOvFumYxoKft37+Oos7HENsA5Rhas9MNl9gg4WF8suOLJHHp1c+p56PvNIY3T45A
+	b50eXW/8oyI38Yayzvl6Zz1/Jf0EDLE6SUcPaYtcSOzam4WK6Xd9FM8rd1iqwCZB8B4BySWCO6a
+	bMtkVwUgAqn2iXQdI7OHwW3MW3C1zfSgI0EalVtdlyxAmuHfANHdm15NLb1x0yqV5cXL3XvAWjg
+	X0iwnPukvQgZ7jeNm6tUmifOdeGe7RrTyOAd0nZ9pIJDppSZbmKzNeo8R6+YBFdQyGuT+lRwp7Q
+	X386/1mRoKwJjR6SA0TzmODPT8Om+/mQV6oA+wCJepcrsMdRB6iwciaSDNFELIrqyiX+G1qSy2p
+	GXOX+YByoJZi
+X-Received: by 2002:a05:701b:2610:b0:14d:baf5:c411 with SMTP id a92af1059eb24-1993505e01bmr10996508c88.14.1793057215996;
+        Mon, 26 Oct 2026 16:26:55 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0e8d700sm32234982c88.10.2026.10.26.16.26.52
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0e8d700sm32234982c88.10.2026.10.26.16.26.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 16:26:53 -0700 (PDT)
+        Mon, 26 Oct 2026 16:26:55 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 11/13] libraw: upgrade 0.22.2 -> 0.22.3
-Date: Tue, 27 Oct 2026 12:26:23 +1300
-Message-ID: <20261026232625.1275411-11-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 12/13] nano: upgrade 9.2 -> 9.3
+Date: Tue, 27 Oct 2026 12:26:24 +1300
+Message-ID: <20261026232625.1275411-12-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261026232625.1275411-1-ankur.tyagi85@gmail.com>
 References: <20261026232625.1275411-1-ankur.tyagi85@gmail.com>
@@ -62,33 +62,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2026 23:27:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131451
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131452
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelog:
-https://github.com/LibRaw/LibRaw/releases/tag/0.22.3
+- On the mini bar, an overlong filename gets properly clipped.
+- The keypad operator keys produce their inscribed characters.
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb}               | 2 +-
+ meta-oe/recipes-support/nano/{nano_9.2.bb => nano_9.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libraw/{libraw_0.22.2.bb => libraw_0.22.3.bb} (92%)
+ rename meta-oe/recipes-support/nano/{nano_9.2.bb => nano_9.3.bb} (87%)
 
-diff --git a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-similarity index 92%
-rename from meta-oe/recipes-support/libraw/libraw_0.22.2.bb
-rename to meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-index 2db0c14a61..c0601f71a8 100644
---- a/meta-oe/recipes-support/libraw/libraw_0.22.2.bb
-+++ b/meta-oe/recipes-support/libraw/libraw_0.22.3.bb
-@@ -3,7 +3,7 @@ LICENSE = "CDDL-1.0 OR LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1d66195044cfbe4327c055d1c9c1a229"
+diff --git a/meta-oe/recipes-support/nano/nano_9.2.bb b/meta-oe/recipes-support/nano/nano_9.3.bb
+similarity index 87%
+rename from meta-oe/recipes-support/nano/nano_9.2.bb
+rename to meta-oe/recipes-support/nano/nano_9.3.bb
+index 81faa7da95..889a9d1086 100644
+--- a/meta-oe/recipes-support/nano/nano_9.2.bb
++++ b/meta-oe/recipes-support/nano/nano_9.3.bb
+@@ -13,7 +13,7 @@ RDEPENDS:${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
  
- SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.22-stable;protocol=https;tag=${PV}"
--SRCREV = "b93f6e45c194f5df9b02a43b1af9a54b4f41f33f"
-+SRCREV = "cf02d66eb5c19d4e46df7aee0582e47a4918509a"
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "05ecb99247b782e8a5b3a25ed4101dd034b0236902f7449bc9795b717642f7e9"
++SRC_URI[sha256sum] = "a9affc52c9596ee0682bcdd4ceb3c0b235eb221d83d733dfd9b0dff45897cb0d"
  
- inherit autotools pkgconfig
+ UPSTREAM_CHECK_URI = "${GNU_MIRROR}/nano"
  
