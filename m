@@ -1,95 +1,89 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14871.1793092906100526824
+Received: from codeconstruct.com.au (codeconstruct.com.au [203.29.241.158])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14875.1793092911917570688
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:21:46 -0700
+ Tue, 27 Oct 2026 02:21:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ILjG/rX5;
- spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2167bd087so25898955e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:45 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@codeconstruct.com.au header.s=2022a header.b=cjgRuYCB;
+ spf=pass (domain: codeconstruct.com.au, ip: 203.29.241.158, mailfrom: james@codeconstruct.com.au)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092904; x=1793697704; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JIz+750Tzqf0O7idbS4pbagXOvBQ7vT4/vZC/oIP2fA=;
-        b=ILjG/rX53nBeD5QKLjnctmeNo7g+XF2jYk5xIfR1Q3n8E/i/qhZmtLQ9WnEeyvwh5j
-         rQ6bcSJfxTtwniZTL33so3p9WZ27ik8yUlbUGmF3xxlcphEBqp5YjcVk3StFonIzX2IL
-         hxdx+p9s7OGt6UmnwuJ/gQ4EiAxT7Yj88Odgk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092904; x=1793697704;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JIz+750Tzqf0O7idbS4pbagXOvBQ7vT4/vZC/oIP2fA=;
-        b=1ht+FqmFq7SgASt0rk0uiSTeVYaf9xp9TCF4QCUvcs0TqXvaPgKZcORREyWi+4Tdki
-         204VjAV2Bs/C1P5kzh0AylbycRSLbuWbywgbyZwQQRaHDY4SehjcZ+ny2O6IlNHhm3QU
-         OCjdj0/Kvn/eWvgMagousRq3xmAp1tezLKRz8aumgYVKsEfwWFe79e2JyjrH3ez6lK2R
-         ScVIgenE4NyLht9pz+f4niG5hoCn5Dws6dOqVP4hT0N4SHgJx3jQ352Bv2vLeM595Y2Y
-         YuQQujLmgAdhPfafU0Tf5rpSeFgvuAFq9W73LltxlDyclXgfjMO4+w3nr0KjhWtkdLR1
-         gJwA==
-X-Gm-Message-State: AFq9FYJKq568cmiR6D/vb/+tc8urrg8HrGA8z1+btjzMbgRstIZ93UjJ
-	PCZ9lByD2xNY7JouGWpzHY/Yzr1CfeH8GCHSJEtY1R0mQ18GAefZQiNPlqOC65fM/6CYaq4gIwc
-	V4Rc/
-X-Gm-Gg: AYBFou00Q43TPWOryVvfsnaizNHVJqQ2tf3t+GGduowZMIko7SBvi/tUG/ncdza0E5v
-	3waNVH0maE60TiVITdvghrt8KJuAsfGN32gRHrxN9Zs56Md74xDKKgFrKXWzIBINOJUPbxrVTs4
-	TIZRuuuTLZtYT+YJ6MjE4PyK+TPtL/VBDbxpfLnqUP6P5g/qxlWVuOgj05TfKBNaDbOSG9Xm26b
-	z2sUwZpACPzgfqe20oBze9FJni0nZ6Cd4OMb3LGrHaFNuMQXbFh6GjUqqas7acxOub5j1lVvN6Q
-	vFTLPJr6EvcI2zkczyEst666+zc4toaQd4KVGWfIE00tiRHq4iPp5ab9trg28bPyp1Ictsh7dIy
-	/I9aqd2y7dtLPox3MUsLJChKKzogkPjAly9xUZpUCrDdwm+rQ+EvoPACE0PXazfjlXYy1AEiL9W
-	GqK/PzesdVM+g9J3IZFBf1fSsp7Uifjw9wRHiluSZVe3WHQMlRBWe/Bo/XylbDVDsVdMLwyQiBj
-	6HB6zAhnTqTciNVDGq6LCi3mmrhjkhAwzrA8ZgZ9jJGb8dj1E31jEVvRLICA2SxV+LABxo4JrV2
-	6AobFfAUwxRhH4EaFBtg6ntxV1w/O/5jICU33M7NI1s+CkkxfWqtuVKfDD/da+ffQVcSDGA7+1x
-	hjVaK
-X-Received: by 2002:a05:600c:4f56:b0:4a5:a5ca:de1d with SMTP id 5b1f17b1804b1-4a5a5cae166mr146692185e9.30.1793092904401;
-        Tue, 27 Oct 2026 02:21:44 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:21:43 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+	d=codeconstruct.com.au; s=2022a; t=1793092909;
+	bh=mb+KL4w25xKBOy0f8uiyPpKGNApjPgxEcVaoCHKUvq4=;
+	h=From:To:Cc:Subject:Date;
+	b=cjgRuYCB3kgEDXpileh24J1lnSlpTwKjTmjscBbncfg9osIyE4othzf12k8vFvLmH
+	 N+mK6/Iw8nrG14pomtIG60zHGYadEob0tHccSiBaLUfYI1aV1zpisLg6XdhcEkAUWb
+	 G9IoPNMdHqTSkVp3Y+qXk1+Z6VbAkD/B5ng5AzndTguZz+NlWVLBMZwJGDwEHkJ556
+	 6uWybUexEq1P1P/6Gb7el0Uf708XBEW62UhU7Yx6/M1v8EvOvgEGnuSbPtixo3FEXG
+	 tISnZlTveWPrIt8NP5wJ8MRz9TZ1Pwx2od/uE3uGzTN30q0hysk3RUC/hYStxNdEUM
+	 ZMmCSyrbokF8g==
+Received: by codeconstruct.com.au (Postfix, from userid 10004)
+	id 49DF764ACD; Tue, 27 Oct 2026 17:21:49 +0800 (AWST)
+From: James Lee <james@codeconstruct.com.au>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 58/61] python3-xxhash: Upgrade 4.0.1 -> 4.0.2
-Date: Tue, 27 Oct 2026 11:20:25 +0200
-Message-ID: <20261027092028.782979-58-leon.anavi@konsulko.com>
+Cc: jk@codeconstruct.com.au
+Subject: [blacksail][meta-networking][PATCH v2] mctp: upgrade 2.6 -> 2.6.1
+Date: Tue, 27 Oct 2026 17:21:46 +0800
+Message-ID: <20261027092146.2571059-1-james@codeconstruct.com.au>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
-References: <20261027092028.782979-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131522
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131526
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 4.0.2:
+mctp 2.6.1 is a bugfix release that corrects mctpd's systemd service
+file. mctpd requires CAP_NET_RAW to send MCTP control messages when
+running as an unprivileged user. This capability is missing from
+version 2.6, breaking mctpd.
 
-- Improve type annotation compatibility with hashlib
+Bump mctp and mctpd to version 2.6.1 to correct this.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Changelog:
+https://github.com/CodeConstruct/mctp/blob/v2.6.1/CHANGELOG.md
+
+Signed-off-by: James Lee <james@codeconstruct.com.au>
 ---
- .../python/{python3-xxhash_4.0.1.bb => python3-xxhash_4.0.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xxhash_4.0.1.bb => python3-xxhash_4.0.2.bb} (85%)
+v2
+* Update SRCREV
+---
+ meta-networking/recipes-support/mctp/mctp.inc                 | 4 ++--
+ .../recipes-support/mctp/{mctp_2.6.bb =3D> mctp_2.6.1.bb}       | 0
+ .../recipes-support/mctp/{mctpd_2.6.bb =3D> mctpd_2.6.1.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/mctp/{mctp_2.6.bb =3D> mctp_2.6.1=
+.bb} (100%)
+ rename meta-networking/recipes-support/mctp/{mctpd_2.6.bb =3D> mctpd_2.6=
+.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xxhash_4.0.1.bb b/meta-python/recipes-devtools/python/python3-xxhash_4.0.2.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-xxhash_4.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-xxhash_4.0.2.bb
-index 4a9a995414..fd2ce3be5a 100644
---- a/meta-python/recipes-devtools/python/python3-xxhash_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-xxhash_4.0.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c6a4f6d709b13927e4d5e9ff13cf8956"
- 
- DEPENDS += "python3-setuptools-scm-native"
- 
--SRC_URI[sha256sum] = "d55bf4ef10eb09b8b6866790e083d26d087d84caa3cc0946ba87c3ca7ecaf7b7"
-+SRC_URI[sha256sum] = "af3d1b3cfa5280e84d8968e9f30c9eca75781db4915eb6d6acb0dd4fc93e0f47"
- 
- SRC_URI += " \
-     file://run-ptest \
--- 
+diff --git a/meta-networking/recipes-support/mctp/mctp.inc b/meta-network=
+ing/recipes-support/mctp/mctp.inc
+index c8fc98f63a..cc140f23a1 100644
+--- a/meta-networking/recipes-support/mctp/mctp.inc
++++ b/meta-networking/recipes-support/mctp/mctp.inc
+@@ -3,8 +3,8 @@ SECTION =3D "net"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
+b21"
+=20
+-SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
+https;tag=3Dv${PV}"
+-SRCREV =3D "31ac0e86b0e23d32abf34d191653a87a47f3c9a7"
++SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dstable/2.6.x;p=
+rotocol=3Dhttps;tag=3Dv${PV}"
++SRCREV =3D "ea1dfa9e59681c42d02ed3bf91cb150161481403"
+=20
+ inherit meson pkgconfig
+=20
+diff --git a/meta-networking/recipes-support/mctp/mctp_2.6.bb b/meta-netw=
+orking/recipes-support/mctp/mctp_2.6.1.bb
+similarity index 100%
+rename from meta-networking/recipes-support/mctp/mctp_2.6.bb
+rename to meta-networking/recipes-support/mctp/mctp_2.6.1.bb
+diff --git a/meta-networking/recipes-support/mctp/mctpd_2.6.bb b/meta-net=
+working/recipes-support/mctp/mctpd_2.6.1.bb
+similarity index 100%
+rename from meta-networking/recipes-support/mctp/mctpd_2.6.bb
+rename to meta-networking/recipes-support/mctp/mctpd_2.6.1.bb
+--=20
 2.47.3
 
