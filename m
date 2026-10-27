@@ -1,59 +1,59 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14653.1793092849151680832
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14654.1793092850171601933
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:20:49 -0700
+ Tue, 27 Oct 2026 02:20:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=NkqnMFYK;
- spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so26929015e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:20:48 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kEQxNjbo;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so27260295e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:20:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092847; x=1793697647; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793092848; x=1793697648; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ix/4334WzUzfdmRE3GfdRSiZz1oWYknfOv9NrWKZM2A=;
-        b=NkqnMFYKC6Cx74/yJhBUMyPxqsXvQhkk0We46JLZpK8+5PDJ0K7O2cNvKMkujUr7Uw
-         UJA1fyGCCvA/RDT4WKRvV8rdSND39W15yuS4jvbT+ubaZMuNIZEl3jU+9FeLz+baPo6/
-         LVT8BAqj9MWy9KxS5hqWmICzoOkGvCkgfkvDI=
+        bh=0IZ9nttynXZYxkgjOU/gRkxRUL2s8JkcD+I1EDbz1A0=;
+        b=kEQxNjboYw8jmQ1wKjfuR8qIgiyABGqL/pJxj6xgSwG0o4OPRSvU0W0YBkd34iyaKY
+         LgXOF0CYor6udb275ab5hXfZopmrLgPl+rHS5HKw4mtflLxCgZ6wJ264YjQ6Z9mNDvUZ
+         p0RglnIeem9DIHCsLNoaR9UbOf7lAt2y7MkKA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092847; x=1793697647;
+        d=1e100.net; s=20260707; t=1793092848; x=1793697648;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ix/4334WzUzfdmRE3GfdRSiZz1oWYknfOv9NrWKZM2A=;
-        b=cWqMTVjfsenQR6VziKr9DwtAATEPwmNEIR7hPtUn6t/85D78Ly1ypGUdLKIjZqpR6v
-         /C1nlqsIxflCHT9Kraq4YsEgsaW+3YiQW5YYUDl5v8d3nknPM+wGsJiDhYNDClp+CNlq
-         8i7dbCA4gwg+VOxI9CkNNGFyVZmM+Wvf4DzPA8zztqqxAX80/52EVj+GyK/8FC9xWeZ8
-         8fgRJcw5EzzHVIvAc0ygowR5AqGXudfYDSnO3kp13AGQ8WhFXS4YFpXm+YZ+Gn5xbQ0j
-         CTEwMZSz9yoHqSD8Fm3/YyDkr2MxbimN5qE/pHLDGR2IKGEe26g76IFOodwlP/KXq6HF
-         9lVA==
-X-Gm-Message-State: AFq9FYLvPGWniTrypoZXvvln6sLTgfN4U6qO7QzwqDiz2t9f0vSrfrXO
-	cDpunzJd/DJkNnFYL6/ZE5Us7qzEPv9RWAdZr0nCX+i2T9s0Fuigg0uNR5ZpMJ8Ri04wyWrsbjE
-	dBa6f
-X-Gm-Gg: AYBFou0JYqjLUyRghNrctd5fUmCFoWnClZHriuls3V/+vewIAPLPWBVT3uX/M01uwhc
-	vJHPKk1A1S1XcVfnKNh69QzJS/nsMvEcFaR5vtf0F2tR6ubISBr9Q6JP92fRFtdVpbuMpfRz5Nz
-	DhyUjoKPVlmnpHony5wYl614c5XLPFlYK2fhlloPh5q5ib6cZ4Ed/r7rETaSpZHHTDtB1WHwSNR
-	s36c5mV4xR1x8CZrUiUuiG+46v6XsmtVCVU3n3a7zQNmRBVjt76tYKk+dFJPfwYpJy1vBM165W5
-	fuLjhbuI5W0tke1FEebah1J7JrfSLIKa6cJiilYQetoeq9p4tFgDRu3qEHm2B57ploiCZ/r/8m3
-	WvJO2t+xccK1EM32wnU2U79pOqUbQPkR7bp+1Fwgm8hu7sHwOb/6cwkEEn8YeXycBXlBmQAWL72
-	r1eZuG082LB6NetqU6VKyRfL1BbMt4KcZwMNdlyNsptDn/iYhJbSrB+L377H6oryMv8h2Nun7mk
-	DJ2fWszkxvo5I06ou2YYRrhqiy00+8DKwM0/AyVoS3zYgANKNY81xq17F+liFfwhCtcr9F7d7BQ
-	DtfeIe8HTP2Y+GUmR+mdCyff8Qch0tcWwGhNbWKFasuhAWt9euyjD/z+xDmJB2JxDcblT0mw9s3
-	0OxYpg48NA6/OWSgLwbtfjtMTVw==
-X-Received: by 2002:a05:600c:37cc:b0:4a1:a6e0:4ce4 with SMTP id 5b1f17b1804b1-4a35acb990emr170805005e9.33.1793092847450;
-        Tue, 27 Oct 2026 02:20:47 -0700 (PDT)
+        bh=0IZ9nttynXZYxkgjOU/gRkxRUL2s8JkcD+I1EDbz1A0=;
+        b=tmDeKH66p+4743BhYarlhJqYSKGnrswNbUC64A0WFW6YbfXivam45Kvtqvg/ZBh13S
+         S0/UoB7Ltip3zpwrD6PAPYWN45y26gmOeK+FyJxopupcbbFOQvezmg37unK3rbquC63b
+         FMOmSXpMi27dYPufY9K0WVtWQRxvb+S87BrJu6fSuISiMnZfXYcmEpoWcqlXddK1h6CX
+         nU9Ia2vQ+9qfpYDxD8Kc6BSItNTRiqbPZFCNw4yamSv605YGyBywruxj8XUAA/Q7QgRs
+         OiKN5pdvdc9o3dGzZZqn54BdEL42AmNH9ivAvy6C4abUaZcy9pGf0bLHzoDYwcHPbnSm
+         BkPA==
+X-Gm-Message-State: AFq9FYLQ0xiHAP2qL/pN16eGDXoOd1mbjo4Xu0pcfoLvQG0hu6GgzuhJ
+	sdV9GiP6/6UN2KJe+T79EQXdQvPCbYi0+SGtnUKrbPwAVGxgFUgzIrogpw9jlukMysWV+9azU1B
+	d5qoI
+X-Gm-Gg: AYBFou1A1r3FvkFJJuNW6SpVCCC8GzKA2lNbTiBxRoOxEVZ0e8zNMZgw03ahfE/1eLF
+	8dmBA+4ZD6lRIGmzJfDsdMUg8Y+rUHus6x9hPJIPEqT4MK6HBAQgTNrBztE1QyIoDOdnYExk0kl
+	W3yqI24xrXyPd6/tDxV3fcDcWOy/dgaRd1WS6LqnnCUjX/H3dIqlrUht7FOdM6mxvZekq+k3gaU
+	c+4RM8vqWazBNmawcZGX1P5NQFb0kILf02ttRBmxJTF95p2E2rKey4aQONVYwAA/yPNrTB+NFAz
+	BUu98ETOefMM12kXG+iWnWqXzYdahXkTLhNLtkt34+njWqzWK4Qu/329tHTIXVvLrNsWpX3x5KD
+	ouic1APrLCuvyLffE3Ysc8jsktXiEq34c1iUg5QMhDWslC0Qi2VM2jmEU+/UYca/5+lRoYFXkb+
+	x7MW4ccgOCSqV87HUuIbfTolzKku8uZPCK+jf2Xh2h8H7vsscUAzgJdwsf55GGrd/HhcvVIu6CV
+	EX3uHcaT3ZnvzLbEFNxD+Sbc/dV12HECBSAd3+tYXPrbuFPF/GQVphl3ejoIBwguE5rPO00Hy05
+	kRkdaK40iWgy6bvby3SzccW68FIRntemGHIP2u0cE6hh1xMzdfN7BLN7ghMeAYRVrLeQXWVE9ig
+	94qzC
+X-Received: by 2002:a05:600c:4f55:b0:4a3:598e:e7a8 with SMTP id 5b1f17b1804b1-4a35ac3d022mr184587125e9.4.1793092848451;
+        Tue, 27 Oct 2026 02:20:48 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.46
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:20:46 -0700 (PDT)
+        Tue, 27 Oct 2026 02:20:47 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 15/61] python3-pycares: Upgrade 5.0.1 -> 5.2.1
-Date: Tue, 27 Oct 2026 11:19:42 +0200
-Message-ID: <20261027092028.782979-15-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 16/61] python3-pycodestyle: Upgrade 2.14.0 -> 2.15.0
+Date: Tue, 27 Oct 2026 11:19:43 +0200
+Message-ID: <20261027092028.782979-16-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
@@ -61,35 +61,40 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:20:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131479
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131480
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 5.2.1:
+Upgrade to release 2.15.0:
 
-- Bump c-ares to version 1.34.9
+- Improve performance of module_imports_on_top_of_file.
+- Improve performance of python_3000_invalid_escape_sequence.
+- Improve performacne of missing_whitespace_after_keyword.
+- Drop EOL python 3.9.
+- Add support for python 3.15.
+- Fix loading unrelated configuration due to commonprefix.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pycares_5.0.1.bb => python3-pycares_5.2.1.bb}      | 2 +-
+ ...hon3-pycodestyle_2.14.0.bb => python3-pycodestyle_2.15.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pycares_5.0.1.bb => python3-pycares_5.2.1.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-pycodestyle_2.14.0.bb => python3-pycodestyle_2.15.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb b/meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
-index 8a0536ff24..ccbf13728d 100644
---- a/meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/saghul/pycares"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1538fcaea82ebf2313ed648b96c69b1"
+diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.14.0.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.15.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-pycodestyle_2.14.0.bb
+rename to meta-python/recipes-devtools/python/python3-pycodestyle_2.15.0.bb
+index 4389198fba..cf4171dc03 100644
+--- a/meta-python/recipes-devtools/python/python3-pycodestyle_2.14.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pycodestyle_2.15.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd"
  
--SRC_URI[sha256sum] = "5a3c249c830432631439815f9a818463416f2a8cbdb1e988e78757de9ae75081"
-+SRC_URI[sha256sum] = "3e89edc56a3745046676207958bf3dbf2971c5df0d64de9f7a893eba8bf255b4"
+-SRC_URI[sha256sum] = "c4b5b517d278089ff9d0abdec919cd97262a3367449ea1c8b49b91529167b783"
++SRC_URI[sha256sum] = "318f5db083869b4c4dad922d0b11124fb27ab181b6730b93371da671e31bd50e"
  
+ inherit pypi setuptools3
  
- inherit pypi python_setuptools_build_meta
 -- 
 2.47.3
 
