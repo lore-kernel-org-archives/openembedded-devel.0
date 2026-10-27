@@ -1,59 +1,59 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14835.1793092842396514188
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14836.1793092842965349571
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:20:42 -0700
+ Tue, 27 Oct 2026 02:20:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=KxvOeHW+;
- spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a4dc547987so10276455e9.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ppIlUJx6;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a59100fa83so17971645e9.0
         for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:20:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1793092841; x=1793697641; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mfhHdx67jTOM8sL9foK4QnAo5crchpoBM5sZwtz6YwA=;
-        b=KxvOeHW+JkAzcGVgfAX+K1Ypkq1Z+E3mtD9UChSHBmbJ12mPZCduyDTzuJ/qyMDthg
-         8MhyNcLVsOoSq4LW100xrQDGI9gQrfxdCu4Qy0nkavonvoKVWY1YfhgGSKDJcpzi7Mc3
-         VpHysRP1nrgTWTSh2J8NABDINMn8CJbfOG7V0=
+        bh=Qxj0BITOOXJJyBkHtQvj4s2RXxJ5uExlbvIzqB5zeeM=;
+        b=ppIlUJx6KryHmJN2dqni7gy0HDEBJgTIgIxZixolOER+QdUtGRR0p0yV2YUsAlJhzR
+         L8I0YVGRpBa2/m8ZgiUAS/r7kltL1x6P+dGorNefDVbPelbxLD8qAHSDNH9hY/YlFawh
+         HxdPnWks46S9fXOZ9Unfme6MXLCqADlyQnlWs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1793092841; x=1793697641;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mfhHdx67jTOM8sL9foK4QnAo5crchpoBM5sZwtz6YwA=;
-        b=KyGVjQsqWK7/cIPqf9C+PY7XSfaXOGymBqAOcJFmnYDFWgW5cSUJbLsNa8mUyPsYpv
-         yqOQRPeHUVRh190XSvZFBHSl35mvkmCPfAA6ZNDoADT2MdFlYQX88Hpn6vYeaSg/YG9O
-         wEDEkbEy9FS1GJkYWviP7QLeD9xSDLepWdM7iDqzXxUb1yWQRCgjD8/FBDBMCSXx/CK+
-         J7ybgXi9r35HkTqllEPmodKfb1oiwLrq/9cOpWXPqs5CggKFbpAuUsnvfbkZlHcJ86ED
-         OBSkB4+LGPZVwZMrigWB6ow5ADDKTGEMww4iRlM6pTfyc4WUm94K0JIy0MWvHzlAQT5o
-         rXIQ==
-X-Gm-Message-State: AFq9FYLfeuJxWVSUXbl8F1WgvfqA50um9nxWrTwJhNWkuH6wUg7HZxqG
-	zoQvOw6AYV786/dh8wGhwGUftYpCNFC2sMMy/fh3gDCw4GZ6RH/oyIxHhX2mpSQQDbs4adgfsYe
-	BNc6a
-X-Gm-Gg: AYBFou3HPSIXT7jTdihGv1d/lsuXwMgYgoOMs1mJ7Cf8xvY1aoBOj+D38ymFWtCEP2y
-	KDfsRrXeSz32FCaxXkpTq2s7Qju1mjrDPlI9A6NsP5yTicULFRnCFdU9VqnVUORG4+azVY7IHo8
-	vBk70LbdvwHAnHhYSm2B8IKaVCha+ZVsL9/864p6htuvBsldH6CLu/bFRs/ExK/CRPWUVpe5iz1
-	E54PaTXEdFCg1SX2Iwn1/xXd+wztEVx1pcbpEtiMsM6yWmEe4rM9MPsMKgEXF/uB2e8/pmd0lx1
-	e2YqMnLz7mDmKlIysjS7Fu5ndL6Xt1bGn5/pblNwiyCc50A0uLhIFyRQKhyXR25GPQbcD2Jha9F
-	zkAqidWyP3naXiLZlQDQNIOqbZSTo4+t5WEiERl7m/ng71gp8C3Qw54S3XpAM+lBBRGzJEe/DPS
-	yLSOUn4spV0XNwgWUeaTrBgO4aUTJBGRLYGkF3psF8JSckGmx+FEoZ2wEo5UJKVygZ5UUiSooXr
-	EeZ/s3iNPUlsDZOVztluc36WoXclZwZ7UaqSB2cmPYjrGDoffOKN0F2zCu9H1ats8xWR4WZTDhS
-	odNdJjZ4gEUpmCO187CYJI7xE7gO1cr60MN0BG9rFAm66dhPDhKJoRzX0haqRWJm3IlUF7fC8Xw
-	syrgF
-X-Received: by 2002:a05:600c:3d8f:b0:49f:e8bf:8f9b with SMTP id 5b1f17b1804b1-4a35ac48640mr152397485e9.4.1793092840312;
-        Tue, 27 Oct 2026 02:20:40 -0700 (PDT)
+        bh=Qxj0BITOOXJJyBkHtQvj4s2RXxJ5uExlbvIzqB5zeeM=;
+        b=q33bRbp4rZY+9Yk0/jZ2IdWleN+52XNJgSHCXGFij+AAnlrViIi6L+nyESm3h1LoJt
+         df8TwTXkYr887OX6RSVjJNjW95bN55SHDwYJ1VF+q6mSip6fua2W4uXmgAKp4hsVPHpD
+         yXYL7BLMNtP2eGGmpQ6ns2xFmshorThG06qwQCSVAj/TWVoH+24QkbgKkpWVe3K1nlwy
+         xXIu3m1OamM1s1VJ26IfM19yLRoz0MKd7PhEbxCeda8GGoptmVQYM8esCO5GRQRAblZF
+         bwjWXTTPNWzEve9yNtzLbbZoxxd6JbRrtFpbqtvDLS6Pe8d1+2KeM0W4ba7TdcG5bMKl
+         82Kg==
+X-Gm-Message-State: AFq9FYIPgDQBkibCXGClKWwvX9IZ5+GEJ37iJ5b6/PK1Fl8Qn3+HNSUB
+	nXH9n9vDNHbXnWVsOd6leTx0/Y56FDI88nGIqiEqVKVPNWX3+Dfnrcny4kbJMR1PoO9c0L0aMbQ
+	Iopqn
+X-Gm-Gg: AYBFou38nUqk3fLYE0iYQ/wYfeZjTmKnSKsPCj8jf+1HKh1CTixDanCqTEL9eAdTeDu
+	qyfzeU/PjiLv0I3qeONjRMDJVyh6t0N6fyhA/O8qBXqn8fk5EcxKSI3lNAvjaRp7aFqiWkQMQtM
+	tPiLrqajLaketAPZXX8y+roFD80u7fA0/vXmLN726n7mS5Oh+4n4j3ekd1W9sbROtbvKiWU32Zy
+	tl49xg7IQrpJCX9R9W5LoZhRFRat0Hxw9oDovz+Nmn/xfts6HPvXmrEY3+79ahMgxWO9TlvE5+f
+	zvmhyISul6OB3a3eUA5dNW5PTrCc/63kHIfuTWJthzRyB6jqR2Q3SDdfrXmOqJaoCEHPch7dSA+
+	lwR+51TGv9B4fQ3JckNYkVvOpy9Pe6df4jdc9CjiTvNcO/zizD8HCkotVq/qqK6nbovlxUNhetr
+	05WSCvnD/A+t3HUHe1hwswmp6SoSUtC36kROuADifanbskz+hMkQgF1nuvXEy4QzqB39XegBKDh
+	KKGVhnZ/8gPT0Z8TxOfmvVaw5G2yWj8UpaQ6ev4s6dsQFFkeJpzg9tBOALzNti+xqt3sHx3aNfi
+	pzbLoSWYT1SpeKCuZo1kOR9rAyI8aCGHCUrv8aLKqOELNyJvimcsL1mxJZpLl6S77tBeeMOJaZG
+	Z+8mr
+X-Received: by 2002:a05:600c:1388:b0:4a7:6425:c274 with SMTP id 5b1f17b1804b1-4a76425c27dmr69185975e9.2.1793092841154;
+        Tue, 27 Oct 2026 02:20:41 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.39
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:20:39 -0700 (PDT)
+        Tue, 27 Oct 2026 02:20:40 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 08/61] python3-icu: Upgrade 2.16.2 -> 2.17
-Date: Tue, 27 Oct 2026 11:19:35 +0200
-Message-ID: <20261027092028.782979-8-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 09/61] python3-jsonpatch: Upgrade 1.33 -> 1.37
+Date: Tue, 27 Oct 2026 11:19:36 +0200
+Message-ID: <20261027092028.782979-9-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
@@ -61,58 +61,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:20:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131472
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131473
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 2.17:
+Upgrade to release 1.37:
 
-- Added support for DateTimePatternGenerator.getDefaultHourCycle()
-  and enums
-- Added missing wrappers for UDateFormatField
-- Added support for ICU 79.1
+- Clean up in-place output after write errors
+- Reject invalid patch document containers
+- Use UTF-8 for JSON command-line file I/O
+- Handle source pointer objects in move location helpers
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../0001-Fix-host-contamination-of-include-files.patch        | 4 ++--
- .../python/{python3-icu_2.16.2.bb => python3-icu_2.17.bb}     | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-icu_2.16.2.bb => python3-icu_2.17.bb} (85%)
+ .../{python3-jsonpatch_1.33.bb => python3-jsonpatch_1.37.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.33.bb => python3-jsonpatch_1.37.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-icu/0001-Fix-host-contamination-of-include-files.patch b/meta-python/recipes-devtools/python/python3-icu/0001-Fix-host-contamination-of-include-files.patch
-index d3a05972c3..b159d24a17 100644
---- a/meta-python/recipes-devtools/python/python3-icu/0001-Fix-host-contamination-of-include-files.patch
-+++ b/meta-python/recipes-devtools/python/python3-icu/0001-Fix-host-contamination-of-include-files.patch
-@@ -1,4 +1,4 @@
--From 5648531ec5f77f5270ddf5c7e49ade5c160669bc Mon Sep 17 00:00:00 2001
-+From 2fe99147f24049694c02f857c9bcc900575d8de1 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 16 Apr 2021 10:48:36 -0700
- Subject: [PATCH] Fix host contamination of include files
-@@ -16,7 +16,7 @@ Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-  1 file changed, 1 insertion(+), 2 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.37.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.37.bb
+index 6a1715c6df..62c12327a2 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.37.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4f81c84f9a053e31fe9402a2a4e78864"
  
- diff --git a/setup.py b/setup.py
--index 8a975e5..e85fdd3 100644
-+index b87ae66..4c81aa0 100644
- --- a/setup.py
- +++ b/setup.py
- @@ -68,7 +68,7 @@ elif platform.startswith('freebsd'):
-diff --git a/meta-python/recipes-devtools/python/python3-icu_2.16.2.bb b/meta-python/recipes-devtools/python/python3-icu_2.17.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-icu_2.16.2.bb
-rename to meta-python/recipes-devtools/python/python3-icu_2.17.bb
-index f700aafbb8..5ebde78dd6 100644
---- a/meta-python/recipes-devtools/python/python3-icu_2.16.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-icu_2.17.bb
-@@ -9,7 +9,7 @@ DEPENDS += "icu"
+ inherit pypi setuptools3
  
- PYPI_PACKAGE = "pyicu"
+-SRC_URI[sha256sum] = "9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c"
++SRC_URI[sha256sum] = "04288ef93e60084bcb118101cd9d53424e627b91bb47ec5a95c02ec3795f6d23"
  
--SRC_URI[sha256sum] = "006d51e24b5ec76df6ec2130f3dde269c51db8b8cfebb7d45a427dde0d10aa52"
-+SRC_URI[sha256sum] = "6138b95ac9592fa3983bf489e0c625e8fcfffd0c562a36a08269cecc4ffb48be"
- 
- SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
- 
+ RDEPENDS:${PN} += " \
+     python3-json \
 -- 
 2.47.3
 
