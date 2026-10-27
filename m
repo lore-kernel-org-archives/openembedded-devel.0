@@ -1,134 +1,191 @@
-Subject: Re: [meta-python][wrynose][PATCH 0/3] python3-aiohttp: fix multiple CVEs
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15988.1793096967507014823
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 27 Oct 2026 03:29:27 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@konsulko.com header.s=google header.b=JDFZoLK0;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a5720b0a57so4814915e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 03:29:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1793096965; x=1793701765; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=obKDM9GSL1LQgRvybF6+WRQCr+RYuIezMjyf8Luu4ZY=;
+        b=JDFZoLK0z0T+3ri03/OG8ZFg/jQGrMpS/fnpIhvgbRKCOPhiHXF7uvVQtWf3a+6Whl
+         oQjnMz69GUcgGlG08GWSZWJZd5LZmTzkZ7BAQF6HixmOcW0lonB0P+rhyE4GDQ39J2O3
+         383bDigcBOBpMOR8FvzpWIgMtBmPnbW03smPo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793096965; x=1793701765;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=obKDM9GSL1LQgRvybF6+WRQCr+RYuIezMjyf8Luu4ZY=;
+        b=ha6IUslAcNOjP3M2EFni9lFoJc8zANeZMNNTJqXgT+T/9ikRWYaebSyv+fFnbyV8Lj
+         jgF1YAD2Ez8WvRiBGkoWJ14U8A1e043fnR9Yrra9zmrk/KbJkm30IU/5lkXTvvvhqGK9
+         yBkSKoS30aSqHEqurDbYfi9LN959gKWKcpnK9GAkmdLeoRQ4QvMG1i7zhKhgZqo+r9Z+
+         olwPSUbikjWlptQYNB0MYqsXHdyUyGD41BCctFk9y///Cfx8eAf2YedfnCBo0xhAXaVY
+         BPIfvCfTAU4pvzICveCNzt23Tdus5QcwZ5tCWyzOXYPklhahq3wTiq/ny9Kd6b/Q1mcp
+         xS9A==
+X-Gm-Message-State: AFq9FYIOjeMeNKaSJYaY95pusxps2ocHNfF+uPK7mhVM0GPpAtUD11LU
+	o0FSNlXs447d+59052Stpmt6oFU8sit/KzmVnJFS7tsNvctBDNFQqMgA1nNJ8iMfeJrHobzAh+c
+	JvKum
+X-Gm-Gg: AYBFou3aYOiqLjNW0iu2lldKy34RhLgtIxcauL2RdBwwMDMq7Pw2o+fvgWOjQtS3Jvs
+	cKFhh4OupgOH2fXEBsoBtnV82XwUNgh/IrDmwHVqdo2H6Ts4WPxVbB4txScaV7YH9XAWG5K6Wsv
+	esaL7mK/khvop1aabjAVMya3erOqGvc53lcdxQORUKtGEvN2+vUIqrseuLoxpe2DrbmDkKHxFPr
+	Mg/VRgStqep33Bt9DMo31Bzq5j4QP1EgJLXmEq56GwqULInkgYdzfCOBv+i5UC2UdOD2q8PIS6m
+	FEKPsTZqW6QP8F0OacYl18EGIP1IqSV3ui0i4odHV7IAfSPk2POpL1Fx9oed7Uldl7MzKAQ4eEC
+	0c07Vs0He747Z2tBfnAM885ORONtHDImTwlt7iTEIiss9UYZG5LA7FICnyyYEwzR04Wq3DQDHMk
+	0W4mh5pWUENgtZVFRhd3bN8NOMigSu0GD1yTAbBSYq/jtmLtmfr2rpLcqYHi4p1FvWIB8tVbhVE
+	l+oN8UGfrB/b7Y462mgaHXLPoy/PU9gxXk6MjKpaIctrTHZDRjpJHSpVZHT1ySDg8lVWksphQGZ
+	I1i6HwlvhVE7I7tAQ26/yvWuTCAKVWRVACvvJ7ugo9qKE0SoSMwSo22vFblSGXdy/BmK7VZHa+i
+	esytQ
+X-Received: by 2002:a05:600c:322a:b0:4a5:9224:fa10 with SMTP id 5b1f17b1804b1-4a7c60a0174mr34397235e9.18.1793096965443;
+        Tue, 27 Oct 2026 03:29:25 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebd48e0sm22634625f8f.38.2026.10.27.03.29.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Oct 2026 03:29:25 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
-X-Originating-Location: Mumbai, Maharashtra, IN (151.186.177.83)
-X-Originating-Platform: Windows Edge 156
-User-Agent: GROUPS.IO Web Poster
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] valkey: Upgrade 9.1.2 -> 9.1.3
+Date: Tue, 27 Oct 2026 12:29:18 +0200
+Message-ID: <20261027102918.788795-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Date: Tue, 27 Oct 2026 02:28:13 -0700
-References: <20261016064219.3910025-1-dkelaiya@cisco.com>
-In-Reply-To: <20261016064219.3910025-1-dkelaiya@cisco.com>
-Message-ID: <2948182.1793093293231559016@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="uzpU5T9Ms1BGIR4T8TuC"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:28:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131527
-
---uzpU5T9Ms1BGIR4T8TuC
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 10:29:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131528
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hello Anuj,
+Upgrade to release 9.1.3:
 
-I noticed that the aiohttp series has been picked up in your
-anujm/wrynose contrib branch, but the prerequisite fix for
-CVE-2026-54273 is missing.
+Security Fixes:
 
-As noted in the cover letter below, the series depends on that patch
-for the HTTP parser queue-limit changes and recipe-time Cython
-regeneration.
+- GHSA-f4q9-j22m-xqq9: Fix a heap buffer overflow in cluster
+  Pub/Sub message construction that could allow an authenticated
+  client to potentially execute arbitrary code by publishing an
+  oversized message
 
-Could you please check the prerequisite patch [1] ( https://patchwork.yocto=
-project.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/ )=
- before this series?
+Bug Fixes:
 
-[1] https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.1818=
-191-1-dkelaiya@cisco.com/
+- Fix stream commands that mutate consumer-group or PEL state
+  (XGROUP, XSETID, XREADGROUP, XACK, XCLAIM, XAUTOCLAIM) not
+  triggering WATCH and client-side tracking invalidation
 
-Thanks,
-Darsh
+- Reject module write commands while the server is paused for
+  writes, preventing a crash from module timer callbacks during
+  CLIENT PAUSE WRITE or CLUSTER FAILOVER
 
-On Fri, Oct 16, 2026 at 12:12 PM, Darsh Kelaiya -X (dkelaiya - E INFOCHIPS =
-PRIVATE LIMITED at Cisco) wrote:
+- Fix event loop busy-spinning on virtual machines by not using raw
+  TSC for the monotonic clock when the kernel clocksource is not
+  tsc
 
->=20
-> From: Darsh Kelaiya <dkelaiya@cisco.com>
->=20
-> Backport three upstream aiohttp security fixes to the 3.13.5 recipe
-> on wrynose: CVE-2026-59881, CVE-2026-69243, and CVE-2026-69244.
->=20
-> The series fixes WebSocket compression handling, rejected WebSocket
-> upgrade request-body parsing, and bounded error messages in the C
-> HTTP parser.
-> The individual commits retain upstream fix and advisory references.
->=20
-> This series depends on the previously submitted Wrynose fix for
-> CVE-2026-54273, which has not merged yet. Apply that patch [1] before
-> this series. It provides the HTTP parser queue-limit changes and
-> recipe-time Cython regeneration used by these backports.
->=20
-> [1] https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.18=
-18191-1-dkelaiya@cisco.com/
->=20
->=20
-> Darsh Kelaiya (3):
-> python3-aiohttp: fix CVE-2026-59881
-> python3-aiohttp: fix CVE-2026-69243
-> python3-aiohttp: fix CVE-2026-69244
->=20
-> .../python3-aiohttp/CVE-2026-59881.patch | 103 ++++++
-> .../python3-aiohttp/CVE-2026-69243.patch | 307 ++++++++++++++++++
-> .../python3-aiohttp/CVE-2026-69244.patch | 159 +++++++++
-> .../python/python3-aiohttp_3.13.5.bb | 3 +
-> 4 files changed, 572 insertions(+)
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-59881.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69243.patch
-> create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69244.patch
->=20
-> --
-> 2.35.6
+- Fix a crash in ValkeyModule_HashHasStringRef on a missing or
+  expired field and correct wrong return values in the hash
+  stringRef module APIs
 
---uzpU5T9Ms1BGIR4T8TuC
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+- Fix a server abort on a RESTORE payload declaring a string length
+  that overflows the allocation size; such payloads are now
+  rejected as bad data
 
-<div>Hello Anuj,<br /><br /></div>
-<div>
-<p><span>I noticed that the aiohttp series has been picked up in your</span=
-><br /><span>anujm/wrynose contrib branch, but the prerequisite fix for</sp=
-an><br /><span>CVE-2026-54273 is missing.</span></p>
-<p><span>As noted in the cover letter below, the series depends on that pat=
-ch</span><br /><span>for the HTTP parser queue-limit changes and recipe-tim=
-e Cython</span><br /><span>regeneration.</span></p>
-<p><span>Could you please check the prerequisite patch [1]<a href=3D"https:=
-//patchwork.yoctoproject.org/project/oe/patch/20260928174806.1818191-1-dkel=
-aiya@cisco.com/" target=3D"_blank" rel=3D"noopener">&nbsp;</a></span><span>=
-before this series?<br /><br />[1] <span><a href=3D"https://patchwork.yocto=
-project.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/" =
-target=3D"_blank" rel=3D"noopener">https://patchwork.yoctoproject.org/proje=
-ct/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/</a><br /></span><b=
-r /></span></p>
-<p><span>Thanks,</span><br /><span>Darsh</span></p>
-On Fri, Oct 16, 2026 at 12:12 PM, Darsh Kelaiya -X (dkelaiya - E INFOCHIPS =
-PRIVATE LIMITED at Cisco) wrote:</div>
-<div>
-<blockquote>From: Darsh Kelaiya &lt;dkelaiya@cisco.com&gt;<br /><br />Backp=
-ort three upstream aiohttp security fixes to the 3.13.5 recipe<br />on wryn=
-ose: CVE-2026-59881, CVE-2026-69243, and CVE-2026-69244.<br /><br />The ser=
-ies fixes WebSocket compression handling, rejected WebSocket<br />upgrade r=
-equest-body parsing, and bounded error messages in the C<br />HTTP parser.<=
-br />The individual commits retain upstream fix and advisory references.<br=
- /><br />This series depends on the previously submitted Wrynose fix for<br=
- />CVE-2026-54273, which has not merged yet. Apply that patch [1] before<br=
- />this series. It provides the HTTP parser queue-limit changes and<br />re=
-cipe-time Cython regeneration used by these backports.<br /><br />[1] <a hr=
-ef=3D"https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.18=
-18191-1-dkelaiya@cisco.com/" target=3D"_blank" rel=3D"noopener">https://pat=
-chwork.yoctoproject.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@=
-cisco.com/</a><br /><br />Darsh Kelaiya (3):<br />python3-aiohttp: fix CVE-=
-2026-59881<br />python3-aiohttp: fix CVE-2026-69243<br />python3-aiohttp: f=
-ix CVE-2026-69244<br /><br />.../python3-aiohttp/CVE-2026-59881.patch | 103=
- ++++++<br />.../python3-aiohttp/CVE-2026-69243.patch | 307 +++++++++++++++=
-+++<br />.../python3-aiohttp/CVE-2026-69244.patch | 159 +++++++++<br />.../=
-python/python3-aiohttp_3.13.5.bb | 3 +<br />4 files changed, 572 insertions=
-(+)<br />create mode 100644 meta-python/recipes-devtools/python/python3-aio=
-http/CVE-2026-59881.patch<br />create mode 100644 meta-python/recipes-devto=
-ols/python/python3-aiohttp/CVE-2026-69243.patch<br />create mode 100644 met=
-a-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69244.patch<br />=
-<br />-- <br />2.35.6</blockquote>
-</div>
+- Fix ZINTER/ZINTERSTORE returning input-order-dependent scores
+  when a weighted term is 0*inf; a NaN weighted score now counts as
+  0, matching ZUNION
 
---uzpU5T9Ms1BGIR4T8TuC--
+- Clear a stale primary-failure gossip flag on replicas so later
+  failovers don't incorrectly skip the election delay
+  (#4533)
+
+- Correct ValkeyModule_FreeModuleUser, ValkeyModule_ACLAddLogEntry
+  and ValkeyModule_ACLAddLogEntryByUserName declarations to return
+  int as implemented, fixing undefined behavior on targets with
+  strict call signature checks
+
+- valkey-check-aof now recognizes RDB base files with the VALKEY
+  signature instead of misreporting a valid multipart AOF as
+  invalid
+
+- Fix module commands that access undeclared keys in other slots
+  reading or writing the wrong slot in cluster mode, and aborting
+  in debug builds
+
+- Reject relative expire times in SET/GETEX, RESTORE, and
+  ValkeyModule_SetExpire that overflow when added to the current
+  time, preventing server aborts from negative expires
+
+- HDEL, HGETDEL, HPERSIST, and HEXPIRE no longer propagate fields
+  they treat as expired, preventing replica and AOF-reload
+  divergence
+
+- Fix a server crash when loading an ACL file containing a selector
+  with an unmatched parenthesis
+
+- Fix a segfault on Alpine/musl when Lua is built as a module,
+  caused by a symbol clash on an internal clock function
+
+- COPY of a hash now includes expired-but-unreaped fields so their
+  deletion is propagated and replicas stay in sync
+
+- Restore acceptance of hexadecimal float sorted set scores (such
+  as 0x10), keeping replication and AOF replay compatible with
+  Valkey 9.0
+
+- Sorted set range commands with a negative LIMIT offset now return
+  an empty result instead of a spurious element on btree-encoded
+  keys
+
+- Fix listpack encoding incompatibility that caused RDB load and
+  replication failures for entries of certain lengths between 9.0
+  and 9.1.x
+
+- Fix atomic slot migration not replicating evictions on the import
+  target, which let replicas grow far past maxmemory
+
+- Redact error text in server logs when hide-user-data-from-log is
+  enabled, so command arguments no longer leak into logs
+
+- Fix HSETEX and HGETEX failing to parse their arguments when the
+  key is named fields
+
+- Fix cluster config saving to avoid publishing truncated
+  nodes.conf files, losing the startup lock after the first save,
+  and failing every save on SMB filesystems such as Azure Files;
+  the lock now lives on a separate nodes.conf.lock file
+
+- Fix LSET on 64-bit builds silently modifying the wrong element
+  for out-of-range indexes instead of returning an index out of
+  range error
+
+- Fix atomic slot migration with cluster-databases > 1 applying
+  writes made during the snapshot to the wrong database on the
+  target
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../valkey/{valkey_9.1.2.bb => valkey_9.1.3.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/valkey/{valkey_9.1.2.bb => valkey_9.1.3.bb} (98%)
+
+diff --git a/meta-oe/recipes-extended/valkey/valkey_9.1.2.bb b/meta-oe/recipes-extended/valkey/valkey_9.1.3.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/valkey/valkey_9.1.2.bb
+rename to meta-oe/recipes-extended/valkey/valkey_9.1.3.bb
+index 187c9a046e..40e8a9cd75 100644
+--- a/meta-oe/recipes-extended/valkey/valkey_9.1.2.bb
++++ b/meta-oe/recipes-extended/valkey/valkey_9.1.3.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version
+            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+            file://GNU_SOURCE-7.patch \
+            "
+-SRCREV = "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
++SRCREV = "29173b67508b2de4c0f0ed551f3b47cf19fc3ca8"
+ 
+ RPROVIDES:${PN} = "virtual-redis"
+ 
+-- 
+2.47.3
+
