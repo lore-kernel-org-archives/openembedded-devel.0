@@ -1,98 +1,100 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14851.1793092871915482036
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14667.1793092873439104680
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:21:12 -0700
+ Tue, 27 Oct 2026 02:21:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ONB/wif6;
- spf=pass (domain: konsulko.com, ip: 209.85.221.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48dfaa3fa12so540022f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:11 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EW1dW2Ct;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a2072b9832so4246835e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092870; x=1793697670; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793092872; x=1793697672; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ibBq09MXQ1Vstp0JQmpimUoChQKb4f7uQG4l13PjkD8=;
-        b=ONB/wif6vumGmJ3vSvFQbUumHcFqH8+ubPKc91ZNNueiq2c1DrLHtd25b0zLjV/lqa
-         Hy+d3T1vfAyqViMJJDOrFhDfctgBoQ+Kbkm5BPvUC6O/79slFAJMbgSBHY11IdF8nyTD
-         XpsER4pIsRKkFwmdYVhyaOwoyxD3BpXr0CPX8=
+        bh=5iIY3Wj9QKu0/A0C4ufZ8O2TTiZwKgC3eYIjBeZRl0s=;
+        b=EW1dW2CtNrhAZEx1h0vFQvK1ko31YDXXwSlsiAVZH9yb8M8911OKzPRtJyxsW+j2Vi
+         Nop8xeSiRIw3DMBCRcjO1x4iMZ6p9Wdw+oIzqZigDjhRjtlRvuA+OFSWADUKGGPnhFt8
+         eB5WYg5k0efBi7e4TKr8/0RTQisjmQhxIQ9ng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092870; x=1793697670;
+        d=1e100.net; s=20260707; t=1793092872; x=1793697672;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ibBq09MXQ1Vstp0JQmpimUoChQKb4f7uQG4l13PjkD8=;
-        b=iCBOkD9pQ9D6PBDQUCKvkxI84LRsQFugUKDtUEneTuwFXW0Lav+PnDVHMt6l/8FEzp
-         n/jNVdKj/hUFzNutVfaRRzsBL5SCdDYZz3LEEkryI6ytVrHcxjniTZbIQXbhjHpf3v70
-         fc4gLGhD5CIK/63oTh6QIKipblTmNKaOly9WMnPjM9DqVIJr2UAVXEumtkCxFX6U/KWl
-         PQQPhe21cyNdq3v3xIJyMZMJrJtkkU1eiJHiu845oekjsStOlsOVC8qHhCwPssGAIcim
-         aA/sVC6WzykAB0Fn/WZsSHygXBqQKlmjVurnNi0p3rvYGsyiIZ0fQ3lfrwvOlKzp+Xzi
-         mlUw==
-X-Gm-Message-State: AFq9FYIfYNu0WEjb7rGXxhAO9K4VKNZM4x6OxgFyTPsYm0zMEYpjbKfo
-	9GgBNepXhG+iV6ucCmlp7CzsEmwUGIYumuqZ9V1h/QIIVK2XTdb56/vfGrJPzahBN71TXob0Foy
-	bem9u
-X-Gm-Gg: AYBFou30ZY111aiDSca+CS0Lq9zs90NGIZGFPWYFR6r0ICTP0EnW+dHK769Yevpmtnc
-	nawlKCxpgT46r7CoVGL9q/sR+q7LcCtu2WpDe+luV3dmJyng89P/u+ufnQ4614XBpUry8s/2lfM
-	5iXLLnjKYlyBa0Es7mjMcb0DXtTqrJkdTj50OeFdvtCkpORqSIjRibIpz1o8E9ZcJs/DlmiSeG2
-	vZx2A+nUb+S8YvUwB4KlEYKeI3CCMyXq5J7IzBf+HSyBBk80jzRgpn47m7RPBXJn10pkNBEewXQ
-	llA1/oYQdGFmf7NF+KW/Ejav98biNkFL1BUZ6cpkIQ+A831eIV5a4/azmIu60FqcKpdueWF/P5t
-	W9cei4N6/yJN8v85MfpstFASGgk5AA/jq3JGUNxIn/NKO6Jz81MMP21dAwjbvL5VMN5fJdM3dPF
-	5IhFuM/SsI1rdUisS6HfNNDe1z65bkL+4bH0Ua1DHAAEKekfwAapHJS/OxYoH+XLzJD1bluGtFW
-	8PQLfyxcWOGSE+3ku/f2l8SjaRjgMhNuK0GDcyglrAh0p0VbPqpRA+T0EGd1biUPUOESYrVYmSd
-	A3nsJenbNZBWb6jn5HosMaP5c/W6UwBCLxXg/XM1naoUN/uz6Odvm2ZzCW0d8kPn3+CW1ap8NhG
-	/riBkNz6vdzrMccJl/tGhWB0fiQ==
-X-Received: by 2002:a05:600c:4e01:b0:4a1:efbe:529c with SMTP id 5b1f17b1804b1-4a7c16c4554mr43348385e9.12.1793092870143;
-        Tue, 27 Oct 2026 02:21:10 -0700 (PDT)
+        bh=5iIY3Wj9QKu0/A0C4ufZ8O2TTiZwKgC3eYIjBeZRl0s=;
+        b=X2ZOefjOuzFEJDQl7HbRf61NnL4iG01aOwh/kmkuGnyjSTmwk5C15KGLJ8rO2R2RfI
+         UnBcYWhLBsm12G7O07P7d/WW0rj+NdxYmAexitlB1Wtxr1R8GilsASlBd1edfbiWQLJU
+         hINVcD2bth0QsNbvaWi50xPo3QsfKNwrPjFAEzik2iZwFebqggEFGo3/Eu8lgNBdTPTr
+         YdR/lg9uSawD7zxLlnzjgv1RaDqFYlp1lWW5k6uABSvrpKiZHASXT+m31DvVJD1XtlJ8
+         Ijeco6EaIJ1uPaDHrruQ3TF5mTYj+LGP9E7buseYGJnYugMkulmwLXRJX1Z1BOf59Cnb
+         Pb/Q==
+X-Gm-Message-State: AFq9FYI8mflVO2GBMHh34cM8NGQq9kNb5tSseHGr6YLvNmRkoINX3Y7W
+	9/Y86/bSay3yFKVOcjve8OMxQ9uYqrT38RI4fMb12mm3akX2II2VKqaMglJ8skLS3cFFJt3SLz0
+	YTtXp
+X-Gm-Gg: AYBFou1ExzzjCjeQP3JMic9nXG5g/2uibMbsZKjrDy0ib/p8CJ/lY+HllGwxvaEg7cT
+	mVxih6eRpxr2yxtamaMNbm1vgzv2kwv1iHZCgGzYK0tOrIZu67YhNco/TfwvyGL8vUfzE5+hB62
+	zB/+1HHcENygAa9mLdkAIh6iSIHcYUNapTng8UH2pIyZdmq9R4EQGHu3exkoZNs/0CNTRImmC+4
+	rBV/WAb3NkbmdNXX7UimUqaM82QEI4zlKHwWRZifvPaAbgjo49rS9IdGLYSrpXyjc2bqqdcOc4a
+	3VatzJNlpdWUAEkQ9a01iNoV4+AmNXOvHv9QIghv5iQQbSvyxQsLJX9B+nfVm8MUj4ZKSu2gsXm
+	YmZEI6cV4eHVNH/DM8doqynfb1iH6F8loPHSxLLX+ATiozAq4uBZyESVM4LCTWpKLfw+Fd0RrQu
+	v9VIQMwPDvO59QJbYdbXEP1rahZk4o18+J1RKNgkrXR0F6a6lXgHh5sJT0F5WuupjaM6BtXAKYS
+	OHCoTgJXlOcm4nJc33LDMoJYlLYHB4nLvYyjIhVyB92VNgfNILh5PYg8nFJnmOM/GPRpaMAZ0pN
+	31Wy/HYFjIdEliPbsLQICL4siU0jvfmxWaCzbCRykUw0V1p1Lw97kwtWF7IwuTa0qQhhaU+eajo
+	4eYMa
+X-Received: by 2002:a05:600c:3f0d:b0:4a3:5da2:38ae with SMTP id 5b1f17b1804b1-4a7c18afbdemr43948145e9.14.1793092871740;
+        Tue, 27 Oct 2026 02:21:11 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:21:09 -0700 (PDT)
+        Tue, 27 Oct 2026 02:21:10 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 34/61] python3-reportlab: Upgrade 5.0.1 -> 5.1.0
-Date: Tue, 27 Oct 2026 11:20:01 +0200
-Message-ID: <20261027092028.782979-34-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 35/61] python3-robotframework: Upgrade 7.4.2 -> 7.5
+Date: Tue, 27 Oct 2026 11:20:02 +0200
+Message-ID: <20261027092028.782979-35-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131498
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131499
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 5.1.0:
+Upgrade to release 7.5:
 
-- Allow for bool values in rl_config.py
-- Fix some file issues and download afmfer in setup.py
-- Special case ListFloables in PTOContainer
-- Require 3.10 at least (3.9 is now EOL)
+Robot Framework 7.5 is a new feature release with major enhancements to
+the library documentation tool Libdoc, support for test/task metadata,
+enhanced console logging configuration and several other enhancements
+and bug fixes.
+
+For more details, see the full release notes.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-reportlab_5.0.1.bb => python3-reportlab_5.1.0.bb}  | 2 +-
+ ...n3-robotframework_7.4.2.bb => python3-robotframework_7.5.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-reportlab_5.0.1.bb => python3-reportlab_5.1.0.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-robotframework_7.4.2.bb => python3-robotframework_7.5.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-reportlab_5.0.1.bb b/meta-python/recipes-devtools/python/python3-reportlab_5.1.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-reportlab_5.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-reportlab_5.1.0.bb
-index 07d0467696..367c9527cc 100644
---- a/meta-python/recipes-devtools/python/python3-reportlab_5.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-reportlab_5.1.0.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "An Open Source Python library for generating PDFs and graphics."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=cf24392f451ff6710fca1e96cefa0424"
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework_7.4.2.bb b/meta-python/recipes-devtools/python/python3-robotframework_7.5.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-robotframework_7.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-robotframework_7.5.bb
+index 5c83d923d4..8dbf7ef936 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework_7.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework_7.5.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "ebd13154be1c8515e665de70bd2d303ae9ddc3ef47e44afd5116441ca0283a26"
-+SRC_URI[sha256sum] = "6878200464527e87672d19e9f7cfc6bb890e3a6931e74ac6a1a8d1754aa55671"
+ inherit pypi setuptools3
  
- CVE_PRODUCT = "reportlab"
- CVE_STATUS[CVE-2020-28463] = "fixed-version: has been fixed since 3.5.55"
+-SRC_URI[sha256sum] = "1c934e7f43600de407860cd2bd2fdc41adad4a4a785d8b46b1ed485fdc0f6c9f"
++SRC_URI[sha256sum] = "ff6233ff752a200ece4d0a6c59f6f9f7d0e96dcff0a7a3458296b997b812482e"
+ 
+ RDEPENDS:${PN} += " \
+     python3-shell \
 -- 
 2.47.3
 
