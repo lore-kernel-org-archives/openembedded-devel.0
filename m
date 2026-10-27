@@ -1,59 +1,59 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14845.1793092863774157973
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14663.1793092865196701190
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:21:04 -0700
+ Tue, 27 Oct 2026 02:21:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=BPAHYLW+;
- spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a20bdaf39cso40319725e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:03 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=J0jbfBVI;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a7992e2f7dso8527265e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092862; x=1793697662; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793092863; x=1793697663; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PesXJ9eo3/ybY+lAHAX6D4F1XPP9wv6eNjO+m3/Pc5w=;
-        b=BPAHYLW+qBByEzQ2dIaO1uOOVJAqw+GLAUAPxWhiSwpSEURRBXyIDJLZMxxLQ6Wirs
-         6NaF5//K1CbJwsPQZoPVPYaaEeeNwQE/SgEghQteh5vH3Ei9vuB7TcuZpPg/8bwMVjww
-         Ix448217FWByEAdLafkYcioDTQmlKd/wPy0mg=
+        bh=KQA5kN66dgY9AZT3TKsC/eyWlBZ4PBN8Ut3m81iQPxo=;
+        b=J0jbfBVI5IHvjf34W0iOa8Q98uGNLLzhTB6xnFr+RpWlQrI22UZBGweV35M79DsL+U
+         rIfysq5iJzmWNC+ZblY+pdLQ+OWC5yEPT8nBOceSvwaKVeaJcJbWMV+++PJF+W4sEHJa
+         t6rHibP8FjmHTAJas6Bd/BGRS4CpXNr+99PI4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092862; x=1793697662;
+        d=1e100.net; s=20260707; t=1793092863; x=1793697663;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PesXJ9eo3/ybY+lAHAX6D4F1XPP9wv6eNjO+m3/Pc5w=;
-        b=0o8GJqvvzgQ5tN8zYM7+v8YZd4hQBeLzLIK5tB0FolIHQebdB1ozni40Q3nEoINPwo
-         ztm1dby7FtWeiFuPVWifC7KjVnC97gF5/NWP0Y9Kt2LmuQIyeV4KNBhDgBMNBIgFLxPC
-         /skus1nLg33mZaQT6Y7cHmqi+p8zfq+Yk/wK4bgeDLZI6o/LiUQpvVL04xApYKjsaPm0
-         ghWXede2127ibKkRYAGrMa9VUdbhcNT9y3WJO8CoxuRY4jbnWhtdh6EBnrnKB25NBrg6
-         HNzRpxuCJA6R33oM0F4vmZJXHk0DilwjzzvQJYdY8/RGt3nCOhdet80m2bTUleHuKdJl
-         Ofdg==
-X-Gm-Message-State: AFq9FYKQ+LLfFuKw7k8U7qge3Z9dS859rsj3ZgfD7pz619xppXDt/b6Q
-	0OUDMqRqgulAM0kv3rDq35XAnSAmDVdnnHUn6F5wTpGN5Wa+6k9gMs3f6mrhgvr8nFA2427aXpn
-	pVsmv
-X-Gm-Gg: AYBFou3ouC8IuNU7o60xq+1qhI5wQHQaoJWic4lQPTi9z/yzf1LO5jGOmPU3RepeAV9
-	LdzlYjvw9RDs44AqDv7nUpGPBwwr2ZXERrKqZmCx/mA3TZfOgP0rVYaVWVqvkVE1uVqNrd0t95h
-	KmrznT1QiiVDhCMxTnRS7N6ijD7q1aF3WWvXaqGOsni5kd5m5YIVw/d5lJ7kCl3Pmkglmpk4ZYA
-	Lafa5oZFAO5OiZ2H+oOh7VMHk5Ub7Od370zkWqlxMUgOMKDNwSowbwQuNF/s/syGz/kO1MVjIRV
-	Ytj/mCww1ufKMsF0cI3Txf3LzWHj6G0/FgQusrzYgikYl+5++sBoAk2J7oEwxT4lScOJfSqGQXw
-	AKHmJMG/DeXpDaVLuGroqKAvdWa6nVcYeG5gkqM8ZyHZv8cs6jlym4IlO2wWeXseEzlNOsp5Sgv
-	Z3yhQ9nFT5o57EsUaLczvmUSwNDQN6sE2pEtkIbKmYx5ugJO5UUL63Kg8NZf2hbb2XhescffAUe
-	wlrrUWtGE5BBB5Q+mJ0VnjE4WIh4aR74x7B9JmrSqakjk+PNMEGmZ3eInpMVDmeR5IVKEe8eLQ7
-	lyApcX9rkZRus4GR4hYQ8FvVx+ao4+2P3YCjQlYe2bQ6HKBpR2gxaL9r8SEQzDsgpOl8ApkQAm+
-	Jug8XZfR+NyGWrorW2Mkgkk81Xw==
-X-Received: by 2002:a05:600c:b86:b0:4a1:7ec7:a479 with SMTP id 5b1f17b1804b1-4a35acc1129mr170457635e9.33.1793092862041;
-        Tue, 27 Oct 2026 02:21:02 -0700 (PDT)
+        bh=KQA5kN66dgY9AZT3TKsC/eyWlBZ4PBN8Ut3m81iQPxo=;
+        b=n6q/Cdt0/dL0lib3JZEqkp8bMJamsbw3yTTkXY4OTdPg+R7//t9/1LMjbPIeiK1z8a
+         HERXKOQM4YC0HeGAtjl55rhiDRoFQNwJcfXaaRvm6/Eu0xcEL/fiXkvu6jkOcViIPEzY
+         ySTeY9Y//un+BEAdSntt95tp81abT3nQLpQfoym/++skTxpH8wB0R4CVhoddJz5II3i/
+         fN+7pLpFjncNkuc0XnJJgkOGZi7Dh0p0rRV7n2xUdVTH/Um3MgOSmqBNZX7ZHpZDN8gf
+         /dMT2uu3JGcF1fqUpmxE/aE0J7UdD6WdTnSuhy4S5lKpf+mYN+w7zUh0M8ws2YUMrIBU
+         Wtvw==
+X-Gm-Message-State: AFq9FYJHfOtP3eY1wdaQcRtgfX+4zBkMQu8tZ3YlR6nIqpdx1uKmXhW/
+	Pl8QqVDO+lLlNoZ2fIX0ceiiudIlhtbKaMGbXkRS+57+AdYr68T2Tkt7vd4u9CftbrApECY9kGJ
+	3chGX
+X-Gm-Gg: AYBFou0S06pOSvkIYhNQvoTgIZtW3QYEqdKuC4jT3IXHWG7wn2XIPGg9w+tU2tUe0Tu
+	dmpjhmnMcAKTiuagwTxXPAx8WR9R2iYhCrsdpKse7LCvMvQebMLNb0Phed1Xh/L+gICdJLsvUSN
+	4PIEIZgsrjRDfQ7g3pRbWMMA96V81//UPaKBueVksZM72c1Fff7thgjmSz9ZQY7Kcn2GZU0ARPi
+	v5xdlGQIC8K3Rz9O60Ppo9j1/GOVGYBI2wfgOkuUH48tTQvoa0HEWUsKwl3WmOvmI6XgV9iYnAf
+	h2E4Ag2yc2A8s13DbrdzXNSqzk+WrVggnOZ/N7FAcW37ccF8L1UmsCO2oXmWXUVkaElIFNTjn7L
+	15AcSMMnyUQTdIlyG9xdy6msgeIu4yBVwYtKs62PTo7G962D5P7UXUe5qG0H3tfaAri8JLAVeID
+	Zxjv6Cut3hdfUE3b7caWFfA5jBoTl6GczS2dLMHGku8uyHAzraufwtdKSM4uBHfFACaY/k3LhZ8
+	5nofkhw9QKjE04mMRUS5Ll+Jc73wHabDuTd5LeFpobqrnoK25nmyisBb/AnzJwY/cSulU8dJAy7
+	vkAUJmoldk2m3/8FFVF467nGyLsG3Dq1aSEvUjBsaVXftsS3BDw9DW3EozTUeTr9VBEz0rmLQiE
+	13rRa
+X-Received: by 2002:a05:600c:840e:b0:4a2:5267:3cd4 with SMTP id 5b1f17b1804b1-4a35ac3f101mr172428335e9.3.1793092863282;
+        Tue, 27 Oct 2026 02:21:03 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.01
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:21:01 -0700 (PDT)
+        Tue, 27 Oct 2026 02:21:02 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 28/61] python3-pyroute2: Upgrade 0.9.6 -> 0.9.7
-Date: Tue, 27 Oct 2026 11:19:55 +0200
-Message-ID: <20261027092028.782979-28-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 29/61] python3-pytest-asyncio: Upgrade 1.4.0 -> 1.4.1
+Date: Tue, 27 Oct 2026 11:19:56 +0200
+Message-ID: <20261027092028.782979-29-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
@@ -61,43 +61,46 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131492
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131493
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 0.9.7:
+Upgrade to release 1.4.1:
 
-- ndb: basic support for XFRM interfaces
-- ndb: basic support for object preload hooks
-- ndb: basic support for prometheus metrics
-- taskstats: fix name unregister_mask() -> deregister_mask()
-- plan9: fids per session & inodes per FS
-- ethtool: fix the off flags
-- dhcp: support option 41 NIS servers
-- wirouting: link features
-- rtnl: support RTAX_CC_ALGO on route metrics
-- rtnl: add missing NFT flags
+Added:
+
+- Declared support for Python 3.15
+
+Fixed:
+
+- Allow *AsyncIterable* as a return type for asynchronous generator
+  fixtures decorated with *pytest_asyncio.fixture*
+
+Notes for Downstream Packagers:
+
+- Source-tree development dependencies now use PEP 735 dependency
+  groups and uv.lock.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb}    | 2 +-
+ ...-pytest-asyncio_1.4.0.bb => python3-pytest-asyncio_1.4.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_1.4.0.bb => python3-pytest-asyncio_1.4.1.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
-rename to meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-index ec72b450ee..10e227926f 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
-                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.1.bb
+index c1803e3eb2..9e49d949d4 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_1.4.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pytest-dev/pytest-asyncio"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=136e4f49dbf29942c572a3a8f6e88a77"
  
--SRC_URI[sha256sum] = "6bc5e2ea9a372ded682b4ede4028ba00236bd6e35b42d833f39a96b219ef1db2"
-+SRC_URI[sha256sum] = "a678b098478c46ec51d6bf9a03c3cd2ac0172dffa590e9e8c1eeab633d0c17c6"
+-SRC_URI[sha256sum] = "c6c0d2259945122819f171a32ecea2c349ead889ee28176caaf492143424be42"
++SRC_URI[sha256sum] = "e8266eb094e5ee9ffdb2068c9836f33e209ea77a970eb846933d416b5602669b"
  
- inherit python_setuptools_build_meta pypi ptest-python-pytest
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.47.3
