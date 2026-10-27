@@ -1,107 +1,134 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14686.1793092911011517502
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:21:51 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=UkT4VZQg;
- spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so26939255e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092909; x=1793697709; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eBUFhDwSm8jFRae/q2DAvOdqBNdA79k0cGBAOR3h5mM=;
-        b=UkT4VZQgjBTGpcvM5auAZAEn7fT/Ai3DB1C4ikjG0vZEIOSYQF70avJv5WWVC4EU3f
-         Z045UI8kyHTMrtPn/7DhunmRQtcxBvVt6ZWM9Ur6JsBcjzqBN3OmDEqP089g91InHKcI
-         D3fft5QNpSskjBIxF9ZXb5OM97HoXLBq2oa6I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092909; x=1793697709;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eBUFhDwSm8jFRae/q2DAvOdqBNdA79k0cGBAOR3h5mM=;
-        b=Vu2nygdtqvmyLf2h0MMHxtsM144H6kiHFsGXF2kDpYOd0UzHvCD1r1EBd6jVoZilvM
-         8ykPSXy6thSNi+5R/xZatRf3wmC6/WTrzFyNWIP0PO2RWv7uLzPwRX3eaL/cVYLGGO/V
-         AdhBiOSgT4HbgRlgM7LR5IJJU+IGYMfwav+nkyQ+6bDz4/Xy2rWSAP7QQlF2FVSD993M
-         x6WmPAGbd3WFhUeWid0gP8/AcQh0z2NmEscYAS3v5lvDGb93qvdXP7vvIA8jCn6Kx+nB
-         cXhdNDm+Bi/VSXPzL1a6M3vmeqc8TnIZs7hPeJx+0AHNSMmRuObjMcSq1IRbHmmbHiSP
-         TjTg==
-X-Gm-Message-State: AFq9FYKXp5zp59uO5BSrpRb6fUsDRhIv5cT4MgINS4UjGFk1pqdPTwEI
-	s0r0hrOPc5zXiGcPf6Kw8ENV9QgMSjP+wKB5enw9u+XHFWQfYAr4celK5HYrDxTJXbr9+/YfSCS
-	uThYQ
-X-Gm-Gg: AYBFou0QcJTjstmAar3Su3mshbsDIldYphfGCYrOhHGiu8NatLKPNQG7puQIJmfE17h
-	ETEpykkym+kEjN2SBmF2CKZ7PCncgdhAsEoz47RdJ8mvPFxoatr+Ew3mIpYbFRzUpODhBjPfkIK
-	v1bmrLt4qDljTOnJM029oM98PAUi++B20H+S1dftwNBgu8nWFAHQKvb4IyfvJ29Ez80V6zm2T6A
-	bKAZg6jMfdt+sXz4oeNrBfUQ2juDOS4YGnPT5anEkAV1rsGYvSmJI2yrfYFpTpcjXDG7+VTmNMk
-	XJAks5VO/wMv3kyetDds+YFr8GoX8m0hsJiXbpEEKK0CX4wvwjUsKv7G4vIq4AnCFcRqnZPzxeK
-	/AsiLJgnTjoKm3e1i8lXnTMw7x+Z16twYNBlaeNmNPFLCOZtbZCK0+ydQp/LS/6NSp809zAfLyk
-	iH0oKUj1GMmGqbHIZeHGAQwJgR1B3EZjPNhCDfQ9odLQtN1CeFxFoPkL0tB8SIZaivnv0aE4GjY
-	QbJ2UpNG9hNH2HNSvmz25bWoFC2dFr3dlMJPp7Sah2WVDEJQEp+fa3lkGxjWfZ6zN6a8mEEGWE9
-	HPveS9aPKYSGcJTSR/pOy6oCeLoln82q8ltFN3y4zC6dpbhS101jhntknlMlRlhOpHJvVk+J/uW
-	N9Boy
-X-Received: by 2002:a05:600d:8:b0:4a5:ef46:1603 with SMTP id 5b1f17b1804b1-4a5ef461bc1mr90084105e9.30.1793092909266;
-        Tue, 27 Oct 2026 02:21:49 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:21:48 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+Subject: Re: [meta-python][wrynose][PATCH 0/3] python3-aiohttp: fix multiple CVEs
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 61/61] python3-pytest-httpserver: Upgrade 1.1.5 -> 1.2.0
-Date: Tue, 27 Oct 2026 11:20:28 +0200
-Message-ID: <20261027092028.782979-61-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
-References: <20261027092028.782979-1-leon.anavi@konsulko.com>
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
+X-Originating-Location: Mumbai, Maharashtra, IN (151.186.177.83)
+X-Originating-Platform: Windows Edge 156
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 27 Oct 2026 02:28:13 -0700
+References: <20261016064219.3910025-1-dkelaiya@cisco.com>
+In-Reply-To: <20261016064219.3910025-1-dkelaiya@cisco.com>
+Message-ID: <2948182.1793093293231559016@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="uzpU5T9Ms1BGIR4T8TuC"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:22:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131525
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:28:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131527
+
+--uzpU5T9Ms1BGIR4T8TuC
 Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upgrade to release 1.2.0:
+Hello Anuj,
 
-- Dictionary expectations must include parameters with empty
-  values. A request for flag=&foo=123 previously matched {"foo":
-  "123"}. It now requires {"flag": "", "foo": "123"}.
+I noticed that the aiohttp series has been picked up in your
+anujm/wrynose contrib branch, but the prerequisite fix for
+CVE-2026-54273 is missing.
 
-Bug Fixes:
+As noted in the cover letter below, the series depends on that patch
+for the HTTP parser queue-limit changes and recipe-time Cython
+regeneration.
 
-- Preserve empty query values when matching dictionaries and
-  MultiDict objects. Both flag= and flag match {"flag": ""} and no
-  longer match {}. For repeated parameters, dictionary matching
-  uses the first value even when it is empty. MultiDict matching
-  includes every empty value.
+Could you please check the prerequisite patch [1] ( https://patchwork.yocto=
+project.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/ )=
+ before this series?
 
-This work was sponsored by GOVCERT.LU.
+[1] https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.1818=
+191-1-dkelaiya@cisco.com/
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...t-httpserver_1.1.5.bb => python3-pytest-httpserver_1.2.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pytest-httpserver_1.1.5.bb => python3-pytest-httpserver_1.2.0.bb} (82%)
+Thanks,
+Darsh
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-httpserver_1.1.5.bb b/meta-python/recipes-devtools/python/python3-pytest-httpserver_1.2.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-pytest-httpserver_1.1.5.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-httpserver_1.2.0.bb
-index 0c3e8f8486..d98525fff7 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-httpserver_1.1.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-httpserver_1.2.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/csernazs/pytest-httpserver"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7f54416ccc5478427995b27e5ef38e92"
- 
--SRC_URI[sha256sum] = "dc3d82e1fe00e491829d8939c549bf4bd9b39a260f87113c619b9d517c2f8ff1"
-+SRC_URI[sha256sum] = "d07744ce2efaafa0575ed3081d416b999c773b09e84aa95065138bedc3e12352"
- 
- inherit pypi python_poetry_core ptest-python-pytest
- 
--- 
-2.47.3
+On Fri, Oct 16, 2026 at 12:12 PM, Darsh Kelaiya -X (dkelaiya - E INFOCHIPS =
+PRIVATE LIMITED at Cisco) wrote:
 
+>=20
+> From: Darsh Kelaiya <dkelaiya@cisco.com>
+>=20
+> Backport three upstream aiohttp security fixes to the 3.13.5 recipe
+> on wrynose: CVE-2026-59881, CVE-2026-69243, and CVE-2026-69244.
+>=20
+> The series fixes WebSocket compression handling, rejected WebSocket
+> upgrade request-body parsing, and bounded error messages in the C
+> HTTP parser.
+> The individual commits retain upstream fix and advisory references.
+>=20
+> This series depends on the previously submitted Wrynose fix for
+> CVE-2026-54273, which has not merged yet. Apply that patch [1] before
+> this series. It provides the HTTP parser queue-limit changes and
+> recipe-time Cython regeneration used by these backports.
+>=20
+> [1] https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.18=
+18191-1-dkelaiya@cisco.com/
+>=20
+>=20
+> Darsh Kelaiya (3):
+> python3-aiohttp: fix CVE-2026-59881
+> python3-aiohttp: fix CVE-2026-69243
+> python3-aiohttp: fix CVE-2026-69244
+>=20
+> .../python3-aiohttp/CVE-2026-59881.patch | 103 ++++++
+> .../python3-aiohttp/CVE-2026-69243.patch | 307 ++++++++++++++++++
+> .../python3-aiohttp/CVE-2026-69244.patch | 159 +++++++++
+> .../python/python3-aiohttp_3.13.5.bb | 3 +
+> 4 files changed, 572 insertions(+)
+> create mode 100644
+> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-59881.patch
+> create mode 100644
+> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69243.patch
+> create mode 100644
+> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69244.patch
+>=20
+> --
+> 2.35.6
+
+--uzpU5T9Ms1BGIR4T8TuC
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hello Anuj,<br /><br /></div>
+<div>
+<p><span>I noticed that the aiohttp series has been picked up in your</span=
+><br /><span>anujm/wrynose contrib branch, but the prerequisite fix for</sp=
+an><br /><span>CVE-2026-54273 is missing.</span></p>
+<p><span>As noted in the cover letter below, the series depends on that pat=
+ch</span><br /><span>for the HTTP parser queue-limit changes and recipe-tim=
+e Cython</span><br /><span>regeneration.</span></p>
+<p><span>Could you please check the prerequisite patch [1]<a href=3D"https:=
+//patchwork.yoctoproject.org/project/oe/patch/20260928174806.1818191-1-dkel=
+aiya@cisco.com/" target=3D"_blank" rel=3D"noopener">&nbsp;</a></span><span>=
+before this series?<br /><br />[1] <span><a href=3D"https://patchwork.yocto=
+project.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/" =
+target=3D"_blank" rel=3D"noopener">https://patchwork.yoctoproject.org/proje=
+ct/oe/patch/20260928174806.1818191-1-dkelaiya@cisco.com/</a><br /></span><b=
+r /></span></p>
+<p><span>Thanks,</span><br /><span>Darsh</span></p>
+On Fri, Oct 16, 2026 at 12:12 PM, Darsh Kelaiya -X (dkelaiya - E INFOCHIPS =
+PRIVATE LIMITED at Cisco) wrote:</div>
+<div>
+<blockquote>From: Darsh Kelaiya &lt;dkelaiya@cisco.com&gt;<br /><br />Backp=
+ort three upstream aiohttp security fixes to the 3.13.5 recipe<br />on wryn=
+ose: CVE-2026-59881, CVE-2026-69243, and CVE-2026-69244.<br /><br />The ser=
+ies fixes WebSocket compression handling, rejected WebSocket<br />upgrade r=
+equest-body parsing, and bounded error messages in the C<br />HTTP parser.<=
+br />The individual commits retain upstream fix and advisory references.<br=
+ /><br />This series depends on the previously submitted Wrynose fix for<br=
+ />CVE-2026-54273, which has not merged yet. Apply that patch [1] before<br=
+ />this series. It provides the HTTP parser queue-limit changes and<br />re=
+cipe-time Cython regeneration used by these backports.<br /><br />[1] <a hr=
+ef=3D"https://patchwork.yoctoproject.org/project/oe/patch/20260928174806.18=
+18191-1-dkelaiya@cisco.com/" target=3D"_blank" rel=3D"noopener">https://pat=
+chwork.yoctoproject.org/project/oe/patch/20260928174806.1818191-1-dkelaiya@=
+cisco.com/</a><br /><br />Darsh Kelaiya (3):<br />python3-aiohttp: fix CVE-=
+2026-59881<br />python3-aiohttp: fix CVE-2026-69243<br />python3-aiohttp: f=
+ix CVE-2026-69244<br /><br />.../python3-aiohttp/CVE-2026-59881.patch | 103=
+ ++++++<br />.../python3-aiohttp/CVE-2026-69243.patch | 307 +++++++++++++++=
++++<br />.../python3-aiohttp/CVE-2026-69244.patch | 159 +++++++++<br />.../=
+python/python3-aiohttp_3.13.5.bb | 3 +<br />4 files changed, 572 insertions=
+(+)<br />create mode 100644 meta-python/recipes-devtools/python/python3-aio=
+http/CVE-2026-59881.patch<br />create mode 100644 meta-python/recipes-devto=
+ols/python/python3-aiohttp/CVE-2026-69243.patch<br />create mode 100644 met=
+a-python/recipes-devtools/python/python3-aiohttp/CVE-2026-69244.patch<br />=
+<br />-- <br />2.35.6</blockquote>
+</div>
+
+--uzpU5T9Ms1BGIR4T8TuC--
