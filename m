@@ -1,59 +1,59 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14852.1793092874632497301
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14853.1793092875859894520
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:21:14 -0700
+ Tue, 27 Oct 2026 02:21:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=P1DiVkQY;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a20bde60a0so33549285e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:14 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=VhQPVfup;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a20a37703bso29763475e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:21:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793092873; x=1793697673; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793092874; x=1793697674; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mU+wyCsHuts69QsLFcuq2Omk7QA0n310+vvt4YRMJ/8=;
-        b=P1DiVkQYN9/PFdp1Sjy8SimjMva1loHCS9I4BJJ2R8WICLewWvj0VXCm032el8o7BF
-         CY5TS4GdAcn4ki44l2rysL7VECmOb3mqXTKm1LmJTrw9q+3wWWytfIybWlDlhWiscpbt
-         gwXuuV9nsYCElyieCOgqy2qgEwrjS+YhSIOz8=
+        bh=CLZ5lUQb+9hGYYoEHUFrzgFB5JW1myjR6W21ItxS3MY=;
+        b=VhQPVfuprgf55N3nNqo+QdBm5wtbnHgaT7nISx/dFCBIPALeYKfR7esVdIwkAG7Qrd
+         Rp1mmvMXcR+7mrT31OTQLFGK4J5sObbfzAkDaV119dsg69DQ0JU/5vWt1Jy9qWBexpMD
+         4ioqzI9lNX42Gd5zt1Co0rGAbsDD82QxXYyDY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793092873; x=1793697673;
+        d=1e100.net; s=20260707; t=1793092874; x=1793697674;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mU+wyCsHuts69QsLFcuq2Omk7QA0n310+vvt4YRMJ/8=;
-        b=tvdg3VbgVfGPKqreS4BVDjDadnDKZmIn4i5UcbIjKAFbzdB+tKZ2zVbHZGaI9+CJVV
-         vPjOpyyewMXabCV8gJBoac0bQEu7pFeekiKlpQNYIbjnIKuHfx6cmFe37u2Ra/gYBV/9
-         oN9RAYanfKYRcLEls7QHzhs5lYOFZTQNZ3ivF0ia2Iml15bT2qRTQ6Gx5g8mFqCuRvO8
-         uYSYwbDJ5fujfSZmgL89b7RunztZRqx6JTYfZHpF2Ye4pJp7xW4tTGmQ1Oe/xrNai7Bq
-         mwACf7y+bBPaGr0CnQwJI9zPnr9fMZZCY6ajZXhdL/ir5VBp0WXmE0IcxBylq0kR2QGR
-         MyAQ==
-X-Gm-Message-State: AFq9FYIVHGDTxZbF64IHcwgF+S54H0iJfRmwkKtLMy/iE4T33hUCJ9yW
-	URpcK++tp8wdgB4zufymRGXxTjYC1VLklZX3N/+1aRxeBEIdrLncmlnq9d7Ov2mRv5oUZ54nI3h
-	qAYLV
-X-Gm-Gg: AYBFou1WM9xUadgtIE+uA2gdGyloXZO3nunAUOYSpnir2+eXdcOH5TcOYM+/62WUwZP
-	gFooNrQq0LaCKGZhRYyYtXzKYZz890e4RNv3rJhhRlXT3R/6Z+x82m8e14THMzQ4REA9FHUfeQ7
-	Hjjox4PhmG9lVelsszMNDvZvzbRq+7xBc09ZkI4MYKsKKBL+8VYceORhqHP6NBk/HBTUSlrCjSE
-	Yp2IQ5ltxvJ8Q3fE+//PVmT/3MfBZcPnnCX99yUBdlXfa15K74CAiJ/4tJwqimxXdCHF65Eh4P3
-	G9Suv0gWCuBLOnhA7jGRpB1muK3QXkeD18uN9A3h72BQioPGaDOmBz0LGNEi/NYtya8uhRT7FG+
-	jH637A6J6+N7hbMTPjaBjemJVWRWihFHWMs6QWP6C2kSlunbt05D5sUmpkNMAZqTglJ1QAjvRAy
-	NlkGs1RTlOO46BsFEQ5rlApK67zp/PuRbSxWu2bLmxFoYUBTwo2vo6b9d9JaoaEuHUEaGeruq+P
-	CQilKaIxTpuQ5+5vCyXmNzgtBiyBCzcF1kVY95RmRhdmABRWKJIckdUecmyf2t163ppcj3SIoNk
-	Jag2+P3gpYx5h5fYTX//AkAPcat1kOvfI3EAVTq2VqHkItOH4h6Tm68fP1VRbrNqJmwqevqKwkg
-	1TCpe
-X-Received: by 2002:a05:600c:3b22:b0:49c:fa20:cbfd with SMTP id 5b1f17b1804b1-4a35ac9f145mr174276455e9.20.1793092872950;
-        Tue, 27 Oct 2026 02:21:12 -0700 (PDT)
+        bh=CLZ5lUQb+9hGYYoEHUFrzgFB5JW1myjR6W21ItxS3MY=;
+        b=UFSjRDuidu8B/qBlP0d9W9C4GWGNVCncuPHn46c+xkYOLWmGR1M80JE+sxPOcgicAq
+         wZfLpzQW9IAOfMvin8H15Z0tcTCZZ7dCD8cDMXHZCmNJztjjU+gyeY9DiVsUoXD3n5rh
+         MlYpvfYLqEmjy4oX5tXX0R6ygGHZbh5XMOJ/oObTEbPqQga03HfTdVKa1lBK3EKftrmb
+         wkftOPMI9iGluPq8LafjKH+PX42cvZipn3OCH6H6e3NjT0KhLzjqjox4Fm26xXZ0DDAK
+         gMrFtXH8m6KuDL1m28n6cw3c9IymptaBE1pKyvDt4QFAsPtFy+hx2uPFW+t7PnqDRICj
+         4HBQ==
+X-Gm-Message-State: AFq9FYIvKq4584a7hcUtGkpvRdqxy9BPaNnfzP7FUBDTo5uDKj8hSYf/
+	/nejVIYnjDltLQc/NRhv6m2oiuPNkERQqVQ470yeVATsjXl4R4KulKsr54SQMyb9jhFo7PbBVhJ
+	jsj/J
+X-Gm-Gg: AYBFou2OP3x6yd+NMoRtTagNkUEyRKcoXmWw1Dmml/1Fl1jpe66pTm8rYNjKIHtCotW
+	lk3XHfKejiCWSu60BCVQAEneK6WYwJ+mCU9hDkdhjqIKsy7FuRFkkPy5zBeUEvUlfZaWYEXqINg
+	Rg58w9hyYhTBK9yArJZ9bxc2O3tCHZJyNXHOJ4t8EqVAi41ofOJh/v0oEf+Bb5ORSBV9JxV6VoO
+	OfB84XvnHsrHPA+vDhvSKxJ2LcWjFbWcFUEHIo3nRqQU0CTSXv7uuuE7sGQk+FR5k0j4LTWpXKQ
+	jKTDbbI+PN1KA0B0UvdeXVtH0lK80SPWEkGqzS17M0vlQ2NVE3zz68IhzvFqjZ58PInm6jWnz2U
+	mONRbESaZerDwz4F7uI/OPKPWWGB5ikBpWY6YDdm3JOqwhYGMCWg3U6Rax1CfAojxGjjD9XGgsH
+	CwXAtuDM5J4ORh8Orga/B+gKtlZEDThDd9fOm/kSw6jnQKktdhE+dSAcjrBuTw6oR+PkiKvgIF4
+	5XI1NFFFcsK9nx8yIkIqhEaRk9MsYPY0ewdZO7wJEvwKdaebWyjMmZh43wpWqJOBNMzPsSImm45
+	fj0LVSVw+ZL4p7y0R6/sA2bl2sHxeLcy+kBVpwu6ipfhsxkZyb4BOQ0fWNhhKRRvPw41jXn1su+
+	N+uiF
+X-Received: by 2002:a05:600c:8114:b0:4a2:397:73e9 with SMTP id 5b1f17b1804b1-4a35ac9781cmr161122815e9.18.1793092874156;
+        Tue, 27 Oct 2026 02:21:14 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.11
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.21.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:21:12 -0700 (PDT)
+        Tue, 27 Oct 2026 02:21:13 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 36/61] python3-semver: Upgrade 3.0.4 -> 3.1.0
-Date: Tue, 27 Oct 2026 11:20:03 +0200
-Message-ID: <20261027092028.782979-36-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 37/61] python3-sentry-sdk: Upgrade 2.64.0 -> 2.73.0
+Date: Tue, 27 Oct 2026 11:20:04 +0200
+Message-ID: <20261027092028.782979-37-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
@@ -61,48 +61,78 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:21:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131500
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131501
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 3.1.0:
+Upgrade to release 2.73.0:
 
-- Remove duplicate code Version.bump_build
-- Improve bump_prerelease to alway get a newer version
-- 441 update pydantic section of docs
-- Remove Python 3.7-3.9 (EOL)
-- fix: replace semver.parse() with semver.Version.parse() in
-  docstrings
-- fix: next_version should bump version for build-only versions
-- fix(next_version): reset prerelease when token changes
-- Declare support for Python 3.15
-- Add optional native parser backend (minimal adapter)
-- Reject non-ASCII digits and trailing newlines in version parsing
-- Fix bump_build() silently returning an unchanged version for
-  digitless build metadata
-- Handle malformed collection operands in Version comparisons
+New Features:
+
+- (arq) Add an option to monitor arq cron jobs
+- (huey) Add an option to monitor Huey periodic tasks
+- (rq) Add an option to monitor rq-scheduler jobs
+- (types) Export Attributes from the public types module
+
+Bug Fixes:
+
+- (arq) Don't monitor cron jobs with unsupported schedules
+- (attributes) Handle special float values correctly
+- (celery) Don't round down beat schedule intervals
+- (cohere) Stop swallowing exceptions during stream iteration
+- (huggingface_hub) Stop swallowing exceptions during stream
+  iteration
+- Exclude litellm==1.107.0 from extras
+
+Other:
+
+- (litellm) Require filelock>=4.0.3 on Python 3.10/3.11
+- (monitor) Stop background health checks in tests that drive the
+  monitor
+- Update AGENTS.md
+- Update test matrix with new releases (10/12)
+
+Extend RDEPENDS with the runtime dependency python3-certifi.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-semver_3.0.4.bb => python3-semver_3.1.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-semver_3.0.4.bb => python3-semver_3.1.0.bb} (82%)
+ ...2.64.0.bb => python3-sentry-sdk_2.73.0.bb} | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_2.64.0.bb => python3-sentry-sdk_2.73.0.bb} (54%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-semver_3.0.4.bb b/meta-python/recipes-devtools/python/python3-semver_3.1.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-semver_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-semver_3.1.0.bb
-index acac3bf3ca..45664c6be9 100644
---- a/meta-python/recipes-devtools/python/python3-semver_3.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-semver_3.1.0.bb
-@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/python-semver/python-semver"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3ce011bad2c5218ddd4973952a6db93a"
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_2.64.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_2.73.0.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_2.64.0.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_2.73.0.bb
+index a45f4543d6..b946bafaac 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_2.64.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_2.73.0.bb
+@@ -5,16 +5,17 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=03dc788d9a9486be5e6a1d99c2c1ce3a"
  
--SRC_URI[sha256sum] = "afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602"
-+SRC_URI[sha256sum] = "14bc073439513d7773662a338f4db9829cf16c12b74b9568e2d2689975fbd7fc"
+-RDEPENDS:${PN} += "\
+-	python3-urllib3 \
+-	python3-core \
+-	python3-json \
+-	python3-logging \
+-	python3-threading \
+-	python3-compression \
+-	python3-datetime \
++RDEPENDS:${PN} += " \
++    python3-urllib3 \
++    python3-core \
++    python3-json \
++    python3-logging \
++    python3-threading \
++    python3-compression \
++    python3-datetime \
++    python3-certifi \
+ "
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+-SRC_URI[sha256sum] = "68be2c29e14ae310f8a39e1a79916b6d85c6cb41dcce789d14ff05fe293e4c55"
++SRC_URI[sha256sum] = "4a2ab97b16e4693c325ab361c7bbbb346dbc7d0bc0150922d795a25bac8d5280"
  
+ inherit pypi setuptools3
 -- 
 2.47.3
 
