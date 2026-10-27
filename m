@@ -1,135 +1,120 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22223.1793115908085125277
+Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.71])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22374.1793116817126285957
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 08:45:08 -0700
+ Tue, 27 Oct 2026 09:00:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=tCPgToFK;
- spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a2072b9832so7117485e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 08:45:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793115906; x=1793720706; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4u6SMRvKUhY7uGY5UhMrmTyevqT/HFxpU6BjatLcuzU=;
-        b=tCPgToFK7cWJVUYeEmqiSLcZx5olbZDSjw+hrAUPR4zVDxEFnTNNRXznImVPAFJfp4
-         HXYMOboaO910X4y8ZIp9xNJ9FN5Mf4HNrQz5+RDusnNfwkoI1B+fAdXuuagP8gR470VB
-         fFH1pkcJdE+UwzGTJEMIitR+mDz5FT9CFthI0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793115906; x=1793720706;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4u6SMRvKUhY7uGY5UhMrmTyevqT/HFxpU6BjatLcuzU=;
-        b=sQjQX9YlGYHJB7AsRJJr++3YVcsMu+iJ1R/srkI0ZqQyF5J/CPjHS7FojigXbG52qA
-         OZ4uWwrhvj6d16S2PrBk84WwfkcCQghXa2vcTSakBLzUtNmigD+lN5GelzlCqudL8szn
-         gfuD7lFyThNc0Gl22SddzR6onS6EEPZERhUGWIsaRHEU6JOA2QF8Nphmdl0X/nbCbw1d
-         4VxXchnkYh36dqM4AoknpNNps1Y6nN/2GjXc+AdYReV9SC+dmRTABaxpRd+3tRm1GiAE
-         KqZdBCLza2HpqjqUeFj3hwkUEY0qzAcFC8fDQxN5etVVnujXNMUrdZLarkz06tFf40kj
-         riZQ==
-X-Gm-Message-State: AFq9FYKR7k7MZiHF9GEplIrZqQscMvJjs4TeBzXc9qkWfrI3yQC7ZEnT
-	cfMOxltsrlfzOM91sth6M0Gblj4A1qC8XmwFYh14uc4Awxal5Ja8FXVL94YBX8A8hDQWUc6uSJu
-	DNZG6
-X-Gm-Gg: AYBFou0F6+AVn4A9Mi3K+VQm5Gf1yhh2bS9sw4lkKOK98LLUcza1dZkJ19rVHlJy9eq
-	r7bEZrws5FVyDatDNG0jau/h0zHJ9Kw1voycKBLmm1uKC49OAYNrDhQTXS2NpHo1xI0SjRkDmsi
-	hNloj+kWNeWVdLtOL81Q/GfU2WhInnQUSNflZxnpiHbqR0GPbqfjlxLpHBRpI8CvvcAw5Z1Swnr
-	sCMgxfq7QeipNGWPn8ORnwCOm6ka6fVk1MF8va8ev+JT1NE1LR8UHMOr9NcjNyHWUob1dJ5urj2
-	rxpiIEpLzjQW7eRyt/rriZ/KHxsmi17pe8t9VVkO1cgKSSerzvl0qHSNb2qa5YY4uKPXGRiJIGy
-	dndkm2TBWC0ZnI2MlnqlttA9lcgF1AUWXMwbL43Hg5nBu8vJUxxNpj/n6Mmys04TuW5Uh2pM93Y
-	3zGhe8KWhxNhj9y+SOcaMFr8cOiKU+TBBlQdkP6SxStERu++3El6rhyqF4XW+vLCK3N83TR4Z7g
-	ZM5gCnsDGwV9LZFQDXZKuHVKMCmSoyxjBtdkt+Vyd20jQDJejEC44CLe0HP4gKyTprEGJVQF2yH
-	vkAYuoVSbtNubdw0uyXw7ZKeYcbwbHvWq4kjkzIn4Q4n3NYKxCvOqhrrLi7l2CUe2dqo8A1zgDF
-	Yeku3
-X-Received: by 2002:a05:600c:45c4:b0:49e:6581:7baf with SMTP id 5b1f17b1804b1-4a7bfec4e49mr68936985e9.2.1793115906303;
-        Tue, 27 Oct 2026 08:45:06 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a2d6f6fsm266099575e9.12.2026.10.27.08.45.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 08:45:05 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=fFrESKwB;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.130.71, mailfrom: johannes.schneider@leica-geosystems.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DtU2uNnDZ5RijBuXQhjJ6P9kqy0vPqtInyRrFPi/4E5fIstVM7iO9G8vT/XeVRgUuTdtJ2e7aYgdcCWICKzrSU8C7uuBEQmw2pRCUgl8C/a4316uH03HpcqtOE1o+MTd9KSJjiItZa/8O/pC69J83MKpIj1cxgyv4mflO0RdK/ktSDxtpiVZ6mocffqWNJQfCUNS37TQaoVlhK2fE6/N8afpmVGU7Gq2iVzUy1BrU22hNGXoHqZineUP4Hi9bAoOLlaaiNwHhMsmxDCKECdqBB/8qSmYYRK/GsGJrNAlSFd/Rykt1WeVArmPRR1s+KVeXtdg+ZzCzSRDRPY8dgIwgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tw+mmjrQFH5KIur55H9pxhRoDPa1Lb/UUZe8jjG9Mls=;
+ b=iufEwz5tCBQ6F+p29slsT19B8YDJ6sn/4fSHfFrzzbKsUU3w0xX7yhWmW04X53BkmWcKbA0KK60mdDUrZwtWjt4HPot2ajGoyyC7zcqs43M8xGkrGPu0xqTB2KLyuRP12GkGC+pRc6SmCyXla483pqcHlBA0oqD0d6rNPSBowDPBXygSrd38zPaEagpQW24PzK20/VUQYzqr4lEqJA4SUC9AL8tFC5u+CV+Zhcx5dorlm1nxZtl5hed2L3C/YHr8qkHdLNRiv0NhtH6FAlRuu28PMD7YW7bThOMfEMNcAFh7Q8T4QiIrvNALCx24PJ+vuMyrEL7I7FUHQhaRyuKOGg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=leica-geosystems.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tw+mmjrQFH5KIur55H9pxhRoDPa1Lb/UUZe8jjG9Mls=;
+ b=fFrESKwBEbuX7Lk5MsMpipyiqJ62/1aP6AbiCWc4KQbnBjlHooEKK/mXptfzsFR+JkCxsgzWIxtd7MPyRqzfYudvBCxU/Ea4lUKUhONPJhc7ypLIDeH6jQJKfiGQXnoGcdjp3mLtmYcO3tw1ASZio8t/HeBe/TGwXhSNHZAq33c=
+Received: from AS4PR09CA0006.eurprd09.prod.outlook.com (2603:10a6:20b:5e0::16)
+ by VI1PR06MB6463.eurprd06.prod.outlook.com (2603:10a6:800:11d::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
+ 2026 16:00:10 +0000
+Received: from AM2PEPF00070CF2.eurprd02.prod.outlook.com
+ (2603:10a6:20b:5e0:cafe::a7) by AS4PR09CA0006.outlook.office365.com
+ (2603:10a6:20b:5e0::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.22 via Frontend Transport; Tue,
+ 27 Oct 2026 16:00:09 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
+ signed) header.d=none;dmarc=pass action=none
+ header.from=leica-geosystems.com;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
+ designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.99; helo=hexagon.com; pr=C
+Received: from hexagon.com (193.8.40.99) by
+ AM2PEPF00070CF2.mail.protection.outlook.com (10.167.242.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Tue, 27 Oct 2026 16:00:09 +0000
+Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
+	 Tue, 27 Oct 2026 17:00:09 +0100
+From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 2/2] hunspell: Upgrade 1.7.5 -> 1.7.6
-Date: Tue, 27 Oct 2026 17:45:01 +0200
-Message-ID: <20261027154501.1209697-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261027154501.1209697-1-leon.anavi@konsulko.com>
-References: <20261027154501.1209697-1-leon.anavi@konsulko.com>
+CC: Khem Raj <raj.khem@gmail.com>,
+	Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH v1] neatvnc: add nettle PACKAGECONFIG, disabled by default
+Date: Tue, 27 Oct 2026 16:00:09 +0000
+Message-ID: <20261027160009.2436431-1-johannes.schneider@leica-geosystems.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Return-Path: johannes.schneider@leica-geosystems.com
+X-OriginalArrivalTime: 27 Oct 2026 16:00:09.0138 (UTC) FILETIME=[3DBD1920:01DD662C]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM2PEPF00070CF2:EE_|VI1PR06MB6463:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7de64d57-8cee-4211-4c3e-08df34436052
+X-SET-LOWER-SCL-SCANNER: YES
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|36860700016|23010399003|82310400026|261026140227099003|261021121427099003|56012099006|261022105027099003|261009223027099003|11063799006|10067099003|261026121527099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 1GodiGqNgqGKxOe0hiQXdxSMwXMi9uvZMt+PBgaCj3CEXWJVyXlQDWws6TO/7q6J/c3aH+mSZlCBZZm5fEyo5ZlGeViE5QefW0BEnoKg6On+syObybMD1DUCKp4c34rDEqCAmJtwQPmQFxROnrMNR3IuqonMB9gM1gPFEkgOX5D99GIkHsB3PufBN7A+m883V49m4reom3oidDwhi8xFPrGNLTtUBcKwS5uT8I021hgAUdA0NqcJA1nnuUdv0FGJWpZU22oTlTNOyXJs/4d3OoP0ufhvI5B/r/59SuFV6HnuEK+COHQUbuAR2slr3MBB6ehDV7Pgh5Vjozhb7K23aXYc0Seo/MwnhuQ+yyfqGwTtBTCITP6V9wtT3vVusRoUylCclegnbiUMCdvFkkcJyT4yQ9mQhOcAbKdDhKRkW0kkcKNxYz6dnUE+6AG25wjLa83i09l4RPXNUzhUMvP3p4wfZEPBs11QgKBPi6y/hO7UXSYABmOsk4WZIAbWuPKFs+8a1ArlJTtA0YZFiQ8HABKjGCzUQmbphHWdFWn4ultNLk0a/3K3KNdgGW5khjBJZb52KSZe5WrtKVooj3W94YCcKB2D9KWZDKPwfjNtw8u81GYhkLVDCl7QvFWLIRNVkdH9DR6wpVCodvZKs49cdgqUvTS9KtU8jqfO6Vgx0SEjcpp1TyN/hXIu/z0L/paMUx59dl9YMnTNRITRKWnrYQ==
+X-Forefront-Antispam-Report: CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700016)(23010399003)(82310400026)(261026140227099003)(261021121427099003)(56012099006)(261022105027099003)(261009223027099003)(11063799006)(10067099003)(261026121527099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: zPgzMkpACny+LOL+kzQUXeaRo1kq4TgREVM3e8VdjRUAhX/+gmEDNkW9S8nFXPa3wyKtNkT+jVjYGxk6/if1318eMZE3iu6i8SFuZV3sD/ev4P7Ba3hykXUgADVBNsfX0oSpqEuv+uOXj90KrkGpy9six0OkJ9BZU98MQ/um1xd2A3Cke4vLn4dkM30NIEUrc8fo6Jil7wOGZYBC4d9XbgBavc9L++koI+GTwtVPdaLryby997dCiekUy9Tm4q6W/NK5IikYc+zl1uiaYoJ5N1NBWBkY2jXffWxdidRfz5OzquH/Hv1WJug7b1hKY7K3ETrJU92GD98Gm26NA9u7Jd5HIXB8Px+Ky8cRg32Fqkdp7lkl69aufDB9HZOUOCSlC13ZsqXx6XSunvqkUPnOuqADgft4BexEuREbYCKQvloymW/qDk5wQYrwk7Dx99DA
+X-OriginatorOrg: leica-geosystems.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 16:00:09.2995
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7de64d57-8cee-4211-4c3e-08df34436052
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF00070CF2.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR06MB6463
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 15:45:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131539
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 16:00:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131540
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.7.6:
+The nettle crypto backend (RSA-AES security type) has no PACKAGECONFIG, so
+meson auto-detects it from the sysroot: non-deterministic, nettle missing
+from DEPENDS, and broken against nettle 4.0 (split sha.h, changed EAX
+arity) which neatvnc 1.0.1 has not adopted.
 
-- add, add_with_flags, add_with_affix and remove apply the
-  dictionary's ICONV rules to the word, as spell does, so a
-  caller that converted the word itself must stop doing so
-- A personal dictionary exclusion such as *afterwards also
-  rejects the word when the dictionary has it only as an affixed
-  form
-- stem and analyze give st: stem fields again with
-  COMPLEXPREFIXES
-- analyze lists every analysis of a compound word, where a
-  rejected split of the word could hide the splits after it
-- The text and XML parsers check the character after a character
-  entity such as &agrave;
-- The interactive mode shows the first digit of a two digit
-  suggestion number
-- The -a pipe interface checks a line of any length in one piece
-- The hunspell tool takes -- as the end of the options, the -u2
-  sed script escapes the word and the suggestion, and a zipped
-  ODF file whose name starts with - can be checked
-- The hunspell tool no longer searches the OpenOffice.org 2.x and
-  3 folders or LibreOffice's user wordbook folder for
-  dictionaries, and searches /Library/Spelling and
-  ~/Library/Spelling only on macOS
-- On Windows, search the share\hunspell, share\myspell and
-  share\myspell\dicts folders of the installation that holds
-  hunspell.exe
-- New configure option --disable-tools to build and install only
-  the library
-- A static-only build records that in the installed hunvisapi.h,
-  so its users need not define HUNSPELL_STATIC
-- Install the Hungarian hunspell.5 in hu/man5
-- Use Mozilla's own FileMgr and csutil code in MOZILLA_CLIENT
-  builds
-- A CMake build of the library, as an alternative to configure
-- New configure option --enable-werror, off by default
-- Man page: the fallback dictionary is en_US, the SYNOPSIS lists
-  -u, -U, -u2, -u3, -P and --trace, and -a reads a file with the
-  pipe protocol too
-- Build fixes: MinGW, the BSDs, macOS, makealias without gawk or
-  GNU sed, readline and curses detection, and the release tarball
-  ships the CMake files and all the test data
-- oss-fuzz and Coverity fixes and hardening
+Add the toggle with its nettle/hogweed/gmp deps and default it off, so the
+build is deterministic and green on nettle 4.0; gnutls TLS is unaffected.
+The real fix is a nettle-4.0 port of src/crypto/nettle in neatvnc upstream;
+this only keeps the recipe building meanwhile.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Assisted-by: Claude:claude-opus-4-8
+Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- .../hunspell/{hunspell_1.7.5.bb => hunspell_1.7.6.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/hunspell/{hunspell_1.7.5.bb => hunspell_1.7.6.bb} (96%)
+ meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.6.bb
-similarity index 96%
-rename from meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb
-rename to meta-oe/recipes-support/hunspell/hunspell_1.7.6.bb
-index ec25dc91e2..f7e98da5ac 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.7.5.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.6.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
- "
- 
--SRCREV = "e8342700b4dde06130cdbba75f7e6500ffa58864"
-+SRCREV = "15faca15532b34db3106d50f162e5edc2503d6d6"
- SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
-            file://run-ptest \
- "
--- 
-2.47.3
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.1.bb b/meta-oe/re=
+cipes-graphics/neatvnc/neatvnc_1.0.1.bb
+index 5946994b53..ab462bcf08 100644
+--- a/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.1.bb
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc_1.0.1.bb
+@@ -13,6 +13,7 @@ DEPENDS =3D "libdrm pixman aml zlib"
+=20
+ PACKAGECONFIG ??=3D ""
+ PACKAGECONFIG[tls] =3D "-Dtls=3Denabled,-Dtls=3Ddisabled,gnutls"
++PACKAGECONFIG[nettle] =3D "-Dnettle=3Denabled,-Dnettle=3Ddisabled,nettle h=
+ogweed gmp"
+ PACKAGECONFIG[jpeg] =3D "-Djpeg=3Denabled,-Djpeg=3Ddisabled,libjpeg-turbo"
+ PACKAGECONFIG[examples] =3D "-Dexamples=3Dtrue,-Dexamples=3Dfalse,libpng"
+ PACKAGECONFIG[benchmarks] =3D "-Dbenchmarks=3Dtrue,-Dbenchmarks=3Dfalse,li=
+bpng"
+--=20
+2.43.0
 
