@@ -1,240 +1,352 @@
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28177.1793131511592438745
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28200.1793131567880448998
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 13:05:11 -0700
+ Tue, 27 Oct 2026 13:06:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=kOQdzdZt;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-8ac525c1f05so2351877b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 13:05:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793131510; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=WIZoGaNJ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8b056d58f2aso2176757b3.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 13:06:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793131567; cv=none;
         d=google.com; s=arc-20260327;
-        b=Xs2HIKXm+8Vgsnv144MiMjQy/B+QP8bvJJvLRnBTYJLCgCRD5BfjfkakxQD+sQOhKp
-         UysrU9qZIzl4WM2ic9bwthy3TADmCJuX1x8pwatOwciXiNFyvxJ0189dKV0YFFRQ1G82
-         pfKVH6AQBfhiDzsfDWpEEUblFWG++zMah9YDkGtFZ7WKxk76edsavgHA8oKsmIeoMFQs
-         CyTspJvvujAfPyaydDIPU8ChSM1D8/BtH7vrJaYEjNIhQj1WZd7NH22/9bpqm4SRI5rj
-         vNY2tAnm5bP10X8FVm2abdmA6bQHkr6M7SlbjYwdOGcDuhTvtTT4xl3GPUuzRniQltx0
-         MCcQ==
+        b=DSeveh/VSFnWAAgoV/zbTG+Z7J71ExoKLpo7BBmD+qZtulh/pydqmy4w1hdJtJOJsU
+         2+KncXtEVGqpCkQxnE1kvKXYKM9wk+C0eH/ReiJpD2BAof7WlPVXTyPumjr6ntGqcoev
+         F1TUaTdwyCe38zyxEQbCDLuxh1HgOYmQrhFLOc7BfTeDrTB2JhS/rZvIaJ7cNwwNh6R6
+         pN03+J7Lf+KMfzhep63WQmGlaAgdhsLNh1n43tpJaj/vgSK+FLBgncCvklh6TILZSzr3
+         VxyxxBrQVi8YIcgHzTAb93MqSyYtxihxiNRoHuqksJ8mJE8vtIazvz+1Sn1yFH4g5BAn
+         QEPg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=RwLQQZxcJ4cYFAHly9VX8GxLd+04ZgVtc5Wm98swv5Y=;
+        bh=33SXT68Uos4IASxgFMyzo1a7rF83H0jkc2v/8cTk46o=;
         fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
-        b=nmX99WMsQbXMRJ0nSQmsV+omyckfhJAeWQVHZcXxqP3QW4VPEPnx/qmsofKvbJQvPo
-         ocn5RHY9H4fByqQxFzKcaX66gIwqPJFYiYO+pSI1DqkXwzyekUqBsy5uc7C0VJ1qM5gC
-         W7ltwNn0L9NMiYEmRCuvKfTu5LJWP4DoDr8bVTKRoykbF/VIAh0JhSDU06fhVKlIHWkz
-         g/ZVE6N1ej+g1mVe62iFJlkDCwEFFn0Aje7oWfSqJimNItzQqEnw1+DNDR27ZXl4kLdr
-         h4ou1wHGgy6in4H4j5qHPCG3ULnIWs7dSV4tsRH/XkqhUGyIfDNRkMJGRWRfuzam3VKU
-         E+JQ==;
+        b=LrA/dMz4czEg+tlwgOmU2QO1QIxzv7PEcgb5yuXr81qFHw0sBiuMOtirj2V2IgYd1H
+         yn2AARVXKZhPIzQwajbKHghZlB/Zs1E10UYbaNdp8JUm7zAx0/ilLxfNfwVeOFMkegW5
+         d5UMxpQKKsouTYFEkSfLKrcXUs9TQSeZjkQKN/TG6PgS/+HRMV1De4o9VNIm35KXur9a
+         I4sq3ikYqmF0ItHOLK7XNr27iEj08rYF7G7flgmW86wiKxKduDOp9aGk3NFLDTbFCWZE
+         hSndfp+3bULUIauZ+Gk0+8EtAQUxbo3q9wlkA3EuOAaHIQI2nrm4+0nbb8GUgtJipLy5
+         gUew==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793131510; x=1793736310; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793131567; x=1793736367; darn=lists.openembedded.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=RwLQQZxcJ4cYFAHly9VX8GxLd+04ZgVtc5Wm98swv5Y=;
-        b=kOQdzdZt+1/UylGn2jwGvkl5JmA2pkEBL4QylcPzN8aKTN+dTnjwzQfT882w4NYyx/
-         EqhVSJNNXFEE1MrDYuDv6h4btzolb4yWH/5xVukgRfg0cuM+ex4nGig+UmWZezilnXYy
-         t7exPZ8T8VAs1ZrtoNWahZKU+QRH+KddGIL34Old1OVWDr21T5r0ceqDlTYLkqYMQ2DH
-         2RLAg04LqVdnlZ7hht57TUloEGsqggiEbmyvTY4/zvpvgr/V6FhbNTrKoI7SEb3nh0QH
-         pmhaiuwng0Z3j5qNdG18dGXLEPqqUBi1eetSkcqlMFeo+aFy/XeShen6fk37dcAPqdqG
-         onAw==
+        bh=33SXT68Uos4IASxgFMyzo1a7rF83H0jkc2v/8cTk46o=;
+        b=WIZoGaNJIpLE2W6sb0DF/5ItsgA10hJ7VS95d7M15/euxmiYhprKRMO+QQVhV+dbxH
+         B9ohDE39h+6ZbmbsDcoAfOkeIoJRESo2bqallkeUJeVPSHJ5o5E4eCRjYQsm0NP7Hzel
+         Y96rucGrJEXQusv69mWBK6bz5wo2qIVI3d3SO1GsMsUKTglH9ohooXGkSxdd2wqH5mcb
+         CPIO/zc72JHGYP5KrEY8ZY4Y1AHr2RCLewSiYflnnm6/wce9K7OiHHFRtuZH7XPNs3Eu
+         z7OxJRyyadEnN3yQ3/X+Xf51x5uu4SEPMRMiRB4C/ykddg05rb+0pmguaFApoydd91xS
+         0kTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793131510; x=1793736310;
+        d=1e100.net; s=20260707; t=1793131567; x=1793736367;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=RwLQQZxcJ4cYFAHly9VX8GxLd+04ZgVtc5Wm98swv5Y=;
-        b=zflF4xQ6RW4NfVazMJnZM7PiWbf8Jvyguud//RH4R7wMGt9EPnoh6o/+z9WbfZwFPb
-         j/J+6oC2YvLwmb2HLAjvF/ZqZf0Owi0MVaZZBux6zWnz21J457Dc0LxOoaaYEodhYsCJ
-         crC7QqKalbkeR+1yZHCLj3lqPlNfeDt7g4oVggOsJjqSFS7cMlc16N7Y4EXrlnpMc/Tm
-         kTpOi84A3tTgTG7MoNFbJiVD9kQv8BXeQdUd53625ZALXBP9C5pvYDPs5nX2Guolh6h6
-         uPklHLcqY5QdFy+2w9tI8rrT8lY9LW6Krk3S0MIrVlaW3kJBX1uV29QTd7y44dboPSZz
-         XK2g==
-X-Gm-Message-State: AFq9FYIBLlWjA1OG6S4km7FbYfDy73Wjl6vsDpTPC1Vo88wZ2WXiD7Gc
-	UX7kUCmGZ6Tp+VIOEgg9wooUOzD2b82xYydstn+kzHLG4nvUfQUcg5y6CTYmZz5UgA2Uzc7sDgi
-	MyN0FKRGz43KUCnCVJzMS6CyDwRft/uUuwhk/V9Zpbw==
-X-Gm-Gg: AYBFou2AHVauv2Il+Kju2WqzHsw0RUa3fnXfEoeTIUv3V2mZvi2N41N7iRWsI2lyffu
-	pw5qOiYtnmwIKTvFruHskuZjaMq5dXXERAc3WVDUajG/7q0zGsQVrK65jDQZ0C/fn5TAaicxLEd
-	6BAoMQVrSMTIgdsXA3x4GAbqTAOHA+/E8DoZf8Fwi0ceJ0WDh8/NPK365S0LB0xT0aXiM9AEbts
-	PtH0bUDnrmviC/UEhkxajFnTR5wbX35Q7j0bKetzSK89wM+POOfr+Ygau5O44sMGKO2URC3TI+Q
-	rpHWQyyhlqF2NJnd1eBxFJ95udw/7sb5nM8rJMExBqy0NR8mcuua6E1qN55I2PFXakoLkDDQuj7
-	o9z0cD4CxVaHBlsIs+hVVwA47XrZOjGf9mfrTZS5hCoYtR79WZvVvEU9o1nXOb/lHH9swefCgS5
-	ekxZ77DNxSrhj1TFs0ZvyOE2aWKnNXGOd2TkApBq683+lxLNQ0ZGg4CLVFWIyTaRnw31GQojZp8
-	DJvCa8GbYas/Y9n/OBJyaKtWxjklL/5QR7SnTZR4MKtuUcMI+UhZxuPR4jzW7rCjEiEyo3AZgBY
-	Ma+R26cjgaCm9tHHeh0H3fCCDp1TjAUScJ/hSB0UqjZpk3ROhGyIKSPGAlMoeUfD
-X-Received: by 2002:a05:690c:60c1:b0:8b1:e7c:cdcb with SMTP id
- 00721157ae682-8b1b5c4b654mr748987b3.23.1793131510348; Tue, 27 Oct 2026
- 13:05:10 -0700 (PDT)
+        bh=33SXT68Uos4IASxgFMyzo1a7rF83H0jkc2v/8cTk46o=;
+        b=2nO+9FWt8JDX/lZ6YZyDAHtlu+8XJZaS6V+K0I+qwFjRlw8EWEMLTgfBifSJp6mJsg
+         tH8JfcqNEG3nNcumcNF58U3+wUlOIBxsztF4dyHxv4sEOVjUWmRMa6dfS3fyRPEywek+
+         Ts8Qvpqyk8Z7NWIA/Dtwo1/M3qOvHmwW83kXlP9kXedutGckbHctlEYOm566hnNfLDaX
+         sKmEXGPL+MJeY3o83HwJRrSRZ6QoJyGpqznJr034mSh3gpWOpnaEX9mfZ+sHBSkrGNd6
+         BgseUkzgNESHSjn4b06BQYoQUJOOUdEWWSGwioNqjG+dipcfy4S8vJf3pJ/sGTtFy4Ho
+         fQBA==
+X-Gm-Message-State: AFq9FYIJxpsXdVP5edim3IhpE/vBkh0uiywWYErCcTmvUPQrrC3qbWQ6
+	rArHUT5VaNCySplo5Enaruid2PKmONiGQgF/ikOm/rlxhks2BeS+FyybuL3zuGI1Ra+w473MzoI
+	qJc2zDxRHgE9Q4arOT6Q9h9wdqB3X1CvRkf/rCFpkCg==
+X-Gm-Gg: AYBFou2LCXOS7FeCsl9Sh7H+FAkFxdmdCok1EsW75pCBD7xC4PWg2wbUnODE/8dkCb6
+	Y5KuIzf5TMQsRmYTHJWVHv77Yzcc+tYwy645KDz5Nt0VPJ0LTckrcBKJK+mNGDylS1zf3y/H6qF
+	8S7JArz/QSMM2bOhtF0RYKqcgOZYDpTJ8uksYA1otEiXTuw1PnO1XjoFYYvjCcnLMN/QGQCBXQ5
+	n7KgYAwJS43flancGv6HT2yNRIYsNHn18uIVc0jG08fhLRYajX9LrClB9+pSM9KY9xGkSJCj1tt
+	R/5AOMjOH2ZuPOmDVC9Xfj4rouKpw4LH/NGD7xFl7E9Ll4QZg0bdPTx9cMRrXvYlyPAHG1wd69y
+	NuQlAdlwOJop2TlKEyDM6Ovx3vxC+4BhonZ1GrAPYhnetZRAMbPXdaup+YfghX13iywKJRQF09V
+	u8/jHJMHBB9Ajo1l286plqtItsD9FUJsiV2lgFlAhkHiqUPfgxTP+lgmBS1oqZcKvcB5jhOwc73
+	GhFowklwcP+TN0oT5uOYG+ulmre4qVh8cbrC/K25+uZcGoOS7SBUJmD6N9bFhkAzFdiPFgqgFlU
+	DrnDmCxiSrDI/wW9FEbOdZ/CYJfcuuQAKalxokRpzhSd1yT44WAyrAz1yM5PoRIm
+X-Received: by 2002:a05:690c:39d:b0:8ab:36df:344e with SMTP id
+ 00721157ae682-8b1b5cf84ccmr532117b3.91.1793131566781; Tue, 27 Oct 2026
+ 13:06:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261027092028.782979-1-leon.anavi@konsulko.com> <20261027092028.782979-43-leon.anavi@konsulko.com>
-In-Reply-To: <20261027092028.782979-43-leon.anavi@konsulko.com>
+References: <20261027092028.782979-1-leon.anavi@konsulko.com> <20261027092028.782979-28-leon.anavi@konsulko.com>
+In-Reply-To: <20261027092028.782979-28-leon.anavi@konsulko.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 27 Oct 2026 13:04:43 -0700
-X-Gm-Features: AclHuK-w0cOuaUCCub5LjnfPMdMB2tRPeBlAkJg-ZYW1qb9O_ELrOdWUb8z7ows
-Message-ID: <CAMKF1srRNVMxd7ZJZDUPz38uR2UZu-uRm6j7gwu2ngOBG6ADLA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 43/61] python3-starlette: Upgrade 1.6.0
- -> 1.10.0
+Date: Tue, 27 Oct 2026 13:05:40 -0700
+X-Gm-Features: AclHuK9P_SRaU6pgRimpFql7hPhr-A0YNySabB70RIY0J4q5sevCi9AAc0JU_mg
+Message-ID: <CAMKF1spjdwjvQp-jqshEWXeeT05Oujmjh3nUQyPf_DjEuSDv0Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 28/61] python3-pyroute2: Upgrade 0.9.6
+ -> 0.9.7
 To: leon.anavi@konsulko.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b5c9ef065ed7f611"
+Content-Type: multipart/alternative; boundary="00000000000012d965065ed7fa36"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 20:05:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131545
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 20:06:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131546
 
---000000000000b5c9ef065ed7f611
+--00000000000012d965065ed7fa36
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 fails ptests
 
 Failed ptests:
-{'python3-starlette': 'START: ptest-runner\n'
-                      '2026-10-27T18:51\n'
-                      '\n'
-                      'ImportError while importing test module '
+{'python3-pyroute2': 'START: ptest-runner\n'
+                     '2026-10-27T18:53\n'
+                     '\n'
+                     'ImportError while importing test module '
 
-"'/usr/lib/python3-starlette/ptest/tests/middleware/test_opentelemetry.py'.=
-\n"
-                      'Hint: make sure your test modules/packages have
-valid '
-                      'Python names.\n'
-                      'Traceback:\n'
-                      '../../python3.14/importlib/__init__.py:88: in '
-                      'import_module\n'
-                      '    return _bootstrap._gcd_import(name[level:], '
-                      'package, level)\n'
-                      '           '
+ "'/usr/lib/python3-pyroute2/ptest/tests/test_unit/test_addr_pool.py'.\n"
+                     'Hint: make sure your test modules/packages have valid
+'
+                     'Python names.\n'
+                     'Traceback:\n'
+                     '../../python3.14/importlib/__init__.py:88: in '
+                     'import_module\n'
+                     '    return _bootstrap._gcd_import(name[level:],
+package, '
+                     'level)\n'
+                     '           '
 
-'^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
-                      'tests/middleware/test_opentelemetry.py:8: in
-<module>\n'
-                      '    from opentelemetry import metrics, trace\n'
-                      'E   ModuleNotFoundError: No module named '
-                      "'opentelemetry'\n"
-                      'ERROR: '
+ '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                     'tests/test_unit/test_addr_pool.py:3: in <module>\n'
+                     '    from pyroute2.common import AddrPool\n'
 
-'tests/middleware/test_opentelemetry.py:tests/middleware/test_opentelemetry=
-.py\n'
+ '../../python3.14/site-packages/pyroute2/__init__.py:31: '
+                     'in <module>\n'
+                     '    from pyroute2.ipdb import IPDB, CommitException, =
+'
+                     'CreateException\n'
 
-'=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+ '../../python3.14/site-packages/pyroute2/ipdb/__init__.py:16: '
+                     'in <module>\n'
+                     '    from pyroute2.ndb.main import NDB\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/main.py:317: '
+                     'in <module>\n'
+                     '    from .task_manager import TaskManager\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/task_manager.py:3: '
+                     'in <module>\n'
+                     '    import resource\n'
+                     "E   ModuleNotFoundError: No module named 'resource'\n=
+"
+                     'ERROR: '
+
+ 'tests/test_unit/test_addr_pool.py:tests/test_unit/test_addr_pool.py\n'
+                     '\n'
+                     'ImportError while importing test module '
+
+ "'/usr/lib/python3-pyroute2/ptest/tests/test_unit/test_config.py'.\n"
+                     'Hint: make sure your test modules/packages have valid
+'
+                     'Python names.\n'
+                     'Traceback:\n'
+                     '../../python3.14/importlib/__init__.py:88: in '
+                     'import_module\n'
+                     '    return _bootstrap._gcd_import(name[level:],
+package, '
+                     'level)\n'
+                     '           '
+
+ '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                     'tests/test_unit/test_config.py:1: in <module>\n'
+                     '    from pyroute2 import config\n'
+
+ '../../python3.14/site-packages/pyroute2/__init__.py:31: '
+                     'in <module>\n'
+                     '    from pyroute2.ipdb import IPDB, CommitException, =
+'
+                     'CreateException\n'
+
+ '../../python3.14/site-packages/pyroute2/ipdb/__init__.py:16: '
+                     'in <module>\n'
+                     '    from pyroute2.ndb.main import NDB\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/main.py:317: '
+                     'in <module>\n'
+                     '    from .task_manager import TaskManager\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/task_manager.py:3: '
+                     'in <module>\n'
+                     '    import resource\n'
+                     "E   ModuleNotFoundError: No module named 'resource'\n=
+"
+                     'ERROR: '
+
+ 'tests/test_unit/test_config.py:tests/test_unit/test_config.py\n'
+                     '\n'
+                     'ImportError while importing test module '
+
+ "'/usr/lib/python3-pyroute2/ptest/tests/test_unit/test_entry_points/test_b=
+asic.py'.\n"
+                     'Hint: make sure your test modules/packages have valid
+'
+                     'Python names.\n'
+                     'Traceback:\n'
+                     '../../python3.14/importlib/__init__.py:88: in '
+                     'import_module\n'
+                     '    return _bootstrap._gcd_import(name[level:],
+package, '
+                     'level)\n'
+                     '           '
+
+ '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                     'tests/test_unit/test_entry_points/test_basic.py:1: in
+'
+                     '<module>\n'
+                     '    from pyroute2 import IPRoute\n'
+
+ '../../python3.14/site-packages/pyroute2/__init__.py:31: '
+                     'in <module>\n'
+                     '    from pyroute2.ipdb import IPDB, CommitException, =
+'
+                     'CreateException\n'
+
+ '../../python3.14/site-packages/pyroute2/ipdb/__init__.py:16: '
+                     'in <module>\n'
+                     '    from pyroute2.ndb.main import NDB\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/main.py:317: '
+                     'in <module>\n'
+                     '    from .task_manager import TaskManager\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/task_manager.py:3: '
+                     'in <module>\n'
+                     '    import resource\n'
+                     "E   ModuleNotFoundError: No module named 'resource'\n=
+"
+                     'ERROR: '
+
+ 'tests/test_unit/test_entry_points/test_basic.py:tests/test_unit/test_entr=
+y_points/test_basic.py\n'
+                     '\n'
+                     'tests/test_unit/test_frozen.py:9: in <module>\n'
+                     '    SPEC.loader.exec_module(frozen_module)\n'
+                     '<frozen importlib._bootstrap_external>:759: in '
+                     'exec_module\n'
+                     '    ???\n'
+                     '<frozen importlib._bootstrap_external>:896: in
+get_code\n'
+                     '    ???\n'
+                     '<frozen importlib._bootstrap_external>:954: in
+get_data\n'
+                     '    ???\n'
+                     'E   FileNotFoundError: [Errno 2] No such file or '
+                     'directory: '
+
+ "'/usr/lib/python3-pyroute2/ptest/pyroute2-frozen.py'\n"
+                     'ERROR: '
+
+ 'tests/test_unit/test_frozen.py:tests/test_unit/test_frozen.py\n'
+                     '\n'
+                     'ImportError while importing test module '
+
+ "'/usr/lib/python3-pyroute2/ptest/tests/test_unit/test_iproute_match/test_=
+match.py'.\n"
+                     'Hint: make sure your test modules/packages have valid
+'
+                     'Python names.\n'
+                     'Traceback:\n'
+                     '../../python3.14/importlib/__init__.py:88: in '
+                     'import_module\n'
+                     '    return _bootstrap._gcd_import(name[level:],
+package, '
+                     'level)\n'
+                     '           '
+
+ '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                     'tests/test_unit/test_iproute_match/test_match.py:5:
+in '
+                     '<module>\n'
+                     '    from pyroute2 import IPRoute\n'
+
+ '../../python3.14/site-packages/pyroute2/__init__.py:31: '
+                     'in <module>\n'
+                     '    from pyroute2.ipdb import IPDB, CommitException, =
+'
+                     'CreateException\n'
+
+ '../../python3.14/site-packages/pyroute2/ipdb/__init__.py:16: '
+                     'in <module>\n'
+                     '    from pyroute2.ndb.main import NDB\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/main.py:317: '
+                     'in <module>\n'
+                     '    from .task_manager import TaskManager\n'
+
+ '../../python3.14/site-packages/pyroute2/ndb/task_manager.py:3: '
+                     'in <module>\n'
+                     '    import resource\n'
+                     "E   ModuleNotFoundError: No module named 'resource'\n=
+"
+                     'ERROR: '
+
+ 'tests/test_unit/test_iproute_match/test_match.py:tests/test_unit/test_ipr=
+oute_match/test_match.py\n'
+
+ '=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D\n'
-                      'Testsuite summary\n'
-                      '# TOTAL: 1\n'
-                      '# PASS: 0\n'
-                      '# SKIP: 0\n'
-                      '# XFAIL: 0\n'
-                      '# FAIL: 0\n'
-                      '# XPASS: 0\n'
-                      '# ERROR: 1\n'
-                      '\n'
-                      'ERROR: Exit status is 2\n'
-                      'DURATION: 2\n'}
-
-ptests which had no test results:
-['python3-starlette']
-
+                     'Testsuite summary\n'
+                     '# TOTAL: 5\n'
+                     '# PASS: 0\n'
+                     '# SKIP: 0\n'
+                     '# XFAIL: 0\n'
+                     '# FAIL: 0\n'
+                     '# XPASS: 0\n'
+                     '# ERROR: 5\n'
+                     '\n'
+                     'ERROR: Exit status is 2\n'
+                     'DURATION: 1\n'}
 
 On Tue, Oct 27, 2026 at 2:21=E2=80=AFAM Leon Anavi via lists.openembedded.o=
 rg
 <leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
 
-> Upgrade to release 1.10.0:
+> Upgrade to release 0.9.7:
 >
-> Leaner URL-encoded form parsing:
->
-> Starlette 1.10.0 parses URL-encoded forms with less memory and CPU, no
-> longer drops the last field when a stream ends early, and lets you
-> compare FormData that holds several uploads under one key.
->
-> - Forms with many fields parse faster and use less memory (#3724).
->   FormParser builds each field in the parser callbacks instead of
->   queueing every event and replaying it. On CodSpeed, 1000 fields
->   went from 42.8 ms to 34.9 ms and from 63.5 KB to 54.5 KB, and the
->   max_fields limit case went from 6,880 B to 864 B.
-> - The last field is kept when the request stream ends without an
->   empty chunk (#3599). The parser is now finalized once the stream
->   is exhausted, so custom streams that never yield a final b"" no
->   longer lose their last field.
-> - FormData with repeated uploads can be compared (#3619). Comparing
->   two FormData objects with several UploadFile values under the
->   same key used to raise TypeError.
->
-> Behaviour changes:
->
-> - Multidict equality keeps the order of values under a repeated key
->   (#3619). Keys can still appear in any order, but
->   QueryParams("a=3D1&a=3D2") and QueryParams("a=3D2&a=3D1") are no longer
->   equal, matching what getlist() returns.
-> - starlette.formparsers.FormMessage is deprecated (#3724). The
->   parser no longer uses it, and FormParser.messages is gone.
->   Calling FormMessage(...) emits a StarletteDeprecationWarning.
->
-> Routing and URL generation:
->
-> - Path parameter values that look like a placeholder are kept as
->   they are (#3725). url_path_for("route", category=3D"{id}", id=3D"42")
->   on /{category}/{id} now returns /{id}/42 instead of /42/42.
->   Substitution also got faster, from 549 ns to 520 ns with two
->   parameters and from 1,078 ns to 779 ns with five.
-> - Route matching does less work per request (#3665, #3722). Match
->   members are compared by identity, cutting up to 4.9% of the
->   instructions per dispatch in the routing benchmarks.
-> - WSGIMiddleware strips root_path only at a path segment boundary
->   (#3718). A request to /application under a root_path of /app no
->   longer becomes /lication.
-> - FloatConvertor reports NaN and infinity correctly (#3716). NaN
->   was reported as a negative float.
->
-> Middleware, responses and config:
->
-> - Handled exceptions no longer keep requests alive (#3205).
->   Starlette clears the traceback after an exception handler runs,
->   so an exception instance reused across requests, such as a
->   module-level HTTPException, no longer pins per-request objects in
->   memory.
-> - Middlewares accept http.response.start without headers (#3721).
->   BaseHTTPMiddleware, GZipMiddleware and SessionMiddleware default
->   the omitted field to an empty list instead of raising KeyError.
-> - FileResponse ignores Range on methods other than GET and HEAD
->   (#3679). A POST endpoint that returns a file now sends the full
->   file, as RFC 9110 requires.
-> - Config strips one pair of matching outer quotes from env file
->   values (#3720). KEY=3D'say "hi"' now reads as say "hi" instead of
->   say "hi.
+> - ndb: basic support for XFRM interfaces
+> - ndb: basic support for object preload hooks
+> - ndb: basic support for prometheus metrics
+> - taskstats: fix name unregister_mask() -> deregister_mask()
+> - plan9: fids per session & inodes per FS
+> - ethtool: fix the off flags
+> - dhcp: support option 41 NIS servers
+> - wirouting: link features
+> - rtnl: support RTAX_CC_ALGO on route metrics
+> - rtnl: add missing NFT flags
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 > ---
->  .../{python3-starlette_1.6.0.bb =3D> python3-starlette_1.10.0.bb} | 2 +-
+>  .../{python3-pyroute2_0.9.6.bb =3D> python3-pyroute2_0.9.7.bb}    | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-starlette_1.6.0.bb
-> =3D> python3-starlette_1.10.0.bb} (92%)
+>  rename meta-python/recipes-devtools/python/{python3-pyroute2_0.9.6.bb =
+=3D>
+> python3-pyroute2_0.9.7.bb} (93%)
 >
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-starlette_1.6.0.bb b/meta-python/recipes-devtools/python/
-> python3-starlette_1.10.0.bb
-> similarity index 92%
-> rename from meta-python/recipes-devtools/python/python3-starlette_1.6.0.b=
+> diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.b=
 b
-> rename to meta-python/recipes-devtools/python/python3-starlette_1.10.0.bb
-> index 45ba3a5311..dcd103bd87 100644
-> --- a/meta-python/recipes-devtools/python/python3-starlette_1.6.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-starlette_1.10.0.bb
-> @@ -2,7 +2,7 @@ SUMMARY =3D "Starlette is a lightweight ASGI
-> framework/toolkit, which is ideal for
->  LICENSE =3D "BSD-3-Clause"
->  LIC_FILES_CHKSUM =3D
-> "file://LICENSE.md;md5=3D11e8c8dbfd5fa373c703de492140ff7a"
+> b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+> similarity index 93%
+> rename from meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
+> rename to meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+> index ec72b450ee..10e227926f 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D
+> "file://LICENSE;md5=3Ddccbff78d7d79ae7e53953d43445c6e6 \
+>
+>  file://LICENSE.GPL-2.0-or-later;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
+>
+>  file://LICENSE.Apache-2.0;md5=3D34281e312165f843a2b7d1f114fe65ce"
 >
 > -SRC_URI[sha256sum] =3D
-> "d4e3ac5e546444960c710297a3c9fc3f7ebae1b7e963f3d36173b49da535be9b"
+> "6bc5e2ea9a372ded682b4ede4028ba00236bd6e35b42d833f39a96b219ef1db2"
 > +SRC_URI[sha256sum] =3D
-> "b8399098d4c1e3522734f7235dc79b1fc967f96cf139c81e0fa30479e0685f9b"
+> "a678b098478c46ec51d6bf9a03c3cd2ac0172dffa590e9e8c1eeab633d0c17c6"
 >
->  inherit pypi python_hatchling ptest
+>  inherit python_setuptools_build_meta pypi ptest-python-pytest
 >
 > --
 > 2.47.3
@@ -242,9 +354,9 @@ b
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#131507):
-> https://lists.openembedded.org/g/openembedded-devel/message/131507
-> Mute This Topic: https://lists.openembedded.org/mt/121956786/1997914
+> View/Reply Online (#131492):
+> https://lists.openembedded.org/g/openembedded-devel/message/131492
+> Mute This Topic: https://lists.openembedded.org/mt/121956770/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -252,208 +364,301 @@ b
 >
 >
 
---000000000000b5c9ef065ed7f611
+--00000000000012d965065ed7fa36
 Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 
-<div dir=3D"ltr">fails ptests<div><br></div><div>Failed ptests:<br>{&#39;py=
-thon3-starlette&#39;: &#39;START: ptest-runner\n&#39;<br>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;2026-10-27=
-T18:51\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 &#39;\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;ImportError while importing tes=
-t module &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 &quot;&#39;/usr/lib/python3-starlette/ptest/tests/midd=
-leware/test_opentelemetry.py&#39;.\n&quot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;Hint: make sure your =
-test modules/packages have valid &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;Python names.\n&#39;<br>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 &#39;Traceback:\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;../../python3.14/importlib/__init__.py=
-:88: in &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 &#39;import_module\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39; =C2=A0 =C2=A0ret=
-urn _bootstrap._gcd_import(name[level:], &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;package, level)\n=
-&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 &#39; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;<br>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;^^^^^^^=
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n&#39;<br>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;tests/midd=
-leware/test_opentelemetry.py:8: in &lt;module&gt;\n&#39;<br>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39; =C2=A0=
- =C2=A0from opentelemetry import metrics, trace\n&#39;<br>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;E =C2=A0 M=
-oduleNotFoundError: No module named &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;&#39;opentelemetry&#=
-39;\n&quot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 &#39;ERROR: &#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;tests/middleware/test_opente=
-lemetry.py:tests/middleware/test_opentelemetry.py\n&#39;<br>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D\n&=
-#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 &#39;Testsuite summary\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;# TOTAL: 1\n&#39;<br>=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &=
-#39;# PASS: 0\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;# SKIP: 0\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;# XFAIL: 0\n&#=
-39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 &#39;# FAIL: 0\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;# XPASS: 0\n&#39;<br>=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;# E=
-RROR: 1\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 &#39;\n&#39;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;ERROR: Exit status is 2\n&#39;<=
-br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 &#39;DURATION: 2\n&#39;}<br><br>ptests which had no test results:<br=
->[&#39;python3-starlette&#39;]<br><br></div></div><br><div class=3D"gmail_q=
-uote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, O=
-ct 27, 2026 at 2:21=E2=80=AFAM Leon Anavi via <a href=3D"http://lists.opene=
-mbedded.org">lists.openembedded.org</a> &lt;leon.anavi=3D<a href=3D"mailto:=
-konsulko.com@lists.openembedded.org">konsulko.com@lists.openembedded.org</a=
->&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Upg=
-rade to release 1.10.0:<br>
-<br>
-Leaner URL-encoded form parsing:<br>
-<br>
-Starlette 1.10.0 parses URL-encoded forms with less memory and CPU, no<br>
-longer drops the last field when a stream ends early, and lets you<br>
-compare FormData that holds several uploads under one key.<br>
-<br>
-- Forms with many fields parse faster and use less memory (#3724).<br>
-=C2=A0 FormParser builds each field in the parser callbacks instead of<br>
-=C2=A0 queueing every event and replaying it. On CodSpeed, 1000 fields<br>
-=C2=A0 went from 42.8 ms to 34.9 ms and from 63.5 KB to 54.5 KB, and the<br=
->
-=C2=A0 max_fields limit case went from 6,880 B to 864 B.<br>
-- The last field is kept when the request stream ends without an<br>
-=C2=A0 empty chunk (#3599). The parser is now finalized once the stream<br>
-=C2=A0 is exhausted, so custom streams that never yield a final b&quot;&quo=
-t; no<br>
-=C2=A0 longer lose their last field.<br>
-- FormData with repeated uploads can be compared (#3619). Comparing<br>
-=C2=A0 two FormData objects with several UploadFile values under the<br>
-=C2=A0 same key used to raise TypeError.<br>
-<br>
-Behaviour changes:<br>
-<br>
-- Multidict equality keeps the order of values under a repeated key<br>
-=C2=A0 (#3619). Keys can still appear in any order, but<br>
-=C2=A0 QueryParams(&quot;a=3D1&amp;a=3D2&quot;) and QueryParams(&quot;a=3D2=
-&amp;a=3D1&quot;) are no longer<br>
-=C2=A0 equal, matching what getlist() returns.<br>
-- starlette.formparsers.FormMessage is deprecated (#3724). The<br>
-=C2=A0 parser no longer uses it, and FormParser.messages is gone.<br>
-=C2=A0 Calling FormMessage(...) emits a StarletteDeprecationWarning.<br>
-<br>
-Routing and URL generation:<br>
-<br>
-- Path parameter values that look like a placeholder are kept as<br>
-=C2=A0 they are (#3725). url_path_for(&quot;route&quot;, category=3D&quot;{=
-id}&quot;, id=3D&quot;42&quot;)<br>
-=C2=A0 on /{category}/{id} now returns /{id}/42 instead of /42/42.<br>
-=C2=A0 Substitution also got faster, from 549 ns to 520 ns with two<br>
-=C2=A0 parameters and from 1,078 ns to 779 ns with five.<br>
-- Route matching does less work per request (#3665, #3722). Match<br>
-=C2=A0 members are compared by identity, cutting up to 4.9% of the<br>
-=C2=A0 instructions per dispatch in the routing benchmarks.<br>
-- WSGIMiddleware strips root_path only at a path segment boundary<br>
-=C2=A0 (#3718). A request to /application under a root_path of /app no<br>
-=C2=A0 longer becomes /lication.<br>
-- FloatConvertor reports NaN and infinity correctly (#3716). NaN<br>
-=C2=A0 was reported as a negative float.<br>
-<br>
-Middleware, responses and config:<br>
-<br>
-- Handled exceptions no longer keep requests alive (#3205).<br>
-=C2=A0 Starlette clears the traceback after an exception handler runs,<br>
-=C2=A0 so an exception instance reused across requests, such as a<br>
-=C2=A0 module-level HTTPException, no longer pins per-request objects in<br=
->
-=C2=A0 memory.<br>
-- Middlewares accept http.response.start without headers (#3721).<br>
-=C2=A0 BaseHTTPMiddleware, GZipMiddleware and SessionMiddleware default<br>
-=C2=A0 the omitted field to an empty list instead of raising KeyError.<br>
-- FileResponse ignores Range on methods other than GET and HEAD<br>
-=C2=A0 (#3679). A POST endpoint that returns a file now sends the full<br>
-=C2=A0 file, as RFC 9110 requires.<br>
-- Config strips one pair of matching outer quotes from env file<br>
-=C2=A0 values (#3720). KEY=3D&#39;say &quot;hi&quot;&#39; now reads as say =
-&quot;hi&quot; instead of<br>
-=C2=A0 say &quot;hi.<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../{<a href=3D"http://python3-starlette_1.6.0.bb" rel=3D"noreferrer"=
- target=3D"_blank">python3-starlette_1.6.0.bb</a> =3D&gt; <a href=3D"http:/=
-/python3-starlette_1.10.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-=
-starlette_1.10.0.bb</a>} | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--starlette_1.6.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette=
-_1.6.0.bb</a> =3D&gt; <a href=3D"http://python3-starlette_1.10.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">python3-starlette_1.10.0.bb</a>} (92%)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-starlette_1.6.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette_=
-1.6.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-starlette_1.10.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlet=
-te_1.10.0.bb</a><br>
-similarity index 92%<br>
-rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-s=
-tarlette_1.6.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette_1=
-.6.0.bb</a><br>
-rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-sta=
-rlette_1.10.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette_1.=
-10.0.bb</a><br>
-index 45ba3a5311..dcd103bd87 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-starlet=
-te_1.6.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette_1.6.0.b=
-b</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-starlet=
-te_1.10.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-starlette_1.10.0=
-.bb</a><br>
-@@ -2,7 +2,7 @@ SUMMARY =3D &quot;Starlette is a lightweight ASGI framework=
-/toolkit, which is ideal for<br>
-=C2=A0LICENSE =3D &quot;BSD-3-Clause&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=3D11e8c8dbfd5fa373c7=
-03de492140ff7a&quot;<br>
-<br>
--SRC_URI[sha256sum] =3D &quot;d4e3ac5e546444960c710297a3c9fc3f7ebae1b7e963f=
-3d36173b49da535be9b&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;b8399098d4c1e3522734f7235dc79b1fc967f96cf139c=
-81e0fa30479e0685f9b&quot;<br>
-<br>
-=C2=A0inherit pypi python_hatchling ptest<br>
-<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#131507): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/131507" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/131507</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/121956786/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/121956786/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000b5c9ef065ed7f611--
+PGRpdiBkaXI9Imx0ciI+ZmFpbHMgcHRlc3RzPGRpdj48YnI+PC9kaXY+PGRpdj5GYWlsZWQgcHRl
+c3RzOjxicj57JiMzOTtweXRob24zLXB5cm91dGUyJiMzOTs6ICYjMzk7U1RBUlQ6IHB0ZXN0LXJ1
+bm5lclxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OzIwMjYt
+MTAtMjdUMTg6NTNcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMz
+OTtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtJbXBvcnRF
+cnJvciB3aGlsZSBpbXBvcnRpbmcgdGVzdCBtb2R1bGUgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAmcXVvdDsmIzM5Oy91c3IvbGliL3B5dGhvbjMtcHlyb3V0ZTIvcHRl
+c3QvdGVzdHMvdGVzdF91bml0L3Rlc3RfYWRkcl9wb29sLnB5JiMzOTsuXG4mcXVvdDs8YnI+wqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O0hpbnQ6IG1ha2Ugc3VyZSB5b3VyIHRl
+c3QgbW9kdWxlcy9wYWNrYWdlcyBoYXZlIHZhbGlkICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgJiMzOTtQeXRob24gbmFtZXMuXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7VHJhY2ViYWNrOlxuJiMzOTs8YnI+wqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5Oy4uLy4uL3B5dGhvbjMuMTQvaW1wb3J0bGliL19faW5p
+dF9fLnB5Ojg4OiBpbiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYj
+Mzk7aW1wb3J0X21vZHVsZVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5OyDCoCDCoHJldHVybiBfYm9vdHN0cmFwLl9nY2RfaW1wb3J0KG5hbWVbbGV2ZWw6XSwg
+cGFja2FnZSwgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O2xl
+dmVsKVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyDCoCDC
+oCDCoCDCoCDCoCAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7
+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXlxuJiMz
+OTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O3Rlc3RzL3Rlc3RfdW5p
+dC90ZXN0X2FkZHJfcG9vbC5weTozOiBpbiAmbHQ7bW9kdWxlJmd0O1xuJiMzOTs8YnI+wqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyDCoCDCoGZyb20gcHlyb3V0ZTIuY29tbW9u
+IGltcG9ydCBBZGRyUG9vbFxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5Oy4uLy4uL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9weXJvdXRlMi9fX2luaXRfXy5w
+eTozMTogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O2luICZs
+dDttb2R1bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYj
+Mzk7IMKgIMKgZnJvbSBweXJvdXRlMi5pcGRiIGltcG9ydCBJUERCLCBDb21taXRFeGNlcHRpb24s
+ICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtDcmVhdGVFeGNl
+cHRpb25cbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8u
+Li9weXRob24zLjE0L3NpdGUtcGFja2FnZXMvcHlyb3V0ZTIvaXBkYi9fX2luaXRfXy5weToxNjog
+JiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O2luICZsdDttb2R1
+bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7IMKg
+IMKgZnJvbSBweXJvdXRlMi5uZGIubWFpbiBpbXBvcnQgTkRCXG4mIzM5Ozxicj7CoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7Li4vLi4vcHl0aG9uMy4xNC9zaXRlLXBhY2thZ2Vz
+L3B5cm91dGUyL25kYi9tYWluLnB5OjMxNzogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAmIzM5O2luICZsdDttb2R1bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7IMKgIMKgZnJvbSAudGFza19tYW5hZ2VyIGltcG9ydCBU
+YXNrTWFuYWdlclxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5
+Oy4uLy4uL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9weXJvdXRlMi9uZGIvdGFza19tYW5hZ2Vy
+LnB5OjM6ICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtpbiAm
+bHQ7bW9kdWxlJmd0O1xuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAm
+IzM5OyDCoCDCoGltcG9ydCByZXNvdXJjZVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAmcXVvdDtFIMKgIE1vZHVsZU5vdEZvdW5kRXJyb3I6IE5vIG1vZHVsZSBuYW1l
+ZCAmIzM5O3Jlc291cmNlJiMzOTtcbiZxdW90Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCYjMzk7RVJST1I6ICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgJiMzOTt0ZXN0cy90ZXN0X3VuaXQvdGVzdF9hZGRyX3Bvb2wucHk6dGVzdHMvdGVzdF91bml0
+L3Rlc3RfYWRkcl9wb29sLnB5XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7
+SW1wb3J0RXJyb3Igd2hpbGUgaW1wb3J0aW5nIHRlc3QgbW9kdWxlICYjMzk7PGJyPsKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJnF1b3Q7JiMzOTsvdXNyL2xpYi9weXRob24zLXB5cm91
+dGUyL3B0ZXN0L3Rlc3RzL3Rlc3RfdW5pdC90ZXN0X2NvbmZpZy5weSYjMzk7LlxuJnF1b3Q7PGJy
+PsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtIaW50OiBtYWtlIHN1cmUgeW91
+ciB0ZXN0IG1vZHVsZXMvcGFja2FnZXMgaGF2ZSB2YWxpZCAmIzM5Ozxicj7CoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7UHl0aG9uIG5hbWVzLlxuJiMzOTs8YnI+wqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O1RyYWNlYmFjazpcbiYjMzk7PGJyPsKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8uLi9weXRob24zLjE0L2ltcG9ydGxpYi9f
+X2luaXRfXy5weTo4ODogaW4gJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5O2ltcG9ydF9tb2R1bGVcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgJiMzOTsgwqAgwqByZXR1cm4gX2Jvb3RzdHJhcC5fZ2NkX2ltcG9ydChuYW1lW2xldmVs
+Ol0sIHBhY2thZ2UsICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMz
+OTtsZXZlbClcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsg
+wqAgwqAgwqAgwqAgwqAgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAm
+IzM5O15eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5c
+biYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTt0ZXN0cy90ZXN0
+X3VuaXQvdGVzdF9jb25maWcucHk6MTogaW4gJmx0O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqBmcm9tIHB5cm91dGUyIGltcG9y
+dCBjb25maWdcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsu
+Li8uLi9weXRob24zLjE0L3NpdGUtcGFja2FnZXMvcHlyb3V0ZTIvX19pbml0X18ucHk6MzE6ICYj
+Mzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtpbiAmbHQ7bW9kdWxl
+Jmd0O1xuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyDCoCDC
+oGZyb20gcHlyb3V0ZTIuaXBkYiBpbXBvcnQgSVBEQiwgQ29tbWl0RXhjZXB0aW9uLCAmIzM5Ozxi
+cj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7Q3JlYXRlRXhjZXB0aW9uXG4m
+IzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7Li4vLi4vcHl0aG9u
+My4xNC9zaXRlLXBhY2thZ2VzL3B5cm91dGUyL2lwZGIvX19pbml0X18ucHk6MTY6ICYjMzk7PGJy
+PsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtpbiAmbHQ7bW9kdWxlJmd0O1xu
+JiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyDCoCDCoGZyb20g
+cHlyb3V0ZTIubmRiLm1haW4gaW1wb3J0IE5EQlxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAmIzM5Oy4uLy4uL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9weXJvdXRl
+Mi9uZGIvbWFpbi5weTozMTc6ICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgJiMzOTtpbiAmbHQ7bW9kdWxlJmd0O1xuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAmIzM5OyDCoCDCoGZyb20gLnRhc2tfbWFuYWdlciBpbXBvcnQgVGFza01hbmFn
+ZXJcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8uLi9w
+eXRob24zLjE0L3NpdGUtcGFja2FnZXMvcHlyb3V0ZTIvbmRiL3Rhc2tfbWFuYWdlci5weTozOiAm
+IzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7aW4gJmx0O21vZHVs
+ZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAg
+wqBpbXBvcnQgcmVzb3VyY2VcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgJnF1b3Q7RSDCoCBNb2R1bGVOb3RGb3VuZEVycm9yOiBObyBtb2R1bGUgbmFtZWQgJiMzOTty
+ZXNvdXJjZSYjMzk7XG4mcXVvdDs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAm
+IzM5O0VSUk9SOiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7
+dGVzdHMvdGVzdF91bml0L3Rlc3RfY29uZmlnLnB5OnRlc3RzL3Rlc3RfdW5pdC90ZXN0X2NvbmZp
+Zy5weVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O1xuJiMz
+OTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O0ltcG9ydEVycm9yIHdo
+aWxlIGltcG9ydGluZyB0ZXN0IG1vZHVsZSAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCZxdW90OyYjMzk7L3Vzci9saWIvcHl0aG9uMy1weXJvdXRlMi9wdGVzdC90ZXN0
+cy90ZXN0X3VuaXQvdGVzdF9lbnRyeV9wb2ludHMvdGVzdF9iYXNpYy5weSYjMzk7LlxuJnF1b3Q7
+PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtIaW50OiBtYWtlIHN1cmUg
+eW91ciB0ZXN0IG1vZHVsZXMvcGFja2FnZXMgaGF2ZSB2YWxpZCAmIzM5Ozxicj7CoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7UHl0aG9uIG5hbWVzLlxuJiMzOTs8YnI+wqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O1RyYWNlYmFjazpcbiYjMzk7PGJyPsKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8uLi9weXRob24zLjE0L2ltcG9ydGxp
+Yi9fX2luaXRfXy5weTo4ODogaW4gJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAmIzM5O2ltcG9ydF9tb2R1bGVcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgJiMzOTsgwqAgwqByZXR1cm4gX2Jvb3RzdHJhcC5fZ2NkX2ltcG9ydChuYW1lW2xl
+dmVsOl0sIHBhY2thZ2UsICYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+JiMzOTtsZXZlbClcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMz
+OTsgwqAgwqAgwqAgwqAgwqAgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5O15eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5e
+Xl5cbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTt0ZXN0cy90
+ZXN0X3VuaXQvdGVzdF9lbnRyeV9wb2ludHMvdGVzdF9iYXNpYy5weToxOiBpbiAmIzM5Ozxicj7C
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7Jmx0O21vZHVsZSZndDtcbiYjMzk7
+PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqBmcm9tIHB5cm91
+dGUyIGltcG9ydCBJUFJvdXRlXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7Li4vLi4vcHl0aG9uMy4xNC9zaXRlLXBhY2thZ2VzL3B5cm91dGUyL19faW5pdF9f
+LnB5OjMxOiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7aW4g
+Jmx0O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+JiMzOTsgwqAgwqBmcm9tIHB5cm91dGUyLmlwZGIgaW1wb3J0IElQREIsIENvbW1pdEV4Y2VwdGlv
+biwgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O0NyZWF0ZUV4
+Y2VwdGlvblxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5Oy4u
+Ly4uL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9weXJvdXRlMi9pcGRiL19faW5pdF9fLnB5OjE2
+OiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7aW4gJmx0O21v
+ZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsg
+wqAgwqBmcm9tIHB5cm91dGUyLm5kYi5tYWluIGltcG9ydCBOREJcbiYjMzk7PGJyPsKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8uLi9weXRob24zLjE0L3NpdGUtcGFja2Fn
+ZXMvcHlyb3V0ZTIvbmRiL21haW4ucHk6MzE3OiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCYjMzk7aW4gJmx0O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqBmcm9tIC50YXNrX21hbmFnZXIgaW1wb3J0
+IFRhc2tNYW5hZ2VyXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYj
+Mzk7Li4vLi4vcHl0aG9uMy4xNC9zaXRlLXBhY2thZ2VzL3B5cm91dGUyL25kYi90YXNrX21hbmFn
+ZXIucHk6MzogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O2lu
+ICZsdDttb2R1bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCYjMzk7IMKgIMKgaW1wb3J0IHJlc291cmNlXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCZxdW90O0UgwqAgTW9kdWxlTm90Rm91bmRFcnJvcjogTm8gbW9kdWxlIG5h
+bWVkICYjMzk7cmVzb3VyY2UmIzM5O1xuJnF1b3Q7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgJiMzOTtFUlJPUjogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAmIzM5O3Rlc3RzL3Rlc3RfdW5pdC90ZXN0X2VudHJ5X3BvaW50cy90ZXN0X2Jhc2ljLnB5
+OnRlc3RzL3Rlc3RfdW5pdC90ZXN0X2VudHJ5X3BvaW50cy90ZXN0X2Jhc2ljLnB5XG4mIzM5Ozxi
+cj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7XG4mIzM5Ozxicj7CoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7dGVzdHMvdGVzdF91bml0L3Rlc3RfZnJvemVu
+LnB5Ojk6IGluICZsdDttb2R1bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCYjMzk7IMKgIMKgU1BFQy5sb2FkZXIuZXhlY19tb2R1bGUoZnJvemVuX21vZHVs
+ZSlcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsmbHQ7ZnJv
+emVuIGltcG9ydGxpYi5fYm9vdHN0cmFwX2V4dGVybmFsJmd0Ozo3NTk6IGluICYjMzk7PGJyPsKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtleGVjX21vZHVsZVxuJiMzOTs8YnI+
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyDCoCDCoD8/P1xuJiMzOTs8YnI+
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5OyZsdDtmcm96ZW4gaW1wb3J0bGli
+Ll9ib290c3RyYXBfZXh0ZXJuYWwmZ3Q7Ojg5NjogaW4gZ2V0X2NvZGVcbiYjMzk7PGJyPsKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqA/Pz9cbiYjMzk7PGJyPsKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsmbHQ7ZnJvemVuIGltcG9ydGxpYi5fYm9v
+dHN0cmFwX2V4dGVybmFsJmd0Ozo5NTQ6IGluIGdldF9kYXRhXG4mIzM5Ozxicj7CoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7IMKgIMKgPz8/XG4mIzM5Ozxicj7CoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7RSDCoCBGaWxlTm90Rm91bmRFcnJvcjogW0Vycm5v
+IDJdIE5vIHN1Y2ggZmlsZSBvciAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7ZGlyZWN0b3J5OiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCZxdW90OyYjMzk7L3Vzci9saWIvcHl0aG9uMy1weXJvdXRlMi9wdGVzdC9weXJvdXRlMi1m
+cm96ZW4ucHkmIzM5O1xuJnF1b3Q7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+JiMzOTtFUlJPUjogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5
+O3Rlc3RzL3Rlc3RfdW5pdC90ZXN0X2Zyb3plbi5weTp0ZXN0cy90ZXN0X3VuaXQvdGVzdF9mcm96
+ZW4ucHlcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtcbiYj
+Mzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtJbXBvcnRFcnJvciB3
+aGlsZSBpbXBvcnRpbmcgdGVzdCBtb2R1bGUgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAmcXVvdDsmIzM5Oy91c3IvbGliL3B5dGhvbjMtcHlyb3V0ZTIvcHRlc3QvdGVz
+dHMvdGVzdF91bml0L3Rlc3RfaXByb3V0ZV9tYXRjaC90ZXN0X21hdGNoLnB5JiMzOTsuXG4mcXVv
+dDs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O0hpbnQ6IG1ha2Ugc3Vy
+ZSB5b3VyIHRlc3QgbW9kdWxlcy9wYWNrYWdlcyBoYXZlIHZhbGlkICYjMzk7PGJyPsKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTtQeXRob24gbmFtZXMuXG4mIzM5Ozxicj7CoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7VHJhY2ViYWNrOlxuJiMzOTs8YnI+wqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5Oy4uLy4uL3B5dGhvbjMuMTQvaW1wb3J0
+bGliL19faW5pdF9fLnB5Ojg4OiBpbiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCYjMzk7aW1wb3J0X21vZHVsZVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAmIzM5OyDCoCDCoHJldHVybiBfYm9vdHN0cmFwLl9nY2RfaW1wb3J0KG5hbWVb
+bGV2ZWw6XSwgcGFja2FnZSwgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5O2xldmVsKVxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAm
+IzM5OyDCoCDCoCDCoCDCoCDCoCAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5e
+Xl5eXlxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O3Rlc3Rz
+L3Rlc3RfdW5pdC90ZXN0X2lwcm91dGVfbWF0Y2gvdGVzdF9tYXRjaC5weTo1OiBpbiAmIzM5Ozxi
+cj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7Jmx0O21vZHVsZSZndDtcbiYj
+Mzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqBmcm9tIHB5
+cm91dGUyIGltcG9ydCBJUFJvdXRlXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCYjMzk7Li4vLi4vcHl0aG9uMy4xNC9zaXRlLXBhY2thZ2VzL3B5cm91dGUyL19faW5p
+dF9fLnB5OjMxOiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7
+aW4gJmx0O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgJiMzOTsgwqAgwqBmcm9tIHB5cm91dGUyLmlwZGIgaW1wb3J0IElQREIsIENvbW1pdEV4Y2Vw
+dGlvbiwgJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5O0NyZWF0
+ZUV4Y2VwdGlvblxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5
+Oy4uLy4uL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9weXJvdXRlMi9pcGRiL19faW5pdF9fLnB5
+OjE2OiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7aW4gJmx0
+O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMz
+OTsgwqAgwqBmcm9tIHB5cm91dGUyLm5kYi5tYWluIGltcG9ydCBOREJcbiYjMzk7PGJyPsKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsuLi8uLi9weXRob24zLjE0L3NpdGUtcGFj
+a2FnZXMvcHlyb3V0ZTIvbmRiL21haW4ucHk6MzE3OiAmIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCYjMzk7aW4gJmx0O21vZHVsZSZndDtcbiYjMzk7PGJyPsKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTsgwqAgwqBmcm9tIC50YXNrX21hbmFnZXIgaW1w
+b3J0IFRhc2tNYW5hZ2VyXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCYjMzk7Li4vLi4vcHl0aG9uMy4xNC9zaXRlLXBhY2thZ2VzL3B5cm91dGUyL25kYi90YXNrX21h
+bmFnZXIucHk6MzogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAmIzM5
+O2luICZsdDttb2R1bGUmZ3Q7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7IMKgIMKgaW1wb3J0IHJlc291cmNlXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCZxdW90O0UgwqAgTW9kdWxlTm90Rm91bmRFcnJvcjogTm8gbW9kdWxl
+IG5hbWVkICYjMzk7cmVzb3VyY2UmIzM5O1xuJnF1b3Q7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgJiMzOTtFUlJPUjogJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAmIzM5O3Rlc3RzL3Rlc3RfdW5pdC90ZXN0X2lwcm91dGVfbWF0Y2gvdGVzdF9tYXRj
+aC5weTp0ZXN0cy90ZXN0X3VuaXQvdGVzdF9pcHJvdXRlX21hdGNoL3Rlc3RfbWF0Y2gucHlcbiYj
+Mzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgJiMzOTs9PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7VGVz
+dHN1aXRlIHN1bW1hcnlcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+JiMzOTsjIFRPVEFMOiA1XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCYjMzk7IyBQQVNTOiAwXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCYjMzk7IyBTS0lQOiAwXG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCYjMzk7IyBYRkFJTDogMFxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5OyMgRkFJTDogMFxuJiMzOTs8YnI+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAmIzM5OyMgWFBBU1M6IDBcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgJiMzOTsjIEVSUk9SOiA1XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCYjMzk7XG4mIzM5Ozxicj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCYjMzk7
+RVJST1I6IEV4aXQgc3RhdHVzIGlzIDJcbiYjMzk7PGJyPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgJiMzOTtEVVJBVElPTjogMVxuJiMzOTt9PGJyPjwvZGl2PjwvZGl2Pjxicj48ZGl2
+IGNsYXNzPSJnbWFpbF9xdW90ZSBnbWFpbF9xdW90ZV9jb250YWluZXIiPjxkaXYgZGlyPSJsdHIi
+IGNsYXNzPSJnbWFpbF9hdHRyIj5PbiBUdWUsIE9jdCAyNywgMjAyNiBhdCAyOjIx4oCvQU0gTGVv
+biBBbmF2aSB2aWEgPGEgaHJlZj0iaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmciPmxpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmc8L2E+ICZsdDtsZW9uLmFuYXZpPTxhIGhyZWY9Im1haWx0bzprb25z
+dWxrby5jb21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZyI+a29uc3Vsa28uY29tQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmc8L2E+Jmd0OyB3cm90ZTo8YnI+PC9kaXY+PGJsb2NrcXVvdGUgY2xhc3M9Imdt
+YWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2JvcmRlci1sZWZ0OjFw
+eCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPlVwZ3JhZGUgdG8gcmVs
+ZWFzZSAwLjkuNzo8YnI+DQo8YnI+DQotIG5kYjogYmFzaWMgc3VwcG9ydCBmb3IgWEZSTSBpbnRl
+cmZhY2VzPGJyPg0KLSBuZGI6IGJhc2ljIHN1cHBvcnQgZm9yIG9iamVjdCBwcmVsb2FkIGhvb2tz
+PGJyPg0KLSBuZGI6IGJhc2ljIHN1cHBvcnQgZm9yIHByb21ldGhldXMgbWV0cmljczxicj4NCi0g
+dGFza3N0YXRzOiBmaXggbmFtZSB1bnJlZ2lzdGVyX21hc2soKSAtJmd0OyBkZXJlZ2lzdGVyX21h
+c2soKTxicj4NCi0gcGxhbjk6IGZpZHMgcGVyIHNlc3Npb24gJmFtcDsgaW5vZGVzIHBlciBGUzxi
+cj4NCi0gZXRodG9vbDogZml4IHRoZSBvZmYgZmxhZ3M8YnI+DQotIGRoY3A6IHN1cHBvcnQgb3B0
+aW9uIDQxIE5JUyBzZXJ2ZXJzPGJyPg0KLSB3aXJvdXRpbmc6IGxpbmsgZmVhdHVyZXM8YnI+DQot
+IHJ0bmw6IHN1cHBvcnQgUlRBWF9DQ19BTEdPIG9uIHJvdXRlIG1ldHJpY3M8YnI+DQotIHJ0bmw6
+IGFkZCBtaXNzaW5nIE5GVCBmbGFnczxicj4NCjxicj4NClNpZ25lZC1vZmYtYnk6IExlb24gQW5h
+dmkgJmx0OzxhIGhyZWY9Im1haWx0bzpsZW9uLmFuYXZpQGtvbnN1bGtvLmNvbSIgdGFyZ2V0PSJf
+YmxhbmsiPmxlb24uYW5hdmlAa29uc3Vsa28uY29tPC9hPiZndDs8YnI+DQotLS08YnI+DQrCoC4u
+Li97PGEgaHJlZj0iaHR0cDovL3B5dGhvbjMtcHlyb3V0ZTJfMC45LjYuYmIiIHJlbD0ibm9yZWZl
+cnJlciIgdGFyZ2V0PSJfYmxhbmsiPnB5dGhvbjMtcHlyb3V0ZTJfMC45LjYuYmI8L2E+ID0mZ3Q7
+IDxhIGhyZWY9Imh0dHA6Ly9weXRob24zLXB5cm91dGUyXzAuOS43LmJiIiByZWw9Im5vcmVmZXJy
+ZXIiIHRhcmdldD0iX2JsYW5rIj5weXRob24zLXB5cm91dGUyXzAuOS43LmJiPC9hPn3CoCDCoCB8
+IDIgKy08YnI+DQrCoDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigt
+KTxicj4NCsKgcmVuYW1lIG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3s8YSBo
+cmVmPSJodHRwOi8vcHl0aG9uMy1weXJvdXRlMl8wLjkuNi5iYiIgcmVsPSJub3JlZmVycmVyIiB0
+YXJnZXQ9Il9ibGFuayI+cHl0aG9uMy1weXJvdXRlMl8wLjkuNi5iYjwvYT4gPSZndDsgPGEgaHJl
+Zj0iaHR0cDovL3B5dGhvbjMtcHlyb3V0ZTJfMC45LjcuYmIiIHJlbD0ibm9yZWZlcnJlciIgdGFy
+Z2V0PSJfYmxhbmsiPnB5dGhvbjMtcHlyb3V0ZTJfMC45LjcuYmI8L2E+fSAoOTMlKTxicj4NCjxi
+cj4NCmRpZmYgLS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi88YSBo
+cmVmPSJodHRwOi8vcHl0aG9uMy1weXJvdXRlMl8wLjkuNi5iYiIgcmVsPSJub3JlZmVycmVyIiB0
+YXJnZXQ9Il9ibGFuayI+cHl0aG9uMy1weXJvdXRlMl8wLjkuNi5iYjwvYT4gYi9tZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi88YSBocmVmPSJodHRwOi8vcHl0aG9uMy1weXJvdXRl
+Ml8wLjkuNy5iYiIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+cHl0aG9uMy1weXJv
+dXRlMl8wLjkuNy5iYjwvYT48YnI+DQpzaW1pbGFyaXR5IGluZGV4IDkzJTxicj4NCnJlbmFtZSBm
+cm9tIG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uLzxhIGhyZWY9Imh0dHA6Ly9w
+eXRob24zLXB5cm91dGUyXzAuOS42LmJiIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdldD0iX2JsYW5r
+Ij5weXRob24zLXB5cm91dGUyXzAuOS42LmJiPC9hPjxicj4NCnJlbmFtZSB0byBtZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi88YSBocmVmPSJodHRwOi8vcHl0aG9uMy1weXJvdXRl
+Ml8wLjkuNy5iYiIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+cHl0aG9uMy1weXJv
+dXRlMl8wLjkuNy5iYjwvYT48YnI+DQppbmRleCBlYzcyYjQ1MGVlLi4xMGUyMjc5MjZmIDEwMDY0
+NDxicj4NCi0tLSBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uLzxhIGhyZWY9
+Imh0dHA6Ly9weXRob24zLXB5cm91dGUyXzAuOS42LmJiIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdl
+dD0iX2JsYW5rIj5weXRob24zLXB5cm91dGUyXzAuOS42LmJiPC9hPjxicj4NCisrKyBiL21ldGEt
+cHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uLzxhIGhyZWY9Imh0dHA6Ly9weXRob24zLXB5
+cm91dGUyXzAuOS43LmJiIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdldD0iX2JsYW5rIj5weXRob24z
+LXB5cm91dGUyXzAuOS43LmJiPC9hPjxicj4NCkBAIC00LDcgKzQsNyBAQCBMSUNfRklMRVNfQ0hL
+U1VNID0gJnF1b3Q7ZmlsZTovL0xJQ0VOU0U7bWQ1PWRjY2JmZjc4ZDdkNzlhZTdlNTM5NTNkNDM0
+NDVjNmU2IFw8YnI+DQrCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGZpbGU6Ly9MSUNF
+TlNFLkdQTC0yLjAtb3ItbGF0ZXI7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0ODZhODBmZGFmNGE0MjYz
+IFw8YnI+DQrCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGZpbGU6Ly9MSUNFTlNFLkFw
+YWNoZS0yLjA7bWQ1PTM0MjgxZTMxMjE2NWY4NDNhMmI3ZDFmMTE0ZmU2NWNlJnF1b3Q7PGJyPg0K
+PGJyPg0KLVNSQ19VUklbc2hhMjU2c3VtXSA9ICZxdW90OzZiYzVlMmVhOWEzNzJkZWQ2ODJiNGVk
+ZTQwMjhiYTAwMjM2YmQ2ZTM1YjQyZDgzM2YzOWE5NmIyMTllZjFkYjImcXVvdDs8YnI+DQorU1JD
+X1VSSVtzaGEyNTZzdW1dID0gJnF1b3Q7YTY3OGIwOTg0NzhjNDZlYzUxZDZiZjlhMDNjM2NkMmFj
+MDE3MmRmZmE1OTBlOWU4YzFlZWFiNjMzZDBjMTdjNiZxdW90Ozxicj4NCjxicj4NCsKgaW5oZXJp
+dCBweXRob25fc2V0dXB0b29sc19idWlsZF9tZXRhIHB5cGkgcHRlc3QtcHl0aG9uLXB5dGVzdDxi
+cj4NCjxicj4NCi0tIDxicj4NCjIuNDcuMzxicj4NCjxicj4NCjxicj4NCi09LT0tPS09LT0tPS09
+LT0tPS09LT0tPGJyPg0KTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRo
+aXMgZ3JvdXAuPGJyPg0KVmlldy9SZXBseSBPbmxpbmUgKCMxMzE0OTIpOiA8YSBocmVmPSJodHRw
+czovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS8x
+MzE0OTIiIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxhbmsiPmh0dHBzOi8vbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzEzMTQ5MjwvYT48YnI+
+DQpNdXRlIFRoaXMgVG9waWM6IDxhIGhyZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
+Zy9tdC8xMjE5NTY3NzAvMTk5NzkxNCIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+
+aHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzEyMTk1Njc3MC8xOTk3OTE0PC9hPjxi
+cj4NCkdyb3VwIE93bmVyOiA8YSBocmVmPSJtYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsJTJCb3du
+ZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIgdGFyZ2V0PSJfYmxhbmsiPm9wZW5lbWJlZGRlZC1k
+ZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPC9hPjxicj4NClVuc3Vic2NyaWJlOiA8
+YSBocmVmPSJodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2
+ZWwvdW5zdWIiIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxhbmsiPmh0dHBzOi8vbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1YjwvYT4gWzxhIGhyZWY9
+Im1haWx0bzpyYWoua2hlbUBnbWFpbC5jb20iIHRhcmdldD0iX2JsYW5rIj5yYWoua2hlbUBnbWFp
+bC5jb208L2E+XTxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPGJyPg0KPGJyPg0KPC9ibG9j
+a3F1b3RlPjwvZGl2Pg0K
+--00000000000012d965065ed7fa36--
