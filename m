@@ -1,59 +1,59 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14837.1793092848540113931
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14653.1793092849151680832
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 02:20:48 -0700
+ Tue, 27 Oct 2026 02:20:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Q93W7RVh;
- spf=pass (domain: konsulko.com, ip: 209.85.128.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so26928965e9.2
+ dkim=pass header.i=@konsulko.com header.s=google header.b=NkqnMFYK;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so26929015e9.2
         for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 02:20:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1793092847; x=1793697647; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GgEMlFSEUwYSQAdyJ5vpMqUWFaSl7Y+j8QqfXIXKRyk=;
-        b=Q93W7RVhKickEQeOIVYMTjVkAbJKogK8hGghNFpxPMUvpfB8qhpfZ5W7OuK9N7o6m9
-         ZUefm5ih0bWOlsKJ6/9zyKtJstOSI9fdjhbng9TQrOzbLCnolcEogciKTA7gi7HvZFhe
-         jBYgdeUwqoAELl7RG0PYBpYK5ORw7wMXVPcW4=
+        bh=ix/4334WzUzfdmRE3GfdRSiZz1oWYknfOv9NrWKZM2A=;
+        b=NkqnMFYKC6Cx74/yJhBUMyPxqsXvQhkk0We46JLZpK8+5PDJ0K7O2cNvKMkujUr7Uw
+         UJA1fyGCCvA/RDT4WKRvV8rdSND39W15yuS4jvbT+ubaZMuNIZEl3jU+9FeLz+baPo6/
+         LVT8BAqj9MWy9KxS5hqWmICzoOkGvCkgfkvDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1793092847; x=1793697647;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GgEMlFSEUwYSQAdyJ5vpMqUWFaSl7Y+j8QqfXIXKRyk=;
-        b=fiwc/tRemAUiQ6CDsSpQm16ck4vGo1FkGcUlo9wdS0ey/tyKKm5/V8KfMB3vSxPYzK
-         1BWmvyK1rkWEpF5MiB6hs9Cd1sxNPqKI30cB9ue1nK7c/BxjEFTFRPzblzeCS8sJOBqy
-         X/erkqls+cN4S8TtdjfjQebMtVnVRjMQBeZwwa2SxBBZDw+oTc+bmAxp4nm+Aeo96VWw
-         xInXhbhik3DYsdd2qGBiAY5UkvHOF365c1DS+wZAsSBXMiX9On62oC5FhbncgdjXFjuu
-         0JSLk+ulHpYNmUsl9zgHA99rLF6b2drBOfqn5VMPWpC4KbjbX7POtL/kBBdG3g9UrjS2
-         7SJA==
-X-Gm-Message-State: AFq9FYLJbiRq3tTArXNX91FZ7wZp18yvIJsi1bbsQ36n/C/oXuCaEmvJ
-	T+94MwoOkhe8pXLHIvYpGR84KbH2IPYYxrDGS0emYKGmAfd6vFwLXSmTiE6kJivtMv9tyqJFpym
-	u1Qzo
-X-Gm-Gg: AYBFou2O2K5mBapDOZ9yKQV95jLCtU5oXX07fQadTgh7Tg18z67ZW6jBpP1N9Iv4Ve5
-	tw+HMrfTVVS2IsEAuIijhbjQmJ1jNofFL+AFWCf3p6ZcIrm1Z/WK7Yi27CKv22YxOljky/H5NTd
-	7rgibsxAvkLPVRu1pJwzA7qZkjffq+t/dKBFKT/fShJxFWQPhGSxGYAHOf+2NKVZ+EV3Ad1AyRS
-	EBNZXhHo7ONeI60jAFdVrFk39uyZblXeLIVxGu6s64aWX52sdG13ha/TcxMF8EIY381guob+QD1
-	xYQ5gZF8e6pFv2Tt/IdQBPGWDDpQUK168DwXXaDWRtmf03T4Qo9rOz/q+3ix/Q+qbS4Wc441IY0
-	2wu3eSBlrZ7I4D3A3InQxFpFpvBXVWKdeXTe8ewrJWySKG+k/YKPJQw+HNCPbXu+jgNPARHuvpz
-	mEouhGKTqEeuVNLGeY6VOOomiBhwuw9RZO/cqE6aXNv8A7a3QysXGUSsLLLVs/i1/kBtli3viXq
-	q/xzi9dztTOMT1a5QwLmHQQ+uaSxjxo+iDQEBJnEoddr3/+IDySpyFEnQl29NyON/qFDAhAMg8p
-	gBfRU/yKj79PacQHpBBLA0LRnnchkjcLOivHhM2TjJqS/j5DuNVdHsNvL5eTOxYmvEPl/gd8AMx
-	7k8aW
-X-Received: by 2002:a05:600c:1909:b0:4a1:7c56:d4e2 with SMTP id 5b1f17b1804b1-4a35ac95fa0mr163866345e9.16.1793092846393;
-        Tue, 27 Oct 2026 02:20:46 -0700 (PDT)
+        bh=ix/4334WzUzfdmRE3GfdRSiZz1oWYknfOv9NrWKZM2A=;
+        b=cWqMTVjfsenQR6VziKr9DwtAATEPwmNEIR7hPtUn6t/85D78Ly1ypGUdLKIjZqpR6v
+         /C1nlqsIxflCHT9Kraq4YsEgsaW+3YiQW5YYUDl5v8d3nknPM+wGsJiDhYNDClp+CNlq
+         8i7dbCA4gwg+VOxI9CkNNGFyVZmM+Wvf4DzPA8zztqqxAX80/52EVj+GyK/8FC9xWeZ8
+         8fgRJcw5EzzHVIvAc0ygowR5AqGXudfYDSnO3kp13AGQ8WhFXS4YFpXm+YZ+Gn5xbQ0j
+         CTEwMZSz9yoHqSD8Fm3/YyDkr2MxbimN5qE/pHLDGR2IKGEe26g76IFOodwlP/KXq6HF
+         9lVA==
+X-Gm-Message-State: AFq9FYLvPGWniTrypoZXvvln6sLTgfN4U6qO7QzwqDiz2t9f0vSrfrXO
+	cDpunzJd/DJkNnFYL6/ZE5Us7qzEPv9RWAdZr0nCX+i2T9s0Fuigg0uNR5ZpMJ8Ri04wyWrsbjE
+	dBa6f
+X-Gm-Gg: AYBFou0JYqjLUyRghNrctd5fUmCFoWnClZHriuls3V/+vewIAPLPWBVT3uX/M01uwhc
+	vJHPKk1A1S1XcVfnKNh69QzJS/nsMvEcFaR5vtf0F2tR6ubISBr9Q6JP92fRFtdVpbuMpfRz5Nz
+	DhyUjoKPVlmnpHony5wYl614c5XLPFlYK2fhlloPh5q5ib6cZ4Ed/r7rETaSpZHHTDtB1WHwSNR
+	s36c5mV4xR1x8CZrUiUuiG+46v6XsmtVCVU3n3a7zQNmRBVjt76tYKk+dFJPfwYpJy1vBM165W5
+	fuLjhbuI5W0tke1FEebah1J7JrfSLIKa6cJiilYQetoeq9p4tFgDRu3qEHm2B57ploiCZ/r/8m3
+	WvJO2t+xccK1EM32wnU2U79pOqUbQPkR7bp+1Fwgm8hu7sHwOb/6cwkEEn8YeXycBXlBmQAWL72
+	r1eZuG082LB6NetqU6VKyRfL1BbMt4KcZwMNdlyNsptDn/iYhJbSrB+L377H6oryMv8h2Nun7mk
+	DJ2fWszkxvo5I06ou2YYRrhqiy00+8DKwM0/AyVoS3zYgANKNY81xq17F+liFfwhCtcr9F7d7BQ
+	DtfeIe8HTP2Y+GUmR+mdCyff8Qch0tcWwGhNbWKFasuhAWt9euyjD/z+xDmJB2JxDcblT0mw9s3
+	0OxYpg48NA6/OWSgLwbtfjtMTVw==
+X-Received: by 2002:a05:600c:37cc:b0:4a1:a6e0:4ce4 with SMTP id 5b1f17b1804b1-4a35acb990emr170805005e9.33.1793092847450;
+        Tue, 27 Oct 2026 02:20:47 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.45
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm660086505e9.1.2026.10.27.02.20.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 02:20:45 -0700 (PDT)
+        Tue, 27 Oct 2026 02:20:46 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 14/61] python3-protobuf: Upgrade 6.33.6 -> 7.36.2
-Date: Tue, 27 Oct 2026 11:19:41 +0200
-Message-ID: <20261027092028.782979-14-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 15/61] python3-pycares: Upgrade 5.0.1 -> 5.2.1
+Date: Tue, 27 Oct 2026 11:19:42 +0200
+Message-ID: <20261027092028.782979-15-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261027092028.782979-1-leon.anavi@konsulko.com>
 References: <20261027092028.782979-1-leon.anavi@konsulko.com>
@@ -61,40 +61,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 09:20:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131478
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131479
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 7.36.2:
+Upgrade to release 5.2.1:
 
-- Detects single-crate cross-file symbol collisions and
-  conditionally emits crate-root re-exports.
-- Prepend the file module name to Rust type paths to use canonical
-  paths.
-- Expose generated per-file Rust proto modules as public.
-- Include .c files in the source_files glob in upb/port/BUILD
+- Bump c-ares to version 1.34.9
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-protobuf_6.33.6.bb => python3-protobuf_7.36.2.bb}  | 2 +-
+ .../{python3-pycares_5.0.1.bb => python3-pycares_5.2.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-protobuf_6.33.6.bb => python3-protobuf_7.36.2.bb} (95%)
+ rename meta-python/recipes-devtools/python/{python3-pycares_5.0.1.bb => python3-pycares_5.2.1.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb b/meta-python/recipes-devtools/python/python3-protobuf_7.36.2.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-rename to meta-python/recipes-devtools/python/python3-protobuf_7.36.2.bb
-index f9aa69e9c5..7f3dbd1ec9 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_7.36.2.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb b/meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
+index 8a0536ff24..ccbf13728d 100644
+--- a/meta-python/recipes-devtools/python/python3-pycares_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pycares_5.2.1.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/saghul/pycares"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1538fcaea82ebf2313ed648b96c69b1"
  
- inherit pypi setuptools3
--SRC_URI[sha256sum] = "a6768d25248312c297558af96a9f9c929e8c4cee0659cb07e780731095f38135"
-+SRC_URI[sha256sum] = "497d0463ff3316681da6c0b9e8d06cb465d61abce00b613ab42226175644d1bb"
+-SRC_URI[sha256sum] = "5a3c249c830432631439815f9a818463416f2a8cbdb1e988e78757de9ae75081"
++SRC_URI[sha256sum] = "3e89edc56a3745046676207958bf3dbf2971c5df0d64de9f7a893eba8bf255b4"
  
- CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
- CVE_STATUS[CVE-2026-0994] = "fixed-version: it is fixed in 6.33.5"
+ 
+ inherit pypi python_setuptools_build_meta
 -- 
 2.47.3
 
