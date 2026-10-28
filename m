@@ -1,161 +1,63 @@
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36944.1793168059053147120
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39175.1793180365555877181
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 23:14:19 -0700
+ Wed, 28 Oct 2026 02:39:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Uyh6u6bj;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-156cbe59622so690280c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 23:14:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793168058; x=1793772858; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IDbXR9OubXR3P3gCcqb2Rmfx7zW4ektT5nnU1K7da28=;
-        b=Uyh6u6bjKrqCeH17buuCUxeVVbL/g2LcPctywUk+Vxpw7/AKTQKZwZKXbc3kVlsLQ3
-         rTAZFRQ+CVSQlk+n45p64V5AokR8sjuyy5n0nBTK2eaiXRQwKw5Gzb7YLtYp5GeiM8KJ
-         0BuR+BgnLUFc6qEUwJ5sQawZOsVHUUmACl/IZkRYjr3F+k3jf4HCipC9sgjVa0h4uc/k
-         xa7cfkNxgwVRXVapdtKpGQI3OjlB6ZCDP2RWshRp1js1KrzaQXxFALmINqNhvwtQmMah
-         GwPqHCyGMbSc3iXt9ib/9gtBB43fkVtR7akJP9dWSS687m8sZLmP+BRxvJ7ByytXw6We
-         CenQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793168058; x=1793772858;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IDbXR9OubXR3P3gCcqb2Rmfx7zW4ektT5nnU1K7da28=;
-        b=NqVBlZX2w0Phw+KvIRpspGj8jb2wDcW6e+1uPuCXixAH5xs87JT6DtQQKoI9VOVOFK
-         JW6rRgMgdlmG/C3A+AHk+i63/NBOi/cHZ/zP0WafVGuHvNfOBPeqbKzhhvp2PzVCZs1z
-         WRRdRbaHZoiXx51bhOra8XtcYGuaQH5uZl09TPr6KM667xzMKmEWcHcDFLDiqUfjZ57G
-         Zt5gucKAq4dIY/XfMrrD6uGgI3rZcDOkwhnkJQ5MRBcA/R2eV2HkqE3tYio2K4LU/wf3
-         1r/YBBFV7NuewHX14cSH1kP2t0i3nzV30HMv95TjBievGDMiJ2HTPalbyDH/f4A8DfYQ
-         pQPA==
-X-Gm-Message-State: AFq9FYKcpYghqszBk8ayDkXcX2LzHJk9JEA+SziSjS66MukyNhrwh2fz
-	T970N7peCXMR/UhRJKsOeeEbh1vS2nWESFQMg/vcokceJ1rbrwPJYT372GwkfK12pU0=
-X-Gm-Gg: AYBFou1tdc8tDW0bgNZ+RpWrjlVLFv8iT8zOW182UqGCpt/krkL1kYxAg3Z0NcNsE5W
-	n+77RAfCxTOW7PFfv9rUr171gSUdSx2vTRlV1zuLsL3V5cI57IMLbqHp2IhQ0bv5YbwmYtqKD08
-	i0FjW4NMk4wk2jxwngjxOY6jTzeq6X4K/XyuYE0Q5/4irvH6OzsoMc7A9wQWgBMIjcgcuknIjHG
-	31I0sqvF/hg6pgLoi+yvsnNFlBALhrBTRDkHDuh8Ta6hTfVZ8cCNbfelqXRo3NLAGQQZ2vFyP9+
-	bPAp53Uf5F+t+8p4cAmb5e7ldXNqDw8vkCBP/pkNJRhS0uzEEKHIIUeyoxnNe1CU0V+aLX+qkMw
-	dJjDYDMq7bwVgKPwlTPr+CgpqXX7RvtXhsF1wEY68SYb4m9QbBFtUaneYIdIssO/HuCRJbxFgeD
-	l2O2vTfd8/ioz9RYqbOhA53IMJeAi+E/3ecyPWGmVRFzANaipT6/GAhlB9H/De20ql6Fl5SOrud
-	N705bR3w52D83lXyrSLwaR0mZk95JDpoI47fpWNf4bLg4pDhokSvqNas6eaA7CpCuX/EQr6FAPB
-	4rpjq5u4X7DAoaFAQ/vEP4XdWKTDwDqPMXo7KgwTd0UMhLYpmusd4P+RiDrA3FdcF7A4AL6Pg8W
-	GoEzrVK0h0s65VNtRrslX1zjBYTr2wl9Z93zJj6TuvG8kANQGTYqaHXavXRHqooqzbMiUObNtjL
-	O+cogMYy+bkUzazY81w1nzYnoFuT22TEq7iHecqf0zwmAfjqXD8BUFWJmhao4UlerfdKIvX8UDI
-	vrX6NkiPUFVnA6xr7UqE0PRUyCn9oovoXKEqv6XT1J0C/gR0qMmG15Mo3qHcuWGoSg0P8wBwxlt
-	W33M
-X-Received: by 2002:a05:7022:629:b0:196:4eeb:76e8 with SMTP id a92af1059eb24-1a6cf914491mr2482204c88.20.1793168058136;
-        Tue, 27 Oct 2026 23:14:18 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a2390929asm3654486eec.12.2026.10.27.23.14.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 23:14:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH] tuna: Fix build with PEP 517 frontends
-Date: Tue, 27 Oct 2026 23:14:14 -0700
-Message-ID: <20261028061414.4062430-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+ dkim=pass header.i=@kernel.org header.s=k20260515 header.b=Nv0iyjgn;
+ spf=pass (domain: kernel.org, ip: 172.234.252.31, mailfrom: brgl@kernel.org)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	by sea.source.kernel.org (Postfix) with ESMTP id 9314243C8A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 09:31:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 778BF1F01825
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 09:31:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793179917;
+	bh=UztJfQXRyXIZrCbFezavOUCl/fMiPUBrYlq9O0rReSM=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=Nv0iyjgnZZ9c6bBQV+TG/884hU0NVHcDD//9FAYFgZzIYDHUwnOwTt4Jds3P91/CP
+	 /7hRh1giD7eGPIHdbGPUImD+9/X8TLXdXHCKF4T2MQzqUdM69egPQdBCzxDYquLr0N
+	 uAl2E0gtVNE0bXf8W7TRE0udyNr4CGOf8iv7PbdahlIs7iQYrAbZbqzUHCGE4YCEcG
+	 JlWTUpW3Nw4gY/ZOMUpx3/XqZYfchheJ3dNkLfGxsimKMbD7T5K2T5fxz2/jAWa71y
+	 0DTpZYcgP6OSFpTNVsC9XNQN4hVoD1aoaQA0Sg3qivWNmAx9YGL91Hmt1mbQdaYCCk
+	 Ae20oEqgPRPuA==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5bfbc25a76aso2505163e87.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 02:31:57 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwh5Y2XeCB1H3IVS0vjPYuF99VUoW0Zp9jrK5YbSk0VwLUwU5KIhFI5z3lRzHaY5EYMKkZXQRGrARDNhKTXHiGj2H8=@lists.openembedded.org
+X-Gm-Message-State: AFq9FYIVX640z85OWugfSQLY7CeuhFOJEGV1z3uYQT4F+JhWLPYBPfHf
+	bwCcG3VWh8MNem3RxS+QaeJDv3cFXSUn++fhzOScn2mR3Tqf2wBSjhEGLRlGMnfVqlIEY7pAAfe
+	zRenVeBrxFlrzIXn8LBcOS4yPVfE53v9GfP6ftXA4qw==
+X-Received: by 2002:a2e:a9a5:0:b0:3aa:e5df:f852 with SMTP id
+ 38308e7fff4ca-3ac9f586c3emr2263361fa.14.1793179915667; Wed, 28 Oct 2026
+ 02:31:55 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 02:31:53 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 02:31:53 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20261025214330.653779-4-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261025214330.653779-1-khem.raj@oss.qualcomm.com> <20261025214330.653779-4-khem.raj@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 02:31:53 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MdH_5uwkhDRLBYpemHDfEA3r8iN1QrOpTPpP3=6Rvhn0A@mail.gmail.com>
+X-Gm-Features: AclHuK__YfS4xLY62dM8KBhlxxE4-qrpklm3lvxR4V0dMH9XTzQNCNhINeZ9svc
+Message-ID: <CAMRc=MdH_5uwkhDRLBYpemHDfEA3r8iN1QrOpTPpP3=6Rvhn0A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 4/6] libgpiod: Show the output of failing tests in ptest log
+To: raj.khem@gmail.com
+Cc: "Khem Raj via lists.openembedded.org" <raj.khem=gmail.com@lists.openembedded.org>, 
+	Khem Raj <khem.raj@oss.qualcomm.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 06:14:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131622
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 09:50:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131623
 
-setup.py imports tuna.version from the source tree. The setuptools
-build_meta backend does not put the source directory on sys.path, so
-do_compile fails:
+On Sun, 25 Oct 2026 22:43:28 +0100, "Khem Raj via
+lists.openembedded.org" <raj.khem=gmail.com@lists.openembedded.org>
+said:
+> run-ptest wrote each test's output into a file in the image, so an
+> intermittent gpiod-glib-test failure in testimage left nothing to debug.
+> Print the output when a test fails.
+>
+> Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+> ---
 
-  File "<string>", line 9, in <module>
-  ModuleNotFoundError: No module named 'tuna'
-  ERROR Backend subprocess exited when trying to invoke get_requires_for_build_wheel
-
-It only worked so far because python3targetconfig added an empty entry,
-i.e. the current directory, to PYTHONPATH. The same happens with a plain
-"python3 -m build" outside of OE.
-
-pyproject.toml already gets the version from tuna.version via
-[tool.setuptools.dynamic], so drop the import from setup.py.
-
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- ...una-Do-not-import-tuna-from-setup.py.patch | 48 +++++++++++++++++++
- .../recipes-extended/tuna/tuna_0.21.bb        |  4 +-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-extended/tuna/tuna/0001-tuna-Do-not-import-tuna-from-setup.py.patch
-
-diff --git a/meta-python/recipes-extended/tuna/tuna/0001-tuna-Do-not-import-tuna-from-setup.py.patch b/meta-python/recipes-extended/tuna/tuna/0001-tuna-Do-not-import-tuna-from-setup.py.patch
-new file mode 100644
-index 0000000000..94b8fd917c
---- /dev/null
-+++ b/meta-python/recipes-extended/tuna/tuna/0001-tuna-Do-not-import-tuna-from-setup.py.patch
-@@ -0,0 +1,48 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 27 Oct 2026 22:59:58 -0700
-+Subject: [PATCH] tuna: Do not import tuna from setup.py
-+
-+Commit cb5593a2be9c ("tuna: Get the tuna version from a single source")
-+made setup.py import tuna.version. setup.py runs from the setuptools
-+build backend, which does not put the source directory on sys.path (only
-+the legacy backend does), so building with a PEP 517 frontend fails:
-+
-+  $ python3 -m build --no-isolation --wheel
-+  ...
-+    File "<string>", line 9, in <module>
-+  ModuleNotFoundError: No module named 'tuna'
-+  ERROR Backend subprocess exited when trying to invoke get_requires_for_build_wheel
-+
-+pyproject.toml already takes the version from tuna.version.TUNA_VERSION
-+via [tool.setuptools.dynamic], which setuptools reads without importing
-+the package, so drop the import and the version argument from setup().
-+
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-rt-users/20261028061243.4061773-1-raj.khem@gmail.com/]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ setup.py | 4 ----
-+ 1 file changed, 4 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 8036a64..07ec523 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -5,9 +5,6 @@ import sysconfig
-+ from os.path import isfile, relpath
-+ from setuptools import setup
-+
-+-# Get the tuna version from a single source
-+-from tuna.version import TUNA_VERSION
-+-
-+ if isfile("MANIFEST"):
-+     os.unlink("MANIFEST")
-+
-+@@ -19,7 +16,6 @@ if SCHEME not in sysconfig.get_scheme_names():
-+ PYTHONLIB = relpath(sysconfig.get_path('platlib', SCHEME), '/usr')
-+
-+ setup(name="tuna",
-+-      version = TUNA_VERSION,
-+       description = "Application tuning GUI",
-+       author = "Arnaldo Carvalho de Melo, John Kacur",
-+       author_email = "acme@redhat.com, jkacur@redhat.com",
-diff --git a/meta-python/recipes-extended/tuna/tuna_0.21.bb b/meta-python/recipes-extended/tuna/tuna_0.21.bb
-index de80d1aa7a..0e96eabbdc 100644
---- a/meta-python/recipes-extended/tuna/tuna_0.21.bb
-+++ b/meta-python/recipes-extended/tuna/tuna_0.21.bb
-@@ -3,7 +3,9 @@ HOMEPAGE = "https://rt.wiki.kernel.org/index.php/Tuna"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
-
--SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main"
-+SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main \
-+           file://0001-tuna-Do-not-import-tuna-from-setup.py.patch \
-+           "
-
- SRCREV = "cb5593a2be9c26c8865f46bf29723c1ce93890aa"
-
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
