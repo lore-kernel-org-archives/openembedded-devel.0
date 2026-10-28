@@ -1,60 +1,60 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36069.1793161544062618088
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36216.1793161546191393654
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:25:44 -0700
+ Tue, 27 Oct 2026 21:25:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=gcJZEdS+;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3acdcfa2bd3so452838a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:25:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=PLNzSZfr;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cd8ba7c2694so221668a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:25:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161543; x=1793766343; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161545; x=1793766345; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=I7IcKFN+mRbxB0Jt7GDfhFlCKIprJx/reEIRujSdvTg=;
-        b=gcJZEdS+LCSFoBKFLDXado4Ljcc2amLbQe6FK2TGvRRP61xRLCxoUu0Cu1L9GHsKeH
-         bnxxKWwxSMsnwN+VhGnu+dWrzG8feoHJs1vbHhDU/CN/UFJM2eAiZAcrEnJ0rZaSDZCs
-         brdkIrYprJ8OWm+KXrBBZxIxHqyQPEVRhqgOoT8SlPC9xRXk25eOwqgNYfSGOAfO+MFf
-         9VzJp8kPl+EhWL7ylcWOBKX7N3Rpoh7o361gCeybBu4J9gO0rSFWFI+BvDdk/Uxgaw5N
-         /D2s3UfR56eoSWAnuCmPGqvN9H8WCRmEMW4ALjhcY9gSp0DUy3Nvqb6TK4IrsEc1ubDC
-         52KA==
+        bh=quuckHUW88M0c3FHYx6XxuCwr9T1qdVWzn407ExGYz4=;
+        b=PLNzSZfr9q7RSXr8Tg1gD8Mubz5WdESUPLB3NNCKbGJ6mwpOxpmvlascYnFnrJ7NKq
+         BM5qQus7GB/BwGAikNTJMQSGX03iejb+IglRWtAYHtmVUFBnyqocGx9+qquJEDbnUvvw
+         q97WA2v5lOq//mn9FN+WmIdaoi4c/K1xdEuOu7CglLzZvPSUBcLRqFEkcg8vxJTDOr8Q
+         YP9qS+somApUApRU2SWE9P1x03T5NQta8IXWEY5dRsYNLiAEt4ICJqpXfZw/wNzVVanL
+         Z9SzUsWqqf3BlCB5CkMNODcOqkgilSy2Op3+U2JntywalDjXFxZeMchvNLpa/AEKQgWn
+         WYhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161543; x=1793766343;
+        d=1e100.net; s=20260707; t=1793161545; x=1793766345;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=I7IcKFN+mRbxB0Jt7GDfhFlCKIprJx/reEIRujSdvTg=;
-        b=PIO9pHTt43aKp4xHdZPV9svxtoSV/eDqzclLaKGJ96ZrG4mrZal2clwV7idBpq33cO
-         k/H9HS+13NnXOM22EomRxAmH38Sg0O4mgwniAlPDj/yhBH+/iNgjcos+1uwZP60KSFi3
-         b0XhwLGnBif4vO4Iymx5LjczahJNVgGcbOfHyP9WuUyzNpoc4gw4PxsXenqUTL9j+y11
-         jLRCBWmwnNye8TZ+YAZqXV40ouNdpsR0w3ekMKyoldiwXf0w8TtSLwjAi6TDuMovPnr1
-         QeX9ij8XLksvOTOAmN1LMa0maezNenUlcvxfp8yZaNusFj0644mbKlsrWVD9MS+417TI
-         3YGg==
-X-Gm-Message-State: AFq9FYJmWE9dunU2Nw3/yJtxsrpGYYl+XLjrk4NB73/8YTXDEHkY/6Bu
-	TxJijNBtIsxHlZgEv9rVttKY66viSE1c1qixlL+lNypT20hJt0iiSwUkRT9qyQ==
-X-Gm-Gg: AYBFou2mFMdCF9Ay8nDH3FW7elzvg/6C7vCuKXNAhmjzfiash2S2P8qbbl2B4qpmkoD
-	KXvOuFpDwQu+r8lEf6mfq18h/p+KtLInA/CJvE62dqbDnvY3h6xqqRi9wCBUlNVvtOOM9+arzMW
-	5GsuUhiLNspkjw5rBgpgMUei2ATG+5jodnN1OvXWnyK6VW8SPmxpc1iqmMjiRSMM2k8ZoPYNWbI
-	28yNpnS2T76lXiIZXrICkSoT1qRlbTuCTapoC8Qnh42UMAWsPQLyy0xkPtaaVXFpLFm6SpM2E6z
-	qIUemQcTCleWQZiNbd8pt4AG4x4B/YsbzFvRTJN6mXOCop05wDgodWpPax5aHAVEv0Vwsco/Eok
-	dX+Bn/4e+GPfVWU2xS6jnkqImn7RqPI15gzg8B2xR0wma8rjUclBfhnR0N5BOHH+K0KvTrQwmei
-	nRO19UDEai5V9vPS2WptG1rvqSydR07RW2pr6WIHspAnjKTSQhpdQBIYx15YEZjk2BU/j/do9Yi
-	AvlrWE/DaIsbe6PYsaZ1cW9O3ecg7Zri4vfVEnHTxgyLGbduKUg/6IyuzicdMmX45A2TzmkZB+K
-	tTPO5aUc8CIjapc5yvElymUgQXCW5EFh4202X1dizDrWs3wuF+ffUJmu77JbKA==
-X-Received: by 2002:a17:90b:582e:b0:3a8:878:ebab with SMTP id 98e67ed59e1d1-3ae580a0835mr872287a91.35.1793161543365;
-        Tue, 27 Oct 2026 21:25:43 -0700 (PDT)
+        bh=quuckHUW88M0c3FHYx6XxuCwr9T1qdVWzn407ExGYz4=;
+        b=V8usJpz0c/U+V2zfXyGyOMyFhqjQykjh2GOXHMFtmV9Dkexu3hpoYHJu0MUlCVYJ0a
+         QksymenNcV+H5T12xAcfOVV22wU85bUUj+dTMIjwk2lq38pyjWkebqyTU0c+9qpocIDt
+         9lY6FnWR7bfZccAFNGkihxqZNh71lJUw2Irg5oQYzR7FPsNELM5l18WQXAAluzL9cy60
+         cO3Xy8w0sJFdTUZZ8rEPU6zLEyMBBgQPUT+c+3jqm6NFfnS/UV8kPJmJXUX9AW3YyjmD
+         YI+jvI6/BW1YOYE2mqytJMNCqGg2wIzQldlgvLpAbcEO7vTPkpXwe1AtOCjQIJxBcU0J
+         p0kQ==
+X-Gm-Message-State: AFq9FYJDPyHGMr3uxEYJAtdUln0E8vSa1yzKOIk5NO2s6TzsPy8lIsKs
+	vPkRxgeg2HqmnKB2DWoshMDROi59nXzuD98BIl0Fu0wsoI+Y3d5DYtqaYj6FZg==
+X-Gm-Gg: AYBFou08qTt8zgvC8/tT4iIHEazX9/lIjvqelH+6+Vp7Jho9eTaARds2M1zDzAC2hwy
+	J8vMpLa33Im4ii+sIDtdGZluuA+Y16psbzYwnOcnn+yiJzq2patq8AJJUynLrkiA73WOx0o4X1b
+	S27OXx/dnRj+4sxmYIoVAC6NFMNxLgkAsc+K7Xpl919obIMsMsdt6ocYv/yLUmsi2FxpT+Hgs6h
+	WsYYVtYNCZzILOGt48R3Mjm2/wGZN8iphou1CKgTlTMnYdd4rVndSLpue1iDG1Mwr39q64bcXDQ
+	PBPz3TxF7MjfAoX7/bbmyA6vWXXcGPvolZuI0FoAlYG2RyXw0WcVKzRHyKtkKQggHKHzipTFlrA
+	Tkhj4OV8752pfWD+CV+WLwuzHD7yprhE+SIomYgAzWqbXq7rHJD2TQzVTcvP7qBl904OqFTHpGU
+	n8woHBBHx4b9sL2b6c1cLBJL24sPo22mpCrzIbjoW0bj1Qa5nscJTNo3/O6d8S3IECTPW6z0og1
+	DQTISKnivVDKMIVV4MhhWUby83o5IUoYTBI12EZtlCCD2wZogaF/b1izOFD3v73v+9WxcDb0KIR
+	G4bwVZWWGjHJV/ds20l+edzKBYYTpyhjenRosSMO4CeWjkPYJ8eH7APQdlWj0w==
+X-Received: by 2002:a17:90b:4d0e:b0:3ac:af8d:c839 with SMTP id 98e67ed59e1d1-3ae5822f6a2mr860040a91.35.1793161545503;
+        Tue, 27 Oct 2026 21:25:45 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.25.41
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.25.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:25:43 -0700 (PDT)
+        Tue, 27 Oct 2026 21:25:45 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 41/60] libvncserver: patch CVE-2026-32854
-Date: Wed, 28 Oct 2026 17:23:39 +1300
-Message-ID: <3f2eb98cd85e201fb921e969be9a73f3a143eb6e.1793161233.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 42/60] libvncserver: patch CVE-2026-32853
+Date: Wed, 28 Oct 2026 17:23:40 +1300
+Message-ID: <105c0a7d4bae8ed71f4fb95973e660940163dc6d.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -62,102 +62,112 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:25:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131593
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131594
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-32854
+https://nvd.nist.gov/vuln/detail/cve-2026-32853
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libvncserver/CVE-2026-32854.patch         | 66 +++++++++++++++++++
+ .../libvncserver/CVE-2026-32853.patch         | 76 +++++++++++++++++++
  .../libvncserver/libvncserver_0.9.15.bb       |  1 +
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32854.patch
+ 2 files changed, 77 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32853.patch
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32854.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32854.patch
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32853.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32853.patch
 new file mode 100644
-index 0000000000..85adf3eba2
+index 0000000000..23d6a3df1f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32854.patch
-@@ -0,0 +1,66 @@
-+From bf01ccc67bc8181568af2d1f6e1f6f6888b51bde Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-32853.patch
+@@ -0,0 +1,76 @@
++From 4d5c0ea960e4a22cd8b8fb3c6e18b5a1b1797783 Mon Sep 17 00:00:00 2001
 +From: Kazuma Matsumoto <269371721+y637F9QQ2x@users.noreply.github.com>
-+Date: Thu, 19 Mar 2026 17:42:00 +0900
-+Subject: [PATCH] libvncserver: fix NULL pointer dereferences in httpd proxy
-+ handlers
++Date: Sun, 22 Mar 2026 20:35:49 +0100
++Subject: [PATCH] libvncclient: add bounds checks to UltraZip subrectangle
++ parsing
 +
-+httpProcessInput() passes the return value of strchr() to atoi()
-+and strncmp() without checking for NULL. If a CONNECT request
-+contains no colon, or a GET request contains no slash, strchr()
-+returns NULL, leading to a segmentation fault.
++HandleUltraZipBPP() iterates over sub-rectangles using numCacheRects
++(derived from the attacker-controlled rect.r.x) without validating
++that the pointer stays within the decompressed data buffer. A malicious
++server can set a large numCacheRects value, causing heap out-of-bounds
++reads via the memcpy calls in the parsing loop.
 +
-+Add NULL checks before using the strchr() return values.
++Add bounds checks before reading the 12-byte subrect header and before
++advancing the pointer by the raw pixel data size. Use uint64_t for the
++raw data size calculation to prevent integer overflow on 32-bit platforms.
 +
-+(cherry picked from commit dc78dee51a7e270e537a541a17befdf2073f5314)
++(cherry picked from commit 009008e2f4d5a54dd71f422070df3af7b3dbc931)
 +
-+CVE: CVE-2026-32854
-+Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/dc78dee51a7e270e537a541a17befdf2073f5314]
++CVE: CVE-2026-32853
++Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/009008e2f4d5a54dd71f422070df3af7b3dbc931]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/libvncserver/httpd.c | 24 ++++++++++++++----------
-+ 1 file changed, 14 insertions(+), 10 deletions(-)
++ src/libvncclient/ultra.c | 16 +++++++++++++++-
++ 1 file changed, 15 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/libvncserver/httpd.c b/src/libvncserver/httpd.c
-+index 2186ae54..604e5bf9 100644
-+--- a/src/libvncserver/httpd.c
-++++ b/src/libvncserver/httpd.c
-+@@ -337,10 +337,11 @@ httpProcessInput(rfbScreenInfoPtr rfbScreen)
++diff --git a/src/libvncclient/ultra.c b/src/libvncclient/ultra.c
++index 1d3aaba6..5633b8cb 100644
++--- a/src/libvncclient/ultra.c
+++++ b/src/libvncclient/ultra.c
++@@ -126,6 +126,7 @@ HandleUltraZipBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++   int toRead=0;
++   int inflateResult=0;
++   unsigned char *ptr=NULL;
+++  unsigned char *ptr_end=NULL;
++   lzo_uint uncompressedBytes = ry + (rw * 65535);
++   unsigned int numCacheRects = rx;
 + 
++@@ -194,11 +195,18 @@ HandleUltraZipBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++   
++   /* Put the uncompressed contents of the update on the screen. */
++   ptr = (unsigned char *)client->raw_buffer;
+++  ptr_end = ptr + uncompressedBytes;
++   for (i=0; i<numCacheRects; i++)
++   {
++     unsigned short sx, sy, sw, sh;
++     unsigned int se;
 + 
-+     /* Process the request. */
-+-    if(rfbScreen->httpEnableProxyConnect) {
-++if(rfbScreen->httpEnableProxyConnect) {
-+ 	const static char* PROXY_OK_STR = "HTTP/1.0 200 OK\r\nContent-Type: octet-stream\r\nPragma: no-cache\r\n\r\n";
-+ 	if(!strncmp(buf, "CONNECT ", 8)) {
-+-	    if(atoi(strchr(buf, ':')+1)!=rfbScreen->port) {
-++	    char *colon = strchr(buf, ':');
-++	    if(colon == NULL || atoi(colon+1)!=rfbScreen->port) {
-+ 		rfbErr("httpd: CONNECT format invalid.\n");
-+ 		rfbWriteExact(&cl,INVALID_REQUEST_STR, strlen(INVALID_REQUEST_STR));
-+ 		httpCloseSock(rfbScreen);
-+@@ -353,14 +354,17 @@ httpProcessInput(rfbScreenInfoPtr rfbScreen)
-+ 	    rfbScreen->httpSock = RFB_INVALID_SOCKET;
-+ 	    return;
-+ 	}
-+-	if (!strncmp(buf, "GET ",4) && !strncmp(strchr(buf,'/'),"/proxied.connection HTTP/1.", 27)) {
-+-	    /* proxy connection */
-+-	    rfbLog("httpd: client asked for /proxied.connection\n");
-+-	    rfbWriteExact(&cl,PROXY_OK_STR,strlen(PROXY_OK_STR));
-+-	    rfbNewClientConnection(rfbScreen,rfbScreen->httpSock);
-+-	    rfbScreen->httpSock = RFB_INVALID_SOCKET;
-+-	    return;
-+-	}	   
-++	if (!strncmp(buf, "GET ",4)) {
-++	    char *slash = strchr(buf, '/');
-++	    if (slash != NULL && !strncmp(slash,"/proxied.connection HTTP/1.", 27)) {
-++		/* proxy connection */
-++		rfbLog("httpd: client asked for /proxied.connection\n");
-++		rfbWriteExact(&cl,PROXY_OK_STR,strlen(PROXY_OK_STR));
-++		rfbNewClientConnection(rfbScreen,rfbScreen->httpSock);
-++		rfbScreen->httpSock = RFB_INVALID_SOCKET;
-++		return;
-++	    }
-++	}
+++    /* subrect header: sx(2) + sy(2) + sw(2) + sh(2) + se(4) = 12 bytes */
+++    if (ptr + 12 > ptr_end) {
+++      rfbClientLog("UltraZip: subrect %d header exceeds decompressed data bounds\n", i);
+++      return FALSE;
+++    }
+++
++     memcpy((char *)&sx, ptr, 2); ptr += 2;
++     memcpy((char *)&sy, ptr, 2); ptr += 2;
++     memcpy((char *)&sw, ptr, 2); ptr += 2;
++@@ -213,8 +221,13 @@ HandleUltraZipBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++ 
++     if (se == rfbEncodingRaw)
++     {
+++        uint64_t rawBytes = (uint64_t)sw * sh * (BPP / 8);
+++        if (rawBytes > (size_t)(ptr_end - ptr)) {
+++          rfbClientLog("UltraZip: subrect %d raw data exceeds decompressed data bounds\n", i);
+++          return FALSE;
+++        }
++         client->GotBitmap(client, (unsigned char *)ptr, sx, sy, sw, sh);
++-        ptr += ((sw * sh) * (BPP / 8));
+++        ptr += (size_t)rawBytes;
 +     }
++   }  
 + 
-+     if (strncmp(buf, "GET ", 4)) {
++@@ -222,3 +235,4 @@ HandleUltraZipBPP (rfbClient* client, int rx, int ry, int rw, int rh)
++ }
++ 
++ #undef CARDBPP
+++
 diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-index 47e42cd094..9fbec58c72 100644
+index 9fbec58c72..e2f995947f 100644
 --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
 +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-@@ -47,6 +47,7 @@ inherit cmake pkgconfig
- SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag=LibVNCServer-${PV} \
+@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag
             file://0001-CMake-require-at-least-CMake-3.5.patch \
             file://CVE-2026-44988.patch \
-+           file://CVE-2026-32854.patch \
+            file://CVE-2026-32854.patch \
++           file://CVE-2026-32853.patch \
  "
  SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
  
