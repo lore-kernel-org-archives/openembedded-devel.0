@@ -1,61 +1,60 @@
 Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36044.1793161468930462699
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.36045.1793161473080299024
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:24:28 -0700
+ Tue, 27 Oct 2026 21:24:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Z/0UYNqV;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=XX80e43Z;
  spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2e5378b281aso2488775ad.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:28 -0700 (PDT)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2e987a2ba0cso2892925ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161468; x=1793766268; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161472; x=1793766272; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3uLxgzOj5PVjJcA9KrdjjodUQeMPLWlydBZ6fmvtUig=;
-        b=Z/0UYNqV0FkHF1w21emthGFh+HpxPbnEcFn/8Wx0gNhAYR//XPwIWrZfllflquCuDN
-         +7xEfBYgH7ZfZ3H/iP3I9uVA5RlqPUNhDzwoMpX85HKgqeURVaoAY0PpedEOyuOiHR/4
-         oOrzzBik6eTrZ6OrJS6aK9EaRkQthiKCSomqW/PtiNR5+VOLYcZweAWmFPfuGczVpYi4
-         fb1uQiFd0JaW3lBGbIDCGRGTPmMlF3nY/TOrhN5JySbMpNtQSg1dnuLFsUEDDwNLgLLQ
-         1g63VJClgzRxVaIsCQfQxSKAzdVZAg7TQ59sfs4yv2a0rBn14oGk+CS4g7rkmCrP7JHm
-         faFA==
+        bh=3BFzdwDFW7wTV3svdpv55mLXc0xFJAqXCwGrZefnb60=;
+        b=XX80e43Zmr5NKh+WXjtnmKEapBVJ+6ijpJB6ByIZ8/9Klf7o1HJjTHHArlApLY3geB
+         60mavEHiKh/Sz6VZw3lMfM/5pEjUBQGL0CzwrHu1tzs34pOawmAiWt2ElSf/k3PoOD6d
+         JzLfMJOE3DhJolbqO8AE6cernnDgo4W96+zSN5D6tY57u3IKwC+4C/8qatoPa6QceMYf
+         isxdhZy5ABHT+vqLdDySZ9j333aPipNokHE9f+EsjcbHAmBWh46K31rZl2kudD8ilqKb
+         9Q+jWVMaOjgLXf9/6tCEjHItNnJLJTrDSdtyZeAtjrnClaUTAfiVwc9rOkhozqph0iNl
+         5cSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161468; x=1793766268;
+        d=1e100.net; s=20260707; t=1793161472; x=1793766272;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3uLxgzOj5PVjJcA9KrdjjodUQeMPLWlydBZ6fmvtUig=;
-        b=BnnTVbK4FBLC0W6EGE08S8Bk6NnpgmY24tWoZvdkdL3HsttW7Banh2jSKmWzfjSxVx
-         3eUc/qpYyX08LDu8dmITdI0i1+gsm1gqTvLtB0AThk5lCCpQJoJDqufA18uNQ4VQk75v
-         lP+LcPC60d+6x1SG1LdWYoM16R+JvlgHFi1AxZof/cGlCsunAt3S/gjxoo/7Q8l1M2S6
-         tquQ6TN3JVX5CEIV33d/nG6mIcWXxJ4C9E+mYuspwK5MiyJQh/Mud/tdB/9ZoxemD7zE
-         b4EMkoUFdEsjSFo/NPa9LIEvqnPJkypQa9i0qLyNduANDdJNhiRxADqwb/Xqbg9XEboG
-         QswA==
-X-Gm-Message-State: AFq9FYIlRUT6z/YKc5Gg9oXzhm6xgxvw4cygisf1kAFllea1Qafxf1YO
-	K4o6jWwfeOid+H6lui7nwW3jQ3nI9DhRuppTHhrbTreX6dcRHpjnkj5gMdzkbg==
-X-Gm-Gg: AYBFou1SUxAZPEv1N0MsybRt94kio3ldwdmXnsfaBnqOWIS5D/m/zXfDIKBkWBgfBtB
-	Be4q/n2vGDuqSh00AMDCna05bqdDrgMu/amowEoWXaw7cJQLT69jFVYgHverEtkyVIFO+B4bZNZ
-	6fZty+A2F/b6KHRHqOWRS20XfAET3O3i37OoQDjdviOARoZJfyvb4MenDhnMYlRiVB7NSTl9r05
-	vSD/62oFDmQrN3xm24JyH2kjA5LRTXZPqJsBAoJz/l0uhIu+nlY1FtlUN6KMdCmwkjZ2fBvUOJx
-	QtXpVAH4sVyuy59kEWjblsrpbWvAhkvnntR3m4Gbm5jZnDvVptbZfTYPUa8j+fTW0QXu3ZhESz6
-	HpVM4pV5CMMfdaEodrC5+IwdGTe2PtwHvbLcAWL5kF0d7eiQbyMMPBJLNhdyCnAxZVhIabFSRc2
-	20n5C6CPvLkexuL2S0tGM595k5ryFWujI94k558csavJpMTXkdpy/eHsJJlIvwd4zQmstv6hgKl
-	fmYLfB6Dc9pxDM/RBdE7ItrJE/XXzOmkLT2FmMbzn5ktdLANZBf/ev2kMoXiJPHWxgmBuYOSudv
-	6IrnGlR7w+aWHlvAIzJWpGhKOwjLgIQ6B15M6EjVXIVLHpHNxfJ0eqoiOhg7PWNaosKA2hsNc84
-	9k34oCaU=
-X-Received: by 2002:a17:90b:1c8b:b0:3ad:6738:db14 with SMTP id 98e67ed59e1d1-3ae5814509amr909590a91.55.1793161468164;
-        Tue, 27 Oct 2026 21:24:28 -0700 (PDT)
+        bh=3BFzdwDFW7wTV3svdpv55mLXc0xFJAqXCwGrZefnb60=;
+        b=PRhVE8cQXcp9TJ905RVTLz1j97h/1KuNrXdCRICsdl27rHKA+rmqoS4IwJuoU3qUAk
+         DVNVx5kHb1zj1Liz1/PnhgFWqCMCFH190Wd83ldz2LhbApgBJkusNV3Ieso5RvsOks01
+         a8gQX2L3JVahNZ0X/JO6nlG/2Y+wt7hLskCRMPv5wzSXZNioccphZ9hajUsSRz5O6nL/
+         owZFHmm83CFKV6SoTqQ3RW5Bl04CMWs4SOOOdwreFneTaB1mncefhKAPjyNEQjBDk+Xp
+         EzTMD+7/51K3zyH9KPkY9lkijcSvLsmldxHLRWkPR0HL9l7NTMGl5yTblL6Jh2udwXwl
+         s3QQ==
+X-Gm-Message-State: AFq9FYJDMoc7YUyBE3YIoG9QgcP9kJ8ypxR2FqICIbGTJWAzjAkcSi8W
+	53Zx5B9KGR2ukrVxId2pTamRxiltzQqm4LsTn8/uotJ+eafxTNsjb6Fod0HUJw==
+X-Gm-Gg: AYBFou2K0UNZQ/5nGPvYnKb/0NzaA1jjFd2WiiX997s7+Xd99zIXyV9lA8DjCuAxO9J
+	mEKngXCEHPoclMG6N4dYYr7mRhXhH3FzaZUHGuqGeCltLz+eVy4TUmIbBY9XDynEdE4wva1KnkH
+	XlRnuxl28BiMyY7b51iD5D8L3M3LmLfpUHZms7U5GpUktE3bLAHXSBrUPW1Dgs4Jv3tcPB34gbv
+	wvTSsPQOkXAQ4/ZeEJk9HuvEDeu4/GK8GfS22fainKFCTbJTJ5vJDRT2V0dl2k6eTRrBBoV8XKY
+	uLc7YsLP5QcmigThioUNbcNgAiDQe6dOwqQA1VbFSQ14KqPIwdDVpxGWVepv9hZd59XbsfOhpFt
+	Ihsqp1lFqa3YIXzpV89vA/yUZVmcbz/zfKkMzO5p3IHx7+fOgkxZ5blrMAnSoeI0tLoXDNsNv/m
+	Fx7TGVIaN7wcowkz0lP0GNY4tRC/V+ZwQ0LZpfciwrpXIlwe16chH90KDzVcOB9eJgBllNOFTqO
+	WeSXTm9DWGAmQHunIBmJoCNCiYsltwPY3Kn3DeQGACpM8MLjpcTu5iABqm9J+yMUl3FK9JVol9v
+	a6wBzXdm++OQXaZTHUy4oMnM+ioSOFtLPNNQz56WRoZTUhbIM+3l1kRKqvvWPA==
+X-Received: by 2002:a17:90b:5201:b0:3ad:93b4:718f with SMTP id 98e67ed59e1d1-3ae58289e21mr897472a91.65.1793161472451;
+        Tue, 27 Oct 2026 21:24:32 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.26
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:24:27 -0700 (PDT)
+        Tue, 27 Oct 2026 21:24:32 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 09/60] spitools: upgrade 1.1.0 -> 1.1.1
-Date: Wed, 28 Oct 2026 17:23:07 +1300
-Message-ID: <b598e510a560c6eafe0815182e4ef6fbfb86496b.1793161233.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 11/60] libmikmod: upgrade 3.3.14 -> 3.3.15
+Date: Wed, 28 Oct 2026 17:23:09 +1300
+Message-ID: <3fb79999f2fcc2aa52918d418b1a1e0c53df9d34.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -63,30 +62,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:24:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131561
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131563
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Changelog:
+https://sourceforge.net/p/mikmod/mikmod/ci/libmikmod-3.3.15/tree/libmikmod/NEWS
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../spitools/{spitools_1.1.0.bb => spitools_1.1.1.bb}           | 2 +-
+ .../mikmod/{libmikmod_3.3.14.bb => libmikmod_3.3.15.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/spitools/{spitools_1.1.0.bb => spitools_1.1.1.bb} (87%)
+ rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.14.bb => libmikmod_3.3.15.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/spitools/spitools_1.1.0.bb b/meta-oe/recipes-support/spitools/spitools_1.1.1.bb
-similarity index 87%
-rename from meta-oe/recipes-support/spitools/spitools_1.1.0.bb
-rename to meta-oe/recipes-support/spitools/spitools_1.1.1.bb
-index 69f527a6eb..e2ab0a5d11 100644
---- a/meta-oe/recipes-support/spitools/spitools_1.1.0.bb
-+++ b/meta-oe/recipes-support/spitools/spitools_1.1.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/cpb-/spi-tools"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+similarity index 90%
+rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb
+rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+index 2468943349..bfd15cabe1 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.14.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
+@@ -8,7 +8,7 @@ DEPENDS = "alsa-lib texinfo"
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+ "
+-SRC_URI[sha256sum] = "dffd82b8f254c3489c32098da831f33eac7136843d1e7ccb802f1254ad5b4219"
++SRC_URI[sha256sum] = "dc27b338154b8f88dc9e6317196d42c6abc13bf63c4e055257a18d4e38e1afa2"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mikmod/files/libmikmod/"
+ UPSTREAM_CHECK_REGEX = "/(?P<pver>\d+(\.\d+)+)/"
  
--SRCREV = "a19dffe44fee857124a993598caae0c85894f914"
-+SRCREV = "74ba65b19e0cf9d1eabd52d17d842200ef901d61"
- 
- 
- SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=https;branch=master;tag=${PV}"
