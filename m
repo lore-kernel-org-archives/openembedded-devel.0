@@ -1,60 +1,61 @@
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36071.1793161548471548115
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36217.1793161551307412028
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:25:48 -0700
+ Tue, 27 Oct 2026 21:25:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=kQk9aC6D;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cdadf7e248aso232018a12.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:25:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=GzEwpRx+;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3ad41b47541so457365a91.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:25:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161548; x=1793766348; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161551; x=1793766351; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=kQk9aC6DvbYnnpYIm+Vi3QJEQTSaqQpHTgr6roFyX0qlv/dZ+ibcVkKJDVDZ3ZdYwa
-         Nu8U7EtPs31nwY8BTefA1vRXPEo01znp6497Anv0H++KLtNAL19CXvtf7759EncTuJht
-         MAkmGmcr3y5OcXyBiKW19VP7iEjgpWhjz94qicHD3ngT6VeaNfhQr5X7wLY5mAppIJzP
-         NY6u6XnYWv4yNlPZQgAeM+q231jA58Ys16qztxKZZ8chIu7JfEFAHipprzlTwcwKxXSn
-         QTGSeXFoDSo4EhHJmXZlzCjWYkvieKUkBhRgRrwX0+Cj2IjFyYhbV6HoUjw4ZQrBM0Wv
-         hgUA==
+        bh=qRmWPLXpTjUvZ/R6YXZXwRgJPUBZlIjpRkbSr1takPA=;
+        b=GzEwpRx+RBpLdxv+drjwjoQjASWgBY2cSRaqWbf3R4zu8IpN/J+jd9vbwhQdjeEMV1
+         GklR4bGR5yZ+bDi6YSTyY5Yb4C/QHzmqDkXgB1fZ1lpXBan7v58woo2CfqMAo6mheAG0
+         N6mamPfURpk2aAc0i/0mGRYufuT+DM38NRzdWvsdLszDsG7mYoxC4lp9XqaahFBzdMoh
+         eki4kYTkCtMAMv8XHcHHBJ+pydKBQTu0rRXdZ2BehgROTP8tvHrCFQtHg/Dj0wh4LfpE
+         OPCPqHLfOhwI+YZfdKGcMC8g4ieIToJ2Is8+hMIYwVZHAuTWzeauyLu+0viWEIl0Q5LY
+         /ElQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161548; x=1793766348;
+        d=1e100.net; s=20260707; t=1793161551; x=1793766351;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bMZWrUxPiD/DZ3eOTZX4K9oNsIWXpZlaHqLpM/3qtvg=;
-        b=cYvDVF5LAOWAJNDhCKECr4kCudoitSHbOt7iaNVC9pU/Md7FeCjU7oDwLVW6MawG7t
-         lCNHaQ5bNomy2hC/bH91TW+kqAoikux+qEH2/VZeb+PZAtbgDGePoGWvf0YumsygYSW1
-         LGDlyJG96VtMxm5VgKVo0OMFXr/hqwqaBh+IHtcGfKxQq/kG5SXXrPPdb+MYtdLvjnGc
-         pv8Wy7wBks/kXVFSWyD9eFAfE+TcWqQrpZdscnW0fXFATYJGduAdPZLb02ccJ92p700v
-         B6xW7Zo5VKMZKJ+bw92tb3A50Y2AX43V1Mlg6JaeFrQa35ot5vS4VjcPyeJuFxpmWhxb
-         F8Qw==
-X-Gm-Message-State: AFq9FYJ0gtJ4cr4hBjgmJosx8DggfXMfRPvUtVi62DsucVqmhGgmfpHX
-	MEalVcWkM2w2G/0l8h4iMJwSk3e0Sw2jtbWJo1Js0i8NpH7GZRTTEGUY0pLSdw==
-X-Gm-Gg: AYBFou1oKvzpZVDhPfHkxPAo7bpl4w4x+zenFztbFsntKjZrwMOb/s6v6h3PyoXfjZd
-	gm2seraY++44GVtlqiCeNTWtbzf8zBryNeGREznCjBGRlo+9ITXo53t/VC8qyjKksAFQy6d/uG3
-	DqyFEcxyreFbPH0kHEO4fJ5ztt1ioUmnS54KZqU373xgKdtIhLj0lJo1PIoKeh85RY3mbqlb2se
-	nXKWDXiEUP+6Lch7G3voYU03vhXmb+47b8niZqE7R7kReaKBjpXL106CpdRv0tkqX5bUlXRJ3tg
-	LKMYfBugTtYdzGZLAeMujVw4sH9m+9oI8SSxMg/BiTAn6Hidf5pUL6SU+qXZWwsCYo0W609i/NC
-	cbNBiYQrIg7X4wyVotMUWxU32jkm+xuvrMjymSEHl5oTdwI7s8axqt5FTXp+1kL+1wJdmlkkiSG
-	wbTuteXynHFQfdvNrNnjYzSJ0eC6e13Xqx5COymxw2gnlCIVhjP9MlbDut20i6eyyzNkpzlZ5Az
-	kuIuS7crM4tJedf4Quays4SxfUpPnBQgDNn9EFs0gqPgQK0d4Z6VggCj+b+3h67PC+B5BGFS8Pm
-	u7L6v9ThbFoaA1oRYjnsd5Y/F1nCXaLTtNmuIgqpFOKWvT73bupWnCZqmjLMLQ==
-X-Received: by 2002:a17:90b:224f:b0:3a0:b312:1fbe with SMTP id 98e67ed59e1d1-3ae580a7ac7mr753597a91.23.1793161547854;
-        Tue, 27 Oct 2026 21:25:47 -0700 (PDT)
+        bh=qRmWPLXpTjUvZ/R6YXZXwRgJPUBZlIjpRkbSr1takPA=;
+        b=iHW3Xr4CZ5EtVhKNmEeVtLItVyu/OUVDbeR3yr5n8i0e59FOA4M2v65WY3GGZ3sfKe
+         AM/bwgeq/wsm4yZqNbgmGg7zSWMOPloTx95ky4I6DaXnWKwlgEre7wX3GyPrDKiAxqyp
+         k6a1aKH8IqQIujUxFcHFnAfCF2cBR92uNPyIvMi70DwxvpHN4poGtwGKihSbKiB8jkdo
+         w3aQ4xGK1dfWMfLX9M0+N/TZSaWWLYSP5Cpg7izkJEFn0iuIDshV2MqvaHfOgitzSOgv
+         zcfbvuqj7EhPlcL1F2NsjjF6SFQP+PoK41nP/IVP6RSzkAHXERDo2N03ISE3FIBroqQP
+         Xzlw==
+X-Gm-Message-State: AFq9FYI2i68GzT9/DboyJq+MP2ePFk9eXmUAHf5bl0hsEIX66M19ohgJ
+	vxUbxbSLmhQ/hc52SsEDmiT7wPZ8g1DnjdIMOaCy6fcMtoXWJ1YurmdLObd5pg==
+X-Gm-Gg: AYBFou0duKLwcv8tXw12niqGWUwfg+4DE9FwCe6NUJ7EpnMu6XBe1EZjIzfnDGjN0SG
+	7tB/Uc691smrNJqriyYCBqeN4PHQGWhFwZoDCkDwqwrPC0OR9SrFQecdI+HxIumIuN06dF1k9sO
+	zgwn10zYud6Hri3nAZDYEPjUeUitm75gerd2fq3KcwFKNwkOQOZfmYSxTqYtthwSQ/BeYBDIHmw
+	oLsoWO4GqEgIbg2RnA6QOhtVS7KpcJp6LzbAO+oG4Tl2Rwyy3kEnerTzPJgGziLY7bL05ZSZtDE
+	Pn4p19qz0TEblrnQPaUWIuM/j4MdRsl2mVrwNfRIovEmeocT62+sGl9qKCzbFTeJAI0E5O/8PtX
+	Xu591s5CtnMC0KIiGuj54PnMjaz8giBYbsQ4U0EQki9qb09y7294vSQuRo6Mb2Iok4rJ3fWUefe
+	/4RZMT6Pa8WzWHZRIc5BGm0llpK8m6GTfAWeEBklWHSBEx0PJOYdnmzoavMJhjHhIuy/80LgIlQ
+	l2yPSj73kb+713FKI7BQzp8yqflWaWeBrsw+pGgSfdnoqzgIl/hdXxqpY5ET/iVSDDW5KD8nu2a
+	kVWu58VD9tqLgcvoa5ORZl6T5Wj+KNeT3ad+3Ceh1F+lCh278qTzCW6qz6QOOg==
+X-Received: by 2002:a17:90b:1647:b0:3ac:b2e6:317d with SMTP id 98e67ed59e1d1-3ae5822b42bmr949982a91.35.1793161550706;
+        Tue, 27 Oct 2026 21:25:50 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.25.45
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.25.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:25:47 -0700 (PDT)
+        Tue, 27 Oct 2026 21:25:50 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 43/60] libvncserver: patch CVE-2026-50538
-Date: Wed, 28 Oct 2026 17:23:41 +1300
-Message-ID: <b625e91dcfa260c792bc873b2b1faf198cda41bc.1793161233.git.ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [blacksail][PATCH 44/60] swagger-ui: upgrade 5.33.2 -> 5.33.3
+Date: Wed, 28 Oct 2026 17:23:42 +1300
+Message-ID: <a07cefff6a945c9374a8a4302ff5001cf59d8cd4.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -62,85 +63,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:25:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131595
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131596
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-50538
+Changelog:
+https://github.com/swagger-api/swagger-ui/releases/tag/v5.33.3
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 67b4387a4d9f2fbc111b52ec6cd3b7620116c6d1)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libvncserver/CVE-2026-50538.patch         | 49 +++++++++++++++++++
- .../libvncserver/libvncserver_0.9.15.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
+ .../swagger-ui/{swagger-ui_5.33.2.bb => swagger-ui_5.33.3.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.33.2.bb => swagger-ui_5.33.3.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
-new file mode 100644
-index 0000000000..da01736323
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-50538.patch
-@@ -0,0 +1,49 @@
-+From e824e7d8ea71feccb81aeb34771eb83e052c3fe2 Mon Sep 17 00:00:00 2001
-+From: "Bas.Levering" <45083161+Bazskillz@users.noreply.github.com>
-+Date: Fri, 29 May 2026 09:08:28 +0200
-+Subject: [PATCH] Merge commit from fork
-+
-+HandleTightBPP's basic-compression loop wrote each batch of decompressed
-+rows straight into client->frameBuffer (via FilterCopy/Palette/Gradient)
-+and only compared the running total against the rectangle height rh after
-+the loop. A malicious or man-in-the-middle server can send a zlib stream
-+that decompresses to more rows than rh, so the writes run past the end of
-+the framebuffer allocation: an attacker-controlled heap out-of-bounds
-+write reachable in a default build (Tight is advertised when built with
-+libz+libjpeg), pre-authentication, from one FramebufferUpdate.
-+
-+Clamp numRows to the remaining height before calling filterFn, matching
-+the existing house style (trle.c and the Tight JPEG path already clamp to
-+the rectangle height).
-+
-+Co-authored-by: Bas Levering <basdaniel3@gmail.com>
-+(cherry picked from commit 540332be3e0acc566fa64da6f1b4680c72c724dd)
-+
-+CVE: CVE-2026-50538
-+Upstream-Status: Backport [https://github.com/LibVNC/libvncserver/commit/540332be3e0acc566fa64da6f1b4680c72c724dd]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/libvncclient/tight.c | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
-+
-+diff --git a/src/libvncclient/tight.c b/src/libvncclient/tight.c
-+index dad5514f..3ee0d5e0 100644
-+--- a/src/libvncclient/tight.c
-++++ b/src/libvncclient/tight.c
-+@@ -341,6 +341,16 @@ HandleTightBPP (rfbClient* client, int rx, int ry, int rw, int rh)
-+ 
-+       numRows = (bufferSize - zs->avail_out) / rowSize;
-+ 
-++      /* The decompressed stream is server-controlled and may yield more rows
-++         than the rectangle's declared height.  filterFn() writes directly into
-++         client->frameBuffer, so clamp here before writing to avoid running past
-++         the framebuffer (heap out-of-bounds write).  The post-loop
-++         "rowsProcessed != rh" check happens too late. */
-++      if (numRows > rh - rowsProcessed) {
-++	rfbClientLog("Tight: too many scan lines after decompression.\n");
-++	return FALSE;
-++      }
-++
-+       filterFn(client, rx, ry+rowsProcessed, numRows);
-+ 
-+       extraBytes = bufferSize - zs->avail_out - numRows * rowSize;
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-index e2f995947f..ff7327c6cf 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.15.bb
-@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag
-            file://CVE-2026-44988.patch \
-            file://CVE-2026-32854.patch \
-            file://CVE-2026-32853.patch \
-+           file://CVE-2026-50538.patch \
- "
- SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
+diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.3.bb
+similarity index 94%
+rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb
+rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.3.bb
+index aeee9e4da6..6f69070033 100644
+--- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb
++++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.3.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+ 
+-SRCREV = "e89a91f13cdee432d97ca9d3d1ac1969ff797036"
++SRCREV = "38ca10e1867a66525751590d8d51011973107ad1"
+ 
+ CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
  
