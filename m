@@ -1,60 +1,60 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36048.1793161479928921830
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36197.1793161484437934937
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:24:39 -0700
+ Tue, 27 Oct 2026 21:24:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=PyWa/rdV;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cd5c9e52398so312833a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=xVAryv3r;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3ae1d0caaedso236128a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161479; x=1793766279; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161484; x=1793766284; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5HOihMnDMJkcXyygoOReELhms2F3rzLvYN/eIk1Nou4=;
-        b=PyWa/rdVnByd6+eDn5yjv5s3IZhNyZNkEJwLVqcw88ChCMCRN5UL8UHmQbdPYVEOu1
-         JPN9vSUQCM23dpSp3W6CnvZZ0sGs//6jNIGi7CCXmMPiIO7UM83mkg3aiTen+4EYiixf
-         m122YJm8pQeey/rPh6kVThvV6c6R1sQKzCVLaXW3s2mBJSf1nGMwU5v8La4GW/nE9kgd
-         aVQbE8iv+dWwlhqDMzL3/i7YsKQVtQqOL6w3ZvkUoII9CQVLnofzvTWTPqXTXAfMqxIg
-         L4y4YxacJqnGSPCtukQ6AnR77AXdUZWRnEzjR2yHFF26YSkg8qx00fHW1kNXprU24Shc
-         z7bQ==
+        bh=SNQsxVmwqPVTKy5cEzPnePID1JoMFJ87q7zrIsa1rvQ=;
+        b=xVAryv3rhn++3XssT1G1Mh9TKZ4eK+Oj2AWHUbodeoRkkdQm3F44T3r+BqnKyibS9D
+         oryXdG9ViK47EYWHERaVlZGUwSemDUTmF0BpwMRWzO5l36BdpSrKcLf9sIu3f4Wgjd+s
+         /kbQ1Gtxz3XG7Gs7Izkv+GFcAkqgwxQ5Yi0/APT5II2BdU6oUn9NKWBGqQ2QXrZG7P3Y
+         7TOIJ2Y1MTCP/Utcb7xHxshfhrJi5cdsgaRessQznjzi7khFQCO7ndIDtjOcIFbe9Ow5
+         quKpjrRUCbfvB5ZdPoBmLnhj6r4vITE0uGUAVdX0TN93deGa3sNd8EgEwqvrTOl23KHK
+         kYbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161479; x=1793766279;
+        d=1e100.net; s=20260707; t=1793161484; x=1793766284;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5HOihMnDMJkcXyygoOReELhms2F3rzLvYN/eIk1Nou4=;
-        b=uhnI7BHGMJ8hUBwC7xzLNvBUs4DgAhXksc1KkzF6/A+lROPk5IKJT5VdjpQ9mGGrSu
-         j2M04CGqUTxqy79YSgqGl6cBBMCoKeV6fuFP7wi0KXqz+dAWbwgjL51DdvPKr4agX5LB
-         anYjcSHDWWwZ6j4nNXdguezmJaNfJNBhRT7CC7xTrsHgmb5TvQwZjTt0JLN3bQxOX2c+
-         bxuLTy9RyG1F7kTGVaGfFF9DfwRtmG3QXIb1uLsKidIIrORXPNO+STUYUJvBXh8cOdS5
-         gQQcDyLfzxGf9Y0+oon38+AXl1QKcgxK3fRi4+/S0w/eJu4koVm8Tiix9aaDE4bJcLlb
-         ucBg==
-X-Gm-Message-State: AFq9FYLuXWbzkALc+GGumhF7KLQpoioadkfFLLNdK2f86FzpJJ41E6zz
-	4iNHOoYQiXEsf4cMKtY5gxxp/7xLmzO8o0FIo4dLgW6q5VfMYRwuPE3fNM7lUg==
-X-Gm-Gg: AYBFou3KnPkn2HUcbSpDCuYBOtlyhBAJ4ksi5bkvsIalKk+b28NqVAiRaVQhMTD8No9
-	Hgh0Um3ufVqpbpmK9z4WM5Gews7JilGQVfOhh+cTwuf73uXUyRALLNxRxHE7pKLhH1UOewOhDLG
-	P5rxGzN+cUhkj7uwLxFaXXo7raQulbAgx9Ud/GU8ig1wUfrP6z1JKDMqxgxqK3ItQZSbpZpePxp
-	99USA8fjG9VMmxkB+VkW+QGJxb3VosV85P8od5ushDcVHmHfG8CNgHacHiMdKxOkD26czHBPD4u
-	Ie7IMU1JcB9oILo0IPWU6IxIdVnH3AYwlzQp3gM18//5WagcpEOoBg1YgVmQNqzF9LG0/aPZboO
-	NEzZ+keQjfWrZElAMb5TmDafKjcQqcxGgOiyiJpsvaUwWyay6cbldMSi84tjz8lXjWBk3HaCXsM
-	8Nq+abDnon3/WpSwoPzUTnvAvcwj1alLYL6iqOnA6qVTGa5ie2hNa3OcK4l6+lNelVnFZLjunlS
-	S8aBWDezvJLhBRiP7pEbZyOLt+aPMzxbeaVWYhT3a3KBYvSPiXOFhPyBTrVVnwjcRFwkPjuMUnP
-	0phTyHyBJw8fsSfyUNGZwQvq9ZAflxnR5OL2mGd8gNIdhURldzEOEaGDbt4ktA==
-X-Received: by 2002:a17:90b:3c83:b0:3ad:d29c:5e64 with SMTP id 98e67ed59e1d1-3ae58324cc3mr806071a91.65.1793161479220;
-        Tue, 27 Oct 2026 21:24:39 -0700 (PDT)
+        bh=SNQsxVmwqPVTKy5cEzPnePID1JoMFJ87q7zrIsa1rvQ=;
+        b=Qsk+05sZfdqYV0JPhZEPL+Jxwj6ebyQUY4HltEwi+1gnmUcRDA5G03HAmGw+0WDtBb
+         bNcJdKKdkD1qb0V4a93Djq92Wn6ALg59d0MVunl2gDcwL+47ZG7HubBZ3qkpGbId+ZaR
+         SxS/oh4NEZYivlwJk9X+WwmOIsg8VOpOpFiwaYrtXOyHSG5Ztzy8KId9X3W9N6/VN8PZ
+         dAMi9qOCVu0u7YunoDLXv0EJwjl5JQTNKkoztlYGmip99oDmH0JqAp4Vs9m+fyIb10+W
+         41OwH+3R1CcG0STSWqb0reK/4hplbMLRdkpXNUGAaNP4ajm9Vv7D60egcLT/olmzGHdg
+         ChOg==
+X-Gm-Message-State: AFq9FYK+hmfAIZg/kCyKEqg633NxwfhQ6ECSkRVxnaoMLzBQl3gvcNOG
+	7RxGdw7Ldr9NYEiYjdgu6nI5A9kMBbZqzFhsaJwq8efe8nFuNOxnHP9ZAiGqbQ==
+X-Gm-Gg: AYBFou2USt3d4scnfxBjq3fXnXwFtCnFhIBcBTGTAG95+l58XJMtaVi4a3ksTWaIZva
+	+vGAX+q1N6PSjnX18PO1KJNcYFgTkj2FsmBXIe+l3mjSb2ADCQB4A9nq/GSUMOnjYl2JmwA+rw+
+	DTdFWbZcnV2JuKFaYeOuU5YirjjB41y7nK2HBkh2IFMb9MYgvqZs/KxMl70yExQTOb/J44FrwBt
+	d06hX7rua3HW6OCw3OzMW4UctTSprHSysnNTOmh9F2yKKFOHqADsnDmRp31dNiaWk6j9JNbE0Pr
+	WlrbO/c3+9KokFiSB3BIhhILjyxttF3aR57bsEZI2rZQqnpwSZvf/hE3B90F50OA3twBk/e0gRo
+	kLNvPZlWJukL19P6NnXToJ19TqFVEnqEo6dg2dTRITJLka4Pl0kuWRt9WhuqufpjT/H5kZ0QxD7
+	LVX8O2v0ZG6vFfYbN+CZxg5SOjWDkpC8Bs7kFfPHmKa8SQmXSzLMZEXlr1Q+5FXBWvJQRF1eb2f
+	29JI1n0xoF/kpXdd+x1WwupQzyPjLZ7S5PQe6wUBwM48O6aa501W3j/s0f1maDwPGTWklEMphkb
+	R7qSKOjpmoK/Kmbnd+TzRdFX4y5i7UTYDZ5w8R+TZQk6+lo1tEFBNAN8X/a4eA==
+X-Received: by 2002:a17:90b:1647:b0:3a0:ace4:d2b4 with SMTP id 98e67ed59e1d1-3ae580cce76mr757432a91.23.1793161483854;
+        Tue, 27 Oct 2026 21:24:43 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.37
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:24:38 -0700 (PDT)
+        Tue, 27 Oct 2026 21:24:43 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 14/60] python3-cbor2: upgrade 6.1.4 -> 6.1.5
-Date: Wed, 28 Oct 2026 17:23:12 +1300
-Message-ID: <bc11cbea9e21924bcba8e88cb8de67c7e130d1d8.1793161233.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 16/60] rapidjson: mark CVE-2024-38517 fixed
+Date: Wed, 28 Oct 2026 17:23:14 +1300
+Message-ID: <622cd276dd3855d73e24d610f8cda866519b7008.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -62,33 +62,31 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:24:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131566
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131568
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelog:
-https://github.com/agronholm/cbor2/releases/tag/6.1.5
+Commit mentioned in the NVD is part of the current version:
+
+$ git log HEAD --oneline | grep 8269bc2b
+8269bc2b Prevent int underflow when parsing exponents
+
+Details:
+https://nvd.nist.gov/vuln/detail/cve-2024-38517
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-cbor2_6.1.4.bb => python3-cbor2_6.1.5.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_6.1.4.bb => python3-cbor2_6.1.5.bb} (87%)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-index 6a894848d6..94d3f30dbb 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_6.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index fa20b4d448..f565f0a175 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -21,3 +21,5 @@ EXTRA_OECMAKE += "-DLIB_INSTALL_DIR=${libdir}"
+ ALLOW_EMPTY:${PN} = "1"
  
--SRC_URI[sha256sum] = "01ecc79a28f33d17331943ce508fc1e21f4b06553c73f874f4c77120d72b2ef9"
-+SRC_URI[sha256sum] = "6eb06160c42315ac0c4ded461c7d84d92fa18c69d13d17fc1dfc1fae96580c95"
- 
- inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
- 
+ BBCLASSEXTEND = "native nativesdk"
++
++CVE_STATUS[CVE-2024-38517] = "fixed-version: fixed in the current v1.1.0"
