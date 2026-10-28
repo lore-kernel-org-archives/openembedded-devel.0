@@ -1,91 +1,107 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5718.1793218053862150955
+Received: from mail.tafhub.de (mail.tafhub.de [5.9.40.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6215.1793219228222800127
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Oct 2026 13:07:34 -0700
+ Wed, 28 Oct 2026 13:27:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@nkent-net.20260707.gappssmtp.com header.s=20260707 header.b=aOTThnS5;
- spf=none, err=SPF record not found (domain: nkent.net, ip: 209.85.128.52, mailfrom: nate@nkent.net)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a215e64962so15734495e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 13:07:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=nkent-net.20260707.gappssmtp.com; s=20260707; t=1793218052; x=1793822852; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hNW5gNtW0B/IEBebkt16PuyGtfH299YVkLXXon/kOek=;
-        b=aOTThnS5bqX+UvJJZasvrGX2ZUSZxjkgNPTxUmglf5+6T0sLWAy6pmEHF2TxskUZx8
-         gJ7cMFFjjOt4EP+xJBH/vQU3kSxvbmVXo1/gnu0Xd8hRjCAcDoCj0+Wr6gtib8dXBaTk
-         MXsAQ0qX7ggIWJM4fkJXcL7ZkICY576uNIN8+d3C1kPNVSz6KMOIIOUgJECKNsl5snTZ
-         mT1udy7VgHuOLvYtgkWckkWdNWO2uRZcQg1zN8F8i1D0KYf1m/ogzyiH5m4Z4+73UKmP
-         AmnB/A68zg7pJjqWF7mwVHfxhPS6fKn7QRd4ObWlmQisDFG7bmQlf/QxOoyjBiggET5J
-         jMyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793218052; x=1793822852;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hNW5gNtW0B/IEBebkt16PuyGtfH299YVkLXXon/kOek=;
-        b=RJYUbLw1/ZPXZasTyOWTRfOjDApKgmVcB9CgnTY8s7Z1D0145HYvZFsk5v9m8xTOQn
-         ifOXHP3hTALdVIBp1WcuL7RcLWT0uJN5e/U9LzYgQbHvcODUMkPUUSbU/rzTNopob/eU
-         NGr1IU/SQpOIiLc9arrjJl6MU2pn3ArSddf/wQDdpiWzW8xQaR5fgALZZ8xFWxjS7oHR
-         s8+nkLM9Ptc/Q6GgwGj24NhnzPI9gHaVi35v9Y+7iFxGTMqtNO42DsxfD23a/yTjK8Nu
-         tinWFokKOnu6eC1pFNam/ELths5+RptDevWp29iEIY0yphce6Xhrqo7tISrNkH/m7z+5
-         gihQ==
-X-Gm-Message-State: AFq9FYINwLIXT0dLAO+EjzqKvTdVEWMEL09hsns3zcBSAF1l3exUhx/I
-	D0fSh/GoeqrdAekcCzdVSxOgzhNJ8W2AluVrTGqGY5e7HfPdvcKUdETy1pTLNneIesxYuBHOg2p
-	6kGM4QT364Q==
-X-Gm-Gg: AYBFou1TgWhLV/EKvt2mDPxT/i+WpquS+T7hobglpXVNI8Yq25IZ975gH1USGQteIjy
-	r45Ob7+t8UXj0Z5wEZJ04wwveldZpKiruuela1rnCycyay7kmfbPiceg42dgYopIg+Yz1/534YT
-	lCN4oKahoiFZ6/2mn4Tcedut7k4s+m7HoFoc//71NS76T7wXsQniDDdWoiJHO7/UFJ/b6rRTuAy
-	keKvo0q6GJNYFbRcdxAXk8/ZolAfnICPix/qtp0JzCNTAyuK6i8cqMi4jaB7oeMLNYMCZPEq85n
-	f2nO5IAKSVkJESfEF0v+snwXPb3vr5DzRA3ZheLgNfqPhW64vuLZRVOHQU5LicWpBJaBFv67HRi
-	Jd76pTXkvjZ7UoFeircceL80sxxt2PMn7PY/REzpIGbFMtE8411mjsu1VRLGWtuepYnSzRMPkOW
-	tK51TobFm68IfMv02hqiWzZUxRpS9Lxydw4APxbg3JSyOKyITr/RWup80GxIjij/hledfWGrICY
-	GN7YYg6pUiHc9UmB54Vcw+DboYXFdfxN+hdDoc3xWl68Uy99b8fXqKCcvJmOUo6j5xbSt8FxLJc
-	mlYumknMKN2x4+A94gSmjZxWdKoMHc8qeZQxQafjd6F7Wav5Hkse/DnxeWossFBV0bMDy025f0M
-	5f/nHPHrbZNsBxYiUXhfpU9amjGLiEazP0UPzPDRuVyz+zmPcFm+LgPYI0lK1lRXf8g==
-X-Received: by 2002:a05:600c:34cc:b0:49f:e8bf:8f9b with SMTP id 5b1f17b1804b1-4a963ffd2b9mr85982455e9.4.1793218051787;
-        Wed, 28 Oct 2026 13:07:31 -0700 (PDT)
-Return-Path: <nate@nkent.net>
-Received: from akatosh.telenet.be (2a02-1811-e507-d800-9ae4-d494-8afd-3e84.ip6.access.telenet.be. [2a02:1811:e507:d800:9ae4:d494:8afd:3e84])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a9ead8aa0fsm19540195e9.4.2026.10.28.13.07.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 13:07:30 -0700 (PDT)
-From: Nate Kent <nate@nkent.net>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=HvKX8/4A;
+ spf=pass (domain: tafhub.de, ip: 5.9.40.180, mailfrom: tafil@tafhub.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1FFCB2E40E9F;
+	Wed, 28 Oct 2026 21:27:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
+	t=1793219225; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=18rKgjVvAaASj7MjA0uYr7FuOpk82Muu8klGp+zEVVE=;
+	b=HvKX8/4A3yfWy5Fgdg3+lv3VuByVn6C34sk4Ht1LCzBGAgGI+/nBy/vfEed/z29jUWKXdf
+	z3uZHinaiUO2X2mMTq5MB2VI1Nns5FX14R6SbqmO6MuCthoH/s3kxQeza4LDA2oSSVscNh
+	RhBM4ra6avzwAQW6EAX76WZdwG5GRCVQ06G7mr+ujfkuNS488YRzPtQYH5i+gDHkvjWl8l
+	9rhSdiQmEgVYeS2mn6WSe7xFlFlncfEO1NImInQmGcwyFLGoQvA8lrPEXYcXzmj/yAP1PK
+	oEcSonGtbRLR3bgnQdd2qJf1KyRPsmCZrbRKYL27RujvLxAHMpWdsXUVJ9LUFg==
+From: Tafil Avdyli <tafil@tafhub.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Nate Kent <nate@nkent.net>
-Subject: [meta-networking][wrynose][PATCH] nng: correct upstream branch name
-Date: Wed, 28 Oct 2026 21:07:06 +0100
-Message-ID: <20261028200706.3611828-1-nate@nkent.net>
-X-Mailer: git-send-email 2.55.0
+Cc: Tafil Avdyli <tafil@tafhub.de>
+Subject: [meta-oe][PATCH] fastfetch: upgrade 2.69.0 -> 2.70.0
+Date: Wed, 28 Oct 2026 21:26:05 +0100
+Message-ID: <20261028202605.64490-1-tafil@tafhub.de>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 20:21:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131630
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 20:27:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131631
 Content-Type: text/plain; charset="utf-8"
 
-Upstream changed the branch names between the v1.11.0 release and the
-v2.0.0 release, which means the old branch is no longer valid and the
-fetch will fail.
+Drop quickjs packageconfig. Previously 2.69.0 marked quickjs as
+deprecated and in 2.70.0 the option has been removed.
 
-Signed-off-by: Nate Kent <nate@nkent.net>
+Drop pulseaudio and ddcutil packageconfig. The libraries libpulse and
+libddcutil are not used in the Linux build anymore and got removed.
+
+Full changelog: https://github.com/fastfetch-cli/fastfetch/releases/tag/2=
+.70.0
+
+Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
 ---
- meta-networking/recipes-connectivity/nanomsg/nng_1.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../fastfetch/{fastfetch_2.69.0.bb =3D> fastfetch_2.70.0.bb} | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/fastfetch/{fastfetch_2.69.0.bb =3D> fastf=
+etch_2.70.0.bb} (89%)
 
-diff --git a/meta-networking/recipes-connectivity/nanomsg/nng_1.11.bb b/meta-networking/recipes-connectivity/nanomsg/nng_1.11.bb
-index 031827a5c0..f4c15ff674 100644
---- a/meta-networking/recipes-connectivity/nanomsg/nng_1.11.bb
-+++ b/meta-networking/recipes-connectivity/nanomsg/nng_1.11.bb
-@@ -5,7 +5,7 @@ SECTION = "libs/networking"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
- 
--SRC_URI = "git://github.com/nanomsg/nng.git;branch=stable;protocol=https \
-+SRC_URI = "git://github.com/nanomsg/nng.git;branch=nng1;protocol=https \
-            file://run-ptest \
-           "
- 
--- 
-2.55.0
-
+diff --git a/meta-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb b/meta=
+-oe/recipes-support/fastfetch/fastfetch_2.70.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb
+rename to meta-oe/recipes-support/fastfetch/fastfetch_2.70.0.bb
+index 761dafc039..c1cfa4548f 100644
+--- a/meta-oe/recipes-support/fastfetch/fastfetch_2.69.0.bb
++++ b/meta-oe/recipes-support/fastfetch/fastfetch_2.70.0.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2090e7d93df7=
+ad5a3d41f6fb4226ac76"
+ DEPENDS =3D "yyjson"
+=20
+ SRC_URI =3D "git://github.com/fastfetch-cli/fastfetch.git;protocol=3Dhtt=
+ps;branch=3Dmaster;tag=3D${PV}"
+-SRCREV =3D "0c3b852bf7bad2837a814c7a31bf332092048a2b"
++SRCREV =3D "17bb3fd2384bd814b421d73b8c8b8d08e06cfa26"
+=20
+ inherit cmake pkgconfig
+=20
+@@ -25,7 +25,7 @@ PACKAGECONFIG ??=3D "\
+     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'egl', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'glx', '', d)}=
+ \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcb xrandr', '', d)}=
+ \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'opencl pulseaudio vulkan wayl=
+and', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'opencl vulkan wayland', d)} \
+     dbus \
+     drm \
+     sqlite3 \
+@@ -34,7 +34,6 @@ PACKAGECONFIG ??=3D "\
+ PACKAGECONFIG[chafa] =3D "-DENABLE_CHAFA=3DON,-DENABLE_CHAFA=3DOFF,chafa=
+"
+ PACKAGECONFIG[dbus] =3D "-DENABLE_DBUS=3DON,-DENABLE_DBUS=3DOFF,dbus"
+ PACKAGECONFIG[dconf] =3D "-DENABLE_DCONF=3DON,-DENABLE_DCONF=3DOFF,dconf=
+"
+-PACKAGECONFIG[ddcutil] =3D "-DENABLE_DDCUTIL=3DON,-DENABLE_DDCUTIL=3DOFF=
+,ddcutil"
+ PACKAGECONFIG[drm] =3D "-DENABLE_DRM=3DON,-DENABLE_DRM=3DOFF,libdrm"
+ PACKAGECONFIG[egl] =3D "-DENABLE_EGL=3DON,-DENABLE_EGL=3DOFF,virtual/egl=
+"
+ PACKAGECONFIG[elf] =3D "-DENABLE_ELF=3DON,-DENABLE_ELF=3DOFF,elfutils"
+@@ -45,8 +44,6 @@ PACKAGECONFIG[glx] =3D "-DENABLE_GLX=3DON,-DENABLE_GLX=3D=
+OFF,virtual/libgles2"
+ PACKAGECONFIG[imagemagick] =3D "-DENABLE_IMAGEMAGICK7=3DON -DENABLE_IMAG=
+EMAGICK6=3DOFF,-DENABLE_IMAGEMAGICK7=3DOFF -DENABLE_IMAGEMAGICK6=3DOFF,im=
+agemagick"
+ PACKAGECONFIG[lua] =3D "-DENABLE_LUA=3DON,-DENABLE_LUA=3DOFF,lua"
+ PACKAGECONFIG[opencl] =3D "-DENABLE_OPENCL=3DON,-DENABLE_OPENCL=3DOFF,op=
+encl-headers virtual/libopencl1"
+-PACKAGECONFIG[pulseaudio] =3D "-DENABLE_PULSE=3DON,-DENABLE_PULSE=3DOFF,=
+pulseaudio"
+-PACKAGECONFIG[quickjs] =3D "-DENABLE_QUICKJS=3DON,-DENABLE_QUICKJS=3DOFF=
+,quickjs"
+ PACKAGECONFIG[rpm] =3D "-DENABLE_RPM=3DON,-DENABLE_RPM=3DOFF,rpm"
+ PACKAGECONFIG[sixel] =3D "-DENABLE_SIXEL=3DON,-DENABLE_SIXEL=3DOFF,"
+ PACKAGECONFIG[sqlite3] =3D "-DENABLE_SQLITE3=3DON,-DENABLE_SQLITE3=3DOFF=
+,sqlite3"
