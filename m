@@ -1,60 +1,61 @@
 Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36042.1793161464255632781
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.36043.1793161466498214035
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:24:24 -0700
+ Tue, 27 Oct 2026 21:24:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=oVdTItXv;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=kUXYE+Mx;
  spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cd623dfe420so441259a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:24 -0700 (PDT)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cc4dbda1e5dso239472a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161464; x=1793766264; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161466; x=1793766266; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=VTjVlb+otFRnQCorDsRBLqqwQiAElB9jBQmGoR879kA=;
-        b=oVdTItXvUIYyCa/y1TBATW81oP+6+znpgAmYlO8m9ExlLBVeKSa77wIHuBjPKUo7Ei
-         kP0bAUCt3RCmXvbiqCaTkoKgumbYogqB01fShb9j1dg+phC7Zb8BAe8QvULQAu9SpNLf
-         HVcqF3xCmpLPURb0R3l0+tQqyfiE4Qaw/RxmuMdkRdX+oroLJnVd7ZbAnMSkPIlgPBDS
-         5ndOqPN8AujfFyVLZt1WMTnEyp+6BvRT6qwUTfEL84MnTFUICFvCGjh/Kf7vK8fnkUYF
-         wj1C3vsuBczFpTLFl8ETzs3QeTPCfl2/9kdDcngNYLTmviULsmluEHGjLSrec2z4d9R/
-         P74A==
+        bh=n4x69lUCrVBQwJ4mdn2UdiHmcMV75dkXJrevM7XafYo=;
+        b=kUXYE+Mx4rsGeBP1eB6ZmDDbwIT0u3D/E3w9gPKMZs60tsI/8Qrk6SRloZFk8aa+91
+         xB9qvDft69Bi5kAToippY/npZVGVEjgBJTYwlxnpyjeo6t7zE8w6i5uzynpucOGJxN6g
+         UHXvuHmS/1zsYpJoeIt3cPq02p96gFYhZ6ddnvtSMjTpXptaRPY+/Fs/FJNG+2WQv9b4
+         degnV3JmZZEKv8hts3nOIwiihOjeea4K29kS5AfzAO+AXI3b/AePN+90uAjstQc6Pytl
+         e5OUf6uFVoA6TtHp1W7Vmv019/PJAc+vKhe2+bdWQEf8lIYfI1VpqnTUuV/jEqVq6sSQ
+         pgog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161464; x=1793766264;
+        d=1e100.net; s=20260707; t=1793161466; x=1793766266;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=VTjVlb+otFRnQCorDsRBLqqwQiAElB9jBQmGoR879kA=;
-        b=0T6urxi4Ro6i8eqrDmlUYvj3xSL1MNq2r73AtNB/t1SNgm+IM48Z2oSg2BOkVRITLX
-         b3ZIkzmEAYnjf61GaZvPopjZg71hoDevC65S0HAHlBmTy1oHHWZOayA5Bl2Or/r2i1I+
-         KrZHBijElDU04SzoCoWQr4ptcq9XPCcfoMrYlb/stN9cZNO4jdjmiwUDXfziLE1sgR/6
-         HmLlrZt/jIUnqDdmQGHakgQ0xnbLyxm4JXpvNyyX28FAzDu/MVD3OXgOO9O9ffBIlLr9
-         IMvZiikoPKhGMA1tzkqyZGm6lmpYo7aFYSS6oGKjW6rcaUV+jM816tQRO72lpCXMKK/v
-         vlFQ==
-X-Gm-Message-State: AFq9FYIJX/FNxLZW5Yu5Ab6WflH7UMR4oXULyvr9H/q9+OR5wViev54n
-	r4wZdmySzz2PXZ5Ozeyb4+aDNmb6Me1XFKDfwZKY+OUY/yizOXpGFosdAJXKvg==
-X-Gm-Gg: AYBFou0z4J7y7BA8BMZ4EQO3Y9aBf/nxAnWS/4n6J4K1A43mn5pl1GPrwRir5ivfQZ2
-	/jr4d9HF1oONbHlSKISrGlYzBM4J7BAdyYiZGfkuTH+41NQ8S2NAHLR8ICvOV7UXqbctVPb7mHz
-	6NiB265gJJ9yNzWcKTRepN1PIuZLd5IkEdCeU7pPwz2bFrsS+1RtDXYPBJQUY+4ZdtYMHmt0dpW
-	DsPrLGvqGGVzlvJ2QVKYol+lmyycf9/JQGJF+M8J6t5eDJNxTocDVhGhK6b00xbhRpjzHF0pd0A
-	gYHX4GV649K6OPHekenbRA2Xe+htxRLP01aP8gW6e7Yzk/4GN8wFAJSpUSYnI6czELwl0GlxHop
-	Z5WsQqUSKTQIEbAlrpwZtyIdPIc1zxLh83QB1f1GJvNGS/qIE0O1Lr02Cl5p6Slou0EAMpMHlsP
-	PiHjH1LZO2bYKB0Kvy0LW0io7XTLezgJjpduiFarOHPEKNRszV/QwQBLZk0cdL/kmx/74qtzRsK
-	Rpl8Kq4Nm/6YTaYUQ4oxQJSPFsgD5iYoL1MQ2X76SxIcIQ+Sy0JjFG48j9bHD+jOudhSyW08KWO
-	pj0st8EssWJ/XfK1cHBRsGtVvVWcMZc2s711tdQCNdf4loCmw3h9hL0yn9LjDQ==
-X-Received: by 2002:a17:90a:d00f:b0:3a8:5d1f:59ad with SMTP id 98e67ed59e1d1-3ae580dd6c5mr935740a91.43.1793161463586;
-        Tue, 27 Oct 2026 21:24:23 -0700 (PDT)
+        bh=n4x69lUCrVBQwJ4mdn2UdiHmcMV75dkXJrevM7XafYo=;
+        b=mWsTfhJ4fR9gn/XvXgaFT5ZG7L3a3UpwX//3IfNkrrffxrFHprk34n37xAnNYEz6EF
+         H08REspd/GMzDuPWAGe0jpTlDPocJ6g8MaKejbW6l9GNLbsttrmAe7jUFwMPla2d4jqG
+         ihTPHVoGMl/nzLqoamGKBSpBYys/ByG30G5WycJvdb8M+BBKTqA358EvYEDL4/4QOMf7
+         +RGawu4457irF/uoCBhQkHMrgxEssNdidx3jHjiDMEAUnrykfwtfKfZ5bookchm4aN0r
+         uC95SJu1D8lBP/X+9MIiAoFWKdW+9miV4rmG5EdTtf64glogKjNxmAATramH0Fz77BcI
+         9sXA==
+X-Gm-Message-State: AFq9FYKauxIgI12qfpoZcXBYssPjo3tQnL8Lo6AVIcUuE6w1z1yaKf2W
+	++MJxvA9a6XVdv0ZSRTYdhFrRc1ARKPBuYuZeCgkr2navUq8ZCK0kapPHSBf1Q==
+X-Gm-Gg: AYBFou32R3y9b61yzmXAcqBjzk48xzVdy9w9TlfsiENe4xwChUsQqzUUQ2+z3j3aRWo
+	NxZcP7qn7/IQqGdkJjNuoVOvYXklEUd3EKC7GJaSn5KXKZaplqiyeJ9ZyMoRvnX2fptUs8C2EKn
+	aHvflCwk8/uFzVMJTvKZ43BRpQuSqgfRvfw1vXCnsx2w8+dmWEVfdCaodIignh9lQRHv4NJZGPw
+	ZMdfZmDOCFj60WNujBmLcx4+QKkVOO3L7UAeZ99DcdB0oLEtKlkDc9AVA1cwnAr+Rvb+ntEKMZR
+	flY/e4DiF5tqZdtYRME6WzdfGFDBc1yr7W6lzBEqdhHX4eP6tlhIdPzOYaN5EPsuykT24zrQi+p
+	8Vt10ujFfQbY2X+VFJAB7BmFLBR/ZWf4IWL1wddcbc6/YGlW/pJXF4EJrdme/TLWESgix2rZqkq
+	0NaZhGBP1KSlgIVmEG05Y6TBciWYTu3Nxidwiy4WiBH2xBAbs59cU5gaOBdHvceUVgoZLhfg/ut
+	cFGBSXcJiU/pIr/ZS0XJ8QkHQIaPxzbvnJiiCpoGZu1yzoPXXBc+ujzmXguGY6uTI3cKtNRux4f
+	uWKorEI584X+mUrrisEth2nfVF4HXoYuGaikLowOedA/l5BTReeRvnoUwhj9cwOy7yWVdvVqzLI
+	HCquT3bI=
+X-Received: by 2002:a17:90b:4a07:b0:3ac:a7ee:6761 with SMTP id 98e67ed59e1d1-3ae57f630aemr928439a91.21.1793161465826;
+        Tue, 27 Oct 2026 21:24:25 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.21
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:24:23 -0700 (PDT)
+        Tue, 27 Oct 2026 21:24:25 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 07/60] swagger-ui: upgrade 5.33.1 -> 5.33.2
-Date: Wed, 28 Oct 2026 17:23:05 +1300
-Message-ID: <492ba8a3afd93c6f5f24fbf0672bb1b1ab8a80e4.1793161233.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 08/60] freerdp3: upgrade 3.32.1 -> 3.32.2
+Date: Wed, 28 Oct 2026 17:23:06 +1300
+Message-ID: <63837fd4bd94dbaa035acf2bafbd6a5dbf7d5861.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -62,33 +63,121 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:24:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131559
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131560
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+Dropped patch that is part of the upstream version.
+
 Changelog:
-https://github.com/swagger-api/swagger-ui/releases/tag/v5.33.2
+https://github.com/FreeRDP/FreeRDP/releases/tag/3.32.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../swagger-ui/{swagger-ui_5.33.1.bb => swagger-ui_5.33.2.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.33.1.bb => swagger-ui_5.33.2.bb} (94%)
+ ...1-winpr-tools-link-only-winpr-public.patch | 76 -------------------
+ ...{freerdp3_3.32.1.bb => freerdp3_3.32.2.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 78 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
+ rename meta-oe/recipes-support/freerdp/{freerdp3_3.32.1.bb => freerdp3_3.32.2.bb} (98%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.1.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.1.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb
-index db2bb498a8..aeee9e4da6 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.1.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.33.2.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch b/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
+deleted file mode 100644
+index 2dea69c3c4..0000000000
+--- a/meta-oe/recipes-support/freerdp/freerdp3/0001-winpr-tools-link-only-winpr-public.patch
++++ /dev/null
+@@ -1,76 +0,0 @@
+-From 6682e9ca667271b8ba148a301b4a2f9ac78be2b9 Mon Sep 17 00:00:00 2001
+-From: Armin Novak <armin.novak@thincast.com>
+-Date: Mon, 28 Sep 2026 11:57:22 +0200
+-Subject: [PATCH] [winpr,tools] link only winpr public
+-
+-Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/6682e9ca667271b8ba148a301b4a2f9ac78be2b9]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- winpr/tools/CMakeLists.txt          | 18 +++++++++++++-----
+- winpr/tools/makecert/CMakeLists.txt |  6 +++---
+- 2 files changed, 16 insertions(+), 8 deletions(-)
+-
+-diff --git a/winpr/tools/CMakeLists.txt b/winpr/tools/CMakeLists.txt
+-index 5719c1c65..225b70744 100644
+---- a/winpr/tools/CMakeLists.txt
+-+++ b/winpr/tools/CMakeLists.txt
+-@@ -28,7 +28,8 @@ set(WINPR_TOOLS_API_VERSION "${WINPR_TOOLS_VERSION_MAJOR}")
+- 
+- set(WINPR_TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+- set(WINPR_TOOLS_SRCS "")
+--set(WINPR_TOOLS_LIBS "")
+-+set(WINPR_TOOLS_PUBLIC_LIBS "")
+-+set(WINPR_TOOLS_PRIVATE_LIBS "")
+- set(WINPR_TOOLS_INCLUDES "")
+- set(WINPR_TOOLS_DEFINITIONS "")
+- 
+-@@ -64,11 +65,18 @@ macro(winpr_tools_include_directory_add)
+-   endif()
+- endmacro()
+- 
+--macro(winpr_tools_library_add)
+-+macro(winpr_tools_library_public_add)
+-   foreach(_lib ${ARGN})
+--    list(APPEND WINPR_TOOLS_LIBS "${_lib}")
+-+    list(APPEND WINPR_TOOLS_PUBLIC_LIBS "${_lib}")
+-   endforeach()
+--  set(WINPR_TOOLS_LIBS ${WINPR_TOOLS_LIBS} PARENT_SCOPE)
+-+  set(WINPR_TOOLS_PUBLIC_LIBS ${WINPR_TOOLS_PUBLIC_LIBS} PARENT_SCOPE)
+-+endmacro()
+-+
+-+macro(winpr_tools_library_private_add)
+-+  foreach(_lib ${ARGN})
+-+    list(APPEND WINPR_TOOLS_PRIVATE_LIBS "${_lib}")
+-+  endforeach()
+-+  set(WINPR_TOOLS_PRIVATE_LIBS ${WINPR_TOOLS_PRIVATE_LIBS} PARENT_SCOPE)
+- endmacro()
+- 
+- macro(winpr_tools_definition_add)
+-@@ -89,7 +97,7 @@ addtargetwithresourcefile(${MODULE_NAME} FALSE "${WINPR_VERSION}" WINPR_TOOLS_SR
+- 
+- add_compile_definitions(${WINPR_DEFINITIONS})
+- target_include_directories(${MODULE_NAME} INTERFACE $<INSTALL_INTERFACE:include/winpr${WINPR_VERSION_MAJOR}>)
+--target_link_libraries(${MODULE_NAME} PUBLIC ${WINPR_TOOLS_LIBS})
+-+target_link_libraries(${MODULE_NAME} PRIVATE ${WINPR_TOOLS_PRIVATE_LIBS} PUBLIC ${WINPR_TOOLS_PUBLIC_LIBS})
+- 
+- installwithrpath(
+-   TARGETS
+-diff --git a/winpr/tools/makecert/CMakeLists.txt b/winpr/tools/makecert/CMakeLists.txt
+-index 37b831125..0af1fcc08 100644
+---- a/winpr/tools/makecert/CMakeLists.txt
+-+++ b/winpr/tools/makecert/CMakeLists.txt
+-@@ -31,11 +31,11 @@ endif()
+- winpr_tools_module_add(${${MODULE_PREFIX}_SRCS})
+- 
+- if(OPENSSL_FOUND)
+--  list(APPEND ${MODULE_PREFIX}_LIBS ${OPENSSL_LIBRARIES})
+-+  winpr_tools_library_private_add(${OPENSSL_LIBRARIES})
+- endif()
+- 
+- if(MBEDTLS_FOUND)
+--  list(APPEND ${MODULE_PREFIX}_LIBS ${MBEDTLS_LIBRARIES})
+-+  winpr_tools_library_private_add(${MBEDTLS_LIBRARIES})
+- endif()
+- 
+--winpr_tools_library_add(${${MODULE_PREFIX}_LIBS} winpr)
+-+winpr_tools_library_public_add(winpr)
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb
+similarity index 98%
+rename from meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb
+rename to meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb
+index f43c8cc7d2..2a985522c0 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.32.1.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.32.2.bb
+@@ -8,9 +8,8 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=main;protocol=https;tag=v${PV}"
+ inherit pkgconfig cmake ptest
  
--SRCREV = "cac3d136b5e37bfbe3288c8591f6f4fcf9870599"
-+SRCREV = "e89a91f13cdee432d97ca9d3d1ac1969ff797036"
+-SRCREV = "bf217a504e54cc719880c228e82353382cd7d4fa"
++SRCREV = "97eff6ddfbbfaa8e42a126d362686bd001ff8bdc"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
+-           file://0001-winpr-tools-link-only-winpr-public.patch \
+            file://run-ptest"
  
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
  
