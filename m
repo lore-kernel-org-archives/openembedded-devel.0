@@ -1,60 +1,60 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36191.1793161455612621385
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.36041.1793161461952775222
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Oct 2026 21:24:15 -0700
+ Tue, 27 Oct 2026 21:24:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ZSPpezw4;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-3aded3c6103so291382a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=jBJWwukb;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-ca766c1c9ccso241630a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Oct 2026 21:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793161455; x=1793766255; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793161461; x=1793766261; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SFKa95pacYmxD4fyvvH7JpYlJS5wAUEwj2Ix4xN8Gm0=;
-        b=ZSPpezw48yyDIJgQGZbreddPQPJoVVrddhXPrQ68O2nPoBx/M0tCnsSdNOOgHnJ971
-         UwTTjLQdq41hBalGGEJP9mNi71EVMSPq53Ljk/I9onDftwi0cJ/W3S//hTzJVI6S06D6
-         r+7Ap2rK5tmEjS1rvvTZTIHkNeGnns74kjmLnrs7bn3ufrguWRy3n504SRhx9SY4diYZ
-         7dPOEVjvpMPXOnvUIdGAoj8gg/3s6/XmWhTTBamdtrTviAP74SfhOYgPiFilikPwxy9e
-         +u+28rs831NEggmFcnaJm3U9+RS9opXI51B7JeUwHn+bFIDbNte4xrOnVYP3T0G9TBkt
-         mLUg==
+        bh=DLI0VP/Jt3BBslil/tHzmXSVaQanww03QlU4UwGU1P8=;
+        b=jBJWwukby7n2Bq15k9MrK/UaI2eQCvjg0X1faGKKtLiFeybUFJcpWwtPmIkyQlrguw
+         Qc9RggQQtgHFp0i4rkCRyRv2CrrOcEGJenzNW35yijeSOcICDXXhaDqflyCkuFBPqcyT
+         I3Y8t7Ia+z/YvJY/MblWow0i+AhlmFParQ8F4tydKcLO/sSYwfVe7nhfWM3g+dToUO+1
+         iPQcakg7BHh7Zk+3dJBw6lCgsUTn6PIJTm0Tp5hyUWEDHzT1WM4aVv4NCkve8vuIQfpN
+         lz353J2GW5m7IaXaSV3/q8yvEWjiFwEDDKzFx3ANzACiOoHWGF+mh0X+9jCNmBEZTDEt
+         KkJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793161455; x=1793766255;
+        d=1e100.net; s=20260707; t=1793161461; x=1793766261;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SFKa95pacYmxD4fyvvH7JpYlJS5wAUEwj2Ix4xN8Gm0=;
-        b=vS3rSwf6tGlVI12IvN5qGcuawpFMG9zSBwuu8WIVAJzgGuK90N3TpIzhguK1igThlk
-         +4akGzjxV4gi3r+WGTh1aqSjmEg7S4V7hx5DI1fb6smPslvBq17G1qivzhwOOkqERlXY
-         1UNvY5Y7v1GJJe+Wsd0TqbFrJ2WTbdd+AHaiGaeqqtSCUbU3oS6xXhsO5TM60+jo93/V
-         m0+Zyq4bPF4j1Ggvvnk+3raXb9acAlBQzn81nCGIfM6aT7m3jzgWsdJ91hSvsTWCbgEc
-         u/NymR/IsnU9N5C04ywLoZxIqM92XT6OSacvQ8JYObiIbTssW4jh9fIbH7dRqLDJ37Px
-         t/EQ==
-X-Gm-Message-State: AFq9FYJvnMI37riP7P+UlHq1hQXgsgpOVtdIlbzQJV2FKQis+H4nRFiz
-	MHSK6LDu0yLK+kDgYLYKrT//9DfcAvOjLerZHs2pX3YGYdXGPctpz6yc5/84Tw==
-X-Gm-Gg: AYBFou0YqMlPL8tRK2eiFPahoNwYtUSeG5CfWHVOrdqI5l8TyenflgBnY6OI/l/gR7W
-	eAtF6u7dj1YxgiCzUWw4z0ZuBq0iBMJIMiiXEE2z5KsYBsOGDJmpuRrAJyOTffm9Kvp31eHvr+3
-	OYe3chdeLJK46BWgIz4JIQ1ZoUuVXqY9ZJtNvEj+q+Bke/JgA8XsF1SEG/RWNg0vN+igjR3g2XG
-	ryorLY2+J4SCIogGWLV0F1+hGgsb2s8MhTIHyFrjlPhNkeNCcAWQ75GFrZDNDZy+p5aMX0ZY8vg
-	T6eqHTDP5R1qiJe09ms9R3StCEP1+DOJY6MbPPYnlvKkd0vaEpkMcM0xHVqfElLZb+ii8qj7wRz
-	l3zi1VPy/Ypoufpny2E/9AqndWU1JcZUsIfBXJqmDSqfvtQvfGMWIt30H/B1TjGu9IQ52fiPkC0
-	jSw91BoCyC26V0b3RsAGoiiStqjSXNJTNsv3syXT2IBVaSECVzyE5yjFipNWgF/Iiq0F/gW2Rrs
-	dK9VBgW4PZXs6vgH2bO5scd/n4gXsC/pntQb7UrH+Dj+fAHpiClsECovqG5gQ6H1LwCbGKrI8RE
-	OnQPS40gdMn3cC5DnigpvRLbYhUMExIhCjXk5zfFXEGgyiORzbXTqfEyk8Q3Nw==
-X-Received: by 2002:a17:90b:4ac7:b0:3ac:403d:6239 with SMTP id 98e67ed59e1d1-3ae58161237mr785572a91.43.1793161454853;
-        Tue, 27 Oct 2026 21:24:14 -0700 (PDT)
+        bh=DLI0VP/Jt3BBslil/tHzmXSVaQanww03QlU4UwGU1P8=;
+        b=Sy5NSAepN6y1qZhE1K+hjFLdoDcV3vh5i/0C4aCOPC6RqIsFFyXqirZmUu+DklujGZ
+         ZT+qwE7m9dW8O4HXnzZB+DaeQunYH6z+w2dT68BHXS9249iFO3899KvNFfnN4W+Kwrmb
+         HjbzsOQj+5WeR6SxBL2cVlDddF5QfW/6stFvZ7BP3Bl7kH4bSbrlXdtiMCjoRDwKMq+K
+         qe6EBV+LbM5pgs+0HM0k6gaePGrhSpofcaWzd3TctahY5Dt4PWs+98SKH/D7KjF17Klj
+         OBkCk8rzcB5Me45uGT0mDR9XcNiOfMuz+fbAywRzblnzMgCZg0JxLIjgT49fSlv4QabY
+         tElQ==
+X-Gm-Message-State: AFq9FYJVOzaKPHr/6ryaADZL06vQgzC4zudFYnS0mA1UhyCgmdHX6jA3
+	2o0/dKhCVAWdZ0XQqY4Iai+jX0mUtknrpNu+6yoHBoIAT/qYjqjEFNIYhgTWPQ==
+X-Gm-Gg: AYBFou3Ifm97xAVEz2Fx0+mlNOdwBlJy4+hVKLHYV+hnrAYFtgakmYpK8DU+iDPQuof
+	ERjaqx0utGNbar+f/g2hQtDAohpmu0HfxHHwNbRJOy9eD7yFO9zlZeqyEmkGp4DVcxXGxNefnIT
+	S+MPtEOUxMK+OFFC2/7n3winJlggSVjvxuZ2oILzJWuP6Yen7fKnEuzCW0dRcVBxgnaoTN6aoru
+	+yfWiUZbMYzfTMwS3D2mGfrBok7BqQRRQBFAwtkxyQ4h+9cp345JYhX+Ut8sEeAO45KEGk5hiQZ
+	kvYzRkBozSY5XXKRhVsOJOKYyw/feHw/W1h3ChHB5vpzlKIoeULtUlECFFUKfd8Zx5p2HPi3yFu
+	fYcpwB87wC5cw3tNSxOc4CGHxvEDhXwImPoOPYn1SuziPaR4ZMOKku0D+a07/i5BvcQ+fobX/SM
+	HQhkM9B9zRbxkiv4OKuwyhSUAZegGcehNWhWIRzluX/jrgTIPMAjvMCy1zHWCtH8OlAlagW4zz9
+	3BWplDUbPRG48fWbTSyN0FfQFGgE0shpyoQy54Yt1Osn0wkhedhpgdoiKHETB5rj8kyoVQ9CMc7
+	LYVHa92NNvRKW2SmQndmsvi+GLI+J3S4gbMNDhoqaggArTWV2qxbU5KQoXqHpA==
+X-Received: by 2002:a17:90b:224f:b0:3ac:a7ee:6760 with SMTP id 98e67ed59e1d1-3ae57f637d9mr795339a91.23.1793161461274;
+        Tue, 27 Oct 2026 21:24:21 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae5a48c2d3sm1010794a91.5.2026.10.27.21.24.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 21:24:14 -0700 (PDT)
+        Tue, 27 Oct 2026 21:24:20 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [blacksail][PATCH 03/60] tmate: patch CVE-2026-4751
-Date: Wed, 28 Oct 2026 17:23:01 +1300
-Message-ID: <a145655a58bba21447ca6469d9e352858296c6bf.1793161233.git.ankur.tyagi85@gmail.com>
+Subject: [blacksail][PATCH 06/60] xdg-dbus-proxy: upgrade 0.1.7 -> 0.1.9
+Date: Wed, 28 Oct 2026 17:23:04 +1300
+Message-ID: <991d0967810dc1dc6bb903f875264a3b744f69ba.1793161233.git.ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1793161233.git.ankur.tyagi85@gmail.com>
 References: <cover.1793161233.git.ankur.tyagi85@gmail.com>
@@ -62,111 +62,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 28 Oct 2026 04:24:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131555
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131558
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-4751
+Changelog:
+https://github.com/flatpak/xdg-dbus-proxy/blob/0.1.9/NEWS
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tmate/files/CVE-2026-4751.patch           | 75 +++++++++++++++++++
- meta-oe/recipes-extended/tmate/tmate_2.4.0.bb |  1 +
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-extended/tmate/files/CVE-2026-4751.patch
+ .../{xdg-dbus-proxy_0.1.7.bb => xdg-dbus-proxy_0.1.9.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/xdg-dbus-proxy/{xdg-dbus-proxy_0.1.7.bb => xdg-dbus-proxy_0.1.9.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/tmate/files/CVE-2026-4751.patch b/meta-oe/recipes-extended/tmate/files/CVE-2026-4751.patch
-new file mode 100644
-index 0000000000..faf3d2a3ae
---- /dev/null
-+++ b/meta-oe/recipes-extended/tmate/files/CVE-2026-4751.patch
-@@ -0,0 +1,75 @@
-+From 27f07d414949259f17aebc02a61f103629d547f1 Mon Sep 17 00:00:00 2001
-+From: npt-1707 <npthanh132@gmail.com>
-+Date: Tue, 10 Mar 2026 00:19:33 +0800
-+Subject: [PATCH] Fix CVE-2018-19387
-+
-+(cherry picked from commit 3e12f558c7b71b7135403cdd2df77d38538a695c)
-+
-+CVE: CVE-2026-4751
-+Upstream-Status: Backport [https://github.com/tmate-io/tmate/commit/3e12f558c7b71b7135403cdd2df77d38538a695c]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ format.c        | 2 ++
-+ input.c         | 2 ++
-+ server-client.c | 6 ++++++
-+ window.c        | 2 ++
-+ 4 files changed, 12 insertions(+)
-+
-+diff --git a/format.c b/format.c
-+index f771c85f..3bbb8cf1 100644
-+--- a/format.c
-++++ b/format.c
-+@@ -468,6 +468,8 @@ format_cb_pane_tabs(struct format_tree *ft, struct format_entry *fe)
-+ 		return;
-+ 
-+ 	buffer = evbuffer_new();
-++	if (buffer == NULL)
-++		fatalx("out of memory");
-+ 	for (i = 0; i < wp->base.grid->sx; i++) {
-+ 		if (!bit_test(wp->base.tabs, i))
-+ 			continue;
-+diff --git a/input.c b/input.c
-+index 18c8eb9a..8a66d89e 100644
-+--- a/input.c
-++++ b/input.c
-+@@ -766,6 +766,8 @@ input_init(struct window_pane *wp)
-+ 	ictx->input_buf = xmalloc(INPUT_BUF_START);
-+ 
-+ 	ictx->since_ground = evbuffer_new();
-++	if (ictx->since_ground == NULL)
-++		fatalx("out of memory");
-+ 
-+ 	input_reset(wp, 0);
-+ }
-+diff --git a/server-client.c b/server-client.c
-+index 21cccc85..e8614d40 100644
-+--- a/server-client.c
-++++ b/server-client.c
-+@@ -121,8 +121,14 @@ server_client_create(int fd)
-+ 	c->cmdq->client_exit = 1;
-+ 
-+ 	c->stdin_data = evbuffer_new();
-++	if (c->stdin_data == NULL)
-++		fatalx("out of memory");
-+ 	c->stdout_data = evbuffer_new();
-++	if (c->stdout_data == NULL)
-++		fatalx("out of memory");
-+ 	c->stderr_data = evbuffer_new();
-++	if (c->stderr_data == NULL)
-++		fatalx("out of memory");
-+ 
-+ 	c->tty.fd = -1;
-+ 	c->title = NULL;
-+diff --git a/window.c b/window.c
-+index 45ec7790..9d95bb77 100644
-+--- a/window.c
-++++ b/window.c
-+@@ -945,6 +945,8 @@ window_pane_spawn(struct window_pane *wp, int argc, char **argv,
-+ 
-+ 	wp->event = bufferevent_new(wp->fd, window_pane_read_callback, NULL,
-+ 	    window_pane_error_callback, wp);
-++	if (wp->event == NULL)
-++		fatalx("out of memory");
-+ 
-+ 	bufferevent_setwatermark(wp->event, EV_READ, 0, READ_SIZE);
-+ 	bufferevent_enable(wp->event, EV_READ|EV_WRITE);
-diff --git a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
-index 5fb28b0085..9027826ea6 100644
---- a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
-+++ b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
-@@ -8,6 +8,7 @@ DEPENDS:append = " libevent libssh msgpack-c ncurses"
- SRC_URI = "\
-     git://github.com/tmate-io/tmate.git;protocol=https;branch=master \
-     file://0001-fix-finding-msgpack.patch \
-+    file://CVE-2026-4751.patch \
- "
+diff --git a/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.7.bb b/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.9.bb
+similarity index 93%
+rename from meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.7.bb
+rename to meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.9.bb
+index eb21f701d6..1a65874155 100644
+--- a/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.7.bb
++++ b/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.9.bb
+@@ -16,7 +16,7 @@ SRC_URI = " \
+     file://run-ptest \
+     "
  
- SRCREV = "5e00bfa5e137e76c81888727712ced2b3fd99f5b"
+-SRCREV = "6a170fa77e3cbecb48f9dd2478fe5c0a119eb467"
++SRCREV = "72b40c8f6d9d585cfbdb249690724f740d207087"
+ 
+ CVE_STATUS[CVE-2026-34080] = "fixed-version: fixed in 0.1.7"
+ 
