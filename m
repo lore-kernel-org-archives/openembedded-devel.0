@@ -1,125 +1,165 @@
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.97])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8781.1793269923975124638
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11123.1793278388304592213
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 03:32:05 -0700
+ Thu, 29 Oct 2026 05:53:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@gomspace.com header.s=selector2 header.b=NbkKIUrC;
- spf=pass (domain: gomspace.com, ip: 52.101.70.97, mailfrom: mns@gomspace.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H0ifM/GenQkHTvHX707JvsuX++I2/5IzCJLm7YkAM2uFgK80MQfeRuPYYAw1jzQZHtjy2kjug5MhpYOCWZis5khu2c0NVCqG6Hy79ntNt8ZsasI0C6RHyx96XmYkpuviWnTH8tZBLS6/7M3kOu8JrUY/VC8IRStE/7gQdgQvioz2FaGoWBQ+y8lvVeWFC5mG16zl9XPZf1U9pyDqK+3XGNilQixObQhSpLVuU4EsHbepiI7EyM6XRKV6wrEqQ6o1EkE8nJGtWq7AOmpjVwMloEmViKfP0ZWrAUxYYlfnZNQbUzu49fyz5C9gSko80AKljOEO2TpfNwL8z7PhFeVnDA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RpOQqBD6FFeZzadoF2slMyZQfQgOqTunULlqmmG36FM=;
- b=lu40lo5xcq3W6NEpNUZ9eD5njhuYagUeYkCW6vF2KZwjAftPizWunXJG1iKdk4UfYz0O8Aqk5z7z/5PIYtUeRFa5cgA0923defo/hsTAxHqzbtECv9zF3j2hPwXhzgeOvUL1QA9IBwNZiYJtYjpxlj2IO8Ft7/FHgb3R91l4dMFaopfU0C4+Ls5cs5MBr7LkmqYnmIAvHFlQTamLXPn6Kh3cRSa7jBTSd/SDILTmlzK9b8cVH8kIwu2HFGSSLgK4TnDLvQxQXBu3kFnfVmq7QHUSwNZ+dDkuhlmq1IEWIupFlFj3aA2BPhd9GSsMnK0NiyiWaUbGBDBBvKQVKRTb9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 77.233.245.163) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=gomspace.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=gomspace.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RpOQqBD6FFeZzadoF2slMyZQfQgOqTunULlqmmG36FM=;
- b=NbkKIUrCo0d8+sgH3vRvsIPL5sDFfP+R5xAWuMICLdLwtG9CB1yOdm3244YUC+BUm3ascV10FGSwh6omaxbLb2Rm0LC2CpebKNOXakOUfhO3zX9Yvw6bvP0tDnGIzcDejLZDsEZkqZO3Kt2Rw2YmpY8ApGCxCX0ioBy9rtc0wAU=
-Received: from PR3P193CA0040.EURP193.PROD.OUTLOOK.COM (2603:10a6:102:51::15)
- by DB4PR08MB9312.eurprd08.prod.outlook.com (2603:10a6:10:3f4::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Thu, 29 Oct
- 2026 10:31:58 +0000
-Received: from ZR1PEPF0000E6B8.eurprd07.prod.outlook.com
- (2603:10a6:102:51:cafe::7c) by PR3P193CA0040.outlook.office365.com
- (2603:10a6:102:51::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.8 via Frontend Transport; Thu, 29
- Oct 2026 10:31:58 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 77.233.245.163) smtp.mailfrom=gomspace.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=gomspace.com;
-Received-SPF: Pass (protection.outlook.com: domain of gomspace.com designates
- 77.233.245.163 as permitted sender) receiver=protection.outlook.com;
- client-ip=77.233.245.163; helo=webmail.gomspace.com; pr=C
-Received: from webmail.gomspace.com (77.233.245.163) by
- ZR1PEPF0000E6B8.mail.protection.outlook.com (10.167.241.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Thu, 29 Oct 2026 10:31:57 +0000
-Received: from DK-AAL-EX03.gomspace.lan (10.0.1.61) by
- DK-AAL-EX03.gomspace.lan (10.0.1.61) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.56; Thu, 29 Oct 2026 11:31:56 +0100
-Received: from ThinkStation-P3.gomspace.lan (10.0.8.56) by
- DK-AAL-EX03.gomspace.lan (10.0.1.61) with Microsoft SMTP Server id
- 15.2.2562.56 via Frontend Transport; Thu, 29 Oct 2026 11:31:56 +0100
-From: Martin Siegumfeldt <mns@gomspace.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Martin Siegumfeldt <mns@gomspace.com>
-Subject: [meta-oe][PATCH] luaunit: initial recipe
-Date: Thu, 29 Oct 2026 11:31:38 +0100
-Message-ID: <20261029103139.3887962-1-mns@gomspace.com>
-X-Mailer: git-send-email 2.55.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Lx/kiP1Q;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a5b2be99a8so17650065e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 05:53:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1793278386; x=1793883186; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zU+gqZwiSA07AchNW5vc0Le+3SKfGCLiG1yjiry6CAM=;
+        b=Lx/kiP1QV1Uc9wII2TaKLczpqHJbvjU88q0yf122ShftwpQvN4gG+PQQuErySIjoZX
+         sD2I2IYWcif0k452fWPhtdXdwalLfoJroERKHhErLK5MW4sUpLFUKYAxc9C23PlRe/rx
+         HmyV9te0L87rqFo8mlAS26auEINmOoAWqtrCA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793278386; x=1793883186;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zU+gqZwiSA07AchNW5vc0Le+3SKfGCLiG1yjiry6CAM=;
+        b=NRZADZNhcv5LlA/GIbT7uMGYg9UlXQ5TkNkTJ3ipvy+kCAYfY33zPZU4tyxcbo6GE7
+         EpCnsdVNEVdD4KsCCwVa2uwA1NGRf5F83yr5Eb5+DTSQjhBjgnu8BnrNmkZ+0PrUxye6
+         jKgv/+OFTIe4yKaIX4cv+uajKVvlkWf0OaOziqfbf1n7o0kSBwRB9hUbmDFIofZxAMs9
+         Af8lZ8eApCxwrD7HtKPrvuEYyo1DNWf+sldOD67ed33HbvwdPZGGhrZNbDjYAiMAysm0
+         mepXRrIfiLpXzheuwWzC7jvBgQbAs8hPBQBSERIx0XCzzf8xl27qc/hiKial9c05AEbZ
+         qV0A==
+X-Gm-Message-State: AFq9FYJga39xIgyC78RXLKIHTQbKt9HoaZSkVkCRvEFYtXu5cSr13Qdd
+	ukc738zpPclgDbfm8wfBuWiLyA0NsQm92p8DIauY0HDl6WBkOZ+gr85hZnNLyx5fZj5EF0ND25e
+	1MNqP
+X-Gm-Gg: AYBFou2MRprKertFSMdRik0l2YajUxkxiv8D/Nsrlg/I9DxruKh2Co/x/xu1E5d3WcM
+	lppz2uGsLmDLxD94RNFM8WZ6ckwJY8CX/iG7EXoxptjVhNrE0dR/ci2sPxR5VJZN15bIaZpXrJc
+	UiBYbapxR3178YHV09QrDXbRmAMCU7Ro3ZPPTQq5y3LTrfiHJ6zZueJtAQ7Ov6HQdPy+p/YU4Wk
+	lMM5rU8hDxzCmYhX5/ZGydWmRLOypcOq4BZMHJuieQY5/Ugq8XyXj0t8wjx/jInm3XNcHw+Y1eA
+	xht2yzNLGXYEbnO4ojOxzYw1sbcJeypviP1MC7Mx2AtfAsDJLHvOyZ8R/dcDVQMixxBnCni1Wz0
+	IvgyIiYS2dOn9AVU28KXkdf5g6GurM4SrvQxnfq5Ts84/io76ve0YYfg41zffSYWAJLcUNtwgff
+	aVDBH/6fhVhhSOozxXP5GGJU0hTu7JUCtbdauIo+u4Jxg2GVY4gMDSFs5P2wy4YxNhxilznpqTW
+	JEB5t5zeVyRnAQdA6fsXAng/2HNp7LyWudUXQa4GPwjH0xQJwkMtuqxY51sQ8Dl/ZcxtGf6lUkN
+	A4zfkgfwIxvXN//f5h2l7cFE3FoAGHD8Bf8cA6kyI7TBQK9n93MnueX/zNw9cifvwaxSyQ7iv0s
+	e61BdhT0xaH2us8iMatQF0wO8ZsOINQnAA48+wjpFeLxTsVgvX6OM2w==
+X-Received: by 2002:a05:600c:3b24:b0:4a3:5a98:c279 with SMTP id 5b1f17b1804b1-4a966c41c8dmr126089755e9.8.1793278386356;
+        Thu, 29 Oct 2026 05:53:06 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4aa7f4188f4sm61465685e9.4.2026.10.29.05.53.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2026 05:53:05 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-starlette: Upgrade 1.6.0 -> 1.10.0
+Date: Thu, 29 Oct 2026 14:53:03 +0200
+Message-ID: <20261029125303.811460-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-Path: mns@gomspace.com
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZR1PEPF0000E6B8:EE_|DB4PR08MB9312:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0daf8235-5e98-48d0-9f54-08df35a7dc1d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|260925022911599003|260925021911599003|260925021311599003|11063799006|261026121527099003|56012099006|261009223027099003|10067099003|261021121427099003|18002099003|6133799003|3023799007;
-X-Microsoft-Antispam-Message-Info: WI1moAVU4A4Yb0lT9KnyE8UBmzBptEPq+NSj6xS6T1xTMgYeysHc2TJN+TqY33OfRxThdG6JUvaWb9FtCxg9zyj1XBsbCl7/ehRdskCRzg5eHsOUn2C0yyghwuLcOJbVpIGoG1XA5rvBsw+nH6xADKZ3w8W/x6tlH1kX0paYRods6ABuEk/+1NYgKRaPOHGl+e0oqy8ptSP20KCZGWXW3BZWLgRaMPLoPDX9s7gi/AD4N0RU01HKxfW1s/AfqYEdGIlzpsib6Ehj+gageGZMp9yZB+W3mka2HoOtnxPqmKk9kBeprsVBbPSo8XsVqhYrPrNipiXzpTzXVtrWhIfs9W7x5HDqHM65BpE1Ph9ztt3GkXX7k9TaJyNQ///unSDOqvcEB/gPVt5VBP8M0qkbmcwgd4sE90Jva49IZaubnenPBoU2JxTMc71DlFQKSkPg1tw+pID2f3EWyuVdLod3OmFZ0lPudQbtqBTjWWi7nYjFmimPuMrOI0cr71AyRrCIgyIEhUXm9kTgoJMF+WKO3XnKjvHCV2+Vp/n8xHhX/+fyXDDhxZtLt2TDJzqkFIVlKOxS4AiTiP2oHA8NO6cWi9nMFpVfSTy7NV0hSwmhH3iZNM60RSXTpw10TJJwkSPL8qzPWQbeAiH+LvdYJpdHbAJPGIjuRG/jpNGwR2/BjQjz7qFQKGSzFavdUcBS/R4rybO7KQC2FiJmO1Qkgythvw==
-X-Forefront-Antispam-Report: CIP:77.233.245.163;CTRY:DK;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:webmail.gomspace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(260925022911599003)(260925021911599003)(260925021311599003)(11063799006)(261026121527099003)(56012099006)(261009223027099003)(10067099003)(261021121427099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Gj5GelJ5du/Q+tQfQz95ThppuKHWY1qOAdqYQp/D8ej4SdtfOmr+IGND5yEuOGM4U0hfzqE2IG/qfTbJpYNmSNrvOaG4Gb+X6K8uOQ97DD5HZGFllE8wVPr42AsLHLy7i7YhGul1GwW7aGMTDxAtkwmhZmNR3oc0hL4OChsClSZI6AN24k1XQJE5SGrqLc5cCdBXURkbZO6QlzmcTsB1RrIM2+ov4BScLMGNA/JhrWT0pnk8uQj32YA8l7tfzONS4zWHqxsfCYNfT/0QVzVfrZ7pvrytYdB6la6q+pzfYA9rgebziIdUCkv35egT4tUK8aliWZyt2ec/MktBmuXLQjW8z1qfcpvhYz2h8OaAQGwWPwNh8OCjkbnWGzKvjvLdLh6kOL+V4eBuac0azbyHZc21iNepWtWGYAMYRcnSNefv/Yot/ZkOCotHRjNMS9pS
-X-OriginatorOrg: gomspace.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2026 10:31:57.8080
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0daf8235-5e98-48d0-9f54-08df35a7dc1d
-X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;Ip=[77.233.245.163];Helo=[webmail.gomspace.com]
-X-MS-Exchange-CrossTenant-AuthSource: ZR1PEPF0000E6B8.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR08MB9312
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 10:32:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131658
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 12:53:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131659
 Content-Type: text/plain; charset="utf-8"
 
-heavily inspired from version in meta-microblx
+Upgrade to release 1.10.0:
 
-Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+Leaner URL-encoded form parsing:
+
+Starlette 1.10.0 parses URL-encoded forms with less memory and CPU, no
+longer drops the last field when a stream ends early, and lets you
+compare FormData that holds several uploads under one key.
+
+- Forms with many fields parse faster and use less memory (#3724).
+  FormParser builds each field in the parser callbacks instead of
+  queueing every event and replaying it. On CodSpeed, 1000 fields
+  went from 42.8 ms to 34.9 ms and from 63.5 KB to 54.5 KB, and the
+  max_fields limit case went from 6,880 B to 864 B.
+- The last field is kept when the request stream ends without an
+  empty chunk (#3599). The parser is now finalized once the stream
+  is exhausted, so custom streams that never yield a final b"" no
+  longer lose their last field.
+- FormData with repeated uploads can be compared (#3619). Comparing
+  two FormData objects with several UploadFile values under the
+  same key used to raise TypeError.
+
+Behaviour changes:
+
+- Multidict equality keeps the order of values under a repeated key
+  (#3619). Keys can still appear in any order, but
+  QueryParams("a=1&a=2") and QueryParams("a=2&a=1") are no longer
+  equal, matching what getlist() returns.
+- starlette.formparsers.FormMessage is deprecated (#3724). The
+  parser no longer uses it, and FormParser.messages is gone.
+  Calling FormMessage(...) emits a StarletteDeprecationWarning.
+
+Routing and URL generation:
+
+- Path parameter values that look like a placeholder are kept as
+  they are (#3725). url_path_for("route", category="{id}", id="42")
+  on /{category}/{id} now returns /{id}/42 instead of /42/42.
+  Substitution also got faster, from 549 ns to 520 ns with two
+  parameters and from 1,078 ns to 779 ns with five.
+- Route matching does less work per request (#3665, #3722). Match
+  members are compared by identity, cutting up to 4.9% of the
+  instructions per dispatch in the routing benchmarks.
+- WSGIMiddleware strips root_path only at a path segment boundary
+  (#3718). A request to /application under a root_path of /app no
+  longer becomes /lication.
+- FloatConvertor reports NaN and infinity correctly (#3716). NaN
+  was reported as a negative float.
+
+Middleware, responses and config:
+
+- Handled exceptions no longer keep requests alive (#3205).
+  Starlette clears the traceback after an exception handler runs,
+  so an exception instance reused across requests, such as a
+  module-level HTTPException, no longer pins per-request objects in
+  memory.
+- Middlewares accept http.response.start without headers (#3721).
+  BaseHTTPMiddleware, GZipMiddleware and SessionMiddleware default
+  the omitted field to an empty list instead of raising KeyError.
+- FileResponse ignores Range on methods other than GET and HEAD
+  (#3679). A POST endpoint that returns a file now sends the full
+  file, as RFC 9110 requires.
+- Config strips one pair of matching outer quotes from env file
+  values (#3720). KEY='say "hi"' now reads as say "hi" instead of
+  say "hi.
+
+Extend the ptest runtime dependencies to fix test cases from
+tests/middleware/test_opentelemetry.py.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb
+ ...ython3-starlette_1.6.0.bb => python3-starlette_1.10.0.bb} | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-starlette_1.6.0.bb => python3-starlette_1.10.0.bb} (82%)
 
-diff --git a/meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb b/meta-oe/reci=
-pes-devtools/luaunit/luaunit_3.5.bb
-new file mode 100644
-index 0000000000..5d6d6100df
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb
-@@ -0,0 +1,17 @@
-+SUMMARY =3D "Unit testing framework for Lua"
-+HOMEPAGE =3D "https://github.com/bluebird75/luaunit"
-+LICENSE =3D "BSD-2-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3cbaf542c6e9a9dcad6c372227a=
-c49a1"
-+
-+SRC_URI =3D "git://github.com/bluebird75/luaunit.git;protocol=3Dhttps;nobr=
-anch=3D1;tag=3DLUAUNIT_V3_5"
-+SRCREV =3D "9678c933e71cb26adcdfa6cf1baceb926398eb48"
-+
-+RDEPENDS:${PN} =3D "lua"
-+
-+LUA_VERSION =3D "5.5"
-+
-+do_install() {
-+    install -D ${S}/luaunit.lua ${D}${datadir}/lua/${LUA_VERSION}/luaunit.=
-lua
-+}
-+
-+FILES:${PN} =3D "${datadir}/lua/${LUA_VERSION}/luaunit.lua"
---=20
-2.55.0
+diff --git a/meta-python/recipes-devtools/python/python3-starlette_1.6.0.bb b/meta-python/recipes-devtools/python/python3-starlette_1.10.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-starlette_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-starlette_1.10.0.bb
+index 45ba3a5311..d8d19053c6 100644
+--- a/meta-python/recipes-devtools/python/python3-starlette_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-starlette_1.10.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Starlette is a lightweight ASGI framework/toolkit, which is ideal for
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
+ 
+-SRC_URI[sha256sum] = "d4e3ac5e546444960c710297a3c9fc3f7ebae1b7e963f3d36173b49da535be9b"
++SRC_URI[sha256sum] = "b8399098d4c1e3522734f7235dc79b1fc967f96cf139c81e0fa30479e0685f9b"
+ 
+ inherit pypi python_hatchling ptest
+ 
+@@ -30,6 +30,9 @@ RDEPENDS:${PN}-ptest += " \
+         python3-unittest-automake-output \
+         python3-pyyaml \
+         python3-httpx2 \
++        python3-opentelemetry-api \
++        python3-opentelemetry-sdk \
++        python3-opentelemetry-semantic-conventions \
+ "
+ 
+ do_install_ptest() {
+-- 
+2.47.3
 
