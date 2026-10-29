@@ -1,260 +1,223 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7740.1793266029820664072
+Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.1])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7491.1793264794375212497
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:27:09 -0700
+ Thu, 29 Oct 2026 02:06:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=EP07Qr4t;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-cdab6ae1ee9so965836a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:27:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793266029; x=1793870829; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=b2vj7RornLKYc++uyp99Qdq4ZPQUnFaj2VBHUN7VfLo=;
-        b=EP07Qr4twAu1toDFXsd2wQNZh38h+a6do1uUJWsvk6ucIIVC2G46N2xlds54JEw9lL
-         hk0DsxNw7HSn44H+lu/vhpzHd6MSU48nFi5neWlVx52fpCacUGoJRkJIpGhiVJTc81ut
-         fQRdtkUCuNU6IVVJFn4aKJdJ20KXwJF8lxKfHFFjsEd8YZfGPBuDFgORWF72y8HaiJm6
-         p1AENv/C9ObR4ZO82fhkoUUa2eQbeTDxJzTJ9HLgO78PtKa0WGolttu9HSNkYZIn5FGh
-         nPwEa41yFYrQNjXCnGkql5l0kvKXgwGAUMlcWjoBwqdHmhK4GR4jSNqXNyG6ow21mzKr
-         RS2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793266029; x=1793870829;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=b2vj7RornLKYc++uyp99Qdq4ZPQUnFaj2VBHUN7VfLo=;
-        b=jzDLlYcDwQD3dfvpitZ3O42m1vhE5+dQIvAdZvzHEpmSw7QFcHNwtquF4q1EpI7m6J
-         yP4J2XxjkmsG7fj48qf4tG97iIg15xEMJdZc9dqX8GXJsjbqXqvBzvy9EmUmSGbjm2tf
-         C8Bw9ZiWSdJqlc3HVy2sUfI88BBG9HQqqSLHoKwzBgUv1jM1tRJ+mC09dlqDwcMS1Bwm
-         iC5Ti83cqw4yIXNNhmLPgnKd6+b3auyAKj+iigtPvAEL99uBiOwlv3IH8Y2RolgpP8N/
-         zsh8rvVJr5u7W9jzmE9YKqC3FipN0u1nv6yzq+lZ6Dsng1P7U1TWD6UwIBP/9B20daac
-         DE8g==
-X-Gm-Message-State: AFq9FYK2pMsnbsG2hEqOcmuNht21AVp4bNPaYlv9F0MO6XWP6qXzcsk6
-	bqDnQDf5T3Z9GngaHjhAH2x6zIqsdy264pQLVog4h/ustbno68gHh31XIgXveA==
-X-Gm-Gg: AYBFou2eIj61U/57Fv318m7J6XmC3pS1CuUhkTLnc4QPUCY1EgxIQxsCIdyYomUZdrV
-	jaIGG8hg+UfSaeGe+icNE7/4IUqDDlfglz/0QITri1D3qsS8xSy5jw82dNGngTt+snmKOamMVW8
-	22oaDUP0tRaCpolZpT1B8o6kgApGlfmYxo52b15hHQ0pOuHF5enNSvQjtPvtzHnWO0gCY9azgPi
-	iA4JQ7ENSCiEauv2Kr6Asg6n83WNe/f4t63Bp5pMAq3WyEvo2XktO8NJGLWfGqTe0vvzHrOfkVE
-	Q6bTc1b+ShsLU1cGIJ9Vr71mioXgadvEgTIk1WCwomlZE+5fWqnnZ3zMCaeytaRXLNT7ArnuePG
-	yO2LjUOrclkO4XiTwsjCO1/WmJyOmqYx23Fs/GLMmtzJjUTt27ZXnsgx+yqGnMIIsnRf8RiQkR8
-	7gsInSlJndY9cECTSSgv75wWnHtIBN4ml54emqAEqXZ9bZ0oFPzJyhNXkzfhwECtoSNqR5sS9HC
-	VxSZU4oluKcTKPZyAhfGeifUZedJGcPHeiLREi7BVwaE/+CMWlnxN9WqpSyiUEBk7ieGKLKsqH8
-	AJffVd9r+8yP/1i3NuUYruRl8ihM/9Q1deK0wiMtAQE/V81xDN9TBMQGKmniR4VAuyKVKWbXXRE
-	vY4UDwz0=
-X-Received: by 2002:a17:90b:a09:b0:3ad:a270:a623 with SMTP id 98e67ed59e1d1-3ae57e35220mr2613700a91.4.1793266029101;
-        Thu, 29 Oct 2026 02:27:09 -0700 (PDT)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e874bebsm3513079a91.14.2026.10.29.02.27.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:27:08 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=qFK94r/4;
+ spf=pass (domain: est.tech, ip: 40.107.130.1, mailfrom: adarsh.jagadish.kamini@est.tech)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oOdU6ptfQ8RLWlCnHdwNAPiZUMlkNtqIpcoseNAXgU3fJ4lvC5shC9Aeg7HJ48ZcNAqi1A1x0UJI3Z0wjT+hIkAfAcm5oARXo3vUnlcWAF54Eqv/kNQ9U37j9AW3Wm8U4nf2cVH+37/unOemxxMMDcf4MLEsY0WwCQeBGP7kWU3ttnzTKducURFBwxrLOxNzFcaij6M0wt3k151VBs1lP8xgjXThZXAO6CpjZrK++LofvowagsdTJBsCK6bGbOk44cBRhbJth4ImbvUw5lGVBuz6BGSQlWtS6rbpu39vwFTuJ5vsZzC9sUOnk1f/I6trWvcPNYOdTluct1yBmc5ffQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uQs8qjTUjyWsa3fwywe0TD8RsL7AHJfJWOypqKu3apY=;
+ b=sNKhwJsSpJ/17M3jFddTDw+37VKk/lATgwz1ydTFsjAT4mH4vji3j+Qkw0C/h8iFEWfRqu3lASkbEgJgmRXVL3n0q6aQJQx0bb8r8Rtqdea6zPZIv3zaJbHj9FLqr2aZ7ACt7hBFT2iqJSeZT1nLqa+MhpR/99cR8kGbkon8UlwpBe+EB6WoMJNlKSyriCag3bivfBF7V7NWrWRmcE+uCQgmSFTzlLSLl9dBewP4mMVWLaRMgwMlOunqJ5phalEv1JTr2W8/XjVQuGmKLDjQiVwcgdbW0gk9EJZnQBnzPzyACM95iHqc2tW1SeTbL3W+ey+a3bdXNmL/7SdwKzfmTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
+ dkim=pass header.d=est.tech; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uQs8qjTUjyWsa3fwywe0TD8RsL7AHJfJWOypqKu3apY=;
+ b=qFK94r/4tpw80IcmFXCD++VrrU04wbJRsXHVgEf/5cQp/784xjZMelsZpioR+a6CnvS1QIkHGTeYCGjju366I5pkz2Jgwd02z2jjRuXICbDN1856xFxDCqDMepW705S4va1HeHaQJsFXu/YzLLqQVrCOn/EDBeSe3bxeX67KAI+C6rPYuLjCTtneQp1zH2mRo3BEKZv5gaiZjmTAjz/2JnpvX75NR4Z61CmpimeJJJL1+EsRv5Pgxvz/sgqddqWPmVN1aW2oef5o0Nyx55eVaCsU7Kuj8S6JM1Sdv7FPLcc4Mhe4VsaXtfrcme8L5b0c6EfpZKmi87b43se4K4erMA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=est.tech;
+Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:396::9)
+ by DU2PPF136EFA2F4.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::a85) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Thu, 29 Oct
+ 2026 09:06:30 +0000
+Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
+ ([fe80::f147:85e5:34de:eeff]) by AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
+ ([fe80::f147:85e5:34de:eeff%4]) with mapi id 15.21.0546.021; Thu, 29 Oct 2026
+ 09:06:29 +0000
+From: "Adarsh Jagadish Kamini" <adarsh.jagadish.kamini@est.tech>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 7/7] polkit: upgrade 127 -> 128
-Date: Thu, 29 Oct 2026 22:26:46 +1300
-Message-ID: <20261029092646.3634215-7-ankur.tyagi85@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH] strongswan: fix CVE-2026-78135
+Date: Thu, 29 Oct 2026 10:06:26 +0100
+Message-ID: <20261029090626.498332-1-adarsh.jagadish.kamini@est.tech>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
-References: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
+X-ClientProxiedBy: OS6P279CA0121.NORP279.PROD.OUTLOOK.COM
+ (2603:10a6:e10:3b::19) To AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:20b:396::9)
+Return-Path: adarsh.jagadish.kamini@est.tech
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8P189MB1672:EE_|DU2PPF136EFA2F4:EE_
+X-MS-Office365-Filtering-Correlation-Id: df72a679-1ae9-4c98-7388-08df359beb71
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|260925022911599003|260925021911599003|260925021311599003|56012099006|11063799006|261009223027099003|261009221227099003|261026140227099003|261026121527099003|261028144727099003|261021123027099003|261022105027099003|261021121427099003|10067099003|12006099003|18002099003|3023799007|13003099007;
+X-Microsoft-Antispam-Message-Info: 4nV8jeu+kmIhdw9Yv6Qu/+Z6KJpMS1IQMWqCPHYyIOCp4UjSpEkbIn77m7/OvpM5JQ3zd9hmmB5eioC47trD9i5cGqrXz/gBqGzDY14UU1SsnWR5wg10q3Us3fb+Yh76nex5MpwVD2qLdwSLQ57WLB61EDNn6AkYC32zbA3+Dk7DjhN6046NMmXFdXs6TE9KCbMOxxepIWxXMxScFmQe4Tp7JFO3diEmG1jd8e1qZSmrHhVt13G8ZSNte47IPZ9653qa0QBwRh0VVPZFAelKP2FMBV4bnSdzdVvOUg1JZyf6wtYaFvbzS1wwpCHZiVc+xXPaA0KjNb6MAGX/aFklZzYNeR5ey62hAmz+y3H5ZAGUbHs5Ixs1DbsmoranTeEEVCyb++HjliGu2k3hSmNzgPbcxf9cOglNa9vjvjZNvSUUasAxz4mMS1MDWIpJ5C0cYccXr5H2dZ6JDp5Hb68tb61W8siUqNpReRFTLJRopInfhl6+HSWA30P+Py+ISysI/fhGABVUNThtgH4hhwCj0V2bfNwfNo3tK2PPnGauEFrz+dTQHwKSZasvvOm46gDdCp0Pf19cYSdZ4ncs/4nUSwwOrnWeOy/7Ru8cZU3igowJ35XNVTbWIyBroBzrg1Qz
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8P189MB1672.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(260925022911599003)(260925021911599003)(260925021311599003)(56012099006)(11063799006)(261009223027099003)(261009221227099003)(261026140227099003)(261026121527099003)(261028144727099003)(261021123027099003)(261022105027099003)(261021121427099003)(10067099003)(12006099003)(18002099003)(3023799007)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6lX8Hafxh2E//B/D0eI0UhTZPce7YQzrY19DHpPWEgs8/1+9uWO92KgrbCO5?=
+ =?us-ascii?Q?NL571WRkd/UyZZU6b+YmYVrIBcYGLv8/F5LVj/2vhx7bDOtu3LwwM1X456D+?=
+ =?us-ascii?Q?Bt01gWcSDtwOlrhZgRfXgERqQOHY6/jezo7/etGGSXrfWqaNBloyqENRVvhi?=
+ =?us-ascii?Q?kRV1obRSS9ove7nIN9HRceYzR8F5vg8a+L9xkaSOUzIOSqUaaPpfZkunvSof?=
+ =?us-ascii?Q?3mn/mFSBNb7jAW6IjW7DDRFNk8w0FB0tNShgTRIpEQfi7PtWhAOFzlQBQEn2?=
+ =?us-ascii?Q?TAk7WdeG60GNV6CBjwNxfIZ+XbRBilNGLTpdXp1TG+aMRzeLpPSw/ZT9nCow?=
+ =?us-ascii?Q?xcZGhTsK4jKVzinTnUVIxffbTibDeQjCeLMCFda0hQM0us+x7OJei2b29Fjz?=
+ =?us-ascii?Q?cOO+WHzZ/RjYHipqFE6u5ndTdPkzk+S9U9jsKTk5zV32nS8SYhAGJ3Q4/0Mj?=
+ =?us-ascii?Q?s+SP/lmgZQqCMdpjn13mc/xpqX9uGKdfd0GBr8GI/w+OaRxt7uIigkKEidtb?=
+ =?us-ascii?Q?CLp2vj9GOj4nucpEm9bzfxN1yk5qGqFrT35rGg9QDhfkva+DKnRI4R2FMxHB?=
+ =?us-ascii?Q?Ev+gEJYIb/33kfV99N/gHeGB2CE8sGZ4ZMZx1QcxJgxNVXjtA6kI63AHhMhW?=
+ =?us-ascii?Q?7fAT+1WObBcojEXlJY1piUFQpERhRG8nF61tZS2R0HDH/aGM3s0UGqyb1eSb?=
+ =?us-ascii?Q?ITSeiw0hTx0nm0jtw+Rvrf4q+srwEbl5Eaw9m0u1YmWVS52pMJ4tyBgbS39g?=
+ =?us-ascii?Q?sgbM9A6+n6JlN9v4yv+2RtZwHUS1eXGVtvziO3Kp7+JB5vUHtNoI9Ej092/0?=
+ =?us-ascii?Q?g7IiDQhiJHIKPQ2j4Xj+fV2Vih6tFgOvBAySae54pY3Aj1IfAUh8zB9aOgkZ?=
+ =?us-ascii?Q?gLQIlpLP2Bc2DKe381BgMON4PZWj0xS5GL+Zo3aepAnp1qN227RBn5dpWyIn?=
+ =?us-ascii?Q?l5JsgTxe4YcLtWmE0RCpIXGnKGDY9SfpumYdSRH4A0BgcgZzVdxvSVtPlHvy?=
+ =?us-ascii?Q?XH3W4p8uqXXt7sMAK2reMgR3XebtS7WGTTDoaXJu02jqc85mN2TK6NpO0CeJ?=
+ =?us-ascii?Q?kjcj4S28oy2B/Rx1FBMLYRS4Uk0vS8lwPYdr8jBGTU0Zo7PBF0fpwfXpuq5N?=
+ =?us-ascii?Q?iN+cngb/P73+4rKq8C7xvPJFkzBQKbKrgOFUq1WrEUqPjVDjXEqc3gq4mNZC?=
+ =?us-ascii?Q?v228HUe4KxtzL6xsLhSTp2YmKYP2ny1WFNac/6yZFRGfsrDV9bWsVMjljXT+?=
+ =?us-ascii?Q?xQimt6T090yXphq4cAtAIjVz7YkpsIrWf1u7bIb0FGdOFvWhInfhCmA1rqOC?=
+ =?us-ascii?Q?Ge6EteIpRXspwEP21Q1l36szKNeGSYbFr2sqkGyOIqrgX6fpIQq3/0sJuwH5?=
+ =?us-ascii?Q?0/qqVyzbD1NQjONHpfifYS9s4YfCio5nLF3E0ksgjydxxuAybZvfXKqyBK9r?=
+ =?us-ascii?Q?m/02LitcgzRqs8fz29u0Y7qOaC/GWVYqD1NLzrqckLguIDmn6RyVMnYTPp+E?=
+ =?us-ascii?Q?Os+Ji5wnXjWtKTbto6gnBEsa99GJFTHYLBGORiTbcMpP9Ds62XTeyKRU3lyo?=
+ =?us-ascii?Q?eU22Cfh8WA732yNM1f5C+3/uGapyW6dqSVGwKKTs1IHg8rja5Ri+Z2CjHYZq?=
+ =?us-ascii?Q?1J0VOaSYmnm3N63zqz46cxcVo8Jeiv9frHmSN3P14KYYpc/pTcDNITNFsgoL?=
+ =?us-ascii?Q?oYL0qNje4ZUdzVbztYAemcgw1/2XkF0jJ6aHF35XeR5Ai9RigyW7aZUOn1Aj?=
+ =?us-ascii?Q?/JoXdq+VD4gHLPRB9J56sg4azkosREE=3D?=
+X-OriginatorOrg: est.tech
+X-MS-Exchange-CrossTenant-Network-Message-Id: df72a679-1ae9-4c98-7388-08df359beb71
+X-MS-Exchange-CrossTenant-AuthSource: AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2026 09:06:29.8063
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nROJFOemPE88paxyfU13COsK7KmjS7N4nNhCU21OjAVW7tyojIN5JQj2jSl5ksXebxgLjOlWgFEUj47T1kGRkX6eZCltIvaZUH6cl6qGlkM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PPF136EFA2F4
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:27:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131655
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:56:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131657
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Backport patch to fix CVE-2026-78135.
 
-Dropped patched that are part of the upstream version.
+References:
+  https://nvd.nist.gov/vuln/detail/CVE-2026-78135
 
-Changelog:
-https://github.com/polkit-org/polkit/blob/128/NEWS.md
+Upstream fix:
+  https://github.com/strongswan/strongswan/commit/4dcb132266a954202509a3b4b=
+3be99378f3e3b4d
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
 ---
- .../polkit/files/CVE-2026-4897-01.patch       | 64 -------------------
- .../polkit/files/CVE-2026-4897-02.patch       | 32 ----------
- .../polkit/files/CVE-2026-85498.patch         | 38 -----------
- .../polkit/{polkit_127.bb => polkit_128.bb}   |  5 +-
- 4 files changed, 1 insertion(+), 138 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
- delete mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
- delete mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
- rename meta-oe/recipes-extended/polkit/{polkit_127.bb => polkit_128.bb} (95%)
+ .../strongswan/CVE-2026-78135.patch           | 73 +++++++++++++++++++
+ .../strongswan/strongswan_5.9.14.bb           |  1 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta-networking/recipes-support/strongswan/strongswan/C=
+VE-2026-78135.patch
 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
-deleted file mode 100644
-index 96548ca771..0000000000
---- a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-01.patch
-+++ /dev/null
-@@ -1,64 +0,0 @@
--From 7e122c8a5120c2aae2d9d44a26796dc18f5b677c Mon Sep 17 00:00:00 2001
--From: Jan Rybar <jrybar@redhat.com>
--Date: Fri, 27 Mar 2026 15:57:01 +0100
--Subject: [PATCH] CVE-2026-4897 - getline() string overflow
--
--Report and fix by Aisle.com
--Pavel Kohout, Aisle Research
--
--Signed-off-by: Jan Rybar jrybar@redhat.com
--
--CVE: CVE-2026-4897
--Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/7e122c8a5120c2aae2d9d44a26796dc18f5b677c]
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- src/polkitagent/polkitagenthelperprivate.c | 23 +++++++++++++---------
-- 1 file changed, 14 insertions(+), 9 deletions(-)
--
--diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
--index 35bca85..7e4f94e 100644
----- a/src/polkitagent/polkitagenthelperprivate.c
--+++ b/src/polkitagent/polkitagenthelperprivate.c
--@@ -24,6 +24,7 @@
-- #include <stdio.h>
-- #include <string.h>
-- #include <stdlib.h>
--+#include <errno.h>
-- #include <unistd.h>
-- 
-- #ifndef HAVE_CLEARENV
--@@ -59,21 +60,25 @@ read_cookie (int argc, char **argv)
--     return strdup (argv[2]);
--   else
--     {
---      char *ret = NULL;
---      size_t n = 0;
---      ssize_t r = getline (&ret, &n, stdin);
---      if (r == -1)
--+      #define POLKIT_AGENT_MAX_COOKIE 4096
--+      char buf[POLKIT_AGENT_MAX_COOKIE + 2]; /* +1 for newline, +1 for NUL */
--+      if (fgets (buf, sizeof(buf), stdin) == NULL)
--         {
--           if (!feof (stdin))
---            perror ("getline");
---          free (ret);
--+            perror ("fgets");
--           return NULL;
--         }
---      else
--+      if (buf[strlen (buf) - 1] != '\n')
--         {
---          g_strchomp (ret);
---          return ret;
--+          /* Cookie too long - drain remaining input and reject */
--+          int c;
--+          while ((c = getchar ()) != '\n' && c != EOF)
--+            ;
--+          errno = EOVERFLOW;
--+          return NULL;
--         }
--+      g_strchomp (buf);
--+      return strdup (buf);
--     }
-- }
-- 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
-deleted file mode 100644
-index c47eee2014..0000000000
---- a/meta-oe/recipes-extended/polkit/files/CVE-2026-4897-02.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 39601309eb3e5e88a1c1fbda9a272ba8691f1bf3 Mon Sep 17 00:00:00 2001
--From: Jan Rybar <jrybar@redhat.com>
--Date: Wed, 13 May 2026 14:58:32 +0200
--Subject: [PATCH] Draining loop can keep polkit busy
--
--The draining loop is not really appropriate for pipe input, especially
--in a daemon.
--
--Co-authored-by: Frantisek Sumsal <fsumsal@redhat.com>
--
--CVE: CVE-2026-4897
--Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/39601309eb3e5e88a1c1fbda9a272ba8691f1bf3]
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- src/polkitagent/polkitagenthelperprivate.c | 4 ----
-- 1 file changed, 4 deletions(-)
--
--diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
--index 7e4f94e..c0a9825 100644
----- a/src/polkitagent/polkitagenthelperprivate.c
--+++ b/src/polkitagent/polkitagenthelperprivate.c
--@@ -70,10 +70,6 @@ read_cookie (int argc, char **argv)
--         }
--       if (buf[strlen (buf) - 1] != '\n')
--         {
---          /* Cookie too long - drain remaining input and reject */
---          int c;
---          while ((c = getchar ()) != '\n' && c != EOF)
---            ;
--           errno = EOVERFLOW;
--           return NULL;
--         }
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch b/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
-deleted file mode 100644
-index 891d9215c9..0000000000
---- a/meta-oe/recipes-extended/polkit/files/CVE-2026-85498.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From eea172967848bb4c5a407329f40c0e45de0d187e Mon Sep 17 00:00:00 2001
--From: Jan Rybar <jrybar@redhat.com>
--Date: Thu, 27 Aug 2026 15:02:45 +0200
--Subject: [PATCH] CVE-2026-85498: Unsanitized underflow in cookie input
--
--Credits for the report:
--Sunwoo Lee, Korea Institute of Energy Technology (KENTECH)
--Daeyoung Kang, Korea Institute of Energy Technology (KENTECH)
--Haeryong Park, Korea Internet & Security Agency (KISA)
--Hyuk Lim, Korea Institute of Energy Technology (KENTECH)
--Seunghyun Yoon, Korea Institute of Energy Technology (KENTECH)
--Juthawong Naisanguansee
--
--Co-authored-by: Jan Rybar <jrybar@redhat.com>
--
--CVE: CVE-2026-85498
--Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/eea172967848bb4c5a407329f40c0e45de0d187e]
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- src/polkitagent/polkitagenthelperprivate.c | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/src/polkitagent/polkitagenthelperprivate.c b/src/polkitagent/polkitagenthelperprivate.c
--index c0a9825..e2d2c9b 100644
----- a/src/polkitagent/polkitagenthelperprivate.c
--+++ b/src/polkitagent/polkitagenthelperprivate.c
--@@ -68,6 +68,11 @@ read_cookie (int argc, char **argv)
--             perror ("fgets");
--           return NULL;
--         }
--+      if (buf[0] == '\0')
--+        {
--+          errno = EINVAL;
--+          return NULL;
--+        }
--       if (buf[strlen (buf) - 1] != '\n')
--         {
--           errno = EOVERFLOW;
-diff --git a/meta-oe/recipes-extended/polkit/polkit_127.bb b/meta-oe/recipes-extended/polkit/polkit_128.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/polkit/polkit_127.bb
-rename to meta-oe/recipes-extended/polkit/polkit_128.bb
-index acd4386354..61dcdd0cb8 100644
---- a/meta-oe/recipes-extended/polkit/polkit_127.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_128.bb
-@@ -7,12 +7,9 @@ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
- 
- SRC_URI = "\
-     git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV} \
--    file://CVE-2026-4897-01.patch \
--    file://CVE-2026-4897-02.patch \
--    file://CVE-2026-85498.patch \
- "
- 
--SRCREV = "9e4894c969eecf26a3ba762f4f7a268aa0fb3e51"
-+SRCREV = "e6373dc19975d8583568c6cd7025d03e682ca956"
- 
- DEPENDS = "expat glib-2.0 duktape"
- 
+diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026=
+-78135.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-20=
+26-78135.patch
+new file mode 100644
+index 0000000000..d046ef78c1
+--- /dev/null
++++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78135.=
+patch
+@@ -0,0 +1,73 @@
++From 59468f3ba1a8084ea566a50d835d96bf02cebcef Mon Sep 17 00:00:00 2001
++From: Tobias Brunner <tobias@strongswan.org>
++Date: Mon, 27 Jul 2026 08:53:50 +0200
++Subject: [PATCH] ikev2: Properly reject CREATE_CHILD_SA requests on
++ unestablished IKE_SAs
++
++The previous check was not actually enforced as long as there were still
++tasks in the passive queue (it was originally added to fix an issue on
++initiators, so the passive queue was expected to be empty).  This allowed
++an unauthenticated attacker to potentially establish a usable Child SA
++if certain preconditions were met.
++
++First, it required that the initiator is authenticated with EAP so the
++authentication and the creation of the first Child SA is deferred.
++Second, the responder must either not configure an IP address pool or
++an explicit remote TS, otherwise, traffic selector negotiation fails.
++
++Note that the half-open IKE SA and the installed IPsec SA will be removed
++after the default timeout of 30 seconds.
++
++Fixes: 28b33d7cacd2 ("ike-auth: Support exchange between IKE_SA_INIT and I=
+KE_AUTH")
++Fixes: 8503077175cd ("ikev2: Reject CREATE_CHILD_SA exchange on unestablis=
+hed IKE_SAs")
++Fixes: c60c7694d2d8 ("merged tasking branch into trunk")
++Fixes: CVE-2026-78135
++
++CVE: CVE-2026-78135
++Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit=
+/4dcb132266a954202509a3b4b3be99378f3e3b4d]
++
++Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
++---
++ src/libcharon/sa/ikev2/task_manager_v2.c | 21 +++++++++++----------
++ 1 file changed, 11 insertions(+), 10 deletions(-)
++
++diff --git a/src/libcharon/sa/ikev2/task_manager_v2.c b/src/libcharon/sa/i=
+kev2/task_manager_v2.c
++index 8c07cf272d..6ac94b8679 100644
++--- a/src/libcharon/sa/ikev2/task_manager_v2.c
+++++ b/src/libcharon/sa/ikev2/task_manager_v2.c
++@@ -1088,9 +1088,18 @@ static status_t process_request(private_task_manage=
+r_t *this,
++ 	delete_payload_t *delete;
++ 	ike_sa_state_t state;
++=20
+++	state =3D this->ike_sa->get_state(this->ike_sa);
+++	if (message->get_exchange_type(message) =3D=3D CREATE_CHILD_SA &&
+++		(state =3D=3D IKE_CREATED || state =3D=3D IKE_CONNECTING))
+++	{
+++		DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
+++			 "unestablished IKE_SA, rejected");
+++		return FAILED;
+++	}
+++
+++	/* create tasks depending on request type, if not already some queued */
++ 	if (array_count(this->passive_tasks) =3D=3D 0)
++-	{	/* create tasks depending on request type, if not already some queued =
+*/
++-		state =3D this->ike_sa->get_state(this->ike_sa);
+++	{
++ 		switch (message->get_exchange_type(message))
++ 		{
++ 			case IKE_SA_INIT:
++@@ -1131,14 +1140,6 @@ static status_t process_request(private_task_manage=
+r_t *this,
++ 			{	/* FIXME: we should prevent this on mediation connections */
++ 				bool notify_found =3D FALSE, ts_found =3D FALSE;
++=20
++-				if (state =3D=3D IKE_CREATED ||
++-					state =3D=3D IKE_CONNECTING)
++-				{
++-					DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
++-						 "unestablished IKE_SA, rejected");
++-					return FAILED;
++-				}
++-
++ 				enumerator =3D message->create_payload_enumerator(message);
++ 				while (enumerator->enumerate(enumerator, &payload))
++ 				{
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.b=
+b b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
+index 661727e501..b2aebf188a 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
+@@ -18,6 +18,7 @@ SRC_URI =3D "https://download.strongswan.org/strongswan-$=
+{PV}.tar.bz2 \
+            file://constraints-Case-insensitive-matching-and-reject-exc.pat=
+ch \
+            file://tls-server-Only-accept-non-empty-ECDH-public-keys-wi.pat=
+ch \
+            file://libradius-Reject-undersized-attributes-in-enumerator.pat=
+ch \
++           file://CVE-2026-78135.patch \
+            "
+=20
+ SRC_URI[sha256sum] =3D "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e7=
+4693b54fc33678"
