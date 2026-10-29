@@ -1,60 +1,60 @@
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.901.1793316684662051903
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.865.1793316678545370637
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 16:31:24 -0700
+ Thu, 29 Oct 2026 16:31:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=yXAjfMNZ;
- spf=pass (domain: gmail.com, ip: 74.125.82.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-1846bc43c28so139815c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 16:31:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=0gVGZnVY;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-18cdcfc05ffso116268c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 16:31:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793316684; x=1793921484; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793316678; x=1793921478; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rHQhOxsTQMm1PA2x3VBv5GXwyQJa8kiaq4j+aQWG04M=;
-        b=yXAjfMNZKUJsULuvualsnMKrT+UNzLUu35fLH3HZHO8apPPsb7NatVe3h3vTHD6xoe
-         e5wkdjvVM+LhWqZGuqVGPEl/PFqMOvWzbUgjEMnzJxHjV/ghVfConWBdYs+KoVBDBsmW
-         3PilMCTkMpZ8snTLxktOKlh02fnlwN3wqdM69dmmpS7Tuj5IeToiVDDb3tFIKsNY3J9I
-         /sUrKwJHoEy/ajFGg4D1LxysajGDuU6SlSspX+h2miS7l4oEHJYkI6aILgocJVx9SvoX
-         ++46HDrAcRExV+ifXHFfVEE9PNqhS3ymkrYJYAb6ZEpu114nHH9VRfQ5FhAA4DVJUkZ3
-         346g==
+        bh=KItx4smV4DnAQx20FmC1r6K3MdkWuzYqMfNF+K3WKxA=;
+        b=0gVGZnVYs1xqVd/QbhUTq/EU29AeLU4CxVBhUWFFbsVVOCrIul8rCQAb9LnA7MncAs
+         W1D24driRJ7rJt7ygsmBZ7YLgZMsWcQjK9ZeCNZVu8lGNKOgoGpqOYFTG04SQOihOJbg
+         4PozqBFmHkynC3VJVoTqaOlKGQpYEIISYWAbFJMKqAVf0j/+mJkqCkxnhY0C0kFd38II
+         t/IK/UlgBIeToNCxk5bUC3WNYl+HA7l25Urf5c1vtjhomQCeV54D5QG9+tNvIdOkkyXi
+         Z5F9zkTTt0QOcOS6JysWLqFoF2u7uZIhyLxfbrs5alq9ubaxLbBAw3JqXjjUc5dQ1SfN
+         SmXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793316684; x=1793921484;
+        d=1e100.net; s=20260707; t=1793316678; x=1793921478;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rHQhOxsTQMm1PA2x3VBv5GXwyQJa8kiaq4j+aQWG04M=;
-        b=aNUMrG9sySTYOKDOsGqwWBJedgrZ6ITzjQ8nNvkffKQgzLwz3zWTUwQui9Vl1PyWgu
-         SFbJaiDRbMref2tfehsR32RZH3O6FjKReblrHzn1CMsq68zZI4aJn6YeaDSAEb6djU+E
-         aEqYio0qCg3eoOroovRPOf1cUO1qZ4QiZqMV2vhm1j1uL9EBCKEDlDN+5Fj7PArfam/P
-         00lBd3E7UlXLy9T1/jNPwedrdQza3DYQ0fy8Jbr/TjpeNAuhVlcQGJcTmrfdwFD1XUOh
-         e56ubthmo5wXKCIAo1jseuJauRCeu0qLKNTxNpwO1gPXOg/FMaWma/bYSs9IGV6nLjpB
-         2dSg==
-X-Gm-Message-State: AFq9FYLaKDpU7qfIxCLuj++8n3Ud3lE+FCC6BiMF+WkMhyYmbbS9GTnp
-	lq842LHAtrmLnUgS/KkkMl3mvEn03bbni4PxOSOQdX/snwYPK1lUQx4WeKDKHg==
-X-Gm-Gg: AYBFou1Sjt2Ra7rKNs4WV0xEvyZzGyAs3CuhTVzt8XShofZAYbrs7fKwTo90LI3QW8D
-	mukYElIpORbQr7LTO9G0fbO52eCPmIvilaevmBNDM9LcG/F96zC3GyzWMQTzzXQomFvAYamLIi2
-	O+rHmNcwojrgT0m0GUaMs2JIl+Eq+vAnOW5C1NqBqBeTr15lGXt40t2HEbGehMdGo4quw4Bq0pM
-	/22jX9o/aSyJlBeXGIXOX68nRvpg74SKiEi06NCIjbUXSg1EgYCpB8s8yyWdy6O2i8HP0CTHqgx
-	IPL5qA5Jh7Nc3Mm19Npr5ovLVrdeVxH1E3H1LirV0uBGXrYUmZIXl03Dxzij5Fc1cTnbUL05mA+
-	gOIyERfqchmRpcJ2lWCxbkSbOYvyNptt2U9rEtp9oUq0gMkX6337L6Zntv/iVKIdhItiu/SiX3t
-	F6Oivv0B4qFxp7VxYy8Qj1/9Ar9QWpolNd2IwucjsuqQ1YwrA1RO1XEJ+wQF2Oa8JFDb3ZXr6yI
-	0IuQyHQFjC5niMf7elMAbw3oMKSozxikw8S6yelXJE+8h1/6m6RXrTapMwXcBGJyXLqQ6LhY6V5
-	u1zbDfua56iz0sfcfa8XIO3e9uv5WjTwkSUMj7VK/AIeQKIIpNBvU8fqZvj2fQ==
-X-Received: by 2002:a05:701b:2302:b0:182:9071:3249 with SMTP id a92af1059eb24-1ac5de53bdemr609484c88.30.1793316683835;
-        Thu, 29 Oct 2026 16:31:23 -0700 (PDT)
+        bh=KItx4smV4DnAQx20FmC1r6K3MdkWuzYqMfNF+K3WKxA=;
+        b=waQdFt37x4VskLqjKQjHdQ+JoTteS7jeChxkG24q37ckKty5gVYcVZN87fkhTLMeoa
+         WLl3PxR/1tQkfqfEp6Z56lQv8wylyyfZLJuVHFZBiTql9b/zLAlTTykEhjsq6ITgvWzn
+         ZISbzcv9PGVh7PE/NWSSi5A4mbJ3Qton6+oSjlH3aGcBF0az7rwyHQ3sYRuHSSybFiy9
+         vZ+NC5n3+SHHjvkJrfgEzMtUE6d/92QA2hkrg/EEr0xSvyiu77iIXMFHhfaZhjND/XJU
+         bt5mrnqFhjHsJjDYx4G6fzXOp/JiXVpnB8gbocdF/fTNG6fxvbMa4mTHm3w7HeEZER6d
+         HoIg==
+X-Gm-Message-State: AFq9FYJxOVUs+DwuFjhC+D+DfWi2I2s3nIYE/mAXpQm24Z0EgpzR2OFa
+	mvNBb6LNL4qx8UKhKus+1G473a9T5gdlxHndmrYqnjC2GwpYctbf2Rfp0dlhcQ==
+X-Gm-Gg: AYBFou2n8Jbyyr8qQpNoKqviMNbcSnQHbgBF2WKG9HkIU+EzZZDaMXmzIPGQqDpZvNm
+	37w+YUt5KxHUfrrVCeCbN7W0H9tlwJlxPMcuNdZ3EycjeyEGMScR1wkRUI31Ao6FS9dPiM8tzPw
+	h234xENITMB+UaKl7Rw4deCosNFPBcuBYym5pB2jZgfDWKUt9vHwuyaA6Vxw+XqasF/uiH7NKad
+	duO7G38mwB6INRbN0733NVyOnjA3sjkDsHoA3FqC89bDZqM1HdKr/ykerQWEaTj+1cIdDhq1pR4
+	nBmPDuNJLyRfWYc87S0QGtPoOK/IO4lTjs40UqtjyRbXJX7OLCAkddv83W6BnPsdzeIvYolUj+f
+	7trnrJHtAAg4uuVl8sJJah5LWxyg1DesJshbcJstMboB+1t5LTVmHWS9cPeHm4ND8aFEnKx/LZQ
+	Oog0ImGrDrsWG6T7j0hetEsev7PJg/Nm9PfAaZnPhvtOPy8N+7dnKMbz8tk7JAfC4Fx5aHjCknO
+	HkiUkoI5pjtwa/Id9Iw7LZntu8cRM88nkK6nBJI/CEPYsFm4zsAnZzaXmirnl2ysM1KCP9d2rNp
+	FEZ0zJ6bc9TiIRMoES+jn+lJOTmZ2FkIuvsEU4AERVM10IVTGOZSO+hO8Q9A1A==
+X-Received: by 2002:a05:701b:42cb:20b0:187:c940:21b9 with SMTP id a92af1059eb24-1ac5d6a0756mr773534c88.30.1793316677695;
+        Thu, 29 Oct 2026 16:31:17 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm2207349c88.10.2026.10.29.16.31.22
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm2207349c88.10.2026.10.29.16.31.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 16:31:23 -0700 (PDT)
+        Thu, 29 Oct 2026 16:31:17 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 8/8] lldpd: upgrade 1.0.22 -> 1.0.23
-Date: Fri, 30 Oct 2026 12:31:02 +1300
-Message-ID: <20261029233102.1177876-8-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 5/8] rtorrent: upgrade 0.16.26 -> 0.16.27
+Date: Fri, 30 Oct 2026 12:30:59 +1300
+Message-ID: <20261029233102.1177876-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261029233102.1177876-1-ankur.tyagi85@gmail.com>
 References: <20261029233102.1177876-1-ankur.tyagi85@gmail.com>
@@ -62,61 +62,103 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 23:31:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131677
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131674
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-License-Update: use LICENSE file
-
-Update SRC_URI to GitHub.
+Dropped patch that is part of the upstream version.
 
 Changelog:
-https://github.com/lldpd/lldpd/releases/tag/1.0.23
-
-PTEST pass:
-root@qemux86-64:~# ptest-runner lldpd
-START: ptest-runner
-2026-10-29T23:27
-BEGIN: /usr/lib/lldpd/ptest
-...
-END: /usr/lib/lldpd/ptest
-2026-10-29T23:27
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+https://github.com/rakshasa/rtorrent/releases/tag/v0.16.27
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../lldpd/{lldpd_1.0.22.bb => lldpd_1.0.23.bb}              | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.22.bb => lldpd_1.0.23.bb} (91%)
+ ...e-atomic-test-program-from-being-opt.patch | 57 -------------------
+ ...torrent_0.16.26.bb => rtorrent_0.16.27.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 59 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/rtorrent/rtorrent/0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch
+ rename meta-oe/recipes-connectivity/rtorrent/{rtorrent_0.16.26.bb => rtorrent_0.16.27.bb} (76%)
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.23.bb
-similarity index 91%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.23.bb
-index 635d54931d..3d623bcf5b 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.23.bb
-@@ -1,18 +1,18 @@
- SUMMARY = "A 802.1ab implementation (LLDP) to help you locate neighbors of all your equipments"
- SECTION = "net/misc"
- LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=31864e0b3df438284c0adef04a6897e5"
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent/0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch b/meta-oe/recipes-connectivity/rtorrent/rtorrent/0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch
+deleted file mode 100644
+index 5f18c63c2c..0000000000
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent/0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From: Khem Raj <khem.raj@oss.qualcomm.com>
+-Date: Wed, 21 Oct 2026 13:00:00 -0700
+-Subject: [PATCH] checks.m4: Keep the atomic test program from being optimized
+- away
+-
+-TORRENT_CHECK_ATOMIC decides whether -latomic is needed by linking a
+-program that loads from a local std::atomic<uint64_t>. The atomic never
+-escapes, so with -O2 in CXXFLAGS clang folds the load to a constant and
+-no __atomic_* call is emitted. The check then reports that -latomic is
+-not required even on targets that need it for 64-bit atomics, such as
+-riscv32, and linking fails later:
+-
+-  ld.lld: error: undefined symbol: __atomic_load_8
+-
+-Make the atomic global and modify it with fetch_add() so the atomic
+-operations are emitted at any optimization level.
+-
+-Upstream-Status: Submitted [https://github.com/rakshasa/rtorrent/pull/2072]
+-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+----
+- scripts/checks.m4 | 13 +++++++++----
+- 1 file changed, 9 insertions(+), 4 deletions(-)
+-
+---- a/scripts/checks.m4
+-+++ b/scripts/checks.m4
+-@@ -99,13 +99,17 @@
+- ])
+- 
+- 
+-+# The atomic is global and modified with a read-modify-write operation,
+-+# otherwise the compiler can optimize the operations away and the program
+-+# links without libatomic even on targets that need it.
+- AC_DEFUN([TORRENT_CHECK_ATOMIC], [
+-   AC_MSG_CHECKING([whether 64-bit atomic operations require -latomic])
+-   AC_LANG_PUSH(C++)
+- 
+-   AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <cstdint>
+--                                    #include <atomic>]],
+--                                    [[std::atomic<uint64_t> x(0);
+-+                                    #include <atomic>
+-+                                    std::atomic<uint64_t> x(0);]],
+-+                                    [[x.fetch_add(1);
+-                                     return x.load();]])],
+-     [
+-       AC_MSG_RESULT([no])
+-@@ -116,8 +120,9 @@
+-       LIBS="$LIBS -latomic"
+- 
+-       AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <cstdint>
+--                                        #include <atomic>]],
+--                                        [[std::atomic<uint64_t> x(0);
+-+                                        #include <atomic>
+-+                                        std::atomic<uint64_t> x(0);]],
+-+                                        [[x.fetch_add(1);
+-                                         return x.load();]])],
+-         [
+-           AC_MSG_RESULT([yes])
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.26.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.27.bb
+similarity index 76%
+rename from meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.26.bb
+rename to meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.27.bb
+index 77796bc3a8..d562173f24 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.26.bb
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.16.27.bb
+@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "autoconf-archive libsigc++-2.0 curl cppunit libtool libtorrent ncurses"
  
- DEPENDS = "libbsd libevent"
+ SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https;tag=v${PV} \
+-           file://0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch \
+            "
  
- SRC_URI = "\
--    http://media.luffy.cx/files/${BPN}/${BP}.tar.gz \
-+    git://github.com/lldpd/lldpd.git;branch=master;protocol=https;tag=${PV} \
-     file://lldpd.init.d \
-     file://lldpd.default \
-     file://run-ptest \
-     "
+-SRCREV = "62899bd053c39b70380464e8f64dbcfce92579aa"
++SRCREV = "cab23f12a4ecf43db046ed813bed3d835416338e"
  
--SRC_URI[sha256sum] = "9587940ed2314a86774c5499f3dfb13a8eb86232a62d243a83a1f09886848e03"
-+SRCREV = "d092902333a89e228b144a1c9b4c41df3b0761e8"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
+ inherit autotools pkgconfig
  
