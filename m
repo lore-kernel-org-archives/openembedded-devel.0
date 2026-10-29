@@ -1,95 +1,94 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7739.1793266016327005555
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7740.1793266018322670961
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:26:56 -0700
+ Thu, 29 Oct 2026 02:26:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=jxQQhANI;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-ccce6d9abfeso1402913a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:26:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=O3cbiDO4;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3ac7842c17dso1239578a91.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:26:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793266015; x=1793870815; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qBUfIXe9ivxrJ5jksO74fe5X00U5WzSqO+Lt2rj25h0=;
-        b=jxQQhANIwIATohJQyu8Y28dF7eiNOP8asbjZL90E//9pqDp10EJPz0JcqkGnJpfdWc
-         Gh+DG7/0718uaeumeAvgKGEWf589x6DnxFtYJWKRN+MH+IFM6J6OstRXcNhIiGPekkbg
-         pUl1+cEabdurg9rYj4Sv9q9gwxNrxL+R/QBDWbfFLwNpF+MQqQFM4vIylE2Y78Ts+C9A
-         yQRCTdnK+BQx9tiGzg5lnfY/VqxopT49aVrHL2dzi4mOXA1Q6DXF5slB+0zjSWbl/UhD
-         tm26ghN+8tjIy5Gcdj0bQmdpICVZnkl0vDsFYDtt0GlgfEGlvzK2WeCT77Lwg4+sPm8S
-         gYFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793266015; x=1793870815;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1793266018; x=1793870818; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qBUfIXe9ivxrJ5jksO74fe5X00U5WzSqO+Lt2rj25h0=;
-        b=DBn0oI6LVYc1x6HRCbxxHNfnMU2eMshu9GpdkwLoZa3npj/wRR5MN09kYjCx/JaccG
-         OHJ0HeLSINYWGMdVVvDCVGAisPJ6VSv/WAxGAMSm1gLwjSNYM2jq3Qo3PQdZrglzS7W8
-         eBmqcLIFOXvLoayvPG3Zaw3tqXV7IqVlVtwHxYfnp2/YKSg1fi2nJclu7Ld2jCH2kM4X
-         IgKsdCNQsv2pFHVybRRKjxo8F+faNroYIa7HEGvhBzJ+L1azyxy+EqAKcf9al2ZamWS7
-         1XAxOr6YY+v2LuvRkEUchut6DEdK6pJBf8TuBFQ/D72BuL4E3y1JfwKdzVEmOwl8l1eZ
-         HzGg==
-X-Gm-Message-State: AFq9FYJU9pIgHv6mT5wZobtUwuoZr/yPfocOnHql0zMAl3oKO4AIAhlr
-	o7Hj/S7v6oLTmq7FDTVr0IdPlQFmSKAAzhNnfDzW0cHr3pRjpVwaFyGGAjFL5g==
-X-Gm-Gg: AYBFou2na23oUUv48Q/4x7WATWCk4rbVNR89sXlIfTzU4knSMqF2oc5Q4e3taiKsfgz
-	D/5haLgQxbFMtAOYI0GDJD6QuxQOR1fWQ4RBSqDuw3mAkynJrTOPZ3yzGUF0B9ndw4uEOMwSV9C
-	iERjr8Eu7WBSS0Cc/cfsrGOgGpTWA6A8R2jkvUzF9ZY9zPYFGDvF2zc30kJsNF45BY5XTjOIBMO
-	jm6m1vRnHMroX2hBz4IVv+rusQxZnludN3ZSL4AlixiS4CELVXDnM/LlycbhH0zvOypj/z65oIE
-	k4rHkRx1J1L7pxBerAyt66DScupF9iqwJF269tlNRf44kVhbCcQI5rHgOgb5m8JEAH3Vv/YpZrM
-	jPtrxZbU3mRt8DU29T8SEgh0eI280wfmQOt0kAb7Tc0QRoy4hwAsvrQOEOvgocFSiN+R+zVotZK
-	oSJkxbgesmgv1RHotQL+fzxwlwcTqOmzi9+SF7jdalnFLocKWOUpFMxy3+IiC9FKRjFKCCXBGbj
-	tqLRNNpUqMxnNv+dHrU7zWMYtUDztJsTT7poN7qyY6T//MosMsTGELsmfDiBBWyrrQ4yhrbNYTY
-	tBiBudDkCLirOOj76PEYfD/P1/OkfNZnyhHhVNWMqy7z9gOVvLllQhKMK9zbog==
-X-Received: by 2002:a17:90b:5348:b0:3ac:9d14:fe9f with SMTP id 98e67ed59e1d1-3ae5822fc89mr3981898a91.31.1793266015282;
-        Thu, 29 Oct 2026 02:26:55 -0700 (PDT)
+        bh=7qfaTXW+kh4WKFDNXUkXzEAXya0eXqZPzK8Qt7taUIY=;
+        b=O3cbiDO4MLsVoG43nTAIIgKeuMkRax5G4OyeEHsFyzXE/ZokJqDkoIsOfvu0PyMJf/
+         6WO1w5lRXvXVrjqde+CkuqtpfNXrdKtG2GRQJ1r77gA9aEzW/zXf26jbWNrkYlPeVsdb
+         IYpt905nj9YhUDbKrloZHQi8dFKz4O3UeqYJMyIqZW/KbVeYibuiXIvgwHOoFZdiq5c0
+         V81ubZ2atY5IWRWOrnqUVhvXc+NexSWHBkg48pjrKQuabhWmj+M836Ye6tHjutX8u/Tb
+         8pVULMw+9nOeTrbz0xIcIqZIn5/uhu3fFO69cYagh5df8NRgkiYiioKhM9WLNx3beX8B
+         8HtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793266018; x=1793870818;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=7qfaTXW+kh4WKFDNXUkXzEAXya0eXqZPzK8Qt7taUIY=;
+        b=XEp0tbximHZxPyuIHNklQYiBHAXrpIbTI8uC+P9iKR7ftPoUO6wwuHBXvA038iiVrL
+         MQWT1vT7wYrnVGPoJmAYarIe6bWuTMKsZtAqVrDoSoaYdmzuQ9DuPoO9JaiE9E1SArzh
+         JODEqVsDzHWw0Iz3dAZ7oAT7365Xq+ppPDHIw/s3giSS31xDgSbgolh8SJSQIpxjhVed
+         S7PbWHV7YW/Zcp0JxqnWxIuSd7aV5bcwHKqVAr4ocG2wEf0QnqAD2ovJvVFR9bg8TobP
+         HYIQxslowcex8ASt9/+fGllYOfreUQ4SslAYk7/6Qom9NJ/jmqwbIFpQf42w4t5n2h7t
+         P7WA==
+X-Gm-Message-State: AFq9FYLruGVHgRuAOG/NCSVhPEYt0ie027FD6wDBHWz9wuWcjJ+EiVXD
+	6YfVUulOLKX0rgf5u+sqDDxqTW9mvROcgdbH2aaigCljoZb3GQINsE8DWxTjmg==
+X-Gm-Gg: AYBFou1PmAUsCksv7L6LPfJ+L3DUkkcWIETSH1hAHF4rKk64EeRuBwEKjruX29Q3OqQ
+	tddDQVvFGqah3D4IKmvOv5P1oJuBP9Tgu8//hI2PAC9b79HGKcxSka4ifC4ecHAhFP9Hxhn7ziV
+	2y9PVkB9TFORotz7eevw9XqFdWruPUm30sC14e35jvaoax9An3VzWG1hBOCAp7q2rYZJjiGmIGl
+	URWUjmVSCOs8/5kcQbEwCqTEIpIb9J0lRUstaeSwmr0CuQ6J4l1zUXbt4/ieFDzEwPXdTWaXvZu
+	pJCvwN484ANJVSKkSL/O8AIAFjgipiMVZTHyMi0o4aBzB1J2mOQ/hKe0bMz45YnuxbC7vtteW9y
+	uvGiAcNqmP6C6iUCWFoD8y410fgVOpFGXbzedYCRyRWDSF4rwJvmyIApnqyNCb0ZV0ZZQjNgzxv
+	FJ4mIE8zAsf+Cj99HL+aYkQYqJS59ku8JMYmkfiFUyhnABD38jmEQ2JlzRr7V+/gxKUJTqPHB43
+	XIK2JeHB0BoKD2fGaYLkDij/g6B0rt42cuFVUtlix/K//cvU9IXhv5a6mI0GZCSLcMG5Ju4Eb9i
+	CeyMDI2ZPxNnBt7jqWwmQTouc2rixBh/ybGer1r7dlKUL7SClU8zQpdChyWxOg==
+X-Received: by 2002:a17:90b:55ce:b0:3ac:9d83:8861 with SMTP id 98e67ed59e1d1-3ae5832af4dmr3942620a91.67.1793266017576;
+        Thu, 29 Oct 2026 02:26:57 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e874bebsm3513079a91.14.2026.10.29.02.26.53
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e874bebsm3513079a91.14.2026.10.29.02.26.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:26:54 -0700 (PDT)
+        Thu, 29 Oct 2026 02:26:57 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/7] zchunk: upgrade 1.5.4 -> 1.5.5
-Date: Thu, 29 Oct 2026 22:26:40 +1300
-Message-ID: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/7] catch2: upgrade 3.16.0 -> 3.16.1
+Date: Thu, 29 Oct 2026 22:26:41 +1300
+Message-ID: <20261029092646.3634215-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
+References: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:26:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131649
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:27:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131650
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-- Fix out-of-bounds read
-- Harden multipart download parsing against malicious servers
-- Harden chunk decompression and header parsing
+Changelog:
+https://github.com/catchorg/Catch2/releases/tag/v3.16.1
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb} (81%)
+ .../recipes-test/catch2/{catch2_3.16.0.bb => catch2_3.16.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-test/catch2/{catch2_3.16.0.bb => catch2_3.16.1.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-similarity index 81%
-rename from meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
-rename to meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-index 9d587debfd..f84cd8d6fe 100644
---- a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
-+++ b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-@@ -3,9 +3,9 @@ DESCRIPTION = "A file format designed for highly efficient deltas while maintain
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
+diff --git a/meta-oe/recipes-test/catch2/catch2_3.16.0.bb b/meta-oe/recipes-test/catch2/catch2_3.16.1.bb
+similarity index 92%
+rename from meta-oe/recipes-test/catch2/catch2_3.16.0.bb
+rename to meta-oe/recipes-test/catch2/catch2_3.16.1.bb
+index e9ef1e70a4..f98c31ffa8 100644
+--- a/meta-oe/recipes-test/catch2/catch2_3.16.0.bb
++++ b/meta-oe/recipes-test/catch2/catch2_3.16.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
  
--SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;nobranch=1;tag=${PV}"
-+SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main;tag=${PV}"
+ SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https;tag=v${PV}"
+-SRCREV = "317ac1ed4c0bb6e6b91eafc817e05c488feffcb3"
++SRCREV = "08092139210881f01a34e60c5f2fd6afa0ea4024"
  
--SRCREV = "99e51afa38c723e7c25834c2c3b305d20ef55d04"
-+SRCREV = "ae8e9f5b1e820a906c39f7eaf231e71bef72a3a6"
  
- DEPENDS = "zstd"
- DEPENDS:append:libc-musl = " argp-standalone"
+ inherit cmake python3native
