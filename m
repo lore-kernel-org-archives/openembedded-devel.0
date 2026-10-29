@@ -1,116 +1,115 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7659.1793265712764112147
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7651.1793265713959908154
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:21:53 -0700
+ Thu, 29 Oct 2026 02:21:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=WCzp87u+;
- spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48afbd2c386so1082723f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:21:52 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kaY4Zdxk;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a35db1f202so14429625e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793265711; x=1793870511; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Cs9CGa9djD575i36VgtDmnTQAXHI5AqPDLrid9BOzT4=;
-        b=WCzp87u+r0wHG8dlV01o50ZOsk63yKYRw01ebHQ5fVOnfEmj8xdzbyMGh0sQV32JbK
-         8JqqS9xBJuokVE7XreS3yceoCOy4FICIeXBCR9ZM/rq9y15gbMrzDD4uT8CkZcg2iPA0
-         jY3OmOmcE4ipf8tvsXnhwto654xhpcfGDt34Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793265711; x=1793870511;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1793265712; x=1793870512; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Cs9CGa9djD575i36VgtDmnTQAXHI5AqPDLrid9BOzT4=;
-        b=n4s8XJY6Ydlj+IsuGr1TvG8PyGZyVGFz5nfaX+SHlDMwQ6YG6mYLpoB9dkbAmjVEk6
-         BYf3CTILkU61uqN+LNE1D55pG6d0lVMCteRx56WoqBjzlr7c1pVy2qFwtPIYccvt2lb3
-         idFvTGC05fM6TODjdmYKKKL2kIzhA+E00uAMlfI+ByEtHT7vs5vcVXW1IFg2iQY8BfIy
-         14dqkm+TpZFQBtjr/d20UUnDcQhs4pOK6WCMColWCo/yf7fdrpshnyh/cHrqt3AlLpwM
-         P83W6HaqUHuOkKUtfdWpIlbHrWn/eYm1pnBvCs7QsfXS6+Bo295Hex7dbIJJEORH+Jo8
-         nFsA==
-X-Gm-Message-State: AFq9FYKcM8dAJTHO8u9NctqxslyAlqNBk520uSXId3XlbEFrtkVEdNcm
-	Q3EyLVoCW4cCjqCmyxAb3aL83kLw34Ctj/TjcalYVJj3hlhOAuy4EbVwDvf6dRjy10RDwnZBMHt
-	hMC2i
-X-Gm-Gg: AYBFou0GJR3mgjg82C0okDSQzSeQUBOyNcggrPTQ5tRdZWwkSbnTQTxcsQ+jkrCzxQc
-	bcwNVUbDMSmygWaABaWPzIwQuWULpqfapA83ZAR4UHPIYYb+dXqd3tBjcgXz7kivFn2HaFUP61b
-	kyg2rEis+Djqbwq10wrLuJKO2PXT4aL4OXNGv0Fk82uZVGn54fW4Xdxbu/QhctDCPvES1JRAHV3
-	4OzrPi+S+6ljxvzti010PEP03SpFQF7msV6zKRemDn09sOZLyoifo4TcZlP/ynDZeLdmNb1zj1W
-	b3lVH5irg0JmLB41PEaOKcPzbqd83M3PJd1Q4ZGVElACjgZ4jI8nIAb2RpfX/D65cyBv7TytRj+
-	713ORBMNQJdmdeNOcf1cmIhdRpj+3oJvh0dJA8dYbxRl5vgNx7iPfrmcEte+y37B68Exq+av4Z+
-	dww9LwKooAIRcjheppGXaOV7J07yNtC/jI3v15t5E4uCymPOB26O/JiUNgGsICCSMdifTD8lR+Y
-	/idrfJM/K0599bc+hTcqd5efUiyiiPN88JuMhRKnKV2zv/LsZTu+1KqEK0oblV7f2FSwV+T5LvL
-	ilyke0y/wPlLPBFeRIHkocvO27xZhcFL6Gs69bpe5q4UiASzIjbU0XY59JbgxTG6I/GqVOqrKsj
-	g0fNUm4vQduzcWiNjoApM40z2QV9VLFaMbZBrPw0SXmLrpvAl/2ijjw==
-X-Received: by 2002:a05:6000:3101:b0:48e:3085:7cf0 with SMTP id ffacd0b85a97d-48e5d5da15amr11641633f8f.51.1793265710711;
-        Thu, 29 Oct 2026 02:21:50 -0700 (PDT)
+        bh=HEvCV6x54lNd9W+qagw65Z0OtY7MOvGp/Wb0M+hIfs4=;
+        b=kaY4ZdxkaNoz3R6LCqNRRh0T+9Uy0H3FX6QszbAwBmxNi0S8XjQC4QLgkKvkBdTyqs
+         S5xKJzMgiWma3/Hn7meBD3LrhESW3OOjwePx8cEjhJH0QRQEnXLY/f/klJJkrXwq0B81
+         Mrltv5O7rmPVhHFhGkUHWVwcafARUs7KJNPAA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793265712; x=1793870512;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HEvCV6x54lNd9W+qagw65Z0OtY7MOvGp/Wb0M+hIfs4=;
+        b=EjHiAUgZ4tu/YK74l0OlxvxADQJQTPCmdVvjT6XZN90Yd2Fdadb6PPqfrZ3/RNXjyn
+         tWf5uHY9IKVktLqd2bVePCfpdTHP1IG79nRZCiBniGEctgu9K/4/+NSeB5ZBONkJH3J8
+         R6mk7VbJWYwZwWo0oGj9/zvB8+20KE3kJXqyABzP2e42K7xQ2Stgnj958DX5lkwvLCPN
+         LhgIf1LUehCaDax8RamuOX0k95PrhY++E+HVTAGwZMbsaRwLqMg55rMIXKphVSnBic0V
+         xZjWk5CEzNTo6MC7Pht8J6n1rVxtY3NBr6Yq/L6mJt8xcq847RGJK5mTC1VZn0gJAtHc
+         KadQ==
+X-Gm-Message-State: AFq9FYKBLaRamO6vi+gvqMn0PdaZOxg+P8uC6K7JOsXs2jXt9zzQeugI
+	0dotiWd8aaG2HpkCVVtaZUjHnpF4c6bbmATY2un2s+xf7PPiGqw57YTI/nvnX/w4IKpLtfgcqZf
+	hLhZp
+X-Gm-Gg: AYBFou23rktNRGy49pb8YOTidt6WHcfkIN/D2ur4/boPwrq08uTqQMYfu2u4zsX18eu
+	IX2W3wqVGpQ6iHRMecmRkCpWC9evPANXtwtNMmpIaLmrhAzVdQlxUiv7itqlDo4SL1uPsnH/HcY
+	IbvPpO4CdEyeTdOxpwTbHrY5zA2hywqMe+y1g6ghQoaaKfYdp/4TETI2jD6BOEJzfVyq02pHzJj
+	IAzwWjuvGU7keb/47Z+TrzQSrAq4tMhYdEdAoupNCOo/9qSAkjmleIYnjQPMlDx1+P1D23Ib+rf
+	Cg3pAY1dXuFMV1OCk2JEJP40MQCn/pT9hXEgjPZA/WKFi3jgFDjM33kMXq6IyjjsZlG7T+uZMnQ
+	AHjaCUcbMIOnJeEfyqGPQi50aOLFowVKKoy8RBp3QgiJyG6o+CNUzniOlRPXwDuixB+mr87QidH
+	hhkw9fg6VpF+u/gpVlJvJAyTLwn/KFYuP803PNjfMHBYr0C2ghtdqg9vexZxdK2eDMBuNYlBsKT
+	UrEoUpGb2XRGtoChe+dK8Bx28C/DtDGLnBiutNor894pNd683gg5aJArfqv4g5FaMMeDG/H9BiV
+	OCYASAXQVfjNgSgUdI2GIYiS+M52U3Q2AnUtdheGD0aidiuHyL5RAWtFXGzOmKz9l9PFCiU7F84
+	yQNnIpijK+FIvrQM161Mp1r3AefYrIOfHOoqlKUilcmxcB9eakHd3jA==
+X-Received: by 2002:a05:600c:19c8:b0:4a1:d459:db4b with SMTP id 5b1f17b1804b1-4a966e2a979mr112576345e9.24.1793265711844;
+        Thu, 29 Oct 2026 02:21:51 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ecdf9bdsm31901084f8f.55.2026.10.29.02.21.49
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ecdf9bdsm31901084f8f.55.2026.10.29.02.21.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:21:50 -0700 (PDT)
+        Thu, 29 Oct 2026 02:21:51 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2 1/4] python3-pyroute2: Upgrade 0.9.6 -> 0.9.7
-Date: Thu, 29 Oct 2026 11:21:44 +0200
-Message-ID: <20261029092147.791220-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2 2/4] python3-platformdirs: Upgrade 4.10.1 -> 4.13.5
+Date: Thu, 29 Oct 2026 11:21:45 +0200
+Message-ID: <20261029092147.791220-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261029092147.791220-1-leon.anavi@konsulko.com>
+References: <20261029092147.791220-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:21:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131645
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131646
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 0.9.7:
+Upgrade to release 4.13.5:
 
-- ndb: basic support for XFRM interfaces
-- ndb: basic support for object preload hooks
-- ndb: basic support for prometheus metrics
-- taskstats: fix name unregister_mask() -> deregister_mask()
-- plan9: fids per session & inodes per FS
-- ethtool: fix the off flags
-- dhcp: support option 41 NIS servers
-- wirouting: link features
-- rtnl: support RTAX_CC_ALGO on route metrics
-- rtnl: add missing NFT flags
+- Publish a GitHub Release with changelog notes, a PyPI link, and a
+  version comparison after each PyPI release.
 
-Fix ptest-runner errors.
+Deselect failing tests from the run-ptest script for ptest-runner.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb} | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb} (75%)
+ .../recipes-devtools/python/python3-platformdirs/run-ptest    | 4 ++++
+ ...-platformdirs_4.10.1.bb => python3-platformdirs_4.13.5.bb} | 4 +++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-platformdirs/run-ptest
+ rename meta-python/recipes-devtools/python/{python3-platformdirs_4.10.1.bb => python3-platformdirs_4.13.5.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
-rename to meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-index ec72b450ee..d83b65f6da 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
-                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
+diff --git a/meta-python/recipes-devtools/python/python3-platformdirs/run-ptest b/meta-python/recipes-devtools/python/python3-platformdirs/run-ptest
+new file mode 100644
+index 0000000000..fa98212711
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-platformdirs/run-ptest
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++pytest --automake \
++       --deselect tests/test_pytest_plugin.py::test_import_before_pytest_main
+diff --git a/meta-python/recipes-devtools/python/python3-platformdirs_4.10.1.bb b/meta-python/recipes-devtools/python/python3-platformdirs_4.13.5.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-platformdirs_4.10.1.bb
+rename to meta-python/recipes-devtools/python/python3-platformdirs_4.13.5.bb
+index 7c004a1ed3..40c7b25333 100644
+--- a/meta-python/recipes-devtools/python/python3-platformdirs_4.10.1.bb
++++ b/meta-python/recipes-devtools/python/python3-platformdirs_4.13.5.bb
+@@ -3,10 +3,12 @@ HOMEPAGE = "https://github.com/platformdirs/platformdirs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4f5a41454746a9ed111e3d8723d17a"
  
--SRC_URI[sha256sum] = "6bc5e2ea9a372ded682b4ede4028ba00236bd6e35b42d833f39a96b219ef1db2"
-+SRC_URI[sha256sum] = "a678b098478c46ec51d6bf9a03c3cd2ac0172dffa590e9e8c1eeab633d0c17c6"
+-SRC_URI[sha256sum] = "ceab4084426fe6319ce18e86deada8ab1b7487c7aee7040c55e277c9ae793695"
++SRC_URI[sha256sum] = "05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb47544788a0"
  
- inherit python_setuptools_build_meta pypi ptest-python-pytest
+ inherit pypi python_hatchling ptest-python-pytest
  
-@@ -35,6 +35,11 @@ RDEPENDS:${PN}-ptest += " \
- do_install_ptest:append () {
-     install -d ${D}${PTEST_PATH}/tests
-     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+    # Remove test_frozen.py because it is missing some components
-+    # and is not present in the project's upstream GitHub repository.
-+    rm ${D}${PTEST_PATH}/tests/test_unit/test_frozen.py
-+    # Fix paths
-     sed -e  "s|'test_unit|'tests/test_unit|g" -i  ${D}${PTEST_PATH}/tests/test_unit/test_nlmsg/test_marshal.py \
--    ${D}${PTEST_PATH}/tests/test_unit/test_iproute_match/test_match.py
-+    ${D}${PTEST_PATH}/tests/test_unit/test_iproute_match/test_match.py \
-+    ${D}${PTEST_PATH}/tests/test_unit/test_nlmsg/test_nl80211_station.py
- }
++SRC_URI += "file://run-ptest"
++
+ DEPENDS += " \
+     python3-hatch-vcs-native \
+ "
 -- 
 2.47.3
 
