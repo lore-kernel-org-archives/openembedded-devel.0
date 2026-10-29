@@ -1,61 +1,60 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7735.1793266020493104697
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7742.1793266024364523066
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:27:00 -0700
+ Thu, 29 Oct 2026 02:27:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=wnGQ3YK5;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc4c02ddd62so1363912a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:27:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=oK8YZTV1;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2e9cf928dc9so2497525ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:27:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793266020; x=1793870820; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793266024; x=1793870824; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LAajpKqcsgKEag3j+zb4DOQZwrqpf86ouxKdRTmCb4U=;
-        b=wnGQ3YK5lx8Kq2UgLsKeHN5L7LR9/mKs4gfY8I20l74kIBJpJG2d7EsF/mdJVobElQ
-         OAZIS/Li6wzJOCwAT163VQymctGVgTPx+EJUCzjPwaU0Zzk8MXqPOYAoRQU6pMVQ4D4j
-         IT30zwftjUdIM/gqHf0h4PZi8gHAU1foN2ceb8Gj6r/yfoAyOveL3BnLUnCpF3tCoRoZ
-         uBEp9XfFvM+6BX9giDjwyeibRAKvDWUNbdxDDIpwLDB8zuPZecy4H//Z4wk9ZEUJpYDa
-         Kc9noU1/1XUDjBAkQLJpB1erEovxfGz0jXQp8CUKlOTITAl+hPDtmhTAIeg0IrcvrKXL
-         DITg==
+        bh=0Fwe4k20Cvclkv7uK37rVC9Y2dOHSqNDyLLRVmOjhMw=;
+        b=oK8YZTV1uteIhlTLUfRys32ViOdvvDF9S9eFO1lxzVcGbjUSgCCK0ghbiNaLsgp5kr
+         K7GeWFwgC/m/EyeYmHlorYY3P6PbuE05aewx5vewio4vEoRm65Ofe3iuB91Vj14+n9te
+         9orU5RVcFofH3jQiiYg8sLDNuMVM1+Hw3GEgSpFyUyILerCOz4GmGERgfGcjMLZ7llX4
+         +APWqNrGSaaAicyHo1e8+BOcFB9y9mTtF5/cuUyJom2Rn1IBqHRlAn7aKtlP2lX3O6Rb
+         hKCl6QOkvVTTgLNC2o+pkQdj9GOXS7xk3g9A6K0GYzdqsyezryYFuYzrLCv3ab/TpgEp
+         0LPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793266020; x=1793870820;
+        d=1e100.net; s=20260707; t=1793266024; x=1793870824;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LAajpKqcsgKEag3j+zb4DOQZwrqpf86ouxKdRTmCb4U=;
-        b=EQnte+buM3fBzwyV5r52ZwWU49RcdHWIRBxAje2OeRfziivRi6qynCOvGrdYL+h8/f
-         rfokrd/0d7YQGtkzN5/VVatfcSPjwK6Rt0zTQyNOo+5XU+AY+3JDO6mKYoC2JDhkfzxt
-         wiKlqYUSOb1cUnAZy8x0q5ggHFR7wc1JIE03iyorZ/1sRoQv7+A1jLeKL7cPqozWrC6N
-         qcH/M38E4KpCBobyUxOqcRcBYYnMv0MzBHcBNMYIrShTivKk/u0U+lj5x7ivj62c15Wa
-         8PAs1pkIeE/TLb1dPYHRyEN0I4yCtRViXxkditkUzvFHj3/aHADKdVsOdPQXG69LBrjB
-         Dmrw==
-X-Gm-Message-State: AFq9FYLR2MWgfsZ0+reLvwPo2GdSJXz4tTlV7w5h7qUXkMggQ1bNEC/7
-	Mh7WMvhpc5r5pNul2n2li3xzpiYZGgdDR2OiXOEHqmX5wn+4L8SYa9iDYfvQNA==
-X-Gm-Gg: AYBFou18BQkO/lEOJmWKr2Z1dXP8XiXTTTxpv3jRyrE56OkZ314roc+Jl/P6qW6vhZx
-	6qWE17TlOh/HuYkxr1YQHkCi8RRJMHyjCAQOXvVLN4z7LKmcw3kyyP5woITOw5nST0dfnrJHaRl
-	gQflrABaLxu3kACNZLDyk8aF3vOHvBsvAmQ4B8HZT6sSbIIKv12EBmMg8BYL34P7Vmg9FoB5r+k
-	GrmJUugr2EyxnhMCH0+bqizpwVyjpaG65vwzBWrnqxvMs/uGoKc7w1bh01YMk16B3oZcWw0hObJ
-	3OolLnj03/ksjWYLmle4bse0AaF4XlYUgB7gPQx3UQ/F+xn53fQazsroKnh7CJIeBdv2y3sf6q2
-	6W2hpgzoGN2u0CvAKN617ecjq83c+bKQgjw58SK9tUicoZzTrV+FB4OhRE23v43tFS0O8tG6aZF
-	Sq6iHT5bLvbkQ76WmalpBQuzxolORgFKbIe33J5VxkCZ/6uJdc2AvS5VrZrCbV2uPskEsc2w4Lp
-	wEAe0Y8e7YnR5oehWoVYu03daul6QXS/g2doeie6tIqf4grnwxONYg8HSUCF02Zu2N6+5xcDH7N
-	2GUTt5lJI3oK+gCqt263jIJqSsVsSU+LC7CBl2Ux5niXOblOSK11AvAeAlphrk+TJbOFATnf58G
-	zpsGItAs=
-X-Received: by 2002:a17:90b:3b8c:b0:3ad:47ce:3876 with SMTP id 98e67ed59e1d1-3ae58268806mr3515842a91.61.1793266019824;
-        Thu, 29 Oct 2026 02:26:59 -0700 (PDT)
+        bh=0Fwe4k20Cvclkv7uK37rVC9Y2dOHSqNDyLLRVmOjhMw=;
+        b=lo3PlSIN0VluDLj7AjZkf9W+3bRG0wMndB/P6dcscGr2iR/8G+5/QOlX/KiHGNrCrD
+         QSWvjX7r7P43+nCkgGA/9gXj7CzubTM+29tI4KoYYa25pK79Fy+nfKsidwZ1s/EoHvdM
+         2njZvbtsJF44iWbhMeNKbJQd1OvRruQMP4ScxJPrGmEW/QYX43Efljhb4Y04m0T43FsQ
+         fJXz3pYbZlXxPzm0M0O9dpi8ohzgmINY0ozIJ4F56JEMpq0qe6OTNA89bursK8ZY2a7z
+         b1lgbLyLGYd6ggAgrkU/wXTPFYqSP1SWhRo4HAV0PtRAE5fz6BsDKoHpjJAOxKreCB1B
+         jGWQ==
+X-Gm-Message-State: AFq9FYJ2LAK3E4ijRIA3EAKt0n5w4DRRzD8UUEFSz/JvUESgVyMAuSG7
+	SONLcTcYzKstEbd7h7gLwuN5T4TZHHgYYttyhaOuNa5nvWFCyUqhJAFCEtHHfg==
+X-Gm-Gg: AYBFou2xp+VDH5psZDJ+C5YlFfRWqhDMi8MS/7a6Znkd5Y8HF+VGazaNXpywYH0FlVV
+	CRVGMf4znhSOtEkbKlQImqUAkv37i8kZzeksCERLqTLGsODif1ayGUgDodt9UHrrO6NJr6OHs87
+	CnhPgckL4mvFCA1ajqwz0cBWDtVm1tZ2rJ9hl9X2KoAR+NIjmpWDwhiZkf5/kVCdoQbV7ZuoEd0
+	Iq4MbvlBKnS8bw2XBqNMHmk0QghVlhO7XgELWdFwCVD2sA0DNjNxNtybe7aBQd123kzgJG4FV4x
+	bAaWsYLNFoiBZk9Ldsi6jbS1JqyVFtySRTNJCWBKFX3o1H7tuAQqWsogOMcbEIYYgmxLqwcEb6p
+	rvSbJH9Yp+J6XKf3U/poHEiVUQOVYss9+rOSJa+j1V4v719NRpleW/XOy6STLBye4gkIRzYn+Ho
+	IZH494KGNZw7XJSlFUAgCyjdycdFoVaVJNw2xAcWoM0RZZ+/tN6ZHW6WWjylnmj9x4wSB/RD4H+
+	fdts2rsguYBMznVfxqBOX6VP/MqfgUVekbqDpbvIbmnXEN4W1ykdbTpXlbQqOnZ04oL88H+++8y
+	vb+JrhU4DGi48xvZ/1gCWHlWyDY3ZLsGsbYuh+LGt6/jo2XCZSr/pEC79HdZdQ==
+X-Received: by 2002:a17:90b:2fcc:b0:3ad:677f:567f with SMTP id 98e67ed59e1d1-3ae6ed92c4bmr1185566a91.40.1793266022641;
+        Thu, 29 Oct 2026 02:27:02 -0700 (PDT)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e874bebsm3513079a91.14.2026.10.29.02.26.57
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e874bebsm3513079a91.14.2026.10.29.02.27.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:26:59 -0700 (PDT)
+        Thu, 29 Oct 2026 02:27:02 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 3/7] utf8proc: upgrade 2.11.3 -> 2.12.0
-Date: Thu, 29 Oct 2026 22:26:42 +1300
-Message-ID: <20261029092646.3634215-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 4/7] tesseract: upgrade 5.5.3 -> 5.5.4
+Date: Thu, 29 Oct 2026 22:26:43 +1300
+Message-ID: <20261029092646.3634215-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
 References: <20261029092646.3634215-1-ankur.tyagi85@gmail.com>
@@ -63,46 +62,1698 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:27:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131651
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131652
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelog:
-https://github.com/JuliaStrings/utf8proc/releases/tag/v2.12.0
+Dropped patches that are part of the upstream version.
 
-PTEST pass:
-root@qemux86-64:~# ptest-runner ut8proc
-ut8proc ptest isn't available.
-root@qemux86-64:~# ptest-runner utf8proc
-START: ptest-runner
-2026-10-29T09:15
-BEGIN: /usr/lib/utf8proc/ptest
-...
-END: /usr/lib/utf8proc/ptest
-2026-10-29T09:15
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+Changelog:
+https://github.com/tesseract-ocr/tesseract/releases/tag/5.5.4
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../utf8proc/{utf8proc_2.11.3.bb => utf8proc_2.12.0.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/utf8proc/{utf8proc_2.11.3.bb => utf8proc_2.12.0.bb} (95%)
+ .../tesseract/tesseract/CVE-2026-88047.patch  | 225 -------------
+ .../tesseract/tesseract/CVE-2026-88048.patch  | 227 -------------
+ .../tesseract/tesseract/CVE-2026-88049.patch  | 315 ------------------
+ .../tesseract/tesseract/CVE-2026-88050.patch  | 209 ------------
+ .../tesseract/tesseract/CVE-2026-88051.patch  | 184 ----------
+ .../tesseract/tesseract/CVE-2026-88052.patch  | 165 ---------
+ .../tesseract/tesseract/CVE-2026-88054.patch  | 274 ---------------
+ ...{tesseract_5.5.3.bb => tesseract_5.5.4.bb} |   9 +-
+ 8 files changed, 1 insertion(+), 1607 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
+ delete mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
+ rename meta-oe/recipes-graphics/tesseract/{tesseract_5.5.3.bb => tesseract_5.5.4.bb} (63%)
 
-diff --git a/meta-oe/recipes-support/utf8proc/utf8proc_2.11.3.bb b/meta-oe/recipes-support/utf8proc/utf8proc_2.12.0.bb
-similarity index 95%
-rename from meta-oe/recipes-support/utf8proc/utf8proc_2.11.3.bb
-rename to meta-oe/recipes-support/utf8proc/utf8proc_2.12.0.bb
-index 12649d984b..b151550c34 100644
---- a/meta-oe/recipes-support/utf8proc/utf8proc_2.11.3.bb
-+++ b/meta-oe/recipes-support/utf8proc/utf8proc_2.12.0.bb
-@@ -12,7 +12,7 @@ SRC_URI = "\
-     git://github.com/JuliaStrings/utf8proc;protocol=https;branch=master;tag=v${PV} \
-     file://run-ptest \
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
+deleted file mode 100644
+index 780f686e61..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88047.patch
++++ /dev/null
+@@ -1,225 +0,0 @@
+-From e974684acbe3aeb6bc6192b06a048537c345b713 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Mon, 24 Aug 2026 13:39:22 +0200
+-Subject: [PATCH] Limit unichar extraction in ReadNormProtos to the buffer size
+-
+-Classify::ReadNormProtos parsed each normproto line with
+-`stream >> unichar >> NumProtos` into a char unichar[2 * UNICHAR_LEN + 1]
+-stack buffer, but char* extraction from an istream has no length limit
+-(the stream width was never set). A crafted TESSDATA_NORMPROTO component
+-in a .traineddata file whose first proto-line token exceeds 60
+-characters (the 100-byte line buffer allows up to 99) overflows the
+-stack buffer during legacy engine initialization (CWE-121).
+-
+-Toolchain note: Apple's libc++ provides a C++20 array overload of
+-operator>>(basic_istream&, char(&)[N]) that implicitly bounds the
+-extraction to the array size, so builds against that standard library
+-are incidentally protected. Standard libraries without that overload
+-(e.g. libstdc++) still take the unbounded char* overload, so the
+-explicit width limit below makes the behavior defined on all
+-toolchains.
+-
+-Key changes:
+-- normmatch.cpp: read the unichar token with
+-  std::setw(2 * UNICHAR_LEN + 1); char* extraction takes at most
+-  width - 1 characters, which fits the buffer exactly. Overlong
+-  tokens are truncated and the line is rejected like any other
+-  unparseable line.
+-- unittest: add normproto_test covering a 99-character token (the
+-  maximum a 100-byte line can hold), a token of exactly 2 *
+-  UNICHAR_LEN characters, and a well-formed component. A minimal
+-  reproduction of the unbounded extraction crashes an ASan build
+-  with a stack-buffer-overflow.
+-
+-Reported-by: Tristan Madani <tristan@talencesecurity.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit 1bda5079b1c8a7e25f523486837426903d29ce84)
+-
+-CVE: CVE-2026-88047
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/1bda5079b1c8a7e25f523486837426903d29ce84]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                |   5 ++
+- src/classify/normmatch.cpp |   6 +-
+- unittest/CMakeLists.txt    |   1 +
+- unittest/normproto_test.cc | 111 +++++++++++++++++++++++++++++++++++++
+- 4 files changed, 122 insertions(+), 1 deletion(-)
+- create mode 100644 unittest/normproto_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 63ca6686..cc748455 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1184,6 +1184,7 @@ check_PROGRAMS += mastertrainer_test
+- endif # !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += matrix_test
+- check_PROGRAMS += networkio_test
+-+check_PROGRAMS += normproto_test
+- if ENABLE_TRAINING
+- check_PROGRAMS += normstrngs_test
+- endif # ENABLE_TRAINING
+-@@ -1388,6 +1389,10 @@ networkio_test_SOURCES = unittest/networkio_test.cc
+- networkio_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- networkio_test_LDADD = $(TESS_LIBS)
+- 
+-+normproto_test_SOURCES = unittest/normproto_test.cc
+-+normproto_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+normproto_test_LDADD = $(TESS_LIBS)
+-+
+- normstrngs_test_SOURCES = unittest/normstrngs_test.cc
+- normstrngs_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- normstrngs_test_LDADD = $(TRAINING_LIBS) $(ICU_I18N_LIBS) $(ICU_UC_LIBS)
+-diff --git a/src/classify/normmatch.cpp b/src/classify/normmatch.cpp
+-index d5bd7e6a..1ce7c928 100644
+---- a/src/classify/normmatch.cpp
+-+++ b/src/classify/normmatch.cpp
+-@@ -28,6 +28,7 @@
+- 
+- #include <cmath>
+- #include <cstdio>
+-+#include <iomanip> // for std::setw
+- #include <sstream> // for std::istringstream
+- 
+- namespace tesseract {
+-@@ -190,7 +191,10 @@ NORM_PROTOS *Classify::ReadNormProtos(TFile *fp) {
+-   while (fp->FGets(line, kMaxLineSize) != nullptr) {
+-     std::istringstream stream(line);
+-     stream.imbue(std::locale::classic());
+--    stream >> unichar >> NumProtos;
+-+    // unichar holds at most 2 * UNICHAR_LEN characters; the width limit
+-+    // (width - 1 characters for char* extraction) keeps the extraction
+-+    // from overflowing the buffer on overlong lines.
+-+    stream >> std::setw(2 * UNICHAR_LEN + 1) >> unichar >> NumProtos;
+-     if (stream.fail()) {
+-       continue;
+-     }
+-diff --git a/unittest/CMakeLists.txt b/unittest/CMakeLists.txt
+-index a660c9b1..4c677a60 100644
+---- a/unittest/CMakeLists.txt
+-+++ b/unittest/CMakeLists.txt
+-@@ -59,6 +59,7 @@ set(LEGACY_TESTS
+-     indexmapbidi_test.cc
+-     intfeaturemap_test.cc
+-     mastertrainer_test.cc
+-+    normproto_test.cc
+-     osd_test.cc
+-     params_model_test.cc
+-     shapetable_test.cc
+-diff --git a/unittest/normproto_test.cc b/unittest/normproto_test.cc
+-new file mode 100644
+-index 00000000..574b2f3d
+---- /dev/null
+-+++ b/unittest/normproto_test.cc
+-@@ -0,0 +1,111 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        normproto_test.cc
+-+// Description: Tests that Classify::ReadNormProtos handles a normproto
+-+//              line whose first (unichar) token exceeds the
+-+//              unichar[2 * UNICHAR_LEN + 1] stack buffer. The
+-+//              istream extraction has no intrinsic length limit, so a
+-+//              crafted NORMPROTO component in a .traineddata file
+-+//              could overflow the stack buffer during legacy engine
+-+//              initialization.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "classify.h"
+-+#include "serialis.h" // for TFile
+-+
+-+#include <cstdio>
+-+#include <cstdlib>
+-+#include <string>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Minimal unicharset (space and 'a').
+-+const char kMinUnicharset[] =
+-+    "2\n"
+-+    "NULL 1 0,255,0,255,0,0,0,0,0,0 Latin 2 0 2\n"
+-+    "a 1 0,255,0,255,0,0,0,0,0,0 Latin 2 0 2\n";
+-+
+-+// Builds a normproto component: a sample-size line (5), five parameter
+-+// description lines, then the given raw proto lines.
+-+std::vector<char> MakeNormproto(const std::string &lines) {
+-+  std::string data = "5\n";
+-+  for (int i = 0; i < 5; ++i) {
+-+    data += "e e 0 1\n";
+-+  }
+-+  data += lines;
+-+  return std::vector<char>(data.begin(), data.end());
+-+}
+-+
+-+class NormprotoTest : public testing::Test {
+-+protected:
+-+  void SetUp() override {
+-+    tmpl_ = "/tmp/tess_normproto_test_XXXXXX";
+-+    char *dir = mkdtemp(tmpl_.data());
+-+    ASSERT_NE(dir, nullptr);
+-+    dir_ = dir;
+-+    std::string uc_path = dir_ + "/eng.unicharset";
+-+    FILE *f = fopen(uc_path.c_str(), "w");
+-+    ASSERT_NE(f, nullptr);
+-+    ASSERT_EQ(fwrite(kMinUnicharset, 1, sizeof(kMinUnicharset) - 1, f),
+-+              sizeof(kMinUnicharset) - 1);
+-+    fclose(f);
+-+    // Load the minimal unicharset into the classifier's inherited
+-+    // unicharset member.
+-+    ASSERT_TRUE(classifier_.unicharset.load_from_file(uc_path.c_str()));
+-+  }
+-+  void TearDown() override {
+-+    std::remove((dir_ + "/eng.unicharset").c_str());
+-+    rmdir(dir_.c_str());
+-+  }
+-+  std::string dir_;
+-+  std::string tmpl_;
+-+  Classify classifier_;
+-+};
+-+
+-+// A 99-character first token (the maximum FGets can return) overflows
+-+// unichar[2 * UNICHAR_LEN + 1] on unpatched code; the width-limited
+-+// extraction must reject the line instead.
+-+TEST_F(NormprotoTest, ToleratesOverlongUnicharToken) {
+-+  std::vector<char> bytes = MakeNormproto(std::string(99, 'A') + "\n");
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+-+  ASSERT_NE(classifier_.NormProtos, nullptr);
+-+  classifier_.FreeNormProtos();
+-+  EXPECT_EQ(classifier_.NormProtos, nullptr);
+-+}
+-+
+-+// A token of exactly 2 * UNICHAR_LEN characters is the maximum legitimate
+-+// size; it must not be truncated or rejected by the width limit.
+-+TEST_F(NormprotoTest, ToleratesMaxLenUnicharToken) {
+-+  std::vector<char> bytes = MakeNormproto(std::string(2 * UNICHAR_LEN, 'A') + " 0\n");
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+-+  ASSERT_NE(classifier_.NormProtos, nullptr);
+-+  classifier_.FreeNormProtos();
+-+  EXPECT_EQ(classifier_.NormProtos, nullptr);
+-+}
+-+
+-+// A well-formed normproto component must still parse.
+-+TEST_F(NormprotoTest, ReadsValidNormprotos) {
+-+  std::vector<char> bytes = MakeNormproto("a 0\n");
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  classifier_.NormProtos = classifier_.ReadNormProtos(&fp);
+-+  ASSERT_NE(classifier_.NormProtos, nullptr);
+-+  classifier_.FreeNormProtos();
+-+  EXPECT_EQ(classifier_.NormProtos, nullptr);
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
+deleted file mode 100644
+index abfd502667..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88048.patch
++++ /dev/null
+@@ -1,227 +0,0 @@
+-From b2fbc8282c34f0a5a426622a9eb6a79ad0df0fe4 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 15:23:59 +0200
+-Subject: [PATCH] Validate FullyConnected weight matrix dimensions at load
+-
+-FullyConnected::DeSerialize read the WeightMatrix without checking
+-that its dimensions match the layer's declared ni/no. MatrixDotVector
+-drives the dot product from the matrix dimensions (writes w.dim1()
+-results, reads w.dim2()-1 inputs) while the scratch buffers are sized
+-from no_ and ni_, so a crafted .traineddata with a mismatched matrix
+-performed a heap out-of-bounds write (up to 65535 rows) and out-of-
+-bounds read on the first recognition step (crash, or heap corruption
+-with attacker-influenced size and content).
+-
+-Key changes:
+-- weightmatrix.h: add Dim1()/Dim2() accessors for the active weight
+-  matrix (int or float), alongside the existing NumOutputs().
+-- fullyconnected.cpp: reject the layer in DeSerialize unless
+-  Dim1() == no_ and Dim2() == ni_ + 1 (the second dimension
+-  includes the bias column), the layout that InitWeightsFloat
+-  always produces.
+-- unittest: new fullyconnected_test that builds a Softmax network
+-  with mismatched matrix dimensions and expects CreateFromFile to
+-  return nullptr; on unpatched code the test reaches Forward and
+-  ASan catches the out-of-bounds write in MatrixDotVector. A
+-  second test verifies that matching dimensions are still accepted.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit 103dc134eb36411ddc6833ec20aa2c76795bd0ff)
+-
+-CVE: CVE-2026-88048
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/103dc134eb36411ddc6833ec20aa2c76795bd0ff]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                     |   5 ++
+- src/lstm/fullyconnected.cpp     |  11 ++-
+- src/lstm/weightmatrix.h         |   7 ++
+- unittest/fullyconnected_test.cc | 115 ++++++++++++++++++++++++++++++++
+- 4 files changed, 137 insertions(+), 1 deletion(-)
+- create mode 100644 unittest/fullyconnected_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 22c2c7a0..284f8b53 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1158,6 +1158,7 @@ if !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += equationdetect_test
+- endif # !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += fileio_test
+-+check_PROGRAMS += fullyconnected_test
+- check_PROGRAMS += heap_test
+- check_PROGRAMS += imagedata_test
+- if !DISABLED_LEGACY_ENGINE
+-@@ -1290,6 +1291,10 @@ fileio_test_SOURCES = unittest/fileio_test.cc
+- fileio_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- fileio_test_LDADD = $(TRAINING_LIBS)
+- 
+-+fullyconnected_test_SOURCES = unittest/fullyconnected_test.cc
+-+fullyconnected_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+fullyconnected_test_LDADD = $(TESS_LIBS)
+-+
+- heap_test_SOURCES = unittest/heap_test.cc
+- heap_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- heap_test_LDADD = $(TESS_LIBS)
+-diff --git a/src/lstm/fullyconnected.cpp b/src/lstm/fullyconnected.cpp
+-index a0ee1b02..d999f575 100644
+---- a/src/lstm/fullyconnected.cpp
+-+++ b/src/lstm/fullyconnected.cpp
+-@@ -121,7 +121,16 @@ bool FullyConnected::Serialize(TFile *fp) const {
+- 
+- // Reads from the given file. Returns false in case of error.
+- bool FullyConnected::DeSerialize(TFile *fp) {
+--  return weights_.DeSerialize(IsTraining(), fp);
+-+  if (!weights_.DeSerialize(IsTraining(), fp)) {
+-+    return false;
+-+  }
+-+  // The weight matrix must match the declared sizes (the second dimension
+-+  // includes the bias column); otherwise Forward would read or write
+-+  // outside the scratch buffers sized from ni_ and no_.
+-+  if (weights_.Dim1() != no_ || weights_.Dim2() != ni_ + 1) {
+-+    return false;
+-+  }
+-+  return true;
+- }
+- 
+- // Runs forward propagation of activations on the input line.
+-diff --git a/src/lstm/weightmatrix.h b/src/lstm/weightmatrix.h
+-index eaca3ffb..6c5ab236 100644
+---- a/src/lstm/weightmatrix.h
+-+++ b/src/lstm/weightmatrix.h
+-@@ -107,6 +107,13 @@ public:
+-   int NumOutputs() const {
+-     return int_mode_ ? wi_.dim1() : wf_.dim1();
+-   }
+-+  // The dimensions of the active weight matrix (wi_ in int mode, else wf_).
+-+  int Dim1() const {
+-+    return int_mode_ ? wi_.dim1() : wf_.dim1();
+-+  }
+-+  int Dim2() const {
+-+    return int_mode_ ? wi_.dim2() : wf_.dim2();
+-+  }
+-   // Provides one set of weights. Only used by peep weight maxpool.
+-   const TFloat *GetWeights(int index) const {
+-     return wf_[index];
+-diff --git a/unittest/fullyconnected_test.cc b/unittest/fullyconnected_test.cc
+-new file mode 100644
+-index 00000000..f9697de4
+---- /dev/null
+-+++ b/unittest/fullyconnected_test.cc
+-@@ -0,0 +1,115 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        fullyconnected_test.cc
+-+// Description: Tests that a FullyConnected (softmax) network layer with
+-+//              weight-matrix dimensions that do not match the declared
+-+//              ni/no is rejected at load. Without the check,
+-+//              MatrixDotVector writes w.dim1() results into a scratch
+-+//              buffer sized from no_ and reads w.dim2()-1 inputs from
+-+//              a buffer sized from ni_ (heap out-of-bounds write/read)
+-+//              on the first recognition step.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "network.h" // for Network, NetworkType
+-+#include "networkio.h"
+-+#include "networkscratch.h"
+-+#include "serialis.h" // for TFile
+-+
+-+#include <cstdint>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Appends raw little-endian values to a byte buffer.
+-+class ByteWriter {
+-+public:
+-+  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
+-+  void PutU32(uint32_t v) {
+-+    for (int i = 0; i < 4; ++i) {
+-+      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
+-+    }
+-+  }
+-+  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
+-+  const std::vector<char> &data() const { return data_; }
+-+
+-+private:
+-+  std::vector<char> data_;
+-+};
+-+
+-+void PutDoubleLE(ByteWriter *w, double d) {
+-+  union {
+-+    double d;
+-+    uint64_t u;
+-+  } conv;
+-+  conv.d = d;
+-+  w->PutU32(static_cast<uint32_t>(conv.u & 0xFFFFFFFF));
+-+  w->PutU32(static_cast<uint32_t>(conv.u >> 32));
+-+}
+-+
+-+// Builds a serialized NT_SOFTMAX network: header with the given ni/no,
+-+// then a float-mode WeightMatrix with the given (corrupt) dimensions.
+-+// The matrix is stored as doubles on disk (see WeightMatrix::DeSerialize).
+-+std::vector<char> MakeSoftmaxNetwork(int ni, int no, int32_t dim1, int32_t dim2) {
+-+  ByteWriter w;
+-+  w.PutU8(static_cast<uint32_t>(NT_SOFTMAX));
+-+  w.PutU8(0); // training: TS_DISABLED
+-+  w.PutU8(0); // needs_to_backprop
+-+  w.PutU32(0); // network_flags
+-+  w.PutU32(static_cast<uint32_t>(ni));
+-+  w.PutU32(static_cast<uint32_t>(no));
+-+  w.PutU32(0); // num_weights (not cross-checked, kept consistent anyway)
+-+  w.PutU32(0); // name (empty string)
+-+  // WeightMatrix::DeSerialize:
+-+  w.PutU8(128); // mode: kDoubleFlag, float mode
+-+  w.PutS32(dim1);
+-+  w.PutS32(dim2);
+-+  PutDoubleLE(&w, 0.0); // empty_ cell
+-+  for (int32_t i = 0; i < dim1 * dim2; ++i) {
+-+    PutDoubleLE(&w, 0.0); // weight data
+-+  }
+-+  return w.data();
+-+}
+-+
+-+// A FullyConnected layer whose weight matrix does not match the declared
+-+// sizes must be rejected by CreateFromFile; on unpatched code the test
+-+// reaches Forward, where MatrixDotVector performs the out-of-bounds
+-+// write this regression test guards against.
+-+TEST(FullyconnectedTest, RejectsWeightMatrixDimensionMismatch) {
+-+  // ni_=no_=1 but dim1=3 (OOB write of 3 results into a 1-result buffer)
+-+  // and dim2=5 (OOB read of 4 inputs from a 1-input buffer).
+-+  std::vector<char> bytes = MakeSoftmaxNetwork(1, 1, 3, 5);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  if (net == nullptr) {
+-+    return; // Fixed: the mismatched layer is rejected at load.
+-+  }
+-+  NetworkIO input;
+-+  input.Resize2d(false, /*width=*/1, /*num_features=*/1);
+-+  NetworkScratch scratch;
+-+  NetworkIO output;
+-+  net->Forward(false, input, nullptr, &scratch, &output);
+-+  delete net;
+-+  FAIL() << "crafted FullyConnected layer with mismatched weight matrix was accepted";
+-+}
+-+
+-+// Consistent dimensions must still be accepted.
+-+TEST(FullyconnectedTest, AcceptsMatchingDimensions) {
+-+  std::vector<char> bytes = MakeSoftmaxNetwork(1, 2, 2, 2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  ASSERT_NE(net, nullptr);
+-+  delete net;
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
+deleted file mode 100644
+index b6a5e5275d..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88049.patch
++++ /dev/null
+@@ -1,315 +0,0 @@
+-From 62fabbca097d127e7d5a8fe3869102d2e4918b80 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 16:41:51 +0200
+-Subject: [PATCH] Validate LSTM gate matrix dimensions against na_/no_ at load
+-
+-LSTM::DeSerialize read na_ from the untrusted TESSDATA_LSTM component
+-and derived ns_ from the CI gate matrix's dim1, but never checked that
+-the deserialized dimensions were mutually consistent. The forward pass
+-sizes its buffers from na_, no_ and ns_ while the gate matrices drive
+-their own dimensions, so a crafted .traineddata performed heap
+-out-of-bounds writes and reads during the first recognition step, e.g.
+-WriteTimeStepPart writing ns_ floats at offset ni_+nf_ into a source_
+-buffer sized from na_ (up to ~256 KB with an attacker-chosen gate
+-matrix dim1).
+-
+-The bounds assertions added by 2f4d2f4 (CVE-2026-73066) covered only
+-NetworkIO::CopyTimeStepGeneral and Randomize, leaving
+-WriteTimeStepPart and AddTimeStepPart unguarded.
+-
+-Key changes:
+-- weightmatrix.h: add Dim1()/Dim2() accessors for the active weight
+-  matrix (int or float), alongside the existing NumOutputs().
+-- lstm.cpp: reject the layer in DeSerialize unless na_ ==
+-  ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_, every deserialized gate has
+-  Dim1() == ns_ and Dim2() == na_ + 1 (the layout InitWeightsFloat
+-  always produces), ns_ == no_ for plain NT_LSTM/NT_LSTM_SUMMARY, and
+-  the softmax layer's sizes match ns_/no_ for the softmax variants.
+-- networkio.cpp: add the same defense-in-depth bounds assertions to
+-  WriteTimeStepPart and AddTimeStepPart as 2f4d2f4 added to
+-  CopyTimeStepGeneral and Randomize.
+-- unittest: add lstm_layer_test with crafted NT_LSTM layers for the
+-  na_ mismatch, gate dim1 mismatch, and gate dim2 mismatch cases
+-  (each rejected at load; on unpatched code the tests reach Forward
+-  and ASan catches the out-of-bounds write in WriteTimeStepPart),
+-  plus a positive control that a consistent layer loads and runs.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit b494ac18925f9d9aff9ef5815475de9943ab19bf)
+-
+-CVE: CVE-2026-88049
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/b494ac18925f9d9aff9ef5815475de9943ab19bf]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                 |   5 +
+- src/lstm/lstm.cpp           |  20 ++++
+- src/lstm/networkio.cpp      |   2 +
+- unittest/lstm_layer_test.cc | 177 ++++++++++++++++++++++++++++++++++++
+- 4 files changed, 204 insertions(+)
+- create mode 100644 unittest/lstm_layer_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 284f8b53..4bcc858b 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1171,6 +1171,7 @@ check_PROGRAMS += layout_test
+- check_PROGRAMS += ligature_table_test
+- check_PROGRAMS += linlsq_test
+- check_PROGRAMS += list_test
+-+check_PROGRAMS += lstm_layer_test
+- if ENABLE_TRAINING
+- check_PROGRAMS += lstm_recode_test
+- check_PROGRAMS += lstm_squashed_test
+-@@ -1352,6 +1353,10 @@ loadlang_test_SOURCES = unittest/loadlang_test.cc
+- loadlang_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- loadlang_test_LDADD = $(TESS_LIBS) $(LEPTONICA_LIBS)
+- 
+-+lstm_layer_test_SOURCES = unittest/lstm_layer_test.cc
+-+lstm_layer_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+lstm_layer_test_LDADD = $(TESS_LIBS)
+-+
+- lstm_recode_test_SOURCES = unittest/lstm_recode_test.cc
+- lstm_recode_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- lstm_recode_test_LDADD = $(TRAINING_LIBS)
+-diff --git a/src/lstm/lstm.cpp b/src/lstm/lstm.cpp
+-index 7bfd19b5..bfffa5de 100644
+---- a/src/lstm/lstm.cpp
+-+++ b/src/lstm/lstm.cpp
+-@@ -274,12 +274,32 @@ bool LSTM::DeSerialize(TFile *fp) {
+-       is_2d_ = na_ - nf_ == ni_ + 2 * ns_;
+-     }
+-   }
+-+  // The deserialized dimensions must be mutually consistent: the forward
+-+  // pass sizes its buffers from na_, no_ and ns_ while the gate matrices
+-+  // drive their own dimensions.
+-+  if (na_ != ni_ + nf_ + (is_2d_ ? 2 : 1) * ns_) {
+-+    return false;
+-+  }
+-+  for (int w = 0; w < WT_COUNT; ++w) {
+-+    if (w == GFS && !Is2D()) {
+-+      continue;
+-+    }
+-+    if (gate_weights_[w].Dim1() != ns_ || gate_weights_[w].Dim2() != na_ + 1) {
+-+      return false;
+-+    }
+-+  }
+-+  if ((type_ == NT_LSTM || type_ == NT_LSTM_SUMMARY) && ns_ != no_) {
+-+    return false;
+-+  }
+-   delete softmax_;
+-   if (type_ == NT_LSTM_SOFTMAX || type_ == NT_LSTM_SOFTMAX_ENCODED) {
+-     softmax_ = static_cast<FullyConnected *>(Network::CreateFromFile(fp));
+-     if (softmax_ == nullptr) {
+-       return false;
+-     }
+-+    if (softmax_->NumInputs() != ns_ || softmax_->NumOutputs() != no_) {
+-+      return false;
+-+    }
+-   } else {
+-     softmax_ = nullptr;
+-   }
+-diff --git a/src/lstm/networkio.cpp b/src/lstm/networkio.cpp
+-index 8e1c6679..7a31034b 100644
+---- a/src/lstm/networkio.cpp
+-+++ b/src/lstm/networkio.cpp
+-@@ -641,6 +641,7 @@ void NetworkIO::AddTimeStep(int t, TFloat *inout) const {
+- 
+- // Adds part of a single timestep to floats.
+- void NetworkIO::AddTimeStepPart(int t, int offset, int num_features, float *inout) const {
+-+  ASSERT_HOST(offset + num_features <= NumFeatures());
+-   if (int_mode_) {
+-     const int8_t *line = i_[t] + offset;
+-     for (int i = 0; i < num_features; ++i) {
+-@@ -662,6 +663,7 @@ void NetworkIO::WriteTimeStep(int t, const TFloat *input) {
+- // Writes a single timestep from floats in the range [-1, 1] writing only
+- // num_features elements of input to (*this)[t], starting at offset.
+- void NetworkIO::WriteTimeStepPart(int t, int offset, int num_features, const TFloat *input) {
+-+  ASSERT_HOST(offset + num_features <= NumFeatures());
+-   if (int_mode_) {
+-     int8_t *line = i_[t] + offset;
+-     for (int i = 0; i < num_features; ++i) {
+-diff --git a/unittest/lstm_layer_test.cc b/unittest/lstm_layer_test.cc
+-new file mode 100644
+-index 00000000..2c874995
+---- /dev/null
+-+++ b/unittest/lstm_layer_test.cc
+-@@ -0,0 +1,177 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        lstm_layer_test.cc
+-+// Description: Tests that an NT_LSTM network layer with mutually
+-+//              inconsistent deserialized dimensions is rejected at
+-+//              load. The forward pass sizes its buffers from na_, no_
+-+//              and ns_ while the gate weight matrices drive their own
+-+//              dimensions, so a crafted .traineddata performs heap
+-+//              out-of-bounds writes/reads during the first
+-+//              recognition step (e.g. WriteTimeStepPart writing ns_
+-+//              floats into a source_ buffer sized from na_).
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "network.h" // for Network, NetworkType
+-+#include "networkio.h"
+-+#include "networkscratch.h"
+-+#include "serialis.h" // for TFile
+-+#include "stridemap.h"
+-+
+-+#include <cstdint>
+-+#include <utility>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Appends raw little-endian values to a byte buffer.
+-+class ByteWriter {
+-+public:
+-+  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
+-+  void PutU32(uint32_t v) {
+-+    for (int i = 0; i < 4; ++i) {
+-+      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
+-+    }
+-+  }
+-+  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
+-+  const std::vector<char> &data() const { return data_; }
+-+
+-+private:
+-+  std::vector<char> data_;
+-+};
+-+
+-+void PutDoubleLE(ByteWriter *w, double d) {
+-+  union {
+-+    double d;
+-+    uint64_t u;
+-+  } conv;
+-+  conv.d = d;
+-+  w->PutU32(static_cast<uint32_t>(conv.u & 0xFFFFFFFF));
+-+  w->PutU32(static_cast<uint32_t>(conv.u >> 32));
+-+}
+-+
+-+// A serialized float-mode WeightMatrix with the given dimensions,
+-+// all weight data zeroed.
+-+void PutGateMatrix(ByteWriter *w, int32_t dim1, int32_t dim2) {
+-+  w->PutU8(128); // mode: kDoubleFlag, float mode
+-+  w->PutS32(dim1);
+-+  w->PutS32(dim2);
+-+  PutDoubleLE(w, 0.0); // empty_ cell
+-+  for (int32_t i = 0; i < dim1 * dim2; ++i) {
+-+    PutDoubleLE(w, 0.0);
+-+  }
+-+}
+-+
+-+// A serialized 1-D NT_LSTM network: header with the given ni/no, na_,
+-+// then the four gates CI, GI, GF1, GO (GFS is not serialized for 1-D).
+-+std::vector<char> MakeLstmNetwork(int ni, int no, int32_t na,
+-+                                  const int32_t gate_dim1[4], const int32_t gate_dim2[4]) {
+-+  ByteWriter w;
+-+  w.PutU8(static_cast<uint32_t>(NT_LSTM));
+-+  w.PutU8(0); // training: TS_DISABLED
+-+  w.PutU8(0); // needs_to_backprop
+-+  w.PutU32(0); // network_flags
+-+  w.PutU32(static_cast<uint32_t>(ni));
+-+  w.PutU32(static_cast<uint32_t>(no));
+-+  w.PutU32(0); // num_weights
+-+  w.PutU32(0); // name (empty string)
+-+  w.PutS32(na);
+-+  for (int g = 0; g < 4; ++g) {
+-+    PutGateMatrix(&w, gate_dim1[g], gate_dim2[g]);
+-+  }
+-+  return w.data();
+-+}
+-+
+-+// Builds the input a standalone LSTM layer would receive: one row of
+-+// the given width with ni features.
+-+NetworkIO MakeInput(int ni, int width) {
+-+  StrideMap stride_map;
+-+  stride_map.SetStride({{1, width}});
+-+  NetworkIO input;
+-+  input.ResizeToMap(false, stride_map, ni);
+-+  return input;
+-+}
+-+
+-+// Runs Forward on the loaded network; on unpatched code the out-of-
+-+// bounds access this regression test guards against fires here.
+-+void RunForward(Network *net, int ni, int width) {
+-+  NetworkIO input = MakeInput(ni, width);
+-+  NetworkScratch scratch;
+-+  NetworkIO output;
+-+  net->Forward(false, input, nullptr, &scratch, &output);
+-+  delete net;
+-+}
+-+
+-+// na_ must equal ni_ + nf_ + ns_ for a 1-D LSTM; here na_=2 but the
+-+// CI matrix makes ns_=64, so the layer must be rejected. On unpatched
+-+// code Forward writes 64 floats at offset ni_=1 into a source_ buffer
+-+// sized for na_=2 (heap out-of-bounds write).
+-+TEST(LstmLayerTest, RejectsInconsistentNa) {
+-+  const int32_t dim1[4] = {64, 64, 64, 64};
+-+  const int32_t dim2[4] = {3, 3, 3, 3};
+-+  std::vector<char> bytes = MakeLstmNetwork(1, 1, 2, dim1, dim2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  if (net == nullptr) {
+-+    return; // Fixed: the inconsistent layer is rejected at load.
+-+  }
+-+  RunForward(net, 1, 2);
+-+  FAIL() << "crafted LSTM layer with inconsistent na_ was accepted";
+-+}
+-+
+-+// All gate matrices must have dim1 == ns_; here the GI matrix has
+-+// dim1=9 while ns_=5. On unpatched code the GI gate dot product writes
+-+// 9 results into a temp line sized for 5 (heap out-of-bounds write).
+-+TEST(LstmLayerTest, RejectsGateDim1Mismatch) {
+-+  const int32_t dim1[4] = {5, 9, 5, 5};
+-+  const int32_t dim2[4] = {7, 7, 7, 7};
+-+  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  if (net == nullptr) {
+-+    return; // Fixed: the inconsistent layer is rejected at load.
+-+  }
+-+  RunForward(net, 1, 2);
+-+  FAIL() << "crafted LSTM layer with inconsistent gate dim1 was accepted";
+-+}
+-+
+-+// All gate matrices must have dim2 == na_ + 1; here the GI matrix has
+-+// dim2=9 while na_=6. On unpatched code the GI gate dot product reads
+-+// 8 inputs from a buffer sized for 6 (heap out-of-bounds read).
+-+TEST(LstmLayerTest, RejectsGateDim2Mismatch) {
+-+  const int32_t dim1[4] = {5, 5, 5, 5};
+-+  const int32_t dim2[4] = {7, 9, 7, 7};
+-+  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  if (net == nullptr) {
+-+    return; // Fixed: the inconsistent layer is rejected at load.
+-+  }
+-+  RunForward(net, 1, 2);
+-+  FAIL() << "crafted LSTM layer with inconsistent gate dim2 was accepted";
+-+}
+-+
+-+// A fully consistent 1-D LSTM layer must still be accepted and usable.
+-+TEST(LstmLayerTest, AcceptsConsistentLayer) {
+-+  const int32_t dim1[4] = {5, 5, 5, 5};
+-+  const int32_t dim2[4] = {7, 7, 7, 7};
+-+  std::vector<char> bytes = MakeLstmNetwork(1, 5, 6, dim1, dim2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  Network *net = Network::CreateFromFile(&fp);
+-+  ASSERT_NE(net, nullptr);
+-+  RunForward(net, 1, 2);
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
+deleted file mode 100644
+index 21fa5e9a67..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88050.patch
++++ /dev/null
+@@ -1,209 +0,0 @@
+-From 5426c23fe7fe32b62bd5694f68f71772f273c821 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 16:56:51 +0200
+-Subject: [PATCH] Reject recoder code values outside the sane range at load
+-
+-RecodedCharID::DeSerialize (hardened by 82727cc to check length_
+-only) still read the individual code values as raw signed int32.
+-UnicharCompress::ComputeCodeRange computes code_range_ as 1 plus the
+-maximum code using a signed > comparison, so a code value of -1
+-never raises the maximum and yields code_range_ = 0. SetupDecoder
+-then resizes is_valid_start_ to 0 and writes is_valid_start_[code(0)]
+-on the size-0 vector<bool>, an out-of-bounds write at a wild wrapped
+-index (deterministic crash) on LSTMRecognizer load. A code value of
+-INT32_MAX instead wraps code_range_ negative and makes resize()
+-throw.
+-
+-Key changes:
+-- unicharcompress.h: validate each deserialized code value to be
+-  within [0, UINT16_MAX), the same arbitrary cap used elsewhere for
+-  .traineddata counts; reject the recoder otherwise.
+-- unicharcompress.h/.cpp: add defense-in-depth bounds assertions to
+-  IsValidFirstCode and SetupDecoder, matching the style of the
+-  NetworkIO assertions from 2f4d2f4.
+-- unittest: add recoder_test, which feeds a crafted UnicharCompress
+-  with a -1 code and an INT32_MAX code and expects DeSerialize to
+-  fail (on unpatched code the -1 case dies on the SEGV in
+-  SetupDecoder, the huge case on the uncaught length_error), plus a
+-  positive control that valid codes load and answer
+-  code_range()/IsValidFirstCode() correctly.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit c94a5532ee04db5a4919542832fd94caee5ea58f)
+-
+-CVE: CVE-2026-88050
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/c94a5532ee04db5a4919542832fd94caee5ea58f]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                    |  5 ++
+- src/ccutil/unicharcompress.cpp |  1 +
+- src/ccutil/unicharcompress.h   | 13 ++++-
+- unittest/recoder_test.cc       | 91 ++++++++++++++++++++++++++++++++++
+- 4 files changed, 109 insertions(+), 1 deletion(-)
+- create mode 100644 unittest/recoder_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 4bcc858b..63ca6686 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1202,6 +1202,7 @@ endif # !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += progress_test
+- check_PROGRAMS += qrsequence_test
+- check_PROGRAMS += recodebeam_test
+-+check_PROGRAMS += recoder_test
+- check_PROGRAMS += rect_test
+- check_PROGRAMS += resultiterator_test
+- check_PROGRAMS += scanutils_test
+-@@ -1435,6 +1436,10 @@ recodebeam_test_SOURCES = unittest/recodebeam_test.cc
+- recodebeam_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- recodebeam_test_LDADD = $(TRAINING_LIBS) $(ICU_I18N_LIBS) $(ICU_UC_LIBS)
+- 
+-+recoder_test_SOURCES = unittest/recoder_test.cc
+-+recoder_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+recoder_test_LDADD = $(TESS_LIBS)
+-+
+- rect_test_SOURCES = unittest/rect_test.cc
+- rect_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- rect_test_LDADD = $(TESS_LIBS)
+-diff --git a/src/ccutil/unicharcompress.cpp b/src/ccutil/unicharcompress.cpp
+-index f909f76e..b3dd440f 100644
+---- a/src/ccutil/unicharcompress.cpp
+-+++ b/src/ccutil/unicharcompress.cpp
+-@@ -400,6 +400,7 @@ void UnicharCompress::SetupDecoder() {
+-   for (unsigned c = 0; c < encoder_.size(); ++c) {
+-     const RecodedCharID &code = encoder_[c];
+-     decoder_[code] = c;
+-+    ASSERT_HOST(code(0) >= 0 && code(0) < code_range_);
+-     is_valid_start_[code(0)] = true;
+-     RecodedCharID prefix = code;
+-     uint32_t len = code.length();
+-diff --git a/src/ccutil/unicharcompress.h b/src/ccutil/unicharcompress.h
+-index 9b696d03..6919b7d2 100644
+---- a/src/ccutil/unicharcompress.h
+-+++ b/src/ccutil/unicharcompress.h
+-@@ -84,7 +84,17 @@ public:
+-     if (length_ > kMaxCodeLen) {
+-       return false;
+-     }
+--    return fp->DeSerialize(&code_[0], length_);
+-+    if (!fp->DeSerialize(&code_[0], length_)) {
+-+      return false;
+-+    }
+-+    // Code values index arrays sized from the maximum code; reject values
+-+    // that are out of the sane range for a recoded alphabet.
+-+    for (uint32_t i = 0; i < length_; ++i) {
+-+      if (code_[i] < 0 || code_[i] >= static_cast<int32_t>(UINT16_MAX)) {
+-+        return false;
+-+      }
+-+    }
+-+    return true;
+-   }
+-   bool operator==(const RecodedCharID &other) const {
+-     if (length_ != other.length_) {
+-@@ -190,6 +200,7 @@ public:
+-   int DecodeUnichar(const RecodedCharID &code) const;
+-   // Returns true if the given code is a valid start or single code.
+-   bool IsValidFirstCode(int code) const {
+-+    ASSERT_HOST(code >= 0 && code < code_range_);
+-     return is_valid_start_[code];
+-   }
+-   // Returns a list of valid non-final next codes for a given prefix code,
+-diff --git a/unittest/recoder_test.cc b/unittest/recoder_test.cc
+-new file mode 100644
+-index 00000000..48dfa7ea
+---- /dev/null
+-+++ b/unittest/recoder_test.cc
+-@@ -0,0 +1,91 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        recoder_test.cc
+-+// Description: Tests that a UnicharCompress (LSTM recoder) with code
+-+//              values outside the sane range is rejected at load.
+-+//              Negative code values leave code_range_ at zero, so
+-+//              SetupDecoder writes is_valid_start_[code(0)] out of
+-+//              bounds on a size-0 vector<bool>; huge code values wrap
+-+//              code_range_ and make resize() throw.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "serialis.h" // for TFile
+-+#include "unicharcompress.h"
+-+
+-+#include <cstdint>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Appends raw little-endian values to a byte buffer.
+-+class ByteWriter {
+-+public:
+-+  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
+-+  void PutU32(uint32_t v) {
+-+    for (int i = 0; i < 4; ++i) {
+-+      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
+-+    }
+-+  }
+-+  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
+-+  const std::vector<char> &data() const { return data_; }
+-+
+-+private:
+-+  std::vector<char> data_;
+-+};
+-+
+-+// A serialized UnicharCompress with one length-1 RecodedCharID per
+-+// given code value (self-normalizing).
+-+std::vector<char> MakeRecoder(const std::vector<int32_t> &codes) {
+-+  ByteWriter w;
+-+  w.PutU32(codes.size());
+-+  for (int32_t code : codes) {
+-+    w.PutU8(1); // self_normalized_
+-+    w.PutU32(1); // length_
+-+    w.PutS32(code); // code_[0]
+-+  }
+-+  return w.data();
+-+}
+-+
+-+// A recoder code of -1 keeps code_range_ at 0, so on unpatched code
+-+// SetupDecoder performs an out-of-bounds write into the size-0
+-+// is_valid_start_ vector<bool>.
+-+TEST(RecoderTest, RejectsNegativeCode) {
+-+  std::vector<char> bytes = MakeRecoder({-1});
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  UnicharCompress recoder;
+-+  EXPECT_FALSE(recoder.DeSerialize(&fp));
+-+}
+-+
+-+// A recoder code of INT32_MAX wraps code_range_ to a negative value,
+-+// so on unpatched code SetupDecoder's resize() throws.
+-+TEST(RecoderTest, RejectsHugeCode) {
+-+  std::vector<char> bytes = MakeRecoder({INT32_MAX});
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  UnicharCompress recoder;
+-+  EXPECT_FALSE(recoder.DeSerialize(&fp));
+-+}
+-+
+-+// A valid recoder must still be accepted and usable.
+-+TEST(RecoderTest, AcceptsValidCodes) {
+-+  std::vector<char> bytes = MakeRecoder({0, 1});
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  UnicharCompress recoder;
+-+  ASSERT_TRUE(recoder.DeSerialize(&fp));
+-+  EXPECT_EQ(recoder.code_range(), 2);
+-+  EXPECT_TRUE(recoder.IsValidFirstCode(0));
+-+  EXPECT_TRUE(recoder.IsValidFirstCode(1));
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
+deleted file mode 100644
+index 1956d49672..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88051.patch
++++ /dev/null
+@@ -1,184 +0,0 @@
+-From 79bf602b0cd5216c125f86eaf3c768daae256930 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 20:29:37 +0200
+-Subject: [PATCH] Validate vector counts in GenericVector::read
+-
+-The callback form of GenericVector::read read two independent int32
+-fields from the file: reserved sized the allocation via reserve(),
+-while size_used_ drove the element loop. Neither was capped and no
+-size_used_ <= reserved invariant was checked, so a crafted
+-.traineddata (e.g. the fontinfo table of a version >= 4 inttemp
+-component) performed a heap out-of-bounds write during legacy
+-engine initialization.
+-
+-Key changes:
+-- genericvector.h: reject negative or over-limit reserved
+-  (matching the 50000000 cap of the DeSerialize overloads) and
+-  reject size_used_ < 0 or size_used_ > reserved before entering
+-  the read loop. Legit files always satisfy size_used_ <= reserved,
+-  as write() persists size_reserved_ first.
+-- unittest: add genericvector_test covering size_used_ beyond
+-  reserved (on unpatched code the ASan build dies on a
+-  heap-buffer-overflow in the read loop), negative counts, and a
+-  consistent vector that must still load.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit 56e09ca12e751623fe796ce1554ce704bffd2ef0)
+-
+-CVE: CVE-2026-88051
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/56e09ca12e751623fe796ce1554ce704bffd2ef0]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                    |  5 ++
+- src/ccutil/genericvector.h     | 10 ++++
+- unittest/genericvector_test.cc | 91 ++++++++++++++++++++++++++++++++++
+- 3 files changed, 106 insertions(+)
+- create mode 100644 unittest/genericvector_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index cc748455..c67f0f63 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1159,6 +1159,7 @@ check_PROGRAMS += equationdetect_test
+- endif # !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += fileio_test
+- check_PROGRAMS += fullyconnected_test
+-+check_PROGRAMS += genericvector_test
+- check_PROGRAMS += heap_test
+- check_PROGRAMS += imagedata_test
+- if !DISABLED_LEGACY_ENGINE
+-@@ -1298,6 +1299,10 @@ fullyconnected_test_SOURCES = unittest/fullyconnected_test.cc
+- fullyconnected_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- fullyconnected_test_LDADD = $(TESS_LIBS)
+- 
+-+genericvector_test_SOURCES = unittest/genericvector_test.cc
+-+genericvector_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+genericvector_test_LDADD = $(TESS_LIBS)
+-+
+- heap_test_SOURCES = unittest/heap_test.cc
+- heap_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- heap_test_LDADD = $(TESS_LIBS)
+-diff --git a/src/ccutil/genericvector.h b/src/ccutil/genericvector.h
+-index 4a5bbe12..cbe1e203 100644
+---- a/src/ccutil/genericvector.h
+-+++ b/src/ccutil/genericvector.h
+-@@ -654,10 +654,20 @@ bool GenericVector<T>::read(TFile *f, const std::function<bool(TFile *, T *)> &c
+-   if (f->FReadEndian(&reserved, sizeof(reserved), 1) != 1) {
+-     return false;
+-   }
+-+  // Arbitrarily limit the number of elements to protect against bad data.
+-+  const uint32_t limit = 50000000;
+-+  if (reserved < 0 || static_cast<uint32_t>(reserved) > limit) {
+-+    return false;
+-+  }
+-   reserve(reserved);
+-   if (f->FReadEndian(&size_used_, sizeof(size_used_), 1) != 1) {
+-     return false;
+-   }
+-+  // size_used_ is an independent file field; without this check the reads
+-+  // below land past the end of the buffer sized from reserved.
+-+  if (size_used_ < 0 || size_used_ > reserved) {
+-+    return false;
+-+  }
+-   if (cb != nullptr) {
+-     for (int i = 0; i < size_used_; ++i) {
+-       if (!cb(f, data_ + i)) {
+-diff --git a/unittest/genericvector_test.cc b/unittest/genericvector_test.cc
+-new file mode 100644
+-index 00000000..269b00f0
+---- /dev/null
+-+++ b/unittest/genericvector_test.cc
+-@@ -0,0 +1,91 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        genericvector_test.cc
+-+// Description: Tests that the callback form of GenericVector::read
+-+//              rejects vectors whose size_used_ exceeds reserved (or
+-+//              whose counts are negative). reserved sizes the buffer
+-+//              while size_used_ is an independent file field driving
+-+//              the element loop, so a crafted .traineddata (e.g. the
+-+//              fontinfo table of a version >= 4 inttemp component)
+-+//              performs a heap out-of-bounds write during legacy
+-+//              engine initialization.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "genericvector.h"
+-+#include "serialis.h" // for TFile
+-+
+-+#include <cstdint>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Appends raw little-endian values to a byte buffer.
+-+class ByteWriter {
+-+public:
+-+  void PutS32(int32_t v) {
+-+    uint32_t u = static_cast<uint32_t>(v);
+-+    for (int i = 0; i < 4; ++i) {
+-+      data_.push_back(static_cast<char>((u >> (8 * i)) & 0xFF));
+-+    }
+-+  }
+-+  const std::vector<char> &data() const { return data_; }
+-+
+-+private:
+-+  std::vector<char> data_;
+-+};
+-+
+-+// A serialized vector header (reserved, size_used_) followed by the
+-+// given number of int32 elements.
+-+std::vector<char> MakeVector(int32_t reserved, int32_t size_used, int32_t num_elements) {
+-+  ByteWriter w;
+-+  w.PutS32(reserved);
+-+  w.PutS32(size_used);
+-+  for (int32_t i = 0; i < num_elements; ++i) {
+-+    w.PutS32(i);
+-+  }
+-+  return w.data();
+-+}
+-+
+-+// reserved=4 but size_used_=0x10000: on unpatched code the callback
+-+// loop writes 65536 ints past the 4-int buffer (heap out-of-bounds
+-+// write).
+-+TEST(GenericVectorTest, RejectsSizeUsedBeyondReserved) {
+-+  std::vector<char> bytes = MakeVector(4, 0x10000, 0x10000);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  GenericVector<int> v;
+-+  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+-+}
+-+
+-+// Negative counts must be rejected; on unpatched code the read
+-+// "succeeds" and leaves size_used_ negative.
+-+TEST(GenericVectorTest, RejectsNegativeCounts) {
+-+  std::vector<char> bytes = MakeVector(-1, -1, 0);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  GenericVector<int> v;
+-+  EXPECT_FALSE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+-+}
+-+
+-+// A consistent vector must still be accepted.
+-+TEST(GenericVectorTest, AcceptsConsistentVector) {
+-+  std::vector<char> bytes = MakeVector(4, 2, 2);
+-+  TFile fp;
+-+  ASSERT_TRUE(fp.Open(bytes.data(), bytes.size()));
+-+  GenericVector<int> v;
+-+  ASSERT_TRUE(v.read(&fp, [](TFile *f, int *p) { return f->DeSerialize(p); }));
+-+  EXPECT_EQ(v.size(), 2);
+-+  EXPECT_EQ(v[0], 0);
+-+  EXPECT_EQ(v[1], 1);
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
+deleted file mode 100644
+index e55968135a..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88052.patch
++++ /dev/null
+@@ -1,165 +0,0 @@
+-From c60ad589ff3a645a3fdf13cb24fe719313145a06 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 18:34:33 +0200
+-Subject: [PATCH] Reject unicharset files whose inserts desync id from unichars
+-
+-UNICHARSET::load_via_fgets reads the unichar count via sscanf and
+-trusts it as the loop bound, indexing the unichars vector with the
+-loop index id via the unchecked set_* accessors. unichar_insert is a
+-no-op for duplicate (or empty) representations, so once any insert
+-no-ops, unichars.size() falls behind id and the subsequent
+-set_*(id, ...) and unichars[id].properties writes land past the end
+-of the vector - a deterministic heap out-of-bounds write (including a
+-std::string assignment via set_normed) for every remaining line, on
+-both the LSTM and legacy init paths. A malformed unicharset with a
+-duplicate line (e.g. two identical entries) triggers it; a
+-non-positive header count likewise loads an empty unicharset
+-"successfully".
+-
+-Key changes:
+-- unicharset.cpp: reject unicharset_size <= 0, and after each insert
+-  verify the vector actually grew to id + 1; on mismatch report the
+-  offending line and reject the file instead of writing out of bounds.
+-- unittest: add unicharset_load_test with a duplicate-representation
+-  unicharset (on unpatched code the test dies on the
+-  container-overflow in load_via_fgets), a zero and a negative count,
+-  and a positive control that a valid unicharset still loads.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit 2d04d640db2e8c7e3bab2369d599343b5a8b8443)
+-
+-CVE: CVE-2026-88052
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/2d04d640db2e8c7e3bab2369d599343b5a8b8443]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am                      |  5 +++
+- src/ccutil/unicharset.cpp        | 12 ++++++
+- unittest/unicharset_load_test.cc | 64 ++++++++++++++++++++++++++++++++
+- 3 files changed, 81 insertions(+)
+- create mode 100644 unittest/unicharset_load_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index bec9ab0e..22c2c7a0 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1220,6 +1220,7 @@ check_PROGRAMS += tfile_test
+- if ENABLE_TRAINING
+- check_PROGRAMS += unichar_test
+- check_PROGRAMS += unicharcompress_test
+-+check_PROGRAMS += unicharset_load_test
+- check_PROGRAMS += unicharset_test
+- check_PROGRAMS += validate_grapheme_test
+- check_PROGRAMS += validate_indic_test
+-@@ -1493,6 +1494,10 @@ unicharcompress_test_SOURCES = unittest/unicharcompress_test.cc
+- unicharcompress_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- unicharcompress_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
+- 
+-+unicharset_load_test_SOURCES = unittest/unicharset_load_test.cc
+-+unicharset_load_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+unicharset_load_test_LDADD = $(TESS_LIBS)
+-+
+- unicharset_test_SOURCES = unittest/unicharset_test.cc
+- unicharset_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- unicharset_test_LDADD = $(TRAINING_LIBS) $(ICU_UC_LIBS)
+-diff --git a/src/ccutil/unicharset.cpp b/src/ccutil/unicharset.cpp
+-index b29ec3b7..0e72ae48 100644
+---- a/src/ccutil/unicharset.cpp
+-+++ b/src/ccutil/unicharset.cpp
+-@@ -791,6 +791,9 @@ bool UNICHARSET::load_via_fgets(
+-       sscanf(buffer, "%d", &unicharset_size) != 1) {
+-     return false;
+-   }
+-+  if (unicharset_size <= 0) {
+-+    return false;
+-+  }
+-   for (UNICHAR_ID id = 0; id < unicharset_size; ++id) {
+-     char unichar[256];
+-     unsigned int properties;
+-@@ -884,6 +887,15 @@ bool UNICHARSET::load_via_fgets(
+-     } else {
+-       this->unichar_insert_backwards_compatible(unichar);
+-     }
+-+    // A duplicate or empty representation makes the insert a no-op,
+-+    // desynchronizing id from the unichars vector; the set_* calls and
+-+    // unichars[id] below would then write out of bounds. The file is
+-+    // malformed, so reject it.
+-+    if (size() != static_cast<size_t>(id) + 1) {
+-+      fprintf(stderr, "%s:%d unichar %d has a duplicate or empty representation\n",
+-+              __FILE__, __LINE__, id);
+-+      return false;
+-+    }
+- 
+-     this->set_isalpha(id, properties & ISALPHA_MASK);
+-     this->set_islower(id, properties & ISLOWER_MASK);
+-diff --git a/unittest/unicharset_load_test.cc b/unittest/unicharset_load_test.cc
+-new file mode 100644
+-index 00000000..d775e233
+---- /dev/null
+-+++ b/unittest/unicharset_load_test.cc
+-@@ -0,0 +1,64 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        unicharset_load_test.cc
+-+// Description: Tests that UNICHARSET::load_via_fgets rejects unicharset
+-+//              files whose insertions desynchronize the id loop index
+-+//              from the unichars vector (duplicate or empty
+-+//              representations), which would make the subsequent set_*
+-+//              calls write out of bounds, and non-positive size counts.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include "serialis.h" // for TFile
+-+#include "unicharset.h"
+-+
+-+#include <cstring>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Loads the given unicharset text via the TFile-based loader.
+-+bool LoadUnicharset(const char *text, UNICHARSET *unicharset) {
+-+  TFile fp;
+-+  if (!fp.Open(text, std::strlen(text))) {
+-+    return false;
+-+  }
+-+  return unicharset->load_from_file(&fp, false);
+-+}
+-+
+-+// A duplicate representation makes the second insert a no-op, so on
+-+// unpatched code the set_* calls for the remaining lines write past
+-+// the end of the unichars vector (ASan container-overflow).
+-+TEST(UnicharsetLoadTest, RejectsDuplicateRepresentation) {
+-+  const char *text = "3\nA 0 Latin\nA 0 Latin\nB 0 Latin\n";
+-+  UNICHARSET unicharset;
+-+  EXPECT_FALSE(LoadUnicharset(text, &unicharset));
+-+}
+-+
+-+// A non-positive size count must be rejected; on unpatched code a
+-+// zero or negative count loads an empty unicharset successfully.
+-+TEST(UnicharsetLoadTest, RejectsNonPositiveCount) {
+-+  const char *texts[] = {"0\n", "-1\n"};
+-+  for (const char *text : texts) {
+-+    UNICHARSET unicharset;
+-+    EXPECT_FALSE(LoadUnicharset(text, &unicharset));
+-+  }
+-+}
+-+
+-+// A valid unicharset must still be accepted.
+-+TEST(UnicharsetLoadTest, AcceptsValidUnicharset) {
+-+  const char *text = "3\nA 0 Latin\nB 0 Latin\nC 0 Latin\n";
+-+  UNICHARSET unicharset;
+-+  ASSERT_TRUE(LoadUnicharset(text, &unicharset));
+-+  EXPECT_EQ(unicharset.size(), 3u);
+-+  EXPECT_STREQ(unicharset.id_to_unichar(1), "B");
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch b/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
+deleted file mode 100644
+index 32e70c0f6f..0000000000
+--- a/meta-oe/recipes-graphics/tesseract/tesseract/CVE-2026-88054.patch
++++ /dev/null
+@@ -1,274 +0,0 @@
+-From 83bbac0975f52a5171776fddcc800a2aaa5206a3 Mon Sep 17 00:00:00 2001
+-From: Stefan Weil <sw@weilnetz.de>
+-Date: Fri, 21 Aug 2026 14:38:55 +0200
+-Subject: [PATCH] Reject empty network stacks in LSTM .traineddata
+- deserialization
+-
+-Plumbing::DeSerialize read the network stack size from the untrusted
+-TESSDATA_LSTM component and only rejected size > 10000. A crafted
+-.traineddata with a top-level Series/Parallel/Reversed layer with an
+-empty stack survived load; LSTMRecognizer initialization then called
+-network_->CacheXScaleFactor(network_->XScaleFactor()), which
+-dereferences stack_[0] on the empty vector:
+-- Series: Series::CacheXScaleFactor (series.cpp)
+-- Parallel/Reversed: inherited Plumbing::XScaleFactor
+-The virtual call through the wild pointer crashed the process at
+-initialization (deterministic denial of service).
+-
+-Key changes:
+-- plumbing.cpp: reject size == 0 for all plumbing types, and
+-  size < 2 for NT_SERIES (Series::Forward requires two or more
+-  networks and always aborts on one).
+-- tessedit.cpp: fail the language load gracefully when the LSTM model
+-  cannot be loaded, instead of aborting via ASSERT_HOST, so
+-  TessBaseAPI::Init returns -1 on corrupt traineddata.
+-- unittest: add plumbing_test, which builds a minimal traineddata
+-  with empty/undersized LSTM plumbing stacks and expects a graceful
+-  init failure. On unpatched code the tests die on the original
+-  SEGV in Series::CacheXScaleFactor / Plumbing::XScaleFactor.
+-
+-Reported-by: Zhixi "Jace" Sun <g.mygenie@gmail.com>
+-Assisted-by: OpenCode / qwen3.8-27b-thinking (Alibaba Cloud)
+-Signed-off-by: Stefan Weil <sw@weilnetz.de>
+-(cherry picked from commit 552771236b0d80cbdb0c7dd856120fa21a4672e5)
+-
+-CVE: CVE-2026-88054
+-Upstream-Status: Backport [https://github.com/tesseract-ocr/tesseract/commit/552771236b0d80cbdb0c7dd856120fa21a4672e5]
+-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+----
+- Makefile.am               |   5 ++
+- src/ccmain/tessedit.cpp   |   7 +-
+- src/lstm/plumbing.cpp     |   6 ++
+- unittest/plumbing_test.cc | 165 ++++++++++++++++++++++++++++++++++++++
+- 4 files changed, 182 insertions(+), 1 deletion(-)
+- create mode 100644 unittest/plumbing_test.cc
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index c67f0f63..a6ee0931 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1198,6 +1198,7 @@ if ENABLE_TRAINING
+- check_PROGRAMS += pango_font_info_test
+- endif # ENABLE_TRAINING
+- check_PROGRAMS += paragraphs_test
+-+check_PROGRAMS += plumbing_test
+- if !DISABLED_LEGACY_ENGINE
+- check_PROGRAMS += params_model_test
+- endif # !DISABLED_LEGACY_ENGINE
+-@@ -1427,6 +1428,10 @@ paragraphs_test_SOURCES = unittest/paragraphs_test.cc
+- paragraphs_test_CPPFLAGS = $(unittest_CPPFLAGS)
+- paragraphs_test_LDADD = $(TESS_LIBS)
+- 
+-+plumbing_test_SOURCES = unittest/plumbing_test.cc
+-+plumbing_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-+plumbing_test_LDADD = $(TESS_LIBS)
+-+
+- if !DISABLED_LEGACY_ENGINE
+- params_model_test_SOURCES = unittest/params_model_test.cc
+- params_model_test_CPPFLAGS = $(unittest_CPPFLAGS)
+-diff --git a/src/ccmain/tessedit.cpp b/src/ccmain/tessedit.cpp
+-index 7ec89bd9..722ed09b 100644
+---- a/src/ccmain/tessedit.cpp
+-+++ b/src/ccmain/tessedit.cpp
+-@@ -169,7 +169,12 @@ bool Tesseract::init_tesseract_lang_data(const std::string &language, OcrEngineM
+- #endif // ndef DISABLED_LEGACY_ENGINE
+-     if (mgr->IsComponentAvailable(TESSDATA_LSTM)) {
+-       lstm_recognizer_ = new LSTMRecognizer(language_data_path_prefix.c_str());
+--      ASSERT_HOST(lstm_recognizer_->Load(this->params(), lstm_use_matrix ? language : "", mgr));
+-+      if (!lstm_recognizer_->Load(this->params(), lstm_use_matrix ? language : "", mgr)) {
+-+        delete lstm_recognizer_;
+-+        lstm_recognizer_ = nullptr;
+-+        tprintf("Error: Failed to load the LSTM model from %s\n", tessdata_path.c_str());
+-+        return false;
+-+      }
+-     } else {
+- #ifdef DISABLED_LEGACY_ENGINE
+-       // The legacy engine is compiled out, so we cannot fall back to it.
+-diff --git a/src/lstm/plumbing.cpp b/src/lstm/plumbing.cpp
+-index f0133148..15cf3d62 100644
+---- a/src/lstm/plumbing.cpp
+-+++ b/src/lstm/plumbing.cpp
+-@@ -226,6 +226,12 @@ bool Plumbing::DeSerialize(TFile *fp) {
+-   if (size > 10000) {
+-     return false;
+-   }
+-+  // Reject empty stacks: XScaleFactor, CacheXScaleFactor and other methods
+-+  // unconditionally dereference stack_[0] during network initialization.
+-+  // A Series needs at least two networks (see Series::Forward).
+-+  if (size == 0 || (type() == NT_SERIES && size == 1)) {
+-+    return false;
+-+  }
+-   for (uint32_t i = 0; i < size; ++i) {
+-     Network *network = CreateFromFile(fp);
+-     if (network == nullptr) {
+-diff --git a/unittest/plumbing_test.cc b/unittest/plumbing_test.cc
+-new file mode 100644
+-index 00000000..27486f86
+---- /dev/null
+-+++ b/unittest/plumbing_test.cc
+-@@ -0,0 +1,165 @@
+-+///////////////////////////////////////////////////////////////////////
+-+// File:        plumbing_test.cc
+-+// Description: Tests that a corrupt TESSDATA_LSTM component in a
+-+//              .traineddata file is rejected without crashing. A
+-+//              plumbing layer (Series/Parallel/Reversed) with an
+-+//              empty or undersized network stack would make
+-+//              XScaleFactor/CacheXScaleFactor dereference stack_[0]
+-+//              during engine initialization.
+-+//
+-+// Licensed under the Apache License, Version 2.0 (the "License");
+-+// you may not use this file except in compliance with the License.
+-+// You may obtain a copy of the License at
+-+// http://www.apache.org/licenses/LICENSE-2.0
+-+//
+-+///////////////////////////////////////////////////////////////////////
+-+
+-+#include "include_gunit.h"
+-+
+-+#include <tesseract/baseapi.h>
+-+
+-+#include "network.h"        // for NetworkType
+-+#include "tessdatamanager.h" // for TessdataManager, TESSDATA_LSTM
+-+
+-+#include <cstdint>
+-+#include <cstdio>
+-+#include <cstdlib>
+-+#include <cstring>
+-+#include <string>
+-+#include <vector>
+-+
+-+namespace tesseract {
+-+namespace {
+-+
+-+// Minimal unicharset with the special codes (space, Joined, Broken) that
+-+// UNICHARSET::load_from_file expects, as embedded in the TESSDATA_LSTM
+-+// component by LSTMRecognizer::Serialize.
+-+const char kMinUnicharset[] =
+-+    "3\n"
+-+    "NULL 0 NULL 0\n"
+-+    "Joined 7 0,69,188,255,486,1218,0,30,486,1188 Latin 26 0 98 Joined\n"
+-+    "|Broken|0|1 f 0,69,186,255,892,2138,0,80,892,2058 Common 84 10 84 |Broken|0|1\n";
+-+
+-+// Appends raw little-endian values to a byte buffer.
+-+class ByteWriter {
+-+public:
+-+  void PutU8(uint32_t v) { data_.push_back(static_cast<char>(v & 0xFF)); }
+-+  void PutU32(uint32_t v) {
+-+    for (int i = 0; i < 4; ++i) {
+-+      data_.push_back(static_cast<char>((v >> (8 * i)) & 0xFF));
+-+    }
+-+  }
+-+  void PutS32(int32_t v) { PutU32(static_cast<uint32_t>(v)); }
+-+  void PutString(const char *s) {
+-+    PutU32(static_cast<uint32_t>(std::strlen(s)));
+-+    data_.insert(data_.end(), s, s + std::strlen(s));
+-+  }
+-+  void PutRaw(const char *s) { data_.insert(data_.end(), s, s + std::strlen(s)); }
+-+  const std::vector<char> &data() const { return data_; }
+-+
+-+private:
+-+  std::vector<char> data_;
+-+};
+-+
+-+// Serialized network header as written by Network::Serialize:
+-+//   int8 type, int8 training, int8 needs_to_backprop, int32 network_flags,
+-+//   int32 ni, int32 no, int32 num_weights, string name.
+-+void AppendNetworkHeader(ByteWriter *w, NetworkType type) {
+-+  w->PutU8(static_cast<uint32_t>(type));
+-+  w->PutU8(0); // training: TS_DISABLED
+-+  w->PutU8(0); // needs_to_backprop
+-+  w->PutU32(0); // network_flags
+-+  w->PutU32(0); // ni
+-+  w->PutU32(0); // no
+-+  w->PutU32(0); // num_weights
+-+  w->PutString(""); // name
+-+}
+-+
+-+// A minimal valid child network (NT_INPUT with a 1x1x1x1 shape).
+-+void AppendInputChild(ByteWriter *w) {
+-+  AppendNetworkHeader(w, NT_INPUT);
+-+  w->PutS32(1); // batch
+-+  w->PutS32(1); // height
+-+  w->PutS32(1); // width
+-+  w->PutS32(1); // depth
+-+  w->PutS32(0); // loss type
+-+}
+-+
+-+// Builds a TESSDATA_LSTM component whose top-level network is a plumbing
+-+// layer of the given type with the given (corrupt) stack size, followed by
+-+// the remaining fields of LSTMRecognizer::DeSerialize.
+-+std::vector<char> MakeLstmComponent(NetworkType type, uint32_t stack_size) {
+-+  ByteWriter w;
+-+  AppendNetworkHeader(&w, type);
+-+  w.PutU32(stack_size); // Plumbing::DeSerialize reads this as uint32
+-+  for (uint32_t i = 0; i < stack_size; ++i) {
+-+    AppendInputChild(&w);
+-+  }
+-+  w.PutRaw(kMinUnicharset); // unicharset (raw text, no recoder/unicharset components)
+-+  w.PutString("");             // network_str_
+-+  w.PutS32(0);                 // training_flags_
+-+  w.PutS32(0);                 // training_iteration_
+-+  w.PutS32(0);                 // sample_iteration_
+-+  w.PutS32(0);                 // null_char_
+-+  w.PutU32(0);                 // adam_beta_ (float 0.0)
+-+  w.PutU32(0);                 // learning_rate_ (float 0.0)
+-+  w.PutU32(0);                 // momentum_ (float 0.0)
+-+  return w.data();
+-+}
+-+
+-+// Writes a traineddata file with the given (corrupt) LSTM component to
+-+// dir/eng.traineddata.
+-+bool WriteCorruptTraineddata(const std::string &dir, const std::vector<char> &lstm) {
+-+  TessdataManager mgr;
+-+  mgr.OverwriteEntry(TESSDATA_LSTM, lstm.data(), static_cast<int>(lstm.size()));
+-+  return mgr.SaveFile((dir + "/eng.traineddata").c_str(), nullptr);
+-+}
+-+
+-+class PlumbingTest : public testing::Test {
+-+protected:
+-+  void SetUp() override {
+-+    tmpl_ = "/tmp/tess_plumbing_test_XXXXXX";
+-+    char *dir = mkdtemp(tmpl_.data());
+-+    ASSERT_NE(dir, nullptr);
+-+    dir_ = dir;
+-+  }
+-+  void TearDown() override {
+-+    std::remove((dir_ + "/eng.traineddata").c_str());
+-+    rmdir(dir_.c_str());
+-+  }
+-+  // Expects the LSTM engine to reject the corrupted traineddata
+-+  // gracefully (init failure) instead of crashing.
+-+  void ExpectInitFails(const std::vector<char> &lstm) {
+-+    ASSERT_TRUE(WriteCorruptTraineddata(dir_, lstm));
+-+    tesseract::TessBaseAPI api;
+-+    EXPECT_EQ(api.Init(dir_.c_str(), "eng", tesseract::OEM_LSTM_ONLY), -1);
+-+  }
+-+  std::string dir_;
+-+  std::string tmpl_;
+-+};
+-+
+-+// Empty NT_SERIES stack: Series::CacheXScaleFactor would dereference
+-+// stack_[0] on the empty vector during initialization.
+-+TEST_F(PlumbingTest, RejectsEmptySeriesStack) {
+-+  ExpectInitFails(MakeLstmComponent(NT_SERIES, 0));
+-+}
+-+
+-+// Empty NT_PARALLEL stack: Plumbing::XScaleFactor would dereference
+-+// stack_[0] on the empty vector during initialization.
+-+TEST_F(PlumbingTest, RejectsEmptyParallelStack) {
+-+  ExpectInitFails(MakeLstmComponent(NT_PARALLEL, 0));
+-+}
+-+
+-+// Empty NT_XREVERSED stack: same crash as the parallel case.
+-+TEST_F(PlumbingTest, RejectsEmptyReversedStack) {
+-+  ExpectInitFails(MakeLstmComponent(NT_XREVERSED, 0));
+-+}
+-+
+-+// A Series with a single network: Series::Forward requires at least two
+-+// networks, so such a model can never work.
+-+TEST_F(PlumbingTest, RejectsSingleNetworkSeries) {
+-+  ExpectInitFails(MakeLstmComponent(NT_SERIES, 1));
+-+}
+-+
+-+} // namespace
+-+} // namespace tesseract
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.4.bb
+similarity index 63%
+rename from meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
+rename to meta-oe/recipes-graphics/tesseract/tesseract_5.5.4.bb
+index c96aca1dde..069282d510 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.3.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.4.bb
+@@ -5,15 +5,8 @@ BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
++SRCREV = "7e548e6eff172f38f97664afe7f7ce40db36c8d6"
+ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
+-           file://CVE-2026-88052.patch \
+-           file://CVE-2026-88048.patch \
+-           file://CVE-2026-88049.patch \
+-           file://CVE-2026-88050.patch \
+-           file://CVE-2026-88047.patch \
+-           file://CVE-2026-88051.patch \
+-           file://CVE-2026-88054.patch \
  "
--SRCREV = "e5e799221b45bbb90f5fdc5c69b6b8dfbf017e78"
-+SRCREV = "79cdd5ab40c79afa559f689ffc13b76812dee1ac"
  
- inherit cmake ptest
- 
+ DEPENDS = "leptonica"
