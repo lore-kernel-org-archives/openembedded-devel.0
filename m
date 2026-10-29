@@ -1,223 +1,125 @@
-Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.1])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7491.1793264794375212497
+Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.97])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8781.1793269923975124638
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:06:34 -0700
+ Thu, 29 Oct 2026 03:32:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@est.tech header.s=selector1 header.b=qFK94r/4;
- spf=pass (domain: est.tech, ip: 40.107.130.1, mailfrom: adarsh.jagadish.kamini@est.tech)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@gomspace.com header.s=selector2 header.b=NbkKIUrC;
+ spf=pass (domain: gomspace.com, ip: 52.101.70.97, mailfrom: mns@gomspace.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oOdU6ptfQ8RLWlCnHdwNAPiZUMlkNtqIpcoseNAXgU3fJ4lvC5shC9Aeg7HJ48ZcNAqi1A1x0UJI3Z0wjT+hIkAfAcm5oARXo3vUnlcWAF54Eqv/kNQ9U37j9AW3Wm8U4nf2cVH+37/unOemxxMMDcf4MLEsY0WwCQeBGP7kWU3ttnzTKducURFBwxrLOxNzFcaij6M0wt3k151VBs1lP8xgjXThZXAO6CpjZrK++LofvowagsdTJBsCK6bGbOk44cBRhbJth4ImbvUw5lGVBuz6BGSQlWtS6rbpu39vwFTuJ5vsZzC9sUOnk1f/I6trWvcPNYOdTluct1yBmc5ffQ==
+ b=H0ifM/GenQkHTvHX707JvsuX++I2/5IzCJLm7YkAM2uFgK80MQfeRuPYYAw1jzQZHtjy2kjug5MhpYOCWZis5khu2c0NVCqG6Hy79ntNt8ZsasI0C6RHyx96XmYkpuviWnTH8tZBLS6/7M3kOu8JrUY/VC8IRStE/7gQdgQvioz2FaGoWBQ+y8lvVeWFC5mG16zl9XPZf1U9pyDqK+3XGNilQixObQhSpLVuU4EsHbepiI7EyM6XRKV6wrEqQ6o1EkE8nJGtWq7AOmpjVwMloEmViKfP0ZWrAUxYYlfnZNQbUzu49fyz5C9gSko80AKljOEO2TpfNwL8z7PhFeVnDA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQs8qjTUjyWsa3fwywe0TD8RsL7AHJfJWOypqKu3apY=;
- b=sNKhwJsSpJ/17M3jFddTDw+37VKk/lATgwz1ydTFsjAT4mH4vji3j+Qkw0C/h8iFEWfRqu3lASkbEgJgmRXVL3n0q6aQJQx0bb8r8Rtqdea6zPZIv3zaJbHj9FLqr2aZ7ACt7hBFT2iqJSeZT1nLqa+MhpR/99cR8kGbkon8UlwpBe+EB6WoMJNlKSyriCag3bivfBF7V7NWrWRmcE+uCQgmSFTzlLSLl9dBewP4mMVWLaRMgwMlOunqJ5phalEv1JTr2W8/XjVQuGmKLDjQiVwcgdbW0gk9EJZnQBnzPzyACM95iHqc2tW1SeTbL3W+ey+a3bdXNmL/7SdwKzfmTA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=est.tech; dmarc=pass action=none header.from=est.tech;
- dkim=pass header.d=est.tech; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=est.tech; s=selector1;
+ bh=RpOQqBD6FFeZzadoF2slMyZQfQgOqTunULlqmmG36FM=;
+ b=lu40lo5xcq3W6NEpNUZ9eD5njhuYagUeYkCW6vF2KZwjAftPizWunXJG1iKdk4UfYz0O8Aqk5z7z/5PIYtUeRFa5cgA0923defo/hsTAxHqzbtECv9zF3j2hPwXhzgeOvUL1QA9IBwNZiYJtYjpxlj2IO8Ft7/FHgb3R91l4dMFaopfU0C4+Ls5cs5MBr7LkmqYnmIAvHFlQTamLXPn6Kh3cRSa7jBTSd/SDILTmlzK9b8cVH8kIwu2HFGSSLgK4TnDLvQxQXBu3kFnfVmq7QHUSwNZ+dDkuhlmq1IEWIupFlFj3aA2BPhd9GSsMnK0NiyiWaUbGBDBBvKQVKRTb9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 77.233.245.163) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=gomspace.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=gomspace.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQs8qjTUjyWsa3fwywe0TD8RsL7AHJfJWOypqKu3apY=;
- b=qFK94r/4tpw80IcmFXCD++VrrU04wbJRsXHVgEf/5cQp/784xjZMelsZpioR+a6CnvS1QIkHGTeYCGjju366I5pkz2Jgwd02z2jjRuXICbDN1856xFxDCqDMepW705S4va1HeHaQJsFXu/YzLLqQVrCOn/EDBeSe3bxeX67KAI+C6rPYuLjCTtneQp1zH2mRo3BEKZv5gaiZjmTAjz/2JnpvX75NR4Z61CmpimeJJJL1+EsRv5Pgxvz/sgqddqWPmVN1aW2oef5o0Nyx55eVaCsU7Kuj8S6JM1Sdv7FPLcc4Mhe4VsaXtfrcme8L5b0c6EfpZKmi87b43se4K4erMA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=est.tech;
-Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:396::9)
- by DU2PPF136EFA2F4.EURP189.PROD.OUTLOOK.COM (2603:10a6:18:3::a85) with
+ bh=RpOQqBD6FFeZzadoF2slMyZQfQgOqTunULlqmmG36FM=;
+ b=NbkKIUrCo0d8+sgH3vRvsIPL5sDFfP+R5xAWuMICLdLwtG9CB1yOdm3244YUC+BUm3ascV10FGSwh6omaxbLb2Rm0LC2CpebKNOXakOUfhO3zX9Yvw6bvP0tDnGIzcDejLZDsEZkqZO3Kt2Rw2YmpY8ApGCxCX0ioBy9rtc0wAU=
+Received: from PR3P193CA0040.EURP193.PROD.OUTLOOK.COM (2603:10a6:102:51::15)
+ by DB4PR08MB9312.eurprd08.prod.outlook.com (2603:10a6:10:3f4::5) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Thu, 29 Oct
- 2026 09:06:30 +0000
-Received: from AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
- ([fe80::f147:85e5:34de:eeff]) by AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
- ([fe80::f147:85e5:34de:eeff%4]) with mapi id 15.21.0546.021; Thu, 29 Oct 2026
- 09:06:29 +0000
-From: "Adarsh Jagadish Kamini" <adarsh.jagadish.kamini@est.tech>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][scarthgap][PATCH] strongswan: fix CVE-2026-78135
-Date: Thu, 29 Oct 2026 10:06:26 +0100
-Message-ID: <20261029090626.498332-1-adarsh.jagadish.kamini@est.tech>
-X-Mailer: git-send-email 2.43.0
-X-ClientProxiedBy: OS6P279CA0121.NORP279.PROD.OUTLOOK.COM
- (2603:10a6:e10:3b::19) To AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:20b:396::9)
-Return-Path: adarsh.jagadish.kamini@est.tech
+ 2026 10:31:58 +0000
+Received: from ZR1PEPF0000E6B8.eurprd07.prod.outlook.com
+ (2603:10a6:102:51:cafe::7c) by PR3P193CA0040.outlook.office365.com
+ (2603:10a6:102:51::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.8 via Frontend Transport; Thu, 29
+ Oct 2026 10:31:58 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 77.233.245.163) smtp.mailfrom=gomspace.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=gomspace.com;
+Received-SPF: Pass (protection.outlook.com: domain of gomspace.com designates
+ 77.233.245.163 as permitted sender) receiver=protection.outlook.com;
+ client-ip=77.233.245.163; helo=webmail.gomspace.com; pr=C
+Received: from webmail.gomspace.com (77.233.245.163) by
+ ZR1PEPF0000E6B8.mail.protection.outlook.com (10.167.241.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Thu, 29 Oct 2026 10:31:57 +0000
+Received: from DK-AAL-EX03.gomspace.lan (10.0.1.61) by
+ DK-AAL-EX03.gomspace.lan (10.0.1.61) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.56; Thu, 29 Oct 2026 11:31:56 +0100
+Received: from ThinkStation-P3.gomspace.lan (10.0.8.56) by
+ DK-AAL-EX03.gomspace.lan (10.0.1.61) with Microsoft SMTP Server id
+ 15.2.2562.56 via Frontend Transport; Thu, 29 Oct 2026 11:31:56 +0100
+From: Martin Siegumfeldt <mns@gomspace.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Martin Siegumfeldt <mns@gomspace.com>
+Subject: [meta-oe][PATCH] luaunit: initial recipe
+Date: Thu, 29 Oct 2026 11:31:38 +0100
+Message-ID: <20261029103139.3887962-1-mns@gomspace.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Return-Path: mns@gomspace.com
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8P189MB1672:EE_|DU2PPF136EFA2F4:EE_
-X-MS-Office365-Filtering-Correlation-Id: df72a679-1ae9-4c98-7388-08df359beb71
+X-MS-TrafficTypeDiagnostic: ZR1PEPF0000E6B8:EE_|DB4PR08MB9312:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0daf8235-5e98-48d0-9f54-08df35a7dc1d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|260925022911599003|260925021911599003|260925021311599003|56012099006|11063799006|261009223027099003|261009221227099003|261026140227099003|261026121527099003|261028144727099003|261021123027099003|261022105027099003|261021121427099003|10067099003|12006099003|18002099003|3023799007|13003099007;
-X-Microsoft-Antispam-Message-Info: 4nV8jeu+kmIhdw9Yv6Qu/+Z6KJpMS1IQMWqCPHYyIOCp4UjSpEkbIn77m7/OvpM5JQ3zd9hmmB5eioC47trD9i5cGqrXz/gBqGzDY14UU1SsnWR5wg10q3Us3fb+Yh76nex5MpwVD2qLdwSLQ57WLB61EDNn6AkYC32zbA3+Dk7DjhN6046NMmXFdXs6TE9KCbMOxxepIWxXMxScFmQe4Tp7JFO3diEmG1jd8e1qZSmrHhVt13G8ZSNte47IPZ9653qa0QBwRh0VVPZFAelKP2FMBV4bnSdzdVvOUg1JZyf6wtYaFvbzS1wwpCHZiVc+xXPaA0KjNb6MAGX/aFklZzYNeR5ey62hAmz+y3H5ZAGUbHs5Ixs1DbsmoranTeEEVCyb++HjliGu2k3hSmNzgPbcxf9cOglNa9vjvjZNvSUUasAxz4mMS1MDWIpJ5C0cYccXr5H2dZ6JDp5Hb68tb61W8siUqNpReRFTLJRopInfhl6+HSWA30P+Py+ISysI/fhGABVUNThtgH4hhwCj0V2bfNwfNo3tK2PPnGauEFrz+dTQHwKSZasvvOm46gDdCp0Pf19cYSdZ4ncs/4nUSwwOrnWeOy/7Ru8cZU3igowJ35XNVTbWIyBroBzrg1Qz
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8P189MB1672.EURP189.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(260925022911599003)(260925021911599003)(260925021311599003)(56012099006)(11063799006)(261009223027099003)(261009221227099003)(261026140227099003)(261026121527099003)(261028144727099003)(261021123027099003)(261022105027099003)(261021121427099003)(10067099003)(12006099003)(18002099003)(3023799007)(13003099007);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|260925022911599003|260925021911599003|260925021311599003|11063799006|261026121527099003|56012099006|261009223027099003|10067099003|261021121427099003|18002099003|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: WI1moAVU4A4Yb0lT9KnyE8UBmzBptEPq+NSj6xS6T1xTMgYeysHc2TJN+TqY33OfRxThdG6JUvaWb9FtCxg9zyj1XBsbCl7/ehRdskCRzg5eHsOUn2C0yyghwuLcOJbVpIGoG1XA5rvBsw+nH6xADKZ3w8W/x6tlH1kX0paYRods6ABuEk/+1NYgKRaPOHGl+e0oqy8ptSP20KCZGWXW3BZWLgRaMPLoPDX9s7gi/AD4N0RU01HKxfW1s/AfqYEdGIlzpsib6Ehj+gageGZMp9yZB+W3mka2HoOtnxPqmKk9kBeprsVBbPSo8XsVqhYrPrNipiXzpTzXVtrWhIfs9W7x5HDqHM65BpE1Ph9ztt3GkXX7k9TaJyNQ///unSDOqvcEB/gPVt5VBP8M0qkbmcwgd4sE90Jva49IZaubnenPBoU2JxTMc71DlFQKSkPg1tw+pID2f3EWyuVdLod3OmFZ0lPudQbtqBTjWWi7nYjFmimPuMrOI0cr71AyRrCIgyIEhUXm9kTgoJMF+WKO3XnKjvHCV2+Vp/n8xHhX/+fyXDDhxZtLt2TDJzqkFIVlKOxS4AiTiP2oHA8NO6cWi9nMFpVfSTy7NV0hSwmhH3iZNM60RSXTpw10TJJwkSPL8qzPWQbeAiH+LvdYJpdHbAJPGIjuRG/jpNGwR2/BjQjz7qFQKGSzFavdUcBS/R4rybO7KQC2FiJmO1Qkgythvw==
+X-Forefront-Antispam-Report: CIP:77.233.245.163;CTRY:DK;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:webmail.gomspace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(260925022911599003)(260925021911599003)(260925021311599003)(11063799006)(261026121527099003)(56012099006)(261009223027099003)(10067099003)(261021121427099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6lX8Hafxh2E//B/D0eI0UhTZPce7YQzrY19DHpPWEgs8/1+9uWO92KgrbCO5?=
- =?us-ascii?Q?NL571WRkd/UyZZU6b+YmYVrIBcYGLv8/F5LVj/2vhx7bDOtu3LwwM1X456D+?=
- =?us-ascii?Q?Bt01gWcSDtwOlrhZgRfXgERqQOHY6/jezo7/etGGSXrfWqaNBloyqENRVvhi?=
- =?us-ascii?Q?kRV1obRSS9ove7nIN9HRceYzR8F5vg8a+L9xkaSOUzIOSqUaaPpfZkunvSof?=
- =?us-ascii?Q?3mn/mFSBNb7jAW6IjW7DDRFNk8w0FB0tNShgTRIpEQfi7PtWhAOFzlQBQEn2?=
- =?us-ascii?Q?TAk7WdeG60GNV6CBjwNxfIZ+XbRBilNGLTpdXp1TG+aMRzeLpPSw/ZT9nCow?=
- =?us-ascii?Q?xcZGhTsK4jKVzinTnUVIxffbTibDeQjCeLMCFda0hQM0us+x7OJei2b29Fjz?=
- =?us-ascii?Q?cOO+WHzZ/RjYHipqFE6u5ndTdPkzk+S9U9jsKTk5zV32nS8SYhAGJ3Q4/0Mj?=
- =?us-ascii?Q?s+SP/lmgZQqCMdpjn13mc/xpqX9uGKdfd0GBr8GI/w+OaRxt7uIigkKEidtb?=
- =?us-ascii?Q?CLp2vj9GOj4nucpEm9bzfxN1yk5qGqFrT35rGg9QDhfkva+DKnRI4R2FMxHB?=
- =?us-ascii?Q?Ev+gEJYIb/33kfV99N/gHeGB2CE8sGZ4ZMZx1QcxJgxNVXjtA6kI63AHhMhW?=
- =?us-ascii?Q?7fAT+1WObBcojEXlJY1piUFQpERhRG8nF61tZS2R0HDH/aGM3s0UGqyb1eSb?=
- =?us-ascii?Q?ITSeiw0hTx0nm0jtw+Rvrf4q+srwEbl5Eaw9m0u1YmWVS52pMJ4tyBgbS39g?=
- =?us-ascii?Q?sgbM9A6+n6JlN9v4yv+2RtZwHUS1eXGVtvziO3Kp7+JB5vUHtNoI9Ej092/0?=
- =?us-ascii?Q?g7IiDQhiJHIKPQ2j4Xj+fV2Vih6tFgOvBAySae54pY3Aj1IfAUh8zB9aOgkZ?=
- =?us-ascii?Q?gLQIlpLP2Bc2DKe381BgMON4PZWj0xS5GL+Zo3aepAnp1qN227RBn5dpWyIn?=
- =?us-ascii?Q?l5JsgTxe4YcLtWmE0RCpIXGnKGDY9SfpumYdSRH4A0BgcgZzVdxvSVtPlHvy?=
- =?us-ascii?Q?XH3W4p8uqXXt7sMAK2reMgR3XebtS7WGTTDoaXJu02jqc85mN2TK6NpO0CeJ?=
- =?us-ascii?Q?kjcj4S28oy2B/Rx1FBMLYRS4Uk0vS8lwPYdr8jBGTU0Zo7PBF0fpwfXpuq5N?=
- =?us-ascii?Q?iN+cngb/P73+4rKq8C7xvPJFkzBQKbKrgOFUq1WrEUqPjVDjXEqc3gq4mNZC?=
- =?us-ascii?Q?v228HUe4KxtzL6xsLhSTp2YmKYP2ny1WFNac/6yZFRGfsrDV9bWsVMjljXT+?=
- =?us-ascii?Q?xQimt6T090yXphq4cAtAIjVz7YkpsIrWf1u7bIb0FGdOFvWhInfhCmA1rqOC?=
- =?us-ascii?Q?Ge6EteIpRXspwEP21Q1l36szKNeGSYbFr2sqkGyOIqrgX6fpIQq3/0sJuwH5?=
- =?us-ascii?Q?0/qqVyzbD1NQjONHpfifYS9s4YfCio5nLF3E0ksgjydxxuAybZvfXKqyBK9r?=
- =?us-ascii?Q?m/02LitcgzRqs8fz29u0Y7qOaC/GWVYqD1NLzrqckLguIDmn6RyVMnYTPp+E?=
- =?us-ascii?Q?Os+Ji5wnXjWtKTbto6gnBEsa99GJFTHYLBGORiTbcMpP9Ds62XTeyKRU3lyo?=
- =?us-ascii?Q?eU22Cfh8WA732yNM1f5C+3/uGapyW6dqSVGwKKTs1IHg8rja5Ri+Z2CjHYZq?=
- =?us-ascii?Q?1J0VOaSYmnm3N63zqz46cxcVo8Jeiv9frHmSN3P14KYYpc/pTcDNITNFsgoL?=
- =?us-ascii?Q?oYL0qNje4ZUdzVbztYAemcgw1/2XkF0jJ6aHF35XeR5Ai9RigyW7aZUOn1Aj?=
- =?us-ascii?Q?/JoXdq+VD4gHLPRB9J56sg4azkosREE=3D?=
-X-OriginatorOrg: est.tech
-X-MS-Exchange-CrossTenant-Network-Message-Id: df72a679-1ae9-4c98-7388-08df359beb71
-X-MS-Exchange-CrossTenant-AuthSource: AS8P189MB1672.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2026 09:06:29.8063
+X-MS-Exchange-AntiSpam-MessageData-0: Gj5GelJ5du/Q+tQfQz95ThppuKHWY1qOAdqYQp/D8ej4SdtfOmr+IGND5yEuOGM4U0hfzqE2IG/qfTbJpYNmSNrvOaG4Gb+X6K8uOQ97DD5HZGFllE8wVPr42AsLHLy7i7YhGul1GwW7aGMTDxAtkwmhZmNR3oc0hL4OChsClSZI6AN24k1XQJE5SGrqLc5cCdBXURkbZO6QlzmcTsB1RrIM2+ov4BScLMGNA/JhrWT0pnk8uQj32YA8l7tfzONS4zWHqxsfCYNfT/0QVzVfrZ7pvrytYdB6la6q+pzfYA9rgebziIdUCkv35egT4tUK8aliWZyt2ec/MktBmuXLQjW8z1qfcpvhYz2h8OaAQGwWPwNh8OCjkbnWGzKvjvLdLh6kOL+V4eBuac0azbyHZc21iNepWtWGYAMYRcnSNefv/Yot/ZkOCotHRjNMS9pS
+X-OriginatorOrg: gomspace.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2026 10:31:57.8080
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d2585e63-66b9-44b6-a76e-4f4b217d97fd
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nROJFOemPE88paxyfU13COsK7KmjS7N4nNhCU21OjAVW7tyojIN5JQj2jSl5ksXebxgLjOlWgFEUj47T1kGRkX6eZCltIvaZUH6cl6qGlkM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PPF136EFA2F4
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0daf8235-5e98-48d0-9f54-08df35a7dc1d
+X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;Ip=[77.233.245.163];Helo=[webmail.gomspace.com]
+X-MS-Exchange-CrossTenant-AuthSource: ZR1PEPF0000E6B8.eurprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR08MB9312
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:56:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131657
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 10:32:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131658
 Content-Type: text/plain; charset="utf-8"
 
-Backport patch to fix CVE-2026-78135.
+heavily inspired from version in meta-microblx
 
-References:
-  https://nvd.nist.gov/vuln/detail/CVE-2026-78135
-
-Upstream fix:
-  https://github.com/strongswan/strongswan/commit/4dcb132266a954202509a3b4b=
-3be99378f3e3b4d
-
-Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
+Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
 ---
- .../strongswan/CVE-2026-78135.patch           | 73 +++++++++++++++++++
- .../strongswan/strongswan_5.9.14.bb           |  1 +
- 2 files changed, 74 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/C=
-VE-2026-78135.patch
+ meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026=
--78135.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-20=
-26-78135.patch
+diff --git a/meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb b/meta-oe/reci=
+pes-devtools/luaunit/luaunit_3.5.bb
 new file mode 100644
-index 0000000000..d046ef78c1
+index 0000000000..5d6d6100df
 --- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-78135.=
-patch
-@@ -0,0 +1,73 @@
-+From 59468f3ba1a8084ea566a50d835d96bf02cebcef Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Mon, 27 Jul 2026 08:53:50 +0200
-+Subject: [PATCH] ikev2: Properly reject CREATE_CHILD_SA requests on
-+ unestablished IKE_SAs
++++ b/meta-oe/recipes-devtools/luaunit/luaunit_3.5.bb
+@@ -0,0 +1,17 @@
++SUMMARY =3D "Unit testing framework for Lua"
++HOMEPAGE =3D "https://github.com/bluebird75/luaunit"
++LICENSE =3D "BSD-2-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3cbaf542c6e9a9dcad6c372227a=
+c49a1"
 +
-+The previous check was not actually enforced as long as there were still
-+tasks in the passive queue (it was originally added to fix an issue on
-+initiators, so the passive queue was expected to be empty).  This allowed
-+an unauthenticated attacker to potentially establish a usable Child SA
-+if certain preconditions were met.
++SRC_URI =3D "git://github.com/bluebird75/luaunit.git;protocol=3Dhttps;nobr=
+anch=3D1;tag=3DLUAUNIT_V3_5"
++SRCREV =3D "9678c933e71cb26adcdfa6cf1baceb926398eb48"
 +
-+First, it required that the initiator is authenticated with EAP so the
-+authentication and the creation of the first Child SA is deferred.
-+Second, the responder must either not configure an IP address pool or
-+an explicit remote TS, otherwise, traffic selector negotiation fails.
++RDEPENDS:${PN} =3D "lua"
 +
-+Note that the half-open IKE SA and the installed IPsec SA will be removed
-+after the default timeout of 30 seconds.
++LUA_VERSION =3D "5.5"
 +
-+Fixes: 28b33d7cacd2 ("ike-auth: Support exchange between IKE_SA_INIT and I=
-KE_AUTH")
-+Fixes: 8503077175cd ("ikev2: Reject CREATE_CHILD_SA exchange on unestablis=
-hed IKE_SAs")
-+Fixes: c60c7694d2d8 ("merged tasking branch into trunk")
-+Fixes: CVE-2026-78135
++do_install() {
++    install -D ${S}/luaunit.lua ${D}${datadir}/lua/${LUA_VERSION}/luaunit.=
+lua
++}
 +
-+CVE: CVE-2026-78135
-+Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit=
-/4dcb132266a954202509a3b4b3be99378f3e3b4d]
-+
-+Signed-off-by: Adarsh Jagadish Kamini <adarsh.jagadish.kamini@est.tech>
-+---
-+ src/libcharon/sa/ikev2/task_manager_v2.c | 21 +++++++++++----------
-+ 1 file changed, 11 insertions(+), 10 deletions(-)
-+
-+diff --git a/src/libcharon/sa/ikev2/task_manager_v2.c b/src/libcharon/sa/i=
-kev2/task_manager_v2.c
-+index 8c07cf272d..6ac94b8679 100644
-+--- a/src/libcharon/sa/ikev2/task_manager_v2.c
-++++ b/src/libcharon/sa/ikev2/task_manager_v2.c
-+@@ -1088,9 +1088,18 @@ static status_t process_request(private_task_manage=
-r_t *this,
-+ 	delete_payload_t *delete;
-+ 	ike_sa_state_t state;
-+=20
-++	state =3D this->ike_sa->get_state(this->ike_sa);
-++	if (message->get_exchange_type(message) =3D=3D CREATE_CHILD_SA &&
-++		(state =3D=3D IKE_CREATED || state =3D=3D IKE_CONNECTING))
-++	{
-++		DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
-++			 "unestablished IKE_SA, rejected");
-++		return FAILED;
-++	}
-++
-++	/* create tasks depending on request type, if not already some queued */
-+ 	if (array_count(this->passive_tasks) =3D=3D 0)
-+-	{	/* create tasks depending on request type, if not already some queued =
-*/
-+-		state =3D this->ike_sa->get_state(this->ike_sa);
-++	{
-+ 		switch (message->get_exchange_type(message))
-+ 		{
-+ 			case IKE_SA_INIT:
-+@@ -1131,14 +1140,6 @@ static status_t process_request(private_task_manage=
-r_t *this,
-+ 			{	/* FIXME: we should prevent this on mediation connections */
-+ 				bool notify_found =3D FALSE, ts_found =3D FALSE;
-+=20
-+-				if (state =3D=3D IKE_CREATED ||
-+-					state =3D=3D IKE_CONNECTING)
-+-				{
-+-					DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
-+-						 "unestablished IKE_SA, rejected");
-+-					return FAILED;
-+-				}
-+-
-+ 				enumerator =3D message->create_payload_enumerator(message);
-+ 				while (enumerator->enumerate(enumerator, &payload))
-+ 				{
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.b=
-b b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-index 661727e501..b2aebf188a 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-@@ -18,6 +18,7 @@ SRC_URI =3D "https://download.strongswan.org/strongswan-$=
-{PV}.tar.bz2 \
-            file://constraints-Case-insensitive-matching-and-reject-exc.pat=
-ch \
-            file://tls-server-Only-accept-non-empty-ECDH-public-keys-wi.pat=
-ch \
-            file://libradius-Reject-undersized-attributes-in-enumerator.pat=
-ch \
-+           file://CVE-2026-78135.patch \
-            "
-=20
- SRC_URI[sha256sum] =3D "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e7=
-4693b54fc33678"
++FILES:${PN} =3D "${datadir}/lua/${LUA_VERSION}/luaunit.lua"
+--=20
+2.55.0
+
