@@ -1,92 +1,116 @@
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7604.1793265450068169854
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7659.1793265712764112147
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 02:17:30 -0700
+ Thu, 29 Oct 2026 02:21:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=ShAj31PI;
- spf=pass (domain: gmail.com, ip: 74.125.224.54, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-67583c777abso585437d50.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:17:29 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=WCzp87u+;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48afbd2c386so1082723f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 02:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793265449; x=1793870249; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793265711; x=1793870511; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QFZkzHf/HFIvMnHS/Bj0ZJgmNP1LZ4ApdJIp2t94f+o=;
-        b=ShAj31PIS9kldWyZ1EYcZiB3Kpn+tnSQDs+2W9zk0egcx06VTGvM3nOVtmA4Xk/Wxo
-         OwYroEQWLVKF6SfOVIY2iwX4NGEGqLb0ZvXgBzV1B1tfCgoSZhE7CR/zVhQPVOILkxxt
-         Tce3v43nKpXGHOeuwWaR3DdUMPVvCvZDdWFgw3Dut/bLrm7x8W3Qsy2QVxIOmq6NcNNb
-         zHDu0DTEg5O7/A0prcRY/DLtXukbzuzI76NixAwNQnROa/i0YW/JXoMHWAaRL9uahlra
-         hcl51KWXKo3z0NK3GmHsmJqvC4xdcmD11SpbKQZavFDDAbGjbvefKC+Y+RBnH9BsZFHA
-         jTIg==
+        bh=Cs9CGa9djD575i36VgtDmnTQAXHI5AqPDLrid9BOzT4=;
+        b=WCzp87u+r0wHG8dlV01o50ZOsk63yKYRw01ebHQ5fVOnfEmj8xdzbyMGh0sQV32JbK
+         8JqqS9xBJuokVE7XreS3yceoCOy4FICIeXBCR9ZM/rq9y15gbMrzDD4uT8CkZcg2iPA0
+         jY3OmOmcE4ipf8tvsXnhwto654xhpcfGDt34Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793265449; x=1793870249;
+        d=1e100.net; s=20260707; t=1793265711; x=1793870511;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QFZkzHf/HFIvMnHS/Bj0ZJgmNP1LZ4ApdJIp2t94f+o=;
-        b=nxm6oV1mbqyfljxuyvyipTn6XX1yiRuMv1B4bNHnCzaiCqEWLBFgqzPVwTMrR/KAre
-         CUt0UhKks1UCbhNVyVYeRb2gdWQJGy6oPhLS0K/WGNxKNumSBL7ilBpXSv7xdCmfGmMX
-         Cy4R2NnO+MkHRcWbdyX/9gXELNYJRB+2VdJikHs5sywen1u5buKz/am3bhEx0HFF4uX0
-         l4XrMWMxbTMmyAEIyl+7XN1tWJOHNHOk8Zo8seyw3WfEDxtJ/oYFMvXZc/LHI/bLKXMs
-         FPsk4yF0qYem86mAH09eWkmXWbpLcpmQZDTPxshntmksVpA93DV0Cj/A0a+Ort/SdYzd
-         jJnw==
-X-Gm-Message-State: AFq9FYIKfMBL+/u1TefQYuoVwUFCFv7tdqyfRq5Jbg8pAEQ9vPD7+Z34
-	eihDln977ZkATmLUhGybXMPMgOIA1RRHeAuQ1vV7LY3SEtoB8jXNuMhv4arsft64
-X-Gm-Gg: AYBFou3V5eTbkpwE8Ei+n280SpnTklOYx4PrCZUM0ISzfFBDCGNzNhNEqptFD6PBssi
-	siSGOFJ++rTfYPlgPgGhWQMcWbB1KGsp0rWK7Yb4i5+kU1fXebZhIHQ3V/cHF2T58KWwg188nml
-	y4oWht4Ub6kllfLlNzW3jzJGTY1nRd6rB49ZG2WoufTFB082FooFg/hRS1uPdjWf860VUrAbfFO
-	DaYUqvJAdbwLho/CHk8ijrN6NsGhOrJe1W4+h06+afmMsZk27AYbHsbuWJs9/CA9LSYt4B9foM3
-	ULq9PRT1NF64PDBQePR45gmolfRzKEP2y6v9iEJOr/XwPxan9LyihfGqyoa9bp0v4AygXZiF9z1
-	QC65i5D9t/YABTIKHLOCJgqueBmQcH5Kth1yzx8J0U0eWg+J2V07uFtyXXciGckpKBAyd/6ycev
-	05r0K2jpwuP0ovgj82i3hvNHMLBiJg9Dp3SzAumCouTOPJ+hq5l/9Qfb2PON9Wrlz4bQUQX5Rv9
-	J9hbXtn+ptQxZzmH98lfqPiB9p3RxugwOPyPSVAb66PNzKJK/Z+4vEJLzLkgGR/SN+dhwRO8uPf
-	uJdGU/G1MmPpw2d4Hc2F35jy5CRIcPvEAF96negPIvsEZvrok7MItDjNvQ+UBrk0NtESAs+Z9rd
-	pgYY7/mMfcL36j/cSpSFNOkKP7E+cbO/pB0Br9Yxvoc80tMbAyQqC
-X-Received: by 2002:a05:690e:d8c:b0:677:edf1:80b7 with SMTP id 956f58d0204a3-67a8d06d64fmr1636395d50.12.1793265448936;
-        Thu, 29 Oct 2026 02:17:28 -0700 (PDT)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.54.204.63])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a7a0c7da1sm3041065d50.12.2026.10.29.02.17.27
+        bh=Cs9CGa9djD575i36VgtDmnTQAXHI5AqPDLrid9BOzT4=;
+        b=n4s8XJY6Ydlj+IsuGr1TvG8PyGZyVGFz5nfaX+SHlDMwQ6YG6mYLpoB9dkbAmjVEk6
+         BYf3CTILkU61uqN+LNE1D55pG6d0lVMCteRx56WoqBjzlr7c1pVy2qFwtPIYccvt2lb3
+         idFvTGC05fM6TODjdmYKKKL2kIzhA+E00uAMlfI+ByEtHT7vs5vcVXW1IFg2iQY8BfIy
+         14dqkm+TpZFQBtjr/d20UUnDcQhs4pOK6WCMColWCo/yf7fdrpshnyh/cHrqt3AlLpwM
+         P83W6HaqUHuOkKUtfdWpIlbHrWn/eYm1pnBvCs7QsfXS6+Bo295Hex7dbIJJEORH+Jo8
+         nFsA==
+X-Gm-Message-State: AFq9FYKcM8dAJTHO8u9NctqxslyAlqNBk520uSXId3XlbEFrtkVEdNcm
+	Q3EyLVoCW4cCjqCmyxAb3aL83kLw34Ctj/TjcalYVJj3hlhOAuy4EbVwDvf6dRjy10RDwnZBMHt
+	hMC2i
+X-Gm-Gg: AYBFou0GJR3mgjg82C0okDSQzSeQUBOyNcggrPTQ5tRdZWwkSbnTQTxcsQ+jkrCzxQc
+	bcwNVUbDMSmygWaABaWPzIwQuWULpqfapA83ZAR4UHPIYYb+dXqd3tBjcgXz7kivFn2HaFUP61b
+	kyg2rEis+Djqbwq10wrLuJKO2PXT4aL4OXNGv0Fk82uZVGn54fW4Xdxbu/QhctDCPvES1JRAHV3
+	4OzrPi+S+6ljxvzti010PEP03SpFQF7msV6zKRemDn09sOZLyoifo4TcZlP/ynDZeLdmNb1zj1W
+	b3lVH5irg0JmLB41PEaOKcPzbqd83M3PJd1Q4ZGVElACjgZ4jI8nIAb2RpfX/D65cyBv7TytRj+
+	713ORBMNQJdmdeNOcf1cmIhdRpj+3oJvh0dJA8dYbxRl5vgNx7iPfrmcEte+y37B68Exq+av4Z+
+	dww9LwKooAIRcjheppGXaOV7J07yNtC/jI3v15t5E4uCymPOB26O/JiUNgGsICCSMdifTD8lR+Y
+	/idrfJM/K0599bc+hTcqd5efUiyiiPN88JuMhRKnKV2zv/LsZTu+1KqEK0oblV7f2FSwV+T5LvL
+	ilyke0y/wPlLPBFeRIHkocvO27xZhcFL6Gs69bpe5q4UiASzIjbU0XY59JbgxTG6I/GqVOqrKsj
+	g0fNUm4vQduzcWiNjoApM40z2QV9VLFaMbZBrPw0SXmLrpvAl/2ijjw==
+X-Received: by 2002:a05:6000:3101:b0:48e:3085:7cf0 with SMTP id ffacd0b85a97d-48e5d5da15amr11641633f8f.51.1793265710711;
+        Thu, 29 Oct 2026 02:21:50 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ecdf9bdsm31901084f8f.55.2026.10.29.02.21.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:17:27 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 29 Oct 2026 02:21:50 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 24.22.1 -> 24.22.2
-Date: Thu, 29 Oct 2026 05:17:05 -0400
-Message-ID: <20261029091705.1718506-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2 1/4] python3-pyroute2: Upgrade 0.9.6 -> 0.9.7
+Date: Thu, 29 Oct 2026 11:21:44 +0200
+Message-ID: <20261029092147.791220-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:17:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131644
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 09:21:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131645
 Content-Type: text/plain; charset="utf-8"
 
-Changelog: https://github.com/nodejs/node/releases/tag/v24.22.2
+Upgrade to release 0.9.7:
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+- ndb: basic support for XFRM interfaces
+- ndb: basic support for object preload hooks
+- ndb: basic support for prometheus metrics
+- taskstats: fix name unregister_mask() -> deregister_mask()
+- plan9: fids per session & inodes per FS
+- ethtool: fix the off flags
+- dhcp: support option 41 NIS servers
+- wirouting: link features
+- rtnl: support RTAX_CC_ALGO on route metrics
+- rtnl: add missing NFT flags
+
+Fix ptest-runner errors.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../nodejs/{nodejs_24.22.1.bb => nodejs_24.22.2.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_24.22.1.bb => nodejs_24.22.2.bb} (98%)
+ ...thon3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb} | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyroute2_0.9.6.bb => python3-pyroute2_0.9.7.bb} (75%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb
-index 4912136f76..22355ab85c 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.2.bb
-@@ -35,7 +35,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI:append:class-target = " \
-            file://0009-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "4f5379796280cdaeb0c2f358fd04b6a16cc4fb7dfa83b5a8c91a9d963b435231"
-+SRC_URI[sha256sum] = "8fe2ec1723bb9f8d0b683907c82708debbeda64af21cb2aa214c4241eed0a061"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
+rename to meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+index ec72b450ee..d83b65f6da 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
+                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
  
- S = "${UNPACKDIR}/node-v${PV}"
+-SRC_URI[sha256sum] = "6bc5e2ea9a372ded682b4ede4028ba00236bd6e35b42d833f39a96b219ef1db2"
++SRC_URI[sha256sum] = "a678b098478c46ec51d6bf9a03c3cd2ac0172dffa590e9e8c1eeab633d0c17c6"
  
+ inherit python_setuptools_build_meta pypi ptest-python-pytest
+ 
+@@ -35,6 +35,11 @@ RDEPENDS:${PN}-ptest += " \
+ do_install_ptest:append () {
+     install -d ${D}${PTEST_PATH}/tests
+     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++    # Remove test_frozen.py because it is missing some components
++    # and is not present in the project's upstream GitHub repository.
++    rm ${D}${PTEST_PATH}/tests/test_unit/test_frozen.py
++    # Fix paths
+     sed -e  "s|'test_unit|'tests/test_unit|g" -i  ${D}${PTEST_PATH}/tests/test_unit/test_nlmsg/test_marshal.py \
+-    ${D}${PTEST_PATH}/tests/test_unit/test_iproute_match/test_match.py
++    ${D}${PTEST_PATH}/tests/test_unit/test_iproute_match/test_match.py \
++    ${D}${PTEST_PATH}/tests/test_unit/test_nlmsg/test_nl80211_station.py
+ }
 -- 
-2.43.0
+2.47.3
 
