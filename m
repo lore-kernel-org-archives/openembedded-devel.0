@@ -1,143 +1,288 @@
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13260.1793371236522395132
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14265.1793374272315804761
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 07:40:36 -0700
+ Fri, 30 Oct 2026 08:31:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=E7F0JPL6;
- spf=pass (domain: axis.com, ip: 52.101.84.54, mailfrom: peter.kjellerstedt@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dn7Se1M3g2XRLMfBkfd3PUG3FffVKDdlWmbqofK2ftTdT1AgVMCG6Nw6QEAY4smqCpoUFLPE5b0nuVkvCfatBoY3jLgESvoGpPlKRlwJ58MuZ8IQTkl+R3uJwmGjcRjOTYkVI74pfkl939P9iDO+ifMwhhc9EzNhpRZ3AZLbhM+1VoBlmsh8He1h2wyIaSwcndKnhzkyAA4eC3Yh0t5YNdMCMO+tN5Hv06SUPVi8FvsR8Hx02cnYM3suvzeAomMi4LdfyXjYhKzaZbvTWmeI2V/+waZiWfDUEQEfuwaGt/4z7Y4QwbxZiI1MCJ1B63I6KkPHLUg6IT0Y1kr/42xfRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vWh7P5i1MrzjK1p4AWaxp9pik+R+5xy6++L0EdgBro8=;
- b=mrCXmSYTt7iQVkpopE4SEclaEql9LWARb3lFBNSKmhhArd5+uuH0jyBE0XDsBiu0BvUehLPdsErm4SNS2wCqLMlh+ghf8i0pD+2FblExMumJ1sz01qxd7zGjIgderMiC+q6lwLfTaqUMwNpOlPcrp8jiFClCwGXi3Geq+ULgpCxwoZkndRNxhnlX8ShXZhfQ8jsXCCEA+pQIEpqg50RG5t2BFuTkCERCpO47Q9eQ9P0WHGckbinWUmRPGQsDG88ai1N+sIUuNh0y1s1sdqVOMcbXChnQ0+xgix0FJ4zxHTfK2b3bELLMBjD0cQOgP4t6Jff6af/o22IX1QiGdlFD4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vWh7P5i1MrzjK1p4AWaxp9pik+R+5xy6++L0EdgBro8=;
- b=E7F0JPL6ZHgoneRLe6JX12HN7SYN4rbSvY07brJoCGxd3qsAt0Et/o9Jux7htvKihimWt4ClU9vNFsqhBHU1HW3sB9vB6t4YZGq5ymbsJ0F6HaQTz1NSaXUXbfn8salzJQuTHJCN/bxF4+B/Dbw86RyKywvSYADp2BuzswKhCUE=
-Received: from DU7P190CA0013.EURP190.PROD.OUTLOOK.COM (2603:10a6:10:550::35)
- by DU2PR02MB7776.eurprd02.prod.outlook.com (2603:10a6:10:2e7::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.9; Fri, 30 Oct
- 2026 14:40:31 +0000
-Received: from DB1PEPF000509E5.eurprd03.prod.outlook.com
- (2603:10a6:10:550:cafe::61) by DU7P190CA0013.outlook.office365.com
- (2603:10a6:10:550::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.10 via Frontend Transport; Fri,
- 30 Oct 2026 14:40:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- DB1PEPF000509E5.mail.protection.outlook.com (10.167.242.55) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Fri, 30 Oct 2026 14:40:30 +0000
-Received: from SE-MAILARCH01W.axis.com (10.20.40.15) by se-mail11w.axis.com
- (10.20.40.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.39; Fri, 30 Oct
- 2026 15:40:29 +0100
-Received: from se-mail10w.axis.com (10.20.40.10) by SE-MAILARCH01W.axis.com
- (10.20.40.15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.61; Fri, 30 Oct
- 2026 15:40:29 +0100
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail10w.axis.com
- (10.20.40.10) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
- Transport; Fri, 30 Oct 2026 15:40:29 +0100
-Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id AD423C76;
-	Fri, 30 Oct 2026 15:40:29 +0100 (CET)
-Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
-	id A934212B974; Fri, 30 Oct 2026 15:40:29 +0100 (CET)
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>, Markus Volk
-	<f_l_k@t-online.de>
-Subject: [meta-oe][master][blacksail][PATCH] glaze: Install the CMake files in /usr/lib/cmake/glaze (as intended)
-Date: Fri, 30 Oct 2026 15:39:54 +0100
-Message-ID: <20261030143954.1209259-1-pkj@axis.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=snG7qtrE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-8b09e07e149so7259197b3.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 08:31:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793374271; cv=none;
+        d=google.com; s=arc-20260327;
+        b=p4Vt5opGOTqyVsQ9YzG/FfRij693ktbYhUFE63NXuVTwc5fxdAHdVU8bSvKzmV00UB
+         KEkdxO/2AZC3L5SdyZk8nEhAkH9eXNzju+RtgzIjJ1dWI1+bcbgvuUB4Gzne1JAwzVUI
+         IcDQAUQPRJk2+FjaQsW7yWfG5kaTmKPdwjjB9zyb8KJ38T9Lab6789xlxFPjIOXw4hmw
+         9ipujMb4JYd8rBTeZrZKCqzjq/VmTx4xGCD6ETHKA8wo9Sj1MVFIIri/LKb1kL3RkYoT
+         ++IQwWKV3FOMjxjAtPhMdMSBvVJ7kicbq+i+3l+KKdqkuDO376ObZZLMOwm6UcIZDvAv
+         piwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
+        fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
+        b=Bz6+kfZIF5DznwKsdVmyykF+JCtE4HZjsyPNJfHX4tbhBkaMVp3ComzsqbJMjH6fso
+         kTaHsE23uLvhvr71ipp3lNzjkVnMZE2Imbcy7nHt9Zxk550Jdzce2f5ZI7ZZvRBPHugr
+         F7PZZT6yzbR7LzeC4Lj+KqBrLb5QRygIve5xOmQyQ4d6TyIN/rlLsaWojMvxD6XzRaXc
+         4k9PDhSxz1CPHmRBwNh/97VVVW74iW/Sar7s76hJd8dHOOTxWx1Qd17l/+xF0pggux6h
+         Ke+vWTzV5XOqEv5xiDn60HNth/7Cgtin59FIXIHLHEmDEID+K6mUDlDrdtyPe3VgBYLE
+         WRSQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793374271; x=1793979071; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
+        b=snG7qtrEQ6U9XhuZsM111tiK7s22HLpna0lRYU8EaAteqq1b0dszd2eEvbZakIRRwS
+         TKkOh0EIgsgpEgaRsIDJDY7pamtCNEvfp1BFh3bjmUeEJQwaQUO22Xl0AW7dmi69cFar
+         29A+Sa5ReVcdL9uLbOsDjZls50Bj0rkZK+jBMCFMqSqM3lYBNfsAelVzWmO3VWRY4q3C
+         w/UdMS5QLrODxtTZ5JCHogo/5wBr8NJW0YTo2o6RVOQyUova5ZylnqsT2c0fHYaa9Llw
+         GnKntJlg3o57usBV/61mXV8/l5ij3ANsb9usaPEU79lH1tiVPS01bZ03cSj6tfYwVagF
+         Oh2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793374271; x=1793979071;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
+        b=S3moF1jHULebwdrf4GYmHPeDcsBR2L4lPS/MECvXesshNtPEtu/kj2Hy7lTXbz9wPu
+         7AEAPmaBgZpqFvu6MZ5qHLVl1Y1ghocnzXoGQIRFku5+qipjo14T/bykxNsa2k2X6qwe
+         zhL/U0c2lTJf4GNt1y5g1oEc94WVlYsOIQyFg1z5RMFzcaqQGoGbupeOigg1AdMIQyNP
+         rGKwBf5ZsvtWG6MuWip977FMU48OJYvTBxg0XlEcayoQgML7buj4y+B15UTQ7T8t8q28
+         cKtXcCXv1HwLuU6JAY1bWgr/oNBCOwf2NLaAmN1BrmHNEuSebCZjJ/FAX1RFFxN4DlvT
+         BE5Q==
+X-Gm-Message-State: AFq9FYIy/dR7IafWnYvbEmFMPFihQfCMy+FCrWX7Z/Ah5KnQgQG2M6Is
+	txHfGpwv/KxjHdZTy3PTNaXInT/cod9Wy2U9ZjqTs41vjiGAU4E6kP62Z79CGz8b1EPK5yxmud2
+	4A4D2OQIZeh/Q4/OOspxjRCnhAKhhoyw=
+X-Gm-Gg: AYBFou2rCAqfxiO1NUrcjs45u65T3KCWCUpr1ZB1zcWHjhmywMvdvaWXL9wqlVGQQRE
+	r2AVZ+q9uDQxibTKm6wu+KJqbJy9HexR+pOg+k0Vfmu8Ra/PkpYsk2gutlQfcZ0othCYEbO3naM
+	76SsEUTBle7I16rjdxObSQU14UMsrlBCrWIbXY7r8hV64kbOrCY0D0YBMkpiOE+X1VoDa6EJYDk
+	r7722i4mBMoVhimDBCtBvqZIDlFFe7bxHbcT7kPEUCoIQcCipxpTSX7FJdLYx14sabBREO7D4Or
+	1AWoySZ6r67PPvJjDE8XUFpkJdFNS3HP+Z7Oec7r1eQTAAZ26SXq+QV4pUFlJPqIyQRlsKOsUD3
+	g+qSki0TZkK7wRsTd3b2QfuNpjr32nS7Lopwml8QzS5NXPG5qcXxkcUODjvD93eJH66Ihp2NJAM
+	8pf/v+EzgEXe+0TtDMBr3cmX3fF6SpsR7tczWNmzkiWSQWTaB+I0nGndxqaWlfrK1sFUra3DDkT
+	hGmUkgx56D2tjCVZ/jBX1aU9wq4kMKew5NIP38tIElxOlGqDE5BH5d0ddh3i9T9RinIdhfCoE1M
+	MpISNgjcPf1fxkmEnSFZ0N3O4z0UzZyAT0Wnn8sl4PTY9YVf/N9QM/LQFJQji5rIk2pJdCHDIZa
+	56pztwQ4xq9ScduLDNTOH7w==
+X-Received: by 2002:a05:690c:6e84:b0:8b0:dca9:8fc8 with SMTP id
+ 00721157ae682-8b2b67a3528mr14166817b3.92.1793374269944; Fri, 30 Oct 2026
+ 08:31:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-Path: peter.kjellerstedt@axis.com
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E5:EE_|DU2PR02MB7776:EE_
-X-MS-Office365-Filtering-Correlation-Id: de34c1ce-6c72-4e89-7bac-08df3693bf07
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|18002099003|10062099007|56012099006|11063799006|261028144727099003|10067099003|261021123027099003|261021121427099003|261026121527099003|261009223027099003|261022105027099003|261026140227099003;
-X-Microsoft-Antispam-Message-Info: 4dgDRA8Z5BIDHXYkZN4LKCgM1DSKNJ8hCyU1sFBknPDBZqrjEYnTvKpptGBFog0iNg23Zuz9MtGqFVed0mqUijZxbFMSZhUWshgUJdUCTAcEG3utIzJv59OD+YmkFlvD53k0Gy/lZXDyynzjEvjmvjTZBBZ1EUyFtuhOjfZqjmJ6RI3Z0puNUdHlWdSj3rRuWVfoJw7fzTN7vhBspp58abLX8DVTW/GIFxHzs2or/DQtwgX75tg8a/yWH3swZ6fUlGzOX/jPNMumjmdgNRiX7m3/GOWcGWIwuoUMqk/tcu08bp6KZRNzN9qbNs2MBMGDGsVXaZ61RnqAVNfVPZddJ6ElqlT8sxzJY8HDt1rqWOmrdMkbYE1tMX6YPBk28Xy5CxEtm+sHH1ASmeM3WJJlC5MSMmEijvv9sierlzuzuliJdJH0IWBDDr5JvzJ+Tvi8D8iFrEPSIx1apzMjPG0P8cY+mQkvfeNDH069Zfz0yQBaEGejwkR2WUbTvKF1BbamkpPPcgYw1B1UoY7Y/1qEUI92loEfOZd8wU6LYVfZD8HGZQoXXyU9F1FcaA37T0yFV0EkbKxJbu69nNOjf6bGO/GTdGZ29e36rt4pR0rhTWhJQe3Oyun2e+0Q1nqOrWYq4QHjEn3y2zci8iGry9Y+hAn7reSHX9TtQ6JJRZN2AtN0JM6BTmZDc2je1Wd13YHcIUcrPS6DUDQprd2Vxe9R5w==
-X-Forefront-Antispam-Report: CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(18002099003)(10062099007)(56012099006)(11063799006)(261028144727099003)(10067099003)(261021123027099003)(261021121427099003)(261026121527099003)(261009223027099003)(261022105027099003)(261026140227099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 5C1HJYNlagg4sGIwRL8WzueHtDfhhE4+pZ6AM5fzdYpnta1XX8LpTIFBRR9SrMB6Alp6PiDFU7KAssAkbuMQUHq/Zx6QOpC2ZpIJo2skdmQ66IgroYkXoKPZJ+8/pl5pCJf9nndGD+psLFmwClHqiTdBTTO2YNL0Cql+fwTyUsbihRAbDJaDekSq7MWf3osD+3L+fkBeh7OyTWNDZziVi3PbdynNWw2l33EckQpEOWMAeFsaGXEEp8GD8OQ5TjofnxKrIqyFN8pi9aQqsLwyD3zOd64ADQRPsqku/c7YiSWCFdAPcukB0uO1YwNrkSEg39i4MTh9XB6/a0wVMJjOEZxh8lt1dpRwr2+tKaPMFLa0Pigtbgwq7qzU8NtNEBa0hyjjHGar3omQ2aYxvfvLwQOA7PXhQc1Ht+dMbkVtFA3DbWhPYKSO0ro+0Par6oAu
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 14:40:30.2430
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: de34c1ce-6c72-4e89-7bac-08df3693bf07
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E5.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR02MB7776
+References: <20261030110309.1124614-1-leon.anavi@konsulko.com> <20261030110309.1124614-18-leon.anavi@konsulko.com>
+In-Reply-To: <20261030110309.1124614-18-leon.anavi@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 30 Oct 2026 08:30:42 -0700
+X-Gm-Features: AclHuK838S9zp1vSjh0wTkhj56a8Yrwr0hNhoTDYM8uFEm9w9yxPk3Oa1b5JIRU
+Message-ID: <CAMKF1spOVYFJMeqC=cFGZ23roDiHadVza9tEyeZSqK8j11fv2w@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 18/25] python3-asciitree: Upgrade 0.3.3
+ -> 1.0.0
+To: leon.anavi@konsulko.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000004f3a3c065f107c6b"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 14:40:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131708
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 15:31:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131709
 
-Commit 23304685070f85c25af858beec06ada10fd9df79 aspired to move the
-CMake files from /usr/share/glaze to /usr/lib/cmake/glaze. However, all
-it did was remove the FILES:${PN}-dev assignment, which resulted in the
-CMake files ending up in the target package.
+--0000000000004f3a3c065f107c6b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Actually set the install path for the CMake files using
--Dglaze_INSTALL_CMAKEDIR:PATH. For some odd reason, it needs to be
-realtive, or the installed files will not work as intended when
-cross-compiling.
+why did LIC_FILES_CHKSUM change ?
+btw. you might want to let git find renames a bit harder adding M30% -C
+--find-copies-harder options to
+git format-patch might help.
 
-Also remove -DCMAKE_INSTALL_PREFIX and -DDESTDIR from EXTRA_OECMAKE as
-they are already set correctly by cmake.bbclass.
+On Fri, Oct 30, 2026 at 4:03=E2=80=AFAM Leon Anavi via openembedded-devel
+<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
 
-Finally, restore -Dglaze_DEVELOPER_MODE=3DOFF. It does not seem to affect
-the installed files, but generates less CMake rules.
+> Upgrade to release 1.0.0:
+>
+> - Configurable layout spaces through BoxStyle.gfx["SPACE"], with an
+>   ordinary-space fallback for existing palettes.
+> - Declared the existing public API stable, without breaking changes
+>   from 0.4.0.
+>
+> Fixes:
+>
+> WARNING: python3-asciitree-1.0.0-r0 do_check_backend: QA Issue:
+> inherits setuptools3 but has pyproject.toml specifying backend
+> setuptools.build_meta, use the correct class [pep517-backend]
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../recipes-devtools/python/python3-asciitree_0.3.3.bb   | 8 --------
+>  .../recipes-devtools/python/python3-asciitree_1.0.0.bb   | 9 +++++++++
+>  2 files changed, 9 insertions(+), 8 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/
+> python3-asciitree_0.3.3.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-asciitree_1.0.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-asciitree_0.3.3.bb b/meta-python/recipes-devtools/python/
+> python3-asciitree_0.3.3.bb
+> deleted file mode 100644
+> index a3185a9c66..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -SUMMARY =3D "Draws ASCII trees."
+> -HOMEPAGE =3D "https://github.com/mbr/asciitree"
+> -LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da985ccb0df374f2a8cab75010bf8d=
+b73"
+> -
+> -SRC_URI[sha256sum] =3D
+> "4aa4b9b649f85e3fcb343363d97564aa1fb62e249677f2e18a96765145cc0f6e"
+> -
+> -inherit pypi setuptools3
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-asciitree_1.0.0.bb b/meta-python/recipes-devtools/python/
+> python3-asciitree_1.0.0.bb
+> new file mode 100644
+> index 0000000000..086fc07392
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb
+> @@ -0,0 +1,9 @@
+> +SUMMARY =3D "ASCII trees"
+> +DESCRIPTION =3D "Draws ASCII trees"
+> +HOMEPAGE =3D "https://github.com/mbr/asciitree"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da533ab417405f77f9a3d236d35cd7=
+069"
+> +
+> +SRC_URI[sha256sum] =3D
+> "0c396808c13cab27b60cbe402b99ef37fa681c6b59d337a008719efa201cdd07"
+> +
+> +inherit pypi python_setuptools_build_meta
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#131700):
+> https://lists.openembedded.org/g/openembedded-devel/message/131700
+> Mute This Topic: https://lists.openembedded.org/mt/122008956/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
+--0000000000004f3a3c065f107c6b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Markus: Can you verify that your use case actually works now? Because
-ours worked fine before and after.
+<div dir=3D"ltr">why did LIC_FILES_CHKSUM change ?<div>btw. you might want =
+to let git find renames a bit harder adding=C2=A0M30% -C --find-copies-hard=
+er options to</div><div>git format-patch might help.</div></div><br><div cl=
+ass=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_a=
+ttr">On Fri, Oct 30, 2026 at 4:03=E2=80=AFAM Leon Anavi via openembedded-de=
+vel &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org"=
+>konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">Upgrade to release 1.0.0:<br>
+<br>
+- Configurable layout spaces through BoxStyle.gfx[&quot;SPACE&quot;], with =
+an<br>
+=C2=A0 ordinary-space fallback for existing palettes.<br>
+- Declared the existing public API stable, without breaking changes<br>
+=C2=A0 from 0.4.0.<br>
+<br>
+Fixes:<br>
+<br>
+WARNING: python3-asciitree-1.0.0-r0 do_check_backend: QA Issue:<br>
+inherits setuptools3 but has pyproject.toml specifying backend<br>
+setuptools.build_meta, use the correct class [pep517-backend]<br>
+<br>
+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
+rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-asciitree_0.3.3=
+.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_0.3.3.bb</a>=C2=
+=A0 =C2=A0| 8 --------<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-asciitree_1.0.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_1.0.0.bb</a>=C2=
+=A0 =C2=A0| 9 +++++++++<br>
+=C2=A02 files changed, 9 insertions(+), 8 deletions(-)<br>
+=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python=
+3-asciitree_0.3.3.bb</a><br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python=
+3-asciitree_1.0.0.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_=
+0.3.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
+3-asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitre=
+e_0.3.3.bb</a><br>
+deleted file mode 100644<br>
+index a3185a9c66..0000000000<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-asciitr=
+ee_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_0.3.3.b=
+b</a><br>
++++ /dev/null<br>
+@@ -1,8 +0,0 @@<br>
+-SUMMARY =3D &quot;Draws ASCII trees.&quot;<br>
+-HOMEPAGE =3D &quot;<a href=3D"https://github.com/mbr/asciitree" rel=3D"nor=
+eferrer" target=3D"_blank">https://github.com/mbr/asciitree</a>&quot;<br>
+-LICENSE =3D &quot;MIT&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da985ccb0df374f2a8cab75010b=
+f8db73&quot;<br>
+-<br>
+-SRC_URI[sha256sum] =3D &quot;4aa4b9b649f85e3fcb343363d97564aa1fb62e249677f=
+2e18a96765145cc0f6e&quot;<br>
+-<br>
+-inherit pypi setuptools3<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_=
+1.0.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
+3-asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitre=
+e_1.0.0.bb</a><br>
+new file mode 100644<br>
+index 0000000000..086fc07392<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-asciitr=
+ee_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_1.0.0.b=
+b</a><br>
+@@ -0,0 +1,9 @@<br>
++SUMMARY =3D &quot;ASCII trees&quot;<br>
++DESCRIPTION =3D &quot;Draws ASCII trees&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/mbr/asciitree" rel=3D"nor=
+eferrer" target=3D"_blank">https://github.com/mbr/asciitree</a>&quot;<br>
++LICENSE =3D &quot;MIT&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da533ab417405f77f9a3d236d35=
+cd7069&quot;<br>
++<br>
++SRC_URI[sha256sum] =3D &quot;0c396808c13cab27b60cbe402b99ef37fa681c6b59d33=
+7a008719efa201cdd07&quot;<br>
++<br>
++inherit pypi python_setuptools_build_meta<br>
+-- <br>
+2.47.3<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#131700): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/131700" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/131700</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122008956/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/122008956/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
- meta-oe/recipes-support/glaze/glaze_8.3.0.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/glaze/glaze_8.3.0.bb b/meta-oe/recipes=
--support/glaze/glaze_8.3.0.bb
-index b393460c9f..e1bef79ba5 100644
---- a/meta-oe/recipes-support/glaze/glaze_8.3.0.bb
-+++ b/meta-oe/recipes-support/glaze/glaze_8.3.0.bb
-@@ -9,13 +9,15 @@ SRCREV =3D "dce5e0f7ec572725ec369a0bc59a00eeb2270a9a"
-=20
- inherit cmake
-=20
-+# For some odd reason, glaze_INSTALL_CMAKEDIR must be relative, or the ins=
-talled
-+# files will not work as intended when cross-compiling.
- EXTRA_OECMAKE =3D " \
-     -Dglaze_BUILD_EXAMPLES=3DOFF \
-     -DBUILD_TESTING=3DOFF \
-     -Dglaze_ENABLE_FUZZING=3DOFF \
-+    -Dglaze_DEVELOPER_MODE=3DOFF \
-     -DCMAKE_BUILD_TYPE=3DRelease \
--    -DCMAKE_INSTALL_PREFIX=3D${prefix} \
--    -DDESTDIR=3D${D} \
-+    -Dglaze_INSTALL_CMAKEDIR:PATH=3D${baselib}/cmake/${BPN} \
- "
-=20
- # Glaze is a header-only C++ library, so the main package will be empty.
+--0000000000004f3a3c065f107c6b--
