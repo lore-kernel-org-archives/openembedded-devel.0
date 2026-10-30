@@ -1,71 +1,93 @@
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6456.1793345615339885680
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8931.1793358196892239144
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 00:33:35 -0700
+ Fri, 30 Oct 2026 04:03:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=cFRPnaog;
- spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd92.aul.t-online.de (fwd92.aul.t-online.de [10.223.144.118])
-	by mailout04.t-online.de (Postfix) with SMTP id 5544782D
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 08:33:32 +0100 (CET)
-Received: from localhost.localdomain ([84.163.35.82]) by fwd92.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1xMh7C-2O1XHc0; Fri, 30 Oct 2026 08:33:30 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=fxPVAX0s;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-48e3b22e971so265359f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 04:03:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1793358195; x=1793962995; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=d5MUGv0Udy14VX3G8TB09vFybb9GvT/ZGJjUoQpvtCU=;
+        b=fxPVAX0sNUTo9efR7Wk4ilKpmKP7XCe0KV9aRZGKN2uNQtJlf2m0wH1PQhf2rzVOYg
+         vu6UqdAzEeslnAGdMWKAPtKcqSSl8A+Yt3LQ5Kun2k/wY+PgEwNntdo7aWv8Ibls1jcX
+         4xVKVU0ixloWKPbD+DoZNmBp75yXwDs3QR4h0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793358195; x=1793962995;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=d5MUGv0Udy14VX3G8TB09vFybb9GvT/ZGJjUoQpvtCU=;
+        b=w1Jp0pkeC4edlM24l3cTxwFHGglFqjKDH7KNrcPbfTeE408+1iWlZEvRGwwSNzco6d
+         8k1hZzYMtYw8bNLIslHwGlePYHi7s6T1DFjaSE10nvgvmID194yGVZfJCF3dMHL64swm
+         3K9oMCWe+6vdvIfBXkMsG7jcwsJeCqeyGdwmhyV37eOd6f9NO1ReahKCzVDuTYEbllDN
+         lSVPnAL5RlnT79mVHs6v+VndDkk+CBU6YaRl1UrzC/c54s8gGlFyA+wq7h06TMocvxd+
+         k7t84niWvqHSRZNw9XL85/p3t7N+2S2LjkC8dpBOlmNgNAUuU9S2GI4KN2ZSOAqiOfH3
+         oRWg==
+X-Gm-Message-State: AFq9FYKuafAH1Dhj8kZm04sgehhg0j0w4wDBLxI2EGlLsbgjyQBy0j11
+	wsTFJwY31hmZoqGEKqnFcJXo1Lq8vzhK0Fy01ulAnHdXShIYaKcCIneI45wP5fgk9o4aWyP7KMv
+	Jxw6v
+X-Gm-Gg: AYBFou0jJv+S8S/lNGCAgAPgv6uF9xL9/GE7QPuVYtuMqSmh7BIKHIRcMWIK3eDQnwV
+	8q3tBuF4cY2FIZWVkMscxhh2Rit8AS91CcxSPYrBy7MC0lHOSfrfdHRSgaLUBJ10oku1YsDpLM+
+	gJFv/4xH/dwn4fVjiSi9uF2DHZ0MkvmfCU1pLiA/KNo17gxdSc0pvrWMm3A0SX8UF1hBuOmdYK1
+	nejSTMzy/DzFIrm9T/jEoE2FO1a/9A0OmmA98zVrcy1PVbsPkTUH9UWSjWwOUsoJnJSqauXdBGE
+	XoeQDl2pXSGh/Ph7vfB6iGvzAeuZDO97KMLHvFssfhf5LDUZOZe2y8DTnj8OFAtYRFa51lmiYny
+	JbD8ATqSG+plCYBBeBhpNSxpekQ4+RxjYKu6/N+g/0iY3uk5uDtogLu62XX2t5HfIkzw/voLyEJ
+	0yf5agCLi/AaQ39XvD3JikyWcJZU7UNcWWpB/zFRMsPqxRmVRApcvq7r2+R6fdkqU7J8UhhKM/K
+	kAiY+5WuOdWg0y1obALTZL/wGt3J0NqYhEi3RcPce6uMVxgpcNSM6HS4tTNEXcSaLR1owwQMJrT
+	Zt6L8fqnuAQYXdFwBiRIVpJP7FV+3fzbP0GlTSAZ+Kpvf0m2q9zKD3LtzezIezE3JZCaUNr+hlZ
+	zt8hgn9x8HQ+6H3DAdLb4sLIVt9gcf5Miygy/giyfmdVXrT2Spou32/lkSfu4lL0hbSMygxIbIj
+	ZI
+X-Received: by 2002:a05:6000:29c9:b0:48d:ff06:c634 with SMTP id ffacd0b85a97d-48e6e5036ecmr2612581f8f.54.1793358194659;
+        Fri, 30 Oct 2026 04:03:14 -0700 (PDT)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78a4csm2642151f8f.23.2026.10.30.04.03.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Oct 2026 04:03:13 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: upgrade 1.6.9 -> 1.6.11
-Date: Fri, 30 Oct 2026 08:33:21 +0100
-Message-ID: <20261030073321.535016-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.56.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/25] python3-cachetools: Upgrade 7.2.5 -> 7.2.7
+Date: Fri, 30 Oct 2026 13:02:45 +0200
+Message-ID: <20261030110309.1124614-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1793345610-62FFB40E-9AC91807/0/0 CLEAN NORMAL
-X-TOI-MSGID: 25a29523-3959-4983-8ef9-b38f372bf37e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1793345612; i=f_l_k@t-online.de;
-	bh=xqtkqz9LqBPbSAWruXEJxMuFvtZOhm/1KRsgZeZw5X8=;
-	h=From:To:Subject:Date;
-	b=cFRPnaogcHeUxejaPcDN54ZF9bDf7mowqasZYiE8Eh9SZUQN716S0BzgL9UhZnd5E
-	 fFKUssXpRUbbC+XwgQ25FK8TqdtfNQdf84Gh8RpBCe2h0UlIMAeSOhqfDzzLmwbqwe
-	 tpJ2FePSwKHIAtyFe6zjFFaWafbl7jdf/Nkf3zJzVMuSG9btwChHFK6AMRzLnQ2PtC
-	 1iGTYAAnHrAZcS4nCBA9WKPONQJlNxfIFyCJKVOHMgN3gJTssJwcfPkyJey4+LnHow
-	 vALfjI1S91RG/HyV5LhEDfDg/haaqzM+KfK2nf/n7k+s5fqxmy/5wKkxWYrDHs7qEg
-	 wiHEl/FIMJ5rQ==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 07:33:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131682
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 11:03:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131683
 Content-Type: text/plain; charset="utf-8"
 
-Changelog:
-https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/1.6.11/NEWS?ref_t=
-ype=3Dtags
+Upgrade to release 7.2.7:
 
-AI-Generated: Uses Claude Code (Claude Opus 5.5)
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+- Various performance improvements
+- Minor unit test improvements
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../pipewire/{pipewire_1.6.9.bb =3D> pipewire_1.6.11.bb}          | 2 +-
+ ...{python3-cachetools_7.2.5.bb => python3-cachetools_7.2.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.9.bb =3D=
-> pipewire_1.6.11.bb} (99%)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_7.2.5.bb => python3-cachetools_7.2.7.bb} (86%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
-index 143f3d5e0a..ec55d6034b 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus"
-=20
--SRCREV =3D "8fa27cabdc6c0c1350c69c026af5850ef0af1e26"
-+SRCREV =3D "4287f31510771fc999f8a58a024c81ca10b8d55f"
- BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-${BRANCH};protocol=3Dhttps;tag=3D${PV}"
- SRC_URI +=3D "file://0001-pipewire-compress-offload.patch"
---=20
-2.56.0
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_7.2.5.bb b/meta-python/recipes-devtools/python/python3-cachetools_7.2.7.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-cachetools_7.2.5.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_7.2.7.bb
+index ec6e612e42..4b564bc3f9 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_7.2.5.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_7.2.7.bb
+@@ -18,6 +18,6 @@ RDEPENDS:${PN} += " \
+ 	python3-math \
+ "
+ 
+-SRC_URI[sha256sum] = "a2223b80de434291ddf4c105354e533bbaf4d29382f5d1bc3e4b9332cb31061e"
++SRC_URI[sha256sum] = "e2154c809ce9e1247120258c36821467597b5663d44c3255a9790785f23c2b1e"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.47.3
 
