@@ -1,59 +1,60 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8933.1793358200412450052
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8934.1793358200479226465
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 30 Oct 2026 04:03:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=N4wggVdr;
- spf=pass (domain: konsulko.com, ip: 209.85.208.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6b429f71dbeso542710a12.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=hHgBxaBT;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6afbc363efeso674379a12.3
         for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 04:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1793358199; x=1793962999; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rTanHciY09kAbfyBGAo8y/tuJin2wTamvMgsOMNvLQk=;
-        b=N4wggVdrE7aq9ifgLZyn3l2f9GOO3oRktFJJSDOsyXh5s7SiFxDZts8RCTrvx1kiuF
-         oznCBZwaKKcSlgUOL+usdPLXSLRFFVNVh17Bi6p9hJuxnWhjYc6O9aEYTztmdrFgMC6x
-         5Kq/Fl/jec64A5bzGaSftxh++/EMDi0wxMR8s=
+        bh=o5EYi3xMB2vpvP2s9JXa578Ujg+ZF8rLa74Yrlbkazc=;
+        b=hHgBxaBT0WU3qL70vNUu7lvRFrRTL/1ayWZMpOayFyGeSSn/2VRaY2BobvF2gYmVMn
+         qCdY4zzVi6FqNexsAcoAENRDlT0eaWTefSDikgQlVogy+EVpuyIzwg+jj/U4mjLxRhXv
+         7TQO9f7xrA3YSkaL01Kw3O/W8wcYfRX1Tt7EY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1793358199; x=1793962999;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rTanHciY09kAbfyBGAo8y/tuJin2wTamvMgsOMNvLQk=;
-        b=ZTWeSo4ehtFHJgE0jyqcAR+KPgIzvhuKZfOFWn0Dvewikd7HqHqUJLVEnenCSnqzFE
-         o31e0RtmAXdbE0Sy/nfCil9qB2rNBClmH93y+9tQxmuJ0g8AyoOlb4Muw3UAsyrsBTpS
-         uNkJ69/VcB6E604RikNghv2f8LeQTwJHeu1RZO4g4VjTCcShs7QWgZDhaWtcJZITBNkt
-         EI/sG7jMgYrmv4P4xinGeuDQzs2wtRX4WdudfFD5gB82drWQbfdU/QRGFvazZBLA8ZCK
-         M6vEumjKFeuPGSfVUq8wlHuo2Ie0SwI7sQOqVcCS5m1BEbT3qDY8x4cA4SFFkuCQ3iSd
-         LxYA==
-X-Gm-Message-State: AFq9FYIbsmHIM4wMa+fxj8kwxdDctZgv72WfEWo34s4WBUMo8BFweWHj
-	jMhFMzVEbRJwoPNjdHNOeq1UToJBjyfDFlPm6a2MWizhZATRroDMANRyVYYiHobd+am7YK1hxel
-	JZvPs
-X-Gm-Gg: AYBFou2l3mn3/4Bca5Rf77jvjdbV9j3nrVlJceAeV8ObprgsJlw77NVShRrrrE3ZoQk
-	oJEr/LgD0cy0eqplL23/M9xPLDykOnk/PoAc96MR5WiWmIlO+p54L0V4oLmFEEUh1aKudcjywZO
-	9Ncj72sxsMMTC6PdiwMzBgMGSbOHgaK16wfgZCknU5szD+tsSqve/RefQ/bXg4+sdxk9ugZ/69F
-	/VG0W0eoYbpKV1spj9cJ0cpy4Q7lc9kN+J9YVyM1l4lt2rClTC3GSNPiLPqzhDXO/vQSs3g56Ig
-	943CtrWGu+nuqOM5VNuDveSRfe9Cki0QGwR/W1IPXyQ8EbfOht9AW7ay+2/6Qzwk0mvHZnsviaW
-	BnMqfctmK9jLGE7P+J/baNDvi0hkrkRzcWdvkg4cgvz8Qz4y3ENEaZAdpLR2ukvLugVwAiC4k4S
-	KpLcjeW0GP2QPXLeBzdWLJqs1UR+XbYwp7UGGOhmHpUBcNTbW7X/AlRcAJsr28IzdM6UKp1LXTq
-	Zu/khCiPGPSKmxF0X4dg7st07U0VgPiuNSC5NRnYr1rIEm6MmXIZDOml4gH0WgJv8Mnptomhn90
-	By6AUCKJE+7gWqaAs4Mj/ygYo5sd9F+VLQ1I55ufyDc2lGNLjl48dI/urOPk1imLYZQvmKBcWcb
-	IDagjJwUEnR4pHc1BUZFz3Ymb8FHvUpker6ZD6OhWVfe7Yc5C2BB21A==
-X-Received: by 2002:aa7:cd73:0:b0:6a7:e514:1d85 with SMTP id 4fb4d7f45d1cf-6b4d438a5aamr928200a12.13.1793358197627;
-        Fri, 30 Oct 2026 04:03:17 -0700 (PDT)
+        bh=o5EYi3xMB2vpvP2s9JXa578Ujg+ZF8rLa74Yrlbkazc=;
+        b=vFPqizub2zhvbdc5Q39Um1fODA9IdjJXFDFy7+ZqLxSaFvKfehWPzac9kQmyr5t0oH
+         HqwBuEfN+ocUV0VAQ8+dvysWLho+esj977hKd1dazJu2LV5rMu2XHx+MzyNaSPHyvSdb
+         EWJns0idSn53PveJ8++Y5MfvIAzYz5BfHWGbWKMCcYTKgaXeCDNCQq+GtS4zUONnXkx5
+         FYSpOQLePR7lfqB5p68ri+96Y6v6wVW5xz43jF7WtfGV44cX/f+Nx/oQLWxYtYRytlrZ
+         q7GzzVAwNeyhD8so8mXLlJUZ/cXL6GjyuhuDMZCKKGOlRz5/EAcXhhMIBgvrzW1fLRx9
+         OMfg==
+X-Gm-Message-State: AFq9FYISdwC0dna8oO10Mz8ulVFGgsJEx//oI5FTSjmrIe3lp+Zj2AIr
+	CBI8XNOzo3yHvAiaVc2w74foC8RUYH0P0urrob7AKSicvMkM6FNRzV6SNyRVG8tIpKFus22RUkf
+	DII9j
+X-Gm-Gg: AYBFou1EP/His2BKkpRqHINujV19mvq9Cma2p6y4t3zgBUTowZk7JEEJGhzX+yotZgI
+	2xTFykKkRPk2hFolAqkHsW+OFKCHzRfH4NSIi1XYuG4J+ySX50z63fSVR1pTZC2R3hnfXcMeEpL
+	XVXcTN31Do/9BwYQbLmcrn2kl7j6lwuOim/VMPWexLh1uGqwcTTO/A6nzbPmSpo2m93U5OliBjn
+	cBB659mqalKDsjfu5jFQAvcAR7LzBOEpwbIX9PiSI6y8wZ+bAZdQByVnw71KLx/QjsruQZyeT4p
+	j9M1EMZ7863zU3PfeLQfTLvkaPDrUe0I/hMtu3SoOjyCfllr3MQZcivbqQvWw8eXlW+DuLNHTlc
+	Po+eT1WPP+jP/OUgI2Ksu03Fxmu/Hx3IOZr+LbjNzlR0DEBSHi5OCeyhSUjsFnf635EhArwi0Qk
+	+zfCar4BHRFGja5yyAhlcVYSaQCHilas8Uk+WajMMAy+bldNsIPoZ27gDABek4ZMaEcn3fHXh4+
+	7dNCgUGyebai2QsZJqbWILi4BbODy/Hi+0kdrpiykxK31TimFvN1gZ+pCTvL+FFiltcawVn9fwb
+	4A1dYcVws1vfwLoz15zQdN/ey1MgBeg8oA+b6un/i+uvDD6OTJUxk5Z23xXymucAWZt9pRwHHGy
+	stl4dxxLB5LUI8EMhd5SvTT6I5Xs/MWA9ws20ewPthpBq8e9aK+NjnHQgkl4L5HEN06RbAvfvfM
+	0=
+X-Received: by 2002:a05:6402:518f:b0:6b1:ce0f:eb6b with SMTP id 4fb4d7f45d1cf-6b4d4d7c79emr1450282a12.31.1793358198585;
+        Fri, 30 Oct 2026 04:03:18 -0700 (PDT)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78a4csm2642151f8f.23.2026.10.30.04.03.16
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78a4csm2642151f8f.23.2026.10.30.04.03.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 04:03:17 -0700 (PDT)
+        Fri, 30 Oct 2026 04:03:18 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/25] python3-engineio: Upgrade 4.14.0 -> 4.15.1
-Date: Fri, 30 Oct 2026 13:02:48 +0200
-Message-ID: <20261030110309.1124614-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/25] python3-faker: Upgrade 40.43.0 -> 40.44.0
+Date: Fri, 30 Oct 2026 13:02:49 +0200
+Message-ID: <20261030110309.1124614-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261030110309.1124614-1-leon.anavi@konsulko.com>
 References: <20261030110309.1124614-1-leon.anavi@konsulko.com>
@@ -61,34 +62,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 11:03:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131686
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131687
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 4.15.1:
+Upgrade to release 40.44.0:
 
-- Reject requests before the connection completes
-- Address possible race condition when checking the last pong
-  response to a ping
+- Fix: allow repeated digits in pt_BR CPF and RG generators
+- Fix: keep en_CA SINs out of the 0 and 8 series
+- Fix: use Luhn check digit for no_NO Postgiro (0000) BBANs
+- Fix: en_GB VAT ID generation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-engineio_4.14.0.bb => python3-engineio_4.15.1.bb}  | 2 +-
+ .../{python3-faker_40.43.0.bb => python3-faker_40.44.0.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-engineio_4.14.0.bb => python3-engineio_4.15.1.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-faker_40.43.0.bb => python3-faker_40.44.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-engineio_4.14.0.bb b/meta-python/recipes-devtools/python/python3-engineio_4.15.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-engineio_4.14.0.bb
-rename to meta-python/recipes-devtools/python/python3-engineio_4.15.1.bb
-index 3811ca332c..bed536229c 100644
---- a/meta-python/recipes-devtools/python/python3-engineio_4.14.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-engineio_4.15.1.bb
-@@ -20,4 +20,4 @@ RDEPENDS:${PN} += " \
- 	python3-threading \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-faker_40.43.0.bb b/meta-python/recipes-devtools/python/python3-faker_40.44.0.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-faker_40.43.0.bb
+rename to meta-python/recipes-devtools/python/python3-faker_40.44.0.bb
+index 505ac3fcdd..bb4ab9c64f 100644
+--- a/meta-python/recipes-devtools/python/python3-faker_40.43.0.bb
++++ b/meta-python/recipes-devtools/python/python3-faker_40.44.0.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
  
--SRC_URI[sha256sum] = "eaa1e386baf9c2c7959eef7f9d9165c5ea910c5b392f5316e78d29ed073cb43d"
-+SRC_URI[sha256sum] = "1a412e798a90c64fabe7b20798939ae6d4a03f34da8a33d5a21a25a8bbbc3612"
+-SRC_URI[sha256sum] = "02fae4327c03a4a6315e1b428a3878f435bfc276c93435ea349b95c0c9372361"
++SRC_URI[sha256sum] = "97245a3756dcaf35418b89bea9f03ae6881557db0032bf048744c2aaee2a9108"
+ 
+ inherit pypi setuptools3 ptest-python-pytest
+ 
 -- 
 2.47.3
 
