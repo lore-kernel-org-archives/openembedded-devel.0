@@ -1,91 +1,71 @@
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4175.1793330716317076611
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6456.1793345615339885680
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 20:25:16 -0700
+ Fri, 30 Oct 2026 00:33:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=C0tuajMc;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: ragaprasanth@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-15ea896ddc8so413955c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 20:25:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793330716; x=1793935516; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cV3+RTyOFDlu1/a91nVIe5LQyK5/OSBvYshXBBiNuhg=;
-        b=C0tuajMcxEUofahTD3WI5JzuKLTGkQRFo99Jpili+rVyFhXdpE4tQCQcbIhevzM2Zj
-         wjSF/FXr3cLf4MlLwu5FgGfsHe5l2QtMDP4grCZlIFV0KLg8z/yWxfao03BSI18udiOa
-         uTk4wGj0BOcj3YJKQfjH4uiSyc+8V7YAnF16KL6ipU6TaIc5KMRU8tJDfzsIVRIjF1V3
-         K7Gz0WplEBplKa8aWXVg584r/+m7KXVNr9hoX6hTqqR+KRhrU3XJu/R0w6Yethi+6Pi/
-         ZXnbb9NoW3e39ZDyRkRtzjjpqVHZTrWre2l5ORzzMXXHzmTZ8NAPkccPzQVmy2yJsPRC
-         jX4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793330716; x=1793935516;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cV3+RTyOFDlu1/a91nVIe5LQyK5/OSBvYshXBBiNuhg=;
-        b=zZNJH424AHYZ7ZBBSb6BtxeHfGTt11WG9Ch1Bk710JXz0do+pPwzC2mYtu5xj+l3Oy
-         HsQfzQ3tXbVSlQVFChAcHv6NXMEHod4hlZkhSU9/167wvH6lNDVp+Z+GYL8ziPXQaPGI
-         4vbA1b4Riyjcr/RKlWScEAXSOE1C7FG1omHbCU+x9E3NzOYhX3vgjhZmOq4yyaZmikWl
-         xfKD8ZDd2lLeLc5XqP7XFPUb9rGD6thZi1ZT1YlkjjcfGMgC/tLyAj3od2W5MeGtQjl4
-         uv9LySoPt+sYt9pMVwrJEMuGTP/HyMUoVzCAwyJWrj2N58UYaE8IOornxVDmsxa69dTL
-         3t7A==
-X-Gm-Message-State: AFq9FYKGczmJQuM9noOvsBgLnTUfgYv3htJpFK/1YLiioW+MJe1NO4JU
-	UH72TeqQBBIsmY34uIoNuGwOPp/M3+EukuiCfvbUI7n5ogbQmQ2cNM6I3TQ9sw==
-X-Gm-Gg: AYBFou2oTNEs2GVQP8DOWfw5O+6S49PnwByn3OV/ZQwtWY3a0hPzM+4Iyx6VG/lXRrD
-	Jm06W3kLPhw1C7lbsty/5pfm8yw3dgleOI7Vt+PmoGohOcwR/2oDO0/OPZhkFKUfbFBHDd5Dww+
-	JyW1dNGvCPPPZ/2j+AjBQ+GI/f5DAFQSoxbagZCZQrRMzw3XIijRM71NfMz6epfILf7W3pDIkCI
-	dc9gIgLpi/psyypCbLNecf5FuLoK70vv1tFLGY+iyICtB6Ow6HuRVp1Rj6nEYBHOy9pXEAjT6Nk
-	LgC6b9MPVdX96rhvbNwHwySJ/SvC9cl8kxRxAQ+jB+p+qoH6SeRPRc2OtPUmy97+GCCI2B/HD8X
-	9ATfCYM1GldyHhH5252XV1xOX5BJoI5n8caypjql+SCQ7B0N+CoSQi3jYFSWAVaNZmi6adOYZrd
-	1OjD3kTuaa3FGD59f/zwxE+T9HlYovhiZbHOY2IZ0ZVwDXCHvtmPdMLuUmkghgjeWjQMJJ/RvtJ
-	hbEsxVy/lr8c4zW/0QhWrv9UGXdMy0ExUi77xiM4CpjMp4h18fqOe92T0/UmTfj8Z6dZfuD0s/o
-	jsXnZF9Vqf0Rvvmr51Lnd8fUbi+W5ZDfdJ4AYGwBgPWKomVZaMZIGAkZemV9D6/Z
-X-Received: by 2002:a05:7022:1108:b0:199:4f68:7710 with SMTP id a92af1059eb24-1ac55774becmr1518034c88.2.1793330715330;
-        Thu, 29 Oct 2026 20:25:15 -0700 (PDT)
-Return-Path: <ragaprasanth@gmail.com>
-Received: from prasanth.alps.lineo.co.jp (vpn1.lineo.co.jp. [203.141.200.204])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1b38ac58sm2862032c88.23.2026.10.29.20.25.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 20:25:14 -0700 (PDT)
-From: Prasanth R <ragaprasanth@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=cFRPnaog;
+ spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd92.aul.t-online.de (fwd92.aul.t-online.de [10.223.144.118])
+	by mailout04.t-online.de (Postfix) with SMTP id 5544782D
+	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 08:33:32 +0100 (CET)
+Received: from localhost.localdomain ([84.163.35.82]) by fwd92.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1xMh7C-2O1XHc0; Fri, 30 Oct 2026 08:33:30 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Prasanth R <ragaprasanth@gmail.com>
-Subject: [meta-oe][PATCH] zchunk: upgrade 1.5.4 -> 1.5.5
-Date: Fri, 30 Oct 2026 12:25:05 +0900
-Message-Id: <20261030032505.102012-1-ragaprasanth@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-multimedia][PATCH] pipewire: upgrade 1.6.9 -> 1.6.11
+Date: Fri, 30 Oct 2026 08:33:21 +0100
+Message-ID: <20261030073321.535016-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1793345610-62FFB40E-9AC91807/0/0 CLEAN NORMAL
+X-TOI-MSGID: 25a29523-3959-4983-8ef9-b38f372bf37e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1793345612; i=f_l_k@t-online.de;
+	bh=xqtkqz9LqBPbSAWruXEJxMuFvtZOhm/1KRsgZeZw5X8=;
+	h=From:To:Subject:Date;
+	b=cFRPnaogcHeUxejaPcDN54ZF9bDf7mowqasZYiE8Eh9SZUQN716S0BzgL9UhZnd5E
+	 fFKUssXpRUbbC+XwgQ25FK8TqdtfNQdf84Gh8RpBCe2h0UlIMAeSOhqfDzzLmwbqwe
+	 tpJ2FePSwKHIAtyFe6zjFFaWafbl7jdf/Nkf3zJzVMuSG9btwChHFK6AMRzLnQ2PtC
+	 1iGTYAAnHrAZcS4nCBA9WKPONQJlNxfIFyCJKVOHMgN3gJTssJwcfPkyJey4+LnHow
+	 vALfjI1S91RG/HyV5LhEDfDg/haaqzM+KfK2nf/n7k+s5fqxmy/5wKkxWYrDHs7qEg
+	 wiHEl/FIMJ5rQ==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 03:25:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131681
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 07:33:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131682
 Content-Type: text/plain; charset="utf-8"
 
-Security fix release CVE-2026-117556.
+Changelog:
+https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/1.6.11/NEWS?ref_t=
+ype=3Dtags
 
-Signed-off-by: Prasanth R <prasanth.r@lineo.co.jp>
+AI-Generated: Uses Claude Code (Claude Opus 5.5)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-support/zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb} | 2 +-
+ .../pipewire/{pipewire_1.6.9.bb =3D> pipewire_1.6.11.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb} (92%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.9.bb =3D=
+> pipewire_1.6.11.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-similarity index 92%
-rename from meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
-rename to meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-index 9d587debfd..a43ef98ef9 100644
---- a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
-+++ b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
- 
- SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;nobranch=1;tag=${PV}"
- 
--SRCREV = "99e51afa38c723e7c25834c2c3b305d20ef55d04"
-+SRCREV = "ae8e9f5b1e820a906c39f7eaf231e71bef72a3a6"
- 
- DEPENDS = "zstd"
- DEPENDS:append:libc-musl = " argp-standalone"
--- 
-2.34.1
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
+index 143f3d5e0a..ec55d6034b 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.9.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.11.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus"
+=20
+-SRCREV =3D "8fa27cabdc6c0c1350c69c026af5850ef0af1e26"
++SRCREV =3D "4287f31510771fc999f8a58a024c81ca10b8d55f"
+ BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+${BRANCH};protocol=3Dhttps;tag=3D${PV}"
+ SRC_URI +=3D "file://0001-pipewire-compress-offload.patch"
+--=20
+2.56.0
 
