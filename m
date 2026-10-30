@@ -1,288 +1,340 @@
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14265.1793374272315804761
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15117.1793376103669664805
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 08:31:12 -0700
+ Fri, 30 Oct 2026 09:01:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=snG7qtrE;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-8b09e07e149so7259197b3.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 08:31:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793374271; cv=none;
-        d=google.com; s=arc-20260327;
-        b=p4Vt5opGOTqyVsQ9YzG/FfRij693ktbYhUFE63NXuVTwc5fxdAHdVU8bSvKzmV00UB
-         KEkdxO/2AZC3L5SdyZk8nEhAkH9eXNzju+RtgzIjJ1dWI1+bcbgvuUB4Gzne1JAwzVUI
-         IcDQAUQPRJk2+FjaQsW7yWfG5kaTmKPdwjjB9zyb8KJ38T9Lab6789xlxFPjIOXw4hmw
-         9ipujMb4JYd8rBTeZrZKCqzjq/VmTx4xGCD6ETHKA8wo9Sj1MVFIIri/LKb1kL3RkYoT
-         ++IQwWKV3FOMjxjAtPhMdMSBvVJ7kicbq+i+3l+KKdqkuDO376ObZZLMOwm6UcIZDvAv
-         piwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
-        fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
-        b=Bz6+kfZIF5DznwKsdVmyykF+JCtE4HZjsyPNJfHX4tbhBkaMVp3ComzsqbJMjH6fso
-         kTaHsE23uLvhvr71ipp3lNzjkVnMZE2Imbcy7nHt9Zxk550Jdzce2f5ZI7ZZvRBPHugr
-         F7PZZT6yzbR7LzeC4Lj+KqBrLb5QRygIve5xOmQyQ4d6TyIN/rlLsaWojMvxD6XzRaXc
-         4k9PDhSxz1CPHmRBwNh/97VVVW74iW/Sar7s76hJd8dHOOTxWx1Qd17l/+xF0pggux6h
-         Ke+vWTzV5XOqEv5xiDn60HNth/7Cgtin59FIXIHLHEmDEID+K6mUDlDrdtyPe3VgBYLE
-         WRSQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=lexADOyZ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-15dd124bbe7so1513314c88.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 09:01:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793374271; x=1793979071; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
-        b=snG7qtrEQ6U9XhuZsM111tiK7s22HLpna0lRYU8EaAteqq1b0dszd2eEvbZakIRRwS
-         TKkOh0EIgsgpEgaRsIDJDY7pamtCNEvfp1BFh3bjmUeEJQwaQUO22Xl0AW7dmi69cFar
-         29A+Sa5ReVcdL9uLbOsDjZls50Bj0rkZK+jBMCFMqSqM3lYBNfsAelVzWmO3VWRY4q3C
-         w/UdMS5QLrODxtTZ5JCHogo/5wBr8NJW0YTo2o6RVOQyUova5ZylnqsT2c0fHYaa9Llw
-         GnKntJlg3o57usBV/61mXV8/l5ij3ANsb9usaPEU79lH1tiVPS01bZ03cSj6tfYwVagF
-         Oh2Q==
+        d=gmail.com; s=20260707; t=1793376103; x=1793980903; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GCUom7wLCXYigHc12s1xvCbUC7ZJYq/docqcSfEGxu4=;
+        b=lexADOyZqZ00krgn5Hs37pUulp+gscYjDYoND+Pu0W8zV5G0HDWBQRZXLveMMzrZZE
+         oC8UnB9OTCjv3tOkzmtuG8s+lT4CL0WyWbzOJfzyaLza+lpd16xJWXp2yLpIY/cybGqn
+         POmb1kxvwQ0CGW3A3s0xUCNZU5H0Rt9339WLLRd1kjetVWqY8Hero0AGCuSL1Zkt/HTM
+         e7LhZqzqerX7VW+roPIte6+fBEf3gD0RirlHUXdulojx+HGZvom8kO2lAZxpgHVDWp+X
+         eX4GV/ilZudYK0IduBJOcbPLpSQGDpm6GXvpiSuC8yCUJSxOM/hf0169kK1Cum1OC8C9
+         MW/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793374271; x=1793979071;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=HE11MoTA9Chw4+ACSnuGYJnPPrd6py5k41LKV+zQBOc=;
-        b=S3moF1jHULebwdrf4GYmHPeDcsBR2L4lPS/MECvXesshNtPEtu/kj2Hy7lTXbz9wPu
-         7AEAPmaBgZpqFvu6MZ5qHLVl1Y1ghocnzXoGQIRFku5+qipjo14T/bykxNsa2k2X6qwe
-         zhL/U0c2lTJf4GNt1y5g1oEc94WVlYsOIQyFg1z5RMFzcaqQGoGbupeOigg1AdMIQyNP
-         rGKwBf5ZsvtWG6MuWip977FMU48OJYvTBxg0XlEcayoQgML7buj4y+B15UTQ7T8t8q28
-         cKtXcCXv1HwLuU6JAY1bWgr/oNBCOwf2NLaAmN1BrmHNEuSebCZjJ/FAX1RFFxN4DlvT
-         BE5Q==
-X-Gm-Message-State: AFq9FYIy/dR7IafWnYvbEmFMPFihQfCMy+FCrWX7Z/Ah5KnQgQG2M6Is
-	txHfGpwv/KxjHdZTy3PTNaXInT/cod9Wy2U9ZjqTs41vjiGAU4E6kP62Z79CGz8b1EPK5yxmud2
-	4A4D2OQIZeh/Q4/OOspxjRCnhAKhhoyw=
-X-Gm-Gg: AYBFou2rCAqfxiO1NUrcjs45u65T3KCWCUpr1ZB1zcWHjhmywMvdvaWXL9wqlVGQQRE
-	r2AVZ+q9uDQxibTKm6wu+KJqbJy9HexR+pOg+k0Vfmu8Ra/PkpYsk2gutlQfcZ0othCYEbO3naM
-	76SsEUTBle7I16rjdxObSQU14UMsrlBCrWIbXY7r8hV64kbOrCY0D0YBMkpiOE+X1VoDa6EJYDk
-	r7722i4mBMoVhimDBCtBvqZIDlFFe7bxHbcT7kPEUCoIQcCipxpTSX7FJdLYx14sabBREO7D4Or
-	1AWoySZ6r67PPvJjDE8XUFpkJdFNS3HP+Z7Oec7r1eQTAAZ26SXq+QV4pUFlJPqIyQRlsKOsUD3
-	g+qSki0TZkK7wRsTd3b2QfuNpjr32nS7Lopwml8QzS5NXPG5qcXxkcUODjvD93eJH66Ihp2NJAM
-	8pf/v+EzgEXe+0TtDMBr3cmX3fF6SpsR7tczWNmzkiWSQWTaB+I0nGndxqaWlfrK1sFUra3DDkT
-	hGmUkgx56D2tjCVZ/jBX1aU9wq4kMKew5NIP38tIElxOlGqDE5BH5d0ddh3i9T9RinIdhfCoE1M
-	MpISNgjcPf1fxkmEnSFZ0N3O4z0UzZyAT0Wnn8sl4PTY9YVf/N9QM/LQFJQji5rIk2pJdCHDIZa
-	56pztwQ4xq9ScduLDNTOH7w==
-X-Received: by 2002:a05:690c:6e84:b0:8b0:dca9:8fc8 with SMTP id
- 00721157ae682-8b2b67a3528mr14166817b3.92.1793374269944; Fri, 30 Oct 2026
- 08:31:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20261030110309.1124614-1-leon.anavi@konsulko.com> <20261030110309.1124614-18-leon.anavi@konsulko.com>
-In-Reply-To: <20261030110309.1124614-18-leon.anavi@konsulko.com>
+        d=1e100.net; s=20260707; t=1793376103; x=1793980903;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GCUom7wLCXYigHc12s1xvCbUC7ZJYq/docqcSfEGxu4=;
+        b=HnkbkDccib/v9zdsKUDr9DLetKzKs4TiwVvbrm6UzPqqkoc+tVOVehW4CFz8UV20kC
+         HnpHNPyJi8aM7zvfVIZNCmBzuhJDqUoruK2MQiY0cKH/wjIWeVElI+EOyvA2l9kXzGIw
+         qiZIyqk4gBoLBnrKIAShYAB2igJiB9TS8UA1MDQh8t750Mi+zmAO+EyjNtU7pOJy+7MP
+         BSpkgJHHptYyK4qsqm+dkW8VmYBVkdCU4rvOW01Eex/WJDK5piHk/FWWLtT/BB7MisWe
+         sqz28VKlbCZmlk8yUQOeeOFE+fvcHDMmPyoEYPG1/Blsq0MTtCJG8Eulg6DFFFILLdW+
+         WLoA==
+X-Gm-Message-State: AFq9FYKM2kXjiAi0EKb6wnj6X7IftrESD4RHL13x/oOqqfOclMAydTuw
+	z9atR01JxmA5bdIHQfZG6mJD/D/87VlV/VZ+jngXrkMyPYSdn/sQPNfdY5dMjq1ihAI=
+X-Gm-Gg: AYBFou0gpVJQbRajwNqq4ChRcrSXlV/ATeoKJTxZiKJrgg1T1rt7j2fmKgUAAPhh0o5
+	zwFMdm3EHg/LXMZwJ53WyZSBa9byvlMEvR3NtyfJ22OWxdVohJhsDVIisf4G0rHsXXknWPxUO5d
+	n3pK5aajtE/SUUxpA5iqXQuEreo7mXWXe/AsP0+L3GFvAYZ6oVO+wnZ4c84+MmXOYYxDxAz/KE5
+	3jHJA0qAr3QGpbC+EzBq5exFBgcOXrma4zbIwjjeeq/QEpTfkheYhVsfyffsBP1gRYWgetEQvsU
+	7MtvghEeOX/iOjDUqv1Ul6nrNtd1o16UkBvjYWU1qJ3QkXBzdF9Nrsqjn99asPYIqsUyVjLUp7W
+	LsAfahz8isBcwTXJCbI65XTG8tsl8dfq7gpZZs0ORvbxaLumiAljpjJQsnWmp7PTu7EYkjD6pR8
+	j886pPMHdFYBMpea18uc/HQ8LofJrsAeMEyoAk3Wlxf4nn1hBk7BHorIbyBGvV8bpcMlR87yKs3
+	AiODW4HW1Cqy8dbK1vQN03PdyUe7pd08KOfoNJ6SCL1i9w4uoP4cPA1+oJv05vD+MKH/yw6qNSM
+	iVQVcznoaibhMC5Xew0IjYUr2Rbyvu+7Qv60vZwHZ6nmsx1sNZnCWUjRQBm79XPbLS74shsUNcP
+	Uu+1q3uILTNeZXfxKZQUCLjYHTcmjCvGG9W0AJfjRpGcVpzzJ9b/pgyjygA1eRnzEHi93IDaOVU
+	0+qxCnCH+61/MtWZMvsylqrI+E5a/CjC2zWUimNDq2KnY9kpVjlEUt0r5ZLfu5biWAiXu7JqEnp
+	++vk9CN8EsopRFvI0lyaePfnX3smKCIcu+3hoGpZQgB1YkNHfDxC/dyWJmQxA88XquHTPCaLMj/
+	Vwzr
+X-Received: by 2002:a05:701b:4187:20b0:19b:1202:77f8 with SMTP id a92af1059eb24-1ac5bf91695mr4132646c88.32.1793376102586;
+        Fri, 30 Oct 2026 09:01:42 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1a136537sm7630359c88.18.2026.10.30.09.01.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Oct 2026 09:01:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 30 Oct 2026 08:30:42 -0700
-X-Gm-Features: AclHuK838S9zp1vSjh0wTkhj56a8Yrwr0hNhoTDYM8uFEm9w9yxPk3Oa1b5JIRU
-Message-ID: <CAMKF1spOVYFJMeqC=cFGZ23roDiHadVza9tEyeZSqK8j11fv2w@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 18/25] python3-asciitree: Upgrade 0.3.3
- -> 1.0.0
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004f3a3c065f107c6b"
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] nodejs: Fix build with ICU 79
+Date: Fri, 30 Oct 2026 09:01:38 -0700
+Message-ID: <20261030160138.1408100-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 15:31:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131709
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 16:01:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131710
+Content-Type: text/plain; charset="utf-8"
 
---0000000000004f3a3c065f107c6b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ICU 79.1 brings Unicode 18, which adds U+1DF95 LATIN SMALL LIGATURE
+LONG S WITH DESCENDER S. It case-folds to U+00DF, so for the first time
+the case closure of a BMP character contains a supplementary code point.
+V8's gen-regexp-special-case build tool passes every member of that
+closure to RegExpCaseFolding::Canonicalize(), which asserts a UTF-16
+code unit, and aborts with
 
-why did LIC_FILES_CHKSUM change ?
-btw. you might want to let git find renames a bit harder adding M30% -C
---find-copies-harder options to
-git format-patch might help.
+  # Check failed: ch <= 0xffff.
 
-On Fri, Oct 30, 2026 at 4:03=E2=80=AFAM Leon Anavi via openembedded-devel
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+Backport the V8 fix, adapted to the V8 13.6 bundled with Node.js 24.
 
-> Upgrade to release 1.0.0:
->
-> - Configurable layout spaces through BoxStyle.gfx["SPACE"], with an
->   ordinary-space fallback for existing palettes.
-> - Declared the existing public API stable, without breaking changes
->   from 0.4.0.
->
-> Fixes:
->
-> WARNING: python3-asciitree-1.0.0-r0 do_check_backend: QA Issue:
-> inherits setuptools3 but has pyproject.toml specifying backend
-> setuptools.build_meta, use the correct class [pep517-backend]
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../recipes-devtools/python/python3-asciitree_0.3.3.bb   | 8 --------
->  .../recipes-devtools/python/python3-asciitree_1.0.0.bb   | 9 +++++++++
->  2 files changed, 9 insertions(+), 8 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/
-> python3-asciitree_0.3.3.bb
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-asciitree_1.0.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-asciitree_0.3.3.bb b/meta-python/recipes-devtools/python/
-> python3-asciitree_0.3.3.bb
-> deleted file mode 100644
-> index a3185a9c66..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb
-> +++ /dev/null
-> @@ -1,8 +0,0 @@
-> -SUMMARY =3D "Draws ASCII trees."
-> -HOMEPAGE =3D "https://github.com/mbr/asciitree"
-> -LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da985ccb0df374f2a8cab75010bf8d=
-b73"
-> -
-> -SRC_URI[sha256sum] =3D
-> "4aa4b9b649f85e3fcb343363d97564aa1fb62e249677f2e18a96765145cc0f6e"
-> -
-> -inherit pypi setuptools3
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-asciitree_1.0.0.bb b/meta-python/recipes-devtools/python/
-> python3-asciitree_1.0.0.bb
-> new file mode 100644
-> index 0000000000..086fc07392
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb
-> @@ -0,0 +1,9 @@
-> +SUMMARY =3D "ASCII trees"
-> +DESCRIPTION =3D "Draws ASCII trees"
-> +HOMEPAGE =3D "https://github.com/mbr/asciitree"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da533ab417405f77f9a3d236d35cd7=
-069"
-> +
-> +SRC_URI[sha256sum] =3D
-> "0c396808c13cab27b60cbe402b99ef37fa681c6b59d337a008719efa201cdd07"
-> +
-> +inherit pypi python_setuptools_build_meta
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#131700):
-> https://lists.openembedded.org/g/openembedded-devel/message/131700
-> Mute This Topic: https://lists.openembedded.org/mt/122008956/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ ...y-case-equivalents-of-BMP-characters.patch | 235 ++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_24.22.1.bb |   1 +
+ 2 files changed, 236 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
 
---0000000000004f3a3c065f107c6b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">why did LIC_FILES_CHKSUM change ?<div>btw. you might want =
-to let git find renames a bit harder adding=C2=A0M30% -C --find-copies-hard=
-er options to</div><div>git format-patch might help.</div></div><br><div cl=
-ass=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_a=
-ttr">On Fri, Oct 30, 2026 at 4:03=E2=80=AFAM Leon Anavi via openembedded-de=
-vel &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org"=
->konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">Upgrade to release 1.0.0:<br>
-<br>
-- Configurable layout spaces through BoxStyle.gfx[&quot;SPACE&quot;], with =
-an<br>
-=C2=A0 ordinary-space fallback for existing palettes.<br>
-- Declared the existing public API stable, without breaking changes<br>
-=C2=A0 from 0.4.0.<br>
-<br>
-Fixes:<br>
-<br>
-WARNING: python3-asciitree-1.0.0-r0 do_check_backend: QA Issue:<br>
-inherits setuptools3 but has pyproject.toml specifying backend<br>
-setuptools.build_meta, use the correct class [pep517-backend]<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-asciitree_0.3.3=
-.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_0.3.3.bb</a>=C2=
-=A0 =C2=A0| 8 --------<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-asciitree_1.0.0=
-.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_1.0.0.bb</a>=C2=
-=A0 =C2=A0| 9 +++++++++<br>
-=C2=A02 files changed, 9 insertions(+), 8 deletions(-)<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python=
-3-asciitree_0.3.3.bb</a><br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python=
-3-asciitree_1.0.0.bb</a><br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_=
-0.3.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-asciitree_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitre=
-e_0.3.3.bb</a><br>
-deleted file mode 100644<br>
-index a3185a9c66..0000000000<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-asciitr=
-ee_0.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_0.3.3.b=
-b</a><br>
-+++ /dev/null<br>
-@@ -1,8 +0,0 @@<br>
--SUMMARY =3D &quot;Draws ASCII trees.&quot;<br>
--HOMEPAGE =3D &quot;<a href=3D"https://github.com/mbr/asciitree" rel=3D"nor=
-eferrer" target=3D"_blank">https://github.com/mbr/asciitree</a>&quot;<br>
--LICENSE =3D &quot;MIT&quot;<br>
--LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da985ccb0df374f2a8cab75010b=
-f8db73&quot;<br>
--<br>
--SRC_URI[sha256sum] =3D &quot;4aa4b9b649f85e3fcb343363d97564aa1fb62e249677f=
-2e18a96765145cc0f6e&quot;<br>
--<br>
--inherit pypi setuptools3<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_=
-1.0.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-asciitree_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitre=
-e_1.0.0.bb</a><br>
-new file mode 100644<br>
-index 0000000000..086fc07392<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-asciitr=
-ee_1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-asciitree_1.0.0.b=
-b</a><br>
-@@ -0,0 +1,9 @@<br>
-+SUMMARY =3D &quot;ASCII trees&quot;<br>
-+DESCRIPTION =3D &quot;Draws ASCII trees&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/mbr/asciitree" rel=3D"nor=
-eferrer" target=3D"_blank">https://github.com/mbr/asciitree</a>&quot;<br>
-+LICENSE =3D &quot;MIT&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da533ab417405f77f9a3d236d35=
-cd7069&quot;<br>
-+<br>
-+SRC_URI[sha256sum] =3D &quot;0c396808c13cab27b60cbe402b99ef37fa681c6b59d33=
-7a008719efa201cdd07&quot;<br>
-+<br>
-+inherit pypi python_setuptools_build_meta<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#131700): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/131700" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/131700</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122008956/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/122008956/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000004f3a3c065f107c6b--
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch b/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
+new file mode 100644
+index 0000000000..36703eedd4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
+@@ -0,0 +1,235 @@
++From e455d955bd6b7a7549106d1b9d7ae5bb3b9e77b4 Mon Sep 17 00:00:00 2001
++From: Jakob Linke <jgruber@chromium.org>
++Date: Fri, 9 Oct 2026 12:41:30 +0200
++Subject: [PATCH] v8: [regexp] Handle supplementary case equivalents of BMP
++ characters
++
++Unicode 18 adds U+1DF95, which simple-folds to U+00DF. This creates the
++first case-equivalence class spanning BMP and supplementary characters:
++{U+00DF, U+1E9E, U+1DF95}.
++
++Discard supplementary characters from the generator's non-unicode
++closures before calling Canonicalize, which requires UTF-16 code units
++and otherwise CHECK-fails with ICU 79. Apply the same filtering in
++runtime non-unicode closure.
++
++Generate SupplementaryEquivalentsSet and desugar its BMP characters into
++character classes under /iu and /iv, allowing literals to match
++surrogate pairs.
++
++Backreferences with differing UTF-16 character widths remain unsupported
++and are tracked in crbug.com/571793821.
++
++IgnoreSet is unchanged with ICU 78 and with ICU 78.2 patched to upstream
++Unicode 18 case data. With the patched data, the generator succeeds,
++SupplementaryEquivalentsSet is {U+00DF, U+1E9E}, and regexp tests pass
++in release and debug.
++
++Bug: 571232615, 571668686
++Change-Id: I9eacb273a74c66e17f0cfb1b256e863f2718c130
++Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/8548134
++Reviewed-by: Patrick Thier <pthier@chromium.org>
++Commit-Queue: Jakob Linke <jgruber@chromium.org>
++Cr-Commit-Position: refs/heads/main@{#110522}
++
++Fixes the build with system ICU 79.1 (Unicode 18), where
++gen-regexp-special-case aborts with "Check failed: ch <= 0xffff".
++
++This is the V8 change adapted to the RegExpCaseFolding layout of the
++V8 13.6 bundled with Node.js 24; the test changes are dropped.
++
++Upstream-Status: Backport [https://github.com/v8/v8/commit/f607706154eabc4a949628a88b38dbe95cd2274c]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ deps/v8/src/regexp/gen-regexp-special-case.cc | 18 ++++++++++
++ deps/v8/src/regexp/regexp-parser.cc           | 18 +++++++---
++ deps/v8/src/regexp/special-case.h             | 47 ++++++++++++++++++++++++++-
++ 3 files changed, 77 insertions(+), 6 deletions(-)
++
++diff --git a/deps/v8/src/regexp/gen-regexp-special-case.cc b/deps/v8/src/regexp/gen-regexp-special-case.cc
++index 86f6b212c93..98f70975be1 100644
++--- a/deps/v8/src/regexp/gen-regexp-special-case.cc
+++++ b/deps/v8/src/regexp/gen-regexp-special-case.cc
++@@ -9,6 +9,7 @@
++
++ #include "src/base/strings.h"
++ #include "src/regexp/special-case.h"
+++#include "unicode/uchar.h"
++
++ namespace v8 {
++ namespace internal {
++@@ -17,6 +18,19 @@ static const base::uc32 kSurrogateStart = 0xd800;
++ static const base::uc32 kSurrogateEnd = 0xdfff;
++ static const base::uc32 kNonBmpStart = 0x10000;
++
+++// Removes supplementary code points from |set| and returns whether any were
+++// present. Since Unicode 18, the case closure of a BMP character can contain
+++// supplementary code points (U+1DF95 LATIN SMALL LIGATURE LONG S WITH
+++// DESCENDER S case-folds to U+00DF LATIN SMALL LETTER SHARP S). Non-unicode
+++// ignoreCase matching compares UTF-16 code units, so a supplementary code
+++// point never matches a BMP character and does not take part in Canonicalize.
+++bool RemoveSupplementary(icu::UnicodeSet& set) {
+++  constexpr UChar32 kFirstSupplementary = static_cast<UChar32>(kNonBmpStart);
+++  if (!set.containsSome(kFirstSupplementary, UCHAR_MAX_VALUE)) return false;
+++  set.remove(kFirstSupplementary, UCHAR_MAX_VALUE);
+++  return true;
+++}
+++
++ // The following code generates "src/regexp/special-case.cc".
++ void PrintSet(std::ofstream& out, const char* name,
++               const icu::UnicodeSet& set) {
++@@ -51,6 +65,7 @@ void PrintSpecial(std::ofstream& out) {
++   icu::UnicodeSet current;
++   icu::UnicodeSet special_add;
++   icu::UnicodeSet ignore;
+++  icu::UnicodeSet supplementary_equivalents;
++   UErrorCode status = U_ZERO_ERROR;
++   icu::UnicodeSet upper("[\\p{Lu}]", status);
++   CHECK(U_SUCCESS(status));
++@@ -63,6 +78,7 @@ void PrintSpecial(std::ofstream& out) {
++     }
++     current.set(i, i);
++     current.closeOver(USET_CASE_INSENSITIVE);
+++    if (RemoveSupplementary(current)) supplementary_equivalents.add(i);
++
++     // Check to see if all characters in the case-folding equivalence
++     // class as defined by UnicodeSet::closeOver all map to the same
++@@ -112,6 +128,7 @@ void PrintSpecial(std::ofstream& out) {
++       UChar32 canonical = RegExpCaseFolding::Canonicalize(c);
++       current.set(c, c);
++       current.closeOver(USET_CASE_INSENSITIVE);
+++      RemoveSupplementary(current);
++       current.removeAll(ignore);
++       for (int32_t j = 0; j < current.getRangeCount(); j++) {
++         for (UChar32 c2 = current.getRangeStart(j);
++@@ -124,6 +141,7 @@ void PrintSpecial(std::ofstream& out) {
++
++   PrintSet(out, "IgnoreSet", ignore);
++   PrintSet(out, "SpecialAddSet", special_add);
+++  PrintSet(out, "SupplementaryEquivalentsSet", supplementary_equivalents);
++ }
++
++ void WriteHeader(const char* header_filename) {
++diff --git a/deps/v8/src/regexp/regexp-parser.cc b/deps/v8/src/regexp/regexp-parser.cc
++index 2792cd0f1e9..dd883c3eddc 100644
++--- a/deps/v8/src/regexp/regexp-parser.cc
+++++ b/deps/v8/src/regexp/regexp-parser.cc
++@@ -10,6 +10,7 @@
++ #include "src/regexp/regexp-ast.h"
++ #include "src/regexp/regexp-macro-assembler.h"
++ #include "src/regexp/regexp.h"
+++#include "src/regexp/special-case.h"
++ #include "src/strings/char-predicates-inl.h"
++ #include "src/utils/ostreams.h"
++ #include "src/utils/utils.h"
++@@ -156,6 +157,10 @@ void RegExpTextBuilder::FlushText() {
++
++ void RegExpTextBuilder::AddCharacter(base::uc16 c) {
++   FlushPendingSurrogate();
+++  if (NeedsDesugaringForIgnoreCase(c)) {
+++    AddClassRangesForDesugaring(c);
+++    return;
+++  }
++   if (characters_ == nullptr) {
++     characters_ = zone()->New<ZoneList<base::uc16>>(4, zone());
++   }
++@@ -238,15 +243,18 @@ bool RegExpTextBuilder::NeedsDesugaringForUnicode(RegExpClassRanges* cc) {
++   return false;
++ }
++
++-// We only use this for characters made of surrogate pairs.  All other
++-// characters outside of character classes are made case independent in the
++-// code generation.
+++// Desugar supplementary characters with case equivalents and BMP characters
+++// with supplementary equivalents. Other atoms are folded during code
+++// generation.
++ bool RegExpTextBuilder::NeedsDesugaringForIgnoreCase(base::uc32 c) {
++ #ifdef V8_INTL_SUPPORT
++   if (IsUnicodeMode() && ignore_case()) {
+++    if (c <= unibrow::Utf16::kMaxNonSurrogateCharCode) {
+++      return RegExpCaseFolding::HasSupplementaryEquivalents(
+++          static_cast<base::uc16>(c));
+++    }
++     icu::UnicodeSet set(c, c);
++-    set.closeOver(USET_CASE_INSENSITIVE);
++-    set.removeAllStrings();
+++    RegExpCaseFolding::CloseOver(set, RegExpCaseFolding::Mode::kUnicode);
++     return set.size() > 1;
++   }
++   // In the case where ICU is not included, we act as if the unicode flag is
++diff --git a/deps/v8/src/regexp/special-case.h b/deps/v8/src/regexp/special-case.h
++index 753c9231ede..80b88a308cc 100644
++--- a/deps/v8/src/regexp/special-case.h
+++++ b/deps/v8/src/regexp/special-case.h
++@@ -7,8 +7,8 @@
++
++ #ifdef V8_INTL_SUPPORT
++ #include "src/base/logging.h"
+++#include "src/base/strings.h"
++ #include "src/common/globals.h"
++-
++ #include "unicode/uchar.h"
++ #include "unicode/uniset.h"
++ #include "unicode/unistr.h"
++@@ -71,9 +71,17 @@ namespace internal {
++ // another character. Characters that match no other characters in
++ // their equivalence class are added to IgnoreSet. Characters that
++ // match at least one other character are added to SpecialAddSet.
+++// Supplementary code points are ignored throughout: non-unicode matching
+++// compares UTF-16 code units, so they can never match a BMP character.
+++//
+++// The generator additionally emits SupplementaryEquivalentsSet, the BMP
+++// characters whose Unicode case closure contains supplementary code points.
+++// This set is used for unicode-mode matching, see HasSupplementaryEquivalents.
++
++ class RegExpCaseFolding final : public AllStatic {
++  public:
+++  enum class Mode { kNonUnicode, kUnicode };
+++
++   static const icu::UnicodeSet& IgnoreSet();
++   static const icu::UnicodeSet& SpecialAddSet();
++
++@@ -108,6 +116,43 @@ class RegExpCaseFolding final : public AllStatic {
++     // h. Return cu.
++     return cu;
++   }
+++
+++  // Close a set of characters under case equivalence, preserving its
+++  // original members. Non-unicode inputs must be UTF-16 code units.
+++  static void CloseOver(icu::UnicodeSet& set, Mode mode) {
+++    if (mode == Mode::kUnicode) {
+++      set.closeOver(USET_SIMPLE_CASE_INSENSITIVE);
+++      return;
+++    }
+++    DCHECK(!set.containsSome(0x10000, 0x10ffff));
+++    if (IgnoreSet().containsNone(set)) {
+++      CloseOverNonUnicode(set);
+++      return;
+++    }
+++    if (IgnoreSet().containsAll(set)) return;
+++    // Ignored characters neither contribute nor acquire equivalents, but
+++    // must remain in the result if they were explicitly present.
+++    icu::UnicodeSet ignored(set);
+++    ignored.retainAll(IgnoreSet());
+++    set.removeAll(IgnoreSet());
+++    CloseOverNonUnicode(set);
+++    set.addAll(ignored);
+++  }
+++
+++  // Whether c has supplementary Unicode case equivalents.
+++  static bool HasSupplementaryEquivalents(base::uc16 c) {
+++    return SupplementaryEquivalentsSet().contains(c);
+++  }
+++
+++ private:
+++  static const icu::UnicodeSet& SupplementaryEquivalentsSet();
+++
+++  // Requires a set containing no IgnoreSet characters.
+++  static void CloseOverNonUnicode(icu::UnicodeSet& set) {
+++    set.closeOver(USET_SIMPLE_CASE_INSENSITIVE);
+++    set.removeAll(IgnoreSet());
+++    set.remove(0x10000, 0x10ffff);
+++  }
++ };
++
++ }  // namespace internal
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
+index 4912136f76..fc5a5e5c09 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
+@@ -30,6 +30,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0007-positional-args.patch \
+            file://0008-custom-env.patch \
+            file://0010-v8-fix-Wtemplate-body-error-with-GCC-15-on-ia32.patch \
++           file://0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch \
+            file://run-ptest \
+            "
+ SRC_URI:append:class-target = " \
