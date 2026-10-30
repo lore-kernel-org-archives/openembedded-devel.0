@@ -1,116 +1,91 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4024.1793330236823804698
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4175.1793330716317076611
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2026 20:17:17 -0700
+ Thu, 29 Oct 2026 20:25:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=PVr+r53X;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: vaibjind@qualcomm.com)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69U2K9e91961424;
-	Fri, 30 Oct 2026 03:17:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=m815aeZ2Y6S
-	S2UNTZt51ituWePCfih6T4LtCTVi4hvQ=; b=PVr+r53XWQH7ix3HSh58TkvazzQ
-	2TBcMah6QgoDknBmeIjPOHA5bpowoW9STx7u8ujba+HMGjUWuDE1jSt25xldZbqQ
-	8+XFYrL9igIbm7eAb3/xW3k7U3Fo518CszJB4pZQwzNKW8HUNhiLcbJla2CutHah
-	GBcf+iwd6K075SpznGf9YbeDIcDxshj71EOKV3G4ksfiLppkdRcjauoWvT7wJcVu
-	h1bMJrGkD5qJB5PZgCt54cQNPmIEcO6vcNHk+U+1d0vBlykmPVeUOCJ+HxmQbkzo
-	GsZUnlkTQdthEbgmb+S6IgO1RsVgnlSUkabrMzNzgthGY7pGAUD9WwITQJA==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6qgxtm-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 30 Oct 2026 03:17:15 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69U3HBSH504985;
-	Fri, 30 Oct 2026 03:17:11 GMT
-Received: from hu-devc-hyd-u22-a.qualcomm.com (hu-vaibjind-hyd.qualcomm.com [10.147.244.121])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 69U3HBo9504979
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 30 Oct 2026 03:17:11 +0000 (GMT)
-Received: by hu-devc-hyd-u22-a.qualcomm.com (Postfix, from userid 4734334)
-	id 1AB50643; Fri, 30 Oct 2026 08:47:10 +0530 (+0530)
-From: Vaibhav Jindal <vaibjind@qti.qualcomm.com>
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=C0tuajMc;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: ragaprasanth@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-15ea896ddc8so413955c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2026 20:25:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793330716; x=1793935516; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cV3+RTyOFDlu1/a91nVIe5LQyK5/OSBvYshXBBiNuhg=;
+        b=C0tuajMcxEUofahTD3WI5JzuKLTGkQRFo99Jpili+rVyFhXdpE4tQCQcbIhevzM2Zj
+         wjSF/FXr3cLf4MlLwu5FgGfsHe5l2QtMDP4grCZlIFV0KLg8z/yWxfao03BSI18udiOa
+         uTk4wGj0BOcj3YJKQfjH4uiSyc+8V7YAnF16KL6ipU6TaIc5KMRU8tJDfzsIVRIjF1V3
+         K7Gz0WplEBplKa8aWXVg584r/+m7KXVNr9hoX6hTqqR+KRhrU3XJu/R0w6Yethi+6Pi/
+         ZXnbb9NoW3e39ZDyRkRtzjjpqVHZTrWre2l5ORzzMXXHzmTZ8NAPkccPzQVmy2yJsPRC
+         jX4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793330716; x=1793935516;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cV3+RTyOFDlu1/a91nVIe5LQyK5/OSBvYshXBBiNuhg=;
+        b=zZNJH424AHYZ7ZBBSb6BtxeHfGTt11WG9Ch1Bk710JXz0do+pPwzC2mYtu5xj+l3Oy
+         HsQfzQ3tXbVSlQVFChAcHv6NXMEHod4hlZkhSU9/167wvH6lNDVp+Z+GYL8ziPXQaPGI
+         4vbA1b4Riyjcr/RKlWScEAXSOE1C7FG1omHbCU+x9E3NzOYhX3vgjhZmOq4yyaZmikWl
+         xfKD8ZDd2lLeLc5XqP7XFPUb9rGD6thZi1ZT1YlkjjcfGMgC/tLyAj3od2W5MeGtQjl4
+         uv9LySoPt+sYt9pMVwrJEMuGTP/HyMUoVzCAwyJWrj2N58UYaE8IOornxVDmsxa69dTL
+         3t7A==
+X-Gm-Message-State: AFq9FYKGczmJQuM9noOvsBgLnTUfgYv3htJpFK/1YLiioW+MJe1NO4JU
+	UH72TeqQBBIsmY34uIoNuGwOPp/M3+EukuiCfvbUI7n5ogbQmQ2cNM6I3TQ9sw==
+X-Gm-Gg: AYBFou2oTNEs2GVQP8DOWfw5O+6S49PnwByn3OV/ZQwtWY3a0hPzM+4Iyx6VG/lXRrD
+	Jm06W3kLPhw1C7lbsty/5pfm8yw3dgleOI7Vt+PmoGohOcwR/2oDO0/OPZhkFKUfbFBHDd5Dww+
+	JyW1dNGvCPPPZ/2j+AjBQ+GI/f5DAFQSoxbagZCZQrRMzw3XIijRM71NfMz6epfILf7W3pDIkCI
+	dc9gIgLpi/psyypCbLNecf5FuLoK70vv1tFLGY+iyICtB6Ow6HuRVp1Rj6nEYBHOy9pXEAjT6Nk
+	LgC6b9MPVdX96rhvbNwHwySJ/SvC9cl8kxRxAQ+jB+p+qoH6SeRPRc2OtPUmy97+GCCI2B/HD8X
+	9ATfCYM1GldyHhH5252XV1xOX5BJoI5n8caypjql+SCQ7B0N+CoSQi3jYFSWAVaNZmi6adOYZrd
+	1OjD3kTuaa3FGD59f/zwxE+T9HlYovhiZbHOY2IZ0ZVwDXCHvtmPdMLuUmkghgjeWjQMJJ/RvtJ
+	hbEsxVy/lr8c4zW/0QhWrv9UGXdMy0ExUi77xiM4CpjMp4h18fqOe92T0/UmTfj8Z6dZfuD0s/o
+	jsXnZF9Vqf0Rvvmr51Lnd8fUbi+W5ZDfdJ4AYGwBgPWKomVZaMZIGAkZemV9D6/Z
+X-Received: by 2002:a05:7022:1108:b0:199:4f68:7710 with SMTP id a92af1059eb24-1ac55774becmr1518034c88.2.1793330715330;
+        Thu, 29 Oct 2026 20:25:15 -0700 (PDT)
+Return-Path: <ragaprasanth@gmail.com>
+Received: from prasanth.alps.lineo.co.jp (vpn1.lineo.co.jp. [203.141.200.204])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1b38ac58sm2862032c88.23.2026.10.29.20.25.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2026 20:25:14 -0700 (PDT)
+From: Prasanth R <ragaprasanth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com, Vaibhav Jindal <vaibjind@qti.qualcomm.com>
-Subject: [meta-oe][PATCH v2] wrk: fix parallel build failure due to missing obj directory
-Date: Fri, 30 Oct 2026 08:46:34 +0530
-Message-Id: <20261030031634.3740225-1-vaibjind@qti.qualcomm.com>
+Cc: Prasanth R <ragaprasanth@gmail.com>
+Subject: [meta-oe][PATCH] zchunk: upgrade 1.5.4 -> 1.5.5
+Date: Fri, 30 Oct 2026 12:25:05 +0900
+Message-Id: <20261030032505.102012-1-ragaprasanth@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <CAMKF1so2GEPYnN5jnGfzbT2g9hh_Zg7eOtngna8Pb=0m_5GbJw@mail.gmail.com>
-References: <CAMKF1so2GEPYnN5jnGfzbT2g9hh_Zg7eOtngna8Pb=0m_5GbJw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-GUID: YnL0aTnmUGyE1lBxZ1BmbdM7nsTpfYjw
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDAxMiBTYWx0ZWRfX2caOm05PT/O7
- +1N0W1wsAjX0SuBuWty/dbsFtfVrF1hUhZmVGob41CPRHAM+7n+yxb6BgziMdQWuna7DywsoMZd
- AgDRok4i3VJZbhrBeBmkfjzjMhxYwsM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDAxMiBTYWx0ZWRfX5poZF76EZupC
- EovmgNoVKhF3lWkTdumPxb4iINAtES+Ubt7tA30DFwqEk5ZkP5DqBUrXaswI8nL2ZZjv1zlKwdf
- aKtNY/TMAAXzQUXnSRBbR+yz3g3HsaJfDECxg7wH8KdpiEwKbOktdSLDeflZtd0jeUdR8swejg6
- 67JvxtrqEym7D8fai/90eo35Dfs/zPWzNO1FHSWxsbBxivMYafRLQSqTDjzt+l/WXiFnYoQtTIV
- dNklmryXyejawe/iDO0/jEVNqz3gXYlyHiCSup4m8NVf2mkuKHppZVxC9ry0bt8/vvbiwExLSEE
- pP7WOUds9+/bU0/VvQJINSDXyLf2/ht5gJgOky+GsVu7DGPH8njWcvjVsNepxbQ8j1Zctb1BpM4
- plAHyK84yzuI32uqmUZ6hLg2oRitkNm21on7ZeFVz6fVC84D4LAFcS9xxBrLBklV9Z0S9v62CCB
- rix+IywKm8h9pUAO3kA==
-X-Proofpoint-ORIG-GUID: YnL0aTnmUGyE1lBxZ1BmbdM7nsTpfYjw
-X-Authority-Analysis: v=2.4 cv=TpVzFzXh c=1 sm=1 tr=0 ts=6ae40c3b cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8 a=_Y2gOFyC22x1hoYQTOcA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-30_01,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 priorityscore=1501
- impostorscore=0 adultscore=0 suspectscore=0 clxscore=1011 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610300012
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 03:17:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131680
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 03:25:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131681
 Content-Type: text/plain; charset="utf-8"
 
-The obj/bytecode.c rule in the wrk Makefile has no dependency on the
-obj/ directory, so with parallel make luajit can run before obj/ has
-been created and fails:
+Security fix release CVE-2026-117556.
 
-  LUAJIT src/wrk.lua
-  luajit: .../obj/bytecode.c: No such file or directory
-  make: *** [Makefile:64: obj/bytecode.c] Error 1
-
-wrk only supports in-tree builds (relative obj/ and src/ paths, B = S),
-so create ${S}/obj via do_compile[dirs], keeping ${S} last so make
-still runs from the source directory.
-
-Signed-off-by: Vaibhav Jindal <vaibjind@qti.qualcomm.com>
+Signed-off-by: Prasanth R <prasanth.r@lineo.co.jp>
 ---
-v2: use do_compile[dirs] = "${S}/obj ${S}" instead of mkdir in the
-function, as suggested by Khem Raj. wrk's Makefile is in-tree
-only (B = S), so obj/ is under ${S}; ${S} is kept last so make runs
-from the source dir.
+ .../recipes-support/zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/zchunk/{zchunk_1.5.4.bb => zchunk_1.5.5.bb} (92%)
 
- meta-oe/recipes-benchmark/wrk/wrk_4.2.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-oe/recipes-benchmark/wrk/wrk_4.2.0.bb b/meta-oe/recipes-benchmark/wrk/wrk_4.2.0.bb
-index 47ca9ada01..1eaf97a382 100644
---- a/meta-oe/recipes-benchmark/wrk/wrk_4.2.0.bb
-+++ b/meta-oe/recipes-benchmark/wrk/wrk_4.2.0.bb
-@@ -23,6 +23,10 @@ EXTRA_OEMAKE = "\
-     CFLAGS='${CFLAGS} -I${RECIPE_SYSROOT}/usr/include/luajit-2.1' \
- "
+diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
+similarity index 92%
+rename from meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
+rename to meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
+index 9d587debfd..a43ef98ef9 100644
+--- a/meta-oe/recipes-support/zchunk/zchunk_1.5.4.bb
++++ b/meta-oe/recipes-support/zchunk/zchunk_1.5.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
  
-+# wrk's Makefile is in-tree only (relative obj/, src/) and its obj/bytecode.c
-+# rule doesn't depend on obj/, so create it before make runs in ${S}.
-+do_compile[dirs] = "${S}/obj ${S}"
-+
- do_compile() {
-     export LUA_PATH="${RECIPE_SYSROOT_NATIVE}/usr/share/luajit-2.1/?.lua;;"
-     oe_runmake
+ SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;nobranch=1;tag=${PV}"
+ 
+-SRCREV = "99e51afa38c723e7c25834c2c3b305d20ef55d04"
++SRCREV = "ae8e9f5b1e820a906c39f7eaf231e71bef72a3a6"
+ 
+ DEPENDS = "zstd"
+ DEPENDS:append:libc-musl = " argp-standalone"
 -- 
 2.34.1
 
