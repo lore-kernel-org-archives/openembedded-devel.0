@@ -1,161 +1,116 @@
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.739.1793419258154412441
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.902.1793420136064443561
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 21:00:58 -0700
+ Fri, 30 Oct 2026 21:15:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=flh+EzUk;
- spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3645f0f3fcdso2307148eec.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 21:00:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=HrkGzGRq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-8b056d58f2aso13509717b3.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 21:15:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793419257; x=1794024057; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Z5yipu0q8Vr2jBjaghB7XbaYkQSgULC6LkO3kB9GKMo=;
-        b=flh+EzUkFJd0ug9RPQVMeHhhh1G17o+wC+dEI/oU16Alxj6Mlkpf0IBjYZ7d4KWhzE
-         +Yyd0V6TjVqqdxRmlIMAvjFekPOYzeBzitj3hP/D7MOXqLLURPCiqz0M0ojT/IFoCaAq
-         bmC4PycnJ9V+wGH0Dhby4YEIoj7Jd11CPyu6+686FqhhuwLtIN2nkXPN61HlwBAFDnef
-         jrXmu/CP6H0B1QqSnyYsRH7GWKOBVrO4gPVQjP8whbh0qpELdkx69fXVBf6P+5ouyxjQ
-         zXCpB6aPf3J4uJG5m1POSotBw8YkX/0CD90M+absgQJvBhkuTOYU/fRNdwvUNGDFrXY2
-         W0RQ==
+        d=gmail.com; s=20260707; t=1793420135; x=1794024935; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=aWHYk6nGLCu4nq7mFEYbxMNLg4di1OaM+5aq1fAgsBs=;
+        b=HrkGzGRqh72mUfUQQNZ72ZVR3SkB6Yk7Zc6Vj0+U/ntzAJ602pZ9Mm1hxTOov1ATbu
+         fRts7Xf25vTXqUB8AGhfqqcmyt4JsD/HlE8fheCIcVMzBEQxwjiKOHYFQ0p4SCOcrY2G
+         ilArgWc9c3Y5xQd8vOKVaCNPL0RqxqjssZlP0luDjzcOkwaQkbgodXs+jTYTVLDLwUel
+         qkYu4Edn0h+AZCjEntyzH0ymrH64crVKDnz3SVjCs8qrTUaqjLMf7Mo9FbQeV+YPdCmA
+         fQQhry/TlPKonrJGiR+bK/kghalSmxF/8HH2OM+QiFUXRHTcdvHjuEEXzR9j/hZm/bF1
+         3tDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793419257; x=1794024057;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Z5yipu0q8Vr2jBjaghB7XbaYkQSgULC6LkO3kB9GKMo=;
-        b=X6SVXSnbM7KUKklUReaVX2xK0zw1ocXQXGhWm5P75J4hPwoyE89ERkv/JJCCfiZ0x+
-         APGlX0KFhOjBjLwBt+UPlDFLr16ACghHHNryZ1BQ0p8N1J5BUqqU8yLej2qbrqehGqSz
-         ZnVhYQXt4ZxgVQPk0njdvTYmE/1m/gsXGekBWNCgpT9pcpE84gHyt6LZ/VO//xMUTUwk
-         QaNBog8g73P6bvQM3Q0ODzM8KYTDf22IPeWkjJWBx1weJ+80c5zohAgPyH3Z2G1WOrRl
-         LTQrOdaf1M7QeCCZ7ufN8s92x5IE4N36HiQhAI6Sdntn3h9kBbXLDKv5o8J/K16IQ3QA
-         2VFg==
-X-Gm-Message-State: AFq9FYLuxMb669FQMf2tvJWNOjyM5JQKadmZFpXTfMc3clFMLBTgHiYj
-	5BhPrk9HYp0RPY4ZDGUb9SefXe1su5UCJjkaA6ySAVDEpmbTGiKg778t34Ko5fwJH20=
-X-Gm-Gg: AYBFou39eFzhw4KGBHrNyEN9wNjREujodtRRZ9gi2JmsWSVwzSwumLNItfZIPRO80OL
-	CdJ3REMT+muKqP+Cn2es8YSCzA8jOtXBpu8QS7h8K/N/990tXV0MTT/omPvupmXR7ScmqD1joMg
-	Qsb14XlZQ/1q08c/R2RAoLYOC0zdbw5ZCNifhOIPN7xocDVzuZqjUWIb/47ifzNatoDe4Cpsapq
-	0OqEa78Gdtc18/1Hrlf7Nj+H0P55zC5pwoN8kCD2M8YDIPbLuiVJpqqDPGlxi3gl5jUQRFpvV9y
-	ibSyzZgOLYXwk4svJZE+xW8eLg1c1OPG3+gcshRoTk1hWN/ia03R/pB14YHHWZoRLpLNPgOxTsb
-	8VH7XrDKwZTo1YqWAiXCGl3pcUoBkQY/+5+T/dq7fzKiVdPT5Ogm/D2XA2pzpQ12C1Kz37u83O5
-	F2lfb2/XwKQtE6VX7SoxZlaK+6AGw1j/3HqxIKdDScE5Gm/WyaqCsFSyIWBd9xg6dSm0NO36njx
-	+YLWQRnwYwoB3IObuQMHrgjco8fkr8ATEVaeYJ9KJoyp4IQ02ln7KHhXPlJOgv3DtgEYkf5zHXk
-	yr1MFQiWnJyleSuEPGs/hRFXau4WmTUhz+sXxU24tnuRYpyXKSm1lRA7uYrb5YOi6XDq4IjAHvp
-	kREjPeR2bnMY+zCTD5/VEiKbjE9ciXDuE35dKVJ9C+lQBELmrDRKpvdWZC6qvoNwLnFMDAjAfwF
-	wes4L5ypCv3GZJAaVx5wKjCiAnyUZpeovnx2HVc5EnR4fKNzN96x9C7+pGDt9IBU1TqDUAKE1Ab
-	ACBbwXwgbL33QE26/k5IdFNRPwtitPjFnyDciu/ytlDZr2WzNvgN6U1LOK2c7Wjt38aGEfs9OFZ
-	DXlW
-X-Received: by 2002:a05:693c:6092:b0:35e:5ca:e0df with SMTP id 5a478bee46e88-36a424609c2mr7531424eec.35.1793419256805;
-        Fri, 30 Oct 2026 21:00:56 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42a98f65sm11853728eec.28.2026.10.30.21.00.55
+        d=1e100.net; s=20260707; t=1793420135; x=1794024935;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=aWHYk6nGLCu4nq7mFEYbxMNLg4di1OaM+5aq1fAgsBs=;
+        b=TPsmDnBo7TCRq3+SxXWJ5y4DMpiQyAaJd4+AJXhebMRJd83z8mgv68axUioRcrBX2Z
+         oIjucbGsams3hzlVULDe1yASiTFo/PCL5M8htimCyQb9ZRCQMeMbeLe7w0n729yPINSj
+         7TujXZcD11FgzbhiAtf0t2DctAeKUb0Vqh+699kpokP/XDxoyHr7vL61v4bQSj7vrA0o
+         5Rtgh7Hu+Vp1LCLdje3c10/vlkdS12y/74R1gEdMsRnT3eDP1a7UG/wciog96sWLdl9L
+         jmmY0skhN+GfraEDhUQKPGJToCG6vMMrwkpCnP4DUGRi4EKB5nYAAXmyNTMcdIqSLQsH
+         E+9Q==
+X-Gm-Message-State: AFq9FYLPa87p8mK3l0C0rqHatV1WwGO4/cFn7VTNPRkKvbkUAYKriS9k
+	Ok74GPbsOOPRvs6f7U7rOnqy6/npRL3wrXgdg9sIkDUTR3hT7/6FrBlbNwl1pZYP
+X-Gm-Gg: AYBFou0iJhTTAxHG8FtH62Tdl3fWwuaacygYoa3q7MBMAON9F0mhqVhs4VZtZNQn2Ox
+	vHWwH7CK3+PC6HzxXVgwSInJSINQGiT5f5QNT9dmJncF/CNhRtJr73Df0ThNijGuHhXcLS0hyma
+	cR1q5g2ESZ9x3xao742QXKlDjw2d08+xKY2MEyplZ83AF7da4P8f4ddKBVWEkjreMxvCy2jxfTg
+	rDbyRLTtMIndi+ELoq883M/3A1je2RknMX2nof7PC7smPiOb7v84hmVyLjzB3Q82PU0d28PmMjj
+	G448u+jKjd5cMofK53Rz1w3R4ghnwDexcszVYujMDMT19ds8v/KkkxUeL5CqgUCv/JEgQNAftxY
+	5R8m9Fmz/VcOO4tZb8io6HL7F6meUHidHCMf8n5lyvFiimn5U7VEVxut7NmYzYIZkG9sblbe3Z3
+	NAWNT+43OCMwC/0fPbDkSzOqdlRUks2oWHm8ueLyO1N/HFph8ngJ2e5xnWiwJXADEfRUZ3chJhf
+	0ExznKtHE6bP62SiDfTEYXfJTbHRrR7wdVDLbYczrwkDjwSmPpFCkVBt3j7msDNAI1luXMMLb5d
+	uDq70HFUsEPvVf+JM7n+ZnJBpqhJrJ0KeyjwudPE05MnI8yYG2FFxo/lRD1Tn9AnRgS67JK/za2
+	3cr9rLv5/24KtHR5YNCbhGo5oX9V8k0N3Js0p/lVKImflm7qHCG8Y
+X-Received: by 2002:a05:690e:168f:b0:679:887f:a2b1 with SMTP id 956f58d0204a3-67ba5002bcamr2160654d50.48.1793420134768;
+        Fri, 30 Oct 2026 21:15:34 -0700 (PDT)
+Return-Path: <schonm@gmail.com>
+Received: from localhost.localdomain ([71.54.204.63])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67baf2701f8sm1033176d50.6.2026.10.30.21.15.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 21:00:56 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Fri, 30 Oct 2026 21:15:34 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 3/3] libgpiod: Fix intermittent gpiocli monitor ptest failure
-Date: Fri, 30 Oct 2026 21:00:51 -0700
-Message-ID: <20261031040051.2131713-3-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261031040051.2131713-1-khem.raj@oss.qualcomm.com>
-References: <20261031040051.2131713-1-khem.raj@oss.qualcomm.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][wrynose][PATCH] nodejs: 22.23.3 -> 22.23.4
+Date: Sat, 31 Oct 2026 00:15:13 -0400
+Message-ID: <20261031041513.261844-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2026 04:01:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131723
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2026 04:15:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131724
 Content-Type: text/plain; charset="utf-8"
 
-test_monitor_all_lines_on_request toggles line 1 twice, with line 4 in
-between, before reading any event. gpio-sim delivers both changes of
-line 1 as one interrupt when they happen before it is handled, so the
-rising edge is lost:
+This is the October 2026 security release.
 
-  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
-  match '[0-9]+ rising\s+"foo"'
+  4 high severity issues.
+  3 medium severity issues.
+  3 low severity issue.
 
-Wait for each event before triggering the next one. In a qemux86-64
-guest this took the test from 12 of 20 runs failing to none.
+High severity issues.
+  CVE-2026-105482
+  CVE-2026-105483
+  CVE-2026-106069
+  CVE-2026-111497
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Medium severity issues.
+  CVE-2026-105481
+  CVE-2026-106072
+  CVE-2026-106074
+
+Low severity issues.
+  CVE-2026-106070 (affects only nodejs v26)
+  CVE-2026-106071 (affects only nodejs v26)
+  CVE-2026-106073
+
+https://nodejs.org/en/blog/vulnerability/october-2026-security-releases
+
+Changelog: https://github.com/nodejs/node/releases/tag/v22.23.4
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...for-each-event-in-test_monitor_all_l.patch | 52 +++++++++++++++++++
- .../libgpiod/libgpiod_2.3.1.bb                |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch
+ .../nodejs/{nodejs_22.23.3.bb => nodejs_22.23.4.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.23.3.bb => nodejs_22.23.4.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch
-new file mode 100644
-index 0000000000..6f94fc6a68
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch
-@@ -0,0 +1,52 @@
-+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 28 Oct 2026 07:55:33 -0700
-+Subject: [PATCH] dbus: tests: wait for each event in
-+ test_monitor_all_lines_on_request
-+
-+The test pulls line 1 up, line 4 up and line 1 down again in quick
-+succession and only then reads the monitor output. gpio-sim raises the
-+line interrupts through irq_sim, so two changes of the same line that
-+happen before the interrupt is handled are delivered as one interrupt,
-+and as edge detection is set to both edges the kernel derives the edge
-+type from the line value read in the handler. The rising edge on line 1
-+is then lost and only a falling edge is reported, timestamped after the
-+rising edge on line 4:
-+
-+  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
-+  match '[0-9]+ rising\s+"foo"'
-+
-+This fails intermittently, in 12 of 20 runs in a qemux86-64 guest.
-+
-+Wait for each event before triggering the next one, like the gpiomon
-+tests in gpio-tools-test.bash do.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ dbus/client/gpiocli-test.bash | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
-+index 5160f57..ede69c9 100755
-+--- a/dbus/client/gpiocli-test.bash
-++++ b/dbus/client/gpiocli-test.bash
-+@@ -1421,13 +1421,13 @@ test_monitor_all_lines_on_request() {
-+ 	dut_run gpiocli monitor -r "$request"
-+
-+ 	gpiosim_set_pull sim0 1 pull-up
-++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
-++
-+ 	gpiosim_set_pull sim0 4 pull-up
-+-	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ rising\\s+4"
-+
-+-	dut_read
-+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
-+-	output_regex_match "[0-9]+ rising\\s+4"
-+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
-++	gpiosim_set_pull sim0 1 pull-down
-++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
-+
-+ 	gpiodbus_release_request "$request"
-+ }
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb
-index 49327591b7..1c8c13677f 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.3.1.bb
-@@ -26,6 +26,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
- SRC_URI += " \
-     file://gpio-manager.init \
-     file://fix_gpiodbus_license.patch \
-+    file://0001-dbus-tests-wait-for-each-event-in-test_monitor_all_l.patch \
- "
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.23.3.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
+index 1a8a50434c..4dedfe36f8 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.23.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.23.4.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "bd97093e1a1e9243338950c174a693a64d4e0926a9c6ce259962bc58d5e96909"
++SRC_URI[sha256sum] = "7b9adc82d612d0a2a863d96c46de2292552e250cee51956ebbe0146c42aacae9"
+ 
+ S = "${UNPACKDIR}/node-v${PV}"
+ 
+-- 
+2.43.0
 
- SRC_URI[sha256sum] = "e3a358a90a9204ff16f92b6f4028ed91460b1926f10589eb54b3566484650a30"
