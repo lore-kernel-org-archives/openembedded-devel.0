@@ -1,340 +1,95 @@
-Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15117.1793376103669664805
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.693.1793419072250488607
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 09:01:43 -0700
+ Fri, 30 Oct 2026 20:57:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=lexADOyZ;
- spf=pass (domain: gmail.com, ip: 74.125.82.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-15dd124bbe7so1513314c88.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 09:01:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=HF3pDYMo;
+ spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-36a0f27c9f4so2345691eec.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 20:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793376103; x=1793980903; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793419072; x=1794023872; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GCUom7wLCXYigHc12s1xvCbUC7ZJYq/docqcSfEGxu4=;
-        b=lexADOyZqZ00krgn5Hs37pUulp+gscYjDYoND+Pu0W8zV5G0HDWBQRZXLveMMzrZZE
-         oC8UnB9OTCjv3tOkzmtuG8s+lT4CL0WyWbzOJfzyaLza+lpd16xJWXp2yLpIY/cybGqn
-         POmb1kxvwQ0CGW3A3s0xUCNZU5H0Rt9339WLLRd1kjetVWqY8Hero0AGCuSL1Zkt/HTM
-         e7LhZqzqerX7VW+roPIte6+fBEf3gD0RirlHUXdulojx+HGZvom8kO2lAZxpgHVDWp+X
-         eX4GV/ilZudYK0IduBJOcbPLpSQGDpm6GXvpiSuC8yCUJSxOM/hf0169kK1Cum1OC8C9
-         MW/A==
+        bh=JPuAh17Z75zUUlqU8a9X7cPjwBCk5xigg90QkZLUfU8=;
+        b=HF3pDYMovgLloGS38uuY2vif3RU7NK4iPr7Gxq7wvCO9IkZB11+ZyX+4s+te0glEDU
+         FiKTSK8MnnJN1dy398NC+VKnpS5/Hxpb/GWwAInAge609muhSqCjVTv1GZnUT6AIJ1uO
+         zDMLS9pfNkfmsijyfMtJTRVtInL93T1btmwiVOZcRD+SQd1EgPp0U+pX/IWx5M3wfcpj
+         ML8xQ7sAD3ZEYihk7eFp30Qp9G9k5+vO34tfGBz6Hwy05wtNP9pKWXdQyjlRD5h4kBtT
+         LE7XTsL6cszITWDCBeIqIShYs4cDzRG9Zhkd5ZCIe6iY/NLdc6kWxjrFBNPtcNggQAgB
+         rqrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793376103; x=1793980903;
+        d=1e100.net; s=20260707; t=1793419072; x=1794023872;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GCUom7wLCXYigHc12s1xvCbUC7ZJYq/docqcSfEGxu4=;
-        b=HnkbkDccib/v9zdsKUDr9DLetKzKs4TiwVvbrm6UzPqqkoc+tVOVehW4CFz8UV20kC
-         HnpHNPyJi8aM7zvfVIZNCmBzuhJDqUoruK2MQiY0cKH/wjIWeVElI+EOyvA2l9kXzGIw
-         qiZIyqk4gBoLBnrKIAShYAB2igJiB9TS8UA1MDQh8t750Mi+zmAO+EyjNtU7pOJy+7MP
-         BSpkgJHHptYyK4qsqm+dkW8VmYBVkdCU4rvOW01Eex/WJDK5piHk/FWWLtT/BB7MisWe
-         sqz28VKlbCZmlk8yUQOeeOFE+fvcHDMmPyoEYPG1/Blsq0MTtCJG8Eulg6DFFFILLdW+
-         WLoA==
-X-Gm-Message-State: AFq9FYKM2kXjiAi0EKb6wnj6X7IftrESD4RHL13x/oOqqfOclMAydTuw
-	z9atR01JxmA5bdIHQfZG6mJD/D/87VlV/VZ+jngXrkMyPYSdn/sQPNfdY5dMjq1ihAI=
-X-Gm-Gg: AYBFou0gpVJQbRajwNqq4ChRcrSXlV/ATeoKJTxZiKJrgg1T1rt7j2fmKgUAAPhh0o5
-	zwFMdm3EHg/LXMZwJ53WyZSBa9byvlMEvR3NtyfJ22OWxdVohJhsDVIisf4G0rHsXXknWPxUO5d
-	n3pK5aajtE/SUUxpA5iqXQuEreo7mXWXe/AsP0+L3GFvAYZ6oVO+wnZ4c84+MmXOYYxDxAz/KE5
-	3jHJA0qAr3QGpbC+EzBq5exFBgcOXrma4zbIwjjeeq/QEpTfkheYhVsfyffsBP1gRYWgetEQvsU
-	7MtvghEeOX/iOjDUqv1Ul6nrNtd1o16UkBvjYWU1qJ3QkXBzdF9Nrsqjn99asPYIqsUyVjLUp7W
-	LsAfahz8isBcwTXJCbI65XTG8tsl8dfq7gpZZs0ORvbxaLumiAljpjJQsnWmp7PTu7EYkjD6pR8
-	j886pPMHdFYBMpea18uc/HQ8LofJrsAeMEyoAk3Wlxf4nn1hBk7BHorIbyBGvV8bpcMlR87yKs3
-	AiODW4HW1Cqy8dbK1vQN03PdyUe7pd08KOfoNJ6SCL1i9w4uoP4cPA1+oJv05vD+MKH/yw6qNSM
-	iVQVcznoaibhMC5Xew0IjYUr2Rbyvu+7Qv60vZwHZ6nmsx1sNZnCWUjRQBm79XPbLS74shsUNcP
-	Uu+1q3uILTNeZXfxKZQUCLjYHTcmjCvGG9W0AJfjRpGcVpzzJ9b/pgyjygA1eRnzEHi93IDaOVU
-	0+qxCnCH+61/MtWZMvsylqrI+E5a/CjC2zWUimNDq2KnY9kpVjlEUt0r5ZLfu5biWAiXu7JqEnp
-	++vk9CN8EsopRFvI0lyaePfnX3smKCIcu+3hoGpZQgB1YkNHfDxC/dyWJmQxA88XquHTPCaLMj/
-	Vwzr
-X-Received: by 2002:a05:701b:4187:20b0:19b:1202:77f8 with SMTP id a92af1059eb24-1ac5bf91695mr4132646c88.32.1793376102586;
-        Fri, 30 Oct 2026 09:01:42 -0700 (PDT)
+        bh=JPuAh17Z75zUUlqU8a9X7cPjwBCk5xigg90QkZLUfU8=;
+        b=PTE9yoSa67i8m1cBjKBgCfSdW+d5qiatT+gAKdmS2k+UtlpAh+8txkPSWTbjjehnnz
+         oQ8/kRbRQbEkPyJL1S0dOsTFEQrmnIgO4LktpllEBrMGk7Xwmp5zslAWmRqzFUvHpF23
+         QEQES/GvBGm14Yyrp7VxcBQQWdU7ft786gPVLiwjEafFLuOk4CawB7ZdtVx++/HviY62
+         A6Oe4C3iMF36wtpVngwxKqpzcp+zGuacI49Spe8R1yZPeHYuCcp37h0s77CLHph+juoe
+         JWM/T66x2eU6LbUK7meV2irNw0eZ26Qg0Ui5XLzAJRhMEIwRrVm151ebb4dzqTncy/0j
+         A1zA==
+X-Gm-Message-State: AFq9FYIGQO8rkoD8vb66E7Lb45iXI7A5Ct/6a/HHIAqDAu/alkBKhiZR
+	rjyeqjysi1UxdkFzv6xiLbGJ/rrVkkxUI1n9x2AQHOU3MUFsHFnAfuOdBrDqsDZjELM=
+X-Gm-Gg: AYBFou17oQ4OEsTDJ5c5y4RxULi5+zGY1Rf1O3ITmUJuVVqYTEoHWcc/WJsrBpuloNR
+	REAVuhmZnekoxe1r0agptShHMcXCturwDHgxGNOBlYDTknoYiJfzL7tuFpp82nyMOZvY9oV4SaR
+	DEF6EW1IgjbRZ40V8yDZyNX+6JNx6D0FmrH6++xvjbF2AszRDxJMVlv6laseZ3iIB8vjHRoQMFi
+	9z4DkW5ZQQq9isVAADJkS5oDPR7LUQsjHqmEjUpoOvjqhBcp3QKUQTjhJMtnKeQ+LnBQX02w04k
+	0ZWStO6/vRHBlEWZiA5ZPvE3g+29Z6ixuDXogO9YstESMEqqoAiV8M02RkhUyH2T2/GMnpvgAgy
+	DNTknvdmh94D5KEOD8METVUigfOIlixsyzXzz5xfBbo69v5LcidYb7+ART5IHUUh9ObmVyvOVUy
+	8jBJyWE9temBHHrFvmdufusqn3ImEo9+9SVaIT6Nwgl+48ZOm5X8fTm5ldHWjMUyWZbDVtAv9VS
+	WBKoHCjqerclTjmmI8mfi1vVnuZzBsc28Wnn9rikhhVSBlqd5lvxkT9xYd7I6zUkh99OgGbN+KM
+	Tb9uQP3v07IWqF/hTUor3XktqV08ORcmY/8Bs2ErMBy4KqC9QHPU+MmVnocE5G50o9t7sYDs3T1
+	rumx1bEMV+8ZBe7cw/vu0EMHP60wmV6IDcy6xFr4/U2s/xXm0bAVbzlzvmMRmg4o/fbFRaRqzNq
+	i7SyOUsOk/X3c/k5gmwh+8lcgAv2tqHeIaNJxzdPN8IrKZIKtMpAaScWfg25ZXgAvgXDXkvfGw8
+	K+it6nOn1addclwZSL+ES+qr5ChHwEDKcAAmlx7zEpZ5THp934+oFU4VYVBNzKzAra2kfvw3/a3
+	aeKo
+X-Received: by 2002:a05:7301:6787:b0:361:306f:c32a with SMTP id 5a478bee46e88-36a42345b05mr7916192eec.11.1793419071507;
+        Fri, 30 Oct 2026 20:57:51 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1a136537sm7630359c88.18.2026.10.30.09.01.39
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42a5fb97sm13687837eec.23.2026.10.30.20.57.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 09:01:41 -0700 (PDT)
+        Fri, 30 Oct 2026 20:57:50 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] nodejs: Fix build with ICU 79
-Date: Fri, 30 Oct 2026 09:01:38 -0700
-Message-ID: <20261030160138.1408100-1-khem.raj@oss.qualcomm.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 01/10] python3-pyroute2: Add missing python3-resource runtime dependency
+Date: Fri, 30 Oct 2026 20:57:38 -0700
+Message-ID: <20261031035748.2130261-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 16:01:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131710
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2026 03:57:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131711
 Content-Type: text/plain; charset="utf-8"
 
-ICU 79.1 brings Unicode 18, which adds U+1DF95 LATIN SMALL LIGATURE
-LONG S WITH DESCENDER S. It case-folds to U+00DF, so for the first time
-the case closure of a BMP character contains a supplementary code point.
-V8's gen-regexp-special-case build tool passes every member of that
-closure to RegExpCaseFolding::Canonicalize(), which asserts a UTF-16
-code unit, and aborts with
+From: Khem Raj <raj.khem@gmail.com>
 
-  # Check failed: ch <= 0xffff.
+pyroute2/ndb/task_manager.py imports the resource module and it is
+pulled in when importing pyroute2, so every ptest module failed to
+import with:
 
-Backport the V8 fix, adapted to the V8 13.6 bundled with Node.js 24.
+ModuleNotFoundError: No module named 'resource'
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...y-case-equivalents-of-BMP-characters.patch | 235 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_24.22.1.bb |   1 +
- 2 files changed, 236 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
+ meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch b/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
-new file mode 100644
-index 0000000000..36703eedd4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs-24/0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch
-@@ -0,0 +1,235 @@
-+From e455d955bd6b7a7549106d1b9d7ae5bb3b9e77b4 Mon Sep 17 00:00:00 2001
-+From: Jakob Linke <jgruber@chromium.org>
-+Date: Fri, 9 Oct 2026 12:41:30 +0200
-+Subject: [PATCH] v8: [regexp] Handle supplementary case equivalents of BMP
-+ characters
-+
-+Unicode 18 adds U+1DF95, which simple-folds to U+00DF. This creates the
-+first case-equivalence class spanning BMP and supplementary characters:
-+{U+00DF, U+1E9E, U+1DF95}.
-+
-+Discard supplementary characters from the generator's non-unicode
-+closures before calling Canonicalize, which requires UTF-16 code units
-+and otherwise CHECK-fails with ICU 79. Apply the same filtering in
-+runtime non-unicode closure.
-+
-+Generate SupplementaryEquivalentsSet and desugar its BMP characters into
-+character classes under /iu and /iv, allowing literals to match
-+surrogate pairs.
-+
-+Backreferences with differing UTF-16 character widths remain unsupported
-+and are tracked in crbug.com/571793821.
-+
-+IgnoreSet is unchanged with ICU 78 and with ICU 78.2 patched to upstream
-+Unicode 18 case data. With the patched data, the generator succeeds,
-+SupplementaryEquivalentsSet is {U+00DF, U+1E9E}, and regexp tests pass
-+in release and debug.
-+
-+Bug: 571232615, 571668686
-+Change-Id: I9eacb273a74c66e17f0cfb1b256e863f2718c130
-+Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/8548134
-+Reviewed-by: Patrick Thier <pthier@chromium.org>
-+Commit-Queue: Jakob Linke <jgruber@chromium.org>
-+Cr-Commit-Position: refs/heads/main@{#110522}
-+
-+Fixes the build with system ICU 79.1 (Unicode 18), where
-+gen-regexp-special-case aborts with "Check failed: ch <= 0xffff".
-+
-+This is the V8 change adapted to the RegExpCaseFolding layout of the
-+V8 13.6 bundled with Node.js 24; the test changes are dropped.
-+
-+Upstream-Status: Backport [https://github.com/v8/v8/commit/f607706154eabc4a949628a88b38dbe95cd2274c]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ deps/v8/src/regexp/gen-regexp-special-case.cc | 18 ++++++++++
-+ deps/v8/src/regexp/regexp-parser.cc           | 18 +++++++---
-+ deps/v8/src/regexp/special-case.h             | 47 ++++++++++++++++++++++++++-
-+ 3 files changed, 77 insertions(+), 6 deletions(-)
-+
-+diff --git a/deps/v8/src/regexp/gen-regexp-special-case.cc b/deps/v8/src/regexp/gen-regexp-special-case.cc
-+index 86f6b212c93..98f70975be1 100644
-+--- a/deps/v8/src/regexp/gen-regexp-special-case.cc
-++++ b/deps/v8/src/regexp/gen-regexp-special-case.cc
-+@@ -9,6 +9,7 @@
-+
-+ #include "src/base/strings.h"
-+ #include "src/regexp/special-case.h"
-++#include "unicode/uchar.h"
-+
-+ namespace v8 {
-+ namespace internal {
-+@@ -17,6 +18,19 @@ static const base::uc32 kSurrogateStart = 0xd800;
-+ static const base::uc32 kSurrogateEnd = 0xdfff;
-+ static const base::uc32 kNonBmpStart = 0x10000;
-+
-++// Removes supplementary code points from |set| and returns whether any were
-++// present. Since Unicode 18, the case closure of a BMP character can contain
-++// supplementary code points (U+1DF95 LATIN SMALL LIGATURE LONG S WITH
-++// DESCENDER S case-folds to U+00DF LATIN SMALL LETTER SHARP S). Non-unicode
-++// ignoreCase matching compares UTF-16 code units, so a supplementary code
-++// point never matches a BMP character and does not take part in Canonicalize.
-++bool RemoveSupplementary(icu::UnicodeSet& set) {
-++  constexpr UChar32 kFirstSupplementary = static_cast<UChar32>(kNonBmpStart);
-++  if (!set.containsSome(kFirstSupplementary, UCHAR_MAX_VALUE)) return false;
-++  set.remove(kFirstSupplementary, UCHAR_MAX_VALUE);
-++  return true;
-++}
-++
-+ // The following code generates "src/regexp/special-case.cc".
-+ void PrintSet(std::ofstream& out, const char* name,
-+               const icu::UnicodeSet& set) {
-+@@ -51,6 +65,7 @@ void PrintSpecial(std::ofstream& out) {
-+   icu::UnicodeSet current;
-+   icu::UnicodeSet special_add;
-+   icu::UnicodeSet ignore;
-++  icu::UnicodeSet supplementary_equivalents;
-+   UErrorCode status = U_ZERO_ERROR;
-+   icu::UnicodeSet upper("[\\p{Lu}]", status);
-+   CHECK(U_SUCCESS(status));
-+@@ -63,6 +78,7 @@ void PrintSpecial(std::ofstream& out) {
-+     }
-+     current.set(i, i);
-+     current.closeOver(USET_CASE_INSENSITIVE);
-++    if (RemoveSupplementary(current)) supplementary_equivalents.add(i);
-+
-+     // Check to see if all characters in the case-folding equivalence
-+     // class as defined by UnicodeSet::closeOver all map to the same
-+@@ -112,6 +128,7 @@ void PrintSpecial(std::ofstream& out) {
-+       UChar32 canonical = RegExpCaseFolding::Canonicalize(c);
-+       current.set(c, c);
-+       current.closeOver(USET_CASE_INSENSITIVE);
-++      RemoveSupplementary(current);
-+       current.removeAll(ignore);
-+       for (int32_t j = 0; j < current.getRangeCount(); j++) {
-+         for (UChar32 c2 = current.getRangeStart(j);
-+@@ -124,6 +141,7 @@ void PrintSpecial(std::ofstream& out) {
-+
-+   PrintSet(out, "IgnoreSet", ignore);
-+   PrintSet(out, "SpecialAddSet", special_add);
-++  PrintSet(out, "SupplementaryEquivalentsSet", supplementary_equivalents);
-+ }
-+
-+ void WriteHeader(const char* header_filename) {
-+diff --git a/deps/v8/src/regexp/regexp-parser.cc b/deps/v8/src/regexp/regexp-parser.cc
-+index 2792cd0f1e9..dd883c3eddc 100644
-+--- a/deps/v8/src/regexp/regexp-parser.cc
-++++ b/deps/v8/src/regexp/regexp-parser.cc
-+@@ -10,6 +10,7 @@
-+ #include "src/regexp/regexp-ast.h"
-+ #include "src/regexp/regexp-macro-assembler.h"
-+ #include "src/regexp/regexp.h"
-++#include "src/regexp/special-case.h"
-+ #include "src/strings/char-predicates-inl.h"
-+ #include "src/utils/ostreams.h"
-+ #include "src/utils/utils.h"
-+@@ -156,6 +157,10 @@ void RegExpTextBuilder::FlushText() {
-+
-+ void RegExpTextBuilder::AddCharacter(base::uc16 c) {
-+   FlushPendingSurrogate();
-++  if (NeedsDesugaringForIgnoreCase(c)) {
-++    AddClassRangesForDesugaring(c);
-++    return;
-++  }
-+   if (characters_ == nullptr) {
-+     characters_ = zone()->New<ZoneList<base::uc16>>(4, zone());
-+   }
-+@@ -238,15 +243,18 @@ bool RegExpTextBuilder::NeedsDesugaringForUnicode(RegExpClassRanges* cc) {
-+   return false;
-+ }
-+
-+-// We only use this for characters made of surrogate pairs.  All other
-+-// characters outside of character classes are made case independent in the
-+-// code generation.
-++// Desugar supplementary characters with case equivalents and BMP characters
-++// with supplementary equivalents. Other atoms are folded during code
-++// generation.
-+ bool RegExpTextBuilder::NeedsDesugaringForIgnoreCase(base::uc32 c) {
-+ #ifdef V8_INTL_SUPPORT
-+   if (IsUnicodeMode() && ignore_case()) {
-++    if (c <= unibrow::Utf16::kMaxNonSurrogateCharCode) {
-++      return RegExpCaseFolding::HasSupplementaryEquivalents(
-++          static_cast<base::uc16>(c));
-++    }
-+     icu::UnicodeSet set(c, c);
-+-    set.closeOver(USET_CASE_INSENSITIVE);
-+-    set.removeAllStrings();
-++    RegExpCaseFolding::CloseOver(set, RegExpCaseFolding::Mode::kUnicode);
-+     return set.size() > 1;
-+   }
-+   // In the case where ICU is not included, we act as if the unicode flag is
-+diff --git a/deps/v8/src/regexp/special-case.h b/deps/v8/src/regexp/special-case.h
-+index 753c9231ede..80b88a308cc 100644
-+--- a/deps/v8/src/regexp/special-case.h
-++++ b/deps/v8/src/regexp/special-case.h
-+@@ -7,8 +7,8 @@
-+
-+ #ifdef V8_INTL_SUPPORT
-+ #include "src/base/logging.h"
-++#include "src/base/strings.h"
-+ #include "src/common/globals.h"
-+-
-+ #include "unicode/uchar.h"
-+ #include "unicode/uniset.h"
-+ #include "unicode/unistr.h"
-+@@ -71,9 +71,17 @@ namespace internal {
-+ // another character. Characters that match no other characters in
-+ // their equivalence class are added to IgnoreSet. Characters that
-+ // match at least one other character are added to SpecialAddSet.
-++// Supplementary code points are ignored throughout: non-unicode matching
-++// compares UTF-16 code units, so they can never match a BMP character.
-++//
-++// The generator additionally emits SupplementaryEquivalentsSet, the BMP
-++// characters whose Unicode case closure contains supplementary code points.
-++// This set is used for unicode-mode matching, see HasSupplementaryEquivalents.
-+
-+ class RegExpCaseFolding final : public AllStatic {
-+  public:
-++  enum class Mode { kNonUnicode, kUnicode };
-++
-+   static const icu::UnicodeSet& IgnoreSet();
-+   static const icu::UnicodeSet& SpecialAddSet();
-+
-+@@ -108,6 +116,43 @@ class RegExpCaseFolding final : public AllStatic {
-+     // h. Return cu.
-+     return cu;
-+   }
-++
-++  // Close a set of characters under case equivalence, preserving its
-++  // original members. Non-unicode inputs must be UTF-16 code units.
-++  static void CloseOver(icu::UnicodeSet& set, Mode mode) {
-++    if (mode == Mode::kUnicode) {
-++      set.closeOver(USET_SIMPLE_CASE_INSENSITIVE);
-++      return;
-++    }
-++    DCHECK(!set.containsSome(0x10000, 0x10ffff));
-++    if (IgnoreSet().containsNone(set)) {
-++      CloseOverNonUnicode(set);
-++      return;
-++    }
-++    if (IgnoreSet().containsAll(set)) return;
-++    // Ignored characters neither contribute nor acquire equivalents, but
-++    // must remain in the result if they were explicitly present.
-++    icu::UnicodeSet ignored(set);
-++    ignored.retainAll(IgnoreSet());
-++    set.removeAll(IgnoreSet());
-++    CloseOverNonUnicode(set);
-++    set.addAll(ignored);
-++  }
-++
-++  // Whether c has supplementary Unicode case equivalents.
-++  static bool HasSupplementaryEquivalents(base::uc16 c) {
-++    return SupplementaryEquivalentsSet().contains(c);
-++  }
-++
-++ private:
-++  static const icu::UnicodeSet& SupplementaryEquivalentsSet();
-++
-++  // Requires a set containing no IgnoreSet characters.
-++  static void CloseOverNonUnicode(icu::UnicodeSet& set) {
-++    set.closeOver(USET_SIMPLE_CASE_INSENSITIVE);
-++    set.removeAll(IgnoreSet());
-++    set.remove(0x10000, 0x10ffff);
-++  }
-+ };
-+
-+ }  // namespace internal
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
-index 4912136f76..fc5a5e5c09 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_24.22.1.bb
-@@ -30,6 +30,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0007-positional-args.patch \
-            file://0008-custom-env.patch \
-            file://0010-v8-fix-Wtemplate-body-error-with-GCC-15-on-ia32.patch \
-+           file://0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target = " \
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+index d83b65f6da..a0abcd2514 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.7.bb
+@@ -20,6 +20,7 @@ RDEPENDS:${PN} += " \
+     python3-pickle \
+     python3-pkgutil \
+     python3-pprint \
++    python3-resource \
+     python3-shell \
+     python3-sqlite3 \
+     python3-unittest \
