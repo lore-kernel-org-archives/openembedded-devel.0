@@ -1,199 +1,245 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.701.1793419085256166994
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.766.1793419255346126379
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2026 20:58:05 -0700
+ Fri, 30 Oct 2026 21:00:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=F/5jT+d0;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-36a17a332ecso2415354eec.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 20:58:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=lzD4txh/;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-36a1947498bso936854eec.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2026 21:00:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793419085; x=1794023885; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=y1TcmG9qu1LQyH8HVm2Y6HsES7mXdyLuG+KoqrRoALs=;
-        b=F/5jT+d0UUno1GOcECrT1Towl/mZTWRsVQAC12SouZ0vdF0JTYnr3eLWZN5T9gmYf+
-         rXq6vGSVjTty7C9iUfcibJ45IR8AHrWShCk0OHzJuU7g12QRJl4NyZwEy/rLw6RMpMOk
-         FMH0iy0zQMzfvRf5/+dJzoSiZemCQEkCYXLYr3oPhhF39Dk85cmVSOdwl/08cIjH7nxw
-         PZJHrJYJ71wv1yPcmqGRpyvhhLAlwrtEA/sWRc6QI7o8rngmDnKRgjMEBbyUOllovXkk
-         NiaFbSLdKbp8KphRz75P4bIb6IVNVRZG/+Cs4qaM0nFYV/mqim2b4/iDexvK6DpNkveH
-         OihQ==
+        d=gmail.com; s=20260707; t=1793419255; x=1794024055; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xOnGgJz5g1zyw+Bw3pRRXBN336l6W37gp+RkHqk9kQw=;
+        b=lzD4txh/sayghK7wWZY4GiYvzYxUwAvjmnnRJyQXMDvhx6DH1fwPYdB20eqRWwf/H6
+         ldPZ44HEqZi9PysSgUm7w7MsqHJTNguiUoUW9lyhG4Q0BSwBldnwO5QQhFtZWAE8sX33
+         HU3wWkI27mApwEEUNOB+2JzjqMJiwxFfOtPlLI8CNufHp2v4YZlIKhcJhbDaCWIcMXra
+         U4ARERM7cAbsL5yRdSzyWDYO50ahMBNohQ66UnguxF+WbcvMTQMyld2kL0j7YQgFQYRP
+         CmAWMDKrhnpqrBcHQOZRWfvRCrHa0O3BYDmMG03tgBCWWiUUsiF8/QBLPvXN+Jr7gd5s
+         V8Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793419085; x=1794023885;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=y1TcmG9qu1LQyH8HVm2Y6HsES7mXdyLuG+KoqrRoALs=;
-        b=poZ1VM2LdDCikU1eL0xtQ1KbSpXB33l3BboGhy3/hkoxbgyFLPv7Jc+88kJQSxLTbP
-         1VPVqqzHHtx7KEp3x+0zT9IaWiPCSNqX82enugddiUk3usD+zfbTSJeHa1ozbqlIY5XA
-         vTVrTDOpoMG2SLVvurstOzSPxRpZay+H/3HTWlwMXX1CIJuJNp4vEzZkVN6CpGzWc22E
-         yn9UkuVQ2oLIy5V4Yi+HY3C2P7aftBZAAt84d2ow1J6ba2M7M1WyWhXQPN0Krel5BfMP
-         VdPtHVQf5b+GJzCzokpRfRmF98bPhx/4UUXRddNPEbo+wjrh7N2LY6FqiPQZGvNepfXa
-         dsnw==
-X-Gm-Message-State: AFq9FYIta9ymK4qD8Aaqden6zpQAW+vBx5QRn7h4qpwiqEMExbOg4m06
-	pEXHXJFqaSKzFCrDTGLn+ZbWNRg7Ki+Sk24cr17U9yGX5ckpdjl6NtweRqg3eP+bd0E=
-X-Gm-Gg: AYBFou3tQnBPcMkSsb0E+uEfAzB9wAoEIHPeRzan7FlL0QlIiyvHRjvI4U/xj+EG9bA
-	6WWoC3/MxsK+qNDD/RidKEio0NPPTUZfOC3Vux+2yTCT+JhwyNiTWRvE1NkLTT9xpXCsdvM3Qz5
-	pZYsxrSCcKbl2cUkt+azTT4u/efmWsZM8b/yBEJ6jtnKmfejgeTIMN6mRi7TpUGMAfWsCO8/wCI
-	utZzfAukDp8N62L5Bm7AcatEiLmu/FaBuWV1ENFWF2QPC46VxFwAtxTWKM72MXj/7/ZzpdGjL1W
-	bc0wZNSQRMK/TVq4FuCT3M1WvG5Spf/zatfjWSIL5snt/1U4u6kpErYdTXWWGdoxOWdK3kkyACP
-	zqytXResuniqFY/VUD7sXJATg5Ps4I0+1kpepAYWv5vDo5TrMsILIVNJrGiXU9CIhCBkWpbGqXS
-	jXyhdASODX5+Pqqa9nN59YFzWaPFg56CLhySjS19L9ggXOkzti6IPODFGkmUK8xB9mCiQm7Pkqb
-	GQvJ7C7uc0msMHr+TD0Olm2y6HabqBVIlgxYHI2UBoi/zYLpww+aiQDcewoByjcceLFuCz9XuH7
-	NdXLr8pSbLo0yazYLX47RTJc4D00WsryRJICnOmVvNGCRLb8+Y6nrQ+A1S+AmGTbtBAoleudany
-	SVKo+fL8hg9pcRhl5gXorssWEk/PquINq4qjqIt7eJfFbecvuyBrPeuEd+ARhdrxq78aaIN4Txx
-	mOrp/UbvplucUmlXtOIos3oJgAllW/J3sRu4sRqAhBZbYblQP3TRhjhTDrxIqigNR+B2LQlxRu1
-	Dwg14/u5JyWCLrpaAk6krFsZWTcI7XBpCXwEcwEkUzQ/GtR6stAp7qKpkXDVlteRdiEOsIb916J
-	wSse2fRHGnQwQd9u3symt78IAiQ=
-X-Received: by 2002:a05:7300:881c:b0:369:ec31:8fd5 with SMTP id 5a478bee46e88-36a42225546mr6738566eec.3.1793419084400;
-        Fri, 30 Oct 2026 20:58:04 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793419255; x=1794024055;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xOnGgJz5g1zyw+Bw3pRRXBN336l6W37gp+RkHqk9kQw=;
+        b=xMFyZOFIaS5JW/K00ZGBu4amvjppnjVIOKAWtenAZaZSAdP6u4oyA6MLfLZhJ1OTHi
+         9Iq7siZqFPKWValcQOOeAxD2ENunkGSCXmvGNfx5gYEhYQC6vHdQ3fy1iXm5Lp6cRlpu
+         1McUnvwYfz6O9ZggeDzx3rqulFv+ni7GRBJAE+Gh+Gg2b5msZNeWysSr4tgjNGhRy06J
+         obfXOaXuT+5fdeUdOmjBDfZnbGRms98ggJuD3w4Hb1oLOmO1D+Fjat0kk3hFfaQevFH3
+         oNlIqzu/nM00ORRUk+KGhIyqudTVrqAen04qgLkW4c2NAgEhzhERL/n0SCposyOpXZS4
+         EqIw==
+X-Gm-Message-State: AFq9FYLYdFG9UUXeDyATpqMJ+1wLygYhruYZCsFNlRYUqb7FMAWGSnkP
+	GpCD7RaAO9lI0/8agu6rr7oqyRcCtbqBfXQQERiLrywm/JvWdYOimpLdNmJJYufG7F8=
+X-Gm-Gg: AYBFou3KaNxiDj+o06XbBtVyqn2nzlYeZjwlius2qwXexjm7PjIYc72LlGTKLFG0dJi
+	zFdoGNK3sLclRCgY6pNo3D7xDnJUfZuyw2GQLFHBaJoOxffv4co/VInenJDdzMe/ibore42fhwU
+	ARcGhB83pMz0u9PpyTTv2pFTx8cKHjw3eXFfO5W7xPuP5L0DPeRQdIKKo6jrsM9J2N5BapleEo6
+	2tW8GpRygS1L2Y59eZ6z1CfcdVdBJTaKc1RJfMB8t0BrU6mmVBjJxq1HRwDUfaHnWQKxYaZKR6X
+	gxkk/YRNcOxeFAplGORg5ESstF6if3k3f3sCS9KCR2gacsBgb3d7TNCeubDlPazJk35c2nbeZZE
+	oH83nOpbtduo6iRt4/qTCz2U4GR7DWQUrBXvJmIlY4AK00ATiQAn382iLnYP3FkzDNf/SXy6wqi
+	x8pu0tyEYp2C3hio96qxqynbgsBYZ10LHyxVRzRRKFeGODbPrYKx5wvl+tHxF0NezMlZ7+wCUPx
+	/v2cmBuOhj++yvf2r5SMMGETqU0JQnlHq0kBECTz7FlekHNOlKqhYrZTGvdhvlIhylFMdCzquMf
+	qDrOlzepsGjEhUX6N+/2C8s/YK12GguPhnbvZsrJ6RbSE/uISwBLc2/wEFpaA15+EpZeUkoTHNx
+	5oriOveWMhIosVHcVj23auxLPvgm1mOfGAuJpxbSzdIotfC/VxT7WjQsQvI7s9AWbBtp9IgOQpS
+	Uw8KwkFtT6fe3xv7rTq4oKL3MYG7KD6VWeMlxnfYLf+fSQ4nM4tbCH5t9pcr2GrClCs0yjNm2sp
+	/XpHYkHQFKO29Ihk5ZBW0/QScyYb9tROWv0w17ftE7+YTENerSFxkTwWm6es1zZj4grTpLegyMB
+	j3Dg
+X-Received: by 2002:a05:693c:41c2:20b0:36a:5042:85b1 with SMTP id 5a478bee46e88-36a50428d57mr2326663eec.2.1793419254520;
+        Fri, 30 Oct 2026 21:00:54 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42a5fb97sm13687837eec.23.2026.10.30.20.58.03
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42a98f65sm11853728eec.28.2026.10.30.21.00.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 20:58:03 -0700 (PDT)
+        Fri, 30 Oct 2026 21:00:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 10/10] kernel-selftest: Skip tests the running kernel can't support
-Date: Fri, 30 Oct 2026 20:57:47 -0700
-Message-ID: <20261031035748.2130261-10-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 1/3] python3-simple-websocket: Do not need network access in client ptests
+Date: Fri, 30 Oct 2026 21:00:49 -0700
+Message-ID: <20261031040051.2131713-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261031035748.2130261-1-khem.raj@oss.qualcomm.com>
-References: <20261031035748.2130261-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2026 03:58:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131720
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2026 04:00:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131721
 Content-Type: text/plain; charset="utf-8"
 
-Many tests, most of them in net, fail rather than skip when the kernel
-lacks a feature they need (vxlan, geneve, macvlan, vrf, netdevsim, TLS,
-tc actions and qdiscs, audit for the landlock tests, ...). Skip them
-based on the running kernel's config, so the results show regressions
-instead of the kernel configuration.
+The client unit tests mock socket.socket but not socket.getaddrinfo(), so
+every test resolves example.com. Without working DNS in the image (e.g.
+yoe-musl-sysvinit qemux86-64) all of tests/test_client.py fails.
 
-Also skip the udpgro tests when iptables can't set up NAT (legacy
-iptables on a kernel with only nftables), tc-testing when scapy is not
-installed, landlock's fs_bench, which only reports timings and needs
-twice the default timeout in qemu, mseal's sysmap_is_sealed when the
-kernel doesn't seal the system mappings, and the ptrace vmaccess and
-tty_tiocsti tests, which check for kernel changes that are not in
-mainline.
+Backport the upstream fix that uses localhost instead.
 
 AI-Generated: Uses Claude Code
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../kernel-selftest/kernel-selftest/run-ptest | 93 ++++++++++++++++++-
- 1 file changed, 92 insertions(+), 1 deletion(-)
+ ...ess-requirement-in-client-unit-tests.patch | 141 ++++++++++++++++++
+ .../python/python3-simple-websocket_1.1.0.bb  |   4 +-
+ 2 files changed, 144 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-simple-websocket/0002-Removed-net-access-requirement-in-client-unit-tests.patch
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-index e8a136dce8..85fa63b5e4 100755
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-@@ -8,10 +8,101 @@
- # runner blocked (and silent) until they finish, so ptest-runner kills the
- # whole suite. Skip it.
- #
-+# ptrace:vmaccess and tty:tty_tiocsti_test check for kernel changes that are
-+# not in mainline: PTRACE_ATTACH failing with EAGAIN during a multi-threaded
-+# exec instead of blocking (the attach test always times out), and TIOCSTI
-+# checking the credentials of the file opener rather than the caller. Skip
-+# them.
-+#
-+# landlock:fs_bench only reports timings, and walking its 10000 nested
-+# directories takes about 90 seconds in qemu, twice the default timeout.
-+SKIP="-S ftrace:ftracetest-ktap -S filesystems:file_stressor \
-+      -S ptrace:vmaccess -S tty:tty_tiocsti_test -S landlock:fs_bench"
+diff --git a/meta-python/recipes-devtools/python/python3-simple-websocket/0002-Removed-net-access-requirement-in-client-unit-tests.patch b/meta-python/recipes-devtools/python/python3-simple-websocket/0002-Removed-net-access-requirement-in-client-unit-tests.patch
+new file mode 100644
+index 0000000000..7266ee57f3
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-simple-websocket/0002-Removed-net-access-requirement-in-client-unit-tests.patch
+@@ -0,0 +1,141 @@
++From 159e030c7c23060de989cebec6d98d776c75bcbd Mon Sep 17 00:00:00 2001
++From: Miguel Grinberg <miguel.grinberg@gmail.com>
++Date: Sun, 13 Oct 2024 15:11:39 +0100
++Subject: [PATCH] Removed net access requirement in client unit tests (Fixes
++ #40)
 +
-+# sysmap_is_sealed can't tell at runtime whether the kernel seals the system
-+# mappings, so skip it when the running kernel's config says it doesn't.
-+if [ -r /proc/config.gz ] && \
-+   zcat /proc/config.gz | grep -q '^# CONFIG_MSEAL_SYSTEM_MAPPINGS is not set'; then
-+    SKIP="$SKIP -S mseal_system_mappings:sysmap_is_sealed"
-+fi
++Upstream-Status: Backport [https://github.com/miguelgrinberg/simple-websocket/commit/159e030c7c23060de989cebec6d98d776c75bcbd]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ tests/test_client.py | 34 +++++++++++++++++-----------------
++ 1 file changed, 17 insertions(+), 17 deletions(-)
 +
-+# Tests that fail, rather than skip, when the kernel lacks a feature they
-+# need (the options are in each collection's "config" file). Skip a test when
-+# the running kernel has any of its options neither built in nor as a module.
-+NEEDS_CONFIG="
-+landlock:audit_test AUDIT
-+landlock:fs_test AUDIT
-+landlock:net_test AUDIT
-+landlock:ptrace_test AUDIT
-+landlock:scoped_abstract_unix_test AUDIT
-+net:bridge_vlan_dump.sh BRIDGE_VLAN_FILTERING
-+net:busy_poll_test.sh NETDEVSIM
-+net:cmsg_so_mark.sh IPV6_MULTIPLE_TABLES
-+net:cmsg_so_priority.sh NET_ACT_GACT
-+net:cmsg_time.sh NET_SCH_ETF
-+net:ecmp_rehash.sh NET_ACT_GACT
-+net:fdb_notify.sh MACVLAN VXLAN
-+net:fib_nexthops.sh VXLAN
-+net:fib_rule_tests.sh IPV6_MULTIPLE_TABLES NET_VRF
-+net:fq_band_pktlimit.sh NET_SCH_FQ
-+net:gre_gso.sh IPV6_GRE
-+net:gre_ipv6_lladdr.sh IPV6_MULTIPLE_TABLES
-+net:icmp_redirect.sh NET_VRF
-+net:ip_local_port_range.sh MPTCP
-+net:ipvtap_test.sh IPVTAP
-+net:l2tp.sh L2TP_V3 L2TP_ETH L2TP_IP
-+net:link_netns.py IPVLAN IPV6_GRE MACSEC MACVLAN MACVTAP NETKIT
-+net:netdev-l2addr.sh NETDEVSIM
-+net:netns-name.sh NETDEVSIM
-+net:nk_qlease.py NETDEVSIM NETKIT
-+net:nl_netdev.py NETDEVSIM
-+net:protodown.sh MACVLAN VXLAN
-+net:rtnetlink.sh IPV6_GRE MACSEC MACVLAN NET_VRF VXLAN
-+net:srv6_end_dx4_netfilter_test.sh LWTUNNEL
-+net:srv6_end_dx6_netfilter_test.sh LWTUNNEL
-+net:tap MACVTAP
-+net:test_bpf.sh TEST_BPF
-+net:test_neigh.sh NET_ACT_GACT NET_CLS_MATCHALL
-+net:test_vxlan_fdb_changelink.sh VXLAN
-+net:test_vxlan_vnifilter_notify.sh VXLAN
-+net:test_vxlan_vnifiltering.sh VXLAN
-+net:tfo_passive.sh NETDEVSIM
-+net:tls TLS
-+net:tun GENEVE
-+net:txtimestamp.sh IFB
-+net:udpgro_frglist.sh NET_CLS_BPF
-+net:vlan_bridge_binding.sh BRIDGE_VLAN_FILTERING
-+net:vrf-xfrm-tests.sh NET_VRF XFRM_INTERFACE
-+net:vrf_route_leaking.sh NET_VRF
-+"
-+if [ -r /proc/config.gz ]; then
-+    KCONFIG=$(zcat /proc/config.gz)
-+    SKIP="$SKIP $(echo "$NEEDS_CONFIG" | while read -r test options; do
-+        for option in $options; do
-+            if ! echo "$KCONFIG" | grep -q "^CONFIG_$option=[ym]"; then
-+                echo "-S $test"
-+                break
-+            fi
-+        done
-+    done)"
-+fi
++diff --git a/tests/test_client.py b/tests/test_client.py
++index d986520..898b423 100644
++--- a/tests/test_client.py
+++++ b/tests/test_client.py
++@@ -22,16 +22,16 @@ def get_client(self, mock_wsconn, url, events=[], subprotocols=None,
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_make_client(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws?a=1')
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws?a=1')
++         assert client.sock == mock_socket()
++         assert client.receive_bytes == 4096
++         assert client.input_buffer == []
++         assert client.event.__class__.__name__ == 'Event'
++         client.sock.send.assert_called_with(
++-            b"Request(host='example.com', target='/ws?a=1', extensions=[], "
+++            b"Request(host='localhost', target='/ws?a=1', extensions=[], "
++             b"extra_headers=[], subprotocols=[])")
++         assert not client.is_server
++-        assert client.host == 'example.com'
+++        assert client.host == 'localhost'
++         assert client.port == 80
++         assert client.path == '/ws?a=1'
 +
-+# udpgro.sh and udpgro_fwd.sh set up NAT with iptables, which fails when it
-+# uses the legacy backend and the kernel only has nftables.
-+if ! iptables -t nat -n -L >/dev/null 2>&1; then
-+    SKIP="$SKIP -S net:udpgro.sh -S net:udpgro_fwd.sh"
-+fi
++@@ -39,42 +39,42 @@ def test_make_client(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_make_client_subprotocol(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws?a=1',
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws?a=1',
++                                  subprotocols='foo')
++         assert client.subprotocols == ['foo']
++         client.sock.send.assert_called_with(
++-            b"Request(host='example.com', target='/ws?a=1', extensions=[], "
+++            b"Request(host='localhost', target='/ws?a=1', extensions=[], "
++             b"extra_headers=[], subprotocols=['foo'])")
 +
-+# tc-testing's tdc.py needs scapy (in meta-networking) and exits at once
-+# without it.
-+if ! python3 -c 'import scapy' >/dev/null 2>&1; then
-+    SKIP="$SKIP -S tc-testing:tdc.sh"
-+fi
++     @mock.patch('simple_websocket.ws.socket.socket')
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_make_client_subprotocols(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws?a=1',
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws?a=1',
++                                  subprotocols=['foo', 'bar'])
++         assert client.subprotocols == ['foo', 'bar']
++         client.sock.send.assert_called_with(
++-            b"Request(host='example.com', target='/ws?a=1', extensions=[], "
+++            b"Request(host='localhost', target='/ws?a=1', extensions=[], "
++             b"extra_headers=[], subprotocols=['foo', 'bar'])")
 +
- # Turn the runner's per-test TAP lines ("ok 3 selftests: cgroup: test_core",
- # "not ok 4 ... # exit=1", "ok 5 ... # SKIP") into PASS:/FAIL:/SKIP: lines
- # that ptest log parsers understand, keeping the original output too.
--/usr/kernel-selftest/run_kselftest.sh -s -S ftrace:ftracetest-ktap -S filesystems:file_stressor 2>&1 | awk '
-+/usr/kernel-selftest/run_kselftest.sh -s $SKIP 2>&1 | awk '
- { print; fflush() }
- /^(not )?ok [0-9]+ selftests: / {
-     res = "PASS"
++     @mock.patch('simple_websocket.ws.socket.socket')
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_make_client_headers(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws?a=1',
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws?a=1',
++                                  headers={'Foo': 'Bar'})
++         client.sock.send.assert_called_with(
++-            b"Request(host='example.com', target='/ws?a=1', extensions=[], "
+++            b"Request(host='localhost', target='/ws?a=1', extensions=[], "
++             b"extra_headers=[('Foo', 'Bar')], subprotocols=[])")
++
++     @mock.patch('simple_websocket.ws.socket.socket')
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_make_client_headers2(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws?a=1',
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws?a=1',
++                                  headers=[('Foo', 'Bar'), ('Foo', 'Baz')])
++         client.sock.send.assert_called_with(
++-            b"Request(host='example.com', target='/ws?a=1', extensions=[], "
+++            b"Request(host='localhost', target='/ws?a=1', extensions=[], "
++             b"extra_headers=[('Foo', 'Bar'), ('Foo', 'Baz')], "
++             b"subprotocols=[])")
++
++@@ -82,7 +82,7 @@ def test_make_client_headers2(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_send(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws')
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws')
++         while client.connected:
++             time.sleep(0.01)
++         with pytest.raises(simple_websocket.ConnectionClosed):
++@@ -102,7 +102,7 @@ def test_send(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_receive(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws', events=[
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws', events=[
++             [TextMessage('hello')],
++             [BytesMessage(b'hello')],
++         ])
++@@ -117,7 +117,7 @@ def test_receive(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_receive_after_close(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws', events=[
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws', events=[
++             [TextMessage('hello')],
++         ])
++         while client.connected:
++@@ -130,7 +130,7 @@ def test_receive_after_close(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_receive_ping(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws', events=[
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws', events=[
++             [Ping(b'hello')],
++         ])
++         while client.connected:
++@@ -141,7 +141,7 @@ def test_receive_ping(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_receive_empty(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.side_effect = [b'x', b'x', b'']
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws', events=[
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws', events=[
++             [TextMessage('hello')],
++         ])
++         while client.connected:
++@@ -154,7 +154,7 @@ def test_receive_empty(self, mock_wsconn, mock_socket):
++     @mock.patch('simple_websocket.ws.WSConnection')
++     def test_close(self, mock_wsconn, mock_socket):
++         mock_socket.return_value.recv.return_value = b'x'
++-        client = self.get_client(mock_wsconn, 'ws://example.com/ws')
+++        client = self.get_client(mock_wsconn, 'ws://localhost/ws')
++         while client.connected:
++             time.sleep(0.01)
++         with pytest.raises(simple_websocket.ConnectionClosed):
+diff --git a/meta-python/recipes-devtools/python/python3-simple-websocket_1.1.0.bb b/meta-python/recipes-devtools/python/python3-simple-websocket_1.1.0.bb
+index 35c568cf7c..2438495dd3 100644
+--- a/meta-python/recipes-devtools/python/python3-simple-websocket_1.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-simple-websocket_1.1.0.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9d272c9fe2437531b5bbecf4fcc82e24"
+
+ inherit pypi python_setuptools_build_meta ptest-python-pytest
+
+-SRC_URI += "file://0001-Async-test-improvements-for-Python-3.14-48.patch"
++SRC_URI += "file://0001-Async-test-improvements-for-Python-3.14-48.patch \
++           file://0002-Removed-net-access-requirement-in-client-unit-tests.patch \
++           "
+ SRC_URI[sha256sum] = "7939234e7aa067c534abdab3a9ed933ec9ce4691b0713c78acb195560aa52ae4"
+
+ RDEPENDS:${PN} += " \
