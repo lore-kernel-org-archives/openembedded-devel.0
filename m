@@ -1,109 +1,96 @@
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16914.1793547261369959130
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20269.1793559419620027113
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Nov 2026 07:34:21 -0800
+ Sun, 01 Nov 2026 10:56:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=hhiKHmUN;
- spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-36661f953e4so3481758eec.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 07:34:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=KXOAQfNH;
+ spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1ae18eb9b69so1352016c88.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 10:56:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793547261; x=1794152061; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CQPaTiBifOYxikuwjWL7YeAVP3eKYSxoQNp1znnbFG8=;
-        b=hhiKHmUNUnmxAmYTFCjuMNCwO2+jD/iCzDqPpuKTHs53P8H9zeKpg8nRzwJoa4u1D/
-         PMDX5odS1eWS8+ePA2t9gI11NkYjcNVuae3f8LzCigPoRjjwCV84neQFQ2wuVwBiqOc6
-         FDucQlCxwCXfSZpq1ziNACTROgvEove6zWfmYlNkLz885SrdWyXRdm4JNplZU/g1sl2n
-         jEn3kIWg14UnoG7iqgjbDV8t0F2nk7jbGimAFbOaf/5jGNWI3mri029lerpWgkwKL7cX
-         3SY1Ko6U1DlJEZq5EjBX2R/3Uzoof9d8C4nLQrcR48wR44YCU5LDBNOIFqEhHRGMMJVa
-         sc2g==
+        d=gmail.com; s=20260707; t=1793559419; x=1794164219; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tC7bvIgBuZPmQzOLKQe47HQK1TR3HdrNxDl1JVcBrhE=;
+        b=KXOAQfNHJJslGnSwesBz04AXpZzXmUdjufD7J6en7d/aXsW+Kfto2Bskrlje+8vuuJ
+         ASxGIgkqr8aknM86n2dOwRSp33uspKRSO8EXGtSI1FPtoN1Hl+WYi3S3R34zBovxz7tu
+         0NpQ/u3GbrbghkGOZTR2OXWsSyrFUvH0s+NcP8Tu6uR+/mp+PfCh7U5OWyrDZbi1b2qB
+         CQLaZuUXfaOgx+CaXrf+Q4kWyxXjt6In479K9cnhq9cDbC+0AmbX38wBZDz0qRJaCK5f
+         CiQ7DRZxS5dcRyNHCsn/vFQM7+A429ehNqdIFEELmpCnSbsTeN9fBU4OFCdSeD7OVDuK
+         txtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793547261; x=1794152061;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CQPaTiBifOYxikuwjWL7YeAVP3eKYSxoQNp1znnbFG8=;
-        b=F6DRsjTothLACMXX0oGuHhcSlA1jqrB9zOSkg2xFhX/3AtppyS5h8zsEe4jBokPSw9
-         IYlWYXvngmUYQBGUH47/Y42lASHjq1Lz6slf0iG1keJ3ZX8F4myXGwbY8fss1fJjnNHC
-         d8jrppW9h9KcRQWUORW9z6CHSUwjUuBIHu9xjscEpXE+fWYRwNM6QSftlzA5rOCDU8HF
-         UeYd01qnwJ3caUpBRzW+aExtTnjSjC3AvoDRfK1ClonMOa7hncmaH4N6dMJZrbZ8ZfVY
-         L6NpRj/NP9ze5YKqbeojEIidYDquo6Ii4pjYsQV/RrYUlF63u1IN0D3HyrKDH56/W6Kd
-         Nv1A==
-X-Gm-Message-State: APuU4Z8YCAOKWDdwxS83K7jNcjN5qdEQUBqQPPE2LqkEgRX+9lHYOMQu
-	A/tX7qjp+PYqUXVlYiQsrW6eWu+HdoD8KbDboYgHOEpWmlLhZxO4LdMeeka+dLlFfvM=
-X-Gm-Gg: AYBFou2A/9yi+GHhMJoXU/8nDiJmbQZhllvJ49Q7mJJMHHBixe3bclOcPWe4v4mNg3q
-	vbqeLjUmJ32ivvajWuwLwVAsBHznZRGHz8keifx5pKUOKegD49PnpJgXnk5Cy58t12OzxHUqxET
-	VOjplptdG9PwhgXICqhQuNJaheJGJ7Sk5FpTe4NvdRv7n3iQNZRhgzMYe7JFGm6btBiPiXbmuln
-	S3HYZ5rRfvMOKpMXp3oqQl3Co7MthUVozvCoZTCu52CRenNhzJjWYtAVwyy2C8JuBmsBql73GdF
-	MROj559tmjYEAHVerjfNDLR3bO9wh+lMF9MKkun47IOvCUo7IMXR1QUVFksTHQYDFNqTDTYCbva
-	iTUj9QqemprtklmBecAYKK+KmNsx2zSQ0KMOO0o50yjSTVJTWm9YeV05crcV0pIu/NQGVltduwR
-	P6sTP0O0rN/OTe/KmPDNyxi8iviGnWqsWYGU8e9fgVCkVjOWqWHRwMMVwNr/68vmzzU5qLU7GvE
-	AKJBX7nVJ+3UYS+jKLBJ+MMmsX30+PEuBS4NPZKU9YhMXA8cV1HVxjekzC/XLI1mW9URvEvGM19
-	QU9cACCyC9hdVxD5U9CZ6ZPAgpZuqB++DV0IwCubPqmqePEdx8poLABUAEDJcdcK+0vZ/x2Jyqg
-	14pufyy5A01fqMYkm+HITDVvKwl7OOxpUkhNPlQ3snq3KF+zR39Cn8+36Cce63ZMmdCox382Cqs
-	wJ+YsK3o7AegHKMuovMPP4WU/yZNjSzh8C1N42fwP7skyK3l1WMuqDys6p+laV6UNuDFu9tkVc4
-	6e7zFyP0oLi05CNhF7CruhvoGNa+ykpl/vipGZlamxyzfojGqnIVb/ZS+aFGSCunAcGp5ugJMHv
-	mIr/
-X-Received: by 2002:a05:7301:1a15:b0:369:a113:756f with SMTP id 5a478bee46e88-36a423f980emr11026812eec.34.1793547260356;
-        Sun, 01 Nov 2026 07:34:20 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793559419; x=1794164219;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tC7bvIgBuZPmQzOLKQe47HQK1TR3HdrNxDl1JVcBrhE=;
+        b=mFsvduPlZ4xgatZI3ZohwnmdICXxQf4xqyI0qLYIqnyZE3AGsNvuZN/lVs52oQ+12k
+         ZVtqEx8eAw28/oHUfBmWuJF1UERHgAbatq4oWFrXqdYdkI6FB/1h94uoADANLUkyzXP1
+         vBd4KEaKAUXgty3k+B+x7JEU/j2OJyWankXfMHaHS5McVXoyTrZ92KaKH+9AIDl63avR
+         HRZsTMumQfBX92DqdHGu2e+jjGSu3TUWxBwR44fRYyrje8QO7EIYs5wQGltQbIq32Gpl
+         vcKKOEdXBt3FRAFdyvBiJBQzVoPWK5EdiT5a6NVTQV9gGa8w5iLHlpQaI8J5kEJ/oGi5
+         fzzQ==
+X-Gm-Message-State: AFq9FYJoXq30bxfha5MoTfpsXyRkURKbzqJPIsi48gjHXZlQH0Te3mNH
+	aAYT2xBBOUfjZgl/6Fb5ygv6E2PMvmvZcvKK3hNxWQDFhcF4jhW8aD1w6cX+6gj4bYw=
+X-Gm-Gg: AYBFou2m1MiUkwk1TxyfNjBqdfOCG/YyqoXkb0wPKppVEmxHtsh2mcZAQXZOoLc8quS
+	OILLlAqGpME77vu4oXmkSf6RH0xxyqUz67uYzlmUiKC1IR2XaQS5JvKm/gpv5g7znmW6BrpGbQ3
+	th8ma4ydKYl5Zt9G8780gCej+/UkGcVKd/aGBFGdjaIymhMMjdKYB5jOLEGR/A1rC7Hr4+ocSDb
+	hcP72IyYZtWnI0Y1/pNMiG9eSVF7pF2Cxa6yyVzMdARUO4k+Hk8sxz3tUmM8l4azqD3qj8f/b5+
+	N+bmw05hHcdL+hMyyLFDZgUuicU0UaazWIlLaMlsdWyc00v3f6N9hswPGW813uv1LPRchJvRh7Z
+	Yh53ykcaXnTEmT6K8rO4QOuQsnkz/JA/QfHSmxBXDY+I1vTunfmQySQUsD9kFBsmXuePlUqM5bT
+	kTM9yoxu1sOKfPWm9L6FERFParZ2F+q4Y7C6AaqerLvdZnb2S91XAQ7wiyv/xrhet2Qik5ziqdI
+	ZRUtzSy++PCV42ACYKs7xC07GJnz4he4dGwy7h1/jh04NH/rBEi/LFK4Hr9ii/5JCmRlT0GvMW4
+	dYi4qXdYvMJ47tUqqP9W6f9zoKkZ/dN2BEWOubriGJCqUEtMZMgGSHuvHyfGfLTnJnL/G1HSLxe
+	AkCSce5g2vSevb79y83aZ2z202pDgquFsF2mmvZWRL6uRM21OVghu5k9SktG1PfJxa6n1X8PW2n
+	RGRllU7K664kOkYkHwIT5rpp0fP4SI3/tcPz3sreE/3i/RKCgLw20utsHEGGN7XDbsar+86d56F
+	7wLgtpXyh/HUyG14RmXxbxXQ3EL8EI6xbBwSSZbs+0QzZ6RXaSw3jh+7ICR6Pq2gXSCqd9Rcymg
+	tRFV
+X-Received: by 2002:a05:7022:7f17:b0:168:3243:c937 with SMTP id a92af1059eb24-1ac5cb1c8b3mr14002341c88.16.1793559418746;
+        Sun, 01 Nov 2026 10:56:58 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42aa8999sm31448224eec.29.2026.11.01.07.34.19
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm46337863c88.10.2026.11.01.10.56.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 07:34:19 -0800 (PST)
+        Sun, 01 Nov 2026 10:56:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 3/3] fwupd-efi: Use the cross linker instead of the host ld.bfd
-Date: Sun,  1 Nov 2026 07:34:14 -0800
-Message-ID: <20261101153414.1370959-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] power-profiles-daemon: Fix configure without systemd
+Date: Sun,  1 Nov 2026 10:56:54 -0800
+Message-ID: <20261101185655.1459673-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261101153414.1370959-1-khem.raj@oss.qualcomm.com>
-References: <20261101153414.1370959-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 15:34:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131729
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 18:57:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131730
 Content-Type: text/plain; charset="utf-8"
 
-fwupd-efi finds the linker with find_program(cc.get_linker_id()),
-which looks for a program named ld.bfd. meson.cross only sets ld, so
-meson falls back to PATH and picks up ld.bfd from HOSTTOOLS. That breaks
-cross builds on an x86-64 host:
+The systemdsystemunitdir option defaults to auto, which makes meson look
+up systemd.pc. That only worked because systemd ends up in the sysroot
+through other dependencies, and it fails on sysvinit distros:
 
-  hosttools/ld.bfd: cannot represent machine `aarch64'
+  meson.build:36:18: ERROR: Dependency "systemd" not found
 
-and on x86-64 targets it silently links with the host linker.
-
-Set ld.bfd in an additional cross file
+Pass the unit directory explicitly. The unit is installed unconditionally
+and systemd.bbclass removes it again on distros without systemd.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb b/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb
-index 8682d97c06..44d1f1807b 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb
-@@ -12,6 +12,16 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
+diff --git a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
+index f9f7e86990..5750ee33ee 100644
+--- a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
++++ b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
+@@ -14,7 +14,7 @@ inherit meson pkgconfig systemd features_check
 
- inherit meson pkgconfig python3native
+ REQUIRED_DISTRO_FEATURES = "polkit"
 
-+# without this meson finds the build host linker in HOSTTOOLS.
-+do_write_config:append() {
-+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-+[binaries]
-+ld.bfd = '${HOST_PREFIX}ld.bfd'
-+EOF
-+}
-+
-+MESON_CROSS_FILE:append = " --cross-file ${WORKDIR}/meson-${PN}.cross"
-+
- # These should be configured as needed
- SBAT_DISTRO_ID ?= "${DISTRO}"
- SBAT_DISTRO_SUMMARY ?= "${DISTRO_NAME}"
+-EXTRA_OEMESON = "-Dtests=false"
++EXTRA_OEMESON = "-Dtests=false -Dsystemdsystemunitdir=${systemd_system_unitdir}"
+
+ SRCREV = "5b4994c8a91290481bef87a5bae95391d0ec677f"
+ SRC_URI = "git://gitlab.freedesktop.org/upower/power-profiles-daemon;branch=main;protocol=https"
