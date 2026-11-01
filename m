@@ -1,96 +1,99 @@
-Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20269.1793559419620027113
+Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20432.1793559420650634004
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Nov 2026 10:56:59 -0800
+ Sun, 01 Nov 2026 10:57:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KXOAQfNH;
- spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1ae18eb9b69so1352016c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 10:56:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=v19OTAX+;
+ spf=pass (domain: gmail.com, ip: 74.125.82.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-36a0f27c9f4so4312247eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 10:57:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793559419; x=1794164219; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tC7bvIgBuZPmQzOLKQe47HQK1TR3HdrNxDl1JVcBrhE=;
-        b=KXOAQfNHJJslGnSwesBz04AXpZzXmUdjufD7J6en7d/aXsW+Kfto2Bskrlje+8vuuJ
-         ASxGIgkqr8aknM86n2dOwRSp33uspKRSO8EXGtSI1FPtoN1Hl+WYi3S3R34zBovxz7tu
-         0NpQ/u3GbrbghkGOZTR2OXWsSyrFUvH0s+NcP8Tu6uR+/mp+PfCh7U5OWyrDZbi1b2qB
-         CQLaZuUXfaOgx+CaXrf+Q4kWyxXjt6In479K9cnhq9cDbC+0AmbX38wBZDz0qRJaCK5f
-         CiQ7DRZxS5dcRyNHCsn/vFQM7+A429ehNqdIFEELmpCnSbsTeN9fBU4OFCdSeD7OVDuK
-         txtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793559419; x=1794164219;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1793559420; x=1794164220; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tC7bvIgBuZPmQzOLKQe47HQK1TR3HdrNxDl1JVcBrhE=;
-        b=mFsvduPlZ4xgatZI3ZohwnmdICXxQf4xqyI0qLYIqnyZE3AGsNvuZN/lVs52oQ+12k
-         ZVtqEx8eAw28/oHUfBmWuJF1UERHgAbatq4oWFrXqdYdkI6FB/1h94uoADANLUkyzXP1
-         vBd4KEaKAUXgty3k+B+x7JEU/j2OJyWankXfMHaHS5McVXoyTrZ92KaKH+9AIDl63avR
-         HRZsTMumQfBX92DqdHGu2e+jjGSu3TUWxBwR44fRYyrje8QO7EIYs5wQGltQbIq32Gpl
-         vcKKOEdXBt3FRAFdyvBiJBQzVoPWK5EdiT5a6NVTQV9gGa8w5iLHlpQaI8J5kEJ/oGi5
-         fzzQ==
-X-Gm-Message-State: AFq9FYJoXq30bxfha5MoTfpsXyRkURKbzqJPIsi48gjHXZlQH0Te3mNH
-	aAYT2xBBOUfjZgl/6Fb5ygv6E2PMvmvZcvKK3hNxWQDFhcF4jhW8aD1w6cX+6gj4bYw=
-X-Gm-Gg: AYBFou2m1MiUkwk1TxyfNjBqdfOCG/YyqoXkb0wPKppVEmxHtsh2mcZAQXZOoLc8quS
-	OILLlAqGpME77vu4oXmkSf6RH0xxyqUz67uYzlmUiKC1IR2XaQS5JvKm/gpv5g7znmW6BrpGbQ3
-	th8ma4ydKYl5Zt9G8780gCej+/UkGcVKd/aGBFGdjaIymhMMjdKYB5jOLEGR/A1rC7Hr4+ocSDb
-	hcP72IyYZtWnI0Y1/pNMiG9eSVF7pF2Cxa6yyVzMdARUO4k+Hk8sxz3tUmM8l4azqD3qj8f/b5+
-	N+bmw05hHcdL+hMyyLFDZgUuicU0UaazWIlLaMlsdWyc00v3f6N9hswPGW813uv1LPRchJvRh7Z
-	Yh53ykcaXnTEmT6K8rO4QOuQsnkz/JA/QfHSmxBXDY+I1vTunfmQySQUsD9kFBsmXuePlUqM5bT
-	kTM9yoxu1sOKfPWm9L6FERFParZ2F+q4Y7C6AaqerLvdZnb2S91XAQ7wiyv/xrhet2Qik5ziqdI
-	ZRUtzSy++PCV42ACYKs7xC07GJnz4he4dGwy7h1/jh04NH/rBEi/LFK4Hr9ii/5JCmRlT0GvMW4
-	dYi4qXdYvMJ47tUqqP9W6f9zoKkZ/dN2BEWOubriGJCqUEtMZMgGSHuvHyfGfLTnJnL/G1HSLxe
-	AkCSce5g2vSevb79y83aZ2z202pDgquFsF2mmvZWRL6uRM21OVghu5k9SktG1PfJxa6n1X8PW2n
-	RGRllU7K664kOkYkHwIT5rpp0fP4SI3/tcPz3sreE/3i/RKCgLw20utsHEGGN7XDbsar+86d56F
-	7wLgtpXyh/HUyG14RmXxbxXQ3EL8EI6xbBwSSZbs+0QzZ6RXaSw3jh+7ICR6Pq2gXSCqd9Rcymg
-	tRFV
-X-Received: by 2002:a05:7022:7f17:b0:168:3243:c937 with SMTP id a92af1059eb24-1ac5cb1c8b3mr14002341c88.16.1793559418746;
-        Sun, 01 Nov 2026 10:56:58 -0800 (PST)
+        bh=U7oTelNwMWuBklqU98jreW1tVkqRTGFYjOx7W/kUlnY=;
+        b=v19OTAX+gKH7KyKlhyC/6Y06ml8v8y0wDpa1+rT2Iy5V3hmgtiO/NCLheRE56w9+7o
+         cyZzZV1HAzcC5hkzvDFsgmv2CIRpRubAdmjqRJ46b/VQzOzvjM5YbAHqK6Jsy0ySz9BZ
+         Pte3B7kTxO0tOYuIIJxfXo0SmKAPbGLLrtDHszfgnWhT2zXG8tfPWpwRYUr97PmeZ/B8
+         cyHOhU27pqZdJy9DIdWbx6m1WhfeFil/aLKlWvOkqrqjFNqEysHAFUCOtu2lrtrCUmBY
+         D0OxjRjyl1NRL0+p9PelBSDHBpom+GXHbqtmBhRTzwClXhXok5BtEemoRiD1L/z0U8Vj
+         ORnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793559420; x=1794164220;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=U7oTelNwMWuBklqU98jreW1tVkqRTGFYjOx7W/kUlnY=;
+        b=RMIK6nQFfjgaRYcMkw9a6yW0mU0tTAOUuCoxREkIMoqTpIQiCQ4FC5DdjZMI01H7Mz
+         5jexj8tn5RjIJwvzhhksNWcuuBVd0ZmhdkZ8I+hoJ8OXSqC6bO6u4A2Z5scDZjsjpd2B
+         rcdE3qPGjQkxtKxUvx/TpetxD0ApMNAl263OnstQSP57c4h+BE+R8npgngjad7zCYnNC
+         kYcKF1YDYaQNh8OYVixISzEZ4CGGLjzDOGjP4W8N8RDXtd/dVDhXXkjNCiN8EBoRNHYq
+         8lgsphLn3IK3eyL0ulwlgw7YKiJy9PUbW7uS7Dqhxktg0QB4YhZ/ZKQdTaF02xvnd9g2
+         YOmg==
+X-Gm-Message-State: AFq9FYJTegecfGD/e/ZvBX8pDepnRQrW7yQlRFBX4XV/6ZyeMPmvlup5
+	9RIrdC6w1ekZB9ixlRgpE4xstpBAEXKIC7mfwuLQaUz3xueuGX+5QlrJZlQRCyMVbko=
+X-Gm-Gg: AYBFou3DJyAvnX+GomGiv52z49N7Jy3gQH3sI9moggrmSyU02PmFAbzKHOLg9noBZau
+	ZVrlmH/ghmAxJkEBPG6IcJMd5XjK77gIg6y2RPSGLZWFu2cSVMLLAPe+B9RKBrveuI/SgGfv8Rs
+	nzow3b7Q5n8cuv+4AqNA/X9edBvzsZUdRRH+16HWvjZvnUZwvWAuFV3zKNRhtZ2bpqP4tTE5HNJ
+	etpzZa2zK7LU2D+g7v/cWeBbQLdKzp2MpYQKkYE9BiGapdOj90YvbKGb4DAhnWmeFoN32thGcMJ
+	6xpJXYuMTWGNn76ixzdw679V07Fm/nyCQHAyFQGn9dOWOXoUoFtbbXpyPW3RDAmsLeOPBfOPRcK
+	VvMkWblSFEM7sQXr2yQpMWvJ4OxW+FrDJx0+z9ZnzU6vDPVddBStXUorS5jlM7vaFZMH3FPHw54
+	lyOSJzxqkC3nmZeM7vusWw8HDUxEibrGUsV+18XM/WYu/iyCRHO3+CmviISEj6hCBYAi3c/BV6D
+	qLGSdPUtUg/OipHrmW2CAbMKMEmsbiOKzxI0EtuJYjOuf6M+Upvmantb6Lg4a7UVC4QmkrUhsHm
+	w5RPYEhVeW+qrJAzsnKPuOea/o2mVktgMetDwjvsRGpZFYkBvbu6lEpNTmjXbvt5n2da2JjNs1L
+	6/zodrxXUqL5Z1jeOdXCT0GCwocEohRHMLAqsTigJ6/kYWPANjrF27onie/G3191wsC1nZKb2ZB
+	KkO/01JROdRBRXClMzBo+HWY34I27C6NcY9iJPK9ar6QAudguqoPFr5SzAXUdbx50ZvqRwQvSWe
+	9UE25L9W2wwOM7So0E31tG+1vTKUeTA5cLrudfeqewamaH4VRdusujLXSrYnjDqmHumPIUKfGp1
+	kir4ngbFQanDHbXUjdl6N3hjvg==
+X-Received: by 2002:a05:7022:7f03:b0:1b2:32e1:3bb4 with SMTP id a92af1059eb24-1b232e13d6cmr1151255c88.18.1793559419808;
+        Sun, 01 Nov 2026 10:56:59 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm46337863c88.10.2026.11.01.10.56.57
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm46337863c88.10.2026.11.01.10.56.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 10:56:58 -0800 (PST)
+        Sun, 01 Nov 2026 10:56:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 1/2] power-profiles-daemon: Fix configure without systemd
-Date: Sun,  1 Nov 2026 10:56:54 -0800
-Message-ID: <20261101185655.1459673-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH 2/2] accountsservice: Require the systemd distro feature
+Date: Sun,  1 Nov 2026 10:56:55 -0800
+Message-ID: <20261101185655.1459673-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261101185655.1459673-1-khem.raj@oss.qualcomm.com>
+References: <20261101185655.1459673-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 18:57:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131730
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 18:57:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131731
 Content-Type: text/plain; charset="utf-8"
 
-The systemdsystemunitdir option defaults to auto, which makes meson look
-up systemd.pc. That only worked because systemd ends up in the sysroot
-through other dependencies, and it fails on sysvinit distros:
+libaccountsservice uses sd-login for its session tracking and links
+against libsystemd or libelogind unconditionally. There is no elogind
+recipe to satisfy the alternative, so on sysvinit distros configure fails:
 
-  meson.build:36:18: ERROR: Dependency "systemd" not found
+  meson.build:206:2: ERROR: Assert failed: systemd required but not found
 
-Pass the unit directory explicitly. The unit is installed unconditionally
-and systemd.bbclass removes it again on distros without systemd.
+Declare the requirement so that the recipe is skipped there.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/accountsservice/accountsservice_26.27.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-index f9f7e86990..5750ee33ee 100644
---- a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-+++ b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-@@ -14,7 +14,7 @@ inherit meson pkgconfig systemd features_check
+diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_26.27.3.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_26.27.3.bb
+index 4a95d1410e..dc03677926 100644
+--- a/meta-gnome/recipes-support/accountsservice/accountsservice_26.27.3.bb
++++ b/meta-gnome/recipes-support/accountsservice/accountsservice_26.27.3.bb
+@@ -13,7 +13,8 @@ DEPENDS = " \
 
- REQUIRED_DISTRO_FEATURES = "polkit"
+ inherit meson gobject-introspection gtk-doc features_check systemd vala pkgconfig
 
--EXTRA_OEMESON = "-Dtests=false"
-+EXTRA_OEMESON = "-Dtests=false -Dsystemdsystemunitdir=${systemd_system_unitdir}"
+-REQUIRED_DISTRO_FEATURES = "polkit"
++# libaccountsservice needs libsystemd or libelogind for its session tracking
++REQUIRED_DISTRO_FEATURES = "polkit systemd"
 
- SRCREV = "5b4994c8a91290481bef87a5bae95391d0ec677f"
- SRC_URI = "git://gitlab.freedesktop.org/upower/power-profiles-daemon;branch=main;protocol=https"
+ SRC_URI = "git://gitlab.freedesktop.org/${BPN}/${BPN}.git;protocol=https;branch=main;tag=${PV}"
+ SRCREV = "4e254d9624cc48224c9920b9509df0b144f7be0c"
