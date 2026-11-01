@@ -1,105 +1,239 @@
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20746.1793560454280540713
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1735.1793575214643120580
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Nov 2026 11:14:14 -0800
+ Sun, 01 Nov 2026 15:20:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Xs9FliHo;
- spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-1aefd1bf74aso1136841c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 11:14:14 -0800 (PST)
+ dkim=pass header.i=@snap.com header.s=google header.b=a3XHUMYF;
+ spf=pass (domain: snapchat.com, ip: 209.85.128.54, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a2167bd087so19152405e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 15:20:14 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793575212; cv=none;
+        d=google.com; s=arc-20260327;
+        b=i25zZTUA3qPhCMVpPjvBRWMsqQVxb9E9ed5JLaNMxspkth2ZOQIfmF6l9ROjVnYO0j
+         uimjn2umA8eyjtChyIxxIVlZsKGow3vt0vMEAaY/8YCEwbOvtAJCISulW67AMYUnCpJM
+         kkQakd9vVEaPBxcDLyB6zrBM0cEWRjMS4pYH5Y9SuvWLZsMYcdJyDiwKnl24Vz8tKMcH
+         Ji4CNpKKA0KQeiZkb4N5V9NXs6Ft1SrVo3U71ePfpkviHsVjG1H7qO5dk3VLzqvDJYsR
+         ggoYLREad+hZGMxzRBnxpw+Fm1ZZba+fGLo6fxramWmcJ4USZ3q2ZgPDnUAvEiF/ZiKb
+         wZ5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=GTJ/UsPSmURO7iM0HvZrOgw0X1nkfA6YLDp+x+nXSZA=;
+        fh=pgSuNtBd9WV+mTof3gYKFZAQkk03g+8G5+Acac4ed14=;
+        b=DM+SVhBm+67GqeUxNBIzFK4R13v1ku2wyU6qHG26O/Zts0sTw7WP3dwN/0Kth0DSB3
+         PF18hWn2ctwxWfT2AnmVxRKQMtchJMRxwFWAC7PvJUJQJb32ZeipaYBhOgX/H9BM0/OR
+         EVas679omQ9sWTk6Jru2N79hS1Lib58SZBp5AR9GsBD+f4Esom4ftjzDiGvc+O9CdyLF
+         pR5TV8DUCaja7d0IX90Q5h3A0i77AnNxzOF/fx5+kwrV/o+bioglRIkNS23QCJ95huqC
+         nFbZGlQioFTTm5pYTS7b/CFRicMHd5k0KIPKBOQCEYQzz6iehV33th8Tv9ftN1Dc64k4
+         +oog==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793560454; x=1794165254; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=J29NEVJzPYgDzgRNxrQOqumUBn8HiNRyeT9SApOPLfY=;
-        b=Xs9FliHomUrgmM56Vz8QRFqUVD4MvtJfNNRQwje+3bEZNtMtxigJLljdCVy4+xL+sW
-         B4ScCerTsp4rHjJLHWaud9s271QkrTZUvWgzUn29HeGLldaYfUiawgCu8fjIwkrvfYkL
-         iPKOImvori8gEWENFzYMOJ+TTBYlnsjpdqBsTcsOKMmIilI4/xwpBW9Wbwu9eC5kAuQJ
-         V7tFUM+j9TvRsqmlBcXguoU4gAIpJi7+Y8Xkjtg9kc2Z0OzP6wG3gVkuo4dBIAei1IgG
-         Q4PL5aeXeaWpsCo4mD64T7dbkf30oI9w6wwaa36+jvQB6AuVMe6736g1OAc8eO2TgQ/i
-         0Q0A==
+        d=snap.com; s=google; t=1793575212; x=1794180012; darn=lists.openembedded.org;
+        h=content-type:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GTJ/UsPSmURO7iM0HvZrOgw0X1nkfA6YLDp+x+nXSZA=;
+        b=a3XHUMYF0ZoYjGy6tvf2GwTXH0EWv03LxbyOO7yeJ5Wpg9ZdyE9EhZH/gAr/4ZLqWx
+         ENdFSiriM2hKhUpoOgwQKazr2eFSSbTZbdRQU7Qhl6SkT+RQKDLUjgXzJU3lMPuVs16M
+         5/x7kPC9YiTdr9OmK2FbhCyYNf01oGPQVFiZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793560454; x=1794165254;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793575212; x=1794180012;
+        h=content-type:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=J29NEVJzPYgDzgRNxrQOqumUBn8HiNRyeT9SApOPLfY=;
-        b=jM0muzRQqIBzZRDsi/IQXJuNLqiv6S5tGn7GHv1iE2bx6qZSkzykNMPta9Lr2bYlVG
-         OBld4k43Df++gkRg96gm5Csfkp/epaL89RzX/jpVgKFHA2Zchx6oMCQ0k94p4FUh3p1E
-         ZnR7kMv0YYHAgBsWxHn45Jr8zFNJ4goJnMrcqB77x6MSAdO4NqcuycpdZpqrLSQjnRzv
-         u7b0xk/C9pnD1gtsX70try/vDOnjZ1/H/pl2sRHcB7FLN16FNLCDEyrQvDnw3h5CGTRb
-         VaLHQ5OxRD5O+/o+mjSfsJZ2FTcruxu4aq1f9/zR+oKGYJkhPG/J6/5A8sKOHRMwCxyP
-         CacQ==
-X-Gm-Message-State: AFq9FYKaafX/qKjqm6Z2eTJ+g3Uvemfx7M63wKVk7jpEP8CJrg4rv/k0
-	XBuErF9M7NvM9+vWXrkIFHXHqHEl/Nxfy5XjQZQ9ePlE8rAAQpfxjTMqX+1rKFbAZwM=
-X-Gm-Gg: AYBFou1jVXfyvdQt8NBo9TCv3McR/UhX/pPYV+p1gMLKNQIPRNkQH5Krcnoso/dTXG9
-	518u+fmaggp1DuWf0jn7V0P1B/7sfeWXc/houIYXLOMrVau9B4DyKxd1omK9yfJd3z132uMa+bD
-	1cLZ0UqRB9zH/t5KdC74I+eymoVufTTQKHYssKrf+zY9miOgEWE6bTp1wHS2r6JKvhZn4H7RR1G
-	ZZCyliROpmzpPFQsFauoof9chOf2tCcddJx1KjhbhEr0C4KQ1E8QSIKklE9W2r6if4ynMgQnqcg
-	9cYJ4VZW4P8evEqd89f31M3sRq8XzftVgBuWj6IjrXOfy77w1hThxLWBXg2wPzSIJ3QU6mC1Mas
-	UPqpdvb8o7cv3n4Q1D3XlVii34nMag17/W5S68r9wgKKK8+mMN1mQOpf/MfYf5qaXkBJHwb4Ffh
-	qv5ZRrhKgJh4wHrH2RiC7ehUzYEcI1zTjSKc3dbpl70bvVohg9e2C7TRhnhtsAvIs3glrIND89c
-	+eeKcgxgMVivbtthHjjhvr5JIaGQdGkhCWlIbH0iYFnZgE40JcthuKjjW7Crb+iP+OtnUN51rmi
-	TXiDqXk1tyoHAux5InwZaevtQ6vQjYdLj1p6cOa8Dpkrgaw9/seUvNfqMbiB1tErb0knWEVzugX
-	Pht4+PLWiUlfQAYVrYO71Xox3FQ8u54zr5Xtxk0FABY6dUf0KMiK3R4z8GknTumeiQVg+kxZz8I
-	cagvvse9vUL2VpFyas8ONk9eQ8kJDZp7lq0zggXmFb4affg9Fs7vQIZghTHMK28DFvrd0Un+PUZ
-	Vrsq4vUieUTeIk9919F3Hqjn5U0saNVcBEw/QQfOgEZb/Dui6SYBR/WAHpG4l0gOdUKHz0DPynl
-	3lKs
-X-Received: by 2002:a05:7022:b0c6:b0:185:6c8c:d860 with SMTP id a92af1059eb24-1ac599f50b1mr11742034c88.5.1793560453490;
-        Sun, 01 Nov 2026 11:14:13 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac0e738445sm27600735c88.0.2026.11.01.11.14.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 11:14:12 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-gnome][PATCH] malcontent: Require the systemd distro feature
-Date: Sun,  1 Nov 2026 11:14:09 -0800
-Message-ID: <20261101191409.1470402-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+        bh=GTJ/UsPSmURO7iM0HvZrOgw0X1nkfA6YLDp+x+nXSZA=;
+        b=j1rfQ1+fsakf9uI8HEmbBE6l95QlkZwl7+tWeSobPUm7tdT3e6WCN+/4sGP8gvmUOA
+         v12/1X0C7fQFj2MhHLxJOEzm5Jcvwmn2dZfIAiNDwttb5p0MOhcsH83SmAQUQWcuZ2xF
+         o2G6soyC/ox0RbNJ9M6+rItbGH7zcvmS5vB6f256/IIx+beFRh4EEP9h06Z1bXx8zd+8
+         I+R+JI11REAie2puSRYz0IWfviuKrD8+38OfRM8jFMBsNThu+n9C0PU/GbU5e+dGhQeE
+         5Sl9IpSX+zlgWlLZljLrBF+G2uJKDGQkbFxnakzIEJ6vnAiL5TEh1ppL/ADthzulwlmN
+         2HqA==
+X-Gm-Message-State: AFq9FYJopr80FCyzZn4fjsC0spoeoLVi4WuI2NVITUTE+wkcHRCl8bta
+	q2VAiP4HSqCCOi5nCI/hnTcCsRQD+pD2jGfbaul2ddBypmvdVhv4eigd+g4oloXL5MLvAhxuSdl
+	aKeciMMAYQFLWriuXXGD6mlqf7st34VNZwcJUhSvMpgy5gSU17k61No6YJQ==
+X-Gm-Gg: AYBFou19PRwfWxBhBm8kOaXBmK4WnADkawScdq1g2cyl/5+vtXJUKQuEEzr/mrmOJcA
+	MnPcMRyzxtCBbdPyCU6hFiVLI4oZDbBQ16wVDPagJC6/epAEqxKW+YBXo9pgVjMrjlnmU/91LtF
+	t5RJ0HSOlSYQ8Z/HWqJkXLeYqPZ/TNgbTYS6DKifAsHLXrY6L82l161ARuUlHPTKkIti1aFKFI/
+	OpXRIfiUJurGbyqw+0dBZ4BA0ozBCFvYp5zFyNgIQrVjbb/uw1nVO584ilUnHO/VKkCStSN79u4
+	Wj6B8gGyD0cHupBnHcPAQIZe63xFr75PGjqlmmdo6lwRD6+DZovPZu3ARRB0toOnYEiciI5eFFF
+	Sb8XRAd2fClC1FJc0ozHWufndCcQ3tlj96QHHWdrVJsvFa7FDs8a6YXUfPqgee3L3V1bF
+X-Received: by 2002:a05:600c:3d05:b0:4a1:faa1:3813 with SMTP id
+ 5b1f17b1804b1-4ac187a6960mr194601065e9.27.1793575212225; Sun, 01 Nov 2026
+ 15:20:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261022142449.2372030-1-ecordonnier@snap.com>
+In-Reply-To: <20261022142449.2372030-1-ecordonnier@snap.com>
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Mon, 2 Nov 2026 00:20:01 +0100
+X-Gm-Features: AclHuK9pjYXCyFTh4il9QlDs8T9fl-aW13PZVtpvTTkf_mglaetZEU0VtV99PJ4
+Message-ID: <CAHUKmYZ6AJ_WSb9xP1QCMyG=m0bvfzMATUBHPzjR440wJox-RA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] android-tools: drop GPL-2.0-only from LICENSE
+To: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000674eea065f3f457e"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 19:14:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131732
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2026 23:20:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131733
 
-malcontent and malcontent-ui depend on accountsservice, which needs
-systemd now, so they can not be built on sysvinit distros. Declare it so
-the skip message names the actual requirement.
+--000000000000674eea065f3f457e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
----
- meta-oe/recipes-gnome/malcontent/malcontent-ui.bb | 2 +-
- meta-oe/recipes-gnome/malcontent/malcontent.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Hi,
+what is the status of this patch? It still applies on master-next.
+I double-checked again and Arch/nmeum list GPL/LGPL only because they also
+ship e2fsprogs/f2fs-tools and link libsepol into fastboot, none of which
+are in the Debian sources or selectable via TOOLS_TO_BUILD in meta-oe
+bitbake recipe.
 
-diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb b/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
-index d0a975a457..4cce5213d8 100644
---- a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
-+++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
-@@ -27,7 +27,7 @@ GIR_MESON_OPTION = ""
- GTKIC_VERSION = "4"
- inherit  meson pkgconfig gtk-icon-cache gobject-introspection gettext features_check
+=C3=89tienne
 
--REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
-+REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection systemd"
+On Thu, Oct 22, 2026 at 4:24=E2=80=AFPM <ecordonnier@snap.com> wrote:
 
- EXTRA_OEMESON = "-Dui=enabled"
+> From: Etienne Cordonnier <ecordonnier@snap.com>
+>
+> The GPL-2.0 entry dates back to the first recipe (AOSP android-5.1.1_r37,
+> 2016) and was carried over unchanged to the Debian android-platform-tools
+> based 35.0.2 recipe.
+>
+> In the android-5.1.1_r37 repos the recipe fetched, the only GPLv2 mention=
+s
+> are headers which are dual licensed "Apache 2.0 OR GPLv2"
+> (system/core include/cutils/ashmem.h, include/utils/ashmem.h,
+> include/log/logger.h), kernel headers in libion which are not built, and
+> documentation templates. Apache-2.0 can be chosen for all of them.
+>
+> The 35.0.2 sources come from Debian's android-platform-tools, whose
+> debian/copyright lists no GPL license: the files are Apache-2.0, BSD,
+> Expat, Khronos, PSF and public-domain, and a scan of the unpacked tarball
+> finds no GPL licensed source files.
+>
+> Remove GPL-2.0-only from LICENSE and LIC_FILES_CHKSUM so that the recipe =
+is
+> not wrongly treated as GPL by license based tooling (e.g. copyleft source
+> archiving).
+>
+> Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+> ---
+>  meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/android-tools/
+> android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/
+> android-tools_35.0.2.bb
+> index 65529c1b53..b7cb062410 100644
+> --- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
+> @@ -1,9 +1,8 @@
+>  DESCRIPTION =3D "Various utilities from Android"
+>  SECTION =3D "console/utils"
+> -LICENSE =3D "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND GPL-2.0-on=
+ly"
+> +LICENSE =3D "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause"
+>  LIC_FILES_CHKSUM =3D " \
+>
+>  file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=3D89aea4e17d99a7cacdbeed46a0=
+096b10
+> \
+> -
+> file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=3D801f80980d171dd6425610833=
+a22dbe6
+> \
+>
+>  file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3Dcb641bc04cda31daea161b1b=
+c15da69f
+> \
+>
+>  file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=3D550794465ba0ec5312d6919e=
+203a55f9
+> \
+>  "
+> --
+> 2.43.0
+>
+>
 
-diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.bb b/meta-oe/recipes-gnome/malcontent/malcontent.bb
-index 0bb258e2b0..91df15745b 100644
---- a/meta-oe/recipes-gnome/malcontent/malcontent.bb
-+++ b/meta-oe/recipes-gnome/malcontent/malcontent.bb
-@@ -19,7 +19,7 @@ GIR_MESON_OPTION = ""
+--000000000000674eea065f3f457e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
- inherit  meson pkgconfig gobject-introspection gettext features_check useradd
+<div dir=3D"ltr">Hi,<br>what is the status of this patch? It still applies =
+on master-next.<br>I double-checked again and=C2=A0Arch/nmeum list GPL/LGPL=
+ only because they also ship e2fsprogs/f2fs-tools and link libsepol into fa=
+stboot, none of which are in the Debian sources or selectable via TOOLS_TO_=
+BUILD in meta-oe bitbake recipe.<br><br>=C3=89tienne</div><br><div class=3D=
+"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Thu, Oct 22, 2026 at 4:24=E2=80=AFPM &lt;<a href=3D"mailto:ecordonnier@sn=
+ap.com">ecordonnier@snap.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">From: Etienne Cordonnier &lt;<a href=3D"mailto:=
+ecordonnier@snap.com" target=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+<br>
+The GPL-2.0 entry dates back to the first recipe (AOSP android-5.1.1_r37,<b=
+r>
+2016) and was carried over unchanged to the Debian android-platform-tools<b=
+r>
+based 35.0.2 recipe.<br>
+<br>
+In the android-5.1.1_r37 repos the recipe fetched, the only GPLv2 mentions<=
+br>
+are headers which are dual licensed &quot;Apache 2.0 OR GPLv2&quot;<br>
+(system/core include/cutils/ashmem.h, include/utils/ashmem.h,<br>
+include/log/logger.h), kernel headers in libion which are not built, and<br=
+>
+documentation templates. Apache-2.0 can be chosen for all of them.<br>
+<br>
+The 35.0.2 sources come from Debian&#39;s android-platform-tools, whose<br>
+debian/copyright lists no GPL license: the files are Apache-2.0, BSD,<br>
+Expat, Khronos, PSF and public-domain, and a scan of the unpacked tarball<b=
+r>
+finds no GPL licensed source files.<br>
+<br>
+Remove GPL-2.0-only from LICENSE and LIC_FILES_CHKSUM so that the recipe is=
+<br>
+not wrongly treated as GPL by license based tooling (e.g. copyleft source<b=
+r>
+archiving).<br>
+<br>
+Signed-off-by: Etienne Cordonnier &lt;<a href=3D"mailto:ecordonnier@snap.co=
+m" target=3D"_blank">ecordonnier@snap.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-devtools/android-tools/<a href=3D"http://android-tool=
+s_35.0.2.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_35.0.2.bb</=
+a> | 3 +--<br>
+=C2=A01 file changed, 1 insertion(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-devtools/android-tools/<a href=3D"http://andro=
+id-tools_35.0.2.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_35.0=
+.2.bb</a> b/meta-oe/recipes-devtools/android-tools/<a href=3D"http://androi=
+d-tools_35.0.2.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_35.0.=
+2.bb</a><br>
+index 65529c1b53..b7cb062410 100644<br>
+--- a/meta-oe/recipes-devtools/android-tools/<a href=3D"http://android-tool=
+s_35.0.2.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_35.0.2.bb</=
+a><br>
++++ b/meta-oe/recipes-devtools/android-tools/<a href=3D"http://android-tool=
+s_35.0.2.bb" rel=3D"noreferrer" target=3D"_blank">android-tools_35.0.2.bb</=
+a><br>
+@@ -1,9 +1,8 @@<br>
+=C2=A0DESCRIPTION =3D &quot;Various utilities from Android&quot;<br>
+=C2=A0SECTION =3D &quot;console/utils&quot;<br>
+-LICENSE =3D &quot;Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND GPL-2.0=
+-only&quot;<br>
++LICENSE =3D &quot;Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=3D89aea4e17=
+d99a7cacdbeed46a0096b10 \<br>
+-=C2=A0 =C2=A0 file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=3D801f80980d17=
+1dd6425610833a22dbe6 \<br>
+=C2=A0 =C2=A0 =C2=A0file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3Dcb641bc=
+04cda31daea161b1bc15da69f \<br>
+=C2=A0 =C2=A0 =C2=A0file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=3D5507944=
+65ba0ec5312d6919e203a55f9 \<br>
+=C2=A0&quot;<br>
+-- <br>
+2.43.0<br>
+<br>
+</blockquote></div>
 
--REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
-+REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection systemd"
-
- PACKAGECONFIG ?= "ui"
- PACKAGECONFIG[ui] = ",,,malcontent-ui"
+--000000000000674eea065f3f457e--
