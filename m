@@ -1,312 +1,118 @@
-Received: from mailrelay-egress16.pub.mailoutpod3-cph3.one.com (mailrelay-egress16.pub.mailoutpod3-cph3.one.com [46.30.212.3])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7637.1793604579823886910
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8838.1793609825894995357
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Nov 2026 23:29:41 -0800
+ Mon, 02 Nov 2026 00:57:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@embetrix.com header.s=rsa1 header.b=TkC+qWkd;
- dkim=pass header.i=@embetrix.com header.s=ed1 header.b=SQUj1Bj0;
- spf=none, err=permanent DNS error (domain: embetrix.com, ip: 46.30.212.3, mailfrom: ayoub.zaki@embetrix.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1793604576; x=1794209376;
-	d=embetrix.com; s=rsa1;
-	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
-	 from;
-	bh=PvVFj5JHd3Jdo9Krz6suZE7EtdAhVrlqZyh8/wT7dNU=;
-	b=TkC+qWkdCBej/NlUe/RbW/fAJkpJCLHNrdWZX/O+gc0IL8c8AVkxuwZXAInD3IvkzDY890RDu4Oxs
-	 6gS4eHVe1yJPr7WCcUc8HaGsWoIuqfxxsVsYL4yx7JtYj3KQo8dmPmachYHjuM+NuL6puk8T6qCyRP
-	 6jhEOnAAhwhpLWPKflzjPONf++b/Ioskpi5vMDZN27wwwDFcEwUCFLLyTJscuqXTAd65bOg1kJVAXi
-	 OcZYEmScEEgA8y3kBGfI/HkW4htZSNwMpHsuBSict1xutER3sfookWyHIKA6RMDJWDBfZ7wuYb2UDm
-	 GfMp+eDAEH8B+EAmsJlolV5iQMc4NjA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1793604576; x=1794209376;
-	d=embetrix.com; s=ed1;
-	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
-	 from;
-	bh=PvVFj5JHd3Jdo9Krz6suZE7EtdAhVrlqZyh8/wT7dNU=;
-	b=SQUj1Bj04uoU5gBn/wRfBDbQzrcBIDknK7e9M1BHXesAnQi2fondxrcACyzBRtfqc/t7NeDeAIvWG
-	 XERSXLNBg==
-X-HalOne-ID: 26c3ff81-d68f-11f1-9e85-4fe78d1e3c23
-Received: from xps-13.fritz.box (dynamic-2a02-3102-8c10-1ae0-ac69-42a0-6860-65be.310.pool.telefonica.de [2a02:3102:8c10:1ae0:ac69:42a0:6860:65be])
-	by mailrelay2.pub.mailoutpod2-cph3.one.com (Halon) with ESMTPSA
-	id 26c3ff81-d68f-11f1-9e85-4fe78d1e3c23;
-	Mon, 02 Nov 2026 07:29:36 +0000 (UTC)
-From: "Ayoub Zaki" <ayoub.zaki@embetrix.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=aRviPTol;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48dee593f18so2548366f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2026 00:57:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1793609824; x=1794214624; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Wx/7KCUHW/YZ108uel/kjCf4BfC078bDsjNOl4ZtQdg=;
+        b=aRviPTol5+PcEKwHKBI3yQk1Op4/Cjjd/HEBFCSgX0IZSFX4K/eIYJu5TFH6WKIi2B
+         Wfq2ny+zZFNDmthMdCoIQnIQluYMUMBTpM7jgejJ9lju1i+d/1uNzlVV7/VQMo+Prpmo
+         yNCGOndvSiq737ifI76BYJe0S8sjr9/hU6bjw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793609824; x=1794214624;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Wx/7KCUHW/YZ108uel/kjCf4BfC078bDsjNOl4ZtQdg=;
+        b=fe7P9KlTTx/tilGtvmOmUVH7NZdu+nN/O/v/tCjIPw1PNChp6V7Khuzyvxj0xFlBK1
+         ySx0xIqBlIixm0pJil2jNjQcky6trhsPZEkrJjWdHmEbzIXw+C3AMEMuKUE8TBMr81g3
+         VpTlXeDP6zaQ8XHATNzMbSrRZYey6Attiy2mejrYiA5tO4V9GITVp3GIA8uejzXc5mgH
+         zxXcmq0Ge2UX8iKHsX+spVEfi4qlXS+bynokTGII8Td8pB7V5h4nbZROMLU6SXTL028R
+         83b0T+Vaqs54TOXkx6zrRHJNrgG3Q7+piS8b2iz7AtlJzcrbfQyHq5wlrA1ODWyqnJwK
+         04Gw==
+X-Gm-Message-State: APuU4Z9Zkt3fOa+qX54vXrde7XwIXGqa7nEmyVAkOFxhqJvNcrfafnQC
+	3hBGbV82mr9vn1+m2UkAM5ZxPpcUMGYngzGfsZnRslLtLDmfyQC00T+IDE0V30rLnV7u4T8NzXl
+	56/OW
+X-Gm-Gg: AYBFou0ZbX2AnYVC0KcAfgrpC2FrQNsy7KozAaXOIPiTXTwCGW2VdN3MOkeEGidna3B
+	m3Wis6RUeIVca7yRadXFHhWXe5GsrLGAZk6/xLaqMctzarbxR1Jxa54mLqgbHOekiDcs7t00QA+
+	b3e/gVxIDtM+y8ldznUjqf9creuesNdFvlL24dKCVpiO4bDHkW582HNnyZy3nK4qpAQhiou8Nuc
+	kk3WISUKJVb+2noyQb1JMx8UQSSDYylw7IZqa74XuPXhCncGPZzuprDES8+TJY6QhJTx4U0295v
+	KNVh4AO6+gbiIGT1H8lrYeuN9oayvXCIhexPg/VEpFFBsZpL9Aa3YJmvWhKjFOTNQ5GAo8JsARP
+	aYi3sGiti4csPKgGKajqLlHjpZIIee4lgtrqw55dBZxL58DlbfNI2n6DRlFHqizJ5GHxzxtZnz/
+	s0XghcPxyEC729x2PTJEFMilBunFH4IufPgFFudmP0C+jo84+jRb+nX2FE6tO3jR2uhWnCE+mRe
+	/DAI3/QxVJr8bQDySV44VP4UcTyNWh5nVsJoHWbSUiuLahc4/j+Q5xJ4+y2Ik/yUGTSBwu9b2Wa
+	eWIzW9P7BJp34oyI8roXcFqEZJq2l3onnvKrYXgUYVMwS/9PCQtu/hQAK2o7pP5EBZxlxKPPVjI
+	ZS0OhSUkjSGuLKA7hekt9RY2xoofsuNiyzwNUdORp0A2bsbirlaSoGg==
+X-Received: by 2002:a05:6000:46c3:b0:48c:67d6:a87a with SMTP id ffacd0b85a97d-48e6e2f069amr13591887f8f.32.1793609823727;
+        Mon, 02 Nov 2026 00:57:03 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78a6bsm18451088f8f.27.2026.11.02.00.57.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Nov 2026 00:57:02 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ayoub Zaki <ayoub.zaki@embetrix.com>
-Subject: [meta-oe][PATCH] leancrypto: add Linux kernel module recipe
-Date: Mon,  2 Nov 2026 08:29:34 +0100
-Message-ID: <20261102072934.89576-1-ayoub.zaki@embetrix.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-asciitree: Upgrade 0.3.3 -> 1.0.0
+Date: Mon,  2 Nov 2026 10:57:00 +0200
+Message-ID: <20261102085700.236561-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2026 07:58:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131742
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2026 08:57:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131743
 Content-Type: text/plain; charset="utf-8"
 
-Add leancrypto-module to build and package leancrypto.ko
-independently of the userspace library.
+Upgrade to release 1.0.0:
 
-Move common source and license metadata into leancrypto.inc and include the
-submitted upstream patch to generate headers using the target kernel
-architecture instead of the build host.
+- Configurable layout spaces through BoxStyle.gfx["SPACE"], with an
+  ordinary-space fallback for existing palettes.
+- Declared the existing public API stable, without breaking changes
+  from 0.4.0.
 
-Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
+Fixes:
+
+WARNING: python3-asciitree-1.0.0-r0 do_check_backend: QA Issue:
+inherits setuptools3 but has pyproject.toml specifying backend
+setuptools.build_meta, use the correct class [pep517-backend]
+
+License-Update: Update copyright years to 2015-2026
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...t-architecture-for-generated-headers.patch | 164 ++++++++++++++++++
- .../leancrypto/leancrypto-module_1.9.1.bb     |  25 +++
- .../recipes-crypto/leancrypto/leancrypto.inc  |  10 ++
- .../leancrypto/leancrypto_1.9.1.bb            |  18 +-
- 4 files changed, 205 insertions(+), 12 deletions(-)
- create mode 100644 meta-oe/recipes-crypto/leancrypto/files/0001-linux_kernel-use-target-architecture-for-generated-headers.patch
- create mode 100644 meta-oe/recipes-crypto/leancrypto/leancrypto-module_1.9.1.bb
- create mode 100644 meta-oe/recipes-crypto/leancrypto/leancrypto.inc
+ .../recipes-devtools/python/python3-asciitree_0.3.3.bb   | 8 --------
+ .../recipes-devtools/python/python3-asciitree_1.0.0.bb   | 9 +++++++++
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb
 
-diff --git a/meta-oe/recipes-crypto/leancrypto/files/0001-linux_kernel-use-target-architecture-for-generated-headers.patch b/meta-oe/recipes-crypto/leancrypto/files/0001-linux_kernel-use-target-architecture-for-generated-headers.patch
+diff --git a/meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb b/meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb
+deleted file mode 100644
+index a3185a9c66..0000000000
+--- a/meta-python/recipes-devtools/python/python3-asciitree_0.3.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "Draws ASCII trees."
+-HOMEPAGE = "https://github.com/mbr/asciitree"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a985ccb0df374f2a8cab75010bf8db73"
+-
+-SRC_URI[sha256sum] = "4aa4b9b649f85e3fcb343363d97564aa1fb62e249677f2e18a96765145cc0f6e"
+-
+-inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb b/meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb
 new file mode 100644
-index 0000000000..1ce848265e
+index 0000000000..086fc07392
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/leancrypto/files/0001-linux_kernel-use-target-architecture-for-generated-headers.patch
-@@ -0,0 +1,164 @@
-+From 47aedd8d985b94dc35836925c123cb705985796b Mon Sep 17 00:00:00 2001
-+From: Ayoub Zaki <ayoub.zaki@embetrix.com>
-+Date: Sun, 1 Nov 2026 16:55:00 +0100
-+Subject: [PATCH] linux_kernel: use target architecture for generated headers
++++ b/meta-python/recipes-devtools/python/python3-asciitree_1.0.0.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "ASCII trees"
++DESCRIPTION = "Draws ASCII trees"
++HOMEPAGE = "https://github.com/mbr/asciitree"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a533ab417405f77f9a3d236d35cd7069"
 +
-+Derive the architecture from the target kernel configuration and pass it
-+to the AWK generators instead of querying uname -m.
-+This prevents cross builds from using the build host's settings.
++SRC_URI[sha256sum] = "0c396808c13cab27b60cbe402b99ef37fa681c6b59d337a008719efa201cdd07"
 +
-+Upstream-Status: Submitted [https://github.com/smuellerDD/leancrypto/pull/79]
-+Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
-+---
-+ linux_kernel/Kbuild.autogen        | 28 ++++++++++++++++++++++------
-+ linux_kernel/README.md             |  8 ++++++++
-+ linux_kernel/lc_ascon_hash.awk     |  7 ++-----
-+ linux_kernel/lc_hash.h.awk         |  9 +++------
-+ linux_kernel/lc_memory_support.awk | 11 ++++-------
-+ 5 files changed, 39 insertions(+), 24 deletions(-)
-+
-+diff --git a/linux_kernel/Kbuild.autogen b/linux_kernel/Kbuild.autogen
-+index e5052406d..da6d5d05a 100644
-+--- a/linux_kernel/Kbuild.autogen
-++++ b/linux_kernel/Kbuild.autogen
-+@@ -3,6 +3,17 @@
-+ 
-+ # Generic support files
-+ 
-++# Use the target kernel configuration not the build host architecture
-++ifdef CONFIG_X86_64
-++lc_target_arch := x86_64
-++else ifdef CONFIG_ARM
-++lc_target_arch := arm
-++else ifdef CONFIG_ARM64
-++lc_target_arch := aarch64
-++else
-++lc_target_arch := generic
-++endif
-++
-+ clean-files := $(obj)/lc_memory_support.h $(obj)/lc_hash.h
-+ 
-+ $(obj)/posix_support.o: $(obj)/lc_memory_support.h
-+@@ -10,16 +21,19 @@ $(obj)/posix_support.o: $(obj)/lc_memory_support.h
-+ targets += lc_memory_support.h
-+ 
-+ quiet_cmd_build_lc_memory_support = GEN     $@
-+-      cmd_build_lc_memory_support = awk -f $(src)/lc_memory_support.awk $< > $@
-+-$(obj)/lc_memory_support.h: $(src)/../internal/api/lc_memory_support.h.in FORCE
-++      cmd_build_lc_memory_support = awk -v target_arch=$(lc_target_arch) \
-++	-f $(src)/lc_memory_support.awk $< > $@
-++$(obj)/lc_memory_support.h: $(src)/../internal/api/lc_memory_support.h.in \
-++			  $(src)/lc_memory_support.awk FORCE
-+ 	$(call if_changed,build_lc_memory_support)
-+ 
-+ $(obj)/leancrypto_kernel.o: $(obj)/lc_hash.h
-+ targets += lc_hash.h
-+ 
-+ quiet_cmd_build_lc_hash = GEN     $@
-+-      cmd_build_lc_hash = awk -f $(src)/lc_hash.h.awk $< > $@
-+-$(obj)/lc_hash.h: $(src)/../hash/api/lc_hash.h.in FORCE
-++      cmd_build_lc_hash = awk -v target_arch=$(lc_target_arch) \
-++	-f $(src)/lc_hash.h.awk $< > $@
-++$(obj)/lc_hash.h: $(src)/../hash/api/lc_hash.h.in $(src)/lc_hash.h.awk FORCE
-+ 	$(call if_changed,build_lc_hash)
-+ 
-+ 
-+@@ -103,8 +117,10 @@ clean-files += $(obj)/lc_ascon_hash.h
-+ 
-+ 
-+ quiet_cmd_build_lc_ascon_hash = GEN     $@
-+-      cmd_build_lc_ascon_hash = awk -f $(src)/lc_ascon_hash.awk $< > $@
-+-$(obj)/lc_ascon_hash.h: $(src)/../hash/api/lc_ascon_hash.h.in FORCE
-++      cmd_build_lc_ascon_hash = awk -v target_arch=$(lc_target_arch) \
-++	-f $(src)/lc_ascon_hash.awk $< > $@
-++$(obj)/lc_ascon_hash.h: $(src)/../hash/api/lc_ascon_hash.h.in \
-++		      $(src)/lc_ascon_hash.awk FORCE
-+ 	$(call if_changed,build_lc_ascon_hash)
-+ 
-+ 
-+diff --git a/linux_kernel/README.md b/linux_kernel/README.md
-+index 45ae377cc..17ff76b16 100644
-+--- a/linux_kernel/README.md
-++++ b/linux_kernel/README.md
-+@@ -21,6 +21,14 @@ directory `linux_kernel`:
-+ 
-+ 2. the leancrypto library is provided with `leancrypto.ko`
-+ 
-++For cross-compilation set `KDIR` to the configured and prepared target kernel
-++build directory and pass the kernel architecture and compiler prefix:
-++
-++```sh
-++make KDIR=/path/to/target/kernel/build ARCH=arm64 \
-++	CROSS_COMPILE=aarch64-linux-gnu-
-++```
-++
-+ ## Build in Tree
-+ 
-+ When the use of leancrypto as a kernel module is insufficient, e.g. when its
-+diff --git a/linux_kernel/lc_ascon_hash.awk b/linux_kernel/lc_ascon_hash.awk
-+index e1fed4cf6..e3c048511 100644
-+--- a/linux_kernel/lc_ascon_hash.awk
-++++ b/linux_kernel/lc_ascon_hash.awk
-+@@ -1,9 +1,6 @@
-+-# Set the Ascon memory size
-+-BEGIN {
-+-	"uname -m" | getline host
-+-}
-++# Set the Ascon memory size for target_arch
-+ {
-+-	if (host=="x86_64") {
-++	if (target_arch=="x86_64") {
-+ 		gsub("mesondefine LC_DEF_ASCON_AVX512", "define LC_DEF_ASCON_AVX512", $0) ;
-+ 	} else {
-+ 		gsub("mesondefine LC_DEF_ASCON_AVX512", "undef LC_DEF_ASCON_AVX512", $0) ;
-+diff --git a/linux_kernel/lc_hash.h.awk b/linux_kernel/lc_hash.h.awk
-+index d26e36304..0a83bade2 100644
-+--- a/linux_kernel/lc_hash.h.awk
-++++ b/linux_kernel/lc_hash.h.awk
-+@@ -1,9 +1,6 @@
-+-# Set the hash alignment value
-+-BEGIN {
-+-	"uname -m" | getline host
-+-}
-++# Set the hash alignment value for target_arch
-+ {
-+-	if (host=="x86_64") {
-++	if (target_arch=="x86_64") {
-+ 		# This value has to be limited to 32 as otherwise the hash
-+ 		# algorithms fail to register since their state is larger than
-+ 		# HASH_MAX_DESCSIZE - this is an arbitrary defined value in
-+@@ -14,7 +11,7 @@ BEGIN {
-+ 		# implementation as it requires an alignment of the buffer to
-+ 		# 512 bits.
-+ 		gsub("@hash_common_alignment@", "32", $0) ;
-+-	} else if (host=="arm") {
-++	} else if (target_arch=="arm") {
-+ 		gsub("@hash_common_alignment@", "32", $0) ;
-+ 	} else {
-+ 		gsub("@hash_common_alignment@", "8", $0) ;
-+diff --git a/linux_kernel/lc_memory_support.awk b/linux_kernel/lc_memory_support.awk
-+index b3480a7e2..4b346a742 100644
-+--- a/linux_kernel/lc_memory_support.awk
-++++ b/linux_kernel/lc_memory_support.awk
-+@@ -1,17 +1,14 @@
-+-# Set the XOR alignment value
-+-BEGIN {
-+-	"uname -m" | getline host
-+-}
-++# Set the XOR alignment value for target_arch
-+ {
-+-	if (host=="x86_64") {
-++	if (target_arch=="x86_64") {
-+ 		gsub("mesondefine LC_DEF_HOST_X86_64", "define LC_DEF_HOST_X86_64", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_ARM32_NEON", "undef LC_DEF_HOST_ARM32_NEON", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_AARCH64", "undef LC_DEF_HOST_AARCH64", $0) ;
-+-	} else if (host=="arm") {
-++	} else if (target_arch=="arm") {
-+ 		gsub("mesondefine LC_DEF_HOST_X86_64", "undef LC_DEF_HOST_X86_64", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_ARM32_NEON", "define LC_DEF_HOST_ARM32_NEON", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_AARCH64", "undef LC_DEF_HOST_AARCH64", $0) ;
-+-	} else if (host=="aarch64") {
-++	} else if (target_arch=="aarch64") {
-+ 		gsub("mesondefine LC_DEF_HOST_X86_64", "undef LC_DEF_HOST_X86_64", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_ARM32_NEON", "undef LC_DEF_HOST_ARM32_NEON", $0) ;
-+ 		gsub("mesondefine LC_DEF_HOST_AARCH64", "define LC_DEF_HOST_AARCH64", $0) ;
-diff --git a/meta-oe/recipes-crypto/leancrypto/leancrypto-module_1.9.1.bb b/meta-oe/recipes-crypto/leancrypto/leancrypto-module_1.9.1.bb
-new file mode 100644
-index 0000000000..ea74347792
---- /dev/null
-+++ b/meta-oe/recipes-crypto/leancrypto/leancrypto-module_1.9.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Leancrypto Linux kernel module"
-+DESCRIPTION = "Standalone Linux kernel module providing PQC-resistant algorithms"
-+
-+require leancrypto.inc
-+
-+SRC_URI += "file://0001-linux_kernel-use-target-architecture-for-generated-headers.patch"
-+
-+inherit module
-+
-+B = "${S}/linux_kernel"
-+
-+MAKE_TARGETS = "modules"
-+# Also apply when a custom Kbuild.config is supplied
-+EXTRA_OEMAKE += "KDIR=${STAGING_KERNEL_DIR} \
-+                 CONFIG_LEANCRYPTO=m \
-+                 CONFIG_LEANCRYPTO_TEST_MODULES=n \
-+"
-+
-+# Supply Kbuild.config to SRC_URI in a bbappend to select algorithms
-+# Otherwise retain upstream settings
-+do_configure() {
-+    if [ -f ${UNPACKDIR}/Kbuild.config ]; then
-+        install -m 0644 ${UNPACKDIR}/Kbuild.config ${B}/Kbuild.config
-+    fi
-+}
-diff --git a/meta-oe/recipes-crypto/leancrypto/leancrypto.inc b/meta-oe/recipes-crypto/leancrypto/leancrypto.inc
-new file mode 100644
-index 0000000000..fdccdb5a77
---- /dev/null
-+++ b/meta-oe/recipes-crypto/leancrypto/leancrypto.inc
-@@ -0,0 +1,10 @@
-+HOMEPAGE = "https://leancrypto.org"
-+LICENSE = "BSD-3-Clause OR GPL-2.0-only"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE;md5=581f53c96a634ae7f241516370a8f1ee \
-+    file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \
-+    file://LICENSE.gplv2;md5=eb723b61539feef013de476e68b5c50a \
-+"
-+
-+SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV}"
-+SRCREV = "65eb4e7e84e3a5499460a66b1623ccf6c59628b1"
-diff --git a/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb b/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-index 083b70fe8c..43d4b13655 100644
---- a/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-+++ b/meta-oe/recipes-crypto/leancrypto/leancrypto_1.9.1.bb
-@@ -3,19 +3,13 @@ DESCRIPTION = "leancrypto is a cryptographic library that exclusively contains \
- PQC-resistant cryptographic algorithms. It is lean, has minimal dependencies, \
- supports stack-only operation and provides optimized implementations for \
- ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (Sphincs+) and many more"
--HOMEPAGE = "https://leancrypto.org"
--LICENSE = "BSD-3-Clause OR GPL-2.0-only"
--LIC_FILES_CHKSUM = " \
--    file://LICENSE;md5=581f53c96a634ae7f241516370a8f1ee \
--    file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \
--    file://LICENSE.gplv2;md5=eb723b61539feef013de476e68b5c50a \
--    "
- SECTION = "libs"
--SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
--           file://leancrypto-tests.sh \
--           file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
--           "
--SRCREV = "65eb4e7e84e3a5499460a66b1623ccf6c59628b1"
-+
-+require leancrypto.inc
-+
-+SRC_URI += "file://leancrypto-tests.sh \
-+            file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
-+"
- 
- inherit pkgconfig meson
- 
++inherit pypi python_setuptools_build_meta
 -- 
-2.53.0
+2.47.3
 
