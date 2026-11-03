@@ -1,60 +1,60 @@
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4297.1793738742746063352
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4299.1793738745052730704
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 12:45:42 -0800
+ Tue, 03 Nov 2026 12:45:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Wc3djaXR;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-14394530ec6so67081c88.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 12:45:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=vZ8hLk6O;
+ spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1a8cc11ac42so85502c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 12:45:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793738742; x=1794343542; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793738744; x=1794343544; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hfr32258dotONBRNlTmIXHTOhD3+sLwgUUs/9UId8z0=;
-        b=Wc3djaXR2XMxg9qmsSfAMKB5IWuQ9Hd8WUWj+LLQ/e+xbkXW4c42OUmmelI+qQP1He
-         M9n7qn2lV+gUrGHpJBPReuOKgyHP8Fc2KlqqqKaFb12bH20lpMWLM77A59DaCS32mWTt
-         o50431TIbMojEw3Fic1Hg/L4flg1eiz8rOiau1W0dgOqq436FsiAXjbeODaLRCCnnoPB
-         2xnRvHSWCtx3fAAVziGlTR1IFxW5sQIj7FLzJPxNOmLf4isMiGqvrnEXXS/jyQlblesV
-         XSbmiF2bx267YI/WFdP/Uv0bHiQ9HqVcri69c0cw9PGIdy/24DWCZQjWw074m6iAfJVQ
-         exNg==
+        bh=pABe/P+6oA6Tpz3CFOHmULoRAMUi3RZlq/7wnGVwSXk=;
+        b=vZ8hLk6OfSB0VwinaN6JcdZYYk9EXl6c2MamlKwHKTm0LSgEhzBXZuLHQiaPegRuQL
+         +eYIF0BJdcK05n+dPyuVA93Y7JCC7UjRtl5GMwCVjOruPYgkeZhOexMrXbWE6cBxuAsq
+         5iOfD98MUVAm7yTqVjACuxIVi8M/LL8iTxvA+qP7rxWs3uIkHWG5gfXHqEG5LoDK58zZ
+         6ap2vY5oqaObLNNpI7hzpaZft1RMJM0/P1oGnf4ls1fZAsmsFPKj7ltIeppRyI0CKM3G
+         TWlJ51TXu8InoQAVcBHyh2JyODHCzdKcXcBCOilyU41z4zymRg0GzoRSfhHK2OW3wSJu
+         gTUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793738742; x=1794343542;
+        d=1e100.net; s=20260707; t=1793738744; x=1794343544;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hfr32258dotONBRNlTmIXHTOhD3+sLwgUUs/9UId8z0=;
-        b=CdSw3kc3hzpPAHDGOvxBth79asZ+mHmk9JEiwFNA2+O7yvj9lBJaH6j2mbE56NZ4rC
-         bE54RpL/iY60z0h8z18jaXUNEl+A8AxW3+/mpNCQd0wBod/KQ6G3aEhgGwvhEfmMvGQF
-         1GzgdUc7U7PhtfxqjMHo5Fgen0K6NEwkjhJwescEga0kpL7NjKgkDwH4YpsWI6JSrbm7
-         K3XQua6duwGiKa34uZ+Gu2jbXnOQcO7eA6kIZPdSaObJIiLGHgLn7a6fcY7ldyzIFYId
-         0RopOpDFm3eUpXNHK9XvCOwvDq5d0MBpJKkrYROSv0W/4lFOYLGWinEcNHWqoIBHRJ7c
-         lbQA==
-X-Gm-Message-State: APuU4Z8ClPewz4i9Novhp+inwENd1ayVGGwKWB1UjmW+iW23PWsLclW8
-	BrfAFInI2HnL3Zl2Puhy8R59HgOJV38/e1hU4SVnetg9XzbnSN0jTWE/vrSjBA==
-X-Gm-Gg: AYBFou23XGAjfOKHZhCH7IPMWPAYBapLZCdMCvGlsfXt+Zvg9ta1iuquv6SXqEXz73l
-	+Ks7yuKYU406bJz46tzfm/yBIKR8Oj+Lm0kDVztrbhdZPoxD4cQnOStjKt/gQi86JzCCotUOzOh
-	K2kRgjcDrbcVsxdI+twN6APkIn7b67ljF7qpCRDdMFfgsXhmjr4wS/IGwpZz3j5WktPR9WnH7eV
-	BrzMFIt3FYUFpYVnm2v93HxiV2t8v2qZ/1cYw2AGJ66wh9j+G+0RK7t0+2XKhwajjExVcNeoSJE
-	A2nrzB5tIkDfoR/sO1nnl+mle+OOZpRhjoU8Djhw1/8xk9hdoJjNKfJ9CUmj3dHi05FxrLJVGY+
-	3Im5TlQXwg4Xdn9sN5JUilzE9Eh2tUq3FVapUSNZYONCi3HfXZjGpQY6/QtSnMmMeNZKb31a6nc
-	SKRV/Hw9hFVzTKKz6Q3NC2G0khA7Pl1vYwtbu3YiKfvL5RzLx/8cFv7oNuwzY9wB1TCZ/m8Aaii
-	K6J72GjA5ktXUVcvIX1CajVwagX518qaJmUzNzGrDt3kPlZSlueg4KRp7VNbJXXdm+y7PgVGfqD
-	L93Mwx0q6yn/LrNWRP6JegFqYlYmz+B1ikDiZ9Q2JevjktGZnFJ7OXWOR0+DbQ==
-X-Received: by 2002:a05:7022:f908:b0:14c:d84c:7182 with SMTP id a92af1059eb24-1ac5da75597mr18790731c88.22.1793738741997;
-        Tue, 03 Nov 2026 12:45:41 -0800 (PST)
+        bh=pABe/P+6oA6Tpz3CFOHmULoRAMUi3RZlq/7wnGVwSXk=;
+        b=v9adjyEREDIL+vTxPSfmP9MVR3cCB5mVpQABbBqeIrH4ZdVKkaEFoZpQf1BcpujKLV
+         inYPcYtr0qChUXTlxIO7NnbAK9pRCFb8vhM68AI1qSTHkIxWsjSfaffIehpP0YLpVOhP
+         yCW9sbVsPGAVEe1UbzdMca8MI6bo4y170QlJxIHLdIe2oJj/FK9+uYaejZJNS7GrM5pL
+         2W0CX4pHQyLWFnjIFP3S227ehQVne2EgsebPZYg3BrfCqFT+BGuRMb6U9TwIwTe0ZUS5
+         o5EMEx3ipzjjxKFuAH4i7moyRRXi8Ft+Cg51M9Ueu80enVCEdP7P4DikhjIUzGud+ieF
+         BU1w==
+X-Gm-Message-State: APuU4Z+wO7M0/t8npprMMazylw2ABRvjwNAseVh3RM5rRzceQe1xuIfV
+	Idz3J23rNovfXQzqLbBdPwY3gK+xvMJEkUfWFIGDDYqt3wSZDtL/lZ/RrX+73g==
+X-Gm-Gg: AYBFou1W+HkFuonS/uFnYGpuj6s4zlgV1hzlgm83gS8aQO5gId5GKCKSHlCxOdmIKY8
+	8ouT6W7J5H8zCGxRckc9g+b+5lajqPagL5E41HjZ3OR+Y2c9g/YhfNzXeCTGMNVdrCOvG8M5uo2
+	RdZTxAW4GtU48frQlg1DZN17n093H0Jc98n71DWQa4XJtYE81EuIuNiIDG11nXWAFhJzJoMadHR
+	wu8ftOOlh/z0n11ANCBc2sXjcaEKPD9dW/fbceBjc5dIGk7ZJrbSl5yjLjPlDLwgh+N6UxzTR9X
+	W7QhfP4I0ZWmBJaH/WKtSV98rQG2SCqQeEFnGI7/XlSalX2FuFIifdbv2oCBODNguTh9PWODWsc
+	qE3nRE/7v1DSGDJ7E5O0qQR1oatutsztw50wra7GJr1b5NaeT8Nh52d7cSlb+EBwL6Zd211fSp1
+	YqrXwj5s8B0+GfIGX74F8X9SOH/aEbQhBedPDS1SQplAC7JLemH9FdpW6fOl+jbyivWYlO0Vp8z
+	XUlayOVEawJf6LuEUrcPuF7NiTz0aixGO+OI0VL97MmCKzvjdsYDPz5KWf2l622BBihGLK3RLbC
+	mLMGADID8SjifimfcXZlWk0u1PihK3FXKXUbPI8GlD5MLLxn8/DVftQvzerB9Q==
+X-Received: by 2002:a05:7022:1187:b0:168:6ad8:e89f with SMTP id a92af1059eb24-1ae5ea2cf95mr16081519c88.3.1793738744153;
+        Tue, 03 Nov 2026 12:45:44 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c47076sm1104555c88.16.2026.11.03.12.45.40
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c47076sm1104555c88.16.2026.11.03.12.45.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 12:45:41 -0800 (PST)
+        Tue, 03 Nov 2026 12:45:43 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 3/5] jsoncons: upgrade 1.9.0 -> 1.10.0
-Date: Wed,  4 Nov 2026 09:45:26 +1300
-Message-ID: <20261103204529.1094356-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 4/5] libinih: upgrade 62 -> 63
+Date: Wed,  4 Nov 2026 09:45:27 +1300
+Message-ID: <20261103204529.1094356-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261103204529.1094356-1-ankur.tyagi85@gmail.com>
 References: <20261103204529.1094356-1-ankur.tyagi85@gmail.com>
@@ -62,33 +62,32 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 20:45:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131827
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131828
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/danielaparker/jsoncons/releases/tag/v1.10.0
+https://github.com/benhoyt/inih/releases/tag/r63
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../jsoncons/{jsoncons_1.9.0.bb => jsoncons_1.10.0.bb}          | 2 +-
+ meta-oe/recipes-support/inih/{libinih_62.bb => libinih_63.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/jsoncons/{jsoncons_1.9.0.bb => jsoncons_1.10.0.bb} (89%)
+ rename meta-oe/recipes-support/inih/{libinih_62.bb => libinih_63.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/jsoncons/jsoncons_1.9.0.bb b/meta-oe/recipes-support/jsoncons/jsoncons_1.10.0.bb
-similarity index 89%
-rename from meta-oe/recipes-support/jsoncons/jsoncons_1.9.0.bb
-rename to meta-oe/recipes-support/jsoncons/jsoncons_1.10.0.bb
-index fdbce38e01..f269e8d452 100644
---- a/meta-oe/recipes-support/jsoncons/jsoncons_1.9.0.bb
-+++ b/meta-oe/recipes-support/jsoncons/jsoncons_1.10.0.bb
-@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=6ee7f7ed2001e4cde4679fdb8926f820"
+diff --git a/meta-oe/recipes-support/inih/libinih_62.bb b/meta-oe/recipes-support/inih/libinih_63.bb
+similarity index 88%
+rename from meta-oe/recipes-support/inih/libinih_62.bb
+rename to meta-oe/recipes-support/inih/libinih_63.bb
+index 2ec64c7e69..78ed12ab51 100644
+--- a/meta-oe/recipes-support/inih/libinih_62.bb
++++ b/meta-oe/recipes-support/inih/libinih_63.bb
+@@ -8,6 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a7a95d2af90376e85a05318794e6f202"
  
- SRC_URI = "git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;tag=v${PV}"
--SRCREV = "bcb44594c50c495ee1e690602cdd71455942ad0e"
-+SRCREV = "9e57e421285422d7aeeb5aa7dc839f6a19121ee6"
+ SRC_URI = "git://github.com/benhoyt/inih.git;protocol=https;branch=master"
  
+-SRCREV = "26254ee9de7681f8825433415443e7116ff24b98"
++SRCREV = "611ab51f8dd7ec583543815b0de693495045fbf8"
  
- inherit cmake
+ inherit meson pkgconfig
