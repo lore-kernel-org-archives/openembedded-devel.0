@@ -1,60 +1,60 @@
-Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1466.1793731016471153906
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1467.1793731018361384769
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 10:36:56 -0800
+ Tue, 03 Nov 2026 10:36:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=cQIOHbTY;
- spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-1aefd1bf74aso1029896c88.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:36:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mqbd4Jeq;
+ spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-3550c917fd3so6197840eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:36:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793731016; x=1794335816; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793731018; x=1794335818; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yX/GL1WBOGOsmMKMZNRADq8Bk7rActxgTRLdRQelBz4=;
-        b=cQIOHbTY5Hf0dcX/XnQaaPWcJ3emeimVcWjv3KmC3ytwmQE5eoQXiaD6/U3D+jR3z9
-         FPWseJs21fWiggd0wmrKjWs+0az3avG+FFvFIdeLaOHfEDRQdZB0uOeLGAtaIMJrHUwy
-         t8rDniWIGlaC00V/X9X/Yw//3mYPa5z+u4e4nBBJTJ+zBS5BQyWyqaw7Z4cp8MZIy2dP
-         kYajjoHvb33549AJMWrEqwCXPlG+q09mBBWC1TjwDLlR/x/y3BLRO47JTp656qgQKA8I
-         OSnBLu40bbOdIOwNKKVYRbdyxVeJ4WSEkbm6s9lUbfAX1RhTsYFQqiLlxKumijf9xVG4
-         snVQ==
+        bh=lS8UdBoNilMZ4KQVMGCCZW5EiVhEUS7SbEpTjGioFZ8=;
+        b=mqbd4JeqjIMLOoi7X5X46mXDnDMa5iRdkA83M9hNFIkcfxi7aVF75KsXvjhJ2gAznv
+         05SRqyX8ArAGVmNWbY3pD7PYd6m/kkYTousr8NTTrLx64aA6U7TBs7NJd3KuZxKiDEuX
+         Z/LPUDd/5+cdo1xEdSh/AirqqpE6lr9aCbJv2MY07VONikU8mXyCU5yFayjon2IrQ96f
+         unSf4fQDQ0N4vypncP8aq231q1meeyFH0AC7aR0UtwLve/74kucYXZ28wAXJ0tQ9LBMM
+         J9jUX/h7xmCc6+OWeXrqlNrj84ywMYyvsMpwvMLuZiomF1enUmyM3WvCc37GxdGEElFT
+         ZGCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793731016; x=1794335816;
+        d=1e100.net; s=20260707; t=1793731018; x=1794335818;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=yX/GL1WBOGOsmMKMZNRADq8Bk7rActxgTRLdRQelBz4=;
-        b=CJr+Ii3yQd2O0sdgoGpkz2Jn0Bjuewsb0pfLB+212kGpDv3RQWx5OH8tPjB6R01/8g
-         7vDuR/BTjX7+4y9Wdech8L6HLE3qr5wVN21IJXBlRXS6ZztWFLGnZFP1wLWUwxcuMFHg
-         rvjab0S9UqepjXNknkFLsjC+isFy//BSVcHn7IqUCri9DwMuWcZ5RFY3at5LPP1spxhh
-         syBnCX8JqusQ16oJjmQKnExQ+GCKcs6r9YZunbiBTkuv7ZxW1EpPHF9kLcXAOfd8IenB
-         fz/3Y7NM6f+dG1YDC1P3ugeCdLqIfr8YEgYUF4mXGDwFiUoDVfPzpohjBB5UcbjALTqX
-         Smww==
-X-Gm-Message-State: APuU4Z99FnTef1Bh6BA6Gbe9vSqRWTFd2Qp2ge0QymSZ+Rjfwg+OEnem
-	78qL0Ln1cKrjwvoapem65nDk5MSdIEj2Tvfz/dOlfDc0Bxc4F+9GjqLHBWRB0g==
-X-Gm-Gg: AYBFou1VLOxlQrqaHjl+ecD/sA1Tth+MNddKWbYOeZuZQzD5/hUsVMmTwLb+ASWAYap
-	3AeJpigxboCP6Lp7EpLz++vU95ej6X7JJ9AmhDrnF8/I9pXnXCy28pmt18Qa48XjKceDHJjySqS
-	SoBlDhfgdU2VONhnTHO+M0CWVuERmRXqX58Gv8FJMMqIN7cWdHl1Uh167t3/oK6FqhTrhRKZbvY
-	y4qdkjEMylegwKJGtiGd2oXVUc/eXa4W2gAKjspeQMoycFFEeilJTi4evk+iYLw2bOvcIRmIy/I
-	1tw73BQzpDWaCeqNTTmGR3E4jlnYzyzgPxedFVy6NWB2DWoMi4vQDV+iWLYrUkiBwr8sQrjnCqR
-	v4n1F85B30OYo7KhW4ip2x+/GQUaYzMJTRchyvFRJ6nF/kW8GO9O3mtii6veLlhTUif3y7UL3le
-	rUbqItpSEys9Jmk6klpnPxJNscDJAOwHMSrWVMlG5PqhTXzXXJZ/O1bbdQSQM3FzG1W6V65dhUg
-	u1V1QL3EVLk1J90aS6CPAsZI/kIUcHa0VjNhkyeRclk5JUL1zk054aP7NW9P8qZmhvg60xn0qLu
-	AhESCKXSL1ScbfjpOqSU9vIyJgN9nPkVqV9yQZvPESkpWc6ylYvX0+atRngo1g==
-X-Received: by 2002:a05:7022:294:20b0:1a9:4d51:8c33 with SMTP id a92af1059eb24-1ac5bda4837mr18953978c88.18.1793731015675;
-        Tue, 03 Nov 2026 10:36:55 -0800 (PST)
+        bh=lS8UdBoNilMZ4KQVMGCCZW5EiVhEUS7SbEpTjGioFZ8=;
+        b=HLnYKgwfQFK6CbuzIZHnzJTVkZOGV82G7dIAhaTytxHYu7dkhvThSjQcrhBBH25rYh
+         WoJ3XkO7eP3S5ro2+8u5DZAF9Wedc17tapnT7czgEB4a7nmaXgAzakHjVRNLLvULUBxp
+         +Jn4fxNAji95Jaf8ijbX6AbrnVYfwjnFpeLKI+I0ncjSz9TBlXqzYdorYxxpFhdIsBhn
+         m/Cz4svhLxGIzi4gRnQoNluulfJyN+UuwpsJkXFooarYvNro0mA2BpQg3dih6FEE/XwW
+         sczBAed9vsLDn46e4OnAHz5GNPXr+MMCcbFGL4vz6J4HCZ2XY3ur580pakuGHuppXPXy
+         gX8g==
+X-Gm-Message-State: APuU4Z9915AMyM9UKTQxe6J02ixLkgMfA19TkblodnH+CUqigTRT6rV/
+	4SuX1UuH6/g095izVAirszHhvZLUZfTZLj+0rs3W9Dw4km3is/Y8gtMorCXYtA==
+X-Gm-Gg: AYBFou0VeWEfbm3AiD0Db6OaMptBYG9xdmRw4althINWOjlGx0hJ0hhngDLh6dN6zXV
+	UG9HD29O45+geospaLPCjwTQPmpkBbmvHqMWPnvSraXVOvFwdodyFkHM8++wHq8RYZJXkxa9NwD
+	9R2M42pl3+5ZlElpblQ3TWCqGMXKF9WR14a8preyEd6ysQkAtHaNHfsWIG2cL2hNIgRotC8HiwC
+	dHKLXz1oPIL+itaUET5HYrwQk5FMlediAPGlLag9UpeI1LKKKzU0RMvvqgQB0ZmjgnGJnaiXlJb
+	daxEIFXAWyiYTIFYa/HOorq++T/cdapFGkzuFmCa/CmMWcDewGfl4Q31JETfM7ABlO15z/iHiUq
+	5ehs0qbGeMZZUuGVMBTNCRGHtFdEcPeIdZfFfqszgla/4QLcEe8ps3QNwRUJanSh5nqp6HuOXe+
+	BshFbIHJ9R3rMD4SxCacI5urMwxnzUlah88ygfiwq2O+1K6b/CCIMEr6+QgYRkxgVdmAWBb4+rt
+	rltzxDpSYB8ykJzTPOAiwdSA7sY3xx3TbYe0VpHhFiOG4iAfQcRxo6Jo9Zk6c+C5jLtgQtGVxB8
+	ZjKzPldobULy0J331Ckgs6K44TvLG/Gby6jfxjlze0pY9zyHigNFrhPC4lc3qA==
+X-Received: by 2002:a05:701b:4194:20b0:136:b50c:c0e9 with SMTP id a92af1059eb24-1ac5ae39645mr21057757c88.21.1793731017655;
+        Tue, 03 Nov 2026 10:36:57 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4f83fsm1192887c88.17.2026.11.03.10.36.54
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4f83fsm1192887c88.17.2026.11.03.10.36.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 10:36:55 -0800 (PST)
+        Tue, 03 Nov 2026 10:36:57 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 5/20] weechat: upgrade 4.10.1 -> 4.10.2
-Date: Wed,  4 Nov 2026 07:36:25 +1300
-Message-ID: <20261103183640.919438-5-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 6/20] nghttp3: upgrade 1.18.0 -> 1.19.0
+Date: Wed,  4 Nov 2026 07:36:26 +1300
+Message-ID: <20261103183640.919438-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
 References: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
@@ -62,33 +62,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 18:37:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131803
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131804
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/weechat/weechat/releases/tag/v4.10.2
+https://github.com/ngtcp2/nghttp3/releases/tag/v1.19.0
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../weechat/{weechat_4.10.1.bb => weechat_4.10.2.bb}            | 2 +-
+ .../nghttp3/{nghttp3_1.18.0.bb => nghttp3_1.19.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-irc/weechat/{weechat_4.10.1.bb => weechat_4.10.2.bb} (95%)
+ rename meta-networking/recipes-protocols/nghttp3/{nghttp3_1.18.0.bb => nghttp3_1.19.0.bb} (93%)
 
-diff --git a/meta-networking/recipes-irc/weechat/weechat_4.10.1.bb b/meta-networking/recipes-irc/weechat/weechat_4.10.2.bb
-similarity index 95%
-rename from meta-networking/recipes-irc/weechat/weechat_4.10.1.bb
-rename to meta-networking/recipes-irc/weechat/weechat_4.10.2.bb
-index 00030452dc..01565119e4 100644
---- a/meta-networking/recipes-irc/weechat/weechat_4.10.1.bb
-+++ b/meta-networking/recipes-irc/weechat/weechat_4.10.2.bb
-@@ -8,7 +8,7 @@ DEPENDS = "zlib libgcrypt gnutls curl aspell zstd cjson gettext-native"
+diff --git a/meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb b/meta-networking/recipes-protocols/nghttp3/nghttp3_1.19.0.bb
+similarity index 93%
+rename from meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb
+rename to meta-networking/recipes-protocols/nghttp3/nghttp3_1.19.0.bb
+index a0d1b97d93..e39a05a755 100644
+--- a/meta-networking/recipes-protocols/nghttp3/nghttp3_1.18.0.bb
++++ b/meta-networking/recipes-protocols/nghttp3/nghttp3_1.19.0.bb
+@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/ngtcp2/nghttp3;protocol=https;branch=main;tag=v${PV}
+            git://github.com/ngtcp2/sfparse;protocol=https;branch=main;name=sfparse;subdir=${S}/lib/sfparse \
+ "
  
- SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz"
- 
--SRC_URI[sha256sum] = "b8744c6f5dc5543062791f563e0516dbc96a36161e1a03c468b3b7dcc8be5aff"
-+SRC_URI[sha256sum] = "6fcd05f350c808a4206d6951af36a9eec11b145b6a1a2a8a2b29dd3502e07022"
- 
- inherit cmake pkgconfig python3targetconfig
+-SRCREV_nghttp3 = "dbfc24286138cb0b6490160e7ca87fe1ce6722a0"
++SRCREV_nghttp3 = "dc83309ca5fd2beb91cc5c030a2d30525e9f2a00"
+ SRCREV_munit = "11e8e3466b2d6a8bdfd4b05a3d1ee7805c5d3442"
+ SRCREV_sfparse = "4b313cfd2e1b389ae632b36dcd50402307289af2"
  
