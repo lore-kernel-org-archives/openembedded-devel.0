@@ -1,130 +1,91 @@
-Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1489.1793731046690954400
+Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4249.1793738637896750307
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 10:37:26 -0800
+ Tue, 03 Nov 2026 12:43:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=TxIYPGXm;
- spf=pass (domain: gmail.com, ip: 74.125.82.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-33bf40b0c8bso4981765eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:37:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=R2nTp/VC;
+ spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-15ea896ddc8so109717c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 12:43:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793731046; x=1794335846; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6CQMGDBBUx9y1Hw9WcmVXq9pFRko7pyUGxZKghOYO9Y=;
-        b=TxIYPGXmT3ukx/OgwphG2VvsJDfhuNH4mIvI1kPnEyyAdqEiH0b60NVb47gmcSJQdO
-         TCLiM8sqf9kYfUfvweFPwL1f8D3mc+WWvxAKSWE8768qXfxG8vfm3QCUaBUAzcdz517i
-         hL/siBjgs0ZD7aoPTLEbBAVI3dpXgGvDmKqCYqtGd+k0GIYBLt4tHZKmyUf70pOdw26v
-         Nta8pfqI0QJ+OTKLaph+ZeoEPN5ROi5NcDLwEM4pi8mo1+Fxut71yT5g6saQ2i3t7i5r
-         Ar2ruvFsX0xPLjyG6kecwLjlDUhGjXfkDuHOk38px2vjHsCfbUpo5TqYglYC2WfHx6yo
-         1j2Q==
+        d=gmail.com; s=20260707; t=1793738637; x=1794343437; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+HLN8dgQEq7wnKeNhSBp/XEaxPG4LZowiBwTJEzuEIY=;
+        b=R2nTp/VCwZtE4UI+w9zXvC2A11lK11w/wfRuC9uCg5nyG372GsA4j4jz/q6SAGmHY7
+         AsI656z8NQM/k7+HHxPmRhbtZYk0rBtbpPQMUWqS9X1efBnx/x0VDVJSGVi5p61w6f6d
+         Gh509yAdJIAsVdwHDHvNWYBvsVxEUvC3RzZHDV2E7B9qxZuCyhJOrRixdkZZJ4WhFJuI
+         ooY3nF5uT6Jl/EmTf/8txKG8nJi3xDmyuDtN8K6/8hXPKCMAClgq3NPaJxWnlmpDYVV3
+         s4AJE4Dxafbx9GtOtH627VPf3meB3ZecryPtpNZ83TPgP36Kj79LmMt4IbV5X66vBuWX
+         PrYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793731046; x=1794335846;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6CQMGDBBUx9y1Hw9WcmVXq9pFRko7pyUGxZKghOYO9Y=;
-        b=evIEa5Sl7cYPE9rsVrytxSnMJA0xWORz9VZFtleFPHBJWrOPGhVG8X1eWOlUydltK4
-         tvuYsTdfr4I7YkBZ1NyrDCdOhi0L41h+dComrBZXYdMAfShvjYgzD2Nyeqye3Sy/gWTZ
-         1LbZ8DVoeyi+3q1z/nAie4Ru5Ng338TwzIGPh9WEWO+uNGWhg4g2B7mbdJFoccxYEn6l
-         EJ1sxmozEk/ka0MmlXe/eyHUE7buxTl+1hgQL9lzZ9pKMp/d0YV4mDpahccci6M4DpCp
-         ErD2AqF8NPK7zwUTNYpPuA7ohUdB1/tBgI4fooyeXIkkNBTOWUH7yrKom7izaZA7pRb9
-         /JqA==
-X-Gm-Message-State: APuU4Z9pZJU6olNyqsWCp3g8HoiwDbjFxhp2xzM4JT9e1R9Fj6sRF2co
-	w6dB0FQLG9jwBMYP9sfu6UiOsU5sbjeOQAXKxb/cKCUppK3O4bdv7ZUp9/i2WQ==
-X-Gm-Gg: AYBFou1r1Jc+xt9dkDPK0fmTJNrKKN9MULs3DS1TgRvsXLk4e60hjebfiWr8bMwNnog
-	L2VABIb+8j0ovlOzx6r3PAoN9izF7DTHfocbqmRTVWwLbkh326fGZCnHunOS93Vw09zfgLxC4Qy
-	ENgyA9TUC5I+D0dX1lO69sipE/gvA8yeMkeXPYSnKNu3Voo6qJB7y3/61fa5HP5T3ycEpJNaLUa
-	cAuzzU1LwewyXVY1IJf+tm1oZJO9IaBRCGjeN1lKmjVTgWe6lmYvyZJ4kdgwOl56ZsUtY211jnX
-	S7i775uiUr/THXih3VPHds3EjGSyxTnLs6help/aOfBlowzvs0AGrJBcdtuJJFMnCL5vzG22H/y
-	Qbj5EkPIo9Pp1PheSgltCcje/SQmxSk54KeiMIWYvKzntDwfmg6zmTPzf55BtxcozNSQpE0+Gan
-	8aKQJQ9TREV+EtlHclJ7MigdV+AgcOku0C+H/OdjBqxdn1LiH4w4o8jSGoL99rlJszU2uvFfkwB
-	wUByc5Yw86dpn4mxw+GfyEO8qdij6ExF+Z3gyvMD+XXskXKC/f8ZPGzUu3eRiUxKd9QZby4wARm
-	azy9K9W8Hb7ZSs9bO5rOve9D38L403SfOAY90b9WPKrmsmjCIWc7EdqWRMB0A6ML
-X-Received: by 2002:a05:701b:4208:10b0:1a3:116:848a with SMTP id a92af1059eb24-1ac5de5424dmr20381128c88.35.1793731045963;
-        Tue, 03 Nov 2026 10:37:25 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793738637; x=1794343437;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+HLN8dgQEq7wnKeNhSBp/XEaxPG4LZowiBwTJEzuEIY=;
+        b=OGYTlFYOscGq+1KCOV9abV7EN/CN6nnrCz21Xx4TfRX9Q8yJOKc1h9Q+08OCsGpINV
+         QEkNSEwszmVrJ0IIv3KcZs/ri9Y+uJdVSXSe54rgrQb/woQiOsxpmivybbVe21TaTdYZ
+         jINg4cOpVJ3B6gnCAzcuaFeGOx9qHYBj7TRCjoDCO9DqV0OjNPtaOhFxBOwnB2icO8uM
+         sf8JcHa3KnEzof2DyHwu8lfcbcvyFRVQp8z+5v5U1j7/xcrBaV4TY5mkBrXJDSkKX8J2
+         qgitgHXQkDZL4nMsKn27VgbwVn5jNkhq68F3r6lsgElC/o8VSO1a7i9EJiAhrglNT1Kg
+         rY9w==
+X-Gm-Message-State: APuU4Z/v1/4/3L1FNQbsou1JnhavrV6PBwRH1PK18zNu+TzmUcxClBUn
+	d7XW243N5GTwNd54s+lHvbL3NVbQOICZ2noB1ze6qF1M+Maa//FaVcs6BrvxUg==
+X-Gm-Gg: AYBFou18WdHAQN0BQtUbcix1YCc4imFu/MNJMZsDO+uZN/562whaqdGHavd2PIv/RmP
+	K+YVVzqJRx8JEnqeM7uqULgV0CAjJtZ9zto0IpPssYbovyIHDZLHSahl8YTA2CHtmYIffDsFZSq
+	qhh/uyo6Bnz+rMMouj2I+/DPUIcgmdnKDjDm+PDc5BODXEvGav8QarP7hzPfYUb0rHjHOItuBc2
+	oCkYYQiboeylZyGO5APVcSUlS5F/svhkjr1XkoHtVZZDe1yeL2nMRvXW6FVW1enuJ66DC9i93SS
+	RNRgmCkTIVa+RzaVEhBZIVyA4rHD51ZJ6uinLVZajrhlm2i11zhBdMquKS3H31m9/z6TWQyWZ9o
+	DbN/RP5w6MD+8HLoB+JcEH8pDyOSVe84VhHazY/f0JO9RlkxpNOucbCCJy1iVGVs9GtgkMgns7b
+	0WtuIzJ79fobcXi1VkY/oxFpbNYuEnDp9QDukWWSxTq9SG4ZgNNACrSGNNgN8jt/70b1BwNciat
+	DJotmn5DTR0xV7eb157tx1KOLstS5+iFN/kxKH2jlUD1UuVebLa7ZoCgk55DDQDmowUKZdGD3Zh
+	ffT/3JYzLiB4tWHskskbwqwXJ4crUSfKmuylrhajpD6I2dL9BLXFO9R+LPg2m0k0
+X-Received: by 2002:a05:7022:b042:10b0:19e:1ad9:1c2 with SMTP id a92af1059eb24-1ac5c92da1amr20901148c88.38.1793738636950;
+        Tue, 03 Nov 2026 12:43:56 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4f83fsm1192887c88.17.2026.11.03.10.37.24
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c6f0dcsm1544834c88.21.2026.11.03.12.43.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 10:37:25 -0800 (PST)
+        Tue, 03 Nov 2026 12:43:56 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 20/20] ndpi: patch CVE-2026-116744
-Date: Wed,  4 Nov 2026 07:36:40 +1300
-Message-ID: <20261103183640.919438-20-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][master-v1][PATCH 1/5] uriparser: upgrade 1.0.2 -> 1.0.3
+Date: Wed,  4 Nov 2026 09:43:46 +1300
+Message-ID: <20261103204350.1092741-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
-References: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 18:37:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131818
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 20:44:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131819
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-116744
+Changelog:
+https://github.com/uriparser/uriparser/blob/uriparser-1.0.3/ChangeLog
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../ntopng/files/CVE-2026-116744.patch        | 33 +++++++++++++++++++
- .../recipes-support/ntopng/ndpi_5.0.bb        |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
+ .../uriparser/{uriparser_1.0.2.bb => uriparser_1.0.3.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/uriparser/{uriparser_1.0.2.bb => uriparser_1.0.3.bb} (91%)
 
-diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch b/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
-new file mode 100644
-index 0000000000..5794963ada
---- /dev/null
-+++ b/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
-@@ -0,0 +1,33 @@
-+From 00706d4da0b7a1f9eff61e5835a0a1cc22c9c7e1 Mon Sep 17 00:00:00 2001
-+From: Ivan Nardi <12729895+IvanNardi@users.noreply.github.com>
-+Date: Mon, 26 Oct 2026 17:35:39 +0100
-+Subject: [PATCH] softEther: fix out-of-bounds read (#3298)
-+
-+Close: #3291
-+
-+Reported by HaiND (Nguyen Dinh Hai), Post and Telecommunication
-+Institute of Technology, github.com/Haind03
-+
-+(cherry picked from commit ca9d819151606377ac53305583fe819748c69be2)
-+
-+CVE: CVE-2026-116744
-+Upstream-Status: Backport [https://github.com/ntop/nDPI/commit/ca9d819151606377ac53305583fe819748c69be2]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/lib/protocols/softether.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/protocols/softether.c b/src/lib/protocols/softether.c
-+index 379e743f7..c6f5d131e 100644
-+--- a/src/lib/protocols/softether.c
-++++ b/src/lib/protocols/softether.c
-+@@ -200,7 +200,8 @@ static int dissect_softether_host_fqdn(struct ndpi_flow_struct *flow,
-+   payload += value_siz;
-+   payload_len -= value_siz;
-+ 
-+-  if(strncmp(val1.value.ptr.value_str, "host_name", value_siz) == 0)
-++  if(val1.value_size > 0 &&
-++     strncmp(val1.value.ptr.value_str, "host_name", value_siz) == 0)
-+     got_hostname = 1;
-+ 
-+   for (; tuple_count > 0; --tuple_count) {
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb b/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-index 6eadf8ba62..80890b1f27 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
- SRCREV = "375f99ef9fb4999d778b57bbeece171b3fa9fba6"
- SRC_URI = "git://github.com/ntop/nDPI.git;branch=5.0-stable;protocol=https;tag=${PV} \
-            file://0001-configure-Stop-embedding-pwd-at-configure-time.patch \
-+           file://CVE-2026-116744.patch \
-           "
+diff --git a/meta-oe/recipes-support/uriparser/uriparser_1.0.2.bb b/meta-oe/recipes-support/uriparser/uriparser_1.0.3.bb
+similarity index 91%
+rename from meta-oe/recipes-support/uriparser/uriparser_1.0.2.bb
+rename to meta-oe/recipes-support/uriparser/uriparser_1.0.3.bb
+index 161073103d..1ef8b15553 100644
+--- a/meta-oe/recipes-support/uriparser/uriparser_1.0.2.bb
++++ b/meta-oe/recipes-support/uriparser/uriparser_1.0.3.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://src/COPYING;md5=fcc5a53146c2401f4b4f6a3bdf3f0168 \
  
- inherit autotools pkgconfig
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${BP}/${BP}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "963554c32d40fb6cba5644f1ba63e6dd7a182b2948bd71ee448c532f53b07f1e"
++SRC_URI[sha256sum] = "b5014a630e61e085787f760c83675a35ef8e719972b05e8f61ff2f48692b15dc"
+ 
+ inherit cmake github-releases ptest
+ 
