@@ -1,59 +1,59 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7977.1793701470806605402
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7978.1793701471921507533
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 02:24:31 -0800
+ Tue, 03 Nov 2026 02:24:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Yj0Fovyc;
- spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a208d93758so42433175e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 02:24:30 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ET7eSOCo;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2167bd087so33401385e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 02:24:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793701469; x=1794306269; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793701470; x=1794306270; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=j6JCtEy9Xgo2Rk6Qjy9P6Gz8A2/LAwCof5QR2KCnFVw=;
-        b=Yj0FovycCpvmqqk03ZYBmzB+DhmSFOKdEQypErkieFgKYqZ8Tiu3oXFBPRBFWhQ6sH
-         egJRe9KfdzIiQoE0/pw65sa66N0a4U8xtTqWSevtaWFxMue7dOT0/4/dgCPZAR9KQjKZ
-         oHp5kExCLlFprwx3Bs5YTuGEuymSFqbZ9qOoc=
+        bh=vBSWh+PFVjg6q7Jag9tQdxu2I4pQQpcpLmFe/321URg=;
+        b=ET7eSOCocgKnlxdxT/z+fprZF1jyLpGD1xlqtlzCeBh5tuf7eQ9Gpa1nVt0NdObZm/
+         wMQs0JT+blNmwehWFKB5bmV9VkDkSZokxnR/a8vFMkOBWweSIpkVATrssoZNSpBS1Yft
+         AoXroMJ0U46kCJBMdTN7D7sM/oWVV1Wv4fKKE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793701469; x=1794306269;
+        d=1e100.net; s=20260707; t=1793701470; x=1794306270;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=j6JCtEy9Xgo2Rk6Qjy9P6Gz8A2/LAwCof5QR2KCnFVw=;
-        b=sZTW5ygYwbj2zjvLx//G9sSthgQgMYjVATPhZqn3+3QjnjotAsB+DYzHoDP8vtPu+J
-         d6rfddPebD0S8ByI33OM75KEoxcQ2v0n3he5jlfvqMlO0uwZDlXIG3wzRoEf2VdHtBqH
-         7pYsHxSmB3VECqjG89XyG26k1tNHffyBuE0nFFMooV+4PimJVKxCNrUd4JII6b0zNp21
-         mexRlRFFQbSKG4hBqVTvSFmLOtSp/5v4rse6g6MLDH/ADiiWGznWyTxTtg4n6UVdu49F
-         C2gDZDYiUXdaAntC7mRMbWHhZ9wdfNo/1H6VXdXiPxBbm7zj8L3V8edN7cMRFwC8/Dug
-         UQkw==
-X-Gm-Message-State: APuU4Z/oyW5Ch8fkRsey83PCeY2/Ix+s2c/gxg5ZYh1vS3R021BidvcO
-	P2txsPwiyT2E729RckrBhqi48Y6CziK2raGUgnUQi4YqeCG3ctZR7pl7/z4I6rUELhOmyzvVe1i
-	VlOj0
-X-Gm-Gg: AYBFou3w37JmfM5oCosWMFXXNbc/0rv4n7dIAvvFyW0S6IgByY9XXV6xgnvOiVfglBK
-	EUKwLKhw6ASqCQzgMegwUrtgjEe/8QiCitYOnJS1WrJlSgLozq0tyQflp0f8z6qv1NY6dVMMxeV
-	U1T+fkEuLQB/9u6UXzQsfHneBvLA8hBs6rertFjoioPaluP+K0X5bWWDbkuB/zBpdRxcZ+bnfS9
-	IPuX+VRB3GtW3nyeUlCr2iQYjFYtht7ymIOzBzpHWfsSSa3WyamKtXAiqFDKLxVn4Ac+0T8DV8v
-	2e7DrxrA0Uqwjm6AtfIfmJ7V2Kqtkv/ins6xhx/fnCOV5yg2ww7PRWR1qLWV1R8U66jrsQNSMVb
-	anvA4PF7OgQ6d5jBRdeLeSDMXJGDoFg4BBmIQwPi7NCJdVTwoQ/6Z2rniPI+goOsMb2LKIT/14r
-	hSRz4yXIFM48tj3aIsImfTH2A0SZL1MUahmoRse2FHAqJsSv4zpMwDlSSJj1bxyl2MzEhFdiD1H
-	/VH1rgp/m6C0/R6O4C9NV+9WINjt57kAOljhFv3+BzKU7U/hymIaxIx3zy8vVFmFSAfwItCN9/M
-	+bZdVm/s2kMg/lWpplwvokI8i47gbjjnNpdAdkLWLZZ5sDmXLxtyyWMN22Lvyqrz/Xh+KTv2/kU
-	bPLdBzeAA7X7bVsssvkNHl15H+trzNKxC5WX7EyLXEK3PdhBzW5Gw5w==
-X-Received: by 2002:a05:600c:1907:b0:4a2:1a:a116 with SMTP id 5b1f17b1804b1-4ac16fa15edmr292424695e9.0.1793701469117;
-        Tue, 03 Nov 2026 02:24:29 -0800 (PST)
+        bh=vBSWh+PFVjg6q7Jag9tQdxu2I4pQQpcpLmFe/321URg=;
+        b=mpSq7ivzbYoSu3p2V7GAa9ke9wVjESKBmVmC2p0e/fd1Sz5iz0mh5O5A6xgbjQP0ow
+         R+gnIIP12WlnzLDFHPGqdtbFHikvC2XRMWANbfaFfRAAXF87gwuhtUEk7brv4S0W2uOr
+         DnuyKw4ff4Be9nRTaaEfBaohnW0GmcX4jFBou7BXIa3mevuLK4EN7+ZiHxIgvncLgoJg
+         LtWH9Bh2f5mm21wKrI+vdPnowsQU/F6ObFDGyndATM5IwP4Ey1TSzsL+ak2VER9//kmw
+         PzQdhCbpLdn/ZNgqhDBSyVPmcm1i09FiWsryMb84E7duKzV0ZLSDxIjUFzcqxE93mS5l
+         Iclg==
+X-Gm-Message-State: APuU4Z+LYLjkylSZW5JiwpvOHnZuljgEqC5yUQoam63VA4TRsf7pZ8aL
+	NiVND+4PKB2DTNSKl6sY8efjqhDHP/3XOaPXovtN1K01VQm6n17J5GYx66GhyOEq5saPX6FXyOL
+	+sJZ7
+X-Gm-Gg: AYBFou3ywTg2Do5D2Z7Gk+O/yBlVmPj427e54jtjuL7Oh6OFPtnqs46r+5hkqFQvBfH
+	eMRHhFzr2RguAwpRRGQvaZ+JErdfsOsEqX/zWBNOhEzeeqcepCId/RmHsU0MP4jAl2wepXqIQqt
+	ilbJoaGGPWG2+N+NcCdFiV2HzgSKaketUltuGl20esQLCFc+xxbAQKWksFv1cUBtbA0dQIJ2Oa4
+	o+Lk2e4dXRt6UwYAMOpQeWetVI8rUzgEI+4qbicfpBjl5yRP7XpQ54XxpH6Z9zDjEJCn17E/rbz
+	Fkvu3fl7Znuyg/0Ikc7Dp/jrEnWvi9KIIFhsQzyIniRAfi8LrPdMri0l1hlYsHgLDPxZBvvGe51
+	w+8P38i+pjTinalNhHQbhrQCygitvCYLzf3XhcJ0a+7wggzrjMEDrJKCCAoHE+HbGGree5D9JMA
+	6JJgAPMRTk/2mmWkqfszlRSE6Zj1X52Uw7vs/RlZPtVQBUtQAXLsaQGhd2CKpmT0VePy0kOenTq
+	OrT5ncRvQi9xi8VVrI5aCYN5u0H1K4j+B3hkURe/jf59lC0ArKzqB38Qqxe7f/2MtzJrA9+Z8Cm
+	UHHHLqV3ra5qaXVOQ42mJAtNdMgVtY369Nx9NgQexIiyuCrmkU6luparQTtGr0lR/9FR+3ArJMP
+	Cce+fbS25MhEpbz7f29oA0X9Uf+ozDxKLA7OEJCZ9bLbLlCqWR0jivA==
+X-Received: by 2002:a05:600c:c118:b0:4af:79ee:f660 with SMTP id 5b1f17b1804b1-4af79eef775mr147209755e9.31.1793701470248;
+        Tue, 03 Nov 2026 02:24:30 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a9fafe08sm73017225e9.3.2026.11.03.02.24.28
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a9fafe08sm73017225e9.3.2026.11.03.02.24.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 02:24:28 -0800 (PST)
+        Tue, 03 Nov 2026 02:24:29 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 20/22] python3-wrapt: Upgrade 2.5.1 -> 2.5.2
-Date: Tue,  3 Nov 2026 12:23:48 +0200
-Message-ID: <20261103102350.1952237-20-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 21/22] python3-wtforms: Upgrade 3.3.1 -> 3.3.2
+Date: Tue,  3 Nov 2026 12:23:49 +0200
+Message-ID: <20261103102350.1952237-21-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261103102350.1952237-1-leon.anavi@konsulko.com>
 References: <20261103102350.1952237-1-leon.anavi@konsulko.com>
@@ -61,59 +61,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:24:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131783
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131784
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 2.5.2:
+Upgrade to release 3.3.2:
 
-- The special methods added to the class generated for an
-  wrapt.AutoObjectProxy, and adjusted when __wrapped__ was
-  reassigned, were determined by inspecting the wrapped object
-  itself, rather than the type of the wrapped object. As special
-  methods are only ever looked up on the type of an object, this
-  gave the wrong result in several cases. When the wrapped object
-  was a class, the special methods it defined for its instances
-  were added to the proxy class, so a proxy for a class defining
-  __set_name__() raised TypeError when assigned to an attribute in
-  a class body, a proxy for a class defining __get__() was bound as
-  a descriptor on attribute access, and a proxy for a class
-  defining __await__() or __iter__() was reported as awaitable or
-  iterable by inspect.isawaitable() and collections.abc checks,
-  even though the class itself was not. Special methods provided by
-  the metaclass of a wrapped class, such as __iter__(), were not
-  added to the proxy class. When the wrapped object was an
-  instance, instance attributes shadowing the dunder names were
-  treated as special methods of the wrapped object, and special
-  methods which a __dir__() method of the wrapped object did not
-  report were missed. The special methods are now always determined
-  from the type of the wrapped object, so a proxy behaves the same
-  as the object it wraps. This also covers a wrapt.LazyObjectProxy
-  whose factory returns an object, as resolving the wrapped object
-  reassigns __wrapped__. With thanks to ybai08 for pull request
-  #361 which identified the issue.
+What's Changed:
+
+- chore(deps): Bump the "dependencies" group with 1 update across
+  multiple ecosystems
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-wrapt_2.5.1.bb => python3-wrapt_2.5.2.bb}   | 2 +-
+ .../{python3-wtforms_3.3.1.bb => python3-wtforms_3.3.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-wrapt_2.5.1.bb => python3-wrapt_2.5.2.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-wtforms_3.3.1.bb => python3-wtforms_3.3.2.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-wrapt_2.5.1.bb b/meta-python/recipes-devtools/python/python3-wrapt_2.5.2.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-wrapt_2.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-wrapt_2.5.2.bb
-index 8c75c173c3..6d1f2cf4c9 100644
---- a/meta-python/recipes-devtools/python/python3-wrapt_2.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-wrapt_2.5.2.bb
-@@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
+diff --git a/meta-python/recipes-devtools/python/python3-wtforms_3.3.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_3.3.2.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-wtforms_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-wtforms_3.3.2.bb
+index dbf472a618..e90768669a 100644
+--- a/meta-python/recipes-devtools/python/python3-wtforms_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-wtforms_3.3.2.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
  
- DEPENDS += "python3-wheel-native"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=17ed54aa95f4a6cd0d7a4747d14b64d0"
  
--SRC_URI[sha256sum] = "f595bb0185aab3e9dc31950c95d914f56ea8278810c3b928f3426e12ed6d27bc"
-+SRC_URI[sha256sum] = "551cb49e88b3722faad780303833bc4fa70685fb1773270fb98b40d39d9fddbf"
+-SRC_URI[sha256sum] = "9d10ccb5740290c9ae6673522d87bcae3b669cf0cb4e4584aee229b4694af10c"
++SRC_URI[sha256sum] = "49bb51d10b7832d497e758736da4d56f7d129a015db24756f36f28992f175404"
  
- # python3-misc for 'this' module, python3-image for colorsys (test_deferred_patching)
- RDEPENDS:${PN}-ptest += " \
+ inherit pypi python_hatchling
+ 
 -- 
 2.47.3
 
