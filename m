@@ -1,229 +1,129 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8027.1793701445967920829
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7965.1793701447628754267
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 02:24:06 -0800
+ Tue, 03 Nov 2026 02:24:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=WqkLH/ae;
- spf=pass (domain: konsulko.com, ip: 209.85.128.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a210470b49so31674865e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 02:24:05 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=c3cXz/Fb;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so39940325e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 02:24:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793701444; x=1794306244; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Av+SkFuevjETB0v2YPHG0EfaD5/47l1YKXwcGe83rgw=;
-        b=WqkLH/ae58lapnyhyK3+0sIEyfsSKLf2bAmbcw75i0fgERNg73M1YhqBSJQsHbrpiK
-         19LcKXK+i34kpLF/nwieBE3Ndi2RcMc6mDKiF9BeAsGNMEActVz4ppwBgpzAntPMw5Ly
-         8K/L7j52APVVFBwbd9zaW0cj/i4XR/B/32bDE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793701444; x=1794306244;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1793701446; x=1794306246; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Av+SkFuevjETB0v2YPHG0EfaD5/47l1YKXwcGe83rgw=;
-        b=DUUt73BQLBqvjjyKP72xLTqWuYYi0YM2fn026AsLOZnjecxWFmNGesIziqZkWWKFxH
-         b9jqk1NIC/gOlohWHi9igsl1n4Xd2f8qWU1VxQmGwcQuV7/pY/eWvK66w66+NJBP/Q2z
-         Srlhn1RzK8689D2LgC5ib0lfOINdTcrWDUQ0pV8a1gj9t1TVyVi1FgklFreK6I3MjQQt
-         jhwfSjvqM2YcvOXT/g4zmwXYeAK9yMP/WmSpoo9BpohPTeo4fHkk1lfObcTZpnGQrlbn
-         +dtANckRnNJlPjuu3Z7P19oEjdf8f3Se9OAb7C4P7l6BiCq1MaMv3AZmh9Vsx3mRz0DS
-         KUDQ==
-X-Gm-Message-State: APuU4Z9oPceX0F8/pp9eYZVgzHIGT7oVv2cVy3PVcwjZzhqai43TVrIV
-	XH2ljVCB3kKQb4HLX2Mb8KavsWn9uGEec/dA+S4tAoMiof+YVU0TrlN3WSDjvv4nb5JLjVb9QP4
-	Yiyih
-X-Gm-Gg: AYBFou18eBtTbaJrgeiT9ImT+iG7Iycg76yzFT+9u338pe3+9iev1oLaEC7SygX6Ebq
-	pE0FAaCTIG8fYGC3y5Lc1IwAyVfRnkuGN4QiIWNDgHf4Tc+mrvSpUQfoZA5RdjnkmaSi8KX6hZv
-	98ZcVXrXUBqSTkdpIBm68h4e7BmB8miVRGKzbxfeO/ABm9L60Ahwq9Cq1CJOw0aWeZpOmVj9T6X
-	xD0y5bU71oswe/NW1j4V5n4ZyjCpc1fncHbt2kDbXC11eb5MTmyzyI9CEcoTQNxEieYUaoJDtn7
-	AxawsShZ6Y/3X1HHyCYgnv6MpA6FF/MfouXcadl8gVh45hAn7se4O1AqMTNJ6oeZu1hIBLLH2+W
-	i5FOJAYhtT3y2VVuqvDROAVD45BNzw/WEwZervrNv3wtZwO3UEX4hHzeO0EPT3FX8SuP7GqaWzh
-	VvS/pUTQYfYFKtMrU384SftG+pE/rMY1jy0TTyNR5A4qANNaNhbX+32TaMfg6g1W7UAsrHa9j9w
-	xO+DIdfJ/Ze2w6cV3AWfrEau0acBlabS+s2HbX1og0mkM3+XNqqdtmd7fYVUQ9YVnFE1vi8RoBg
-	PbLmJzoMPJqcju9oiSeVMeYlixMbhjbOcw9qX92vyOZHEFnMgOww1BMAqzzkRNnLhpVy6Xftexu
-	zPf2PaP8CttfJB9ot/LxSCgrcbdIhUoSStUeqwb5IKnV99OEVwalMfg==
-X-Received: by 2002:a05:600c:6099:b0:4a1:992f:d0e7 with SMTP id 5b1f17b1804b1-4ac180f2ac5mr267054795e9.16.1793701443979;
-        Tue, 03 Nov 2026 02:24:03 -0800 (PST)
+        bh=Zk/Kua62CSJD8KBNTu5bL6p/VvXsUIvv11Rvuvm0AmY=;
+        b=c3cXz/FbxDkHIVV1EA0kRwIucDb4fdtJ4N2niiW7YOuCqsQOkVpZtB2wHOuEa59YpZ
+         cGFysXsq3RCDa/j4HZtiYDzARRDMJU2bXe5GYL9SFsn2AVe04DMsaPpkIipTDR4yR7Dw
+         +P4pU/sWsCQu1t85FqBhj1x9FoP/73kWD9xSI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793701446; x=1794306246;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Zk/Kua62CSJD8KBNTu5bL6p/VvXsUIvv11Rvuvm0AmY=;
+        b=TBOC+LkEDSEb9Jpvee377fdLkRbLGuWGuWy8tln/R1uJG8pK3ZMYY+iA8AQsS5dpu3
+         OpW0PTIL+1jKCd1O5ZJDPR67VL9HaSyLvopAELpR9oYy4l2cF4/jtNNCpXA9ZW5syLVq
+         TsTK5syk2dc4FtF8n5I0EDB0owHm8v4xYi5zEReKdLwdIK0d59DJpYuZmAT8axfSjck+
+         uyAeSI3hVHc6+ohAoiJ1dLHk+k+gZxqS6czqfX+IGyX25leVMXbx3cYH0r6Qlylfk4uk
+         tC+FWlg8MJRzdqpULF3UpRiGdJvDjjYjV5ji4ZHI1ULdScgdhPLy1/qTCwfd/2q1hc+w
+         Eu4A==
+X-Gm-Message-State: APuU4Z9pX7NUfu0WmknUPGz02W0Yq4yIDytCiVam9T9waUkRxxCXiGaR
+	C51dRuN6SiYMNyb38ZqUyI8GiAXgtbCyEIj+B1KmdUKC4BEqQU7NK2QCKycijqi8yRhuEVkauuo
+	lSAAI
+X-Gm-Gg: AYBFou2fKDMvxD6Lgae4JOu8UdydKDI/k3Vo26zcg8+BfOzh9WPXfxsFk1wITn5fbs+
+	z/wG1wALItRN3nA055miWZ2o4DpdadnehLldqY4xJjiq2HcLPDbbpHBWgvBCO9EDr+3jy5ebEQU
+	CEhkGBBEjZRpN2RjbSN2iCGBlXP+MkGXpxIQnF86wsVs4e2vO3eTqPp+iRZJhOkmRsqxeGwjYf/
+	O1yQnyfBspcIIfYXaSsRk93OiqLynJLF8N7r7bXvdafm+vJYNbsdkzphQHPzq9wAX0mZHuQnX/3
+	6360vAD18qDaJDj5Qn7LuO3h0WhW4h6pO8ZoXFVs4XsnpeWcqeMbnVK6GJPuht//oggHXXfhEIW
+	6QPk+8T2KcAjAnvG7byHzBOIqjKru/wE+VdYbH62trMmQokxkaHPqOqV8ZMD20czBrT5BA1EDOg
+	XygNGmQvz+/lktk8xb7llUF3IhGel/6EtuZFTUeURFi76OX/7Ezmnx6PFcobnmcsxS3eEiLAnPv
+	T2JOAauyRoaAblIi/NBm6jSFbMjAYuw2a/y6qt56WfMTuS6jDk5R8QF0Nqjv8Q6FW1/jHA35Uj9
+	2JoxCOAqW2xQHfdmI/nNBHEmlmUo5OAaN3CncZvRpt9miiOoF3y2Xsy0+8K+iubeS/d/NmxA86C
+	0Of9cKqWfFCVvtg9t4bL2dL9Aq2nfOWuKnUW9ng+2gbnE/HyLOkG6mQ==
+X-Received: by 2002:a05:600c:638f:b0:4a2:c2b:a91b with SMTP id 5b1f17b1804b1-4ac17d168a6mr281284445e9.10.1793701445994;
+        Tue, 03 Nov 2026 02:24:05 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a9fafe08sm73017225e9.3.2026.11.03.02.24.02
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a9fafe08sm73017225e9.3.2026.11.03.02.24.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 02:24:03 -0800 (PST)
+        Tue, 03 Nov 2026 02:24:05 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/22] python3-anyio: Upgrade 4.15.1 -> 4.16.0
-Date: Tue,  3 Nov 2026 12:23:29 +0200
-Message-ID: <20261103102350.1952237-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/22] python3-cbor2: Upgrade 6.1.5 -> 6.2.0.post1
+Date: Tue,  3 Nov 2026 12:23:31 +0200
+Message-ID: <20261103102350.1952237-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261103102350.1952237-1-leon.anavi@konsulko.com>
+References: <20261103102350.1952237-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:24:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131764
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131766
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 4.16.0:
+Upgrade to release 6.2.0.post1:
 
-- Added BlockingPortal.call_async() for asynchronously calling into
-  an event loop with optional abandonment on cancellation
-- Added SOCK_SEQPACKET support to connect_unix() and
-  create_unix_listener()
-- Changed UDP sockets on the asyncio backend to make send() wait
-  until the datagram has been passed to the operating system
-- Fixed documentation implying that use_uvloop=True falls back to
-  the standard event loop when uvloop (winloop on Windows) is not
-  installed, and showed how to skip the corresponding pytest
-  backend variant when the dependency is missing
-- Fixed get_current_task() on the asyncio backend raising an opaque
-  TypeError: cannot create weak reference to 'NoneType' object
-  instead of a clear error when called from a callback scheduled
-  via loop.call_soon_threadsafe() (e.g. from within
-  from_thread.run_sync()), where asyncio.current_task() is
-  legitimately None
-- Fixed CancelScope on the asyncio backend swallowing a native
-  Task.cancel() that was delivered in the same event loop iteration
-  as the scope's own cancellation (such as a move_on_after()
-  deadline expiring), which left the host task with a pending
-  cancellation request that never raised CancelledError (\#1214)
-- Fixed UDP socket closing hanging if a datagram send was still in
-  flight
-- Fixed concurrent aclose_forcefully() calls on asyncio socket
-  streams returning before the underlying socket was closed
-- Fixed aclose() on sockets not checkpointing, and thus failing to
-  raise a cancellation exception when called inside a cancelled
-  scope (affected UNIX socket streams and UNIX datagram sockets on
-  asyncio, and all sockets on Trio)
-- Fixed aclose() on asyncio TCP socket listeners not checkpointing,
-  and leaking the listening socket if cancelled while another task
-  was waiting in accept()
-- Fixed accept() on asyncio UNIX socket listeners hanging forever,
-  and leaving the listening socket registered with the event loop,
-  when the listener was closed by another task
-- Fixed send() on asyncio TCP and UDP sockets returning normally,
-  despite the data being discarded, when the socket was closed by
-  another task (or, for TCP, the connection was lost) while send()
-  was waiting for the operating system to accept the data
-- Fixed SocketStream.send() on the asyncio backend handing its data
-  to a paused transport after a previous send() was cancelled
-- Fixed sleep() treating a negative delay (including -inf)
-  inconsistently across backends (asyncio returned immediately;
-  Trio raised ValueError) by raising ValueError on all backends
-- Fixed create_tcp_listener() occasionally failing with a message
-  like Could not create 2 listeners with a consistent port when an
-  ephemeral port is requested and IPv6 is enabled and the
-  dual-stack path is not available or a specific local host name
-  was given
-- Fixed AsyncFile not shielding against cancellation while closing
-- Fixed TemporaryDirectory.cleanup() reacting to cancellation
-  prematurely when the host task was already cancelled, causing the
-  actual cleanup operation to be skipped
-- Fixed a NaN deadline being accepted on asyncio while Trio raised
-  ValueError, which silently disabled the timeout
-  (fail_after(math.nan) returned instead of raising TimeoutError);
-  CancelScope now rejects it on both backends
-- Fixed FileReadStream and FileWriteStream leaving files open when
-  cancelled during context manager exit, including unflushed writes
-- Fixed Condition.notify() and Condition.notify_all() failing when
-  the underlying lock was acquired directly rather than through the
-  condition
-- Fixed importing AnyIO with loaders that do not provide __file__,
-  such as PyOxidizer, raising TypeError instead of falling back to
-  eager imports
-- Fixed text receive streams silently discarding incomplete
-  characters at end-of-file instead of applying the configured
-  decoding error handler
-- Fixed Semaphore(fast_acquire=True) losing its fast-acquire
-  behavior when instantiated outside a running event loop
-- Fixed BlockingPortalProvider permanently failing with an
-  AttributeError on every subsequent use if the first attempt to
-  start its blocking portal failed
-- Fixed create_udp_socket() silently ignoring the local_port
-  argument when local_host was omitted, making the socket bind to a
-  random ephemeral port instead of the requested one
-- Fixed worker threads on the asyncio backend never returning to
-  the idle pool (and thus never being reused or pruned) when a
-  to_thread.run_sync() call was cancelled after it had been queued
-  for the worker but before the worker thread had picked it up
-- Fixed pytest plugin running Hypothesis async tests only on the
-  first parametrized backend instead of each backend
-- Fixed TypeError when subclassing an existing TypedAttributeSet
-  subclass, and this subclass contains type annotations
-- Fixed Lock.locked() (and Condition.locked()) raising
-  NoEventLoopError when the lock was created outside a running
-  event loop
-- Fixed connect_tcp() leaking a connected socket when an enclosing
-  cancel scope was cancelled before the connection attempt task
-  group exited
-- Fixed create_connected_udp_socket() silently ignoring local_port
-  when local_host was not given: the local address was left unset,
-  so the OS picked an ephemeral port instead of the requested one
-- Fixed BlockingPortalProvider not passing the exception raised in
-  its with block on to the start_blocking_portal() context manager
-  it wraps
-- Fixed anyio.itertools.islice() not consuming the first start
-  items when stop <= start
-- Fixed BufferedByteReceiveStream.receive_exactly() and
-  receive_until() returning buffered data after explicit closure
-  instead of raising ClosedResourceError
-- Fixed a TLS stream sending records the peer could no longer
-  decrypt after a cancelled send() lost an already-encrypted
-  record; the stream now raises BrokenResourceError on further use
-  instead
-- Fixed close() on memory object streams not waking up tasks
-  blocked in send() or receive() on the same stream
-- Fixed anyio.itertools.product() acquiring and consuming unused
-  input iterables when repeat=0
-- Fixed SpooledTemporaryFile rolling over to disk on writes when
-  max_size is zero (the default)
-- Fixed Trio UDP sockets remaining open when initialization failed
-  or was cancelled
-- Fixed SpooledTemporaryFile.rollover() moving the current file
-  position to the end of the file
-- Fixed cancellation during temporary directory creation leaving
-  the directory behind while its context manager is retained
-- Fixed cancellation during SpooledTemporaryFile.rollover() losing
-  buffered contents
-- Fixed TextSendStream.send() re-emitting the byte order mark on
-  every item with BOM-emitting encodings (utf-16, utf-32,
-  utf-8-sig), which made the peer decode a stray \ufeff in front of
-  every message after the first
-- Fixed buffered byte streams returning empty bytes when a wrapped
-  object stream received empty messages instead of waiting for data
-  or raising EndOfStream
-- Fixed BlockingPortal crashing with InvalidStateError when a
-  future it returned was cancelled just as the callable was
-  completing
-- Fixed UNIXSocketStream.send_fds() silently truncating messages on
-  short socket writes
-- Fixed cancelled TCP receives on the asyncio backend leaving
-  transport reads enabled, allowing incoming data to accumulate
-  while the application was not receiving.
-- Fixed CapacityLimiter.acquire_on_behalf_of() on asyncio releasing
-  the wrong borrower when the acquiring task was cancelled during
-  the cancel-shielded checkpoint that runs after a non-blocking
-  acquisition
+- Build Pyodide (pyemscripten) wheels for Python 3.14
+
+From 6.2.0:
+
+- Added the strict_hashable_types parameter to CBORDecoder, load()
+  and loads() which, when enabled, restricts map keys and set
+  elements to text strings and byte strings in order to prevent
+  denial-of-service attacks via hash collisions
+  (GHSA-p6xp-9h6j-r278)
+- Documented decoding concatenated CBOR objects with EOF checks
+  between objects
+- Fixed CBOREncoder.encode_to_bytes() sharing the string reference
+  namespace of the enclosing encode operation when called from a
+  default hook
+- Fixed the encoder writing the repr() of a bytes regular
+  expression pattern (tag 35) instead of the pattern itself, so the
+  regular expression decoded back as the text pattern b'...' and no
+  longer matched the same input
+- Fixed shared references (tag 29) allowing the decoder to
+  construct object graphs nested deeper than max_depth, which could
+  crash the interpreter with a segmentation fault when such an
+  object was hashed (as a map key or set member)
+  (GHSA-55vx-2phh-7grr)
+- Fixed mission conversion of date values (tags 100 and 1004) to
+  JSON as ISO formatted strings
+- Fixed a PanicException on Python 3.10 when decoding a string-form
+  datetime (tag 0) whose fractional seconds part contains a
+  multi-byte Unicode numeric character, as the microsecond padding
+  treated those as digits and then truncated the part on a byte
+  index inside one of them
+- Fixed the decoder accepting a set (tag 258) whose payload is not
+  an array, folding a text string, byte string or map into a set of
+  its characters, bytes or keys instead of rejecting it
+- Fixed the decoder accepting a non-integer exponent or mantissa in
+  a decimal fraction (tag 4) or a bigfloat (tag 5)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-anyio_4.15.1.bb => python3-anyio_4.16.0.bb} | 2 +-
+ .../{python3-cbor2_6.1.5.bb => python3-cbor2_6.2.0.post1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-anyio_4.15.1.bb => python3-anyio_4.16.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-cbor2_6.1.5.bb => python3-cbor2_6.2.0.post1.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyio_4.15.1.bb b/meta-python/recipes-devtools/python/python3-anyio_4.16.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-anyio_4.15.1.bb
-rename to meta-python/recipes-devtools/python/python3-anyio_4.16.0.bb
-index e0d626e0e3..4d09c1ca78 100644
---- a/meta-python/recipes-devtools/python/python3-anyio_4.15.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-anyio_4.16.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0a769411d2af7894099e8ff75058c9f"
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post1.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
+rename to meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post1.bb
+index 94d3f30dbb..aa5839a932 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_6.1.5.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post1.bb
+@@ -3,7 +3,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
+ DEPENDS += "python3-setuptools-scm-native"
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "6eb06160c42315ac0c4ded461c7d84d92fa18c69d13d17fc1dfc1fae96580c95"
++SRC_URI[sha256sum] = "2465ecef686b61e9feee840f506ef1cc15fa568825344c7b0af504b8230b698c"
  
--SRC_URI[sha256sum] = "9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94"
-+SRC_URI[sha256sum] = "59bb03251907983d1603d27c3087ddb1e93299ea2163adcdba37899a4fb12ffb"
+ inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
  
- DEPENDS += " \
- 	python3-setuptools-scm-native \
 -- 
 2.47.3
 
