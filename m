@@ -1,71 +1,71 @@
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5763.1793689470937557005
+Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5668.1793689471004380858
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 02 Nov 2026 23:04:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=kPCkeyHx;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Q3NfQKVE;
+ spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4124; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=4468; q=dns/txt;
   s=iport01; t=1793689471; x=1794899071;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=2PONZU8wXLMlHEWRwRdVAeyEP2Grb3/26YG/o4vg1ms=;
-  b=kPCkeyHxdzmvvZ1gCJfX1TLUDmseg/n+v3Turn8Dd/ahNuJoo9iTpClX
-   GPFSO9qOcP4U+6KuhxXPyTc9bj/R74XztjUhGxjirN6bYRFFLj0tGnR4D
-   ybP0yhsGp2FEC0GmNO9UWIzCjjrDj2Li/8Pl2jVvWUzUkNe5lYzLxZw6S
-   YL0J147TH0N7GJltUGIm6taEoaK+m6KYJyQzpXZqOqHucSZCt9X5m4QIP
-   BeAD0j+T/Suu7KWUFFMl08rX39DFN4L0RAg4+ywb+adyE5eShJMYNFCLH
-   6XPsexC9HOZe3LP+8pwjRHbyNkmXLrc48Bny/ONoPYifnzeWcncD7qlkU
+  bh=JKS0l8XYcd2T3Y//GgVZk9YrAI8vYY8Xk4Y0WyXF54Y=;
+  b=Q3NfQKVE1lloyjv5adbFxXJDEHk4ADXQEBu/49fi8PBf8xPLRmBInvai
+   iFSOearoxFbd6/KrZqeWhuody8/QPNSHN5JZa8zeS5bQLfUeFkq9IoeVK
+   fDLd8O38s93uBs0y3EnFSowJqxsVFo1z+INq56atubFUVPAHicnL9A5de
+   1EBqjNBtcpZTMD8IlsxM7qYCfS40ncwiUrgaqvK2KHIkQOlWApChrEXD+
+   gEcZ222/9qd74CbP5IcA3NM1QIjMRy+jM0bI2HguMN74yEusyk9V+B5T6
+   79OzXuPCN9ypFDRMWjNPQIIL3MLxXqPODmcEqmm0uNiWw2NkwRVqNcpIW
    g==;
-X-CSE-ConnectionGUID: xG5R3OwpSq+zBI94L5rr8A==
-X-CSE-MsgGUID: KMBcLC7VTqiZagbDVC5ZAw==
-X-IPAS-Result: =?us-ascii?q?A0DLAgBdhulq/4v/Ja1aHgEBCxIMggULgld1YENJA5Vcb?=
- =?us-ascii?q?AOeH4F+DwEBAQ9EDQQBAYUFAo4cAiY1CA4BAgQDAgMBAQEBAQEBAQEBAQEKA?=
- =?us-ascii?q?QEFAQEBAgEHBYEOE4ZPDZASAQIBAycLARgBLRAcAwECLysjCBmDAgGCdAMRu?=
- =?us-ascii?q?x2BeTOBAYMpAT8CQ1DbMwELFAEFgTOFQIgjXRgBhH0nGxuBcoR+gQWBXAKBJ?=
- =?us-ascii?q?4Z/BIIigQyBWh6MfQKIG0iBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBB?=
- =?us-ascii?q?xsGBYEdgR6BEoEHXYErKF0BIYEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSC?=
- =?us-ascii?q?QETGiwKgRo1PAkmPxUMZgsaBWEIAg0MdDkQMB4kLwUcJkAQGA1IESw3FRkEP?=
- =?us-ascii?q?m4Hkg2DDQEGNxY7ASoBgTQRJkFJkkiQRIIhoQ8KKIN3jCOVOhozqnALmH2OC?=
- =?us-ascii?q?pU1TFCEaYFpATqBWXAVgyIJShkPji8KC4NgzlsmMgIJAy8BAQcCBw4DC4Fok?=
- =?us-ascii?q?ACBfgEB?=
-IronPort-Data: A9a23:qu0zkKuYRoVygraFxuX3tDBqmOfnVAdfMUV32f8akzHdYApBsoF/q
- tZmKT3UOv2LYDbxet10b42090wCsZ7UyoQyQAZv/CxmQyMagMeUXt7xwmUckM+xwmwvaGo9s
- q3yv/GZdJhcokf0/0nrb/656yYsjclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
- eja/YuFZzdJ5xYuajhKsvvb8ks11BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw6skqOzpp6
- uQjMXMfRDHS28br2qjrY7w57igjBJGD0II3oHpsy3TdSP0hW52GG/+M7t5D1zB2jcdLdRrcT
- 5NGMnw0M1KaPkAJYwxGYH49tL/Aan3XcyFYoVGcv4I84nPYy0p6172F3N/9J4bbH5gFxRbHz
- o7A10fcKBo+H4Oh9SOEwHujjMPxtn7JcZ1HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YbLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:R8bsmqD4XNJxQaflHel055DYdb4zR+YMi2TDGXofdfUzSL3+qy
- nAppUmPHPP5Qr5HUtQ++xoW5PwJU80i6QU3WB5B97LN2PbUSmTXeRfBODZrQEIdReTygd179
- YHT0EHMqySMXFKyeDn/QK/D9EshPOD8KyumKPi6k0Fd3ASV0mlhD0JcTpy1SZNNXF7OaY=
-X-Talos-CUID: 9a23:OMmFAWMQB0DawO5DSAY6zhUzBdgeaz7P5laBf2vlE3w5YejA
-X-Talos-MUID: =?us-ascii?q?9a23=3AkTcN1g+CKIPFCoDRSmLOYc2Qf+RNya+KIx8zrYw?=
- =?us-ascii?q?HicCLPwBOEGqvpSviFw=3D=3D?=
+X-CSE-ConnectionGUID: B+9bGAUDR0S6poJIqNAubQ==
+X-CSE-MsgGUID: MupZ4RE5Q2eL9s9wg+ruqg==
+X-IPAS-Result: =?us-ascii?q?A0AaAACJhulq/4v/Ja1aHAEBAQEBAQcBARIBAQQEAQGBf?=
+ =?us-ascii?q?AcBAQsBglZ1YENJA4xviG1sA54fgX4PAQEBD0QNBAEBhQUCjhwCJjQJDgECB?=
+ =?us-ascii?q?AMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDJwsBGAEtE?=
+ =?us-ascii?q?BwDAQIvKyMIGYMCAYJ0AxG7HYF5M4EBgykBPwJDUNszAQsUAQWBMwGFP4gjX?=
+ =?us-ascii?q?RgBhH0nGxuBcoR+gQWBXAKBJ4Z/BIIigQyBWo0bAogbSIEeA1ksAVUTDQoLB?=
+ =?us-ascii?q?wWBaAM1EioVbjIdgSM+F4EHGwYFgR2BHoESgQddgSsoXQEhgQiBdgKCUYIAA?=
+ =?us-ascii?q?gFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxmCxoFYQgCDQx0ORAwH?=
+ =?us-ascii?q?iQvBRwmQBAYDUgRLDcVGQQ+bgeSDYMHBz1RASoBFXAbS0EHpW+hEQoog3eMI?=
+ =?us-ascii?q?5U6GjOqcAuYfY4KlWkYUIRpgWg8gVlwFYMiCUoZD44rBAoLg2DOWyYyAgkDL?=
+ =?us-ascii?q?wEBBwIHDgMLgWiQAIF+AQE?=
+IronPort-Data: A9a23:+QorG6ywSVsp5vw1S0V6t+dmxyrEfRIJ4+MujC+fZmUNrF6WrkUAn
+ TBNXWCHaavfYTT1L9okOoy29BtX7J/Sz9VqTQQ9rlhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCKa/lHyYuCJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ 4yaT/H3Ygf/hWctajhMscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJGt1bIc309tbOzl1q
+ +QfChEUSDmejdvjldpXSsE07igiBNPgMIVavjRryivUSK58B5vCWK7No9Rf2V/chOgXQq2YP
+ JVfM2cyKk2bMnWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+OWxa4eIIofbHq25mG69u
+ 3r0o17UXyhAOfjO0mua/TG2m/bAyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPBXC4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:P4ftCasEPDOSJ8MYfP49/Bw57skDrtV00zEX/kB9WHVpmwKj+P
+ xG+85rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1MmZPDUO0VHAROoJ0WKh+UyEJ8SUzIBgPM
+ lbH5SWIeeAa2SS9fyKgzWQIpIH3MSN9ryuiKP1yndgShwvVoRbhj0Jczpy1iZNNXJ77V1TLu
+ vl2vZ6
+X-Talos-CUID: 9a23:oLx3aG39G4KtD5ilxTOtI7xfMIN0eFL08Vvqe3TmEWFLaaSzYEKawfYx
+X-Talos-MUID: 9a23:lyaPbQaOFKm3QuBTkiL0tm1YGZpRuamKWVtcjppFodSdOnkl
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,192,1787011200"; 
-   d="scan'208";a="529258387"
+   d="scan'208";a="543550393"
 Received: from rcdn-l-core-02.cisco.com ([173.37.255.139])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 03 Nov 2026 07:04:30 +0000
+  by rcdn-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 03 Nov 2026 07:04:30 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id 03F951800036F;
-	Tue,  3 Nov 2026 07:04:30 +0000 (GMT)
+	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id F3E0F18000207;
+	Tue,  3 Nov 2026 07:04:29 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id A4B99CBF203; Mon,  2 Nov 2026 23:04:29 -0800 (PST)
+	id 9D89FCBF201; Mon,  2 Nov 2026 23:04:29 -0800 (PST)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com
-Subject: [meta-webserver][wrynose][PATCH 3/3] nginx: fix CVE-2026-15176
-Date: Mon,  2 Nov 2026 23:04:29 -0800
-Message-Id: <20261103070429.1299769-4-hthakar@cisco.com>
+Subject: [meta-webserver][wrynose][PATCH 1/3] nginx: fix CVE-2026-95101
+Date: Mon,  2 Nov 2026 23:04:27 -0800
+Message-Id: <20261103070429.1299769-2-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261103070429.1299769-1-hthakar@cisco.com>
 References: <20261103070429.1299769-1-hthakar@cisco.com>
@@ -77,7 +77,7 @@ X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
 X-Outbound-Node: rcdn-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 07:04:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131759
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131760
 Content-Type: text/plain; charset="utf-8"
 
 From: Hetvi Thakar <hthakar@cisco.com>
@@ -85,98 +85,112 @@ From: Hetvi Thakar <hthakar@cisco.com>
 This patch applies the upstream fix as referenced in [2],
 using the commit shown in [1].
 
-[1] https://github.com/nginx/nginx/commit/ce1da78900b07e72f37a25f55e6606220ac45902
-[2] https://ubuntu.com/security/CVE-2026-15176
+[1] https://github.com/nginx/nginx/commit/90b30edffea4f427608c36e3849643b6f9841bc4
+[2] https://ubuntu.com/security/CVE-2026-95101
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../nginx/files/CVE-2026-15176.patch          | 54 +++++++++++++++++++
+ .../nginx/files/CVE-2026-95101.patch          | 68 +++++++++++++++++++
  .../recipes-httpd/nginx/nginx_1.28.3.bb       |  1 +
  .../recipes-httpd/nginx/nginx_1.29.7.bb       |  1 +
- 3 files changed, 56 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-15176.patch
+ 3 files changed, 70 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-95101.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-15176.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-15176.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-95101.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-95101.patch
 new file mode 100644
-index 0000000000..19b9ab787d
+index 0000000000..c70150c114
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-15176.patch
-@@ -0,0 +1,54 @@
-+From ce1da78900b07e72f37a25f55e6606220ac45902 Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Fri, 10 Jul 2026 20:10:12 +0400
-+Subject: [PATCH] Avoid post-rewrite URI to path mapping with alias
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-95101.patch
+@@ -0,0 +1,68 @@
++From 90b30edffea4f427608c36e3849643b6f9841bc4 Mon Sep 17 00:00:00 2001
++From: Vadim Zhestikov <v.zhestikov@f5.com>
++Date: Wed, 22 Jul 2026 17:48:55 -0700
++Subject: [PATCH] HTTP/3: kept the skipped frame length separate from data
++ length
 +
-+Previously, after a "rewrite" had changed the URI, and before a new
-+location was chosen, the new URI might not match the current location
-+prefix.  This becomes a problem when the location uses "alias", which
-+is why normally such inconsistency is detected by checking the
-+r->valid_location flag.  Meanwhile this flag only handles the
-+inconsistency when using the "break" directive or parameter.  However
-+in absence of those, there's still an inconsistency window from URI
-+change up until the end of the current set of rewrite directives.
-+URI to path mapping within this window might result in a buffer
-+overflow if location's prefix was longer than the rewritten URI.
++ngx_http_v3_parse_data() stored the remaining length of a skipped
++(unknown) frame in st->length -- the same field the request body
++filter uses for the number of DATA payload bytes to pass on as
++request body.  When an unknown frame was split across parser
++invocations, the skip was interrupted with st->length holding the
++skip remainder; on the next buffer the body filter, which calls
++the parser only while st->length == 0, treated that remainder as
++request body.
 +
-+The following example resulted in a buffer overflow with the request
-+"/foo/1":
++When proxying, this could result in sending unframed bytes, potentially
++allowing for bypass of client_max_body_size, which is enforced only on
++the DATA path, or an injection.
 +
-+location /foo/ {
-+    alias /bar/;
-+    rewrite ^/foo/.*$ /x;
-+    return 200 $request_filename;
-+}
++The fix is to keep unknown frame payload in a separate st->skip counter.
 +
-+Alternatively, $request_filename might be used in access log format,
-+"set", "if", "add_header", etc.
++Reported by Hansol Lee of GOTROOT.
 +
-+The fix is to reject URI mapping in ngx_http_map_uri_to_path() if the
-+r->uri_changed flag is set.
-+
-+CVE: CVE-2026-15176
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/ce1da78900b07e72f37a25f55e6606220ac45902]
++CVE: CVE-2026-95101
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/90b30edffea4f427608c36e3849643b6f9841bc4]
 +
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/http/ngx_http_core_module.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/http/v3/ngx_http_v3_parse.c | 4 +++-
++ src/http/v3/ngx_http_v3_parse.h | 1 +
++ 2 files changed, 4 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/http/ngx_http_core_module.c b/src/http/ngx_http_core_module.c
-+index a5f4597294..385b84e1b3 100644
-+--- a/src/http/ngx_http_core_module.c
-++++ b/src/http/ngx_http_core_module.c
-+@@ -1936,7 +1936,7 @@ ngx_http_map_uri_to_path(ngx_http_request_t *r, ngx_str_t *path,
++diff --git a/src/http/v3/ngx_http_v3_parse.c b/src/http/v3/ngx_http_v3_parse.c
++index bcbf0dbe12..ffaade8429 100644
++--- a/src/http/v3/ngx_http_v3_parse.c
+++++ b/src/http/v3/ngx_http_v3_parse.c
++@@ -1837,6 +1837,8 @@ ngx_http_v3_parse_data(ngx_connection_t *c, ngx_http_v3_parse_data_t *st,
++                            st->type, st->length);
 + 
-+     alias = clcf->alias;
++             if (st->type != NGX_HTTP_V3_FRAME_DATA && st->length > 0) {
+++                st->skip = st->length;
+++                st->length = 0;
++                 st->state = sw_skip;
++                 break;
++             }
++@@ -1846,7 +1848,7 @@ ngx_http_v3_parse_data(ngx_connection_t *c, ngx_http_v3_parse_data_t *st,
 + 
-+-    if (alias && !r->valid_location) {
-++    if (alias && (!r->valid_location || r->uri_changed)) {
-+         ngx_log_error(NGX_LOG_ALERT, r->connection->log, 0,
-+                       "\"alias\" cannot be used in location \"%V\" "
-+                       "where URI was rewritten", &clcf->name);
++         case sw_skip:
++ 
++-            rc = ngx_http_v3_parse_skip(b, &st->length);
+++            rc = ngx_http_v3_parse_skip(b, &st->skip);
++             if (rc != NGX_DONE) {
++                 return rc;
++             }
++diff --git a/src/http/v3/ngx_http_v3_parse.h b/src/http/v3/ngx_http_v3_parse.h
++index ba004db5df..e161cecf7b 100644
++--- a/src/http/v3/ngx_http_v3_parse.h
+++++ b/src/http/v3/ngx_http_v3_parse.h
++@@ -121,6 +121,7 @@ typedef struct {
++     ngx_uint_t                      state;
++     ngx_uint_t                      type;
++     ngx_uint_t                      length;
+++    ngx_uint_t                      skip;
++     ngx_http_v3_parse_varlen_int_t  vlint;
++ } ngx_http_v3_parse_data_t;
++ 
 +-- 
 +2.35.6
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-index 1ee9d41562..5b31fabc37 100644
+index d087ae8804..eaf069135a 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-@@ -17,6 +17,7 @@ SRC_URI:append = " \
+@@ -15,6 +15,7 @@ SRC_URI:append = " \
+     file://CVE-2026-42533_p4.patch \
+     file://CVE-2026-42533_p5.patch \
      file://CVE-2026-56434.patch \
-     file://CVE-2026-95101.patch \
-     file://CVE-2026-97629.patch \
-+    file://CVE-2026-15176.patch \
++    file://CVE-2026-95101.patch \
  "
  
  LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-index 77b6303a74..c2a6e2b6be 100644
+index 3b57994069..bba4788d5e 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-@@ -17,6 +17,7 @@ SRC_URI:append = " \
+@@ -15,6 +15,7 @@ SRC_URI:append = " \
+     file://CVE-2026-42533_p4.patch \
+     file://CVE-2026-42533_p5.patch \
      file://CVE-2026-56434.patch \
-     file://CVE-2026-95101.patch \
-     file://CVE-2026-97629.patch \
-+    file://CVE-2026-15176.patch \
++    file://CVE-2026-95101.patch \
  "
  
  # 1.28.x branch is the current stable branch, the recommended default
