@@ -1,60 +1,60 @@
 Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1481.1793731034100259543
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1483.1793731036014447958
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 10:37:14 -0800
+ Tue, 03 Nov 2026 10:37:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=iOKnLdwF;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=DaD6NIJt;
  spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1a2af4c8d00so6762528c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:37:14 -0800 (PST)
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1438d9363fbso993338c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 10:37:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793731033; x=1794335833; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793731035; x=1794335835; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FA1XyhPYKdRIPYXVs4oW8BD/tm3+zwDJwYWOpUU9ygI=;
-        b=iOKnLdwFMBQ21cXzVC7Q05uQS/k3RiW9lx2Ae25jBvebqLTMhzwL1HaKnW9BuYFbXm
-         8UXZBk2ocjOBHuXcf6syCAC2iHPW6BwWoSlUnSPBcWm8rhvV0V0WFvjM0m7TtAMefmjt
-         H+CVyUFNksJ1q6KlGYpaUcilKNNCtc8H1UzbXxY2T+i+jv61YXaryKzo33gI3ovLgRId
-         48VrlGdQ72Fzk6OV5v4ZnKE80utpUCBcFiS5TzzL/mCSVE2rCFTF4vl2+lxvrDOW64Nb
-         +3DHpxQNw2jh+adbsbf1CnAO8dlOe6qKVt5N1v99w9WI6eq7hLnrlsUL96e5h4Hra52q
-         ytRA==
+        bh=ENva+W92l4YZPhPZCKHF5LQP3G0a6G+atDj0aKelDRg=;
+        b=DaD6NIJtXHC7S9+SKcD696cinyQRf9eTKaXWh0sdbVNyZQn2OQorw5QOh0Aq+OCYs1
+         F8C3nwiAk7RG+QA3FAxP55zJwJn/5H0bpY8TMDU+GF9durNhByzZt7pqz4JGDrqRMW1B
+         SRqmr7a9I+L+rY+OmZcIheMikoj5bhZA4xSZDKzxXDO+2d3WQp+5U34yY9TGC0iY0LuP
+         hG3vFYn16Irg9PQYhOyu7KTpODvJEO6b41zsL+07dBKAbd4/FI90Q+1hRCnkgw89U/PO
+         XIcW57lG2U5sAMZvDLFjs+QelYve9T6PgAJkc8flYdgBDN44vIghl2O/jUHKgqahw81z
+         T8lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793731033; x=1794335833;
+        d=1e100.net; s=20260707; t=1793731035; x=1794335835;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FA1XyhPYKdRIPYXVs4oW8BD/tm3+zwDJwYWOpUU9ygI=;
-        b=d0zAMpqmZ4Uz3uBsJITXRrVG1nMtLFZgx43T7hTkecxLqQtOdUQ6R/PYGlUxAgt5iF
-         tHUr+qfhFzJaFo9niXJL9YXM7lYJdWy34t0h/HF8/Gy22LOJvrgLktOMuJjG/uXIG/tG
-         1Bsn0/MNY/vrHwMMn4lqtdgcILyEZYpFIhF2QVFQvtkxVwaz3nNaYw3BD5FL8yMHvofS
-         MM7IOt49qEZquCJDtK1PeaZtCnUy8WLl4qFEjcdJBU6bZbDstIPeHSD2SHEQCU1saAub
-         n2e1jIk3quTUsLl5DTk26QZ0paYzoPMwsDvA3SPgnq3FInlPvh1f6D4FjA9WHfXiFW+S
-         XKnQ==
-X-Gm-Message-State: APuU4Z8c+35pcYbTXYsutcLjRvn7RCcfps1b2qWIv1z8J05UmFjHtbEj
-	TcokuoxuO+K3NSZgwXX8e7DRtaenTgFXEUfUXAERf2GscYmdFQujau+t251ogw==
-X-Gm-Gg: AYBFou11MQJNWwIt2Ha0+FBWBWvPZuyGLCzrcocVdj6EeAtJWwJSi9XbpuTR/QrwXRE
-	ib5oHRoIf9ywNfA4Ne0WRuc4cIddhzBetNqf3Po2DVVR51rQJr60+gBbj4+5893p8MJTqAUWvtl
-	eiLCyKeJQSlRyDr6xOCNeQThwwNVOjBPl8S9jfdmTm9IJkPnbSl1QEi30ux0LcbjLX38NTVaFn8
-	zbHfKJYZy12d6JqumfP4zIXEc/R8pLNKTr8FHtxtW7shAB7DoYA3PtMGoYM9W95SjayTn9REovo
-	t8D/jQ7bEbhhPmR7T0T3sEn+J9OBQYaMpLXmIigAgUesUETeT4oeax5vrnXBiMzxpujcVFSwAyN
-	KxMzCRkZ0P9XziTuBV+0PuUxB1KForVfGzULp7SMgFmkl83kEvjoJC1zXUiiCrrQ5/Y+9KJjhQm
-	my40jjvVZOcHW0JdjTt0rRHflf2FtGGnvhTVfHe9bAA3p5ts3twz1psXlsibTE/1Vm8auPUHy0/
-	alR0BJPx4nsjmFwvwRMWUu1ifnlNN/0fGgB/LkwAX0+phUx0xVWGyXGWk8cVxMrBZ2IsUWiEn47
-	iWDbdkYXjP2NnYScewdI58WDtoUgto0XcLpoNPyD4byjlDzH9MavKtAytz+z10t4
-X-Received: by 2002:a05:701b:42d2:20b0:1aa:6c3f:2f7b with SMTP id a92af1059eb24-1ac5b3fdef6mr22219622c88.24.1793731033389;
-        Tue, 03 Nov 2026 10:37:13 -0800 (PST)
+        bh=ENva+W92l4YZPhPZCKHF5LQP3G0a6G+atDj0aKelDRg=;
+        b=sH9I6cfDSt8F//x/rNv+By9m8INDN1xnBS30IFCKOQp+DFn0me/HYYJyayWqWxb/hz
+         u6WjK08aLQmLUrpgZFOFTYJA8Ky/2e0dROt10lRfFOLqnhR1rwFbXthPYCPPWmZ68LBk
+         eFAJ3en/3xIhO1xULSgwpU23YW7hexEsn77CRdBvcVmeUMjUcyJTDhTF5LchA4GUQYbv
+         hUZ88bsYdYgO/XGf+VYHU25R0tTpjyThfzW0QI2QKG4npI6LeA0D35oOXEvH8VnSDHVq
+         hBqEnX8u8En7m1EctqzyYdxNpw/UjtZbV+8YowtoQquLFp0Xetbm+SGn9G5OaRaHRDDS
+         57qw==
+X-Gm-Message-State: APuU4Z8Rx2/Bpm2Rg3wjx428QtE2vq33neBUNfeLnlY7CC0IT6M0vPAM
+	qjbaRm5vrqozDKCp8LnG9RlDK71BIbkQm3lDQRtUCzDi1XL2JqL/9AbqX7K5Jg==
+X-Gm-Gg: AYBFou2ZBrhN3OK0kcRhg14+xDUd+yu6U3TiVK2OyCjKeKSPEhdVZMw4Y/1TFxxOHPn
+	YXCGlqF3a7dnNhcRrWX0wPxwV4GJUTrTAQFcQHUxM7gUDDsWoG6u5W7KHtRrbwRX7FJ0Sz4UFAk
+	RDVt8nIXsz2fv1grcC/QZDG4e8yt/FWKeQnmHNZRmyFe8LxajE1U6lHHSJ4ICQfXW/zdTsum1IK
+	IsNdpnfu5aY2tnb02K09SrtsgBH0vzjN6hntxhTp/HCjCtEDnYOOFE18Ez3I2EZtehkCMqa+VvV
+	K/MQy683e0isQBWXw0zkSwUZ83r0zw/nlaFu/exJAcsdmy3dRoxsiSOx938nltY+R43fLWL5rYs
+	YMYACp/cLauTfDEozhIL4H+5/yRsfdGd7WcCxOnGTo7j7xrNInzo1IfUH1OEuu6Z4xThaDOyKZl
+	AFUoM1tGe7PV5EJ6lFqntrcjGO6KzdWuaude9nXSMPQcAwzQ6btSUBxvQzyDgYWNnonmfrpNTkZ
+	aJ8kD/OUYjhwG/frhNKRKzCbhZcSDEbdlu3q2rJRGO7xmWN8FAWEq67CjsZ0CUcwVHbk//bCZaT
+	ZULAB4gRDK/mKYcC5ISbXUpZjuWKaPSFkUQk+Yx7rfdP/gOP01yVx/TYpZEkAA==
+X-Received: by 2002:a05:7022:f90d:b0:151:7831:e403 with SMTP id a92af1059eb24-1ac5b027fbfmr16970454c88.13.1793731035249;
+        Tue, 03 Nov 2026 10:37:15 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4f83fsm1192887c88.17.2026.11.03.10.37.11
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4f83fsm1192887c88.17.2026.11.03.10.37.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 10:37:13 -0800 (PST)
+        Tue, 03 Nov 2026 10:37:14 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 14/20] toybox: upgrade 0.8.14 -> 0.8.15
-Date: Wed,  4 Nov 2026 07:36:34 +1300
-Message-ID: <20261103183640.919438-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 15/20] grpc: upgrade 1.84.1 -> 1.84.2
+Date: Wed,  4 Nov 2026 07:36:35 +1300
+Message-ID: <20261103183640.919438-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
 References: <20261103183640.919438-1-ankur.tyagi85@gmail.com>
@@ -62,33 +62,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 18:37:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131812
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131813
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://landley.net/toybox/news.html#03-10-2026
+https://github.com/grpc/grpc/releases/tag/v1.84.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-core/toybox/{toybox_0.8.14.bb => toybox_0.8.15.bb}  | 2 +-
+ .../recipes-devtools/grpc/{grpc_1.84.1.bb => grpc_1.84.2.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.8.14.bb => toybox_0.8.15.bb} (97%)
+ rename meta-oe/recipes-devtools/grpc/{grpc_1.84.1.bb => grpc_1.84.2.bb} (98%)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.14.bb b/meta-oe/recipes-core/toybox/toybox_0.8.15.bb
-similarity index 97%
-rename from meta-oe/recipes-core/toybox/toybox_0.8.14.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.8.15.bb
-index 80ad89d4e7..473db46fa9 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.8.14.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.8.15.bb
-@@ -10,7 +10,7 @@ inherit cml1 update-alternatives
- SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-            file://0001-kconfig-use-HOSTCC-to-build-the-config-frontends.patch \
-            "
--SRC_URI[sha256sum] = "827e4cdfd69f5da973e00e2a59b30b3c9857fb7fae74c362fd0b4f96be7929b0"
-+SRC_URI[sha256sum] = "44e2bab43dfe2c171743297631ce558c6d9ed38b87a66fd751cef617574b375e"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.84.2.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb
+rename to meta-oe/recipes-devtools/grpc/grpc_1.84.2.bb
+index 274aeb4ba3..db0725db3f 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.84.1.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.84.2.bb
+@@ -23,7 +23,7 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
+ # Both dependencies are mutually exclusive
+ # RDEPENDS:${PN}-dev += "${PN}-compiler"
  
- SECTION = "base"
- 
+-SRCREV = "b0c0c4f8823ba69e7e43aaaf183c30a43e549924"
++SRCREV = "41ee9aad18b902ea75a6ff5505d71dce6082613f"
+ BRANCH = "v1.84.x"
+ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=v${PV} \
+            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
