@@ -1,196 +1,125 @@
-Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13531.1793718603447762682
+Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13572.1793718604725835474
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 07:10:03 -0800
+ Tue, 03 Nov 2026 07:10:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KPSiDNyB;
- spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-1a2761c69fbso7313236c88.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 07:10:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=UOmfYygx;
+ spf=pass (domain: gmail.com, ip: 74.125.82.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-15ea896ddc8so7252294c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 07:10:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793718603; x=1794323403; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ssSZbrj06g/Aoj7r99pEXxq5HjQ6fnj0TSZ4L0bSymc=;
-        b=KPSiDNyBxm/0eHDNeGfTvL/IW5tFS8a071/5cqta5VbFLjmaHiYjIo0i2HRRyC+Iq6
-         h8NYX6YtDgRdjuYIgy8Cp0Ao/CNieP22zK0oVMX4o00a9WRACsWXlTiG/mJqFeBzvHv1
-         v+S2jjFsWJe/Zpm//tezWFpukYk16/uXtvfj62ULmuSLTCd+AhOqtdOmGjN4KPilQeCa
-         jNFQwhfbe8N+o6yOOIPFPycJtNlJ47xTOWA5BwULRs4gRbj2rdMxnNROzBI1guLkpxpS
-         BEHiPXvBRzwwy1EMq1i6u+CV4qz9JzRSTRvYjJHrhNbuc/iiPfhB6vgjOlmXOqRcYPWU
-         qBNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793718603; x=1794323403;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1793718604; x=1794323404; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ssSZbrj06g/Aoj7r99pEXxq5HjQ6fnj0TSZ4L0bSymc=;
-        b=sh7Lg4ZNWauyH+6wjifWphAoW4GuEHsUzwiDTsyGNVhX9rcmlUepBF84dbH+WBx5ZM
-         HeOJV+pr3GvsKLu2BWvYovfvkhfCRBVwuIq18BVgMufa6jM87vir6rVyvnFStCQd0/SY
-         qmqRoNpX3HkLUzikhmqWgEjTzMdeRvHdwiQWdBF68Qh3vnTY1tTYKXvXipQCYt1tqBB9
-         UHzIpr52W5Ekyz9HhNj6SMGC1maGGICGPH1v9lkG+cY5SCc6lMLumO237cArVia8fUfk
-         V8FNh7VWj6cT0lYbMCNwrq3or6YEY1f2xnJvkD5x5TbA41yNPkPc6r/vCJs9CE3+12Xw
-         4HrQ==
-X-Gm-Message-State: APuU4Z+7sGH6FJsaDuo8Vim83d6ZjshURADOT1M6UTplnk8PEzyOT09t
-	anB6QyXmnQl6OlWKhw6SigXltWwwchFSAIPqkeNJV3OxPUv7FrZSGdB8090VtLGOeiL5Qg==
-X-Gm-Gg: AYBFou0Bi9mU1oBYGY5tgwNUdcVu4zAYwtggBt+vx3mVfQH94fMbM8dQSs4IsZD41zG
-	wVOSDQEKPIlTsk+DZBCg7WdXysLFcd0Qf/l6BTo/L5CCFNsjQzGZL2/3cM7bCGHDka70WSVv3lG
-	3S8fbPId1VTa4oEn3eJUx66xKOrqrRDnv1tkIu0hjbd1DbCHocRHB3cFaCJLEaIuj1JvEAqTkZn
-	UQk/TYbeQ+/Tu96J2t52z6s3Pt/w/zfhDoB7z+3x0fVva0c3a3MD2u6nRHO69kIBKusHcGf0mxQ
-	xX2sLRIkdUZ/8fMsyXutUiPpOw1z+yowisXxEUv7NlsC8XJ9RQ5kXROAuEdZKZjDSxUZDOk+qvO
-	pG4o+t0SqzqIbK4mpaBNiAOctVLk4xfRuGPbsVe6g8a+RvmvhDZRLRpl3zl39tJ08tjZ8L4zTbP
-	Nz+d+LSce6pt8FVSR5NvL6XqZT05hej0g21L6yvYUFMyyxJ8uIf2afPJ8qTE+Lzz9oaLlFKE53B
-	T5xFTsuU4W7txlA6mChm4uP+sNgcicB3MupXWt6bdB9C4lPixgtO+HJDmiymsyiVrHd+UqvWk1j
-	77DbUbrLDPvT+rVw5VefgA0mA4nkjK3prRY0jEvkvriDHbWs4TlQd+JO3xkhHE3hfK+r97+UwH5
-	msNDMI3bh92nfHA5NYSMfnrD4+3OPoLugV58IMuXnYS4JwJJ4VXNOUBW9Acdw7oXhbKqPdFCEk8
-	WcoO+RdR8oLblJ+M+ZgTQDsVXxHYa48woyISkFjRvQZqqj30skIbmj+nmQBOs8lenURRUVEyA3A
-	RnJsIZ3Ye4Es+LlL9f7n1vv32Obz7hUbzvfdGdc2aZ38oI0e63AwZE8py6Q19LQAmXH87E44us3
-	q7j/YGNDKY3zbacQH72194sGgg==
-X-Received: by 2002:a05:701b:4515:20b0:1a7:78a3:bda8 with SMTP id a92af1059eb24-1ac5b5ee671mr20089907c88.27.1793718602425;
-        Tue, 03 Nov 2026 07:10:02 -0800 (PST)
+        bh=dEU71IS0wwhMDTJrSbomDqDev0IoHSU56kpILI3UNAg=;
+        b=UOmfYygx81SymDqMaTPg49CpJMgUhaLznMdcoHyTxj8K9W4w6eq7JjUBoztdzV9Yku
+         AwuDiptNCJFPIwIAIxg+ItA4TNx5Pj/VyabvPRKu5rlKVkJ7rfRrP7c8zRNZ73grmq9u
+         +Jxb3UY0a5Y4gL0led1EX1EXebB+G8Q8/OnMAD1uTTqQ5uTXA1SxvKbAxf8Ljh1TiclX
+         Pa3/+PYiK1mqy92oClfu7Hv78QELLPXVoo8KXADrKsZSGdTPNku0euntdpERIk/BD1QQ
+         0vys+m4NVO7ggE6k4GgIdWD/zuoHgjJalr6xvxkKLlZDdUthG5tsM9GeRFDXLASOXDJ3
+         vt/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793718604; x=1794323404;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=dEU71IS0wwhMDTJrSbomDqDev0IoHSU56kpILI3UNAg=;
+        b=vI7blrDMaGaIDe8GX2uF93achcvuEasUM0hjh68to8sWYa8B0CkQgFJ1bBwh3U7RWe
+         ltIFsJWkHHqkZoWCNb3YrV9Rcg59FHfdzoEQzxnC90d/FW8mSBcu8LkCwXaoKW2p/YKK
+         fAknAuoAd5UYo8ds6aGGF/Pp6C7EYvbvBjvHBRnLouYIaDouo3Yzq9qo541VuEjMfHT1
+         W5s+bQZZU+FKumJcCrm2aJ4FD2gE2Z3nx+yvzzPkicrV5/v2JXF/3rXLjMk5j1Ny2+e+
+         MOy22UhMsbUfmcMVuCIivAfKEhTQg/M+zg0t4fFmKd/MqqPgh9qndoNOGh5St4pvu1yR
+         HyEw==
+X-Gm-Message-State: APuU4Z9bWygW8S6x9Oc7T9r8i6gI+y/qk32/JpZBJZKB0DH4T56ezDbL
+	n3Ohuir2sepA6bRzOpchNaaW8hGPSUbcuEK1hvg1bD3kbOBhGykzArCZYtZ14gyj5n8d+w==
+X-Gm-Gg: AYBFou3rRwyk7WUrrJnh1CyA1Nm6JQYOTWU6ANzNbVsb6vPvQvlV7ACtFXIO9kA5dhU
+	HDBHiK8sRrlXv7ETPACikAXHsQDbWoZc5j9hEJERlk6yIqocLci8OJWvjOHjuj6iQ4SvgMz2XuE
+	7EFDjIuBzNczgjZc/npQsuzbVQ0tZtNKbWD1/fWT7URdhzaP/tpRUylEAnU++XBj9B3k5au3Pn+
+	2j2KnFdtAWCj97SmTzs1dKUWG6HkO9dA8QDGQ87wg3HuyOWQFnCAH587t8rICsZpZkV7NY9GVOP
+	Eg+vLj/RsQ6I4bHiNzVbKlavTRbnOTJRsEowehd1BMCv/AhaW5FCkY7VAAXURO4Ibgk7Bbo/MLM
+	twqz/XnZPnCLZ+awpAYZwjcgDh4xQ6g/WbvWX6VU0bdWmh1Amke4WGUGIbZfzs64C7jNSd+KtyT
+	G/bZNduIiyOtxpLox+Nli/zB91TnlYG2GbJFDD8ENRylk5DWM4LusqqL/TwsJkiTIhBKK109CtY
+	AUnrHYe/91tjC9yCcsr3haxM79ziw/ZGDuo5wwQ1NSqwvsag24BJg2pQPgyYQDuMNEpcWep7Ikf
+	l1ZlxkJbY9pO3HNM+6kCnsXp4w4BAhZT+kebiSIGZDiaqge/wilAJI3eZgD6rbtg7TiTgf/+wTA
+	8CIN5x8m+XYoqh9DbOfNlIQM6lyl++2089+v9taYMW5WW0A7PL5efFEIIbLz/SQoi9RU+2r2Spf
+	DWtm1Jdd6+cfXWrA4OWNWEQAoUVBkd1s2lDtLePrzQG4BpWySzYcL3q4PLN/TkFkWXPmMCA87Vr
+	0xnE4AE6NE3z1Y45IXtTADll7vn1edJ40b/iaIa1XqBnu00x6XuDw0lnB77AGrXIGTzpjFuQI3D
+	SVlZ
+X-Received: by 2002:a05:701b:2087:10b0:143:7001:7645 with SMTP id a92af1059eb24-1ac5d889adcmr20507076c88.47.1793718603701;
+        Tue, 03 Nov 2026 07:10:03 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm75076204c88.10.2026.11.03.07.10.00
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm75076204c88.10.2026.11.03.07.10.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 07:10:01 -0800 (PST)
+        Tue, 03 Nov 2026 07:10:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ross Burton <ross.burton@arm.com>
-Subject: [meta-oe][PATCH 1/2] libfaketime: Remove recipe, it is in oe-core now
-Date: Tue,  3 Nov 2026 07:09:58 -0800
-Message-ID: <20261103150959.4060867-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 2/2] python3-tomlkit: Remove recipe, it is in oe-core now
+Date: Tue,  3 Nov 2026 07:09:59 -0800
+Message-ID: <20261103150959.4060867-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261103150959.4060867-1-khem.raj@oss.qualcomm.com>
+References: <20261103150959.4060867-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 15:10:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131795
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 15:10:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131796
 Content-Type: text/plain; charset="utf-8"
 
-libfaketime was imported into oe-core (f3a4faaf4c "libfaketime: Import
-recipe from meta-oe") and has had fixes there since: a 32-bit build fix,
-the clang 23 fix, -O1 for the clobbered-variable error and the man page
-install. Both copies are 0.9.13 at the same layer priority, so bitbake
-picks one by parse order and currently ends up with the outdated meta-oe
-copy.
+python3-tomlkit was added to oe-core (46d3b26a63 "python3-tomlkit: add
+new recipe (from meta-oe)") and is at 0.15.2 there, so the meta-python
+0.15.1 copy is not used. Drop it, and drop it from the meta-python ptest
+list as oe-core's ptest-packagelists.inc already lists it.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 Cc: Ross Burton <ross.burton@arm.com>
 ---
- ...-write-only-real_-pointers-as-unused.patch | 68 -------------------
- .../libfaketime/libfaketime_0.9.13.bb         | 30 --------
- 2 files changed, 98 deletions(-)
- delete mode 100644 meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
- delete mode 100644 meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
+ .../ptest-packagelists-meta-python.inc        |  1 -
+ .../python/python3-tomlkit_0.15.1.bb          | 21 -------------------
+ 2 files changed, 22 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-tomlkit_0.15.1.bb
 
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch b/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 6e4af06aaa..5e999e6f1a 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -115,7 +115,6 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-time-machine \
+     python3-tokenize-rt \
+     python3-tomli-w \
+-    python3-tomlkit \
+     python3-trustme \
+     python3-typeguard \
+     python3-typing-inspection \
+diff --git a/meta-python/recipes-devtools/python/python3-tomlkit_0.15.1.bb b/meta-python/recipes-devtools/python/python3-tomlkit_0.15.1.bb
 deleted file mode 100644
-index c7a854a196..0000000000
---- a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
+index b0c51f21c5..0000000000
+--- a/meta-python/recipes-devtools/python/python3-tomlkit_0.15.1.bb
 +++ /dev/null
-@@ -1,68 +0,0 @@
--From d0fd7b4be89feb6a8809216b0dc1d84299bbad96 Mon Sep 17 00:00:00 2001
--From: Khem Raj <khem.raj@oss.qualcomm.com>
--Date: Mon, 7 Sep 2026 19:27:57 -0700
--Subject: [PATCH] Mark write-only real_* pointers as unused
+@@ -1,21 +0,0 @@
+-SUMMARY = "Style preserving TOML library"
+-HOMEPAGE = "https://pypi.org/project/tomlkit/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=31aac0dbc1babd278d5386dadb7f8e82"
 -
--clang 23 added -Wunused-but-set-global, which together with the -Werror
--in src/Makefile breaks the build:
+-SRC_URI[sha256sum] = "e25bbf38843005246210a12982776f27f99cb9be67160e14434d0c0d21ee1e97"
 -
--  libfaketime.c:340:23: error: variable 'real_lstat' set but not used
--    [-Werror,-Wunused-but-set-global]
+-inherit pypi python_poetry_core ptest-python-pytest
 -
--ftpl_init() deliberately resolves every real_* pointer up front ('Look
--up all real_* functions. NULL will mark missing ones.'), but several of
--them are only consumed on other platforms or under build options that
--are off by default, so on Linux/glibc they are written and never read.
--
--Annotate exactly those with __attribute__((unused)). This is understood
--by every gcc and clang that can build libfaketime, unlike a
---Wno-error=unused-but-set-global flag, which older compilers reject.
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-----
-- src/libfaketime.c | 20 ++++++++++----------
-- 1 file changed, 10 insertions(+), 10 deletions(-)
--
--diff --git a/src/libfaketime.c b/src/libfaketime.c
--index e674883..2addaab 100644
----- a/src/libfaketime.c
--+++ b/src/libfaketime.c
--@@ -337,26 +337,26 @@ static __thread bool dont_fake = false;
-- /* pointers to real (not faked) functions */
-- static int          (*real_stat)            (const char *, struct stat *);
-- static int          (*real_fstat)           (int, struct stat *);
---static int          (*real_lstat)           (const char *, struct stat *);
--+static int          (*real_lstat)           (const char *, struct stat *) __attribute__((unused));
-- #ifndef __ANDROID__
-- static int          (*real_xstat)           (int, const char *, struct stat *);
-- static int          (*real_fxstat)          (int, int, struct stat *);
---static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int);
---static int          (*real_lxstat)          (int, const char *, struct stat *);
--+static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int) __attribute__((unused));
--+static int          (*real_lxstat)          (int, const char *, struct stat *) __attribute__((unused));
-- #endif
-- #if !defined(__APPLE__) || !__DARWIN_ONLY_64_BIT_INO_T
-- #ifndef __ANDROID__
---static int          (*real_stat64)          (const char *, struct stat64 *);
---static int          (*real_xstat64)         (int, const char *, struct stat64 *);
---static int          (*real_fxstat64)        (int, int , struct stat64 *);
---static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int);
---static int          (*real_lxstat64)        (int, const char *, struct stat64 *);
--+static int          (*real_stat64)          (const char *, struct stat64 *) __attribute__((unused));
--+static int          (*real_xstat64)         (int, const char *, struct stat64 *) __attribute__((unused));
--+static int          (*real_fxstat64)        (int, int , struct stat64 *) __attribute__((unused));
--+static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int) __attribute__((unused));
--+static int          (*real_lxstat64)        (int, const char *, struct stat64 *) __attribute__((unused));
-- #endif
-- #endif
-- #ifdef STATX_TYPE
---static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf);
--+static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf) __attribute__((unused));
-- #endif
---static time_t       (*real_time)            (time_t *);
--+static time_t       (*real_time)            (time_t *) __attribute__((unused));
-- #ifndef __ANDROID__
-- static int          (*real_ftime)           (struct timeb *);
-- #endif
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
-deleted file mode 100644
-index 22c908f335..0000000000
---- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "A library for faking the system time in user-space programs"
--SECTION = "libs"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--
--SRCREV = "86b37fde2fed7336ea2d0c17928e3015a55d9b4a"
--
--SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;tag=v${PV};protocol=https \
--           file://0001-Mark-write-only-real_-pointers-as-unused.patch \
+-RDEPENDS:${PN} += " \
+-    python3-datetime \
+-    python3-profile \
+-    python3-stringold \
 -"
 -
--CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+-RDEPENDS:${PN}-ptest += " \
+-    python3-poetry-core \
+-    python3-pyyaml \
+-"
 -
--do_configure[noexec] = "1"
--
--do_compile () {
--    oe_runmake
--}
--
--do_install () {
--    install -d ${D}${libdir}/faketime
--    oe_libinstall -C src libfaketime ${D}${libdir}/faketime
--    install -d ${D}${bindir}
--    install -m 0755 src/faketime ${D}${bindir}
--}
--
--FILES:${PN} = "${bindir}/faketime ${libdir}/faketime/lib*${SOLIBS}"
--FILES:${PN}-dev += "${libdir}/faketime/lib*${SOLIBSDEV}"
--
--BBCLASSEXTEND = "native"
+-BBCLASSEXTEND = "native nativesdk"
