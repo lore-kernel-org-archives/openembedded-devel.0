@@ -1,264 +1,196 @@
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13177.1793717729118038616
+Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13531.1793718603447762682
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 06:55:29 -0800
+ Tue, 03 Nov 2026 07:10:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=BiyYRu3e;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-8ac525c1f05so40400897b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 06:55:29 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793717728; cv=none;
-        d=google.com; s=arc-20260327;
-        b=rKHRHOMU62lXuqhP5ZyuvuRYweU8QC1m8DSg3yaWGgTHdvY0sW0rxivFhWiFQ0rv1Z
-         2610S6oKTKvqUGaD+zAsr/WTCX6pJzAnYxKHZCoEMmrl3fHsIjmb8pFxzshsAAO40V+U
-         8Zt3HPvCtrdDT/lvGhYd2hYV33HaNp9HQENmm3v3y4FynCei4gqWbrd93wCPNmfRJmCc
-         JP9B/ZR3dNN26M7pm1qTWwjRgBGOLBtggcI6+3FOniV+ldWgabOLX6udEU/eMJt/Fq7p
-         8CW3FTAR1P0kwNsCqJK3pi1Xfd+TWP9UK26TVdsT9BlxZCf22fcIT6pp7xB6c1HZzhpc
-         rKBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=TNhghUbKegyR7vN4L+h5AtQYj0r4noo9L8npG7SO7aQ=;
-        fh=2nN/GzVxUjERD0LNgf9vNaPM58ZIkCHYlMJQEwcNq0M=;
-        b=RVc4F4VwKmVqCCh3tVqppYzyu79lKRPyXVImO0fXlkCHyvdJ8K++FhmnXQ8LM6hsgz
-         j84Tl8yk6/PquqrwRIWGigbg1ZHL7XqJFDGfilVFX5jdHiOhfxSQnR5r8Z11WTvKfU3i
-         YKqqFHWukyxlonz/JZsuWEOPaupI4Wchn4lUmMGYKIbYZ2yBKVam37YbT2emA9ymOeAq
-         Rhf7AAm633iFp0HxLLqJQh2KCXrfzVSIVbGuOsH956g8bUeYafaoX1MjLBwZ8OEtK3Ty
-         vJs/yPbaoa0lWAhmY+YopGI9oDXecftARjIHgRG2GqkMLB7i+7hlWzlmhVQdCDCYOGAJ
-         2XsA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=KPSiDNyB;
+ spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-1a2761c69fbso7313236c88.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 07:10:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793717728; x=1794322528; darn=lists.openembedded.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TNhghUbKegyR7vN4L+h5AtQYj0r4noo9L8npG7SO7aQ=;
-        b=BiyYRu3ezbQbeMEZ+mu5QWUkkTb36u7QXCAyt2ejjQsWI92gprh9AcXZJiYTyepkAz
-         ynvYTYPZSh7AjgJh/ZnmHEGSy4qBE95r3HBk+aGNpPHRbWqsiDisy4je85engLi2H5fz
-         MX2nhCmVjMfglGNZqRFrdK85qN+MTsafFYrqs1NDzrzluzcN9LGv9VzECyF+TiGUFFWB
-         cdxv84c8ZCNQj5r062B1/wVtfk9Zd8YKfbB3i/0a8jwggp6ZaCljU0f12WvwsOU9I+L1
-         /6QraxI8fGIQSFxUVQGYO3vbZR3GlGFi3AlCPRj0OwY9Z+5zKKUreRFIKapqasUFlJdl
-         QcrQ==
+        d=gmail.com; s=20260707; t=1793718603; x=1794323403; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ssSZbrj06g/Aoj7r99pEXxq5HjQ6fnj0TSZ4L0bSymc=;
+        b=KPSiDNyBxm/0eHDNeGfTvL/IW5tFS8a071/5cqta5VbFLjmaHiYjIo0i2HRRyC+Iq6
+         h8NYX6YtDgRdjuYIgy8Cp0Ao/CNieP22zK0oVMX4o00a9WRACsWXlTiG/mJqFeBzvHv1
+         v+S2jjFsWJe/Zpm//tezWFpukYk16/uXtvfj62ULmuSLTCd+AhOqtdOmGjN4KPilQeCa
+         jNFQwhfbe8N+o6yOOIPFPycJtNlJ47xTOWA5BwULRs4gRbj2rdMxnNROzBI1guLkpxpS
+         BEHiPXvBRzwwy1EMq1i6u+CV4qz9JzRSTRvYjJHrhNbuc/iiPfhB6vgjOlmXOqRcYPWU
+         qBNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793717728; x=1794322528;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=TNhghUbKegyR7vN4L+h5AtQYj0r4noo9L8npG7SO7aQ=;
-        b=ciXLE4jAtdhG/OohGDEiT9R0ayIXk7SoK+6naqJdUKNVxXL+keRIk5HJlVQ7hp7o+5
-         Gbjx9J6gBNdksQSl/lDc4cUGRBkKNsuuNtid6YwhCOMYgT15/6kHBqQSx9gKJz1YTFC8
-         Z6oz7FgRlpcJDyBov6ZYtml9eIQNZ8g0y8YE+cxnX7ldoT9j7fo557iBK1Wf1d8FGuRx
-         mgAT/XyJRx8MvIDGPtOcTEED+09fkF704tkPJagwaofJK/Q/QhNHzq31Gk4GDRIQm+k8
-         hg+fmt9v8dekGcJ9pEOpkAsu12tvFjMMz4LnqTNpBK5Tj1dpRf+te/obUWMgPu+MgMxH
-         fxLQ==
-X-Gm-Message-State: APuU4Z+LNDicAukPcbSpcMs88FaLI8Z4pTrassgdNm0N1E/KV6HYbGvt
-	VrVAuCk0Gn7TDurlrJXRpaHSfcxy5rCFfBrk2iEX6v4+hL7vfu8NuB+v9rJkkY2LiaH/AbC/LuI
-	iAPQqwbFR0hwfLDj7pkhfw0HpridZEyo=
-X-Gm-Gg: AYBFou0WGKAagRdkaWbFDDeUv3sFUBonBUBsahDxPuVkQZ01JaEFBNzP68R4eib9ipV
-	Q8nk5qDFmsrL7P6c+TRwtq4d//zUyoqKrCwpbb1GYI7n7s8F9Rillq4WSJQRwWXjGAuo7MH+yLf
-	PFgdCilXotYdb750aHBg97nsLc96HpwOVkB+c4XofOU+2GTlXfJZWh1vb+et3diQkKfIRJMenh8
-	lHHpPuMVZ/khObBKLdhmNtClLeZsujxCSa7Dc5xiEBkVMTrSWMsTQL6u3uXVF76+aHDRAzW7eBD
-	ZtZpgDMucM/mIdU+CS8B4dUc4Pl2yBPKidnP57hLGOG3O6BCBwbjQB0Em4NusdaGgH+HcloEj7K
-	QX4JmLM6cgtd46ht18/CuEmp37jWYE34eRv3HVNgfBem/2UWoh2TEF7HYVBcb+w8coGOXN9nOjb
-	sLMeYvZPDzQZfnyX9Aj0qh/gqENPaEpcMthcQHKqO0iFMn9l7qp8NBUzTX8cRju892EnZimoJT/
-	Krkr+RjlPP/ihU7sU0XeUk2v+T8dMBZRW668m+gTnh5eNZiFdZWAkryKRe68sm9Wqprlk03BDWQ
-	/Hz0dWCjrsCcau2Gq6I2UKo33sfhC+b2HggcVfMcRbGE/9lNlHoXsABvG471N3trpuVTTVgEODF
-	mkpE3+cjxUbzjpIhT9KQk+A==
-X-Received: by 2002:a05:690c:39b:b0:8b1:46a1:2893 with SMTP id
- 00721157ae682-8b2b6597d22mr106886507b3.6.1793717728125; Tue, 03 Nov 2026
- 06:55:28 -0800 (PST)
-MIME-Version: 1.0
-References: <20261103145328.1973965-1-leon.anavi@konsulko.com> <20261103145328.1973965-3-leon.anavi@konsulko.com>
-In-Reply-To: <20261103145328.1973965-3-leon.anavi@konsulko.com>
+        d=1e100.net; s=20260707; t=1793718603; x=1794323403;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ssSZbrj06g/Aoj7r99pEXxq5HjQ6fnj0TSZ4L0bSymc=;
+        b=sh7Lg4ZNWauyH+6wjifWphAoW4GuEHsUzwiDTsyGNVhX9rcmlUepBF84dbH+WBx5ZM
+         HeOJV+pr3GvsKLu2BWvYovfvkhfCRBVwuIq18BVgMufa6jM87vir6rVyvnFStCQd0/SY
+         qmqRoNpX3HkLUzikhmqWgEjTzMdeRvHdwiQWdBF68Qh3vnTY1tTYKXvXipQCYt1tqBB9
+         UHzIpr52W5Ekyz9HhNj6SMGC1maGGICGPH1v9lkG+cY5SCc6lMLumO237cArVia8fUfk
+         V8FNh7VWj6cT0lYbMCNwrq3or6YEY1f2xnJvkD5x5TbA41yNPkPc6r/vCJs9CE3+12Xw
+         4HrQ==
+X-Gm-Message-State: APuU4Z+7sGH6FJsaDuo8Vim83d6ZjshURADOT1M6UTplnk8PEzyOT09t
+	anB6QyXmnQl6OlWKhw6SigXltWwwchFSAIPqkeNJV3OxPUv7FrZSGdB8090VtLGOeiL5Qg==
+X-Gm-Gg: AYBFou0Bi9mU1oBYGY5tgwNUdcVu4zAYwtggBt+vx3mVfQH94fMbM8dQSs4IsZD41zG
+	wVOSDQEKPIlTsk+DZBCg7WdXysLFcd0Qf/l6BTo/L5CCFNsjQzGZL2/3cM7bCGHDka70WSVv3lG
+	3S8fbPId1VTa4oEn3eJUx66xKOrqrRDnv1tkIu0hjbd1DbCHocRHB3cFaCJLEaIuj1JvEAqTkZn
+	UQk/TYbeQ+/Tu96J2t52z6s3Pt/w/zfhDoB7z+3x0fVva0c3a3MD2u6nRHO69kIBKusHcGf0mxQ
+	xX2sLRIkdUZ/8fMsyXutUiPpOw1z+yowisXxEUv7NlsC8XJ9RQ5kXROAuEdZKZjDSxUZDOk+qvO
+	pG4o+t0SqzqIbK4mpaBNiAOctVLk4xfRuGPbsVe6g8a+RvmvhDZRLRpl3zl39tJ08tjZ8L4zTbP
+	Nz+d+LSce6pt8FVSR5NvL6XqZT05hej0g21L6yvYUFMyyxJ8uIf2afPJ8qTE+Lzz9oaLlFKE53B
+	T5xFTsuU4W7txlA6mChm4uP+sNgcicB3MupXWt6bdB9C4lPixgtO+HJDmiymsyiVrHd+UqvWk1j
+	77DbUbrLDPvT+rVw5VefgA0mA4nkjK3prRY0jEvkvriDHbWs4TlQd+JO3xkhHE3hfK+r97+UwH5
+	msNDMI3bh92nfHA5NYSMfnrD4+3OPoLugV58IMuXnYS4JwJJ4VXNOUBW9Acdw7oXhbKqPdFCEk8
+	WcoO+RdR8oLblJ+M+ZgTQDsVXxHYa48woyISkFjRvQZqqj30skIbmj+nmQBOs8lenURRUVEyA3A
+	RnJsIZ3Ye4Es+LlL9f7n1vv32Obz7hUbzvfdGdc2aZ38oI0e63AwZE8py6Q19LQAmXH87E44us3
+	q7j/YGNDKY3zbacQH72194sGgg==
+X-Received: by 2002:a05:701b:4515:20b0:1a7:78a3:bda8 with SMTP id a92af1059eb24-1ac5b5ee671mr20089907c88.27.1793718602425;
+        Tue, 03 Nov 2026 07:10:02 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac192c27cdsm75076204c88.10.2026.11.03.07.10.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Nov 2026 07:10:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Nov 2026 06:55:00 -0800
-X-Gm-Features: AclHuK8bbIP2jW4g5HLs_Krf5qTcuzKRcD89BVtGPKcdHPJ2OGLl1AhXm0lFV60
-Message-ID: <CAMKF1soPVRZnP2TMvtwU1KOgsndQjJmNZbVgsFxncDu+-oO20Q@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH 3/3] overlayfs-tools: Upgrade
- 2025.01 -> 2026.10
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000000328a1065f6074c4"
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ross Burton <ross.burton@arm.com>
+Subject: [meta-oe][PATCH 1/2] libfaketime: Remove recipe, it is in oe-core now
+Date: Tue,  3 Nov 2026 07:09:58 -0800
+Message-ID: <20261103150959.4060867-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 14:55:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131794
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 15:10:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131795
+Content-Type: text/plain; charset="utf-8"
 
---0000000000000328a1065f6074c4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+libfaketime was imported into oe-core (f3a4faaf4c "libfaketime: Import
+recipe from meta-oe") and has had fixes there since: a 32-bit build fix,
+the clang 23 fix, -O1 for the clobbered-variable error and the man page
+install. Both copies are 0.9.13 at the same layer priority, so bitbake
+picks one by parse order and currently ends up with the outdated meta-oe
+copy.
 
-On Tue, Nov 3, 2026 at 6:53=E2=80=AFAM Leon Anavi via openembedded-devel
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Cc: Ross Burton <ross.burton@arm.com>
+---
+ ...-write-only-real_-pointers-as-unused.patch | 68 -------------------
+ .../libfaketime/libfaketime_0.9.13.bb         | 30 --------
+ 2 files changed, 98 deletions(-)
+ delete mode 100644 meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
+ delete mode 100644 meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
 
-> Upgrade to release 2026.10:
->
-> - meson: Disable tests build by default
-> - Define attr dependency
-> - Test if merged overlay is usable after mounting
-> - Remove trusted xattrs from upperdir metacopies before copying
->   attributes
-> - Add Option To Use rsync for merge Operation
-> - Support merge metacopy file
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  ...verlayfs-tools_2025.01.bb =3D> overlayfs-tools_2026.10.bb} | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
->  rename meta-filesystems/recipes-utils/overlayfs/{
-> overlayfs-tools_2025.01.bb =3D> overlayfs-tools_2026.10.bb} (68%)
->
-> diff --git a/meta-filesystems/recipes-utils/overlayfs/
-> overlayfs-tools_2025.01.bb b/meta-filesystems/recipes-utils/overlayfs/
-> overlayfs-tools_2026.10.bb
-> similarity index 68%
-> rename from meta-filesystems/recipes-utils/overlayfs/
-> overlayfs-tools_2025.01.bb
-> rename to meta-filesystems/recipes-utils/overlayfs/
-> overlayfs-tools_2026.10.bb
-> index 3b5963bb26..6a3d609567 100644
-> --- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb
-> +++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.10.bb
-> @@ -7,14 +7,10 @@ SRC_URI =3D "\
->      git://
-> github.com/kmxz/overlayfs-tools.git;protocol=3Dhttps;branch=3Dmaster;tag=
-=3Dv${PV}
-> <http://github.com/kmxz/overlayfs-tools.git;protocol=3Dhttps;branch=3Dmas=
-ter;tag=3Dv$%7BPV%7D>
-> \
->  "
->
-> -SRCREV =3D "6e925bbbe747fbb58bc4a95a646907a2101741f6"
-> +SRCREV =3D "950d0cf35e4f917b6836565d76e38bcf7fcf2d5f"
->
->  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
->
->  inherit meson pkgconfig
->
->  DEPENDS:append:libc-musl =3D " fts"
-> -
-> -do_configure:prepend() {
-> -       sed -i '/Custom targets for testing overlay function/,/command :
-> .*permanent...changes/ d' ${S}/meson.build
-> -}
->
-
-Why is this hunk removed ?
-
-
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#131793):
-> https://lists.openembedded.org/g/openembedded-devel/message/131793
-> Mute This Topic: https://lists.openembedded.org/mt/122076983/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---0000000000000328a1065f6074c4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Nov 3, =
-2026 at 6:53=E2=80=AFAM Leon Anavi via openembedded-devel &lt;leon.anavi=3D=
-<a href=3D"mailto:konsulko.com@lists.openembedded.org">konsulko.com@lists.o=
-penembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex">Upgrade to release 2026.10:<br>
-<br>
-- meson: Disable tests build by default<br>
-- Define attr dependency<br>
-- Test if merged overlay is usable after mounting<br>
-- Remove trusted xattrs from upperdir metacopies before copying<br>
-=C2=A0 attributes<br>
-- Add Option To Use rsync for merge Operation<br>
-- Support merge metacopy file<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0...<a href=3D"http://verlayfs-tools_2025.01.bb" rel=3D"noreferrer" ta=
-rget=3D"_blank">verlayfs-tools_2025.01.bb</a> =3D&gt; <a href=3D"http://ove=
-rlayfs-tools_2026.10.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-too=
-ls_2026.10.bb</a>} | 6 +-----<br>
-=C2=A01 file changed, 1 insertion(+), 5 deletions(-)<br>
-=C2=A0rename meta-filesystems/recipes-utils/overlayfs/{<a href=3D"http://ov=
-erlayfs-tools_2025.01.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-to=
-ols_2025.01.bb</a> =3D&gt; <a href=3D"http://overlayfs-tools_2026.10.bb" re=
-l=3D"noreferrer" target=3D"_blank">overlayfs-tools_2026.10.bb</a>} (68%)<br=
->
-<br>
-diff --git a/meta-filesystems/recipes-utils/overlayfs/<a href=3D"http://ove=
-rlayfs-tools_2025.01.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-too=
-ls_2025.01.bb</a> b/meta-filesystems/recipes-utils/overlayfs/<a href=3D"htt=
-p://overlayfs-tools_2026.10.bb" rel=3D"noreferrer" target=3D"_blank">overla=
-yfs-tools_2026.10.bb</a><br>
-similarity index 68%<br>
-rename from meta-filesystems/recipes-utils/overlayfs/<a href=3D"http://over=
-layfs-tools_2025.01.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-tool=
-s_2025.01.bb</a><br>
-rename to meta-filesystems/recipes-utils/overlayfs/<a href=3D"http://overla=
-yfs-tools_2026.10.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-tools_=
-2026.10.bb</a><br>
-index 3b5963bb26..6a3d609567 100644<br>
---- a/meta-filesystems/recipes-utils/overlayfs/<a href=3D"http://overlayfs-=
-tools_2025.01.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-tools_2025=
-.01.bb</a><br>
-+++ b/meta-filesystems/recipes-utils/overlayfs/<a href=3D"http://overlayfs-=
-tools_2026.10.bb" rel=3D"noreferrer" target=3D"_blank">overlayfs-tools_2026=
-.10.bb</a><br>
-@@ -7,14 +7,10 @@ SRC_URI =3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/kmxz/overlayfs-tools=
-.git;protocol=3Dhttps;branch=3Dmaster;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" =
-target=3D"_blank">github.com/kmxz/overlayfs-tools.git;protocol=3Dhttps;bran=
-ch=3Dmaster;tag=3Dv${PV}</a> \<br>
-=C2=A0&quot;<br>
-<br>
--SRCREV =3D &quot;6e925bbbe747fbb58bc4a95a646907a2101741f6&quot;<br>
-+SRCREV =3D &quot;950d0cf35e4f917b6836565d76e38bcf7fcf2d5f&quot;<br>
-<br>
-=C2=A0UPSTREAM_CHECK_GITTAGREGEX =3D &quot;v(?P&lt;pver&gt;\d+(\.\d+)+)&quo=
-t;<br>
-<br>
-=C2=A0inherit meson pkgconfig<br>
-<br>
-=C2=A0DEPENDS:append:libc-musl =3D &quot; fts&quot;<br>
--<br>
--do_configure:prepend() {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i &#39;/Custom targets for testing overlay=
- function/,/command : .*permanent...changes/ d&#39; ${S}/meson.build<br>
--}<br></blockquote><div><br></div><div>Why is this hunk removed ?</div><div=
->=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#131793): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/131793" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/131793</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122076983/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/122076983/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---0000000000000328a1065f6074c4--
+diff --git a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch b/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
+deleted file mode 100644
+index c7a854a196..0000000000
+--- a/meta-oe/recipes-test/libfaketime/libfaketime/0001-Mark-write-only-real_-pointers-as-unused.patch
++++ /dev/null
+@@ -1,68 +0,0 @@
+-From d0fd7b4be89feb6a8809216b0dc1d84299bbad96 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <khem.raj@oss.qualcomm.com>
+-Date: Mon, 7 Sep 2026 19:27:57 -0700
+-Subject: [PATCH] Mark write-only real_* pointers as unused
+-
+-clang 23 added -Wunused-but-set-global, which together with the -Werror
+-in src/Makefile breaks the build:
+-
+-  libfaketime.c:340:23: error: variable 'real_lstat' set but not used
+-    [-Werror,-Wunused-but-set-global]
+-
+-ftpl_init() deliberately resolves every real_* pointer up front ('Look
+-up all real_* functions. NULL will mark missing ones.'), but several of
+-them are only consumed on other platforms or under build options that
+-are off by default, so on Linux/glibc they are written and never read.
+-
+-Annotate exactly those with __attribute__((unused)). This is understood
+-by every gcc and clang that can build libfaketime, unlike a
+--Wno-error=unused-but-set-global flag, which older compilers reject.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+----
+- src/libfaketime.c | 20 ++++++++++----------
+- 1 file changed, 10 insertions(+), 10 deletions(-)
+-
+-diff --git a/src/libfaketime.c b/src/libfaketime.c
+-index e674883..2addaab 100644
+---- a/src/libfaketime.c
+-+++ b/src/libfaketime.c
+-@@ -337,26 +337,26 @@ static __thread bool dont_fake = false;
+- /* pointers to real (not faked) functions */
+- static int          (*real_stat)            (const char *, struct stat *);
+- static int          (*real_fstat)           (int, struct stat *);
+--static int          (*real_lstat)           (const char *, struct stat *);
+-+static int          (*real_lstat)           (const char *, struct stat *) __attribute__((unused));
+- #ifndef __ANDROID__
+- static int          (*real_xstat)           (int, const char *, struct stat *);
+- static int          (*real_fxstat)          (int, int, struct stat *);
+--static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int);
+--static int          (*real_lxstat)          (int, const char *, struct stat *);
+-+static int          (*real_fxstatat)        (int, int, const char *, struct stat *, int) __attribute__((unused));
+-+static int          (*real_lxstat)          (int, const char *, struct stat *) __attribute__((unused));
+- #endif
+- #if !defined(__APPLE__) || !__DARWIN_ONLY_64_BIT_INO_T
+- #ifndef __ANDROID__
+--static int          (*real_stat64)          (const char *, struct stat64 *);
+--static int          (*real_xstat64)         (int, const char *, struct stat64 *);
+--static int          (*real_fxstat64)        (int, int , struct stat64 *);
+--static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int);
+--static int          (*real_lxstat64)        (int, const char *, struct stat64 *);
+-+static int          (*real_stat64)          (const char *, struct stat64 *) __attribute__((unused));
+-+static int          (*real_xstat64)         (int, const char *, struct stat64 *) __attribute__((unused));
+-+static int          (*real_fxstat64)        (int, int , struct stat64 *) __attribute__((unused));
+-+static int          (*real_fxstatat64)      (int, int , const char *, struct stat64 *, int) __attribute__((unused));
+-+static int          (*real_lxstat64)        (int, const char *, struct stat64 *) __attribute__((unused));
+- #endif
+- #endif
+- #ifdef STATX_TYPE
+--static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf);
+-+static int          (*real_statx)           (int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf) __attribute__((unused));
+- #endif
+--static time_t       (*real_time)            (time_t *);
+-+static time_t       (*real_time)            (time_t *) __attribute__((unused));
+- #ifndef __ANDROID__
+- static int          (*real_ftime)           (struct timeb *);
+- #endif
+diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
+deleted file mode 100644
+index 22c908f335..0000000000
+--- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.13.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-DESCRIPTION = "A library for faking the system time in user-space programs"
+-SECTION = "libs"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-SRCREV = "86b37fde2fed7336ea2d0c17928e3015a55d9b4a"
+-
+-SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;tag=v${PV};protocol=https \
+-           file://0001-Mark-write-only-real_-pointers-as-unused.patch \
+-"
+-
+-CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+-
+-do_configure[noexec] = "1"
+-
+-do_compile () {
+-    oe_runmake
+-}
+-
+-do_install () {
+-    install -d ${D}${libdir}/faketime
+-    oe_libinstall -C src libfaketime ${D}${libdir}/faketime
+-    install -d ${D}${bindir}
+-    install -m 0755 src/faketime ${D}${bindir}
+-}
+-
+-FILES:${PN} = "${bindir}/faketime ${libdir}/faketime/lib*${SOLIBS}"
+-FILES:${PN}-dev += "${libdir}/faketime/lib*${SOLIBSDEV}"
+-
+-BBCLASSEXTEND = "native"
