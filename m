@@ -1,133 +1,140 @@
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.57])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5535.1793784730051190633
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5594.1793785813401731987
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 01:32:10 -0800
+ Wed, 04 Nov 2026 01:50:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=tohhUtUc;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.66.57, mailfrom: johannes.schneider@leica-geosystems.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e8ZAgWwp0nOOwGPPDBJ5uwEki70V0P0kYtqxRoi2HNhOtj6x3HG3qOkRLS/uz5Oco4dXPsA/RhUU+7s/ArKBRJbmzgt54UJvluWkZ11EtN5+nDOU4RSfxyt01UsEz/E1s21qn4rrl/dMzk2NKXgzdyXINs7xUd60asgxzb+zyks1wcHoGNvx+0WBbo4PBLtZUJZbLALBX9RkwFQTc0jqFCqyb4xPA7n/4uBiodyT3m0U9ZwCt+Nb72yt4nPyK0lATbz00IHv5f3JpJPcopFfhE3Wy27phKIcEEd0R49mmZllgIX1UdCgXm4+4i8tqB6hDInTpJbK433vpUC+IGkr+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZDWrFl/ZWdW0unm3k+M7LR0BjJ4PbA09PrXzUQHs+aU=;
- b=H/rbmLKbZG5duzit2HfkMoQIzXotA1Yhe1Du7yu9Q90BHpWwNUSAIxChx0nmg7qfpCItB/8OEoH/BWlWK1RsC8jnUeKz0y9NBAmIdZ8U2gEF4W0L4oZPgK79vai3l8JV0XSZYD8rHPSMfc6jLn5sohxQxKtV7NF9nk+svZfugk011JTxJ32pEuKC9tUdjLQ71gqCCEZTushzMnXyWDBneAd2Wj/r7FKRQq8cKu0moKgAUOGnNydnIM3SroNYDyDLehaKYplLBAVR3H8LhhZQvLOh4YHyVIkmnH/PQhBkKct4ZG687EO1vMOkeUBi5ImZ3Q1eclksFowGjXhPNOSnFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=leica-geosystems.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZDWrFl/ZWdW0unm3k+M7LR0BjJ4PbA09PrXzUQHs+aU=;
- b=tohhUtUcqT72dRz5ROIZ7dCZM1xp6QMPaewADuDMjJykU3mGcNqXPrmx8p7WanThm5O1SSvIAk4zMARxKKGuKanQrVAHsYuMM/nyDRMm1oQymImprgPfRHRMvfmPslxN0SHv5IC9OvfaR3ijyB3F5ozY8cQ75QBuUPTiD+FNxIA=
-Received: from AM9P195CA0005.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:21f::10)
- by DB9PR06MB8091.eurprd06.prod.outlook.com (2603:10a6:10:268::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Wed, 4 Nov 2026
- 09:32:02 +0000
-Received: from AMS0EPF0000056B.eurprd02.prod.outlook.com
- (2603:10a6:20b:21f:cafe::8b) by AM9P195CA0005.outlook.office365.com
- (2603:10a6:20b:21f::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.9 via Frontend Transport; Wed, 4
- Nov 2026 09:32:02 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
- signed) header.d=none;dmarc=pass action=none
- header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.99; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.99) by
- AMS0EPF0000056B.mail.protection.outlook.com (10.167.242.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.592.5 via Frontend Transport; Wed, 4 Nov 2026 09:32:01 +0000
-Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Wed, 4 Nov 2026 10:32:01 +0100
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-To: openembedded-devel@lists.openembedded.org
-CC: Jan Luebbe <jlu@pengutronix.de>,
-	Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Subject: [meta-oe][PATCH v1] signing.bbclass: set all softhsm config keys explicitly
-Date: Wed,  4 Nov 2026 09:32:01 +0000
-Message-ID: <20261104093201.3491037-1-johannes.schneider@leica-geosystems.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=gdbl0cfp;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=YCPzNbq8;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: bartosz.golaszewski@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A48KaEe2232021
+	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Nov 2026 09:50:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=kppSjTGl24Gx3Gy7+kuc4PDDM9/4TpBVsH3
+	CsrMwlGY=; b=gdbl0cfpUQWWgptjqPUBubFHbahNVJG8yQ6eXlfx2IE2V33rSg1
+	blq4BkC8wwCLifWLTNk9a/XTyCm1t7j1BFLsSk+OfsIBv5nGm1e8Cz2HrvDLR6G9
+	wM4curMMKdXlaLKfNnRwXncUMu+wSINL4zwS47Q6sc4H+xL8Ilty5YehpdvMms1K
+	4/c+O3fafkSJ+U8xKFNHFS7b7+qTy59IB1Nm6qqqECvJLsJI6rU5Ss6tRmx98cNe
+	dPNvpgy+xSQTDNp16UD06yPPjVbM7bF/Vpi/X07qq06MMqkHHB4FHmdMcH4YEm87
+	HSwVK+7P4RZsj9NSn10vQLq1secP6xBamIw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqm2pkgf3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 09:50:12 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2c0e6653so112203885a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 01:50:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793785811; x=1794390611; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=kppSjTGl24Gx3Gy7+kuc4PDDM9/4TpBVsH3CsrMwlGY=;
+        b=YCPzNbq8hbdQNuws7rPAk9ReqvSsh8DmPVzEEjVYUu/W/5UVI/xNT6hLt3PG9DExoq
+         oKq5O9QLDzfqSn0K8tfv+imQtGgMN9BMrVnf7cDeZlHO76PlCT98c9sLQPB79ZiVowG5
+         mMQCpG5SxQQBoxubur5WkUhBoSVBAXshUqhHtiVtyub848lSL/Ks1EXNh5sIdkPJQCQu
+         1zXSaZzaqwYMKo3CAH0XEdQI6AudoJyFO6WUIpoWd6QZbjH3nry5+t+WZhSJGqjre0hh
+         afzDedI2j/OXYjT1TrJLr10wE3O4TsiFOfrxfULqvopmgDZhBmMSl987BNcHBmFMilpF
+         bBgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793785811; x=1794390611;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kppSjTGl24Gx3Gy7+kuc4PDDM9/4TpBVsH3CsrMwlGY=;
+        b=yxHRDjaziYEVqxr9h9+2l+ktCvAmlhC/TxIODzAn/xbYfK7CKZsY6wAHNtuNIuh+3n
+         tCalZBRCBruzQuTZqlvDqiSaLTYeYbH/83NHtjJhnvBDRcj5Xw2lSdURWSIGwi3K05t6
+         1Aq2pYw1nON4WWHIAPxn4FHXIlpS4T0rrRKuDA5FUEBUhS0YaTV5ks34bzCvCauu3N5l
+         hApMN8uZu6hmuYUlSSWbJ7cNZ4PaMWYH08sOu604F8//awyUuc2bqTiFaQxXirhF8E63
+         M/0gDUFx07s6PqpnnvoDC1GIRIiWGRtN0V30gy7XgZv58vBATi5lyx/f2uDuu4r68fhE
+         idMw==
+X-Forwarded-Encrypted: i=1; AKwUvBxPgFWppu0YUeMPxUBI7soXcCzvXKkO5Ss2Nc6TNQ2rQuz/qy2s2b/rZ4zLYxMUYN0BF67/G5l8PAiZmiBJp+zP518=@lists.openembedded.org
+X-Gm-Message-State: APuU4Z8x2W12CY96EZh5o9GPML300t5DPB0Iou0VJI0USXcEQzFWRyIw
+	t8EBjB7D4OyjbhLgRImUpSqUE0NE4ScWJLboBpmi3mVIY7PiDPM6qNktqCImgjOK7+45Pgba1PZ
+	oZggX3g8VUWa4eC3NV87sPONrXerN6PMEsIC8y9WgZzeSXEKjGCOj0qTF+ALJ+/DyxIyr/Fq95k
+	5aaOpTB2Tw
+X-Gm-Gg: AYBFou0UwwdK1y9A4vQVeUqeqKYShi4myejAaZcFSBWME5ipIjNWQZfAzW6Nm3bfsTU
+	wN+RGEcaVfbRdYsAk13pZKEH2m/xXEWFVVxGNcpdE+TwNH9kt8pl/M5Bni8q9frrqQu62+VyhlH
+	NVSIAvNijV6VNoVb3xnVKtqclgORkBouz+/ZxE3HG7OeikRLEx+PL9WkrtmviTboE0Wh+M9cTca
+	N7P9980pj5D/jYBXks4FGxix/v3mDzdBnhyAOODxhRhvBVfDMzix6FTAxrNRw7Wtq3NVQ0HrHiJ
+	/6RMHHDV/pXt0iBd3XY6ApVtu3zEUBVOfQdFiaCdzf0Rxf/+YsN1LTXMQijzQrFBtA4GjyI7qwD
+	mBCpWaj6dObqqbynE0Oj0rLAy3WNg3RO/+LJwp0mYcZv/u7ziLznPD0fwc/bbEv4zS4lVN6mr9x
+	i4
+X-Received: by 2002:a05:620a:3703:b0:93c:8e3f:3036 with SMTP id af79cd13be357-9442158807emr2505391785a.4.1793785811463;
+        Wed, 04 Nov 2026 01:50:11 -0800 (PST)
+X-Received: by 2002:a05:620a:3703:b0:93c:8e3f:3036 with SMTP id af79cd13be357-9442158807emr2505389585a.4.1793785811031;
+        Wed, 04 Nov 2026 01:50:11 -0800 (PST)
+Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a80e0fe6sm141504875e9.1.2026.11.04.01.50.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Nov 2026 01:50:10 -0800 (PST)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
+        openembedded-devel@lists.openembedded.org
+Cc: brgl@kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-gpiod: update to v2.6.0
+Date: Wed,  4 Nov 2026 10:50:06 +0100
+Message-ID: <20261104095006.34150-1-bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-Path: johannes.schneider@leica-geosystems.com
-X-OriginalArrivalTime: 04 Nov 2026 09:32:01.0540 (UTC) FILETIME=[588DA440:01DD6C3F]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF0000056B:EE_|DB9PR06MB8091:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9212c0ba-5fbb-4a9b-599c-08df3a567b31
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|82310400026|36860700016|23010399003|376014|1800799024|6133799003|10067099003|18002099003|56012099006|11063799006|261022075727099003|261022113327099003|261102123227099003|261026121527099003|261021121427099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info: NNcGpAInDF3Q9NHxFpX5NhfAzlDalAdGuEG1VLiXQYX2RU7MJIcJ2ZqSNKIox0j9ME7oc0Osxqtmdu1WtbiAyhcVKgzYUvUKOD3G+3e/efgu8bPZao82h9UPGiRivk8iZ9rb+617PSBp4n0AQZm7Pt+QMrsV0jEdf6y8x86aZ/OAZOxZ3HJxu/PKsJb4dQBi0qNM0u9mvmYjzWyadJjoLD1qQ+41PTtaA500/81hINbzOB5PtF/via5bhCvPfl0bZvt59uzBk7DxU59S2sa3BWHee1pQX+Ea/tuAlG8xygWN248u3bQHyfctCxigkg3GeqL9Vr5/12QiB6U1y8pQxo5CUQjHBI1AIBSqqaxCUHASKTH/Z6Lgn6EL4O3sIA9UP9J+UV3zjjlo6LTM2TU7jRB3+vd3zVZpf7OhifrZ9Vphe2O6/jR8nXakmqcyCACfgIyNzTX3KeVwGudtt637FVHCeDfTah/OK9VQAgG/YOak6JiT8+rCT+gXOjCaXimuWMxiIHI/pdu2zR8+5W+nnT1jAJTSyKdVNdlpMkKniWcZBA5B+QwCTZGCpnjCCCqB2Xz/3m5CqVG1s8Jz9x3vw5TPE8M48juE+s4QVcKpAPzPaDjZVTGGvNUYstco0mbWYx7ARJOsv5FjMavHpZ0ZvCSbGNXEEJcBAyH3P6Xu4knUhuhDjf6xxRZf+AyVdRcreHmFVb5lDLPmafGdnYXqeQ==
-X-Forefront-Antispam-Report: CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(376014)(1800799024)(6133799003)(10067099003)(18002099003)(56012099006)(11063799006)(261022075727099003)(261022113327099003)(261102123227099003)(261026121527099003)(261021121427099003)(261009223027099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: LqpYAa2CXmpfmGu87lRluYk6AnRL7wVaipBw2opUToTlcDBg9AexWDhpZuDGzawqVjX+zfrmsBHGzdz7GfFa4DFTvmNMCpX7HlobAPoF7meTG3PJ+54glTo1QKKfQXlZJQ5KMv3s/dDNbjQz9fNrGE4NDulWLi4m+Jf1GdK0rQQ9MEbRb2+PH8v0qYmdvSC1qQSuXWIcUednCTEZvwTm/RD5WOsssOGNcRj1MPKkDQz1gHIHck65sVEzBkwRzqZBhFrJJLyRGxLJViHA0M0n9ygOQhxLqVKtJmpMa/undCsabdaynnTRIwtzpe15w3ENl7R2ehapf3bhESUwEF/sZOlibYnwY5jYF63BTB/cVLoKmj5BD4cRXEOyNOV9swtstaDUqXnzsYWXxYvDSlLuQZTXmwCacGxJbrNkQkkvLDV65JBRWarzk8COfx1pzdbA
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 09:32:01.7896
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9212c0ba-5fbb-4a9b-599c-08df3a567b31
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000056B.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR06MB8091
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAzOSBTYWx0ZWRfX48PoACpZ+skE
+ O9bpA9mMdo4K2iSs7rIeTXHOhw4Gi3e0GEUPROW8SAVTmx0vCnVkWTXSTFAwWLLoZXGYyeU7D93
+ dkIzmLCC96Y/QI7T1FmHQUsjtiIqaV1heolaLxGHpr4CT9Bl+G4jsHmixHWLjpTpcJtZP9tfSTb
+ RWMZnAMUqBUyO2aR7GZVJy9+f0uiJrLHhVI+DTCTOu+v6YIZscwWl6DKKEA2bSvemu5giLY0ULP
+ EH0SE6736VCrrPon18Q0wWprleNktx6ZPHZiPEY0HM5IiHV3ii2mCOr2W2waZUN+9wT5BgjwfQN
+ tF/lozNcWrY2FghbNT0q3as3WzKSIj6xpY5kDWJV0g+qhuxBRT79W3eHFHN7pKWiIg8KtegJPo1
+ v23m1Nymbh3zr3n/bapo78CYJXvMfBB9QsWtmAgFny/WmpgiIkh8weFp3XNFZvJbgc1Gqe+j4v1
+ a/80AzYCponJzGRKdOw==
+X-Proofpoint-GUID: SA9pWVPCpRNrEUf9IQgkd7HyIVfo3JH6
+X-Proofpoint-ORIG-GUID: SA9pWVPCpRNrEUf9IQgkd7HyIVfo3JH6
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAzOSBTYWx0ZWRfX8Gx6VSbLM9oh
+ KjUEhFPhscy9MJXGxXNUJqB+lGJNKeVPeSIxipnZO3Exk4yJTUCFPxT4SGc7l/Ak0cqyvT1WGXK
+ GvMH/0ZTknqqS8cVtiQFDGQk2KZ22hA=
+X-Authority-Analysis: v=2.4 cv=c64+0h9l c=1 sm=1 tr=0 ts=6aeaffd4 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=kJEEPpjrxqurOdzKljAA:9
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-04_02,2026-11-03_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611040039
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 09:32:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131839
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 10:04:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131840
 Content-Type: text/plain; charset="utf-8"
 
-The generated softhsm2.conf only sets directories.tokendir and
-objectstore.backend. SoftHSM warns about every other key it falls back to
-the default for, and it logs through syslog(), so every process loading
-the module during a build (rauc, extract-cert, ...) puts three
-"Missing ... in configuration" lines into the build host's journal.
+This is a minor release adding support for Python 3.15 + some other
+minor tweaks and fixes.
 
-Set log.level, slots.removable and slots.mechanisms explicitly. The latter
-two keep their defaults; log.level =3D ERROR keeps SoftHSM's INFO/WARNING
-chatter out of the host journal while errors are still logged.
-
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
-Tested with a downstream copy of this class: a RAUC bundle build signs as
-before, and the build host's journal no longer shows the warnings.
+ .../python/{python3-gpiod_2.5.0.bb => python3-gpiod_2.6.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-gpiod_2.5.0.bb => python3-gpiod_2.6.0.bb} (92%)
 
- meta-oe/classes/signing.bbclass | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
-ass
-index b02825bd00..431ceab8e3 100644
---- a/meta-oe/classes/signing.bbclass
-+++ b/meta-oe/classes/signing.bbclass
-@@ -112,6 +112,9 @@ signing_import_prepare() {
-=20
-     echo "directories.tokendir =3D $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
-     echo "objectstore.backend =3D db" >> "$SOFTHSM2_CONF"
-+    echo "log.level =3D ERROR" >> "$SOFTHSM2_CONF"
-+    echo "slots.removable =3D false" >> "$SOFTHSM2_CONF"
-+    echo "slots.mechanisms =3D ALL" >> "$SOFTHSM2_CONF"
-     rm -rf "$SOFTHSM2_DIR"
-     mkdir -p "$SOFTHSM2_DIR"
-=20
-@@ -353,6 +356,9 @@ signing_prepare() {
-=20
-     echo "directories.tokendir =3D $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
-     echo "objectstore.backend =3D db" >> "$SOFTHSM2_CONF"
-+    echo "log.level =3D ERROR" >> "$SOFTHSM2_CONF"
-+    echo "slots.removable =3D false" >> "$SOFTHSM2_CONF"
-+    echo "slots.mechanisms =3D ALL" >> "$SOFTHSM2_CONF"
-=20
-     cat > "${OPENSSL_CONF}" <<EOF
- openssl_conf =3D openssl_init
---=20
-2.53.0
+diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.5.0.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.6.0.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-gpiod_2.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-gpiod_2.6.0.bb
+index 3cbeeb772d..352fc77314 100644
+--- a/meta-python/recipes-devtools/python/python3-gpiod_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-gpiod_2.6.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4b54a1fd55a448865a0b32d41598759d"
+ 
+ SRC_URI += "file://run-ptest"
+ 
+-SRC_URI[sha256sum] = "53ae5a1f14d6388c155b591ca0fc0cfa73b44d4f6d8d117e8a9e68f5902d187a"
++SRC_URI[sha256sum] = "1076f0384c63fdb9e4438508c511378c57b4236c6b43b65ad609d0dafdfcfd7d"
+ 
+ inherit python_setuptools_build_meta python_pep517 ptest pypi
+ 
+-- 
+2.47.3
 
