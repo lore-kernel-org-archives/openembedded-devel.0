@@ -1,35 +1,35 @@
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20064.1793826700878635646
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20026.1793826714431127249
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 13:11:41 -0800
+ Wed, 04 Nov 2026 13:11:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=phX6gf1i;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20261104211138c38df761c4000207db-vovvjm@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20261104211138c38df761c4000207db
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=chF5obXR;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202611042111529f7b1e3bb80002074e-w74le0@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202611042111529f7b1e3bb80002074e
         for <openembedded-devel@lists.openembedded.org>;
-        Wed, 04 Nov 2026 22:11:38 +0100
+        Wed, 04 Nov 2026 22:11:52 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=HwJeOUwNFMXV3d/91q0xYegAsYLnI7s/rFtLML35r6Y=;
- b=phX6gf1ixMvPNIS/FiLZ36b9vHqYEHsp1fdeXwsZWTYS96mC4zF2okaIontslNaelrjzoK
- vzu4Ux17ah6zDLYHUCKgzxzqjLEAojt8JtVMhQmVMo1DqNRMUhdCKuesi7JyCl1GM0+8RQP3
- xKkuKlVO+EjujymJZKiWnhp5O5p/JUoidB8ySSnC3jXVso+bRRlyBco4ueslPiEiuzNWeRPN
- YSB0AeKFkDynAa5kqq/bJDjfCwwlTLBNDBjTUGHxiVHIHud46mniLuK0fQpMGw60VQMvUq6W
- 3LspeB03jr+KnnTXwXWE9vHDu5gZghVtHdlxWQCI9SlqnAav4oOk4U/A==;
+ bh=/mqpo1wgBe7tdD6jMCuWMeCfbBNrxS8++Fe4tLeN0q4=;
+ b=chF5obXR+Zbz4A+5sG+sTJcC4SJYTXxzKOCeIDgvbmpcIF2sJdDIzzBDbCZrMp/F9l271x
+ QH8wzrIOyCzdVkZ34AM8WjSzuNOlDVKJ3ARZpP4QISdEDdMNYnzRcUoAJRIc/uYgPl/BVsfY
+ D+/yLpC20TXP+UHZJ2GZ82dq5PdcMWYXcdOq08DdmRSb2fvpnu3iYxnR5Z3/qjkGEix+7HzH
+ A/3NPwoT/pHa9JBxeix3Gkg2SIv8mp1g2qT31EXPrUZawytIK6TabFUzu8gEyvM8rxaddIWV
+ p7i0vr9qb1qLjFZkaxeukec8UYfljYz7SixYK8C3JenlmNFlXNPHosdA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][blacksail][PATCH] libwebsockets: patch CVE-2026-114550
-Date: Wed,  4 Nov 2026 22:11:25 +0100
-Message-ID: <20261104211125.2288933-1-peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] libwebsockets: patch CVE-2026-114550
+Date: Wed,  4 Nov 2026 22:11:35 +0100
+Message-ID: <20261104211135.2290706-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
 Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 21:11:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131848
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 21:11:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131849
 Content-Type: text/plain; charset="utf-8"
 
 From: Peter Marko <peter.marko@siemens.com>
@@ -81,7 +81,7 @@ index 0000000000..e398239bda
 + 			default:
 + 				lwsl_notice("%s: puback pr bad vbi\n", __func__);
 diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
-index 0b612c6f4f..424f5633dd 100644
+index f0cc181ab7..8ce4ca2839 100644
 --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
 +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.5.8.bb
 @@ -12,6 +12,7 @@ SRC_URI = " \
