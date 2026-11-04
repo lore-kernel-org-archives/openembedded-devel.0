@@ -1,99 +1,112 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2641.1793772339733987599
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4410.1793777517121927512
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Nov 2026 22:05:39 -0800
+ Tue, 03 Nov 2026 23:31:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=KV5pGFQb;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-36661f953e4so405154eec.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 22:05:39 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=L0kZ21zb;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48dfc0421d9so286557f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2026 23:31:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793772339; x=1794377139; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aXnFhiPyaPWYRqp5JNXHZaSwkytPvssv+DRnfv4swMU=;
-        b=KV5pGFQbtyftKirpzI+63Hjeqa5XFhA79piSadVrnotp/kcNp4orGo5NbbBzyhJffe
-         8GGpNSOdEM2eCsU5pupgupGnkI5rU9KhhZJWBJpbrNyqg8wVRv2vFw2uwV37YD+tp4cd
-         f3IKlgLEnKtQYGsko+XFkQqr4+8qQIfRhG7puZPHKfPH0FZjv5qhHV4FK3R+gX3Pa8oQ
-         Awn2E3p5ww1EMFH0zF3mfsNEJKdBSqzSBoytf96UPy6HGEUxRc0xD8wuiDFxoDQGmAcq
-         lusMLu/+IwJbf5SIAUgGEH8V9Bf9kC2tKlQc+33n0/hU7tBiPI8JGIvMgaWzCTfNrG3M
-         v7fw==
+        d=konsulko.com; s=google; t=1793777515; x=1794382315; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Y+7ivGlO64d00rQDIQSdmy4IbAu0Yrmb9VVgAjfD01M=;
+        b=L0kZ21zbw4qaK7kk3qoXe4cSZN4nWml2EgL1XmVbRjI+XBMJ1HeUb8PIRHN9BSUTl7
+         /XooFVyx0/LYhEB58na4G9U6tb17Lg8ycwbEPatgBSff4p/lvXziocSepQOaqvRDJeLs
+         x6hbPUyj/Se+CjNDZDEiSO/duz+Efv9LSvs3E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793772339; x=1794377139;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aXnFhiPyaPWYRqp5JNXHZaSwkytPvssv+DRnfv4swMU=;
-        b=ywgwGil+ffW5TdUjpYm0IbEsLQotmase99Sxf/bC7Qi6BEtXhwaubII5LyKbNYYsDu
-         biWiObdWcBcQl90VEh3dN0ScIc102OsSrUuQfZNzD4C4P8sK2PniieDQIRAXh0ET6ikj
-         vjKLDCHFP9FVJOUr6poWkGyAeUjksI1AWgWYo8otJaBLhDJ5TsaK7KzNVp2PWP3NZASL
-         o5ps9ffwUrvHPXxxhqg8s9PxTQeGJoH+iHVHmByxGxVtHiBPi7vE5UF+cv+xkpM56OaC
-         opoGmdyLM3DGM1MTGVD3CiOuyZ9271FSMuNic2p+xplK4FbRW90ZWXoxmUce4BiF+a1A
-         ccKA==
-X-Gm-Message-State: APuU4Z8YbE/fcacpunWdmi99F4qyDVMX+Jz2HSz8LqNkBzxW0/vfUP+z
-	CScwAo0EmyeT3vd4X/Rlrcm7krT8L7BGHvctmK6Uv2955XbguFF1FUxG1vfhv5vDDY2mtA==
-X-Gm-Gg: AYBFou3CIPkgBaHuLZXVOtRc/pd4bbjpCtN93UcgzMO5tL+Fpihv/7uLieyAapKiuca
-	ZlO5wXQQc4yMkhJWnd7joCmezJEoqSVkmyyQW5GLn6Zdh2UI72CPSSegzLGIb4bOAIp97le1El3
-	HhGIja7OxeruWGN7+jemv1zevu1kyk22aKXNnJLR5popbxTNTGuENkVxYUkVcy9OlYv7g+bqo/N
-	GSY2uTQ15SeXut+ReJEviPeBt+AbB1hyK4E4kT8XTSQ2J8QKBEQDeUevkW0m7pNApV18dcbCF7e
-	cdvNL76YYIZKcBW310uIXE+r/GPlptBk5eHzUC8xzJkww9uA0lWau8ndyOAwM4l8Qz2CV93DIWe
-	kVGh2sKqbkJQzPG5kMKmaBLxJ5wn9OsYCI4+kAclTNP1tsXtJtNPsRZFF4Nf5IK6iRkjS3W1gx1
-	M7A8pls7c3AumM4wgWihFyOcZzCrYf3qvLp1Ai4NxDtMpyLak+0XEYvOY6ye+nGlw4k9fcPX7dX
-	+bZpiq8Muaf/wJ42stry5kl/tG5koFSzgKD0sLbC2wU5WT5OGzw92AYHP68+zQyodQf4H6ok0It
-	gRzToCyTlkjxkkJDZ9NivvgEFEjuoIKltJwS4Myx89HVvPoAj8h9WWame3/GlOUrQvhnE4ZtBs+
-	78yWA6TVGYMmLF+CK1oHdu1GIyYV72Wl2UsZMKcPiFICTlmyzRs/BqcNFnstA7VHrSr7k6+AARn
-	BZIOrvA7uR0wVrwNghchLVRn6maLuOK+Ie7SyarmN0RS28WWjGc8RX73kY5iopPMo0oUVZ49F3Q
-	lkWYltFP3MlfnqVCnHY6WFBmEpmi/aIUxq+LE/L/421C1W3mbEeE2J8VVUjMvbi02+9qSj7p/ve
-	yQcVrnyEaM22F9c4Z5Yx1w370A==
-X-Received: by 2002:a05:7301:4545:b0:36c:9ac2:475b with SMTP id 5a478bee46e88-36c9ac25267mr3721985eec.0.1793772338551;
-        Tue, 03 Nov 2026 22:05:38 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36ca3785430sm5973410eec.3.2026.11.03.22.05.37
+        d=1e100.net; s=20260707; t=1793777515; x=1794382315;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Y+7ivGlO64d00rQDIQSdmy4IbAu0Yrmb9VVgAjfD01M=;
+        b=jqN/PnIO++F65FxZnxA7HT1gFrpU7A0rpRlMVl7ak0f3ndqBg64/XzXYDiQQmP51sn
+         kbs738KPNaZT/ZsiADZT15xWwildOWj3rVE7unzYgWxamc71Oir43e88Dl7LuWD5/D/7
+         Xx5loh62OlCVmVbjLYVD33zscpBlfuJNE8TMo+t7U+zfhunNXxUYrX4KXPspMMog2Bam
+         jQtjQOj6iKRfIBb5n+7XKco1asQ6DkEjVQpA3I+fWr5ExfhWyswwFv0csZmee4g5zg6R
+         K6/HxzXZCR6FsjKXAyLg2bZbxg90yWqLBPuUMbMaXfYCPoMiwDqAo6jOIli/JCPbxg6L
+         1VUw==
+X-Gm-Message-State: APuU4Z/W1gV+EeP6ZZy0VU4rKXrXNgVGHxSs9pHlBU4f/hEUnioxjdJK
+	8qj4Joje6Si/uY3nEXYJUwVeLhdLLSoB8UCzaoRsNQN0muRwXm9KJ54F70tnmn+kiDVQLuqOHCV
+	u/dW8
+X-Gm-Gg: AYBFou1TwWPRjsXB8BOLaC8GbTDK+MKjObR9aTqZa+nEhjxcMCSCjrCmb9waUgH1+4H
+	cHSVk5iOQuQ7qPwpmpOJC+VThh/JYAPyb1X1zYTVmOxjPU4HlXHiQ5XRgV0PGv7JVFzet1Uw0pT
+	DzL8vKqm+N/loSlm4dagLjlj9iC98lomrYMnhuBTDOkS7EpV9R3DjtmAGaFkpmMetz7/2Cy3Wba
+	XWdgUl0ymdi3fH5+u55+beu1Iv3uBDgzjE5cVOdSppXsrz8K6VECcO/GR9mW0Gz/OPkwKxNQqOJ
+	KqHVh8NUhRCuXNRLpw4qbsHMPZpuGYUlHuSdRVjk98NeV7u8S4ZyE3PfoCVl4SJKkfhktfd1hQR
+	QTXba0Qx6YvAv9PXTBfxdh78qGOQ0cC0XzgLtpl+erZnBO8Hgz/uC/6Hj0CObGPDDXFFy6eFR6k
+	4WKSNFsufm37ahLMfBsNMmIQa/N79G26qZ0qjLdSklZ8nTaMm0w/V5WqsS3DHnTPDUWcKKDpMJZ
+	NpIHBykIAkRMoiPS8GjNX+FssMcmUoni/gbO5u2jnbFrJ7UiKdypCEfvty105Tsu/i+YPrY8k92
+	HEA9fMqFMAYAWS+ROoTka1rNh+ZLaV9u9/FTAGvV6jIMgCwDdz4+AoNoNOddcdIHZ4LZIH9JIo6
+	pC9wfJMGaeQ3VBfflbxCn3/vKRq46se8dp2zeMHNS5jNkrJJeLJh9+Q==
+X-Received: by 2002:a05:6000:290d:b0:48e:75f:477d with SMTP id ffacd0b85a97d-48e6e2dba63mr33221918f8f.7.1793777515124;
+        Tue, 03 Nov 2026 23:31:55 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fed08536dsm2028200f8f.32.2026.11.03.23.31.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 22:05:38 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Tue, 03 Nov 2026 23:31:54 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 2/3] python3-cbor2: Install docs/usage.rst for ptests
-Date: Tue,  3 Nov 2026 22:05:33 -0800
-Message-ID: <20261104060534.1875273-2-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261104060534.1875273-1-khem.raj@oss.qualcomm.com>
-References: <20261104060534.1875273-1-khem.raj@oss.qualcomm.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-filesystems][PATCHv2] overlayfs-tools: Upgrade 2025.01 -> 2026.10
+Date: Wed,  4 Nov 2026 09:31:52 +0200
+Message-ID: <20261104073152.3367657-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 06:05:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131832
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 07:32:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131834
 Content-Type: text/plain; charset="utf-8"
 
-tests/test_sequence_docs.py executes the code examples embedded in
-docs/usage.rst, resolved relative to the tests directory. The file was
-not installed, so all 26 tests in it failed with:
+Upgrade to release 2026.10:
 
-  FileNotFoundError: [Errno 2] No such file or directory:
-  '/usr/lib/python3-cbor2/ptest/docs/usage.rst'
+- meson: Disable tests build by default
+- Define attr dependency
+- Test if merged overlay is usable after mounting
+- Remove trusted xattrs from upperdir metacopies before copying
+  attributes
+- Add Option To Use rsync for merge Operation
+- Support merge metacopy file
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Since version 2026.10, meson.build wraps the tests build in
+"if get_option('tests')", so the tests are disabled by default and
+do_configure:prepend is no longer needed. Keeping it also breaks
+the build with:
+
+ERROR: Expecting endif got eof.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-cbor2_6.2.0.post2.bb      | 4 ++++
- 1 file changed, 4 insertions(+)
+ ...verlayfs-tools_2025.01.bb => overlayfs-tools_2026.10.bb} | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+ rename meta-filesystems/recipes-utils/overlayfs/{overlayfs-tools_2025.01.bb => overlayfs-tools_2026.10.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post2.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post2.bb
-index 10f8869943..cda44d3864 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_6.2.0.post2.bb
-@@ -11,6 +11,10 @@ CARGO_SRC_DIR = "rust"
+diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.10.bb
+similarity index 68%
+rename from meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb
+rename to meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.10.bb
+index 3b5963bb26..6a3d609567 100644
+--- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2025.01.bb
++++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_2026.10.bb
+@@ -7,14 +7,10 @@ SRC_URI = "\
+     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=v${PV} \
+ "
+ 
+-SRCREV = "6e925bbbe747fbb58bc4a95a646907a2101741f6"
++SRCREV = "950d0cf35e4f917b6836565d76e38bcf7fcf2d5f"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ inherit meson pkgconfig
+ 
+ DEPENDS:append:libc-musl = " fts"
+-
+-do_configure:prepend() {
+-	sed -i '/Custom targets for testing overlay function/,/command : .*permanent...changes/ d' ${S}/meson.build
+-}
+-- 
+2.47.3
 
- require ${BPN}-crates.inc
-
-+do_install_ptest:append() {
-+    install -Dm 0644 ${S}/docs/usage.rst ${D}${PTEST_PATH}/docs/usage.rst
-+}
-+
- RDEPENDS:${PN}-ptest += " \
-     python3-hypothesis \
-     python3-tzdata \
