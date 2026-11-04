@@ -1,159 +1,130 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5130.1793782723910745238
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5131.1793782725855966596
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 00:58:43 -0800
+ Wed, 04 Nov 2026 00:58:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=eD0DOqhT;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cc502d509c0so167198a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 00:58:43 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=wIhPxSPf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-cc4aa0246b7so225004a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 00:58:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793782723; x=1794387523; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Guy0I91qw3sIoaWNcLghzUXAkO+zYUptDzp1uacYV30=;
-        b=eD0DOqhTG3ukvnc8SP7pZQ6F7EKinSftKurbRvUSJFffRWfKkiXmcxStUJ3yU9K9dk
-         5EzG8eJgKrQd+SgPw+fwMahMNo211DA67xphy8oBs90Uysjs6FWv46DWXmunHgqLOUSh
-         Y0bSivbiD73Qk/427u9IqLP6j1yWA7jYcls4DMqjfSRrTE587NVB/wlTzkG5tGif9nW0
-         LSkafeL1s+kqxOqCsWNym5CRdAfWHp1qnVZcF9zfu2rkpVyz4YyWnoGze3pLItCSDXg+
-         tC5jIbvf9dDEc59pPGm46sqFweI/uR/hGk5IplQPHQG8t26jJv6YYKTNth+UqTl3i2Xn
-         sO3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793782723; x=1794387523;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1793782725; x=1794387525; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Guy0I91qw3sIoaWNcLghzUXAkO+zYUptDzp1uacYV30=;
-        b=WPSHtZWuPvODSweNhJBBUe+TW8sZOqTvYVpCSCkIAZ5cND5m8oR4beYzm6Lu/rn9Qx
-         CXyRq54TfgiNjFAJPM/sPGWHEe9QVUhhtz5L5znuQcB95QWQAvamRFAbAzjhbzURtiUS
-         /hxC+WmySNOK0YDypenB7kkh7wgJ5gaXMft6WaMssxluCVdDFoBToLMar2HiViehiUnS
-         aHGHVr0JDrRz/sqV62yWPhwdA8wLHSfJm6oijlc5dfl71JsK99xA4Prx+bFSjDo9uEn2
-         ifq/30zJiBwc/q6kWRVfTT4/2L+ga+1eacGndw05XVUCF8Am9ivb1oCAfrUPC7Nt9w9y
-         EwwQ==
-X-Gm-Message-State: APuU4Z9OfX636Yt09yVIn77iiLZh1jZ/r+Cq1EE2scKvGqRYZE1TdufR
-	++fbbgGVoZ1F2xgVD9O5OJmrM1XhBf7Li2yZEdnelE+W35Uy7e1Dq/kMab1QqA==
-X-Gm-Gg: AYBFou1h010FtvMU/NI9IttBTxkIhu2Kx1y0Ikv5q6fNep02jkWe/9g01XCVRJTwKhJ
-	9SSVF8FxTi8oFOaGVVZpr5NOczjM8+qdf1Kr/FO2hNix1V8+Uju4NfCezkNAjfXtr1IJBTpsC2V
-	2/NVEpPFVt1u36qGPUIg7ab/gJMMOkDf2ZGQ2Sxv3F4hg9wG4O87MZL4Z/d8tdY/50OZ06LTiuH
-	kqrdj9qqoSVFQ0taoe5mGlx61ox50GVpkKXfTOE8wiHUpDXWmnKOBcj2Q5ZDl5uiwtcNAXVK4W3
-	5OA/FE/AVmhmUVxlek+bbxt6LhTDO3wnr9lET4uPuBQYsjA2MFTDrPc440/xu5Ld/It5qRcNJCX
-	PUlvzwiwDy0ZH2wvCzTWw4vcZxYo+h/JKgIbV6ch/Gl07NZuF1d9wTS/pctscjwyyrG+l6mZePl
-	d+ajToIzWnMmCDARpueEjbSJO/EdUIDcG7lI+tOCzYWvgIfyaosWlv+HXqgoPET1DneUBS/nKyQ
-	vwEoiWt/mXP/81jvSfzP6ACIHkr3GGIi4gCOMgKPo/UFy8yeZoL34YJ2WWzmJA6NmLp4fj95QWK
-	JetjT/w/UQOb2f0HMrDIPpG/LIsB+xNC4bv6HyN7BcstfqUfhRbstQ9Qc6mB3w==
-X-Received: by 2002:a17:90b:17cd:b0:3ac:9e5e:d195 with SMTP id 98e67ed59e1d1-3ae89851212mr12224565a91.61.1793782723089;
-        Wed, 04 Nov 2026 00:58:43 -0800 (PST)
+        bh=IJE9+Tm2KQ3aXQWBYP6o9BO+bZM4qzqKnZR5fljxIuU=;
+        b=wIhPxSPfOdosrjwPBvf9zmQzwL1bkDeIyq+uhEfOyRHSZoD+6VmqMgekcFscJ9/SQx
+         nlp5JCp+dU3VxRp5CXPEbNHBlGQucMjYC276J4Eqg6g02EaA/xU1K262QJurDs+bbkrz
+         r+rafIT3wo/hs+qSKfbd4dSMO/js8opEJ0uhOJG/f6/hi9uF6bk9ZAOk+0oFWepX8DjO
+         9eXMO9iPCI0x9THKLefBXJZtMvRSvDjceQgd2fXcpjJGIbkCKlb/oP3WfMezRuhaG3sZ
+         ZUVxkylZufy9qI/c1ooNm+XxXO3M2C/QrHljn75p/ydfXPsVnLUZLUJAwY6RkJ6oMF8p
+         YJQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793782725; x=1794387525;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IJE9+Tm2KQ3aXQWBYP6o9BO+bZM4qzqKnZR5fljxIuU=;
+        b=tsVZQIyOancOYGISvDSg3uExvhcADsWd6bV2sAI81evRywOKyZVomiExrSf3qVOS0i
+         1VN63UwS0aKLReGULYhLn3M+nHepVg3/wwb5i+wFpi1/pvoHSFe4ELzcrMRmpuNiV2uE
+         fBRBmZ3KNDd8XjBL6xVJE8zxBYXy6BuTKidzbElNSttRE+MmHZglABk1rRsZYYHsX0g0
+         Vl5TqweOt/rLWhO2ces7DRGruJc0mqz6pGnDDkWKWxoVmiagGErjh/4cVnaKXH+4vKoD
+         Pr7bzzK1GUBGU8NnplCys1vepF0JhHCMLUGq/FSFOikqWWMl6+e6qFRy7IkXaESR6izA
+         tHHw==
+X-Gm-Message-State: APuU4Z+wMNjsJR0708JWA6woKjZRyl5ORbEjdi+U/X9ePhysTBI28CTq
+	49uPmKmIK99ArD7+Ds2pxitZpNAArSWmyB9ew9WhX6I8UaFdHuo0vPszIKu0pA==
+X-Gm-Gg: AYBFou3tdQCQVwa8B1ghr8kaP7AQvMVO4GJwDAs5/xra3FtwBijvQr6aSfn1KCNfm4I
+	RHyniQ2Vmnvhf52DvmPpDYBJMQJ/2G2CE4z4ntLiOwJ5wmU3EPcqFhmwalbGwMBS9a51nvO2Pd9
+	dJQSlPi+L0DWboh1ECM3dw53bP+0723VCbQ8yH8KQmjNeVmXEKCUWFNLO0L0I0iJ41CARtb0e0M
+	/0oxXZ7hHeiDPiN+Mm4yR+NN002HVe0XEYnP50PJPsove/snt32JiCFs2w7IaU7QALxFa4emQDy
+	QquQl9arUby2ZSEKIIcO730Sn5CH7tSOlDlEHZ1KV12t+Yof1Gkn4uD6nzac8pJKcZ07TbNKb1F
+	/SQofgAj4dow38XuoM6AorWGfnS8nbEIQd+5mz++uAYJhgWBItp9NAqVNDR7evBwtaXXSBqLIVI
+	wT80SqfLdME9ySBNuiqjNnldVYRNsYrdGB8Tzh6dgt1EOsC2YhcX7Zadrbk2hIJLT4WOO47MiRY
+	G9Uxg2RxdT3O8p4FeeceUfRhFJlw3rDLAsz+AvsXjPNkhbCaMM2yJ4YCa1xiZUKBK6FO5j20gOw
+	/2Ahfn72LpBSdxMElLKyN0zrNi83wBdVIECoKAI+Xpoc+Yd+CO6fgmh/T9wfvA==
+X-Received: by 2002:a17:90b:4c52:b0:3b0:a4d1:6d7a with SMTP id 98e67ed59e1d1-3b0a4d1700dmr88420a91.31.1793782725207;
+        Wed, 04 Nov 2026 00:58:45 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b093d481a3sm3139981a91.1.2026.11.04.00.58.41
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b093d481a3sm3139981a91.1.2026.11.04.00.58.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 00:58:42 -0800 (PST)
+        Wed, 04 Nov 2026 00:58:44 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][blacksail][PATCH 1/4] assimp: patch CVE-2026-117608
-Date: Wed,  4 Nov 2026 21:58:31 +1300
-Message-ID: <20261104085834.1877643-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][blacksail][PATCH 2/4] flatcc: patch CVE-2026-116733
+Date: Wed,  4 Nov 2026 21:58:32 +1300
+Message-ID: <20261104085834.1877643-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261104085834.1877643-1-ankur.tyagi85@gmail.com>
+References: <20261104085834.1877643-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 08:58:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131835
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131836
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-117608
+https://nvd.nist.gov/vuln/detail/cve-2026-116733
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../assimp/assimp/CVE-2026-117608.patch       | 62 +++++++++++++++++++
- meta-oe/recipes-graphics/assimp/assimp_git.bb |  4 +-
- 2 files changed, 65 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/assimp/assimp/CVE-2026-117608.patch
+ .../flatcc/flatcc/CVE-2026-116733.patch       | 30 +++++++++++++++++++
+ .../recipes-devtools/flatcc/flatcc_0.6.4.bb   |  4 ++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/flatcc/flatcc/CVE-2026-116733.patch
 
-diff --git a/meta-oe/recipes-graphics/assimp/assimp/CVE-2026-117608.patch b/meta-oe/recipes-graphics/assimp/assimp/CVE-2026-117608.patch
+diff --git a/meta-oe/recipes-devtools/flatcc/flatcc/CVE-2026-116733.patch b/meta-oe/recipes-devtools/flatcc/flatcc/CVE-2026-116733.patch
 new file mode 100644
-index 0000000000..2a388cb147
+index 0000000000..86272984f7
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/assimp/assimp/CVE-2026-117608.patch
-@@ -0,0 +1,62 @@
-+From 9b9c149237ff7bf7f71db8eba7b6cc707e00e0bc Mon Sep 17 00:00:00 2001
-+From: venkatchalla06 <111296179+venkatchalla06@users.noreply.github.com>
-+Date: Sun, 25 Oct 2026 19:48:47 +0530
-+Subject: [PATCH] MD2: compute the frame-table bounds check in 64-bit (integer
-+ overflow) (#6963)
++++ b/meta-oe/recipes-devtools/flatcc/flatcc/CVE-2026-116733.patch
+@@ -0,0 +1,30 @@
++From 8fcc19366aa081068d2c845084a3ffd907c88129 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Mikkel=20Fahn=C3=B8e=20J=C3=B8rgensen?= <mikkel@dvide.com>
++Date: Thu, 22 Oct 2026 18:59:04 +0200
++Subject: [PATCH] Guard against adversarial buffer overrun in JSON parser
 +
-+The header validation rejects out-of-file offsets with
-+    offsetFrames + numFrames * frameSize >= fileSize
-+but numFrames is an attacker-controlled uint32 and frameSize is an unsigned
-+int that grows with numVertices (another uint32 field), so the product is a
-+32-bit multiply that can wrap. The AI_MAX_ALLOC guards above bound numFrames
-+only against sizeof(MD2::Frame) (~44 bytes, ceiling ~48M), while frameSize can
-+be far larger (e.g. numVertices=1014 -> 4096), so numFrames ~= 2^20 already
-+wraps numFrames*frameSize to a small value and the check passes. The frame
-+vertices are then read out of bounds (heap OOB read / info leak).
++(cherry picked from commit 356792dc155a9e685acdfe0ec1e209bdadcb4ab9)
 +
-+Compute frameSize and the four offset+count*size checks in 64-bit so the
-+products cannot wrap. Reachable from Assimp::Importer::ReadFile() on a crafted
-+.md2 (MD2 is default-enabled). Confirmed with AddressSanitizer
-+(heap-buffer-overflow READ in InternReadFile); valid .md2 files
-+(dolphin/horse/flag/faerie) still load unchanged.
++CVE: CVE-2026-116733
++Upstream-Status: Backport [https://github.com/dvidelabs/flatcc/commit/356792dc155a9e685acdfe0ec1e209bdadcb4ab9]
 +
-+Co-authored-by: Claude Opus 4.8 <noreply@anthropic.com>
-+Co-authored-by: Kim Kulling <kimkulling@users.noreply.github.com>
-+(cherry picked from commit 7dbc85d9218fae017d4fad70269e7569f7b0c870)
++Dropped changes to the CHANGELOG file.
 +
-+CVE: CVE-2026-117608
-+Upstream-Status: Backport [https://github.com/assimp/assimp/commit/7dbc85d9218fae017d4fad70269e7569f7b0c870]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ code/AssetLib/MD2/MD2Loader.cpp | 18 +++++++++++-------
-+ 1 file changed, 11 insertions(+), 7 deletions(-)
++ src/runtime/json_parser.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/code/AssetLib/MD2/MD2Loader.cpp b/code/AssetLib/MD2/MD2Loader.cpp
-+index f7101560d..adce318f8 100644
-+--- a/code/AssetLib/MD2/MD2Loader.cpp
-++++ b/code/AssetLib/MD2/MD2Loader.cpp
-+@@ -171,13 +171,17 @@ void MD2Importer::ValidateHeader( )
-+     }
-+ 
-+     // -1 because Frame already contains one
-+-    unsigned int frameSize = sizeof (MD2::Frame) + (m_pcHeader->numVertices - 1) * sizeof(MD2::Vertex);
-+-
-+-    if (m_pcHeader->offsetSkins     + m_pcHeader->numSkins * sizeof (MD2::Skin)         >= fileSize ||
-+-        m_pcHeader->offsetTexCoords + m_pcHeader->numTexCoords * sizeof (MD2::TexCoord) >= fileSize ||
-+-        m_pcHeader->offsetTriangles + m_pcHeader->numTriangles * sizeof (MD2::Triangle) >= fileSize ||
-+-        m_pcHeader->offsetFrames    + m_pcHeader->numFrames * frameSize                 >= fileSize ||
-+-        m_pcHeader->offsetEnd           > fileSize)
-++    // Compute in 64-bit: numVertices/numFrames are attacker-controlled uint32 header
-++    // fields, so numFrames * frameSize (frameSize itself grows with numVertices) overflows
-++    // a 32-bit product and can wrap past the file-size check below. The AI_MAX_ALLOC guards
-++    // above only bound each count against sizeof(element), not against this product.
-++    const uint64_t frameSize = (uint64_t)sizeof(MD2::Frame) + (uint64_t)(m_pcHeader->numVertices - 1) * sizeof(MD2::Vertex);
-++
-++    if ((uint64_t)m_pcHeader->offsetSkins     + (uint64_t)m_pcHeader->numSkins     * sizeof(MD2::Skin)     >= fileSize ||
-++        (uint64_t)m_pcHeader->offsetTexCoords + (uint64_t)m_pcHeader->numTexCoords * sizeof(MD2::TexCoord) >= fileSize ||
-++        (uint64_t)m_pcHeader->offsetTriangles + (uint64_t)m_pcHeader->numTriangles * sizeof(MD2::Triangle) >= fileSize ||
-++        (uint64_t)m_pcHeader->offsetFrames    + (uint64_t)m_pcHeader->numFrames    * frameSize             >= fileSize ||
-++        m_pcHeader->offsetEnd > fileSize)
-+     {
-+         throw DeadlyImportError("Invalid MD2 header: Some offsets are outside the file");
-+     }
-diff --git a/meta-oe/recipes-graphics/assimp/assimp_git.bb b/meta-oe/recipes-graphics/assimp/assimp_git.bb
-index 561ef50508..5fd56f719d 100644
---- a/meta-oe/recipes-graphics/assimp/assimp_git.bb
-+++ b/meta-oe/recipes-graphics/assimp/assimp_git.bb
-@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2d38c9e0d63058b051065fb7b1102a8"
++diff --git a/src/runtime/json_parser.c b/src/runtime/json_parser.c
++index 4472af2..f9bc9fa 100644
++--- a/src/runtime/json_parser.c
+++++ b/src/runtime/json_parser.c
++@@ -538,7 +538,7 @@ static const char *__flatcc_json_parser_number(flatcc_json_parser_t *ctx, const
++     if (buf != end) {
++         if (*buf == '.') {
++             ++buf;
++-            if (*buf < '0' || *buf > '9') {
+++            if (buf == end || *buf < '0' || *buf > '9') {
++                 return flatcc_json_parser_set_error(ctx, buf, end, flatcc_json_parser_error_invalid_numeric);
++             }
++             ++buf;
+diff --git a/meta-oe/recipes-devtools/flatcc/flatcc_0.6.4.bb b/meta-oe/recipes-devtools/flatcc/flatcc_0.6.4.bb
+index 059f888eed..9defbfac04 100644
+--- a/meta-oe/recipes-devtools/flatcc/flatcc_0.6.4.bb
++++ b/meta-oe/recipes-devtools/flatcc/flatcc_0.6.4.bb
+@@ -6,7 +6,9 @@ SECTION = "devel/lib"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b3d8fb7158bf7e2600ba3191428dc4ef"
  
- DEPENDS = "zlib"
- 
--SRC_URI = "git://github.com/assimp/assimp.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/assimp/assimp.git;protocol=https;branch=master \
-+           file://CVE-2026-117608.patch \
+-SRC_URI = "git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master;tag=v${PV}"
++SRC_URI = "git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master;tag=v${PV} \
++           file://CVE-2026-116733.patch \
 +"
+ SRCREV = "fec0275c0d0c5b6f495ab48d51fcde521d72b5fc"
  
- SRCREV = "fe1965b3e73f7c241265e8e5b3015764936a6ce5"
- 
+ inherit cmake
