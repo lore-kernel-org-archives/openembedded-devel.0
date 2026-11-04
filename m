@@ -1,100 +1,136 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8229.1793796024097918743
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8755.1793798257651704797
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 04:40:24 -0800
+ Wed, 04 Nov 2026 05:17:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Ej03QJTc;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a1fbd52ab6so4478265e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 04:40:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793796022; x=1794400822; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/m6G0LzteCf7ob3KrvQX4gSZ3n9CRX7fwjr3zPI/GoE=;
-        b=Ej03QJTcVL1GpnZ2qgvCLbsuN6BIYhCRLaPOjknW4mb6wOfgHjSrrb4El5ZSg+DeDC
-         CLueh8WpDewbwCElsRG3Rcsf+yNPmGDHioIz6s1vDfOcPp35q23BFppR1KMVak0qT95i
-         BeoZ8en9NxUmggEF2QQsRBLKiNomuaPNhuSo+Cz5mF0UZXNdvdjgLcZZiH/gqi83HII/
-         MRwdjSA2nLTmM7sC8Pjq4YP03h9KL2cAn2X9u9Cu7vrGBt5VAqrPP7HaUxEEfpcDZmiU
-         ePyvULmuSY7nzKgq/jOcViACeLTI09oNxcYeqyfsJWm28bUo56UGtnVL8CWkRfPiba7t
-         XbPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793796022; x=1794400822;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/m6G0LzteCf7ob3KrvQX4gSZ3n9CRX7fwjr3zPI/GoE=;
-        b=eMJDO4Rn55LReB+XV6oZ/EkK/9ePt1OCVhm+/yg3oHvfoGzxBz3HbEpkpKVQMYoumw
-         FXCtMukjO1Uqa5FrbmF6y4nF5Ln/LBggcLtdvYIy16MXs1XDEyUZTEXLE/D0/hywndAJ
-         ZoRmgCUmsbcBLKUc7Ff7HJZ6DYaKEVJTMr3IQjg4XBK8UxqJliNV/Ke4EoEn4GLOtF1H
-         NBk+vybTPw0qb33b1VoUn6CdzCEW0Nzued3nAMBhT/g6Qro7F4IPd4csqJkk7l+NzL06
-         G9HdeumbRmG/f2116ziRxExsVbal4J4jnR56zFxXWxVt3g8FuyMNlOLjR4IPkHqW8FYP
-         wd3g==
-X-Gm-Message-State: APuU4Z/9KYjb0lx5UvKkKxHMGBqH5dZ9EalGRO7S+FVPlz1ODTRy2J85
-	d0o8LoOCLFjlOeXF9+hwtawvyiCcz92K/jewFzzr7+wg3w6AlvFlAuoGLrov8ViQ
-X-Gm-Gg: AYBFou0N5mLRCgLjYHdSQiIG5QEnzxwGO8aQEfTiu3LsMZ7mGmdsXSNHseBQRt6WZjx
-	XfTNe6r50re82a5/ey1KgAj4dAiAuPQjnmWFFEb3iFTR1V3ECGpHiAC+RafZkTa1AenMNH938by
-	B0VFtyiVeHZgu3/YGav1y6AtDsh6BarbZMlM5p1/Vnx4wACzSZEOVjy8DOixsjgkKFH87K6xemW
-	pXpYcxKF2UEFimGKrPqDw9IVI6Q0kMvGdtrp88TW9JFA8mhxeZGJr3ZhkgBsNoFx17tt+kjOprU
-	L9iUHURmHMV2/uuGvUPLHGYA8z5bEHYoHELkatfl99Nr8vJcA72+ICifWuWXnMKG4mADxE3Fjn5
-	ia91U8gzXpSF4p7+0tDwLxPaxyYwGHRksqYNEUVmK2fav9AnV27R8hVOGQW1mef3GSvBcGCN0gE
-	9VjOwIf6JYONhU6blvxG63i8RDlcIcS6xPZ9WgZDgrI3r9B77wP32YjU/GFC0U7CW4hfTTNk9Fw
-	L+v9i7iJ2meoqEdX+2IJbSpxovHZNVx9iZbyH+9++gJ80T+paBcW+UV/rhNeGrPcWcU36L58xpi
-	QJfBnN5MkA+OEeZ65kz7HlpvMIuyqu7FULeTb2DERhhqg21tae8CIj1AKzqmvnzQJMoQKgYSCbe
-	1T2l6lv25+XmHwGI/kKWYR93EchKRYSb1
-X-Received: by 2002:a05:600c:a4c:b0:4a1:fba8:b13d with SMTP id 5b1f17b1804b1-4ac17d16ba4mr359642355e9.9.1793796022116;
-        Wed, 04 Nov 2026 04:40:22 -0800 (PST)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.212.54])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2ab010a66sm186745455e9.13.2026.11.04.04.40.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 04:40:21 -0800 (PST)
-From: martin.jansa@gmail.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=ckO+WsdB;
+ spf=pass (domain: bootlin.com, ip: 185.171.202.116, mailfrom: joaomarcos.costa@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 12C5EC8F46F
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Nov 2026 13:18:40 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 1916D60770
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Nov 2026 13:17:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 32D03103283F6;
+	Wed,  4 Nov 2026 14:17:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1793798250; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=QaEfPUlPw4tuF8a6gAw3PK8SVO2dBUTcRbpyZhp0VCg=;
+	b=ckO+WsdBy+7K27IN6VzbFW+Qrza5O50J16qoo54uMrn1KrRs0hCDzp9ovx9uxDHMUQ4gko
+	B7xnc9rOTyGUQZmeyS1Mtq5teUfTQfWx6MNUdQjJf955K1H+pKlKnMYvdaCP3BxeNITv8w
+	0gWmi9ds5bmBev7zgygpOXdXVkzYsM3nbO0vHDkLqdqwOr5fSW8+49n6EUnL9u2m+1/P04
+	ucTXV5E9jv8dduKAejiEG8uWr5RfEjLsXBJTnrWTbOOVKfnuj4xUwy0tlGZcVVO8XDmQz2
+	zsXpTa9UbNqk3S8OAp0eqoMhSFUCxoinvOuMExyE7tPrXKiuqcG+UkImiUpMRw==
+From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] ctags: set CLEANBROKEN
-Date: Wed,  4 Nov 2026 13:40:17 +0100
-Message-ID: <20261104124017.889577-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.56.0
+Cc: thomas.petazzoni@bootlin.com,
+	=?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa=20=28Schneider=20Electric=29?= <joaomarcos.costa@bootlin.com>
+Subject: [meta-networking][scarthgap][PATCH] ntpsec: fix CVE-2026-121506
+Date: Wed,  4 Nov 2026 14:17:17 +0100
+Message-ID: <20261104131717.1347063-1-joaomarcos.costa@bootlin.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 12:40:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131843
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 13:25:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131844
 
-From: Martin Jansa <martin.jansa@gmail.com>
+This vulnerability, marked as High [1], was fixed upstream [2] since
+v1.2.5 (tag NTPsec_1_2_5).
 
-Tries to call sphinx-build during clean in docs directory and fails when
-not installed on host nor included in HOSTTOOLS
+Backport the fix to ntpsec v1.2.2a.
 
-Fixes do_configure failure when re-executed in existing WORKDIR
+[1] https://nvd.nist.gov/vuln/detail/cve-2026-121506
+[2] https://security-tracker.debian.org/tracker/CVE-2026-121506
 
-...
-rm -f ./*.gcov
-make[2]: Entering directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0/docs'
-/bin/sh: 1: sphinx-build: not found
-make[2]: Leaving directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0/docs'
-make[2]: *** [Makefile:20: clean] Error 127
-make[1]: *** [Makefile:8218: clean-local] Error 2
-make[1]: Leaving directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0'
-make: *** [Makefile:7175: clean-recursive] Error 1
-ERROR: oe_runmake failed
-WARNING: exit code 1 from a shell command.
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Jo=C3=A3o Marcos Costa (Schneider Electric) <joaomarcos.co=
+sta@bootlin.com>
 ---
- meta-oe/recipes-devtools/ctags/ctags_6.2.20261011.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../ntpsec/ntpsec/CVE-2026-121506.patch       | 52 +++++++++++++++++++
+ .../recipes-support/ntpsec/ntpsec_1.2.2a.bb   |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/CVE-202=
+6-121506.patch
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261011.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261011.0.bb
-index e2f6b309ef..b419a158c0 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261011.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261011.0.bb
-@@ -33,3 +33,6 @@ PACKAGECONFIG[yaml] = "--enable-yaml,--disable-yaml,libyaml"
- PACKAGECONFIG[manpages] = ",,python3-docutils-native"
- 
- BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/CVE-2026-12150=
+6.patch b/meta-networking/recipes-support/ntpsec/ntpsec/CVE-2026-121506.p=
+atch
+new file mode 100644
+index 0000000000..cee46825de
+--- /dev/null
++++ b/meta-networking/recipes-support/ntpsec/ntpsec/CVE-2026-121506.patch
+@@ -0,0 +1,52 @@
++From dfd436ee883e9df7c170b5d8e62f534a09f54be2 Mon Sep 17 00:00:00 2001
++From: Hal Murray <halmurray@sonic.net>
++Date: Thu, 1 May 2025 22:32:56 -0700
++Subject: [PATCH] Add length checks to fix fuzzer 393742176
 +
-+# calls sphinx-build during clean
-+CLEANBROKEN = "1"
++Also fix nonce length checking.
++
++CVE: CVE-2026-121506
++
++Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/0a3=
+6941e499d533dfbc3fb6b1fcd8c367679d719]
++
++Signed-off-by: Jo=C3=A3o Marcos Costa <joaomarcos.costa@bootlin.com>
++---
++ ntpd/nts_extens.c | 12 ++++++++----
++ 1 file changed, 8 insertions(+), 4 deletions(-)
++
++diff --git a/ntpd/nts_extens.c b/ntpd/nts_extens.c
++index 553b61b25..5442dbf1a 100644
++--- a/ntpd/nts_extens.c
+++++ b/ntpd/nts_extens.c
++@@ -405,14 +405,18 @@ bool extens_client_recv(struct peer *peer, uint8_t=
+ *pkt, int lng) {
++ 			break;
++ 		    case NTS_AEEF:
++ 			adlength =3D buf.next-NTP_EX_HDR_LNG-pkt;  /* backup over header */
+++			if (NTP_EX_U16_LNG*2 > length)
+++				return false;        /* garbage packet */
++ 			noncelen =3D next_uint16(&buf);
++ 			outlen =3D next_uint16(&buf);
++ 			if (noncelen&3 || outlen&3)
++-				return false;                 /* else round up */
+++				return false;        /* else round up */
++ 			nonce =3D buf.next;
++ 			ciphertext =3D nonce+noncelen;
++ 			plaintext =3D ciphertext+CMAC_LENGTH;
++-			outlen =3D buf.left-NONCE_LENGTH-CMAC_LENGTH;
+++			if (noncelen+CMAC_LENGTH > length)
+++				return false;        /* garbage packet */
+++			outlen =3D buf.left-noncelen-CMAC_LENGTH;
++ 			//      printf("ECRa: %lu, %d\n", (long unsigned)outlen, noncelen);
++ 			ok =3D AES_SIV_Decrypt(wire_ctx,
++ 					     plaintext, &outlen,
++@@ -424,8 +428,8 @@ bool extens_client_recv(struct peer *peer, uint8_t *=
+pkt, int lng) {
++ 			if (!ok)
++ 				return false;
++ 			/* setup to process encrypted headers */
++-			buf.next +=3D NONCE_LENGTH+CMAC_LENGTH;
++-			buf.left -=3D NONCE_LENGTH+CMAC_LENGTH;
+++			buf.next +=3D noncelen+CMAC_LENGTH;
+++			buf.left -=3D noncelen+CMAC_LENGTH;
++ 			sawAEEF =3D true;
++ 			break;
++ 		    default:
+diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb b/me=
+ta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+index 4b6125b4c5..4e039a9fd2 100644
+--- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
++++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+@@ -15,6 +15,7 @@ DEPENDS +=3D "bison-native \
+ SRC_URI =3D "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
+            file://volatiles.ntpsec \
+            file://0001-wscript-Add-BISONFLAGS-support.patch \
++           file://CVE-2026-121506.patch \
+            "
+=20
+ SRC_URI[sha256sum] =3D "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea1=
+18a62f0a3226950e"
+--=20
+2.55.0
+
