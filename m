@@ -1,130 +1,133 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5171.1793782730411175392
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.57])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5535.1793784730051190633
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 00:58:50 -0800
+ Wed, 04 Nov 2026 01:32:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=Kbk1hG7l;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3b07db03f41so325164a91.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 00:58:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793782730; x=1794387530; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6CQMGDBBUx9y1Hw9WcmVXq9pFRko7pyUGxZKghOYO9Y=;
-        b=Kbk1hG7lR/sdcEyQrIvIZaZNCpfDnlEUYgW37xbbwFgIdIBWiY8bemWSxTAQ7jIB8n
-         8riXTKpdPuZwcvZHwpZ76R5F1iPdQ4qLifIODppdsY5rRWJP3r4G9iGsgJvcmtRoA9KF
-         rbyV1pb06dtcrBJ+E471Jl56wV7G8n0FttArJJmbPCxrcx1VbQuQg1VcPFgBYu7bOMQ5
-         QMLO/PufC0ggVJlyq/MrP+62SZ/2SkDWkZX9vM6vCeulfDpcIIO/SdvxGTKlFelSL5nW
-         LsQLyk0VXUSUJWlY7y0qseMBcRZHy+CpYOhxA/M75C1s8g58x7Hrm94GQeUd+PgWZmJR
-         XomQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793782730; x=1794387530;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6CQMGDBBUx9y1Hw9WcmVXq9pFRko7pyUGxZKghOYO9Y=;
-        b=ZcSYK3i/ibuuP4depfpyaTruhZdr8Dppgekq4FlVP17/pzold3917PH1MBMAwQZYfv
-         5HlzACIvVID0knkHTmWYYIIiU/LmTGNTpuWSZhJ+uIelD/LXifJNcO9+Mi0Pymip1BIc
-         bS9nggYsSxyt6ycjmowAyh+dTk3fe0EJirM3GOoCOcz5Ov+wKQs8GkJDL8gU2EtRwDKS
-         g7ghMmgjWnmKPh1fLnGb8idzSjd9Lb5dW3OFMluJ2LwvAVIvTbc7wSEUv/eRbAcF1QNu
-         1Dyx7rn/hPBXebAMCDh9A8MN/fkHPioSPNUzdz1p4HPGeRnopWV1X6AOGgAJl2Wn8Hn/
-         RC2Q==
-X-Gm-Message-State: APuU4Z9D+Lw/U6deQ84TLuLvZtBz3tNoTn61Z+DqQ5cPqikeQ5oACc9S
-	VZ9k+5jUg15g53AWfp0/qe8afdk/6L5SIwpr+oc30+cPPJqTnWAt3rZ/ZbLqBQ==
-X-Gm-Gg: AYBFou2kW+ICiu7W1TtHwVZux7TH+ykNKFTjFaSlhbt6eTvc0tIoTfp4qIfogKjucEL
-	VC0Ra3hr/Jr4R358uWpdEKYX7Xg/IQGT7kRye3BekWj7zfS/CwJUe9ZgYKxkTYXNekRAtXX2kgS
-	WofMeM3db1kC5tLO7F79Rp5fucou8OLSPTuk1CHDrOIK1Fs3Nb5jfpWxoS3Z0ywn94i/pwn0yI8
-	yqPdveTArMw5cpgZc7P/QH+YOCBLV5EzwunYrTSSKn9ClPzkOd0qdkC+M/ghSQ8IL3jzXLFKJEn
-	XBwfLakFXJh5GO5g8YLWEbU4sYgY4dvaUovve8ktY0JZL2JihAPW/4GTIcExs57oQe34kq/9EG/
-	KlBlkgZ80bVjunnQJCd/RmCeGRBOO09SXw/l4qATRdHhEGprGhklFtkBRci79yw9rMEcmRwoEBF
-	Ia0FxsZHXNHfFmiTBl7H95+odILNZa0GdJUqAtyQ0Y6taBlbDSRhvTsvx6c806jHV2ck9K8xkiR
-	dw+QpZ1Wpk3WtKQFjCVEgI8TnPwBY/t4iVvk74de7kXm9soTbSR3sIaLMTab7lSlTBhpEXHceZh
-	Mc/+Vg8TWaVb0Y9lQBdAtrDN9JkvaY+pvfseBG2nj3lliBb6qz4QR5QU9dOCLk78
-X-Received: by 2002:a17:90a:f307:b0:3ae:9944:3bf0 with SMTP id 98e67ed59e1d1-3ae99443c7bmr8538732a91.34.1793782729659;
-        Wed, 04 Nov 2026 00:58:49 -0800 (PST)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b093d481a3sm3139981a91.1.2026.11.04.00.58.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 00:58:49 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=tohhUtUc;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.66.57, mailfrom: johannes.schneider@leica-geosystems.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e8ZAgWwp0nOOwGPPDBJ5uwEki70V0P0kYtqxRoi2HNhOtj6x3HG3qOkRLS/uz5Oco4dXPsA/RhUU+7s/ArKBRJbmzgt54UJvluWkZ11EtN5+nDOU4RSfxyt01UsEz/E1s21qn4rrl/dMzk2NKXgzdyXINs7xUd60asgxzb+zyks1wcHoGNvx+0WBbo4PBLtZUJZbLALBX9RkwFQTc0jqFCqyb4xPA7n/4uBiodyT3m0U9ZwCt+Nb72yt4nPyK0lATbz00IHv5f3JpJPcopFfhE3Wy27phKIcEEd0R49mmZllgIX1UdCgXm4+4i8tqB6hDInTpJbK433vpUC+IGkr+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZDWrFl/ZWdW0unm3k+M7LR0BjJ4PbA09PrXzUQHs+aU=;
+ b=H/rbmLKbZG5duzit2HfkMoQIzXotA1Yhe1Du7yu9Q90BHpWwNUSAIxChx0nmg7qfpCItB/8OEoH/BWlWK1RsC8jnUeKz0y9NBAmIdZ8U2gEF4W0L4oZPgK79vai3l8JV0XSZYD8rHPSMfc6jLn5sohxQxKtV7NF9nk+svZfugk011JTxJ32pEuKC9tUdjLQ71gqCCEZTushzMnXyWDBneAd2Wj/r7FKRQq8cKu0moKgAUOGnNydnIM3SroNYDyDLehaKYplLBAVR3H8LhhZQvLOh4YHyVIkmnH/PQhBkKct4ZG687EO1vMOkeUBi5ImZ3Q1eclksFowGjXhPNOSnFg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=leica-geosystems.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZDWrFl/ZWdW0unm3k+M7LR0BjJ4PbA09PrXzUQHs+aU=;
+ b=tohhUtUcqT72dRz5ROIZ7dCZM1xp6QMPaewADuDMjJykU3mGcNqXPrmx8p7WanThm5O1SSvIAk4zMARxKKGuKanQrVAHsYuMM/nyDRMm1oQymImprgPfRHRMvfmPslxN0SHv5IC9OvfaR3ijyB3F5ozY8cQ75QBuUPTiD+FNxIA=
+Received: from AM9P195CA0005.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:21f::10)
+ by DB9PR06MB8091.eurprd06.prod.outlook.com (2603:10a6:10:268::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Wed, 4 Nov 2026
+ 09:32:02 +0000
+Received: from AMS0EPF0000056B.eurprd02.prod.outlook.com
+ (2603:10a6:20b:21f:cafe::8b) by AM9P195CA0005.outlook.office365.com
+ (2603:10a6:20b:21f::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.9 via Frontend Transport; Wed, 4
+ Nov 2026 09:32:02 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
+ signed) header.d=none;dmarc=pass action=none
+ header.from=leica-geosystems.com;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
+ designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.99; helo=hexagon.com; pr=C
+Received: from hexagon.com (193.8.40.99) by
+ AMS0EPF0000056B.mail.protection.outlook.com (10.167.242.121) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Wed, 4 Nov 2026 09:32:01 +0000
+Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
+	 Wed, 4 Nov 2026 10:32:01 +0100
+From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][blacksail][PATCH 4/4] ndpi: patch CVE-2026-116744
-Date: Wed,  4 Nov 2026 21:58:34 +1300
-Message-ID: <20261104085834.1877643-4-ankur.tyagi85@gmail.com>
+CC: Jan Luebbe <jlu@pengutronix.de>,
+	Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH v1] signing.bbclass: set all softhsm config keys explicitly
+Date: Wed,  4 Nov 2026 09:32:01 +0000
+Message-ID: <20261104093201.3491037-1-johannes.schneider@leica-geosystems.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261104085834.1877643-1-ankur.tyagi85@gmail.com>
-References: <20261104085834.1877643-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Return-Path: johannes.schneider@leica-geosystems.com
+X-OriginalArrivalTime: 04 Nov 2026 09:32:01.0540 (UTC) FILETIME=[588DA440:01DD6C3F]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF0000056B:EE_|DB9PR06MB8091:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9212c0ba-5fbb-4a9b-599c-08df3a567b31
+X-SET-LOWER-SCL-SCANNER: YES
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|82310400026|36860700016|23010399003|376014|1800799024|6133799003|10067099003|18002099003|56012099006|11063799006|261022075727099003|261022113327099003|261102123227099003|261026121527099003|261021121427099003|261009223027099003;
+X-Microsoft-Antispam-Message-Info: NNcGpAInDF3Q9NHxFpX5NhfAzlDalAdGuEG1VLiXQYX2RU7MJIcJ2ZqSNKIox0j9ME7oc0Osxqtmdu1WtbiAyhcVKgzYUvUKOD3G+3e/efgu8bPZao82h9UPGiRivk8iZ9rb+617PSBp4n0AQZm7Pt+QMrsV0jEdf6y8x86aZ/OAZOxZ3HJxu/PKsJb4dQBi0qNM0u9mvmYjzWyadJjoLD1qQ+41PTtaA500/81hINbzOB5PtF/via5bhCvPfl0bZvt59uzBk7DxU59S2sa3BWHee1pQX+Ea/tuAlG8xygWN248u3bQHyfctCxigkg3GeqL9Vr5/12QiB6U1y8pQxo5CUQjHBI1AIBSqqaxCUHASKTH/Z6Lgn6EL4O3sIA9UP9J+UV3zjjlo6LTM2TU7jRB3+vd3zVZpf7OhifrZ9Vphe2O6/jR8nXakmqcyCACfgIyNzTX3KeVwGudtt637FVHCeDfTah/OK9VQAgG/YOak6JiT8+rCT+gXOjCaXimuWMxiIHI/pdu2zR8+5W+nnT1jAJTSyKdVNdlpMkKniWcZBA5B+QwCTZGCpnjCCCqB2Xz/3m5CqVG1s8Jz9x3vw5TPE8M48juE+s4QVcKpAPzPaDjZVTGGvNUYstco0mbWYx7ARJOsv5FjMavHpZ0ZvCSbGNXEEJcBAyH3P6Xu4knUhuhDjf6xxRZf+AyVdRcreHmFVb5lDLPmafGdnYXqeQ==
+X-Forefront-Antispam-Report: CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(376014)(1800799024)(6133799003)(10067099003)(18002099003)(56012099006)(11063799006)(261022075727099003)(261022113327099003)(261102123227099003)(261026121527099003)(261021121427099003)(261009223027099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: LqpYAa2CXmpfmGu87lRluYk6AnRL7wVaipBw2opUToTlcDBg9AexWDhpZuDGzawqVjX+zfrmsBHGzdz7GfFa4DFTvmNMCpX7HlobAPoF7meTG3PJ+54glTo1QKKfQXlZJQ5KMv3s/dDNbjQz9fNrGE4NDulWLi4m+Jf1GdK0rQQ9MEbRb2+PH8v0qYmdvSC1qQSuXWIcUednCTEZvwTm/RD5WOsssOGNcRj1MPKkDQz1gHIHck65sVEzBkwRzqZBhFrJJLyRGxLJViHA0M0n9ygOQhxLqVKtJmpMa/undCsabdaynnTRIwtzpe15w3ENl7R2ehapf3bhESUwEF/sZOlibYnwY5jYF63BTB/cVLoKmj5BD4cRXEOyNOV9swtstaDUqXnzsYWXxYvDSlLuQZTXmwCacGxJbrNkQkkvLDV65JBRWarzk8COfx1pzdbA
+X-OriginatorOrg: leica-geosystems.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 09:32:01.7896
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9212c0ba-5fbb-4a9b-599c-08df3a567b31
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000056B.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR06MB8091
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 08:58:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131838
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 09:32:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131839
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+The generated softhsm2.conf only sets directories.tokendir and
+objectstore.backend. SoftHSM warns about every other key it falls back to
+the default for, and it logs through syslog(), so every process loading
+the module during a build (rauc, extract-cert, ...) puts three
+"Missing ... in configuration" lines into the build host's journal.
 
-Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-116744
+Set log.level, slots.removable and slots.mechanisms explicitly. The latter
+two keep their defaults; log.level =3D ERROR keeps SoftHSM's INFO/WARNING
+chatter out of the host journal while errors are still logged.
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- .../ntopng/files/CVE-2026-116744.patch        | 33 +++++++++++++++++++
- .../recipes-support/ntopng/ndpi_5.0.bb        |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
+Tested with a downstream copy of this class: a RAUC bundle build signs as
+before, and the build host's journal no longer shows the warnings.
 
-diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch b/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
-new file mode 100644
-index 0000000000..5794963ada
---- /dev/null
-+++ b/meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
-@@ -0,0 +1,33 @@
-+From 00706d4da0b7a1f9eff61e5835a0a1cc22c9c7e1 Mon Sep 17 00:00:00 2001
-+From: Ivan Nardi <12729895+IvanNardi@users.noreply.github.com>
-+Date: Mon, 26 Oct 2026 17:35:39 +0100
-+Subject: [PATCH] softEther: fix out-of-bounds read (#3298)
-+
-+Close: #3291
-+
-+Reported by HaiND (Nguyen Dinh Hai), Post and Telecommunication
-+Institute of Technology, github.com/Haind03
-+
-+(cherry picked from commit ca9d819151606377ac53305583fe819748c69be2)
-+
-+CVE: CVE-2026-116744
-+Upstream-Status: Backport [https://github.com/ntop/nDPI/commit/ca9d819151606377ac53305583fe819748c69be2]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/lib/protocols/softether.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/protocols/softether.c b/src/lib/protocols/softether.c
-+index 379e743f7..c6f5d131e 100644
-+--- a/src/lib/protocols/softether.c
-++++ b/src/lib/protocols/softether.c
-+@@ -200,7 +200,8 @@ static int dissect_softether_host_fqdn(struct ndpi_flow_struct *flow,
-+   payload += value_siz;
-+   payload_len -= value_siz;
-+ 
-+-  if(strncmp(val1.value.ptr.value_str, "host_name", value_siz) == 0)
-++  if(val1.value_size > 0 &&
-++     strncmp(val1.value.ptr.value_str, "host_name", value_siz) == 0)
-+     got_hostname = 1;
-+ 
-+   for (; tuple_count > 0; --tuple_count) {
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb b/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-index 6eadf8ba62..80890b1f27 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_5.0.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
- SRCREV = "375f99ef9fb4999d778b57bbeece171b3fa9fba6"
- SRC_URI = "git://github.com/ntop/nDPI.git;branch=5.0-stable;protocol=https;tag=${PV} \
-            file://0001-configure-Stop-embedding-pwd-at-configure-time.patch \
-+           file://CVE-2026-116744.patch \
-           "
- 
- inherit autotools pkgconfig
+ meta-oe/classes/signing.bbclass | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
+ass
+index b02825bd00..431ceab8e3 100644
+--- a/meta-oe/classes/signing.bbclass
++++ b/meta-oe/classes/signing.bbclass
+@@ -112,6 +112,9 @@ signing_import_prepare() {
+=20
+     echo "directories.tokendir =3D $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
+     echo "objectstore.backend =3D db" >> "$SOFTHSM2_CONF"
++    echo "log.level =3D ERROR" >> "$SOFTHSM2_CONF"
++    echo "slots.removable =3D false" >> "$SOFTHSM2_CONF"
++    echo "slots.mechanisms =3D ALL" >> "$SOFTHSM2_CONF"
+     rm -rf "$SOFTHSM2_DIR"
+     mkdir -p "$SOFTHSM2_DIR"
+=20
+@@ -353,6 +356,9 @@ signing_prepare() {
+=20
+     echo "directories.tokendir =3D $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
+     echo "objectstore.backend =3D db" >> "$SOFTHSM2_CONF"
++    echo "log.level =3D ERROR" >> "$SOFTHSM2_CONF"
++    echo "slots.removable =3D false" >> "$SOFTHSM2_CONF"
++    echo "slots.mechanisms =3D ALL" >> "$SOFTHSM2_CONF"
+=20
+     cat > "${OPENSSL_CONF}" <<EOF
+ openssl_conf =3D openssl_init
+--=20
+2.53.0
+
