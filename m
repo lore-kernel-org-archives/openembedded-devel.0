@@ -1,106 +1,97 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31188.1793875005557823058
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.32572.1793879730923219369
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 02:36:45 -0800
+ Thu, 05 Nov 2026 03:55:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=rzEQhovg;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48fd2e38825so1150273f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 02:36:45 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=nJwprPxJ;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a208d93758so20156655e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793875004; x=1794479804; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793879729; x=1794484529; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lY3G+gXEIbztuuCf/Wfo857KvheOk5ATNbAD8abwoQ0=;
-        b=rzEQhovgKte0lPr9yDt5GslbrxgNzeoeVKujODjKMcGTu8LIUKA7GkflKFQyCsaHxl
-         VS2/1TiNxcehL0XIqFkIxoACtUBG2UKuFZMGUb2Tc1Kc9Ihi5HftNEzyIShmBLc7XKfu
-         d4outKPCidUwFChCLxT/4tOsKX9WCLr/O5IowfA3TEJ8417P6b1331ryj4IjRchL5it7
-         m5jzRnm9QAYZRXf5CBY+W7MlNhgd66kteWnMn3GaRIDnkwg9EE79WVWboSDtHhm/TzeY
-         fO9ZfOly0+HRsPpF2/y3RnkTqv/T4GCt7Js25K4RJxEcZEykffKbbn+x7je5ksGJWaBF
-         gIsA==
+        bh=nH5QVfxYiYKIaN+qFrGkr2R5aaxr03zvNY7A6ziV/zY=;
+        b=nJwprPxJVKyFu/mLdCyJX5OqykMt8pau1KnYwWSpacGsFa9pqM8IMFoMUMprpEA+Mf
+         fTRONIJ7f/k2EJIDF7mXnjCzSAR4+saLKLFImyvLwQhwkj04KsFzGgiQ5d+y8RKX+xPK
+         jDiTLaCf3KTiaYRzjFl8zi6W9ktUYCCIBBWI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793875004; x=1794479804;
+        d=1e100.net; s=20260707; t=1793879729; x=1794484529;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lY3G+gXEIbztuuCf/Wfo857KvheOk5ATNbAD8abwoQ0=;
-        b=oOPjHIf9Ko71re665ic4d1pPPk+C8xLyTKvKz/s+QVejXWqC5lKhltG2bEKX84xN6M
-         nj2P6NGQIyZoxzYMVTmUZ4PVVWH7zzwb5repBRVWojyrUtNTzGVrEO+bBTw5BypNaEvP
-         9ssVxc/0jz35I3VStiYPdWTXVic6glUshsAdzZh4F9CS65veGVGK4KBepNGgSD0LUBcM
-         ARnJazA8X0ogk3+MzAv7rw2GvZC6GBuh/ycYFIzg31FPJhQC5s8/ro8ZXOMkWGocMvs7
-         Rt/IFW3Nuts3KkPGM0scC5Agw015dhrGzpGS4CIV8E/t8dk5iGcV0z9gI0/L9BWgDf+A
-         TwmQ==
-X-Gm-Message-State: APuU4Z/KdTC+E4EQ1nTsj1uEHj1PfsCssCF1jbSPGz0Y20b6yECg8gL2
-	zWLABnYIVklh6u9wdCIVrSbrBTdmnyH126UX0iZVsyt0AWJ73n5nKwX0EwhjrxJg
-X-Gm-Gg: AYBFou2CgW+i9+vEySy8Tqwuy7W22EdILtvtF6IhDn13fnD+7P+6wg3h6iyzzimne1Y
-	vE+ngY1AQF6buDw9FNxXXNOCCpbJ+18XgW+GSscdvnGA09JHC9FKFYDeGmTL+A9ax/PwWV2YzBl
-	pZfvM2vrtt2iTD91bzduUSuuz7uarqygpJN1B4h4/UjedFwAO/mUjyHnnjLWzsr11wTsgctqaow
-	yvvOb47OLv97B+FtLPNPV8Kj3WsJ+o5wdbAipLSo8R0pIQJpuxmjGh8HxV+OWeQXRXY9A6Dy7p8
-	egID4oFcuCWhw1TSOyYt8y905t/WRVxgtBhdDkHG+VXR8m2IlP84LNzGvvCA2FWKhW6k5GHy/Qw
-	9w2ddkIr0FPtuwYf5sbbO9m3DXBa6v0JLssiwUbgycYCoDmrlatlWkglsBu/HFdwOkggBIdl4xv
-	Ikd1Au5+LQh8fp9BUdirBZF/tYh2QnAvB4uWAfFJFS+VCxeOrbFSGzUzuPDb0hqfhQvCIR2KDcS
-	+2UrrlbCLj2AE6cs6NHSIlEiJAmRQ5A5D6RIiTSYDoMhbYreWCW9fDBrRYNzZLqF3B1Fedv9tje
-	Zuf48HlojRXi9dUACiXOv1agC8YT09lK+X5OpQMS2X+03fDl+dm8NUbMQ+2wBpXWzzFLJKZsR2Y
-	e1wtSARLPdw==
-X-Received: by 2002:a05:6000:46ca:b0:48e:679a:4aeb with SMTP id ffacd0b85a97d-48e6e2bcda2mr28055296f8f.3.1793875003454;
-        Thu, 05 Nov 2026 02:36:43 -0800 (PST)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.212.54])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fed551dbasm8919699f8f.37.2026.11.05.02.36.42
+        bh=nH5QVfxYiYKIaN+qFrGkr2R5aaxr03zvNY7A6ziV/zY=;
+        b=hiUiZOHdD4BmOWTvy3q8m7LSMzWZFy1YcBYGrULsTOLVZlGqVzsquC0VY6XQTFnOBQ
+         m7cjTmu/xutxU7i32SoCHbTB4VMW1k1R826jvCHL4Af1ywORK/E0ska9SxDeI+MWavgH
+         6ynvYLyrxSsGrZmd3zIgnE57/R3p7SQEQiTO80QTBhSHgYgs2TgQ4QWSVs9br6GlLftK
+         PHzTn91VS+SpIVxXp2lY2aVgD36Kk3O7Pveo3ldyvLa++za0WHmNbwF37nw5QDVmvKZM
+         jv4XnapKwr3KaREWM8luIJ9oWHmiAT9a72ea+zkUfK6MTHHWhV6rRL1bKSNSixd9W30c
+         tovQ==
+X-Gm-Message-State: APuU4Z9p7aFPt4NZxiOhXjrtOi52kfhp9H08rtAfysB9ZNkgx+HXc4CR
+	QsJ2Tbd0b8wz7DhbOW61l5zIwuz+2gLG4zikUqy4KUNt+ScbBGiKI4iulH79sfKzLnCFsWRnxiX
+	L/nsu
+X-Gm-Gg: AYBFou0mKk++809grWrzXvoVbCPZC96cOUu9WaVoVefVtCDQEvNOvRuvnqYZmPfiWZ+
+	zTqv+vKufqL0I4KyjEQh2dVbBEHzc/j4DnMRQ3f7kFTiMq87HVf0CtIumduGjQGaBGlzPGJvxQR
+	MlQ5+nuoGTQ3ZZ8oUwvIzKdmcWen2ggf0OHl3Z/rUA78Qd1nR4+hDs3CJvTxzC8cB+cFaY9KMKr
+	rt/dXul8kJLI7B2RhmGAi5MJZZHgKYDKo+uJWkncytBR24gIel8xVRftfg/c05BS+2B7U7+r4H3
+	IRoXIEHoMRSleUSBDdx1rhPjMrzaqhGyraZSr4WKxhi9IrwE2TQpDprhWbdQWTzgJgE6qy09v4b
+	mKZdqCInKijUdi4RvPdEl5SkOHJO69FXZDUJb9yz8wsuOjEsSRtMgLdRpJ7Hmf7rLy8WLtC1uc4
+	CN5BwaeU58A/51uqNCa7AsiRKvmRugSuTGnpEEQYv+9FXMLzp4L1Co7Q3ArErXVh3FYSZqOet/3
+	UyULxlJSdCiMgtX57WnV39pWCwc490ZHZ8cto9Id7fn0UHZVOJYmnILJhx087Wi2dF1OUUjl+id
+	iPTtD5XCW7UA6ixKkWDv5GgRTlqZLdN2CRGuyf6Pfk8/urZVBBF8kZEnhTc4C9Uh1MoGV8nO7I2
+	J0BShkJbbKqqWKKlMTccuByhbMLz2fgmbI4u0wnGuGVcVSxC8CRYB95U9foBJ/S64Iy1bo7LVuE
+	8=
+X-Received: by 2002:a05:600c:474a:b0:4b5:d95c:2378 with SMTP id 5b1f17b1804b1-4b5d95c241cmr26865255e9.34.1793879729048;
+        Thu, 05 Nov 2026 03:55:29 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 02:36:42 -0800 (PST)
-From: martin.jansa@gmail.com
+        Thu, 05 Nov 2026 03:55:28 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][master-next][PATCH] ctags: set CLEANBROKEN
-Date: Thu,  5 Nov 2026 11:36:38 +0100
-Message-ID: <20261105103638.745303-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.56.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/19] python3-apispec: Upgrade 6.10.0 -> 6.10.1
+Date: Thu,  5 Nov 2026 13:55:08 +0200
+Message-ID: <20261105115526.634289-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 10:36:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131900
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 11:55:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131901
 Content-Type: text/plain; charset="utf-8"
 
-From: Martin Jansa <martin.jansa@gmail.com>
+Upgrade to release 6.10.1:
 
-Tries to call sphinx-build during clean in docs directory and fails when
-not installed on host nor included in HOSTTOOLS
+- Recognize trace operations defined in view docstrings, instead
+  of silently dropping them
+- Fix intersect OneOf and Equal choices in field2choices
+- Drop support for marshmallow 3, which is EOL
+- Drop support for Python 3.10
+- Test against Python 3.15
 
-Fixes do_configure failure when re-executed in existing WORKDIR
-
-...
-rm -f ./*.gcov
-make[2]: Entering directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0/docs'
-/bin/sh: 1: sphinx-build: not found
-make[2]: Leaving directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0/docs'
-make[2]: *** [Makefile:20: clean] Error 127
-make[1]: *** [Makefile:8218: clean-local] Error 2
-make[1]: Leaving directory '/OE/tmp/work/x86_64-linux/ctags-native/6.2.20261011.0/sources/ctags-6.2.20261011.0'
-make: *** [Makefile:7175: clean-recursive] Error 1
-ERROR: oe_runmake failed
-WARNING: exit code 1 from a shell command.
-
-The issue was introduced in p6.2.20260802.0 version with:
-https://github.com/universal-ctags/ctags/commit/05a8061a581f626deada11da5300822bee20e458
-which replaced "rm -rf $(BUILDDIR) $(EXTDIR)/__pycache__" in clean with
-sphinx-build clean:
-@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../{python3-apispec_6.10.0.bb => python3-apispec_6.10.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-apispec_6.10.0.bb => python3-apispec_6.10.1.bb} (79%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb
-index ec80a2fa25..db0718748e 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20261101.0.bb
-@@ -33,3 +33,6 @@ PACKAGECONFIG[yaml] = "--enable-yaml,--disable-yaml,libyaml"
- PACKAGECONFIG[manpages] = ",,python3-docutils-native"
+diff --git a/meta-python/recipes-devtools/python/python3-apispec_6.10.0.bb b/meta-python/recipes-devtools/python/python3-apispec_6.10.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-apispec_6.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-apispec_6.10.1.bb
+index 52ebc43c6e..be4b658dbc 100644
+--- a/meta-python/recipes-devtools/python/python3-apispec_6.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-apispec_6.10.1.bb
+@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a75956865b40c80a37c1e864716592b4"
  
- BBCLASSEXTEND = "native"
-+
-+# calls sphinx-build during clean
-+CLEANBROKEN = "1"
+ inherit pypi python_flit_core
+ 
+-SRC_URI[sha256sum] = "0a888555cd4aa5fb7176041be15684154fd8961055e1672e703abf737e8761bf"
++SRC_URI[sha256sum] = "46896cb0cab23b4e853e528528937719739f836358832bb8610edd14db1d9c01"
+ 
+ RDEPENDS:${PN} += "python3-packaging"
+-- 
+2.47.3
+
