@@ -1,106 +1,95 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.32583.1793879742001361907
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32772.1793879747076378597
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 03:55:42 -0800
+ Thu, 05 Nov 2026 03:55:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ph7YP0pp;
- spf=pass (domain: konsulko.com, ip: 209.85.128.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4b4571ff080so19007035e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:41 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=WZCdIcFL;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a2167bd087so15100575e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793879740; x=1794484540; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793879745; x=1794484545; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/BLtPJp9RiLjZT8pN6ck0/lGN2e2SgMwQJs6HlrCzCw=;
-        b=ph7YP0ppQ9kzDSZckPgFmSB/z2phTyW+Y9lZLqhlZoKsEPlopxOZeal8Dl4yhMhdg1
-         ZnL3Xw7dkG5WwRva/UXGawuEF5qMLUlCzwy1V7kFxgNrYc8nx4h8HrNlgiD0t8I2uODY
-         jaLkQ6nlvikS2bujoOTgWj+GTYZuVpwZuE+zQ=
+        bh=GtRxujiQ2jnmOpaM07r8twslMR6lnTaMYrVgLwu6U0s=;
+        b=WZCdIcFLra4qE6ky0Ca0zFNwYxJvtuZNyAqV8HY4iAfo4W8A9SOyoXSyhRyFDjF7vX
+         2bA+RMPWi0gqT/k+81kOb0iqucFYkY3e/sVO8Y4oQTShqM4ugewUCI3Rlbc0RdL6+JRU
+         sDpJbhVRcjsA5ID3rFWIr2xy7FFT8Sl+gPZko=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793879740; x=1794484540;
+        d=1e100.net; s=20260707; t=1793879745; x=1794484545;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/BLtPJp9RiLjZT8pN6ck0/lGN2e2SgMwQJs6HlrCzCw=;
-        b=s7rdoVi4cs/w5shJHavRQD0juTJ983EclfxxJ2uirWjkdN6Bd7f7nIV4atnwTRL8nV
-         Y5nh6ggMhDfVu8DmpvfSetXDa0KbPehLrbv8yw8Eee6cKFSslfBfn3Pij40KvSxYD02H
-         BHQsx8uQrAS1aFyJGGwulkd0PZnJytcSUo6Av3KpY4OZQrv3JtYhiDNNiH9WMNOtA+Eu
-         saOdYrV/t08zb/wWoXwotYqWCa4z8tUAwKMJMtB5D9B64x9a+SZGNt/2aCaJUo6zWENW
-         gskjzzU2ZR5uBtmx9Rh5D4+q5HzQgu1F0y89moony8hGTCOcJyVcsnap3Na2XIFCrn+L
-         wwmQ==
-X-Gm-Message-State: APuU4Z/1gym+Z5Gt3Iw2pKQYocLdNlTshQTEpZ4wos0E/0Z15vZ64HLQ
-	OXo1k7KnliPNj5fcbc5ItR95BqH8v/KthbxZk7siIv1m/BpFzGsqn5iF8E6X/UtfnN1QQS2q1PD
-	rXl06
-X-Gm-Gg: AYBFou3igqNQEIseDoXXwDnEvUYGg0kQFVLx9qUCFpHHrg0kvSKW3UFoQXos18g+DsD
-	pl4mkjacV/19Atl7LM4BGY+vvdJl2ETQvJ17w1tjz5Z81UnrtawPB1P6uIH9e3XbxhTC733xPvK
-	ZmmxdNIBQ9ZQ5Z3j7ijE2wMlwsTC/f9XF3pyl1VziW36D4SypHv2moO8uMIK5PLnqZWmprnlpWW
-	s3Buo0o1dw9Z5kXLTTs8YBJbTLxicqLSHVSQ/zNUYWnm2SirASc1SXn5FT9yK0pPewKlUVkbpM1
-	OiXrN0od/UsxBGoIYt3hed7ZdAkd/aZ90QbAihpaZFVgOECo7AOjjxKMGCZ0XVhPujKLap9kAuz
-	MebJKoypV9G5b3BMfdbYx50VS6jZHSJESF9h729DBNR0WI+5ClLhHXaMRGAek9yz/aDrE/FO6PQ
-	VMTEYArLrtDiPc6NJAs/VKVRJ1ubKWMk8MrGij8YfoFg9Xcx8M+dY/bqhGddWURFgEITO1fTbWY
-	HyLUj+qmz4FQAljETcYQfhs0A8JVzIGO4kcVJ+L57V49KO6H2X1orJKIJg07YXLzPKFim3c/HXo
-	NXRvDyjwGWgktQfkcL48bxTia6O/QEE1AVYIsQKip1L3fm2KZ8QkGOUOPrAgQ/WLLN7wd1XPRTg
-	jOBN3QCUra+2NEnEteNA44qK7g5D9CtaHWUlSNs0amgLXgoH/2TIfZXbl7IJbEl3jL9e8xXYkpo
-	E=
-X-Received: by 2002:a05:600c:3510:b0:4a1:dec1:4e1 with SMTP id 5b1f17b1804b1-4ac1765d674mr421674655e9.22.1793879740369;
-        Thu, 05 Nov 2026 03:55:40 -0800 (PST)
+        bh=GtRxujiQ2jnmOpaM07r8twslMR6lnTaMYrVgLwu6U0s=;
+        b=RYesYzEkfZud/Kr4vUal70sy9B5jTpYlRu0QX93AXJZ/cAWL9mhjYp5MpMRk3omCWN
+         WlW9o+Yw/xg03MNstoQgLVCV6ovv3gx6f3W8hvMJ6CDuXFuWdvI3pQz63+CoCyhYqca/
+         k4lbTZFIsmFxv1zXzcz7II/oJkHh72JfT3GBnVZ7DtKUlNJtS2Oa+ZRNplbJ3s3smIJT
+         9YuBAZks+4lV2k9/RB5fegv34zMj4o2D2agnqFB1LHNeEwasAdhh4vWgHvl9Pfuxc7fA
+         Qo9yzMwwnvjfGXkKUlkzoooKOWzSsT3lYPtWjg1zZv13OpChr53eDlAVle0B1RK6mTBy
+         hcQQ==
+X-Gm-Message-State: APuU4Z/qhXoa728y/WoYuFf3l1C2D66zlXEYDQvNmFuhh3iRKy3q6i7I
+	6sXmCsBdf22WgkxjkI+aqgyWSYuNXyqcKhgHNtQAm/icqLXfK3AkaTaRelSLGrAKLrw+UZqfCXn
+	74Hri
+X-Gm-Gg: AYBFou38QFRMaYWpSde+cHJqL8OzE1XZi65FYWRWnGt7Wd4cmgT5dggRSr7iojh5ksn
+	Z6qXPXBuuq7jb6Qvdg9TpRmyFL9s/d38MML2FBUCKzgPO74lyPI1gdI19N9NRtgZbA3dalDZ6uy
+	jT4xVUHc8aSBoGW1DM1KOZcMuYQmDUhnHaObaqVF7AFeOARUbdeJon8STaCfTNb9qSO2E+rd8/g
+	C4Fuqbq9EzFvSyQVRO0iVqeRB68GUY7OX0GwMTRl3QBDQF+amg7be/vWOsrA9yhtxZKl++chD0j
+	PJEonkyeoyrBXVx6QB18VMw3LyYPaBctrGtrTgWU5wuufPRtkkxwL6CRej8SVUj03J36+zCj0DX
+	shZGUC775hScXK8L2tJaDkuHpSftDqtdXhuWONe7YwqZJ9vnoT963P51SFzf6ORsfuIRndt+qbq
+	cHOYpmcb3ctZXWPhvJcueoKveN1xiaje0Wa+EcH0l3ZqnubHFfHkWZx24sfJ/FIX7xHVfHz2qIl
+	+Ytlqc/dIq4VMT/dcw5U2VgdxZobfFMf2MSMjoiDHLiSlkAGxU57i2cB6VhA2ECwniyWYRexdty
+	5/RdYUHO8ZzGx0CQk074I+TOKEEt6ES5PVLiWJw/wzeyQcB5UxfkeZgDB/CKVnjbAUaPuyMWgOr
+	uGSRpomUvCVfvaHHxYb3ge/4VgbujhyTJsw55ojHazY4CbClDLY8ddPM=
+X-Received: by 2002:a05:600c:3f14:b0:4a3:59ee:86b with SMTP id 5b1f17b1804b1-4ac14ec873emr404864275e9.4.1793879745355;
+        Thu, 05 Nov 2026 03:55:45 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.39
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 03:55:39 -0800 (PST)
+        Thu, 05 Nov 2026 03:55:44 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 13/19] python3-robotframework: Upgrade 7.5 -> 7.5.1
-Date: Thu,  5 Nov 2026 13:55:20 +0200
-Message-ID: <20261105115526.634289-13-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 18/19] python3-ujson: Upgrade 6.0.0 -> 6.1.0
+Date: Thu,  5 Nov 2026 13:55:25 +0200
+Message-ID: <20261105115526.634289-18-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261105115526.634289-1-leon.anavi@konsulko.com>
 References: <20261105115526.634289-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 11:55:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131913
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 11:55:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131918
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 7.5.1:
+Upgrade to release 6.1.0:
 
-- Type aliases with list of types in values crash execution
-- Performance regression in Grep File
-- Execution crashes if library import argument cannot be converted
-- Tests in Markdown files get line numbers relative to the code
-  blocks, not to the file
-- Argument conversion failing unexpectedly causes bad error
-  messages with keywords and crashes elsewhere (e.g. with listeners)
-- --parseinclude with multiple data sources fails with "Suite '...'
-  contains no tests or tasks"
-
-For more details, see the full release notes.
+- No functional changes, only in binary wheels released to PyPI
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-robotframework_7.5.bb => python3-robotframework_7.5.1.bb} | 2 +-
+ .../python/{python3-ujson_6.0.0.bb => python3-ujson_6.1.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-robotframework_7.5.bb => python3-robotframework_7.5.1.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-ujson_6.0.0.bb => python3-ujson_6.1.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-robotframework_7.5.bb b/meta-python/recipes-devtools/python/python3-robotframework_7.5.1.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-robotframework_7.5.bb
-rename to meta-python/recipes-devtools/python/python3-robotframework_7.5.1.bb
-index 8dbf7ef936..72b3425fc5 100644
---- a/meta-python/recipes-devtools/python/python3-robotframework_7.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-robotframework_7.5.1.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-ujson_6.0.0.bb b/meta-python/recipes-devtools/python/python3-ujson_6.1.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ujson_6.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-ujson_6.1.0.bb
+index ece408e60d..f163be2db0 100644
+--- a/meta-python/recipes-devtools/python/python3-ujson_6.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ujson_6.1.0.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
+ LICENSE = "BSD-3-Clause AND TCL"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1e3768cfe2662fa77c49c9c2d3804d87"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "80e23393feb707582e0ad495c397a4477b646d08094d2df64f7316f9fafd8aae"
++SRC_URI[sha256sum] = "aef7ea4cd9e2e9f8a35c4538a9780d58c80d76c5da66a8dad269b4cc6d930c29"
  
--SRC_URI[sha256sum] = "ff6233ff752a200ece4d0a6c59f6f9f7d0e96dcff0a7a3458296b997b812482e"
-+SRC_URI[sha256sum] = "00f63dc7b0477a137f8a9c1f2e14db8084a4d187a76f3fec6c2567875c32b932"
+ CVE_PRODUCT = "ultrajson:ultrajson ultrajson_project:ultrajson"
  
- RDEPENDS:${PN} += " \
-     python3-shell \
 -- 
 2.47.3
 
