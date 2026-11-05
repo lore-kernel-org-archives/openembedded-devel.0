@@ -1,59 +1,60 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.32582.1793879741088349340
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.32574.1793879732217346407
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 03:55:41 -0800
+ Thu, 05 Nov 2026 03:55:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=pMOM33gJ;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a5b2be99a8so13826915e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:40 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=k3tkpWIA;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-4923176309dso29178f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793879739; x=1794484539; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NIE2tdQPJFbe3rBBlLOFI9yfXVCIBCjGIUcK8v9/mq0=;
-        b=pMOM33gJqiVO/U0Qh/6Ed0PXZac4rNBitr0Sl5q9/VewqwtTt2uc5GJ+o1r5oLwCwf
-         xVgDHaqE2Mafz6Fh/nv2Z3Vbj4ZVIMZpue610YHBrZy6+w9yAFM2dkEPl9vRiLcEoUnv
-         8zzrBesUqIgqzSjAW2pqXaDksjZH8XWaYCUyk=
+        d=konsulko.com; s=google; t=1793879730; x=1794484530; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=t0gBbv8aI3mi+vLi1o2vSS7B5V55V5fabTXJf0AzcTA=;
+        b=k3tkpWIAghdrpDkPJKiRTDxIZ8BMs7XZVHh7GCjap3kQ4akAuc/JBAz6HpAa4N5o6Z
+         +/4Ba2je+haMNikH4FZ6p6+LqHEVvVZAgOxIn4xfi92S4QUEA3zVBBpEeVWfNoSaJ9UE
+         VB5q+Ugf+oQX6QDTyMPvCkZC49B9/NYfSj/8w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793879739; x=1794484539;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NIE2tdQPJFbe3rBBlLOFI9yfXVCIBCjGIUcK8v9/mq0=;
-        b=thEWbFVFObtWgObKz1RK2LMjVZ3bV5dHbGKEnxGgOkA5t2bf3MgRgfoRWllY8xjgFv
-         a0X947G1x8fYPnArEq7OkZCB6K+zyE6T8skaZAT7nzxsqQdRNj7G0qrB9tUBi5KIM0Df
-         +8q2bzpeWQU8QenkZUdTmLQw3bchN2Eq5Q9jPcxw39IyUlXeQI9mRG+MuVTfpMac3/6g
-         6jgAy7pNtTRhCrZTbOAesBXoUhH5TTPPJOyXNv2DB6YO16N0XokE4t8h2W+cLkyLvtHR
-         qjCsygMlvPbH0CjfBXInSDz0SYpzIcCOva5i7tVFa5EpigUN8yxeP/VkhUDJ+A517RLM
-         HOww==
-X-Gm-Message-State: APuU4Z9FJig4S2uUrzJMsWVBcFRGZy3o9WsoefWfycK7t4s8/U1z9bIK
-	A6AmRyOnOyjSmCqyAQsgfARonW6fSv2wN6VSWNJNovVY5Wo2MvppC0QrU0SHZmagdWZGb1ww66v
-	dAvS1
-X-Gm-Gg: AYBFou1nY+F15lrohwURRJC5I+Gd8psb5ITcK72/I5NmmFzRx/cJ6Bm6pXG/AkUX/jC
-	4Y6QYB5cUL15lKRw7ncf4ltcSlr/YPWcXXfza4j6KYjFKijSx93v+SmwwfGavxq/RDzJ5wIIP9a
-	VZIVcRjbvQ+HQJsdD5q0M5eRnZ0j7si02HT4DS5V4H4eEvKXF3z+Liqx0GVaenLPka0xmS3szkQ
-	85siio4ouzM0bG2JjVKtWHujNSTkw3PsfvMlG991tbHeS05OiHdpNj9tDQIsro2QvMDNwdOOAfZ
-	Lb+wZC8y+KOe8ecjfEtVrBznHMTUI3JgeTVQbs2KUxqkQMidRUR2WVo+CTSDlpdGESpXU8cQGeh
-	cuycxVcckJ6/m57sjoOJVRFaHaBzNf1fCzUASTe3znqMOYkDvpzuc+QdA8v/REc8D5MIXuj9UyK
-	5u9j3rx907SDRUiuA853LgOxCGn/nzOhGmyYQBIOpbnZIZAIMWvcsiRsCNluGrak+zlfYJrqIUb
-	OWyChiPN02hgnwvbZIJrC01UfTkNGanRVdNkHikoG64Avd/CsPK4+jdoGMyCP4wsbVQIxv6IIQk
-	xrzJHrJ3znvPGDLD9KlbePTcJK4BkDRYYvb+nuNjIH0W+N8l4XTzccKSvIWRY9+UdJYtoTPV5sL
-	1yHIbgFrBlg8tabKLaAeF06aPvn1y56nkuBJidZBMaGn9JxTUQnct5A==
-X-Received: by 2002:a05:600c:870f:b0:4a2:1612:6367 with SMTP id 5b1f17b1804b1-4ac185bcf74mr404164125e9.15.1793879739347;
-        Thu, 05 Nov 2026 03:55:39 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793879730; x=1794484530;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=t0gBbv8aI3mi+vLi1o2vSS7B5V55V5fabTXJf0AzcTA=;
+        b=AEsyb3t8udrXuxy5SDMgzcBHVv1XWJzEeD7DjYmsI8Om0Eo0b4lp52J+IIvPjQst6L
+         eW71OMt/1nJ5iN11Nh6U7P+3WUyi2j67X1ZxsEw4xcjjmd0YTKm5gL2evv+OAUGEPtC6
+         /G292JaX7SvTdruKVKH8Ut735RkSKJqcgsOGhrAQ6kjr1dJ3enint/4/QRroikjN/vb2
+         F5LdhtxHi4INMIDV/5eeyH/N8Ke7px4GWtFAAzNqCfFQW6b7Ix6df/HDLDftTtnxaTcv
+         u1NqwVdCwfU33Ejx2wRHyTa2Le+pDBIib7yeciFYhfuL7s3vT2nY9GlN7Vz24awwn0we
+         wMDg==
+X-Gm-Message-State: APuU4Z9mDD+s91Wx5xY5ptRycnvndoo51oqWdwzLSlF9k+R41+OR7V+g
+	e3liyTfTEjK9S0lvy/79E9NuQLinMN9tC8684QMM76eljdlXg4DAeiZq3R/U5yPhP/aQkgHIzcd
+	zWyqO
+X-Gm-Gg: AYBFou0QmfjK/nuQUsD9YzAdA6DpwRL+PXKF/PoOEUsQeezfDCab4PJeHe+O+Tdr0zq
+	tWmfPlp4UbhOLO1doSfcMfGHjx1/kHEvw3AQisCkH1ekRFyoxjEk9k6YJSk/YWzfndNKw7f+jp+
+	uaPTqqISvwiv43njG6MeOHmcRkiYiSTPtarmZ3H86VAyU8JZ4diTnWWQM7pL1e4j8o21vZVZ6CO
+	2/j/uT0sZvKCtkZyz/AFnEti52jfNtG1Quz/CwLdgvI4b6g/JCRgZfUDIZ7/bvtkZuAWfn+K7Aj
+	xxsZ3rruDhwBkdqvsiWfxGfkmRKWsiD+z9U90S4qv4r3iO+GCrVK0EeNXG1/fPkjjYaBblmvDjU
+	YtWjnreZTFKPdCbf92hWG/Rlg7pxFId3Kr8NX3mp1ULwzoXle8YMi3PgP54HpXm/qYZhuPEjZ8c
+	rgrW5MAlZBtGQPxeGtfGp/8nAfC27D6eSo0E11kafXTkGrqI6ql4afKHm2KK/BPseuaIGmIlohS
+	8GBx/PIc8N5rrFa1U2KZQlpnXY7MV+nKy6oUmigUfn3Vh0crk7oOfJD0mmlauqC80ky1NgBidyi
+	13udVsR1xAHlSoPux8v7Lg0l0B6w3brDUeddidDGRlHg/2ljcCF29i448bSxTzQ/tAPPZqU4RUl
+	4KMay0aIjNISEmoZF2xITTT7sgHatid7Nnz7TzWI9/XbvhO0MInH6cw==
+X-Received: by 2002:a05:600c:6087:b0:49f:f099:6fb1 with SMTP id 5b1f17b1804b1-4ac17753befmr406323755e9.15.1793879730212;
+        Thu, 05 Nov 2026 03:55:30 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.38
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 03:55:38 -0800 (PST)
+        Thu, 05 Nov 2026 03:55:29 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 12/19] python3-pymodbus: Upgrade 3.16.1 -> 3.16.2
-Date: Thu,  5 Nov 2026 13:55:19 +0200
-Message-ID: <20261105115526.634289-12-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/19] python3-autobahn: Upgrade 26.10.2 -> 26.11.1
+Date: Thu,  5 Nov 2026 13:55:09 +0200
+Message-ID: <20261105115526.634289-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261105115526.634289-1-leon.anavi@konsulko.com>
 References: <20261105115526.634289-1-leon.anavi@konsulko.com>
@@ -61,58 +62,75 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 11:55:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131912
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131902
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 3.16.2:
+Upgrade to release 26.11.1:
 
-- Discard the late response of a cancelled request
-- Fix missed buffered serial replies after a delayed wakeup
-- Test case for cancelling request.
-- Test wrong response gets discarded.
-- Answer ILLEGAL_VALUE for a Write Single Coil value other than
-  0x0000/0xFF00
-- Partial solve ext. cancel sideeffects.
-- Correct CI for PR runs.
-- Report bad file record frames as undecodable
-- Wait for data when an RTU request arrives split
-- return ILLEGAL_VALUE for out-of-range counts
-- Correct doc of write_coils / readwrite_registers
-- Isolate PDU methods (using decoder).
-- Fix decoders.decode()
-- Fix convert_to_registers mutate value.
-- add fixtures for PDU, socket and content.
-- Combine decode in pdu.
-- Allow multiple frames with bad decoding.
-- Echo transaction id and device id in exception for undecodable
-  request.
-- Remove rtu_byte_count_pos from pdu.
-- Remove packet when MDAP is wrong.
-- Correct fc in exception response.
-- Multiple frames in one packet.
-- Remove rtu_frame_size from pdu.
+- Security: parse the HTTP headers of the WebSocket opening
+  handshake strictly (RFC 9112, RFC 9110). The header block was
+  split with str.splitlines(), which also splits on VT, FF, FS, GS,
+  RS, NEL and on a bare CR or LF, so a peer could make autobahn see
+  header lines that a front proxy treats as part of a header value,
+  for example an X-Forwarded-For used with trustXForwardedFor.
+  Lines are now separated by CRLF only. ⚠ behaviour change — a
+  header block with a bare CR or LF, obs-fold, whitespace before
+  the colon, an invalid header name, a header line without a colon
+  (was skipped), or a control character in a header value or the
+  status line is rejected: the server fails the handshake with HTTP
+  400, the client fails the handshake or the proxy CONNECT. A bare
+  LF is rejected deliberately, although RFC 9112 allows accepting
+  it as a line end. obs-text (0x80-0xFF) in header values is still
+  allowed, and header values are trimmed of SP and HTAB only. This
+  fixes advisory GHSA-2gqc-mwv3-66rp
+
+- Security: raise the floors of the compress extra (and so all)
+  to brotli>=1.2.1 (CPython) and brotlicffi>=1.2.1.0 (PyPy), the
+  releases with the fix for CVE-2026-111497, an out-of-bounds write
+  in the brotli decoder that permits remote code execution.
+  permessage-brotli decodes data sent by the WebSocket peer; it is
+  not used unless an application offers or accepts it. The brotli
+  1.0.10 and 1.1.1 backports of the fix are not enough, since the
+  permessage-brotli receive path needs the decompression limit of
+  brotli 1.2. New tests check the declared floors and the installed
+  version
+
+- Add tests for the HTTP header parsing of the WebSocket opening
+  handshake, on the server, the client and the explicit proxy
+  CONNECT, run on Twisted and asyncio
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pymodbus_3.16.1.bb => python3-pymodbus_3.16.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymodbus_3.16.1.bb => python3-pymodbus_3.16.2.bb} (90%)
+ ...0001-Skip-march-guessing-for-external-cross-toolchains.patch | 2 +-
+ ...{python3-autobahn_26.10.2.bb => python3-autobahn_26.11.1.bb} | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-autobahn_26.10.2.bb => python3-autobahn_26.11.1.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.16.1.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.16.2.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pymodbus_3.16.1.bb
-rename to meta-python/recipes-devtools/python/python3-pymodbus_3.16.2.bb
-index f843b931f5..7497a9772f 100644
---- a/meta-python/recipes-devtools/python/python3-pymodbus_3.16.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.16.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/riptideio/pymodbus/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=12a490c6cffa2e76a6df8aa1fa29e183"
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
+index 7573b1f5a6..a5e1b0928b 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
++++ b/meta-python/recipes-devtools/python/python3-autobahn/0001-Skip-march-guessing-for-external-cross-toolchains.patch
+@@ -1,4 +1,4 @@
+-From bfcf66157dab06a8f4f718cc0016e799f6b9e284 Mon Sep 17 00:00:00 2001
++From 77c79aa0e048e4bea40eb794a623c36ff1ec3fbc Mon Sep 17 00:00:00 2001
+ From: Leon Anavi <leon.anavi@konsulko.com>
+ Date: Mon, 20 Jul 2026 15:52:32 +0300
+ Subject: [PATCH] Skip -march guessing for external cross toolchains
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb b/meta-python/recipes-devtools/python/python3-autobahn_26.11.1.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb
+rename to meta-python/recipes-devtools/python/python3-autobahn_26.11.1.bb
+index 03ea85111f..681f46e5b2 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn_26.10.2.bb
++++ b/meta-python/recipes-devtools/python/python3-autobahn_26.11.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=49165a577911c4178e915dc26e2802a3"
  
--SRC_URI[sha256sum] = "19e571826dff37860afc31c845c1fd2fb72acffca02a233506b32d94fa022c33"
-+SRC_URI[sha256sum] = "64057981fac117ed4b75ea8ef6035369f6ae803247700a5efdf75d76a2be8aef"
+ SRC_URI += "file://0001-Skip-march-guessing-for-external-cross-toolchains.patch"
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "6c69fca89106567060941c5568e67a5369738813d883db4e3d62b76f0a2c497e"
++SRC_URI[sha256sum] = "1a081ca27ad5a0a04d3c7ca07b2caa6d324b8004383e36ae6eede1d5053e23b0"
+ 
+ CVE_PRODUCT = "autobahn"
  
 -- 
 2.47.3
