@@ -1,72 +1,69 @@
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.30269.1793869209791001985
+Received: from rcdn-iport-9.cisco.com (rcdn-iport-9.cisco.com [173.37.86.80])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.30270.1793869212002803767
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 01:00:10 -0800
+ Thu, 05 Nov 2026 01:00:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=SDNXJH0c;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=RasHplzn;
+ spf=pass (domain: cisco.com, ip: 173.37.86.80, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=21333; q=dns/txt;
-  s=iport01; t=1793869210; x=1795078810;
+  d=cisco.com; i=@cisco.com; l=1516; q=dns/txt;
+  s=iport01; t=1793869212; x=1795078812;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=NKpRlc05AfRU3iefiUsQ+fqf4vpyVUkyG1JQqAT6q6c=;
-  b=SDNXJH0cRwvutOF9PLzGcbPWUbW843nZZY0GouLNTBTPg/VzeGJc55gO
-   hzROIm5iBgRtDJdoAxdaBiu0YzmiW3y06vgxJnmnNSSX5d6InKJlvDsX3
-   6e/TxQppRf/BLHC/UrFiGnR5HndFSd1d1BXsed11cWmNQ3+O683V9hjQJ
-   pwzHbk1PoMmjsut6BdBKTSVppUhrmbHhlfLWWXYM25uGd9LEl/k8vdGUg
-   YTuGba2SiG1e4vKNDDSjxXkb36PnGnxVEgAMMOSS/dQNuaIhNp468MDr7
-   yaKZWZAhD4BuxXdvXUleBx558H/maAb3DTf5BDlP3Ok1tdTP7c+OzO7Sw
+  bh=Y08J+mfayLUwODAdNMY1pkKkCBrtbYXQM7jNUvuBAxc=;
+  b=RasHplznpK5crSpPpCLfuBzOV4wFfQ/hFe/m2sBb0myVO4+eknL4Q3zG
+   +sWsJ6o/3mtvGlfGzBqEK41WBRIt8J5DIFU41+pG+e0kAHktmlLlrDxGf
+   8nQdW88JkNyoMocTKKCQjAYuoy3Dv5ghnQLkQ73amXYHynJYvWpOgCjEj
+   ReAN3ebt+USyyOOHWb9fW/kunkuS6/vd9i4GscIehFRA7TjOamdKszQdH
+   bWKPbE8KPTMvbolQV0TZzrCrN6LJbaueRZPfbMuICLO60nKo5CDhVxVGg
+   7ZgTIRLW0Q0BapwnJNb8jHLScTKaJ/M1of8hIIbPnORoM1WThLpYO9JXt
    g==;
-X-CSE-ConnectionGUID: EF8jbalgQoyh5H8pQrOMXQ==
-X-CSE-MsgGUID: vBrZQ+TCTHGnxLvyWjPdrQ==
-X-IPAS-Result: =?us-ascii?q?A0ApAABRROxq/4//Ja1aHQEBAQEJARIBBQUBgXwIAQsBg?=
- =?us-ascii?q?lZ1YBopSYRXiBuHOIIhA4ETggmISYVnjFUUgWoPAQEBD0QNBAEBhD9GAo4dA?=
- =?us-ascii?q?iY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBA?=
- =?us-ascii?q?xoJBAsBGAE9CRMDAQIDAiYCAiALHQEFCBAJgwIBgjoDNwMRBqEAmyR6fzOBA?=
- =?us-ascii?q?YMpATEFCQJDUNhMDYJaAQsUAYEKLgGFP4J/IAGFA10YAYR9JxsbgXKBFYEXg?=
- =?us-ascii?q?Vx2gQWBGkIBAQEBgSUfg3aCagSCIoEMgVqBA4wVAoFShnFIgQIcA1ksAVUTD?=
- =?us-ascii?q?QoLBwWBaAM1EioVbjIdgSM+Fy9YGwYFgR2BHoESgQddgSsoXiGBCIF2AoJRg?=
- =?us-ascii?q?gACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJj8VDGQLGgVhCAINDHI5E?=
- =?us-ascii?q?DAeJC8FHCZAGwoYGA1IESw3FRkEPQFuB5Ivgl00ATAMIxsTASkCBCshBAIpE?=
- =?us-ascii?q?gcDBQ8ENRUIAzIDDTCSPgUUEJAggiGgIHEKKIN4ihSCEI8+hXwaM4QEgVeSQ?=
- =?us-ascii?q?pJUC5h9glmGG4IzgmOECoRtGoxNFhAWN4RpgWg8gUcLB3AVO4JnCUoZD44rD?=
- =?us-ascii?q?guDYIF/WoF3Q1HIdyYyAgEIMgEBBwIHAQwBAwuBaJAAgX4BAQ?=
-IronPort-Data: A9a23:/xS396wpBmKjIuVTmRp6t+dmxyrEfRIJ4+MujC+fZmUNrF6WrkUAm
- DZNDWzSOqqNZGWmKtkgaN/j/EsE78fWyIc1SApsqVhgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCKa/lHyYuCJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 4yaT/H3Ygf/hWctaj5MscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJGwYbY8S8+J4OGZf9
- aE4eCg0dDemt9vjldpXSsE07igiBNPgMIVavjRryivUSK54B5vCWK7No9Rf2V/chOgXQq2YP
- JVfM2cyKk2cOHWjOX9PYH46tOe0hnD8eidwo1OOrq1x6G/WpOB0+OWxbIGLJ4TaGq25mG6Gj
- Hj0xifFKS06G9qP7SSUzXCUivX2yHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
- lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPBWC4PTyVKb5ots8peqSEW6
- 2JlVujBXVRH2IB5g1rGnltIhVte4RQoEFI=
-IronPort-HdrOrdr: A9a23:RIKcy6heiNzBg36cgRKXWDhrxHBQXvgji2hC6mlwRA09TyX+rb
- HIoB17726RtN9/Yh8dcLy7VZVoBEmslqKdgrNhWItKIjOGhILAFugLhuHfKn/bak/DH4Vmup
- uIHZITNDSJNzhHpPe/xhWkGNA9x9TC2qWpieDCi0pJd2hRGsddB8MTMHfiLqWwLzM2fKYEKA
- ==
-X-Talos-CUID: 9a23:7F2xAG962BrK+iHbRUiVv2M6SsIve3nS9XDBIxKYWX5QUpqweWbFrQ==
-X-Talos-MUID: 9a23:ddxO3wbB/CxKz+BTqRX2tgghCOxUw4uoGGQTgKoEg8WeDHkl
+X-CSE-ConnectionGUID: 6yN1YX6UQpi5yT2pjr3jtA==
+X-CSE-MsgGUID: 1CakMX2zRNepCBatnH7cCg==
+X-IPAS-Result: =?us-ascii?q?A0A5AwBHRexq/43/Ja1aglmCV3VgQ0kDlCeCIQOgHw8BA?=
+ =?us-ascii?q?QEPRA0EAQGEP0YCjh0CJjcGDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECA?=
+ =?us-ascii?q?QcFgQ4Thk8NkBMCAQMyARgBPSAxKx0BDRmDAgGCdAMRvDGCLIEBgykBgVTbM?=
+ =?us-ascii?q?wELFAGBOIVAiCN1AYR9JxsbgXKBFYNpgQWBXAKCLYV5BIIigQyBeIx6iEVIg?=
+ =?us-ascii?q?R4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEegRKBB12BKyheI?=
+ =?us-ascii?q?YEIgXYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZAsaB?=
+ =?us-ascii?q?WEIAg0McjkQMB4kLwUcJkAbChgYDUgRLDcVGQQ+bgeSL4MRgQ4sBByCDAWTB?=
+ =?us-ascii?q?5JqoREKKIN4ihSCEJU6GjOqcQuYfY4KllGEaYF+JoFZcBWDIglKGQ+OOYNrz?=
+ =?us-ascii?q?lsmMgIJAy8BAQcCBw4DC4FokX4BAQ?=
+IronPort-Data: A9a23:wIIK+q+tPmseEX44DOdbDrUD0H+TJUtcMsCJ2f8bNWPcYEJGY0x3z
+ mMYD2mAb/jcZDT9fox+OoSwoxwEu5SGnIU3GwBtri5EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmB4E/rbei5xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mtyyHjEAX9gWAtazpIs/jrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2loLKtBy9YpPFhW9
+ KEJFGoVbArYhf6flefTpulE3qzPLeHxN48Z/3UlxjbDALN+HdbIQr7B4plT2zJYasJmRKmFI
+ ZFGL2AyMVKZP0Qn1lQ/UPrSmM+omnn2cDRCgFmUvqEwpWPUyWSd1ZCwbIGLK4bXHJw9ckCw/
+ 0nP/EHJWAMgEtGH4hCM7nSM2eTkknauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
+ 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjRCRT9aY9tgv8gzLdA36
+ mK0cxrSLWQHmNWopbi1r+z8Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:hHgNO6wb0HKuOpUjeru5KrPwAL1zdoMgy1knxilNoHtuA6ilfq
+ +V8sjzuSWYtN9VYgBCpTniAtjkfZqjz/9ICOAqVN/INjUO+lHYTr2KhrGM/9SPIUHDH5ZmtZ
+ tIQuxZFMD6C0R8gILR5Qm1FMtl/fy8mZrY4ts3CxxWPHhXg2YK1XYeNjqm
+X-Talos-CUID: 9a23:jwpgX2FnF9pvQtqIqmI55WhNK/B7T0TFzSrBHxWgC3wySqG8HAo=
+X-Talos-MUID: =?us-ascii?q?9a23=3AzCQ0aQ6hJUsQfCkr1uFeF2mxxowxyK2tLXBXg68?=
+ =?us-ascii?q?gttGvHyVsPRfChx+4F9o=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="544365087"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 09:00:08 +0000
+   d="scan'208";a="543692511"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by rcdn-iport-9.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 09:00:08 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id 8865B180003AC
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 94365180015C2
 	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 09:00:08 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 93480CBEF6C; Thu,  5 Nov 2026 01:00:07 -0800 (PST)
+	id AB87DCBEF7A; Thu,  5 Nov 2026 01:00:07 -0800 (PST)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][wrynose][PATCH 12/18] python3-virtualenv: fix CVE-2026-113721
-Date: Thu,  5 Nov 2026 01:00:01 -0800
-Message-Id: <20261105090007.351866-13-hthakar@cisco.com>
+Subject: [meta-python][wrynose][PATCH 17/18] python3-virtualenv: Ignore CVE-2026-113718
+Date: Thu,  5 Nov 2026 01:00:06 -0800
+Message-Id: <20261105090007.351866-18-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261105090007.351866-1-hthakar@cisco.com>
 References: <20261105090007.351866-1-hthakar@cisco.com>
@@ -74,524 +71,40 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 09:00:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131893
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131894
 Content-Type: text/plain; charset="utf-8"
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
-This patch applies the upstream fix as referenced in [2], using the
-commit shown in [1]. Replace existing symbolic and hard links before
-writing generated files, and create the replacement files exclusively.
-Prepare the stdlib venv executable directory before it writes files.
+Analysis:
+- The advisory [1] limits this issue to Xonsh activation in versions
+  21.3.0 through 21.14.8.
+- Version 21.2.1 has no Xonsh activator, activate.xsh template or
+  registered entry point. None of the existing backports adds them.
+- The upstream fix [2] changes the absent Xonsh quoting code, so it
+  is not applicable to this recipe.
 
-[1] https://github.com/pypa/virtualenv/commit/d25f28699eefb1fc34a251e5adf2b5de844c36cd
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-113721
+Reference:
+[1] https://github.com/pypa/virtualenv/security/advisories/GHSA-394h-qwmc-48pf
+[2] https://github.com/pypa/virtualenv/commit/e5fc2e6e189a877ff559af288919e3525d13e5e0
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python3-virtualenv/CVE-2026-113721.patch  | 477 ++++++++++++++++++
- .../python/python3-virtualenv_21.2.1.bb       |   1 +
- 2 files changed, 478 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113721.patch
+ meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113721.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113721.patch
-new file mode 100644
-index 0000000000..a2c6b7257b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113721.patch
-@@ -0,0 +1,477 @@
-+From d25f28699eefb1fc34a251e5adf2b5de844c36cd Mon Sep 17 00:00:00 2001
-+From: Bernát Gábor <gaborjbernat@gmail.com>
-+Date: Sat, 17 Oct 2026 03:25:09 -0700
-+Subject: [PATCH] 🐛 fix(create): replace generated file links (#3431)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
-+
-+CVE: CVE-2026-113721
-+Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/d25f28699eefb1fc34a251e5adf2b5de844c36cd]
-+
-+Backport Changes:
-+- Replace PyEnvCfg's older write_text() call instead of write_bytes();
-+  retain _one_line() serialization and separate the new helper import
-+  from the type-only imports, without the later util.text refactor.
-+- Add the Windows junction-constant guard absent from 21.2.1's helper
-+  module and retain S_IWUSR for its existing deletion callback; do not
-+  import the later read-only deletion refactor.
-+- Add the missing fs_supports_symlink test import and extend the older
-+  test_util path-import list with write_file.
-+- Omit the release-only changelog fragment; the release documentation
-+  directory is absent from the 21.2.1 source distribution.
-+
-+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
-+---
-+ src/virtualenv/activation/via_template.py     |  21 ++-
-+ src/virtualenv/create/creator.py              |   6 +-
-+ src/virtualenv/create/pyenv_cfg.py            |   4 +-
-+ src/virtualenv/create/via_global_ref/api.py   |   5 +-
-+ src/virtualenv/create/via_global_ref/venv.py  |   8 +-
-+ .../embed/via_app_data/pip_install/base.py    |   4 +
-+ src/virtualenv/util/path/__init__.py          |   4 +-
-+ src/virtualenv/util/path/_sync.py             |  46 ++++++-
-+ tests/unit/create/test_creator.py             | 127 +++++++++++++++++-
-+ tests/unit/test_util.py                       |  11 +-
-+ 10 files changed, 213 insertions(+), 23 deletions(-)
-+
-+diff --git a/src/virtualenv/activation/via_template.py b/src/virtualenv/activation/via_template.py
-+index 3af9dc5..3fba6ad 100644
-+--- a/src/virtualenv/activation/via_template.py
-++++ b/src/virtualenv/activation/via_template.py
-+@@ -5,7 +5,9 @@ import re
-+ import shlex
-+ import sys
-+ from abc import ABC, abstractmethod
-+-from typing import TYPE_CHECKING
-++from typing import TYPE_CHECKING, Final
-++
-++from virtualenv.util.path import write_file
-+ 
-+ from .activator import Activator
-+ 
-+@@ -63,18 +65,13 @@ class ViaTemplateActivator(Activator, ABC):
-+     def _generate(
-+         self, replacements: dict[str, str], templates: Iterable[str], to_folder: Path, creator: Creator
-+     ) -> list[Path]:
-+-        generated = []
-++        generated: Final[list[Path]] = []
-+         for template in templates:
-+-            text = self.instantiate_template(replacements, template, creator)
-+-            dest = to_folder / self.as_name(template)
-+-            # remove the file if it already exists - this prevents permission
-+-            # errors when the dest is not writable
-+-            if dest.exists():
-+-                dest.unlink()
-+-            # Powershell assumes Windows 1252 encoding when reading files without BOM
-+-            encoding = "utf-8-sig" if str(template).endswith(".ps1") else "utf-8"
-+-            # use write_bytes to avoid platform specific line normalization (\n -> \r\n)
-+-            dest.write_bytes(text.encode(encoding))
-++            text: Final = self.instantiate_template(replacements, template, creator)
-++            dest: Final = to_folder / self.as_name(template)
-++            # PowerShell assumes Windows 1252 when the UTF-8 BOM is absent.
-++            encoding: Final = "utf-8-sig" if str(template).endswith(".ps1") else "utf-8"
-++            write_file(dest, text.encode(encoding))
-+             generated.append(dest)
-+         return generated
-+ 
-+diff --git a/src/virtualenv/create/creator.py b/src/virtualenv/create/creator.py
-+index 9fa60d3..855d5a1 100644
-+--- a/src/virtualenv/create/creator.py
-++++ b/src/virtualenv/create/creator.py
-+@@ -23,7 +23,7 @@ if TYPE_CHECKING:
-+ 
-+ from os.path import commonpath
-+ 
-+-from virtualenv.util.path import safe_delete
-++from virtualenv.util.path import safe_delete, write_file
-+ from virtualenv.util.subprocess import LogCmd, run_cmd
-+ from virtualenv.version import __version__
-+ 
-+@@ -215,7 +215,7 @@ class Creator(ABC):
-+                 # For information about cache directory tags, see:
-+                 #   https://bford.info/cachedir/
-+             """).strip()
-+-            cachedir_tag_file.write_text(cachedir_tag_text, encoding="utf-8")
-++            write_file(cachedir_tag_file, cachedir_tag_text.encode("utf-8"))
-+ 
-+     def set_pyenv_cfg(self) -> None:
-+         self.pyenv_cfg.content = OrderedDict()
-+@@ -237,7 +237,7 @@ class Creator(ABC):
-+         # mark this folder to be ignored by VCS, handle https://www.python.org/dev/peps/pep-0610/#registered-vcs
-+         git_ignore = self.dest / ".gitignore"
-+         if not git_ignore.exists():
-+-            git_ignore.write_text("# created by virtualenv automatically\n*\n", encoding="utf-8")
-++            write_file(git_ignore, b"# created by virtualenv automatically\n*\n")
-+         # Mercurial - does not support the .hgignore file inside a subdirectory directly, but only if included via the
-+         # subinclude directive from root, at which point on might as well ignore the directory itself, see
-+         # https://www.selenic.com/mercurial/hgignore.5.html for more details
-+diff --git a/src/virtualenv/create/pyenv_cfg.py b/src/virtualenv/create/pyenv_cfg.py
-+index 52411fb..c0fb345 100644
-+--- a/src/virtualenv/create/pyenv_cfg.py
-++++ b/src/virtualenv/create/pyenv_cfg.py
-+@@ -5,6 +5,8 @@ import os
-+ from collections import OrderedDict
-+ from typing import TYPE_CHECKING, Final
-+ 
-++from virtualenv.util.path import write_file
-++
-+ if TYPE_CHECKING:
-+     from pathlib import Path
-+ 
-+@@ -67,7 +69,7 @@ class PyEnvCfg:
-+             LOGGER.debug("\t%s", line)
-+             text += line
-+             text += "\n"
-+-        self.path.write_text(text, encoding="utf-8")
-++        write_file(self.path, text.encode("utf-8"))
-+ 
-+     def refresh(self) -> OrderedDict[str, str]:
-+         self.content = self._read_values(self.path)
-+diff --git a/src/virtualenv/create/via_global_ref/api.py b/src/virtualenv/create/via_global_ref/api.py
-+index 5cb8e12..5382419 100644
-+--- a/src/virtualenv/create/via_global_ref/api.py
-++++ b/src/virtualenv/create/via_global_ref/api.py
-+@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
-+ 
-+ from virtualenv.create.creator import Creator, CreatorMeta
-+ from virtualenv.info import fs_supports_symlink
-++from virtualenv.util.path import write_file
-+ 
-+ if TYPE_CHECKING:
-+     from argparse import ArgumentParser
-+@@ -116,10 +117,10 @@ class ViaGlobalRefApi(Creator, ABC):
-+         if text:
-+             pth = self.purelib / "_virtualenv.pth"
-+             LOGGER.debug("create virtualenv import hook file %s", pth)
-+-            pth.write_text("import _virtualenv", encoding="utf-8")
-++            write_file(pth, b"import _virtualenv")
-+             dest_path = self.purelib / "_virtualenv.py"
-+             LOGGER.debug("create %s", dest_path)
-+-            dest_path.write_text(text, encoding="utf-8")
-++            write_file(dest_path, text.encode("utf-8"))
-+ 
-+     def env_patch_text(self) -> str:
-+         """Patch the distutils package to not be derailed by its configuration files."""
-+diff --git a/src/virtualenv/create/via_global_ref/venv.py b/src/virtualenv/create/via_global_ref/venv.py
-+index 2bfd1b4..8b704eb 100644
-+--- a/src/virtualenv/create/via_global_ref/venv.py
-++++ b/src/virtualenv/create/via_global_ref/venv.py
-+@@ -9,7 +9,7 @@ from python_discovery import PythonInfo
-+ from virtualenv.create.pyenv_cfg import _one_line as collapse_line_boundaries
-+ from virtualenv.create.via_global_ref.store import handle_store_python
-+ from virtualenv.util.error import ProcessCallFailedError
-+-from virtualenv.util.path import ensure_dir
-++from virtualenv.util.path import ensure_dir, ensure_within
-+ from virtualenv.util.subprocess import run_cmd
-+ 
-+ from .api import ViaGlobalRefApi, ViaGlobalRefMeta
-+@@ -50,6 +50,12 @@ class Venv(ViaGlobalRefApi):
-+         return None
-+ 
-+     def create(self) -> None:
-++        # stdlib venv writes interpreter files, configuration and activation scripts in place, so a planted symlink or
-++        # hard link would receive them outside the environment
-++        ensure_within(self.dest, self.bin_dir)
-++        for path in (self.dest / "pyvenv.cfg", self.dest / ".gitignore", *self.bin_dir.iterdir()):
-++            if path.is_symlink() or (path.is_file() and path.stat().st_nlink > 1):
-++                path.unlink()
-+         if self.can_be_inline:
-+             self.create_inline()
-+         else:
-+diff --git a/src/virtualenv/seed/embed/via_app_data/pip_install/base.py b/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-+index 7697e73..086ae0c 100644
-+--- a/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-++++ b/src/virtualenv/seed/embed/via_app_data/pip_install/base.py
-+@@ -219,6 +219,10 @@ class ScriptMakerCustom(ScriptMaker):
-+         self, names: set[str], shebang: bytes, script_bytes: bytes, filenames: list[str], ext: str
-+     ) -> None:
-+         names.add(f"{self._name}{self.version_info[0]}.{self.version_info[1]}")
-++        for name in names:
-++            path: Final = Path(self.target_dir) / (f"{name}.exe" if os.name == "nt" else name)
-++            if path.is_symlink():
-++                path.unlink()
-+         super()._write_script(names, shebang, script_bytes, filenames, ext)
-+ 
-+ 
-+diff --git a/src/virtualenv/util/path/__init__.py b/src/virtualenv/util/path/__init__.py
-+index c144d8d..451630f 100644
-+--- a/src/virtualenv/util/path/__init__.py
-++++ b/src/virtualenv/util/path/__init__.py
-+@@ -1,16 +1,18 @@
-+ from __future__ import annotations
-+ 
-+ from ._permission import make_exe, set_tree
-+-from ._sync import copy, copytree, ensure_dir, safe_delete, symlink
-++from ._sync import copy, copytree, ensure_dir, ensure_within, safe_delete, symlink, write_file
-+ from ._win import get_short_path_name
-+ 
-+ __all__ = [
-+     "copy",
-+     "copytree",
-+     "ensure_dir",
-++    "ensure_within",
-+     "get_short_path_name",
-+     "make_exe",
-+     "safe_delete",
-+     "set_tree",
-+     "symlink",
-++    "write_file",
-+ ]
-+diff --git a/src/virtualenv/util/path/_sync.py b/src/virtualenv/util/path/_sync.py
-+index a94466f..fae3859 100644
-+--- a/src/virtualenv/util/path/_sync.py
-++++ b/src/virtualenv/util/path/_sync.py
-+@@ -5,9 +5,12 @@ import os
-+ import shutil
-+ import sys
-+ from pathlib import Path
-+-from stat import S_IWUSR, S_IXGRP, S_IXOTH, S_IXUSR
-++from stat import S_ISDIR, S_ISLNK, S_IWUSR, S_IXGRP, S_IXOTH, S_IXUSR
-+ from typing import Final
-+ 
-++if os.name == "nt":
-++    from stat import IO_REPARSE_TAG_MOUNT_POINT
-++
-+ LOGGER = logging.getLogger(__name__)
-+ 
-+ 
-+@@ -17,6 +20,45 @@ def ensure_dir(path: Path) -> None:
-+         os.makedirs(str(path))
-+ 
-+ 
-++def ensure_within(root: Path, path: Path) -> None:
-++    parts: Final = path.relative_to(root).parts
-++    if ".." in parts:
-++        msg: Final = f"environment directory {path} must remain inside {root}"
-++        raise ValueError(msg)
-++    ensure_dir(root)
-++    folder = root
-++    for part in parts:
-++        folder /= part
-++        try:
-++            metadata: Final = folder.lstat()
-++        except FileNotFoundError:
-++            pass
-++        else:
-++            if S_ISLNK(metadata.st_mode):
-++                LOGGER.warning("replace environment directory link %s", folder)
-++                folder.unlink()
-++            elif os.name == "nt" and metadata.st_reparse_tag == IO_REPARSE_TAG_MOUNT_POINT:
-++                LOGGER.warning("replace environment directory junction %s", folder)
-++                folder.rmdir()
-++        try:
-++            folder.mkdir()
-++        except FileExistsError:
-++            created: Final = folder.lstat()
-++            if not S_ISDIR(created.st_mode) or (
-++                os.name == "nt" and created.st_reparse_tag == IO_REPARSE_TAG_MOUNT_POINT
-++            ):
-++                msg: Final = f"environment directory is not a real directory: {folder}"
-++                raise NotADirectoryError(msg) from None
-++
-++
-++def write_file(path: Path, data: bytes) -> None:
-++    if path.is_symlink() or path.exists():
-++        path.unlink()
-++    # Exclusive creation rejects links introduced after the old entry was removed.
-++    with path.open("xb") as stream:
-++        stream.write(data)
-++
-++
-+ def ensure_safe_to_do(src: Path, dest: Path) -> None:
-+     if src == dest:
-+         msg = f"source and destination is the same {src}"
-+@@ -90,6 +132,8 @@ __all__ = [
-+     "copy",
-+     "copytree",
-+     "ensure_dir",
-++    "ensure_within",
-+     "safe_delete",
-+     "symlink",
-++    "write_file",
-+ ]
-+diff --git a/tests/unit/create/test_creator.py b/tests/unit/create/test_creator.py
-+index bd0f071..bc02679 100644
-+--- a/tests/unit/create/test_creator.py
-++++ b/tests/unit/create/test_creator.py
-+@@ -30,13 +30,101 @@ from virtualenv.create.pyenv_cfg import PyEnvCfg
-+ from virtualenv.create.via_global_ref import api
-+ from virtualenv.create.via_global_ref.builtin.cpython.common import is_mac_os_framework, is_macos_brew
-+ from virtualenv.create.via_global_ref.builtin.cpython.cpython3 import CPython3Posix
-+-from virtualenv.info import IS_PYPY, IS_WIN, fs_is_case_sensitive
-++from virtualenv.info import IS_GRAALPY, IS_PYPY, IS_WIN, fs_is_case_sensitive, fs_supports_symlink
-+ from virtualenv.run import cli_run, session_via_cli
-+ from virtualenv.run.plugin.creators import CreatorSelector
-+ 
-+ CURRENT = PythonInfo.current_system()
-+ 
-+ 
-++@pytest.mark.parametrize("creator_name", [pytest.param("builtin", id="builtin"), pytest.param("venv", id="venv")])
-++@pytest.mark.parametrize("existing", [pytest.param(False, id="dangling"), pytest.param(True, id="existing")])
-++@pytest.mark.parametrize(
-++    "generated",
-++    [
-++        pytest.param(name, id=name)
-++        for name in ("pyvenv.cfg", "activate", "pip", "CACHEDIR.TAG", ".gitignore", "_virtualenv.py", "_virtualenv.pth")
-++    ],
-++)
-++def test_creator_replaces_generated_file_links(
-++    tmp_path: Path,
-++    creator_name: str,
-++    existing: bool,
-++    generated: str,
-++) -> None:
-++    command: Final = [
-++        str(tmp_path / "env"),
-++        "--creator",
-++        creator_name,
-++        "--pip",
-++        "embed",
-++        "--no-periodic-update",
-++    ]
-++    if generated.startswith("_virtualenv"):
-++        if (python39 := shutil.which("python3.9")) is None:
-++            pytest.skip("Python 3.9 is unavailable")
-++        command.extend(["--python", python39])
-++    session: Final = session_via_cli(command)
-++    session.creator.bin_dir.mkdir(parents=True)
-++    target: Final = session.creator.dest / "original"
-++    if existing:
-++        target.write_bytes(b"original")
-++    path = (
-++        session.creator.bin_dir / ("pip.exe" if generated == "pip" and os.name == "nt" else generated)
-++        if generated in {"activate", "pip"}
-++        else session.creator.dest / generated
-++    )
-++    if generated.startswith("_virtualenv"):
-++        path = session.creator.purelib / generated
-++    path.parent.mkdir(parents=True, exist_ok=True)
-++    path.symlink_to(target)
-++    with session:
-++        session.run()
-++    if existing and (generated == "CACHEDIR.TAG" or (generated == ".gitignore" and creator_name == "builtin")):
-++        assert path.is_symlink()
-++    else:
-++        assert not path.is_symlink()
-++    assert (target.read_bytes() if existing else target.exists()) == (b"original" if existing else False)
-++
-++
-++@pytest.mark.parametrize(
-++    "kind",
-++    [
-++        pytest.param("file", id="file"),
-++        pytest.param("symlink", id="symlink"),
-++        pytest.param("dangling", id="dangling"),
-++        pytest.param("junction", id="junction"),
-++    ],
-++)
-++def test_venv_prepares_real_executable_directory(tmp_path: Path, kind: str) -> None:
-++    session: Final = session_via_cli([str(tmp_path / "env"), "--creator", "venv", "--no-seed", "--activators="])
-++    session.creator.dest.mkdir()
-++    if kind == "file":
-++        session.creator.bin_dir.write_bytes(b"file")
-++    else:
-++        target: Final = session.creator.dest / "empty"
-++        if kind != "dangling":
-++            target.mkdir()
-++        if kind == "junction":
-++            if not IS_WIN:
-++                pytest.skip("requires Windows junctions")
-++            subprocess.run(
-++                ["cmd", "/c", "mklink", "/J", str(session.creator.bin_dir), str(target)],
-++                capture_output=True,
-++                check=True,
-++            )
-++        else:
-++            if not fs_supports_symlink():
-++                pytest.skip("requires directory symlinks")
-++            session.creator.bin_dir.symlink_to(target, target_is_directory=True)
-++    if kind == "file":
-++        with pytest.raises(NotADirectoryError, match="environment directory is not a real directory"):
-++            session.run()
-++    else:
-++        session.run()
-++        assert session.creator.bin_dir.resolve() == session.creator.bin_dir
-++
-++
-+ def test_os_path_sep_not_allowed(tmp_path, capsys) -> None:
-+     target = str(tmp_path / f"a{os.pathsep}b")
-+     err = _non_success_exit_code(capsys, target)
-+@@ -326,6 +414,43 @@ def test_venv_configuration_uses_selected_options(tmp_path: Path, global_package
-+     assert {key: session.creator.pyenv_cfg.content.get(key) for key in expected} == expected
-+ 
-+ 
-++@pytest.mark.skipif(not CURRENT.has_venv or not fs_supports_symlink(), reason="requires venv and symlinks")
-++@pytest.mark.skipif(
-++    is_mac_os_framework(CURRENT) or is_macos_brew(CURRENT) or (IS_GRAALPY and not IS_WIN),
-++    reason="stdlib creator requires symlinks on this runtime",
-++)
-++def test_venv_recreate_with_copied_interpreter(tmp_path: Path) -> None:
-++    args: Final = [str(tmp_path / "env"), "--creator", "venv", "--no-seed"]
-++    cli_run([*args, "--symlinks"])
-++    session: Final = cli_run([*args, "--copies"])
-++    assert (session.creator.exe.is_file(), session.creator.exe.resolve().parent) == (
-++        True,
-++        session.creator.bin_dir.resolve(),
-++    )
-++
-++
-++@pytest.mark.skipif(not CURRENT.has_venv, reason="requires interpreter with venv")
-++@pytest.mark.parametrize("mode", [pytest.param("--copies", id="copies"), pytest.param("--symlinks", id="symlinks")])
-++def test_venv_replaces_hard_linked_files(tmp_path: Path, mode: str) -> None:
-++    if mode == "--symlinks" and not fs_supports_symlink():
-++        pytest.skip("requires symlinks")
-++    if mode == "--copies" and (is_mac_os_framework(CURRENT) or is_macos_brew(CURRENT) or (IS_GRAALPY and not IS_WIN)):
-++        pytest.skip("stdlib creator requires symlinks on this runtime")
-++    session: Final = session_via_cli([str(tmp_path / "env"), "--creator", "venv", "--no-seed", "--activators=", mode])
-++    session.creator.bin_dir.mkdir(parents=True)
-++    names: Final = (
-++        ("python.exe", "pythonw.exe") if IS_WIN else ("python", "python3", f"python3.{CURRENT.version_info.minor}")
-++    )
-++    planted: Final = [session.creator.dest / "pyvenv.cfg", *(session.creator.bin_dir / name for name in names)]
-++    for path in planted:
-++        (tmp_path / f"{path.name}.original").write_bytes(b"original")
-++        os.link(tmp_path / f"{path.name}.original", path)
-++    session.run()
-++    assert [((tmp_path / f"{path.name}.original").read_bytes(), path.lstat().st_nlink) for path in planted] == [
-++        (b"original", 1)
-++    ] * len(planted)
-++
-++
-+ @pytest.mark.skipif(not CURRENT.has_venv, reason="requires interpreter with venv")
-+ def test_venv_fails_not_inline(tmp_path, capsys, mocker) -> None:
-+     if hasattr(os, "geteuid") and os.geteuid() == 0:
-+diff --git a/tests/unit/test_util.py b/tests/unit/test_util.py
-+index ea7030b..c4c448a 100644
-+--- a/tests/unit/test_util.py
-++++ b/tests/unit/test_util.py
-+@@ -9,7 +9,7 @@ import pytest
-+ 
-+ from virtualenv.app_data import _cache_dir_with_migration, _default_app_data_dir
-+ from virtualenv.util.lock import ReentrantFileLock
-+-from virtualenv.util.path import copy
-++from virtualenv.util.path import copy, write_file
-+ from virtualenv.util.subprocess import run_cmd
-+ 
-+ if TYPE_CHECKING:
-+@@ -60,6 +60,15 @@ def test_copy_replaces_contents(tmp_path: Path, directory: bool) -> None:
-+     assert (destination / "entry" if directory else destination).read_bytes() == b"new"
-+ 
-+ 
-++@pytest.mark.parametrize("existing", [pytest.param(False, id="new"), pytest.param(True, id="replace")])
-++def test_write_file_replaces_content(tmp_path: Path, existing: bool) -> None:
-++    path: Final = tmp_path / "generated"
-++    if existing:
-++        path.write_bytes(b"previous")
-++    write_file(path, b"generated")
-++    assert path.read_bytes() == b"generated"
-++
-++
-+ def test_run_fail(tmp_path) -> None:
-+     code, out, err = run_cmd([str(tmp_path)])
-+     assert err
-+-- 
-+2.35.6
 diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb b/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
-index 01b2125df7..bc31885a02 100644
+index 1a8091adcc..b554c3a4f8 100644
 --- a/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
-@@ -26,6 +26,7 @@ SRC_URI += " \
-     file://CVE-2026-113715.patch \
-     file://CVE-2026-113720.patch \
-     file://CVE-2026-113719.patch \
-+    file://CVE-2026-113721.patch \
- "
+@@ -55,3 +55,4 @@ CVE_PRODUCT = "virtualenv"
  
- BBCLASSEXTEND = "native nativesdk"
+ # The batch activator only supports Windows interpreters.
+ CVE_STATUS[CVE-2026-102937] = "${@'not-applicable-platform: Windows cmd.exe batch activation is not selected for Linux interpreters' if (d.getVar('TARGET_OS') or '').startswith('linux') else ''}"
++CVE_STATUS[CVE-2026-113718] = "not-applicable-config: Xonsh activation was introduced in virtualenv 21.3.0 and is absent from 21.2.1"
 -- 
 2.35.6
 
