@@ -1,71 +1,73 @@
-Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28859.1793862502181832854
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28856.1793862501882047726
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 23:08:22 -0800
+ Wed, 04 Nov 2026 23:08:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=cZikn5h3;
- spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=V95DhRj1;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=18543; q=dns/txt;
-  s=iport01; t=1793862502; x=1795072102;
+  d=cisco.com; i=@cisco.com; l=44159; q=dns/txt;
+  s=iport01; t=1793862504; x=1795072104;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=SK08MsGbiIcAfo8gMpFZwx3QhXX7krb5YekfmbmglGs=;
-  b=cZikn5h3vQMWqZuhJIQlR/0kZ4S3DJMu18dB1RemDHBOdb8LNA9pTUkO
-   AenpTI9R/9TAA6zqjL8zmZaWBZ41SPmP+xY0vroWKXtNjr4yIorObEL+a
-   XLZKvNScN28yiBxdaIHtxS8zF/9Qns7PT7T2Hgz9HRJMuJJujqzXU75pa
-   72Z/+BvlApZUv4bEpc8LLW9CJlitQojUNSdkRXuJwagG6pGPufs/eB7O/
-   qMdO3pZLqky7cYQFbQ/qQrbI3m7wGc0qjpHWNqJXIwZMxpbjPjXTC7vWC
-   j1LzmSa/i28aRoIF+J9wPGnuEbQ10HlfbxlpswIcaCJfmvQofUS7yNo7L
+  bh=JAaBW3y/tyuJZy/cykufwMVSbL9coEFqvWo48KXcX1Q=;
+  b=V95DhRj1X/CeHePBZ9iKlbQ4wbp/0kujXkM5MCJGHgI5zLz+L/JQcuMS
+   vZ+G/C8Lioa3F/wt+zaD0x8XUdZcii3bd5aUHRl6MZuxvFt8hffRkMvBu
+   SA2+zfbZqS370Ly1Dl9cQLcm6h2zRTMLF4DewGtQRIbeZ/cCkNUnU/Sl4
+   XHNFDHs9jW/Dxu5DwViho01G/QEbL2RXv4aMomA22NsOLOHu2zugOfSaw
+   LlA1udG777e1hQWWBBziz0FG8qFVgkWBTLC0pgFKg2R0jbrixvgQBLoXY
+   Z4NHnucB1ZJOH6SzpEzQVh1Sh6YbowM27jEu8ef+A8K+1PUsfA3kGleCE
    A==;
-X-CSE-ConnectionGUID: uKMO/SwoRvGMXVLS/VJU7w==
-X-CSE-MsgGUID: zWjzCEqaR660yUpVZOz/+w==
-X-IPAS-Result: =?us-ascii?q?A0AnAAC/Kexq/5P/Ja1aHQEBAQEJARIBBQUBgXwIAQsBg?=
- =?us-ascii?q?lZ1YENJjHKHOIIhA4ETnQ4UgWoPAQEBD0QNBAEBhD9GAo4dAiY0CQ4BAgQDA?=
- =?us-ascii?q?gMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBAycLARgBPRwDA?=
- =?us-ascii?q?QIWGSsjCBmDAgGCdAMRvD6BeTOBAYMpAT8CQ1DZS4FoAQsUAYE4AYU/iCNdG?=
- =?us-ascii?q?AGEfScbgUlEgRWCc3aBBYFcAQGBGS9XhgcEgy6BWoEDjBUCgVKGcUiBHgNZL?=
- =?us-ascii?q?AFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BEoEHXYErKF4hgQiBd?=
- =?us-ascii?q?gKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxkCxoFYQgCD?=
- =?us-ascii?q?QxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5Ivgjk4HwEBehMBBwMgAQRML?=
- =?us-ascii?q?xJnDUOlWp9TgT6EKowkj0KFeBozhVulFguWGoJjhVSFY4JTlgFQhGmBaDyBK?=
- =?us-ascii?q?BsECwczGggbFTuCZwlKGQ+OKw4LgWiBeIF/g2XIdyYyAgkyAQEHAgcOAwuBa?=
- =?us-ascii?q?JF+AQE?=
-IronPort-Data: A9a23:Axz4M6OPP/9dhtDvrR3zlsFynXyQoLVcMsEvi/4bfWQNrUor12AAz
- WQXDzuAOPbfZGGnftFza4i1/E0A7Z6AmoNqSXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmD9k/F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVzlV
- e/a+ZWFZgb8g2IsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj6+hNKWZxBpIfwPhYJFFw0
- cdfFhIwMQ/W0opawJrjIgVtrt4oIM+uOMYUvWttiGiBS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzM3wsYDUXUrsTIIMjhu6ki1H0ciZTrxSeoq9fD237kVAqgeC8aYeKEjCMbddqnFSzi
- 3vPxTqnWgAnLOKt7ijCsW3504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
- UsM9ywjqKI/+ECmQp/6RRLQnZKflgQXV9wVF6gx7xuAj/OMpQ2YHWMDCDVGbbTKqfMLeNDj7
- XfR9/uBONClmOf9pa61nltMkQ6PBA==
-IronPort-HdrOrdr: A9a23:3LH9/6q2HNUiW7LCE3qm70oaV5oHeYIsimQD101hICG9Ffbo8/
- xG88506faZslsssTQb6LO90cq7MBbhHOBOgLX5VI3KNGKNhILrFvAB0WKI+VLd8kPFmtK1rZ
- 0BT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
-X-Talos-CUID: 9a23:xn+OpGwNqSsbbeRLN5ltBgUJOeUCNUbCy03ODGqIN0JSD4O3dACPrfY=
-X-Talos-MUID: 9a23:m3tYdQWOlqwtwFLq/C3ThiNJGd5h2frwUFEwias0nNvDdjMlbg==
+X-CSE-ConnectionGUID: 87Xc/jB4Twys8YBFEeDsHw==
+X-CSE-MsgGUID: JNzgi8aMTNSYWc+N72WvJw==
+X-IPAS-Result: =?us-ascii?q?A0BSAgDDKuxq/43/Ja1aglmCV3VgGilJlCqCIQOBE4IKj?=
+ =?us-ascii?q?i+MVRSBag8BAQEPRA0EAQGEP0YCjh0CJjQJDgECBAMCAwEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDGgEMCwEUBRsiHAIBAQIZFiQHIwgQC?=
+ =?us-ascii?q?YMCAYJxAwMRvD+BeTOBAYJPWz8CQ1DZS4FoAQsUAYE4gWESg02DA4ERhA9dG?=
+ =?us-ascii?q?AFEhDknG4FJRIEVgnN2gQWBXAEBgS0LDwFohXYEgg2BIYFagQMJghmDG4Y+G?=
+ =?us-ascii?q?gKBUlSGHUiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BE?=
+ =?us-ascii?q?oEHXYErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
+ =?us-ascii?q?SY/FQxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5IvghkWN?=
+ =?us-ascii?q?Q0OCwYBFhkCDA4IDhoEBQoBJQUBBB40KSEUESgWAQsjCQ4VGQOSQx0HFpAKg?=
+ =?us-ascii?q?iGBNZ9chCqMJI9ChXgaM4QEgVeSQpJUC5YagmOOCokEjDojAgYYAU+EaYFoP?=
+ =?us-ascii?q?IFHCwczGggbFTuCZwkWNBkPjisDAQoLgWiBeIF/WguCL8lIJjICCTIBAQcCB?=
+ =?us-ascii?q?w4DC4FokAEleGABAQ?=
+IronPort-Data: A9a23:RdojqaAQc8+NERVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApD901TMAz
+ WNOXm+Aa//cMzCjc9l3Po+090lSupSBzNBmOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGcYZsCCCM/n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
+ fuo+5eBYQb9h2YuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEk6peBwY0F9Ek5fdsUVBk2
+ 9EVBCstcUXW7w626OrTpuhEnM8vKozveYgYoHwllW2fBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
+ pdfMGY2BPjDS0Un1lM/GY8kleulrnL+aDZf7lmSoMLb5kCOkFAqiOS8YIu9ltqiZ+NHkUfIr
+ 0f62V/IPRpZEoPF9iSn7Sf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWspBUQXZ9UVuY98gzIkvaS6AeCDW9CRTlEADA7iPILqfUR/
+ gfht7vU6fZH7NV5lVr1Gm+okA6P
+IronPort-HdrOrdr: A9a23:zYYSe6jCujziNRBOHes7LjMXknBQXvYji2hC6mlwRA09TyX+rb
+ HLoB1173HJYVoqNU3I3OrwW5VoIkmskKKdn7NxAV7KZmCP0wGVxcNZnOnfKlbbdBEWmNQw6U
+ 4ZSchDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhBQpcUAUdAY0++/YTzrdHFLeA==
+X-Talos-CUID: =?us-ascii?q?9a23=3AcMr2+WnteBa9/ct0pjnrtC5G6xPXOS2C/HyXIWX?=
+ =?us-ascii?q?kNXl4U+2kY3G99Y9/s9U7zg=3D=3D?=
+X-Talos-MUID: 9a23:6QY4tAhuKuKFfyfNI2CBIsMpFuF67KX+AWUxt643hMLHE3MqBCm/k2Hi
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="543909157"
-Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
-  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:08:21 +0000
+   d="scan'208";a="544304989"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:08:21 +0000
 Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id 63AF4180008A7
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 061D7180005CE
 	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 07:08:21 +0000 (GMT)
 Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id BA012CC124C; Wed,  4 Nov 2026 23:08:20 -0800 (PST)
+	id A16B6CC12A8; Wed,  4 Nov 2026 23:08:20 -0800 (PST)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH 6/6] python3-tornado: Fix CVE-2026-116578
-Date: Wed,  4 Nov 2026 23:08:19 -0800
-Message-Id: <20261105070819.2086816-7-yurade@cisco.com>
+Subject: [oe][meta-oe][wrynose][PATCH 2/6] python3-tornado: Fix CVE-2026-103262
+Date: Wed,  4 Nov 2026 23:08:15 -0800
+Message-Id: <20261105070819.2086816-3-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261105070819.2086816-1-yurade@cisco.com>
 References: <20261105070819.2086816-1-yurade@cisco.com>
@@ -73,420 +75,1157 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-7310.cisco.com [10.30.220.95];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
-X-Outbound-Node: rcdn-l-core-10.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:08:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131866
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131867
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [4],
-using the commit shown in [1], [2] and [3].
+This patch applies the upstream fix as referenced in [2],
+using the commit shown in [1].
 
-[1] https://github.com/tornadoweb/tornado/commit/940ea725bdd9bc68231d68a105eef17ea6e11233
-[2] https://github.com/tornadoweb/tornado/commit/ccb6a2e5482f17997efd4a74b8200d5b4babc035
-[3] https://github.com/tornadoweb/tornado/commit/cc75ab0eb3af459c714895a49f682ad354f50117
-[4] https://nvd.nist.gov/vuln/detail/CVE-2026-116578
+[1] https://github.com/tornadoweb/tornado/commit/e412435febba4569c552c5c9054f1bf92bd171a9
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-103262
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../python3-tornado/CVE-2026-116578_p1.patch  |  62 ++++++
- .../python3-tornado/CVE-2026-116578_p2.patch  | 106 ++++++++++
- .../python3-tornado/CVE-2026-116578_p3.patch  | 192 ++++++++++++++++++
- .../python/python3-tornado_6.5.7.bb           |   3 +
- 4 files changed, 363 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p3.patch
+ .../python3-tornado/CVE-2026-103262.patch     | 1117 +++++++++++++++++
+ .../python/python3-tornado_6.5.7.bb           |    1 +
+ 2 files changed, 1118 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p1.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
 new file mode 100644
-index 0000000000..5a146dfda5
+index 0000000000..22da4e9e7b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p1.patch
-@@ -0,0 +1,62 @@
-+From 940ea725bdd9bc68231d68a105eef17ea6e11233 Mon Sep 17 00:00:00 2001
-+From: Ben Darnell <ben@bendarnell.com>
-+Date: Tue, 6 Oct 2026 13:06:04 -0400
-+Subject: [PATCH] web: Block open redirects in RedirectHandler
-+
-+When the redirect target is formatted from parts of the input, and
-+one of those parts appears at the start of the new URL, this can
-+be used to construct protocol-relative URLs which effectively
-+make an open redirect. Now we refuse to redirect to a
-+protocol-relative URL unless the double slash was present in the
-+configured pattern.
-+
-+CVE: CVE-2026-116578
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/940ea725bdd9bc68231d68a105eef17ea6e11233]
-+
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ tornado/test/web_test.py | 12 ++++++++++++
-+ tornado/web.py           |  4 ++++
-+ 2 files changed, 16 insertions(+)
-+
-+diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
-+index 3ecb3ef5..6008fb50 100644
-+--- a/tornado/test/web_test.py
-++++ b/tornado/test/web_test.py
-+@@ -3565,6 +3565,18 @@ class RedirectHandlerTest(WebTestCase):
-+         self.assertEqual(response.code, 301)
-+         self.assertEqual(response.headers["Location"], "/b/a/c")
-+ 
-++    def test_redirect_double_slash(self):
-++        # Note that the redirect pattern we're using reorders the components.
-++        response = self.fetch("/a/example.com/b", follow_redirects=False)
-++        self.assertEqual(response.code, 301)
-++        self.assertEqual(response.headers["Location"], "/example.com/a/b")
-++
-++        # With a double slash this becomes //example.com/a/b, which is a protocol-relative
-++        # redirect to another host, which we disallow because it is an open redirect.
-++        with ExpectLog(app_log, "Uncaught exception"):
-++            response = self.fetch("/a//example.com/a/b", follow_redirects=False)
-++        self.assertEqual(response.code, 500)
-++
-+ 
-+ class AcceptLanguageTest(WebTestCase):
-+     """Test evaluation of Accept-Language header"""
-+diff --git a/tornado/web.py b/tornado/web.py
-+index d3257221..be3b07c0 100644
-+--- a/tornado/web.py
-++++ b/tornado/web.py
-+@@ -2707,6 +2707,10 @@ class RedirectHandler(RequestHandler):
-+                 to_url,
-+                 list(httputil.qs_to_qsl(self.request.query_arguments)),  # type: ignore
-+             )
-++        if to_url.startswith("//") and not self._url.startswith("//"):
-++            raise ValueError(
-++                "Redirect URL cannot start with '//' if template does not."
-++            )
-+         self.redirect(to_url, permanent=self._permanent)
-+ 
-+ 
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p2.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p2.patch
-new file mode 100644
-index 0000000000..9a41ca93eb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p2.patch
-@@ -0,0 +1,106 @@
-+From ccb6a2e5482f17997efd4a74b8200d5b4babc035 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
+@@ -0,0 +1,1117 @@
++From e412435febba4569c552c5c9054f1bf92bd171a9 Mon Sep 17 00:00:00 2001
 +From: Claude <noreply@anthropic.com>
-+Date: Sat, 10 Oct 2026 16:48:22 +0000
-+Subject: [PATCH] web: Catch backslash and whitespace variants of
-+ protocol-relative redirects
++Date: Sat, 12 Sep 2026 21:17:45 +0000
++Subject: [PATCH] Bound the memory an HTTP client response can consume
 +
-+The open-redirect checks in RedirectHandler and StaticFileHandler only
-+looked for a literal leading "//". Browsers follow the WHATWG URL spec,
-+which treats backslashes like slashes and drops tabs and newlines, so
-+Location headers such as "/\evil.com" or "/<TAB>/evil.com" are also
-+protocol-relative redirects to another host.
++Backport for 6.5.9. On master this is ten commits; the net change is the
++same, minus two things that do not exist on this branch: master's rejection
++of a coroutine streaming_callback (here streaming_callback is typed
++Callable[[bytes], None], and simple_httpclient already calls it
++synchronously, so calling it directly is what the contract says), and
++master's newer annotation syntax.
 +
-+RedirectHandler was exploitable this way because path arguments are
-+url-decoded before they are substituted into the template, so a link
-+to e.g. /%5Cevil.com/... produced a raw backslash in the redirect.
-+StaticFileHandler checks the undecoded request path, which a browser
-+cannot make contain a raw backslash, but harden it the same way.
++curl_httpclient passed every chunk libcurl produced to IOLoop.add_callback
++and returned immediately, so a response body accumulated in the IOLoop's
++callback queue instead of reaching the application as it arrived. With
++decompress_response, a "decompression bomb" turns a few kilobytes on the
++wire into gigabytes in that queue: a 4GiB bomb peaked at ~400MB of RSS,
++~350MB of it queued chunks. Chunks now go through _CurlStreamingBuffer,
++which pauses the transfer once more than 1MB is waiting and resumes it once
++the callback has caught up, holding the same fetch to ~58MB regardless of
++the response size.
 +
-+CVE: CVE-2026-116578
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/ccb6a2e5482f17997efd4a74b8200d5b4babc035]
++Without a streaming_callback the whole body is buffered, so a bomb cannot
++be retrieved at all -- only refused. simple_httpclient already refused one
++at max_body_size, but curl_httpclient had no limit and would buffer a
++520KB response expanding to 512MiB in full. CurlAsyncHTTPClient takes
++max_body_size, defaulting to the same 100MB, applied to streaming
++responses too so that the two implementations agree. Retrieving a response
++larger than that now means raising the limit deliberately.
 +
-+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-+Claude-Session: https://claude.ai/code/session_01Jhn71YM65mTQ8sdDrEMwS8
++libcurl's CURLOPT_MAXFILESIZE would have been the place to delegate the
++limit, but outside of very recent versions it is measured against the
++compressed size, which a bomb keeps small.
++
++Also: unpausing only makes a transfer runnable again; libcurl has reported
++that through the timer callback since 7.69, and before that a paused
++transfer stalls until unrelated socket activity wakes it, so the buffer
++asks for a socket_action itself. The documented libcurl requirement moves
++to 7.81, the version in the oldest supported Ubuntu LTS, which is above
++both that and the 7.71 cap on libcurl's own pause buffer.
++
++Verified against libcurl 8.11.1, 8.16.0 and 8.21.0, and with black 24.4.2,
++flake8 7.0.0 and mypy 1.10.0 as pinned on this branch.
++
++CVE: CVE-2026-103262
++Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/e412435febba4569c552c5c9054f1bf92bd171a9]
++
++Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
++Claude-Session: https://claude.ai/code/session_01BD36EiRmzMSFqZeAqZu4gm
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ tornado/test/web_test.py | 16 ++++++++++++++++
-+ tornado/web.py           | 18 ++++++++++++++++--
-+ 2 files changed, 32 insertions(+), 2 deletions(-)
++ docs/httpclient.rst                    |  13 +-
++ docs/index.rst                         |   3 +-
++ tornado/curl_httpclient.py             | 175 +++++++++++++-
++ tornado/test/circlerefs_test.py        |  50 +++-
++ tornado/test/curl_httpclient_test.py   | 226 +++++++++++++++++-
++ tornado/test/httpclient_test.py        | 309 ++++++++++++++++++++++++-
++ tornado/test/simple_httpclient_test.py |  31 +--
++ 7 files changed, 759 insertions(+), 48 deletions(-)
 +
-+diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
-+index 6008fb50..b6b62e96 100644
-+--- a/tornado/test/web_test.py
-++++ b/tornado/test/web_test.py
-+@@ -1763,6 +1763,13 @@ class StaticDefaultFilenameRootTest(WebTestCase):
-+             )
-+         self.assertEqual(response.code, 403)
++diff --git a/docs/httpclient.rst b/docs/httpclient.rst
++index 3837d4c4..39896442 100644
++--- a/docs/httpclient.rst
+++++ b/docs/httpclient.rst
++@@ -53,7 +53,7 @@ Implementations
 + 
-++    def test_no_open_redirect_backslash(self):
-++        # Browsers treat a backslash like a slash, so a redirect to /\evil.com
-++        # is protocol-relative too. This form doesn't need the server-side path.
-++        with ExpectLog(gen_log, ".*cannot redirect path with two initial slashes"):
-++            response = self.fetch("/\\evil.com/../dir", follow_redirects=False)
-++        self.assertEqual(response.code, 403)
-++
++ .. module:: tornado.curl_httpclient
 + 
-+ class StaticFileWithPathTest(WebTestCase):
-+     def get_app_kwargs(self):
-+@@ -3577,6 +3584,15 @@ class RedirectHandlerTest(WebTestCase):
-+             response = self.fetch("/a//example.com/a/b", follow_redirects=False)
-+         self.assertEqual(response.code, 500)
++-.. class:: CurlAsyncHTTPClient(max_clients=10, defaults=None)
+++.. class:: CurlAsyncHTTPClient(max_clients=10, defaults=None, max_body_size=104857600)
 + 
-++        # Browsers treat backslashes like slashes and ignore tabs and newlines,
-++        # so these variants are also protocol-relative. Path arguments are
-++        # url-decoded, so they can be smuggled in with percent-encoding.
-++        for path in ["/a/%5Cexample.com/b", "/a/%09/example.com/b"]:
-++            with self.subTest(path=path):
-++                with ExpectLog(app_log, "Uncaught exception"):
-++                    response = self.fetch(path, follow_redirects=False)
-++                self.assertEqual(response.code, 500)
-++
++    ``libcurl``-based HTTP client.
 + 
-+ class AcceptLanguageTest(WebTestCase):
-+     """Test evaluation of Accept-Language header"""
-+diff --git a/tornado/web.py b/tornado/web.py
-+index be3b07c0..62c0f7d5 100644
-+--- a/tornado/web.py
-++++ b/tornado/web.py
-+@@ -2707,7 +2707,7 @@ class RedirectHandler(RequestHandler):
-+                 to_url,
-+                 list(httputil.qs_to_qsl(self.request.query_arguments)),  # type: ignore
-+             )
-+-        if to_url.startswith("//") and not self._url.startswith("//"):
-++        if _is_protocol_relative(to_url) and not _is_protocol_relative(self._url):
-+             raise ValueError(
-+                 "Redirect URL cannot start with '//' if template does not."
-+             )
-+@@ -3034,7 +3034,7 @@ class StaticFileHandler(RequestHandler):
-+             # but there is some prefix to the path that was already
-+             # trimmed by the routing
-+             if not self.request.path.endswith("/"):
-+-                if self.request.path.startswith("//"):
-++                if _is_protocol_relative(self.request.path):
-+                     # A redirect with two initial slashes is a "protocol-relative" URL.
-+                     # This means the next path segment is treated as a hostname instead
-+                     # of a part of the path, making this effectively an open redirect.
-+@@ -3926,3 +3926,17 @@ def _create_signature_v2(secret: Union[str, bytes], s: bytes) -> bytes:
++@@ -67,6 +67,17 @@ Implementations
++    ``defaults`` is a dict of parameters that will be used as defaults on all
++    `.HTTPRequest` objects submitted to this client.
 + 
-+ def is_absolute(path: str) -> bool:
-+     return any(path.startswith(x) for x in ["/", "http:", "https:"])
+++   ``max_body_size`` (default 100MB) is the largest response body that the
+++   client will accept, measured after decompression so that a compressed
+++   response cannot expand past it. As in `.SimpleAsyncHTTPClient`, it applies
+++   whether or not a ``streaming_callback`` is used; raise it to retrieve
+++   responses larger than that.
 ++
+++   .. versionchanged:: 6.5.9
+++      Added the ``max_body_size`` argument. Previously a response body was
+++      accepted without limit, so a server could exhaust the client's memory
+++      with a compressed response.
 ++
-++def _is_protocol_relative(url: str) -> bool:
-++    """Returns True if a browser would treat ``url`` as a protocol-relative URL.
++ Example Code
++ ~~~~~~~~~~~~
++ 
++diff --git a/docs/index.rst b/docs/index.rst
++index 9b121862..61b97a9c 100644
++--- a/docs/index.rst
+++++ b/docs/index.rst
++@@ -103,7 +103,8 @@ source tarball or clone the `git repository
++ optional packages may be useful:
++ 
++ * `pycurl <http://pycurl.io/>`_ is used by the optional
++-  ``tornado.curl_httpclient``.  Libcurl version 7.22 or higher is required.
+++  ``tornado.curl_httpclient``.  Libcurl version 7.81 or higher is required
+++  (the version shipped by Ubuntu 22.04 LTS).
++ * `pycares <https://pypi.org/project/pycares/>`_ is an alternative
++   non-blocking DNS resolver that can be used when threads are not
++   appropriate.
++diff --git a/tornado/curl_httpclient.py b/tornado/curl_httpclient.py
++index 8d680666..71a99c2a 100644
++--- a/tornado/curl_httpclient.py
+++++ b/tornado/curl_httpclient.py
++@@ -37,7 +37,7 @@ from tornado.httpclient import (
++ )
++ from tornado.log import app_log
++ 
++-from typing import Dict, Any, Callable, Union, Optional
+++from typing import Dict, Any, Callable, Optional
++ import typing
++ 
++ if typing.TYPE_CHECKING:
++@@ -48,11 +48,138 @@ curl_log = logging.getLogger("tornado.curl_httpclient")
++ CR_OR_LF_RE = re.compile(b"\r|\n")
++ 
++ 
+++class _CurlStreamingBuffer:
+++    """Delivers response body chunks from libcurl to a ``streaming_callback``.
 ++
-++    A protocol-relative URL (``//example.com/path``) names a host, so redirecting
-++    to one that was built from untrusted input is an open redirect. Browsers
-++    follow the WHATWG URL spec, which strips leading control characters and
-++    spaces, removes tabs and newlines anywhere in the URL, and treats backslashes
-++    like forward slashes, so a plain ``startswith("//")`` check is not enough.
+++    libcurl runs its write callback from inside
+++    ``curl_multi_socket_action``, where it is not safe to run application
+++    code (which may reenter this client, or raise exceptions that libcurl
+++    would turn into transfer errors). Chunks are therefore queued here and
+++    delivered later from the `.IOLoop`.
+++
+++    Queuing alone would let the amount of buffered data grow with whatever
+++    the server chooses to send, which is a problem when
+++    ``decompress_response`` is in use: a "decompression bomb" lets a server
+++    turn a few kilobytes on the wire into gigabytes of decompressed data,
+++    all of which would pile up in the `.IOLoop`'s callback queue before any
+++    of it reached the application. To bound this, the transfer is paused
+++    once more than `max_buffer_size` bytes are waiting, and resumed after
+++    the callback has consumed them.
 ++    """
-++    url = url.lstrip("".join(chr(i) for i in range(0x21)))
-++    url = url.replace("\t", "").replace("\n", "").replace("\r", "")
-++    return url[:1] in ("/", "\\") and url[1:2] in ("/", "\\")
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p3.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p3.patch
-new file mode 100644
-index 0000000000..e57924d6bf
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p3.patch
-@@ -0,0 +1,192 @@
-+From cc75ab0eb3af459c714895a49f682ad354f50117 Mon Sep 17 00:00:00 2001
-+From: Claude <noreply@anthropic.com>
-+Date: Sat, 10 Oct 2026 17:56:53 +0000
-+Subject: [PATCH] web: Don't let RedirectHandler substitutions change the
-+ scheme or netloc
-+
-+Rather than looking only for protocol-relative URLs, RedirectHandler now
-+requires the scheme and netloc (user info, host, and port) of the
-+redirect to be the same as those of the template formatted with
-+placeholder values. This also covers templates like
-+"https://example.com{0}", where a substitution could extend the host
-+(".evil.com") or add user info ("@evil.com"), and templates beginning
-+with a substitution, which could otherwise be given an absolute URL.
-+Such requests, and protocol-relative ones, now get a 400 response
-+instead of a 500 from an uncaught ValueError.
-+
-+A consequence is that substitutions can no longer be used in the scheme
-+or netloc part of a template.
-+
-+CVE: CVE-2026-116578
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/cc75ab0eb3af459c714895a49f682ad354f50117]
-+
-+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-+Claude-Session: https://claude.ai/code/session_01Jhn71YM65mTQ8sdDrEMwS8
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ tornado/test/web_test.py | 42 ++++++++++++++++++++++++++---
-+ tornado/web.py           | 58 ++++++++++++++++++++++++++++++++--------
-+ 2 files changed, 85 insertions(+), 15 deletions(-)
-+
-+diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
-+index b6b62e96..1438b6f3 100644
-+--- a/tornado/test/web_test.py
-++++ b/tornado/test/web_test.py
-+@@ -3549,6 +3549,8 @@ class RedirectHandlerTest(WebTestCase):
-+         return [
-+             ("/src", WebRedirectHandler, {"url": "/dst"}),
-+             ("/src2", WebRedirectHandler, {"url": "/dst2?foo=bar"}),
-++            (r"/any/(.*)", WebRedirectHandler, {"url": "{0}"}),
-++            (r"/moved(.*)", WebRedirectHandler, {"url": "https://example.com{0}"}),
-+             (r"/(.*?)/(.*?)/(.*)", WebRedirectHandler, {"url": "/{1}/{0}/{2}"}),
-+         ]
-+ 
-+@@ -3580,18 +3582,50 @@ class RedirectHandlerTest(WebTestCase):
-+ 
-+         # With a double slash this becomes //example.com/a/b, which is a protocol-relative
-+         # redirect to another host, which we disallow because it is an open redirect.
-+-        with ExpectLog(app_log, "Uncaught exception"):
-++        with ExpectLog(gen_log, ".*Redirect URL cannot change the scheme or netloc"):
-+             response = self.fetch("/a//example.com/a/b", follow_redirects=False)
-+-        self.assertEqual(response.code, 500)
-++        self.assertEqual(response.code, 400)
-+ 
-+         # Browsers treat backslashes like slashes and ignore tabs and newlines,
-+         # so these variants are also protocol-relative. Path arguments are
-+         # url-decoded, so they can be smuggled in with percent-encoding.
-+         for path in ["/a/%5Cexample.com/b", "/a/%09/example.com/b"]:
-+             with self.subTest(path=path):
-+-                with ExpectLog(app_log, "Uncaught exception"):
-++                with ExpectLog(
-++                    gen_log, ".*Redirect URL cannot change the scheme or netloc"
-++                ):
-++                    response = self.fetch(path, follow_redirects=False)
-++                self.assertEqual(response.code, 400)
 ++
-++    def test_redirect_cannot_change_host(self):
-++        # Substitutions directly after the host can extend it or add userinfo.
-++        response = self.fetch("/moved/x", follow_redirects=False)
-++        self.assertEqual(response.code, 301)
-++        self.assertEqual(response.headers["Location"], "https://example.com/x")
-++        for path in ["/moved.evil.com/x", "/moved@evil.com/x", "/moved:8080/x"]:
-++            with self.subTest(path=path):
-++                with ExpectLog(
-++                    gen_log, ".*Redirect URL cannot change the scheme or netloc"
-++                ):
-++                    response = self.fetch(path, follow_redirects=False)
-++                self.assertEqual(response.code, 400)
+++    # Pause the transfer while at least this many bytes are waiting to be
+++    # delivered. This bounds our own queue only: a paused libcurl still
+++    # finishes decoding the socket read it already has (there is no way to
+++    # tell its decoder to stop) and buffers the result internally, so the
+++    # real high-water mark is one read's worth of expansion -- roughly 16MB
+++    # for gzip at libcurl's default CURLOPT_BUFFERSIZE. libcurl limits that
+++    # buffer to 64MB and fails the transfer with CURLE_TOO_LARGE past it,
+++    # which a codec with a higher ratio than deflate's (brotli, say) will
+++    # reach. That is libcurl's call to make; we just avoid holding a copy.
+++    max_buffer_size = 1024 * 1024
 ++
-++    def test_template_starting_with_substitution(self):
-++        # A relative URL is fine, but the client cannot supply an absolute one.
-++        response = self.fetch("/any/foo/bar", follow_redirects=False)
-++        self.assertEqual(response.code, 301)
-++        self.assertEqual(response.headers["Location"], "foo/bar")
-++        for path in [
-++            "/any/https://evil.com/",
-++            "/any/%5C%5Cevil.com/",
-++            "/any/javascript:alert(1)",
-++        ]:
-++            with self.subTest(path=path):
-++                with ExpectLog(
-++                    gen_log, ".*Redirect URL cannot change the scheme or netloc"
-++                ):
-+                     response = self.fetch(path, follow_redirects=False)
-+-                self.assertEqual(response.code, 500)
-++                self.assertEqual(response.code, 400)
-+ 
-+ 
-+ class AcceptLanguageTest(WebTestCase):
-+diff --git a/tornado/web.py b/tornado/web.py
-+index 62c0f7d5..0b67216a 100644
-+--- a/tornado/web.py
-++++ b/tornado/web.py
-+@@ -2693,6 +2693,14 @@ class RedirectHandler(RequestHandler):
-+     .. versionchanged:: 5.0
-+        If any query arguments are present, they will be copied to the
-+        destination URL.
+++    def __init__(
+++        self,
+++        client: "CurlAsyncHTTPClient",
+++        curl: pycurl.Curl,
+++        callback: Callable[[bytes], Any],
+++    ) -> None:
+++        self.client = client
+++        self.io_loop = client.io_loop
+++        # Set to None in finish(); the handle may be reused after that.
+++        self.curl = curl  # type: Optional[pycurl.Curl]
+++        self.callback = callback
+++        self.chunks = collections.deque()  # type: Deque[bytes]
+++        self.size = 0
+++        self.total = 0
+++        self.body_too_large = False
+++        self.paused = False
+++        self.flush_scheduled = False
 ++
-++    .. versionchanged:: 6.6
-++       Substituted values may no longer change the scheme or netloc (user
-++       info, host, and port) of the destination URL. For example, with a
-++       ``url`` of ``"/{0}/b"``, a request that would redirect to
-++       ``//example.com/b`` (a protocol-relative URL pointing to another host)
-++       now fails with a 400 error. As a consequence, substitutions cannot be
-++       used in the scheme or netloc part of the ``url``.
-+     """
-+ 
-+     def initialize(self, url: str, permanent: bool = True) -> None:
-+@@ -2701,16 +2709,24 @@ class RedirectHandler(RequestHandler):
-+ 
-+     def get(self, *args: Any, **kwargs: Any) -> None:
-+         to_url = self._url.format(*args, **kwargs)
-++        # The scheme and netloc of the redirect must come from the template, not
-++        # from the request. Find out what they are by formatting the template
-++        # with a placeholder that cannot extend a scheme or netloc.
-++        expected_url = self._url.format(
-++            *("/" for _ in args), **{k: "/" for k in kwargs}
-++        )
+++    def write(self, chunk: bytes) -> int:
+++        """libcurl ``WRITEFUNCTION`` callback."""
+++        if self.total + len(chunk) > self.client.max_body_size:
+++            # max_body_size applies here as well as to a buffered response:
+++            # it is a safeguard for applications that do not impose a limit
+++            # of their own on what they do with the chunks. Writing less
+++            # than we were given makes libcurl fail the transfer.
+++            self.body_too_large = True
+++            return 0
+++        if self.size >= self.max_buffer_size:
+++            # Tell libcurl to stop reading from the socket until flush()
+++            # resumes it. This chunk is not consumed here: libcurl holds
+++            # on to it and passes it to us again when we unpause.
+++            self.paused = True
+++            return pycurl.WRITEFUNC_PAUSE
+++        self.chunks.append(chunk)
+++        self.size += len(chunk)
+++        self.total += len(chunk)
+++        self._schedule_flush()
+++        return len(chunk)
+++
+++    def _schedule_flush(self) -> None:
+++        if not self.flush_scheduled:
+++            self.flush_scheduled = True
+++            self.io_loop.add_callback(self.flush)
+++
+++    def flush(self) -> None:
+++        """Pass everything we have buffered to the ``streaming_callback``."""
+++        self.flush_scheduled = False
 ++        try:
-++            unchanged = _scheme_and_netloc(to_url) == _scheme_and_netloc(expected_url)
-++        except ValueError:
-++            unchanged = False
-++        if not unchanged:
-++            raise HTTPError(400, "Redirect URL cannot change the scheme or netloc")
-+         if self.request.query_arguments:
-+             # TODO: figure out typing for the next line.
-+             to_url = httputil.url_concat(
-+                 to_url,
-+                 list(httputil.qs_to_qsl(self.request.query_arguments)),  # type: ignore
-+             )
-+-        if _is_protocol_relative(to_url) and not _is_protocol_relative(self._url):
-+-            raise ValueError(
-+-                "Redirect URL cannot start with '//' if template does not."
-+-            )
-+         self.redirect(to_url, permanent=self._permanent)
-+ 
-+ 
-+@@ -3928,15 +3944,35 @@ def is_absolute(path: str) -> bool:
-+     return any(path.startswith(x) for x in ["/", "http:", "https:"])
-+ 
-+ 
-++def _normalize_url_like_browser(url: str) -> str:
-++    """Approximates how a browser cleans up a URL before parsing it.
+++            while self.chunks:
+++                chunk = self.chunks.popleft()
+++                self.size -= len(chunk)
+++                self.callback(chunk)
+++        finally:
+++            if self.chunks:
+++                # The callback raised; deliver the rest (and unpause) later.
+++                self._schedule_flush()
+++            elif self.paused:
+++                self.paused = False
+++                if self.curl is not None:
+++                    try:
+++                        # Note that this may call write() again
+++                        # (synchronously) with data libcurl buffered while
+++                        # paused, so it must come after our own buffer has
+++                        # been drained.
+++                        self.curl.pause(pycurl.PAUSE_CONT)
+++                    except pycurl.error:
+++                        # The transfer failed while it was paused (libcurl
+++                        # reports the pending error here). Nothing to do:
+++                        # _finish will pass the error to the callback.
+++                        pass
+++                    else:
+++                        # Ask for a socket_action so the unpaused transfer
+++                        # makes progress. libcurl has notified us of this
+++                        # itself (through the timer callback) since 7.69,
+++                        # which is below the version we require, so this is
+++                        # redundant there and costs one timeout per
+++                        # max_buffer_size of body. But without it a libcurl
+++                        # older than that stalls until unrelated socket
+++                        # activity happens to wake the transfer, and a
+++                        # streaming fetch that used to work would hang.
+++                        self.client._set_timeout(0)
 ++
-++    Browsers follow the WHATWG URL spec, which strips leading and trailing
-++    control characters and spaces, removes tabs and newlines anywhere in the
-++    URL, and (for http and https) treats backslashes like forward slashes. Checks
-++    on redirect URLs built from untrusted input must account for this.
+++    def finish(self) -> None:
+++        """Deliver any remaining data at the end of the request.
+++
+++        The curl handle may be reset and reused after this, so we must not
+++        touch it again.
+++        """
+++        self.curl = None
+++        self.paused = False
+++        self.flush()
+++
+++
++ class CurlAsyncHTTPClient(AsyncHTTPClient):
++     def initialize(  # type: ignore
++-        self, max_clients: int = 10, defaults: Optional[Dict[str, Any]] = None
+++        self,
+++        max_clients: int = 10,
+++        defaults: Optional[Dict[str, Any]] = None,
+++        max_body_size: int = 104857600,
++     ) -> None:
++         super().initialize(defaults=defaults)
+++        self.max_body_size = max_body_size
++         # Typeshed is incomplete for CurlMulti, so just use Any for now.
++         self._multi = pycurl.CurlMulti()  # type: Any
++         self._multi.setopt(pycurl.M_TIMERFUNCTION, self._set_timeout)
++@@ -203,6 +330,8 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
++                 curl.info = {  # type: ignore
++                     "headers": httputil.HTTPHeaders(),
++                     "buffer": BytesIO(),
+++                    "streaming_buffer": None,
+++                    "body_too_large": False,
++                     "request": request,
++                     "callback": callback,
++                     "queue_start_time": queue_start_time,
++@@ -243,9 +372,23 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
++         info = curl.info  # type: ignore
++         curl.info = None  # type: ignore
++         self._multi.remove_handle(curl)
+++        streaming_buffer = info["streaming_buffer"]
+++        body_too_large = info["body_too_large"]
+++        if streaming_buffer is not None:
+++            body_too_large = body_too_large or streaming_buffer.body_too_large
+++            # Make sure everything that was received reaches the
+++            # streaming_callback before the final response.
+++            try:
+++                streaming_buffer.finish()
+++            except Exception:
+++                self.handle_callback_exception(info["request"].streaming_callback)
++         buffer = info["buffer"]
++         if curl_error:
++             assert curl_message is not None
+++            if body_too_large:
+++                curl_message = "body exceeded max_body_size of %d bytes" % (
+++                    self.max_body_size,
+++                )
++             error = CurlError(curl_error, curl_message)  # type: Optional[CurlError]
++             assert error is not None
++             code = error.code
++@@ -344,15 +487,31 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
++                 self._curl_header_callback, headers, request.header_callback
++             ),
++         )
+++        write_function: Callable[[bytes], int]
++         if request.streaming_callback:
++ 
++-            def write_function(b: Union[bytes, bytearray]) -> int:
++-                assert request.streaming_callback is not None
++-                self.io_loop.add_callback(request.streaming_callback, b)
++-                return len(b)
++-
+++            streaming_buffer = _CurlStreamingBuffer(
+++                self, curl, request.streaming_callback
+++            )
+++            curl.info["streaming_buffer"] = streaming_buffer  # type: ignore
+++            write_function = streaming_buffer.write
++         else:
++-            write_function = buffer.write  # type: ignore
+++            # Count the buffered body against max_body_size, as
+++            # _CurlStreamingBuffer does for the streaming case. Here the
+++            # whole body is held in memory, so a response that decompresses
+++            # past the limit cannot be retrieved at all -- only refused
+++            # before it exhausts memory. libcurl's CURLOPT_MAXFILESIZE is
+++            # no help: outside of very recent versions it is measured
+++            # against the compressed size, which a bomb keeps small.
+++            def write_function(chunk: bytes) -> int:
+++                if buffer.tell() + len(chunk) > self.max_body_size:
+++                    curl.info["body_too_large"] = True  # type: ignore
+++                    # Writing less than we were given makes libcurl fail
+++                    # the transfer with CURLE_WRITE_ERROR; _finish uses the
+++                    # flag above to replace its message with ours.
+++                    return 0
+++                return buffer.write(chunk)
+++
++         curl.setopt(pycurl.WRITEFUNCTION, write_function)
++         curl.setopt(pycurl.FOLLOWLOCATION, request.follow_redirects)
++         curl.setopt(pycurl.MAXREDIRS, request.max_redirects)
++diff --git a/tornado/test/circlerefs_test.py b/tornado/test/circlerefs_test.py
++index d5f7e969..0907aa86 100644
++--- a/tornado/test/circlerefs_test.py
+++++ b/tornado/test/circlerefs_test.py
++@@ -21,6 +21,14 @@ import tornado
++ from tornado import web, gen, httpclient
++ from tornado.test.util import skipNotCPython
++ 
+++try:
+++    import pycurl
+++except ImportError:
+++    pycurl = None  # type: ignore
+++
+++if pycurl is not None:
+++    from tornado.curl_httpclient import CurlAsyncHTTPClient
+++
++ 
++ def find_circular_references(garbage):
++     """Find circular references in a list of objects.
++@@ -100,6 +108,11 @@ def assert_no_cycle_garbage():
++         gc.enable()
++ 
++ 
+++class OkHandler(web.RequestHandler):
+++    def get(self):
+++        self.write("ok\n")
+++
+++
++ # GC behavior is cpython-specific
++ @skipNotCPython
++ class CircleRefsTest(unittest.TestCase):
++@@ -137,7 +150,7 @@ class CircleRefsTest(unittest.TestCase):
++         self.assertIn("    name=b", str(cm.exception))
++         self.assertNotIn("    name=c", str(cm.exception))
++ 
++-    async def run_handler(self, handler_class):
+++    async def run_handler(self, handler_class, client_factory=None, **fetch_kwargs):
++         app = web.Application(
++             [
++                 (r"/", handler_class),
++@@ -147,14 +160,18 @@ class CircleRefsTest(unittest.TestCase):
++         server = tornado.httpserver.HTTPServer(app)
++         server.add_socket(socket)
++ 
++-        client = httpclient.AsyncHTTPClient()
+++        # The client must be constructed here rather than by the caller: it
+++        # binds to the IOLoop that is current when it is created.
+++        if client_factory is None:
+++            client_factory = httpclient.AsyncHTTPClient
+++        client = client_factory()
++         with assert_no_cycle_garbage():
++             # Only the fetch (and the corresponding server-side handler)
++             # are being tested for cycles. In particular, the Application
++             # object has internal cycles (as of this writing) which we don't
++             # care to fix since in real world usage the Application object
++             # is effectively a global singleton.
++-            await client.fetch(f"http://127.0.0.1:{port}/")
+++            await client.fetch(f"http://127.0.0.1:{port}/", **fetch_kwargs)
++         client.close()
++         server.stop()
++         socket.close()
++@@ -190,6 +207,33 @@ class CircleRefsTest(unittest.TestCase):
++ 
++         asyncio.run(self.run_handler(Handler))
++ 
+++    # The tests above vary the server-side handler against one client. These
+++    # vary the client instead: a streaming_callback takes a different path
+++    # through both client implementations than a buffered response does, and
+++    # curl_httpclient keeps per-request state on pooled curl handles.
+++
+++    def test_streaming_callback(self):
+++        asyncio.run(self.run_handler(OkHandler, streaming_callback=lambda chunk: None))
+++
+++    @unittest.skipIf(pycurl is None, "pycurl module not present")
+++    def test_curl_httpclient(self):
+++        asyncio.run(
+++            self.run_handler(
+++                OkHandler,
+++                client_factory=lambda: CurlAsyncHTTPClient(force_instance=True),
+++            )
+++        )
+++
+++    @unittest.skipIf(pycurl is None, "pycurl module not present")
+++    def test_curl_httpclient_streaming_callback(self):
+++        asyncio.run(
+++            self.run_handler(
+++                OkHandler,
+++                client_factory=lambda: CurlAsyncHTTPClient(force_instance=True),
+++                streaming_callback=lambda chunk: None,
+++            )
+++        )
+++
++     def test_run_on_executor(self):
++         # From https://github.com/tornadoweb/tornado/issues/2620
++         #
++diff --git a/tornado/test/curl_httpclient_test.py b/tornado/test/curl_httpclient_test.py
++index ac3cccc5..d7eb1adf 100644
++--- a/tornado/test/curl_httpclient_test.py
+++++ b/tornado/test/curl_httpclient_test.py
++@@ -1,12 +1,23 @@
+++import gc
++ from hashlib import md5
++ import os
++ import ssl
++ import unittest
+++from unittest import mock
+++import weakref
++ 
+++from tornado import gen
++ from tornado.escape import utf8
+++from tornado.log import app_log
++ from tornado.netutil import ssl_options_to_context
++ from tornado.test import httpclient_test
++-from tornado.testing import AsyncHTTPSTestCase, AsyncHTTPTestCase
+++from tornado.test.util import skipNotCPython
+++from tornado.testing import (
+++    AsyncHTTPSTestCase,
+++    AsyncHTTPTestCase,
+++    AsyncTestCase,
+++    ExpectLog,
+++)
++ from tornado.web import Application, RequestHandler
++ 
++ try:
++@@ -15,17 +26,106 @@ except ImportError:
++     pycurl = None  # type: ignore
++ 
++ if pycurl is not None:
++-    from tornado.curl_httpclient import CurlAsyncHTTPClient
+++    from tornado.curl_httpclient import (
+++        CurlAsyncHTTPClient,
+++        CurlError,
+++        _CurlStreamingBuffer,
+++    )
+++
+++
+++def create_client(**kwargs):
+++    return CurlAsyncHTTPClient(
+++        force_instance=True, defaults=dict(allow_ipv6=False), **kwargs
+++    )
++ 
++ 
++ @unittest.skipIf(pycurl is None, "pycurl module not present")
++ class CurlHTTPClientCommonTestCase(httpclient_test.HTTPClientCommonTestCase):
+++    # libcurl decodes the Content-Encoding named by the response whether or
+++    # not we listed it in Accept-Encoding, so brotli is reachable whenever
+++    # libcurl was built with it (which is common).
+++    decompresses_brotli = pycurl is not None and "brotli" in pycurl.version
+++
++     def get_http_client(self):
++         client = CurlAsyncHTTPClient(defaults=dict(allow_ipv6=False))
++         # make sure AsyncHTTPClient magic doesn't give us the wrong class
++         self.assertTrue(isinstance(client, CurlAsyncHTTPClient))
++         return client
++ 
+++    def test_streaming_pause_and_resume(self):
+++        # With a small buffer the transfer is paused and resumed many times
+++        # over one response. libcurl re-delivers the chunk that was in
+++        # flight when it was paused, so that chunk must not be consumed
+++        # twice.
+++        chunks: list[bytes] = []
+++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
+++            response = self.fetch("/large_body", streaming_callback=chunks.append)
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(b"".join(chunks), httpclient_test.large_body())
+++
+++    def test_concurrent_paused_streams(self):
+++        # Several streaming requests in flight at once, each pausing and
+++        # resuming repeatedly: pausing one transfer must not disturb another.
+++        client = create_client(max_clients=4)
+++        buffers = [bytearray() for _ in range(8)]
+++        try:
+++            with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
+++                self.io_loop.run_sync(
+++                    lambda: gen.multi(
+++                        [
+++                            client.fetch(
+++                                self.get_url("/large_body"),
+++                                streaming_callback=buf.extend,
+++                            )
+++                            for buf in buffers
+++                        ]
+++                    )
+++                )
+++        finally:
+++            client.close()
+++        for buf in buffers:
+++            self.assertEqual(bytes(buf), httpclient_test.large_body())
+++
+++    @skipNotCPython
+++    def test_client_not_leaked_by_write_callbacks(self):
+++        # The WRITEFUNCTION callbacks installed for both the buffered and
+++        # the streaming path hold references to the client and to the curl
+++        # handle. They must not keep the client alive after close().
+++
+++        def use_and_close_a_client():
+++            client = create_client()
+++            self.io_loop.run_sync(lambda: client.fetch(self.get_url("/hello")))
+++            self.io_loop.run_sync(
+++                lambda: client.fetch(
+++                    self.get_url("/large_body"),
+++                    streaming_callback=lambda chunk: None,
+++                )
+++            )
+++            client.close()
+++            return weakref.ref(client)
+++
+++        ref = use_and_close_a_client()
+++        gc.collect()
+++        self.assertIsNone(ref())
+++
+++    def test_streaming_callback_exception(self):
+++        # An exception in the streaming_callback is logged, and does not
+++        # stop the transfer or leave it paused forever.
+++        chunks: list[bytes] = []
+++
+++        def streaming_callback(chunk):
+++            chunks.append(chunk)
+++            if len(chunks) == 1:
+++                raise ZeroDivisionError()
+++
+++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
+++            with ExpectLog(app_log, "Exception in callback"):
+++                response = self.fetch(
+++                    "/large_body", streaming_callback=streaming_callback
+++                )
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(b"".join(chunks), httpclient_test.large_body())
+++
++ 
++ class DigestAuthHandler(RequestHandler):
++     def initialize(self, username, password):
++@@ -82,7 +182,7 @@ class CustomFailReasonHandler(RequestHandler):
++ class CurlHTTPClientTestCase(AsyncHTTPTestCase):
++     def setUp(self):
++         super().setUp()
++-        self.http_client = self.create_client()
+++        self.http_client = create_client()
++ 
++     def get_app(self):
++         return Application(
++@@ -98,11 +198,6 @@ class CurlHTTPClientTestCase(AsyncHTTPTestCase):
++             ]
++         )
++ 
++-    def create_client(self, **kwargs):
++-        return CurlAsyncHTTPClient(
++-            force_instance=True, defaults=dict(allow_ipv6=False), **kwargs
++-        )
++-
++     def test_digest_auth(self):
++         response = self.fetch(
++             "/digest", auth_mode="digest", auth_username="foo", auth_password="bar"
++@@ -220,3 +315,118 @@ class CurlHTTPClientReuseCertsTestCase(AsyncHTTPSTestCase):
++         )
++         response = self.fetch(self.get_url("/client_cert"))
++         self.assertEqual(response.body, b"no client cert")
+++
+++
+++@unittest.skipIf(pycurl is None, "pycurl module not present")
+++class CurlHTTPClientMaxBodySizeTestCase(httpclient_test.HTTPClientMaxBodySizeTestCase):
+++    # curl_httpclient does not log when it refuses a body; the message is
+++    # carried by the CurlError instead.
+++    def get_http_client(self):
+++        # max_clients=1 so that each test also reuses the curl handle left
+++        # behind by the one before it.
+++        return create_client(max_body_size=httpclient_test.MAX_BODY_SIZE, max_clients=1)
+++
+++    def test_refusal_message(self):
+++        # The generic test only checks that the body was refused; make sure
+++        # the error says why, since libcurl's own message for a short write
+++        # ("Failure writing output to destination") would not.
+++        with self.assertRaises(CurlError) as cm:
+++            self.fetch("/bomb", raise_error=True)
+++        self.assertIn("max_body_size", str(cm.exception))
+++
+++    def test_redirect_body_not_counted(self):
+++        # libcurl discards the body of a redirect that it follows, so a
+++        # redirect carrying a large body of its own does not count towards
+++        # the limit for the response that follows it. Not shared:
+++        # simple_httpclient applies max_body_size to the redirect response
+++        # too, and refuses this one before following it.
+++        response = self.fetch("/body_bearing_redirect")
+++        response.rethrow()
+++        self.assertEqual(response.body, b"a" * httpclient_test.MAX_BODY_SIZE)
+++
+++
+++@unittest.skipIf(pycurl is None, "pycurl module not present")
+++class CurlStreamingBufferTest(AsyncTestCase):
+++    """Unit tests for the buffer that feeds a ``streaming_callback``."""
+++
+++    def setUp(self):
+++        super().setUp()
+++        self.timeouts_requested: list[int] = []
+++        test = self
+++
+++        class FakeClient:
+++            io_loop = test.io_loop
+++            max_body_size = 1024 * 1024
+++
+++            def _set_timeout(self, msecs):
+++                test.timeouts_requested.append(msecs)
+++
+++        self.client = FakeClient()
+++
+++    def make_buffer(self, curl, callback):
+++        return _CurlStreamingBuffer(
+++            self.client,  # type: ignore[arg-type]
+++            curl,
+++            callback,
+++        )
+++
+++    def test_unpause_asks_for_a_socket_action(self):
+++        # Only libcurl 8.x reports through the timer callback that an
+++        # unpaused transfer is runnable again; older versions leave it
+++        # stalled unless we ask for a socket_action ourselves.
+++        paused = []
+++
+++        class FakeCurl:
+++            def pause(self, flags):
+++                paused.append(flags)
+++
+++        chunks: list[bytes] = []
+++        buf = self.make_buffer(FakeCurl(), chunks.append)
+++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 4):
+++            self.assertEqual(buf.write(b"hello"), 5)
+++            self.assertEqual(buf.write(b"world"), pycurl.WRITEFUNC_PAUSE)
+++        buf.flush()
+++        self.assertEqual(chunks, [b"hello"])
+++        self.assertEqual(paused, [pycurl.PAUSE_CONT])
+++        self.assertEqual(self.timeouts_requested, [0])
+++
+++    def test_body_too_large(self):
+++        # Exceeding the client's max_body_size makes write() report a short
+++        # write, which libcurl turns into a failed transfer, and records why
+++        # so that _finish can say so.
+++        class FakeCurl:
+++            def pause(self, flags):
+++                raise AssertionError("should not pause")
+++
+++        chunks: list[bytes] = []
+++        buf = self.make_buffer(FakeCurl(), chunks.append)
+++        self.client.max_body_size = 8
+++        self.assertEqual(buf.write(b"12345"), 5)
+++        self.assertFalse(buf.body_too_large)
+++        # 5 + 5 > 8, so this chunk is refused rather than truncated.
+++        self.assertEqual(buf.write(b"67890"), 0)
+++        self.assertTrue(buf.body_too_large)
+++        buf.flush()
+++        self.assertEqual(chunks, [b"12345"])
+++
+++    def test_unpause_error_is_ignored(self):
+++        # When a transfer fails while it is paused, libcurl reports the
+++        # failure from curl_easy_pause instead of from the write callback.
+++        # That is not an error in the flush itself, and must not be raised
+++        # into the IOLoop: _finish will pass the failure to the callback.
+++        class FakeCurl:
+++            def pause(self, flags):
+++                raise pycurl.error(pycurl.E_WRITE_ERROR, "write error")
+++
+++        chunks: list[bytes] = []
+++        buf = self.make_buffer(FakeCurl(), chunks.append)
+++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 4):
+++            self.assertEqual(buf.write(b"hello"), 5)
+++            # The buffer is full, so this chunk is left with libcurl.
+++            self.assertEqual(buf.write(b"world"), pycurl.WRITEFUNC_PAUSE)
+++        self.assertTrue(buf.paused)
+++        buf.flush()
+++        self.assertEqual(chunks, [b"hello"])
+++        self.assertFalse(buf.paused)
+++        # A failed unpause is not worth a socket_action.
+++        self.assertEqual(self.timeouts_requested, [])
++diff --git a/tornado/test/httpclient_test.py b/tornado/test/httpclient_test.py
++index f009f190..46300200 100644
++--- a/tornado/test/httpclient_test.py
+++++ b/tornado/test/httpclient_test.py
++@@ -1,17 +1,22 @@
++ import base64
++ import binascii
+++import contextlib
++ from contextlib import closing
++ import copy
+++import functools
++ import gzip
+++import logging
++ import threading
++ import datetime
++ from io import BytesIO
++ import subprocess
++ import sys
++ import time
+++import tracemalloc
++ import typing  # noqa: F401
++ import unicodedata
++ import unittest
+++import zlib
++ 
++ from tornado.escape import utf8, native_str, to_unicode, json_encode, json_decode
++ from tornado import gen
++@@ -28,7 +33,7 @@ from tornado.iostream import IOStream
++ from tornado.log import gen_log, app_log
++ from tornado import netutil
++ from tornado.testing import AsyncHTTPTestCase, bind_unused_port, gen_test, ExpectLog
++-from tornado.test.util import ignore_deprecation
+++from tornado.test.util import abstract_base_test, ignore_deprecation
++ from tornado.web import Application, RequestHandler, url
++ from tornado.httputil import format_timestamp, HTTPHeaders
++ 
++@@ -161,12 +166,108 @@ class EchoHeadersHandler(RequestHandler):
++         self.write(json_encode(dict(self.request.headers.get_all())))
++ 
++ 
+++# Decompressed size of the response served by `GzipBombHandler`. Kept below
+++# every implementation's default ``max_body_size`` of 100MB so that a
+++# streaming_callback can retrieve the whole thing; raising it past that limit
+++# would turn this into a test of the limit instead (see
+++# `HTTPClientMaxBodySizeTestCase`).
+++GZIP_BOMB_SIZE = 64 * 1024 * 1024
+++
+++
+++# Decompressed size of the bomb used for the buffered (no
+++# streaming_callback) case. Larger than any implementation is willing to
+++# hold in memory, so such a request cannot complete and can only be
+++# refused.
+++UNBUFFERABLE_BOMB_SIZE = 256 * 1024 * 1024
+++
+++
+++@functools.lru_cache(maxsize=None)
+++def gzip_bomb(size: int = GZIP_BOMB_SIZE) -> bytes:
+++    """Returns a small gzip stream that expands to ``size`` bytes.
+++
+++    Compressed incrementally so that building it does not itself allocate
+++    the decompressed size.
 ++    """
-++    url = url.strip("".join(chr(i) for i in range(0x21)))
-++    url = url.replace("\t", "").replace("\n", "").replace("\r", "")
-++    return url.replace("\\", "/")
+++    compressor = zlib.compressobj(9, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
+++    block = b"\0" * (1024 * 1024)
+++    pieces = [compressor.compress(block) for _ in range(size // len(block))]
+++    pieces.append(compressor.flush())
+++    return b"".join(pieces)
 ++
 ++
-+ def _is_protocol_relative(url: str) -> bool:
-+     """Returns True if a browser would treat ``url`` as a protocol-relative URL.
-+ 
-+     A protocol-relative URL (``//example.com/path``) names a host, so redirecting
-+-    to one that was built from untrusted input is an open redirect. Browsers
-+-    follow the WHATWG URL spec, which strips leading control characters and
-+-    spaces, removes tabs and newlines anywhere in the URL, and treats backslashes
-+-    like forward slashes, so a plain ``startswith("//")`` check is not enough.
-++    to one that was built from untrusted input is an open redirect.
-+     """
-+-    url = url.lstrip("".join(chr(i) for i in range(0x21)))
-+-    url = url.replace("\t", "").replace("\n", "").replace("\r", "")
-+-    return url[:1] in ("/", "\\") and url[1:2] in ("/", "\\")
-++    return _normalize_url_like_browser(url).startswith("//")
+++# A 421-byte brotli stream that expands to BROTLI_BOMB_SIZE bytes of zeros,
+++# a ratio of ~637000:1 (deflate cannot exceed ~1032:1). Embedded as a
+++# constant so that the test suite does not need a brotli module for Python.
+++# Regenerate with:
+++#     import base64, brotli
+++#     base64.b64encode(brotli.compress(b"\0" * BROTLI_BOMB_SIZE, quality=11))
+++BROTLI_BOMB_SIZE = 256 * 1024 * 1024
+++BROTLI_BOMB = base64.b64decode(
+++    "y///P/gnAOKxQCD3/o///3/wTwDEYRGA7v0f////4J8AiMMCAN37P/7//8E/ARCHBQC6"
+++    "93/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f/BMAcVgA"
+++    "oHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7//8E/ARCH"
+++    "BQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f/BMA"
+++    "cVgAoHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7//8E/"
+++    "ARCHBQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f"
+++    "/BMAcVgAoHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7/"
+++    "/8E/ARCHBQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j"
+++    "//8f/BMAcVgAoHv/Nw=="
+++)
 ++
 ++
-++def _scheme_and_netloc(url: str) -> tuple[str, str]:
-++    """Returns the scheme and netloc a browser would see in ``url``.
+++@functools.lru_cache(maxsize=None)
+++def large_body() -> bytes:
+++    """Returns a body big enough to be delivered in several chunks.
 ++
-++    The netloc includes the user info and port as well as the host.
-++
-++    Both are empty for a relative URL. Raises `ValueError` for some malformed
-++    URLs.
+++    The contents are non-repeating so that a chunk which was dropped,
+++    duplicated or delivered out of order can be detected.
 ++    """
-++    parts = urllib.parse.urlsplit(_normalize_url_like_browser(url))
-++    return parts.scheme.lower(), parts.netloc.lower()
+++    return b"".join(b"%09d\n" % i for i in range(100000))
+++
+++
+++class GzipBombHandler(RequestHandler):
+++    """Sends a small response that decompresses to a very large one."""
+++
+++    def get(self):
+++        size = int(self.get_argument("size", str(GZIP_BOMB_SIZE)))
+++        # Set Content-Encoding manually to avoid automatic gzip encoding.
+++        self.set_header("Content-Encoding", "gzip")
+++        self.write(gzip_bomb(size))
+++
+++
+++class BrotliBombHandler(RequestHandler):
+++    """Sends a brotli-encoded bomb that the client never asked for.
+++
+++    No client implementation requests brotli, but libcurl builds its decoder
+++    from the ``Content-Encoding`` of the response without checking it against
+++    what was requested, so ``curl_httpclient`` decodes this anyway.
+++    """
+++
+++    def get(self):
+++        self.set_header("Content-Encoding", "br")
+++        self.write(BROTLI_BOMB)
+++
+++
+++class LargeBodyHandler(RequestHandler):
+++    def get(self):
+++        # An incompressible content type, so that the server's gzip
+++        # transform leaves the body alone and this exercises the plain
+++        # streaming path.
+++        self.set_header("Content-Type", "application/octet-stream")
+++        self.write(large_body())
+++
+++
++ # These tests end up getting run redundantly: once here with the default
++ # HTTPClient implementation, and then again in each implementation's own
++ # test suite.
++ 
++ 
++ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
+++    # Set by subclasses whose client decodes ``Content-Encoding: br``. No
+++    # implementation asks for brotli, so this is only true where the client
+++    # decodes an encoding it did not request (see BrotliBombHandler).
+++    decompresses_brotli = False
+++
++     def get_app(self):
++         return Application(
++             [
++@@ -187,6 +288,9 @@ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
++                 url("/invalid_gzip", InvalidGzipHandler),
++                 url("/header-encoding", HeaderEncodingHandler),
++                 url("/echo_headers", EchoHeadersHandler),
+++                url("/gzip_bomb", GzipBombHandler),
+++                url("/brotli_bomb", BrotliBombHandler),
+++                url("/large_body", LargeBodyHandler),
++             ],
++             gzip=True,
++         )
++@@ -228,6 +332,91 @@ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
++         self.assertEqual(chunks, [b"Hello world!"])
++         self.assertFalse(response.body)
++ 
+++    def test_streaming_callback_large_body(self):
+++        # A body large enough to arrive in several chunks must reach the
+++        # callback exactly once each, in order.
+++        chunks: list[bytes] = []
+++        response = self.fetch("/large_body", streaming_callback=chunks.append)
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(b"".join(chunks), large_body())
+++        self.assertFalse(response.body)
+++
+++    def test_streaming_decompression_bomb(self):
+++        # A malicious server can turn a small compressed response into an
+++        # arbitrarily large decompressed one. With a streaming_callback it
+++        # must be possible to consume the whole thing without the client
+++        # buffering more than a bounded amount of it at a time.
+++        gzip_bomb()  # Precompute so it isn't counted in the measurement.
+++        received = 0
+++
+++        def streaming_callback(chunk):
+++            nonlocal received
+++            received += len(chunk)
+++
+++        tracemalloc.start()
+++        try:
+++            tracemalloc.reset_peak()
+++            response = self.fetch("/gzip_bomb", streaming_callback=streaming_callback)
+++            peak = tracemalloc.get_traced_memory()[1]
+++        finally:
+++            tracemalloc.stop()
+++
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(received, GZIP_BOMB_SIZE)
+++        self.assertFalse(response.body)
+++        self.assertLess(peak, 16 * 1024 * 1024)
+++
+++    def test_decompression_bomb_without_streaming_callback(self):
+++        # Without a streaming_callback the whole body has to be buffered, so
+++        # a bomb this size cannot be retrieved at all. It has to be refused
+++        # before it exhausts memory rather than buffered in full.
+++        gzip_bomb(UNBUFFERABLE_BOMB_SIZE)  # Precompute.
+++
+++        tracemalloc.start()
+++        try:
+++            tracemalloc.reset_peak()
+++            with self.assertRaises(HTTPError):
+++                self.fetch(
+++                    "/gzip_bomb?size=%d" % UNBUFFERABLE_BOMB_SIZE, raise_error=True
+++                )
+++            peak = tracemalloc.get_traced_memory()[1]
+++        finally:
+++            tracemalloc.stop()
+++
+++        # Well short of the decompressed size: the point is that the body
+++        # was refused, not accumulated.
+++        self.assertLess(peak, UNBUFFERABLE_BOMB_SIZE // 2)
+++
+++    def test_streaming_unsolicited_brotli_bomb(self):
+++        # A client that decodes an encoding it did not request can be
+++        # reached by a codec whose expansion ratio is hundreds of times
+++        # deflate's. The transfer need not survive -- libcurl aborts it once
+++        # its own pause buffer cannot hold the expansion -- but either way
+++        # the expansion must not be buffered.
+++        if not self.decompresses_brotli:
+++            self.skipTest("client does not decompress Content-Encoding: br")
+++        received = 0
+++
+++        def streaming_callback(chunk):
+++            nonlocal received
+++            received += len(chunk)
+++
+++        tracemalloc.start()
+++        try:
+++            tracemalloc.reset_peak()
+++            try:
+++                self.fetch("/brotli_bomb", streaming_callback=streaming_callback)
+++            except HTTPError:
+++                pass
+++            peak = tracemalloc.get_traced_memory()[1]
+++        finally:
+++            tracemalloc.stop()
+++
+++        # More than was sent on the wire, i.e. the response really was
+++        # decoded with an encoding we never asked for.
+++        self.assertGreater(received, len(BROTLI_BOMB))
+++        self.assertLess(peak, 16 * 1024 * 1024)
+++
++     def test_post(self):
++         response = self.fetch("/post", method="POST", body="arg1=foo&arg2=bar")
++         self.assertEqual(response.code, 200)
++@@ -1017,3 +1206,121 @@ class HTTPErrorTestCase(unittest.TestCase):
++         e = cm.exception
++         self.assertEqual(str(e), "HTTP 403: Forbidden")
++         self.assertEqual(repr(e), "HTTP 403: Forbidden")
+++
+++
+++# Limit used by `HTTPClientMaxBodySizeTestCase`. Subclasses configure their
+++# client with it.
+++MAX_BODY_SIZE = 1024 * 64
+++
+++
+++class MaxBodySizeSmallHandler(RequestHandler):
+++    def get(self):
+++        self.set_header("Content-Type", "application/octet-stream")
+++        self.write(b"a" * MAX_BODY_SIZE)
+++
+++
+++class MaxBodySizeLargeHandler(RequestHandler):
+++    def get(self):
+++        self.set_header("Content-Type", "application/octet-stream")
+++        self.write(b"a" * (MAX_BODY_SIZE + 1))
+++
+++
+++class BodyBearingRedirectHandler(RequestHandler):
+++    """A redirect carrying a body of its own, larger than the limit.
+++
+++    Implementations differ here: libcurl discards the body of a redirect it
+++    follows, while simple_httpclient applies ``max_body_size`` to every
+++    response including the redirect, and so refuses this one before
+++    following it.
+++    """
+++
+++    def prepare(self):
+++        self.write("x" * (MAX_BODY_SIZE * 2))
+++        self.redirect("/small")
+++
+++
+++@abstract_base_test
+++class HTTPClientMaxBodySizeTestCase(AsyncHTTPTestCase):
+++    """Tests for the limit on a response body held in memory.
+++
+++    Without a ``streaming_callback`` the whole body is buffered, so a
+++    response larger than the client is prepared to hold cannot be retrieved
+++    at all -- it can only be refused. Subclasses supply a client configured
+++    with `MAX_BODY_SIZE`.
+++    """
+++
+++    # Format of the message the implementation logs to `.gen_log` when it
+++    # refuses a body, or None if it does not log one. ``{reason}`` is filled
+++    # in with why the body was refused.
+++    refusal_log_format = None  # type: typing.Optional[str]
+++
+++    def get_app(self):
+++        return Application(
+++            [
+++                url("/small", MaxBodySizeSmallHandler),
+++                url("/large", MaxBodySizeLargeHandler),
+++                url("/bomb", GzipBombHandler),
+++                url("/body_bearing_redirect", BodyBearingRedirectHandler),
+++            ]
+++        )
+++
+++    def assert_refused(self, path, reason, **fetch_kwargs):
+++        with contextlib.ExitStack() as stack:
+++            if self.refusal_log_format is not None:
+++                stack.enter_context(
+++                    ExpectLog(
+++                        gen_log,
+++                        self.refusal_log_format.format(reason=reason),
+++                        level=logging.INFO,
+++                    )
+++                )
+++            with self.assertRaises(HTTPError) as cm:
+++                self.fetch(path, raise_error=True, **fetch_kwargs)
+++        self.assertEqual(cm.exception.code, 599)
+++
+++    def assert_streaming_refused(self, path, reason):
+++        received = 0
+++
+++        def streaming_callback(chunk):
+++            nonlocal received
+++            received += len(chunk)
+++
+++        self.assert_refused(path, reason=reason, streaming_callback=streaming_callback)
+++        # Nothing past the limit reached the callback.
+++        self.assertLessEqual(received, MAX_BODY_SIZE)
+++
+++    def test_small_body(self):
+++        # A body of exactly max_body_size is accepted.
+++        response = self.fetch("/small")
+++        response.rethrow()
+++        self.assertEqual(response.body, b"a" * MAX_BODY_SIZE)
+++
+++    def test_large_body(self):
+++        # One byte more is not.
+++        self.assert_refused("/large", reason="Content-Length too long")
+++
+++    def test_decompressed_body_size(self):
+++        # The limit is measured after decompression, so a compressed
+++        # response cannot expand past it.
+++        self.assert_refused("/bomb", reason="decompressed body too large")
+++
+++    def test_streaming_callback_over_limit(self):
+++        # max_body_size applies to a streaming_callback as well as to a
+++        # buffered response. It is a safeguard for applications that do not
+++        # impose a limit of their own on what they do with the chunks
+++        # (writing them to disk, say), so retrieving a response larger than
+++        # this means raising the limit deliberately.
+++        self.assert_streaming_refused("/large", reason="Content-Length too long")
+++
+++    def test_streaming_callback_decompressed_over_limit(self):
+++        # As above, measured after decompression.
+++        self.assert_streaming_refused("/bomb", reason="decompressed body too large")
+++
+++    def test_reuse_after_refusal(self):
+++        # Refusing a body must not leave the client unable to make the next
+++        # request. This matters most for curl_httpclient, which reuses a
+++        # pool of curl handles.
+++        self.assert_refused("/large", reason="Content-Length too long")
+++        response = self.fetch("/small")
+++        response.rethrow()
+++        self.assertEqual(response.body, b"a" * MAX_BODY_SIZE)
++diff --git a/tornado/test/simple_httpclient_test.py b/tornado/test/simple_httpclient_test.py
++index a40435e8..03da1c34 100644
++--- a/tornado/test/simple_httpclient_test.py
+++++ b/tornado/test/simple_httpclient_test.py
++@@ -789,34 +789,13 @@ class MaxHeaderSizeTest(AsyncHTTPTestCase):
++                 self.fetch("/large", raise_error=True)
++ 
++ 
++-class MaxBodySizeTest(AsyncHTTPTestCase):
++-    def get_app(self):
++-        class SmallBody(RequestHandler):
++-            def get(self):
++-                self.write("a" * 1024 * 64)
++-
++-        class LargeBody(RequestHandler):
++-            def get(self):
++-                self.write("a" * 1024 * 100)
++-
++-        return Application([("/small", SmallBody), ("/large", LargeBody)])
+++class SimpleHTTPClientMaxBodySizeTestCase(
+++    httpclient_test.HTTPClientMaxBodySizeTestCase
+++):
+++    refusal_log_format = "Malformed HTTP message from None: {reason}"
++ 
++     def get_http_client(self):
++-        return SimpleAsyncHTTPClient(max_body_size=1024 * 64)
++-
++-    def test_small_body(self):
++-        response = self.fetch("/small")
++-        response.rethrow()
++-        self.assertEqual(response.body, b"a" * 1024 * 64)
++-
++-    def test_large_body(self):
++-        with ExpectLog(
++-            gen_log,
++-            "Malformed HTTP message from None: Content-Length too long",
++-            level=logging.INFO,
++-        ):
++-            with self.assertRaises(HTTPStreamClosedError):
++-                self.fetch("/large", raise_error=True)
+++        return SimpleAsyncHTTPClient(max_body_size=httpclient_test.MAX_BODY_SIZE)
++ 
++ 
++ class MaxBufferSizeTest(AsyncHTTPTestCase):
 +-- 
 +2.35.6
 +
 diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-index 87b6721320..dd61da78be 100644
+index a1b016d818..2888090884 100644
 --- a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
 +++ b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-@@ -19,6 +19,9 @@ SRC_URI += "file://CVE-2026-91990.patch \
-             file://CVE-2026-116577_p1.patch \
-             file://CVE-2026-116577_p2.patch \
-             file://CVE-2026-116577_p3.patch \
-+            file://CVE-2026-116578_p1.patch \
-+            file://CVE-2026-116578_p2.patch \
-+            file://CVE-2026-116578_p3.patch \
+@@ -12,6 +12,7 @@ SRC_URI += "file://CVE-2026-91990.patch \
+             file://CVE-2026-82397.patch \
+             file://CVE-2026-91991.patch \
+             file://CVE-2026-103261.patch \
++            file://CVE-2026-103262.patch \
  "
  
  inherit pypi python_setuptools_build_meta
