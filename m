@@ -1,107 +1,64 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1157.1793898743034473729
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1700.1793900005037658075
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 09:12:23 -0800
+ Thu, 05 Nov 2026 09:33:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=DaOV8dJV;
- spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a20bde60a0so19926695e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 09:12:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793898741; x=1794503541; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=YJe3R0jQCT/KyXGee4bO8bIuQ0ShdXFgAZueHz463n4=;
-        b=DaOV8dJVWr7lkZTo+Olh9/D+QXjTTz90psYRS46mGi0JPkdg48kgem4vzKfIqhvZfx
-         kj9UZ7aa2uiGgfMPlFGkR/I+mMYvSihgsEfhXxKvfXkOC0X+OuRqPINTnI3FZtx/cHOD
-         E81NR9kIjqLxn9Syjzu/RsMK2FbJ5aD7AP8xw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793898741; x=1794503541;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YJe3R0jQCT/KyXGee4bO8bIuQ0ShdXFgAZueHz463n4=;
-        b=hip26ZWc88yYzzwGFg8kM7AGiEA9PZIrtXu2Qua53CpEDQiuCGcWlnWEwuMHTzWUid
-         c6zPVWfxTwZaZt++ILpDaZvuUAYC7LP600IWYJy+1/IGu/6P85rm3pIqBDGOXfiahD77
-         OztDJPznN3SALta7I0fjAJPvSsPqKV0QM16t5895fPeaIcJCvZATAgUKWGj64/7tes3K
-         8NjUN7QN+S7RUGLjtusC64QrVfckeEDjzILpP201zpVE6VgpKEmq7RDh7IgqXNbZdIRV
-         ijc5Cq4YbhztiQUZoip7inwoBf1Nxi2lkwKjxjn38oBbG7GkRoNDhcdywUIYKyt8qEZL
-         vfmA==
-X-Gm-Message-State: APuU4Z8NySR2Ji8LsdWEFI0trz1Qpu+Jjx3XzFC2PA91apfTp+A9mr8o
-	rC9VhDYcXU+WDyfyxv+37SfO+nb8X1R3CR4PHyGPGCAxhcsB42wRCs9otUXuMZ+8E7/KH9NOSKe
-	vN168
-X-Gm-Gg: AYBFou21QPklfglnnfwm6XCvbSLy18X5edhOWtAdkImJCJ+onP/mpTxNRFmWjS7MHcH
-	BQijrTylmaOy/WXFvrIOn6UQbF159Et5MHuaZ98cpeuFwAVcYMTnSY5AyVAhKagukVLcLCxAoT3
-	PxYJUYi3dk7gq9yQJaRv0O/nBlJR0PtY+TMF8Z2fApfhz+SF3X8czGWgxXITFSnbtR8wRcYSMq1
-	aOi3LktP6Fbz0O2gYhNfQ6Z6kVpn2Hms9y60DMGcxjnrg47Pcrzl9Lwd6YIonnoH1WCEa/28TOJ
-	XDtpxN1JIMGfrMDhPgJOIBRzYMhGoH8LHDK70+40vXUL3lxUfQIrNrZMlIFtKicYvMWMQtqMgHl
-	CHX5TivyEmv1BEScJWx9OpjBwbMcfWgNRQ3dsCHLbFDz94zpCbnWmU4i+N/Y19dqsMmED0fTSS8
-	U1e75g+S/L8IpDpocfrqx6JqE2ZLlh/iMeyObsOqmmabhLr0sbFWAwlTsp/Uw27EObbQObZWq7d
-	1AQDGq+x7qPLttn2g+9veMHdMGKsCRHOC0eMzFmC7KZpJMj3FYWYE7ofUE51jZGiQPmtdKf65jF
-	BVL/8y4qsDA+9K+83eBNxumbhjDMzqdeJKBDNPnM2fuBx/2/zsPoDNbIcKamVlxUBsDNRk7tang
-	bpPSdaTOYx9jB9ZJiuMdNOWNFFrGeIjV2spE+WVwzwQdaEP08f69sIg==
-X-Received: by 2002:a05:600d:82f2:b0:4af:c210:5b3f with SMTP id 5b1f17b1804b1-4afc2105bf0mr348291525e9.24.1793898740502;
-        Thu, 05 Nov 2026 09:12:20 -0800 (PST)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4533873f0sm149901595e9.4.2026.11.05.09.12.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 09:12:19 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=eZvXvmEx;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20261105173321bb4fbd786600020752-qhhzsa@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20261105173321bb4fbd786600020752
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 05 Nov 2026 18:33:21 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=Z4jGoV4EsexaxY85Nu3J4EWFkpFl507bqREVhF8UIDA=;
+ b=eZvXvmExtWx1c189ECwFLvFEDjwZMYbKdBc2b5mBWeWk8itsjf9nceNJemgZWC8/B0ogwR
+ 5Fo0hMZo76lUjq+KFPMwACmRu9n7B/W7iTMyZOrgGwxquYtJoaDSMNdWI82d+SSXQo0wC8WA
+ 9cQqyUKLHbhBDcR94KDlkrj6PUQse0tbxJ+DO6gyW4J318UfazKqrCSNoupkkBgfCeFmRfJE
+ xiVb9YyQSQUOig2kA0Th8IHs84tP3Z8vQroVpBLtzfGPOP+xUNBPIjVfq7VD75a3mQq/61w9
+ +2zEv1bl5Lqvto4T6bCrQri/S3SMdJF+OaPBJSzabTpZRxg5ujlLdZng==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCHv2] opensc: add PACKAGECONFIG for ctapi
-Date: Thu,  5 Nov 2026 19:12:17 +0200
-Message-ID: <20261105171217.659747-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH 1/2] crow: upgrade 1.3.2 -> 1.3.3
+Date: Thu,  5 Nov 2026 18:32:59 +0100
+Message-ID: <20261105173300.406894-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 17:12:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131925
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 17:33:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131926
 Content-Type: text/plain; charset="utf-8"
 
-Add a PACKAGECONFIG option for OpenSC's CT-API reader driver so it
-can be enabled without modifying the recipe, e.g. from local.conf:
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-PACKAGECONFIG:pn-opensc = "ctapi"
+Changelog:
+https://github.com/CrowCpp/Crow/releases/tag/v1.3.3
 
-Please note that OpenSC's configure allows only one reader driver:
-
-Only one of --enable-pcsc, --enable-cryptotokenkit,
---enable-openct, --enable-ctapi can be specified!
-
-So to use it, ctapi should replace the default pcsc rather than
-being just added to it. Not enabled by default. Existing builds are
-unaffected.
-
-The patch also removes --disable-ctapi from EXTRA_OECONF.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(From OE-Core rev: 6034c7f14f1929d25ad73389e4b76639c9d0545b)
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-support/opensc/opensc_0.27.1.bb | 2 +-
+ meta-oe/recipes-support/crow/{crow_1.3.2.bb => crow_1.3.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/crow/{crow_1.3.2.bb => crow_1.3.3.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-index 70406513ad..fdcf003842 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
-@@ -23,7 +23,6 @@ CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
- inherit autotools pkgconfig bash-completion
+diff --git a/meta-oe/recipes-support/crow/crow_1.3.2.bb b/meta-oe/recipes-support/crow/crow_1.3.3.bb
+similarity index 92%
+rename from meta-oe/recipes-support/crow/crow_1.3.2.bb
+rename to meta-oe/recipes-support/crow/crow_1.3.3.bb
+index 09970fcfc2..da8da60aea 100644
+--- a/meta-oe/recipes-support/crow/crow_1.3.2.bb
++++ b/meta-oe/recipes-support/crow/crow_1.3.3.bb
+@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e08502e395a6f7c037ddfe7d2915f58e"
  
- EXTRA_OECONF = " \
--    --disable-ctapi \
-     --disable-doc \
-     --disable-static \
-     --disable-strict \
-@@ -39,6 +38,7 @@ PACKAGECONFIG[openct] = "--enable-openct,--disable-openct,openct"
- PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite,pcsc-lite pcsc-lite-lib"
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[notify] = "--enable-notify,--disable-notify,glib-2.0"
-+PACKAGECONFIG[ctapi] = "--enable-ctapi,--disable-ctapi"
+ SRC_URI = "git://github.com/CrowCpp/Crow.git;protocol=https;branch=v1.3;tag=v${PV}"
+-SRCREV = "f8c060c51feeca2c65828fb6f538603db4392d55"
++SRCREV = "7375d3dc1ffb8719778cdb29fb1c73141ce684e8"
  
- FILES:${PN} += "\
-     ${libdir}/opensc-pkcs11.so \
--- 
-2.47.3
-
+ inherit cmake
+ 
