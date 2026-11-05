@@ -1,94 +1,110 @@
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20039.1793826730676183170
+Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.27110.1793853140359009096
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 13:12:10 -0800
+ Wed, 04 Nov 2026 20:32:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=qNQ9fNSU;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20261104211208fa75e439dd000207db-rnurtk@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20261104211208fa75e439dd000207db
-        for <openembedded-devel@lists.openembedded.org>;
-        Wed, 04 Nov 2026 22:12:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=t2Kd5lieODweGCSvZ2DUVCYBnDKXEQRLJCJuyNQk50s=;
- b=qNQ9fNSUJyegg87/0KCbcZ+QetCZSMXRrXKNA7QDlro/af7eFIPd+vZSFIRf0UTPS7T52d
- MkT/8FjfWdnBiMRYo84YK3dhbc5D00dIEcNfXFDe4QTJQPTbO/zqD9e1HjohTH4sd5l/zgoE
- hFO+VSzrfFWD8ppsQ4d4XdEELUIfxGrI+ud2TwasROfEFyk7lkDHwUEmdj5dzlH6IFrm4h4w
- dur8nU1a9kxm5x6TK34ZKGBFPfpeebAwaZpHX9lF8F6v3mHX5XgxVFWz2eKF9nfhSSFCe/QJ
- DGBRTehLXfHczoFPfshpq9F5Ygjkp97P0Y6AWpnamAPOtSH3dDYyrLzw==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=e87MR1+i;
+ spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: hthakar@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=1436; q=dns/txt;
+  s=iport01; t=1793853140; x=1795062740;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=L9E4Y+PR5+0bz9KrRTr+/UOBFy6UUyVV3KxPXmTQnS8=;
+  b=e87MR1+iUSki8keVYVzwnC7LY8E5NZGW/VVbHAjepUdxON5UlusNvRJf
+   JpZTzxf9PQGybFpMVi7WOwoOrZp7gfwWuQfg1p/PAhx0MzolIpJt12Iex
+   rdpSaHlxDUKKdGETmgi6fPBH6DQFND7TKAHgJMybMw2LblZs3dyN/i3mv
+   cUPmQTFclSxMEANlKhy7HZxeLPbbkHV5tK8Yk4aE3hnHhxX0nDkvjLN9r
+   6jIBNt1FP2I8em92VBFtP4im1sxkVnw1udF3iFKjNL6tGD1/8HCmRPo6Z
+   h5A7MXPry47I9IjVFnjAKO0yOMR9QzyZpXPpeTx7j49FAgNUb62mPte9v
+   w==;
+X-CSE-ConnectionGUID: CANeh64kT6Go+ZM67kAcTg==
+X-CSE-MsgGUID: RVH5c4dtRdKn/CZovmJfFg==
+X-IPAS-Result: =?us-ascii?q?A0AzAwBmBuxq/5D/Ja1aglmCV3VgQ0mTWgFPgiGLaJQ6D?=
+ =?us-ascii?q?wEBAQ89FAQBAZMjAiY3Bg4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZPDZBACwEYAV1RC0SDAgGCOgM3AxEGvF6BeTOBAYMpAUNBUNhMDYJaA?=
+ =?us-ascii?q?QsUAYE4hUCCf4UkdQGEfScbG4FyhH6CH0IDgSaBBoV5BIMcEo5yiERIgR4DW?=
+ =?us-ascii?q?SwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEegRKBB12BKyheIYEIg?=
+ =?us-ascii?q?XYCglGCAAIBSUEOB0VTCSVDEkckIggSCQETGiwKgRo1PAkmPxUMZAsaBWEIA?=
+ =?us-ascii?q?g0McjkQMB4kLwUcJkAbChgYDUgRLDcVGQQ+bgeSL4MRYS0qAoI9k2qRe6Agc?=
+ =?us-ascii?q?Qoog3iMJI8+hXwaM6pxmQiOCoQKkkeEaYF+JoFZcBWDIglKGQ+XN8lEJjICA?=
+ =?us-ascii?q?QE5AQEHAgcOAwuBaJAAgX4BAQ?=
+IronPort-Data: A9a23:2IKytK2S1QbX6Ws9q/bD5YJwkn2cJEfYwER7XKvMYLTBsI5bp2ACn
+ GQZDzrXOf/fazfxcosgO9uy/R8Dv8DTn943Hgs43Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7gmcsbjpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGJ2gQMI1GpuVLX05Jt
+ s49dm8ORxu/iLfjqF67YrEEasULNsLnOsYb/3pn1zycValgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUicC/FMEg9/5JYWnPuoj3r2aRVTqUmeouw85G27IAlZjeOzaoSNIozULSlTtnymh
+ j/No2jlOB05Mpu0+z2b91CiqOCayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7GQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:g2zbtalWbG1IYX2CIPlorXkZIE3pDfIc3DAbv31ZSRFFG/Fw8P
+ re/sjzuiWbtN98YhwdcLO7Scq9qA3nlKKdiLN5VdzJYOCMggSVxe9ZgbcKuweBJwTOsshAyK
+ xnb69yTPf0DVR8kILGxTPQKadE/DFCm5rY4ts3CBxWPGVXV50=
+X-Talos-CUID: 9a23:6GtqzGAWpYbNiRz6EwJO0kMURJwmTiPyyzTiBhHnCk9idLLAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3Ab1Pgyw7T8cs3icSIe32CiKHZxoxS3YTzAxwBja8?=
+ =?us-ascii?q?KmM/DHh53JTK/ghq4F9o=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
+   d="scan'208";a="536260086"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 04:32:17 +0000
+Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 674B518000206
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 04:32:17 +0000 (GMT)
+Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
+	id 10660CC1611; Wed,  4 Nov 2026 20:32:17 -0800 (PST)
+From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH] libwebsockets: patch CVE-2026-114550
-Date: Wed,  4 Nov 2026 22:11:50 +0100
-Message-ID: <20261104211150.2291802-1-peter.marko@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] wireshark: upgrade 4.6.8 -> 4.6.9
+Date: Wed,  4 Nov 2026 20:32:17 -0800
+Message-Id: <20261105043217.106970-1-hthakar@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 21:12:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131850
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 04:32:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131851
 Content-Type: text/plain; charset="utf-8"
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Pick patch mentioned in NVD CVE report.
+Release Notes:
+https://www.wireshark.org/docs/relnotes/wireshark-4.6.9.html
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit 650ced113c1219cecafb8f3084988abaaab49904)
+Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../libwebsockets/CVE-2026-114550.patch       | 31 +++++++++++++++++++
- .../libwebsockets/libwebsockets_4.3.10.bb     |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-114550.patch
+ .../wireshark/{wireshark_4.6.8.bb => wireshark_4.6.9.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.6.8.bb => wireshark_4.6.9.bb} (97%)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-114550.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-114550.patch
-new file mode 100644
-index 0000000000..950f46ba76
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-114550.patch
-@@ -0,0 +1,31 @@
-+From c9e8e1834d7f13038c82963086b90e2ee9c5b44c Mon Sep 17 00:00:00 2001
-+From: Andy Green <andy@warmcat.com>
-+Date: Fri, 17 Jul 2026 05:02:06 +0100
-+Subject: [PATCH] ZDI-CAN-31039: enter wrong state
-+
-+When handling LMQCPP_PUBACK_PROPERTIES_LEN_VBI/COMPLETED
-+
-+This vulnerability was discovered by:
-+Anonymous working with TrendAI Zero Day Initiative
-+
-+CVE: CVE-2026-114550
-+Upstream-Status: Backport [https://github.com/warmcat/libwebsockets/commit/c9e8e1834d7f13038c82963086b90e2ee9c5b44c]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ lib/roles/mqtt/mqtt.c | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/lib/roles/mqtt/mqtt.c b/lib/roles/mqtt/mqtt.c
-+index 85e984015..e743c3812 100644
-+--- a/lib/roles/mqtt/mqtt.c
-++++ b/lib/roles/mqtt/mqtt.c
-+@@ -1228,8 +1228,7 @@ _lws_mqtt_rx_parser(struct lws *wsi, lws_mqtt_parser_t *par,
-+ 				 * Otherwise consume the properties before
-+ 				 * completing the command
-+ 				 */
-+-				lws_mqtt_vbi_init(&par->vbit);
-+-				par->state = LMQCPP_PUBACK_VH_PKT_ID;
-++				par->state = LMQCPP_EAT_PROPERTIES_AND_COMPLETE;
-+ 				break;
-+ 			default:
-+ 				lwsl_notice("%s: puback pr bad vbi\n", __func__);
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-index 1aa1d1a369..78e96531ae 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.10.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3
-           file://CVE-2026-10650.patch \
-           file://CVE-2026-19773.patch \
-           file://CVE-2026-78161.patch \
-+          file://CVE-2026-114550.patch \
-           "
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.8.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.6.8.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+index dd839f081a..1a10eb08e8 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.6.8.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.9.bb
+@@ -31,7 +31,7 @@ SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-bu
  
- UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
+ 
+-SRC_URI[sha256sum] = "c0f1ccf217bc0d3b51a9c03ea178b0f7df682e475da26a2d21cd4a1bdd9579d0"
++SRC_URI[sha256sum] = "d062d416a1ab3a49975aafe3a671c882dde0562ccd71b078808ceb59d465fc0f"
+ 
+ PE = "1"
+ 
+-- 
+2.35.6
+
