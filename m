@@ -1,512 +1,143 @@
-Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28859.1793862502181832854
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29084.1793862646167192253
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 23:08:22 -0800
+ Wed, 04 Nov 2026 23:10:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ekYLDW8x;
- spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: yurade@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=wzQ6Hz7k;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-36d6765756fso1668583eec.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2026 23:10:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=16524; q=dns/txt;
-  s=iport01; t=1793862502; x=1795072102;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=ghknYZT/LCwnuWcdot9v2ImszkDdw0fsl3TXc/tiLso=;
-  b=ekYLDW8xbsqzTBUhHD0oQhT2it1Uo5XoqtsnDaSaGpI1lrpabEVEPCdH
-   r6OHMryPkXy7Hyhoqs3dNkD8GSqjoxWzOZVZ3k62CU3hrtkGlKfLag1jJ
-   f8I32ywMj1dTlltriP0FsJrgdx1K80tVI10MktS+nLv+JMCKNh3Jxm4f8
-   lyDTXwHdDTl2iZuah7RgBHO04fu82yEVJC99q+iq5kkqtjhu5iGb50o+9
-   Qbw6Hj9FbPed5DlpBriT+FaByMqoaFPoIGEpriuqpR3KJCrPo+dUeA+Sq
-   Y6nkbhkUXD2QsaUGJ50tVF8gbVm8Ki/glBkHC5rHNR398B7qLbadUCPK9
-   g==;
-X-CSE-ConnectionGUID: xP+CFfc+RwuJFEKuHicNTA==
-X-CSE-MsgGUID: Nc1oWQlwRc+PmR7aLKMnVQ==
-X-IPAS-Result: =?us-ascii?q?A0BLAgC/Kexq/4//Ja1aglmCGD91YBopSQOUJ4IhA5FMj?=
- =?us-ascii?q?FWBfg8BAQEPRA0EAQGEP0YCjh0CJjQJDgECBAMCAwEBAQEBAQEBAQEBAQoBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4ThhUIMg2QEgECAQMnCwEYAT0cAwECLysjCBmCKlgBgnQDE?=
- =?us-ascii?q?bw+gXkzgQGDKQE/AkNQ2UuBaAELFAGBOIVAiCNdGAGEfScbgUlEgRWDaYEFg?=
- =?us-ascii?q?VwBAQIBiCMEgg2BIYFagQOFPYZYAoFShnFIgR4DWSwBVRMNCgsHBYFoAzUSK?=
- =?us-ascii?q?hVuMh2BIz4XgQcbBgWBHYEegRKBB12BKyheIYEIgXYCglGCAAIBSUEOB0VTC?=
- =?us-ascii?q?SVDEkckIggSCQETGiwKgRo1PAkmPxUMZAsaBWEIAg0McjkQMB4kLwUcJkAbC?=
- =?us-ascii?q?hgYDUgRLDcVGQQ+bgeSL4JxIBY1FgIrASkBARc/Gw4GGy0bRAdEA5JDJBSSL?=
- =?us-ascii?q?aERhCqMJI9ChXgaM4QEgVeSQpJUC5h9jgqVYSADC0KEaYFoPIFHCwczGggbF?=
- =?us-ascii?q?TuCZwlKGQ+DOIpzDguBaIF4gX+CCIEMUch3JjICAQgDLwEBBwIHDgMLgWiRf?=
- =?us-ascii?q?gEB?=
-IronPort-Data: A9a23:KJM/BK6/nC6pqCnlPpsJoAxRtG7GchMFZxGqfqrLsTDasY5as4F+v
- jRKXWrXbq6ONGfyeIx1YNngoUwFsZDSnNBiSQc9pSFgZn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa+1H1dOex9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo/KUzBHf/g2QqaztMt/rZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eLbVb0ch5CiJ06
- uE6Bh0uczCCjMSK6efuIgVsrpxLwMjDJogTvDRkiDreF/tjGc6FSKTR7tge1zA17ixMNa+BP
- IxCNnw1MUmGOkEUUrsUIMpWcOOAl2TlejFVgFmUvqEwpWPUyWSd1ZCwbIGEIo3TGJg9ckCwg
- Gmf+FvABg4gP5+nzADa+1aPo+nxpHauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjZCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1rN94cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:49NdsalJAwyjd3+g0ZmOB1ujCxHpDfIA3DAbv31ZSRFFG/Fw8P
- re+MjzuiWbtN98YhwdcJW7Scq9qBDnhPtICPcqXItKNTOO0ADDEGgh1/qB/9SKIULDH4BmuZ
- uIC5IfNPTASX5nkM39/A60V/wkwNWB7eSUoN229QYLcemvAJsQljuQzW2gYytLeDU=
-X-Talos-CUID: 9a23:sdjnc2B0IBHEAVL6Ezlft2U6FMtmSGLA7ln9AFKYCG1PdJTAHA==
-X-Talos-MUID: 9a23:WkBe0QZJrRl6xOBTkTS1gw5bMNhS6OeWDXpSmLElns+6DHkl
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="543909155"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:08:21 +0000
-Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id 141B618000268
-	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 07:08:21 +0000 (GMT)
-Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id AFDC1CC124A; Wed,  4 Nov 2026 23:08:20 -0800 (PST)
-From: Yogita Urade <yurade@cisco.com>
+        d=gmail.com; s=20260707; t=1793862645; x=1794467445; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EXU1ttBuQwDSc1SMXV2LRnBRmXjN2kfq2v28Yo9mnEs=;
+        b=wzQ6Hz7kBE4HydqNAvtzixGKQu6do/U2XkvR/4n5fE9OcoSFwpPOVHDjumACJLNLh9
+         5Sk0XH1Q3OPQspcfIJuddwjolrRA+Jq4GTr9bGQhMdRe+U5Rvh51qXF+CmH+Q67JdMJw
+         INg/5CeZMn6AhVhdJja7SryI5Vn13qcW5JrZrkvE5IYtLYrkUQOnWDaaKZjFa3vkpk80
+         fnRwZNc1UcqfnWX3Ss8Lvh9On8XRJlLRlesG7d0QZEetRKSfewUXfWKNPFd503hlVAc2
+         RBCKBfpOsOQ6umkZ3jNpb/5obdmjJuIMYn+t+WeujFG7AFC7QShStNdp4hog09eepozS
+         5Yhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793862645; x=1794467445;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=EXU1ttBuQwDSc1SMXV2LRnBRmXjN2kfq2v28Yo9mnEs=;
+        b=lklHMqc9wHA09R2+9Fa49PdzfN5c8eQy1Mgt9uCn5iiknaS9/jxDbiCV90K60ypIo2
+         TaWsgYJyhGXAbhucE7aHS01j0vOvM0xkvqydTE/XC4EgmdPJAo4u+Y8QtZSbiiYxTwkF
+         7hd28KyDyv6Q6iDkZnHuOaW564QHfvDXLJfFJxwmcY4B8f06ECFBo3eerEKlvovlJP94
+         eC6gessAjbP6qnm3Dfa04+Io2zLXfu1D1VLuuCPfu0eF5k5WUa5ODta+aMTH3vJCCGO9
+         Bp4qu4Ib6UEr2CUvidOb21gNdcUc/Mwjmm0yI/8FHSZ7WJ1shav/hM/8PznBvtY3n+09
+         tvfw==
+X-Gm-Message-State: APuU4Z+ZoOa28CJbq+x/SwLryJtq4hFA5IWlEg5wZTDaYh42Sqbtdp1O
+	fvUXWIyPdK7cRRu223AOQAKS/ZRiu+PVgdirJCRJxpSzz/z7uz+rSEfpYxSkPeIVPjI=
+X-Gm-Gg: AYBFou30UrkbzVdSCFSw8CIpmqvve5rSyRJZhgrq5IRepCFm4wHXcZJniuaqzSmr6jy
+	RPgdTlWk7184bNMpPTW5W8tID6gey2ZPqUClaITGuLk+TDnEXRR6BjoGB32eqpxd1+UB70DNhov
+	f+/9SAfxp9FprMc12DGYNfOtsiw6edrIl9EQef/i47fBSDWCWDyBGr2jfyhOVNuYU4/qHdxPGPU
+	EG2PmFzkm6+MiX+KGoBrU1HCoKW20WVOZRnIvkEV9n2A48ChcoDt5avANYSv9oddgsvhSARM2b2
+	tHsz6B8Fq5yEHy1Dw5Yh+7MGfLgGFh/zsPIoJ+JRKvmqUkzK7QeEuRI5z3Kmo7f8TqtYz9GwQlX
+	gUtmviNrSdHGZwbzg2C0S+eRgIv/uZ9rcVjTGLsG75So4sgSMVIK/LXuSmldGmITgaRqfShSiiV
+	0xnzguIaMCOKLYAM8eTQmoa9ZyAyW5ZMR1CQih7jtXR+/1/IwIddR/y6uNXa3WkjJx9yMqH24qz
+	XfKrVtSy0zQia2ATogIFb3hm+QxoHnVbo6M9fc90b1OOQyYug23tA6wtEnARUYmaqmpM/3BbP/O
+	hl/aFMLjRlSoQmU98plmDELjAJLrq0EXfJkM/n6UXNwy7QHIaomLSUP6nZnzQ+gUV7q123Dvo3d
+	/H5GRobSfiibusBz/v0K6Wmdl7A+1CGgcQo5KjG0CQAVv5HsLmtn9OHi0CMDhvPWLjze1vzn9Fs
+	bI06CyrXLoDCr4qAswmGn7DI/DFJx21AwmFLs5LRfJ3MYNPeIYHHENru00X5DKPErsPfOBpZfcF
+	T7comYuo/uX/0qHDfBXOmCsvZ+gf47uLXEu1L5T/8SopdBMOhh38Uv1ULg5UWZvtsLww4Yk8rs0
+	4e1n
+X-Received: by 2002:a05:693c:20c5:10b0:36c:da71:37e0 with SMTP id 5a478bee46e88-36cda807b27mr5986821eec.2.1793862645149;
+        Wed, 04 Nov 2026 23:10:45 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36ca39b3b7esm13132205eec.28.2026.11.04.23.10.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Nov 2026 23:10:44 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH 4/6] python3-tornado: Fix CVE-2026-115927
-Date: Wed,  4 Nov 2026 23:08:17 -0800
-Message-Id: <20261105070819.2086816-5-yurade@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261105070819.2086816-1-yurade@cisco.com>
-References: <20261105070819.2086816-1-yurade@cisco.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 4/4] python3-execnet: Fix test_remote_exec_module_is_removed ptest
+Date: Wed,  4 Nov 2026 23:10:38 -0800
+Message-ID: <20261105071038.2029943-4-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261105071038.2029943-1-khem.raj@oss.qualcomm.com>
+References: <20261105071038.2029943-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-7310.cisco.com [10.30.220.95];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:08:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131864
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:10:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131872
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [2],
-using the commit shown in [1].
+The test is parametrized over gateway types; it imports "remote" from
+its tmp_path and then deletes that directory, but the module stays in
+sys.modules. Every run after the first got the stale module back and
+failed with "OSError: could not get source code". Drop the cached
+module before importing it.
 
-[1] https://github.com/tornadoweb/tornado/commit/ceab33581489751a66fba8566ad6d5960d4b01c8
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-115927
-
-Signed-off-by: Yogita Urade <yurade@cisco.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- .../python3-tornado/CVE-2026-115927.patch     | 397 ++++++++++++++++++
- .../python/python3-tornado_6.5.7.bb           |   1 +
- 2 files changed, 398 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-115927.patch
+ ...hed-remote-module-in-test_remote_exe.patch | 38 +++++++++++++++++++
+ .../python/python3-execnet_2.1.2.bb           |  2 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-execnet/0001-testing-Drop-cached-remote-module-in-test_remote_exe.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-115927.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-115927.patch
+diff --git a/meta-python/recipes-devtools/python/python3-execnet/0001-testing-Drop-cached-remote-module-in-test_remote_exe.patch b/meta-python/recipes-devtools/python/python3-execnet/0001-testing-Drop-cached-remote-module-in-test_remote_exe.patch
 new file mode 100644
-index 0000000000..ffefe9db15
+index 0000000000..23957588c8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-115927.patch
-@@ -0,0 +1,397 @@
-+From ceab33581489751a66fba8566ad6d5960d4b01c8 Mon Sep 17 00:00:00 2001
-+From: Claude <noreply@anthropic.com>
-+Date: Wed, 7 Oct 2026 15:48:00 +0000
-+Subject: [PATCH] http1connection: Avoid event loop starvation from chunked
-+ bodies
++++ b/meta-python/recipes-devtools/python/python3-execnet/0001-testing-Drop-cached-remote-module-in-test_remote_exe.patch
+@@ -0,0 +1,38 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 4 Nov 2026 16:22:44 -0800
++Subject: [PATCH] testing: Drop cached remote module in
++ test_remote_exec_module_is_removed
 +
-+Reads of body data that has already arrived complete without returning
-+control to the IOLoop, so a client sending a chunked body made of many
-+tiny chunks (which cost ~6us each to parse) could block the event loop
-+for the entire body (minutes, with the default max_body_size).
++test_remote_exec_module_is_removed is parametrized over the gateway
++fixtures. The first run imports "remote" from its tmp_path and then
++removes that directory, but the module stays in sys.modules. Later
++runs then get the stale module back from "import remote", whose source
++file is gone, and remote_exec() fails with:
 +
-+- Yield to the IOLoop periodically while reading any body (every 256KB,
-+  with each chunk of a chunked body counting as 1KB).
-+- Coalesce consecutive small chunks before calling data_received. Pending
-+  data is flushed whenever we would wait for the network, so streaming
-+  latency is unaffected.
-+- Accumulate non-streaming bodies in a bytearray instead of a list of
-+  bytes objects, which used ~120 bytes of memory per 1-byte chunk.
-+- Raise HTTPInputError instead of using assert for a chunk that is not
-+  followed by CRLF.
-+- Document the baseline for denial-of-service reports in SECURITY.md.
++  OSError: could not get source code
 +
-+CVE: CVE-2026-115927
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/ceab33581489751a66fba8566ad6d5960d4b01c8]
++Remove "remote" from sys.modules before importing it, so each run
++imports the module it just wrote.
 +
-+Backport Changes:
-+- Kept the 6.5.7 read_until_close() path for close-delimited bodies because
-+  the newer incremental reader is absent; the affected chunked path and
-+  fixed-length reads retain the upstream yielding behavior.
-+- Kept AsyncTestCase imported from tornado.testing to match the 6.5.7 test harness.
-+- Omitted SECURITY.md and docs/releases/v6.6.0.rst because they are documentation-only.
++Upstream-Status: Submitted [https://github.com/pytest-dev/execnet/pull/442]
 +
-+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-+Claude-Session: https://claude.ai/code/session_019XKZM6XMVNYGibRyDU6QZW
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tornado/http1connection.py           | 97 +++++++++++++++++++++++-----
-+ tornado/httpserver.py                |  6 +-
-+ tornado/simple_httpclient.py         |  6 +++---
-+ tornado/test/http1connection_test.py | 59 ++++++++++++++++-
-+ tornado/test/httpserver_test.py      |  7 +-
-+ tornado/test/web_test.py             |  5 +-
-+ tornado/web.py                       |  6 +-
-+ 7 files changed, 156 insertions(+), 30 deletions(-)
++ testing/test_gateway.py | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/tornado/http1connection.py b/tornado/http1connection.py
-+index 3eb1dfc2..d4bb2cc6 100644
-+--- a/tornado/http1connection.py
-++++ b/tornado/http1connection.py
-+@@ -41,6 +41,23 @@ from typing import cast, Optional, Type, Awaitable, Callable, Union, Tuple
-+ CR_OR_LF_RE = re.compile(b"\r|\n")
-+ 
-+ 
-++# Reads that can be satisfied from data that has already arrived complete
-++# without returning control to the IOLoop, so a peer that sends a body
-++# faster than we can process it could otherwise monopolize the IOLoop for
-++# the duration of the body. While reading a body, we yield to the IOLoop
-++# after processing this many bytes. Each chunk of a chunked body also counts
-++# as _CHUNK_YIELD_COST bytes, since the per-chunk overhead dominates when
-++# the chunks are small.
-++_YIELD_THRESHOLD = 256 * 1024
-++_CHUNK_YIELD_COST = 1024
-++
-++
-++def _is_done(future: Awaitable) -> bool:
-++    # IOStream's read methods are declared to return Awaitables, but they
-++    # are actually Futures which may already be resolved.
-++    return isinstance(future, Future) and future.done()
-++
-++
-+ class _QuietException(Exception):
-+     def __init__(self) -> None:
-+         pass
-+@@ -645,53 +662,101 @@ class HTTP1Connection(httputil.HTTPConnection):
-+             return self._read_body_until_close(delegate)
-+         return None
-+ 
-++    async def _deliver_body(
-++        self, delegate: httputil.HTTPMessageDelegate, data: bytes
-++    ) -> None:
-++        if not self._write_finished or self.is_client:
-++            with _ExceptionLoggingContext(app_log):
-++                ret = delegate.data_received(data)
-++                if ret is not None:
-++                    await ret
-++
-+     async def _read_fixed_body(
-+         self, content_length: int, delegate: httputil.HTTPMessageDelegate
-+     ) -> None:
-++        work = 0  # See _YIELD_THRESHOLD
-+         while content_length > 0:
-+             body = await self.stream.read_bytes(
-+                 min(self.params.chunk_size, content_length), partial=True
-+             )
-+             content_length -= len(body)
-+-            if not self._write_finished or self.is_client:
-+-                with _ExceptionLoggingContext(app_log):
-+-                    ret = delegate.data_received(body)
-+-                    if ret is not None:
-+-                        await ret
-++            await self._deliver_body(delegate, body)
-++            work += len(body)
-++            if work >= _YIELD_THRESHOLD:
-++                work = 0
-++                await asyncio.sleep(0)
-+ 
-+     async def _read_chunked_body(self, delegate: httputil.HTTPMessageDelegate) -> None:
-+         # TODO: "chunk extensions" http://tools.ietf.org/html/rfc2616#section-3.6.1
-+         total_size = 0
-++        # Chunk boundaries are not meaningful (and may be changed by
-++        # intermediaries), so the contents of consecutive small chunks are
-++        # coalesced before being passed to the delegate. This bounds the
-++        # number of data_received calls (and the overhead of delegates that
-++        # buffer each piece they receive) regardless of how small the chunks
-++        # are. Pending data is delivered whenever we would have to wait for
-++        # the network, so this does not add latency for streaming delegates.
-++        pending = bytearray()
-++        work = 0  # See _YIELD_THRESHOLD
-++
-++        def read(future: Awaitable[bytes]) -> Awaitable[bytes]:
-++            if pending and not _is_done(future):
-++                return flush_and_read(future)
-++            return future
-++
-++        async def flush_and_read(future: Awaitable[bytes]) -> bytes:
-++            data = bytes(pending)
-++            pending.clear()
-++            await self._deliver_body(delegate, data)
-++            return await future
-++
-+         while True:
-+-            chunk_len_str = await self.stream.read_until(b"\r\n", max_bytes=64)
-++            work += _CHUNK_YIELD_COST
-++            if work >= _YIELD_THRESHOLD:
-++                work = 0
-++                await asyncio.sleep(0)
-++            chunk_len_str = await read(self.stream.read_until(b"\r\n", max_bytes=64))
-+             try:
-+                 chunk_len = parse_hex_int(native_str(chunk_len_str[:-2]))
-+             except ValueError:
-+                 raise httputil.HTTPInputError("invalid chunk size")
-+             if chunk_len == 0:
-+-                crlf = await self.stream.read_bytes(2)
-++                crlf = await read(self.stream.read_bytes(2))
-+                 if crlf != b"\r\n":
-+                     raise httputil.HTTPInputError(
-+                         "improperly terminated chunked request"
-+                     )
-++                if pending:
-++                    await self._deliver_body(delegate, bytes(pending))
-+                 return
-+             total_size += chunk_len
-+             if total_size > self._max_body_size:
-+                 raise httputil.HTTPInputError("chunked body too large")
-+             bytes_to_read = chunk_len
-+             while bytes_to_read:
-+-                chunk = await self.stream.read_bytes(
-+-                    min(bytes_to_read, self.params.chunk_size), partial=True
-++                chunk = await read(
-++                    self.stream.read_bytes(
-++                        min(bytes_to_read, self.params.chunk_size), partial=True
-++                    )
-+                 )
-+                 bytes_to_read -= len(chunk)
-+-                if not self._write_finished or self.is_client:
-+-                    with _ExceptionLoggingContext(app_log):
-+-                        ret = delegate.data_received(chunk)
-+-                        if ret is not None:
-+-                            await ret
-++                if not pending and len(chunk) == self.params.chunk_size:
-++                    # Full-sized reads are passed through without copying.
-++                    await self._deliver_body(delegate, chunk)
-++                else:
-++                    pending += chunk
-++                    if len(pending) >= self.params.chunk_size:
-++                        data = bytes(pending[: self.params.chunk_size])
-++                        del pending[: self.params.chunk_size]
-++                        await self._deliver_body(delegate, data)
-++                work += len(chunk)
-++                if work >= _YIELD_THRESHOLD:
-++                    work = 0
-++                    await asyncio.sleep(0)
-+             # chunk ends with \r\n
-+-            crlf = await self.stream.read_bytes(2)
-+-            assert crlf == b"\r\n"
-++            crlf = await read(self.stream.read_bytes(2))
-++            if crlf != b"\r\n":
-++                raise httputil.HTTPInputError("improperly terminated chunk")
-+ 
-+     async def _read_body_until_close(
-+         self, delegate: httputil.HTTPMessageDelegate
-+diff --git a/tornado/httpserver.py b/tornado/httpserver.py
-+index 68c6301b..ab5bea60 100644
-+--- a/tornado/httpserver.py
-++++ b/tornado/httpserver.py
-+@@ -267,7 +267,7 @@ class _CallableAdapter(httputil.HTTPMessageDelegate):
-+         self.request_callback = request_callback
-+         self.request = None  # type: Optional[httputil.HTTPServerRequest]
-+         self.delegate = None
-+-        self._chunks = []  # type: List[bytes]
-++        self._chunks = bytearray()
-+ 
-+     def headers_received(
-+         self,
-+@@ -282,12 +282,12 @@ class _CallableAdapter(httputil.HTTPMessageDelegate):
-+         return None
-+ 
-+     def data_received(self, chunk: bytes) -> Optional[Awaitable[None]]:
-+-        self._chunks.append(chunk)
-++        self._chunks += chunk
-+         return None
-+ 
-+     def finish(self) -> None:
-+         assert self.request is not None
-+-        self.request.body = b"".join(self._chunks)
-++        self.request.body = bytes(self._chunks)
-+         self.request._parse_body()
-+         self.request_callback(self.request)
-+ 
-+diff --git a/tornado/simple_httpclient.py b/tornado/simple_httpclient.py
-+index 9d693a44..df13e919 100644
-+--- a/tornado/simple_httpclient.py
-++++ b/tornado/simple_httpclient.py
-+@@ -276,7 +276,7 @@ class _HTTPConnection(httputil.HTTPMessageDelegate):
-+         self.max_body_size = max_body_size
-+         self.code = None  # type: Optional[int]
-+         self.headers = None  # type: Optional[httputil.HTTPHeaders]
-+-        self.chunks = []  # type: List[bytes]
-++        self.chunks = bytearray()
-+         self._decompressor = None
-+         # Timeout handle returned by IOLoop.add_timeout
-+         self._timeout = None  # type: object
-+@@ -621,7 +621,7 @@ class _HTTPConnection(httputil.HTTPMessageDelegate):
-+ 
-+     def finish(self) -> None:
-+         assert self.code is not None
-+-        data = b"".join(self.chunks)
-++        data = bytes(self.chunks)
-+         self._remove_timeout()
-+         original_request = getattr(self.request, "original_request", self.request)
-+         if self._should_follow_redirect():
-+@@ -730,7 +730,7 @@ class _HTTPConnection(httputil.HTTPMessageDelegate):
-+         if self.request.streaming_callback is not None:
-+             self.request.streaming_callback(chunk)
-+         else:
-+-            self.chunks.append(chunk)
-++            self.chunks += chunk
-+ 
-+ 
-+ if __name__ == "__main__":
-+diff --git a/tornado/test/http1connection_test.py b/tornado/test/http1connection_test.py
-+index 34de6d38..7443ae1c 100644
-+--- a/tornado/test/http1connection_test.py
-++++ b/tornado/test/http1connection_test.py
-+@@ -1,12 +1,15 @@
-++import logging
-+ import socket
-+ import typing  # noqa(F401)
-+ 
-++from tornado import gen
-+ from tornado.http1connection import HTTP1Connection
-+ from tornado.httputil import HTTPMessageDelegate
-+ from tornado.iostream import IOStream
-+ from tornado.locks import Event
-+ from tornado.netutil import add_accept_handler
-+-from tornado.testing import AsyncTestCase, bind_unused_port, gen_test
-++from tornado.log import gen_log
-++from tornado.testing import AsyncTestCase, ExpectLog, bind_unused_port, gen_test
-+ 
-+ 
-+ class HTTP1ConnectionTest(AsyncTestCase):
-+@@ -59,3 +62,57 @@ class HTTP1ConnectionTest(AsyncTestCase):
-+         yield event.wait()
-+         self.assertEqual(self.code, 200)
-+         self.assertEqual(b"".join(body), b"hello")
-++
-++    @gen_test
-++    def test_chunked_body_tiny_chunks(self):
-++        # A body made of many tiny chunks is coalesced into a few
-++        # data_received calls, and reading it yields to the IOLoop
-++        # periodically even though all of the data is already available.
-++        conn = HTTP1Connection(self.client_stream, True)
-++        num_chunks = 5000
-++        yield self.server_stream.write(
-++            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n"
-++            + b"1\r\nx\r\n" * num_chunks
-++            + b"0\r\n\r\n"
-++        )
-++        self.server_stream.close()
-++        # Give the data time to arrive so that the body can be read
-++        # without waiting for the network.
-++        yield gen.sleep(0.1)
-++
-++        body = []
-++        ticks = [0]
-++        done = [False]
-++        io_loop = self.io_loop
-++
-++        # Count IOLoop iterations while the body is being read.
-++        def tick():
-++            if not done[0]:
-++                ticks[0] += 1
-++                io_loop.add_callback(tick)
-++
-++        class Delegate(HTTPMessageDelegate):
-++            def headers_received(self, start_line, headers):
-++                io_loop.add_callback(tick)
-++
-++            def data_received(self, data):
-++                body.append(data)
-++
-++            def finish(self):
-++                done[0] = True
-++
-++        yield conn.read_response(Delegate())
-++        self.assertEqual(b"".join(body), b"x" * num_chunks)
-++        self.assertLess(len(body), 10)
-++        self.assertGreater(ticks[0], 10)
-++
-++    @gen_test
-++    def test_chunked_body_bad_chunk_terminator(self):
-++        conn = HTTP1Connection(self.client_stream, True)
-++        self.server_stream.write(
-++            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n"
-++            b"3\r\nfooXX0\r\n\r\n"
-++        )
-++        with ExpectLog(gen_log, ".*improperly terminated chunk", level=logging.INFO):
-++            result = yield conn.read_response(HTTPMessageDelegate())
-++        self.assertIs(result, False)
-+diff --git a/tornado/test/httpserver_test.py b/tornado/test/httpserver_test.py
-+index b3f6ed18..6e9d4d3a 100644
-+--- a/tornado/test/httpserver_test.py
-++++ b/tornado/test/httpserver_test.py
-+@@ -1247,9 +1247,10 @@ class StreamingChunkSizeTest(AsyncHTTPTestCase):
-+             write(self.BODY[:20])
-+             write(self.BODY[20:])
-+ 
-+-        chunks = self.fetch_chunk_sizes(body_producer=body_producer)
-+-        # HTTP chunk boundaries translate to application-visible breaks
-+-        self.assertEqual([16, 4, 16, 14], chunks)
-++        # HTTP chunk boundaries are not preserved: small chunks may be
-++        # coalesced, so the assertions in fetch_chunk_sizes are as specific
-++        # as we can get.
-++        self.fetch_chunk_sizes(body_producer=body_producer)
-+ 
-+     def test_chunked_compressed(self):
-+         compressed = self.compress(self.BODY)
-+diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
-+index 8a014d22..3ecb3ef5 100644
-+--- a/tornado/test/web_test.py
-++++ b/tornado/test/web_test.py
-+@@ -2736,7 +2736,10 @@ class BaseStreamingRequestFlowControlTest:
++diff --git a/testing/test_gateway.py b/testing/test_gateway.py
++index 634f237..c571bbd 100644
++--- a/testing/test_gateway.py
+++++ b/testing/test_gateway.py
++@@ -130,6 +130,9 @@ class TestBasicGateway:
 +         )
 + 
-+     def test_flow_control_chunked_body(self: typing.Any):
-+-        chunks = [b"abcd", b"efgh", b"ijkl"]
-++        # Small chunks may be coalesced (when they arrive together), so use
-++        # chunks of exactly chunk_size (except the last) to get a
-++        # predictable sequence of calls.
-++        chunks = [b"abcdefghij", b"klmnopqrst", b"uvwxyz"]
++         monkeypatch.syspath_prepend(tmp_path)
+++        # The test is parametrized; drop the module cached by a previous run,
+++        # whose source file has since been removed.
+++        monkeypatch.delitem(sys.modules, "remote", raising=False)
++         import remote  # type: ignore[import-not-found]
 + 
-+         @gen.coroutine
-+         def body_producer(write):
-+diff --git a/tornado/web.py b/tornado/web.py
-+index 2c8a1e1d..d3257221 100644
-+--- a/tornado/web.py
-++++ b/tornado/web.py
-+@@ -2468,7 +2468,7 @@ class _HandlerDelegate(httputil.HTTPMessageDelegate):
-+         self.handler_kwargs = handler_kwargs or {}
-+         self.path_args = path_args or []
-+         self.path_kwargs = path_kwargs or {}
-+-        self.chunks = []  # type: List[bytes]
-++        self.chunks = bytearray()
-+         self.stream_request_body = _has_stream_request_body(self.handler_class)
-+ 
-+     def headers_received(
-+@@ -2485,7 +2485,7 @@ class _HandlerDelegate(httputil.HTTPMessageDelegate):
-+         if self.stream_request_body:
-+             return self.handler.data_received(data)
-+         else:
-+-            self.chunks.append(data)
-++            self.chunks += data
-+             return None
-+ 
-+     def finish(self) -> None:
-+@@ -2494,7 +2494,7 @@ class _HandlerDelegate(httputil.HTTPMessageDelegate):
-+         else:
-+             # Note that the body gets parsed in RequestHandler._execute so it can be in
-+             # the right exception handler scope.
-+-            self.request.body = b"".join(self.chunks)
-++            self.request.body = bytes(self.chunks)
-+             self.execute()
-+ 
-+     def on_connection_close(self) -> None:
-+-- 
-+2.35.6
-+
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-index a84503db51..1dd2ff3c32 100644
---- a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-@@ -15,6 +15,7 @@ SRC_URI += "file://CVE-2026-91990.patch \
-             file://CVE-2026-103262.patch \
-             file://CVE-2026-103263.patch \
-             file://CVE-2026-103263-dependent.patch \
-+            file://CVE-2026-115927.patch \
++         ch = gw.remote_exec(remote)
+diff --git a/meta-python/recipes-devtools/python/python3-execnet_2.1.2.bb b/meta-python/recipes-devtools/python/python3-execnet_2.1.2.bb
+index 34f0a1f670..d94ab6375b 100644
+--- a/meta-python/recipes-devtools/python/python3-execnet_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-execnet_2.1.2.bb
+@@ -11,6 +11,8 @@ DEPENDS += "\
+     python3-hatch-vcs-native \
  "
  
- inherit pypi python_setuptools_build_meta
--- 
-2.35.6
-
++SRC_URI += "file://0001-testing-Drop-cached-remote-module-in-test_remote_exe.patch"
++
+ SRC_URI[sha256sum] = "63d83bfdd9a23e35b9c6a3261412324f964c2ec8dcd8d3c6916ee9373e0befcd"
+ 
+ inherit ptest-python-pytest pypi python_hatchling
