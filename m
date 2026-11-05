@@ -1,106 +1,107 @@
-Received: from mail-244108.protonmail.ch (mail-244108.protonmail.ch [109.224.244.108])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.34016.1793884031747314195
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1157.1793898743034473729
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 05:07:12 -0800
+ Thu, 05 Nov 2026 09:12:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@geanix.com header.s=protonmail header.b=klP+8A5u;
- spf=pass (domain: geanix.com, ip: 109.224.244.108, mailfrom: sean@geanix.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geanix.com;
-	s=protonmail; t=1793884026; x=1794143226;
-	bh=TMJkFQQ2wesVX8bJW6vbxTOC1bYeq0MZvP+iYN39arE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=klP+8A5uks0MVa6qM/1rLr0pU5NZ8ZyQnWq4xQeNsb/8nUrSga1vKFL9Xb+rx+UrB
-	 RYnPTqV25lh3JVcXaViHDApRIGHH+x2u0eaLQaaGzvkMJ7NnQClRmtRCKprGExJRu+
-	 UYB226yvHWcRoEmuF9GJSp1oUUnRvs+CISb662DpltEN2DHaT0ypyNpL24ICkR7sEf
-	 vIiKy9BPPXMYtAXPq4VSsa+TpFN3A9VKI6v2JuKblvMWcQzLgIu3wUTIPUFczajvNy
-	 PBaDALUvOHlXDAeproda7032JZ3q7yvwximSa5E/odQn6Gxt2hlkI6cBH0WUa6huif
-	 DFEqH/ZJoR+nQ==
-X-Pm-Submission-Id: 4jL2dj0YsKz1DDnq
-From: Sean Nyekjaer <sean@geanix.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=DaOV8dJV;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a20bde60a0so19926695e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 09:12:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1793898741; x=1794503541; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=YJe3R0jQCT/KyXGee4bO8bIuQ0ShdXFgAZueHz463n4=;
+        b=DaOV8dJVWr7lkZTo+Olh9/D+QXjTTz90psYRS46mGi0JPkdg48kgem4vzKfIqhvZfx
+         kj9UZ7aa2uiGgfMPlFGkR/I+mMYvSihgsEfhXxKvfXkOC0X+OuRqPINTnI3FZtx/cHOD
+         E81NR9kIjqLxn9Syjzu/RsMK2FbJ5aD7AP8xw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793898741; x=1794503541;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=YJe3R0jQCT/KyXGee4bO8bIuQ0ShdXFgAZueHz463n4=;
+        b=hip26ZWc88yYzzwGFg8kM7AGiEA9PZIrtXu2Qua53CpEDQiuCGcWlnWEwuMHTzWUid
+         c6zPVWfxTwZaZt++ILpDaZvuUAYC7LP600IWYJy+1/IGu/6P85rm3pIqBDGOXfiahD77
+         OztDJPznN3SALta7I0fjAJPvSsPqKV0QM16t5895fPeaIcJCvZATAgUKWGj64/7tes3K
+         8NjUN7QN+S7RUGLjtusC64QrVfckeEDjzILpP201zpVE6VgpKEmq7RDh7IgqXNbZdIRV
+         ijc5Cq4YbhztiQUZoip7inwoBf1Nxi2lkwKjxjn38oBbG7GkRoNDhcdywUIYKyt8qEZL
+         vfmA==
+X-Gm-Message-State: APuU4Z8NySR2Ji8LsdWEFI0trz1Qpu+Jjx3XzFC2PA91apfTp+A9mr8o
+	rC9VhDYcXU+WDyfyxv+37SfO+nb8X1R3CR4PHyGPGCAxhcsB42wRCs9otUXuMZ+8E7/KH9NOSKe
+	vN168
+X-Gm-Gg: AYBFou21QPklfglnnfwm6XCvbSLy18X5edhOWtAdkImJCJ+onP/mpTxNRFmWjS7MHcH
+	BQijrTylmaOy/WXFvrIOn6UQbF159Et5MHuaZ98cpeuFwAVcYMTnSY5AyVAhKagukVLcLCxAoT3
+	PxYJUYi3dk7gq9yQJaRv0O/nBlJR0PtY+TMF8Z2fApfhz+SF3X8czGWgxXITFSnbtR8wRcYSMq1
+	aOi3LktP6Fbz0O2gYhNfQ6Z6kVpn2Hms9y60DMGcxjnrg47Pcrzl9Lwd6YIonnoH1WCEa/28TOJ
+	XDtpxN1JIMGfrMDhPgJOIBRzYMhGoH8LHDK70+40vXUL3lxUfQIrNrZMlIFtKicYvMWMQtqMgHl
+	CHX5TivyEmv1BEScJWx9OpjBwbMcfWgNRQ3dsCHLbFDz94zpCbnWmU4i+N/Y19dqsMmED0fTSS8
+	U1e75g+S/L8IpDpocfrqx6JqE2ZLlh/iMeyObsOqmmabhLr0sbFWAwlTsp/Uw27EObbQObZWq7d
+	1AQDGq+x7qPLttn2g+9veMHdMGKsCRHOC0eMzFmC7KZpJMj3FYWYE7ofUE51jZGiQPmtdKf65jF
+	BVL/8y4qsDA+9K+83eBNxumbhjDMzqdeJKBDNPnM2fuBx/2/zsPoDNbIcKamVlxUBsDNRk7tang
+	bpPSdaTOYx9jB9ZJiuMdNOWNFFrGeIjV2spE+WVwzwQdaEP08f69sIg==
+X-Received: by 2002:a05:600d:82f2:b0:4af:c210:5b3f with SMTP id 5b1f17b1804b1-4afc2105bf0mr348291525e9.24.1793898740502;
+        Thu, 05 Nov 2026 09:12:20 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4533873f0sm149901595e9.4.2026.11.05.09.12.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2026 09:12:19 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Sean Nyekjaer <sean@geanix.com>
-Subject: [meta-oe][PATCH v2 5/5] zsh: add pcre PACKAGECONFIG
-Date: Thu,  5 Nov 2026 14:06:40 +0100
-Message-ID: <20261105130640.683925-5-sean@geanix.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261105130640.683925-1-sean@geanix.com>
-References: <20261105130640.683925-1-sean@geanix.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCHv2] opensc: add PACKAGECONFIG for ctapi
+Date: Thu,  5 Nov 2026 19:12:17 +0200
+Message-ID: <20261105171217.659747-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 13:07:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131924
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 17:12:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131925
 Content-Type: text/plain; charset="utf-8"
 
-The zsh/pcre module is link=3Ddynamic only, so add a PACKAGECONFIG for it
-that conflicts with static.
+Add a PACKAGECONFIG option for OpenSC's CT-API reader driver so it
+can be enabled without modifying the recipe, e.g. from local.conf:
 
-libpcre2 inherits binconfig-disabled, so pass a small pcre2-config
-wrapper using pkg-config via PCRE_CONFIG.
+PACKAGECONFIG:pn-opensc = "ctapi"
 
-AI-Generated: Uses Claude Code
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+Please note that OpenSC's configure allows only one reader driver:
+
+Only one of --enable-pcsc, --enable-cryptotokenkit,
+--enable-openct, --enable-ctapi can be specified!
+
+So to use it, ctapi should replace the default pcsc rather than
+being just added to it. Not enabled by default. Existing builds are
+unaffected.
+
+The patch also removes --disable-ctapi from EXTRA_OECONF.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-shells/zsh/zsh/pcre2-config | 16 ++++++++++++++++
- meta-oe/recipes-shells/zsh/zsh_5.9.2.bb     |  5 ++++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
- create mode 100755 meta-oe/recipes-shells/zsh/zsh/pcre2-config
+ meta-oe/recipes-support/opensc/opensc_0.27.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-shells/zsh/zsh/pcre2-config b/meta-oe/recipe=
-s-shells/zsh/zsh/pcre2-config
-new file mode 100755
-index 0000000000..13df7b39a7
---- /dev/null
-+++ b/meta-oe/recipes-shells/zsh/zsh/pcre2-config
-@@ -0,0 +1,16 @@
-+#!/bin/sh
-+# libpcre2 inherits binconfig-disabled, so answer the queries zsh's
-+# configure makes of pcre2-config using pkg-config instead.
-+case "$1" in
-+--cflags)
-+    exec pkg-config --cflags libpcre2-8
-+    ;;
-+--libs8)
-+    exec pkg-config --libs libpcre2-8
-+    ;;
-+--version)
-+    exec pkg-config --modversion libpcre2-8
-+    ;;
-+esac
-+echo "pcre2-config: unsupported option $1" >&2
-+exit 1
-diff --git a/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb b/meta-oe/recipes-sh=
-ells/zsh/zsh_5.9.2.bb
-index 32c59fb6bc..7f6b0e7511 100644
---- a/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
-+++ b/meta-oe/recipes-shells/zsh/zsh_5.9.2.bb
-@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D1a4c4cda3e80=
-96d2fd483ff2f4514fec"
-=20
- DEPENDS =3D "ncurses bison-native libcap groff-native"
-=20
--SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
-.xz"
-+SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
-.xz \
-+           file://pcre2-config \
-+"
- SRC_URI[sha256sum] =3D "36fa734374b44783582cec09bcd67822e2f992c779ec1624=
-ab5596df078d2f81"
-=20
- # The SourceForge download mirror has no browsable listing; check the pe=
-r-release
-@@ -46,6 +48,7 @@ ALTERNATIVE_PRIORITY =3D "90"
- PACKAGECONFIG ??=3D "static"
- PACKAGECONFIG[static] =3D "--disable-dynamic,--enable-dynamic zsh_cv_sys=
-_dynamic_rtld_global=3Dyes zsh_cv_sys_dynamic_execsyms=3Dyes"
- PACKAGECONFIG[gdbm] =3D "--enable-gdbm,--disable-gdbm,gdbm,,,static"
-+PACKAGECONFIG[pcre] =3D "--enable-pcre PCRE_CONFIG=3D${UNPACKDIR}/pcre2-=
-config,--disable-pcre,libpcre2 pkgconfig-native,,,static"
- # Needed for manpages.bbclass, but they're always installed
- PACKAGECONFIG[manpages] =3D ""
-=20
---=20
-2.55.0
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
+index 70406513ad..fdcf003842 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.27.1.bb
+@@ -23,7 +23,6 @@ CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
+ inherit autotools pkgconfig bash-completion
+ 
+ EXTRA_OECONF = " \
+-    --disable-ctapi \
+     --disable-doc \
+     --disable-static \
+     --disable-strict \
+@@ -39,6 +38,7 @@ PACKAGECONFIG[openct] = "--enable-openct,--disable-openct,openct"
+ PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite,pcsc-lite pcsc-lite-lib"
+ PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+ PACKAGECONFIG[notify] = "--enable-notify,--disable-notify,glib-2.0"
++PACKAGECONFIG[ctapi] = "--enable-ctapi,--disable-ctapi"
+ 
+ FILES:${PN} += "\
+     ${libdir}/opensc-pkcs11.so \
+-- 
+2.47.3
 
