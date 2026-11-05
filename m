@@ -1,60 +1,59 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.32586.1793879748159301727
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.32767.1793879743021998297
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 03:55:48 -0800
+ Thu, 05 Nov 2026 03:55:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=kSOb1wlX;
- spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so19427925e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:47 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=nnvAg2Zi;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a549cd7fd2so6050405e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 03:55:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1793879746; x=1794484546; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1793879741; x=1794484541; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=11effdexOJxHjSSU2AzAPhKdvFuErT//Ub+TO5C246M=;
-        b=kSOb1wlXZP3uNXqO7pkmnUyXiDCrIU0N5fB5Kj42Yo5zxM+amtKiDSdzn9tstdUgvB
-         5T39maIPXmc64B8ya00eum9ps6R9swLla3iaX+LnyzMQEGiSJjxC0wB8EwuUlSI89KYR
-         GEkAs2KOYrXcpu/gAoDoL13jf941bbpYZ2C88=
+        bh=InRJkscdpZ9zWvmPO5zDA+XTzG79KgWO81mbrqmIZqs=;
+        b=nnvAg2ZiRGnQU2ay93EsQesoUeu2qpMwFukqEDJesVutYO17CMDWlUFBxRzV6PCoP0
+         s4ZluBF2dx4GDpTI/yZyO3zlYtp6wFwcS1m77Hp6YhBWLWp620A7jVBQGLhQs0p2CuRz
+         3mQGtSe27gYeN0qGWd+FqX1TU6Y+Fr6B3LljM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793879746; x=1794484546;
+        d=1e100.net; s=20260707; t=1793879741; x=1794484541;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=11effdexOJxHjSSU2AzAPhKdvFuErT//Ub+TO5C246M=;
-        b=Em2nvlIYCBwVaiH6GVB7u0to5oHSkjT/AgEr7wZyZliqhWuhS6EOuamnpv0uQA4dHA
-         2ZUw8bRc69Blc8HNrK8EF6PcjtrfL/Jh4iXpvbxhH5OIYaJgB1u+fMus2Ow8/LWrGS/k
-         ICM/poksHTQfaABvE1vSr6+7ODN45jM0NPXpl38yTMSFYsHW52ma35qr+76EbP+Suag2
-         rFhERpecWxtGlBIO/s/YDpV/XwEZSLgdGYk8hi5UYV9Lp2Q7UmPf7iiAj1RgmCVotpDv
-         5anEq2VeKItGxXH/7IVsc3Wazip2M3bcQrkHfTVYwu6KVcrp90izqX4YQtgSdF+Dd4l7
-         CeAg==
-X-Gm-Message-State: APuU4Z/+VLVE1GdN0W6gG2muPopXwA3g9hoZqVticydvcw2sW+O+Ndue
-	VrVuLm10z/3CMuEN7gJ63p90hIs488gZAM2TGnc+SJw3Hr6d8ko1O6cum3aiaJsEs45ATjoMFGs
-	URB4e
-X-Gm-Gg: AYBFou2svbvp9fBeFzgmmBdBuiH5vbOCZbs2N67g5VZyAuCBVJqNrIw1jUbJFeMAlOu
-	JFcQDzW75ZHR+ojyqsmtmBkRY5P93D6GSlZ9KVuImQ3nJpCGzvS/ZK3ljMFKI5JIBdLOzpNo76+
-	vgeMhFVV9aLuoSXrmCyg6vRFSRiKZ5zmmhakrcHDZK2Q+Hn6/gwGycW46ZPR6arEs9vUL5LyIC6
-	xRgK1CBfcinan1QcsZ04/m2O+JU25YPzgqIc9416HVW5c0x5tctTVWe5A1uKf5kbI0JI53DgEei
-	4oV0pTWDT2qb5pyLHhECk4scx+tmb25wcZsllfw4IhEXAml+fQx4gwdcm/auNg4+jR5ohec2v3A
-	vD250jsGINJtjzfsZpF02tvRBS09uxFYL40gBIrCmMfVrDJ3FcGGxYEYjThuZ4fiPI8ZZLXqLnf
-	i9GX5rgdwQ6/MvCt1flB7oHdteZNn5eAMs+1YjYWMnLzzhXnjAm+iL0/B1zw97knhMgJvH8jpjM
-	4Cn4vDXh8wZPA/1b5NJOvQeBz3vSsaCPBZZfwAC8CHMldrJqoDrDigI+VE0F/pqEwZrDq6PQ2gy
-	Tv4UHlt67T/7CPqzuYiFvXW/tt0Zq6BxBsHzsLHg0QCsvpQJhFRbvrM7vv32SdVsj3OJiH2CSFZ
-	dbfTicIWCYCcpvxpPE9uQgZGt3xl3Pj4TrD1DWpiW3woeVnv+L2A+Ow==
-X-Received: by 2002:a05:600c:3b09:b0:4b1:4017:c4f4 with SMTP id 5b1f17b1804b1-4b14017c507mr231493825e9.20.1793879746444;
-        Thu, 05 Nov 2026 03:55:46 -0800 (PST)
+        bh=InRJkscdpZ9zWvmPO5zDA+XTzG79KgWO81mbrqmIZqs=;
+        b=Gl2fRlDfYw+M1x7pQ6OGvhFSStphcr6Ch2fVaEP37N8dBmLc78MGzDHGdLq8tDlfEt
+         kmbPZPfrIy2FUQK1b71pIPEKGiBBfpVaKK8FCzNNc3ctjSYM/YmB+kQdOb7Ne4H0C7JO
+         XbPdIJJx6AwohaxiT5kO8+5OTl6AB9mJmFjSfaTfJ3IEsgMn+XP5/LkZjHWQCdks8j/d
+         px6lyBSsGIprZBcHx6l0I5rmQZKsUsqgWjKbw8uVbLf/4oQXQaNNDkGP/xL1H3XEcAPm
+         weKOYPIVZGZQd89XYs81RTbUR7YOgydayuhvTWInlXQZh90BW++XGyYRmtXjoptsLbBb
+         yfYg==
+X-Gm-Message-State: APuU4Z/26B6OtLIdVSQgVDNDZpVvvuN5o4oLD/tvjMNxVwT1oL/YgVfo
+	ZGSREgWAy3vt0FHQS2SXprqzzHV5VO5XVlhkFxoLjjxcRxVY6vnmd7PPyaBXCDehb7j8wsW13FE
+	WF8qD
+X-Gm-Gg: AYBFou3FniGTwIX7rNcrw0fbCrNdfWZjlAZTLH096589rbqXimOmEnJ8WSsEs7IHoeO
+	IRtc896qoNVYI0MNvq9C7BkbI8X0pLwk4XqJrqrmhE4pgARMvCdQa6DGzJACfEr49SkgIr5xj4F
+	bkwMgTsYJgyvyhNQIBo2kknOnvFEnB+UxqKCg5bLp1GW3x8xBpOxEk0RPkp8dApRtIPW1a+3wIp
+	y0JCYx3wWRiL/IqBj8zZ5hbhnc+JeIis0jLyQRt0LppheyyfWGjm1juX5rWCsQ1GD1fiFwR0Iao
+	3iIbd4XxSbATKbro3erIOSO4QWQf0w94+U2Tw74KyZCfay33ClWheerbW3jMZaaulacexL+ya6F
+	Im1zcy39dTB/joqCI5WOTHfBhEO/H5/9ozqQOUSHsLtmtLP1N7panrbzs3A7OU9xnEPn4+1qmad
+	ATo/gO2RHVMHM80QkDN8tCWoxakUejavdAZJfZ9utR9dh6p+QGzvGgkjfwC04z0Xrk0Knr7zyO6
+	Ua8s3C7xNjqc8HHs1GKKC9YKgqZL38sS9k9CD6XK+DOAuwBCdZeICEhbKtLz4vIpBJaoYFDilNp
+	2QJXc+LKwX1mJ7SwTZVLUd2LsUQlKN69lHkADCbq1njoncCrUwkBqFlZtba+tiQyvOxPld2bbBQ
+	H0buXCq0eh3zrprh+n7r0Yjm9UIbe2Yh5SxC8wukjdwYKJeHHLterRbE=
+X-Received: by 2002:a05:600c:3b04:b0:4a1:efbe:529c with SMTP id 5b1f17b1804b1-4b55d8cfdbbmr39246855e9.12.1793879741324;
+        Thu, 05 Nov 2026 03:55:41 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.45
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm173720995e9.3.2026.11.05.03.55.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 03:55:46 -0800 (PST)
+        Thu, 05 Nov 2026 03:55:40 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 19/19] meta-python: README.md: Improve send-email command
-Date: Thu,  5 Nov 2026 13:55:26 +0200
-Message-ID: <20261105115526.634289-19-leon.anavi@konsulko.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 14/19] python3-socketio: Upgrade 5.18.0 -> 5.18.1
+Date: Thu,  5 Nov 2026 13:55:21 +0200
+Message-ID: <20261105115526.634289-14-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261105115526.634289-1-leon.anavi@konsulko.com>
 References: <20261105115526.634289-1-leon.anavi@konsulko.com>
@@ -62,36 +61,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 11:55:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131919
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131914
 Content-Type: text/plain; charset="utf-8"
 
-Add -M30% -C --find-copies-harder to the git send-email example in
-README.md so that git format-patch detects renames and copies more
-aggressively.
+Upgrade to release 5.18.1:
 
-Patches that move or copy files then show only the changed lines
-instead of full file deletions and additions, which makes them
-smaller and easier to review.
+- Fix enter/leave room in connect handler, when a message queue is
+  used (regression introduced in v5.18.0)
 
-Suggested-by: Khem Raj <khem.raj@oss.qualcomm.com>
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/README.md | 2 +-
+ .../{python3-socketio_5.18.0.bb => python3-socketio_5.18.1.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-socketio_5.18.0.bb => python3-socketio_5.18.1.bb} (88%)
 
-diff --git a/meta-python/README.md b/meta-python/README.md
-index 36c193957c..a076705c75 100644
---- a/meta-python/README.md
-+++ b/meta-python/README.md
-@@ -31,7 +31,7 @@
- '[meta-python]' in the subject.
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.18.0.bb b/meta-python/recipes-devtools/python/python3-socketio_5.18.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-socketio_5.18.0.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_5.18.1.bb
+index c389adda0d..653760cd17 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_5.18.0.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_5.18.1.bb
+@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
  
- When sending single patches, please use something like:
--git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix='meta-python][PATCH'
-+git send-email -M30% -C --find-copies-harder -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix='meta-python][PATCH'
+ PYPI_PACKAGE = "python-socketio"
  
- Maintenance
- -------------------------
+-SRC_URI[sha256sum] = "81ec0fbc34b82009272834145a8fab82ccc36eb057eb2c3798dfe253fa47ed72"
++SRC_URI[sha256sum] = "07ab0e7c94a52833a67af1dc05958ad6fb0de69adc87de9198a61b22588c40d4"
+ 
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,python3-aiohttp python3-websockets"
 -- 
 2.47.3
 
