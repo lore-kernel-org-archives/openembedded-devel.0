@@ -1,954 +1,172 @@
 Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29126.1793862866972556380
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29066.1793863678404501158
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2026 23:14:27 -0800
+ Wed, 04 Nov 2026 23:27:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=VpI61qf2;
- spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=GhNpFZ4X;
+ spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=21604; q=dns/txt;
-  s=iport01; t=1793862866; x=1795072466;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Ius1VwAhtPMc2aSSIq/E1xJsELgpXhGmvO7OW5SveA4=;
-  b=VpI61qf2rg+Kcponz08xE6qk26AAiJ4BTyrW5DjVx6b5nanuAyYJEJYr
-   ebwt96No5aUSMSTZ67QpTUUjG0wuDoHCMaBoGGStVfPoZWTTg7TYOLt29
-   dnubuQPUN6bporQcY+Z51bqynF6FJ/6yc6ZZDZTo8igWO0YjOKQoqpSKu
-   VmtmUKq9xKVp0xWmlZZVv1HqnulGdPw6Dle+ub0GWLKJKZ/ylpFuTcGy4
-   Mr9tZfcq02Z9D9d+TYw43NGfSIQp5FNAFuAPycH2jN3hhvvnnbusqOjSY
-   Gz0mkJC7Y/+KcjtNP/mZj9T9LAj4cIPH0d32TrTtJBFd8K4Q67FPktCj3
-   A==;
-X-CSE-ConnectionGUID: MmSo5iCURMyur4jYnIIeLw==
-X-CSE-MsgGUID: pca/CPFQQuaSixYFnN0rXQ==
-X-IPAS-Result: =?us-ascii?q?A0DHAgBSLOxq/4//Ja1aglmCV3VgQ0mUKoE1bJ4kgX4PA?=
- =?us-ascii?q?QEBD0QNBAEBkyQCJjUIDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFg?=
- =?us-ascii?q?Q4Thk8NkBIBIA0LARgBWQMBAlojIYMCAYJ0AxG8BRs3gXkzgQGDKQExBYEe2?=
- =?us-ascii?q?UuBaAELFAGBOIVAiCNdGAFEhDknG4FJRIR+gQWBXAKBSIZeBIINgSGBWh5lj?=
- =?us-ascii?q?BUCgVKGcUiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BE?=
- =?us-ascii?q?oEHXYErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
- =?us-ascii?q?SY/FQxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5IvgwoHY?=
- =?us-ascii?q?ysBKgF/IV09Aw0wkmkBOY9kgiGBNZ9chCqMJJU6GjOEBIFXkkKSVAuYfY4Kl?=
- =?us-ascii?q?WFwhGmBaQE6gVkzGggbFTuCZwlKGQ+OLgEKC4NghRPJRSYyAgkyAQEHAgcOA?=
- =?us-ascii?q?wuBaJEeYAEB?=
-IronPort-Data: A9a23:sVC5h62qgY/9sD8G7PbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2FRz
- WMfX23UafmOZGCjL98nYYnnpEsAsZHdy4I2QFBr3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
- 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
- rsen+WFYAX7gmcsbjpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
- u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGKUQNOtAZ0dtNJHBT7
- 6AaGTYsTx2nmLfjqF67YrEEasULNsLnOsYb/3pn1zycVahgSpHYSKKM7thdtNsyrpkRRrCFO
- IxDNGcpNUibC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQsjOO8aYCPI4LiqcN9hk2R4
- Un+0V3AHxghNcyu5zyjqmicv7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1jfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:SkLdjq0dQwNZsizD5+gDXAqjBIIkLtp133Aq2lEZdPUzSL37qy
- nAppomPHPP5Qr5O0tQ+uxoRpPgfZq0z/cciuMs1NyZMzUO1lHFEGgb1+vf6gylPTHi/ehA0q
- olWa1/BNrsSWVet6/BkWyF+xJK+qjhzEhu7t2uq0tQcQ==
-X-Talos-CUID: 9a23:CbGMPW99X45OzEaHr1iVv2sRIcd4c1bg9lLBPlXkC1dvaZyYbUDFrQ==
-X-Talos-MUID: 9a23:nkrcGwR+cnzZym/BRXT0jzglH/9G2p2zAXsMgaQove/cLxxJbmI=
+  d=cisco.com; i=@cisco.com; l=6235; q=dns/txt;
+  s=iport01; t=1793863678; x=1795073278;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=xUoXkrkgj1VoWvqz/sMr4hn5TYOASWpRDUujVtqGCcw=;
+  b=GhNpFZ4XklHboDmnN6U3Gq9qK9HNTfUM/m3FkN65EX7gqwgVwr45b8QW
+   Ahr/wtS7S3SjJAPgTmooaFgqXy4O+NUYy5vhQGtZGNd2jAUkWApN6LqTD
+   1NBjECMm2r0pNs1fxTQ6heB0kCktePNnrsz80jwjmqNyU3IxXOw4MDPVD
+   jhz6KRgKML4zu53DOVbNi/Buz7ilUUuSmJyMsJpCvZs+v50NCclS6XsTV
+   r5gM/GvuMyaaxBesqka3W47RzbuYl0jsOwwkZaEKcNYAYZnVengznAYMd
+   IQHmyfhA5QZBPln6ki9QBIM+C8/3V0u3qFY4PxXSzzkBpRB+dE2A9lkzZ
+   w==;
+X-CSE-ConnectionGUID: Fsru6iNNTFmMXx4NGt/0BQ==
+X-CSE-MsgGUID: ODJAO65JTDyniUDe4qaP/A==
+X-IPAS-Result: =?us-ascii?q?A0BFAgBlLuxq/5D/Ja1aHgEBCxIMggULgld1YENJA5Vcb?=
+ =?us-ascii?q?AOeIYF+DwEBAQ9EDQQBAYUFAo4dAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKA?=
+ =?us-ascii?q?QEFAQEBAgEHBYEOE4ZPDZATAgEDMgFGECAxKysZgwIBgnQDEbxkgiyBAeAxA?=
+ =?us-ascii?q?QsUAYE4hUCII3aEfScbG4FygRWDaYEFgVwCiAQiBIIigQyBeIx6iEVIgR4DW?=
+ =?us-ascii?q?SwBVRMNCgsHBYFoAzUSKhVuMh2BIz4XgQcbBgWBHYEegRKBB12BKyhdASGBC?=
+ =?us-ascii?q?IF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJj8VDGQLGgVhC?=
+ =?us-ascii?q?AINDHI5EDAeJC8FHCZAGwoYGA1IESw3FRkEPm4Hki+DEQEVeAEqASCBOlKTL?=
+ =?us-ascii?q?pJIgTWfXAoog3iMJJU6GjOFW6UWmQiOCpV0XYRpgWg8gVlwFYMiCUoZD44vC?=
+ =?us-ascii?q?gscg0TOViYyAgkDLwEBBwIHDgMLgWiQAi2BTwEB?=
+IronPort-Data: A9a23:LehsF6/ZGBs33U29wg0HDrUD0H+TJUtcMsCJ2f8bNWPcYEJGY0x3m
+ GZJWGjVbPaKZTejc94gPom+9h4G7MPTzYRmQQRvrXtEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmB4E/rbei5xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mtyyHjEAX9gWAtazpIs/jrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2kYJpcFpOdRJ11g8
+ NkoOGwrQQzE38iPlefTpulE3qzPLeHxN48Z/3UlxjbDALN+HtbIQr7B4plT2zJYasJmRKmFI
+ ZFGL2AyMVKZP0En1lQ/UPrSmM+khXT7ejxJoXqepLE85C7YywkZPL3FbYaOK4XbGJsP9qqej
+ kXq3U3eXEw4CPCOzzu43n/wn+b32gquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzBbCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:lmWcQaiPoE74uQDPM+r7zTFsHXBQXvgji2hC6mlwRA09TyVXra
+ +TdZMgpHjJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7dZmnbUQKTRekIh7cKgQeQfhEWndQy6U
+ 4PScRD4aXLfDtHpPe/xhWkGNA9x9TC2qWpieDCi0pJd2hRGsddB8MTMHfiLqWwLzM2fKYEKA
+ ==
+X-Talos-CUID: =?us-ascii?q?9a23=3AumaSk2oKsXX6O7kyo6EeK6vmUe4+aGCDzVH2H2G?=
+ =?us-ascii?q?9LFZ5FJu6VRjI0poxxg=3D=3D?=
+X-Talos-MUID: 9a23:rk08LQn0Ymm/S8Xz3eRTdnpFGOVBxPrzKnwhgJMHhuWJaTV5A3C02WE=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="543912216"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:14:26 +0000
-Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
+   d="scan'208";a="543919562"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:27:57 +0000
+Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id D3D5E18000242
-	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 07:14:25 +0000 (GMT)
-Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id 7C9A8CC12A6; Wed,  4 Nov 2026 23:14:25 -0800 (PST)
-From: Yogita Urade <yurade@cisco.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 7FFB6180003DC;
+	Thu,  5 Nov 2026 07:27:57 +0000 (GMT)
+Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
+	id 2B17DCBF201; Wed,  4 Nov 2026 23:27:57 -0800 (PST)
+From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][scarthgap][PATCH 1/2]  python3-pymongo: Fix CVE-2026-88029
-Date: Wed,  4 Nov 2026 23:14:23 -0800
-Message-Id: <20261105071424.2092617-1-yurade@cisco.com>
+Cc: Darsh Kelaiya <dkelaiya@cisco.com>
+Subject: [oe][meta-filesystems][scarthgap][PATCH 2/2] ntfs-3g-ntfsprogs: mark CVE-2026-56136 as fixed
+Date: Wed,  4 Nov 2026 23:27:54 -0800
+Message-Id: <20261105072754.878938-2-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
+In-Reply-To: <20261105072754.878938-1-dkelaiya@cisco.com>
+References: <20261105072754.878938-1-dkelaiya@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-7310.cisco.com [10.30.220.95];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:14:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131876
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:28:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131877
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [2],
-using the commit shown in [1].
+From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-[1] https://github.com/mongodb/mongo-python-driver/commit/fa676586ba4b399168a4d1d41c30dc2166cc44fd
-[2] https://jira.mongodb.org/browse/PYTHON-5994
+The three index validation patches already included for CVE-2026-46572
+and CVE-2026-42617 also provide the complete CVE-2026-56136 fix [1-3].
+Their combined source changes match Tuxera's 2022.10.3 backport linked
+from the advisory [4]. Add the missing CVE tag to each patch so
+cve-check recognises the existing fix.
 
-Signed-off-by: Yogita Urade <yurade@cisco.com>
+[1] https://github.com/tuxera/ntfs-3g/commit/2ead8a3ccf940c0219ffba587fab54e21462b3a5
+[2] https://github.com/tuxera/ntfs-3g/commit/dfd1a7c6eb23a22238ec193451fa59c989b4381f
+[3] https://github.com/tuxera/ntfs-3g/commit/edf2b892356684ca8f2fc5898943c7a9b90ffb80
+[4] https://github.com/tuxera/ntfs-3g/security/advisories/GHSA-r66g-c39x-cw95
+
+Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-pymongo/CVE-2026-88029.patch      | 840 ++++++++++++++++++
- .../python/python3-pymongo_4.6.3.bb           |   3 +
- 2 files changed, 843 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
+ ...> CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch} | 2 +-
+ ...> CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch} | 2 +-
+ ...> CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch} | 2 +-
+ .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb        | 6 +++---
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+ rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p1.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch} (97%)
+ rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p2.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch} (98%)
+ rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p3.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
-new file mode 100644
-index 0000000000..c1a04571fe
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
-@@ -0,0 +1,840 @@
-+From fa676586ba4b399168a4d1d41c30dc2166cc44fd Mon Sep 17 00:00:00 2001
-+From: Jeffrey 'Alex' Clark <aclark@aclark.net>
-+Date: Thu, 10 Sep 2026 10:12:37 -0400
-+Subject: [PATCH] PYTHON-5994 Use exact match for file ID in GridFS delete
-+ methods (#3046)
-+
-+Co-authored-by: Iris <58442094+sleepyStick@users.noreply.github.com>
-+
-+CVE: CVE-2026-88029
-+Upstream-Status: Backport [https://github.com/mongodb/mongo-python-driver/commit/fa676586ba4b399168a4d1d41c30dc2166cc44fd]
-+
-+Backport Changes:
-+- Mapped upstream GridFS operations into the 4.6.3 monolithic
-+  gridfs/__init__.py and gridfs/grid_file.py implementations.
-+- Ported the synchronous GridIn.abort() regression test to the
-+  existing test/test_gridfs_bucket.py suite.
-+- Updated the bundled legacy retryable-read GridFS download fixtures
-+  to expect the new exact-match filters.
-+- Omitted asynchronous and unified integration tests and fixtures because
-+  this recipe does not run those upstream integration suites.
-+
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ gridfs/__init__.py                                 |  14 +-
-+ gridfs/grid_file.py                                |  20 ++-
-+ .../legacy/gridfs-download-serverErrors.json       | 144 +++++++++++++++------
-+ test/retryable_reads/legacy/gridfs-download.json   |  32 +++--
-+ .../legacy/gridfs-downloadByName-serverErrors.json |  44 +++++--
-+ .../legacy/gridfs-downloadByName.json              |   8 +-
-+ test/test_gridfs_bucket.py                         |  28 ++++
-+ 7 files changed, 221 insertions(+), 69 deletions(-)
-+
-+diff --git a/gridfs/__init__.py b/gridfs/__init__.py
-+index 63aa406..8abd0a4 100644
-+--- a/gridfs/__init__.py
-++++ b/gridfs/__init__.py
-+@@ -273,8 +273,8 @@ class GridFS:
-+            ``delete`` no longer ensures indexes.
-+         """
-+         _disallow_transactions(session)
-+-        self.__files.delete_one({"_id": file_id}, session=session)
-+-        self.__chunks.delete_many({"files_id": file_id}, session=session)
-++        self.__files.delete_one({"_id": {"$eq": file_id}}, session=session)
-++        self.__chunks.delete_many({"files_id": {"$eq": file_id}}, session=session)
-+ 
-+     def list(self, session: Optional[ClientSession] = None) -> list[str]:
-+         """List the names of all files stored in this instance of
-+@@ -328,7 +328,7 @@ class GridFS:
-+            Added ``session`` parameter.
-+         """
-+         if filter is not None and not isinstance(filter, abc.Mapping):
-+-            filter = {"_id": filter}
-++            filter = {"_id": {"$eq": filter}}
-+ 
-+         _disallow_transactions(session)
-+         for f in self.find(filter, *args, session=session, **kwargs):
-+@@ -444,6 +444,8 @@ class GridFS:
-+         if kwargs:
-+             f = self.__files.find_one(kwargs, ["_id"], session=session)
-+         else:
-++            if document_or_id is not None and not isinstance(document_or_id, abc.Mapping):
-++                document_or_id = {"_id": {"$eq": document_or_id}}
-+             f = self.__files.find_one(document_or_id, ["_id"], session=session)
-+ 
-+         return f is not None
-+@@ -826,8 +828,8 @@ class GridFSBucket:
-+            Added ``session`` parameter.
-+         """
-+         _disallow_transactions(session)
-+-        res = self._files.delete_one({"_id": file_id}, session=session)
-+-        self._chunks.delete_many({"files_id": file_id}, session=session)
-++        res = self._files.delete_one({"_id": {"$eq": file_id}}, session=session)
-++        self._chunks.delete_many({"files_id": {"$eq": file_id}}, session=session)
-+         if not res.deleted_count:
-+             raise NoFile("no file could be deleted because none matched %s" % file_id)
-+ 
-+@@ -1012,7 +1014,7 @@ class GridFSBucket:
-+         """
-+         _disallow_transactions(session)
-+         result = self._files.update_one(
-+-            {"_id": file_id}, {"$set": {"filename": new_filename}}, session=session
-++            {"_id": {"$eq": file_id}}, {"$set": {"filename": new_filename}}, session=session
-+         )
-+         if not result.matched_count:
-+             raise NoFile(
-+diff --git a/gridfs/grid_file.py b/gridfs/grid_file.py
-+index 685d097..e6f7b85 100644
-+--- a/gridfs/grid_file.py
-++++ b/gridfs/grid_file.py
-+@@ -72,7 +72,9 @@ def _grid_in_property(
-+ 
-+     def setter(self: Any, value: Any) -> Any:
-+         if self._closed:
-+-            self._coll.files.update_one({"_id": self._file["_id"]}, {"$set": {field_name: value}})
-++            self._coll.files.update_one(
-++                {"_id": {"$eq": self._file["_id"]}}, {"$set": {field_name: value}}
-++            )
-+         self._file[field_name] = value
-+ 
-+     if read_only:
-+@@ -223,8 +225,10 @@ class GridIn:
-+ 
-+     def abort(self) -> None:
-+         """Remove all chunks/files that may have been uploaded and close."""
-+-        self._coll.chunks.delete_many({"files_id": self._file["_id"]}, session=self._session)
-+-        self._coll.files.delete_one({"_id": self._file["_id"]}, session=self._session)
-++        self._coll.chunks.delete_many(
-++            {"files_id": {"$eq": self._file["_id"]}}, session=self._session
-++        )
-++        self._coll.files.delete_one({"_id": {"$eq": self._file["_id"]}}, session=self._session)
-+         object.__setattr__(self, "_closed", True)
-+ 
-+     @property
-+@@ -268,7 +272,9 @@ class GridIn:
-+             # them now.
-+             self._file[name] = value
-+             if self._closed:
-+-                self._coll.files.update_one({"_id": self._file["_id"]}, {"$set": {name: value}})
-++                self._coll.files.update_one(
-++                    {"_id": {"$eq": self._file["_id"]}}, {"$set": {name: value}}
-++                )
-+ 
-+     def __flush_data(self, data: Any) -> None:
-+         """Flush `data` to a chunk."""
-+@@ -507,7 +513,9 @@ class GridOut(io.IOBase):
-+     def _ensure_file(self) -> None:
-+         if not self._file:
-+             _disallow_transactions(self._session)
-+-            self._file = self.__files.find_one({"_id": self.__file_id}, session=self._session)
-++            self._file = self.__files.find_one(
-++                {"_id": {"$eq": self.__file_id}}, session=self._session
-++            )
-+             if not self._file:
-+                 raise NoFile(
-+                     f"no file in gridfs collection {self.__files!r} with _id {self.__file_id!r}"
-+@@ -779,7 +787,7 @@ class _GridOutChunkIterator:
-+         return self
-+ 
-+     def _create_cursor(self) -> None:
-+-        filter = {"files_id": self._id}
-++        filter = {"files_id": {"$eq": self._id}}
-+         if self._next_chunk > 0:
-+             filter["n"] = {"$gte": self._next_chunk}
-+         _disallow_transactions(self._session)
-+diff --git a/test/retryable_reads/legacy/gridfs-download-serverErrors.json b/test/retryable_reads/legacy/gridfs-download-serverErrors.json
-+index cec3a50..b5a3126 100644
-+--- a/test/retryable_reads/legacy/gridfs-download-serverErrors.json
-++++ b/test/retryable_reads/legacy/gridfs-download-serverErrors.json
-+@@ -83,7 +83,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -96,7 +98,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -109,7 +113,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -153,7 +159,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -166,7 +174,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -179,7 +189,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -223,7 +235,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -236,7 +250,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -249,7 +265,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -293,7 +311,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -306,7 +326,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -319,7 +341,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -363,7 +387,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -376,7 +402,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -389,7 +417,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -433,7 +463,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -446,7 +478,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -459,7 +493,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -503,7 +539,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -516,7 +554,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -529,7 +569,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -573,7 +615,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -586,7 +630,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -599,7 +645,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -643,7 +691,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -656,7 +706,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -669,7 +721,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -713,7 +767,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -726,7 +782,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -739,7 +797,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -783,7 +843,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -796,7 +858,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -809,7 +873,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -854,7 +920,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -867,7 +935,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -912,7 +982,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+diff --git a/test/retryable_reads/legacy/gridfs-download.json b/test/retryable_reads/legacy/gridfs-download.json
-+index 4d0d5a1..8acd5c7 100644
-+--- a/test/retryable_reads/legacy/gridfs-download.json
-++++ b/test/retryable_reads/legacy/gridfs-download.json
-+@@ -71,7 +71,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -84,7 +86,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -128,7 +132,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -141,7 +147,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -154,7 +162,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -202,7 +212,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -244,7 +256,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+@@ -257,7 +271,9 @@
-+               "find": "fs.files",
-+               "filter": {
-+                 "_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               }
-+             },
-+diff --git a/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json b/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
-+index a64230d..9038e2f 100644
-+--- a/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
-++++ b/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
-+@@ -103,7 +103,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -167,7 +169,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -231,7 +235,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -295,7 +301,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -359,7 +367,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -423,7 +433,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -487,7 +499,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -551,7 +565,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -615,7 +631,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -679,7 +697,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -743,7 +763,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+diff --git a/test/retryable_reads/legacy/gridfs-downloadByName.json b/test/retryable_reads/legacy/gridfs-downloadByName.json
-+index 48f2168..282e120 100644
-+--- a/test/retryable_reads/legacy/gridfs-downloadByName.json
-++++ b/test/retryable_reads/legacy/gridfs-downloadByName.json
-+@@ -80,7 +80,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+@@ -144,7 +146,9 @@
-+               "find": "fs.chunks",
-+               "filter": {
-+                 "files_id": {
-+-                  "$oid": "000000000000000000000001"
-++                  "$eq": {
-++                    "$oid": "000000000000000000000001"
-++                  }
-+                 }
-+               },
-+               "sort": {
-+diff --git a/test/test_gridfs_bucket.py b/test/test_gridfs_bucket.py
-+index 53e5cad..1352f08 100644
-+--- a/test/test_gridfs_bucket.py
-++++ b/test/test_gridfs_bucket.py
-+@@ -27,6 +27,7 @@ from test.utils import joinall, one, rs_client, rs_or_single_client, single_clie
-+ import gridfs
-+ from bson.binary import Binary
-+ from bson.int64 import Int64
-++from bson.min_key import MinKey
-+ from bson.objectid import ObjectId
-+ from bson.son import SON
-+ from gridfs.errors import CorruptGridFile, NoFile
-+@@ -34,6 +35,7 @@ from pymongo.errors import (
-+     ConfigurationError,
-+     NotPrimaryError,
-+     ServerSelectionTimeoutError,
-++    WriteError,
-+ )
-+ from pymongo.mongo_client import MongoClient
-+ from pymongo.read_preferences import ReadPreference
-+@@ -373,6 +375,32 @@ class TestGridfs(IntegrationTest):
-+         self.assertRaises(ValueError, gin.write, b"test4")
-+         self.assertEqual(0, self.db.fs.chunks.count_documents({"files_id": gin._id}))
-+ 
-++    # Server versions older than 5.0 do not support document values with
-++    # "$"-prefixed keys.
-++    @client_context.require_version_min(5, 0)
-++    def test_abort_with_injected_file_id_does_not_delete_other_files(self):
-++        bucket = self.fs
-++        file1_bytes = b"\x11\x22\x33\x44"
-++        bucket.upload_from_stream("file1", file1_bytes)
-++
-++        upload_stream = bucket.open_upload_stream_with_id(
-++            {"$gt": MinKey()}, "file2", chunk_size_bytes=2
-++        )
-++        upload_stream.write(b"\x55\x66\x77\x88")
-++        try:
-++            upload_stream.abort()
-++        except WriteError:
-++            # Newer server versions reject an equality match on "_id" whose
-++            # operand itself resembles a query operator, even when the
-++            # driver safely wraps it in "$eq". The chunks are still cleaned
-++            # up in that case; only the (never created) files document
-++            # delete is rejected.
-++            pass
-++
-++        self.assertEqual(file1_bytes, (bucket.open_download_stream_by_name("file1")).read())
-++        with self.assertRaises(NoFile):
-++            bucket.open_download_stream_by_name("file2")
-++
-+     def test_download_to_stream(self):
-+         file1 = BytesIO(b"hello world")
-+         # Test with one chunk.
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb b/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
-index 35a6a81516..b2d4d72f85 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
-@@ -8,6 +8,9 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p1.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch
+similarity index 97%
+rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p1.patch
+rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch
+index 47121ea9a5..27fc063df2 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p1.patch
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch
+@@ -13,7 +13,7 @@ inconsistency.
+ Thanks to Alexandro Calo' from Nozomi Networks Labs for reporting this
+ issue.
  
-+SRC_URI = "file://CVE-2026-88029.patch \
-+          "
-+
- SRC_URI[sha256sum] = "400074090b9a631f120b42c61b222fd743490c133a5d2f99c0208cefcccc964e"
+-CVE: CVE-2026-46572 CVE-2026-42617
++CVE: CVE-2026-46572 CVE-2026-42617 CVE-2026-56136
+ Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/2ead8a3ccf940c0219ffba587fab54e21462b3a5]
  
- inherit pypi setuptools3
+ (cherry picked from commit 2ead8a3ccf940c0219ffba587fab54e21462b3a5)
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p2.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch
+similarity index 98%
+rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p2.patch
+rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch
+index d2d40124fe..ae78336386 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p2.patch
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch
+@@ -10,7 +10,7 @@ ntfs_attr_inconsistent() for INDEX_ROOT and from
+ ntfs_index_block_inconsistent() for INDX blocks so callers can rely on
+ the IE stream being well-formed.
+ 
+-CVE: CVE-2026-46572 CVE-2026-42617
++CVE: CVE-2026-46572 CVE-2026-42617 CVE-2026-56136
+ Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/dfd1a7c6eb23a22238ec193451fa59c989b4381f]
+ 
+ (cherry picked from commit dfd1a7c6eb23a22238ec193451fa59c989b4381f)
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p3.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch
+similarity index 96%
+rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p3.patch
+rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch
+index 54bce4f95e..3ff1a46ce8 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_p3.patch
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch
+@@ -9,7 +9,7 @@ applies at libntfs-3g/dir.c.
+ 
+ Thanks to Alexandro Calo' from Nozomi Networks Labs for the report.
+ 
+-CVE: CVE-2026-46572 CVE-2026-42617
++CVE: CVE-2026-46572 CVE-2026-42617 CVE-2026-56136
+ Upstream-Status: Backport [https://github.com/tuxera/ntfs-3g/commit/edf2b892356684ca8f2fc5898943c7a9b90ffb80]
+ 
+ (cherry picked from commit edf2b892356684ca8f2fc5898943c7a9b90ffb80)
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+index 938a661d2c..f076db4dbd 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+ 
+ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
+            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
+-           file://CVE-2026-46572_CVE-2026-42617_p1.patch \
+-           file://CVE-2026-46572_CVE-2026-42617_p2.patch \
+-           file://CVE-2026-46572_CVE-2026-42617_p3.patch \
++           file://CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch \
++           file://CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch \
++           file://CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch \
+            file://CVE-2026-46571.patch \
+            file://CVE-2026-46570.patch \
+            file://CVE-2026-46569.patch \
 -- 
-2.35.6
-
+2.44.4
