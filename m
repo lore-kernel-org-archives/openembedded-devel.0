@@ -1,60 +1,60 @@
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6629.1793913779949792875
+Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6743.1793913782027256365
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2026 13:22:59 -0800
+ Thu, 05 Nov 2026 13:23:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=MqzLYLLG;
- spf=pass (domain: gmail.com, ip: 74.125.82.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-36f8cdd30beso128954eec.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 13:22:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=UCLGbyR5;
+ spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-1a3c08d6928so68553c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 13:23:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793913779; x=1794518579; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1793913781; x=1794518581; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uKcJChIQQ4BNQL2uTStls8BatYWzKDucFBs2RmD3uPg=;
-        b=MqzLYLLGSncLxdDsTtz35wlDkIaX2vUKwRAsZbnC2OGk45IowobYvByuKRtDDZy9E9
-         qrMuOmfkYOs75Jv/H2z8SP16d5I1RBD0z0IDJ1AwKBUm9Or6j4rfzl7g2zHdbzIyEiI9
-         iz83p6F2Tsj294UWNv/5dJjakW1dDf2p6JbcChrHyWwYUq0Ss4ehN/hOAgeZuh5yrj3G
-         NpLPW7nSt8xx7kXL65dSOK+Fe58s9G0tyDUU0nxrXe8cLtJpxpF22f4j3jDZIX1NgpFc
-         ypo+x+s4DvYekkbr3B/cJNRsCZ2aA+ybsR7HyfXeJ2dE95wyVksxDyJlFFY9AtTHToCr
-         IiOg==
+        bh=PA6XKl9SqBXYy9VJi5794gwNgSMxB6x5+2LDcHdpgNQ=;
+        b=UCLGbyR5C2O33Nx0DzQDFtPHjQgUail7KaRnpnDzkFc2yEDXl9pJWCHzrlLbn5Khmu
+         jwLu2Q2dqPzhKzeG89vG7k7htLhSb3p/H9zyE5S+gMn6yUkQ9jwB8w4DOLeWBE1MMXKi
+         zIT6hBDeLwmgchCiEZd9lLI9KmjLQABNP/iNR/qYrqP9c4wgLAhHIOpL8MnDGBNP9gw0
+         jdBatVd+BoGM4St6ETRUbLh4f5PzMIeF2i+9iGWu4UFPoiOlW/nEyL5peYaTUJmEis0V
+         4EcqMH4FEKUekb0Przwqe39je18QEYJEFjhDPVTftR+YkFNmhXnriRepU+vPQTlXqAPF
+         dUeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793913779; x=1794518579;
+        d=1e100.net; s=20260707; t=1793913781; x=1794518581;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uKcJChIQQ4BNQL2uTStls8BatYWzKDucFBs2RmD3uPg=;
-        b=EHPfnuGeix3cXkAnK3BmdUGfShwMS7bJ0CnrW+tPhteJFCrwnJYxHB6/ZB+63tk4u8
-         PwY9MNYG5nSqd1ToCQC62q17EvOgQQmZEhjjrCm7nQTEsvua5FIiF0UDTKZAG4uOQ/cN
-         RquyQxRaQzfeoMVAfB2SP9ZlxUclfl+8X5bq3hoIgMp+MSjDiqNFTXiUUUqjQL+Dt3sa
-         EmfnmW82/cuAvLctPSHED77qOkcC2ByMi82jaIe50H/NxknQhbssbUHhpi07uA7avs1W
-         K5c8DlESMI7RmNxNW/upqv+xMUJ301p/BcXTBTQdxwo2v/nLyuGYn5m5t8dY6Y416KLk
-         HTbg==
-X-Gm-Message-State: APuU4Z8azmj3Q5qj1134ywSqwGn3EQ0CwZOa1/iRAwe/GVoGqE5NsO4e
-	JawEngTCQTA8gBWkShn0AGzCFb9bxjy0Pm4NHA0S9PUAo9i/bsSwiDhWJnuu4w==
-X-Gm-Gg: AYBFou1WoXO8hu9MV0mykZJwrnOa1IxixI8iG/F/egagRsgzorgzWksw38m+3T8UovF
-	Dcyir3aeja3TMYCNJAISJ6xCAiJe9hOjDHTauXMFBJw2GWTtsfEGhBfjeHNid4TTBBH/IQCeQ5g
-	mQGirC80ghHuKgmiBsMUKNpucPKmfz3kCc+t9ujgmJcH1kl8ikomDnAgrrLiiiUfB4oyjtKZ+TC
-	ekTCdhcFtZGADTLWh73ZgmMq2kVCaizI39n7btCMzm8XRMZbMiQ2tETbL9fCR9RnbveWvm/Eg55
-	UOqAExxaq4bsW3yQwu/jykFq19NlxB4qlyGCB7vb2WdwfznNBvrdf53CdnZrEExFutliXOQYKgp
-	CmvSUw0KobFDWrz/J5GJfHDBTlLwaE0OK1ba8Ue65dbhk+myUdk5EqAjg3FSs6SolbQsFKHOKsW
-	/fDpDiNa4UFSpqROE/X8KWytC22qKm7IRutzdFY3FV7G+ABEA6LgYPiq00r9T0TAY99qhz1G4tE
-	oWf7lvThMN4b3Wkzgn1MgRfbNCk6J6hVZ/T4YjWdKnmgbIpF7anCMiaAfHPDdtFGeNC1ILamblu
-	PhAbTmLWTgGdbpVc5TR8maQMCk2Y/toHVFYu3J/2/6Nn3LqzP7yZ+RkUlsIJJA==
-X-Received: by 2002:a05:693c:26c9:b0:369:36c9:5848 with SMTP id 5a478bee46e88-36f76022c16mr494205eec.12.1793913779026;
-        Thu, 05 Nov 2026 13:22:59 -0800 (PST)
+        bh=PA6XKl9SqBXYy9VJi5794gwNgSMxB6x5+2LDcHdpgNQ=;
+        b=AX53k9SJcg9gNeXMJC615i5IalF/+e1ofU7GjkKDf82r94miMTKUM5u5PPVIdAqCe9
+         nGubmiDx2lesM+M1g9oFQA8FBX6XNx10NAa0BRFsGHqA3ifIHLx9OalT6QeAVuS80T2H
+         Tq6zalhPwqkYQuI1LqqDLcgxuLl8q0ip3eL7wKTgNYlBiVmuob04leeu3zAq71xnGy0Q
+         IZGCBiKgmcCT4cTdV17Sm6tUdw7vWEw9eNFkzeYIat+0twsiWVIciWkW4PDCkmx1IGPq
+         9KFWRNwqB1DJkv+CNqP1hoHoOQPbXS4VQ2+bojJkoXrX3Fw1fsQDqrSTe34ZydvwcVIF
+         wD8Q==
+X-Gm-Message-State: APuU4Z8CbY/HY6Rt8QGjd1mr5QN3P2DDhN7LuS3LpjwvpA6CcmDOY6x2
+	Ae2g2UPwLb4r2yI92MS7jXRzco/fEbywgmCdAK86tJbHudYz5fwHzmP2t71Lrw==
+X-Gm-Gg: AYBFou3ut5hx0ZIpRsKFIqDrVLts5nfFx8E7mSkVsuvncZL1se+e803ENeBISWAB/Y3
+	x3IUIDMcr7h+L1Is+byBaT3OtZnbKMVGZN3NIbKJ8e2LfLjuh5FcMRu0Pn2B5CtT8QeC0Yn7jYb
+	EBed/qbyihR1SF/3mfD2upJNF0of4AuGMzW32TeV6diPMjY4RkUnSrCa6Dq7A+1U6DpWFGEVA0l
+	HMfucz6iYwH0NybpeXoLQjiz6I+R4DrT0KLqavMoE0/3xhK/FJ33vsLAf9AlOnhjtVHLfRzvBmC
+	JugkRO9mRYqfifxW4OmnjIl4rOuuXAmPWZ4/x5w0OEU4XAp2KhZsNW6WRrK56iAd/Yhhd8lo/lD
+	UhXfhO46qX2oGwPY8vU8nX4veNyNi1IcNsAEONE/RXTUyO6UCm7EjPW+TBExkSOepbpIsHL8N30
+	1Hfo9w7aqDR1fbQY00oLe6hEf7RJvGofC5d9LJVDb6IjrXq48nHOtyZN5SkQjkiiGxHmYXykDJQ
+	fb807GPrl+m4MrLEMBRBOd+egVHSrVpsmd/8xtN9Pn9XVHtIRrSkoYtRNxVCuR500SbQSZoV+/r
+	a/3ccabHmnmWmIufpbvOUi9tmQhcSHk39ev2FUpNimhaE58G/hWrRrPvlSja4A==
+X-Received: by 2002:a05:701b:2050:20b0:166:5552:780a with SMTP id a92af1059eb24-1b25d31e5a2mr315437c88.8.1793913781066;
+        Thu, 05 Nov 2026 13:23:01 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36f71a25da0sm1034059eec.24.2026.11.05.13.22.57
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36f71a25da0sm1034059eec.24.2026.11.05.13.22.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 13:22:58 -0800 (PST)
+        Thu, 05 Nov 2026 13:23:00 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 2/14] hdf5: patch CVE-2026-19023 and CVE-2026-19024
-Date: Fri,  6 Nov 2026 10:22:38 +1300
-Message-ID: <20261105212250.490188-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][wrynose][PATCH 3/14] hdf5: patch CVE-2026-120689
+Date: Fri,  6 Nov 2026 10:22:39 +1300
+Message-ID: <20261105212250.490188-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261105212250.490188-1-ankur.tyagi85@gmail.com>
 References: <20261105212250.490188-1-ankur.tyagi85@gmail.com>
@@ -62,213 +62,96 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 21:23:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131939
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131940
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Details:
-https://nvd.nist.gov/vuln/detail/cve-2026-19023
-https://nvd.nist.gov/vuln/detail/cve-2026-19024
+https://nvd.nist.gov/vuln/detail/cve-2026-120689
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../files/CVE-2026-19023-CVE-2026-19024.patch | 176 ++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   1 +
- 2 files changed, 177 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-19023-CVE-2026-19024.patch
+ .../hdf5/files/CVE-2026-120689.patch          | 60 +++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |  1 +
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-19023-CVE-2026-19024.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-19023-CVE-2026-19024.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch b/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
 new file mode 100644
-index 0000000000..acf3817ea1
+index 0000000000..dd9e9374ac
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-19023-CVE-2026-19024.patch
-@@ -0,0 +1,176 @@
-+From e7e85949865b771b2b0b73ac1edaf54ce14cd894 Mon Sep 17 00:00:00 2001
-+From: Matt L <124107509+mattjala@users.noreply.github.com>
-+Date: Wed, 7 Oct 2026 11:03:55 -0500
-+Subject: [PATCH] Fix CVEs related to vlen binary output and malformed fill
-+ values in h5dump (#6507)
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
+@@ -0,0 +1,60 @@
++From 0472315404dc03d0e89eec4513eb80930f9b176e Mon Sep 17 00:00:00 2001
++From: PGZXB <420254146@qq.com>
++Date: Fri, 9 Oct 2026 02:52:55 +0800
++Subject: [PATCH] Fix StackOverflow when calling `H5Gget_info` (#6685)
 +
-+* Fix h5dump SIGSEGVs on vlen binary output and malformed fill value
++Verify B-tree node level when an expected level value is provided
 +
-+Fixes two crafted-file crashes in h5dump (GitHub issues #6486 and #6487).
-+A third report (#6488) is the Fletcher32 checksum-length underflow already
-+fixed for h5ls in PR #6497, so it is not addressed again here.
++(cherry picked from commit 5933130b610c7bd6e66fe93c2798b97e3f3188c8)
 +
-+Issue #6486 (tools) - render_bin_output() SIGSEGV with "-b" on a
-+variable-length string dataset. The H5T_STRING branch reused the local
-+"size" variable both as the per-element stride and as the string length
-+returned by strlen(), so after the first element the stride became that
-+string's length and subsequent elements were read from misaligned
-+addresses, dereferencing a garbage pointer. This affected any multi-element
-+vlen-string dataset, not just crafted files. A separate str_len variable is
-+now used for the write length so "size" stays the datatype stride. As this
-+is a tools bug, the regression test is a tools test: tools/test/h5dump adds
-+the tbinvlstr case (binary dump of a vlen-string dataset, file
-+tbinvlstr.h5, generated by h5dumpgentest.c/gent_binvlstr), which crashes on
-+develop and passes with the fix.
-+
-+Issue #6487 (library) - H5Pget_fill_value() SIGSEGV via H5T_path_find().
-+A crafted version-1/2 fill value message can have "fill defined" set with a
-+negative size field; H5O_fill_old_decode() leaves fill.size negative and
-+fill.buf/type NULL instead of normalizing to the "undefined" sentinel.
-+That value is neither 0 nor -1, so H5P_get_fill_value() fell through to
-+H5T_path_find() with a NULL source type and crashed. H5P_get_fill_value()
-+now rejects a NULL fill datatype and returns an error, keeping the dataset
-+itself readable. h5dump's XML fill-value renderer (xml_dump_fill_value) is
-+also hardened: it checks the buffer allocation and the H5Pget_fill_value()
-+return value and emits an empty fill value element instead of dereferencing
-+an unallocated or unretrievable buffer.
-+
-+Regression test (library): test/fillval.c test_bad_fill_value() reads a
-+crafted file (generated by test/gen_bad_fill.c, committed as
-+test/testfiles/bad_fill_value.h5) and verifies that the dataset data is
-+still readable while H5Pget_fill_value() fails cleanly instead of crashing.
-+
-+Verified: both PoCs exit cleanly with the fix (SIGSEGV without it); the
-+committed fixtures crash the pre-fix library/tools and pass post-fix; the
-+fillval suite, the new tbinvlstr h5dump test, and the non-XML h5dump suite
-+pass.
-+
-+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
-+
-+* Update CHANGELOG to list CVEs/GH issues
-+
-+* Renumber tbinvlstr.h5 generator macro to FILE114
-+
-+---------
-+
-+Co-authored-by: Claude Opus 4.8 <noreply@anthropic.com>
-+Co-authored-by: Larry Knox <lrknox@hdfgroup.org>
-+
-+CVE: CVE-2026-19023 CVE-2026-19024
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/cfcd7fe7421cc94e0527d043f2d1b271986e7b09]
-+
-+Dropped changes to the test and CHANGELOG file.
++CVE: CVE-2026-120689
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/5933130b610c7bd6e66fe93c2798b97e3f3188c8]
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5Pdcpl.c                 |  7 +++++++
-+ tools/lib/h5tools.c           |  9 ++++++---
-+ tools/src/h5dump/h5dump_xml.c | 33 ++++++++++++++++++++++++++++-----
-+ 3 files changed, 41 insertions(+), 8 deletions(-)
++ release_docs/CHANGELOG.md |  6 ++++++
++ src/H5B.c                 | 14 ++++++++++++++
++ 2 files changed, 20 insertions(+)
 +
-+diff --git a/src/H5Pdcpl.c b/src/H5Pdcpl.c
-+index 2317c317f73..a1a33d52c7b 100644
-+--- a/src/H5Pdcpl.c
-++++ b/src/H5Pdcpl.c
-+@@ -3207,6 +3207,13 @@ H5P_get_fill_value(H5P_genplist_t *plist, const H5T_t *type, void *value /*out*/
-+         HGOTO_DONE(SUCCEED);
-+     } /* end if */
++diff --git a/release_docs/CHANGELOG.md b/release_docs/CHANGELOG.md
++index c181f174bbb..b5c99cd4b16 100644
++--- a/release_docs/CHANGELOG.md
+++++ b/release_docs/CHANGELOG.md
++@@ -778,6 +778,12 @@ Added Fortran wrapper `h5fdsubfiling_get_file_mapping_f()` for the subfiling fil
 + 
-++    /*
-++     * A fill value with a nonzero size must have an associated datatype in
-++     * order to be converted to the destination type.
++    A malformed HDF5 file could have an attribute with a recorded name length of zero.This would lead to an overflow and an invalid memory access. An integrity check has been added to detect this case and safely stop file decoding.
++ 
+++### Fixed a stack overflow when iterating a corrupted B-tree
+++
+++   `H5B__iterate_helper()` now verifies that a B-tree node it has just protected has the level the traversal expects, when the expected level is known. The equivalent check in `H5B__cache_deserialize()` only runs when a node is first loaded into the metadata cache, so a corrupted B-tree whose child pointer revisits a node that is already cached (for example, a node that points to itself) could bypass that check and recurse without bound until the stack was exhausted. Such a file is now rejected with an error instead of crashing. This was observed through `H5Gget_info()`.
+++
+++   Fixes GitHub issue #6403
+++
++ ## Java Library
++ 
++ ### Renamed the Callbacks.java file to H5Callbacks.java
++diff --git a/src/H5B.c b/src/H5B.c
++index c9571708b73..4c6b1a55480 100644
++--- a/src/H5B.c
+++++ b/src/H5B.c
++@@ -1140,6 +1140,20 @@ H5B__iterate_helper(H5F_t *f, const H5B_class_t *type, haddr_t addr, int exp_lev
++     if (NULL == (bt = (H5B_t *)H5AC_protect(f, H5AC_BT, addr, &cache_udata, H5AC__READ_ONLY_FLAG)))
++         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5_ITER_ERROR, "unable to load B-tree node");
++ 
+++    /* Check for a corrupted B-tree node.  If the caller has told us what
+++     * level to expect, verify that the node we just protected actually has
+++     * that level.  This check must be performed here rather than relying
+++     * solely on the equivalent check in H5B__cache_deserialize, because
+++     * that deserialize callback only runs when a node is first loaded into
+++     * the metadata cache.  A corrupted B-tree whose child pointer revisits
+++     * a node that is already cached (e.g. a node that points to itself)
+++     * bypasses the deserialize callback entirely, so without this check the
+++     * recursion below would never terminate and would overflow the stack.
 ++     */
-++    if (NULL == fill.type)
-++        HGOTO_ERROR(H5E_PLIST, H5E_CANTGET, FAIL, "fill value has no datatype");
+++    if (exp_level != H5B_UNKNOWN_NODELEVEL && bt->level != (unsigned)exp_level)
+++        HGOTO_ERROR(H5E_BTREE, H5E_BADVALUE, H5_ITER_ERROR,
+++                    "B-tree node level is not as expected, possibly corrupted");
 ++
-+     /*
-+      * Can we convert between the source and destination datatypes?
-+      */
-+diff --git a/tools/lib/h5tools.c b/tools/lib/h5tools.c
-+index b1a2aa0de4c..3e028504f7c 100644
-+--- a/tools/lib/h5tools.c
-++++ b/tools/lib/h5tools.c
-+@@ -1825,24 +1825,27 @@ render_bin_output(FILE *stream, hid_t container, hid_t tid, void *_mem, hsize_t
-+             H5T_str_t     pad;
-+             char         *s = NULL;
-+             unsigned char tempuchar;
-++            size_t        str_len; /* # of bytes to write for this element */
-+ 
-+             H5TOOLS_DEBUG("H5T_STRING");
-+             pad = H5Tget_strpad(tid);
-+ 
-+             for (block_index = 0; block_index < block_nelmts; block_index++) {
-++                /* Advance by the datatype size */
-+                 mem = ((unsigned char *)_mem) + block_index * size;
-+ 
-+                 if (H5Tis_variable_str(tid)) {
-+                     s = *(char **)((void *)mem);
-+                     if (s != NULL)
-+-                        size = strlen(s);
-++                        str_len = strlen(s);
-+                     else
-+                         H5TOOLS_THROW((-1), "NULL string");
-+                 }
-+                 else {
-+-                    s = (char *)mem;
-++                    s       = (char *)mem;
-++                    str_len = size;
-+                 }
-+-                for (i = 0; i < size && (s[i] || pad != H5T_STR_NULLTERM); i++) {
-++                for (i = 0; i < str_len && (s[i] || pad != H5T_STR_NULLTERM); i++) {
-+                     memcpy(&tempuchar, &s[i], sizeof(unsigned char));
-+                     if (1 != fwrite(&tempuchar, sizeof(unsigned char), 1, stream))
-+                         H5TOOLS_THROW((-1), "fwrite failed");
-+diff --git a/tools/src/h5dump/h5dump_xml.c b/tools/src/h5dump/h5dump_xml.c
-+index f1a34870f4a..6f3e00a27df 100644
-+--- a/tools/src/h5dump/h5dump_xml.c
-++++ b/tools/src/h5dump/h5dump_xml.c
-+@@ -3534,8 +3534,9 @@ xml_dump_fill_value(hid_t dcpl, hid_t type)
-+     hid_t             n_type = H5I_INVALID_HID;
-+     void             *buf;
-+     char             *name;
-+-    h5tools_str_t     buffer; /* string into which to render   */
-+-    h5tools_context_t ctx;    /* print context  */
-++    herr_t            fill_ret = FAIL; /* status of retrieving the fill value */
-++    h5tools_str_t     buffer;          /* string into which to render   */
-++    h5tools_context_t ctx;             /* print context  */
-+     h5tool_format_t  *outputformat = &xml_dataformat;
-+     h5tool_format_t   string_dataformat;
-+     hsize_t           curr_pos = 0; /* total data element position   */
-+@@ -3593,11 +3594,33 @@ xml_dump_fill_value(hid_t dcpl, hid_t type)
-+         n_type = type;
-+ 
-+     space = H5Tget_size(n_type);
-+-    buf   = malloc((size_t)space);
-++    /* Zero-initialize so a partially-filled buffer never contains
-++     * uninitialized memory for the rendering code below. */
-++    buf = calloc((size_t)space, 1);
-++
-++    /* Retrieve the fill value.  This can fail on a corrupted or crafted file
-++     * whose fill value has no datatype. Any errors are suppressed and handled
-++     * later. */
-++    if (buf != NULL) {
-++        H5E_BEGIN_TRY
-++        {
-++            fill_ret = H5Pget_fill_value(dcpl, n_type, buf);
-++        }
-++        H5E_END_TRY
-++    }
-+ 
-+-    H5Pget_fill_value(dcpl, n_type, buf);
-++    if (buf == NULL || fill_ret < 0) {
-++        /* No usable fill value: emit an empty element rather than
-++         * dereferencing an unallocated or unretrievable buffer. */
-++        ctx.need_prefix = true;
-+ 
-+-    if (H5Tget_class(n_type) == H5T_REFERENCE) {
-++        /* Render the element */
-++        h5tools_str_reset(&buffer);
-++        h5tools_str_append(&buffer, "<%sNoData />", xmlnsprefix);
-++        h5tools_render_element(rawoutstream, outputformat, &ctx, &buffer, &curr_pos,
-++                               (size_t)outputformat->line_ncols, (hsize_t)0, (hsize_t)0);
-++    }
-++    else if (H5Tget_class(n_type) == H5T_REFERENCE) {
-+         const char *path = lookup_ref_path(*(H5R_ref_t *)buf);
-+ 
-+         ctx.need_prefix = true;
++     /* Iterate over node's children */
++     for (u = 0; u < bt->nchildren && ret_value == H5_ITER_CONT; u++) {
++         if (bt->level > 0)
 diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 1ec5ad049e..31a56bce3c 100644
+index 31a56bce3c..ea2ce9747c 100644
 --- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
 +++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -23,6 +23,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
-            file://CVE-2026-17574.patch \
+@@ -24,6 +24,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
             file://CVE-2026-19025.patch \
             file://CVE-2026-19026-CVE-2026-19027-CVE-2026-19028.patch \
-+           file://CVE-2026-19023-CVE-2026-19024.patch \
+            file://CVE-2026-19023-CVE-2026-19024.patch \
++           file://CVE-2026-120689.patch \
             "
  SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
  
