@@ -1,343 +1,954 @@
-Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28938.1793862866880278293
+Received: from rcdn-iport-7.cisco.com (rcdn-iport-7.cisco.com [173.37.86.78])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29126.1793862866972556380
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 04 Nov 2026 23:14:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=AzLlscD+;
- spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=VpI61qf2;
+ spf=pass (domain: cisco.com, ip: 173.37.86.78, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=10115; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=21604; q=dns/txt;
   s=iport01; t=1793862866; x=1795072466;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=/7X/fsfY9WZvaAsRflos6sQSEppTsL+9/a3NQoQLMcw=;
-  b=AzLlscD+x2/g8eClE+deDWy5N8yemGK86lr8L9dQEmiSI2Z+AqGDqB9b
-   f9NXwIJpPNXCpWNVgrmfBdAqQ3yzQSMEhcZ+klnWi5HJSnp7Q4e5FTlXR
-   RqAaasdNHpoVNrq4cRcGi7eAKlQdszfbk8PjorysSHqx7kTpFFaZFdJbb
-   fLBDgCRWy6nRI54Ot/iz22gLTP7DUWrw8EgvKbv/DYqg/3FVu0ShM83kf
-   ijnDIR2Y1pDj8i40ZaTRAxikwwl82dVSmEF/illPoe7vNmcynrqw6H9aF
-   yNJLTZUoo4CNSePmebb5T7oAZQG58EurIDadpScgxYvAMrEY9Xrzn5zNL
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Ius1VwAhtPMc2aSSIq/E1xJsELgpXhGmvO7OW5SveA4=;
+  b=VpI61qf2rg+Kcponz08xE6qk26AAiJ4BTyrW5DjVx6b5nanuAyYJEJYr
+   ebwt96No5aUSMSTZ67QpTUUjG0wuDoHCMaBoGGStVfPoZWTTg7TYOLt29
+   dnubuQPUN6bporQcY+Z51bqynF6FJ/6yc6ZZDZTo8igWO0YjOKQoqpSKu
+   VmtmUKq9xKVp0xWmlZZVv1HqnulGdPw6Dle+ub0GWLKJKZ/ylpFuTcGy4
+   Mr9tZfcq02Z9D9d+TYw43NGfSIQp5FNAFuAPycH2jN3hhvvnnbusqOjSY
+   Gz0mkJC7Y/+KcjtNP/mZj9T9LAj4cIPH0d32TrTtJBFd8K4Q67FPktCj3
    A==;
-X-CSE-ConnectionGUID: 7++LAkheSCiptnfg/CZRAw==
-X-CSE-MsgGUID: 2VFYRRkOTVeYv19NrozyKA==
-X-IPAS-Result: =?us-ascii?q?A0AaAABSLOxq/43/Ja1aHAEBAQEBAQcBARIBAQQEAQGBf?=
- =?us-ascii?q?AcBAQsBglZ1YENJjHKHOIE1bAOeIRSBag8BAQEPRA0EAQGFBQKOHQImNAkOA?=
- =?us-ascii?q?QIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBDhOGTw2QEgECAQMnCwEYA?=
- =?us-ascii?q?T0cAwECFhkrIwgZgwIBgnQDEbxXgXkzgQGDKQExBYEe2UuBaAELFAGBOAGFP?=
- =?us-ascii?q?4gjXRgBhH0nG4FJRIEVg2mBBYFcAoEZDniGBwSCDYEhgVqBA4IkiXECgVKGc?=
- =?us-ascii?q?UiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BEoEHXYErK?=
- =?us-ascii?q?F4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/FQxkC?=
- =?us-ascii?q?xoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5IvgwoHASw2ARcJC?=
- =?us-ascii?q?gEHJBeCNyyTI49kgiGBNZ9chCqMJJU6GjOEBKZtC5h9glmLMZVpaIRpgWg8g?=
- =?us-ascii?q?VkzGggbFTuCZwlKGQ+OKwMBCguDYIUTyUUmMgIJMgEBBwIHDgMLgWiQAIF+A?=
- =?us-ascii?q?QE?=
-IronPort-Data: A9a23:LirYpa0oDV2BciJ1NfbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2MOz
- 2cdXWHVOquJMGTyKt4lbYvl8hxU6paHzIRkQQpp3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+X-CSE-ConnectionGUID: MmSo5iCURMyur4jYnIIeLw==
+X-CSE-MsgGUID: pca/CPFQQuaSixYFnN0rXQ==
+X-IPAS-Result: =?us-ascii?q?A0DHAgBSLOxq/4//Ja1aglmCV3VgQ0mUKoE1bJ4kgX4PA?=
+ =?us-ascii?q?QEBD0QNBAEBkyQCJjUIDgECBAMCAwEBAQEBAQEBAQEBAQoBAQUBAQECAQcFg?=
+ =?us-ascii?q?Q4Thk8NkBIBIA0LARgBWQMBAlojIYMCAYJ0AxG8BRs3gXkzgQGDKQExBYEe2?=
+ =?us-ascii?q?UuBaAELFAGBOIVAiCNdGAFEhDknG4FJRIR+gQWBXAKBSIZeBIINgSGBWh5lj?=
+ =?us-ascii?q?BUCgVKGcUiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BE?=
+ =?us-ascii?q?oEHXYErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
+ =?us-ascii?q?SY/FQxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5IvgwoHY?=
+ =?us-ascii?q?ysBKgF/IV09Aw0wkmkBOY9kgiGBNZ9chCqMJJU6GjOEBIFXkkKSVAuYfY4Kl?=
+ =?us-ascii?q?WFwhGmBaQE6gVkzGggbFTuCZwlKGQ+OLgEKC4NghRPJRSYyAgkyAQEHAgcOA?=
+ =?us-ascii?q?wuBaJEeYAEB?=
+IronPort-Data: A9a23:sVC5h62qgY/9sD8G7PbD5YVwkn2cJEfYwER7XKvMYLTBsI5bp2FRz
+ WMfX23UafmOZGCjL98nYYnnpEsAsZHdy4I2QFBr3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
  512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
  rsen+WFYAX7gmcsbjpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
  u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGUwJ1GaQb+utMKmBW6
- foWJ3cmXCqqmLfjqF67YrEEasULNsLnOsYb/3pn1zycVapgSpHYSKKM7thdtNsyrpkRRrCFO
- IxDNGcpNUiZC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQsjOS9aYqFI4fiqcN9xHi2l
- 1j8/EPFPBwrKoXO7yCC4GOPr7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1rfDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:hcQY0KpaALlhptClIx0dyaQaV5oHeYIsimQD101hICG9Ffbo8/
- xG88506faZslsssTQb6LO90cq7MBbhHOBOgLX5VI3KNGKNhILrFvAB0WKI+VLd8kPFmtK1rZ
- 0BT4FOTPvtEFN9kcH2pCO8E9om3Z271ZrAv5a485+oJjsaEp2JKGxCe2CmLnE=
-X-Talos-CUID: 9a23:IvPNL29cnWfgh9fAzOeVvxFXWeQMcX3Q91zRO1O+B2kuY4+vYEDFrQ==
-X-Talos-MUID: 9a23:tDOqmwYZ7eXEseBT7QHCtQtYN+BU3amfFhlct48BqdinHHkl
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGKUQNOtAZ0dtNJHBT7
+ 6AaGTYsTx2nmLfjqF67YrEEasULNsLnOsYb/3pn1zycVahgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUibC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQsjOO8aYCPI4LiqcN9hk2R4
+ Un+0V3AHxghNcyu5zyjqmicv7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1jfDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:SkLdjq0dQwNZsizD5+gDXAqjBIIkLtp133Aq2lEZdPUzSL37qy
+ nAppomPHPP5Qr5O0tQ+uxoRpPgfZq0z/cciuMs1NyZMzUO1lHFEGgb1+vf6gylPTHi/ehA0q
+ olWa1/BNrsSWVet6/BkWyF+xJK+qjhzEhu7t2uq0tQcQ==
+X-Talos-CUID: 9a23:CbGMPW99X45OzEaHr1iVv2sRIcd4c1bg9lLBPlXkC1dvaZyYbUDFrQ==
+X-Talos-MUID: 9a23:nkrcGwR+cnzZym/BRXT0jzglH/9G2p2zAXsMgaQove/cLxxJbmI=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="544818813"
-Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
-  by rcdn-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:14:26 +0000
+   d="scan'208";a="543912216"
+Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
+  by rcdn-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:14:26 +0000
 Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id D6ACE180005C7
+	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id D3D5E18000242
 	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 07:14:25 +0000 (GMT)
 Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id 817EDCC12A7; Wed,  4 Nov 2026 23:14:25 -0800 (PST)
+	id 7C9A8CC12A6; Wed,  4 Nov 2026 23:14:25 -0800 (PST)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][scarthgap][PATCH 2/2]  python3-pymongo: Fix CVE-2026-106435
-Date: Wed,  4 Nov 2026 23:14:24 -0800
-Message-Id: <20261105071424.2092617-2-yurade@cisco.com>
+Subject: [oe][meta-python][scarthgap][PATCH 1/2]  python3-pymongo: Fix CVE-2026-88029
+Date: Wed,  4 Nov 2026 23:14:23 -0800
+Message-Id: <20261105071424.2092617-1-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20261105071424.2092617-1-yurade@cisco.com>
-References: <20261105071424.2092617-1-yurade@cisco.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: VERIFIED;sjc-ads-7310.cisco.com [10.30.220.95];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
 X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
-X-Outbound-Node: rcdn-l-core-04.cisco.com
+X-Outbound-Node: rcdn-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:14:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131875
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131876
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [3],
-using the commit shown in [1] and regression commit from [2].
+This patch applies the upstream fix as referenced in [2],
+using the commit shown in [1].
 
-Follow up the PYTHON-6110 CVE fix: its regex flags scan leaves a
-one-byte boundary error after consuming the pattern terminator.
-Apply PYTHON-6111's correction and terminator-overlap regression test.
-
-[1] https://github.com/mongodb/mongo-python-driver/commit/bb8d4e195275e75bd94ebeffb53cc747d357fcf4
-[2] https://github.com/mongodb/mongo-python-driver/commit/b5a36ccbdb97298fbf9b5b5767affe92c534461f
-[3] https://jira.mongodb.org/browse/PYTHON-6110
-[4] https://jira.mongodb.org/browse/PYTHON-6111
+[1] https://github.com/mongodb/mongo-python-driver/commit/fa676586ba4b399168a4d1d41c30dc2166cc44fd
+[2] https://jira.mongodb.org/browse/PYTHON-5994
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../CVE-2026-106435-regression.patch          |  79 +++++++++++
- .../python3-pymongo/CVE-2026-106435.patch     | 134 ++++++++++++++++++
- .../python/python3-pymongo_4.6.3.bb           |   2 +
- 3 files changed, 215 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435-regression.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435.patch
+ .../python3-pymongo/CVE-2026-88029.patch      | 840 ++++++++++++++++++
+ .../python/python3-pymongo_4.6.3.bb           |   3 +
+ 2 files changed, 843 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435-regression.patch b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435-regression.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
 new file mode 100644
-index 0000000000..2f3e0ded99
+index 0000000000..c1a04571fe
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435-regression.patch
-@@ -0,0 +1,79 @@
-+From b5a36ccbdb97298fbf9b5b5767affe92c534461f Mon Sep 17 00:00:00 2001
-+From: Steven Silvester <steve.silvester@mongodb.com>
-+Date: Tue, 13 Oct 2026 09:30:43 -0500
-+Subject: [PATCH] PYTHON-6111 C extension accepts BSON documents where element
-+ data overlaps the document terminator (#3113)
-+
-+CVE: CVE-2026-106435
-+Upstream-Status: Backport [https://github.com/mongodb/mongo-python-driver/commit/b5a36ccbdb97298fbf9b5b5767affe92c534461f]
-+
-+Backport Changes:
-+- Omitted doc/changelog.rst file changes.
-+
-+Signed-off-by: Yogita Urade <yurade@cisco.com>
-+---
-+ bson/_cbsonmodule.c |  7 ++++++-
-+ test/test_bson.py   | 34 ++++++++++++++++++++++++++++++++++
-+ 2 files changed, 40 insertions(+), 1 deletion(-)
-+
-+diff --git a/bson/_cbsonmodule.c b/bson/_cbsonmodule.c
-+--- a/bson/_cbsonmodule.c
-++++ b/bson/_cbsonmodule.c
-+@@ -2102,5 +2102,8 @@
-+     case 8:
-+         {
-++            if (max < 1) {
-++                goto invalid;
-++            }
-+             char boolean_raw = buffer[(*position)++];
-+             if (0 == boolean_raw) {
-+                 value = Py_False;
-+@@ -2290,7 +2290,9 @@
-+             *position += (unsigned)pattern_length + 1;
-+             start += pattern_length + 1;
-+-            const char* flags_nul = memchr(start, 0, max - pattern_length);
-++            /* PYTHON-6111: account for the pattern NUL consumed above so
-++             * the flags terminator cannot overlap the document terminator. */
-++            const char* flags_nul = memchr(start, 0, max - pattern_length - 1);
-+             if (!flags_nul) {
-+                 Py_DECREF(pattern);
-+                 goto invalid;
-+             }
-+diff --git a/test/test_bson.py b/test/test_bson.py
-+--- a/test/test_bson.py
-++++ b/test/test_bson.py
-+@@ -438,0 +439,34 @@ class TestBSON(unittest.TestCase):
-++    def test_element_overlaps_document_terminator(self):
-++        # PYTHON-6111: an element whose value would consume the document
-++        # terminator byte must be rejected, matching the pure-Python decoder.
-++        bad_bsons = [
-++            # Boolean value byte is the document terminator.
-++            ("boolean value", b"\x08\x00\x00\x00\x08a\x00\x00"),
-++            # Regex pattern terminator is the document terminator.
-++            ("regex pattern", b"\x08\x00\x00\x00\x0ba\x00\x00"),
-++            # Regex flags terminator is the document terminator.
-++            ("regex flags", b"\x0a\x00\x00\x00\x0ba\x00b\x00\x00"),
-++        ]
-++        for description, data in bad_bsons:
-++            with self.subTest(description, bad_bson=data):
-++                self.assertFalse(is_valid(data))
-++                with self.assertRaises(InvalidBSON):
-++                    decode(data)
-++                with self.assertRaises(InvalidBSON):
-++                    decode(bytearray(data))
-++                with self.assertRaises(InvalidBSON):
-++                    decode(memoryview(data))
-++                with self.assertRaises(InvalidBSON):
-++                    decode(array.array("B", data))
-++                with self.assertRaises(InvalidBSON):
-++                    list(decode_iter(data))
-++                with self.assertRaises(InvalidBSON):
-++                    decode_all(data)
-++                with mmap.mmap(-1, len(data)) as mm:
-++                    mm.write(data)
-++                    mm.seek(0)
-++                    with self.assertRaises(InvalidBSON):
-++                        decode(mm)
-++                    with self.assertRaises(InvalidBSON):
-++                        decode_all(mm)
-++
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435.patch b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435.patch
-new file mode 100644
-index 0000000000..688c8fc5b6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435.patch
-@@ -0,0 +1,134 @@
-+From bb8d4e195275e75bd94ebeffb53cc747d357fcf4 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
+@@ -0,0 +1,840 @@
++From fa676586ba4b399168a4d1d41c30dc2166cc44fd Mon Sep 17 00:00:00 2001
 +From: Jeffrey 'Alex' Clark <aclark@aclark.net>
-+Date: Thu, 8 Oct 2026 14:45:52 -0400
-+Subject: [PATCH] PYTHON-6110 Bound Regex element scans to the remaining
-+ document bytes (#3109)
++Date: Thu, 10 Sep 2026 10:12:37 -0400
++Subject: [PATCH] PYTHON-5994 Use exact match for file ID in GridFS delete
++ methods (#3046)
 +
-+Co-authored-by: Steven Silvester <steve.silvester@mongodb.com>
++Co-authored-by: Iris <58442094+sleepyStick@users.noreply.github.com>
 +
-+CVE: CVE-2026-106435
-+Upstream-Status: Backport [https://github.com/mongodb/mongo-python-driver/commit/bb8d4e195275e75bd94ebeffb53cc747d357fcf4]
++CVE: CVE-2026-88029
++Upstream-Status: Backport [https://github.com/mongodb/mongo-python-driver/commit/fa676586ba4b399168a4d1d41c30dc2166cc44fd]
 +
 +Backport Changes:
-+- Added the `struct` import used to update the malformed-regex test's BSON
-+  length prefix.
-+- Adapted the C hunk to 4.6.3: the new flags-NUL failure path uses the
-+  `Py_DECREF(pattern); goto invalid;` cleanup, and the existing flags-length
-+  size/overflow check remains after the bounded length is computed. Upstream
-+  also removes the `max < pattern_length + flags_length` check.
++- Mapped upstream GridFS operations into the 4.6.3 monolithic
++  gridfs/__init__.py and gridfs/grid_file.py implementations.
++- Ported the synchronous GridIn.abort() regression test to the
++  existing test/test_gridfs_bucket.py suite.
++- Updated the bundled legacy retryable-read GridFS download fixtures
++  to expect the new exact-match filters.
++- Omitted asynchronous and unified integration tests and fixtures because
++  this recipe does not run those upstream integration suites.
 +
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ bson/_cbsonmodule.c | 25 ++++++++++++++++++--------
-+ test/test_bson.py   | 46 +++++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 63 insertions(+), 8 deletions(-)
++ gridfs/__init__.py                                 |  14 +-
++ gridfs/grid_file.py                                |  20 ++-
++ .../legacy/gridfs-download-serverErrors.json       | 144 +++++++++++++++------
++ test/retryable_reads/legacy/gridfs-download.json   |  32 +++--
++ .../legacy/gridfs-downloadByName-serverErrors.json |  44 +++++--
++ .../legacy/gridfs-downloadByName.json              |   8 +-
++ test/test_gridfs_bucket.py                         |  28 ++++
++ 7 files changed, 221 insertions(+), 69 deletions(-)
 +
-+diff --git a/bson/_cbsonmodule.c b/bson/_cbsonmodule.c
-+index da86cd8..6868308 100644
-+--- a/bson/_cbsonmodule.c
-++++ b/bson/_cbsonmodule.c
-+@@ -2270,18 +2270,31 @@ static PyObject* get_value(PyObject* self, PyObject* name, const char* buffer,
-+             PyObject* pattern;
-+             int flags;
-+             size_t flags_length, i;
-+-            size_t pattern_length = strlen(buffer + *position);
-+-            if (pattern_length > BSON_MAX_SIZE || max < pattern_length) {
-++            /* PYTHON-6110: Search for each NUL within the bytes remaining
-++             * in the document rather than scanning the buffer. */
-++            const char* start = buffer + *position;
-++            const char* pattern_nul = memchr(start, 0, max);
-++            if (!pattern_nul) {
-++                goto invalid;
-++            }
-++            size_t pattern_length = (size_t)(pattern_nul - start);
-++            if (pattern_length > BSON_MAX_SIZE) {
-+                 goto invalid;
-+             }
-+             pattern = PyUnicode_DecodeUTF8(
-+-                buffer + *position, pattern_length,
-++                start, pattern_length,
-+                 options->unicode_decode_error_handler);
-+             if (!pattern) {
-+                 goto invalid;
-+             }
-+             *position += (unsigned)pattern_length + 1;
-+-            flags_length = strlen(buffer + *position);
-++            start += pattern_length + 1;
-++            const char* flags_nul = memchr(start, 0, max - pattern_length);
-++            if (!flags_nul) {
-++                Py_DECREF(pattern);
-++                goto invalid;
-++            }
-++            flags_length = (size_t)(flags_nul - start);
-+             if (flags_length > BSON_MAX_SIZE ||
-+                     (BSON_MAX_SIZE - pattern_length) < flags_length) {
-+                 Py_DECREF(pattern);
-+@@ -2288,10 +2301,6 @@
-+                 goto invalid;
-+             }
-+-            if (max < pattern_length + flags_length) {
-+-                Py_DECREF(pattern);
-+-                goto invalid;
-+-            }
-+             flags = 0;
-+             for (i = 0; i < flags_length; i++) {
-+                 if (buffer[*position + i] == 'i') {
-+                     flags |= 2;
-+diff --git a/test/test_bson.py b/test/test_bson.py
-+index 749c63b..483facf 100644
-+--- a/test/test_bson.py
-++++ b/test/test_bson.py
-+@@ -23,6 +23,7 @@ import mmap
-+ import os
-+ import pickle
-+ import re
-++import struct
-+ import sys
-+ import tempfile
-+ import uuid
-+@@ -392,0 +393,45 @@ class TestBSON(unittest.TestCase):
-++    def test_malformed_regex(self):
-++        # PYTHON-6110: decoding a malformed Regex element must raise
-++        # InvalidBSON on every accepted buffer type.
-++        malformed = []
-++        for pattern in ("", "x", "xx"):
-++            doc = bytearray(encode({"a": Regex(pattern, "")}))
-++            # Drop the trailing flags NUL and document EOO bytes, leaving
-++            # the flags string unterminated after the pattern's NUL.
-++            del doc[-2:]
-++            # Keep the length prefix consistent with the shorter document.
-++            doc[:4] = struct.pack("<i", len(doc))
-++            malformed.append(bytes(doc))
-++        for data in malformed:
-++            with self.assertRaises(InvalidBSON):
-++                decode(data)
-++            with self.assertRaises(InvalidBSON):
-++                decode(bytearray(data))
-++            with self.assertRaises(InvalidBSON):
-++                decode(memoryview(data))
-++            with self.assertRaises(InvalidBSON):
-++                decode(array.array("B", data))
-++            with self.assertRaises(InvalidBSON):
-++                list(decode_iter(data))
-++            with self.assertRaises(InvalidBSON):
-++                decode_all(data)
-++            with mmap.mmap(-1, len(data)) as mm:
-++                mm.write(data)
-++                mm.seek(0)
-++                with self.assertRaises(InvalidBSON):
-++                    decode(mm)
-++                with self.assertRaises(InvalidBSON):
-++                    decode_all(mm)
++diff --git a/gridfs/__init__.py b/gridfs/__init__.py
++index 63aa406..8abd0a4 100644
++--- a/gridfs/__init__.py
+++++ b/gridfs/__init__.py
++@@ -273,8 +273,8 @@ class GridFS:
++            ``delete`` no longer ensures indexes.
++         """
++         _disallow_transactions(session)
++-        self.__files.delete_one({"_id": file_id}, session=session)
++-        self.__chunks.delete_many({"files_id": file_id}, session=session)
+++        self.__files.delete_one({"_id": {"$eq": file_id}}, session=session)
+++        self.__chunks.delete_many({"files_id": {"$eq": file_id}}, session=session)
++ 
++     def list(self, session: Optional[ClientSession] = None) -> list[str]:
++         """List the names of all files stored in this instance of
++@@ -328,7 +328,7 @@ class GridFS:
++            Added ``session`` parameter.
++         """
++         if filter is not None and not isinstance(filter, abc.Mapping):
++-            filter = {"_id": filter}
+++            filter = {"_id": {"$eq": filter}}
++ 
++         _disallow_transactions(session)
++         for f in self.find(filter, *args, session=session, **kwargs):
++@@ -444,6 +444,8 @@ class GridFS:
++         if kwargs:
++             f = self.__files.find_one(kwargs, ["_id"], session=session)
++         else:
+++            if document_or_id is not None and not isinstance(document_or_id, abc.Mapping):
+++                document_or_id = {"_id": {"$eq": document_or_id}}
++             f = self.__files.find_one(document_or_id, ["_id"], session=session)
++ 
++         return f is not None
++@@ -826,8 +828,8 @@ class GridFSBucket:
++            Added ``session`` parameter.
++         """
++         _disallow_transactions(session)
++-        res = self._files.delete_one({"_id": file_id}, session=session)
++-        self._chunks.delete_many({"files_id": file_id}, session=session)
+++        res = self._files.delete_one({"_id": {"$eq": file_id}}, session=session)
+++        self._chunks.delete_many({"files_id": {"$eq": file_id}}, session=session)
++         if not res.deleted_count:
++             raise NoFile("no file could be deleted because none matched %s" % file_id)
++ 
++@@ -1012,7 +1014,7 @@ class GridFSBucket:
++         """
++         _disallow_transactions(session)
++         result = self._files.update_one(
++-            {"_id": file_id}, {"$set": {"filename": new_filename}}, session=session
+++            {"_id": {"$eq": file_id}}, {"$set": {"filename": new_filename}}, session=session
++         )
++         if not result.matched_count:
++             raise NoFile(
++diff --git a/gridfs/grid_file.py b/gridfs/grid_file.py
++index 685d097..e6f7b85 100644
++--- a/gridfs/grid_file.py
+++++ b/gridfs/grid_file.py
++@@ -72,7 +72,9 @@ def _grid_in_property(
++ 
++     def setter(self: Any, value: Any) -> Any:
++         if self._closed:
++-            self._coll.files.update_one({"_id": self._file["_id"]}, {"$set": {field_name: value}})
+++            self._coll.files.update_one(
+++                {"_id": {"$eq": self._file["_id"]}}, {"$set": {field_name: value}}
+++            )
++         self._file[field_name] = value
++ 
++     if read_only:
++@@ -223,8 +225,10 @@ class GridIn:
++ 
++     def abort(self) -> None:
++         """Remove all chunks/files that may have been uploaded and close."""
++-        self._coll.chunks.delete_many({"files_id": self._file["_id"]}, session=self._session)
++-        self._coll.files.delete_one({"_id": self._file["_id"]}, session=self._session)
+++        self._coll.chunks.delete_many(
+++            {"files_id": {"$eq": self._file["_id"]}}, session=self._session
+++        )
+++        self._coll.files.delete_one({"_id": {"$eq": self._file["_id"]}}, session=self._session)
++         object.__setattr__(self, "_closed", True)
++ 
++     @property
++@@ -268,7 +272,9 @@ class GridIn:
++             # them now.
++             self._file[name] = value
++             if self._closed:
++-                self._coll.files.update_one({"_id": self._file["_id"]}, {"$set": {name: value}})
+++                self._coll.files.update_one(
+++                    {"_id": {"$eq": self._file["_id"]}}, {"$set": {name: value}}
+++                )
++ 
++     def __flush_data(self, data: Any) -> None:
++         """Flush `data` to a chunk."""
++@@ -507,7 +513,9 @@ class GridOut(io.IOBase):
++     def _ensure_file(self) -> None:
++         if not self._file:
++             _disallow_transactions(self._session)
++-            self._file = self.__files.find_one({"_id": self.__file_id}, session=self._session)
+++            self._file = self.__files.find_one(
+++                {"_id": {"$eq": self.__file_id}}, session=self._session
+++            )
++             if not self._file:
++                 raise NoFile(
++                     f"no file in gridfs collection {self.__files!r} with _id {self.__file_id!r}"
++@@ -779,7 +787,7 @@ class _GridOutChunkIterator:
++         return self
++ 
++     def _create_cursor(self) -> None:
++-        filter = {"files_id": self._id}
+++        filter = {"files_id": {"$eq": self._id}}
++         if self._next_chunk > 0:
++             filter["n"] = {"$gte": self._next_chunk}
++         _disallow_transactions(self._session)
++diff --git a/test/retryable_reads/legacy/gridfs-download-serverErrors.json b/test/retryable_reads/legacy/gridfs-download-serverErrors.json
++index cec3a50..b5a3126 100644
++--- a/test/retryable_reads/legacy/gridfs-download-serverErrors.json
+++++ b/test/retryable_reads/legacy/gridfs-download-serverErrors.json
++@@ -83,7 +83,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -96,7 +98,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -109,7 +113,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -153,7 +159,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -166,7 +174,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -179,7 +189,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -223,7 +235,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -236,7 +250,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -249,7 +265,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -293,7 +311,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -306,7 +326,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -319,7 +341,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -363,7 +387,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -376,7 +402,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -389,7 +417,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -433,7 +463,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -446,7 +478,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -459,7 +493,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -503,7 +539,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -516,7 +554,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -529,7 +569,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -573,7 +615,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -586,7 +630,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -599,7 +645,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -643,7 +691,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -656,7 +706,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -669,7 +721,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -713,7 +767,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -726,7 +782,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -739,7 +797,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -783,7 +843,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -796,7 +858,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -809,7 +873,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -854,7 +920,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -867,7 +935,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -912,7 +982,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++diff --git a/test/retryable_reads/legacy/gridfs-download.json b/test/retryable_reads/legacy/gridfs-download.json
++index 4d0d5a1..8acd5c7 100644
++--- a/test/retryable_reads/legacy/gridfs-download.json
+++++ b/test/retryable_reads/legacy/gridfs-download.json
++@@ -71,7 +71,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -84,7 +86,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -128,7 +132,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -141,7 +147,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -154,7 +162,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -202,7 +212,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -244,7 +256,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++@@ -257,7 +271,9 @@
++               "find": "fs.files",
++               "filter": {
++                 "_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               }
++             },
++diff --git a/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json b/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
++index a64230d..9038e2f 100644
++--- a/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
+++++ b/test/retryable_reads/legacy/gridfs-downloadByName-serverErrors.json
++@@ -103,7 +103,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -167,7 +169,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -231,7 +235,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -295,7 +301,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -359,7 +367,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -423,7 +433,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -487,7 +499,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -551,7 +565,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -615,7 +631,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -679,7 +697,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -743,7 +763,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++diff --git a/test/retryable_reads/legacy/gridfs-downloadByName.json b/test/retryable_reads/legacy/gridfs-downloadByName.json
++index 48f2168..282e120 100644
++--- a/test/retryable_reads/legacy/gridfs-downloadByName.json
+++++ b/test/retryable_reads/legacy/gridfs-downloadByName.json
++@@ -80,7 +80,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++@@ -144,7 +146,9 @@
++               "find": "fs.chunks",
++               "filter": {
++                 "files_id": {
++-                  "$oid": "000000000000000000000001"
+++                  "$eq": {
+++                    "$oid": "000000000000000000000001"
+++                  }
++                 }
++               },
++               "sort": {
++diff --git a/test/test_gridfs_bucket.py b/test/test_gridfs_bucket.py
++index 53e5cad..1352f08 100644
++--- a/test/test_gridfs_bucket.py
+++++ b/test/test_gridfs_bucket.py
++@@ -27,6 +27,7 @@ from test.utils import joinall, one, rs_client, rs_or_single_client, single_clie
++ import gridfs
++ from bson.binary import Binary
++ from bson.int64 import Int64
+++from bson.min_key import MinKey
++ from bson.objectid import ObjectId
++ from bson.son import SON
++ from gridfs.errors import CorruptGridFile, NoFile
++@@ -34,6 +35,7 @@ from pymongo.errors import (
++     ConfigurationError,
++     NotPrimaryError,
++     ServerSelectionTimeoutError,
+++    WriteError,
++ )
++ from pymongo.mongo_client import MongoClient
++ from pymongo.read_preferences import ReadPreference
++@@ -373,6 +375,32 @@ class TestGridfs(IntegrationTest):
++         self.assertRaises(ValueError, gin.write, b"test4")
++         self.assertEqual(0, self.db.fs.chunks.count_documents({"files_id": gin._id}))
++ 
+++    # Server versions older than 5.0 do not support document values with
+++    # "$"-prefixed keys.
+++    @client_context.require_version_min(5, 0)
+++    def test_abort_with_injected_file_id_does_not_delete_other_files(self):
+++        bucket = self.fs
+++        file1_bytes = b"\x11\x22\x33\x44"
+++        bucket.upload_from_stream("file1", file1_bytes)
 ++
-++    def test_regex_empty_flags(self):
-++        # PYTHON-6110: a valid regex with an empty flags string must
-++        # continue to decode.
-++        valid = encode({"a": Regex("b", "")})
-++        expected = {"a": Regex("b", 0)}
-++        self.assertEqual(decode(valid), expected)
-++        with mmap.mmap(-1, len(valid)) as mm:
-++            mm.write(valid)
-++            mm.seek(0)
-++            self.assertEqual(decode(mm), expected)
-++            self.assertEqual(decode_all(mm), [expected])
+++        upload_stream = bucket.open_upload_stream_with_id(
+++            {"$gt": MinKey()}, "file2", chunk_size_bytes=2
+++        )
+++        upload_stream.write(b"\x55\x66\x77\x88")
+++        try:
+++            upload_stream.abort()
+++        except WriteError:
+++            # Newer server versions reject an equality match on "_id" whose
+++            # operand itself resembles a query operator, even when the
+++            # driver safely wraps it in "$eq". The chunks are still cleaned
+++            # up in that case; only the (never created) files document
+++            # delete is rejected.
+++            pass
 ++
+++        self.assertEqual(file1_bytes, (bucket.open_download_stream_by_name("file1")).read())
+++        with self.assertRaises(NoFile):
+++            bucket.open_download_stream_by_name("file2")
+++
++     def test_download_to_stream(self):
++         file1 = BytesIO(b"hello world")
++         # Test with one chunk.
 diff --git a/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb b/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
-index b2d4d72f85..005607f27f 100644
+index 35a6a81516..b2d4d72f85 100644
 --- a/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
 +++ b/meta-python/recipes-devtools/python/python3-pymongo_4.6.3.bb
-@@ -9,6 +9,8 @@ LICENSE = "Apache-2.0"
+@@ -8,6 +8,9 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
+ LICENSE = "Apache-2.0"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
- SRC_URI = "file://CVE-2026-88029.patch \
-+           file://CVE-2026-106435.patch \
-+           file://CVE-2026-106435-regression.patch \
-           "
- 
++SRC_URI = "file://CVE-2026-88029.patch \
++          "
++
  SRC_URI[sha256sum] = "400074090b9a631f120b42c61b222fd743490c133a5d2f99c0208cefcccc964e"
+ 
+ inherit pypi setuptools3
 -- 
 2.35.6
 
