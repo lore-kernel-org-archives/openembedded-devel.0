@@ -1,73 +1,71 @@
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28856.1793862501882047726
+Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28861.1793862504297912303
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 04 Nov 2026 23:08:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=V95DhRj1;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: yurade@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Pl4norz4;
+ spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: yurade@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=44159; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=31935; q=dns/txt;
   s=iport01; t=1793862504; x=1795072104;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=JAaBW3y/tyuJZy/cykufwMVSbL9coEFqvWo48KXcX1Q=;
-  b=V95DhRj1X/CeHePBZ9iKlbQ4wbp/0kujXkM5MCJGHgI5zLz+L/JQcuMS
-   vZ+G/C8Lioa3F/wt+zaD0x8XUdZcii3bd5aUHRl6MZuxvFt8hffRkMvBu
-   SA2+zfbZqS370Ly1Dl9cQLcm6h2zRTMLF4DewGtQRIbeZ/cCkNUnU/Sl4
-   XHNFDHs9jW/Dxu5DwViho01G/QEbL2RXv4aMomA22NsOLOHu2zugOfSaw
-   LlA1udG777e1hQWWBBziz0FG8qFVgkWBTLC0pgFKg2R0jbrixvgQBLoXY
-   Z4NHnucB1ZJOH6SzpEzQVh1Sh6YbowM27jEu8ef+A8K+1PUsfA3kGleCE
-   A==;
-X-CSE-ConnectionGUID: 87Xc/jB4Twys8YBFEeDsHw==
-X-CSE-MsgGUID: JNzgi8aMTNSYWc+N72WvJw==
-X-IPAS-Result: =?us-ascii?q?A0BSAgDDKuxq/43/Ja1aglmCV3VgGilJlCqCIQOBE4IKj?=
- =?us-ascii?q?i+MVRSBag8BAQEPRA0EAQGEP0YCjh0CJjQJDgECBAMCAwEBAQEBAQEBAQEBA?=
- =?us-ascii?q?QoBAQUBAQECAQcFgQ4Thk8NkBIBAgEDGgEMCwEUBRsiHAIBAQIZFiQHIwgQC?=
- =?us-ascii?q?YMCAYJxAwMRvD+BeTOBAYJPWz8CQ1DZS4FoAQsUAYE4gWESg02DA4ERhA9dG?=
- =?us-ascii?q?AFEhDknG4FJRIEVgnN2gQWBXAEBgS0LDwFohXYEgg2BIYFagQMJghmDG4Y+G?=
- =?us-ascii?q?gKBUlSGHUiBHgNZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPheBBxsGBYEdgR6BE?=
- =?us-ascii?q?oEHXYErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8C?=
- =?us-ascii?q?SY/FQxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD5uB5IvghkWN?=
- =?us-ascii?q?Q0OCwYBFhkCDA4IDhoEBQoBJQUBBB40KSEUESgWAQsjCQ4VGQOSQx0HFpAKg?=
- =?us-ascii?q?iGBNZ9chCqMJI9ChXgaM4QEgVeSQpJUC5YagmOOCokEjDojAgYYAU+EaYFoP?=
- =?us-ascii?q?IFHCwczGggbFTuCZwkWNBkPjisDAQoLgWiBeIF/WguCL8lIJjICCTIBAQcCB?=
- =?us-ascii?q?w4DC4FokAEleGABAQ?=
-IronPort-Data: A9a23:RdojqaAQc8+NERVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApD901TMAz
- WNOXm+Aa//cMzCjc9l3Po+090lSupSBzNBmOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGcYZsCCCM/n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
- fuo+5eBYQb9h2YuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEk6peBwY0F9Ek5fdsUVBk2
- 9EVBCstcUXW7w626OrTpuhEnM8vKozveYgYoHwllW2fBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGY2BPjDS0Un1lM/GY8kleulrnL+aDZf7lmSoMLb5kCOkFAqiOS8YIu9ltqiZ+NHkUfIr
- 0f62V/IPRpZEoPF9iSn7Sf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
- FQZ/Ccrp6U++EGnCN7nUHWFTGWspBUQXZ9UVuY98gzIkvaS6AeCDW9CRTlEADA7iPILqfUR/
- gfht7vU6fZH7NV5lVr1Gm+okA6P
-IronPort-HdrOrdr: A9a23:zYYSe6jCujziNRBOHes7LjMXknBQXvYji2hC6mlwRA09TyX+rb
- HLoB1173HJYVoqNU3I3OrwW5VoIkmskKKdn7NxAV7KZmCP0wGVxcNZnOnfKlbbdBEWmNQw6U
- 4ZSchDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhBQpcUAUdAY0++/YTzrdHFLeA==
-X-Talos-CUID: =?us-ascii?q?9a23=3AcMr2+WnteBa9/ct0pjnrtC5G6xPXOS2C/HyXIWX?=
- =?us-ascii?q?kNXl4U+2kY3G99Y9/s9U7zg=3D=3D?=
-X-Talos-MUID: 9a23:6QY4tAhuKuKFfyfNI2CBIsMpFuF67KX+AWUxt643hMLHE3MqBCm/k2Hi
+  bh=nuTdES3VJCkcviYiO4n3MoJVNVeBBjYI1mV8puTnqRg=;
+  b=Pl4norz4x5Ahn4wmRqqyRzW1tzAFG21iJoxu0CLaBuVtB6A9nMhEwkrl
+   CK5hQd0khvRZjERwMsB+JGBHHvM7hrYHkIWbCZ6wBymnb17kBVBDVKxPo
+   7AkPUxtTzqon5Qppw6+47lRGjn1CPI/xqtd2TA9oWfOB79NMrXpU0RmDy
+   KajB8IGvD6afjLtlN0TESDl796KkN7l/lIJbKDz4pyzZiHEWktp+x6kMu
+   iKO6JAoLp1pJ/9eRQhgwoAV2CMQ+cAlfg0ni2sdBMEalqhqSFEtc+wykj
+   bUaRXWJgFwxDBsVUD3Cb0iCCkzirHE3JD1ZsTS0zvrbtNpeIu+rTTWAfT
+   Q==;
+X-CSE-ConnectionGUID: 9ib+lX2CSDu3xVekiX9RNA==
+X-CSE-MsgGUID: j0DrzgI6TxW6WaRPtqkM2g==
+X-IPAS-Result: =?us-ascii?q?A0AqAADDKuxq/43/Ja1aHAEBAQEBAQcBARIBAQQEAQGBf?=
+ =?us-ascii?q?QYBAQsBglZ1YENJlCqCIQORTIxVFIFqDwEBAQ9EDQQBAYQ/RgKOHQImNQgOA?=
+ =?us-ascii?q?QIEAwIDAQEBAQEBAQEBAQEBCgEBBQEBAQIBBwWBDhOGTw2QEgECAQMaAQwLA?=
+ =?us-ascii?q?RgBPRwDAQIvKyMIGYMCAYJ0AxG8P4F5M4EBgykBPwJDUNlLgWgBCxQBgTgBh?=
+ =?us-ascii?q?T+II10YAUSEOScbgUlEhAh2gQWBXAEBgUcBhl4Egy6BWoEDhT2GWAKBUoZxS?=
+ =?us-ascii?q?IEeA1ksAVUTDQoLBwWBaAM1EioVbjIdgSM+F4EHGwYFgR2BHoESgQddgSsoX?=
+ =?us-ascii?q?iGBCIF2AoJRggACAUlBDgdFUwklQxJHJCIIEgkBExosCoEaNTwJJj8VDGQLG?=
+ =?us-ascii?q?gVhCAINDHI5EDAeJC8FHCZAGwoYGA1IESw3FRkEPm4Hki+CcQ4LBwEeXBMBB?=
+ =?us-ascii?q?yICBBwCJggEAikGDHIBBCQeBicDkmBDj2SCIYE1n1yEKowkj0KFeBozhASUG?=
+ =?us-ascii?q?ZJUC5h9jgqJEYxYCw0BT4RpgWoDN4FHCwczGggbFTuCZwlKGQ+OOYFzgXiBf?=
+ =?us-ascii?q?4JRgRTIdyYyAgkyAQEHAgcOAwuBaJACLYFPAQE?=
+IronPort-Data: A9a23:RKcIuK1hQkOahrR5ufbD5YVwkn2cJEfYwER7XKvMYLTBsI5bpzdRy
+ zQWWDiDaKqPYWL2fo1/O9zk8E0A6MWAmNZhHgU/3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7gmcsbjpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGXUA8fokooM1MLXwV5
+ cIVKzE9PyqlrrfjqF67YrEEasULNsLnOsYb/3pn1zycVapgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUiZC/FMEg9/5JYWjfqyj3XyWzZZs1mS46Ew5gA/ySQsi+C3b4SPIYfiqcN9nB60v
+ HDJ3jrFEi5EC9Wl8Sac8Vf2ibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRu1rfDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9ExpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:jquUDKATMsXKUXHlHemA55DYdb4zR+YMi2TDsHoBLSC9Hfb3qy
+ nDppkmPFrP+VUssRIb6LW90de7IE80nKQdieJ6AV7hZniFhILCFu5fBOXZrwEIYxefysdtkY
+ F9bqN5FNr8SXJ+jcr8/U2ENuxI+qjhzEht7t2utkuEimpRGsdd0zs=
+X-Talos-CUID: 9a23:3fdLMG+OVS9hfnmlA5qVvx8VEIMhQif291vNeF+GBGVoeOyvb3bFrQ==
+X-Talos-MUID: 9a23:RM03+QRJMDp3lCO7RXTu3B14JshJvZi+Nx4ymK8+p9CHEHZ/bmI=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="544304989"
+   d="scan'208";a="530276233"
 Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:08:21 +0000
+  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 07:08:21 +0000
 Received: from sjc-ads-7310.cisco.com (sjc-ads-7310.cisco.com [10.30.220.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
 	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
 	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 061D7180005CE
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 0AAAC180005D7
 	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 07:08:21 +0000 (GMT)
 Received: by sjc-ads-7310.cisco.com (Postfix, from userid 1889728)
-	id A16B6CC12A8; Wed,  4 Nov 2026 23:08:20 -0800 (PST)
+	id A9132CC12A9; Wed,  4 Nov 2026 23:08:20 -0800 (PST)
 From: Yogita Urade <yurade@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][wrynose][PATCH 2/6] python3-tornado: Fix CVE-2026-103262
-Date: Wed,  4 Nov 2026 23:08:15 -0800
-Message-Id: <20261105070819.2086816-3-yurade@cisco.com>
+Subject: [oe][meta-oe][wrynose][PATCH 3/6] python3-tornado: Fix CVE-2026-103263
+Date: Wed,  4 Nov 2026 23:08:16 -0800
+Message-Id: <20261105070819.2086816-4-yurade@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261105070819.2086816-1-yurade@cisco.com>
 References: <20261105070819.2086816-1-yurade@cisco.com>
@@ -78,1154 +76,731 @@ X-Outbound-SMTP-Client: 10.30.220.95, sjc-ads-7310.cisco.com
 X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 07:08:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131867
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131868
 Content-Type: text/plain; charset="utf-8"
 
-This patch applies the upstream fix as referenced in [2],
-using the commit shown in [1].
+This patch applies the upstream fix as referenced in [3],
+using the commit shown in [1] and dependent commit from [2].
 
-[1] https://github.com/tornadoweb/tornado/commit/e412435febba4569c552c5c9054f1bf92bd171a9
-[2] https://nvd.nist.gov/vuln/detail/CVE-2026-103262
+Required companion fix for CVE-2026-103263: The symlink-hardening
+backport adds allowed_symlink_directory, but subclasses that
+override initialize() without calling the base method do not
+set it and fail with AttributeError. Include upstream commit
+6bd9c4e0 and its regression tests with the CVE fix.
+
+[1] https://github.com/tornadoweb/tornado/commit/437ab5f76565403b3403438d2e555d11f8128d32
+[2] https://github.com/tornadoweb/tornado/commit/6bd9c4e0fc10ae743006cd6a97543d15050f9594
+[3] https://nvd.nist.gov/vuln/detail/CVE-2026-103263
+[4] https://github.com/tornadoweb/tornado/issues/3724
 
 Signed-off-by: Yogita Urade <yurade@cisco.com>
 ---
- .../python3-tornado/CVE-2026-103262.patch     | 1117 +++++++++++++++++
- .../python/python3-tornado_6.5.7.bb           |    1 +
- 2 files changed, 1118 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
+ .../CVE-2026-103263-dependent.patch           | 255 +++++++++++
+ .../python3-tornado/CVE-2026-103263.patch     | 422 ++++++++++++++++++
+ .../python/python3-tornado_6.5.7.bb           |   2 +
+ 3 files changed, 679 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263-dependent.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
+diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263-dependent.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263-dependent.patch
 new file mode 100644
-index 0000000000..22da4e9e7b
+index 0000000000..168f91c147
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
-@@ -0,0 +1,1117 @@
-+From e412435febba4569c552c5c9054f1bf92bd171a9 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263-dependent.patch
+@@ -0,0 +1,255 @@
++From 6bd9c4e0fc10ae743006cd6a97543d15050f9594 Mon Sep 17 00:00:00 2001
 +From: Claude <noreply@anthropic.com>
-+Date: Sat, 12 Sep 2026 21:17:45 +0000
-+Subject: [PATCH] Bound the memory an HTTP client response can consume
++Date: Tue, 15 Sep 2026 12:54:25 +0000
++Subject: [PATCH] web: Fix subclasses that do not set allowed_symlink_directory
 +
-+Backport for 6.5.9. On master this is ten commits; the net change is the
-+same, minus two things that do not exist on this branch: master's rejection
-+of a coroutine streaming_callback (here streaming_callback is typed
-+Callable[[bytes], None], and simple_httpclient already calls it
-+synchronously, so calling it directly is what the contract says), and
-+master's newer annotation syntax.
++allowed_symlink_directory was added in 6.5.9 as an attribute assigned in
++initialize(). Projects that subclass StaticFileHandler with their own
++initialize() that does not call ours never set it, so every static file
++request failed with
 +
-+curl_httpclient passed every chunk libcurl produced to IOLoop.add_callback
-+and returned immediately, so a response body accumulated in the IOLoop's
-+callback queue instead of reaching the application as it arrived. With
-+decompress_response, a "decompression bomb" turns a few kilobytes on the
-+wire into gigabytes in that queue: a 4GiB bomb peaked at ~400MB of RSS,
-+~350MB of it queued chunks. Chunks now go through _CurlStreamingBuffer,
-+which pauses the transfer once more than 1MB is waiting and resumes it once
-+the callback has caught up, holding the same fetch to ~58MB regardless of
-+the response size.
++    AttributeError: 'FileFindHandler' object has no attribute
++    'allowed_symlink_directory'
 +
-+Without a streaming_callback the whole body is buffered, so a bomb cannot
-+be retrieved at all -- only refused. simple_httpclient already refused one
-+at max_body_size, but curl_httpclient had no limit and would buffer a
-+520KB response expanding to 512MiB in full. CurlAsyncHTTPClient takes
-+max_body_size, defaulting to the same 100MB, applied to streaming
-+responses too so that the two implementations agree. Retrieving a response
-+larger than that now means raising the limit deliberately.
++Jupyter is the most prominent example, and it also shows why the
++attribute cannot simply default to self.root: its FileFindHandler
++searches a list of directories, so self.root is a tuple of paths, and
++its validate_absolute_path passes the one that matched down to us.
 +
-+libcurl's CURLOPT_MAXFILESIZE would have been the place to delegate the
-+limit, but outside of very recent versions it is measured against the
-+compressed size, which a bomb keeps small.
++Give allowed_symlink_directory a class-level default of None, which
++subclasses inherit whatever their initialize() does, and resolve that
++default in validate_absolute_path against the root it was given.
++_resolve_symlink_target becomes a static method taking only the values
++its caller settled on, so that it cannot read a directory from self that
++differs from the one the other path checks used.
 +
-+Also: unpausing only makes a transfer runnable again; libcurl has reported
-+that through the timer callback since 7.69, and before that a paused
-+transfer stalls until unrelated socket activity wakes it, so the buffer
-+asks for a socket_action itself. The documented libcurl requirement moves
-+to 7.81, the version in the oldest supported Ubuntu LTS, which is above
-+both that and the 7.71 cap on libcurl's own pause buffer.
++Fixes #3724
 +
-+Verified against libcurl 8.11.1, 8.16.0 and 8.21.0, and with black 24.4.2,
-+flake8 7.0.0 and mypy 1.10.0 as pinned on this branch.
-+
-+CVE: CVE-2026-103262
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/e412435febba4569c552c5c9054f1bf92bd171a9]
++CVE: CVE-2026-103263
++Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/6bd9c4e0fc10ae743006cd6a97543d15050f9594]
 +
 +Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-+Claude-Session: https://claude.ai/code/session_01BD36EiRmzMSFqZeAqZu4gm
++Claude-Session: https://claude.ai/code/session_01Brgh48sZusx4pzHwygor7q
 +Signed-off-by: Yogita Urade <yurade@cisco.com>
 +---
-+ docs/httpclient.rst                    |  13 +-
-+ docs/index.rst                         |   3 +-
-+ tornado/curl_httpclient.py             | 175 +++++++++++++-
-+ tornado/test/circlerefs_test.py        |  50 +++-
-+ tornado/test/curl_httpclient_test.py   | 226 +++++++++++++++++-
-+ tornado/test/httpclient_test.py        | 309 ++++++++++++++++++++++++-
-+ tornado/test/simple_httpclient_test.py |  31 +--
-+ 7 files changed, 759 insertions(+), 48 deletions(-)
++ tornado/test/web_test.py | 97 ++++++++++++++++++++++++++++++++++++++++
++ tornado/web.py           | 40 +++++++++++++----
++ 2 files changed, 128 insertions(+), 9 deletions(-)
 +
-+diff --git a/docs/httpclient.rst b/docs/httpclient.rst
-+index 3837d4c4..39896442 100644
-+--- a/docs/httpclient.rst
-++++ b/docs/httpclient.rst
-+@@ -53,7 +53,7 @@ Implementations
++diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
++index 4ac6fb98..fba23a7c 100644
++--- a/tornado/test/web_test.py
+++++ b/tornado/test/web_test.py
++@@ -1676,6 +1676,103 @@ class StaticFileSymlinkTest(WebTestCase):
++         self.assertEqual(response.body, b"secret")
 + 
-+ .. module:: tornado.curl_httpclient
 + 
-+-.. class:: CurlAsyncHTTPClient(max_clients=10, defaults=None)
-++.. class:: CurlAsyncHTTPClient(max_clients=10, defaults=None, max_body_size=104857600)
-+ 
-+    ``libcurl``-based HTTP client.
-+ 
-+@@ -67,6 +67,17 @@ Implementations
-+    ``defaults`` is a dict of parameters that will be used as defaults on all
-+    `.HTTPRequest` objects submitted to this client.
-+ 
-++   ``max_body_size`` (default 100MB) is the largest response body that the
-++   client will accept, measured after decompression so that a compressed
-++   response cannot expand past it. As in `.SimpleAsyncHTTPClient`, it applies
-++   whether or not a ``streaming_callback`` is used; raise it to retrieve
-++   responses larger than that.
+++class MultiRootStaticFileHandler(StaticFileHandler):
+++    """A subclass that searches a list of directories.
 ++
-++   .. versionchanged:: 6.5.9
-++      Added the ``max_body_size`` argument. Previously a response body was
-++      accepted without limit, so a server could exhaust the client's memory
-++      with a compressed response.
-++
-+ Example Code
-+ ~~~~~~~~~~~~
-+ 
-+diff --git a/docs/index.rst b/docs/index.rst
-+index 9b121862..61b97a9c 100644
-+--- a/docs/index.rst
-++++ b/docs/index.rst
-+@@ -103,7 +103,8 @@ source tarball or clone the `git repository
-+ optional packages may be useful:
-+ 
-+ * `pycurl <http://pycurl.io/>`_ is used by the optional
-+-  ``tornado.curl_httpclient``.  Libcurl version 7.22 or higher is required.
-++  ``tornado.curl_httpclient``.  Libcurl version 7.81 or higher is required
-++  (the version shipped by Ubuntu 22.04 LTS).
-+ * `pycares <https://pypi.org/project/pycares/>`_ is an alternative
-+   non-blocking DNS resolver that can be used when threads are not
-+   appropriate.
-+diff --git a/tornado/curl_httpclient.py b/tornado/curl_httpclient.py
-+index 8d680666..71a99c2a 100644
-+--- a/tornado/curl_httpclient.py
-++++ b/tornado/curl_httpclient.py
-+@@ -37,7 +37,7 @@ from tornado.httpclient import (
-+ )
-+ from tornado.log import app_log
-+ 
-+-from typing import Dict, Any, Callable, Union, Optional
-++from typing import Dict, Any, Callable, Optional
-+ import typing
-+ 
-+ if typing.TYPE_CHECKING:
-+@@ -48,11 +48,138 @@ curl_log = logging.getLogger("tornado.curl_httpclient")
-+ CR_OR_LF_RE = re.compile(b"\r|\n")
-+ 
-+ 
-++class _CurlStreamingBuffer:
-++    """Delivers response body chunks from libcurl to a ``streaming_callback``.
-++
-++    libcurl runs its write callback from inside
-++    ``curl_multi_socket_action``, where it is not safe to run application
-++    code (which may reenter this client, or raise exceptions that libcurl
-++    would turn into transfer errors). Chunks are therefore queued here and
-++    delivered later from the `.IOLoop`.
-++
-++    Queuing alone would let the amount of buffered data grow with whatever
-++    the server chooses to send, which is a problem when
-++    ``decompress_response`` is in use: a "decompression bomb" lets a server
-++    turn a few kilobytes on the wire into gigabytes of decompressed data,
-++    all of which would pile up in the `.IOLoop`'s callback queue before any
-++    of it reached the application. To bound this, the transfer is paused
-++    once more than `max_buffer_size` bytes are waiting, and resumed after
-++    the callback has consumed them.
+++    It replaces ``initialize`` without calling ``super().initialize()``, so
+++    ``allowed_symlink_directory`` is never set, and it puts something other
+++    than a string in ``self.root``, passing the directory that matched to
+++    ``validate_absolute_path``. The symlink check must run against that
+++    directory. Jupyter's ``FileFindHandler`` is built this way.
 ++    """
 ++
-++    # Pause the transfer while at least this many bytes are waiting to be
-++    # delivered. This bounds our own queue only: a paused libcurl still
-++    # finishes decoding the socket read it already has (there is no way to
-++    # tell its decoder to stop) and buffers the result internally, so the
-++    # real high-water mark is one read's worth of expansion -- roughly 16MB
-++    # for gzip at libcurl's default CURLOPT_BUFFERSIZE. libcurl limits that
-++    # buffer to 64MB and fails the transfer with CURLE_TOO_LARGE past it,
-++    # which a codec with a higher ratio than deflate's (brotli, say) will
-++    # reach. That is libcurl's call to make; we just avoid holding a copy.
-++    max_buffer_size = 1024 * 1024
+++    root: tuple  # type: ignore[assignment]
 ++
-++    def __init__(
-++        self,
-++        client: "CurlAsyncHTTPClient",
-++        curl: pycurl.Curl,
-++        callback: Callable[[bytes], Any],
-++    ) -> None:
-++        self.client = client
-++        self.io_loop = client.io_loop
-++        # Set to None in finish(); the handle may be reused after that.
-++        self.curl = curl  # type: Optional[pycurl.Curl]
-++        self.callback = callback
-++        self.chunks = collections.deque()  # type: Deque[bytes]
-++        self.size = 0
-++        self.total = 0
-++        self.body_too_large = False
-++        self.paused = False
-++        self.flush_scheduled = False
+++    def initialize(self, path):  # type: ignore[override]
+++        self.root = tuple(os.path.abspath(p) + os.path.sep for p in path)
+++        self.default_filename = None
 ++
-++    def write(self, chunk: bytes) -> int:
-++        """libcurl ``WRITEFUNCTION`` callback."""
-++        if self.total + len(chunk) > self.client.max_body_size:
-++            # max_body_size applies here as well as to a buffered response:
-++            # it is a safeguard for applications that do not impose a limit
-++            # of their own on what they do with the chunks. Writing less
-++            # than we were given makes libcurl fail the transfer.
-++            self.body_too_large = True
-++            return 0
-++        if self.size >= self.max_buffer_size:
-++            # Tell libcurl to stop reading from the socket until flush()
-++            # resumes it. This chunk is not consumed here: libcurl holds
-++            # on to it and passes it to us again when we unpause.
-++            self.paused = True
-++            return pycurl.WRITEFUNC_PAUSE
-++        self.chunks.append(chunk)
-++        self.size += len(chunk)
-++        self.total += len(chunk)
-++        self._schedule_flush()
-++        return len(chunk)
+++    @classmethod
+++    def get_absolute_path(cls, roots, path):  # type: ignore[override]
+++        for root in roots:
+++            candidate = os.path.abspath(os.path.join(root, path))
+++            if os.path.exists(candidate):
+++                return candidate
+++        return os.path.abspath(os.path.join(roots[0], path))
 ++
-++    def _schedule_flush(self) -> None:
-++        if not self.flush_scheduled:
-++            self.flush_scheduled = True
-++            self.io_loop.add_callback(self.flush)
-++
-++    def flush(self) -> None:
-++        """Pass everything we have buffered to the ``streaming_callback``."""
-++        self.flush_scheduled = False
-++        try:
-++            while self.chunks:
-++                chunk = self.chunks.popleft()
-++                self.size -= len(chunk)
-++                self.callback(chunk)
-++        finally:
-++            if self.chunks:
-++                # The callback raised; deliver the rest (and unpause) later.
-++                self._schedule_flush()
-++            elif self.paused:
-++                self.paused = False
-++                if self.curl is not None:
-++                    try:
-++                        # Note that this may call write() again
-++                        # (synchronously) with data libcurl buffered while
-++                        # paused, so it must come after our own buffer has
-++                        # been drained.
-++                        self.curl.pause(pycurl.PAUSE_CONT)
-++                    except pycurl.error:
-++                        # The transfer failed while it was paused (libcurl
-++                        # reports the pending error here). Nothing to do:
-++                        # _finish will pass the error to the callback.
-++                        pass
-++                    else:
-++                        # Ask for a socket_action so the unpaused transfer
-++                        # makes progress. libcurl has notified us of this
-++                        # itself (through the timer callback) since 7.69,
-++                        # which is below the version we require, so this is
-++                        # redundant there and costs one timeout per
-++                        # max_buffer_size of body. But without it a libcurl
-++                        # older than that stalls until unrelated socket
-++                        # activity happens to wake the transfer, and a
-++                        # streaming fetch that used to work would hang.
-++                        self.client._set_timeout(0)
-++
-++    def finish(self) -> None:
-++        """Deliver any remaining data at the end of the request.
-++
-++        The curl handle may be reset and reused after this, so we must not
-++        touch it again.
-++        """
-++        self.curl = None
-++        self.paused = False
-++        self.flush()
+++    def validate_absolute_path(self, root, absolute_path):  # type: ignore[override]
+++        for candidate in self.root:
+++            if (absolute_path + os.path.sep).startswith(candidate):
+++                root = candidate
+++                break
+++        return super().validate_absolute_path(root, absolute_path)
 ++
 ++
-+ class CurlAsyncHTTPClient(AsyncHTTPClient):
-+     def initialize(  # type: ignore
-+-        self, max_clients: int = 10, defaults: Optional[Dict[str, Any]] = None
-++        self,
-++        max_clients: int = 10,
-++        defaults: Optional[Dict[str, Any]] = None,
-++        max_body_size: int = 104857600,
-+     ) -> None:
-+         super().initialize(defaults=defaults)
-++        self.max_body_size = max_body_size
-+         # Typeshed is incomplete for CurlMulti, so just use Any for now.
-+         self._multi = pycurl.CurlMulti()  # type: Any
-+         self._multi.setopt(pycurl.M_TIMERFUNCTION, self._set_timeout)
-+@@ -203,6 +330,8 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
-+                 curl.info = {  # type: ignore
-+                     "headers": httputil.HTTPHeaders(),
-+                     "buffer": BytesIO(),
-++                    "streaming_buffer": None,
-++                    "body_too_large": False,
-+                     "request": request,
-+                     "callback": callback,
-+                     "queue_start_time": queue_start_time,
-+@@ -243,9 +372,23 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
-+         info = curl.info  # type: ignore
-+         curl.info = None  # type: ignore
-+         self._multi.remove_handle(curl)
-++        streaming_buffer = info["streaming_buffer"]
-++        body_too_large = info["body_too_large"]
-++        if streaming_buffer is not None:
-++            body_too_large = body_too_large or streaming_buffer.body_too_large
-++            # Make sure everything that was received reaches the
-++            # streaming_callback before the final response.
-++            try:
-++                streaming_buffer.finish()
-++            except Exception:
-++                self.handle_callback_exception(info["request"].streaming_callback)
-+         buffer = info["buffer"]
-+         if curl_error:
-+             assert curl_message is not None
-++            if body_too_large:
-++                curl_message = "body exceeded max_body_size of %d bytes" % (
-++                    self.max_body_size,
-++                )
-+             error = CurlError(curl_error, curl_message)  # type: Optional[CurlError]
-+             assert error is not None
-+             code = error.code
-+@@ -344,15 +487,31 @@ class CurlAsyncHTTPClient(AsyncHTTPClient):
-+                 self._curl_header_callback, headers, request.header_callback
-+             ),
-+         )
-++        write_function: Callable[[bytes], int]
-+         if request.streaming_callback:
-+ 
-+-            def write_function(b: Union[bytes, bytearray]) -> int:
-+-                assert request.streaming_callback is not None
-+-                self.io_loop.add_callback(request.streaming_callback, b)
-+-                return len(b)
-+-
-++            streaming_buffer = _CurlStreamingBuffer(
-++                self, curl, request.streaming_callback
-++            )
-++            curl.info["streaming_buffer"] = streaming_buffer  # type: ignore
-++            write_function = streaming_buffer.write
-+         else:
-+-            write_function = buffer.write  # type: ignore
-++            # Count the buffered body against max_body_size, as
-++            # _CurlStreamingBuffer does for the streaming case. Here the
-++            # whole body is held in memory, so a response that decompresses
-++            # past the limit cannot be retrieved at all -- only refused
-++            # before it exhausts memory. libcurl's CURLOPT_MAXFILESIZE is
-++            # no help: outside of very recent versions it is measured
-++            # against the compressed size, which a bomb keeps small.
-++            def write_function(chunk: bytes) -> int:
-++                if buffer.tell() + len(chunk) > self.max_body_size:
-++                    curl.info["body_too_large"] = True  # type: ignore
-++                    # Writing less than we were given makes libcurl fail
-++                    # the transfer with CURLE_WRITE_ERROR; _finish uses the
-++                    # flag above to replace its message with ours.
-++                    return 0
-++                return buffer.write(chunk)
-++
-+         curl.setopt(pycurl.WRITEFUNCTION, write_function)
-+         curl.setopt(pycurl.FOLLOWLOCATION, request.follow_redirects)
-+         curl.setopt(pycurl.MAXREDIRS, request.max_redirects)
-+diff --git a/tornado/test/circlerefs_test.py b/tornado/test/circlerefs_test.py
-+index d5f7e969..0907aa86 100644
-+--- a/tornado/test/circlerefs_test.py
-++++ b/tornado/test/circlerefs_test.py
-+@@ -21,6 +21,14 @@ import tornado
-+ from tornado import web, gen, httpclient
-+ from tornado.test.util import skipNotCPython
-+ 
-++try:
-++    import pycurl
-++except ImportError:
-++    pycurl = None  # type: ignore
-++
-++if pycurl is not None:
-++    from tornado.curl_httpclient import CurlAsyncHTTPClient
-++
-+ 
-+ def find_circular_references(garbage):
-+     """Find circular references in a list of objects.
-+@@ -100,6 +108,11 @@ def assert_no_cycle_garbage():
-+         gc.enable()
-+ 
-+ 
-++class OkHandler(web.RequestHandler):
-++    def get(self):
-++        self.write("ok\n")
-++
-++
-+ # GC behavior is cpython-specific
-+ @skipNotCPython
-+ class CircleRefsTest(unittest.TestCase):
-+@@ -137,7 +150,7 @@ class CircleRefsTest(unittest.TestCase):
-+         self.assertIn("    name=b", str(cm.exception))
-+         self.assertNotIn("    name=c", str(cm.exception))
-+ 
-+-    async def run_handler(self, handler_class):
-++    async def run_handler(self, handler_class, client_factory=None, **fetch_kwargs):
-+         app = web.Application(
-+             [
-+                 (r"/", handler_class),
-+@@ -147,14 +160,18 @@ class CircleRefsTest(unittest.TestCase):
-+         server = tornado.httpserver.HTTPServer(app)
-+         server.add_socket(socket)
-+ 
-+-        client = httpclient.AsyncHTTPClient()
-++        # The client must be constructed here rather than by the caller: it
-++        # binds to the IOLoop that is current when it is created.
-++        if client_factory is None:
-++            client_factory = httpclient.AsyncHTTPClient
-++        client = client_factory()
-+         with assert_no_cycle_garbage():
-+             # Only the fetch (and the corresponding server-side handler)
-+             # are being tested for cycles. In particular, the Application
-+             # object has internal cycles (as of this writing) which we don't
-+             # care to fix since in real world usage the Application object
-+             # is effectively a global singleton.
-+-            await client.fetch(f"http://127.0.0.1:{port}/")
-++            await client.fetch(f"http://127.0.0.1:{port}/", **fetch_kwargs)
-+         client.close()
-+         server.stop()
-+         socket.close()
-+@@ -190,6 +207,33 @@ class CircleRefsTest(unittest.TestCase):
-+ 
-+         asyncio.run(self.run_handler(Handler))
-+ 
-++    # The tests above vary the server-side handler against one client. These
-++    # vary the client instead: a streaming_callback takes a different path
-++    # through both client implementations than a buffered response does, and
-++    # curl_httpclient keeps per-request state on pooled curl handles.
-++
-++    def test_streaming_callback(self):
-++        asyncio.run(self.run_handler(OkHandler, streaming_callback=lambda chunk: None))
-++
-++    @unittest.skipIf(pycurl is None, "pycurl module not present")
-++    def test_curl_httpclient(self):
-++        asyncio.run(
-++            self.run_handler(
-++                OkHandler,
-++                client_factory=lambda: CurlAsyncHTTPClient(force_instance=True),
-++            )
-++        )
-++
-++    @unittest.skipIf(pycurl is None, "pycurl module not present")
-++    def test_curl_httpclient_streaming_callback(self):
-++        asyncio.run(
-++            self.run_handler(
-++                OkHandler,
-++                client_factory=lambda: CurlAsyncHTTPClient(force_instance=True),
-++                streaming_callback=lambda chunk: None,
-++            )
-++        )
-++
-+     def test_run_on_executor(self):
-+         # From https://github.com/tornadoweb/tornado/issues/2620
-+         #
-+diff --git a/tornado/test/curl_httpclient_test.py b/tornado/test/curl_httpclient_test.py
-+index ac3cccc5..d7eb1adf 100644
-+--- a/tornado/test/curl_httpclient_test.py
-++++ b/tornado/test/curl_httpclient_test.py
-+@@ -1,12 +1,23 @@
-++import gc
-+ from hashlib import md5
-+ import os
-+ import ssl
-+ import unittest
-++from unittest import mock
-++import weakref
-+ 
-++from tornado import gen
-+ from tornado.escape import utf8
-++from tornado.log import app_log
-+ from tornado.netutil import ssl_options_to_context
-+ from tornado.test import httpclient_test
-+-from tornado.testing import AsyncHTTPSTestCase, AsyncHTTPTestCase
-++from tornado.test.util import skipNotCPython
-++from tornado.testing import (
-++    AsyncHTTPSTestCase,
-++    AsyncHTTPTestCase,
-++    AsyncTestCase,
-++    ExpectLog,
-++)
-+ from tornado.web import Application, RequestHandler
-+ 
-+ try:
-+@@ -15,17 +26,106 @@ except ImportError:
-+     pycurl = None  # type: ignore
-+ 
-+ if pycurl is not None:
-+-    from tornado.curl_httpclient import CurlAsyncHTTPClient
-++    from tornado.curl_httpclient import (
-++        CurlAsyncHTTPClient,
-++        CurlError,
-++        _CurlStreamingBuffer,
-++    )
-++
-++
-++def create_client(**kwargs):
-++    return CurlAsyncHTTPClient(
-++        force_instance=True, defaults=dict(allow_ipv6=False), **kwargs
-++    )
-+ 
-+ 
-+ @unittest.skipIf(pycurl is None, "pycurl module not present")
-+ class CurlHTTPClientCommonTestCase(httpclient_test.HTTPClientCommonTestCase):
-++    # libcurl decodes the Content-Encoding named by the response whether or
-++    # not we listed it in Accept-Encoding, so brotli is reachable whenever
-++    # libcurl was built with it (which is common).
-++    decompresses_brotli = pycurl is not None and "brotli" in pycurl.version
-++
-+     def get_http_client(self):
-+         client = CurlAsyncHTTPClient(defaults=dict(allow_ipv6=False))
-+         # make sure AsyncHTTPClient magic doesn't give us the wrong class
-+         self.assertTrue(isinstance(client, CurlAsyncHTTPClient))
-+         return client
-+ 
-++    def test_streaming_pause_and_resume(self):
-++        # With a small buffer the transfer is paused and resumed many times
-++        # over one response. libcurl re-delivers the chunk that was in
-++        # flight when it was paused, so that chunk must not be consumed
-++        # twice.
-++        chunks: list[bytes] = []
-++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
-++            response = self.fetch("/large_body", streaming_callback=chunks.append)
-++        self.assertEqual(response.code, 200)
-++        self.assertEqual(b"".join(chunks), httpclient_test.large_body())
-++
-++    def test_concurrent_paused_streams(self):
-++        # Several streaming requests in flight at once, each pausing and
-++        # resuming repeatedly: pausing one transfer must not disturb another.
-++        client = create_client(max_clients=4)
-++        buffers = [bytearray() for _ in range(8)]
-++        try:
-++            with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
-++                self.io_loop.run_sync(
-++                    lambda: gen.multi(
-++                        [
-++                            client.fetch(
-++                                self.get_url("/large_body"),
-++                                streaming_callback=buf.extend,
-++                            )
-++                            for buf in buffers
-++                        ]
-++                    )
-++                )
-++        finally:
-++            client.close()
-++        for buf in buffers:
-++            self.assertEqual(bytes(buf), httpclient_test.large_body())
-++
-++    @skipNotCPython
-++    def test_client_not_leaked_by_write_callbacks(self):
-++        # The WRITEFUNCTION callbacks installed for both the buffered and
-++        # the streaming path hold references to the client and to the curl
-++        # handle. They must not keep the client alive after close().
-++
-++        def use_and_close_a_client():
-++            client = create_client()
-++            self.io_loop.run_sync(lambda: client.fetch(self.get_url("/hello")))
-++            self.io_loop.run_sync(
-++                lambda: client.fetch(
-++                    self.get_url("/large_body"),
-++                    streaming_callback=lambda chunk: None,
-++                )
-++            )
-++            client.close()
-++            return weakref.ref(client)
-++
-++        ref = use_and_close_a_client()
-++        gc.collect()
-++        self.assertIsNone(ref())
-++
-++    def test_streaming_callback_exception(self):
-++        # An exception in the streaming_callback is logged, and does not
-++        # stop the transfer or leave it paused forever.
-++        chunks: list[bytes] = []
-++
-++        def streaming_callback(chunk):
-++            chunks.append(chunk)
-++            if len(chunks) == 1:
-++                raise ZeroDivisionError()
-++
-++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 1024):
-++            with ExpectLog(app_log, "Exception in callback"):
-++                response = self.fetch(
-++                    "/large_body", streaming_callback=streaming_callback
-++                )
-++        self.assertEqual(response.code, 200)
-++        self.assertEqual(b"".join(chunks), httpclient_test.large_body())
-++
-+ 
-+ class DigestAuthHandler(RequestHandler):
-+     def initialize(self, username, password):
-+@@ -82,7 +182,7 @@ class CustomFailReasonHandler(RequestHandler):
-+ class CurlHTTPClientTestCase(AsyncHTTPTestCase):
-+     def setUp(self):
-+         super().setUp()
-+-        self.http_client = self.create_client()
-++        self.http_client = create_client()
-+ 
-+     def get_app(self):
-+         return Application(
-+@@ -98,11 +198,6 @@ class CurlHTTPClientTestCase(AsyncHTTPTestCase):
-+             ]
-+         )
-+ 
-+-    def create_client(self, **kwargs):
-+-        return CurlAsyncHTTPClient(
-+-            force_instance=True, defaults=dict(allow_ipv6=False), **kwargs
-+-        )
-+-
-+     def test_digest_auth(self):
-+         response = self.fetch(
-+             "/digest", auth_mode="digest", auth_username="foo", auth_password="bar"
-+@@ -220,3 +315,118 @@ class CurlHTTPClientReuseCertsTestCase(AsyncHTTPSTestCase):
-+         )
-+         response = self.fetch(self.get_url("/client_cert"))
-+         self.assertEqual(response.body, b"no client cert")
-++
-++
-++@unittest.skipIf(pycurl is None, "pycurl module not present")
-++class CurlHTTPClientMaxBodySizeTestCase(httpclient_test.HTTPClientMaxBodySizeTestCase):
-++    # curl_httpclient does not log when it refuses a body; the message is
-++    # carried by the CurlError instead.
-++    def get_http_client(self):
-++        # max_clients=1 so that each test also reuses the curl handle left
-++        # behind by the one before it.
-++        return create_client(max_body_size=httpclient_test.MAX_BODY_SIZE, max_clients=1)
-++
-++    def test_refusal_message(self):
-++        # The generic test only checks that the body was refused; make sure
-++        # the error says why, since libcurl's own message for a short write
-++        # ("Failure writing output to destination") would not.
-++        with self.assertRaises(CurlError) as cm:
-++            self.fetch("/bomb", raise_error=True)
-++        self.assertIn("max_body_size", str(cm.exception))
-++
-++    def test_redirect_body_not_counted(self):
-++        # libcurl discards the body of a redirect that it follows, so a
-++        # redirect carrying a large body of its own does not count towards
-++        # the limit for the response that follows it. Not shared:
-++        # simple_httpclient applies max_body_size to the redirect response
-++        # too, and refuses this one before following it.
-++        response = self.fetch("/body_bearing_redirect")
-++        response.rethrow()
-++        self.assertEqual(response.body, b"a" * httpclient_test.MAX_BODY_SIZE)
-++
-++
-++@unittest.skipIf(pycurl is None, "pycurl module not present")
-++class CurlStreamingBufferTest(AsyncTestCase):
-++    """Unit tests for the buffer that feeds a ``streaming_callback``."""
+++@unittest.skipIf(os.name != "posix", "non-posix OS")
+++class StaticFileMultiRootTest(WebTestCase):
+++    """Subclasses that search several directories and never set
+++    ``allowed_symlink_directory`` must keep working (issue #3724).
+++    """
 ++
 ++    def setUp(self):
+++        self.tmpdir = tempfile.mkdtemp()
+++        self.addCleanup(shutil.rmtree, self.tmpdir)
+++        self.root1 = os.path.join(self.tmpdir, "static1")
+++        self.root2 = os.path.join(self.tmpdir, "static2")
+++        self.outside = os.path.join(self.tmpdir, "outside")
+++        for d in (self.root1, self.root2, self.outside):
+++            os.mkdir(d)
+++        with open(os.path.join(self.root1, "one.txt"), "w", encoding="utf-8") as f:
+++            f.write("one")
+++        with open(os.path.join(self.root2, "two.txt"), "w", encoding="utf-8") as f:
+++            f.write("two")
+++        with open(os.path.join(self.outside, "secret.txt"), "w", encoding="utf-8") as f:
+++            f.write("secret")
+++        os.symlink(
+++            os.path.join(self.root1, "one.txt"),
+++            os.path.join(self.root2, "internal.txt"),
+++        )
+++        os.symlink(
+++            os.path.join(self.outside, "secret.txt"),
+++            os.path.join(self.root1, "link.txt"),
+++        )
 ++        super().setUp()
-++        self.timeouts_requested: list[int] = []
-++        test = self
 ++
-++        class FakeClient:
-++            io_loop = test.io_loop
-++            max_body_size = 1024 * 1024
+++    def get_handlers(self):
+++        return [
+++            (
+++                "/multi/(.*)",
+++                MultiRootStaticFileHandler,
+++                dict(path=[self.root1, self.root2]),
+++            )
+++        ]
 ++
-++            def _set_timeout(self, msecs):
-++                test.timeouts_requested.append(msecs)
+++    def get_app_kwargs(self):
+++        return dict()
 ++
-++        self.client = FakeClient()
+++    def test_first_root(self):
+++        response = self.fetch("/multi/one.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"one")
 ++
-++    def make_buffer(self, curl, callback):
-++        return _CurlStreamingBuffer(
-++            self.client,  # type: ignore[arg-type]
-++            curl,
-++            callback,
+++    def test_second_root(self):
+++        response = self.fetch("/multi/two.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"two")
+++
+++    def test_symlink_to_other_root_rejected(self):
+++        # Each root is validated on its own: a link from one search directory
+++        # into another is still an escape from the directory it lives in.
+++        with ExpectLog(gen_log, ".*is not in root static directory"):
+++            response = self.fetch("/multi/internal.txt")
+++        self.assertEqual(response.code, 403)
+++
+++    def test_symlink_escaping_roots_rejected(self):
+++        with ExpectLog(gen_log, ".*is not in root static directory"):
+++            response = self.fetch("/multi/link.txt")
+++        self.assertEqual(response.code, 403)
+++
+++
++ class StaticFileSymlinkedRootTest(WebTestCase):
++     """The root itself may be reached through a symlink; that must not make
++     every request look like an escape.
++diff --git a/tornado/web.py b/tornado/web.py
++index 2c8a1e1d..34315220 100644
++--- a/tornado/web.py
+++++ b/tornado/web.py
++@@ -2794,6 +2794,13 @@ class StaticFileHandler(RequestHandler):
++     _static_hashes = {}  # type: Dict[str, Optional[str]]
++     _lock = threading.Lock()  # protects _static_hashes
++ 
+++    # None means "not set", in which case the symlink check falls back to the
+++    # directory being served. The default lives on the class, not in
+++    # initialize(), because this attribute was introduced in a security patch
+++    # and some projects (notably Jupyter) subclass StaticFileHandler with their
+++    # own initialize() that does not call ours.
+++    allowed_symlink_directory = None  # type: Optional[str]
+++
++     def initialize(
++         self,
++         path: str,
++@@ -2802,8 +2809,6 @@ class StaticFileHandler(RequestHandler):
++     ) -> None:
++         self.root = path
++         self.default_filename = default_filename
++-        if allowed_symlink_directory is None:
++-            allowed_symlink_directory = path
++         self.allowed_symlink_directory = allowed_symlink_directory
++ 
++     @classmethod
++@@ -3016,6 +3021,11 @@ class StaticFileHandler(RequestHandler):
++         # the requested path so a request to root/ will match.
++         if not (absolute_path + os.path.sep).startswith(root):
++             raise HTTPError(403, "%s is not in root static directory", self.path)
+++        # Symlinks may point anywhere inside allowed_symlink_directory, which
+++        # defaults to the directory being served. Resolve that default here,
+++        # against the same root the checks above used, rather than in
+++        # _resolve_symlink_target.
+++        allowed_symlink_directory = self.allowed_symlink_directory or root
++         # The check above is on the path as written, which is cheap and
++         # rejects traversal without touching the filesystem. Resolve
++         # symlinks only once it has passed, so that the remaining checks -
++@@ -3024,7 +3034,9 @@ class StaticFileHandler(RequestHandler):
++         # cannot be merged: this one must stay on the unresolved path,
++         # because allowed_symlink_directory may be wider than the root and
++         # would then let a ../ traversal through.
++-        absolute_path = self._resolve_symlink_target(absolute_path)
+++        absolute_path = self._resolve_symlink_target(
+++            absolute_path, allowed_symlink_directory, self.path
 ++        )
++         if os.path.isdir(absolute_path) and self.default_filename is not None:
++             # need to look at the request.path here for when path is empty
++             # but there is some prefix to the path that was already
++@@ -3049,7 +3061,9 @@ class StaticFileHandler(RequestHandler):
++             # on a path that has already escaped, or the difference between
++             # a redirect and a 403 would reveal whether an out-of-bounds
++             # directory exists.
++-            absolute_path = self._resolve_symlink_target(absolute_path)
+++            absolute_path = self._resolve_symlink_target(
+++                absolute_path, allowed_symlink_directory, self.path
+++            )
++         # Stat the resolved path once and keep the result, instead of
++         # letting os.path.exists, os.path.isfile and the later header
++         # generation each resolve the path again. Every one of those is a
++@@ -3066,15 +3080,23 @@ class StaticFileHandler(RequestHandler):
++         self._stat_result = stat_result
++         return absolute_path
++ 
++-    def _resolve_symlink_target(self, absolute_path: str) -> str:
+++    @staticmethod
+++    def _resolve_symlink_target(
+++        absolute_path: str, allowed_symlink_directory: str, path_message: str
+++    ) -> str:
++         """Resolves symlinks in ``absolute_path`` and validates the result.
++ 
++         The path checks in `validate_absolute_path` operate on the path as
++         written, which says nothing about where a symlink points: a symlink
++         inside the static directory can name any file on the system. The
++         resolved path must therefore stay inside
++-        ``allowed_symlink_directory``, which defaults to the directory being
++-        served.
+++        ``allowed_symlink_directory``.
 ++
-++    def test_unpause_asks_for_a_socket_action(self):
-++        # Only libcurl 8.x reports through the timer callback that an
-++        # unpaused transfer is runnable again; older versions leave it
-++        # stalled unless we ask for a socket_action ourselves.
-++        paused = []
-++
-++        class FakeCurl:
-++            def pause(self, flags):
-++                paused.append(flags)
-++
-++        chunks: list[bytes] = []
-++        buf = self.make_buffer(FakeCurl(), chunks.append)
-++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 4):
-++            self.assertEqual(buf.write(b"hello"), 5)
-++            self.assertEqual(buf.write(b"world"), pycurl.WRITEFUNC_PAUSE)
-++        buf.flush()
-++        self.assertEqual(chunks, [b"hello"])
-++        self.assertEqual(paused, [pycurl.PAUSE_CONT])
-++        self.assertEqual(self.timeouts_requested, [0])
-++
-++    def test_body_too_large(self):
-++        # Exceeding the client's max_body_size makes write() report a short
-++        # write, which libcurl turns into a failed transfer, and records why
-++        # so that _finish can say so.
-++        class FakeCurl:
-++            def pause(self, flags):
-++                raise AssertionError("should not pause")
-++
-++        chunks: list[bytes] = []
-++        buf = self.make_buffer(FakeCurl(), chunks.append)
-++        self.client.max_body_size = 8
-++        self.assertEqual(buf.write(b"12345"), 5)
-++        self.assertFalse(buf.body_too_large)
-++        # 5 + 5 > 8, so this chunk is refused rather than truncated.
-++        self.assertEqual(buf.write(b"67890"), 0)
-++        self.assertTrue(buf.body_too_large)
-++        buf.flush()
-++        self.assertEqual(chunks, [b"12345"])
-++
-++    def test_unpause_error_is_ignored(self):
-++        # When a transfer fails while it is paused, libcurl reports the
-++        # failure from curl_easy_pause instead of from the write callback.
-++        # That is not an error in the flush itself, and must not be raised
-++        # into the IOLoop: _finish will pass the failure to the callback.
-++        class FakeCurl:
-++            def pause(self, flags):
-++                raise pycurl.error(pycurl.E_WRITE_ERROR, "write error")
-++
-++        chunks: list[bytes] = []
-++        buf = self.make_buffer(FakeCurl(), chunks.append)
-++        with mock.patch.object(_CurlStreamingBuffer, "max_buffer_size", 4):
-++            self.assertEqual(buf.write(b"hello"), 5)
-++            # The buffer is full, so this chunk is left with libcurl.
-++            self.assertEqual(buf.write(b"world"), pycurl.WRITEFUNC_PAUSE)
-++        self.assertTrue(buf.paused)
-++        buf.flush()
-++        self.assertEqual(chunks, [b"hello"])
-++        self.assertFalse(buf.paused)
-++        # A failed unpause is not worth a socket_action.
-++        self.assertEqual(self.timeouts_requested, [])
-+diff --git a/tornado/test/httpclient_test.py b/tornado/test/httpclient_test.py
-+index f009f190..46300200 100644
-+--- a/tornado/test/httpclient_test.py
-++++ b/tornado/test/httpclient_test.py
-+@@ -1,17 +1,22 @@
-+ import base64
-+ import binascii
-++import contextlib
-+ from contextlib import closing
-+ import copy
-++import functools
-+ import gzip
-++import logging
-+ import threading
-+ import datetime
-+ from io import BytesIO
-+ import subprocess
-+ import sys
-+ import time
-++import tracemalloc
+++        This is a static method so that it can only see the values its
+++        caller checked against: ``allowed_symlink_directory`` is the
+++        directory `validate_absolute_path` settled on, which is not
+++        necessarily ``self.allowed_symlink_directory`` or ``self.root``.
+++        ``path_message`` is used only to build the error message.
++ 
++         Raises `HTTPError` (403) if the resolved path escapes that directory.
++ 
++@@ -3089,7 +3111,7 @@ class StaticFileHandler(RequestHandler):
++         # may itself be reached through a symlink (a static directory of
++         # /var/www that links to /srv/www, say). Comparing a resolved path
++         # against an unresolved directory would reject every request.
++-        allowed_directory = os.path.realpath(self.allowed_symlink_directory)
+++        allowed_directory = os.path.realpath(allowed_symlink_directory)
++         if not allowed_directory.endswith(os.path.sep):
++             # As in validate_absolute_path, the separator must not be
++             # doubled when the directory is the filesystem root.
++@@ -3105,7 +3127,7 @@ class StaticFileHandler(RequestHandler):
++             # Deliberately the same error as the check on the path as
++             # written, so that a caller cannot tell which way a path left
++             # the served directory.
++-            raise HTTPError(403, "%s is not in root static directory", self.path)
+++            raise HTTPError(403, "%s is not in root static directory", path_message)
++         return resolved_path
++ 
++     @classmethod
++-- 
++2.35.6
++
+diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263.patch
+new file mode 100644
+index 0000000000..295f7e00e6
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263.patch
+@@ -0,0 +1,422 @@
++From 437ab5f76565403b3403438d2e555d11f8128d32 Mon Sep 17 00:00:00 2001
++From: Claude <noreply@anthropic.com>
++Date: Sun, 13 Sep 2026 03:42:20 +0000
++Subject: [PATCH] web: Do not follow symlinks out of the static directory
++
++StaticFileHandler.validate_absolute_path checked the requested path
++against the configured root using os.path.abspath, which does not
++resolve symlinks. A symlink inside the static directory could therefore
++point anywhere on the filesystem and its contents would be served: both
++a symlinked file and a symlinked directory were confirmed to expose
++files outside the root.
++
++Resolve the path with os.path.realpath and require the result to remain
++inside a new allowed_symlink_directory, which defaults to the served
++path. Deployments that use such symlinks deliberately can widen it to a
++directory containing all of the intended targets. Both this check and
++the existing one on the path as written raise the same error, so a
++caller cannot tell which way a path left the served directory.
++
++The two checks are not merged, and the resolution stays after the check
++on the unresolved path. That check must operate on the path as written:
++when allowed_symlink_directory is wider than the root, comparing the
++resolved path instead would let a ../ traversal out of the root while
++rejecting the deliberate symlinks the setting exists to permit. Doing
++the cheap string comparison first also avoids walking the filesystem
++for a path that is already out of bounds.
++
++Because default_filename is appended after the path has been resolved,
++the joined path is resolved again: the directory containing an index
++file may be legitimate while the index file itself is a symlink
++pointing elsewhere. Deferring to a single resolution after that block
++would be cheaper, but the isdir() check and the redirect it can trigger
++would then run on a path that had already escaped, and the difference
++between a 301 and a 403 would reveal whether an out-of-bounds directory
++exists. A test pins this. The second resolution only happens for
++directory-index requests; a request for a file resolves once.
++
++realpath() is applied to the allowed directory as well as to the
++requested path, so that serving a directory that is itself reached
++through a symlink continues to work instead of rejecting every request.
++strict=True is not used: it is unavailable on Python 3.9, and a path
++that does not exist resolves to itself and is then reported as a 404.
++
++This check reflects the filesystem at one instant, and a path swapped
++for a symlink afterwards would not be caught; closing that race fully
++would mean holding descriptors across the whole operation. Short of
++that, the validated path is now stat'ed once and the result reused for
++the Content-Length and Last-Modified headers, replacing the separate
++os.path.exists and os.path.isfile calls. That cuts the number of times
++a single request resolves the path from ten to six, and ensures the
++headers describe the file that was validated. The residual race is
++documented rather than papered over.
++
++CVE: CVE-2026-103263
++Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/437ab5f76565403b3403438d2e555d11f8128d32]
++
++Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
++Claude-Session: https://claude.ai/code/session_01JD7LUuFMdyPJB1Dwdq6fPg
++Signed-off-by: Yogita Urade <yurade@cisco.com>
++---
++ tornado/test/web_test.py | 170 +++++++++++++++++++++++++++++++++++++++
++ tornado/web.py           | 100 ++++++++++++++++++++++-
++ 2 files changed, 267 insertions(+), 3 deletions(-)
++
++diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
++index 27e7fcfe..8a014d22 100644
++--- a/tornado/test/web_test.py
+++++ b/tornado/test/web_test.py
++@@ -54,7 +54,9 @@ import itertools
++ import logging
++ import os
++ import re
+++import shutil
++ import socket
+++import tempfile
 + import typing  # noqa: F401
-+ import unicodedata
 + import unittest
-++import zlib
++ import urllib.parse
++@@ -1510,6 +1512,14 @@ class StaticFileTest(WebTestCase):
++         response = self.get_and_head("/static/blarg")
++         self.assertEqual(response.code, 404)
 + 
-+ from tornado.escape import utf8, native_str, to_unicode, json_encode, json_decode
-+ from tornado import gen
-+@@ -28,7 +33,7 @@ from tornado.iostream import IOStream
-+ from tornado.log import gen_log, app_log
-+ from tornado import netutil
-+ from tornado.testing import AsyncHTTPTestCase, bind_unused_port, gen_test, ExpectLog
-+-from tornado.test.util import ignore_deprecation
-++from tornado.test.util import abstract_base_test, ignore_deprecation
-+ from tornado.web import Application, RequestHandler, url
-+ from tornado.httputil import format_timestamp, HTTPHeaders
-+ 
-+@@ -161,12 +166,108 @@ class EchoHeadersHandler(RequestHandler):
-+         self.write(json_encode(dict(self.request.headers.get_all())))
-+ 
-+ 
-++# Decompressed size of the response served by `GzipBombHandler`. Kept below
-++# every implementation's default ``max_body_size`` of 100MB so that a
-++# streaming_callback can retrieve the whole thing; raising it past that limit
-++# would turn this into a test of the limit instead (see
-++# `HTTPClientMaxBodySizeTestCase`).
-++GZIP_BOMB_SIZE = 64 * 1024 * 1024
+++    def test_static_directory_without_default_filename(self):
+++        # Without a default_filename, a directory is not servable. This
+++        # shares the stat() that validate_absolute_path performs, so it is
+++        # worth pinning the status it produces.
+++        with ExpectLog(gen_log, ".*is not a file"):
+++            response = self.get_and_head("/static/dir/")
+++        self.assertEqual(response.code, 403)
 ++
-++
-++# Decompressed size of the bomb used for the buffered (no
-++# streaming_callback) case. Larger than any implementation is willing to
-++# hold in memory, so such a request cannot complete and can only be
-++# refused.
-++UNBUFFERABLE_BOMB_SIZE = 256 * 1024 * 1024
-++
-++
-++@functools.lru_cache(maxsize=None)
-++def gzip_bomb(size: int = GZIP_BOMB_SIZE) -> bytes:
-++    """Returns a small gzip stream that expands to ``size`` bytes.
-++
-++    Compressed incrementally so that building it does not itself allocate
-++    the decompressed size.
-++    """
-++    compressor = zlib.compressobj(9, zlib.DEFLATED, 16 + zlib.MAX_WBITS)
-++    block = b"\0" * (1024 * 1024)
-++    pieces = [compressor.compress(block) for _ in range(size // len(block))]
-++    pieces.append(compressor.flush())
-++    return b"".join(pieces)
-++
-++
-++# A 421-byte brotli stream that expands to BROTLI_BOMB_SIZE bytes of zeros,
-++# a ratio of ~637000:1 (deflate cannot exceed ~1032:1). Embedded as a
-++# constant so that the test suite does not need a brotli module for Python.
-++# Regenerate with:
-++#     import base64, brotli
-++#     base64.b64encode(brotli.compress(b"\0" * BROTLI_BOMB_SIZE, quality=11))
-++BROTLI_BOMB_SIZE = 256 * 1024 * 1024
-++BROTLI_BOMB = base64.b64decode(
-++    "y///P/gnAOKxQCD3/o///3/wTwDEYRGA7v0f////4J8AiMMCAN37P/7//8E/ARCHBQC6"
-++    "93/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f/BMAcVgA"
-++    "oHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7//8E/ARCH"
-++    "BQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f/BMA"
-++    "cVgAoHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7//8E/"
-++    "ARCHBQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j//8f"
-++    "/BMAcVgAoHv/x///P/gnAOKwAED3/o///3/wTwDEYQGA7v0f////4J8AiMMCAN37P/7/"
-++    "/8E/ARCHBQC693/8//+DfwIgDgsAdO//+P//B/8EQBwWAOje//H//w/+CYA4LADQvf/j"
-++    "//8f/BMAcVgAoHv/Nw=="
-++)
-++
-++
-++@functools.lru_cache(maxsize=None)
-++def large_body() -> bytes:
-++    """Returns a body big enough to be delivered in several chunks.
-++
-++    The contents are non-repeating so that a chunk which was dropped,
-++    duplicated or delivered out of order can be detected.
-++    """
-++    return b"".join(b"%09d\n" % i for i in range(100000))
-++
-++
-++class GzipBombHandler(RequestHandler):
-++    """Sends a small response that decompresses to a very large one."""
-++
-++    def get(self):
-++        size = int(self.get_argument("size", str(GZIP_BOMB_SIZE)))
-++        # Set Content-Encoding manually to avoid automatic gzip encoding.
-++        self.set_header("Content-Encoding", "gzip")
-++        self.write(gzip_bomb(size))
-++
-++
-++class BrotliBombHandler(RequestHandler):
-++    """Sends a brotli-encoded bomb that the client never asked for.
-++
-++    No client implementation requests brotli, but libcurl builds its decoder
-++    from the ``Content-Encoding`` of the response without checking it against
-++    what was requested, so ``curl_httpclient`` decodes this anyway.
-++    """
-++
-++    def get(self):
-++        self.set_header("Content-Encoding", "br")
-++        self.write(BROTLI_BOMB)
-++
-++
-++class LargeBodyHandler(RequestHandler):
-++    def get(self):
-++        # An incompressible content type, so that the server's gzip
-++        # transform leaves the body alone and this exercises the plain
-++        # streaming path.
-++        self.set_header("Content-Type", "application/octet-stream")
-++        self.write(large_body())
-++
-++
-+ # These tests end up getting run redundantly: once here with the default
-+ # HTTPClient implementation, and then again in each implementation's own
-+ # test suite.
-+ 
-+ 
-+ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
-++    # Set by subclasses whose client decodes ``Content-Encoding: br``. No
-++    # implementation asks for brotli, so this is only true where the client
-++    # decodes an encoding it did not request (see BrotliBombHandler).
-++    decompresses_brotli = False
-++
-+     def get_app(self):
-+         return Application(
-+             [
-+@@ -187,6 +288,9 @@ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
-+                 url("/invalid_gzip", InvalidGzipHandler),
-+                 url("/header-encoding", HeaderEncodingHandler),
-+                 url("/echo_headers", EchoHeadersHandler),
-++                url("/gzip_bomb", GzipBombHandler),
-++                url("/brotli_bomb", BrotliBombHandler),
-++                url("/large_body", LargeBodyHandler),
-+             ],
-+             gzip=True,
-+         )
-+@@ -228,6 +332,91 @@ class HTTPClientCommonTestCase(AsyncHTTPTestCase):
-+         self.assertEqual(chunks, [b"Hello world!"])
-+         self.assertFalse(response.body)
-+ 
-++    def test_streaming_callback_large_body(self):
-++        # A body large enough to arrive in several chunks must reach the
-++        # callback exactly once each, in order.
-++        chunks: list[bytes] = []
-++        response = self.fetch("/large_body", streaming_callback=chunks.append)
-++        self.assertEqual(response.code, 200)
-++        self.assertEqual(b"".join(chunks), large_body())
-++        self.assertFalse(response.body)
-++
-++    def test_streaming_decompression_bomb(self):
-++        # A malicious server can turn a small compressed response into an
-++        # arbitrarily large decompressed one. With a streaming_callback it
-++        # must be possible to consume the whole thing without the client
-++        # buffering more than a bounded amount of it at a time.
-++        gzip_bomb()  # Precompute so it isn't counted in the measurement.
-++        received = 0
-++
-++        def streaming_callback(chunk):
-++            nonlocal received
-++            received += len(chunk)
-++
-++        tracemalloc.start()
-++        try:
-++            tracemalloc.reset_peak()
-++            response = self.fetch("/gzip_bomb", streaming_callback=streaming_callback)
-++            peak = tracemalloc.get_traced_memory()[1]
-++        finally:
-++            tracemalloc.stop()
-++
-++        self.assertEqual(response.code, 200)
-++        self.assertEqual(received, GZIP_BOMB_SIZE)
-++        self.assertFalse(response.body)
-++        self.assertLess(peak, 16 * 1024 * 1024)
-++
-++    def test_decompression_bomb_without_streaming_callback(self):
-++        # Without a streaming_callback the whole body has to be buffered, so
-++        # a bomb this size cannot be retrieved at all. It has to be refused
-++        # before it exhausts memory rather than buffered in full.
-++        gzip_bomb(UNBUFFERABLE_BOMB_SIZE)  # Precompute.
-++
-++        tracemalloc.start()
-++        try:
-++            tracemalloc.reset_peak()
-++            with self.assertRaises(HTTPError):
-++                self.fetch(
-++                    "/gzip_bomb?size=%d" % UNBUFFERABLE_BOMB_SIZE, raise_error=True
-++                )
-++            peak = tracemalloc.get_traced_memory()[1]
-++        finally:
-++            tracemalloc.stop()
-++
-++        # Well short of the decompressed size: the point is that the body
-++        # was refused, not accumulated.
-++        self.assertLess(peak, UNBUFFERABLE_BOMB_SIZE // 2)
-++
-++    def test_streaming_unsolicited_brotli_bomb(self):
-++        # A client that decodes an encoding it did not request can be
-++        # reached by a codec whose expansion ratio is hundreds of times
-++        # deflate's. The transfer need not survive -- libcurl aborts it once
-++        # its own pause buffer cannot hold the expansion -- but either way
-++        # the expansion must not be buffered.
-++        if not self.decompresses_brotli:
-++            self.skipTest("client does not decompress Content-Encoding: br")
-++        received = 0
-++
-++        def streaming_callback(chunk):
-++            nonlocal received
-++            received += len(chunk)
-++
-++        tracemalloc.start()
-++        try:
-++            tracemalloc.reset_peak()
-++            try:
-++                self.fetch("/brotli_bomb", streaming_callback=streaming_callback)
-++            except HTTPError:
-++                pass
-++            peak = tracemalloc.get_traced_memory()[1]
-++        finally:
-++            tracemalloc.stop()
-++
-++        # More than was sent on the wire, i.e. the response really was
-++        # decoded with an encoding we never asked for.
-++        self.assertGreater(received, len(BROTLI_BOMB))
-++        self.assertLess(peak, 16 * 1024 * 1024)
-++
-+     def test_post(self):
-+         response = self.fetch("/post", method="POST", body="arg1=foo&arg2=bar")
++     def test_path_traversal_protection(self):
++         # curl_httpclient processes ".." on the client side, so we
++         # must test this with simple_httpclient.
++@@ -1536,6 +1546,166 @@ class StaticFileTest(WebTestCase):
 +         self.assertEqual(response.code, 200)
-+@@ -1017,3 +1206,121 @@ class HTTPErrorTestCase(unittest.TestCase):
-+         e = cm.exception
-+         self.assertEqual(str(e), "HTTP 403: Forbidden")
-+         self.assertEqual(repr(e), "HTTP 403: Forbidden")
-++
-++
-++# Limit used by `HTTPClientMaxBodySizeTestCase`. Subclasses configure their
-++# client with it.
-++MAX_BODY_SIZE = 1024 * 64
-++
-++
-++class MaxBodySizeSmallHandler(RequestHandler):
-++    def get(self):
-++        self.set_header("Content-Type", "application/octet-stream")
-++        self.write(b"a" * MAX_BODY_SIZE)
-++
-++
-++class MaxBodySizeLargeHandler(RequestHandler):
-++    def get(self):
-++        self.set_header("Content-Type", "application/octet-stream")
-++        self.write(b"a" * (MAX_BODY_SIZE + 1))
-++
-++
-++class BodyBearingRedirectHandler(RequestHandler):
-++    """A redirect carrying a body of its own, larger than the limit.
-++
-++    Implementations differ here: libcurl discards the body of a redirect it
-++    follows, while simple_httpclient applies ``max_body_size`` to every
-++    response including the redirect, and so refuses this one before
-++    following it.
++ 
++ 
+++@unittest.skipIf(os.name != "posix", "non-posix OS")
+++class StaticFileSymlinkTest(WebTestCase):
+++    """Symlinks must not be followed out of the static directory unless the
+++    application opts in with ``allowed_symlink_directory``.
 ++    """
 ++
-++    def prepare(self):
-++        self.write("x" * (MAX_BODY_SIZE * 2))
-++        self.redirect("/small")
-++
-++
-++@abstract_base_test
-++class HTTPClientMaxBodySizeTestCase(AsyncHTTPTestCase):
-++    """Tests for the limit on a response body held in memory.
-++
-++    Without a ``streaming_callback`` the whole body is buffered, so a
-++    response larger than the client is prepared to hold cannot be retrieved
-++    at all -- it can only be refused. Subclasses supply a client configured
-++    with `MAX_BODY_SIZE`.
-++    """
-++
-++    # Format of the message the implementation logs to `.gen_log` when it
-++    # refuses a body, or None if it does not log one. ``{reason}`` is filled
-++    # in with why the body was refused.
-++    refusal_log_format = None  # type: typing.Optional[str]
-++
-++    def get_app(self):
-++        return Application(
-++            [
-++                url("/small", MaxBodySizeSmallHandler),
-++                url("/large", MaxBodySizeLargeHandler),
-++                url("/bomb", GzipBombHandler),
-++                url("/body_bearing_redirect", BodyBearingRedirectHandler),
-++            ]
+++    def setUp(self):
+++        self.tmpdir = tempfile.mkdtemp()
+++        self.addCleanup(shutil.rmtree, self.tmpdir)
+++        self.root = os.path.join(self.tmpdir, "static")
+++        self.outside = os.path.join(self.tmpdir, "outside")
+++        os.mkdir(self.root)
+++        os.mkdir(self.outside)
+++        with open(os.path.join(self.root, "inside.txt"), "w") as f:
+++            f.write("inside")
+++        with open(os.path.join(self.outside, "secret.txt"), "w") as f:
+++            f.write("secret")
+++        with open(os.path.join(self.root, "index.html"), "w") as f:
+++            f.write("root index")
+++        # A symlink to a file outside the root.
+++        os.symlink(
+++            os.path.join(self.outside, "secret.txt"),
+++            os.path.join(self.root, "link.txt"),
 ++        )
+++        # A symlink to a directory outside the root.
+++        os.symlink(self.outside, os.path.join(self.root, "linkdir"))
+++        # Out-of-bounds symlink targets, one existing and one not, for the
+++        # existence-oracle test below.
+++        os.mkdir(os.path.join(self.outside, "realdir"))
+++        os.symlink(
+++            os.path.join(self.outside, "realdir"),
+++            os.path.join(self.root, "link_exists"),
+++        )
+++        os.symlink(
+++            os.path.join(self.outside, "nope"),
+++            os.path.join(self.root, "link_missing"),
+++        )
+++        # A symlink that stays inside the root.
+++        os.symlink(
+++            os.path.join(self.root, "inside.txt"),
+++            os.path.join(self.root, "internal.txt"),
+++        )
+++        super().setUp()
 ++
-++    def assert_refused(self, path, reason, **fetch_kwargs):
-++        with contextlib.ExitStack() as stack:
-++            if self.refusal_log_format is not None:
-++                stack.enter_context(
-++                    ExpectLog(
-++                        gen_log,
-++                        self.refusal_log_format.format(reason=reason),
-++                        level=logging.INFO,
-++                    )
+++    def get_handlers(self):
+++        return [
+++            ("/default/(.*)", StaticFileHandler, dict(path=self.root)),
+++            (
+++                "/permissive/(.*)",
+++                StaticFileHandler,
+++                dict(path=self.root, allowed_symlink_directory=self.tmpdir),
+++            ),
+++            (
+++                "/default_filename/(.*)",
+++                StaticFileHandler,
+++                dict(path=self.root, default_filename="index.html"),
+++            ),
+++        ]
+++
+++    def get_app_kwargs(self):
+++        return dict()
+++
+++    def test_regular_file(self):
+++        response = self.fetch("/default/inside.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"inside")
+++
+++    def test_symlink_within_root(self):
+++        # A symlink is fine as long as it resolves inside the root.
+++        response = self.fetch("/default/internal.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"inside")
+++
+++    def test_symlinked_file_escaping_root(self):
+++        with ExpectLog(gen_log, ".*is not in root static directory"):
+++            response = self.fetch("/default/link.txt")
+++        self.assertEqual(response.code, 403)
+++
+++    def test_symlinked_directory_escaping_root(self):
+++        with ExpectLog(gen_log, ".*is not in root static directory"):
+++            response = self.fetch("/default/linkdir/secret.txt")
+++        self.assertEqual(response.code, 403)
+++
+++    def test_served_directory_itself(self):
+++        # A request for the served directory itself resolves to the allowed
+++        # directory exactly, rather than to something beneath it. That must
+++        # still be allowed.
+++        response = self.fetch("/default_filename/")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"root index")
+++
+++    def test_symlinked_default_filename(self):
+++        # The default filename is appended after the directory has been
+++        # resolved, so it must be checked in its own right.
+++        os.mkdir(os.path.join(self.root, "dir"))
+++        os.symlink(
+++            os.path.join(self.outside, "secret.txt"),
+++            os.path.join(self.root, "dir", "index.html"),
+++        )
+++        with ExpectLog(gen_log, ".*is not in root static directory"):
+++            response = self.fetch("/default_filename/dir/")
+++        self.assertEqual(response.code, 403)
+++
+++    def test_no_existence_oracle_for_symlinked_directory(self):
+++        # A symlink pointing out of bounds must be rejected identically
+++        # whether or not its target exists, so that it cannot be used to
+++        # probe the server's filesystem. This pins the ordering in
+++        # validate_absolute_path: resolving only after the isdir() check
+++        # would let an existing directory trigger a redirect (301) while a
+++        # missing one still gave 403.
+++        codes = []
+++        for name in ("link_exists", "link_missing"):
+++            with ExpectLog(gen_log, ".*is not in root static directory"):
+++                codes.append(
+++                    self.fetch("/default_filename/" + name, follow_redirects=False).code
 ++                )
-++            with self.assertRaises(HTTPError) as cm:
-++                self.fetch(path, raise_error=True, **fetch_kwargs)
-++        self.assertEqual(cm.exception.code, 599)
+++        self.assertEqual(codes, [403, 403])
 ++
-++    def assert_streaming_refused(self, path, reason):
-++        received = 0
+++    def test_allowed_symlink_directory(self):
+++        # With an explicit allowed_symlink_directory that contains the
+++        # target, the same symlinks are served.
+++        response = self.fetch("/permissive/link.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"secret")
 ++
-++        def streaming_callback(chunk):
-++            nonlocal received
-++            received += len(chunk)
+++        response = self.fetch("/permissive/linkdir/secret.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"secret")
 ++
-++        self.assert_refused(path, reason=reason, streaming_callback=streaming_callback)
-++        # Nothing past the limit reached the callback.
-++        self.assertLessEqual(received, MAX_BODY_SIZE)
 ++
-++    def test_small_body(self):
-++        # A body of exactly max_body_size is accepted.
-++        response = self.fetch("/small")
-++        response.rethrow()
-++        self.assertEqual(response.body, b"a" * MAX_BODY_SIZE)
+++class StaticFileSymlinkedRootTest(WebTestCase):
+++    """The root itself may be reached through a symlink; that must not make
+++    every request look like an escape.
+++    """
 ++
-++    def test_large_body(self):
-++        # One byte more is not.
-++        self.assert_refused("/large", reason="Content-Length too long")
+++    def setUp(self):
+++        self.tmpdir = tempfile.mkdtemp()
+++        self.addCleanup(shutil.rmtree, self.tmpdir)
+++        real_root = os.path.join(self.tmpdir, "real")
+++        os.mkdir(real_root)
+++        with open(os.path.join(real_root, "inside.txt"), "w") as f:
+++            f.write("inside")
+++        # Serve through a symlink to the real directory.
+++        self.root = os.path.join(self.tmpdir, "link")
+++        os.symlink(real_root, self.root)
+++        super().setUp()
 ++
-++    def test_decompressed_body_size(self):
-++        # The limit is measured after decompression, so a compressed
-++        # response cannot expand past it.
-++        self.assert_refused("/bomb", reason="decompressed body too large")
+++    def get_handlers(self):
+++        return [("/static/(.*)", StaticFileHandler, dict(path=self.root))]
 ++
-++    def test_streaming_callback_over_limit(self):
-++        # max_body_size applies to a streaming_callback as well as to a
-++        # buffered response. It is a safeguard for applications that do not
-++        # impose a limit of their own on what they do with the chunks
-++        # (writing them to disk, say), so retrieving a response larger than
-++        # this means raising the limit deliberately.
-++        self.assert_streaming_refused("/large", reason="Content-Length too long")
+++    def get_app_kwargs(self):
+++        return dict()
 ++
-++    def test_streaming_callback_decompressed_over_limit(self):
-++        # As above, measured after decompression.
-++        self.assert_streaming_refused("/bomb", reason="decompressed body too large")
+++    @unittest.skipIf(os.name != "posix", "non-posix OS")
+++    def test_symlinked_root(self):
+++        response = self.fetch("/static/inside.txt")
+++        self.assertEqual(response.code, 200)
+++        self.assertEqual(response.body, b"inside")
 ++
-++    def test_reuse_after_refusal(self):
-++        # Refusing a body must not leave the client unable to make the next
-++        # request. This matters most for curl_httpclient, which reuses a
-++        # pool of curl handles.
-++        self.assert_refused("/large", reason="Content-Length too long")
-++        response = self.fetch("/small")
-++        response.rethrow()
-++        self.assertEqual(response.body, b"a" * MAX_BODY_SIZE)
-+diff --git a/tornado/test/simple_httpclient_test.py b/tornado/test/simple_httpclient_test.py
-+index a40435e8..03da1c34 100644
-+--- a/tornado/test/simple_httpclient_test.py
-++++ b/tornado/test/simple_httpclient_test.py
-+@@ -789,34 +789,13 @@ class MaxHeaderSizeTest(AsyncHTTPTestCase):
-+                 self.fetch("/large", raise_error=True)
+++
++ class StaticDefaultFilenameTest(WebTestCase):
++     def get_app_kwargs(self):
++         return dict(
++diff --git a/tornado/web.py b/tornado/web.py
++index 6f1ae304..2c8a1e1d 100644
++--- a/tornado/web.py
+++++ b/tornado/web.py
++@@ -72,6 +72,7 @@ import numbers
++ import os.path
++ import re
++ import socket
+++import stat
++ import sys
++ import threading
++ import time
++@@ -2736,6 +2737,13 @@ class StaticFileHandler(RequestHandler):
++     in your application settings, or add ``default_filename`` as an initializer
++     argument for your ``StaticFileHandler``.
 + 
+++    Symlinks are not followed out of the directory being served: if a path
+++    resolves to a location outside it, the request is rejected with a 403
+++    error. Deployments that deliberately serve content through symlinks
+++    pointing elsewhere can set the ``allowed_symlink_directory`` initializer
+++    argument to a directory containing all of the intended targets. It
+++    defaults to the ``path`` argument.
+++
++     To maximize the effectiveness of browser caching, this class supports
++     versioned urls (by default using the argument ``?v=``).  If a version
++     is given, we instruct the browser to cache this file indefinitely.
++@@ -2774,6 +2782,11 @@ class StaticFileHandler(RequestHandler):
 + 
-+-class MaxBodySizeTest(AsyncHTTPTestCase):
-+-    def get_app(self):
-+-        class SmallBody(RequestHandler):
-+-            def get(self):
-+-                self.write("a" * 1024 * 64)
-+-
-+-        class LargeBody(RequestHandler):
-+-            def get(self):
-+-                self.write("a" * 1024 * 100)
-+-
-+-        return Application([("/small", SmallBody), ("/large", LargeBody)])
-++class SimpleHTTPClientMaxBodySizeTestCase(
-++    httpclient_test.HTTPClientMaxBodySizeTestCase
-++):
-++    refusal_log_format = "Malformed HTTP message from None: {reason}"
++     .. versionchanged:: 3.1
++        Many of the methods for subclasses were added in Tornado 3.1.
+++
+++    .. versionchanged:: 6.5.9
+++       Symlinks pointing outside the served directory are no longer
+++       followed, and the ``allowed_symlink_directory`` argument was added
+++       to configure this.
++     """
 + 
-+     def get_http_client(self):
-+-        return SimpleAsyncHTTPClient(max_body_size=1024 * 64)
-+-
-+-    def test_small_body(self):
-+-        response = self.fetch("/small")
-+-        response.rethrow()
-+-        self.assertEqual(response.body, b"a" * 1024 * 64)
-+-
-+-    def test_large_body(self):
-+-        with ExpectLog(
-+-            gen_log,
-+-            "Malformed HTTP message from None: Content-Length too long",
-+-            level=logging.INFO,
-+-        ):
-+-            with self.assertRaises(HTTPStreamClosedError):
-+-                self.fetch("/large", raise_error=True)
-++        return SimpleAsyncHTTPClient(max_body_size=httpclient_test.MAX_BODY_SIZE)
++     CACHE_MAX_AGE = 86400 * 365 * 10  # 10 years
++@@ -2781,9 +2794,17 @@ class StaticFileHandler(RequestHandler):
++     _static_hashes = {}  # type: Dict[str, Optional[str]]
++     _lock = threading.Lock()  # protects _static_hashes
 + 
++-    def initialize(self, path: str, default_filename: Optional[str] = None) -> None:
+++    def initialize(
+++        self,
+++        path: str,
+++        default_filename: Optional[str] = None,
+++        allowed_symlink_directory: Optional[str] = None,
+++    ) -> None:
++         self.root = path
++         self.default_filename = default_filename
+++        if allowed_symlink_directory is None:
+++            allowed_symlink_directory = path
+++        self.allowed_symlink_directory = allowed_symlink_directory
 + 
-+ class MaxBufferSizeTest(AsyncHTTPTestCase):
++     @classmethod
++     def reset(cls) -> None:
++@@ -2995,6 +3016,15 @@ class StaticFileHandler(RequestHandler):
++         # the requested path so a request to root/ will match.
++         if not (absolute_path + os.path.sep).startswith(root):
++             raise HTTPError(403, "%s is not in root static directory", self.path)
+++        # The check above is on the path as written, which is cheap and
+++        # rejects traversal without touching the filesystem. Resolve
+++        # symlinks only once it has passed, so that the remaining checks -
+++        # and the path this method returns - refer to the file that will
+++        # actually be opened rather than to the link. The two checks
+++        # cannot be merged: this one must stay on the unresolved path,
+++        # because allowed_symlink_directory may be wider than the root and
+++        # would then let a ../ traversal through.
+++        absolute_path = self._resolve_symlink_target(absolute_path)
++         if os.path.isdir(absolute_path) and self.default_filename is not None:
++             # need to look at the request.path here for when path is empty
++             # but there is some prefix to the path that was already
++@@ -3012,12 +3042,72 @@ class StaticFileHandler(RequestHandler):
++                 self.redirect(self.request.path + "/", permanent=True)
++                 return None
++             absolute_path = os.path.join(absolute_path, self.default_filename)
++-        if not os.path.exists(absolute_path):
+++            # The default filename may be a symlink even when the directory
+++            # containing it is not. Resolving here rather than deferring a
+++            # single resolution until after this block is deliberate: the
+++            # isdir() above, and the redirect it can trigger, must not run
+++            # on a path that has already escaped, or the difference between
+++            # a redirect and a 403 would reveal whether an out-of-bounds
+++            # directory exists.
+++            absolute_path = self._resolve_symlink_target(absolute_path)
+++        # Stat the resolved path once and keep the result, instead of
+++        # letting os.path.exists, os.path.isfile and the later header
+++        # generation each resolve the path again. Every one of those is a
+++        # separate trip through the filesystem that could observe a
+++        # different file from the one validated here.
+++        try:
+++            stat_result = os.stat(absolute_path)
+++        except OSError:
+++            # Matches the previous os.path.exists() check, which is also
+++            # false when the path cannot be stat'ed at all.
++             raise HTTPError(404)
++-        if not os.path.isfile(absolute_path):
+++        if not stat.S_ISREG(stat_result.st_mode):
++             raise HTTPError(403, "%s is not a file", self.path)
+++        self._stat_result = stat_result
++         return absolute_path
++ 
+++    def _resolve_symlink_target(self, absolute_path: str) -> str:
+++        """Resolves symlinks in ``absolute_path`` and validates the result.
+++
+++        The path checks in `validate_absolute_path` operate on the path as
+++        written, which says nothing about where a symlink points: a symlink
+++        inside the static directory can name any file on the system. The
+++        resolved path must therefore stay inside
+++        ``allowed_symlink_directory``, which defaults to the directory being
+++        served.
+++
+++        Raises `HTTPError` (403) if the resolved path escapes that directory.
+++
+++        Note that this is a check against the state of the filesystem at
+++        one moment: a path that is replaced by a symlink after this returns
+++        but before the file is opened would not be caught. Closing that
+++        race entirely would require holding file descriptors across the
+++        whole operation. This check is not a substitute for filesystem
+++        permissions on a directory that untrusted users can write to.
+++        """
+++        # realpath() is applied to the allowed directory as well, because it
+++        # may itself be reached through a symlink (a static directory of
+++        # /var/www that links to /srv/www, say). Comparing a resolved path
+++        # against an unresolved directory would reject every request.
+++        allowed_directory = os.path.realpath(self.allowed_symlink_directory)
+++        if not allowed_directory.endswith(os.path.sep):
+++            # As in validate_absolute_path, the separator must not be
+++            # doubled when the directory is the filesystem root.
+++            allowed_directory += os.path.sep
+++        # strict=True is deliberately not used here: it is unavailable on
+++        # Python 3.9, and a path that does not exist resolves to itself,
+++        # which the caller then reports as a 404.
+++        resolved_path = os.path.realpath(absolute_path)
+++        # The trailing separator lets the allowed directory itself match, as
+++        # well as anything beneath it. This is reachable because the path may
+++        # still be a directory at this point (when default_filename is set).
+++        if not (resolved_path + os.path.sep).startswith(allowed_directory):
+++            # Deliberately the same error as the check on the path as
+++            # written, so that a caller cannot tell which way a path left
+++            # the served directory.
+++            raise HTTPError(403, "%s is not in root static directory", self.path)
+++        return resolved_path
+++
++     @classmethod
++     def get_content(
++         cls, abspath: str, start: Optional[int] = None, end: Optional[int] = None
++@@ -3077,6 +3167,10 @@ class StaticFileHandler(RequestHandler):
++ 
++     def _stat(self) -> os.stat_result:
++         assert self.absolute_path is not None
+++        # validate_absolute_path normally populates this, so that the size
+++        # and modification time reported here describe the same file that
+++        # was validated. Subclasses that override validate_absolute_path
+++        # without calling super() fall back to stat'ing here.
++         if not hasattr(self, "_stat_result"):
++             self._stat_result = os.stat(self.absolute_path)
++         return self._stat_result
 +-- 
 +2.35.6
 +
 diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-index a1b016d818..2888090884 100644
+index 2888090884..a84503db51 100644
 --- a/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
 +++ b/meta-python/recipes-devtools/python/python3-tornado_6.5.7.bb
-@@ -12,6 +12,7 @@ SRC_URI += "file://CVE-2026-91990.patch \
-             file://CVE-2026-82397.patch \
+@@ -13,6 +13,8 @@ SRC_URI += "file://CVE-2026-91990.patch \
              file://CVE-2026-91991.patch \
              file://CVE-2026-103261.patch \
-+            file://CVE-2026-103262.patch \
+             file://CVE-2026-103262.patch \
++            file://CVE-2026-103263.patch \
++            file://CVE-2026-103263-dependent.patch \
  "
  
  inherit pypi python_setuptools_build_meta
