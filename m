@@ -1,72 +1,70 @@
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30041.1793869209251710244
+Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.30265.1793869209177458011
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 05 Nov 2026 01:00:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=A1/YK71m;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: hthakar@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=KJjf27r1;
+ spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: hthakar@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=8611; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=7840; q=dns/txt;
   s=iport01; t=1793869209; x=1795078809;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=3zUjOajfTpz6JCpHRPfgNz+qg9TFbfv0WDhRwfAwajE=;
-  b=A1/YK71mbbIQjG3KoikgzUEST60iO/pbBCQBg3FhJ3wyFLppw2oQN4+d
-   LG87vxAMX7R7axpSRe4eAd3YUtxIisFMj8PqCuNqemfgzBxQKMXez9oWV
-   zS6+zhYJkol+LmMAQdNuF1LaShW1tf+4A3RAfPngTQWtYUu5d81gdhfHt
-   1SZfN7mmDjalKwV5QKnxl0bBvOOE0lBZbcwZA4b4hVa0dm8+wn7zqmI/U
-   eqSXjv2YEkj3LrCF7jKzlJkkq2CjCMVCBxlyHfCfVLmQ4nuZKuObmaL07
-   IoODFTn9KNimvZ0i1Via4tXRjJ5KNqLO31iL1XmMfvxLR7Aewzuf+fDzc
-   w==;
-X-CSE-ConnectionGUID: gihlA6dISyiuCXtIAIXSKg==
-X-CSE-MsgGUID: PXJoTMBaS76zFQK29vnvHA==
-X-IPAS-Result: =?us-ascii?q?A0BOAgDGROxq/5D/Ja1aHgEBCxIMggULgld1YENJA4RUj?=
- =?us-ascii?q?1OCIQOLZZI8gX4PAQEBD0QNBAEBhD9GAo4dAiY0CQ4BAgQDAgMBAQEBAQEBA?=
- =?us-ascii?q?QEBAQEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBAyMECwEYAT0JEwMBAgMCJgICI?=
- =?us-ascii?q?AsdAQUIEAmDAgGCOgM3AxGhDZsken8zgQGDKQGBVNhMDYJaAQsUAYEKLoVAg?=
- =?us-ascii?q?n8gAYUDXRgBRIQ5JxsbgXKBFYNpgQWBGkIChTyCagSCIoEMgVqBAwmMDAKBU?=
- =?us-ascii?q?oZxSIECHANZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPhcvWBsGBYEdgR6BEoEHX?=
- =?us-ascii?q?YErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJARMaLAqBGjU8CSY/F?=
- =?us-ascii?q?QxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZBD0BbgeSL4MRMQw+E?=
- =?us-ascii?q?wEKIQQTP4EWGScFCZNvj1iCIaAgcQoog3iMJI8+hXwaM4QEgVeSQpJUC5h9g?=
- =?us-ascii?q?lmLMYQKkV9ohGmBaDyBWXAVO4JnCUoZD445g2uFZMh3JjICCQMvAQEHAgcBD?=
- =?us-ascii?q?AEDC4FokAItgU8BAQ?=
-IronPort-Data: A9a23:HpqwHamZjj0TuVDUvkTphkro5gzQJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xIeDzyGaKuIZGenLdBzaYm0oUsEvpPSmtJiGwBu/npkE1tH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4Errav6+/SEUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+ZK31GONgWYubDtNs/7b8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FYIZ+uJeX21vz
- u0ZNRs9cjGqptKN473uH4GAhux7RCXqFJkUtnclyXTSCuwrBMicBa7L/tRfmjw3g6iiH96HO
- JFfMmUpNkmdJUQTZj/7C7pm9AusrnnjczRboUi9rqss6G+Vxwt0uFToGIeOIofRFZ8Pwi50o
- Er+z0b+PjQwPefAlyiry1H21/HJgwPSDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
- 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUg4w2Lj66R6AGDCy1cEXhKaccts4k9QjlCO
- kK1ou4FzAdH6NW9IU9xPJ/Oxd9uEUD59VM/WBI=
-IronPort-HdrOrdr: A9a23:NKGRuamA8ASMW+qRcgKPl8e1m1fpDfIO3DAbv31ZSRFFG/Fw8P
- re+8jztCWE7Ar5N0tPpTntAsS9qDbnhP1ICOoqTNKftXfd2VdARbsKheCJ/9SjIVydygc378
- hdmsZFZOEYdWIbse/KpC+lDt0n3N6LtIqshevY0jNRaDsCUdAH0++8YTzranGfg2J9dOMEKK
- Y=
-X-Talos-CUID: 9a23:eSy/pWwCVd0nq3aYViCvBgUbG8AhWyPR7UzBIlKTOXpIYZylcnyfrfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3AVLsOgw/D5pxgwUBSQ+Ds48yQf/9YwaOSLWoEqsp?=
- =?us-ascii?q?Yqee9FnYhJTGDrB3iFw=3D=3D?=
+  bh=+jaZV3gZM7dUEeZZcAb31dxCq0IyiQtkrLceKyRyQT4=;
+  b=KJjf27r1Qej6ldKMdPFwNk5WNZCRYC1FPoAcV7yYziaU4AoIFG0z1HIZ
+   dwI423dIiAnMY7tdhtk6R9iTkzJK792wMLngsFUU7iqPo9os6LBZZAcVu
+   70eQrqumR8U4czycEQsWHE6DswMa0rZRv2nJ6IjlJjXBsBhvwYwW3Yfyk
+   WAXrC9vPMPTZzBO/v6g053+Ct+212wFSyQFFeMhNRDMSSEIJ+8SQgiM2h
+   9dUDaoZ1RnGrzhXFigLSykihgNOCaRdTCNYtJSgmCOvvcZ2ddYzVLshW8
+   KyhcKECvrda51ovHDg7UYeqwluzBIdAkyK1PnaKyCxQOkNSBehQ5VA2C5
+   Q==;
+X-CSE-ConnectionGUID: 9xL5NoUTSN61bfGZIsE2Xw==
+X-CSE-MsgGUID: KkZ4d4nXSX6smRBfAceyGA==
+X-IPAS-Result: =?us-ascii?q?A0CFAADGROxq/5P/Ja1aHQEBAQEJARIBBQUBgX4GAQsBg?=
+ =?us-ascii?q?lZ1YAo5SQOEVI9TgiEDgROKUpI8gX4PAQEBD0QNBAEBhD9GAo4dAiY2Bw4BA?=
+ =?us-ascii?q?gQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBAyMECwEYA?=
+ =?us-ascii?q?T0JEwMBAgMCJgICIAsjCBmDAgGCOgM3AxGhDZsken8zgQGDKQGBVNhMDYJaA?=
+ =?us-ascii?q?QsUAYEKLgGFP4J/IAGFA10YAUSEOScbG4FygRWCc3aBBYEaQgKFPIJqBIINF?=
+ =?us-ascii?q?YEMgVoegweJcwKBUoZxSIECHANZLAFVEw0KCwcFgWgDNRIqFW4yHYEjPhcvW?=
+ =?us-ascii?q?BsGBYEdgR6BEoEHXYErKF4hgQiBdgKCUYIAAgFJQQ4HRVMJJUMSRyQiCBIJA?=
+ =?us-ascii?q?RMaLAqBGjU8CSY/FQxkCxoFYQgCDQxyORAwHiQvBRwmQBsKGBgNSBEsNxUZB?=
+ =?us-ascii?q?D0BbgeSL4MRDko2ASsXgQlATA4Bkn0FkESCIaAgcQoog3iKFIIQjz6FfBozh?=
+ =?us-ascii?q?ASBV5JCklQLmH2OCoQKkXpNhGmBbwMygVlwFYMiCUoZD44uCwuDYIVkyHcmM?=
+ =?us-ascii?q?gIJAy8BAQcCBwEMAQMLgWiRfgEB?=
+IronPort-Data: A9a23:RHVZYa1AB0H2NaE2L/bD5YJwkn2cJEfYwER7XKvMYLTBsI5bpzYPy
+ jcbUGHUOvyKYGX2f492ady3/ElVuZ7cndc1TwVs3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yEzmE4Ej9atANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXX5
+ rsen+WFYAX7gmcsbjpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGXVESYKsfx9pMJz8X/
+ /I3GhEWQ0qzmLfjqF67YrEEasULNsLnOsYb/3pn1zycVK5gSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNUifC/FMEg9/5JYWnPuoj3r2aRVTqUmeouw85G27IAlZjeSxYIWJIYXXLSlTtmWbl
+ D7Ko2LJOSFEL9ml4zSs+X+9qcaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl/BQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:LCoC/qGLC1zj0qOzpLqEyseALOsnbusQ8zAXPidKOHtom62j5q
+ STdZsguyMc5Ax9ZJhko6HiBEDiewK4yXcK2+gs1N6ZNWGM0ldAbrsSj7cKqAeOJ8SRzIJgPN
+ 9bE5RWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqUuEiWpRGtldB8ATMHfjLnFL
+X-Talos-CUID: 9a23:VGvOoG/mmWSz1eTdRjmVvx8EPp0DdUDh91GOekW2JlRIU5DPeUDFrQ==
+X-Talos-MUID: 9a23:Qw2U4Aul9FpJN1Tloc2npzJQaMs05ZSVOB4WlK8steCPOD1fEmLI
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,196,1787011200"; 
-   d="scan'208";a="530338224"
-Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 09:00:08 +0000
+   d="scan'208";a="544874315"
+Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
+  by rcdn-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 05 Nov 2026 09:00:08 +0000
 Received: from sjc-ads-5245.cisco.com (sjc-ads-5245.cisco.com [10.28.23.9])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id 30430180004BC
+	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id 28C411800027C
 	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Nov 2026 09:00:08 +0000 (GMT)
 Received: by sjc-ads-5245.cisco.com (Postfix, from userid 1887505)
-	id 85F93CBEFAB; Thu,  5 Nov 2026 01:00:07 -0800 (PST)
+	id 7748FCBF21E; Thu,  5 Nov 2026 01:00:07 -0800 (PST)
 From: "Hetvi Thakar -X (hthakar - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hthakar@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][wrynose][PATCH 09/18] python3-virtualenv: fix CVE-2026-113715
-Date: Thu,  5 Nov 2026 00:59:58 -0800
-Message-Id: <20261105090007.351866-10-hthakar@cisco.com>
+Subject: [meta-python][wrynose][PATCH 05/18] python3-virtualenv: fix CVE-2026-113776
+Date: Thu,  5 Nov 2026 00:59:54 -0800
+Message-Id: <20261105090007.351866-6-hthakar@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261105090007.351866-1-hthakar@cisco.com>
 References: <20261105090007.351866-1-hthakar@cisco.com>
@@ -74,210 +72,177 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5245.cisco.com [10.28.23.9];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.23.9, sjc-ads-5245.cisco.com
-X-Outbound-Node: rcdn-l-core-07.cisco.com
+X-Outbound-Node: rcdn-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 09:00:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131883
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2026 09:00:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131885
 Content-Type: text/plain; charset="utf-8"
 
 From: Hetvi Thakar <hthakar@cisco.com>
 
 This patch applies the upstream fix as referenced in [2], using the
-commit shown in [1]. Reject line boundaries in stdlib venv paths and
-regenerate pyvenv.cfg from the selected interpreter and options,
-instead of merging potentially injected configuration read back from
-the intermediate file.
+commit shown in [1]. Replace activation-template placeholders in a
+single pass so placeholder names inside substituted paths or prompts
+cannot be expanded again as script content.
 
-[1] https://github.com/pypa/virtualenv/commit/b0008a58885ded9227faf8f910c6c402712c750a
-[2] https://github.com/pypa/virtualenv/security/advisories/GHSA-qmx5-4p3x-wvqf
+[1] https://github.com/pypa/virtualenv/commit/602b26623a724827ff171bf11fef4ad186d01f74
+[2] https://github.com/pypa/virtualenv/security/advisories/GHSA-8rjx-v5ww-45pp
 
 Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 ---
- .../python3-virtualenv/CVE-2026-113715.patch  | 165 ++++++++++++++++++
+ .../python3-virtualenv/CVE-2026-113776.patch  | 133 ++++++++++++++++++
  .../python/python3-virtualenv_21.2.1.bb       |   1 +
- 2 files changed, 166 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113715.patch
+ 2 files changed, 134 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113715.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113715.patch
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
 new file mode 100644
-index 0000000000..8ab16b5d93
+index 0000000000..c1e034edb5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113715.patch
-@@ -0,0 +1,165 @@
-+From b0008a58885ded9227faf8f910c6c402712c750a Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
+@@ -0,0 +1,133 @@
++From 602b26623a724827ff171bf11fef4ad186d01f74 Mon Sep 17 00:00:00 2001
 +From: Bernát Gábor <gaborjbernat@gmail.com>
-+Date: Sat, 17 Oct 2026 02:56:02 -0700
-+Subject: [PATCH] 🐛 fix(create): reject ambiguous venv paths (#3426)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++Date: Wed, 30 Sep 2026 23:01:05 -0700
++Subject: [PATCH] Merge commit from fork
 +
-+CVE: CVE-2026-113715
-+Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/b0008a58885ded9227faf8f910c6c402712c750a]
++instantiate_template replaced one placeholder at a time across the whole
++template, so a placeholder name inside an already quoted value, such as a
++parent directory named __VIRTUAL_NAME__, was rewritten from inside the
++finished literal. The second value's quotes closed the first, and the rest
++of the path ran as code in bash, fish, xonsh and activate_this.py; in csh
++the prompt display tokens broke activate.csh the same way.
++
++Build every token's final text first and substitute them in one regex pass,
++with the csh display tokens joining that pass through substitutions().
++
++CVE: CVE-2026-113776
++Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/602b26623a724827ff171bf11fef4ad186d01f74]
 +
 +Backport Changes:
-+- Reuse the identical _one_line helper already backported for
-+  CVE-2026-102938 because 21.2.1 lacks the later
-+  virtualenv.util.text.collapse_line_boundaries helper.
-+- Use the 21.2.1 system_executable API and GraalVM implementation name
-+  in the launcher settings and regression test instead of the later
-+  system_exe API and GraalPy name.
-+- Import Final in the older test module for the upstream annotations.
-+- Omit the upstream release changelog fragment.
++- Omit the Csh display-token override and its specific test: 21.2.1 has
++  no separate display-token substitution or prompt-literal helpers.
++  Its Csh activator uses the corrected shared template substitution.
++- Exercise upstream's placeholder-in-parent-directory regression through
++  the existing Bash relocation fixture, since 21.2.1 lacks the later
++  prompt-test fixture. Add direct one-pass substitution checks for the
++  existing Bash, Csh, Fish and Python activators, and retain the 21.2.1
++  special-character fixture's other characters.
 +
 +Signed-off-by: Hetvi Thakar <hthakar@cisco.com>
 +---
-+ src/virtualenv/create/via_global_ref/venv.py | 26 +++++++--
-+ tests/unit/create/test_creator.py            | 56 ++++++++++++++++++++
-+ 2 files changed, 77 insertions(+), 5 deletions(-)
++ src/virtualenv/activation/via_template.py | 21 +++++++++++++++++----
++ tests/conftest.py                         |  3 ++-
++ tests/unit/activation/test_activator.py   | 16 ++++++++++++++++
++ tests/unit/activation/test_bash.py        |  1 +
++ 4 files changed, 36 insertions(+), 5 deletions(-)
 +
-+diff --git a/src/virtualenv/create/via_global_ref/venv.py b/src/virtualenv/create/via_global_ref/venv.py
-+index 9c95d12..2bfd1b4 100644
-+--- a/src/virtualenv/create/via_global_ref/venv.py
-++++ b/src/virtualenv/create/via_global_ref/venv.py
-+@@ -1,11 +1,12 @@
++diff --git a/src/virtualenv/activation/via_template.py b/src/virtualenv/activation/via_template.py
++index 926c2b0..3af9dc5 100644
++--- a/src/virtualenv/activation/via_template.py
+++++ b/src/virtualenv/activation/via_template.py
++@@ -1,6 +1,7 @@
 + from __future__ import annotations
 + 
-+ import logging
-+-from copy import copy
-+-from typing import TYPE_CHECKING
-++from argparse import ArgumentTypeError
-++from typing import TYPE_CHECKING, Final
-+ 
-+ from python_discovery import PythonInfo
-+ 
-++from virtualenv.create.pyenv_cfg import _one_line as collapse_line_boundaries
-+ from virtualenv.create.via_global_ref.store import handle_store_python
-+ from virtualenv.util.error import ProcessCallFailedError
-+ from virtualenv.util.path import ensure_dir
-+@@ -67,6 +68,20 @@ class Venv(ViaGlobalRefApi):
-+             for exe in creator.executables(self.interpreter):
-+                 exe.run(creator, self.symlinks)
-+ 
-++    @classmethod
-++    def validate_dest(cls, raw_value: str) -> str:
-++        return cls._check_line_boundaries(super().validate_dest(cls._check_line_boundaries(raw_value)))
++ import os
+++import re
++ import shlex
++ import sys
++ from abc import ABC, abstractmethod
++@@ -84,10 +85,22 @@ class ViaTemplateActivator(Activator, ABC):
++         # read content as binary to avoid platform specific line normalization (\n -> \r\n)
++         binary = read_binary(self.__module__, template)
++         text = binary.decode("utf-8", errors="strict")
++-        for key, value in replacements.items():
++-            value_uni = self._repr_unicode(creator, value)
++-            text = text.replace(key, self.quote(value_uni))
++-        return text
+++        substitutions = self.substitutions(replacements, creator)
+++        # one pass over the template, so a placeholder name inside an already quoted value (a path component named
+++        # __VIRTUAL_NAME__) stays data instead of being rewritten by a later key from inside the finished literal
+++        pattern = re.compile("|".join(re.escape(key) for key in sorted(substitutions, key=len, reverse=True)))
+++        return pattern.sub(lambda match: substitutions[match.group()], text)
 ++
-++    @staticmethod
-++    def _check_line_boundaries(value: str) -> str:
-++        # stdlib venv writes the destination into pyvenv.cfg without escaping line boundaries.
-++        if collapse_line_boundaries(value) != value:
-++            msg: Final = (
-++                f"destination {value!r} must not contain a line boundary as venv cannot record it in pyvenv.cfg"
-++            )
-++            raise ArgumentTypeError(msg)
-++        return value
+++    def substitutions(self, replacements: dict[str, str], creator: Creator) -> dict[str, str]:
+++        """Map each placeholder to the final text that replaces it in the template.
 ++
-+     def create_inline(self) -> None:
-+         from venv import EnvBuilder  # noqa: PLC0415
+++        :param replacements: the raw placeholder values
+++        :param creator: the creator of the environment
+++
+++        :returns: the placeholder to substituted text mapping
+++
+++        """
+++        return {key: self.quote(self._repr_unicode(creator, value)) for key, value in replacements.items()}
 + 
-+@@ -95,10 +110,11 @@ class Venv(ViaGlobalRefApi):
-+         return cmd  # ty: ignore[invalid-return-type]
++     @staticmethod
++     def _repr_unicode(creator: Creator, value: str) -> str:  # noqa: ARG004
++diff --git a/tests/conftest.py b/tests/conftest.py
++index 3ec4147..f27c450 100644
++--- a/tests/conftest.py
+++++ b/tests/conftest.py
++@@ -279,7 +279,8 @@ def is_inside_ci():
 + 
-+     def set_pyenv_cfg(self) -> None:
-+-        # prefer venv options over ours, but keep our extra
-+-        venv_content = copy(self.pyenv_cfg.refresh())
-+         super().set_pyenv_cfg()
-+-        self.pyenv_cfg.update(venv_content)
-++        if self.interpreter.implementation == "GraalVM":
-++            # GraalPy launchers need these settings on Windows and macOS.
-++            self.pyenv_cfg["venvlauncher_command"] = self.interpreter.system_executable
-++            self.pyenv_cfg["base-executable"] = self.interpreter.system_executable
-+ 
-+     def __getattribute__(self, item: str) -> object:
-+         describe = object.__getattribute__(self, "describe")
-+diff --git a/tests/unit/create/test_creator.py b/tests/unit/create/test_creator.py
-+index 3a8ad25..bd0f071 100644
-+--- a/tests/unit/create/test_creator.py
-++++ b/tests/unit/create/test_creator.py
-+@@ -19,6 +19,7 @@ from pathlib import Path
-+ from stat import S_IREAD, S_IRGRP, S_IROTH
-+ from textwrap import dedent
-+ from threading import Thread
-++from typing import Final
++ @pytest.fixture(scope="session")
++ def special_char_name():
++-    base = "'\";&&e-$ èрт🚒♞中片-j"
+++    # __VIRTUAL_NAME__ is a template placeholder, and must stay data when the path embeds it
+++    base = "'\";&&e-$ __VIRTUAL_NAME__èрт🚒♞中片-j"
++     if IS_WIN:
++         # get rid of invalid characters on Windows
++         base = base.replace('"', "")
++diff --git a/tests/unit/activation/test_activator.py b/tests/unit/activation/test_activator.py
++index 21be96d..03481c2 100644
++--- a/tests/unit/activation/test_activator.py
+++++ b/tests/unit/activation/test_activator.py
++@@ -4,9 +4,25 @@ from argparse import Namespace
 + 
 + import pytest
-+ from python_discovery import PythonInfo
-+@@ -95,6 +96,42 @@ def system(session_app_data):
++ 
+++from virtualenv.activation import BashActivator, CShellActivator, FishActivator, PythonActivator
++ from virtualenv.activation.activator import Activator
 + 
 + 
-+ CURRENT_CREATORS = [i for i in CreatorSelector.for_interpreter(CURRENT).key_to_class if i != "builtin"]
-++
-++
-++@pytest.mark.skipif("venv" not in CURRENT_CREATORS, reason="stdlib venv is unavailable")
-++@pytest.mark.parametrize(
-++    "boundary",
-++    [
-++        pytest.param(char, id=name)
-++        for name, char in (
-++            ("newline", "\n"),
-++            ("return", "\r"),
-++            ("vertical-tab", "\v"),
-++            ("form-feed", "\f"),
-++            ("file-separator", "\x1c"),
-++            ("group-separator", "\x1d"),
-++            ("record-separator", "\x1e"),
-++            ("next-line", "\x85"),
-++            ("line-separator", "\u2028"),
-++            ("paragraph-separator", "\u2029"),
-++        )
-++    ],
-++)
-++def test_venv_creator_rejects_line_boundary(tmp_path: Path, capsys: pytest.CaptureFixture[str], boundary: str) -> None:
-++    destination: Final = tmp_path / f"project{boundary}name"
-++    with pytest.raises(SystemExit) as context:
-++        cli_run([str(destination), "--creator", "venv", "--no-seed"])
-++    assert context.value.code == 2
-++    assert "must not contain a line boundary" in capsys.readouterr().err
-++    assert not list(tmp_path.iterdir())
-++
-++
-++@pytest.mark.skipif("venv" not in CURRENT_CREATORS, reason="stdlib venv is unavailable")
-++def test_venv_creator_accepts_plain_destination(tmp_path: Path) -> None:
-++    session: Final = cli_run([str(tmp_path / "environment"), "--creator", "venv", "--no-seed"])
-++    assert (session.creator.dest / "pyvenv.cfg").is_file()
-++
-++
-+ CREATE_METHODS = []
-+ for k, v in CreatorSelector.for_interpreter(CURRENT).key_to_meta.items():
-+     if k in CURRENT_CREATORS:
-+@@ -270,6 +307,25 @@ def test_create_vcs_ignore_exists_override(tmp_path) -> None:
-+     assert git_ignore.read_text(encoding="utf-8") == "magic"
-+ 
-+ 
-++@pytest.mark.skipif(not CURRENT.has_venv, reason="requires venv")
-++@pytest.mark.parametrize("global_packages", [pytest.param(False, id="isolated"), pytest.param(True, id="global")])
-++def test_venv_configuration_uses_selected_options(tmp_path: Path, global_packages: bool) -> None:
-++    args: Final = [str(tmp_path / "env"), "--creator", "venv", "--no-seed"]
-++    if global_packages:
-++        args.append("--system-site-packages")
-++    session: Final = cli_run(args)
-++    session.creator.pyenv_cfg.path.write_text("vendor-marker = unused\n", encoding="utf-8")
-++    session.creator.set_pyenv_cfg()
-++    executable: Final = session.creator.interpreter.system_executable if CURRENT.implementation == "GraalVM" else None
-++    expected: Final = {
-++        "vendor-marker": None,
-++        "include-system-site-packages": str(global_packages).lower(),
-++        "venvlauncher_command": executable,
-++        "base-executable": executable,
+++@pytest.mark.parametrize("activator_class", [BashActivator, CShellActivator, FishActivator, PythonActivator])
+++def test_template_substitution_does_not_expand_replacement_values(monkeypatch, activator_class) -> None:
+++    template = b"__VIRTUAL_ENV__ __VIRTUAL_NAME__"
+++    monkeypatch.setattr("virtualenv.activation.via_template.read_binary", lambda *_: template)
+++    activator = activator_class(Namespace(prompt=None))
+++    replacements = {
+++        "__VIRTUAL_ENV__": "A__VIRTUAL_NAME__B/x'$(touch PWNED)'y",
+++        "__VIRTUAL_NAME__": "x'$(touch PWNED)'y",
 ++    }
-++    assert {key: session.creator.pyenv_cfg.content.get(key) for key in expected} == expected
+++
+++    actual = activator.instantiate_template(replacements, "unused", None)
+++
+++    assert actual == " ".join(activator.quote(value) for value in replacements.values())
 ++
 ++
-+ @pytest.mark.skipif(not CURRENT.has_venv, reason="requires interpreter with venv")
-+ def test_venv_fails_not_inline(tmp_path, capsys, mocker) -> None:
-+     if hasattr(os, "geteuid") and os.geteuid() == 0:
++ @pytest.mark.graalpy
++ def test_activator_prompt_cwd(monkeypatch, tmp_path) -> None:
++     class FakeActivator(Activator):
++diff --git a/tests/unit/activation/test_bash.py b/tests/unit/activation/test_bash.py
++index 00ac55f..df3aaf3 100644
++--- a/tests/unit/activation/test_bash.py
+++++ b/tests/unit/activation/test_bash.py
++@@ -130,6 +130,7 @@ def test_bash_activate_relocation_resolves_virtual_env(
++         pytest.param("x'$(id > PWNED)'y", id="command-substitution"),
++         pytest.param("x'`id > PWNED`'y", id="backticks"),
++         pytest.param("a';id > PWNED;'b", id="statement-separator"),
+++        pytest.param("A__VIRTUAL_NAME__B/x'$(touch PWNED)'y", id="placeholder-in-parent-dir"),
++     ],
++ )
++ def test_bash_activate_relocation_does_not_run_path_commands(
 +-- 
 +2.35.6
 diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb b/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
-index 2c584361ab..d514e79358 100644
+index 66354956b9..65e50d3f88 100644
 --- a/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-virtualenv_21.2.1.bb
-@@ -23,6 +23,7 @@ SRC_URI += " \
-     file://CVE-2026-113725.patch \
-     file://CVE-2026-113723.patch \
-     file://CVE-2026-115586.patch \
-+    file://CVE-2026-113715.patch \
+@@ -17,6 +17,7 @@ SRC_URI += " \
+     file://CVE-2026-102925.patch \
+     file://CVE-2026-113732_p1.patch \
+     file://CVE-2026-113732_p2.patch \
++    file://CVE-2026-113776.patch \
  "
  
  BBCLASSEXTEND = "native nativesdk"
