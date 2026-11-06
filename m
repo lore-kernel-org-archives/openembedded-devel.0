@@ -1,71 +1,70 @@
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1305.1793950037539436545
+Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1306.1793950037587061845
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 05 Nov 2026 23:27:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=fr8hpXgT;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: dkelaiya@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=N//60w/6;
+ spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: dkelaiya@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=7991; q=dns/txt;
+  d=cisco.com; i=@cisco.com; l=10105; q=dns/txt;
   s=iport01; t=1793950037; x=1795159637;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=CvgLTEh/jGMSxMOfEELYfJshAIso41F/h605AYXoV0c=;
-  b=fr8hpXgTa90dNz4qZ8y3IEvIrR+nqOMYHANnFK+GwLBiQjLuS6QwMIOp
-   V4tzdq+awtgjLKAFE1hINizSDEay1V/wtG/S4f1nSNRkypeRXxJQzzrpi
-   kr/JO/66D97opAr4LQGUMCjvIeykBSUEbzzHyljXv1+Hun5P03lL4jXQW
-   0eQK9e23jwIG6iU2y4bF5NFaVoIzA8DfEO8nIt46DAeJv+JqpmVVCU6u4
-   NnJLSAiwyubN700XynaKurFi4L5hYbb8CYtRWR3Z4fZ38LD8qgjbaG0eX
-   ueR9BpUWnZlta4PF8JsILZsyhdMBaxXN8GL8wk/U07UsnHn0HukJO+Jg0
-   Q==;
-X-CSE-ConnectionGUID: lRmkQrGATxa0RLIRTMbT+w==
-X-CSE-MsgGUID: 034ESAt2St+Go0rqDfN5EQ==
-X-IPAS-Result: =?us-ascii?q?A0BJAgBpgO1q/5X/Ja1aglmCGD91YENJA5ZIA54hgX4PA?=
- =?us-ascii?q?QEBD0QNBAEBhD9GAo4dAiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
- =?us-ascii?q?gEHBYEOE4ZPDZASAQIBAycLARgBLRAcAwECLysjCBmCKlgBgnQDEbwTgXkzg?=
- =?us-ascii?q?QGDKQFDQVDbMwELFAGBOIVAiCNdGAGEfScbG4FygRWBO4IugQWBXAEBAgGBJ?=
- =?us-ascii?q?BGGbgSCIoEMgVqBA4wVAoFRhnlIgR4DWSwBVRMNCgsHBYFoAzUSKhVuMh2BI?=
- =?us-ascii?q?z4XgQcbBgWBHYEegRKBB12BKyhdASGBCIF2AoJRggACAUlBDgdFUwklQxJHJ?=
- =?us-ascii?q?CIIEgkBExosCoEaNTwJJj8VDGQLGgVhCAINDHQ5EDAeJC8FHCY+GwovGA1IE?=
- =?us-ascii?q?Sw3FRkEPm4Hkj2DAhAOdgoBExIEAn9VUwUcAjCSZwOQHYIhoREKKIN4jCSVO?=
- =?us-ascii?q?hozhVulFguYfYkBgjaCU5YBUIRpgWg8gVlwFTuCZwlKGQ+OLgsLgRQBAoJJh?=
- =?us-ascii?q?RNRxk0mMgIBCAMvAQEHAgcOAwuBaJAAASeBVgEB?=
-IronPort-Data: A9a23:DXoDtqtTH27I9JK2Fm+SuiZdQefnVAZfMUV32f8akzHdYApBsoF/q
- tZmKW2FafrZYWqme9klbdi/9k8DsJDVx4NhSAdkpXhkQX4SgMeUXt7xwmUckM+xwmwvaGo9s
- q3yv/GZdJhcokf0/0nrb/656yYsjclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
- eja/YuFZzdJ5xYuajhKsvvb9Us21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
- 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIw/txyAlhU2
- tUkODlVVDSivd6Tyo74Vbw57igjBJGD0II3oHpsy3TdSP0hW52GGv+M7t5D1zB2jcdLdRrcT
- 5NGMnw0M1KaPkAJYwtGYH49tL/Aan3Xfz5VrFuUtKMf6GnIxws327/oWDbQUoHWGZoKzh7J/
- Aoq+UyhWU03D/WDkwGZsV2r3vXWsS3dBa8rQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
- lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sYMpottdQ9Qnoh0
- Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
-IronPort-HdrOrdr: A9a23:xw/v7KFxAmCzVx6MpLqEyseALOsnbusQ8zAXPo5KJiC9Ffbo8P
- xG88576faZslsssTQb6LK90cq7MBfhHOBOgbX5VI3KNGKNhILrFvAG0WKI+VPd8kPFmtK1rZ
- 0QEJRWOZnXEUVwi9r87U2TFtYtx8TCzYWT7N2uqUuEiWpRGtldB8ATMHfjLnFL
-X-Talos-CUID: =?us-ascii?q?9a23=3AtXU8c2hP+hfyWo3XkdqDThF7PzJudkfYz07KDGa?=
- =?us-ascii?q?EGW8xcpm0c2O18p8njJ87?=
-X-Talos-MUID: 9a23:wEWJGQoIAh+GyeLTo6Eez2k5aOpTyrj0M1xOvpJeodCoOwotFg7I2Q==
+  bh=IIVUTOiZeuf78/d1W9z8KlQ5ybKkjIZ2CnNIdHfjztc=;
+  b=N//60w/6sVGnGYApLu031MzC+0TmFpk3FzZvyenZjL6j6KvtDiY9wgsx
+   9inGb+9rp5YpJr9uRgTcN0YHr07KVzr5FQGBzyRQvzlWTSe8LqbK4P0Aa
+   80TkweKReWjbeGNcABStFLtgZX1OrnsXZCQ/ZN1HjlGwUjjx1LVPDUzst
+   DChbfaQpBNTnKDFvSRwxJHhgPxbJ7zZ8QHVVthw4m9Ez7ZOdJHYPdWPNh
+   mv8YbhGy0FBLnEb2miYQ1H7s7MBouXtZpSjS8kGxC1V/gMsZCuqI+0PVF
+   LASOT3gY7VtnQpkQwZkrCWgfIsHTzPmMbvAof/nDpV6c/0WOZOdWl9Tuy
+   A==;
+X-CSE-ConnectionGUID: SnwDtqM2SQCLuI+AlHe8cg==
+X-CSE-MsgGUID: MR3Zu+srRFSNGMwPd5PYgA==
+X-IPAS-Result: =?us-ascii?q?A0BJAgDmf+1q/43/Ja1RCR4BAQsSDIIFC4JXdWBDSQOWS?=
+ =?us-ascii?q?AORTIxVgX4PAQEBD0QNBAEBhD9GAo4dAiY0CQ4BAgQDAgMBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QEKAQEFAQEBAgEHBYEOE4ZPDZASAQIBAycLARgBLRAcAwECLysjCBmDAgGCd?=
+ =?us-ascii?q?AMRvBKBeTOBAYMpAYFU2zMBCxQBgTiFQIgjXRgBhH0nGxuBcoEVgTuCLoEFg?=
+ =?us-ascii?q?VwBAYE0hnIEgiKBDIFagQMJjAwCgVGGeUiBHgNZLAFVEw0KCwcFgWgDNRIqF?=
+ =?us-ascii?q?W4yHYEjPheBBxsGBYEdgR6BEoEHXYErKF0BIYEIgXYCglGCAAIBSUEOB0VTC?=
+ =?us-ascii?q?SVDEkckIggSCQETGiwKgRo1PAkmPxUMZAsaBWEIAg0MdDkQMB4kLwUcJj4bC?=
+ =?us-ascii?q?i8YDUgRLDcVGQQ+bgeSPRWCdgctVA0BKgGBfRAfHB6jG4IhoREKKIN4jCSVO?=
+ =?us-ascii?q?hozhASBV6UWC5h9glmCeoMugjaCU5VXKgNNhGmBaDyBWXAVO4JnCUoZD1iNV?=
+ =?us-ascii?q?gsLg2CFZMZNJjICCQMvAQEHAgcOAwuBaJF+AQE?=
+IronPort-Data: A9a23:P8c3S6DccA8XJRVW/3niw5YqxClBgxIJ4kV8jS/XYbTApGtw0GYCz
+ GMaUDzQb6qIZWL3fNp3aNnk8UNVvZbcx9NgOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGcYZsCCCM/n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jXGthh
+ fuo+5eBYQb9hmYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE+PNxIF0vGNcjw81THEAN3
+ Pg4JWAGYUXW7w626OrTpuhEnM8vKozveYgYoHwllW2fBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
+ pdfMGY2BPjDS0Un1lM/BJEzmO6pl3DXeDxDo1XTrq0yi4TW5FEtjeK9YIaMILRmQ+1wpB2qu
+ yHd5V7XOTc1EcOnxWe9w32F07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
+ AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++Mv0CSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:6MEpwausRpRxmbQ6WxTCofhm7skDVNV00zEX/kB9WHVpmwKj+P
+ xG+85rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1MmZPDUO0VHAROoJ0WKh+UyEJ8SUzIBgPM
+ lbH5SWcOeAbmRSvILd/BSyFcomzZ2s9aClgvqb8lJWJDsaDZ2JK2xCe36m+oocfng+OaYE
+X-Talos-CUID: 9a23:zlSLWm9AFiKefSIIZkaVv3USBew5a1iH9077B1KZSk9taLDFQlDFrQ==
+X-Talos-MUID: 9a23:6PfhFwjGtcFYxAIzyOgEF8MpEf0z0bntE1o3v64glOybDSAtAwaSpWHi
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.27,197,1787011200"; 
-   d="scan'208";a="544778092"
-Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Nov 2026 07:27:16 +0000
+   d="scan'208";a="545288412"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by rcdn-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 06 Nov 2026 07:27:16 +0000
 Received: from sjc-ads-5675.cisco.com (sjc-ads-5675.cisco.com [10.28.88.189])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id 83B06180001C9;
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 7F2A618000191;
 	Fri,  6 Nov 2026 07:27:16 +0000 (GMT)
 Received: by sjc-ads-5675.cisco.com (Postfix, from userid 1887444)
-	id 2FF36CBF204; Thu,  5 Nov 2026 23:27:16 -0800 (PST)
+	id 2B656CBF203; Thu,  5 Nov 2026 23:27:16 -0800 (PST)
 From: "Darsh Kelaiya -X (dkelaiya - E INFOCHIPS PRIVATE LIMITED at Cisco)" <dkelaiya@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Darsh Kelaiya <dkelaiya@cisco.com>
-Subject: [oe][meta-python][wrynose][PATCH 4/7] python3-aiohttp: fix CVE-2026-111065
-Date: Thu,  5 Nov 2026 23:26:59 -0800
-Message-Id: <20261106072702.502813-5-dkelaiya@cisco.com>
+Subject: [oe][meta-python][wrynose][PATCH 3/7] python3-aiohttp: fix CVE-2026-111749
+Date: Thu,  5 Nov 2026 23:26:58 -0800
+Message-Id: <20261106072702.502813-4-dkelaiya@cisco.com>
 X-Mailer: git-send-email 2.35.6
 In-Reply-To: <20261106072702.502813-1-dkelaiya@cisco.com>
 References: <20261106072702.502813-1-dkelaiya@cisco.com>
@@ -73,227 +72,254 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-5675.cisco.com [10.28.88.189];TLSv1.3;TLS_AES_256_GCM_SHA384;256
 X-Outbound-SMTP-Client: 10.28.88.189, sjc-ads-5675.cisco.com
-X-Outbound-Node: rcdn-l-core-12.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 06 Nov 2026 07:27:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131965
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Fri, 06 Nov 2026 07:27:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131966
 Content-Type: text/plain; charset="utf-8"
 
 From: Darsh Kelaiya <dkelaiya@cisco.com>
 
-Backport the upstream cookie overflow and response cleanup fix [1]
-to aiohttp 3.13.5, as identified by [2]. Clamp positive Max-Age values
-before float conversion and expire nonpositive values immediately.
+Backport the upstream host-only cookie state fix [1] to aiohttp
+3.13.5, as identified by [2]. Track host-only state by domain, path
+and name so expiring another cookie cannot widen its domain scope.
 
-Close a received response if subsequent processing fails so a
-malformed cookie cannot exhaust the connection pool. Include the
-upstream extreme Max-Age and connection-release regression tests.
-Adapt the response annotation and imports to the existing code.
+Preserve this identity during filtering, replacement and JSON
+persistence. Adapt regression assertions to the existing private
+state because 3.13.5 lacks the newer public inspection property.
 
-[1] https://github.com/aio-libs/aiohttp/commit/9dd8eaf4e31f1237ef2c1574a8c82a739fca5805
-[2] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-6cjc-53gc-5rqm
+[1] https://github.com/aio-libs/aiohttp/commit/6a07c171ef9f3be583e2907dcd1931372efca8d6
+[2] https://github.com/aio-libs/aiohttp/security/advisories/GHSA-gx76-c99x-2c96
 
 Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 ---
- .../python3-aiohttp/CVE-2026-111065.patch     | 176 ++++++++++++++++++
+ .../python3-aiohttp/CVE-2026-111749.patch     | 205 ++++++++++++++++++
  .../python/python3-aiohttp_3.13.5.bb          |   1 +
- 2 files changed, 177 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
+ 2 files changed, 206 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
 new file mode 100644
-index 0000000000..5ee6a44dff
+index 0000000000..475229e180
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
-@@ -0,0 +1,176 @@
-+From 9dd8eaf4e31f1237ef2c1574a8c82a739fca5805 Mon Sep 17 00:00:00 2001
-+From: "patchback[bot]" <45432694+patchback[bot]@users.noreply.github.com>
-+Date: Wed, 9 Sep 2026 14:43:30 +0100
-+Subject: [PATCH] [PR #13677/9e08ba02 backport][3.14] Fix cookie overflow
-+ (#13679)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
+@@ -0,0 +1,205 @@
++From 6a07c171ef9f3be583e2907dcd1931372efca8d6 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Wed, 9 Sep 2026 02:21:06 +0100
++Subject: [PATCH] Fix host-only state on cookie expiration (#13674) (#13676)
 +
-+**This is a backport of PR #13677 as merged into master
-+(9e08ba02abe573ce9e4cc541d4e3c3646adb43a7).**
++(cherry picked from commit 9332972cfcb0f5a2b6677e7307819ab8f13b5d09)
 +
-+---------
-+
-+Co-authored-by: Sam Bull <git@sambull.org>
-+
-+CVE: CVE-2026-111065
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/9dd8eaf4e31f1237ef2c1574a8c82a739fca5805]
++CVE: CVE-2026-111749
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/6a07c171ef9f3be583e2907dcd1931372efca8d6]
 +
 +Backport Changes:
-+- Use the existing Optional type spelling for the response variable.
-+- Add Sequence to the existing typing imports for the regression test.
++- Refresh the runtime hunks for aiohttp 3.13.5 and its existing
++  JSON cookie persistence backport; retain Set/Tuple type spelling.
++- Omit annotation changes for the public host_only_cookies property
++  in CookieJar, DummyCookieJar, AbstractCookieJar and the test jar.
++  That property and its documentation were introduced in 3.14.
++- Omit the absent public-property test update and use private
++  _host_only_cookies assertions in the regression and JSON tests.
++  Adapt both existing JSON scope assertions to the private state.
 +
 +Signed-off-by: Darsh Kelaiya <dkelaiya@cisco.com>
 +---
-+ CHANGES/13677.bugfix.rst        |  1 +
-+ aiohttp/client.py               |  5 ++++
-+ aiohttp/cookiejar.py            | 10 +++++++-
-+ tests/test_client_functional.py | 45 +++++++++++++++++++++++++++++++++
-+ tests/test_cookiejar.py         | 22 ++++++++++++++++
-+ 5 files changed, 82 insertions(+), 1 deletion(-)
-+ create mode 100644 CHANGES/13677.bugfix.rst
++ CHANGES/13674.bugfix.rst |  1 +
++ aiohttp/cookiejar.py     | 25 +++++++++-------
++ tests/test_cookiejar.py  | 64 ++++++++++++++++++++++++++++++++++++++--
++ 3 files changed, 77 insertions(+), 13 deletions(-)
++ create mode 100644 CHANGES/13674.bugfix.rst
 +
-+diff --git a/CHANGES/13677.bugfix.rst b/CHANGES/13677.bugfix.rst
++diff --git a/CHANGES/13674.bugfix.rst b/CHANGES/13674.bugfix.rst
 +new file mode 100644
-+index 0000000..bea67cb
++index 0000000..5152bce
 +--- /dev/null
-++++ b/CHANGES/13677.bugfix.rst
+++++ b/CHANGES/13674.bugfix.rst
 +@@ -0,0 +1 @@
-++Fixed a possible ``OverflowError`` on cookies and a connection not being closed properly -- by :user:`Dreamsorcerer`.
-+diff --git a/aiohttp/client.py b/aiohttp/client.py
-+index 8cd9add..f404b55 100644
-+--- a/aiohttp/client.py
-++++ b/aiohttp/client.py
-+@@ -628,6 +628,7 @@ class ClientSession:
-+             await trace.send_request_start(method, url.update_query(params), headers)
-+ 
-+         timer = tm.timer()
-++        resp: Optional[ClientResponse] = None
-+         try:
-+             with timer:
-+                 # https://www.rfc-editor.org/rfc/rfc9112.html#name-retrying-requests
-+@@ -939,6 +940,10 @@ class ClientSession:
-+                 handle.cancel()
-+                 handle = None
-+ 
-++            if resp is not None:
-++                # A failure occurred after the response was received.
-++                resp.close()
-++
-+             for trace in traces:
-+                 await trace.send_request_exception(
-+                     method, url.update_query(params), headers, e
+++Fixed host-only cookie state being lost on expiration -- by :user:`Dreamsorcerer`.
 +diff --git a/aiohttp/cookiejar.py b/aiohttp/cookiejar.py
-+index c5e5b09..6712b90 100644
++index b07d1fd..c5e5b09 100644
 +--- a/aiohttp/cookiejar.py
 ++++ b/aiohttp/cookiejar.py
-+@@ -410,7 +410,15 @@ class CookieJar(AbstractCookieJar):
++@@ -139,7 +139,8 @@ class CookieJar(AbstractCookieJar):
++         self._morsel_cache: DefaultDict[Tuple[str, str], Dict[str, Morsel[str]]] = (
++             defaultdict(dict)
++         )
++-        self._host_only_cookies: Set[Tuple[str, str]] = set()
+++        # Cookie identity is (domain, path, name).
+++        self._host_only_cookies: Set[Tuple[str, str, str]] = set()
++         self._unsafe = unsafe
++         self._quote_cookie = quote_cookie
++         if treat_as_secure_origin is None:
++@@ -186,7 +187,7 @@ class CookieJar(AbstractCookieJar):
++                     if attr_val:
++                         morsel_data[attr] = attr_val
++                 # Persist or it reloads as a domain cookie and leaks to subdomains.
++-                if (domain, name) in self._host_only_cookies:
+++                if (domain, path, name) in self._host_only_cookies:
++                     morsel_data["host_only"] = True
++                 if (exp := self._expirations.get((domain, path, name))) is not None:
++                     morsel_data["expires_timestamp"] = exp
++@@ -340,7 +341,7 @@ class CookieJar(AbstractCookieJar):
++ 
++     def _delete_cookies(self, to_del: List[Tuple[str, str, str]]) -> None:
++         for domain, path, name in to_del:
++-            self._host_only_cookies.discard((domain, name))
+++            self._host_only_cookies.discard((domain, path, name))
++             self._cookies[(domain, path)].pop(name, None)
++             self._morsel_cache[(domain, path)].pop(name, None)
++             self._expirations.pop((domain, path, name), None)
++@@ -377,18 +378,12 @@ class CookieJar(AbstractCookieJar):
++                 domain = ""
++                 del cookie["domain"]
++ 
++-            if not domain and hostname is not None:
++-                # Set the cookie's domain to the response hostname
++-                # and set its host-only-flag
++-                self._host_only_cookies.add((hostname, name))
++-                domain = cookie["domain"] = hostname
++-
++             if domain and domain[0] == ".":
++                 # Remove leading dot
++                 domain = domain[1:]
++                 cookie["domain"] = domain
++ 
++-            if hostname and not self._is_domain_match(domain, hostname):
+++            if domain and hostname and not self._is_domain_match(domain, hostname):
++                 # Setting cookies for different domains is not allowed
++                 continue
++ 
++@@ -404,6 +399,14 @@ class CookieJar(AbstractCookieJar):
++                 cookie["path"] = path
++             path = path.rstrip("/")
++ 
+++            if not domain and hostname is not None:
+++                self._host_only_cookies.add((hostname, path, name))
+++                domain = cookie["domain"] = hostname
+++            else:
+++                # A cookie with an explicit Domain attribute replaces any
+++                # host-only cookie with the same (domain, path, name) identity.
+++                self._host_only_cookies.discard((domain, path, name))
+++
 +             if max_age := cookie["max-age"]:
 +                 try:
 +                     delta_seconds = int(max_age)
-+-                    max_age_expiration = min(time.time() + delta_seconds, self.MAX_TIME)
-++                    # https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.2
-++                    if delta_seconds <= 0:
-++                        max_age_expiration = 0.0
-++                    else:
-++                        # Cap first to protect against OverflowError on next line.
-++                        delta_seconds = min(delta_seconds, self.MAX_TIME)
-++                        max_age_expiration = min(
-++                            time.time() + delta_seconds, self.MAX_TIME
-++                        )
-+                     self._expire_cookie(max_age_expiration, domain, path, name)
-+                 except ValueError:
-+                     cookie["max-age"] = ""
-+diff --git a/tests/test_client_functional.py b/tests/test_client_functional.py
-+index 60caf6e..3415b83 100644
-+--- a/tests/test_client_functional.py
-++++ b/tests/test_client_functional.py
-+@@ -23,6 +23,7 @@ from typing import (
-+     List,
-+     NoReturn,
-+     Optional,
-++    Sequence,
-+     Type,
-+ )
-+ from unittest import mock
-+@@ -2978,6 +2979,50 @@ async def test_set_cookies_max_age_overflow(aiohttp_client) -> None:
-+                 assert int(cookie["max-age"]) == int(overflow)
++@@ -493,7 +496,7 @@ class CookieJar(AbstractCookieJar):
++             for name, cookie in self._cookies[p].items():
++                 domain = cookie["domain"]
 + 
++-                if (domain, name) in self._host_only_cookies and domain != hostname:
+++                if domain != hostname and p + (name,) in self._host_only_cookies:
++                     continue
 + 
-++async def test_connection_released_when_cookie_processing_fails(
-++    aiohttp_client: AiohttpClient,
-++) -> None:
-++    class EvilJar(aiohttp.CookieJar):
-++        def update_cookies_from_headers(
-++            self, headers: Sequence[str], response_url: URL
-++        ) -> None:
-++            raise RuntimeError("boom")
-++
-++    hold = asyncio.Event()
-++
-++    async def hostile(request: web.Request) -> web.StreamResponse:
-++        ret = web.StreamResponse()
-++        ret.content_length = 2
-++        ret.set_cookie("sid", "x")
-++        await ret.prepare(request)
-++        await ret.write(b"x")
-++        await hold.wait()
-++        assert False
-++
-++    async def clean(request: web.Request) -> web.Response:
-++        return web.Response()
-++
-++    app = web.Application()
-++    app.router.add_get("/hostile", hostile)
-++    app.router.add_get("/clean", clean)
-++    connector = aiohttp.TCPConnector(limit=1)
-++    client = await aiohttp_client(app, connector=connector, cookie_jar=EvilJar())
-++
-++    try:
-++        for _ in range(2):
-++            with pytest.raises(RuntimeError, match="boom") as excinfo:
-++                await client.get("/hostile")
-++            assert not connector._acquired
-++            del excinfo
-++
-++        # The single connector slot is free again: an unaffected request
-++        # succeeds instead of waiting forever for a connection.
-++        async with client.get("/clean") as resp:
-++            assert resp.status == 200
-++    finally:
-++        hold.set()
-++
-++
-+ async def test_request_conn_error() -> None:
-+     client = aiohttp.ClientSession()
-+     with pytest.raises(aiohttp.ClientConnectionError):
++                 # Skip edge case when the cookie has a trailing slash but request doesn't.
 +diff --git a/tests/test_cookiejar.py b/tests/test_cookiejar.py
-+index 5779df9..f3719a7 100644
++index ba7ee32..f82861e 100644
 +--- a/tests/test_cookiejar.py
 ++++ b/tests/test_cookiejar.py
-+@@ -2005,3 +2005,25 @@ async def test_save_load_json_secure_cookies(tmp_path: Path) -> None:
-+     assert cookie["secure"] is True
-+     assert cookie["httponly"] is True
-+     assert cookie["domain"] == "example.com"
-++
-++
-++async def test_update_cookies_max_age_beyond_float_range_is_clamped() -> None:
-++    """A hostile Max-Age larger than float max must clamp, not raise OverflowError."""
-++    url = URL("https://example.com/")
++@@ -1625,6 +1625,44 @@ async def test_shared_cookie_with_multiple_domains() -> None:
++     assert "universal" in jar._morsel_cache[("", "")]
++ 
++ 
+++async def test_host_only_marker_survives_same_name_expiry_on_other_path() -> None:
+++    """Expiring a same-name cookie on another path must not clear host-only state."""
 ++    jar = CookieJar()
+++    origin = URL("http://auth.example.com/")
+++    subdomain = URL("http://evil.auth.example.com/")
 ++
-++    jar.update_cookies_from_headers([f"sid=x; Max-Age={'9' * 309}"], url)
+++    jar.update_cookies_from_headers(["sid=secret; Path=/"], origin)
+++    assert "sid" not in jar.filter_cookies(subdomain)
 ++
-++    assert "sid" in jar.filter_cookies(url)
-++    assert jar._expirations[("example.com", "", "sid")] == CookieJar.MAX_TIME
+++    # Attacker-controlled descendant expires a same-name cookie on its own path.
+++    jar.update_cookies_from_headers(
+++        ["sid=gone; Domain=auth.example.com; Path=/attacker; Max-Age=0"],
+++        subdomain,
+++    )
+++
+++    assert ("auth.example.com", "", "sid") in jar._host_only_cookies
+++    assert "sid" not in jar.filter_cookies(subdomain)
+++    assert jar.filter_cookies(origin)["sid"].value == "secret"
 ++
 ++
-++async def test_update_cookies_negative_max_age_beyond_float_range_expires() -> None:
-++    """A negative Max-Age below float min must expire the cookie, not raise."""
-++    url = URL("https://example.com/")
+++async def test_explicit_domain_replacement_clears_host_only_marker() -> None:
+++    """A replacing cookie with an explicit Domain is a domain cookie."""
 ++    jar = CookieJar()
+++    origin = URL("http://example.com/")
+++    subdomain = URL("http://sub.example.com/")
 ++
-++    jar.update_cookies_from_headers([f"sid=x; Max-Age=-{'9' * 309}"], url)
+++    jar.update_cookies_from_headers(["sid=hostonly; Path=/"], origin)
+++    assert ("example.com", "", "sid") in jar._host_only_cookies
+++    assert "sid" not in jar.filter_cookies(subdomain)
 ++
-++    assert "sid" not in jar.filter_cookies(url)
-++    assert len(jar) == 0
+++    jar.update_cookies_from_headers(
+++        ["sid=domainwide; Domain=example.com; Path=/"], origin
+++    )
+++
+++    assert jar._host_only_cookies == set()
+++    assert jar.filter_cookies(subdomain)["sid"].value == "domainwide"
+++
+++
++ # === Security tests for restricted unpickler and JSON save/load ===
++ 
++ 
++@@ -1775,7 +1813,7 @@ async def test_save_load_json_preserves_host_only_scope(tmp_path: Path) -> None:
++     jar_load = CookieJar()
++     jar_load.load(file_path=file_path)
++ 
++-    assert jar_load.host_only_cookies == frozenset({("auth.example.com", "sid")})
+++    assert jar_load._host_only_cookies == {("auth.example.com", "", "sid")}
++     assert "sid" not in jar_load.filter_cookies(subdomain)
++     assert "sid" in jar_load.filter_cookies(issuer)
++ 
++@@ -1796,10 +1834,32 @@ async def test_save_load_json_domain_cookie_still_matches_subdomain(
++     jar_load = CookieJar()
++     jar_load.load(file_path=file_path)
++ 
++-    assert jar_load.host_only_cookies == frozenset()
+++    assert jar_load._host_only_cookies == set()
++     assert "sid" in jar_load.filter_cookies(subdomain)
++ 
++ 
+++async def test_save_load_json_host_only_per_path(tmp_path: Path) -> None:
+++    """Verify save/load keeps host-only state per (domain, path, name)."""
+++    file_path = tmp_path / "per_path.json"
+++    origin = URL("https://example.com/")
+++    subdomain = URL("https://sub.example.com/")
+++
+++    jar_save = CookieJar()
+++    jar_save.update_cookies_from_headers(
+++        ["sid=hostonly; Path=/", "sid=domainwide; Domain=example.com; Path=/api"],
+++        origin,
+++    )
+++    jar_save.save(file_path=file_path)
+++
+++    jar_load = CookieJar()
+++    jar_load.load(file_path=file_path)
+++
+++    assert jar_load._host_only_cookies == {("example.com", "", "sid")}
+++    assert "sid" not in jar_load.filter_cookies(subdomain)
+++    filtered = jar_load.filter_cookies(URL("https://sub.example.com/api/x"))
+++    assert filtered["sid"].value == "domainwide"
+++
+++
++ async def test_save_load_json_preserves_max_age_deadline(tmp_path: Path) -> None:
++     """Verify save/load restores the absolute deadline without resetting it."""
++     file_path = tmp_path / "max_age.json"
 +-- 
 +2.35.6
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index 17398ab323..e2ac1eda3a 100644
+index 40ac847c01..17398ab323 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -26,6 +26,7 @@ SRC_URI += " \
+@@ -25,6 +25,7 @@ SRC_URI += " \
+     file://CVE-2026-111066_p1.patch \
      file://CVE-2026-111066_p2.patch \
      file://CVE-2026-111750.patch \
-     file://CVE-2026-111749.patch \
-+    file://CVE-2026-111065.patch \
++    file://CVE-2026-111749.patch \
  "
  
  CVE_PRODUCT = "aiohttp:aiohttp"
 -- 
 2.35.6
-
