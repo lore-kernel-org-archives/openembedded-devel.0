@@ -1,59 +1,60 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11966.1794070359457372899
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12019.1794070358688818130
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 08:52:39 -0800
+ Sat, 07 Nov 2026 08:52:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=NGCY9u1h;
- spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a20bdaf39cso17638665e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:39 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=pGeLIluc;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so18139645e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794070358; x=1794675158; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1794070357; x=1794675157; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=E4JzDdpxhG4SR5KnThTVY/hPQxLuiRp5xmDrEDQH1vE=;
-        b=NGCY9u1h+j4/+/u6WyeFrncWwVceoZh6kV9Azjtfrl/6xBR+1T0QjswL1IZf61og1Q
-         jvc7HfkRmGZ/OGARa7uRzS08n0UYkhHgkXGrgRkxfq65Z3PX3YwQIl7DYoluwGMW/hRT
-         0ycBSAKsuTzJCfdN9tDjusTnmrzevDxlN37sw=
+        bh=T0yexCb2vXbk8Yq43DE1nEmg99JhEnGmliu5DJSALII=;
+        b=pGeLIluc5mqG5YZUZXMD52f56y5aCaQyTeVJQ6TuKuhuvIekgit8W2zkW3lKW+G9+p
+         U7gBSzRDYrNX78KkKhy5paC9wX8nXO/UfX6ysRzy2fzIzLAwJuBrUA9QLZnlK/e/N97y
+         Yks2aEjq6U0oa3cqbJZ8SP/j++2Xl218j1Yjo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794070358; x=1794675158;
+        d=1e100.net; s=20260707; t=1794070357; x=1794675157;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=E4JzDdpxhG4SR5KnThTVY/hPQxLuiRp5xmDrEDQH1vE=;
-        b=Y3T/3KznW+i0JFZaIoT9qkBGFv5oFxk1PfVQjI9ZDFrQt/siXjKVJbD2F7dLGu6XJy
-         umRwzM/1DsJx52i1K68gC30oUhAeU1hVpUxnH9z4jhOTdAy3J1oeOSBQrzPvgEjFIhxp
-         327OwTAfAoy9ssIlXRA8OfbUfb8RngjjB1IxJBXInq6G8i7nC1XXIviUC+Yg20Og07wY
-         sbNcejwNdwRTGpxEm4D0FjC3VBEVQE4ykzmv8jD82vtUpe/a/SPUkBbKTyWrRHATi1F8
-         QL62vq6bOVd3ZG3YHj9sqPaYHaVTTslLBdxlZSOFleUgcct2Ocl8DffU4LNRxweOhI+u
-         p42g==
-X-Gm-Message-State: APuU4Z86hSLiXGju29GlOFDv1Zot7tM43RSryfZJhojSXjqpSGwBWkhg
-	9RLsI/T5FCXRoJONhRxiKglZVwBp5L51dwnAlDTyO83uYhgGnbIKulu8b6efVin2w2F4fVj7qzk
-	4a51K
-X-Gm-Gg: AYBFou1tqpYNm+NiE3oAnbhqE5CkkuH+dMuc3owB7mFFz4LpE7XVR86gUvYRWSLsNao
-	YL0vucAnLQzbliPPMVvROTLxm31/EQlGTp3banUr3/5D7Qnc4Yd2Owurdp8RfXhLTtKFdxxJUOS
-	hKa/MyjV/P/VPSP3JiO/bBVJAi3MjISFD02dBmVXY2pKWzxaxgZP1IRDiIzY+VBG3TlH0W6DZru
-	mpwbxgrYDInE0i/G6wBvWHvAocIlxJf4GA8Kio1UYT0heHzL3/Gs+RoLW1+3mD8F+UVrjCN9pSp
-	xF8RRrrJYpGFkPQjEbtHVUG2Aq35Qcc23JlPNd3YQzVBWbjsBgBWiBjyknF+z9vArcFVJHJ/5b0
-	oRWbfRYlFtsinER1RSfvXKUC1YqTrLdUfo3fWULGS2d0KrQCLW4isoGH74J1NftEr0MZREQVTb5
-	E321GG/DzdYVYEMr0GOeNZnF8Kj4ZFRBZtkjVdMfD3t9GBENDDlIws1/ZWG3uu5jAyDBemY0Vji
-	qVFtZFdwzK+bsVs4Dv59zf0n5yQgibFqg6KGX0nFA7/YoKK9B/6HHuHVioAydIfV1PtS4x1Wheq
-	+ur0X7eUDoUXmqST6okGAUUStUNcC4Tpa1f8hpbsIBNbv/UlKRXy1bg4NbXIOP8NEFbkbFZPhdU
-	1gbaVh7SlejG0zER4fdQi7c5/+TDvEXI8lTX168TgzCEPvRrV3UGzjJA=
-X-Received: by 2002:a05:600c:621b:b0:4a2:190f:cf6a with SMTP id 5b1f17b1804b1-4b6dfbab213mr98231855e9.35.1794070357790;
-        Sat, 07 Nov 2026 08:52:37 -0800 (PST)
+        bh=T0yexCb2vXbk8Yq43DE1nEmg99JhEnGmliu5DJSALII=;
+        b=fuoPjM8i5yOxp3c+AOKbiQQ0+LIuQ3KjYF03nnnJ2o3U/sH9ywM5ifBPPCj9ZTyIlb
+         gxI5tuHwUHZlaHW4Wzu0rjGxRdEa5LtgnTZBGTGa5H3RVrICf9GcqaWL5GI/emh/KO4F
+         BNYBCVK31Al0d2FEOKTC+s8DH8iyeL/dbXnpFVPpo+e2s8hOUswyVW8PsGd94i5UpI8t
+         dgcT9A3LtiERf7yrEJbw8B2IntQxSJ+QYXafrqrrk2ZPSpE7J38IyZpiesLqZxyReUro
+         DD5PkVQpDFDMhIr0HdBnawXg0atuCei68zDOzhqWowQe+TbMcFNRK4V9OGi1LPigpo1k
+         /sQA==
+X-Gm-Message-State: APuU4Z9MUFbifMzA/JE4riH4gv6w0S2Oqg6XL6pNXcXpK3Gv1Vj61wAf
+	0N3Zn49SzPVCeI6km1ZnyE6rBVvmmhjFM9U3bMkf3DW3VMDvULbvnjOw/XO4WYqf7yAhElSelZI
+	oKjSB
+X-Gm-Gg: AYBFou2NXaynh7ZKYmV2jz0j/TDMt6J/YvexG01FDCYaEK97wk1oKtQvkcKwpwkiLw9
+	+Lr+S+dX+Fx2rvnALe4/oK/rYIr/CvWaZk7popcPj/lhqmPaKudz2HfdBN6Qgtr68EfPr0lQbWy
+	XOF9Zg3LHL+h1lmhQGuM6LqTpflgx8DaoMN858NjwkVnnMNYmIO0d+FLseWGGbvHA4ZhZyRxkhC
+	Dvn4DBjz9PXB1DAMdtfRVS//8ynNlr8CA/RoYgt+8xkYRKLNAyvqzUG8tkryTewROHacS6QhpUs
+	lmBqkqAUdG0U+RZYnQbMlrXTKjJHlaIxpsHfPQUmab6/fEpi57iWIFmNMfsY4otJS4uprerWVW9
+	wbFCrFvI/T+xHC21FQohnt6Yj0xKgcnGGKveEojkLL2X6mQBqs11cU+govwVwoTVY2BLRUggO19
+	CfqD7arHStrCtq1KcbuuLtSKWodG24/bYn/ufystix3l3aA9s9dXzMigpO1IpOxD7tP8PfPUWzc
+	U2lkV++sclK+qiFNmP0nbb5z7K+138KKJz3QtOqDhM3v9xQ//IgfL0AMCdR7xhuv0irfBU4OqNI
+	bX3ZIpCvIYwIppFd5dLWYMapmnxn4esqaQS8ifrF8MWJ9t089PP3hxUY2m0+pP8XI/dnuRKBb7h
+	dlVVcT7Lm2qrH37XnUPuDB6n3NJIqOJQgjUS45epSquonI0vjn04n9sZMhH+bMzx3WsQb1Mh1fe
+	Q=
+X-Received: by 2002:a05:6000:4312:b0:490:6fbc:9457 with SMTP id ffacd0b85a97d-4927678e068mr12654428f8f.41.1794070356912;
+        Sat, 07 Nov 2026 08:52:36 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.37
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 08:52:37 -0800 (PST)
+        Sat, 07 Nov 2026 08:52:36 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 14/22] libmikmod: Upgrade 3.3.15 -> 3.3.16
-Date: Sat,  7 Nov 2026 18:52:13 +0200
-Message-ID: <20261107165221.122340-14-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 13/22] libdbi-perl: Upgrade 1.651 -> 1.656
+Date: Sat,  7 Nov 2026 18:52:12 +0200
+Message-ID: <20261107165221.122340-13-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261107165221.122340-1-leon.anavi@konsulko.com>
 References: <20261107165221.122340-1-leon.anavi@konsulko.com>
@@ -61,35 +62,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 16:52:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131999
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131998
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 3.3.16:
+Upgrade to release 1.656:
 
-- Fix out-of-bounds reads in MTM loader (CVE-2026-111165.)
-- Fix out-of-bounds reads in IMF loader (CVE-2026-111166.)
+- Prevent dbi_profile crash (CVE-2026-108518) (Henrik Teichmann)
+- Fix lock file not removed when DBD::DBM check for bad serializer
+  class fails. (CVE-2026-111879)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../mikmod/{libmikmod_3.3.15.bb => libmikmod_3.3.16.bb}         | 2 +-
+ .../perl/{libdbi-perl_1.651.bb => libdbi-perl_1.656.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.15.bb => libmikmod_3.3.16.bb} (90%)
+ rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.651.bb => libdbi-perl_1.656.bb} (95%)
 
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.16.bb
-similarity index 90%
-rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
-rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.16.bb
-index bfd15cabe1..54e92721a8 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.15.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.16.bb
-@@ -8,7 +8,7 @@ DEPENDS = "alsa-lib texinfo"
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
- "
--SRC_URI[sha256sum] = "dc27b338154b8f88dc9e6317196d42c6abc13bf63c4e055257a18d4e38e1afa2"
-+SRC_URI[sha256sum] = "7b24e41468b0dfe7fae1104ae6a0d7c52e04a65e1851b268c7074e4d06685a53"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mikmod/files/libmikmod/"
- UPSTREAM_CHECK_REGEX = "/(?P<pver>\d+(\.\d+)+)/"
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.651.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.656.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.651.bb
+rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.656.bb
+index 436ee47165..ada346b4e8 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.651.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.656.bb
+@@ -10,7 +10,7 @@ LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1a1138dff61f77bbc3d8782caba6758d"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
+-SRC_URI[sha256sum] = "da621a23fa68e1e04fac824cfd3d41e8ffbab2ab3eba642a12499242e8be5253"
++SRC_URI[sha256sum] = "ab5f2b9aef00951ed4598723d6131a00b03e68193478dd5e5f211015520a6ef0"
+ 
+ S = "${UNPACKDIR}/DBI-${PV}"
  
 -- 
 2.47.3
