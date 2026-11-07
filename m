@@ -1,86 +1,94 @@
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6372.1794046322331194573
+Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6373.1794046324415502790
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 02:12:02 -0800
+ Sat, 07 Nov 2026 02:12:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=kDJOKJsh;
- spf=pass (domain: gmail.com, ip: 74.125.82.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1438d9363fbso242541c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=eV8XJRjC;
+ spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-14394530ec6so2033848c88.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794046322; x=1794651122; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=A6OAGKkIeb6tZ5LUXBfJyLivFyi8jec4W3qKHF016sw=;
-        b=kDJOKJshOrwRMlcogeVbgHiUjuntr+1saH4sPDb76eLwTTU5F7VqO9rfcGoL/30QWM
-         JuYBihonF+EcPzaNC/gmkgTRx2yKz2E7Ug9b4Cr9NL/q5dKDqEMtOP4KY5s3E4gpSHXQ
-         /lcWG/R/w4dbGSWeEb5UfUWAFDritSDDd7NEMePfnzhsXemc/OBaadknAIVsXNc+jLp+
-         QVTSOjrqoI2GsEmoEJL8DUp1fZvHzqmACaCtbzIr62daJwfeqQmGDueu6qjStL51mIuc
-         iYtXkZkAbVRCBzNIrFklvgVCaxSm/vjK15s1R7c+Bt2jpoOzDQkk95+q5jBYkHmYIvwm
-         Iswg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794046322; x=1794651122;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794046324; x=1794651124; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=A6OAGKkIeb6tZ5LUXBfJyLivFyi8jec4W3qKHF016sw=;
-        b=YWBiVlgeXoo9SsSPb6DxAWODYvRj5YL7eVP344h6rSG7jkWSCVJSo5tnt/Vyn2Pben
-         QfO9GpfIudUBiXJtb0PefCL8HGFHJbX8gwXehu5EEF3sK0+Am2gAL2g1cObsZVC8ewYU
-         F30fMf/4k+1lCh8jMSz++2LP+D1wO7sJ3PT0QUxzxBKGDI5p5CRpQMXgJZYxKMKl1lAf
-         rD612CJuFRROxnAz46y3JUbw8AmssQF2uHYb2AerXtTJ9+zzg7LCCwRZMytdsJ45JMtH
-         RdHBs7Wh8rxm6WcGWMxKnEPg0Di8RVYcRQJnahblgelFR7HVb1ko/4baA4qvxvDvagnJ
-         9Fyw==
-X-Gm-Message-State: APuU4Z93L+124wNVgHA5+y9bkDH5CimOlVGBOptRJJDX/Ptl8Cl8/sUK
-	Px2Xbkr6MuCfqXywuUVZsTo2HPjfY5okKklogKcW225rmAi9itkz+OMEcMuw+Q==
-X-Gm-Gg: AYBFou2JzwrDAFwSeh9GuhJvhfgJl3l/CU1Zx+lk9rd5A3jWpcE+B4Ouf+Yx3UJEF4y
-	oJvSpLmauPngxD2cZZrJMvY7CiK4Wp9u//7A6eMSQJy21E/k90oPLJAFBNzaf53Q87txapr3zIZ
-	Xzco4ESted/dyvQSrh+1+qLGcPhBmnz9mtRnhzsM/xMGVQXPDfTUYX8vYOJlgoNnfXUmd48WjRp
-	Mpy37a6ooYlKDXwY1QnN4XcFSM4w7q0aA06EHd/jwwXYCjNHKkovzTjV3YCZmjOsbUhEUsnDTwm
-	UKE4fprCg/0s/BB4SVjmVnjIVsb6bPRvMt3sJ478BHKlDdR5sX6X7vXY0aJBzZWuhc2loBXwMlO
-	8WSmOjlNGIwoQYhirXp5nY1ZoaeSgOyaeeTH0uRdnH2fS1DDhBPcP+L1pUbBzZo0atJzEwRS9Bd
-	fQK5igk1rFuAJhGAKuMELIolKekp6hy2pFMxQwJGArA8W5VTT9UgNWFErjx9UIVSUt3VA4wYj5n
-	TrKZtIE1gyZTIJlwJm7lD9cfl8bvHLiqq0cNeTfJzBamc19XdCEcoUfxmYFz2Fy/4KNn1rG+thJ
-	HinsLWKz8OpJ2ad7o3bZwaYLQNR0yeniy61MYG7Fr2i9NtJMFcq6kI/s0hGAlQ==
-X-Received: by 2002:a05:7022:264b:b0:13c:f65c:d5b5 with SMTP id a92af1059eb24-1b269a6631dmr2140638c88.3.1794046321469;
-        Sat, 07 Nov 2026 02:12:01 -0800 (PST)
+        bh=U48Kyz0UtYIZkxm8yCV1kEYYJ6hFMFHT946FOuKhSHQ=;
+        b=eV8XJRjC2YxaqVuhLzYgQe4qFyyCYEU99lJ6txqRybxVKVpMvOdPSGHZCRYYa2RxHj
+         hgFJLNfq1q+h3sI6C1eKg6Sw8NggtxW7yTrviA9TfgLEPL0C1EryIYwvPlrd/4KcwfU1
+         TV9j3HuVTuu72GfgeDk6U39sVaY7nJotjOSlnTp/OPzkhBYfQk0axIeA6qIsj781G33R
+         R0BJrg54ndl/BcFVVrfm3qhYoaw0C6xC1vnEccU3oa+IFKf93M0Ont+gtMm5MeTL49h3
+         WxJkhWYxPsnhIXjAwvWyQeBYcb6PHxxyUUKBULHH2x7J0VADm099x2NtGTOozpZSx0sl
+         DhCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794046324; x=1794651124;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=U48Kyz0UtYIZkxm8yCV1kEYYJ6hFMFHT946FOuKhSHQ=;
+        b=FSPM+ioNredyf3Iyf7oUWc5vKTPaF9/5T6cD2+lA0sjSHhIhvy3Js4U7/ZVoi2ti8n
+         ZZkEnIEK0ikOP32pkYaJsyKKSZpN66y7/JlzOGHb30tf3J7CMXuNotttuVbqVZNugh5V
+         8PfNbuT1Jle/J2L4ruJ+iOVI/vkNVcQlOOinhVwG7XMewVm9E0V125CXKY5G78CKkxDI
+         NNc6dyve9XAUkt7AaZXGAJVv+OVGDKWplMLHc2aMzsPBuhj+fLRV0nrftvaxK7MJXkTg
+         jCD0bH7puWQ7XRFiuI+iNUMi1SR5Xy+f3ot8L9BKmeDRdu2ShnbwbfVzfsBJGDV9NP2H
+         Qjhg==
+X-Gm-Message-State: APuU4Z+U0dRB7WjolrasHsnUmiajfDQbv997mFaR/Y8+024Jh1alA1un
+	GVQ17AAVcQxs/cDHc/Jq/g7jtFLBNisRltM8O+XxscH5QZL0NNXr+nu8eAVS+w==
+X-Gm-Gg: AYBFou1B5S0ozLqp+AbN3vdFqeLkicv7Pk5kTDsq1TDob0GptSLH0sDAHAjOhHsmkdM
+	LZoNUFWY+vFDzdQa7mV1Ge2HgyLhUJ8kC+XfcKO1sleZEJtKsxMaXUGKVE231GnqPrAO1hby24G
+	4fc2dw46NHrg0Ce5qa3K89PVF+3SQbeeY+AlvULPHCaVCR5qhL2158UeOEFhe8b5epfKoSEy/gr
+	v+CS+xO9fF/6HCCBoNNY1y6xgEjR+Z5tbd4nPlO6watf+WDvIU4WsU03ZvgfBDgz2gQK0aK8Zu7
+	NL+DOWsPs5qZnMPUx0+ThaYfNCGbCaxCo3aPS+lZfjm3p3Edj0IK08+dGaN0eMHPIQyHpFHH+mg
+	5neqAiDDJf6K4gl9jBST6TJvQxQzaFj9hd9zKw+m0n3VS10DAvj0Fa9yoOHqZGRrcYu3mvgHaL3
+	c6lbputT+j6bMo6hhTrzyssKLOx7sm2zoy7+pE5O1pnb5uY3OJc1FdpR/aO1fvj1naumqSfDJ/p
+	LV6SOLb3rTuFzQvy+kzDNgnOaNRtyoDJQfPSVC/GYs6f1Mo4ryAbA0/OR0a0FFhOu0EpYc7IZpA
+	9ytipCe5+emXvnAlmF22FTfr/9nft2pSv7RTRgAF9JuzhHG9ZoEubcD6HAnPYw==
+X-Received: by 2002:a05:7022:1701:b0:15d:fb47:4268 with SMTP id a92af1059eb24-1b25d30f4edmr5854690c88.21.1794046323474;
+        Sat, 07 Nov 2026 02:12:03 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.11.58
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.12.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 02:12:01 -0800 (PST)
+        Sat, 07 Nov 2026 02:12:03 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-gnome][PATCH 1/11] evolution-data-server: upgrade 3.62.0 -> 3.62.1
-Date: Sat,  7 Nov 2026 23:11:44 +1300
-Message-ID: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-gnome][PATCH 2/11] gdm: upgrade 51.1 -> 51.1.1
+Date: Sat,  7 Nov 2026 23:11:45 +1300
+Message-ID: <20261107101154.2992152-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
+References: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 10:12:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131975
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 10:12:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131976
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://gitlab.gnome.org/GNOME/evolution/-/blob/3.62.1/NEWS?ref_type=tags
+https://gitlab.gnome.org/GNOME/gdm/-/blob/51.1.1/NEWS?ref_type=tags
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../evolution-data-server/evolution-data-server.inc           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/gdm/{gdm_51.1.bb => gdm_51.1.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_51.1.bb => gdm_51.1.1.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-index 8f248c7362..5f27b97acd 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -11,5 +11,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
- GNOMEBASEBUILDCLASS = "cmake"
- inherit gnomebase upstream-version-is-even
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_51.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
+similarity index 96%
+rename from meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
+index 7ee327bff2..4f83fb90f4 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
+@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
  
--SRC_URI[archive.sha256sum] = "78be88e9a511f5afe7ff2e363eade84b622dd0282647fc576edb2d4ff2962cba"
--PV = "3.62.0"
-+SRC_URI[archive.sha256sum] = "b75c823445d7d30bca797eee929809e8d389abbb8d471f68ae2af60972779f26"
-+PV = "3.62.1"
+ inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
+ 
+-SRC_URI[archive.sha256sum] = "27970ad4f58eb0a48fb01bffb89a8f472503641c3573eb6d788ad4042de01120"
++SRC_URI[archive.sha256sum] = "390ae9e7540f71db28a3dc64319a8f687f4d88bd4d5f1ff816b7a9f2249ab4aa"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
