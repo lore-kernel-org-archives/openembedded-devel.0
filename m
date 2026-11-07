@@ -1,60 +1,61 @@
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6379.1794046336353045394
+Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6448.1794046332363141705
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 02:12:16 -0800
+ Sat, 07 Nov 2026 02:12:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=nnJamWB9;
- spf=pass (domain: gmail.com, ip: 74.125.82.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1a2761c69fbso45013c88.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Cw48fADP;
+ spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-36f6295304dso1506120eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794046336; x=1794651136; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794046332; x=1794651132; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ItMpuz/oITOV2kJZHPF/QnAZ9bl+flbn0BHEeNokRys=;
-        b=nnJamWB9qwh/LbD92nARlmEvE6HGiDNX+LgC1DazSS32J66HiS5Yk7/f2+a132PXrB
-         +FXQrdoKABsNYFPpcazd2MLjMVq3CgWQjnOcluOt39ZmzPnjAM+YN4R0nqE88Xq/olQI
-         j+janK+hh3jAOMT4dBC5UFV/NyZJPgYmZR4bg8lvQKTZEiup0/2yhR7D3U4GPi+vfzjx
-         ZasOqnuX89vCTu5KJTf1XZRyoiEsRH54+MOn/FIaaSsRGqA9UPB1NTNiSo9XSjWh2ETV
-         KugBF+EoDAVfVTrwxIs/ARrUk+J/HsQYWrkSfvluJLH+1kCOs6rkW1niZ4/CQ20+X0rk
-         IAbw==
+        bh=ey5STgU1MiArszvFC1yJqQ7xHTt+fMubzIn0LKG8Tkk=;
+        b=Cw48fADPfXn6OvOBU2JBZiBZ0TY1IWWYGGsLEutvq4Z+K5rD4qoS3+AM6pQZ62+SMu
+         dchdqxt7xsIVKVizuQK89+kHK0fmsiIaXw0YYtWSoUxTYy0oG5COZiK+cf7oDAl2QqIJ
+         fm7bs5XY85hGVSiokgdpreGa+JHG4FCgJOe7JBvQVtUpdZR5eiEYXqZk/GxHrhEU1PYT
+         iDcDbfztJnSJMKDeDhswXYligrpqeHbk8HXyx3sASkgFz4dFc6vybuk5g0I6cukv5/Hm
+         vlfXFuOjHZMv1t00gdiY4MdPiWZsCOj//ceSt0ZT7OZAQiNx9EA7+ZhnGy2Tp7dMD/hL
+         uYhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794046336; x=1794651136;
+        d=1e100.net; s=20260707; t=1794046332; x=1794651132;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ItMpuz/oITOV2kJZHPF/QnAZ9bl+flbn0BHEeNokRys=;
-        b=kvkwfBurWcFvh9XySUFEUXpxHA3gRCXh4a1TQOObjRCugX6PIuRjJzh8JQah6u0aM/
-         TSMhZH6qWPFcLvSEXEdPy/qD92eT7o9QOH68JpoTkwGnk6Jp8+cQ0puZWPEQU5UYPhtP
-         bhWAo9GkG2CobwBzhdl+iw8SnjBzhUWUpFnWircgxs5V6SSMNPanwJuQGq0nxsLABxtT
-         P8EfLdRcX3AiXQ7TYX1DEOvTK5558MwNT/NY+9VFTqLXGud5xh3qKtxEFPOP8DtIH7op
-         xLoCJ+CfWz4mv/nAb11gm09ahKvJNfqc+7B/JwSHpnZuEIOlpek9AYuxsL2qL9CQIbkk
-         BT4Q==
-X-Gm-Message-State: APuU4Z/F4iIOPcNZAjJyL1889GxCD7aV9+OXZpbftxv2jiCZ5e47MDaJ
-	TU4RdAs6Rc2LjF0w9Nt7i+SnrJRyFjPRVrOr1Kt97M99skHnYdg5zy7aDQKefw==
-X-Gm-Gg: AYBFou2zGxOzzOp4ztbhEOiVw+fBmIjLUxpY3/2vs2N8MVF0C7mUxnR7XDPrH/meiI4
-	4fBTYZjciAUWJvaKB0pETRkJi6C6XSK69/LMFf9VjuGrb/rafjNQRBpmUaQ3eEfclFl1qJFrkpE
-	vuh8rOrjgTlHQwI1MUwayfweiVTgFKb0XSjK1Xf8RGIt6lck4gY5lNwwTHWTefhcutN6ZeQWyfc
-	5tBlkEZIJW9lSA5fmTMLWWRLo0a+ohuE0j2fzbkNVabKvSMEjwQOs1gtdw2Y/ESlQtYzpJ7GdA8
-	3mZrs59XgNYpR40Bu/WJUJucC7/9K7zoFIhUfeR3ai7KUwLbsIjvvLL/dIHLHLSwbHmnb949BuB
-	HudtxqAXiHoXGZbZ8jzzIVxHSv2bNdYuF5rh7kPjntZbH8rKmhKht2e3azVs3AlLVx28LBEsWrG
-	IQJqr9Xcen5RrkDfUGYkGxwkhDqYT+4Vda/vTRrV7PBUqsS2ikbqAZx3yspSxns3Z9hIulnjJUy
-	XbH9UctLuzh0hTuupC7xRyEkF6R5pJHqyDA5A8tCeq4k6tXYT32/v+9G/MzdzK759Clo+Du6ZC+
-	5PfZ3qvN+1o5lvmFC3maiKf5JrhnYZ00e+ujf7gbZ3fkm0Q403nV9/6rBazovw==
-X-Received: by 2002:a05:701b:2916:b0:17a:e684:b497 with SMTP id a92af1059eb24-1b25d293b87mr6763045c88.5.1794046335569;
-        Sat, 07 Nov 2026 02:12:15 -0800 (PST)
+        bh=ey5STgU1MiArszvFC1yJqQ7xHTt+fMubzIn0LKG8Tkk=;
+        b=kh2GeckNEXSBGF6bIDkFINjFBHa2Bvx/q3M80/q946/vImczLRgHUcQdpPBzttaVdf
+         0HU0HosKh6KGsYqH8298E1FLP7tx1ZDnBEqCNC0gq3Eh4P6x1Fi0+IHsgt1rlcREE75N
+         DKc9NzYIMr83XkHea27w1bHj7ipQ8OiuXpvKZpBkskC4Zdx5izLi4dt0xmZz/BDGdroS
+         0fBUSQQ9z4bjFrtDpFBfFU5tRPsdflbQ8oV2hTS1PIJbxoXrDIeFPIDuIKq+a8BnqRJH
+         aVBjhxMjGNhmHHRKxBnmNf9B6YdNtha2DR5NHa9qiqhjjIM1EWwAX/Dhqxfb+SNxA+oS
+         sJmg==
+X-Gm-Message-State: APuU4Z9HeBDKDz91xaBXzZrfh1UwHaPtlxwIx00vBuGTwi81iK2R/OmT
+	DMW4Re/POcDlo4VWKglVvtDV6FtR+JqowbMlwYgeVnfuZCHukWitXFyOFf+P0Q==
+X-Gm-Gg: AYBFou1fsn7yecVsZ3JZcxqWhI55RaggJExtcJTqvJgsydw04+ksKDU4iyKsPBX1mRs
+	1ZWHD+2me23Uovu3wjdJsGHOtYguTVvETHKdaLSzWRS2920an+ed8Rn10aAfx8xnFsYJDmghj44
+	EWLa3ekMSwvRwRdTiSim6TwX1WwVEZsB/yZef6Fhhph+CeFYTOAiYmOixZS9NTlZ+/YST4fQtpl
+	bw1OpzK5QaXcu7sOHYnLxE5nxg/QeL5LELIdr8QOlxM99os5YyogsOKBlzuGZvfTHXXoOc1AwpN
+	OUFsQTJRNGZO2jj8L4ON0rSozNFxaD7NJwQvPwn7ZnjFNpU4aRTkwupMDDpVL/tXwuPpnJ0alnT
+	PgL/w036HVfDXauJFJKXI/CTPq03+zqID7VsjxwNc60CzBZVefAq64LrXXwKSbEQf8KUr62qyPn
+	amnZX2n8kSeWGM9jC5MHNx91EdhA5oRmnuugwspFyMf+VZyN7OYymCdI+tXl2tcy0XFXAmQKlHM
+	y/cLFEWS9nbwzNHOiK8Hwv6xe6+LBLTGox8M1v+rzalkrs+KfvEo9qIPyYtEv+a5KWvE6gZB2JI
+	s6mgBMQtbZErtS4fFRmzjw4PdfFl1q4MEhn/eNIR32LcFayI6fXmpwdIjAmRpxXBHsl7Wg5kSoA
+	gOxY6oJw=
+X-Received: by 2002:a05:7022:ea8c:b0:192:74cf:1db2 with SMTP id a92af1059eb24-1b25d32e856mr6994115c88.11.1794046331614;
+        Sat, 07 Nov 2026 02:12:11 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.12.13
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.12.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 02:12:15 -0800 (PST)
+        Sat, 07 Nov 2026 02:12:11 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][PATCH 8/11] openvpn: upgrade 2.7.8 -> 2.7.9
-Date: Sat,  7 Nov 2026 23:11:51 +1300
-Message-ID: <20261107101154.2992152-8-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][PATCH 6/11] libdaq: upgrade 3.0.28 -> 3.0.29
+Date: Sat,  7 Nov 2026 23:11:49 +1300
+Message-ID: <20261107101154.2992152-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
 References: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
@@ -62,33 +63,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 10:12:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131982
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131980
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://github.com/OpenVPN/openvpn/releases/tag/v2.7.9
+https://github.com/snort3/libdaq/releases/tag/v3.0.29
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../openvpn/{openvpn_2.7.8.bb => openvpn_2.7.9.bb}              | 2 +-
+ .../daq/{libdaq_3.0.28.bb => libdaq_3.0.29.bb}                  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.7.8.bb => openvpn_2.7.9.bb} (98%)
+ rename meta-networking/recipes-connectivity/daq/{libdaq_3.0.28.bb => libdaq_3.0.29.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.8.bb b/meta-networking/recipes-support/openvpn/openvpn_2.7.9.bb
-similarity index 98%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.7.8.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.7.9.bb
-index 6040935d4a..8b262f9acd 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.7.8.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.9.bb
-@@ -15,7 +15,7 @@ SRC_URI = "https://github.com/OpenVPN/openvpn/releases/download/v${PV}/${BP}.tar
+diff --git a/meta-networking/recipes-connectivity/daq/libdaq_3.0.28.bb b/meta-networking/recipes-connectivity/daq/libdaq_3.0.29.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/daq/libdaq_3.0.28.bb
+rename to meta-networking/recipes-connectivity/daq/libdaq_3.0.29.bb
+index c9231100f8..89bc961a1b 100644
+--- a/meta-networking/recipes-connectivity/daq/libdaq_3.0.28.bb
++++ b/meta-networking/recipes-connectivity/daq/libdaq_3.0.29.bb
+@@ -12,7 +12,7 @@ inherit autotools pkgconfig
+ SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master;tag=v${PV} \
+            file://0001-example-Use-lm-for-the-fst-module.patch"
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+-SRCREV = "6e76888ae8ddc5dae1eb110363f2254d0f701b32"
++SRCREV = "c8d4083904f7791f596d853178aca4ef1e20f7d3"
  
--SRC_URI[sha256sum] = "c070d1d2440b5a6fca6c2c68645c98cd492116ac36ef4f0946177115532c8e36"
-+SRC_URI[sha256sum] = "c42a6ed892ddfe2d6e3317a5040f19bec5827564affb2fe3f2b3904a94daacb1"
  
- CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
- 
+ FILES:${PN} += "${libdir}/daq/*.so"
