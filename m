@@ -1,60 +1,59 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11973.1794070366847190858
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11967.1794070360391745675
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 08:52:47 -0800
+ Sat, 07 Nov 2026 08:52:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=apAodfGJ;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a549cd7fd2so4675365e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:46 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=tw+/+dzv;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a2153c8525so12078195e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794070365; x=1794675165; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1794070358; x=1794675158; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8+3G+D/C6gYUvrgyV+XDWDTwYdKdt6os5fRO/EFnbZM=;
-        b=apAodfGJMmst6ASAjZAqNCd+QA/duTo1LZgddCq2ZRl++acXs6ENImXedziiswuhq3
-         KY22Tdf+L6JQVebyyVMPnYf8RurmV+VufvcwmuykzvjKzrCRsUYopfChAYxODFnobNue
-         XxbyGKGkVFK7jwTvTBwDfrOllxX0378gPNXc4=
+        bh=z/beBo9iLcMzJtWMB4MAUrWZTcy398bmswiGamcAIfs=;
+        b=tw+/+dzvNxoZ0bdRehvYA3RAhNQgEiK6zseHleVf8yp7uXkXBb8pw4bP6YWqEV4HWb
+         +nci2hjcGgjF+Qtlqq8tDHU6Q4wUmu4ZFf1yWx+Q7HCDtljfTsPtl+YhnZ5Ce13H94gg
+         JbzRPfrlIOsl5k7vBQUEs5PmNExPTbTBKeI8c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794070365; x=1794675165;
+        d=1e100.net; s=20260707; t=1794070358; x=1794675158;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8+3G+D/C6gYUvrgyV+XDWDTwYdKdt6os5fRO/EFnbZM=;
-        b=c6/7oMuxdxSXugtvQXboSAwRx2nPbXlLjlPC0SA4xNtTRW6PNkO5Z0UFmpoCnpj2NC
-         2TpJEquBqxepFWEkHzThSfdti0j8/MctvC6pJoPcRX5GTX8ifK4qYgVx5iXTxhhgiWS7
-         mtiiW2YZIhZDepIZMIGGuStXoMmzja4FTmiPtHaMkfY2JcQLUSmgRUgUrh10DUwvO0yI
-         iMhA7TL6QY9un2XlnfFY8Tvz6drwMFC7g65lscbHjDzBV7lzRc1PclGFX2pD6hsnNG0S
-         YHlzk0YEjcNEL6sI0VH08JeWkr2ToFjhOsdVmJEBFrQv9o8Km33I2W9OlSLCxUEuY0UL
-         Y7UA==
-X-Gm-Message-State: APuU4Z/zvLanpThw2JdTv5qp1xlVxpD0hP/ucVD/bNsn7UsmExXa5ipF
-	XmmrglQWj8low+SqWPvdHViv3HkedgEN1CexjhGupepW0/eBJ5i24DhU7BXdwD7ryO/WuhblfYM
-	wT8GU
-X-Gm-Gg: AYBFou2Dyuyq0exaNiQFCKK4xKOI/WFH0uqp7LjXQFA+OKRTkQKUMaA8ESQ0eWcdXY0
-	vLkdPjk4vLA93PnaSH2sgVDvzq9Mf2kJ34wJAqC3kN6iTqtoMl6Kh6MDOe12Z01YEGq20Ta/FK9
-	UY4ScUgYNXZ7x+/d8Zte+eTlDJUeV74jpj8NfwqmfZoZ3ZRTDKy/AtXVG03GjCInF8k3wW7Q7kn
-	nkHIakFq2SEre/4Dl9J1HLRt9Z/NBn3FrVWg+7zoVnh2RNH1jfl5Lw9131d+LPMXontEIS44A3t
-	jNmgEPrlV7Uc7Yt/EBvE1nUwttj1msdARNPvk2O8hkuxTChktws5SIWNuP51A33fn7aQvfl9bnC
-	deqos5RmRrw6UF77G8yhsgmmOpsKrt8EwHcThFFmLbnaV/ew6jiSTJDVSxH/u4kwuhvYH+2nEMB
-	ilSNEXQydNIRxWahUiY7szqOWalAHYOzhU/c5TuB8H7g8/qAQkSLNu03LPo9XeXajaS5ElRV/En
-	z878tbcRlqp5bgV18pfQuT6pOzaJDFmH29ihHtj+R8pCYxKzAB0IEWHVLuTZLQFl4pibpbCiSDS
-	VxGbnxIRptkFwSI3L2Ri1kmAToLFqqsrHZDdVorO68TzJ1oLB9dJHEbKf4wgwIgywq1HVGGc1ar
-	GwCwSvjvQEvVKoFkkY533Yy6uSu1WvqfAVt7S3nUuYz2ZYkd+amHsDQ==
-X-Received: by 2002:a05:600c:6218:b0:4a2:1002:223e with SMTP id 5b1f17b1804b1-4b8205955e1mr47825325e9.7.1794070365174;
-        Sat, 07 Nov 2026 08:52:45 -0800 (PST)
+        bh=z/beBo9iLcMzJtWMB4MAUrWZTcy398bmswiGamcAIfs=;
+        b=c+ftJTogfqvwKyDEl3YRzisjDr+aLytTvpjD8zZiYAKY3gY8LRmqKgsDxDZjdtuHSW
+         XG0UsOIEeq/w1bpWwp6QooV2jCHk+jhQ7v0iO+zlaqq5ZyAiV2G41hhaqZ2jWhv712G4
+         LV+g9rceIznKroj3v0vAF4oShYMlEoR22HdbUSFTmAxNrvkDucOab32FQ92kU4eRdyVG
+         fIwEPl4KkoyBGk6deUz1SSErirus6TAup/ELNMxj03y/oZ3pjQxe4H4vpQKpAUefqjZX
+         JrGkkfeSG91b0bb0qXA8WJgVTBTebSVcmeMDPQNgm97WQsIutGSu0BIgMH/I+FshJGJP
+         cVbg==
+X-Gm-Message-State: APuU4Z+zDmfNof0mo3j7oHNmQD8CjHyXGbGS4hWj8PBb1kAcAxthJI6X
+	7ol5tv3N6uC4u3Z1L9VnaQawMaMt78CZe/UGJzTv9k8B9a0FsGXan0+dm7tfrsJYUh6Ct15pcVR
+	uZ1q0
+X-Gm-Gg: AYBFou3TMuo7AQnBH2d0qJjCWsbRrajDWs79FXR7slO4XTCnesytcfqLsUR6JwTNuiJ
+	SA7eZ5DHjYPkjrSyf44tKKya79bvqB+6woMzyBIEHFNQYInprfyYoRh5GKA2xmPygsJiqgUr/O4
+	gUtzhfugQ/nkWyi7j/f28sxv9AsLW+DJXq4QQOXirBXm3umXdqXro1r/DI7WvnL+LPGon2p1nki
+	8ZeXFjlX/P8yzi3/z1Otryy624uI9l606w7FvRS8A08z20hLTstEgApON8NduEP5AtwATWDBV6A
+	z7n91jtLc3s+cHHxQ4w4bpCrb6KdSSE3/2KLP4d0uWC7antfogebdSu3JJ7pSMbHwaG1XZmC+DU
+	V639kwk4SkaUqxRW1v+n8sqfrRfU3cHvvLBikLGMp+amido4rYBfbQdRLR8xgscWkr/qjwn6l0s
+	myO8lHFLyvKCTVzl/7j4PmyjmS8QkmF92o4MZclxZQLjtYcB2pE3XSg4Z8ifB+/gZdjs/RR6w42
+	pkJA/CkNb/AaPFk7JkT0ILq0+DK61dP1kNP777GJiT2C0JjSACIsaVuwrUhRHcySEyNplfytUyG
+	HAhzGZsCznsxzLR3Nh73M+meJnOmwa8iFl1sDlrfMncX0V7nodpPgHczqKeluHwwwUUk4EWzZH6
+	VbF+ssrNq2ZKZVW287dN0NavHiu3qZ8LBzdhCCo3w6IAwtxkE/j/c4w==
+X-Received: by 2002:a05:600c:a47:b0:4ac:86c9:b09c with SMTP id 5b1f17b1804b1-4b6df21324cmr109136335e9.13.1794070358609;
+        Sat, 07 Nov 2026 08:52:38 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.44
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 08:52:44 -0800 (PST)
+        Sat, 07 Nov 2026 08:52:38 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 22/22] meta-oe: README.md: Improve send-email command
-Date: Sat,  7 Nov 2026 18:52:21 +0200
-Message-ID: <20261107165221.122340-22-leon.anavi@konsulko.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 15/22] libnice: Upgrade 0.1.23 -> 0.1.24
+Date: Sat,  7 Nov 2026 18:52:14 +0200
+Message-ID: <20261107165221.122340-15-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261107165221.122340-1-leon.anavi@konsulko.com>
 References: <20261107165221.122340-1-leon.anavi@konsulko.com>
@@ -62,36 +61,48 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 16:52:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132007
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132000
 Content-Type: text/plain; charset="utf-8"
 
-Add -M30% -C --find-copies-harder to the git send-email example in
-README.md so that git format-patch detects renames and copies more
-aggressively.
+Upgrade to release 0.1.24:
 
-Patches that move or copy files then show only the changed lines
-instead of full file deletions and additions, which makes them
-smaller and easier to review.
+- API: nice_agent_attach_recv_ex() to retrieve extra message data
+  in recv callback
+- API: nice_message_extra_data_get_tos() to enable access to
+  IP_TOS/IPV6_TCLASS IP header field of incoming packets; requires
+  GLib 2.88
+- API: stun_usage_bind_run_compat() to allow specifying
+  compatibility mode when sending a binding request
+- Nicesrc: Attach GstNetControlMessageMeta containing the TOS
+  header field to buffers
+- Ensure NICE_CANDIDATE_MAX_TURN_SERVERS is obeyed
+- Ensure nice_agent_get_local_credentials() returns FALSE on error
+- Fix random crashes
+- Fix potential heap buffer overflow in UDP-TURN over TCP
+- Fix compilation on FreeBSD
 
-Suggested-by: Khem Raj <khem.raj@oss.qualcomm.com>
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/README.md | 2 +-
+ .../libnice/{libnice_0.1.23.bb => libnice_0.1.24.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libnice/{libnice_0.1.23.bb => libnice_0.1.24.bb} (94%)
 
-diff --git a/meta-oe/README.md b/meta-oe/README.md
-index da6c4cbe79..d8aefd6db1 100644
---- a/meta-oe/README.md
-+++ b/meta-oe/README.md
-@@ -19,7 +19,7 @@
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
+diff --git a/meta-oe/recipes-support/libnice/libnice_0.1.23.bb b/meta-oe/recipes-support/libnice/libnice_0.1.24.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libnice/libnice_0.1.23.bb
+rename to meta-oe/recipes-support/libnice/libnice_0.1.24.bb
+index d670f49b5e..64c72b87e4 100644
+--- a/meta-oe/recipes-support/libnice/libnice_0.1.23.bb
++++ b/meta-oe/recipes-support/libnice/libnice_0.1.24.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=963cc62096d5412ee9580043babb8b60 \
+                     "
  
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
-+'git send-email -M30% -C --find-copies-harder -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
+ SRC_URI = "http://nice.freedesktop.org/releases/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "618fc4e8de393b719b1641c1d8eec01826d4d39d15ade92679d221c7f5e4e70d"
++SRC_URI[sha256sum] = "cfb5e8e778534f2f5b3c6f4958a1eb057c6b95c537c0f100817a537cf5d64fcc"
  
- You are encouraged to fork the mirror on GitHub https://github.com/openembedded/meta-openembedded
- to share your patches, this is preferred for patch sets consisting of more than one patch.
+ UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/libnice/libnice/-/tags"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.47.3
 
