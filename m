@@ -1,60 +1,60 @@
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6373.1794046324415502790
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6375.1794046326617785670
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 02:12:04 -0800
+ Sat, 07 Nov 2026 02:12:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=eV8XJRjC;
- spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-14394530ec6so2033848c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=znsOB+HO;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so2368877eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 02:12:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794046324; x=1794651124; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794046326; x=1794651126; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=U48Kyz0UtYIZkxm8yCV1kEYYJ6hFMFHT946FOuKhSHQ=;
-        b=eV8XJRjC2YxaqVuhLzYgQe4qFyyCYEU99lJ6txqRybxVKVpMvOdPSGHZCRYYa2RxHj
-         hgFJLNfq1q+h3sI6C1eKg6Sw8NggtxW7yTrviA9TfgLEPL0C1EryIYwvPlrd/4KcwfU1
-         TV9j3HuVTuu72GfgeDk6U39sVaY7nJotjOSlnTp/OPzkhBYfQk0axIeA6qIsj781G33R
-         R0BJrg54ndl/BcFVVrfm3qhYoaw0C6xC1vnEccU3oa+IFKf93M0Ont+gtMm5MeTL49h3
-         WxJkhWYxPsnhIXjAwvWyQeBYcb6PHxxyUUKBULHH2x7J0VADm099x2NtGTOozpZSx0sl
-         DhCQ==
+        bh=POzoNvKQ1VgRyFzE4vorQMJx2EBfXJ88YEbDZqAFF1c=;
+        b=znsOB+HOjVhskTs6secK23wX25BWtlnZo4DM5psQTIWdkEyTOLiQNXufdQHsf75ub4
+         iQ90YKk8WSbGFuh46BD32weKJLvZQ7zYpl5fkjeoFp26HmUWULyM94BH4OeklUDpzjiK
+         grBOJkzOlbr1Gsd1MVqANPf5/H0uUN+KgMIQvd56ixGWwq9EhxARr6oMKw7vvR7pwGO7
+         dM3vVHCPta2b1nI0LhRXAqqtlc0P95spF4yzADDT4/Bb1dYSacWmqhkCm27vN+DIevAU
+         71TxdGUdG23YbZk6AcVM0yQGUlzoipWxsb7993msnVGCEt1iTmPpq1DdjOsn9OupHM7g
+         o+pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794046324; x=1794651124;
+        d=1e100.net; s=20260707; t=1794046326; x=1794651126;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=U48Kyz0UtYIZkxm8yCV1kEYYJ6hFMFHT946FOuKhSHQ=;
-        b=FSPM+ioNredyf3Iyf7oUWc5vKTPaF9/5T6cD2+lA0sjSHhIhvy3Js4U7/ZVoi2ti8n
-         ZZkEnIEK0ikOP32pkYaJsyKKSZpN66y7/JlzOGHb30tf3J7CMXuNotttuVbqVZNugh5V
-         8PfNbuT1Jle/J2L4ruJ+iOVI/vkNVcQlOOinhVwG7XMewVm9E0V125CXKY5G78CKkxDI
-         NNc6dyve9XAUkt7AaZXGAJVv+OVGDKWplMLHc2aMzsPBuhj+fLRV0nrftvaxK7MJXkTg
-         jCD0bH7puWQ7XRFiuI+iNUMi1SR5Xy+f3ot8L9BKmeDRdu2ShnbwbfVzfsBJGDV9NP2H
-         Qjhg==
-X-Gm-Message-State: APuU4Z+U0dRB7WjolrasHsnUmiajfDQbv997mFaR/Y8+024Jh1alA1un
-	GVQ17AAVcQxs/cDHc/Jq/g7jtFLBNisRltM8O+XxscH5QZL0NNXr+nu8eAVS+w==
-X-Gm-Gg: AYBFou1B5S0ozLqp+AbN3vdFqeLkicv7Pk5kTDsq1TDob0GptSLH0sDAHAjOhHsmkdM
-	LZoNUFWY+vFDzdQa7mV1Ge2HgyLhUJ8kC+XfcKO1sleZEJtKsxMaXUGKVE231GnqPrAO1hby24G
-	4fc2dw46NHrg0Ce5qa3K89PVF+3SQbeeY+AlvULPHCaVCR5qhL2158UeOEFhe8b5epfKoSEy/gr
-	v+CS+xO9fF/6HCCBoNNY1y6xgEjR+Z5tbd4nPlO6watf+WDvIU4WsU03ZvgfBDgz2gQK0aK8Zu7
-	NL+DOWsPs5qZnMPUx0+ThaYfNCGbCaxCo3aPS+lZfjm3p3Edj0IK08+dGaN0eMHPIQyHpFHH+mg
-	5neqAiDDJf6K4gl9jBST6TJvQxQzaFj9hd9zKw+m0n3VS10DAvj0Fa9yoOHqZGRrcYu3mvgHaL3
-	c6lbputT+j6bMo6hhTrzyssKLOx7sm2zoy7+pE5O1pnb5uY3OJc1FdpR/aO1fvj1naumqSfDJ/p
-	LV6SOLb3rTuFzQvy+kzDNgnOaNRtyoDJQfPSVC/GYs6f1Mo4ryAbA0/OR0a0FFhOu0EpYc7IZpA
-	9ytipCe5+emXvnAlmF22FTfr/9nft2pSv7RTRgAF9JuzhHG9ZoEubcD6HAnPYw==
-X-Received: by 2002:a05:7022:1701:b0:15d:fb47:4268 with SMTP id a92af1059eb24-1b25d30f4edmr5854690c88.21.1794046323474;
-        Sat, 07 Nov 2026 02:12:03 -0800 (PST)
+        bh=POzoNvKQ1VgRyFzE4vorQMJx2EBfXJ88YEbDZqAFF1c=;
+        b=turSzs+QDd8KTUnbibn5Qjb7B8szxL8IVW7UrJVl4j1SvYT9WFtNFWSSuDi9nuHaM4
+         FysCuASy8/dQ9IiMhJPwTG+dntpQe61Fgy7BWYByA+5ORsn5DUjyD2JgTIiMpUHhPpqM
+         zU0GbBfN6b2e82yYlIlp/E6/lU+ZaX1lYh5DOsG+MjFSXrZ8UpG/Gh3cE9YAbqpRC5YC
+         33LmvAJFtvZ+g/G39OvJ9hmCZaXyl9Zz8JdDrKQcZ/MHn8SpOqrtRBHXSfGpZsIsE4+z
+         PjvGXJKXnwEJL32IaNKYPjfifwZ/ALD/0rnjlqgkJPQUUFfEEnIWST1cpaM8Whz4j/Rd
+         B1Pg==
+X-Gm-Message-State: APuU4Z+w6aJeqvg9lPRPgTQnEcVVATNDY1ZAi57UsA9UXBCuVBpmHL9O
+	TJ+gaJS6elKK8DXaSofOBYo6ShNx0Qu1YzhTgbaXJSxWjbrZ2B9EKBfCnhtSFQ==
+X-Gm-Gg: AYBFou0CbwCbWDIlz5JLFQUoybMIcKW/jEDdPstCOsS1055jgCGphbrb7wjhA6uI4qN
+	U9Qjze3S0FPuNMm4+Vv0uHwHtL2g18KXognl+Vqd0LCkggJnT2496M3hoWcKFpbkybByFfkUM4s
+	ZDt+7nvM0YQLx/6lNJwX2TOciYW9nJ3FOnG/q4JhW9N4I3fdka4gIku4C/0H5LoCszBZ/kDU1kt
+	vGxbFQjJqKqB9WEI0YZtjw3OnVJSpg+G42a2UqcJ2/fysE1NSpWcqGQOXfg3BiE6U6dlsEiKaNO
+	fzJFFfFgpVL7igd6g/aJ7ORenpAK1T90OBRMlhg8BIXaDmy01RtA9CXMtqecOGKQzU/nJoT8VgE
+	xWf1lWwM29t4riix79rF+lrZC5kbaiWF91h6J2J70d8H9ACofVhOKt6k//6RFZCJFXjDCUV2rYG
+	gcKaWwW16TlLFOQOuCukPvIuYq1IHAPpPe9Ty1zZ+JoaqubFvwVZ/J3k9zWK3eG/MbhMIQJawI5
+	zH4+lzO3Dkm3JqOf8piX47nmuGE1zniugIu4ZPutDB+hwvQeP3mLXRFCZ1KW9Ncp2aSMo1r9ujF
+	bQzMlU+SdG1uPBe0Pc/18PHpuwtm/vvzKFqMpCXakZ9CTqBtvMXXnNQo/ZSQ/g==
+X-Received: by 2002:a05:701b:2309:b0:1b2:6c97:fecd with SMTP id a92af1059eb24-1b26c97ff1amr1281420c88.42.1794046325737;
+        Sat, 07 Nov 2026 02:12:05 -0800 (PST)
 Return-Path: <ankur.tyagi85@gmail.com>
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.12.01
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b25e4840f3sm22856467c88.5.2026.11.07.02.12.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 02:12:03 -0800 (PST)
+        Sat, 07 Nov 2026 02:12:05 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-gnome][PATCH 2/11] gdm: upgrade 51.1 -> 51.1.1
-Date: Sat,  7 Nov 2026 23:11:45 +1300
-Message-ID: <20261107101154.2992152-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-gnome][PATCH 3/11] libspelling: upgrade 0.4.10 -> 0.4.11
+Date: Sat,  7 Nov 2026 23:11:46 +1300
+Message-ID: <20261107101154.2992152-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
 References: <20261107101154.2992152-1-ankur.tyagi85@gmail.com>
@@ -62,33 +62,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 10:12:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131976
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131977
 Content-Type: text/plain; charset="utf-8"
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Changelog:
-https://gitlab.gnome.org/GNOME/gdm/-/blob/51.1.1/NEWS?ref_type=tags
+https://gitlab.gnome.org/GNOME/libspelling/-/blob/0.4.11/NEWS?ref_type=tags
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-gnome/recipes-gnome/gdm/{gdm_51.1.bb => gdm_51.1.1.bb} | 2 +-
+ .../{libspelling_0.4.10.bb => libspelling_0.4.11.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gdm/{gdm_51.1.bb => gdm_51.1.1.bb} (96%)
+ rename meta-gnome/recipes-gnome/libspelling/{libspelling_0.4.10.bb => libspelling_0.4.11.bb} (85%)
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_51.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
-similarity index 96%
-rename from meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
-rename to meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
-index 7ee327bff2..4f83fb90f4 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_51.1.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_51.1.1.bb
-@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
+diff --git a/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.10.bb b/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.11.bb
+similarity index 85%
+rename from meta-gnome/recipes-gnome/libspelling/libspelling_0.4.10.bb
+rename to meta-gnome/recipes-gnome/libspelling/libspelling_0.4.11.bb
+index c906c8097d..d24d6f35f2 100644
+--- a/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.10.bb
++++ b/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.11.bb
+@@ -16,4 +16,4 @@ GIDOCGEN_MESON_OPTION = 'docs'
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[sysprof] = "-Dsysprof=true,-Dsysprof=false,sysprof"
  
- inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
- 
--SRC_URI[archive.sha256sum] = "27970ad4f58eb0a48fb01bffb89a8f472503641c3573eb6d788ad4042de01120"
-+SRC_URI[archive.sha256sum] = "390ae9e7540f71db28a3dc64319a8f687f4d88bd4d5f1ff816b7a9f2249ab4aa"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
- PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
+-SRC_URI[archive.sha256sum] = "56e3f01a3a18b575beea4c34349f99cdaba316e1f7c271b1231f7bcf5d9af73b"
++SRC_URI[archive.sha256sum] = "52e53ec3fba0f604cfd0931e26af7f7241a0d4f0208dd5574f43b3589f6d28b2"
