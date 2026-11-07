@@ -1,214 +1,194 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11962.1794070352884046987
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11957.1794070346141964863
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 08:52:33 -0800
+ Sat, 07 Nov 2026 08:52:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=RNO/e/gN;
- spf=pass (domain: konsulko.com, ip: 209.85.221.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4919a880834so879445f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:32 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=CSLPssZX;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4922523d1afso911863f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 08:52:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794070351; x=1794675151; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=W8d5K8nEQP6K2G6K2MVvCnYnBbR0c83fusIMaKN+wGM=;
-        b=RNO/e/gNAWSUkMZX3zxVXGISwokEH1HLwXyxMB+LV+l1kqXlpIVj69BLwHYjcNfaEI
-         yLtZR3JDgiEvqkSXCq/FcbrWtXISbBN3/tx5feeHLmIhlHbEBHNCwJEHpkzz1xNHxaVD
-         PpDQkIs3s6Bte7cTqhx3vArpBCWWINoKOqbyI=
+        d=konsulko.com; s=google; t=1794070344; x=1794675144; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jWFajFhdglE8Hpfwq7t/ETBT1NQPBZT988j3gthdutw=;
+        b=CSLPssZXLrmC7DeA/knnpblh0Oxm5yg5JpchC5NU0utzFaodfbh7gbGsrAR9zNE38W
+         2Wn0GAtNcY4UXn9c88h8GlHirp6t4KXEFCPp1R848ca2FIrPdlWKBYp97C+8Dgl01QQ6
+         ALiBKrcZM32DXoFZxRxnK0gpG2lHsIIIC6EuA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794070351; x=1794675151;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=W8d5K8nEQP6K2G6K2MVvCnYnBbR0c83fusIMaKN+wGM=;
-        b=DzSURkb4S3XnrCpWKdzjxHvQjJ2Z1h57Tds4aTNcAxCZ7sI0TkvQQpCdSmo9VirRic
-         yoG8h50neQsVOfyrnekunIQKlbybBBZ7eXYMbSIH1SU9qWkeRXLpeUe5N/kt0StHC5AW
-         c81Oh8rKphUsJt9tBijW+6RJWux/FjgMhpPjKmAdgP0hYAzfoBhuZx+DH1ixTWYtjPgl
-         y1/KX0ykLehoP0NcFMD/npoUHBS2oUTqSKC//fCtWyb55B2YnckcJiCSJ5m6bXDZ9l+q
-         vTxkQAsgcIkNAI8CqDFzNo+0rYlELQfQ5o8ADFeCU44c73yE1zlUy0DLY/mm7QQZNNsH
-         K+Mg==
-X-Gm-Message-State: APuU4Z+7SO1uqfYo72SJX/3PrlJMpmPQjaC/kUnJvUZZ1ew4u6nUMnxt
-	NJC9d6FSNcKBzreZR+boeT8fPR4HxBOIEYVtA6qYwt0Khhl923eDiCJosEPYUmfvcF1Ywe6tcc2
-	dLfBi
-X-Gm-Gg: AYBFou0Nphe9YAYaVQmmy32zx8C/5EGPBgCX64jYm2QJtT8TRbctZTQt4Ejvbt3ktAU
-	oRddlu+MKhiiFXBoK6qSLgVVn8QQxfRP2W3ZdvhHZDndIVrnU42Ip4NSr1fRIB+3EuUahLJv2qD
-	UMENSlesFvj0XGPAa9drnk9yhgb4nXZMdXEMjtcmD2Xasc9GzlAzjYqlaRfsDn/cimUnM/7QzlF
-	RTe2QWMJV84Oi6zNcuIiyFzjEpPC/ZqmpLA7hfHq7N84iurYGhkfnCK5KyQzT7ZoQwL/Fqw6UNG
-	9Wlk4m/OPFF2siVEc52NgdAGETO+ogk8LpqwnK0AS3zl/QMcSRU2+X9H1OE59NAmF29Dxc7UmR/
-	e96Jv69qsD7Wk0AXf1+NLZ5nPNPJEQOSm9kYz9xfO9BClh5A8pZ8QeknOtQU2qvhztjqr2MfBAf
-	Q75HUpIyFPqPjFWHBdScvzcA3qEzwpHLQCOyYKAibfCFCIavSkr98E4HmUK3rvLJGdk3vNQpoXX
-	m4JixZy10SD8pfoY7anOjcUvv6hUpaej9QWx9NosiCWs7lUfhUrEosilr1EcJ71pV59gMhfqDXU
-	Znf04l1P2AIQpb2TXxUP/5EdVev5y6m9ZornbmK/mKiYeBT5001R6aBtn6ldyJzzHRhyFkTiY9F
-	ludErjMppco5exSD3Ht+/YN9nO2FruAV8JKng18QyTK4QH1CtJUQ3LQ==
-X-Received: by 2002:a5d:5d13:0:b0:48e:6f84:2e8e with SMTP id ffacd0b85a97d-49275eeefc2mr8251624f8f.39.1794070351128;
-        Sat, 07 Nov 2026 08:52:31 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794070344; x=1794675144;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jWFajFhdglE8Hpfwq7t/ETBT1NQPBZT988j3gthdutw=;
+        b=pwdk7+3od8TPfZwH9APUEuTXI1XzpGDDlqwQyMWlipklNByZPBqpJTubqQKcbI8dla
+         wjMW7Cnzs40L/C/fwaUYf43p8cDHNSjsC+8hn2tkJ+w91Opx5RWDP9tEFLddsod35cl2
+         AHqQN0g3D1RPLGpbvuK/QHqnfqpmuAlROd2pZ26mQhpgJGN8bwIJKTHr/waJU55f1x5C
+         WQBMBVYD8gr6eSJCLWgp2jLLrLN9iRqIbjoBkb8o4HMn6E5RGU8Jfl38jApHM0j2/XBK
+         JfTvLifGl2eMbx/7tQC55cjxl0RMZW9FmZGsRPGBTdJNnNWQn5Up6KeGScjAby3mXqYA
+         mnYg==
+X-Gm-Message-State: APuU4Z9rqnRNnUbr0lqEfIX6RiZl3Oziy9NpUiZLy1AIb6xRI883OOax
+	IcfDm7Uvll0bh43vDRQfmo1lr7rvyWDeK1MllKWEZX8HVFNd1Hg21TRFjElYfjudgb2OJKvdkAo
+	rd36x
+X-Gm-Gg: AYBFou3xJX9OiHPkTXqsj+1lDEiOyjyl/0yM30vHkIpcgDjq2kOdv2vLpA0QDhR5v+g
+	GH3IytvGyt5lYa6DQsapp+fwj8pxuOihXlDc7bZ3HCDAZo0ukzh72S/MB1Mnl55uJJ1u7p50pE0
+	FZZS9t0lx3LFPW1ty8M2idkkIVOIxpi7Mh575gpc8tMoELJ5uxSt3TNLUjbFAhqcXGKGmWqMPHw
+	RUTMSj+tceyxEUy16Nn6Ycd8H/KhrGTQ0w32jyVneF6QejeCYsmU1OMvqi1hmsGluuARqaA/UIQ
+	RuhJCbyYnd0AIUIIkK4+AhiFl8rrSRXuVxgQs2OXO7IpMYXtmfJxRHlXEM6Beli5ZVMCKICHFpN
+	jFhgdojhXgmcWbqXWOPqk3D3mXfplxTnyA7Wx/M/zGhWg4TgryNQv7rF0Xtjqfpy8tpKynWp4bK
+	LwLeJi3q9/sz67QC+eqQw/xoDZjweUubgTnlO5aC/HfzDRoI8iUVRocC+3tyLEE9z0Hyq4knH2p
+	6GCcEfpHIfZ6E1ljGNcjw5McSgMwjXu3WwVtC1hezthMN44G9Eh33eBjt1Xon5S78jNDRnPj1PU
+	evh0WwwTmVsphpw4aozL5bYPKoVs+G1NzIST4AYMkIWDweUQBDXXlvge4kId3DDIotbnIwZyzMh
+	EFVrWg0uDh0j9Em4qwIK+3/pa2PT7tKu+Yg9/mO0aelbz2OKjGkoqoA==
+X-Received: by 2002:a05:6000:381:b0:490:83b9:7888 with SMTP id ffacd0b85a97d-49278b08d1amr11837493f8f.52.1794070344090;
+        Sat, 07 Nov 2026 08:52:24 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4948a99b9b0sm4127090f8f.4.2026.11.07.08.52.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 08:52:30 -0800 (PST)
+        Sat, 07 Nov 2026 08:52:23 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 08/22] gsoap: Upgrade 2.8.144 -> 2.8.146
-Date: Sat,  7 Nov 2026 18:52:07 +0200
-Message-ID: <20261107165221.122340-8-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 01/22] asio: Upgrade 1.36.0 -> 1.38.2
+Date: Sat,  7 Nov 2026 18:52:00 +0200
+Message-ID: <20261107165221.122340-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261107165221.122340-1-leon.anavi@konsulko.com>
-References: <20261107165221.122340-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 16:52:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131993
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/131986
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 2.8.146:
+Upgrade to release 1.38.2:
 
-- Update compile-time configuration option `WITH_SELF_PIPE` to use
-  `poll()` when available.
+- Added a `"scheduler"` / `"assume_continuation"` configuration
+  parameter. When `true`, the scheduler assumes that all posted
+  handlers are a continuation of the currently executing handler,
+  allowing them to be added to a fast thread-local queue. This can
+  improve performance for applications that exclusively use
+  short-running handlers.
+- Added a `"reactor"` / `"io_uring_ring_count"` configuration
+  parameter.  This sets the number of independent io_uring
+  instances ("rings") that a single execution context maintains
+  internally. Increasing this parameter from its default of 1 may
+  improve scalability when the execution context is used with
+  multiple threads.
+- Added a `"reactor"` / `"io_uring_ring_size"` configuration
+  parameter, which is used to specify the number of entries in each
+  io_uring instance.
+- Added a `"reactor"` / `"io_uring_submit_batch_size"`
+  configuration parameter.  This sets the number of pending
+  io_uring submission queue entries at which they are submitted
+  immediately, rather than deferred.
+- Added a `"reactor"` / `"io_uring_iowait"` configuration
+  parameter, which may be used to determine whether the thread is
+  marked as being in iowait while io_uring operations are pending.
+- Added the ability to configure `ssl::stream<>`'s internal buffer
+  sizes.
+- Added `asio/fwd.hpp`, as a way to safely forward declare some
+  Asio class names, even when `ASIO_ENABLE_VERSION_NAMESPACE` or
+  `ASIO_VERSION_NAMESPACE` are defined.
+- Added an example for using `cancel_after` with coroutines.
+- Changed all exception classes to use inline implementations, to
+  fix an undefined symbol error on some platforms when using
+  separate compilation.
+- Changed constants and CPOs to use external linkage for C++17 and
+  later.
+- Changed "slim" mutexes to use futexes on Linux.
+- Changed the reactor send/receive path to use `MSG_DONTWAIT`, if
+  supported, rather than setting the socket to be non-blocking.
+- Added a missing optimisation for `concurrency_hint == 1` in the
+  `io_context` class's `poll_one()` function.
+- Added support for `co_composed` under `ASIO_NO_EXCEPTIONS`.
+- Fixed a `co_composed` crash on MSVC that occurs when using
+  multiple completion signatures.
+- Fixed a `co_composed` crash on MSVC by ensuring 16-byte block
+  alignment in its internal coroutine representation.
+- Fixed the return type on one `cancel_after` overload.
+- Fixed integer truncation in `basic_streambuf::commit`/`consume`
+  for sizes greater than or equal to `INT_MAX`.
+- Fixed a buffer invalidation error triggered when SSL streams are
+  moved, and clarified the buffer invalidation semantics in the
+  documentation.
+- Fixed a compilation error, seen with some compilers such as
+  [^nvc++], that occurs when using `post`, `dispatch` or `defer`
+  (or an asynchronous operation built on them) with a completion
+  handler.
+- Fixed `parallel_group` handling of non-terminal cancellation
+  requests.
+- Fixed thread sanitizer warnings due to atomic thread fences, and
+  added thread sanitizer instrumentation to the io_uring backend.
+- Fixed a signed/unsigned warning in `basic_resolver_results`.
+- Fixed `experimental::channel` compilation with older versions of
+  MSVC.
+- Fixed the `multicast::enable_loopback` socket option size on
+  NetBSD and OpenBSD.
+- Suppressed case fall-through warnings in the SSL implementation.
+- Fixed standard library coroutine detection when using
+  [^clang-cl].
+- Improved cross-referencing within the documentation.
+
+License-Update: Update copyright years to 2003-2026
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-signature-on-non-glibc-linux-musl-s.patch | 46 ++++++++++---------
- .../{gsoap_2.8.144.bb => gsoap_2.8.146.bb}    |  2 +-
- 2 files changed, 25 insertions(+), 23 deletions(-)
- rename meta-oe/recipes-support/gsoap/{gsoap_2.8.144.bb => gsoap_2.8.146.bb} (94%)
+ .../0001-tests-Remove-blocking_adaptation.cpp.patch   | 11 ++++-------
+ .../asio/{asio_1.36.0.bb => asio_1.38.2.bb}           |  4 ++--
+ 2 files changed, 6 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-support/asio/{asio_1.36.0.bb => asio_1.38.2.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
-index a57b3ff23e..b64009b6d7 100644
---- a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
-+++ b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
+diff --git a/meta-oe/recipes-support/asio/asio/0001-tests-Remove-blocking_adaptation.cpp.patch b/meta-oe/recipes-support/asio/asio/0001-tests-Remove-blocking_adaptation.cpp.patch
+index 5aa502916d..b1e91d9981 100644
+--- a/meta-oe/recipes-support/asio/asio/0001-tests-Remove-blocking_adaptation.cpp.patch
++++ b/meta-oe/recipes-support/asio/asio/0001-tests-Remove-blocking_adaptation.cpp.patch
 @@ -1,4 +1,4 @@
--From 2b7a51556185539a0f9baef0f109e0814933d6b3 Mon Sep 17 00:00:00 2001
-+From 2deca92607b4f399510e7e23c79192ebe3d2d15d Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 19 May 2024 17:11:20 -0700
- Subject: [PATCH] Provide strtod_l signature on non-glibc linux ( musl )
-@@ -11,16 +11,18 @@ the automatic __GLIBC__ detection this patch adds is still needed on top.
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- gsoap/stdsoap2.c   | 8 ++++++--
-- gsoap/stdsoap2.cpp | 8 ++++++--
-- 2 files changed, 12 insertions(+), 4 deletions(-)
--
----- a/gsoap/stdsoap2.cpp
--+++ b/gsoap/stdsoap2.cpp
--@@ -74,6 +74,11 @@
-+ gsoap/stdsoap2.c   | 11 ++++++++---
-+ gsoap/stdsoap2.cpp | 11 ++++++++---
-+ 2 files changed, 16 insertions(+), 6 deletions(-)
+-From 7d76513b82a67e117d195a1b5a0d6c2e8591488b Mon Sep 17 00:00:00 2001
++From 125f69ba681677d50061dcb2554dcb2970d9165d Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+ Date: Thu, 10 Oct 2024 13:58:38 +0800
+ Subject: [PATCH] tests: Remove blocking_adaptation.cpp
+@@ -21,17 +21,14 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+  1 file changed, 1 deletion(-)
  
-+diff --git a/gsoap/stdsoap2.c b/gsoap/stdsoap2.c
-+index 554b059..f4fcfd7 100644
-+--- a/gsoap/stdsoap2.c
-++++ b/gsoap/stdsoap2.c
-+@@ -74,6 +74,11 @@ A commercial use license is available from Genivia, Inc., contact@genivia.com
-+ 
-  #include "stdsoap2.h"
+ diff --git a/src/tests/Makefile.am b/src/tests/Makefile.am
+-index 04f8a03..eab2d56 100644
++index 32b67f2..e972c7f 100644
+ --- a/src/tests/Makefile.am
+ +++ b/src/tests/Makefile.am
+-@@ -68,7 +68,6 @@ check_PROGRAMS = \
++@@ -74,7 +74,6 @@ check_PROGRAMS = \
+  	unit/error \
+  	unit/execution/any_executor \
+  	unit/execution/blocking \
+ -	unit/execution/blocking_adaptation \
+  	unit/execution/context_as \
+  	unit/execution/executor \
+- 	unit/execution/invocable_archetype \
+--- 
+-2.34.1
 -
-+ 
- +#if defined(__linux__) && !defined(__GLIBC__)
- +struct __locale_struct;
- +double strtod_l(const char *__restrict, char **__restrict, struct __locale_struct *);
-@@ -29,7 +31,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  #if GSOAP_VERSION != GSOAP_LIB_VERSION
-  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
-  #endif
--@@ -5460,7 +5465,7 @@
-+@@ -5467,7 +5472,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
-  {
-  #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
-    struct hostent_data ht_data;
-@@ -38,7 +40,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-    int r;
-    char *tmpbuf = soap->tmpbuf;
-    size_t tmplen = sizeof(soap->tmpbuf);
--@@ -5493,7 +5498,7 @@
-+@@ -5500,7 +5505,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
-      hostent = NULL;
-      soap->errnum = h_errno;
-    }
-@@ -47,7 +49,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-    while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
-    {
-      if (tmpbuf != soap->tmpbuf)
--@@ -23409,7 +23414,7 @@
-+@@ -23432,7 +23437,7 @@ soap_strerror(struct soap *soap)
-    {
-  #ifndef WIN32
-  # ifdef HAVE_STRERROR_R
-@@ -56,12 +58,14 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
-      if (err != 0)
-        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
----- a/gsoap/stdsoap2.c
--+++ b/gsoap/stdsoap2.c
--@@ -74,6 +74,11 @@
--
-+diff --git a/gsoap/stdsoap2.cpp b/gsoap/stdsoap2.cpp
-+index 554b059..f4fcfd7 100644
-+--- a/gsoap/stdsoap2.cpp
-++++ b/gsoap/stdsoap2.cpp
-+@@ -74,6 +74,11 @@ A commercial use license is available from Genivia, Inc., contact@genivia.com
-+ 
-  #include "stdsoap2.h"
--
-+ 
- +#if defined(__linux__) && !defined(__GLIBC__)
- +struct __locale_struct;
- +double strtod_l(const char *__restrict, char **__restrict, struct __locale_struct *);
-@@ -70,7 +74,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  #if GSOAP_VERSION != GSOAP_LIB_VERSION
-  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
-  #endif
--@@ -5460,7 +5465,7 @@
-+@@ -5467,7 +5472,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
-  {
-  #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
-    struct hostent_data ht_data;
-@@ -79,7 +83,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-    int r;
-    char *tmpbuf = soap->tmpbuf;
-    size_t tmplen = sizeof(soap->tmpbuf);
--@@ -5493,7 +5498,7 @@
-+@@ -5500,7 +5505,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
-      hostent = NULL;
-      soap->errnum = h_errno;
-    }
-@@ -88,7 +92,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-    while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
-    {
-      if (tmpbuf != soap->tmpbuf)
--@@ -23409,7 +23414,7 @@
-+@@ -23432,7 +23437,7 @@ soap_strerror(struct soap *soap)
-    {
-  #ifndef WIN32
-  # ifdef HAVE_STRERROR_R
-@@ -97,5 +101,3 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
-      if (err != 0)
-        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
----
--2.43.0
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.146.bb
-similarity index 94%
-rename from meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb
-rename to meta-oe/recipes-support/gsoap/gsoap_2.8.146.bb
-index 5d4c99256b..ca9919f4d0 100644
---- a/meta-oe/recipes-support/gsoap/gsoap_2.8.144.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.146.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7eaf5d4df67c0db38549ba3c714a37d6 \
++ 	unit/execution/inline_exception_handling \
+diff --git a/meta-oe/recipes-support/asio/asio_1.36.0.bb b/meta-oe/recipes-support/asio/asio_1.38.2.bb
+similarity index 89%
+rename from meta-oe/recipes-support/asio/asio_1.36.0.bb
+rename to meta-oe/recipes-support/asio/asio_1.38.2.bb
+index bd23e5b112..ef2341a67a 100644
+--- a/meta-oe/recipes-support/asio/asio_1.36.0.bb
++++ b/meta-oe/recipes-support/asio/asio_1.38.2.bb
+@@ -17,9 +17,9 @@ inherit autotools ptest
  
- SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
-            file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
--SRC_URI[sha256sum] = "b981818fbbd4bf9f6f4feac03136800f6e16a7d0b7515924ff7a2661ca26e581"
-+SRC_URI[sha256sum] = "821af2ecfb93ca9dbd9bdae67fa0d57f9165fb4252bb40e23cd510dc4d49ec98"
+ ALLOW_EMPTY:${PN} = "1"
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/${BPN}2/files/"
- UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)\.zip"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=92db288d8a7d89bb9c5821c447c3052c"
++LIC_FILES_CHKSUM = "file://COPYING;md5=068306999fcd4c4f2ba32622dae406ac"
+ 
+-SRC_URI[sha256sum] = "7bf4dbe3c1ccd9cc4c94e6e6be026dcc2110f9201d286bb9500dc85d69825524"
++SRC_URI[sha256sum] = "c04e0e66ac29741faad763a56f3c50196421d4b968009fc237c53314769bf8ad"
+ 
+ # Releases live in per-version directories named "<pver> (Stable)" / "<pver> (Development)",
+ # so match only the stable ones.
 -- 
 2.47.3
 
