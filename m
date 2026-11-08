@@ -1,99 +1,131 @@
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4454.1794171088975459442
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2896.1794165955149087413
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2026 12:51:29 -0800
+ Sun, 08 Nov 2026 11:25:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=FVnq36bn;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-36eb1cb7aabso366020eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 12:51:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794171088; x=1794775888; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pCpVIrld6rmjN+d4sIoJ4F/d+zvJQwLA89uA0EJw7Qs=;
-        b=FVnq36bnAK7FwHVTghrB+o4QHLfry+DCZ2yWI50g7JODibZjHSW8OVTy38BT1KNk/b
-         bx/pHeWxTvoBl1OjeNGmkYBXR+AFJYZFS9XPniPF9jYY/9tcuPW+AtTmaDzKMa6C1ZeT
-         Buvh04M5rk6s1jSuunX2uNNzs9r0ozEWeq7/19sC3J31YUwJiWOo+WBNBC/VxCBH3gdQ
-         GvOMXAb6FiNHHJWjUBtY8BYTGsxt50Kq18bghWlTO2qoxoMXoeZlqmL6xIftMhl0prme
-         kqPAHMIRp8fc4Q4q6NyflkjO6eN8M4a+qzDLP+uQrM8+cNpBhmkgoRbev93nfRk4H4Nh
-         FrpQ==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: roosesweb@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a5036bbac7so1314915e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 11:25:54 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794171088; x=1794775888;
+        d=1e100.net; s=20260707; t=1794165953; x=1794770753;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pCpVIrld6rmjN+d4sIoJ4F/d+zvJQwLA89uA0EJw7Qs=;
-        b=GZqfNzAkWPww9dRoS+u4TcuvC0NVUFkNHIgHGH7BMICQcuERMNOVwEehw8MmnRTp2X
-         T+liFp5vdXnXcEVQNfHnhmUcGYTkGiFc038CUKNmYosd2lNhQ1lIhzZEXOs/dBBbJcKA
-         6zEAy1PS0Ti+3Ib5EstS0hnMbne6+ehtZzEmga79fEMqj33CQgLWJFddZta5+1micJMH
-         Jks7S4vpeJ5zt0qJ6rAvg6UXPwPw1Wq/ERhW0w1AsvbPp9u50hm5G3/rmHwgjVBfPjjW
-         MNzsz9AARJt1F0alqPcg6KIkxW1puMU90m3CzUxMl+Hg/Zk1CkO2k5hnPffgF6lDTk1k
-         wLfA==
-X-Gm-Message-State: APuU4Z+VXV5FtvhYSuMjdeWhUlCTVPbZIW+FAy+SqXWJEClrSBxcg7Qi
-	UNo+QiKYMrrFYIIOk+DJ5iVui/ktCeJnUxqRGj96rdX8es4bO7V3OmoBe9hCIQ==
-X-Gm-Gg: AYBFou3Y9E4lGdSXy1d/Qqu3dryys99+zgmEOC7FQyjgd26N2fBG4PW2JV+VnmUDCKN
-	UwzH8yEGbq5RwOQXDTfzVRw/8XFTsK1kLmutgs3F4c1eQQzQxSHFyhbJaZTJiIcuTGoJwudxS2E
-	kU2CI+fbTHznjcKNbyreHovg10Wkysmx55uBy8niSkTEzPLBy7CLiORSj0D4u391SAI96PXucS5
-	8nNzkSAFipxx/nyExD0GZ5d/cWc9sS4d9bu9ZomOxHov6r7mg9Gb84u4FNfpiZv4hkwczQTlGTm
-	N6Lt6CNZT14kS1aTLAb/PbkSa7IOA3e3Yu1R7LUF5oH8v5GcfTx887jsBb/tQdWmk1IsrWJ9Nf9
-	MMaRyNCT9IrHZrgC0rvKnpt1tXAiSODzrf/ySl3Py5YOWw+9GSJFk84fbJ3X0aGzCza4FqWc8kj
-	YRyH50sXs42tYcW9JjXWWeiboPpsmtZkfws9ujXJCvaNToJieN44o3sto5jROQPE+JhHnNf+MFm
-	88Po3GIsftMJCJ47qZXWAbhslc6wWkdfzxZ3pkGVEIpK35qrwTkFZAUa4rLawBXThVJgHLaeHF9
-	0E0d/4yRCq1XbT8CuATReDOay5BlY4dqRuptg58UZLPj7P0NM7JHNBAnNR5ibw==
-X-Received: by 2002:a05:693c:42dc:b0:36f:4981:da16 with SMTP id 5a478bee46e88-37255a514c7mr4568935eec.25.1794171088132;
-        Sun, 08 Nov 2026 12:51:28 -0800 (PST)
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.9])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37265d05514sm7222876eec.15.2026.11.08.12.51.26
+        bh=eAEZ7Kzcw4QKE42iufg3BnTuhu+NhTVOegHjM1oJpac=;
+        b=kqcoKnGIO3K30VIi1+Oj85Rq8Bj+gQrC0cfHDfauqq+Jvn6W5frLXFOXmF6aK519t5
+         9hVLpw3mtE6FKZkDS2VQt4PW224rV+Lu6X4vfV6upaCXB86XI3QVb2mR9tvjF8LXraMY
+         DY1zJoYmY1m4bIEV1k9XQUnxYETykgX9SvmttPtDeiu9puLJjgvMHR4NPut8EI9yqLBZ
+         JXoFRJqf/2LTixn9Ztde6+8/r/Md8qJ7CbuzEccGIw9M24S4ABZjQd7mmSzCOYKUfwwI
+         qiWPcg7hvrMufl906e79XHXVjFb98NSFRQgyBBLN6BTYuO05a1uqpghzc9Z752o4lpeq
+         jD9A==
+X-Gm-Message-State: APuU4Z8SW5ieavfsgTcpy7sgjWea3kAcEyb7wkoTR6DAG66fHS8LDnba
+	nDUzpRX2/O0EkBnGqMFGQ3bmYxDRS2Jv13O97fcg7WrjgxRerFR/bdPf5/+MQg==
+X-Gm-Gg: AYBFou06i7k8o8+qYvBRPvnOuyXjjgz0NQeuO84h4Mm1zIT+yuIRO//ajfpC/lMQLoL
+	8tKIWRF6M3yip/A9f7DAJJm4ytuLDoVWFQm7j6YeVGjIsXNuMCoqfUH9EtpIkH3dQc1TyD54l8x
+	xl6vOceJ+CrYkXXQhIm1CaBsBkHuY7SF08oM9PqdAoZAtx1P7ghy1jQGLkPrziso56pI7LwwP8H
+	McDBR/s82kYDHizXCPQzkZOftJPzPEZtpZYNkkUHXkT4heGe1XOkft58Y9LPedPD+TUzWixWIl7
+	Q62bDVg5hcX0xOIfYqmhCnUxrj6mb9KTaVrYxi/575aK9sG3BHumyprMc2YuOk1Bo9QHLZ2TWTe
+	TcYg7om7k7KZxx30ttBpaXnfSpUzP0zH2StNlqroJ/ed6cHkIeek7GuT6AXsbm6mRYoCZnCp30y
+	DNDhZEQ2TsV0dCjFLuMGUPOOxvwgmJcqht3FB5jSll5ndcCv1HMmPL0RzPOZVj0YbH7jrY0a7PY
+	4JgvkeBwz9OTedEhYVgkOyK2t5Yc/hW7oaJJ9yx1ZOIdnQv+89zhFxFYfGtQYGW7v4/5MHivZjC
+	c9oFIDzaXOU42Y5WlMis7UtDalbWvP17GUzf32jY1veQgECSGeyyu+maeb1lgQkXaoYtBtJQoBe
+	nANxoxwNZlqnrUneu7VXE9rIyAG5Il5QUarZdvFiv5yAxd+YrfzanjF1L1w==
+X-Received: by 2002:a05:600c:c174:b0:4a3:5a42:b2a4 with SMTP id 5b1f17b1804b1-4b963c675c1mr42833875e9.12.1794165953182;
+        Sun, 08 Nov 2026 11:25:53 -0800 (PST)
+Return-Path: <roosesweb@gmail.com>
+Received: from mother.tail4535.ts.net ([2a02:810d:ae08:d00:e5a9:b4b9:ba2:5901])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b7efb1a517sm160930535e9.12.2026.11.08.11.25.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Nov 2026 12:51:27 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+        Sun, 08 Nov 2026 11:25:52 -0800 (PST)
+From: "Thomas Roos" <roosesweb@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][PATCH 1/1] apache2: upgrade 2.4.69 -> 2.4.70
-Date: Mon,  9 Nov 2026 09:51:21 +1300
-Message-ID: <20261108205122.414671-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Thomas Roos <thomas@roosesweb.de>
+Subject: [meta-python][PATCH 0/6] Fixes for pika, pint, haversine and httpx2
+Date: Sun,  8 Nov 2026 20:25:43 +0100
+Message-ID: <20261108192549.1082715-1-thomas@roosesweb.de>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 20:51:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132014
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 22:37:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132015
 Content-Type: text/plain; charset="utf-8"
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Four recipes in meta-python install broken or wrong code. I found them
+while upgrading meta-homeassistant to Home Assistant 2026.11, but the
+fixes do not depend on that:
 
-- mod_authnz_ldap: Fix crashes in 2.4.69 reported on Windows
-- mod_cgid: Increase limits for number and length of environment variables,
-  URI and arguments
-- mod_substitute: Fix an integer overflow that can happen in very special
-  setups
-- mod_cache: Do not store a response whose "Vary: *" was set via
-  "Header always"
-- mod_dav_lock: Fix a heap buffer overflow in dav_size_indirect(), which
-  under-reserved space for the stored key length field, written as
-  apr_size_t but sized as int
+- python3-pika: the 1.4.4 upgrade only changed the unused sha256sum, so
+  SRCREV still pointed at a 1.4.2 era commit and the package installed
+  pika 1.4.2 under version 1.4.4. SRCREV now points at the 1.4.4 tag
+  commit, and tag=${PV} lets the fetcher check that.
+- python3-pint: flexcache, flexparser and typing-extensions were only
+  pulled in by the ptest, so "import pint" failed on an image without
+  the ptest. flexcache and flexparser are extended to native and
+  nativesdk like pint; without that, python3-pint-native fails with
+  "Nothing RPROVIDES 'python3-flexcache-native'".
+- python3-haversine: numba is optional, but haversine only catches
+  ModuleNotFoundError. numba 0.66 (meta-python-ai) raises ImportError with
+  NumPy 2.5, which broke "import haversine". The patch catches ImportError.
+  Submitted upstream: https://github.com/mapado/haversine/pull/91
+- python3-httpx2, with the new python3-truststore and python3-httpcore2:
+  httpx2 requires httpcore2, anyio and truststore, but did not depend on
+  them, so "import httpx2" failed with "No module named 'httpcore2'".
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../apache2/{apache2_2.4.69.bb => apache2_2.4.70.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.69.bb => apache2_2.4.70.bb} (99%)
+The series is independent of the "Python updates for Home Assistant
+2026.11" series sent at the same time; both apply to master on their own.
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb
-index fba4667bd1..f34d622495 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.69.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.70.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "c5e6ebc66e349b87d7fc6916ae7cc2a808ed348003de134cf9e9d89d3e2cc73d"
-+SRC_URI[sha256sum] = "1eefd7dc95836c5872894ce8e6a37f773d5a6764f0766869d39b8bcf0b1bafc3"
- 
- S = "${UNPACKDIR}/httpd-${PV}"
- 
+Related changes for the Home Assistant 2026.11 upgrade:
+
+- openembedded-core: python3-cython 3.2.9 -> 3.3.1
+  https://github.com/thomas-roos/openembedded-core/commits/ha-2026.11
+- meta-openembedded (meta-python): this series and the updates series
+  https://github.com/thomas-roos/meta-openembedded/commits/ha-2026.11
+- meta-python-ai: 7 upgrades
+  https://github.com/zboszor/meta-python-ai/pull/46
+- meta-homeassistant: Home Assistant 2026.3.1 -> 2026.11.0
+  https://github.com/meta-homeassistant/meta-homeassistant/pull/207
+
+Testing, on top of master b5d60afb63:
+- built for qemux86-64 (x86-64-v3), together with meta-homeassistant's
+  core-image-homeassistant (Home Assistant 2026.11)
+- ptests pass for flexcache, flexparser and pint
+- in the running image, Home Assistant starts (it imports httpx2) and
+  all its integrations import, including the geo_rss_events and geojson
+  based ones that import haversine
+- python3-pika: built; the installed dist-info now reports 1.4.4. It is
+  not in a ptest list of meta-python, so its ptest was not run
+- checked with bodnuti: patchtest pass, no oelint-adv or shellcheck
+  findings
+
+AI disclosure: the patches, commit messages and this cover letter were
+written with Claude Code (Claude Opus 5.5), as the AI-Generated tags in
+each patch say. I reviewed every change, ran the builds and tests above,
+and can answer for them.
+
+
+Thomas Roos (6):
+  python3-pika: build the 1.4.4 release
+  python3-pint: add missing runtime dependencies
+  python3-haversine: keep working when numba fails to import
+  python3-truststore: add recipe
+  python3-httpcore2: add recipe
+  python3-httpx2: add missing runtime dependencies
+
+ .../python/python3-flexcache_0.3.bb           |  2 +
+ .../python/python3-flexparser_0.4.bb          |  2 +
+ ...-pure-Python-kernels-if-numba-fails-.patch | 40 +++++++++++++++++++
+ .../python/python3-haversine_2.9.0.bb         |  1 +
+ .../python/python3-httpcore2_2.16.0.bb        | 26 ++++++++++++
+ .../python/python3-httpx2_2.16.0.bb           |  5 ++-
+ .../python/python3-pika_1.4.4.bb              |  6 +--
+ .../python/python3-pint_0.26.2.bb             |  5 ++-
+ .../python/python3-truststore_0.10.4.bb       | 13 ++++++
+ 9 files changed, 93 insertions(+), 7 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-haversine/0001-Fall-back-to-the-pure-Python-kernels-if-numba-fails-.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-httpcore2_2.16.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-truststore_0.10.4.bb
+
+-- 
+2.56.0
+
