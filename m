@@ -1,101 +1,107 @@
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2218.1794083303765526502
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15076.1794153707109519760
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Nov 2026 12:28:23 -0800
+ Sun, 08 Nov 2026 08:01:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=N8kGO9fL;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-6798af41644so8587d50.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 12:28:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=RDnNiH7R;
+ spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-1931ff67a29so434523c88.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 08:01:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794083303; x=1794688103; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PiBcUdF2PF9cVsZnI809ztj95PSWSxodQclIU6sOJHc=;
-        b=N8kGO9fL015DIunDbyV3kqQ+3G24IuMIoDX16I41b8FpaWvc/TGJDspZrdROugHEA6
-         RF400B5E6pvh5k9tg329ASLR8HJOR/RIZ9YASbuU3Jg33cW/s9vb3DcT0WV8ItNNfge4
-         6DFJZ91HLqSmQwpx0Zb5AX0b2LuM2iIbb0XgdmIP/0aZZ8/RwbpU9HjUtkmNbp04tgFs
-         Bmf1+2nqZo6Js/fGzvTz2+K/lkfHTMqLv9fJGmPClK45uTJLqBVwPNWF8RAs8eot0vf5
-         Rup/E4tO2oDJDVJSnlhk39Kpybn2EFZMeZhy4k6JG4WzqKrIoBCKk96uRmWQVfCg9fSR
-         v4kg==
+        d=gmail.com; s=20260707; t=1794153706; x=1794758506; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=yzpY4jpxsbOXB0n3WFtkm86CIVYphAlGCowPTuk7Soo=;
+        b=RDnNiH7RhImOaa/tadUyEhcVz4RYiW5ozVAs+z7XGNROEVb3FeK3zukoFjuKrCAJEK
+         mAJ7/CzjgX5XlY5y2wM9yl387teTGHjq/+q80PyBaXOngP7jt4i0Pgjlg+KevCHHi6xo
+         WRbwfTeBOnec3Hn7nt+mFyVZPFG4RkAGl2fCstgv9MoLHyBmsChf7vO/GGRv+Z+bcV08
+         QkSvAqvXuFcIkuca8mrXW0IEUltBei0pRVw5wHgtdQuDP9+glU95uJMOvll16hiULMwg
+         M4aKJtI1tx4dbtTDh/Zx0hiBu1loGN5EbELKHXf+WlHfrC9mKft2fp8sdRDRUF8BdKJ3
+         9Aqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794083303; x=1794688103;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PiBcUdF2PF9cVsZnI809ztj95PSWSxodQclIU6sOJHc=;
-        b=bG94J4+6V+X73zR/nCa9z+sJgdQngaKigXyffeqiS9loDmaHGekZw2R9ySixXX6rOy
-         Wcw5K46p8JPotzyk1ybvgxrW96QFp/hmz8SPw752gIAWTz6m2n2VnTR4Xg3IeojaLND7
-         Sk51Ty30tkTK2+obmGZfnwBaJFQLjThFCf9XYBGLZsv3Vu+JuvWjFErEW9tcwrjRYBdY
-         6qrkdDf1t4jwZ6rtxLXBf2ZGBGHmPGXQjH0mEFFKHbzvZEMLsvVv0NWBavYM5d30GTA6
-         XyAgN0JjTl3tx95tDB83LuF2wJ5+LHQSM1gjjTfL+rJqjY8feAbuif5lKOBSvc7GEy/9
-         M5Kw==
-X-Gm-Message-State: APuU4Z+3E0iiIRqJziELw9rE8VZYEbMb5K2ByZTinQ+X7w7LTXHoaFUM
-	n45JMQoR9YAw4c60TSBYd4Pjfkrj+bYE4UipQaZmSkwfcaraRUus/WHaWhPqGH+FP1g=
-X-Gm-Gg: AYBFou1ckpg/y6JZhaoWPaFUTkTQDxSxlOq0L7FT2YqYnt3NuGVShB9ILRdsyekeagj
-	KAlyfl4GgDOFdkV8IGqgSLGElzaxxyUZFNAVcJfVMvpzWBe/w+/CALa8vH0NcvxR4PbLea2tywL
-	nWh7SKxwMgLdcvw6YwYkUH6bbRddlf+C4RGySXupHV72fNJ2igbHo6BNboXKWMQTKQ+Rm0Sd2hc
-	gX0dQZC4p0fprm1KCuujLvuxm7PN60jkWJAZD9fFy2iRcdyf8J0iS5raqank5/hA6fLAisHuiMt
-	pRwKFa0GtBMQMa0td8dlaloJQaDJ+uUmmJfd47XAKvmvZ+T4vS8tbjkBV8SvMSaHBDEu2g9lNwi
-	/ek2tmQHuDkzFdaiLuW0Z6OdyYqo69g4wek5svS5f9xsvc+50z8PE9lf94AxaKB5/El8B8cJXmi
-	8vB/IECSVq63l51JqKZLGA7y0p8zBiKDVOjcJylVMigdfqsjoijZePeLf0GYTuqW5+y5DyqUo0n
-	6BiDL/qVpjYXCcpSIkvq4v4J5Ve0w+K7PdOOn+pQEOLr4YUWiIIWLXiu5KBTJm0V5Uc7cy/GyWG
-	a4lbLV1KpOgG6GofpotUEghApu+Hzqow4IVi6k51JtdNn5d88PUxznM6o3YBnzeKdBoPpI+RUbG
-	sfR2d5X4gVIR6cqj9ha5X/k4eCTjfcsGDPVPd/3jXcby+gIwICZFR
-X-Received: by 2002:a05:690e:1918:b0:67c:63b:2a09 with SMTP id 956f58d0204a3-67c14418f69mr4111663d50.44.1794083302445;
-        Sat, 07 Nov 2026 12:28:22 -0800 (PST)
-Return-Path: <schonm@gmail.com>
-Received: from localhost.localdomain ([71.3.193.106])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67c3b83e8bdsm262044d50.1.2026.11.07.12.28.21
+        d=1e100.net; s=20260707; t=1794153706; x=1794758506;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yzpY4jpxsbOXB0n3WFtkm86CIVYphAlGCowPTuk7Soo=;
+        b=ZAChSVqfXBOExevJtwQVUe/ufXYhEBcp4mOWZYmpb6EjxwXhI0nf9TEs1zsYYvOiKX
+         tTGJN/9CJg4/pt3j3ixpYZagHTrqOHdvCUUfxH7X3q+c/CEVQo9OSYw72BXJ9d1R78Zh
+         /23CGuTxNHydoERRouSxDdVP1d7bqwWBHgKoJGqsNqREy4b7DwLF8awsJHHqCpL/EKDv
+         1nMOXXdVd/xs8evBlDFrYSx8VtxfzFlumg95xjxs3fp5FYVonoBkBJqTNrA0AgCKwqz/
+         w8GT+ldG/Gjs6FUcEmvk+/12hO2srEWrcjzesCQ2r+UdON6sZ5buLob/alJEcSYI2fzo
+         Qe3A==
+X-Gm-Message-State: APuU4Z9PZN2uT+xQMXi9M+rBuD8eaAVpBGoSrABEESCthbROMhUKhIYx
+	qMAMP8sfXZom2ie6XmH/DYI0l00AosnSP4QmSs/OzKOW5RdUwPq5KbF3T5ukgwhYr3M=
+X-Gm-Gg: AYBFou1X1VG6AYmfzWEJvbCRev9eGtxxhg7Rw50Wg6cRYUQPR23aWLJiojBDakXlPmZ
+	SKlm2iwudlRK8HF5drh0cPwL93R2pGHH2rtwev1Wt+hy4lqWTo79hyN60rArgd20K5L5feQI2zp
+	zG+bjjV5miWwuwuHZPmjs5fhlJPmCVH9l0Apvb5vr6u+jxWDJf5VJda4FjwlNilq2yicaREg+i8
+	LJsn8NH/sS9bQ//olnt7sKokM8SB6v1aAP11T1RueVvcz6WdFjJ3SjK7xlAxWA3l51tXEFzEBYk
+	oJOjsE9ehChdrioufM3YScoyBKqjDpCSfeahGn/4Glq4AprhTtZ2x5awGWtN/g3E2vRvE4UmBef
+	iCu5mZCkZgZpI0N/HEi7LCvEREnRxX6YeJwHCbjxH5x4JInGHFEZ8tJooWcPn3O25rI8wN6IlQv
+	8us5t+BGvdO9mXY3csmx/rBrxTAIM/T5r+XJhERb/tyiUX6L4hL2wsHOvlC/IefaWx2MVvxrFf0
+	eqVY6iTzH5kpulgDEpy/jrlG3FKjY7GTv5jhS/06LfTJ59N9NTSEyG6/xQLBiV16aoRicnPK4YC
+	/LowatVCUAVlH+o555BFYfFVvPsZsblYJMkHv7PcXUJ9q0X7ozHCc/Pp4C3qc3hTNREqF7lLnW0
+	OXsnuLS3MP4MBQPUi5BR8sf4pnNgzrIJKz1fQmjk6mGFWVvk9hgdLoAsAzomJN1I5mPxogBUf4d
+	TwcySoLbiA7dA20QIB2DMOAIXaJwC2sOdvF339gUhGS5naA7CldYpemxMHeXJK+xs4kuJDpBa2D
+	tz3sqlA4TGxFZqM96m5HSThbDImYrYQkT5FtWdiQ8Vahe5iLhAE715MxUHepAaXRlcvZF36WQ4S
+	8A85l4Mj2aJ0Kdla+bQeSCScSW0=
+X-Received: by 2002:a05:701a:ca09:b0:13b:2f26:6881 with SMTP id a92af1059eb24-1b39fe2f4f3mr3037825c88.4.1794153706125;
+        Sun, 08 Nov 2026 08:01:46 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.tail3ccdd3.ts.net ([147.160.63.35])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b375603ee8sm6191699c88.9.2026.11.08.08.01.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 12:28:22 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Sun, 08 Nov 2026 08:01:45 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH 2/2] libmozilla-ca-perl: upgrade 20260813 -> 20261020
-Date: Sat,  7 Nov 2026 15:27:53 -0500
-Message-ID: <20261107202753.16734-2-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261107202753.16734-1-schonm@gmail.com>
-References: <20261107202753.16734-1-schonm@gmail.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 1/2] waf-samba: Link with --undefined-version
+Date: Sun,  8 Nov 2026 08:01:42 -0800
+Message-ID: <20261108160143.1662655-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.56.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sat, 07 Nov 2026 20:28:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132009
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 16:01:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132010
 Content-Type: text/plain; charset="utf-8"
 
-Changelog
----------
-Changes for version 20261020
+wafsamba generates version scripts that name symbols which may not
+exist in the library: _end, __bss_start and _edata are always listed as
+local, and the per-version nodes carry symbols from older ABI signature
+files that were later removed (e.g. tdb_do_delete). GNU ld ignores
+these, but lld rejects them by default:
 
-    Update from Mozilla repository to 2026-10-20
-    Denylisted certificates:
-        emSign ECC Root CA - G3
+  ld.lld: error: version script assignment of 'local' to symbol '_end'
+  failed: symbol not defined
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+meta-clang used to add -Wl,--undefined-version for libtalloc, libtdb,
+libtevent, libldb and samba. Since the scripts are generated by design
+this way, do it once in the class for all its users; binutils accepts
+the option too. FreeBSD ports do the same for talloc and tdb.
+
+Tested: libtalloc, libtdb, libtevent, libldb ptest images pass on
+qemux86-64 with clang/lld; samba builds.
+
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...zilla-ca-perl_20260813.bb => libmozilla-ca-perl_20261020.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libmozilla/{libmozilla-ca-perl_20260813.bb => libmozilla-ca-perl_20261020.bb} (88%)
+ meta-networking/classes/waf-samba.bbclass | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20260813.bb b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20261020.bb
-similarity index 88%
-rename from meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20260813.bb
-rename to meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20261020.bb
-index 45eea1db89..7a37f9567d 100644
---- a/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20260813.bb
-+++ b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20261020.bb
-@@ -10,7 +10,7 @@ LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://README;beginline=32;endline=39;md5=51e666dce556490a1132e937ad3f8729"
- 
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LW/LWP/Mozilla-CA-${PV}.tar.gz"
--SRC_URI[sha256sum] = "81f0bd9665eacbb6feef13b0fa16fbb30162c09292542b1206434e569196dd9b"
-+SRC_URI[sha256sum] = "1aeed97a463389e582e085e82de03ae0bffae74d46cf8ee4c511341e5508c21d"
- 
- S = "${UNPACKDIR}/Mozilla-CA-${PV}"
- 
--- 
-2.43.0
+diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+index fcec1bea16..d6c03c45a7 100644
+--- a/meta-networking/classes/waf-samba.bbclass
++++ b/meta-networking/classes/waf-samba.bbclass
+@@ -24,6 +24,10 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+ # avoids build breaks when using no-static-libs.inc
+ DISABLE_STATIC = ""
 
++# wafsamba version scripts name symbols that may not exist (_end, __bss_start,
++# _edata, and symbols from older ABI versions); lld rejects those by default
++LDFLAGS += "-Wl,--undefined-version"
++
+ def get_waf_parallel_make(d):
+     pm = d.getVar('PARALLEL_MAKE')
+     if pm:
