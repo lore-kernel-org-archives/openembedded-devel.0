@@ -1,48 +1,49 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2900.1794165957699906603
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2901.1794165958160411489
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2026 11:25:57 -0800
+ Sun, 08 Nov 2026 11:25:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: roosesweb@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4b79502c27aso1907795e9.1
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: roosesweb@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a4d7ae1ae9so1682805e9.1
         for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 11:25:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1794165956; x=1794770756;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dmowj+eJjeoGRb9EydoTHQTqv1rb9AWJwlkqJwM+rxM=;
-        b=rjcHxEekNa6AJdK29ItGIfq9GO9kgzSBszL4Zxx+0IpnlG10Twu2Log/WwmBIfTPNQ
-         J6PpVz+wyWJkicDnvcL+igMDpoVf2xQjJy2q0QS5AL8x9IZEZAuZ/kj+q6bWrtaRRQez
-         5dj0fyZM+n23Z26exJVgqP2v4rPZMfKo/Fdit5JltrV1V++Kz5vvWZIDTPBLI1BJLlH3
-         INjhmQTh536n2rJk2cHyTrD9/+kpqSFw7WoSCGGwyO477R2xo7cpVvlqy8rn/CLWyax6
-         c36sErGEFzPB5DhVtZEFG/a1VUtWRQVgt7eh0puMbqURA5atuSc/FtJvFTJDxBbxKdPu
-         JP5w==
-X-Gm-Message-State: APuU4Z8lE+pclAfkmGctsoqDk5eoG//IzDHm871BtzXJGt7WnkSNpEA0
-	qO2DArGi31z2lh8cMiS+F5skKOYUpWPljXCBT+c3pH1c4Kgdm6ggMs5aWG6tSQ==
-X-Gm-Gg: AYBFou2AhOlqf8Wqqko5t92LhgAri4xD34l8PUY4aF7teYcr1tMKU8WVNSOmJZlkpc/
-	1A9G3V/Q8AQ5YenaVC83iuq7d3OwHhDLhl8OEwjrVDlie7j9Plt6R8fvUH2Egap+y05SkGsMwXb
-	u6bOPQoIxBjr4wm3WPKfLTkDMyXLhbog5VOKv0gsdcfRrkprEQLXNL3OFZVnuSdaASkVedQfDlQ
-	9egLhmaoTTdVgHb+qO9oK01DaBTB8nt4MEMe0DxX6HmlFo311rLjq+/MoJR8vLkL3dVW4eSRmGt
-	0p547LiPDB9aG50o1ax189PFsLTLS/fymSyKNnLynJt6JAGrSfJ0qw2MhHXrw3e1EFIhvxXFnVC
-	mV+oowaWn9qnJcHe6Wg41Vn89l16vpfjoShZq0wSX7/LJYRQRGUVXKJf+rWJ7ZMr8zGJmwG+mzt
-	zNHczRj+l1aRVpkQCwiUhw0dgwAaRI3KuKsRNEOkX37AO/cvVtZc7zn971bGH3/71W6Jgn6uFOe
-	vfcg0VtLpQKbJk8s0nofkKTFWtLDmqJG5ZWEDkq4+mOVrmbqsBZc4X8oHhfOzTDo1vdurIl2O4G
-	ts1ElnbdjmnUNLwbpRzbCPpDBxun9x7e8PnjyLnDvMQuQzJHpQKbBCCvxocTv/uGBZ52jOmaRkf
-	LuhUwltF+OecSzxqyC+SP2hGb3G3+FuivF/4qTU/qhDQkPT5UtnPRhowauw==
-X-Received: by 2002:a05:600c:1910:b0:4a2:d99:3171 with SMTP id 5b1f17b1804b1-4b963c6d3e2mr46714965e9.23.1794165955741;
-        Sun, 08 Nov 2026 11:25:55 -0800 (PST)
+        bh=SqIynJ9QfUr+xs2N0b6cLi4Ut5hE5veD6EV0O2oN4Xg=;
+        b=HNZSqafqtihfBZSkc2eEbR7yr16SIonJhiYm7bp2m5jRzhGCyNeC6B611nwxBqe1r6
+         oRcDYIyUarJ3InrNvFA7D9RfBs/mk0j2MgzV6lik9GlgMbVX1Mpw7qpaYLifb2GhXlKF
+         2IhAFnk40VOIKeD1f6mFJAO2ODYBr5GVKDr9taYdqV/nb+XChJasslsVHBUGKjMndG4N
+         0eXJQ5x1FBdmUwoVqPSZuL9P8x+Ukgi0fBqHA4o+k26cj9kYyV3q2P0VxjibA2+UFSAd
+         Juh7VJuPL4+XJu92LfgOxfFquaCPFrln3Ig5XpTb2RV15wpmtteXBcjZN7IQfFTbInhH
+         Fq/Q==
+X-Gm-Message-State: APuU4Z+X4UYlEb6qEgHiFy2AotX0Oz9CtgrdBIy9ezrhjB9qo0TEDA01
+	Nhe78sn5mVxQiI34jgfo/bHTJDus72o77bwZD12y6ro3KH4eFWcHg+ZcIobEtg==
+X-Gm-Gg: AYBFou269aP3lao5zoveMTwxRqJLwMwdgfq6Jm6x0VnQxJqwFKJCkyNrCP0LUnTSPps
+	5Z5yoa+7nIMmJMw9x8Y6m9HkjA2rsHRrtX8ihXSRHilYU0od3GDWUu5ORnNXN4ZGcz8xZXXuu5X
+	KUoOQNrvOtr/NUc+VDPGGi2gk3s5yRsb2Fvs6TQtxJm3zLMdxnjx16SiOXgHc63VZkdikoCXazE
+	GXzDjzYOgK7kP8gYm+tSi61GatQQADxl6WaskgWnw42miszEKu8FPYCGxZ6jp1LisWAmvCt7tRR
+	b8+bnHf4Gm5deYxhOo2nAufcnJxOYkSkPSMnwnW99iBT+g60a3+sKAERByvnMwYcsg7zfXuG8mf
+	ekaYpOpSZ0XM7kpxkXzhyQu414jBBMQA4quaLq7z9qxByHRToBbJgsMwnnXYHVClIkYms/7N8kc
+	2qOM7YsVaODVFRPpBKftss9NAXBUGfKJvjzYoT4mc5+ZKIzmAGirvMc5fxMkcpWmK3XUiYQOpQk
+	Vz/77YARBu3hifbYKLUKm2mgMquNKcxMAXzi13epmJUqg3QmmTT8QXSalWZiY0o/K3AuzdWtRZf
+	SR0hplDEOKaGP6KK3t64STJlaB2y9np1DXV44OsK+dx9uLHIzD0nT+hCBee8sb9aw844QnXIMuX
+	uhlPejSjuiJD6Tsh7P7v1abnuEaXRv16tDtuz6qfZw0NDBB2sGvQjAbrVhsVlbPhxEhE/98rTI1
+	GI/Vo=
+X-Received: by 2002:a05:600d:82ea:b0:4a7:7f3f:6f8e with SMTP id 5b1f17b1804b1-4b943f76d81mr49378395e9.0.1794165956440;
+        Sun, 08 Nov 2026 11:25:56 -0800 (PST)
 Return-Path: <roosesweb@gmail.com>
 Received: from mother.tail4535.ts.net ([2a02:810d:ae08:d00:e5a9:b4b9:ba2:5901])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b7efb1a517sm160930535e9.12.2026.11.08.11.25.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Nov 2026 11:25:55 -0800 (PST)
+        Sun, 08 Nov 2026 11:25:56 -0800 (PST)
 From: "Thomas Roos" <roosesweb@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Thomas Roos <thomas@roosesweb.de>
-Subject: [meta-python][PATCH 5/6] python3-httpcore2: add recipe
-Date: Sun,  8 Nov 2026 20:25:48 +0100
-Message-ID: <20261108192549.1082715-6-thomas@roosesweb.de>
+Subject: [meta-python][PATCH 6/6] python3-httpx2: add missing runtime dependencies
+Date: Sun,  8 Nov 2026 20:25:49 +0100
+Message-ID: <20261108192549.1082715-7-thomas@roosesweb.de>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261108192549.1082715-1-thomas@roosesweb.de>
 References: <20261108192549.1082715-1-thomas@roosesweb.de>
@@ -50,51 +51,36 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 22:38:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132020
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132021
 Content-Type: text/plain; charset="utf-8"
 
-httpx2 imports httpcore2, which is released as a separate package from
-the same repository and with the same version.
+httpx2 requires httpcore2, anyio and truststore, so "import httpx2"
+fails with "No module named 'httpcore2'". Home Assistant 2026.11 imports
+httpx2 at startup and does not start without them.
 
 AI-Generated: Claude Code, Claude Opus 5.5
 Signed-off-by: Thomas Roos <thomas@roosesweb.de>
 ---
- .../python/python3-httpcore2_2.16.0.bb        | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-httpcore2_2.16.0.bb
+ meta-python/recipes-devtools/python/python3-httpx2_2.16.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httpcore2_2.16.0.bb b/meta-python/recipes-devtools/python/python3-httpcore2_2.16.0.bb
-new file mode 100644
-index 0000000000..03718729c1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-httpcore2_2.16.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "A minimal low-level HTTP client"
-+DESCRIPTION = "The HTTP core package of httpx2: connection pooling, \
-+    HTTP/1.1 and HTTP/2 transport and proxy support."
-+HOMEPAGE = "https://github.com/pydantic/httpx2"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=77c5a523c15d4a5887b081bba41ca110"
-+
-+SRC_URI[sha256sum] = "c72cd0413563b17e1cd8354677dff887466f8ec2551679759e93126534428643"
-+
-+inherit pypi python_hatchling
-+
-+DEPENDS += "\
-+    python3-uv-dynamic-versioning-native \
-+    python3-hatch-fancy-pypi-readme-native \
-+    python3-jinja2-native \
-+    python3-tomlkit-native \
-+    python3-dunamai-native \
-+"
-+
-+# anyio comes from the "asyncio" extra, which httpx2 needs for its async
-+# client.
-+RDEPENDS:${PN} += "\
+diff --git a/meta-python/recipes-devtools/python/python3-httpx2_2.16.0.bb b/meta-python/recipes-devtools/python/python3-httpx2_2.16.0.bb
+index fe4919bff2..5478522592 100644
+--- a/meta-python/recipes-devtools/python/python3-httpx2_2.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-httpx2_2.16.0.bb
+@@ -15,8 +15,11 @@ DEPENDS += " \
+ "
+ 
+ RDEPENDS:${PN} += " \
 +    python3-anyio \
-+    python3-h11 \
+     python3-core \
+-    python3-logging \
+     python3-h2 \
++    python3-httpcore2 \
+     python3-idna \
++    python3-logging \
 +    python3-truststore \
-+"
+ "
 -- 
 2.56.0
 
