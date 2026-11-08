@@ -1,49 +1,49 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2911.1794165994667516511
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2959.1794165992617660484
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2026 11:26:34 -0800
+ Sun, 08 Nov 2026 11:26:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: roosesweb@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48b001cd92bso87414f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 11:26:34 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: roosesweb@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-49318428d98so103344f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 11:26:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794165993; x=1794770793;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=M1/+23Qm2YOfQ9HkyDcbZ1IMauDYjJBHaoM4cm7wbS4=;
-        b=2kS/4yP+XIRpqlbJccOLtj2voHycFNxKiNNl+39KR51EeC2cbjBF2rkoPteJX1BLwq
-         W2lBJVNm7s98Ygp//LooxdhQiICNbDRnyuKIBv7OhBqohMPlOXGASehLsdtxOtFPW2MX
-         L4vErXq2xcT4McE+MGjkykPsoW5jB+dyvtF6tRWN9QezQWnZjboc5c5aRCCwpxuJf3Vc
-         S16TdruSIelKzPRVyAGR+0oZvToM/BNmPSKH1Njx288qLoFt94upaLEfZRAKXiPwKBad
-         moGtX92GmHO0KojPmsct6iMwgskv5HTmX0cODIxyfpr3tIGFtN+8MTxEgOEiyX06ubb/
-         BbEA==
-X-Gm-Message-State: APuU4Z/8j0sTOQVeH2wZXQd+wiT1IvAIY8kbVSLLwH9gs4P4sAKgn99T
-	aG5mmOZ3owK4SuwaC+Hhe7jz6YOIRwuCheqZEv/rwDQHrNEh3gC6GKi28FzdOA==
-X-Gm-Gg: AYBFou382AD66p+Izsnyfq7dRFeWRiQIilXllj07AVdFKK2TIrU9B39sFckDiZWmN7J
-	d0vGNo/xX/0C4riGrjM+vNhbmuGEJnTBbwi5p9QTXjyUt3YldyTuIlkdz7gIzP9Wi7zGm/TYx3b
-	fzkUNF3v78qi4DxHQx9c/UJrI4rG7K56K7AHknm39+adtEIO8W7FnlvEvD3eM9MvRpbYUe18iR0
-	6eb6dD1BTRyFfmxxvWBR2gBRxUKJGoW4s9ncq9iAgrJ2gE602PU+cVOdW1vcsvqmEWpKtQ9u7Ph
-	oB8ZdufaPTVu6QUyKusm/tDRjYQ/G6YKFaa19TkXJSfOkXlb2qxJqk8M00ERw1l6oU6cNfqIOY2
-	JuTagIVG/Wb1AOxYP3dWxihuT/1fzPklMe/7r2+sVbHLM1h75Un0hE1Voo5RpxIhR5Lbp4/GnxL
-	nXsevyEOa+EK6RtQ3gU2ajNJvw784VkdySOx38f12A4IK1Rjg/oRyE9+zC88RUahM493F4YIeGx
-	5NDYEodYin7nZskHjFa04+3GxW+7x6m7fWTpjSv5tg7lO0rcn+ZAI3tP4e0J0gPSSLB10mvBZfx
-	RMj99/Ec6JmDURiZya1OtHAw9o6qcH+KORIyB70iwFEvs7DEsbnPk1nhZqL8oCin7apSEbknEWM
-	p06wOm+6Yqy5nTvrgKAO1GMVPrtZXiXbsHOQzijjHPfnJYBlBBzdO15rqmUfWbqpH3d5Hhc9p9Y
-	OFnu0=
-X-Received: by 2002:a05:6000:4b14:b0:48e:752b:9f90 with SMTP id ffacd0b85a97d-4958b62dc21mr4054397f8f.38.1794165992827;
-        Sun, 08 Nov 2026 11:26:32 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794165991; x=1794770791;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DD247DOmXOqJUMfGvYXRWibdzsvlt/NPtsdYLnKZrIQ=;
+        b=M9jgLMtj6pCJKw4HHFXme7xFFaTsd3XH0JRAs6cv5xrKYGD5+k/v4/Qud0jK9/YWFY
+         3gk0nOvJfyzZG8HQlsoq8iOP4qYhvhwIZhOxSRLvHcq7z0IoKkDHBhfZCqZn13aC1ekv
+         TKF5kV5whNLUrc1nksTA/Y/+tBl+w9cbkCa7BH1SwauWSqn2fJT4AiJTuanN7y2qYMnW
+         S4UWcg+QiCuOac50ox/kGsNtM1ecRl+XhzuflM9d8LxOrFywYYPPXROCLHndUmkpdd1b
+         3N0rTGKYe1DHSJE03KREe2yAuwLCI9c6o+FmrEIBgFZs+Yzi6/pT5yBnKH4hUsv/VtSJ
+         KWjQ==
+X-Gm-Message-State: APuU4Z/mVVHLl3Wju/5htgrFepQe5vA48Cvaz8tIhrm5pIFOeoy3NoEC
+	fcTrgbOtbTiusOF7+cUDsUsulSA9i+hhBGxbM/qH2zFbBaO1r/9LbLQCSHdkJw==
+X-Gm-Gg: AYBFou0Kz2lHApZBun3BeLxYFxk9qboWYiLw9x/2GawVmuUAzkUcsBHAuJlxB1+ocz3
+	K82HK4BjOhJfmesaCw1sCJWfW6jVJWAB3SyILXsVoHiQ5zhEnIiz7jS8/gf115G6XgQYnF24TgC
+	sbCHTpopgwrX0JL2EgxodoOnlwKZJIEwUKyLI9ZXDP0H6cMdUHheEq/tq3wsEqKOt2idQk/ihlE
+	OcEMi1G/uRWh0xBfylYpN8OdtdT2Gh0mOzMcZ5bOOq1t59AQHWoOlvqm1xDKh2NhTQKli9z+HpZ
+	Q2IJMQKEz/R8pUX2dMKbZRJsYewHOBIBAzPPOexCjBOGZlXHdZrbf2DRJCX7uCFpvy0qA9wsSlP
+	mrnjcI0Zy3EQ7vYw9XeWZaBJtd5dP5BEeT+OOCkUI+xz6EWkC9Lf404gicVZ2YdjT0Sp6mU6j6L
+	EanCO3tnWFDUzi6E2l7pe1d96Fj4LtIkWXLlbCSZxtl8TmqGrkRAj5QMML3Q1ZKboyk6Bsva434
+	k5rOjcuwvBiKsCnT0evzgbfJ/IBrlxSjQausI3vXTt0cq7Vyul+E8Rpu/+sTt4BdqUsx2RzzQCl
+	ymZI4PvszlAJjXvJ2rKQ/HzSEkv15zL84A8eKihRL37yoifbwVAtiQyDLH9eTJ/dVFfnXh9Lu7s
+	10MS7nf3iC/Ox+x7wwWVRMuK8LivFDJH3XFWpDkqxQyel10XKAbs2mDEI0A==
+X-Received: by 2002:a05:6000:4a09:b0:490:71a7:6f3c with SMTP id ffacd0b85a97d-4958a9b3daamr3474378f8f.55.1794165990610;
+        Sun, 08 Nov 2026 11:26:30 -0800 (PST)
 Return-Path: <roosesweb@gmail.com>
 Received: from mother.tail4535.ts.net ([2a02:810d:ae08:d00:e5a9:b4b9:ba2:5901])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49592f38e2bsm5808729f8f.8.2026.11.08.11.26.32
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49592f38e2bsm5808729f8f.8.2026.11.08.11.26.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Nov 2026 11:26:32 -0800 (PST)
+        Sun, 08 Nov 2026 11:26:30 -0800 (PST)
 From: "Thomas Roos" <roosesweb@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Thomas Roos <thomas@roosesweb.de>
-Subject: [meta-python][PATCH 11/13] python3-proto-plus: add recipe
-Date: Sun,  8 Nov 2026 20:26:16 +0100
-Message-ID: <20261108192623.1082770-12-thomas@roosesweb.de>
+Subject: [meta-python][PATCH 07/13] python3-pylint: upgrade 4.0.8 -> 4.1.3
+Date: Sun,  8 Nov 2026 20:26:12 +0100
+Message-ID: <20261108192623.1082770-8-thomas@roosesweb.de>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261108192623.1082770-1-thomas@roosesweb.de>
 References: <20261108192623.1082770-1-thomas@roosesweb.de>
@@ -51,43 +51,416 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2026 22:37:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132033
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132029
 Content-Type: text/plain; charset="utf-8"
 
-python3-google-api-core 2.x requires proto-plus. A recipe for 1.27.1
-exists in meta-python-ai, but meta-python cannot depend on that layer.
+Home Assistant 2026.11 pins pylint 4.1.3 in its test requirements.
 
-Only protobuf is a runtime dependency; google-api-core is needed by the
-test suite only.
+Drop patches that are no longer needed:
+- 0002-pyproject.toml-Keep-tool.setuptools.license-files.patch rewrote
+  the PEP 639 license and license-files keys into the older
+  tool.setuptools form. 4.1.3 requires setuptools >= 77, which handles
+  the PEP 639 keys, and OE-Core provides 84.0.0.
+- 0003-astroid-4.1.2-endlineno.patch adjusted functional test
+  expectations for astroid 4.1.2 (for example MyClass instead of
+  MyClass.my_method). 4.1.3 ships the same expectations.
+- 0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch was
+  a backport of upstream commit 554b1d192434, which is part of 4.1.3.
+
+Refresh 0001-Adjust-test-expectations-for-ptest.patch. The expected
+output was regenerated by running the functional test with pylint 4.1.3
+and astroid 4.3.4 installed into a virtualenv and the tests outside the
+source tree, which is how the ptest sees pylint.
 
 AI-Generated: Claude Code, Claude Opus 5.5
 Signed-off-by: Thomas Roos <thomas@roosesweb.de>
 ---
- .../python/python3-proto-plus_1.29.0.bb           | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-proto-plus_1.29.0.bb
+ ...1-Adjust-test-expectations-for-ptest.patch |  18 +-
+ ...l-Keep-tool.setuptools.license-files.patch |  43 ----
+ .../0003-astroid-4.1.2-endlineno.patch        | 203 ------------------
+ ...s-do-not-pass-asname-to-Import.infer.patch |  39 ----
+ ...ylint_4.0.8.bb => python3-pylint_4.1.3.bb} |   5 +-
+ 5 files changed, 11 insertions(+), 297 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pylint/0003-astroid-4.1.2-endlineno.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
+ rename meta-python/recipes-devtools/python/{python3-pylint_4.0.8.bb => python3-pylint_4.1.3.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-proto-plus_1.29.0.bb b/meta-python/recipes-devtools/python/python3-proto-plus_1.29.0.bb
-new file mode 100644
-index 0000000000..da31e423e7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-proto-plus_1.29.0.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Beautiful, Pythonic protocol buffers"
-+DESCRIPTION = "Proto Plus provides a Pythonic wrapper around protocol buffers. \
-+    Messages behave like native Python types, which makes them easier to \
-+    construct, read and serialize."
-+HOMEPAGE = "https://github.com/googleapis/google-cloud-python/tree/main/packages/proto-plus"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+SRC_URI[sha256sum] = "cfb4e62ad7e13dd18f346cabbda00cab39930d36a05791fd81ddb074d6ee884f"
-+
-+RDEPENDS:${PN} += "python3-protobuf"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+index 307dc0083b..b98b776136 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
++++ b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+@@ -1,4 +1,4 @@
+-From ed93b7d7f629e95528560f84ead6919b5f1c9d37 Mon Sep 17 00:00:00 2001
++From 6fb7ef6a3cacd55337c8497e720c2b5d1e5da739 Mon Sep 17 00:00:00 2001
+ From: Dan McGregor <dan.mcgregor@vecima.com>
+ Date: Wed, 13 Mar 2024 14:08:25 -0600
+ Subject: [PATCH] Adjust test expectations for ptest
+@@ -12,31 +12,33 @@ Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
+  tests/functional/w/wrong_import_order.txt | 22 +++++++++++-----------
+  1 file changed, 11 insertions(+), 11 deletions(-)
+ 
++diff --git a/tests/functional/w/wrong_import_order.txt b/tests/functional/w/wrong_import_order.txt
++index 9bd78c786..9a2859811 100644
+ --- a/tests/functional/w/wrong_import_order.txt
+ +++ b/tests/functional/w/wrong_import_order.txt
+-@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::"standard
+- wrong-import-order:15:0:15:15::"standard import ""datetime"" should be placed before third party imports ""six"", ""astroid.are_exclusive""":UNDEFINED
++@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::"standard import ""sys"" should be placed before
++ wrong-import-order:15:0:15:15::"standard import ""datetime"" should be placed before third party imports ""six"", ""pytest.mark""":UNDEFINED
+  wrong-import-order:18:0:18:22::"third party import ""totally_missing"" should be placed before local import ""package.Class""":UNDEFINED
+- wrong-import-order:20:0:20:14::"third party import ""astroid"" should be placed before local imports ""package.Class"", "".package""":UNDEFINED
++ wrong-import-order:20:0:20:13::"third party import ""pytest"" should be placed before local imports ""package.Class"", "".package""":UNDEFINED
+ -wrong-import-order:22:0:22:22::"first party import ""pylint.checkers"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ -wrong-import-order:23:0:23:25::"first party import ""pylint.config"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ -wrong-import-order:24:0:24:17::"first party import ""pylint.sys"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ -wrong-import-order:25:0:25:28::"first party import ""pylint.pyreverse"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ -wrong-import-order:30:0:30:40::"third party import ""six.moves.urllib.parse.quote"" should be placed before first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ -wrong-import-order:31:0:31:23::"first party import ""pylint.constants"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+--wrong-import-order:32:0:32:19::"standard import ""re"" should be placed before third party imports ""six"", ""astroid.are_exclusive"", ""unused_import"", ""totally_missing"", ""astroid"", ""six.moves.urllib.parse.quote"", first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"", ""pylint.constants"", and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
++-wrong-import-order:32:0:32:19::"standard import ""re"" should be placed before third party imports ""six"", ""pytest.mark"", ""unused_import"", ""totally_missing"", ""pytest"", ""six.moves.urllib.parse.quote"", first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"", ""pylint.constants"", and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ -wrong-import-order:32:0:32:19::"third party import ""requests"" should be placed before first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"", ""pylint.constants"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ -wrong-import-order:33:0:33:24::"first party import ""pylint.exceptions"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ -wrong-import-order:34:0:34:21::"first party import ""pylint.message"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+--wrong-import-order:35:0:35:11::"standard import ""time"" should be placed before third party imports ""six"", ""astroid.are_exclusive"", ""unused_import"" (...) ""astroid"", ""six.moves.urllib.parse.quote"", ""requests"", first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"" (...) ""pylint.constants"", ""pylint.exceptions"", ""pylint.message"", and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
++-wrong-import-order:35:0:35:11::"standard import ""time"" should be placed before third party imports ""six"", ""pytest.mark"", ""unused_import"" (...) ""pytest"", ""six.moves.urllib.parse.quote"", ""requests"", first party imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"" (...) ""pylint.constants"", ""pylint.exceptions"", ""pylint.message"", and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ +wrong-import-order:22:0:22:22::"third party import ""pylint.checkers"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ +wrong-import-order:23:0:23:25::"third party import ""pylint.config"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ +wrong-import-order:24:0:24:17::"third party import ""pylint.sys"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ +wrong-import-order:25:0:25:28::"third party import ""pylint.pyreverse"" should be placed before local imports ""package.Class"", "".package"", "".package2""":UNDEFINED
+ +wrong-import-order:30:0:30:40::"third party import ""six.moves.urllib.parse.quote"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ +wrong-import-order:31:0:31:23::"third party import ""pylint.constants"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+-+wrong-import-order:32:0:32:19::"standard import ""re"" should be placed before third party imports ""six"", ""astroid.are_exclusive"", ""unused_import"" (...) ""pylint.pyreverse"", ""six.moves.urllib.parse.quote"", ""pylint.constants"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+++wrong-import-order:32:0:32:19::"standard import ""re"" should be placed before third party imports ""six"", ""pytest.mark"", ""unused_import"" (...) ""pylint.pyreverse"", ""six.moves.urllib.parse.quote"", ""pylint.constants"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ +wrong-import-order:32:0:32:19::"third party import ""requests"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ +wrong-import-order:33:0:33:24::"third party import ""pylint.exceptions"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+ +wrong-import-order:34:0:34:21::"third party import ""pylint.message"" should be placed before local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+-+wrong-import-order:35:0:35:11::"standard import ""time"" should be placed before third party imports ""six"", ""astroid.are_exclusive"", ""unused_import"" (...) ""requests"", ""pylint.exceptions"", ""pylint.message"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+++wrong-import-order:35:0:35:11::"standard import ""time"" should be placed before third party imports ""six"", ""pytest.mark"", ""unused_import"" (...) ""requests"", ""pylint.exceptions"", ""pylint.message"" and local imports ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"", "".package4"", ""package4.Class4""":UNDEFINED
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch b/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
+deleted file mode 100644
+index 9c1d535690..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From b559c86a8e6efb7f2081c4aacf9ce1c552d60abb Mon Sep 17 00:00:00 2001
+-From: Leon Anavi <leon.anavi@konsulko.com>
+-Date: Thu, 20 Mar 2025 12:09:42 +0000
+-Subject: [PATCH] pyproject.toml: Keep tool.setuptools.license-files
+-
+-Keep legacy license declaration and tool.setuptools.license-files
+-to avoid the following errors:
+-
+-| ValueError: invalid pyproject.toml config: `project.license`.
+-| configuration error: `project.license` must be valid exactly by one definition (2 matches found):
+-
+-| ValueError: invalid pyproject.toml config: `project`.
+-| configuration error: `project` must not contain {'license-files'} properties
+-
+-Upstream-Status: Inappropriate
+-
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+----
+- pyproject.toml | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -8,8 +8,7 @@ name = "pylint"
+- description = "python code static checker"
+- readme = "README.rst"
+- keywords = [ "lint", "linter", "python", "static code analysis" ]
+--license = "GPL-2.0-or-later"
+--license-files = [ "LICENSE", "CONTRIBUTORS.txt" ]
+-+license = { text = "GPL-2.0-or-later" }
+- authors = [
+-   { name = "Python Code Quality Authority", email = "code-quality@python.org" },
+- ]
+-@@ -105,6 +104,9 @@ test-min = [
+-   "typing-extensions~=4.15",
+- ]
+- 
+-+[tool.setuptools]
+-+license-files = [ "LICENSE", "CONTRIBUTORS.txt" ]
+-+
+- [tool.setuptools.packages.find]
+- include = [ "pylint*" ]
+- 
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0003-astroid-4.1.2-endlineno.patch b/meta-python/recipes-devtools/python/python3-pylint/0003-astroid-4.1.2-endlineno.patch
+deleted file mode 100644
+index 1b85ae6606..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pylint/0003-astroid-4.1.2-endlineno.patch
++++ /dev/null
+@@ -1,203 +0,0 @@
+-From febd3091c2e241833aa5534edf887f96b6e7b77e Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 16 Aug 2026 06:05:33 +0200
+-Subject: [PATCH] tests: adjust functional-test expectations for astroid
+- 4.1.2 / Python 3.14
+-
+-astroid 4.1.2 (the version this distro packages) changed how it
+-resolves the enclosing scope/parent name and end_lineno for decorated
+-functions, singledispatch registrations, positional-only-arg checks
+-and a few other node kinds. These functional tests were pinned
+-against an older astroid's output and fail with plain output-text
+-mismatches (not logic errors) once run against 4.1.2. Regenerated the
+-expected .txt fixtures with:
+-
+-  python tests/test_functional.py --update-functional-output -k ...
+-
+-against astroid==4.1.2, mirroring the existing
+-0001-Adjust-test-expectations-for-ptest.patch approach for this
+-recipe.
+-
+-tests/functional/u/undefined/undefined_variable.314.txt is pylint's
+-own Python-3.14-specific override of undefined_variable.txt (see
+-FunctionalTestFile.expected_output, which prefers a "<base>.<ver>.txt"
+-file over the plain one when it matches the running interpreter). The
+-distro's target Python is 3.14.7, so this file - not the plain .txt -
+-is what actually gets read during ptest, and it still carried the
+-pre-4.1.2 astroid values for the same two lines. Applied the identical
+-lineno 339/344 fix there too; verified both files against the same
+-python3-native 3.14.7 build used to run the target ptest.
+-
+-Upstream-Status: Inappropriate (embedded specific)
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- .../d/deprecated/deprecated_decorators.txt     |  2 +-
+- .../m/method_cache_max_size_none.txt           | 16 ++++++++--------
+- .../non_ascii_name_decorator.txt               |  2 +-
+- .../o/overridden_final_method_regression.txt   |  2 +-
+- .../r/regression_02/regression_10334.txt       |  2 +-
+- .../s/singledispatch/singledispatch_method.txt | 18 +++++++++---------
+- .../singledispatchmethod_function.txt          |  6 +++---
+- .../u/undefined/undefined_variable.314.txt     |  4 ++--
+- .../u/undefined/undefined_variable.txt         |  4 ++--
+- .../unsupported_version_for_final.txt          | 18 +++++++++---------
+- .../unsupported_version_for_posonly_args.txt   |  2 +-
+- tests/functional/u/unused/unused_argument.txt  |  4 ++--
+- 12 files changed, 40 insertions(+), 40 deletions(-)
+-
+-diff --git a/tests/functional/d/deprecated/deprecated_decorators.txt b/tests/functional/d/deprecated/deprecated_decorators.txt
+-index 38bb50f..e93f0aa 100644
+---- a/tests/functional/d/deprecated/deprecated_decorators.txt
+-+++ b/tests/functional/d/deprecated/deprecated_decorators.txt
+-@@ -1 +1 @@
+--deprecated-decorator:7:4:7:28:MyClass.my_method:Using deprecated decorator abc.abstractclassmethod():UNDEFINED
+-+deprecated-decorator:7:4:7:28:MyClass:Using deprecated decorator abc.abstractclassmethod():UNDEFINED
+-diff --git a/tests/functional/m/method_cache_max_size_none.txt b/tests/functional/m/method_cache_max_size_none.txt
+-index bd916c6..0b16047 100644
+---- a/tests/functional/m/method_cache_max_size_none.txt
+-+++ b/tests/functional/m/method_cache_max_size_none.txt
+-@@ -1,8 +1,8 @@
+--method-cache-max-size-none:26:5:26:20:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:30:5:30:30:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:34:5:34:38:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:38:5:38:24:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:43:5:43:24:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:44:5:44:24:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:49:5:49:30:MyClassWithMethods.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+--method-cache-max-size-none:79:5:79:40:MyClassWithMethodsAndMaxSize.my_func:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:26:5:26:20:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:30:5:30:30:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:34:5:34:38:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:38:5:38:24:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:43:5:43:24:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:44:5:44:24:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:49:5:49:30:MyClassWithMethods:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-+method-cache-max-size-none:79:5:79:40:MyClassWithMethodsAndMaxSize:'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self':INFERENCE
+-diff --git a/tests/functional/n/non_ascii_name/non_ascii_name_decorator.txt b/tests/functional/n/non_ascii_name/non_ascii_name_decorator.txt
+-index 6c49440..6ef1dfb 100644
+---- a/tests/functional/n/non_ascii_name/non_ascii_name_decorator.txt
+-+++ b/tests/functional/n/non_ascii_name/non_ascii_name_decorator.txt
+-@@ -1 +1 @@
+--non-ascii-name:16:4:16:13:a_function:"Argument name ""fåling"" contains a non-ASCII character, consider renaming it.":HIGH
+-+non-ascii-name:16:4:16:13::"Argument name ""fåling"" contains a non-ASCII character, consider renaming it.":HIGH
+-diff --git a/tests/functional/o/overridden_final_method_regression.txt b/tests/functional/o/overridden_final_method_regression.txt
+-index a8cb239..9e7d118 100644
+---- a/tests/functional/o/overridden_final_method_regression.txt
+-+++ b/tests/functional/o/overridden_final_method_regression.txt
+-@@ -1 +1 @@
+--undefined-variable:4:1:4:18:crash_test:Undefined variable 'unknown_decorator':UNDEFINED
+-+undefined-variable:4:1:4:18::Undefined variable 'unknown_decorator':UNDEFINED
+-diff --git a/tests/functional/r/regression_02/regression_10334.txt b/tests/functional/r/regression_02/regression_10334.txt
+-index d2baba9..838c6d9 100644
+---- a/tests/functional/r/regression_02/regression_10334.txt
+-+++ b/tests/functional/r/regression_02/regression_10334.txt
+-@@ -1 +1 @@
+--not-callable:4:1:4:4:A:s is not callable:UNDEFINED
+-+not-callable:4:1:4:4::s is not callable:UNDEFINED
+-diff --git a/tests/functional/s/singledispatch/singledispatch_method.txt b/tests/functional/s/singledispatch/singledispatch_method.txt
+-index 7943551..b44df99 100644
+---- a/tests/functional/s/singledispatch/singledispatch_method.txt
+-+++ b/tests/functional/s/singledispatch/singledispatch_method.txt
+-@@ -1,9 +1,9 @@
+--singledispatch-method:9:5:9:19:Board1.convert_position:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+--singledispatch-method:13:5:13:30:Board1._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+--singledispatch-method:18:5:18:30:Board1._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+--singledispatch-method:24:5:24:19:Board2.convert_position:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+--singledispatch-method:29:5:29:30:Board2._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+--singledispatch-method:35:5:35:30:Board2._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+--singledispatch-method:43:5:43:19:Board3.convert_position:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+--singledispatch-method:48:5:48:30:Board3._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+--singledispatch-method:54:5:54:30:Board3._:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:9:5:9:19:Board1:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+-+singledispatch-method:13:5:13:30:Board1:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:18:5:18:30:Board1:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:24:5:24:19:Board2:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+-+singledispatch-method:29:5:29:30:Board2:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:35:5:35:30:Board2:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:43:5:43:19:Board3:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:HIGH
+-+singledispatch-method:48:5:48:30:Board3:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-+singledispatch-method:54:5:54:30:Board3:singledispatch decorator should not be used with methods, use singledispatchmethod instead.:INFERENCE
+-diff --git a/tests/functional/s/singledispatch/singledispatchmethod_function.txt b/tests/functional/s/singledispatch/singledispatchmethod_function.txt
+-index c25f70c..6884f38 100644
+---- a/tests/functional/s/singledispatch/singledispatchmethod_function.txt
+-+++ b/tests/functional/s/singledispatch/singledispatchmethod_function.txt
+-@@ -1,3 +1,3 @@
+--singledispatchmethod-function:9:1:9:21:convert_position2:singledispatchmethod decorator should not be used with functions, use singledispatch instead.:HIGH
+--singledispatchmethod-function:13:1:13:27:_:singledispatchmethod decorator should not be used with functions, use singledispatch instead.:INFERENCE
+--singledispatchmethod-function:18:1:18:27:_:singledispatchmethod decorator should not be used with functions, use singledispatch instead.:INFERENCE
+-+singledispatchmethod-function:9:1:9:21::singledispatchmethod decorator should not be used with functions, use singledispatch instead.:HIGH
+-+singledispatchmethod-function:13:1:13:27::singledispatchmethod decorator should not be used with functions, use singledispatch instead.:INFERENCE
+-+singledispatchmethod-function:18:1:18:27::singledispatchmethod decorator should not be used with functions, use singledispatch instead.:INFERENCE
+-diff --git a/tests/functional/u/undefined/undefined_variable.314.txt b/tests/functional/u/undefined/undefined_variable.314.txt
+-index de83d83..6c0f81a 100644
+---- a/tests/functional/u/undefined/undefined_variable.314.txt
+-+++ b/tests/functional/u/undefined/undefined_variable.314.txt
+-@@ -30,6 +30,6 @@ undefined-variable:234:25:234:37:LambdaClass5.<lambda>:Undefined variable 'Lambd
+- undefined-variable:291:18:291:24:not_using_loop_variable_accordingly:Undefined variable 'iteree':UNDEFINED
+- undefined-variable:308:27:308:28:undefined_annotation:Undefined variable 'x':UNDEFINED
+- used-before-assignment:309:7:309:8:undefined_annotation:Using variable 'x' before assignment:HIGH
+--undefined-variable:339:11:339:12:decorated3:Undefined variable 'x':UNDEFINED
+--undefined-variable:344:19:344:20:decorated4:Undefined variable 'y':UNDEFINED
+-+undefined-variable:339:11:339:12::Undefined variable 'x':UNDEFINED
+-+undefined-variable:344:19:344:20::Undefined variable 'y':UNDEFINED
+- undefined-variable:365:10:365:20:global_var_mixed_assignment:Undefined variable 'GLOBAL_VAR':HIGH
+-diff --git a/tests/functional/u/undefined/undefined_variable.txt b/tests/functional/u/undefined/undefined_variable.txt
+-index c527c76..b85ad8a 100644
+---- a/tests/functional/u/undefined/undefined_variable.txt
+-+++ b/tests/functional/u/undefined/undefined_variable.txt
+-@@ -31,8 +31,8 @@ used-before-assignment:255:26:255:34:func_should_fail:Using variable 'datetime'
+- undefined-variable:291:18:291:24:not_using_loop_variable_accordingly:Undefined variable 'iteree':UNDEFINED
+- undefined-variable:308:27:308:28:undefined_annotation:Undefined variable 'x':UNDEFINED
+- used-before-assignment:309:7:309:8:undefined_annotation:Using variable 'x' before assignment:HIGH
+--undefined-variable:339:11:339:12:decorated3:Undefined variable 'x':UNDEFINED
+--undefined-variable:344:19:344:20:decorated4:Undefined variable 'y':UNDEFINED
+-+undefined-variable:339:11:339:12::Undefined variable 'x':UNDEFINED
+-+undefined-variable:344:19:344:20::Undefined variable 'y':UNDEFINED
+- undefined-variable:365:10:365:20:global_var_mixed_assignment:Undefined variable 'GLOBAL_VAR':HIGH
+- undefined-variable:377:19:377:44:RepeatedReturnAnnotations.x:Undefined variable 'RepeatedReturnAnnotations':UNDEFINED
+- undefined-variable:379:19:379:44:RepeatedReturnAnnotations.y:Undefined variable 'RepeatedReturnAnnotations':UNDEFINED
+-diff --git a/tests/functional/u/unsupported/unsupported_version_for_final.txt b/tests/functional/u/unsupported/unsupported_version_for_final.txt
+-index 326bffd..99558dc 100644
+---- a/tests/functional/u/unsupported/unsupported_version_for_final.txt
+-+++ b/tests/functional/u/unsupported/unsupported_version_for_final.txt
+-@@ -1,9 +1,9 @@
+--using-final-decorator-in-unsupported-version:10:1:10:6:MyClass1:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:12:5:12:10:MyClass1.my_method:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:13:5:13:10:MyClass1.my_method:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:18:1:18:8:MyClass2:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:20:5:20:12:MyClass2.my_method:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:25:1:25:13:MyClass3:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:27:5:27:17:MyClass3.my_method:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:32:1:32:15:MyClass4:typing.final is not supported by all versions included in the py-version setting:HIGH
+--using-final-decorator-in-unsupported-version:34:5:34:19:MyClass4.my_method:typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:10:1:10:6::typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:12:5:12:10:MyClass1:typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:13:5:13:10:MyClass1:typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:18:1:18:8::typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:20:5:20:12:MyClass2:typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:25:1:25:13::typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:27:5:27:17:MyClass3:typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:32:1:32:15::typing.final is not supported by all versions included in the py-version setting:HIGH
+-+using-final-decorator-in-unsupported-version:34:5:34:19:MyClass4:typing.final is not supported by all versions included in the py-version setting:HIGH
+-diff --git a/tests/functional/u/unsupported/unsupported_version_for_posonly_args.txt b/tests/functional/u/unsupported/unsupported_version_for_posonly_args.txt
+-index 4ae1b27..fa76615 100644
+---- a/tests/functional/u/unsupported/unsupported_version_for_posonly_args.txt
+-+++ b/tests/functional/u/unsupported/unsupported_version_for_posonly_args.txt
+-@@ -1 +1 @@
+--using-positional-only-args-in-unsupported-version:2:0:None:None:add:Positional-only arguments are not supported by all versions included in the py-version setting:HIGH
+-+using-positional-only-args-in-unsupported-version:2:0:2:None:add:Positional-only arguments are not supported by all versions included in the py-version setting:HIGH
+-diff --git a/tests/functional/u/unused/unused_argument.txt b/tests/functional/u/unused/unused_argument.txt
+-index bca2700..50f6c66 100644
+---- a/tests/functional/u/unused/unused_argument.txt
+-+++ b/tests/functional/u/unused/unused_argument.txt
+-@@ -3,8 +3,8 @@ unused-argument:3:23:3:29:test_unused:Unused argument 'second':HIGH
+- unused-argument:32:29:32:32:Sub.newmethod:Unused argument 'aay':INFERENCE
+- unused-argument:59:13:59:16:function:Unused argument 'arg':HIGH
+- unused-argument:66:21:66:24:AAAA.method:Unused argument 'arg':INFERENCE
+--unused-argument:73:0:None:None:AAAA.selected:Unused argument 'args':INFERENCE
+--unused-argument:73:0:None:None:AAAA.selected:Unused argument 'kwargs':INFERENCE
+-+unused-argument:73:0:73:None:AAAA.selected:Unused argument 'args':INFERENCE
+-+unused-argument:73:0:73:None:AAAA.selected:Unused argument 'kwargs':INFERENCE
+- unused-argument:92:23:92:26:BBBB.__init__:Unused argument 'arg':INFERENCE
+- unused-argument:103:34:103:39:Ancestor.set_thing:Unused argument 'other':INFERENCE
+- unused-argument:129:21:129:25:TestClassWithOnlyNew.__new__:Unused argument 'argA':INFERENCE
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch b/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
+deleted file mode 100644
+index 411ba313fc..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pylint/0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 554b1d1924342ce2e5b4d8f79dd62eab7cd67501 Mon Sep 17 00:00:00 2001
+-From: Daniël van Noord <13665637+DanielNoord@users.noreply.github.com>
+-Date: Sat, 4 Jul 2026 23:17:33 +0200
+-Subject: [PATCH] checkers/variables: do not pass asname to Import.infer()
+-
+-astroid 4.2 removed the asname keyword argument from Import/ImportFrom
+-inference (astroid commit fe29fb1f7e3e, "Remove `asname` kwarg from
+-Import/ImportFrom `_infer`"). With astroid >= 4.2, pylint 4.0.8 then
+-crashes on any module that imports a missing submodule of a package:
+-
+-  TypeError: NodeNG.infer() got an unexpected keyword argument 'asname'
+-  ... (astroid-error)
+-
+-which breaks the fallback_import_enabled, import_error and
+-no_name_in_module functional tests with the astroid 4.3.1 in meta-python.
+-
+-This is the pylint/ part of upstream commit 554b1d192434
+-("Bump `astroid` to `4.2.0b4` (#11153)"); the astroid version pin
+-changes in pyproject.toml and requirements_test_min.txt are left out.
+-
+-Upstream-Status: Backport [https://github.com/pylint-dev/pylint/commit/554b1d192434]
+-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+----
+- pylint/checkers/variables.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/pylint/checkers/variables.py b/pylint/checkers/variables.py
+-index 3ce7dc63410..7e5f27b70ef 100644
+---- a/pylint/checkers/variables.py
+-+++ b/pylint/checkers/variables.py
+-@@ -217,7 +217,7 @@ class C: ...
+- def _infer_name_module(node: nodes.Import, name: str) -> Generator[InferenceResult]:
+-     context = astroid.context.InferenceContext()
+-     context.lookupname = name
+--    return node.infer(context, asname=False)  # type: ignore[no-any-return]
+-+    return node.infer(context)  # type: ignore[no-any-return]
+- 
+- 
+- def _fix_dot_imports(
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb b/meta-python/recipes-devtools/python/python3-pylint_4.1.3.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb
+rename to meta-python/recipes-devtools/python/python3-pylint_4.1.3.bb
+index 9ae03295e7..25f6c916f0 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_4.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_4.1.3.bb
+@@ -3,12 +3,9 @@ HOMEPAGE = "https://www.pylint.org/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
+ 
+-SRCREV = "ecb84baf74ae152a511e5fdada5000c85250a48f"
++SRCREV = "e75de10c69103381c875601f638d4b977ff0fcaf"
+ SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v${PV} \
+            file://0001-Adjust-test-expectations-for-ptest.patch \
+-           file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
+-           file://0003-astroid-4.1.2-endlineno.patch \
+-           file://0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch \
+            file://run-ptest \
+            "
+ 
 -- 
 2.56.0
 
