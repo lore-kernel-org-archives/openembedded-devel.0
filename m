@@ -1,151 +1,253 @@
-Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.20])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8297.1794237771741644451
+Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8750.1794238936250584922
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Nov 2026 07:22:52 -0800
+ Mon, 09 Nov 2026 07:42:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=nWrEdf/P;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.159.20, mailfrom: johannes.schneider@leica-geosystems.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eQ1CRSef2jVunwOt+PDo0xWNgy1e6CHPoLNkAD8BZIQcBCzz7hY1KDDaoorSVIcw4DMt8XJNv/q6SwziBYZqcK8m/QjWOAdjeO7H8A18qUl74gsgJEvG7AxRAmcuybCUu9Xq1f6nzG5gajq584IRUp3Yygxw8frrwZPpKSyqQVSIzlIPMbBANidyLlbY6/8zzzPJXdI4lYTJlpRSL1cEQd9FsSHXOSeXIh8pJolPES3MpYJt1apugRpgamEFNGwDKZI01OClrtN0avlro3c/kj/pJhmkKjZd/awb772EpTa1GykoCM5f4/JUcoSlPjsjdRVY8RoTwC9xGhR8K7A4gw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ncN2U48A/0GY+gMdkm/8n0CM5wGoZia6XtMLzRdwGSE=;
- b=WO5NloxmTtjP3SO/R8Qtn3WFW0pzWp/II5M8aGdHPnBS2OWMOwEww7+b/ZtS71OCvk0lJt3siylEEYzoPJNqTb4jpBNlLgxoKrM2teizZ1MFhd+kAIe5sii2Dx1DoHIw8/pwkPYac+yO8I/E9VCRaxGh4L96OQ23uDz/Rx9Vsu0xGFex5S3bueFSLZpoxo97Uu3SBxOtamr/tUEJc3HWpw31lBPbREnDPHHlrPGXCxIFzY+9eUKeDzXKbFAbZq3I/0nqwBMpyxn+AajW0Lr7kEVgSLBVOY0XUHErTrVt7HydaChXmDulHmRyhjrP7vom1KsmG3y5mtVhNuFePokKnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=leica-geosystems.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ncN2U48A/0GY+gMdkm/8n0CM5wGoZia6XtMLzRdwGSE=;
- b=nWrEdf/PiceWRusS0kkA3+9KaHRxFo0l0L1+OE5VaS5Oc8K3XJZjQNuHGFWwIsgUcbk1o8NwuaSZRhz/aCfGhA/R+9WwOaSJ5eQMmZLbVmEiWmUe7Lb3YE7hVOpRdL+1+mAt3gKa19d//jyprC7Y+6C0tdssQrFKJssZPDmvhUg=
-Received: from DB8PR06CA0039.eurprd06.prod.outlook.com (2603:10a6:10:120::13)
- by MA9PR06MB818361.eurprd06.prod.outlook.com (2603:10a6:250:102::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Mon, 9 Nov
- 2026 15:22:44 +0000
-Received: from DB1PEPF000509E6.eurprd03.prod.outlook.com
- (2603:10a6:10:120:cafe::28) by DB8PR06CA0039.outlook.office365.com
- (2603:10a6:10:120::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.12 via Frontend Transport; Mon, 9
- Nov 2026 15:22:44 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 193.8.40.99) smtp.mailfrom=leica-geosystems.com; dkim=none (message not
- signed) header.d=none;dmarc=pass action=none
- header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.99; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.99) by
- DB1PEPF000509E6.mail.protection.outlook.com (10.167.242.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Mon, 9 Nov 2026 15:22:44 +0000
-Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Mon, 9 Nov 2026 16:22:43 +0100
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-To: openembedded-devel@lists.openembedded.org
-CC: Khem Raj <raj.khem@gmail.com>,
-	Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Subject: [meta-oe][PATCH 2/2] discoverable-disk-image: stage systemd-repart below WORKDIR
-Date: Mon,  9 Nov 2026 15:22:42 +0000
-Message-ID: <20261109152242.1135919-2-johannes.schneider@leica-geosystems.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261109152242.1135919-1-johannes.schneider@leica-geosystems.com>
-References: <20261109152242.1135919-1-johannes.schneider@leica-geosystems.com>
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=U3MrR8dT;
+ spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-67be6030c9fso786618d50.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2026 07:42:16 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794238935; cv=none;
+        d=google.com; s=arc-20260327;
+        b=KsYROEPmigMWdZ/7JIyhXV4wGaqlV3SoB6VpzvkCwx1/IzgU6QeaQkcvB4dzXUiCZh
+         nG4MXfOH5B2B+xTM44sSPnajiuJj1eSva2NpdX3oUH/YpEs9TnPr7ZIOfrG6RDQY+NqD
+         qMv2VAoWcAifDt2aH7XJb9hL77SUV2Jp9lwdqv1Gix4R+0JhgdUBNYzpk3V9dtsjYFt8
+         Z/N2m8oQp4GNpPrFuRYiycn4AmZdjS6m5lfl5UtdrxJpy9GJPu8/MAQUkp9b5WlC+pqi
+         k4CSH9fo2B0IVM4pgIzi+m3H+3U+cHbNy/JS8s5aU6PpwXlpwqbDtNpo3pgQ+0kcTt8L
+         XG2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=HsFoPBhQSdisXV0xwT2Tsyxudfx0mrpxWsgLlSuN/MU=;
+        fh=VD2Xf9JlQuLMcCcvtuDQCLVYdA4ERSFPUZnFrsdABUE=;
+        b=P5/oSsl70bcmM4cqZ/9YJzdkZm/Fx02Xj7dEGr7xcC/f182lZSJ+BQ8/4ej5O0dn9r
+         2dHdRzbZr3MZfshnvZfDhWTkRw4v2RkJEHNsQEU4W6ubXL3eVd0lNvwGODnQdMGVNo63
+         h5mIC2qN7dC1hsJpzdgBNMgNe2QQWQZNmO2J+ntCaRUbAFV0KyWmIKJFnoSHWQjky3IM
+         NaWeqj8WDGMLmrq3UdNibFNpGjlbhLVdl53b5tJ81W2XW179M4QV1KVAMXhmtaD6wtjT
+         HqFttOQv0K1gWC0ci7Capnko2FA/mAu1wgQKBgfnkqwDQVdCqv620VzRF59UJbI890a2
+         2fJw==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794238935; x=1794843735; darn=lists.openembedded.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HsFoPBhQSdisXV0xwT2Tsyxudfx0mrpxWsgLlSuN/MU=;
+        b=U3MrR8dT4Xl+hEYy2HTtPBds67L/hYxqWkXjW9q6fiV72rtCeaDrAMtFwF5dI8JGFG
+         ccA2DuRIekulq49IG1lhkh3fcK9g3jYDrFJc+RUF3/lMj3w1sNSVVVu3C/tKzZdhlZNG
+         /hIBkMmhUrQcqunYnYTprWaJu0penuf56D3QkmuzgBgn0PeyJTlGTxEmwxYU2y0PMKrs
+         PY/VNoW/NnQa8SpBlpzhzoU316ZdGbs9aDFssOJczdgybpQezVVAiI9WlMyRnCoXGvxK
+         KgF5E9sJDVVtT5eAuS0/c1vavTtmNB8VutKgCCmX0HZCEgdPc1whS30f080ed7rxFwFU
+         ZPZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794238935; x=1794843735;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=HsFoPBhQSdisXV0xwT2Tsyxudfx0mrpxWsgLlSuN/MU=;
+        b=GsQoMwMSZPnwTV9s4KB8A55MuHlMdTlXhKrvt9Xy97mmWoFNsp1za7ED7ZbkOKZhdD
+         ALnqflisV9WPSNdpIcYy958foL4oExXk9dkveYseMHxbNWbnobWc7qBXDanWsdKRrjWE
+         1jykujtrN88FpMUklhDVFPzb2hQ86hI5QSt4lG4lKNR3X9MC9nf7vgE0WEKYuv2vSjaK
+         1j19QlUWbnKuHUO6CRueIhBREFKcYyfb+G5vWDhy4pL1NgYtD0xeaLx4KiyTpY6R7SmF
+         Rm87eJ+wPuUCIVZ44A6p1qyR3iM9gO3HVGi294sT535n3rGzPubIuzmbcaOcLfEuKnQX
+         NwVA==
+X-Gm-Message-State: APuU4Z/5l50OlPmL/+YDEbA3frvGTZZ0gD3LXehdNVualx96kntBoK1Q
+	hxlwgS+UVPtqc8oMzsKtRmh3esvR+uBMdb0uAZ7uJT+fPdrelaqRNUMpRfY01VmDYnupZLAT8Kk
+	WE9ZfqrzdyshhT8I6oyWDliqY6JMrttJ/vlEJ
+X-Gm-Gg: AYBFou3zA8T4av6NdXdJdQO7Ls+sBjs4UFM0rgvp4lXsMHiFTj0SmRjqdJ1jw9cmc0q
+	ohHLCnEp6fBisvfdMNzYdsMtmcjUjDfXlo9IsioNn0k/qcsTSrMreoM0CU1uCKwCylWQyVqcL7D
+	EaWwbjyKCwZ+URhgK6M7Yq5vQ5NweiOilSRNjs7Ydz+86YKQYaypllnm35uyvww3HMZOJ66ExP9
+	wgRPorr1r9ctnm/+LCKwkKJW2+2vOQdeh5IopMV2bNx51M62FPJz2fEJTHUWETA9kXG5T0dBLg4
+	YbKhj9rjFLQW5evZobfye92ksHzHrMRs8n19ubZhoeDO0WGEWviU12mGLBQUnBU1fw8s/yuXsdJ
+	Km8KP0WhfvHR5B461/meoKrcE/XLEdHREhlHzUyzaKh7MU6lYt9QavXGhe9kwEdN2NyQlD6Zuby
+	8Zbt38xZ9hgrAVoIa9UucLbSNTc9Ot/4mkmk20bPdVwZQGTi9m7y5HAl8dfiZFg5QtSlPdAEq5Y
+	BblJZdPYJL5ercf1LgkgjgYywscWIagboUj3REAwaZ2tX2ADSr8zT98ip3awri6A+VYrBGX9hJP
+	T60e6m70lD1VByY4zYaKxUuedmkWe0+6GCMMPb11X9pFrT4ZPY2Iram2Kv1JsUnpyLkc5o8e/0y
+	PGXZ8uQJ2iLiFkLGEGCSTWg==
+X-Received: by 2002:a53:ee10:0:b0:67b:fc94:86dd with SMTP id
+ 956f58d0204a3-67c3dabe576mr1810383d50.106.1794238934942; Mon, 09 Nov 2026
+ 07:42:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-Path: johannes.schneider@leica-geosystems.com
-X-OriginalArrivalTime: 09 Nov 2026 15:22:43.0062 (UTC) FILETIME=[2A57D960:01DD705E]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E6:EE_|MA9PR06MB818361:EE_
-X-MS-Office365-Filtering-Correlation-Id: b95a23f1-d4a1-455e-88a4-08df3e754d7a
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|10067099003|5023799004|11063799006|56012099006|261026121527099003|261021123027099003|261022105027099003|261021121427099003|261022075727099003|261022115727099003|261009223027099003|261026140227099003|261102130727099003|261028144727099003|261102123227099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: OzdnOZ7bTqIwe6doBnaNWCr3rGpWo4Wl2R0w8YHOnPE3hOF+FPWFdPDT5C7ltq8L8jJCtk/wbgnKgfyM3VN3aEzWc3hVW33lNkPeAHIIKXVrJ46LK3TwoNG+GTpKPDkdg23G2fPPAx8Q6MR44cl+yTB4jn9gxzlub9cmcgIp00BrchiAvnqAxndOnF5FsflHMVWdtQCNT70P41ED2qdZhi+EmnnwazlEhL6c1DkVnGbLqeP1Mgw78ulce3VPdEBxAPgscErsucKNEVxwIKQMjRwGoXFeRtXg6v+GHPKtB4bw7RgmKtL+L/Q2wEZyzmJIh1NkEStoKvNIg4uWY1yMdy+JSq/5gQrGuARazgv9jEt9d0JvIIURJqhj1nVX4J47LrGUSX47MXPOWv/EDERDYnVNZcGypF2OeL7aDWUETgWNtTO00Z8zJpykm9QplbWXoxv6urBBG9K1tpm7PPGdU2RiiynDSVgZSrctHKL+Z09Rj21Pckfojk/OBwgJYQGT2Mk43BHdKJ7RWLsVZ/jtWqwWOrmMz8fV7Fegihc8DLN63qnea9SOK9HyuZdVeynDnEs+MaaxZmAN17lVfrMsiL4TkDCNs54SQBf25Fr/r2eiGoGqmlAGE2dMozUtl8Fad8VlO/vnEOgCIbDh1linvsv1BQrfOUvhYG+KJIm137cq1qeFfh240pD7axyH4IWjx0kKXT87ATCRY7O5/wln6A==
-X-Forefront-Antispam-Report: CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(10067099003)(5023799004)(11063799006)(56012099006)(261026121527099003)(261021123027099003)(261022105027099003)(261021121427099003)(261022075727099003)(261022115727099003)(261009223027099003)(261026140227099003)(261102130727099003)(261028144727099003)(261102123227099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: gtsJDbI5z93yJsgR1oOMIxyE/PTBxaAWUpT60sLu99hgvqOtjjgd0vQw5uGuhHoycv0qfMj41YlmGEORCFLTTz6AFdbc3Oyzw/UGo/1H8Pi2m+YtZKxYy+0gc49H/7rOWwzLl2oTOkt3jCR1whaGgjdlDQqEHmV9JG6dTnDPdHvCXdmx5trL38q2bMhtW31QOqltnBj8ODZ2BUxQaEPnma/BtwOjd4JiowUU8POMFs90NUbaQXk+9k+WUOHM4atsp7PFymIRytakMFxHzBeNC4PJla9a4ZOvwa++hFwXlHg1jl5Tj4EFLlmw6IVc6I0INbVgTRRlnvZDx0A+u9SO+4bCQSc279v8avpw9qRoKINAMd5YGe3lX2KeiHfT9W1aQ1RfuGkR0zMwVNkq4+jHrvW9kzW1F79gTCSkrSRhQ0dUwWXuW6lMCH9aSPiVAQ4Q
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 15:22:44.1244
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b95a23f1-d4a1-455e-88a4-08df3e754d7a
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E6.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA9PR06MB818361
+References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.60c45970-bf59-4753-942e-e3561e9c5a75@emailsignatures365.codetwo.com>
+ <20261109081800.69803-1-mike.looijmans@topic.nl>
+In-Reply-To: <20261109081800.69803-1-mike.looijmans@topic.nl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 9 Nov 2026 07:41:38 -0800
+X-Gm-Features: AclHuK9tN3IBIvmCJRtMLiZQnQN6w2L2gGcX47Mn6Di94gtJTqYtZXNk7PU1D40
+Message-ID: <CAMKF1soWj4FYR=Kq-mMRXjMnUzMkztdO9Epss9D61RWPE5nS0g@mail.gmail.com>
+Subject: Re: [oe] [PATCH 0/4] Apply the mongodb patches from the scarthgap
+ branch, which is ahead
+To: mike.looijmans@topic.nl
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005c0c93065fd9ce78"
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2026 15:22:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132063
-Content-Type: text/plain; charset="utf-8"
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2026 15:42:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132064
 
-systemd-repart copies the rootfs into a temporary directory from
-var_tmp_dir() to populate the filesystems. With $TMPDIR, $TEMP and $TMP
-unset in the task, that is the host's /var/tmp, which the class adds to
-PSEUDO_INCLUDE_PATHS for the faked ownership to apply there. pseudo
-then tracks a host-wide directory shared by all builds and users, and
-an interrupted run can leave its staging tree outside the build
-directory.
+--0000000000005c0c93065fd9ce78
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Stage into ${WORKDIR}/repart-tmp instead, recreated on every run, and
-cover only that with pseudo. The location is passed through $TMP rather
-than $TMPDIR, because pseudo derives its own runtime paths from $TMPDIR.
+fails to build -
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1947/ste=
+ps/18/logs/stdio
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
----
+| scons: Reading SConscript files ...
+| ModuleNotFoundError: No module named 'pkg_resources':
 
-Build-tested on scarthgap with this class and 1/2: two signed lzma
-sysext DDIs build, the files in the erofs partition are owned by root,
-and nothing is left in /var/tmp. A downstream copy of the class, which
-had no pseudo coverage for the staging directory at all, failed
-do_image_ddi in a CI container (EPERM on the ownership copy); this
-staging fixed it there.
+On Mon, Nov 9, 2026 at 12:18=E2=80=AFAM Mike Looijmans via openembedded-dev=
+el
+<mike.looijmans=3Dtopic.nl@lists.openembedded.org> wrote:
 
- meta-oe/classes/discoverable-disk-image.bbclass | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+> of the current state and was apparently lost in master.
+>
+> As wrynose introduces new build issues, this still won't build yet.
+>
+>
+> Awais Belal (2):
+>   mongodb: fix build with python 3.12
+>   mongodb: update to 4.4.29
+>
+> Gyorgy Sarvari (2):
+>   mongodb: upgrade 4.4.29 -> 4.4.30
+>   mongodb: ignore CVE-2025-14911
+>
+>  ...001-free_mon-Include-missing-cstdint.patch | 28 ---------
+>  ...econfig.py-python-3.12-compatibility.patch | 57 +++++++++++++++++++
+>  .../recipes-dbs/mongodb/mongodb_git.bb        | 11 ++--
+>  3 files changed, 62 insertions(+), 34 deletions(-)
+>  delete mode 100644
+> meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_=
+mon-Include-missing-cstdint.patch
+>  create mode 100644
+> meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-modul=
+econfig.py-python-3.12-compatibility.patch
+>
+> ---
+> base-commit: c734c2cb9713dbd6d50697a9f6c25ebdf3ae589e
+> branch: wrynose-mongodb
+>
+> --
+> 2.43.0
+>
+>
+> Met vriendelijke groet / kind regards,
+>
+> Mike Looijmans
+> System Expert
+>
+>
+> TOPIC Embedded Products B.V.
+> Materiaalweg 4, 5681 RJ
+> <https://www.google.com/maps/search/Materiaalweg+4,+5681+RJ?entry=3Dgmail=
+&source=3Dg>
+> Best
+> The Netherlands
+>
+> T: +31 (0) 499 33 69 69 <+31%20499%20336%20969>
+> E: mike.looijmans@topic.nl
+> W: www.topic.nl
+>
+> Please consider the environment before printing this e-mail
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#132053):
+> https://lists.openembedded.org/g/openembedded-devel/message/132053
+> Mute This Topic: https://lists.openembedded.org/mt/122170765/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-diff --git a/meta-oe/classes/discoverable-disk-image.bbclass b/meta-oe/clas=
-ses/discoverable-disk-image.bbclass
-index 02ad900d0f..604f316d5f 100644
---- a/meta-oe/classes/discoverable-disk-image.bbclass
-+++ b/meta-oe/classes/discoverable-disk-image.bbclass
-@@ -77,17 +77,19 @@ REPART_DDI_TYPE ?=3D "sysext"
-=20
- REPART_DDI_EXTENSION ?=3D "ddi"
-=20
--# systemd-repart creates temporary directoryies under /var/tmp/.#repartXXX=
-XXXX/,
--# to estimate partition size etc. Since files are copied there from the im=
-age/rootfs
--# folder - which are owned by pseudo-root - this temporary location has to=
- be
--# added to the directories handled by pseudo; otherwise calls to e.g.
--# fchown(0,0) inside systemd git/src/shared/copy.c end up failing.
--PSEUDO_INCLUDE_PATHS .=3D ",/var/tmp/"
-+# systemd-repart stages copies of the rootfs here; pseudo has to cover it
-+REPART_WORKDIR =3D "${WORKDIR}/repart-tmp"
-+PSEUDO_INCLUDE_PATHS .=3D ",${REPART_WORKDIR}"
-=20
- oe_image_systemd_repart_make_ddi() {
-=20
-     local additional_args=3D""
-=20
-+    # $TMP, not $TMPDIR: pseudo derives its own runtime paths from $TMPDIR
-+    rm -rf "${REPART_WORKDIR}"
-+    mkdir -p "${REPART_WORKDIR}"
-+    export TMP=3D"${REPART_WORKDIR}"
-+
-     if [ -n "${REPART_PRIVATE_KEY}" ]
-     then
-         if [ -n "${REPART_PRIVATE_KEY_SOURCE}" ]
---=20
-2.53.0
+--0000000000005c0c93065fd9ce78
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">fails to build=C2=A0-=C2=A0<a href=3D"https://autobuilder.=
+yoctoproject.org/valkyrie/#/builders/81/builds/1947/steps/18/logs/stdio">ht=
+tps://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1947/steps=
+/18/logs/stdio</a><div><br><div>| scons: Reading SConscript files ...<br>| =
+ModuleNotFoundError: No module named &#39;pkg_resources&#39;:</div></div></=
+div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Mon, Nov 9, 2026 at 12:18=E2=80=AFAM Mike Looijmans =
+via openembedded-devel &lt;mike.looijmans=3D<a href=3D"mailto:topic.nl@list=
+s.openembedded.org">topic.nl@lists.openembedded.org</a>&gt; wrote:<br></div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex">of the current state and=
+ was apparently lost in master.<br>
+<br>
+As wrynose introduces new build issues, this still won&#39;t build yet.<br>
+<br>
+<br>
+Awais Belal (2):<br>
+=C2=A0 mongodb: fix build with python 3.12<br>
+=C2=A0 mongodb: update to 4.4.29<br>
+<br>
+Gyorgy Sarvari (2):<br>
+=C2=A0 mongodb: upgrade 4.4.29 -&gt; 4.4.30<br>
+=C2=A0 mongodb: ignore CVE-2025-14911<br>
+<br>
+=C2=A0...001-free_mon-Include-missing-cstdint.patch | 28 ---------<br>
+=C2=A0...econfig.py-python-3.12-compatibility.patch | 57 ++++++++++++++++++=
++<br>
+=C2=A0.../recipes-dbs/mongodb/<a href=3D"http://mongodb_git.bb" rel=3D"nore=
+ferrer" target=3D"_blank">mongodb_git.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1=
+1 ++--<br>
+=C2=A03 files changed, 62 insertions(+), 34 deletions(-)<br>
+=C2=A0delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mon=
+godb/mongodb/0001-free_mon-Include-missing-cstdint.patch<br>
+=C2=A0create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mon=
+godb/mongodb/0001-moduleconfig.py-python-3.12-compatibility.patch<br>
+<br>
+---<br>
+base-commit: c734c2cb9713dbd6d50697a9f6c25ebdf3ae589e<br>
+branch: wrynose-mongodb<br>
+<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+Met vriendelijke groet / kind regards,<br>
+<br>
+Mike Looijmans<br>
+System Expert<br>
+<br>
+<br>
+TOPIC Embedded Products B.V.<br>
+<a href=3D"https://www.google.com/maps/search/Materiaalweg+4,+5681+RJ?entry=
+=3Dgmail&amp;source=3Dg">Materiaalweg 4, 5681 RJ</a> Best<br>
+The Netherlands<br>
+<br>
+T: <a href=3D"tel:+31%20499%20336%20969" value=3D"+31499336969" target=3D"_=
+blank">+31 (0) 499 33 69 69</a><br>
+E: <a href=3D"mailto:mike.looijmans@topic.nl" target=3D"_blank">mike.looijm=
+ans@topic.nl</a><br>
+W: <a href=3D"http://www.topic.nl" rel=3D"noreferrer" target=3D"_blank">www=
+.topic.nl</a><br>
+<br>
+Please consider the environment before printing this e-mail<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#132053): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/132053" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/132053</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/122170765/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/122170765/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--0000000000005c0c93065fd9ce78--
