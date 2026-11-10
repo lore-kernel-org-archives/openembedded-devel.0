@@ -1,64 +1,64 @@
 Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1079.1794332162479716475
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1096.1794332163540036057
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 09:36:02 -0800
+ Tue, 10 Nov 2026 09:36:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=AuE+KqkX;
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=TrvVO15Y;
  spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4b467581b98so21659635e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:36:02 -0800 (PST)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a140e7405dso19507345e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:36:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794332161; x=1794936961; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794332162; x=1794936962; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Vuhg8gcWyHZ/J3+GUIlfM0bdYOXTiVMVbpbblTsMXtw=;
-        b=AuE+KqkXn2joEnT1BbNsx7otJnJNiL8v6e4KivHqLcRmlE9b8GMbzlBcoNPJhuWWus
-         tUXLtEA+njabWAapTE46bqkSwUS6t9zANZ6XkvYTjFj0VEB+NttGNtrhwKIW4+Lnhmb7
-         dRMHrqdCJjzJtswEB7oKQ+yXQTen4WVae7fxdnjx1W4eFZ6xrnkv3sRkdwZ+oZ1cCtn6
-         sO0j5bQ2FOuaIJgSAkXN+Ba0uEYVURm1OEPIVbEB4MPxbQxXBQtLdUA0NPQN+EI7tCgV
-         dp0608FgSu2QZVwVH1/ZSnlvfsn6WqeeGKtZGloSHsIpjpYE4mHuqfnQ0MrGoIx5CkQS
-         7AcA==
+        bh=CruFE0B+ab44eamVfh7YVrhzAIixmDzulNVGq/yfSXI=;
+        b=TrvVO15YhxjaS5oA/sqWVAiPiMxyuGbZsGiMXOLOFlLRNHbeDGzM1HnZAZxigmcDq0
+         qhO8V7dvjRY5BR9C3jAC3oaSuXwMvvRaVb7uY5ijusDA9gnbgwz3amS63dfIOPBtIeIY
+         8q15lXV+lyYwLz5cypvkDzx2jDZ5baixc5P9zLXY5erA+PAJ9zdJ7TNIN1GW0dLn1j9h
+         HMktkN/5TsFR71GXrmmpvIcPM+CgaIHoEdzHn+xfADeFaqtP+Vja7r1F24SqgIneWuWE
+         Kep27OBrUZzpPfQSN5fBx3oNYN2eJdKJFfI9ZxdIHkVLrUvnncXVH6gOvqskanogDmSo
+         YbjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794332161; x=1794936961;
+        d=1e100.net; s=20260707; t=1794332162; x=1794936962;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Vuhg8gcWyHZ/J3+GUIlfM0bdYOXTiVMVbpbblTsMXtw=;
-        b=blrMzUHj+a1Km2WvqbcFGTPyeK1F7o8uG5KkEORh7s7u1kU4joMPue1qStvgkqL52y
-         GZWrsIQ1+F9SypAsU7fuEOvWG3z5BJKuyE/F5g8ZlDdROQvBKvZ5gHikQqlwXf+jBxCF
-         Oa6YKwa7VNYr7XR1exvD/ZpLYcZ5bUi40H1EIfTRnxuLCytUJOoJzMaWRzV1eHc1tEcM
-         BAAD/ImbEimmicSpYwlsxJLkybIkbifT3lryEd7PERfnowxiVAYRFR0b03/SL7h8X+4c
-         /xtzjE8X0HsxWnIrcQQxHhEnnLYl2hmKZnxqMCBlrL5yM6vFs0r3OTHMR1lVF1YhrAkH
-         S9iw==
-X-Gm-Message-State: APuU4Z8+2bz6wOlz/RXXAxsMqKVI0rGV6N8WGI8kqhUyzSWYuRKNQvIp
-	sz0hHxz2h+MsRLUPdsZi6cWGG5IPeo8vohrbZOXrmZDc+lUgh4ZcPbb8LQFEAA==
-X-Gm-Gg: AYBFou3MGqfJ74z8sTUPvpHuoml1iZ/fahCLJ1e+L8kxSlr/f40R2MrwbmGUCfLCF7g
-	2Ch5un3W7s6fSNme0xMtZ7Wy2/kAYei6X8LYhBVkmiiGBtY/Xl44etBs9KWKJb9KxlWMz2q4wNN
-	VZOGqhz724Hu/QE2PsCkfVK0e6Qybta1qYAzj6COeKCOfevccS8BtbHY9Js+Cqlp/D+sudwsLrY
-	2K7CIwaxk3iJ3VDsypZob82zHGNaSjOyRyK+/Lz9EJu7Pn2Z4MgcwpqUFPJxpnW1UnZlLIuNjwr
-	UIywuMPt3AZVnfSdZXq/2pMCTddYGWVJqIFccS+2VrpxJAZ0WRyJVLuWrJMQ0axIZepBBhqKMZl
-	WgQL06S6b029TULPO4TO/byBM+N5wPkqDCSzK5rssp0HWcTLapD8YtdxtnLrOnG3zsm7AqOIwpQ
-	gXSEVYMT7TvZo+u0OHkzB2b6YQMp4a+63LsDPEbB3qS20MMMCvw15HzUJgVD5/PNlwFtlSq6vng
-	MXLo/2HDQh3QPUO+x3Ee29hPPKAvJVAkabhXKrkkboWubQyZGjggGmjLLxxWAmlqbOKdMdcfC3z
-	vvgLZANJvgMGgySHpNoLjscPvhsNWBqbEQ6fxN7DSRLfK29KNLgZO0WZ/wA9yfN2S8cank8bcT2
-	EUuf4
-X-Received: by 2002:a05:600c:3486:b0:4a1:e250:b191 with SMTP id 5b1f17b1804b1-4ba023418ddmr60401035e9.17.1794332160611;
-        Tue, 10 Nov 2026 09:36:00 -0800 (PST)
+        bh=CruFE0B+ab44eamVfh7YVrhzAIixmDzulNVGq/yfSXI=;
+        b=sdtffH3Ux7U9WOSxLilXYfDR+0Oi5m64OsKliIakrLyEo7AwN6J+SqeKiDmkGA0c2x
+         OhcnCrj02uRT2+aijRXp0Jk3wrp4XK2bPR+qBvHqUsLy+BZbPOqwmq9uWJky91NcISb5
+         15vKgwSj12FYUbl6sNGx7ysAQ7MUIEkSaXR0qb3SyjlzxWTTRXU+8NIQbLTKvwEprK5E
+         Ug3nbwnbYr3YflsSA0VcV0v4eYJgXXEJD5Z3V8Mj3MsbDwBjxqYIgM4+JUwpbw4IX3dO
+         HHRCBXo91iyt0WX6tRzvfWQAg8esEwJGzi46M8PXwS5fIkNwRLb90/bg6KoXoLCPQHns
+         cd0g==
+X-Gm-Message-State: APuU4Z/7Jv2zx8NAPegSSy/P28Kko6oVneZX4Vw8GKqd3NgGYWSJnciu
+	EsCpRlKadflrXpupiBxTr2G8OYbnlg+st8r57Ptc8oVWARes58/tb3o7mXII/A==
+X-Gm-Gg: AYBFou1+8229o4wJuVBwJQrMtOc9GEuLhUbuBgSAzMK9oHZ2EnpK37fY3VfFZzCqJo4
+	LFSnvzFl3uDcVFJVzNYW9FoU0VRK5pt9DzdTQY84ht/ZsCJ7nZvUEsvORMYtkky6aCNIitimT/b
+	mSDSPblBRHDhDChMNMswxg7vBHrpvGhwI2PxKSqV4ID/hBQ6Z7jCPnPYcpIdpNj98NUCzQ4vrs1
+	H3aocXMLPwH9OPgMXW5zgLIj1VNLoqwvZCXHPpufY/Xh7qg2FK+Q06LDzPnPMQeNpqYVCCF6aT4
+	yEH3QwOyKA6E9eW+NIhbczASv66ljvxdzovKopMvjVqTeRBi9EIaSmjB02iVjAHF+F5ExBAO9N1
+	7TPHrpGmYaPE/dQ9KBTY7H60NJSprFDudGrfDLCrdqW5t+CdHHwW+5JAlqB2xjZ1ERcgRba1p3i
+	VXzh4jb+M9Us3LHWUfXjgyU/2+k2UIfjruielBuLo0r4gvwMTzxa/wDDhuG/f9wbTDIKxunk2zM
+	ek6bizxxbMqyGKxyjNbREpn3JRac6yUTHeGeZk4ZzRBOyYyx10GvmFG+jXi0OhrQYfgmezUgkNV
+	P2MsuduMF4S9gmdmwIUQlNDvo5INChGgKIX3JoXSUU/VUeJ5ZNf4fLqg6EkXJuIWVQQC0dmxpom
+	EljmdcdQciuWCX0HU7YQGNjxv
+X-Received: by 2002:a05:600c:34c7:b0:4a2:133:45e1 with SMTP id 5b1f17b1804b1-4ba0234cccemr54824815e9.24.1794332161623;
+        Tue, 10 Nov 2026 09:36:01 -0800 (PST)
 Return-Path: <alex.kiernan@gmail.com>
 Received: from [192.168.5.15] (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.35.59
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.36.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 09:35:59 -0800 (PST)
+        Tue, 10 Nov 2026 09:36:00 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 10 Nov 2026 17:35:35 +0000
-Subject: [PATCH meta-oe 06/10] android-tools: add PACKAGECONFIG
- debuggable-prop
+Date: Tue, 10 Nov 2026 17:35:36 +0000
+Subject: [PATCH meta-oe 07/10] android-tools: add PACKAGECONFIG
+ auth-unless-debuggable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-android-tools-adbd-v1-6-cc2176f381c3@gmail.com>
+Message-Id: <20261110-android-tools-adbd-v1-7-cc2176f381c3@gmail.com>
 References: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 In-Reply-To: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -66,44 +66,45 @@ Cc: Alex Kiernan <alex.kiernan@gmail.com>
 X-Mailer: b4 0.16.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 17:36:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132103
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132104
 
-The non-Android liblog says every build is debuggable, so adbd allows
-`adb root` and the root: service everywhere. With debuggable-prop, liblog
-reads ro.debuggable from the build.prop-style files in
-ADB_DEBUGGABLE_PROP_FILES (default ${sysconfdir}/build.prop), and the build
-is debuggable only if one of them sets it to 1.
+Debian's adbd never asks a host for a key on Linux. With
+auth-unless-debuggable a host must authenticate unless the build is
+debuggable, checked for each connection so that a debuggable state that
+appears while adbd runs applies at once. It needs debuggable-prop to mean
+anything.
 
 AI-Generated: Claude Opus 5.5 (Claude Code)
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...onally-read-ro.debuggable-from-build.prop.patch | 117 +++++++++++++++++++++
- .../android-tools/android-tools_35.0.2.bb          |   9 +-
- 2 files changed, 125 insertions(+), 1 deletion(-)
+ ...ally-require-authorization-unless-the-bui.patch | 138 +++++++++++++++++++++
+ .../android-tools/android-tools_35.0.2.bb          |   8 +-
+ 2 files changed, 145 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0022-adbd-optionally-require-authorization-unless-the-bui.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0022-adbd-optionally-require-authorization-unless-the-bui.patch
 new file mode 100644
-index 000000000000..6cf4f9c8583e
+index 000000000000..e4115348fd31
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch
-@@ -0,0 +1,117 @@
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/0022-adbd-optionally-require-authorization-unless-the-bui.patch
+@@ -0,0 +1,138 @@
 +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 +From: Alex Kiernan <alex.kiernan@gmail.com>
 +Date: Fri, 6 Nov 2026 09:38:18 +0000
-+Subject: [PATCH] liblog: optionally read ro.debuggable from build.prop-style
-+ files
++Subject: [PATCH] adbd: optionally require authorization unless the build is
++ debuggable
 +
-+The non-Android stub of __android_log_is_debuggable() returns 1, so on a
-+Linux adbd every build is debuggable: `adb root` and the root: service are
-+always allowed, and nothing can tell a development image from a production
-+one.
++On a Linux build adbd accepts every connection without a key check:
++Debian's "don't require authorization on Linux" sets auth_required to
++false unconditionally, because there is no property service to relax it
++on development builds the way Android does.
 +
-+When LIBLOG_DEBUGGABLE_PROP_FILES is passed to make - a colon-separated
-+list of build.prop-style files - read ro.debuggable from them instead. The build is
-+debuggable if any of them has "ro.debuggable=1", and not otherwise,
-+including when none of them exists. The files are read on each call rather
-+than latched, so one written after the process started (a runtime unlock on
-+tmpfs, say) takes effect without a restart.
++When make is given ADBD_AUTH_UNLESS_DEBUGGABLE=1, leave auth_required alone
++and decide per connection instead: a host must authenticate unless
++__android_log_is_debuggable() says the build is debuggable. Deciding per
++connection rather than once at startup lets a debuggable state that
++appears while adbd runs (LIBLOG_DEBUGGABLE_PROP_FILES re-reads its files)
++take effect without a restart. The TLS client-certificate checks make
++the same decision.
 +
 +Without the define nothing changes.
 +
@@ -112,133 +113,148 @@ index 000000000000..6cf4f9c8583e
 +AI-Generated: Claude Opus 5.5 (Claude Code)
 +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 +---
-+ debian/system/liblog.mk              |  4 +++
-+ system/logging/liblog/properties.cpp | 52 ++++++++++++++++++++++++++++
-+ 2 files changed, 56 insertions(+)
++ debian/system/adbd.mk                |  4 ++++
++ packages/modules/adb/adb.cpp         |  2 +-
++ packages/modules/adb/adb_auth.h      |  4 ++++
++ packages/modules/adb/daemon/auth.cpp | 17 +++++++++++++++--
++ packages/modules/adb/daemon/main.cpp |  2 +-
++ 5 files changed, 25 insertions(+), 4 deletions(-)
 +
-+diff --git a/debian/system/liblog.mk b/debian/system/liblog.mk
-+index 091ccad19c3a..89027bcebacf 100644
-+--- a/debian/system/liblog.mk
-++++ b/debian/system/liblog.mk
-+@@ -26,6 +26,10 @@ CPPFLAGS += \
-+   -Isystem/libbase/include \
-+   -Isystem/logging/liblog/include \
++diff --git a/debian/system/adbd.mk b/debian/system/adbd.mk
++index a3f88f169b9b..5e2c5ccaea30 100644
++--- a/debian/system/adbd.mk
+++++ b/debian/system/adbd.mk
++@@ -109,6 +109,10 @@ LDFLAGS += -lsystemd
++ CPPFLAGS += -DHAVE_SYSTEMD
++ endif
 + 
-++ifneq ($(LIBLOG_DEBUGGABLE_PROP_FILES),)
-++CPPFLAGS += -DLIBLOG_DEBUGGABLE_PROP_FILES='"$(LIBLOG_DEBUGGABLE_PROP_FILES)"'
+++ifeq ($(ADBD_AUTH_UNLESS_DEBUGGABLE),1)
+++CPPFLAGS += -DADBD_AUTH_UNLESS_DEBUGGABLE
 ++endif
 ++
-+ LDFLAGS += \
-+   -Wl,-rpath='$$ORIGIN' \
-+   -Wl,-soname,$(NAME).so.0 \
-+diff --git a/system/logging/liblog/properties.cpp b/system/logging/liblog/properties.cpp
-+index 657901a34e44..f069ebc4eb22 100644
-+--- a/system/logging/liblog/properties.cpp
-++++ b/system/logging/liblog/properties.cpp
-+@@ -17,7 +17,9 @@
-+ #include <log/log_properties.h>
++ STATIC_LIBS = \
++   debian/out/system/libadb.a \
++   debian/out/system/libcrypto_utils.a \
++diff --git a/packages/modules/adb/adb.cpp b/packages/modules/adb/adb.cpp
++index 78bbfb6df48f..6e753484971c 100644
++--- a/packages/modules/adb/adb.cpp
+++++ b/packages/modules/adb/adb.cpp
++@@ -392,7 +392,7 @@ static void handle_new_connection(atransport* t, apacket* p) {
++         // we'll just not verify the client's certificate. This should be the
++         // first packet the client receives to indicate the new protocol.
++         send_tls_request(t);
++-    } else if (!auth_required) {
+++    } else if (!adbd_connection_auth_required()) {
++         LOG(INFO) << "authentication not required";
++         handle_online(t);
++         send_connect(t);
++diff --git a/packages/modules/adb/adb_auth.h b/packages/modules/adb/adb_auth.h
++index 38312211f3ad..e23ad2b089c7 100644
++--- a/packages/modules/adb/adb_auth.h
+++++ b/packages/modules/adb/adb_auth.h
++@@ -51,6 +51,10 @@ void adb_auth_tls_handshake(atransport* t);
++ extern bool auth_required;
++ extern bool socket_access_allowed;
 + 
-+ #include <ctype.h>
-++#include <limits.h>
-+ #include <pthread.h>
-++#include <stdio.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <unistd.h>
-+@@ -311,8 +313,58 @@ int __android_log_is_loggable_len(int prio, const char*, size_t, int def) {
-+   return __android_log_is_loggable(prio, nullptr, def);
-+ }
-+ 
-++#if defined(LIBLOG_DEBUGGABLE_PROP_FILES)
-++// True only if the build.prop-style file at path has the line "<key>=1".
-++// Anything else, including the file being absent or unreadable, is false.
-++static bool prop_file_is_true(const char* path, size_t pathlen, const char* key) {
-++  char buf[PATH_MAX];
-++  if (pathlen == 0 || pathlen >= sizeof(buf)) {
-++    return false;
-++  }
-++  memcpy(buf, path, pathlen);
-++  buf[pathlen] = '\0';
-++  FILE* f = fopen(buf, "re");
-++  if (f == nullptr) {
-++    return false;
-++  }
-++  const size_t keylen = strlen(key);
-++  char line[256];
-++  bool value = false;
-++  while (fgets(line, sizeof(line), f) != nullptr) {
-++    if (strncmp(line, key, keylen) == 0 && line[keylen] == '=') {
-++      const char* v = line + keylen + 1;
-++      value = v[0] == '1' && (v[1] == '\0' || v[1] == '\n' || v[1] == '\r');
-++      break;
-++    }
-++  }
-++  fclose(f);
-++  return value;
-++}
-++#endif
+++// Whether a connection made now must authenticate. auth_required is decided
+++// once at startup; this can also depend on state that changes while adbd runs.
+++bool adbd_connection_auth_required();
 ++
-+ int __android_log_is_debuggable() {
-++#if defined(LIBLOG_DEBUGGABLE_PROP_FILES)
-++  // There is no property service off Android. Read ro.debuggable from a
-++  // colon-separated list of build.prop-style files instead, and treat the
-++  // build as debuggable if any of them sets it to 1; absent all of them, it is
-++  // not. Read on every call, not latched: a file may be written after the
-++  // process starts, and the callers are occasional.
-++  const char* paths = LIBLOG_DEBUGGABLE_PROP_FILES;
-++  while (*paths != '\0') {
-++    const char* end = strchr(paths, ':');
-++    const size_t len = end != nullptr ? static_cast<size_t>(end - paths) : strlen(paths);
-++    if (prop_file_is_true(paths, len, "ro.debuggable")) {
-++      return 1;
-++    }
-++    if (end == nullptr) {
-++      break;
-++    }
-++    paths = end + 1;
-++  }
-++  return 0;
++ void adbd_auth_init();
++ void adbd_auth_verified(atransport *t);
++ 
++diff --git a/packages/modules/adb/daemon/auth.cpp b/packages/modules/adb/daemon/auth.cpp
++index 7df15aedd58a..2bb0fa65aad5 100644
++--- a/packages/modules/adb/daemon/auth.cpp
+++++ b/packages/modules/adb/daemon/auth.cpp
++@@ -37,6 +37,7 @@
++ #include <adb/tls/adb_ca_list.h>
++ #include <adbd_auth.h>
++ #include <android-base/file.h>
+++#include <log/log_properties.h>
++ #include <android-base/no_destructor.h>
++ #include <android-base/strings.h>
++ #include <crypto_utils/android_pubkey.h>
++@@ -157,6 +158,18 @@ static uint32_t transport_auth_id = 0;
++ bool auth_required = true;
++ bool socket_access_allowed = true;
++ 
+++bool adbd_connection_auth_required() {
+++#if !defined(__ANDROID__) && defined(ADBD_AUTH_UNLESS_DEBUGGABLE)
+++    // Off Android there is no property service to relax auth_required at
+++    // startup, and whether the build is debuggable can change while adbd runs
+++    // (see LIBLOG_DEBUGGABLE_PROP_FILES), so decide per connection: a
+++    // debuggable build accepts any host, and anything else authenticates.
+++    return auth_required && !__android_log_is_debuggable();
 ++#else
-+   return 1;
+++    return auth_required;
 ++#endif
+++}
+++
++ static void* transport_to_callback_arg(atransport* transport) {
++     uint32_t id = transport_auth_id++;
++     (*transports)[id] = transport->weak();
++@@ -196,7 +209,7 @@ static void IteratePublicKeys(std::function<bool(std::string_view public_key)> f
 + }
 + 
-+ int __android_log_security() {
++ bssl::UniquePtr<STACK_OF(X509_NAME)> adbd_tls_client_ca_list() {
++-    if (!auth_required) {
+++    if (!adbd_connection_auth_required()) {
++         return nullptr;
++     }
++ 
++@@ -390,7 +403,7 @@ void adbd_notify_framework_connected_key(atransport* t) {
++ }
++ 
++ int adbd_tls_verify_cert(X509_STORE_CTX* ctx, std::string* auth_key) {
++-    if (!auth_required) {
+++    if (!adbd_connection_auth_required()) {
++         // Any key will do.
++         LOG(INFO) << __func__ << ": auth not required";
++         return 1;
++diff --git a/packages/modules/adb/daemon/main.cpp b/packages/modules/adb/daemon/main.cpp
++index a5b1d6b3e0eb..d309e235b947 100644
++--- a/packages/modules/adb/daemon/main.cpp
+++++ b/packages/modules/adb/daemon/main.cpp
++@@ -313,7 +313,7 @@ int adbd_main(int server_port) {
++         auth_required = android::base::GetBoolProperty("ro.adb.secure", false);
++ #endif
++     }
++-#else
+++#elif !defined(ADBD_AUTH_UNLESS_DEBUGGABLE)
++     auth_required = false;
++ #endif
++ 
 diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-index f5ab21262ce5..d3d60b514721 100644
+index d3d60b514721..1a939b503601 100644
 --- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
 +++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-@@ -65,6 +65,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
-            file://0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch \
+@@ -66,6 +66,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
             file://0019-adb-daemon-exit-after-adb-root-unroot-so-an-init-sup.patch \
             file://0020-adbd-signal-readiness-once-functionfs-is-serviced.patch \
-+           file://0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch \
+            file://0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch \
++           file://0022-adbd-optionally-require-authorization-unless-the-bui.patch \
             "
  
  SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
-@@ -208,7 +209,8 @@ do_compile() {
-     # Debian replaces Android's Soong build system with hand-written GNU make
-     # fragments under debian/system/ and debian/external/.
-     for tool in ${PREREQUISITE_core}; do
--        oe_runmake -f ${S}/debian/system/${tool}.mk -C ${S}
-+        oe_runmake -f ${S}/debian/system/${tool}.mk -C ${S} \
-+            ${@'LIBLOG_DEBUGGABLE_PROP_FILES=' + d.getVar('ADB_DEBUGGABLE_PROP_FILES') if bb.utils.contains('PACKAGECONFIG', 'debuggable-prop', True, False, d) else ''}
+@@ -221,7 +222,8 @@ do_compile() {
+ 
+     for tool in ${TOOLS_TO_BUILD}; do
+         oe_runmake -f ${S}/debian/system/${tool}.mk -C ${S} \
+-            ${@'HAVE_SYSTEMD=1' if bb.utils.contains('PACKAGECONFIG', 'systemd', True, False, d) else ''}
++            ${@'HAVE_SYSTEMD=1' if bb.utils.contains('PACKAGECONFIG', 'systemd', True, False, d) else ''} \
++            ${@'ADBD_AUTH_UNLESS_DEBUGGABLE=1' if bb.utils.contains('PACKAGECONFIG', 'auth-unless-debuggable', True, False, d) else ''}
      done
+ }
  
-     if echo " ${TOOLS_TO_BUILD} " | grep -q " fastboot "; then
-@@ -266,8 +268,13 @@ FILES:${PN}-adbd = " \
- BBCLASSEXTEND = "native"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+ADB_DEBUGGABLE_PROP_FILES ?= "${sysconfdir}/build.prop"
- # Apply Android's fs_config ownership/mode tables to files pushed by adbd to
- # /system, /vendor and /oem. Off by default: the tables describe Android
- # partition images and are meaningless on a generic Linux rootfs.
- PACKAGECONFIG[fs-config] = ""
-+# Read ro.debuggable from ADB_DEBUGGABLE_PROP_FILES (colon-separated,
-+# build.prop format), so `adb root` is refused unless one of them sets
-+# ro.debuggable=1. Off by default: every build is debuggable.
-+PACKAGECONFIG[debuggable-prop] = ""
+@@ -277,4 +279,8 @@ PACKAGECONFIG[fs-config] = ""
+ # build.prop format), so `adb root` is refused unless one of them sets
+ # ro.debuggable=1. Off by default: every build is debuggable.
+ PACKAGECONFIG[debuggable-prop] = ""
++# Require hosts to authenticate unless the build is debuggable, decided per
++# connection. Off by default, as in Debian: no host is asked for a key. Only
++# meaningful with debuggable-prop, without which every build is debuggable.
++PACKAGECONFIG[auth-unless-debuggable] = ""
  PACKAGECONFIG[systemd] = ",,systemd"
 
 -- 
