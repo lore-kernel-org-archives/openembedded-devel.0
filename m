@@ -1,60 +1,59 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10.1794324459853605919
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11.1794324460981245743
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 07:27:40 -0800
+ Tue, 10 Nov 2026 07:27:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=XbjBtpyN;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a2000d5fb1so12484725e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 07:27:39 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=FjrodQE7;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4b4571ff080so25196845e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 07:27:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1794324458; x=1794929258; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1794324459; x=1794929259; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=t0R3azMwiplxA33eQo8BwXzVLiE3X0fuXShqXzMDBVE=;
-        b=XbjBtpyNGZnAOeqkrTrv6YtHkx8/iFehIsFIPNBCSOtiV1U7qs67eKEOrz78ej2EEE
-         IGDmhKxe/e8Lc4v6Ghi0fQMaZL9cGWpuw5IfQcPW6K0gW4S08NfckHDZsgeIZz4b4XxA
-         /NrL/IrAc/0UAzy21ec1Y9pdfqcBy5fIEJ94k=
+        bh=qLtb78wLXY3+FPQjY5NebE7ZEHk93LnYxCVQocB7aog=;
+        b=FjrodQE7mNSlnUHm+qnEYQ+yhxL1yovtiZmvPk4um1b3YDC4N0UtBJXqWBFNxC6wV4
+         mJAhLTdLTEPreemL5n+t77H7ZqgnwQVjJsWfS1clm1PpMFRWwKvxtqLBQ7GeFzJwVMfr
+         UXdO04G0oSFwlpnW1GQCROgsAXhmtkmmsIZ1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794324458; x=1794929258;
+        d=1e100.net; s=20260707; t=1794324459; x=1794929259;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t0R3azMwiplxA33eQo8BwXzVLiE3X0fuXShqXzMDBVE=;
-        b=OOesEnPhXb7lkAk68OzEUPaW1+St2Beii0ZqGR/E9upUtpvJEgwjVGjsP3zVbm9QFA
-         aoPPOGOuckP9oHzlEHfOtkGtAwsVC5PtpwF761HYys2pMlAt7qo8q8SUUCMInuP3EisM
-         akQmNm9BOLz939oUhuE3gXFzTzYdoX8XPQgICEQmNq7kcr0ksctsnifYPkNbC/e14r2W
-         oP0LWScYB9my5BTr0iMkViCEp/OCXP0bu1LqSzUAe7M9Q4uFsCtx7OZaZpgeRIy0qByJ
-         AMa3qBp7C/YT6u8KsO0NPJN7oO/8hYxkkqitBlAAY8M/LIiM1I368jYDSiCvU7fDTGVq
-         XXDA==
-X-Gm-Message-State: APuU4Z+gy3fW/FZabHdHF5dXPO0hxAvFaYLio9f3UZVSggEdK183IZ3L
-	tT99WPFGbZ4uUcoMT60X7V5MWK7EkD4P1CablE/fqXcFjdy/bZqmCwherHWmMT8pmJYO3WHPEa1
-	11wj1
-X-Gm-Gg: AYBFou31TUlCJrX4oCINrQspnglBhTId4ot1LzPO/tSfn6LI6cmyMvPRw/AAuoFnyGH
-	2Q0vdvN2UaDkazzzLVkTMdxEb+wf8C7Mrh6nKKApcpp1vpFHxkufkeLQlcL771FwL5IiLfAf9vO
-	iF1hNSyzgLfADspJaxWGEdeCW3BVp4XYKNcwPVRChxIRtrBVXlCytRa+6rhYtQ0qh5poUE+MTHI
-	iwziVe2hhZHnCxKM3b9biGrQ+QLnJ9Zm73eCci76AFr34A+YBWOLLWyrGbzVMPa/KpNPMSo0wUA
-	8nM4G7LjOiRmhhub2qM729m5V4VAtF2/UbboHnzIGlEJ/uGQ743Igx5pcsSoNkDJJb3udGbcQVw
-	pn4I0b0t02QKuD/8egOOd4DLMrbwOKJocr6HJqJ9Q2bYAlA2XL7i0OYQ+0lZE2WearkqxTmgNK9
-	k7PWUjgn8qE3nqeOlgUXglpcERlGwpsmqsVvT7aUs3yPafi+tnqjq4LkAEqpVTZdqj1eR7HgcIc
-	u9yviLqZS2oFEEX+IJrEeoFXgfkVrSEIs8eYZBRs+lXUdSdFB+lDB9AhAeZEnHAdV+IvDBzhihk
-	oHv2EJ0hKdPX3onX7Dns/a8yNfe0AGnI6wjbPlEa1gZDjrg0zAy7EXDr6a6gj9iEmOXi3lPdlq9
-	22XKmKhoQIEKtNUy1KoTLlYK9G2MsQFQxodBY9HPE556/AUTxvWuZGAcXIQ/hI4kN/K6rxS5+GL
-	m9
-X-Received: by 2002:a05:600c:34d0:b0:4a5:87b3:ddc1 with SMTP id 5b1f17b1804b1-4ba0233c45cmr54260525e9.13.1794324458009;
-        Tue, 10 Nov 2026 07:27:38 -0800 (PST)
+        bh=qLtb78wLXY3+FPQjY5NebE7ZEHk93LnYxCVQocB7aog=;
+        b=LkNSSXsdTWMvfZAwXOwkXVURKKHcdvJuEZGa1Dp/rAJwkM7UymR1hXQ0PIMF3uOIja
+         12vq/BdIpScF6l4Cbf0Gn0rYXrBOW5iBHLA2J5uGwhw0oS4Rh8G1FkZj9MhWjtosGhPD
+         4ue2egISeZbmTmwtfjphZ0TpYmnkXK1DoDgyLvVHBJG8hF5fgjI8GjD0YVo6npen9SLy
+         bAo+o4m0liiogPfrGV/R7ypO/1DPBgU1LUzZ3rDb5EemzMg8vqvyUgXxQNnhqpEOIe8n
+         vYnEAs0T1xRWcjYDp7/9XBMkRsU3ggHP2k7c2FpC9/qQreywDhWKVVbGVA0TlqO5d7yH
+         q6kA==
+X-Gm-Message-State: APuU4Z9I1B+yaYpVRCJUdyOUY+fSr7Puh9P3No9g+bsPSqQ3oMClqVVV
+	C1xeVZHf9q8q4ZAsJ6++/IAJtkZ3ScIv2h3fHkd8wM0BxCNR6N+gXn+9br0sTH/6wHIQuLkRrie
+	WgFzX
+X-Gm-Gg: AYBFou11fKaIx8uBqfZZb2Lxk1WadvulmIt7OspCNsZHnbo8TLPQWLPm9ny07/oFVUp
+	VYEdh6kcLdsRfYf2ty0dTf9Fm3KhzkLgIWV81uUYIj2jYTOfMkZfkJxdzxPrzQT0Of2DtJafmen
+	aBx3pbR04TLSTeuANk2JsC3I+xuJimFBA76Q9FvZupvnWbuznQMYohbKEPq0j7Ha9g18b4HvRK/
+	Dq2ik8FKlklVCVkaG78QumaMlTzeuD2fNGC16EZbcXWH8jW+dpZDn4M8OKXwAfuKHnTnB26tgxk
+	2LiSSTbLl2Gr6/UZzAaj6g18dnd9pUakcBmoWtGYTgNWtnT9zprsUqBaJ13387gq9V0hTyh3Tx7
+	pv6dbY4YY1AMO7niuCrUUGbVgDS9UlOLwPzCDWdujVkHNrEhErOyDN7Etf5niAzWahDe0ecLDiE
+	l4KsqDqp3/Axo6F1XeCTCBNMtpT2srzNOpt4M6QvYzEFr9mkB7IJTya9giZhorbe9JhbKGIcQqF
+	6dj6Vusl4Q6gKmH+VJaiNsLCp7W755RcvtiXg5ovVRa9GkRQWquN0wYEqIkII0psK5SuDgJyKMP
+	O1g6jh0gSPKRRKuodMwTCZSwO0288JC0OqO+bqFm5o8SH8mx4YKWvrpUkzSvHljMvqU+y7vz3kT
+	xeMToAJfXLUui7+/IocXgJG0/6nE3CAJgGbZJ937ikoOPZbau0Iuc3w==
+X-Received: by 2002:a05:600c:3551:b0:4a0:1c94:7042 with SMTP id 5b1f17b1804b1-4ba023376a2mr48724895e9.8.1794324459150;
+        Tue, 10 Nov 2026 07:27:39 -0800 (PST)
 Return-Path: <leon.anavi@konsulko.com>
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-498369a3f4esm6064071f8f.53.2026.11.10.07.27.37
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-498369a3f4esm6064071f8f.53.2026.11.10.07.27.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 07:27:37 -0800 (PST)
+        Tue, 10 Nov 2026 07:27:38 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/19] python3-moteus: Upgrade 1.1.1 -> 1.1.3
-Date: Tue, 10 Nov 2026 17:27:17 +0200
-Message-ID: <20261110152729.1065911-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/19] python3-paho-mqtt: Upgrade 2.1.0 -> 2.2.0
+Date: Tue, 10 Nov 2026 17:27:18 +0200
+Message-ID: <20261110152729.1065911-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261110152729.1065911-1-leon.anavi@konsulko.com>
 References: <20261110152729.1065911-1-leon.anavi@konsulko.com>
@@ -62,45 +61,53 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 15:27:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132081
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132082
 Content-Type: text/plain; charset="utf-8"
 
-Upgrade to release 1.1.3:
+Upgrade to release 2.2.0:
 
-- mpat: Fix inertia for the mad8318 and gbm5208
-- Clean up after NamedTemporaryFile to avoid warnings with newer
-  pythons
-- Prevent inlining of some functions to prevent CCM size bloat
-- Mark all enum mapping functions as constexpr
-- mpat: Don't delete the entire chip when backspace is pressed
-- Document the field weakening limit reason in the limited-torque
-  guide
-- Fix mpat handling of non-default controller and motor maximum
-  temps
-- Add a utility to plot hall effect calibration errors
+- Update supported Python versions. Drop support for Python 3.7 and
+  3.8. Deprecation notice: next release is expected to drop Python
+  3.9 and 3.10.
+- Possible breaking change: Change some exceptions from ValueError
+  to TypeError (in max_queued_messages_set and Client
+  callback_api_version parameter) The breaking change is unlikely
+  however, both exceptions are expected to only be raised with
+  broken code (e.g. need to pass wrong type - not just wrong value).
+- Type annotations fix: bytearray was missing as alternative of
+  some payload
+- Add drop_out_messages to discard outgoing message queue. This
+  could be needed if broker lost the session
+- Honor MQTTv5 Server Keep Alive from CONNACK Properties
+- Fix an keepalive disconnection when receiving large payload
+- Fix bug in inflight message tracking & QoS 2 message, which could
+  result in negative counter
+- Various reinforcement against corrupted or malformed packets
+- Expose ReasonCode names as documentation said
+- Fix broken reinitialise()
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-moteus_1.1.1.bb => python3-moteus_1.1.3.bb} | 2 +-
+ .../{python3-paho-mqtt_2.1.0.bb => python3-paho-mqtt_2.2.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-moteus_1.1.1.bb => python3-moteus_1.1.3.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-paho-mqtt_2.1.0.bb => python3-paho-mqtt_2.2.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-moteus_1.1.1.bb b/meta-python/recipes-devtools/python/python3-moteus_1.1.3.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-moteus_1.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-moteus_1.1.3.bb
-index be35c409d3..99ed6ad8a3 100644
---- a/meta-python/recipes-devtools/python/python3-moteus_1.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-moteus_1.1.3.bb
-@@ -7,7 +7,7 @@ inherit pypi python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
+index cecd98fca4..fbfbf064d6 100644
+--- a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.2.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e5f264c6988aec56808a3a11e77b913 \
  
- DEPENDS += "python3-wheel-native"
+ inherit pypi python_hatchling
  
--SRC_URI[sha256sum] = "a10a097100984ec16dfed7848bae1ee83e29cc00cd0bb3138cb599b697315820"
-+SRC_URI[sha256sum] = "fb7babcde6293927ded01bcc79f75138412e4d2f18d149d421a9d71bfb6d6387"
+-SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
++SRC_URI[sha256sum] = "bcf706f03f1f49e0fc3ae166dc7b67ee35463496f8bdfd7c9c36181f6ba635c9"
  
- S = "${UNPACKDIR}/moteus-${PV}"
- 
+ do_install:append() {
+         install -d -m0755 ${D}${datadir}/${BPN}/examples
 -- 
 2.47.3
 
