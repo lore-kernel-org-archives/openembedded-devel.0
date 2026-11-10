@@ -1,435 +1,384 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16161.1794302588813090571
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16957.1794306634104566530
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 01:23:09 -0800
+ Tue, 10 Nov 2026 02:30:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=OHapw+3b;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=ASt1J8CG;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AA7lCPC2770746
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:23:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=pwzGb9JX6BaQF45FXkEHTL1Dw8yWCUCpzXE
-	92LoxXUE=; b=OHapw+3buUR8YODYRXjp+D1FLfuWWrmlPrwhnkKpmSiCiOM2vSP
-	VFZV5MVFMI2EJiu2DP4fDFYqS9tYJocfR6CvNZ/CCssy9ORf0efNzdK6XBHBC6pa
-	nk1kQESm/GcsjaHPjb4tnCFfM0zAutd/BigTIGn7gwgkw9f9mou2W+w0jiDg+7x8
-	YET1MGX2ccQs4jmOgS4rHPO3TiuCuMHMuTBVCJnkvpWG+VevyFw0XXFO/Dcw+9he
-	j5PA7mOk3rKcQX3u7Llf7aj2nzJGg/rs8TAOU/GqxU0FiBupTcTdOMT5wqaJgTGx
-	jd9bPIQyzK3NvhC1PFarRXIjFSuHfGKwBZg==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4huvtd91bx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:23:07 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-1a2b6fab7a6so1894760c88.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 01:23:07 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kx2BY96r;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4afe2d546f9so25052385e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 02:30:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794302586; x=1794907386; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pwzGb9JX6BaQF45FXkEHTL1Dw8yWCUCpzXE92LoxXUE=;
-        b=ASt1J8CGb5BloATnAx1/QkrCfyeaIx3SFBMty0bnWkXG+4ymRQRAW1d0EqKnJFDr9p
-         p4GdDPv9++wZqvpoWe7y55wM6CZZwQrCLe59LVovyXHA+M4phN56FyyIU72y8SmIng2a
-         /x03UVZ8CLmZP9y7Ota7c48o1UhQRO9aHhNT++sEVMLGSe5+kU55ukRf2VtQojMCmQ6M
-         L4z5bq9dRI9bPGjJCHJNL1288r3f4XjTWogyZBgskNj4x5Fl1Mn7Nu+hMcXITZBoMjC0
-         2N7plDZqh8lOfmG+zTBfduiH1wrS250+tyaa9uD/6hIRjZZz8vH/DmKrSSMO0VVzj+CC
-         ROPg==
+        d=konsulko.com; s=google; t=1794306632; x=1794911432; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=AinrE0EInVs8sOE3nDO6HYvnVPgqJ+cEnyzXbIu9S4E=;
+        b=kx2BY96r499ypQsY3j5WOJ9DAyAEVWLfHMC9lF5cL2Wzmn+AZKpZ16wYqEUmBvXNfQ
+         0tHfUEc9y+kNxVAQvJ/jVjKS09a5KkYcUnxgvdACx3T3bA6WOx3/4P0IA4Bxfk4wI904
+         1vsheWAYOOKgYsusEfFosfB7E/tSFEkCBdnAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794302586; x=1794907386;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=pwzGb9JX6BaQF45FXkEHTL1Dw8yWCUCpzXE92LoxXUE=;
-        b=Brm01vp5zR+ZWPjiJAyw03Ux5in68IGjaDzhK6scTgQ56Rb+idmH/Nas1v9id7pdGW
-         /aI/kjkdRQW9ro8/vaLKM9OUtzKUYW/CffJj/cbTjWQ+dp7Ux8O986V5ca9qGjBzNTbs
-         ctv01b4Q+Q6aEKR9SGdf/vGYmcDVHpoGfH8w2vSWFsjCqnxf5/aHz5m8BLTyvJY6wo+A
-         PjHbGTWgGWQMiCFPW2HsGAM8nnSjp5FWyvdGAF5SSnjlVkLEQw5zh5IFrOXxgyz3hJ7H
-         BcT8YVNqj7hRM2Lnct5UjervM1iU7oS25FnHHtXxY395pOiI9TCN94INeHYFQBShKrMs
-         hykA==
-X-Gm-Message-State: APuU4Z9bdl0lgq9CMcM7zi6MKHfUDUq/uAGGJ9f38XW4+XlFc0Vrmog3
-	PdQfEeWCdiSKESxl3SMsIx+OgoWCLMlXR158NImDzh8puk0Lu5yot7gaD7nZuQpHSdjXNKuiaFc
-	5iv6LaWGcXtE00YSdyNdD+QmC9HTXIv6a4+3Q+Sf9Qn8vm/w8YBnylM2CJXtAtjhCDSRT6iFXH4
-	Deq0WIKr4xtJ0lCNctW0kwlw==
-X-Gm-Gg: AYBFou3sl1JhkD3ZZlfcIT7jbEHJjInbf5S6uHQkNiPh4oqHCoFZV0zA41kjiIUOAUc
-	uhYCsq8twIQNSH8atXT0IsOM2O7QHYP7agT6ZiJJZjZ4W7d5GVKu4nr1JV87Tg2Hu/K1un5Uy2k
-	AljzAkfhFc/nA3wHdcpR+oZ2PFFjSOCp2HWvHG+ojdrkDUlfSm+eMAGUPY9f8/qDLjeVEY230a+
-	3f2GIClFep+oiimEpaws9m9EJZPPcV7DWmXyk1gBLf4fshEb3p8BH2zJKhwLcGPcGaJ4kOQFXOg
-	7TSY2Gj6p/R//7R394Dz8zjmkq8CRa+D6DeTqWnFEMt447Ober9si39J6tx+RCFxtRyobmudGif
-	7QRdfhtSnjtdLAGNOqZ+NrPlEwFdOzILyWfeRY1LC2/THmw6Ku2dT88jKyD9Tl5bXbKb9pvYdUg
-	Zv0U1s
-X-Received: by 2002:a05:701b:450f:10b0:14e:61bb:ec3d with SMTP id a92af1059eb24-1b3b6073d11mr2752058c88.16.1794302586067;
-        Tue, 10 Nov 2026 01:23:06 -0800 (PST)
-X-Received: by 2002:a05:701b:450f:10b0:14e:61bb:ec3d with SMTP id a92af1059eb24-1b3b6073d11mr2752005c88.16.1794302584844;
-        Tue, 10 Nov 2026 01:23:04 -0800 (PST)
-Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5890c0esm5965703c88.1.2026.11.10.01.23.03
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20260707; t=1794306632; x=1794911432;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AinrE0EInVs8sOE3nDO6HYvnVPgqJ+cEnyzXbIu9S4E=;
+        b=mEX5ri2X0R1sPXVBFkXbStbklPNAYg1oXwjoBuPBhT1Jlfyoq5q25T5GLd/G8W1JQ9
+         ZM+hztwXnZJ7wFnLppXwDvQfvJi/bN8EYAay8IaKEjaxFLzFz9STNtlGOVtzOAuNVL6J
+         HZ1t/CsxX3Rf6LzeQnWHMF106I5i9iSoG3Lku9s9I6OpVtzKDjoErV+jEdV6Hd5i/kh4
+         KccNNlVVOXP0dk5k7b4lZF9GL0vwxcbL1oWpGy+JvAk/OOEzfYIgOZgqZ2vsvBpGqb1R
+         9YumhI1Nr+0nXSvhOsj7q+/J8wz8xvCIJKo0lWLgAGMeMA2ZdCxGoHKDVvHD5KzRRWbo
+         /TNQ==
+X-Gm-Message-State: APuU4Z+ZkYf4B8bJPp7awNb0DGcojy01PxUx9OgWA/nW+NaD6m+J4DsB
+	GPx/A5wV/MgAjD5HXgfNGc32ke//hp7d2Gv9HVi4Ycfe5jpY40hKhercq01WXdsy5Yo3dkwj8a7
+	ezmRI
+X-Gm-Gg: AYBFou0aJRMoVpzXamu5ZRiLKGRwZHOuBrIFYXr5BwdYzgjzYByjmRhUM1+cpJ3s7gc
+	0Lmz0Qsrg1NwaZ1J4HCihrxppRIOqcAn4SrDpQPpCQLDjt3NGXYKi+0VZn/mKmlW86n6uXnm0z5
+	bI38yMKSEXPLXowk9+4i/FH4YK33tT6ntJefezjZOcVXAGLYWXX4r85C0ThKNtqF7WCuJSkAyIo
+	8cZGHJ8+Ux7MgGaH51WCjvQghoeinsUoy5Lhc5i00I+Rv6zwRuRbUpj2W9vZJoEdNVjFMk1F4ZV
+	kdd3pHgSg2wGPRg1vsVgWR25ME3q2pRqdHwqpd6UDIdAnsOp3WtzFbeuO+074Yu0KRzrdnent9e
+	VJXCIvWD/STNB2XQUopKCvKjmWBdXV69JCrbOIhBdqv951Xxgmye0SaEU4482SjViaNTzgeEYGJ
+	+TiAsu8JVQlj8eeFYokKnelj8FdiTHN2Q8DjPWW0ZEn/k28zaKspT9teQVAu7etWLRHiaJ6NuGZ
+	K4aAQ0E0/BXA/98G8wnovDE6NzFHwoNGOQB+M4WZuvZMptxJT4whhs90FylAaegG+DRWyI+JIaB
+	fXucMBiuMs2QwbgIC3KGFWPTzHFt9K02/2dpdxK+UVcWzhcRTmk7QFAOCccfg0y9fmDBdo9o+yk
+	lvf7DjC3hiT1An2dDPKh9YRgqPkWhfpc727J+Z93zv68Tgxe/sLsl7Q==
+X-Received: by 2002:a05:600c:6296:b0:4a1:fe26:24f0 with SMTP id 5b1f17b1804b1-4ba02348dd9mr34302155e9.20.1794306631946;
+        Tue, 10 Nov 2026 02:30:31 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fe2cb2sm52019685e9.3.2026.11.10.02.30.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 01:23:04 -0800 (PST)
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+        Tue, 10 Nov 2026 02:30:31 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 00/74] Wrynose pull request
-Date: Tue, 10 Nov 2026 14:52:57 +0530
-Message-ID: <cover.1794302275.git.anuj.mittal@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-ruff: Upgrade 0.17.3 -> 0.17.4
+Date: Tue, 10 Nov 2026 12:30:27 +0200
+Message-ID: <20261110103028.1041905-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: jsBvZf6CvkZGEXBlMtfqa1X22veeAJka
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDAzNyBTYWx0ZWRfX12Dtjob4Vwy+
- wcRBbAgEDnWiEqSRc3F7kdgjA7ESKcnyniHZuWlq9ZL1i8alzRmDAFo0KaeH0/6ZvI1U4WTo93G
- KYnRhxJYBbO8WhdUTm23puOxW/7galw=
-X-Proofpoint-ORIG-GUID: jsBvZf6CvkZGEXBlMtfqa1X22veeAJka
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDAzNyBTYWx0ZWRfXy2Kx59oWPVT/
- vQyb+kvrEyoVrVOGhg/n7uSIUdjcRP0TD/0Uo82q9sDSdlKMxNmqf8l9PPaI/JViaVCoHh3BV8s
- rA0VHfv4hYXlwT57OmPT7I4PUZCJMFhsMdkvI2X4rQKABCqBfVo9xXaOzyv0mlCL6j4kWBlKROL
- y4375bgUoiGtFsub2T7IcwXsSaqWGdlZyzhEUCsaZv6GKy0NOoTk0PuL03RF0E/9E3PaiZkX/Gy
- /Yy7FdZaSsYWE4t8uY1hdrz4BkgkJVjm5izQh/EeXMrUrzDcI+WWPaLQYrOBK3kwAQXNZzZ5uMu
- oTF1paQNSeCH+/iU5iu2ixEPkEy/nC4YHZ+cagczIvCndXa5Zr3w2qXgUBeaqUhAO7Tr+ITuogR
- Zl0mCYqKsWupy2r+SstddkjuSJckC0O89NQ7g+ron2k3u5TiV3fCabp56NuAAGFdJ7Uup3+i3kM
- tkXdSYQKuyeGIluM6Fw==
-X-Authority-Analysis: v=2.4 cv=ArR7T+9P c=1 sm=1 tr=0 ts=6af2e27b cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=iGHA9ds3AAAA:8
- a=Q4-j1AaZAAAA:8 a=CV4l_LIBgr3rokFX6SwA:9 a=Fk4IpSoW4aLDllm1B1p-:22
- a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-10_03,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 spamscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 phishscore=0 suspectscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100037
 List-Id: <openembedded-devel.lists.openembedded.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:23:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132072
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 10:30:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132073
 Content-Type: text/plain; charset="utf-8"
 
-Please merge these changes in wrynose. Tested locally and on autobuilder.
+Upgrade to release 0.17.4:
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1946
+Preview features:
 
-The following changes since commit c734c2cb9713dbd6d50697a9f6c25ebdf3ae589e:
+- [flake8-logging-format] Avoid behavior changes and syntax errors
+  in fixes (G004)
+- [security] Implement tarfile-ignore-zeros-true
 
-  frr: Fix native clippy failing to load libatomic.so.1 (2026-10-29 10:19:10 +0530)
+Bug fixes:
 
-are available in the Git repository at:
+- Accept a bare raise before a semicolon
+- Allow match identifiers after a semicolon
+- Fix panic on BOM-prefixed files in diagnostic renderer
+- [flake8-simplify] Report collapsible elif clauses after a
+  multi-statement if branch (SIM102)
 
-  https://git.openembedded.org/meta-openembedded-contrib anujm/wrynose
-  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/wrynose
+Rule changes:
 
-for you to fetch changes up to c0fcd7cca3760ef24e087ac4a31b8f357cb204da:
+- Show more nonprinting characters in diagnostic fix diffs
 
-  pgpool2: 4.6.4 -> 4.6.6 (2026-11-09 11:17:15 +0530)
+Performance:
 
-----------------------------------------------------------------
+- Coalesce source slices when formatting attributes
+- Collect return statements with a statement-only visitor
+- [pyflakes] Defer value comparisons for repeated dictionary keys
+  (F601, F602)
+- Format node fields directly when comment handling is unnecessary
+- Reduce formatter source-slice overhead
+- Reuse a callee's qualified name across lint rules
+- Skip invalid string character checks when the source contains
+  none
+- Use a Bloom filter for formatter comment lookups
+- Use a concrete buffer for ordinary writes
 
-Ankur Tyagi (23):
-  zchunk: upgrade 1.5.4 -> 1.5.5
-  wireshark: upgrade 4.6.8 -> 4.6.9
-  crow: upgrade 1.3.2 -> 1.3.3
-  crow: upgrade 1.3.3 -> 1.3.4
-  hdf5: patch CVE-2026-19026, CVE-2026-19027 and CVE-2026-19028
-  hdf5: patch CVE-2026-19023 and CVE-2026-19024
-  hdf5: patch CVE-2026-120689
-  hdf5: patch CVE-2026-120754 and CVE-2026-120755
-  hdf5: patch CVE-2026-120756
-  hdf5: patch CVE-2026-120757
-  hdf5: patch CVE-2026-120758
-  libgphoto2: patch CVE-2026-120451
-  libgphoto2: patch CVE-2026-120452
-  smarty: upgrade 5.8.4 -> 5.8.5
-  valkey: upgrade 9.0.6 -> 9.0.7
-  uriparser: upgrade 1.0.2 -> 1.0.3
-  python3-django: upgrade 6.0.9 -> 6.0.10
-  python3-django: upgrade 5.2.18 -> 5.2.19
-  mtr: patch CVE-2026-14461
-  libvncserver: patch CVE-2026-44988
-  libmspack: patch CVE-2026-110602
-  ndpi: patch CVE-2026-116744
-  ncp: ignore CVE-2025-14577 and CVE-2026-35087
+CLI:
 
-Ashishkumar Parmar (1):
-  nmap: Fix CVE-2026-72712
+- Give NO_COLOR precedence in Ruff and ty diagnostics
+- Honor CLICOLOR=0 in Ruff and ty diagnostics
 
-Darsh Kelaiya (10):
-  libhtml-parser-perl: fix CVE-2026-8829
-  ntfs-3g-ntfsprogs: fix CVE-2026-56135
-  ntfs-3g-ntfsprogs: mark CVE-2026-56136 as fixed
-  python3-aiohttp: fix CVE-2026-111066
-  python3-aiohttp: fix CVE-2026-111750
-  python3-aiohttp: fix CVE-2026-111749
-  python3-aiohttp: fix CVE-2026-111065
-  python3-aiohttp: fix CVE-2026-111748
-  python3-aiohttp: fix CVE-2026-111063
-  python3-aiohttp: fix CVE-2026-111064
+Documentation:
 
-Hetvi Thakar (21):
-  nginx: fix CVE-2026-95101
-  nginx: fix CVE-2026-97629
-  nginx: fix CVE-2026-15176
-  python3-virtualenv: fix CVE-2026-102938
-  python3-virtualenv: fix CVE-2026-102930
-  python3-virtualenv: fix CVE-2026-102925
-  python3-virtualenv: fix CVE-2026-113732
-  python3-virtualenv: fix CVE-2026-113776
-  python3-virtualenv: fix CVE-2026-113726
-  python3-virtualenv: fix CVE-2026-113725
-  python3-virtualenv: fix CVE-2026-113723
-  python3-virtualenv: fix CVE-2026-113715
-  python3-virtualenv: fix CVE-2026-113720
-  python3-virtualenv: fix CVE-2026-113719
-  python3-virtualenv: fix CVE-2026-113721
-  python3-virtualenv: fix CVE-2026-113716
-  python3-virtualenv: fix CVE-2026-113722
-  python3-virtualenv: fix CVE-2026-113713
-  python3-virtualenv: Ignore CVE-2026-102937
-  python3-virtualenv: Ignore CVE-2026-113718
-  python3-virtualenv: Ignore CVE-2026-113724
+- Correct the documented version and src defaults for ruff-action
+- [flake8-bugbear] Make B014 example error out-of-the-box
+- [flake8-no-pep420] Document preview behavior (INP001)
+- [isort] Expand I001 documentation
 
-Jason Schonberg (1):
-  nodejs: 22.23.3 -> 22.23.4
+Other changes:
 
-Khem Raj (3):
-  fwupd-efi: Use the cross linker instead of the host ld.bfd
-  clight: Fix build with musl
-  fftw: Fix planner hang on musl with CLOCK_SGI_CYCLE
+- [syntax-errors] Extend __debug__ write check to attribute targets
 
-Kris Gavvala (1):
-  python3-pillow: patch CVE-2026-112393
+This work was sponsored by GOVCERT.LU.
 
-Markus Volk (1):
-  mpv: fix a file descriptor leak in the render API
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/python3-ruff-crates.inc            | 64 +++++++++----------
+ ...e-atomic-for-AtomicU64-on-targets-wi.patch | 10 +--
+ ...-ruff_0.17.3.bb => python3-ruff_0.17.4.bb} |  2 +-
+ 3 files changed, 38 insertions(+), 38 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ruff_0.17.3.bb => python3-ruff_0.17.4.bb} (86%)
 
-Nate Kent (1):
-  nng: correct upstream branch name
-
-Peter Marko (1):
-  libwebsockets: patch CVE-2026-114550
-
-Poornima Lokesh (1):
-  mariadb: upgrade 11.4.12 -> 11.4.13
-
-Wang Mingyu (2):
-  zchunk: upgrade 1.5.3 -> 1.5.4
-  pgpool2: 4.6.4 -> 4.6.6
-
-Yogita Urade (8):
-  python3-tornado: Fix CVE-2026-103261
-  python3-tornado: Fix CVE-2026-103262
-  python3-tornado: Fix CVE-2026-103263
-  python3-tornado: Fix CVE-2026-115927
-  python3-tornado: Fix CVE-2026-116577
-  python3-tornado: Fix CVE-2026-116578
-  python3-pymongo: Fix CVE-2026-88029
-  python3-pymongo: Fix CVE-2026-106435
-
- ...72_CVE-2026-42617_CVE-2026-56136_p1.patch} |    2 +-
- ...72_CVE-2026-42617_CVE-2026-56136_p2.patch} |    2 +-
- ...72_CVE-2026-42617_CVE-2026-56136_p3.patch} |    2 +-
- .../files/CVE-2026-56135_p1.patch             |  140 ++
- .../files/CVE-2026-56135_p2.patch             |   36 +
- .../files/CVE-2026-56135_p3.patch             |  203 +++
- .../files/CVE-2026-56135_p4.patch             |   94 ++
- .../ntfs-3g-ntfsprogs_2022.10.3.bb            |   10 +-
- ...nclude-fcntl.h-for-open-and-O_-flags.patch |   27 +
- .../recipes-multimedia/clight/clight_4.11.bb  |    1 +
- .../recipes-connectivity/nanomsg/nng_1.11.bb  |    2 +-
- .../mtr/mtr/CVE-2026-14461.patch              |   32 +
- .../recipes-support/mtr/mtr_0.96.bb           |    4 +-
- .../recipes-support/ncp/ncp_1.2.4.bb          |    3 +
- .../ntopng/files/CVE-2026-116744.patch        |   33 +
- .../recipes-support/ntopng/ndpi_5.0.bb        |    1 +
- .../{pgpool2_4.6.4.bb => pgpool2_4.6.6.bb}    |    4 +-
- ...{wireshark_4.6.8.bb => wireshark_4.6.9.bb} |    2 +-
- meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb    |   10 +
- .../libwebsockets/CVE-2026-114550.patch       |   31 +
- .../libwebsockets/libwebsockets_4.5.8.bb      |    1 +
- ...e_11.4.12.bb => mariadb-native_11.4.13.bb} |    0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |    4 +-
- ...b11be28ae9b2432b2a661bf38a197cf9514d.patch |   52 -
- ...{mariadb_11.4.12.bb => mariadb_11.4.13.bb} |    0
- .../{nodejs_22.23.3.bb => nodejs_22.23.4.bb}  |    2 +-
- .../{valkey_9.0.6.bb => valkey_9.0.7.bb}      |    2 +-
- .../gphoto2/libgphoto2/CVE-2026-120451.patch  |   43 +
- .../gphoto2/libgphoto2/CVE-2026-120452.patch  |   40 +
- .../gphoto2/libgphoto2_2.5.33.bb              |    2 +
- .../libvncserver/CVE-2026-44988.patch         |   71 +
- .../libvncserver/libvncserver_0.9.15.bb       |    1 +
- ...equire-swap_buffers-param-for-FenceS.patch |   35 +
- .../recipes-multimedia/mplayer/mpv_0.41.0.bb  |    5 +-
- .../nmap/files/CVE-2026-72712.patch           |   50 +
- meta-oe/recipes-security/nmap/nmap_7.95.bb    |    1 +
- .../libmspack/CVE-2026-110602.patch           |   41 +
- .../cabextract/libmspack_0.11alpha.bb         |    4 +-
- .../crow/{crow_1.3.2.bb => crow_1.3.4.bb}     |    2 +-
- ...-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch |   43 +
- meta-oe/recipes-support/fftw/fftw_3.3.11.bb   |    1 +
- .../hdf5/files/CVE-2026-120689.patch          |   60 +
- .../CVE-2026-120754-CVE-2026-120755.patch     |  172 +++
- .../hdf5/files/CVE-2026-120756.patch          |   45 +
- .../hdf5/files/CVE-2026-120757.patch          |   63 +
- .../hdf5/files/CVE-2026-120758.patch          |  143 ++
- .../files/CVE-2026-19023-CVE-2026-19024.patch |  176 +++
- ...-19026-CVE-2026-19027-CVE-2026-19028.patch |  579 ++++++++
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |    7 +
- .../{smarty_5.8.4.bb => smarty_5.8.5.bb}      |    2 +-
- ...{uriparser_1.0.2.bb => uriparser_1.0.3.bb} |    2 +-
- .../{zchunk_1.5.3.bb => zchunk_1.5.5.bb}      |    4 +-
- .../libhtml/files/CVE-2026-8829.patch         |  127 ++
- .../libhtml/libhtml-parser-perl_3.83.bb       |    4 +-
- .../python3-aiohttp/CVE-2026-111063_p1.patch  |  137 ++
- .../python3-aiohttp/CVE-2026-111063_p2.patch  |  244 ++++
- .../python3-aiohttp/CVE-2026-111064.patch     |  285 ++++
- .../python3-aiohttp/CVE-2026-111065.patch     |  176 +++
- .../python3-aiohttp/CVE-2026-111066_p1.patch  |  400 ++++++
- .../python3-aiohttp/CVE-2026-111066_p2.patch  |   57 +
- .../python3-aiohttp/CVE-2026-111748_p1.patch  |  376 +++++
- .../python3-aiohttp/CVE-2026-111748_p2.patch  |  282 ++++
- .../python3-aiohttp/CVE-2026-111749.patch     |  205 +++
- .../python3-aiohttp/CVE-2026-111750.patch     |   83 ++
- .../python/python3-aiohttp_3.13.5.bb          |   10 +
- ...ngo_5.2.18.bb => python3-django_5.2.19.bb} |    2 +-
- ...ango_6.0.9.bb => python3-django_6.0.10.bb} |    2 +-
- .../python3-pillow/CVE-2026-112393.patch      |  124 ++
- .../python/python3-pillow_12.2.0.bb           |    1 +
- .../CVE-2026-106435-regression.patch          |   92 ++
- .../python3-pymongo/CVE-2026-106435.patch     |  122 ++
- .../python3-pymongo/CVE-2026-88029.patch      | 1255 +++++++++++++++++
- .../python/python3-pymongo_4.16.0.bb          |    5 +
- .../python3-tornado/CVE-2026-103261.patch     |   98 ++
- .../python3-tornado/CVE-2026-103262.patch     | 1117 +++++++++++++++
- .../CVE-2026-103263-dependent.patch           |  255 ++++
- .../python3-tornado/CVE-2026-103263.patch     |  422 ++++++
- .../python3-tornado/CVE-2026-115927.patch     |  397 ++++++
- .../python3-tornado/CVE-2026-116577_p1.patch  |  195 +++
- .../python3-tornado/CVE-2026-116577_p2.patch  |   99 ++
- .../python3-tornado/CVE-2026-116577_p3.patch  |  101 ++
- .../python3-tornado/CVE-2026-116578_p1.patch  |   62 +
- .../python3-tornado/CVE-2026-116578_p2.patch  |  106 ++
- .../python3-tornado/CVE-2026-116578_p3.patch  |  192 +++
- .../python/python3-tornado_6.5.7.bb           |   11 +
- .../python3-virtualenv/CVE-2026-102925.patch  |  296 ++++
- .../CVE-2026-102930-dependent.patch           |  115 ++
- .../CVE-2026-102930_p1.patch                  |  309 ++++
- .../CVE-2026-102930_p2.patch                  |  293 ++++
- .../CVE-2026-102930_p3.patch                  |  777 ++++++++++
- .../python3-virtualenv/CVE-2026-102938.patch  |  141 ++
- .../python3-virtualenv/CVE-2026-113713.patch  |  113 ++
- .../python3-virtualenv/CVE-2026-113715.patch  |  165 +++
- .../python3-virtualenv/CVE-2026-113716.patch  |  208 +++
- .../python3-virtualenv/CVE-2026-113719.patch  |  207 +++
- .../python3-virtualenv/CVE-2026-113720.patch  |  156 ++
- .../python3-virtualenv/CVE-2026-113721.patch  |  477 +++++++
- .../CVE-2026-113722_p1.patch                  |  262 ++++
- .../CVE-2026-113722_p2.patch                  |   50 +
- .../python3-virtualenv/CVE-2026-113723.patch  |  233 +++
- .../python3-virtualenv/CVE-2026-113725.patch  |   88 ++
- .../CVE-2026-113726-dependent.patch           |  168 +++
- .../python3-virtualenv/CVE-2026-113726.patch  |  149 ++
- .../CVE-2026-113732_p1.patch                  |  116 ++
- .../CVE-2026-113732_p2.patch                  |  120 ++
- .../python3-virtualenv/CVE-2026-113776.patch  |  133 ++
- .../python3-virtualenv/CVE-2026-115586.patch  |  526 +++++++
- .../python/python3-virtualenv_21.2.1.bb       |   31 +
- .../nginx/files/CVE-2026-15176.patch          |   54 +
- .../nginx/files/CVE-2026-95101.patch          |   68 +
- .../nginx/files/CVE-2026-97629.patch          |   45 +
- .../recipes-httpd/nginx/nginx_1.28.3.bb       |    3 +
- .../recipes-httpd/nginx/nginx_1.29.7.bb       |    3 +
- 113 files changed, 14565 insertions(+), 77 deletions(-)
- rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p1.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p1.patch} (97%)
- rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p2.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p2.patch} (98%)
- rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/{CVE-2026-46572_CVE-2026-42617_p3.patch => CVE-2026-46572_CVE-2026-42617_CVE-2026-56136_p3.patch} (96%)
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-56135_p1.patch
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-56135_p2.patch
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-56135_p3.patch
- create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/CVE-2026-56135_p4.patch
- create mode 100644 meta-multimedia/recipes-multimedia/clight/clight/0001-log-Include-fcntl.h-for-open-and-O_-flags.patch
- create mode 100644 meta-networking/recipes-support/mtr/mtr/CVE-2026-14461.patch
- create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2026-116744.patch
- rename meta-networking/recipes-support/pgpool2/{pgpool2_4.6.4.bb => pgpool2_4.6.6.bb} (92%)
- rename meta-networking/recipes-support/wireshark/{wireshark_4.6.8.bb => wireshark_4.6.9.bb} (97%)
- create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2026-114550.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.12.bb => mariadb-native_11.4.13.bb} (100%)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/c21bb11be28ae9b2432b2a661bf38a197cf9514d.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.12.bb => mariadb_11.4.13.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.23.3.bb => nodejs_22.23.4.bb} (99%)
- rename meta-oe/recipes-extended/valkey/{valkey_9.0.6.bb => valkey_9.0.7.bb} (98%)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120451.patch
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-120452.patch
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/CVE-2026-44988.patch
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/0001-opengl-context-require-swap_buffers-param-for-FenceS.patch
- create mode 100644 meta-oe/recipes-security/nmap/files/CVE-2026-72712.patch
- create mode 100644 meta-oe/recipes-support/cabextract/libmspack/CVE-2026-110602.patch
- rename meta-oe/recipes-support/crow/{crow_1.3.2.bb => crow_1.3.4.bb} (92%)
- create mode 100644 meta-oe/recipes-support/fftw/fftw/0001-cycle.h-Do-not-use-CLOCK_SGI_CYCLE-on-Linux.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120689.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120754-CVE-2026-120755.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120756.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120757.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-120758.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-19023-CVE-2026-19024.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2026-19026-CVE-2026-19027-CVE-2026-19028.patch
- rename meta-oe/recipes-support/smarty/{smarty_5.8.4.bb => smarty_5.8.5.bb} (96%)
- rename meta-oe/recipes-support/uriparser/{uriparser_1.0.2.bb => uriparser_1.0.3.bb} (91%)
- rename meta-oe/recipes-support/zchunk/{zchunk_1.5.3.bb => zchunk_1.5.5.bb} (81%)
- create mode 100644 meta-perl/recipes-perl/libhtml/files/CVE-2026-8829.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111063_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111064.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111065.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111066_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111066_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111748_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111749.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2026-111750.patch
- rename meta-python/recipes-devtools/python/{python3-django_5.2.18.bb => python3-django_5.2.19.bb} (70%)
- rename meta-python/recipes-devtools/python/{python3-django_6.0.9.bb => python3-django_6.0.10.bb} (79%)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-112393.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435-regression.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-106435.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pymongo/CVE-2026-88029.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103261.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103262.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263-dependent.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-103263.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-115927.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116577_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116577_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116577_p3.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2026-116578_p3.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102925.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102930-dependent.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102930_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102930_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102930_p3.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-102938.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113713.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113715.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113716.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113719.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113720.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113721.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113722_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113722_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113723.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113725.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113726-dependent.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113726.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113732_p1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113732_p2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-113776.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-115586.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-15176.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-95101.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-97629.patch
-
+diff --git a/meta-python/recipes-devtools/python/python3-ruff-crates.inc b/meta-python/recipes-devtools/python/python3-ruff-crates.inc
+index f657504ad7..f11630d974 100644
+--- a/meta-python/recipes-devtools/python/python3-ruff-crates.inc
++++ b/meta-python/recipes-devtools/python/python3-ruff-crates.inc
+@@ -62,7 +62,7 @@ SRC_URI += " \
+     crate://crates.io/clap_complete_nushell/4.5.8 \
+     crate://crates.io/clap_derive/4.6.7 \
+     crate://crates.io/clap_lex/1.0.0 \
+-    crate://crates.io/clearscreen/4.0.6 \
++    crate://crates.io/clearscreen/5.0.0 \
+     crate://crates.io/codspeed/5.0.1 \
+     crate://crates.io/codspeed-criterion-compat/5.0.1 \
+     crate://crates.io/codspeed-criterion-compat-walltime/5.0.1 \
+@@ -74,7 +74,7 @@ SRC_URI += " \
+     crate://crates.io/colored/3.1.1 \
+     crate://crates.io/compact_str/0.10.0 \
+     crate://crates.io/condtype/1.3.0 \
+-    crate://crates.io/console/0.16.4 \
++    crate://crates.io/console/0.16.6 \
+     crate://crates.io/console_error_panic_hook/0.1.7 \
+     crate://crates.io/console_log/1.1.0 \
+     crate://crates.io/core-foundation-sys/0.8.7 \
+@@ -174,7 +174,7 @@ SRC_URI += " \
+     crate://crates.io/indoc/2.0.7 \
+     crate://crates.io/inotify/0.11.0 \
+     crate://crates.io/inotify-sys/0.1.5 \
+-    crate://crates.io/insta/1.48.0 \
++    crate://crates.io/insta/1.49.0 \
+     crate://crates.io/insta-cmd/0.7.0 \
+     crate://crates.io/interpolator/0.5.0 \
+     crate://crates.io/intrusive-collections/0.10.1 \
+@@ -199,7 +199,7 @@ SRC_URI += " \
+     crate://crates.io/kqueue-sys/1.0.4 \
+     crate://crates.io/lazy_static/1.5.0 \
+     crate://crates.io/leb128fmt/0.1.0 \
+-    crate://crates.io/libc/0.2.189 \
++    crate://crates.io/libc/0.2.190 \
+     crate://crates.io/libcst/1.9.0 \
+     crate://crates.io/libcst_derive/1.9.0 \
+     crate://crates.io/libm/0.2.16 \
+@@ -228,7 +228,7 @@ SRC_URI += " \
+     crate://crates.io/munge_macro/0.4.7 \
+     crate://crates.io/natord/1.0.9 \
+     crate://crates.io/newtype-uuid/1.3.2 \
+-    crate://crates.io/nix/0.31.2 \
++    crate://crates.io/nix/0.31.3 \
+     crate://crates.io/nom/7.1.3 \
+     crate://crates.io/normalize-line-endings/0.3.0 \
+     crate://crates.io/notify/8.2.0 \
+@@ -353,7 +353,7 @@ SRC_URI += " \
+     crate://crates.io/similar/3.2.0 \
+     crate://crates.io/siphasher/1.0.1 \
+     crate://crates.io/slab/0.4.12 \
+-    crate://crates.io/smallvec/1.16.1 \
++    crate://crates.io/smallvec/1.16.2 \
+     crate://crates.io/snapbox/1.0.0 \
+     crate://crates.io/snapbox-macros/1.0.0 \
+     crate://crates.io/stable_deref_trait/1.2.0 \
+@@ -373,14 +373,14 @@ SRC_URI += " \
+     crate://crates.io/terminal_size/0.4.4 \
+     crate://crates.io/terminfo/0.9.0 \
+     crate://crates.io/termtree/0.5.1 \
+-    crate://crates.io/test-case/3.3.1 \
+-    crate://crates.io/test-case-core/3.3.1 \
+-    crate://crates.io/test-case-macros/3.3.1 \
++    crate://crates.io/test-case/3.4.0 \
++    crate://crates.io/test-case-core/3.4.0 \
++    crate://crates.io/test-case-macros/3.4.0 \
+     crate://crates.io/thin-vec/0.2.20 \
+     crate://crates.io/thiserror/1.0.69 \
+-    crate://crates.io/thiserror/2.0.20 \
++    crate://crates.io/thiserror/2.0.21 \
+     crate://crates.io/thiserror-impl/1.0.69 \
+-    crate://crates.io/thiserror-impl/2.0.20 \
++    crate://crates.io/thiserror-impl/2.0.21 \
+     crate://crates.io/thread_local/1.1.9 \
+     crate://crates.io/tikv-jemalloc-sys/0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7 \
+     crate://crates.io/tikv-jemallocator/0.6.1 \
+@@ -419,7 +419,7 @@ SRC_URI += " \
+     crate://crates.io/utf8-width/0.1.7 \
+     crate://crates.io/utf8_iter/1.0.4 \
+     crate://crates.io/utf8parse/0.2.2 \
+-    crate://crates.io/uuid/1.26.1 \
++    crate://crates.io/uuid/1.27.0 \
+     crate://crates.io/valuable/0.1.1 \
+     crate://crates.io/version-ranges/0.1.1 \
+     crate://crates.io/version_check/0.9.5 \
+@@ -498,12 +498,12 @@ SRC_URI += " \
+     crate://crates.io/zerotrie/0.2.5 \
+     crate://crates.io/zerovec/0.11.8 \
+     crate://crates.io/zerovec-derive/0.11.6 \
+-    crate://crates.io/zip/8.6.0 \
++    crate://crates.io/zip/9.0.5 \
+     crate://crates.io/zlib-rs/0.5.5 \
+     crate://crates.io/zmij/1.0.10 \
+-    crate://crates.io/zstd/0.13.3 \
+-    crate://crates.io/zstd-safe/7.2.4 \
+-    crate://crates.io/zstd-sys/2.0.16+zstd.1.5.7 \
++    crate://crates.io/zstd/0.14.3 \
++    crate://crates.io/zstd-safe/8.2.0 \
++    crate://crates.io/zstd-sys/2.1.2+zstd.1.5.7 \
+ "
+ 
+ SRC_URI[adler2-2.0.1.sha256sum] = "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa"
+@@ -566,7 +566,7 @@ SRC_URI[clap_complete_command-0.6.1.sha256sum] = "da8e198c052315686d36371e8a3c57
+ SRC_URI[clap_complete_nushell-4.5.8.sha256sum] = "0a0c951694691e65bf9d421d597d68416c22de9632e884c28412cb8cd8b73dce"
+ SRC_URI[clap_derive-4.6.7.sha256sum] = "f9c751b79415d4e559e3d1fcf128e09e720eb673a06d26cf6f392d37d75b66e0"
+ SRC_URI[clap_lex-1.0.0.sha256sum] = "3a822ea5bc7590f9d40f1ba12c0dc3c2760f3482c6984db1573ad11031420831"
+-SRC_URI[clearscreen-4.0.6.sha256sum] = "d669bb552908e336ad5681789752033b45566b7e591aeaac7a614e58e5d6d8f2"
++SRC_URI[clearscreen-5.0.0.sha256sum] = "6ebe9918b237e4e17e25a04d539d99ef3515417a85f703e0ed8bf44353eb17b3"
+ SRC_URI[codspeed-5.0.1.sha256sum] = "7083f253260bcb4aaa3b4aa4c52973703dabc1a85c2f193997e2689aafa8a919"
+ SRC_URI[codspeed-criterion-compat-5.0.1.sha256sum] = "d9f24251445188c69d50f10179d795424bd71b533b7e3f84fc03f26893b01af0"
+ SRC_URI[codspeed-criterion-compat-walltime-5.0.1.sha256sum] = "5c38205d56e2cb4fe04b708de7f9653a3f1b89edbe3a20b28f21e9e525e9e061"
+@@ -578,7 +578,7 @@ SRC_URI[colorchoice-1.0.4.sha256sum] = "b05b61dc5112cbb17e4b6cd61790d9845d138883
+ SRC_URI[colored-3.1.1.sha256sum] = "faf9468729b8cbcea668e36183cb69d317348c2e08e994829fb56ebfdfbaac34"
+ SRC_URI[compact_str-0.10.0.sha256sum] = "79fcda08c33bb58b97008b2cdada6622500e949e060f5913361763121abd2416"
+ SRC_URI[condtype-1.3.0.sha256sum] = "baf0a07a401f374238ab8e2f11a104d2851bf9ce711ec69804834de8af45c7af"
+-SRC_URI[console-0.16.4.sha256sum] = "4fe5f465a4f6fee88fad41b85d990f84c835335e85b5d9e6e63e0d06d28cba7c"
++SRC_URI[console-0.16.6.sha256sum] = "e96a4956774c13c126a8b5af4daa79384f4d826534c95a02d76afb39e2ab64e3"
+ SRC_URI[console_error_panic_hook-0.1.7.sha256sum] = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
+ SRC_URI[console_log-1.1.0.sha256sum] = "86919cef3e37b9356ccf54d4421208c17ecfda01beae61393e7ffd72916c0ef1"
+ SRC_URI[core-foundation-sys-0.8.7.sha256sum] = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
+@@ -678,7 +678,7 @@ SRC_URI[indicatif-0.18.6.sha256sum] = "9433806cd6b4ec1aba79c021c7e4c58fb4c3b9977
+ SRC_URI[indoc-2.0.7.sha256sum] = "79cf5c93f93228cf8efb3ba362535fb11199ac548a09ce117c9b1adc3030d706"
+ SRC_URI[inotify-0.11.0.sha256sum] = "f37dccff2791ab604f9babef0ba14fbe0be30bd368dc541e2b08d07c8aa908f3"
+ SRC_URI[inotify-sys-0.1.5.sha256sum] = "e05c02b5e89bff3b946cedeca278abc628fe811e604f027c45a8aa3cf793d0eb"
+-SRC_URI[insta-1.48.0.sha256sum] = "86f0f8fee8c926415c58d6ae43a08523a26faccb2323f5e6b644fe7dd4ef6b82"
++SRC_URI[insta-1.49.0.sha256sum] = "b67d3d2e287e4b86c10b3f3b641033d1f89b74bdb39d05f34952e2b9a6fe21cd"
+ SRC_URI[insta-cmd-0.7.0.sha256sum] = "bffdf4af1db390cf0401535d7c1303cd079a074d28d8473b026fdb6559c41403"
+ SRC_URI[interpolator-0.5.0.sha256sum] = "71dd52191aae121e8611f1e8dc3e324dd0dd1dee1e6dd91d10ee07a3cfb4d9d8"
+ SRC_URI[intrusive-collections-0.10.1.sha256sum] = "80e165935eba36cb526af8389effd2005a741adcbb6ed32106cc68e3f7b92960"
+@@ -703,7 +703,7 @@ SRC_URI[kqueue-1.1.1.sha256sum] = "eac30106d7dce88daf4a3fcb4879ea939476d5074a9b7
+ SRC_URI[kqueue-sys-1.0.4.sha256sum] = "ed9625ffda8729b85e45cf04090035ac368927b8cebc34898e7c120f52e4838b"
+ SRC_URI[lazy_static-1.5.0.sha256sum] = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
+ SRC_URI[leb128fmt-0.1.0.sha256sum] = "09edd9e8b54e49e587e4f6295a7d29c3ea94d469cb40ab8ca70b288248a81db2"
+-SRC_URI[libc-0.2.189.sha256sum] = "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2"
++SRC_URI[libc-0.2.190.sha256sum] = "ce5d3ddc6d3fa000eb1536d85e147bfe31aacaba692ed6a876f95cb7c855be78"
+ SRC_URI[libcst-1.9.0.sha256sum] = "21b68d9c60cba9c333f89596ef5c4d3b6c9bd0b7d2e48a9810df6fa7976102a3"
+ SRC_URI[libcst_derive-1.9.0.sha256sum] = "57a1ac6fb3fbdc3408a2f138e54d11c3dd338f12c2efc3db47477cc2227d89c2"
+ SRC_URI[libm-0.2.16.sha256sum] = "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+@@ -732,7 +732,7 @@ SRC_URI[munge-0.4.7.sha256sum] = "5e17401f259eba956ca16491461b6e8f72913a0a114e39
+ SRC_URI[munge_macro-0.4.7.sha256sum] = "4568f25ccbd45ab5d5603dc34318c1ec56b117531781260002151b8530a9f931"
+ SRC_URI[natord-1.0.9.sha256sum] = "308d96db8debc727c3fd9744aac51751243420e46edf401010908da7f8d5e57c"
+ SRC_URI[newtype-uuid-1.3.2.sha256sum] = "5c012d14ef788ab066a347d19e3dda699916c92293b05b85ba2c76b8c82d2830"
+-SRC_URI[nix-0.31.2.sha256sum] = "5d6d0705320c1e6ba1d912b5e37cf18071b6c2e9b7fa8215a1e8a7651966f5d3"
++SRC_URI[nix-0.31.3.sha256sum] = "cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d"
+ SRC_URI[nom-7.1.3.sha256sum] = "d273983c5a657a70a3e8f2a01329822f3b8c8172b73826411a55751e404a0a4a"
+ SRC_URI[normalize-line-endings-0.3.0.sha256sum] = "61807f77802ff30975e01f4f071c8ba10c022052f98b3294119f3e615d13e5be"
+ SRC_URI[notify-8.2.0.sha256sum] = "4d3d07927151ff8575b7087f245456e549fea62edf0ec4e565a5ee50c8402bc3"
+@@ -857,7 +857,7 @@ SRC_URI[similar-2.7.0.sha256sum] = "bbbb5d9659141646ae647b42fe094daf6c6192d16208
+ SRC_URI[similar-3.2.0.sha256sum] = "4f66ca1f7aca2474dc10c942eb22feffc897735f54cd1db90138c2fddb490987"
+ SRC_URI[siphasher-1.0.1.sha256sum] = "56199f7ddabf13fe5074ce809e7d3f42b42ae711800501b5b16ea82ad029c39d"
+ SRC_URI[slab-0.4.12.sha256sum] = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
+-SRC_URI[smallvec-1.16.1.sha256sum] = "ba467056f1b547ed52077911161fc86985becbc60e8e1857c8a144dab0def891"
++SRC_URI[smallvec-1.16.2.sha256sum] = "f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e"
+ SRC_URI[snapbox-1.0.0.sha256sum] = "71d70a71b68054cbe88708f77abfc4bd2daf75028f8f55f4f1cff63565df89ea"
+ SRC_URI[snapbox-macros-1.0.0.sha256sum] = "d248cef42e1456ab2f7149c0376985351b7d849ea9ad2a957bf15ddfebf1fdf9"
+ SRC_URI[stable_deref_trait-1.2.0.sha256sum] = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
+@@ -877,14 +877,14 @@ SRC_URI[tempfile-3.27.0.sha256sum] = "32497e9a4c7b38532efcdebeef879707aa9f794296
+ SRC_URI[terminal_size-0.4.4.sha256sum] = "230a1b821ccbd75b185820a1f1ff7b14d21da1e442e22c0863ea5f08771a8874"
+ SRC_URI[terminfo-0.9.0.sha256sum] = "d4ea810f0692f9f51b382fff5893887bb4580f5fa246fde546e0b13e7fcee662"
+ SRC_URI[termtree-0.5.1.sha256sum] = "8f50febec83f5ee1df3015341d8bd429f2d1cc62bcba7ea2076759d315084683"
+-SRC_URI[test-case-3.3.1.sha256sum] = "eb2550dd13afcd286853192af8601920d959b14c401fcece38071d53bf0768a8"
+-SRC_URI[test-case-core-3.3.1.sha256sum] = "adcb7fd841cd518e279be3d5a3eb0636409487998a4aff22f3de87b81e88384f"
+-SRC_URI[test-case-macros-3.3.1.sha256sum] = "5c89e72a01ed4c579669add59014b9a524d609c0c88c6a585ce37485879f6ffb"
++SRC_URI[test-case-3.4.0.sha256sum] = "124953e7f67cb0b2fcfb87e899e4ae5a64fb68e2e160767933cc67b646fb0042"
++SRC_URI[test-case-core-3.4.0.sha256sum] = "bd097615b407247e102046ba34426bb594923ab3554cf0f3cdfed050f1a5a3e8"
++SRC_URI[test-case-macros-3.4.0.sha256sum] = "f4ce35ece947bccac166e1ded639133827a953f69a48ba134d17f91108333082"
+ SRC_URI[thin-vec-0.2.20.sha256sum] = "4568d7e143ec86d2021c338bae2afa88699e84b8e0af523626654fe6f03a1748"
+ SRC_URI[thiserror-1.0.69.sha256sum] = "b6aaf5339b578ea85b50e080feb250a3e8ae8cfcdff9a461c9ec2904bc923f52"
+-SRC_URI[thiserror-2.0.20.sha256sum] = "ec86235f5fcc2a73650310756d2ac5b138a5780bbbdfae3eeccec992c435ba4f"
++SRC_URI[thiserror-2.0.21.sha256sum] = "09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e"
+ SRC_URI[thiserror-impl-1.0.69.sha256sum] = "4fee6c4efc90059e10f81e6d42c60a18f76588c3d74cb83a0b242a2b6c7504c1"
+-SRC_URI[thiserror-impl-2.0.20.sha256sum] = "bc04cd3e1236dd4a98afca4569f2deb3f120e5422a4023be2cb683f8486292af"
++SRC_URI[thiserror-impl-2.0.21.sha256sum] = "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524"
+ SRC_URI[thread_local-1.1.9.sha256sum] = "f60246a4944f24f6e018aa17cdeffb7818b76356965d03b07d6a9886e8962185"
+ SRC_URI[tikv-jemalloc-sys-0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7.sha256sum] = "cd8aa5b2ab86a2cefa406d889139c162cbb230092f7d1d7cbc1716405d852a3b"
+ SRC_URI[tikv-jemallocator-0.6.1.sha256sum] = "0359b4327f954e0567e69fb191cf1436617748813819c94b8cd4a431422d053a"
+@@ -923,7 +923,7 @@ SRC_URI[urlencoding-2.1.3.sha256sum] = "daf8dba3b7eb870caf1ddeed7bc9d2a049f3cfdf
+ SRC_URI[utf8-width-0.1.7.sha256sum] = "86bd8d4e895da8537e5315b8254664e6b769c4ff3db18321b297a1e7004392e3"
+ SRC_URI[utf8_iter-1.0.4.sha256sum] = "b6c140620e7ffbb22c2dee59cafe6084a59b5ffc27a8859a5f0d494b5d52b6be"
+ SRC_URI[utf8parse-0.2.2.sha256sum] = "06abde3611657adf66d383f00b093d7faecc7fa57071cce2578660c9f1010821"
+-SRC_URI[uuid-1.26.1.sha256sum] = "2ef6dac1e96601b4fb3acccccff2139741fcb757cb9a36089bf5be91cfb285ce"
++SRC_URI[uuid-1.27.0.sha256sum] = "97277d36b9c3ace13e58fa6e753f8b0bbbf302a18dd193240d70f9e29681059a"
+ SRC_URI[valuable-0.1.1.sha256sum] = "ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65"
+ SRC_URI[version-ranges-0.1.1.sha256sum] = "f8d079415ceb2be83fc355adbadafe401307d5c309c7e6ade6638e6f9f42f42d"
+ SRC_URI[version_check-0.9.5.sha256sum] = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
+@@ -1002,9 +1002,9 @@ SRC_URI[zerofrom-derive-0.1.6.sha256sum] = "d71e5d6e06ab090c67b5e44993ec16b72dcb
+ SRC_URI[zerotrie-0.2.5.sha256sum] = "4ea269c3bd32f0a32c321907a2ae912ba6f4649bb0fc764a15627e99a7095a3f"
+ SRC_URI[zerovec-0.11.8.sha256sum] = "bb0464e17806c1d976d5cba29399c7f08e516e279e2ba493f63123b5fca67dd8"
+ SRC_URI[zerovec-derive-0.11.6.sha256sum] = "34df6fc39dbd26ddc9c10e6a2984476e13acce22e64e4487636ef494369225da"
+-SRC_URI[zip-8.6.0.sha256sum] = "2d04a6b5381502aa6087c94c669499eb1602eb9c5e8198e534de571f7154809b"
++SRC_URI[zip-9.0.5.sha256sum] = "6e04976da629d3b04204ba8105b396a193af8ad2583b2c79bfb3ab8af580a11e"
+ SRC_URI[zlib-rs-0.5.5.sha256sum] = "40990edd51aae2c2b6907af74ffb635029d5788228222c4bb811e9351c0caad3"
+ SRC_URI[zmij-1.0.10.sha256sum] = "30e0d8dffbae3d840f64bda38e28391faef673a7b5a6017840f2a106c8145868"
+-SRC_URI[zstd-0.13.3.sha256sum] = "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a"
+-SRC_URI[zstd-safe-7.2.4.sha256sum] = "8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d"
+-SRC_URI[zstd-sys-2.0.16+zstd.1.5.7.sha256sum] = "91e19ebc2adc8f83e43039e79776e3fda8ca919132d68a1fed6a5faca2683748"
++SRC_URI[zstd-0.14.3.sha256sum] = "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70"
++SRC_URI[zstd-safe-8.2.0.sha256sum] = "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b"
++SRC_URI[zstd-sys-2.1.2+zstd.1.5.7.sha256sum] = "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3"
+diff --git a/meta-python/recipes-devtools/python/python3-ruff/0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch b/meta-python/recipes-devtools/python/python3-ruff/0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch
+index 2fbda610aa..788f6ec31d 100644
+--- a/meta-python/recipes-devtools/python/python3-ruff/0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch
++++ b/meta-python/recipes-devtools/python/python3-ruff/0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch
+@@ -1,4 +1,4 @@
+-From 3db4e7361ecdafec16b5ea23a2a21e62bc5d87bd Mon Sep 17 00:00:00 2001
++From fb8bd491698715d72568a10b118afebb31f550c9 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <khem.raj@oss.qualcomm.com>
+ Date: Wed, 21 Oct 2026 18:00:00 -0700
+ Subject: [PATCH] ruff: Use portable-atomic for AtomicU64 on targets without
+@@ -31,7 +31,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+  4 files changed, 58 insertions(+), 4 deletions(-)
+ 
+ diff --git a/Cargo.lock b/Cargo.lock
+-index 84eda7b..4444142 100644
++index 1a222f1..7e9a657 100644
+ --- a/Cargo.lock
+ +++ b/Cargo.lock
+ @@ -3123,6 +3123,7 @@ dependencies = [
+@@ -43,10 +43,10 @@ index 84eda7b..4444142 100644
+   "regex",
+   "rkyv",
+ diff --git a/Cargo.toml b/Cargo.toml
+-index f5f3f6c..288535a 100644
++index 7a20227..a919431 100644
+ --- a/Cargo.toml
+ +++ b/Cargo.toml
+-@@ -172,6 +172,7 @@ pathdiff = { version = "0.2.1", default-features = false }
++@@ -173,6 +173,7 @@ pathdiff = { version = "0.2.1", default-features = false }
+  phf = { version = "0.14.0", default-features = false }
+  phf_codegen = { version = "0.14.0", default-features = false }
+  pep440_rs = { version = "0.7.1", default-features = false }
+@@ -55,7 +55,7 @@ index f5f3f6c..288535a 100644
+  proc-macro2 = { version = "1.0.79", default-features = false, features = ["proc-macro"] }
+  pyproject-toml = { version = "0.13.4", default-features = false }
+ diff --git a/crates/ruff/Cargo.toml b/crates/ruff/Cargo.toml
+-index d88c322..a0de836 100644
++index 718cbfa..301de70 100644
+ --- a/crates/ruff/Cargo.toml
+ +++ b/crates/ruff/Cargo.toml
+ @@ -77,6 +77,9 @@ tikv-jemallocator = { workspace = true }
+diff --git a/meta-python/recipes-devtools/python/python3-ruff_0.17.3.bb b/meta-python/recipes-devtools/python/python3-ruff_0.17.4.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-ruff_0.17.3.bb
+rename to meta-python/recipes-devtools/python/python3-ruff_0.17.4.bb
+index 0c3a0dec55..2c97383b2c 100644
+--- a/meta-python/recipes-devtools/python/python3-ruff_0.17.3.bb
++++ b/meta-python/recipes-devtools/python/python3-ruff_0.17.4.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e679ca4f742cbfa29ab6a499529c2d39"
+ 
+ SRC_URI += "file://0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch"
+ 
+-SRC_URI[sha256sum] = "a57049c8addb3662073859bb55a7ad35aa54f8a7c9ed268911d1333c5aadaaa9"
++SRC_URI[sha256sum] = "f32d178b50e826e00f6c6c1be3f56333068acb9b67fe167143527fa9b81e890d"
+ 
+ inherit pypi python_maturin cargo-update-recipe-crates
+ 
 -- 
-2.55.0
+2.47.3
 
