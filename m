@@ -1,63 +1,64 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1097.1794332164794662928
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1089.1794332158100706761
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 09:36:05 -0800
+ Tue, 10 Nov 2026 09:35:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=hJwbqJv5;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a5720b0a57so14064635e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:36:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=mzIpHYgU;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-498f5fa4f70so637426f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:35:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794332163; x=1794936963; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794332156; x=1794936956; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Wgz6v/dxTlEafNcMVdgKqeL4J15jP3zzdfpYWR3p7ic=;
-        b=hJwbqJv5k8C6tBIWkfhrfqn1FeHTs/aFOgSDCLnrsLbiQFXRQ7T1R+YJWtrCCPLlkv
-         Kn6vVZUfpsxqO2zsokoXgNyzjwqDM/Wa5D4yZJ2btx5N6cCNJlUKZkEyo8bKZYq2xbMz
-         xuYjc0368EhQMlxssj2rKsBsypPvX0OiTI0t9J6TNvrbSsxZSmmtkwdiFjwpITdpqF9O
-         AlWbevkRQpoELtWyL27rMgehsIaDXgOhK/AENpdgc+/9iB16GMWxZKExdPF0h2ewvDxR
-         QSKv/G1Gp46QJ+6THb2ye2cWkp48hAkOz2zKyml2OO59p8UOmHmEB99icX+cPE0eha/R
-         rdEg==
+        bh=3xXRRykqRrKToxez0VFTiK6p6eky8RT4rH1pd7Lp3y4=;
+        b=mzIpHYgUFAaR3T8v9Bh/fwz6etY60K0OwGuodcDwkPpIVfhgpDgb+jk06Xyz0kW+Wm
+         8efiZ/0mZUKOFxZA6OjOTlDYej7BEwghfiotI5ZJGdbFfl/+81DwHl5flQIE/tAfZYI2
+         SMxGG1psNzfnV8y3XsITadVl5sr52qXD35zprqTLLZ/cv7/N8FrMVjwcd0RyJ+e+gSB7
+         l4GO0wePhkNuhEhxTS2zuiZz0KFdlX65ziuW63ODljVJz7VmnE0nFEOFl6uGsiopByAB
+         B+3M4GAwvMesdi+hQBkLZH4URRGgViQb9EJ4PdBNGHl3oW4MOy6MbXr8TQ+1oXQBftGe
+         la/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794332163; x=1794936963;
+        d=1e100.net; s=20260707; t=1794332156; x=1794936956;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Wgz6v/dxTlEafNcMVdgKqeL4J15jP3zzdfpYWR3p7ic=;
-        b=o7TZ8ZcITTWp7aERl4mV5eMxIXS1e72uqGZXAwAPWIGKNcbmhuyLpEOB2XOqHUaCXy
-         DNCONVx9bf7Rqr9zctkzjv8bEesuRMMWB4LDxtE69l9z6xsTDFXoC2ZRIcr9yg5bOdTd
-         9aimQFKTlX3oJu0TiSwPB53hIU3EBVz+KKXWNy95Ye86OLiGDVgtv5rEl1mrjU9ml50Y
-         mjBxDFhmRuUIxkTj5B5BP6HeDT7PoRVIcHvCZMYIKtfMuEBm2sRcwIk+3PqtVLZ6+yfL
-         xwQlcswqFAqFFieqMITKzahraywTqdj2Mfv7X3M0ExDEOfUGR35iIj4fJ3IC4a+PrUKC
-         N/lg==
-X-Gm-Message-State: APuU4Z9YXXNQOCpJBGkqXTI5RPcXuYKFP/iQjj+GgbNGgHHrWe5Mkv0e
-	i4kEnyOGhbwDTjLVc35X7gN4PZiHb5z485Wg/aDN9/g1Ws4x9JzEqOzDLGVZqw==
-X-Gm-Gg: AYBFou2vPl+Ze0NEXszwl1BrYSA2eObhS4EUyCqFTcd1lOQ8jFla6lllKZVrevYoVvx
-	KC0znYG0nFo8bkcgvZU44z8cuwwGXTFzdgVI0bPUD4OZPXFz65tTjBwXoF5jf1ax7wNQVyO7OvC
-	X/MGXY9sf87P1n4X2WMQE7//9ErYCslo5neVgDdw7kqiQ+3KNZmkazGTiN9iLgjJPYxgGGk8nqK
-	4lPU8Tw2iPHidP9FcjlSh+ldRsGNNS3B39yjFzAgLOMlT5d5dETMkLZynplwtv8ukYu51yZDXVH
-	3DGUZXUrmR166WFDCV+OToB2c8p1A8FKblHKs+BHCvLpPIJlHzcSYHNKCIQaXGaKHaVzhjShlgl
-	94ONAtinJmJZ+yeCbvEAxwraYrbmwaas4bflnntbUbocn2TrLdHxQ3vX7e4UsbsM6kH4pCeLvSP
-	9M03NITUNlvELqapO4Xifq6X7YZ2UfDpNPkKjjx9TatMZXrDggkyVaCLAJKXKOtd7YkLNn8S83N
-	Px3Pny4XYsPmKpkZCboeupAfSWlgGuo5di635YJOPitSLHaau6r7DAdezA4jv1g8ezvedRpxNmv
-	djfVPv8i/uGxhu8FAmdqdphN5ks/2HCHa5ne0KlWqB6padoluxnhzlex9m9arjGcdkvtnilizYp
-	hv/U=
-X-Received: by 2002:a05:600c:c4ab:b0:4a1:c27d:e1a8 with SMTP id 5b1f17b1804b1-4ba08dcdba8mr1067275e9.10.1794332162937;
-        Tue, 10 Nov 2026 09:36:02 -0800 (PST)
+        bh=3xXRRykqRrKToxez0VFTiK6p6eky8RT4rH1pd7Lp3y4=;
+        b=XN2s9BQssVd10KGqLbhAx3H5QvMkeNjtP3tvxXyu7axCAjZY5Evjd95qxCRtPQyV6E
+         d13HqTjFlV3Vm9O3/01AUPJwPwIfiU+P6/bEBsNO2Dt4SWjr2Na8s/8PBhMz0xmXm47M
+         1faElFzdaRR980Vtk7dvLhkd/iR7dXBrf3XQZE0DM2r0khshbSWn/5mTsgfRLmBgp7D5
+         asKp+pc3QOkohdh6mnrGT3OJwjtjsTaKvTYaz4SNzUJDQb7KmeR+c1K0dU8/lfd8YFln
+         PGErdWlG3+hW15td5PvlW74irQ52SKuTYr6xO7wDNHPALQMDPBCWLbzdV7TMVszNBiVW
+         uzCQ==
+X-Gm-Message-State: APuU4Z+6C8nBOYwMYtyw+0E4y2EmQUKWmUyUDFZVRMLu0N9Qs41VhRRp
+	ewY3CMy0KXKhZDyGm+srRF3Jvv2Rz1Bl5+V7hJRfP60PDlh5RjchHbbsD/4VwQ==
+X-Gm-Gg: AYBFou2nNxBVKAmXcvnVSdvb1eX8nROHKyhFlgPREyE0+vtU/3rXAzuvwuVtcVD11u+
+	XPgLIXWpAs0XXuSZgCgQ5EdTuGQsoHfTyfrunzTjNlSyAhG2LSlaCDAJU9Sk8Poig9PPaNy6DkH
+	qE7BnyzUovJgDWXHqj6oXREHK+AAilQnlfevtVezSgdpTPTVyu/1Mj1+gbSxJ3Mmd6fdrb9YaDH
+	z/ixHTjBtrMmcKBUUU+QKpxQLixV+5Eiit6xaOrczZnvhQuVxgx84F4xpFljjeTbVUXYFQ/bCYt
+	q2+aigYblnv2gtw7zcaZYe2n9dmYZVazXPrBMO8H8YoYSP3DOmZFk/oQ9krMIp0yfE4NxMVE3jN
+	NP5CnTFvroEML1Tz3RsUxMwkTpbSBfjpIq5Rj9iTlg2wQcP/+W2+vcQnhS7u5QJuQcqE2mqib7E
+	YFwRVOzybLyeAgsqzNdqdnuG1DAOv1yHshAmbX9/AeBjUeJ9XsiJBbZL60/YkS6C1Tr6a4wLu0x
+	uoQAd4wEhv4i5fEB/UD1i4siaBV4GR3A03+HVLXno88HaqwhUZ/UPx+lLcCOq1xCBJIxEtmr2HU
+	WPSFeLuSwNTl6NgOAoQf4vtZNJEXpj8YsX9+xSmdyz3HFJRMXJ6otHGJaLxGwCdEV8rB4d5uEFo
+	xZZDQnqqhoAkEYHUzqXrtrmi5
+X-Received: by 2002:a05:600c:a310:b0:4ba:809:5453 with SMTP id 5b1f17b1804b1-4ba0809556amr15680855e9.31.1794332156264;
+        Tue, 10 Nov 2026 09:35:56 -0800 (PST)
 Return-Path: <alex.kiernan@gmail.com>
 Received: from [192.168.5.15] (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.36.01
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.35.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 09:36:01 -0800 (PST)
+        Tue, 10 Nov 2026 09:35:55 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 10 Nov 2026 17:35:37 +0000
-Subject: [PATCH meta-oe 08/10] android-tools: add ADBD_AUTH_KEY_PATHS
+Date: Tue, 10 Nov 2026 17:35:31 +0000
+Subject: [PATCH meta-oe 02/10] android-tools: adbd: start adb shell in
+ $HOME, without Android's TMPDIR
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-android-tools-adbd-v1-8-cc2176f381c3@gmail.com>
+Message-Id: <20261110-android-tools-adbd-v1-2-cc2176f381c3@gmail.com>
 References: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 In-Reply-To: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -65,130 +66,82 @@ Cc: Alex Kiernan <alex.kiernan@gmail.com>
 X-Mailer: b4 0.16.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 17:36:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132105
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132099
 
-adbd looks for trusted host keys only in Android's /adb_keys and
-/data/misc/adb/adb_keys, so a Linux adbd that requires authorization has
-nowhere sensible to be given one. ADBD_AUTH_KEY_PATHS, colon-separated,
-replaces that list.
+adbd execs the login shell itself, so `adb shell` starts in adbd's working
+directory rather than the user's home, and with TMPDIR=/data/local/tmp,
+which does not exist on a Linux rootfs.
 
 AI-Generated: Claude Opus 5.5 (Claude Code)
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...h-optionally-take-the-trusted-key-paths-a.patch | 72 ++++++++++++++++++++++
- .../android-tools/android-tools_35.0.2.bb          |  7 ++-
- 2 files changed, 78 insertions(+), 1 deletion(-)
+ ...start-in-HOME-and-drop-the-Android-only-T.patch | 45 ++++++++++++++++++++++
+ .../android-tools/android-tools_35.0.2.bb          |  1 +
+ 2 files changed, 46 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0023-libadbd_auth-optionally-take-the-trusted-key-paths-a.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0023-libadbd_auth-optionally-take-the-trusted-key-paths-a.patch
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0017-adbd-shell-start-in-HOME-and-drop-the-Android-only-T.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0017-adbd-shell-start-in-HOME-and-drop-the-Android-only-T.patch
 new file mode 100644
-index 000000000000..581ecc85ce09
+index 000000000000..d8839d776069
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/0023-libadbd_auth-optionally-take-the-trusted-key-paths-a.patch
-@@ -0,0 +1,72 @@
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/0017-adbd-shell-start-in-HOME-and-drop-the-Android-only-T.patch
+@@ -0,0 +1,45 @@
 +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 +From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Fri, 6 Nov 2026 09:38:18 +0000
-+Subject: [PATCH] libadbd_auth: optionally take the trusted-key paths at build
-+ time
++Date: Fri, 17 Jul 2026 18:20:41 +0100
++Subject: [PATCH] adbd: shell - start in $HOME and drop the Android-only TMPDIR
 +
-+libadbd_auth reads trusted host keys from /adb_keys and
-+/data/misc/adb/adb_keys, which are Android's locations and rarely exist
-+on a Linux system - so a Linux adbd that requires authorization has
-+nowhere to be given a key.
-+
-+When ADBD_AUTH_KEY_PATHS is passed to make - a colon-separated list -
-+read keys from those files instead. They are still read on every attempt, so a key
-+file that appears after adbd started is picked up.
-+
-+Without the define nothing changes.
++adbd execs the login shell directly (no login(1)), so it never chdir()s and the
++shell lands in adbd's cwd (/) instead of the user's home. chdir() to the passwd
++home before exec, best-effort. Also drop the hardcoded TMPDIR=/data/local/tmp:
++that path only exists on Android and is wrong on a normal Linux rootfs, where an
++unset TMPDIR correctly falls back to /tmp.
 +
 +Upstream-Status: Pending
 +
-+AI-Generated: Claude Opus 5.5 (Claude Code)
++AI-Generated: Claude Opus 4.8 (claude-opus-4-8)
 +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 +---
-+ debian/system/adbd.mk                         |  4 ++++
-+ .../native/libs/adbd_auth/adbd_auth.cpp       | 19 ++++++++++++++++---
-+ 2 files changed, 20 insertions(+), 3 deletions(-)
++ packages/modules/adb/daemon/shell_service.cpp | 8 +++++++-
++ 1 file changed, 7 insertions(+), 1 deletion(-)
 +
-+diff --git a/debian/system/adbd.mk b/debian/system/adbd.mk
-+index 5e2c5ccaea30..dc82b998e77a 100644
-+--- a/debian/system/adbd.mk
-++++ b/debian/system/adbd.mk
-+@@ -113,6 +113,10 @@ ifeq ($(ADBD_AUTH_UNLESS_DEBUGGABLE),1)
-+ CPPFLAGS += -DADBD_AUTH_UNLESS_DEBUGGABLE
-+ endif
-+ 
-++ifneq ($(ADBD_AUTH_KEY_PATHS),)
-++CPPFLAGS += -DADBD_AUTH_KEY_PATHS='"$(ADBD_AUTH_KEY_PATHS)"'
-++endif
-++
-+ STATIC_LIBS = \
-+   debian/out/system/libadb.a \
-+   debian/out/system/libcrypto_utils.a \
-+diff --git a/frameworks/native/libs/adbd_auth/adbd_auth.cpp b/frameworks/native/libs/adbd_auth/adbd_auth.cpp
-+index 78896ed553c4..9b76c17b1b39 100644
-+--- a/frameworks/native/libs/adbd_auth/adbd_auth.cpp
-++++ b/frameworks/native/libs/adbd_auth/adbd_auth.cpp
-+@@ -390,10 +390,23 @@ public:
-+         }
++diff --git a/packages/modules/adb/daemon/shell_service.cpp b/packages/modules/adb/daemon/shell_service.cpp
++index dbca4adb61e2..4e9e50edf271 100644
++--- a/packages/modules/adb/daemon/shell_service.cpp
+++++ b/packages/modules/adb/daemon/shell_service.cpp
++@@ -274,7 +274,6 @@ bool Subprocess::ForkAndExec(std::string* error) {
++         env["HOSTNAME"] = GetHostName();
++         env["LOGNAME"] = pw->pw_name;
++         env["SHELL"] = pw->pw_shell;
++-        env["TMPDIR"] = "/data/local/tmp";
++         env["USER"] = pw->pw_name;
 +     }
 + 
-+-    static constexpr const char* key_paths[] = {"/adb_keys", "/data/misc/adb/adb_keys"};
-++#if defined(ADBD_AUTH_KEY_PATHS)
-++    // A colon-separated list, for systems where AOSP's locations mean nothing.
-++    // Read on every attempt, so a file that appears after adbd started counts.
-++    static std::vector<std::string> KeyPaths() {
-++        return android::base::Split(ADBD_AUTH_KEY_PATHS, ":");
-++    }
-++#else
-++    static std::vector<std::string> KeyPaths() {
-++        return {"/adb_keys", "/data/misc/adb/adb_keys"};
-++    }
-++#endif
-+     void IteratePublicKeys(bool (*callback)(void*, const char*, size_t), void* opaque) {
-+-        for (const auto& path : key_paths) {
-+-            if (access(path, R_OK) == 0) {
-++        for (const auto& path : KeyPaths()) {
-++            if (path.empty()) {
-++                continue;
-++            }
-++            if (access(path.c_str(), R_OK) == 0) {
-+                 LOG(INFO) << "adbd_auth: loading keys from " << path;
-+                 std::string content;
-+                 if (!android::base::ReadFileToString(path, &content)) {
++@@ -386,6 +385,13 @@ bool Subprocess::ForkAndExec(std::string* error) {
++         }
++ #endif
++ 
+++        // Start the shell in the user's home dir, like login(1) would - adbd
+++        // execs the shell directly (no login), so without this it inherits
+++        // adbd's cwd (/). Best-effort: if HOME is missing/unset, stay put.
+++        if (pw != nullptr && pw->pw_dir && pw->pw_dir[0]) {
+++            (void)chdir(pw->pw_dir);
+++        }
+++
++         if (command_.empty()) {
++             // Spawn a login shell if we don't have a command.
++             execle(_PATH_BSHELL, "-" _PATH_BSHELL, nullptr, cenv.data());
 diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-index 1a939b503601..b17d92d6e9bb 100644
+index 4961a13963c4..b1e66198f88c 100644
 --- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
 +++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-@@ -67,6 +67,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
-            file://0020-adbd-signal-readiness-once-functionfs-is-serviced.patch \
-            file://0021-liblog-optionally-read-ro.debuggable-from-build.prop.patch \
-            file://0022-adbd-optionally-require-authorization-unless-the-bui.patch \
-+           file://0023-libadbd_auth-optionally-take-the-trusted-key-paths-a.patch \
+@@ -61,6 +61,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
+            file://0014-daemon-auth-vendor-a-portable-b64_pton-for-non-glib.patch \
+            file://0015-adbd-make-fs-config-opt-in-on-non-android-builds.patch \
+            file://0016-adbd-forward-the-reboot-target-to-RESTART2.patch \
++           file://0017-adbd-shell-start-in-HOME-and-drop-the-Android-only-T.patch \
             "
  
  SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
-@@ -223,7 +224,8 @@ do_compile() {
-     for tool in ${TOOLS_TO_BUILD}; do
-         oe_runmake -f ${S}/debian/system/${tool}.mk -C ${S} \
-             ${@'HAVE_SYSTEMD=1' if bb.utils.contains('PACKAGECONFIG', 'systemd', True, False, d) else ''} \
--            ${@'ADBD_AUTH_UNLESS_DEBUGGABLE=1' if bb.utils.contains('PACKAGECONFIG', 'auth-unless-debuggable', True, False, d) else ''}
-+            ${@'ADBD_AUTH_UNLESS_DEBUGGABLE=1' if bb.utils.contains('PACKAGECONFIG', 'auth-unless-debuggable', True, False, d) else ''} \
-+            ${@'ADBD_AUTH_KEY_PATHS=' + d.getVar('ADBD_AUTH_KEY_PATHS') if d.getVar('ADBD_AUTH_KEY_PATHS') else ''}
-     done
- }
- 
-@@ -271,6 +273,9 @@ BBCLASSEXTEND = "native"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- ADB_DEBUGGABLE_PROP_FILES ?= "${sysconfdir}/build.prop"
-+# Where adbd reads trusted host keys, colon-separated. Empty keeps Android's
-+# /adb_keys and /data/misc/adb/adb_keys.
-+ADBD_AUTH_KEY_PATHS ?= ""
- # Apply Android's fs_config ownership/mode tables to files pushed by adbd to
- # /system, /vendor and /oem. Off by default: the tables describe Android
- # partition images and are meaningless on a generic Linux rootfs.
 
 -- 
 2.43.0
