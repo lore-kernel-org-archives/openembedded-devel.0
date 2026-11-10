@@ -1,64 +1,64 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1090.1794332159437590724
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1077.1794332160270640571
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2026 09:35:59 -0800
+ Tue, 10 Nov 2026 09:36:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20260707 header.b=0zmVA+hM;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a9a8d6cea8so28629255e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:35:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20260707 header.b=Tm402ELv;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so24355975e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 09:36:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794332157; x=1794936957; darn=lists.openembedded.org;
+        d=gmail.com; s=20260707; t=1794332158; x=1794936958; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=o6TmDhIQfQMyKfUbNRc764ERoyhuscUbIGTQEB12gk0=;
-        b=0zmVA+hM+bSz3RN6XbSEOGdh+iG/PgmL6qHrNh3Mibl6qAw70fLKdpS/Uw6FwxG5iS
-         SuDVmGbOPKdOX/UIHmwQpx3P/+ApE1/8RnEqb5YYMN6LJgOB0uMBvKNzUlpXdMuo5otr
-         SFNiZ9lHggb79h+Ww3vSla3+Ufk9MbzATs8LsloVASsLyw3jM1qWnKw9HhCplELiw6ZR
-         SPSeyJ8tzWZ3XIvS3jhQrgNRjNFjmtLAxmowMbxwefsE3PNNIgL/dooVuYvfUUihAMLK
-         S8agAFAyZjC3oDfBPHRXGIV/X0/oUOk//vz8k8W2kMSRJBamQinOt1wuuwKQ5DP6BBS1
-         WaKw==
+        bh=VCoIVxUN7/HNcrZJQNRrtt1h0uxfOvtG2T4z2RkCTCE=;
+        b=Tm402ELvGxgxOIUi5oulmDAxRDfb/3pRv0guVRkq8S9NCxcrhPrnzH1MbV9t8VOtu7
+         bwNf/TfxoqqGnDLjmwK4Kebq6fBJzanb4OUyPzKxWxXItr7dnrEXG3fH/cPv8XGa2CtU
+         1rCrLxcn/p39S/rrPkDlva24PVA0JRibcj+jUBPhj9sfp8oiStr+KIJy1GUAChXx59NR
+         SondLh5YMxuI1PJLYFDLVSUOh4OoGYN0UZ6uz5ytCv4sXbK4t8rvITzrxLIrhhDg3/78
+         ShyGsMCr/sMXLTLLPKaZ2gkUsl37gAe2NsglXav1ng5w9lKajDtEk8vBDax1EUzP7vTH
+         lPcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794332157; x=1794936957;
+        d=1e100.net; s=20260707; t=1794332158; x=1794936958;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=o6TmDhIQfQMyKfUbNRc764ERoyhuscUbIGTQEB12gk0=;
-        b=CjVifhkruYpDOv7EtI9PJKk6W4lVwQ1EZzFLKBQ/dz4YEV97c7K8+we0Yhsaqo5Rf1
-         0eVT1q4AQxijJvsBm8NhSG0bkJ2dAGOkrEagh+KhV/aiMfUVWhHiByH6elY5oskoxFCg
-         Bv2ujfJLqDhnOyN9G56t50mdscpzia4tS122cRY8r+drF3gYaK0PjtHFYOT8WIWebENg
-         RylUoF7ATjMDS+23vGH2mxb3uqm1+PBrXUY2m0+qDOCoocENU9LV9pv/nAOTBPCXCdyc
-         v/hSRHC0qHG5wz+0ll1qyccInV63S1qrZk5/xtTjRTBbTxria+WwWDJ2Cj5DzUcStnxH
-         hI0Q==
-X-Gm-Message-State: APuU4Z+5TJM8halBDajFGPfu8e47KWKYALIhD91duDb3+34NzXsSDZ+V
-	KHdXtXBfLQIklm5teyf9t5KQkWaHMnsg67lpcnJepzrGVBmjqLxDKGRRXvFf6Q==
-X-Gm-Gg: AYBFou2Jfmg8wdH0373SHlHXqXBiehbjg4zNBjvoyh7hj9U8R0Aq5qGfBKyDTkZ5mHs
-	ERXtCDoWNKdy+pRX6FMvImm21WVtapPjHkJmPBnb/8QsXHTu3tVPbNtqpTHJzIXLvERqbYdI2Nj
-	BqOvWVwegiZAE7Bzg8yTM1n1YH9LFLyMp9wKyDaVaKvdAAEyfE1ZASjV/H50g2HeH4z91FV//MA
-	LbtlE/SEydDDN24brrUeRPStCrVnu1Zd34B3WQwpXTdenwrxQEVVngxAdWDdTtiOrkjAc/aXj5F
-	EL3lRRvS3t1nB65XOVZgjfVbV+mN5y6ra7QVTsVKkYsYpSUvsjhuvZvsL2//7aUpiwQ6sbUV1a2
-	AbrT94zRIN4zMASibEDluGi4+92dLH82s+HPa/lcgT46EMdzinvgNp3ZRbppswU6vzxjJ8Ys/Fi
-	GdKLIE+NWlzLPgIE4yXp0ZNX5frwjQy2a3GiJCYEJJ7iMIQRV8nyE+43/xzIznl9TKmC73QyO0f
-	GafhS2jjsmPsbSMb2Eiq6J5pUok/B/zv+NWrrKjfJ8JUdgztD7b/DFZ9zGK1euJaFK92+uuKMDq
-	a+5RCl295W6+lDQx9FmA3Fv2vUsuZYomxFKoC4zRmOHLYNIzHTeEKO4Pnx0A4j5bVUWwBI/YF3y
-	dLQI=
-X-Received: by 2002:a05:600c:c83:b0:4a2:18c4:61a5 with SMTP id 5b1f17b1804b1-4ba08dc2f77mr1484205e9.6.1794332157281;
-        Tue, 10 Nov 2026 09:35:57 -0800 (PST)
+        bh=VCoIVxUN7/HNcrZJQNRrtt1h0uxfOvtG2T4z2RkCTCE=;
+        b=dTlnBqi2r0AwCqDnVVAhfO3BoEu2gE9Gv7ZrWwVFAuhJSY151WNWLsqkBjd5d12IL8
+         9/pZufh3E7I51tjPekJcy+tl83C3GopXKImqmJjSwbn5WQ1e38P27SHu/ptma7XC93v5
+         RFS4dgD8SUYd4LLAUA2hZOXbNDMjJizpD1+IGbvPIlnBtHWpU+uo/UHxcnFleAgmUEaz
+         SH1Q7X76mdrfNUQ2HQMxrAsWrKujPYZy70AvUinE/EL5+jiukoEwxBDl1twx7/08m8Cv
+         M3CmqMOodBridf9Z45zqg5rg+ABfVxTm89x0yMHSbdNH/flFp0xW/BFHTg+o+oVsWwlY
+         4WtA==
+X-Gm-Message-State: APuU4Z96ZFdq1vqktDfUV0cDG7YhIf+YkiiIRktvRykGAIalmoObVjwi
+	JaLY2OITOr5KjdbgZnX59g1GLBgXsae6Kd8gHQFKTi57RZkNs4ZIlVrAUcF0Bg==
+X-Gm-Gg: AYBFou1rNZl9yQDqHqwSOTwbWVFqPzYEFrwBfQY/tRPas4CbX8K0QqfA+LNihH4DhtX
+	w/4LKOC5eWo3fuv9naVAh0SRVpruAKOeSopTelJhtuomXjyWjyI1pwP+zFpgSlS/Hdy8yjtUxj8
+	P16kkaQ7w4VHW3K1guLlEHVp5Xrzstwd2xdhVpjgwqWhqM4fkPJspKK2AsuEXwLLTTX9Gvy+jC2
+	2X6JpUb+2Ic371UCqF9vsyd3uu3OYg6XE/qABoAdN7wCT2B4uY139yHbUYSD1tPO/yQ4wvYN92G
+	+Lz66k1uWov8R+0P3EEHpzTnfquXz0xZHgVtn3W5pakrr6JfuuAYcI8xP7WmttlxiqlPq4w9jv1
+	fG67AJ8j8L0CBT3zBx4JMTXaS/J8gm1LK18ytZaoexDEGhMiZSWxxjEFb84vEsEZ5vycyRNfXcX
+	2sY7gw8S+hh5kFfn5YfW8r5ESaTb6/aOR7MIvRe4+d/5lEkCrgmWdQg1xxBCV43Otti4Le4rigM
+	GYUGfRoyjKl3MzyBoI0Ibs+NZv8puy+ppILTXxaFZfHOcK5UyYBA0sHaOQSUD2+yGjwt3bJlmE5
+	xFlduaMdcj/pbb36sAh9pK9tfWX1aFVnnZAs3z6vH9gbnanRTJxBYHb1oJrpvp/8svMrW1gIRCR
+	gUJbp
+X-Received: by 2002:a05:600c:1d18:b0:4a6:eca1:7d5c with SMTP id 5b1f17b1804b1-4ba023580demr53430515e9.32.1794332158396;
+        Tue, 10 Nov 2026 09:35:58 -0800 (PST)
 Return-Path: <alex.kiernan@gmail.com>
 Received: from [192.168.5.15] (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.35.56
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fea9eesm122994405e9.11.2026.11.10.09.35.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 09:35:56 -0800 (PST)
+        Tue, 10 Nov 2026 09:35:57 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 10 Nov 2026 17:35:32 +0000
-Subject: [PATCH meta-oe 03/10] android-tools: adbd: fix the USB worker
- hanging on glibc after a cable pull
+Date: Tue, 10 Nov 2026 17:35:33 +0000
+Subject: [PATCH meta-oe 04/10] android-tools: adbd: restart after adb
+ root/unroot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-android-tools-adbd-v1-3-cc2176f381c3@gmail.com>
+Message-Id: <20261110-android-tools-adbd-v1-4-cc2176f381c3@gmail.com>
 References: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 In-Reply-To: <20261110-android-tools-adbd-v1-0-cc2176f381c3@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -66,154 +66,110 @@ Cc: Alex Kiernan <alex.kiernan@gmail.com>
 X-Mailer: b4 0.16.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2026 17:36:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132100
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/132101
 
-UsbFfsConnection::StopWorker() waits for the worker with
-pthread_kill(handle, 0) == ESRCH, which holds on bionic but not glibc, where
-an exited, unjoined thread still answers 0. A cable pull ends the worker
-on its own, StopWorker() then spins for ever, ep0 is never reopened and the
-host sees the device as offline until adbd is restarted.
+`adb root` and `adb unroot` write the new privilege state to
+/run/adbd.root and expect adbd to be restarted to apply it, as Android's
+init does. Nothing restarted it here, so the client's wait-for-disconnect
+hung and adbd kept its uid. Have adbd exit after writing the state, and
+restart the service on any exit, not only on failure.
 
 AI-Generated: Claude Opus 5.5 (Claude Code)
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...-use-pthread_kill-as-a-thread-liveness-pr.patch | 118 +++++++++++++++++++++
- .../android-tools/android-tools_35.0.2.bb          |   1 +
- 2 files changed, 119 insertions(+)
+ ...exit-after-adb-root-unroot-so-an-init-sup.patch | 60 ++++++++++++++++++++++
+ .../android-tools/android-tools-adbd.service       |  2 +-
+ .../android-tools/android-tools_35.0.2.bb          |  1 +
+ 3 files changed, 62 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0019-adb-daemon-exit-after-adb-root-unroot-so-an-init-sup.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0019-adb-daemon-exit-after-adb-root-unroot-so-an-init-sup.patch
 new file mode 100644
-index 000000000000..0ebe7aba69b5
+index 000000000000..a55e4259194c
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch
-@@ -0,0 +1,118 @@
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/0019-adb-daemon-exit-after-adb-root-unroot-so-an-init-sup.patch
+@@ -0,0 +1,60 @@
 +From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 +From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Sun, 13 Sep 2026 08:31:56 +0100
-+Subject: [PATCH] adbd: do not use pthread_kill as a thread-liveness probe
++Date: Sun, 19 Jul 2026 08:59:06 +0100
++Subject: [PATCH] adb: daemon: exit after adb root/unroot so an init supervisor
++ restarts adbd
 +
-+UsbFfsConnection::StopWorker() polled `pthread_kill(handle, 0) == ESRCH` to ask
-+whether the worker had exited. That reads as portable and is not: it relies on
-+bionic clearing the thread id on exit, so a signal to a dead thread lands on
-+nothing. glibc keeps the thread descriptor valid until join(), so for an
-+exited-but-unjoined thread pthread_kill returns 0, the probe answers "still
-+running" for ever, and the loop never terminates.
++On Android, `adb root`/`adb unroot` write the desired privilege state and
++rely on init restarting adbd (via a property trigger) to pick it up. This
++Linux port keeps the "write state file, rely on a restart" model but the
++running adbd never exits, so on a non-Android system with nothing watching
++the state file the daemon keeps its current uid and the client's
++`wait-for-disconnect` hangs (or times out once the USB transport happens to
++drop for unrelated reasons).
 +
-+It is not a race on glibc, it is a hang, and the path that reaches it is the
-+ordinary one: a cable pull kills the worker on its own with "Cannot send after
-+transport endpoint shutdown", so StopWorker is entered with a corpse.
-+~UsbFfsConnection then never returns, usb_ffs_open_thread never reopens ep0,
-+and the kernel gadget re-enumerates perfectly while the host claims the
-+interface and never receives a CNXN. The device shows as `offline` until
-+something restarts adbd. On a unit whose only route in is adb, nothing can.
-+
-+The worker now reports its own exit through an atomic, which is true on both
-+libcs. It is set from a scope guard rather than as the lambda's last statement
-+because the SubmitRead failure path returns early, and that is precisely a case
-+StopWorker must not wait for ever on. The signal is still sent on every pass,
-+since interrupting a worker blocked in io_getevents is what the loop is for.
-+
-+Diagnosed on two RK3308 units, both wedged the first time either had its cable
-+pulled since boot: main thread in futex_wait joining the monitor, monitor
-+thread in hrtimer_nanosleep at the 100ms spin, the open thread waiting on a
-+connection reset that never comes, and no worker thread at all. strace of the
-+monitor shows both pthread_kill calls returning success with no tgkill issued.
++Exit after successfully writing the root state, as the classic adbd did,
++so the service manager restarts adbd (systemd with Restart=always, or a
++supervisor such as runit); on restart should_drop_privileges() reads the
++state file and comes back root (root) or drops to the adb user (unroot). A
++short delay lets the reply reach the host over USB before the gadget is
++torn down.
 +
 +Upstream-Status: Pending
-+
-+AI-Generated: Claude Opus 5 (Claude Code)
 +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 +---
-+ packages/modules/adb/daemon/usb.cpp | 38 +++++++++++++++++++++--------
-+ 1 file changed, 28 insertions(+), 10 deletions(-)
++ packages/modules/adb/daemon/restart_service.cpp | 15 ++++++++++++++-
++ 1 file changed, 14 insertions(+), 1 deletion(-)
 +
-+diff --git a/packages/modules/adb/daemon/usb.cpp b/packages/modules/adb/daemon/usb.cpp
-+index 1fe2d3aa3215..e44c7b788587 100644
-+--- a/packages/modules/adb/daemon/usb.cpp
-++++ b/packages/modules/adb/daemon/usb.cpp
-+@@ -146,6 +146,7 @@ struct UsbFfsConnection : public Connection {
-+     UsbFfsConnection(unique_fd control, unique_fd read, unique_fd write,
-+                      std::promise<void> destruction_notifier)
-+         : worker_started_(false),
-++          worker_exited_(false),
-+           stopped_(false),
-+           destruction_notifier_(std::move(destruction_notifier)),
-+           control_fd_(std::move(control)),
-+@@ -406,6 +407,14 @@ struct UsbFfsConnection : public Connection {
-+             adb_thread_setname("UsbFfs-worker");
-+             LOG(INFO) << "UsbFfs-worker thread spawned";
-+ 
-++            // On EVERY exit path, not as a final statement: the SubmitRead
-++            // failure below returns early, and that is precisely a case
-++            // StopWorker() must not wait forever on.
-++            struct ExitReporter {
-++                std::atomic<bool>* flag;
-++                ~ExitReporter() { flag->store(true, std::memory_order_release); }
-++            } exit_reporter{&worker_exited_};
-++
-+             for (size_t i = 0; i < kUsbReadQueueDepth; ++i) {
-+                 read_requests_[i] = CreateReadBlock(next_read_id_++);
-+                 if (!SubmitRead(&read_requests_[i])) {
-+@@ -435,8 +444,23 @@ struct UsbFfsConnection : public Connection {
-+             return;
++diff --git a/packages/modules/adb/daemon/restart_service.cpp b/packages/modules/adb/daemon/restart_service.cpp
++index 8aee1afeaef8..3c3fd24ed5af 100644
++--- a/packages/modules/adb/daemon/restart_service.cpp
+++++ b/packages/modules/adb/daemon/restart_service.cpp
++@@ -65,7 +65,16 @@ void restart_root_service(unique_fd fd) {
++         if (write_root_state(kRootMagic, kRootMagicSize)) {
++             LOG(INFO) << "adbd restarting as root";
++             WriteFdExactly(fd.get(), "restarting adbd as root\n");
++-            return;
+++            // Unlike on Android (where init restarts adbd on a property
+++            // trigger), on this Linux port nothing watches the root-state
+++            // file, so a still-running adbd would keep its current uid and
+++            // the client's `wait-for-disconnect` would hang. Exit instead so
+++            // the init supervisor restarts us; on restart should_drop_
+++            // privileges() reads #ROOT# and we come back as root. Give the
+++            // reply time to reach the host over USB before tearing the gadget
+++            // down, as the classic adbd did.
+++            sleep(1);
+++            _exit(0);
 +         }
++         usleep(100000);
++     }
++@@ -84,6 +93,10 @@ void restart_unroot_service(unique_fd fd) {
++     }
++     LOG(INFO) << "adbd restarting as nonroot";
++     WriteFdExactly(fd.get(), "restarting adbd as non root\n");
+++    // See restart_root_service(): exit so the init supervisor restarts adbd,
+++    // which then reads #NOROOT# and drops privileges again.
+++    sleep(1);
+++    _exit(0);
++ }
 + 
-++        // NOT pthread_kill(handle, 0) == ESRCH as a liveness probe. That reads
-++        // as portable and is not: it relies on bionic clearing the thread id
-++        // when a thread exits, so the signal lands on nothing. glibc keeps the
-++        // descriptor valid until join(), so for an exited-but-unjoined thread
-++        // pthread_kill returns 0 and the probe says "still running" for ever.
-++        //
-++        // The loop is reached with a dead worker in the one case that matters:
-++        // a cable pull kills the worker on its own (transport endpoint
-++        // shutdown), and then ~UsbFfsConnection never returns, the ffs
-++        // endpoints are never reopened, and the host sees a device that
-++        // enumerates but never sends CNXN - offline until adbd is restarted.
-++        // On a unit whose only way in IS adb, that is unrecoverable.
-++        //
-++        // The signal is still sent on every pass, because that is what the loop
-++        // is for: interrupting a worker blocked in io_getevents.
-+         pthread_t worker_thread_handle = worker_thread_.native_handle();
-+-        while (true) {
-++        while (!worker_exited_.load(std::memory_order_acquire)) {
-+             int rc = pthread_kill(worker_thread_handle, kInterruptionSignal);
-+             if (rc != 0) {
-+                 LOG(ERROR) << "failed to send interruption signal to worker: " << strerror(rc);
-+@@ -444,15 +468,6 @@ struct UsbFfsConnection : public Connection {
-+             }
-+ 
-+             std::this_thread::sleep_for(100ms);
-+-
-+-            rc = pthread_kill(worker_thread_handle, 0);
-+-            if (rc == 0) {
-+-                continue;
-+-            } else if (rc == ESRCH) {
-+-                break;
-+-            } else {
-+-                LOG(ERROR) << "failed to send interruption signal to worker: " << strerror(rc);
-+-            }
-+         }
-+ 
-+         worker_thread_.join();
-+@@ -709,6 +724,9 @@ struct UsbFfsConnection : public Connection {
-+ 
-+     bool worker_started_;
-+     std::thread worker_thread_;
-++    // Set by the worker itself on the way out. StopWorker() waits on this
-++    // rather than probing the thread handle - see the comment there.
-++    std::atomic<bool> worker_exited_;
-+ 
-+     std::atomic<bool> stopped_;
-+     std::promise<void> destruction_notifier_;
++ void restart_tcp_service(unique_fd fd, int port) {
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+index 7c16b5cea20f..355d91517cff 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+@@ -5,7 +5,7 @@ Before=android-system.service
+ 
+ [Service]
+ Type=notify
+-Restart=on-failure
++Restart=always
+ ExecStartPre=-/usr/bin/android-gadget-setup adb
+ ExecStart=/usr/bin/adbd
+ 
 diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-index b1e66198f88c..9a0bae98dd19 100644
+index 9a0bae98dd19..e247cbbafa60 100644
 --- a/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
 +++ b/meta-oe/recipes-devtools/android-tools/android-tools_35.0.2.bb
-@@ -62,6 +62,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
-            file://0015-adbd-make-fs-config-opt-in-on-non-android-builds.patch \
+@@ -63,6 +63,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
             file://0016-adbd-forward-the-reboot-target-to-RESTART2.patch \
             file://0017-adbd-shell-start-in-HOME-and-drop-the-Android-only-T.patch \
-+           file://0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch \
+            file://0018-adbd-do-not-use-pthread_kill-as-a-thread-liveness-pr.patch \
++           file://0019-adb-daemon-exit-after-adb-root-unroot-so-an-init-sup.patch \
             "
  
  SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
